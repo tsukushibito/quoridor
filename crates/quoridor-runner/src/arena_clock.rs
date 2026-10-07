@@ -10,6 +10,7 @@ pub enum Failure {
     IllegalMove,
     EngineError,
     NoCompletedIteration,
+    NoCompletedSimulation,
     Cancelled,
     JobBudget,
     Deadline,
@@ -45,6 +46,8 @@ pub fn failure_from_reason(reason: &str) -> Failure {
         Failure::PlyCap
     } else if reason == "no_completed_alpha_beta_iteration" || reason == "no_completed_action" {
         Failure::NoCompletedIteration
+    } else if reason == "no_completed_mcts_simulation" {
+        Failure::NoCompletedSimulation
     } else if reason.starts_with("inference:")
         || reason == "worker_panicked"
         || reason == "backend_output_shape"
@@ -62,6 +65,7 @@ pub fn forfeitable(f: Failure) -> bool {
             | Failure::IllegalMove
             | Failure::EngineError
             | Failure::NoCompletedIteration
+            | Failure::NoCompletedSimulation
     )
 }
 /// Pure policy fixture: a late internal result is not automatically an accepted move.

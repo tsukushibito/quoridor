@@ -323,11 +323,194 @@ struct Request {
     id: RequestId,
     input: Box<[f32; 648]>,
     created: Instant,
-    reply: Sender<Response>,
+    reply: Option<Sender<Response>>,
+}
+impl Request {
+    /// Exactly one terminal response, including skipped or failed requests.
+    fn complete(
+        mut self,
+        output: std::result::Result<NetworkOutput, String>,
+    ) -> std::result::Result<(), Box<mpsc::SendError<Response>>> {
+        self.reply
+            .take()
+            .expect("request already completed")
+            .send(Response {
+                id: self.id,
+                output,
+            })
+            .map_err(Box::new)
+    }
+}
+impl Drop for Request {
+    fn drop(&mut self) {
+        if let Some(reply) = self.reply.take() {
+            let _ = reply.send(Response {
+                id: self.id,
+                output: Err("inference_request_abandoned".into()),
+            });
+        }
+    }
+}
+fn finish_pending(pending: &mut VecDeque<Request>, reason: &str) {
+    for request in pending.drain(..) {
+        let _ = request.complete(Err(reason.into()));
+    }
+}
+/// Cancellation asks the pump to stop admission, but never substitutes for the
+/// terminal result of a request the pump already owns.
+fn wait_sigma_reply(
+    rx: &mpsc::Receiver<Response>,
+    id: RequestId,
+    mut request_stop: impl FnMut(),
+) -> std::result::Result<NetworkOutput, String> {
+    let mut stale = false;
+    loop {
+        match rx.recv_timeout(Duration::from_millis(1)) {
+            Ok(response) if response.id == id => {
+                return match response.output {
+                    Err(original) => Err(original),
+                    Ok(_) if stale => {
+                        Err("STALE_INFERENCE_RESPONSE:matching_backend_succeeded".into())
+                    }
+                    Ok(output) => Ok(output),
+                };
+            }
+            Ok(_) => stale = true,
+            Err(mpsc::RecvTimeoutError::Timeout) => request_stop(),
+            Err(mpsc::RecvTimeoutError::Disconnected) => {
+                return Err("inference_channel_closed".into());
+            }
+        }
+    }
+}
+
+#[cfg(test)]
+mod sigma_reply_tests {
+    use super::*;
+    fn request(tx: Sender<Response>) -> Request {
+        Request {
+            id: RequestId {
+                game: 0,
+                generation: 1,
+                token: 1,
+            },
+            input: Box::new([0.; 648]),
+            created: Instant::now(),
+            reply: Some(tx),
+        }
+    }
+    #[test]
+    fn timeout_then_enqueued_error_and_cancel_retains_original_terminal_result() {
+        let (tx, rx) = mpsc::channel();
+        let mut admitted = Some(request(tx));
+        let id = admitted.as_ref().unwrap().id;
+        let cancel = AtomicBool::new(false);
+        let result = wait_sigma_reply(&rx, id, || {
+            admitted
+                .take()
+                .unwrap()
+                .complete(Err("inference:original-fixture".into()))
+                .unwrap();
+            cancel.store(true, Ordering::Relaxed);
+        });
+        assert!(cancel.load(Ordering::Relaxed));
+        assert_eq!(result.unwrap_err(), "inference:original-fixture");
+        assert!(rx.try_recv().is_err());
+    }
+    #[test]
+    fn queued_cancel_and_abandoned_request_each_have_one_terminal_reply() {
+        let (tx, rx) = mpsc::channel();
+        let r = request(tx.clone());
+        let id = r.id;
+        let mut pending = VecDeque::from([r]);
+        finish_pending(&mut pending, "cancelled");
+        assert!(pending.is_empty());
+        assert_eq!(
+            wait_sigma_reply(&rx, id, || panic!("queued cancel reply absent")).unwrap_err(),
+            "cancelled"
+        );
+        assert!(rx.try_recv().is_err());
+        drop(request(tx));
+        assert_eq!(
+            wait_sigma_reply(&rx, id, || panic!("abandoned reply absent")).unwrap_err(),
+            "inference_request_abandoned"
+        );
+        assert!(rx.try_recv().is_err());
+        // The lint repair boxes a failed send without losing its original
+        // response payload or attempting a second terminal reply.
+        let (tx, rx) = mpsc::channel();
+        let rejected = request(tx);
+        drop(rx);
+        let error = rejected
+            .complete(Err("inference:receiver-closed-original".into()))
+            .unwrap_err();
+        assert_eq!(error.0.id, id);
+        assert_eq!(
+            error.0.output.unwrap_err(),
+            "inference:receiver-closed-original"
+        );
+    }
+    #[test]
+    fn stale_reply_does_not_end_wait_or_hide_matching_backend_failure() {
+        let (tx, rx) = mpsc::channel();
+        let r = request(tx.clone());
+        let id = r.id;
+        tx.send(Response {
+            id: RequestId {
+                generation: 2,
+                ..id
+            },
+            output: Err("stale".into()),
+        })
+        .unwrap();
+        r.complete(Err("inference:matching-original".into()))
+            .unwrap();
+        assert_eq!(
+            wait_sigma_reply(&rx, id, || panic!("matching reply missing")).unwrap_err(),
+            "inference:matching-original"
+        );
+    }
+    #[test]
+    fn cancellation_request_waits_for_running_backend_terminal_result() {
+        let (tx, rx) = mpsc::channel();
+        let r = request(tx);
+        let id = r.id;
+        let (notified, started) = mpsc::sync_channel(1);
+        let (done_tx, done_rx) = mpsc::channel();
+        let waiting = thread::spawn(move || {
+            let mut first = true;
+            let result = wait_sigma_reply(&rx, id, || {
+                if first {
+                    notified.send(()).unwrap();
+                    first = false;
+                }
+            });
+            done_tx.send(result).unwrap();
+        });
+        started.recv_timeout(Duration::from_secs(2)).unwrap();
+        assert!(
+            done_rx.try_recv().is_err(),
+            "returned before backend terminal reply"
+        );
+        r.complete(Ok(NetworkOutput {
+            logits: [0.; 136],
+            value: 0.25,
+        }))
+        .unwrap();
+        assert_eq!(
+            done_rx
+                .recv_timeout(Duration::from_secs(2))
+                .unwrap()
+                .unwrap()
+                .value,
+            0.25
+        );
+        waiting.join().unwrap();
+    }
 }
 struct Response {
     id: RequestId,
-    output: NetworkOutput,
+    output: std::result::Result<NetworkOutput, String>,
 }
 enum Event {
     Request(Request),
@@ -815,6 +998,206 @@ fn play_completed(
     game.move_started = None;
     Ok(())
 }
+/// The same inference pump owns the synchronous backend; a timed caller waits for
+/// its reply before returning, so a late engine error cannot be hidden by a snapshot.
+struct SigmaReplies<'a> {
+    events: &'a SyncSender<Event>,
+    tx: &'a Sender<Response>,
+    rx: &'a mpsc::Receiver<Response>,
+}
+fn play_timed_sigma(
+    game: &mut Game,
+    engine_index: usize,
+    config: &Config,
+    cancel: &AtomicBool,
+    run_start: Instant,
+    replies: SigmaReplies<'_>,
+    model_sha: &str,
+) -> std::result::Result<(), String> {
+    let started = Instant::now();
+    let e = &config.engines[engine_index];
+    let duration = Duration::from_millis(e.time_ms.ok_or("missing MCTS caller clock")?);
+    let reserve = Duration::from_millis(config.arena.as_ref().map_or(0, |a| a.return_reserve_ms));
+    let id_game = game.planned.id;
+    let generation = game.generation;
+    let call = crate::sigma_clock::run(
+        &game.context,
+        crate::sigma_clock::Budget {
+            started,
+            duration,
+            reserve,
+            generation,
+            simulations: config.simulations,
+            limits: Limits {
+                max_nodes: config.mcts_max_nodes,
+                max_depth: 200,
+                max_bytes: config.mcts_max_bytes,
+            },
+        },
+        || cancel.load(Ordering::Relaxed) || config.pause_file.as_ref().is_some_and(|p| p.exists()),
+        |token, input| {
+            let id = RequestId {
+                game: id_game,
+                generation,
+                token,
+            };
+            replies
+                .events
+                .send(Event::Request(Request {
+                    id,
+                    input,
+                    created: Instant::now(),
+                    reply: Some(replies.tx.clone()),
+                }))
+                .map_err(|_| "inference_channel_closed".to_owned())?;
+            wait_sigma_reply(replies.rx, id, || {
+                if guard(config, run_start, u64::MAX).is_some() {
+                    cancel.store(true, Ordering::Relaxed);
+                }
+            })
+        },
+    );
+    let returned = Instant::now();
+    game.nn += call.returned;
+    game.advance_calls += call.advance_calls;
+    if let Some(s) = &call.whole {
+        game.allocated_nodes_peak = game.allocated_nodes_peak.max(s.nodes);
+        game.terminal_no_nn += u64::from(s.terminal_no_nn);
+    }
+    let selected = call.completed.as_ref();
+    let action =
+        selected.and_then(|s| choose(&s.edges, s.action, config.temperature, &mut game.rng));
+    let legal = action.is_some_and(|a| game.context.play(a).is_ok());
+    let ns = |at: Instant| {
+        at.duration_since(game.origin)
+            .as_nanos()
+            .min(u64::MAX as u128) as u64
+    };
+    let deadline = ns(started).checked_add(duration.as_nanos().min(u64::MAX as u128) as u64);
+    let policy = config
+        .arena
+        .as_ref()
+        .map_or(crate::arena::ClockPolicy::Observe, |a| a.clock_policy);
+    let backend_failed = call.error.as_ref().is_some_and(|e| {
+        !matches!(
+            e.as_str(),
+            "cancelled" | "paused" | "wall_limit" | "deadline" | "memory_limit"
+        )
+    });
+    // The pump also raises its cancellation flag after a backend failure. Keep
+    // that engine error distinct from explicit cancellation in the move record.
+    let cancelled = (cancel.load(Ordering::Relaxed) && !backend_failed)
+        || call.stop == "cancelled"
+        || config.pause_file.as_ref().is_some_and(|p| p.exists());
+    let checked = Instant::now();
+    let mut decision = crate::arena_clock::acceptance(
+        policy,
+        deadline,
+        ns(checked),
+        cancelled,
+        legal,
+        selected.is_some(),
+    );
+    if decision == Err(crate::arena_clock::Failure::NoCompletedIteration) {
+        decision = Err(crate::arena_clock::Failure::NoCompletedSimulation);
+    }
+    if !cancelled
+        && call.error.is_some()
+        && decision != Err(crate::arena_clock::Failure::TimeOverrun)
+    {
+        decision = Err(crate::arena_clock::Failure::EngineError);
+    }
+    if let Some(reason) = guard(config, run_start, u64::MAX) {
+        decision = Err(crate::arena_clock::failure_from_reason(&reason));
+    }
+    let mut counters = call.counters();
+    counters["terminal_request_error"] = call.error.clone().into();
+    counters["cancellation_flag_at_return"] = cancel.load(Ordering::Relaxed).into();
+    counters["pause_at_return"] = config
+        .pause_file
+        .as_ref()
+        .is_some_and(|p| p.exists())
+        .into();
+    counters["guard_reason_at_return"] = guard(config, run_start, u64::MAX).into();
+    counters["last_completed_simulation_ns"] = call.completed_at.map(ns).into();
+    counters["completed_simulations"] = selected.map(|s| s.root_visits).into();
+    counters["completed_simulation_counters"] =
+        selected.map(crate::sigma_clock::snapshot_counters).into();
+    counters["selected_child_q"] = action
+        .and_then(|a| {
+            selected
+                .and_then(|s| s.edges.iter().find(|e| e.action == a))
+                .filter(|e| e.visits > 0)
+                .map(|e| -e.value_sum / f64::from(e.visits))
+        })
+        .into();
+    counters["selected_child_q_perspective"] = "root_side_to_move".into();
+    game.observations.push(crate::arena_clock::MoveObservation {
+        ply: game.context.total_ply(),
+        side: game.context.position().turn,
+        engine_index,
+        action,
+        accepted: false,
+        failure: decision.err(),
+        caller_started_ns: ns(started),
+        deadline_ns: deadline,
+        returned_ns: ns(returned),
+        admission_checked_ns: ns(checked),
+        accepted_ns: None,
+        caller_seconds: checked.duration_since(started).as_secs_f64(),
+        thinking_seconds: Some(returned.duration_since(started).as_secs_f64()),
+        last_completed_iteration_ns: None,
+        completed_iteration_counters: None,
+        engine_error: if backend_failed {
+            call.error.clone()
+        } else {
+            None
+        },
+        stop: Some(call.stop.into()),
+        completed_depth: None,
+        value_stm: selected.map(|s| s.root_mean as f32),
+        pv: Vec::new(),
+        counters,
+    });
+    if let Err(f) = decision {
+        game.failure = Some(f);
+        if policy == crate::arena::ClockPolicy::StrictForfeit && crate::arena_clock::forfeitable(f)
+        {
+            game.forfeit_winner = Some(1 - game.context.position().turn);
+        }
+        return Err(format!("move_rejected:{f:?}"));
+    }
+    // An error never becomes success, even under Observe or a retained completion.
+    if let Some(error) = call.error {
+        return Err(error);
+    }
+    let s = selected.ok_or("no_completed_mcts_simulation")?;
+    let action = action.ok_or("no_completed_mcts_simulation")?;
+    play_completed(
+        game,
+        action,
+        Teacher::Mcts {
+            root_mean: s.root_mean as f32,
+            root_nn: call.root_nn,
+            root_visits: s.root_visits,
+            nn_calls: s.nn_calls,
+            edges: s
+                .edges
+                .iter()
+                .map(|e| Visit {
+                    action: e.action,
+                    visits: e.visits,
+                    prior: e.prior as f32,
+                })
+                .collect(),
+        },
+        model_sha,
+        config,
+        cancel,
+        run_start,
+    )
+    .map_err(|e| e.to_string())
+}
 fn worker(
     config: Arc<Config>,
     plans: Vec<Planned>,
@@ -896,17 +1279,20 @@ fn worker(
                     continue;
                 }
                 g.pending = None;
+                let output = match response.output {
+                    Ok(output) => output,
+                    Err(_) => {
+                        cancel.store(true, Ordering::Relaxed);
+                        continue;
+                    }
+                };
                 if g.root_nn.is_none() {
-                    g.root_nn = Some(response.output.value)
+                    g.root_nn = Some(output.value)
                 }
                 if g.search
                     .as_mut()
                     .unwrap()
-                    .supply(
-                        response.id.token,
-                        &response.output.logits,
-                        response.output.value,
-                    )
+                    .supply(response.id.token, &output.logits, output.value)
                     .is_err()
                 {
                     cancel.store(true, Ordering::Relaxed)
@@ -956,7 +1342,24 @@ fn worker(
             };
             let e = &config.engines[engine_index];
             let mut failure = None;
-            if e.kind == "mcts" {
+            if e.kind == "mcts" && e.time_ms.is_some() && !g.record_teacher {
+                if let Err(error) = play_timed_sigma(
+                    g,
+                    engine_index,
+                    &config,
+                    &cancel,
+                    run_start,
+                    SigmaReplies {
+                        events: &events,
+                        tx: &reply_tx,
+                        rx: &reply_rx,
+                    },
+                    &evaluators[engine_index].identity.row_identity,
+                ) {
+                    failure = Some(error);
+                }
+                progressed = true;
+            } else if e.kind == "mcts" {
                 if g.search.is_none() {
                     g.move_started = Some(Instant::now());
                     match Search::with_limits(
@@ -989,7 +1392,7 @@ fn worker(
                                     id,
                                     input: features,
                                     created: Instant::now(),
-                                    reply: reply_tx.clone(),
+                                    reply: Some(reply_tx.clone()),
                                 }))
                                 .is_err()
                             {
@@ -1342,7 +1745,11 @@ fn run_inner(
                 .iter()
                 .map(|e| e.identity.content_sha256.clone())
                 .collect::<Vec<_>>(),
-            &crate::arena_manifest::search_source_sha256(),
+            &config
+                .engines
+                .iter()
+                .map(|e| crate::arena_manifest::search_source_sha256(&e.kind))
+                .collect::<Vec<_>>(),
         )?;
     }
     let backend_start = Instant::now();
@@ -1517,13 +1924,15 @@ fn run_inner(
         }
         if !pending.is_empty() {
             if cancel.load(Ordering::Relaxed) {
-                pending.clear();
+                finish_pending(&mut pending, stopped.as_deref().unwrap_or("cancelled"));
+                first_pending = None;
                 continue;
             }
             let Some(b) = backend.as_mut() else {
                 stopped = Some("missing_backend".into());
                 cancel.store(true, Ordering::Relaxed);
-                pending.clear();
+                finish_pending(&mut pending, "missing_backend");
+                first_pending = None;
                 continue;
             };
             let n = pending
@@ -1563,30 +1972,35 @@ fn run_inner(
             *batches.entry(n).or_insert(0) += 1;
             match result {
                 Ok(outputs) if outputs.len() == n => {
-                    if !cancel.load(Ordering::Relaxed) {
-                        for (r, o) in requests.into_iter().zip(outputs) {
-                            if o.logits.iter().any(|v| !v.is_finite())
-                                || !o.value.is_finite()
-                                || o.value.abs() > 1.0
-                            {
-                                stopped = Some("invalid_inference".into());
-                                cancel.store(true, Ordering::Relaxed);
-                                break;
-                            }
-                            let _ = r.reply.send(Response {
-                                id: r.id,
-                                output: o,
-                            });
+                    // A running backend must return its original result even if
+                    // cancellation was requested while it was executing.
+                    for (r, o) in requests.into_iter().zip(outputs) {
+                        if o.logits.iter().any(|v| !v.is_finite())
+                            || !o.value.is_finite()
+                            || o.value.abs() > 1.0
+                        {
+                            let _ = r.complete(Err("invalid_inference".into()));
+                            stopped = Some("invalid_inference".into());
+                            cancel.store(true, Ordering::Relaxed);
+                        } else {
+                            let _ = r.complete(Ok(o));
                         }
                     }
                 }
                 Ok(_) => {
+                    for r in requests {
+                        let _ = r.complete(Err("backend_output_shape".into()));
+                    }
                     stopped = Some("backend_output_shape".into());
-                    cancel.store(true, Ordering::Relaxed)
+                    cancel.store(true, Ordering::Relaxed);
                 }
                 Err(e) => {
-                    stopped = Some(format!("inference:{e}"));
-                    cancel.store(true, Ordering::Relaxed)
+                    let error = format!("inference:{e}");
+                    for r in requests {
+                        let _ = r.complete(Err(error.clone()));
+                    }
+                    stopped = Some(error);
+                    cancel.store(true, Ordering::Relaxed);
                 }
             }
         }
@@ -2278,7 +2692,7 @@ mod tests {
         let thread = thread::spawn(move || {
             worker(cfg, vec![plan()], tx, c, vec![loaded], true, Instant::now())
         });
-        let r = match rx.recv_timeout(Duration::from_secs(2)).unwrap() {
+        let mut r = match rx.recv_timeout(Duration::from_secs(2)).unwrap() {
             Event::Request(r) => r,
             _ => panic!("request expected"),
         };
@@ -2287,12 +2701,14 @@ mod tests {
             ..r.id
         };
         r.reply
+            .take()
+            .unwrap()
             .send(Response {
                 id: bad,
-                output: NetworkOutput {
+                output: Ok(NetworkOutput {
                     logits: [0.; 136],
                     value: 0.,
-                },
+                }),
             })
             .unwrap();
         let mut finished = false;
@@ -2338,15 +2754,11 @@ mod tests {
                         rx.try_recv().is_err(),
                         "second request while first is pending"
                     );
-                    r.reply
-                        .send(Response {
-                            id: r.id,
-                            output: NetworkOutput {
-                                logits: [0.; 136],
-                                value: 0.,
-                            },
-                        })
-                        .unwrap()
+                    r.complete(Ok(NetworkOutput {
+                        logits: [0.; 136],
+                        value: 0.,
+                    }))
+                    .unwrap()
                 }
                 Event::Finished(out, rows) => {
                     assert_eq!(out.status, "unknown");
@@ -2393,14 +2805,10 @@ mod tests {
         assert!(finished);
         assert!(
             pending
-                .reply
-                .send(Response {
-                    id: pending.id,
-                    output: NetworkOutput {
-                        logits: [0.; 136],
-                        value: 0.
-                    }
-                })
+                .complete(Ok(NetworkOutput {
+                    logits: [0.; 136],
+                    value: 0.
+                }))
                 .is_err()
         );
     }

@@ -237,6 +237,14 @@ impl Config {
         if self.engines.iter().any(|e| e.kind == "mcts") && self.inference.is_none() {
             return Err("MCTS needs an explicit inference backend".into());
         }
+        if self
+            .engines
+            .iter()
+            .any(|e| e.kind == "mcts" && e.time_ms.is_some())
+            && self.arena.is_none()
+        {
+            return Err("timed MCTS requires the arena caller contract".into());
+        }
         self.split_counts()?;
         if let Some(arena) = &self.arena {
             arena.validate(self)?;

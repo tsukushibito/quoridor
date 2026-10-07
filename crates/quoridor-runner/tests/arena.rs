@@ -269,16 +269,28 @@ fn model_and_search_bindings_require_actual_loaded_content() {
     a.evaluator_sha256 = vec!["0".repeat(64); 2];
     a.search_source_sha256 = vec!["1".repeat(64); 2];
     assert!(
-        arena::validate_loaded_bindings(a, &["0".repeat(64), "0".repeat(64)], &"1".repeat(64))
-            .is_ok()
+        arena::validate_loaded_bindings(
+            a,
+            &["0".repeat(64), "0".repeat(64)],
+            &["1".repeat(64), "1".repeat(64)]
+        )
+        .is_ok()
     );
     assert!(
-        arena::validate_loaded_bindings(a, &["2".repeat(64), "0".repeat(64)], &"1".repeat(64))
-            .is_err()
+        arena::validate_loaded_bindings(
+            a,
+            &["2".repeat(64), "0".repeat(64)],
+            &["1".repeat(64), "1".repeat(64)]
+        )
+        .is_err()
     );
     assert!(
-        arena::validate_loaded_bindings(a, &["0".repeat(64), "0".repeat(64)], &"3".repeat(64))
-            .is_err()
+        arena::validate_loaded_bindings(
+            a,
+            &["0".repeat(64), "0".repeat(64)],
+            &["3".repeat(64), "3".repeat(64)]
+        )
+        .is_err()
     );
 }
 #[test]
@@ -298,4 +310,48 @@ fn reference_q_keeps_definition_perspective_and_aggregation_distinct() {
     assert_eq!(r.q_stm(1), Some(-0.2));
     r.q_perspective = None;
     assert!(r.q_stm(1).is_none());
+}
+
+#[test]
+fn timed_sigma_is_whole_engine_serial_and_has_distinct_source_binding() {
+    let mut c = functional_config();
+    c.engines[1].kind = "mcts".into();
+    c.inference = Some(
+        serde_json::from_value(serde_json::json!({
+            "backend":"ort","model":"unused","model_sha":"0".repeat(64),"library":"unused"
+        }))
+        .unwrap(),
+    );
+    c.max_batch = 1;
+    let a = c.arena.as_mut().unwrap();
+    a.comparison = arena::Comparison::WholeWallTime;
+    a.evaluator_sha256 = vec!["0".repeat(64); 2];
+    a.search_source_sha256 = vec!["1".repeat(64), "2".repeat(64)];
+    assert!(c.validate().is_ok());
+    assert!(
+        arena::validate_loaded_bindings(
+            c.arena.as_ref().unwrap(),
+            &["0".repeat(64), "0".repeat(64)],
+            &["1".repeat(64), "2".repeat(64)]
+        )
+        .is_ok()
+    );
+    assert!(
+        arena::validate_loaded_bindings(
+            c.arena.as_ref().unwrap(),
+            &["0".repeat(64), "0".repeat(64)],
+            &["1".repeat(64), "1".repeat(64)]
+        )
+        .is_err()
+    );
+    c.active_games = 2;
+    assert!(c.validate().is_err());
+    c.active_games = 1;
+    c.max_batch = 2;
+    assert!(c.validate().is_err());
+    c.max_batch = 1;
+    c.arena.as_mut().unwrap().comparison = arena::Comparison::EvaluatorWallTime;
+    assert!(c.validate().is_err());
+    c.arena = None;
+    assert!(c.validate().is_err());
 }

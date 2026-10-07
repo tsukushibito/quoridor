@@ -72,22 +72,42 @@ unknown; `strict_forfeit` loses on late/illegal/error/no-completed-move results;
 job budget, absolute deadline, resource stops and ply censor remain unknown under every
 policy. The final admission check occurs after full-history legal validation, immediately
 before publishing the move. No hard realtime return guarantee is claimed. Persistent TT
-does not expose completed-iteration timestamps/callbacks, so a pre-deadline completed
-move returned late is still rejected. Depth/node caps remain recorded caps, even in a
-wall-time preset. Internal elapsed, invocation and whole caller spans overlap; do not sum
-them. Stats include discarded partial work; unavailable leaf/physical NN counters and
-last-completed-iteration timestamps are explicit nulls. NNUE has no extra warmup here;
-backend counters separately record any provider warmup.
+sessions expose completed-depth callbacks and timestamps; a pre-deadline completion
+returned or accepted late is still rejected. An earlier completion cannot rescue a
+later engine error. Depth/node caps remain recorded caps, even in a wall-time preset.
+Internal elapsed, invocation and whole caller spans overlap; do not sum them. Completed
+snapshot counters and whole invocation counters include different work. Unavailable
+leaf/physical NN counters remain explicit nulls. NNUE has no extra warmup here; backend
+counters separately record any provider warmup.
 
-`whole_wall_time` is a future comparison boundary. Current Sigma uses fixed K and
-cannot qualify wall time; attempts to configure timed MCTS are rejected. For later
-Sigma-vs-Sigma confirmation, use `sigma_fixed_k_diagnostic`, two `mcts` engines and the
-same explicit frozen `inference` backend/model, seed and K; it is a diagnostic with a
-different denominator. Root mean, root NN and selected-child mean are distinct typed
-book Q definitions, with explicit perspective and aggregation. Saved Q is signed to
-side-to-move; abs(Q)<=0.2 is tagged provisional main, 0.2–0.4 auxiliary, otherwise tilted
-diagnostic. Tags neither select a book automatically nor guarantee calibrated balance.
-No Sigma book generation, GPU matches or model acquisition is performed by these presets.
+`whole_wall_time` supports timed MCTS via the maintained Sigma adapter. Specify engine
+`time_ms` and use one worker, one active game and batch size one. The clock starts before
+full-history search clone/setup and includes features, queue, synchronous inference,
+search, choice, legal return and final acceptance. With 100ms and a 5ms return reserve,
+completed simulations are retained before 95ms; an in-flight reply is awaited and a
+late valid reply is discarded. Every admitted request receives one terminal result,
+including queued cancellation and failed-send/drop paths. Original backend errors,
+cancellation and guard facts remain distinct; prior completion never rescues an error.
+MCTS completed simulations are separate from alpha-beta completed depth and from whole
+partial-work counters. Callback results, raw returned outputs and finite/range valid
+replies have separate counters. The generic callback-error stop label alone does not
+identify a model fault: read the typed guard reason and `engine_error`.
+
+Retain explicit MCTS K/temperature/tree settings (the research configuration uses
+K64/tau1/256MiB); early K stops retain their reason. K is an upper work cap, not a
+same-time claim or a value inferred from neural-call ratios. Model/session loading is
+measured once separately and charged to the whole job. Software/type/NN0 fixture
+qualification does not establish live backend deadlines or playing strength. Full
+NNUE alpha-beta versus Sigma policy/value MCTS is an engine-level comparison.
+
+For fixed-work backend diagnostics, `sigma_fixed_k_diagnostic` requires two `mcts`
+engines and the same explicit frozen inference backend/model, seed and K; its benchmark
+warmup/repetition route does not qualify the timed caller. Root mean, root NN and
+selected-child mean are distinct typed book Q definitions, with explicit perspective
+and aggregation. Saved Q is signed to side-to-move; abs(Q)<=0.2 is tagged provisional
+main, 0.2–0.4 auxiliary, otherwise tilted diagnostic. Tags neither select a book
+automatically nor guarantee calibrated balance. No Sigma book generation, GPU matches
+or model acquisition is performed by these presets.
 
 Arena `score` is now the complete-pair mean under schema `quoridor-arena-v2`. The summary
 also records planned/started/completed games, complete/incomplete pairs, typed unknown

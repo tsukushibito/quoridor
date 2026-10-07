@@ -11,8 +11,12 @@ use std::{
     process::{Command, Stdio},
 };
 
-pub fn search_source_sha256() -> String {
-    arena::digest(include_bytes!("../../quoridor-ai/src/alphabeta.rs"))
+pub fn search_source_sha256(kind: &str) -> String {
+    if kind == "mcts" {
+        arena::digest(include_bytes!("../../quoridor-ai/src/sigma_mcts.rs"))
+    } else {
+        arena::digest(include_bytes!("../../quoridor-ai/src/alphabeta.rs"))
+    }
 }
 pub fn source_bindings() -> BTreeMap<&'static str, String> {
     // Compiled bytes, rather than a mutable source tree read after the run.
@@ -32,6 +36,7 @@ pub fn source_bindings() -> BTreeMap<&'static str, String> {
         ),
         ("runner/arena.rs", include_bytes!("arena.rs")),
         ("runner/arena_clock.rs", include_bytes!("arena_clock.rs")),
+        ("runner/sigma_clock.rs", include_bytes!("sigma_clock.rs")),
         (
             "runner/arena_statistics.rs",
             include_bytes!("arena_statistics.rs"),
@@ -236,7 +241,7 @@ pub fn begin(c: &Config, slots: &[Slot], admission: &crate::resources::Admission
                 "cap_stop":"depth/node/K stop does not imply full clock consumption"},
             "cancel":{"mechanism":"runner guard AtomicBool, joined workers; external research-job handles exact process cleanup",
                 "poll_ms":1,"forced_engine_return_guarantee":false},
-            "limitations":["Single compiled search revision; versioned dual search adapter pending.","Sigma fixed-K available; equal-wall-time Sigma not implemented.",
+            "limitations":["Single compiled search revision; versioned dual search adapter pending.","Timed Sigma waits for synchronous inference; no hard real-time guarantee. Completed simulations and alpha-beta depths are distinct.",
                 "Legacy books have unknown lineage/selection; research uses explicit frozen provenance.","Deterministic repeats are not independent samples."]
         }),
     )
@@ -494,9 +499,20 @@ pub fn audit(output: &Path) -> Result<crate::arena_statistics::Summary> {
             arena::validate_loaded_bindings(
                 a,
                 &actual,
-                binding["compiled_sources"]["ai/alphabeta.rs"]
-                    .as_str()
-                    .ok_or("search source identity")?,
+                &config
+                    .engines
+                    .iter()
+                    .map(|e| {
+                        binding["compiled_sources"][if e.kind == "mcts" {
+                            "ai/sigma_mcts.rs"
+                        } else {
+                            "ai/alphabeta.rs"
+                        }]
+                        .as_str()
+                        .map(str::to_owned)
+                        .ok_or("search source identity")
+                    })
+                    .collect::<std::result::Result<Vec<_>, _>>()?,
             )?;
         }
     }

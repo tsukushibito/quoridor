@@ -127,7 +127,7 @@ pub struct ArenaConfig {
     pub bootstrap_resamples: usize,
     /// Expected loaded evaluator identities, in candidate/reference order. Required for research.
     pub evaluator_sha256: Vec<String>,
-    /// Expected source payload identities, in candidate/reference order; this runner has one search implementation.
+    /// Expected maintained alpha-beta or MCTS source identities, in candidate/reference order.
     pub search_source_sha256: Vec<String>,
     pub book: Book,
 }
@@ -215,8 +215,12 @@ impl ArenaConfig {
         if c.engines
             .iter()
             .any(|e| e.kind == "mcts" && e.time_ms.is_some())
+            && (self.comparison != Comparison::WholeWallTime
+                || c.workers != 1
+                || c.active_games != 1
+                || c.max_batch != 1)
         {
-            return Err("fixed-K MCTS has no per-move time adapter; do not supply a clock".into());
+            return Err("timed MCTS requires whole-engine mode and one game/worker/batch".into());
         }
         if self
             .book
@@ -238,12 +242,6 @@ impl ArenaConfig {
             {
                 return Err(
                     "wall-time comparisons need equal caller clocks and strict admission".into(),
-                );
-            }
-            if c.engines.iter().any(|e| e.kind == "mcts") {
-                return Err(
-                    "Sigma currently stops at fixed K; wall-time Sigma adapter is unimplemented"
-                        .into(),
                 );
             }
         }
@@ -357,9 +355,9 @@ pub fn engine_index(turn: u8, candidate_color: u8) -> usize {
 pub fn validate_loaded_bindings(
     a: &ArenaConfig,
     evaluators: &[String],
-    search_source: &str,
+    search_sources: &[String],
 ) -> Result<()> {
-    if evaluators.len() != 2 {
+    if evaluators.len() != 2 || search_sources.len() != 2 {
         return Err("arena needs two loaded evaluator identities".into());
     }
     for (i, sha) in evaluators.iter().enumerate() {
@@ -371,7 +369,7 @@ pub fn validate_loaded_bindings(
         }
         if a.search_source_sha256
             .get(i)
-            .is_some_and(|expected| expected != search_source)
+            .is_some_and(|expected| expected != &search_sources[i])
         {
             return Err(format!("compiled search binding mismatch: engine {i}").into());
         }

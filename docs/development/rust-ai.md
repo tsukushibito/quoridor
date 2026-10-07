@@ -40,7 +40,7 @@ CPUだけで接続を確認する設定例:
 
 ## 推論と資源
 
-MCTSは`engines:[{"kind":"mcts"}]`と、モデル・SHA・backendを指定した`inference`を使う。CPUは`backend:"ort"`で`model`にONNX、`library`に既存ORT共有ライブラリを渡す。ONNXファイルの実SHAを検証し、双方同じモデル/版/設定で比較する。`simulations`はroot初回評価を含むK、`max_batch`は上限、`active_games`は独立した稼働対局数である。各木は1要求だけを待ち、部分batchも有界待ちで処理する。
+MCTSは`engines:[{"kind":"mcts"}]`と、モデル・SHA・backendを指定した`inference`を使う。CPUは`backend:"ort"`で`model`にONNX、`library`に既存ORT共有ライブラリを渡す。ONNXファイルの実SHAを検証する。同一評価器のbackend比較では双方同じモデル/版/設定を使い、学習済みNNUE対Sigmaの全engine比較では各モデルと探索設定を別々に固定する。`simulations`はroot初回評価を含むK、`max_batch`は上限、`active_games`は独立した稼働対局数である。各木は1要求だけを待ち、部分batchも有界待ちで処理する。
 
 CUDAは`cuda-aoti`、TensorRTは`tensorrt`のCargo featureを明示する。`QUORIDOR_TORCH_ROOT`、`QUORIDOR_CUDA_ROOT`、`QUORIDOR_CCCL_INCLUDE`、必要なら`QUORIDOR_TENSORRT_ROOT`を既存SDK/隔離cacheへ向けてビルドする。`tools/model-export/export.py --help`で変換入口を確認する。重み・source・入力形状・backend/runtime版とcompiled artifactのSHAをmanifestへ束縛する。GPUライブラリはCPU/Wasmのcrateにリンクしない。
 
@@ -48,7 +48,11 @@ CUDAは`cuda-aoti`、TensorRTは`tensorrt`のCargo featureを明示する。`QUO
 
 `nnue` engineはmanifestから対応するfloat/距離残差loaderを選択し、既存の評価器へ接続する。`model-check --model MANIFEST`は対応形式・署名・サイズを推論前に検査する。2 engineのarenaは色交換ペア単位で分割し、明示した奇数の分割境界は開始前に拒否する。
 
-arenaのbook・時計・pair集計・保存検査は[runnerのarena手順](../../crates/quoridor-runner/README.md)と[preset案内](../../configs/arena/README.md)を使う。色交換pairは同じ全履歴prefixから開始し、全予定slotと未知/取消を記録する。主集計は完了pair、補助に全予定分母の範囲を残す。`arena --audit OUTPUT` は来歴・保存SHA・集計を照合し、`--recover OUTPUT` は未完了journalの記録済みslotを読み取る。比較する探索版はsource/compiler/flags/lock/private ELFとmodel/scale/inputを別々に束縛する。同時間Sigmaは未実装。αβのnative時計はcaller setup・探索・返却・合法履歴検査後の受理を測り、完了depthのtimestampとcounterを全呼出しのcounterから分ける。既存のpersistent TTを使うSearchSessionは最後に完成した合法depthを返し、後続のengine errorを旧completionで救済しない。terminal/cancel/no-completion/lateは別結果で、期限前のcompletionがあっても期限後の受理を許可しない。研究用100ms/手ではsetupと5ms return reserveを差し引くが、硬い返却保証ではない。要求TT65536でも現persistent policyの実容量は最大4096 slots/1MiBで、manifestのsource見込みとruntime実容量/retained snapshotを区別する。
+arenaのbook・時計・pair集計・保存検査は[runnerのarena手順](../../crates/quoridor-runner/README.md)と[preset案内](../../configs/arena/README.md)を使う。色交換pairは同じ全履歴prefixから開始し、全予定slotと未知/取消を記録する。主集計は完了pair、補助に全予定分母の範囲を残す。`arena --audit OUTPUT` は来歴・保存SHA・集計を照合し、`--recover OUTPUT` は未完了journalの記録済みslotを読み取る。比較する探索版はsource/compiler/flags/lock/private ELFとmodel/scale/inputを別々に束縛する。同時間Sigmaのmaintained adapterを実装した。実backend/caller資格と棋力結果はsource/softwareの成功とは別に確認する。αβのnative時計はcaller setup・探索・返却・合法履歴検査後の受理を測り、完了depthのtimestampとcounterを全呼出しのcounterから分ける。既存のpersistent TTを使うSearchSessionは最後に完成した合法depthを返し、後続のengine errorを旧completionで救済しない。terminal/cancel/no-completion/lateは別結果で、期限前のcompletionがあっても期限後の受理を許可しない。研究用100ms/手ではsetupと5ms return reserveを差し引くが、硬い返却保証ではない。要求TT65536でも現persistent policyの実容量は最大4096 slots/1MiBで、manifestのsource見込みとruntime実容量/retained snapshotを区別する。
+
+Sigmaのtimed MCTSはengineの`time_ms`とarenaの`comparison:"whole_wall_time"`を明示し、`workers=1/active_games=1/max_batch=1`で実行する。caller時計はfull-history Search clone/setupの前から始まり、features・queue・同期推論・探索・choice・合法返却・最終受理を含む。研究用100ms/5ms reserveでは95msまでの完成simulationを保持し、同期in-flight応答を待った後のlate valid replyは破棄する。cancel/guardと元backend errorを別に記録し、旧completionでerrorを救済しない。K64/tau1/tree256MiB等の既存設定は保持し、K上限の早期停止を理由付きで記録する。Kやneural-call倍率を同時間の代替にしない。model/session初期化は一度だけ別計測しwhole jobへ含める。
+
+MCTS completed simulationsとαβ completed depth、snapshot counterと全呼出しcounterを分ける。callback results・raw returned・finite/range valid repliesは別分母で、物理kernel数は未測定ならUNKNOWN。Call.stopのgeneric callback-error labelだけでモデル障害と解釈せず、typed guard理由とengine_errorを読む。fixedK benchmarkは別の仕事量診断で、timed caller資格の代用にしない。既存arenaによるcaller資格はprefix[]/[13]各一手の色交換pair・4機能slot（total max_pliesは1/2）を16科学slotと分離し、追加2Sigma＋2NNUE windows/max128Sigma requests/max2M NNUE nodesを結果前に固定する。[main統合・software証拠と未資格範囲](../../research-data/ai-sigma/arena-evaluation/sigma-timed-v1/main-integration-result.json)を参照する。
 
 benchmarkは時間制限を含む場合`fixed_work=false`とし、depth/node/timeの指定と実完了量を保存する。停止・pause・RAM条件は探索中にも確認し、失敗でも完了済みrecordを残す。nativeの同期呼出中の即時停止は別の限界であり、外側jobのexact回収と区別する。
 

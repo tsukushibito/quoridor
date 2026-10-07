@@ -1,0 +1,214 @@
+{
+  "issue": "quoridor-4lc.331",
+  "integration_owner_issue": "quoridor-4lc.324",
+  "status": "MAIN_WORKING_SOFTWARE_ADOPTED_LIVE_QUALIFICATION_PENDING",
+  "base_main": "ed168d3fb713493c9d8c99cde33fef9da59edebc",
+  "pre_integration_HEAD": "d9630ac573b2beaf195b287f4e68a7b9ddb307b2",
+  "prospective_inclusive_forecast": {
+    "inclusive_B": 1048576,
+    "source_docs_control_B": 262144,
+    "new_Git_objects_B": 524288,
+    "temp_failure_B": 262144,
+    "source_positive_allocated_forecast_B": 49152,
+    "within_existing_Root_integration_B": 8388608,
+    "new_resource_grant_B": 0,
+    "parent_cap_B": 13421772800,
+    "forward_addition_B": 536870912,
+    "UNKNOWN_retained_B": 134217728,
+    "Sigma_MiB": {
+      "source_control_review": 11,
+      "build_private": 45,
+      "qualification": 8,
+      "matches": 64
+    }
+  },
+  "source_packet": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/source-stop-v3-clippy.json",
+    "SHA256": "afa51ce664c14b8cbe592f5ba0a2ade799bbe31f101a0cfee315af66f1ce253c"
+  },
+  "patch": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/adapter-source-v3.patch",
+    "SHA256": "cc549b45fa43e2f0f4fa76e88556f1d1d284eb5b8cb6781c5c4dc09dafa8c670"
+  },
+  "before_SHA256": {
+    "crates/quoridor-runner/src/runtime.rs": "cc6bf1b5f984edbbfe51f736db365ccb6a7cdeef563effc99ca5e791501bdc2c",
+    "crates/quoridor-runner/src/sigma_clock.rs": null,
+    "crates/quoridor-runner/src/arena.rs": "e7d5632474a250af065d587242c71c6ebdac693cd7bd78a95ae62a14452df4b1",
+    "crates/quoridor-runner/src/arena_clock.rs": "a7a4f60b51167b05d1bafe1b119a9fa2ab061684c1903d85e28a09fe0f18ea8c",
+    "crates/quoridor-runner/src/arena_manifest.rs": "1e684606d8c640de3d6841ab78d3ade4a056cfdbbe3e43fddc335d0439949b7f",
+    "crates/quoridor-runner/src/lib.rs": "73daaff7359061a545f0547635c5a5454f40caabaeed66d1e1762b3bd68aa92e",
+    "crates/quoridor-runner/src/config.rs": "c73fd406b41bac730edb8cd2022f179cdae68343c65a29040fd01bf86a9b6ddd",
+    "crates/quoridor-runner/tests/arena.rs": "d7cec5c53e7e18eead7a23633e767e4617b99dbc101b4f0c81dc7bbda2b9ac01",
+    "crates/quoridor-runner/tests/sigma_clock.rs": null
+  },
+  "after_sources": {
+    "crates/quoridor-runner/src/runtime.rs": {
+      "SHA256": "07d544640ea9fb94505f62bc73b1a4ef031928d5e49b2b61d77055814a39682b",
+      "bytes": 131506,
+      "mode": 420,
+      "allocated": 135168
+    },
+    "crates/quoridor-runner/src/sigma_clock.rs": {
+      "SHA256": "69761dfb475541e5f9d29ee350609dcf18dac469bb3f33100fcd7f03323d8a8a",
+      "bytes": 12970,
+      "mode": 420,
+      "allocated": 16384
+    },
+    "crates/quoridor-runner/src/arena.rs": {
+      "SHA256": "45432cfc9797ed1c320eac35d7f28c02eb0cd95d752bf30fe305d43490850852",
+      "bytes": 13256,
+      "mode": 420,
+      "allocated": 16384
+    },
+    "crates/quoridor-runner/src/arena_clock.rs": {
+      "SHA256": "56323e4b0c24951f1521077dd1f352ec216cf446682175ca500625a6abc5bdda",
+      "bytes": 8965,
+      "mode": 420,
+      "allocated": 12288
+    },
+    "crates/quoridor-runner/src/arena_manifest.rs": {
+      "SHA256": "42bdd15deadb57ac9a5d23805c567c9fdbbf62734b7883dace29009fd45c3ca9",
+      "bytes": 27976,
+      "mode": 420,
+      "allocated": 28672
+    },
+    "crates/quoridor-runner/src/lib.rs": {
+      "SHA256": "0168944f76eb4a9320a636664dfe507c9bfaf65db1721c3949318faf7c6e5b87",
+      "bytes": 482,
+      "mode": 420,
+      "allocated": 4096
+    },
+    "crates/quoridor-runner/src/config.rs": {
+      "SHA256": "dcc01fbc81ccc8fa82f2976c5761e8f50760d9e1588a488852883de34642789c",
+      "bytes": 7535,
+      "mode": 420,
+      "allocated": 8192
+    },
+    "crates/quoridor-runner/tests/arena.rs": {
+      "SHA256": "48390113594c469d144d9c95392aae4bfa89d7f70910f9d2bece012b6a110951",
+      "bytes": 12853,
+      "mode": 420,
+      "allocated": 16384
+    },
+    "crates/quoridor-runner/tests/sigma_clock.rs": {
+      "SHA256": "51376e370795c46555cbcd94825c4352bf580d3be3effa8390096187672a9698",
+      "bytes": 4858,
+      "mode": 420,
+      "allocated": 8192
+    }
+  },
+  "unchanged_dependencies": [
+    {
+      "path": "crates/quoridor-ai/src/alphabeta.rs",
+      "SHA256": "cd34a858a085353f76b184f8a609ca09d07f23874ae67df8a2dbac2ee7593d0e",
+      "scope": "unchanged maintained dependency, no math/FT/head/PUCT changes"
+    },
+    {
+      "path": "crates/quoridor-ai/src/sigma_mcts.rs",
+      "SHA256": "dd59988dd7ddae090e1d71b7a17e1ef4f1772151db295c716a1375d84de67eee",
+      "scope": "unchanged maintained dependency, no math/FT/head/PUCT changes"
+    },
+    {
+      "path": "crates/quoridor-nnue/src/residual.rs",
+      "SHA256": "a51834c0677391ed19af6d832ad5cb1bd27352fac0b75bc8841a8ec3390085a1",
+      "scope": "unchanged maintained dependency, no math/FT/head/PUCT changes"
+    },
+    {
+      "path": "crates/quoridor-inference/src/lib.rs",
+      "SHA256": "d7656d85ba0e00fa2e4b2ac40ebfdc0b2c5fa56aca5a52d1e2e4d79f463cfc0f",
+      "scope": "unchanged maintained dependency, no math/FT/head/PUCT changes"
+    },
+    {
+      "path": "crates/quoridor-inference/native/ort.cpp",
+      "SHA256": "0911d448754c58d1a8869cc1ec46aad7adcd8e530e05401446333777c80108d9",
+      "scope": "unchanged maintained dependency, no math/FT/head/PUCT changes"
+    },
+    {
+      "path": "Cargo.lock",
+      "SHA256": "5b448d049178c9227ba2d51a784918f1ab192574a4c79f92cb61187f6f1732fe",
+      "scope": "unchanged maintained dependency, no math/FT/head/PUCT changes"
+    }
+  ],
+  "software_evidence": {
+    "joined_bundle_path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/software-recovery-v2/joined-software-bundle-v1.json",
+    "joined_bundle_SHA256": "5fc764aa3abeb7c294389f847f01a8c915a958312ba19540b762c1a34b0a657b",
+    "STOP_receipt_path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/software-recovery-v2/software-stop-receipt-v1.json",
+    "STOP_receipt_SHA256": "cddd7bd5ec2e6df39c007ad53f9e981951b6912a2fb26386b3f22cb3204bf866",
+    "job": "f8d68573-2d38-4d68-8344-35aa488e56bd",
+    "actual_START": "2026-10-07T21:55:02.258093+00:00",
+    "worker_STOP": "2026-10-07T21:56:03.816144+00:00",
+    "controller_STOP": "2026-10-07T21:56:03.894921+00:00",
+    "direct_children": 4,
+    "direct_wait_exit0_cleanup_remaining_empty": true,
+    "impacted_closedreceiver_fixture": "1 PASS",
+    "scoped_Clippy": "PASS -Dwarnings WITHOUTallow",
+    "other_prior_NN0_fixture_proofs": "reused only unchanged scope; no replay",
+    "private_runner_ELF_SHA256": "b91dd975d2d9e5f78b369e3021cefb3efb8e91197b379722e32bae040148d88d",
+    "release_own_payload_metadata_SHA256": "bf387f35b7654a65fc9e47ca498ca7d3aeb943969f0f02e48a5027cc5b04142e",
+    "compiler_provenance": "first release own6 fresh=false; repaired release own runner fresh=false, unchanged dependencies reused; source/private chain proof reused, no shared mutable artifact retroproof",
+    "known_controller_seconds": 186.63479634094983,
+    "old_failed_controller_seconds": 124.956918545,
+    "nested_times_not_added": true,
+    "sampled_family_RSS_B": 571842560,
+    "positive_artifact_charge_B": 18669568,
+    "private_B": 13824000,
+    "TMP_B": 2936832,
+    "continuous_intermediate_peak": "UNKNOWN retained",
+    "charged_record_SHA256": "0844109dc2bc8dd6c2675f8df4f1bbfce41cc3c2a3e018898dd991bcb609f83e",
+    "pending_signal_mask_receipts": "preserved; directwait/cleanup do not upgrade pending fields"
+  },
+  "related_reviews": {
+    "adapter_R1_C1_reader_STOP": "2026-10-07T20:11:13.860760+00:00",
+    "bound_charge_import_review_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/search-ownership-review-v1/sigma-deadline-v1/R1b-bound-import-confirm-v5/review.md",
+    "bound_charge_import_review_SHA256": "c5c28001e88636cc7437bcbf5a4182e5d92da98b546afbab618dd3d5b7cd953b",
+    "reader_STOP": "2026-10-07T21:37:17.444674+00:00",
+    "blockers": 0,
+    "ordinary": 0,
+    "scope": "source/static and focused NN0; not backend/runtime certificate"
+  },
+  "resource_proof_SHA256": "b58374a454d6cab172951b934f98eaa167d4c05a6700a7fecb9df181794ddd49",
+  "current_parent_manifest_SHA256": "1d8fdcf67c0ad6cbeffcf44fe7dfbfa2181eb900b3d1896a5a52e2ba05e01852",
+  "main_verification": {
+    "patch_check": "PASS",
+    "nine_source_mode_length_SHA_match": "PASS",
+    "unchanged_six_SHA_match": "PASS",
+    "scoped_Rustfmt": "PASS edition2024 skip_children=true check",
+    "docs_JSON_Pretty": "PASS scoped write/check",
+    "central_Cargo_model_fixture_replays": 0,
+    "diff_check": "PASS",
+    "source_positive_allocated_B": 45056,
+    "source_docs_control_positive_B": 73728,
+    "prospective_Git_object_upper_B": 278528,
+    "adoption_scope": "exact stopped9 and docs only; joined software evidence reused; no new model/native/runtime qualification"
+  },
+  "next_live_qualification": {
+    "ingress": "existing maintained arena; two operational one-additional-ply colourpairs",
+    "prefixes": [[], [13]],
+    "total_max_plies": [1, 2],
+    "functional_slots": 4,
+    "Sigma_windows": 2,
+    "NNUE_windows": 2,
+    "max_Sigma_requests": 128,
+    "max_NNUE_nodes": 2000000,
+    "separate_scientific_slots": 16,
+    "comparison_field": "whole_wall_time",
+    "denominator": "functional ply-censored only; no strength estimate",
+    "owner_delivery_accepted_turn": "01a1184d-bd60-7c73-bd32-d4bf981fed48",
+    "status": "NOT_RUN at adoption"
+  },
+  "limits": {
+    "live_backend_deadline": "NOT_RUN",
+    "strength": "NOT_RUN",
+    "PUCT_head_FT_math_model_selection": "unchanged",
+    "model_defaults": "unchanged",
+    "original_323": "paused",
+    "newE_oldopened": "CLOSED",
+    "old_assets_failed_costs_build_UNKNOWN": "retained"
+  },
+  "source_writer_STOP_UTC": "2026-10-07T22:28:43.012460+00:00",
+  "docs_SHA256": {
+    "docs/development/rust-ai.md": "d5e8bd8cd7cabaddff27f7b6b82e1ca37ff3020425de6372622e02a5f49d3050",
+    "crates/quoridor-runner/README.md": "ac67d4f4d1c19b1ce069a0b39d953068fa8addce08bca3d4145b309ffe60e250",
+    "docs/research-findings.md": "fbc94474110228990d83d8e59f076b1696a14529b87c6c5197c9665c831d5d2c"
+  }
+}
