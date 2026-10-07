@@ -1,0 +1,61 @@
+{
+  "schema": "quoridor-prospective-autonomy-reclassification-v1",
+  "issue": "quoridor-4lc.324",
+  "recipient": "quoridor-4lc.327",
+  "authority_path": "research-data/ai-sigma/execution-autonomy-20261007.json",
+  "authority_SHA256": "ad767319afed874e6ee056d0206e2df8b035699325fcefaa451475272ac3c9e8",
+  "before_manifest_SHA256": "31a70e69a37b0edda68e912fcac9d1a4fd4f81af4e5be834180ae67360a9e12f",
+  "after_manifest_SHA256": "5941d0ea80e994c0e03de068ff2f2e24c7ab79108461442f715c3d1fee5a9ea8",
+  "before_manifest_preserved_path": "research-data/ai-sigma/arena-evaluation/trained-reference-v1/storage-before-final-clippy-manifest.json.gz",
+  "before_manifest_preserved_gzip_SHA256": "2a06cea3e3bfc8ef809ef31a8fb594047a3220eb657b28ef5483c8f25875de38",
+  "parent_cap_B": 13421772800,
+  "parent_covered_reserved_B": 13421174784,
+  "parent_margin_B": 598016,
+  "UNKNOWN_retained_B": 134217728,
+  "new_addition_sum_B": 536870912,
+  "transfer_B": 8388608,
+  "from": {
+    "category": "autonomy-integration-review-repair",
+    "before_B": 67108864,
+    "after_B": 58720256,
+    "components_MiB": {
+      "execution324_setup_mainGit_tests": 8,
+      "328_entryrepair_integration": 8,
+      "same_relatedreviewer": 12,
+      "routine_producerrepair_cleanup": 20,
+      "prospective_unassigned_inside_addition": 8
+    }
+  },
+  "to": {
+    "category": "autonomy-327-native-clock",
+    "before_B": 134217728,
+    "after_B": 142606336,
+    "components_MiB": {
+      "fixed16_independent_PyTorch_fixture": 8,
+      "current_native_clock": 56,
+      "final_native_clock": 64,
+      "book_relatedreview_routine_overhead": 8
+    },
+    "final_native_components_MiB": {
+      "build_cache_linker_TMP": 48,
+      "diagnose": 2,
+      "runner": 8,
+      "source": 1,
+      "runtime": 1,
+      "failed_cleanup": 4
+    }
+  },
+  "whole_build_forecast_B": 48869376,
+  "whole_build_upper_B": 50331648,
+  "whole_build_margin_B": 1462272,
+  "forecast_path": ".worktree/arena-evaluation/.artifacts/trained-reference-v1/native-final-v1/software-v1/unfinished-clippy-forecast.json",
+  "forecast_SHA256": "502c25d41835b0cbbf4e0062c34397877402b846efb82715ba9b5aeb99b6764f",
+  "failed_job": "347d0260-2de8-4042-9879-53b1e4a0b3a2",
+  "failed_stop_receipt_SHA256": "d8d47348c9bbf7bd5accbd88d1abbf3ba16085fc93caa70658dcf1b36a15b02c",
+  "scope": "ONLY unfinished cached runner/AI Clippy; reuse successful own-source release and eight commands plus immutable finalpayloads. No repeated fixture/native/model/game or new math/flags. New separately bound entry and fresh soleCargo/private/source/owner/physics required, no ACK gate. Successful merged finalsoftware then324maincommit before finalgames.",
+  "old_reservations_roots_raw_fees_UNKNOWN_unchanged": true,
+  "existing_512MiB_conserved": true,
+  "setup_source_control_Git_temp_upper_B": 65536,
+  "setup_category": "existing shared execution324_setup_mainGit_tests8MiB; no additional parent bytes",
+  "initial_allocation": "ad767 remains historical original; this is prospective overlay for NEW entries only; failed/live prior proofs not retargeted"
+}
