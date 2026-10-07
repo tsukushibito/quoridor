@@ -71,3 +71,15 @@ FIRST Aだけを現行baselineと比較する1問を推奨する。最初にexac
 4. 速度の成立後に、同model/book/history、同hardware/thread、wholecallerにsetup含む同時間対局を別問として比較する。100msは既arenaに揃える有力案で、現在のfixedD/Sigma仕事を上書きしない。全予定slot、colour-pair、completeddepth/late/no-complete/error/cancel/unknown、勝敗/引分けを残す。少数16slotなら一般棋力certificateを主張しない。
 
 次に人間が選ぶのは、Aのordering-only反証を実装・計測するか、追加教師/学習費を承知してB/Cへ進むかである。最良MSE追求、fullfit再開、value/特徴/modelの変更、TTnamespace/pruning変更、newE開封はこの提案から導かない。
+
+## FIRST Aの実装・有限検証の承認
+
+2026-10-07、人間がFIRST Aのhistory同点continuationを実装・correctness・finite plain比較へ明示承認した。Beads334で別taskとして所有し、既333perf/332saved分析/331CPU修復を中断しないtask-specific実装sessionが凍結main向けstoppedpatchを準備する。AのみでB/C学習scoreとD全child先払いは提案のまま、323fitを再開しない。
+
+優先順はTT/PV→既two killers→optional既policy→history→continuation→ActionIDで、既history同点だけ変える。209×209 i16/87362Bをinvocation所有heapへ一度zeroし、actual検索stackのpreviousAction、rootは0、cutoffでmin(depth²,16383)を加えて16383へsaturate。negative/aging/multi-ply/新pruning/TTkey/value/FT/RNG等は導入しない。setup/drop/copy/cache/lookup/sort全費をcold wholeSearchへ含める。
+
+最初のsource phase inclusive1MiBは[前向きscope/資源proof](../../research-data/ai-sigma/search-optimization/lightweight-ordering-A334/storage-continuation-A334.json)で支持し、model/build/runtimecallsはそのsource枠から起動しない。新build/private A-B/raw/review/Git/failedcleanup全費は実必要variantで別途束縛する。source準備をmethod ACK待ちにはしない。
+
+独立complete-tree minimaxはrootvalueとvalid equal-bestAction集合を確認し、ordering変更によるAction/PV/nodes/cutoffs差を禁止しない。previousAction/root/reset/lifetime/color/history/reentrant/parentundo/cancel/error/saturation/tie-only/alllegalunique/PV合法の意味を検証する。plain比較は既5roots/d3/node100000/TT4096/BEST51固定、2ABBA8process50samples/1swarm/3stargetの5cold IDs、同完成depth・有限値・root合法/parent不変を確認し、cap未完成はinconclusiveにする。両bracketing Aに対する95%CI >1%・3/4反復/root・3/5coldbenefit/再現adverseなしを固定し、mixed/無効果なら問を終了しblind repeatしない。
+
+plain robust benefitなら関連source/ordering境界確認後に承認方向として採用できるが棋力効果とは区別する。same-time baseline A対Bの既8family16colour100ms/5reserveは次の全費/protocol提案のみで、この最初の依頼から追加gamesやSigma331slotを起動しない。333perfの現source/private baselineへadoptionを混ぜず、使用version bindingを先に確認する。
