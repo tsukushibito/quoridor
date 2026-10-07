@@ -48,7 +48,7 @@ CUDAは`cuda-aoti`、TensorRTは`tensorrt`のCargo featureを明示する。`QUO
 
 `nnue` engineはmanifestから対応するfloat/距離残差loaderを選択し、既存の評価器へ接続する。`model-check --model MANIFEST`は対応形式・署名・サイズを推論前に検査する。2 engineのarenaは色交換ペア単位で分割し、明示した奇数の分割境界は開始前に拒否する。
 
-arenaのbook・時計・pair集計・保存検査は[runnerのarena手順](../../crates/quoridor-runner/README.md)と[preset案内](../../configs/arena/README.md)を使う。色交換pairは同じ全履歴prefixから開始し、全予定slotと未知/取消を記録する。主集計は完了pair、補助に全予定分母の範囲を残す。`arena --audit OUTPUT` は来歴・保存SHA・集計を照合し、`--recover OUTPUT` は未完了journalの記録済みslotを読み取る。現在は単一探索版で、二版search adapterと同時間Sigmaは未実装。native時計は返却・合法性検査後の受理を測り、内部完了反復のtimestampや硬い返却保証は持たない。
+arenaのbook・時計・pair集計・保存検査は[runnerのarena手順](../../crates/quoridor-runner/README.md)と[preset案内](../../configs/arena/README.md)を使う。色交換pairは同じ全履歴prefixから開始し、全予定slotと未知/取消を記録する。主集計は完了pair、補助に全予定分母の範囲を残す。`arena --audit OUTPUT` は来歴・保存SHA・集計を照合し、`--recover OUTPUT` は未完了journalの記録済みslotを読み取る。比較する探索版はsource/compiler/flags/lock/private ELFとmodel/scale/inputを別々に束縛する。同時間Sigmaは未実装。αβのnative時計はcaller setup・探索・返却・合法履歴検査後の受理を測り、完了depthのtimestampとcounterを全呼出しのcounterから分ける。既存のpersistent TTを使うSearchSessionは最後に完成した合法depthを返し、後続のengine errorを旧completionで救済しない。terminal/cancel/no-completion/lateは別結果で、期限前のcompletionがあっても期限後の受理を許可しない。研究用100ms/手ではsetupと5ms return reserveを差し引くが、硬い返却保証ではない。要求TT65536でも現persistent policyの実容量は最大4096 slots/1MiBで、manifestのsource見込みとruntime実容量/retained snapshotを区別する。
 
 benchmarkは時間制限を含む場合`fixed_work=false`とし、depth/node/timeの指定と実完了量を保存する。停止・pause・RAM条件は探索中にも確認し、失敗でも完了済みrecordを残す。nativeの同期呼出中の即時停止は別の限界であり、外側jobのexact回収と区別する。
 
@@ -141,3 +141,11 @@ TTのtargetは同playerが合法な二手を進めたdepth2の局面。`tt/cold_
 事前資格はtyped Action/valuebits/PV/完成depth/全exported counter/保持memoryをstdoutのJSON recordに保存する。Criterionのraw samples/estimatesは `CRITERION_HOME` へ保存する。50 samples、既定95% confidence/5% significance/1% noise threshold・標準bootstrapを用い、暖機/測定時間は有限の測定方法であって外側jobの作業期限ではない。プロセス全費・init・forward数・確保数・独立算術oracleは別に保持する。Criterionは原因profile・実対局・棋力の測定器ではなく、過去の短い測定や不支持結果を遡って支持へ書き換えない。共有target唯一writer、CPU/RAM/保存/owner pause/exact cleanupと学習/arena時計との非重複は従来のjob手順に従う。
 
 従来版と借用入力版の固定比較source/rawは[保存結果](../../research-data/ai-sigma/search-optimization/borrowed-criterion-comparison/result/report.md)に残す。現役benchmarkは採用済みAPIで通常の再用bufferを測り、比較専用の互換featureや別searcherを常設しない。5固定局面で事前の明確退行条件は0/5だったが、無退行証明や速度利益とは扱わない。
+
+## 固定参照・bookとnativeの対応確認
+
+現役診断入口は `nnue-diagnose --config CONFIG`。`mode:"correspondence"` は独立期待値を持つ16 ordered rowsのpacketと必須 `input_sha256`、モデルmanifest/weight SHAを検査し、QF1両視点・STM順D・native side0/Torch side1・finite/shapeを維持してScalar/Simd FTの対応と実head guard/backend経路を報告する。FP32 alertはabs1e-5+rel1e-4で、FT bitsの比較と区別する。feature-only入力から合法履歴や棋力を資格せず、全体の `qualification_complete` はfalseのまま。合法prefix/full-delta/親undo・caller/対局は別境界で確認する。packet/診断例は停止済みの研究証拠であり、準備済みであることだけから新しいforwardや既定モデル採用を許可しない。
+
+`mode:"prepare_arena_book"` はengine指定を拒否するNN0入口。全候補/却下の分母、seed・全Action/history・turn/stocks・非終局検査・共通lineageを保存し、不完全/重複bookを拒否する。8 familyの一先後pair/16 slotでは固定bookを結果前に束縛し、候補の勝敗で再選択しない。`configs/arena/best51-book-preparation.json` は人間が受け入れたseed32710001/lengths0..14の準備設定であり、対局実行やSigmaの同時間資格ではない。
+
+診断Configの `wall_seconds` は必須nullableで、省略は拒否、明示nullはwhole-job wall guardなし、positive有限値は明示guardとなる。一般runner Configは省略時の既存300秒既定と明示nullを区別する。いずれもNN/processed/node/RAM/取消・個別caller deadlineの条件を置き換えず、見積り400/480秒を科学deadlineにしない。実運用の採用sourceとprivate compiled版・trained correspondence・default/棋力採用は別のreceiptで確認する。

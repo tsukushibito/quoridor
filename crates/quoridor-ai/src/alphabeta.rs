@@ -1035,6 +1035,10 @@ impl SearchSession {
             + self.namespace.selectivity.capacity();
         (self.table.retained_bytes(), metadata)
     }
+    /// Live persistent slot count and byte limit; no table or history mutation.
+    pub fn tt_capacity(&self) -> (usize, usize) {
+        (self.table.slots.len(), self.table.byte_limit)
+    }
     pub fn namespace(&self) -> &SearchNamespace {
         &self.namespace
     }
@@ -1051,13 +1055,23 @@ impl SearchSession {
         limits: &SearchLimits,
         cancel: &AtomicBool,
     ) -> Result<SearchResult> {
+        self.search_with_updates(root, limits, cancel, &mut |_| {})
+    }
+    /// Same persistent table and search; callback publishes complete depths only.
+    pub fn search_with_updates(
+        &mut self,
+        root: &SigmaContext,
+        limits: &SearchLimits,
+        cancel: &AtomicBool,
+        on_completed: &mut dyn FnMut(&SearchResult),
+    ) -> Result<SearchResult> {
         search_in_table(
             root,
             self.evaluator.as_ref(),
             limits,
             cancel,
             None,
-            &mut |_| {},
+            on_completed,
             &mut self.table,
         )
     }
@@ -2163,5 +2177,128 @@ mod child_buffer_tests {
         assert_eq!(outer.completed_depth, 2);
         assert_eq!(callbacks, 2);
         assert_eq!(root.history_counts(), before);
+    }
+}
+
+#[cfg(test)]
+mod merged_session_pool_tests {
+    use super::*;
+    use std::sync::atomic::AtomicUsize;
+
+    #[derive(Default)]
+    struct Probe {
+        pools: AtomicUsize,
+        advances: AtomicUsize,
+        fail: AtomicBool,
+    }
+    impl StaticEvaluator for Probe {
+        fn create_child_storage(&self, slots: usize) -> Vec<Option<EvalAccumulator>> {
+            self.pools.fetch_add(1, Ordering::SeqCst);
+            vec![None; slots]
+        }
+        fn advance_move_context(
+            &self,
+            _: Option<&EvalAccumulator>,
+            _: &SigmaContext,
+            _: &quoridor_core::research::ContextUndo,
+            child: &mut Option<EvalAccumulator>,
+        ) -> Result<()> {
+            self.advances.fetch_add(1, Ordering::SeqCst);
+            if self.fail.load(Ordering::SeqCst) {
+                return Err(SearchError::Evaluation("merged-pool-probe".into()));
+            }
+            *child = None;
+            Ok(())
+        }
+        fn evaluate(&self, context: &SigmaContext, _: Option<&EvalAccumulator>) -> Result<f32> {
+            DistanceEvaluator::new(0., 8.).evaluate(context, None)
+        }
+    }
+    fn namespace() -> SearchNamespace {
+        SearchNamespace {
+            evaluator: "merged-pool-NN0".into(),
+            rules: "Sigma-RuleA-full-history-terminal-ply-v1".into(),
+            selectivity: "fullwidth-PVS-MPC-OFF-v1".into(),
+        }
+    }
+    fn legal_completion(root: &SigmaContext, result: &SearchResult) {
+        assert!(result.completed_depth > 0);
+        assert_eq!(result.action, result.pv.first().copied());
+        let mut replay = root.clone();
+        for action in &result.pv {
+            replay = replay.play(*action).unwrap();
+        }
+    }
+    #[test]
+    fn persistent_completed_callback_with_pool_error_cancel_and_nested_search_nn0() {
+        let root = SigmaContext::from_prefix(&[13]).unwrap();
+        let history = root.history_counts();
+        let position = root.position();
+        let limits = SearchLimits {
+            max_depth: 2,
+            max_nodes: 100000,
+            time_limit: None,
+            tt_entries: 64,
+            use_pvs: true,
+            use_tt: true,
+        };
+        let error = Arc::new(Probe::default());
+        let mut session = SearchSession::new(error.clone(), namespace(), 64).unwrap();
+        let mut completions = 0;
+        let failed =
+            session.search_with_updates(&root, &limits, &AtomicBool::new(false), &mut |result| {
+                legal_completion(&root, result);
+                completions += 1;
+                error.fail.store(true, Ordering::SeqCst);
+            });
+        assert!(matches!(failed, Err(SearchError::Evaluation(_))));
+        assert_eq!(completions, 1);
+        assert_eq!(root.history_counts(), history);
+        assert_eq!(root.position(), position);
+        assert!(error.advances.load(Ordering::SeqCst) > 0);
+
+        let cancelled = Arc::new(Probe::default());
+        let mut session = SearchSession::new(cancelled.clone(), namespace(), 64).unwrap();
+        let cancel = AtomicBool::new(false);
+        let stopped = session
+            .search_with_updates(&root, &limits, &cancel, &mut |result| {
+                legal_completion(&root, result);
+                cancel.store(true, Ordering::SeqCst);
+            })
+            .unwrap();
+        assert_eq!(stopped.stop, StopReason::Cancelled);
+        assert_eq!(stopped.completed_depth, 1);
+        assert_eq!(root.history_counts(), history);
+        assert_eq!(root.position(), position);
+        assert_eq!(cancelled.pools.load(Ordering::SeqCst), 1);
+
+        let nested = Arc::new(Probe::default());
+        let mut session = SearchSession::new(nested.clone(), namespace(), 64).unwrap();
+        let inner_limits = SearchLimits {
+            max_depth: 1,
+            ..limits.clone()
+        };
+        let mut completions = 0;
+        let done = session
+            .search_with_updates(&root, &limits, &AtomicBool::new(false), &mut |result| {
+                legal_completion(&root, result);
+                let mut inner = SearchSession::new(nested.clone(), namespace(), 64).unwrap();
+                let inner_done = inner
+                    .search_with_updates(&root, &inner_limits, &AtomicBool::new(false), &mut |_| {})
+                    .unwrap();
+                legal_completion(&root, &inner_done);
+                assert_eq!(inner_done.completed_depth, 1);
+                assert_eq!(inner_done.stats.policy_calls, 0);
+                completions += 1;
+                assert_eq!(root.history_counts(), history);
+            })
+            .unwrap();
+        assert_eq!(done.completed_depth, 2);
+        assert_eq!(done.stats.policy_calls, 0);
+        assert_eq!(completions, 2);
+        assert_eq!(nested.pools.load(Ordering::SeqCst), 3);
+        assert_eq!(root.history_counts(), history);
+        assert_eq!(root.position(), position);
+        assert_eq!(session.tt_capacity(), (64, 1048576));
     }
 }

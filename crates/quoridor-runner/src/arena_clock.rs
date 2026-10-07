@@ -104,6 +104,10 @@ pub struct MoveObservation {
     pub caller_seconds: f64,
     pub thinking_seconds: Option<f64>,
     pub last_completed_iteration_ns: Option<u64>,
+    #[serde(default)]
+    pub completed_iteration_counters: Option<serde_json::Value>,
+    #[serde(default)]
+    pub engine_error: Option<String>,
     pub stop: Option<String>,
     pub completed_depth: Option<u16>,
     pub value_stm: Option<f32>,
@@ -131,4 +135,127 @@ pub fn alpha_counters(r: &SearchResult) -> serde_json::Value {
         "tt_illegal_moves":s.tt_illegal_moves,"tt_retained_bytes":s.tt_retained_bytes,"tt_generation":s.tt_generation,
         "pvs_researches":s.pvs_researches,"delta_updates":s.delta_updates,"policy_calls":s.policy_calls,
         "leaf_count":null,"physical_nn_calls":null})
+}
+
+/// Single caller-owned snapshot, never a hard real-time asynchronous return promise.
+#[derive(Default)]
+pub(crate) struct Completion {
+    pub at: Option<std::time::Instant>,
+    pub result: Option<SearchResult>,
+    pub invalid: bool,
+}
+impl Completion {
+    pub fn publish(
+        &mut self,
+        root: &quoridor_core::research::SigmaContext,
+        r: &SearchResult,
+        deadline: Option<std::time::Instant>,
+    ) {
+        let legal = r.completed_depth > 0
+            && r.value.is_some_and(f32::is_finite)
+            && r.action
+                .is_some_and(|a| r.pv.first() == Some(&a) && root.play(a).is_ok());
+        if !legal {
+            self.invalid = true;
+            return;
+        }
+        let now = std::time::Instant::now();
+        if deadline.is_none_or(|d| now < d) {
+            self.at = Some(now);
+            self.result = Some(r.clone());
+        }
+    }
+    pub fn select(&self, r: &mut SearchResult) {
+        if matches!(r.stop, StopReason::Terminal | StopReason::Cancelled) {
+            return;
+        }
+        if let Some(done) = &self.result {
+            r.action = done.action;
+            r.value = done.value;
+            r.completed_depth = done.completed_depth;
+            r.pv = done.pv.clone();
+        } else {
+            r.action = None;
+            r.value = None;
+            r.completed_depth = 0;
+            r.pv.clear();
+        }
+    }
+}
+pub(crate) fn remaining(
+    start: std::time::Instant,
+    now: std::time::Instant,
+    budget: std::time::Duration,
+    reserve: std::time::Duration,
+) -> std::time::Duration {
+    budget
+        .saturating_sub(reserve)
+        .saturating_sub(now.saturating_duration_since(start))
+}
+#[cfg(test)]
+mod completion_tests {
+    use super::*;
+    use std::time::{Duration, Instant};
+    #[test]
+    fn setup_charges_budget_and_late_completion_is_not_published() {
+        let start = Instant::now();
+        assert_eq!(
+            remaining(
+                start,
+                start + Duration::from_millis(98),
+                Duration::from_millis(100),
+                Duration::from_millis(5)
+            ),
+            Duration::ZERO
+        );
+        let root = quoridor_core::research::SigmaContext::from_prefix(&[]).unwrap();
+        let mut r = SearchResult {
+            action: Some(13),
+            value: Some(0.),
+            completed_depth: 1,
+            pv: vec![13],
+            stats: Default::default(),
+            stop: StopReason::DepthComplete,
+            elapsed: Duration::ZERO,
+        };
+        let mut c = Completion::default();
+        c.publish(&root, &r, Some(start));
+        assert!(c.at.is_none());
+        c.publish(&root, &r, None);
+        assert!(c.at.is_some());
+        r.completed_depth = 2;
+        r.stats.nodes = 99;
+        r.stop = StopReason::TimeLimit;
+        c.select(&mut r);
+        assert_eq!(r.completed_depth, 1);
+        assert_eq!(r.stats.nodes, 99);
+        assert_eq!(r.stop, StopReason::TimeLimit);
+        assert_eq!(
+            acceptance(
+                ClockPolicy::StrictUnknown,
+                Some(100),
+                100,
+                false,
+                true,
+                true
+            ),
+            Err(Failure::TimeOverrun)
+        );
+        assert_eq!(
+            acceptance(ClockPolicy::StrictUnknown, Some(100), 99, true, true, true),
+            Err(Failure::Cancelled)
+        );
+        assert_eq!(
+            acceptance(ClockPolicy::StrictUnknown, None, 0, false, false, false),
+            Err(Failure::NoCompletedIteration)
+        );
+        r.stop = StopReason::Terminal;
+        r.action = None;
+        r.completed_depth = 0;
+        c.select(&mut r);
+        assert!(r.action.is_none());
+        r.stop = StopReason::Cancelled;
+        c.select(&mut r);
+        assert_eq!(r.completed_depth, 0);
+    }
 }

@@ -18,6 +18,8 @@ use std::{
     time::{Duration, Instant},
 };
 
+#[path = "../native_input.rs"]
+mod native_input;
 type Result<T> = std::result::Result<T, Box<dyn std::error::Error + Send + Sync>>;
 #[derive(Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -44,6 +46,8 @@ struct Generate {
 #[serde(deny_unknown_fields)]
 struct Config {
     mode: String,
+    input: Option<PathBuf>,
+    input_sha256: Option<String>,
     output: PathBuf,
     counter: PathBuf,
     #[serde(default)]
@@ -55,13 +59,31 @@ struct Config {
     max_nodes: u64,
     nn_cap: u64,
     processed_cap: u64,
-    wall_seconds: f64,
+    #[serde(deserialize_with = "required_nullable_wall")]
+    wall_seconds: Option<f64>,
     time_ms: Option<u64>,
     search_ms: Option<u64>,
     max_plies: u16,
     cpu_core: usize,
     ram_limit: u64,
     host_ram_reserve: u64,
+}
+// No serde default: omission stays invalid; an explicitly supplied null is unbounded.
+fn required_nullable_wall<'de, D>(deserializer: D) -> std::result::Result<Option<f64>, D::Error>
+where
+    D: serde::Deserializer<'de>,
+{
+    Option::<f64>::deserialize(deserializer)
+}
+impl Config {
+    fn caps_valid(&self) -> bool {
+        self.nn_cap > 0
+            && self.processed_cap > 0
+            && self.max_nodes > 0
+            && self
+                .wall_seconds
+                .is_none_or(|seconds| seconds.is_finite() && seconds > 0.)
+    }
 }
 struct Counted {
     inner: Arc<dyn StaticEvaluator>,
@@ -158,7 +180,8 @@ fn save(p: &PathBuf, x: &Value) -> Result<()> {
     Ok(())
 }
 fn guard(c: &Config, start: Instant, nn: u64, processed: u64) -> Result<()> {
-    if start.elapsed().as_secs_f64() >= c.wall_seconds
+    if c.wall_seconds
+        .is_some_and(|seconds| start.elapsed().as_secs_f64() >= seconds)
         || nn >= c.nn_cap
         || processed >= c.processed_cap
     {
@@ -380,6 +403,9 @@ fn qualify_residual(c: &Config, start: Instant) -> Result<Value> {
         let simd_values = parent_simd.values.clone();
         max_accumulator_error =
             max_accumulator_error.max(accumulator_error(&parent_scalar, &parent_simd)?);
+        if !same_float_bits(&parent_scalar.values, &parent_simd.values) {
+            return Err("QUALIFY_ORDERED_FT_BITS".into());
+        }
         let scalar = evaluate(&parent_scalar)?;
         let simd = evaluate(&parent_simd)?;
         if (scalar - simd).abs() > 1e-5 + 1e-4 * scalar.abs() {
@@ -400,6 +426,11 @@ fn qualify_residual(c: &Config, start: Instant) -> Result<Value> {
             let full_simd = model.full_context(&s, EvaluationMode::Simd)?;
             let delta_scalar = model.delta_context(&parent_scalar, &s)?;
             let delta_simd = model.delta_context(&parent_simd, &s)?;
+            if !same_float_bits(&full_scalar.values, &full_simd.values)
+                || !same_float_bits(&delta_scalar.values, &delta_simd.values)
+            {
+                return Err("QUALIFY_ORDERED_FT_BITS".into());
+            }
             for (a, b) in [
                 (&full_scalar, &full_simd),
                 (&full_scalar, &delta_scalar),
@@ -457,6 +488,9 @@ fn qualify_residual(c: &Config, start: Instant) -> Result<Value> {
 }
 
 fn run(c: &Config, start: Instant) -> Result<Value> {
+    if c.mode == "correspondence" {
+        return native_input::run(c, start);
+    }
     if c.mode == "qualify" {
         return qualify_residual(c, start);
     }
@@ -738,16 +772,12 @@ fn main() -> Result<()> {
     if args.len() != 3 || args[1] != "--config" {
         return Err("usage: nnue-diagnose --config CONFIG".into());
     }
-    let c: Config = serde_json::from_slice(&fs::read(&args[2])?)?;
+    let config_bytes = fs::read(&args[2])?;
+    let c: Config = serde_json::from_slice(&config_bytes)?;
     if c.output.exists() {
         return Err("OUTPUT_EXISTS".into());
     }
-    if c.nn_cap == 0
-        || c.processed_cap == 0
-        || c.max_nodes == 0
-        || !c.wall_seconds.is_finite()
-        || c.wall_seconds <= 0.
-    {
+    if !c.caps_valid() {
         return Err("CAPS".into());
     }
     let affinity = quoridor_runner::resources::AffinityGuard::capture()?;
@@ -760,7 +790,19 @@ fn main() -> Result<()> {
     )?;
     quoridor_runner::resources::pin(admission.worker_cores[0])?;
     let start = Instant::now();
-    let result = if c.mode == "prepare" {
+    let result = if c.mode == "prepare_arena_book" {
+        if !c.engines.is_empty() {
+            return Err("BOOK_NN0_NO_ENGINE".into());
+        }
+        let mut p = prepare(&c, start)?;
+        p["generation"] = serde_json::from_slice::<Value>(&config_bytes)?["generate"].clone();
+        let book = quoridor_runner::arena_book::from_preparation(
+            &p,
+            quoridor_runner::arena::digest(include_bytes!("nnue-diagnose.rs")),
+        )?;
+        p["book"] = serde_json::to_value(book)?;
+        Ok(p)
+    } else if c.mode == "prepare" {
         prepare(&c, start)
     } else {
         run(&c, start)
@@ -768,6 +810,13 @@ fn main() -> Result<()> {
     let output = match result {
         Ok(mut v) => {
             v["admission"] = serde_json::to_value(admission)?;
+            v["config_sha256"] = json!(quoridor_runner::arena::digest(&config_bytes));
+            v["compiled_sources"] =
+                serde_json::to_value(quoridor_runner::compiled_source_bindings())?;
+            if c.mode == "correspondence" {
+                v["NN_scope"] =
+                    json!("caller pipeline attempts; physical head/FT kernel counts unavailable");
+            }
             v
         }
         Err(e) => {
@@ -912,5 +961,37 @@ mod borrowed_input_counter_tests {
         assert_eq!(inner.0.load(Ordering::Relaxed), 2);
         assert_eq!(counter.load(Ordering::Relaxed), 0);
         assert_eq!(e.own.load(Ordering::Relaxed), 0);
+    }
+}
+
+#[cfg(test)]
+mod required_wall_tests {
+    use super::*;
+    #[test]
+    fn diagnostic_wall_requires_presence_and_accepts_explicit_null_nn0() {
+        let mut v = json!({"mode":"qualify","output":"out","counter":"count",
+            "depths":[],"max_nodes":1,"nn_cap":1,"processed_cap":1,
+            "max_plies":0,"cpu_core":0,"ram_limit":1,"host_ram_reserve":0});
+        assert!(serde_json::from_value::<Config>(v.clone()).is_err());
+        v["wall_seconds"] = Value::Null;
+        let null: Config = serde_json::from_value(v.clone()).unwrap();
+        assert!(null.wall_seconds.is_none() && null.caps_valid());
+        v["wall_seconds"] = json!(2.5);
+        let positive: Config = serde_json::from_value(v.clone()).unwrap();
+        assert_eq!(positive.wall_seconds, Some(2.5));
+        assert!(positive.caps_valid());
+        for invalid in [json!(0.), json!(-1.)] {
+            v["wall_seconds"] = invalid;
+            assert!(
+                !serde_json::from_value::<Config>(v.clone())
+                    .unwrap()
+                    .caps_valid()
+            );
+        }
+        v["wall_seconds"] = json!("invalid");
+        assert!(serde_json::from_value::<Config>(v.clone()).is_err());
+        v["wall_seconds"] = Value::Null;
+        v["nn_cap"] = json!(0);
+        assert!(!serde_json::from_value::<Config>(v).unwrap().caps_valid());
     }
 }

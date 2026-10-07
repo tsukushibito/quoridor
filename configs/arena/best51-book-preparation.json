@@ -1,0 +1,28 @@
+{
+  "mode": "prepare_arena_book",
+  "output": ".artifacts/arena-preparation/book.json",
+  "counter": ".artifacts/arena-preparation/counter.json",
+  "prefixes": [],
+  "engines": [],
+  "generate": {
+    "seed": 32710001,
+    "opening_plies": [0, 2, 4, 6, 8, 10, 12, 14],
+    "max_attempts": 32,
+    "min_distance": 2,
+    "max_distance_difference": 2,
+    "pawn_fraction": 0.5,
+    "primary_shallow_slots": 8,
+    "preparation_node_cap": 250000
+  },
+  "depths": [],
+  "max_nodes": 250000,
+  "nn_cap": 1,
+  "processed_cap": 8,
+  "wall_seconds": 60,
+  "time_ms": null,
+  "search_ms": null,
+  "max_plies": 0,
+  "cpu_core": 0,
+  "ram_limit": 536870912,
+  "host_ram_reserve": 2147483648
+}

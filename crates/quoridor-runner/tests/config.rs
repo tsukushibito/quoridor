@@ -40,3 +40,17 @@ fn paired_arena_counts_are_admitted_by_family_before_execution() {
     c.train_games = Some(usize::MAX - 1);
     assert!(c.validate().is_err());
 }
+
+#[test]
+fn optional_job_wall_preserves_other_limits() {
+    let mut c = config();
+    c.wall_seconds = None;
+    assert!(c.validate().is_ok());
+    for bad in [0., -1., f64::NAN, f64::INFINITY] {
+        c.wall_seconds = Some(bad);
+        assert!(c.validate().is_err());
+    }
+    c.wall_seconds = None;
+    c.max_plies = 0;
+    assert!(c.validate().is_err());
+}

@@ -27,8 +27,8 @@ fn nodes() -> u64 {
 fn plies() -> u16 {
     200
 }
-fn seconds() -> f64 {
-    300.0
+fn seconds() -> Option<f64> {
+    Some(300.0)
 }
 fn output_limit() -> u64 {
     512 * 1024 * 1024
@@ -90,7 +90,7 @@ pub struct Config {
     #[serde(default)]
     pub inference: Option<Inference>,
     #[serde(default = "seconds")]
-    pub wall_seconds: f64,
+    pub wall_seconds: Option<f64>,
     #[serde(default = "reserve")]
     pub host_ram_reserve: u64,
     #[serde(default)]
@@ -208,9 +208,9 @@ impl Config {
             || self.simulations > 1000000
             || self.max_plies == 0
             || self.max_plies > 200
-            || !self.wall_seconds.is_finite()
-            || self.wall_seconds <= 0.0
-            || self.wall_seconds > 86400.0
+            || self
+                .wall_seconds
+                .is_some_and(|seconds| !seconds.is_finite() || seconds <= 0.0 || seconds > 86400.0)
             || self.temperature < 0.0
             || !self.temperature.is_finite()
             || self.max_output_bytes == 0

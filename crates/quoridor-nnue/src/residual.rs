@@ -274,6 +274,15 @@ impl ResidualModel {
         a: &Accumulator,
         scratch: &mut ResidualScratch,
     ) -> Result<f32> {
+        self.evaluate_with_scratch_observed(a, scratch, |_, _| {})
+    }
+    /// Observe permit/hardware routing once after valid packing; errors propagate.
+    pub fn evaluate_with_scratch_observed(
+        &self,
+        a: &Accumulator,
+        scratch: &mut ResidualScratch,
+        observe: impl FnOnce(bool, bool),
+    ) -> Result<f32> {
         self.base.validate_accumulator(a)?;
         let t = self.base.topology;
         let input = t.input_width() + 4;
@@ -303,6 +312,11 @@ impl ResidualModel {
         let fast = self
             .fast_range
             .permits(x, a.features.distance, self.base.distance_fit);
+        #[cfg(target_arch = "x86_64")]
+        let avx2 = std::is_x86_feature_detected!("avx2");
+        #[cfg(not(target_arch = "x86_64"))]
+        let avx2 = false;
+        observe(fast, avx2);
         let mut r = self.weights[o + t.hidden_width];
         for j in 0..t.hidden_width {
             let v = crate::simd::dot_fast(
@@ -847,5 +861,46 @@ mod input_scratch_frozen_tests {
             "FAST_HEAD_ACCURACY_INPUTS={};CHILDREN={children};ROOTS=5",
             obs.errors.len()
         );
+    }
+}
+
+#[cfg(test)]
+mod head_route_observer_test {
+    use super::*;
+    #[test]
+    fn observed_matches_and_bad_shape_has_no_route() {
+        let t = Topology {
+            ft_width: 4,
+            hidden_width: 1,
+        };
+        let m = ResidualModel::from_parts(
+            t,
+            vec![0.; ResidualModel::parameter_count(t).unwrap()],
+            [0.; 2],
+            [1.; 2],
+            DistanceFit { a: 0., b: 8. },
+            RouteMode::Zero4,
+            [0.; 4],
+            [1.; 4],
+        )
+        .unwrap();
+        let a = m.full(quoridor_core::Position::default()).unwrap();
+        let before = a.values.clone();
+        let mut scratch = m.evaluation_scratch();
+        let mut route = None;
+        let v = m
+            .evaluate_with_scratch_observed(&a, &mut scratch, |p, h| route = Some((p, h)))
+            .unwrap();
+        assert_eq!(v.to_bits(), m.evaluate(&a).unwrap().to_bits());
+        assert!(route.unwrap().0);
+        assert_eq!(a.values, before);
+        let mut bad = ResidualScratch { input: vec![] };
+        route = None;
+        assert!(
+            m.evaluate_with_scratch_observed(&a, &mut bad, |p, h| route = Some((p, h)))
+                .is_err()
+        );
+        assert!(route.is_none());
+        println!("OBSERVED_ROUTE_SYNTHETIC_HEAD_ATTEMPTS=2;FT_SETUPS=1;SHAPE_REJECTS=1");
     }
 }

@@ -63,6 +63,9 @@ pub struct TtProfile {
     pub key_history_capacity_bytes_sum: u64,
     pub hashes: u64,
     pub retained_bytes_peak: usize,
+    pub requested_tt_entries: Option<usize>,
+    pub effective_tt_slots: Option<usize>,
+    pub persistent_tt_byte_cap: Option<usize>,
     pub successful_result_elapsed_seconds: f64,
     pub search_invocation_seconds: f64,
     pub search_error_invocation_seconds: f64,
@@ -100,6 +103,7 @@ impl TtProfile {
 }
 /// One TT caller attempt, including allocation errors and early cancellation.
 /// The owned evaluator/session and numerical search semantics are unchanged.
+#[cfg(test)]
 #[allow(clippy::too_many_arguments)]
 fn invoke_alpha(
     session: &mut Option<alphabeta::SearchSession>,
@@ -115,6 +119,40 @@ fn invoke_alpha(
         alphabeta::SearchNamespace,
         usize,
     ) -> alphabeta::Result<alphabeta::SearchSession>,
+) -> alphabeta::Result<alphabeta::SearchResult> {
+    invoke_alpha_observed(
+        session,
+        profile,
+        evaluator,
+        namespace,
+        root,
+        limits,
+        cancel,
+        caller_start,
+        initialize,
+        None,
+        None,
+        Duration::ZERO,
+    )
+}
+#[allow(clippy::too_many_arguments)]
+fn invoke_alpha_observed(
+    session: &mut Option<alphabeta::SearchSession>,
+    profile: &mut TtProfile,
+    evaluator: Arc<dyn StaticEvaluator>,
+    namespace: alphabeta::SearchNamespace,
+    root: &SigmaContext,
+    limits: &SearchLimits,
+    cancel: &AtomicBool,
+    caller_start: Instant,
+    initialize: impl FnOnce(
+        Arc<dyn StaticEvaluator>,
+        alphabeta::SearchNamespace,
+        usize,
+    ) -> alphabeta::Result<alphabeta::SearchSession>,
+    mut completion: Option<&mut crate::arena_clock::Completion>,
+    budget: Option<Duration>,
+    reserve: Duration,
 ) -> alphabeta::Result<alphabeta::SearchResult> {
     profile.attempts += 1;
     let outcome = (|| {
@@ -136,6 +174,10 @@ fn invoke_alpha(
             }
         }
         let session = session.as_mut().unwrap();
+        let (slots, byte_cap) = session.tt_capacity();
+        profile.requested_tt_entries = Some(limits.tt_entries);
+        profile.effective_tt_slots = Some(slots);
+        profile.persistent_tt_byte_cap = Some(byte_cap);
         if session.namespace() != &namespace {
             let start = Instant::now();
             session.reset(evaluator, namespace);
@@ -144,7 +186,41 @@ fn invoke_alpha(
         }
         profile.search_invocations += 1;
         let start = Instant::now();
-        let result = session.search(root, limits, cancel);
+        let mut bounded = limits.clone();
+        let result = (|| {
+            if let Some(done) = completion.as_mut() {
+                let deadline = budget
+                    .map(|b| {
+                        caller_start.checked_add(b).ok_or_else(|| {
+                            alphabeta::SearchError::Limits("caller deadline overflow".into())
+                        })
+                    })
+                    .transpose()?;
+                if let Some(b) = budget {
+                    bounded.time_limit = Some(crate::arena_clock::remaining(
+                        caller_start,
+                        Instant::now(),
+                        b,
+                        reserve,
+                    ));
+                }
+                let result = session.search_with_updates(root, &bounded, cancel, &mut |r| {
+                    done.publish(root, r, deadline)
+                });
+                if done.invalid {
+                    Err(alphabeta::SearchError::Root(
+                        "invalid completed-depth snapshot".into(),
+                    ))
+                } else {
+                    result.map(|mut r| {
+                        done.select(&mut r);
+                        r
+                    })
+                }
+            } else {
+                session.search(root, limits, cancel)
+            }
+        })();
         let invocation_seconds = start.elapsed().as_secs_f64();
         profile.search_invocation_seconds += invocation_seconds;
         let (table, metadata) = session.retained_memory_bytes();
@@ -530,7 +606,10 @@ fn memory() -> u64 {
         * 1024
 }
 fn guard(config: &Config, start: Instant, limit: u64) -> Option<String> {
-    if start.elapsed().as_secs_f64() > config.wall_seconds {
+    if config
+        .wall_seconds
+        .is_some_and(|seconds| start.elapsed().as_secs_f64() > seconds)
+    {
         Some("wall_limit".into())
     } else if config.deadline_unix_ms > 0 && unix_ms() >= config.deadline_unix_ms {
         Some("deadline".into())
@@ -936,7 +1015,7 @@ fn worker(
                                         accepted:false,failure:None,caller_started_ns:ns(started),deadline_ns:None,
                                         returned_ns:ns(returned),admission_checked_ns:ns(returned),accepted_ns:None,
                                         caller_seconds:started.elapsed().as_secs_f64(),thinking_seconds:None,
-                                        last_completed_iteration_ns:None,stop:Some("fixed_k".into()),completed_depth:None,value_stm:None,pv:Vec::new(),
+                                        last_completed_iteration_ns:None,completed_iteration_counters:None,engine_error:None,stop:Some("fixed_k".into()),completed_depth:None,value_stm:None,pv:Vec::new(),
                                         counters:serde_json::json!({"nn_calls_logical":s.nn_calls,"allocated_nodes":s.nodes,"root_visits":s.root_visits,
                                             "root_mean_stm":s.root_mean,"root_nn_stm":g.root_nn,"selected_child_q":null}),
                                     });
@@ -997,7 +1076,9 @@ fn worker(
                     rules: "Sigma-RuleA-full-history-terminal-ply-v1".into(),
                     selectivity: "fullwidth-PVS-MPC-OFF-v1".into(),
                 };
-                let search_result = invoke_alpha(
+                let mut completion = crate::arena_clock::Completion::default();
+                let observed = !g.record_teacher;
+                let search_result = invoke_alpha_observed(
                     &mut g.alpha_sessions[engine_index],
                     &mut g.tt_profiles[engine_index],
                     evaluators[engine_index].evaluator.as_ref().unwrap().clone(),
@@ -1007,6 +1088,11 @@ fn worker(
                     &cancel,
                     caller_start,
                     alphabeta::SearchSession::new,
+                    observed.then_some(&mut completion),
+                    observed
+                        .then_some(e.time_ms.map(Duration::from_millis))
+                        .flatten(),
+                    Duration::from_millis(config.arena.as_ref().map_or(0, |a| a.return_reserve_ms)),
                 );
                 if !g.record_teacher {
                     let returned = Instant::now();
@@ -1029,6 +1115,9 @@ fn worker(
                         .as_ref()
                         .is_ok_and(|r| r.completed_depth > 0 && r.value.is_some());
                     let cancelled = cancel.load(Ordering::Relaxed)
+                        || search_result
+                            .as_ref()
+                            .is_ok_and(|r| r.stop == alphabeta::StopReason::Cancelled)
                         || config.pause_file.as_ref().is_some_and(|p| p.exists());
                     let mut decision = crate::arena_clock::acceptance(
                         policy,
@@ -1063,7 +1152,12 @@ fn worker(
                         accepted_ns: None,
                         caller_seconds: checked.duration_since(caller_start).as_secs_f64(),
                         thinking_seconds: r.map(|r| r.elapsed.as_secs_f64()),
-                        last_completed_iteration_ns: None,
+                        last_completed_iteration_ns: completion.at.map(ns),
+                        completed_iteration_counters: completion
+                            .result
+                            .as_ref()
+                            .map(crate::arena_clock::alpha_counters),
+                        engine_error: search_result.as_ref().err().map(ToString::to_string),
                         stop: r.map(|r| crate::arena_clock::stop_name(r.stop).into()),
                         completed_depth: r.map(|r| r.completed_depth),
                         value_stm: r.and_then(|r| r.value),
@@ -2707,6 +2801,171 @@ mod telemetry317_tests {
             "scientificMAX":0,"attempts":profile.attempts,"successes":profile.successful_results,"errors":profile.errors,
             "cancellations":profile.cancellations,"terminal":profile.terminal_results,"stats_missing_errors":profile.search_errors_without_counters,
             "profile":profile,"software_fixture_only":true,"performance_gain":"NOT_MEASURED"})
+        );
+    }
+}
+
+#[cfg(test)]
+mod completed_error_tests {
+    use super::*;
+    struct FailDepth2;
+    impl StaticEvaluator for FailDepth2 {
+        fn evaluate(
+            &self,
+            c: &SigmaContext,
+            _: Option<&alphabeta::EvalAccumulator>,
+        ) -> alphabeta::Result<f32> {
+            if c.total_ply() >= 2 {
+                Err(alphabeta::SearchError::Evaluation(
+                    "depth2 fixture error".into(),
+                ))
+            } else {
+                Ok(0.)
+            }
+        }
+    }
+    #[test]
+    fn completed_move_does_not_hide_engine_error() {
+        let root = SigmaContext::from_prefix(&[]).unwrap();
+        let mut done = crate::arena_clock::Completion::default();
+        let mut profile = TtProfile::default();
+        let limits = SearchLimits {
+            max_depth: 2,
+            time_limit: None,
+            tt_entries: 4096,
+            ..Default::default()
+        };
+        let ns = alphabeta::SearchNamespace {
+            evaluator: "fixture".into(),
+            rules: "RuleA".into(),
+            selectivity: "fullwidth".into(),
+        };
+        let r = invoke_alpha_observed(
+            &mut None,
+            &mut profile,
+            Arc::new(FailDepth2),
+            ns,
+            &root,
+            &limits,
+            &AtomicBool::new(false),
+            Instant::now(),
+            alphabeta::SearchSession::new,
+            Some(&mut done),
+            None,
+            Duration::ZERO,
+        );
+        assert!(r.is_err());
+        assert!(done.result.is_some());
+        assert_eq!(profile.errors, 1);
+        assert_eq!(profile.successful_results, 0);
+    }
+}
+
+#[cfg(test)]
+mod live_caller_clock_tests {
+    use super::*;
+    #[test]
+    fn distance_live_deadline_completed_cap_cancel_and_tt_nn0() {
+        let root = SigmaContext::from_prefix(&[]).unwrap();
+        let root_history = root.history_counts();
+        let mut rows = Vec::new();
+        for mode in ["live_100ms", "node_cap_no_completion", "pre_cancel"] {
+            let start = Instant::now();
+            let limits = SearchLimits {
+                max_depth: 64,
+                max_nodes: if mode == "node_cap_no_completion" {
+                    1
+                } else {
+                    1_000_000
+                },
+                time_limit: Some(Duration::from_millis(100)),
+                tt_entries: 65536,
+                use_pvs: false,
+                use_tt: true,
+            };
+            let mut session = None;
+            let mut profile = TtProfile::default();
+            let mut done = crate::arena_clock::Completion::default();
+            let cancelled = mode == "pre_cancel";
+            let r = invoke_alpha_observed(
+                &mut session,
+                &mut profile,
+                Arc::new(DistanceEvaluator::new(0., 8.)),
+                alphabeta::SearchNamespace {
+                    evaluator: "D_a0b8_clock_probe".into(),
+                    rules: "RuleA".into(),
+                    selectivity: "fullwidth".into(),
+                },
+                &root,
+                &limits,
+                &AtomicBool::new(cancelled),
+                start,
+                alphabeta::SearchSession::new,
+                Some(&mut done),
+                Some(Duration::from_millis(100)),
+                Duration::from_millis(5),
+            )
+            .unwrap();
+            let returned_ns = start.elapsed().as_nanos() as u64;
+            let legal = r.action.is_some_and(|a| root.play(a).is_ok());
+            let checked_ns = start.elapsed().as_nanos() as u64;
+            let acceptance = crate::arena_clock::acceptance(
+                crate::arena::ClockPolicy::StrictUnknown,
+                Some(100_000_000),
+                checked_ns,
+                cancelled,
+                legal,
+                r.completed_depth > 0,
+            );
+            assert_eq!(profile.requested_tt_entries, Some(65536));
+            assert_eq!(profile.effective_tt_slots, Some(4096));
+            assert_eq!(profile.persistent_tt_byte_cap, Some(1024 * 1024));
+            assert!(profile.retained_bytes_peak <= 1024 * 1024);
+            assert_eq!(root.history_counts(), root_history);
+            if mode == "live_100ms" {
+                assert!(legal && r.completed_depth > 0);
+                let snapshot = done.result.as_ref().unwrap();
+                assert_eq!(r.action, snapshot.action);
+                assert_eq!(r.completed_depth, snapshot.completed_depth);
+                assert_eq!(r.pv, snapshot.pv);
+                assert!(r.stats.nodes >= snapshot.stats.nodes);
+                assert!(done.at.unwrap() < start + Duration::from_millis(100));
+                let mut replay = root.clone();
+                for &a in &r.pv {
+                    replay = replay.play(a).unwrap();
+                }
+                // Observed lateness is typed unknown; this fixture promises no hard real-time bound.
+                if checked_ns >= 100_000_000 {
+                    assert_eq!(acceptance, Err(crate::arena_clock::Failure::TimeOverrun));
+                } else {
+                    assert!(acceptance.is_ok());
+                }
+            } else if cancelled {
+                assert_eq!(r.stop, alphabeta::StopReason::Cancelled);
+                assert!(done.result.is_none());
+                assert_eq!(acceptance, Err(crate::arena_clock::Failure::Cancelled));
+            } else {
+                assert_eq!(r.stop, alphabeta::StopReason::NodeLimit);
+                assert_eq!(r.completed_depth, 0);
+                assert!(done.result.is_none());
+                // Separate node-cap diagnostic, never labelled time exhausted or draw.
+                assert_eq!(
+                    crate::arena_clock::acceptance(
+                        crate::arena::ClockPolicy::StrictUnknown,
+                        None,
+                        checked_ns,
+                        false,
+                        legal,
+                        false
+                    ),
+                    Err(crate::arena_clock::Failure::NoCompletedIteration)
+                );
+            }
+            rows.push(serde_json::json!({"mode":mode,"NN":0,"returned_ns":returned_ns,"admission_checked_ns":checked_ns,"deadline_ns":100_000_000,"acceptance":format!("{acceptance:?}"),"action":r.action,"depth":r.completed_depth,"PV":r.pv,"stop":crate::arena_clock::stop_name(r.stop),"whole_counters":crate::arena_clock::alpha_counters(&r),"completed_counters":done.result.as_ref().map(crate::arena_clock::alpha_counters),"last_completed_ns":done.at.map(|t| t.duration_since(start).as_nanos() as u64),"TT":profile}));
+        }
+        println!(
+            "CALLER_CLOCK_NN0={}",
+            serde_json::json!({"rows":rows,"games":0,"hard_realtime_guarantee":false})
         );
     }
 }

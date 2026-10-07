@@ -14,7 +14,7 @@ use std::{
 pub fn search_source_sha256() -> String {
     arena::digest(include_bytes!("../../quoridor-ai/src/alphabeta.rs"))
 }
-fn source_bindings() -> BTreeMap<&'static str, String> {
+pub fn source_bindings() -> BTreeMap<&'static str, String> {
     // Compiled bytes, rather than a mutable source tree read after the run.
     let sources: &[(&str, &[u8])] = &[
         ("Cargo.lock", include_bytes!("../../../Cargo.lock")),
@@ -24,6 +24,12 @@ fn source_bindings() -> BTreeMap<&'static str, String> {
         ("runner/runtime.rs", include_bytes!("runtime.rs")),
         ("runner/config.rs", include_bytes!("config.rs")),
         ("runner/resources.rs", include_bytes!("resources.rs")),
+        ("runner/native_input.rs", include_bytes!("native_input.rs")),
+        ("runner/arena_book.rs", include_bytes!("arena_book.rs")),
+        (
+            "runner/nnue-diagnose.rs",
+            include_bytes!("bin/nnue-diagnose.rs"),
+        ),
         ("runner/arena.rs", include_bytes!("arena.rs")),
         ("runner/arena_clock.rs", include_bytes!("arena_clock.rs")),
         (
@@ -203,6 +209,7 @@ pub fn journal(c: &Config, outcome: &crate::runtime::Outcome) -> Result<()> {
 }
 pub fn begin(c: &Config, slots: &[Slot], admission: &crate::resources::Admission) -> Result<()> {
     let exe = std::env::current_exe()?;
+    let requested_tt = c.arena.as_ref().map_or(65536, |a| a.tt_entries);
     write(
         c,
         "manifest-start.json",
@@ -216,9 +223,15 @@ pub fn begin(c: &Config, slots: &[Slot], admission: &crate::resources::Admission
         "compiled_sources":source_bindings(),"executable":exe,"executable_sha256":file_sha256(&exe)?,
         "build":{"os":std::env::consts::OS,"arch":std::env::consts::ARCH,"cuda_aoti":cfg!(feature="cuda-aoti"),"tensorrt":cfg!(feature="tensorrt")},
             "rules":arena::RULES,"admission":admission,
+            "engine_tt_source_policy":c.engines.iter().enumerate().filter(|(_,e)| e.kind != "mcts").map(|(index,e)| serde_json::json!({
+                "engine_index":index,"kind":e.kind,"requested_slots":requested_tt,
+                "effective_slots_from_source":requested_tt.min(4096),"persistent_byte_cap_from_source":1048576,
+                "actual_build_capacity":null,"actual_retained_bytes":null,
+                "measurement":"source policy only; bind actual allocation in the software/runtime receipt"
+            })).collect::<Vec<_>>(),
             "cpu_model":fs::read_to_string("/proc/cpuinfo").ok().and_then(|s| s.lines().find(|l| l.starts_with("model name")).map(str::to_owned)),
             "clock":{"origin":"monotonic, per game worker","start":"before session/limits setup","acceptance":"after legal replay immediately before state publication",
-                "last_completed_iteration_timestamp":null,"persistent_session_completion_callback":false,"hard_realtime_guarantee":false,
+                "last_completed_iteration_timestamp":"after completed-depth full-history legal check, before caller deadline","persistent_session_completion_callback":true,"hard_realtime_guarantee":false,
                 "internal_spans":"search elapsed nested in whole caller; startup/model load separate; do not sum",
                 "cap_stop":"depth/node/K stop does not imply full clock consumption"},
             "cancel":{"mechanism":"runner guard AtomicBool, joined workers; external research-job handles exact process cleanup",

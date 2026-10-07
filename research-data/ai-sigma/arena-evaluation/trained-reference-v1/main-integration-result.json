@@ -1,0 +1,112 @@
+{
+  "issue": "quoridor-4lc.327",
+  "integrator_issue": "quoridor-4lc.324",
+  "status": "MAINTAINED_MAIN_SOURCE_ACCEPTED; FINAL_NATIVE_AND_STRENGTH_PENDING",
+  "main_Git_writer": "324 only",
+  "base_main_commit": "941bb583ac9d2512f0f39a82841c017886773576",
+  "prior_326_adoption": "45a6205c0e6a9739fb4d42bf8edbba2c71c82003",
+  "prior_merge_receipt_SHA256": "34c9ded499301976f3f9a7fa58fb4ca3c2e59fea80ab3dc7ae37c2dfe9e05623",
+  "after_SHA256": {
+    "crates/quoridor-ai/src/alphabeta.rs": "cd34a858a085353f76b184f8a609ca09d07f23874ae67df8a2dbac2ee7593d0e",
+    "crates/quoridor-nnue/src/residual.rs": "a51834c0677391ed19af6d832ad5cb1bd27352fac0b75bc8841a8ec3390085a1",
+    "crates/quoridor-runner/src/bin/nnue-diagnose.rs": "211db51f6d98fafd94f7e0754e709bd8f2ccc13dfbd34c79f6095001b7ee273a",
+    "crates/quoridor-runner/src/runtime.rs": "cc6bf1b5f984edbbfe51f736db365ccb6a7cdeef563effc99ca5e791501bdc2c",
+    "crates/quoridor-runner/src/config.rs": "c73fd406b41bac730edb8cd2022f179cdae68343c65a29040fd01bf86a9b6ddd",
+    "crates/quoridor-runner/src/arena_manifest.rs": "1e684606d8c640de3d6841ab78d3ade4a056cfdbbe3e43fddc335d0439949b7f",
+    "crates/quoridor-runner/src/arena_clock.rs": "a7a4f60b51167b05d1bafe1b119a9fa2ab061684c1903d85e28a09fe0f18ea8c",
+    "crates/quoridor-runner/src/arena_book.rs": "5dde8c7625c35488e27255fd7fbed740a6fa80b9da37cb82880eafca261b5bf8",
+    "crates/quoridor-runner/src/lib.rs": "73daaff7359061a545f0547635c5a5454f40caabaeed66d1e1762b3bd68aa92e",
+    "crates/quoridor-runner/src/native_input.rs": "335d29824083aa9ffc05693c64bdb5357850fd6a31c24cceb46942efbffde264",
+    "crates/quoridor-runner/tests/config.rs": "89cdad7e3fffd81c6c6e472f28517a0e6f0a6c85022c3907250982a8accb159f",
+    "configs/arena/best51-book-preparation.json": "f9fa0e3f528c6e31c1c45ff137c02aa5fb1cdcf5aa4b1433c20e2f8a8cb77d13"
+  },
+  "test_only_append": {
+    "alpha_complete_SHA256": "cd34a858a085353f76b184f8a609ca09d07f23874ae67df8a2dbac2ee7593d0e",
+    "prior_prefix_SHA256": "97a0594844d55dbf16df78e03372643b03e66ffcd6fec2b1999b7ffa4d600e79",
+    "appended_B": 4967,
+    "source_fixture_SHA256": "86d1d4e9a86bb944365d7025e2793144c7608538310aec6114569f051759d000",
+    "production_prefix_exact": true
+  },
+  "related_review": {
+    "control_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/search-ownership-review-v1/trained-reference-v1/final-merge-confirm-v1/control.json",
+    "control_SHA256": "a1548e43b1abc431b1c6c67b934a0198d4f3f8b62b97b2c55d6f40856b2669df",
+    "blockers": 0,
+    "ordinary": 0,
+    "reader_STOP_UTC": "2026-10-07T17:53:03.042500+00:00",
+    "scope": "new merge border static only; cfg-only append checked by executed scoped fixture, no extra broad review"
+  },
+  "working_software": {
+    "joined_bundle_path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-final-v1/software-clippy-recovery-v1/failed-stop-joined-command-pass.json",
+    "joined_bundle_SHA256": "7278bf95b8f81517623cb54551d9f278272d11b03d770871f1194c37e56fd3e6",
+    "compiler_record_path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-final-v1/software-v1/result.json",
+    "compiler_record_SHA256": "d0873864619c4cce7dd2bdfba91dec2e7fa36530a0073aefd32f754aba6980e6",
+    "producer_source_packet_SHA256": "81781bd87882500a99440435d784f702f6b16160b9e313156a4c14d3af5cb980",
+    "source_packet44": "producer fixed guarded declaration; Root checked12 changed paths+critical dependencies, no central broad source or old scientific suite replay",
+    "successful_scoped_commands": [
+      "compiler",
+      "release",
+      "ai-no-run",
+      "ai-fixture",
+      "diagnose-no-run",
+      "diagnose-fixture",
+      "caller-no-run",
+      "caller-fixture",
+      "clippy-runner",
+      "clippy-ai"
+    ],
+    "release_own_core_NNUE_AI_data_fresh_false": true,
+    "actual_Clippy_commands": "runner bins/lib and AI research lib default-debug -Dwarnings WITHOUTallow; exit0/directwait/cleanup",
+    "scoped_fixtures": "persistent completion + invocation child pool error/cancel/nested NN0; Counted forwards child hooks; final D-only100ms/no-completion/precancel/actualTT4096-1MiB",
+    "final_D_only_accepted_ms": 96.049225,
+    "last_completed_ms": 85.713962,
+    "completed_depth": 4,
+    "action": 13,
+    "hard_realtime_guarantee": false,
+    "all10_command_exit0_directwait_cleanup": true,
+    "main_Cargo_repeat": "NOT_RUN; identical stopped producer source/build/fixtures proofs reused",
+    "model_NN_FT_game_calls_from_Root": 0
+  },
+  "failed_jobs_preserved": [
+    {
+      "job": "347d0260-2de8-4042-9879-53b1e4a0b3a2",
+      "outcome": "FAILED40MiB resourceguard;8commandsPASS",
+      "controller_seconds": 102.46017473901156,
+      "command_guardians": 9,
+      "tenth_AI_Clippy_NOT_RUN": true
+    },
+    {
+      "job": "0212b3f0-8f0f-41b4-a1ad-86dd6149df55",
+      "outcome": "FAILED48MiB resourceguard afterbothClippy exit0; NOT retroactive compliant success",
+      "controller_seconds": 28.155381654039957
+    }
+  ],
+  "final_software_controller_seconds": 130.61555639305152,
+  "all_known327_controller_seconds": 357.7242201150515,
+  "nested_not_added": true,
+  "build_peak": "UNKNOWN; actual freshfalse debug dependency variants exceededforecast, all bytes/failedfees retained",
+  "private_compiled_payloads": {
+    "nnue-diagnose": {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-final-v1/software-v1/private/nnue-diagnose",
+      "SHA256": "b463e09ffd192da0a25c8c5b595f84b623cc78761d2f8b9932d7089da88fe5f6",
+      "logical_B": 1965728,
+      "mode": 493
+    },
+    "quoridor-runner": {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-final-v1/software-v1/private/quoridor-runner",
+      "SHA256": "f87f4ac0b2c11155d40704cc19e0b448004c24d4fcb101641678c503d195c10e",
+      "logical_B": 6254272,
+      "mode": 493
+    }
+  },
+  "final_native_correspondence": "NOT_RUN; fixed330packet03ca/reuse exactmodel-input-scale/96head API finite plan separate",
+  "final_fixedD_matches": "NOT_RUN; samefrozenbook93cb,8family16slot100ms5reserve separately source/ELF/version bound; current3W13L outcome not inherited",
+  "retention_authority_path": "research-data/ai-sigma/arena-evaluation/trained-reference-v1/storage-final-native-retention.json",
+  "retention_authority_SHA256": "ed35e81c8712cbbcd5361f98172e908d523ab1a534d22c3ad7d87b290e5e0a37",
+  "final_native_inclusive_B": 83886080,
+  "no_future_Cargo_or_target_TMP": true,
+  "parent_cap_B": 13421772800,
+  "new_addition_sum_B": 536870912,
+  "format": "scopedRustfmt/Prettier before commit; exactsourceSHA then diffcheck",
+  "Root_source_staging_control_Git_budget": "existing2MiB final integration staging inside sharedRoot8MiB, plus64KiB resourceoverlay metadata/Git insideRoot8MiB; oldreservesheld",
+  "preserved": "allsource/archive/raw/private/currentresults/failedfees/UNKNOWN; ScalarFT/defaultweights/BEST51 unchanged; parent323paused/newE-oldopenedclosed; no model/algorithm/pruning/TTpolicy/source mirror/default adoption"
+}
