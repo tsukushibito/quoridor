@@ -2,7 +2,7 @@
 
 2026-10-07の人間承認により、325の既存Scalar/Simd FT比較を完了し、実結果で採否を決めた後に本タスクへ進む。FT SIMD不支持でもその問いを完了したものとして次段階へ進める。担当は同保存thread01a11004-79f3-7c20-872c-432a2c347664/cwd search-optimization、main/Git/index writerはexecution324のみ。旧318.3はclosed、326に具体issueを結び付ける。権限danger-full-access/neverを明示適用・確認し、model gpt-6.1-sol/highを変えない。
 
-baselineは325の受入れ時点で採用されたFT/head版、同固定モデル/FT32H32/5root/特徴/尺度/FP32/教師/学習条件で固定する。現在の高速headとFT列減算/加算順を維持し、複数段階の速度を合成しない。325のsource読者/実job STOPと採否・main統合後にのみ対象sourceを変更する。まず必要な配置・API・buffer責務、実source/保存/compile/数値/有限比較のwhole forecastと停止条件を具体化し、結果前に一つのplanを固定する。326の実source/compile/NN/性能用の新資源枠は現時点0、未使用capはcompute許可ではない。支持された親内配分とfresh physics/peerquiet/uniqueCargo/private bindingsが成立した工程は、新しい人間ACKなしに進める。
+baselineは325の受入れ時点で採用されたFT/head版、同固定モデル/FT32H32/5root/特徴/尺度/FP32/教師/学習条件で固定する。現在の高速headとFT列減算/加算順を維持し、複数段階の速度を合成しない。325のsource読者/実job STOPと採否・main統合後にのみ対象sourceを変更する。325の結果を要しない独立design/source/test準備は、同writerの325対象や読者と重ならず、支持された既準備容量のinclusive予測内で先行可能。325依存は最終baseline/候補変更の固定・数値性能比較と受入れに適用し、独立準備を一律停止しない。まず必要な配置・API・buffer責務、実source/保存/compile/数値/有限比較のwhole forecastと停止条件を具体化し、結果前に一つのplanを固定する。326の実source/compile/NN/性能用の新資源枠は現時点0、未使用capはcompute許可ではない。支持された親内配分とfresh physics/peerquiet/uniqueCargo/private bindingsが成立した工程は、新しい人間ACKなしに進める。
 
 差分特徴は、子完成ID一覧を毎回全生成して差分を探す経路だけに留めず、checked single move/board変化から削除・追加特徴を直接得る。駒なら旧→新pawn位置だけを置換しwall/stock特徴を再用。壁ならwall ID追加と配置者stock ID置換。両視点のQF1/回転/正規化・手番head視点/D並びを正しく更新する。追加/削除IDを既存昇順/重複なしで適用し、受入幅/shape/finite/error条件を保つ。既存独立full-encode/ordered FT oracleで無変更の数学を確かめる。新モデル/特徴定義/加算順/FMA/FP16/量子化/探索規則/TT/枝刈りは対象外。
 
@@ -14,4 +14,4 @@ baselineは325の受入れ時点で採用されたFT/head版、同固定モデ�
 
 改善後に残る費用を有限計測して距離mapの必要性を判断する段階まで承認済み。駒移動で親map共有・壁変更時だけ再生成という現行再用を維持する。旧instrumented割合はoverhead大かつfasthead以前なので現在のCPU割合へ流用しない。同wall状態の重複生成やmap費が大きい根拠が出た場合、効果見込み/保持費/保守コスト/境界を短くまとめて人間の次判断へ戻す。大きな共有map cache/動的最短距離差分を無条件に実装しない。
 
-Sigma参考を中断/再実行せず、各actual科学jobとcompile/numeric/性能時計は予算とSTOP/readerquietで直列化する。bounded logs/exact directwait/TERM-KILL/cleanup・pauseを既job規約で守る。原323pause/封印評価/oldassets/費/UNKNOWNを保全。通常報告はexecutionthread01a1153d-7900-7740-837f-c300ca54764f/issue324へ、jobcompletionは当taskowner自身へ。まとまった効果/限界/採否だけexecutionから人間Rootへ短く届ける。Beads状態・依存と本文根拠を結び付け、backup sync、イベントのない間Idle。新role/常設reviewer/周期LLM/無制限な実験は作らない。
+Sigma参考を中断/再実行せず、各actual科学job/numeric/性能時計は予算とSTOP/readerquietで直列化する。既admission内のpurecompileは具体CPU/RAM/storage/uniqueCargo/privatebinding条件下で先行可能であり、併走費を公平性能証拠へ使わない。bounded logs/exact directwait/TERM-KILL/cleanup・pauseを既job規約で守る。原323pause/封印評価/oldassets/費/UNKNOWNを保全。通常報告はexecutionthread01a1153d-7900-7740-837f-c300ca54764f/issue324へ、jobcompletionは当taskowner自身へ。まとまった効果/限界/採否だけexecutionから人間Rootへ短く届ける。Beads状態・依存と本文根拠を結び付け、backup sync、イベントのない間Idle。新role/常設reviewer/周期LLM/無制限な実験は作らない。
