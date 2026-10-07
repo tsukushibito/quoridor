@@ -1,0 +1,181 @@
+{
+  "job_id": "ec2b06d7-b891-4db1-b865-3a6cfb0f0a07",
+  "started_at": "2026-10-07T06:01:21.830744+00:00",
+  "exactSTOP": "2026-10-07T06:03:30.633901+00:00",
+  "controller": {
+    "job_id": "ec2b06d7-b891-4db1-b865-3a6cfb0f0a07",
+    "outcome": "succeeded",
+    "error": null,
+    "exit_code": 0,
+    "finished_at": "2026-10-07T06:03:30.633901+00:00",
+    "wall_seconds": 128.86260392598342,
+    "remaining": [],
+    "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+    "cleanup_complete": true,
+    "log_bytes_seen": 89,
+    "log_bytes_retained": 89
+  },
+  "guardian": {
+    "issue": "quoridor-4lc.323.4",
+    "status": "PASS_EXACT_DIAGNOSTIC",
+    "candidate_adoption": false,
+    "newE_Sigma": "CLOSED",
+    "phases": [
+      {
+        "name": "qualification",
+        "whole_child_control_seconds": 27.602542999899015,
+        "process": {
+          "command": [
+            "/usr/bin/env",
+            "OPENBLAS_NUM_THREADS=1",
+            "OMP_NUM_THREADS=2",
+            "MKL_NUM_THREADS=2",
+            "NUMEXPR_NUM_THREADS=1",
+            "PYTHONPATH=/workspaces/quoridor/.worktree/learning-million/python",
+            "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+            "-B",
+            "/workspaces/quoridor/.worktree/learning-million/.artifacts/learning-supply-v1/worker4-preparation/qualify4.py",
+            "/workspaces/quoridor/.worktree/learning-million/.artifacts/learning-supply-v1/worker4-preparation/qualification4-config.json"
+          ],
+          "status": "complete",
+          "child": {
+            "pid": 1813480,
+            "start_ticks": "60600263",
+            "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+          },
+          "log_bytes_seen": 101,
+          "scope": "session group and periodically recorded descendants; no daemon adoption",
+          "exit_code": 0,
+          "remaining": [],
+          "direct_child_reaped": true,
+          "descendant_visibility": "observed",
+          "cleanup_complete": true,
+          "log_bytes_retained": 101,
+          "wall_seconds": 27.600892400019802
+        }
+      },
+      {
+        "name": "worker2cpu4",
+        "whole_child_control_seconds": 50.14522011601366,
+        "process": {
+          "command": [
+            "/usr/bin/env",
+            "OPENBLAS_NUM_THREADS=1",
+            "OMP_NUM_THREADS=2",
+            "MKL_NUM_THREADS=2",
+            "NUMEXPR_NUM_THREADS=1",
+            "PYTHONPATH=/workspaces/quoridor/.worktree/learning-million/python",
+            "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+            "-B",
+            "-m",
+            "quoridor_training.epoch_measurement",
+            "--config",
+            "/workspaces/quoridor/.worktree/learning-million/.artifacts/learning-supply-v1/worker4-preparation/worker2cpu4-config.json"
+          ],
+          "status": "complete",
+          "child": {
+            "pid": 1814375,
+            "start_ticks": "60603023",
+            "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+          },
+          "log_bytes_seen": 70,
+          "scope": "session group and periodically recorded descendants; no daemon adoption",
+          "exit_code": 0,
+          "remaining": [],
+          "direct_child_reaped": true,
+          "descendant_visibility": "observed",
+          "cleanup_complete": true,
+          "log_bytes_retained": 70,
+          "wall_seconds": 50.14386244898196
+        }
+      },
+      {
+        "name": "worker4cpu4",
+        "whole_child_control_seconds": 50.70946584898047,
+        "process": {
+          "command": [
+            "/usr/bin/env",
+            "OPENBLAS_NUM_THREADS=1",
+            "OMP_NUM_THREADS=2",
+            "MKL_NUM_THREADS=2",
+            "NUMEXPR_NUM_THREADS=1",
+            "PYTHONPATH=/workspaces/quoridor/.worktree/learning-million/python",
+            "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+            "-B",
+            "-m",
+            "quoridor_training.epoch_measurement",
+            "--config",
+            "/workspaces/quoridor/.worktree/learning-million/.artifacts/learning-supply-v1/worker4-preparation/worker4cpu4-config.json"
+          ],
+          "status": "complete",
+          "child": {
+            "pid": 1816238,
+            "start_ticks": "60608038",
+            "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+          },
+          "log_bytes_seen": 70,
+          "scope": "session group and periodically recorded descendants; no daemon adoption",
+          "exit_code": 0,
+          "remaining": [],
+          "direct_child_reaped": true,
+          "descendant_visibility": "observed",
+          "cleanup_complete": true,
+          "log_bytes_retained": 70,
+          "wall_seconds": 50.70811871404294
+        }
+      }
+    ],
+    "whole_worker_seconds": 128.76865544705652,
+    "finished_at": "2026-10-07T06:03:30.591657+00:00",
+    "observed_resources": {
+      "peak_family_RSS_bytes": 3010498560,
+      "peak_whole_device_used_bytes": 1830305792
+    },
+    "controller_reserve_bytes": 67108864,
+    "all_completed_phases_direct_waited": true
+  },
+  "science_identities_absent": [
+    {
+      "pid": 1813452,
+      "start_ticks": "60600257",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    {
+      "pid": 1813480,
+      "start_ticks": "60600263",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    {
+      "pid": 1814375,
+      "start_ticks": "60603023",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    {
+      "pid": 1816238,
+      "start_ticks": "60608038",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    }
+  ],
+  "notifier_supervisor": {
+    "identity": {
+      "pid": 1813363,
+      "start_ticks": "60600092",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "alive": false,
+    "scope": "completion notification/controller metadata only; not science"
+  },
+  "source_input_private_binding_current_unchanged": true,
+  "Root_future_manifest_changes": [
+    {
+      "path": "/workspaces/quoridor/.artifacts/task-session-permissions/native-completion-root-manifest.json",
+      "used_SHA": "e5c088896d92fe351ebfaf2cda40e2b11044bf8f28d971df71de9ed48b77a271",
+      "current_SHA": "6dbd9be6dcae349628ea5256ce23362d55091b4bddbad9fa5d9498a12ffb9f23",
+      "scope": "Root mutable future allocation; prelaunch verified old binding retained"
+    }
+  ],
+  "source_writer": "STOP",
+  "current_next_numerical_reservation": null,
+  "parent323": "paused",
+  "newE_Sigma": "CLOSED"
+}

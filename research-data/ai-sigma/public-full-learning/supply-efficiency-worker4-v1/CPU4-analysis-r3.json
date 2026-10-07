@@ -1,0 +1,180 @@
+{
+  "issue": "quoridor-4lc.323.4",
+  "job": "ec2b06d7-b891-4db1-b865-3a6cfb0f0a07",
+  "status": "PASS_EXACT_DIAGNOSTIC",
+  "qualification_exact": {
+    "devices": ["CPU", "CUDA"],
+    "modes": [2, 4],
+    "updates_each": 3,
+    "forward_rows": 24576,
+    "matches_old_qualified2": true,
+    "tolerance": 0
+  },
+  "correspondence": {
+    "initial.pt": {
+      "equal_bytes": true,
+      "SHA": "9ab72853cae112579f718830066d55ae4f4a3ce7da3eac35343de0a34db3e482"
+    },
+    "best.pt": {
+      "equal_bytes": true,
+      "SHA": "49dbef82bb9572b12f6ef3360e8e3d68657d591f1882c4bf4aa9480a5973d3ec"
+    },
+    "last.pt": {
+      "equal_bytes": true,
+      "SHA": "f2cb5a3b28f6f32aa7ae8dbdda4141156f391d6eaede8fde36a17f42788e5737"
+    },
+    "initial-model/weights.f32": {
+      "equal_bytes": true,
+      "SHA": "2ddacbf88145816b6b0c86e13ebb983d7c1b64e42f8d346623873a18ae7414ad"
+    },
+    "best-model/weights.f32": {
+      "equal_bytes": true,
+      "SHA": "9f238b2ca43fce0168f712a21a1c601131886e7dfe61c213b2c74bde86e04d4d"
+    },
+    "last-model/weights.f32": {
+      "equal_bytes": true,
+      "SHA": "9f238b2ca43fce0168f712a21a1c601131886e7dfe61c213b2c74bde86e04d4d"
+    },
+    "sampling-counts.npz": {
+      "equal_bytes": true,
+      "SHA": "aa53fae22475b6d6fda3d15377de40988bcf2b5bfd78ed67153d6a5f92f83d0f"
+    },
+    "curves.jsonl.gz": {
+      "numeric_equal": true,
+      "points": 2,
+      "excluded_field": "wall_seconds only"
+    },
+    "diagnostic-curves.jsonl.gz": {
+      "numeric_equal": true,
+      "points": 91,
+      "excluded_field": "wall_seconds only"
+    },
+    "batch.jsonl.gz": {
+      "numeric_equal": true,
+      "points": 180,
+      "excluded_field": "wall_seconds only"
+    },
+    "observations.jsonl.gz": {
+      "numeric_equal": true,
+      "points": 93,
+      "excluded_field": "wall_seconds only"
+    }
+  },
+  "statistics": {
+    "worker2cpu4": {
+      "loop": 22.148918563849293,
+      "caller_whole": 49.490619927993976,
+      "CPU": 54.579201397,
+      "disjoint_lifecycle": {
+        "initialization": 12.426811331999488,
+        "initial_evaluation": 1.0760394820244983,
+        "training_loop": 22.148918563849293,
+        "fixed_diagnostic": 5.676074702176265,
+        "epoch_boundary": 7.913157899049111,
+        "finalize": 0.2496074530063197
+      },
+      "successful_rows": 8413949,
+      "successful_updates": 4109,
+      "model_forward_rows": 19132566,
+      "supply": {
+        "workers": 2,
+        "dispatched_rows": 8413949,
+        "expanded_rows": 8413949,
+        "consumed_supply_rows": 8413949,
+        "successful_training_rows": 8413949,
+        "timing_inclusive_not_DMA": {
+          "expansion_worker_seconds": 7.276938235270791,
+          "queue_wait_seconds": 0.03492288489360362,
+          "transfer_enqueue_seconds": 1.3889243338489905,
+          "lease_wait_seconds": 0.08911046013236046
+        }
+      },
+      "reflection": {
+        "attempted_training_supply_original_rows": 8413949,
+        "reflected_drawn_original_rows": 4209397,
+        "counter_scope": "supply attempts/drawn masks before transfer or forward; successful exposure recorded separately",
+        "independent_game_count": "UNKNOWN",
+        "saved_augmentation_rows": 0
+      }
+    },
+    "worker4cpu4": {
+      "loop": 22.344122707494535,
+      "caller_whole": 50.053935481002554,
+      "CPU": 54.828521886,
+      "disjoint_lifecycle": {
+        "initialization": 12.780235521961004,
+        "initial_evaluation": 1.114938489976339,
+        "training_loop": 22.344122707494535,
+        "fixed_diagnostic": 5.573007533559576,
+        "epoch_boundary": 7.996130582992919,
+        "finalize": 0.24549099593423307
+      },
+      "successful_rows": 8413949,
+      "successful_updates": 4109,
+      "model_forward_rows": 19132566,
+      "supply": {
+        "workers": 4,
+        "dispatched_rows": 8413949,
+        "expanded_rows": 8413949,
+        "consumed_supply_rows": 8413949,
+        "successful_training_rows": 8413949,
+        "timing_inclusive_not_DMA": {
+          "expansion_worker_seconds": 7.1471899366006255,
+          "queue_wait_seconds": 0.035286552854813635,
+          "transfer_enqueue_seconds": 1.3968619056977332,
+          "lease_wait_seconds": 0.09020597615744919
+        }
+      },
+      "reflection": {
+        "attempted_training_supply_original_rows": 8413949,
+        "reflected_drawn_original_rows": 4209397,
+        "counter_scope": "supply attempts/drawn masks before transfer or forward; successful exposure recorded separately",
+        "independent_game_count": "UNKNOWN",
+        "saved_augmentation_rows": 0
+      }
+    }
+  },
+  "four_vs_two_loop_change": 0.008813258447924799,
+  "four_vs_two_caller_change": 0.011382269081053664,
+  "prebound_rule": "choose4 only >5%loop improvement AND no whole caller regression",
+  "decision": "KEEP_TWO_WORKERS",
+  "fourworker_eligibility": "exact numerics PASS, speed criterion NOT_MET",
+  "limitations": [
+    "one prebound new2 then new4 order; no CI or general worker optimum",
+    "old CPU2,3 timings separate history",
+    "supply timing includes enqueue/waits/overlaps; not pure DMA",
+    "model states discarded, no convergence/fullfit/defaultweight adoption"
+  ],
+  "controller_whole_seconds": 128.86260392598342,
+  "old_diagnostic_whole_seconds": 271.156201977,
+  "known_two_diagnostic_whole_sum": 400.0188059029834,
+  "fees_excludes_no_refund": "old failures/NN0/review/control kept in previous receipts; not all-history cost certificate",
+  "RAM_sample_incl_controller": 3010498560,
+  "whole_device_used_sample": 1830305792,
+  "slots": {
+    "two": 4,
+    "four": 6,
+    "four_pinned_bytes": 30867456,
+    "four_device_payload_bytes": 30867456
+  },
+  "actual_named_raw": {
+    "file_bytes": 2605570,
+    "allocated_bytes": 2793472,
+    "files": 67
+  },
+  "current_preparation": {
+    "file_bytes": 334452,
+    "allocated_bytes": 487424,
+    "files": 59
+  },
+  "review": {
+    "file_bytes": 149971,
+    "allocated_bytes": 192512,
+    "files": 19
+  },
+  "used_storage": "e5/f9e2 1048MiB intact; later Root6db future1042MiB overlay separately retained",
+  "parent323": "paused",
+  "newE_Sigma": "closed",
+  "native_trained_qualification": false,
+  "main_index_ref": 0
+}
