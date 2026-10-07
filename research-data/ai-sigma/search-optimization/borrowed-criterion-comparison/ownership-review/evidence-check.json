@@ -1,0 +1,108 @@
+{
+  "dependency_SHA": [
+    {
+      "main": "/workspaces/quoridor/crates/quoridor-nnue/src/lib.rs",
+      "frozen": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/search-optimization/evaluation-input-scratch-v1/stopped-source/crates/quoridor-nnue/src/lib.rs",
+      "SHA": "95df6793add8fc846ca27b7e8ba4e3a440343bd6c1c732c52fe1d8d947887c8a"
+    },
+    {
+      "main": "/workspaces/quoridor/crates/quoridor-nnue/src/features.rs",
+      "frozen": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/search-optimization/ordered-ft-canonical-v1/stopped-source/crates/quoridor-nnue/src/features.rs",
+      "SHA": "80e1d95af972510b4f161d9fe028069a5498952d6d64a221e56977e5f4fb0b71"
+    },
+    {
+      "main": "/workspaces/quoridor/crates/quoridor-nnue/src/quantized.rs",
+      "frozen": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/search-optimization/ordered-ft-canonical-v1/stopped-source/crates/quoridor-nnue/src/quantized.rs",
+      "SHA": "2553767bb6f045f5312d8759e185da518dbc2b211c2849b1b23f93d964c046d6"
+    },
+    {
+      "main": "/workspaces/quoridor/crates/quoridor-core/src/research.rs",
+      "frozen": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/search-optimization/ordered-ft-canonical-v1/stopped-source/crates/quoridor-core/src/research.rs",
+      "SHA": "c4aaf1ed318be17e6755d54ed9940e02eb9bbeca5e3a8dcdab8a7ad0274ec3b5"
+    }
+  ],
+  "Criterion_recalculation": [
+    {
+      "ID": "nnue/evaluate/initial",
+      "adverse_B_of4": 0,
+      "clear_regression": false,
+      "descriptive_median": -0.016736412748807994
+    },
+    {
+      "ID": "nnue/evaluate/opening",
+      "adverse_B_of4": 0,
+      "clear_regression": false,
+      "descriptive_median": -0.012644819298283871
+    },
+    {
+      "ID": "nnue/evaluate/walled-midgame",
+      "adverse_B_of4": 0,
+      "clear_regression": false,
+      "descriptive_median": -0.026575231391454346
+    },
+    {
+      "ID": "nnue/evaluate/jump-p2",
+      "adverse_B_of4": 0,
+      "clear_regression": false,
+      "descriptive_median": -0.025543717277978883
+    },
+    {
+      "ID": "nnue/evaluate/endgame",
+      "adverse_B_of4": 0,
+      "clear_regression": false,
+      "descriptive_median": -0.00683991548682128
+    },
+    {
+      "ID": "search/cold_setup_search_drop/initial",
+      "adverse_B_of4": 0,
+      "clear_regression": false,
+      "descriptive_median": 0.00779249957130812
+    },
+    {
+      "ID": "search/cold_setup_search_drop/opening",
+      "adverse_B_of4": 0,
+      "clear_regression": false,
+      "descriptive_median": -0.0016984083264965366
+    },
+    {
+      "ID": "search/cold_setup_search_drop/walled-midgame",
+      "adverse_B_of4": 0,
+      "clear_regression": false,
+      "descriptive_median": -0.012504262518426124
+    },
+    {
+      "ID": "search/cold_setup_search_drop/jump-p2",
+      "adverse_B_of4": 0,
+      "clear_regression": false,
+      "descriptive_median": -0.032781539112675506
+    },
+    {
+      "ID": "search/cold_setup_search_drop/endgame",
+      "adverse_B_of4": 0,
+      "clear_regression": false,
+      "descriptive_median": -0.016469741634860535
+    }
+  ],
+  "primary_regression_roots": 0,
+  "profile_trigger": false,
+  "process_ids": [
+    "qualify-A",
+    "qualify-B",
+    "A0",
+    "B0",
+    "B1",
+    "A1",
+    "B0-versus-A0",
+    "B0-versus-A1",
+    "B1-versus-A0",
+    "B1-versus-A1",
+    "A2",
+    "B2",
+    "B3",
+    "A3",
+    "B2-versus-A2",
+    "B2-versus-A3",
+    "B3-versus-A2",
+    "B3-versus-A3"
+  ]
+}

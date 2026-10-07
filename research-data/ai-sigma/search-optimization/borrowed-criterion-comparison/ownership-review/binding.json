@@ -1,0 +1,45 @@
+{
+  "scope": "Independent static production scratch ownership/caller/API adoption review, not learner resume or speed claim",
+  "production_paths": [
+    {
+      "main_path": "/workspaces/quoridor/crates/quoridor-nnue/src/residual.rs",
+      "main_SHA256": "60d4475add7c3e19119f2b11c6431e085495ee746576323be66ec348e382cb41",
+      "candidate_path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/search-optimization/evaluation-input-scratch-v1/stopped-source-r2/crates/quoridor-nnue/src/residual.rs",
+      "candidate_SHA256": "fab07f2af91fc77debc80a4a0050d076a832521cc40c883c5b00e49b0eebbc7a"
+    },
+    {
+      "main_path": "/workspaces/quoridor/crates/quoridor-ai/src/alphabeta.rs",
+      "main_SHA256": "5faf36cf9cbf99d97f35a6e1dd5aa0db183a50e9c22f12b66bb2fba6be2408f6",
+      "candidate_path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/search-optimization/evaluation-input-scratch-v1/stopped-source-r3/crates/quoridor-ai/src/alphabeta.rs",
+      "candidate_SHA256": "0d4dd0cad33fcd462073ff173e1509bcb25e2ba63317696585af6e63c517f8d8"
+    },
+    {
+      "main_path": "/workspaces/quoridor/crates/quoridor-runner/src/bin/nnue-diagnose.rs",
+      "main_SHA256": "2dd3619ee7d94f72bcf3cb484ea93fd16b6be818fd5d0cf476020fa3359aba12",
+      "candidate_path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/search-optimization/evaluation-input-scratch-v1/stopped-source/crates/quoridor-runner/src/bin/nnue-diagnose.rs",
+      "candidate_SHA256": "c2f0420df4a16515fbb76c513d720345765094ecb1b338eae3e8d8b936250b3d"
+    }
+  ],
+  "bench_archive_path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/search-optimization/criterion-v1/borrowed-comparison-v1/evidence-source.tar.gz",
+  "bench_archive_member": "source/candidate/nnue_search.rs",
+  "bench_SHA256": "6891220c23b0144b964b3c240b1215113eddbd39e04b7da82af04ebaaa585b4e",
+  "archive_SHA256": "c1e4cd1968dae94a1ce076195b813afe93a6d6816c3511c77a6b3e1de4d1c792",
+  "Criterion_summary": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/search-optimization/criterion-v1/borrowed-comparison-v1/summary.json",
+  "Criterion_summary_SHA256": "b9a3497ebca9b2a22379ae1c851338050619926155e8384d20b84463bdd165bc",
+  "numerical_source_handoff": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/search-optimization/evaluation-input-scratch-v1/handoff.json",
+  "target_source_stopped": true,
+  "code_edits_main_Git_build_forward_GPU_network": 0,
+  "review_output_upper_bytes": 262144,
+  "review_family_RAM_bytes": 536870912,
+  "review_CPU": [
+    3
+  ],
+  "scientific_time_job_forward_caps": null,
+  "search_before_forecast_bytes": 267833344,
+  "forecast_including_review_bytes": 268095488,
+  "search_cap_bytes": 268435456,
+  "remaining_margin_bytes": 339968,
+  "model_weights": "c0ec (old fixed), no labels/models/checkpoints may be opened",
+  "paused_learning323": "unchanged; no send/resume/source writes",
+  "maintained_scope": "3 production full stopped files including required tests, maintained Criterion head uses reusable buffer, docs updated. No experimental search_cost example integration, no old temporary driver feature, no math/model/FT/TT/maps/order changes."
+}

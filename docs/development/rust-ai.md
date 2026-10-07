@@ -101,11 +101,13 @@ node crates/quoridor-wasm/tests/nnue-runtime.cjs \
 
 `nnue-diagnose` の既存engine設定で `kind: "distance_residual"` とmanifestを指定すると、`ResidualEvaluator` を介して履歴付きAlphaBetaへ接続する。full/SIMD/deltaのFTと壁距離map再利用、親accumulatorの保持を用いる。モデルをロードできたこと、有限parity、深度到達を同時間棋力の証明へ置き換えない。歴史的小subsetの公開z checkpointはRuleA48転移利益が未支持だった。後続original-only100万行のGPU学習と保留観測評価は[研究知見](../research-findings.md)で別に扱い、同時間棋力の確認前に製品既定へ自動採用しない。
 
+残差headの反復評価は、`ResidualModel::evaluation_scratch()` で作ったprivate `ResidualScratch` を `evaluate_with_scratch` へ可変借用する。Zero4専用の連続入力を一度ゼロ初期化し、各評価でReLUと距離入力を上書きする。予約ゼロ4値は外部から変更できず、モデル幅とscratch形状の不一致はresizeやheap fallbackを行わずerrorにする。Searchは**各探索呼出し**で入力scratchを一度確保し、終了時に破棄する。TTを維持するSearchSessionの寿命へは持越さない。modelと親accumulatorは別の借用対象で、cancel/error後の次呼出しや再入探索は別scratchを所有する。繰返し診断callerは自身のscratchを再用する。one-shot `evaluate` はscratchのsetupを含み、同じ算術実装を呼ぶ。Distance/Float/Quantizedは既定のNone/workspace委譲を使い、残差入力scratchを要求しない。通常headの一時確保回避を設計方針として採用し、速度・断片化・latency・棋力の改善は認定しない。
+
 観測streamはgzip JSONLをrecordごとflushする。group ID/行数と距離・定数基準はmeasurement-sets/reference-metricsへ一度保存し、groupのtarget MSE/sign/saturation/biasは明示little-endian f32 base64 vector（NaNは欠測）で保存する。全体metricは元の数値精度を保つ。curves JSON/CSV/SVGとgradients.jsonには同じbulkを複製せずstream参照を置く。cache binding全体はcache-binding.json.gzへlossless保存する。evaluation.full_train_checkpointsはselector点の一部を明示してその点だけ全trainを測る。実outputと残forecastをrun入場前に確認する。
 
 ## CriterionでNNUE評価・AlphaBetaを測定する
 
-`quoridor-ai/benches/nnue_search.rs` は現役の残差モデルとAlphaBeta APIを使う。Criterion 0.8.2はdev依存のみ、default featuresなし・`cargo_bench_support`のみ。Rayon/plotters/GUIは導入しない。通常の製品APIや未採用scratch APIを変更せず、`research` featureのplain構成を使う（`profiling`併用は拒否）。
+`quoridor-ai/benches/nnue_search.rs` は現役の残差モデルとAlphaBeta APIを使う。Criterion 0.8.2はdev依存のみ、default featuresなし・`cargo_bench_support`のみ。Rayon/plotters/GUIは導入しない。採用済みの残差scratch APIと`research` featureのplain構成を使う（`profiling`併用は拒否）。
 
 重みは既存の真正checkpointをread-only参照する。`QUORIDOR_BENCH_MANIFEST` を既存 `baseline-original-v2/output/best-model/manifest.json` の絶対pathへ設定する。固定設定 `benches/nnue_search.json` はweights SHA `c0ec9bf3…`、既に資格確認した5本の完全な合法prefix（序盤・壁の多い中盤・P2 jump・終盤）と二手の進行を束縛する。loaderが実weightsのSHA/長さ/形式/尺度を検証する。別モデルの利用は新しい比較条件として設定・source・compiler・lock・manifest/weights SHAを結果前に固定する。
 
@@ -126,10 +128,10 @@ cargo bench -p quoridor-ai --features research --bench nnue_search --offline --l
 cargo bench -p quoridor-ai --features research --bench nnue_search --offline --locked -- --save-baseline canonical
 ```
 
-測定範囲はbenchmark IDに明示する。モデルload、合法prefix replay、完成depth・有限値・同仕事の再現・親/history復帰の事前資格は全項目のtimer外だが、job全費には含める。`nnue/evaluate` だけはaccumulatorのfull FT事前計算をtimer外に置き、通常head APIの一時確保をtimer内に含む。各 `search/*` / `tt/*` の探索呼出は、通常のevaluator準備とroot FT計算もtimer内に含む。`search/cold_setup_search_drop` は毎回新しいplayer/TTを作り、depth3探索とtable破棄まで含む。
+測定範囲はbenchmark IDに明示する。モデルload、合法prefix replay、完成depth・有限値・同仕事の再現・親/history復帰の事前資格は全項目のtimer外だが、job全費には含める。`nnue/evaluate` はaccumulatorのfull FT事前計算と入力scratchのsetupをtimer外に置き、反復中は借用入力bufferを再用する。one-shot `evaluate` のsetup費用をこのhead timerへ含めた測定ではない。各 `search/*` / `tt/*` の探索呼出は、通常のevaluator準備・root FT計算とSearch呼出しごとのscratch setup/dropもtimer内に含む。`search/cold_setup_search_drop` は毎回新しいplayer/TTを作り、depth3探索とtable破棄まで含む。
 
 TTのtargetは同playerが合法な二手を進めたdepth2の局面。`tt/cold_target_setup_search_drop` は空TTの作成/target探索/破棄、`tt/warm_target_search_only` は各iterationで別のplayerをdepth3でseedしてからtargetを一度だけ検索する（seed/setup/table破棄はこのtimer外だが、target探索自身のevaluator準備/root FTはtimer内）。同じtargetを無限に再検索してwarmの代用にしない。`tt/seed_setup_search_drop` と `tt/seed_progress_target_drop` はseed単体・二手進行を含む全費で、warm限定時間をそのまま永続TTの全体利益にしない。weights/mode/rules/selectivity namespaceとfullhistory/plyは維持する。
 
 事前資格はtyped Action/valuebits/PV/完成depth/全exported counter/保持memoryをstdoutのJSON recordに保存する。Criterionのraw samples/estimatesは `CRITERION_HOME` へ保存する。50 samples、既定95% confidence/5% significance/1% noise threshold・標準bootstrapを用い、暖機/測定時間は有限の測定方法であって外側jobの作業期限ではない。プロセス全費・init・forward数・確保数・独立算術oracleは別に保持する。Criterionは原因profile・実対局・棋力の測定器ではなく、過去の短い測定や不支持結果を遡って支持へ書き換えない。共有target唯一writer、CPU/RAM/保存/owner pause/exact cleanupと学習/arena時計との非重複は従来のjob手順に従う。
 
-未採用borrowed input-scratchとの直接比較は、停止版sourceと比較専用driverをserialに使う。通常headは一度確保した実scratchを再用し、候補のone-shot `.evaluate` を再用経路と呼ばない。adapterはこの比較が終わるまでの実験専用で現役API/恒久featureへ残さず、mainのbenchmarkは常に採用済みAPIでcompile可能とする。
+従来版と借用入力版の固定比較source/rawは[保存結果](../../research-data/ai-sigma/search-optimization/borrowed-criterion-comparison/result/report.md)に残す。現役benchmarkは採用済みAPIで通常の再用bufferを測り、比較専用の互換featureや別searcherを常設しない。5固定局面で事前の明確退行条件は0/5だったが、無退行証明や速度利益とは扱わない。

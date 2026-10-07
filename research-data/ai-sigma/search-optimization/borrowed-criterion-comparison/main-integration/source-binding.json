@@ -1,0 +1,31 @@
+{
+  "scope": "adopt reviewed memory ownership/API principle, not speed benefit; no model/feature/math/FT/TT/window/order changes",
+  "source_SHA256": {
+    "crates/quoridor-nnue/src/residual.rs": "fab07f2af91fc77debc80a4a0050d076a832521cc40c883c5b00e49b0eebbc7a",
+    "crates/quoridor-ai/src/alphabeta.rs": "0d4dd0cad33fcd462073ff173e1509bcb25e2ba63317696585af6e63c517f8d8",
+    "crates/quoridor-runner/src/bin/nnue-diagnose.rs": "c2f0420df4a16515fbb76c513d720345765094ecb1b338eae3e8d8b936250b3d",
+    "crates/quoridor-ai/benches/nnue_search.rs": "23d383ecdfd8285b2cc2d95249b3acbc755caacd39e42e24d9d29f1b1a35cadd"
+  },
+  "review_binding_SHA256": "95586125c6eacc672081dd26b935213fb462e1f80145f2848741216b6a1d79e9",
+  "review_files_SHA256": {
+    "administrative-failure.json": "c48b615e60cdc2758bbba7ccf5f596c29ac08d4fca1c50d99b5078b74b066263",
+    "binding.json": "95586125c6eacc672081dd26b935213fb462e1f80145f2848741216b6a1d79e9",
+    "contract.md": "522a3a2c0eb24b0f18b4411e93b40943ef802c65b0623aeea0ad5886efb5bdd6",
+    "control.json": "45a429589755a33ba3b6f41760459cb4dffcc7980590bf9f90b3397d05e0d0c0",
+    "evidence-check.json": "d2ebf9d4dd2397dfce9cbbc894bc50d59628c77e137a2d4bfc466656f03e0db8",
+    "review.json": "2f0e5b457af1c81e64d349c91415fa02bc06c3907453ee76af033ff64488098c",
+    "review.md": "6c54d840512f91f1af94257f65e547cd7d762ac8dd0ce7d0fa7c51d1bb3833d4",
+    "source-check.json": "2ad52b709b5ea4cc0e501b6cdebc1a07fe454032b3432881b2b8e11f9518ac67"
+  },
+  "measured_bench_member_SHA256": "6891220c23b0144b964b3c240b1215113eddbd39e04b7da82af04ebaaa585b4e",
+  "bench_change_from_measured": "only comparison-only metadata string replaced; entire remaining source byte-identical",
+  "software_job": "bdca85f6-eb88-4cd8-b4f9-11a2b52a0203",
+  "source_copy_status": "three full frozen source files byte-identical after scoped rustfmt",
+  "verification": "PASS scoped NN0 mock/build/early-help/Clippy; no new model forward",
+  "physical_model_forwards": 0,
+  "learner": "explicit user pause remains; no wake/resume or final newE/Sigma release",
+  "profile_trigger": 0,
+  "conditional_profile_grant": 0,
+  "old_failures_negative_results_UNKNOWN": "preserved",
+  "Counted_mock_accounting_calls": 2
+}

@@ -1,7 +1,7 @@
 //! Configured native feature/value/search diagnostics; no training or fixed experiment inputs.
 use quoridor_ai::alphabeta::{
-    self, DistanceEvaluator, EvalAccumulator, NnueEvaluator, ResidualEvaluator, SearchError,
-    SearchLimits, StaticEvaluator,
+    self, DistanceEvaluator, EvalAccumulator, EvalScratch, NnueEvaluator, ResidualEvaluator,
+    SearchError, SearchLimits, StaticEvaluator,
 };
 use quoridor_core::research::SigmaContext;
 use quoridor_nnue::{Accumulator, EvaluationMode, Model, encode_qf1, residual::ResidualModel};
@@ -70,8 +70,8 @@ struct Counted {
     own: AtomicU64,
     cap: u64,
 }
-impl StaticEvaluator for Counted {
-    fn evaluate(&self, c: &SigmaContext, a: Option<&EvalAccumulator>) -> alphabeta::Result<f32> {
+impl Counted {
+    fn count_evaluation(&self) -> alphabeta::Result<()> {
         if self.neural
             && self
                 .nn
@@ -83,6 +83,24 @@ impl StaticEvaluator for Counted {
             return Err(SearchError::Evaluation("NN_CAP".into()));
         }
         self.own.fetch_add(1, Ordering::Relaxed);
+        Ok(())
+    }
+}
+impl StaticEvaluator for Counted {
+    fn create_scratch(&self) -> EvalScratch {
+        self.inner.create_scratch()
+    }
+    fn evaluate_with_scratch(
+        &self,
+        c: &SigmaContext,
+        a: Option<&EvalAccumulator>,
+        scratch: &mut EvalScratch,
+    ) -> alphabeta::Result<f32> {
+        self.count_evaluation()?;
+        self.inner.evaluate_with_scratch(c, a, scratch)
+    }
+    fn evaluate(&self, c: &SigmaContext, a: Option<&EvalAccumulator>) -> alphabeta::Result<f32> {
+        self.count_evaluation()?;
         self.inner.evaluate(c, a)
     }
     fn prepare_context(&self, c: &SigmaContext) -> alphabeta::Result<Option<EvalAccumulator>> {
@@ -323,11 +341,12 @@ fn qualify_residual(c: &Config, start: Instant) -> Result<Value> {
     #[cfg(not(target_arch = "x86_64"))]
     let avx2_available = false;
     let nn = Cell::new(0_u64);
-    let evaluate = |a: &Accumulator| -> Result<f32> {
+    let mut input_scratch = model.evaluation_scratch();
+    let mut evaluate = |a: &Accumulator| -> Result<f32> {
         guard(c, start, nn.get(), 0)?;
         nn.set(nn.get() + 1);
         save(&c.counter, &json!({"NN": nn.get(), "processed": 0}))?;
-        Ok(model.evaluate(a)?)
+        Ok(model.evaluate_with_scratch(a, &mut input_scratch)?)
     };
     let mut rows = Vec::new();
     let mut undo_checks = 0;
@@ -461,6 +480,7 @@ fn run(c: &Config, start: Instant) -> Result<Value> {
     let mut searches = Vec::new();
     let cancel = AtomicBool::new(false);
     if c.mode == "diagnose" {
+        let mut inputs: Vec<_> = evaluators.iter().map(|e| e.create_scratch()).collect();
         for (root, prefix) in c.prefixes.iter().enumerate() {
             let s = SigmaContext::from_prefix(prefix)?;
             let key = s.position();
@@ -474,7 +494,7 @@ fn run(c: &Config, start: Instant) -> Result<Value> {
                 let v = if let Some(x) = s.terminal_value() {
                     x * alphabeta::TERMINAL_SCORE
                 } else {
-                    e.evaluate(&s, a.as_ref())?
+                    e.evaluate_with_scratch(&s, a.as_ref(), &mut inputs[i])?
                 };
                 values.push(json!({"engine":c.engines[i].id,"value":v,"evaluation_s":t.elapsed().as_secs_f64()}));
                 if e.neural {
@@ -492,8 +512,8 @@ fn run(c: &Config, start: Instant) -> Result<Value> {
                             (x * 2., x * 2.)
                         } else {
                             (
-                                e.evaluate(&child, full.as_ref())?,
-                                e.evaluate(&child, delta.as_ref())?,
+                                e.evaluate_with_scratch(&child, full.as_ref(), &mut inputs[i])?,
+                                e.evaluate_with_scratch(&child, delta.as_ref(), &mut inputs[i])?,
                             )
                         };
                         if (vf - vd).abs() > 1e-5 + 1e-4 * vf.abs() {
@@ -749,4 +769,87 @@ fn main() -> Result<()> {
         json!({"mode":c.mode,"NN":output["NN"],"processed":output["processed"],"wall_s":output["wall_s"]})
     );
     Ok(())
+}
+
+#[cfg(test)]
+mod borrowed_input_counter_tests {
+    use super::*;
+    struct Mock {
+        model: ResidualModel,
+        setups: AtomicU64,
+        calls: AtomicU64,
+    }
+    impl StaticEvaluator for Mock {
+        fn create_scratch(&self) -> EvalScratch {
+            self.setups.fetch_add(1, Ordering::Relaxed);
+            EvalScratch::Residual(self.model.evaluation_scratch())
+        }
+        fn evaluate_with_scratch(
+            &self,
+            _: &SigmaContext,
+            _: Option<&EvalAccumulator>,
+            scratch: &mut EvalScratch,
+        ) -> alphabeta::Result<f32> {
+            assert!(matches!(scratch, EvalScratch::Residual(_)));
+            self.calls.fetch_add(1, Ordering::Relaxed);
+            Ok(0.) // Mock adapter qualification: no model forward.
+        }
+        fn evaluate(
+            &self,
+            _: &SigmaContext,
+            _: Option<&EvalAccumulator>,
+        ) -> alphabeta::Result<f32> {
+            panic!("scratch adapter must forward the explicit workspace")
+        }
+    }
+    #[test]
+    fn counted_adapter_forwards_workspace_and_charges_each_call_once_nn0() {
+        let t = quoridor_nnue::Topology {
+            ft_width: 1,
+            hidden_width: 1,
+        };
+        let inner = Arc::new(Mock {
+            model: ResidualModel::from_parts(
+                t,
+                vec![0.; ResidualModel::parameter_count(t).unwrap()],
+                [0.; 2],
+                [1.; 2],
+                quoridor_nnue::DistanceFit::default(),
+                quoridor_nnue::residual::RouteMode::Zero4,
+                [0.; 4],
+                [1.; 4],
+            )
+            .unwrap(),
+            setups: AtomicU64::new(0),
+            calls: AtomicU64::new(0),
+        });
+        let global = Arc::new(AtomicU64::new(0));
+        let evaluator = Counted {
+            inner: inner.clone(),
+            neural: true,
+            nn: global.clone(),
+            own: AtomicU64::new(0),
+            cap: 2,
+        };
+        let mut scratch = evaluator.create_scratch();
+        let context = SigmaContext::from_prefix(&[]).unwrap();
+        for _ in 0..2 {
+            assert_eq!(
+                evaluator
+                    .evaluate_with_scratch(&context, None, &mut scratch)
+                    .unwrap(),
+                0.
+            );
+        }
+        assert!(
+            evaluator
+                .evaluate_with_scratch(&context, None, &mut scratch)
+                .is_err()
+        );
+        assert_eq!(inner.setups.load(Ordering::Relaxed), 1);
+        assert_eq!(inner.calls.load(Ordering::Relaxed), 2);
+        assert_eq!(evaluator.own.load(Ordering::Relaxed), 2);
+        assert_eq!(global.load(Ordering::Relaxed), 2);
+        println!("COUNTED_SCRATCH_ADAPTER_NN_FORWARD=0;MOCK_CALLS=2");
+    }
 }

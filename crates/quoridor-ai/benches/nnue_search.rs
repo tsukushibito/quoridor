@@ -119,7 +119,7 @@ fn main() {
             "tt/seed_setup_search_drop":"seed player/TT setup, seed evaluator preparation/root FT/search and table destruction inside",
             "tt/seed_progress_target_drop":"setup, seed FT/search, legal two-ply progression, target FT/search and table destruction inside"
         },
-        "normal_head":"canonical allocating API; no unadopted scratch hook",
+        "normal_head":"maintained reusable head input per fixture; each production Search invocation owns scratch/setup/drop",
         "head_calls":"one per evaluate iteration; search evaluations exported in preflight",
         "initialization_forward_cost":"preflight search/determinism calls included in whole job, outside Criterion samples"})
     );
@@ -138,6 +138,14 @@ fn main() {
         assert_eq!(root.total_ply() + 2, next.total_ply());
         let accumulator = model.full_context(&root, EvaluationMode::Scalar).unwrap();
         let head_bits = model.evaluate(&accumulator).unwrap().to_bits();
+        let mut input_scratch = model.evaluation_scratch();
+        assert_eq!(
+            model
+                .evaluate_with_scratch(&accumulator, &mut input_scratch)
+                .unwrap()
+                .to_bits(),
+            head_bits
+        );
         assert_eq!(model.evaluate(&accumulator).unwrap().to_bits(), head_bits);
 
         let original = cold(&evaluator, &config, &root, &seed, &cancel);
@@ -174,7 +182,13 @@ fn main() {
         drop((player, repeat));
 
         criterion.bench_function(&format!("nnue/evaluate/{name}"), |b| {
-            b.iter(|| black_box(model.evaluate(black_box(&accumulator)).unwrap()));
+            b.iter(|| {
+                black_box(
+                    model
+                        .evaluate_with_scratch(black_box(&accumulator), &mut input_scratch)
+                        .unwrap(),
+                )
+            });
         });
         criterion.bench_function(&format!("search/cold_setup_search_drop/{name}"), |b| {
             b.iter(|| black_box(cold(&evaluator, &config, &root, &seed, &cancel)));

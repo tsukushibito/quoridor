@@ -1,7 +1,7 @@
 //! Native iterative deepening / PVS over the history-correct Sigma rule cursor.
 //! No speculative pruning. A result is published only after a whole root depth.
 use quoridor_core::{Position, RulesError, research::SigmaContext};
-use quoridor_nnue::residual::ResidualModel;
+use quoridor_nnue::residual::{ResidualModel, ResidualScratch};
 use quoridor_nnue::{Accumulator, EvaluationMode, Model, QuantizedAccumulator, QuantizedModel};
 use std::{
     collections::hash_map::DefaultHasher,
@@ -51,9 +51,27 @@ pub enum EvalAccumulator {
     Float(Accumulator),
     Quantized(QuantizedAccumulator),
 }
+/// Owned by one search invocation, not by shared model weights or parents.
+#[derive(Debug, Default)]
+pub enum EvalScratch {
+    #[default]
+    None,
+    Residual(ResidualScratch),
+}
 /// Immutable evaluators share weights; accumulator state belongs to one search.
 /// Hooks support a cached per-child delta and exact rollback by retaining parent.
 pub trait StaticEvaluator: Send + Sync {
+    fn create_scratch(&self) -> EvalScratch {
+        EvalScratch::None
+    }
+    fn evaluate_with_scratch(
+        &self,
+        context: &SigmaContext,
+        accumulator: Option<&EvalAccumulator>,
+        _scratch: &mut EvalScratch,
+    ) -> Result<f32> {
+        self.evaluate(context, accumulator)
+    }
     fn evaluate(
         &self,
         context: &SigmaContext,
@@ -210,6 +228,25 @@ impl ResidualEvaluator {
     }
 }
 impl StaticEvaluator for ResidualEvaluator {
+    fn create_scratch(&self) -> EvalScratch {
+        EvalScratch::Residual(self.model.evaluation_scratch())
+    }
+    fn evaluate_with_scratch(
+        &self,
+        _c: &SigmaContext,
+        a: Option<&EvalAccumulator>,
+        scratch: &mut EvalScratch,
+    ) -> Result<f32> {
+        let Some(EvalAccumulator::Float(a)) = a else {
+            return Err(SearchError::Evaluation(
+                "missing residual accumulator".into(),
+            ));
+        };
+        let EvalScratch::Residual(scratch) = scratch else {
+            return Err(SearchError::Evaluation("missing residual scratch".into()));
+        };
+        Ok(self.model.evaluate_with_scratch(a, scratch)?)
+    }
     fn prepare_context(&self, c: &SigmaContext) -> Result<Option<EvalAccumulator>> {
         Ok(Some(EvalAccumulator::Float(
             self.model.full_context(c, self.mode)?,
@@ -541,6 +578,7 @@ impl From<RulesError> for Interrupted {
 type NodeResult<T> = std::result::Result<T, Interrupted>;
 struct Search<'a> {
     eval: &'a dyn StaticEvaluator,
+    eval_scratch: EvalScratch,
     orderer: Option<&'a dyn MoveOrderer>,
     limits: &'a SearchLimits,
     cancel: &'a AtomicBool,
@@ -658,7 +696,9 @@ impl Search<'_> {
         }
         if depth == 0 {
             self.stats.evaluations += 1;
-            let value = self.eval.evaluate(c, a)?;
+            let value = self
+                .eval
+                .evaluate_with_scratch(c, a, &mut self.eval_scratch)?;
             self.control()?;
             if !value.is_finite() || value.abs() > 1. {
                 return Err(Interrupted::Error(SearchError::Evaluation(
@@ -1011,6 +1051,7 @@ fn search_in_table(
         .transpose()?;
     let mut state = Search {
         eval: evaluator,
+        eval_scratch: evaluator.create_scratch(),
         orderer,
         limits,
         cancel,
@@ -1309,6 +1350,7 @@ mod persistent_tt_tests {
             let cancel = AtomicBool::new(false);
             let mut state = Search {
                 eval: e.as_ref(),
+                eval_scratch: e.create_scratch(),
                 orderer: None,
                 limits: &l,
                 cancel: &cancel,
@@ -1509,6 +1551,173 @@ mod persistent_tt_tests {
         println!(
             "TT311 {}",
             serde_json::json!({"purpose":"frame24-persistent-tt-311-v1","PASS":true,"native_NN":0,"processed_including_oracle":PROCESSED.load(Ordering::Relaxed),"MPC":"OFF","runtime_pergame_execution":"NOT_RUN"})
+        );
+    }
+}
+#[cfg(test)]
+mod input_scratch_error_tests {
+    use super::*;
+    use std::sync::atomic::AtomicU64;
+
+    struct Probe {
+        inner: ResidualEvaluator,
+        cancel: Arc<AtomicBool>,
+        inject_error: bool,
+        prepares: AtomicU64,
+        deltas: AtomicU64,
+        heads: AtomicU64,
+        setups: AtomicU64,
+    }
+    impl StaticEvaluator for Probe {
+        fn create_scratch(&self) -> EvalScratch {
+            self.setups.fetch_add(1, Ordering::Relaxed);
+            self.inner.create_scratch()
+        }
+        fn evaluate_with_scratch(
+            &self,
+            c: &SigmaContext,
+            a: Option<&EvalAccumulator>,
+            scratch: &mut EvalScratch,
+        ) -> Result<f32> {
+            self.heads.fetch_add(1, Ordering::Relaxed);
+            let value = self.inner.evaluate_with_scratch(c, a, scratch)?;
+            if self.inject_error {
+                return Err(SearchError::Evaluation(
+                    "injected after borrowed head".into(),
+                ));
+            }
+            self.cancel.store(true, Ordering::Relaxed);
+            Ok(value)
+        }
+        fn prepare_context(&self, c: &SigmaContext) -> Result<Option<EvalAccumulator>> {
+            self.prepares.fetch_add(1, Ordering::Relaxed);
+            self.inner.prepare_context(c)
+        }
+        fn advance_context(
+            &self,
+            parent: Option<&EvalAccumulator>,
+            c: &SigmaContext,
+        ) -> Result<Option<EvalAccumulator>> {
+            self.deltas.fetch_add(1, Ordering::Relaxed);
+            self.inner.advance_context(parent, c)
+        }
+        fn evaluate(&self, c: &SigmaContext, a: Option<&EvalAccumulator>) -> Result<f32> {
+            self.heads.fetch_add(1, Ordering::Relaxed);
+            self.inner.evaluate(c, a)
+        }
+    }
+    #[test]
+    #[ignore = "requires an explicitly supplied frozen model and legal replay config"]
+    fn input_scratch_head_error_cancel_restore_parent() {
+        let config: serde_json::Value = serde_json::from_slice(
+            &std::fs::read(std::env::var("QUORIDOR_NNUE_REFERENCE_CONFIG").unwrap()).unwrap(),
+        )
+        .unwrap();
+        let model = Arc::new(ResidualModel::load(config["manifest"].as_str().unwrap()).unwrap());
+        let limits = SearchLimits {
+            max_depth: 2,
+            max_nodes: 100_000,
+            time_limit: None,
+            tt_entries: 4096,
+            use_pvs: true,
+            use_tt: true,
+        };
+        let mut heads = 0;
+        let mut prepares = 0;
+        let mut deltas = 0;
+        for fixture in config["fixtures"].as_array().unwrap() {
+            let prefix: Vec<u16> = serde_json::from_value(fixture["prefix"].clone()).unwrap();
+            let root = SigmaContext::from_prefix(&prefix).unwrap();
+            let before = (root.position(), root.history_counts(), root.total_ply());
+            for mode in [EvaluationMode::Scalar, EvaluationMode::Simd] {
+                let parent = model.full_context(&root, mode).unwrap();
+                prepares += 1;
+                let before_value = model.evaluate(&parent).unwrap().to_bits();
+                heads += 1;
+                for inject_error in [true, false] {
+                    let cancel = Arc::new(AtomicBool::new(false));
+                    let probe = Arc::new(Probe {
+                        inner: ResidualEvaluator::new(model.clone()).with_mode(mode),
+                        cancel: cancel.clone(),
+                        inject_error,
+                        prepares: AtomicU64::new(0),
+                        deltas: AtomicU64::new(0),
+                        heads: AtomicU64::new(0),
+                        setups: AtomicU64::new(0),
+                    });
+                    let mut session = SearchSession::new(
+                        probe.clone(),
+                        SearchNamespace {
+                            evaluator: format!("fixedBEST:{mode:?}"),
+                            rules: "Sigma-fullhistory-ply200".into(),
+                            selectivity: "fullwidth-PVS".into(),
+                        },
+                        4096,
+                    )
+                    .unwrap();
+                    let result = session.search(&root, &limits, &cancel);
+                    assert_eq!(probe.setups.load(Ordering::Relaxed), 1);
+                    if inject_error {
+                        assert!(matches!(result, Err(SearchError::Evaluation(_))));
+                    } else {
+                        let result = result.unwrap();
+                        assert_eq!(result.stop, StopReason::Cancelled);
+                        assert_eq!(result.completed_depth, 0);
+                        assert!(result.action.is_none());
+                    }
+                    assert_eq!(
+                        (root.position(), root.history_counts(), root.total_ply()),
+                        before
+                    );
+                    assert_eq!(model.evaluate(&parent).unwrap().to_bits(), before_value);
+                    heads += 1 + probe.heads.load(Ordering::Relaxed);
+                    prepares += probe.prepares.load(Ordering::Relaxed);
+                    deltas += probe.deltas.load(Ordering::Relaxed);
+                }
+            }
+        }
+        println!("INPUT_SCRATCH_ERROR_HEADS={heads};FT_PREPARES={prepares};FT_DELTAS={deltas}");
+    }
+
+    #[test]
+    #[ignore = "requires an explicitly supplied frozen model and legal replay config"]
+    fn borrowed_scratch_search_is_reentrant_after_completed_depth() {
+        let config: serde_json::Value = serde_json::from_slice(
+            &std::fs::read(std::env::var("QUORIDOR_NNUE_REFERENCE_CONFIG").unwrap()).unwrap(),
+        )
+        .unwrap();
+        let model = Arc::new(ResidualModel::load(config["manifest"].as_str().unwrap()).unwrap());
+        let evaluator = ResidualEvaluator::new(model);
+        let prefix: Vec<u16> =
+            serde_json::from_value(config["fixtures"][0]["prefix"].clone()).unwrap();
+        let root = SigmaContext::from_prefix(&prefix).unwrap();
+        let before = (root.position(), root.history_counts(), root.total_ply());
+        let limits = SearchLimits {
+            max_depth: 1,
+            max_nodes: 100_000,
+            use_tt: false,
+            ..SearchLimits::default()
+        };
+        let cancel = AtomicBool::new(false);
+        let mut nested = None;
+        let outer = search_with_updates(&root, &evaluator, &limits, &cancel, &mut |_| {
+            assert!(nested.is_none());
+            nested = Some(search(&root, &evaluator, &limits, &cancel).unwrap());
+        })
+        .unwrap();
+        let inner = nested.unwrap();
+        assert_eq!(outer.action, inner.action);
+        assert_eq!(outer.value.map(f32::to_bits), inner.value.map(f32::to_bits));
+        assert_eq!(outer.pv, inner.pv);
+        assert_eq!(outer.completed_depth, inner.completed_depth);
+        assert_eq!(outer.stats.nodes, inner.stats.nodes);
+        assert_eq!(
+            (root.position(), root.history_counts(), root.total_ply()),
+            before
+        );
+        println!(
+            "INPUT_SCRATCH_REENTRANT_HEADS={}",
+            outer.stats.evaluations + inner.stats.evaluations
         );
     }
 }

@@ -1,0 +1,21 @@
+quoridor-4lc.318.1 borrowed-input ownership/API独立レビュー完了。binding SHA95586125c6eacc672081dd26b935213fb462e1f80145f2848741216b6a1d79e9。重大・導入を阻む正しさ指摘0。3本の完全な凍結production source＋測定済Bのborrowed maintainedbench採用は、今回確認した所有権/API/数値同一性の境界で妥当。Rootによる実統合と必要な文書更新は未実施であり、速度採用を含めない。
+
+main/candidate 3組SHAとarchive/member SHAはbindingに一致。NNUE lib/features/quantized/coreの必要依存4本も凍結証拠と現在mainが一致。根拠path/SHAはsource-check.json/evidence-check.json/review.json。product変更はscratch所有とcaller接続に限られ、model/FT/TT/order/FP数学、unsafe、深さ比例の大きなstackは増えていない。
+
+(1) ResidualScratchはprivate Vec、setup時に2*FTwidth+6個のf32をゼロ初期化（最大4102個=16408B payload）。受入topologyは既存parameter_countでFT/hidden各1..2048。evaluate_with_scratchはaccumulatorのfingerprint/両view形状/finite/side/distanceを先に検証し、scratch幅も書込み前に照合。全ReLU入力とDを毎回上書きし、外部から書けない4routeは初期+0のまま。旧順序のSTM view、ReLU、D正規化、j/k積和、距離logit加算、f64tanh→f32を保持。numeric error後も次回は全可変入力を上書き、scratch値を返さない。別modelとの幅違いは明示error。同幅scratch再用も全可変領域を更新する。
+
+(2) Search<'a>がEvalScratchを値で所有し、search_in_table1052–1064で1呼出し1setup。共有Arc modelやparent accumulatorとは別allocationで、&mut workspaceのみを借用。SearchSessionはTTを維持するがscratchを持越さない。child659–680のunmake、leaf697–708の制御、completed-depth1098のcallback、error時uncommitted TT処理は元と同じ。cancel/error後の次呼出しとnested/reentrant searchは新scratch。standalone diagnoseはworker内でevaluatorごとのscratchを再用、qualification closureもlocalscratchを再用する。
+
+(3) Countedは従来のfetch_update cap確認→own増分→inner評価を抽出し、borrowed経路も一度だけ通る。cap拒否時にinnerを呼ばず、scratch setupはNNに数えない。prepare/advance/callback/cancel orderingは変更なし。default None/workspace delegateはDistance/Float/Quantized/既存test evaluatorsへ従来evaluateを渡す。bounded main crates rgで production impl/caller・runner/Wasm・LoadedModelを確認し、API不整合なし。ResidualModel::evaluateは同一borrowed実装を呼ぶone-shot convenienceであり、旧数式のproduction二重実装は残さない。
+
+(4) 完全凍結filesにはcfg(test) Search初期化と追加oracle/error/cancel/reentrant/Counted adapter fixturesを含む。production-only.patchは抜粋なので統合の代用にしない。original_allocating oracleは旧実装の独立式を維持。提供21topology/84parentmodes/1176head calls、5root full/delta/parent/undo/162594calls、error-cancel50calls、reentrant270calls、24 plain full-result parity、normalallocatorの記録を再用（正確な比較head数は88727、head allocations88727→0、5setup各280B）。数値STOPのsource/dependency SHAとmarkersを照合した。default Float/Quantizedはcompile/delegation証明、Counted NN0fixtureはsourceに存在するが実行marker空であり、実行PASSへ昇格しない。新runtime probeは必要と判断せず、build/native/Torch/model callsを実行していない。
+
+測定Bのbench member SHA6891220c…585b4eはsoftware proofのsource SHAとも一致。18processの5typed preflight一致は提供summary/report/receiptの証拠範囲で再用する。benchは値bits/Action/PV/depth/stop/23counters/parentを比較し、headはfixtureごとにsetupしたbufferを借用する。cold searchは実production setup/rootFT/Search scratch/TT/dropを含む。同memberの保守bench採用で実験用search_costや互換featureを常設しない。build/Clippyは提供software receiptを再用、helpのmodel読取前境界はbench sourceで確認（今回の実行0）。compileを新数値資格と扱わない。
+
+固定Criterionルール（各Bが両隣Aでregressedかつ95%CI下端>+1%、3/4 B以上、全体4/5根以上）を記録80comparisonsから再計算し、primary退行0/5、profile trigger0と一致。50samplesは50processではない。混合CI/記述中央値を非劣性・速度利益へ変換しない。旧whole+2.50%/micro+18.23%等の負の小標本と費/UNKNOWNは保全。codegenを速度の原因証拠にしない。
+
+通常D1/P3（非blocker、採用時の必要文書）：scratchはSearchSession寿命でなく各Search呼出し寿命でsetup/drop、one-shot evaluateはsetupを含む、head timerはFT/workspace setup外、cold/warm target Searchはそれを含む、と記述する。bench member122のcomparison-only frozen表記は保守採用時のscope説明へ直す。workspaceはZero4専用・形状エラー時resizeなし、default委譲の非residual scopeも明示する。これは既に予定されたdocs更新の具体境界であり、新方式の承認要求ではない。
+
+未確認：Rootが行う実統合後のbuild/tests、全2048×2048 topology総当たり、全model/allgame数値、DefaultFloat/Quantized新runtime proof、一般的latency/fragmentation/noninferiority/speed/strength。親のsoftware/数値証拠は今回replayしていない。resume応答のmodel/effortを別RPCで再取得しておらず、変更要求0、実permission danger-full-access/neverとcwd/CPU3は開始時確認。
+
+writerは本review namespaceのみ256KiB内。Beads最初のGo起動をRLIMIT_ASで拒否した行政失敗、read range IndexErrorと任意metadata path不在も失敗として保全し、推定費/科学成功へ変換しない。開始時childピーク232324KiB、通知・終了control込み248292KiB、Python静的readerは軽量、連続family peak保証ではない。commands/実測body時間/control/waitsはcontrol.jsonに記録。source/main/Git/GPU/forward/model/network/job/delegate0、learner323のresume/send/issue操作0。Root宛issuequoridor-4lcへ一度通知、318.1のみ閉じbackup後readers/children停止・Idle。親318/paused323は閉じない。
