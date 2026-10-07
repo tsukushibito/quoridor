@@ -1,0 +1,167 @@
+{
+  "started_at": "2026-10-07T02:52:23.993451+00:00",
+  "job_id": "60673349-c79e-4889-8e05-1f9065cc15db",
+  "outcome": "succeeded",
+  "error": null,
+  "exit_code": 0,
+  "finished_at": "2026-10-07T02:59:02.239310+00:00",
+  "wall_seconds": 398.41771834297106,
+  "remaining": [],
+  "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+  "cleanup_complete": true,
+  "log_bytes_seen": 0,
+  "log_bytes_retained": 0,
+  "guardian": {
+    "started": "2026-10-07T02:52:24.022002+00:00",
+    "ended": "2026-10-07T02:59:01.839953+00:00",
+    "exit_code": 0,
+    "reason": null,
+    "direct_child_reaped": true,
+    "leader": {
+      "pid": 1562413,
+      "tick": "59465935",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "rss": 233472
+    },
+    "identities": [
+      {
+        "pid": 1562413,
+        "tick": "59465935",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "rss": 27283456
+      },
+      {
+        "pid": 1562442,
+        "tick": "59465953",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "rss": 5619712
+      },
+      {
+        "pid": 1562486,
+        "tick": "59466044",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "rss": 5816320
+      },
+      {
+        "pid": 1562541,
+        "tick": "59466128",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "rss": 6258688
+      },
+      {
+        "pid": 1566278,
+        "tick": "59470908",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "rss": 9297920
+      },
+      {
+        "pid": 1569226,
+        "tick": "59475648",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "rss": 10080256
+      },
+      {
+        "pid": 1571005,
+        "tick": "59480370",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "rss": 9469952
+      },
+      {
+        "pid": 1572693,
+        "tick": "59485263",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "rss": 11186176
+      },
+      {
+        "pid": 1572763,
+        "tick": "59485469",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "rss": 10723328
+      },
+      {
+        "pid": 1572811,
+        "tick": "59485677",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "rss": 10665984
+      },
+      {
+        "pid": 1572831,
+        "tick": "59485879",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "rss": 11071488
+      },
+      {
+        "pid": 1572849,
+        "tick": "59486081",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "rss": 7442432
+      },
+      {
+        "pid": 1573623,
+        "tick": "59490865",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "rss": 9355264
+      },
+      {
+        "pid": 1574376,
+        "tick": "59495541",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "rss": 7528448
+      },
+      {
+        "pid": 1575086,
+        "tick": "59500216",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "rss": 10280960
+      },
+      {
+        "pid": 1575811,
+        "tick": "59504892",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "rss": 11112448
+      },
+      {
+        "pid": 1575828,
+        "tick": "59505101",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "rss": 10543104
+      },
+      {
+        "pid": 1575845,
+        "tick": "59505307",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "rss": 11296768
+      },
+      {
+        "pid": 1575861,
+        "tick": "59505521",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "rss": 10874880
+      }
+    ],
+    "remaining": [],
+    "cleanup_complete": true,
+    "canonical_source_and_ELF_restored": true,
+    "restoration_error": null,
+    "family_RSS_sampled_peak_including_controller_B": 122507264,
+    "owned_output_sampled_peak_B": 1433600,
+    "owned_output_final_B": 643072,
+    "shared_target_growth_peak_B": null,
+    "capacity_method": "Root admitted finite artifact-lifetime forecast; only owned namespace sampled, no live sharedtarget/registry inventory",
+    "CPU": [
+      0,
+      1
+    ],
+    "GPU": 0,
+    "NN_FT_statistics": "all model/FT/head counts to be collected from exact warmup/sample/startup logs",
+    "learner_context": "8b672b9d exactSTOP02:35:31.861342; substantial metadata collection serialized before numeric",
+    "max_runtime_seconds": null
+  },
+  "all18_direct_commands_waited_exit0": true,
+  "exact_recorded_scientific_IDs_absent": true,
+  "canonical_current_source_ELF_SHA_verified": true,
+  "classification": "PENDING_SAVED_RAW_COLLECTION",
+  "no_current_next_numeric": true,
+  "profile_admitted": false,
+  "learner_paused_not_notified_again": true
+}
