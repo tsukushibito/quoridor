@@ -6,7 +6,7 @@
 
 現在の主作業は、**NNUE型で最強のQuoridor AI**を目指す研究です。NNUE評価とαβ探索を主候補とし、SigmaQuoridor同等は段階目標・比較基準です。既存PV/MCTSは教師生成・基準実装・対照として再利用します。現在の目標と評価境界は[研究目標](docs/design/ai-sigma-research-goal.md)、仮説は[NNUE研究方針](docs/design/ai-nnue-research.md)を参照してください。製品のRust B0 AIと描画の実装状況は上記のままです。
 
-AI研究はRootが人間との窓口・作業調整・統合を兼ね、必要時にタスク単位の実行担当と独立レビューを依頼します。固定ロールや定期LLM監督は使いません。重要な研究方向・データ・学習・モデルの変更は、事実・競合案・全工程費を示して人間が選び、受入れ済み作業は許可範囲で進めます。競合仮説と実験は結果から見直し、小規模診断と正式棋力評価を区別します。現在のSigma同等水準は未立証です。 観測・限界・次の人間判断は[研究知見](docs/research-findings.md)へまとめます。[タスク型研究の設計](docs/design/ai-research-team.md)と[実行・記録規約](docs/development/ai-research-experiments.md)を参照してください。
+AI研究はRootが人間との方針相談を担当し、別の実行・統合担当が作業配分とmain/Git/indexの唯一writerを担当します。通常の成果は実行・統合担当へ届け、必要時にタスク単位の実行担当と独立レビューを依頼します。固定ロールや定期LLM監督は使いません。重要な研究方向・データ・学習・モデルの変更は、事実・競合案・全工程費を示して人間が選び、受入れ済み作業は許可範囲で進めます。競合仮説と実験は結果から見直し、小規模診断と正式棋力評価を区別します。現在のSigma同等水準は未立証です。 観測・限界・次の人間判断は[研究知見](docs/research-findings.md)へまとめます。[タスク型研究の設計](docs/design/ai-research-team.md)と[実行・記録規約](docs/development/ai-research-experiments.md)を参照してください。
 
 ## 主要ディレクトリ
 
@@ -17,7 +17,7 @@ AI研究はRootが人間との窓口・作業調整・統合を兼ね、必要�
 | `crates/quoridor-core/`, `quoridor-nnue/`, `quoridor-ai/`, `quoridor-wasm/` | Rustのルール・差分評価・αβ/PVS/TT・MCTS・CPU/Wasm公開境界                                       |
 | `crates/quoridor-inference/`, `quoridor-data/`, `quoridor-runner/`          | 常駐CPU/GPU推論・Arrowデータ・並列生成/arena/学習cycle入口                                      |
 | `python/quoridor_training/`, `tools/model-export/`                          | bulk入力のPyTorch学習・曲線/freeze/test・nativeモデル変換                                       |
-| その他`tools/`                                                              | 補助ツール・独立checker・版付きの過去recipe                                                     |
+| その他`tools/`                                                              | 現役の補助ツール・独立checker・整形/検査用の固定依存                                            |
 | `scripts/`, `scripts/dev/`                                                  | ビルド・生成・検証入口と開発環境/Beads/研究通信の操作                                           |
 | `tests/`                                                                    | 製品のrender/audio/e2e検証・fixture                                                             |
 | `docs/design/`, `development/`, `reports/`                                  | 設計・運用規約・実施結果と限界                                                                  |

@@ -13,3 +13,39 @@
 数学・game/product behavior・feature/data/teacher/split/RNG/model/default/TT/search/deadline-error意味と323pause/sealsを保つ。必要なindependent scalar/reference testsは削除対象のparallel productionではない。既active/upcoming比較の旧sourceは用途と撤去条件を別pathで保持し、immutable science/raw/assets/config/failedcost/buildUNKNOWN/UNKNOWN・uncommitted evidence・Beads locksは保護する。未追跡arenaファイルを自動delete/stageせず、所有確認は具体cleanupが依存する時だけ行う。
 
 331 actualsource reader/job/privateとfairclock/soleCargoを守り、perf333・saved332にmaintenance review gateを追加しない。必要なhighrisk新boundaryだけ同task reviewerがresolution確認し、trivial editsや各runの一律再review・monitorは作らない。source artifact review完了時にproblem群/prioritiesを一回報告し、実装・検証を終えてからverified completionを別報告する。
+
+## 独立レビューの受入れと実装方針
+
+原レビューは[findings](../../.artifacts/repository-maintenance/n3l/review/findings.md)（SHA256 `e17f98270bb3f7726e97beddc7a9e1d76696a50c159a01b82096d059e3b2d522`）、[scope](../../.artifacts/repository-maintenance/n3l/review/scope.json)、[control](../../.artifacts/repository-maintenance/n3l/review/control.json)へ固定した。22件の指摘とH01があり、reader STOPは23:13:40 UTC、owned remaining[]、source/runtime/Git書込み0。364 tracked textの対象と手動深読みに差がある限界も残す。全件を原則実装し、単にnonblockingや大きいfileを理由に除外しない。
+
+| ID  | 判定                  | 修復と担当・必要な確認                                                                               |
+| --- | --------------------- | ---------------------------------------------------------------------------------------------------- |
+| F01 | IMPLEMENT             | n3l.2: concurrent atomic JSONをunique sibling tempへ。barrier/failure fixture                        |
+| F02 | IMPLEMENT             | n3l.2: job/cycle各cleanup obligationを独立attemptしdirect waitを保証。primary/cleanup errors保存     |
+| F03 | IMPLEMENT             | n3l.2: authority readにremaining budgetと有限cancel応答bound。slow fake backend                      |
+| F04 | IMPLEMENT             | n3l.2: null wall horizonと初期失敗stateの整合。fake cycle stages                                     |
+| F05 | IMPLEMENT             | 331同runtime所有者と調整: backend error/storage reasonを区別。known typed Failureとdetailを保持      |
+| F06 | IMPLEMENT             | 331同runtime所有者と調整: exclusive output acquisitionをfallbackまで渡す。敗者はwinner領域へ書かない |
+| F07 | IMPLEMENT             | 324: final manifest公開成功まで全raw shard保持。later shard/manifest失敗fixture                      |
+| F08 | IMPLEMENT             | 324: collecting APIを正本row iteratorへ統合。malformed ArrowはResult                                 |
+| F09 | IMPLEMENT             | n3l.3: source exportのexact manifestとfile/dir allocated upperをprewrite算定                         |
+| F10 | IMPLEMENT             | n3l.3: scope exportのtracked deletionを現在sourceから除外、explicit missingは拒否                    |
+| F11 | IMPLEMENT             | n3l.3: offline parsed TOML feature graphでWasm rules/AI boundary検証                                 |
+| F12 | IMPLEMENT             | n3l.3: completed Worker cancel ackとstale generation/IDの区別                                        |
+| F13 | IMPLEMENT             | n3l.3: bfcache復帰のdispose/restart lifecycleを修復                                                  |
+| F14 | IMPLEMENT             | n3l.3: cancellation latency samplesの保持をboundedにする                                             |
+| F15 | IMPLEMENT             | n3l.2: PackedSupply acquisition直後から所有cleanup scope、log open失敗でもclose                      |
+| F16 | IMPLEMENT             | n3l.2: mutable small snapshotをatomic publish、stream数学/observations不変                           |
+| F17 | IMPLEMENT             | 331同runtime所有者と調整: recv/try_recv completionとdirectory walkerを一つへ                         |
+| F18 | IMPLEMENT             | 331同runtime所有者と調整: first16 telemetryをincrementalにし全completion record保持                  |
+| F19 | IMPLEMENT             | n3l.3: saved-match/title/dialog operation ownershipのfocused UI controller抽出とrender ports         |
+| F20 | IMPLEMENT             | n3l.2: 既存storage regression suiteをmaintained NN0 quality entryへ接続                              |
+| F21 | IMPLEMENT             | 324: README/goal/continuationのactive ownership split、obsolete tools案内修正                        |
+| F22 | IMPLEMENT             | n3l.2: export SHAをbounded streaming、empty/multichunk/failure closure                               |
+| H01 | VERIFY THEN IMPLEMENT | n3l.3: synthetic Git ignored evidenceでremoval挙動を実確認、真の保全不足ならhelper拒否を修復         |
+
+実装は二つの短命・非重複patch helper n3l.2（Python/control）とn3l.3（Web/export/worktree）、324のRust/docsに分ける。[前向き内訳](../../research-data/repository-maintenance/n3l/implementation-dispatch.json)は既source phase4MiBを各helper1.5MiB＋Root1MiBへ分類し、parent/new512容量を増やさない。gpt-6.1-sol/high、cwd main、danger-full-access/neverの実turn_contextを双方で確認した。main/source/Gitは324のみ、helperはoffpathの必要file/patch/test/controlだけを所有し、newCargo/browser/科学runはない。高リスク解決の独立確認は元のsaved reviewerを用いる。
+
+新しい研究規約はstandard-2p基本則＋threefold drawの共通裁定である。製品UI publisher-standardと、旧科学RuleA証拠の使用版を区別し、sourceコピー/互換shimを増やさない。331が実装中のrule/runtime pathsは同担当の停止版と調整してmergeし、科学ジョブの使用sourceを変更しない。
+
+F21のactive passagesは修正・scoped Prettier済み。原F21を消さず、現在のownership正本ai-research-teamと整合する説明へ移した。他の修復は停止patch/affected verificationを受け入れてからcommitと実結果をここへ追記する。現時点でruntime/build/実装全体の完了は主張しない。

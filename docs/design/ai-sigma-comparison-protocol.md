@@ -8,13 +8,19 @@
 
 最初のnative/localはRust-native対ローカルSigma-Webであり、Sigma C++ nativeの成績ではない。Rust-Wasm対Sigma-Webは別に測る。
 
-2026-10-07の人間判断により、今後の評価は公式standard-2pを使う。NNUE/D/Sigmaの審判だけでなく、αβ・MCTS・solverの内部合法手と終局判定にも同じ規則を適用し、config/context/TT namespace/run receiptにrulesetを記録する。公式ルールは前後移動を認め、先に対岸のgoalへ到達した側が勝つ。出版社規則には3回反復禁止・自動反復draw・200ply drawを追加する根拠がない。[出版社の英語規則](https://export.gigamic.com/wp-content/uploads/2021/01/INS-RULES-QUORIDOR_10-2016.pdf)。大会独自の反復裁定を公式共通規則として導入しない。
+2026-10-07の最新の人間採択により、今後の研究self-play・棋力/arena評価は共通の **standard-2p基本則＋3回同一局面で自動draw** を使う。これは出版社規則に追加した明示的な裁定慣行である。[出版社の英語規則](https://export.gigamic.com/wp-content/uploads/2021/01/INS-RULES-QUORIDOR_10-2016.pdf)は前後移動と対岸goal到達による勝利を定め、3回反復drawを指定していない。製品UIの出版社standardモードはこの研究採択によって変更しない。
 
-Sigma RuleA（3回目に入るpawn手禁止、200ply/合法手なしdraw、goal優先）はself-playに限る現役の規則である。両rulesetは共通の盤面・move・数値実装を使い、探索全体を複製しない。既存corpusの終了由来を変更せず、paused323や新label生成を再開しない。
+1. goal到達のWIN/LOSSを反復と運用上限より先に判定する。
+2. 初期局面を1回と数え、同じ局面の3回目をdrawとする。出現は連続でなくてよい。両pawn位置、H/V壁配置、両残壁数、side-to-moveを局面の正本identityに含める。実対局履歴と現在の探索pathを重複rootなしで数え、3回目へ入る手は合法、次stateはterminal draw0とする。旧RuleAの3回目pawn手禁止filterを残さない。
+3. total200pliesは運用の収集上限である。goal/真の反復drawで未決着ならunfinished/censored/UNKNOWNで、draw/z0/terminal eval0/ProvenDrawに変換しない。境界goalと3回反復は真の結果として優先する。error/cancel/late/no completedも未完了である。standard非goalで合法手なしの不正/未対応stateに旧RuleA drawを継承しない。距離による上限採点や罰則drawを追加しない。
+4. 完了したself-playだけWIN+1/DRAW0/LOSS−1を正確なSTM視点へ写す。上限/未完了はpositions/policy/endcauseを記録しても確定outcome labelを入れない。旧公開corpus z0の終了由来不明はそのままで、新裁定のprovenanceとして格上げしない。323pause・生成/fit/export/label開封の保留は解除しない。
+5. 評価では予定denominator、complete pairs/draws/unknowns、bounds/completion rateと規約版を保存する。
 
-評価のmaxplies200は運用上の収集上限として使えるが、goalで未決着ならunfinished/censored/UNKNOWNとする。owner stop・late・error・no completed resultもdraw/z0/ProvenDrawへ変換しない。上限境界のgoalは勝ちとして優先する。予定16局・完成pair・unknown boundsと停止理由を保存し、反復をerrorや0評価のleafにしない。exact solverの循環グラフ上の解析的drawと、対局/UIの自動裁定は区別する。
+NNUE/D/Sigmaの審判だけでなく内部αβ/PVS・MCTS・solverにもこの裁定を適用する。canonical moves/features/math/contextを共有し、config/context/TT namespace/run receiptにrulesetを明示する。反復identityとTTのhistory/ply identityを混同せず、history依存drawをboard-only普遍値としてcacheしない。terminal drawはNN値呼出しを通さない。head/FT/model/features/float/order/pruningは変えない。暫定の研究official-only入口を恒常互換shimとして増やさず、実利用する製品standard機能は維持する。
 
-旧327の3勝13敗/4勝12敗、332の敗戦分析、331の既存4機能windowは使用時のRuleAに束縛された証拠として保持する。公式ルールの棋力結果へ読み替えず、旧D/Torch/book/対局を一律再実行しない。未開始の331比較は同一の公式ルール・新source/private版を両engineに適用し、変更したlegal/history/terminal/caller境界だけを確認する。公式D再比較は必要なら全費用を持つ別提案であり、Sigmaの必須gateにしない。
+旧327の3勝13敗/4勝12敗、332の敗戦分析、331既存4機能windowは使用時のRuleAに束縛された証拠として保持する。新規約の結果へ読み替えず、cohortを混合しない。未開始331比較は両engineで同じ新規約・新source/private版を使い、変更legal/history/terminal/TT/caller境界だけを確認する。first/second非terminal、third合法draw、stock/side/key区別、root+path/nonconsecutive、goal優先、undo/cancel/error/reentrant、200未決着UNKNOWNと境界反復drawを対象にする。native入力/head数値の不変範囲は再用し、旧D/Torch/book/全suiteを一律再実行しない。既存prefixbookは再選定せず新規約の合法性を検証して使う。新規約D再比較は別の全費用付き提案でありSigmaの必須gateではない。
+
+直前の「self-play RuleA/評価official-only」は今後の研究には適用しない。既に始まったimmutable job/readersは使用した規約のまま自然STOP・回収し、次entryから最新採択に移行する。過去label/結果/費/binding/UNKNOWNは不変である。
 
 同じPC・指定論理CPU・推論1スレッド・GPU推論なしを使い、測定中の重い研究jobを停止する。入力供給可能時のt0から合法応答の配送完了までを測る。モデルload/warmup、共通審判処理は区別して記録する。現在の500msとearly-sealの数値は既存試験の条件で、製品の一般上限ではない。
 

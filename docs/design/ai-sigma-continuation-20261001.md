@@ -6,7 +6,7 @@
 
 ## 現在のタスク許可
 
-ユーザーの明示指示で `quoridor-4lc.318` の独立保存セッションを作成する。初回は代表的な実NNUE探索のprofile、永続TTの実効性、探索意味を変えない最大1処理最適化を対象とする。[担当契約](../../research-data/ai-sigma/search-optimization/task.md)が編集境界・配分・停止・検証を定める。Rootが採用とGit統合を担当する。
+ユーザーの明示指示で `quoridor-4lc.318` の独立保存セッションを作成する。初回は代表的な実NNUE探索のprofile、永続TTの実効性、探索意味を変えない最大1処理最適化を対象とする。[担当契約](../../research-data/ai-sigma/search-optimization/task.md)が編集境界・配分・停止・検証を定める。これは初回の履歴上の担当記述である。現在は[タスク型研究の設計](ai-research-team.md)に従い、実行・統合担当が採用検証とmain/Git統合を担当する。
 
 CPU2 logical/RAM2GiB/GPU0、compile・tests・profile累計600秒/各job120秒、新保存96MiB inclusiveを初回配分とし、既存の全保持12GiBとUNKNOWNを維持する。初回の成果又は停止条件で区切り、重要な探索設計・方策・枝刈り・モデル変更はRoot経由で人間が選ぶ。このタスクは全体の新しい時間枠や学習・公開データ取得を許可しない。
 
@@ -44,6 +44,6 @@ frame24/extension25の元の開始は2026-10-06 00:08:46 UTC、連続延長の�
 
 ## 次の実行
 
-人間が重要な方針を選び、RootがBeads課題・目的・単独writer・作業場所・実資源・停止条件・検証を明示して担当へ依頼する。[タスク型研究](ai-research-team.md)と[ジョブ運用](../development/research-jobs.md)を使う。固定ロール、role registry、定期LLM監督、枠終了時の全役起床は使わない。
+人間がRootとの相談で重要な方針を選び、実行・統合担当がBeads課題・目的・単独writer・作業場所・実資源・停止条件・検証を明示して担当へ依頼する。[タスク型研究](ai-research-team.md)と[ジョブ運用](../development/research-jobs.md)を使う。固定ロール、role registry、定期LLM監督、枠終了時の全役起床は使わない。
 
 本書や過去の許可枠を読むだけでは研究を再開しない。学習・データ取得・対局などの新しい実行は次タスクの明示範囲に従う。モデル・入力・検証データ・共有DB・使用中worktreeは保持する。
