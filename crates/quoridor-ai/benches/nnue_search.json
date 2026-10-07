@@ -1,0 +1,45 @@
+{
+  "weights_sha": "c0ec9bf3f8f221c2a2d2db6bf70857fa55647e7c7fd15b38786ef941baa079cd",
+  "fixtures": [
+    {
+      "name": "initial",
+      "prefix": [],
+      "next": 13,
+      "reply": 67
+    },
+    {
+      "name": "opening",
+      "prefix": [13, 67, 81, 66, 14, 65],
+      "next": 143,
+      "reply": 126
+    },
+    {
+      "name": "walled-midgame",
+      "prefix": [13, 67, 81, 66, 14, 65, 143, 126, 150, 64, 141, 151],
+      "next": 5,
+      "reply": 55
+    },
+    {
+      "name": "jump-p2",
+      "prefix": [13, 67, 22, 58, 31, 49, 40],
+      "next": 48,
+      "reply": 49
+    },
+    {
+      "name": "endgame",
+      "prefix": [13, 67, 22, 58, 31, 49, 40, 48, 49, 39, 58, 30],
+      "next": 67,
+      "reply": 21
+    }
+  ],
+  "selection_reason": "Same five preregistered legal representative replays, covering opening/wall-heavy/jump-P2/endgame, fixed before new results; model replaced only by explicitly accepted sameBEST handoff.",
+  "two_ply_selection_reason": "First two extend saved legal opening/walled prefixes; jump extends savednear-goal prefix;wallednext5 reply55 andendnext67 reply21 are fixed legal neighboring moves before output, no measured bestmove selection.",
+  "depth": 3,
+  "target_depth": 2,
+  "max_nodes": 100000,
+  "tt_entries": 4096,
+  "use_pvs": true,
+  "evaluation_mode": "Scalar",
+  "rules": "Sigma-full-history-ply",
+  "selectivity": "none"
+}

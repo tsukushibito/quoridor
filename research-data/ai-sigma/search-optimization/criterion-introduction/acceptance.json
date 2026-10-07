@@ -1,0 +1,129 @@
+{
+  "status": "MAIN_SOURCE_INTEGRATED_SOFTWARE_QUALIFIED; numeric smoke/statistics NOT_RUN",
+  "source_paths_SHA256": {
+    "crates/quoridor-ai/Cargo.toml": "be921d673b5ad53f0c71d8e3439e392916062ede11c361da9224f9c215a8ad67",
+    "Cargo.lock": "5b448d049178c9227ba2d51a784918f1ab192574a4c79f92cb61187f6f1732fe",
+    "crates/quoridor-ai/benches/nnue_search.rs": "760180fda39b7181781a1fb8cda835d94b11c219225d16036891f0a8a9f874cb",
+    "crates/quoridor-ai/benches/nnue_search.json": "4ec90807fe78674fc8cb77841f88d228bcc74b823e4c765c9a868f3b50b70d4a",
+    "docs/development/rust-ai.md": "56d50293be4a988870102dc60dce9221794d9aff8cb1dc8868ba813ac8c66f7a"
+  },
+  "source_version": "final reporting version r6; measured workload byte-identical to r5",
+  "dependency_change": {
+    "criterion": "0.8.2 dev-only",
+    "features": ["cargo_bench_support"],
+    "default_features": false,
+    "old_package_identities": 90,
+    "old_removed": 0,
+    "necessary_added": 27
+  },
+  "verification": {
+    "compile_bench_no_run": "PASS offline/locked/release same source+main dependencies",
+    "early_help": "PASS envmodelunset/no model/FT work",
+    "scoped_release_Clippy": "PASS -D warnings",
+    "numerical_smoke": "NOT_RUN",
+    "Criterion_statistics": "NOT_RUN",
+    "software_STOP": {
+      "job_id": "2ea314ac-a853-4817-8132-42f875a160cc",
+      "outcome": "succeeded",
+      "error": null,
+      "exit_code": 0,
+      "finished_at": "2026-10-07T01:16:37.340097+00:00",
+      "wall_seconds": 18.86849336605519,
+      "remaining": [],
+      "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+      "cleanup_complete": true,
+      "log_bytes_seen": 0,
+      "log_bytes_retained": 0
+    },
+    "commands": {
+      "compile": {
+        "argv": [
+          "cargo",
+          "bench",
+          "--offline",
+          "--locked",
+          "-p",
+          "quoridor-ai",
+          "--features",
+          "research",
+          "--bench",
+          "nnue_search",
+          "--no-run",
+          "-j",
+          "2",
+          "--message-format=json-render-diagnostics"
+        ],
+        "identity": {
+          "pid": 1321812,
+          "start_ticks": "58889094"
+        },
+        "exit_code": 0,
+        "direct_child_reaped": true
+      },
+      "cli-help": {
+        "argv": [
+          "/workspaces/quoridor/.artifacts/rust-migration/target/release/deps/nnue_search-01996e5811164747",
+          "--help"
+        ],
+        "identity": {
+          "pid": 1322835,
+          "start_ticks": "58890481"
+        },
+        "exit_code": 0,
+        "direct_child_reaped": true
+      },
+      "clippy": {
+        "argv": [
+          "cargo",
+          "clippy",
+          "--release",
+          "--offline",
+          "--locked",
+          "-p",
+          "quoridor-ai",
+          "--features",
+          "research",
+          "--bench",
+          "nnue_search",
+          "-j",
+          "2",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "identity": {
+          "pid": 1322837,
+          "start_ticks": "58890482"
+        },
+        "exit_code": 0,
+        "direct_child_reaped": true
+      }
+    },
+    "image_SHA256": "c6fbda1bbb064bd56ff6e55682da8587f53990fe9e702e00b29f4a39d8923af4",
+    "image_bytes": 2996096,
+    "private_gzip_roundtrip": "PASS",
+    "source_format": {
+      "Rustfmt": "PASS edition2024 scoped bench",
+      "Prettier": "PASS scoped JSON/docs",
+      "TOML": "manual existing style, tomllib parse and cargo qualified; no automated TOML formatter introduced",
+      "git_diff_check": "PASS"
+    },
+    "evidence_archive_byte_roundtrip": "PASS every member"
+  },
+  "scope_review": "head precompute excluded; each search normal root FT included; cold setup/drop included; warm seeded once per iteration with seed/setup/drop separate; canonical APIs/math unchanged",
+  "whole_attempt_seconds": 155.07189582812134,
+  "past_failures_missing_waits_UNKNOWN": "retained unchanged; not reclassified PASS",
+  "evidence": {
+    "archive": "software-evidence.tar.gz",
+    "SHA256": "1915edd718311ac98188c1b0a97479e557a84c2c778e2efc592fc2891714cbc5",
+    "bytes": 33998,
+    "original_worktree_proof": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/search-optimization/criterion-v1/handoff-final.json"
+  },
+  "main_production_source_unchanged": {
+    "crates/quoridor-ai/src/alphabeta.rs": "5faf36cf9cbf99d97f35a6e1dd5aa0db183a50e9c22f12b66bb2fba6be2408f6",
+    "crates/quoridor-nnue/src/residual.rs": "60d4475add7c3e19119f2b11c6431e085495ee746576323be66ec348e382cb41",
+    "crates/quoridor-nnue/src/features.rs": "80e1d95af972510b4f161d9fe028069a5498952d6d64a221e56977e5f4fb0b71"
+  },
+  "measurement_continuation": "existing search owner; after learner ed94 actual STOP and fresh quiet slot; no new model or production scratch adoption",
+  "integration_control_failure": "First Root validation incorrectly looked up Cargo.lock under proof.source; refused before any source copy. Corrected to separately declared lock_SHA256, no compile or numeric rerun."
+}
