@@ -1,0 +1,76 @@
+{
+  "task": "quoridor-4lc.332",
+  "status": "SAVED_ANALYSIS_ACCEPTED_SINGLE_CAUSE_UNKNOWN",
+  "game_commit": "ed168d3fb713493c9d8c99cde33fef9da59edebc",
+  "binding_path": ".worktree/learning-million/.artifacts/distance-vs-nnue-analysis-v1/binding.json",
+  "binding_SHA256": "e99c1cd4bb5e0194cda887d2f7e8b8450b8ca95a602011a50c73d3cefde095c1",
+  "source_STOP_UTC": "2026-10-07T23:08:56.608120+00:00",
+  "substantive_STOP_UTC": "2026-10-07T23:01:28.544116+00:00",
+  "remaining": [],
+  "census": {
+    "games": 16,
+    "pairs": 8,
+    "NNUE_wins": 4,
+    "NNUE_losses": 12,
+    "accepted_moves": 776,
+    "errors_unknown_draw": 0
+  },
+  "saved_teacher_metrics": {
+    "BEST51": {
+      "step": 209559,
+      "epoch": 51,
+      "Vrows": 419150,
+      "NNUE_z_MSE": 0.42744088098494515,
+      "D_baseline_z_MSE": 0.8558441571214598,
+      "constant_z_MSE": 0.9999319148056844
+    },
+    "D_metric_same_across_fullV_selector_points": 52,
+    "definition": "saved originalV decisive-z rowMSE, FP32 baseline tanh(0+8*(opponentD-STM D)); not arena move regret or new native D/fullV inference"
+  },
+  "evidence": {
+    "report.md": {
+      "path": ".worktree/learning-million/.artifacts/distance-vs-nnue-analysis-v1/report.md",
+      "SHA256": "86eeb50ee8ff53b5c58560e62cdcfd1c5a7a2f8f88c2909eec0b369b803237be"
+    },
+    "aggregates.json": {
+      "path": ".worktree/learning-million/.artifacts/distance-vs-nnue-analysis-v1/aggregates.json",
+      "SHA256": "6058b7e796766a2103d1128f8aaf1b13aca33854dba1d26ad7e1ad98990cf864"
+    },
+    "control.json": {
+      "path": ".worktree/learning-million/.artifacts/distance-vs-nnue-analysis-v1/control.json",
+      "SHA256": "8c8d8ca76d5fcee44f9c554b7cc0947550e91f999ab62f8ea487fe37eee7b12d"
+    }
+  },
+  "central_verification": "boundartifactSHAs/findingbase+patchcheck/16games8pairs4W12L776/depthhistcounts/source4originalGitblobSHA/savedcurvecompressedSHA; no all776/scientificsuite replay",
+  "curve": {
+    "path": "/workspaces/quoridor/.worktree/assets/checkpoints/public-full-learning/trigger-patience-v1/patience1/output/curves.jsonl.gz",
+    "bytes": 118709,
+    "SHA256": "b3304f9f0af52cc8033f5411d949d88f730f556bf69db2318a103fc270839c57",
+    "scope": "savedtrainer FP32 D rowMSE; no newnativeD/fullV or runtimebit qualification"
+  },
+  "ranked_hypotheses": [
+    "finitehorizon/residualleaf objective vs terminal tactics",
+    "same-time completedwork/stock use/trajectories",
+    "teacher-bookdistribution/calibration/rarebug unresolved"
+  ],
+  "example": "main/game3 P2 ply25 depth3/+.68573/PV57,66 ->D26 depth4/+2 ->NNUE27 depth5/-2 ->D28goal; not exactregret",
+  "next": "PROPOSALONLY exact2fullhistory positions/static4calls+8complete depth3/4 searches; source/private/wholecostadmission needed, no newjob authorized",
+  "memory_peak": "Originalru_maxrss631016KiB despite AS512MiB, originalkernelVmHWM absent; later separate17-19MiB cannotreplace. Actualfamily peakNOTCERTIFIED.",
+  "costs": {
+    "aggregation_wall_s": 0.05817683006171137,
+    "selected_window_wall_s": 0.01455546892248094,
+    "stock_disaggregation_wall_s": 0.01427952095400542,
+    "old_equality_assert_failures": "preserved; onlyvalueSTM f32bits normalized, otherfields exact",
+    "tiny_PID_census": "unrecorded, directwait retained"
+  },
+  "source_phase_1MiB_held": true,
+  "owned_allocated_before_binding_B": 286720,
+  "main_handoff": {
+    "old332_128KiBupper": "held unchanged; first rootforecast128KiB check refused beforewrites",
+    "new_Root_phase_inclusive_B": 262144,
+    "within_existing_Root8MiB": true,
+    "new_parent_grant_B": 0
+  },
+  "central_models_native_Torch_ORT_Cargo_newgames": 0,
+  "preserved": "eightcorrelatedfamilies/notIID/no universalDsuperiority/equaldepthcounterfactual/pernodecausality/rarebugexclusion; defaults/pause323/seals/assets/failedfees/UNKNOWN held"
+}
