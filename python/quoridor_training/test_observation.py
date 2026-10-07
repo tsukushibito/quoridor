@@ -1,5 +1,7 @@
 """Trainer observation, interruption and independent sampler contracts."""
 
+import csv
+from .sampling import ReflectionBatches, ConvergenceObservations, update_steps
 import json
 import gzip
 import os
@@ -7,14 +9,174 @@ from pathlib import Path
 import tempfile
 import unittest
 from unittest.mock import patch
-
 import numpy as np
-
 from .common import resolve_config
 from .sampling import diagnostic_indices, exposure, observation_steps, EarlyStopping
 
 
 class ObservationContracts(unittest.TestCase):
+    def test_visit_archive_range_and_irregular_indices_preserve_exact_int64_counts(self):
+        from .train import write_sampling_counts
+
+        counts = np.asarray([0, 149, 150, 2**40, 149, 0], dtype=np.int64)
+        attempted = counts + np.asarray([0, 1, 0, 1, 0, 0], dtype=np.int64)
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "counts.npz"
+            for indices in [np.asarray([1, 2, 3, 4]), np.asarray([1, 3, 4])]:
+                encoding = write_sampling_counts(path, indices, counts, attempted)
+                with np.load(path, allow_pickle=False) as archive:
+                    self.assertEqual(str(archive["schema"]), "quoridor-visit-counts-v2")
+                    restored = (
+                        np.arange(*archive["training_index_range"])
+                        if encoding == "range"
+                        else archive["training_indices"]
+                    )
+                    np.testing.assert_array_equal(restored, indices)
+                    np.testing.assert_array_equal(archive["row_counts"], counts)
+                    np.testing.assert_array_equal(archive["attempted_row_counts"], attempted)
+                    self.assertEqual(archive["row_counts"].dtype, np.dtype("int64"))
+            preserved = path.read_bytes()
+            with patch(
+                "quoridor_training.train.np.savez_compressed", side_effect=OSError("fixture")
+            ):
+                with self.assertRaisesRegex(OSError, "fixture"):
+                    write_sampling_counts(path, indices, counts, attempted)
+            self.assertEqual(path.read_bytes(), preserved)
+            self.assertFalse(path.with_suffix(".npz.tmp").exists())
+
+    def test_curve_stream_keeps_every_observation_and_preserves_prefix_on_encoding_failure(self):
+        from .train import append_curve_record
+
+        records = [
+            {
+                "step": step,
+                "kind": "fixed_diagnostic",
+                "used_for_selection": False,
+                "validation": {"target_mse": np.float64(0.4 + step / 10000)},
+            }
+            for step in range(1000)
+        ]
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "diagnostic-curves.jsonl.gz"
+            for record in records:
+                append_curve_record(path, record)
+            with gzip.open(path, "rt") as stream:
+                self.assertEqual([json.loads(line) for line in stream], records)
+            preserved = path.read_bytes()
+            with patch("quoridor_training.train.stream_json", side_effect=OSError("fixture")):
+                with self.assertRaisesRegex(OSError, "fixture"):
+                    append_curve_record(path, {"step": 1001})
+            self.assertEqual(path.read_bytes(), preserved)
+            self.assertFalse(path.with_suffix("").exists())
+
+    def test_fixed_initial_weight_binding_rejects_a_different_or_missing_identity(self):
+        from .cache import sha
+        from .train import verify_initial_binding
+
+        with tempfile.TemporaryDirectory() as temporary:
+            weights = Path(temporary) / "weights.f32"
+            weights.write_bytes(b"fixed-byte-fixture")
+            binding = {"initial_weights_sha": sha(weights)}
+            verify_initial_binding(binding, weights)
+            weights.write_bytes(b"different-byte-fixture")
+            with self.assertRaisesRegex(ValueError, "fixed qualified initialization"):
+                verify_initial_binding(binding, weights)
+            with self.assertRaisesRegex(ValueError, "fixed qualified initialization"):
+                verify_initial_binding({}, weights)
+
+    def test_diagnostic_csv_has_explicit_original_measurement_scopes(self):
+        from .train import _curve_csv
+
+        metrics = {"target_mse": 0.4, "target_game_equal_mse": 0.5, "rows": 3}
+        point = {
+            "step": 1,
+            "kind": "fixed_diagnostic",
+            "used_for_selection": False,
+            "scope": "fixed_target_blind_subset",
+            "train": metrics,
+            "validation": metrics,
+        }
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "curves.csv"
+            _curve_csv([point], path)
+            with path.open() as stream:
+                row = next(csv.DictReader(stream))
+            self.assertEqual(row["train_scope"], "fixed_diagnostic_subset")
+            self.assertEqual(row["validation_scope"], "fixed_diagnostic_subset")
+            self.assertEqual(row["used_for_selection"], "False")
+            self.assertEqual(row["kind"], "fixed_diagnostic")
+            self.assertEqual(row["validation_rows"], "3")
+            _curve_csv([{**point, "step": 2}], path, append=True)
+            with path.open() as stream:
+                rows = list(csv.DictReader(stream))
+            self.assertEqual([row["step"] for row in rows], ["1", "2"])
+            self.assertEqual(rows[0]["validation_scope"], rows[1]["validation_scope"])
+
+    def test_train_only_reflection_keeps_shuffle_and_original_validation(self):
+        from types import SimpleNamespace
+
+        masks = []
+
+        def batch(indices, mask=None):
+            masks.append(None if mask is None else mask.copy())
+            return np.asarray(indices).copy()
+
+        corpus = SimpleNamespace(compact=True, splits=np.array([0] * 12 + [1] * 3), batch=batch)
+        supply = ReflectionBatches(corpus, 0.5, 20261007)
+        a = np.arange(6)
+        np.testing.assert_array_equal(supply.batch(a, training=True), a)
+        supply.batch([12, 13])
+        supply.batch(np.arange(6, 12), training=True)
+        np.testing.assert_array_equal(
+            np.concatenate([masks[0], masks[2]]), np.random.default_rng(20261007).random(12) < 0.5
+        )
+        self.assertIsNone(masks[1])
+        self.assertEqual(supply.training_seen, 12)
+        with self.assertRaisesRegex(ValueError, "exclude validation"):
+            supply.batch([12], training=True)
+        from .sampling import EpochSampler
+
+        left, right = (EpochSampler(np.arange(12), 6, 42), EpochSampler(np.arange(12), 6, 42))
+        for _ in range(4):
+            order = left.next_batch()
+            supply.batch(order, training=True)
+            np.testing.assert_array_equal(order, right.next_batch())
+
+    def test_unbounded_updates_have_no_hidden_horizon(self):
+        iterator = update_steps(None)
+        self.assertEqual([next(iterator) for _ in range(5)], [1, 2, 3, 4, 5])
+        self.assertEqual(list(update_steps(3)), [1, 2, 3])
+
+    def test_unbounded_config_uses_null_caps_and_scientific_stopping(self):
+        base = [
+            "training.steps=null",
+            "limits.samples=null",
+            "limits.seconds=null",
+            'evaluation.monitor="row"',
+            'evaluation.early_stopping_unit="epoch"',
+            "evaluation.full_train=false",
+        ]
+        resolved = resolve_config(overrides=base)
+        self.assertIsNone(resolved["training"]["steps"])
+        with self.assertRaisesRegex(ValueError, "scientific epoch"):
+            resolve_config(overrides=base + ["evaluation.early_stopping_patience=0"])
+        with self.assertRaisesRegex(ValueError, "finite update horizon"):
+            resolve_config(overrides=base + ['training.scheduler="cosine"'])
+        with self.assertRaisesRegex(ValueError, "separate fixed seed"):
+            resolve_config(
+                overrides=base
+                + ["training.reflection_probability=0.5", "training.reflection_seed=19080311"]
+            )
+
+    def test_convergence_plan_does_not_select_dense_diagnostics_or_have_horizon(self):
+        plan = ConvergenceObservations(100003, 1250, 5)
+        self.assertEqual(plan.at(1, 128), (False, True, False))
+        self.assertEqual(plan.at(25, 3200), (False, True, False))
+        self.assertEqual(plan.at(782, 100003), (True, True, True))
+        self.assertEqual(plan.at(1564, 200006), (True, True, False))
+        self.assertEqual(plan.at(1000000, 100003 * 1278), (True, True, False))
+        self.assertEqual(plan.at(2500, 319999), (False, True, False))
+
     def test_target_blind_stable_subset_does_not_use_numpy_rng(self):
         rows = [{"id": str(i), "z": i % 2} for i in range(12)]
         state = np.random.get_state()
@@ -30,7 +192,7 @@ class ObservationContracts(unittest.TestCase):
     def test_dense_points_epoch_ends_and_explicit_override(self):
         points = observation_steps(400, 25, 14803, 128, "epoch")
         self.assertTrue({0, 1, 2, 5, 10, 20, 116, 232, 348, 400} <= points)
-        self.assertLessEqual(max(b - a for a, b in zip(sorted(points), sorted(points)[1:])), 25)
+        self.assertLessEqual(max((b - a for a, b in zip(sorted(points), sorted(points)[1:]))), 25)
         self.assertEqual(observation_steps(40, 25, 10, 3, "epoch", [0, 40]), {0, 40})
 
     def test_attempted_tail_is_not_completed_exposure(self):
@@ -82,7 +244,7 @@ class LiveTrainerObservation(unittest.TestCase):
         self.rows = [
             {
                 "id": str(i),
-                "group": ("t" + str(i % 2) if i < 5 else "v" + str(i % 2)),
+                "group": "t" + str(i % 2) if i < 5 else "v" + str(i % 2),
                 "split": "train" if i < 5 else "validation",
                 "primary_eligible": True,
                 "teacher_type": "native_terminal_outcome",
@@ -102,14 +264,14 @@ class LiveTrainerObservation(unittest.TestCase):
                 return (self[int(i)] for i in indices)
 
         def batch(indices):
-            return x[indices].copy(), d[indices].copy(), labels[indices].copy()
+            return (x[indices].copy(), d[indices].copy(), labels[indices].copy())
 
         def chunks(indices=None, size=4096):
             if indices is None:
                 indices = np.arange(len(self.rows))
             for first in range(0, len(indices), size):
                 sub = indices[first : first + size]
-                yield sub, batch(sub)
+                yield (sub, batch(sub))
 
         fixture = SimpleNamespace(
             binding={"dataset_sha": "synthetic-observation-input-v1"},
@@ -143,7 +305,7 @@ class LiveTrainerObservation(unittest.TestCase):
                 "hidden_width": 32,
             },
             "training": {"steps": 3, "batch_size": 3, "target": "z", "sampling": "epoch"},
-            "optimizer": {"lr": 1e-4},
+            "optimizer": {"lr": 0.0001},
             "evaluation": {
                 "checkpoints": [0, 1, 2, 3],
                 "diagnostic_rows": 2,
@@ -156,7 +318,7 @@ class LiveTrainerObservation(unittest.TestCase):
         }
         p = self.root / (name + ".json")
         p.write_text(json.dumps(cfg))
-        return p, cfg
+        return (p, cfg)
 
     def build_counted(self, *args):
         model = self.original_build(*args)
@@ -175,7 +337,7 @@ class LiveTrainerObservation(unittest.TestCase):
         output = self.root / name
         with patch.object(self.trainer, "build_model", side_effect=self.build_counted):
             result = self.trainer.train("synthetic-only", output, config)
-        return output, result
+        return (output, result)
 
     def test_live_complete_tail_selected_and_whole_exposure(self):
         out, result = self.run_train("normal")
@@ -185,8 +347,8 @@ class LiveTrainerObservation(unittest.TestCase):
         self.assertEqual(sampling["partial_epoch_fraction"], 0.6)
         self.assertEqual(sampling["optimizer_steps"], 3)
         self.assertEqual(sum(sampling["row_counts"][5:]), 0)
-        curve = json.loads((out / "curves.json").read_text())
-        chosen = next(p for p in curve if p["step"] == result["best_step"])
+        curve = [json.loads(line) for line in gzip.open(out / "curves.jsonl.gz", "rt")]
+        chosen = next((p for p in curve if p["step"] == result["best_step"]))
         self.assertEqual(result["selected_exposure"]["training_seen"], chosen["training_seen"])
         self.assertEqual(result["training_seen"], 8)
         records = [
@@ -203,7 +365,7 @@ class LiveTrainerObservation(unittest.TestCase):
         p, cfg = self.config("budget")
         cfg["evaluation"]["checkpoints"] = [0, 3]
         cfg["evaluation"]["diagnostic_rows"] = 0
-        cfg["limits"]["samples"] = 11  # initial8 + successful batch3; tail cannot enter.
+        cfg["limits"]["samples"] = 11
         p.write_text(json.dumps(cfg))
         self.run_train("budget", p)
         out = self.root / "budget"
@@ -252,7 +414,6 @@ class LiveTrainerObservation(unittest.TestCase):
         cfg["evaluation"]["diagnostic_rows"] = 0
         p.write_text(json.dumps(cfg))
         quiet, _ = self.run_train("quiet", p)
-        # Same full selectors, extra fixed diagnostics consume no sampler/model RNG.
         q, cfg = self.config("verbose")
         cfg["evaluation"]["checkpoints"] = [0, 3]
         q.write_text(json.dumps(cfg))
@@ -267,7 +428,9 @@ class LiveTrainerObservation(unittest.TestCase):
         self.assertEqual(left["row_counts"], right["row_counts"])
         self.assertEqual(self.nn, 24 + 32)
         self.assertEqual(
-            json.loads((verbose / "diagnostic-curves.json").read_text())[0]["used_for_selection"],
+            [json.loads(line) for line in gzip.open(verbose / "diagnostic-curves.jsonl.gz", "rt")][
+                0
+            ]["used_for_selection"],
             False,
         )
 

@@ -47,15 +47,10 @@ def point(step, diagnostic=False):
 
 
 def save_records(module, root, records):
-    # Each target's current format, not a production compatibility reader.
-    if hasattr(module, "gzip"):
-        path = root / "observations.jsonl.gz"
-        with gzip.open(path, "wt") as stream:
-            for record in records:
-                stream.write(json.dumps(record) + "\n")
-    else:
-        path = root / "observations.json"
-        path.write_text(json.dumps(records))
+    path = root / "observations.jsonl.gz"
+    with gzip.open(path, "wt") as stream:
+        for record in records:
+            stream.write(json.dumps(record) + "\n")
     return path
 
 
@@ -70,6 +65,7 @@ class ImagePolicyTests(unittest.TestCase):
             and n.name
             in {
                 "write",
+                "_attempt_finalization",
                 "stream_json",
                 "append_curve_record",
                 "write_sampling_counts",
@@ -107,6 +103,7 @@ class ImagePolicyTests(unittest.TestCase):
                 "attempted_step": 0,
                 "batch_records_logged": 0,
                 "compact": True,
+                "packed_supply": None,
                 "unbounded": True,
                 "ix_train": np.array([0, 1]),
                 "sampled_rows": np.array([1, 1, 0]),
@@ -149,11 +146,8 @@ class ImagePolicyTests(unittest.TestCase):
                 ("diagnostic-curves", env["diagnostic_curve"]),
             ]:
                 compressed = output / (name + ".jsonl.gz")
-                if compressed.exists():
-                    with gzip.open(compressed, "rt") as stream:
-                        actual = [json.loads(line) for line in stream]
-                else:
-                    actual = json.loads((output / (name + ".json")).read_text())
+                with gzip.open(compressed, "rt") as stream:
+                    actual = [json.loads(line) for line in stream]
                 self.assertEqual(actual, expected)
                 with (output / (name + ".csv")).open() as stream:
                     CSV = list(csv.DictReader(stream))

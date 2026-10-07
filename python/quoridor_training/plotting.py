@@ -4,6 +4,7 @@ from collections import defaultdict
 from html import escape
 import argparse
 import json
+import gzip
 import math
 from pathlib import Path
 
@@ -90,6 +91,11 @@ def render_learning_curves(
             return metric.get(
                 "constant_game_equal_mse" if field == "target_game_equal_mse" else "constant_mse"
             )
+        direct_key = (
+            "distance_group_equal_mse" if field == "target_game_equal_mse" else "distance_mse"
+        )
+        if direct_key in metric:
+            return metric[direct_key]
         direct = metric.get("distance")
         ref = references.get(metric.get("distance_ref"), {})
         return (direct or ref.get("distance", {})).get(field)
@@ -277,6 +283,7 @@ def render_learning_png(curves, path, *, selected_step=None):
                 [p["train"][field] for p in points],
                 marker=".",
                 linewidth=0.8,
+                linestyle="none" if scope == "full_train" else "-",
                 color=colors.get(scope, "#67778b"),
                 label="Train: " + scope,
             )
@@ -332,7 +339,8 @@ def main():
         parser.error("output extension must match the requested image format")
     if args.references and image_format != "svg":
         parser.error("--references is used by the SVG renderer")
-    records = json.loads(Path(args.curves).read_text())
+    with gzip.open(args.curves, "rt") as stream:
+        records = [json.loads(line) for line in stream]
     if image_format == "svg":
         references = json.loads(Path(args.references).read_text()) if args.references else None
         render_learning_curves(

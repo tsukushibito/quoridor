@@ -462,7 +462,7 @@ def load(path, allow_test=False):
     manifest = Path(path) / "cache.json"
     if (
         manifest.is_file()
-        and json.loads(manifest.read_text()).get("schema") == "quoridor-public-compact-v1"
+        and json.loads(manifest.read_text()).get("schema") == "quoridor-public-geometry-v1"
     ):
         from .compact_cache import CompactCorpus
 

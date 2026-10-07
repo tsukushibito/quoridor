@@ -3,6 +3,7 @@
 from collections import Counter
 import hashlib
 import heapq
+import itertools
 import math
 
 import numpy as np
@@ -46,6 +47,35 @@ class EpochSampler:
     @property
     def partial_epoch_fraction(self):
         return 0.0 if self.cursor == len(self.indices) else self.cursor / len(self.indices)
+
+
+def update_steps(limit):
+    """A true unbounded update iterator when no scientific horizon is specified."""
+    return itertools.count(1) if limit is None else iter(range(1, limit + 1))
+
+
+class ReflectionBatches:
+    """Train-only online reflection, with a generator separate from epoch shuffle."""
+
+    def __init__(self, corpus, probability, seed):
+        if not 0 <= probability <= 1 or (probability and not getattr(corpus, "compact", False)):
+            raise ValueError("online reflection requires a qualified geometry corpus")
+        self.corpus, self.probability = corpus, probability
+        self.generator = np.random.default_rng(seed)
+        self.training_seen, self.reflected_seen = 0, 0
+
+    def batch(self, indices, *, training=False):
+        if not training:
+            return self.corpus.batch(indices)
+        indices = np.asarray(indices, dtype=np.int64)
+        if np.any(self.corpus.splits[indices] != 0):
+            raise ValueError("online training reflection must exclude validation/test")
+        self.training_seen += len(indices)
+        if not self.probability:
+            return self.corpus.batch(indices)
+        mask = self.generator.random(len(indices)) < self.probability
+        self.reflected_seen += int(mask.sum())
+        return self.corpus.batch(indices, mask)
 
 
 def loss_weights(groups, mode):
@@ -100,6 +130,33 @@ def exposure(seen, rows, mode):
         "completed_epochs": seen // rows if mode == "epoch" else None,
         "partial_epoch_fraction": (seen % rows) / rows if mode == "epoch" else None,
     }
+
+
+class ConvergenceObservations:
+    """Result-blind, no horizon: full validation per epoch, dense early diagnostics.
+
+    Diagnostics never select or consume patience. Full train is measured on the
+    first completed epoch and then at the fixed configured epoch interval.
+    """
+
+    def __init__(self, rows, diagnostic_interval=1250, full_train_every_epochs=5):
+        if rows <= 0 or diagnostic_interval <= 0 or full_train_every_epochs < 0:
+            raise ValueError("positive rows/diagnostic interval and nonnegative train interval")
+        self.rows = rows
+        self.diagnostic_interval = diagnostic_interval
+        self.full_train_every_epochs = full_train_every_epochs
+
+    def at(self, step, seen):
+        boundary = seen > 0 and seen % self.rows == 0
+        selector = step == 0 or boundary
+        dense = step in {0, 1, 2, 5, 10, 20} or (0 < step <= 2000 and step % 25 == 0)
+        diagnostic = selector or dense or (step > 2000 and step % self.diagnostic_interval == 0)
+        epoch = seen // self.rows
+        full_train = boundary and (
+            epoch == 1
+            or bool(self.full_train_every_epochs and epoch % self.full_train_every_epochs == 0)
+        )
+        return selector, diagnostic, full_train
 
 
 class EarlyStopping:

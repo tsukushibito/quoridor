@@ -56,7 +56,7 @@ def identity(info):
 
 def alive(member):
     info = process_info(member["pid"])
-    return bool(info and info["state"] != "Z" and identity(info) == member)
+    return bool(info and info["state"] != "Z" and (identity(info) == member))
 
 
 def members(root, known):
@@ -71,7 +71,7 @@ def members(root, known):
     current = process_info(root["pid"])
     group_valid = current is None or identity(current) == root
     for info in processes:
-        if (group_valid and info["group"] == root["pid"]) or identity(info) == root:
+        if group_valid and info["group"] == root["pid"] or identity(info) == root:
             live[info["pid"]] = identity(info)
     changed = True
     while changed:
@@ -98,9 +98,11 @@ def signal_members(owned, sig):
 
 def available_memory():
     value = next(
-        int(line.split()[1]) * 1024
-        for line in Path("/proc/meminfo").read_text().splitlines()
-        if line.startswith("MemAvailable:")
+        (
+            int(line.split()[1]) * 1024
+            for line in Path("/proc/meminfo").read_text().splitlines()
+            if line.startswith("MemAvailable:")
+        )
     )
     cgroup = Path("/sys/fs/cgroup")
     try:
@@ -108,7 +110,7 @@ def available_memory():
         if limit != "max":
             value = min(value, max(0, int(limit) - int((cgroup / "memory.current").read_text())))
     except OSError:
-        pass  # Match native admission when a cgroup v2 memory limit is unavailable.
+        pass
     return value
 
 
@@ -124,10 +126,7 @@ class DeviceMemory:
             ctypes.c_uint,
             ctypes.POINTER(ctypes.c_void_p),
         ]
-        self.library.nvmlDeviceGetMemoryInfo.argtypes = [
-            ctypes.c_void_p,
-            ctypes.POINTER(self.Info),
-        ]
+        self.library.nvmlDeviceGetMemoryInfo.argtypes = [ctypes.c_void_p, ctypes.POINTER(self.Info)]
         self.handle = ctypes.c_void_p()
         if self.library.nvmlInit_v2() or self.library.nvmlDeviceGetHandleByIndex_v2(
             0, ctypes.byref(self.handle)
@@ -155,14 +154,14 @@ class CycleResources:
             raise CycleStopped("cycle resource budget must be positive after host reserve")
 
     def check(self, owned=()):
-        if time.monotonic() >= self.deadline:
+        if self.deadline is not None and time.monotonic() >= self.deadline:
             raise CycleStopped("cycle deadline")
         if self.pause_file and self.pause_file.exists():
             raise CycleStopped("cycle paused")
         if available_memory() < self.reserve:
             raise CycleStopped("cycle host RAM reserve")
         infos = [process_info(os.getpid()), *(process_info(member["pid"]) for member in owned)]
-        rss = sum(info["rss"] for info in infos if info)
+        rss = sum((info["rss"] for info in infos if info))
         if rss > self.memory_limit:
             raise CycleStopped("cycle memory_limit")
         output_bytes = directory_bytes(self.output)
@@ -172,7 +171,7 @@ class CycleResources:
 
 def directory_bytes(root):
     """Sample owned regular-file bytes with one stat; vanished temporaries are absent."""
-    pending, total = [root], 0
+    pending, total = ([root], 0)
     while pending:
         try:
             with os.scandir(pending.pop()) as entries:
@@ -203,7 +202,7 @@ class GPUResources(CycleResources):
     def check(self, owned=()):
         super().check(owned)
         infos = [process_info(os.getpid()), *(process_info(x["pid"]) for x in owned)]
-        rss = sum(x["rss"] for x in infos if x) + self.controller_reserve
+        rss = sum((x["rss"] for x in infos if x)) + self.controller_reserve
         used = self.device.used()
         self.observed["peak_family_RSS_bytes"] = max(self.observed["peak_family_RSS_bytes"], rss)
         self.observed["peak_whole_device_used_bytes"] = max(
@@ -223,7 +222,7 @@ def execute(command, log, deadline, cpu_core=None, resources=None):
     """Always TERM→KILL→wait; retain a bounded tail plus exact cleanup evidence."""
     if resources:
         resources.check()
-    elif time.monotonic() >= deadline:
+    elif deadline is not None and time.monotonic() >= deadline:
         raise CycleStopped("cycle deadline before child launch")
     log = Path(log)
     record_path = log.with_suffix(".process.json")
@@ -236,159 +235,226 @@ def execute(command, log, deadline, cpu_core=None, resources=None):
     }
     tail = bytearray()
     selector = selectors.DefaultSelector()
-    child, root, owned = None, None, []
+    child, root, owned = (None, None, [])
     direct_fd = None
     pipe_open = False
     failure = None
     started = time.monotonic()
-    with log.open("xb") as stream:
+    stream, mask = (None, None)
+    final_errors, handle_closes = ([], [])
+
+    def error_fact(error):
         try:
-            launch_mask = signal.pthread_sigmask(signal.SIG_BLOCK, {signal.SIGINT, signal.SIGTERM})
-            try:
+            message = str(error)
+        except BaseException:
+            message = "<exception stringification failed>"
+        return {"type": type(error).__name__, "message": message}
 
-                def prepare_child():
-                    signal.pthread_sigmask(signal.SIG_SETMASK, launch_mask)
-                    if cpu_core is not None:
-                        os.sched_setaffinity(0, {cpu_core})
+    def final_error_facts():
+        return [{"stage": stage, **error_fact(error)} for stage, error in final_errors]
 
-                child = subprocess.Popen(
-                    command,
-                    stdin=subprocess.DEVNULL,
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.STDOUT,
-                    start_new_session=True,
-                    preexec_fn=prepare_child,
-                )
-                # Popen owns an unreaped child; retain kernel ownership before proc discovery.
-                direct_fd = os.pidfd_open(child.pid)
-                root = identity(process_info(child.pid))
-                if root is None:
-                    raise CycleStopped("cannot record child identity")
-                owned = [root]
-                record.update(status="running", child=root)
-                save_record(record_path, record)
-                os.set_blocking(child.stdout.fileno(), False)
-                selector.register(child.stdout, selectors.EVENT_READ)
-                pipe_open = True
-
-                def drain(timeout=0):
-                    nonlocal pipe_open
-                    for key, _event in selector.select(timeout):
-                        data = os.read(key.fd, 65536)
-                        if not data:
-                            selector.unregister(key.fileobj)
-                            pipe_open = False
-                            continue
-                        record["log_bytes_seen"] += len(data)
-                        tail.extend(data)
-                        del tail[: max(0, len(tail) - LOG_MAX_BYTES)]
-
-            finally:
-                signal.pthread_sigmask(signal.SIG_SETMASK, launch_mask)
-
-            next_log = 0
-            while child.poll() is None:
-                owned = members(root, owned)
-                if resources:
-                    resources.check(owned)
-                elif time.monotonic() >= deadline:
-                    raise CycleStopped("cycle child deadline: " + str(command[0]))
-                drain(POLL_SECONDS)
-                if time.monotonic() >= next_log:
-                    stream.seek(0)
-                    stream.write(tail)
-                    stream.truncate()
-                    stream.flush()
-                    next_log = time.monotonic() + 0.25
-            if child.returncode:
-                raise CycleStopped(f"cycle child failed: {command}: {child.returncode}")
-            record["status"] = "complete"
+    def attempt_final(stage, action):
+        if stage.endswith("_close"):
+            handle_closes.append(stage)
+        try:
+            action()
         except BaseException as error:
-            failure = error
-            record.update(status="failed", error=str(error), reason=type(error).__name__)
+            final_errors.append((stage, error))
+
+    try:
+        stream = log.open("xb")
+        launch_mask = signal.pthread_sigmask(signal.SIG_BLOCK, {signal.SIGINT, signal.SIGTERM})
+        try:
+
+            def prepare_child():
+                signal.pthread_sigmask(signal.SIG_SETMASK, launch_mask)
+                if cpu_core is not None:
+                    os.sched_setaffinity(0, {cpu_core})
+
+            child = subprocess.Popen(
+                command,
+                stdin=subprocess.DEVNULL,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+                start_new_session=True,
+                preexec_fn=prepare_child,
+            )
+            direct_fd = os.pidfd_open(child.pid)
+            root = identity(process_info(child.pid))
+            if root is None:
+                raise CycleStopped("cannot record child identity")
+            owned = [root]
+            record.update(status="running", child=root)
+            save_record(record_path, record)
+            os.set_blocking(child.stdout.fileno(), False)
+            selector.register(child.stdout, selectors.EVENT_READ)
+            pipe_open = True
+
+            def drain(timeout=0):
+                nonlocal pipe_open
+                for key, _event in selector.select(timeout):
+                    data = os.read(key.fd, 65536)
+                    if not data:
+                        selector.unregister(key.fileobj)
+                        pipe_open = False
+                        continue
+                    record["log_bytes_seen"] += len(data)
+                    tail.extend(data)
+                    del tail[: max(0, len(tail) - LOG_MAX_BYTES)]
         finally:
-            # Further cancellation must not interrupt child ownership cleanup/evidence.
+            signal.pthread_sigmask(signal.SIG_SETMASK, launch_mask)
+        next_log = 0
+        while child.poll() is None:
+            owned = members(root, owned)
+            if resources:
+                resources.check(owned)
+            elif deadline is not None and time.monotonic() >= deadline:
+                raise CycleStopped("cycle child deadline: " + str(command[0]))
+            drain(POLL_SECONDS)
+            if time.monotonic() >= next_log:
+                stream.seek(0)
+                stream.write(tail)
+                stream.truncate()
+                stream.flush()
+                next_log = time.monotonic() + 0.25
+        if child.returncode:
+            raise CycleStopped(f"cycle child failed: {command}: {child.returncode}")
+        record["status"] = "complete"
+    except BaseException as error:
+        failure = error
+        record.update(status="failed", error=str(error), reason=type(error).__name__)
+    finally:
+        try:
             mask = signal.pthread_sigmask(signal.SIG_BLOCK, {signal.SIGINT, signal.SIGTERM})
-            try:
+        except BaseException as error:
+            final_errors.append(("signal_mask_block", error))
+        try:
 
-                def stop_direct(sig):
-                    try:
-                        if direct_fd is not None:
-                            signal.pidfd_send_signal(direct_fd, sig)
-                        else:
-                            child.send_signal(sig)
-                    except ProcessLookupError:
-                        pass
+            def stop_direct(sig):
+                try:
+                    if direct_fd is not None:
+                        signal.pidfd_send_signal(direct_fd, sig)
+                    else:
+                        child.send_signal(sig)
+                except ProcessLookupError:
+                    pass
 
-                if child:
-                    owned = members(root, owned) if root else []
-                    direct_running = child.poll() is None
-                    if owned or direct_running:
-                        if record["status"] == "complete":
-                            failure = CycleStopped("cycle child left running descendants")
-                            record.update(status="failed", error=str(failure))
-                        signal_members(owned, signal.SIGTERM)
-                        if direct_running:
-                            stop_direct(signal.SIGTERM)
-                        until = time.monotonic() + TERM_SECONDS
-                        while time.monotonic() < until and (
-                            child.poll() is None or any(alive(member) for member in owned)
-                        ):
-                            owned = members(root, owned) if root else []
-                            if pipe_open:
-                                drain(POLL_SECONDS)
-                            else:
-                                time.sleep(POLL_SECONDS)
-                        owned = members(root, owned) if root else []
-                        signal_members(owned, signal.SIGKILL)
-                        if child.poll() is None:
-                            stop_direct(signal.SIGKILL)
-                    try:
-                        child.wait(timeout=3)
-                    except subprocess.TimeoutExpired:
-                        record["wait_error"] = "cycle child wait failed"
-                        if failure is None:
-                            failure = CycleStopped("cycle child wait failed")
-                    until = time.monotonic() + 1
+            if child:
+                owned = members(root, owned) if root else []
+                direct_running = child.poll() is None
+                if owned or direct_running:
+                    if record["status"] == "complete":
+                        failure = CycleStopped("cycle child left running descendants")
+                        record.update(status="failed", error=str(failure))
+                    signal_members(owned, signal.SIGTERM)
+                    if direct_running:
+                        stop_direct(signal.SIGTERM)
+                    until = time.monotonic() + TERM_SECONDS
                     while time.monotonic() < until and (
-                        pipe_open or any(alive(member) for member in owned)
+                        child.poll() is None or any((alive(member) for member in owned))
                     ):
+                        owned = members(root, owned) if root else []
                         if pipe_open:
                             drain(POLL_SECONDS)
                         else:
                             time.sleep(POLL_SECONDS)
-                    record.update(
-                        exit_code=child.returncode,
-                        remaining=[member for member in owned if alive(member)],
-                    )
-                direct_reaped = child is None or child.returncode is not None
-                record.update(
-                    direct_child_reaped=direct_reaped,
-                    descendant_visibility="unavailable" if child and root is None else "observed",
-                    cleanup_complete=direct_reaped
-                    and (child is None or root is not None)
-                    and not record.get("remaining")
-                    and not pipe_open,
-                    log_bytes_retained=len(tail),
-                    wall_seconds=time.monotonic() - started,
-                )
-                if not record["cleanup_complete"]:
-                    record["cleanup_error"] = "cycle cleanup incomplete"
+                    owned = members(root, owned) if root else []
+                    signal_members(owned, signal.SIGKILL)
+                    if child.poll() is None:
+                        stop_direct(signal.SIGKILL)
+                try:
+                    child.wait(timeout=3)
+                except subprocess.TimeoutExpired:
+                    record["wait_error"] = "cycle child wait failed"
                     if failure is None:
-                        failure = CycleStopped("cycle cleanup incomplete")
-                if failure:
-                    record.update(status="failed", error=str(failure))
-                stream.seek(0)
-                stream.write(tail)
-                stream.truncate()
-                save_record(record_path, record)
-                selector.close()
-                if child and child.stdout:
-                    child.stdout.close()
-                if direct_fd is not None:
-                    os.close(direct_fd)
-            finally:
-                signal.pthread_sigmask(signal.SIG_SETMASK, mask)
+                        failure = CycleStopped("cycle child wait failed")
+                until = time.monotonic() + 1
+                while time.monotonic() < until and (
+                    pipe_open or any((alive(member) for member in owned))
+                ):
+                    if pipe_open:
+                        drain(POLL_SECONDS)
+                    else:
+                        time.sleep(POLL_SECONDS)
+                record.update(
+                    exit_code=child.returncode,
+                    remaining=[member for member in owned if alive(member)],
+                )
+            direct_reaped = child is None or child.returncode is not None
+            record.update(
+                direct_child_reaped=direct_reaped,
+                descendant_visibility="unavailable" if child and root is None else "observed",
+                cleanup_complete=direct_reaped
+                and (child is None or root is not None)
+                and (not record.get("remaining"))
+                and (not pipe_open),
+                log_bytes_retained=len(tail),
+                wall_seconds=time.monotonic() - started,
+            )
+            if not record["cleanup_complete"]:
+                record["cleanup_error"] = "cycle cleanup incomplete"
+                if failure is None:
+                    failure = CycleStopped("cycle cleanup incomplete")
+            if failure:
+                record.update(status="failed", error=str(failure))
+        except BaseException as error:
+            final_errors.append(("process_cleanup", error))
+        finally:
+            if stream is not None:
+                for stage, action in (
+                    ("log_seek", lambda: stream.seek(0)),
+                    ("log_write", lambda: stream.write(tail)),
+                    ("log_truncate", stream.truncate),
+                    ("log_flush", stream.flush),
+                ):
+                    attempt_final(stage, action)
+            attempt_final("selector_close", selector.close)
+            if child and child.stdout:
+                attempt_final("pipe_close", child.stdout.close)
+            if direct_fd is not None:
+                attempt_final("pidfd_close", lambda: os.close(direct_fd))
+            if stream is not None:
+                attempt_final("log_close", stream.close)
+            record["handle_closes_attempted"] = handle_closes
+            record["primary_error"] = error_fact(failure) if failure else None
+            record["process_cleanup_complete"] = record.get("cleanup_complete", False)
+            record["handle_closes_complete"] = not any(
+                (stage.endswith("_close") for stage, _ in final_errors)
+            )
+            record["cleanup_complete"] = (
+                record["process_cleanup_complete"] and record["handle_closes_complete"]
+            )
+            if final_errors:
+                record.update(status="failed", finalization_failed_stage=final_errors[0][0])
+            record["signal_mask_restoration"] = "pending"
+            if stream is not None:
+                record["final_record_persist"] = "attempted"
+                record["finalization_errors"] = final_error_facts()
+                attempt_final("receipt_persist", lambda: save_record(record_path, record))
+                record["final_record_persist"] = (
+                    "failed_or_partial_UNKNOWN"
+                    if any((stage == "receipt_persist" for stage, _ in final_errors))
+                    else "completed"
+                )
+            else:
+                record["final_record_persist"] = "unavailable; new log ownership not acquired"
+            if mask is not None:
+                attempt_final(
+                    "signal_mask_restore", lambda: signal.pthread_sigmask(signal.SIG_SETMASK, mask)
+                )
+                record["signal_mask_restoration"] = (
+                    "failed_UNKNOWN"
+                    if any((stage == "signal_mask_restore" for stage, _ in final_errors))
+                    else "completed"
+                )
+            else:
+                record["signal_mask_restoration"] = "unavailable; block did not return"
+    if final_errors:
+        record.update(status="failed", finalization_errors=final_error_facts())
+        errors = ([failure] if failure is not None else []) + [error for _, error in final_errors]
+        group = BaseExceptionGroup("cycle primary/finalization failures", errors)
+        group.add_note("nonrecursive cycle fallback facts: " + json.dumps(record, allow_nan=False))
+        raise group
     if failure:
         raise failure
     if resources:

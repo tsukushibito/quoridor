@@ -16,13 +16,153 @@ import os
 from pathlib import Path
 import numpy as np
 from .cache import load, sha
-
 from .common import (
     resolve_config,
     selected_teacher_types,
     validate_target_tensor,
     MeasurementAccumulator,
 )
+import io, sys
+
+
+def _exception_record(error):
+    result = {"type": type(error).__name__, "message": str(error)}
+    if hasattr(error, "__notes__"):
+        result["notes"] = error.__notes__
+    if isinstance(error, BaseExceptionGroup):
+        result["errors"] = [_exception_record(part) for part in error.exceptions]
+    return result
+
+
+def write_sampling_counts(path, indices, row_counts, attempted_row_counts):
+    """Store visits exactly; contiguous train indices need only two int64 bounds."""
+    indices = np.asarray(indices, dtype=np.int64)
+    start = int(indices[0]) if len(indices) else 0
+    contiguous = all(
+        (
+            np.array_equal(
+                indices[first : first + 4096],
+                np.arange(start + first, start + min(first + 4096, len(indices))),
+            )
+            for first in range(0, len(indices), 4096)
+        )
+    )
+    encoding = "range" if contiguous else "explicit"
+    payload = {
+        "schema": np.asarray("quoridor-visit-counts-v2"),
+        "index_encoding": np.asarray(encoding),
+        "row_counts": row_counts,
+        "attempted_row_counts": attempted_row_counts,
+    }
+    payload["training_index_range" if contiguous else "training_indices"] = (
+        np.asarray([start, start + len(indices)], dtype=np.int64) if contiguous else indices
+    )
+    path = Path(path)
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    try:
+        with temporary.open("wb") as stream:
+            np.savez_compressed(stream, **payload)
+        temporary.replace(path)
+    finally:
+        temporary.unlink(missing_ok=True)
+    return encoding
+
+
+def verify_initial_binding(expected, weights_path):
+    """Reject a different initialization before any selector or optimizer forward."""
+    if sha(weights_path) != expected.get("initial_weights_sha"):
+        raise ValueError("initial native weights differ from fixed qualified initialization")
+
+
+def prepare_statistics(cache, output):
+    """Fix original-train distance moments and row constant without Torch or test labels."""
+    started = time.monotonic()
+    corpus = load(cache)
+    if (
+        not getattr(corpus, "compact", False)
+        or corpus.manifest.get("dataset_revision") != "original-full-v1"
+    ):
+        raise ValueError("statistics requires qualified original-full-v1 compact observations")
+    indices = np.flatnonzero((corpus.splits == 0) & corpus.eligible)
+    if not len(indices):
+        raise ValueError("statistics requires nonempty training observations")
+    statistics, fitted = training_statistics(corpus, indices, 1)
+    constant = float(np.mean(corpus.labels[indices, 1], dtype=np.float64))
+    binding = {
+        "cache_manifest_sha": corpus.binding["dataset_sha"],
+        "partition": "train",
+        "rows": len(indices),
+        "target": "decisive STM z",
+        "weighting": "row",
+        "augmentation": "original only; scale fixed before online reflection",
+        "test_opened": False,
+    }
+    output = Path(output)
+    output.mkdir(parents=True)
+    corpus.verify_binding()
+    write(output / "train-only-scale.json", {**statistics, "binding": binding})
+    write(output / "train-only-constant.json", {"row_mean_constant": constant, "binding": binding})
+    result = {
+        **binding,
+        "scale_sha": sha(output / "train-only-scale.json"),
+        "constant_sha": sha(output / "train-only-constant.json"),
+        "least_squares_distance_diagnostic": fitted,
+        "model_distance": {"a": 0, "b": 8},
+        "wall_seconds": time.monotonic() - started,
+        "model_forward_rows": 0,
+    }
+    write(output / "result.json", result)
+    return result
+
+
+def _finalize_training(output, actions, primary_error, facts, *, prior_failures=()):
+    failures = list(prior_failures)
+    stages = [{"stage": "primary_stop_record", "status": "FAILED"} for _ in prior_failures]
+    for stage, action in actions:
+        before = len(failures)
+        _attempt_finalization(stage, action, failures)
+        stages.append(
+            {"stage": stage, "status": "FAILED" if len(failures) > before else "COMPLETED"}
+        )
+    if not failures:
+        return
+    receipt = {
+        "primary_exception": None if primary_error is None else _exception_record(primary_error),
+        "original_stop_and_position": facts(),
+        "stages": stages,
+        "finalization_errors": [_exception_record(error) for error in failures],
+        "failed_checkpoint_completeness": "UNKNOWN if its stage failed; position is last known successful save",
+    }
+    _attempt_finalization(
+        "finalization_error_receipt",
+        lambda: write(output / "finalization-errors.json", receipt),
+        failures,
+    )
+    errors = ([primary_error] if primary_error is not None else []) + failures
+    group = BaseExceptionGroup("training primary/finalization failures", errors)
+    group.add_note(json.dumps(receipt, allow_nan=False))
+    raise group from None
+
+
+def append_curve_record(path, record):
+    """Append one complete gzip member; existing observations are never rewritten."""
+    buffer = io.BytesIO()
+    with gzip.GzipFile(fileobj=buffer, mode="wb", compresslevel=6, mtime=0) as archive:
+        with io.TextIOWrapper(archive, encoding="utf-8") as stream:
+            stream_json(stream, record)
+            stream.write("\n")
+    with Path(path).open("ab") as stream:
+        stream.write(buffer.getbuffer())
+
+
+def _attempt_finalization(stage, action, failures):
+    """Attempt each owed independent action, retaining every stage error."""
+    try:
+        return action()
+    except BaseException as error:
+        error.add_note("training finalization stage: " + stage)
+        failures.append(error)
+        return None
 
 
 def write(path, value):
@@ -68,7 +208,7 @@ def build_model(config, statistics):
 
 def export(model, config, statistics, distance_fit, path):
     path = Path(path)
-    path.mkdir()
+    path.mkdir(exist_ok=True)
     ordered = [
         model.ft.weight,
         model.ft.bias,
@@ -131,14 +271,30 @@ def export(model, config, statistics, distance_fit, path):
     return path / "manifest.json"
 
 
-def train(cache, output, config_path=None, steps=None, *, scale_path=None, input_binding=None):
+def train(
+    cache,
+    output,
+    config_path=None,
+    steps=None,
+    *,
+    scale_path=None,
+    input_binding=None,
+    supply_workers=None,
+):
     start = time.monotonic()
     os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
     import torch
 
-    cfg = resolve_config(config_path, (() if steps is None else (f"training.steps={steps}",)))
+    cfg = resolve_config(config_path, () if steps is None else (f"training.steps={steps}",))
+    if supply_workers is None:
+        supply_workers = cfg["training"]["supply_workers"]
+    if type(supply_workers) is not int or supply_workers not in (0, 2):
+        raise ValueError("supply workers must be 0 (synchronous) or 2 (qualified prefetch)")
+    if input_binding and supply_workers != cfg["training"]["supply_workers"]:
+        raise ValueError("bound input requires the configured supply worker mode")
+    cfg["training"]["supply_workers"] = supply_workers
     if config_path is None:
-        cfg["optimizer"]["lr"] = 1e-4
+        cfg["optimizer"]["lr"] = 0.0001
     torch.set_num_threads(cfg["training"]["threads"])
     if torch.get_num_interop_threads() != cfg["training"]["threads"]:
         torch.set_num_interop_threads(cfg["training"]["threads"])
@@ -152,7 +308,7 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None, input
         torch.cuda.set_per_process_memory_fraction(min(5 * 1024**3 / device_total, 1.0))
         torch.cuda.manual_seed_all(cfg["training"]["seed"])
     corpus = load(cache)
-    binding, rows, labels = corpus.binding, corpus.rows, corpus.labels
+    binding, rows, labels = (corpus.binding, corpus.rows, corpus.labels)
     target = cfg["training"]["target"]
     column = {"rootmean": 0, "z": 1}[target]
     compact = getattr(corpus, "compact", False)
@@ -160,16 +316,27 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None, input
         target != "z"
         or cfg["training"]["sampling"] != "epoch"
         or cfg["training"]["loss_weighting"] != "row"
-        or cfg["evaluation"]["monitor"] != "row"
+        or (cfg["evaluation"]["monitor"] != "row")
     ):
         raise ValueError(
             "public compact corpus requires decisive z / row epoch objective and row monitor"
         )
     if compact and (
         corpus.manifest.get("original_only") is not True
-        or corpus.manifest.get("dataset_revision") != "original-only-v2"
+        or corpus.manifest.get("dataset_revision") != "original-full-v1"
     ):
-        raise ValueError("public fit requires adopted original-only-v2 observations")
+        raise ValueError("public fit requires adopted original-full-v1 observations")
+    if compact and (
+        cfg["model"]["architecture"] != "distance_residual"
+        or cfg["model"]["transformer_width"] != 32
+        or cfg["model"]["hidden_width"] != 32
+        or (cfg["model"]["dropout"] != 0)
+        or (cfg["model"]["distance_a"] != 0)
+        or (cfg["model"]["distance_b"] != 8)
+        or (cfg["optimizer"]["name"] != "adam")
+        or (cfg["optimizer"]["weight_decay"] != 0)
+    ):
+        raise ValueError("public full fit requires fixed QF1+D FT32/H32/dropout0/a0b8 Adam/wd0")
     teacher_types = {"external_outcome"} if compact else selected_teacher_types(rows, target)
     if not compact:
         validate_target_tensor(rows, labels[:, column], target)
@@ -181,11 +348,11 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None, input
         raise ValueError("nonempty eligible train and unexposed validation required")
     if compact:
         family_codes = np.unique(corpus.groups[ix_train])
-        group_indices, families = [], []
+        group_indices, families = ([], [])
         constant = float(np.mean(labels[ix_train, column], dtype=np.float64))
     else:
         codes = corpus.groups[ix_train]
-        family_codes, seen_codes = [], set()
+        family_codes, seen_codes = ([], set())
         for code in codes:
             if int(code) not in seen_codes:
                 family_codes.append(int(code))
@@ -209,14 +376,17 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None, input
     if input_binding is not None:
         expected = json.loads(Path(input_binding).read_text())
         expected_scale = json.loads(Path(expected["scale_artifact"]).read_text())
-        constant_path = Path(expected["scale_artifact"]).with_name("train-only-constant-v2.json")
+        constant_path = Path(expected["constant_artifact"])
         expected_constant = json.loads(constant_path.read_text())
         if (
             binding["dataset_sha"] != expected["cache_manifest_sha"]
-            or statistics["mu_f32"] != expected_scale["mu_f32"]
-            or statistics["sigma_f32"] != expected_scale["sigma_f32"]
-            or constant != expected_constant["row_mean_constant"]
-            or scale_path is not None
+            or sha(expected["scale_artifact"]) != expected["scale_artifact_sha"]
+            or sha(constant_path) != expected["constant_artifact_sha"]
+            or (config_path is not None and sha(config_path) != expected["fit_config_sha"])
+            or (statistics["mu_f32"] != expected_scale["mu_f32"])
+            or (statistics["sigma_f32"] != expected_scale["sigma_f32"])
+            or (constant != expected_constant["row_mean_constant"])
+            or (scale_path is not None)
         ):
             raise ValueError("fit train-only statistics/constant/input binding mismatch")
     if scale_path is not None:
@@ -235,23 +405,24 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None, input
         if free <= 2 * 1024**3:
             raise RuntimeError("CUDA host/display reserve leaves no training window")
     generator = torch.Generator().manual_seed(cfg["training"]["seed"] + 1)
-    optimizers = {
-        "adam": torch.optim.Adam,
-        "adamw": torch.optim.AdamW,
-        "sgd": torch.optim.SGD,
-    }
-    opt_kwargs = {
-        "lr": cfg["optimizer"]["lr"],
-        "weight_decay": cfg["optimizer"]["weight_decay"],
-    }
+    optimizers = {"adam": torch.optim.Adam, "adamw": torch.optim.AdamW, "sgd": torch.optim.SGD}
+    opt_kwargs = {"lr": cfg["optimizer"]["lr"], "weight_decay": cfg["optimizer"]["weight_decay"]}
     if cfg["optimizer"]["name"] == "sgd":
         opt_kwargs["momentum"] = cfg["optimizer"]["momentum"]
     optimizer = optimizers[cfg["optimizer"]["name"]](model.parameters(), **opt_kwargs)
-    scheduler = (
-        torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, cfg["training"]["steps"])
-        if cfg["training"]["scheduler"] == "cosine"
-        else None
-    )
+    scheduler = None
+    if cfg["training"]["scheduler"] == "cosine":
+        scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, cfg["training"]["steps"])
+    elif cfg["training"]["scheduler"] == "plateau":
+        scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
+            optimizer,
+            mode="min",
+            factor=cfg["training"]["lr_decay_factor"],
+            patience=cfg["training"]["lr_decay_patience"],
+            threshold=cfg["evaluation"]["min_delta"],
+            threshold_mode="abs",
+            min_lr=cfg["training"]["min_lr"],
+        )
     output = Path(output)
     output.mkdir(parents=True)
     write(output / "config.json", cfg)
@@ -271,8 +442,8 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None, input
             "test_opened": False,
         },
     )
-    samples, best_step, best_loss, best_state = 0, 0, float("inf"), initial_state
-    curve, diagnostics, diagnostic_curve = [], [], []
+    samples, best_step, best_loss, best_state = (0, 0, float("inf"), initial_state)
+    curve, diagnostics, diagnostic_curve = ([], [], [])
     group_lengths = np.array([len(group) for group in group_indices], dtype=np.int64)
     group_offsets = np.concatenate([[0], np.cumsum(group_lengths)[:-1]])
     group_flat = np.concatenate(group_indices) if group_indices else np.empty(0, dtype=np.int64)
@@ -283,20 +454,42 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None, input
         observation_steps,
         exposure,
         loss_weights,
+        update_steps,
+        ReflectionBatches,
+        ConvergenceObservations,
     )
 
     mode = cfg["training"]["sampling"]
     batch_size = cfg["training"]["batch_size"]
-    evaluation_steps = observation_steps(
-        cfg["training"]["steps"],
-        cfg["evaluation"]["interval"],
-        len(ix_train),
-        batch_size,
-        mode,
-        cfg["evaluation"]["checkpoints"],
+    unbounded = cfg["training"]["steps"] is None
+    convergence = (
+        ConvergenceObservations(
+            len(ix_train),
+            cfg["evaluation"]["diagnostic_interval"],
+            cfg["evaluation"]["full_train_every_epochs"],
+        )
+        if unbounded
+        else None
+    )
+    supply = ReflectionBatches(
+        corpus, cfg["training"]["reflection_probability"], cfg["training"]["reflection_seed"]
+    )
+    evaluation_steps = (
+        set()
+        if unbounded
+        else observation_steps(
+            cfg["training"]["steps"],
+            cfg["evaluation"]["interval"],
+            len(ix_train),
+            batch_size,
+            mode,
+            cfg["evaluation"]["checkpoints"],
+        )
     )
     diagnostic_steps = (
-        observation_steps(
+        set()
+        if unbounded
+        else observation_steps(
             cfg["training"]["steps"],
             cfg["evaluation"]["diagnostic_interval"],
             len(ix_train),
@@ -312,7 +505,6 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None, input
     evaluation_validation = ix_validation_raw if scheduled else ix_validation
     primary_in_raw = np.searchsorted(ix_validation_raw, ix_validation)
     if compact:
-        # Target-blind fixed subset, independent of the epoch sampler generator.
         rng = np.random.default_rng(cfg["training"]["seed"] + 2)
         diag_train = np.sort(
             rng.choice(
@@ -328,16 +520,10 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None, input
         )
     else:
         diag_train = diagnostic_indices(
-            rows,
-            ix_train,
-            cfg["evaluation"]["diagnostic_rows"],
-            cfg["training"]["seed"],
+            rows, ix_train, cfg["evaluation"]["diagnostic_rows"], cfg["training"]["seed"]
         )
         diag_val = diagnostic_indices(
-            rows,
-            ix_validation,
-            cfg["evaluation"]["diagnostic_rows"],
-            cfg["training"]["seed"],
+            rows, ix_validation, cfg["evaluation"]["diagnostic_rows"], cfg["training"]["seed"]
         )
     train_eval = ix_train if cfg["evaluation"]["full_train"] else diag_train
     if not len(train_eval):
@@ -350,14 +536,28 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None, input
     )
     sampled_rows = np.zeros(len(rows), dtype=np.int64)
     attempted_rows = np.zeros(len(rows), dtype=np.int64)
-    training_seen, completed_step, attempted_step = 0, 0, 0
+    training_seen, completed_step, attempted_step = (0, 0, 0)
     best_exposure = None
     row_loss_weights = np.zeros(len(rows), dtype=np.float32)
     row_loss_weights[ix_train] = loss_weights(
-        corpus.groups[ix_train],
-        cfg["training"]["loss_weighting"],
+        corpus.groups[ix_train], cfg["training"]["loss_weighting"]
     )
     objective_weights = torch.as_tensor(row_loss_weights)
+    packed_supply = None
+    training_payload = None
+    if compact:
+        from .supply import PackedSupply
+
+        packed_supply = PackedSupply(
+            supply,
+            max(batch_size, cfg["evaluation"]["batch_size"]),
+            device,
+            row_loss_weights,
+            column,
+            workers=supply_workers,
+        )
+    elif supply_workers:
+        raise ValueError("prefetch requires compact epoch corpus")
     phase_seconds = {
         name: 0.0
         for name in [
@@ -373,11 +573,13 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None, input
         ]
     }
     phase_seconds["initialization"] = time.monotonic() - start
+    batch_records_logged = 0
+    checkpoint_positions = {}
     forward_rows = {"train": 0, "full_selector": 0, "diagnostic": 0, "onnx": 0}
     completed_forward_rows = dict(forward_rows)
-    status, fault, model_state_status = "RUNNING", None, "LAST_COMPLETED_UPDATE"
+    status, fault, model_state_status = ("RUNNING", None, "LAST_COMPLETED_UPDATE")
     last_completed_point = None
-    measurement_sets, reference_metrics = {}, {}
+    measurement_sets, reference_metrics = ({}, {})
 
     def position():
         return {"step": completed_step, **exposure(training_seen, len(ix_train), mode)}
@@ -397,18 +599,31 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None, input
     def charge(n, kind):
         nonlocal samples
         if (
-            samples + n > cfg["limits"]["samples"]
-            or time.monotonic() - start > cfg["limits"]["seconds"]
+            cfg["limits"]["samples"] is not None
+            and samples + n > cfg["limits"]["samples"]
+            or (
+                cfg["limits"]["seconds"] is not None
+                and time.monotonic() - start > cfg["limits"]["seconds"]
+            )
         ):
             raise RuntimeError("training budget exhausted")
         samples += n
         forward_rows[kind] += n
 
-    def batch(index):
+    def batch(index, *, training=False):
+        nonlocal training_payload
         if device == "cuda" and torch.cuda.mem_get_info()[0] < 2 * 1024**3:
             raise RuntimeError("CUDA reserve exhausted")
         tick = time.monotonic()
-        features, distances, _ = corpus.batch(index)
+        if packed_supply is not None:
+            result, targets, weights = packed_supply.batch(
+                index, training=training, sampler=epoch_sampler if training else None
+            )
+            if training:
+                training_payload = (targets, weights)
+            phase_seconds["transfer"] += time.monotonic() - tick
+            return result
+        features, distances, _ = supply.batch(index, training=training)
         result = (
             torch.from_numpy(features).to(device),
             torch.from_numpy(distances).to(device),
@@ -440,7 +655,7 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None, input
         scope = hashlib.sha256(np.asarray(indices, dtype="<i8")).hexdigest()
         measured = MeasurementAccumulator(target, constant)
         reference = MeasurementAccumulator(target, constant)
-        group_distance, group_constant = {}, {}
+        group_distance, group_constant = ({}, {})
         for first in range(0, len(indices), cfg["evaluation"]["batch_size"]):
             sub = indices[first : first + cfg["evaluation"]["batch_size"]]
             _, raw, local_labels = corpus.batch(sub)
@@ -513,7 +728,9 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None, input
     subsets = {
         "train": [int(i) for i in diag_train],
         "validation": [int(i) for i in diag_val],
-        "algorithm": "sha256(seed:input-row-id), index tie; sorted loaded-index output",
+        "algorithm": "independent numpy RNG(seed+2), uniform without replacement, sorted indices"
+        if compact
+        else "sha256(seed:input-row-id), index tie; sorted loaded-index output",
         "target_blind": True,
     }
     write(
@@ -529,8 +746,24 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None, input
     write(
         output / "observation-plan.json",
         {
-            "full_selector_steps": sorted(evaluation_steps),
-            "fixed_diagnostic_steps": sorted(diagnostic_steps),
+            "full_selector_steps": None if unbounded else sorted(evaluation_steps),
+            "unbounded_epoch_plan": {
+                "selector": "step0 and each completed epoch, all eligible validation original inputs",
+                "diagnostic": "0/1/2/5/10/20; every25 through2000, then configured interval plus epoch ends",
+                "full_train": "epoch1 and every configured full_train_every_epochs; fixed diagnostics otherwise",
+                "diagnostic_interval": cfg["evaluation"]["diagnostic_interval"],
+                "full_train_every_epochs": cfg["evaluation"]["full_train_every_epochs"],
+                "scientific_stop": "epoch primary rowMSE patience/min_delta or nonfinite; no fixed horizon",
+            }
+            if unbounded
+            else None,
+            "augmentation": {
+                "probability": cfg["training"]["reflection_probability"],
+                "seed": cfg["training"]["reflection_seed"],
+                "train_only": True,
+                "validation_original": True,
+            },
+            "fixed_diagnostic_steps": None if unbounded else sorted(diagnostic_steps),
             "checkpoint_steps": sorted(checkpoint_steps),
             "full_train": cfg["evaluation"]["full_train"],
             "selector_scope": "all eligible validation; scheduled export additionally reads raw validation",
@@ -554,7 +787,27 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None, input
         export(model, cfg, statistics, distance_fit, output / f"step{step}-model")
         phase_seconds["export"] += time.monotonic() - tick
 
-    def evaluate(step, selector, diagnostic):
+    def save_named_checkpoint(name):
+        """Overwrite the three maintained names; never save a checkpoint per curve point."""
+        tick = time.monotonic()
+        state = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
+        torch.save(
+            {
+                "model": state,
+                "model_config": cfg["model"],
+                "scale": statistics,
+                "target": target,
+                "dataset_sha": binding["dataset_sha"],
+                "position": position(),
+                "optimizer": optimizer.state_dict(),
+            },
+            output / (name + ".pt"),
+        )
+        export(model, cfg, statistics, distance_fit, output / (name + "-model"))
+        checkpoint_positions[name] = position()
+        phase_seconds["export"] += time.monotonic() - tick
+
+    def evaluate(step, selector, diagnostic, full_train=False):
         nonlocal best_step, best_loss, best_state, best_exposure, last_completed_point
         tick = time.monotonic()
         model.eval()
@@ -563,7 +816,9 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None, input
         with torch.inference_mode():
             if selector:
                 current_train_eval = (
-                    ix_train if step in cfg["evaluation"]["full_train_checkpoints"] else train_eval
+                    ix_train
+                    if full_train or step in cfg["evaluation"]["full_train_checkpoints"]
+                    else train_eval
                 )
                 ptrain = predict(current_train_eval, "full_selector")
                 praw = predict(evaluation_validation, "full_selector")
@@ -578,7 +833,8 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None, input
                     "wall_seconds": time.monotonic() - start,
                     "loss_weighting": cfg["training"]["loss_weighting"],
                     "train_scope": "full_train"
-                    if cfg["evaluation"]["full_train"]
+                    if full_train
+                    or cfg["evaluation"]["full_train"]
                     or step in cfg["evaluation"]["full_train_checkpoints"]
                     else "fixed_diagnostic_subset",
                     "validation_forward_rows": len(evaluation_validation),
@@ -592,17 +848,27 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None, input
                 ]
                 if cfg["evaluation"]["early_stopping_unit"] == "epoch":
                     boundary = training_seen > 0 and training_seen % len(ix_train) == 0
-                    if boundary:
+                    if step == 0 or boundary:
                         _, stop = stopper.observe(loss)
+                    if (
+                        boundary
+                        and scheduler is not None
+                        and (cfg["training"]["scheduler"] == "plateau")
+                        and (completed_step >= cfg["training"]["warmup_steps"])
+                    ):
+                        scheduler.step(loss)
                     improved = loss < best_loss
                 else:
                     improved, stop = stopper.observe(loss)
                 if improved:
-                    best_step, best_loss = step, loss
+                    best_step, best_loss = (step, loss)
                     best_state = {
                         k: v.detach().cpu().clone() for k, v in model.state_dict().items()
                     }
                     best_exposure = position()
+                    save_named_checkpoint("best")
+                save_named_checkpoint("last")
+                record["lr"] = [group["lr"] for group in optimizer.param_groups]
                 curve.append(curve_summary(record, "full_selector"))
                 last_completed_point = {"kind": "full_selector", **position()}
                 append_record(observation_log, {"kind": "full_selector", **record})
@@ -643,6 +909,7 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None, input
                     "wall_seconds": time.monotonic() - start,
                     **parts,
                     "scope": "fixed_target_blind_subset",
+                    "train_scope": "fixed_diagnostic_subset",
                     "used_for_selection": False,
                 }
                 diagnostic_curve.append(curve_summary(record, "fixed_diagnostic"))
@@ -651,77 +918,129 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None, input
                 phase_seconds["fixed_diagnostic"] += time.monotonic() - tick
         if step in checkpoint_steps:
             save_checkpoint(step)
+        persist_curves()
         return stop
+
+    persisted_curve_counts = {"curves": 0, "diagnostic-curves": 0}
+
+    def persist_curves():
+        tick = time.monotonic()
+        for name, records in [("curves", curve), ("diagnostic-curves", diagnostic_curve)]:
+            while persisted_curve_counts[name] < len(records):
+                at = persisted_curve_counts[name]
+                append_curve_record(output / (name + ".jsonl.gz"), records[at])
+                _curve_csv([records[at]], output / (name + ".csv"), append=at > 0)
+                persisted_curve_counts[name] += 1
+        phase_seconds["logging"] += time.monotonic() - tick
 
     def persist():
         tick = time.monotonic()
-        write(output / "curves.json", curve)
-        write(output / "diagnostic-curves.json", diagnostic_curve)
-        write(
-            output / "gradients.json",
-            {
-                "schema": "quoridor-gradient-stream-reference-v1",
-                "file": "batch.jsonl.gz",
-                "record_status": "COMPLETED",
-                "field": "gradient_norm",
-                "completed_records": completed_step,
-            },
-        )
-        for name, records in [("curves", curve), ("diagnostic-curves", diagnostic_curve)]:
-            _curve_csv(records, output / (name + ".csv"))
-        if compact:
-            np.savez_compressed(
-                output / "sampling-counts.npz",
-                training_indices=ix_train,
-                row_counts=sampled_rows,
-                attempted_row_counts=attempted_rows,
-            )
-        write(
-            output / "sampling.json",
-            {
-                **position(),
-                "seen": int(sampled_rows.sum()),
-                "mode": mode,
-                "row_count_order": "immutable loaded cache order",
-                "attempted_step": attempted_step,
-                "optimizer_steps": completed_step,
-                "training_indices": None if compact else ix_train,
-                "training_rows": len(ix_train),
-                "row_counts": None if compact else sampled_rows,
-                "attempted_row_counts": None if compact else attempted_rows,
-                "training_row_min_visits": int(sampled_rows[ix_train].min()),
-                "training_row_max_visits": int(sampled_rows[ix_train].max()),
-                "compact_counts_file": "sampling-counts.npz" if compact else None,
-                "family_counts": {
-                    family: int(sampled_rows[group].sum())
-                    for family, group in zip(families, group_indices)
+        failures = []
+        _attempt_finalization("curves", persist_curves, failures)
+        _attempt_finalization(
+            "gradients.json",
+            lambda: write(
+                output / "gradients.json",
+                {
+                    "schema": "quoridor-gradient-stream-reference-v1",
+                    "file": "batch.jsonl.gz",
+                    "record_status": "COMPLETED",
+                    "field": "gradient_norm",
+                    "completed_records": batch_records_logged,
+                    "logging": "observed diagnostics/epoch boundaries only"
+                    if unbounded
+                    else "every update",
                 },
-                "loss_weighting": cfg["training"]["loss_weighting"],
-                "sampler_advanced_seen": epoch_sampler.seen if epoch_sampler else None,
-            },
+            ),
+            failures,
+        )
+        count_encoding = None
+        if compact:
+            count_encoding = _attempt_finalization(
+                "sampling-counts.npz",
+                lambda: write_sampling_counts(
+                    output / "sampling-counts.npz", ix_train, sampled_rows, attempted_rows
+                ),
+                failures,
+            )
+        _attempt_finalization(
+            "sampling.json",
+            lambda: write(
+                output / "sampling.json",
+                {
+                    **position(),
+                    "seen": int(sampled_rows.sum()),
+                    "mode": mode,
+                    "row_count_order": "immutable loaded cache order",
+                    "attempted_step": attempted_step,
+                    "optimizer_steps": completed_step,
+                    "training_indices": None if compact else ix_train,
+                    "training_rows": len(ix_train),
+                    "row_counts": None if compact else sampled_rows,
+                    "attempted_row_counts": None if compact else attempted_rows,
+                    "training_row_min_visits": int(sampled_rows[ix_train].min()),
+                    "training_row_max_visits": int(sampled_rows[ix_train].max()),
+                    "compact_counts_file": "sampling-counts.npz" if compact else None,
+                    "compact_counts_schema": "quoridor-visit-counts-v2" if compact else None,
+                    "compact_training_index_encoding": count_encoding if compact else None,
+                    "family_counts": {
+                        family: int(sampled_rows[group].sum())
+                        for family, group in zip(families, group_indices)
+                    },
+                    "loss_weighting": cfg["training"]["loss_weighting"],
+                    "reflection": {
+                        "attempted_training_supply_original_rows": supply.training_seen,
+                        "reflected_drawn_original_rows": supply.reflected_seen,
+                        "counter_scope": "supply attempts/drawn masks before transfer or forward; successful exposure recorded separately",
+                        "independent_game_count": "UNKNOWN",
+                        "saved_augmentation_rows": 0,
+                    },
+                    "sampler_advanced_seen": epoch_sampler.seen if epoch_sampler else None,
+                    "packed_supply": None
+                    if packed_supply is None
+                    else {
+                        "workers": packed_supply.workers,
+                        "dispatched_rows": packed_supply.queue.dispatched_rows,
+                        "expanded_rows": packed_supply.queue.expanded_rows,
+                        "consumed_supply_rows": packed_supply.queue.consumed_rows,
+                        "successful_training_rows": training_seen,
+                        "timing_inclusive_not_DMA": packed_supply.timing,
+                    },
+                },
+            ),
+            failures,
         )
         phase_seconds["logging"] += time.monotonic() - tick
-        write(
-            output / "run-status.json",
-            {
-                "status": status,
-                "fault": fault,
-                **position(),
-                "attempted_step": attempted_step,
-                "model_state_status": model_state_status,
-                "selected_exposure": best_exposure,
-                "last_completed_point": last_completed_point,
-                "samples": samples,
-                "forward_rows_conservative": forward_rows,
-                "forward_rows_completed": completed_forward_rows,
-                "phase_seconds_inclusive": phase_seconds,
-                "wall_seconds": time.monotonic() - start,
-                "timing_overlap": "inclusive/nested; do not add phases to infer whole wall",
-            },
+        _attempt_finalization(
+            "run-status.json",
+            lambda: write(
+                output / "run-status.json",
+                {
+                    "status": status,
+                    "fault": fault,
+                    **position(),
+                    "attempted_step": attempted_step,
+                    "model_state_status": model_state_status,
+                    "selected_exposure": best_exposure,
+                    "last_completed_point": last_completed_point,
+                    "checkpoint_positions": checkpoint_positions,
+                    "samples": samples,
+                    "forward_rows_conservative": forward_rows,
+                    "forward_rows_completed": completed_forward_rows,
+                    "phase_seconds_inclusive": phase_seconds,
+                    "wall_seconds": time.monotonic() - start,
+                    "timing_overlap": "inclusive/nested; do not add phases to infer whole wall",
+                },
+            ),
+            failures,
         )
+        if failures:
+            raise BaseExceptionGroup("training numerical record persistence failures", failures)
 
     def curve_summary(record, kind):
         result = dict(record)
+        result["kind"] = kind
+        result.setdefault("used_for_selection", kind == "full_selector")
         for scope in ("train", "validation"):
             result[scope] = {k: v for k, v in record[scope].items() if k != "groups"}
             result[scope]["groups_ref"] = {
@@ -736,17 +1055,30 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None, input
         gzip.open(output / "batch.jsonl.gz", "wt", compresslevel=1) as batch_log,
         gzip.open(output / "observations.jsonl.gz", "wt", compresslevel=1) as observation_log,
     ):
+        primary_error = None
+        stop_record_failures = []
         try:
+            save_named_checkpoint("initial")
+            if compact and input_binding is not None:
+                verify_initial_binding(expected, output / "initial-model" / "weights.f32")
+            save_named_checkpoint("last")
+            if unbounded:
+                evaluation_steps.add(0)
+                if cfg["evaluation"]["diagnostic_rows"]:
+                    diagnostic_steps.add(0)
             if evaluate(0, True, 0 in diagnostic_steps):
                 status = "EARLY_STOPPED"
             else:
-                for step in range(1, cfg["training"]["steps"] + 1):
+                for step in update_steps(cfg["training"]["steps"]):
                     attempted_step = step
-                    # Budget check before consuming the sampler. charge() runs immediately before forward.
                     n = epoch_sampler.next_batch_size if epoch_sampler else batch_size
                     if (
-                        samples + n > cfg["limits"]["samples"]
-                        or time.monotonic() - start > cfg["limits"]["seconds"]
+                        cfg["limits"]["samples"] is not None
+                        and samples + n > cfg["limits"]["samples"]
+                        or (
+                            cfg["limits"]["seconds"] is not None
+                            and time.monotonic() - start > cfg["limits"]["seconds"]
+                        )
                     ):
                         raise RuntimeError("training budget exhausted")
                     if epoch_sampler is not None:
@@ -765,20 +1097,31 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None, input
                             torch.randint(len(ix_train), (batch_size,), generator=generator).numpy()
                         ]
                     np.add.at(attempted_rows, index, 1)
-                    append_record(
-                        batch_log,
-                        {
-                            "status": "ATTEMPTED",
-                            "attempted_step": step,
-                            "batch_rows": len(index),
-                            **position(),
-                            "wall_seconds": time.monotonic() - start,
-                        },
+                    planned_seen = training_seen + len(index)
+                    selector_point, diagnostic_point, full_train_point = (
+                        convergence.at(step, planned_seen)
+                        if unbounded
+                        else (step in evaluation_steps, step in diagnostic_steps, False)
                     )
+                    diagnostic_point = diagnostic_point and bool(
+                        cfg["evaluation"]["diagnostic_rows"]
+                    )
+                    record_update = not unbounded or selector_point or diagnostic_point
+                    if record_update:
+                        append_record(
+                            batch_log,
+                            {
+                                "status": "ATTEMPTED",
+                                "attempted_step": step,
+                                "batch_rows": len(index),
+                                **position(),
+                                "wall_seconds": time.monotonic() - start,
+                            },
+                        )
                     ix = torch.as_tensor(index, dtype=torch.long)
                     model.train()
                     optimizer.zero_grad(set_to_none=True)
-                    inputs = batch(ix)
+                    inputs = batch(index, training=True)
                     charge(len(index), "train")
                     tick = time.monotonic()
                     prediction = model(*inputs)
@@ -787,93 +1130,159 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None, input
                     completed_forward_rows["train"] += len(index)
                     per_row_loss = torch.nn.functional.mse_loss(
                         prediction,
-                        torch.from_numpy(labels[index, column].copy()).to(device),
+                        training_payload[0]
+                        if packed_supply is not None
+                        else torch.from_numpy(labels[index, column].copy()).to(device),
                         reduction="none",
                     )
-                    loss = (per_row_loss * objective_weights[ix].to(device)).mean()
+                    weights = (
+                        training_payload[1]
+                        if packed_supply is not None
+                        else objective_weights[ix].to(device)
+                    )
+                    loss = (per_row_loss * weights).mean()
                     if not torch.isfinite(loss):
                         raise ValueError("nonfinite training loss")
                     tick = time.monotonic()
                     loss.backward()
-                    gradients = {
-                        k: float(v.grad.detach().norm().cpu())
-                        for k, v in model.named_parameters()
-                        if v.grad is not None
-                    }
+                    if not torch.stack(
+                        [
+                            torch.isfinite(v.grad).all()
+                            for v in model.parameters()
+                            if v.grad is not None
+                        ]
+                    ).all():
+                        raise ValueError("nonfinite training gradient")
+                    gradients = (
+                        {
+                            k: float(v.grad.detach().norm().cpu())
+                            for k, v in model.named_parameters()
+                            if v.grad is not None
+                        }
+                        if record_update
+                        else None
+                    )
+                    if step <= cfg["training"]["warmup_steps"]:
+                        for group in optimizer.param_groups:
+                            group["lr"] = (
+                                cfg["optimizer"]["lr"] * step / cfg["training"]["warmup_steps"]
+                            )
                     lr = [group["lr"] for group in optimizer.param_groups]
                     model_state_status = "UPDATE_IN_PROGRESS_OR_FAILED_UNKNOWN"
                     optimizer.step()
                     sync()
+                    if not torch.stack([torch.isfinite(v).all() for v in model.parameters()]).all():
+                        raise ValueError("nonfinite parameter after update")
                     completed_step = step
                     training_seen += len(index)
                     np.add.at(sampled_rows, index, 1)
                     model_state_status = "LAST_COMPLETED_UPDATE"
-                    if scheduler is not None:
+                    if scheduler is not None and cfg["training"]["scheduler"] == "cosine":
                         scheduler.step()
                     phase_seconds["update"] += time.monotonic() - tick
-                    record = {
-                        **position(),
-                        "status": "COMPLETED",
-                        "actual_optimizer_step": completed_step,
-                        "objective_loss": float(loss.detach().cpu()),
-                        "batch_row_mse": float(per_row_loss.detach().mean().cpu()),
-                        "batch_rows": len(index),
-                        "lr": lr,
-                        "gradient_norm": gradients,
-                        "samples": samples,
-                        "wall_seconds": time.monotonic() - start,
-                    }
+                    if packed_supply is not None:
+                        packed_supply.release()
+                    record = (
+                        {
+                            **position(),
+                            "status": "COMPLETED",
+                            "actual_optimizer_step": completed_step,
+                            "objective_loss": float(loss.detach().cpu()),
+                            "batch_row_mse": float(per_row_loss.detach().mean().cpu()),
+                            "batch_rows": len(index),
+                            "lr": lr,
+                            "gradient_norm": gradients,
+                            "samples": samples,
+                            "wall_seconds": time.monotonic() - start,
+                        }
+                        if record_update or not compact
+                        else None
+                    )
                     if not compact:
                         diagnostics.append(record)
-                    append_record(batch_log, record)
-                    if step in evaluation_steps or step in diagnostic_steps:
-                        if evaluate(step, step in evaluation_steps, step in diagnostic_steps):
+                    if record_update:
+                        append_record(batch_log, record)
+                        batch_records_logged += 1
+                    if selector_point or diagnostic_point:
+                        if selector_point:
+                            evaluation_steps.add(step)
+                        if diagnostic_point:
+                            diagnostic_steps.add(step)
+                        if evaluate(step, selector_point, diagnostic_point, full_train_point):
                             status = "EARLY_STOPPED"
                             break
-                    elif step in checkpoint_steps:
+                    if not (selector_point or diagnostic_point) and step in checkpoint_steps:
                         save_checkpoint(step)
                 else:
                     status = "COMPLETED"
         except RuntimeError as error:
+            primary_error = error
             if str(error) != "training budget exhausted":
-                status, fault = "INTERRUPTED", {"type": type(error).__name__, "message": str(error)}
+                status, fault = (
+                    "INTERRUPTED",
+                    {"type": type(error).__name__, "message": str(error)},
+                )
                 raise
-            status, fault = "BUDGET_STOPPED", {"type": type(error).__name__, "message": str(error)}
-            append_record(
-                batch_log,
-                {"status": status, "fault": fault, **position(), "attempted_step": attempted_step},
+            status, fault = (
+                "BUDGET_STOPPED",
+                {"type": type(error).__name__, "message": str(error)},
+            )
+            _attempt_finalization(
+                "primary_stop_record",
+                lambda: append_record(
+                    batch_log,
+                    {
+                        "status": status,
+                        "fault": fault,
+                        **position(),
+                        "attempted_step": attempted_step,
+                    },
+                ),
+                stop_record_failures,
             )
         except BaseException as error:
-            status, fault = "INTERRUPTED", {"type": type(error).__name__, "message": str(error)}
-            append_record(
-                batch_log,
-                {"status": status, "fault": fault, **position(), "attempted_step": attempted_step},
+            primary_error = error
+            status, fault = ("INTERRUPTED", {"type": type(error).__name__, "message": str(error)})
+            _attempt_finalization(
+                "primary_stop_record",
+                lambda: append_record(
+                    batch_log,
+                    {
+                        "status": status,
+                        "fault": fault,
+                        **position(),
+                        "attempted_step": attempted_step,
+                    },
+                ),
+                stop_record_failures,
             )
             raise
         finally:
-            persist()
-
-    tick = time.monotonic()
-    last_state = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
-    for name, state in [("initial", initial_state), ("best", best_state), ("last", last_state)]:
-        torch.save(
-            {
-                "model": state,
-                "model_config": cfg["model"],
-                "scale": statistics,
-                "target": target,
-                "dataset_sha": binding["dataset_sha"],
-            },
-            output / (name + ".pt"),
-        )
-        model.load_state_dict(state)
-        export(model, cfg, statistics, distance_fit, output / (name + "-model"))
-    phase_seconds["export"] += time.monotonic() - tick
+            actions = []
+            if packed_supply is not None:
+                actions.append(("supply_cleanup", packed_supply.close))
+            if model_state_status == "LAST_COMPLETED_UPDATE":
+                actions.append(("last_checkpoint", lambda: save_named_checkpoint("last")))
+            actions.append(("persist", persist))
+            _finalize_training(
+                output,
+                actions,
+                primary_error if primary_error is not None else sys.exception(),
+                lambda: {
+                    "status": status,
+                    "fault": fault,
+                    **position(),
+                    "attempted_step": attempted_step,
+                    "model_state_status": model_state_status,
+                    "checkpoint_positions": checkpoint_positions,
+                },
+                prior_failures=stop_record_failures,
+            )
     model.load_state_dict(best_state)
     model.eval()
     model = model.cpu()
     if cfg["artifacts"]["mode"] == "native_onnx":
-        # Exporter trace count depends on its version; hooks charge each actual call.
+
         def trace_charge(module, inputs):
             charge(int(inputs[0].shape[0]), "onnx")
 
@@ -886,7 +1295,7 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None, input
         try:
             torch.onnx.export(
                 model,
-                tuple(torch.from_numpy(v) for v in corpus.batch([0])[:2])
+                tuple((torch.from_numpy(v) for v in corpus.batch([0])[:2]))
                 + (torch.ones(1, dtype=torch.long),),
                 str(output / "best.onnx"),
                 input_names=["features", "distance", "side"],
@@ -901,7 +1310,10 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None, input
                 dynamo=False,
             )
         except BaseException as error:
-            status, fault = "ARTIFACT_FAILED", {"type": type(error).__name__, "message": str(error)}
+            status, fault = (
+                "ARTIFACT_FAILED",
+                {"type": type(error).__name__, "message": str(error)},
+            )
             raise
         finally:
             before.remove()
@@ -951,8 +1363,7 @@ def compact_measurements(corpus, indices, values, constant, distance_fit, train_
         prediction = np.asarray(values[first : first + len(sub)], dtype=np.float32)
         if not np.isfinite(prediction).all():
             raise ValueError("nonfinite compact prediction")
-        # Metadata is gathered by bounded batches. No dense full-corpus tensor.
-        _, distance, labels = corpus.batch(sub)
+        distance, labels, source, phase = corpus.metadata(sub)
         target = labels[:, 1]
         baseline = np.tanh(
             np.float32(distance_fit["a"])
@@ -972,12 +1383,10 @@ def compact_measurements(corpus, indices, values, constant, distance_fit, train_
         bias += (prediction.astype(np.float64) - target).sum()
         sign_correct += int(np.count_nonzero(prediction * target > 0))
         saturated += int(np.count_nonzero(np.abs(prediction) >= 0.9))
-        source = np.fromiter((int(corpus.record(int(i))["shard"]) for i in sub), dtype=np.int16)
-        phase = np.fromiter((int(corpus.record(int(i))["phase"]) for i in sub), dtype=np.int8)
         for dimension, codes in [
             ("source", source),
             ("phase", phase),
-            ("train_input_known", corpus.train_known_groups[groups].astype(np.int8)),
+            ("original_train_input_known", corpus.train_known_groups[groups].astype(np.int8)),
         ]:
             for code in np.unique(codes):
                 mask = codes == code
@@ -1008,32 +1417,38 @@ def compact_measurements(corpus, indices, values, constant, distance_fit, train_
     }
 
 
-def _curve_csv(curves, path):
-    with Path(path).open("w", newline="") as stream:
+def _curve_csv(curves, path, *, append=False):
+    with Path(path).open("a" if append else "w", newline="") as stream:
         writer = csv.writer(stream)
-        writer.writerow(
-            [
-                "step",
-                "training_seen",
-                "row_epoch",
-                "completed_epochs",
-                "partial_epoch_fraction",
-                "wall_seconds",
-                "train_group_mse",
-                "validation_group_mse",
-                "train_scope",
-                "train_row_mse",
-                "validation_row_mse",
-                "train_distance_mse",
-                "validation_distance_mse",
-                "train_constant_mse",
-                "validation_constant_mse",
-                "train_sign_accuracy",
-                "validation_sign_accuracy",
-                "train_saturation_fraction",
-                "validation_saturation_fraction",
-            ]
-        )
+        if not append:
+            writer.writerow(
+                [
+                    "step",
+                    "training_seen",
+                    "row_epoch",
+                    "completed_epochs",
+                    "partial_epoch_fraction",
+                    "wall_seconds",
+                    "train_group_mse",
+                    "validation_group_mse",
+                    "train_scope",
+                    "train_row_mse",
+                    "validation_row_mse",
+                    "train_distance_mse",
+                    "validation_distance_mse",
+                    "train_constant_mse",
+                    "validation_constant_mse",
+                    "train_sign_accuracy",
+                    "validation_sign_accuracy",
+                    "train_saturation_fraction",
+                    "validation_saturation_fraction",
+                    "kind",
+                    "used_for_selection",
+                    "validation_scope",
+                    "train_rows",
+                    "validation_rows",
+                ]
+            )
         for point in curves:
             writer.writerow(
                 [
@@ -1050,7 +1465,12 @@ def _curve_csv(curves, path):
                 + [
                     point["train"]["target_game_equal_mse"],
                     point["validation"]["target_game_equal_mse"],
-                    point.get("train_scope"),
+                    point.get(
+                        "train_scope",
+                        "fixed_diagnostic_subset"
+                        if point.get("used_for_selection") is False
+                        else None,
+                    ),
                     point["train"]["target_mse"],
                     point["validation"]["target_mse"],
                     point["train"].get("distance_mse"),
@@ -1061,6 +1481,13 @@ def _curve_csv(curves, path):
                     point["validation"].get("z_sign_accuracy"),
                     point["train"].get("saturation_fraction"),
                     point["validation"].get("saturation_fraction"),
+                    point.get("kind"),
+                    point.get("used_for_selection", point.get("kind") == "full_selector"),
+                    "fixed_diagnostic_subset"
+                    if point.get("used_for_selection") is False
+                    else "full_selector",
+                    point["train"].get("rows"),
+                    point["validation"].get("rows"),
                 ]
             )
 
@@ -1116,19 +1543,18 @@ def verify_test_cache_before_open(cache, freeze):
     manifest = Path(cache) / "cache.json"
     descriptor = json.loads(manifest.read_text()) if manifest.is_file() else {}
     if (
-        freeze.get("cache_schema") == "quoridor-public-compact-v1"
-        or descriptor.get("schema") == "quoridor-public-compact-v1"
+        freeze.get("cache_schema") == "quoridor-public-geometry-v1"
+        or descriptor.get("schema") == "quoridor-public-geometry-v1"
     ):
         if (
             not manifest.is_file()
-            or descriptor.get("schema") != "quoridor-public-compact-v1"
+            or descriptor.get("schema") != "quoridor-public-geometry-v1"
             or sha(manifest) != freeze["dataset_sha"]
         ):
             raise ValueError("frozen compact test corpus differs before label opening")
 
 
 def mapped_values(count, dtype="<f4"):
-    # Anonymous disk-backed arrays bound prediction RAM even for full selectors.
     stream = tempfile.TemporaryFile()
     stream.truncate(count * np.dtype(dtype).itemsize)
     result = np.memmap(stream, dtype=dtype, mode="r+", shape=(count,))
@@ -1150,15 +1576,23 @@ def write_values(values, path, size):
 
 
 def training_statistics(corpus, indices, column, size=4096):
+    def metadata_chunks():
+        for first in range(0, len(indices), size):
+            sub = indices[first : first + size]
+            if getattr(corpus, "compact", False):
+                distance, labels, _, _ = corpus.metadata(sub)
+            else:
+                _, distance, labels = corpus.batch(sub)
+            yield (distance, labels)
+
     total = np.zeros(2, dtype=np.float64)
-    for _, (_, d, _) in corpus.chunks(indices, size):
+    for d, _ in metadata_chunks():
         total += d.sum(axis=0, dtype=np.float64)
     mu64 = total / len(indices)
     squared = np.zeros(2, dtype=np.float64)
-    # Incremental QR preserves the least-squares objective without a full design matrix.
     r = np.empty((0, 2), dtype=np.float64)
     projected = np.empty(0, dtype=np.float64)
-    for _, (_, d, y) in corpus.chunks(indices, size):
+    for d, y in metadata_chunks():
         squared += ((d.astype(np.float64) - mu64) ** 2).sum(axis=0)
         difference = (d[:, 1] - d[:, 0]).astype(np.float64)
         design = np.column_stack((np.ones(len(d)), difference))
@@ -1169,7 +1603,7 @@ def training_statistics(corpus, indices, column, size=4096):
         {
             "mu_f32": mu64.astype(np.float32).tolist(),
             "sigma_f32": np.maximum(
-                np.sqrt(squared / len(indices)).astype(np.float32), np.float32(1e-4)
+                np.sqrt(squared / len(indices)).astype(np.float32), np.float32(0.0001)
             ).tolist(),
         },
         {"a": float(np.float32(fit[0])), "b": float(np.float32(fit[1]))},
@@ -1194,7 +1628,6 @@ def test(cache, training, output):
     training = Path(training)
     freeze_path = training / "freeze.json"
     freeze_sha = sha(freeze_path)
-    # No model construction or forward may precede complete attribution checks.
     freeze = verify_freeze(training)
     verify_test_cache_before_open(cache, freeze)
     corpus = load(cache, allow_test=True)
@@ -1215,9 +1648,8 @@ def test(cache, training, output):
     model = build_model(cfg["model"], stats)
     output = Path(output)
     output.mkdir(parents=True)
-    predictions, reports = {}, {}
+    predictions, reports = ({}, {})
     primary_count = int(corpus.eligible[test_index].sum())
-    # Verify checkpoint/native parameter correspondence before sharing model forwards.
     checkpoint_predictions = {}
     size = cfg["evaluation"]["batch_size"]
     checkpoint_names = ("best",) if getattr(corpus, "compact", False) else ("initial", "best")
@@ -1228,7 +1660,7 @@ def test(cache, training, output):
             cp["model_config"] != cfg["model"]
             or cp["scale"] != stats
             or cp["target"] != target
-            or cp["dataset_sha"] != freeze["dataset_sha"]
+            or (cp["dataset_sha"] != freeze["dataset_sha"])
         ):
             raise ValueError("checkpoint descriptor differs from frozen evaluation configuration")
         verify_native_parameters(training / (name + "-model/weights.f32"), cp["model"])
@@ -1273,13 +1705,10 @@ def test(cache, training, output):
     for name, (all_rows, unexposed) in accumulators.items():
         reports[name] = {
             "all": all_rows.result(),
-            (
-                "eligible_heldout_observations"
-                if getattr(corpus, "compact", False)
-                else "unexposed"
-            ): unexposed.result() if primary_count else None,
+            "eligible_heldout_observations"
+            if getattr(corpus, "compact", False)
+            else "unexposed": unexposed.result() if primary_count else None,
         }
-    # numpy's zip writer streams array storage rather than constructing a combined tensor.
     np.savez(output / "predictions.npz", **predictions)
     result = {
         "freeze_sha": freeze_sha,
@@ -1318,7 +1747,8 @@ def guarded_train(config_path):
         raise ValueError("fit storage admission before child/GPU")
     os.sched_setaffinity(0, {2, 3})
     root = Path(cfg["output"]).parent
-    deadline = time.monotonic() + cfg["seconds"]
+    started = time.monotonic()
+    deadline = None if cfg["seconds"] is None else started + cfg["seconds"]
     resources = GPUResources(cfg["resources"], root, deadline)
     command = [
         sys.executable,
@@ -1343,7 +1773,7 @@ def guarded_train(config_path):
             root / "observed-resources.json",
             {
                 **resources.observed,
-                "wall_seconds": cfg["seconds"] - max(0, deadline - time.monotonic()),
+                "wall_seconds": time.monotonic() - started,
                 "sampling": "guardian checks, not continuous absolute peak",
                 "controller_reserve_bytes": resources.controller_reserve,
                 "whole_device_VRAM_cap_bytes": resources.vram_limit,
@@ -1355,7 +1785,7 @@ def guarded_train(config_path):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("command", choices=["train", "test"])
+    parser.add_argument("command", choices=["train", "test", "statistics"])
     parser.add_argument("--cache", required=True)
     parser.add_argument("--output", required=True)
     parser.add_argument("--config")
@@ -1366,9 +1796,22 @@ def main():
     parser.add_argument("--training")
     parser.add_argument("--input-binding")
     parser.add_argument("--guard-config")
+    parser.add_argument(
+        "--supply-workers",
+        type=int,
+        choices=(0, 2),
+        help="0: synchronous (default); 2: qualified ordered prefetch",
+    )
     args = parser.parse_args()
+    if args.command == "statistics":
+        if args.guard_config or args.supply_workers is not None:
+            parser.error("statistics does not use a fit guard or supply workers")
+        print(json.dumps(prepare_statistics(args.cache, args.output)))
+        return
     if args.command == "train":
         if args.guard_config:
+            if args.supply_workers is not None or args.steps is not None or args.scale is not None:
+                parser.error("guarded training uses only its fixed config/input binding")
             guarded_train(args.guard_config)
             return
         print(
@@ -1380,6 +1823,7 @@ def main():
                     args.steps,
                     scale_path=args.scale,
                     input_binding=args.input_binding,
+                    supply_workers=args.supply_workers,
                 )
             )
         )

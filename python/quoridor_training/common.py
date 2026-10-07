@@ -31,6 +31,13 @@ DEFAULTS = {
         "sampling": "epoch",
         "loss_weighting": "row",
         "scheduler": "none",
+        "warmup_steps": 0,
+        "lr_decay_factor": 0.5,
+        "lr_decay_patience": 2,
+        "min_lr": 1e-6,
+        "reflection_probability": 0.0,
+        "supply_workers": 0,
+        "reflection_seed": 19080314,
         "device": "cpu",
         "threads": 1,
     },
@@ -47,6 +54,7 @@ DEFAULTS = {
         "diagnostic_checkpoints": None,
         "full_train": True,
         "full_train_checkpoints": [],
+        "full_train_every_epochs": 5,
     },
     "limits": {"seconds": 60.0, "samples": 500000},
     "data": {"overlap_policy": "error"},
@@ -83,12 +91,19 @@ def resolve_config(path=None, overrides=()):
         ("limits", "samples"),
     ]:
         value = result[section][key]
+        if (section, key) in (("training", "steps"), ("limits", "samples")) and value is None:
+            continue
         if type(value) is not int or value <= 0:
             raise ValueError(f"positive integer required: {section}.{key}")
     for section, key in [
         ("evaluation", "early_stopping_patience"),
         ("evaluation", "diagnostic_rows"),
         ("training", "seed"),
+        ("training", "warmup_steps"),
+        ("training", "lr_decay_patience"),
+        ("training", "reflection_seed"),
+        ("training", "supply_workers"),
+        ("evaluation", "full_train_every_epochs"),
     ]:
         value = result[section][key]
         if type(value) is not int or value < 0:
@@ -100,13 +115,18 @@ def resolve_config(path=None, overrides=()):
         ("optimizer", "momentum"),
         ("evaluation", "min_delta"),
         ("limits", "seconds"),
+        ("training", "lr_decay_factor"),
+        ("training", "min_lr"),
+        ("training", "reflection_probability"),
     ]:
         value = result[section][key]
+        if (section, key) == ("limits", "seconds") and value is None:
+            continue
         if type(value) not in (int, float) or not math.isfinite(value) or value < 0:
             raise ValueError(f"nonnegative finite number required: {section}.{key}")
     if (
         result["optimizer"]["lr"] <= 0
-        or result["limits"]["seconds"] <= 0
+        or (result["limits"]["seconds"] is not None and result["limits"]["seconds"] <= 0)
         or result["model"]["dropout"] >= 1
     ):
         raise ValueError("lr/seconds must be positive; dropout must be below 1")
@@ -120,8 +140,9 @@ def resolve_config(path=None, overrides=()):
         ("optimizer", "name"): ["adam", "adamw", "sgd"],
         ("training", "target"): ["rootmean", "z"],
         ("training", "sampling"): ["row", "game", "epoch"],
+        ("training", "supply_workers"): [0, 2],
         ("training", "loss_weighting"): ["row", "group"],
-        ("training", "scheduler"): ["none", "cosine"],
+        ("training", "scheduler"): ["none", "cosine", "plateau"],
         ("training", "device"): ["cpu", "cuda"],
         ("evaluation", "monitor"): ["row", "game"],
         ("evaluation", "early_stopping_unit"): ["observation", "epoch"],
@@ -131,6 +152,42 @@ def resolve_config(path=None, overrides=()):
     for (section, key), choices in allowed.items():
         if result[section][key] not in choices:
             raise ValueError(f"invalid {section}.{key}: {result[section][key]}")
+    unbounded = result["training"]["steps"] is None
+    if unbounded and (
+        result["limits"]["seconds"] is not None
+        or result["limits"]["samples"] is not None
+        or result["training"]["sampling"] != "epoch"
+        or result["evaluation"]["monitor"] != "row"
+        or result["evaluation"]["early_stopping_unit"] != "epoch"
+        or result["evaluation"]["early_stopping_patience"] <= 0
+        or result["evaluation"]["checkpoints"] is not None
+        or result["evaluation"]["full_train"]
+        or result["artifacts"]["save_scheduled"]
+        or result["artifacts"]["checkpoint_steps"]
+        or result["evaluation"]["full_train_checkpoints"]
+        or result["evaluation"]["diagnostic_checkpoints"] is not None
+    ):
+        raise ValueError(
+            "unbounded fit requires null time/sample limits and scientific epoch row selection"
+        )
+    if result["training"]["scheduler"] == "cosine" and unbounded:
+        raise ValueError("cosine scheduler requires a finite update horizon")
+    if (
+        result["training"]["scheduler"] == "plateau"
+        and result["training"]["min_lr"] > result["optimizer"]["lr"]
+    ):
+        raise ValueError("plateau LR floor must not exceed initial LR")
+    if (
+        not 0 < result["training"]["lr_decay_factor"] < 1
+        or result["training"]["min_lr"] <= 0
+        or not 0 <= result["training"]["reflection_probability"] <= 1
+    ):
+        raise ValueError("invalid LR decay/floor or reflection probability")
+    if result["training"]["reflection_probability"] and (
+        result["training"]["sampling"] != "epoch"
+        or result["training"]["reflection_seed"] == result["training"]["seed"]
+    ):
+        raise ValueError("online reflection requires epoch sampling and separate fixed seed")
     if result["training"]["sampling"] == "game" and result["training"]["loss_weighting"] != "row":
         raise ValueError("game sampling already balances groups; do not weight groups twice")
     points = result["evaluation"]["checkpoints"]
@@ -160,7 +217,10 @@ def resolve_config(path=None, overrides=()):
         if points is not None and (
             not isinstance(points, list)
             or points != sorted(set(points))
-            or any(type(v) is not int or not 0 <= v <= result["training"]["steps"] for v in points)
+            or any(
+                type(v) is not int or v < 0 or (not unbounded and v > result["training"]["steps"])
+                for v in points
+            )
         ):
             raise ValueError("invalid observation/artifact checkpoints: " + section + "." + key)
     if result["evaluation"]["checkpoints"] is not None and not set(

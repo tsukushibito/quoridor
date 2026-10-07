@@ -23,7 +23,7 @@ Linuxネイティブを主経路とし、評価・探索・対局・推論queue�
 
 NodeはWeb/Vite/TypeScript、Wasm製品ビルド・検証、品質とソース書き出しに必要。研究の対局・探索・推論・生成をNodeへ委譲しない。旧Node実装、互換shim、実験別コピー、旧Python学習recipe、旧実装との比較テストは削除済み。移行前コードはGit `54a294a`、[撤去manifest](../../research-data/ai-sigma/retired-code-cleanup/removed-source.json.gz)と[検証](../../research-data/ai-sigma/retired-code-cleanup/verification.json)で追跡する。[AGENTS.md](../../AGENTS.md)の方針に従い、保守コストを優先し、互換性維持を目的とした旧経路は保持しない。実施中・具体的に予定した直接比較に必要な旧版だけは比較専用に保持し、対象・用途・撤去条件を明示する。比較時にGitから復元する手順は挟まず、終了後に不要分を削除する。
 
-Rustの共通crateから過去frameのコードや管理scriptを呼ばない。PythonはRustが生成・検証したtensorを読み、学習loop内で盤面を再構成しない。モデル定義・設定・尺度は同packageに置き、`sys.path`で旧ツールを取り込まない。学習済み重みと凍結データはコード移行で書き換えない。
+Rustの共通crateから過去frameのコードや管理scriptを呼ばない。PythonはRustが生成・検証したtensor又は66B canonical geometryを読み、学習loop内では限定batchのQF1特徴を展開する。ルール・距離・盤面の合法性を学習loopで再計算しない。モデル定義・設定・尺度は同packageに置き、`sys.path`で旧ツールを取り込まない。学習済み重みと凍結データはコード移行で書き換えない。
 
 ## 品質確認
 
