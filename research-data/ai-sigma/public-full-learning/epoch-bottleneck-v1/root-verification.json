@@ -1,0 +1,69 @@
+{
+  "scope": "Root saved-only bounded metadata/byte verification, not causal or speed adoption",
+  "reported_fixed_files_SHA256": {
+    "report.md": "463e7bdfcaa9e77d0450ac77c99513bee534c82b8a1b7bfcf3b3315c1dc00e02",
+    "analysis.json": "5dc2d1a85213a59ca7ada42d56fc171b42af7cb97ca64c471b08a6f95a7d14d5",
+    "plan.json": "52fc530c5a7927b2f39ee21f6c9ebd3508d43a496ba1837675e077fea3def5bf",
+    "control.json": "afce9e2ca78af683cd474c9ea768fd5898f668c40878d8e71cf81cdaf685ee21",
+    "job.json": "b7d6cc776efe52568361998635b9c768d52614310af0af0f508deff3625bd67c",
+    "forecast.json": "df88dc27009a89f2d0bac8656587c7491c20c9295831b4b75cb11c22ec741934",
+    "preflight.json": "36f5aa0112bc10b091ea07d99266934e3ad807c22f38bbdbc9019ea1739082c7",
+    "stop-receipt.json": "df79efd455495ecf4f6332de97a1766433dcfff0f875d00729244936a87d30ef",
+    "stopped-source.tar.gz": "fafcb1b6d24d256ddd909dcc33a69915831642848dabca15f21f50db96e14420",
+    "math-call-check.json": "7a4808eead80a24a0670a2a31d6d1c1cae06f8814fbcf3e11402b35d6ec7c443",
+    "train-before.py.txt": "0f89a0087f6a20822dd8508474943176e931aee5725a2a6afa81bc7add524830",
+    "plain-config.json": "c9d38c675714e080a46dec4b6f240ed6ee3afec4a9d64400ac11e3093ea5ba77",
+    "detailed-config.json": "4aade669a42b960f976e165e151ad0ab7ba04c2ac17407ff369979d60925a3fa"
+  },
+  "source_archive_members_SHA256": {
+    "python/quoridor_training/train.py": "ee3ef76890d51aac52c963ab5b35dddbeff2e98bea378cb3b9b93bd709b670b6",
+    "python/quoridor_training/epoch_measurement.py": "b8cef74ee2be8a2b8f0e602f962796e2275e6999edda462149df4e9220a1e443",
+    "python/quoridor_training/test_epoch_measurement.py": "aecd562d22474859b7c924cdfcd2a6cda443dbbd37bf472492a2204a2e8f8036"
+  },
+  "current_source_SHA256": {
+    "/workspaces/quoridor/.worktree/learning-million/python/quoridor_training/train.py": "ee3ef76890d51aac52c963ab5b35dddbeff2e98bea378cb3b9b93bd709b670b6",
+    "/workspaces/quoridor/.worktree/learning-million/python/quoridor_training/epoch_measurement.py": "b8cef74ee2be8a2b8f0e602f962796e2275e6999edda462149df4e9220a1e443",
+    "/workspaces/quoridor/.worktree/learning-million/python/quoridor_training/test_epoch_measurement.py": "aecd562d22474859b7c924cdfcd2a6cda443dbbd37bf472492a2204a2e8f8036"
+  },
+  "exact_plain_detailed_named_weights_SHA256": {
+    "plain": {
+      "initial": "2ddacbf88145816b6b0c86e13ebb983d7c1b64e42f8d346623873a18ae7414ad",
+      "best": "9f238b2ca43fce0168f712a21a1c601131886e7dfe61c213b2c74bde86e04d4d",
+      "last": "9f238b2ca43fce0168f712a21a1c601131886e7dfe61c213b2c74bde86e04d4d"
+    },
+    "detailed": {
+      "initial": "2ddacbf88145816b6b0c86e13ebb983d7c1b64e42f8d346623873a18ae7414ad",
+      "best": "9f238b2ca43fce0168f712a21a1c601131886e7dfe61c213b2c74bde86e04d4d",
+      "last": "9f238b2ca43fce0168f712a21a1c601131886e7dfe61c213b2c74bde86e04d4d"
+    }
+  },
+  "lifecycle_partition_sum_and_updates": "PASS both phases, 4109updates/T8413949; no nested-cost sum",
+  "controller_STOP": {
+    "job_id": "6b4627ea-af17-4a01-a36c-0533df96a9ac",
+    "outcome": "succeeded",
+    "error": null,
+    "exit_code": 0,
+    "finished_at": "2026-10-07T03:57:53.039033+00:00",
+    "wall_seconds": 163.24909815902356,
+    "remaining": [],
+    "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+    "cleanup_complete": true,
+    "log_bytes_seen": 74,
+    "log_bytes_retained": 74
+  },
+  "guardian_trainers_cleanup": "provided and controller/phase receipt confirmed; no rerun",
+  "original323_pause_preserved": true,
+  "newE_Sigma_opened": false,
+  "new_Root_model_native_Torch_Numpy_GPU_or_fit_execution": 0,
+  "optimization_or_measurement_hook_main_adoption": false,
+  "limitations": "single plain->detailed pair; first-epoch dense diagnostics/fullT; CPU caller wall not pure GPU DMA/kernel, representative window utilization and purebackward UNKNOWN",
+  "collection_repair": "wrong bounded process.json path repaired to actualoutput; original administrative failure preserved, no model rerun",
+  "preserved_files_SHA256": {
+    "analysis.json.gz": "380ee6ef3262ee9a7eed99b2c7e23cbbde5e5dd5eaf6cc591a0e57ecfc6258e2",
+    "evidence.tar.gz": "63c27438e1d831564df34f56beaf020bad46d00019460ec55772f46569c1effa",
+    "final-artifact-check.json.gz": "9b23a0caf6f21a4fa1647fde474adadc8457e44b12374969daab06221ede7fa5",
+    "report.md": "463e7bdfcaa9e77d0450ac77c99513bee534c82b8a1b7bfcf3b3315c1dc00e02",
+    "stop-receipt.json.gz": "dcee5f3b2f52759a4178a97dfe55b170b0b7162c188bdf4a85cfa0533638727c",
+    "stopped-source.tar.gz": "fafcb1b6d24d256ddd909dcc33a69915831642848dabca15f21f50db96e14420"
+  }
+}
