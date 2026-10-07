@@ -1,0 +1,73 @@
+{
+  "issue": "quoridor-4lc.323.5",
+  "accepted_by": "quoridor-4lc.324",
+  "job_id": "3186f9a6-44e3-48d2-9ac3-20527aacd52d",
+  "START": "2026-10-07T10:29:32.668018+00:00",
+  "STOP": "2026-10-07T10:55:53.331082+00:00",
+  "outcome": "reference completed; no model/default adoption or paused training resume",
+  "evidence": {
+    "summary": ".worktree/assets/checkpoints/public-full-learning/sigma-reference-r5-v1/completion-summary-r5.json",
+    "summary_SHA256": "01ce319a9a59b935cf825515341ef4a713cdf40ba38a7183a3f3fef22902ee8e",
+    "reference_result_SHA256": "147f57c771f6b0e7a82f396920ece762005c32bf3ec424a135cafb80ea906a5a",
+    "latency_SHA256": "594046c47f16ae70a73394e6f431087ad3059155ecabdb1605e7808a987818e5",
+    "binding_SHA256": "2f5a130490663744a2dbaf509fa0eba63c45e831568ebe03acdff3f4aaaacc34",
+    "typed_proof_SHA256": "3b4a898ba787a94b702521dd0ccb1c52c3989499dcee54a47406ed51b759f31e",
+    "changed_source_patch_archive_SHA256": "87a4b77e1fee5d80132d8d1ed997a7df73b4858e655849fb343c3e3d4253dbe9"
+  },
+  "fixed_models": {
+    "trainedBEST": "epoch51/step209559/FT32H32",
+    "PT_SHA256": "b16ba38e65de5de40e6dd421e2200fb25f7524a46b13e441c976eec32f1305ac",
+    "native_parameters_SHA256": "9ca438e43b0c105ac5f802a302946f2ba71623ea2bc443b9c54cc9a8468b75b0",
+    "Sigma_SHA256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d"
+  },
+  "qualification": {
+    "16_targetblind_ordinals_Torch_vs_ORT_maxabs": 3.427267074584961e-7,
+    "tolerance": 1e-6,
+    "finite_range_shape_FP32_before_timing": true,
+    "review_scope": "owned copy/input static NN0; live parity from retained run"
+  },
+  "conditions": "CPU2,3/ORT1.30/CPUExecutionProvider/FP32/thread1/batch1; warm32 each; fixed16 ordinals*100 each; Sigma then NNUE fixed order",
+  "latency_ns": {
+    "Sigma": {
+      "n": 1600,
+      "median": 3576430.0,
+      "p90": 3820586.4000000004,
+      "p99": 5346546.969999999
+    },
+    "NNUE_dense_fullFT_head_D": {
+      "n": 1600,
+      "median": 41547.5,
+      "p90": 68562.90000000001,
+      "p99": 119791.08999999997
+    }
+  },
+  "ratio_of_medians": 86.08051025934172,
+  "timer_scope": "Sigma fullpolicy+value/readvalue vs NNUE dense two-view fullFT+head+D; export/load/features/distance/warm outside; Sigma feed dict/slice inside vs NNUE prebuilt feed indexing inside",
+  "original_openV": {
+    "rows": 419150,
+    "shards": 43,
+    "z": "STM +/-1",
+    "Sigma_fresh_MSE": 0.6653351170399593,
+    "NNUE_saved_sameV_MSE": 0.42744088098494515,
+    "NNUE_MSE_fresh_rerun": false
+  },
+  "costs_seconds": {
+    "successful_controller": 1581.1729731679661,
+    "old_failed_controller": 2.3194578499533236,
+    "two_reference_attempts_controller_sum": 1583.4924310179194,
+    "guard_child_reference_nested_not_added": true,
+    "other_source_review_costs": "retained separately in bound evidence"
+  },
+  "counts": {
+    "Sigma_calls_rows": 420782,
+    "NNUE_ORT_calls_rows": 1648,
+    "Torch_returned": 17,
+    "Torch_validated": 16,
+    "native_geometry_calls": 3275,
+    "native_geometry_rows": 419150,
+    "Torch_export_internal_replay": "UNKNOWN; export observed row not validated"
+  },
+  "cleanup": "directwait/process/handle cleanup and exact identities absent verified; persisted process mask pending retained, guard postreturn child snapshot completed",
+  "storage": "source growth4096+pack36864+controller24576=held65536; one summary inside newoutput114688<=131072; old upper/assets/UNKNOWN not refunded",
+  "limits": "One fixed workload/reference, no sparse native/delta/head-only/kernel/search speed or strength claim. Same original V selected trainedBEST; Sigma public exposure UNKNOWN. No sealed labels opened. Independent per-row Torch expectations not saved. Finite diagnostic source archived, not installed as a permanent experiment entry."
+}
