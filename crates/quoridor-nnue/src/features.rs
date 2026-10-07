@@ -31,14 +31,7 @@ pub(crate) fn encode_cached(
     p: Position,
     previous: Option<&Arc<WallMaps>>,
 ) -> Result<(Features, Arc<WallMaps>)> {
-    let maps = match previous {
-        Some(m) if m.horizontal == p.horizontal && m.vertical == p.vertical => Arc::clone(m),
-        _ => Arc::new(WallMaps {
-            horizontal: p.horizontal,
-            vertical: p.vertical,
-            distances: p.wall_distance_maps(),
-        }),
-    };
+    let maps = maps_for(p, previous);
     let ids = std::array::from_fn(|player| {
         let rotate = player == 1;
         let square = |cell: u8| if rotate { 80 - cell } else { cell };
@@ -57,6 +50,29 @@ pub(crate) fn encode_cached(
         out.sort_unstable();
         out
     });
+    let distance = distance(p, &maps)?;
+    Ok((
+        Features {
+            ids,
+            distance,
+            side: p.turn,
+        },
+        maps,
+    ))
+}
+
+fn maps_for(p: Position, previous: Option<&Arc<WallMaps>>) -> Arc<WallMaps> {
+    match previous {
+        Some(m) if m.horizontal == p.horizontal && m.vertical == p.vertical => Arc::clone(m),
+        _ => Arc::new(WallMaps {
+            horizontal: p.horizontal,
+            vertical: p.vertical,
+            distances: p.wall_distance_maps(),
+        }),
+    }
+}
+
+fn distance(p: Position, maps: &WallMaps) -> Result<[f32; 2]> {
     let side = p.turn as usize;
     let mut distance = [0.; 2];
     for (i, player) in [side, side ^ 1].into_iter().enumerate() {
@@ -66,14 +82,107 @@ pub(crate) fn encode_cached(
         }
         distance[i] = (f64::from(d) / 80.) as f32;
     }
-    Ok((
-        Features {
-            ids,
-            distance,
-            side: p.turn,
-        },
-        maps,
-    ))
+    Ok(distance)
+}
+
+/// Validate canonical board IDs without allocating/re-encoding or trusting
+/// public mutable Features. Other valid general inputs use the general delta.
+#[cfg(feature = "research")]
+pub(crate) fn matches_position(f: &Features, p: Position) -> bool {
+    if f.side != p.turn {
+        return false;
+    }
+    for (player, ids) in f.ids.iter().enumerate() {
+        let square = |x: u8| if player == 1 { 80 - x } else { x };
+        if ids.len() < 4
+            || ids[0] != u16::from(square(p.pawns[player]))
+            || ids[1] != 81 + u16::from(square(p.pawns[player ^ 1]))
+            || ids[ids.len() - 2] != 290 + u16::from(p.walls_remaining[player])
+            || ids[ids.len() - 1] != 301 + u16::from(p.walls_remaining[player ^ 1])
+        {
+            return false;
+        }
+        let mut horizontal = 0u64;
+        let mut vertical = 0u64;
+        for &id in &ids[2..ids.len() - 2] {
+            let (anchor, bits) = match id {
+                162..=225 => (id - 162, &mut horizontal),
+                226..=289 => (id - 226, &mut vertical),
+                _ => return false,
+            };
+            *bits |= 1u64 << if player == 1 { 63 - anchor } else { anchor };
+        }
+        if horizontal != p.horizontal || vertical != p.vertical {
+            return false;
+        }
+    }
+    true
+}
+
+#[cfg(feature = "research")]
+pub(crate) struct FeatureDelta {
+    pub removed: [u16; 1],
+    pub added: [u16; 2],
+    pub added_len: usize,
+}
+
+/// Only called with a core-checked transition and canonical matching parent.
+#[cfg(feature = "research")]
+pub(crate) fn move_features_into(
+    parent: &Features,
+    before: Position,
+    child: Position,
+    out: &mut Features,
+    previous: Option<&Arc<WallMaps>>,
+) -> Result<([FeatureDelta; 2], Arc<WallMaps>)> {
+    let mover = usize::from(before.turn);
+    let pawn = before.horizontal == child.horizontal && before.vertical == child.vertical;
+    let deltas: [FeatureDelta; 2] = std::array::from_fn(|player| {
+        let rotate = player == 1;
+        if pawn {
+            let base = if player == mover { 0 } else { 81 };
+            let square = |x: u8| if rotate { 80 - x } else { x };
+            FeatureDelta {
+                removed: [base + u16::from(square(before.pawns[mover]))],
+                added: [base + u16::from(square(child.pawns[mover])), 0],
+                added_len: 1,
+            }
+        } else {
+            let (bits, base) = if before.horizontal != child.horizontal {
+                (child.horizontal ^ before.horizontal, 162)
+            } else {
+                (child.vertical ^ before.vertical, 226)
+            };
+            let anchor = bits.trailing_zeros() as u16;
+            let stock = if player == mover { 290 } else { 301 };
+            FeatureDelta {
+                removed: [stock + u16::from(before.walls_remaining[mover])],
+                added: [
+                    base + if rotate { 63 - anchor } else { anchor },
+                    stock + u16::from(child.walls_remaining[mover]),
+                ],
+                added_len: 2,
+            }
+        }
+    });
+    for (player, delta) in deltas.iter().enumerate() {
+        out.ids[player].clone_from(&parent.ids[player]);
+        let index = out.ids[player]
+            .binary_search(&delta.removed[0])
+            .map_err(|_| Error::Input("checked move parent feature mismatch".into()))?;
+        out.ids[player].remove(index);
+        for &id in &delta.added[..delta.added_len] {
+            let index = out.ids[player].binary_search(&id);
+            match index {
+                Ok(_) => return Err(Error::Input("checked move duplicate feature".into())),
+                Err(index) => out.ids[player].insert(index, id),
+            }
+        }
+    }
+    let maps = maps_for(child, previous);
+    out.distance = distance(child, &maps)?;
+    out.side = child.turn;
+    Ok((deltas, maps))
 }
 
 #[cfg(test)]

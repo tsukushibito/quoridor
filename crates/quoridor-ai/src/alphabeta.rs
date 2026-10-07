@@ -61,6 +61,20 @@ pub enum EvalScratch {
 /// Immutable evaluators share weights; accumulator state belongs to one search.
 /// Hooks support a cached per-child delta and exact rollback by retaining parent.
 pub trait StaticEvaluator: Send + Sync {
+    /// Optional setup-owned child storage, separate for every invocation.
+    fn create_child_storage(&self, _slots: usize) -> Vec<Option<EvalAccumulator>> {
+        Vec::new()
+    }
+    fn advance_move_context(
+        &self,
+        parent: Option<&EvalAccumulator>,
+        context: &SigmaContext,
+        _transition: &quoridor_core::research::ContextUndo,
+        storage: &mut Option<EvalAccumulator>,
+    ) -> Result<()> {
+        *storage = self.advance_context(parent, context)?;
+        Ok(())
+    }
     fn create_scratch(&self) -> EvalScratch {
         EvalScratch::None
     }
@@ -98,6 +112,7 @@ pub trait StaticEvaluator: Send + Sync {
         self.prepare(position)
     }
 }
+
 /// Optional local policy/history ranking. Scores cover every legal action in
 /// the supplied order; they affect ordering only and never exclude a move.
 pub trait MoveOrderer: Send + Sync {
@@ -230,6 +245,27 @@ impl ResidualEvaluator {
     }
 }
 impl StaticEvaluator for ResidualEvaluator {
+    fn create_child_storage(&self, slots: usize) -> Vec<Option<EvalAccumulator>> {
+        (0..slots)
+            .map(|_| Some(EvalAccumulator::Float(self.model.child_buffer(self.mode))))
+            .collect()
+    }
+    fn advance_move_context(
+        &self,
+        parent: Option<&EvalAccumulator>,
+        context: &SigmaContext,
+        transition: &quoridor_core::research::ContextUndo,
+        storage: &mut Option<EvalAccumulator>,
+    ) -> Result<()> {
+        match (parent, storage.as_mut()) {
+            (Some(EvalAccumulator::Float(parent)), Some(EvalAccumulator::Float(child))) => {
+                self.model
+                    .delta_move_into(parent, transition, context, child)?;
+            }
+            _ => *storage = self.advance_context(parent, context)?,
+        }
+        Ok(())
+    }
     fn create_scratch(&self) -> EvalScratch {
         EvalScratch::Residual(self.model.evaluation_scratch())
     }
@@ -581,6 +617,7 @@ type NodeResult<T> = std::result::Result<T, Interrupted>;
 struct Search<'a> {
     eval: &'a dyn StaticEvaluator,
     eval_scratch: EvalScratch,
+    child_buffers: Vec<Option<EvalAccumulator>>,
     orderer: Option<&'a dyn MoveOrderer>,
     limits: &'a SearchLimits,
     cancel: &'a AtomicBool,
@@ -669,15 +706,22 @@ impl Search<'_> {
     ) -> NodeResult<f32> {
         self.control()?;
         let undo = c.make_move(action)?;
+        // Taking the slot keeps payloads on the heap and the parent borrow local;
+        // deeper recursion can never alias this active child.
+        let pooled = ply < self.child_buffers.len();
+        let mut a = self.child_buffers.get_mut(ply).and_then(Option::take);
         // The restore happens even when evaluation, budget or cancellation fails.
         let result = (|| {
-            let a = self.eval.advance_context(parent, c)?;
+            self.eval.advance_move_context(parent, c, &undo, &mut a)?;
             if a.is_some() {
                 self.stats.delta_updates += 1;
             }
             self.control()?;
             self.negamax(c, a.as_ref(), depth, -window[1], -window[0], ply)
         })();
+        if pooled {
+            self.child_buffers[ply] = a;
+        }
         c.unmake_move(undo)?;
         result.map(|v| -v)
     }
@@ -1054,6 +1098,7 @@ fn search_in_table(
     let mut state = Search {
         eval: evaluator,
         eval_scratch: evaluator.create_scratch(),
+        child_buffers: Vec::new(),
         orderer,
         limits,
         cancel,
@@ -1083,6 +1128,7 @@ fn search_in_table(
         }
         let a = evaluator.prepare_context(&c)?;
         state.control()?;
+        state.child_buffers = evaluator.create_child_storage(limits.max_depth as usize + 1);
         for depth in 1..=limits.max_depth {
             state.table.next_generation();
             let (action, value) = state.root_depth(&mut c, a.as_ref(), depth, result.action)?;
@@ -1353,6 +1399,7 @@ mod persistent_tt_tests {
             let mut state = Search {
                 eval: e.as_ref(),
                 eval_scratch: e.create_scratch(),
+                child_buffers: Vec::new(),
                 orderer: None,
                 limits: &l,
                 cancel: &cancel,
@@ -1921,5 +1968,200 @@ mod fast_head_search_tests {
             rows.len(),
             all_errors.len()
         );
+    }
+}
+
+#[cfg(test)]
+mod child_buffer_tests {
+    use super::*;
+    use quoridor_nnue::{DistanceFit, Topology, residual::RouteMode};
+
+    struct Probe {
+        inner: ResidualEvaluator,
+        cancel: Arc<AtomicBool>,
+        failure: u8,
+    }
+    impl StaticEvaluator for Probe {
+        fn create_child_storage(&self, n: usize) -> Vec<Option<EvalAccumulator>> {
+            self.inner.create_child_storage(n)
+        }
+        fn create_scratch(&self) -> EvalScratch {
+            self.inner.create_scratch()
+        }
+        fn prepare_context(&self, c: &SigmaContext) -> Result<Option<EvalAccumulator>> {
+            self.inner.prepare_context(c)
+        }
+        fn evaluate(&self, c: &SigmaContext, a: Option<&EvalAccumulator>) -> Result<f32> {
+            self.inner.evaluate(c, a)
+        }
+        fn evaluate_with_scratch(
+            &self,
+            c: &SigmaContext,
+            a: Option<&EvalAccumulator>,
+            s: &mut EvalScratch,
+        ) -> Result<f32> {
+            self.inner.evaluate_with_scratch(c, a, s)
+        }
+        fn advance_move_context(
+            &self,
+            p: Option<&EvalAccumulator>,
+            c: &SigmaContext,
+            u: &quoridor_core::research::ContextUndo,
+            storage: &mut Option<EvalAccumulator>,
+        ) -> Result<()> {
+            self.inner.advance_move_context(p, c, u, storage)?;
+            if self.failure == 1 {
+                self.cancel.store(true, Ordering::Relaxed);
+            }
+            if self.failure == 2 {
+                return Err(SearchError::Evaluation("after-child fixture".into()));
+            }
+            Ok(())
+        }
+    }
+    fn evaluator(width: usize) -> ResidualEvaluator {
+        let t = Topology {
+            ft_width: width,
+            hidden_width: 1,
+        };
+        let model = ResidualModel::from_parts(
+            t,
+            vec![0.; ResidualModel::parameter_count(t).unwrap()],
+            [0.; 2],
+            [1.; 2],
+            DistanceFit::default(),
+            RouteMode::Zero4,
+            [0.; 4],
+            [1.; 4],
+        )
+        .unwrap();
+        ResidualEvaluator::new(Arc::new(model))
+    }
+    #[test]
+    fn slot_return_and_history_restore_after_success_cancel_or_error() {
+        for failure in 0..=2 {
+            let cancel = Arc::new(AtomicBool::new(false));
+            let e = Probe {
+                inner: evaluator(32),
+                cancel: cancel.clone(),
+                failure,
+            };
+            let limits = SearchLimits {
+                max_depth: 3,
+                max_nodes: 100000,
+                time_limit: None,
+                tt_entries: 4096,
+                use_pvs: true,
+                use_tt: true,
+            };
+            let mut table = Table::new(4096).unwrap();
+            let mut c = SigmaContext::from_prefix(&[]).unwrap();
+            let position = c.position();
+            let history = c.history_counts();
+            let parent = e.prepare_context(&c).unwrap();
+            let mut state = Search {
+                eval: &e,
+                eval_scratch: e.create_scratch(),
+                child_buffers: e.create_child_storage(4),
+                orderer: None,
+                limits: &limits,
+                cancel: &cancel,
+                start: Instant::now(),
+                deadline: None,
+                table: &mut table,
+                stats: SearchStats::default(),
+                killers: vec![[None; 2]; 4],
+                history: [0; 209],
+            };
+            let result = state.child(
+                &mut c,
+                parent.as_ref(),
+                13,
+                0,
+                [f32::NEG_INFINITY, f32::INFINITY],
+                1,
+            );
+            assert_eq!(c.position(), position);
+            assert_eq!(c.history_counts(), history);
+            assert!(state.child_buffers[1].is_some());
+            if failure == 0 {
+                assert!(result.is_ok());
+            } else {
+                assert!(result.is_err());
+            }
+        }
+    }
+    #[test]
+    fn maxdepth_maxwidth_per_invocation_slots_have_distinct_payloads() {
+        let e = evaluator(2048);
+        let one = e.create_child_storage(201);
+        let two = e.create_child_storage(201);
+        let mut pointers = std::collections::HashSet::new();
+        for a in one.iter().chain(&two) {
+            let Some(EvalAccumulator::Float(a)) = a else {
+                panic!("float slot missing")
+            };
+            for values in &a.values {
+                assert_eq!(values.len(), 2048);
+                assert!(pointers.insert(values.as_ptr()));
+            }
+        }
+        assert!(
+            DistanceEvaluator::new(0., 8.)
+                .create_child_storage(201)
+                .is_empty()
+        );
+    }
+    #[test]
+    fn cancelled_before_entry_does_not_request_child_storage() {
+        struct Never;
+        impl StaticEvaluator for Never {
+            fn create_child_storage(&self, _: usize) -> Vec<Option<EvalAccumulator>> {
+                panic!("cancelled allocation")
+            }
+            fn evaluate(&self, _: &SigmaContext, _: Option<&EvalAccumulator>) -> Result<f32> {
+                panic!("cancelled evaluation")
+            }
+        }
+        let root = SigmaContext::from_prefix(&[]).unwrap();
+        let limits = SearchLimits {
+            max_depth: 200,
+            max_nodes: 1,
+            time_limit: None,
+            tt_entries: 1,
+            use_pvs: false,
+            use_tt: false,
+        };
+        let result = search(&root, &Never, &limits, &AtomicBool::new(true)).unwrap();
+        assert_eq!(result.stop, StopReason::Cancelled);
+    }
+    #[test]
+    fn nested_search_has_its_own_pool_and_exact_parent_history() {
+        let e = evaluator(7);
+        let root = SigmaContext::from_prefix(&[]).unwrap();
+        let before = root.history_counts();
+        let limits = SearchLimits {
+            max_depth: 2,
+            max_nodes: 100000,
+            time_limit: None,
+            tt_entries: 4096,
+            use_pvs: true,
+            use_tt: true,
+        };
+        let mut callbacks = 0;
+        let outer = search_with_updates(&root, &e, &limits, &AtomicBool::new(false), &mut |_| {
+            let inner_limits = SearchLimits {
+                max_depth: 1,
+                ..limits.clone()
+            };
+            let inner = search(&root, &e, &inner_limits, &AtomicBool::new(false)).unwrap();
+            assert_eq!(inner.completed_depth, 1);
+            assert_eq!(root.history_counts(), before);
+            callbacks += 1;
+        })
+        .unwrap();
+        assert_eq!(outer.completed_depth, 2);
+        assert_eq!(callbacks, 2);
+        assert_eq!(root.history_counts(), before);
     }
 }

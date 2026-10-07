@@ -442,29 +442,20 @@ impl Model {
     pub fn delta_features(&self, parent: &Accumulator, features: Features) -> Result<Accumulator> {
         self.validate_accumulator(parent)?;
         validate_features(&features)?;
-        let width = self.topology.ft_width;
         let mut values = parent.values.clone();
         for (p, out) in values.iter_mut().enumerate() {
-            for &k in &parent.features.ids[p] {
-                if features.ids[p].binary_search(&k).is_err() {
-                    simd::add_column(
-                        out,
-                        &self.columns[k as usize * width..(k as usize + 1) * width],
-                        true,
-                        parent.mode == EvaluationMode::Simd,
-                    );
-                }
-            }
-            for &k in &features.ids[p] {
-                if parent.features.ids[p].binary_search(&k).is_err() {
-                    simd::add_column(
-                        out,
-                        &self.columns[k as usize * width..(k as usize + 1) * width],
-                        false,
-                        parent.mode == EvaluationMode::Simd,
-                    );
-                }
-            }
+            self.update_columns(
+                out,
+                parent.features.ids[p]
+                    .iter()
+                    .copied()
+                    .filter(|k| features.ids[p].binary_search(k).is_err()),
+                features.ids[p]
+                    .iter()
+                    .copied()
+                    .filter(|k| parent.features.ids[p].binary_search(k).is_err()),
+                parent.mode,
+            );
         }
         if values.iter().flatten().any(|v| !v.is_finite()) {
             return Err(Error::Numeric("FT delta overflow".into()));
@@ -476,6 +467,131 @@ impl Model {
             mode: parent.mode,
             maps: None,
         })
+    }
+
+    /// Setup-owned initialized FT/ID storage. It is the legitimate empty-feature
+    /// accumulator, not an uninitialized search state. Overwrite before child use.
+    #[cfg(feature = "research")]
+    pub fn child_buffer(&self, mode: EvaluationMode) -> Accumulator {
+        let width = self.topology.ft_width;
+        let bias = &self.weights[FEATURE_COUNT * width..(FEATURE_COUNT + 1) * width];
+        Accumulator {
+            features: Features {
+                ids: std::array::from_fn(|_| Vec::with_capacity(24)),
+                distance: [0.; 2],
+                side: 0,
+            },
+            values: [bias.to_vec(), bias.to_vec()],
+            fingerprint: self.fingerprint,
+            mode,
+            maps: None,
+        }
+    }
+
+    /// Reuse child buffers for a core-checked transition. Public mutable parent
+    /// inputs are validated; non-board feature inputs retain general delta meaning.
+    /// Child FT vectors must have this model's width and each ID vector must have
+    /// capacity >= 24. On Err the child may be partially overwritten and must not
+    /// be evaluated until a subsequent successful overwrite; parent stays immutable.
+    #[cfg(feature = "research")]
+    pub fn delta_move_into(
+        &self,
+        parent: &Accumulator,
+        transition: &quoridor_core::research::ContextUndo,
+        context: &quoridor_core::research::SigmaContext,
+        child: &mut Accumulator,
+    ) -> Result<()> {
+        self.validate_accumulator(parent)?;
+        if child
+            .values
+            .iter()
+            .any(|v| v.len() != self.topology.ft_width)
+            || child.features.ids.iter().any(|v| v.capacity() < 24)
+        {
+            return Err(Error::Input("child buffer shape/capacity mismatch".into()));
+        }
+        let (before, after) = transition
+            .checked_positions(context)
+            .map_err(|e| Error::Input(e.to_string()))?;
+        if features::matches_position(&parent.features, before) {
+            let (deltas, maps) = features::move_features_into(
+                &parent.features,
+                before,
+                after,
+                &mut child.features,
+                parent.maps.as_ref(),
+            )?;
+            for (p, delta) in deltas.iter().enumerate() {
+                child.values[p].copy_from_slice(&parent.values[p]);
+                self.update_columns(
+                    &mut child.values[p],
+                    delta.removed.iter().copied(),
+                    delta.added[..delta.added_len].iter().copied(),
+                    parent.mode,
+                );
+            }
+            child.maps = Some(maps);
+        } else {
+            // General valid features need full child encoding and membership;
+            // do not silently reinterpret them as the board's single-move IDs.
+            let (input, maps) = features::encode_cached(after, parent.maps.as_ref())?;
+            validate_features(&input)?;
+            for (p, out) in child.values.iter_mut().enumerate() {
+                out.copy_from_slice(&parent.values[p]);
+                self.update_columns(
+                    out,
+                    parent.features.ids[p]
+                        .iter()
+                        .copied()
+                        .filter(|k| input.ids[p].binary_search(k).is_err()),
+                    input.ids[p]
+                        .iter()
+                        .copied()
+                        .filter(|k| parent.features.ids[p].binary_search(k).is_err()),
+                    parent.mode,
+                );
+            }
+            for (out, ids) in child.features.ids.iter_mut().zip(&input.ids) {
+                out.clone_from(ids);
+            }
+            child.features.distance = input.distance;
+            child.features.side = input.side;
+            child.maps = Some(maps);
+        }
+        child.mode = parent.mode;
+        child.fingerprint = self.fingerprint;
+        if child.values.iter().flatten().any(|v| !v.is_finite()) {
+            return Err(Error::Numeric("FT delta overflow".into()));
+        }
+        Ok(())
+    }
+
+    // One arithmetic kernel for general inputs and direct checked moves. Removal
+    // and addition iterators must be ascending, exactly as the original delta.
+    fn update_columns(
+        &self,
+        out: &mut [f32],
+        removals: impl Iterator<Item = u16>,
+        additions: impl Iterator<Item = u16>,
+        mode: EvaluationMode,
+    ) {
+        let width = self.topology.ft_width;
+        for k in removals {
+            simd::add_column(
+                out,
+                &self.columns[k as usize * width..(k as usize + 1) * width],
+                true,
+                mode == EvaluationMode::Simd,
+            );
+        }
+        for k in additions {
+            simd::add_column(
+                out,
+                &self.columns[k as usize * width..(k as usize + 1) * width],
+                false,
+                mode == EvaluationMode::Simd,
+            );
+        }
     }
     pub fn evaluate(&self, a: &Accumulator) -> Result<f32> {
         self.validate_accumulator(a)?;

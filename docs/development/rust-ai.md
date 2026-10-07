@@ -111,7 +111,7 @@ node crates/quoridor-wasm/tests/nnue-runtime.cjs \
 
 ## CriterionでNNUE評価・AlphaBetaを測定する
 
-`quoridor-ai/benches/nnue_search.rs` は現役の残差モデルとAlphaBeta APIを使う。Criterion 0.8.2はdev依存のみ、default featuresなし・`cargo_bench_support`のみ。Rayon/plotters/GUIは導入しない。採用済みの残差scratch APIと`research` featureのplain構成を使う（`profiling`併用は拒否）。
+`quoridor-ai/benches/nnue_search.rs` は現役の残差モデルとAlphaBeta APIを使う。Criterion 0.8.2はdev依存のみ、default featuresなし・`cargo_bench_support`のみ。Rayon/plotters/GUIは導入しない。採用済みの残差scratch APIと`research` featureのplain構成を使う（`profiling` / `research-diagnostics`併用は拒否）。
 
 重みは既存の真正checkpointをread-only参照する。`QUORIDOR_BENCH_MANIFEST` を既存 `baseline-original-v2/output/best-model/manifest.json` の絶対pathへ設定する。固定設定 `benches/nnue_search.json` はweights SHA `c0ec9bf3…`、既に資格確認した5本の完全な合法prefix（序盤・壁の多い中盤・P2 jump・終盤）と二手の進行を束縛する。loaderが実weightsのSHA/長さ/形式/尺度を検証する。別モデルの利用は新しい比較条件として設定・source・compiler・lock・manifest/weights SHAを結果前に固定する。
 
@@ -134,7 +134,7 @@ cargo bench -p quoridor-ai --features research --bench nnue_search --offline --l
 
 測定範囲はbenchmark IDに明示する。モデルload、合法prefix replay、完成depth・有限値・同仕事の再現・親/history復帰の事前資格は全項目のtimer外だが、job全費には含める。`nnue/evaluate` はaccumulatorのfull FT事前計算と入力scratchのsetupをtimer外に置き、反復中は借用入力bufferを再用する。one-shot `evaluate` のsetup費用をこのhead timerへ含めた測定ではない。各 `search/*` / `tt/*` の探索呼出は、通常のevaluator準備・root FT計算とSearch呼出しごとのscratch setup/dropもtimer内に含む。`search/cold_setup_search_drop` は毎回新しいplayer/TTを作り、depth3探索とtable破棄まで含む。
 
-`QUORIDOR_BENCH_FT_MODE=Scalar|Simd` はFTの入口だけを明示選択する。未指定は設定のScalarを使い、両条件のheadは同じ採用済みguarded AVX2で、独立したFT modeとheadを混同しない。`ft/full_context/*` はrootのmap・特徴生成・full FT・確保・検査・破棄、`ft/delta_context/*` は既に用意した親/子contextからの特徴・membership検査・親値コピー・ordered減算/加算・確保・破棄をtimer内へ含める。これら10項目とcold Search5項目がFT比較の15項目で、単体kernelの計測ではない。資格では両modeのfull/delta bits、独立したserialized-weight ordered FT oracle、親/undo/history/errors、cold探索のAction/value/PV/depth/全counterを対応させる。重みdecodeはsafe `as_chunks::<4>()` を使い、現役Clippyに一時lint例外を置かない。固定325比較はcold利益0/5でScalar既定を保持した。[有限結果と保守検証](../../research-data/ai-sigma/search-optimization/ft-delta-simd-v1/integration-result.json)。
+`QUORIDOR_BENCH_FT_MODE=Scalar|Simd` はFTの入口だけを明示選択する。未指定は設定のScalarを使い、両条件のheadは同じ採用済みguarded AVX2で、独立したFT modeとheadを混同しない。`ft/full_context/*` はrootのmap・特徴生成・full FT・確保・検査・破棄、`ft/delta_context/*` は親accumulator、合法手のchecked token、再用child bufferをtimer外に用意し、通常の `delta_move_into` による特徴差分・親検証・親FTコピー・ordered減算/加算を測る。child bufferのsetup/dropはこの単体timer外で、cold Searchでは呼出しごとのchild pool setup/dropを含める。公開general入力の `delta_context` は引き続き一般入力の意味を保つ。full/deltaとcold Searchは単体kernelの計測ではない。保存済み325はScalar/Simd FTの15項目比較で、326は同じScalar FT/guarded headによるdirect-feature差分＋Search child bufferの10項目（delta5＋cold5）比較として区別する。資格では両modeのfull/delta bits、独立したserialized-weight ordered FT oracle、親/undo/history/errors、cold探索のAction/value/PV/depth/全counterを対応させる。重みdecodeはsafe `as_chunks::<4>()` を使い、現役Clippyに一時lint例外を置かない。固定325比較はcold利益0/5でScalar既定を保持した。[有限結果と保守検証](../../research-data/ai-sigma/search-optimization/ft-delta-simd-v1/integration-result.json)。
 
 TTのtargetは同playerが合法な二手を進めたdepth2の局面。`tt/cold_target_setup_search_drop` は空TTの作成/target探索/破棄、`tt/warm_target_search_only` は各iterationで別のplayerをdepth3でseedしてからtargetを一度だけ検索する（seed/setup/table破棄はこのtimer外だが、target探索自身のevaluator準備/root FTはtimer内）。同じtargetを無限に再検索してwarmの代用にしない。`tt/seed_setup_search_drop` と `tt/seed_progress_target_drop` はseed単体・二手進行を含む全費で、warm限定時間をそのまま永続TTの全体利益にしない。weights/mode/rules/selectivity namespaceとfullhistory/plyは維持する。
 

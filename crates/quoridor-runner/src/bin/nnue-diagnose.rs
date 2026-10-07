@@ -87,6 +87,19 @@ impl Counted {
     }
 }
 impl StaticEvaluator for Counted {
+    fn create_child_storage(&self, slots: usize) -> Vec<Option<EvalAccumulator>> {
+        self.inner.create_child_storage(slots)
+    }
+    fn advance_move_context(
+        &self,
+        parent: Option<&EvalAccumulator>,
+        context: &SigmaContext,
+        transition: &quoridor_core::research::ContextUndo,
+        storage: &mut Option<EvalAccumulator>,
+    ) -> alphabeta::Result<()> {
+        self.inner
+            .advance_move_context(parent, context, transition, storage)
+    }
     fn create_scratch(&self) -> EvalScratch {
         self.inner.create_scratch()
     }
@@ -852,5 +865,52 @@ mod borrowed_input_counter_tests {
         assert_eq!(evaluator.own.load(Ordering::Relaxed), 2);
         assert_eq!(global.load(Ordering::Relaxed), 2);
         println!("COUNTED_SCRATCH_ADAPTER_NN_FORWARD=0;MOCK_CALLS=2");
+    }
+    #[test]
+    fn counted_checked_move_hook_forwards_without_evaluation_charge_nn0() {
+        struct ChildMock(AtomicU64);
+        impl StaticEvaluator for ChildMock {
+            fn create_child_storage(&self, slots: usize) -> Vec<Option<EvalAccumulator>> {
+                self.0.fetch_add(1, Ordering::Relaxed);
+                std::iter::repeat_with(|| None).take(slots).collect()
+            }
+            fn advance_move_context(
+                &self,
+                _: Option<&EvalAccumulator>,
+                context: &SigmaContext,
+                undo: &quoridor_core::research::ContextUndo,
+                storage: &mut Option<EvalAccumulator>,
+            ) -> alphabeta::Result<()> {
+                undo.checked_positions(context).unwrap();
+                self.0.fetch_add(1, Ordering::Relaxed);
+                *storage = None;
+                Ok(())
+            }
+            fn evaluate(
+                &self,
+                _: &SigmaContext,
+                _: Option<&EvalAccumulator>,
+            ) -> alphabeta::Result<f32> {
+                panic!("no head in child hook")
+            }
+        }
+        let inner = Arc::new(ChildMock(AtomicU64::new(0)));
+        let counter = Arc::new(AtomicU64::new(0));
+        let e = Counted {
+            inner: inner.clone(),
+            neural: true,
+            nn: counter.clone(),
+            own: AtomicU64::new(0),
+            cap: 0,
+        };
+        let mut slots = e.create_child_storage(4);
+        let mut context = SigmaContext::from_prefix(&[]).unwrap();
+        let undo = context.make_move(13).unwrap();
+        e.advance_move_context(None, &context, &undo, &mut slots[1])
+            .unwrap();
+        context.unmake_move(undo).unwrap();
+        assert_eq!(inner.0.load(Ordering::Relaxed), 2);
+        assert_eq!(counter.load(Ordering::Relaxed), 0);
+        assert_eq!(e.own.load(Ordering::Relaxed), 0);
     }
 }

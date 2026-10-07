@@ -219,7 +219,7 @@ fn main() {
         .warm_up_time(Duration::from_secs(1))
         .measurement_time(Duration::from_secs(3))
         .configure_from_args();
-    if cfg!(feature = "profiling") {
+    if cfg!(feature = "profiling") || cfg!(feature = "research-diagnostics") {
         panic!("timing requires plain research build");
     }
     let mut config: Value = serde_json::from_str(include_str!("nnue_search.json")).unwrap();
@@ -249,7 +249,7 @@ fn main() {
             "all_ids":"plain; model load, legal replay and qualification outside samples, included in whole job",
             "nnue/evaluate":"head only; accumulator full FT precompute outside timer",
             "ft/full_context":"full root geometry/features/FT/vector allocation+drop inside; model/replay outside",
-            "ft/delta_context":"parent and child context prepared outside; cached maps/features/delta/validation/vector copy+drop inside",
+            "ft/delta_context":"parent/checked transition/reusable child FT-ID storage setup and destruction outside; validation/direct features/maps/parent FT copy/ordered columns into reused buffer inside",
             "search/cold_setup_search_drop":"new player/TT, normal evaluator preparation including root FT, search and table destruction inside timer",
             "tt/cold_target_setup_search_drop":"new player/TT, target evaluator preparation including root FT, search and table destruction inside timer",
             "tt/warm_target_search_only":"target search AND normal target evaluator preparation/root FT inside; player setup/seed/table destruction outside",
@@ -292,7 +292,20 @@ fn main() {
         assert_eq!(root.total_ply() + 2, next.total_ply());
         let accumulator = model.full_context(&root, ft_mode).unwrap();
         qualify_ft(&model, &weights, width, &root);
-        let child = root.play(fixture["next"].as_u64().unwrap() as u16).unwrap();
+        let mut child = root.clone();
+        let transition = child
+            .make_move(fixture["next"].as_u64().unwrap() as u16)
+            .unwrap();
+        let mut delta_storage = model.child_buffer(ft_mode);
+        let general = model.delta_context(&accumulator, &child).unwrap();
+        model
+            .delta_move_into(&accumulator, &transition, &child, &mut delta_storage)
+            .unwrap();
+        same_ft(&delta_storage, &general);
+        assert_eq!(
+            ft_bits(&delta_storage),
+            ordered_ft(&weights, width, Some(&accumulator), &delta_storage)
+        );
         let other: Arc<dyn StaticEvaluator> =
             Arc::new(ab::ResidualEvaluator::new(model.clone()).with_mode(
                 if ft_mode == EvaluationMode::Scalar {
@@ -360,11 +373,15 @@ fn main() {
         });
         criterion.bench_function(&format!("ft/delta_context/{name}"), |b| {
             b.iter(|| {
-                let a = model
-                    .delta_context(black_box(&accumulator), black_box(&child))
+                model
+                    .delta_move_into(
+                        black_box(&accumulator),
+                        black_box(&transition),
+                        black_box(&child),
+                        &mut delta_storage,
+                    )
                     .unwrap();
-                black_box(&a);
-                drop(a);
+                black_box(&delta_storage);
             });
         });
         criterion.bench_function(&format!("nnue/evaluate/{name}"), |b| {

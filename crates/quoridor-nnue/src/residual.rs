@@ -237,6 +237,21 @@ impl ResidualModel {
     ) -> Result<Accumulator> {
         self.base.delta_context(parent, context)
     }
+    #[cfg(feature = "research")]
+    pub fn child_buffer(&self, mode: EvaluationMode) -> Accumulator {
+        self.base.child_buffer(mode)
+    }
+    #[cfg(feature = "research")]
+    pub fn delta_move_into(
+        &self,
+        parent: &Accumulator,
+        transition: &quoridor_core::research::ContextUndo,
+        context: &SigmaContext,
+        child: &mut Accumulator,
+    ) -> Result<()> {
+        self.base
+            .delta_move_into(parent, transition, context, child)
+    }
     pub fn full_mode(&self, position: Position, mode: EvaluationMode) -> Result<Accumulator> {
         self.base.full_mode(position, mode)
     }

@@ -1,0 +1,94 @@
+{
+  "issue": "quoridor-4lc.326",
+  "status": "ADOPTED reviewed production and qualified maintained bench source; exact main version recorded in Beads commit receipt",
+  "source_SHA256": {
+    "crates/quoridor-core/src/research.rs": "633794c0250abea7be2d3c837ddd185ce2ee4d107b097119adcecb2674ff72c8",
+    "crates/quoridor-nnue/src/features.rs": "c13e6e50fa3307a41109c104e963ef6869685bd3bdf60ed1dd42572fc496f529",
+    "crates/quoridor-nnue/src/lib.rs": "a6f7826168e77d1ee4ab12972bcd909cbeb724a6eef4642f1c97bb245ea49d63",
+    "crates/quoridor-nnue/src/residual.rs": "bc1fcc4bd35f882408d92b397bf981b459e8c5c9a08638ce9a738cd86f5d44ab",
+    "crates/quoridor-ai/src/alphabeta.rs": "1516ef1cbaed44e21f9069b4a4871ff7267c39f89873f44c37f2b357809994a2",
+    "crates/quoridor-runner/src/bin/nnue-diagnose.rs": "6413e9d126ec1cb0b1eced3c88c3b7554732b296f07696a97aceb3ccc9eb5a3d",
+    "crates/quoridor-nnue/tests/move_buffer.rs": "5848bd54bffd0889b9f8df7a3ec060163cb48c3cc8a6e33376636311a34261da",
+    "crates/quoridor-ai/benches/nnue_search.rs": "6f2929a75c6441151502780603528ae71a1d91a0a764ec5dcec1acba82870458"
+  },
+  "main_source_matches_reviewed_candidate": true,
+  "production_patch_gzip_SHA256": "b72c22e3cd7e4617cf79579ba00241217160fa5b357900c717752c15336bcb01",
+  "docs_patch_SHA256": "d9a2f1b21fbc085de2f5d55e620b463d9cb36e8f659b9b479a33b284058dab7f",
+  "maintained_bench": {
+    "proposal_SHA256": "6f2929a75c6441151502780603528ae71a1d91a0a764ec5dcec1acba82870458",
+    "status": "installed exact source; producer no-run/model-unset help/Clippy -D warnings without allow PASS",
+    "source": "phase-v1/maintained-bench-proposal.rs",
+    "maintenance_STOP_SHA256": "a5d355434d58c632b735b98c37fe639be4b400cd2e14b53aa7eb5320761cde75",
+    "temporary_compiled_ELF_SHA256": "ecdf73f46e76cac2f108bace48810dba2c80022e51e6137ff7e0eb87102f1e69",
+    "shared_current_ELF": "historical A47 restoration; not new main build"
+  },
+  "scope": "checked direct move-feature delta + Search-owned bounded initialized child FT/feature buffers, legitimate general public delta fallback, immutable parent, ordered FP32 subtraction/addition, same Scalar FT and guarded AVX2/noFMA head",
+  "qualification": {
+    "affected_tests": 9,
+    "children": 635,
+    "full_QF1_ordered_FT_headbits_parent_history_undo": "PASS on producer exact source",
+    "startup_work": "all 18 smoke/measured/loaded process rows match five-root reference including FP/action/PV/depth/stop/23 counters",
+    "limits": "not an all-model theorem; timed iterations not each externally compared; stable pointers are not allocation counts"
+  },
+  "comparison": {
+    "model": "fixed c0ec FT32/H32; both Scalar FT/same guarded head",
+    "roots": 5,
+    "depth": 3,
+    "node_cap": 100000,
+    "TT": 4096,
+    "protocol": "2 ABBA blocks/8 measured processes/8 standard loaded comparisons; 50 samples/1s warmup/3s target",
+    "cold_supported_roots": 5,
+    "cold_adverse_roots": 0,
+    "benefit_repetitions_per_root": 4,
+    "gate": "95% mean-change CI upper < -1% vs BOTH bracketing A for >=3/4 B; >=3/5 cold roots and no reproducible adverse",
+    "cold_paired_mean_reduction_pct": [11.46, 21.05],
+    "delta_paired_mean_reduction_pct": [29.54, 64.62],
+    "scope": "cold includes root/pool/scratch/TT setup/search/drop; delta B preowned buffer setup/drop outside microtimer; compound candidate not isolated causal attribution",
+    "not_claimed": [
+      "pooled CI",
+      "general hardware gain",
+      "strength",
+      "profile CPU proportions"
+    ]
+  },
+  "review": {
+    "binding_SHA256": "bf0fa3bf8093f2810caae8cd59155ed1cea2cc14b87382159a52bda90dd3133b",
+    "control_SHA256": "57622b0c77de9e53019cd338d8e218824f5aa7a0e17e5196570224665261b55d",
+    "blockers": 0,
+    "ordinary": 0,
+    "reader_STOP": "2026-10-07T17:07:26.165171+00:00",
+    "scope": "saved source/results and related changed boundary; no new runtime/model review"
+  },
+  "evidence_root": ".worktree/search-optimization/.artifacts/search-optimization/feature-delta-buffer-v1/phase-v1",
+  "primary_summary_SHA256": "978774cf5f0ec0290022f5090ff8843c8d83cf072dc463404b459776d25612b8",
+  "numeric_STOP_SHA256": "a364c2ab64634c671237e8611545f580ecf253c738c3b1c6176bbbab50e8f8de",
+  "compiler_chain_SHA256": "eeb8782a5341baa81a4cf97f2ca255a980932a23ebaef55a2235ca5811813530",
+  "costs": {
+    "software_controller_s": 119.77145268698223,
+    "numeric_controller_s": 400.5971102020703,
+    "known_controller_s": 546.0145173489582,
+    "nested_not_added": true,
+    "maintenance_pending": false,
+    "target_transient_peak": "UNKNOWN",
+    "maintenance_controller_s": 25.645954459905624
+  },
+  "main_checks": {
+    "reviewed_7_source_SHA_match": true,
+    "Rustfmt": "PASS",
+    "git_diff_check": "PASS",
+    "main_Cargo_build": "NOT_RUN_NOT_CLAIMED",
+    "maintained_bench_validation": "PASS on exact same source/dependencies in producer; main Cargo build NOT_RUN_NOT_CLAIMED",
+    "scoped_docs_Prettier": "PASS"
+  },
+  "boundaries": {
+    "327_current_private_payload": "unchanged; caller/observer source not yet adopted in main",
+    "327_final_version": "requires separately bound integrated source/ELF/native/clock/D outcomes",
+    "focused_cost_observation": "source only NOT_BUILT_NOT_RUN; not a prerequisite for positive source adoption",
+    "model_default": "unchanged",
+    "FT_mode_default": "Scalar",
+    "parent323": "paused",
+    "sealed_newE_oldopened": "closed",
+    "old_assets_failed_costs_build_UNKNOWN": "held"
+  },
+  "resources": "Existing NEW64 ad767; review/mainGit4MiB covers this bounded source integration; no extra allocation"
+}

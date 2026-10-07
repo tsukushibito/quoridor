@@ -97,6 +97,23 @@ pub struct ContextUndo {
     overlay_len: usize,
     child: Position,
 }
+impl ContextUndo {
+    /// Read a transition proved by make_move, only while its child is current.
+    /// The token cannot be constructed by inference callers.
+    pub fn checked_positions(
+        &self,
+        context: &SigmaContext,
+    ) -> Result<(Position, Position), RulesError> {
+        if context.position != self.child
+            || context.total_ply != self.total_ply + 1
+            || context.overlay.len() != self.overlay_len + 1
+            || context.overlay.last() != Some(&HistoryKey::from(self.child))
+        {
+            return Err(RulesError::InvalidUndo);
+        }
+        Ok((self.position, self.child))
+    }
+}
 impl SigmaContext {
     pub fn from_prefix(actions: &[u16]) -> Result<Self, RulesError> {
         if actions.len() > 200 {
@@ -286,13 +303,7 @@ impl SigmaContext {
         Ok(undo)
     }
     pub fn unmake_move(&mut self, undo: ContextUndo) -> Result<(), RulesError> {
-        if self.position != undo.child
-            || self.total_ply != undo.total_ply + 1
-            || self.overlay.len() != undo.overlay_len + 1
-            || self.overlay.last() != Some(&HistoryKey::from(undo.child))
-        {
-            return Err(RulesError::InvalidUndo);
-        }
+        undo.checked_positions(self)?;
         self.position = undo.position;
         self.total_ply = undo.total_ply;
         self.overlay.truncate(undo.overlay_len);
