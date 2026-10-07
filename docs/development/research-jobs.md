@@ -9,7 +9,7 @@
 3. 担当者はjob ID、結果の場所と次に行う判断をBeadsへ残し、turnを終了する。セッションはIdleになる。**スクリプトはturnをinterruptせず、エージェントが自分で終了する。** 他の有用な仕事を行う場合も、計算待ちのためにturnを保持しない。
 4. 背景controllerはprocessを待ち、exit、ログ、実行時間、子回収を保存する。成功だけでなく失敗・timeoutも結果になる。
 5. 保存済み結果を含む完了イベントを、元の担当の保存セッションへ一度だけ送る。Idleなら`turn/start`、notLoadedなら設定を変更せず`thread/resume`して開始する。Activeなら通知を待機し、完了通知のために別作業へsteerしない。
-6. 担当者は結果の回収・資格確認・次判断を続ける。exit0を科学的成功とみなさず、Beads close/Rootへの引渡し/backupは引き続き担当者が行う。
+6. 担当者は結果の回収・資格確認・次判断を続ける。exit0を科学的成功とみなさず、Beads close/実行・統合担当への引渡し/backupは引き続き担当者が行う。
 
 ## 設定と操作
 
@@ -52,6 +52,8 @@ bash scripts/dev/research-job.sh notify --state-dir /absolute/path/new-job-runti
 期限なしでもpause・終了・所有変更・明示cancelの点検とexact cleanupは維持する。停止/所有変更で完了通知を送れないことが確定した場合は通知待ちも終了し、期限なしの待機processを残さない。
 
 背景processは研究セッションがIdleでも生存する。Beadsの課題・目標のpause/終了や所有変更を`control_interval_seconds`ごとに確認し、問題があればcommandを停止する。読取不能時も実行を続けない。停止検出はその間隔と有界Beads待ち分遅れ得る。同一process groupと定期的に記録した子孫のidentityを対象にSIGTERM→2秒後に必要なSIGKILLで停止し、直接の子をwaitする。別sessionを作った記録済み子孫もpidfdで停止する。短い親から監視前にdaemon化した未記録processは取り込めないため、commandはdaemon化せず、**既存guardianで全子の所有と回収を維持する**。ログpipeが残れば回収未確認として保存する。host全process回収や全子孫waitの保証はしない。
+
+方針相談と実行・統合の分離時も、既存jobの保存config/元担当threadは書き換えない。workerが結果を回収してから、新しい実行・統合issueへ報告する。相談会話へ通常のjob完了を転送しない。切替前に配送済みの遅延報告だけは、一度の引渡しで処理する。
 
 新しいturnはpause・閉じたissue・所有変更・期限後には開始しない。Activeの通知待ちは短いPython待機だけでLLMを起こさない。issueを自動claim/closeしたり、モデル/effort・担当の指示を変更したりしない。既存の共通dispatch lockを使う。
 
