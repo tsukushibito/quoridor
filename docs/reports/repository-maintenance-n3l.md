@@ -49,3 +49,11 @@
 新しい研究規約はstandard-2p基本則＋threefold drawの共通裁定である。製品UI publisher-standardと、旧科学RuleA証拠の使用版を区別し、sourceコピー/互換shimを増やさない。331が実装中のrule/runtime pathsは同担当の停止版と調整してmergeし、科学ジョブの使用sourceを変更しない。
 
 F21のactive passagesは修正・scoped Prettier済み。原F21を消さず、現在のownership正本ai-research-teamと整合する説明へ移した。他の修復は停止patch/affected verificationを受け入れてからcommitと実結果をここへ追記する。現時点でruntime/build/実装全体の完了は主張しない。
+
+## 停止patchの現在の検証範囲
+
+n3l.2はF01/F02/F03/F04/F15/F16/F20/F22の18変更pathを停止patch `354beb3dee9c323617c19facf6e71c7749106272d4d3faac7d50e358eaa3d484` として提出した。20 source/dependencyのbefore/after SHAとmain apply-checkを324が照合した。科学importsをblockした57focused tests＋wrapper timeout1件の58件がPASS、scoped Ruff21 filesとBash構文、trainer/public科学function AST不変の記録がある。原失敗検証ログも保持する。F03の1秒はDB authority checkのcontroller latency boundであり科学horizonではない。F15は二つのgzip logを開けてから同じPackedSupplyを既try/finally内で取得し、log open失敗なら未取得、取得後のbody失敗はcloseする。
+
+snapshotのold/new overlapは今後のlive caller forecastで別途保持し、今回のsynthetic小snapshot検証を任意サイズのpeak証明にしない。実permission値は設定通りだがn3l.2も最初のlight read後の実確認という順序逸脱を記録した。58testsは旧fit/model/nativeの再実行ではない。停止・所有・atomic publicationの高リスク変更は元の独立reviewerへ限定確認を実配分済みで、main採用はそのfixed versionとcaller統合検証を確認後に行う。
+
+324のF07/F08も[停止patch/control](../../.artifacts/repository-maintenance/n3l/data-patch/source-stop.json)へ準備済み。dataset manifest公開成功まで全rawを残し、cleanup失敗には公開済みの事実を含むerrorを返す。collecting readerはchecked iteratorへ委譲しmalformed Arrowを同じResultへ集約する。later shard/manifest失敗raw保全とreader/cacheのmalformed fixture定義を追加、Rustfmt PASS。ただしtypecheck/testはNOT_RUNで、mainにはbefore bytesを復元しており採用していない。原reviewerのsource確認と、supported affected Cargo phaseを経て受け入れる。新builder/harness/TMP/private費を旧cachedfreeとして扱わない。

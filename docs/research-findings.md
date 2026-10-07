@@ -411,3 +411,9 @@ joined software f8d68573は21:55:02.258093〜21:56:03.816144 UTC/controller STOP
 ## 333 perfアクセス拒否（計測未実施）
 
 現環境で一回ずつ試した自プロセスのuser-space hardware cyclesとsoftware cpu-clockは、disabledのevent openでも共にEPERMだった。FD/enable/count/samplingは0、23:16:29.504995〜23:16:29.522680 UTC、directwait/cleanup[]。perf packageの取得・build・model/Searchは実施せず、hotspot順位/CPI/cache/callchain/overheadはNOT_MEASURED。Seccomp2/filters2/CapEff0/paranoid2は観測したが、直接拒否したpolicy層はUNKNOWN。再開にはhost/runtime側でprocess-local user perf_event_openを許す条件が必要で、hardware virtual PMUは別の未確認条件である。インストール許可は保持するが、同じ権限のまま取得・再probeしたり、global sysctl/cap/securityを変更しない。旧intrusive比率をperfの代替にしない。333は外部条件待ち、初期2MiBだけ支持、whole128MiB/additional126MiBは未配分。[停止証拠と受付](../research-data/ai-sigma/search-optimization/feature-delta-buffer-v1/perf333-access-result.json)。
+
+## 335 壁なしexact solverの着手（sourceのみ）
+
+人間承認の専任335をmanaged sparse worktreeへ配分し、BOTHstock0・固定壁・採択済みthreefold裁定に対するborrowed typed API、bounded explicit-stack DFS/minimaxのformal契約、独立有限graph oracleの5test定義を停止版として受け入れた。board-only81×80×2=12,960状態retrogradeだけをhistory依存裁定の完全証明としない。Winの存在証明と、全childを必要とするLoss/Drawの証明を分け、Unknown/limit/cancelをdrawに変換しない。実solver kernel/adapterはまだなく、test/compile/production timingはNOT_RUN。331のshared canonical stocks-inclusive history/third合法draw/goal優先/非terminal200/API停止版に合わせて次sourceを実装する。原323pause・models/default/label/fit/追加対局は維持、opt-in/default採用は証明と全費確認後に限る。[停止source・観測と未配分工程](../research-data/ai-sigma/endgame-solver335/source-intake.json)。
+
+初期1MiBはmanaged checkoutを含み、source532480B＋direct admin/dotgit12288B、新source/test/designの小規模増加を記録した。permissionsはdanger-full-access/never・gpt-6.1-sol/highだが、担当の実確認前に最初のpwd/metadata/Beads読取があり、確認後にsourceを書いた。以前の「first command前確認」の記述は強すぎたため、順序逸脱を原controlと受付に残し全sessionのcomplianceを主張しない。旧caps/fees/UNKNOWNを返却せず、次のcompiler/sparse依存/private/NN0実行/finite timing/review全費は未配分で具体予測を要する。

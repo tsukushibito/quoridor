@@ -1,0 +1,70 @@
+{
+  "task": "quoridor-4lc.335",
+  "status": "FORMAL_API_SOURCE_INTAKE_NO_KERNEL_OR_PROVEN_RESULT",
+  "receipt_path": ".worktree/endgame-solver335/.endgame335-source-stop.json",
+  "receipt_SHA256": "193b4a9ff58dce1947cf5f3f8e4e64c5c602a4f25bd4c5d3e0de5a65f24b8948",
+  "source": [
+    {
+      "path": "crates/quoridor-ai/src/lib.rs",
+      "SHA256": "d27cef11160a8b597ecc08ef14c6d83032be336e2c17c81a67953ba144f12b95",
+      "logical_B": 18970,
+      "allocated_B": 20480,
+      "change": "Two added lines expose research-only endgame contract types; no search caller changes."
+    },
+    {
+      "path": "crates/quoridor-ai/src/endgame.rs",
+      "SHA256": "df9e425bfbe42886a41717e397ec2fb99d816269c9d833f58b44fb5050a5e68a",
+      "logical_B": 3237,
+      "allocated_B": 4096,
+      "change": "Unbound borrowed rules/context API, explicit bounds, private ProvenWdl construction, Unknown/NotApplicable reasons, proof scope and work report. No executable solver or old-rule binding."
+    },
+    {
+      "path": "crates/quoridor-ai/tests/endgame_contract.rs",
+      "SHA256": "94f4fd295927aeef0aa82b70ba14a1d86a233f44981a426b4fcdf51be294c1cd",
+      "logical_B": 4619,
+      "allocated_B": 8192,
+      "change": "Five independent finite graph oracle test definitions, including 16 exhaustive two-child proof combinations; no production comparison has run."
+    },
+    {
+      "path": "crates/quoridor-ai/endgame-solver-contract.md",
+      "SHA256": "592eebc5075fb764a61bf497ca5639000d18d050eb7a706e729c18b24ff000d1",
+      "logical_B": 12418,
+      "allocated_B": 16384,
+      "change": "Pre-outcome DFS/minimax choice versus board-only retrograde and unselected PNS/DFPN; soundness, full-history memo, finite path argument, heap/control boundary and prebound geometric/history/limit qualification definitions."
+    }
+  ],
+  "scoped_format": "PASS supplied scoped Rustfmt, directSHA matching all4paths",
+  "compiler_or_oracle_or_model_or_timing_run": "NOT_RUN",
+  "source_stop": "2026-10-07 23:51:19 UTC",
+  "own_children": [],
+  "observed_storage": {
+    "ledger": "/workspaces/quoridor/research-data/ai-sigma/endgame-solver335/storage-no-wall-solver335.json",
+    "source_phase_inclusive_cap_B": 1048576,
+    "baseline_tracked_files": 44,
+    "baseline_tracked_logical_B": 378160,
+    "baseline_tracked_allocated_B": 483328,
+    "baseline_parent_dirs_allocated_B": 45056,
+    "root_dir_allowance_B": 4096,
+    "baseline_tracked_files_dirs_B": 532480,
+    "direct_worktree_admin_and_dotgit_allocated_B": 12288,
+    "index_logical_B": 6724,
+    "index_allocated_B": 8192,
+    "index_SHA256": "1a5181835d6ab868316134ae1132c1574723bbe088e4fc6d194778af918522cd",
+    "source_growth_observed_B": 4096,
+    "test_definitions_observed_B": 8192,
+    "design_observed_B": 16384,
+    "report_and_notice_upper_B": 16384,
+    "owned_scratch_peak_B": 4096,
+    "shared_Git_reserved_B": 32768,
+    "reserved_component_caps_unchanged": true,
+    "observation_limit": "No global assets/object/target scan. A read-only git ls-files produced an in-memory sparse-index expansion warning; it completed and was reaped. Subsequent index remained 6724 logical B. Total command input/read bytes and family RSS were not instrumented; no comprehensive resource-compliance claim."
+  },
+  "control_sequence_deviation": "The requested verification-before-first-ordinary-command ordering was not met: initial pwd and metadata/Beads reads occurred before actual thread/turn_context verification. All source writes followed verification. Do not claim complete session-control compliance.",
+  "corrected_prior_root_note": "Explicit permissions were provisioned before launch and actual values match. Root previous beforecommands-verification wording was too strong; initial ordinary reads preceded worker actual verification, sourcewrites followed it. No retro whole-session compliance claim.",
+  "canonical_dependency": "SAME331 latestunifiedstandard2p+threefold sharedcontextAPI/sourceSTOP pending. Do notinvent/copylegal or oldRuleA adapter. Mainunmodified/kernelnone.",
+  "initial_support_B": 1048576,
+  "future_solver_implementation_runtime_forecast": "Unallocated, exact compiler/sparse dependency/harness/private/TMP/raw/review requirements not yet priced; userauthorizedpipeline remainsconditional on actualsupportedfootprint/proof/quiet, no humanmethodACK.",
+  "root_own_intake_upper_B": 65536,
+  "inside_Root8MiB": true,
+  "old_assets_usedcaps_fees_UNKNOWN": "retained"
+}
