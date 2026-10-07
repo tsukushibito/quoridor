@@ -66,7 +66,7 @@ benchmarkは時間制限を含む場合`fixed_work=false`とし、depth/node/tim
 
 `evaluation.checkpoints` に初期0から最終stepまでの昇順・重複なし配列を指定すると、その固定stepで選定する。省略時は既定intervalを使う。`artifacts.mode: "native"` はONNXを作らずnative重みを保存する。`artifacts.save_scheduled: true` は既存評価forwardのtrain/全raw validation scalarと行順を保存する（full_train必須）。中間のPT/native重みは独立した `artifacts.checkpoint_steps` の明示点だけで保存し、初期/BEST/LASTは正常終了時に保存する。資格外validation行の保存値を選定metricへ混ぜず、保存・forward分もrun予算へ含める。
 
-307の元検証・303の失敗は保存する。308の観測修復では `batch.jsonl.gz` に試行batchと完了更新を逐次flushし、budget/例外による終了でも finally で JSON/CSV/SVG、rowcounts、最後の完了観測を保存する。optimizer.stepが失敗した場合はそのbatchを完了seenへ加えず、model状態をUNKNOWNと記録する。hard killや保存I/O障害は finally 到達を保証しない。freezeの `selected_exposure` と全runのseenを分ける。`early_stopping_patience` は全selector評価の非改善回数で停止し、0は無効、min_deltaと厳密改善/同値時先行を使う。CLI `--steps` を含む最終設定に対してcheckpoint範囲を再検証する。末尾batchもmean lossの一更新であり、全epoch一括勾配や旧sampler軌跡と同じとは扱わない。
+307の元検証・303の失敗は保存する。308の観測修復では `batch.jsonl.gz` に試行batchと完了更新を逐次flushし、budget/例外による終了でも finally で JSON/CSV、rowcounts、最後の完了観測を保存する。optimizer.stepが失敗した場合はそのbatchを完了seenへ加えず、model状態をUNKNOWNと記録する。hard killや保存I/O障害は finally 到達を保証しない。freezeの `selected_exposure` と全runのseenを分ける。`early_stopping_patience` は全selector評価の非改善回数で停止し、0は無効、min_deltaと厳密改善/同値時先行を使う。CLI `--steps` を含む最終設定に対してcheckpoint範囲を再検証する。末尾batchもmean lossの一更新であり、全epoch一括勾配や旧sampler軌跡と同じとは扱わない。
 
 `evaluation.diagnostic_rows` / `diagnostic_interval` / `diagnostic_checkpoints` は入力row IDとseedのSHA順位で固定した診断subsetを独立頻度で測る。subset選定は教師値を読まず、sampler RNGを使わない。0行で診断を無効化できる。省略点は0/1/2/5/10/20、以降interval（最大.25行epoch相当）と実epoch末を含む。`evaluation.checkpoints` は全eligible validationのselector点であり、診断subsetはBEST選択に使わない。`evaluation.full_train: false` はselector時のtrain側測定を固定診断subsetに限定する。全selectorで得た同じ重み・入力の値は同stepの診断に再用する。`observations.jsonl.gz` と `observation-plan.json` は分母・点・subset SHAを区別する。距離/定数、row/group MSE、飽和、sign、biasとgroup結果は固定測定集合の値であり、batch objective lossと混同しない。
 
@@ -103,7 +103,7 @@ node crates/quoridor-wasm/tests/nnue-runtime.cjs \
 
 残差headの反復評価は、`ResidualModel::evaluation_scratch()` で作ったprivate `ResidualScratch` を `evaluate_with_scratch` へ可変借用する。Zero4専用の連続入力を一度ゼロ初期化し、各評価でReLUと距離入力を上書きする。予約ゼロ4値は外部から変更できず、モデル幅とscratch形状の不一致はresizeやheap fallbackを行わずerrorにする。Searchは**各探索呼出し**で入力scratchを一度確保し、終了時に破棄する。TTを維持するSearchSessionの寿命へは持越さない。modelと親accumulatorは別の借用対象で、cancel/error後の次呼出しや再入探索は別scratchを所有する。繰返し診断callerは自身のscratchを再用する。one-shot `evaluate` はscratchのsetupを含み、同じ算術実装を呼ぶ。Distance/Float/Quantizedは既定のNone/workspace委譲を使い、残差入力scratchを要求しない。通常headの一時確保回避を設計方針として採用し、速度・断片化・latency・棋力の改善は認定しない。
 
-観測streamはgzip JSONLをrecordごとflushする。group ID/行数と距離・定数基準はmeasurement-sets/reference-metricsへ一度保存し、groupのtarget MSE/sign/saturation/biasは明示little-endian f32 base64 vector（NaNは欠測）で保存する。全体metricは元の数値精度を保つ。curves JSON/CSV/SVGとgradients.jsonには同じbulkを複製せずstream参照を置く。cache binding全体はcache-binding.json.gzへlossless保存する。evaluation.full_train_checkpointsはselector点の一部を明示してその点だけ全trainを測る。実outputと残forecastをrun入場前に確認する。
+観測streamはgzip JSONLをrecordごとflushする。group ID/行数と距離・定数基準はmeasurement-sets/reference-metricsへ一度保存し、groupのtarget MSE/sign/saturation/biasは明示little-endian f32 base64 vector（NaNは欠測）で保存する。全体metricは元の数値精度を保つ。curves JSON/CSVとgradients.jsonには同じbulkを複製せずstream参照を置く。cache binding全体はcache-binding.json.gzへlossless保存する。evaluation.full_train_checkpointsはselector点の一部を明示してその点だけ全trainを測る。実outputと残forecastをrun入場前に確認する。
 
 ## CriterionでNNUE評価・AlphaBetaを測定する
 

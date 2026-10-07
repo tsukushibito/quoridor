@@ -197,7 +197,7 @@ class LiveTrainerObservation(unittest.TestCase):
         )
         self.assertEqual(self.nn, 40)
         self.assertTrue((out / "curves.csv").exists())
-        self.assertTrue((out / "curves.svg").exists())
+        self.assertFalse((out / "curves.svg").exists())
 
     def test_live_budget_does_not_consume_next_tail(self):
         p, cfg = self.config("budget")

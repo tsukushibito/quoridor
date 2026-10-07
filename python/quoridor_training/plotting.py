@@ -5,10 +5,7 @@ from html import escape
 import argparse
 import json
 import math
-import os
 from pathlib import Path
-import subprocess
-import sys
 
 
 def _number(value):
@@ -253,24 +250,6 @@ def render_learning_curves(
 
 def render_learning_png(curves, path, *, selected_step=None):
     """Publication artifact from recorded points, with train scopes separated."""
-    interpreter = os.environ.get("QUORIDOR_PLOTS_PYTHON")
-    if interpreter and os.path.abspath(interpreter) != os.path.abspath(sys.executable):
-        command = [
-            interpreter,
-            "-B",
-            "-m",
-            "quoridor_training.plotting",
-            "--curves",
-            str(Path(path).with_suffix(".json")),
-            "--output",
-            str(path),
-        ]
-        if selected_step is not None:
-            command.extend(["--selected-step", str(selected_step)])
-        environment = dict(os.environ)
-        environment.pop("QUORIDOR_PLOTS_PYTHON", None)
-        subprocess.run(command, env=environment, check=True, timeout=20)
-        return
     import matplotlib
 
     matplotlib.use("Agg")
@@ -283,8 +262,16 @@ def render_learning_png(curves, path, *, selected_step=None):
         ["target_mse", "target_game_equal_mse"],
         ["Primary row MSE", "Secondary model-input-group equal MSE"],
     ):
-        for scope in sorted({p.get("train_scope", "unspecified") for p in curves}):
-            points = [p for p in curves if p.get("train_scope", "unspecified") == scope]
+
+        def train_scope(point):
+            return (
+                "fixed_diagnostic_subset"
+                if point.get("used_for_selection") is False
+                else point.get("train_scope", "unspecified")
+            )
+
+        for scope in sorted({train_scope(p) for p in curves}):
+            points = [p for p in curves if train_scope(p) == scope]
             axis.plot(
                 [p["step"] for p in points],
                 [p["train"][field] for p in points],
@@ -299,7 +286,9 @@ def render_learning_png(curves, path, *, selected_step=None):
             marker=".",
             linewidth=0.8,
             color="#ce3945",
-            label="All validation rows",
+            label="Fixed validation diagnostic subset"
+            if curves and all(p.get("used_for_selection") is False for p in curves)
+            else "All validation rows",
         )
         distance_field = "distance_mse" if field == "target_mse" else "distance_group_equal_mse"
         constant_field = "constant_mse" if field == "target_mse" else "constant_game_equal_mse"
@@ -329,14 +318,28 @@ def render_learning_png(curves, path, *, selected_step=None):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Render saved observations without inference")
+    parser = argparse.ArgumentParser(description="Render only the requested saved-record image")
     parser.add_argument("--curves", required=True)
     parser.add_argument("--output", required=True)
+    parser.add_argument("--format", choices=("png", "svg"))
     parser.add_argument("--selected-step", type=int)
+    parser.add_argument("--references", help="Saved reference-metrics JSON, for SVG baselines")
     args = parser.parse_args()
-    render_learning_png(
-        json.loads(Path(args.curves).read_text()), args.output, selected_step=args.selected_step
-    )
+    image_format = args.format or Path(args.output).suffix.lower().lstrip(".")
+    if image_format not in ("png", "svg"):
+        parser.error("choose PNG or SVG with --format or the output extension")
+    if Path(args.output).suffix.lower() != "." + image_format:
+        parser.error("output extension must match the requested image format")
+    if args.references and image_format != "svg":
+        parser.error("--references is used by the SVG renderer")
+    records = json.loads(Path(args.curves).read_text())
+    if image_format == "svg":
+        references = json.loads(Path(args.references).read_text()) if args.references else None
+        render_learning_curves(
+            records, args.output, selected_step=args.selected_step, references=references
+        )
+    else:
+        render_learning_png(records, args.output, selected_step=args.selected_step)
 
 
 if __name__ == "__main__":

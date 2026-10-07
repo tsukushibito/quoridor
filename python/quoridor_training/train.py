@@ -16,7 +16,6 @@ import os
 from pathlib import Path
 import numpy as np
 from .cache import load, sha
-from .plotting import render_learning_curves, render_learning_png
 
 from .common import (
     resolve_config,
@@ -670,18 +669,6 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None, input
         )
         for name, records in [("curves", curve), ("diagnostic-curves", diagnostic_curve)]:
             _curve_csv(records, output / (name + ".csv"))
-            render_learning_curves(
-                records,
-                output / (name + ".svg"),
-                selected_step=best_step if name == "curves" and best_exposure is not None else None,
-                references=reference_metrics,
-                sampling=mode,
-                title=(
-                    "Full selector: " + cfg["evaluation"]["monitor"] + " MSE"
-                    if name == "curves"
-                    else "Fixed diagnostics (never checkpoint selection)"
-                ),
-            )
         if compact:
             np.savez_compressed(
                 output / "sampling-counts.npz",
@@ -689,8 +676,6 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None, input
                 row_counts=sampled_rows,
                 attempted_row_counts=attempted_rows,
             )
-        if compact:
-            render_learning_png(curve, output / "curves.png", selected_step=best_step)
         write(
             output / "sampling.json",
             {

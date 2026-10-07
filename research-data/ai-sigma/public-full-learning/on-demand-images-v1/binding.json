@@ -1,0 +1,80 @@
+{
+  "issue": "quoridor-4lc.323.3",
+  "main_minimum_targets": [
+    {
+      "path": "docs/development/nnue-training.md",
+      "before_SHA": "5c177d36c55531ca65249bd2e9bf53c0026d54d788cb39000549fc63d68e124d",
+      "after_SHA": "523db9f609b350f3bb8fb29bb6bf5200489ec5b432b81ca54883a1219faa0a2e",
+      "purpose": "image-only minimum patch; main JSON recording untouched"
+    },
+    {
+      "path": "docs/development/rust-ai.md",
+      "before_SHA": "a2b4c3dc5977517369326a5e9fcfc80f3da8f19cdf7c852524aafbb93df43e86",
+      "after_SHA": "955c659fd9ea18cdfbfdfcc465a16734deb880bcbd78b1aaf4ced3d327e171a0",
+      "purpose": "image-only minimum patch; main JSON recording untouched"
+    },
+    {
+      "path": "python/quoridor_training/plotting.py",
+      "before_SHA": "278dfc2854a8e6ad4c8dc41731933a2cacec4e61fb4ecb075d99d72010a613c9",
+      "after_SHA": "2610b52c7e37262d099a27ad5af5af9a8888230f85748c345bab5465519bd09c",
+      "purpose": "image-only minimum patch; main JSON recording untouched"
+    },
+    {
+      "path": "python/quoridor_training/test_image_policy.py",
+      "before_SHA": null,
+      "after_SHA": "0988eff6723d1b37ca1003261b8af7cfa4f5b06526abe9dad86da978e3626651",
+      "purpose": "image-only minimum patch; main JSON recording untouched"
+    },
+    {
+      "path": "python/quoridor_training/test_observation.py",
+      "before_SHA": "1313d2480b8273a658affc0dd705c31ef4c8c7f4d6fc2573628b6403e3ee3189",
+      "after_SHA": "baff92e40fbd6bf3a4555c7b429de533dc05d532c4c7557d86316151d7261d29",
+      "purpose": "image-only minimum patch; main JSON recording untouched"
+    },
+    {
+      "path": "python/quoridor_training/train.py",
+      "before_SHA": "a1c7934c17069131200d78cb53a83a209ce249ceb6988c762ec7952d354d9ee2",
+      "after_SHA": "ae6cde966caf73e7249106adc5050feb829a5c30606cab445a2b0cfb2b1bab85",
+      "purpose": "image-only minimum patch; main JSON recording untouched"
+    }
+  ],
+  "main_patch_SHA": "bc4231291c27fa3eae4625d05db60cedc7e2de9d20b011baf7e01dbe893cb989",
+  "WT_stopped_source": {
+    "python/quoridor_training/train.py": "f69f6f24d8d5ddcdcc06f7a8f923191e091b0d93871b8999bb4c071b816e22b5",
+    "python/quoridor_training/plotting.py": "d7956bb50917875dc40857da805b6dd9dbe4d039dd2ce58763f2905513e657ce",
+    "python/quoridor_training/test_observation.py": "9aa79d405a7b5813c8d8be861fa50084440ca2c79cf39cd8a88e17c2f91626d7",
+    "python/quoridor_training/test_image_policy.py": "0988eff6723d1b37ca1003261b8af7cfa4f5b06526abe9dad86da978e3626651",
+    "python/quoridor_training/epoch_measurement.py": "79e4b2e01731081ec3c4b7604b7dc72d6f26de5f9639d3b2bf9727e4e3690f93",
+    "docs/development/nnue-training.md": "8e9563d6802219712642c6cbf09f61a422e11328d9dd686a75d64e6bca010dea",
+    "docs/development/rust-ai.md": "39fd79a8c68c1045f0e345e8a33a0c61436b53e65eb3567f3bf15ed8cc98d6c2"
+  },
+  "WT_source_archive_SHA": "b961d15a6682cb727585d9a87ec2848fb135852ab0a8c67871f4a916f80b5dae",
+  "main_patch_source_archive_SHA": "345b1c9028979dfe527a60e6be70e534b318197787188d6cdae99f44f46cf48b",
+  "record_format_boundary": {
+    "current_main": "curves/diagnostic-curves JSON arrays unchanged",
+    "actual_WT": "curves/diagnostic-curves JSONL.gz append unchanged",
+    "main_patch_includes_fulltrainer_or_epoch_measurement": false,
+    "no_compatibility_reader_shim": true
+  },
+  "math_invariants": [
+    {
+      "target": "WT",
+      "entire_train_AST_except_removed_image_operations": "identical",
+      "FROZEN_ARTIFACTS_AST": "identical"
+    },
+    {
+      "target": "main-minimum",
+      "entire_train_AST_except_removed_image_operations": "identical",
+      "FROZEN_ARTIFACTS_AST": "identical"
+    }
+  ],
+  "independent_mock_targets": "same narrow NN0 fixture run against each version, no live train/model import",
+  "GPU": 0,
+  "training_forward": 0,
+  "paused323": "unchanged",
+  "closed323.2": "not reopened",
+  "toy_PNGs_viewed": true,
+  "optional_GPU_transfer_optimizations": "proposal only, not implemented",
+  "sourcewriter_STOP": true,
+  "main_Git_index_ref_operations": 0
+}

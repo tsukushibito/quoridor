@@ -13,7 +13,18 @@ export PYTHONPATH="$PWD/python"
   --cache NEW_CACHE --output NEW_RUN --config CONFIG.json
 ```
 
-`CARGO_TARGET_DIR`とrunnerの構築は[Rust運用手順](rust-ai.md)で明示する。configは`common.py`の設定schemaで、幅、optimizer/LR、target、row/game sampling、step、評価間隔、device、実費上限を指定する。初期・低stepを含むtrain/validation曲線、勾配、initial/best/last checkpoint、native f32モデル、ONNX、freezeを新runへ保存する。グラフは`learning-curves.svg`と`curves.png`、数値は`curves.json`を使う。記録にない評価点を補間した実測値として扱わない。
+`CARGO_TARGET_DIR`とrunnerの構築は[Rust運用手順](rust-ai.md)で明示する。configは`common.py`の設定schemaで、幅、optimizer/LR、target、row/game sampling、step、評価間隔、device、実費上限を指定する。初期・低stepを含むtrain/validation曲線、勾配、initial/best/last checkpoint、native f32モデル、ONNX、freezeを新runへ保存する。数値曲線は`curves.json`とCSVに保存し、通常学習はPNG/SVGを自動生成しない。初期・epoch末・終了時にも画像生成は行わず、画像が無くても記録・freezeは成立する。必要な画像だけ、保存済みselectorまたは固定診断の記録ファイルを指定して生成する。
+
+```bash
+# SVGはstdlibのみ。保存済みreferenceを描く場合だけ --references を指定する。
+"$QUORIDOR_TRAINING_ENV/bin/python" -B -m quoridor_training.plotting \
+  --curves NEW_RUN/curves.json --output selector.svg --format svg
+# PNGはMatplotlib導入済み描画環境のPythonを明示して実行する。
+"$QUORIDOR_PLOTS_PYTHON" -B -m quoridor_training.plotting \
+  --curves NEW_RUN/diagnostic-curves.json --output diagnostic.png --format png
+```
+
+対象の記録と出力形式だけを生成し、学習や推論は実行しない。PNG/SVGの生成は別操作であり、数値記録や候補選定を変更しない。記録にない評価点を補間した実測値として扱わない。
 
 family分割とstate/history/input露出maskを生成時に固定する。距離統計と定数・距離基準はtrainだけから求める。validationでcheckpointを選定し、testは別cacheと凍結候補で一巡する。
 

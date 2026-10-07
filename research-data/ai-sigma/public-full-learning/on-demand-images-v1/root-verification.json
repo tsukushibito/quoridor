@@ -1,0 +1,29 @@
+{
+  "issue": "quoridor-4lc.323.3",
+  "main_six_paths_match_after_SHA": true,
+  "train_AST_except_two_removed_image_calls": "identical",
+  "FROZEN_ARTIFACTS_AST": "identical",
+  "NN0_tests": 5,
+  "Torch_imported": false,
+  "model_GPU_forward": 0,
+  "patch_application": "patch -p1 dry-run then apply; git apply --check refused missing new-file header for dev/null before changes",
+  "source_record_format": "main JSON array unchanged, no full WT trainer import",
+  "source_archive_SHA_verified": true,
+  "producer_old_first_fixture_failure": "preserved; not reset",
+  "parent323_pause": "unchanged",
+  "evidence_source_archives": {
+    "WT-stopped-source.tar.gz": "b961d15a6682cb727585d9a87ec2848fb135852ab0a8c67871f4a916f80b5dae",
+    "main-minimum-source.tar.gz": "345b1c9028979dfe527a60e6be70e534b318197787188d6cdae99f44f46cf48b",
+    "producer-evidence.tar.gz": "74b3e595a664263a181b29a3982425ae7195fa89f85f0943b4cab603b6a71948"
+  },
+  "source_archives_are_frozen_evidence_not_active_mirrors": true,
+  "main_NN0_summary": {
+    "success": true,
+    "tests": 5,
+    "wall_seconds": 0.3538053350057453,
+    "peak_RSS_KiB": 43936,
+    "Torch_imported": false,
+    "model_forward": 0,
+    "CUDA": 0
+  }
+}
