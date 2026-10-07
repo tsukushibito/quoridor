@@ -1,0 +1,17 @@
+# 直接の差分特徴生成・子領域再利用と残存費用
+
+2026-10-07の人間承認により、325の既存Scalar/Simd FT比較を完了し、実結果で採否を決めた後に本タスクへ進む。FT SIMD不支持でもその問いを完了したものとして次段階へ進める。担当は同保存thread01a11004-79f3-7c20-872c-432a2c347664/cwd search-optimization、main/Git/index writerはexecution324のみ。旧318.3はclosed、326に具体issueを結び付ける。権限danger-full-access/neverを明示適用・確認し、model gpt-6.1-sol/highを変えない。
+
+baselineは325の受入れ時点で採用されたFT/head版、同固定モデル/FT32H32/5root/特徴/尺度/FP32/教師/学習条件で固定する。現在の高速headとFT列減算/加算順を維持し、複数段階の速度を合成しない。325のsource読者/実job STOPと採否・main統合後にのみ対象sourceを変更する。まず必要な配置・API・buffer責務、実source/保存/compile/数値/有限比較のwhole forecastと停止条件を具体化し、結果前に一つのplanを固定する。326の実source/compile/NN/性能用の新資源枠は現時点0、未使用capはcompute許可ではない。支持された親内配分とfresh physics/peerquiet/uniqueCargo/private bindingsが成立した工程は、新しい人間ACKなしに進める。
+
+差分特徴は、子完成ID一覧を毎回全生成して差分を探す経路だけに留めず、checked single move/board変化から削除・追加特徴を直接得る。駒なら旧→新pawn位置だけを置換しwall/stock特徴を再用。壁ならwall ID追加と配置者stock ID置換。両視点のQF1/回転/正規化・手番head視点/D並びを正しく更新する。追加/削除IDを既存昇順/重複なしで適用し、受入幅/shape/finite/error条件を保つ。既存独立full-encode/ordered FT oracleで無変更の数学を確かめる。新モデル/特徴定義/加算順/FMA/FP16/量子化/探索規則/TT/枝刈りは対象外。
+
+本番の検査済み単一手と、公開delta APIの一般入力を区別して責務と検証を設計する。一般入力を単一手扱いして誤更新/未検証にしない。必要な一般処理は同じ本番正本の正当な境界とし、互換shim/実験searcher/旧数学の平行本番コピーを常設しない。独立テストoracleと直接比較中の凍結sourceは対象/用途/撤去条件を明示して証拠として保存する。
+
+子FT/特徴領域はSearch呼出し所有の深さ等に応じたbounded再用候補とする。モデル/親は借用し親FTを正確に保つ。親をin-place変更して逆算で戻すことで丸めを蓄積させない。コピーの必要性と毎回heap確保を区別する。cancel/error/nested/reentrant/最大受入幅/shape/非aliasと所有/再用寿命を守り、深さ比例の巨大stack/global mutable/unsafe未初期化bufferを作らない。
+
+関連mode/caller/差分に必要十分な資格と独立oracleを使い、毎回全旧suite/成功benchmarkを再演しない。normal standalone、setup/分岐/検査/再用、実Search全費、確保回数・仕事量/深度/parent/controlと全比較費を記録する。allocation0だけで速度利益を認定しない。one baseline vs one combined approved candidateを主比較とし、機構ごとの記録/必要なstage差分を結果前に定め、特定機構の因果利益を無根拠に分解しない。有限順序/判定基準・同仕事/値と許容差の意味を先に固定し、予期しない数学/手/仕事の差は停止・原因/影響報告、勝手なtolerance緩和や新run/sweepをしない。重要な採用境界は同保存レビュアーの関連部分へ戻す。workerは受入れまでdefault/Main/Gitを書かず、固定sourceSTOP/証拠をexecution324へ返す。
+
+改善後に残る費用を有限計測して距離mapの必要性を判断する段階まで承認済み。駒移動で親map共有・壁変更時だけ再生成という現行再用を維持する。旧instrumented割合はoverhead大かつfasthead以前なので現在のCPU割合へ流用しない。同wall状態の重複生成やmap費が大きい根拠が出た場合、効果見込み/保持費/保守コスト/境界を短くまとめて人間の次判断へ戻す。大きな共有map cache/動的最短距離差分を無条件に実装しない。
+
+Sigma参考を中断/再実行せず、各actual科学jobとcompile/numeric/性能時計は予算とSTOP/readerquietで直列化する。bounded logs/exact directwait/TERM-KILL/cleanup・pauseを既job規約で守る。原323pause/封印評価/oldassets/費/UNKNOWNを保全。通常報告はexecutionthread01a1153d-7900-7740-837f-c300ca54764f/issue324へ、jobcompletionは当taskowner自身へ。まとまった効果/限界/採否だけexecutionから人間Rootへ短く届ける。Beads状態・依存と本文根拠を結び付け、backup sync、イベントのない間Idle。新role/常設reviewer/周期LLM/無制限な実験は作らない。
