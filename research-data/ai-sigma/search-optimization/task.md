@@ -65,3 +65,9 @@ job configのend_at/notify_until/max_runtime_secondsをnullにし、許可を変
 次の優先処理候補はcanonical算術を基準に、実search/session/workerで適切なサイズの入力scratchを一度確保し、各evaluateでReLU/denseを一度だけ埋め、連続sliceを参照して同じscalar内積を行う構成。大きなmap/accumulatorは安全な参照で扱い、不要なpayload移動・全buffer初期化・hidden rowごとの入力再計算・所有管理を増やさない。全accepted topology、親/history復元、reentrant/nonalias/error/cancel保証を保ち、global mutable・unsafe未初期化・巨大な深さ別stackを導入しない。現役standalone callerも正しく維持し、互換性だけの旧経路や探索器コピーを残さない。
 
 比較は一時確保のあるcanonicalとの最小同算術差分に限定し、過去のFT/TT/map複合候補を混ぜない。initと通常のalloc数、独立bit/reference/実caller/parent/error/cancelとplain wholeを確認する。事前確保ヒープ利用は許可済みだが高速化を先取りしない。先のstack packing patch/全negative証拠は保存して代替案とし、新buildは現163MiBのinclusive成立または具体前向き配分後、数値/公平clockは学習の実STOP後のquiet slotで行う。
+
+## Criterion導入（ユーザー明示依頼）
+
+ユーザーはCriterionの導入を指定した。同探索担当がCriterion0.8.2を開発用依存として導入し、必要なCargo.toml/Cargo.lock、現役benches入口、既存Rust AI運用の手順を更新する。通常製品依存や無関係の更新を増やさず、default featuresを外してcargo_bench_supportを基本とする。現main APIで評価単体・実探索を測定し、TT coldの作成/破棄込みと同player履歴を進めるwarm/seed費を区別する。細かな自前速度統計を増やさずCriterionの暖機/反復/統計を使い、既存のbit/親/error/cancel/確保回数と全プロセス費は維持する。測定期間やsample設定は有限の計測方法で、外側job/runtime/forward/epoch上限はnullのまま。
+
+未採用input scratchとの直接比較は停止版を使う比較専用のdriver差分を明示できるが、導入のために未採用API/模型をmainへ混ぜない。新benchesは現mainのpublic APIでcompile可能とし、比較専用adapterの用途/版/撤去条件を明示する。model/inputは既資産をread-only参照し、実version/config/model/lock/compilerとcold/warm範囲を固定。compile/no-run/CLIhelpまでと実NN/FT/統計計測を区別し、実測は学習exactSTOP/quiet後。Current232MiBへの64MiB追加は必要registry/cache/build/linker/source/resultsをinclusiveで束縛し、新prefixは限定metadataでcoverageへ加える。[前向き配分](storage-allocation-criterion.json)。現段階は依頼・準備で、未buildを導入完了や速度成功と呼ばない。
