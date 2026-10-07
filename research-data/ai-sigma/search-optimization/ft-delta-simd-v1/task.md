@@ -1,0 +1,19 @@
+# 既存FT差分SIMDと採用済みheadの併用
+
+人間は2026-10-07に「FT差分更新は進める方針で！」と明示した。既存Scalar/Simd入口と本番caller伝播を確認し、既存列ベクトルの加減算SIMDを利用する最小候補を実装・資格・有限比較まで進める。モデルやdefaultweightsの変更はない。
+
+担当は保存thread01a11004-79f3-7c20-872c-432a2c347664、cwd `/workspaces/quoridor/.worktree/search-optimization`。旧318.3はclosedのまま。新issueをこの契約へ結び付ける。実行・統合324が唯一のmain/Git/index writer、ワーカーは指定WT source/owned evidenceのみを書く。新worktree/session/常設reviewer/再帰委譲を作らない。既存研究方針とジョブ運用を参照し、作成/再開/turnでdanger-full-access/approvalPolicy neverを明示適用し、初回コマンド前に実効権限/cwdを確認。host gpt-6.1-sol/highは維持する。
+
+AはScalar FT、Bは既存Simd FT。両方にmain21649f3以降の同じ採用済みguarded AVX2 headを使用する。FT32H32、固定c0ecモデル/重み、5既存局面、特徴/尺度/FP32、FT列の減算・加算順を維持する。新FT方式/加算順/量子化/FMA/FP16/探索規則/TT/枝刈り/モデル採用は対象外。mainの現行4ソースとintegration.jsonのSHA/通常metadata修正を確認し、旧WTのscalar-headや旧immutableA47をA条件へ混ぜない。この新タスクに必要なWT source alignmentは許可するが、未保存変更・旧source/ELF/raw/costを保全し、main/Git/indexは操作しない。
+
+まずsource-onlyでmodeの意味、full/root/context/delta/parentへの伝播、既存kernelのruntime fallback、本番runner/Wasm/benchmark callerを確認する。現状はResidualEvaluator.new既定Scalar、with_modeあり、production runnerは設定でSimdを選べる。既存headはFT modeから独立。最小の明示mode/config/caller/harness候補を用い、未資格default切替を先行させない。FT standalone/full/root setupと実Search差分更新を含む全費を測れる入口を一つにする。必要な本番mode修正と維持される検証以外の実験copy/shimを現役APIへ残さない。
+
+資格は関連mode/caller/差分に限定する。FT/full/deltaの有限・形状・値、既存独立ordered oracle、parent/undo/historyと同一仕事を確認する。期待されるordered scalar/SIMD一致を事前に定義し、bitwise一致が期待できる範囲ではそれを要求する。予期しない差は原因/影響を報告して自動採用せず、toleranceを緩めない。headの既資格・全幅・モデル・旧suiteを広く再実行しない。cold Searchのaction/value/PV/depth/stop/全work countersを記録し、rootFT/delta/whole caller境界を説明する。
+
+結果前に唯一の有限planを固定する。既存5局面/depth3/node100000/TT4096、A/Bの同モデル同head、原則既存2ABBA blocks=8process/各50samples・warm1s・target3sを再用し、対象ID数と実command総数を明示する。主項目はfullFT/rootとdelta/update、およびrootsetup/scratch/TT/search/dropを含むcold実Search全費。kernelだけの改善を全体採用根拠にしない。各Bを両隣Aへ比べる95%mean-change CI+1%noise規則、どの項目を主判定にし、無改善/回帰時にどう採否を扱うかを事前固定する。必要なら最小で同じ問いを満たす既存protocolへ具体調整し、そのplanを結果前に保存する。恣意的な追加run/別モデル/sweepはしない。仮定の効果や平均だけで採用しない。
+
+初期sourceprepはstorage-source-preparation.jsonによりproducer128KiBと実行統合control/docs/Git32KiB、oldsearch297783296B全保持、検索総枠297959424B。closed maintenanceの支持された196608B余裕から160KiBを前向きに移し、旧maintenance/transition64KiB全保持、parent/roots/UNKNOWN不変。source/旧保全/archive/plan/receiptの実inclusive予測を出し、128KiBを超える前に正確な不足を報告する。現時点のcompile/NN/FT/性能/新binary/deps作成は未admit。未使用capをcompute許可にしない。source-only整形・構文/既存metadata確認は可。global/shared-target inventory、モデル/依存の取得、旧asset削除/refundは禁止。
+
+次に実source/guard/job/command/output/ELF/必要build・linkertemp・images・raw・Git/review/source予測を示す。旧284MiBの全uppers/UNKNOWNは保持し、最小候補の既存cache/image利用と一つのruntime mode binaryで不要な新imageを避けられるかを具体確認する。使用中binary/libraryはimmutable SHA binding、Cargo writerは一人。支持された親内資源調整は実行324で処理し、具体admissionが成立すれば新しい人間ACKなしに工程を進める。CPU0,1/RAMfamily2GiB/GPU0の既検索上限内を条件付き上限とし、増枠を認めない。compile/numeric/performanceはSigmaの実job/関連readerと直列化し、fresh actual peerquiet/physics・private binding・exact directwait/TERM-KILL/cleanup・boundedlog/outputを成立させる。source準備は並行可、Sigmaを停止/再実行/移管しない。
+
+モデル/探索の重要な採用境界は同じ保存独立レビュアーの関連mode/caller/FT差分だけで確認する。具体固定版とreaderSTOP・証拠・小予算を実行324へ返して必要時に依頼し、毎runレビュー/新常設reviewerを作らない。通常報告/修復/START/STOPは実行thread01a1153d-7900-7740-837f-c300ca54764f/issue324へ。job completionはあなた自身の新issue/threadのまま。効果・限界・採否が確定した成果だけ実行324から人間Rootへ短く届ける。original323のpause/newE/oldopened封印を維持。sourceSTOP/所有/費用/次工程条件を残し、Beads更新・backup sync。通知のない間Idleで、定期LLM/poll監視をしない。
