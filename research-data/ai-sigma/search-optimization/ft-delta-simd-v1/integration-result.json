@@ -1,0 +1,65 @@
+{
+  "issue": "quoridor-4lc.325",
+  "acceptance": "Finite fixed ScalarFT vs existingSimdFT comparison complete; NO_SUPPORTED_DEFAULT_SIMD_ADOPTION; default Scalar retained",
+  "conditions": {
+    "weights_SHA": "c0ec9bf3f8f221c2a2d2db6bf70857fa55647e7c7fd15b38786ef941baa079cd",
+    "scientific_ELF_SHA": "eae6be0cc53504b939f3423754e6a83392e777509f0ab2c5d50217e805a7de0c",
+    "prebound_plan_SHA": "6a9657f59147965feb69b889daebaab8aa8aab17b224832cf05330b743c7a961",
+    "head": "same adopted guarded FP32 AVX2 no FMA both modes",
+    "roots": 5,
+    "depth": 3,
+    "nodes": 100000,
+    "TT": 4096,
+    "commands": 18,
+    "measurement": "twoABBA eight measured processes/eight loaded analyses/two numericsmokes; 50samples/1swarmup/3s target; fullFT/deltaFT/coldwholeSearch scopes"
+  },
+  "prebound_rule": "95% mean-change CI beyond1% versus BOTH flanking A, >=3/4 B repetitions; primary coldwhole requires>=3/5 beneficial roots and zero reproducible adverse roots",
+  "result": {
+    "cold_benefit_roots": 0,
+    "cold_regression_roots": 0,
+    "inconclusive_IDs": 15,
+    "adopt_Simd_default": false,
+    "limits": "No noninferiority/hardware-cause/kernel/strength/generalization conclusion; late adverse endgame7.96/7.52pct only1/4 preserved"
+  },
+  "related_qualification": {
+    "children": 635,
+    "matching_Mode_FT_head_bits_23cold_counters_parent_history_errors_exact": true,
+    "full_delta_same_path_crossmode_maxabs": 0,
+    "existing_full_vs_delta_head_maxabs": 4.172325134277344e-7,
+    "old_unaffected_head_fullsuite_reused": true
+  },
+  "numeric": {
+    "job": "4d378345-c3e3-4477-9596-993c800ed877",
+    "START": "2026-10-07T11:25:10.943503+00:00",
+    "STOP": "2026-10-07T11:35:09.940211+00:00",
+    "controller_s": 599.1685317950323,
+    "18_directwait": true,
+    "remaining": []
+  },
+  "mandatory_cleanup": {
+    "job": "afffefbe-3d62-4c45-8115-5553e2ef6b60",
+    "STOP": "2026-10-07T11:42:14.013105+00:00",
+    "controller_s": 7.805897530983202,
+    "decoder": "safe as_chunks::<4>().0.iter().map(|v|f32::from_le_bytes(*v)); complete chunk/order/remainder/FPbits/alloc preserved",
+    "Clippy": "offline locked scoped bench -D warnings WITHOUT allow PASS; producer source-bound command receipt",
+    "active_temporary_allow": "retired; original failures/allow commands/noncompliant preflight shell continuation/raw/source/images/fees preserved"
+  },
+  "known_controller_allattempts_s": 657.770962067,
+  "nested_costs_not_added": true,
+  "main_integration": {
+    "path": "crates/quoridor-ai/benches/nnue_search.rs",
+    "SHA": "278c851228af609657f710768608f295c112910b87aa8b3af4b462a2161fa735",
+    "scope": "Single maintained explicit Scalar|Simd runtime mode/fullFT/deltaFT/coldwhole bench and independent qualification oracle; no alternate Searcher/model/default/math",
+    "production_four_sources": "main equals stopped qualified producer bytes; alpha deb246 unchanged, do not overwrite327 callback",
+    "validation": "Exact source-bound producer qualification and exception-free Clippy reused; main rustfmt/diff checks. New main Cargo build NOT_RUN/NOT_CLAIMED. SharedA47 historical restored only, not current scientific image."
+  },
+  "evidence": {
+    "directory": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/search-optimization/ft-delta-simd-v1",
+    "report_SHA": "aa60b00aa69476d121650ef96016cd37e11e86fa075c8e8ac0b4fc3dd06fb651",
+    "summary_gzip_SHA": "cff11155adca3ba8a43b45a6395a25b64a49b07d2617a0345d226936e6951dc6",
+    "completion_receipt_SHA": "3d715072617b28e9c28ebd06e31214129dab9a076ce50ee783b92d0e49fb6ed9",
+    "all630_archive_members": "Producer byte/SHA verified; unchanged proof reused, not repeated centrally"
+  },
+  "resources": "search forecast315904000/cap315916288; oldassets/UNKNOWN/failedcosts retained, nextscience/CargoNONE;326 actualimplementation19.2MiB remains unallocated",
+  "pause": "323 paused;newE/oldopened sealed;defaultweights unchanged"
+}
