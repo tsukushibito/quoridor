@@ -1,0 +1,104 @@
+{
+  "task": "quoridor-4lc.331",
+  "integrator": "quoridor-4lc.324",
+  "status": "QUALIFIED_SERIAL_CPU_SOFTWARE_AND4FUNCTIONAL_WINDOWS_ADOPTED",
+  "before_main": "f176f998c4349f947792570fca251be50df045e7",
+  "source_packet_path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/serial-shared-cpu-repair-v1/source-stop-v2-R1.json",
+  "source_packet_SHA256": "73d08d83c9a9ec1dd8cdb5c14332736d28b326153590b71c16caaad1924ecce9",
+  "before_SHA256": {
+    "crates/quoridor-runner/src/resources.rs": "867ffd82d05e1e777cee220c9f9fd7321e3b83370a85ffb2547ae8ff69042fb2",
+    "crates/quoridor-runner/src/runtime.rs": "07d544640ea9fb94505f62bc73b1a4ef031928d5e49b2b61d77055814a39682b"
+  },
+  "after_sources": {
+    "crates/quoridor-runner/src/resources.rs": {
+      "before_SHA256": "867ffd82d05e1e777cee220c9f9fd7321e3b83370a85ffb2547ae8ff69042fb2",
+      "after_SHA256": "52573320329b20a4051b188b0ba996a70f3e46033f252f43654adae43c463abe",
+      "bytes": 16674,
+      "mode": 420,
+      "allocated_B": 20480
+    },
+    "crates/quoridor-runner/src/runtime.rs": {
+      "before_SHA256": "f4c001d69bd12575571a7bf348c56facc97d19069722be4d915f4c168134c072",
+      "after_SHA256": "3c7849505abf66e2dd8f6c1cca57a75c2c2bbb7ef78b841ad60306e6e27cd896",
+      "bytes": 137707,
+      "mode": 420,
+      "allocated_B": 139264
+    }
+  },
+  "main_patch_SHA256": "19927b5ff730a8f826becbf2456561763520a601cae9773a0779f4472e0a5e24",
+  "software": {
+    "receipt": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/software-serial-cpu-v1/software-stop-receipt-v1.json",
+    "SHA256": "88657350955ae83544831ecbb5f60f4c846305c217e55d099dc45c7e4d16a651",
+    "job": "8fef3f2c-d10d-47f2-b23f-38565797e573",
+    "START": "2026-10-07T23:06:43.776575+00:00",
+    "workerSTOP": "2026-10-07T23:07:42.171510+00:00",
+    "controllerSTOP": "2026-10-07T23:07:42.333339+00:00",
+    "controller_s": 58.60770820197649,
+    "known_cumulative_s": 247.23733451392036,
+    "four_commands": "directwait exit0/cleanup[]",
+    "newNN0_fixtures": 3,
+    "Clippy": "PASS -Dwarnings WITHOUTallow",
+    "private_ELF": "ec567f662e2abe15daf5ed0b7598037892b9d77972542fd3d7332e4a6c30407b",
+    "private_gzip": "755d523ddf40abac9e6ac2084d85dfd870b49b1e9c02ffc903deab4e95f8beef",
+    "charged_record": {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/software-serial-cpu-v1/charged-path-maxima.json",
+      "SHA256": "bff7fad87cfa1249eb424338671a98ab277a56625b217d9576f92127c3907797",
+      "positive_union_B": 18735104
+    },
+    "sampled_peaks": {
+      "family_RAM_B": 577376256,
+      "positive_artifact_growth_B": 18735104,
+      "TMP_B": 2965504,
+      "private_B": 17248256
+    },
+    "continuous_peak": "UNKNOWN retained"
+  },
+  "live_qualification": {
+    "receipt": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/live-qualification-v2/qualification-stop-receipt-v1.json",
+    "SHA256": "c10a7cc4783d7bcce59954c9502f50d93542dbfe457aab78cfe108f3f233771a",
+    "job": "72a2d95e-0e6b-4543-bec8-73faceb8dce2",
+    "actualSTART": "2026-10-07T23:16:53.254364+00:00",
+    "workerSTOP": "2026-10-07T23:16:55.064768+00:00",
+    "controllerSTOP": "2026-10-07T23:16:55.204594+00:00",
+    "controller_s": 1.950593609,
+    "direct_commands": 6,
+    "cleanup_remaining": [],
+    "functional_slots": 4,
+    "Sigma_windows": 2,
+    "NNUE_windows": 2,
+    "intentional_ply_cap_UNKNOWN": 4,
+    "scientific_games": 0,
+    "allaccepted_legal_before100ms": true,
+    "engine_errors": 0,
+    "Sigma_requests_backend_batch1_rows": 47,
+    "Sigma_completed_simulations": [21, 24],
+    "late_discarded_each": 1,
+    "NNUE_whole_nodes": 149393,
+    "NNUE_completed_depth_each": 3,
+    "provider_identity": "CPUORT defaultfactory source/payloadbound; no separatelyemitted runtimeproviderlabel",
+    "warmup": 0,
+    "startup": "separate insidewholejob",
+    "scope": "fixed4functionalwindows only, nothardRT/allerror/strength guarantee"
+  },
+  "policy": "Only defaultCPUORT arena whole_wall_time timedMCTS workers1/active1/batch1 exactsameLogicalCPU. Every suppliedbackend remainsgenericduplicate refusal. Generic sibling/affinity/cpuset/RAM/worker+3 quota unchanged, sharedretains3unusedphysical cores (control+2host). PUCT/math/model/headFT/TT unchanged.",
+  "related_review": "source-static R1clear/blockers0/readerSTOP22:58:37.239668, previousresources reviewscope reused; new3NN0 executedonce/no broadsuite",
+  "main_checks": {
+    "generated_stopped2path_hunks_check": "PASS",
+    "exactsource_mode_length_after": "PASS",
+    "Rustfmt": "PASS scoped edition2024 skip_children=true",
+    "central_Cargo_model_clock_replays": 0,
+    "unchanged_other7_math6": "proof reused same scope, not rehashed wholesale"
+  },
+  "resources": {
+    "Sigma_MiB": [7, 49, 8, 64],
+    "proof_SHA256": "38e0ac920241909785a69fe3aba100e5dc45ea5d097d91a841bf3e1d8edabb27",
+    "Root_inclusive_phase_B": 262144,
+    "within_existing_Root8MiB": true,
+    "parent_cap_B": 13421772800,
+    "addition_B": 536870912,
+    "oldfailedcosts_assets_buildUNKNOWN_UNKNOWN": "retained",
+    "known_controller_including_failures_s": 249.187928123
+  },
+  "next": "SAME331 migrate canonical official evaluation contexts/internal alpha+MCTS/legal/terminal/TT namespace/config/receipts with RuleA selfplay preserved. No further RuleA scientific evaluation entry. Matched official scientific16 follows actual migrated main/private/affected qualification/fresh resources. Operational maxplies censors UNKNOWN; goal priority. No old results replay or official D rerun gate.",
+  "rules_scope": "Software and four functional windows were bound to Sigma RuleA. Retained only in that original scope; not official evaluation qualification. Human authorizes future evaluation official-standard-2p; rules migration and affected checks/private binding precede pending scientific16."
+}

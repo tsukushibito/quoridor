@@ -1632,6 +1632,152 @@ fn worker(
     }
     let _ = events.send(Event::WorkerStopped);
 }
+#[cfg(test)]
+mod serial_shared_inference_tests {
+    use super::*;
+    fn config() -> Config {
+        let mut c: Config =
+            serde_json::from_str(include_str!("../../../configs/arena/smoke.json")).unwrap();
+        c.workers = 1;
+        c.active_games = 1;
+        c.max_batch = 1;
+        c.cpu_cores = vec![2];
+        c.inference_cpu_core = Some(2);
+        c.arena.as_mut().unwrap().comparison = crate::arena::Comparison::WholeWallTime;
+        c.engines[1].kind = "mcts".into();
+        c.engines[1].time_ms = Some(100);
+        c.inference = Some(crate::config::Inference {
+            backend: "ort".into(),
+            model: "unopened-fixture.onnx".into(),
+            model_sha: "0".repeat(64),
+            library: None,
+            device: 0,
+            cuda_graph: false,
+        });
+        c
+    }
+    #[test]
+    fn serial_shared_gate_rejects_every_supplied_backend() {
+        let c = config();
+        struct MetadataOnly(quoridor_inference::BackendMetadata);
+        impl InferenceBackend for MetadataOnly {
+            fn infer(
+                &mut self,
+                _: &[[f32; quoridor_inference::FEATURES]],
+            ) -> std::result::Result<Vec<NetworkOutput>, quoridor_inference::InferenceError>
+            {
+                panic!("metadata-only admission fixture must not infer");
+            }
+            fn metadata(&self) -> &quoridor_inference::BackendMetadata {
+                &self.0
+            }
+            fn counters(&self) -> InferenceCounters {
+                InferenceCounters::default()
+            }
+        }
+        for kind in ["non-cpu-backend", "onnxruntime-cpu"] {
+            let provided: Option<Box<dyn InferenceBackend>> = Some(Box::new(MetadataOnly(
+                quoridor_inference::BackendMetadata {
+                    backend: kind.into(),
+                    model_sha: c.inference.as_ref().unwrap().model_sha.clone(),
+                    max_batch: 1,
+                    input_features: quoridor_inference::FEATURES,
+                    output_values: quoridor_inference::POLICY + 1,
+                },
+            )));
+            assert_eq!(
+                provided.as_ref().unwrap().metadata().model_sha,
+                c.inference.as_ref().unwrap().model_sha
+            );
+            // The actual callsite passes this presence check before admission.
+            assert!(!serial_shared_inference_allowed(
+                &c,
+                "arena",
+                provided.is_some()
+            ));
+            assert_eq!(provided.as_ref().unwrap().counters().logical_rows, 0);
+        }
+        // The maintained factory is selected only when no backend was supplied.
+        assert!(serial_shared_inference_allowed(&c, "arena", false));
+    }
+    #[test]
+    fn serial_shared_gate_accepts_only_the_timed_serial_cpu_arena() {
+        let c = config();
+        assert!(serial_shared_inference_allowed(&c, "arena", false));
+        for mode in ["selfplay", "benchmark", "other"] {
+            assert!(!serial_shared_inference_allowed(&c, mode, false));
+        }
+        for workers in [0, 2] {
+            let mut x = c.clone();
+            x.workers = workers;
+            assert!(!serial_shared_inference_allowed(&x, "arena", false));
+        }
+        for active in [0, 2] {
+            let mut x = c.clone();
+            x.active_games = active;
+            assert!(!serial_shared_inference_allowed(&x, "arena", false));
+        }
+        for batch in [0, 2] {
+            let mut x = c.clone();
+            x.max_batch = batch;
+            assert!(!serial_shared_inference_allowed(&x, "arena", false));
+        }
+        for cores in [vec![], vec![2, 12], vec![12]] {
+            let mut x = c.clone();
+            x.cpu_cores = cores;
+            assert!(!serial_shared_inference_allowed(&x, "arena", false));
+        }
+        for core in [None, Some(12)] {
+            let mut x = c.clone();
+            x.inference_cpu_core = core;
+            assert!(!serial_shared_inference_allowed(&x, "arena", false));
+        }
+        for time in [None, Some(0)] {
+            let mut x = c.clone();
+            x.engines[1].time_ms = time;
+            assert!(!serial_shared_inference_allowed(&x, "arena", false));
+        }
+        let mut x = c.clone();
+        x.engines[1].kind = "distance".into();
+        assert!(!serial_shared_inference_allowed(&x, "arena", false));
+        let mut x = c.clone();
+        x.inference.as_mut().unwrap().backend = "aoti".into();
+        assert!(!serial_shared_inference_allowed(&x, "arena", false));
+        let mut x = c.clone();
+        x.inference = None;
+        assert!(!serial_shared_inference_allowed(&x, "arena", false));
+        let mut x = c.clone();
+        x.arena.as_mut().unwrap().comparison = crate::arena::Comparison::Functional;
+        assert!(!serial_shared_inference_allowed(&x, "arena", false));
+        let mut x = c;
+        x.arena = None;
+        assert!(!serial_shared_inference_allowed(&x, "arena", false));
+    }
+}
+fn serial_shared_inference_allowed(config: &Config, mode: &str, supplied_backend: bool) -> bool {
+    // Only the maintained CPU ORT factory path can take this exception. An
+    // arbitrary held backend retains generic admission, regardless of labels.
+    !supplied_backend
+        && mode == "arena"
+        && config
+            .arena
+            .as_ref()
+            .is_some_and(|a| a.comparison == crate::arena::Comparison::WholeWallTime)
+        && config.workers == 1
+        && config.active_games == 1
+        && config.max_batch == 1
+        && config
+            .inference_cpu_core
+            .is_some_and(|core| config.cpu_cores.as_slice() == [core])
+        && config
+            .inference
+            .as_ref()
+            .is_some_and(|i| i.backend == "ort")
+        && config
+            .engines
+            .iter()
+            .any(|e| e.kind == "mcts" && e.time_ms.is_some_and(|ms| ms > 0))
+}
 fn run_inner(
     config: &Config,
     mode: &str,
@@ -1671,13 +1817,21 @@ fn run_inner(
         if config.inference.is_none() {
             return Err("explicit inference core requires backend".into());
         }
-        crate::resources::admit_explicit(
-            config.workers.min(config.games),
-            &config.cpu_cores,
-            core,
-            config.host_ram_reserve,
-            config.max_memory_bytes,
-        )?
+        if serial_shared_inference_allowed(config, mode, provided.is_some()) {
+            crate::resources::admit_serial_shared(
+                core,
+                config.host_ram_reserve,
+                config.max_memory_bytes,
+            )?
+        } else {
+            crate::resources::admit_explicit(
+                config.workers.min(config.games),
+                &config.cpu_cores,
+                core,
+                config.host_ram_reserve,
+                config.max_memory_bytes,
+            )?
+        }
     } else {
         crate::resources::admit(
             config.workers.min(config.games),

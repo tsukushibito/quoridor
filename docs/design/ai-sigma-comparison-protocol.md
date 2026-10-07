@@ -6,7 +6,15 @@
 
 固定Sigma-Web commit `751186344fc52ad0c29bc65922e62c6fa915f006`、9x9/10壁、NN-MCTS、`best.onnx`、C_PUCT1/FPU.2/temp0、ORT WASM推論1スレッドを参照する。root noise/先読み/analysisなし。参照原版の機能を弱めた別設定へ無断で置き換えない。モデル/依存/sourceの実版はrunから参照する。
 
-最初のnative/localはRust-native対ローカルSigma-Webであり、Sigma C++ nativeの成績ではない。Rust-Wasm対Sigma-Webは別に測る。研究RuleAはSigmaの履歴・3回目反復手禁止・200ply/合法手なしdraw・goal優先に内部探索まで合わせる。製品standard-2p-v1をこの比較のため変更しない。
+最初のnative/localはRust-native対ローカルSigma-Webであり、Sigma C++ nativeの成績ではない。Rust-Wasm対Sigma-Webは別に測る。
+
+2026-10-07の人間判断により、今後の評価は公式standard-2pを使う。NNUE/D/Sigmaの審判だけでなく、αβ・MCTS・solverの内部合法手と終局判定にも同じ規則を適用し、config/context/TT namespace/run receiptにrulesetを記録する。公式ルールは前後移動を認め、先に対岸のgoalへ到達した側が勝つ。出版社規則には3回反復禁止・自動反復draw・200ply drawを追加する根拠がない。[出版社の英語規則](https://export.gigamic.com/wp-content/uploads/2021/01/INS-RULES-QUORIDOR_10-2016.pdf)。大会独自の反復裁定を公式共通規則として導入しない。
+
+Sigma RuleA（3回目に入るpawn手禁止、200ply/合法手なしdraw、goal優先）はself-playに限る現役の規則である。両rulesetは共通の盤面・move・数値実装を使い、探索全体を複製しない。既存corpusの終了由来を変更せず、paused323や新label生成を再開しない。
+
+評価のmaxplies200は運用上の収集上限として使えるが、goalで未決着ならunfinished/censored/UNKNOWNとする。owner stop・late・error・no completed resultもdraw/z0/ProvenDrawへ変換しない。上限境界のgoalは勝ちとして優先する。予定16局・完成pair・unknown boundsと停止理由を保存し、反復をerrorや0評価のleafにしない。exact solverの循環グラフ上の解析的drawと、対局/UIの自動裁定は区別する。
+
+旧327の3勝13敗/4勝12敗、332の敗戦分析、331の既存4機能windowは使用時のRuleAに束縛された証拠として保持する。公式ルールの棋力結果へ読み替えず、旧D/Torch/book/対局を一律再実行しない。未開始の331比較は同一の公式ルール・新source/private版を両engineに適用し、変更したlegal/history/terminal/caller境界だけを確認する。公式D再比較は必要なら全費用を持つ別提案であり、Sigmaの必須gateにしない。
 
 同じPC・指定論理CPU・推論1スレッド・GPU推論なしを使い、測定中の重い研究jobを停止する。入力供給可能時のt0から合法応答の配送完了までを測る。モデルload/warmup、共通審判処理は区別して記録する。現在の500msとearly-sealの数値は既存試験の条件で、製品の一般上限ではない。
 

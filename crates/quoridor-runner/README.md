@@ -16,6 +16,12 @@ and RAM; an externally restricted single-core smoke shares its synchronous provi
 with the waiting worker. These guards are finite runtime measurements, not hard realtime
 or whole-host resource guarantees.
 
+Timed arena MCTS may share exactly one logical worker/inference CPU only with the
+default CPU ORT factory, one worker, one active game and batch size one. Supplied
+backends retain generic duplicate-core rejection, regardless of their metadata.
+The shared route still reserves three other physical cores and keeps affinity,
+cpuset, quota and RAM checks. This resource exception does not select game rules.
+
 Optional `inference_cpu_core` selects an inference owner separately from explicit
 `cpu_cores`. The requested worker and inference CPUs must lie in the process affinity
 and effective cpuset, use distinct physical cores, and leave two physical host cores

@@ -1,5 +1,11 @@
 # NNUE研究の知見と次の判断
 
+## 評価の公式ルールへの移行（2026-10-07、人間判断）
+
+今後の棋力/arena評価は公式standard-2pとし、Sigma RuleAはself-playのみで使う。合法な反復を禁止せず、3回反復/200plyを自動drawにしない。運用maxplies200に未決着ならcensored/UNKNOWN、境界goalは勝ちとする。内部αβ/MCTS/solverも同規則、config/context/TT namespace/receiptも明示する。[現行比較規約](design/ai-sigma-comparison-protocol.md)。旧327の3W13L/4W12Lと332分析、331既存4機能windowはRuleAの証拠であり、公式棋力へ読み替えない。規則変更がNNUEのvalue問題を解決するとの証拠はない。native入力/head数値の不変範囲は再用し、変更legal/history/terminal/callerと新private版を確認する。未開始331のRuleA科学対局は開始せず、担当へ公式移行を配分済み。公式D再対局・旧Torch/book再実行は自動追加しない。モデル/default・paused323・封印は維持する。
+
+331のserial-shared CPU sourceは停止済みresources/runtime2パスをbyte/SHA/mode一致でmainへ統合した。変更release・3新NN0 fixture・Clippyは成功し、旧RuleAの4機能windowは47Sigma要求、完成simulation21/24、各late1を捨て、4合法手を100ms前に受理した。4件とも意図したply capのUNKNOWNで、16科学対局や公式ルールの資格ではない。全directwait/cleanup[]、既失敗費も保持する。[main受付と使用範囲](../research-data/ai-sigma/arena-evaluation/sigma-timed-v1/serial-shared-main-result.json)。
+
 2026-10-06更新。[研究目標](design/ai-sigma-research-goal.md)はNNUE型Quoridor AIの最高棋力。Sigma同等は段階目標・比較基準であり、最高棋力と正式な同等水準は未立証。[現在の許可](design/ai-sigma-continuation-20261001.md)はユーザー指定の探索高速化と公開100万行GPU学習。本書を観測・限界・競合説明・次の人間判断の正本とし、担当・状態・依存はBeads、仕様は[設計](README.md)、数値と科学記録は原成果物へ置く。
 
 ## 学習の適合と汎化
