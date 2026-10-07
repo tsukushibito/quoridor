@@ -1,0 +1,52 @@
+{
+  "task": "quoridor-4lc.333",
+  "status": "BLOCKED_HOST_PERF_EVENT_ACCESS_SAMPLING_NOT_RUN",
+  "handoff_path": ".worktree/search-optimization/.artifacts/inference-search-perf-v1/kernel-access-refusal-handoff-v1.json",
+  "handoff_SHA256": "28819ec6ee1ec4baab313f24b4f37d1633d413346304a09775197d6493ee9d57",
+  "report_path": ".worktree/search-optimization/.artifacts/inference-search-perf-v1/kernel-access-refusal-report-v1.md",
+  "report_SHA256": "df910a27ca6234b723525dd76f2dd16d9cb27cd734ca2c1c3f61081e49b1a4f1",
+  "verified_bound_handoff_files": 8,
+  "probe": {
+    "issue": "quoridor-4lc.333",
+    "kind": "ONE_KERNEL_ACCESS_PROBE_DIRECT_COMMAND",
+    "actual_START": "2026-10-07T23:16:29.504995+00:00",
+    "exact_STOP": "2026-10-07T23:16:29.522680+00:00",
+    "controller_wall_s": 0.017660045996308327,
+    "exit_code": 0,
+    "direct_child_wait_reaped": true,
+    "child_identity": {
+      "pid": 2790408,
+      "start_ticks": "66814461",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "exact_child_absent": true,
+    "remaining": [],
+    "result_exists": true,
+    "source_SHA256": "5bf0ceb70b0417255b25fee9c4d654de19d79e3ff3260bea35a673345b9aa1fb",
+    "preflight_SHA256": "631d993aff8cc9a4bcbd049c52bb545d9a4ff345080d1524c94351a7705f5c90",
+    "raw_SHA256": {
+      "kernel-access-output-v1.log": "82352d57594e46d1b8b3df55aa1c27f2fb2bb6826f586d9ab6d4f1bf029505bb",
+      "kernel-access-result-v1.json": "bb4afc1294dba5e4a310d432f45c38e07a9fb4404048a9662f4a77859920b71c"
+    },
+    "model_FT_NN_Search_perf_sampling_calls": 0,
+    "budget": "explicit2MiB accessprobe only; whole128MiB not admitted",
+    "namespace_new_probe_lifetime_upper_B": 32768
+  },
+  "events": [
+    "hardware cycles disabled userspace EPERM",
+    "software cpu-clock disabled userspace EPERM"
+  ],
+  "metrics": "hotspots/cycles/instructions/cache/callchains/unwinder/samples/overhead NOT_MEASURED",
+  "external_condition": "Host/runtime must permit process-local userspace perf_event_open; rejecting layer UNKNOWN. Hardware virtual PMU availability separately unverified. No global policy changes authorized.",
+  "installation": "Authorized scoped acquisition remains allowed when useful, but no packages downloaded because installation does not resolve syscall denial.",
+  "resources": {
+    "prep_B": 2097152,
+    "proposed_whole_B": 134217728,
+    "additional_NOT_ADMITTED_B": 132120576,
+    "Root_new_handoff_upper_B": 65536,
+    "inside_existing_Root8MiB": true,
+    "old_raw_fees_buildUNKNOWN_UNKNOWN": "retained"
+  },
+  "resumption": "Same owner after actual changed host permission and finite frozen tool/source/ELF/model/clock/storage conditions. No repeated probes under unchanged policy or intrusive timing substitute.",
+  "rules": "Prepared fixed-depth baseline RuleA explicitly retained; official evaluation migration separate, no automatic replay."
+}
