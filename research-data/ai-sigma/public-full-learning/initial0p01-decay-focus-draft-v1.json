@@ -1,0 +1,64 @@
+{
+  "schema": "quoridor-human-steering-initial0p01-decay-focus-v1",
+  "authority": "Direct human: initialLR0.01 looks useful; prefer short-epoch rapid convergence, focus decay adjustment",
+  "ongoing_job": "cdf72ec0-0828-4452-bd55-b55dc6cc55fa",
+  "ongoing_action": "CONTINUE unchanged to its scientific naturalSTOP; no interrupt/resume/optimizer reset",
+  "prior_upper_log_search": "preserve all old plans/results/limits; after currentcandidate collect, no blind further initialLR refinement against human fixed0.01 preference",
+  "status": "DRAFT scientific comparison; no extra fit/entry bound or submitted",
+  "fixed_initial_LR_next": 0.01,
+  "proposed_first_comparison": [
+    {
+      "id": "decay0p5",
+      "factor": 0.5
+    },
+    {
+      "id": "decay0p25",
+      "factor": 0.25
+    }
+  ],
+  "otherwise_unchanged": [
+    "qualifiedINITIAL2ddac",
+    "fulloriginalT8413949/fixedoriginalV419150/newEclosed",
+    "FT32/H32/FP32/QF1+D/Adamwd0/batch2048",
+    "epochorderseed32320261007/reflection50%seed32320261008",
+    "warmup257/plateaupatience2/minLR1e-6/earlystop8/min_delta1e-4",
+    "source recordingr6 and original train-onlyscale/constant",
+    "scientific stop and null time/epoch/sample/forward/MAXjob horizons"
+  ],
+  "result_before_run_protocol": "Bind final concrete configurations/guard/input/selection/speed criteria and inclusive local resource forecast before first extra fit; no changes to rescue a condition",
+  "speed_endpoints": {
+    "absolute_fullV_rowMSE_thresholds": [
+      0.44,
+      0.435,
+      0.43
+    ],
+    "near_current_best_rule": "fullV <= best scientific completed observed V before decay-cohort lock +0.001; freeze actual numeric threshold before both outcomes",
+    "record": [
+      "first measured completedepoch",
+      "successfulupdates/seen",
+      "wholewall including initialization/evaluation/log/save",
+      "actual initialLR and effectiveLR curve"
+    ],
+    "not_reached": "explicit not reached, not extrapolated",
+    "fullV_frequency": "keep same step0+completedepoch selector",
+    "final_accuracy": "recorded minimum originalfullV rowMSE and exacttie lowerinitialLR/earlierstep; decay-cohort tie rule must be fixed before results",
+    "performance_context": "co-running software work separately recorded, no unfair causal speed claim"
+  },
+  "current_snapshot_only": {
+    "epoch3_V": 0.446027045294431,
+    "epoch20_V": 0.4309154357334148,
+    "first_recorded_decay_point_epoch": 16,
+    "best_prior_completed_V": 0.4284179383814613,
+    "snapshot_cannot_certify_scientific_completion": true
+  },
+  "scientific_caveat": "plateau multiplier does not change its trigger; compare multiplier first, adjust trigger/patience only on concrete evidence and explicit direction",
+  "resource_scope": "learning1043/evidence83/search168/parent12GiB; after ongoingSTOP exact inclusive preservedoutputs+newoutput forecasts required, no automatic2x20MiB allocation",
+  "newE_Sigma": "HELD until updated comparison and globalfreeze/finalboundary",
+  "scope_excluded": [
+    "newarchitecture/features/teacher",
+    "fixedwall/epochstop",
+    "newarena/defaultmodeladoption",
+    "change ongoingfit",
+    "blind delete/refund/oldUNKNOWNrelease"
+  ]
+}

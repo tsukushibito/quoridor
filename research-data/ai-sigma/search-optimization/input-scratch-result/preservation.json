@@ -1,0 +1,54 @@
+{
+  "scope": "Root preserved stopped fullsource/proofs and memory-principle evidence; no production adoption",
+  "checks": [
+    "reported artifactSHA allmatched",
+    "full stopped dependencySHA",
+    "current main baselineSHA unchanged",
+    "archive member byte roundtrip; no forward/rebuild/rerun"
+  ],
+  "production_source_paths": [
+    {
+      "path": "/workspaces/quoridor/.worktree/search-optimization/crates/quoridor-nnue/src/residual.rs",
+      "SHA": "fab07f2af91fc77debc80a4a0050d076a832521cc40c883c5b00e49b0eebbc7a",
+      "main_SHA": "60d4475add7c3e19119f2b11c6431e085495ee746576323be66ec348e382cb41"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/search-optimization/crates/quoridor-ai/src/alphabeta.rs",
+      "SHA": "0d4dd0cad33fcd462073ff173e1509bcb25e2ba63317696585af6e63c517f8d8",
+      "main_SHA": "5faf36cf9cbf99d97f35a6e1dd5aa0db183a50e9c22f12b66bb2fba6be2408f6"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/search-optimization/crates/quoridor-runner/src/bin/nnue-diagnose.rs",
+      "SHA": "c2f0420df4a16515fbb76c513d720345765094ecb1b338eae3e8d8b936250b3d",
+      "main_SHA": "2dd3619ee7d94f72bcf3cb484ea93fd16b6be818fd5d0cf476020fa3359aba12"
+    }
+  ],
+  "candidate_fullsource_in_archive": true,
+  "production_patch_is_incomplete_review_excerpt": true,
+  "Root_static_source_observations": [
+    "worker/search-owned privateVec, borrowed accumulator/model and contiguous inputs",
+    "ReLU and two distance inputs filledonce; fourprivatezero routes retainsetupzero",
+    "same ascending scalar multiply/add/activation/scale/weights/math",
+    "StaticEvaluator default delegates to existing evaluate; residual overrides explicit scratch; Counted forwards accounting once",
+    "mutable scratch separate per invocation; parent immutable; no unsafe/globalmut/state-sharing introduced"
+  ],
+  "limited_proofs": "six bounded fixtures;24 plain results equal; independent allocating arithmetic oracle/source counterpart retained",
+  "normalhead_alloc_realloc_bytes": 0,
+  "setup_bytes_per_root": 280,
+  "main_inference_adopted": false,
+  "speed_gain_supported": false,
+  "raw_negative_speed_results_preserved": true,
+  "archive_bytes": 502149,
+  "archive_SHA256": "9d91ab03fc05cd8621235b27e7c5ac8547fab74943256b7f3e9777f550562fbf",
+  "execution_artifacts": {
+    "handoff.json": "1400e86f3d7062310dd1fa2433def57e9547aef4594cc3c17e8aa8fe3316e9ff",
+    "report.md": "ca8a82faec1c6587c1985cad60333fff776a620faa841752a498853d5f785250",
+    "summary.json": "338530982528ac8d3cb19f9085c0d12255690de10bf6b1a527b974bcbdec1118",
+    "aggregate.py": "ffbe7eaa4218c0896251b0a1e7aea2d161737e27bb3edee7b8250378573e4340",
+    "production-only.patch": "18655dcc20069b6823eb838ed3226e42aa8e60732ad643793e57283c56db425d",
+    "numeric-stop-receipt.json": "af99669d920d512e4f15ef6b4feafcfdd7c28d4bd2dc4c34a9f8717f5690c797",
+    "numeric-command-logs.gz": "85e415d5adf0e187c42de5bd4419e9d112ca4fca1a1bf8ceff5c3e3d50493f5e",
+    "candidate-plain-r3.gz": "bac484273e310f096faf1ad4ad85e5464861bcf828aaab3e6967e396b58a76a4"
+  },
+  "limitation": "API/ownership adoption is separate from memory principle and speed evidence; core/default/counter caller related acceptance must be complete before production integration. No low-risk waiver or automatic speed/strength conclusion."
+}

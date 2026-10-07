@@ -36,3 +36,7 @@ CPU2,3最大2logical、RAMfamily4GiB、VRAM6GiB、親CPU4/RAM8/保存12GiB/UNKNO
 全3LRの結果を確認後、ユーザーは「もっと大きい学習率を試して欲しい。上限の確認はしてないよね？」と明示した。旧3e-5/1e-4/3e-4 cohortの観測・最小選定・失敗を保存し、3e-4を旧範囲内の暫定最良とする。続いてユーザーは「最初は極端に大きくて良いよ。二分探索のように検索していく方が効率良いでしょう」と指定し、初案1e-3→3e-3の順次拡張を置き換えた。初期LRだけを変え、同qualified INITIAL/batch2048/全T/fixed original V/Adam FP32/尺度/seed/反転RNG/257warmup/plateau/科学的停止規則で、まず0.1を大きな上側候補として試す。悪化または非finiteなら旧良好値3e-4との倍率中点（sqrt(.1\*.0003)≈.005477）などで範囲を絞る。良好な上端が続けば上側候補を拡張する。MSEの単調性は未証明なので厳密な二分探索による全域最適保証とはせず、実validation最小・有限性・収束を根拠に対数尺度で探索する。有限の初期振動だけで不安定上限を認定せず、減衰後に回復した場合も初期LRと実LR推移を区別する。候補ごとの判定と精度基準を結果前固定する。有限振動と非finite失敗を区別し、失敗を条件変更で救済しない。普遍的最大LR・最適値とは主張しない。
 
 新候補config/input/guard/job/validation選定規則とinclusive保存予測を結果前に固定する。旧出力/費/UNKNOWNを保持し、現1040MiB等の資源内成立またはRootの具体的な前向き容量配分後に実行する。時間/epoch/forward/job上限は設けない。重要な意味変更を含まないLR比較で毎fitレビューを追加せず、同セッションで継続する。最終Sigma/newE開封は拡張比較・最終選定・global freezeと関連入力境界確認まで保留し、評価labelsを追加LR選定に用いない。
+
+## 初期0.01固定・減衰倍率比較への最新方針
+
+ユーザーは初期LR0.01を候補に固定し、減衰率の調整で短いepochで速く収束させる方針を指定した。実行中midpoint3 cdf72ec0は設定を変更/取消せず自然停止を保存し、その後の機械的な初期LR二分探索は継続しない。まず減衰倍率0.5対0.25を、同qualified INITIAL/全T/固定original V/model/尺度/batch/Adam/RNG/反転/warmup257/plateau patience2/minLR/earlystop/null horizonで比較する。倍率以外を同時に変更しない。結果前にfixed pair/config/input/control/選定規則と全旧outputsを保全するinclusive容量を束縛する。初回fullV .44/.435/.43や結果前固定のincumbent+0.001到達、updates/seen/wholewall/実LR曲線と最終精度を併記する。epoch数だけで速さを認定せず、trigger/patienceによる到達時間の限界も区別する。これは準備案であり新fit開始/2候補分20MiBの自動配分ではない。最終Sigma/newEは選定/freeze/境界確認まで保留する。

@@ -1,0 +1,442 @@
+{
+  "status": "LIMITED_NUMERICAL_PARENT_ERROR_NONALIAS_AND_NORMAL_INPUT_HEAP_AVOIDANCE_PASS; ROBUST_SPEED_BENEFIT_NOT_SUPPORTED; ROOT_ADOPTION_PENDING",
+  "job_id": "25450e59-81c2-4056-a09c-cc9ba2be2cf3",
+  "numeric_whole_s": 4.861134083010256,
+  "software_whole_s": {
+    "r1": 1.4205037080682814,
+    "r2": 22.844988135038875,
+    "r3": 58.17693193303421
+  },
+  "same_candidate_all_attempt_s": 87.30355785915162,
+  "head_forwards": 2782283,
+  "unit_head_calls": 164108,
+  "macro_head_calls": 2618175,
+  "numeric_error_head_attempts": 2,
+  "fingerprint_rejects": 2,
+  "FT_prepares_recorded": 165,
+  "FT_updates_recorded": 2363349,
+  "FT_full_oracle_detail": "UNKNOWN detailed count; real fullminimax/child work included in wholejob",
+  "six_fixture_markers": {
+    "topology": [
+      "test residual::evaluation_input_scratch_tests::borrowed_input_matches_allocating_across_widths_and_parents ... INPUT_SCRATCH_ORACLE_FORWARDS=1176;TOPOLOGIES=21;PARENT_MODES=84;NUMERIC_ERROR_HEAD_ATTEMPTS=2;FINGERPRINT_REJECTS=2"
+    ],
+    "frozen": [
+      "test residual::input_scratch_frozen_tests::input_scratch_frozen_contexts_and_parent_return ... CANONICAL_FT_FROZEN_FORWARDS=162594;CHILDREN=1270;ROOTS=5"
+    ],
+    "error-cancel": [
+      "test alphabeta::input_scratch_error_tests::input_scratch_head_error_cancel_restore_parent ... INPUT_SCRATCH_ERROR_HEADS=50;FT_PREPARES=30;FT_DELTAS=20"
+    ],
+    "reentrant": [
+      "test alphabeta::input_scratch_error_tests::borrowed_scratch_search_is_reentrant_after_completed_depth ... INPUT_SCRATCH_REENTRANT_HEADS=270"
+    ],
+    "default-residual": [],
+    "counted-adapter-NN0": []
+  },
+  "all35_raw_member_restore_SHA_and_directwait": true,
+  "all24_plain_full_result_and_parent_parity": true,
+  "micro_checksum_exact": true,
+  "comparisons": {
+    "primary_canonical": {
+      "totals_ns": {
+        "baseline": {
+          "process_wall_ns": 1606982082,
+          "whole_ns": 1594005836,
+          "search_ns": 1583848335
+        },
+        "candidate": {
+          "process_wall_ns": 1732655663,
+          "whole_ns": 1633838600,
+          "search_ns": 1608110780
+        }
+      },
+      "candidate_over_baseline": {
+        "process_wall_ns": 1.0782047182776242,
+        "whole_ns": 1.0249890954602503,
+        "search_ns": 1.0153186668596017
+      },
+      "adjacent_pairs": [
+        {
+          "process_wall_ns": 1.048828625816428,
+          "whole_ns": 0.9764377772101551,
+          "search_ns": 0.9634985974476853
+        },
+        {
+          "process_wall_ns": 1.0724093023758041,
+          "whole_ns": 1.030392658833093,
+          "search_ns": 1.0190804664943522
+        },
+        {
+          "process_wall_ns": 1.1312220374143496,
+          "whole_ns": 1.068932270819811,
+          "search_ns": 1.0624071407905142
+        },
+        {
+          "process_wall_ns": 1.0331744549336703,
+          "whole_ns": 0.9808332755784986,
+          "search_ns": 0.9675998895981245
+        },
+        {
+          "process_wall_ns": 1.0533230739088064,
+          "whole_ns": 1.0012781408251674,
+          "search_ns": 0.9905402430614216
+        },
+        {
+          "process_wall_ns": 1.0308479360377973,
+          "whole_ns": 0.9922257608742318,
+          "search_ns": 0.9850901443570071
+        },
+        {
+          "process_wall_ns": 1.060417448922494,
+          "whole_ns": 1.0283348086994861,
+          "search_ns": 1.018938048634746
+        },
+        {
+          "process_wall_ns": 1.0146053150848762,
+          "whole_ns": 0.9737145556680679,
+          "search_ns": 0.9663787689660779
+        },
+        {
+          "process_wall_ns": 0.9297951655183497,
+          "whole_ns": 0.8888456303778404,
+          "search_ns": 0.8805484523530007
+        },
+        {
+          "process_wall_ns": 1.257250852814034,
+          "whole_ns": 1.2156962773732634,
+          "search_ns": 1.2075818764223611
+        },
+        {
+          "process_wall_ns": 1.0469287471954936,
+          "whole_ns": 0.9893686886283498,
+          "search_ns": 0.9804408869266437
+        },
+        {
+          "process_wall_ns": 1.2933437106117378,
+          "whole_ns": 1.1849382033886455,
+          "search_ns": 1.17256532561644
+        }
+      ],
+      "whole_pairs_faster": 6,
+      "whole_pair_median": 0.9967519508496996,
+      "whole_pair_range": [0.8888456303778404, 1.2156962773732634]
+    },
+    "secondary_micro": {
+      "totals_ns": {
+        "baseline": {
+          "process_wall_ns": 119191217,
+          "whole_ns": 117511117,
+          "evaluate_ns": 116849621
+        },
+        "candidate": {
+          "process_wall_ns": 175116931,
+          "whole_ns": 138938701,
+          "evaluate_ns": 133229427
+        }
+      },
+      "candidate_over_baseline": {
+        "process_wall_ns": 1.469210025768929,
+        "whole_ns": 1.182345164840872,
+        "evaluate_ns": 1.140178512003903
+      },
+      "adjacent_pairs": [
+        {
+          "process_wall_ns": 1.6713623783183025,
+          "whole_ns": 1.3466683080933586,
+          "evaluate_ns": 1.2991397636783322
+        },
+        {
+          "process_wall_ns": 1.2816196174721937,
+          "whole_ns": 1.0302791848085084,
+          "evaluate_ns": 0.9931826873330405
+        }
+      ],
+      "whole_pairs_faster": 0,
+      "whole_pair_median": 1.1884737464509336,
+      "whole_pair_range": [1.0302791848085084, 1.3466683080933586]
+    }
+  },
+  "per_root_primary_search_ratio": {
+    "initial": 1.0004961746612995,
+    "opening": 1.0515968805123095,
+    "walled-midgame": 0.9739852054400209,
+    "jump-p2": 1.0310893657684261,
+    "endgame": 1.0107606373454638
+  },
+  "allocation_counts": {
+    "historical_baseline": {
+      "head_calls": 88727,
+      "normal_head_allocations": 88727,
+      "normal_head_requested_B": 24843560,
+      "whole_search_allocations": 585221,
+      "whole_search_requested_B": 85744997,
+      "per_root": {
+        "initial": {
+          "evaluate": {
+            "alloc_calls": 18866,
+            "calls": 18866,
+            "dealloc_calls": 18866,
+            "inclusive_ns": 10988601,
+            "name": "evaluate",
+            "realloc_calls": 0,
+            "requested_bytes_including_realloc": 5282480
+          },
+          "scratch_setup": null,
+          "whole_search": {
+            "alloc_calls": 122145,
+            "dealloc_calls": 121446,
+            "realloc_calls": 279,
+            "requested_bytes_including_realloc": 17101551,
+            "retained_or_peak_memory": null
+          }
+        },
+        "opening": {
+          "evaluate": {
+            "alloc_calls": 19958,
+            "calls": 19958,
+            "dealloc_calls": 19958,
+            "inclusive_ns": 11593459,
+            "name": "evaluate",
+            "realloc_calls": 0,
+            "requested_bytes_including_realloc": 5588240
+          },
+          "scratch_setup": null,
+          "whole_search": {
+            "alloc_calls": 138464,
+            "dealloc_calls": 137327,
+            "realloc_calls": 279,
+            "requested_bytes_including_realloc": 20412667,
+            "retained_or_peak_memory": null
+          }
+        },
+        "walled-midgame": {
+          "evaluate": {
+            "alloc_calls": 14067,
+            "calls": 14067,
+            "dealloc_calls": 14067,
+            "inclusive_ns": 8351461,
+            "name": "evaluate",
+            "realloc_calls": 0,
+            "requested_bytes_including_realloc": 3938760
+          },
+          "scratch_setup": null,
+          "whole_search": {
+            "alloc_calls": 95676,
+            "dealloc_calls": 94998,
+            "realloc_calls": 239,
+            "requested_bytes_including_realloc": 14819453,
+            "retained_or_peak_memory": null
+          }
+        },
+        "jump-p2": {
+          "evaluate": {
+            "alloc_calls": 18038,
+            "calls": 18038,
+            "dealloc_calls": 18038,
+            "inclusive_ns": 10304309,
+            "name": "evaluate",
+            "realloc_calls": 0,
+            "requested_bytes_including_realloc": 5050640
+          },
+          "scratch_setup": null,
+          "whole_search": {
+            "alloc_calls": 112593,
+            "dealloc_calls": 112187,
+            "realloc_calls": 308,
+            "requested_bytes_including_realloc": 16022551,
+            "retained_or_peak_memory": null
+          }
+        },
+        "endgame": {
+          "evaluate": {
+            "alloc_calls": 17798,
+            "calls": 17798,
+            "dealloc_calls": 17798,
+            "inclusive_ns": 10500369,
+            "name": "evaluate",
+            "realloc_calls": 0,
+            "requested_bytes_including_realloc": 4983440
+          },
+          "scratch_setup": null,
+          "whole_search": {
+            "alloc_calls": 116343,
+            "dealloc_calls": 115786,
+            "realloc_calls": 278,
+            "requested_bytes_including_realloc": 17388775,
+            "retained_or_peak_memory": null
+          }
+        }
+      }
+    },
+    "candidate": {
+      "head_calls": 88727,
+      "normal_head_allocations": 0,
+      "normal_head_requested_B": 0,
+      "whole_search_allocations": 496499,
+      "whole_search_requested_B": 60902837,
+      "per_root": {
+        "initial": {
+          "evaluate": {
+            "alloc_calls": 0,
+            "calls": 18866,
+            "dealloc_calls": 0,
+            "inclusive_ns": 10992756,
+            "name": "evaluate",
+            "realloc_calls": 0,
+            "requested_bytes_including_realloc": 0
+          },
+          "scratch_setup": {
+            "alloc_calls": 1,
+            "calls": 1,
+            "dealloc_calls": 0,
+            "inclusive_ns": 250,
+            "name": "scratch_setup",
+            "realloc_calls": 0,
+            "requested_bytes_including_realloc": 280
+          },
+          "whole_search": {
+            "alloc_calls": 103280,
+            "dealloc_calls": 102581,
+            "realloc_calls": 279,
+            "requested_bytes_including_realloc": 11819351,
+            "retained_or_peak_memory": null
+          }
+        },
+        "opening": {
+          "evaluate": {
+            "alloc_calls": 0,
+            "calls": 19958,
+            "dealloc_calls": 0,
+            "inclusive_ns": 11507943,
+            "name": "evaluate",
+            "realloc_calls": 0,
+            "requested_bytes_including_realloc": 0
+          },
+          "scratch_setup": {
+            "alloc_calls": 1,
+            "calls": 1,
+            "dealloc_calls": 0,
+            "inclusive_ns": 262,
+            "name": "scratch_setup",
+            "realloc_calls": 0,
+            "requested_bytes_including_realloc": 280
+          },
+          "whole_search": {
+            "alloc_calls": 118507,
+            "dealloc_calls": 117370,
+            "realloc_calls": 279,
+            "requested_bytes_including_realloc": 14824707,
+            "retained_or_peak_memory": null
+          }
+        },
+        "walled-midgame": {
+          "evaluate": {
+            "alloc_calls": 0,
+            "calls": 14067,
+            "dealloc_calls": 0,
+            "inclusive_ns": 8207795,
+            "name": "evaluate",
+            "realloc_calls": 0,
+            "requested_bytes_including_realloc": 0
+          },
+          "scratch_setup": {
+            "alloc_calls": 1,
+            "calls": 1,
+            "dealloc_calls": 0,
+            "inclusive_ns": 261,
+            "name": "scratch_setup",
+            "realloc_calls": 0,
+            "requested_bytes_including_realloc": 280
+          },
+          "whole_search": {
+            "alloc_calls": 81610,
+            "dealloc_calls": 80932,
+            "realloc_calls": 239,
+            "requested_bytes_including_realloc": 10880973,
+            "retained_or_peak_memory": null
+          }
+        },
+        "jump-p2": {
+          "evaluate": {
+            "alloc_calls": 0,
+            "calls": 18038,
+            "dealloc_calls": 0,
+            "inclusive_ns": 10343160,
+            "name": "evaluate",
+            "realloc_calls": 0,
+            "requested_bytes_including_realloc": 0
+          },
+          "scratch_setup": {
+            "alloc_calls": 1,
+            "calls": 1,
+            "dealloc_calls": 0,
+            "inclusive_ns": 229,
+            "name": "scratch_setup",
+            "realloc_calls": 0,
+            "requested_bytes_including_realloc": 280
+          },
+          "whole_search": {
+            "alloc_calls": 94556,
+            "dealloc_calls": 94150,
+            "realloc_calls": 308,
+            "requested_bytes_including_realloc": 10972191,
+            "retained_or_peak_memory": null
+          }
+        },
+        "endgame": {
+          "evaluate": {
+            "alloc_calls": 0,
+            "calls": 17798,
+            "dealloc_calls": 0,
+            "inclusive_ns": 10270612,
+            "name": "evaluate",
+            "realloc_calls": 0,
+            "requested_bytes_including_realloc": 0
+          },
+          "scratch_setup": {
+            "alloc_calls": 1,
+            "calls": 1,
+            "dealloc_calls": 0,
+            "inclusive_ns": 254,
+            "name": "scratch_setup",
+            "realloc_calls": 0,
+            "requested_bytes_including_realloc": 280
+          },
+          "whole_search": {
+            "alloc_calls": 98546,
+            "dealloc_calls": 97989,
+            "realloc_calls": 278,
+            "requested_bytes_including_realloc": 12405615,
+            "retained_or_peak_memory": null
+          }
+        }
+      }
+    }
+  },
+  "historical_allocator_provenance": {
+    "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/search-optimization/caller-cost-v1/calibration-2.log",
+    "SHA": "ac2744bc593f21ae45506100498896fac8323b021d8aa33c01713fec96c56063",
+    "binding": {
+      "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/search-optimization/caller-cost-v1/private/baseline-observed",
+      "SHA": "35c625f5ca96aba2c3c3e5ef97a16d18123c42361be20f95bf5efcf15a172bbd",
+      "source_SHA": "60d4475add7c3e19119f2b11c6431e085495ee746576323be66ec348e382cb41",
+      "features": "research,profiling",
+      "bytes": 919736,
+      "compressed_bytes": 399354
+    },
+    "scope": "Prior same canonical60d/model/roots/depth/counters allocation evidence; NOT a new paired timing result"
+  },
+  "baseline": {
+    "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/search-optimization/caller-cost-v1/private/baseline-plain",
+    "SHA": "6c18d786109ee422a653c5278b2b8ccf48844e5b222d6dede7b5c12970b40348",
+    "source_SHA": "60d4475add7c3e19119f2b11c6431e085495ee746576323be66ec348e382cb41",
+    "features": "research",
+    "bytes": 872416,
+    "compressed_bytes": 382453
+  },
+  "model_weights_SHA": "c0ec9bf3f8f221c2a2d2db6bf70857fa55647e7c7fd15b38786ef941baa079cd",
+  "decision": "Normal input temporary allocation removed with setup-owned borrowed storage. No automatic speed adoption: whole total2.50percent slower,6of12 faster/median0.996752, short correlated samples. Root weighs explicit memory principle and source ownership separately; no general fragmentation/latency/copy/strength claim.",
+  "limitations": "Five fixed genuine roots/depth3/node100k/TT4096/sameBEST;24plain processes/12pairs,4micro processes/2pairs. Single shortseries, no confidence/power inference. Whole includes initialization/drop, process differs; nested clocks not added. Other FT/legal/TT allocations remain. Default Float/Quantized branch compile/delegation proof separate from actual Residual caller qualification; no new unrelated numeric proof claimed.",
+  "source_target_writer_STOP": true,
+  "shared_target_growth_B": null,
+  "old_fees_failures_UNKNOWN": "All preserved; no refunds/new timers/history audit; three pure compile attempts co-ran learnerd105 and are workcost only"
+}
