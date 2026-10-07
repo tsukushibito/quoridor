@@ -1,0 +1,86 @@
+{
+  "schema": "quoridor-fixed-initial0p01-decay-pair-pre-result-v1",
+  "authority": "Direct human initial0.01/decay/faster convergence +Root acknowledgement; no additionalmethodACK required",
+  "prior_pair_draft": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-full-learning/decay-pair-scientific-draft-v1.json",
+    "SHA": "af704ff32491c70806bf40357b2502b81ad6f0643461ebdcaa464c3bfb910b57"
+  },
+  "completed_REFERENCE": {
+    "receipt": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-full-learning/bracket-midpoint3-stop-collection-v2.json",
+    "receipt_SHA": "9348e6c4f82a9235be71f90fc8bbb8bffef330d23d132c2fe5bedc2c35a3c512",
+    "initial_LR": 0.011321930132219958,
+    "BEST_V": 0.42505264436242673,
+    "BEST_position": {
+      "step": 238322,
+      "training_seen": 488009042,
+      "row_epoch": 58.0,
+      "completed_epochs": 58,
+      "partial_epoch_fraction": 0.0
+    },
+    "BEST_weights_SHA": "dcb3b49fe3dedc267895e0a570d3420cd898ccfb204468bd36a6d71458802cca",
+    "purePT_nativebytes_not_live_nativequalification": true
+  },
+  "fixed_near_reference_target": 0.42605264436242674,
+  "fixed_absolute_targets": [
+    0.44,
+    0.435,
+    0.43
+  ],
+  "conditions": [
+    {
+      "id": "factor0p5",
+      "initial_LR": 0.01,
+      "decay_factor": 0.5,
+      "config": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-full-learning/decay-factor0p5-config-draft-v1.json",
+      "config_SHA": "b76b5441d8dc883e4176e3cc4db96dee50978ce67afe5a4f8fb09c6fbb6051ee",
+      "input_binding": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-full-learning/decay-factor0p5-input-binding-draft-v1.json",
+      "input_binding_SHA": "640fa3279a4e8e1fef5db342c2964e9ced6875ccff9e4c3c1d2acedc08b44f9b",
+      "output": null,
+      "guard": null,
+      "job": null,
+      "entry_admission": "NONE"
+    },
+    {
+      "id": "factor0p25",
+      "initial_LR": 0.01,
+      "decay_factor": 0.25,
+      "config": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-full-learning/decay-factor0p25-config-draft-v1.json",
+      "config_SHA": "d6d40fb9950c8ef86320c4d5f56e81018f468299002a7fbe4f62a36ed513f907",
+      "input_binding": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-full-learning/decay-factor0p25-input-binding-draft-v1.json",
+      "input_binding_SHA": "0fd030c0d8502f7808bd74e725ef20ca9d85382a99b1cc49f503f55dad304e83",
+      "output": null,
+      "guard": null,
+      "job": null,
+      "entry_admission": "NONE"
+    }
+  ],
+  "order": [
+    "factor0p5",
+    "factor0p25"
+  ],
+  "sole_between_pair_config_difference": "lr_decay_factor 0.5 vs0.25, bothinitial0.01, all other values equal",
+  "science_run_stop": "unchanged fullV row epoch patience8/min_delta1e-4 or nonfinite; no wall/epoch/sample/forward/MAXjob; crossingtarget does not stop current science run",
+  "speed_accuracy_comparison": {
+    "primary_error": "full original V rowMSE; optimizer/plateau/BEST criterion unchanged",
+    "first_threshold_crossing": "first ACTUAL fullV scheduled epoch <=fixed0.42605264436242674; no diagnostic subset or interpolation substitutes",
+    "valid_speed_comparison": "finite scientifically completed trajectory with its BEST <=fixedtarget; nonfinite failure retains all results but not a speed-eligible model",
+    "pair_recommendation": "among speed-eligible conditions, smallest first-crossing successfulseen/epoch; exacttie lower recordedBEST rowMSE then factor0.5; if no eligible condition, report target not reached and recommend neither as achieving it",
+    "final_accuracy": "report both strict recordedmin and difference vs frozenREFERENCE; final onecandidate/config selection/globalfreeze remains separate after outcomes, no test-label tuning",
+    "whole_cost": "reported alongside epoch/update/seen with initial/transfer/eval/log/save/failure costs; co-running compile incidental costs retained, no unfairclock causalclaim",
+    "LR": "initialLR distinct from actual effectiveLR/plateautrigger curve"
+  },
+  "bindings": {
+    "source": {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-full-learning/recording-source-binding-r6.json",
+      "SHA": "c976a0f683d557fa54fb58c7d6547c5520f04b470fa5f1642639e716aebf7b39"
+    },
+    "qualifiedINITIAL_SHA": "2ddacbf88145816b6b0c86e13ebb983d7c1b64e42f8d346623873a18ae7414ad",
+    "cache_SHA": "07d81abc2230b2fe6b7c5fb7a425e7e3109bf9af2c467f5c72f8d3bdb975279b",
+    "scale_SHA": "0a322186e48d1ef45a02927848a45939df7a36cbfe299fae442270cc42b4a61b",
+    "constant_SHA": "d1ee90ac7faeaaca86fdd46770d097e7ef2bef09b777b55f1a7f7d6eb3fc08b7"
+  },
+  "newE_Sigma": "HELD until updated expanded selection/globalfreeze/relatedboundary",
+  "resource_status": "NOT_ADMITTED; config/reference/rule fixed, no extra guard/job/output/heavyentry",
+  "old_bracket": "NO furtherblindinitialLRrefinement per latesthuman, alloldhistory retained",
+  "oldreviews": "reuse qualified input/nativeINITIAL/onlineLR/Tonlyscale; no everyrunreview/newrole"
+}
