@@ -1,0 +1,174 @@
+{
+  "job_id": "00bc4726-296e-49f3-81c2-20e9a53c9434",
+  "result": "PASS_LIMITED CLI/standard statistics and deterministic startup semantics",
+  "CLI_ids_passed": 30,
+  "startup_qualified_roots": 5,
+  "startup_repetitions": 3,
+  "typed_results": "head valuebits, Action/PV/depth/stop/all23 work counters/parent-history and retained memory exact",
+  "model": "/workspaces/quoridor/.worktree/assets/checkpoints/public-million-learning/baseline-original-v2/output/best-model/manifest.json",
+  "weights_SHA256": "c0ec9bf3f8f221c2a2d2db6bf70857fa55647e7c7fd15b38786ef941baa079cd",
+  "binary_SHA256": "c6fbda1bbb064bd56ff6e55682da8587f53990fe9e702e00b29f4a39d8923af4",
+  "timings": [
+    {
+      "benchmark": "nnue/evaluate/initial",
+      "absolute": {
+        "canonical-a0": {
+          "displayed_estimator": "slope",
+          "estimate_ns": {
+            "confidence_interval": {
+              "confidence_level": 0.95,
+              "lower_bound": 551.836391464556,
+              "upper_bound": 561.1155145960902
+            },
+            "point_estimate": 556.0705593900274,
+            "standard_error": 2.3664594420907727
+          }
+        },
+        "canonical-a1": {
+          "displayed_estimator": "slope",
+          "estimate_ns": {
+            "confidence_interval": {
+              "confidence_level": 0.95,
+              "lower_bound": 542.3231304980345,
+              "upper_bound": 549.4772579730661
+            },
+            "point_estimate": 545.735686041582,
+            "standard_error": 1.8250342619461322
+          }
+        }
+      },
+      "iterations": {
+        "canonical-a0": {
+          "warmup": 2097151,
+          "measurement": 5529675,
+          "head_calls_per_iteration": 1,
+          "head_calls": 7626826,
+          "sampling_mode": "Linear",
+          "samples": 50
+        },
+        "canonical-a1": {
+          "warmup": 2097151,
+          "measurement": 5398350,
+          "head_calls_per_iteration": 1,
+          "head_calls": 7495501,
+          "sampling_mode": "Linear",
+          "samples": 50
+        }
+      },
+      "relative_standard_Criterion_mean": {
+        "confidence_interval": {
+          "confidence_level": 0.95,
+          "lower_bound": -0.025617449815691935,
+          "upper_bound": 0.007671036952728335
+        },
+        "point_estimate": -0.010088968173143087,
+        "standard_error": 0.00847774767985082
+      },
+      "interpretation": "No change in performance detected (Criterion printed p=0.25)"
+    },
+    {
+      "benchmark": "search/cold_setup_search_drop/initial",
+      "absolute": {
+        "canonical-a0": {
+          "displayed_estimator": "mean",
+          "estimate_ns": {
+            "confidence_interval": {
+              "confidence_level": 0.95,
+              "lower_bound": 26256058.983166665,
+              "upper_bound": 26513373.806999996
+            },
+            "point_estimate": 26379529.059999995,
+            "standard_error": 65655.71934787158
+          }
+        },
+        "canonical-a1": {
+          "displayed_estimator": "mean",
+          "estimate_ns": {
+            "confidence_interval": {
+              "confidence_level": 0.95,
+              "lower_bound": 26580242.381499995,
+              "upper_bound": 26978562.175666653
+            },
+            "point_estimate": 26769182.386666667,
+            "standard_error": 102025.09490950755
+          }
+        }
+      },
+      "iterations": {
+        "canonical-a0": {
+          "warmup": 63,
+          "measurement": 150,
+          "head_calls_per_iteration": 18866,
+          "head_calls": 4018458,
+          "sampling_mode": "Flat",
+          "samples": 50
+        },
+        "canonical-a1": {
+          "warmup": 63,
+          "measurement": 150,
+          "head_calls_per_iteration": 18866,
+          "head_calls": 4018458,
+          "sampling_mode": "Flat",
+          "samples": 50
+        }
+      },
+      "relative_standard_Criterion_mean": {
+        "confidence_interval": {
+          "confidence_level": 0.95,
+          "lower_bound": 0.006398506092833768,
+          "upper_bound": 0.023936874946118868
+        },
+        "point_estimate": 0.014771049391382629,
+        "standard_error": 0.004497558662200165
+      },
+      "interpretation": "Change within noise threshold; confidence interval crosses +1% threshold. Printed p=0.00 is rounded, not exact zero."
+    }
+  ],
+  "head_forward_accounting": {
+    "startup_per_process": 365176,
+    "startup_all3": 1095528,
+    "smoke_body_calls": 365171,
+    "statistical_warmup_plus_measurement": 23159243,
+    "total": 24619942,
+    "basis": "frozen driver multiplicities, exported preflight evaluations, Criterion warmup DEBUG iterations and exact sample.json iteration counts",
+    "unexported_internal_neuron_operations": null
+  },
+  "whole_job_seconds": 22.59539237502031,
+  "exported_delta_updates_accounting": {
+    "startup_all3": 1170915,
+    "smoke_bodies": 390305,
+    "statistical_warmup_plus_measurement": 8479530,
+    "total": 10040750,
+    "basis": "driver multiplicities and preflight delta_updates counter; timed bodies uninstrumented",
+    "internal_fullFT_feature_operations": null
+  },
+  "statistical_method": {
+    "sample_size": 50,
+    "warmup_s": 1,
+    "measurement_target_s": 3,
+    "nresamples": 100000,
+    "confidence": 0.95,
+    "significance": 0.05,
+    "noise_threshold": 0.01,
+    "quick": false,
+    "parallel_analysis": false
+  },
+  "limits": {
+    "time": null,
+    "forward": null,
+    "MAXjob": null,
+    "CPU": [0, 1],
+    "RAMfamily_B": 2147483648,
+    "GPU": 0
+  },
+  "scope": "head excludes precomputed fullFT; cold includes player/TT setup, normal rootFT preparation, search and table destruction. Models/replay/preflight outside samples, inside whole job",
+  "interpretation": "same-binary sequential control only; cannot estimate candidate speed, causally attribute allocations/dispatch, certify stability or playing strength",
+  "limitations": [
+    "50 samples within each process are not 50 independent process runs",
+    "two sequential processes only; five roots qualified, initial root timed",
+    "each timed search body uses fresh TT; per-iteration full counters not instrumented",
+    "substantial learner curve analysis stopped before entry; light text/source work may co-run",
+    "head slope estimate and relative mean estimate differ; do not equate their ratios",
+    "prior unfavorable optimization results, failures and UNKNOWN costs unchanged"
+  ]
+}

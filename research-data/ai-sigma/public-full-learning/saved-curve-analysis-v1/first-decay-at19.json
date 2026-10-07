@@ -1,0 +1,221 @@
+{
+  "scope": "saved first21 fullV observations + fixed-config scheduler bookkeeping only; no new fit/forward/GPU/labels",
+  "curve_path": "/workspaces/quoridor/.worktree/assets/checkpoints/public-full-learning/decay-pair-v1/factor0p5/output/curves.jsonl.gz",
+  "curve_SHA": "af9c164cc0fa30b4837ffb4603ee1a110ae29486f5b0481ec7abf651979c2e46",
+  "config_path": "/workspaces/quoridor/.worktree/assets/checkpoints/public-full-learning/decay-pair-v1/factor0p5/output/config.json",
+  "config_SHA": "3279027e3fc721c9bf9275686d16e640ffca9cfa55ef6ff7ab0271c374810941",
+  "rule": {
+    "mode": "min",
+    "threshold_mode": "abs",
+    "threshold": 0.0001,
+    "patience": 2,
+    "factor": 0.5,
+    "warmup_steps": 257,
+    "fullV_rows": 419150
+  },
+  "actual_first_trigger_after_epoch": 19,
+  "actual_trace": [
+    {
+      "epoch": 0,
+      "V": 0.8558441580504356,
+      "significant_improvement": true,
+      "scheduler_best": 0.8558441580504356,
+      "bad_epochs": 0,
+      "trigger": false,
+      "observed_next_LR": 0.01
+    },
+    {
+      "epoch": 1,
+      "V": 0.4655768743122415,
+      "significant_improvement": true,
+      "scheduler_best": 0.4655768743122415,
+      "bad_epochs": 0,
+      "trigger": false,
+      "observed_next_LR": 0.01
+    },
+    {
+      "epoch": 2,
+      "V": 0.4556769899418343,
+      "significant_improvement": true,
+      "scheduler_best": 0.4556769899418343,
+      "bad_epochs": 0,
+      "trigger": false,
+      "observed_next_LR": 0.01
+    },
+    {
+      "epoch": 3,
+      "V": 0.4508424311918419,
+      "significant_improvement": true,
+      "scheduler_best": 0.4508424311918419,
+      "bad_epochs": 0,
+      "trigger": false,
+      "observed_next_LR": 0.01
+    },
+    {
+      "epoch": 4,
+      "V": 0.44734880603656013,
+      "significant_improvement": true,
+      "scheduler_best": 0.44734880603656013,
+      "bad_epochs": 0,
+      "trigger": false,
+      "observed_next_LR": 0.01
+    },
+    {
+      "epoch": 5,
+      "V": 0.44612837434923636,
+      "significant_improvement": true,
+      "scheduler_best": 0.44612837434923636,
+      "bad_epochs": 0,
+      "trigger": false,
+      "observed_next_LR": 0.01
+    },
+    {
+      "epoch": 6,
+      "V": 0.4448807030359805,
+      "significant_improvement": true,
+      "scheduler_best": 0.4448807030359805,
+      "bad_epochs": 0,
+      "trigger": false,
+      "observed_next_LR": 0.01
+    },
+    {
+      "epoch": 7,
+      "V": 0.4437786978619928,
+      "significant_improvement": true,
+      "scheduler_best": 0.4437786978619928,
+      "bad_epochs": 0,
+      "trigger": false,
+      "observed_next_LR": 0.01
+    },
+    {
+      "epoch": 8,
+      "V": 0.4421412774954627,
+      "significant_improvement": true,
+      "scheduler_best": 0.4421412774954627,
+      "bad_epochs": 0,
+      "trigger": false,
+      "observed_next_LR": 0.01
+    },
+    {
+      "epoch": 9,
+      "V": 0.441323947629266,
+      "significant_improvement": true,
+      "scheduler_best": 0.441323947629266,
+      "bad_epochs": 0,
+      "trigger": false,
+      "observed_next_LR": 0.01
+    },
+    {
+      "epoch": 10,
+      "V": 0.4420854052841926,
+      "significant_improvement": false,
+      "scheduler_best": 0.441323947629266,
+      "bad_epochs": 1,
+      "trigger": false,
+      "observed_next_LR": 0.01
+    },
+    {
+      "epoch": 11,
+      "V": 0.4409946969123401,
+      "significant_improvement": true,
+      "scheduler_best": 0.4409946969123401,
+      "bad_epochs": 0,
+      "trigger": false,
+      "observed_next_LR": 0.01
+    },
+    {
+      "epoch": 12,
+      "V": 0.4397393992826547,
+      "significant_improvement": true,
+      "scheduler_best": 0.4397393992826547,
+      "bad_epochs": 0,
+      "trigger": false,
+      "observed_next_LR": 0.01
+    },
+    {
+      "epoch": 13,
+      "V": 0.4386375097300105,
+      "significant_improvement": true,
+      "scheduler_best": 0.4386375097300105,
+      "bad_epochs": 0,
+      "trigger": false,
+      "observed_next_LR": 0.01
+    },
+    {
+      "epoch": 14,
+      "V": 0.44003531271256185,
+      "significant_improvement": false,
+      "scheduler_best": 0.4386375097300105,
+      "bad_epochs": 1,
+      "trigger": false,
+      "observed_next_LR": 0.01
+    },
+    {
+      "epoch": 15,
+      "V": 0.43912622975162724,
+      "significant_improvement": false,
+      "scheduler_best": 0.4386375097300105,
+      "bad_epochs": 2,
+      "trigger": false,
+      "observed_next_LR": 0.01
+    },
+    {
+      "epoch": 16,
+      "V": 0.43833020489684243,
+      "significant_improvement": true,
+      "scheduler_best": 0.43833020489684243,
+      "bad_epochs": 0,
+      "trigger": false,
+      "observed_next_LR": 0.01
+    },
+    {
+      "epoch": 17,
+      "V": 0.4390829451922671,
+      "significant_improvement": false,
+      "scheduler_best": 0.43833020489684243,
+      "bad_epochs": 1,
+      "trigger": false,
+      "observed_next_LR": 0.01
+    },
+    {
+      "epoch": 18,
+      "V": 0.4392201079743792,
+      "significant_improvement": false,
+      "scheduler_best": 0.43833020489684243,
+      "bad_epochs": 2,
+      "trigger": false,
+      "observed_next_LR": 0.01
+    },
+    {
+      "epoch": 19,
+      "V": 0.43847782662154583,
+      "significant_improvement": false,
+      "scheduler_best": 0.43833020489684243,
+      "bad_epochs": 3,
+      "trigger": true,
+      "observed_next_LR": 0.005
+    }
+  ],
+  "first_trigger_on_unchanged_observed_prefix": {
+    "patience=0,threshold=0.0001": 10,
+    "patience=1,threshold=0.0001": 15,
+    "patience=2,threshold=0.0005": 16,
+    "patience=2,threshold=0.001": 16
+  },
+  "alternative_interpretation": "First trigger timing only, no predicted subsequent V/LR/stop/BEST; after a changed trigger the original future curve is no longer a valid counterfactual",
+  "segments": {
+    "epoch1to9_net_drop": 0.024252926682975462,
+    "epoch9to16_net_drop": 0.0029937427324235877,
+    "epoch13to19_net_drop": 0.00015968310846464773,
+    "epoch13to16_best_gain_that_reset_wait": 0.0003073048331680428,
+    "epoch13to19_wall_seconds": 221.03690258599818,
+    "epoch19to20_drop": 0.005105131479037683,
+    "epoch19to20_wall_seconds": 41.10404297406785,
+    "next_epoch_drop_over_prior_six_epoch_net_drop": 31.97039140910705
+  },
+  "inference": "Small record improvement at16 reset bad-count after14/15; fullV up/down13..19 plus sharp20 drop is consistent with high-LR plateau/refinement; no earlier-trigger accuracy proof/optimizer mechanism proof",
+  "next_fit": "HELD; no method adopted",
+  "newE_Sigma": "CLOSED",
+  "sharedCargo": 0,
+  "analysis_runtime": "bounded small stdlib read, CPU2,3; no NumPy/Torch/PNG work during peer quiet-clock reservation"
+}
