@@ -41,6 +41,8 @@ npm run check:all
 
 `npm run check`は製品core/AI/WasmとWeb/DTO/fixture/境界/audio/renderを、`npm run check:native`はnative研究crateを選ぶ。`check:all`は製品・native・軽量研究の統合入口とする。通常のproduction distを検証用buildで上書きせず、`verify:production`は専用outDirを使う。
 
+共有Cargo targetでは、worktreeの凍結ソースを旧mtime付きで復元すると、別版のrlibをCargoが`fresh`と判定する場合がある。現在のsource SHAを記録しただけでは使用されたcache payloadの版を証明しない。唯一Cargo writerの次entryで、担当source・compiler/flags・lock・実使用artifactを束縛する。鮮度修復が必要なら、読者停止後にSHA確認済みの名前を指定した担当sourceだけのmtimeを更新し、必要scopeを再compileして新artifactとlinker/TMP費を記録する。数学・ソースbyte・凍結private ELF・失敗原記録を維持し、Cargo cleanやtarget全量走査・cache削除を修復の代用にしない。
+
 品質依存の初期導入は専用領域へ行う。共有学習envをformatter導入で変更しない。
 
 ```bash
