@@ -436,7 +436,8 @@ fn qualify_residual(c: &Config, start: Instant) -> Result<Value> {
         json!({"schema":"native-residual-qualification-v1","status":"PASS","predictions":rows,
         "NN":nn.get(),"processed":0,"undo_checks":undo_checks,"max_accumulator_error":max_accumulator_error,
         "max_value_error":max_value_error,"abs_tol":1e-5,"rel_tol":1e-4,
-        "evaluation_modes":["Scalar","Simd"],"SIMD_scope":"FT/accumulator; residual head remains scalar",
+        "evaluation_modes":["Scalar","Simd"],"SIMD_scope":"FT/accumulator mode; residual head independently uses guarded runtime AVX2 or ordered scalar fallback",
+        "residual_head_policy":"fp32_avx2_lane8_balanced_no_fma_guarded_scalar_fallback_v1",
         "avx2_available":avx2_available,
         "performance_claim":false,"parent_history_ply_exact_restore":true,"wall_s":start.elapsed().as_secs_f64()}),
     )

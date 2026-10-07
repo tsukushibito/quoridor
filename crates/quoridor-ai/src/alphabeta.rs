@@ -213,6 +213,8 @@ impl StaticEvaluator for NnueEvaluator {
 #[derive(Debug, Clone)]
 pub struct ResidualEvaluator {
     pub model: Arc<ResidualModel>,
+    /// FT accumulation mode. The residual head independently selects guarded
+    /// runtime AVX2 or its ordered scalar fallback.
     pub mode: EvaluationMode,
 }
 impl ResidualEvaluator {
@@ -1718,6 +1720,206 @@ mod input_scratch_error_tests {
         println!(
             "INPUT_SCRATCH_REENTRANT_HEADS={}",
             outer.stats.evaluations + inner.stats.evaluations
+        );
+    }
+}
+
+#[cfg(all(test, feature = "research"))]
+mod fast_head_search_tests {
+    use super::*;
+    use serde_json::{Value, json};
+    use std::sync::Mutex;
+
+    // Independent test-only original scalar head. Production search, FT,
+    // history, move ordering and TT are reused, never copied here.
+    struct Reference {
+        inner: ResidualEvaluator,
+        weights: Vec<f32>,
+        manifest: Value,
+        scalar: bool,
+        deltas: Mutex<Vec<f64>>,
+    }
+    impl Reference {
+        fn scalar_head(&self, a: &Accumulator) -> f32 {
+            let width = self.manifest["topology"]["ft_width"].as_u64().unwrap() as usize;
+            let hidden = self.manifest["topology"]["hidden_width"].as_u64().unwrap() as usize;
+            let input = 2 * width + 6;
+            let side = usize::from(a.features.side);
+            let mut x = Vec::with_capacity(input);
+            for p in [side, side ^ 1] {
+                x.extend(a.values[p].iter().map(|v| v.max(0.)));
+            }
+            for i in 0..2 {
+                let mu = self.manifest["mu_f32"][i].as_f64().unwrap() as f32;
+                let sigma = self.manifest["sigma_f32"][i].as_f64().unwrap() as f32;
+                x.push((a.features.distance[i] - mu) / sigma);
+            }
+            x.extend([0.; 4]);
+            let h = (quoridor_nnue::FEATURE_COUNT + 1) * width;
+            let b = h + input * hidden;
+            let o = b + hidden;
+            let mut r = self.weights[o + hidden];
+            for j in 0..hidden {
+                let mut v = self.weights[b + j];
+                for (k, &x) in x.iter().enumerate() {
+                    v += self.weights[h + j * input + k] * x;
+                }
+                r += self.weights[o + j] * v.max(0.);
+            }
+            let da = self.manifest["distance_fit"]["a"].as_f64().unwrap() as f32;
+            let db = self.manifest["distance_fit"]["b"].as_f64().unwrap() as f32;
+            let logit = da + db * (a.features.distance[1] - a.features.distance[0]) + r;
+            assert!(logit.is_finite());
+            f64::from(logit).tanh() as f32
+        }
+    }
+    impl StaticEvaluator for Reference {
+        fn create_scratch(&self) -> EvalScratch {
+            self.inner.create_scratch()
+        }
+        fn prepare_context(&self, c: &SigmaContext) -> Result<Option<EvalAccumulator>> {
+            self.inner.prepare_context(c)
+        }
+        fn advance_context(
+            &self,
+            a: Option<&EvalAccumulator>,
+            c: &SigmaContext,
+        ) -> Result<Option<EvalAccumulator>> {
+            self.inner.advance_context(a, c)
+        }
+        fn evaluate(&self, c: &SigmaContext, a: Option<&EvalAccumulator>) -> Result<f32> {
+            self.evaluate_with_scratch(c, a, &mut self.create_scratch())
+        }
+        fn evaluate_with_scratch(
+            &self,
+            c: &SigmaContext,
+            a: Option<&EvalAccumulator>,
+            s: &mut EvalScratch,
+        ) -> Result<f32> {
+            let fast = self.inner.evaluate_with_scratch(c, a, s)?;
+            let Some(EvalAccumulator::Float(acc)) = a else {
+                panic!("float accumulator")
+            };
+            let scalar = self.scalar_head(acc);
+            self.deltas
+                .lock()
+                .unwrap()
+                .push((f64::from(fast) - f64::from(scalar)).abs());
+            Ok(if self.scalar { scalar } else { fast })
+        }
+    }
+    fn sig(r: &SearchResult) -> Value {
+        let s = &r.stats;
+        json!({"action":r.action,"value":r.value,"value_bits":r.value.map(f32::to_bits),
+            "depth":r.completed_depth,"pv":r.pv,"stop":format!("{:?}",r.stop),
+            "counters":[s.nodes,s.evaluations,s.terminal,s.cutoffs,s.tt_hits,s.tt_probes,
+            s.tt_exact_hits,s.tt_key_builds,s.tt_history_items,s.tt_key_history_capacity_bytes,
+            s.tt_hashes,s.tt_usable_depth,s.tt_order_only,s.tt_collisions,s.tt_replacements,
+            s.tt_capacity_skips,s.tt_illegal_moves,s.tt_retained_bytes as u64,s.tt_generation,
+            s.tt_cutoffs,s.pvs_researches,s.delta_updates,s.policy_calls]})
+    }
+    #[test]
+    #[ignore = "requires fixed model/fixture paths and explicit finite numeric admission"]
+    fn fast_head_actual_bounded_search_outcomes() {
+        let cfg: Value = serde_json::from_slice(
+            &std::fs::read(std::env::var("QUORIDOR_NNUE_REFERENCE_CONFIG").unwrap()).unwrap(),
+        )
+        .unwrap();
+        let path = std::path::PathBuf::from(cfg["manifest"].as_str().unwrap());
+        let manifest: Value = serde_json::from_slice(&std::fs::read(&path).unwrap()).unwrap();
+        let raw = std::fs::read(
+            path.parent()
+                .unwrap()
+                .join(manifest["weights"].as_str().unwrap()),
+        )
+        .unwrap();
+        let weights: Vec<f32> = raw
+            .chunks_exact(4)
+            .map(|x| f32::from_le_bytes(x.try_into().unwrap()))
+            .collect();
+        let model = Arc::new(ResidualModel::load(&path).unwrap());
+        let limits = SearchLimits {
+            max_depth: 3,
+            max_nodes: 100_000,
+            time_limit: None,
+            tt_entries: 4096,
+            use_pvs: true,
+            use_tt: true,
+        };
+        let cancel = AtomicBool::new(false);
+        let mut rows = vec![];
+        let mut all_errors = vec![];
+        for fixture in cfg["fixtures"].as_array().unwrap() {
+            let prefix: Vec<u16> = serde_json::from_value(fixture["prefix"].clone()).unwrap();
+            let root = SigmaContext::from_prefix(&prefix).unwrap();
+            let mut roots = vec![(None, root.clone())];
+            for action in root.legal_ids() {
+                roots.push((Some(action), root.play(action).unwrap()));
+            }
+            for (action, c) in roots {
+                let before = (c.position(), c.history_counts(), c.total_ply());
+                let mut results = vec![];
+                for scalar in [true, false] {
+                    let evaluator = Arc::new(Reference {
+                        inner: ResidualEvaluator::new(model.clone()),
+                        weights: weights.clone(),
+                        manifest: manifest.clone(),
+                        scalar,
+                        deltas: Mutex::new(vec![]),
+                    });
+                    let mut session = SearchSession::new(
+                        evaluator.clone(),
+                        SearchNamespace {
+                            evaluator: format!("head-qualification:scalar={scalar}"),
+                            rules: "Sigma-fullhistory-ply200".into(),
+                            selectivity: "fullwidth-PVS".into(),
+                        },
+                        4096,
+                    )
+                    .unwrap();
+                    let result = session.search(&c, &limits, &cancel).unwrap();
+                    if c.terminal_value().is_none() {
+                        assert!(matches!(
+                            result.stop,
+                            StopReason::DepthComplete | StopReason::NodeLimit
+                        ));
+                        assert!(result.value.unwrap().is_finite());
+                        assert!(c.legal_ids().contains(&result.action.unwrap()));
+                        let mut pv = c.clone();
+                        for &a in &result.pv {
+                            assert!(pv.legal_ids().contains(&a));
+                            pv = pv.play(a).unwrap();
+                        }
+                    } else {
+                        assert_eq!(result.stop, StopReason::Terminal);
+                    }
+                    assert_eq!((c.position(), c.history_counts(), c.total_ply()), before);
+                    results.push(sig(&result));
+                    all_errors.extend(evaluator.deltas.lock().unwrap().iter().copied());
+                }
+                rows.push(json!({"fixture":fixture["name"],"child_action":action,"scalar":results[0],"fast":results[1]}));
+            }
+        }
+        all_errors.sort_by(f64::total_cmp);
+        let q = |p: f64| all_errors[((all_errors.len() - 1) as f64 * p).ceil() as usize];
+        let changed = rows
+            .iter()
+            .filter(|r| r["scalar"]["action"] != r["fast"]["action"])
+            .count();
+        let result = json!({"roots":rows,"changed_actions":changed,"visited_head_pairs":all_errors.len(),
+            "absolute_error":{"mean":all_errors.iter().sum::<f64>()/all_errors.len() as f64,
+                "p50":q(0.5),"p90":q(0.9),"p99":q(0.99),"p999":q(0.999),"max":all_errors.last()},
+            "scope":"production search; each visited input compared, probe allocating scalar diagnostic is NOT performance data",
+            "parent_history_legal_PV_exact":true,"adoption":false});
+        std::fs::write(
+            std::env::var("QUORIDOR_HEAD_SEARCH_OUT").unwrap(),
+            serde_json::to_vec(&result).unwrap(),
+        )
+        .unwrap();
+        println!(
+            "FAST_HEAD_BOUNDED_ROOTS={};VISITED_PAIRS={};CHANGED_ACTIONS={changed}",
+            rows.len(),
+            all_errors.len()
         );
     }
 }

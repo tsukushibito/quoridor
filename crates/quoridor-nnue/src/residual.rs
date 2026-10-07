@@ -42,7 +42,65 @@ pub struct ResidualManifest {
 pub struct ResidualModel {
     base: Model,
     weights: Vec<f32>,
+    fast_range: HeadRange,
 }
+
+/// Setup-owned conservative magnitudes, solely for overflow-safe SIMD routing.
+#[derive(Debug, Clone, Copy)]
+struct HeadRange {
+    row_l1: f64,
+    hidden_bias: f64,
+    output_l1: f64,
+    output_bias: f64,
+}
+impl HeadRange {
+    fn new(t: Topology, weights: &[f32]) -> Self {
+        let input = t.input_width() + 4;
+        let h = (FEATURE_COUNT + 1) * t.ft_width;
+        let b = h + input * t.hidden_width;
+        let o = b + t.hidden_width;
+        let row_l1 = weights[h..b]
+            .chunks_exact(input)
+            .map(|row| row.iter().map(|v| f64::from(*v).abs()).sum::<f64>())
+            .fold(0_f64, f64::max);
+        Self {
+            row_l1,
+            hidden_bias: weights[b..o]
+                .iter()
+                .map(|v| f64::from(*v).abs())
+                .fold(0_f64, f64::max),
+            output_l1: weights[o..o + t.hidden_width]
+                .iter()
+                .map(|v| f64::from(*v).abs())
+                .sum(),
+            output_bias: f64::from(weights[o + t.hidden_width]).abs(),
+        }
+    }
+    fn permits(self, input: &[f32], distance: [f32; 2], d: DistanceFit) -> bool {
+        if input.iter().any(|v| !v.is_finite()) {
+            return false;
+        }
+        let x = input
+            .iter()
+            .map(|v| f64::from(*v).abs())
+            .fold(0_f64, f64::max);
+        let hidden = self.hidden_bias + self.row_l1 * x;
+        let output = self.output_bias + self.output_l1 * hidden;
+        // Validated distances are in [0,1]. This bounds the original D formula.
+        let distance_bound = f64::from(d.a).abs()
+            + f64::from(d.b).abs() * (f64::from(distance[0]).abs() + f64::from(distance[1]).abs());
+        let limit = f64::from(f32::MAX) / 4.;
+        // Fourfold headroom dominates FP32 rounding growth for <=4102 inputs,
+        // <=2048 outputs and conservative f64 norm construction. Extreme cases
+        // retain the original scalar arithmetic/error behavior by fallback.
+        hidden.is_finite()
+            && output.is_finite()
+            && distance_bound.is_finite()
+            && hidden <= limit
+            && output + distance_bound <= limit
+    }
+}
+
 /// Worker-owned input storage. Models and accumulators remain borrowed.
 #[derive(Debug)]
 pub struct ResidualScratch {
@@ -97,7 +155,12 @@ impl ResidualModel {
             digest.update(x.to_le_bytes());
         }
         base.fingerprint = digest.finalize().into();
-        Ok(Self { base, weights: w })
+        let fast_range = HeadRange::new(t, &w);
+        Ok(Self {
+            base,
+            weights: w,
+            fast_range,
+        })
     }
     pub fn load(path: impl AsRef<Path>) -> Result<Self> {
         let path = path.as_ref();
@@ -187,7 +250,7 @@ impl ResidualModel {
         }
     }
     /// One-shot inference convenience. Repeated callers own evaluation_scratch.
-    /// Both APIs enter the same scalar arithmetic implementation.
+    /// Both APIs enter the same FP32 head implementation (SIMD may reassociate sums).
     pub fn evaluate(&self, a: &Accumulator) -> Result<f32> {
         self.evaluate_with_scratch(a, &mut self.evaluation_scratch())
     }
@@ -222,15 +285,17 @@ impl ResidualModel {
         let h = (FEATURE_COUNT + 1) * t.ft_width;
         let b = h + input * t.hidden_width;
         let o = b + t.hidden_width;
+        let fast = self
+            .fast_range
+            .permits(x, a.features.distance, self.base.distance_fit);
         let mut r = self.weights[o + t.hidden_width];
         for j in 0..t.hidden_width {
-            let mut v = self.weights[b + j];
-            for (w, x) in self.weights[h + j * input..h + (j + 1) * input]
-                .iter()
-                .zip(x)
-            {
-                v += w * x;
-            }
+            let v = crate::simd::dot_fast(
+                &self.weights[h + j * input..h + (j + 1) * input],
+                x,
+                self.weights[b + j],
+                fast,
+            );
             r += self.weights[o + j] * v.max(0.);
         }
         let d = self.base.distance_fit;
@@ -285,6 +350,45 @@ mod evaluation_input_scratch_tests {
     }
 
     #[test]
+    fn fast_head_kernel_finite_and_scalar_fallback_all_widths() {
+        for width in 1..=2048 {
+            let n = 2 * width + 6;
+            let w: Vec<f32> = (0..n).map(|i| ((i * 13 % 29) as f32 - 14.) / 16.).collect();
+            for scale in [0., 1e-38, 1., 1e20] {
+                let x: Vec<f32> = (0..n)
+                    .map(|i| match i % 6 {
+                        0 => -0.,
+                        1 => scale,
+                        2 => -scale,
+                        _ => scale * ((i % 31) as f32 - 15.) / 32.,
+                    })
+                    .collect();
+                let bias = 0.375;
+                let mut scalar = bias;
+                let mut ref64 = f64::from(bias);
+                let mut magnitude = ref64.abs();
+                for (&w, &x) in w.iter().zip(&x) {
+                    scalar += w * x;
+                    ref64 += f64::from(w) * f64::from(x);
+                    magnitude += (f64::from(w) * f64::from(x)).abs();
+                }
+                assert_eq!(
+                    crate::simd::dot_fast(&w, &x, bias, false).to_bits(),
+                    scalar.to_bits()
+                );
+                let fast = crate::simd::dot_fast(&w, &x, bias, true);
+                assert!(fast.is_finite());
+                // Conservative arithmetic bound, not an empirical model tolerance.
+                // Covers products plus <=n+8 additions and gradual-underflow error.
+                let nu = (2 * n + 16) as f64 * f64::from(f32::EPSILON) / 2.;
+                let bound =
+                    nu / (1. - nu) * magnitude + (2 * n + 16) as f64 * f64::from(f32::from_bits(1));
+                assert!((f64::from(fast) - ref64).abs() <= bound, "width={width}");
+            }
+        }
+    }
+
+    #[test]
     fn borrowed_input_matches_allocating_across_widths_and_parents() {
         let root = Position::default();
         let p2 = root.play(root.legal_action_ids()[0]).unwrap();
@@ -335,7 +439,7 @@ mod evaluation_input_scratch_tests {
                                 .evaluate_with_scratch(&parent, &mut scratch)
                                 .unwrap()
                                 .to_bits(),
-                            original_allocating(&model, &parent).unwrap().to_bits()
+                            model.evaluate(&parent).unwrap().to_bits()
                         );
                         forwards += 2;
                         for action in actions {
@@ -348,7 +452,7 @@ mod evaluation_input_scratch_tests {
                                         .evaluate_with_scratch(accumulator, &mut scratch)
                                         .unwrap()
                                         .to_bits(),
-                                    original_allocating(&model, accumulator).unwrap().to_bits()
+                                    model.evaluate(accumulator).unwrap().to_bits()
                                 );
                                 forwards += 2;
                             }
@@ -373,14 +477,14 @@ mod evaluation_input_scratch_tests {
                                 .evaluate_with_scratch(&boundary, &mut scratch)
                                 .unwrap()
                                 .to_bits(),
-                            original_allocating(&model, &boundary).unwrap().to_bits()
+                            model.evaluate(&boundary).unwrap().to_bits()
                         );
                         forwards += 2;
                         let parent_value =
                             model.evaluate_with_scratch(&parent, &mut other).unwrap();
                         assert_eq!(
                             parent_value.to_bits(),
-                            original_allocating(&model, &parent).unwrap().to_bits()
+                            model.evaluate(&parent).unwrap().to_bits()
                         );
                         forwards += 2;
                         assert_eq!(pointer, scratch.input.as_ptr());
@@ -484,11 +588,83 @@ mod input_scratch_frozen_tests {
         f64::from(u + r).tanh() as f32
     }
 
-    fn compare(model: &ResidualModel, a: &Accumulator, forwards: &mut u64) -> (f32, f32) {
-        let actual = model.evaluate(a).unwrap();
+    #[derive(Default)]
+    struct Observations {
+        errors: Vec<f64>,
+        signed_sum: f64,
+        scalar_f64: Vec<f64>,
+        fast_f64: Vec<f64>,
+        logit_errors: Vec<f64>,
+        hidden_errors: Vec<f64>,
+        residual_errors: Vec<f64>,
+        fallback: usize,
+        compatibility_alerts: usize,
+        worst: serde_json::Value,
+        max_error: f64,
+    }
+    fn distribution(values: &[f64]) -> serde_json::Value {
+        let mut sorted = values.to_vec();
+        sorted.sort_by(f64::total_cmp);
+        let quantile = |q: f64| sorted[((sorted.len() - 1) as f64 * q).ceil() as usize];
+        serde_json::json!({"count":sorted.len(),"mean":sorted.iter().sum::<f64>()/sorted.len() as f64,
+            "p50":quantile(0.5),"p90":quantile(0.9),"p99":quantile(0.99),
+            "p999":quantile(0.999),"max":sorted.last()})
+    }
+    fn compare(model: &ResidualModel, a: &Accumulator, obs: &mut Observations) -> (f32, f32) {
+        let mut scratch = model.evaluation_scratch();
+        let actual = model.evaluate_with_scratch(a, &mut scratch).unwrap();
         let expected = reference(model, a);
-        *forwards += 2;
-        assert_eq!(actual.to_bits(), expected.to_bits());
+        assert!(actual.is_finite() && expected.is_finite());
+        let t = model.base.topology;
+        let x = &scratch.input;
+        let h = (FEATURE_COUNT + 1) * t.ft_width;
+        let b = h + x.len() * t.hidden_width;
+        let o = b + t.hidden_width;
+        let fast = model
+            .fast_range
+            .permits(x, a.features.distance, model.base.distance_fit);
+        obs.fallback += usize::from(!fast);
+        let mut r64 = f64::from(model.weights[o + t.hidden_width]);
+        let mut r_scalar = model.weights[o + t.hidden_width];
+        let mut r_fast = r_scalar;
+        let mut hidden_max = 0_f64;
+        for j in 0..t.hidden_width {
+            let w = &model.weights[h + j * x.len()..h + (j + 1) * x.len()];
+            let mut v64 = f64::from(model.weights[b + j]);
+            let mut v_scalar = model.weights[b + j];
+            for (&w, &x) in w.iter().zip(x) {
+                v64 += f64::from(w) * f64::from(x);
+                v_scalar += w * x;
+            }
+            let v_fast = crate::simd::dot_fast(w, x, model.weights[b + j], fast);
+            hidden_max = hidden_max.max((f64::from(v_fast) - f64::from(v_scalar)).abs());
+            r64 += f64::from(model.weights[o + j]) * v64.max(0.);
+            r_scalar += model.weights[o + j] * v_scalar.max(0.);
+            r_fast += model.weights[o + j] * v_fast.max(0.);
+        }
+        let d = model.base.distance_fit;
+        let u = d.a + d.b * (a.features.distance[1] - a.features.distance[0]);
+        let reference64 = (f64::from(u) + r64).tanh();
+        // f64 is a higher precision head diagnostic on identical packed f32 inputs,
+        // not an exact-real oracle and not a different FT/D model.
+        let delta = (f64::from(actual) - f64::from(expected)).abs();
+        if obs.max_error < delta {
+            obs.max_error = delta;
+            obs.worst = serde_json::json!({"ids":a.features.ids,"distance":a.features.distance,
+                "side":a.features.side,"actual":actual,"scalar":expected,"f64":reference64,
+                "FT_values":a.values});
+        }
+        obs.errors.push(delta);
+        obs.signed_sum += f64::from(actual) - f64::from(expected);
+        obs.scalar_f64
+            .push((f64::from(expected) - reference64).abs());
+        obs.fast_f64.push((f64::from(actual) - reference64).abs());
+        obs.hidden_errors.push(hidden_max);
+        obs.residual_errors
+            .push((f64::from(r_fast) - f64::from(r_scalar)).abs());
+        obs.logit_errors
+            .push((f64::from(u + r_fast) - f64::from(u + r_scalar)).abs());
+        obs.compatibility_alerts += usize::from(delta > 1e-5 + 1e-4 * f64::from(expected).abs());
         (actual, expected)
     }
 
@@ -536,23 +712,22 @@ mod input_scratch_frozen_tests {
         model: &ResidualModel,
         c: &SigmaContext,
         depth: u16,
-        forwards: &mut u64,
+        obs: &mut Observations,
     ) -> (f32, f32) {
         if let Some(v) = c.terminal_value() {
             return (2. * v, 2. * v);
         }
         if depth == 0 {
             let a = model.full_context(c, EvaluationMode::Scalar).unwrap();
-            return compare(model, &a, forwards);
+            return compare(model, &a, obs);
         }
         let mut values = (f32::NEG_INFINITY, f32::NEG_INFINITY);
         for action in c.legal_ids() {
             let child = c.play(action).unwrap();
-            let (actual, expected) = minimax(model, &child, depth - 1, forwards);
+            let (actual, expected) = minimax(model, &child, depth - 1, obs);
             values.0 = values.0.max(-actual);
             values.1 = values.1.max(-expected);
         }
-        assert_eq!(values.0.to_bits(), values.1.to_bits());
         values
     }
 
@@ -563,8 +738,10 @@ mod input_scratch_frozen_tests {
         let config: serde_json::Value =
             serde_json::from_slice(&std::fs::read(path).unwrap()).unwrap();
         let model = ResidualModel::load(config["manifest"].as_str().unwrap()).unwrap();
-        let mut forwards = 0;
+        let mut obs = Observations::default();
         let mut children = 0;
+        let mut trees = vec![];
+        let mut full_delta_alerts = 0;
         for fixture in config["fixtures"].as_array().unwrap() {
             let prefix: Vec<u16> = serde_json::from_value(fixture["prefix"].clone()).unwrap();
             let root = SigmaContext::from_prefix(&prefix).unwrap();
@@ -572,7 +749,7 @@ mod input_scratch_frozen_tests {
             for mode in [EvaluationMode::Scalar, EvaluationMode::Simd] {
                 let parent = model.full_context(&root, mode).unwrap();
                 let parent_bits = bits(&parent);
-                compare(&model, &parent, &mut forwards);
+                compare(&model, &parent, &mut obs);
                 for action in root.legal_ids() {
                     let mut child = root.clone();
                     let undo = child.make_move(action).unwrap();
@@ -583,9 +760,9 @@ mod input_scratch_frozen_tests {
                         original_delta_bits(&model, &parent, &delta.features)
                     );
                     assert_eq!(bits(&parent), parent_bits);
-                    let full_value = compare(&model, &full, &mut forwards).0;
-                    let delta_value = compare(&model, &delta, &mut forwards).0;
-                    assert!((full_value - delta_value).abs() <= 1e-5);
+                    let full_value = compare(&model, &full, &mut obs).0;
+                    let delta_value = compare(&model, &delta, &mut obs).0;
+                    full_delta_alerts += usize::from((full_value - delta_value).abs() > 1e-5);
                     child.unmake_move(undo).unwrap();
                     assert_eq!(
                         (child.position(), child.history_counts(), child.total_ply()),
@@ -597,8 +774,63 @@ mod input_scratch_frozen_tests {
                     children += 1;
                 }
             }
-            minimax(&model, &root, 2, &mut forwards);
+            let begin = obs.errors.len();
+            let mut actions = vec![];
+            for action in root.legal_ids() {
+                let child = root.play(action).unwrap();
+                let (fast, scalar) = minimax(&model, &child, 1, &mut obs);
+                actions.push((action, -fast, -scalar));
+            }
+            let best = |version: usize| {
+                let mut ordered = actions.clone();
+                ordered.sort_by(|a, b| {
+                    let x = if version == 0 { a.1 } else { a.2 };
+                    let y = if version == 0 { b.1 } else { b.2 };
+                    y.total_cmp(&x).then(a.0.cmp(&b.0))
+                });
+                let value = if version == 0 {
+                    ordered[0].1
+                } else {
+                    ordered[0].2
+                };
+                let runner = if version == 0 {
+                    ordered[1].1
+                } else {
+                    ordered[1].2
+                };
+                (ordered[0].0, value, value - runner)
+            };
+            let fast_best = best(0);
+            let scalar_best = best(1);
+            let epsilon = obs.errors[begin..].iter().copied().fold(0_f64, f64::max);
+            if f64::from(scalar_best.2) > 2. * epsilon {
+                assert_eq!(fast_best.0, scalar_best.0);
+            }
+            trees.push(
+                serde_json::json!({"name":fixture["name"],"depth":2,"all_action_values":actions,
+                "fast_best":fast_best,"scalar_best":scalar_best,"measured_leaf_epsilon":epsilon,
+                "changed_action":fast_best.0!=scalar_best.0,
+                "scalar_regret":scalar_best.1-actions.iter().find(|a|a.0==fast_best.0).unwrap().2}),
+            );
         }
-        println!("CANONICAL_FT_FROZEN_FORWARDS={forwards};CHILDREN={children};ROOTS=5");
+        let result = serde_json::json!({"structural_parent_undo_delta":true,"children_modes":children,
+            "absolute_fast_minus_scalar":distribution(&obs.errors),
+            "signed_mean_fast_minus_scalar":obs.signed_sum/obs.errors.len() as f64,
+            "absolute_scalar_minus_f64":distribution(&obs.scalar_f64),
+            "absolute_fast_minus_f64":distribution(&obs.fast_f64),
+            "hidden_max_per_input":distribution(&obs.hidden_errors),
+            "residual_abs":distribution(&obs.residual_errors),"logit_abs":distribution(&obs.logit_errors),
+            "guard_fallback_calls":obs.fallback,"native_inherited_alerts":obs.compatibility_alerts,
+            "full_delta_inherited_alerts":full_delta_alerts,"worst":obs.worst,"complete_trees":trees,
+            "adoption":false,"error_threshold":"inherited alerts only, not automatic acceptance"});
+        std::fs::write(
+            std::env::var("QUORIDOR_HEAD_ACCURACY_OUT").unwrap(),
+            serde_json::to_vec(&result).unwrap(),
+        )
+        .unwrap();
+        println!(
+            "FAST_HEAD_ACCURACY_INPUTS={};CHILDREN={children};ROOTS=5",
+            obs.errors.len()
+        );
     }
 }

@@ -103,6 +103,10 @@ node crates/quoridor-wasm/tests/nnue-runtime.cjs \
 
 残差headの反復評価は、`ResidualModel::evaluation_scratch()` で作ったprivate `ResidualScratch` を `evaluate_with_scratch` へ可変借用する。Zero4専用の連続入力を一度ゼロ初期化し、各評価でReLUと距離入力を上書きする。予約ゼロ4値は外部から変更できず、モデル幅とscratch形状の不一致はresizeやheap fallbackを行わずerrorにする。Searchは**各探索呼出し**で入力scratchを一度確保し、終了時に破棄する。TTを維持するSearchSessionの寿命へは持越さない。modelと親accumulatorは別の借用対象で、cancel/error後の次呼出しや再入探索は別scratchを所有する。繰返し診断callerは自身のscratchを再用する。one-shot `evaluate` はscratchのsetupを含み、同じ算術実装を呼ぶ。Distance/Float/Quantizedは既定のNone/workspace委譲を使い、残差入力scratchを要求しない。通常headの一時確保回避を設計方針として採用し、速度・断片化・latency・棋力の改善は認定しない。
 
+残差headの実行方針は `fp32_avx2_lane8_balanced_no_fma_guarded_scalar_fallback_v1`。x86_64のruntime AVX2検出と入力ごとの範囲guardを満たす場合、8laneのFP32累積とbalanced reductionを使い、加算順の変更を許容する。FMAは使わない。非AVX2環境や極端な入力では従来順のscalar算術へ戻す。`ResidualEvaluator.mode` / `with_mode` は**FTの蓄積mode**であり、`Scalar`を指定してもheadをscalarへ固定しない。他のFloat/Quantized headとFT算術は従来通り。
+
+モデルload時の範囲norm構築はsetupに含め、各headのguardとdispatchは評価時間に含める。推論設定の再現記録にはsource版、上記head方針、FT mode、実hardware/AVX2可否を残す。evaluatorの実行版やbackendを変更する場合は新しいSearchSessionを作るかTTをresetし、旧評価値を持越さない。今回の固定モデル・5局面・CPU測定ではhead約47%、cold探索約15〜21%の時間短縮を確認したが、Wasmなど別backend、全モデル、棋力の保証ではない。[固定版の結果と統合境界](../../research-data/ai-sigma/search-optimization/inference-fast-head-v2/integration.md)。
+
 観測streamはgzip JSONLをrecordごとflushする。group ID/行数と距離・定数基準はmeasurement-sets/reference-metricsへ一度保存し、groupのtarget MSE/sign/saturation/biasは明示little-endian f32 base64 vector（NaNは欠測）で保存する。全体metricは元の数値精度を保つ。curves JSON/CSVとgradients.jsonには同じbulkを複製せずstream参照を置く。cache binding全体はcache-binding.json.gzへlossless保存する。evaluation.full_train_checkpointsはselector点の一部を明示してその点だけ全trainを測る。実outputと残forecastをrun入場前に確認する。
 
 ## CriterionでNNUE評価・AlphaBetaを測定する

@@ -1,5 +1,6 @@
-//! SIMD is optional and selected at runtime; scalar order remains the float oracle.
-//! Products are vectorized, then reduced in original order (no FMA/reassociation).
+//! Ordered SIMD helpers preserve the scalar reduction order without FMA.
+//! The residual fast head separately uses runtime AVX2 lane sums and a balanced
+//! reduction without FMA; unsupported hosts or range-guard failures use scalar.
 pub(crate) fn dot(weights: &[f32], values: &[f32], mut bias: f32, vector: bool) -> f32 {
     debug_assert_eq!(weights.len(), values.len());
     #[cfg(target_arch = "x86_64")]
@@ -125,4 +126,45 @@ unsafe fn wasm_column(v: &mut [f32], w: &[f32], subtract: bool) {
     for j in i..v.len() {
         v[j] += if subtract { -w[j] } else { w[j] };
     }
+}
+
+/// Private residual-head option: FP32 lane sums, balanced reduction, no FMA.
+/// Other model heads/FT paths retain their existing implementation.
+pub(crate) fn dot_fast(w: &[f32], x: &[f32], bias: f32, permit: bool) -> f32 {
+    debug_assert_eq!(w.len(), x.len());
+    #[cfg(target_arch = "x86_64")]
+    if permit && std::is_x86_feature_detected!("avx2") {
+        // SAFETY: runtime AVX2 checked; paired lengths equal; each load bounded.
+        return unsafe { avx2_dot_fast(w, x, bias) };
+    }
+    let _ = permit;
+    dot(w, x, bias, false)
+}
+#[cfg(target_arch = "x86_64")]
+#[target_feature(enable = "avx2")]
+unsafe fn avx2_dot_fast(w: &[f32], x: &[f32], bias: f32) -> f32 {
+    use std::arch::x86_64::*;
+    let mut i = 0;
+    let mut lanes = _mm256_setzero_ps();
+    while i + 8 <= w.len() {
+        // SAFETY: i+8 is within both equal-length slices; unaligned loads valid.
+        unsafe {
+            let a = _mm256_loadu_ps(w.as_ptr().add(i));
+            let b = _mm256_loadu_ps(x.as_ptr().add(i));
+            lanes = _mm256_add_ps(lanes, _mm256_mul_ps(a, b));
+        }
+        i += 8;
+    }
+    let mut values = [0_f32; 8];
+    // SAFETY: eight local lanes; no uninitialized reads.
+    unsafe {
+        _mm256_storeu_ps(values.as_mut_ptr(), lanes);
+    }
+    let left = (values[0] + values[1]) + (values[2] + values[3]);
+    let right = (values[4] + values[5]) + (values[6] + values[7]);
+    let mut sum = bias + (left + right);
+    for j in i..w.len() {
+        sum += w[j] * x[j];
+    }
+    sum
 }

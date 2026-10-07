@@ -1,0 +1,87 @@
+{
+  "issue": "quoridor-4lc.318.3",
+  "review_issue": "quoridor-4lc.318.3.1",
+  "review_result": "NO_BLOCKERS_FIXED_FAST_SOURCE_ADOPTION_SUPPORTED_UNDER_HUMAN_RELAXED_FP_POLICY",
+  "review_binding_SHA": "13cfe67d2a640d9a0562e564d885cd6837796c89708fe8c643ce95f441add15e",
+  "producer_root": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/search-optimization/inference-fast-head-v2",
+  "job": "4feb1c91-a7ec-47a6-b161-5d816d27891a",
+  "controller_whole_seconds": 477.05709170899354,
+  "stop": "2026-10-07T06:28:25.548099+00:00",
+  "sources": {
+    "crates/quoridor-nnue/src/residual.rs": {
+      "reviewed_SHA": "9c8593b92397f2b024b0939bb63b0df829e119ee53be88588506049b036c8b49",
+      "main_SHA": "5d4e3661ad402227b5382b3cb36d19127bbb0e8edcabf3da59457e4807536702",
+      "integration_only_diff": "--- reviewed/crates/quoridor-nnue/src/residual.rs\n+++ main/crates/quoridor-nnue/src/residual.rs\n@@ -553,7 +553,7 @@\n             original_allocating(&model, &invalid)\n         );\n         println!(\n-            \"INPUT_SCRATCH_ORACLE_FORWARDS={forwards};TOPOLOGIES=24;PARENT_MODES=96;NUMERIC_ERROR_HEAD_ATTEMPTS=2;FINGERPRINT_REJECTS=2\"\n+            \"INPUT_SCRATCH_ORACLE_FORWARDS={forwards};TOPOLOGIES=21;PARENT_MODES=84;NUMERIC_ERROR_HEAD_ATTEMPTS=2;FINGERPRINT_REJECTS=2\"\n         );\n     }\n }\n"
+    },
+    "crates/quoridor-nnue/src/simd.rs": {
+      "reviewed_SHA": "e0cef4199639453d6ff2a87ff6c4978c89f0ba6b8029967577f410e83b871f07",
+      "main_SHA": "1731f69385649ff5eb6d75f5cbbaf2fd046a2907ec968801cae8ac033b17d02a",
+      "integration_only_diff": "--- reviewed/crates/quoridor-nnue/src/simd.rs\n+++ main/crates/quoridor-nnue/src/simd.rs\n@@ -1,5 +1,6 @@\n-//! SIMD is optional and selected at runtime; scalar order remains the float oracle.\n-//! Products are vectorized, then reduced in original order (no FMA/reassociation).\n+//! Ordered SIMD helpers preserve the scalar reduction order without FMA.\n+//! The residual fast head separately uses runtime AVX2 lane sums and a balanced\n+//! reduction without FMA; unsupported hosts or range-guard failures use scalar.\n pub(crate) fn dot(weights: &[f32], values: &[f32], mut bias: f32, vector: bool) -> f32 {\n     debug_assert_eq!(weights.len(), values.len());\n     #[cfg(target_arch = \"x86_64\")]\n"
+    },
+    "crates/quoridor-ai/src/alphabeta.rs": {
+      "reviewed_SHA": "5ff66a545561e82d74c9421784b239e0e71a6b64d47274181c0bb88f7582511f",
+      "main_SHA": "deb246536d26fec6387397c22b4c652ae82ed43b9f82c04f1f163de7129b8dad",
+      "integration_only_diff": "--- reviewed/crates/quoridor-ai/src/alphabeta.rs\n+++ main/crates/quoridor-ai/src/alphabeta.rs\n@@ -213,6 +213,8 @@\n #[derive(Debug, Clone)]\n pub struct ResidualEvaluator {\n     pub model: Arc<ResidualModel>,\n+    /// FT accumulation mode. The residual head independently selects guarded\n+    /// runtime AVX2 or its ordered scalar fallback.\n     pub mode: EvaluationMode,\n }\n impl ResidualEvaluator {\n"
+    },
+    "crates/quoridor-ai/benches/nnue_search.rs": {
+      "reviewed_SHA": "dd0ab4a6d464e98a07998cd7cfafe71a5a6225b2a4046959763cac783d0d5096",
+      "main_SHA": "dd0ab4a6d464e98a07998cd7cfafe71a5a6225b2a4046959763cac783d0d5096",
+      "integration_only_diff": ""
+    }
+  },
+  "ordinary_corrections": [
+    "Module docs distinguish ordered helpers and reassociated residual head.",
+    "ResidualEvaluator.mode is FT-only.",
+    "Topology log reports actual21/84 rather than stale24/96.",
+    "Native qualification metadata records guarded AVX2 head policy."
+  ],
+  "verification": "Producer exact frozen build/Clippy/numerical/Criterion proofs reused; main formatting and restricted source-difference verification. No new main Cargo build or numerical replay claimed.",
+  "head_policy": "fp32_avx2_lane8_balanced_no_fma_guarded_scalar_fallback_v1",
+  "FT_default": "Scalar",
+  "model_default_adoption": false,
+  "strength_claim": false,
+  "newE_opened": false,
+  "parent_learning_pause_preserved": true,
+  "runner_metadata_only_SHA": "7b7852b25e7db4cc3d93af3b8bec1b39ffcd50b89beb226024ca41849cc361a9",
+  "artifacts": {
+    "report.md": {
+      "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/search-optimization/inference-fast-head-v2/report.md",
+      "SHA256": "14f4520a818929551123ac08802e7a9c471a08da52cfabeccc8993381582f3e7",
+      "bytes": 10706
+    },
+    "summary.json": {
+      "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/search-optimization/inference-fast-head-v2/summary.json",
+      "SHA256": "c66ee2684d86b5579b2702a31464fa6f303be6aada27e79387cd279bf2c6c91b",
+      "bytes": 96367
+    },
+    "source-lease.tar.gz": {
+      "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/search-optimization/inference-fast-head-v2/source-lease.tar.gz",
+      "SHA256": "22617f257c7f7d039a4165d0448b028c2dd6ceb2f031b495338de6869c715478",
+      "bytes": 48106
+    },
+    "evidence.tar.gz": {
+      "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/search-optimization/inference-fast-head-v2/evidence.tar.gz",
+      "SHA256": "38aefe24c310bbfa33e400414cea2ddbf452d12026522e47a67e3b1c685021cc",
+      "bytes": 298191
+    },
+    "stop-receipt.json": {
+      "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/search-optimization/inference-fast-head-v2/stop-receipt.json",
+      "SHA256": "1debfb5a38dc8939c8f060b8fb334510cb187bba32a6748b9d80887b3af4edaf",
+      "bytes": 6542
+    },
+    "fast-head-review.json": {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/search-ownership-review-v1/fast-head-review.json",
+      "SHA256": "9013d9f82b486c4287063750db573a8103614b20c12d1cec6914d33fb410270f",
+      "bytes": 12397
+    }
+  },
+  "main_verification": {
+    "source_version_match": "4 exact reviewed candidate files applied, after only listed comment/log-count corrections",
+    "runner_control_and_math_unchanged": true,
+    "rustfmt_changed5": "PASS",
+    "prettier_changed_docs_evidence_all5": "PASS",
+    "git_diff_check": "PASS",
+    "new_Cargo_compile_or_runtime_replay": false,
+    "producer_compile_Clippy_numeric_proofs_reused": true
+  }
+}
