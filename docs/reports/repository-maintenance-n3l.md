@@ -63,3 +63,9 @@ snapshotのold/new overlapは今後のlive caller forecastで別途保持し、�
 R01（execution end_atとcompletion notify_untilの混同）とR02（pidfd/Popenの二重signal失敗の一方がdurable記録から消える）を同helperが修復し、同独立reviewerが関連境界を確認した。固定combined patch `0c421668b3cebd26ca11bfbd289e2c5948bda98c82bb43e89e6e6e2d3a7ca819` をmainへ適用し、18変更path＋2依存のafter SHA一致を確認した。通知は明示caller horizon、cleanupは各signal/wait/close/publicationを別attemptで保持する。
 
 実mainの通知/authority/dual-signal/snapshot/supply-lifecycle/hashの12focused checksがPASS（body1.9437秒、CPU2/AS512MiB、科学import禁止）、17変更PythonのRuff format/checkとBash構文/diffチェックがPASSした。元58件、producer v2の10件と独立13件は元の限定範囲で再用し、科学/モデルsuiteは再実行しない。対象F01/F02/F03/F04/F15/F16/F20/F22はこの統合で実装・対象確認済み。実OScontainment/latency/family peak/科学jobの資格とは区別する。[exact sourceと検証receipt](../../research-data/repository-maintenance/n3l/python-integration.json)。元review/失敗/権限検証順序deviation/failed費/UNKNOWNは保持。Web/data/runtimeの残りは別の実変更・検証が必要で、parent保守完了とはしない。
+
+## Web/export関連確認と修復
+
+停止Web patch99193cの17 pathを同独立reviewerが確認し、[原関連findings](../../.artifacts/repository-maintenance/n3l/review/confirmation-web-v1/findings.md)へW03/F19、W01/F09のblockerとW02/F11のordinaryを保存した。reader STOP00:56:04.976609、remaining[]。W03はstartup restore中のclearでoperation世代が変わりworking/save suppressionが解除されない実caller/mock反例。W01はhash済buffer読取後にcopyFileがsourceを再openし、growした入力を出力へ書いてからrefuseするためprewrite capが守れない反例。W02は本来optionalなquoridor-ai依存の完全renameを誤拒否する。三件とも費用対効果の悪い修復ではなくIMPLEMENTとした。
+
+同n3l.3へ、accepted restoreとclearの直列化、hash済bytesのexclusive出力、package identityとdependency alias reachabilityの分離、および各反例のaffected回帰を依頼した。原patch/source/log/initial1753088B cap失敗・676 intake拒否を保持し、旧819200B forecast＋修復655360B＝1474560B<helper1572864Bに束縛する。新STOP後は同reviewerへW01/W02/W03だけ確認し、既clear F10/F12/F13/F14/H01を広く再実行しない。mainにはこのWeb patchを未適用。実browser/BFCacheと最終whole TypeScript確認は別の資源付き統合検証が必要で、mock PASSから実cache復帰を認定しない。
