@@ -16,12 +16,6 @@ and RAM; an externally restricted single-core smoke shares its synchronous provi
 with the waiting worker. These guards are finite runtime measurements, not hard realtime
 or whole-host resource guarantees.
 
-Timed arena MCTS may share exactly one logical worker/inference CPU only with the
-default CPU ORT factory, one worker, one active game and batch size one. Supplied
-backends retain generic duplicate-core rejection, regardless of their metadata.
-The shared route still reserves three other physical cores and keeps affinity,
-cpuset, quota and RAM checks. This resource exception does not select game rules.
-
 Optional `inference_cpu_core` selects an inference owner separately from explicit
 `cpu_cores`. The requested worker and inference CPUs must lie in the process affinity
 and effective cpuset, use distinct physical cores, and leave two physical host cores
@@ -78,42 +72,22 @@ unknown; `strict_forfeit` loses on late/illegal/error/no-completed-move results;
 job budget, absolute deadline, resource stops and ply censor remain unknown under every
 policy. The final admission check occurs after full-history legal validation, immediately
 before publishing the move. No hard realtime return guarantee is claimed. Persistent TT
-sessions expose completed-depth callbacks and timestamps; a pre-deadline completion
-returned or accepted late is still rejected. An earlier completion cannot rescue a
-later engine error. Depth/node caps remain recorded caps, even in a wall-time preset.
-Internal elapsed, invocation and whole caller spans overlap; do not sum them. Completed
-snapshot counters and whole invocation counters include different work. Unavailable
-leaf/physical NN counters remain explicit nulls. NNUE has no extra warmup here; backend
-counters separately record any provider warmup.
+does not expose completed-iteration timestamps/callbacks, so a pre-deadline completed
+move returned late is still rejected. Depth/node caps remain recorded caps, even in a
+wall-time preset. Internal elapsed, invocation and whole caller spans overlap; do not sum
+them. Stats include discarded partial work; unavailable leaf/physical NN counters and
+last-completed-iteration timestamps are explicit nulls. NNUE has no extra warmup here;
+backend counters separately record any provider warmup.
 
-`whole_wall_time` supports timed MCTS via the maintained Sigma adapter. Specify engine
-`time_ms` and use one worker, one active game and batch size one. The clock starts before
-full-history search clone/setup and includes features, queue, synchronous inference,
-search, choice, legal return and final acceptance. With 100ms and a 5ms return reserve,
-completed simulations are retained before 95ms; an in-flight reply is awaited and a
-late valid reply is discarded. Every admitted request receives one terminal result,
-including queued cancellation and failed-send/drop paths. Original backend errors,
-cancellation and guard facts remain distinct; prior completion never rescues an error.
-MCTS completed simulations are separate from alpha-beta completed depth and from whole
-partial-work counters. Callback results, raw returned outputs and finite/range valid
-replies have separate counters. The generic callback-error stop label alone does not
-identify a model fault: read the typed guard reason and `engine_error`.
-
-Retain explicit MCTS K/temperature/tree settings (the research configuration uses
-K64/tau1/256MiB); early K stops retain their reason. K is an upper work cap, not a
-same-time claim or a value inferred from neural-call ratios. Model/session loading is
-measured once separately and charged to the whole job. Software/type/NN0 fixture
-qualification does not establish live backend deadlines or playing strength. Full
-NNUE alpha-beta versus Sigma policy/value MCTS is an engine-level comparison.
-
-For fixed-work backend diagnostics, `sigma_fixed_k_diagnostic` requires two `mcts`
-engines and the same explicit frozen inference backend/model, seed and K; its benchmark
-warmup/repetition route does not qualify the timed caller. Root mean, root NN and
-selected-child mean are distinct typed book Q definitions, with explicit perspective
-and aggregation. Saved Q is signed to side-to-move; abs(Q)<=0.2 is tagged provisional
-main, 0.2–0.4 auxiliary, otherwise tilted diagnostic. Tags neither select a book
-automatically nor guarantee calibrated balance. No Sigma book generation, GPU matches
-or model acquisition is performed by these presets.
+`whole_wall_time` is a future comparison boundary. Current Sigma uses fixed K and
+cannot qualify wall time; attempts to configure timed MCTS are rejected. For later
+Sigma-vs-Sigma confirmation, use `sigma_fixed_k_diagnostic`, two `mcts` engines and the
+same explicit frozen `inference` backend/model, seed and K; it is a diagnostic with a
+different denominator. Root mean, root NN and selected-child mean are distinct typed
+book Q definitions, with explicit perspective and aggregation. Saved Q is signed to
+side-to-move; abs(Q)<=0.2 is tagged provisional main, 0.2–0.4 auxiliary, otherwise tilted
+diagnostic. Tags neither select a book automatically nor guarantee calibrated balance.
+No Sigma book generation, GPU matches or model acquisition is performed by these presets.
 
 Arena `score` is now the complete-pair mean under schema `quoridor-arena-v2`. The summary
 also records planned/started/completed games, complete/incomplete pairs, typed unknown
@@ -187,3 +161,22 @@ Action/policy agreement is a separate observation. See
 [`src/bin/teacher-qualify.rs`](src/bin/teacher-qualify.rs) and the
 [research execution policy](../../docs/development/ai-research-experiments.md) before
 running a diagnostic.
+
+Research configs require `"ruleset": "standard_2p_threefold"`. The canonical
+`quoridor_core::research::SigmaContext` applies standard two-player moves plus
+an automatic threefold draw, a supplementary research convention rather than a
+publisher draw rule. Goal termination takes precedence. Both pawn locations,
+wall geometry, both wall stocks and side to move define the repetition key;
+the initial position counts once, and the third occurrence is entered legally
+before drawing. Real history and the search path share this same context.
+`Position` and product `Game` keep publisher-standard rules.
+
+`max_plies` is an operational cap on total history ply. A nonterminal capped
+slot is `unknown` with no definitive selfplay `z`; it is not a draw. A goal or
+third occurrence at the boundary is terminal first. Completed selfplay rows
+use +1/0/-1 from that row's side to move. Existing external public unknown-zero
+labels and historical RuleA runs are unchanged. The previous RuleA functional
+and strength evidence does not qualify this research ruleset. Ruleset, full
+stocks-inclusive history, source and compiled payload must be bound before
+any new qualification or matches. `HistoryKey::sigma_string` is only legacy
+external geometry spelling; `history_string` is the research identity.

@@ -105,7 +105,7 @@ mod tests {
         SigmaContext::synthetic_diagnostic(p, ply, vec![(p.into(), 1)]).unwrap()
     }
     #[test]
-    fn deep_overlay_excludes_third_return_and_siblings_restore_base() {
+    fn research_threefold_deep_overlay_enters_third_draw_and_siblings_restore_base() {
         let cycle = [13, 67, 4, 76];
         let root = SigmaContext::from_prefix(&[]).unwrap();
         let mut c = root.clone();
@@ -127,13 +127,14 @@ mod tests {
             .find(|n| n.context.total_ply() == 7 && n.context.position().pawns == [4, 67])
             .expect("deep path reached");
         assert!(deep.expanded);
-        assert!(!deep.context.legal_ids().contains(&76));
-        assert!(!deep.edges.iter().any(|e| e.0 == 76));
+        assert!(deep.context.legal_ids().contains(&76));
+        assert_eq!(deep.context.play(76).unwrap().terminal_value(), Some(0.));
+        assert!(deep.edges.iter().any(|e| e.0 == 76));
         assert!(
             calls
                 .borrow()
                 .iter()
-                .any(|(p, l)| p.pawns == [4, 67] && p.turn == 1 && !l.contains(&76))
+                .any(|(p, l)| p.pawns == [4, 67] && p.turn == 1 && l.contains(&76))
         );
         assert_eq!(
             s.research_context.as_ref().unwrap().history_counts(),
@@ -171,7 +172,7 @@ mod tests {
             root.history_counts()
         );
         println!(
-            "deep context nodes={} ply7 forbidden76; sibling nodes={} root/base unchanged",
+            "deep context nodes={} ply7 legal76 -> draw; sibling nodes={} root/base unchanged",
             nodes.len(),
             snapshot.len()
         );
@@ -185,11 +186,11 @@ mod tests {
         let (eval, _) = spy(vec![], 0.);
         assert!(SearchSession::new_sigma(c, limits(8, 2), 1979, eval).is_err());
         let c = SigmaContext::from_prefix(&[13, 67, 4, 76, 13, 67, 4]);
-        assert!(c.unwrap().play(76).is_err());
+        assert_eq!(c.unwrap().play(76).unwrap().terminal_value(), Some(0.));
         assert!(HistoryKey::parse("4,0|4,8|0|1,2;1,2|").is_err());
     }
     #[test]
-    fn ply200_goal_and_no_legal_draw_precede_caps_without_evaluation() {
+    fn research_threefold_goal_draw_precede_caps_without_evaluation() {
         let p = Position {
             pawns: [4, 13],
             turn: 1,
@@ -219,7 +220,10 @@ mod tests {
         let goal = synthetic(p, 199).play(3).unwrap();
         assert_eq!(goal.total_ply(), 200);
         assert_eq!(goal.terminal_value(), Some(-1.));
-        for context in [goal, synthetic(Position::default(), 200)] {
+        for context in [
+            goal,
+            SigmaContext::from_prefix(&[13, 67, 4, 76, 13, 67, 4, 76]).unwrap(),
+        ] {
             let (eval, calls) = spy(vec![], 0.25);
             let mut s =
                 SearchSession::new_sigma_diagnostic(context, limits(1, 1), 1979, eval).unwrap();
@@ -235,7 +239,7 @@ mod tests {
         assert!(c.terminal_value().is_none());
         c = c.play(67).unwrap();
         assert_eq!(c.total_ply(), 200);
-        assert_eq!(c.terminal_value(), Some(0.));
+        assert_eq!(c.terminal_value(), None);
         let walls = [
             206, 181, 90, 129, 177, 191, 88, 167, 176, 82, 106, 95, 119, 132, 186, 190, 135, 164,
             205, 160,
@@ -246,15 +250,14 @@ mod tests {
             h.push((c.play(a).unwrap().position().into(), 2));
         }
         let c = SigmaContext::synthetic_diagnostic(c.position(), 20, h).unwrap();
-        assert!(c.raw_legal_ids().is_empty());
+        assert!(!c.raw_legal_ids().is_empty());
         let (eval, calls) = spy(vec![], 0.25);
         let mut s = SearchSession::new_sigma_diagnostic(c, limits(1, 1), 1979, eval).unwrap();
-        assert!(s.done());
-        assert_eq!(s.finish().action, None);
+        assert!(!s.done());
+        assert_eq!(s.research_context.as_ref().unwrap().terminal_value(), None);
         assert!(calls.borrow().is_empty());
-        assert_eq!(s.stats.edges, 0);
         println!(
-            "terminal priority: goal at200/node/depth/arena; ply198→199→200; artificial no-legal draw; terminal evaluate calls0"
+            "terminal priority: goal at200/node/depth/arena; ply198→199→200 nonterminal; no artificial no-legal draw; terminal evaluate calls0"
         );
     }
     #[test]
@@ -281,7 +284,7 @@ mod tests {
         let cursor = s.root_cursor();
         s.safe_value(c.position(), &cursor);
         assert_eq!(calls.borrow()[0].1, c.legal_ids());
-        assert!(!calls.borrow()[0].1.contains(&76));
+        assert!(calls.borrow()[0].1.contains(&76));
         for cap in ["node", "depth", "arena"] {
             let root = SigmaContext::from_prefix(&[]).unwrap();
             let (eval, calls) = spy(vec![(root.position(), 13)], 0.25);
@@ -317,5 +320,18 @@ mod tests {
         println!(
             "pawn/pawn, wall/pawn, pawn/wall, wall/wall1/2ply signs; node/depth/arena fallback context mask"
         );
+    }
+    #[test]
+    fn research_threefold_solver_cursor_uses_canonical_terminal() {
+        let root = SigmaContext::from_prefix(&[13, 67, 4, 76, 13, 67, 4]).unwrap();
+        let (eval, calls) = spy(vec![(root.position(), 76)], 0.5);
+        let mut s = SearchSession::new_sigma(root.clone(), limits(32, 8), 335, eval).unwrap();
+        s.step(2);
+        let nodes = s.research_tree_snapshot();
+        let child = nodes.iter().find(|n| n.context.total_ply() == 8).unwrap();
+        assert_eq!(child.context.terminal_value(), Some(0.));
+        assert!(child.edges.is_empty());
+        assert_eq!(calls.borrow().len(), 1);
+        assert_eq!(root.count(root.position().into()), 2);
     }
 }

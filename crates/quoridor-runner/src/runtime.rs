@@ -299,10 +299,17 @@ pub struct PumpProfile {
     pub queue_wait_seconds_max: f64,
     pub queued_requests_peak: usize,
     pub recording_seconds: f64,
+    /// Individual publication failures, distinct from the first originating stop reason.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub publication_failures: Vec<PublicationFailure>,
     pub finalization_seconds: f64,
     pub completions: Vec<CompletionTiming>,
     pub first16_complete_seconds: Option<f64>,
     pub first16_complete_rows: usize,
+    #[serde(skip)]
+    first16_seen: usize,
+    #[serde(skip)]
+    first16_rows_accumulated: usize,
     pub backend_warmup_nn: u64,
     #[serde(default)]
     pub backend_work: Option<serde_json::Value>,
@@ -311,6 +318,12 @@ pub struct PumpProfile {
     pub terminal_no_nn: u64,
     pub allocated_nodes_peak: usize,
 }
+#[derive(Debug, Serialize, Deserialize)]
+pub struct PublicationFailure {
+    pub game: Option<usize>,
+    pub reason: String,
+}
+
 #[derive(Debug, Serialize, Deserialize)]
 pub struct CompletionTiming {
     pub game: usize,
@@ -736,7 +749,8 @@ fn planned(config: &Config) -> Result<Vec<Planned>> {
         } else if !config.openings.is_empty() {
             config.openings[family_id % config.openings.len()].clone()
         } else {
-            let mut c = SigmaContext::from_prefix(&[]).map_err(|e| format!("{e:?}"))?;
+            let mut c = SigmaContext::from_prefix_with_rules(&[], config.ruleset)
+                .map_err(|e| format!("{e:?}"))?;
             let mut p = Vec::new();
             for _ in 0..config.opening_plies {
                 let legal = c.legal_ids();
@@ -1218,7 +1232,7 @@ fn worker(
     loop {
         while games.len() < capacity && !cancel.load(Ordering::Relaxed) {
             let Some(p) = waiting.pop_front() else { break };
-            match SigmaContext::from_prefix(&p.opening) {
+            match SigmaContext::from_prefix_with_rules(&p.opening, config.ruleset) {
                 Ok(context) => {
                     let prefix = p.opening.clone();
                     let seed = config.seed ^ (p.id as u64 + 1).wrapping_mul(0x9e3779b97f4a7c15);
@@ -1313,10 +1327,8 @@ fn worker(
                 };
                 let reason = if g.context.position().winner.is_some() {
                     "goal"
-                } else if g.context.total_ply() >= 200 {
-                    "rule_ply_200_draw"
                 } else {
-                    "rule_no_legal_move_draw"
+                    "threefold_draw"
                 };
                 let (o, r) = finish(g, status, Some(reason.into()));
                 let _ = events.send(Event::Finished(o, r));
@@ -1476,7 +1488,7 @@ fn worker(
                         "{}:simd={}",
                         evaluators[engine_index].identity.row_identity, e.simd
                     ),
-                    rules: "Sigma-RuleA-full-history-terminal-ply-v1".into(),
+                    rules: g.context.ruleset().id().into(),
                     selectivity: "fullwidth-PVS-MPC-OFF-v1".into(),
                 };
                 let mut completion = crate::arena_clock::Completion::default();
@@ -1782,6 +1794,7 @@ fn run_inner(
     config: &Config,
     mode: &str,
     provided: Option<Box<dyn InferenceBackend>>,
+    output_owned: &mut bool,
 ) -> Result<RunReport> {
     config.validate().map_err(|e| format!("config: {e}"))?;
     if (config.games as u64)
@@ -1845,8 +1858,7 @@ fn run_inner(
     if config.output.exists() {
         return Err("output exists; choose a new run/output".into());
     }
-    fs::create_dir_all(config.output.parent().unwrap_or(Path::new(".")))?;
-    fs::create_dir(&config.output)?;
+    acquire_output(&config.output, output_owned)?;
     serde_json::to_writer_pretty(
         OpenOptions::new()
             .create_new(true)
@@ -1982,43 +1994,18 @@ fn run_inner(
                 pending.push_back(r)
             }
             Ok(Event::Finished(o, r)) => {
-                let record_start = Instant::now();
-                if mode == "arena"
-                    && let Err(e) = crate::arena_manifest::journal(config, &o)
-                {
-                    stopped = Some(format!("output_journal:{e}"));
-                    cancel.store(true, Ordering::Relaxed);
+                CompletionPublication {
+                    config,
+                    mode,
+                    pump: &mut pump,
+                    dataset_writer: &mut dataset_writer,
+                    row_count: &mut row_count,
+                    stopped: &mut stopped,
+                    cancel: &cancel,
+                    outcomes: &mut outcomes,
+                    start,
                 }
-                record_completion(&mut pump, &o, r.len(), start);
-                if !r.is_empty() {
-                    if o.status != "unknown" {
-                        row_count += r.len();
-                    }
-                    if let Some(writer) = dataset_writer.as_mut() {
-                        let forecast = r.iter().try_fold(16384u64, |n, row| {
-                            serde_json::to_vec(row).map(|v| n + v.len() as u64 * 3)
-                        });
-                        let ready = forecast
-                            .ok()
-                            .and_then(|forecast| {
-                                crate::resources::directory_bytes(&config.output)
-                                    .ok()
-                                    .map(|n| n.saturating_add(forecast) <= config.max_output_bytes)
-                            })
-                            .unwrap_or(false);
-                        if !ready {
-                            stopped = Some("output_forecast_limit".into());
-                            cancel.store(true, Ordering::Relaxed);
-                            dataset_writer = None;
-                        } else if let Err(error) = writer.push(&r) {
-                            stopped = Some(format!("dataset_write:{error}"));
-                            cancel.store(true, Ordering::Relaxed);
-                            dataset_writer = None;
-                        }
-                    }
-                }
-                pump.recording_seconds += record_start.elapsed().as_secs_f64();
-                outcomes.push(o)
+                .record(o, r);
             }
             Ok(Event::WorkerStopped) => live -= 1,
             Err(mpsc::RecvTimeoutError::Timeout) => {}
@@ -2035,43 +2022,18 @@ fn run_inner(
                     pending.push_back(r)
                 }
                 Event::Finished(o, r) => {
-                    let record_start = Instant::now();
-                    if mode == "arena"
-                        && let Err(e) = crate::arena_manifest::journal(config, &o)
-                    {
-                        stopped = Some(format!("output_journal:{e}"));
-                        cancel.store(true, Ordering::Relaxed);
+                    CompletionPublication {
+                        config,
+                        mode,
+                        pump: &mut pump,
+                        dataset_writer: &mut dataset_writer,
+                        row_count: &mut row_count,
+                        stopped: &mut stopped,
+                        cancel: &cancel,
+                        outcomes: &mut outcomes,
+                        start,
                     }
-                    record_completion(&mut pump, &o, r.len(), start);
-                    if !r.is_empty() {
-                        if o.status != "unknown" {
-                            row_count += r.len();
-                        }
-                        if let Some(writer) = dataset_writer.as_mut() {
-                            let forecast = r.iter().try_fold(16384u64, |n, row| {
-                                serde_json::to_vec(row).map(|v| n + v.len() as u64 * 3)
-                            });
-                            let ready = forecast
-                                .ok()
-                                .and_then(|forecast| {
-                                    crate::resources::directory_bytes(&config.output).ok().map(
-                                        |n| n.saturating_add(forecast) <= config.max_output_bytes,
-                                    )
-                                })
-                                .unwrap_or(false);
-                            if !ready {
-                                stopped = Some("output_forecast_limit".into());
-                                cancel.store(true, Ordering::Relaxed);
-                                dataset_writer = None;
-                            } else if let Err(error) = writer.push(&r) {
-                                stopped = Some(format!("dataset_write:{error}"));
-                                cancel.store(true, Ordering::Relaxed);
-                                dataset_writer = None;
-                            }
-                        }
-                    }
-                    pump.recording_seconds += record_start.elapsed().as_secs_f64();
-                    outcomes.push(o)
+                    .record(o, r);
                 }
                 Event::WorkerStopped => live -= 1,
             }
@@ -2164,7 +2126,7 @@ fn run_inner(
     for handle in handles {
         if handle.join().is_err() {
             joined = false;
-            stopped = Some("worker_panicked".into())
+            stopped.get_or_insert_with(|| "worker_panicked".into());
         }
     }
     let ids: std::collections::BTreeSet<_> = outcomes.iter().map(|o| o.game).collect();
@@ -2175,17 +2137,8 @@ fn run_inner(
     }
     outcomes.sort_by_key(|o| o.game);
     if let Some(reason) = &stopped {
-        let cause = crate::arena_clock::failure_from_reason(reason);
         for o in &mut outcomes {
-            if matches!(
-                o.failure,
-                Some(
-                    crate::arena_clock::Failure::Cancelled
-                        | crate::arena_clock::Failure::NotStarted
-                )
-            ) {
-                o.failure = Some(cause);
-            }
+            attach_primary_failure(o, reason);
         }
     }
     if let Some(b) = backend.as_ref() {
@@ -2204,7 +2157,12 @@ fn run_inner(
                 eligible_rows = manifest.eligible_rows.values().sum();
                 dataset = Some("dataset".into());
             }
-            Err(error) => stopped = Some(format!("dataset_finalize:{error}")),
+            Err(error) => record_publication_failure(
+                &mut pump,
+                &mut stopped,
+                None,
+                format!("dataset_finalize:{error}"),
+            ),
         }
     }
     pump.finalization_seconds = finalize_start.elapsed().as_secs_f64();
@@ -2261,7 +2219,7 @@ fn run_inner(
     if arena_slots.is_some() {
         crate::arena_manifest::finish(config, &report)?;
     }
-    let bytes = dir_bytes(&config.output)?;
+    let bytes = crate::resources::directory_bytes(&config.output)?;
     if bytes > config.max_output_bytes {
         return Err(format!(
             "output_limit: {bytes} > {} (saved evidence retained)",
@@ -2271,6 +2229,99 @@ fn run_inner(
     }
     Ok(report)
 }
+struct CompletionPublication<'a> {
+    config: &'a Config,
+    mode: &'a str,
+    pump: &'a mut PumpProfile,
+    dataset_writer: &'a mut Option<quoridor_data::DatasetWriter>,
+    row_count: &'a mut usize,
+    stopped: &'a mut Option<String>,
+    cancel: &'a AtomicBool,
+    outcomes: &'a mut Vec<Outcome>,
+    start: Instant,
+}
+impl CompletionPublication<'_> {
+    fn record(&mut self, mut o: Outcome, r: Vec<TeacherRow>) {
+        let record_start = Instant::now();
+        // A known originating cause accompanies both the durable journal and final census.
+        // Keep the original per-move error/reason/cancel facts untouched.
+        if let Some(reason) = self.stopped.as_deref() {
+            attach_primary_failure(&mut o, reason);
+        }
+        if self.mode == "arena"
+            && let Err(error) = crate::arena_manifest::journal(self.config, &o)
+        {
+            record_publication_failure(
+                self.pump,
+                self.stopped,
+                Some(o.game),
+                format!("output_journal:{error}"),
+            );
+            self.cancel.store(true, Ordering::Relaxed);
+        }
+        record_completion(self.pump, &o, r.len(), self.start);
+        if !r.is_empty() {
+            if o.status != "unknown" {
+                *self.row_count += r.len();
+            }
+            if let Some(writer) = self.dataset_writer.as_mut() {
+                let forecast = r.iter().try_fold(16384u64, |n, row| {
+                    serde_json::to_vec(row).map(|v| n + v.len() as u64 * 3)
+                });
+                let ready = forecast
+                    .ok()
+                    .and_then(|forecast| {
+                        crate::resources::directory_bytes(&self.config.output)
+                            .ok()
+                            .map(|n| n.saturating_add(forecast) <= self.config.max_output_bytes)
+                    })
+                    .unwrap_or(false);
+                if !ready {
+                    record_publication_failure(
+                        self.pump,
+                        self.stopped,
+                        Some(o.game),
+                        "output_forecast_limit".into(),
+                    );
+                    self.cancel.store(true, Ordering::Relaxed);
+                    *self.dataset_writer = None;
+                } else if let Err(error) = writer.push(&r) {
+                    record_publication_failure(
+                        self.pump,
+                        self.stopped,
+                        Some(o.game),
+                        format!("dataset_write:{error}"),
+                    );
+                    self.cancel.store(true, Ordering::Relaxed);
+                    *self.dataset_writer = None;
+                }
+            }
+        }
+        self.pump.recording_seconds += record_start.elapsed().as_secs_f64();
+        self.outcomes.push(o);
+    }
+}
+
+fn attach_primary_failure(outcome: &mut Outcome, reason: &str) {
+    if matches!(
+        outcome.failure,
+        Some(crate::arena_clock::Failure::Cancelled | crate::arena_clock::Failure::NotStarted)
+    ) {
+        outcome.failure = Some(crate::arena_clock::failure_from_reason(reason));
+    }
+}
+fn record_publication_failure(
+    pump: &mut PumpProfile,
+    stopped: &mut Option<String>,
+    game: Option<usize>,
+    reason: String,
+) {
+    // First originating reason is immutable; every additional publication error remains visible.
+    stopped.get_or_insert_with(|| reason.clone());
+    pump.publication_failures
+        .push(PublicationFailure { game, reason });
+}
+
 fn record_completion(pump: &mut PumpProfile, outcome: &Outcome, rows: usize, start: Instant) {
     if outcome.status == "unknown" {
         pump.censored_rows += rows;
@@ -2285,28 +2336,23 @@ fn record_completion(pump: &mut PumpProfile, outcome: &Outcome, rows: usize, sta
         rows,
         nn_calls: outcome.nn_calls,
     });
-    let complete: Vec<_> = pump
-        .completions
-        .iter()
-        .filter(|c| c.status != "unknown")
-        .collect();
-    if complete.len() == 16 && pump.first16_complete_seconds.is_none() {
-        pump.first16_complete_seconds = Some(start.elapsed().as_secs_f64());
-        pump.first16_complete_rows = complete.iter().map(|c| c.rows).sum();
-    }
-}
-fn dir_bytes(path: &Path) -> Result<u64> {
-    let mut n = 0;
-    for e in fs::read_dir(path)? {
-        let e = e?;
-        let m = e.metadata()?;
-        if m.is_dir() {
-            n += dir_bytes(&e.path())?
-        } else {
-            n += m.len()
+    if outcome.status != "unknown" && pump.first16_complete_seconds.is_none() {
+        pump.first16_seen += 1;
+        pump.first16_rows_accumulated += rows;
+        if pump.first16_seen == 16 {
+            pump.first16_complete_seconds = Some(start.elapsed().as_secs_f64());
+            pump.first16_complete_rows = pump.first16_rows_accumulated;
         }
     }
-    Ok(n)
+}
+fn acquire_output(path: &Path, owned: &mut bool) -> Result<()> {
+    fs::create_dir_all(path.parent().unwrap_or(Path::new(".")))?;
+    fs::create_dir(path)?;
+    *owned = true;
+    Ok(())
+}
+fn failure_publication_owned(owned: bool, path: &Path) -> bool {
+    owned && path.is_dir() && !path.join("result.json").exists()
 }
 
 /// Publish every planned slot even when initialization fails before workers
@@ -2327,12 +2373,10 @@ fn run_owned(
     mode: &str,
     backend: Option<Box<dyn InferenceBackend>>,
 ) -> Result<RunReport> {
-    let was_present = config.output.exists();
-    let result = run_inner(config, mode, backend);
+    let mut output_owned = false;
+    let result = run_inner(config, mode, backend, &mut output_owned);
     if let Err(error) = &result
-        && !was_present
-        && config.output.is_dir()
-        && !config.output.join("result.json").exists()
+        && failure_publication_owned(output_owned, &config.output)
     {
         let plans = planned(config).unwrap_or_default();
         let outcomes = plans
@@ -2478,7 +2522,8 @@ fn benchmark_impl(
                             return Err(format!("benchmark:{reason}").into());
                         }
                         let context =
-                            SigmaContext::from_prefix(&p.opening).map_err(|e| format!("{e:?}"))?;
+                            SigmaContext::from_prefix_with_rules(&p.opening, config.ruleset)
+                                .map_err(|e| format!("{e:?}"))?;
                         if context.terminal_value().is_some() {
                             return Err("terminal benchmark fixture".into());
                         }
@@ -2611,7 +2656,7 @@ fn benchmark_impl(
 mod tests {
     use super::*;
     fn config() -> Config {
-        serde_json::from_value(serde_json::json!({"run_id":"synthetic","output":"unused","games":1,"workers":1,"active_games":1,"max_batch":8,"simulations":4,"max_plies":1,"engines":[{"kind":"mcts"}],"inference":{"backend":"ort","model":"unused","model_sha":"0000000000000000000000000000000000000000000000000000000000000000","library":"unused"}})).unwrap()
+        serde_json::from_value(serde_json::json!({"ruleset":"standard_2p_threefold","run_id":"synthetic","output":"unused","games":1,"workers":1,"active_games":1,"max_batch":8,"simulations":4,"max_plies":1,"engines":[{"kind":"mcts"}],"inference":{"backend":"ort","model":"unused","model_sha":"0000000000000000000000000000000000000000000000000000000000000000","library":"unused"}})).unwrap()
     }
     fn plan() -> Planned {
         Planned {
@@ -3128,7 +3173,7 @@ mod telemetry317_tests {
     fn namespace(name: &str) -> alphabeta::SearchNamespace {
         alphabeta::SearchNamespace {
             evaluator: name.into(),
-            rules: "RuleA-fullhistory-totalply".into(),
+            rules: "research-standard-2p-threefold-goal-first-v1".into(),
             selectivity: "fullwidth-PVS-MPC-OFF".into(),
         }
     }
@@ -3399,7 +3444,7 @@ mod completed_error_tests {
         };
         let ns = alphabeta::SearchNamespace {
             evaluator: "fixture".into(),
-            rules: "RuleA".into(),
+            rules: "research-standard-2p-threefold-goal-first-v1".into(),
             selectivity: "fullwidth".into(),
         };
         let r = invoke_alpha_observed(
@@ -3455,7 +3500,7 @@ mod live_caller_clock_tests {
                 Arc::new(DistanceEvaluator::new(0., 8.)),
                 alphabeta::SearchNamespace {
                     evaluator: "D_a0b8_clock_probe".into(),
-                    rules: "RuleA".into(),
+                    rules: "research-standard-2p-threefold-goal-first-v1".into(),
                     selectivity: "fullwidth".into(),
                 },
                 &root,
@@ -3529,5 +3574,408 @@ mod live_caller_clock_tests {
             "CALLER_CLOCK_NN0={}",
             serde_json::json!({"rows":rows,"games":0,"hard_realtime_guarantee":false})
         );
+    }
+}
+
+#[cfg(test)]
+mod research_threefold_runtime_tests {
+    use super::*;
+    include!("../../quoridor-core/tests/fixtures/research_threefold.rs");
+    fn config() -> Config {
+        serde_json::from_value(serde_json::json!({"ruleset":"standard_2p_threefold","run_id":"threefold-fixture","output":"unused","games":1,"workers":1,"engines":[{"kind":"distance","depth":1}]})).unwrap()
+    }
+    fn planned(id: usize, opening: Vec<u16>) -> Planned {
+        Planned {
+            id,
+            opening,
+            family: "source-fixture".into(),
+            split: Split::Train,
+        }
+    }
+    fn game(prefix: Vec<u16>) -> Game {
+        let context = SigmaContext::from_prefix(&prefix).unwrap();
+        Game {
+            planned: planned(0, prefix.clone()),
+            context,
+            prefix,
+            rows: vec![],
+            search: None,
+            alpha_sessions: vec![],
+            tt_profiles: vec![],
+            pending: None,
+            generation: 0,
+            root_nn: None,
+            rng: Rng::new(1),
+            nn: 0,
+            advance_calls: 0,
+            terminal_no_nn: 0,
+            allocated_nodes_peak: 0,
+            origin: Instant::now(),
+            observations: vec![],
+            failure: None,
+            forfeit_winner: None,
+            record_teacher: false,
+            move_started: None,
+        }
+    }
+    fn rows() -> Vec<TeacherRow> {
+        [vec![], vec![13]]
+            .into_iter()
+            .enumerate()
+            .map(|(i, prefix)| {
+                let context = SigmaContext::from_prefix(&prefix).unwrap();
+                TeacherRow::from_context(
+                    i.to_string(),
+                    "source-game".into(),
+                    "source-family".into(),
+                    Split::Train,
+                    prefix,
+                    &context,
+                    None,
+                    Teacher::InputOnly,
+                    "source-fixture".into(),
+                )
+                .unwrap()
+            })
+            .collect()
+    }
+    #[test]
+    fn research_threefold_real_boundary_records_and_stm_labels() {
+        for (prefix, expected, winner, status) in [
+            (&NONREPEAT_CAP200, None, None, "unknown"),
+            (&REPEAT_BOUNDARY200, Some(0.), None, "draw"),
+            (&GOAL_BOUNDARY200, Some(-1.), Some(1), "goal"),
+        ] {
+            let mut g = game(prefix.to_vec());
+            assert_eq!(g.context.terminal_value(), expected);
+            assert_eq!(g.context.total_ply(), 200);
+            g.rows = rows();
+            let reason = if status == "unknown" {
+                "ply_cap_before_terminal"
+            } else if status == "draw" {
+                "threefold_draw"
+            } else {
+                "goal"
+            };
+            let (o, rows) = finish(g, status, Some(reason.into()));
+            assert_eq!(o.winner, winner);
+            assert_eq!(o.plies, 200);
+            assert_eq!(o.moves, prefix.to_vec());
+            assert!(o.observations.is_empty());
+            assert_eq!(o.nn_calls, 0);
+            if status == "unknown" {
+                assert_eq!(o.failure, Some(crate::arena_clock::Failure::PlyCap));
+                assert!(rows.iter().all(|r| r.z.is_none() && !r.eligible));
+            } else {
+                assert!(o.failure.is_none());
+                assert!(rows.iter().all(|r| r.eligible));
+                assert_eq!(
+                    rows.iter().map(|r| r.z).collect::<Vec<_>>(),
+                    if status == "draw" {
+                        vec![Some(0.), Some(0.)]
+                    } else {
+                        vec![Some(-1.), Some(1.)]
+                    }
+                );
+            }
+        }
+    }
+    #[test]
+    fn research_threefold_maintenance_exclusive_output_owner() {
+        let path = std::env::temp_dir().join(format!(
+            "threefold-owner-{}-{}",
+            std::process::id(),
+            unix_ms()
+        ));
+        let barrier = Arc::new(std::sync::Barrier::new(2));
+        let handles: Vec<_> = (0..2)
+            .map(|_| {
+                let path = path.clone();
+                let barrier = barrier.clone();
+                std::thread::spawn(move || {
+                    let mut owned = false;
+                    barrier.wait();
+                    let success = acquire_output(&path, &mut owned).is_ok();
+                    assert_eq!(success, owned);
+                    (success, failure_publication_owned(owned, &path))
+                })
+            })
+            .collect();
+        let results: Vec<_> = handles.into_iter().map(|h| h.join().unwrap()).collect();
+        assert_eq!(results.iter().filter(|r| r.0).count(), 1);
+        assert_eq!(results.iter().filter(|r| r.1).count(), 1);
+        fs::write(path.join("result.json"), b"{}\n").unwrap();
+        assert!(!failure_publication_owned(true, &path));
+        fs::remove_dir_all(path).unwrap();
+    }
+    #[test]
+    fn research_threefold_maintenance_single_finished_publication_and_output_failure() {
+        let mut cfg = config();
+        cfg.output = std::env::temp_dir().join(format!(
+            "threefold-publication-{}-{}",
+            std::process::id(),
+            unix_ms()
+        ));
+        let mut owned = false;
+        acquire_output(&cfg.output, &mut owned).unwrap();
+        let (tx, rx) = mpsc::channel();
+        let mut pump = PumpProfile::default();
+        let mut writer = None;
+        let mut count = 0;
+        let mut stopped = None;
+        let cancel = AtomicBool::new(false);
+        let mut outcomes = vec![];
+        let start = Instant::now();
+        for id in 0..2 {
+            let mut o = unknown(&planned(id, vec![]), "not_started".into());
+            o.status = "draw".into();
+            o.failure = None;
+            o.reason = Some("threefold_draw".into());
+            tx.send(Event::Finished(o, rows())).unwrap();
+            let event = if id == 0 {
+                rx.recv().unwrap()
+            } else {
+                rx.try_recv().unwrap()
+            };
+            let Event::Finished(o, r) = event else {
+                panic!("wrong event")
+            };
+            CompletionPublication {
+                config: &cfg,
+                mode: "arena",
+                pump: &mut pump,
+                dataset_writer: &mut writer,
+                row_count: &mut count,
+                stopped: &mut stopped,
+                cancel: &cancel,
+                outcomes: &mut outcomes,
+                start,
+            }
+            .record(o, r);
+        }
+        assert_eq!(outcomes.len(), 2);
+        assert_eq!(pump.completions.len(), 2);
+        assert_eq!(count, 4);
+        assert_eq!(
+            fs::read_to_string(cfg.output.join("completed.jsonl"))
+                .unwrap()
+                .lines()
+                .count(),
+            2
+        );
+        assert!(stopped.is_none());
+        assert!(!cancel.load(Ordering::Relaxed));
+        cfg.max_output_bytes = 0;
+        CompletionPublication {
+            config: &cfg,
+            mode: "arena",
+            pump: &mut pump,
+            dataset_writer: &mut writer,
+            row_count: &mut count,
+            stopped: &mut stopped,
+            cancel: &cancel,
+            outcomes: &mut outcomes,
+            start,
+        }
+        .record(unknown(&planned(2, vec![]), "not_started".into()), vec![]);
+        assert_eq!(outcomes.len(), 3);
+        assert_eq!(pump.completions.len(), 3);
+        assert!(stopped.as_ref().unwrap().starts_with("output_journal:"));
+        assert!(cancel.load(Ordering::Relaxed));
+        assert_eq!(
+            fs::read_to_string(cfg.output.join("completed.jsonl"))
+                .unwrap()
+                .lines()
+                .count(),
+            2
+        );
+        fs::remove_dir_all(cfg.output).unwrap();
+    }
+    #[test]
+    fn research_threefold_f17_primary_backend_and_two_publication_errors() {
+        let mut cfg = config();
+        cfg.output = std::env::temp_dir().join(format!(
+            "threefold-two-errors-{}-{}",
+            std::process::id(),
+            unix_ms()
+        ));
+        let mut owned = false;
+        acquire_output(&cfg.output, &mut owned).unwrap();
+        // Two deterministic owned-path IO refusals: journal append and Arrow create_new.
+        fs::create_dir(cfg.output.join("completed.jsonl")).unwrap();
+        let dataset = cfg.output.join("dataset");
+        let mut writer = Some(quoridor_data::DatasetWriter::new(&dataset, false).unwrap());
+        fs::create_dir(dataset.join("raw-000000.arrow")).unwrap();
+        let mut pump = PumpProfile::default();
+        let mut count = 0;
+        let primary = "inference:original backend output detail";
+        let mut stopped = Some(primary.into());
+        let cancel = AtomicBool::new(false);
+        let mut outcomes = vec![];
+        CompletionPublication {
+            config: &cfg,
+            mode: "arena",
+            pump: &mut pump,
+            dataset_writer: &mut writer,
+            row_count: &mut count,
+            stopped: &mut stopped,
+            cancel: &cancel,
+            outcomes: &mut outcomes,
+            start: Instant::now(),
+        }
+        .record(
+            unknown(&planned(0, vec![]), "not_started_cancelled".into()),
+            rows(),
+        );
+        assert_eq!(stopped.as_deref(), Some(primary));
+        assert!(cancel.load(Ordering::Relaxed));
+        assert!(writer.is_none());
+        assert_eq!(pump.publication_failures.len(), 2);
+        assert!(
+            pump.publication_failures[0]
+                .reason
+                .starts_with("output_journal:")
+        );
+        assert!(
+            pump.publication_failures[1]
+                .reason
+                .starts_with("dataset_write:")
+        );
+        assert!(pump.publication_failures.iter().all(|e| e.game == Some(0)));
+        assert_eq!(
+            outcomes[0].failure,
+            Some(crate::arena_clock::Failure::EngineError)
+        );
+        assert_eq!(outcomes[0].reason.as_deref(), Some("not_started_cancelled"));
+        assert!(outcomes[0].observations.is_empty());
+        assert_eq!(outcomes[0].nn_calls, 0);
+        record_publication_failure(
+            &mut pump,
+            &mut stopped,
+            None,
+            "dataset_finalize:fixture".into(),
+        );
+        assert_eq!(stopped.as_deref(), Some(primary));
+        assert_eq!(pump.publication_failures.len(), 3);
+        assert!(pump.publication_failures[2].game.is_none());
+        let saved = serde_json::to_value(&pump).unwrap();
+        assert_eq!(saved["publication_failures"].as_array().unwrap().len(), 3);
+        fs::remove_dir_all(cfg.output).unwrap();
+    }
+    #[test]
+    fn research_threefold_f17_first_publication_failure_is_primary_but_all_survive() {
+        let mut pump = PumpProfile::default();
+        let mut stopped = None;
+        for (game, reason) in [
+            (Some(0), "output_journal:first IO"),
+            (Some(0), "output_forecast_limit"),
+            (None, "dataset_finalize:second IO"),
+        ] {
+            record_publication_failure(&mut pump, &mut stopped, game, reason.into());
+        }
+        assert_eq!(stopped.as_deref(), Some("output_journal:first IO"));
+        assert_eq!(
+            pump.publication_failures
+                .iter()
+                .map(|e| e.reason.as_str())
+                .collect::<Vec<_>>(),
+            vec![
+                "output_journal:first IO",
+                "output_forecast_limit",
+                "dataset_finalize:second IO"
+            ]
+        );
+    }
+    #[test]
+    fn research_threefold_f17_known_primary_matches_durable_journal_and_census() {
+        let mut cfg = config();
+        cfg.output = std::env::temp_dir().join(format!(
+            "threefold-primary-journal-{}-{}",
+            std::process::id(),
+            unix_ms()
+        ));
+        let mut owned = false;
+        acquire_output(&cfg.output, &mut owned).unwrap();
+        let mut pump = PumpProfile::default();
+        let mut writer = None;
+        let mut count = 0;
+        let primary = "inference:original backend output detail";
+        let mut stopped = Some(primary.into());
+        let cancel = AtomicBool::new(true);
+        let mut outcomes = vec![];
+        for (id, reason) in ["not_started_cancelled", "cancelled"]
+            .into_iter()
+            .enumerate()
+        {
+            CompletionPublication {
+                config: &cfg,
+                mode: "arena",
+                pump: &mut pump,
+                dataset_writer: &mut writer,
+                row_count: &mut count,
+                stopped: &mut stopped,
+                cancel: &cancel,
+                outcomes: &mut outcomes,
+                start: Instant::now(),
+            }
+            .record(unknown(&planned(id, vec![]), reason.into()), vec![]);
+        }
+        let journal = fs::read_to_string(cfg.output.join("completed.jsonl")).unwrap();
+        for (line, o) in journal.lines().zip(&mut outcomes) {
+            let saved: Outcome = serde_json::from_str(line).unwrap();
+            attach_primary_failure(o, stopped.as_deref().unwrap());
+            assert_eq!(
+                serde_json::to_value(saved).unwrap(),
+                serde_json::to_value(&*o).unwrap()
+            );
+            assert_eq!(o.failure, Some(crate::arena_clock::Failure::EngineError));
+            assert!(
+                o.reason
+                    .as_deref()
+                    .is_some_and(|r| r == "cancelled" || r == "not_started_cancelled")
+            );
+        }
+        assert_eq!(outcomes.len(), 2);
+        assert_eq!(stopped.as_deref(), Some(primary));
+        assert!(pump.publication_failures.is_empty());
+        assert!(
+            serde_json::to_value(pump)
+                .unwrap()
+                .get("publication_failures")
+                .is_none()
+        );
+        fs::remove_dir_all(cfg.output).unwrap();
+    }
+
+    #[test]
+    fn research_threefold_maintenance_first16_completed_telemetry_retains_all() {
+        let mut pump = PumpProfile::default();
+        let start = Instant::now();
+        for id in 0..24 {
+            let mut o = unknown(&planned(id, vec![]), "not_started".into());
+            if id % 3 != 0 {
+                o.status = "draw".into();
+            }
+            record_completion(&mut pump, &o, id + 1, start);
+            if id < 23 {
+                assert!(pump.first16_complete_seconds.is_none());
+            }
+        }
+        assert_eq!(pump.completions.len(), 24);
+        assert_eq!(pump.first16_seen, 16);
+        assert_eq!(
+            pump.first16_complete_rows,
+            (0..24).filter(|i| i % 3 != 0).map(|i| i + 1).sum::<usize>()
+        );
+        assert_eq!(
+            pump.censored_rows,
+            (0..24).filter(|i| i % 3 == 0).map(|i| i + 1).sum::<usize>()
+        );
+        let first_rows = pump.first16_complete_rows;
+        let mut o = unknown(&planned(24, vec![]), "not_started".into());
+        o.status = "goal".into();
+        record_completion(&mut pump, &o, 100, start);
+        assert_eq!(pump.completions.len(), 25);
+        assert_eq!(pump.first16_complete_rows, first_rows);
     }
 }

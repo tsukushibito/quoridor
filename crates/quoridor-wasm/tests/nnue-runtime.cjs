@@ -9,6 +9,7 @@ const crypto = require('node:crypto');
 const wasm = require(path.resolve(process.argv[2]));
 const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'quoridor-wasm-nnue-'));
 let engine;
+const context = (prefix) => JSON.stringify({ ruleset: 'standard_2p_threefold', prefix });
 try {
   const raw = Buffer.alloc(12193 * 4);
   for (let i = 0; i < 12193; i++) raw.writeFloatLE((((i * 73 + 19) % 101) - 50) / 1024, i * 4);
@@ -27,18 +28,18 @@ try {
   fs.writeFileSync(path.join(temp, 'manifest.json'), encoded);
   engine = new wasm.NnueEngine(encoded, raw);
   for (const prefix of [[], [81, 163], [13, 67, 22, 58, 31, 49, 40, 31]]) {
-    const value = engine.evaluate(JSON.stringify(prefix));
+    const value = engine.evaluate(context(prefix));
     engine.set_simd(true);
-    assert.equal(engine.evaluate(JSON.stringify(prefix)), value);
+    assert.equal(engine.evaluate(context(prefix)), value);
     engine.set_simd(false);
     assert(Number.isFinite(value) && Math.abs(value) <= 1);
-    const r = JSON.parse(engine.search_json(JSON.stringify(prefix), 1, 2000, 0));
+    const r = JSON.parse(engine.search_json(context(prefix), 1, 2000, 0));
     assert.equal(r.completed_depth, 1);
     assert(Number.isInteger(r.action) && r.action >= 0 && r.action < 209);
   }
   const updates = [];
   const cancelled = JSON.parse(
-    engine.search_with_updates_json('[]', 4, 20000, 1000, (json) => {
+    engine.search_with_updates_json(context([]), 4, 20000, 1000, (json) => {
       updates.push(JSON.parse(json));
       return false;
     }),
@@ -49,7 +50,10 @@ try {
   const corrupted = Buffer.from(raw);
   corrupted[0] ^= 1;
   assert.throws(() => new wasm.NnueEngine(encoded, corrupted));
-  assert.throws(() => engine.evaluate('[65535]'));
+  assert.throws(() => engine.evaluate(context([65535])));
+  assert.throws(() => engine.evaluate('[]'));
+  assert.throws(() => engine.evaluate(JSON.stringify({ prefix: [] })));
+  assert.equal(engine.evaluate(context([13, 67, 4, 76, 13, 67, 4, 76])), 0);
   console.log(
     JSON.stringify({
       schema: 'wasm-nnue-runtime-v1',

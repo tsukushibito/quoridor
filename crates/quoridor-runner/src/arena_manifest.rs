@@ -130,7 +130,7 @@ pub fn slots(c: &Config, planned: &[(usize, String, Vec<u16>)]) -> Result<Vec<Sl
         .iter()
         .map(|(game, family, opening)| {
             let metadata = c.arena.as_ref().map(|a| &a.book.openings[game / 2]);
-            let replay = arena::replay(opening);
+            let replay = arena::replay(opening, c.ruleset);
             let reference_q_stm = metadata
                 .and_then(|m| m.reference.as_ref())
                 .and_then(|r| replay.as_ref().ok().and_then(|p| r.q_stm(p.turn)));
@@ -227,7 +227,7 @@ pub fn begin(c: &Config, slots: &[Slot], admission: &crate::resources::Admission
             "planned_slots":slots,"planned_sha256":arena::json_digest(&slots)?,
         "compiled_sources":source_bindings(),"executable":exe,"executable_sha256":file_sha256(&exe)?,
         "build":{"os":std::env::consts::OS,"arch":std::env::consts::ARCH,"cuda_aoti":cfg!(feature="cuda-aoti"),"tensorrt":cfg!(feature="tensorrt")},
-            "rules":arena::RULES,"admission":admission,
+            "rules":c.ruleset.id(),"admission":admission,
             "engine_tt_source_policy":c.engines.iter().enumerate().filter(|(_,e)| e.kind != "mcts").map(|(index,e)| serde_json::json!({
                 "engine_index":index,"kind":e.kind,"requested_slots":requested_tt,
                 "effective_slots_from_source":requested_tt.min(4096),"persistent_byte_cap_from_source":1048576,
@@ -438,8 +438,11 @@ pub fn audit(output: &Path) -> Result<crate::arena_statistics::Summary> {
     if serde_json::to_value(&report)? != manifest["result"] {
         return Err("result manifest mismatch".into());
     }
+    if binding["rules"] != config.ruleset.id() {
+        return Err("ruleset binding mismatch".into());
+    }
     for s in &slots {
-        let replay = arena::replay(&s.opening);
+        let replay = arena::replay(&s.opening, config.ruleset);
         if replay.as_ref().ok() != s.replay.as_ref()
             || (replay.is_err() != s.replay_error.is_some())
         {
@@ -447,7 +450,7 @@ pub fn audit(output: &Path) -> Result<crate::arena_statistics::Summary> {
         }
     }
     for o in &report.outcomes {
-        if !o.started && arena::replay(&o.moves).is_err() {
+        if !o.started && arena::replay(&o.moves, config.ruleset).is_err() {
             if o.status != "unknown"
                 || !slots
                     .iter()
@@ -457,7 +460,7 @@ pub fn audit(output: &Path) -> Result<crate::arena_statistics::Summary> {
             }
             continue;
         }
-        let r = arena::replay(&o.moves)?;
+        let r = arena::replay(&o.moves, config.ruleset)?;
         if o.started && r.total_ply != o.plies {
             return Err("outcome total ply mismatch".into());
         }

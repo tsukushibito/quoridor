@@ -34,11 +34,11 @@ pub fn from_preparation(p: &Value, source_sha256: String) -> Result<Book> {
         if context.terminal_value().is_some() {
             return Err("BOOK_EARLY_TERMINAL".into());
         }
-        let key = HistoryKey::from(context.position()).sigma_string();
+        let key = HistoryKey::from(context.position()).history_string();
         let history: Vec<_> = context
             .history_counts()
             .iter()
-            .map(|(k, n)| (k.sigma_string(), *n))
+            .map(|(k, n)| (k.history_string(), *n))
             .collect();
         if r["feature"]["key"] != key || r["feature"]["history"] != json!(history) {
             return Err("BOOK_HISTORY_BINDING".into());

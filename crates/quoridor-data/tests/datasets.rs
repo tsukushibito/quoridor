@@ -125,7 +125,7 @@ fn old_alpha_teacher_has_legacy_empty_pv_and_new_pv_roundtrips() {
 }
 
 #[test]
-fn cache_metadata_preserves_perspectives_tensor_bytes_and_missing_labels() {
+fn research_threefold_cache_metadata_preserves_perspectives_tensor_bytes_and_missing_labels() {
     let d = dir("metadata");
     let c = SigmaContext::from_prefix(&[13]).unwrap();
     let mut p2 = TeacherRow::from_context(
@@ -176,7 +176,18 @@ fn cache_metadata_preserves_perspectives_tensor_bytes_and_missing_labels() {
             ] {
                 legacy_labels.extend(value.to_le_bytes());
             }
-            assert_eq!(m["metadata_schema"], "quoridor-tensor-row-v2");
+            assert_eq!(
+                m["metadata_schema"],
+                "quoridor-tensor-row-v3-research-rules"
+            );
+            assert_eq!(
+                m["research_ruleset"],
+                r.research_ruleset.as_ref().unwrap().as_str()
+            );
+            assert_eq!(
+                m["history_format"],
+                "research-rule-and-stocks-history-SHA-v1"
+            );
             assert_eq!(m["state_key"], r.state_key);
             assert_eq!(m["history_key"], r.history_key);
             assert_eq!(m["feature_signature"], r.signature());
@@ -208,4 +219,115 @@ fn cache_metadata_preserves_perspectives_tensor_bytes_and_missing_labels() {
         std::fs::remove_dir_all(output).unwrap();
     }
     std::fs::remove_dir_all(d).unwrap();
+}
+
+#[test]
+fn research_threefold_record_provenance_never_promotes_legacy_counts() {
+    let current = row("current-rule", Split::Train);
+    assert_eq!(
+        current.research_ruleset.as_deref(),
+        Some("research-standard-2p-threefold-goal-first-v1")
+    );
+    assert_eq!(current.state_key.split('|').count(), 6);
+    current.validate().unwrap();
+    let mut encoded = serde_json::to_value(&current).unwrap();
+    encoded.as_object_mut().unwrap().remove("research_ruleset");
+    let missing: TeacherRow = serde_json::from_value(encoded.clone()).unwrap();
+    assert!(missing.research_ruleset.is_none());
+    assert!(missing.validate().is_err());
+    encoded["state_key"] =
+        quoridor_core::research::HistoryKey::from(quoridor_core::Position::default())
+            .sigma_string()
+            .into();
+    let legacy: TeacherRow = serde_json::from_value(encoded).unwrap();
+    assert!(legacy.research_ruleset.is_none());
+    legacy.validate().unwrap();
+    assert!(
+        serde_json::to_value(&legacy)
+            .unwrap()
+            .get("research_ruleset")
+            .is_none()
+    );
+    let mut wrong = current.clone();
+    wrong.research_ruleset = Some("RuleA".into());
+    assert!(wrong.validate().is_err());
+    wrong = current;
+    wrong.state_key = legacy.state_key;
+    assert!(wrong.validate().is_err());
+}
+
+#[test]
+fn failed_final_publication_keeps_all_streamed_raw_inputs() {
+    for fail_manifest in [false, true] {
+        let d = dir(if fail_manifest {
+            "manifest-failure"
+        } else {
+            "shard-failure"
+        });
+        let mut writer = DatasetWriter::new(&d, false).unwrap();
+        writer.push(&[row("first", Split::Train)]).unwrap();
+        writer.push(&[row("second", Split::Train)]).unwrap();
+        let raw_paths = [d.join("raw-000000.arrow"), d.join("raw-000001.arrow")];
+        let before: Vec<_> = raw_paths
+            .iter()
+            .map(|p| std::fs::read(p).unwrap())
+            .collect();
+        let occupied = d.join(if fail_manifest {
+            "manifest.json"
+        } else {
+            "train-000001.arrow"
+        });
+        std::fs::write(&occupied, b"owned fixture prevents exclusive publication").unwrap();
+        assert!(writer.finish().is_err());
+        for (path, bytes) in raw_paths.iter().zip(before) {
+            assert_eq!(std::fs::read(path).unwrap(), bytes);
+        }
+        assert_eq!(
+            std::fs::read(occupied).unwrap(),
+            b"owned fixture prevents exclusive publication"
+        );
+        std::fs::remove_dir_all(d).unwrap();
+    }
+}
+
+#[test]
+fn collected_and_streamed_readers_share_malformed_row_errors() {
+    use arrow2::{
+        array::Array,
+        chunk::Chunk,
+        datatypes::Schema,
+        io::ipc::write::{FileWriter, WriteOptions},
+    };
+    use sha2::{Digest, Sha256};
+    let d = dir("missing-column");
+    let mut rows = vec![row("first", Split::Train)];
+    let mut manifest = write_dataset(&d, &mut rows, false, 1).unwrap();
+    let shard = d.join(&manifest.shards[0].path);
+    let mut writer = FileWriter::try_new(
+        std::fs::File::create(&shard).unwrap(),
+        Schema::from(Vec::new()),
+        None,
+        WriteOptions { compression: None },
+    )
+    .unwrap();
+    writer
+        .write(&Chunk::new(Vec::<Box<dyn Array>>::new()), None)
+        .unwrap();
+    writer.finish().unwrap();
+    manifest.shards[0].sha256 = format!("{:x}", Sha256::digest(std::fs::read(&shard).unwrap()));
+    std::fs::write(
+        d.join("manifest.json"),
+        serde_json::to_vec_pretty(&manifest).unwrap(),
+    )
+    .unwrap();
+    let collected = read_dataset(&d, false).unwrap_err().to_string();
+    let streamed = for_each_row(&d, false, |_| Ok(())).unwrap_err().to_string();
+    assert_eq!(collected, streamed);
+    // The same checked iterator feeds cache creation; it must also reject this shard.
+    let cache = dir("missing-column-cache");
+    assert!(write_tensor_cache(&d, &cache, false).is_err());
+    std::fs::remove_dir_all(d).unwrap();
+    if cache.exists() {
+        std::fs::remove_dir_all(cache).unwrap();
+    }
 }

@@ -260,6 +260,9 @@ impl Search {
         }
         let c = self.nodes[i].state.as_ref().unwrap();
         let legal = c.sigma_legal_order();
+        if legal.is_empty() {
+            return Err("NO_LEGAL_NONTERMINAL".into());
+        }
         let position = c.position();
         if self
             .nodes
@@ -461,5 +464,42 @@ mod tests {
         assert!(s.supply(token, &[0.0; 136], f32::NAN).is_err());
         assert_eq!(s.snapshot().root_visits, 0);
         assert!(s.advance().is_err());
+    }
+}
+
+#[cfg(test)]
+mod research_threefold_tests {
+    use super::*;
+    include!("../../quoridor-core/tests/fixtures/research_threefold.rs");
+    #[test]
+    fn research_threefold_child_draw_and_root_bypass_inference() {
+        let c = SigmaContext::from_prefix(&[13, 67, 4, 76, 13, 67, 4]).unwrap();
+        let p = c.position();
+        let mut s = Search::new(c.clone(), 1, 2).unwrap();
+        let Progress::NeedInference { token, .. } = s.advance().unwrap() else {
+            panic!()
+        };
+        let mut logits = [-40.; 136];
+        let sigma = rust_to_sigma(p, 76).unwrap() as usize;
+        logits[p2_permutation()[sigma] as usize] = 40.;
+        s.supply(token, &logits, 0.5).unwrap();
+        assert!(matches!(s.advance().unwrap(), Progress::Complete));
+        assert_eq!(s.snapshot().nn_calls, 1); // One synthetic response, no model invocation.
+        assert_eq!(s.snapshot().terminal_no_nn, 1);
+        assert_eq!(s.snapshot().action, Some(76));
+        assert_eq!(c.count(c.position().into()), 2);
+        let mut terminal = Search::new(c.play(76).unwrap(), 2, 2).unwrap();
+        assert!(matches!(terminal.advance().unwrap(), Progress::Complete));
+        assert_eq!(terminal.snapshot().terminal_value, Some(0.));
+        assert_eq!(terminal.snapshot().nn_calls, 0);
+        for (prefix, term) in [
+            (&NONREPEAT_CAP200, false),
+            (&REPEAT_BOUNDARY200, true),
+            (&GOAL_BOUNDARY200, true),
+        ] {
+            let mut s = Search::new(SigmaContext::from_prefix(prefix).unwrap(), 3, 2).unwrap();
+            assert_eq!(matches!(s.advance().unwrap(), Progress::Complete), term);
+            assert_eq!(s.snapshot().nn_calls, 0);
+        }
     }
 }

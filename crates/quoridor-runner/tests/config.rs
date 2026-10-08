@@ -1,11 +1,11 @@
 use quoridor_runner::config::Config;
 fn config() -> Config {
-    serde_json::from_value(serde_json::json!({"run_id":"test","output":"out","games":2,"workers":1,"engines":[{"kind":"distance","depth":1}]})).unwrap()
+    serde_json::from_value(serde_json::json!({"ruleset":"standard_2p_threefold","run_id":"test","output":"out","games":2,"workers":1,"engines":[{"kind":"distance","depth":1}]})).unwrap()
 }
 #[test]
 fn rejects_unknown_keys_limits_and_missing_backend() {
     assert!(config().validate().is_ok());
-    assert!(serde_json::from_value::<Config>(serde_json::json!({"run_id":"test","output":"out","engines":[{"kind":"distance"}],"unknown":true})).is_err());
+    assert!(serde_json::from_value::<Config>(serde_json::json!({"ruleset":"standard_2p_threefold","run_id":"test","output":"out","engines":[{"kind":"distance"}],"unknown":true})).is_err());
     let mut c = config();
     c.max_batch = 0;
     assert!(c.validate().is_err());
@@ -53,4 +53,27 @@ fn optional_job_wall_preserves_other_limits() {
     c.wall_seconds = None;
     c.max_plies = 0;
     assert!(c.validate().is_err());
+}
+
+#[test]
+fn research_threefold_config_requires_explicit_current_convention() {
+    let mut value = serde_json::to_value(config()).unwrap();
+    assert_eq!(value["ruleset"], "standard_2p_threefold");
+    assert_eq!(
+        config().ruleset.id(),
+        "research-standard-2p-threefold-goal-first-v1"
+    );
+    value.as_object_mut().unwrap().remove("ruleset");
+    assert!(serde_json::from_value::<Config>(value.clone()).is_err());
+    for old in ["rule_a", "official", "standard_2p", ""] {
+        value["ruleset"] = old.into();
+        assert!(serde_json::from_value::<Config>(value.clone()).is_err());
+    }
+    value["ruleset"] = "standard_2p_threefold".into();
+    assert!(
+        serde_json::from_value::<Config>(value)
+            .unwrap()
+            .validate()
+            .is_ok()
+    );
 }

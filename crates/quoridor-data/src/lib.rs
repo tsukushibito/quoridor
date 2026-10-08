@@ -87,6 +87,9 @@ pub struct TeacherRow {
     pub prefix: Vec<u16>,
     pub state_key: String,
     pub history_key: String,
+    /// Absent historical/external provenance stays unknown; never infer a ruleset from a hash.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub research_ruleset: Option<String>,
     pub ids: [Vec<u16>; 2],
     pub distance: [f32; 2],
     pub side: u8,
@@ -111,15 +114,17 @@ impl TeacherRow {
         teacher: Teacher,
         model_sha: String,
     ) -> Result<Self> {
+        context
+            .validate_normal()
+            .map_err(|e| format!("research history: {e}"))?;
         let f = quoridor_nnue::encode_qf1(context.position()).map_err(|e| format!("QF1: {e}"))?;
-        let history_key = hex_digest(&serde_json::to_vec(
-            &context
-                .history_counts()
-                .iter()
-                .map(|(k, n)| (k.sigma_string(), n))
-                .collect::<Vec<_>>(),
-        )?);
-        let state_key = HistoryKey::from(context.position()).sigma_string();
+        let history = context
+            .history_counts()
+            .iter()
+            .map(|(k, n)| (k.history_string(), *n))
+            .collect::<Vec<_>>();
+        let history_key = hex_digest(&serde_json::to_vec(&(context.ruleset().id(), history))?);
+        let state_key = HistoryKey::from(context.position()).history_string();
         let mut row = Self {
             id,
             game,
@@ -129,6 +134,7 @@ impl TeacherRow {
             prefix,
             state_key,
             history_key,
+            research_ruleset: Some(context.ruleset().id().into()),
             ids: f.ids,
             distance: f.distance,
             side: f.side + 1,
@@ -158,6 +164,21 @@ impl TeacherRow {
         hex_digest(&raw)
     }
     pub fn validate(&self) -> Result<()> {
+        if let Some(rule) = &self.research_ruleset {
+            if rule != quoridor_core::research::Ruleset::Standard2pThreefold.id() {
+                return Err("unsupported research record ruleset".into());
+            }
+            let key = HistoryKey::parse(&self.state_key)
+                .map_err(|e| format!("research state key: {e}"))?;
+            if key.turn + 1 != self.side
+                || self.history_key.len() != 64
+                || !self.history_key.bytes().all(|c| c.is_ascii_hexdigit())
+            {
+                return Err("research record history/perspective provenance".into());
+            }
+        } else if self.state_key.split('|').count() == 6 {
+            return Err("stocks-inclusive research key requires explicit record ruleset".into());
+        }
         if self.id.is_empty()
             || self.game.is_empty()
             || self.family.is_empty()
@@ -412,51 +433,11 @@ fn write_arrow(path: &Path, rows: &[&TeacherRow], compressed: bool) -> Result<()
     Ok(())
 }
 pub fn read_dataset(path: &Path, allow_test: bool) -> Result<Vec<TeacherRow>> {
-    let manifest: DatasetManifest =
-        serde_json::from_reader(File::open(path.join("manifest.json"))?)?;
-    if manifest.schema != SCHEMA_VERSION {
-        return Err("unsupported dataset schema".into());
-    }
     let mut rows = Vec::new();
-    for shard in manifest.shards {
-        if !allow_test && shard.path.starts_with("test-") {
-            continue;
-        }
-        let file_path = path.join(&shard.path);
-        if Path::new(&shard.path)
-            .components()
-            .any(|c| !matches!(c, std::path::Component::Normal(_)))
-            || file_sha(&file_path)? != shard.sha256
-        {
-            return Err("unsafe/unbound shard".into());
-        }
-        let mut file = File::open(&file_path)?;
-        let metadata = read_file_metadata(&mut file)?;
-        let reader = FileReader::new(file, metadata, None, None);
-        let mut count = 0;
-        for chunk in reader {
-            let chunk = chunk?;
-            let a = chunk
-                .arrays()
-                .last()
-                .unwrap()
-                .as_any()
-                .downcast_ref::<Utf8Array<i32>>()
-                .ok_or("row schema")?;
-            for text in a.values_iter() {
-                let r: TeacherRow = serde_json::from_str(text)?;
-                r.validate()?;
-                if !allow_test && r.split == Split::Test {
-                    return Err("test label in training shard".into());
-                }
-                rows.push(r);
-                count += 1
-            }
-        }
-        if count != shard.rows {
-            return Err("shard row count".into());
-        }
-    }
+    for_each_row(path, allow_test, |row| {
+        rows.push(row.clone());
+        Ok(())
+    })?;
     Ok(rows)
 }
 #[derive(Debug, Serialize, Deserialize)]
@@ -534,28 +515,30 @@ pub fn write_tensor_cache(dataset: &Path, output: &Path, allow_test: bool) -> Re
         ] {
             labels.write_all(&v.to_le_bytes())?
         }
-        serde_json::to_writer(
-            &mut meta,
-            &serde_json::json!({
-                "metadata_schema": "quoridor-tensor-row-v2",
-                "id": r.id, "group": r.family, "game": if matches!(r.teacher, Teacher::ExternalOutcome { .. }) { None } else { Some(&r.game) }, "split": r.split,
-                "primary_eligible": r.eligible,
-                "state_key": r.state_key, "history_key": r.history_key,
-                "ply": if matches!(r.teacher, Teacher::ExternalOutcome { .. }) { None } else { Some(r.ply) }, "feature_signature": r.feature_signature,
-                "side": r.side,
-                "ids": r.ids, "ids_order": "P1_then_P2",
-                "distance": r.distance, "distance_order": "STM_then_opponent_f32",
-                "tensor_view_order": "STM_then_opponent",
-                "teacher_type": match r.teacher {
-                    Teacher::Mcts { .. } => "mcts",
-                    Teacher::AlphaBeta { .. } => "alpha_beta_bounded_search_value",
-                    Teacher::ExternalOutcome { .. } => "external_terminal_outcome",
-                    Teacher::InputOnly => "input_only",
-                },
-                "rootmean": r.teacher.value(), "z": r.z,
-                "external_provenance": if matches!(r.teacher, Teacher::ExternalOutcome { .. }) { Some(&r.teacher) } else { None },
-            }),
-        )?;
+        let mut metadata = serde_json::json!({
+            "metadata_schema": if r.research_ruleset.is_some() { "quoridor-tensor-row-v3-research-rules" } else { "quoridor-tensor-row-v2" },
+            "id": r.id, "group": r.family, "game": if matches!(r.teacher, Teacher::ExternalOutcome { .. }) { None } else { Some(&r.game) }, "split": r.split,
+            "primary_eligible": r.eligible,
+            "state_key": r.state_key, "history_key": r.history_key,
+            "ply": if matches!(r.teacher, Teacher::ExternalOutcome { .. }) { None } else { Some(r.ply) }, "feature_signature": r.feature_signature,
+            "side": r.side,
+            "ids": r.ids, "ids_order": "P1_then_P2",
+            "distance": r.distance, "distance_order": "STM_then_opponent_f32",
+            "tensor_view_order": "STM_then_opponent",
+            "teacher_type": match r.teacher {
+                Teacher::Mcts { .. } => "mcts",
+                Teacher::AlphaBeta { .. } => "alpha_beta_bounded_search_value",
+                Teacher::ExternalOutcome { .. } => "external_terminal_outcome",
+                Teacher::InputOnly => "input_only",
+            },
+            "rootmean": r.teacher.value(), "z": r.z,
+            "external_provenance": if matches!(r.teacher, Teacher::ExternalOutcome { .. }) { Some(&r.teacher) } else { None },
+        });
+        if let Some(rule) = &r.research_ruleset {
+            metadata["research_ruleset"] = rule.clone().into();
+            metadata["history_format"] = "research-rule-and-stocks-history-SHA-v1".into();
+        }
+        serde_json::to_writer(&mut meta, &metadata)?;
         meta.write_all(b"\n")?;
         Ok(())
     })?;
@@ -692,7 +675,6 @@ impl DatasetWriter {
                     compressed: self.compressed,
                 });
             }
-            fs::remove_file(path)?;
         }
         for split in [Split::Train, Split::Validation, Split::Test] {
             manifest.family_counts.insert(
@@ -707,6 +689,16 @@ impl DatasetWriter {
                 .open(self.dir.join("manifest.json"))?,
             &manifest,
         )?;
+        // Raw shards remain recoverable until every final shard and the manifest
+        // have been published. Cleanup failure does not erase that completion fact.
+        for path in &self.raw {
+            fs::remove_file(path).map_err(|error| {
+                format!(
+                    "dataset published; raw shard cleanup failed for {}: {error}",
+                    path.display()
+                )
+            })?;
+        }
         Ok(manifest)
     }
 }
@@ -1024,6 +1016,7 @@ pub fn import_sigma_outcomes<R: Read>(
             prefix: Vec::new(),
             state_key: HistoryKey::from(position).sigma_string(),
             history_key: String::new(),
+            research_ruleset: None,
             ids: f.ids,
             distance: f.distance,
             side: 1,
@@ -1095,18 +1088,20 @@ pub fn write_input_references(dataset: &Path, output: &Path, allow_test: bool) -
             ),
             _ => None,
         };
-        serde_json::to_writer(
-            &mut out,
-            &serde_json::json!({
-                "schema":"quoridor-input-reference-v1", "id":r.id,"family":r.family,"partition":r.split,
-                "side":r.side,"side_frame":if external.is_some() {"canonicalSTM_only"} else {"actualP1P2"},
-                "state_key":r.state_key,"history_key":if r.history_key.is_empty() {None} else {Some(&r.history_key)},
-                "history_format":if r.history_key.is_empty() {"UNAVAILABLE"} else {"nativeSigmaContextSHA"},
-                "actualSTM_ids":[&r.ids[p],&r.ids[1-p]],"ids_order":"STM_then_opponent",
-                "STM_distance_f32bits":r.distance.map(f32::to_bits),"distance_order":"STM_then_opponent",
-                "input_signature":r.feature_signature,"external_input_provenance":external,
-            }),
-        )?;
+        let mut reference = serde_json::json!({
+            "schema":if r.research_ruleset.is_some() {"quoridor-input-reference-v2-research-rules"} else {"quoridor-input-reference-v1"}, "id":r.id,"family":r.family,"partition":r.split,
+            "side":r.side,"side_frame":if external.is_some() {"canonicalSTM_only"} else {"actualP1P2"},
+            "state_key":r.state_key,"history_key":if r.history_key.is_empty() {None} else {Some(&r.history_key)},
+            "history_format":if r.history_key.is_empty() {"UNAVAILABLE"} else {"nativeSigmaContextSHA"},
+            "actualSTM_ids":[&r.ids[p],&r.ids[1-p]],"ids_order":"STM_then_opponent",
+            "STM_distance_f32bits":r.distance.map(f32::to_bits),"distance_order":"STM_then_opponent",
+            "input_signature":r.feature_signature,"external_input_provenance":external,
+        });
+        if let Some(rule) = &r.research_ruleset {
+            reference["research_ruleset"] = rule.clone().into();
+            reference["history_format"] = "research-rule-and-stocks-history-SHA-v1".into();
+        }
+        serde_json::to_writer(&mut out, &reference)?;
         out.write_all(b"\n")?;
         count += 1;
         Ok(())

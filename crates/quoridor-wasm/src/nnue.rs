@@ -2,7 +2,7 @@
 use quoridor_ai::alphabeta::{
     NnueEvaluator, SearchLimits, SearchResult, StaticEvaluator, search, search_with_updates,
 };
-use quoridor_core::research::SigmaContext;
+use quoridor_core::research::{Ruleset, SigmaContext};
 use quoridor_nnue::{EvaluationMode, Model};
 use std::{
     sync::{
@@ -20,11 +20,21 @@ fn context(prefix: &str) -> Result<SigmaContext, String> {
     if prefix.len() > 2048 {
         return Err("PREFIX_TOO_LARGE".into());
     }
-    let actions: Vec<u16> = serde_json::from_str(prefix).map_err(|e| e.to_string())?;
-    SigmaContext::from_prefix(&actions).map_err(|e| e.to_string())
+    #[derive(serde::Deserialize)]
+    #[serde(deny_unknown_fields)]
+    struct ContextInput {
+        ruleset: String,
+        prefix: Vec<u16>,
+    }
+    let input: ContextInput = serde_json::from_str(prefix).map_err(|e| e.to_string())?;
+    let ruleset: Ruleset = input
+        .ruleset
+        .parse()
+        .map_err(|e: quoridor_core::RulesError| e.to_string())?;
+    SigmaContext::from_prefix_with_rules(&input.prefix, ruleset).map_err(|e| e.to_string())
 }
 fn result_json(r: &SearchResult) -> Result<String, JsValue> {
-    serde_json::to_string(&serde_json::json!({"action":r.action,"value":r.value,
+    serde_json::to_string(&serde_json::json!({"ruleset":Ruleset::Standard2pThreefold.id(),"action":r.action,"value":r.value,
         "completed_depth":r.completed_depth,"pv":r.pv,"stop":format!("{:?}",r.stop),
         "elapsed_ms":r.elapsed.as_secs_f64()*1000.0,"nodes":r.stats.nodes,
         "evaluations":r.stats.evaluations,"tt_hits":r.stats.tt_hits,
@@ -32,6 +42,8 @@ fn result_json(r: &SearchResult) -> Result<String, JsValue> {
     .map_err(error)
 }
 
+/// Explicit research-context inlet, not the publisher-standard product Game/B0 route.
+/// Supply {ruleset:"standard_2p_threefold",prefix:[...]} to evaluation/search.
 /// Use inside a browser Worker; the main thread retains game/timer ownership.
 /// The same checksum-bound model is accepted by the native runner.
 #[wasm_bindgen]
@@ -132,8 +144,16 @@ impl NnueEngine {
 mod tests {
     #[test]
     fn boundary_replays_history_and_rejects_bad_input() {
-        assert!(super::context("[13,67]").is_ok());
+        assert!(super::context(r#"{"ruleset":"standard_2p_threefold","prefix":[13,67]}"#).is_ok());
         assert!(super::context("[65535]").is_err());
+        assert!(super::context("[13,67]").is_err());
+        assert!(super::context(r#"{"prefix":[]}"#).is_err());
+        assert!(super::context(r#"{"ruleset":"standard_2p","prefix":[]}"#).is_err());
+        let terminal = super::context(
+            r#"{"ruleset":"standard_2p_threefold","prefix":[13,67,4,76,13,67,4,76]}"#,
+        )
+        .unwrap();
+        assert_eq!(terminal.terminal_value(), Some(0.));
         assert!(super::context(&" ".repeat(2049)).is_err());
     }
 }

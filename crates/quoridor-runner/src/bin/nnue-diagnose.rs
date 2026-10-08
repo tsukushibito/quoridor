@@ -155,10 +155,10 @@ fn feature(c: &SigmaContext) -> Result<Value> {
     let history: Vec<_> = c
         .history_counts()
         .iter()
-        .map(|(k, n)| (k.sigma_string(), *n))
+        .map(|(k, n)| (k.history_string(), *n))
         .collect();
     Ok(
-        json!({"prefix_ply":c.total_ply(),"key":quoridor_core::research::HistoryKey::from(p).sigma_string(),"history":history,
+        json!({"ruleset":c.ruleset().id(),"prefix_ply":c.total_ply(),"key":quoridor_core::research::HistoryKey::from(p).history_string(),"history":history,
     "ids":f.ids,"distance":f.distance,"side":f.side,"wall_distance":[p.wall_distance(0),p.wall_distance(1)],"walls_remaining":p.walls_remaining,
     "pawns":p.pawns,"horizontal":p.horizontal.to_string(),"vertical":p.vertical.to_string(),"terminal":c.terminal_value()}),
     )
@@ -168,11 +168,11 @@ fn input_identity(c: &SigmaContext) -> Result<Value> {
     let h: Vec<_> = c
         .history_counts()
         .iter()
-        .map(|(k, n)| (k.sigma_string(), *n))
+        .map(|(k, n)| (k.history_string(), *n))
         .collect();
     let bytes = serde_json::to_vec(&h)?;
     Ok(
-        json!({"key":quoridor_core::research::HistoryKey::from(c.position()).sigma_string(),"side":c.position().turn,"history_SHA":format!("{:x}",Sha256::digest(bytes))}),
+        json!({"ruleset":c.ruleset().id(),"key":quoridor_core::research::HistoryKey::from(c.position()).history_string(),"side":c.position().turn,"history_SHA":format!("{:x}",Sha256::digest(bytes))}),
     )
 }
 fn save(p: &PathBuf, x: &Value) -> Result<()> {

@@ -1,4 +1,18 @@
+use quoridor_core::research::Ruleset;
 use serde::{Deserialize, Serialize};
+
+pub(crate) mod ruleset_serde {
+    use super::Ruleset;
+    use serde::{Deserialize, Deserializer, Serializer};
+    pub fn serialize<S: Serializer>(value: &Ruleset, serializer: S) -> Result<S::Ok, S::Error> {
+        serializer.serialize_str(value.config_name())
+    }
+    pub fn deserialize<'de, D: Deserializer<'de>>(deserializer: D) -> Result<Ruleset, D::Error> {
+        String::deserialize(deserializer)?
+            .parse()
+            .map_err(serde::de::Error::custom)
+    }
+}
 use std::{
     path::PathBuf,
     time::{SystemTime, UNIX_EPOCH},
@@ -60,6 +74,9 @@ fn search_bytes() -> usize {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct Config {
+    /// Every new research config explicitly declares the supplementary threefold convention.
+    #[serde(with = "ruleset_serde")]
+    pub ruleset: Ruleset,
     pub run_id: String,
     pub output: PathBuf,
     #[serde(default = "games")]

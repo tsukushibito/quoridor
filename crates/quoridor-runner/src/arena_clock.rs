@@ -24,40 +24,34 @@ pub enum Failure {
     Unclassified,
 }
 pub fn failure_from_reason(reason: &str) -> Failure {
-    if reason.starts_with("invalid_opening") {
-        Failure::InvalidPrefix
-    } else if reason.starts_with("initialization") {
-        Failure::Initialization
-    } else if reason.contains("wall_limit") {
-        Failure::JobBudget
-    } else if reason == "deadline" {
-        Failure::Deadline
-    } else if reason == "memory_limit" {
-        Failure::MemoryLimit
-    } else if reason.contains("output") {
-        Failure::OutputLimit
-    } else if reason == "worker_missing_outcome" {
-        Failure::WorkerMissing
-    } else if reason.contains("not_started") {
-        Failure::NotStarted
-    } else if reason == "paused" || reason == "cancelled" {
-        Failure::Cancelled
-    } else if reason == "ply_cap_before_terminal" {
-        Failure::PlyCap
-    } else if reason == "no_completed_alpha_beta_iteration" || reason == "no_completed_action" {
-        Failure::NoCompletedIteration
-    } else if reason == "no_completed_mcts_simulation" {
-        Failure::NoCompletedSimulation
-    } else if reason.starts_with("inference:")
-        || reason == "worker_panicked"
-        || reason == "backend_output_shape"
-        || reason == "invalid_inference"
-    {
-        Failure::EngineError
-    } else {
-        Failure::Unclassified
+    // Classify the machine code, never arbitrary words in backend/IO detail.
+    let machine = reason
+        .split_once(':')
+        .map_or(reason, |(machine, _)| machine);
+    match machine {
+        "invalid_opening" => Failure::InvalidPrefix,
+        "initialization" => Failure::Initialization,
+        "wall_limit" => Failure::JobBudget,
+        "deadline" => Failure::Deadline,
+        "memory_limit" => Failure::MemoryLimit,
+        "output_limit" | "output_journal" | "output_forecast_limit" | "dataset_write" => {
+            Failure::OutputLimit
+        }
+        "worker_missing_outcome" => Failure::WorkerMissing,
+        "not_started" | "worker_not_started" | "not_started_cancelled" => Failure::NotStarted,
+        "paused" | "cancelled" => Failure::Cancelled,
+        "ply_cap_before_terminal" => Failure::PlyCap,
+        "no_completed_alpha_beta_iteration" | "no_completed_action" => {
+            Failure::NoCompletedIteration
+        }
+        "no_completed_mcts_simulation" => Failure::NoCompletedSimulation,
+        "inference" | "worker_panicked" | "backend_output_shape" | "invalid_inference" => {
+            Failure::EngineError
+        }
+        _ => Failure::Unclassified,
     }
 }
+
 pub fn forfeitable(f: Failure) -> bool {
     matches!(
         f,
@@ -261,5 +255,46 @@ mod completion_tests {
         r.stop = StopReason::Cancelled;
         c.select(&mut r);
         assert_eq!(r.completed_depth, 0);
+    }
+}
+
+#[cfg(test)]
+mod research_threefold_failure_tests {
+    use super::*;
+    #[test]
+    fn research_threefold_maintenance_machine_reason_retains_backend_cause() {
+        for reason in [
+            "backend_output_shape",
+            "inference:invalid output size",
+            "inference:output_limit mentioned in backend detail",
+            "worker_panicked:output writer detail",
+        ] {
+            assert_eq!(failure_from_reason(reason), Failure::EngineError);
+        }
+        for reason in [
+            "output_limit:detail",
+            "output_journal:disk failure",
+            "output_forecast_limit",
+            "dataset_write:io",
+        ] {
+            assert_eq!(failure_from_reason(reason), Failure::OutputLimit);
+        }
+        assert_eq!(
+            failure_from_reason("deadline:output detail"),
+            Failure::Deadline
+        );
+        assert_eq!(failure_from_reason("wall_limit"), Failure::JobBudget);
+        assert_eq!(
+            failure_from_reason("memory_limit:backend detail"),
+            Failure::MemoryLimit
+        );
+        for reason in [
+            "not_started:output detail",
+            "not_started_cancelled",
+            "not_started_cancelled:output detail",
+        ] {
+            assert_eq!(failure_from_reason(reason), Failure::NotStarted);
+        }
+        assert_eq!(failure_from_reason("unknown:output"), Failure::Unclassified);
     }
 }

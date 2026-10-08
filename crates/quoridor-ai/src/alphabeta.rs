@@ -443,6 +443,7 @@ pub struct SearchResult {
 // Zobrist/position-only keys are invalid for Sigma's repetition exclusion rule.
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 struct Key {
+    ruleset: quoridor_core::research::Ruleset,
     pawns: [u8; 2],
     walls: [u8; 2],
     horizontal: u64,
@@ -451,12 +452,13 @@ struct Key {
     winner: Option<u8>,
     ply: u16,
     synthetic: bool,
-    history: Vec<([u8; 2], u8, u64, u64, u16)>,
+    history: Vec<([u8; 2], [u8; 2], u8, u64, u64, u16)>,
 }
 impl Key {
     fn of(c: &SigmaContext) -> Self {
         let p = c.position();
         Self {
+            ruleset: c.ruleset(),
             pawns: p.pawns,
             walls: p.walls_remaining,
             horizontal: p.horizontal,
@@ -468,7 +470,7 @@ impl Key {
             history: c
                 .history_counts()
                 .into_iter()
-                .map(|(k, n)| (k.pawns, k.turn, k.horizontal, k.vertical, n))
+                .map(|(k, n)| (k.pawns, k.stocks, k.turn, k.horizontal, k.vertical, n))
                 .collect(),
         }
     }
@@ -712,9 +714,12 @@ impl Search<'_> {
         let mut a = self.child_buffers.get_mut(ply).and_then(Option::take);
         // The restore happens even when evaluation, budget or cancellation fails.
         let result = (|| {
-            self.eval.advance_move_context(parent, c, &undo, &mut a)?;
-            if a.is_some() {
-                self.stats.delta_updates += 1;
+            // True goal/threefold leaves bypass FT and head evaluation as well.
+            if c.terminal_value().is_none() {
+                self.eval.advance_move_context(parent, c, &undo, &mut a)?;
+                if a.is_some() {
+                    self.stats.delta_updates += 1;
+                }
             }
             self.control()?;
             self.negamax(c, a.as_ref(), depth, -window[1], -window[0], ply)
@@ -1198,7 +1203,7 @@ mod persistent_tt_tests {
     fn ns(name: &str) -> SearchNamespace {
         SearchNamespace {
             evaluator: name.into(),
-            rules: "RuleA-fullhistory-totalply-v1".into(),
+            rules: "research-standard-2p-threefold-goal-first-v1".into(),
             selectivity: "fullwidth-PVS-MPC-OFF-v1".into(),
         }
     }
@@ -1298,20 +1303,41 @@ mod persistent_tt_tests {
         let p = Position::default();
         let a = SigmaContext::from_counts(
             p,
-            2,
-            vec![(p.into(), 1), (HistoryKey::from(p.play(13).unwrap()), 2)],
+            4,
+            vec![
+                (p.into(), 1),
+                (
+                    HistoryKey {
+                        turn: 0,
+                        ..HistoryKey::from(p.play(5).unwrap())
+                    },
+                    2,
+                ),
+                (HistoryKey::from(p.play(13).unwrap()), 2),
+            ],
         )
         .unwrap();
         let b = SigmaContext::from_counts(
             p,
-            2,
-            vec![(p.into(), 1), (HistoryKey::from(p.play(3).unwrap()), 2)],
+            4,
+            vec![
+                (p.into(), 1),
+                (
+                    HistoryKey {
+                        turn: 0,
+                        ..HistoryKey::from(p.play(5).unwrap())
+                    },
+                    2,
+                ),
+                (HistoryKey::from(p.play(3).unwrap()), 2),
+            ],
         )
         .unwrap();
         a.validate_normal().unwrap();
         b.validate_normal().unwrap();
         assert_ne!(Key::of(&a), Key::of(&b));
-        assert!(!a.legal_ids().contains(&13));
+        assert!(a.legal_ids().contains(&13));
+        assert_eq!(a.play(13).unwrap().terminal_value(), Some(0.));
         assert!(b.legal_ids().contains(&13));
         let mut t = Table::persistent(1).unwrap();
         t.next_generation();
@@ -2217,7 +2243,7 @@ mod merged_session_pool_tests {
     fn namespace() -> SearchNamespace {
         SearchNamespace {
             evaluator: "merged-pool-NN0".into(),
-            rules: "Sigma-RuleA-full-history-terminal-ply-v1".into(),
+            rules: "research-standard-2p-threefold-goal-first-v1".into(),
             selectivity: "fullwidth-PVS-MPC-OFF-v1".into(),
         }
     }
@@ -2300,5 +2326,112 @@ mod merged_session_pool_tests {
         assert_eq!(root.history_counts(), history);
         assert_eq!(root.position(), position);
         assert_eq!(session.tt_capacity(), (64, 1048576));
+    }
+}
+
+#[cfg(test)]
+mod research_threefold_tests {
+    use super::*;
+    use std::sync::atomic::AtomicU64;
+    include!("../../quoridor-core/tests/fixtures/research_threefold.rs");
+    struct Probe {
+        calls: AtomicU64,
+        fail: bool,
+    }
+    impl StaticEvaluator for Probe {
+        fn prepare_context(&self, c: &SigmaContext) -> Result<Option<EvalAccumulator>> {
+            assert!(c.terminal_value().is_none(), "terminal FT setup forbidden");
+            Ok(None)
+        }
+        fn evaluate(&self, c: &SigmaContext, _: Option<&EvalAccumulator>) -> Result<f32> {
+            assert!(
+                c.terminal_value().is_none(),
+                "terminal evaluation forbidden"
+            );
+            self.calls.fetch_add(1, Ordering::Relaxed);
+            if self.fail {
+                Err(SearchError::Evaluation("controlled fixture".into()))
+            } else {
+                Ok(0.5)
+            }
+        }
+    }
+    fn limits() -> SearchLimits {
+        SearchLimits {
+            max_depth: 1,
+            max_nodes: 1000,
+            time_limit: None,
+            tt_entries: 128,
+            use_pvs: true,
+            use_tt: true,
+        }
+    }
+    #[test]
+    fn research_threefold_terminal_bypass_and_reversible_error_cancel() {
+        let parent = SigmaContext::from_prefix(&[13, 67, 4, 76, 13, 67, 4]).unwrap();
+        let before = (
+            parent.position(),
+            parent.history_counts(),
+            parent.total_ply(),
+        );
+        let eval = Probe {
+            calls: AtomicU64::new(0),
+            fail: false,
+        };
+        let result = search(&parent, &eval, &limits(), &AtomicBool::new(false)).unwrap();
+        assert_eq!(result.action, Some(76));
+        assert_eq!(result.value, Some(0.));
+        assert!(result.stats.terminal > 0);
+        let terminal = parent.play(76).unwrap();
+        let old_calls = eval.calls.load(Ordering::Relaxed);
+        let result = search(&terminal, &eval, &limits(), &AtomicBool::new(false)).unwrap();
+        assert_eq!(result.stop, StopReason::Terminal);
+        assert_eq!(result.value, Some(0.));
+        assert_eq!(eval.calls.load(Ordering::Relaxed), old_calls);
+        let failed = Probe {
+            calls: AtomicU64::new(0),
+            fail: true,
+        };
+        assert!(search(&parent, &failed, &limits(), &AtomicBool::new(false)).is_err());
+        let cancelled = search(&parent, &eval, &limits(), &AtomicBool::new(true)).unwrap();
+        assert_eq!(cancelled.stop, StopReason::Cancelled);
+        assert_eq!(
+            (
+                parent.position(),
+                parent.history_counts(),
+                parent.total_ply()
+            ),
+            before
+        );
+    }
+    #[test]
+    fn research_threefold_tt_full_history_and_true_boundary_terminals() {
+        let root = SigmaContext::from_prefix(&[]).unwrap();
+        let second = SigmaContext::from_prefix(&[13, 67, 4, 76]).unwrap();
+        assert_eq!(root.position(), second.position());
+        assert_ne!(Key::of(&root), Key::of(&second));
+        assert_eq!(
+            Key::of(&second).ruleset.id(),
+            "research-standard-2p-threefold-goal-first-v1"
+        );
+        let probe = Probe {
+            calls: AtomicU64::new(0),
+            fail: false,
+        };
+        for (prefix, terminal) in [
+            (&NONREPEAT_CAP200, false),
+            (&REPEAT_BOUNDARY200, true),
+            (&GOAL_BOUNDARY200, true),
+        ] {
+            let c = SigmaContext::from_prefix(prefix).unwrap();
+            let old_calls = probe.calls.load(Ordering::Relaxed);
+            let r = search(&c, &probe, &limits(), &AtomicBool::new(false)).unwrap();
+            assert_eq!(r.stop == StopReason::Terminal, terminal);
+            if terminal {
+                assert_eq!(probe.calls.load(Ordering::Relaxed), old_calls);
+            } else {
+                assert!(r.action.is_some());
+            }
+        }
     }
 }

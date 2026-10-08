@@ -63,7 +63,7 @@ fn config(name: &str) -> Config {
             .unwrap()
             .as_nanos()
     ));
-    serde_json::from_value(serde_json::json!({"run_id":name,"output":output,"games":3,"workers":1,"active_games":3,"max_batch":8,"simulations":4,"opening_plies":0,"max_plies":2,"host_ram_reserve":0,"max_memory_bytes":1073741824,"engines":[{"kind":"mcts"}],"inference":{"backend":"ort","model":"unused","model_sha":"0".repeat(64),"library":"unused"}})).unwrap()
+    serde_json::from_value(serde_json::json!({"ruleset":"standard_2p_threefold","run_id":name,"output":output,"games":3,"workers":1,"active_games":3,"max_batch":8,"simulations":4,"opening_plies":0,"max_plies":2,"host_ram_reserve":0,"max_memory_bytes":1073741824,"engines":[{"kind":"mcts"}],"inference":{"backend":"ort","model":"unused","model_sha":"0".repeat(64),"library":"unused"}})).unwrap()
 }
 fn cleanup(c: &Config) {
     std::fs::remove_dir_all(&c.output).unwrap();

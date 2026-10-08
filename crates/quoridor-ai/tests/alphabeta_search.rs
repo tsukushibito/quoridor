@@ -111,14 +111,45 @@ fn completed_wins_strictly_outrank_saturated_nonterminal_values() {
 }
 #[test]
 fn repetition_histories_change_legal_moves_and_are_part_of_tt_identity() {
-    // Same current board/ply, but differing history prohibits a pawn successor.
+    // Same board/ply/legal moves, but differing history makes different successors threefold draws.
     let p = Position::default();
     let successor = p.play(13).unwrap();
     let k = HistoryKey::from(successor);
-    let a = SigmaContext::from_counts(p, 2, vec![(p.into(), 1), (k, 2)]).unwrap();
+    let a = SigmaContext::from_counts(
+        p,
+        4,
+        vec![
+            (p.into(), 1),
+            (
+                HistoryKey {
+                    turn: 0,
+                    ..HistoryKey::from(p.play(5).unwrap())
+                },
+                2,
+            ),
+            (k, 2),
+        ],
+    )
+    .unwrap();
     let other = HistoryKey::from(p.play(3).unwrap());
-    let b = SigmaContext::from_counts(p, 2, vec![(p.into(), 1), (other, 2)]).unwrap();
-    assert!(!a.legal_ids().contains(&13));
+    let b = SigmaContext::from_counts(
+        p,
+        4,
+        vec![
+            (p.into(), 1),
+            (
+                HistoryKey {
+                    turn: 0,
+                    ..HistoryKey::from(p.play(5).unwrap())
+                },
+                2,
+            ),
+            (other, 2),
+        ],
+    )
+    .unwrap();
+    assert!(a.legal_ids().contains(&13));
+    assert_eq!(a.play(13).unwrap().terminal_value(), Some(0.));
     assert!(b.legal_ids().contains(&13));
     let e = DistanceEvaluator::new(0., 8.);
     for c in [a, b] {

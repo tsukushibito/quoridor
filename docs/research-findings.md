@@ -7,6 +7,8 @@
 直前の暫定self-play RuleA/評価official-only指示を置換し、331の同担当へ新規約migration、334のorderingには実ruleversionの凍結、333/maintenanceには使用版と製品境界の区別を実steerした。旧327の3W13L/4W12L・332分析・331旧4機能windowはRuleA-onlyの不変証拠で、新規約へ読み替えない。規約変更がNNUEのvalue問題を解決する証拠もない。native/Torch/head数値不変範囲は再用し、新legal/history/terminal/caller/private版だけ確認する。旧D/全suite/book再選定/label生成を自動追加せず、parent323pause・封印/defaultを維持する。
 331のserial-shared CPU sourceは停止済みresources/runtime2パスをbyte/SHA/mode一致でmainへ統合した。変更release・3新NN0 fixture・Clippyは成功し、旧RuleAの4機能windowは47Sigma要求、完成simulation21/24、各late1を捨て、4合法手を100ms前に受理した。4件とも意図したply capのUNKNOWNで、16科学対局や公式ルールの資格ではない。全directwait/cleanup[]、既失敗費も保持する。[main受付と使用範囲](../research-data/ai-sigma/arena-evaluation/sigma-timed-v1/serial-shared-main-result.json)。
 
+停止した新規約の32経路は、mainの統合前後SHA/mode一致とscoped整形を確認して統合した。core/alpha/MCTSの合法第三到着draw・goal優先、history/TT namespace、callerの200cap UNKNOWN、config/receipt/data provenance、失敗原因保持とbounded history APIが対象である。既18 affected Rust testsと前版7callerの成功は元の1.98工程・範囲に限って再用する。残るarena/Clippyと再作成後1.99のartifact lifetime・全費、new private/live caller/strength/Wasmは未資格であり、ソース統合から成功や対局開始を推論しない。探索担当の旧RuleA性能質問は既存worktreeの停止した19経路に固定し、新mainへ無言で切り替えない。[正確なsource受付と未充足条件](../research-data/ai-sigma/arena-evaluation/sigma-timed-v1/unified-main-source-intake.json)。
+
 2026-10-08更新。[研究目標](design/ai-sigma-research-goal.md)はNNUE型Quoridor AIの最高棋力。Sigma同等は段階目標・比較基準であり、最高棋力と正式な同等水準は未立証。現行の工程・資源許可は[前向き実行枠](../research-data/ai-sigma/execution-autonomy-20261007.json)と[比較規約](design/ai-sigma-comparison-protocol.md)へ束縛する。公開Sigma全量供給・学習pipelineは保守対象だが、323の学習は人間の明示pauseを維持し、source保守や新規約の採択でfit・label生成を再開しない。[旧継続文書](design/ai-sigma-continuation-20261001.md)はその時点の許可と経緯を示す。本書を観測・限界・競合説明・次の人間判断の正本とし、担当・状態・依存はBeads、仕様は[設計](README.md)、数値と科学記録は原成果物へ置く。
 
 ## 学習の適合と汎化

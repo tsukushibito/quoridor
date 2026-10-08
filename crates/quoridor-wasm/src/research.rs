@@ -100,7 +100,7 @@ fn entries(c: &SigmaContext) -> Vec<(String, u16)> {
     let mut h: Vec<_> = c
         .history_counts()
         .iter()
-        .map(|(k, n)| (k.sigma_string(), *n))
+        .map(|(k, n)| (k.history_string(), *n))
         .collect();
     h.sort();
     h
@@ -125,14 +125,17 @@ fn state(c: &SigmaContext) -> Value {
     for &id in &raw {
         mask[rust_to_sigma(p, id).unwrap() as usize] = 1;
     }
-    let raw_draw = c.total_ply() >= 200 || raw.is_empty();
-    json!({"board":board(p),"total_ply":c.total_ply(),"history_key":HistoryKey::from(p).sigma_string(),"history_counts":entries(c),"current_count":c.count(p.into()),"raw_rust_ids":raw,"effective_rust_ids":c.legal_ids(),"sigma_order_mapping":mapped,"mask136":mask.to_vec(),"canonical_legal_indices":order.iter().map(|&id|{let s=rust_to_sigma(p,id).unwrap();if p.turn==1 {perm[s as usize]} else {s}}).collect::<Vec<_>>(),"permutation136":perm.to_vec(),"features_bits":features(p).map(f32::to_bits).to_vec(),"terminal":{"winner":p.winner.map_or(0,|w|w+1),"raw_is_drawn":raw_draw,"raw_is_finished":p.winner.is_some()||raw_draw,"side_to_move_value":c.terminal_value()},"wall_distances":[p.wall_distance(0),p.wall_distance(1)]})
+    let raw_draw = c.is_repetition_draw();
+    json!({"board":board(p),"total_ply":c.total_ply(),"history_key":HistoryKey::from(p).history_string(),"history_counts":entries(c),"current_count":c.count(p.into()),"raw_rust_ids":raw,"effective_rust_ids":c.legal_ids(),"sigma_order_mapping":mapped,"mask136":mask.to_vec(),"canonical_legal_indices":order.iter().map(|&id|{let s=rust_to_sigma(p,id).unwrap();if p.turn==1 {perm[s as usize]} else {s}}).collect::<Vec<_>>(),"permutation136":perm.to_vec(),"features_bits":features(p).map(f32::to_bits).to_vec(),"terminal":{"winner":p.winner.map_or(0,|w|w+1),"raw_is_drawn":raw_draw,"raw_is_finished":p.winner.is_some()||raw_draw,"side_to_move_value":c.terminal_value()},"wall_distances":[p.wall_distance(0),p.wall_distance(1)]})
 }
 pub fn diagnose(input: &str) -> Result<String, String> {
     if input.len() > 4 * 1024 * 1024 {
         return Err("INPUT_TOO_LARGE".into());
     }
     let data: Value = serde_json::from_str(input).map_err(|e| e.to_string())?;
+    if data["ruleset"] != "standard_2p_threefold" {
+        return Err("EXPLICIT_CURRENT_RESEARCH_RULESET_REQUIRED".into());
+    }
     let fixtures = data["fixtures"]
         .as_array()
         .ok_or("fixtures array required")?;
@@ -148,28 +151,35 @@ pub fn diagnose(input: &str) -> Result<String, String> {
         for a in f["legal_prefix"].as_array().unwrap() {
             let id = action_id(prefix.position(), a);
             actions.push(id);
-            prefix = prefix.play(id).expect("legal Sigma prefix");
+            prefix = prefix
+                .play(id)
+                .map_err(|e| format!("unsupported research prefix: {e}"))?;
         }
         let context = if class == "legal-replay" {
-            SigmaContext::from_prefix(&actions).unwrap()
+            SigmaContext::from_prefix(&actions).map_err(|e| e.to_string())?
         } else {
             let h = f["history_counts"]
                 .as_array()
                 .unwrap()
                 .iter()
-                .map(|v| {
-                    (
-                        HistoryKey::parse(v[0].as_str().unwrap()).unwrap(),
-                        number(&v[1]),
-                    )
+                .map(|v| -> Result<(HistoryKey, u16), String> {
+                    let spelling = v[0]
+                        .as_str()
+                        .ok_or("explicit stocks-inclusive history key required")?;
+                    let key = HistoryKey::parse(spelling).map_err(|e| e.to_string())?;
+                    let count = v[1]
+                        .as_u64()
+                        .and_then(|n| u16::try_from(n).ok())
+                        .ok_or("bounded explicit history count required")?;
+                    Ok((key, count))
                 })
-                .collect();
+                .collect::<Result<Vec<_>, _>>()?;
             SigmaContext::synthetic_diagnostic(
                 position_from_board(&f["board"]),
                 number(&f["board"]["total_ply"]),
                 h,
             )
-            .unwrap()
+            .map_err(|e| e.to_string())?
         };
         // Prefix/board and history are checked independently of reference features/masks.
         assert_eq!(context.position(), position_from_board(&f["board"]));
@@ -177,7 +187,7 @@ pub fn diagnose(input: &str) -> Result<String, String> {
         let mut transitions = Vec::new();
         for id in context.sigma_legal_order() {
             let next = context.raw_next_diagnostic(id).unwrap();
-            transitions.push(json!({"sigma136":rust_to_sigma(context.position(),id).unwrap(),"rust209":id,"board":board(next.position()),"total_ply":next.total_ply(),"history_counts":entries(&next),"history_key":HistoryKey::from(next.position()).sigma_string(),"raw_is_drawn":next.total_ply()>=200||next.raw_legal_ids().is_empty(),"winner":next.position().winner.map_or(0,|w|w+1)}));
+            transitions.push(json!({"sigma136":rust_to_sigma(context.position(),id).unwrap(),"rust209":id,"board":board(next.position()),"total_ply":next.total_ply(),"history_counts":entries(&next),"history_key":HistoryKey::from(next.position()).history_string(),"raw_is_drawn":next.is_repetition_draw(),"winner":next.position().winner.map_or(0,|w|w+1)}));
         }
         let mut probes = Vec::new();
         for probe in f["probes"].as_array().unwrap() {

@@ -1,12 +1,11 @@
 //! Arena contracts and replay evidence. Rules and search mathematics live in their crates.
 use crate::config::Config;
-use quoridor_core::research::SigmaContext;
+use quoridor_core::research::{Ruleset, SigmaContext};
 use quoridor_data::Result;
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeSet;
 
 pub const SCHEMA: &str = "quoridor-arena-v2";
-pub const RULES: &str = "Sigma-RuleA-full-history-terminal-ply-v1";
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
@@ -317,13 +316,14 @@ pub struct Replay {
     pub history_sha256: String,
     pub immediate_winning_actions: Vec<u16>,
 }
-pub fn replay(prefix: &[u16]) -> Result<Replay> {
-    let c = SigmaContext::from_prefix(prefix).map_err(|e| format!("prefix replay: {e}"))?;
+pub fn replay(prefix: &[u16], ruleset: Ruleset) -> Result<Replay> {
+    let c = SigmaContext::from_prefix_with_rules(prefix, ruleset)
+        .map_err(|e| format!("prefix replay: {e}"))?;
     let p = c.position();
     let history: Vec<_> = c
         .history_counts()
         .into_iter()
-        .map(|(k, n)| (k.sigma_string(), n))
+        .map(|(k, n)| (k.history_string(), n))
         .collect();
     let terminal = c.terminal_value();
     let immediate_winning_actions = if terminal.is_none() {

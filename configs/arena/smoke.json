@@ -11,8 +11,18 @@
   "max_memory_bytes": 1073741824,
   "max_output_bytes": 8388608,
   "engines": [
-    { "kind": "distance", "depth": 1, "max_nodes": 1000, "time_ms": 100 },
-    { "kind": "distance", "depth": 1, "max_nodes": 1000, "time_ms": 100 }
+    {
+      "kind": "distance",
+      "depth": 1,
+      "max_nodes": 1000,
+      "time_ms": 100
+    },
+    {
+      "kind": "distance",
+      "depth": 1,
+      "max_nodes": 1000,
+      "time_ms": 100
+    }
   ],
   "arena": {
     "comparison": "functional",
@@ -42,5 +52,6 @@
         }
       ]
     }
-  }
+  },
+  "ruleset": "standard_2p_threefold"
 }

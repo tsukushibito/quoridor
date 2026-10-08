@@ -4,7 +4,7 @@ use quoridor_runner::{
     arena_clock::{self, Failure},
     arena_statistics::{self, Slot},
     config::Config,
-    runtime::{Outcome, Rng},
+    runtime::Outcome,
 };
 
 const GOAL: &[u16] = &[13, 67, 22, 58, 31, 49, 40, 48, 49, 39, 58, 30, 67, 21, 76];
@@ -16,7 +16,9 @@ fn slot(game: usize, cohort: &str) -> Slot {
         cohort: cohort.into(),
         lineage: format!("lineage-{}", game / 2),
         opening: Vec::new(),
-        replay: Some(arena::replay(&[]).unwrap()),
+        replay: Some(
+            arena::replay(&[], quoridor_core::research::Ruleset::Standard2pThreefold).unwrap(),
+        ),
         replay_error: None,
         reference_q_stm: None,
         reference_q_band: None,
@@ -47,7 +49,8 @@ fn functional_config() -> Config {
 }
 #[test]
 fn legal_replay_binds_every_history_state_walls_side_and_terminal() {
-    let initial = arena::replay(&[]).unwrap();
+    let initial =
+        arena::replay(&[], quoridor_core::research::Ruleset::Standard2pThreefold).unwrap();
     assert_eq!(initial.pawns, [4, 76]);
     assert_eq!(initial.turn, 0);
     assert_eq!(
@@ -58,10 +61,18 @@ fn legal_replay_binds_every_history_state_walls_side_and_terminal() {
             .sum::<usize>(),
         1
     );
-    let walls = arena::replay(&[13, 67, 81, 146]).unwrap();
+    let walls = arena::replay(
+        &[13, 67, 81, 146],
+        quoridor_core::research::Ruleset::Standard2pThreefold,
+    )
+    .unwrap();
     assert_eq!(walls.walls_left, [9, 9]);
     assert_eq!(walls.total_ply, 4);
-    let looped = arena::replay(&[13, 67, 4, 76]).unwrap();
+    let looped = arena::replay(
+        &[13, 67, 4, 76],
+        quoridor_core::research::Ruleset::Standard2pThreefold,
+    )
+    .unwrap();
     assert_eq!(initial.pawns, looped.pawns);
     assert_eq!(initial.turn, looped.turn);
     assert_ne!(initial.history_sha256, looped.history_sha256);
@@ -74,20 +85,43 @@ fn legal_replay_binds_every_history_state_walls_side_and_terminal() {
         5
     );
     assert_eq!(
-        arena::replay(&GOAL[..14])
-            .unwrap()
-            .immediate_winning_actions,
+        arena::replay(
+            &GOAL[..14],
+            quoridor_core::research::Ruleset::Standard2pThreefold
+        )
+        .unwrap()
+        .immediate_winning_actions,
         vec![76]
     );
-    let goal = arena::replay(GOAL).unwrap();
+    let goal = arena::replay(GOAL, quoridor_core::research::Ruleset::Standard2pThreefold).unwrap();
     assert_eq!(goal.winner, Some(0));
     assert_eq!(goal.terminal_value_stm, Some(-1.));
     assert!(goal.immediate_winning_actions.is_empty());
-    assert!(arena::replay(&[999]).is_err());
-    assert!(arena::replay(&[13, 67, 4, 76, 13, 67, 4, 76]).is_err());
+    assert!(
+        arena::replay(
+            &[999],
+            quoridor_core::research::Ruleset::Standard2pThreefold
+        )
+        .is_err()
+    );
+    assert_eq!(
+        arena::replay(
+            &[13, 67, 4, 76, 13, 67, 4, 76],
+            quoridor_core::research::Ruleset::Standard2pThreefold
+        )
+        .unwrap()
+        .terminal_value_stm,
+        Some(0.)
+    );
     let mut post_goal = GOAL.to_vec();
     post_goal.push(12);
-    assert!(arena::replay(&post_goal).is_err());
+    assert!(
+        arena::replay(
+            &post_goal,
+            quoridor_core::research::Ruleset::Standard2pThreefold
+        )
+        .is_err()
+    );
 }
 #[test]
 fn side_mapping_and_same_history_pair_are_not_horizontal_augmentation() {
@@ -215,29 +249,22 @@ fn empty_allunknown_true_draw_and_deterministic_pair_bootstrap() {
     assert!(arena_statistics::summarize(&slots, &invalid, 7, 100).is_err());
 }
 #[test]
-fn rule_ply200_draw_is_replayed_from_initial_with_full_history() {
-    let mut c = SigmaContext::from_prefix(&[]).unwrap();
-    let mut prefix = Vec::new();
-    let mut rng = Rng::new(320);
-    for _ in 0..200 {
-        let turn = c.position().turn;
-        let legal: Vec<_> = c
-            .legal_ids()
-            .into_iter()
-            .filter(|&a| a < 81 && if turn == 0 { a / 9 < 4 } else { a / 9 > 4 })
-            .collect();
-        assert!(!legal.is_empty());
-        let a = legal[rng.next_u64() as usize % legal.len()];
-        c = c.play(a).unwrap();
-        prefix.push(a);
-    }
-    let r = arena::replay(&prefix).unwrap();
-    assert_eq!(r.total_ply, 200);
+fn research_threefold_replay_enters_legal_third_and_refuses_postterminal() {
+    let r = arena::replay(
+        &[13, 67, 4, 76, 13, 67, 4, 76],
+        quoridor_core::research::Ruleset::Standard2pThreefold,
+    )
+    .unwrap();
+    assert_eq!(r.total_ply, 8);
     assert_eq!(r.terminal_value_stm, Some(0.));
     assert_eq!(r.winner, None);
-    assert_eq!(
-        r.history.iter().map(|(_, n)| *n as usize).sum::<usize>(),
-        201
+    assert_eq!(r.history.iter().map(|(_, n)| *n as usize).sum::<usize>(), 9);
+    assert!(
+        arena::replay(
+            &[13, 67, 4, 76, 13, 67, 4, 76, 13],
+            quoridor_core::research::Ruleset::Standard2pThreefold
+        )
+        .is_err()
     );
 }
 #[test]
