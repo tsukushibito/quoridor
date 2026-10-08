@@ -5,6 +5,8 @@ import asyncio
 import importlib.util
 import json
 import os
+import tempfile
+import sys
 from pathlib import Path
 
 _spec = importlib.util.spec_from_file_location(
@@ -45,13 +47,23 @@ def read_json(path):
 
 def atomic_json(path, value):
     path = Path(path)
-    temporary = path.with_name(path.name + ".tmp")
-    with temporary.open("w") as stream:
-        json.dump(value, stream, ensure_ascii=False, indent=2)
-        stream.write("\n")
-        stream.flush()
-        os.fsync(stream.fileno())
-    os.replace(temporary, path)
+    fd, name = tempfile.mkstemp(prefix=path.name + ".", suffix=".tmp", dir=path.parent)
+    temporary = Path(name)
+    try:
+        with os.fdopen(fd, "w") as stream:
+            json.dump(value, stream, ensure_ascii=False, indent=2)
+            stream.write("\n")
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, path)
+    finally:
+        primary = sys.exception()
+        try:
+            temporary.unlink(missing_ok=True)
+        except BaseException as error:
+            if primary is None:
+                raise
+            primary.add_note("atomic JSON temporary cleanup failed: " + repr(error))
     fd = os.open(path.parent, os.O_RDONLY | os.O_DIRECTORY)
     try:
         os.fsync(fd)
@@ -79,9 +91,10 @@ class AppBackend:
     def __init__(self, root):
         self.root = root
 
-    def issue(self, issue):
+    def issue(self, issue, *, timeout=30):
         result = client.command_json(
-            ["bash", str(self.root / "scripts/dev/beads.sh"), "show", issue, "--json"]
+            ["bash", str(self.root / "scripts/dev/beads.sh"), "show", issue, "--json"],
+            timeout=timeout,
         )
         item = result[0] if isinstance(result, list) and len(result) == 1 else result
         if not isinstance(item, dict) or item.get("id") != issue:

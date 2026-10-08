@@ -124,11 +124,20 @@ def validate(config, base):
     return config
 
 
-def authority(config, root, backend):
-    """The issue remains owned by the sleeping agent; no claim/close/resume here."""
+CONTROL_READ_SECONDS = 1.0  # Total DB-read latency per authority check, including no-deadline jobs.
+
+
+def authority(config, root, backend, *, horizon, timeout=CONTROL_READ_SECONDS):
+    """Bound one DB check by its caller horizon; preserve pause and ownership."""
+    if horizon is not None:
+        timeout = min(timeout, (runtime.timestamp(horizon) - now()).total_seconds())
+    end = time.monotonic() + timeout
     entry = {"thread_id": config["thread_id"]}
     for issue_id in dict.fromkeys((config["goal_issue"], config["issue"])):
-        item = backend.issue(issue_id)
+        remaining = end - time.monotonic()
+        if remaining <= 0:
+            raise JobError("Authority read budget exhausted")
+        item = backend.issue(issue_id, timeout=remaining)
         if item.get("status") not in ("open", "in_progress") or "paused-by-user" in (
             item.get("labels") or []
         ):
@@ -229,7 +238,7 @@ def execute(directory, config, root, backend):
     )
     write(directory, "state.json", state)
     try:
-        entry = authority(config, root, backend)
+        entry = authority(config, root, backend, horizon=config["end_at"])
         if entry["thread_id"] != state["thread_id"]:
             raise JobError("Recipient identity changed after submission")
         if (directory / "cancel.json").exists() or deadline_reached(config["end_at"]):
@@ -249,6 +258,19 @@ def execute(directory, config, root, backend):
         tail = None
         outcome, error, remaining = "failed", None, []
         known = []
+        child = None
+        direct_fd = None
+        cleanup_errors = []
+
+        def attempt(stage, action, default=None):
+            try:
+                return action()
+            except BaseException as caught:
+                cleanup_errors.append(
+                    {"stage": stage, "type": type(caught).__name__, "message": str(caught)}
+                )
+                return default
+
         try:
             command = subprocess.Popen(
                 config["argv"],
@@ -258,7 +280,10 @@ def execute(directory, config, root, backend):
                 stderr=subprocess.STDOUT,
                 start_new_session=True,
             )
+            direct_fd = os.pidfd_open(command.pid)
             child = runtime.process_identity(command.pid)
+            if child is None:
+                raise JobError("Cannot record child identity; descendant visibility unavailable")
             state.update(phase="running", child=child, started_at=stamp())
             write(directory, "state.json", state)
             tail = TailLog(command.stdout, config["log_max_bytes"])
@@ -278,7 +303,22 @@ def execute(directory, config, root, backend):
                     outcome = "timed_out"
                     break
                 if time.monotonic() >= next_control:
-                    current = authority(config, root, backend)
+                    read_budget = CONTROL_READ_SECONDS
+                    if config["max_runtime_seconds"] is not None:
+                        read_budget = min(
+                            read_budget, started + config["max_runtime_seconds"] - time.monotonic()
+                        )
+                    if config["end_at"] is not None:
+                        read_budget = min(
+                            read_budget,
+                            (runtime.timestamp(config["end_at"]) - now()).total_seconds(),
+                        )
+                    if read_budget <= 0:
+                        outcome = "timed_out"
+                        break
+                    current = authority(
+                        config, root, backend, horizon=config["end_at"], timeout=read_budget
+                    )
                     if current["thread_id"] != state["thread_id"]:
                         raise JobError("Recipient identity changed during execution")
                     next_control = time.monotonic() + config["control_interval_seconds"]
@@ -287,35 +327,98 @@ def execute(directory, config, root, backend):
                 outcome = "succeeded" if command.returncode == 0 else "failed"
         except Exception as caught:
             error, outcome = str(caught), "control_error"
+            if isinstance(caught, subprocess.TimeoutExpired):
+                if (directory / "cancel.json").exists():
+                    outcome = "cancelled"
+                elif deadline_reached(config["end_at"]) or (
+                    config["max_runtime_seconds"] is not None
+                    and time.monotonic() - started >= config["max_runtime_seconds"]
+                ):
+                    outcome = "timed_out"
         finally:
+            members = list(known)
             if command:
-                # The group covers even short-lived parents; recorded identities also
-                # cover long-lived children that move into a separate process group.
-                members = track_descendants(child, known)
-                members += descendants_in_group(command.pid, child)
+                # Keep each cleanup obligation independent, including exact Popen ownership.
+                members = attempt(
+                    "descendant_discovery", lambda: track_descendants(child, known), members
+                )
+                members += (
+                    attempt("group_discovery", lambda: descendants_in_group(command.pid, child), [])
+                    if child
+                    else []
+                )
                 members = list({(x["pid"], x["start_ticks"]): x for x in members}.values())
-                if members:
+
+                def stop_direct(sig, stage):
+                    def send_owned(action):
+                        try:
+                            action()
+                        except ProcessLookupError:
+                            pass
+                        return True
+
+                    if direct_fd is not None and attempt(
+                        stage + "_pidfd",
+                        lambda: send_owned(lambda: signal.pidfd_send_signal(direct_fd, sig)),
+                        False,
+                    ):
+                        return
+                    attempt(stage + "_popen", lambda: send_owned(lambda: command.send_signal(sig)))
+
+                def live_members():
+                    return [x for x in members if runtime.alive(x)]
+
+                running = attempt("direct_poll", lambda: command.poll() is None, True)
+                live = attempt("descendant_observation", live_members, members)
+                if running or live:
                     if outcome == "succeeded":
                         outcome = "cleanup_required"
-                    signal_members(members, signal.SIGTERM)
-                    deadline = time.monotonic() + 2
-                    while time.monotonic() < deadline and any(runtime.alive(x) for x in members):
-                        command.poll()
+                    for member in members:
+                        attempt(
+                            "descendant_term",
+                            lambda member=member: signal_members([member], signal.SIGTERM),
+                        )
+                    if running:
+                        attempt("direct_term", lambda: stop_direct(signal.SIGTERM, "direct_term"))
+                    until = time.monotonic() + 2
+                    while time.monotonic() < until:
+                        running = attempt("direct_poll", lambda: command.poll() is None, True)
+                        live = attempt("descendant_observation", live_members, members)
+                        if not running and not live:
+                            break
                         time.sleep(0.05)
-                    signal_members(members, signal.SIGKILL)
-                try:
-                    command.wait(timeout=3)
-                except subprocess.TimeoutExpired:
-                    error = "Child could not be reaped"
+                    for member in members:
+                        attempt(
+                            "descendant_kill",
+                            lambda member=member: signal_members([member], signal.SIGKILL),
+                        )
+                    if running:
+                        attempt("direct_kill", lambda: stop_direct(signal.SIGKILL, "direct_kill"))
+                attempt("direct_wait", lambda: command.wait(timeout=3))
                 until = time.monotonic() + 1
-                while time.monotonic() < until and any(runtime.alive(x) for x in members):
+                while time.monotonic() < until:
+                    remaining = attempt("remaining_observation", live_members, members)
+                    if not remaining:
+                        break
                     time.sleep(0.05)
-                remaining = [x for x in members if runtime.alive(x)]
+            pipe_open = False
             if tail:
-                tail.thread.join(timeout=1)
-                if tail.thread.is_alive():
-                    error = "Log pipe still open: possible detached descendant"
-                (directory / "output.log").write_bytes(tail.data)
+                attempt("log_join", lambda: tail.thread.join(timeout=1))
+                pipe_open = tail.thread.is_alive()
+                if pipe_open:
+                    cleanup_errors.append(
+                        {
+                            "stage": "log_join",
+                            "type": "JobError",
+                            "message": "Log pipe still open: possible detached descendant",
+                        }
+                    )
+                attempt("log_publish", lambda: (directory / "output.log").write_bytes(tail.data))
+            if command and command.stdout and not pipe_open:
+                attempt("pipe_close", command.stdout.close)
+            if direct_fd is not None:
+                attempt("pidfd_close", lambda: os.close(direct_fd))
+            direct_reaped = command is None or command.returncode is not None
             result = {
                 "job_id": state["job_id"],
                 "outcome": outcome,
@@ -324,15 +427,36 @@ def execute(directory, config, root, backend):
                 "finished_at": stamp(),
                 "wall_seconds": time.monotonic() - started,
                 "remaining": remaining,
+                "direct_child_reaped": direct_reaped,
+                "descendant_visibility": "unavailable" if command and child is None else "observed",
                 "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
-                "cleanup_complete": not remaining and not (tail and tail.thread.is_alive()),
+                "cleanup_complete": direct_reaped
+                and not remaining
+                and not pipe_open
+                and not cleanup_errors
+                and (command is None or child is not None),
+                "cleanup_errors": cleanup_errors,
                 "log_bytes_seen": tail.bytes_seen if tail else 0,
                 "log_bytes_retained": len(tail.data) if tail else 0,
             }
-    write(directory, "result.json", result)
+            if cleanup_errors and outcome == "succeeded":
+                result["outcome"] = "cleanup_required"
+    publication_errors = []
     state.update(phase="finished", updated_at=stamp(), outcome=result["outcome"])
-    write(directory, "state.json", state)
-    write(directory, "notification.json", {"status": "pending", "updated_at": stamp()})
+    for name, value in (
+        ("result.json", result),
+        ("state.json", state),
+        ("notification.json", {"status": "pending", "updated_at": stamp()}),
+    ):
+        try:
+            write(directory, name, value)
+        except BaseException as caught:
+            caught.add_note("job publication: " + name)
+            publication_errors.append(caught)
+    if publication_errors:
+        group = BaseExceptionGroup("job completion publication failures", publication_errors)
+        group.add_note("job completion fallback: " + json.dumps(result))
+        raise group
     return result
 
 
@@ -404,7 +528,9 @@ async def notify_once(directory, config, root, backend):
             write(directory, "notification.json", notification)
             return notification
         try:
-            entry = await asyncio.to_thread(authority, config, root, backend)
+            entry = await asyncio.to_thread(
+                authority, config, root, backend, horizon=config["notify_until"]
+            )
             state = read(directory, "state.json")
             if entry["thread_id"] != state["thread_id"]:
                 raise JobError("Recipient identity changed")
@@ -428,7 +554,9 @@ async def notify_once(directory, config, root, backend):
                         write(directory, "notification.json", notification)
                         return notification
                     # Recheck after network waits; do not introduce a fresh deadline or budget.
-                    final_entry = await asyncio.to_thread(authority, config, root, backend)
+                    final_entry = await asyncio.to_thread(
+                        authority, config, root, backend, horizon=config["notify_until"]
+                    )
                     if final_entry["thread_id"] != state["thread_id"]:
                         raise JobError("Recipient identity changed before delivery")
                     if (
@@ -463,7 +591,11 @@ async def notify_once(directory, config, root, backend):
                     )
                     write(directory, "notification.json", notification)
         except JobError as error:
-            notification.update(status="cancelled", error=str(error), updated_at=stamp())
+            notification.update(
+                status="expired" if deadline_reached(config["notify_until"]) else "cancelled",
+                error=str(error),
+                updated_at=stamp(),
+            )
             write(directory, "notification.json", notification)
         except Exception as error:
             if notification["status"] == "dispatching":
@@ -506,7 +638,7 @@ def run(directory, root, backend):
 
 def submit(path, directory, root, backend):
     config = validate(runtime.read_json(path), path.resolve().parent)
-    entry = authority(config, root, backend)
+    entry = authority(config, root, backend, horizon=config["end_at"])
     if deadline_reached(config["end_at"]):
         raise JobError("Cannot submit an expired job")
     directory.mkdir(parents=True, exist_ok=False)

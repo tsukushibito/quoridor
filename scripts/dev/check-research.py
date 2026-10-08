@@ -22,6 +22,7 @@ PY_FILES = (
     "scripts/dev/research-storage.py",
     "scripts/dev/research-assets.py",
     "scripts/dev/test_research_assets.py",
+    "scripts/dev/test_research_storage.py",
     "scripts/dev/test_manage_worktree.py",
     "scripts/dev/check-research.py",
     "scripts/dev/research-session.py",
@@ -48,6 +49,7 @@ NN0_TESTS = (
     "quoridor_training.test_selected_target",
     "quoridor_training.test_sharded_cache",
     "quoridor_training.test_cycle",
+    "quoridor_training.test_lifecycle",
     "quoridor_training.test_corpus_safety.CorpusSafety",
     "quoridor_training.test_corpus_safety.FreezeSafety",
 )
@@ -167,6 +169,7 @@ def main():
     run(sys.executable, "-B", "tools/research-quality/test_maintenance.py")
     run(sys.executable, "-B", "tools/research-quality/test_quality_entrypoints.py")
     run(sys.executable, "-B", "scripts/dev/test_research_assets.py")
+    run(sys.executable, "-B", "scripts/dev/test_research_storage.py")
     run(sys.executable, "-B", "scripts/dev/test_manage_worktree.py")
     run(sys.executable, "-B", "tools/model-export/test_export.py")
     layout = json.loads((ROOT / "research-paths.json").read_text())

@@ -11,6 +11,8 @@ import stat
 import subprocess
 import time
 
+from .snapshot import write_json
+
 LOG_MAX_BYTES = 1024 * 1024
 POLL_SECONDS = 0.05
 TERM_SECONDS = 2.0
@@ -215,7 +217,7 @@ class GPUResources(CycleResources):
 
 
 def save_record(path, record):
-    path.write_text(json.dumps(record, indent=2, allow_nan=False) + "\n")
+    write_json(path, record)
 
 
 def execute(command, log, deadline, cpu_core=None, resources=None):
@@ -257,7 +259,7 @@ def execute(command, log, deadline, cpu_core=None, resources=None):
         if stage.endswith("_close"):
             handle_closes.append(stage)
         try:
-            action()
+            return action()
         except BaseException as error:
             final_errors.append((stage, error))
 
@@ -330,56 +332,93 @@ def execute(command, log, deadline, cpu_core=None, resources=None):
             final_errors.append(("signal_mask_block", error))
         try:
 
-            def stop_direct(sig):
-                try:
-                    if direct_fd is not None:
-                        signal.pidfd_send_signal(direct_fd, sig)
-                    else:
-                        child.send_signal(sig)
-                except ProcessLookupError:
-                    pass
+            def stop_direct(sig, stage):
+                def send_owned(action):
+                    try:
+                        action()
+                    except ProcessLookupError:
+                        pass
+                    return True
+
+                if direct_fd is not None and attempt_final(
+                    stage + "_pidfd",
+                    lambda: send_owned(lambda: signal.pidfd_send_signal(direct_fd, sig)),
+                ):
+                    return
+                attempt_final(stage + "_popen", lambda: send_owned(lambda: child.send_signal(sig)))
+
+            def observe():
+                return [member for member in owned if alive(member)]
+
+            def discover():
+                nonlocal owned
+                if root:
+                    owned = members(root, owned)
 
             if child:
-                owned = members(root, owned) if root else []
-                direct_running = child.poll() is None
-                if owned or direct_running:
+                attempt_final("descendant_discovery", discover)
+                direct_running = [True]
+                attempt_final(
+                    "direct_poll", lambda: direct_running.__setitem__(0, child.poll() is None)
+                )
+                live = True
+                try:
+                    live = bool(observe())
+                except BaseException as error:
+                    final_errors.append(("descendant_observation", error))
+                if live or direct_running[0]:
                     if record["status"] == "complete":
                         failure = CycleStopped("cycle child left running descendants")
                         record.update(status="failed", error=str(failure))
-                    signal_members(owned, signal.SIGTERM)
-                    if direct_running:
-                        stop_direct(signal.SIGTERM)
+                    for member in owned:
+                        attempt_final(
+                            "descendant_term",
+                            lambda member=member: signal_members([member], signal.SIGTERM),
+                        )
+                    if direct_running[0]:
+                        attempt_final(
+                            "direct_term", lambda: stop_direct(signal.SIGTERM, "direct_term")
+                        )
                     until = time.monotonic() + TERM_SECONDS
-                    while time.monotonic() < until and (
-                        child.poll() is None or any((alive(member) for member in owned))
-                    ):
-                        owned = members(root, owned) if root else []
+                    while time.monotonic() < until:
+                        try:
+                            if child.poll() is not None and not observe():
+                                break
+                        except BaseException as error:
+                            final_errors.append(("cleanup_observation", error))
+                            break
+                        attempt_final("descendant_discovery", discover)
                         if pipe_open:
-                            drain(POLL_SECONDS)
+                            attempt_final("pipe_drain", lambda: drain(POLL_SECONDS))
                         else:
                             time.sleep(POLL_SECONDS)
-                    owned = members(root, owned) if root else []
-                    signal_members(owned, signal.SIGKILL)
-                    if child.poll() is None:
-                        stop_direct(signal.SIGKILL)
-                try:
-                    child.wait(timeout=3)
-                except subprocess.TimeoutExpired:
-                    record["wait_error"] = "cycle child wait failed"
-                    if failure is None:
-                        failure = CycleStopped("cycle child wait failed")
+                    attempt_final("descendant_discovery", discover)
+                    for member in owned:
+                        attempt_final(
+                            "descendant_kill",
+                            lambda member=member: signal_members([member], signal.SIGKILL),
+                        )
+                    # Signal the owned direct pidfd independently even if discovery failed.
+                    attempt_final("direct_kill", lambda: stop_direct(signal.SIGKILL, "direct_kill"))
+                attempt_final("direct_wait", lambda: child.wait(timeout=3))
                 until = time.monotonic() + 1
-                while time.monotonic() < until and (
-                    pipe_open or any((alive(member) for member in owned))
-                ):
+                while time.monotonic() < until:
+                    try:
+                        if not pipe_open and not observe():
+                            break
+                    except BaseException as error:
+                        final_errors.append(("remaining_observation", error))
+                        break
                     if pipe_open:
-                        drain(POLL_SECONDS)
+                        before = len(final_errors)
+                        attempt_final("pipe_drain", lambda: drain(POLL_SECONDS))
+                        if len(final_errors) != before:
+                            break
                     else:
                         time.sleep(POLL_SECONDS)
-                record.update(
-                    exit_code=child.returncode,
-                    remaining=[member for member in owned if alive(member)],
-                )
+                record["exit_code"] = child.returncode
+                record["remaining"] = list(owned)  # Retain UNKNOWN members if observation fails.
+                attempt_final("remaining_observation", lambda: record.update(remaining=observe()))
             direct_reaped = child is None or child.returncode is not None
             record.update(
                 direct_child_reaped=direct_reaped,
@@ -387,7 +426,8 @@ def execute(command, log, deadline, cpu_core=None, resources=None):
                 cleanup_complete=direct_reaped
                 and (child is None or root is not None)
                 and (not record.get("remaining"))
-                and (not pipe_open),
+                and (not pipe_open)
+                and not final_errors,
                 log_bytes_retained=len(tail),
                 wall_seconds=time.monotonic() - started,
             )

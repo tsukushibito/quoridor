@@ -6,4 +6,4 @@ if [[ ! -x "$beads_binary" || ! -f "$BEADS_DIR/metadata.json" ]]; then
   exit 1
 fi
 # Also serialize reads: embedded Dolt opens the store for each CLI process.
-exec flock --timeout 60 "$beads_lock" "$beads_binary" --sandbox "$@"
+exec flock --no-fork --timeout 60 "$beads_lock" "$beads_binary" --sandbox "$@"

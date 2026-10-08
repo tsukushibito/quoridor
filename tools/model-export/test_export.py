@@ -180,6 +180,29 @@ class ExportTests(unittest.TestCase):
         self.assertFalse(self.output.exists())
         self.assertEqual(EXPORT.manifest_path(self.output).read_bytes(), b"existing manifest")
 
+    def test_streaming_digest_matches_empty_small_and_multi_chunk_input(self):
+        for size in (0, 9, 2 * 64 * 1024 + 3):
+            with self.subTest(size=size):
+                payload = b"x" * size
+                self.model.write_bytes(payload)
+                with patch.object(
+                    Path, "read_bytes", side_effect=AssertionError("whole file allocation")
+                ):
+                    self.assertEqual(EXPORT.sha(self.model), hashlib.sha256(payload).hexdigest())
+
+    def test_streaming_digest_closes_input_after_read_failure(self):
+        class Broken(io.BytesIO):
+            def read(self, size):
+                self.assert_size = size
+                raise OSError("read fixture")
+
+        stream = Broken()
+        with patch.object(Path, "open", return_value=stream):
+            with self.assertRaisesRegex(OSError, "read fixture"):
+                EXPORT.sha(self.model)
+        self.assertTrue(stream.closed)
+        self.assertEqual(stream.assert_size, 64 * 1024)
+
 
 if __name__ == "__main__":
     unittest.main()

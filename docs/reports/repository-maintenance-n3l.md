@@ -57,3 +57,9 @@ n3l.2はF01/F02/F03/F04/F15/F16/F20/F22の18変更pathを停止patch `354beb3dee
 snapshotのold/new overlapは今後のlive caller forecastで別途保持し、今回のsynthetic小snapshot検証を任意サイズのpeak証明にしない。実permission値は設定通りだがn3l.2も最初のlight read後の実確認という順序逸脱を記録した。58testsは旧fit/model/nativeの再実行ではない。停止・所有・atomic publicationの高リスク変更は元の独立reviewerへ限定確認を実配分済みで、main採用はそのfixed versionとcaller統合検証を確認後に行う。
 
 324のF07/F08も[停止patch/control](../../.artifacts/repository-maintenance/n3l/data-patch/source-stop.json)へ準備済み。dataset manifest公開成功まで全rawを残し、cleanup失敗には公開済みの事実を含むerrorを返す。collecting readerはchecked iteratorへ委譲しmalformed Arrowを同じResultへ集約する。later shard/manifest失敗raw保全とreader/cacheのmalformed fixture定義を追加、Rustfmt PASS。ただしtypecheck/testはNOT_RUNで、mainにはbefore bytesを復元しており採用していない。原reviewerのsource確認と、supported affected Cargo phaseを経て受け入れる。新builder/harness/TMP/private費を旧cachedfreeとして扱わない。
+
+## Python v2のmain統合
+
+R01（execution end_atとcompletion notify_untilの混同）とR02（pidfd/Popenの二重signal失敗の一方がdurable記録から消える）を同helperが修復し、同独立reviewerが関連境界を確認した。固定combined patch `0c421668b3cebd26ca11bfbd289e2c5948bda98c82bb43e89e6e6e2d3a7ca819` をmainへ適用し、18変更path＋2依存のafter SHA一致を確認した。通知は明示caller horizon、cleanupは各signal/wait/close/publicationを別attemptで保持する。
+
+実mainの通知/authority/dual-signal/snapshot/supply-lifecycle/hashの12focused checksがPASS（body1.9437秒、CPU2/AS512MiB、科学import禁止）、17変更PythonのRuff format/checkとBash構文/diffチェックがPASSした。元58件、producer v2の10件と独立13件は元の限定範囲で再用し、科学/モデルsuiteは再実行しない。対象F01/F02/F03/F04/F15/F16/F20/F22はこの統合で実装・対象確認済み。実OScontainment/latency/family peak/科学jobの資格とは区別する。[exact sourceと検証receipt](../../research-data/repository-maintenance/n3l/python-integration.json)。元review/失敗/権限検証順序deviation/failed費/UNKNOWNは保持。Web/data/runtimeの残りは別の実変更・検証が必要で、parent保守完了とはしない。

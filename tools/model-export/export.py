@@ -12,7 +12,11 @@ from pathlib import Path
 
 
 def sha(path):
-    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+    digest = hashlib.sha256()
+    with Path(path).open("rb") as stream:
+        for block in iter(lambda: stream.read(64 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
 
 
 def manifest_path(output):

@@ -47,6 +47,13 @@ class QualityEntryPointContracts(unittest.TestCase):
                 patch("sys.argv", ["check-research.py"]),
             ):
                 QUALITY.main()
+            storage_calls = [
+                call
+                for call in execute.call_args_list
+                if "scripts/dev/test_research_storage.py" in call.args[0]
+            ]
+            self.assertEqual(len(storage_calls), 1)
+            self.assertIn("scripts/dev/test_research_storage.py", QUALITY.PY_FILES)
             training_call = next(
                 call
                 for call in execute.call_args_list

@@ -2,12 +2,18 @@
 """Run native numerical/whole-request benchmarks; no Python model forward."""
 
 import argparse
-import hashlib
 import json
 import statistics
 import subprocess
 import time
 from pathlib import Path
+import importlib.util
+
+_spec = importlib.util.spec_from_file_location(
+    "native_export", Path(__file__).with_name("export.py")
+)
+_export = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_export)
 
 
 def main():
@@ -88,8 +94,8 @@ def main():
         "schema": "quoridor-native-inference-verification-v1",
         "cases": cases,
         "wall_seconds": time.monotonic() - begin,
-        "inputs_sha256": hashlib.sha256(a.inputs.read_bytes()).hexdigest(),
-        "source_model_sha256": hashlib.sha256(a.model.read_bytes()).hexdigest(),
+        "inputs_sha256": _export.sha(a.inputs),
+        "source_model_sha256": _export.sha(a.model),
         "tolerance": {"atol": 1e-4, "rtol": 1e-4},
         "whole_request": "H2D + inference + D2H + owned stream synchronization + Rust output validation; CUDA first forward captures/warm separately",
         "fixed_order": ["ort", "graph", "tensorrt"],

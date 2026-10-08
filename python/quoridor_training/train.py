@@ -15,6 +15,7 @@ import tempfile
 import os
 from pathlib import Path
 import numpy as np
+from .snapshot import atomic_text
 from .cache import load, sha
 from .common import (
     resolve_config,
@@ -166,7 +167,7 @@ def _attempt_finalization(stage, action, failures):
 
 
 def write(path, value):
-    with Path(path).open("w") as stream:
+    with atomic_text(path) as stream:
         stream_json(stream, value)
         stream.write("\n")
 
@@ -545,18 +546,7 @@ def train(
     objective_weights = torch.as_tensor(row_loss_weights)
     packed_supply = None
     training_payload = None
-    if compact:
-        from .supply import PackedSupply
-
-        packed_supply = PackedSupply(
-            supply,
-            max(batch_size, cfg["evaluation"]["batch_size"]),
-            device,
-            row_loss_weights,
-            column,
-            workers=supply_workers,
-        )
-    elif supply_workers:
+    if not compact and supply_workers:
         raise ValueError("prefetch requires compact epoch corpus")
     phase_seconds = {
         name: 0.0
@@ -1058,6 +1048,19 @@ def train(
         primary_error = None
         stop_record_failures = []
         try:
+            supply_started = time.monotonic()
+            if compact:
+                from .supply import PackedSupply
+
+                packed_supply = PackedSupply(
+                    supply,
+                    max(batch_size, cfg["evaluation"]["batch_size"]),
+                    device,
+                    row_loss_weights,
+                    column,
+                    workers=supply_workers,
+                )
+            phase_seconds["initialization"] += time.monotonic() - supply_started
             save_named_checkpoint("initial")
             if compact and input_binding is not None:
                 verify_initial_binding(expected, output / "initial-model" / "weights.f32")

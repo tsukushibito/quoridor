@@ -23,8 +23,8 @@ class SessionError(RuntimeError):
     pass
 
 
-def command_json(args: list[str]) -> dict | list:
-    result = subprocess.run(args, capture_output=True, text=True, check=True, timeout=30)
+def command_json(args: list[str], *, timeout: float = 30) -> dict | list:
+    result = subprocess.run(args, capture_output=True, text=True, check=True, timeout=timeout)
     return json.loads(result.stdout)
 
 

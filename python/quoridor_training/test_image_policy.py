@@ -6,6 +6,7 @@ import gzip
 import importlib.util
 import io
 import json
+from .snapshot import atomic_text
 import os
 from pathlib import Path
 import sys
@@ -95,6 +96,7 @@ class ImagePolicyTests(unittest.TestCase):
                 "gzip": gzip,
                 "io": io,
                 "time": time,
+                "atomic_text": atomic_text,
                 "output": output,
                 "curve": [],
                 "diagnostic_curve": [],

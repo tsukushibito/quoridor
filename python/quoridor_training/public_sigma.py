@@ -18,6 +18,7 @@ import zipfile
 import numpy as np
 
 from .cache import sha
+from .snapshot import write_json as write
 
 REVISION = "751186344fc52ad0c29bc65922e62c6fa915f006"
 SEED = 31920261006
@@ -32,13 +33,6 @@ from .public_features import (
 
 EXCLUSION = np.dtype([("shard", "u1"), ("row", "<u4"), ("z", "<f4"), ("reason", "u1")])
 PARTITIONS = ("train", "validation", "test-sealed", "evaluation-opened")
-
-
-def write(path, value):
-    path = Path(path)
-    tmp = path.with_suffix(path.suffix + ".tmp")
-    tmp.write_text(json.dumps(value, indent=2, allow_nan=False) + "\n")
-    tmp.replace(path)
 
 
 def mix64(values):

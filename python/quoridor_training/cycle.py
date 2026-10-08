@@ -7,11 +7,8 @@ import os
 import time
 from pathlib import Path
 
+from .snapshot import write_json as write
 from .cycle_process import CycleResources, cancellation_signals, execute
-
-
-def write(path, value):
-    Path(path).write_text(json.dumps(value, indent=2, allow_nan=False) + "\n")
 
 
 def cycle(config_path, runner):
@@ -27,11 +24,6 @@ def _cycle(config_path, runner):
         raise ValueError("cycle settings required")
     output = Path(config["output"]).resolve()
     output.mkdir(parents=True, exist_ok=False)
-    write(output / "cycle-config.json", config)
-    deadline = time.monotonic() + config.get("wall_seconds", 300)
-    unix_deadline = config.get("deadline_unix_ms", 0)
-    if unix_deadline:
-        deadline = min(deadline, time.monotonic() + unix_deadline / 1000 - time.time())
     state = {
         "schema": "quoridor-cycle-v1",
         "process_records": "*.process.json",
@@ -39,9 +31,16 @@ def _cycle(config_path, runner):
         "stages": [],
         "adopted": False,
     }
-    write(output / "cycle-state.json", state)
-    environment_python = os.path.abspath(settings["python"])
     try:
+        write(output / "cycle-config.json", config)
+        wall_seconds = config.get("wall_seconds", 300)
+        deadline = None if wall_seconds is None else time.monotonic() + wall_seconds
+        unix_deadline = config.get("deadline_unix_ms", 0)
+        if unix_deadline:
+            unix_horizon = time.monotonic() + unix_deadline / 1000 - time.time()
+            deadline = unix_horizon if deadline is None else min(deadline, unix_horizon)
+        write(output / "cycle-state.json", state)
+        environment_python = os.path.abspath(settings["python"])
         resources = CycleResources(config, output, deadline)
 
         def run(command, log, _deadline, cpu_core=None):
@@ -178,7 +177,7 @@ def _cycle(config_path, runner):
             "train_games": 0,
             "validation_games": 0,
             "openings": [],
-            "wall_seconds": max(1.0, deadline - time.monotonic()),
+            "wall_seconds": None if deadline is None else max(1.0, deadline - time.monotonic()),
         }
         if arena["games"] % 2:
             raise ValueError("arena game count must be even")
@@ -216,7 +215,11 @@ def _cycle(config_path, runner):
     except BaseException as error:
         state["status"] = "failed"
         state["error"] = str(error)
-        write(output / "cycle-state.json", state)
+        try:
+            write(output / "cycle-state.json", state)
+        except BaseException as publication:
+            error.add_note("cycle failed-state publication: " + repr(publication))
+            error.add_note("cycle fallback facts: " + json.dumps(state, allow_nan=False))
         raise
     write(output / "cycle-state.json", state)
     return state

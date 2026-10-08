@@ -1,6 +1,8 @@
 """NN0 cycle ownership and resource contracts using synthetic short children."""
 
 import json
+import io
+from types import SimpleNamespace
 import os
 from pathlib import Path
 import signal
@@ -9,10 +11,11 @@ import sys
 import tempfile
 import time
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock, Mock, patch
 
 from . import cycle_process as processes
 from .cycle import cycle
+from . import cycle as cycle_module
 
 
 class CycleProcessTests(unittest.TestCase):
@@ -47,6 +50,190 @@ class CycleProcessTests(unittest.TestCase):
         self.assertTrue(record["cleanup_complete"])
         self.assertEqual(record["remaining"], [])
         self.assertFalse(processes.alive(record["child"]))
+
+    def test_cleanup_discovery_and_signal_faults_wait_and_close_independently(self):
+        for fault in ("members", "signal_members"):
+            with self.subTest(fault=fault):
+                log = self.root / (fault + ".log")
+                with patch.object(processes, fault, side_effect=OSError("cleanup fixture")):
+                    with self.assertRaises(BaseExceptionGroup) as error:
+                        processes.execute(
+                            [sys.executable, "-B", "-c", "import time; time.sleep(10)"],
+                            log,
+                            time.monotonic() + 0.1,
+                        )
+                record = json.loads(log.with_suffix(".process.json").read_text())
+                self.assertTrue(record["direct_child_reaped"])
+                self.assertFalse(record["cleanup_complete"])
+                self.assertEqual(record["remaining"], [])
+                self.assertEqual(
+                    record["handle_closes_attempted"],
+                    ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+                )
+                self.assertFalse(processes.alive(record["child"]))
+                self.assertTrue(error.exception.exceptions)
+
+    def test_log_and_receipt_errors_retain_primary_and_all_close_attempts(self):
+        real_open = Path.open
+
+        class BrokenLog:
+            def __init__(self, stream):
+                self.stream = stream
+
+            def __getattr__(self, name):
+                return getattr(self.stream, name)
+
+            def write(self, value):
+                raise OSError("log write fixture")
+
+        def open_log(path, *args, **kwargs):
+            stream = real_open(path, *args, **kwargs)
+            return BrokenLog(stream) if args and args[0] == "xb" else stream
+
+        log = self.root / "broken-log.log"
+        with patch.object(Path, "open", open_log):
+            with self.assertRaises(BaseExceptionGroup):
+                processes.execute(
+                    [sys.executable, "-B", "-c", "import time; time.sleep(10)"],
+                    log,
+                    time.monotonic() + 0.1,
+                )
+        record = json.loads(log.with_suffix(".process.json").read_text())
+        self.assertTrue(record["direct_child_reaped"])
+        self.assertIn("log write fixture", record["primary_error"]["message"])
+        self.assertIn("log_close", record["handle_closes_attempted"])
+        calls = []
+        real_save = processes.save_record
+
+        def broken_receipt(path, record):
+            calls.append(dict(record))
+            if record.get("final_record_persist") == "attempted":
+                raise OSError("receipt fixture")
+            return real_save(path, record)
+
+        with patch.object(processes, "save_record", side_effect=broken_receipt):
+            with self.assertRaises(BaseExceptionGroup) as error:
+                processes.execute(
+                    [sys.executable, "-B", "-c", "raise SystemExit(7)"],
+                    self.root / "broken-receipt.log",
+                    time.monotonic() + 2,
+                )
+        fallback = json.loads(error.exception.__notes__[-1].split(": ", 1)[1])
+        self.assertTrue(fallback["direct_child_reaped"])
+        self.assertEqual(fallback["final_record_persist"], "failed_or_partial_UNKNOWN")
+        self.assertEqual(fallback["exit_code"], 7)
+        self.assertIn("pipe_close", fallback["handle_closes_attempted"])
+        self.assertEqual(calls[-1]["final_record_persist"], "attempted")
+
+    def test_dual_signal_failures_preserve_both_receipt_facts_and_direct_wait(self):
+        child = SimpleNamespace(
+            pid=999999999,
+            stdout=io.BytesIO(),
+            returncode=None,
+            poll=Mock(return_value=None),
+            send_signal=Mock(side_effect=OSError("fallback Popen failure")),
+        )
+
+        def waited(*args, **kwargs):
+            child.returncode = 7
+            return 7
+
+        child.wait = Mock(side_effect=waited)
+        info = {"pid": child.pid, "start_ticks": "1", "boot_id": "synthetic"}
+        fd = processes.os.open("/dev/null", processes.os.O_RDONLY)
+        original = processes.save_record
+
+        def save(path, record):
+            if record["status"] == "running":
+                raise ValueError("primary record failure")
+            return original(path, record)
+
+        with (
+            patch.object(processes.subprocess, "Popen", return_value=child),
+            patch.object(processes.os, "pidfd_open", return_value=fd),
+            patch.object(processes, "process_info", return_value=info),
+            patch.object(processes, "members", return_value=[]),
+            patch.object(
+                processes.signal, "pidfd_send_signal", side_effect=OSError("original pidfd failure")
+            ),
+            patch.object(processes, "TERM_SECONDS", 0),
+            patch.object(processes, "save_record", side_effect=save),
+        ):
+            with self.assertRaises(BaseExceptionGroup):
+                processes.execute(["synthetic"], self.root / "dual.log", None)
+        child.wait.assert_called_once_with(timeout=3)
+        self.assertTrue(child.stdout.closed)
+        saved = json.loads((self.root / "dual.process.json").read_text())
+        self.assertTrue(saved["direct_child_reaped"])
+        self.assertFalse(saved["cleanup_complete"])
+        self.assertEqual(saved["primary_error"]["message"], "primary record failure")
+        facts = {fact["stage"]: fact["message"] for fact in saved["finalization_errors"]}
+        for stage in ("direct_term", "direct_kill"):
+            self.assertEqual(facts[stage + "_pidfd"], "original pidfd failure")
+            self.assertEqual(facts[stage + "_popen"], "fallback Popen failure")
+
+    def test_pidfd_signal_failure_still_uses_owned_direct_fallback_and_waits(self):
+        with patch.object(
+            processes.signal, "pidfd_send_signal", side_effect=OSError("pidfd fixture")
+        ):
+            with self.assertRaises(BaseExceptionGroup):
+                self.run_child("import time; time.sleep(10)", timeout=0.1)
+        record = self.record()
+        self.assertTrue(record["direct_child_reaped"])
+        self.assertFalse(record["cleanup_complete"])
+        self.assertEqual(record["remaining"], [])
+
+    def test_nullable_finite_default_deadline_and_pre_stage_failures_publish_state(self):
+        class Resources:
+            def __init__(self, config, output, deadline):
+                horizons.append((deadline, time.monotonic()))
+                self.deadline = deadline
+
+            def check(self):
+                if self.deadline is not None and time.monotonic() >= self.deadline:
+                    raise processes.CycleStopped("cycle deadline")
+
+        for name, supplied, expected in (
+            ("null", {"wall_seconds": None}, None),
+            ("absent", {}, 300),
+            ("finite", {"wall_seconds": 4}, 4),
+            ("unix", {"wall_seconds": None, "deadline_unix_ms": 1}, "expired"),
+        ):
+            horizons, launches = [], []
+            output = self.root / name
+            config = self.root / (name + ".json")
+            config.write_text(
+                json.dumps({"output": str(output), "cycle": {"python": "unused"}, **supplied})
+            )
+
+            def fake_execute(*args):
+                launches.append(args)
+                raise RuntimeError("mock stage failure")
+
+            with (
+                patch.object(cycle_module, "CycleResources", Resources),
+                patch.object(cycle_module, "execute", side_effect=fake_execute),
+            ):
+                with self.assertRaisesRegex(RuntimeError, "deadline|mock stage"):
+                    cycle(config, "unused-runner")
+            if expected is None:
+                self.assertIsNone(horizons[0][0])
+            elif expected == "expired":
+                self.assertEqual(launches, [])
+            else:
+                self.assertAlmostEqual(horizons[0][0] - horizons[0][1], expected, delta=0.1)
+            state = json.loads((output / "cycle-state.json").read_text())
+            self.assertEqual(state["status"], "failed")
+            self.assertFalse(state["adopted"])
+        config = self.root / "setup.json"
+        config.write_text(
+            json.dumps({"output": str(self.root / "setup"), "cycle": {"wrong": "python"}})
+        )
+        with self.assertRaises(KeyError):
+            cycle(config, "unused")
+        self.assertEqual(
+            json.loads((self.root / "setup/cycle-state.json").read_text())["status"], "failed"
+        )
 
     def test_gpu_guard_counts_existing_device_users_and_controller(self):
         with (
@@ -353,6 +540,22 @@ class CycleProcessTests(unittest.TestCase):
         records = list((self.root / "cycle").glob("*.process.json"))
         self.assertEqual(len(records), 7)
         self.assertTrue(all(json.loads(path.read_text())["cleanup_complete"] for path in records))
+
+        for name, horizon in (("null-cycle", None), ("default-cycle", "absent")):
+            supplied = json.loads(config.read_text())
+            supplied["output"] = str(self.root / name)
+            if horizon == "absent":
+                supplied.pop("wall_seconds")
+            else:
+                supplied["wall_seconds"] = horizon
+            config.write_text(json.dumps(supplied))
+            state = cycle(config, runner)
+            self.assertEqual(state["status"], "complete")
+            arena = json.loads((self.root / name / "arena-config.json").read_text())
+            if horizon is None:
+                self.assertIsNone(arena["wall_seconds"])
+            else:
+                self.assertGreater(arena["wall_seconds"], 0)
 
 
 if __name__ == "__main__":

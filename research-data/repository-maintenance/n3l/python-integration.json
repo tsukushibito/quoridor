@@ -1,0 +1,248 @@
+{
+  "task": "quoridor-n3l",
+  "helper_issue": "quoridor-n3l.2",
+  "combined_patch_SHA256": "0c421668b3cebd26ca11bfbd289e2c5948bda98c82bb43e89e6e6e2d3a7ca819",
+  "independent_confirmation": ".artifacts/repository-maintenance/n3l/review/confirmation-python-v2/findings.md",
+  "independent_confirmation_SHA256": "5b4f268af3e4517ad039af9ea91163c5882a22c0d6e47cb11a35459fa1bb4ebe",
+  "independent_reader_STOP": "2026-10-08T00:16:15.145295+00:00",
+  "implementation_helper_STOP": "2026-10-08T00:10:15.698867+00:00",
+  "findings_implemented": [
+    "F01",
+    "F02",
+    "F03",
+    "F04",
+    "F15",
+    "F16",
+    "F20",
+    "F22",
+    "R01",
+    "R02"
+  ],
+  "sources": [
+    {
+      "path": "python/quoridor_training/cycle.py",
+      "before_sha256": "68df417f2678374d9043c130793378e03be6cb4d34eb0eca2971ad37337ff320",
+      "after_sha256": "76049eadeec5a905ca0e1dd4217859e1ca82e1e57b706f5709e50d5b77163daf",
+      "before_bytes": 8030,
+      "after_bytes": 8408,
+      "changed": true,
+      "role": "patch",
+      "copy_namespace": "source"
+    },
+    {
+      "path": "python/quoridor_training/cycle_process.py",
+      "before_sha256": "670f648f9c91c1f8430be0f1b62ae4b1e69663d594b53e8bda84379d17638c26",
+      "after_sha256": "ddaa2881335488c719ad6941ac18becf1c544debf7e28037c9977d87cd6f060b",
+      "before_bytes": 18558,
+      "after_bytes": 20479,
+      "changed": true,
+      "role": "patch",
+      "copy_namespace": "repair-v2/source"
+    },
+    {
+      "path": "python/quoridor_training/public_sigma.py",
+      "before_sha256": "cff3f55048dccc4ef0f4b38a0b8b6bdf0cd88a26593b48e77e99d5841c8dcd19",
+      "after_sha256": "f1da9ef792a22e8faaa056c31be2067bbf0312d3901dc912c66efdf2a83d6b2b",
+      "before_bytes": 22530,
+      "after_bytes": 22381,
+      "changed": true,
+      "role": "patch",
+      "copy_namespace": "source"
+    },
+    {
+      "path": "python/quoridor_training/snapshot.py",
+      "before_sha256": null,
+      "after_sha256": "ed0814965c012d6ad5ad094e653158b42b5d4ebf17463706ce53d029bc704341",
+      "before_bytes": 0,
+      "after_bytes": 1232,
+      "changed": true,
+      "role": "patch",
+      "copy_namespace": "source"
+    },
+    {
+      "path": "python/quoridor_training/test_cycle.py",
+      "before_sha256": "949a8cdddb36a9856bec69a7a8761071c47a3cd3d3be48aa4317159aa9b3a960",
+      "after_sha256": "7a65b076fece7c137bfedcd8b040c741deb53878ca2378c04ec6c86549185840",
+      "before_bytes": 15739,
+      "after_bytes": 25130,
+      "changed": true,
+      "role": "patch",
+      "copy_namespace": "repair-v2/source"
+    },
+    {
+      "path": "python/quoridor_training/test_image_policy.py",
+      "before_sha256": "c2ec7e88820b3f293596b77ccfac690afaa5e7da8e61048fd47b6da59812875a",
+      "after_sha256": "3d16027424880035c663a8f93d2e91f9e86cbfe256e13fe1e17a5dbe957ae31e",
+      "before_bytes": 9946,
+      "after_bytes": 10024,
+      "changed": true,
+      "role": "patch",
+      "copy_namespace": "source"
+    },
+    {
+      "path": "python/quoridor_training/test_lifecycle.py",
+      "before_sha256": null,
+      "after_sha256": "907f7e939b0b2f2585670e2f5dbe48e83b5f145c0d523ceb06d659f6e3484a7c",
+      "before_bytes": 0,
+      "after_bytes": 6840,
+      "changed": true,
+      "role": "patch",
+      "copy_namespace": "source"
+    },
+    {
+      "path": "python/quoridor_training/train.py",
+      "before_sha256": "e981ea08bcf731461e6b74bf91ed74391f8efdb23293e89000371e6ddb31e127",
+      "after_sha256": "5be8dd814c8a45cf6980c90a96e7d076ee99a66d4656b6add2e55174778d0f08",
+      "before_bytes": 79231,
+      "after_bytes": 79483,
+      "changed": true,
+      "role": "patch",
+      "copy_namespace": "source"
+    },
+    {
+      "path": "scripts/dev/beads.sh",
+      "before_sha256": "d023f9467d448b8b9eddb0b900323eecc410ae8bd1b2871fda49557c9d8985e7",
+      "after_sha256": "7c907f39131389918f8e48851346c74a7a7dbe12d730d0ef3a478ca522b7e935",
+      "before_bytes": 398,
+      "after_bytes": 408,
+      "changed": true,
+      "role": "patch",
+      "copy_namespace": "source"
+    },
+    {
+      "path": "scripts/dev/check-research.py",
+      "before_sha256": "3158ededad288a26596ccb876222a02e604da119830aef5c9f1c1c45e4861242",
+      "after_sha256": "16ebfef3b9ee6377e2089545a8dd521dd6b8fc1774311c8198e4bf71ee70fd53",
+      "before_bytes": 8175,
+      "after_bytes": 8329,
+      "changed": true,
+      "role": "patch",
+      "copy_namespace": "source"
+    },
+    {
+      "path": "scripts/dev/research-job.py",
+      "before_sha256": "35266c25d2331836a290c92b3173ef18d3ef35fd0b6c4536dcdb18c424d4f6aa",
+      "after_sha256": "6a98df61c3fcfd3881c8bb88d9974f5c85f0f30733a26f533442cd45ee34fac9",
+      "before_bytes": 24517,
+      "after_bytes": 30444,
+      "changed": true,
+      "role": "patch",
+      "copy_namespace": "repair-v2/source"
+    },
+    {
+      "path": "scripts/dev/research-runtime.py",
+      "before_sha256": "9d622080d19ec15a3b2fa84506d6bddf53aef5e82e1aeb79312e2729364405e4",
+      "after_sha256": "2a9aa764a9ab6864772bdb4923c3d94725ff264ab9552fbebd20ce243d1b6da4",
+      "before_bytes": 3112,
+      "after_bytes": 3564,
+      "changed": true,
+      "role": "patch",
+      "copy_namespace": "repair-v2/source"
+    },
+    {
+      "path": "scripts/dev/research-session.py",
+      "before_sha256": "7c43491b0ff444ca2b67ec4e9a4d88756e482f18b9657a3b7548ca545a46793b",
+      "after_sha256": "9c0bb9f0ced14e44162698e71a3af47e4fa8672a6b82eded6bd9f0c810c89e1a",
+      "before_bytes": 17897,
+      "after_bytes": 17926,
+      "changed": true,
+      "role": "patch",
+      "copy_namespace": "repair-v2/source"
+    },
+    {
+      "path": "tools/model-export/export.py",
+      "before_sha256": "95c6f177e1d11f24611013636604d7361f6dc9ab1cad868bf116f8c60883e160",
+      "after_sha256": "b17fb465cd028545cc1b0c6358e0104e4bea622ffd0665928bf3acde67b78028",
+      "before_bytes": 6009,
+      "after_bytes": 6145,
+      "changed": true,
+      "role": "patch",
+      "copy_namespace": "source"
+    },
+    {
+      "path": "tools/model-export/folded_sigma.py",
+      "before_sha256": "669fa4d60888e65ab145eabbab554c96931c3e50557ffe4bd11ced98b79da7e0",
+      "after_sha256": "669fa4d60888e65ab145eabbab554c96931c3e50557ffe4bd11ced98b79da7e0",
+      "before_bytes": 4813,
+      "after_bytes": 4813,
+      "changed": false,
+      "role": "test dependency",
+      "copy_namespace": "source"
+    },
+    {
+      "path": "tools/model-export/test_export.py",
+      "before_sha256": "c57ceefd8a870dd5d00fc0291da3f461a834ea04dcf9d4269cc0dada50b59956",
+      "after_sha256": "1cefaf1c88c40976391f1ab350d61330242010d414f575e827ab429e67c8d822",
+      "before_bytes": 8021,
+      "after_bytes": 9033,
+      "changed": true,
+      "role": "patch",
+      "copy_namespace": "source"
+    },
+    {
+      "path": "tools/model-export/verify-native.py",
+      "before_sha256": "cf7931c4b8103833a3ef4f6b00d1ab552fcd6ec884fd295cac9f7922b29aae07",
+      "after_sha256": "b2fd2132a9c094c6b7435e5bf07d48e265363c03c077aa416d5fd501426840fc",
+      "before_bytes": 4260,
+      "after_bytes": 4404,
+      "changed": true,
+      "role": "patch",
+      "copy_namespace": "source"
+    },
+    {
+      "path": "tools/research-quality/test_quality_entrypoints.py",
+      "before_sha256": "e8fe55d5484bb6602720693285909b43eddf5e0454a8ca559b36a7d04deba2c5",
+      "after_sha256": "454b3871f9588aba597e5a896f1ac6ed06bafb5b743b977ec0e473243d3241b7",
+      "before_bytes": 3558,
+      "after_bytes": 3884,
+      "changed": true,
+      "role": "patch",
+      "copy_namespace": "source"
+    },
+    {
+      "path": "tools/research-session/test_client.py",
+      "before_sha256": "34d2072ae583745b959fa0e5882956993347bf9a642c475beb3e3911c0f4c752",
+      "after_sha256": "34d2072ae583745b959fa0e5882956993347bf9a642c475beb3e3911c0f4c752",
+      "before_bytes": 15276,
+      "after_bytes": 15276,
+      "changed": false,
+      "role": "test dependency",
+      "copy_namespace": "source"
+    },
+    {
+      "path": "tools/research-session/test_job.py",
+      "before_sha256": "e566c83e7267ae7997586817119c9f9b9bb394efbaae8b2921cd16d4ce30a13a",
+      "after_sha256": "5ca44bf50797c200027a7522af076b16956e2b23e5837af87361cbc011bbe782",
+      "before_bytes": 15875,
+      "after_bytes": 33872,
+      "changed": true,
+      "role": "patch",
+      "copy_namespace": "repair-v2/source"
+    }
+  ],
+  "main_applied_exact_after_SHA": true,
+  "integration_validation": {
+    "scope": "Actual-main control/snapshot/hash integration; no old scientific suite",
+    "tests": 12,
+    "success": true,
+    "failures": 0,
+    "errors": 0,
+    "elapsed_seconds": 1.943675319897011,
+    "scientific_imports_or_model_calls": 0,
+    "CPU": 2,
+    "address_space_limit_B": 536870912,
+    "GPU": 0
+  },
+  "validation_log_SHA256": "ae1399d46ca15e60ed2dd58e6071bf260966c22fe3efe35e9e21519f71bb56df",
+  "verification_script_SHA256": "a11305ea36819ae70419cad20e917682f82dba8a6fbe92ce08008934c2d1fc93",
+  "format_lint": "Project Ruff format/check17 changedPythonPASS, Bash manualexistinglayout/bash-nPASS, git diff-checkPASS; helperall21format/mathAST reused",
+  "remaining_owned_children_TMP": [],
+  "actual_OS_model_scientific_peak_qualification": "NOT_RUN; no universal process containment/latency/model/peak certificate. Mainintegration12 limitedsynthetic/control/hash tests; prior58+producer10+independent13 in originalscopes, not replayed wholesale.",
+  "failed_evidence_retained": "Initialhelpervalidation49failed/budgetsubbucketcorrected/orderdeviation, v1R01/R02failedreview and v2reviewfakeportfailures retained; no refund",
+  "resources": "ExistingRoot n3l1MiB forecast491520B, no new capacity; CPU2/AS512/GPU0, mainmutationand focusedtests solewriterlock; Git existingRoot8MiB",
+  "old_science": "MathAST/train/public/folded unchanged proof reused; no Torch/NumPy/ORT/model/game/fit/RNG/target/rule/default/323pause/seal change",
+  "entry_boundary": "Fresh namedscience/Cargo none at apply, mainhelpers not changed beneath any actual job per directedcheck/direct331None. Owner must bind new helperSHA for nextactualentry.",
+  "Root_source_reader_STOP_UTC": "2026-10-08T00:54:51.772916+00:00",
+  "owned_intake_allocated_B": 20480,
+  "Root_control_refusal_and_cleanup": "ownuv0B TMP lock caused expectedempty assertion beforecommit; exactlock removed afterreapedtest andexclusiveflock. cleanup.json retained; no source/test changes or rerun."
+}
