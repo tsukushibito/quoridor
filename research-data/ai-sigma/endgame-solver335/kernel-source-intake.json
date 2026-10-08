@@ -1,0 +1,108 @@
+{
+  "task": "quoridor-4lc.335",
+  "status": "PRIVATE_KERNEL_SOURCE_MATCHED_ADAPTER_AND_RUNTIME_PENDING",
+  "receipt": ".worktree/endgame-solver335/.endgame335-kernel-source-stop.json",
+  "receipt_SHA256": "99687ef2ea3e929b6b9f9c72b9f4be5bdb258251da4708f5b93f0645d360e9b6",
+  "source_STOP_UTC": "2026-10-08 01:03:49 UTC",
+  "fixed_sources": [
+    {
+      "path": "crates/quoridor-ai/src/lib.rs",
+      "SHA256": "9eaeaa56eae73f24f979df5a629cc05f7dad94f767866302d1dbf705ad7b4a1e",
+      "logical_B": 19017,
+      "allocated_B": 20480
+    },
+    {
+      "path": "crates/quoridor-ai/src/endgame.rs",
+      "SHA256": "d9758381203a925fbbb36e7dc39edee8fc0ad3094835fe666e3aa72afe2b77da",
+      "logical_B": 3473,
+      "allocated_B": 4096
+    },
+    {
+      "path": "crates/quoridor-ai/src/endgame_kernel.rs",
+      "SHA256": "6cc8647698298d3bf32ee4089ca0567d0e7129b3ad263fcd6ac904d464f81008",
+      "logical_B": 18192,
+      "allocated_B": 20480
+    },
+    {
+      "path": "crates/quoridor-ai/Cargo.toml",
+      "SHA256": "9f2fb4a60f536e4f666c54db4cc221f3bdd075f73ef933e9692844f061616bb6",
+      "logical_B": 653,
+      "allocated_B": 4096
+    },
+    {
+      "path": "crates/quoridor-ai/tests/endgame_contract.rs",
+      "SHA256": "821c6cd0372b30a5106f1f6d7205185c64aa770f8adf406adabdf39a63abf79e",
+      "logical_B": 4618,
+      "allocated_B": 8192
+    },
+    {
+      "path": "crates/quoridor-ai/tests/endgame_kernel.rs",
+      "SHA256": "ae6ec6a57fb2136c5effe56da4035ccc4697603e31c4e47d9adec610f6c2df5b",
+      "logical_B": 11562,
+      "allocated_B": 12288
+    },
+    {
+      "path": "crates/quoridor-ai/tests/endgame_genuine_prefix.rs",
+      "SHA256": "4475d1b4ca0e61a2b75cc6da9275507a1a9ba2af7f1cf0af660241551413f011",
+      "logical_B": 5736,
+      "allocated_B": 8192
+    },
+    {
+      "path": "crates/quoridor-ai/endgame-solver-contract.md",
+      "SHA256": "76a2faf3db0ca641ebc3375c7ab1627643f1955f81ed49f639ea9d51a40e9892",
+      "logical_B": 16949,
+      "allocated_B": 20480
+    },
+    {
+      "path": "crates/quoridor-ai/endgame-qualification-forecast.json",
+      "SHA256": "b97683041d14bb331e298a0c428d35942916d99c1f643f37adc61e2478c95fcc",
+      "logical_B": 8465,
+      "allocated_B": 12288
+    }
+  ],
+  "canonical_bindings": {
+    "API_v6_SHA256": "d4168fa21fb8f38556eefac535954f8b869506c789ea611f18a2d4e3a9af241f",
+    "source_packet_v6_SHA256": "ad683b232548e6bfb2fc266de5f3aa2f7a795b44dff9de9b209725deef910f43",
+    "core_research_v6_SHA256": "ea1c841b2ebc2d1891a625e921572c88cf7062aa76ed8c7c17344263f4e52f37",
+    "runtime_only_v7_packet_SHA256": "bd143da7113c4807a7ad208b32ecf89664794dd62eb21fb43cf2d73d48b18223",
+    "verification": "PASS exact hashes, necessary frozen source ranges read; foreign source unmodified. Own core still old RuleA; no adapter has used it.",
+    "new_boundary": "v6 semantics sufficient, but public replay/clone/history_counts allocate infallibly and make_move may grow private overlay. Smallest bounded shared API request accepted to324 then routed SAME331 with its own192KiB source allowance. Await actual chosen stopped/reviewed canonical implementation before335 adapter."
+  },
+  "implementation_scope": "Private explicit-stack exact-history kernel source, complete-child proof algebra/bounded storage/control/undo definitions only; no publiccanonicaladapter/solve yet",
+  "supplied_format_checks": {
+    "scoped_Rust_formatter_write_and_check": "PASS all six changed Rust files, edition2024/skip_children=true",
+    "handwritten_Cargo_TOML": "Manually formatted to existing project style; stdlib TOML parse PASS. No automatic TOML formatter used.",
+    "forecast_JSON": "stdlib indent2 format/parse + exact component conservation PASS;64MiB future plus existing1MiB=65MiB whole task",
+    "source_and_input_hashes": "PASS fixed bytes above",
+    "Rust_compiler_tests_Clippy_or_stdlib_oracle_execution": "NOT_RUN",
+    "production_false_proven": "UNKNOWN",
+    "actual_WDL_rules_build_Wasm_timing_games_models": "NOT_RUN"
+  },
+  "compiler_tests_oracle_WDL_timing": "NOT_RUN; false-proven UNKNOWN; no scientific or solveradoption claim",
+  "storage": {
+    "inclusive_cap_B": 1048576,
+    "baseline_checkout_and_dirs_B": 532480,
+    "retained_previous_direct_admin_and_dotgit_B": 12288,
+    "source_growth_current_allocated_B": 24576,
+    "test_definitions_current_allocated_B": 28672,
+    "control_before_new_receipt_and_notice_B": 53248,
+    "receipt_plus_notice_prewrite_upper_B": 12288,
+    "control_cap_B": 65536,
+    "component_caps_unchanged": true,
+    "control_limit": "Control component reaches its existing cap under prewrite bound. Further control-file growth requires supported internal accounting/preservation; no extra budget presumed.",
+    "future_source_and_patch_upper_B": 122880,
+    "source_growth_and_patch_existing_cap_B": 131072,
+    "observability_limit": "Source data/metadata commands bounded and selected, but total read bytes/family RSS not instrumented. Earlier sparse-index read warning and original failed/control fees/UNKNOWN retained; no comprehensive compliance or old capacity release claim."
+  },
+  "additional_phase_forecast": ".worktree/endgame-solver335/crates/quoridor-ai/endgame-qualification-forecast.json",
+  "forecast_SHA256": "b97683041d14bb331e298a0c428d35942916d99c1f643f37adc61e2478c95fcc",
+  "additional_phase_requested_B": 67108864,
+  "additional_phase_admitted_B": 0,
+  "precise_wholephase_gap_B": 67108864,
+  "donor": "NONE currently supported; all addition512MiB categories assigned/oldusedcaps-assets-UNKNOWN held. No released326/native/currentraw credit. A smaller finite phase requiresactualwholeforecast and conserved unadmitted donor support beforeentry",
+  "source_control_constraint": "Existingcontrolcap65536 reached underprewrite; no additionalworkerwrite assumed. Rootintake/report within existingRoot8MiB new65536B phase",
+  "API_routing": "331 offpath preparedcontract95e96ed5 NOT_APPLIED, chosenboundedAPI review/STOP only after protectedsoftware. No oldRuleA core source routed or bound",
+  "independent_review": "Privatekernelproof/source next mayuse original335source32KiB review component; not an adapter/currentrules certificate",
+  "ownership": "Root324 only main/Git/index/sparse routing; owner335 sourceSTOP; no job/children/model/compiler/clock",
+  "pause_defaults_evidence": "Originalsource-start ordering miss/RSS/readUNKNOWN/allassets/fees/323pause/seals/defaults held"
+}
