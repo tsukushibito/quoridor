@@ -22,7 +22,7 @@ class WorktreeTests(unittest.TestCase):
         self.script = self.root / "scripts/dev/manage_worktree.sh"
         self.script.parent.mkdir(parents=True)
         shutil.copyfile(SOURCE, self.script)
-        (self.root / ".gitignore").write_text(".worktree/\n", encoding="utf-8")
+        (self.root / ".gitignore").write_text(".worktree/\n.artifacts/\n", encoding="utf-8")
         self.run_git("add", "scripts/dev/manage_worktree.sh", ".gitignore")
         self.run_git("commit", "--quiet", "-m", "fixture")
 
@@ -83,6 +83,20 @@ class WorktreeTests(unittest.TestCase):
             self.run_git("worktree", "list", "--porcelain").stdout,
         )
         self.run_git("show-ref", "--verify", "refs/heads/fixture/first")
+
+    def test_ignored_evidence_removal_refused(self):
+        self.helper("create", "first", "fixture/first")
+        first = self.root / ".worktree/first"
+        evidence = first / ".artifacts/checkpoint.pt"
+        evidence.parent.mkdir()
+        evidence.write_bytes(b"unique synthetic evidence")
+        failure = self.helper("remove", "first", check=False)
+        self.assertNotEqual(failure.returncode, 0)
+        self.assertIn("Refusing to remove dirty worktree", failure.stderr)
+        self.assertEqual(evidence.read_bytes(), b"unique synthetic evidence")
+        self.assertIn(
+            "locked managed by quoridor", self.run_git("worktree", "list", "--porcelain").stdout
+        )
 
     def test_sparse_creation_from_linked_checkout(self):
         self.helper("create", "first", "fixture/first")

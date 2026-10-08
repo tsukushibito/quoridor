@@ -1,11 +1,12 @@
 import { execFileSync } from 'node:child_process';
 import {
-  copyFileSync,
+  chmodSync,
   existsSync,
   lstatSync,
   mkdirSync,
   readFileSync,
   realpathSync,
+  statfsSync,
   writeFileSync,
 } from 'node:fs';
 import { createHash } from 'node:crypto';
@@ -71,7 +72,7 @@ function sourcePath(root, name) {
     stat = lstatSync(file);
   if (!stat.isFile() || stat.isSymbolicLink() || !realpathSync(file).startsWith(root + sep))
     throw Error('SOURCE_TYPE_OR_ESCAPE:' + name);
-  return { name, file, size: stat.size };
+  return { name, file, size: stat.size, mode: stat.mode & 0o7777 };
 }
 export function exportSource({
   root = process.cwd(),
@@ -101,46 +102,118 @@ export function exportSource({
       .toString()
       .split('\0')
       .filter(Boolean);
-    paths = listed.filter(
-      (name) => !forbidden.test(name) && scopes[scope].some((prefix) => name.startsWith(prefix)),
-    );
+    paths = [...new Set(listed)].filter((name) => {
+      if (forbidden.test(name) || !scopes[scope].some((prefix) => name.startsWith(prefix)))
+        return false;
+      try {
+        lstatSync(join(root, name));
+        return true;
+      } catch (error) {
+        if (error.code === 'ENOENT') return false;
+        throw error;
+      }
+    });
   }
   if (!Array.isArray(paths) || !paths.length || new Set(paths).size !== paths.length)
     throw Error('SOURCE_PATH_LIST');
   const plan = paths.sort().map((name) => sourcePath(root, name));
-  const logical = plan.reduce((n, p) => n + p.size, 0),
-    forecast = logical + plan.length * 512 + 4096;
-  if (forecast > maxBytes) throw Error('OUTPUT_FORECAST');
-  // Preflight completes before any destination creation; no rm/reset/index operation.
-  mkdirSync(dest);
-  const entries = [];
-  for (const item of plan) {
-    // Recheck source path and bytes after preflight. Parallel edits produce typed refusal.
-    const checked = sourcePath(root, item.name);
-    if (checked.size !== item.size) throw Error('SOURCE_CHANGED:' + item.name);
-    const before = readFileSync(item.file),
-      sha256 = createHash('sha256').update(before).digest('hex');
-    const output = join(dest, item.name);
-    mkdirSync(dirname(output), { recursive: true });
-    copyFileSync(item.file, output, 1);
-    if (createHash('sha256').update(readFileSync(output)).digest('hex') !== sha256)
-      throw Error('SOURCE_CHANGED:' + item.name);
-    entries.push({ path: item.name, bytes: before.length, sha256 });
+  if (
+    plan.some(
+      (item) =>
+        item.name === 'source-manifest.json' || item.name.startsWith('source-manifest.json/'),
+    )
+  )
+    throw Error('MANIFEST_PATH_COLLISION');
+  // Budget allocated output, including the exact manifest, directory entries and a failure reserve.
+  // Use the destination filesystem's block size, with at least 4 KiB per allocation unit.
+  const unit = Math.max(4096, statfsSync(dirname(dest)).bsize);
+  const rounded = (bytes) => Math.ceil(bytes / unit) * unit;
+  const directories = new Map([['', []]]);
+  const addEntry = (parent, name) => {
+    if (!directories.has(parent)) directories.set(parent, []);
+    directories.get(parent).push(name);
+  };
+  for (const item of [...plan, { name: 'source-manifest.json' }]) {
+    let parent = '';
+    const parts = item.name.split('/');
+    for (let i = 0; i < parts.length; i++) {
+      const name = parts[i];
+      const child = parent ? parent + '/' + name : name;
+      if (i === parts.length - 1 || !directories.has(child)) addEntry(parent, name);
+      if (i < parts.length - 1 && !directories.has(child)) directories.set(child, []);
+      parent = child;
+    }
   }
+  const logical = plan.reduce((n, item) => n + item.size, 0);
+  // One extra block per file allows tail/preallocation overhead. Directory-entry
+  // bounds include encoded names plus metadata, and a block for dot entries/growth.
+  const sourceAllocated = plan.reduce((n, item) => n + rounded(item.size) + unit, 0);
+  const directoryAllocated = [...directories.values()].reduce(
+    (n, names) =>
+      n + unit + rounded(names.reduce((bytes, name) => bytes + Buffer.byteLength(name) + 32, 0)),
+    0,
+  );
+  // Refuse obviously oversized sources before hashing/materializing their bytes.
+  if (sourceAllocated + directoryAllocated + 4 * unit > maxBytes) throw Error('OUTPUT_FORECAST');
+  const entries = plan.map((item) => {
+    const bytes = readFileSync(item.file);
+    if (bytes.length !== item.size) throw Error('SOURCE_CHANGED:' + item.name);
+    return {
+      path: item.name,
+      bytes: bytes.length,
+      sha256: createHash('sha256').update(bytes).digest('hex'),
+    };
+  });
   const manifest = {
     schema: 'source-export-v1',
     source_root: root,
     scope: scope ?? 'explicit-paths',
     logical_bytes: logical,
-    forecast_bytes: forecast,
+    forecast_bytes: 0,
     max_bytes: maxBytes,
+    budget_basis: 'allocated-output-upper-bound',
+    allocation_unit_bytes: unit,
+    directory_count: directories.size,
+    failure_reserve_bytes: 2 * unit,
+    manifest_bytes: 0,
     entries,
     scientific_data_included: false,
     index_changed: false,
   };
-  writeFileSync(join(dest, 'source-manifest.json'), JSON.stringify(manifest, null, 2) + '\n', {
-    flag: 'wx',
-  });
+  let manifestText;
+  for (;;) {
+    manifestText = JSON.stringify(manifest, null, 2) + '\n';
+    const manifestBytes = Buffer.byteLength(manifestText);
+    const forecast =
+      sourceAllocated +
+      directoryAllocated +
+      rounded(manifestBytes) +
+      unit +
+      manifest.failure_reserve_bytes;
+    if (manifest.manifest_bytes === manifestBytes && manifest.forecast_bytes === forecast) break;
+    manifest.manifest_bytes = manifestBytes;
+    manifest.forecast_bytes = forecast;
+  }
+  if (!Number.isSafeInteger(manifest.forecast_bytes) || manifest.forecast_bytes > maxBytes)
+    throw Error('OUTPUT_FORECAST');
+  // Preflight completes before any destination creation; no rm/reset/index operation.
+  mkdirSync(dest);
+  for (let i = 0; i < plan.length; i++) {
+    const item = plan[i];
+    const checked = sourcePath(root, item.name);
+    if (checked.size !== item.size) throw Error('SOURCE_CHANGED:' + item.name);
+    const before = readFileSync(item.file);
+    if (createHash('sha256').update(before).digest('hex') !== entries[i].sha256)
+      throw Error('SOURCE_CHANGED:' + item.name);
+    const output = join(dest, item.name);
+    mkdirSync(dirname(output), { recursive: true });
+    // Write only this already validated snapshot: source growth cannot escape admission.
+    writeFileSync(output, before, { flag: 'wx', mode: checked.mode });
+    chmodSync(output, checked.mode);
+    if (createHash('sha256').update(readFileSync(output)).digest('hex') !== entries[i].sha256)
+      throw Error('SOURCE_CHANGED:' + item.name);
+  }
+  writeFileSync(join(dest, 'source-manifest.json'), manifestText, { flag: 'wx' });
   return manifest;
 }
 function main() {

@@ -1,9 +1,15 @@
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
-const manifest = readFileSync(resolve('crates/quoridor-wasm/Cargo.toml'), 'utf8');
-if (!/^ai = \[[^\n]*"dep:quoridor-ai"[^\n]*\]$/m.test(manifest) || !/^default = \[\]$/m.test(manifest) ||
-  !/^quoridor-ai = \{[^\n]*optional = true[^\n]*\}$/m.test(manifest) ||
-  /^rules = \[[^\n]*quoridor-ai[^\n]*\]$/m.test(manifest)) {
-  throw new Error('AI dependency must remain optional, with no default features');
-}
-console.log('Wasm feature boundary: AI dependency is optional.');
+import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
+
+// Python 3.11+ is already required by the development environment; no package resolution.
+process.stdout.write(
+  execFileSync(
+    'python3',
+    [
+      '-B',
+      fileURLToPath(new URL('./check-boundaries.py', import.meta.url)),
+      'crates/quoridor-wasm/Cargo.toml',
+    ],
+    { timeout: 30000, maxBuffer: 128 * 1024 },
+  ),
+);

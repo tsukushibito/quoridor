@@ -1,15 +1,31 @@
 /// <reference lib="webworker" />
 import init, { AiSearch, ai_engine_build_id, ai_protocol_version } from '../wasm/ai/quoridor_ai.js';
 import wasmUrl from '../wasm/ai/quoridor_ai_bg.wasm?url';
-import { ENGINE_BUILD_ID, PROTOCOL_VERSION, parseWorkerRequest, validMeta,
-  type AiCorrelation, type AiResult, type AiStats, type WorkerResponse } from './protocol';
+import {
+  ENGINE_BUILD_ID,
+  PROTOCOL_VERSION,
+  parseWorkerRequest,
+  validMeta,
+  sameMeta,
+  type AiCorrelation,
+  type AiResult,
+  type AiStats,
+  type WorkerResponse,
+} from './protocol';
 
 const scope = self as DedicatedWorkerGlobalScope;
 let ready = false;
 let generation = 0;
 let memory: WebAssembly.Memory | null = null;
-let active: { meta: AiCorrelation; search: AiSearch; timer: ReturnType<typeof setTimeout> | null;
-  chunk: number; lastProgress: number; lastSlice: number; sliceSamples: number[] } | null = null;
+let active: {
+  meta: AiCorrelation;
+  search: AiSearch;
+  timer: ReturnType<typeof setTimeout> | null;
+  chunk: number;
+  lastProgress: number;
+  lastSlice: number;
+  sliceSamples: number[];
+} | null = null;
 const send = (message: WorkerResponse): void => scope.postMessage(message);
 function error(meta: AiCorrelation | null, code: string, cause: unknown): void {
   send({ type: 'error', meta, code, message: String(cause).slice(0, 512) });
@@ -36,8 +52,14 @@ function continueSearch(): void {
     if (done) {
       const parsed: unknown = JSON.parse(current.search.finish_json());
       const result = parsed as AiResult; // The main thread validates every field before use.
-      send({ type: 'result', meta: current.meta, result, sliceMs, sliceSamples: current.sliceSamples,
-        wasmMemoryBytes: memory?.buffer.byteLength ?? 0 });
+      send({
+        type: 'result',
+        meta: current.meta,
+        result,
+        sliceMs,
+        sliceSamples: current.sliceSamples,
+        wasmMemoryBytes: memory?.buffer.byteLength ?? 0,
+      });
       release();
     } else {
       const now = performance.now();
@@ -58,13 +80,25 @@ scope.onmessage = async (event: MessageEvent<unknown>): Promise<void> => {
   const request = parseWorkerRequest(event.data);
   if (!request) {
     const value = event.data;
-    const meta = typeof value === 'object' && value !== null && 'payload' in value &&
-      typeof value.payload === 'object' && value.payload !== null && 'meta' in value.payload && validMeta(value.payload.meta)
-      ? value.payload.meta : null;
+    const meta =
+      typeof value === 'object' &&
+      value !== null &&
+      'payload' in value &&
+      typeof value.payload === 'object' &&
+      value.payload !== null &&
+      'meta' in value.payload &&
+      validMeta(value.payload.meta)
+        ? value.payload.meta
+        : null;
     error(meta, 'INVALID_REQUEST', 'Invalid AI Worker request');
     return;
   }
-  if (request.type === 'dispose') { release(); ready = false; scope.close(); return; }
+  if (request.type === 'dispose') {
+    release();
+    ready = false;
+    scope.close();
+    return;
+  }
   if (request.type === 'init') {
     try {
       if (!ready) memory = (await init({ module_or_path: wasmUrl })).memory;
@@ -72,15 +106,24 @@ scope.onmessage = async (event: MessageEvent<unknown>): Promise<void> => {
         throw new Error('AI Wasm build or protocol mismatch');
       generation = request.workerGeneration;
       ready = true;
-      send({ type: 'ready', protocolVersion: ai_protocol_version(), engineBuildId: ai_engine_build_id(), workerGeneration: generation });
-    } catch (cause) { error(null, 'STARTUP_FAILED', cause); }
+      send({
+        type: 'ready',
+        protocolVersion: ai_protocol_version(),
+        engineBuildId: ai_engine_build_id(),
+        workerGeneration: generation,
+      });
+    } catch (cause) {
+      error(null, 'STARTUP_FAILED', cause);
+    }
     return;
   }
   if (request.type === 'cancel') {
-    if (active && active.meta.workerGeneration === generation && active.meta.requestId === request.meta.requestId) {
-      const meta = active.meta;
+    if (ready && request.meta.workerGeneration === generation) {
+      if (active && !sameMeta(active.meta, request.meta)) return;
+      // Completion can already be queued when main invalidates this request.
+      // Acknowledge only when this generation no longer owns a live search.
       release();
-      send({ type: 'cancelled', meta });
+      send({ type: 'cancelled', meta: request.meta });
     }
     return;
   }
@@ -91,7 +134,17 @@ scope.onmessage = async (event: MessageEvent<unknown>): Promise<void> => {
   }
   try {
     const search = new AiSearch(JSON.stringify(payload));
-    active = { meta: payload.meta, search, timer: null, chunk: 1, lastProgress: performance.now(), lastSlice: 0, sliceSamples: [] };
+    active = {
+      meta: payload.meta,
+      search,
+      timer: null,
+      chunk: 1,
+      lastProgress: performance.now(),
+      lastSlice: 0,
+      sliceSamples: [],
+    };
     active.timer = setTimeout(continueSearch, 0);
-  } catch (cause) { error(payload.meta, 'INVALID_START', cause); }
+  } catch (cause) {
+    error(payload.meta, 'INVALID_START', cause);
+  }
 };

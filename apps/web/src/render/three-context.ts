@@ -8,12 +8,21 @@ import { cellPoint, wallPoint } from './board-coordinates';
 import { AmbientOcclusion } from './ambient-occlusion';
 
 export type Backend = 'webgpu' | 'webgl2' | 'unknown';
+export type OverlayBounds = { top?: number; bottom?: number };
 export type RendererFault = 'deviceLost' | 'backendError' | 'renderError';
-type Tween = { started: number; duration: number; update: (fraction: number) => void; complete: () => void; cancel: () => void };
+type Tween = {
+  started: number;
+  duration: number;
+  update: (fraction: number) => void;
+  complete: () => void;
+  cancel: () => void;
+};
 export class BoardRenderer {
   readonly board = new BoardScene();
-  readonly renderer = new THREE.WebGPURenderer({ antialias: true,
-    forceWebGL: new URLSearchParams(location.search).get('forceWebGL') === '1' });
+  readonly renderer = new THREE.WebGPURenderer({
+    antialias: true,
+    forceWebGL: new URLSearchParams(location.search).get('forceWebGL') === '1',
+  });
   readonly canvas = this.renderer.domElement;
   readonly controls: OrbitControls;
   backend: Backend = 'unknown';
@@ -31,8 +40,11 @@ export class BoardRenderer {
   private submittedFrames = 0;
   private occlusion: AmbientOcclusion | null = null;
 
-  private constructor(private readonly element: HTMLElement,
-    private readonly onFault: (kind: RendererFault) => void) {
+  private constructor(
+    private readonly element: HTMLElement,
+    private readonly onFault: (kind: RendererFault) => void,
+    private readonly overlayBounds: () => OverlayBounds,
+  ) {
     // Renderer r186 calls these for both WebGPU device loss and WebGL context loss.
     this.renderer.onDeviceLost = () => this.fail('deviceLost');
     this.renderer.onError = () => this.fail('backendError');
@@ -46,7 +58,9 @@ export class BoardRenderer {
     this.canvas.style.touchAction = 'none';
     this.element.appendChild(this.canvas);
     this.controls = new OrbitControls(this.board.camera, this.canvas);
-    this.controls.addEventListener('change', () => { this.needsRender = true; });
+    this.controls.addEventListener('change', () => {
+      this.needsRender = true;
+    });
     this.controls.enableDamping = true;
     this.controls.enablePan = false;
     this.controls.minDistance = 10;
@@ -58,67 +72,94 @@ export class BoardRenderer {
     this.resizeObserver = new ResizeObserver(() => this.resize());
     this.resizeObserver.observe(element);
   }
-  static async create(element: HTMLElement, onFault: (kind: RendererFault) => void = () => {},
-    options: { environmentId?: EnvironmentId; onAssetsUpdate?: () => void } = {}): Promise<BoardRenderer> {
-    const board = new BoardRenderer(element, onFault);
+  static async create(
+    element: HTMLElement,
+    onFault: (kind: RendererFault) => void = () => {},
+    options: {
+      environmentId?: EnvironmentId;
+      onAssetsUpdate?: () => void;
+      overlayBounds?: () => OverlayBounds;
+    } = {},
+  ): Promise<BoardRenderer> {
+    const board = new BoardRenderer(element, onFault, options.overlayBounds ?? (() => ({})));
     try {
       await board.renderer.init();
       board.board.camera.position.set(0, 14, 18);
       board.resize();
       if (board.faulted) throw new Error('Renderer failed during initialization');
-      board.backend = board.renderer.coordinateSystem === THREE.WebGPUCoordinateSystem ? 'webgpu'
-        : board.renderer.coordinateSystem === THREE.WebGLCoordinateSystem ? 'webgl2' : 'unknown';
+      board.backend =
+        board.renderer.coordinateSystem === THREE.WebGPUCoordinateSystem
+          ? 'webgpu'
+          : board.renderer.coordinateSystem === THREE.WebGLCoordinateSystem
+            ? 'webgl2'
+            : 'unknown';
       board.occlusion = new AmbientOcclusion(board.renderer, board.board.scene, board.board.camera);
       board.animationStarted = true;
       await board.renderer.setAnimationLoop(board.loop);
-      void board.board.assets.load(board.renderer, () => {
-        if (board.disposed) return;
-        board.needsRender = true; options.onAssetsUpdate?.();
-      }, options.environmentId ?? DEFAULT_ENVIRONMENT);
+      void board.board.assets.load(
+        board.renderer,
+        () => {
+          if (board.disposed) return;
+          board.needsRender = true;
+          options.onAssetsUpdate?.();
+        },
+        options.environmentId ?? DEFAULT_ENVIRONMENT,
+      );
       return board;
-    } catch (error) { board.dispose(); throw error; }
+    } catch (error) {
+      board.dispose();
+      throw error;
+    }
   }
   private resize(): void {
     if (this.disposed || this.faulted) return;
     try {
-      const width = Math.max(1, this.element.clientWidth), height = Math.max(1, this.element.clientHeight);
+      const width = Math.max(1, this.element.clientWidth),
+        height = Math.max(1, this.element.clientHeight);
       this.board.camera.aspect = width / height;
       this.board.camera.updateProjectionMatrix();
       this.renderer.setSize(width, height);
       this.fitCamera(this.presetDirection());
       this.needsRender = true;
-    } catch (error) { console.error('Board resize failed', error); this.fail('renderError'); }
+    } catch (error) {
+      console.error('Board resize failed', error);
+      this.fail('renderError');
+    }
   }
   private presetDirection(): THREE.Vector3 {
     const narrow = this.element.clientWidth / Math.max(1, this.element.clientHeight) < 1;
-    return new THREE.Vector3(0, narrow ? 26 : 14, (this.presetFlipped ? -1 : 1) * (narrow ? 12 : 18));
+    return new THREE.Vector3(
+      0,
+      narrow ? 26 : 14,
+      (this.presetFlipped ? -1 : 1) * (narrow ? 12 : 18),
+    );
   }
   private fitCamera(direction: THREE.Vector3): void {
     const camera = this.board.camera;
     const ray = direction.clone().normalize();
     if (ray.lengthSq() < 0.5) ray.set(11, 14, 17).normalize();
     const canvas = this.canvas.getBoundingClientRect();
-    const overlay = (selector: string): DOMRect | undefined => {
-      const element = this.element.ownerDocument.querySelector<HTMLElement>(selector);
-      return element?.getClientRects().length ? element.getBoundingClientRect() : undefined;
-    };
-    const top = Math.max(canvas.top + 10, (overlay('.status-island')?.bottom ?? canvas.top) + 10,
-      (overlay('.top-actions')?.bottom ?? canvas.top) + 10);
-    const bottom = Math.min(canvas.bottom - 10, (overlay('.action-hud:not([hidden])')?.top ?? canvas.bottom) - 10);
-    const left = canvas.left + 10, right = canvas.right - 10;
+    const overlay = this.overlayBounds();
+    const top = Math.max(canvas.top + 10, (overlay.top ?? canvas.top) + 10);
+    const bottom = Math.min(canvas.bottom - 10, (overlay.bottom ?? canvas.bottom) - 10);
+    const left = canvas.left + 10,
+      right = canvas.right - 10;
     const fits = (distance: number): boolean => {
       camera.position.copy(ray).multiplyScalar(distance);
       camera.lookAt(0, 0, 0);
       camera.updateMatrixWorld();
-      for (const x of [-5.3, 5.3]) for (const z of [-5.3, 5.3]) for (const y of [-0.7, 1.1]) {
-        const clip = new THREE.Vector3(x, y, z).project(camera);
-        const px = canvas.left + (clip.x + 1) * canvas.width / 2;
-        const py = canvas.top + (1 - clip.y) * canvas.height / 2;
-        if (px < left || px > right || py < top || py > bottom || clip.z > 1) return false;
-      }
+      for (const x of [-5.3, 5.3])
+        for (const z of [-5.3, 5.3])
+          for (const y of [-0.7, 1.1]) {
+            const clip = new THREE.Vector3(x, y, z).project(camera);
+            const px = canvas.left + ((clip.x + 1) * canvas.width) / 2;
+            const py = canvas.top + ((1 - clip.y) * canvas.height) / 2;
+            if (px < left || px > right || py < top || py > bottom || clip.z > 1) return false;
+          }
       return true;
     };
-    let near = 7, far = 60;
+    let near = 7,
+      far = 60;
     for (let i = 0; i < 22; i++) {
       const middle = (near + far) / 2;
       if (fits(middle)) far = middle;
@@ -151,7 +192,10 @@ export class BoardRenderer {
         this.occlusion!.render();
         this.submittedFrames++;
       }
-    } catch (error) { console.error('Board render failed', error); this.fail('renderError'); }
+    } catch (error) {
+      console.error('Board render failed', error);
+      this.fail('renderError');
+    }
   };
   private fail(kind: RendererFault): void {
     if (this.disposed || this.faulted) return;
@@ -160,9 +204,15 @@ export class BoardRenderer {
     if (this.animationStarted) void this.renderer.setAnimationLoop(null);
     this.onFault(kind);
   }
-  async setEnvironment(id: EnvironmentId): Promise<void> { await this.board.assets.setEnvironment(id); }
-  setReducedMotion(value: boolean): void { this.reducedMotion = value; }
-  fitToViewport(): void { this.resize(); }
+  async setEnvironment(id: EnvironmentId): Promise<void> {
+    await this.board.assets.setEnvironment(id);
+  }
+  setReducedMotion(value: boolean): void {
+    this.reducedMotion = value;
+  }
+  fitToViewport(): void {
+    this.resize();
+  }
   setPaused(value: boolean): void {
     if (value === (this.pausedAt !== null)) return;
     const now = performance.now();
@@ -173,12 +223,24 @@ export class BoardRenderer {
     }
     this.controls.enabled = !value;
   }
-  setView(view: GameView): void { this.cancelAnimation(); this.board.sync(view); this.needsRender = true; }
-  setHints(view: GameView | null, enabled: boolean): void { this.board.setHints(view, enabled); this.needsRender = true; }
-  setPreview(target: Parameters<BoardScene['setPreview']>[0], legal: boolean): void {
-    this.board.setPreview(target, legal); this.needsRender = true;
+  setView(view: GameView): void {
+    this.cancelAnimation();
+    this.board.sync(view);
+    this.needsRender = true;
   }
-  cancelAnimation(): void { this.tween?.cancel(); this.tween = null; this.needsRender = true; }
+  setHints(view: GameView | null, enabled: boolean): void {
+    this.board.setHints(view, enabled);
+    this.needsRender = true;
+  }
+  setPreview(target: Parameters<BoardScene['setPreview']>[0], legal: boolean): void {
+    this.board.setPreview(target, legal);
+    this.needsRender = true;
+  }
+  cancelAnimation(): void {
+    this.tween?.cancel();
+    this.tween = null;
+    this.needsRender = true;
+  }
   animate(before: GameView, after: GameView, actionId: number, complete: () => void): void {
     this.cancelAnimation();
     if (this.pausedAt !== null) this.pausedAt = performance.now();
@@ -193,39 +255,69 @@ export class BoardRenderer {
       if (isWall) this.board.finalizeWall(orientation, anchor);
       else this.board.setPawn(player, after.pawns[player]!);
     };
-    const finish = (): void => { settle(); complete(); };
-    if (this.reducedMotion || matchMedia('(prefers-reduced-motion: reduce)').matches) { finish(); return; }
-    this.tween = { started: performance.now(), duration: isWall ? 350 : 190,
-      update: fraction => {
+    const finish = (): void => {
+      settle();
+      complete();
+    };
+    if (this.reducedMotion || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      finish();
+      return;
+    }
+    this.tween = {
+      started: performance.now(),
+      duration: isWall ? 350 : 190,
+      update: (fraction) => {
         if (isWall) this.board.animateWall(orientation, anchor, fraction);
-        else this.board.setPawnInterpolated(player, before.pawns[player]!, after.pawns[player]!, fraction);
-      }, complete: finish, cancel: settle };
+        else
+          this.board.setPawnInterpolated(
+            player,
+            before.pawns[player]!,
+            after.pawns[player]!,
+            fraction,
+          );
+      },
+      complete: finish,
+      cancel: settle,
+    };
   }
   planePoint(clientX: number, clientY: number): { x: number; z: number } | null {
     const rect = this.canvas.getBoundingClientRect();
-    if (clientX < rect.left || clientX > rect.right || clientY < rect.top || clientY > rect.bottom) return null;
-    const pointer = new THREE.Vector2((clientX - rect.left) / rect.width * 2 - 1,
-      -((clientY - rect.top) / rect.height * 2 - 1));
+    if (clientX < rect.left || clientX > rect.right || clientY < rect.top || clientY > rect.bottom)
+      return null;
+    const pointer = new THREE.Vector2(
+      ((clientX - rect.left) / rect.width) * 2 - 1,
+      -(((clientY - rect.top) / rect.height) * 2 - 1),
+    );
     this.ray.setFromCamera(pointer, this.board.camera);
     const hit = this.ray.ray.intersectPlane(this.pickPlane, new THREE.Vector3());
     return hit ? { x: hit.x, z: hit.z } : null;
   }
   projectCell(cell: number): { x: number; y: number } {
-    const point = cellPoint(cell); return this.project(point.x, point.z);
+    const point = cellPoint(cell);
+    return this.project(point.x, point.z);
   }
   projectWall(anchor: number): { x: number; y: number } {
-    const point = wallPoint(anchor); return this.project(point.x, point.z);
+    const point = wallPoint(anchor);
+    return this.project(point.x, point.z);
   }
   projectBoardBounds(): { left: number; top: number; right: number; bottom: number } {
-    const points = [-5.3, 5.3].flatMap(x => [-5.3, 5.3].flatMap(z =>
-      [-0.7, 1.1].map(y => this.project(x, z, y))));
-    return { left: Math.min(...points.map(point => point.x)), top: Math.min(...points.map(point => point.y)),
-      right: Math.max(...points.map(point => point.x)), bottom: Math.max(...points.map(point => point.y)) };
+    const points = [-5.3, 5.3].flatMap((x) =>
+      [-5.3, 5.3].flatMap((z) => [-0.7, 1.1].map((y) => this.project(x, z, y))),
+    );
+    return {
+      left: Math.min(...points.map((point) => point.x)),
+      top: Math.min(...points.map((point) => point.y)),
+      right: Math.max(...points.map((point) => point.x)),
+      bottom: Math.max(...points.map((point) => point.y)),
+    };
   }
   private project(x: number, z: number, y = 0.17): { x: number; y: number } {
     const rect = this.canvas.getBoundingClientRect();
     const clip = new THREE.Vector3(x, y, z).project(this.board.camera);
-    return { x: rect.left + (clip.x + 1) * rect.width / 2, y: rect.top + (1 - clip.y) * rect.height / 2 };
+    return {
+      x: rect.left + ((clip.x + 1) * rect.width) / 2,
+      y: rect.top + ((1 - clip.y) * rect.height) / 2,
+    };
   }
   flipCamera(): void {
     this.presetFlipped = !this.presetFlipped;
@@ -238,19 +330,40 @@ export class BoardRenderer {
   cameraPosition(): [number, number, number] {
     return this.board.camera.position.toArray() as [number, number, number];
   }
-  diagnostics(): ReturnType<BoardScene['diagnostics']> & { canvasCount: number; disposed: boolean; animating: boolean; submittedFrames: number; gpuTextures: number; gpuRenderTargets: number } & ReturnType<TabletopAssets['diagnostics']> & ReturnType<AmbientOcclusion['diagnostics']> {
-    return { ...this.board.diagnostics(), ...this.board.assets.diagnostics(),
-      ...(this.occlusion?.diagnostics() ?? { aoEnabled: false, aoSize: [0, 0] as [number, number] }), canvasCount: this.element.querySelectorAll('canvas').length,
-      disposed: this.disposed, animating: this.tween !== null, submittedFrames: this.submittedFrames,
-      gpuTextures: this.renderer.info.memory.textures, gpuRenderTargets: this.renderer.info.memory.renderTargets };
+  diagnostics(): ReturnType<BoardScene['diagnostics']> & {
+    canvasCount: number;
+    disposed: boolean;
+    animating: boolean;
+    submittedFrames: number;
+    gpuTextures: number;
+    gpuRenderTargets: number;
+  } & ReturnType<TabletopAssets['diagnostics']> &
+    ReturnType<AmbientOcclusion['diagnostics']> {
+    return {
+      ...this.board.diagnostics(),
+      ...this.board.assets.diagnostics(),
+      ...(this.occlusion?.diagnostics() ?? {
+        aoEnabled: false,
+        aoSize: [0, 0] as [number, number],
+      }),
+      canvasCount: this.element.querySelectorAll('canvas').length,
+      disposed: this.disposed,
+      animating: this.tween !== null,
+      submittedFrames: this.submittedFrames,
+      gpuTextures: this.renderer.info.memory.textures,
+      gpuRenderTargets: this.renderer.info.memory.renderTargets,
+    };
   }
   dispose(): void {
     if (this.disposed) return;
     this.disposed = true;
     this.cancelAnimation();
     if (this.animationStarted) void this.renderer.setAnimationLoop(null);
-    this.resizeObserver.disconnect(); this.controls.dispose();
+    this.resizeObserver.disconnect();
+    this.controls.dispose();
     this.occlusion?.dispose();
-    this.board.dispose(); this.renderer.dispose(); this.canvas.remove();
+    this.board.dispose();
+    this.renderer.dispose();
+    this.canvas.remove();
   }
 }

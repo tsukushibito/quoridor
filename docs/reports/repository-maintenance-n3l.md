@@ -77,3 +77,11 @@ R01（execution end_atとcompletion notify_untilの混同）とR02（pidfd/Popen
 対象11port testsがPASSし、実current authorityのread-only checkも1.9062秒/exit0、RSS guardian sample352395264B<512MiBで完了した。job/submit/compiler/modelは0。最初の実checkではAS512MiBを継承したGoの仮想page-summary予約が失敗したため、その原exit2とstderrを保持し、実CLIのRSS guardと仮想ASを分けた。これは元331のtimeoutと別原因であり、元stderrUNKNOWNを置換しない。[exact source・検証・失敗範囲](../../research-data/repository-maintenance/n3l/authority-batch-repair.json)。旧41f23e9の使用proofは変更せず、次entryだけ新helper SHAへ束縛する。
 
 同n3l.1のF03 batch限定確認はfixed c7ae9aaの3sourceと五callerを照合し、SOURCE-STATIC CLEARとした。実read/testの再実行はせず、actual reader STOP01:50:12.445716/remaining[]を受け入れた。原review/失敗/UNKNOWN/費は保持し、wall-clock-only post-read expiryの追加fixtureは未検証coverage limitationとして記録する。次331 softwareをこの確認へのACK待ちにはせず、helper byteはactual STOPまで固定する。[独立source確認の受付](../../research-data/repository-maintenance/n3l/authority-batch-review-acceptance.json)。
+
+## Web/export/worktree patchのmain統合
+
+停止packet 1a60b365 / patch 8ed2fff0 の17 pathは、再作成後のmainでもbefore SHAが完全一致し、324が採用した。F09/F10/F11/F12/F13/F14/F19/H01とW01/W02/W03の修復・既存caller移行を含む。同独立reviewerの関連clearと元29 NN0は固定された範囲で保持する。
+
+実mainのWeb・engine-bridge各caller/Worker計4 TypeScript no-emit check、維持されたmatch controller/Worker lifecycle14件、Wasm依存境界7件と現行feature判定がPASS。変更pathのPrettier/Ruff/Bash構文もPASSした。旧export11件・worktree6件は採用byte一致の限定証拠を再用し、科学suiteは再実行しない。[統合receipt](../../research-data/repository-maintenance/n3l/web-integration.json)にexact sourceと直接wait結果を固定した。
+
+実ブラウザでの製品BFCache復帰、Wasm再build、広いCargo検証は今回NOT_RUN。mock page eventと型検査から実デバイス復帰を認定しない。元review/失敗1753088B/overrun180224B・lost-wait・費・UNKNOWNを保全する。保守parentの全体完了とはせず、残るrules/runtime/data統合と必要な製品verificationを続ける。unowned .devcontainer/update-toolchain.sh は保存しstageしていない。

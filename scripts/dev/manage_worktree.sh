@@ -92,7 +92,7 @@ remove_worktree() {
     echo "Managed worktree does not exist: $target" >&2
     exit 1
   }
-  if [[ -n "$(git -C "$target" status --porcelain --untracked-files=all)" ]]; then
+  if [[ -n "$(git -C "$target" status --porcelain --untracked-files=all --ignored)" ]]; then
     echo "Refusing to remove dirty worktree: $target" >&2
     exit 1
   fi

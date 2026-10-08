@@ -1,0 +1,116 @@
+{
+  "issue": "quoridor-n3l.3",
+  "phase": "324 acceptance; stopped17-path patch",
+  "patch_SHA256": "8ed2fff0dccd3eebfd2384d4cbfffecd9f5941d51eae38bbaad5f50b75e1e1ec",
+  "producer_STOP": "2026-10-08T04:52:39.762242+00:00",
+  "whole_Root_inclusive_B": 1048576,
+  "components_B": {
+    "Web_main_changed_source_upper": 262144,
+    "retained_prior_Root_source_docs_data_controls": 196608,
+    "Git_previous_and_current_objects_upper": 393216,
+    "test_TMP_failure_upper": 131072,
+    "new_receipt_report_rounding_upper": 65536
+  },
+  "supported_by": "research-data/repository-maintenance/n3l/implementation-dispatch.json Root1MiB; no dashboard/Sigma/perf donor",
+  "observation": {
+    "Web_after_logical_B": 173404,
+    "existing_Root_dispatch_reports_allocated_B": 49152,
+    "existing_Root_data_patch_allocated_B": 40960
+  },
+  "CPU": [2],
+  "RAM_B": 536870912,
+  "GPU": 0,
+  "commands_seconds_max": 120,
+  "checks": "scoped existing formatters; affected no-emit TypeScript and Node/Python NN0 only; no Cargo/Wasm/science/browser now",
+  "preserved": "Old source/patches/review/failures/caps/assets/UNKNOWN; unowned update-toolchain diff",
+  "status": "MAIN_SOURCE_AND_AFFECTED_TYPE_NN0_VERIFIED",
+  "source_after": [
+    {
+      "path": "apps/web/src/main.ts",
+      "SHA256": "0214e56e3df8623f6db58d7ec30f728f85ccf993a026106b7a49e4bfc6e67c19"
+    },
+    {
+      "path": "apps/web/src/render/three-context.ts",
+      "SHA256": "287ced06248bece7e6e007418526bbfbdda16ef236b36039bba0eca5b1ef952d"
+    },
+    {
+      "path": "apps/web/src/ui/match-controller.ts",
+      "SHA256": "e9fce8e4d0077424535f47af784d659e0af760631e159d246ec9658e952ea046"
+    },
+    {
+      "path": "package.json",
+      "SHA256": "c8b85376543ca61ed47e223591d51042ebc5d01ec2f0def49d4f6df71d158fed"
+    },
+    {
+      "path": "packages/engine-bridge/src/ai-client.ts",
+      "SHA256": "1a73c768b312a697656beb88232b9cf3fe359d0e3e529cd9de5bc779295a3b73"
+    },
+    {
+      "path": "packages/engine-bridge/src/ai.worker.ts",
+      "SHA256": "7db20b20e3787fade8549d50ee3a954f1491ff7bdc67dc1f0c7ef1a326c68b5b"
+    },
+    {
+      "path": "scripts/check-boundaries.mjs",
+      "SHA256": "1022a47779a31432b0a94bca448a50187cb33e78d0069e95e2b57a5f08a2b333"
+    },
+    {
+      "path": "scripts/check-boundaries.py",
+      "SHA256": "29319bc29179527c74a2d7976ef445e97b6b53dff2669e6d3c23a0aa4f10cf5d"
+    },
+    {
+      "path": "scripts/dev/manage_worktree.sh",
+      "SHA256": "bae7e6aef32d49addc3b98d89fa8ed0393e3689e27dca653b1f51e335ba5d899"
+    },
+    {
+      "path": "scripts/dev/test_manage_worktree.py",
+      "SHA256": "5feaa7a922dd537167e913e8e9eecb012f14077de40f8c609fc6dfa7d3e36436"
+    },
+    {
+      "path": "scripts/dev/test_wasm_boundaries.py",
+      "SHA256": "85f36253523f41b57583eda63d8150fc764bfdca692a255457803f3803857bea"
+    },
+    {
+      "path": "scripts/export-fresh-source.mjs",
+      "SHA256": "249951cda6db0e989e6c9b58efc74f00028d95b21a8bb5ee336bcd52059313f5"
+    },
+    {
+      "path": "tests/e2e/phase4-recovery.spec.ts",
+      "SHA256": "2665f3fb57a99fb15b3438a11651f35ca55b6de57d1296d23a0e2605ff57ff75"
+    },
+    {
+      "path": "tests/unit/match-controller.test.mjs",
+      "SHA256": "8e65e56a063f9527eafa1aa582328c5ef53d625684b93340ec5288935fff56e0"
+    },
+    {
+      "path": "tests/unit/ts-fixture.mjs",
+      "SHA256": "b525cfcd2c3acd0db30650c2e4eaaf44b004b3aa70c6d7ce9b88e80e30a42f04"
+    },
+    {
+      "path": "tests/unit/worker-lifecycle.test.mjs",
+      "SHA256": "2be003b3119113afa467d0250cffba42afa479f6c4bc9cef62c686c9872053c4"
+    },
+    {
+      "path": "tools/research-quality/test_export.mjs",
+      "SHA256": "dd6d73d208e38eb3e439a56988c2fdb99c7d2a6e960e702487f82fbba226db14"
+    }
+  ],
+  "verification": {
+    "typescript_noemit_configs": 4,
+    "maintained_NN0_tests": 21,
+    "scoped_PrettierruffBash": "PASS",
+    "actual_Wasm_feature_boundary": "PASS",
+    "direct_wait": true,
+    "output_receipts": [
+      ".artifacts/repository-maintenance/n3l/web-integration-validation.json",
+      ".artifacts/repository-maintenance/n3l/web-integration-entrypoints.json"
+    ],
+    "old_export11_worktree6_unchanged_proofs": "reused exact adopted bytes; no broad replay"
+  },
+  "NOT_RUN": [
+    "real product BFCache browser recovery",
+    "new Wasm binaries",
+    "whole Cargo/scientific/model suites"
+  ],
+  "owned_integration_STOP_UTC": "2026-10-08T05:18:26.796694+00:00",
+  "pending_direct_waits": []
+}
