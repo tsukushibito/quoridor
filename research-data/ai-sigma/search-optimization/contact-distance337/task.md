@@ -1,0 +1,11 @@
+# First-mover contact correction for fixed D
+
+Human authorizes a separate bounded diagnostic. Same search owner owns337; perf333 stays blocked. First source/fixture phase is128KiB under [the source support](storage-source-support.json), not a compiler/Search/game allocation. Main/Git/index writer is324; worker writes its offpath namespace only.
+
+Define one contact surrogate for the current mover: when adjacent, use a canonical legal first pawn landing and unchanged relaxed wall-graph distance thereafter, e.g. one plus the minimum landing distance. Preserve nonadjacent values and opposite-side original wall distance. Goal and true threefold terminal precede static evaluation. Explicitly define hypothetical third-arrival draw treatment without mutating history or scoring it as a distance win. This is a one-step heuristic, not exact arrival time or WDL. Do not bundle terminal extension, both-side correction, NN input/features, training or new search policy. Baseline fixedD(a0,b8,Tanh) remains the frozen331/336 opponent.
+
+Source contract must cover straight/blocked/diagonal/edge/backward/beneficial contacts, separating walls, near goal, both sides/contact directions/reflections/stocks, noncontact baseline, and history/goal/draw/cancel/read-only behavior. Delegate only source reading/definitions/lightNN0 independent logic now: executable canonical qualification and wholeSearch cost need the actual stopped sharedrules source/private/compile proof, supported whole-phase forecast, soleCargo and actualquiet. Existing two wall-distance BFS calls are charged; NNUE maps are not owned free by D. Price minimal no-hot-heap strategy before implementation or heavy calls.
+
+Freeze finite contact/noncontact cases and completed-work/plain-wholeSearch protocol before outcomes. Report values/actions/PV/counters differences and setup/maps/condition counts/time; ordering changes can change work. No automatic8ABBA/sweep/corpus/model/16games. Extra strength evaluation, NNinput variants and default adoption remain proposals. Preserve323 pause, labels/seals/models/defaults and all old failed costs/assets/UNKNOWN.
+
+Source STOP includes exactfiles/SHA/prewrite/component observation/directwait/remaining[]. Status/ownership in Beads; confirmed findings in docs/research-findings.md. Report once to324; no polling/permanentreviewer or recursive delegation.
