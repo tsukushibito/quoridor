@@ -85,6 +85,23 @@ fn distance(p: Position, maps: &WallMaps) -> Result<[f32; 2]> {
     Ok(distance)
 }
 
+/// Exact cached integer geometry for the explicit distance-step bypass.
+/// This reads the wall maps directly, never reconstructing D from rounded f32.
+pub(crate) fn integer_distance(p: Position, maps: &WallMaps) -> Result<[u8; 2]> {
+    if maps.horizontal != p.horizontal || maps.vertical != p.vertical {
+        return Err(Error::Input("integer distance wall-map mismatch".into()));
+    }
+    let side = usize::from(p.turn);
+    let distances = [
+        maps.distances[side][usize::from(p.pawns[side])],
+        maps.distances[side ^ 1][usize::from(p.pawns[side ^ 1])],
+    ];
+    if distances.iter().any(|d| *d > 80) {
+        return Err(Error::Input("unreachable integer distance".into()));
+    }
+    Ok(distances)
+}
+
 /// Validate canonical board IDs without allocating/re-encoding or trusting
 /// public mutable Features. Other valid general inputs use the general delta.
 #[cfg(feature = "research")]

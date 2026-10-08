@@ -26,7 +26,45 @@ fn main() {
 fn execute() -> Result<()> {
     let args: Vec<_> = std::env::args().skip(1).collect();
     let command = args.first().map(String::as_str).unwrap_or("help");
+    if command == "teacher-pilot"
+        && !(args.len() == 3 && matches!(args[1].as_str(), "--config" | "--audit")
+            || args.len() == 4 && args[1] == "--config" && args[3] == "--check-config")
+    {
+        return Err(
+            "teacher-pilot accepts only the fixed config or saved audit; no fit/full/games inlet"
+                .into(),
+        );
+    }
     match command {
+        "teacher-pilot" if args.iter().any(|a| a == "--audit") => {
+            let output = PathBuf::from(argument(&args, "--audit")?);
+            println!(
+                "{}",
+                serde_json::to_string(&quoridor_runner::teacher_pilot_execution::audit(&output)?)?
+            );
+        }
+        "teacher-pilot" => {
+            use sha2::{Digest, Sha256};
+            let raw = std::fs::read(argument(&args, "--config")?)?;
+            let config: quoridor_runner::teacher_pilot::PilotConfig = serde_json::from_slice(&raw)?;
+            config.validate()?;
+            let digest = format!("{:x}", Sha256::digest(&raw));
+            if args.iter().any(|a| a == "--check-config") {
+                println!(
+                    "{}",
+                    serde_json::json!({"pilot_config_sha256":digest,"valid":true,"main_volume_n":null,
+                        "compiled_sources":quoridor_runner::teacher_pilot_execution::compiled_sources(),
+                        "fixed_D":"original-distance-a0-b8-tanh","models_loaded":0})
+                );
+                return Ok(());
+            }
+            println!(
+                "{}",
+                serde_json::to_string(&quoridor_runner::teacher_pilot_execution::run(
+                    &config, digest
+                )?)?
+            );
+        }
         "arena" if args.iter().any(|a| a == "--recover") => {
             let output = PathBuf::from(argument(&args, "--recover")?);
             println!(

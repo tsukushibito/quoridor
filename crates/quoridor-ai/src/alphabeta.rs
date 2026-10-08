@@ -14,6 +14,7 @@ use std::{
     time::Duration,
 };
 
+use crate::score::{ScoreDomain, TerminalOutcome};
 use web_time::Instant;
 
 pub const TERMINAL_SCORE: f32 = 2.0;
@@ -50,6 +51,7 @@ pub type Result<T> = std::result::Result<T, SearchError>;
 pub enum EvalAccumulator {
     Float(Accumulator),
     Quantized(QuantizedAccumulator),
+    DistanceStep(quoridor_nnue::distance_step::StepAccumulator),
 }
 /// Owned by one search invocation, not by shared model weights or parents.
 #[derive(Debug, Default)]
@@ -620,6 +622,7 @@ impl From<RulesError> for Interrupted {
 type NodeResult<T> = std::result::Result<T, Interrupted>;
 struct Search<'a> {
     eval: &'a dyn StaticEvaluator,
+    score_domain: ScoreDomain,
     eval_scratch: EvalScratch,
     child_buffers: Vec<Option<EvalAccumulator>>,
     orderer: Option<&'a dyn MoveOrderer>,
@@ -745,7 +748,7 @@ impl Search<'_> {
         if let Some(v) = c.terminal_value() {
             self.stats.terminal += 1;
             self.control()?;
-            return Ok(v * TERMINAL_SCORE);
+            return Ok(v * self.score_domain.terminal_utility());
         }
         if depth == 0 {
             self.stats.evaluations += 1;
@@ -753,9 +756,9 @@ impl Search<'_> {
                 .eval
                 .evaluate_with_scratch(c, a, &mut self.eval_scratch)?;
             self.control()?;
-            if !value.is_finite() || value.abs() > 1. {
+            if !self.score_domain.admits(value) {
                 return Err(Interrupted::Error(SearchError::Evaluation(
-                    "nonterminal value must be finite in [-1,1]".into(),
+                    "nonterminal value must be finite within the declared score domain".into(),
                 )));
             }
             return Ok(value);
@@ -1001,7 +1004,7 @@ pub fn search_with_orderer(
         cancel,
         orderer,
         on_completed,
-        &mut table,
+        (&mut table, ScoreDomain::LEGACY),
     )
 }
 
@@ -1018,6 +1021,7 @@ pub struct SearchSession {
     namespace: SearchNamespace,
     evaluator: Arc<dyn StaticEvaluator>,
     table: Table,
+    score_domain: ScoreDomain,
 }
 impl SearchSession {
     /// An immutable evaluator is owned by the session, so unchanged namespace
@@ -1027,10 +1031,29 @@ impl SearchSession {
         namespace: SearchNamespace,
         capacity: usize,
     ) -> Result<Self> {
+        Self::new_with_score_domain(evaluator, namespace, capacity, ScoreDomain::LEGACY)
+    }
+    /// Research callers freeze one common score domain for both opponents/views.
+    /// `namespace.evaluator` must identify actual model/parameter SHA, deployed
+    /// view, units, scale and bypass. The exact domain is added automatically.
+    /// Original D's nonterminal formula can use this adapter without rescaling.
+    pub fn new_with_score_domain(
+        evaluator: Arc<dyn StaticEvaluator>,
+        mut namespace: SearchNamespace,
+        capacity: usize,
+        score_domain: ScoreDomain,
+    ) -> Result<Self> {
+        if score_domain != ScoreDomain::LEGACY {
+            namespace.evaluator.push(':');
+            namespace
+                .evaluator
+                .push_str(&score_domain.namespace_suffix());
+        }
         Ok(Self {
             namespace,
             evaluator,
             table: Table::persistent(capacity)?,
+            score_domain,
         })
     }
     /// Table accounting includes its header, slot storage and retained history.
@@ -1049,11 +1072,33 @@ impl SearchSession {
     pub fn namespace(&self) -> &SearchNamespace {
         &self.namespace
     }
+    pub fn score_domain(&self) -> ScoreDomain {
+        self.score_domain
+    }
+    /// No search/NN work. Terminal classification uses the supplied real cursor.
+    pub fn root_terminal(root: &SigmaContext) -> Option<TerminalOutcome> {
+        TerminalOutcome::from_context(root)
+    }
     /// New game, model, evaluation mode or rules/profile changes clear values,
     /// even if a caller reuses the same namespace string.
     pub fn reset(&mut self, evaluator: Arc<dyn StaticEvaluator>, namespace: SearchNamespace) {
+        self.reset_with_score_domain(evaluator, namespace, ScoreDomain::LEGACY);
+    }
+    pub fn reset_with_score_domain(
+        &mut self,
+        evaluator: Arc<dyn StaticEvaluator>,
+        mut namespace: SearchNamespace,
+        score_domain: ScoreDomain,
+    ) {
+        if score_domain != ScoreDomain::LEGACY {
+            namespace.evaluator.push(':');
+            namespace
+                .evaluator
+                .push_str(&score_domain.namespace_suffix());
+        }
         self.evaluator = evaluator;
         self.namespace = namespace;
+        self.score_domain = score_domain;
         self.table.clear();
     }
     pub fn search(
@@ -1079,7 +1124,7 @@ impl SearchSession {
             cancel,
             None,
             on_completed,
-            &mut self.table,
+            (&mut self.table, self.score_domain),
         )
     }
 }
@@ -1090,8 +1135,9 @@ fn search_in_table(
     cancel: &AtomicBool,
     orderer: Option<&dyn MoveOrderer>,
     on_completed: &mut dyn FnMut(&SearchResult),
-    table: &mut Table,
+    table_and_domain: (&mut Table, ScoreDomain),
 ) -> Result<SearchResult> {
+    let (table, score_domain) = table_and_domain;
     let start = Instant::now();
     if limits.max_depth == 0 || limits.max_nodes == 0 || limits.max_depth > 200 {
         return Err(SearchError::Limits(
@@ -1118,6 +1164,7 @@ fn search_in_table(
         .transpose()?;
     let mut state = Search {
         eval: evaluator,
+        score_domain,
         eval_scratch: evaluator.create_scratch(),
         child_buffers: Vec::new(),
         orderer,
@@ -1143,7 +1190,7 @@ fn search_in_table(
     let run = (|| -> NodeResult<()> {
         state.control()?;
         if let Some(v) = c.terminal_value() {
-            result.value = Some(v * TERMINAL_SCORE);
+            result.value = Some(v * score_domain.terminal_utility());
             result.stop = StopReason::Terminal;
             return Ok(());
         }
@@ -1440,6 +1487,7 @@ mod persistent_tt_tests {
             let cancel = AtomicBool::new(false);
             let mut state = Search {
                 eval: e.as_ref(),
+                score_domain: ScoreDomain::LEGACY,
                 eval_scratch: e.create_scratch(),
                 child_buffers: Vec::new(),
                 orderer: None,
@@ -1516,7 +1564,7 @@ mod persistent_tt_tests {
             &cancel,
             None,
             &mut |_| cancel.store(true, Ordering::Relaxed),
-            &mut cancel_table,
+            (&mut cancel_table, ScoreDomain::LEGACY),
         )
         .unwrap();
         charge(r.stats.nodes);
@@ -1923,8 +1971,10 @@ mod fast_head_search_tests {
         )
         .unwrap();
         let weights: Vec<f32> = raw
-            .chunks_exact(4)
-            .map(|x| f32::from_le_bytes(x.try_into().unwrap()))
+            .as_chunks::<4>()
+            .0
+            .iter()
+            .map(|x| f32::from_le_bytes(*x))
             .collect();
         let model = Arc::new(ResidualModel::load(&path).unwrap());
         let limits = SearchLimits {
@@ -2103,6 +2153,7 @@ mod child_buffer_tests {
             let parent = e.prepare_context(&c).unwrap();
             let mut state = Search {
                 eval: &e,
+                score_domain: ScoreDomain::LEGACY,
                 eval_scratch: e.create_scratch(),
                 child_buffers: e.create_child_storage(4),
                 orderer: None,

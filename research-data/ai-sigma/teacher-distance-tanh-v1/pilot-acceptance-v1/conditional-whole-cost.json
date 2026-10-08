@@ -1,0 +1,66 @@
+{
+  "scope": "source/saved arithmetic pricing only; no N decision/admission",
+  "retained_all_phases_forward_upper_B": 33692708864,
+  "parent_cap_B": 50000000000,
+  "whole_future_increment_B": "UNKNOWN; raw/bin floors below exclude metadata, fits, checkpoints, exports, sixview qualification,96 games, TMP and failure overlap",
+  "options": [
+    {
+      "N_unselected": 640,
+      "scheduled_game_row_upper": 128000,
+      "binary_only_row_upper_B": 10240000,
+      "binary_only_upper_above_current_cache_component_B": 0,
+      "observed_projection_raw_above_current_raw_component_B": 0,
+      "conditional_raw_projection_plus_binary_row_upper_gap_B": 0,
+      "unassigned_after_only_these_gaps_B": 16307291136,
+      "updates_per_fit_per_epoch_upper_if_all_rows_T": 63,
+      "raw_byte_upper": "UNKNOWN until finalized stream serializer/finite record bound; component guard can stop rather than certify completion",
+      "fit_epochs_runtime_peak_and_total": "UNKNOWN"
+    },
+    {
+      "N_unselected": 6400,
+      "scheduled_game_row_upper": 1280000,
+      "binary_only_row_upper_B": 102400000,
+      "binary_only_upper_above_current_cache_component_B": 0,
+      "observed_projection_raw_above_current_raw_component_B": 398400776,
+      "conditional_raw_projection_plus_binary_row_upper_gap_B": 398400776,
+      "unassigned_after_only_these_gaps_B": 15908890360,
+      "updates_per_fit_per_epoch_upper_if_all_rows_T": 625,
+      "raw_byte_upper": "UNKNOWN until finalized stream serializer/finite record bound; component guard can stop rather than certify completion",
+      "fit_epochs_runtime_peak_and_total": "UNKNOWN"
+    },
+    {
+      "N_unselected": 64000,
+      "scheduled_game_row_upper": 12800000,
+      "binary_only_row_upper_B": 1024000000,
+      "binary_only_upper_above_current_cache_component_B": 487129088,
+      "observed_projection_raw_above_current_raw_component_B": 13647684176,
+      "conditional_raw_projection_plus_binary_row_upper_gap_B": 14134813264,
+      "unassigned_after_only_these_gaps_B": 2172477872,
+      "updates_per_fit_per_epoch_upper_if_all_rows_T": 6250,
+      "raw_byte_upper": "UNKNOWN until finalized stream serializer/finite record bound; component guard can stop rather than certify completion",
+      "fit_epochs_runtime_peak_and_total": "UNKNOWN"
+    }
+  ],
+  "source_memory_floors": {
+    "batch": 2048,
+    "slots": 4,
+    "pinned_payload_B_if_CUDA": 20643840,
+    "device_payload_including_side_B_if_CUDA": 20709376,
+    "records_host_B": 540672,
+    "network_parameters_B": 49284,
+    "excludes": "FeatureWorkspace, cloned index/masks/RNG, activation/autograd/optimizer, framework/BLAS/controller/context/allocator, dataset metadata and mapped-page RSS; not peak or RAM/VRAM admission"
+  },
+  "checkpoints_exports": {
+    "fourfits_three_named_native_weight_files_only_B": 591408,
+    "sixview_weight_duplication": "not required: one source weights file per selected fit, view manifests point to it; future trained source binding mandatory",
+    "PT_checkpoints_manifest_logs_curves_visits_TMP_peak": "UNKNOWN; actual serialized PT size and scientific epochs/records unmeasured; no fixed epoch/log bound or oldfee refund"
+  },
+  "practical_resources": {
+    "source_cache_conversion": "one bounded streaming process; input-only family/identity sets and metadata size depend on N; CPU/thread/storage and peak qualified before actual entry",
+    "fits": "four serial conditions, same batch2048/Torch1/two supply threads; one currently available CPU/GPU training family with host/controller reserve; GPU-vs-CPU runtime not measured and cannot be used as performance prediction",
+    "RAM_GPU_peak": "UNKNOWN; existing initial CPU-only fixture family guard2GiB is not a fit qualification. Future guard based on N metadata+framework/whole-device reserve; preserve current recipe, no automatic larger CPU budget",
+    "sixview_96": "at most96*200=19200 move slots; accepted thinking<=1920 seconds under343100ms authority, not whole match/runtime bound; model load/backend/communication/drain/legality/cancel/controller/startup/report remain additional UNKNOWN"
+  },
+  "unassigned_forward_baseline_at_proof_issuance_B": 16307291136,
+  "baseline_limit": "named9a support at issuance, not current global free capacity; future324 reconciles later reservations"
+}

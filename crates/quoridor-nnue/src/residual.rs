@@ -40,8 +40,8 @@ pub struct ResidualManifest {
 }
 #[derive(Debug, Clone)]
 pub struct ResidualModel {
-    base: Model,
-    weights: Vec<f32>,
+    pub(crate) base: Model,
+    pub(crate) weights: Vec<f32>,
     fast_range: HeadRange,
 }
 
@@ -283,6 +283,23 @@ impl ResidualModel {
         scratch: &mut ResidualScratch,
         observe: impl FnOnce(bool, bool),
     ) -> Result<f32> {
+        let r = self.linear_head_with_scratch_observed(a, scratch, observe)?;
+        let d = self.base.distance_fit;
+        let u = d.a + d.b * (a.features.distance[1] - a.features.distance[0]);
+        let value = u + r;
+        if !value.is_finite() {
+            return Err(Error::Numeric("residual logit".into()));
+        }
+        Ok(f64::from(value).tanh() as f32)
+    }
+    /// Shared packed-input/guarded head kernel. Only the explicit step format
+    /// consumes its linear result; legacy evaluation retains its old logit math.
+    pub(crate) fn linear_head_with_scratch_observed(
+        &self,
+        a: &Accumulator,
+        scratch: &mut ResidualScratch,
+        observe: impl FnOnce(bool, bool),
+    ) -> Result<f32> {
         self.base.validate_accumulator(a)?;
         let t = self.base.topology;
         let input = t.input_width() + 4;
@@ -327,13 +344,7 @@ impl ResidualModel {
             );
             r += self.weights[o + j] * v.max(0.);
         }
-        let d = self.base.distance_fit;
-        let u = d.a + d.b * (a.features.distance[1] - a.features.distance[0]);
-        let value = u + r;
-        if !value.is_finite() {
-            return Err(Error::Numeric("residual logit".into()));
-        }
-        Ok(f64::from(value).tanh() as f32)
+        Ok(r)
     }
     pub fn full_simd(&self, p: Position) -> Result<Accumulator> {
         self.base.full_mode(p, EvaluationMode::Simd)

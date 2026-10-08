@@ -1,0 +1,52 @@
+{
+  "N": null,
+  "options": [
+    {
+      "proposed_scheduled_games": 640,
+      "selected": false,
+      "projected_rows": 27980.0,
+      "projected_native_seconds": 63.85047083,
+      "projected_generation_plus_audit_controller_seconds": 86.13708558026701,
+      "projected_raw_bytes": 147214260,
+      "projection_above_current_1GiB_raw_component_B": 0
+    },
+    {
+      "proposed_scheduled_games": 6400,
+      "selected": false,
+      "projected_rows": 279800.0,
+      "projected_native_seconds": 638.5047083,
+      "projected_generation_plus_audit_controller_seconds": 861.3708558026701,
+      "projected_raw_bytes": 1472142600,
+      "projection_above_current_1GiB_raw_component_B": 398400776
+    },
+    {
+      "proposed_scheduled_games": 64000,
+      "selected": false,
+      "projected_rows": 2798000.0,
+      "projected_native_seconds": 6385.0470829999995,
+      "projected_generation_plus_audit_controller_seconds": 8613.708558026701,
+      "projected_raw_bytes": 14721426000,
+      "projection_above_current_1GiB_raw_component_B": 13647684176
+    }
+  ],
+  "unit": "scheduled games, proposed for human decision only",
+  "basis": "linear empirical pilot ratios, not a minimum, finite upper, accuracy certificate, or launch admission",
+  "whole_cost_formula": "retained source/build/private/raw/failures + future generation + audit + cache/conversion + four fits + six-view native qualification + 96-slot evaluation + TMP/review/Git/cleanup",
+  "retained_whole_phase_component_uppers_B": {
+    "source": 134217728,
+    "build_dependencies": 2147483648,
+    "private": 134217728,
+    "pilot_raw": 1073741824,
+    "TMP": 268435456,
+    "control_review_Git_failure_cleanup": 536870912
+  },
+  "unpriced": [
+    "four fits/epochs/updates until N and complete recipe are fixed",
+    "training cache/conversion and model payload growth",
+    "six-view native qualification and 96-slot outputs/work",
+    "new prefix seed/length schedule for a proposed full volume",
+    "nonlinear game lengths, failed prefix attempts, UNKNOWN and IO/resource failures"
+  ],
+  "future_whole_forecast": "NOT_ADMITTED; actual inclusive bounds required after human N and before any full-generation/fit/96 Popen",
+  "old_caps_assets_maxima_failed_fees_UNKNOWN": "held unchanged; no subtraction or cache credit"
+}

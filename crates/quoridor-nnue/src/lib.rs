@@ -1,5 +1,6 @@
 //! QF1 NNUE: authoritative Rust feature encoding, immutable weights, delta/undo,
 //! scalar float oracle, order-preserving SIMD, and checked integer quantization.
+pub mod distance_step;
 mod features;
 mod quantized;
 pub mod residual;
