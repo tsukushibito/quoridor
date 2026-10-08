@@ -1,0 +1,37 @@
+{
+  "issue": "quoridor-4lc.338",
+  "actual_rebuild": "Human reported rebuild completed; rootonly metadata check afterwards",
+  "scope": "Metadata-only; perf eventopens/stat/sampling/model/Search0",
+  "whole_seconds": 0.06428340100683272,
+  "direct_child_waited": true,
+  "remaining": [],
+  "raw_path": ".artifacts/devcontainer-perf338/post-recreation-metadata.json",
+  "raw_SHA256": "9b95b6588fa128ff6c70d3768024ed15782221d776f4305fc05e8ef42b123e42",
+  "checks": {
+    "remote_user_vscode": true,
+    "root_owned_ELF": true,
+    "restricted_perf_group": true,
+    "only_perfmon_file_capability": true,
+    "perfmon_in_bounding_set": true,
+    "file_capability_elevation_allowed": true
+  },
+  "packages": "libcap2-bin\t1:2.66-4+deb12u3+b1\nlinux-perf\t6.1.187-1\n",
+  "perf_version": "perf version 6.1.187",
+  "kernel": "6.18.40.1-microsoft-standard-WSL2",
+  "CapBnd": "00000040a80c25fb",
+  "shell_CapEff": "0000000000000000",
+  "NoNewPrivs": "0",
+  "Seccomp": "2",
+  "perf_event_paranoid": "2",
+  "kptr_restrict": "1",
+  "actualevent_probe": "NOT_RUN;singleprobe coordination pending toavoidduplicatehumanrun",
+  "CLI_context": "Human-suppliedCLI/server0.161.0 managedpackage0.159.2;session API-key discovery feature requirement mismatchoriginUNKNOWN. Rootrecommendedcodex resume --no-daemon. No interactiveCLI/auth/config/serverchange here.",
+  "preserved_other_source": {
+    "path": ".devcontainer/update-toolchain.sh",
+    "SHA256": "19e82f23d60324251dcfed285cc95c48a9c3a4fec98cb87fa8e5a80d87b34b93",
+    "ownership": "Existing unsavededit notowned,notstaged/reverted/adopted by338;drops workspace_root and finalverify_env call."
+  },
+  "research_scheduling": "OldfiniteREADY expired. Actualrebuild event acknowledged,338awaitsactualeventresult;no automatic333 profiling/scientific entry/323resume.",
+  "storage": "Existing128KiBsource/control and32MiBtool upperheld;no refund or fullimagepeak certificate. Metadata/currentrootforecast90112+future16384<131072.",
+  "record_UTC": "2026-10-08T04:13:37.023587+00:00"
+}
