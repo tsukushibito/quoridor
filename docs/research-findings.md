@@ -491,3 +491,41 @@ default/model・旧assets/fee/UNKNOWNは保持する。
 今回のsum順位とtanh出力順位の逆転は0で、残差による順位変化と飽和によるmargin圧縮を区別できた。これは静的leafと有限horizon・teacher目的の適合を調べる具体例であり、Dの普遍的優越、tanhバグ、exact regret、単一敗因を証明しない。MSEはtanh(u+r)への全行平均誤差で、残差単体や合法手順位の資格ではない。局所感度は過去gradientの実測でもない。静的親・限定子とcompleted-depth minimaxのroot/terminal±2/historyは別scopeであり、現在のthreefold版へ読み替えない。
 
 独立保存値確認で36行・38margin・符号/飽和数・FP32加算・単位と解釈を確認した。3感度の報告転記は保存値どおりに通常修正し、追加model実行はしなかった。成功controller2.535645142秒と旧失敗3.337821918秒を保持し、既知全費5.873467060秒、nested非加算、旧TMP・persisted mask pending・continuous peak UNKNOWNは未解消のまま残す。次のR3/R6同局面・同履歴・同depthでのroot/leaf追跡は費用未確定の提案のみで、学習再開・モデル/係数変更は採用しない。[修正済み診断報告](../.worktree/learning-million/.artifacts/value-residual-diagnostic-v1/report-r2.md)、[固定components](../.worktree/learning-million/.artifacts/value-residual-diagnostic-v1/entry-v3/data/components.json)、[修正STOP binding](../.worktree/learning-million/.artifacts/value-residual-diagnostic-v1/caller-v3/report-r2-STOP-binding.json)を証拠とする。
+
+## 壁在庫ゼロのopt-in有限solver（2026-10-08）
+
+両者の壁在庫がゼロのときだけ使う明示的な `endgame` featureをmainへ統合した。genuine prefixから共有canonical規則の履歴を構成し、position・絶対ply・全履歴countを含むinvocation-local memoとbounded explicit-stack minimaxで証明する。UnknownをDrawへ変換せず、存在するLoss子からWinを、全子の解決後だけLoss/Drawを返す。通常探索の既定経路は変更しない。[契約と適用条件](../crates/quoridor-ai/endgame-solver-contract.md)が現役入口の規約である。
+
+source/APIの条件付き独立確認、25件の限定native tests、owned Clippy、固定7根×cold/freshの14呼出しを受け入れた。loss56、draw60、turn57、terminal draw61、terminal goal58の5根は各2回、参照と一致するProvenだった。独立Win certificateがあるnear34とobstructed34は各2回ともUnknown/MemoLimitで、capを上げたり結果を救済したりしていない。ID順DFSがmemo256を使い切ることと、terminalでも約1.075MBを予約することは実際のcoverage・費用上の制約である。
+
+Linux64/page4096のqualification専用allocatorでは14呼出しすべて5 allocations、mapped peak1,097,728B、reported heap上限1,116,668B、終了live0/failed0を確認した。最大whole solve3.002551ms、driver全費0.054676319秒。実Quoridorケースのmemo hitは0で、opaque graphのmemo-hit unitとは分ける。実行版はown core fd35/private523173f2に固定し、mainの機械的ceil修正core b789へ実行証拠を読み替えない。main上の通常libraryとendgame libraryについては別の独立担当がoffline/locked Cargo checkを各1回実施してPASS、停止版9ファイルとの一致を確認した。System/Wasm・実allocator fault・hardRT・全ゲーム・親探索fallback・既定ON・棋力は未資格である。
+
+[14呼出しの有限結果](../.worktree/endgame-solver335/.artifacts/endgame335/qualification-v1/finite-driver-qualified-results-v1.json)、[producer最終STOP](../.worktree/endgame-solver335/.artifacts/endgame335/qualification-v1/qualified-source-STOP-v6.json)、[main構成の独立型検査](../.artifacts/endgame335-main-integration/report.md)を保持する。14呼出しのdirectwait/remaining[]とmain checkのdirectwait/cleanup[]は確認したが、保存receiptのmask pendingやcontinuous peak UNKNOWNを解消したとは扱わない。whole512MiBの支持内で、失敗・旧費・UNKNOWNを保持し、包含するcommand時間を全費へ二重加算しない。
+
+## Continuation historyの固定plain比較：採用基準未達（2026-10-08）
+
+canonical A fb6323に対し、invocation-owned209×209 i16（logical87,362B）のprevious-action continuationを既存history同点だけに使うB24cbを比較した。TT/PV・既存killer・policy・historyの優先順位、legal集合、評価・FT・TT key・規則は維持した。13-hunk差分と関連source/API確認はblockers0、9件の意味あるNN0と共通7件、owned Clippy、同一harnessのprivate A/B buildを供給された範囲で受け入れ、再実行しなかった。
+
+8 ABBAABBA processes、5固定根、depth3/node100000/TT4096、BEST51/Scalar FT/guarded head、50 samples/root/processの計2000 samplesを保存した。40 preflightの完成depth・finite・合法PV・親履歴復元・root value bitsは一致した。cold root/FT/pool/scratch/TT/continuation初期化・探索・dropをsampleに含む。結果前に固定した40 CI/100000 bootstrap/seed334で、両bracketing Aに対する95% CI upper<-1%をB4回中3回以上満たした根は **0/5（必要3/5）** だった。
+
+| 根             | beneficial B / 4 | adverse B / 4 |
+| -------------- | ---------------: | ------------: |
+| Initial        |                0 |             0 |
+| Opening        |                0 |             2 |
+| Walled midgame |                1 |             0 |
+| Jump P2        |                1 |             1 |
+| Endgame        |                0 |             2 |
+
+同じ両bracket・3/4条件の再現adverse根も0で、mixed dataを保持する。独立担当が保存済みCIと40 preflightから判定を確認した。5根すべてAction/PVは一致したが、Openingのnodes/evaluations/delta updatesは各5、Jump P2は各19減った。保存preflightには23 counters中11だけがあり、残り12はUNKNOWNである。value一致やnode減を、同じwork・速度利益・因果・棋力へ換算しない。**この結果ではcontinuationをmainへ適用しない。** 一般的有用性の否定や追加同時間対局は別の問いである。
+
+plain全費238.473563392秒、成功保存CI計算55.112870018秒、既知工程全費561.882650745秒には失敗も含む。stdlib import衝突はCI生成前に失敗し、invocationをPython `-I`へ修正しただけでformula/seed/dataを変えず一度完了した。raw・失敗・mask pending・continuous UNKNOWNを保持する。[最終証拠](../.artifacts/lightweight-ordering-A-v1/phase-20261008/rebase-v3/final-evidence-v1.json)、[保存CI](../.artifacts/lightweight-ordering-A-v1/phase-20261008/statistics.json)、[独立受入れ確認](../.artifacts/lightweight-ordering-A-v1/phase-20261008/rebase-v3/acceptance-check-v1/report.md)が正本で、比較worktreeはunique sourceの復元確認と全reader STOP後に管理helperで撤去する。
+
+## 現行統一規則でのNNUE対Sigma固定16枠（2026-10-08）
+
+main ad358のcurrent Rust1.99 private e4b/fc7、BEST51とSigma d790、同book93cbの8 families・色交換16枠（initial2/main14）、100ms whole caller/5ms reserveを固定して一度実行した。legal third draw・goal-first・200ply UNKNOWN、実TT4096/1MiB、Sigma K64/tau1/noise off、CPU0/thread1を双方に適用した。335 solver、334 ordering、337 contact候補は含まない。実compiled bodyの証拠を、その後のmain統合へ読み替えない。
+
+全16 planned slotsがstarted、**Sigma14勝0敗、NNUE0勝14敗、draw0、UNKNOWN2**。complete pairs6/incomplete2。UNKNOWNはいずれもSigma callerのTimeOverrun（100.207103ms、100.302499ms）で受理前に拒否し、actionを公開せず、forfeit・draw・勝敗への救済・再実行をしなかった。両件ともSigma後手で、random missingnessは確認していない。予定16枠に対する得点の識別範囲はNNUE[0,0.125]、Sigma[0.875,1]であり、CIではない。開いた固定bookの相関・informative censoringから、Elo・一般棋力順位・原因・母集団精度を断定しない。
+
+独立した保存metadata確認で、16 unique game IDs、8先後families、勝敗と打切り、pair census、分母・集計の一致を確認した。658 accepted moves＋2 rejected windows＝660 attempted、Sigma7746 logical requests、NNUE16,246,244 nodes、MCTS9666 completed simulations/302 late-discardedを保持する。backend単位をphysical kernel計測へ換算しない。6 arena/audit/recover commandsはexit0/directwait/cleanup[]、full journal/results/CSV/f32 bitsのauditとrecoveryを元の範囲で再用した。実controller12:24:43.327149〜12:25:46.081073 UTC、全費62.775165810秒、旧失敗を含む既知controller費730.525121123秒、nested非加算。mask pending・continuous UNKNOWN・旧資産と費用は保持した。
+
+[最終bundle](../.worktree/arena-evaluation/.artifacts/sigma-timed-v1/matches-current-unified-v1/final-task-bundle-v1.json)、[固定集計](../.worktree/arena-evaluation/.artifacts/sigma-timed-v1/matches-current-unified-v1/verified-outcome-summary-v1.json)、[独立集計・censor確認](../.artifacts/research-acceptance/arena331-final-v1/report.md)を受け入れた。旧RuleA結果、4 functional windows、失敗ba05とは別列で扱う。承認済み336 Sigma対固定Dはこの完了後の別比較で、4 operational windowsのUNKNOWNをscientific16や教師へ変換しない。323 USERPAUSE・封印・モデル・既定設定は維持する。

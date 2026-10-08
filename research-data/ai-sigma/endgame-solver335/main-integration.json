@@ -1,0 +1,76 @@
+{
+  "schema": "quoridor.endgame-main-integration.v1",
+  "issue": "quoridor-4lc.335",
+  "accepted_UTC": "2026-10-08T13:35:22.989386+00:00",
+  "main_base": "d1126d8",
+  "source_map": {
+    "crates/quoridor-ai/Cargo.toml": {
+      "SHA256": "9f2fb4a60f536e4f666c54db4cc221f3bdd075f73ef933e9692844f061616bb6",
+      "B": 653,
+      "mode": "0o644"
+    },
+    "crates/quoridor-ai/src/lib.rs": {
+      "SHA256": "9eaeaa56eae73f24f979df5a629cc05f7dad94f767866302d1dbf705ad7b4a1e",
+      "B": 19017,
+      "mode": "0o644"
+    },
+    "crates/quoridor-ai/src/endgame.rs": {
+      "SHA256": "e68cba2fd5519aaef684da1bef95824c64bfbc229653e60607892d8cb6e0ef78",
+      "B": 13165,
+      "mode": "0o644"
+    },
+    "crates/quoridor-ai/src/endgame/tests.rs": {
+      "SHA256": "0fe550295c6536d9c2563f2abc5320fe9a452b68ce68be3fe315a7e45ea11299",
+      "B": 6751,
+      "mode": "0o644"
+    },
+    "crates/quoridor-ai/src/endgame_kernel.rs": {
+      "SHA256": "da68ed9691a049ebca5629a5c225fee203480e9cb1e2c72a84ca6044b545450d",
+      "B": 18619,
+      "mode": "0o644"
+    },
+    "crates/quoridor-ai/src/endgame_kernel/tests.rs": {
+      "SHA256": "c0b9ea739bdc3f72c871130c5f9ca63af301eb297406311a00b63d9d0634a910",
+      "B": 22585,
+      "mode": "0o644"
+    },
+    "crates/quoridor-ai/tests/endgame_contract.rs": {
+      "SHA256": "821c6cd0372b30a5106f1f6d7205185c64aa770f8adf406adabdf39a63abf79e",
+      "B": 4618,
+      "mode": "0o644"
+    },
+    "crates/quoridor-ai/tests/endgame_genuine_prefix.rs": {
+      "SHA256": "3813eb79d9f47beafa202dce3f44b7029eaa6467e51b3fb900af332cdf0c42c1",
+      "B": 5830,
+      "mode": "0o644"
+    },
+    "crates/quoridor-ai/endgame-solver-contract.md": {
+      "SHA256": "d2456bc921a84b6e4bf2a439abacd1b7d7de0be07a4d44bd3b1aa3da10149cb1",
+      "B": 28038,
+      "mode": "0o644"
+    }
+  },
+  "producer_final_source_map_SHA256": "b00065a97f940894e36b2b67ad6ce04973a57717b8c4ed5e2103951bd0f1047c",
+  "independent_main_check_result": ".artifacts/endgame335-main-integration/result.json",
+  "independent_main_check_result_SHA256": "ddfc8bd846497c64abf81c24716e3cac209834b9d562807f58b08406bb58c648",
+  "main_checks": ["PASS no-default-features library", "PASS endgame library"],
+  "main_checks_STOP_UTC": "2026-10-08T12:52:30.919522+00:00",
+  "reviewer_reader_STOP_UTC": "2026-10-08T12:56:35.998489+00:00",
+  "retained_evidence_scopes": [
+    "25 supplied native tests and owned Clippy; not replayed",
+    "conditional genuine-prefix and trusted allocation soundness review",
+    "14 fixed Linux64/page4096 private calls: 10 matching Proven,4 UnknownMemoLimit"
+  ],
+  "runtime_evidence_binding": "own core fd35/private523173f2; main coreb789 is separate mechanical ceil style repair",
+  "default_search_unchanged": true,
+  "whole_supported_B": 536870912,
+  "independent_main_checks_forecast_B": 524288000,
+  "no_new_science_or_training": true,
+  "limits": [
+    "System and Wasm allocator qualification absent",
+    "default ON and parent fallback not adopted",
+    "fault/hardRT/general strength unqualified",
+    "persisted pending mask records and continuous peaks UNKNOWN retained",
+    "historical failures and fees retained; nested times not added"
+  ]
+}

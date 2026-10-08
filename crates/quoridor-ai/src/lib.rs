@@ -80,6 +80,10 @@ pub mod research;
 
 #[cfg(feature = "research")]
 pub mod alphabeta;
+#[cfg(feature = "endgame")]
+pub mod endgame;
+#[cfg(feature = "endgame")]
+mod endgame_kernel;
 #[cfg(feature = "research")]
 pub mod sigma_mcts;
 

@@ -9,7 +9,8 @@ web-time = "1"
 
 [features]
 profiling = ["quoridor-core/profiling"]
-research = ["quoridor-core/research", "dep:quoridor-nnue", "quoridor-nnue/research"]
+endgame = ["quoridor-core/research"]
+research = ["endgame", "dep:quoridor-nnue", "quoridor-nnue/research"]
 research-diagnostics = ["research", "quoridor-core/research-diagnostics"]
 
 [dev-dependencies]
