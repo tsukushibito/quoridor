@@ -1,0 +1,84 @@
+{
+  "policy_commit": "438237a8a3f2557baccb587159abce75333350b0",
+  "proof_path": "research-data/ai-sigma/execution-resources-20261008.json",
+  "proof_sha256": "68f528718c63be5471ed32d87984ef63816d6e7066279cc1ef37393243111f88",
+  "checks": [
+    "scoped Prettier write/check PASS",
+    "JSON conservation and unique phase IDs PASS",
+    "legacy manifest SHA unchanged PASS",
+    "explicit-path git diff --check PASS"
+  ],
+  "actual_usage_bytes": null,
+  "adoption_scope": "Future support only; no runtime/science/browser success inferred",
+  "dispatches": [
+    {
+      "issue": "quoridor-4lc.340",
+      "thread": "01a1100f-6d45-78e0-8a87-84503ff0fbf6",
+      "actual_method": "turn/start",
+      "turn": "01a11aa8-1868-79d1-ba8b-1d4ce1d55367",
+      "scope": "C1 repair and fixed diagnostic support"
+    },
+    {
+      "issue": "quoridor-4lc.331",
+      "thread": "01a11062-b120-73a1-8aa3-fe2cb922c7c0",
+      "actual_method": "turn/steer",
+      "turn": "01a11a97-0409-7202-9529-b2bfc5860b4b",
+      "scope": "R1 repair, necessary current compiler/private completion and accepted pairings"
+    },
+    {
+      "issue": "quoridor-4lc.333",
+      "thread": "01a11004-79f3-7c20-872c-432a2c347664",
+      "actual_method": "turn/start",
+      "turn": "01a11aa8-32bb-7393-a598-750759aeaff9",
+      "scope": "Frozen RuleA perf512MiB and separate contact337256MiB"
+    },
+    {
+      "issue": "quoridor-4lc.334",
+      "thread": "01a118a1-aef1-7252-b21b-42f07dd5b1e6",
+      "actual_method": "turn/start",
+      "turn": "01a11aa8-4171-7a31-b342-0d20f5612621",
+      "scope": "1GiB ordering correctness/plain comparison; subsequent WT routing delivered"
+    },
+    {
+      "issue": "quoridor-4lc.335",
+      "thread": "01a118c2-7aa3-7563-9ec1-c0a101183da1",
+      "actual_method": "turn/start",
+      "turn": "01a11aa8-5020-7490-8166-d5f87277a55e",
+      "scope": "512MiB exact-history solver qualification"
+    },
+    {
+      "issue": "quoridor-4lc.339.1",
+      "thread": "01a1189c-4b70-7a41-8195-c4bf3ce9b810",
+      "actual_method": "turn/start",
+      "turn": "01a11aa9-2da3-72d2-92cf-642169d950da",
+      "scope": "Same browser owner restored;128MiB whole parent,32MiB new profile/TMP and launcher patch"
+    }
+  ],
+  "ordering_worktree": {
+    "path": "/workspaces/quoridor/.worktree/lightweight-ordering-A334",
+    "branch": "codex/lightweight-ordering-A334",
+    "head": "438237a8a3f2557baccb587159abce75333350b0",
+    "helper": "scripts/dev/manage_worktree.sh create-sparse ... crates",
+    "checkout_admin_allocated_bytes": 1888256,
+    "included_forecast_bytes": 16777216,
+    "main_source_adopted": false
+  },
+  "policy_notification": {
+    "first_attempt": "PRE_RPC dispatch lock refused; no delivery",
+    "retry": "accepted turn/start01a11aad-2683-7f32-b6c2-c0333f1909ae"
+  },
+  "process_fact": {
+    "at": "2026-10-08T08:39:32.632322Z",
+    "scope": "Named compiler/perf/quoridor and known current worker paths",
+    "actual_compiler_science_harnesses": [],
+    "chrome_devtools_control_processes_observed": true,
+    "perpetual_quiet_claim": false
+  },
+  "remaining_conditions": [
+    "Actual affected correctness and required related C1/R1 repair confirmation",
+    "Current compiler/private/dependency and runtime bindings",
+    "Fresh actual hardware/quiet and sole Cargo/fair clock",
+    "No inherited pause/model/method expansion"
+  ],
+  "source_writer_stop": "2026-10-08T08:44:50.599453+00:00"
+}
