@@ -471,3 +471,23 @@ attribution、lost rate、overhead、FTの原因/棋力、hardware/cache metrics
 336追加対局64MiB＋D資格費は未配分のまま。通常作業の再開を実験admissionや
 全task完了と扱わず、fairclock/Cargoを直列化する。原323 USERPAUSE・封印・
 default/model・旧assets/fee/UNKNOWNは保持する。
+
+## 再作成後のsoftware cpu-clockによる有限profile（2026-10-08）
+
+探索担当は凍結RuleA版（core633794／alpha cd34／residual a518）のBEST51 cold Searchを5固定局面、depth3、node100000、TT4096、Scalar FT、guarded AVX2 headで測った。完了4フェーズはAction・value bits・PV・depth・stop・23 counters・親履歴が一致した。成功plain-beforeを再実行せず、失敗statの起動10回を保持したため、分母は400計測探索＋50起動確認、5試行中4完了フェーズである。現在のthreefold版への読み替えや棋力の認定はしない。
+
+171 software cpu-clock samplesのself上位はhead評価body26（15.20%）、wall_distance_maps22（12.87%）、delta_move_into20（11.70%）、AVX2 head dot18（10.53%）。別のwall_distanceは9（5.26%）で、mapsと同じ22ではない。inclusiveのhead32.16%とdelta31.58%は内部費用が重なり、加算しない。recordの100 cold callsは2.001870369秒、plain-before1.659595408秒／after1.687483470秒より18.63〜20.62%長かった。修復と他担当工程を挟んだ固定順序の観測であり、plain CPU比率・ランダム化CI・性能優位には換算しない。
+
+全171 samplesが複数frameで記録上lost0だったが、未解決leaf9、全chainの未解決frame、170 chainのffffffffffffffff終端が残る。debug_infoなし、inline・copy・columnの内部費用は未分離。libmの1 sampleでreportとscriptの合成inline表示が異なり、親への置換で一致を作らない。hardware PMU/cache metrics、FT SIMDが効かなかった原因、完全な上位stackは未確認である。controller全費67.069029122秒と保存データ4consumerの2.421035796秒、成功集計区間0.004144986秒は別scopeで、nested費を二重加算しない。原失敗・費用・UNKNOWNを保持した。
+
+次の候補は版とcallerを合わせたmaps／wall-distance評価、既存FT32 scalar列更新のcodegen確認、必要ならcopy／validation／columnを分ける最小診断である。新SIMD/FMA/cache実装・モデル・探索規則はこの結果から自動採用しない。これは提案であり、承認済みcontact-distanceの問いとは別に扱う。[有限profile報告と限界](../.worktree/search-optimization/.artifacts/inference-search-perf-v1/entry-v4/numeric-recovery-v1/saved-analysis-v1/report.md)、[固定値・分母・symbol集計](../.worktree/search-optimization/.artifacts/inference-search-perf-v1/entry-v4/numeric-recovery-v1/saved-analysis-v1/summary.json)、[STOPと束縛](../.worktree/search-optimization/.artifacts/inference-search-perf-v1/entry-v4/numeric-recovery-v1/saved-analysis-v1/handoff.json)を正本証拠とする。
+
+## BEST51固定距離・残差・tanhの有限診断（2026-10-08）
+
+学習担当はhistorical RuleAの敗戦転換点と対照8親局面・28選択子候補を結果前に固定し、trained BEST51/PT b16ba38e、ordered params9ca438e4、T-only scaleを維持してCPU FP32 forwardを44回実行した。旧1680 geometryの保存入力を再用し、新geometryは0。observer有無の8親bitsと36行のFP32 add/tanhが一致し、対象内の入力・STM・尺度・loaded model bindingに不一致は検出していない。固定logit `u=8*(d_opp-d_STM)` の `d` はwall-only盤面距離Dを80で割ってf32へ変換した値で、T標準化前である。残差は別に `(d-mu)/sigma` を使う。整数盤面step差の8倍とは解釈しない。
+
+残差は8親中6で非ゼロDの符号を変えた。38組の選択候補marginにはD→u+rの非ゼロ順位逆転7とD exact tieの分離11があり、1組のD差は5.96e-8にすぎない。R6（game5/ply57）ではu約−0.4、r約5.248730、v約0.999877、保存FP32 vからのFP64感度 `1-v*v` は0.000245675254828だった。一方、保存completed探索値は−2/depth6。R3も静的v約0.378999に対して保存rootは−2/depth5である。勝利対照C2もr約19.108433/v=1に飽和するため、飽和だけで敗因を説明できない。
+
+今回のsum順位とtanh出力順位の逆転は0で、残差による順位変化と飽和によるmargin圧縮を区別できた。これは静的leafと有限horizon・teacher目的の適合を調べる具体例であり、Dの普遍的優越、tanhバグ、exact regret、単一敗因を証明しない。MSEはtanh(u+r)への全行平均誤差で、残差単体や合法手順位の資格ではない。局所感度は過去gradientの実測でもない。静的親・限定子とcompleted-depth minimaxのroot/terminal±2/historyは別scopeであり、現在のthreefold版へ読み替えない。
+
+独立保存値確認で36行・38margin・符号/飽和数・FP32加算・単位と解釈を確認した。3感度の報告転記は保存値どおりに通常修正し、追加model実行はしなかった。成功controller2.535645142秒と旧失敗3.337821918秒を保持し、既知全費5.873467060秒、nested非加算、旧TMP・persisted mask pending・continuous peak UNKNOWNは未解消のまま残す。次のR3/R6同局面・同履歴・同depthでのroot/leaf追跡は費用未確定の提案のみで、学習再開・モデル/係数変更は採用しない。[修正済み診断報告](../.worktree/learning-million/.artifacts/value-residual-diagnostic-v1/report-r2.md)、[固定components](../.worktree/learning-million/.artifacts/value-residual-diagnostic-v1/entry-v3/data/components.json)、[修正STOP binding](../.worktree/learning-million/.artifacts/value-residual-diagnostic-v1/caller-v3/report-r2-STOP-binding.json)を証拠とする。

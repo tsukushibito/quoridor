@@ -63,7 +63,9 @@ mainは持続的研究の統合正本。並行変更・具体的な比較にはm
 
 条件付きの次工程も依頼時に配分し、担当は成果物のbindingと実STOP・childwait・cleanupを次の担当と実行・統合担当へ直接通知する。既に配分された工程はその条件成立で進め、実行・統合担当の受領返答だけを追加gateにしない。開始できない場合は、欠けている具体的な成果物・資源・所有を報告する。終了イベントは既存job通知を使い、確認だけの定期LLM起床や常設調整役を増やさない。
 
-人間が許可した統合効率化では、独立した成果物確認や資源・依存確認、交わらないpatch準備が具体的にある時だけ、同時に最大2件の短期補助を使う。それぞれBeads leaf、限定path・問い・出力・writer、実CPU/RAM/保存予測・STOP・検証を持ち、main/Git/index・jobが読むsource・実験起動・資源承認は実行・統合担当に留める。既担当や関連レビュアーの継続を短期補助で置き換えず、単なる手順分割や全履歴点検で増員しない。作成時の明示権限と適用応答のmodel/effort/cwdを通常command前に確認する。
+2026-10-08の人間の明示指示で、短期補助を同時に最大2件とする従前の制限を撤廃した。[現行の前向き運用overlay](../../research-data/ai-sigma/execution-auxiliary-policy-20261008.json)が、SHA固定した資源証明の旧人数fieldだけを上書きする。容量配分と過去jobの証拠は変更しない。別の固定人数上限は設けない。独立して必要な受入れ・source・依存確認がある場合に、実資源、immutable入力とread/write所有権、期待する調整費から並行数を決める。適した空き保存セッションを再用し、必要なら具体的な有界タスクの新規セッションを作れる。常設役割、定期監視、重複する科学レビュー、不要な全履歴監査は増やさない。
+
+各補助はBeads leaf、限定path・問い・出力・writer、支持されたwhole資源予測・STOP・検証を持つ。main/Git/index・最終採用・資源承認は実行・統合担当に留め、通常検証の実行はタスクに明示して配分する。実計測中のsubstantial compute/IOは停止を待ち、supplied成功証拠を担当を埋めるために再実行しない。作成・再開時にdanger-full-access/approvalPolicy neverを明示し、適用されたmodel/effort/cwdと実turn_contextを通常command前に確認する。過去の最大2件計画と使用済み契約は履歴として保持するが、現行の依頼には人数gateとして適用しない。50GB、sole共有Cargo writer、fairclock、研究方法の承認境界、323 USERPAUSE・封印・model/defaultは変えない。
 
 各phaseのsource/control/runtime/log・必要な関連review・統合分とbounded overheadを一つのinclusive予測へまとめ、支持された上限内の個々のファイルを受領返信待ちにしない。未配分枠は実行・統合担当が根拠つきで配分し、actual資産・旧失敗費・buildUNKNOWNを返金しない。修復担当は指定された問い・予算内で同レビュアーへ固定版と検証を直接渡し、blocker解消・実readerSTOPを受けて次の条件付き工程へ進む。source/private版・resource proof変更は明示し、機械検査で全条件を満たしても追加の324/human ACKを要求しない。実行・統合担当は最終bundleと新たな不足・矛盾を受け取り、同じSHA全検査や独立レビューを重ねず、変更境界と重大未解決指摘を確認する。Cargo writerと公平な数値時計の直列化、未配分工程・pause・封印境界は維持する。
 
