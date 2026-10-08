@@ -4,6 +4,7 @@ FROM ${UV_IMAGE} AS uv
 FROM mcr.microsoft.com/devcontainers/base:bookworm
 
 ARG TARGETARCH
+ARG LINUX_PERF_VERSION=6.1.187-1
 ARG INSTALL_GITHUB_CLI
 ARG INSTALL_GIT_LFS
 ARG INSTALL_IMAGE_TOOLS
@@ -22,7 +23,17 @@ RUN set -eux; \
     export DEBIAN_FRONTEND=noninteractive; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
-        bash ca-certificates curl git gnupg jq python3 unzip xz-utils; \
+        bash ca-certificates curl git gnupg jq python3 unzip xz-utils \
+        "linux-perf=${LINUX_PERF_VERSION}" libcap2-bin; \
+    perf_binary="$(readlink -f /usr/bin/perf)"; \
+    python3 -c 'import sys; sys.exit(0 if open(sys.argv[1], "rb").read(4) == b"\x7fELF" else "perf must be an ELF executable")' "$perf_binary"; \
+    getent group perf_users >/dev/null || groupadd --system perf_users; \
+    usermod -a -G perf_users vscode; \
+    chown root:perf_users "$perf_binary"; \
+    chmod 0750 "$perf_binary"; \
+    setcap cap_perfmon=ep "$perf_binary"; \
+    setcap -v cap_perfmon=ep "$perf_binary"; \
+    dpkg-query -W -f='${Package}\t${Version}\n' linux-perf libcap2-bin > /usr/local/share/quoridor-perf-packages.txt; \
     if [ "$INSTALL_GITHUB_CLI" = true ]; then apt-get install -y --no-install-recommends gh; fi; \
     if [ "$INSTALL_GIT_LFS" = true ]; then apt-get install -y --no-install-recommends git-lfs; fi; \
     if [ "$INSTALL_IMAGE_TOOLS" = true ]; then apt-get install -y --no-install-recommends imagemagick optipng pngquant; fi; \

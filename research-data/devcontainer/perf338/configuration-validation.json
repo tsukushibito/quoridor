@@ -1,0 +1,46 @@
+{
+  "issue": "quoridor-4lc.338",
+  "configuration": "Prepared scopedBookwormlinux-perf6.1.187-1 +libcap2-bin/capAddPERFMON/perfELFrootperf_users0750/filecap_perfmon=ep",
+  "state": "CONFIG_VALIDATED_RECREATION_NOT_YET_READY",
+  "changed_files_SHA256": {
+    ".devcontainer/Dockerfile": "2f28d84f84d9d7f867ecfa32f9e76909c5506f7ba6082e2b7d378baeac4001a2",
+    ".devcontainer/devcontainer.json": "6c4daae110ffd5b5c1d0d97b26b007d21f710011aa92d0dcbbb31249cd70f0b9",
+    ".devcontainer/verify-perf.py": "1fb7092f6e1b904d56ee9267791ed316024c572d0f0d1d0799f17066a5f32b38",
+    ".devcontainer/perf.md": "d9d4caa7c9064e768941670f687230f3c7a0288a67302fd0b413c4aa0e3190c0",
+    ".devcontainer/tests/test_verify_perf.py": "5efc89ad33b50a2e1d1c67ed782d671e07a95c8b6ee3ca1300c2f68c095aaedc"
+  },
+  "static": {
+    "configuration_preservation": "PASS allpreviousJSONvalues/settings/mounts unchanged, onlycapAdd",
+    "DockerRUN_Bash_syntax": "PASS parsedonly/notexecuted",
+    "filecap_setup_order": "owner/modebeforecap; onlyPERFMON",
+    "PythonAST": "PASS",
+    "imagebuild_download_install_runtimeprobe": "NOT_RUN",
+    "files": {
+      ".devcontainer/Dockerfile": "2f28d84f84d9d7f867ecfa32f9e76909c5506f7ba6082e2b7d378baeac4001a2",
+      ".devcontainer/devcontainer.json": "6c4daae110ffd5b5c1d0d97b26b007d21f710011aa92d0dcbbb31249cd70f0b9",
+      ".devcontainer/verify-perf.py": "1fb7092f6e1b904d56ee9267791ed316024c572d0f0d1d0799f17066a5f32b38",
+      ".devcontainer/perf.md": "d9d4caa7c9064e768941670f687230f3c7a0288a67302fd0b413c4aa0e3190c0",
+      ".devcontainer/tests/test_verify_perf.py": "5efc89ad33b50a2e1d1c67ed782d671e07a95c8b6ee3ca1300c2f68c095aaedc"
+    }
+  },
+  "ports": {
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.001s\n\nOK\n",
+    "whole_seconds": 0.1054752899799496,
+    "direct_child_waited": true,
+    "perf_syscall_process_job_model_calls": 0,
+    "remaining_children": [],
+    "scope": "4sourceporttests+negativecases only, no realperf/CLIevents"
+  },
+  "source_writer_STOP_UTC": "2026-10-08T02:39:38.221290+00:00",
+  "image_download_build_install_restart_actualprobe": "NOT_RUN",
+  "unmeasured": "Fullimage/baselinefeature/toolchainrebuildpeak; hardwarePMU/hostseccomp/runtimeeffectivecapability/inheritedNoNewPrivs/openingpermission",
+  "recreation_prerequisites": "Actual3319cb failedSTOP+collectionreceived; currentother sourcewriter/reader STOP and preservedunsavedwork pending, freshnamedsciencecompiler snapshot/Cargolease andbackup beforeREADY. No old sourceSTOP/historicalquiet treatedcurrent.",
+  "postCreate_caveat": "ExistingpostCreate updatesCodex/uv/VSCode/Rust, restoresBeads and runsnative/Wasm arithmeticenvironment smoke; unchanged. Userrebuild mustfinishhooks beforeany researchentry. Existingbaseline downloads/fullbuildUNKNOWN not32MiBnewperf packageincrement certificate. No scientificmodel/fit launchedby338.",
+  "skill": "setup-godot-devcontainer read/inspectattempt/manualnarrowmerge/directedscope static; humanexplicitselectedperfapproach overrides unrelatedscaffold/options/repeatedapproval and prohibitsautoimagebuild",
+  "source_resource_support": "storage-support.json128KiB actualsource+controlsobserve65536 plusfutureGit/report32768 held, nooverrunclaimed; tool32MiBincrementfuture only",
+  "maintenance_window": "Notstarted whilependingownersSTOP/configcommit. Planfinite15min afterallquiescent+READY, no newincompatibleheavy/sourcewrites; expirationrequiresfreshquiescence beforelateuserrestart. No permanentmonitor/newagent/autoRestart.",
+  "old_data_costs_unknown": "Preserved; genericinspection/wrongJSorchestration/335routeordering/accountingdeviations incontrol-deviations.json retained",
+  "source_checks": "Ruffformat/check2files;PrettierJSON/Markdown;Bash-nparsedDockerRUN;4NN0mockports PASS; no actualperf processes orsyscalls"
+}
