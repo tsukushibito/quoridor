@@ -1,0 +1,46 @@
+{
+  "issue": "quoridor-n3l",
+  "finding": "F03",
+  "fixed_commit": "c7ae9aa0ba33e2e3b6794db6c631eaa71195c17b",
+  "review": ".artifacts/repository-maintenance/n3l/review/confirmation-authority-batch-v3/findings.md",
+  "review_SHA256": "25462d6be4963030a95fb0e21dc677f3344b40bb9ca0f013edf5dc9a8aa4caeb",
+  "review_control": ".artifacts/repository-maintenance/n3l/review/confirmation-authority-batch-v3/control.json",
+  "review_control_SHA256": "d810db7279249676a8df9f62d30e0c84ddb7526a615cd13dd0a681408a6c6a4f",
+  "source_bindings": [
+    {
+      "path": "scripts/dev/research-job.py",
+      "version": "c7ae9aa0ba33e2e3b6794db6c631eaa71195c17b",
+      "sha256": "30dc366c8c0a7bc41c8965820cbea511a12ef82ead12c2a30d1082c61316f7a1",
+      "bytes": 30792
+    },
+    {
+      "path": "scripts/dev/research-runtime.py",
+      "version": "c7ae9aa0ba33e2e3b6794db6c631eaa71195c17b",
+      "sha256": "c175a4cfae9bc28671c593c93eb019226dbb43a5add451514787005657a90cfb",
+      "bytes": 4106
+    },
+    {
+      "path": "tools/research-session/test_job.py",
+      "version": "c7ae9aa0ba33e2e3b6794db6c631eaa71195c17b",
+      "sha256": "081fea42299ad41a65c824a10f2a40e11b00974b7a561e61489bb562b88567bc",
+      "bytes": 36972
+    }
+  ],
+  "result": "SOURCESTATIC_CLEAR no remaining narrowbatchauthority blocker identified",
+  "actual_reader_STOP": "2026-10-08T01:50:12.445716+00:00",
+  "remaining_readers_children": [],
+  "reused_executed_evidence": "Producer11focusedNN0 and oneactualread-onlymetadata authority receiptf09; reviewer sourceinspection only, no replay/new job",
+  "limits": [
+    "CLIbatch not atomicDBsnapshot/hardRT",
+    "Actualmetadatareadoneevent/sampleRAMnotcontinuouspeak",
+    "Postreadwall-clock-onlyhorizon expiry meaningfulfuturetestcase, sourcebranchfailsclosed; no genericfullcoverage claim",
+    "RootfirstAS-Go virtualreservation refusal and331originalstderrUNKNOWN retained"
+  ],
+  "new_source_or_helper_modifications": 0,
+  "new_review_forecast_B": 32768,
+  "original_review_budget_B": 2097152,
+  "total_retained_forecast_B": 520192,
+  "next": "Currenthelperbytes c7 fixedthroughactual331softwareSTOP; not an addedcentralgate. Parentmaintenanceincomplete/Web+sharedRustverification pending",
+  "Root_newrecord_docs_Git_failure_upper_B": 16384,
+  "Root_existing8MiB": true
+}
