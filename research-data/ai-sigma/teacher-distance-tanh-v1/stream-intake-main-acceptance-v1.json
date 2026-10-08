@@ -1,0 +1,157 @@
+{
+  "scope": "Verified maintained direct terminal JSONL intake source and current-main terminal-cache typecheck only",
+  "source_commit": "a80ba6e",
+  "source_lease": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/stream-intake-main-source-v1.json",
+    "sha256": "9017890c270ce70a3729fc83b05edc75f3544416fc7756c991da97a6977f60d0",
+    "immutable": true
+  },
+  "source_target_sha256": "eb10d6c0edd22904cc244a0b5ea0d2b6f9c2bb6a425eb240395611fd5288b9da",
+  "review": {
+    "path": "/workspaces/quoridor/.artifacts/teacher-learner-review342-v1/stream-repair-v2-confirmation.md",
+    "sha256": "dda8d45af1bec8d962c722118a0e4ea8580a0d7b8037c7428d9642b507ab4a6c",
+    "reader_STOP": "2026-10-08T22:37:41.249417+00:00"
+  },
+  "main_postimages": {
+    "crates/quoridor-data/src/lib.rs": {
+      "sha256": "845ce307af69d513ef2a3ec08f560d8157dacf81bd573cfe8fc5b2651170428b",
+      "bytes": 43147,
+      "mode": 420
+    },
+    "crates/quoridor-data/src/terminal_cache.rs": {
+      "sha256": "8af2b40cc0f5540d43c7c37b2035493a520d19e2ae8d0ab199e7abbb39abad8d",
+      "bytes": 7634,
+      "mode": 420
+    },
+    "crates/quoridor-data/src/terminal_stream.rs": {
+      "sha256": "cc1cff8f43e220e38238cfae57f766c94159a0aeaf6a66dbf75381dce173d3d6",
+      "bytes": 50176,
+      "mode": 420
+    },
+    "crates/quoridor-data/src/bin/terminal-cache.rs": {
+      "sha256": "d508e87c1ffb5977ee2fa3d31267b4dec51c7398fd77bd3e3e7c54dc9eb198ff",
+      "bytes": 744,
+      "mode": 420
+    },
+    "crates/quoridor-data/tests/terminal_stream.rs": {
+      "sha256": "4a4ae371bc78db4632757b6c971ec2951975d410f1641d14ab7cb5dd3f1ece02",
+      "bytes": 18624,
+      "mode": 420
+    },
+    "python/quoridor_training/distance_steps.py": {
+      "sha256": "1c223f99df3319d957f9368b31aa0c773f59ce6945607f9de08e9bc136807f34",
+      "bytes": 17729,
+      "mode": 420
+    },
+    "python/quoridor_training/terminal_cache.py": {
+      "sha256": "5a0d328d60239306b8ab30f77a68499f31abab1a5c9e7ba8a0797e5619e06d82",
+      "bytes": 11970,
+      "mode": 420
+    },
+    "python/quoridor_training/train.py": {
+      "sha256": "61f4ffe268ce84364667e2f8007610412fdcc4ccaa7cddcd09a8e1e711061f05",
+      "bytes": 89336,
+      "mode": 420
+    },
+    "python/quoridor_training/test_distance_steps_admission.py": {
+      "sha256": "26ae500ed5d60f1b03ff463b2018a974cafc8e75b51284c6c54197613e0a92c2",
+      "bytes": 10831,
+      "mode": 420
+    },
+    "python/quoridor_training/test_terminal_stream_admission.py": {
+      "sha256": "d80b05e4468d9598ea953b8e689969b70d632fa6101cce43417ab4cd165756f4",
+      "bytes": 7266,
+      "mode": 420
+    }
+  },
+  "current_main_check": {
+    "receipt_path": "/workspaces/quoridor/.worktree/nnue-hypothesis-learner/.artifacts/teacher-distance-tanh-v1/stream-intake-v1/main-check-v1/qualified-main-STOP.json",
+    "receipt_sha256": "4312671dfb3e3752bb12ef3cfc6bcc1bff01ee64db0048c311674fd225dc2e9f",
+    "argv": [
+      "cargo",
+      "check",
+      "--offline",
+      "--locked",
+      "--manifest-path",
+      "/workspaces/quoridor/Cargo.toml",
+      "-j1",
+      "-p",
+      "quoridor-data",
+      "--bin",
+      "terminal-cache"
+    ],
+    "job_id": "9e68fc05-cfbc-4a5b-8bb8-8fe0700a14de",
+    "START": "2026-10-08T23:00:08.509814+00:00",
+    "worker_STOP": "2026-10-08T23:00:10.332791+00:00",
+    "controller_STOP": "2026-10-08T23:00:10.388492+00:00",
+    "whole_seconds": 1.879220106988214,
+    "directwait": true,
+    "remaining": [],
+    "exact_owned_science_identities_absent": [
+      {
+        "pid": 1584834,
+        "start_ticks": "75361846",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "pid": 1584865,
+        "start_ticks": "75361880",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      }
+    ],
+    "metadata_supervisor": {
+      "pid": 1584725,
+      "start_ticks": "75361547",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "metadata_alone_not_science": true,
+    "bound_refs": 37,
+    "source_after_SHA_size_mode": true,
+    "returned_mask_handles_finalization": {
+      "mask": "completed",
+      "handles": true,
+      "finalrecord": "completed"
+    },
+    "persisted_receipt_facts": "held separately/no retrospective rewrite",
+    "sampled": {
+      "family_RSS_with_controller": 353542144,
+      "phase_allocated_with_checkout_reserve": 992440320,
+      "target_TMP_allocated": 279945216,
+      "held_floor_plus_observed_growth": 296198144
+    },
+    "continuous_peak": "UNKNOWN"
+  },
+  "verification_reused": {
+    "initial_stream_Rust": 8,
+    "initial_stream_Python": 3,
+    "repair_Rust_policy_IO": 4,
+    "repair_Rust_synthetic_refusal": 1,
+    "repair_Python_consumer": 2,
+    "repair_Clippy": "PASS",
+    "repair_actual_job": "b27d4b62-6fa8-4351-8e42-6fc36c39ed5f",
+    "repair_controller_STOP": "2026-10-08T22:12:43.762999+00:00",
+    "repair_controller_whole_s": 4.588358967099339,
+    "successful_tests_replayed": 0,
+    "reviewer_test_or_model_calls": 0
+  },
+  "successful_tests_replayed": 0,
+  "source_lease_released": "2026-10-08T23:00:10.332791+00:00",
+  "current_main_source_compile_status": "PASS",
+  "exclusions": [
+    "actual stream conversion",
+    "real cache publication or filesystem fault qualification",
+    "N or full prefix schedule selection",
+    "pilot inclusion",
+    "full generation",
+    "four fits",
+    "96 evaluation slots",
+    "trained/native legal-geometry/strength adoption"
+  ],
+  "scientific_calls_during_main_check": 0,
+  "budget": "Root new4MiB inside held8MiB intake increment in402MiB source/control/whole2721968128 proof9a; all oldcaps/external557707264/fees/RAW/masks/continuous peaksUNKNOWN held",
+  "known_intake_controller_seconds_including_failed_attempts": 15.129091189087553,
+  "nested_spans_added": false,
+  "old_failed_fees_RAW_masks_external_assets_UNKNOWN": "retained; no refund or retrospective success",
+  "N": null,
+  "pause_seals_default_models": "unchanged"
+}
