@@ -541,3 +541,13 @@ main ad358のcurrent Rust1.99 private e4b/fc7、BEST51とSigma d790、同book93c
 6 arena/audit/recover commandsはexact argv/directwait exit0/readers・handles・process cleanup[]、全16 journal/results/CSV・loaded identities・f32 raw observations・audit/recoveryが固定metadataと一致した。回収stdoutの64KiB tailは768,999Bの全JSONではない。controller13:34:19.399308〜13:35:11.811531 UTC、全費52.434811084秒、旧失敗と先行operational資格を含む既知controller費784.544721700秒、nested非加算。persisted mask pending/final record attemptedとreturned completedを分け、continuous peaks・unmetered費・旧UNKNOWNを保持した。
 
 [固定bundle](../.worktree/arena-evaluation/.artifacts/sigma-timed-v1/sigma-vs-distance-v1/matches-current-v1/final-task-bundle-v1.json)、[最終報告](../.worktree/arena-evaluation/.artifacts/sigma-timed-v1/sigma-vs-distance-v1/matches-current-v1/report.md)、[勝敗・時計・counter集計](../.worktree/arena-evaluation/.artifacts/sigma-timed-v1/sigma-vs-distance-v1/matches-current-v1/verified-outcome-summary-v1.json)を受け入れた。別担当の[保存metadata確認](../.artifacts/research-acceptance/distance336-final-v1/report.md)は16 unique IDs・色交換・勝敗・11拒否identity・10 late returnと1 admission late・得点範囲・six argv censusを確認し、集計の不一致を検出しなかった。固定source・journal・モデル・対局を再実行せず、178,236Bの決定的照合と既存auditを範囲内で再用した。後続の自動再対局・時計変更・新モデル・追加方法は認可しない。人間が次の問いを選ぶ場合は、この打切りとwhole-work費用を前提として比較案を提示する。323 USERPAUSE・封印・既定設定は維持する。
+
+## 教師・距離残差・tanhの新しい検証計画（2026-10-08承認）
+
+人間は[新しい検証契約](design/nnue-teacher-distance-tanh-v1.md)の実装と、固定D同士の64ゲーム生成pilotを承認した。旧BEST51をfine-tuneせず、raw距離step残差の共通新規初期値から、教師・学習tanh・距離bypassを一要因ずつ比較する。現在の実行範囲はsource/schema/score/native資格とpilotまでで、全量Nは未決定である。pilotのcompletion/UNKNOWN・coverage・費用・保存量を測ってから人間がNを選ぶ。4 fitsと6 inference viewsの96開発枠、8-way組合せ・複数seed・モデル既定採用はまだ実行しない。sealed labelsと323 pauseは維持する。
+
+## Sigmaの同期推論とdeadline接続（2026-10-08通常修正）
+
+方針担当が336の既存move metadataと現行control sourceを照合した。11件すべてで95ms前に合法なcompleted snapshot（81.957226〜94.830665ms）があり、discarded_late_replies=1、engine_error=nullだった。次の同期推論をnow<95msだけで許可し、そのmatching terminal replyが完了するまで返却できないため、推論全費と返却・合法性確認の余裕を確保しない具体的な弱点がある。純推論・packing・schedulingの内訳は保存されておらず、CPU原因やSigmaのvalue品質を断定しない。
+
+[deadline-control source/NN0修正](design/sigma-deadline-control-repair-v1.md)を新しい343として承認範囲内で実施する。100ms whole caller・typed late UNKNOWN・元error・matching reply・in-flight回収を保ち、保守的な残費用と返却reserveで次の仕事を許可する。旧331/336の結果・費用・UNKNOWNは変更しない。live資格と新版本の再比較は別途価格を付けた提案で、旧16枠の自動再実行やOS hard real-timeの保証は行わない。

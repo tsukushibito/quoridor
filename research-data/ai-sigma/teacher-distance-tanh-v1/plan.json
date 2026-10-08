@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "epic": "quoridor-4lc.342",
+  "contract": "docs/design/nnue-teacher-distance-tanh-v1.md",
+  "base_commit": "e2e7181",
+  "owners": {
+    "learner": "quoridor-4lc.342.1",
+    "search": "quoridor-4lc.342.2",
+    "arena": "quoridor-4lc.342.3",
+    "integration": "quoridor-4lc.342.4"
+  },
+  "current_executable": [
+    "maintained source/schema/model/search/native interface implementation",
+    "affected changed-boundary qualification",
+    "64-game fixed-D generation pilot and measured report"
+  ],
+  "main_volume_N": null,
+  "human_gate": "explicit full generation quantity N after measured pilot; no full generation/four fit/main96 launch before N",
+  "pilot": {
+    "games": 64,
+    "prefix_lengths": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+    "prefixes_per_length": 4,
+    "prefix_seed": 20261008,
+    "candidate_attempts_per_prefix": 32,
+    "selection": "legal targetblind terminal/exact-reflected-duplicate rejection; retain scheduled failures",
+    "evaluation_book_use": false,
+    "colour_repeat": false,
+    "both_engines": "fixed original D(a0,b8)",
+    "depth": 3,
+    "max_nodes": 100000,
+    "PVS": true,
+    "TT_slots": 4096,
+    "per_move_timeout": null,
+    "operational_ply_cap": 200,
+    "cap_outcome": "UNKNOWN",
+    "rules": "standard2p legal third occurrence draw, goal priority",
+    "solver_order_contact": false
+  },
+  "labels": {
+    "goal_outcome": "row STM +1/-1",
+    "goal_margin": "integer opponent terminal wall-only distance - own terminal wall-only distance",
+    "threefold_outcome": 0,
+    "threefold_learning_margin": 0,
+    "threefold_geometric_margin": "retained separately",
+    "unknown_targets": null,
+    "eligibility": "false for UNKNOWN/forfeit/error/cancel/cap/no completed legal move",
+    "split": "T80/V20 complete game family, identical/reflected series same group, frozen deterministic rounding before outcome, same eligible rows all conditions"
+  },
+  "score": {
+    "version": "NEW raw-distance-step residual; BEST51 historical only",
+    "bypass": "integer current opponentD-ownD + NN residual",
+    "no_bypass": "NN output, distance inputs retained",
+    "raw_units": "integer wall-distance steps",
+    "F": "80*tanh(s/80)",
+    "outcome_target": "80*z",
+    "margin_target": "raw terminal steps, no clipping",
+    "normalized_MSE": "MSE/6400",
+    "statistics": "T only",
+    "terminal": "explicit typed status; conservative frozen finite weight-derived nonterminal bound; common terminal dominance; no magic abs2 or clipping",
+    "TT": "model/view/score version separated"
+  },
+  "fits_after_N": [
+    {
+      "name": "A",
+      "teacher": "outcome",
+      "bypass": true,
+      "train_transform": "F"
+    },
+    {
+      "name": "B",
+      "teacher": "terminal_margin",
+      "bypass": true,
+      "train_transform": "F"
+    },
+    {
+      "name": "C",
+      "teacher": "outcome",
+      "bypass": true,
+      "train_transform": "raw"
+    },
+    {
+      "name": "D",
+      "teacher": "outcome",
+      "bypass": false,
+      "train_transform": "F"
+    }
+  ],
+  "common_fit": {
+    "fresh_initial_parameters": true,
+    "zero_output_head": true,
+    "BEST51_finetune": false,
+    "topology": "QF1+D/FT32/H32/Zero4/FP32/dropout0",
+    "ScalarFT": true,
+    "head": "adopted guarded AVX2 noFMA",
+    "optimizer": "Adam",
+    "batch": 2048,
+    "initial_LR": 0.01,
+    "LR_decay": 0.5,
+    "plateau_patience": 1,
+    "min_LR": 1e-6,
+    "reflection_probability": 0.5,
+    "workers": 2,
+    "weight_decay": 0,
+    "initial_seed": 19080311,
+    "reflection_seed": 19080314,
+    "warmup": "min(257,updates_per_epoch)",
+    "selection": "normalized V-MSE strict BEST",
+    "significant_improvement": "max(1e-8,1e-4*reference)",
+    "early_stop_patience": 8,
+    "strict_BEST_separate_reset": true,
+    "training_wall_cap": null,
+    "unknown_optimizer_recovery": false
+  },
+  "views_after_N": ["A-F", "A-raw", "B-F", "C-raw", "C-F", "D-F"],
+  "qualification": {
+    "Torch_fixed_reference_per_model": 16,
+    "normalized_alert_abs": 1e-5,
+    "normalized_alert_rel": 0.0001,
+    "comparison_units": "raw-step score /80 plus raw discrepancy",
+    "scope": "changed geometry labels reflection family math terminal PVS TT native legal-child full-delta parentundo error cancel Counted; unchanged proof reused"
+  },
+  "development_after_N": {
+    "slots": 96,
+    "configurations": 6,
+    "slots_per_config": 16,
+    "opponent": "unchanged fixedD",
+    "book": "existing OPEN 8-family colour-paired book",
+    "time_ms": 100,
+    "reserve_ms": 5,
+    "TT_slots": 4096,
+    "thread": 1,
+    "UNKNOWN": "planned denominators; no losses/draws/retry",
+    "claims": "no Elo/general superiority/default promotion"
+  },
+  "future_human_decisions": [
+    "full quantity N",
+    "eight-way combinations",
+    "multiple seeds",
+    "added data",
+    "final model/default adoption"
+  ],
+  "unchanged": [
+    "323 USERPAUSE",
+    "sealed labels unread",
+    "old models/defaults",
+    "historical raw fees UNKNOWN"
+  ],
+  "images": "only explicit human request"
+}
