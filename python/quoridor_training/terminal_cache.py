@@ -9,6 +9,7 @@ from pathlib import Path
 import numpy as np
 
 from .cache import sha
+from .distance_steps import require_completed_stream_cache
 from .compact_cache import CompactCorpus
 from .public_features import RECORD, validate_geometry, geometry_from_native
 
@@ -129,8 +130,16 @@ class TerminalCorpus(CompactCorpus):
     def __init__(self, path, allow_test=False):
         self.path = Path(path)
         self.manifest = json.loads((self.path / "cache.json").read_text())
+        require_completed_stream_cache(self.path, self.manifest)
         self.manifest_sha = sha(self.path / "cache.json")
         m = self.manifest
+        if "stream_intake" in m:
+            games = m["stream_intake"]["provenance"]["games_file"]
+            if (
+                games["file"] != "stream-games.jsonl"
+                or sha(self.path / games["file"]) != games["sha256"]
+            ):
+                raise ValueError("authoritative game/failed search census changed")
         if (
             m.get("schema") != SCHEMA
             or m.get("feature_count") != 312

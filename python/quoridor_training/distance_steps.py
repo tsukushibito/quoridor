@@ -149,6 +149,9 @@ def require_main_volume(
         raise ValueError("common input binding object required")
     cache_path = Path(cache) / "cache.json"
     cache_manifest = bound_json(cache_path, common["cache_manifest_sha"])
+    require_completed_stream_cache(cache, cache_manifest, full_volume=True)
+    if cache_manifest["stream_intake"]["human_quantity_n"] != experiment["main_volume_N"]:
+        raise ValueError("cache intake volume differs from accepted N")
     schedule = bound_json(common["schedule"]["path"], common["schedule"]["sha256"])
     initial = common["initialization"]
     condition = experiment["condition"]
@@ -205,6 +208,45 @@ def require_main_volume(
 def verify_main_statistics(admission, statistics):
     if admission is not None and statistics != admission["statistics"]:
         raise ValueError("actual eligible original T-only statistics differ from common freeze")
+
+
+def require_completed_stream_cache(path, manifest, *, full_volume=False):
+    """Pure control refusal before opening arrays, including finalization failure."""
+    if any(
+        ((Path(path) / name).exists() or (Path(path) / name).is_symlink())
+        for name in ("intake-failure.json", "intake-incomplete.json", ".intake.partial")
+    ):
+        raise ValueError("failed/partial stream intake is not a cache")
+    intake = manifest.get("stream_intake")
+    if intake is None and not full_volume:
+        return  # Existing non-stream caches keep their qualified entry.
+    if not isinstance(intake, dict) or intake.get("status") != "complete":
+        raise ValueError("complete authoritative stream cache required")
+    if full_volume and (
+        intake.get("scope") != "full-volume"
+        or type(intake.get("human_quantity_n")) is not int
+        or intake["human_quantity_n"] <= 0
+    ):
+        raise ValueError("human full N is unset; reference/fixture cache cannot fit")
+    if intake.get("publication_protocol") != "incomplete-marker-last-v1":
+        raise ValueError("completed stream publication protocol required")
+    if intake.get("scope") != "synthetic-fixture":
+        header = intake.get("provenance", {}).get("header", {})
+        source = header.get("compiled_sources")
+        marker = header.get("resource_admission", {}).get("synthetic_fixture", False)
+        if (
+            marker is not False
+            or not isinstance(source, dict)
+            or not source
+            or any("synthetic" in key for key in source)
+            or any(
+                not isinstance(v, str) or "synthetic" in v or "fixture" in v
+                for v in (header.get("generator_version"), header.get("config", {}).get("phase"))
+            )
+        ):
+            raise ValueError(
+                "synthetic/missing provenance cannot be authoritative full volume/reference"
+            )
 
 
 def validate_condition(config):

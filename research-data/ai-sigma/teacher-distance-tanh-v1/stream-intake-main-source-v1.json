@@ -1,0 +1,138 @@
+{
+  "scope": "Maintained direct terminal JSONL intake/source publication and fit-input controls; source-integrated, current-main data-bin typecheck pending",
+  "source_target_sha256": "eb10d6c0edd22904cc244a0b5ea0d2b6f9c2bb6a425eb240395611fd5288b9da",
+  "source_patch_sha256": "dd39095fa8ac67fce2e27c803188a419119e482fc0f54a662c01a4439f6c0b00",
+  "producer_source_STOP": "2026-10-08T22:16:49.004867+00:00",
+  "review_report_path": "/workspaces/quoridor/.artifacts/teacher-learner-review342-v1/stream-repair-v2-confirmation.md",
+  "review_report_sha256": "dda8d45af1bec8d962c722118a0e4ea8580a0d7b8037c7428d9642b507ab4a6c",
+  "review_reader_STOP": "2026-10-08T22:37:41.249417+00:00",
+  "main_source_writer_reader_STOP": "2026-10-08T22:51:41.272770+00:00",
+  "main_paths": {
+    "crates/quoridor-data/src/lib.rs": {
+      "before": {
+        "sha256": "df3edbe64dc532830c3ddb2e1f849644c3ab77656b5db1c91675ee6801f73342",
+        "bytes": 43122,
+        "mode": 420
+      },
+      "after": {
+        "sha256": "845ce307af69d513ef2a3ec08f560d8157dacf81bd573cfe8fc5b2651170428b",
+        "bytes": 43147,
+        "mode": 420
+      }
+    },
+    "crates/quoridor-data/src/terminal_cache.rs": {
+      "before": {
+        "sha256": "09cc7d253fb36c96c79fe325f0cd1f2ff52bdaf21bb18162993403f6180d4a08",
+        "bytes": 4819,
+        "mode": 420
+      },
+      "after": {
+        "sha256": "8af2b40cc0f5540d43c7c37b2035493a520d19e2ae8d0ab199e7abbb39abad8d",
+        "bytes": 7634,
+        "mode": 420
+      }
+    },
+    "crates/quoridor-data/src/terminal_stream.rs": {
+      "before": null,
+      "after": {
+        "sha256": "cc1cff8f43e220e38238cfae57f766c94159a0aeaf6a66dbf75381dce173d3d6",
+        "bytes": 50176,
+        "mode": 420
+      }
+    },
+    "crates/quoridor-data/src/bin/terminal-cache.rs": {
+      "before": null,
+      "after": {
+        "sha256": "d508e87c1ffb5977ee2fa3d31267b4dec51c7398fd77bd3e3e7c54dc9eb198ff",
+        "bytes": 744,
+        "mode": 420
+      }
+    },
+    "crates/quoridor-data/tests/terminal_stream.rs": {
+      "before": null,
+      "after": {
+        "sha256": "4a4ae371bc78db4632757b6c971ec2951975d410f1641d14ab7cb5dd3f1ece02",
+        "bytes": 18624,
+        "mode": 420
+      }
+    },
+    "python/quoridor_training/distance_steps.py": {
+      "before": {
+        "sha256": "76c20e1b26fe4efb4d1342bbfadb2f4cbb8fcfb29ba8307eec8b6f89d18d6520",
+        "bytes": 15574,
+        "mode": 420
+      },
+      "after": {
+        "sha256": "1c223f99df3319d957f9368b31aa0c773f59ce6945607f9de08e9bc136807f34",
+        "bytes": 17729,
+        "mode": 420
+      }
+    },
+    "python/quoridor_training/terminal_cache.py": {
+      "before": {
+        "sha256": "f1e0fccd9b6370ac12777b074565f4801985bcd0d92ece3bff81fb5ac390b9e6",
+        "bytes": 11507,
+        "mode": 420
+      },
+      "after": {
+        "sha256": "5a0d328d60239306b8ab30f77a68499f31abab1a5c9e7ba8a0797e5619e06d82",
+        "bytes": 11970,
+        "mode": 420
+      }
+    },
+    "python/quoridor_training/train.py": {
+      "before": {
+        "sha256": "a85929f58f346a298579d87e3243b664e1ffd5da8a2ba3305a9477c5d6f4f450",
+        "bytes": 87052,
+        "mode": 420
+      },
+      "after": {
+        "sha256": "61f4ffe268ce84364667e2f8007610412fdcc4ccaa7cddcd09a8e1e711061f05",
+        "bytes": 89336,
+        "mode": 420
+      }
+    },
+    "python/quoridor_training/test_distance_steps_admission.py": {
+      "before": {
+        "sha256": "e11f0130e52c37cf757cbf80497f9cc316d08c6cc5ebda5e29baaa682ccfcebe",
+        "bytes": 10167,
+        "mode": 420
+      },
+      "after": {
+        "sha256": "26ae500ed5d60f1b03ff463b2018a974cafc8e75b51284c6c54197613e0a92c2",
+        "bytes": 10831,
+        "mode": 420
+      }
+    },
+    "python/quoridor_training/test_terminal_stream_admission.py": {
+      "before": null,
+      "after": {
+        "sha256": "d80b05e4468d9598ea953b8e689969b70d632fa6101cce43417ab4cd165756f4",
+        "bytes": 7266,
+        "mode": 420
+      }
+    }
+  },
+  "exact_base": "3543d63",
+  "format": "All10 postimages exact SHA/mode/bytes after scoped Rustfmt/Ruff; format/check/lint/diff PASS",
+  "verification_reused": {
+    "initial_stream_Rust": 8,
+    "initial_stream_Python": 3,
+    "repair_Rust_policy_IO": 4,
+    "repair_Rust_synthetic_refusal": 1,
+    "repair_Python_consumer": 2,
+    "repair_Clippy": "PASS",
+    "repair_actual_job": "b27d4b62-6fa8-4351-8e42-6fc36c39ed5f",
+    "repair_controller_STOP": "2026-10-08T22:12:43.762999+00:00",
+    "repair_controller_whole_s": 4.588358967099339,
+    "successful_tests_replayed": 0,
+    "reviewer_test_or_model_calls": 0
+  },
+  "controls": "Known synthetic full-volume/ref provenance refusal; actual reference generator-source-policy binding; config-bound depth/node/strictness; incomplete marker through fallible publication; original primary failures preserved",
+  "real_data_cache_model_fit_or_N_calls": 0,
+  "current_main_Cargo_by_root": 0,
+  "N_schedule_pilot_mix_fullgeneration_fourfits_96": "UNSELECTED/NOT_ADMITTED",
+  "budget": "Root new4MiB inside held8MiB intake increment in402MiB source/control/whole2721968128 proof9a; all oldcaps/external557707264/fees/RAW/masks/continuous peaksUNKNOWN held",
+  "main_source_lease": "Ten code paths and necessary core/NNUE/manifests/lock frozen for sameowner pending current-main check; docs/HEAD not equality gate",
+  "pending": "Samelearner one cargo check main quoridor-data/terminal-cache; no extra tests or model/fit work"
+}

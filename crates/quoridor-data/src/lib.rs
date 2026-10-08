@@ -23,6 +23,7 @@ pub const SCHEMA_VERSION: &str = "quoridor-teacher-v1";
 pub const FEATURE_COUNT: usize = 312;
 pub mod terminal;
 pub mod terminal_cache;
+pub mod terminal_stream;
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, PartialOrd, Ord)]
 #[serde(rename_all = "lowercase")]
 pub enum Split {

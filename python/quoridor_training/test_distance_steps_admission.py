@@ -54,6 +54,20 @@ class FitAdmission(unittest.TestCase):
             self.cache / "cache.json",
             {
                 "schema": "quoridor-terminal-geometry-v1",
+                "stream_intake": {
+                    "status": "complete",
+                    "publication_protocol": "incomplete-marker-last-v1",
+                    "provenance": {
+                        "header": {
+                            "generator_version": "fixed-d-dual-teacher-pilot-v1",
+                            "config": {"phase": "full_volume"},
+                            "compiled_sources": {"unexecuted-control-port": "b" * 64},
+                            "resource_admission": {},
+                        }
+                    },
+                    "scope": "full-volume",
+                    "human_quantity_n": 1,
+                },
                 "source_binding": self.dataset,
                 "schedule_sha256": self.schedule["sha256"],
                 "family_partition_sha256": self.family_sha,

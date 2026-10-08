@@ -89,13 +89,18 @@ def verify_initial_binding(expected, weights_path):
 
 def prepare_statistics(cache, output):
     """Fix original-train distance moments and row constant without Torch or test labels."""
+    manifest = json.loads((Path(cache) / "cache.json").read_text())
+    terminal = manifest.get("schema") == "quoridor-terminal-geometry-v1"
+    if terminal:
+        from .distance_steps import require_completed_stream_cache
+
+        require_completed_stream_cache(cache, manifest, full_volume=True)
     import numpy as np
 
     started = time.monotonic()
     corpus = load(cache)
-    if (
-        not getattr(corpus, "compact", False)
-        or corpus.manifest.get("dataset_revision") != "original-full-v1"
+    if not getattr(corpus, "compact", False) or (
+        not terminal and corpus.manifest.get("dataset_revision") != "original-full-v1"
     ):
         raise ValueError("statistics requires qualified original-full-v1 compact observations")
     indices = np.flatnonzero((corpus.splits == 0) & corpus.eligible)
@@ -115,6 +120,44 @@ def prepare_statistics(cache, output):
     output = Path(output)
     output.mkdir(parents=True)
     corpus.verify_binding()
+    if terminal:
+        # Complete original T-only metadata is exactly what future fits recompute.
+        outcome_constant = 80 * constant
+        margin_constant = float(np.mean(corpus.labels[indices, 2], dtype=np.float64))
+        write(output / "train-only-scale.json", statistics)
+        constants = {}
+        for condition in "ABCD":
+            file = output / ("train-only-constant-" + condition + ".json")
+            write(
+                file,
+                {
+                    "row_mean_constant": margin_constant if condition == "B" else outcome_constant,
+                    "binding": {
+                        "cache_manifest_sha": corpus.binding["dataset_sha"],
+                        "partition": "train",
+                        "rows": len(indices),
+                        "condition": condition,
+                    },
+                },
+            )
+            constants[condition] = {"path": str(file.resolve()), "sha256": sha(file)}
+        result = {
+            "cache_manifest_sha": corpus.binding["dataset_sha"],
+            "main_volume_N": manifest["stream_intake"]["human_quantity_n"],
+            "schedule_sha256": manifest["schedule_sha256"],
+            "family_partition_sha256": manifest["family_partition_sha256"],
+            "scale": {
+                "path": str((output / "train-only-scale.json").resolve()),
+                "sha256": sha(output / "train-only-scale.json"),
+            },
+            "constants": constants,
+            "rows": len(indices),
+            "partition": "train",
+            "wall_seconds": time.monotonic() - started,
+            "model_forward_rows": 0,
+        }
+        write(output / "result.json", result)
+        return result
     write(output / "train-only-scale.json", {**statistics, "binding": binding})
     write(output / "train-only-constant.json", {"row_mean_constant": constant, "binding": binding})
     result = {
@@ -1769,6 +1812,9 @@ def training_statistics(corpus, indices, column, size=4096):
                 "distance_input_units": "canonical-integer-D/80",
                 "fit_partition": "train",
                 "fit_rows": len(indices),
+                "cache_manifest_sha": corpus.binding["dataset_sha"],
+                "source_stream_sha256": corpus.manifest.get("source_binding", {}).get("sha256"),
+                "family_partition_sha256": corpus.manifest.get("family_partition_sha256"),
                 "sigma_floor_f32": float(np.float32(0.0001)),
                 "zero_variance_coordinates": (squared == 0).tolist(),
                 "target_independent": True,
