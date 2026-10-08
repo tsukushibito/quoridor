@@ -83,3 +83,9 @@ FIRST Aだけを現行baselineと比較する1問を推奨する。最初にexac
 独立complete-tree minimaxはrootvalueとvalid equal-bestAction集合を確認し、ordering変更によるAction/PV/nodes/cutoffs差を禁止しない。previousAction/root/reset/lifetime/color/history/reentrant/parentundo/cancel/error/saturation/tie-only/alllegalunique/PV合法の意味を検証する。plain比較は既5roots/d3/node100000/TT4096/BEST51固定、2ABBA8process50samples/1swarm/3stargetの5cold IDs、同完成depth・有限値・root合法/parent不変を確認し、cap未完成はinconclusiveにする。両bracketing Aに対する95%CI >1%・3/4反復/root・3/5coldbenefit/再現adverseなしを固定し、mixed/無効果なら問を終了しblind repeatしない。
 
 plain robust benefitなら関連source/ordering境界確認後に承認方向として採用できるが棋力効果とは区別する。same-time baseline A対Bの既8family16colour100ms/5reserveは次の全費/protocol提案のみで、この最初の依頼から追加gamesやSigma331slotを起動しない。333perfの現source/private baselineへadoptionを混ぜず、使用version bindingを先に確認する。
+
+## FIRST Aの有限結果（2026-10-08）
+
+承認済みの固定plain比較を完了し、mainにはcontinuationを採用しない。A fb6323／B24cb／core b789、8 ABBAABBA processes・5根・depth3・2000 samples、結果前に固定した40 CI/100000 bootstrap/seed334で、両bracketing Aに対する95% CI upper<-1%をB4回中3回以上満たす根は0/5（必要3/5）だった。同じ3/4条件の再現adverse根も0で、mixed結果を保持する。source/API独立確認はblockers0、保存CIの独立受入れ確認も一致した。有限5根の不支持をcontinuation全般や学習型B/Cの反証へ広げない。
+
+全40 preflightのroot value bits・完成depth・finite・合法PV・親復元は一致した。5根のAction/PVも一致したが、OpeningとJump P2ではnodes/evaluations/delta updatesがそれぞれ5、19減り、同じvalueを同じworkや速度利益とみなさない。保存11 counters以外の12 countersはUNKNOWNである。候補patch・raw・失敗と全費を保持し、unique sourceの復元とreader STOPを確認して比較専用worktreeを撤去する。追加games・sweep・再測定は開始しない。詳細と証拠は[正本の有限結果](../research-findings.md#continuation-historyの固定plain比較採用基準未達2026-10-08)に集約する。
