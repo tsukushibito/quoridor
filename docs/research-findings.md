@@ -546,6 +546,8 @@ main ad358のcurrent Rust1.99 private e4b/fc7、BEST51とSigma d790、同book93c
 
 人間は[新しい検証契約](design/nnue-teacher-distance-tanh-v1.md)の実装と、固定D同士の64ゲーム生成pilotを承認した。旧BEST51をfine-tuneせず、raw距離step残差の共通新規初期値から、教師・学習tanh・距離bypassを一要因ずつ比較する。現在の実行範囲はsource/schema/score/native資格とpilotまでで、全量Nは未決定である。pilotのcompletion/UNKNOWN・coverage・費用・保存量を測ってから人間がNを選ぶ。4 fitsと6 inference viewsの96開発枠、8-way組合せ・複数seed・モデル既定採用はまだ実行しない。sealed labelsと323 pauseは維持する。
 
+64局生成が使う最小data境界をmainへ受け入れた。TeacherRowのoptional terminal provenance、整数距離・STM教師、真のthreefoldとUNKNOWNの区別、履歴に結び付くply/action/QF1入力、outcome前のfamily分割を対象とする。同342.5のL01/L02 source blockerは修正確認済みで、7 label定義のPASSは既存成功と修正2件を合わせ、成功suiteを再実行していない。arenaの最小consumerも同じlib/terminalで6対象定義・新release・scoped ClippyがPASSした。main production2パスは凍結版とbyte一致し、7件のtestはRustfmtによる末尾改行1 byteの除去だけで定義は一致する。[最小境界の受入れ](../research-data/ai-sigma/teacher-distance-tanh-v1/minimal-label-acceptance-v1.json)。cache・Python学習・native scoreの採用ではなく、64pilot自体とN決定は未完了である。
+
 ## Sigmaの同期推論とdeadline接続（2026-10-08通常修正）
 
 方針担当が336の既存move metadataと現行control sourceを照合した。11件すべてで95ms前に合法なcompleted snapshot（81.957226〜94.830665ms）があり、discarded_late_replies=1、engine_error=nullだった。次の同期推論をnow<95msだけで許可し、そのmatching terminal replyが完了するまで返却できないため、推論全費と返却・合法性確認の余裕を確保しない具体的な弱点がある。純推論・packing・schedulingの内訳は保存されておらず、CPU原因やSigmaのvalue品質を断定しない。

@@ -1,0 +1,73 @@
+{
+  "issue": "quoridor-4lc.342.4",
+  "accepted_at": "2026-10-08T18:06:40.246097+00:00",
+  "scope": "Minimal terminal teacher/TeacherRow/labels/family split interface; full cache/Python/export/native interfaces excluded",
+  "evidence": [
+    {
+      "path": "/workspaces/quoridor/.worktree/nnue-hypothesis-learner/.artifacts/teacher-distance-tanh-v1/label-repair-v4/binding.json",
+      "sha256": "46c07185575214e35f7c52e69884d53fdd02eaf0ecc7ac6ba289c503bd52e998"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/nnue-hypothesis-learner/.artifacts/teacher-distance-tanh-v1/label-fixture-repair-v5/binding.json",
+      "sha256": "a335245f341d69f800d966fccbce59766b31e949550c6902fa93c9dd74ca1f60"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/nnue-hypothesis-learner/.artifacts/teacher-distance-tanh-v1/source-qualification-fixture-v3/qualified-STOP.json",
+      "sha256": "381563c1d55a1a3da0c2946d2225b2de5ffc53c05f448bb2f4d65948dbf360b8"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/teacher-label-review342-v1/confirmation-v4.md",
+      "sha256": "46a5363cc9aa0a677c007ff32e34f61b517918e8ef914798ed4b21fe6b21cae7"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/nnue-hypothesis-arena/.artifacts/teacher-distance-pilot-v1/software-qualified-STOP-v3.json",
+      "sha256": "cb2ecd7bf5224b56bc8b140700ffa36e7cc67f61373a268564427f7bc0519623"
+    }
+  ],
+  "main_paths": [
+    {
+      "path": "crates/quoridor-data/src/lib.rs",
+      "sha256": "6bbed9e85a5ef96a0914e22783b0990792c6763d24677e0f231ccd9a88d33323",
+      "bytes": 42432,
+      "mode": "0o644"
+    },
+    {
+      "path": "crates/quoridor-data/src/terminal.rs",
+      "sha256": "c3704349240a168c6408be89f6e00405f2093316e73d88cdfe1394dd207a6548",
+      "bytes": 12314,
+      "mode": "0o644"
+    },
+    {
+      "path": "crates/quoridor-data/tests/terminal_teachers.rs",
+      "sha256": "1b161fa614220714838dcec841154d1ef72cb94ccf025a43939e45ce6d03410c",
+      "bytes": 8013,
+      "mode": "0o644"
+    }
+  ],
+  "verification": {
+    "git_exact_patch_preconditions_passed": true,
+    "production_lib_terminal_bytes_exact_stopped_and_arena_compiled": true,
+    "test_fixture_only_format_delta": "Rustfmt removed one surplus final newline; all prior bytes unchanged, seven definitions identical",
+    "seven_label_PASS_join": "prior successful definitions preserved plus only two previously failed fixtures; no successful suite replay",
+    "minimal_vs_learner_compiled_lib": "only terminal_cache module/optional manifest fields/precompute dispatch differs; TeacherRow and terminal math exact",
+    "minimal_arena_consumer_compile": "six generator/chronology/caller definitions PASS, new release and no-deps Clippy PASS in own frozen source",
+    "independent_L01_L02_source_clear": true,
+    "new_integrator_model_tests_pilot_calls": 0
+  },
+  "source_contract": {
+    "outcome_and_raw_margin": "both recorded in row STM; original scalar z preserved",
+    "draw": "genuine third occurrence outcome0/margin target0, actual geometric margin separately retained",
+    "UNKNOWN": "nonterminal proven chronology only; no outcome/margin targets, eligible false",
+    "history_binding": "row ply/action/encoded IDs/STM/history match genuine replay; goal priority preserved",
+    "split": "whole canonical prefix family partition before outcomes, uniform dual-teacher eligibility"
+  },
+  "retained_failures": [
+    "e480 nightly compiler environment failure34.037522511s and557707264B installed footprint/transient UNKNOWN",
+    "9f5 two supplied draw fixtures crossed true terminal and failed9.129389013s; vectors corrected, six successful definitions retained"
+  ],
+  "supported_intake_forecast_B": 65536,
+  "within_existing_integration_pilot_accept_B": 134217728,
+  "N": null,
+  "pilot_full_generation_fits_96_not_started_by_integrator": true,
+  "models_seals_pause323_unchanged": true
+}

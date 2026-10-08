@@ -21,6 +21,7 @@ use std::{
 pub type Result<T> = std::result::Result<T, Box<dyn std::error::Error + Send + Sync>>;
 pub const SCHEMA_VERSION: &str = "quoridor-teacher-v1";
 pub const FEATURE_COUNT: usize = 312;
+pub mod terminal;
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, PartialOrd, Ord)]
 #[serde(rename_all = "lowercase")]
 pub enum Split {
@@ -96,6 +97,8 @@ pub struct TeacherRow {
     pub action: Option<u16>,
     pub teacher: Teacher,
     pub z: Option<f32>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub terminal_targets: Option<terminal::TerminalTargets>,
     pub eligible: bool,
     pub model_sha: String,
     pub feature_signature: String,
@@ -141,6 +144,7 @@ impl TeacherRow {
             action,
             teacher,
             z: None,
+            terminal_targets: None,
             eligible: true,
             model_sha,
             feature_signature: String::new(),
@@ -210,6 +214,9 @@ impl TeacherRow {
         }
         if self.feature_signature != self.signature() {
             return Err("feature signature mismatch".into());
+        }
+        if let Some(targets) = &self.terminal_targets {
+            targets.validate(self)?;
         }
         if let Teacher::ExternalOutcome {
             source,
@@ -331,6 +338,11 @@ pub fn apply_exposure(rows: &mut [TeacherRow]) -> Result<()> {
         }
     }
     for r in rows {
+        if r.terminal_targets.is_some() {
+            // New whole-family teachers retain all outcome-eligible rows. Input
+            // duplicates are reported, never outcome-dependent exposure filters.
+            continue;
+        }
         r.eligible = r.eligible
             && match r.split {
                 Split::Train => true,
@@ -364,6 +376,15 @@ pub fn write_dataset(
             *manifest.eligible_rows.entry(s.clone()).or_default() += 1
         }
         families.entry(s).or_default().insert(r.family.clone());
+    }
+    if rows.iter().any(|r| r.terminal_targets.is_some()) {
+        if rows.iter().any(|r| r.terminal_targets.is_none()) {
+            return Err("mixed historical/terminal dataset".into());
+        }
+        manifest.exposure_rule = format!(
+            "{}; both-teachers-same-eligibility; duplicates-reported-not-output-filtered",
+            terminal::SPLIT_RULE
+        );
     }
     manifest.family_counts = families.into_iter().map(|(s, f)| (s, f.len())).collect();
     // Separate test shards: a training invocation never opens sealed test labels.
@@ -616,8 +637,14 @@ impl DatasetWriter {
         let mut ids = BTreeSet::new();
         let mut train = BTreeSet::new();
         let mut exposed = BTreeSet::new();
+        let mut terminal_mode = None;
         for path in &self.raw {
             for r in read_shard(path)? {
+                let mode = r.terminal_targets.is_some();
+                if terminal_mode.is_some_and(|old| old != mode) {
+                    return Err("mixed historical/terminal streamed dataset".into());
+                }
+                terminal_mode = Some(mode);
                 if !ids.insert(r.id.clone()) {
                     return Err("duplicate streamed row ID".into());
                 }
@@ -641,19 +668,28 @@ impl DatasetWriter {
             }
         }
         let mut manifest=DatasetManifest{schema:SCHEMA_VERSION.into(),feature:"QF1-f32-STM-v1".into(),shards:Vec::new(),rows:self.rows,split_rows:BTreeMap::new(),eligible_rows:BTreeMap::new(),family_counts:BTreeMap::new(),exposure_rule:"family-disjoint; validation-mask=train; test-mask=train+validation; input-OR-state-OR-history".into(),test_sealed:true};
+        if terminal_mode == Some(true) {
+            manifest.exposure_rule = format!(
+                "{}; both-teachers-same-eligibility; duplicates-reported-not-output-filtered",
+                terminal::SPLIT_RULE
+            );
+        }
         for (n, path) in self.raw.iter().enumerate() {
             let mut rows = read_shard(path)?;
             for r in &mut rows {
                 r.eligible = r.eligible
-                    && match r.split {
-                        Split::Train => true,
-                        Split::Validation => ![&r.feature_signature, &r.state_key, &r.history_key]
-                            .into_iter()
-                            .any(|k| !k.is_empty() && train.contains(k)),
-                        Split::Test => ![&r.feature_signature, &r.state_key, &r.history_key]
-                            .into_iter()
-                            .any(|k| !k.is_empty() && exposed.contains(k)),
-                    };
+                    && (r.terminal_targets.is_some()
+                        || match r.split {
+                            Split::Train => true,
+                            Split::Validation => {
+                                ![&r.feature_signature, &r.state_key, &r.history_key]
+                                    .into_iter()
+                                    .any(|k| !k.is_empty() && train.contains(k))
+                            }
+                            Split::Test => ![&r.feature_signature, &r.state_key, &r.history_key]
+                                .into_iter()
+                                .any(|k| !k.is_empty() && exposed.contains(k)),
+                        });
                 let s = format!("{:?}", r.split).to_lowercase();
                 *manifest.split_rows.entry(s.clone()).or_default() += 1;
                 if r.eligible {
@@ -1033,6 +1069,7 @@ pub fn import_sigma_outcomes<R: Read>(
                     .to_vec(),
             },
             z: Some(z),
+            terminal_targets: None,
             eligible: z != 0.,
             model_sha: String::new(),
             feature_signature: String::new(),
