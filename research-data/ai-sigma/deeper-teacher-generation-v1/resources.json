@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "issue": "quoridor-4lc.348",
+  "authorization": "LATEST explicit human: depth6 selected, first completegames/hour with one supported parallel configuration; no depth5/root/worker sweep orN",
+  "parent_refs": [
+    {
+      "path": "research-data/ai-sigma/sigma-receipt-reevaluation-v1/resources.json",
+      "SHA256": "a70b70c3df2b970a41d0c55cec6fb249e68026f8fa51de837bfbd5e3561c2683"
+    }
+  ],
+  "prior_named_reconciled_holds_B": 37987676160,
+  "new_whole_B": 1610612736,
+  "components_B": {
+    "source_checkout": 67108864,
+    "target_dependencies_link": 1073741824,
+    "private": 33554432,
+    "qualification_and_fourgame_raw": 67108864,
+    "controls": 134217728,
+    "related_review_Git": 134217728,
+    "serial_TMP": 67108864,
+    "failure_cleanup": 33554432
+  },
+  "covered_forward_upper_B": 39598288896,
+  "cap_B": 50000000000,
+  "unassigned_forward_B": 10401711104,
+  "no_refund": "All originalpilot64d3/337/347/oldassets/fees/failedinstaller/UNKNOWN held; no unprovedsharedtarget/private/source reuse",
+  "prewrite": "Root contract/control <=256KiB inside newreview128MiB; helper source+syntheticfixtures/control<=8MiB inside source64/control128; narrowreview<=2MiB insidereview128. SourceWT64MiB before managedcreation.",
+  "qualifier_workload": {
+    "new_small_games": 4,
+    "requested_depth": 6,
+    "targetblind_prefix_lengths": [4, 8, 12, 16],
+    "prefix_seed": 20261008,
+    "candidate_attempts_per_prefix": 32,
+    "input_only_family_split": "floor(4G/5); freeze beforeoutcomes",
+    "workers_proposed": 2,
+    "search_threads_each": 1,
+    "node_policy": "No practical per-move node cap: OptionNone if maintainedAPI supports, otherwise exactu64::MAX explicitlyrecorded. Never0-as-unlimitedguess. Everyacceptedmove completeddepth6; underdepth/cancel/errorUNKNOWN/notteachers.",
+    "ply_cap": 200,
+    "per_move_timeout_ms": null,
+    "root_depth_sweeps": 0,
+    "extra_worker_configurations": 0,
+    "scientific_serial_reference_games": 0,
+    "max_new_game_cases": 4,
+    "runtime_cost": "UNKNOWN beforewholepilot; no d3 extrapolation/no arbitraryaccuracywallcap"
+  },
+  "physical": "Expected2 independent-game workers only if2 distinctphysicalcores/RAM/quota support; singlethread search/TT/history/RNG pergame, boundedqueue. Actualworkers/topologylimitations andpeaks recorded; no20logical=20physical. Sigma347 live/games priority andactualfair interval exclusion; no arbitraryscientificruntimecap.",
+  "full_volume_policy": "Depth6 selected; N/fullschedule/pilotinclusion/fullgeneration/fourfits96 unselected/unstarted. Finitefourcaseparallel throughput pilot only.",
+  "historical": "Old64depth3and its source/data/results remainunchanged; no same-policy mixinginto newdepth6corpus",
+  "created_at": "2026-10-08T21:55:09.269077+00:00",
+  "supersedes_only_unexecuted_qualifier_plan": "Earlier depth5/6/root16/node1M feasibility was neverdispatched orrun; retained under .artifacts preclarification record, no oldscience edited.",
+  "clarified_at": "2026-10-08T21:59:09.449266+00:00"
+}

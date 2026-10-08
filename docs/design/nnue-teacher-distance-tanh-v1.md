@@ -15,6 +15,8 @@ status or certify the unobserved installer peak. Future compiler children bind
 absolute RUSTC/RUSTDOC, explicit RUSTUP_TOOLCHAIN and RUSTUP_AUTO_INSTALL=0.
 Beads remains the source of task state; this document defines the experiment.
 
+Latest human steering selects depth6 for future fixedD teachers and requires completegames/hour with independent-game parallelization before choosing fullN. The old64d3 sequential pilot/source/data remains immutable. [Depth6 throughput and independent scheduling](deeper-teacher-generation-v1.md) defines348 source preparation and one newfour-game/two-worker throughput pilot, strict requesteddepth6/no practical per-move node cap/no100ms teacher timeout. N/fullschedule/pilotinclusion/fullgeneration/fourfits96 remain unselected. All four fits must still share the same finally frozen corpus; oldd3 data doesnotbecome same-policyd6. Sigma347 new-clock live32 retains fairinterval priority; disjoint source prep continues.
+
 ## Current executable boundary
 
 Implement maintained data/schema/model/search/native interfaces and qualify their
