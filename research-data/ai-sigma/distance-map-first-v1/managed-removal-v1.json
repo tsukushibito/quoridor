@@ -1,0 +1,438 @@
+{
+  "version": 1,
+  "issue": "quoridor-4lc.324",
+  "plan_issue": "quoridor-4lc.324.3",
+  "manifest_SHA256": "fa6feaae556224fc31145291c0e2118ccf2ab695083e1bb27708d9ba0be1f6f7",
+  "preservation_commit": "daee7c8e156ac9a04beb6de844e361294cbf259e",
+  "preservation_receipt": "evidence-preservation-v1.json",
+  "completion": {
+    "issue": "quoridor-4lc.324",
+    "phase": "finish",
+    "START": "2026-10-08T20:01:31.617024+00:00",
+    "CPU": [3],
+    "storage_support_B": 8388608,
+    "manifest_SHA256": "fa6feaae556224fc31145291c0e2118ccf2ab695083e1bb27708d9ba0be1f6f7",
+    "continuous_peaks": "UNKNOWN",
+    "commands": [
+      {
+        "argv": [
+          "sudo",
+          "-n",
+          "python3",
+          "-B",
+          "-c",
+          "\nimport json, os, sys\nfrom pathlib import Path\nresult=[]\nfor pid in json.loads(sys.argv[1]):\n    p=Path('/proc')/str(pid)\n    try:\n        comm=(p/'comm').read_text().strip()\n        args=[s.decode(errors='replace') for s in (p/'cmdline').read_bytes().split(b'\\0') if s]\n        exe=os.readlink(p/'exe')\n        refs=[exe,os.readlink(p/'cwd')]\n        for fd in (p/'fd').iterdir():\n            try: refs.append(os.readlink(fd))\n            except (FileNotFoundError,ProcessLookupError): pass\n        entry=''\n        if comm.startswith('python'):\n            pos=1\n            while pos<len(args) and args[pos] in ('-B','-I','-u','-E','-s','-S'): pos+=1\n            if pos<len(args): entry=args[pos]\n        named=comm in ('cargo','rustc','clippy-driver','perf','chrome','chromium','firefox','headless_shell')\n        numeric=any(s in Path(entry).name for s in ('worker','numeric','analysis_ci','statistics','finite-driver','generate_dataset','qualification'))\n        payload='/workspaces/quoridor' in exe and any(s in exe for s in ('/private/','/target/'))\n        target=sys.argv[2]\n        result.append({'pid':pid,'WT_reference':any(s==target or s.startswith(target+'/') for s in refs),'competitor':named or numeric or payload})\n    except (FileNotFoundError,ProcessLookupError): result.append({'pid':pid,'absent':True})\nprint(json.dumps(result))\n",
+          "[7, 35, 41, 56, 9344, 13382, 13397, 14710, 14716, 1398847]",
+          "/workspaces/quoridor/.worktree/distance-map-first"
+        ],
+        "START": "2026-10-08T20:01:31.623322+00:00",
+        "STOP": "2026-10-08T20:01:31.646297+00:00",
+        "exit": 0
+      },
+      {
+        "argv": ["git", "rev-parse", "HEAD"],
+        "START": "2026-10-08T20:01:31.651701+00:00",
+        "STOP": "2026-10-08T20:01:31.747624+00:00",
+        "exit": 0
+      },
+      {
+        "argv": ["git", "symbolic-ref", "--short", "HEAD"],
+        "START": "2026-10-08T20:01:31.747712+00:00",
+        "STOP": "2026-10-08T20:01:32.003172+00:00",
+        "exit": 0
+      },
+      {
+        "argv": ["git", "--no-optional-locks", "ls-files", "--others", "--exclude-standard", "-z"],
+        "START": "2026-10-08T20:01:32.018448+00:00",
+        "STOP": "2026-10-08T20:01:48.996162+00:00",
+        "exit": 0
+      },
+      {
+        "argv": [
+          "git",
+          "--no-optional-locks",
+          "ls-files",
+          "--others",
+          "--exclude-standard",
+          "-z",
+          "--ignored"
+        ],
+        "START": "2026-10-08T20:01:48.996188+00:00",
+        "STOP": "2026-10-08T20:02:06.542289+00:00",
+        "exit": 0
+      },
+      {
+        "argv": [
+          "git",
+          "cat-file",
+          "blob",
+          "daee7c8e156ac9a04beb6de844e361294cbf259e:research-data/ai-sigma/distance-map-first-v1/retained-comparison-evidence-v1.tar.gz"
+        ],
+        "START": "2026-10-08T20:02:06.559333+00:00",
+        "STOP": "2026-10-08T20:02:06.721598+00:00",
+        "exit": 0
+      },
+      {
+        "argv": [
+          "git",
+          "cat-file",
+          "blob",
+          "daee7c8e156ac9a04beb6de844e361294cbf259e:research-data/ai-sigma/distance-map-first-v1/retained-comparison-path-map-v1.json"
+        ],
+        "START": "2026-10-08T20:02:06.745586+00:00",
+        "STOP": "2026-10-08T20:02:06.908465+00:00",
+        "exit": 0
+      },
+      {
+        "argv": [
+          "sudo",
+          "-n",
+          "python3",
+          "-B",
+          "-c",
+          "\nimport json, os, sys\nfrom pathlib import Path\nresult=[]\nfor pid in json.loads(sys.argv[1]):\n    p=Path('/proc')/str(pid)\n    try:\n        comm=(p/'comm').read_text().strip()\n        args=[s.decode(errors='replace') for s in (p/'cmdline').read_bytes().split(b'\\0') if s]\n        exe=os.readlink(p/'exe')\n        refs=[exe,os.readlink(p/'cwd')]\n        for fd in (p/'fd').iterdir():\n            try: refs.append(os.readlink(fd))\n            except (FileNotFoundError,ProcessLookupError): pass\n        entry=''\n        if comm.startswith('python'):\n            pos=1\n            while pos<len(args) and args[pos] in ('-B','-I','-u','-E','-s','-S'): pos+=1\n            if pos<len(args): entry=args[pos]\n        named=comm in ('cargo','rustc','clippy-driver','perf','chrome','chromium','firefox','headless_shell')\n        numeric=any(s in Path(entry).name for s in ('worker','numeric','analysis_ci','statistics','finite-driver','generate_dataset','qualification'))\n        payload='/workspaces/quoridor' in exe and any(s in exe for s in ('/private/','/target/'))\n        target=sys.argv[2]\n        result.append({'pid':pid,'WT_reference':any(s==target or s.startswith(target+'/') for s in refs),'competitor':named or numeric or payload})\n    except (FileNotFoundError,ProcessLookupError): result.append({'pid':pid,'absent':True})\nprint(json.dumps(result))\n",
+          "[7, 35, 41, 56, 9344, 13382, 13397, 14710, 14716, 1399987]",
+          "/workspaces/quoridor/.worktree/distance-map-first"
+        ],
+        "START": "2026-10-08T20:02:06.929264+00:00",
+        "STOP": "2026-10-08T20:02:06.971617+00:00",
+        "exit": 0
+      },
+      {
+        "argv": ["git", "--no-optional-locks", "ls-files", "--others", "--exclude-standard", "-z"],
+        "START": "2026-10-08T20:02:07.018321+00:00",
+        "STOP": "2026-10-08T20:02:07.284863+00:00",
+        "exit": 0
+      },
+      {
+        "argv": [
+          "git",
+          "--no-optional-locks",
+          "ls-files",
+          "--others",
+          "--exclude-standard",
+          "-z",
+          "--ignored"
+        ],
+        "START": "2026-10-08T20:02:07.284888+00:00",
+        "STOP": "2026-10-08T20:02:07.448649+00:00",
+        "exit": 0
+      },
+      {
+        "argv": [
+          "git",
+          "--no-optional-locks",
+          "status",
+          "--porcelain",
+          "--untracked-files=all",
+          "--ignored"
+        ],
+        "START": "2026-10-08T20:02:07.448674+00:00",
+        "STOP": "2026-10-08T20:02:07.639666+00:00",
+        "exit": 0
+      },
+      {
+        "argv": [
+          "sudo",
+          "-n",
+          "python3",
+          "-B",
+          "-c",
+          "\nimport json, os, sys\nfrom pathlib import Path\nresult=[]\nfor pid in json.loads(sys.argv[1]):\n    p=Path('/proc')/str(pid)\n    try:\n        comm=(p/'comm').read_text().strip()\n        args=[s.decode(errors='replace') for s in (p/'cmdline').read_bytes().split(b'\\0') if s]\n        exe=os.readlink(p/'exe')\n        refs=[exe,os.readlink(p/'cwd')]\n        for fd in (p/'fd').iterdir():\n            try: refs.append(os.readlink(fd))\n            except (FileNotFoundError,ProcessLookupError): pass\n        entry=''\n        if comm.startswith('python'):\n            pos=1\n            while pos<len(args) and args[pos] in ('-B','-I','-u','-E','-s','-S'): pos+=1\n            if pos<len(args): entry=args[pos]\n        named=comm in ('cargo','rustc','clippy-driver','perf','chrome','chromium','firefox','headless_shell')\n        numeric=any(s in Path(entry).name for s in ('worker','numeric','analysis_ci','statistics','finite-driver','generate_dataset','qualification'))\n        payload='/workspaces/quoridor' in exe and any(s in exe for s in ('/private/','/target/'))\n        target=sys.argv[2]\n        result.append({'pid':pid,'WT_reference':any(s==target or s.startswith(target+'/') for s in refs),'competitor':named or numeric or payload})\n    except (FileNotFoundError,ProcessLookupError): result.append({'pid':pid,'absent':True})\nprint(json.dumps(result))\n",
+          "[7, 35, 41, 56, 9344, 13382, 13397, 14710, 14716, 1399987]",
+          "/workspaces/quoridor/.worktree/distance-map-first"
+        ],
+        "START": "2026-10-08T20:02:07.645234+00:00",
+        "STOP": "2026-10-08T20:02:07.673119+00:00",
+        "exit": 0
+      },
+      {
+        "argv": ["bash", "scripts/dev/manage_worktree.sh", "remove", "distance-map-first"],
+        "START": "2026-10-08T20:02:07.673797+00:00",
+        "STOP": "2026-10-08T20:02:23.878581+00:00",
+        "exit": 0
+      },
+      {
+        "argv": ["git", "show-ref", "--verify", "refs/heads/codex/distance-map-first"],
+        "START": "2026-10-08T20:02:23.878631+00:00",
+        "STOP": "2026-10-08T20:02:23.902403+00:00",
+        "exit": 0
+      }
+    ],
+    "guard": {
+      "at": "2026-10-08T20:01:31.646731+00:00",
+      "named_competitors": [],
+      "WT_readers": [],
+      "unresolved": [],
+      "MemAvailable_B": 19341504512,
+      "privileged_readonly_proc_resolution": [
+        {
+          "pid": 7,
+          "WT_reference": false,
+          "competitor": false
+        },
+        {
+          "pid": 35,
+          "WT_reference": false,
+          "competitor": false
+        },
+        {
+          "pid": 41,
+          "WT_reference": false,
+          "competitor": false
+        },
+        {
+          "pid": 56,
+          "WT_reference": false,
+          "competitor": false
+        },
+        {
+          "pid": 9344,
+          "WT_reference": false,
+          "competitor": false
+        },
+        {
+          "pid": 13382,
+          "WT_reference": false,
+          "competitor": false
+        },
+        {
+          "pid": 13397,
+          "WT_reference": false,
+          "competitor": false
+        },
+        {
+          "pid": 14710,
+          "WT_reference": false,
+          "competitor": false
+        },
+        {
+          "pid": 14716,
+          "WT_reference": false,
+          "competitor": false
+        },
+        {
+          "pid": 1398847,
+          "absent": true
+        }
+      ]
+    },
+    "actual_lock_owned_START": "2026-10-08T20:01:31.646743+00:00",
+    "result": {
+      "managed_WT_removed": "/workspaces/quoridor/.worktree/distance-map-first",
+      "branch_preserved": "codex/distance-map-first",
+      "private_moves": [
+        {
+          "source": "/workspaces/quoridor/.worktree/distance-map-first/.artifacts/distance-map-first-v1/private/B-nnue-search",
+          "destination": "/workspaces/quoridor/.worktree/assets/binaries/distance-map-first-v1/B-nnue-search",
+          "device": 2112,
+          "inode": 3695677,
+          "SHA256": "9bca344b466ca0f7d4ab2a1154aef7da88d573d90584b366b98dadb39e555aa5",
+          "already_moved_in_stopped_v1": true
+        },
+        {
+          "source": "/workspaces/quoridor/.worktree/distance-map-first/.artifacts/distance-map-first-v1/private/A-nnue-search",
+          "destination": "/workspaces/quoridor/.worktree/assets/binaries/distance-map-first-v1/A-nnue-search",
+          "device": 2112,
+          "inode": 3695161,
+          "SHA256": "affbb8183d4f990f764d7d31591fc91454e4807d12722f8097dfbf467647c855",
+          "already_moved_in_stopped_v1": true
+        }
+      ],
+      "tracked_restored": 5,
+      "untracked_source_removed_after_reconstruction": 1,
+      "archived_originals_removed": 197,
+      "exact_cache_auxiliary_removed": 1232,
+      "old_caps_fees_UNKNOWN_not_refunded": true
+    },
+    "status": "PASS",
+    "lock_owned_STOP": "2026-10-08T20:02:23.902480+00:00",
+    "STOP": "2026-10-08T20:02:23.903391+00:00",
+    "owned_children_remaining": [],
+    "lock_lifetime_ended": true
+  },
+  "stopped_partial_retirement": {
+    "issue": "quoridor-4lc.324",
+    "phase": "retire",
+    "START": "2026-10-08T19:52:44.114754+00:00",
+    "CPU": [3],
+    "storage_support_B": 8388608,
+    "manifest_SHA256": "fa6feaae556224fc31145291c0e2118ccf2ab695083e1bb27708d9ba0be1f6f7",
+    "continuous_peaks": "UNKNOWN",
+    "commands": [
+      {
+        "argv": [
+          "sudo",
+          "-n",
+          "python3",
+          "-B",
+          "-c",
+          "\nimport json, os, sys\nfrom pathlib import Path\nresult=[]\nfor pid in json.loads(sys.argv[1]):\n    p=Path('/proc')/str(pid)\n    try:\n        comm=(p/'comm').read_text().strip()\n        args=[s.decode(errors='replace') for s in (p/'cmdline').read_bytes().split(b'\\0') if s]\n        exe=os.readlink(p/'exe')\n        refs=[exe,os.readlink(p/'cwd')]\n        for fd in (p/'fd').iterdir():\n            try: refs.append(os.readlink(fd))\n            except (FileNotFoundError,ProcessLookupError): pass\n        entry=''\n        if comm.startswith('python'):\n            pos=1\n            while pos<len(args) and args[pos] in ('-B','-I','-u','-E','-s','-S'): pos+=1\n            if pos<len(args): entry=args[pos]\n        named=comm in ('cargo','rustc','clippy-driver','perf','chrome','chromium','firefox','headless_shell')\n        numeric=any(s in Path(entry).name for s in ('worker','numeric','analysis_ci','statistics','finite-driver','generate_dataset','qualification'))\n        payload='/workspaces/quoridor' in exe and any(s in exe for s in ('/private/','/target/'))\n        target=sys.argv[2]\n        result.append({'pid':pid,'WT_reference':any(s==target or s.startswith(target+'/') for s in refs),'competitor':named or numeric or payload})\n    except (FileNotFoundError,ProcessLookupError): result.append({'pid':pid,'absent':True})\nprint(json.dumps(result))\n",
+          "[7, 35, 41, 56, 9344, 13382, 13397, 14710, 14716, 1382599]",
+          "/workspaces/quoridor/.worktree/distance-map-first"
+        ],
+        "START": "2026-10-08T19:52:44.125524+00:00",
+        "STOP": "2026-10-08T19:52:44.160411+00:00",
+        "exit": 0
+      },
+      {
+        "argv": ["git", "rev-parse", "HEAD"],
+        "START": "2026-10-08T19:52:44.165301+00:00",
+        "STOP": "2026-10-08T19:52:44.224136+00:00",
+        "exit": 0
+      },
+      {
+        "argv": ["git", "symbolic-ref", "--short", "HEAD"],
+        "START": "2026-10-08T19:52:44.224155+00:00",
+        "STOP": "2026-10-08T19:52:44.268169+00:00",
+        "exit": 0
+      },
+      {
+        "argv": ["git", "--no-optional-locks", "ls-files", "--others", "--exclude-standard", "-z"],
+        "START": "2026-10-08T19:52:44.269354+00:00",
+        "STOP": "2026-10-08T19:53:01.371567+00:00",
+        "exit": 0
+      },
+      {
+        "argv": [
+          "git",
+          "--no-optional-locks",
+          "ls-files",
+          "--others",
+          "--exclude-standard",
+          "-z",
+          "--ignored"
+        ],
+        "START": "2026-10-08T19:53:01.371591+00:00",
+        "STOP": "2026-10-08T19:53:19.082148+00:00",
+        "exit": 0
+      },
+      {
+        "argv": [
+          "git",
+          "cat-file",
+          "blob",
+          "daee7c8e156ac9a04beb6de844e361294cbf259e:research-data/ai-sigma/distance-map-first-v1/retained-comparison-evidence-v1.tar.gz"
+        ],
+        "START": "2026-10-08T19:53:19.090370+00:00",
+        "STOP": "2026-10-08T19:53:19.122044+00:00",
+        "exit": 0
+      },
+      {
+        "argv": [
+          "git",
+          "cat-file",
+          "blob",
+          "daee7c8e156ac9a04beb6de844e361294cbf259e:research-data/ai-sigma/distance-map-first-v1/retained-comparison-path-map-v1.json"
+        ],
+        "START": "2026-10-08T19:53:19.126561+00:00",
+        "STOP": "2026-10-08T19:53:19.163340+00:00",
+        "exit": 0
+      },
+      {
+        "argv": [
+          "sudo",
+          "-n",
+          "python3",
+          "-B",
+          "-c",
+          "\nimport json, os, sys\nfrom pathlib import Path\nresult=[]\nfor pid in json.loads(sys.argv[1]):\n    p=Path('/proc')/str(pid)\n    try:\n        comm=(p/'comm').read_text().strip()\n        args=[s.decode(errors='replace') for s in (p/'cmdline').read_bytes().split(b'\\0') if s]\n        exe=os.readlink(p/'exe')\n        refs=[exe,os.readlink(p/'cwd')]\n        for fd in (p/'fd').iterdir():\n            try: refs.append(os.readlink(fd))\n            except (FileNotFoundError,ProcessLookupError): pass\n        entry=''\n        if comm.startswith('python'):\n            pos=1\n            while pos<len(args) and args[pos] in ('-B','-I','-u','-E','-s','-S'): pos+=1\n            if pos<len(args): entry=args[pos]\n        named=comm in ('cargo','rustc','clippy-driver','perf','chrome','chromium','firefox','headless_shell')\n        numeric=any(s in Path(entry).name for s in ('worker','numeric','analysis_ci','statistics','finite-driver','generate_dataset','qualification'))\n        payload='/workspaces/quoridor' in exe and any(s in exe for s in ('/private/','/target/'))\n        target=sys.argv[2]\n        result.append({'pid':pid,'WT_reference':any(s==target or s.startswith(target+'/') for s in refs),'competitor':named or numeric or payload})\n    except (FileNotFoundError,ProcessLookupError): result.append({'pid':pid,'absent':True})\nprint(json.dumps(result))\n",
+          "[7, 35, 41, 56, 9344, 13382, 13397, 14710, 14716, 1383392]",
+          "/workspaces/quoridor/.worktree/distance-map-first"
+        ],
+        "START": "2026-10-08T19:53:19.180231+00:00",
+        "STOP": "2026-10-08T19:53:19.204921+00:00",
+        "exit": 0
+      },
+      {
+        "argv": [
+          "git",
+          "restore",
+          "--source=f3b673089b339f9a20dece8473369dbcfa9760e7",
+          "--worktree",
+          "--",
+          "crates/quoridor-nnue/src/features.rs",
+          "crates/quoridor-nnue/src/lib.rs",
+          "crates/quoridor-ai/benches/nnue_search.rs",
+          "crates/quoridor-ai/benches/nnue_search.json",
+          "crates/quoridor-nnue/tests/move_buffer.rs"
+        ],
+        "START": "2026-10-08T19:53:19.209192+00:00",
+        "STOP": "2026-10-08T19:53:37.895217+00:00",
+        "exit": 2
+      }
+    ],
+    "guard": {
+      "at": "2026-10-08T19:52:44.161662+00:00",
+      "named_competitors": [],
+      "WT_readers": [],
+      "unresolved": [],
+      "MemAvailable_B": 19570286592,
+      "privileged_readonly_proc_resolution": [
+        {
+          "pid": 7,
+          "WT_reference": false,
+          "competitor": false
+        },
+        {
+          "pid": 35,
+          "WT_reference": false,
+          "competitor": false
+        },
+        {
+          "pid": 41,
+          "WT_reference": false,
+          "competitor": false
+        },
+        {
+          "pid": 56,
+          "WT_reference": false,
+          "competitor": false
+        },
+        {
+          "pid": 9344,
+          "WT_reference": false,
+          "competitor": false
+        },
+        {
+          "pid": 13382,
+          "WT_reference": false,
+          "competitor": false
+        },
+        {
+          "pid": 13397,
+          "WT_reference": false,
+          "competitor": false
+        },
+        {
+          "pid": 14710,
+          "WT_reference": false,
+          "competitor": false
+        },
+        {
+          "pid": 14716,
+          "WT_reference": false,
+          "competitor": false
+        },
+        {
+          "pid": 1382599,
+          "WT_reference": false,
+          "competitor": false
+        }
+      ]
+    },
+    "actual_lock_owned_START": "2026-10-08T19:52:44.161674+00:00",
+    "status": "FAILED",
+    "error": "AssertionError((['git', 'restore', '--source=f3b673089b339f9a20dece8473369dbcfa9760e7', '--worktree', '--', 'crates/quoridor-nnue/src/features.rs', 'crates/quoridor-nnue/src/lib.rs', 'crates/quoridor-ai/benches/nnue_search.rs', 'crates/quoridor-ai/benches/nnue_search.json', 'crates/quoridor-nnue/tests/move_buffer.rs'], 'hint: The sparse index is expanding to a full index, a slow operation.\\nhint: Your working directory likely has contents that are outside of\\nhint: your sparse-checkout patterns. Use \\'git sparse-checkout list\\' to\\nhint: see your sparse-checkout definition and compare it to your working\\nhint: directory contents. Cleaning up any merge conflicts or staged\\nhint: changes before running \\'git sparse-checkout clean\\' or \\'git\\nhint: sparse-checkout reapply\\' may assist in this cleanup.\\nhint: Disable this message with \"git config set advice.sparseIndexExpanded false\"\\nfatal error: failed to reserve page summary memory\\n\\nruntime stack:\\nruntime.throw({0xa2739b?, 0x7ffd7d1cc6a0?})\\n\\truntime/panic.go:1047 +0x5d fp=0x7ffd7d1cc650 sp=0x7ffd7d1cc620 pc=0x437fbd\\nruntime.(*pageAlloc).sysInit(0xea9870)\\n\\truntime/mpagealloc_64bit.go:82 +0x195 fp=0x7ffd7d1cc6d8 sp=0x7ffd7d1cc650 pc=0x42ecf5\\nruntime.(*pageAlloc).init(0xea9870, 0xea9860, 0x0?)\\n\\truntime/mpagealloc.go:324 +0x70 fp=0x7ffd7d1cc700 sp=0x7ffd7d1cc6d8 pc=0x42c950\\nruntime.(*mheap).init(0xea9860)\\n\\truntime/mheap.go:729 +0x13f fp=0x7ffd7d1cc738 sp=0x7ffd7d1cc700 pc=0x429d5f\\nruntime.mallocinit()\\n\\truntime/malloc.go:407 +0xb2 fp=0x7ffd7d1cc760 sp=0x7ffd7d1cc738 pc=0x40e812\\nruntime.schedinit()\\n\\truntime/proc.go:693 +0xab fp=0x7ffd7d1cc7c0 sp=0x7ffd7d1cc760 pc=0x43b98b\\nruntime.rt0_go()\\n\\truntime/asm_amd64.s:345 +0x11c fp=0x7ffd7d1cc7c8 sp=0x7ffd7d1cc7c0 pc=0x4667dc\\n'))",
+    "STOP": "2026-10-08T19:53:37.896274+00:00",
+    "owned_children_remaining": [],
+    "lock_lifetime_ended": true
+  },
+  "partial_failure_disposition": "Both non-overwriting same-device binary moves and five exact tracked source restores completed; Git LFS post-checkout Go virtual page reservation failed under inherited AS512MiB. Exact completed bytes/modes/inodes were verified; finish skipped moves/restoration and performed only remaining bounded cleanup. Hook remained unchanged.",
+  "no_science_model_native_test_replay": true,
+  "source_candidate_applied_to_main": false,
+  "models_seals_defaults_paused323_unchanged": true,
+  "storage_support_B": 8388608,
+  "temporary_growth_upper_B": 2990414,
+  "old_caps_fees_raw_UNKNOWN_refunded": false
+}
