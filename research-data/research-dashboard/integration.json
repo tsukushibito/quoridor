@@ -1,0 +1,57 @@
+{
+  "issue": "quoridor-4lc.339",
+  "source_handoffs": {
+    "base_patch_SHA256": "d0367c31e7eb966690f57cca7c65842ded67fd0f8fd5dec02e429c5fa4107fb3",
+    "repair_SHA256": "db7a353d768482550a3431952b97de9851a0674349574b77a24526cbbc11ec44",
+    "base_STOP": "2026-10-08T05:31:45.939267Z",
+    "repair_STOP": "2026-10-08T05:50:52.626711Z"
+  },
+  "source_bindings": {
+    "scripts/dev/research-dashboard.py": {
+      "SHA256": "573ca6f109d9adc1450056c14ff7b3531913d4238327899395718fd3a16a7b2e",
+      "B": 22086
+    },
+    "scripts/dev/research-dashboard-runtime.py": {
+      "SHA256": "036596d6ffac47e2cf5408e6e958f11b5b47ad251d07c31f528ae9f0c44af850",
+      "B": 1358
+    },
+    "scripts/dev/research-dashboard.html": {
+      "SHA256": "2e23a7f345b6730639a9e058a91f8a576c49fe6ab58377640c9f7659c2badb13",
+      "B": 14122
+    },
+    "scripts/dev/test_research_dashboard.py": {
+      "SHA256": "9d1f76d57b112e1148f59e2bbbb115e83ab5cd437954dbce82de2cd0e1b227cd",
+      "B": 23464
+    },
+    "docs/development/beads-workflow.md": {
+      "SHA256": "373c4b35f3183e23344495a4868a6690031d62182dca81c8a730fd8c36aea866",
+      "B": 17438
+    }
+  },
+  "main_checks": {
+    "NN0_tests": 32,
+    "NN0_exit": 0,
+    "Ruff_format_check": "PASS scoped3",
+    "Ruff_check": "PASS scoped3 no-cache",
+    "Prettier": "PASS HTML/docs/two support JSON",
+    "actual_project_generation_exit": 0,
+    "no_science_model_calls": true
+  },
+  "initial_generated_HTML": {
+    "path": "/workspaces/quoridor/.artifacts/research-dashboard/index.html",
+    "SHA256": "0d0d5e05cf44db3a7c6ef52452a74b7e7329d00b1eb2e1655985b1061563464a",
+    "B": 31944,
+    "groups": 10,
+    "issues": 19,
+    "running_jobs": 0,
+    "waiting_issues": 9,
+    "explicit_human_decisions": 0,
+    "warnings": []
+  },
+  "browser": "NOT_QUALIFIED; child339.1 actual fixed-file verification delegated, original Root profile overrun/refusal logs preserved",
+  "resource_support": "Existing whole2097152; source/docs/Git262144, helper589824, Rootcontrol196608, output/TMP1048576 exclusive phase supports unchanged",
+  "failures": "Original helper failures/raw plus Root browser profileguard1/3 and transient-stat guard2 retained. First exact wholepeak UNKNOWN; lowerbound already exceeded original2MiB, no retrospective WITHIN claim. No new cap/refund. Registration id+parent refused before issue creation, then supported child registered.",
+  "science_controls": "unchanged; original323USERPAUSE/seals/default/model preserved",
+  "completion": false,
+  "UTC": "2026-10-08T06:31:07.912057+00:00"
+}

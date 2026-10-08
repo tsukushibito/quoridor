@@ -49,6 +49,14 @@ Beadsには実装・調査・不具合修正など、着手から検証まで追
 
 issueから設計文書、検証報告、commitまたはworktreeを参照する。Beadsの内容を別のMarkdown TODOへ複製しない。実装計画・タスク契約・引き渡し文書は必要な詳細を保持できるが、作業状態を別管理しない。実行ホストが保持する試行IDや実行状態はBeads issue IDへ対応付ける。
 
+## 研究ダッシュボードのスナップショット
+
+`python3 -B scripts/dev/research-dashboard.py` で、自己完結した `.artifacts/research-dashboard/index.html` を生成する。手動更新、または人間が選んだ引き渡し・状態更新時に実行する。ブラウザの再読み込みは生成済みファイルを読み直すだけで、収集処理やBeadsの変更は行わない。単一HTMLをローカルへコピーして開くこともできる。
+
+対象issueに `dashboard` ラベルを付け、既存metadataを保持したまま `metadata.dashboard` に `stage`、`next_action`、`wait_reason`、`wait_kind`、`runtime_dirs`、`evidence_paths` を記録する。人間の判断待ちは明示的な `wait_kind: human_decision` のみで数える。状態・所有者・依存はBeads、LLMの状態は既存AppServerの読み取り、計算ジョブは指定したruntimeの記録と実プロセス識別で確認する。足りない情報は不明として表示する。
+
+表示は生成時点のスナップショットであり、LLMの活動と計算ジョブの実行は別に示す。収集できない情報を以前のデータで補わない。生成失敗は以前のHTMLを保ち、研究ジョブの実行を妨げない。サーバー・ポーリング・常駐監視は使わない。
+
 ## 作業の粒度と記載内容
 
 - 大きな到達目標をepicにする。Webアプリでは「M1: 学習不要AIで対局できるアプリ」をepicとする。

@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <title>Research snapshot</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: system-ui, sans-serif;
+        color: #172c3d;
+        background: #edf2f5;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+      }
+      main {
+        max-width: 1240px;
+        margin: auto;
+        padding: 28px;
+      }
+      h1 {
+        font-size: 1.7rem;
+        margin: 0 0 8px;
+      }
+      p {
+        line-height: 1.5;
+      }
+      .muted {
+        color: #526675;
+        font-size: 0.9rem;
+      }
+      .counts {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin: 24px 0;
+      }
+      .count {
+        background: white;
+        border: 1px solid #cedbe3;
+        border-radius: 10px;
+        padding: 14px 22px;
+      }
+      .count strong {
+        display: block;
+        font-size: 1.6rem;
+      }
+      .controls {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        align-items: center;
+        margin: 20px 0;
+      }
+      input[type='search'] {
+        min-width: 210px;
+        padding: 10px;
+        border: 1px solid #9eafbc;
+        border-radius: 6px;
+      }
+      button {
+        padding: 8px 12px;
+        border: 1px solid #8a9fac;
+        border-radius: 6px;
+        background: white;
+        color: #172c3d;
+        cursor: pointer;
+      }
+      button:focus-visible,
+      summary:focus-visible,
+      input:focus-visible {
+        outline: 3px solid #2872ae;
+        outline-offset: 3px;
+      }
+      .head,
+      .summary {
+        display: grid;
+        grid-template-columns: minmax(210px, 1.2fr) 1fr 1.3fr 1.3fr;
+        gap: 18px;
+      }
+      .head {
+        padding: 10px 18px;
+        color: #526675;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .owner {
+        border: 1px solid #c9d7e0;
+        border-radius: 10px;
+        background: white;
+        margin: 10px 0;
+        overflow: hidden;
+      }
+      .owner > summary {
+        padding: 18px;
+        cursor: pointer;
+        list-style: none;
+      }
+      .owner > summary::marker,
+      .owner > summary::-webkit-details-marker {
+        display: none;
+      }
+      .owner[open] > summary {
+        background: #f5f8fa;
+        border-bottom: 1px solid #d8e1e7;
+      }
+      .owner-name {
+        overflow-wrap: anywhere;
+        font-weight: 600;
+      }
+      .label {
+        display: block;
+        color: #526675;
+        font-size: 0.8rem;
+        margin-bottom: 4px;
+      }
+      .badge {
+        display: inline-block;
+        padding: 3px 8px;
+        margin: 2px 4px 4px 0;
+        border-radius: 5px;
+        background: #e9eef2;
+        font-size: 0.85rem;
+      }
+      .running,
+      .active {
+        background: #d8efe2;
+        color: #1e593c;
+      }
+      .waiting,
+      .paused {
+        background: #fff0c5;
+        color: #6b4b0b;
+      }
+      .error {
+        background: #fce0dc;
+        color: #8b3228;
+      }
+      .issue {
+        padding: 20px;
+        border-top: 1px solid #e0e7ed;
+        overflow-wrap: anywhere;
+      }
+      .issue h2 {
+        font-size: 1rem;
+        margin: 0 0 10px;
+      }
+      .issue dl {
+        display: grid;
+        grid-template-columns: 130px minmax(0, 1fr);
+        gap: 8px 16px;
+      }
+      dt {
+        color: #526675;
+      }
+      dd {
+        margin: 0;
+        white-space: pre-wrap;
+      }
+      .job {
+        border-left: 3px solid #9bb0be;
+        padding: 8px 14px;
+        margin: 14px 0;
+      }
+      .path {
+        display: flex;
+        gap: 8px;
+        margin: 8px 0;
+      }
+      .path input {
+        min-width: 0;
+        width: 100%;
+        padding: 8px;
+        font-family: monospace;
+        border: 1px solid #c9d7e0;
+        background: #f5f8fa;
+      }
+      #warnings {
+        padding: 0;
+        list-style: none;
+      }
+      #warnings li {
+        border-left: 3px solid #a67817;
+        background: #fff5db;
+        padding: 10px 14px;
+        margin: 8px 0;
+        overflow-wrap: anywhere;
+      }
+      #empty {
+        padding: 30px;
+        text-align: center;
+        color: #526675;
+      }
+      [hidden] {
+        display: none !important;
+      }
+      @media (max-width: 780px) {
+        main {
+          padding: 16px;
+        }
+        .head {
+          display: none;
+        }
+        .summary {
+          grid-template-columns: 1fr 1fr;
+        }
+        .owner-name {
+          grid-column: 1 / -1;
+        }
+        .issue dl {
+          grid-template-columns: 1fr;
+          gap: 4px;
+        }
+        dd {
+          margin-bottom: 10px;
+        }
+      }
+      @media (max-width: 450px) {
+        .summary {
+          grid-template-columns: 1fr;
+        }
+        .count {
+          flex: 1;
+          padding: 12px;
+        }
+        .controls {
+          gap: 12px;
+        }
+        input[type='search'] {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Research snapshot</h1>
+      <p id="timestamp" class="muted"></p>
+      <p class="muted">
+        This is a saved snapshot. Run <code>python3 -B scripts/dev/research-dashboard.py</code> to
+        update the data, then reload this file. LLM activity and confirmed job activity are
+        separate. Command completion does not qualify scientific success.
+      </p>
+      <div id="counts" class="counts" aria-label="Snapshot counts"></div>
+      <ul id="warnings" aria-label="Source warnings"></ul>
+      <div class="controls">
+        <label for="search">Search owners and issues</label>
+        <input id="search" type="search" placeholder="Issue, owner, stage or next action" />
+        <label><input id="waiting" type="checkbox" /> Waiting issues only</label>
+        <button id="reload" type="button">Reload this file</button>
+      </div>
+      <div class="head" aria-hidden="true">
+        <span>Owner / session</span><span>LLM and jobs</span><span>Current work</span
+        ><span>Next / waiting</span>
+      </div>
+      <div id="owners"></div>
+      <p id="empty" hidden>No owners match this filter.</p>
+      <p id="copy-status" class="muted" role="status"></p>
+    </main>
+    <script id="snapshot" type="application/json">
+      __SNAPSHOT_JSON__
+    </script>
+    <script>
+      'use strict';
+      const snapshot = JSON.parse(document.getElementById('snapshot').textContent);
+      const make = (tag, value = '', className = '') => {
+        const node = document.createElement(tag);
+        node.textContent = value;
+        node.className = className;
+        return node;
+      };
+      const badge = (value) =>
+        make(
+          'span',
+          value,
+          'badge ' +
+            ({
+              running: 'running',
+              active: 'active',
+              paused: 'paused',
+              waiting: 'waiting',
+              unavailable: 'error',
+              'recovery needed': 'error',
+              systemError: 'error',
+            }[value] || ''),
+        );
+      const field = (container, label, value) => {
+        container.append(make('dt', label), make('dd', value));
+      };
+      const showPath = (container, value) => {
+        const row = make('div', '', 'path');
+        const input = make('input');
+        input.readOnly = true;
+        input.value = value;
+        input.setAttribute('aria-label', 'Absolute evidence or runtime path');
+        const copy = make('button', 'Copy path');
+        copy.type = 'button';
+        copy.addEventListener('click', async () => {
+          input.select();
+          try {
+            await navigator.clipboard.writeText(value);
+            document.getElementById('copy-status').textContent = 'Path copied.';
+          } catch {
+            document.getElementById('copy-status').textContent =
+              'Path selected. Copy the displayed text manually.';
+          }
+        });
+        row.append(input, copy);
+        container.append(row);
+      };
+      document.getElementById('timestamp').textContent =
+        'Generated ' +
+        snapshot.generated_at +
+        ' (Asia/Tokyo) · Beads collection began ' +
+        snapshot.beads_read_at;
+      for (const [key, label] of [
+        ['running_jobs', 'Confirmed running jobs'],
+        ['waiting_issues', 'Waiting issues'],
+        ['human_decisions', 'Human decisions'],
+      ]) {
+        const card = make('div', '', 'count');
+        card.append(make('strong', String(snapshot.counts[key])), make('span', label));
+        document.getElementById('counts').append(card);
+      }
+      for (const warning of snapshot.warnings)
+        document.getElementById('warnings').append(make('li', warning));
+      const owners = [];
+      for (const group of snapshot.groups) {
+        const detail = make('details', '', 'owner');
+        const summary = make('summary', '', 'summary');
+        const name = make('div', group.name, 'owner-name');
+        name.append(make('div', group.owner, 'muted'));
+        name.append(make('div', 'Expand ' + group.issues.length + ' scoped issue(s)', 'muted'));
+        const statuses = make('div');
+        statuses.append(make('span', 'LLM status', 'label'), badge(group.llm));
+        const jobs = group.issues.flatMap((issue) => issue.jobs);
+        statuses.append(
+          make(
+            'div',
+            jobs.length
+              ? 'Jobs: ' + jobs.map((job) => job.status).join(', ')
+              : 'Jobs: none supplied',
+            'muted',
+          ),
+        );
+        const current = make('div');
+        current.append(make('span', 'Current work', 'label'));
+        const next = make('div');
+        next.append(make('span', 'Next / wait reason', 'label'));
+        for (const issue of group.issues) {
+          current.append(make('div', issue.id + ': ' + issue.stage + ' · ' + issue.status));
+          if (issue.paused) current.append(badge('paused'));
+          next.append(make('div', issue.next_action));
+          if (issue.waiting) next.append(make('div', 'Waiting: ' + issue.wait_reason, 'muted'));
+        }
+        summary.append(name, statuses, current, next);
+        detail.append(summary);
+        detail.append(
+          make('p', 'Thread status read: ' + (group.llm_source_at || 'unavailable'), 'issue muted'),
+        );
+        for (const issue of group.issues) {
+          const article = make('article', '', 'issue');
+          article.append(make('h2', issue.id + ' · ' + issue.title), badge(issue.status));
+          if (issue.waiting) article.append(badge('waiting'));
+          const facts = make('dl');
+          field(facts, 'Stage', issue.stage);
+          field(facts, 'Next action', issue.next_action);
+          field(facts, 'Wait reason', issue.wait_reason);
+          field(facts, 'Wait kind', issue.wait_kind);
+          field(facts, 'Issue updated', issue.updated_at || 'unavailable');
+          if (issue.status === 'closed') {
+            field(facts, 'Administrative closure', issue.close_reason);
+            field(facts, 'Closed at (administrative)', issue.closed_at);
+          }
+          field(
+            facts,
+            'Dependencies',
+            issue.dependencies.length
+              ? issue.dependencies
+                  .map(
+                    (dependency) =>
+                      dependency.id +
+                      ' · ' +
+                      dependency.type +
+                      ' · ' +
+                      dependency.status +
+                      ' · ' +
+                      dependency.title,
+                  )
+                  .join('\n')
+              : 'None supplied',
+          );
+          article.append(facts);
+          for (const job of issue.jobs) {
+            const boundary = make('div', '', 'job');
+            boundary.append(
+              badge(job.status),
+              make('p', job.result),
+              make(
+                'p',
+                'Source file timestamp: ' +
+                  job.source_at +
+                  (job.finished_at ? ' · Controller finished: ' + job.finished_at : ''),
+                'muted',
+              ),
+            );
+            showPath(boundary, job.root);
+            article.append(boundary);
+          }
+          article.append(make('span', 'Evidence paths (display/copy only)', 'label'));
+          if (!issue.evidence_paths.length) article.append(make('p', 'Not supplied', 'muted'));
+          for (const path of issue.evidence_paths) showPath(article, path);
+          detail.append(article);
+        }
+        document.getElementById('owners').append(detail);
+        owners.push({ detail, group });
+      }
+      function filter() {
+        const query = document.getElementById('search').value.trim().toLowerCase();
+        const waiting = document.getElementById('waiting').checked;
+        let visible = 0;
+        for (const { detail, group } of owners) {
+          const matches = group.issues.some(
+            (issue) =>
+              (!waiting || issue.waiting) &&
+              [
+                group.owner,
+                group.name,
+                issue.id,
+                issue.title,
+                issue.stage,
+                issue.next_action,
+                issue.wait_reason,
+              ]
+                .join(' ')
+                .toLowerCase()
+                .includes(query),
+          );
+          detail.hidden = !matches;
+          if (matches) visible += 1;
+        }
+        document.getElementById('empty').hidden = visible !== 0;
+      }
+      document.getElementById('search').addEventListener('input', filter);
+      document.getElementById('waiting').addEventListener('change', filter);
+      document.getElementById('reload').addEventListener('click', () => location.reload());
+      filter();
+    </script>
+  </body>
+</html>
