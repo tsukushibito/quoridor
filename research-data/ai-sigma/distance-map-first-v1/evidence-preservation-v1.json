@@ -1,0 +1,283 @@
+{
+  "version": 1,
+  "issue": "quoridor-4lc.324",
+  "maintenance_plan_issue": "quoridor-4lc.324.3",
+  "source_manifest_SHA256": "fa6feaae556224fc31145291c0e2118ccf2ab695083e1bb27708d9ba0be1f6f7",
+  "retention_result": {
+    "archive": "/workspaces/quoridor/research-data/ai-sigma/distance-map-first-v1/retained-comparison-evidence-v1.tar.gz",
+    "archive_SHA256": "82e07c59ed5695dc273a55d5363cbbd0a27fc0afedc988ee714d4c2a018baad3",
+    "archive_bytes": 158848,
+    "mapping_SHA256": "cceb6069a194272226adbf0a118294830a82f2a14f70f0c270390e0806b19a41",
+    "Git": "daee7c8e156ac9a04beb6de844e361294cbf259e",
+    "members": 197,
+    "reconstructed_sources": 6
+  },
+  "interval": {
+    "START": "2026-10-08T19:45:13.415307+00:00",
+    "actual_lock_owned_START": "2026-10-08T19:45:13.452795+00:00",
+    "lock_owned_STOP": "2026-10-08T19:45:41.283524+00:00",
+    "STOP": "2026-10-08T19:45:41.284468+00:00"
+  },
+  "commands": [
+    {
+      "argv": [
+        "sudo",
+        "-n",
+        "python3",
+        "-B",
+        "-c",
+        "\nimport json, os, sys\nfrom pathlib import Path\nresult=[]\nfor pid in json.loads(sys.argv[1]):\n    p=Path('/proc')/str(pid)\n    try:\n        comm=(p/'comm').read_text().strip()\n        args=[s.decode(errors='replace') for s in (p/'cmdline').read_bytes().split(b'\\0') if s]\n        exe=os.readlink(p/'exe')\n        refs=[exe,os.readlink(p/'cwd')]\n        for fd in (p/'fd').iterdir():\n            try: refs.append(os.readlink(fd))\n            except (FileNotFoundError,ProcessLookupError): pass\n        entry=''\n        if comm.startswith('python'):\n            pos=1\n            while pos<len(args) and args[pos] in ('-B','-I','-u','-E','-s','-S'): pos+=1\n            if pos<len(args): entry=args[pos]\n        named=comm in ('cargo','rustc','clippy-driver','perf','chrome','chromium','firefox','headless_shell')\n        numeric=any(s in Path(entry).name for s in ('worker','numeric','analysis_ci','statistics','finite-driver','generate_dataset','qualification'))\n        payload='/workspaces/quoridor' in exe and any(s in exe for s in ('/private/','/target/'))\n        target=sys.argv[2]\n        result.append({'pid':pid,'WT_reference':any(s==target or s.startswith(target+'/') for s in refs),'competitor':named or numeric or payload})\n    except (FileNotFoundError,ProcessLookupError): result.append({'pid':pid,'absent':True})\nprint(json.dumps(result))\n",
+        "[7, 35, 41, 56, 9344, 13382, 13397, 14710, 14716, 1367168]",
+        "/workspaces/quoridor/.worktree/distance-map-first"
+      ],
+      "START": "2026-10-08T19:45:13.422211+00:00",
+      "STOP": "2026-10-08T19:45:13.451735+00:00",
+      "exit": 0
+    },
+    {
+      "argv": ["git", "rev-parse", "HEAD"],
+      "START": "2026-10-08T19:45:13.452801+00:00",
+      "STOP": "2026-10-08T19:45:13.496316+00:00",
+      "exit": 0
+    },
+    {
+      "argv": ["git", "symbolic-ref", "--short", "HEAD"],
+      "START": "2026-10-08T19:45:13.496336+00:00",
+      "STOP": "2026-10-08T19:45:13.540126+00:00",
+      "exit": 0
+    },
+    {
+      "argv": ["git", "--no-optional-locks", "ls-files", "--others", "--exclude-standard", "-z"],
+      "START": "2026-10-08T19:45:13.543777+00:00",
+      "STOP": "2026-10-08T19:45:26.255092+00:00",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "--no-optional-locks",
+        "ls-files",
+        "--others",
+        "--exclude-standard",
+        "-z",
+        "--ignored"
+      ],
+      "START": "2026-10-08T19:45:26.255117+00:00",
+      "STOP": "2026-10-08T19:45:34.859383+00:00",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "--no-optional-locks",
+        "cat-file",
+        "blob",
+        "b40b45e8bf404c9c16fbf2ca3844a14193087f2f"
+      ],
+      "START": "2026-10-08T19:45:34.944695+00:00",
+      "STOP": "2026-10-08T19:45:34.987898+00:00",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "--no-optional-locks",
+        "cat-file",
+        "blob",
+        "b7d9f5b8c959cf35933a7d2af637e47e41f0a7e2"
+      ],
+      "START": "2026-10-08T19:45:34.988208+00:00",
+      "STOP": "2026-10-08T19:45:35.044855+00:00",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "--no-optional-locks",
+        "cat-file",
+        "blob",
+        "41a28c12c28f0755b63591799f76acd39bba6082"
+      ],
+      "START": "2026-10-08T19:45:35.044956+00:00",
+      "STOP": "2026-10-08T19:45:35.088591+00:00",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "--no-optional-locks",
+        "cat-file",
+        "blob",
+        "feb15f78704e199e51f168e42e94b6729a9af5bd"
+      ],
+      "START": "2026-10-08T19:45:35.088681+00:00",
+      "STOP": "2026-10-08T19:45:35.125672+00:00",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "--no-optional-locks",
+        "cat-file",
+        "blob",
+        "089f903eba67f9b02e7dc0bda8ecd35dc37d1714"
+      ],
+      "START": "2026-10-08T19:45:35.125746+00:00",
+      "STOP": "2026-10-08T19:45:35.170804+00:00",
+      "exit": 0
+    },
+    {
+      "argv": ["git", "diff", "--cached", "--name-only"],
+      "START": "2026-10-08T19:45:35.181592+00:00",
+      "STOP": "2026-10-08T19:45:35.241050+00:00",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "add",
+        "--",
+        "research-data/ai-sigma/distance-map-first-v1/retained-comparison-evidence-v1.tar.gz",
+        "research-data/ai-sigma/distance-map-first-v1/retained-comparison-path-map-v1.json"
+      ],
+      "START": "2026-10-08T19:45:35.241073+00:00",
+      "STOP": "2026-10-08T19:45:35.339060+00:00",
+      "exit": 0
+    },
+    {
+      "argv": ["git", "diff", "--cached", "--name-only"],
+      "START": "2026-10-08T19:45:35.339081+00:00",
+      "STOP": "2026-10-08T19:45:35.392406+00:00",
+      "exit": 0
+    },
+    {
+      "argv": ["git", "commit", "-m", "Preserve stopped distance-map comparison evidence"],
+      "START": "2026-10-08T19:45:35.392436+00:00",
+      "STOP": "2026-10-08T19:45:40.629056+00:00",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:research-data/ai-sigma/distance-map-first-v1/retained-comparison-evidence-v1.tar.gz"
+      ],
+      "START": "2026-10-08T19:45:40.629078+00:00",
+      "STOP": "2026-10-08T19:45:40.995487+00:00",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:research-data/ai-sigma/distance-map-first-v1/retained-comparison-path-map-v1.json"
+      ],
+      "START": "2026-10-08T19:45:41.010785+00:00",
+      "STOP": "2026-10-08T19:45:41.237436+00:00",
+      "exit": 0
+    },
+    {
+      "argv": ["git", "rev-parse", "HEAD"],
+      "START": "2026-10-08T19:45:41.248863+00:00",
+      "STOP": "2026-10-08T19:45:41.283354+00:00",
+      "exit": 0
+    }
+  ],
+  "verification": {
+    "197_member_regular_mode_size_SHA": true,
+    "88_historical_primary_hashes_preserved": true,
+    "six_unique_sources_reconstructed_exactly": true,
+    "Git_blob_restoration_verified_before_any_original_unlink": true,
+    "canonical_nonblocking_lock_released": true,
+    "owned_children_remaining": [],
+    "privileged_operations": "read-only inaccessible proc references; no privileged filesystem writes",
+    "fresh_guard": {
+      "at": "2026-10-08T19:45:13.452778+00:00",
+      "named_competitors": [],
+      "WT_readers": [],
+      "unresolved": [],
+      "MemAvailable_B": 19504140288,
+      "privileged_readonly_proc_resolution": [
+        {
+          "pid": 7,
+          "WT_reference": false,
+          "competitor": false
+        },
+        {
+          "pid": 35,
+          "WT_reference": false,
+          "competitor": false
+        },
+        {
+          "pid": 41,
+          "WT_reference": false,
+          "competitor": false
+        },
+        {
+          "pid": 56,
+          "WT_reference": false,
+          "competitor": false
+        },
+        {
+          "pid": 9344,
+          "WT_reference": false,
+          "competitor": false
+        },
+        {
+          "pid": 13382,
+          "WT_reference": false,
+          "competitor": false
+        },
+        {
+          "pid": 13397,
+          "WT_reference": false,
+          "competitor": false
+        },
+        {
+          "pid": 14710,
+          "WT_reference": false,
+          "competitor": false
+        },
+        {
+          "pid": 14716,
+          "WT_reference": false,
+          "competitor": false
+        },
+        {
+          "pid": 1367168,
+          "WT_reference": false,
+          "competitor": false
+        }
+      ]
+    }
+  },
+  "first_guard_refusal": {
+    "issue": "quoridor-4lc.324",
+    "phase": "preserve",
+    "START": "2026-10-08T19:43:47.725971+00:00",
+    "CPU": [3],
+    "storage_support_B": 8388608,
+    "manifest_SHA256": "fa6feaae556224fc31145291c0e2118ccf2ab695083e1bb27708d9ba0be1f6f7",
+    "continuous_peaks": "UNKNOWN",
+    "commands": [],
+    "status": "FAILED",
+    "error": "AssertionError(([], [], [7, 35, 41, 56, 9344, 13382, 13397, 14710, 14716, 1364970]))",
+    "STOP": "2026-10-08T19:43:47.736701+00:00",
+    "owned_children_remaining": [],
+    "lock_lifetime_ended": true
+  },
+  "first_refusal_SHA256": "6ebfa88629a6b4cd2076a4f3cd834ad35bbc3e746fb76b4ae521533bcb627624",
+  "whole_support": {
+    "maintenance_B": 8388608,
+    "temporary_archive_map_Git_upper_B": 2990414,
+    "parent": "unchanged344review128MiB/whole2GiB/1ed487+68f",
+    "old_caps_assets_failures_fees_UNKNOWN_refunded": false
+  },
+  "continuous_peaks": "UNKNOWN",
+  "asset_moves_source_restoration_original_unlink_managed_removal": "NOT_RUN; new substantial maintenance deferred for genuinely READY D64 pilot priority",
+  "science_model_test_replay": 0,
+  "N": null,
+  "paused323_defaults_seals": "unchanged"
+}
