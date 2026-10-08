@@ -124,20 +124,26 @@ def validate(config, base):
     return config
 
 
-CONTROL_READ_SECONDS = 1.0  # Total DB-read latency per authority check, including no-deadline jobs.
+# One cold embedded-store read exceeded the old one-second cap. This finite
+# controller budget covers one batched read, never extends a caller horizon.
+CONTROL_READ_SECONDS = 5.0
 
 
 def authority(config, root, backend, *, horizon, timeout=CONTROL_READ_SECONDS):
     """Bound one DB check by its caller horizon; preserve pause and ownership."""
     if horizon is not None:
         timeout = min(timeout, (runtime.timestamp(horizon) - now()).total_seconds())
+    if timeout <= 0:
+        raise JobError("Authority read budget exhausted")
     end = time.monotonic() + timeout
     entry = {"thread_id": config["thread_id"]}
-    for issue_id in dict.fromkeys((config["goal_issue"], config["issue"])):
-        remaining = end - time.monotonic()
-        if remaining <= 0:
-            raise JobError("Authority read budget exhausted")
-        item = backend.issue(issue_id, timeout=remaining)
+    issue_ids = list(dict.fromkeys((config["goal_issue"], config["issue"])))
+    items = backend.issues(issue_ids, timeout=timeout)
+    if time.monotonic() >= end or deadline_reached(horizon):
+        raise JobError("Authority read budget exhausted")
+    for issue_id, item in zip(issue_ids, items, strict=True):
+        if not isinstance(item, dict) or item.get("id") != issue_id:
+            raise JobError(f"Cannot identify authority issue {issue_id}")
         if item.get("status") not in ("open", "in_progress") or "paused-by-user" in (
             item.get("labels") or []
         ):

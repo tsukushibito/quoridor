@@ -1,0 +1,61 @@
+{
+  "issue": "quoridor-n3l",
+  "affected_research_issue": "quoridor-4lc.331",
+  "scope": "F03 real authority-read latency repair; one bounded batch with exact identities",
+  "source_before": "41f23e9d0a0e2ee449b3e05c3b3ebeeac679c274",
+  "sources": {
+    "scripts/dev/research-job.py": "30dc366c8c0a7bc41c8965820cbea511a12ef82ead12c2a30d1082c61316f7a1",
+    "scripts/dev/research-runtime.py": "c175a4cfae9bc28671c593c93eb019226dbb43a5add451514787005657a90cfb",
+    "tools/research-session/test_job.py": "081fea42299ad41a65c824a10f2a40e11b00974b7a561e61489bb562b88567bc"
+  },
+  "repair": "Single show goal+work --brief-deps under finite5second sharedcontrollerbudget, clippedby callerhorizon and remainingruntime; after-read expiry/error/identity/cardinality failclosed; allfiveend_at/notify_until callers unchanged",
+  "status_scope": "Pause/status/owner exact top-level fields; batch is not an atomic DB snapshot or hard-real-time promise",
+  "ports_tests": {
+    "tests": 11,
+    "success": true,
+    "failures": 0,
+    "errors": 0,
+    "body_wall_s": 3.21561745100189,
+    "scientific_calls": 0,
+    "actual_submit_job": 0
+  },
+  "actual_readonly_authority": {
+    "probe": {
+      "success": true,
+      "entry": {
+        "thread_id": "01a11062-b120-73a1-8aa3-fe2cb922c7c0"
+      },
+      "wall_s": 1.906197890988551,
+      "budget_s": 5.0,
+      "actual_submit_job": 0
+    },
+    "exit": 0,
+    "stderr": "",
+    "sampled_family_RSS_B": 352395264,
+    "family_cap_B": 536870912,
+    "continuous_peak": "UNKNOWN",
+    "direct_wait": true,
+    "identities": [
+      {
+        "pid": 2858782,
+        "start_ticks": "67538579",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      }
+    ],
+    "remaining": [],
+    "refusal": null,
+    "whole_wall_s": 2.1281794810201973,
+    "scientific_calls_submit_job": 0,
+    "AS_limit": "unset for Go virtual reservation; finite actualRSS and command guard"
+  },
+  "original331_submit": "No jobcreated; originalstderrUNKNOWN; separate actualreadonlyfirstgoal1second TimeoutExpired doesnotproveoriginalstderridentical",
+  "failed_Root_probe": "Firstrealread-only verifier underAS512 exited2; exactclassification AS-refusal.json shows Go virtualpage-summary reservationfailure. Elevenmocktests hadPASS. Oldfailurecost/logretained, no retroPASS",
+  "resource_policy": "CPU2/familyRSS512MiB sampledguarded; Go virtualAS unrestricted for actualCLI, no hostpolicy/sysctl/capabilitychange. Samplingnotcontinuouspeak. Currentknownrootidentityonly; innerCLI directwait via subprocess.run, no invented exactidentityabsencecount",
+  "helper_source_STOP_UTC": "2026-10-08T01:18:45.110093+00:00",
+  "future331_entry": "Newnamespace/sourcebindings/newmainhelperSHA only; no same-submit retry or oldsuccessfulsuite replay. No compiler/models/gamejob launchedhere",
+  "remaining_owned_readers_children_TMP": "verifierdirectwait69227exit1retained; readonlyguard79065exit0/directchildwait/remaining[]. Own uv0BTMP lock retained charged, not assertedempty",
+  "inclusive_new_phase_upper_B": 65536,
+  "within_existing_Root8MiB": true,
+  "mathematical_product_data_rules_fields_changed": false,
+  "fees_UNKNOWN": "Allfailedsubmit/admin/oldsourcecaps/assets/buildUNKNOWN retained"
+}

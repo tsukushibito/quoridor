@@ -69,3 +69,9 @@ R01（execution end_atとcompletion notify_untilの混同）とR02（pidfd/Popen
 停止Web patch99193cの17 pathを同独立reviewerが確認し、[原関連findings](../../.artifacts/repository-maintenance/n3l/review/confirmation-web-v1/findings.md)へW03/F19、W01/F09のblockerとW02/F11のordinaryを保存した。reader STOP00:56:04.976609、remaining[]。W03はstartup restore中のclearでoperation世代が変わりworking/save suppressionが解除されない実caller/mock反例。W01はhash済buffer読取後にcopyFileがsourceを再openし、growした入力を出力へ書いてからrefuseするためprewrite capが守れない反例。W02は本来optionalなquoridor-ai依存の完全renameを誤拒否する。三件とも費用対効果の悪い修復ではなくIMPLEMENTとした。
 
 同n3l.3へ、accepted restoreとclearの直列化、hash済bytesのexclusive出力、package identityとdependency alias reachabilityの分離、および各反例のaffected回帰を依頼した。原patch/source/log/initial1753088B cap失敗・676 intake拒否を保持し、旧819200B forecast＋修復655360B＝1474560B<helper1572864Bに束縛する。新STOP後は同reviewerへW01/W02/W03だけ確認し、既clear F10/F12/F13/F14/H01を広く再実行しない。mainにはこのWeb patchを未適用。実browser/BFCacheと最終whole TypeScript確認は別の資源付き統合検証が必要で、mock PASSから実cache復帰を認定しない。
+
+## 実metadata読取で判明したF03の追修復
+
+331のcanonical submitはjob作成前にrefuseし、元stderrはUNKNOWNとして保持した。別のread-only診断は最初のgoal issue読取が旧1秒budgetに達した。必要なgoal/issue二件を一つのBeads CLI invocationで読み、dependency本文を省いた同じstatus/pause/owner判定へ移した。controllerの共有有限budgetを5秒とし、execution/notificationの明示horizon・remaining runtimeでclipし、read後の期限超過も拒否する。goal/issue identity不足・重複・外部ID・誤ownerはauthorizeしない。DB atomic snapshotやhard-real-time応答を新たに主張しない。
+
+対象11port testsがPASSし、実current authorityのread-only checkも1.9062秒/exit0、RSS guardian sample352395264B<512MiBで完了した。job/submit/compiler/modelは0。最初の実checkではAS512MiBを継承したGoの仮想page-summary予約が失敗したため、その原exit2とstderrを保持し、実CLIのRSS guardと仮想ASを分けた。これは元331のtimeoutと別原因であり、元stderrUNKNOWNを置換しない。[exact source・検証・失敗範囲](../../research-data/repository-maintenance/n3l/authority-batch-repair.json)。旧41f23e9の使用proofは変更せず、次entryだけ新helper SHAへ束縛する。

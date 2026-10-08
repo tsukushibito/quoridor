@@ -91,15 +91,31 @@ class AppBackend:
     def __init__(self, root):
         self.root = root
 
-    def issue(self, issue, *, timeout=30):
+    def issues(self, issues, *, timeout=30):
+        """Read the requested authority records in one bounded store invocation."""
+        issues = list(dict.fromkeys(issues))
+        if not issues:
+            return []
         result = client.command_json(
-            ["bash", str(self.root / "scripts/dev/beads.sh"), "show", issue, "--json"],
+            [
+                "bash",
+                str(self.root / "scripts/dev/beads.sh"),
+                "show",
+                *issues,
+                "--brief-deps",
+                "--json",
+            ],
             timeout=timeout,
         )
-        item = result[0] if isinstance(result, list) and len(result) == 1 else result
-        if not isinstance(item, dict) or item.get("id") != issue:
-            raise RuntimeError(f"Cannot identify issue {issue}")
-        return item
+        items = result if isinstance(result, list) else [result]
+        if (
+            any(not isinstance(item, dict) or item.get("id") not in issues for item in items)
+            or len(items) != len(issues)
+            or len({item["id"] for item in items}) != len(issues)
+        ):
+            raise RuntimeError("Cannot identify all requested authority issues")
+        by_id = {item["id"]: item for item in items}
+        return [by_id[issue] for issue in issues]
 
     async def connect(self, timeout):
         host = await asyncio.to_thread(

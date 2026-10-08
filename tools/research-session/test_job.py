@@ -11,6 +11,7 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
+import time
 import threading
 import unittest
 from unittest.mock import Mock, patch
@@ -74,8 +75,76 @@ class Backend:
     def issue(self, issue, *, timeout=30):
         return self.items[issue]
 
+    def issues(self, issues, *, timeout):
+        # Fake per-record ports retain mutation/error injection. The production
+        # backend uses one CLI invocation, checked separately below.
+        end = time.monotonic() + timeout
+        return [self.issue(issue, timeout=end - time.monotonic()) for issue in issues]
+
     async def connect(self, timeout):
         return self.server
+
+
+class AuthorityBatchTests(unittest.TestCase):
+    def test_one_store_invocation_binds_all_requested_records(self):
+        backend = j.runtime.AppBackend(Path("/workspaces/quoridor"))
+        rows = [{"id": "work", "status": "in_progress"}, {"id": "goal", "status": "open"}]
+        with patch.object(j.runtime.client, "command_json", return_value=rows) as call:
+            self.assertEqual(backend.issues(["goal", "work", "goal"], timeout=0.25), rows[::-1])
+        call.assert_called_once_with(
+            [
+                "bash",
+                "/workspaces/quoridor/scripts/dev/beads.sh",
+                "show",
+                "goal",
+                "work",
+                "--brief-deps",
+                "--json",
+            ],
+            timeout=0.25,
+        )
+
+    def test_missing_duplicate_or_unrequested_records_refuse(self):
+        backend = j.runtime.AppBackend(Path("/workspaces/quoridor"))
+        for rows in (
+            [{"id": "goal"}],
+            [{"id": "goal"}, {"id": "goal"}],
+            [{"id": "goal"}, {"id": "other"}],
+            [{"id": "goal"}, None],
+        ):
+            with (
+                self.subTest(rows=rows),
+                patch.object(j.runtime.client, "command_json", return_value=rows),
+            ):
+                with self.assertRaises(j.runtime.RuntimeError):
+                    backend.issues(["goal", "work"], timeout=0.25)
+
+    def test_authority_has_one_finite_clipped_batch_and_rejects_late_return(self):
+        backend = Backend()
+        config = {"goal_issue": "goal", "issue": "work", "thread_id": "target"}
+        fixed = j.now()
+        horizon = (fixed + timedelta(seconds=0.05)).isoformat()
+        with (
+            patch.object(j, "now", return_value=fixed),
+            patch.object(backend, "issues", wraps=backend.issues) as call,
+        ):
+            self.assertEqual(
+                j.authority(config, None, backend, horizon=horizon)["thread_id"], "target"
+            )
+        self.assertEqual(call.call_count, 1)
+        self.assertEqual(call.call_args.kwargs["timeout"], 0.05)
+        with (
+            patch.object(backend, "issues", return_value=list(backend.items.values())),
+            patch.object(j.time, "monotonic", side_effect=[0.0, j.CONTROL_READ_SECONDS]),
+        ):
+            with self.assertRaisesRegex(j.JobError, "budget exhausted"):
+                j.authority(config, None, backend, horizon=None)
+        with patch.object(backend, "issues") as call, patch.object(j, "now", return_value=fixed):
+            with self.assertRaisesRegex(j.JobError, "budget exhausted"):
+                j.authority(
+                    config, None, backend, horizon=(fixed - timedelta(seconds=1)).isoformat()
+                )
+        call.assert_not_called()
 
 
 class Fixture:
@@ -680,7 +749,7 @@ class NotificationTests(Fixture, unittest.IsolatedAsyncioTestCase):
         self.backend.issue = issue
         with patch.object(j, "now", return_value=fixed):
             self.assertEqual((await self.notify())["status"], "cancelled")
-        self.assertEqual(len(calls), 3)
+        self.assertEqual(len(calls), 4)
         self.assertTrue(all(0 < budget <= j.CONTROL_READ_SECONDS for budget in calls))
         self.assertEqual(self.backend.server.calls, [])
 
