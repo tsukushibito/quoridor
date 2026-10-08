@@ -552,7 +552,7 @@ main ad358のcurrent Rust1.99 private e4b/fc7、BEST51とSigma d790、同book93c
 
 実controller19:46:46.346858〜19:46:54.960173 UTC、whole8.613708558秒、native generation6.385047083秒は内数。失敗を含む既知software＋pilot費339.771841847秒、raw JSONL14,721,426Bを保持する。exact2 commandsのdirectwait/cleanup[]は供給証拠と独立保存確認で受け入れ、rawや対局を再実行していない。persisted mask pending/finalrecord attempted、continuous peak・support費UNKNOWN、旧失敗と資産・費用を保持する。現代mainへのsource統合は別の3 Cargo feature checksで確認し、歴史的pilot binaryの資格へ読み替えない。
 
-人間の次の数量判断は未選択Nとfull prefix scheduleである。未選択640/6400/64000 scheduled gamesのpilot-linear generation＋audit費は約86/861/8614秒、raw約147MB/1.47GB/14.72GB、現行80B/rowのbinary配列のみ約2.24/22.38/223.84MB。200-ply row上限ではbinary10.24/102.4/1024MBとなる。6400/64000のraw予測は現在1GiB componentを398,400,776/13,647,684,176B超え、64000のbinary上限は512MiBを487,129,088B超える。これらは予測・条件付き不足であり、完成時間の上限・推奨・配分ではない。[数量とwhole費用の補足](../research-data/ai-sigma/teacher-distance-tanh-v1/pilot-acceptance-v1/cache-volume-pricing.md)にはmetadata/T統計・4 fitsの収束とcurve/checkpoint成長・6 view資格・96枠・TMP/失敗/review/Git/cleanupの未価格部分を明記した。
+人間の次の数量判断は未選択Nとfull prefix scheduleである。以下は保存済みdepth3 pilotだけの歴史的な線形予測であり、後に選択されたdepth6の時間・throughput価格には使わない。未選択640/6400/64000 scheduled gamesのpilot-linear generation＋audit費は約86/861/8614秒、raw約147MB/1.47GB/14.72GB、現行80B/rowのbinary配列のみ約2.24/22.38/223.84MB。200-ply row上限ではbinary10.24/102.4/1024MBとなる。6400/64000のraw予測は現在1GiB componentを398,400,776/13,647,684,176B超え、64000のbinary上限は512MiBを487,129,088B超える。これらは予測・条件付き不足であり、完成時間の上限・推奨・配分ではない。[数量とwhole費用の補足](../research-data/ai-sigma/teacher-distance-tanh-v1/pilot-acceptance-v1/cache-volume-pricing.md)にはmetadata/T統計・4 fitsの収束とcurve/checkpoint成長・6 view資格・96枠・TMP/失敗/review/Git/cleanupの未価格部分を明記した。
 
 現在のterminal cacheはArrow iteratorを入力とするため、正本JSONLのheader/game/SearchEvidence/footerから直接取り込み、完全family partition・履歴・source・原SHA・T-only統計を結び付けるmaintained入口が必要である。Arrow mirrorを作らず、このsource準備はN待ちでも進められる。learner新fit admissionの独立342.8レビューはN gate順序・actual common inputとのpermit binding・外部scale/worker overrideの3欠陥を検出し、同authorの通常修正を同reviewerへ返している。確認前のfull learner採用・full generation・4 fits・96 gamesは行わない。N増加のみでcoverageやhistory/feature leakageの問題が解消したとは扱わず、開いたpilotの再利用は明示provenanceとfull family partitionの判断を要する。
 
@@ -568,7 +568,17 @@ learnerのC01/C02/C03は同342.8の限定source確認で解消した（reader ST
 
 343のsource/NN0修正をmainへ受け入れた。凍結packet4cad8051と20件のsource・保存証拠参照を照合し、4パスは整形後も資格済みpostimageとbyte/modeが一致した。24件の対象NN0定義は既存PASSを再利用し、変更後のphase6は4新規回帰・affected controller・public入口compile・scoped Clippyを含む7命令が直接wait/exit0/cleanup[]で終了している。同343.2のR01/R02確認はblocker0、reader STOP17:07:37.356447である。違法な完成Alpha通知はlatenessよりrule violationを優先し、choice・packingからauthority receiptまでの費用が支持されたreserveを超えれば後続推論admissionを無効化する。合法性確認とdrainは思考時計から分離し、drain/join後に相手時計を開始する。untimed教師・model・PUCT・rulesは変更していない。[main受入れと対象SHA](../research-data/ai-sigma/sigma-deadline-control-repair-v1/main-acceptance-v1.json)。
 
-これはsourceと有限NN0の資格であり、実backendの費用・scheduler・初回推論の実測やhard real-time、棋力を証明しない。欠落・期限切れ・実測で反証された費用は推論を許可しない。live資格1.25GiB/最大64logical callsと新版本16枠4GiBは別途判断する提案のみで、配分・実行していない。旧331/336の結果・UNKNOWN・費用、persisted mask pendingとcontinuous peak UNKNOWNは保持する。64局D-only生成pilotにはmove timeoutがなく、この修正を待つ依存を追加しない。
+これはsourceと有限NN0の資格であり、実backendの費用・scheduler・初回推論の実測やhard real-time、棋力を証明しない。欠落・期限切れ・実測で反証された費用は推論を許可しない。当初のlive資格1.25GiB/最大64logical callsと新版本16枠4GiBは提案だったが、後述の明示承認により新しい共通phaseへ再価格化した。旧331/336の結果・UNKNOWN・費用、persisted mask pendingとcontinuous peak UNKNOWNは保持する。64局D-only生成pilotにはmove timeoutがなく、この修正を待つ依存を追加しない。
+
+## 新時計のSigma再評価とdepth6 throughput（2026-10-08追加承認）
+
+人間は[新時計のSigma再評価](design/sigma-receipt-reevaluation-v1.md)を承認した。最大64 logical callsにwarmup・全操作費測定・実時計資格を含め、その実資格が通った後、元Sigma対固定Dの新16枠、続いて同Sigma対採用済みBEST51 NNUEの新16枠を実行する。双方のsource/model/OPEN book/config/clockを結果を見る前に凍結し、100ms authority receipt・合法性外側・通知後の決定凍結・matching reply/error/drain後の相手時計という契約を共通に使う。旧331/336のUNKNOWNを救済・再対局せず、342の新fitを使わない。現行CLIは費用資格をruntimeへ渡しておらず、欠落資格で推論を拒否するため、maintained callerと実whole-operation測定入口の接続が具体的な先行作業である。source確認をlive資格へ読み替えない。
+
+人間は教師生成の**depth6**を選び、Nを決める前に独立ゲーム並列化で完成games/hourを測るよう指定した。[有限throughput契約](design/deeper-teacher-generation-v1.md)は新しいtarget-blind prefix長4/8/12/16の4ゲーム、1つの2-worker設定を固定する。各ゲームはsingle-thread searchと独立TT/history/RNGを持ち、ID由来seed・family partition・正本出力を結果前に固定する。100ms教師deadlineや実用node capを置かず、完成depth6のみをacceptedとして数え、下位iteration・error/cancelはUNKNOWNとして予定分母に残す。depth5やworker sweepは行わない。主指標は生成・serialization・保存audit・cleanupを含む完成games/hourとeligible rows/hourであり、depth/node/ply、game duration tails、startup・peak・保存量と4ゲームの標本限界を別に記録する。実depth6費は未測定で、旧depth3 pilotは別policyの保存証拠である。
+
+347にはarenaと独立caller helper、348には別のscheduler engineering担当とarena recipe担当を実dispatchした。source準備とlearner intake修正は並行し、計算区間は実READYと完成までの費用で割り当てる。進行中の実job・予約済み有限fair区間を守り、未完成sourceを理由にhardwareを空予約しない。[Sigma whole4GiB](../research-data/ai-sigma/sigma-receipt-reevaluation-v1/resources.json)と[depth6 whole1.5GiB](../research-data/ai-sigma/deeper-teacher-generation-v1/resources.json)はbuild/private/link/TMP/raw/失敗/review/Git/cleanupを含む。旧上限を返金せず、名前付き保持上限合計39,598,288,896Bはdecimal50GB内である。登録・delivery acceptanceは数値STARTや完成を意味しない。full N/schedule、full generation、4 fits/96枠、323 pause・seals・default weightsのgateは維持する。
+
+learnerの直接JSONL intakeは新8 Rust定義と3 Python control・Clippy/helpが成功したが、同342.8の限定source確認でC04 syntheticからfull-volumeへの再表示、C05 generator/source policyと参照game digestの未結合、C06 fallible cleanup前のcache admission公開という3欠陥が残った。同authorへ通常修正を返し、停止した変更境界を同reviewerで確認する。既に通ったC01–C03/labels/envelope/mathを再試験せず、この未確認intakeをmain採用・real cache・fitへ進めない。
 
 ## Distance-map-firstと学習・探索の接続確認（2026-10-08承認）
 
