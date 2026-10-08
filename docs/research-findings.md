@@ -562,6 +562,20 @@ main ad358のcurrent Rust1.99 private e4b/fc7、BEST51とSigma d790、同book93c
 
 人間は[distance-map-firstの有限最適化契約](design/distance-map-first-v1.md)を承認した。現行coreはu128 frontier/reachedと固定81要素出力でheap BFS queueを持たず、WallEdgesを両側reverse BFSで共有する。NNUEも同H/Vのmapをpawn move間でArc共有済みである。この既存処理を新しい改善として数えず、実callerのwall-change再構築・同状態反復・map/Arc寿命・fill/bitset処理を監査する。具体的に有用な同意味候補がある場合だけ、関連oracle/undo/error資格とsetup/dropを含む5根・8 ABBAABBA plain比較へ進む。候補なしの証拠付き結論も有効で、速度利益・source採用はまだ認定していない。
 
+344の固定5根・8 ABBAABBA比較は完了し、事前の改善gateを満たした根は0/5（必要3/5）だった。候補は親map miss後の既存child-slot ArcをH/V完全一致で再利用する処理のみで、mainへ適用せず既存経路を保持する。3/4 Bが両側Aに対して95% CIで1%を超えるという再現的退行条件も0/5だが、個別の改善・退行と混合結果を消さず、一般的な無退行・速度・棋力の証明とはしない。[固定質問の受入れと全証拠](../research-data/ai-sigma/distance-map-first-v1/fixed-question-acceptance-v1.json)。
+
+| 固定根         | 改善 B/4 | 退行 B/4 |
+| -------------- | -------: | -------: |
+| initial        |        1 |        1 |
+| opening        |        0 |        0 |
+| walled-midgame |        0 |        0 |
+| jump-p2        |        0 |        2 |
+| endgame        |        0 |        1 |
+
+全8プロセスのAction/valuebits/PV/完成depth3/stop/23 work countersは一致し、40組・2000 samplesを保持した。統合担当は88件91657Bのbound raw、保存point meanと40 CIの閾値集計を照合し、nativeや100000-bootstrapを再実行していない。実START18:18:54.361050、native8完了18:22:11.040938、controller STOP18:22:36.513124、whole222.315378730秒。9命令は直接wait/handles/processcleanup[]、softwareを含む既知controller費345.799696511秒はnestedを加算しない。persisted mask pending/final-record attempted、continuous peak UNKNOWN、旧refusal/失敗/費用/assetは保持する。
+
+342.2のCPU2 fake-port fixture4.776402ms（18:22:20.968052〜20.972814）は、保存chronology上ではnative8完了後のsaved-CI/whole-worker区間に重なった。direct native sample overlapとwhole-phaseの公平性を区別し、clean whole-phase isolationやゼロ影響は主張しない。timing/peak影響はUNKNOWNで、raw変更・sample除外・補正・再実行・新estimatorは行わない。SAME346のmap/source・changed-controls確認はその範囲で受け入れ、追加科学工程や候補採用へ拡張しない。比較資産はmanifestと全reader STOPを確認してmanaged整理する。
+
 別担当は342の4 fits/6 viewsが区別するものと残すgapを、maintained sourceとprimary engine/paperに基づいて整理する。生成D policy・history/family・教師の目的・calibration/ranking・terminal/TT単位と有限評価の解釈が対象で、332/340の保存caseや329のordering調査を繰り返さない。次のdiagnosticは費用・依存・解消する人間判断を付けた提案のみで、新teacher/features/fits/games/N決定を行わない。342のD-only64 pilotと343の通知・drain修正は独立して継続する。
 
 345の[停止済みsource gap報告](../.worktree/endgame-solver335/.artifacts/learning-search-gap-v1/gaps.md)を受け入れた。現行featuresはboard/STM/距離を符号化し、search keyは絶対ply・全counted historyも保持する。したがって同じ特徴に異なる履歴条件付きtargetが重なる可能性は残るが、実際のcollision頻度・target差・棋力への影響は未測定である。また新教師は固定D同士の記録された継続結果であり、軌道外の別合法手に対する価値やminimaxを与えるとは限らない。A/Bは同じeligible行のoutcomeとraw terminal marginを比較できるが、生成policyに依存しない教師やoff-trajectoryの順位を識別しない。異なる目的のMSEをモデル順位へ換算しない。

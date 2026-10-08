@@ -1,0 +1,137 @@
+{
+  "issue": "quoridor-4lc.344",
+  "integrator_issue": "quoridor-4lc.324",
+  "accepted_at": "2026-10-08T18:39:19.197279+00:00",
+  "verdict": "FIXED_QUESTION_COMPLETE_BENEFIT_GATE_NOT_MET_KEEP_BASELINE",
+  "candidate": "Existing child-slot immutable wall-map Arc reuse after parent H/V miss, only exact both H/V match",
+  "candidate_main_applied": false,
+  "evidence": [
+    {
+      "path": "/workspaces/quoridor/.worktree/distance-map-first/.artifacts/distance-map-first-v1/qualified-plain-STOP-v1.json",
+      "sha256": "a91d50e21e3ebdfc562154f80900edc01951036b9b60a0e75900e7d02da55b7a",
+      "bytes": 11713
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/distance-map-first/.artifacts/distance-map-first-v1/plain-v1/native-complete.json",
+      "sha256": "947f99c925bcd9389a7d66977c5b211053d5b74f8e72a946e3bdee09523c987b",
+      "bytes": 58140
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/distance-map-first/.artifacts/distance-map-first-v1/plain-v1/statistics.json",
+      "sha256": "145b91026d6d6091d76319e0cfd23871e55bc942ce0a16a18b3425890752c5f0",
+      "bytes": 9439
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/distance-map-first/.artifacts/distance-map-first-v1/final-question-v1.md",
+      "sha256": "e8f73699875c89f1511e0e5fe4d7aa83143edd8c69bfd7ce644da2289c461c75",
+      "bytes": 5792
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/distance-map-first/.artifacts/distance-map-first-v1/retention-handoff-v1.json",
+      "sha256": "28bd81ca4b7bd539b27949e595b378c3fdbf1db8c5dfe7d5c47115ec7b8192d7",
+      "bytes": 1351
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/distance-map-review346-v1/numerical-controls-v1/review.md",
+      "sha256": "34ccafb34bc254ee2bad66a3f270de488894dd4c186b94b69cf7fcfa180c3cab",
+      "bytes": 11144
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/distance-map-review346-v1/numerical-controls-v1/control.json",
+      "sha256": "023bc80e592d715fc279d80fe351ae770feaa44a413b5bdc06ba14f1cf9417f9",
+      "bytes": 10301
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-acceptance/parallel-controls-20261008/344-saved-result-verification.json",
+      "sha256": "9e36ed9971b55363aa8220963fd99ed866ab4a4ee55c04c7f40d86a6df054c64",
+      "bytes": 1623
+    }
+  ],
+  "native_processes": 8,
+  "sample_sets": 40,
+  "samples": 2000,
+  "same_all8_all5_Action_valuebits_PV_depth_stop_23counters": true,
+  "saved_comparisons": 40,
+  "bootstrap_resamples": 100000,
+  "seed": 334,
+  "counts": {
+    "initial": {
+      "beneficial_B_of4": 1,
+      "adverse_B_of4": 1,
+      "robust_benefit": false,
+      "reproducible_adverse": false
+    },
+    "opening": {
+      "beneficial_B_of4": 0,
+      "adverse_B_of4": 0,
+      "robust_benefit": false,
+      "reproducible_adverse": false
+    },
+    "walled-midgame": {
+      "beneficial_B_of4": 0,
+      "adverse_B_of4": 0,
+      "robust_benefit": false,
+      "reproducible_adverse": false
+    },
+    "jump-p2": {
+      "beneficial_B_of4": 0,
+      "adverse_B_of4": 2,
+      "robust_benefit": false,
+      "reproducible_adverse": false
+    },
+    "endgame": {
+      "beneficial_B_of4": 0,
+      "adverse_B_of4": 1,
+      "robust_benefit": false,
+      "reproducible_adverse": false
+    }
+  },
+  "robust_benefit_roots": 0,
+  "reproducible_adverse_roots": 0,
+  "prebound_benefit_roots_required": 3,
+  "mixed_and_individual_adverse_data_retained": true,
+  "integrator_verification": {
+    "runtime_native_statistics_target_SHA_matched": true,
+    "bound_raw_records_SHA_size_matched": 88,
+    "bound_raw_bytes_read": 91657,
+    "saved_point_means_and_threshold_counts_match": true,
+    "bootstrap_native_models_tests_replayed": 0,
+    "finite_question_not_general_speed_or_strength": true
+  },
+  "actual_interval": {
+    "START": "2026-10-08T18:18:54.361050+00:00",
+    "native8_returned_STOP": "2026-10-08T18:22:11.040938+00:00",
+    "worker_STOP": "2026-10-08T18:22:36.414656+00:00",
+    "controller_STOP": "2026-10-08T18:22:36.513124+00:00",
+    "whole_controller_s": 222.31537873006891
+  },
+  "all9_commands_directwait_handle_cleanup": true,
+  "remaining": [],
+  "fairness_limitation": {
+    "mock_path": "/workspaces/quoridor/.worktree/nnue-hypothesis-search/crates/quoridor-ai/.artifacts/teacher-score342-v1/qualification-preparation-v1/mock-result.json",
+    "mock_SHA256": "cc429c6c9d52921257e75914babf1dc039e464cdaa557670d96a9401b2246ee3",
+    "mock_interval": ["2026-10-08T18:22:20.968052+00:00", "2026-10-08T18:22:20.972814+00:00"],
+    "mock_wall_s": 0.004776402027346194,
+    "CPU": [2],
+    "exact_order": "All native8 processes returned and samples retained by18:22:11.040938; disclosed mock18:22:20.968052..20.972814 falls in saved CI/whole worker interval",
+    "native_sample_interval_direct_overlap_disclosed_mock": false,
+    "whole_phase_clean_isolation_claim": false,
+    "timing_effect": "UNKNOWN, no zero-effect assumption or fee subtraction",
+    "no_raw_rewrite_rerun_rescue_or_new_estimator": true
+  },
+  "interpretation": "Disclosed fixture is after all native returns, inside saved CI/whole worker; no clean whole-phase isolation or zero impact claim, no trimming/rerun/rescue/estimator change",
+  "signal_mask": "Returned completed vs nine persisted pending/final-record attempted retained separately",
+  "sample_family_RSS_B": 110346240,
+  "continuous_peaks": "UNKNOWN",
+  "supported_whole_B": 2147483648,
+  "resource_support_SHA256": "1ed487dfa2049d27e419c9fa2f44d17d73eccbab3cdad10a39ad674b2fd91ae0",
+  "new_intake_and_findings_upper_B": 65536,
+  "within_existing_review_Git_B": 134217728,
+  "known_software_comparison_controller_s": 345.799696511,
+  "nested_not_added": true,
+  "all_old_assets_fees_failures_UNKNOWN_held": true,
+  "cleanup": "Deferred managed preservation/removal after exact all-reader STOP and manifest; no blanket deletion/private/raw copies or UNKNOWN refund",
+  "new_phase_authorized": false,
+  "N": null,
+  "paused323_sealed_labels_default_models_unchanged": true
+}
