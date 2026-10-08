@@ -441,6 +441,8 @@ pub struct SearchResult {
 
 // Verify full state on hash hits, including all repetition counts and total ply.
 // Zobrist/position-only keys are invalid for Sigma's repetition exclusion rule.
+type CountedHistoryEntry = ([u8; 2], [u8; 2], u8, u64, u64, u16);
+
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 struct Key {
     ruleset: quoridor_core::research::Ruleset,
@@ -452,7 +454,7 @@ struct Key {
     winner: Option<u8>,
     ply: u16,
     synthetic: bool,
-    history: Vec<([u8; 2], [u8; 2], u8, u64, u64, u16)>,
+    history: Vec<CountedHistoryEntry>,
 }
 impl Key {
     fn of(c: &SigmaContext) -> Self {

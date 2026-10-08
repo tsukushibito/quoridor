@@ -389,7 +389,7 @@ impl SigmaContext {
                     .sum::<u32>()
             };
             if by_turn(0) != u32::from(self.total_ply) / 2 + 1
-                || by_turn(1) != (u32::from(self.total_ply) + 1) / 2
+                || by_turn(1) != u32::from(self.total_ply).div_ceil(2)
             {
                 return Err(RulesError::InvalidReplay);
             }
