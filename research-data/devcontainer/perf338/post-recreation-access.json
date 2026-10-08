@@ -1,0 +1,55 @@
+{
+  "issue": "quoridor-4lc.338",
+  "origin": "Root actual policy toolturn evidence supplied2026-10-08;accepted without rerun",
+  "access_check": {
+    "command": "python3 -B .devcontainer/verify-perf.py --probe",
+    "exit_code": 0,
+    "errors": [],
+    "metadata_checks_PASS": 6,
+    "perf_version": "6.1.187",
+    "uid_user": "vscode",
+    "file_capability": "cap_perfmon=ep",
+    "CapBnd": "00000040a80c25fb",
+    "NoNewPrivs": 0,
+    "Seccomp": 2,
+    "perf_event_paranoid": 2,
+    "hardware_cycles_u": "not supported;notpermissionrefusal",
+    "software_cpu_clock_u": {
+      "numeric_msec": 0.26,
+      "returncode": 0
+    }
+  },
+  "sampling_smoke": {
+    "workload": "NN0 Python0.3CPUsecond;notmodel/Search/scientificprofile",
+    "record": "perf record -e cpu-clock:u -F99 --call-graph dwarf,4096 --no-buildid",
+    "script": "perf script --max-stack16",
+    "returncodes": [0, 0],
+    "directwait_cleanup": true,
+    "whole_seconds": [1.047601383, 0.064946645],
+    "rendered_samples": 26,
+    "multi_frame_callchains": 26,
+    "maximum_rendered_frames": 16,
+    "symbols": "PyObject_Vectorcall/_PyEval_EvalFrameDefault/PyRun andunknowns;partialstripping",
+    "memfd_bytes": 131104,
+    "memfd_SHA256": "739b9c2bee544e80df2abb68ad848aabb17c7d0df0db6e37a8a5eaaa93b26813",
+    "memfd_upper_B": 524288,
+    "memfd_closed": true,
+    "transient_data_not_retained": true,
+    "RAM_upper_B": 536870912,
+    "child_timeout_seconds": 8,
+    "raw_outputs": "Preserved in policytoolturn;no fabricatedlocalrawcopy",
+    "surviving_children": []
+  },
+  "qualification_limit": "Finite acquisition/rendering access PASS only. RustELF symbols/inlining/unwinder/lostrate/plainoverhead/current5rootprofile notqualified. HardwarePMU/cache/cycles unavailablehere. Old333EPERM/raw/fees held,notrerun/notdoublecharged.",
+  "recreation": "Actual rebuild +metadataandaccess prerequisitesfulfilled;temporarymaintenanceholdsreleased;323userpause/seals/default/model unchanged",
+  "new_tools": {
+    "kernel": "6.18.40.1-microsoft-standard-WSL2",
+    "rustc": "1.99.0 b940084d7eb6a299eb4bfeb8e34901bc051e7ac4 LLVM23.1.1",
+    "cargo": "1.99.0 5f94df478",
+    "python": "3.11.2"
+  },
+  "CLI": "Human explicitlypersisted ~/.codex/config.toml [features]api_key_model_discovery=false;featureslistfalse;sharedDesktopserver0.161 not restarted. Previousinvocation-only proof remainshistoricexact;no configwritehere.",
+  "future_profiling": "333sameowner sourceprep2MiB retained;oldwhole128MiB/additional126 proposalNOT_ADMITTED. Reprice softwarecpu-clock usinginstalledtoolheld33832MiB withoutdoubleallocating/freeassetcredit. No record/build/plainworkload launch untilcoherent supportedwholeforecast.",
+  "source_control_existing_upper_B": 131072,
+  "at": "2026-10-08T04:45:12.784046+00:00"
+}

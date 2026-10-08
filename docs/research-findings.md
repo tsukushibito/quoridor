@@ -437,3 +437,29 @@ joined software f8d68573は21:55:02.258093〜21:56:03.816144 UTC/controller STOP
 331 bounded history APIのsource reviewはblocker0、iteratorのroot-in-base説明だけordinary correctionとした。exclusive pre-reserved genuine prefix cursorはinline initialbase＋prefix/path arrivalsを重複根無しで供給し、容量不足はmake前拒否する。Cloneのheadroom、allocator/transient peak、constructor deadlineや200-plyの実canonical合法性は資格済みとしない。335は停止APIのsource adapter準備へ進めるが、Rootの自身worktree core routing前に実sourceSTOPとinclusive予測を要する。[API source review受付](../research-data/ai-sigma/endgame-solver335/bounded-api-review-intake.json)。
 
 人間がfirst-mover adjacent限定のfixedD一歩contact補正を新task337として承認し、同search ownerへsource/fixture128KiBを実配分・dispatchした。Dのrelaxed wall graphと実合法jump/diagonalを区別し、相手側距離・非接触baseline・331/336の元Dは維持する。値やcost/strengthの利益は未測定で、compiler/runtime全費は未配分。配分元は未実行future331対局枠だけ128KiB、現在の全16保存上限54,394,880Bはactualfull forecast成立後に限る。333のperf EPERM/未測定を解除せず、NNUE入力/モデル/teacher/default/新対局は変更しない。[候補scope・source支持](../research-data/ai-sigma/search-optimization/contact-distance337/task.md)。
+
+## 338 再作成後の perf アクセスと通常作業の再開
+
+2026-10-08、再作成済み container の vscode で Root が `verify-perf.py --probe`
+を一度実行し、exit0・metadata6項目PASSを得た。perf6.1.187、限定file capability
+とCAP_PERFMON bounding set、NoNewPrivs0/defaultseccomp2/paranoid2を保持する。
+`cycles:u` は permission拒否でなく unsupported、`cpu-clock:u` は0.26msの数値を
+返した。旧333のraw EPERMは当時の不変証拠として残すが、現在のsoftware-event
+外部アクセス条件は解消した。同じprobeは再実行しない。
+
+Root の NN0 0.3 CPU秒workloadによる99Hz software cpu-clock/DWARF4096 recordと
+max-stack16 scriptは両exit0/directwaitで、26 samplesすべてに複数frameを描画した。
+record1.047601383秒/script0.064946645秒、memfd131104Bはclosedでtransient dataは
+保存していない。raw出力はpolicy turnに残る。Python symbolsとunknownがあり、
+これは有限access smokeであってRust Search profileではない。Rust symbol/inline
+attribution、lost rate、overhead、FTの原因/棋力、hardware/cache metricsは未確認。
+[実測の受付範囲](../research-data/devcontainer/perf338/post-recreation-access.json)。
+
+人間の明示再開指示により338の一時maintenance holdを解除し、既担当による
+承認済みsource/setup/統合を再開する。331は支持済みremaining6 commandの実lease・
+新compiler/private/source/whole forecast・quiet/soleCargo条件を満たす時だけ進む。
+333は同ownerでsoftware cpu-clockの有限profile費を再価格化し、既2MiB source準備
+以外の未配分runを開始しない。334追加114MiB、335追加64MiB、337追加48103424B、
+336追加対局64MiB＋D資格費は未配分のまま。通常作業の再開を実験admissionや
+全task完了と扱わず、fairclock/Cargoを直列化する。原323 USERPAUSE・封印・
+default/model・旧assets/fee/UNKNOWNは保持する。

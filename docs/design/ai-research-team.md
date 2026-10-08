@@ -165,6 +165,12 @@ true だった。起動時だけ `--disable` を指定すると、`agents` は�
 再起動、再認証、global config への永続設定はこの修復に含めない。
 managed package の 0.159.2 は実行中 server の版ではなく、原因と扱わない。
 
+その後、人間が `~/.codex/config.toml` の `[features]` に
+`api_key_model_discovery=false` を明示保存し、CLI の effective false と
+同じ Desktop 接続の成功を確認した。既定値が一致する間は上の起動時 override は
+不要だが有効であり、この設定を実行担当が再書込する必要はない。
+server0.161.0 は再起動していない。先の起動時限定の実測は履歴として保持する。
+
 確認済みなのは live attachment/history streaming と detach まで。
 CLI からの user-message、queue delivery、turn-start、cancel/interrupt の
 双方向動作は未検証で、新しい model call も発生させていない。
