@@ -1,0 +1,95 @@
+{
+  "issue": "quoridor-4lc.343",
+  "integrator_issue": "quoridor-4lc.324",
+  "accepted_at": "2026-10-08T18:04:14.153374+00:00",
+  "verdict": "SOURCE_NN0_ADOPTED_EXACT_MAIN_BYTES",
+  "clock_contract": "authority-receipt-thinking-v1",
+  "contract_sha256": "04062382f70648cdfd722e59c35be1100719169097a04749b0046ea5a19a280d",
+  "final_packet": {
+    "path": "/workspaces/quoridor/.worktree/sigma-deadline-repair/.artifacts/sigma-deadline-control-repair-v1/final-packet.json",
+    "sha256": "4cad805118e448412bf1add54f55f08372823ea63e229a59689ae730be4f63db"
+  },
+  "independent_review": {
+    "confirmation-v3.md": {
+      "path": "/workspaces/quoridor/.artifacts/sigma-deadline-control-review343-v1/confirmation-v3.md",
+      "sha256": "53a2ec34d0eb2c3c983dbb1aaaf3fbf4c147d1ae955d8a9ac17b433fa28f434f",
+      "bytes": 7362
+    },
+    "confirmation-v3-control.json": {
+      "path": "/workspaces/quoridor/.artifacts/sigma-deadline-control-review343-v1/confirmation-v3-control.json",
+      "sha256": "021b00679aae25d5b08ea7383ac5686a96cb6b0a246ef48eaebc9c12637aa9d8",
+      "bytes": 5351
+    }
+  },
+  "verified_packet_evidence_refs": 20,
+  "main_paths": [
+    {
+      "path": "crates/quoridor-runner/src/sigma_clock.rs",
+      "before_sha256": "69761dfb475541e5f9d29ee350609dcf18dac469bb3f33100fcd7f03323d8a8a",
+      "after_sha256": "21e8661423410e4f0adf0abf79210fc48330d1814275e34240bbe7b829411bf1",
+      "mode": "0o644"
+    },
+    {
+      "path": "crates/quoridor-runner/src/runtime.rs",
+      "before_sha256": "5c862060cffd3c533723757dd2d46da350dc7c26c13fcd06c4df8d2cba439340",
+      "after_sha256": "eea8c87904745dad0825ae5e8f1e4381b809cbe9b9c6f75c8206d5daddc7fb57",
+      "mode": "0o644"
+    },
+    {
+      "path": "crates/quoridor-runner/tests/sigma_clock.rs",
+      "before_sha256": "51376e370795c46555cbcd94825c4352bf580d3be3effa8390096187672a9698",
+      "after_sha256": "65a8166ef55f7664fd4c0b198c74e39b33fb5fe96d76fff9518ddd70f38a7bcc",
+      "mode": "0o644"
+    },
+    {
+      "path": "crates/quoridor-runner/tests/fixtures/sigma-clock-config.json",
+      "before_sha256": null,
+      "after_sha256": "639635d9704feba2aac64fb84ba65b5ec37055372c0bd2430ca9a450d97dd1e6",
+      "mode": "0o644"
+    }
+  ],
+  "verification": {
+    "git_apply_check": true,
+    "scoped_format_applied": true,
+    "formatted_main_exact_qualified_SHA_mode": true,
+    "supplied_unique_NN0_definitions_PASS": 24,
+    "supplied_phase6_all7_directwait_exit0_cleanup_empty": true,
+    "supplied_current_public_integration_compile_only_PASS": true,
+    "supplied_scoped_lib_Clippy_PASS": true,
+    "new_tests_models_games_called_by_integrator": 0,
+    "successful_tests_not_replayed": true
+  },
+  "source_and_reader_STOP": {
+    "producer": "2026-10-08T17:12:21.096219+00:00",
+    "review": "2026-10-08T17:07:37.356447+00:00",
+    "software": "2026-10-08T17:02:53.517593+00:00",
+    "remaining": []
+  },
+  "semantics": {
+    "thinking_clock": "100ms until authority receives immutable Action; includes communication",
+    "legality": "outside thinking clock; illegal move is rule violation",
+    "late_legal_receipt": "UNKNOWN unchanged; no timeout forfeit",
+    "before_opponent_clock": "freeze chosen action; admit no more inference; discard later replies; retain original terminal/errors and drain/join admitted work",
+    "unqualified_stale_or_disproven_cost": "refuse further inference, no automatic calibration",
+    "untimed_teacher": "unchanged"
+  },
+  "limits": [
+    "source and focused NN0 only, no live cost/backend/strength or OS hard realtime certificate",
+    "old331/336 results, failures, fees and UNKNOWN unchanged",
+    "persisted pending masks and continuous peaks UNKNOWN retained",
+    "N=null, no full corpus/fits/96 slots, paused323/seals/default weights held"
+  ],
+  "resource_support": {
+    "whole343_B": 1073741824,
+    "new_intake_forecast_B": 65536,
+    "inside_existing_review_Git_B": 100663296,
+    "no_refund_or_new_live_allocation": true
+  },
+  "future_proposals_only": {
+    "live_qualification_B": 1342177280,
+    "max_logical_calls": 64,
+    "new_16_slot_evaluation_B": 4294967296,
+    "executed": false,
+    "allocated": false
+  }
+}

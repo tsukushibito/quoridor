@@ -552,6 +552,10 @@ main ad358のcurrent Rust1.99 private e4b/fc7、BEST51とSigma d790、同book93c
 
 [deadline-control source/NN0修正](design/sigma-deadline-control-repair-v1.md)を新しい343として承認範囲内で実施する。後続の人間の明示訂正により、100msはengine思考からauthorityによるimmutable Action受信までとし、通信時間を含め、rules側の合法性確認は外側で別計測する。違法通知はrule violationで合法drawではない。late receiptは従来のtyped UNKNOWNのままで、timeout-forfeitを追加しない。通知後は新推論を止め、残replyを決定・将来searchへ使わず、matching terminal reply・元error・in-flight回収を完了してから相手時計を始める。保守的な残費用と通知reserveで次の仕事を許可し、受信latency・合法性・drain・whole callerを分けて記録する。これは評価時計の新契約で、旧331/336の結果・費用・UNKNOWNは変更しない。live資格と新版本の再比較は別途価格を付けた提案で、旧16枠の自動再実行やOS hard real-timeの保証は行わない。
 
+343のsource/NN0修正をmainへ受け入れた。凍結packet4cad8051と20件のsource・保存証拠参照を照合し、4パスは整形後も資格済みpostimageとbyte/modeが一致した。24件の対象NN0定義は既存PASSを再利用し、変更後のphase6は4新規回帰・affected controller・public入口compile・scoped Clippyを含む7命令が直接wait/exit0/cleanup[]で終了している。同343.2のR01/R02確認はblocker0、reader STOP17:07:37.356447である。違法な完成Alpha通知はlatenessよりrule violationを優先し、choice・packingからauthority receiptまでの費用が支持されたreserveを超えれば後続推論admissionを無効化する。合法性確認とdrainは思考時計から分離し、drain/join後に相手時計を開始する。untimed教師・model・PUCT・rulesは変更していない。[main受入れと対象SHA](../research-data/ai-sigma/sigma-deadline-control-repair-v1/main-acceptance-v1.json)。
+
+これはsourceと有限NN0の資格であり、実backendの費用・scheduler・初回推論の実測やhard real-time、棋力を証明しない。欠落・期限切れ・実測で反証された費用は推論を許可しない。live資格1.25GiB/最大64logical callsと新版本16枠4GiBは別途判断する提案のみで、配分・実行していない。旧331/336の結果・UNKNOWN・費用、persisted mask pendingとcontinuous peak UNKNOWNは保持する。64局D-only生成pilotにはmove timeoutがなく、この修正を待つ依存を追加しない。
+
 ## Distance-map-firstと学習・探索の接続確認（2026-10-08承認）
 
 人間は[distance-map-firstの有限最適化契約](design/distance-map-first-v1.md)を承認した。現行coreはu128 frontier/reachedと固定81要素出力でheap BFS queueを持たず、WallEdgesを両側reverse BFSで共有する。NNUEも同H/Vのmapをpawn move間でArc共有済みである。この既存処理を新しい改善として数えず、実callerのwall-change再構築・同状態反復・map/Arc寿命・fill/bitset処理を監査する。具体的に有用な同意味候補がある場合だけ、関連oracle/undo/error資格とsetup/dropを含む5根・8 ABBAABBA plain比較へ進む。候補なしの証拠付き結論も有効で、速度利益・source採用はまだ認定していない。
