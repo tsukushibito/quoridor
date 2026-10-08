@@ -1,0 +1,9 @@
+# Completed ordering comparison reconstruction
+
+The accepted five-root comparison did not meet its robust benefit gate (0/5; 3/5 required). Continuation ordering was not adopted. `completed-reconstruction-v1.tar.gz` holds one compact, passive reconstruction archive and the stopped preservation map; it is not a maintained comparison engine or execution entry.
+
+Use Git commit `ad358f6` for canonical A alphabeta and core b789. The archived thirteen-hunk `continuation.patch` reconstructs B24cb from A fb6323. AI Cargo.toml is Git `438237a8a3f2557baccb587159abce75333350b0` plus `unified-comparison-inlet.patch`; the benchmark source is `harness-before-guard-v2.rs.gz` plus `harness-guard-v2.patch`; its JSON is that same Git commit's `crates/quoridor-ai/benches/nnue_search.json`. The archived manifest gives exact resulting SHA, size and mode for each unique source and all 117 inspected worktree files. Archive members were read back byte-for-byte before cleanup.
+
+`managed-removal-v1.json` records the sole integration writer's fresh source/membership/reader guard, restoration of exactly three tracked paths, removal of exactly two preserved untracked benchmark files, and successful managed helper removal of `lightweight-ordering-A334`. The branch remains in Git; no other worktree or main source was removed. All 320 raw files, saved CIs, private images, source/build receipts, failure facts and historical fees remain at their original `.artifacts/lightweight-ordering-A-v1` paths. Models, inputs, Beads and Cargo locks are protected. This receipt does not refund historical peaks, fees or UNKNOWN attribution.
+
+The final result and claim limits remain in [research findings](../../../../docs/research-findings.md#continuation-historyの固定plain比較採用基準未達2026-10-08); the archive and receipt preserve reconstruction after the comparison worktree's removal.
