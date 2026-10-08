@@ -99,13 +99,14 @@ class PackedSupply:
     neither advances the real sampler/RNG nor crosses the epoch boundary.
     """
 
-    def __init__(self, reflection, capacity, device, weights, column, *, workers=0):
+    def __init__(self, reflection, capacity, device, weights, column, *, workers=0, target_scale=1):
         import torch
 
         if not getattr(reflection.corpus, "compact", False):
             raise ValueError("packed supply requires qualified compact corpus")
         self.reflection, self.corpus = reflection, reflection.corpus
         self.capacity, self.device, self.weights, self.column = capacity, device, weights, column
+        self.target_scale = target_scale
         self.torch = torch
         self.queue = OrderedPrefetch(workers)
         self.workers = workers
@@ -142,6 +143,16 @@ class PackedSupply:
             "ready": None,
             "consumer": None,
             "rows": 0,
+            "integer_host": torch.empty(
+                (self.capacity, 2), dtype=torch.float32, pin_memory=self.device == "cuda"
+            )
+            if getattr(self.corpus, "terminal", False)
+            else None,
+            "integer_device": torch.empty(
+                (self.capacity, 2), dtype=torch.float32, device=self.device
+            )
+            if getattr(self.corpus, "terminal", False)
+            else None,
         }
 
     def _fill(self, slot, index, mask):
@@ -156,7 +167,9 @@ class PackedSupply:
             records_out=slot["records"][:n],
             workspace=slot["workspace"],
         )
-        target[:] = self.corpus.labels[index, self.column]
+        target[:] = self.corpus.labels[index, self.column] * self.target_scale
+        if slot["integer_host"] is not None:
+            slot["integer_host"][:n].numpy()[:] = self.corpus.integer_distances[index]
         weights[:] = self.weights[index]
         slot["rows"] = n
         # Each slot belongs to only one future; the owner aggregates its wall later.
@@ -184,6 +197,10 @@ class PackedSupply:
         n = slot["rows"] * FLOATS_PER_ROW
         with self.torch.cuda.stream(self.transfer_stream):
             slot["device"][:n].copy_(slot["host"][:n], non_blocking=True)
+            if slot["integer_host"] is not None:
+                slot["integer_device"][: slot["rows"]].copy_(
+                    slot["integer_host"][: slot["rows"]], non_blocking=True
+                )
             slot["ready"] = self.torch.cuda.Event()
             slot["ready"].record(self.transfer_stream)
         self.timing["transfer_enqueue_seconds"] += time.perf_counter() - tick
@@ -278,7 +295,11 @@ class PackedSupply:
             self.torch.cuda.current_stream().wait_event(slot["ready"])
         self.active = slot
         features, distances, target, weights = payload_views(slot["device"], len(index))
-        return (features, distances, slot["side"][: len(index)]), target, weights
+        inputs = (features, distances, slot["side"][: len(index)])
+        if slot["integer_host"] is not None:
+            integers = slot["integer_device"] if self.device == "cuda" else slot["integer_host"]
+            inputs += (integers[: len(index)],)
+        return inputs, target, weights
 
     def close(self):
         if self.closed:

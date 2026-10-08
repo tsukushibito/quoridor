@@ -22,6 +22,7 @@ pub type Result<T> = std::result::Result<T, Box<dyn std::error::Error + Send + S
 pub const SCHEMA_VERSION: &str = "quoridor-teacher-v1";
 pub const FEATURE_COUNT: usize = 312;
 pub mod terminal;
+pub mod terminal_cache;
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, PartialOrd, Ord)]
 #[serde(rename_all = "lowercase")]
 pub enum Split {
@@ -469,6 +470,10 @@ pub struct TensorCache {
     pub sha256: BTreeMap<String, String>,
     pub dataset_sha: String,
     pub allow_test: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub schema: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label_columns: Option<Vec<String>>,
 }
 /// Precomputation is Rust bulk work. NumPy/PyTorch maps these files without
 /// rebuilding sparse features or walking JSON records in the training loop.
@@ -477,6 +482,18 @@ pub fn write_tensor_cache(dataset: &Path, output: &Path, allow_test: bool) -> Re
         serde_json::from_reader(File::open(dataset.join("manifest.json"))?)?;
     if manifest.schema != SCHEMA_VERSION {
         return Err("dataset schema".into());
+    }
+    let mut mode = None;
+    for_each_row(dataset, allow_test, |row| {
+        let terminal = row.terminal_targets.is_some();
+        if mode.is_some_and(|old| old != terminal) {
+            return Err("mixed terminal/historical dataset".into());
+        }
+        mode = Some(terminal);
+        Ok(())
+    })?;
+    if mode == Some(true) {
+        return terminal_cache::write(dataset, output, allow_test);
     }
     let count = manifest
         .shards
@@ -579,6 +596,8 @@ pub fn write_tensor_cache(dataset: &Path, output: &Path, allow_test: bool) -> Re
         sha256: hashes,
         dataset_sha: file_sha(&dataset.join("manifest.json"))?,
         allow_test,
+        schema: None,
+        label_columns: None,
     };
     serde_json::to_writer_pretty(
         OpenOptions::new()

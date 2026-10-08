@@ -10,13 +10,12 @@ import csv
 import hashlib
 import base64
 import json
+import math
 import time
 import tempfile
 import os
 from pathlib import Path
-import numpy as np
 from .snapshot import atomic_text
-from .cache import load, sha
 from .common import (
     resolve_config,
     selected_teacher_types,
@@ -24,6 +23,17 @@ from .common import (
     MeasurementAccumulator,
 )
 import io, sys
+
+
+def sha(path):
+    with Path(path).open("rb") as stream:
+        return hashlib.file_digest(stream, "sha256").hexdigest()
+
+
+def load(*args, **kwargs):
+    from .cache import load as load_cache
+
+    return load_cache(*args, **kwargs)
 
 
 def _exception_record(error):
@@ -37,6 +47,8 @@ def _exception_record(error):
 
 def write_sampling_counts(path, indices, row_counts, attempted_row_counts):
     """Store visits exactly; contiguous train indices need only two int64 bounds."""
+    import numpy as np
+
     indices = np.asarray(indices, dtype=np.int64)
     start = int(indices[0]) if len(indices) else 0
     contiguous = all(
@@ -77,6 +89,8 @@ def verify_initial_binding(expected, weights_path):
 
 def prepare_statistics(cache, output):
     """Fix original-train distance moments and row constant without Torch or test labels."""
+    import numpy as np
+
     started = time.monotonic()
     corpus = load(cache)
     if (
@@ -174,6 +188,8 @@ def write(path, value):
 
 def stream_json(stream, value):
     """Serialize compact arrays and row iterators without materializing JSON lists."""
+    import numpy as np
+
     if isinstance(value, dict):
         stream.write("{")
         for number, (key, part) in enumerate(value.items()):
@@ -196,6 +212,10 @@ def stream_json(stream, value):
 
 
 def build_model(config, statistics):
+    if config.get("architecture") == "distance_steps":
+        from .distance_steps import build_model as build_steps
+
+        return build_steps(config, statistics)
     if config.get("architecture", "scaled") == "distance_residual":
         from .residual_model import DistanceResidualModel
 
@@ -208,6 +228,8 @@ def build_model(config, statistics):
 
 
 def export(model, config, statistics, distance_fit, path):
+    import numpy as np
+
     path = Path(path)
     path.mkdir(exist_ok=True)
     ordered = [
@@ -267,6 +289,40 @@ def export(model, config, statistics, distance_fit, path):
                 },
             }
         )
+    elif config["model"].get("architecture") == "distance_steps":
+        from .distance_steps import SCORE_SCHEMA, nonterminal_bound
+        from .residual_model import FEATURE_VERSION, ROUTE_VERSION
+
+        bound = nonterminal_bound(
+            [v.detach().cpu().numpy() for v in ordered],
+            statistics,
+            config["model"]["distance_bypass"],
+        )
+        for key in ("transformer_width", "hidden_width", "source_kind", "distance_fit"):
+            manifest.pop(key, None)
+        manifest.update(
+            {
+                "schema": SCORE_SCHEMA,
+                "feature": FEATURE_VERSION,
+                "dense_feature_version": ROUTE_VERSION,
+                "route_mode": "zero4",
+                "route_mu_f32": [0.0] * 4,
+                "route_sigma_f32": [1.0] * 4,
+                "topology": {"ft_width": 32, "hidden_width": 32},
+                "value_perspective": "side-to-move",
+                "score_version": "distance-step-v1",
+                "score_units": "raw-distance-steps",
+                "distance_bypass": config["model"]["distance_bypass"],
+                "train_transform": config["model"]["train_transform"],
+                "deploy_transform": config["model"]["deploy_transform"],
+                "distance_input_units": "wall-only-D/80-before-T-standardization",
+                "integer_bypass_input": "canonical-geometry-opponentD-minus-STM-D; never rounded feature reconstruction",
+                "nonterminal_raw_abs_bound": bound,
+                "outcome_target_scale": 80,
+                "loss_divisor": 6400,
+                "condition": config["experiment"]["condition"],
+            }
+        )
     write(path / "training-target.json", {"training_target": config["training"]["target"]})
     write(path / "manifest.json", manifest)
     return path / "manifest.json"
@@ -283,10 +339,22 @@ def train(
     supply_workers=None,
 ):
     start = time.monotonic()
+    cfg = resolve_config(config_path, () if steps is None else (f"training.steps={steps}",))
+    from .distance_steps import require_main_volume
+
+    volume_admission = require_main_volume(
+        cfg,
+        cache=cache,
+        config_path=config_path,
+        input_binding=input_binding,
+        scale_path=scale_path,
+        supply_workers=supply_workers,
+    )
+    import numpy as np
+
     os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
     import torch
 
-    cfg = resolve_config(config_path, () if steps is None else (f"training.steps={steps}",))
     if supply_workers is None:
         supply_workers = cfg["training"]["supply_workers"]
     if type(supply_workers) is not int or supply_workers not in (0, 2):
@@ -311,9 +379,14 @@ def train(
     corpus = load(cache)
     binding, rows, labels = (corpus.binding, corpus.rows, corpus.labels)
     target = cfg["training"]["target"]
-    column = {"rootmean": 0, "z": 1}[target]
+    column = {"rootmean": 0, "z": 1, "outcome_steps": 1, "terminal_margin": 2}[target]
+    step_score = cfg["model"]["architecture"] == "distance_steps"
+    if step_score != getattr(corpus, "terminal", False):
+        raise ValueError("distance-step model requires its bound dual-teacher geometry corpus")
+    target_scale = 80 if target == "outcome_steps" else 1
     compact = getattr(corpus, "compact", False)
-    if compact and (
+    public_compact = compact and not step_score
+    if public_compact and (
         target != "z"
         or cfg["training"]["sampling"] != "epoch"
         or cfg["training"]["loss_weighting"] != "row"
@@ -322,12 +395,12 @@ def train(
         raise ValueError(
             "public compact corpus requires decisive z / row epoch objective and row monitor"
         )
-    if compact and (
+    if public_compact and (
         corpus.manifest.get("original_only") is not True
         or corpus.manifest.get("dataset_revision") != "original-full-v1"
     ):
         raise ValueError("public fit requires adopted original-full-v1 observations")
-    if compact and (
+    if public_compact and (
         cfg["model"]["architecture"] != "distance_residual"
         or cfg["model"]["transformer_width"] != 32
         or cfg["model"]["hidden_width"] != 32
@@ -338,7 +411,11 @@ def train(
         or (cfg["optimizer"]["weight_decay"] != 0)
     ):
         raise ValueError("public full fit requires fixed QF1+D FT32/H32/dropout0/a0b8 Adam/wd0")
-    teacher_types = {"external_outcome"} if compact else selected_teacher_types(rows, target)
+    teacher_types = (
+        {"terminal_pair"}
+        if step_score
+        else ({"external_outcome"} if compact else selected_teacher_types(rows, target))
+    )
     if not compact:
         validate_target_tensor(rows, labels[:, column], target)
     valid = corpus.eligible & np.isfinite(labels[:, column])
@@ -373,9 +450,18 @@ def train(
             np.add.at(counts, corpus.groups[sub], 1)
         constant = float(np.mean(sums[family_codes] / counts[family_codes]))
         del codes, order, sorted_codes
+    constant *= target_scale
+    if step_score:
+        cfg["training"]["warmup_steps"] = min(
+            257, math.ceil(len(ix_train) / cfg["training"]["batch_size"])
+        )
     statistics, fitted = training_statistics(corpus, ix_train, column)
     if input_binding is not None:
-        expected = json.loads(Path(input_binding).read_text())
+        expected = (
+            volume_admission["expected"]
+            if volume_admission is not None
+            else json.loads(Path(input_binding).read_text())
+        )
         expected_scale = json.loads(Path(expected["scale_artifact"]).read_text())
         constant_path = Path(expected["constant_artifact"])
         expected_constant = json.loads(constant_path.read_text())
@@ -390,6 +476,9 @@ def train(
             or (scale_path is not None)
         ):
             raise ValueError("fit train-only statistics/constant/input binding mismatch")
+    from .distance_steps import verify_main_statistics
+
+    verify_main_statistics(volume_admission, statistics)
     if scale_path is not None:
         from .scaled_model import validate_statistics
 
@@ -399,8 +488,16 @@ def train(
         if cfg["model"]["architecture"] == "distance_residual"
         else fitted
     )
+    if step_score:
+        distance_fit = {"a": 0, "b": 1, "units": "integer-wall-distance-steps"}
     model = build_model(cfg["model"], statistics).to(device)
     initial_state = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
+    if volume_admission is not None:
+        digest = hashlib.sha256()
+        for key in ("ft.weight", "ft.bias", "h.weight", "h.bias", "out.weight", "out.bias"):
+            digest.update(initial_state[key].numpy().astype("<f4").tobytes())
+        if digest.hexdigest() != volume_admission["expected"]["initial_weights_sha"]:
+            raise ValueError("actual common initialization differs before optimizer/forward")
     if device == "cuda":
         free, total = torch.cuda.mem_get_info()
         if free <= 2 * 1024**3:
@@ -424,8 +521,14 @@ def train(
             threshold_mode="abs",
             min_lr=cfg["training"]["min_lr"],
         )
+    if step_score and scheduler is not None:
+        from .distance_steps import significant_improvement
+
+        scheduler.is_better = significant_improvement
     output = Path(output)
     output.mkdir(parents=True)
+    if volume_admission is not None:
+        write(output / "main-volume-admission.json", volume_admission)
     write(output / "config.json", cfg)
     write(output / "scale.json", statistics)
     with gzip.open(output / "cache-binding.json.gz", "wt") as stream:
@@ -533,7 +636,9 @@ def train(
         EpochSampler(ix_train, batch_size, cfg["training"]["seed"]) if mode == "epoch" else None
     )
     stopper = EarlyStopping(
-        cfg["evaluation"]["early_stopping_patience"], cfg["evaluation"]["min_delta"]
+        cfg["evaluation"]["early_stopping_patience"],
+        cfg["evaluation"]["min_delta"],
+        cfg["evaluation"]["min_delta_relative"],
     )
     sampled_rows = np.zeros(len(rows), dtype=np.int64)
     attempted_rows = np.zeros(len(rows), dtype=np.int64)
@@ -619,6 +724,10 @@ def train(
             torch.from_numpy(distances).to(device),
             torch.ones(len(index), dtype=torch.long, device=device),
         )
+        if step_score:
+            result += (
+                torch.from_numpy(corpus.integer_distances[index].astype(np.float32)).to(device),
+            )
         sync()
         phase_seconds["transfer"] += time.monotonic() - tick
         return result
@@ -640,6 +749,12 @@ def train(
         return values
 
     def summarize(indices, values):
+        if step_score:
+            from .step_measurements import measurements as step_measurements
+
+            return step_measurements(
+                corpus, indices, values, target, constant, cfg["model"]["train_transform"]
+            )
         if compact:
             return compact_measurements(corpus, indices, values, constant, distance_fit, ix_train)
         scope = hashlib.sha256(np.asarray(indices, dtype="<i8")).hexdigest()
@@ -1059,6 +1174,7 @@ def train(
                     row_loss_weights,
                     column,
                     workers=supply_workers,
+                    target_scale=target_scale,
                 )
             phase_seconds["initialization"] += time.monotonic() - supply_started
             save_named_checkpoint("initial")
@@ -1135,7 +1251,9 @@ def train(
                         prediction,
                         training_payload[0]
                         if packed_supply is not None
-                        else torch.from_numpy(labels[index, column].copy()).to(device),
+                        else torch.from_numpy((labels[index, column] * target_scale).copy()).to(
+                            device
+                        ),
                         reduction="none",
                     )
                     weights = (
@@ -1143,7 +1261,7 @@ def train(
                         if packed_supply is not None
                         else objective_weights[ix].to(device)
                     )
-                    loss = (per_row_loss * weights).mean()
+                    loss = (per_row_loss * weights).mean() / (6400 if step_score else 1)
                     if not torch.isfinite(loss):
                         raise ValueError("nonfinite training loss")
                     tick = time.monotonic()
@@ -1344,6 +1462,13 @@ def train(
         "wall_seconds": time.monotonic() - start,
     }
     corpus.verify_binding()
+    if volume_admission is not None:
+        freeze["main_volume_admission"] = {
+            "permit_sha256": volume_admission["permit_sha256"],
+            "common_input_freeze": volume_admission["common_input_freeze"],
+            "input_binding_sha256": volume_admission["input_binding_sha256"],
+            "receipt_sha256": sha(output / "main-volume-admission.json"),
+        }
     write(output / "freeze.json", freeze)
     persist()
     return freeze
@@ -1351,6 +1476,8 @@ def train(
 
 def compact_measurements(corpus, indices, values, constant, distance_fit, train_indices):
     """Aggregate row and model-input-group metrics without per-row/group JSON."""
+    import numpy as np
+
     if not hasattr(corpus, "train_known_groups"):
         corpus.train_known_groups = np.zeros(len(corpus.families), dtype=bool)
         corpus.train_known_groups[corpus.groups[train_indices]] = True
@@ -1450,6 +1577,18 @@ def _curve_csv(curves, path, *, append=False):
                     "validation_scope",
                     "train_rows",
                     "validation_rows",
+                    *[
+                        scope + "_" + metric
+                        for metric in (
+                            "outcome_steps_raw_mse",
+                            "terminal_margin_raw_mse",
+                            "outcome_steps_mse",
+                            "terminal_margin_mse",
+                            "bias",
+                            "large_abs_step_score_fraction",
+                        )
+                        for scope in ("train", "validation")
+                    ],
                 ]
             )
         for point in curves:
@@ -1491,6 +1630,18 @@ def _curve_csv(curves, path, *, append=False):
                     else "full_selector",
                     point["train"].get("rows"),
                     point["validation"].get("rows"),
+                    *[
+                        point[scope].get(metric)
+                        for metric in (
+                            "outcome_steps_raw_mse",
+                            "terminal_margin_raw_mse",
+                            "outcome_steps_mse",
+                            "terminal_margin_mse",
+                            "bias",
+                            "large_abs_step_score_fraction",
+                        )
+                        for scope in ("train", "validation")
+                    ],
                 ]
             )
 
@@ -1558,6 +1709,8 @@ def verify_test_cache_before_open(cache, freeze):
 
 
 def mapped_values(count, dtype="<f4"):
+    import numpy as np
+
     stream = tempfile.TemporaryFile()
     stream.truncate(count * np.dtype(dtype).itemsize)
     result = np.memmap(stream, dtype=dtype, mode="r+", shape=(count,))
@@ -1573,12 +1726,16 @@ def select_values(values, indices, size):
 
 
 def write_values(values, path, size):
+    import numpy as np
+
     with Path(path).open("wb") as stream:
         for first in range(0, len(values), size):
             np.asarray(values[first : first + size], dtype="<f4").tofile(stream)
 
 
 def training_statistics(corpus, indices, column, size=4096):
+    import numpy as np
+
     def metadata_chunks():
         for first in range(0, len(indices), size):
             sub = indices[first : first + size]
@@ -1597,10 +1754,28 @@ def training_statistics(corpus, indices, column, size=4096):
     projected = np.empty(0, dtype=np.float64)
     for d, y in metadata_chunks():
         squared += ((d.astype(np.float64) - mu64) ** 2).sum(axis=0)
-        difference = (d[:, 1] - d[:, 0]).astype(np.float64)
-        design = np.column_stack((np.ones(len(d)), difference))
-        q, r = np.linalg.qr(np.vstack((r, design)), mode="reduced")
-        projected = q.T @ np.concatenate((projected, y[:, column].astype(np.float64)))
+        if not getattr(corpus, "terminal", False):
+            difference = (d[:, 1] - d[:, 0]).astype(np.float64)
+            design = np.column_stack((np.ones(len(d)), difference))
+            q, r = np.linalg.qr(np.vstack((r, design)), mode="reduced")
+            projected = q.T @ np.concatenate((projected, y[:, column].astype(np.float64)))
+    if getattr(corpus, "terminal", False):
+        return (
+            {
+                "mu_f32": mu64.astype(np.float32).tolist(),
+                "sigma_f32": np.maximum(
+                    np.sqrt(squared / len(indices)).astype(np.float32), np.float32(0.0001)
+                ).tolist(),
+                "distance_input_units": "canonical-integer-D/80",
+                "fit_partition": "train",
+                "fit_rows": len(indices),
+                "sigma_floor_f32": float(np.float32(0.0001)),
+                "zero_variance_coordinates": (squared == 0).tolist(),
+                "target_independent": True,
+                "original_before_reflection": True,
+            },
+            {"a": 0, "b": 1, "units": "integer-steps"},
+        )
     fit, *_ = np.linalg.lstsq(r, projected, rcond=np.finfo(np.float64).eps * max(len(indices), 2))
     return (
         {
@@ -1614,6 +1789,8 @@ def training_statistics(corpus, indices, column, size=4096):
 
 
 def verify_native_parameters(path, state):
+    import numpy as np
+
     native = np.memmap(path, dtype="<f4", mode="r")
     offset = 0
     for key in ("ft.weight", "ft.bias", "h.weight", "h.bias", "out.weight", "out.bias"):
@@ -1628,13 +1805,19 @@ def verify_native_parameters(path, state):
 
 
 def test(cache, training, output):
+    import numpy as np
+
     training = Path(training)
+    cfg = json.loads((training / "config.json").read_text())
+    if cfg["model"].get("architecture") == "distance_steps":
+        raise ValueError(
+            "new terminal-teacher experiment has T/V only; six-view development is the explicit arena caller, not sealed-label test"
+        )
     freeze_path = training / "freeze.json"
     freeze_sha = sha(freeze_path)
     freeze = verify_freeze(training)
     verify_test_cache_before_open(cache, freeze)
     corpus = load(cache, allow_test=True)
-    cfg = json.loads((training / "config.json").read_text())
     data = json.loads((training / "data.json").read_text())
     stats = json.loads((training / "scale.json").read_text())
     target = cfg["training"]["target"]
@@ -1739,9 +1922,18 @@ def test(cache, training, output):
 def guarded_train(config_path):
     """Launch the maintained trainer once, with exact child ownership and resource caps."""
     import sys
-    from .cycle_process import GPUResources, cancellation_signals, execute
 
     cfg = json.loads(Path(config_path).read_text())
+    from .distance_steps import require_main_volume
+
+    require_main_volume(
+        resolve_config(cfg["fit_config"]),
+        cache=cfg["cache"],
+        config_path=cfg["fit_config"],
+        input_binding=cfg.get("input_binding"),
+    )
+    from .cycle_process import GPUResources, cancellation_signals, execute
+
     for path, digest in cfg["expected_files_sha256"].items():
         if sha(path) != digest:
             raise ValueError("fixed fit input/source/control changed: " + path)

@@ -162,14 +162,20 @@ class ConvergenceObservations:
 class EarlyStopping:
     """Patience counts completed full-selector measurements; zero disables it."""
 
-    def __init__(self, patience, min_delta):
+    def __init__(self, patience, min_delta, relative_delta=0.0):
         self.patience, self.min_delta = patience, min_delta
+        self.relative_delta = relative_delta
         self.best, self.stale = math.inf, 0
 
     def observe(self, value):
         if not math.isfinite(value):
             raise ValueError("nonfinite selector metric")
-        improved = value < self.best - self.min_delta
+        threshold = (
+            max(self.min_delta, self.relative_delta * abs(self.best))
+            if math.isfinite(self.best)
+            else self.min_delta
+        )
+        improved = value < self.best - threshold
         if improved:
             self.best, self.stale = value, 0
         else:

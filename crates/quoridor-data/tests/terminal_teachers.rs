@@ -247,3 +247,55 @@ fn supplied_row_ply_action_and_encoded_inputs_bind_to_true_prefix_atomically() {
         assert_eq!(serde_json::to_vec(&rows).unwrap(), before);
     }
 }
+
+#[test]
+fn terminal_compact_cache_preserves_two_labels_and_integer_bypass() {
+    let prefix = vec![
+        3, 77, 12, 68, 21, 59, 30, 50, 39, 41, 48, 32, 57, 23, 66, 14, 75,
+    ];
+    let context = SigmaContext::from_prefix(&prefix).unwrap();
+    let proof =
+        TerminalProvenance::from_context(&context, prefix, Termination::Goal, "goal".into())
+            .unwrap();
+    let mut rows = vec![row(&[], "one"), row(&[3], "two")];
+    attach_terminal_targets(&mut rows, &proof).unwrap();
+    let fixture = std::env::var_os("QUORIDOR_TERMINAL_CACHE_FIXTURE");
+    let root = fixture
+        .as_ref()
+        .map(std::path::PathBuf::from)
+        .unwrap_or_else(|| {
+            std::env::temp_dir().join(format!(
+                "terminal-cache-{}-{}",
+                std::process::id(),
+                std::time::SystemTime::now()
+                    .duration_since(std::time::UNIX_EPOCH)
+                    .unwrap()
+                    .as_nanos()
+            ))
+        });
+    std::fs::create_dir(&root).unwrap();
+    quoridor_data::write_dataset(&root.join("data"), &mut rows, true, 16).unwrap();
+    let cache =
+        quoridor_data::write_tensor_cache(&root.join("data"), &root.join("cache"), false).unwrap();
+    assert_eq!(
+        cache.schema.as_deref(),
+        Some("quoridor-terminal-geometry-v1")
+    );
+    assert_eq!(
+        std::fs::metadata(root.join("cache/geometry.bin"))
+            .unwrap()
+            .len(),
+        132
+    );
+    assert_eq!(
+        std::fs::read(root.join("cache/distance-steps.u8")).unwrap(),
+        [8, 8, 8, 8]
+    );
+    let margin = std::fs::read(root.join("cache/terminal-margin.f32")).unwrap();
+    assert_eq!(f32::from_le_bytes(margin[..4].try_into().unwrap()), 1.);
+    assert_eq!(f32::from_le_bytes(margin[4..].try_into().unwrap()), -1.);
+    assert!(!root.join("cache/x.f32").exists());
+    if fixture.is_none() {
+        std::fs::remove_dir_all(root).unwrap();
+    }
+}

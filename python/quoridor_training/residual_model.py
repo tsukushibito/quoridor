@@ -40,7 +40,7 @@ class DistanceResidualModel(torch.nn.Module):
             self.out.weight.zero_()
             self.out.bias.zero_()
 
-    def forward(self, x, d, side):
+    def residual_components(self, x, d, side):
         if d.ndim != 2 or d.shape[1] != 2:
             raise ValueError("STM/opponent distance2 input shape")
         raw_distance = d[:, :2]
@@ -50,6 +50,10 @@ class DistanceResidualModel(torch.nn.Module):
         i = torch.arange(len(x), device=x.device)
         h = torch.cat([a[i, p], a[i, 1 - p], (raw_distance - self.mu) / self.sigma, route], dim=1)
         residual = self.out(self.dropout(torch.relu(self.h(h))))[:, 0]
+        return raw_distance, residual
+
+    def forward(self, x, d, side):
+        raw_distance, residual = self.residual_components(x, d, side)
         logit = self.coefficient[0] + self.coefficient[1] * (
             raw_distance[:, 1] - raw_distance[:, 0]
         )

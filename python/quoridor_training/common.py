@@ -49,6 +49,7 @@ DEFAULTS = {
         "early_stopping_patience": 5,
         "early_stopping_unit": "observation",
         "min_delta": 0.0,
+        "min_delta_relative": 0.0,
         "diagnostic_rows": 256,
         "diagnostic_interval": 25,
         "diagnostic_checkpoints": None,
@@ -59,7 +60,14 @@ DEFAULTS = {
     "limits": {"seconds": 60.0, "samples": 500000},
     "data": {"overlap_policy": "error"},
     "artifacts": {"mode": "native_onnx", "save_scheduled": False, "checkpoint_steps": []},
+    "experiment": {
+        "condition": None,
+        "main_volume_N": None,
+        "main_volume_manifest": None,
+        "main_volume_manifest_sha256": None,
+    },
 }
+STEP_MODEL_DEFAULTS = {"distance_bypass": True, "train_transform": "F", "deploy_transform": "F"}
 
 
 def resolve_config(path=None, overrides=()):
@@ -70,13 +78,17 @@ def resolve_config(path=None, overrides=()):
             if section not in result or not isinstance(values, dict):
                 raise ValueError(f"unknown/invalid section: {section}")
             for key, value in values.items():
-                if key not in result[section]:
+                if key not in result[section] and not (
+                    section == "model" and key in STEP_MODEL_DEFAULTS
+                ):
                     raise ValueError(f"unknown setting: {section}.{key}")
                 result[section][key] = value
     for override in overrides:
         name, value = override.split("=", 1)
         section, key = name.split(".", 1)
-        if section not in result or key not in result[section]:
+        if section not in result or (
+            key not in result[section] and not (section == "model" and key in STEP_MODEL_DEFAULTS)
+        ):
             raise ValueError(f"unknown setting: {name}")
         result[section][key] = json.loads(value)
     for section, key in [
@@ -114,6 +126,7 @@ def resolve_config(path=None, overrides=()):
         ("optimizer", "weight_decay"),
         ("optimizer", "momentum"),
         ("evaluation", "min_delta"),
+        ("evaluation", "min_delta_relative"),
         ("limits", "seconds"),
         ("training", "lr_decay_factor"),
         ("training", "min_lr"),
@@ -136,9 +149,9 @@ def resolve_config(path=None, overrides=()):
             raise ValueError("finite model coefficient required: " + name)
     allowed = {
         ("model", "feature_version"): ["QF1"],
-        ("model", "architecture"): ["scaled", "distance_residual"],
+        ("model", "architecture"): ["scaled", "distance_residual", "distance_steps"],
         ("optimizer", "name"): ["adam", "adamw", "sgd"],
-        ("training", "target"): ["rootmean", "z"],
+        ("training", "target"): ["rootmean", "z", "outcome_steps", "terminal_margin"],
         ("training", "sampling"): ["row", "game", "epoch"],
         ("training", "supply_workers"): [0, 2],
         ("training", "loss_weighting"): ["row", "group"],
@@ -227,20 +240,35 @@ def resolve_config(path=None, overrides=()):
         result["evaluation"]["full_train_checkpoints"]
     ) <= set(result["evaluation"]["checkpoints"]):
         raise ValueError("full_train_checkpoints must belong to explicit selector checkpoints")
+    if result["model"]["architecture"] == "distance_steps":
+        from .distance_steps import validate_condition
+
+        for key, value in STEP_MODEL_DEFAULTS.items():
+            result["model"].setdefault(key, value)
+        validate_condition(result)
+    elif any(key in result["model"] for key in STEP_MODEL_DEFAULTS):
+        raise ValueError("step-score model fields require explicit distance_steps architecture")
+    elif result["training"]["target"] in ("outcome_steps", "terminal_margin"):
+        raise ValueError("raw-step teachers require explicit distance_steps score version")
     return result
 
 
 def target_value(row, target):
     """Validate only the selected target; absent auxiliary labels stay absent."""
-    if target not in ("rootmean", "z"):
+    if target not in ("rootmean", "z", "outcome_steps", "terminal_margin"):
         raise ValueError("unsupported training target")
     value = row.get(target)
     if value is None:
         return None
     if isinstance(value, bool) or not isinstance(value, (int, float)):
         raise ValueError("selected target must be a number or null")
-    if not math.isfinite(value) or not -1 <= value <= 1:
-        raise ValueError("selected target must be finite within [-1,1]")
+    maximum = 80 if target in ("outcome_steps", "terminal_margin") else 1
+    if not math.isfinite(value) or not -maximum <= value <= maximum:
+        raise ValueError(f"selected target must be finite within [-{maximum},{maximum}]")
+    if target == "outcome_steps" and value not in (-80, 0, 80):
+        raise ValueError("outcome teacher is exactly80*z")
+    if target == "terminal_margin" and int(value) != value:
+        raise ValueError("terminal margin teacher is raw integer steps")
     return float(value)
 
 
