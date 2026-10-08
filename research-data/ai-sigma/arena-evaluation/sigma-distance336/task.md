@@ -13,3 +13,5 @@ planned16/8pairsを保持し、W/L/true draw/unknown/incomplete、completion rat
 当面の支持はSOURCE PLAN ONLY 128KiB。source/config/binding/control/report/関連source確認の全増分を含め、331 source7MiB内の既future contingencyから6750208＋131072＝6881280B（cap7340032B）として保持する。これは追加の対局保存支持ではない。Rootの契約/docs/Git/controlは既Root8MiB内の64KiB。
 
 追加gamesの保守的64MiB見積りは未配分で、最低不足67108864Bに、未価格の必要D資格/private/TMP/audit/recovery/report/review/Git/failureが加わる。331の使用済みoutput・private・旧assets・failed費・UNKNOWNを返金せず、新outputとの同時保持を数える。affected entry前に実whole forecastと支持を固定する。初期source予算はbuild/model/clock/gamesを許可しない。実quiet/fairclock/soleCargo・entry guard成立後だけ開始し、START/STOP/directwait/cleanupを324へ届ける。323pause/seals維持。追加の人間ACKは不要。
+
+後続の331新software予測でsource不足131072Bとbuild不足が判明し、[前向き成分支持](../sigma-timed-v1/storage-unified-software-components.json)へ更新した。331の未実行future matchesからのみ9MiBをsource1/build8へ分類し、現在の次entryはsource8/build70/qual8/future331matches55MiB。336 source128KiBはsource8MiB内で引き続き保持し、この追加pairingのgames64MiB＋必要D資格等は依然未配分である。331の完全16slots保存は55MiB内の新whole forecast成立を要し、初期7MiB/64MiB計画を新entryの資格として使わない。
