@@ -578,7 +578,7 @@ learnerのC01/C02/C03は同342.8の限定source確認で解消した（reader ST
 
 347にはarenaと独立caller helper、348には別のscheduler engineering担当とarena recipe担当を実dispatchした。source準備とlearner intake修正は並行し、計算区間は実READYと完成までの費用で割り当てる。進行中の実job・予約済み有限fair区間を守り、未完成sourceを理由にhardwareを空予約しない。[Sigma whole4GiB](../research-data/ai-sigma/sigma-receipt-reevaluation-v1/resources.json)と[depth6 whole1.5GiB](../research-data/ai-sigma/deeper-teacher-generation-v1/resources.json)はbuild/private/link/TMP/raw/失敗/review/Git/cleanupを含む。旧上限を返金せず、名前付き保持上限合計39,598,288,896Bはdecimal50GB内である。登録・delivery acceptanceは数値STARTや完成を意味しない。full N/schedule、full generation、4 fits/96枠、323 pause・seals・default weightsのgateは維持する。
 
-learnerの直接JSONL intakeは新8 Rust定義と3 Python control・Clippy/helpが成功したが、同342.8の限定source確認でC04 syntheticからfull-volumeへの再表示、C05 generator/source policyと参照game digestの未結合、C06 fallible cleanup前のcache admission公開という3欠陥が残った。同authorへ通常修正を返し、停止した変更境界を同reviewerで確認する。既に通ったC01–C03/labels/envelope/mathを再試験せず、この未確認intakeをmain採用・real cache・fitへ進めない。
+learnerの直接JSONL intakeは新8 Rust定義と3 Python control・Clippy/helpが成功したが、同342.8の限定source確認でC04 syntheticからfull-volumeへの再表示、C05 generator/source policyと参照game digestの未結合、C06 fallible cleanup前のcache admission公開という3欠陥が残った。同authorの修正後、新4 Rust policy/IO定義・synthetic relabel拒否1件・Python consumer拒否2件・Clippyは、実job b27d4b62の22:12:39.174979〜22:12:43.762999 UTC/whole4.588358967秒・4 directwait/cleanup[]で成功したとの供給報告を受けた。旧8 Rust＋3 Python成功を再実行していない。同reviewerの固定修正source確認はまだ必要で、既に通ったC01–C03/labels/envelope/mathを再試験せず、この未確認intakeをmain採用・real cache・fitへ進めない。
 
 ## Distance-map-firstと学習・探索の接続確認（2026-10-08承認）
 
