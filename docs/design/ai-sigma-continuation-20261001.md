@@ -1,5 +1,7 @@
 # NNUE研究・現在の実行許可
 
+現行の未来資源上限は[2026-10-08資源方針](ai-research-team.md#現行資源方針2026-10-08人間採択)と[typed支持](../../research-data/ai-sigma/execution-resources-20261008.json)。以下の旧hardware/保存枠は各使用時の歴史契約であり、新工程への上限ではない。
+
 2026-10-07の追加承認により、現在の親保存上限は12.5GiB＝13,421,772,800B。旧12GiB配分の予約・資産・失敗費・buildUNKNOWN・UNKNOWN128MiBをすべて保持し、追加512MiBだけを[現行の前向き配分](../../research-data/ai-sigma/execution-autonomy-20261007.json)へ分類した。CPU4/RAM8GiB/VRAM6GiBは不変、原323の学習pauseとnewE/oldopened封印・defaultweightsを維持する。以下の初回配分は履歴であり、新entryのresource proof/科学順序/イベント配分はこの追加承認と既存タスク契約に従う。2026-10-08JSTは人間の確認日で、科学jobの強制STOP期限ではない。
 
 2026-10-07更新。**固定チームの研究枠は終了し、現在はユーザーが指定した探索高速化、公開100万行GPU学習、棋力評価環境の構築をタスクとして配分する。** ユーザーが316・317の引渡し後に解体する方針を選び、`quoridor-1gj`で実施した。残予算や過去の契約から次の実験を自動開始しない。

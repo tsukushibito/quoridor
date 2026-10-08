@@ -1,5 +1,11 @@
 # NNUE研究の知見と次の判断
 
+## 資源方針の更新（2026-10-08）
+
+人間は未来保存上限50GB decimal（50,000,000,000B）と、CPU/RAM/VRAMの固定小枠廃止を採択した。[typed whole-phase支持](../research-data/ai-sigma/execution-resources-20261008.json)で承認済みの棋力評価、perf、ordering、solver、contact距離、value成分診断、dashboard/Web検証へ配分した。旧12.5GiB coverageは保守的に保持し、未来支持との合算は50GB未満。これは測定済み現在使用量ではない。旧job/失敗/最大値の資格を変えず、実source/private/compilerの一致と安全なavailabilityは各entryで確認する。
+
+公平な計測はCPU affinityだけでは保証できないため、timing/perf/対局中は競合するbuild・CPU/GPU解析・browser・大きなdisk IOも止める。通常source/test準備は並行可能。不要な再構築可能物の指定範囲cleanupは復元/unique内容/reader STOP確認後に許可され、固有証拠と歴史的費は保全する。新配分は未実行の科学結果や棋力改善を意味しない。323 USERPAUSE・封印・固定model/defaultは不変。
+
 ## 研究の統一規約（2026-10-07、人間採択）
 
 今後の研究self-play・評価は「standard-2p基本則＋3回同一局面で自動draw」を共通採用する。出版社の必須裁定という主張ではなく、明示的な追加慣行である。goal WIN/LOSSを最優先し、初期counts1・非連続を含む両pawn/HV壁/両stock/STMの3回目への手は合法、次stateはdraw0。実履歴＋探索pathはrootを二重に数えない。200plyは運用capのみ、非goal/nonrepeatはcensored/UNKNOWNで確定z0を入れない。internal alpha/PVS/MCTS/solver・TT history/namespace・config/receiptも同規約、反復terminalはNNを呼ばない。製品UI publisher-standardは変更しない。[現行比較規約と対象検証](design/ai-sigma-comparison-protocol.md)。

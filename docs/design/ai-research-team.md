@@ -11,7 +11,17 @@
 
 担当の具体的thread ID・issueはBeadsの現在の担当と依頼に結び付け、別のrole registryや並行した研究状態台帳は作らない。実行・統合セッションは実際の引渡し・統合作業から開始し、完了通知や具体依頼がない間はIdleにする。
 
-### 方針相談への通知
+### 現行資源方針（2026-10-08、人間採択）
+
+[将来工程のtyped支持](../../research-data/ai-sigma/execution-resources-20261008.json)を現行とする。保存上限は50GB＝50,000,000,000B（約46.57GiB）。従前12.5GiB＋追加512MiBとCPU4/RAM8GiB/VRAM6GiBは過去の使用済み契約として保持し、今後の配分上限には使わない。CPU・RAM・VRAMは実際の空き容量、安全なjob peak、thread/worker上限で制御する。空き容量をすべて同時jobへ渡さず、科学的なbatch・モデル・探索仕事量は変更しない。
+
+速度比較・perf・時間制御対局・明示的なtiming診断は共有hardware上で直列にし、計測中は substantial build、学習/GPU、CPU解析、ブラウザ検証、大きなdisk IOを止める。CPU affinityの分離だけではcache・memory bandwidth・power/thermal・diskの干渉を防げない。軽いsource/metadata準備は継続でき、計測外の通常build/test/reviewは実資源と独立writer/immutable入力が成立すれば並行できる。sole共有Cargo writerとsole main/Git writerは維持する。
+
+支持は承認済み各工程のsource、build/link、private、raw、関連review、Git、失敗とcleanupを含むwhole phaseへ一括配分する。個々の小ファイル増分に再承認を要求しない。旧job/proof/cap/failure費は変更せず、未来entryで新proofと実source/private/physics/quietを束縛する。323 USERPAUSE、封印、固定モデル/default、研究方法の判断境界は変えない。
+
+不要な再構築可能cache・旧未使用ELF・obsolete worktree・重複working copyは、復元確認・unique未保存内容・実reader STOPを確認して指定範囲だけ除去できる。固有の科学データ・必要model/input・圧縮した原因/来歴/失敗証拠・Git/archive復元元・Beads/locksを保護する。過去peak/予約は記録として保持するが、現在retentionと終了した一時寿命が証明された後も重複して永久加算しない。同inodeは一度、実証済み直列TMPは最大寿命で数える。UNKNOWNを根拠なしにzeroへ変えず、全体auditを次工程のgateにしない。
+
+## 方針相談への通知
 
 ジョブの完了イベントは元のワーカーへ届ける。START/STOP、通常の修復、詳細ログ、少額の保存再分類などの通常報告は実行・統合担当へ届け、方針相談の会話へ毎回転送しない。担当間の必要なSTOP/依存通知は直接連絡する。
 
@@ -59,7 +69,7 @@ mainは持続的研究の統合正本。並行変更・具体的な比較にはm
 
 人間が不在中の自律配分を明示承認した場合も、次回確認日は科学jobの強制停止期限にしない。意味ある完了/依存待ちのイベントで、他担当の解除、近い成果の検証・統合、承認済み実装・有限計測、次判断の設計調査の順に有用で実行可能な仕事を選ぶ。同価値なら全費が小さく実CPU/RAM/保存/所有が成立する候補を選び、具体issueと同保存担当へ直接渡す。先行工程が未準備なら未予約slotを状態名だけで保持せず、実ready工程を調整する。実予約・jobは正確STOPまで保護し、mainへの実採否/version引渡しや固定入力・実readerSTOPという必要依存を残す。新method/モデル/特徴/学習条件はこの配分から自動承認しない。実行可能な有用候補がない時だけ具体理由をBeadsへ残してIdleにし、周期LLM監督や翌日要約の自動起床を作らない。
 
-2026-10-07の承認済み[前向き配分](../../research-data/ai-sigma/execution-autonomy-20261007.json)は親保存12.5GiB/13,421,772,800B、追加512MiBだけを対象とする。旧予約・assets/failed費/buildUNKNOWN/UNKNOWN128MiBは保持し、新entryにだけtyped proofとwhole-phase forecastを束縛する。実行担当はこの追加内の支持された分類を人間の再返信なしに調整できる。CPU4/RAM8GiB/VRAM6GiBは維持し、一つの公平時計とsole Cargo writerを実processで守る。対象工程の容量超過・重要な新methodや矛盾はその工程を止めて人間向け選択肢を残し、他の承認済み仕事は継続する。
+過去契約である2026-10-07の承認済み[前向き配分](../../research-data/ai-sigma/execution-autonomy-20261007.json)は親保存12.5GiB/13,421,772,800B、追加512MiBだけを対象とする。旧予約・assets/failed費/buildUNKNOWN/UNKNOWN128MiBは保持し、新entryにだけtyped proofとwhole-phase forecastを束縛する。実行担当はこの追加内の支持された分類を人間の再返信なしに調整できる。CPU4/RAM8GiB/VRAM6GiBは維持し、一つの公平時計とsole Cargo writerを実processで守る。対象工程の容量超過・重要な新methodや矛盾はその工程を止めて人間向け選択肢を残し、他の承認済み仕事は継続する。
 
 ## セッションの選択と再利用
 

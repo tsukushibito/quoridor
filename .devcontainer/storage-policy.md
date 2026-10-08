@@ -12,6 +12,12 @@ This project keeps generated state out of the host checkout and separates caches
 | Training Python, uv packages and virtual environment | `$INFERENCE_CACHE_DIR/python`, `$INFERENCE_CACHE_DIR/uv`, `$INFERENCE_CACHE_DIR/envs/quoridor-training` | same named volume                                            |
 | Rust toolchains / Cargo / wasm-pack cache            | `/usr/local/rustup`, `/usr/local/cargo`                                                                 | container-local; restored by Feature and setup script        |
 
+## Current research resource policy
+
+The human-authorized future research storage cap is **50GB decimal = 50,000,000,000 bytes**, not 50GiB. [The current typed phase support](../research-data/ai-sigma/execution-resources-20261008.json) supersedes the former 12.5GiB plus 512MiB forward envelope. Old used job proofs remain immutable. CPU/RAM/VRAM use fresh physical availability and safe job guards rather than the former fixed research envelopes. Timed measurements hold competing substantial build, CPU/GPU analysis, browser and disk work; separate affinity alone is insufficient.
+
+Preserve unique research evidence, required models/inputs, uncommitted content, source reconstruction and historical cost/failure facts. Scoped deletion of verified rebuildable obsolete caches, binaries, workspaces and duplicates is authorized after restoration and reader STOP checks. Count shared inodes once and proved serial temporary lifetimes by their maximum. Settled past peaks are historical facts, not automatically permanent duplicate storage charges; unresolved attribution stays UNKNOWN. Do not make a broad inventory audit a prerequisite for already supported work.
+
 ## Worktrees
 
 When worktree mode is `volume`, create and remove worktrees only with `scripts/dev/manage_worktree.sh`.
