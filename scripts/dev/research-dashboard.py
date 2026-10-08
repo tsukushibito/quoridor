@@ -9,6 +9,7 @@ research-session environment (or --runtime-python); it installs nothing.
 
 import argparse
 from datetime import datetime, timezone
+import importlib.util
 import json
 import os
 from pathlib import Path
@@ -28,6 +29,13 @@ RUNTIME_BYTES = 65536
 HTML_BYTES = 524288
 ISSUE_ID = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,127}\Z")
 THREAD_ID = re.compile(r"codex:([0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12})\Z")
+
+
+_translation_spec = importlib.util.spec_from_file_location(
+    "dashboard_translations", Path(__file__).with_name("research-dashboard-translations.py")
+)
+translations = importlib.util.module_from_spec(_translation_spec)
+_translation_spec.loader.exec_module(translations)
 
 
 class CollectionError(Exception):
@@ -207,7 +215,7 @@ class Ports:
             [
                 str(self.runtime_python),
                 "-B",
-                str(Path(__file__).with_name("research-dashboard-runtime.py")),
+                str(self.root / "scripts/dev/research-dashboard-runtime.py"),
                 str(self.root),
             ],
             input_data=json.dumps(identities).encode(),
@@ -268,20 +276,29 @@ def job_view(directory, state, result, stamp, alive):
         "status": "unconfirmed",
         "source_at": stamp,
         "result": "Not supplied",
+        "result_code": "not_supplied",
     }
     if phase == "running" and result is None:
         if alive is True:
             view["status"] = "running"
             view["result"] = "Exact child identity confirmed at collection"
+            view["result_code"] = "identity_confirmed"
         else:
             view["status"] = "recovery needed" if alive is False else "unavailable"
             view["result"] = "Running claim has no fresh matching child identity"
+            view["result_code"] = "identity_unconfirmed"
     elif phase in ("queued", "starting") and result is None:
         view["status"] = "preparing"
     elif phase == "finished" and result is not None and result.get("job_id") == state["job_id"]:
         cleanup = result.get("cleanup_complete")
         view["finished_at"] = text(result.get("finished_at"))
         outcome = text(result.get("outcome"), 80) or "unconfirmed"
+        view["result_code"] = "controller_outcome"
+        view["outcome"] = outcome
+        view["exit_code"] = (
+            result.get("exit_code") if type(result.get("exit_code")) is int else None
+        )
+        view["cleanup_unconfirmed"] = False
         view["result"] = (
             f"Controller outcome: {outcome}; exit code: {result.get('exit_code') if type(result.get('exit_code')) is int else 'unknown'}. Scientific success is not qualified here."
         )
@@ -298,8 +315,10 @@ def job_view(directory, state, result, stamp, alive):
         else:
             view["status"] = "recovery needed"
             view["result"] += " Cleanup is incomplete or unknown."
+            view["cleanup_unconfirmed"] = True
     else:
         view["result"] = "State/result boundary is missing or inconsistent"
+        view["result_code"] = "boundary_inconsistent"
     return view
 
 
@@ -320,6 +339,12 @@ def collect(ports, now=None):
     by_id.update({row["id"]: row for row in extra})
     groups = {}
     warnings = []
+    warning_details = []
+
+    def warn(code, reference, original):
+        warnings.append(original)
+        warning_details.append({"code": code, "reference": reference, "original": original})
+
     pending = []
     identities = []
     used_roots = set()
@@ -332,7 +357,9 @@ def collect(ports, now=None):
         dashboard = metadata.get("dashboard", {}) if isinstance(metadata, dict) else {}
         if not isinstance(dashboard, dict):
             dashboard = {}
-            warnings.append(f"{row['id']}: dashboard metadata is unavailable")
+            warn(
+                "metadata_unavailable", row["id"], f"{row['id']}: dashboard metadata is unavailable"
+            )
         deps = []
         for edge in all_edges[row["id"]]:
             dependency = by_id[edge["id"]]
@@ -379,6 +406,16 @@ def collect(ports, now=None):
             "evidence_paths": [],
             "jobs": [],
         }
+        supplied = {
+            "title": row.get("title"),
+            "stage": dashboard.get("stage"),
+            "next_action": dashboard.get("next_action"),
+            "wait_reason": dashboard.get("wait_reason"),
+            "close_reason": row.get("close_reason") if row.get("status") == "closed" else None,
+        }
+        issue["source_fields"] = [
+            key for key, value in supplied.items() if isinstance(value, str) and value
+        ]
         try:
             issue["evidence_paths"] = [
                 p for p in paths(dashboard.get("evidence_paths", [])) if Path(p).is_absolute()
@@ -386,12 +423,16 @@ def collect(ports, now=None):
             runtime_dirs = paths(dashboard.get("runtime_dirs", []))
         except CollectionError:
             runtime_dirs = []
-            warnings.append(f"{row['id']}: invalid path metadata; runtime unavailable")
+            warn(
+                "invalid_paths",
+                row["id"],
+                f"{row['id']}: invalid path metadata; runtime unavailable",
+            )
         for directory in runtime_dirs:
             if len(used_roots) >= ROWS:
                 raise CollectionError("Runtime roots exceed the whole snapshot bound")
             if directory in used_roots:
-                warnings.append(f"{row['id']}: duplicate runtime root omitted")
+                warn("duplicate_root", row["id"], f"{row['id']}: duplicate runtime root omitted")
                 continue
             used_roots.add(directory)
             try:
@@ -420,9 +461,10 @@ def collect(ports, now=None):
                         "status": "unavailable",
                         "source_at": "unknown",
                         "result": "Runtime files could not be verified",
+                        "result_code": "runtime_unavailable",
                     }
                 )
-                warnings.append(f"{row['id']}: runtime read unavailable")
+                warn("runtime_unavailable", row["id"], f"{row['id']}: runtime read unavailable")
         group["issues"].append(issue)
     matches = [None] * len(identities)
     if identities:
@@ -440,7 +482,11 @@ def collect(ports, now=None):
                 raise CollectionError("Invalid identity response")
             matches = values
         except (OSError, ValueError, CollectionError):
-            warnings.append("Runtime identity port unavailable; no running jobs confirmed")
+            warn(
+                "identity_unavailable",
+                "",
+                "Runtime identity port unavailable; no running jobs confirmed",
+            )
     for issue, directory, state, result, stamp, index in pending:
         issue["jobs"].append(
             job_view(
@@ -449,6 +495,7 @@ def collect(ports, now=None):
         )
     for group in groups.values():
         group["name"] = "Not supplied"
+        group["name_supplied"] = False
         match = THREAD_ID.fullmatch(group["owner"])
         if match:
             try:
@@ -461,10 +508,15 @@ def collect(ports, now=None):
                     raise CollectionError("Unknown thread status")
                 group["llm"] = status
                 group["name"] = text(thread.get("name"), 160).strip() or "Not supplied"
+                group["name_supplied"] = bool(text(thread.get("name"), 160).strip())
                 group["llm_source_at"] = datetime.now(timezone.utc).isoformat()
             except (OSError, ValueError, KeyError, TypeError, CollectionError):
                 group["name"] = "unavailable"
-                warnings.append(f"{group['owner']}: actual thread status unavailable")
+                warn(
+                    "thread_unavailable",
+                    group["owner"],
+                    f"{group['owner']}: actual thread status unavailable",
+                )
         else:
             group["llm"] = "not a session owner" if group["owner"] != "Unassigned" else "unknown"
     issues = [issue for group in groups.values() for issue in group["issues"]]
@@ -473,6 +525,7 @@ def collect(ports, now=None):
         "beads_read_at": now.isoformat(),
         "groups": sorted(groups.values(), key=lambda g: g["owner"]),
         "warnings": warnings,
+        "warning_details": warning_details,
         "counts": {
             "running_jobs": sum(
                 job["status"] == "running" for issue in issues for job in issue["jobs"]
@@ -486,9 +539,14 @@ def collect(ports, now=None):
     }
 
 
-def render(snapshot, template=None):
+def render(snapshot, template=None, *, translation_entries=None, cache_warning=False):
     template = template or Path(__file__).with_suffix(".html")
-    encoded = json.dumps(snapshot, ensure_ascii=False, separators=(",", ":"))
+    localized = {
+        **snapshot,
+        "display_ja": translations.display(snapshot, translation_entries or {}),
+    }
+    localized["display_ja"]["cache_warning"] = cache_warning
+    encoded = json.dumps(localized, ensure_ascii=False, separators=(",", ":"))
     for character, escape in (
         ("&", "\\u0026"),
         ("<", "\\u003c"),
@@ -504,8 +562,8 @@ def render(snapshot, template=None):
     return content
 
 
-def publish(path, content):
-    if len(content) > HTML_BYTES:
+def publish(path, content, *, limit=HTML_BYTES):
+    if len(content) > limit:
         raise CollectionError("HTML exceeds byte bound")
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = None
@@ -537,7 +595,19 @@ def publish(path, content):
 
 def generate(ports, output):
     snapshot = collect(ports)
-    content = render(snapshot)
+    cache_warning = False
+    try:
+        entries = (
+            translations.read(
+                ports.root / ".artifacts/research-dashboard/translations-ja.json", missing_ok=True
+            )
+            if hasattr(ports, "root")
+            else {}
+        )
+    except (OSError, ValueError):
+        entries = {}
+        cache_warning = True
+    content = render(snapshot, translation_entries=entries, cache_warning=cache_warning)
     publish(output, content)
     return len(content)
 

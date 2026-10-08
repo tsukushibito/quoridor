@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,7 +7,7 @@
       http-equiv="Content-Security-Policy"
       content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; base-uri 'none'; form-action 'none'"
     />
-    <title>Research snapshot</title>
+    <title>研究状況のスナップショット</title>
     <style>
       :root {
         color-scheme: light;
@@ -29,6 +29,14 @@
       h1 {
         font-size: 1.7rem;
         margin: 0 0 8px;
+      }
+      .summary > div {
+        min-width: 0;
+        overflow-wrap: anywhere;
+      }
+      pre {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
       }
       p {
         line-height: 1.5;
@@ -243,27 +251,27 @@
   </head>
   <body>
     <main>
-      <h1>Research snapshot</h1>
+      <h1>研究状況のスナップショット</h1>
       <p id="timestamp" class="muted"></p>
+      <p id="loaded-at" class="muted"></p>
       <p class="muted">
-        This is a saved snapshot. Run <code>python3 -B scripts/dev/research-dashboard.py</code> to
-        update the data, then reload this file. LLM activity and confirmed job activity are
-        separate. Command completion does not qualify scientific success.
+        LLMの活動と実際の計算ジョブは別の状態です。終了コード0や管理上の完了は、研究結果の成功を意味しません。
       </p>
-      <div id="counts" class="counts" aria-label="Snapshot counts"></div>
-      <ul id="warnings" aria-label="Source warnings"></ul>
+      <div id="counts" class="counts" aria-label="生成時点の件数"></div>
+      <p id="translation-status" class="muted" role="status"></p>
+      <ul id="warnings" aria-label="情報源の警告"></ul>
       <div class="controls">
-        <label for="search">Search owners and issues</label>
-        <input id="search" type="search" placeholder="Issue, owner, stage or next action" />
-        <label><input id="waiting" type="checkbox" /> Waiting issues only</label>
-        <button id="reload" type="button">Reload this file</button>
+        <label for="search">担当者・タスクを検索</label>
+        <input id="search" type="search" placeholder="日本語説明・ID・担当者・次の作業" />
+        <label><input id="waiting" type="checkbox" /> 待機中のタスクのみ</label>
+        <button id="reload" type="button">このファイルを再読み込み</button>
       </div>
       <div class="head" aria-hidden="true">
-        <span>Owner / session</span><span>LLM and jobs</span><span>Current work</span
-        ><span>Next / waiting</span>
+        <span>担当者・セッション</span><span>LLM・計算ジョブ</span><span>現在の作業</span
+        ><span>次の作業・待機理由</span>
       </div>
       <div id="owners"></div>
-      <p id="empty" hidden>No owners match this filter.</p>
+      <p id="empty" hidden>検索条件に一致する担当者はいません。</p>
       <p id="copy-status" class="muted" role="status"></p>
     </main>
     <script id="snapshot" type="application/json">
@@ -272,16 +280,50 @@
     <script>
       'use strict';
       const snapshot = JSON.parse(document.getElementById('snapshot').textContent);
+      const display = snapshot.display_ja;
       const make = (tag, value = '', className = '') => {
         const node = document.createElement(tag);
         node.textContent = value;
         node.className = className;
         return node;
       };
-      const badge = (value) =>
+      const stateNames = {
+        active: '活動中',
+        idle: '待機中',
+        notLoaded: '未読込',
+        systemError: 'システムエラー',
+        unavailable: '確認不能',
+        unknown: '不明',
+        'not a session owner': 'セッション以外の担当者',
+        open: '未完了',
+        in_progress: '進行中',
+        closed: '管理上の完了',
+        blocked: '着手待ち',
+        deferred: '保留',
+        running: '実行中（子プロセス確認済み）',
+        preparing: '準備中',
+        unconfirmed: '未確認',
+        'recovery needed': '復旧が必要',
+        'command finished': 'コマンド終了',
+        'command failed': 'コマンド失敗',
+        'command cancelled': 'コマンド取消',
+        'command timed_out': 'コマンド時間超過',
+        'command not_started': 'コマンド未開始',
+        paused: '人間の指示で一時停止',
+        waiting: '待機中',
+        none: '待機なし',
+        human_decision: '人間の判断待ち',
+        dependency: '依存タスク待ち',
+        resource: '資源待ち',
+        review: 'レビュー待ち',
+        verification: '検証待ち',
+        owner: '担当者待ち',
+      };
+      const stateName = (code) => stateNames[code] || '未記入／確認不能';
+      const badge = (code) =>
         make(
           'span',
-          value,
+          stateName(code),
           'badge ' +
             ({
               running: 'running',
@@ -291,134 +333,236 @@
               unavailable: 'error',
               'recovery needed': 'error',
               systemError: 'error',
-            }[value] || ''),
+            }[code] || ''),
         );
-      const field = (container, label, value) => {
+      const date = (value) => {
+        if (!value || !Number.isFinite(Date.parse(value))) return '未記入／確認不能';
+        return (
+          new Intl.DateTimeFormat('ja-JP', {
+            timeZone: 'Asia/Tokyo',
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hourCycle: 'h23',
+          }).format(new Date(value)) + '（日本時間）'
+        );
+      };
+      const field = (container, label, value) =>
         container.append(make('dt', label), make('dd', value));
+      const original = (container, value) => {
+        const detail = make('details', '', 'original');
+        detail.append(
+          make('summary', '原文・ID・内部コードを確認'),
+          make('pre', JSON.stringify(value, null, 2)),
+        );
+        container.append(detail);
       };
       const showPath = (container, value) => {
         const row = make('div', '', 'path');
         const input = make('input');
         input.readOnly = true;
         input.value = value;
-        input.setAttribute('aria-label', 'Absolute evidence or runtime path');
-        const copy = make('button', 'Copy path');
+        input.setAttribute('aria-label', '証拠・runtimeの元の絶対パス');
+        const copy = make('button', 'パスをコピー');
         copy.type = 'button';
         copy.addEventListener('click', async () => {
           input.select();
           try {
             await navigator.clipboard.writeText(value);
-            document.getElementById('copy-status').textContent = 'Path copied.';
+            document.getElementById('copy-status').textContent = 'パスをコピーしました。';
           } catch {
             document.getElementById('copy-status').textContent =
-              'Path selected. Copy the displayed text manually.';
+              'パスを選択しました。表示された文字列を手動でコピーしてください。';
           }
         });
         row.append(input, copy);
         container.append(row);
       };
+      const warningNames = {
+        metadata_unavailable: '表示用metadataを確認できません。',
+        invalid_paths: 'パスのmetadataが不正なためruntimeを確認できません。',
+        duplicate_root: '重複するruntimeの参照を省略しました。',
+        runtime_unavailable: 'runtimeの記録を確認できません。',
+        identity_unavailable: '子プロセスの識別を確認できず、実行中のジョブは確定していません。',
+        thread_unavailable: '実際のセッション状態を確認できません。',
+      };
       document.getElementById('timestamp').textContent =
-        'Generated ' +
-        snapshot.generated_at +
-        ' (Asia/Tokyo) · Beads collection began ' +
-        snapshot.beads_read_at;
+        '生成日時：' +
+        date(snapshot.generated_at) +
+        ' ／ Beadsの収集開始：' +
+        date(snapshot.beads_read_at);
+      document.getElementById('loaded-at').textContent =
+        'ファイル読込日時：' +
+        date(new Date().toISOString()) +
+        '。再読み込みは生成済みHTMLを読むだけです。最新情報の収集には手動生成が必要です。';
+      document.getElementById('translation-status').textContent =
+        '日本語説明の更新待ち：' + display.pending + '項目。原文は展開して確認できます。';
+      if (display.cache_warning)
+        document
+          .getElementById('warnings')
+          .append(
+            make(
+              'li',
+              '日本語キャッシュを確認できません。原文に対応する日本語説明の更新を待っています。',
+            ),
+          );
       for (const [key, label] of [
-        ['running_jobs', 'Confirmed running jobs'],
-        ['waiting_issues', 'Waiting issues'],
-        ['human_decisions', 'Human decisions'],
+        ['running_jobs', '確認済みの実行ジョブ'],
+        ['waiting_issues', '待機中のタスク'],
+        ['human_decisions', '人間の判断待ち'],
       ]) {
         const card = make('div', '', 'count');
         card.append(make('strong', String(snapshot.counts[key])), make('span', label));
         document.getElementById('counts').append(card);
       }
-      for (const warning of snapshot.warnings)
-        document.getElementById('warnings').append(make('li', warning));
+      for (const warning of snapshot.warning_details) {
+        const row = make(
+          'li',
+          (warning.reference ? warning.reference + '：' : '') +
+            (warningNames[warning.code] || '情報源を確認できません。'),
+        );
+        original(row, warning.original);
+        document.getElementById('warnings').append(row);
+      }
+      const resultText = (job) => {
+        const fixed = {
+          not_supplied: '結果は未記入です。',
+          identity_confirmed: '収集時点で子プロセスの正確な識別を確認しました。',
+          identity_unconfirmed: '実行中という記録に一致する子プロセスを現在確認できません。',
+          boundary_inconsistent: '状態と結果の対応が欠けているか、一致しません。',
+          runtime_unavailable: 'runtimeの記録を検証できません。',
+        };
+        if (job.result_code !== 'controller_outcome')
+          return fixed[job.result_code] || '結果は未確認です。';
+        const outcomes = {
+          succeeded: '正常終了',
+          failed: '失敗',
+          cancelled: '取消',
+          timed_out: '時間超過',
+          not_started: '未開始',
+          unconfirmed: '未確認',
+        };
+        return (
+          'コントローラーの結果：' +
+          (outcomes[job.outcome] || '未確認（原文参照）') +
+          ' ／ 終了コード：' +
+          (Number.isInteger(job.exit_code) ? job.exit_code : '不明') +
+          '。研究結果の成功はここでは判定しません。' +
+          (job.cleanup_unconfirmed ? ' プロセス回収は未完了または不明です。' : '')
+        );
+      };
       const owners = [];
       for (const group of snapshot.groups) {
         const detail = make('details', '', 'owner');
         const summary = make('summary', '', 'summary');
-        const name = make('div', group.name, 'owner-name');
-        name.append(make('div', group.owner, 'muted'));
-        name.append(make('div', 'Expand ' + group.issues.length + ' scoped issue(s)', 'muted'));
+        const name = make('div', display.owner_names[group.owner], 'owner-name');
+        name.append(make('div', group.issues.length + '件のタスクを展開', 'muted'));
         const statuses = make('div');
-        statuses.append(make('span', 'LLM status', 'label'), badge(group.llm));
+        statuses.append(make('span', 'LLMの状態', 'label'), badge(group.llm));
         const jobs = group.issues.flatMap((issue) => issue.jobs);
         statuses.append(
           make(
             'div',
             jobs.length
-              ? 'Jobs: ' + jobs.map((job) => job.status).join(', ')
-              : 'Jobs: none supplied',
+              ? '計算ジョブ：' + jobs.map((job) => stateName(job.status)).join('、')
+              : '計算ジョブ：記録なし',
             'muted',
           ),
         );
         const current = make('div');
-        current.append(make('span', 'Current work', 'label'));
+        current.append(make('span', '現在の作業', 'label'));
         const next = make('div');
-        next.append(make('span', 'Next / wait reason', 'label'));
+        next.append(make('span', '次の作業・待機理由', 'label'));
         for (const issue of group.issues) {
-          current.append(make('div', issue.id + ': ' + issue.stage + ' · ' + issue.status));
+          const translated = display.issues[issue.id];
+          current.append(
+            make(
+              'div',
+              translated.title + '：' + translated.stage + ' · ' + stateName(issue.status),
+            ),
+          );
           if (issue.paused) current.append(badge('paused'));
-          next.append(make('div', issue.next_action));
-          if (issue.waiting) next.append(make('div', 'Waiting: ' + issue.wait_reason, 'muted'));
+          next.append(make('div', translated.next_action));
+          if (issue.waiting)
+            next.append(
+              make(
+                'div',
+                '待機理由：' +
+                  (issue.paused && !issue.source_fields.includes('wait_reason')
+                    ? '人間の指示で一時停止'
+                    : translated.wait_reason),
+                'muted',
+              ),
+            );
         }
         summary.append(name, statuses, current, next);
-        detail.append(summary);
         detail.append(
-          make('p', 'Thread status read: ' + (group.llm_source_at || 'unavailable'), 'issue muted'),
+          summary,
+          make('p', 'セッション状態の読取日時：' + date(group.llm_source_at), 'issue muted'),
         );
+        original(detail, {
+          owner: group.owner,
+          name: group.name,
+          llm: group.llm,
+          llm_source_at: group.llm_source_at,
+        });
         for (const issue of group.issues) {
+          const translated = display.issues[issue.id];
           const article = make('article', '', 'issue');
-          article.append(make('h2', issue.id + ' · ' + issue.title), badge(issue.status));
+          article.append(make('h2', translated.title), badge(issue.status));
           if (issue.waiting) article.append(badge('waiting'));
           const facts = make('dl');
-          field(facts, 'Stage', issue.stage);
-          field(facts, 'Next action', issue.next_action);
-          field(facts, 'Wait reason', issue.wait_reason);
-          field(facts, 'Wait kind', issue.wait_kind);
-          field(facts, 'Issue updated', issue.updated_at || 'unavailable');
+          field(facts, '現在の段階', translated.stage);
+          field(facts, '次の作業', translated.next_action);
+          field(
+            facts,
+            '待機理由',
+            issue.paused && !issue.source_fields.includes('wait_reason')
+              ? '人間の指示で一時停止'
+              : translated.wait_reason,
+          );
+          field(facts, '待機の種類', stateName(issue.wait_kind));
+          field(facts, 'タスク更新日時', date(issue.updated_at));
           if (issue.status === 'closed') {
-            field(facts, 'Administrative closure', issue.close_reason);
-            field(facts, 'Closed at (administrative)', issue.closed_at);
+            field(facts, '管理上の完了理由（研究結果とは別）', translated.close_reason);
+            field(facts, '管理上の完了日時', date(issue.closed_at));
           }
           field(
             facts,
-            'Dependencies',
+            '依存タスク',
             issue.dependencies.length
               ? issue.dependencies
                   .map(
                     (dependency) =>
-                      dependency.id +
-                      ' · ' +
-                      dependency.type +
-                      ' · ' +
-                      dependency.status +
-                      ' · ' +
-                      dependency.title,
+                      display.issues[dependency.id].title + ' · ' + stateName(dependency.status),
                   )
                   .join('\n')
-              : 'None supplied',
+              : '記録なし',
           );
           article.append(facts);
           for (const job of issue.jobs) {
             const boundary = make('div', '', 'job');
             boundary.append(
               badge(job.status),
-              make('p', job.result),
+              make('p', resultText(job)),
               make(
                 'p',
-                'Source file timestamp: ' +
-                  job.source_at +
-                  (job.finished_at ? ' · Controller finished: ' + job.finished_at : ''),
+                '情報源のファイル日時：' +
+                  date(job.source_at) +
+                  (job.finished_at ? ' ／ コントローラー終了日時：' + date(job.finished_at) : ''),
                 'muted',
               ),
             );
             showPath(boundary, job.root);
             article.append(boundary);
           }
-          article.append(make('span', 'Evidence paths (display/copy only)', 'label'));
-          if (!issue.evidence_paths.length) article.append(make('p', 'Not supplied', 'muted'));
+          article.append(make('span', '証拠の元のパス（表示・コピーのみ）', 'label'));
+          if (!issue.evidence_paths.length) article.append(make('p', '未記入／確認不能', 'muted'));
           for (const path of issue.evidence_paths) showPath(article, path);
+          original(article, issue);
           detail.append(article);
         }
         document.getElementById('owners').append(detail);
@@ -435,11 +579,13 @@
               [
                 group.owner,
                 group.name,
+                display.owner_names[group.owner],
                 issue.id,
                 issue.title,
                 issue.stage,
                 issue.next_action,
                 issue.wait_reason,
+                ...Object.values(display.issues[issue.id]),
               ]
                 .join(' ')
                 .toLowerCase()

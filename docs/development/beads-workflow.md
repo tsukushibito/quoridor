@@ -57,6 +57,8 @@ VS Code内で表示する場合は、手動生成後に `bash scripts/dev/resear
 
 対象issueに `dashboard` ラベルを付け、既存metadataを保持したまま `metadata.dashboard` に `stage`、`next_action`、`wait_reason`、`wait_kind`、`runtime_dirs`、`evidence_paths` を記録する。人間の判断待ちは明示的な `wait_kind: human_decision` のみで数える。状態・所有者・依存はBeads、LLMの状態は既存AppServerの読み取り、計算ジョブは指定したruntimeの記録と実プロセス識別で確認する。足りない情報は不明として表示する。
 
+日本語は表示だけに適用し、Beadsの英語フィールド・セッション名・状態・件数は変更しない。通常の作業報告で、担当者が対象の `kind`（`owner` / `issue`）、`id`、`field` と、表示用原文のUTF-8 SHA256（`originalEnglishSHA256`）、日本語の `ja` を供給する。実行・統合担当は `{"version":1,"entries":[...]}` のdeltaJSONを `python3 -B scripts/dev/research-dashboard-translations.py DELTA.json` で現在の読み取り元と照合して統合し、手動生成する。許可フィールドは `owner.name` と `issue.title/stage/next_action/wait_reason/close_reason` のみ。保存先は破棄可能な `.artifacts/research-dashboard/translations-ja.json` 一つ（1MiB以下）で、最新版を上書きし、表示対象外・原文不一致の項目を除去する。欠落・古い日本語は「日本語説明の更新待ち」とし、展開した原文を確認できる。生成処理は保存済みキャッシュを読むだけで、翻訳APIやセッション操作は行わない。
+
 表示は生成時点のスナップショットであり、LLMの活動と計算ジョブの実行は別に示す。収集できない情報を以前のデータで補わない。生成失敗は以前のHTMLを保ち、研究ジョブの実行を妨げない。ポーリング・常駐監視は使わない。
 
 ## 作業の粒度と記載内容
