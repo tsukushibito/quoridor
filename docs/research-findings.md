@@ -417,3 +417,9 @@ joined software f8d68573は21:55:02.258093〜21:56:03.816144 UTC/controller STOP
 人間承認の専任335をmanaged sparse worktreeへ配分し、BOTHstock0・固定壁・採択済みthreefold裁定に対するborrowed typed API、bounded explicit-stack DFS/minimaxのformal契約、独立有限graph oracleの5test定義を停止版として受け入れた。board-only81×80×2=12,960状態retrogradeだけをhistory依存裁定の完全証明としない。Winの存在証明と、全childを必要とするLoss/Drawの証明を分け、Unknown/limit/cancelをdrawに変換しない。実solver kernel/adapterはまだなく、test/compile/production timingはNOT_RUN。331のshared canonical stocks-inclusive history/third合法draw/goal優先/非terminal200/API停止版に合わせて次sourceを実装する。原323pause・models/default/label/fit/追加対局は維持、opt-in/default採用は証明と全費確認後に限る。[停止source・観測と未配分工程](../research-data/ai-sigma/endgame-solver335/source-intake.json)。
 
 初期1MiBはmanaged checkoutを含み、source532480B＋direct admin/dotgit12288B、新source/test/designの小規模増加を記録した。permissionsはdanger-full-access/never・gpt-6.1-sol/highだが、担当の実確認前に最初のpwd/metadata/Beads読取があり、確認後にsourceを書いた。以前の「first command前確認」の記述は強すぎたため、順序逸脱を原controlと受付に残し全sessionのcomplianceを主張しない。旧caps/fees/UNKNOWNを返却せず、次のcompiler/sparse依存/private/NN0実行/finite timing/review全費は未配分で具体予測を要する。
+
+### 追加承認：Sigma対固定D（336）
+
+人間は331 NNUE対Sigmaに加え、同arena担当によるSigma対固定D(a0,b8)の16slots比較を承認した。Beads336は331の新threefold版caller/private資格と実対局STOP・回収に依存する。保持book93cb・8families色交換・100ms whole caller/5ms reserveを使い、third到着LEGAL draw/goal優先、運用200cap UNKNOWNを双方のtree/arenaで一致させる。旧327 4W12LはRuleA-onlyの別列に保ち、新三者cohortにしない。solver335/ordering334を挿入せず、新NNUE対D追加対局は提案に留める。
+
+[条件付き契約](../research-data/ai-sigma/arena-evaluation/sigma-distance336/task.md)と[source支持](../research-data/ai-sigma/arena-evaluation/sigma-distance336/source-support.json)を固定した。source plan128KiBだけを既331 source7MiBのfuture contingencyに含め、保持upper6,750,208B＋131,072B＝6,881,280B<7,340,032B。追加matchesの64MiB見積りは未配分で、最低不足67,108,864B＋未価格の必要D資格/private/TMP/control/review/report等をentry前に解決する。旧出力・failed費・UNKNOWNからの返金はない。条件付き依頼は受理済みだが対局開始・新rules runtime資格はまだない。

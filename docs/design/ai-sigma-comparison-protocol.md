@@ -45,3 +45,7 @@ NNUE/D/Sigmaの審判だけでなく内部αβ/PVS・MCTS・solverにもこの�
 ## 性能の原因判別
 
 固定探索量での速度と固定実時間での棋力を区別する。重複区間を二重計上せず、warmup/steady・wrapper全体/内部APIの費用を区別する。計測器のoverheadや誤差はその主張への影響と感度を報告し、境界値だけで全ての診断を止めない。数値schemaと安い機能確認を先に行い、重大な因果主張に必要な独立確認だけ依頼する。
+
+## 追加pairing：Sigma対固定D
+
+人間が承認した追加16slotsは[336契約](../../research-data/ai-sigma/arena-evaluation/sigma-distance336/task.md)に従い、331 NNUE対Sigmaの実STOP・回収後、同担当で別pairingとして実施する。新threefold規約・保持book・clock・model・source/versionを結果前に固定し、使用済み331出力と新出力を共に保存予測へ含める。331 matches64MiBの再利用を容量支持とみなさない。旧327 NNUE対DはRuleA-onlyであり、新rulesのNNUE対D追加対局はこの承認に含まれない。
