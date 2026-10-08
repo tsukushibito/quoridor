@@ -8,6 +8,11 @@ The machine contract is
 [plan.json](../../research-data/ai-sigma/teacher-distance-tanh-v1/plan.json);
 [whole preparatory/pilot support](../../research-data/ai-sigma/teacher-distance-tanh-v1/resources-pilot.json)
 retains the original 50GB proof and all historical charges and UNKNOWNs.
+The [forward compiler-recovery overlay](../../research-data/ai-sigma/teacher-distance-tanh-v1/compiler-recovery-resources-v1.json)
+adds the retained unexpected toolchain and prospective failure/TMP reserve while
+holding every original component upper. It does not change the failed job's
+status or certify the unobserved installer peak. Future compiler children bind
+absolute RUSTC/RUSTDOC, explicit RUSTUP_TOOLCHAIN and RUSTUP_AUTO_INSTALL=0.
 Beads remains the source of task state; this document defines the experiment.
 
 ## Current executable boundary
