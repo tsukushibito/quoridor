@@ -1,0 +1,39 @@
+{
+  "issue": "quoridor-4lc.331",
+  "target_packet": ".worktree/arena-evaluation/.artifacts/sigma-timed-v1/bounded-history-api-v1/source-stop-v2.json",
+  "target_packet_SHA256": "85dbacfbb0bcabe5b53dafc5f87997a6cd1cdea9fd554304651de7fb7319be89",
+  "fixed_changed_sources": {
+    "crates/quoridor-core/src/research.rs": {
+      "before_SHA256": "ea1c841b2ebc2d1891a625e921572c88cf7062aa76ed8c7c17344263f4e52f37",
+      "after_SHA256": "4583c8edf12b8526caa80a837d96b7e715e5f8131b002ceb9310d3799c0f49f4",
+      "bytes": 32921,
+      "mode": 420,
+      "allocated_B": 36864
+    },
+    "crates/quoridor-core/tests/fixtures/research_threefold.rs": {
+      "before_SHA256": "4624c45f6be1c9ed3f8e63eab5b404fb0c5b5d5e61938d1157553eed58774fa6",
+      "after_SHA256": "522f5d8e2982b74ea3a10428da713844b0b29b694bb62e01e8d6b61416f64b91",
+      "bytes": 2762,
+      "mode": 420,
+      "allocated_B": 4096
+    }
+  },
+  "contract": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/bounded-history-api-v1/canonical-contract-v2.md",
+    "SHA256": "b8618eddea543155915270d645fcc52eb60551e15ad048c8b94af6cc02949a42"
+  },
+  "source_STOP": "2026-10-08T01:45:23.743704+00:00",
+  "review_reader_STOP_UTC": "2026-10-08T01:54:00.998970+00:00",
+  "review_scope": "Source/static boundedconstructor/weightedoccurrences/capacitybeforemutation/historyallocation/undo +identity-only200witness, no Rust/geometry/allocator/runtimecertificate",
+  "blockers": 0,
+  "ordinary_API_C1": "Clarify weighted storedbase plus retainedprefix/path arrivals. Currentroot may be overlay for exclusiveprefixconstructor; do not universally describe root only in base. Same331writer fixes comments only then chosenfrozen source/hash.",
+  "Root_decision": "Accept sourcecontract for335adapter preparation; Rootonlycanonicalfile routing after335inclusiveprewrite/source-readerSTOP and chosen331sourceSTOP. Actualnewprivate/softwarequalification remains necessary, not inferred fromstaticreview.",
+  "constructor_constraints": "Move exclusivecursor, reservebeforegenuineprefixreplay; noClone headroom guarantee, no controlcallback insideconstructor. Startwholeclockbefore setup/boundpollsetup; allocatorrounding/transientconstruction unknown notzero.",
+  "current_old_private": "f2ca/e561 predate API/source repair; retainimmutable",
+  "newtests_and_200legality": "UNEXECUTED; stdlibidentitytrace notactualcanonicallegality",
+  "original_failed_GOAL187": "GameOverfailure retained, no retroPASS",
+  "storage": "source8/build73/qual8 currentprospective support; futuregames current54394880B overlay337source128K, full16forecastbeforeentry",
+  "source_solvers_and_models": "No335solve/WDL/compiler/model/runtimeadoption; models/math/default/pause/seals/fees/UNKNOWN held",
+  "Root_record_Git_failure_upper_B": 16384,
+  "Root_existing8MiB": true
+}
