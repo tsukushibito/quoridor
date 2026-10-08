@@ -28,6 +28,15 @@ Consumers use stopped, bound schema/interface handoffs; no owner-wide idle or
 reply-only ACK is a dependency. Independent reviews cover changed label/split,
 math/score and pilot evidence boundaries; reuse unchanged passing proof.
 
+The D-only pilot needs its actually consumed generator/label/chronology and
+integer-distance boundaries. It does not wait for unconsumed six-view NNUE score
+implementation or whole342.2 completion; unchanged fixed-D interfaces may reuse
+their passing source proof. Later time-controlled evaluations explicitly bind
+[343's thinking-clock contract](sigma-deadline-control-repair-v1.md): authority
+receipt of the immutable Action within100ms including communication, legality
+outside thinking and admitted-work drain before opponent time. Old331/336
+full-caller acceptance is historical and is not silently inherited.
+
 ## Fixed-D pilot and data
 
 Both sides use frozen original D(a0,b8), alpha-beta depth3, max_nodes100000, PVS,

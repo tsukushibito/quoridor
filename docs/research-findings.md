@@ -551,3 +551,9 @@ main ad358のcurrent Rust1.99 private e4b/fc7、BEST51とSigma d790、同book93c
 方針担当が336の既存move metadataと現行control sourceを照合した。11件すべてで95ms前に合法なcompleted snapshot（81.957226〜94.830665ms）があり、discarded_late_replies=1、engine_error=nullだった。次の同期推論をnow<95msだけで許可し、そのmatching terminal replyが完了するまで返却できないため、推論全費と返却・合法性確認の余裕を確保しない具体的な弱点がある。純推論・packing・schedulingの内訳は保存されておらず、CPU原因やSigmaのvalue品質を断定しない。
 
 [deadline-control source/NN0修正](design/sigma-deadline-control-repair-v1.md)を新しい343として承認範囲内で実施する。後続の人間の明示訂正により、100msはengine思考からauthorityによるimmutable Action受信までとし、通信時間を含め、rules側の合法性確認は外側で別計測する。違法通知はrule violationで合法drawではない。late receiptは従来のtyped UNKNOWNのままで、timeout-forfeitを追加しない。通知後は新推論を止め、残replyを決定・将来searchへ使わず、matching terminal reply・元error・in-flight回収を完了してから相手時計を始める。保守的な残費用と通知reserveで次の仕事を許可し、受信latency・合法性・drain・whole callerを分けて記録する。これは評価時計の新契約で、旧331/336の結果・費用・UNKNOWNは変更しない。live資格と新版本の再比較は別途価格を付けた提案で、旧16枠の自動再実行やOS hard real-timeの保証は行わない。
+
+## Distance-map-firstと学習・探索の接続確認（2026-10-08承認）
+
+人間は[distance-map-firstの有限最適化契約](design/distance-map-first-v1.md)を承認した。現行coreはu128 frontier/reachedと固定81要素出力でheap BFS queueを持たず、WallEdgesを両側reverse BFSで共有する。NNUEも同H/Vのmapをpawn move間でArc共有済みである。この既存処理を新しい改善として数えず、実callerのwall-change再構築・同状態反復・map/Arc寿命・fill/bitset処理を監査する。具体的に有用な同意味候補がある場合だけ、関連oracle/undo/error資格とsetup/dropを含む5根・8 ABBAABBA plain比較へ進む。候補なしの証拠付き結論も有効で、速度利益・source採用はまだ認定していない。
+
+別担当は342の4 fits/6 viewsが区別するものと残すgapを、maintained sourceとprimary engine/paperに基づいて整理する。生成D policy・history/family・教師の目的・calibration/ranking・terminal/TT単位と有限評価の解釈が対象で、332/340の保存caseや329のordering調査を繰り返さない。次のdiagnosticは費用・依存・解消する人間判断を付けた提案のみで、新teacher/features/fits/games/N決定を行わない。342のD-only64 pilotと343の通知・drain修正は独立して継続する。
