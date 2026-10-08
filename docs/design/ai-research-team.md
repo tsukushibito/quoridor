@@ -143,6 +143,37 @@ bash scripts/dev/research-session.sh archive --thread <thread-id>
 
 依存は`tools/research-session/pyproject.toml`と`uv.lock`に保持する。専用環境は共有学習環境へ混ぜない。既存専用環境の物理pathは移行で作り直さず、`QUORIDOR_RESEARCH_SESSION_ENV`で指定できる。依存準備済みで同期を行わない操作は`UV_NO_SYNC=1 UV_OFFLINE=1 PYTHONDONTWRITEBYTECODE=1`を付ける。
 
+### Desktop と CLI で同じ保存セッションを開く
+
+既存の Desktop App Server に接続する場合は、project cwd で次を使う。
+
+```bash
+codex agents --disable api_key_model_discovery
+codex resume <thread-id> --disable api_key_model_discovery
+```
+
+2026-10-08 の実測では CLI と実行中 Desktop server はともに 0.161.0。
+Desktop の `config/read` は `api_key_model_discovery=false`、CLI の既定は
+true だった。起動時だけ `--disable` を指定すると、`agents` は既存の
+11 task を表示し、選択と明示 ID の `resume` の両方で実行中 policy thread
+の履歴と現在 turn を同じ title/model/full-access のまま表示した。
+`Ctrl+D` は両 CLI を exit0 で detach し、進行中の仕事は続いた。
+
+この接続では `--no-daemon` を付けない。先の bypass 案より、同じ server
+への実測済み接続を使う。非対応 terminal では `TERM=xterm-256color`、
+表示には `--no-alt-screen` を起動時に足せる。server feature の変更、
+再起動、再認証、global config への永続設定はこの修復に含めない。
+managed package の 0.159.2 は実行中 server の版ではなく、原因と扱わない。
+
+確認済みなのは live attachment/history streaming と detach まで。
+CLI からの user-message、queue delivery、turn-start、cancel/interrupt の
+双方向動作は未検証で、新しい model call も発生させていない。
+既存 `research-session.sh` の read/steer/start は同じ backend を使い、
+担当・permission・Beads・資源の境界を引き続き守る。
+[実測の受入れ範囲と資源](../../research-data/research-session-desktop-cli-attachment.json)
+を参照する。[公式 CLI 文書](https://learn.chatgpt.com/docs/developer-commands?surface=cli#codex-resume)
+の session-ID resume と、この環境の feature handshake の実測を区別する。
+
 ## 長時間ジョブと終了
 
 計算の開始、資源制御、上限付きログ、取消、所有プロセスの回収、完了通知は[ジョブ運用](../development/research-jobs.md)のコードへ渡す。担当はjob IDと結果参照を残してturnを終了できる。完了まで周期的なLLM確認をしない。通知は既存の担当threadへ一度だけ届け、別の監督LLMを起こさない。

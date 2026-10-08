@@ -1,0 +1,49 @@
+{
+  "issue": "quoridor-4lc.324",
+  "scope": "Bounded tooling documentation;Root-reported liveUI evidence accepted,not replayed",
+  "evidence_origin": {
+    "thread": "01a0f2e9-357d-7ef3-a2fe-b16f80accda5",
+    "packet": "Human-authorized Desktop+CLI same-session attachment; raw handshake and TUI outputs retained in policy turn"
+  },
+  "running_CLI": "0.161.0",
+  "running_AppServer": "Desktop ephemeral0.161.0",
+  "managed_package": "0.159.2;not runningserverversion,not blamed",
+  "observed_feature": {
+    "Desktop_config_read_api_key_model_discovery": false,
+    "CLI_default": true,
+    "fix": "Invocation-only --disable api_key_model_discovery alignsclient withactualserver;no globalpersistence/serverrestart"
+  },
+  "observed_commands": [
+    "TERM=xterm-256color codex agents --disable api_key_model_discovery --no-alt-screen",
+    "TERM=xterm-256color codex resume 01a0f2e9-357d-7ef3-a2fe-b16f80accda5 --disable api_key_model_discovery --no-alt-screen"
+  ],
+  "observed": {
+    "listed_Desktop_tasks": 11,
+    "attached_active_policy_thread": true,
+    "streamed_history_and_current_turn": true,
+    "same_title_model_fullaccess": true,
+    "CtrlD_detached_exit0_running_work_continues": true,
+    "CLI_processes_reaped": 2
+  },
+  "NOT_RUN": [
+    "user-message/turn-start/steer queue delivery",
+    "cancel/interrupt",
+    "new model call",
+    "bidirectional control qualification"
+  ],
+  "unchanged": "Server/auth/globalconfig/security/researchsource/model/pause/seals;no reviewer/runtime/science gate. Existing research-session read/steer/start wrappers remainsamebackend.",
+  "earlier_no_daemon_advice": "Superseded for this sharedsession case; omit--no-daemon toattachsameDesktopserver",
+  "documentation_reference": "https://learn.chatgpt.com/docs/developer-commands?surface=cli#codex-resume",
+  "reference_scope": "Officialdocs describe session-ID resume;instance feature handshake/activeattachment evidence comesfromRoot actual0.161.0 tests,not a universal documentedclaim.",
+  "doc_before_SHA256": "3420e0e81e3ead01318d3c45953112947f8376373446333d169027570c1d3905",
+  "phase_prewrite_B": {
+    "doc_formatter_TMP": 32768,
+    "doc_positive_growth": 4096,
+    "evidence_control": 4096,
+    "Git": 8192,
+    "failure_rounding": 8192
+  },
+  "phase_upper_B": 65536,
+  "support": "Within existing Root8MiB source/docs2,Git3,control1,TMPfailure2MiB;not perf338/Sigma donor,no new parent/new512allocation. Alloldassets/caps/fees/UNKNOWNheld.",
+  "at": "2026-10-08T04:21:41.672934+00:00"
+}
