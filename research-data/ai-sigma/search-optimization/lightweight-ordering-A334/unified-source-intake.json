@@ -1,0 +1,84 @@
+{
+  "issue": "quoridor-4lc.334",
+  "source_STOP_UTC": "2026-10-08T01:06:18.238180+00:00",
+  "packet": ".artifacts/lightweight-ordering-A-v1/handoff/unified-rebase-stop.json",
+  "packet_SHA256": "13c209b9929463650e38972b2b17193e8e591db77ca0f3771ea281ec9d6f30be",
+  "canonical_API_SHA256": "d4168fa21fb8f38556eefac535954f8b869506c789ea611f18a2d4e3a9af241f",
+  "canonical_v6_packet_SHA256": "ad683b232548e6bfb2fc266de5f3aa2f7a795b44dff9de9b209725deef910f43",
+  "runtime_only_v7_packet_SHA256": "bd143da7113c4807a7ad208b32ecf89664794dd62eb21fb43cf2d73d48b18223",
+  "A_SHA256": "622ada06317a42ac9d00d75dc65acb0500ef1fb184f18ac312f0050c7a60dba5",
+  "B_SHA256": "a2562041bb9f6126e2ec41dd0284403e34fdd9ed79ce70185df315e0d8f9d744",
+  "fixed_artifacts": {
+    "after/unified-ordering-v6.patch": {
+      "SHA256": "0f7b601668542fb4d06346e0eecc9f6f923c322d96485d56c5f78ae8f1c295a9",
+      "B": 32000
+    },
+    "after/unified-comparison-inlet.patch": {
+      "SHA256": "66fdd85d55e54d426f595019b791076ced096f951a6e71deb80e7bebf9441f1e",
+      "B": 8426
+    },
+    "after/unified-continuation-comparison.rs": {
+      "SHA256": "e75a7b2238a1e9bd0fde725925261862541c87cc62edf1dbd2be31053da3c94a",
+      "B": 6344
+    },
+    "after/unified-five-roots.json": {
+      "SHA256": "4ec90807fe78674fc8cb77841f88d228bcc74b823e4c765c9a868f3b50b70d4a",
+      "B": 1378
+    },
+    "before/alphabeta-unified-v6.rs.gz": {
+      "SHA256": "304976d5f955e37706bed0f36cf72088da48f46be46e140e1ffa35088ce45e20",
+      "B": 18069
+    },
+    "after/alphabeta-unified-continuation.rs.gz": {
+      "SHA256": "1b60119da834c7bb44b5e9b84409e32c327808484a98a34d8def3cb92a0ea909",
+      "B": 22898
+    },
+    "tests/unified-continuation-tests.rs": {
+      "SHA256": "939ee5b2529e2ddc8ad3d41aa26c360f836a724ff4ecb2de3c848a66087525c9",
+      "B": 25161
+    },
+    "handoff/unified-rebase-verification.json": {
+      "SHA256": "1cf15f4d168ee279a3a732cf7ecad0746bcf780f2f0f4521eb2d2101ac4e6fd6",
+      "B": 2112
+    },
+    "handoff/unified-whole-forecast.json": {
+      "SHA256": "aaccc1a79039ac50216e3596edcc9762be9298d62e7060926a71765cd015a79e",
+      "B": 3678
+    },
+    "handoff/unified-future-plan.json": {
+      "SHA256": "368adf49909cdd30a8a69708aa53f6424f457d15cb2a36d368a1a58c1e91906a",
+      "B": 5822
+    },
+    "handoff/unified-rebase-report.md": {
+      "SHA256": "30a5e1610057f691d7a663975cd93ff304490d3863395b8f6056eca9df59f10f",
+      "B": 7211
+    }
+  },
+  "Root_validation": "11 exact source/artifact SHA+bytes and A/BgziproundtripPASS; no compiler/rules/runtime/minimax/performance certification",
+  "ruleset_config": "standard_2p_threefold",
+  "scope": "Bounded209x209i16 continuation affects existinghistorytiesonly, actual previousaction/rootnone/cutoffmin(depth^2,16383)saturation; existing TT/PV/killer/policy/history/ActionID order preserved except newtie component. Canonical unifiedKey/goal-threefold FTskip sourcepreserved, production notadopted.",
+  "supplied_Rust_format_apply_reverse": "PASS sourceonly",
+  "new_test_definitions": 9,
+  "compiler_tests_correctness_ABBA_review": "NOT_RUN",
+  "NN_model_Torch_book_games_Wasm": 0,
+  "wholephase_proposal_B": 120586240,
+  "source_current_supported_B": 1048576,
+  "exact_unallocated_gap_B": 119537664,
+  "future_components_B": {
+    "existing_supported_source_and_stopped_bundles": 1048576,
+    "fresh_release_Cargo_outputs_and_release_Clippy_metadata": 50331648,
+    "linker_Temporary_stage_union": 25165824,
+    "immutable_private_images_A_bench8_B_bench8_AItests8_COREtests4": 29360128,
+    "eight_process_40ID_raw_logs_CI_statistics": 4194304,
+    "same_related_ordering_reviewer_controls": 1048576,
+    "integration_Git_compressed_raw_source_receipts": 1048576,
+    "failed_round_TMP_cleanup_rounding": 8388608
+  },
+  "donor": "NONE supported for114MiB remaining; own1MiB source retained/parent12.5GiB-new512 unchanged, no foreign Sigma/perf/solver or usedasset/UNKNOWN credit",
+  "future_rules_version": "BothA/B frozen SAME actualqualified sharedstandard2p+threefold version; ifcanonical sharedAPI/newsourcechanges impactalpha, preserve oldstoppedquestion/rebase before outcomes. No sourceadoptionfromprep.",
+  "temporary_comparison_removal": "Inlet/Cargo/harness/config/privateA-B comparison code only for acceptedfinitequestion; removeunusedmaintainedentry after outcome, keep immutable used evidence.",
+  "same_time_games": "LaterproposalONLY, no331slots/new16 launched",
+  "original_RuleA_bundle_assets_fees_pause_seals_defaults": "preserved",
+  "Root_record_Git_failure_upper_B": 32768,
+  "Root_existing8MiB": true
+}
