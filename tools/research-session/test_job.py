@@ -86,6 +86,32 @@ class Backend:
 
 
 class AuthorityBatchTests(unittest.TestCase):
+    def test_serialized_read_over_five_seconds_preserves_authority_checks(self):
+        config = {"goal_issue": "goal", "issue": "work", "thread_id": "target"}
+        for mutation in (None, "paused", "closed", "owner"):
+            backend = Backend()
+            if mutation == "paused":
+                backend.items["goal"]["labels"] = ["paused-by-user"]
+            elif mutation == "closed":
+                backend.items["work"]["status"] = "closed"
+            elif mutation == "owner":
+                backend.items["work"]["assignee"] = "codex:other"
+            with (
+                self.subTest(mutation=mutation),
+                patch.object(j.time, "monotonic", side_effect=[0.0, 6.0]),
+                patch.object(backend, "issues", return_value=list(backend.items.values())) as read,
+            ):
+                if mutation is None:
+                    self.assertEqual(
+                        j.authority(config, None, backend, horizon=None)["thread_id"], "target"
+                    )
+                else:
+                    with self.assertRaises(j.JobError):
+                        j.authority(config, None, backend, horizon=None)
+                read.assert_called_once()
+                self.assertGreater(read.call_args.kwargs["timeout"], 60.0)
+                self.assertLessEqual(read.call_args.kwargs["timeout"], 65.0)
+
     def test_one_store_invocation_binds_all_requested_records(self):
         backend = j.runtime.AppBackend(Path("/workspaces/quoridor"))
         rows = [{"id": "work", "status": "in_progress"}, {"id": "goal", "status": "open"}]

@@ -124,9 +124,10 @@ def validate(config, base):
     return config
 
 
-# One cold embedded-store read exceeded the old one-second cap. This finite
-# controller budget covers one batched read, never extends a caller horizon.
-CONTROL_READ_SECONDS = 5.0
+# beads.sh serializes embedded-store access with a 60-second lock wait.
+# Allow that wait plus five seconds for one batched read; shorter caller
+# horizons still win, and unreadable authority remains a fail-closed error.
+CONTROL_READ_SECONDS = 65.0
 
 
 def authority(config, root, backend, *, horizon, timeout=CONTROL_READ_SECONDS):

@@ -53,6 +53,8 @@ bash scripts/dev/research-job.sh notify --state-dir /absolute/path/new-job-runti
 
 背景processは研究セッションがIdleでも生存する。Beadsの課題・目標のpause/終了や所有変更を`control_interval_seconds`ごとに確認し、問題があればcommandを停止する。読取不能時も実行を続けない。停止検出はその間隔と有界Beads待ち分遅れ得る。同一process groupと定期的に記録した子孫のidentityを対象にSIGTERM→2秒後に必要なSIGKILLで停止し、直接の子をwaitする。別sessionを作った記録済み子孫もpidfdで停止する。短い親から監視前にdaemon化した未記録processは取り込めないため、commandはdaemon化せず、**既存guardianで全子の所有と回収を維持する**。ログpipeが残れば回収未確認として保存する。host全process回収や全子孫waitの保証はしない。
 
+Beadsの権限読取りは、wrapperの最大60秒の共有DBロック待ちと、その後の1回のbatched read用5秒を合わせて最大65秒とする。残りの実行時間と絶対期限が短ければ、その残り時間までに制限する。ロック待ちの途中で5秒だけを理由に正常な直列化を打ち切らず、上限超過・読取不能・pause・終了・所有不一致は引き続き停止理由とする。読取り中のcancel検出もこの有界待ち分遅れ得る。この予算は管理操作の待ち時間であり、思考時計・探索深さ・科学的な実行上限を変更しない。
+
 方針相談と実行・統合の分離時も、既存jobの保存config/元担当threadは書き換えない。workerが結果を回収してから、新しい実行・統合issueへ報告する。相談会話へ通常のjob完了を転送しない。切替前に配送済みの遅延報告だけは、一度の引渡しで処理する。
 
 新しいturnはpause・閉じたissue・所有変更・期限後には開始しない。Activeの通知待ちは短いPython待機だけでLLMを起こさない。issueを自動claim/closeしたり、モデル/effort・担当の指示を変更したりしない。既存の共通dispatch lockを使う。
