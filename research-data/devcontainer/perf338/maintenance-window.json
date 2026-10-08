@@ -1,0 +1,16 @@
+{
+  "issue": "quoridor-4lc.338",
+  "START": "2026-10-08T02:56:45.999082+00:00",
+  "EXPIRES": "2026-10-08T03:11:45.999082+00:00",
+  "purpose": "Finite recreation checkpoint/READY handoff;no restart by agent",
+  "prior_statuses": {
+    "quoridor-4lc.331": "in_progress",
+    "quoridor-4lc.335": "in_progress",
+    "quoridor-4lc.337": "in_progress",
+    "quoridor-n3l.3": "in_progress"
+  },
+  "entry_prevention": "Existing Beads blocked predicate in canonical job/session launch; no new scheduler/monitor/controller. Existing commands may finish naturally.",
+  "no_idle_scientific_clock": true,
+  "expiration": "READY invalid afterexpiry; late userrestart requiresfreshquiescence. Release scheduling afteractualevent/freshsnapshot;no automaticperiodicmonitor.",
+  "ROOT_record_upper_B": 4096
+}

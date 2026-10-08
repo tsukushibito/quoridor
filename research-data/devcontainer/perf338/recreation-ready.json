@@ -1,0 +1,52 @@
+{
+  "issue": "quoridor-4lc.338",
+  "state": "RECREATION_READY_WITH_FINITE_WINDOW",
+  "ready_UTC": "2026-10-08T02:58:09.642905+00:00",
+  "config_commit": "54244ea",
+  "support_commit": "c0090d0",
+  "checkpoint_record_commit": "fd731f2",
+  "window": {
+    "issue": "quoridor-4lc.338",
+    "START": "2026-10-08T02:56:45.999082+00:00",
+    "EXPIRES": "2026-10-08T03:11:45.999082+00:00",
+    "purpose": "Finite recreation checkpoint/READY handoff;no restart by agent",
+    "prior_statuses": {
+      "quoridor-4lc.331": "in_progress",
+      "quoridor-4lc.335": "in_progress",
+      "quoridor-4lc.337": "in_progress",
+      "quoridor-n3l.3": "in_progress"
+    },
+    "entry_prevention": "Existing Beads blocked predicate in canonical job/session launch; no new scheduler/monitor/controller. Existing commands may finish naturally.",
+    "no_idle_scientific_clock": true,
+    "expiration": "READY invalid afterexpiry; late userrestart requiresfreshquiescence. Release scheduling afteractualevent/freshsnapshot;no automaticperiodicmonitor.",
+    "ROOT_record_upper_B": 4096
+  },
+  "current_STOP_UTC": {
+    "331": "2026-10-08T02:56:06.847268Z",
+    "335": "2026-10-08T02:53:34Z",
+    "Web": "2026-10-08T02:49:07.437525Z",
+    "337": "2026-10-08T02:31:08.941872Z"
+  },
+  "331_current_packet_SHA256": "925167af3dd99d53e5189b2462f4369ce0a5963c1c47e02389dfa497705c5417",
+  "331_maintenance_receipt_SHA256": "aa03b7cff9e81e99c2112b83e9a91e967aa3c79e9f2b935cf0f0d43cc8ecfffd",
+  "fresh_named_science_compiler": [],
+  "soleCargo": "exclusive nonblocking probe free and released",
+  "source_and_private_outputs": "All preserved in host checkout/unchanged persistent.codex/.worktree/inference mounts; no globalinventory/deletion/source mirror",
+  "Beads_backup": {
+    "directwait_exit": 0,
+    "output": "\nBackup synced in 248ms\n",
+    "at": "2026-10-08T02:58:09.642905+00:00"
+  },
+  "pending_results": "331 failedjob collected;335/sourceonly no runtime pending;Web pendingowneradoptionbutno activecommand/reviewer;337sourceonly no runtime;researchtasks stay incomplete.",
+  "low_impact_sessions": "AppServer/terminal/taskLLM metadata sessions can remain live; recreation stops them. Durable histories and completedresult receipts persist. Metadata supervisor2909210 mayremain notifier only; no foreignkill or absenceclaim.",
+  "manual_restart": "Save all editor buffers. Within window VSCode Dev Containers: Rebuild and Reopen in Container. Wait existing postCreate hooks. Then python3 -B .devcontainer/verify-perf.py --probe ONCE, preserve output/exit status and return to324 before routine research scheduling.",
+  "capability": "Only linux-perf ELF root:perf_users0750 cap_perfmon=ep;containerCAP_PERFMON bounding;defaultseccomp retained. No privileged/SYS_ADMIN/seccompunconfined/sysctlchanges.",
+  "validated": "ScopedJSONpreservation,Bashsyntax,PythonAST,Ruff/Prettier and4NN0 mock porttests PASS.",
+  "unexecuted": "Imagebuild/download/install/actualperfCLI/events/sampling NOT_RUN;postrecreation validates access, not hotspots or perf333 completion.",
+  "unknowns": "WSL hardwarePMU/hostsecurity/runtimefilecapcompatibility/fullbaselineimage andtoolchainbuildfootprint.32MiB futureperf increment is not wholeimage certificate.",
+  "expiry": "READY invalid after03:11:45.999082UTC;late recreation needs freshquiescence. No idleheldnumericalclock/permanentmonitor.",
+  "source_support_B": 131072,
+  "future_package_increment_B": 33554432,
+  "record_Git_failure_upper_B": 16384,
+  "deviations_retained": "Old331twoJSONpostformatbinding discrepancy,335routeorder/controlforecast,rootgenericinspect/permissionordering/readfailures preserved, no retrospectivePASS."
+}
