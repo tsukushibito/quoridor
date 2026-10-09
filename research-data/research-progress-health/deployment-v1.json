@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "issue": "quoridor-4lc.352",
+  "verified_at": "2026-10-09T12:45:03.421330+00:00",
+  "scheduler_enabled": true,
+  "scheduler": "single exact-owned reversible local timer; systemd-user/cron unavailable; native automation API not exposed",
+  "interval_seconds": 900,
+  "initial_mode": "CONSULTATION",
+  "autonomous_triage_enabled": false,
+  "owner": {
+    "argv": [
+      "/usr/bin/python3",
+      "-B",
+      "/workspaces/quoridor/scripts/dev/research-progress-health.py",
+      "timer",
+      "--root",
+      "/workspaces/quoridor",
+      "--state-dir",
+      "/workspaces/quoridor/.artifacts/research-progress-health-v1",
+      "--start-fd",
+      "3"
+    ],
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+    "pid": 2616760,
+    "start_ticks": "80306126"
+  },
+  "first_Main_dry_check": {
+    "at": "2026-10-09T21:42:47.522607+09:00",
+    "candidates": 0,
+    "unknown": 1,
+    "exit_code": 0,
+    "dispatch": 0
+  },
+  "first_scheduled_check": {
+    "at": "2026-10-09T21:43:46.430610+09:00",
+    "pending": 0,
+    "state": "consultation",
+    "unknown": 1
+  },
+  "next_due": {
+    "at": "2026-10-09T21:58:53.471450+09:00",
+    "interval_seconds": 900
+  },
+  "cursor_dispatch_comment_marks": {
+    "delivered": 0,
+    "commented": 0,
+    "uncertain": 0
+  },
+  "operational_state_logical_bytes": 653,
+  "operational_state_cap_bytes": 65536,
+  "sources": [
+    {
+      "path": "scripts/dev/research-progress-health.py",
+      "sha256": "6c0f6c8a5925c905c2a8adc29c4d45656f36a6cc9ebd9b7b6f571d5603d2df78",
+      "bytes": 50170
+    },
+    {
+      "path": "scripts/dev/research-session.py",
+      "sha256": "0959b27559ef377395988aa776241711c12c6778fa89b2fa444564a9acdd33b3",
+      "bytes": 20987
+    },
+    {
+      "path": "scripts/dev/test_research_progress_health.py",
+      "sha256": "d217fd2e561990b4633b1805b16048c33b334e54cfee9b8aff614d0ec6b31a95",
+      "bytes": 52067
+    }
+  ],
+  "worker_handoff": "/workspaces/quoridor/.worktree/research-progress-health/.artifacts/research-progress-health-v1/repair-v3/handoff.md",
+  "worker_patch_sha256": "c59b5a3dae2b264e7a37abc82fb7f5bd49c1c4bffd3e386a84e297f155b01c31",
+  "Main_related_delta": "retain partial-UNKNOWN issue references without counting an unread observation; one new focused discriminator PASS",
+  "Main_test_receipt": "/workspaces/quoridor/.artifacts/research-acceptance/progress-health-v1/Main-partial-UNKNOWN-test.json",
+  "worker_validation": "13 unique affected focused cases PASS; prior24 mode/scheduler/helper results reused; Root did not replay them",
+  "whole_allocation_bytes": 67108864,
+  "covered_global_bytes": 43272499200,
+  "global_cap_bytes": 50000000000,
+  "failed_RAW_fees_masks_UNKNOWN_held": true,
+  "lifetime_limit": "Container and host must remain running; no guarantee through stop/rebuild",
+  "stop": "python3 -B scripts/dev/research-progress-health.py disable --confirm-human-choice",
+  "remove_scheduler_controls_keep_mode_cursor": "python3 -B scripts/dev/research-progress-health.py remove",
+  "status": "python3 -B scripts/dev/research-progress-health.py status",
+  "mode_change": "Explicit user instruction only; persistent, no automatic autonomous resumption",
+  "science_jobs_models_build_calls": 0,
+  "science_Cargo_fair_lease_by_runtime": false,
+  "foreign_kill_retry": false
+}

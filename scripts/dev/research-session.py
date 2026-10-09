@@ -10,6 +10,8 @@ from contextlib import contextmanager
 import json
 import os
 from pathlib import Path
+import selectors
+import signal
 import subprocess
 import sys
 import time
@@ -23,9 +25,59 @@ class SessionError(RuntimeError):
     pass
 
 
-def command_json(args: list[str], *, timeout: float = 30) -> dict | list:
-    result = subprocess.run(args, capture_output=True, text=True, check=True, timeout=timeout)
-    return json.loads(result.stdout)
+def command_json(
+    args: list[str], *, timeout: float = 30, max_bytes: int | None = None
+) -> dict | list:
+    if max_bytes is None:
+        result = subprocess.run(args, capture_output=True, text=True, check=True, timeout=timeout)
+        return json.loads(result.stdout)
+    # The idle-only authority read must not materialize a full Beads history,
+    # even if the brief command regresses. Own and reap this one read process.
+    child = subprocess.Popen(
+        args,
+        stdin=subprocess.DEVNULL,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        start_new_session=True,
+    )
+    streams = selectors.DefaultSelector()
+    output = bytearray()
+    error_bytes = 0
+    deadline = time.monotonic() + timeout
+    try:
+        streams.register(child.stdout, selectors.EVENT_READ, "out")
+        streams.register(child.stderr, selectors.EVENT_READ, "err")
+        while streams.get_map():
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                raise SessionError("Bounded issue authority read timed out")
+            for key, _ in streams.select(remaining):
+                chunk = os.read(key.fileobj.fileno(), 8192)
+                if not chunk:
+                    streams.unregister(key.fileobj)
+                elif key.data == "out":
+                    output.extend(chunk)
+                    if len(output) > max_bytes:
+                        raise SessionError("Bounded issue authority response exceeds 64KiB")
+                else:
+                    error_bytes += len(chunk)
+                    if error_bytes > 65536:
+                        raise SessionError("Bounded issue authority error exceeds 64KiB")
+        code = child.wait(timeout=max(0.001, deadline - time.monotonic()))
+        if code != 0:
+            raise SessionError("Bounded issue authority read failed")
+        return json.loads(output)
+    finally:
+        if child.poll() is None or streams.get_map():
+            try:
+                os.killpg(child.pid, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+        child.wait()
+        streams.close()
+        for stream in (child.stdout, child.stderr):
+            if stream is not None:
+                stream.close()
 
 
 def project_root(checkout: Path = CHECKOUT) -> Path:
@@ -46,8 +98,27 @@ def project_root(checkout: Path = CHECKOUT) -> Path:
     return Path(result.stdout.strip()).parent
 
 
-def require_issue(issue: str, root: Path) -> dict:
-    result = command_json(["bash", str(root / "scripts/dev/beads.sh"), "show", issue, "--json"])
+def require_issue(issue: str, root: Path, *, brief: bool = False) -> dict:
+    args = ["bash", str(root / "scripts/dev/beads.sh")]
+    if brief:
+        args += [
+            "list",
+            "--all",
+            "--brief",
+            "--flat",
+            "--id",
+            issue,
+            "--limit",
+            "0",
+            "--max-rows",
+            "1",
+            "--json",
+        ]
+    else:
+        args += ["show", issue, "--json"]
+    result = command_json(args, max_bytes=65536) if brief else command_json(args)
+    if brief and len(json.dumps(result, ensure_ascii=False).encode()) > 65536:
+        raise SessionError("Bounded issue authority response exceeds 64KiB")
     item = result[0] if isinstance(result, list) and len(result) == 1 else result
     if not isinstance(item, dict) or item.get("id") != issue:
         raise SessionError(f"Cannot identify Beads issue {issue}")
@@ -58,8 +129,8 @@ def require_issue(issue: str, root: Path) -> dict:
     return item
 
 
-def require_owner(issue: str, root: Path, thread_id: str) -> dict:
-    item = require_issue(issue, root)
+def require_owner(issue: str, root: Path, thread_id: str, *, brief: bool = False) -> dict:
+    item = require_issue(issue, root, brief=brief)
     if item.get("assignee") != "codex:" + thread_id:
         raise SessionError("Task issue owner differs from the explicit recipient")
     return item
@@ -150,11 +221,13 @@ def resume_params(thread_id: str) -> dict:
 
 
 def delivery_params(
-    thread: dict, turns: list[dict], text: str, cwd: str | None
+    thread: dict, turns: list[dict], text: str, cwd: str | None, *, idle_only: bool = False
 ) -> tuple[str, dict]:
     thread_id = thread["id"]
     state = thread["status"]["type"]
     content = [{"type": "text", "text": text, "text_elements": []}]
+    if idle_only and state != "idle":
+        raise SessionError(f"Idle-only delivery refused: {state}")
     if state == "active":
         active = next((t for t in turns if t["status"] == "inProgress"), None)
         if active is None:
@@ -319,7 +392,7 @@ async def run(args: argparse.Namespace) -> dict:
     if host.get("status") != "running" or not host.get("socketPath"):
         raise SessionError("Existing App Server is unavailable; this client starts no server")
     if args.command in ("create", "send"):
-        require_issue(args.issue, root)
+        require_issue(args.issue, root, brief=args.command == "send" and args.idle_only)
         cwd = resolve_task_cwd(args.cwd or str(root), root)
         body = Path(args.body_file).read_text()
         if not body.strip():
@@ -367,7 +440,7 @@ async def run(args: argparse.Namespace) -> dict:
                         "accepted": True,
                     }
                 if args.command == "send":
-                    require_owner(args.issue, root, args.thread)
+                    require_owner(args.issue, root, args.thread, brief=args.idle_only)
                     thread = await server.read_thread(args.thread)
                     if thread["status"]["type"] == "notLoaded":
                         await server.request("thread/resume", resume_params(args.thread))
@@ -377,8 +450,10 @@ async def run(args: argparse.Namespace) -> dict:
                         if thread["status"]["type"] == "active"
                         else []
                     )
-                    method, params = delivery_params(thread, turns, body, cwd)
-                    require_owner(args.issue, root, args.thread)
+                    method, params = delivery_params(
+                        thread, turns, body, cwd, idle_only=args.idle_only
+                    )
+                    require_owner(args.issue, root, args.thread, brief=args.idle_only)
                     response = await server.request(method, params)
                     return {
                         "method": method,
@@ -419,6 +494,8 @@ def parser() -> argparse.ArgumentParser:
             command.add_argument("--issue", required=True)
             command.add_argument("--body-file", required=True)
             command.add_argument("--cwd")
+        if name == "send":
+            command.add_argument("--idle-only", action="store_true")
         if name == "create":
             command.add_argument("--instructions-file")
             command.add_argument("--name")

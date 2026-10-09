@@ -90,3 +90,24 @@ App Serverの保存thread再開とturn開始は[公式App Server資料](https://
 ネイティブ自動化APIがこのhostで公開されず、DevContainerでsystemd-user/cronが使えない場合は、singleton lockと正確なPID・start ticks・boot IDを持つ単一timer processを使う。間隔は15分、利用者に示す日時はAsia/Tokyo。コンテナとhostが動作し続ける必要があり、停止・再構築をまたぐ動作を保証しない。install/readback・初回NN0読み取り確認・次回時刻の証拠が揃う前にenabledと記さない。実装・スケジューラ検証は有限のツール担当、sole Main/Git統合は実行・統合、周期結果の判断は方針相談Rootに分ける。新規枠はsource/test/config/log/失敗/admin/Git/cleanupを含む64MiBで、既存50GB内の明示配分を使う。
 
 全モードで、既存科学job自身のpause・資源・所有・cancel・cleanup安全制御は常に有効。相談モードが抑制するのはこのmonitorのtriageだけで、既存job完了・Sigma actualSTART・要求済み成果通知は従来のevent経路を続ける。
+
+操作入口は `scripts/dev/research-progress-health.py` 一つ。状態は `.artifacts/research-progress-health-v1/` に保存し、日時はAsia/Tokyoで表示する。以下のmode変更は人間の明示指示を受けた担当だけが実行する。初回の相談モードは今回の指示で選択済み。
+
+```bash
+# 初回導入：相談モードを保存して読み返し、通知なしの有界確認を行う
+python3 -B scripts/dev/research-progress-health.py mode --set-mode consultation --confirm-human-choice
+python3 -B scripts/dev/research-progress-health.py mode
+python3 -B scripts/dev/research-progress-health.py check --dry-run
+# 単一の軽量timerを起動。重複startは追加processを残さない
+taskset -c 3 python3 -B scripts/dev/research-progress-health.py start
+python3 -B scripts/dev/research-progress-health.py status
+
+# 人間が「自律確認モード」を明示選択した場合だけ変更
+python3 -B scripts/dev/research-progress-health.py mode --set-mode autonomous --confirm-human-choice
+# 人間の「チェック停止」：検出を止め、mode・保留参照を保持
+python3 -B scripts/dev/research-progress-health.py disable --confirm-human-choice
+# 停止後、schedulerの一時controlsを除去。mode/cursorは保持する
+python3 -B scripts/dev/research-progress-health.py remove
+```
+
+`stop` は正確に所有するtimerだけを止め、modeを変えない。停止の人間指示には `disable` を使う。再開は人間が明示選択したmodeと `start` の両方が必要で、コンテナ再起動後も自律確認へ自動復帰しない。`status` はlocal controlsだけを読み、STOPPEDでも保留件数を確認できる。`check --dry-run` はcursor・Beads・LLMを変更しない。UNKNOWNは未取得の事実として残し、稼働保証や研究結果成功と扱わない。timerのPID/start/boot/argv照合とpidfdを用いた停止は、このtimer自身にだけ適用する。
