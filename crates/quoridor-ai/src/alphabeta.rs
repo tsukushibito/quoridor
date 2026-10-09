@@ -442,7 +442,7 @@ pub struct SearchResult {
 }
 
 // Verify full state on hash hits, including all repetition counts and total ply.
-// Zobrist/position-only keys are invalid for Sigma's repetition exclusion rule.
+// Position-only keys/hashes are insufficient for the repetition exclusion rule.
 type CountedHistoryEntry = ([u8; 2], [u8; 2], u8, u64, u64, u16);
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
@@ -493,6 +493,19 @@ enum Bound {
 struct Entry {
     generation: u64,
     key: Key,
+    depth: u16,
+    value: f32,
+    bound: Bound,
+    best: Option<u16>,
+}
+// Invocation-owned proof that this exact immutable key was hashed by probe.
+// Never stored in the table/session, and never detached from its owned key.
+type ProbeHit = (u16, f32, Bound, Option<u16>);
+struct ProbedKey {
+    key: Key,
+    hash: Option<u64>,
+}
+struct NodeValue {
     depth: u16,
     value: f32,
     bound: Bound,
@@ -563,13 +576,27 @@ impl Table {
             }
         }
     }
-    fn probe(&self, key: &Key, stats: &mut SearchStats) -> Option<(u16, f32, Bound, Option<u16>)> {
+    fn probe(&self, key: &Key, stats: &mut SearchStats) -> Option<ProbeHit> {
         stats.tt_probes += 1;
-        stats.tt_hashes += u64::from(!self.slots.is_empty());
         if self.slots.is_empty() {
             return None;
         }
-        let entry = self.slots[(key.hash() % self.slots.len() as u64) as usize].as_ref()?;
+        stats.tt_hashes += 1;
+        self.probe_hashed(key, key.hash(), stats)
+    }
+    fn probe_owned(&self, key: Key, stats: &mut SearchStats) -> (ProbedKey, Option<ProbeHit>) {
+        stats.tt_probes += 1;
+        let hash = if self.slots.is_empty() {
+            None
+        } else {
+            stats.tt_hashes += 1;
+            Some(key.hash())
+        };
+        let hit = hash.and_then(|hash| self.probe_hashed(&key, hash, stats));
+        (ProbedKey { key, hash }, hit)
+    }
+    fn probe_hashed(&self, key: &Key, hash: u64, stats: &mut SearchStats) -> Option<ProbeHit> {
+        let entry = self.slots[(hash % self.slots.len() as u64) as usize].as_ref()?;
         if entry.key != *key {
             stats.tt_collisions += 1;
             return None;
@@ -578,12 +605,37 @@ impl Table {
         stats.tt_exact_hits += u64::from(matches!(entry.bound, Bound::Exact));
         Some((entry.depth, entry.value, entry.bound, entry.best))
     }
-    fn insert(&mut self, mut e: Entry, stats: &mut SearchStats) {
+    fn insert_probed(&mut self, probe: ProbedKey, node: NodeValue, stats: &mut SearchStats) {
+        // Search never resizes its table during a node. No key may be supplied
+        // separately: insertion consumes the same key whose hash was computed.
+        let Some(hash) = probe.hash else {
+            debug_assert!(self.slots.is_empty());
+            return;
+        };
+        debug_assert!(!self.slots.is_empty());
+        self.insert_hashed(
+            Entry {
+                generation: 0,
+                key: probe.key,
+                depth: node.depth,
+                value: node.value,
+                bound: node.bound,
+                best: node.best,
+            },
+            hash,
+            stats,
+        );
+    }
+    fn insert(&mut self, e: Entry, stats: &mut SearchStats) {
         if self.slots.is_empty() {
             return;
         }
         stats.tt_hashes += 1;
-        let i = (e.key.hash() % self.slots.len() as u64) as usize;
+        let hash = e.key.hash();
+        self.insert_hashed(e, hash, stats);
+    }
+    fn insert_hashed(&mut self, mut e: Entry, hash: u64, stats: &mut SearchStats) {
+        let i = (hash % self.slots.len() as u64) as usize;
         if self.slots[i]
             .as_ref()
             .is_some_and(|old| old.generation == self.generation && old.depth > e.depth)
@@ -765,16 +817,15 @@ impl Search<'_> {
         }
         let alpha_original = alpha;
         let beta_original = beta;
-        let key = if self.limits.use_tt {
-            Some(self.key(c))
+        let (key, hit) = if self.limits.use_tt {
+            let key = self.key(c);
+            let (key, hit) = self.table.probe_owned(key, &mut self.stats);
+            (Some(key), hit)
         } else {
-            None
+            (None, None)
         };
         let mut tt_move = None;
-        if let Some((stored_depth, value, bound, best)) = key
-            .as_ref()
-            .and_then(|k| self.table.probe(k, &mut self.stats))
-        {
+        if let Some((stored_depth, value, bound, best)) = hit {
             if best.is_some_and(|action| c.legal_ids().contains(&action)) {
                 tt_move = best;
                 // A different horizon is ordering information, not this depth's exact value.
@@ -838,10 +889,9 @@ impl Search<'_> {
         }
         self.control()?;
         if let Some(key) = key {
-            self.table.insert(
-                Entry {
-                    generation: 0,
-                    key,
+            self.table.insert_probed(
+                key,
+                NodeValue {
                     depth,
                     value,
                     bound: if value <= alpha_original {
@@ -2488,3 +2538,7 @@ mod research_threefold_tests {
         }
     }
 }
+
+#[cfg(test)]
+#[path = "tt_hash_reuse351_tests.rs"]
+mod tt_hash_reuse351_tests;

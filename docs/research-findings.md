@@ -692,6 +692,21 @@ game別の時間は並列実行で重なるため合計せず、主分母へ置�
 
 実target517,763,072Bに新build256MiBを足す場合の未支持249,327,616Bを解消するため、[caller全体支持v2](../research-data/ai-sigma/search-optimization/tt-hash-reuse351/cost-caller-resources-v2.json)で追加256MiBを実発行した。旧624MiBやfloorを減らさずtarget768MiB/whole880MiB、全体40,521,035,776B<50GB。private16MiBには旧8,323,072Bと追加caller inclusive8MiBを保持して残65,536B、超過は事前refuse。source32/TMP32/qual/raw/failure各8/review/Git各4MiBは据置、資源支持だけを数値結果やproduction Zobrist採用へ転換しない。次はSAME351の一つのcompare-only inlet実装・停止境界であり、baseline image複製・old13success replay・Search/game/model/perf/N/fullgen/fits96は追加しない。Sigma真正READY/実interval優先、323pause/seals/defaults・旧RAW費/UNKNOWNを維持する。
 
+## 同一owned TT Keyの再hash除去と固定processing比較（2026-10-09）
+
+351の一度きりのcomparison c41aeb90を[限定受入れ](../research-data/ai-sigma/search-optimization/tt-hash-reuse351/fixed-comparison-acceptance-v1.json)へ統合した。4小prefix・24catalog・64cycles・1536観測/方式、4方式計6144を完了し、保存Key/hash/oracle/parent restorationと既qualified caller/imageの対応を確認した。351.2 reportb885ca7f/control36c540eaはblockers0/ordinary0、reader STOP15:08:16.723337 UTC・remaining[]。元raw・packet・callerとbefore/after source、reviewを[圧縮証拠](../research-data/ai-sigma/search-optimization/tt-hash-reuse351/fixed-comparison-evidence-v1.tar.gz)に保全し、既成功13+7/新caller3+4・native/Search/modelの再実行はない。
+
+| 固定方式            | instrumented Default body entries | 全setup/update/materialization/oracle/capture/localdropを含むwall ms |
+| ------------------- | --------------------------------: | -------------------------------------------------------------------: |
+| reference           |                              3072 |                                                             1.313665 |
+| same-owned reuse    |                              1536 |                                                             1.124463 |
+| full Zobrist        |                            対象外 |                                                             1.008702 |
+| incremental Zobrist |                            対象外 |                                                             1.902733 |
+
+この数はsource wrapperの実body entryで、機械命令数ではない。非random・固定順の短い1blockにCIや因果速度を与えず、incrementalの追加1536 parent-full-Z oracle・Key clone・setup費も差し引かない。Default対Zのindexは24/24異なり、history capacityと課金tupleもphysical layout/RSSではない。one-child RUSAGE差0.013335秒はlaunch/preexecとkernelの回収子を含み、per-method CPU・late-history admission利益・whole Search改善・158秒への寄与はUNKNOWN。
+
+Mainへのsource intakeはqualified alpha **b976df27とbyte一致**するrecursive paired reuseだけを適用した。同じimmutable owned Keyをprobeからinsertへ消費し、rootの別Key構築・PV/unpaired・fullhistory/equality・stored layout・generation/admission/replacement/TT予算を保持する。original13 correctness definitionsはqualified966d4553とbyte一致で保持し、Zobristはtest-local研究用のみ、production dispatchはない。Rustfmt write/checkとexact-source照合を行い、old成功suite・ゲーム・モデル・計測は再実行しない。このsource採用を測定済みwhole-search速度、TT容量修正、model/default変更へ格上げしない。比較専用inlet/includeはGit復元とconsumer STOP確認後に撤去し、raw/private/failed controls・旧controller費204.291929819秒・mask pending対returned completed・continuous UNKNOWNを保持する。
+
 ## Sigma新時計の実live64資格（2026-10-09）
 
 固定campaignの実backendで16 explicit warmup・16 same-cursor measurement・32 fresh timed calls、合計64 logical callsを完了した。untimedとqualified-timedは各32 attempted/32 terminal replies、各16 indexed cases・workers joined・inflight0。framework warm/capture・failed・UNKNOWN・lateは0、provider physical rowsは各32、physical kernel callsはUNKNOWNとして保持する。各caseはこの有限qualification用に最大2 callsであり、K64全探索完了の資格やゲームのcall capへ読み替えない。13 software定義・caller/clock/math/model/privateの成功を再実行していない。[実資格の限定受入れ](../research-data/ai-sigma/sigma-receipt-reevaluation-v1/live64-acceptance-v1.json)。
@@ -712,7 +727,7 @@ Rootは29固定参照945,981Bと、admitted packetが指定する小さいconfig
 
 NN467fc884はcontroller12:44:24.560451〜12:45:56.732658 UTC、source STOP12:45:56.652510、whole92.188595423秒、arena/audit/recover3命令のdirectwait/fullcapture/cleanup[]を外側実完了まで確認した。両群のゲームは各一度。START通知済みでnative科学START UTCはUNKNOWNのまま、controller/observer時刻と区別する。返却完了とdisk pending/attempted、全旧失敗RAW・cap/floor・maskを保全する。既知Arena controller計454.485958347秒、Main33.976906432秒、保存collection1.838116203秒は別記し、nestedを加算しない。
 
-独立review81b0bb1c/control7d1c7bf2はblockers0/ordinary0、実reader STOP13:32:05.481676 UTC・remaining[]。統合は59固定metadata参照741568BのSHA/size/modeを確認し、native/model/library payload・ゲーム・audit・bootstrap・旧成功suiteを呼ばない。347.3/347.4だけがowner workflowで閉じ、parent347・N/fullgeneration/fits96・323pause/seals/defaultsは維持する。受入れやparent closureを次の独立TT/診断/353の入口gateにしない。
+独立review81b0bb1c/control7d1c7bf2はblockers0/ordinary0、実reader STOP13:32:05.481676 UTC・remaining[]。統合は59固定metadata参照741568BのSHA/size/modeを確認し、native/model/library payload・ゲーム・audit・bootstrap・旧成功suiteを呼ばない。347.3/347.4のowner closure後、parent347も元の有限条件と全6子issue完了を確認して15:11:40 UTCに閉じた。epic・N/fullgeneration/fits96・323pause/seals/defaultsは維持する。受入れやparent closureを次の独立TT/診断/353の入口gateにしない。
 
 ## 深さ6観測後の限定perf計画
 
@@ -721,6 +736,18 @@ NN467fc884はcontroller12:44:24.560451〜12:45:56.732658 UTC、source STOP12:45:
 提案はfixedDと採用BEST51 NNUEを分けた1 campaign、8 process・32 complete depth6 search calls、各engine1 perf record（199Hz/DWARF8192、最大30秒の受動window、解決済みuser samples1000件目標）である。production/plainとrecord/plain前後・sampledを照合し、実imageのcodegen/layout・same work/parent/history・overhead・self/inclusive/lost/unresolved/inliningの限界を残す。不足sampleやunderdepthを追加収集で救わず、旧171 sample割合をplain CPUやglobal Amdahlへ移さない。head/dot、FT arithmetic/copy/validation/pack、maps/bitsets、TT/history等は実証拠が示した範囲だけ判断し、poor ROIも有効な結論とする。
 
 whole保存3GiBは未発行の提案上限で、build/private/symbol/TMP/perfdata/RAW/failure/review/Git/cleanupを含む。実時間・NNUE depth6費・continuous/transient peaksはUNKNOWNで、old d3又はDの比から外挿しない。深さ6観測後の実価格・named capacity/lifetime支持と明示的な実行承認が揃う前に影響write・実行をしない。model/feature/FMA/cache/selective-search変更・教師・fits・game・default採用はこの計画から許可せず、323pause/seals/full N gateと全旧fees/UNKNOWNを保持する。
+
+## 六親局面とcurrent32勾配の有限診断結果（2026-10-09）
+
+[固定診断の受入れ](../research-data/ai-sigma/teacher-distance-tanh-v1/causal-fixed-acceptance-v1.json)と[保存証拠](../research-data/ai-sigma/teacher-distance-tanh-v1/causal-fixed-evidence-v1.tar.gz)に、同じ6whole-history parents（R3/R6/C1/C2/G1/T1、target685afad3）の一度きりのcampaignと既BEST51のcurrent32 singleton MSE/autogradを統合した。独立342.14 review3330dd40/control7b271755はblockers0/new ordinary0、reader STOP15:10:06.441121 UTC・remaining[]。11 unique original/D2/NN2 movesと12 reused proposalsを先に固定し、36natural+66forced=102 invocationsを確認した。98 requested/completed-depth matched、C1/T1のnatural6計4件はcompleted5なのでUNKNOWNのまま。6 common depth2 trees/58679nodes、14traces/18scores、missing D6/NN6 PV4件を保持し、未使用42上限枠・不完了を追加runや代替で埋めない。
+
+R3は全90 legal first movesが双方terminal-loss -2で、選定親以降では終局応答がある。選択された異なるtie moveからNNUEの悪手や過去敗戦原因を証明しない。R6はNN2の楽観値から双方4/6の-2へ変わる有限horizon対比で、21を救済手や深いD/consensusを真理としない。C1のforced13優位は候補subtreeの範囲で、未完成whole-root6やtimed depthを補わない。C2のchild STM -1とparent+2勝ちは整合し、飽和/tieだけを失敗やtanhのordering bugとしない。G1 goal75/T1 legal-third13はその正確なcontextでのterminal anchorsで、新教師labelではない。
+
+12 callerは95.068685〜95.350366msの合法accepted authority receiptとmatching drainを持つ。ただし**個別completeddepth/nodes/value/PVはNOT_SAVED**。aggregate1216481nodesやTT usabledepthから再構成せず、同時間でのmatched-depth劣位・plain FT/head share・arithmetic speed・棋力を推定しない。outcome-selected診断は独立strength bookではなく、原RuleA勝敗もcurrent Standardへ再labelしない。
+
+固定32のcurrent original-row-MSEはmean0.405828829128122、符号27正/5誤、|v|≥.99は8、exact+1は2、actual zero residual gradientsは2。両zero行148723/351491はv=z=+1/MSE0で、必要なwrong-sign補正が飽和で消えた証拠ではない。5誤符号行にはnonzero current gradientがあるが、歴史的学習gradient、fullV校正や敗戦因果の証明ではない。parameters/T統計bit不変・optimizer0。OPEN4096行/3443 exact keys/70 mixed-label groupsは通常のselfplay教師分布の記述で、未保存history/policy/familiesを原因帰属せず、異常・history alias・削除/dedup/relabel・deterministic teacher選好の根拠にしない。
+
+既知software163.013452977秒＋native whole58.457688516秒＝221.471141493秒にnestedを加算しない。first reported825768KiBの512MiB超過とrelease121.653937973秒のadministrative120秒超過はFAILED履歴を保持し、後の121040896B sampleで遡及合格にしない。旧RAW/fees/masks/continuous UNKNOWNを保全した。限定horizon/tie/terminal/objectiveの観測は得たが単一の普遍的原因は特定していない。追加診断やdata/teacher/feature変更は開始せず、既承認353の1fitを優先する。N/fullschedule/pilot/common4fits96・323pause/seals/defaultsは変わらない。
 
 ## 全公開データのNNUE-only条件を一度検証する承認（2026-10-09）
 

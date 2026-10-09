@@ -1,0 +1,108 @@
+{
+  "schema": "quoridor.nnue-causal.fixed-evidence-acceptance.v1",
+  "issues": ["quoridor-4lc.342.9", "quoridor-4lc.342.10", "quoridor-4lc.342.14"],
+  "Root_target_SHA256": "d0f50175db7d95570b6586cf520b4f94b071391c8653f3940609ab0a3801cff0",
+  "engineering_binding_SHA256": "a4308c84c4b9da2ed65fe2d3da43f58fd8d96843814783f0f314dbcf1b097c5c",
+  "current_gradient_binding_SHA256": "874a29343a734a8836fffe2efe70cbc8a48aa8f8139885201b01395a6b9cc2dc",
+  "review_control_SHA256": "7b271755c353d6a1b52130813a2feb350f0c05f636a3123f2d59b27233256237",
+  "review_report_SHA256": "3330dd40ddd7e3b74fa6f3645f0ba0bef9c7343197cecce22e46d2c97c962269",
+  "verdict": "LIMITED_FIXED_INTERPRETATION_SUPPORTED_WITH_DECLARED_LIMITS",
+  "blockers": 0,
+  "ordinary_defects": 0,
+  "actual_reader_STOP": "2026-10-09T15:10:06.441121+00:00",
+  "remaining": [],
+  "fixed_six_parent_target_SHA256": "685afad305b9df49240453ff596e3e853f7a68f7c915c6e5aaf7a6d1fe3acb5f",
+  "same_depth_scope": {
+    "unique_union_moves": 11,
+    "depth2_proposals_reused": 12,
+    "natural": 36,
+    "forced": 66,
+    "invocations": 102,
+    "matched_requested_depth": 98,
+    "requested6_UNKNOWN": 4,
+    "caller_receipts_accepted": 12,
+    "caller_individual_depth_nodes_value_PV": "NOT_SAVED",
+    "common_complete_trees": 6,
+    "common_tree_nodes": 58679,
+    "traces": 14,
+    "standalone_scores": 18,
+    "requested_D6_NN6_PV_paths_UNKNOWN": 4
+  },
+  "consequential_observations": {
+    "R3": "All90 legal firstmoves -2 ties under qualified full-tree chain; no worse selected NN move or historical cause",
+    "R6": "NN2 optimistic, both completed4/6 and alternatives report -2; bounded horizon contrast, not rescue/truth",
+    "C1_T1": "Four natural requested6 incomplete at completed5; forced subtrees do not repair whole-root depth UNKNOWN",
+    "C2": "Saturated childSTM -1 with parent+2 win is consistent; FP32 ties not tanh ordering reversal or universal saturation fault",
+    "G1_T1": "Exact context goal75/third13 terminal anchors; no new labels"
+  },
+  "current32_singleton_objective": {
+    "forward_returns_validated": 32,
+    "autograd_returns_validated": 32,
+    "mean_MSE": 0.405828829128122,
+    "sign_correct": 27,
+    "sign_wrong": 5,
+    "abs_ge_0_99": 8,
+    "exact_v_eq_1": 2,
+    "zero_residual_gradients": 2,
+    "both_zero_gradient_rows": "ordinals148723/351491 have v=z=1, MSE0; no missed wrong-sign correction demonstrated",
+    "parameters_Tstats": "bits unchanged, no optimizer/parameter.grad accumulation",
+    "scope": "CURRENT fixed subset, not historical training gradients/fullV/defeat cause"
+  },
+  "OPEN_descriptive_teacher_distribution": {
+    "rows": 4096,
+    "qualified_keys": 3443,
+    "mixed_label_groups": 70,
+    "scope": "Normal stochastic variation compatible; original histories/policy/families unsaved. No anomaly/historyalias/dataerror/dedup/relabel or deterministic teacher preference."
+  },
+  "known_controller_fees_seconds": 221.471141493,
+  "nested_spans_added": false,
+  "retained_resource_failures": [
+    "first reported825768KiB >512MiB allowance; family continuous extent UNKNOWN",
+    "release121.653937973 >120 administrative cap; FAILED bound retained",
+    "later121040896B sample not retrocompliance/continuous certificate"
+  ],
+  "known_limits": [
+    {
+      "id": "L1",
+      "type": "INSTRUMENTATION_MISSING",
+      "fact": "Individual12 caller depth/nodes/value/PV NOT_SAVED",
+      "effect": "No matched timed-depth/speed/strength inference; no replay to fill gap"
+    },
+    {
+      "id": "L2",
+      "type": "INCOMPLETE_REQUESTED_SEARCH",
+      "fact": "C1/T1 D/NN natural6 completed5 at cap",
+      "effect": "Four requested6 UNKNOWN; complete forced branches do not replace them"
+    },
+    {
+      "id": "L3",
+      "type": "CAUSAL_ATTRIBUTION_UNKNOWN",
+      "fact": "Current gradients and stochastic teacher variation have no historical chronology",
+      "effect": "No universal defeat/learning cause or label intervention"
+    },
+    {
+      "id": "L4",
+      "type": "EVIDENCE_SCOPE",
+      "fact": "Inner full hierarchy proof supplied bound checker/source; selected extraction contains first-move/root scalars",
+      "effect": "No independent new geometry/all-reply execution"
+    },
+    {
+      "id": "L5",
+      "type": "RETAINED_RESOURCE_FAILURES",
+      "fact": "Reported first saved RSS gap; prior release administrative overrun",
+      "effect": "No retrocompliance or continuous-peak certificate"
+    }
+  ],
+  "archive": {
+    "path": "research-data/ai-sigma/teacher-distance-tanh-v1/causal-fixed-evidence-v1.tar.gz",
+    "SHA256": "72c18e71309a0a8502d84671e28f123fc05ef88816d6fc5ef5149dc39d68cedb",
+    "bytes": 112993,
+    "members": 37
+  },
+  "new_model_native_Search_gradient_training_statistics_calls": 0,
+  "old_RAW_fees_masks_UNKNOWN": "held without refund",
+  "N_fullschedule_pilot_fourfits96_defaults_323pause_seals": "unchanged; no gate on353fit or TT",
+  "Root_source_reader_STOP": "2026-10-09T15:22:20.824633+00:00",
+  "whole_engineering_B": 2147483648,
+  "global_upper_unchanged_B": 47567466496
+}

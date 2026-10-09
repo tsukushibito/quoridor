@@ -1,0 +1,57 @@
+{
+  "schema": "quoridor.tt351.fixed-comparison-acceptance.v1",
+  "issue": "quoridor-4lc.351",
+  "scope": "Bounded saved comparison and exact qualified recursive same-owned-Key production reuse; test-only Zobrist, no production Zobrist or TT policy change",
+  "target_handoff_SHA256": "454cb848d014ba6d0b87f852832435f4208998f3bfdd202e7343b247ab95c67f",
+  "review_control_SHA256": "36c540ea938bfd19291a0cd457b1fff7bc12f830cc2da1b5ebe56c316adf380f",
+  "review_report_SHA256": "b885ca7fcf34784e8d6ab382e9c7e600b92752a8cdcbef0984029f1c5a088790",
+  "actual_review_reader_STOP": "2026-10-09T15:08:16.723337+00:00",
+  "review_verdict": "CLEAR_FIXED_LIMITED_INTERPRETATION",
+  "blockers": 0,
+  "ordinary_findings": 0,
+  "fixed_job": "c41aeb90-5a04-469b-942d-a5132877298c",
+  "actual_controller_STOP": "2026-10-09T14:12:40.287309+00:00",
+  "whole_seconds": 1.5374819999560714,
+  "whole_software_and_comparison_known_seconds": 204.291929819,
+  "nested_spans_added": false,
+  "observations_per_method": 1536,
+  "total_method_observations": 6144,
+  "source_instrumented_Default_body_entries": {
+    "reference": 3072,
+    "reuse": 1536
+  },
+  "fixed_order_descriptive_method_walls_ms": {
+    "reference": 1.313665,
+    "reuse": 1.124463,
+    "fullZ": 1.008702,
+    "incrementalZ": 1.902733
+  },
+  "bounded_single_child_CPU_seconds": 0.013335,
+  "CPU_scope": "RUSAGE_CHILDREN delta includes launch/preexec and kernel-accounted reaped descendants; per-method CPU UNKNOWN",
+  "limits": [
+    "Fixed nonrandom short-key single block; no confidence estimate",
+    "Incremental additional parent oracle/clone/setup/materialization/drop costs charged; no subtraction",
+    "Budget-counter charging tuple differs from actual CountedHistoryEntry declaration; no portable ABI/RSS inference",
+    "Prototype capacities and all24 Zobrist indices differ; no preserved TT work or capacity-fix inference",
+    "RUSAGE_CHILDREN bounded single-child delta includes launch/preexec and kernel-accounted reaped descendants",
+    "Returned completed and original persisted pending/attempted finalization distinct; continuous peaks UNKNOWN"
+  ],
+  "same_history_equality_hash_and_TT_storage_policy": "Qualified source/software proof reused exactly; recursive paired reuse consumes the same immutable owned Key. Root/PV/unpaired and stored layouts unchanged.",
+  "Main_source": {
+    "crates/quoridor-ai/src/alphabeta.rs": "b976df272b273a147596f36ec503a2801b802b45389d8169ca62468d7a02b335",
+    "crates/quoridor-ai/src/tt_hash_reuse351_tests.rs": "966d455341714c37808993a15274fd97bf4781d5fa1595fc55b8435b1072191a"
+  },
+  "Main_runtime_or_general_speed_claim": "NONE; no new execution or broad equivalence claim",
+  "archive": {
+    "path": "research-data/ai-sigma/search-optimization/tt-hash-reuse351/fixed-comparison-evidence-v1.tar.gz",
+    "SHA256": "c207298e3189ea8723a48fd27ad4d4ca47d94eb0d0e98c211977c11de56706b8",
+    "bytes": 130585
+  },
+  "archive_member_count": 28,
+  "reconstruction_verified_before_cleanup": "Memory member SHA/size/mode; Git reconstruction required next before retiring inlet/include",
+  "retired_compare_only_source": "Pending Git reconstruction; no private/raw/control/data deletion",
+  "old_fees_RAW_failed_masks_continuous_UNKNOWN": "Held without refund; returned completed and disk pending/attempted remain distinct",
+  "whole_TT_B": 922746880,
+  "global_covered_B_unchanged": 47567466496,
+  "N_defaults_seals_323pause": "unchanged"
+}
