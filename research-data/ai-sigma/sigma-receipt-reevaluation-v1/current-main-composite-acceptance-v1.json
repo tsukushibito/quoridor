@@ -1,0 +1,237 @@
+{
+  "schema_version": 1,
+  "issue": "quoridor-4lc.347.6",
+  "accepted_by": "quoridor-4lc.324",
+  "scope": "Exactly one currentMain integrated Sigma caller5 + independent depth6 scheduling5 runnerbin CargoCHECK/typeclosure",
+  "job_id": "edfd6b20-6a43-44d1-8e1e-5bce3b4a48de",
+  "command": [
+    "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+    "check",
+    "--offline",
+    "--locked",
+    "--manifest-path",
+    "/workspaces/quoridor/Cargo.toml",
+    "-j1",
+    "-p",
+    "quoridor-runner",
+    "--bin",
+    "quoridor-runner"
+  ],
+  "actual_interval": {
+    "controller_START": "2026-10-09T02:18:02.184727+00:00",
+    "worker_START": "2026-10-09T02:18:03.507035+00:00",
+    "worker_source_STOP": "2026-10-09T02:18:35.736280+00:00",
+    "controller_STOP": "2026-10-09T02:18:36.139825+00:00",
+    "owner_collector_reader_STOP": "2026-10-09T02:31:15.098631+00:00"
+  },
+  "outcome": "PASS exit0",
+  "direct_commands": 1,
+  "controller_whole_s": 33.9769064320717,
+  "Cargo_direct_s": 30.023711377987638,
+  "nested_not_added": true,
+  "root_verification": {
+    "START": "2026-10-09T02:39:01.683191+00:00",
+    "reader_STOP": "2026-10-09T02:39:01.942229+00:00",
+    "wall_s": 0.25902950193267316,
+    "metadata_refs": 8,
+    "metadata_bytes": 897212,
+    "currentMain10_source_bytes": 390724,
+    "source_hash_size_mode_and_prebound_membership": "all10 exact",
+    "before_after_saved_ref_SHA_size_mode": "all8 exact",
+    "old_registry_tool_payload_source_review": "not replayed; producer84/122 coverage reused",
+    "Root_Cargo_tests_Clippy_native_model_games": 0,
+    "owned_readers_children_jobs_TMP": [],
+    "CPU": 3,
+    "stdlib_AS_B": 536870912,
+    "GPU": 0,
+    "continuous_family_peak_adminfees": "UNKNOWN"
+  },
+  "refs": [
+    {
+      "path": "/workspaces/quoridor/.worktree/sigma-receipt-caller/.artifacts/current-main-composite-check-v1/bindings.json",
+      "sha256": "9d3591c0c1e3dced3169bd6eb24f3bdfaf6469a4cb1139f4c095427df95d53ba",
+      "bytes": 583119,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/sigma-receipt-caller/.artifacts/current-main-composite-check-v1/output/result.json",
+      "sha256": "51954bfd5110667c27eb621b175dc6918de5b601e2e998988e1044b03a609066",
+      "bytes": 301582,
+      "mode": 384
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/sigma-receipt-caller/.artifacts/current-main-composite-check-v1/output/check.process.json",
+      "sha256": "3c0d9a0424a69b5965bcd45d725a2f7577e572da6a06a3b1ecf98750c387c435",
+      "bytes": 1064,
+      "mode": 384
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/sigma-receipt-caller/.artifacts/current-main-composite-check-v1/report.md",
+      "sha256": "4089a2d20f599d24b38e691a47a94f6bf6f93f3964a4f4304cc7ad76763561ac",
+      "bytes": 4619,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/sigma-receipt-caller/.artifacts/current-main-composite-check-v1/output/check.log",
+      "sha256": "820b6e6e06b3e7ff5a41d21cc5b7d0e7096b58228d0f135035e37dfcd94816af",
+      "bytes": 2184,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/sigma-receipt-caller/.artifacts/current-main-composite-check-v1/runtime/result.json",
+      "sha256": "588db89ffeb768107af2c342577f33f49b4821ef43d8c0dc0424440c105efa2d",
+      "bytes": 499,
+      "mode": 384
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/sigma-receipt-caller/.artifacts/current-main-composite-check-v1/collected-facts.json",
+      "sha256": "c54fac97e936be2b533065d7b6c0cc584324192912d7cb9c12fff9721d3c7754",
+      "bytes": 2611,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/sigma-receipt-caller/.artifacts/current-main-composite-check-v1/completion-control.json",
+      "sha256": "25bae16060e3d4ec1db649208b6afd79f90108572243dc34601170a8c75df856",
+      "bytes": 1534,
+      "mode": 420
+    }
+  ],
+  "currentMain10": [
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/lib.rs",
+      "sha256": "304470d6a273c724d5025ccce40903286ee8b673aee12ca328ac79f2d86b2254",
+      "bytes": 567,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/main.rs",
+      "sha256": "47e4cfffc91e592b2638112a63d061bdfe9711433b5b05e130c8fda9c7b86b6f",
+      "bytes": 16940,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/runtime.rs",
+      "sha256": "18bac6a7373529aa09925978952f392373a90f480e7f4ac14811c2c7231d4ccc",
+      "bytes": 203464,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/sigma_clock.rs",
+      "sha256": "0485d49daba990396ad21c19c15c21f75870d568d7c943850951b9d27e381cd1",
+      "bytes": 26363,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/sigma_qualification.rs",
+      "sha256": "15910bc69d4a6809ce0dea581551e8fe7611e529ca9724a5852e3687ac36d3bd",
+      "bytes": 38187,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/teacher_pilot.rs",
+      "sha256": "b7de324feb5dea9fca47b95d06439fcaf1466fd6d49967afd8807915f2e3fd3d",
+      "bytes": 18211,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/teacher_pilot_execution.rs",
+      "sha256": "98889813cc5b8180365f3a83fbcc6a55d438d9542b208bc5339111bf1cc2b4f5",
+      "bytes": 46691,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/teacher_pilot/depth6.rs",
+      "sha256": "e8ab5d452c9dec89c873bb8392af583c64ffd57abd897e41e0a8da5ada5a7f14",
+      "bytes": 4010,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/teacher_pilot_execution/depth6.rs",
+      "sha256": "8e9c4cd8743f3a1a10667dba93454e251684cc70850d5cf1babb129b7e1d32c7",
+      "bytes": 27978,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/teacher_pilot_execution/scheduling.rs",
+      "sha256": "41208c41d2355b39d47e6e30a256c4726f4f018b85daa319700bd767dc85b112",
+      "bytes": 8313,
+      "mode": 420
+    }
+  ],
+  "producer_dependency_scope": {
+    "prebound_Main_named_files": 84,
+    "actual_compiler_Rust_C_CXX_dependency_records_verified": 122,
+    "registry_namespaces_config_absences": "producer before/after frozen-map proof supplied, not a new broader audit"
+  },
+  "finalization": {
+    "directwait_reaped": true,
+    "process_and_handles_complete": true,
+    "returned_mask": "completed",
+    "persisted_mask": "pending",
+    "persisted_final_record": "attempted",
+    "stage_errors": [],
+    "remaining": [],
+    "no_universal_fault_certificate": true,
+    "fresh_owner_exact_identity_checks": [
+      {
+        "role": "Cargo",
+        "identity": {
+          "pid": 1932421,
+          "start_ticks": "76550075",
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        "same_identity_present": false,
+        "classification": "owned command/guardian"
+      },
+      {
+        "role": "guardian",
+        "identity": {
+          "pid": 1932381,
+          "start_ticks": "76549942",
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        "same_identity_present": false,
+        "classification": "owned command/guardian"
+      },
+      {
+        "role": "controller",
+        "identity": {
+          "pid": 1932337,
+          "start_ticks": "76549761",
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        "same_identity_present": false,
+        "classification": "finished controller/notifier metadata only"
+      }
+    ]
+  },
+  "resource": {
+    "whole347_B": 4294967296,
+    "target_limit_B": 536870912,
+    "TMP_limit_B": 67108864,
+    "control_limit_B": 1048576,
+    "actual_final_allocated_with_dirs_B": {
+      "target": 119709696,
+      "TMP": 0,
+      "controls": 1019904
+    },
+    "held_sample_maxima_B": {
+      "TMP": 7720960,
+      "controls": 684032,
+      "target": 148676608
+    },
+    "old_Arena_target_floor_B": 498405376,
+    "sampled_family_peak_B": 514772992,
+    "continuous_transient_scheduler_isolation": "UNKNOWN",
+    "old_Arena_software_whole_s": 239.8910392607795,
+    "old_caps_maxima_failed_fees_RAW_masks_assets_UNKNOWN": "HELD/no refund/no nestedadd"
+  },
+  "scope_limits": [
+    "no loaded backend/live64/cost/clock qualification",
+    "no games/strength/depth6 throughput rate",
+    "no new tests/fullClippy/release/private/metadata replay",
+    "no N/fullgeneration/fourfits96/default adoption"
+  ],
+  "source_lease": "released owner workerSTOP02:18:35.736280; no idlehardware gate or futurequiet certificate",
+  "completion_action": "Latest explicit handoff authorizes sole324 to close ONLY347.6 after this verified scoped acceptance; parent347 remains incomplete"
+}
