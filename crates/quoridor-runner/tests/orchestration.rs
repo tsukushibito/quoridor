@@ -103,7 +103,7 @@ fn backend_fault_drains_and_retains_all_slots() {
 #[test]
 fn deadline_during_inference_waits_then_stops() {
     let mut c = config("deadline");
-    c.wall_seconds = 0.005;
+    c.wall_seconds = Some(0.005);
     let r = run_with_backend(&c, "selfplay", Box::new(Backend::new(false, true))).unwrap();
     assert_eq!(r.stopped.as_deref(), Some("wall_limit"));
     assert!(r.all_workers_joined);
@@ -184,7 +184,7 @@ fn benchmark_monitor_cancels_during_one_alpha_search() {
     let mut c = benchmark_config("benchmark-cancel");
     c.engines[0].depth = 32;
     c.engines[0].max_nodes = 100_000_000;
-    c.wall_seconds = 0.02;
+    c.wall_seconds = Some(0.02);
     let clock = std::time::Instant::now();
     assert!(quoridor_runner::runtime::benchmark(&c).is_err());
     assert!(clock.elapsed() < std::time::Duration::from_secs(2));
