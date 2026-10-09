@@ -1,0 +1,267 @@
+{
+  "version": 1,
+  "issue": "quoridor-4lc.351",
+  "integration_issue": "quoridor-4lc.324",
+  "scope": "saved fixed4/178 depth6 cost and limited TT admission interpretation; no causal speed/TTresize/reset benefit or candidate runtime proof",
+  "producer_handoff_SHA256": "8be5860ff2ade34e2a356c2050dea69e59832f466dba00864027fbee1b2443e8",
+  "producer_report_SHA256": "0a5257b3351dd9971757560de6cc294049161ead4da8ce5020dfb0c28d89130e",
+  "independent_review": {
+    "issue": "quoridor-4lc.351.1",
+    "report_SHA256": "480e8dcfb761101f8c3611ca28c9f9f13bd16cd1a8a36f4a90a361dd4b09069e",
+    "control_SHA256": "a1137b76d9b4b102f25085ccb72e5886cc62f62bae2a6bb9005343e1c4832e65",
+    "blockers": [],
+    "ordinary_findings": [],
+    "all31_fixed_inputs_unchanged": "supplied independent before/after evidence reused; no repeated full-source/raw audit",
+    "reader_STOP": "2026-10-09T06:23:54.710711+00:00",
+    "remaining": [],
+    "initial_mechanisms_read_ordering_disclosure": "An initial light source-mechanisms.json read preceded the full31-reference before sweep; its pinned metadata matched in both subsequent sweeps. This earlier read is retained, not retroactively called hash-before-first-read. Remaining directed source/body reads followed the before sweep."
+  },
+  "verification": {
+    "selected_evidence_refs": [
+      {
+        "original_path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/depth6-tail-analysis-v1/interpretation-binding.json",
+        "member": "producer/interpretation-binding.json",
+        "SHA256": "da498ce8b00d810d2ebde664bd6cc42e45192f43d025c796b6126cd98051ff49",
+        "bytes": 9530,
+        "mode": 420
+      },
+      {
+        "original_path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/depth6-tail-analysis-v1/report.md",
+        "member": "producer/report.md",
+        "SHA256": "0a5257b3351dd9971757560de6cc294049161ead4da8ce5020dfb0c28d89130e",
+        "bytes": 16070,
+        "mode": 420
+      },
+      {
+        "original_path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/depth6-tail-analysis-v1/summary.json",
+        "member": "producer/summary.json",
+        "SHA256": "c6f8acfcda32a07ee1a661b76c0e7edd078dfcf5164f070ba193864950a31a50",
+        "bytes": 94124,
+        "mode": 420
+      },
+      {
+        "original_path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/depth6-tail-analysis-v1/per-ply.csv",
+        "member": "producer/per-ply.csv",
+        "SHA256": "74e2e55a27180d55e79b28da17579e170a8838ca7c04bd3a9d8660a1109137cf",
+        "bytes": 38090,
+        "mode": 420
+      },
+      {
+        "original_path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/depth6-tail-analysis-v1/per-game.csv",
+        "member": "producer/per-game.csv",
+        "SHA256": "7ebb1181cf4639feb53cfc136c0d4a4ca733f5de9dee2400931e465bd4457ee2",
+        "bytes": 801,
+        "mode": 420
+      },
+      {
+        "original_path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/depth6-tail-analysis-v1/source-mechanisms.json",
+        "member": "producer/source-mechanisms.json",
+        "SHA256": "11dd4fe095ecd8416f11123d4962f6ed3e3bb87c78dbf75aa4a9122e46002e05",
+        "bytes": 7962,
+        "mode": 420
+      },
+      {
+        "original_path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/depth6-tail-analysis-v1/review-question.json",
+        "member": "producer/review-question.json",
+        "SHA256": "f923211fdb0bb7e38186d939286b088241c3de95b566129ea2a7372743200ff3",
+        "bytes": 1002,
+        "mode": 420
+      },
+      {
+        "original_path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/depth6-tail-analysis-v1/analysis-STOP.json",
+        "member": "producer/analysis-STOP.json",
+        "SHA256": "6aa2e5f9d86d6e4d647c745f9fb8fdbd73f5ddf9232266b99fae7a315f8aaa6c",
+        "bytes": 4085,
+        "mode": 420
+      },
+      {
+        "original_path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/depth6-tail-analysis-v1/report-STOP.json",
+        "member": "producer/report-STOP.json",
+        "SHA256": "5c67935e65e197d58dc70815b6005908f2a6b1c87b6defe18231575ca565c7b8",
+        "bytes": 994,
+        "mode": 420
+      },
+      {
+        "original_path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/depth6-tail-analysis-v1/input-binding.json",
+        "member": "producer/input-binding.json",
+        "SHA256": "02c440df15a994f05f6c4f6ce21678ad96f6e0e05907e79b9f0f4e6f9f0f5432",
+        "bytes": 6480,
+        "mode": 420
+      },
+      {
+        "original_path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/depth6-tail-analysis-v1/display-ja.json",
+        "member": "producer/display-ja.json",
+        "SHA256": "06e4c8150de14485478f0651179bfeaa1e33023022e1f83305d5acca30977f54",
+        "bytes": 591,
+        "mode": 420
+      },
+      {
+        "original_path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/depth6-tail-analysis-v1/prewrite.json",
+        "member": "producer/prewrite.json",
+        "SHA256": "fb4556136a723be8a94d1590828f2d1a3a9d85920bd6498c251c75e472c7ff07",
+        "bytes": 344,
+        "mode": 420
+      },
+      {
+        "original_path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/depth6-tail-analysis-v1/handoff.json",
+        "member": "producer/handoff.json",
+        "SHA256": "8be5860ff2ade34e2a356c2050dea69e59832f466dba00864027fbee1b2443e8",
+        "bytes": 4362,
+        "mode": 420
+      },
+      {
+        "original_path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/depth6-tail-analysis-v1/conditional-plan-v1.md",
+        "member": "producer/conditional-plan-v1.md",
+        "SHA256": "978c244e4fb9549fc6ba4ab6813562b13ed15fdcccd8ac6b85245bcc75331a48",
+        "bytes": 9970,
+        "mode": 420
+      },
+      {
+        "original_path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/depth6-tail-analysis-v1/conditional-plan-STOP-v1.json",
+        "member": "producer/conditional-plan-STOP-v1.json",
+        "SHA256": "abf3aabb3f6f22975d21fc1bea42de364c20620a07b41f77203979afab17372c",
+        "bytes": 1191,
+        "mode": 420
+      },
+      {
+        "original_path": "/workspaces/quoridor/.worktree/endgame-solver335/.artifacts/depth6-tail-review351-v1/review.md",
+        "member": "review/review.md",
+        "SHA256": "480e8dcfb761101f8c3611ca28c9f9f13bd16cd1a8a36f4a90a361dd4b09069e",
+        "bytes": 9443,
+        "mode": 420
+      },
+      {
+        "original_path": "/workspaces/quoridor/.worktree/endgame-solver335/.artifacts/depth6-tail-review351-v1/control.json",
+        "member": "review/control.json",
+        "SHA256": "a1137b76d9b4b102f25085ccb72e5886cc62f62bae2a6bb9005343e1c4832e65",
+        "bytes": 24588,
+        "mode": 420
+      }
+    ],
+    "all_evidence_hash_size_mode": "PASS",
+    "archive_roundtrip_bytes_modes": "PASS",
+    "saved_CSV_count_time_nodes_residual_top5_stock_arithmetic": "PASS",
+    "reader_START": "2026-10-09T06:35:38.160281+00:00",
+    "reader_STOP": "2026-10-09T06:35:38.208516+00:00",
+    "remaining": [],
+    "new_native_model_Search_test_build_perf_audit_geometry_calls": 0,
+    "source_raw_private_model_payload_copies": 0,
+    "saved_verification_s": 0.04825529793743044
+  },
+  "observations": {
+    "games": [
+      {
+        "game": "0",
+        "request_id": "deeper-teacher-depth6-four-game-000",
+        "worker": "0",
+        "prefix_length": "4",
+        "final_ply": "64",
+        "moves": "60",
+        "native_game_ns": "157588321221",
+        "indexed_whole_ns": "157588765090",
+        "returned_search_sum_ns": "157568024898",
+        "native_minus_search_ns": "20296323",
+        "indexed_minus_native_ns": "443869",
+        "nodes_per_search_second": "702337.6416099551",
+        "move_seconds_median": "3.67862781",
+        "maximum_move_seconds": "7.064288343"
+      },
+      {
+        "game": "1",
+        "request_id": "deeper-teacher-depth6-four-game-001",
+        "worker": "1",
+        "prefix_length": "8",
+        "final_ply": "56",
+        "moves": "48",
+        "native_game_ns": "39192802560",
+        "indexed_whole_ns": "39193174579",
+        "returned_search_sum_ns": "39177045716",
+        "native_minus_search_ns": "15756844",
+        "indexed_minus_native_ns": "372019",
+        "nodes_per_search_second": "864324.3608889787",
+        "move_seconds_median": "0.003412681",
+        "maximum_move_seconds": "5.450248213"
+      },
+      {
+        "game": "2",
+        "request_id": "deeper-teacher-depth6-four-game-002",
+        "worker": "0",
+        "prefix_length": "12",
+        "final_ply": "50",
+        "moves": "38",
+        "native_game_ns": "17456011954",
+        "indexed_whole_ns": "17456158531",
+        "returned_search_sum_ns": "17443357000",
+        "native_minus_search_ns": "12654954",
+        "indexed_minus_native_ns": "146577",
+        "nodes_per_search_second": "760690.5024073061",
+        "move_seconds_median": "0.013970100499999999",
+        "maximum_move_seconds": "3.404469754"
+      },
+      {
+        "game": "3",
+        "request_id": "deeper-teacher-depth6-four-game-003",
+        "worker": "1",
+        "prefix_length": "16",
+        "final_ply": "48",
+        "moves": "32",
+        "native_game_ns": "519101456",
+        "indexed_whole_ns": "519246641",
+        "returned_search_sum_ns": "508703505",
+        "native_minus_search_ns": "10397951",
+        "indexed_minus_native_ns": "145185",
+        "nodes_per_search_second": "914518.9593297574",
+        "move_seconds_median": "0.0006267885",
+        "maximum_move_seconds": "0.300302819"
+      }
+    ],
+    "search_returns": 178,
+    "completed_depth": 6,
+    "total_nodes": 158261845,
+    "game000_top5_search_ns": 32944066732,
+    "game000_positive_stock_moves": 42,
+    "game000_positive_stock_nodes": 110660112,
+    "game000_zero_stock_moves": 18,
+    "game000_zero_stock_nodes": 5843,
+    "TT_completed_no_hit_all_byte_refusal_suffix_rows": 161,
+    "TT_interpretation": "for completed zero-hit calls inspected controlflow proves insertion attempts I=probe events P; suffix S=P proves every attempted result insertion refuses byte test; not a general probe/insert denominator identity",
+    "TT_counter_limits": "occupied index unequal-key mismatch is not64bit collision; retained1MiB is not cumulative construction capacity or total process heap",
+    "parallel_index_worker_sums_s": [175.044923621, 39.71242122],
+    "worker_offsets_sendblocked_idle_CPU_shares": "UNKNOWN",
+    "whole_external_s": 175.88420158601366,
+    "performance_causal_shares_resize_reset_eviction_benefit": "UNKNOWN"
+  },
+  "costs": {
+    "analysis_two_guard_whole_s": 0.7345393280265853,
+    "nested_not_added": true,
+    "source_admin_LLM_continuous_peaks": "UNKNOWN",
+    "oldfees_RAW_masks_caps_UNKNOWN": "HELD"
+  },
+  "resources": {
+    "whole_analysis_B": 8388608,
+    "Root_Git_cleanup_B": 2097152,
+    "evidence_archive_bytes": 59153,
+    "future_candidate624MiB": "PROPOSAL_NOT_ALLOCATED; current8MiB is not a build/private/numeric grant"
+  },
+  "followup": {
+    "selected_next_planning_direction": "assess exact immutable ownedKey hash reuse at paired probe/insert boundary, preserve stored layout/full history/capacity/index/equality/admission/replacement/namespaces; explicit truthful counter contract",
+    "not_a_byte_pressure_fix_or_measured_speedup": true,
+    "next_executable_scope": "same351 owner directed current-source/interface and concrete whole-resource support preparation only, inside remaining existing source/control budget; candidate code/compile/numeric entry awaits issued coherent support",
+    "candidate_code_or_numeric_grant": false,
+    "no_premature_new_task_or_permanent_role": true,
+    "important_semantic_alternatives_to_policy": true,
+    "Table_header_layout_and_retained_accounting": "unchanged; adding stored Table/Stats bytes changes accounted admission and is outside boundary",
+    "sparse_source_forecast": {
+      "base": "5676c53a095b66bdd3674c41a88b38d3c33a3166",
+      "files": 107,
+      "logical_B": 1468619,
+      "blocks_directories_plus4MiB_metadata_B": 6033408,
+      "proposed_source_cap_B": 33554432,
+      "namespace_exists": false,
+      "observed_at": "2026-10-09T06:43:12.315962+00:00",
+      "whole_allocation_proof": false
+    }
+  },
+  "N_fullschedule_pilotmix_fullgen_fits96_defaults_seals_323pause": "HELD_UNSELECTED_UNCHANGED",
+  "Sigma3473_D16_then3474_NNUE16": "priority; no351/intake/N/whole348 ACK gate"
+}
