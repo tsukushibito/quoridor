@@ -560,6 +560,16 @@ main ad358のcurrent Rust1.99 private e4b/fc7、BEST51とSigma d790、同book93c
 
 learnerのC01/C02/C03は同342.8の限定source確認で解消した（reader STOP21:01:26.610138 UTC/remaining[]）。N未決定の新fitはnumerical/cache import・data hash・子process・resource/outputより前に拒否する。実permit SHAとcommon freezeはactual cache/dataset/schedule/family、4条件のrecipe、共通seed/zero-head/ordered parameters、元のeligible T-only統計に結び付き、外部scaleや2以外のworker overrideを拒否する。7新規NN0成功を再用し、4凍結patchから19 postimagesを再構成してscoped Rustfmt/Ruffを確認、maintained learner sourceをmainへ受け入れた。これはreal N permit・データintake・fit・trained native資格ではない。[learner source受入れ](../research-data/ai-sigma/teacher-distance-tanh-v1/learner-main-acceptance-v1.json)。必要な直接JSONL intakeは同342.1へ実dispatch済み（turn01a11d53）、既存402MiB source/control内の新8MiBでsourceとsynthetic provenance/error codecを準備する。実pilot raw/cacheの追加変換・生成・forward・fitは実行しない。
 
+### 因果診断優先への実行承認（2026-10-09）
+
+人間は[同じ正本設計](design/nnue-teacher-distance-tanh-v1.md#causal-diagnosis-first-execution-boundary)・[machine plan v2](../research-data/ai-sigma/teacher-distance-tanh-v1/plan.json)への再編と、その限定診断の実行を承認した。これは新しいモデル・結果ではない。最初に既存SigmaD16の保存chronology/log/audit/外部完了を再対局なしで解決し、元のNNUE16を続ける。332/340/345・BEST51資格・64d3/fourD6/TTtailは適用版と限界を保って再用し、過去RuleA結果を新規約/newclockへ混ぜない。旧64d3契約は元Git版、実data/plans/proofsは不変で、新64pilotは起動しない。
+
+新342.9は同じfreelearner、342.10は別のfree実装担当に割当てた。共通の最大8 wholehistory親に失敗例・成功/neutral・合法goal/threefold controlsを入れ、入力/history/規約/model/scale/provenanceと選定制約を凍結する。同じアルゴリズム・完成深さでD/BEST51を比べ、最大3 unique original/D/NN候補手のforced2/4/6、全合法応答を含むcomplete shallow tree、関連leaf成分、別100ms callerを一つの有限campaignとして準備する。deeperD/Sigma/consensusは真値ではなく、未完成はUNKNOWN、intrusive traceをplain CPU寄与へ読み替えない。small-tree単調tanhの順位・FP32tie・学習gradient飽和は別解釈で、単一普遍原因を強制しない。
+
+同じtargetでmainline/offtrajectory分布・実QF1+D入力同一性と異なるhistory/既知teacherのcontradiction・calibration/sign/ranking・保存curve/観測gradient対proxyを限定して診断する。架空のoffpolicy勝敗・未観測gradient・封印labelは使わない。既source345の可能性は実census結果ではない。[独立whole支持](../research-data/ai-sigma/teacher-distance-tanh-v1/causal-resources-v2.json)はengineering2GiB+learner512MiBを新たに発行し、旧保持/TT880MiBを減らさず43,205,390,336B<50GB。source/build/private/input/raw/forward/search/control/failure/review/Git/cleanupを含み、実局面/candidate/tree/node/forward/argv/image/資格/physics/fairleaseの固定前に数値を起動しない。測定はSigma実interval優先で直列、source/savedlightは並行し、whole診断/parent/N/perf349を他仕事のgateにしない。
+
+N・fullprefixschedule・pilot包含/familypartitionは引き続き人間判断で、fullgeneration/fourfits/sixviews96は未選択・未開始。元のA outcome+bypass+F/B margin+bypass+F/C outcome+bypass+raw/D outcome+nobypass+Fと共通zerohead/seed/FP32/batch/LR/reflection/Tstatsは変更しない。六viewを同じdevelopment診断局面に当ててから元96枠へ進める。BEST51logitをrawstepに再解釈せず、newfeatures/policy learning/追加fit/多seed/ラベル/教師/TTcapacity/default/seals/323pauseを追加しない。観測結果と重要な解釈は限定review後にここへ一度統合する。進捗と実START/STOPはBeadsのみを正本とする。
+
 ## Sigmaの同期推論とdeadline接続（2026-10-08通常修正）
 
 方針担当が336の既存move metadataと現行control sourceを照合した。11件すべてで95ms前に合法なcompleted snapshot（81.957226〜94.830665ms）があり、discarded_late_replies=1、engine_error=nullだった。次の同期推論をnow<95msだけで許可し、そのmatching terminal replyが完了するまで返却できないため、推論全費と返却・合法性確認の余裕を確保しない具体的な弱点がある。純推論・packing・schedulingの内訳は保存されておらず、CPU原因やSigmaのvalue品質を断定しない。

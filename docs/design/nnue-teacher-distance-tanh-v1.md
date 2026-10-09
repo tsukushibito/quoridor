@@ -15,44 +15,71 @@ status or certify the unobserved installer peak. Future compiler children bind
 absolute RUSTC/RUSTDOC, explicit RUSTUP_TOOLCHAIN and RUSTUP_AUTO_INSTALL=0.
 Beads remains the source of task state; this document defines the experiment.
 
-Latest human steering selects depth6 for future fixedD teachers and requires completegames/hour with independent-game parallelization before choosing fullN. The old64d3 sequential pilot/source/data remains immutable. [Depth6 throughput and independent scheduling](deeper-teacher-generation-v1.md) defines348 source preparation and one newfour-game/two-worker throughput pilot, strict requesteddepth6/no practical per-move node cap/no100ms teacher timeout. N/fullschedule/pilotinclusion/fullgeneration/fourfits96 remain unselected. All four fits must still share the same finally frozen corpus; oldd3 data doesnotbecome same-policyd6. Sigma347 new-clock live32 retains fairinterval priority; disjoint source prep continues.
+Depth6 is the selected future fixedD teacher policy. The accepted four-game/two-worker observation reports4goals/178eligible rows in externalwhole175.884201586s; the conditional81.872049games/hour is not a fullN bound. Its TTtail analysis and original64d3 contracts/data remain preserved. [Depth6 throughput, tail and scheduling](deeper-teacher-generation-v1.md) is independent of this diagnosis. N/fullschedule/pilotinclusion/fullgeneration/fourfits96 remain unselected, and all four fits must share one finally frozen commoncorpus. Sigma347 actual savedD completion then originalNN16 keeps priority; disjoint source preparation and TT351 proceed independently.
 
-## Current executable boundary
+## Causal-diagnosis-first execution boundary
 
-Implement maintained data/schema/model/search/native interfaces and qualify their
-changed boundaries. Generate and report exactly the 64-game pilot below. After
-measured throughput, costs and coverage, the human chooses full generation
-quantity N. N is currently unset. Do not choose 1000/10000, launch full generation,
-four fits or the 96 development games before that decision. Source preparation
-may continue while N is pending. Eight-way combinations, multiple seeds, added
-data and model/default adoption remain future human decisions.
+Human steering on2026-10-09 first authorized this reorganization and then explicitly authorized **executing** its bounded saved-result, fixed-position and input/history/teacher diagnosis. This edit does not launch a model or numerical job. Task state/ownership/actual START/STOP belongs only to Beads; the seven phase definitions below (intake0 plus six phases1–6) describe questions and decision effects, not a parallel task list. Current task references are learner `quoridor-4lc.342.9` and engineering `quoridor-4lc.342.10`; reuse their existing sessions. Closed332/340/342.1 stay closed and323 stays paused.
 
-The learner owns data labels/cache/Python training, model and export; search owns
-AI/NNUE score, terminal, TT and native interfaces; arena owns runner generation,
-clocks, outcome auditing and pilot controls. Each writes a separate managed
-worktree based on `e2e7181`, with only the integrator changing main/Git/index.
-Consumers use stopped, bound schema/interface handoffs; no owner-wide idle or
-reply-only ACK is a dependency. Independent reviews cover changed label/split,
-math/score and pilot evidence boundaries; reuse unchanged passing proof.
+The [separate causal whole support](../../research-data/ai-sigma/teacher-distance-tanh-v1/causal-resources-v2.json) issues engineering2GiB and learner512MiB, including source/build/private/input/dependency identities/modelcalls/search/raw/control/TMP/failure/review/Git/cleanup. It holds every existing upper/failure/fee/UNKNOWN and adds2,684,354,560B to40,521,035,776B:43,205,390,336B<50GB. TT351's880MiB pays for none of this. Wall/CPU/continuous peaks remain UNKNOWN until observed, not predicted from D6. Exact workload/source/image/qualifiedinput/resource/physics/peer/soleCargo/canonical nonblocking lifetime guards precede numeric entry; one approved method does not mean unbounded defaultsearch. No reply-only human method ACK is added.
 
-The D-only pilot needs its actually consumed generator/label/chronology and
-integer-distance boundaries. It does not wait for unconsumed six-view NNUE score
-implementation or whole342.2 completion; unchanged fixed-D interfaces may reuse
-their passing source proof. Later time-controlled evaluations explicitly bind
-[343's thinking-clock contract](sigma-deadline-control-repair-v1.md): authority
-receipt of the immutable Action within100ms including communication, legality
-outside thinking and admitted-work drain before opponent time. Old331/336
-full-caller acceptance is historical and is not silently inherited.
+### 0. Reuse qualification; finish original Sigma cohorts first
 
-## Fixed-D pilot and data
+**Question → input → metric → interpretation → next decision:** consume valid BEST51 Torch/native/input/scale/math/error/undo proofs and the accepted64d3/fourD6/TTtail evidence; inspect only affected current couplings. FIRST resolve original savedSigmaD16 chronology/log/audit/external completion **without replaying its16 games**, then original authorizedSigmaNN16. Clock/capture/process cleanup/scheduledUNKNOWN/actual finalized controller facts determine acceptance; nativeexit0 or sourceclear alone does not. OldRuleA D-vs-NNUE results remain historical and cannot merge into current-rule/newclock cohorts. Sigma outcomes are not a model-quality oracle. See [existing findings](../research-findings.md#sigma新時計の実live64資格2026-10-09),347.3/.4 and retained failed19524 evidence. No newwarmup/qualification/expiryrefresh is inferred. TT351 remains independent and perf349 remains plan-only, never a new gate.
 
-Both sides use frozen original D(a0,b8), alpha-beta depth3, max_nodes100000, PVS,
+### 1. First new diagnostic: one bounded shared target
+
+**Question:** distinguish evaluator/leaf choices, limited horizon and actual work/time explanations. **Inputs:**332 savedturnpoints,340 decomposition and345 gaps are inputs/hypotheses, not causes or suites to repeat. Learner owns one shared SHA-bound target of **at most8 original whole-history parents**: failure witnesses plus successful/neutral controls and inexpensive legalgoal/threefold anchors. All evidence is originalOPEN or explicitly syntheticlegal qualification, never sealedlabels. Freeze full prefixes/history/rules/source/model/scale/originalprovenance and strata/selection limitations before new output. Validate current-context mapping of historicalRuleA witnesses; unsupported/missing history remains UNKNOWN, not reconstructed truth. Do not treat an outcome-selected diagnosis as an independentstrength test.
+
+**Metrics:** retained nodes/completeddepth/cutoff/PVS/TTcapacity/work/clock/stage, input/parent identities and knownmissing metadata. Missing leaf timings/policy/history stay UNKNOWN. Use currentSigma saved output only after finalqualification and never as a model-quality oracle. **Decision effect:** define which limited checks actually require new forwards, comparison controls and data-input census in the SAME target; no three loosely coupled experiments or alternativecase selectors.
+
+### 2. One fixed-position causal campaign
+
+**Question:** does the wrong choice persist at matched completeddepth or mainly at same time? **Inputs:** SAME parents, unchanged algorithm/rules/fullhistory/terminal/PVS/score/TT setup, fixedD and acceptedBEST51. Compare same requested **and COMPLETED**depth; differingnodes are expected, not arithmetic speed. Enumerate a manageable common completelegal depth2 tree, including ALLlegal responses or explicitly INCOMPLETE; no hiddenheuristic pruning. Its minimax/ranking/monotone-transform/terminal/tie reference compares evaluators, not trueoptimalplay.
+
+For each parent freeze at most3 unique firstmoves: originalactual, genuineD proposal and genuineNN proposal, union without duplicate work. Reuse valid savedproposals; if unavailable, a predeclared depth2 proposal stage belongs to this SAME campaign/countbudget, with its selection rule fixed before outputs and resulting IDs frozen before deeper/forced/time outputs. Reuse matching depth2 results; no extra proposal retry or outcome-based replacement. Investigate forced firstmoves on a **2/4/6 requested ladder where supported**; incomplete remainsUNKNOWN, no loweringdepth to rescue completion. DeeperD/Sigma/consensus is a qualified reference hypothesis; exactterminal witnesses are stronger.
+
+Trace only relevant leafpaths/subtree summaries: canonicalD/residual/pre-posttanh/sign/margins/saturation/terminal and targeted full/delta/parent invariants. Preserve BEST51's actual historical units/model; the future raw-step residual contract below is not its reinterpretation. Same-complete-tree monotone tanh ordinarily preserves ordering; distinguish FP32ties and learning-gradient saturation from a tanh-bug claim. Rootstatic and completedminimax differ. Keep intrusivetrace/validation outside performance timers and do not infer uninstrumented causalshares.
+
+**Separate SAME-parent100ms comparison:** use authorityreceipt thinking, legalityoutside, configured5ms notificationreserve, immutableAction/matchingreply/drain and opponent afterBOTH independent receipt/drain. Record actualcompleteddepth/nodes/TT/work/setup/delta/head/wholecost, observeroverhead and frozenTTversion. This does not add fullgames/BEST51-vs-D strengthgames. **Limits:** source must freeze an exact smaller workload within <=192 natural/forcedsearchcalls (including reused proposals), <=16 callerwindows, percall8Mnodes/aggregate256Mnodes, <=8 complete depth2 trees/separate1M expanded/leafnodes, <=128 tracepaths/256 standalone tracescores. Budgetexhausted/unsupported cases stay in planneddenominators asUNKNOWN; no repeats/warmups/calibration/sweep. These are ceilings, not executed work or wall bounds.
+
+**Completion/decision:** report supported mechanism(s), alternative explanations and scope. Zero improvement or no singlecause is valid; do not demand a universalcause before other useful work.
+
+### 3. Parallel bounded data and learning diagnosis
+
+**Question:** which exposure/input/objective/gradient facts narrow interpretations? **Inputs:** mainline versus legalalternative/searchleaf samples with defined tree/corpus selection and actualteacher availability; preserve family splits and evaluation-book separation. Source/savedlight preparation proceeds in parallel while actual measurements serialize. At most4096 existingOPEN labelled rows,128 offtrajectory inputs and256 new qualifiedBEST51 fullforwards are proposed contained ceilings; exact selected inputs/forwardcounts must be frozen before entry, not inferred from this edit.
+
+**Metrics:** stage/stocks/contact/neargoal/teacher exposure/features/domain, calibration/sign/move-ranking as well as compatible teacherMSE. Count actual QF1+D input equality across distinct countedhistories and knownteacher labels/outcomes/families when available, not a boardhash proxy or claimed345 result. No fabricated offpolicy winninglabels. Separate teacher-versus-greedy/minimax objective, replay-free savedlearning curves, actual observedtraining gradients and saturation: artificial1-v² is not a measured gradient. Missing teacher/gradient evidence staysUNKNOWN.
+
+**Decision:** these targeted observations narrow next corpus alternatives, not a wholecorpus audit/perpetual prerequisite/newtraining. Source345 is a hypothesis; no arbitrary32MiB historicalreadlimit becomes corpus truth. Freeze exact namedinputbytes/counts/coverage under separately supported input64MiB before reading. Board-only history mismatch may motivate a HUMAN feature/history choice, never silentfeature addition or repetition weakening.
+
+### 4. Human chooses N, schedule and family/pilot inclusion
+
+**Question/input:** what fullN/fullprefixschedule/pilotinclusion/familypartition is useful, given D6 measuredrate/tail/skew and useful preceding diagnostics? **Metric/interpretation:** conditionalfourprefix82games/hour is not a reliablefullN bound and oldd3 forecasts are not d6 prices. Preserve exactdepth6 teacher policy. Price fullsource/generation/corpus/cache/fits/qualification/evaluation/failure/review/Git/cleanup. **Decision:** HUMAN still selects these; importantteacher/source/features/horizon/scale changes return alternatives and wholecost. Do not gate sourceprep/TT/Sigma on whole diagnosis orparentclosure.
+
+### 5. Unchanged common-corpus four fits
+
+The four fits below remain the main hypothesis tests after HUMAN N and supported commoninputs. Keep fresh commonzerohead parameters/seed/topology/FP32/batch/LR/reflection/order/T-onlystats/selection/terminal/scoreunits EXACTLY unchanged. Sixviews A-F/A-raw/B-F/C-raw/C-F/D-F are views, not extra fits. No BEST51logit-to-rawstep reinterpretation, extra labels/fit/eight-way/multiseed. Native and affected legaldelta/error/cancel qualifications precede comparisons; teacher-specificMSE is not a cross-objective ranking. Metrics and nextdecisions combine supported errors/sign/calibration/ranking/gradients/saturation and wholecost, with no newtraining from phase3 alone.
+
+### 6. Same held diagnostic positions, then original96 slots
+
+Evaluate all qualifiedsixviews on the SAME frozen diagnosticparents, held as development/diagnostic even aftertraining, never promoted tosealedfinal. Report same-depth choice/forcedalternative regret where supported, stratified teachererrors/sign/calibration/ranking, gradients/saturation and wholeinferencecost/completedwork. Then the existing96 fixedDslots on frozenbook/newclock, preserving plannedUNKNOWN/errors/late/cap and wholefees. One seed/correlatedbook supports factor directions only; independentgames/multiseed/finalpromotion remain HUMAN choices. No causal-campaign universalproof gate or extra policy-valueSigma ablation is added.
+
+## Ownership and historical contracts
+
+Integration alone writes Main/Git/index. Learner writes its newartifact namespace in the existingowned learnerworktree; disjoint engineering writes the managed diagnosticworktree. Shared target publication/actualreaderSTOP and consumedversion are concrete dependencies, not all-roleACK or wholeN/review gates. Changed production/input/measurement correctness and important causal interpretations get only a narrow stopped independent question; unchanged validproof is reused. Same reviewers handle routine fixes, no perrun audits/periodic supervision.
+
+The original plan is preserved in Git as `89705fc1f7fdebe52bdaa8fc4da626e3d4997f41:research-data/ai-sigma/teacher-distance-tanh-v1/plan.json`; its64d3/pilot/fittingcontracts and original usedoutputs remain immutable. The current machineplan keeps the original pilot object verbatim but marks it HISTORICAL ONLY; do not dispatch another64-game pilot. The [accepteddepth6 fourgame evidence](../../research-data/ai-sigma/deeper-teacher-generation-v1/bounded-four-acceptance-v1.json) and [depth6 design](deeper-teacher-generation-v1.md) are separate. Common corpus labels/splits and futurefits below remain unchanged.
+
+## Historical64d3 pilot and unchanged common-data contract
+
+The historical64-game contract (already executed, never relaunched by this revision) uses frozen original D(a0,b8), alpha-beta depth3, max_nodes100000, PVS,
 TT4096. There is no per-move wall timeout. Solver, continuation ordering and
 contact-distance correction are OFF. Preserve actual completed depth, limits,
 nodes and existing root value without an additional search. Incomplete search
 must not be described as completed depth3.
 
-Schedule four new prefixes at each length4..19, exactly64 games. Prefix RNG seed
+That original schedule requested four prefixes at each length4..19, exactly64 games. Prefix RNG seed
 is20261008; generation is legal and target-blind. Use at most32 candidate attempts
 per requested prefix, reject terminal prefixes and exact/reflected duplicate
 prefixes, and preserve planned failures if attempts are exhausted. Do not use the
@@ -85,8 +112,7 @@ generator/source/family-partition provenance. Existing sealed labels stay unread
 
 Report whole throughput/costs, completion/draw/UNKNOWN fractions, distinct and
 duplicate positions, pawn-contact, wall-stock, opening/endgame coverage,
-row/storage quantities and priced full-volume options. The human N decision
-follows this report; pilot costs are not refunded.
+row/storage quantities and priced full-volume options. This retained historical report informs scope only; HUMAN N now uses the separately accepted depth6 evidence and useful diagnostics. Historical pilot costs are not refunded.
 
 ## Four fits after N
 
@@ -162,9 +188,9 @@ evaluations, cutoffs and real work changes. Shallower work is not speed and fewe
 nodes is not arithmetic throughput. Isolate quantitative jobs from builds,
 browser and CPU/GPU analysis; do not bundle profiling/ordering/solver experiments.
 
-Only after N and all six frozen native/caller qualifications: six ×16=96 planned
+After HUMAN N/common corpus and all six frozen native/caller qualifications: six ×16=96 planned
 development games versus unchanged fixedD, the existing OPEN eight-family
-colour-paired book,100ms total/5ms reserve, realTT4096/thread1/equal CPU and current
+colour-paired book,100ms authorityreceipt thinking/legalityoutside/configured5ms notificationreserve and matching drain, realTT4096/thread1/equal CPU and current
 legal-third/goal-first/200UNKNOWN rules. Keep failures/late/cap/UNKNOWN in planned
 denominators and complete-pair bounds; no conversion to losses/draws or reruns.
 One seed/small correlated book supports no Elo, general superiority or default
@@ -179,7 +205,6 @@ immutable for readers/jobs, one canonical nonblocking Cargo writer, fresh
 physical/resource/input/private/proof guards and isolated actual fair intervals.
 Use the existing finite job/wait/cleanup/notification procedure, no periodic LLM
 supervisor or duplicate status framework. Raw/failure/source/private/TMP/review/
-Git/cleanup costs all belong to the supported whole phase. Main full phase is
-gated by explicit N, then actual bindings/readerSTOP/physics/soleCargo/fairquiet;
+Git/cleanup costs all belong to the supported whole phase. Fullgeneration/fourfits/sixviews96 are gated by explicit N/schedule/pilot partition and supported commoninputs, then actual bindings/readerSTOP/physics/soleCargo/fairquiet. The newly approved bounded diagnostic has its own frozen workload/resources/qualifiedinput guards and does not wait for N;
 there is no additional human method ACK. Paused323, seals, historical results,
 fees, UNKNOWNs, old models and production defaults remain unchanged.
