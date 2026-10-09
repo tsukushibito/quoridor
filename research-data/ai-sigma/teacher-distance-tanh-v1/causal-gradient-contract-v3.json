@@ -1,0 +1,13 @@
+{
+  "schema": "quoridor.nnue-causal.gradient-diagnosis.v3",
+  "authority": "Approved actual gradient/saturation/data diagnosis, no training or optimizer step",
+  "parent_resources": "causal-resources-v2.json",
+  "same_learner_whole_B": 536870912,
+  "additional_global_B": 0,
+  "max_current_loss_gradient_probes": 32,
+  "included_in_fullforward_ceiling": 256,
+  "loss": "Only exact accepted BEST51 compatible original objective/units with actual known scoped labels; no surrogate offpolicy labels, no future rawstep loss reinterpreted as currenttraining",
+  "immutability": "Parameter/statistics/optimizer absence verified beforeafter; eval-mode diagnostic autograd, no update/fit/export/new selection",
+  "interpretation": "This is a current specified-loss gradient at held BEST51, not reconstructed historicaltraining gradients. Missing historical gradients/knownlabels UNKNOWN.1-v*v remains a proxy. Forward/backward/capture/drop costs explicitly counted outside performance clocks.",
+  "entry": "Same frozen target/input/source/qualifiedcoupling/resource/fair/lifetime predicates; label-unavailable cases refuse and retainUNKNOWN, no replacement"
+}
