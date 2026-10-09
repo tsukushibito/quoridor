@@ -1,0 +1,23 @@
+{
+  "schema": "quoridor.tt351.Root-retention-forward.v3",
+  "issue": "quoridor-4lc.351",
+  "issued_at": "2026-10-09T10:29:40.245598+00:00",
+  "parent_resources": {
+    "path": "research-data/ai-sigma/search-optimization/tt-hash-reuse351/cost-caller-resources-v2.json",
+    "SHA256": "c7ddad599a43d363908d6cb61657d6f01a6a0065dd54e9071e71da2106cfd980",
+    "immutable": true
+  },
+  "original_Root_component_B": 4194304,
+  "old_Root_phase_upper_held_B": 131072,
+  "additional_forward_classification_B": 393216,
+  "new_cumulative_Root_phase_upper_B": 524288,
+  "component_check": true,
+  "actual_disclosed_Git_commit_plus_five_blobs_sample_B": 159744,
+  "disclosure": "The first131072B Root phase forecast underestimated the newly stored findings Git blob. The sampled commit+five file objects alone are159744B; initial narrow forecast is not reported as passing or retrospectively expanded. All original4MiB Root/Git component and880MiB whole were already supported. Before further Root retention/control/Git writes, retain old131072 and add393216 within that4MiB. Existing docs/source/assets/foreign Git/UNKNOWN remain held; no deletion/lower-sample credit or global increase. Directory/tree/new metadata/dispatch/backup controls included in forward512KiB.",
+  "global_upper_unchanged_B": 40521035776,
+  "TT_whole_unchanged_B": 922746880,
+  "target_private_source_TMP_review_raw_failure_unchanged": true,
+  "source_build_numeric_authority_unchanged": true,
+  "numeric_entry_now": false,
+  "no_new_scope": "Root metadata/archive/Git retention only, no caller workload/count expansion"
+}
