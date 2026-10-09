@@ -704,6 +704,16 @@ guardianのcandidate bd399はnon-admittingのまま。実際のsuccessful author
 
 Rootは29固定参照945,981Bと、admitted packetが指定する小さいconfig2件/campaign1件のSHA/size/modeを照合し、保存controller/guardian/publication・64 census・case別時刻・元formulaを確認した。ELF/model/library payload・native/backend/Search/testsの再実行はない。関連した独立source review39f/e844を再用し、成功資格を繰り返すreviewや追加callを作らない。64call枠は使い切り、原承認の次工程は同ownerの固定D16 FIRST→採用済みBEST51 NNUE16 SECOND。凍結book・双方の同じ100ms authority semantics・equal CPU/thread・5ms reserve・K64・solver/order/contact OFFを維持し、各実入口でsource/private/backend/evidence/expiry/physical/resource/peer/nonblocking leaseを新鮮に確認する。ゲームはまだ未実行で、whole348・この受入れのACK・N・Main closure待ちをgateへ追加しない。新しいcontroller境界や重要な比較結論だけを固定STOPPED入力で関連確認する。parent347・full N/fits96・323pause・seals・default weightsは維持する。
 
+## 新時計の固定Sigma対D/BEST51 cohort限定結果（2026-10-09）
+
+[停止済み結果の正本受入れ](../research-data/ai-sigma/sigma-receipt-reevaluation-v1/bounded-cohort-acceptance-v31.json)に、347.3/347.4と独立347.5の重要な解釈確認を取り込んだ。予定D16はSigma16勝・0敗、NNUE16はSigma15勝・1敗（loss slot13）、両群draw/UNKNOWN0・完成色交換pair8。共通の固定OPEN8families、book/seedに相関がある限定development観測であり、Elo・普遍的棋力・D対NNUEの順位・原因・速度・default採用を示さない。保存native2000 resamplesは再実行せず、D[1,1]は経験的退化で確実性の証明ではなく、NN[.8125,1]もexchangeability仮定と未補正のshared lineageに依存する。
+
+双方100ms authority-receipt時計、合法性は外側、設定5ms通知reserveとdrain、固定CPU/thread/TT/bookを保持した。保存clock checksはD988/NN771 accepted、rejected/costdisproved0。硬いreal-time保証・scheduler isolation・continuous peakはUNKNOWN。旧RuleAの結果と混ぜない。original D19524はFAILEDと失われた1MiB stdoutのUNKNOWNを保持し、別の実成功saved audit b181とcanonical publication6b4aから保存Dのauthorityを得た。Dゲームを再実行して失敗を置換していない。
+
+NN467fc884はcontroller12:44:24.560451〜12:45:56.732658 UTC、source STOP12:45:56.652510、whole92.188595423秒、arena/audit/recover3命令のdirectwait/fullcapture/cleanup[]を外側実完了まで確認した。両群のゲームは各一度。START通知済みでnative科学START UTCはUNKNOWNのまま、controller/observer時刻と区別する。返却完了とdisk pending/attempted、全旧失敗RAW・cap/floor・maskを保全する。既知Arena controller計454.485958347秒、Main33.976906432秒、保存collection1.838116203秒は別記し、nestedを加算しない。
+
+独立review81b0bb1c/control7d1c7bf2はblockers0/ordinary0、実reader STOP13:32:05.481676 UTC・remaining[]。統合は59固定metadata参照741568BのSHA/size/modeを確認し、native/model/library payload・ゲーム・audit・bootstrap・旧成功suiteを呼ばない。347.3/347.4だけがowner workflowで閉じ、parent347・N/fullgeneration/fits96・323pause/seals/defaultsは維持する。受入れやparent closureを次の独立TT/診断/353の入口gateにしない。
+
 ## 深さ6観測後の限定perf計画
 
 2026-10-09、人間はremaining optimization ROIの追加分析を**計画のみ**承認した。後続はBeads `quoridor-4lc.349` にdeferred登録し、[既存設計内の契約](design/ai-nnue-optimization-agenda.md#深さ6の限定perf-follow-up計画)へまとめた。選択済み348.2の深さ6parallel throughput観測後に費用を具体化して実行判断へ返す。Sigma新時計live資格とD16/NNUE16、深さ6固定4局pilotはこの後続を待たない。SAME探索ownerを将来再用し、旧333/337再開・今のdispatch・numerical entry・hardware予約は行わない。

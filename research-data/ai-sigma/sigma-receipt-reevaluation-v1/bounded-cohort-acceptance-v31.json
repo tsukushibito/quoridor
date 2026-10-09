@@ -1,0 +1,396 @@
+{
+  "schema": "quoridor.sigma.fixed-cohort-acceptance.v31",
+  "issue": "quoridor-4lc.324",
+  "owner_leaves": ["quoridor-4lc.347.3", "quoridor-4lc.347.4"],
+  "accepted_at": "2026-10-09T13:45:31.388810+00:00",
+  "Root_phase_inclusive_upper_B": 131072,
+  "Root_phase_inside": "original Sigma control256MiB/whole4GiB; all prior holds retained",
+  "target": {
+    "path": "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-completion-v31/stopped-result-review-target-v31.json",
+    "SHA256": "e8546041e71a7c36b7c4eca4aa75f7ac1c80ca5739cc6b39e091a26128b48a1f",
+    "bytes": 17730,
+    "mode": "0644"
+  },
+  "review_control": {
+    "path": "/workspaces/quoridor/.artifacts/sigma-receipt-review347-v1/cohort-completion-v31/completion-control.json",
+    "SHA256": "7d1c7bf28df057b8c4c4633c86506f286839e3dbce7b37d2e525409b5c5b9ee7",
+    "bytes": 2695,
+    "mode": "0644"
+  },
+  "review_findings": {
+    "path": "/workspaces/quoridor/.artifacts/sigma-receipt-review347-v1/cohort-completion-v31/findings.md",
+    "SHA256": "81b0bb1cac0cf9aa780cea461d456359f34337337cf551e0ea20a0d972edf480",
+    "bytes": 8228,
+    "mode": "0644"
+  },
+  "producer_report": {
+    "path": "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-completion-v31/report.md",
+    "SHA256": "abbeb3b90a14a0af3acb7c867ee577fe3d229dd45b7d8eca149e7f84114c3d19",
+    "bytes": 6795,
+    "mode": "0644"
+  },
+  "producer_handoff": {
+    "path": "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-completion-v31/final-handoff-v31.json",
+    "SHA256": "f2c602a53dbc7bc748bb3bd2dd4b455e821270d7c7492abe022ae4c485a54da5",
+    "bytes": 1965,
+    "mode": "0644"
+  },
+  "all_selected_SHA_size_mode_match": true,
+  "selected_count": 59,
+  "selected_bytes": 741568,
+  "selected_refs": {
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-completion-v31/report.md": {
+      "SHA256": "abbeb3b90a14a0af3acb7c867ee577fe3d229dd45b7d8eca149e7f84114c3d19",
+      "bytes": 6795,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-completion-v31/related-review-question.md": {
+      "SHA256": "43f0c6915d08897a4d805c34018648e1080dd4eceb88892930913c24c848355e",
+      "bytes": 1601,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-completion-v31/saved-observations-v31.json": {
+      "SHA256": "ece9fb08082ede668f218e3be726c95884b1352c103f7fdaf101c144cb8a5a63",
+      "bytes": 36498,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-completion-v31/saved-collection-STOP-v31.json": {
+      "SHA256": "ffe30702738bfd8bd8362d968f1dc97dc52dffc0075f8e3427d532afbb984d89",
+      "bytes": 1329,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-completion-v31/collect-stopped-cohorts-v31.py": {
+      "SHA256": "a3df978097338063a6a4afc4e03e9ad43b46937c2a13206683df5ead4b8ab508",
+      "bytes": 10561,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-completion-v31/saved-collection-guard-refusal-v31.json": {
+      "SHA256": "7ec221604212974c0e8b8eb804c1a70e9e2107a1097973ba925a25ae902efe1a",
+      "bytes": 831,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/NNUE-entry-recovery-v30/NN-process-release-STOP-v31.json": {
+      "SHA256": "3d7008039a057b65c412e5f1535505e72d3c0d4ab6a60a218c9a0371ccbd05a0",
+      "bytes": 4945,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/NNUE-entry-recovery-v30/admission.actual-v30.json": {
+      "SHA256": "a988c70ad258a46edc0d99f213f2a3e8f3f7ceb4171b204b712d73416141b73f",
+      "bytes": 94607,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/NNUE-entry-recovery-v30/actual-NN-science-START-v30.json": {
+      "SHA256": "df1ab5b33960140e7c798b22b6f673d45fbcc65daeaf37cd1d6a1339bd4d125a",
+      "bytes": 1925,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/NNUE-entry-recovery-v30/actual-START-dispatches-v30.json": {
+      "SHA256": "e5ad86f2ae2be715d66363b7b47a681c7a47d5d70a67f3e49b9677b744adb143",
+      "bytes": 1313,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/NNUE-entry-recovery-v30/forward-control-growth-deviation-v30.json": {
+      "SHA256": "97dc07147e2e42112f67dc9e299476740687b80a6fb678fa3421770764a38563",
+      "bytes": 1089,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/NNUE-entry-v28/failed-qualified-STOP-v28.json": {
+      "SHA256": "0dd9b7b303a6b23f637b74049a4daad29abc6ceab3ce8b94b596ff003022d88b",
+      "bytes": 2623,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/NNUE-entry-recovery-v29/failed-qualified-STOP-v29.json": {
+      "SHA256": "0a74e6348a360c8ec23f19a86f8f7aba2eb91d072aff8dcbe10f1465c816cee6",
+      "bytes": 2639,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/D-completion-v22/process-release-failed-D-STOP.json": {
+      "SHA256": "e63aaff17aee44e1a8536b908550e09e3fe5d22e3659ca4754bc9af64e6a5616",
+      "bytes": 6036,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/saved-audit-entry-v26/process-release-STOP-v26.json": {
+      "SHA256": "42d3c7922f847dd40e0f80414bdd808ff78afe8d3f57d24c54dc4d93bee8072a",
+      "bytes": 4261,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/saved-audit-entry-v26/admission.actual-v26.json": {
+      "SHA256": "8184dd21e882ad5e81288134b691dc6925c129efa3ca7e93ed231e05299a23b7",
+      "bytes": 83833,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/saved-publication-entry-v27/qualified-publication-STOP-v27.json": {
+      "SHA256": "3e5ee5acebec14f18e24d693090851ca39053ec441454070ecf5f158854064ce",
+      "bytes": 3551,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/saved-publication-entry-v27/completed-D-descriptor.actual-v27.json": {
+      "SHA256": "f41c2fbd586e1fd1dab6c49203f5e24762276b83110a9ae90fe3cd6cc7ea4f0a",
+      "bytes": 9197,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/saved-publication-entry-v27/raw-evidence-bundle-v27.json": {
+      "SHA256": "e6ac11bac680ce2ff2f87b4c5c192a3beb7d1214dddc8eca3068a5a2d9bb5039",
+      "bytes": 2790,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/saved-publication-entry-v27/admission.actual-v27.json": {
+      "SHA256": "2a2772ad6e4dbb233fe5675f55745e89227a2dd6a907a5fe33f398d547419a29",
+      "bytes": 87221,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/saved-D-route-preparation-v24/stopped_science.py": {
+      "SHA256": "b3a15db4d0e2bbda3f765c3c6b6b451617e28bb7c59a09af6d35e951cc6286f7",
+      "bytes": 36424,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/saved-D-route-preparation-v24/cohort_nnue_worker.py": {
+      "SHA256": "4c3900a772811b3949604722092c2782b45f72c522d13c352f7e21c537223add",
+      "bytes": 32741,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/saved-control-repair-v23/cohort_worker.py": {
+      "SHA256": "5d76ab7c1cbea4f2c72442e8bc495c23dc1a481b34cd66689e68462613821138",
+      "bytes": 32317,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-repair-v18/cohort_evidence.py": {
+      "SHA256": "adc986dc7971994563ec64a0b6bd34d58c392da23f395d5fec93f56eda1f3670",
+      "bytes": 20861,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-repair-v18/whole-forecast-v18.json": {
+      "SHA256": "2c92eb341e13f4ee2507357f0d10d40d6748975607277a6d3f3375c8bac8111a",
+      "bytes": 2629,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.artifacts/sigma-receipt-review347-v1/saved-D-controller-repair-v25/completion-control.json": {
+      "SHA256": "1f590543f1c998ae4203b5290997d88140cbe9e2a989ffd9001f37b190d8ef8b",
+      "bytes": 3628,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/saved-D-controller-repair-v25/source-review-target-v25.json": {
+      "SHA256": "6cd49933c19f9400bb72add4b0aa17291f2042f47d5b73051f1b5827748801d3",
+      "bytes": 14614,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-runtime-nnue-recovery-v3/config.json": {
+      "SHA256": "eec08c5d9327917b386e9a56ac7a81f7498219ebcd8cfa7f9fa19b84ddc1808e",
+      "bytes": 1012,
+      "mode": 384
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-runtime-nnue-recovery-v3/state.json": {
+      "SHA256": "459f5eec922b3029a909a067e9e283b220fe2b2bb123241f060e65c576176ec5",
+      "bytes": 709,
+      "mode": 384
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-runtime-nnue-recovery-v3/result.json": {
+      "SHA256": "cf31941b4b660609fd172502fc3df29a3efba30172f7905ff479ec53daea8115",
+      "bytes": 508,
+      "mode": 384
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-runtime-nnue-recovery-v3/output.log": {
+      "SHA256": "92a8cff185056725d5ba5524ca6305ac0a2a5956293fc97bc20ee5aca5f085d5",
+      "bytes": 10765,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/saved-audit-runtime-v26/config.json": {
+      "SHA256": "70faf88debcaaa8ceb947c416bdf3db21398e7f6fb9907bcb6563d0ae23dab3f",
+      "bytes": 1004,
+      "mode": 384
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/saved-audit-runtime-v26/state.json": {
+      "SHA256": "6e4e866667f586d0e09ff6c13a4246d82f35890276dacebda072e3ca998cb6e5",
+      "bytes": 709,
+      "mode": 384
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/saved-audit-runtime-v26/result.json": {
+      "SHA256": "608e279116623575d6755733215c07d85c4fac7b94ae929ab6c463dd66f1cfc9",
+      "bytes": 507,
+      "mode": 384
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/saved-audit-runtime-v26/output.log": {
+      "SHA256": "2676995e61841aeb28344819782c91ddf84332520ba69ceb3ae1b681a47420e9",
+      "bytes": 6404,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/saved-publication-runtime-v27/config.json": {
+      "SHA256": "544bd7e29e7d83cb61f963f8bbc92548b4cc40632ec2d9076b375848f0ceb79c",
+      "bytes": 1512,
+      "mode": 384
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/saved-publication-runtime-v27/state.json": {
+      "SHA256": "2de0bbdd3b93935dd4c7b02688e7665aaf94c13f25738c9d4236f17993117215",
+      "bytes": 709,
+      "mode": 384
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/saved-publication-runtime-v27/result.json": {
+      "SHA256": "3669d18515bcfc74e4e9f08f226d04e80ee32c85e0ad2e22bde3ca9ddcbf7495",
+      "bytes": 505,
+      "mode": 384
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/saved-publication-runtime-v27/output.log": {
+      "SHA256": "8724369d8620ee93a80cf34e31231cd05238ade770988917f72fcf257c4d0d1f",
+      "bytes": 254,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-nnue-v1/control-v30/cohort-result.json": {
+      "SHA256": "0a70c98695dc6ba7db5a3934794844738a457539c958c80b6d87328bdae06744",
+      "bytes": 13881,
+      "mode": 384
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-nnue-v1/control-v30/arena.process.json": {
+      "SHA256": "ddb7b74f66056e42f7fcd72b99a727ee6c5e3a22109841eebc4550e8ed54eb63",
+      "bytes": 1416,
+      "mode": 384
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-nnue-v1/control-v30/audit.process.json": {
+      "SHA256": "bd97ddc78a7b4671fc4f9dff15050474d643f05d95d88680f9f849c94d2acf18",
+      "bytes": 1093,
+      "mode": 384
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-nnue-v1/control-v30/recover.process.json": {
+      "SHA256": "e1ef0298f71c776cc1fdc0a7c2bde830c287ccbf8de405038adb969ddcecabcc",
+      "bytes": 1099,
+      "mode": 384
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-nnue-v1/control-v30/audit.log": {
+      "SHA256": "426c4bd4164f0e8856b9501802a1fca7932c1d6a3f018731c8a3dc09773c03f1",
+      "bytes": 1999,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-d-v1/saved-audit-control-v26/saved-completion-result.json": {
+      "SHA256": "3e15f7fdb3c5e4b6b7a87d77fe339220e36dad5d760e86882b91781a9e6c1957",
+      "bytes": 7946,
+      "mode": 384
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-d-v1/saved-audit-control-v26/audit.process.json": {
+      "SHA256": "7f11032b8041da3e8b851908fd2a16c4c330b8b5bda1b61b97a47a10354ea6bd",
+      "bytes": 1089,
+      "mode": 384
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-d-v1/saved-audit-control-v26/audit.log": {
+      "SHA256": "de68912eeac836b6d61349daf27c6301c2c2d821422499db84cf558ace357986",
+      "bytes": 1960,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-d-v1/run/manifest-start.json": {
+      "SHA256": "52b8e831b71012b36f333e81ed2da084088a41462433f0152983904e5c6520c6",
+      "bytes": 53923,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-d-v1/run/config.json": {
+      "SHA256": "8007c46047375f22379a4f6cc1dfe7b9aa3f064e633d1c092d028bc1654d5ab6",
+      "bytes": 19820,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-d-v1/run/admission.json": {
+      "SHA256": "e3e2cd9a5184ca7d64da66801ad1340d81c244b81454b58648e25f89cef96ecd",
+      "bytes": 206,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-d-v1/run/evaluator-identities.json": {
+      "SHA256": "a03974e3490fa777c24a3601f8d0e28518d774d9899a1c2e399cc125f8792254",
+      "bytes": 458,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-d-v1/run/planned.json": {
+      "SHA256": "e132afe502a61932779e1853876ec0f88b88e2f135ea209dbfa890c984d900d1",
+      "bytes": 13981,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-d-v1/run/games.csv": {
+      "SHA256": "553440da708ffd53f9170299aa3df9df4b74d4c78546a5172e82a6a2c32364e7",
+      "bytes": 1223,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-nnue-v1/run/manifest-start.json": {
+      "SHA256": "6ff64ef9dc1dde4b84dfb295fbc621adf0630d7e6f0d06b6dda50270e738a744",
+      "bytes": 54102,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-nnue-v1/run/config.json": {
+      "SHA256": "bcf4118e637a40ae6e5f32e16558cdca1f1357d1439abf2cc61936d8b5493c02",
+      "bytes": 19952,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-nnue-v1/run/admission.json": {
+      "SHA256": "d839130c17d81d173b8e6e6c58e9f725a06968c757bbbfd70323944687359216",
+      "bytes": 206,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-nnue-v1/run/evaluator-identities.json": {
+      "SHA256": "23c6ee7b8b1ff3e9966942f1564438b72acd59280c360a2b8f2f13fa0f5dd61a",
+      "bytes": 458,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-nnue-v1/run/planned.json": {
+      "SHA256": "b224e2d6eb4404267eff8fba3d56e3b16cf76f9d65c07556f773ac3226a2db7f",
+      "bytes": 14029,
+      "mode": 420
+    },
+    "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/cohort-nnue-v1/run/games.csv": {
+      "SHA256": "32dd773aa831de56d5e0dcaee90ccc307181710c4632a359c939f46a0610937d",
+      "bytes": 1270,
+      "mode": 420
+    }
+  },
+  "counts": {
+    "D": {
+      "planned": 16,
+      "started": 16,
+      "goal": 16,
+      "sigma_wins": 16,
+      "sigma_losses": 0,
+      "draw": 0,
+      "UNKNOWN": 0,
+      "complete_pairs": 8
+    },
+    "NNUE": {
+      "planned": 16,
+      "started": 16,
+      "goal": 16,
+      "sigma_wins": 15,
+      "sigma_losses": 1,
+      "draw": 0,
+      "UNKNOWN": 0,
+      "complete_pairs": 8
+    }
+  },
+  "scope": "Eight fixed OPEN families, one correlated book/lineage and shared seed; colour-paired conditional development observations only.",
+  "saved_bootstrap": {
+    "resamples": 2000,
+    "replayed": false,
+    "D": [1, 1],
+    "NNUE": [0.8125, 1],
+    "limit": "D interval empirical degeneracy not underlying certainty; NN exchangeability assumed, shared lineage uncorrected."
+  },
+  "original_D_controller": "19524 FAILED and lost1MiB stdout UNKNOWN kept; distinct finalized saved-audit b181 and publication6b4a authority accepted. No game/recover replay.",
+  "NN_controller": "467fc884 successful external completion; 3 directwait/fullcapture/cleanup, source STOP12:45:56.652510/controllerSTOP12:45:56.732658 UTC; whole92.188595423s.",
+  "known_Arena_controllers_s": 454.485958347,
+  "Main_controller_s_separate": 33.976906432,
+  "saved_collection_s_separate": 1.838116203,
+  "nested_times_added": false,
+  "clock_observations": {
+    "D_accepted": 988,
+    "NNUE_accepted": 771,
+    "rejected": 0,
+    "cost_disproved": 0
+  },
+  "returned_completed_vs_persisted_pending_attempted": "kept distinct",
+  "continuous_peak_scheduler_hard_RT_uninstrumented_costs": "UNKNOWN",
+  "new_science_model_native_library_payload_statistics_or_old_suite_calls": 0,
+  "does_not_establish": [
+    "Elo",
+    "universal strength",
+    "D-versus-NNUE ranking",
+    "causal evaluator diagnosis",
+    "speed",
+    "default adoption",
+    "N"
+  ],
+  "old_failures_RAW_caps_floors_fees_masks_UNKNOWN_323pause_seals_defaults_N": "unchanged",
+  "review_reader_STOP": "2026-10-09T13:32:05.481676+00:00",
+  "Root_reader_STOP": "2026-10-09T13:45:31.395033+00:00",
+  "remaining": []
+}
