@@ -21,6 +21,8 @@ Rootは偏り・機会損失・早すぎる断念を観測と全工程費から�
 | 学習したordering | 軽い独立採点器又は小方策head、根/浅い層に限定する案。TTと併用し追加推論費と価値精度への影響を測る                     |
 | 反復深化と実行   | aspiration window、PVS再探索、時計参照、次深さの見積もり、並列探索と共有TTの総費用                                    |
 
+2026-10-09、人間は353の候補対BEST51評価を妨げない範囲で、Beads `quoridor-4lc.354` の一回のsource/design準備を承認した。観測時の4096 direct-map・完全履歴・1MiB課金について、byte admission拒否、異なるkeyの同slot配置、真のhash衝突を分け、適用可能なdepth/age eviction・session lifetime/reset・容量案と最小候補の意味・費用・不確実性を整理する。同じ停止済み成果物で、採用済みsame-owned-Key hash reuseのwholeSearch評価と下記349の限定perfを、既存証拠からbuild/private/symbol/TMP/RAW/failure/review/Git/cleanupまで価格化する。[準備専用8MiB支持](../../research-data/ai-sigma/search-optimization/tt-capacity-assessment-preparation-v1/resources-v1.json)は数値・build・3GiB提案の配分ではない。353のsource/image/configと実intervalを保護し、容量・置換・Zobrist・model/default・選択的探索の実装や新たな353の前提条件を加えない。重要なTT意味の選択は、競合案と全費を人間へ返してから決める。
+
 ## 選択的探索
 
 LMRと必要な再探索、futility、ProbCut/MPC、重要手の延長、ゴール/接触/jump/強制防御を扱う静止探索・延長、壁なし/少数壁の厳密solverを候補とする。null move等はQuoridorの手番・待ち手の性質を確かめる。浅深の誤差と戦術的取りこぼしを測り、ノード削減だけで採用しない。MPCの校正データと最終評価を分ける。
