@@ -639,6 +639,25 @@ main47e4/runtime18bac/clock0485/lib3044/qualification1591の5 sourceだけを、
 
 [限定Main typeclosure受入れ](../research-data/ai-sigma/sigma-receipt-reevaluation-v1/current-main-composite-acceptance-v1.json)は、供給された84 Main named inputsと122 actual compiler dependency recordsのbefore/after資格を再用する。Rootは保存8参照897212Bと現在の統合10 postimages390724BのSHA/mode/size・prebound map所属を確認し、registry全体・旧tests/Clippy/release/private/model/native/gameを再実行・再調査していない。sample family514772992B、target119709696B/TMP0とheld maxima target148676608B/TMP7720960Bを区別し、control最終1019904Bは既存1MiB内だった。whole3474GiBと旧Arena floor・private・RAW・failed費は保持し、今回33.976906432秒を旧Arena239.891039261秒と別記する。returned mask completedとpersisted pending/attempted、continuous/transient peaksとscheduler isolation UNKNOWNも保持する。この結果はMainの型closureで、loaded backend・live64/cost/clock・新32対局・深さ6rate・N/fits/defaultの資格ではない。347.5は固定f26fe516の新guardian/control boundaryだけを確認中で、Main checkやwhole347.6 closureをprivate633f/a45の次の実入場gateにしない。
 
+## 深さ6・独立2ゲーム並列の有限throughput観測（2026-10-09）
+
+選択済みdepth6について、結果前に固定したprefix長4/8/12/16の4ゲームを完了した。予定4・記録4・Goal4、draw/UNKNOWN/失敗/setup/prefix/cancelは0。178回の返却探索はすべて完成depth6で、158,261,845 nodes、eligible178行、distinct positions178・duplicate0だった。入力だけで固定したfamily partitionはT3/V1ゲーム、T140/V38行。contact9・opening40・endgame16とstock censusを保存した。4局ともP2勝利という観測は、同じ固定D同士の小pilotであり、engine順位や棋力の証拠にしない。[保存報告](../.worktree/sigma-receipt-reevaluation/.artifacts/deeper-teacher-generation-v1/completion-collection-v10/report.md)と[限定受入れ](../research-data/ai-sigma/deeper-teacher-generation-v1/bounded-four-acceptance-v1.json)。これは上記の承認時・software準備時に未測定だった有限問いの実測結果である。
+
+実job bb972d5aは04:56:23.266164〜04:59:18.968291 UTC、外側controller全体175.884201586秒。setup・生成・serialization・保存audit・directwait・cleanupを含むこの時間から、**81.872完成ゲーム/時、3,643.306 eligible行/時**を得た。新規命令は生成と保存auditの2件で、両方directwait/handles/process cleanup[]。前のafc入口はnative CPU admissionで生成前に拒否され、whole1.631769229秒のFAILEDと、別のconfig-only段階PASSをそのまま保持する。失敗入口も分母へ課金した両入口177.515970815秒では81.119ゲーム/時・3,609.816行/時。helperを含む既知controller費430.688223068秒にnested native/game時間を加算しない。
+
+| 固定ID末尾 | prefix長 | 最終ply | eligible行 |       nodes | game別時間（秒） |
+| ---------- | -------: | ------: | ---------: | ----------: | ---------------: |
+| 000        |        4 |      64 |         60 | 110,665,955 |          157.589 |
+| 001        |        8 |      56 |         48 |  33,861,675 |           39.193 |
+| 002        |       12 |      50 |         38 |  13,268,996 |           17.456 |
+| 003        |       16 |      48 |         32 |     465,219 |            0.519 |
+
+game別の時間は並列実行で重なるため合計せず、主分母へ置き換えない。2つの独立game workerはphysical CPU0/2で各single-thread、guardian4、native host-reserve4/6、inlet0/2/4/6という4 physical coreの許可範囲で動いた。各gameは元の2色別TT4096/history/RNGを持ち、D0b8/PVS・strict depth6・u64MAX node limit・時間上限なし・200ply operational UNKNOWNを保持する。logical CPU数から並列能力を予測せず、scheduler isolationはUNKNOWNのまま。新serial科学参照やworker/depth sweep、追加ゲームは実行していない。
+
+正本JSONLは906,362B、directory込みsample913,408B、sample family peak105,025,536B（controller込み）。startupだけの時間、per-worker/continuous/transient peak、未計測費はUNKNOWN。返却されたmask/finalization完了と、元disk receiptのpending/attemptedを分け、旧RAW・失敗・上限・floor・費用を返金しない。統合担当は24固定参照1,005,604BのSHA/size/modeと、保存controller/guardian/CSV/census/率の算術を照合した。ELF/model/library payload・native geometry・Search・audit・testsの再実行はない。既に通った変更境界reviewを再用し、この記述的な率の照合だけのために新しい科学reviewを追加していない。
+
+4固定prefixという小標本であり、game別0.519〜157.589秒の差とgame内の相関がある。観測率は全prefix分布・全量の所要時間・教師品質を保証せず、旧depth3の比率も外挿しない。次の人間判断はN・全prefix schedule・pilot包含の選択で、全量生成/intake/cache/T-only統計/4 fits・6 views・96枠のwhole費は別に支持する必要がある。N/full generation/fits96は未選択・未開始。348親の完了やこの報告受入れをSigma新時計live64→D16→BEST51 NNUE16のgateにせず、同ownerは自分のfresh source/private/library/input/proof/physical/peer/nonblocking lease条件で次入口を進める。323pause・seals・default weightsは変えない。
+
 ## 深さ6観測後の限定perf計画
 
 2026-10-09、人間はremaining optimization ROIの追加分析を**計画のみ**承認した。後続はBeads `quoridor-4lc.349` にdeferred登録し、[既存設計内の契約](design/ai-nnue-optimization-agenda.md#深さ6の限定perf-follow-up計画)へまとめた。選択済み348.2の深さ6parallel throughput観測後に費用を具体化して実行判断へ返す。Sigma新時計live資格とD16/NNUE16、深さ6固定4局pilotはこの後続を待たない。SAME探索ownerを将来再用し、旧333/337再開・今のdispatch・numerical entry・hardware予約は行わない。
