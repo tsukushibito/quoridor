@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "issue": "quoridor-4lc.347.2",
+  "accepted_by": "quoridor-4lc.324",
+  "acceptance_recorded_at": "2026-10-09T02:01:03.354714+00:00",
+  "scope": "supplied13 affected tests/full scoped Clippy/necessary release/private identities plus exactly two actual zero-backend metadata identities; no live/cost/clock/strength admission",
+  "owner_packet": {
+    "path": "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/materialization-v8/qualified-metadata-STOP-v7.json",
+    "sha256": "cc4f8cc4f2e51420226c1aaa3fa39bca2c32d0c6e25c39a49e43b9dda15409dd",
+    "bytes": 14488
+  },
+  "actual_interval": {
+    "job_id": "2ee3aab1-c1fd-4c97-a70b-3f7283df4276",
+    "controller_START": "2026-10-09T01:32:32.120985+00:00",
+    "worker_START": "2026-10-09T01:32:34.069185+00:00",
+    "worker_source_STOP": "2026-10-09T01:32:36.339404+00:00",
+    "controller_STOP": "2026-10-09T01:32:36.547522+00:00",
+    "collection_reader_STOP": "2026-10-09T01:34:14.118106+00:00"
+  },
+  "known_joined_software_whole_s": 239.8910392607795,
+  "whole_metadata_fee_s": 4.426951783010736,
+  "nested_not_added": true,
+  "native_config_bindings": {
+    "d": {
+      "config_file": {
+        "path": "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/configuration-v2/config-d-16.fixed-v2.json",
+        "sha256": "f8ce5e4e37ac0161e3348d81e5e48d0140b1cf1079429b0335dc671d98e330e7"
+      },
+      "normalized_config_sha256": "3f4f2f4faf042c188475cf1984e748e03896de1cf2e233fc413ebbc2203af626",
+      "compiled_sources_sha256": "42a5bacd6f4b9ae707b51ffb9b7ee19988381d6d5c1dcf2bc7d5955d21aa194f",
+      "executable_sha256": "633f05e03889661f2f79a628efe814f5aaa9c933e6abafd0332f25fc7fffe143",
+      "backend_loaded": false,
+      "model_calls": 0
+    },
+    "nnue": {
+      "config_file": {
+        "path": "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/configuration-v2/config-nnue-16.fixed-v2.json",
+        "sha256": "15fcb984e4da55ac94dd0db7f82571c0db21ac9e402947c4c792a8f0b43f5e21"
+      },
+      "normalized_config_sha256": "e7e3d3c69ab0af01fd2e32e64bf9aa3b0d99a8275ddedeeebf2260dfc31ef466",
+      "compiled_sources_sha256": "42a5bacd6f4b9ae707b51ffb9b7ee19988381d6d5c1dcf2bc7d5955d21aa194f",
+      "executable_sha256": "633f05e03889661f2f79a628efe814f5aaa9c933e6abafd0332f25fc7fffe143",
+      "backend_loaded": false,
+      "model_calls": 0
+    }
+  },
+  "private": {
+    "path": "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/private-current-v5/quoridor-runner",
+    "SHA256": "633f05e03889661f2f79a628efe814f5aaa9c933e6abafd0332f25fc7fffe143",
+    "bytes": 7993152,
+    "mode": 493,
+    "root_payload_read": false
+  },
+  "compiled_sources_sha256": "42a5bacd6f4b9ae707b51ffb9b7ee19988381d6d5c1dcf2bc7d5955d21aa194f",
+  "verification": {
+    "root_directed_saved_refs": 11,
+    "selected_bytes": 625725,
+    "root_reader_STOP": "2026-10-09T01:45:47.048716+00:00",
+    "raw_refs": {
+      "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/metadata-runtime-v7/config.json": "d184d8c7eb63138483dcc3403da4c1c8943faa647eabb14e341f497b2633e074",
+      "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/metadata-runtime-v7/result.json": "c985eaa453a79bc2c206fc91ebf3b8adac46f60f0e64b6657ee29186b8e2e1be",
+      "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/metadata-runtime-v7/output.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/metadata-recovery-v7/software-result.json": "a484f4a14dcdc64a0712880303564fb31459b130524ebecaca1af70f323ef6d2",
+      "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/metadata-recovery-v7/held-charges.json": "f90fd98482bb242a24bac7def4145a84286ca44345c5d3abdf2a0609eb243509",
+      "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/metadata-recovery-v7/bindings-d.json": "2fb959a29c5079c9133ae11afcfacca80dc21cb21c3b6cf0a71edec055a7ed8a",
+      "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/metadata-recovery-v7/bindings-nnue.json": "22b295d1ad65fd19f0be074c13f251a930bfe017588313be75a011408ed21771",
+      "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/metadata-recovery-v7/bindings-d.process.json": "6fa320a63c8446644ee2aa7d8b61c66cebdb3655f612792beaa726737295d4e9",
+      "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/metadata-recovery-v7/bindings-nnue.process.json": "32b78e73f2f75d31e8e7dd0e75e7ef462f6c8a9bcb590cfa53c48e5e2e15a280",
+      "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/metadata-recovery-v7/bindings-d.log": "83693d3b7e1650a1e752d77a655a5f475ccdc3f8758fec300548ae918efea59f",
+      "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/metadata-recovery-v7/bindings-nnue.log": "c64c41271e021a1c24bca976640f8078721ae633ac659754330a41aecfc3095d"
+    },
+    "packet_sha_rechecked_now": true,
+    "actual_commands": 2,
+    "directwait_and_handle_process_cleanup": true,
+    "owned_science_remaining": [],
+    "owner_science_guardian_identities_absent": true,
+    "finished_metadata_identity_is_not_science": true,
+    "root_tests_Cargo_native_model_games_replay": 0
+  },
+  "returned_process_finalization": {
+    "bindings-d": {
+      "signal_mask_restoration": "completed",
+      "final_record_persist": "completed",
+      "handle_closes_complete": true,
+      "process_cleanup_complete": true
+    },
+    "bindings-nnue": {
+      "signal_mask_restoration": "completed",
+      "final_record_persist": "completed",
+      "handle_closes_complete": true,
+      "process_cleanup_complete": true
+    }
+  },
+  "persisted_mask_scope": "two disk pending/attempted retained separately; returned fields recorded actual values; no fault/universal certificate",
+  "old_failedsoftware596fa": "FAILED retained with Clippy/release/currentprivate PASS scoped components; no relabel/replay",
+  "configuration_scope": "immutable; new singlecohort label and original_book_cohort provenance inverse returns originalJSON; all8 inputs/prefix/order/IDs/seed/colour/clock/model unchanged",
+  "source_binding_scope": "historical OWN compiled source identities preserved; current Main integration3c4b kept separate and unchanged",
+  "current_main_typecheck": "separate347.6 prepared/in_progress; no supplied actual START here; no gate for qualified private live or depth6",
+  "unqualified": [
+    "loaded backend",
+    "actual live64/cost/control",
+    "new Sigma-D16",
+    "new Sigma-NNUE16",
+    "depth6 four-game throughput",
+    "strength",
+    "full N/fits96/default adoption"
+  ],
+  "current_owner_reservation_at_packet": "NONE / NOT_LIVE_READY",
+  "old_caps_failed_fees_RAW_masks_assets_continuous_UNKNOWN": "HELD; no refund/relabel/replay"
+}
