@@ -1,0 +1,170 @@
+{
+  "schema": "quoridor.tt-exact-processing.resources.v1",
+  "issue": "quoridor-4lc.351",
+  "integration_issue": "quoridor-4lc.324",
+  "allocated_at": "2026-10-09T07:28:11.056838+00:00",
+  "authority": "Human conditional justified TT exact-processing implementation after accepted analysis, plus explicit Zobrist investigation/correctness validation; routine supported source/software allowed, no human ACK gate",
+  "parent_refs_current_hash_size_mode": [
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/execution-resources-20261008.json",
+      "SHA256": "68f528718c63be5471ed32d87984ef63816d6e7066279cc1ef37393243111f88",
+      "bytes": 7612,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/resources-pilot.json",
+      "SHA256": "44c71bc56428705bfd6efc3c8c3531011c63dbf00a16a077a9a25cdac0cf8fa4",
+      "bytes": 3004,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/compiler-recovery-resources-v1.json",
+      "SHA256": "9a4891ddcb3132e43322587c8ef0ce296ca6ef18e1b16f5d35f31a68b4922bd7",
+      "bytes": 2632,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/sigma-receipt-reevaluation-v1/resources.json",
+      "SHA256": "a70b70c3df2b970a41d0c55cec6fb249e68026f8fa51de837bfbd5e3561c2683",
+      "bytes": 3785,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/deeper-teacher-generation-v1/resources.json",
+      "SHA256": "ba84541373a846860070611c3037f4efc6d20f2df2778f23da1d714c85827205",
+      "bytes": 3032,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/deeper-teacher-generation-v1/tail-analysis-resources-v1.json",
+      "SHA256": "41b99f925381122060fdf53b09290fb77d56576f99bd8af99154492832587341",
+      "bytes": 2193,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/distance-map-first-v1/authorized-work.json",
+      "SHA256": "1ed487dfa2049d27e419c9fa2f44d17d73eccbab3cdad10a39ad674b2fd91ae0",
+      "bytes": 2321,
+      "mode": 420
+    }
+  ],
+  "preparation_refs": [
+    {
+      "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/depth6-tail-analysis-v1/source-support-preparation-v1/contract.md",
+      "SHA256": "e8197fb0a9b926d0d002ce8ce3556608f970384401c10ea4c1f83627d9e33ec9"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/depth6-tail-analysis-v1/source-support-preparation-v1/handoff-STOP.json",
+      "SHA256": "9d154e0d23a044d60a70ecf7e5c0e1faf8b8b4a5023ca4bb06daaac240ea996f"
+    }
+  ],
+  "preparation_reader_writer_STOP": "2026-10-09T07:20:22.437647+00:00",
+  "prior_all_phases_forward_upper_B": 39598288896,
+  "additional_whole_B": 654311424,
+  "components_B": {
+    "source_checkout_controls": 33554432,
+    "target_dependencies_build_link": 536870912,
+    "private": 16777216,
+    "TMP": 33554432,
+    "qualification": 8388608,
+    "raw_future_output": 8388608,
+    "failures_finalization_rounding": 8388608,
+    "related_review": 4194304,
+    "Root_Git_retention_cleanup": 4194304
+  },
+  "named_paths": {
+    "source_checkout_controls": [
+      "/workspaces/quoridor/.worktree/tt-hash-reuse351",
+      "/workspaces/quoridor/.git/worktrees/tt-hash-reuse351",
+      "/workspaces/quoridor/.worktree/tt-hash-reuse351/.artifacts/tt-hash-reuse351/controls",
+      "/workspaces/quoridor/.worktree/tt-hash-reuse351/.artifacts/tt-hash-reuse351/source-control"
+    ],
+    "target_dependencies_build_link": [
+      "/workspaces/quoridor/.worktree/tt-hash-reuse351/.artifacts/tt-hash-reuse351/target"
+    ],
+    "private": [
+      "/workspaces/quoridor/.worktree/tt-hash-reuse351/.artifacts/tt-hash-reuse351/private"
+    ],
+    "TMP": ["/workspaces/quoridor/.worktree/tt-hash-reuse351/.artifacts/tt-hash-reuse351/TMP"],
+    "qualification": [
+      "/workspaces/quoridor/.worktree/tt-hash-reuse351/.artifacts/tt-hash-reuse351/qualification"
+    ],
+    "raw_future_output": [
+      "/workspaces/quoridor/.worktree/tt-hash-reuse351/.artifacts/tt-hash-reuse351/raw"
+    ],
+    "failures_finalization_rounding": [
+      "/workspaces/quoridor/.worktree/tt-hash-reuse351/.artifacts/tt-hash-reuse351/failures"
+    ],
+    "related_review": [
+      "/workspaces/quoridor/.worktree/tt-hash-reuse351/.artifacts/tt-hash-reuse351/review"
+    ],
+    "Root_Git_retention_cleanup": [
+      "/workspaces/quoridor/research-data/ai-sigma/search-optimization/tt-hash-reuse351",
+      "/workspaces/quoridor/.artifacts/research-acceptance/tt-hash-reuse351-source-v1",
+      "incremental Git blob/commit preservation only; existing shared Git remains held"
+    ]
+  },
+  "new_all_phases_forward_upper_B": 40252600320,
+  "storage_cap_B": 50000000000,
+  "unassigned_forward_B": 9747399680,
+  "allocated_now": true,
+  "old_analysis8MiB": "remains old348 subclassification, not reused/refunded and not this build grant",
+  "accounting": "Entire new exclusive source/build-dependency-link/private/TMP/qualification/raw/failure/review/Git/cleanup phase supported before writes. All old models/private/targets/raw/failed states/TMP floors/UNKNOWN retained; shared installed registry/toolchains referenced under existing holds with no copies/downloads or cache credit. Path aliases/subdirectories are component classifications, never duplicate charges. Actual private image(s) and original/candidate closure must fit16MiB; additional unsupported baseline/caller or image growth refuses before writes. No old source/private retargeting. Current filesystem free bytes do not measure current research retention; typed reserved coverage and guards govern cap. No cleanup refund.",
+  "source_forecast": {
+    "base": "2cf15b584f18519e1139eb0ecec5cdc0fe333eda",
+    "sparse_members": [
+      "crates/quoridor-core",
+      "crates/quoridor-ai",
+      "crates/quoridor-wasm",
+      "crates/quoridor-nnue",
+      "crates/quoridor-inference",
+      "crates/quoridor-data",
+      "crates/quoridor-runner"
+    ],
+    "optional_config_directory": ".cargo",
+    "tracked_files": 139,
+    "logical_B": 1965937,
+    "blocks_directories_plus4MiB_metadata_B": 6647808,
+    "source_cap_B": 33554432,
+    "namespace_absent_at_prewrite": true,
+    "observed_at": "2026-10-09T07:26:02.159642+00:00",
+    "FS_available_B": 368090791936,
+    "named_competitors": [],
+    "no_quiet_or_physical_future_certificate": true
+  },
+  "write_owner": {
+    "new_source": "codex:01a11004-79f3-7c20-872c-432a2c347664 SAME351",
+    "managed_creation_Main_Git_index": "sole324",
+    "original_saved_cwd": "/workspaces/quoridor/.worktree/search-optimization",
+    "branch": "codex/tt-hash-reuse351"
+  },
+  "current_authorized_scope": [
+    "Recursive same-immutable-owned-Key paired hash reuse production candidate; root/PV/unpaired hashes and constructions unchanged",
+    "Real finite Zobrist correctness/design investigation in SAME351 including research/test-local full recomputation and meaningful incremental full-history oracle; no production Zobrist adoption yet",
+    "Frozen new affected NN0 correctness filters, scoped owned Clippy/necessary feature type closure, one current runner release/private and zero-backend config binding after source review and fresh controls",
+    "Prepare concrete bounded cost comparison contract; no four-return/fullgame/perf/model entry from this allocation alone"
+  ],
+  "numerical_admission": false,
+  "prohibitions": [
+    "No N/fullschedule/fullgeneration/pilotmix/fits96 or new games/models/perf sweep",
+    "No history omission/key compression/repetition weakening, cap resize/reset/eviction/replacement policy bundle",
+    "No Table/Entry/Key/Stats/Session stored hash/counter fields for paired reuse",
+    "No source/software success replay solely for metadata, no oldprivatea45 relabel current",
+    "No installer/download or sharedCargo concurrent writer",
+    "No production Zobrist lifecycle/index change until fixed source correctness/cost scope and narrow independent review"
+  ],
+  "TT_scope": "Layouts/accounted capacity/fullhistory equality/terminal-score-rules namespaces/PVS/cancellation/teacher policy preserved. Existing tt_hashes truthful actual instrumented full-key computation count before outcomes; PV excluded in both. Zobrist hash/index changes must be stated separately; do not forge unchanged nodes/admission or same-work speed claims. Exact full-key equality remains mandatory on lookup, forced hash/index collisions tested.",
+  "physical": "Fresh per entry physical topology/quota/affinity/RAM/source/private/dependency/owner/peer proof. Expected j1/GPU0 compiler family6GiB including64MiB controller plus host4GiB reserve, CPU2/guardian4 only if currently distinct available. Full canonical LOCK_EX|LOCK_NB before hashes/import/TMP/START/Popen through directwait/source/private/charges/cleanup STOP. No current hardware grant/reservation or timeout-derived scientific accuracy cap.",
+  "priority": "Sigma347.3 D16 then347.4 NNUE16 genuinely READY/actual intervals first; any actual peer naturalSTOP, no wholeSigma/analysis/N/ACK gate. Source/light preparation independent; substantive build/analysis/comparison waits actualSTOP and fresh predicates.",
+  "STOP_and_verification": "Stop unsupported growth or changed source/owner/pause; preserve primary plus all finalizer causes. Finite source STOP before one narrow changed correctness review; freeze affected software/input/feature commands before Popen, source/compiler/dependency before/after hashes + all directwait/identities/handles/partial/masks and held charges through cleanup; owner collects actual START/STOP once, no polling/autoretry. Source/qual/software completion is not numerical/strength/adoption.",
+  "prewrite": {
+    "bootstrap_in_existing324_integration_B": 268435456,
+    "Root_new_docs_control_scope_B": 131072,
+    "owner_initial_source_control_scope_B": 2097152,
+    "inside_source_component_B": 33554432,
+    "source_checkout_before_edit_B": 6647808,
+    "review_proposal_upper_B": 2097152,
+    "within_review_component_B": 4194304
+  },
+  "unchanged": "323USERPAUSE/seals/defaultmodels/fullN gate/oldrawfees/masks/UNKNOWN held"
+}
