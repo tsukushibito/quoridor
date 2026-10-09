@@ -1,0 +1,113 @@
+{
+  "scope": "Maintained Main five-source deterministic depth6 scheduling intake only; currentMain typecheck pending separately",
+  "main_source_writer_reader_STOP": "2026-10-09T00:12:59.257966+00:00",
+  "remaining": [],
+  "producer_packet": {
+    "path": "/workspaces/quoridor/.worktree/deeper-teacher-scheduling/.artifacts/deeper-teacher-scheduling-v1/aggregate-repair-v4/final-handoff/source-software-private-STOP.json",
+    "sha256": "adcf3acbe24f766421df1c73d929eae4e3fccad36e8270d7185eded2d7c136bf"
+  },
+  "patch": {
+    "path": "/workspaces/quoridor/.worktree/deeper-teacher-scheduling/.artifacts/deeper-teacher-scheduling-v1/aggregate-repair-v4/final-handoff/maintained-depth6-scheduling.patch",
+    "sha256": "ca782e4f113c28b4fbeb1f452a7b3ddccad4a199a39964fcbbaafa75c34dd237"
+  },
+  "before": {
+    "crates/quoridor-runner/src/teacher_pilot.rs": {
+      "sha256": "074fead188b6cc415a648b878152e3da6ec85f5cc58a6d369e7d328674bb1a77",
+      "bytes": 16867,
+      "mode": 420
+    },
+    "crates/quoridor-runner/src/teacher_pilot_execution.rs": {
+      "sha256": "d43f303d86eff2bd8552ef927471535e190f7686e3ed43954a4c7fd41768fa4a",
+      "bytes": 43044,
+      "mode": 420
+    },
+    "crates/quoridor-runner/src/teacher_pilot/depth6.rs": null,
+    "crates/quoridor-runner/src/teacher_pilot_execution/depth6.rs": null,
+    "crates/quoridor-runner/src/teacher_pilot_execution/scheduling.rs": null
+  },
+  "main_postimages": {
+    "crates/quoridor-runner/src/teacher_pilot.rs": {
+      "sha256": "b7de324feb5dea9fca47b95d06439fcaf1466fd6d49967afd8807915f2e3fd3d",
+      "bytes": 18211,
+      "mode": 420
+    },
+    "crates/quoridor-runner/src/teacher_pilot_execution.rs": {
+      "sha256": "98889813cc5b8180365f3a83fbcc6a55d438d9542b208bc5339111bf1cc2b4f5",
+      "bytes": 46691,
+      "mode": 420
+    },
+    "crates/quoridor-runner/src/teacher_pilot/depth6.rs": {
+      "sha256": "e8ab5d452c9dec89c873bb8392af583c64ffd57abd897e41e0a8da5ada5a7f14",
+      "bytes": 4010,
+      "mode": 420
+    },
+    "crates/quoridor-runner/src/teacher_pilot_execution/depth6.rs": {
+      "sha256": "8e9c4cd8743f3a1a10667dba93454e251684cc70850d5cf1babb129b7e1d32c7",
+      "bytes": 27978,
+      "mode": 420
+    },
+    "crates/quoridor-runner/src/teacher_pilot_execution/scheduling.rs": {
+      "sha256": "41208c41d2355b39d47e6e30a256c4726f4f018b85daa319700bd767dc85b112",
+      "bytes": 8313,
+      "mode": 420
+    }
+  },
+  "base": "3543d63",
+  "source_review": {
+    "initial_B1_report": {
+      "path": "/workspaces/quoridor/.worktree/deeper-teacher-scheduling/.artifacts/deeper-teacher-scheduling-v1/independent-review-v1/review.md",
+      "SHA256": "2357c442a82df25e77bb658a11947b4c98c70912c82f07c6bcfb662ae262c711",
+      "bytes": 7197,
+      "mode": 420
+    },
+    "B1_resolved_report": {
+      "path": "/workspaces/quoridor/.worktree/deeper-teacher-scheduling/.artifacts/deeper-teacher-scheduling-v1/independent-review-v1/repair-B1-v2/review.md",
+      "SHA256": "90139b9ee1e176a34b39b16a9c2549ce9df720cc27906abdf0ae2cb55f11a950",
+      "bytes": 4872,
+      "mode": 420
+    },
+    "B1_control": {
+      "path": "/workspaces/quoridor/.worktree/deeper-teacher-scheduling/.artifacts/deeper-teacher-scheduling-v1/independent-review-v1/repair-B1-v2/control.json",
+      "SHA256": "f13d0a52c471846d14e689b12e1971f34f11e4460bcc35db70bf5924ace7a6a4",
+      "bytes": 10158,
+      "mode": 420
+    },
+    "fixed_target_SHA256": "04814dfe6bc734c529f81461fdd6347ed6f051e786b7a16dff5f902d4055f192",
+    "blockers": 0,
+    "reader_STOP": "2026-10-08T23:42:21.654676+00:00"
+  },
+  "supplied_affected_software": {
+    "job": "86aedd2f",
+    "START": "2026-10-08T23:46:46.436550+00:00",
+    "STOP": "2026-10-08T23:48:46.647464+00:00",
+    "whole_s": 120.28202970593702,
+    "test_filter": "depth6_",
+    "new_synthetic_port_tests_PASS": 6,
+    "old_tests_filtered": 59,
+    "release_build": "PASS",
+    "config_only_CLI": "PASS",
+    "direct_commands_waited": 3,
+    "remaining": [],
+    "returned_mask": "completed3",
+    "persisted_mask": "pending3/held separately",
+    "historical_ee72_mask": "failed_UNKNOWN held",
+    "private_source_metadata": {
+      "path": "/workspaces/quoridor/.worktree/deeper-teacher-scheduling/.artifacts/deeper-teacher-scheduling-v1/private/quoridor-runner",
+      "SHA256": "a45b94d9423f25b7a5f8c03d79f00b6c1cd23a3798ff40f23033d828e395d4c9",
+      "bytes": 7832584,
+      "mode": 493
+    }
+  },
+  "root_quality": "Scoped fiveRust rustfmt edition2024 skipchildren write/check and gitdiffcheck PASS; all five hash-size-mode byteexact afterward",
+  "root_Cargo_Rust_tests_native_models_geometry_science": 0,
+  "complete_guard_membership": "all actual131 Sigma and42 contact records inspected; no Main fivepath member; sharedcontroller/core/manifests unchanged",
+  "authoritative_active_entry": "teacher-pilot explicit phase depth6_throughput and saved teacher-pilot-audit; original64depth3 data/source retained separately",
+  "accepted_numeric_recipe": "four fixed stableIDs000..003 lengths4/8/12/16 seed20261008 max32 attempts; two singlethreadworkers each two percolourTT4096; D0b8/PVS strictcomplete6/u64MAX/timeNone/goal-thirdpriority/200UNKNOWN",
+  "numeric_4games_rates_N_fullschedule_fullgen_fourfits_96": "NOT_RUN/UNSELECTED/NOT_ADMITTED",
+  "Main_Cargo_typecheck": "PENDING; combine with necessary stopped Sigma currentMain closure where appropriate, not suppliedprivatepilot gate",
+  "whole_support": "3481610612736 source64MiB/reviewGit128MiB; newRoot4MiB insideheldreviewGit; oldreview2MiB+controller1MiB+new4MiB=7MiB<128MiB; no allocation increase/refund",
+  "old_fees_once_s": 253.1722522530472,
+  "old_RAW_masks_tmp_caps_assets_continuous_UNKNOWN": "allheld; no restoration of historicalfailed mask",
+  "preflight_refusals": "count42 treatedasiterable; plainunifiedpatch wronglyexpectedgitdiffheader. Both failedBEFORE Main/index mutation, retained in ignoredprewrite metadata",
+  "default_models_pause323_seals": "unchanged"
+}

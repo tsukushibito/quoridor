@@ -20,6 +20,7 @@ pub const PILOT_OUTPUT: &str =
 #[serde(rename_all = "snake_case")]
 pub enum Phase {
     Pilot64,
+    Depth6Throughput,
 }
 
 /// This entry has no full-generation, fitting or development-games mode.
@@ -45,6 +46,11 @@ pub struct PilotConfig {
     pub per_move_timeout_ms: Option<u64>,
     pub max_total_plies: u16,
     pub cpu_core: usize,
+    /// Present only in the separate depth6 recipe; historical64 configs stay unchanged.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub game_workers: Option<usize>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub worker_cores: Vec<usize>,
     pub host_ram_reserve: u64,
     pub max_memory_bytes: u64,
     pub max_output_bytes: u64,
@@ -52,7 +58,12 @@ pub struct PilotConfig {
 
 impl PilotConfig {
     pub fn validate(&self) -> Result<()> {
+        if matches!(self.phase, Phase::Depth6Throughput) {
+            return depth6::validate(self);
+        }
         if self.main_volume_n.is_some()
+            || self.game_workers.is_some()
+            || !self.worker_cores.is_empty()
             || self.ruleset != Ruleset::Standard2pThreefold
             || self.output.as_path() != std::path::Path::new(PILOT_OUTPUT)
             || self.planned_games != PILOT_GAMES
@@ -225,55 +236,83 @@ pub fn schedule() -> Result<Vec<ScheduledGame>> {
     schedule_using(candidate)
 }
 
+pub mod depth6;
+
 fn schedule_using(
+    mut draw: impl FnMut(&mut Rng, u16) -> Result<(Vec<u16>, SigmaContext)>,
+) -> Result<Vec<ScheduledGame>> {
+    let requests = (4..=19)
+        .flat_map(|length| [length; 4])
+        .enumerate()
+        .map(|(id, length)| (format!("teacher-distance-pilot64-game-{id:03}"), length))
+        .collect();
+    schedule_requests(requests, false, &mut draw)
+}
+
+fn schedule_requests(
+    requests: Vec<(String, u16)>,
+    independent: bool,
     mut draw: impl FnMut(&mut Rng, u16) -> Result<(Vec<u16>, SigmaContext)>,
 ) -> Result<Vec<ScheduledGame>> {
     let mut rng = Rng::new(PREFIX_SEED);
     let mut used = BTreeSet::new();
     let mut games = Vec::with_capacity(PILOT_GAMES);
-    for length in 4..=19 {
-        for _ in 0..4 {
-            let game = games.len();
-            let mut slot = ScheduledGame {
-                game,
-                request_id: format!("teacher-distance-pilot64-game-{game:03}"),
-                requested_prefix_length: length,
-                prefix: None,
-                canonical_prefix: None,
-                root: None,
-                attempts: Vec::new(),
-                scheduled_failure: None,
-            };
-            for attempt in 0..PREFIX_ATTEMPTS {
-                let (prefix, context) = draw(&mut rng, length)?;
-                let canonical = canonical_prefix(&prefix)?;
-                let rejection = if context.terminal_value().is_some() {
-                    Some("terminal_prefix".to_owned())
-                } else if prefix.len() != usize::from(length) || !context.has_legal_move() {
-                    Some("unsupported_no_legal_prefix".to_owned())
-                } else if used.contains(&canonical) {
-                    Some("exact_or_reflected_duplicate_prefix".to_owned())
-                } else {
-                    None
-                };
-                slot.attempts.push(PrefixAttempt {
-                    attempt,
-                    prefix: prefix.clone(),
-                    rejection: rejection.clone(),
-                });
-                if rejection.is_none() {
-                    used.insert(canonical.clone());
-                    slot.prefix = Some(prefix);
-                    slot.canonical_prefix = Some(canonical);
-                    slot.root = Some(ContextRecord::from_context(&context));
+    for (request_id, length) in requests {
+        let game = games.len();
+        if independent {
+            rng = Rng::new(depth6::game_seed(&request_id));
+        }
+        let mut slot = ScheduledGame {
+            game,
+            request_id,
+            requested_prefix_length: length,
+            prefix: None,
+            canonical_prefix: None,
+            root: None,
+            attempts: Vec::new(),
+            scheduled_failure: None,
+        };
+        for attempt in 0..PREFIX_ATTEMPTS {
+            let (prefix, context) = match draw(&mut rng, length) {
+                Ok(v) => v,
+                Err(e) if independent => {
+                    slot.attempts.push(PrefixAttempt {
+                        attempt,
+                        prefix: vec![],
+                        rejection: Some(format!("prefix_error:{e}")),
+                    });
+                    slot.scheduled_failure = Some(format!("prefix_error:{e}"));
                     break;
                 }
+                Err(e) => return Err(e),
+            };
+            let canonical = canonical_prefix(&prefix)?;
+            let rejection = if context.terminal_value().is_some() {
+                Some("terminal_prefix".to_owned())
+            } else if prefix.len() != usize::from(length) || !context.has_legal_move() {
+                Some("unsupported_no_legal_prefix".to_owned())
+            } else if used.contains(&canonical) {
+                Some("exact_or_reflected_duplicate_prefix".to_owned())
+            } else {
+                None
+            };
+            slot.attempts.push(PrefixAttempt {
+                attempt,
+                prefix: prefix.clone(),
+                rejection: rejection.clone(),
+            });
+            if rejection.is_none() {
+                used.insert(canonical.clone());
+                slot.prefix = Some(prefix);
+                slot.canonical_prefix = Some(canonical);
+                slot.root = Some(ContextRecord::from_context(&context));
+                break;
             }
-            if slot.prefix.is_none() {
-                slot.scheduled_failure = Some("prefix_attempts_exhausted".into());
-            }
-            games.push(slot);
         }
+        if slot.prefix.is_none() && slot.scheduled_failure.is_none() {
+            slot.scheduled_failure = Some("prefix_attempts_exhausted".into());
+        }
+        games.push(slot);
     }
     Ok(games)
 }

@@ -35,6 +35,28 @@ const ROW_BYTES: usize = 65536;
 const GAME_BYTES: usize = 16 * 1024 * 1024;
 const EVALUATOR_ID: &str = "original-distance-a0-b8-tanh";
 
+pub mod depth6;
+mod scheduling;
+
+#[derive(Clone, Copy)]
+struct SearchPolicy {
+    depth: u16,
+    nodes: u64,
+    strict: bool,
+}
+impl SearchPolicy {
+    const LEGACY: Self = Self {
+        depth: 3,
+        nodes: 100000,
+        strict: false,
+    };
+    const DEPTH6: Self = Self {
+        depth: 6,
+        nodes: u64::MAX,
+        strict: true,
+    };
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct SearchEvidence {
@@ -68,15 +90,18 @@ impl SearchEvidence {
         }
     }
 
-    fn validate_return(&self, context: &SigmaContext) -> Result<u16> {
+    fn validate_return_policy(&self, context: &SigmaContext, policy: SearchPolicy) -> Result<u16> {
         let action = self.action.ok_or("no completed legal move")?;
         if self.raw_value.is_none_or(|v| !v.is_finite())
             || self.raw_value.map(f32::to_bits) != self.raw_value_bits
             || self.completed_depth == 0
-            || self.completed_depth > 3
+            || self.completed_depth > policy.depth
+            || (policy.strict && (self.completed_depth != policy.depth || self.stop != "depth_cap"))
             || !matches!(self.stop.as_str(), "depth_cap" | "node_cap")
             || self.pv.first() != Some(&action)
-            || self.counters["nodes"].as_u64().is_none_or(|n| n > 100000)
+            || self.counters["nodes"]
+                .as_u64()
+                .is_none_or(|n| n > policy.nodes)
             || self.counters["policy_calls"].as_u64() != Some(0)
             || self.counters["tt_retained_bytes"]
                 .as_u64()
@@ -182,10 +207,21 @@ fn finish_game(
     })
 }
 
+#[cfg(test)]
 fn play_using(
     slot: &ScheduledGame,
     assignment: &FamilyAssignment,
     cancel: &AtomicBool,
+    search: impl FnMut(&SigmaContext) -> Result<SearchResult>,
+) -> Result<GameRecord> {
+    play_using_policy(slot, assignment, cancel, SearchPolicy::LEGACY, search)
+}
+
+fn play_using_policy(
+    slot: &ScheduledGame,
+    assignment: &FamilyAssignment,
+    cancel: &AtomicBool,
+    policy: SearchPolicy,
     mut search: impl FnMut(&SigmaContext) -> Result<SearchResult>,
 ) -> Result<GameRecord> {
     let begin = Instant::now();
@@ -243,7 +279,7 @@ fn play_using(
         let checked = if cancel.load(Ordering::Acquire) {
             Err("cancelled_after_search".into())
         } else {
-            evidence.validate_return(&context)
+            evidence.validate_return_policy(&context, policy)
         };
         let action = match checked {
             Ok(action) => action,
@@ -301,12 +337,31 @@ fn play(
     assignment: &FamilyAssignment,
     cancel: &AtomicBool,
 ) -> Result<GameRecord> {
+    play_with_policy(slot, assignment, cancel, SearchPolicy::LEGACY)
+}
+
+fn play_with_policy(
+    slot: &ScheduledGame,
+    assignment: &FamilyAssignment,
+    cancel: &AtomicBool,
+    policy: SearchPolicy,
+) -> Result<GameRecord> {
     let evaluator = Arc::new(DistanceEvaluator::new(0., 8.));
     let namespace = SearchNamespace {
         evaluator: EVALUATOR_ID.into(),
         rules: Ruleset::Standard2pThreefold.id().into(),
-        selectivity: "d3/n100000/PVS/TT4096/no-time/no-solver-order-contact".into(),
+        selectivity: if policy.strict {
+            format!(
+                "{}/d6/n{}/PVS/TT4096/no-time/no-solver-order-contact",
+                teacher_pilot::depth6::VERSION,
+                policy.nodes
+            )
+        } else {
+            "d3/n100000/PVS/TT4096/no-time/no-solver-order-contact".into()
+        },
     };
+    // Preserve the original independently retained per-colour sessions inside
+    // every game. Only one search is active at a time; no cross-colour TT sharing.
     let mut sessions = [
         SearchSession::new(evaluator.clone(), namespace.clone(), 4096)?,
         SearchSession::new(evaluator, namespace, 4096)?,
@@ -318,15 +373,15 @@ fn play(
         return Err("fixed pilot TT allocation differs".into());
     }
     let limits = SearchLimits {
-        max_depth: 3,
-        max_nodes: 100000,
+        max_depth: policy.depth,
+        max_nodes: policy.nodes,
         time_limit: None,
         tt_entries: 4096,
         use_pvs: true,
         use_tt: true,
     };
     // Normal genuine context: SearchSession clones it; no reserved-path claim.
-    play_using(slot, assignment, cancel, |context| {
+    play_using_policy(slot, assignment, cancel, policy, |context| {
         sessions[usize::from(context.position().turn)]
             .search(context, &limits, cancel)
             .map_err(Into::into)
@@ -366,6 +421,8 @@ pub struct PilotHeader {
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 pub struct PilotReport {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub depth6: Option<depth6::Details>,
     pub scheduled: usize,
     pub recorded: usize,
     pub goals: usize,
@@ -431,6 +488,18 @@ pub fn compiled_sources() -> BTreeMap<String, String> {
             include_bytes!("teacher_pilot_execution.rs").as_slice(),
         ),
         (
+            "crates/quoridor-runner/src/teacher_pilot/depth6.rs",
+            include_bytes!("teacher_pilot/depth6.rs").as_slice(),
+        ),
+        (
+            "crates/quoridor-runner/src/teacher_pilot_execution/depth6.rs",
+            include_bytes!("teacher_pilot_execution/depth6.rs").as_slice(),
+        ),
+        (
+            "crates/quoridor-runner/src/teacher_pilot_execution/scheduling.rs",
+            include_bytes!("teacher_pilot_execution/scheduling.rs").as_slice(),
+        ),
+        (
             "crates/quoridor-data/src/terminal.rs",
             include_bytes!("../../quoridor-data/src/terminal.rs").as_slice(),
         ),
@@ -442,6 +511,9 @@ pub fn compiled_sources() -> BTreeMap<String, String> {
 
 /// No inference backend or model loading: one serial fixed-D process.
 pub fn run(config: &PilotConfig, config_sha256: String) -> Result<PilotReport> {
+    if matches!(config.phase, teacher_pilot::Phase::Depth6Throughput) {
+        return depth6::run(config, config_sha256, &AtomicBool::new(false));
+    }
     config.validate()?;
     let begin = Instant::now();
     let admission = resources::admit(
@@ -520,6 +592,14 @@ pub fn run(config: &PilotConfig, config_sha256: String) -> Result<PilotReport> {
 }
 
 fn audit_game(slot: &ScheduledGame, partition: &FamilyPartition, game: &GameRecord) -> Result<()> {
+    audit_game_policy(slot, partition, game, SearchPolicy::LEGACY)
+}
+fn audit_game_policy(
+    slot: &ScheduledGame,
+    partition: &FamilyPartition,
+    game: &GameRecord,
+    policy: SearchPolicy,
+) -> Result<()> {
     if game.game != slot.game
         || game.request_id != slot.request_id
         || game.initial_prefix != slot.prefix
@@ -571,7 +651,7 @@ fn audit_game(slot: &ScheduledGame, partition: &FamilyPartition, game: &GameReco
             return Err("pilot row chronology/family/input identity mismatch".into());
         }
         row.teacher.validate()?;
-        let action = row.search.validate_return(&context)?;
+        let action = row.search.validate_return_policy(&context, policy)?;
         match &row.teacher.teacher {
             Teacher::AlphaBeta {
                 value,
@@ -711,6 +791,15 @@ fn audit_schedule(slots: &[ScheduledGame]) -> Result<()> {
     Ok(())
 }
 
+// Exact node census or an accounting refusal; original per-return records stay
+// in the committed stream. Never wrap/saturate into a purported exact total.
+fn add_search_nodes(report: &mut PilotReport, nodes: u64, stage: &str) -> Result<()> {
+    report.search_nodes = report.search_nodes.checked_add(nodes).ok_or_else(|| {
+        format!("aggregate_search_nodes_overflow:{stage};individual_return_counts_retained")
+    })?;
+    Ok(())
+}
+
 fn summarize(header: &PilotHeader, games: &[GameRecord]) -> Result<PilotReport> {
     let mut report = PilotReport {
         scheduled: header.scheduled.len(),
@@ -727,9 +816,13 @@ fn summarize(header: &PilotHeader, games: &[GameRecord]) -> Result<PilotReport> 
     for game in games {
         report.search_calls += game.attempted_search_calls;
         if let Some(returned) = &game.failed_search {
-            report.search_nodes += returned.counters["nodes"]
-                .as_u64()
-                .ok_or("missing failed returned nodes")?;
+            add_search_nodes(
+                &mut report,
+                returned.counters["nodes"]
+                    .as_u64()
+                    .ok_or("missing failed returned nodes")?,
+                "failed_return",
+            )?;
         }
         match game.termination {
             Termination::Goal => report.goals += 1,
@@ -762,9 +855,13 @@ fn summarize(header: &PilotHeader, games: &[GameRecord]) -> Result<PilotReport> 
                     <= 2,
             );
             report.accepted_search_calls += 1;
-            report.search_nodes += row.search.counters["nodes"]
-                .as_u64()
-                .ok_or("missing actual nodes")?;
+            add_search_nodes(
+                &mut report,
+                row.search.counters["nodes"]
+                    .as_u64()
+                    .ok_or("missing actual nodes")?,
+                "accepted_return",
+            )?;
             *report
                 .achieved_depths
                 .entry(row.search.completed_depth.to_string())
@@ -777,6 +874,9 @@ fn summarize(header: &PilotHeader, games: &[GameRecord]) -> Result<PilotReport> 
 
 /// Saved-only canonical replay; no evaluator, Search, model or extra label search.
 pub fn audit(path: &Path) -> Result<PilotReport> {
+    if depth6::is_stream(path)? {
+        return depth6::audit(path);
+    }
     let file = File::open(path.join("pilot-stream.jsonl"))?;
     let mut reader = BufReader::new(file);
     let mut raw = Vec::new();
@@ -1077,6 +1177,8 @@ mod tests {
                 per_move_timeout_ms: None,
                 max_total_plies: 200,
                 cpu_core: 0,
+                game_workers: None,
+                worker_cores: vec![],
                 host_ram_reserve: 4 * 1024 * 1024 * 1024,
                 max_memory_bytes: 2 * 1024 * 1024 * 1024 - 64 * 1024 * 1024,
                 max_output_bytes: 1024 * 1024 * 1024,
@@ -1137,4 +1239,14 @@ mod tests {
             );
         }
     }
+}
+
+/// Caller-owned cancellation for the explicit depth6 recipe. Legacy entry stays serial.
+pub fn run_depth6_with_cancel(
+    config: &PilotConfig,
+    config_sha256: String,
+    cancel: &AtomicBool,
+) -> Result<PilotReport> {
+    teacher_pilot::depth6::validate(config)?;
+    depth6::run(config, config_sha256, cancel)
 }
