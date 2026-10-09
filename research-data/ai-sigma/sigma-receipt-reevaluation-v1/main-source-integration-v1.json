@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "scope": "source5 exact currentcompiledcaller intake; Main typecheck, configbindings, actualbackend/livequalification/new32 still pending",
+  "writer_reader_STOP": "2026-10-09T01:20:11.726625+00:00",
+  "paths": [
+    {
+      "path": "crates/quoridor-runner/src/lib.rs",
+      "before_sha256": "c7cc46fb3777a2a4ea785c77b4816a319617d2e0011ee41658f9396126dd0b0f",
+      "before_bytes": 538,
+      "before_mode": 420,
+      "after_sha256": "304470d6a273c724d5025ccce40903286ee8b673aee12ca328ac79f2d86b2254",
+      "after_bytes": 567,
+      "after_mode": 420,
+      "supplied_source_path": "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/crates/quoridor-runner/src/lib.rs",
+      "actual214_binding_match": true,
+      "Main_path_actual214_membership": false
+    },
+    {
+      "path": "crates/quoridor-runner/src/main.rs",
+      "before_sha256": "303869895b7661ea71318e0e075aefecd867cd2a3d64c816dad76c25ce9b1124",
+      "before_bytes": 10494,
+      "before_mode": 420,
+      "after_sha256": "47e4cfffc91e592b2638112a63d061bdfe9711433b5b05e130c8fda9c7b86b6f",
+      "after_bytes": 16940,
+      "after_mode": 420,
+      "supplied_source_path": "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/crates/quoridor-runner/src/main.rs",
+      "actual214_binding_match": true,
+      "Main_path_actual214_membership": false
+    },
+    {
+      "path": "crates/quoridor-runner/src/runtime.rs",
+      "before_sha256": "eea8c87904745dad0825ae5e8f1e4381b809cbe9b9c6f75c8206d5daddc7fb57",
+      "before_bytes": 187369,
+      "before_mode": 420,
+      "after_sha256": "18bac6a7373529aa09925978952f392373a90f480e7f4ac14811c2c7231d4ccc",
+      "after_bytes": 203464,
+      "after_mode": 420,
+      "supplied_source_path": "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/crates/quoridor-runner/src/runtime.rs",
+      "actual214_binding_match": true,
+      "Main_path_actual214_membership": false
+    },
+    {
+      "path": "crates/quoridor-runner/src/sigma_clock.rs",
+      "before_sha256": "21e8661423410e4f0adf0abf79210fc48330d1814275e34240bbe7b829411bf1",
+      "before_bytes": 20675,
+      "before_mode": 420,
+      "after_sha256": "0485d49daba990396ad21c19c15c21f75870d568d7c943850951b9d27e381cd1",
+      "after_bytes": 26363,
+      "after_mode": 420,
+      "supplied_source_path": "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/crates/quoridor-runner/src/sigma_clock.rs",
+      "actual214_binding_match": true,
+      "Main_path_actual214_membership": false
+    },
+    {
+      "path": "crates/quoridor-runner/src/sigma_qualification.rs",
+      "before_sha256": null,
+      "before_bytes": 0,
+      "before_mode": null,
+      "after_sha256": "15910bc69d4a6809ce0dea581551e8fe7611e529ca9724a5852e3687ac36d3bd",
+      "after_bytes": 38187,
+      "after_mode": 420,
+      "supplied_source_path": "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/crates/quoridor-runner/src/sigma_qualification.rs",
+      "actual214_binding_match": true,
+      "Main_path_actual214_membership": false
+    }
+  ],
+  "reconstruction": {
+    "base_git": "7c25b8e36b9d4a631c3ab27d1a4096169e99b5eb",
+    "patch_path": "/workspaces/quoridor/.artifacts/research-acceptance/sigma-caller-main-v1/maintained-caller-current.patch",
+    "sha256": "a019e36d13c3778a5a41e93314e2893a649320c8a360c08c93cf9e18cf29fa6c",
+    "bytes": 92319,
+    "applycheck_apply_and_post_Rustfmt_match": "PASS"
+  },
+  "qualification": {
+    "original13tests": "supplied be9 PASS retained/no replay",
+    "fullscopeClippy_keepgoing_Dwarnings": "actual596fa PASS",
+    "currentrelease": "actual596fa PASS",
+    "private_supplied": {
+      "path": "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/private-current-v5/quoridor-runner",
+      "SHA256": "633f05e03889661f2f79a628efe814f5aaa9c933e6abafd0332f25fc7fffe143",
+      "bytes": 7993152,
+      "mode": 493
+    },
+    "private_payload_read_or_copied": false,
+    "software_whole_status": "FAILED Dmetadata existing onecohort config validation beforebackend",
+    "software_receipt": {
+      "path": "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/materialization-v7/failed-software-partial-PASS-STOP-v6.json",
+      "sha256": "7fde31cf70ded07d879a83d5b19c9a2c75e7c5bcceeaa9e5a674512db85d90b4",
+      "controller_STOP": "2026-10-09T01:04:53.701596Z",
+      "whole_failed_controller_s": 50.60275848291349
+    },
+    "review": "same347.5 source760591 and mechanically equivalent CLI decodercb2f; no broadreview/test replay",
+    "pending": [
+      "cohort provenance-preserving config normalization and exactly2 zero-backend metadata againstsamecurrentprivate",
+      "needed onecurrentMain runnerbin typecheck including newly integratedD6 modules; separate scope/not private4game orlive source gate",
+      "actual<=64 logical live qualification before newD16 thenBEST51NN16"
+    ]
+  },
+  "changes": "explicit qualifiedcost/timed caller, strict descriptorlineage/admission and currentpairdecoder; originalscore/model/PUCT/RNG/receipt/commit/math/default unchanged in reviewed scope",
+  "Root_tests_Cargo_models_native_games": 0,
+  "remaining": [],
+  "resource": {
+    "whole347_bytes": 4294967296,
+    "Root_intake_increment_upper_bytes": 4194304,
+    "components": "existing347source64MiB+reviewGit128MiB",
+    "six_failedsoftware_whole_s": 235.46408747776877,
+    "nested_added": false,
+    "oldRAW_caps_masks_assets_fees_UNKNOWN": "held, no deletion/move/refund",
+    "continuous_peak_adminfees": "UNKNOWN"
+  },
+  "not_admitted": "backend/live cost/clock/game runtime/strength/trained models/N/fullgeneration/fits96; original323pause/seals/defaultweights held",
+  "currentRoot_Cargo_model_fair_reservation": "NONE"
+}

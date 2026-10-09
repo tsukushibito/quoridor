@@ -50,17 +50,15 @@ impl SigmaCostQualification {
         config: &Config,
         backend: &dyn InferenceBackend,
     ) -> Result<crate::sigma_clock::Admission> {
-        let metadata = backend.metadata();
-        let binding = serde_json::json!({"backend":metadata.backend,"model_sha":metadata.model_sha,
-            "max_batch":metadata.max_batch,"input_features":metadata.input_features,"output_values":metadata.output_values});
+        let binding = crate::sigma_qualification::backend_binding(config, backend.metadata())?;
         if self.whole_operation_upper_ns == 0
             || self.decision_communication_upper_ns == 0
             || self.config_sha256 != crate::arena::json_digest(config)?
             || self.compiled_sources_sha256
-                != crate::arena::json_digest(&crate::arena_manifest::source_bindings())?
+                != crate::arena::json_digest(&crate::sigma_qualification::sources())?
             || self.executable_sha256
                 != crate::arena_manifest::file_sha256(&std::env::current_exe()?)?
-            || self.backend_sha256 != crate::arena::json_digest(&binding)?
+            || self.backend_sha256 != binding
             || self.evidence_sha256.len() != 64
             || !self.evidence_sha256.bytes().all(|b| b.is_ascii_hexdigit())
         {
@@ -1692,6 +1690,10 @@ struct SigmaReplies<'a> {
     rx: &'a mpsc::Receiver<Response>,
     admission: Option<crate::sigma_clock::Admission>,
 }
+struct SigmaReceiptOptions<'a> {
+    model_sha: &'a str,
+    measurement: Option<(u64, bool)>,
+}
 fn play_timed_sigma(
     game: &mut Game,
     engine_index: usize,
@@ -1701,6 +1703,32 @@ fn play_timed_sigma(
     replies: SigmaReplies<'_>,
     model_sha: &str,
 ) -> std::result::Result<(), String> {
+    play_sigma_receipt(
+        game,
+        engine_index,
+        config,
+        cancel,
+        run_start,
+        replies,
+        SigmaReceiptOptions {
+            model_sha,
+            measurement: None,
+        },
+    )
+}
+fn play_sigma_receipt(
+    game: &mut Game,
+    engine_index: usize,
+    config: &Config,
+    cancel: &AtomicBool,
+    run_start: Instant,
+    replies: SigmaReplies<'_>,
+    options: SigmaReceiptOptions<'_>,
+) -> std::result::Result<(), String> {
+    let SigmaReceiptOptions {
+        model_sha,
+        measurement,
+    } = options;
     let admission = replies.admission.clone();
     let started = Instant::now();
     let e = &config.engines[engine_index];
@@ -1708,15 +1736,22 @@ fn play_timed_sigma(
     let reserve = Duration::from_millis(config.arena.as_ref().map_or(0, |a| a.return_reserve_ms));
     let id_game = game.planned.id;
     let generation = game.generation;
-    let until = started
-        .checked_add(
-            duration.saturating_sub(
-                admission
-                    .as_ref()
-                    .map_or(reserve, |a| reserve.max(a.decision_communication)),
-            ),
+    let timed = measurement.is_none_or(|(_, timed)| timed);
+    let until = if timed {
+        Some(
+            started
+                .checked_add(
+                    duration.saturating_sub(
+                        admission
+                            .as_ref()
+                            .map_or(reserve, |a| reserve.max(a.decision_communication)),
+                    ),
+                )
+                .ok_or("invalid_sigma_decision_deadline")?,
         )
-        .ok_or("invalid_sigma_decision_deadline")?;
+    } else {
+        None
+    };
     let root = game.context.clone();
     let initial_rng = game.rng.clone();
     let (call, receipt, rng, drained) = thread::scope(|scope| {
@@ -1748,56 +1783,58 @@ fn play_timed_sigma(
                     sent: Instant::now(),
                 });
             };
-            let call = crate::sigma_clock::run(
-                &root,
-                crate::sigma_clock::Budget {
-                    started,
-                    duration,
-                    reserve,
-                    admission: admission.clone(),
+            let budget = crate::sigma_clock::Budget {
+                started,
+                duration,
+                reserve,
+                admission: admission.clone(),
+                generation,
+                simulations: config.simulations,
+                limits: Limits {
+                    max_nodes: config.mcts_max_nodes,
+                    max_depth: 200,
+                    max_bytes: config.mcts_max_bytes,
+                },
+            };
+            let cancelled = || {
+                cancel.load(Ordering::Relaxed)
+                    || config.pause_file.as_ref().is_some_and(|p| p.exists())
+            };
+            let infer = |token, input, prior: &crate::sigma_clock::Call| {
+                let id = RequestId {
+                    game: id_game,
                     generation,
-                    simulations: config.simulations,
-                    limits: Limits {
-                        max_nodes: config.mcts_max_nodes,
-                        max_depth: 200,
-                        max_bytes: config.mcts_max_bytes,
-                    },
-                },
-                || {
-                    cancel.load(Ordering::Relaxed)
-                        || config.pause_file.as_ref().is_some_and(|p| p.exists())
-                },
-                |token, input, prior| {
-                    let id = RequestId {
-                        game: id_game,
-                        generation,
-                        token,
-                    };
-                    replies
-                        .events
-                        .send(Event::Request(Request {
-                            id,
-                            input,
-                            created: Instant::now(),
-                            reply: Some(replies.tx.clone()),
-                        }))
-                        .map_err(|_| "inference_channel_closed".to_owned())?;
-                    let output = wait_sigma_reply(replies.rx, id, || {
-                        if guard(config, run_start, u64::MAX).is_some() {
-                            cancel.store(true, Ordering::Relaxed);
-                        }
-                        // Notify from a frozen prior completion while continuing
-                        // to await this exact admitted request's terminal reply.
-                        if prior.completed.is_some() && Instant::now() >= until {
-                            notify(prior.completed.as_ref());
-                        }
-                    })?;
-                    Ok(crate::sigma_clock::Reply {
-                        output,
-                        decision_notified: notified.get(),
-                    })
-                },
-            );
+                    token,
+                };
+                replies
+                    .events
+                    .send(Event::Request(Request {
+                        id,
+                        input,
+                        created: Instant::now(),
+                        reply: Some(replies.tx.clone()),
+                    }))
+                    .map_err(|_| "inference_channel_closed".to_owned())?;
+                let output = wait_sigma_reply(replies.rx, id, || {
+                    if guard(config, run_start, u64::MAX).is_some() {
+                        cancel.store(true, Ordering::Relaxed);
+                    }
+                    // Notify from a frozen prior completion while continuing
+                    // to await this exact admitted request's terminal reply.
+                    if prior.completed.is_some() && until.is_some_and(|d| Instant::now() >= d) {
+                        notify(prior.completed.as_ref());
+                    }
+                })?;
+                Ok(crate::sigma_clock::Reply {
+                    output,
+                    decision_notified: notified.get(),
+                })
+            };
+            let call = if let Some((max_calls, timed)) = measurement {
+                crate::sigma_clock::measure(&root, budget, max_calls, timed, cancelled, infer)
+            } else {
+                crate::sigma_clock::run(&root, budget, cancelled, infer)
+            };
             notify(call.completed.as_ref());
             call
         };
@@ -1828,7 +1865,11 @@ fn play_timed_sigma(
             .as_nanos()
             .min(u64::MAX as u128) as u64
     };
-    let deadline = ns(started).checked_add(duration.as_nanos().min(u64::MAX as u128) as u64);
+    let deadline = if timed {
+        ns(started).checked_add(duration.as_nanos().min(u64::MAX as u128) as u64)
+    } else {
+        None
+    };
     let backend_failed = call.error.as_ref().is_some_and(|e| {
         !matches!(
             e.as_str(),
@@ -1841,7 +1882,15 @@ fn play_timed_sigma(
         || call.stop == "cancelled"
         || config.pause_file.as_ref().is_some_and(|p| p.exists());
     let checked = Instant::now();
-    let mut decision = sigma_receipt_decision(started.checked_add(duration), &receipt, cancelled);
+    let mut decision = sigma_receipt_decision(
+        if timed {
+            started.checked_add(duration)
+        } else {
+            None
+        },
+        &receipt,
+        cancelled,
+    );
     if !cancelled && call.error.is_some() {
         decision = Err(crate::arena_clock::Failure::EngineError);
     }
@@ -1849,6 +1898,19 @@ fn play_timed_sigma(
         decision = Err(crate::arena_clock::failure_from_reason(&reason));
     }
     let mut counters = call.counters();
+    counters["measurement_mode"] = measurement
+        .map(|(_, timed)| {
+            if timed {
+                "qualified-timed"
+            } else {
+                "explicit-untimed"
+            }
+        })
+        .into();
+    counters["measurement_call_limit"] = measurement.map(|(n, _)| n).into();
+    counters["immutable_chosen_action"] = action.into();
+    counters["authority_legal"] = receipt.legal.into();
+    counters["inflight_after_drain"] = 0.into();
     counters["clock_contract"] = SIGMA_RECEIPT_CLOCK.into();
     counters["clock_contract_sha256"] = SIGMA_RECEIPT_CONTRACT_SHA256.into();
     counters["authority_receipt_ns"] = ns(receipt.received).into();
@@ -1975,6 +2037,35 @@ fn play_timed_sigma(
     )
     .map_err(|e| e.to_string())
 }
+fn new_game(p: Planned, context: SigmaContext, config: &Config, record_teacher: bool) -> Game {
+    let prefix = p.opening.clone();
+    let seed = config.seed ^ (p.id as u64 + 1).wrapping_mul(0x9e3779b97f4a7c15);
+    Game {
+        planned: p,
+        context,
+        prefix,
+        rows: Vec::new(),
+        search: None,
+        alpha_sessions: (0..config.engines.len()).map(|_| None).collect(),
+        tt_profiles: (0..config.engines.len())
+            .map(|_| TtProfile::default())
+            .collect(),
+        pending: None,
+        generation: 1,
+        root_nn: None,
+        rng: Rng::new(seed),
+        nn: 0,
+        advance_calls: 0,
+        terminal_no_nn: 0,
+        allocated_nodes_peak: 0,
+        origin: Instant::now(),
+        observations: Vec::new(),
+        failure: None,
+        forfeit_winner: None,
+        record_teacher,
+        move_started: None,
+    }
+}
 fn worker(
     config: Arc<Config>,
     plans: Vec<Planned>,
@@ -1997,35 +2088,7 @@ fn worker(
         while games.len() < capacity && !cancel.load(Ordering::Relaxed) {
             let Some(p) = waiting.pop_front() else { break };
             match SigmaContext::from_prefix_with_rules(&p.opening, config.ruleset) {
-                Ok(context) => {
-                    let prefix = p.opening.clone();
-                    let seed = config.seed ^ (p.id as u64 + 1).wrapping_mul(0x9e3779b97f4a7c15);
-                    games.push(Game {
-                        planned: p,
-                        context,
-                        prefix,
-                        rows: Vec::new(),
-                        search: None,
-                        alpha_sessions: (0..config.engines.len()).map(|_| None).collect(),
-                        tt_profiles: (0..config.engines.len())
-                            .map(|_| TtProfile::default())
-                            .collect(),
-                        pending: None,
-                        generation: 1,
-                        root_nn: None,
-                        rng: Rng::new(seed),
-                        nn: 0,
-                        advance_calls: 0,
-                        terminal_no_nn: 0,
-                        allocated_nodes_peak: 0,
-                        origin: Instant::now(),
-                        observations: Vec::new(),
-                        failure: None,
-                        forfeit_winner: None,
-                        record_teacher,
-                        move_started: None,
-                    })
-                }
+                Ok(context) => games.push(new_game(p, context, &config, record_teacher)),
                 Err(e) => {
                     let _ = events.send(Event::Finished(
                         unknown(&p, format!("invalid_opening:{e:?}")),
@@ -2886,39 +2949,7 @@ fn run_inner(
             pump.backend_warmup_nn = b.counters().warm_rows;
             pump.backend_work = Some(inference_work(b.counters()));
             *batches.entry(n).or_insert(0) += 1;
-            match result {
-                Ok(outputs) if outputs.len() == n => {
-                    // A running backend must return its original result even if
-                    // cancellation was requested while it was executing.
-                    for (r, o) in requests.into_iter().zip(outputs) {
-                        if o.logits.iter().any(|v| !v.is_finite())
-                            || !o.value.is_finite()
-                            || o.value.abs() > 1.0
-                        {
-                            let _ = r.complete(Err("invalid_inference".into()));
-                            stopped = Some("invalid_inference".into());
-                            cancel.store(true, Ordering::Relaxed);
-                        } else {
-                            let _ = r.complete(Ok(o));
-                        }
-                    }
-                }
-                Ok(_) => {
-                    for r in requests {
-                        let _ = r.complete(Err("backend_output_shape".into()));
-                    }
-                    stopped = Some("backend_output_shape".into());
-                    cancel.store(true, Ordering::Relaxed);
-                }
-                Err(e) => {
-                    let error = format!("inference:{e}");
-                    for r in requests {
-                        let _ = r.complete(Err(error.clone()));
-                    }
-                    stopped = Some(error);
-                    cancel.store(true, Ordering::Relaxed);
-                }
-            }
+            deliver_inference(requests, result, &mut stopped, &cancel);
         }
     }
     cancel.store(true, Ordering::Relaxed);
@@ -3028,6 +3059,102 @@ fn run_inner(
         .into());
     }
     Ok(report)
+}
+fn deliver_inference(
+    requests: Vec<Request>,
+    result: std::result::Result<Vec<NetworkOutput>, quoridor_inference::InferenceError>,
+    stopped: &mut Option<String>,
+    cancel: &AtomicBool,
+) {
+    let n = requests.len();
+    match result {
+        Ok(outputs) if outputs.len() == n => {
+            // A running backend must return its original result even if
+            // cancellation was requested while it was executing.
+            for (r, o) in requests.into_iter().zip(outputs) {
+                if o.logits.iter().any(|v| !v.is_finite())
+                    || !o.value.is_finite()
+                    || o.value.abs() > 1.0
+                {
+                    let _ = r.complete(Err("invalid_inference".into()));
+                    *stopped = Some("invalid_inference".into());
+                    cancel.store(true, Ordering::Relaxed);
+                } else {
+                    let _ = r.complete(Ok(o));
+                }
+            }
+        }
+        Ok(_) => {
+            for r in requests {
+                let _ = r.complete(Err("backend_output_shape".into()));
+            }
+            *stopped = Some("backend_output_shape".into());
+            cancel.store(true, Ordering::Relaxed);
+        }
+        Err(e) => {
+            let error = format!("inference:{e}");
+            for r in requests {
+                let _ = r.complete(Err(error.clone()));
+            }
+            *stopped = Some(error);
+            cancel.store(true, Ordering::Relaxed);
+        }
+    }
+}
+#[cfg(test)]
+mod sigma_measurement_delivery_tests {
+    use super::*;
+    #[test]
+    fn measurement_publication_preserves_the_primary_error_object() {
+        use std::error::Error;
+        let error = MeasurementPublicationFailure {
+            primary: Box::new(std::io::Error::new(
+                std::io::ErrorKind::InvalidData,
+                "original",
+            )),
+            publication: "secondary".into(),
+        };
+        assert_eq!(
+            error
+                .source()
+                .unwrap()
+                .downcast_ref::<std::io::Error>()
+                .unwrap()
+                .kind(),
+            std::io::ErrorKind::InvalidData
+        );
+        assert!(error.to_string().contains("original"));
+        assert!(error.to_string().contains("secondary"));
+    }
+    #[test]
+    fn shared_measurement_delivery_keeps_the_original_terminal_error_after_cancel() {
+        let (tx, rx) = mpsc::channel();
+        let id = RequestId {
+            game: 0,
+            generation: 1,
+            token: 7,
+        };
+        let request = Request {
+            id,
+            input: Box::new([0.; 648]),
+            created: Instant::now(),
+            reply: Some(tx),
+        };
+        let cancel = AtomicBool::new(true);
+        let mut stopped = None;
+        deliver_inference(
+            vec![request],
+            Err(quoridor_inference::InferenceError(
+                "original-native-error".into(),
+            )),
+            &mut stopped,
+            &cancel,
+        );
+        let reply = rx.recv().unwrap();
+        assert_eq!(reply.id, id);
+        assert_eq!(reply.output.unwrap_err(), "inference:original-native-error");
+        assert_eq!(stopped.as_deref(), Some("inference:original-native-error"));
+    }
 }
 struct CompletionPublication<'a> {
     config: &'a Config,
@@ -3178,12 +3305,274 @@ pub fn run_with_sigma_cost_qualification(
 ) -> Result<RunReport> {
     run_owned(config, mode, backend, Some(qualification))
 }
+#[derive(Debug)]
+struct MeasurementPublicationFailure {
+    primary: Box<dyn std::error::Error + Send + Sync>,
+    publication: String,
+}
+impl std::fmt::Display for MeasurementPublicationFailure {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(
+            f,
+            "{}; measurement evidence publication:{}",
+            self.primary, self.publication
+        )
+    }
+}
+impl std::error::Error for MeasurementPublicationFailure {
+    fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
+        Some(self.primary.as_ref())
+    }
+}
+/// A separately admitted, explicitly finite measurement workload, never a game
+/// or an implicit calibration in a timed arena. The arena owns the complete
+/// prebound <=64-call campaign and supplies all phase allocations before entry.
+pub fn measure_sigma_cost(
+    plan: crate::sigma_qualification::MeasurementPlan,
+    plan_sha256: String,
+    qualification: Option<crate::sigma_qualification::BoundControl>,
+) -> Result<serde_json::Value> {
+    let qualifications =
+        crate::sigma_qualification::resolve_measurement_entry(&plan, qualification.as_ref())?;
+    measure_sigma_cost_resolved(plan, plan_sha256, qualifications)
+}
+fn measure_sigma_cost_resolved(
+    plan: crate::sigma_qualification::MeasurementPlan,
+    plan_sha256: String,
+    qualifications: Option<Vec<SigmaCostQualification>>,
+) -> Result<serde_json::Value> {
+    use serde_json::json;
+    let configs = plan.validate()?;
+    let timed = plan.mode == "qualified-timed";
+    if timed != qualifications.is_some()
+        || qualifications
+            .as_ref()
+            .is_some_and(|q| q.len() != configs.len())
+    {
+        return Err("timed validation requires explicit mapped measurement evidence; untimed never uses a cost guess".into());
+    }
+    let config = &configs[0];
+    let _affinity = crate::resources::AffinityGuard::capture()?;
+    let admission = if let Some(core) = config.inference_cpu_core {
+        if serial_shared_inference_allowed(config, "arena", false) {
+            crate::resources::admit_serial_shared(
+                core,
+                config.host_ram_reserve,
+                config.max_memory_bytes,
+            )?
+        } else {
+            crate::resources::admit_explicit(
+                1,
+                &config.cpu_cores,
+                core,
+                config.host_ram_reserve,
+                config.max_memory_bytes,
+            )?
+        }
+    } else {
+        crate::resources::admit(
+            1,
+            &config.cpu_cores,
+            true,
+            config.host_ram_reserve,
+            config.max_memory_bytes,
+        )?
+    };
+    let mut output_owned = false;
+    acquire_output(&plan.output, &mut output_owned)?;
+    let result = (|| -> Result<serde_json::Value> {
+        let started = Instant::now();
+        let mut backend = make_backend(config)?.ok_or("measurement backend missing")?;
+        if crate::sigma_qualification::backend_binding(config, backend.metadata())?
+            != plan.native.backend_sha256
+        {
+            return Err("measurement backend/native binding mismatch".into());
+        }
+        let initial_work = backend.counters();
+        // CPU ORT construction has no implicit forward. Reject unknown capture,
+        // hidden warm/retry or an already-used runtime instead of refunding it.
+        if initial_work != InferenceCounters::default() {
+            return Err(
+                "measurement runtime already used or has unallocated startup model work".into(),
+            );
+        }
+        let sigma_admissions = qualifications
+            .as_ref()
+            .map(|q| {
+                q.iter()
+                    .zip(&configs)
+                    .map(|(q, c)| q.admission(c, backend.as_ref()))
+                    .collect::<Result<Vec<_>>>()
+            })
+            .transpose()?;
+        if let Some(core) = admission.inference_core {
+            crate::resources::pin(core)?;
+        }
+        let cancel = AtomicBool::new(false);
+        let (tx, rx) = mpsc::sync_channel(8);
+        let mut attempted = 0u64;
+        let mut terminal_replies = 0u64;
+        let mut stopped = None;
+        let mut inference_seconds = 0.0;
+        let worker_core = admission.worker_cores[0];
+        let (items, worker_error) = thread::scope(|scope| -> Result<_> {
+            let cancel = &cancel;
+            let configs = &configs;
+            let plan = &plan;
+            let sigma_admissions = &sigma_admissions;
+            let worker = scope.spawn(move || -> (Vec<serde_json::Value>, Option<String>) {
+                let mut items = Vec::new();
+                if let Err(error) = crate::resources::pin(worker_core) {
+                    return (items, Some(format!("measurement_worker_affinity:{error}")));
+                }
+                let (reply_tx, reply_rx) = mpsc::channel();
+                for (index, item) in plan.workload.iter().enumerate() {
+                    if cancel.load(Ordering::Relaxed) { return (items, Some("measurement_cancelled".into())); }
+                    let config = &configs[item.configuration];
+                    let context = match SigmaContext::from_prefix_with_rules(&item.prefix, config.ruleset) {
+                        Ok(context) => context,
+                        Err(error) => return (items, Some(format!("measurement_input:{error}"))),
+                    };
+                    let parent = serde_json::json!({"prefix":item.prefix,"state_key":quoridor_core::research::HistoryKey::from(context.position()).history_string(),"ply":context.total_ply()});
+                    let mut game = new_game(Planned { id:index, opening:item.prefix.clone(), family:item.id.clone(), split:Split::Train }, context, config, false);
+                    let model_sha = &config.inference.as_ref().expect("validated inference").model_sha;
+                    let result = play_sigma_receipt(&mut game, 0, config, cancel, started, SigmaReplies {
+                        events:&tx, tx:&reply_tx, rx:&reply_rx,
+                        admission:sigma_admissions.as_ref().map(|a| a[item.configuration].clone()),
+                    }, SigmaReceiptOptions { model_sha, measurement: Some((item.max_logical_calls, timed)) });
+                    let observation = game.observations.last();
+                    let error = result.err().map(|error| observation
+                        .and_then(|o| o.counters["terminal_request_error"].as_str())
+                        .map(str::to_owned).unwrap_or(error));
+                    // The first explicitly admitted call is the warmup and
+                    // the second is its continuation on this SAME cursor.
+                    // No extra search, backend warmup, re-warm or retry occurs.
+                    let actual_calls=observation.and_then(|o|o.counters["nn_requests_attempted"].as_u64()).unwrap_or(0);
+                    let error=error.or_else(|| (actual_calls!=item.max_logical_calls).then(||"unsupported_measurement_prerequisite:fixed_two_calls_not_completed".into()));
+                    items.push(json!({"id":item.id,"stage":item.stage,"configuration":item.configuration,
+                        "config_sha256":plan.configurations[item.configuration].normalized_sha256,
+                        "parent":parent,"receipt":observation,"warmup_logical_calls":actual_calls.min(item.warmup_logical_calls),
+                        "error":error,"full_operation_scope":"maintained advance/pack/request queue/backend/matching reply/validation/supply/legal snapshot/return snapshot"}));
+                    if error.is_some() { return (items, error); }
+                }
+                (items, None)
+            });
+            while let Ok(event) = rx.recv() {
+                match event {
+                    Event::Request(request) => {
+                        let reason = if attempted >= plan.max_logical_calls {
+                            Some("measurement_call_allocation_exhausted".to_owned())
+                        } else if unix_ms() >= plan.native.valid_until_unix_ms {
+                            Some("measurement_identity_expired".to_owned())
+                        } else {
+                            guard(config, started, admission.memory_limit)
+                        };
+                        if let Some(reason) = reason {
+                            let _ = request.complete(Err(reason.clone()));
+                            stopped.get_or_insert(reason);
+                            cancel.store(true, Ordering::Relaxed);
+                            continue;
+                        }
+                        let requests = vec![request];
+                        let input: Vec<_> = requests.iter().map(|r| *r.input).collect();
+                        let before = Instant::now();
+                        let result = backend.infer(&input);
+                        inference_seconds += before.elapsed().as_secs_f64();
+                        attempted += 1;
+                        // Every admitted synchronous invocation returns exactly
+                        // one terminal response, including its original error.
+                        deliver_inference(requests, result, &mut stopped, cancel);
+                        terminal_replies += 1;
+                    }
+                    Event::Finished(_, _) | Event::WorkerStopped => {
+                        stopped.get_or_insert_with(|| "unexpected_measurement_event".into());
+                        cancel.store(true, Ordering::Relaxed);
+                    }
+                }
+            }
+            worker
+                .join()
+                .map_err(|_| "measurement_worker_panicked".into())
+        })?;
+        if let Some(error) = worker_error {
+            stopped.get_or_insert(error);
+        }
+        let work = backend.counters();
+        if work.logical_rows != attempted
+            || work.executed_rows != attempted
+            || work.warm_rows != 0
+            || work.failed_warm_rows != 0
+            || work.capture_rows != Some(0)
+        {
+            stopped.get_or_insert_with(|| {
+                "native work census differs from allocated logical requests".into()
+            });
+        }
+        let native_work = inference_work(work);
+        let cleanup_started = Instant::now();
+        drop(backend);
+        let cleanup_seconds = cleanup_started.elapsed().as_secs_f64();
+        Ok(
+            json!({"schema":"quoridor-sigma-receipt-measurement-result-v1",
+            "plan_sha256":plan_sha256,"campaign_sha256":plan.campaign.sha256,"phase_id":plan.phase_id,"native":plan.native,"mode":plan.mode,
+            "configuration_sha256":plan.configurations.iter().map(|c|&c.normalized_sha256).collect::<Vec<_>>(),
+            "complete":stopped.is_none() && items.len()==plan.workload.len(),"items":items,
+            "logical_calls_attempted":attempted,"returned_terminal_replies":terminal_replies,
+            "prior_logical_calls":plan.prior_logical_calls,"allocated_logical_calls":plan.max_logical_calls,
+            "backend_work":native_work,"pure_backend_seconds":inference_seconds,
+            "backend_cleanup_seconds":cleanup_seconds,"whole_entry_seconds":started.elapsed().as_secs_f64(),
+            "admission":admission,"inflight_after_drain":0,"all_workers_joined":true,
+            "stopped":stopped,"hard_realtime_certificate":false,"games_played":0}),
+        )
+    })();
+    let record = match &result {
+        Ok(record) => record.clone(),
+        Err(error) => json!({"schema":"quoridor-sigma-receipt-measurement-failure-v1",
+            "complete":false,"plan_sha256":plan_sha256,"native":plan.native,"primary_error":error.to_string(),
+            "remaining_work":"UNKNOWN on initialization/unwind; no successful qualification"}),
+    };
+    let publication = (|| -> Result<()> {
+        use std::io::Write;
+        let bytes = serde_json::to_vec_pretty(&record)?;
+        if bytes.len() as u64 > config.max_output_bytes {
+            return Err("measurement evidence output budget".into());
+        }
+        let mut file = OpenOptions::new()
+            .create_new(true)
+            .write(true)
+            .open(plan.output.join("measurement-result.json"))?;
+        file.write_all(&bytes)?;
+        file.sync_all()?;
+        Ok(())
+    })();
+    match (result, publication) {
+        (Err(primary), Err(publication)) => Err(Box::new(MeasurementPublicationFailure {
+            primary,
+            publication: publication.to_string(),
+        })),
+        (Err(primary), _) => Err(primary),
+        (Ok(_), Err(publication)) => Err(publication),
+        (Ok(record), Ok(())) => Ok(record),
+    }
+}
 fn run_owned(
     config: &Config,
     mode: &str,
     backend: Option<Box<dyn InferenceBackend>>,
     qualification: Option<SigmaCostQualification>,
 ) -> Result<RunReport> {
+    if let Some(q) = &qualification
+        && (q.whole_operation_upper_ns == 0
+            || q.decision_communication_upper_ns == 0
+            || q.valid_until_unix_ms <= unix_ms()
+            || q.config_sha256 != crate::arena::json_digest(config)?
+            || q.compiled_sources_sha256
+                != crate::arena::json_digest(&crate::sigma_qualification::sources())?
+            || q.executable_sha256
+                != crate::arena_manifest::file_sha256(&std::env::current_exe()?)?)
+    {
+        return Err("sigma_cost_qualification_static_binding_invalid".into());
+    }
     let mut output_owned = false;
     let result = run_inner(config, mode, backend, &mut output_owned, qualification);
     if let Err(error) = &result

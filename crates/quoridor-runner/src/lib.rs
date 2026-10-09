@@ -8,6 +8,7 @@ pub mod config;
 pub mod resources;
 pub mod runtime;
 mod sigma_clock;
+pub mod sigma_qualification;
 pub mod teacher_pilot;
 pub mod teacher_pilot_execution;
 pub use arena_manifest::audit as audit_arena;

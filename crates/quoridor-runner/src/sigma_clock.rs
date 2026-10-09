@@ -61,6 +61,8 @@ pub(crate) struct Call {
     pub advance_calls: u64,
     pub discarded_replies: u64,
     pub operation_peak: Duration,
+    pub measurement_operations_ns: Vec<u64>,
+    pub measurement_return_snapshot_ns: u64,
     pub stop: &'static str,
     pub error: Option<String>,
 }
@@ -78,6 +80,8 @@ impl Call {
             advance_calls: 0,
             discarded_replies: 0,
             operation_peak: Duration::ZERO,
+            measurement_operations_ns: Vec::new(),
+            measurement_return_snapshot_ns: 0,
             stop: "internal_time_limit",
             error: None,
         }
@@ -88,6 +92,8 @@ impl Call {
             "advance_calls":self.advance_calls, "root_nn_stm":self.root_nn,
             "whole_search":self.whole.as_ref().map(snapshot_counters),
             "operation_peak_ns":self.operation_peak.as_nanos(),
+            "measurement_operations_ns":self.measurement_operations_ns,
+            "measurement_return_snapshot_ns":self.measurement_return_snapshot_ns,
             "physical_kernel_calls":null})
     }
 }
@@ -117,6 +123,48 @@ fn run_with_clock(
     root: &SigmaContext,
     budget: Budget,
     cancelled: impl Fn() -> bool,
+    infer: impl FnMut(u64, Box<[f32; 648]>, &Call) -> Result<Reply, String>,
+    now: impl FnMut() -> Instant,
+) -> Call {
+    run_control(root, budget, None, cancelled, infer, now)
+}
+/// Finite qualification inlet: explicit untimed measurement or separately
+/// qualified timed validation. It never fabricates a clock admission.
+/// The continuation, supply, snapshot and action order below
+/// are shared with the timed route; the caller owns the aggregate call lease.
+pub(crate) fn measure(
+    root: &SigmaContext,
+    budget: Budget,
+    max_calls: u64,
+    timed: bool,
+    cancelled: impl Fn() -> bool,
+    infer: impl FnMut(u64, Box<[f32; 648]>, &Call) -> Result<Reply, String>,
+) -> Call {
+    run_control(
+        root,
+        budget,
+        Some((max_calls, timed)),
+        cancelled,
+        infer,
+        Instant::now,
+    )
+}
+struct OperationSample<'a> {
+    started: Instant,
+    samples: &'a std::cell::RefCell<Vec<u64>>,
+}
+impl Drop for OperationSample<'_> {
+    fn drop(&mut self) {
+        self.samples
+            .borrow_mut()
+            .push(self.started.elapsed().as_nanos().min(u64::MAX as u128) as u64);
+    }
+}
+fn run_control(
+    root: &SigmaContext,
+    budget: Budget,
+    measurement_calls: Option<(u64, bool)>,
+    cancelled: impl Fn() -> bool,
     mut infer: impl FnMut(u64, Box<[f32; 648]>, &Call) -> Result<Reply, String>,
     mut now: impl FnMut() -> Instant,
 ) -> Call {
@@ -124,19 +172,30 @@ fn run_with_clock(
     let reserve = budget.admission.as_ref().map_or(budget.reserve, |a| {
         budget.reserve.max(a.decision_communication)
     });
-    let Some(until) = budget
-        .started
-        .checked_add(budget.duration.saturating_sub(reserve))
-    else {
-        call.error = Some("INVALID_CALLER_DEADLINE".into());
-        call.stop = "engine_error";
-        return call;
-    };
-    if budget.duration.is_zero() || reserve >= budget.duration {
-        call.error = Some("INVALID_CALLER_RESERVE".into());
+    if measurement_calls.is_some_and(|(calls, _)| calls == 0 || calls > 64) {
+        call.error = Some("INVALID_MEASUREMENT_CALL_BOUND".into());
         call.stop = "engine_error";
         return call;
     }
+    let until = if measurement_calls.is_some_and(|(_, timed)| !timed) {
+        None
+    } else {
+        let Some(until) = budget
+            .started
+            .checked_add(budget.duration.saturating_sub(reserve))
+        else {
+            call.error = Some("INVALID_CALLER_DEADLINE".into());
+            call.stop = "engine_error";
+            return call;
+        };
+        if budget.duration.is_zero() || reserve >= budget.duration {
+            call.error = Some("INVALID_CALLER_RESERVE".into());
+            call.stop = "engine_error";
+            return call;
+        }
+        Some(until)
+    };
+    let measurements = std::cell::RefCell::new(Vec::new());
     let mut search = match Search::with_limits(
         root.clone(),
         budget.generation,
@@ -161,22 +220,35 @@ fn run_with_clock(
             break;
         }
         let operation_started = now();
-        let Some(admission) = &budget.admission else {
-            call.stop = "cost_unqualified";
-            break;
-        };
-        if !admission.current(operation_started) {
-            call.stop = "cost_stale";
+        let admission = budget.admission.as_ref();
+        if let Some(until) = until {
+            let Some(admission) = admission else {
+                call.stop = "cost_unqualified";
+                break;
+            };
+            if !admission.current(operation_started) {
+                call.stop = "cost_stale";
+                break;
+            }
+            if !admission.covers(operation_started, until) {
+                break;
+            }
+        }
+        if measurement_calls.is_some_and(|(limit, _)| call.attempted >= limit) {
+            call.stop = "measurement_call_cap";
             break;
         }
-        if !admission.covers(operation_started, until) {
-            break;
-        }
+        // Drop records the complete operation on every normal/error/cancel exit,
+        // through advance/packing/queue/reply/validation/supply/legal snapshot.
+        let _sample = measurement_calls.map(|_| OperationSample {
+            started: Instant::now(),
+            samples: &measurements,
+        });
         call.advance_calls += 1;
         let complete = match search.advance() {
             Ok(Progress::NeedInference { token, features }) => {
                 // Feature packing and traversal may have consumed the remaining clock.
-                if !admission.covers(now(), until) {
+                if until.is_some_and(|d| admission.is_none_or(|a| !a.covers(now(), d))) {
                     break;
                 }
                 call.attempted += 1;
@@ -184,7 +256,9 @@ fn run_with_clock(
                 call.callback_results += 1;
                 let elapsed = now().saturating_duration_since(operation_started);
                 call.operation_peak = call.operation_peak.max(elapsed);
-                admission.observe(elapsed);
+                if let Some(admission) = admission {
+                    admission.observe(elapsed);
+                }
                 let reply = match result {
                     Ok(o) => o,
                     Err(e) => {
@@ -216,8 +290,10 @@ fn run_with_clock(
                 }
                 let elapsed = now().saturating_duration_since(operation_started);
                 call.operation_peak = call.operation_peak.max(elapsed);
-                admission.observe(elapsed);
-                if reply.decision_notified || now() >= until {
+                if let Some(admission) = admission {
+                    admission.observe(elapsed);
+                }
+                if reply.decision_notified || until.is_some_and(|d| now() >= d) {
                     call.discarded_replies += 1;
                     if reply.decision_notified {
                         call.stop = "decision_notified";
@@ -259,20 +335,38 @@ fn run_with_clock(
                 break;
             }
             let at = now();
-            if at < until {
+            if until.is_none_or(|d| at < d) {
                 call.completed = Some(snapshot);
                 call.completed_at = Some(at);
             }
         }
         let elapsed = now().saturating_duration_since(operation_started);
         call.operation_peak = call.operation_peak.max(elapsed);
-        admission.observe(elapsed);
+        if let Some(admission) = admission {
+            admission.observe(elapsed);
+        }
         if complete || cap_reached {
             call.stop = "simulation_cap";
             break;
         }
     }
+    let return_started = measurement_calls.map(|_| Instant::now());
     call.whole = Some(search.snapshot());
+    if let Some(started) = return_started {
+        call.measurement_return_snapshot_ns =
+            started.elapsed().as_nanos().min(u64::MAX as u128) as u64;
+        call.measurement_operations_ns = measurements.into_inner();
+        if let Some(last) = call.measurement_operations_ns.last_mut() {
+            *last = last.saturating_add(call.measurement_return_snapshot_ns);
+        }
+        call.operation_peak = Duration::from_nanos(
+            call.measurement_operations_ns
+                .iter()
+                .copied()
+                .max()
+                .unwrap_or(0),
+        );
+    }
     call
 }
 
@@ -280,6 +374,70 @@ fn run_with_clock(
 mod tests {
     use super::*;
     use std::cell::Cell;
+    #[test]
+    fn untimed_measurement_has_explicit_finite_calls_without_guessed_admission() {
+        let mut b = budget(Instant::now(), 64);
+        b.admission = None;
+        b.duration = Duration::ZERO;
+        b.reserve = Duration::ZERO;
+        let calls = Cell::new(0);
+        let c = measure(
+            &SigmaContext::from_prefix(&[]).unwrap(),
+            b,
+            3,
+            false,
+            || false,
+            |_, _, _| {
+                calls.set(calls.get() + 1);
+                Ok(reply())
+            },
+        );
+        assert_eq!(calls.get(), 3);
+        assert_eq!(c.attempted, 3);
+        assert_eq!(c.callback_results, 3);
+        assert_eq!(c.stop, "measurement_call_cap");
+        assert!(!c.measurement_operations_ns.is_empty());
+        assert!(c.operation_peak > Duration::ZERO);
+    }
+    #[test]
+    fn timed_measurement_never_uses_the_untimed_admission_route() {
+        let mut b = budget(Instant::now(), 64);
+        b.admission = None;
+        let c = measure(
+            &SigmaContext::from_prefix(&[]).unwrap(),
+            b,
+            3,
+            true,
+            || false,
+            |_, _, _| panic!("unqualified backend admitted"),
+        );
+        assert_eq!(c.stop, "cost_unqualified");
+        assert_eq!(c.attempted, 0);
+    }
+    #[test]
+    fn untimed_measurement_discards_a_notified_reply_without_supply_or_future_work() {
+        let mut b = budget(Instant::now(), 64);
+        b.admission = None;
+        let calls = Cell::new(0);
+        let c = measure(
+            &SigmaContext::from_prefix(&[]).unwrap(),
+            b,
+            3,
+            false,
+            || false,
+            |_, _, _| {
+                calls.set(calls.get() + 1);
+                Ok(Reply {
+                    output: output(),
+                    decision_notified: true,
+                })
+            },
+        );
+        assert_eq!(calls.get(), 1);
+        assert_eq!(c.discarded_replies, 1);
+        assert_eq!(c.stop, "decision_notified");
+        assert!(c.root_nn.is_none());
+    }
     fn budget(start: Instant, k: u32) -> Budget {
         Budget {
             started: start,
