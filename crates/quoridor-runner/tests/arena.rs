@@ -1,4 +1,3 @@
-use quoridor_core::research::SigmaContext;
 use quoridor_runner::{
     arena::{self, ClockPolicy},
     arena_clock::{self, Failure},
