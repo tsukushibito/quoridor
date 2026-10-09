@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "issue": "quoridor-4lc.350",
+  "acceptance": "Verified Main desktop UI and actual Japanese generated artifact",
+  "implementation_commit": "3117aa6",
+  "source_inputs": [
+    {
+      "path": "/workspaces/quoridor/scripts/dev/research-dashboard.html",
+      "sha256": "9c209132487154758acca90c5898c1c2b145aca125c2f5a8eee2e5bed4d4ae10",
+      "bytes": 26330,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/scripts/dev/research-dashboard.py",
+      "sha256": "42889d959d58ce8f699b9f562be589ae5b81f45efec15aff95277b5ed2e123ed",
+      "bytes": 26013,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/scripts/dev/test_research_dashboard.py",
+      "sha256": "e0b6bca95898ee559bb6247ff4354735ecb18779beae21174f0dbf8ebd54bf07",
+      "bytes": 26990,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/scripts/dev/research-dashboard-desktop-fixture.py",
+      "sha256": "7d644a3fbe7b99c9fb445756082992054049e2cb5ca41352f030224582667831",
+      "bytes": 5780,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/scripts/dev/test_research_dashboard_desktop.mjs",
+      "sha256": "fee30e9466125002d5d224a2bf284106fa02a894cd79d0aa6af5c8b2becc9976",
+      "bytes": 17501,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/scripts/dev/research-dashboard-runtime.py",
+      "sha256": "036596d6ffac47e2cf5408e6e958f11b5b47ad251d07c31f528ae9f0c44af850",
+      "bytes": 1358,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/scripts/dev/research-dashboard-translations.py",
+      "sha256": "554d76e5604b85e58e0b23ddc6ad3484d8f31f6073b5b163579fdf3ac9eb2724",
+      "bytes": 8340,
+      "mode": 420
+    }
+  ],
+  "generated_HTML": {
+    "issue": "quoridor-4lc.350",
+    "path": "/workspaces/quoridor/.artifacts/research-dashboard/index.html",
+    "sha256": "2fef06a92c046a197d4fd257c4a333dba953778b99563d028efcc6179ca96d63",
+    "bytes": 123458,
+    "mode": 384,
+    "generated_at": "2026-10-09T12:46:29.079078+09:00",
+    "Root_artifact_STOP": "2026-10-09T03:46:35.752410+00:00",
+    "renderer_sha256": "42889d959d58ce8f699b9f562be589ae5b81f45efec15aff95277b5ed2e123ed",
+    "template_sha256": "9c209132487154758acca90c5898c1c2b145aca125c2f5a8eee2e5bed4d4ae10",
+    "groups": 12,
+    "warnings": ["quoridor-4lc.342.7: invalid path metadata; runtime unavailable"],
+    "translations": null,
+    "current_children_readers_TMP": []
+  },
+  "verification_evidence": [
+    {
+      "path": "/workspaces/quoridor/.worktree/research-dashboard-desktop/.artifacts/research-dashboard-desktop-ui-v1/source-stop.json",
+      "sha256": "9ad7fb9edc5846c85db3674247fb78e9e2058b80888b03181590fe570f2bc5f1",
+      "bytes": 2740,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/research-dashboard-desktop/.artifacts/research-dashboard-desktop-ui-v1/r2-source-stop.json",
+      "sha256": "9ed490b1390b41de6a319c93aeb84e85ef0d2a8dbb2de6e7acc75934635311c5",
+      "bytes": 2958,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-dashboard-desktop-verification-v1/r2-verification-binding.json",
+      "sha256": "7e3e18b1b7b48a9a513207dfd39050d58a43008b2201a23d64b12c3ff8f1664b",
+      "bytes": 6220,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-dashboard-desktop-verification-v1/browser-final-v1-receipt.json",
+      "sha256": "181d8002edfa8f49befdf32c26bce6c057a0a954d6ffcd349d351e83d015dda8",
+      "bytes": 2259,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-dashboard-desktop-verification-v1/browser-final-v1-assertions.json",
+      "sha256": "afd0304182e35718a05bb0a502f8e615dab59f9e6088148ad891fbbd894fe705",
+      "bytes": 677,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-acceptance/dashboard-desktop-ux-v1/Root-format-generation-v1.json",
+      "sha256": "58791b90f59cd9556c4b00696c5ad9b7767da94ba946585c3619a631118d818a",
+      "bytes": 8387,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-acceptance/dashboard-desktop-ux-v1/Main-r2-source-intake.json",
+      "sha256": "374b2146e3816bfa23de99bf0999061dc31a089e5514240ddd8981f235430675",
+      "bytes": 1943,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-acceptance/dashboard-desktop-ux-v1/harness-intake.json",
+      "sha256": "4e16aa4a1e6a82362477a7c1b00b2268b513004296ade08a99d8c7e050f0170f",
+      "bytes": 356,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-dashboard-desktop-verification-v1/final-acceptance-binding.json",
+      "sha256": "8d91a2329071caf15357e082877338ba039408b094ccc50f6421cec70ccabc2e",
+      "bytes": 5149,
+      "mode": 420
+    }
+  ],
+  "required_behavior": {
+    "compact_one_row_four_columns_ellipsis": true,
+    "accessible_dialog_keyboard_focus_context": true,
+    "primary_multiple_unresolved_and_history": true,
+    "activity_confirmed_calc_explicitpause_wait_unknown": true,
+    "generated_time_age_static_reload_translation_SHA_fallback": true,
+    "safe_text_offline_no_external_requests": true,
+    "closed_admin_running_job_and_secondary_pause": true
+  },
+  "checks": {
+    "supplier_unit_dashboard": 36,
+    "supplier_localization": 20,
+    "supplier_targeted_r2": 2,
+    "fixture_browser_unique_passes": 9,
+    "actual_final_file_passes": 2,
+    "Main_Ruff_Prettierrender": "PASS",
+    "successes_reused_without_replay": true,
+    "no_mobile_test_required": true
+  },
+  "actual_final_browser_interval": {
+    "START": "2026-10-09T03:48:26.951364+00:00",
+    "source_reader_STOP": "2026-10-09T03:48:35.869359+00:00",
+    "whole_seconds": 8.91798414196819,
+    "direct_wait_cleanup_remaining": [],
+    "TMP_remaining": []
+  },
+  "old_three_failed_browser_whole_seconds": 59.034944014041685,
+  "new_r2_browser_whole_seconds": 27.210374673013575,
+  "new_final_browser_whole_seconds": 8.91798414196819,
+  "Root_format_generation_whole_seconds": 9.860255538951606,
+  "fees_note": "whole intervals counted once; no nested sums/refund/retroPASS; other uninstrumented/admin UNKNOWN held",
+  "supported_whole_B": 25165824,
+  "parent_directed_held_upper_B": 127926272,
+  "allocation_observation_B": {
+    "UI_WT": 1114112,
+    "verifier": 618496,
+    "Root": 163840
+  },
+  "browser_sampled_family_max_B": 691052544,
+  "browser_profile_held_deleted_open_max_B": 7045120,
+  "continuous_peak": "UNKNOWN",
+  "snapshot_warning": ["quoridor-4lc.342.7: invalid path metadata; runtime unavailable"],
+  "scope": "Desktop snapshot UX only; no scientific status inference/job/model/clock/N/default/seal change",
+  "owned_current_next_browser_Cargo_model_job_reservation": null,
+  "cleanup": "Every owned browser/context/command and serial profile/testTMP closed/reaped; managed source WT retained until stopped owner closure and bounded evidence-preserving maintenance",
+  "paused323_seals_defaultmodels_Nfullfits_gate": "UNCHANGED",
+  "verification_collector_STOP": "2026-10-09T03:50:04.430791+00:00",
+  "returned_mask_completion_and_original_persisted_pending_attempted": "Held separately; no general fault certificate"
+}
