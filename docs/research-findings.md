@@ -758,3 +758,16 @@ R3は全90 legal first movesが双方terminal-loss -2で、選定親以降では
 [設計の独立条件](design/nnue-teacher-distance-tanh-v1.md#full-public-no-bypass-condition-authorized-separately-2026-10-09)と[全工程4GiB支持](../research-data/ai-sigma/public-no-bypass-v1/resources-v1.json)に結び付ける。旧保持43,272,499,200B＋新4,294,967,296B＝47,567,466,496B<50GB、TT/342枠や旧RAW/失敗/UNKNOWNを返金・流用しない。VでINITIAL/BEST/LASTと軌跡を固定し、Torch/nativeと変更境界を確認後、同じ100ms時計・規則・TT・CPU/thread・bookの候補対BEST51一比較を固定する。MSEだけで昇格せず、同時刻の仕事・illegal/late/error/unfinishedと推論/探索全費を報告する。旧Sigma D16/NN16の一度きりの実行・実STOPを尊重し、extraD/Sigma・sweep・新教師/特徴/ラベル/封印E・default採用・323pause解除・N/fullschedule/pilot/common4fit/96を追加しない。これは承認と検証する問いであり、新fit/比較の結果ではない。
 
 353の追加順序指定：対局比較より先に、この方針相談へ学習曲線と同じoriginalV419150のMSE表（新INITIAL/BEST/LAST、retainedBEST51 best0.42744088098494515）を**実際に提示**する。train/fixeddiag/fullV・epoch/update/seen/LR/減衰・収束/finite・学習/whole費とモデル/入力/尺度を区別し、比較できる保存点だけをoverlayする。実fitSTOPと読みやすいartifactをnormal一回の結果handoffで届け、Policyの実提示事実を353の既存handoffへ戻してから対局入口を進める。保存file・ownerclose・配送受付だけで提示済みにしない。これは順序依存であり、新しい人間承認・reply-onlyACK・周期pollではない。別のsource/native資格準備は進められる。
+
+353の実fit保存結果を確認した。元T8,413,949・同じopenedV419,150、元T-only尺度・seed/反射・Adam/LR/early-stopを保った新規1fitで、固定距離OUTPUTだけを外した候補BESTはV row MSE **0.42387071217019406**、retainedBEST51は**0.42744088098494515**。差は−0.0035701688147510846（0.8352427%低下）。[固定結果と資格範囲](../research-data/ai-sigma/public-no-bypass-v1/fit-results-acceptance-v1.json)に元report/曲線/表・入力/モデルidentityを結び付け、保存47候補点と52 incumbent点から表を照合した。再fit・追加予測評価は行っていない。
+
+| 同じV419,150   | physical epoch |  update | training seen |        row MSE | sign accuracy |
+| -------------- | -------------: | ------: | ------------: | -------------: | ------------: |
+| 候補INITIAL    |              0 |       0 |             0 | 1.000000000000 |     0.000000% |
+| 候補BEST       |             43 | 176,687 |   361,799,807 | 0.423870712170 |    84.311344% |
+| 候補LAST       |             46 | 189,014 |   387,041,654 | 0.423877643344 |    84.306334% |
+| retainedBEST51 |             51 | 209,559 |   429,111,399 | 0.427440880985 |    84.131934% |
+
+[読みやすい曲線](/workspaces/quoridor/.worktree/nnue-public-no-bypass/.artifacts/nnue-public-no-bypass-v1/curves-render-v1/learning-curves-v3.png)はfullV・fullTの疎な測定・fixed8192診断・LRを分ける。fitは46 complete epochsでEARLY_STOPPED/faultnull。min_delta0.0001に対する最後の有意改善38から39–46の8 stale epochで停止し、strict BEST43はpatienceをリセットしなかった。最終LR0.000009765625はmin0.000001より高い。実controller STOP16:08:49.657021Z、whole1020.968283897秒、直接1wait/reap/handles/process cleanup[]、source後一致・primarynull/secondary[]。trainer1018.106147993秒とcommand1018.703749152秒は内包し加算しない。
+
+これはopened selector Vでの一条件のmodelling観測であり、封印E一般化・棋力・昇格の証明ではない。BEST saturation48.539664%対48.303471%も原因を示さず、incumbent bias/reliability bins/action rankingはUNKNOWN。訓練済み重みのTorch/native・legal/delta/undo/finite/error・推論/探索費と直接対局はこのfit結果から資格を与えない。旧84f/00785失敗、TMP原物、RAW/fee、persisted pendingとreturned completed、continuous/fit VRAM peak UNKNOWNを保持する。元の対局前Policy実提示条件とN/fourfit96/323pause/seals/defaultsを変更しない。

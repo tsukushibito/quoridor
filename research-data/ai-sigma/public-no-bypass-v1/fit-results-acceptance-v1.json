@@ -1,0 +1,181 @@
+{
+  "schema": "quoridor.public-no-bypass.fit-results-acceptance.v1",
+  "issue": "quoridor-4lc.353",
+  "accepted_scope": "Verified saved ONE full-public fit modelling observations and readable curve/same-V table; no trained-native or strength/adoption certificate",
+  "fit_job_id": "7169a3ae-7a3c-4314-ad61-709655e7b3a1",
+  "actual_controller_START": "2026-10-09T15:51:48.982147+00:00",
+  "actual_worker_source_STOP": "2026-10-09T16:08:49.442948+00:00",
+  "actual_controller_STOP": "2026-10-09T16:08:49.657021+00:00",
+  "external_whole_seconds": 1020.9682838969165,
+  "nested_command_seconds_NOT_added": 1018.7037491520168,
+  "nested_trainer_seconds_NOT_added": 1018.1061479930067,
+  "report": {
+    "path": "/workspaces/quoridor/.worktree/nnue-public-no-bypass/.artifacts/nnue-public-no-bypass-v1/fit-results-v1/fit-report.md",
+    "SHA256": "f226232ce8839378ad2af7408a23c996a1812fdb066315b09eea3027f0405973"
+  },
+  "report_source_binding": {
+    "path": "/workspaces/quoridor/.worktree/nnue-public-no-bypass/.artifacts/nnue-public-no-bypass-v1/fit-results-v1/fit-report-source-STOP.json",
+    "SHA256": "1509d92077971c1b3f8c107bcc41b1edd98ebc9cfd29d3b68dc81d1cc0ba0913",
+    "actual_report_source_reader_writer_STOP": "2026-10-09T16:27:56.645262+00:00",
+    "owned_readers_children_jobs_TMP_remaining": []
+  },
+  "figure": {
+    "path": "/workspaces/quoridor/.worktree/nnue-public-no-bypass/.artifacts/nnue-public-no-bypass-v1/curves-render-v1/learning-curves-v3.png",
+    "SHA256": "ec47414c76f6270439a4eb78c5fc5e6d7c7b510efa958f46b45eef0370c07288",
+    "Root_visually_inspected": true
+  },
+  "table": [
+    {
+      "checkpoint": "candidate INITIAL",
+      "epoch": 0,
+      "update": 0,
+      "seen": 0,
+      "same_V_rows": 419150,
+      "row_MSE": 1.0,
+      "sign_accuracy": 0.0,
+      "saturation_fraction": 0.0,
+      "bias": -0.008331146367648814,
+      "saved_selector_wall_seconds": 14.117419749964029
+    },
+    {
+      "checkpoint": "candidate BEST",
+      "epoch": 43,
+      "update": 176687,
+      "seen": 361799807,
+      "same_V_rows": 419150,
+      "row_MSE": 0.42387071217019406,
+      "sign_accuracy": 0.8431134438745079,
+      "saturation_fraction": 0.48539663604914707,
+      "bias": -0.0015030481492018081,
+      "saved_selector_wall_seconds": 952.5048886869336
+    },
+    {
+      "checkpoint": "candidate LAST",
+      "epoch": 46,
+      "update": 189014,
+      "seen": 387041654,
+      "same_V_rows": 419150,
+      "row_MSE": 0.42387764334394457,
+      "sign_accuracy": 0.8430633424788262,
+      "saturation_fraction": 0.48561135631635455,
+      "bias": -0.00034994502701965957,
+      "saved_selector_wall_seconds": 1017.1149800809799
+    },
+    {
+      "checkpoint": "retained BEST51",
+      "epoch": 51,
+      "update": 209559,
+      "seen": 429111399,
+      "same_V_rows": 419150,
+      "row_MSE": 0.42744088098494515,
+      "sign_accuracy": 0.8413193367529525,
+      "saturation_fraction": 0.4830347131098652,
+      "bias": null,
+      "saved_selector_wall_seconds": 1741.6522655140143
+    }
+  ],
+  "absolute_best_MSE_difference": -0.0035701688147510846,
+  "relative_best_MSE_reduction_percent": 0.8352427139220755,
+  "input": {
+    "T_rows": 8413949,
+    "V_opened_selector_rows": 419150,
+    "dataset_SHA256": "07d81abc2230b2fe6b7c5fb7a425e7e3109bf9af2c467f5c72f8d3bdb975279b",
+    "T_only_scale_same_effective_FP32_as_incumbent": true,
+    "sealed_E_opened": false
+  },
+  "condition": "Fresh seed32320261007 INITIAL2dd; ONLY additive distance OUTPUT b8->0/a0/explicitfalse; standardized headD/QF1/Zero4/FT32H32/tanh/teacherz unchanged, qualified supply_workers2, maintaineddefault0",
+  "ordered_parameter_bindings_owner_frozen": {
+    "initial-model": {
+      "manifest": {
+        "SHA256": "4e06f5215311cfbe5519159563b2851362d054f03ec75c0a9e3daae9106794b3",
+        "bytes": 677,
+        "mode": "0600"
+      },
+      "ordered_weights": {
+        "SHA256": "2ddacbf88145816b6b0c86e13ebb983d7c1b64e42f8d346623873a18ae7414ad",
+        "bytes": 49284,
+        "mode": "0644"
+      }
+    },
+    "best-model": {
+      "manifest": {
+        "SHA256": "46ec2c4708f96dcf9fad579c2fb0d1299c6663df27412f0faac98267467715e1",
+        "bytes": 677,
+        "mode": "0600"
+      },
+      "ordered_weights": {
+        "SHA256": "046fe926e56b955b0fb7de8f147a74ec33eace9cbc00a55c307f9b6541ab9841",
+        "bytes": 49284,
+        "mode": "0644"
+      }
+    },
+    "last-model": {
+      "manifest": {
+        "SHA256": "3725ab84d0768e5c8c6e3dd14a6f18a38e14ee465a3cc53545091f082af0537f",
+        "bytes": 677,
+        "mode": "0600"
+      },
+      "ordered_weights": {
+        "SHA256": "73b9b3d5a28cb7349c80b9beacfcb1880dd480af6d2e656a1521bf01c77fad81",
+        "bytes": 49284,
+        "mode": "0644"
+      }
+    }
+  },
+  "convergence": {
+    "status": "EARLY_STOPPED",
+    "fault": null,
+    "completed_epochs": 46,
+    "last_significant_improvement_epoch": 38,
+    "stale_completed_epochs": [39, 40, 41, 42, 43, 44, 45, 46],
+    "min_delta": 0.0001,
+    "strict_BEST_epoch": 43,
+    "strict_BEST_did_not_reset_significant_patience": true,
+    "last_LR": 9.765625e-6,
+    "minimum_LR": 1e-6,
+    "wall_epoch_update_sample_horizon": null
+  },
+  "verification": "All11 report/figure/table/source metadata references and necessary retained curve/config/freeze/scale/data/status identities matched; candidate47/incumbent52 saved fullV rows and exact table checked without model/prediction evaluation",
+  "limits": [
+    "Opened V selected BEST; no independent sealed generalization or universal/seed-averaged bypass conclusion",
+    "Retained incumbent curves only; historical wall is not fresh matched throughput",
+    "Trained BEST/LAST Torch/native/legal/delta/undo/finite/error and inference/search cost unfinished",
+    "No playing-strength evaluation or promotion",
+    "Fit VRAM and continuous family peaks UNKNOWN; sampled family2882838528B",
+    "Original84f/00785failedcontrollers/TMP/RAW/fees/pending-vs-returned masks and all positivefloors/uppers held unchanged"
+  ],
+  "before_candidate16": "Actual Policy readable curves/same-V presentation satisfied by the bound concrete conversation reference; normal trained-native/legal/delta/finite/error/cost/source/device/physical/fair qualifications still required, no additional approvalACK.",
+  "resource_whole_B": 4294967296,
+  "resource_SHA256": "c810e5e09a14d21719db086af22f7bdb9bb4adbbf1cb18e9ea479b86d394a534",
+  "global_held_B": 47567466496,
+  "global_increment_B": 0,
+  "Root_new_model_fit_forward_native_games": 0,
+  "root_intake_ref": "/workspaces/quoridor/.artifacts/research-acceptance/public-no-bypass-v1/fit-report-intake-v1/intake.json",
+  "actual_Policy_human_presentation": {
+    "schema": "quoridor.public-no-bypass.human-curve-presentation.v1",
+    "issue": "quoridor-4lc.353",
+    "policy_thread": "01a0f2e9-357d-7ef3-a2fe-b16f80accda5",
+    "policy_event_turn": "01a12183-bc87-7231-9862-09c7448d6138",
+    "actual_visible_reference": [
+      "commentary beginning 全量学習が完了しました",
+      "rendered learning-curves-v3.png image",
+      "commentary table beginning 同じ検証419,150行での比較です"
+    ],
+    "evidence_authority": "Actual Policy human-presentation fact supplied explicitly by user in this integration turn; not inferred from delivery acceptance",
+    "figure_path": "/workspaces/quoridor/.worktree/nnue-public-no-bypass/.artifacts/nnue-public-no-bypass-v1/curves-render-v1/learning-curves-v3.png",
+    "report_SHA256": "f226232ce8839378ad2af7408a23c996a1812fdb066315b09eea3027f0405973",
+    "binding_SHA256": "1509d92077971c1b3f8c107bcc41b1edd98ebc9cfd29d3b68dc81d1cc0ba0913",
+    "candidate_BEST_ordered_weights_SHA256": "046fe926e56b955b0fb7de8f147a74ec33eace9cbc00a55c307f9b6541ab9841",
+    "displayed": [
+      "candidate INITIAL/BEST/LAST and retainedBEST51 sameV MSE/sign accuracy",
+      "BEST epoch43/update176687 MSE0.423870712170",
+      "LAST epoch46/update189014 MSE0.423877643344",
+      "incumbent0.427440880985; improvement0.835243%",
+      "scopes/limits/earlystop/unchanged standardized headD+tanh; no strength claim"
+    ],
+    "sequencing_prerequisite": "SATISFIED",
+    "next_entry_requires": "normal trained-native/legal/delta/undo/finite/error/cost/source/device/physical/peer/fair lifetime qualifications and one frozen direct cohort; no additional approvalACK",
+    "no_fit_repeat_extra_games_pause_N_default_seal_authority": true,
+    "Root_fact_record_UTC": "2026-10-09T16:36:48.527718+00:00"
+  }
+}
