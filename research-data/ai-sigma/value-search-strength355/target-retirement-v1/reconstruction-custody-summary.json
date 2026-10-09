@@ -1,0 +1,66 @@
+{
+  "selected_retired_source_memory_reconstruction": [
+    {
+      "member": "members/023/tt_hash_reuse351_tests.rs",
+      "SHA256": "fa9244ff5f2d511e2e44a4aa33736c1312b3bd1934abb0ed252c631904c8c603",
+      "bytes": 30306,
+      "mode": 420,
+      "reconstruction": "memory-only selected retired source, no raw semantic read/reaggregation"
+    },
+    {
+      "member": "members/024/tt_hash_processing351.rs",
+      "SHA256": "9156a02443873c6f76b1f93cc030759aa1fbe8f0bd452e5c5c56bf0c8696d4ed",
+      "bytes": 34247,
+      "mode": 420,
+      "reconstruction": "memory-only selected retired source, no raw semantic read/reaggregation"
+    }
+  ],
+  "additional_causal_archive_checked": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/causal-fixed-evidence-v1.tar.gz",
+    "SHA256": "72c18e71309a0a8502d84671e28f123fc05ef88816d6fc5ef5149dc39d68cedb",
+    "bytes": 112993,
+    "mode": 420
+  },
+  "runner_supplied_custody_current_metadata": [
+    {
+      "name": "351_runner",
+      "path": "/workspaces/quoridor/.worktree/tt-hash-reuse351/.artifacts/tt-hash-reuse351/private/quoridor-runner",
+      "bytes": 8316120,
+      "mode": 493,
+      "SHA256": "368351171211b5a183fc1064191f510ebe76eadaa5143faa1c87d845d6e6c531",
+      "current_metadata": {
+        "dev": 2112,
+        "inode": 3706184,
+        "nlink": 1,
+        "size": 8316120,
+        "mode": 493,
+        "mtime_ns": 1791537575383835190,
+        "allocated_B": 8318976
+      },
+      "digest_scope": "supplied qualified custody reused, NOT fresh body hash; extra16.6MB would exceed selected cap"
+    },
+    {
+      "name": "353_runner",
+      "path": "/workspaces/quoridor/.worktree/nnue-public-no-bypass/.artifacts/nnue-public-no-bypass-v1/private-images-v1/direct16-runner-v1",
+      "bytes": 8332144,
+      "mode": 493,
+      "SHA256": "634fb7036266965a8080b3384f6b79cce4d84c3977c3244a944b7600731a268e",
+      "current_metadata": {
+        "dev": 2112,
+        "inode": 3713886,
+        "nlink": 1,
+        "size": 8332144,
+        "mode": 493,
+        "mtime_ns": 1791570322855054978,
+        "allocated_B": 8335360
+      },
+      "digest_scope": "supplied qualified custody reused, NOT fresh body hash; extra16.6MB would exceed selected cap"
+    }
+  ],
+  "target_union_unique_inode_allocated_B": 1729523712,
+  "external_hardlink_candidates": [],
+  "nominal_runtime_gap_B": 1870822400,
+  "naive_gap_minus_observed_union_B": 141298688,
+  "arithmetic_scope": "not free capacity/settled allocation; Root alone later settles after actual removal, preserve hardlinks and history",
+  "compiler_config_provenance": "Stopped argv/env/source maps and toolchain SHA records kept outside targets; no toolchain/library payload hash/probe or rebuild. Exact future installed compiler/offline/bit-identical ELF not certified."
+}
