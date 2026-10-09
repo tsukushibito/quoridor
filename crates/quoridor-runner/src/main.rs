@@ -72,7 +72,34 @@ fn execute() -> Result<()> {
                 .into(),
         );
     }
+    if args.iter().any(|a| a == "--report-mode") {
+        if command != "arena" || argument(&args, "--report-mode")? != "receipt" {
+            return Err("only arena report-mode receipt is supported".into());
+        }
+        let route = if args.iter().any(|a| a == "--recover") {
+            "--recover"
+        } else if args.iter().any(|a| a == "--audit") {
+            "--audit"
+        } else {
+            "--config"
+        };
+        strict_pairs(&args, &[route, "--report-mode"], &[])?;
+    }
     match command {
+        "strength-book" | "strength-configs" => {
+            use quoridor_runner::sigma_qualification::BoundControl;
+            strict_pairs(&args, &["--request", "--request-sha256"], &[])?;
+            let bound = BoundControl {
+                path: argument(&args, "--request")?.into(),
+                sha256: argument(&args, "--request-sha256")?,
+            };
+            let receipt = if command == "strength-book" {
+                quoridor_runner::value_search_strength::generate_bound(bound.read()?)?
+            } else {
+                quoridor_runner::value_search_strength::materialize(bound.read()?)?
+            };
+            println!("{}", serde_json::to_string(&receipt)?);
+        }
         "sigma-cost-bindings" => {
             strict_pairs(&args, &["--config", "--config-sha256"], &[])?;
             println!(
@@ -151,10 +178,15 @@ fn execute() -> Result<()> {
         }
         "arena" if args.iter().any(|a| a == "--recover") => {
             let output = PathBuf::from(argument(&args, "--recover")?);
-            println!(
-                "{}",
-                serde_json::to_string(&quoridor_runner::recover_arena(&output)?)?
-            );
+            let recovered = quoridor_runner::recover_arena(&output)?;
+            if args.iter().any(|a| a == "--report-mode") {
+                println!(
+                    "{}",
+                    serde_json::json!({"output":output,"finalized":false,"partial_journal_tail":recovered["partial_journal_tail"],"missing_slots":recovered["missing_slots"],"summary":recovered["summary"],"observed_outcome_count":recovered["observed_outcomes"].as_array().map(Vec::len),"full_observations":"retained completed.jsonl and result.json when available; not stdout"})
+                );
+            } else {
+                println!("{}", serde_json::to_string(&recovered)?);
+            }
         }
         "arena" if args.iter().any(|a| a == "--audit") => {
             let output = PathBuf::from(argument(&args, "--audit")?);
@@ -191,7 +223,16 @@ fn execute() -> Result<()> {
                     serde_json::from_reader(File::open(argument(&args, "--config")?)?)?;
                 runtime::run(&config, command)?
             };
-            println!("{}", serde_json::to_string(&report)?);
+            if args.iter().any(|a| a == "--report-mode") {
+                let output = PathBuf::from(argument(&args, "--config")?);
+                let c: Config = serde_json::from_reader(File::open(output)?)?;
+                println!(
+                    "{}",
+                    quoridor_runner::value_search_strength::result_receipt(&c, &report)?
+                );
+            } else {
+                println!("{}", serde_json::to_string(&report)?);
+            }
             if report.stopped.is_some() || !report.all_workers_joined {
                 return Err("run incomplete: evidence saved".into());
             }
@@ -329,7 +370,7 @@ fn execute() -> Result<()> {
     Ok(())
 }
 
-const HELP: &str = "quoridor-runner <selfplay|arena|benchmark|cycle> --config CONFIG\nquoridor-runner arena --config CONFIG --sigma-cost-qualification PACKET --qualification-sha256 SHA256\nquoridor-runner sigma-cost-bindings --config CONFIG --config-sha256 SHA256\nquoridor-runner sigma-cost-measure --plan PLAN --plan-sha256 SHA256 [--sigma-cost-qualification VALIDATION_PACKET --qualification-sha256 SHA256]\nquoridor-runner arena --audit OUTPUT_DIRECTORY\nquoridor-runner arena --recover OUTPUT_DIRECTORY\nquoridor-runner dataset <cache|inspect> --input PATH [--output PATH] [--allow-test]\nquoridor-runner dataset evaluate --input PATH --model MODEL --output PATH [--simd] [--allow-test]\nquoridor-runner model-check --model MODEL\nquoridor-runner qf1-bulk --input PREFIXES.json --output FEATURES.json\nSigma dataset import: use the separate sigma-import binary";
+const HELP: &str = "quoridor-runner strength-book --request REQUEST --request-sha256 SHA256\nquoridor-runner strength-configs --request REQUEST --request-sha256 SHA256\nquoridor-runner arena --config CONFIG --report-mode receipt\nquoridor-runner <selfplay|arena|benchmark|cycle> --config CONFIG\nquoridor-runner arena --config CONFIG --sigma-cost-qualification PACKET --qualification-sha256 SHA256\nquoridor-runner sigma-cost-bindings --config CONFIG --config-sha256 SHA256\nquoridor-runner sigma-cost-measure --plan PLAN --plan-sha256 SHA256 [--sigma-cost-qualification VALIDATION_PACKET --qualification-sha256 SHA256]\nquoridor-runner arena --audit OUTPUT_DIRECTORY\nquoridor-runner arena --recover OUTPUT_DIRECTORY\nquoridor-runner dataset <cache|inspect> --input PATH [--output PATH] [--allow-test]\nquoridor-runner dataset evaluate --input PATH --model MODEL --output PATH [--simd] [--allow-test]\nquoridor-runner model-check --model MODEL\nquoridor-runner qf1-bulk --input PREFIXES.json --output FEATURES.json\nSigma dataset import: use the separate sigma-import binary";
 
 #[cfg(test)]
 mod tests {

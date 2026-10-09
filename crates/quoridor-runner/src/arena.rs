@@ -128,6 +128,12 @@ pub struct ArenaConfig {
     pub evaluator_sha256: Vec<String>,
     /// Expected maintained alpha-beta or MCTS source identities, in candidate/reference order.
     pub search_source_sha256: Vec<String>,
+    /// Explicit first candidate colour per family; empty preserves standard 0,1 order.
+    #[serde(default)]
+    pub first_candidate_colors: Vec<u8>,
+    /// Optional complete retained outcome cap. Oversized evidence fails, never truncates to success.
+    #[serde(default)]
+    pub retained_outcome_bytes: Option<usize>,
     pub book: Book,
 }
 pub fn digest(bytes: &[u8]) -> String {
@@ -153,6 +159,15 @@ impl ArenaConfig {
             || self.bootstrap_resamples > 10_000
         {
             return Err("arena needs one immutable book entry per pair, no generated openings, bounded TT/bootstrap".into());
+        }
+        if (!self.first_candidate_colors.is_empty()
+            && (self.first_candidate_colors.len() != self.book.openings.len()
+                || self.first_candidate_colors.iter().any(|&c| c > 1)))
+            || self
+                .retained_outcome_bytes
+                .is_some_and(|n| n == 0 || n as u64 > c.max_output_bytes)
+        {
+            return Err("arena explicit colour order or retained outcome bound".into());
         }
         let research = self.comparison != Comparison::Functional;
         if c.engines

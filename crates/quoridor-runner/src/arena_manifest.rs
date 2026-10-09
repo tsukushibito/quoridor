@@ -31,6 +31,10 @@ pub fn source_bindings() -> BTreeMap<&'static str, String> {
         ("runner/native_input.rs", include_bytes!("native_input.rs")),
         ("runner/arena_book.rs", include_bytes!("arena_book.rs")),
         (
+            "runner/value_search_strength.rs",
+            include_bytes!("value_search_strength.rs"),
+        ),
+        (
             "runner/nnue-diagnose.rs",
             include_bytes!("bin/nnue-diagnose.rs"),
         ),
@@ -137,7 +141,7 @@ pub fn slots(c: &Config, planned: &[(usize, String, Vec<u16>)]) -> Result<Vec<Sl
             Ok(Slot {
                 game: *game,
                 family: family.clone(),
-                candidate_color: (game % 2) as u8,
+                candidate_color: crate::value_search_strength::candidate_color(c, *game),
                 cohort: metadata.map_or("unclassified".into(), |m| format!("{:?}", m.cohort)),
                 lineage: metadata
                     .map_or("legacy_independence_unknown".into(), |m| m.lineage.clone()),
@@ -162,14 +166,25 @@ pub fn slots(c: &Config, planned: &[(usize, String, Vec<u16>)]) -> Result<Vec<Sl
 pub fn preflight(c: &Config, slots: &[Slot]) -> Result<()> {
     let metadata = serde_json::to_vec(c)?.len() as u64 + serde_json::to_vec(slots)?.len() as u64;
     // Includes result + manifest + gzip + journal/CSV and final source bindings.
-    let needed = metadata
-        .saturating_mul(6)
-        .saturating_add(262144)
-        .saturating_add(
-            (c.games as u64)
-                .saturating_mul(c.max_plies as u64)
-                .saturating_mul(16384),
-        );
+    let needed = if let Some(cap) = c.arena.as_ref().and_then(|a| a.retained_outcome_bytes) {
+        metadata
+            .saturating_mul(6)
+            .saturating_add(8 * 1024 * 1024)
+            .saturating_add(
+                (c.games as u64)
+                    .saturating_mul(cap as u64)
+                    .saturating_mul(4),
+            )
+    } else {
+        metadata
+            .saturating_mul(6)
+            .saturating_add(262144)
+            .saturating_add(
+                (c.games as u64)
+                    .saturating_mul(c.max_plies as u64)
+                    .saturating_mul(16384),
+            )
+    };
     if needed > c.max_output_bytes {
         return Err(format!(
             "arena output forecast {needed} exceeds {}",
@@ -197,6 +212,7 @@ fn write_bytes(c: &Config, name: &str, bytes: &[u8]) -> Result<()> {
     Ok(())
 }
 pub fn journal(c: &Config, outcome: &crate::runtime::Outcome) -> Result<()> {
+    crate::value_search_strength::retained_outcome(c, outcome)?;
     let mut bytes = serde_json::to_vec(outcome)?;
     bytes.push(b'\n');
     if crate::resources::directory_bytes(&c.output)?.saturating_add(bytes.len() as u64)
@@ -247,6 +263,9 @@ pub fn begin(c: &Config, slots: &[Slot], admission: &crate::resources::Admission
     )
 }
 pub fn finish(c: &Config, report: &RunReport) -> Result<()> {
+    for outcome in &report.outcomes {
+        crate::value_search_strength::retained_outcome(c, outcome)?;
+    }
     let start: serde_json::Value =
         serde_json::from_slice(&fs::read(c.output.join("manifest-start.json"))?)?;
     let mut csv = String::from("game,family,candidate_color,started,status,winner,plies,failure\n");

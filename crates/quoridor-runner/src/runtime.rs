@@ -795,6 +795,7 @@ mod sigma_receipt_tests {
             let mut game = Game {
                 planned: Planned {
                     id: 0,
+                    candidate_color: 0,
                     opening: vec![],
                     family: "synthetic-boundary".into(),
                     split: Split::Test,
@@ -1457,6 +1458,7 @@ enum Event {
 #[derive(Clone)]
 struct Planned {
     id: usize,
+    candidate_color: u8,
     opening: Vec<u16>,
     family: String,
     split: Split,
@@ -1707,6 +1709,7 @@ fn planned(config: &Config) -> Result<Vec<Planned>> {
         let family = format!("{}-family-{family_id:06}", config.run_id);
         out.push(Planned {
             id,
+            candidate_color: crate::value_search_strength::candidate_color(config, id),
             opening: prefix,
             family,
             split,
@@ -1747,7 +1750,7 @@ fn unknown(p: &Planned, reason: String) -> Outcome {
     Outcome {
         game: p.id,
         family: p.family.clone(),
-        candidate_color: (p.id % 2) as u8,
+        candidate_color: p.candidate_color,
         status: "unknown".into(),
         winner: None,
         plies: 0,
@@ -1815,7 +1818,7 @@ fn finish(mut game: Game, status: &str, reason: Option<String>) -> (Outcome, Vec
         Outcome {
             game: game.planned.id,
             family: game.planned.family,
-            candidate_color: (game.planned.id % 2) as u8,
+            candidate_color: game.planned.candidate_color,
             status: status.into(),
             winner,
             plies: game.context.total_ply(),
@@ -2446,7 +2449,7 @@ fn worker(
             let engine_index = if config.engines.len() == 1 {
                 0
             } else {
-                crate::arena::engine_index(turn as u8, (g.planned.id % 2) as u8)
+                crate::arena::engine_index(turn as u8, g.planned.candidate_color)
             };
             let e = &config.engines[engine_index];
             let mut failure = None;
@@ -3726,7 +3729,7 @@ fn measure_sigma_cost_resolved(
                         Err(error) => return (items, Some(format!("measurement_input:{error}"))),
                     };
                     let parent = serde_json::json!({"prefix":item.prefix,"state_key":quoridor_core::research::HistoryKey::from(context.position()).history_string(),"ply":context.total_ply()});
-                    let mut game = new_game(Planned { id:index, opening:item.prefix.clone(), family:item.id.clone(), split:Split::Train }, context, config, false);
+                    let mut game = new_game(Planned { id:index, candidate_color:(index%2) as u8, opening:item.prefix.clone(), family:item.id.clone(), split:Split::Train }, context, config, false);
                     let model_sha = &config.inference.as_ref().expect("validated inference").model_sha;
                     let result = play_sigma_receipt(&mut game, 0, config, cancel, started, SigmaReplies {
                         events:&tx, tx:&reply_tx, rx:&reply_rx,
@@ -4153,6 +4156,7 @@ mod tests {
     fn plan() -> Planned {
         Planned {
             id: 0,
+            candidate_color: 0,
             opening: vec![],
             family: "family".into(),
             split: Split::Train,
@@ -5095,6 +5099,7 @@ mod research_threefold_runtime_tests {
     fn planned(id: usize, opening: Vec<u16>) -> Planned {
         Planned {
             id,
+            candidate_color: (id % 2) as u8,
             opening,
             family: "source-fixture".into(),
             split: Split::Train,
