@@ -1,0 +1,48 @@
+{
+  "issue": "quoridor-4lc.355",
+  "source_writer_STOP": "2026-10-09T23:57:20.705679+00:00",
+  "inclusive_Root_source_map_Git_admin_forecast_B": 1048576,
+  "inside_issued_Root_B": 67108864,
+  "global_increment_B": 0,
+  "review_control": "/workspaces/quoridor/.worktree/learning-million/.artifacts/value-search-strength355-review-v1/compare-related-v4/control.json",
+  "control_SHA256": "d4e32f2588d3cb938b35edef9151ca59d25771e228fd2d0b450f1e60f56ba130",
+  "target_SHA256": "c453f84f0ca53ad6fa2bbb6bd5f486df55dd59e9daa286b0aaa5391f9f7ea369",
+  "actual_reviewer_reader_STOP": "2026-10-09T23:52:32.398836+00:00",
+  "source_rows": [
+    {
+      "relative_path": "crates/quoridor-runner/src/main.rs",
+      "before_SHA256": "1060809e3c77b5732a1dd8519a833313b939c1d57bee2ea6f7b4973b6c75a1c2",
+      "after_SHA256": "58c037032894e0962ca720021aba5c6c9f8da4283b4438a0069f9326b2f0a997",
+      "bytes": 20123,
+      "mode": "0644",
+      "merge": "Exact reviewed inserted bytes only; inverse restores adopted arena Main"
+    },
+    {
+      "relative_path": "crates/quoridor-runner/src/lib.rs",
+      "before_SHA256": "8e76c2c6fc71a06e8608e6fb63b70b76831c1df19a62dbf297e62275119025ee",
+      "after_SHA256": "f18c193b9fc73208f67d505aaac8875849a53f9e02839b5940d86dd1b7ea60b4",
+      "bytes": 629,
+      "mode": "0644",
+      "merge": "Exact reviewed inserted bytes only; inverse restores adopted arena Main"
+    },
+    {
+      "relative_path": "crates/quoridor-runner/src/value_search_compare.rs",
+      "before_SHA256": null,
+      "after_SHA256": "b81e5c4949084d9e0dc86966ae85be974b841a90223c0ac4e1ca81ebdd69c3ff",
+      "bytes": 53305,
+      "mode": "0644",
+      "merge": "Exact reviewed copy"
+    }
+  ],
+  "arena_adoption_commit": "e031a96",
+  "all_other_arena_paths_unchanged": true,
+  "insertions_inverse_restore_Main": true,
+  "new_definitions": "8 arena + 11 compare UNBUILT/UNTYPED/UNRUN",
+  "actual_Cargo_model_native_Search_games": 0,
+  "retained_admin_refusals": [
+    "Earlier PRE_RPC closed issue started no turn; later accepted related review completed normally",
+    "Root guessed source paths/patch path reads failed before writes",
+    "Root apply_patch duplicate target operations refused before mutation",
+    "First merge context assertion refused before any write because arena inserted at same match anchor; subsequent absent-module rustfmt refused. Corrected unique unchanged suffix anchor retains exact reviewed insertions."
+  ]
+}

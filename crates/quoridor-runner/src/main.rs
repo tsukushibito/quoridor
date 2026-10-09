@@ -100,6 +100,25 @@ fn execute() -> Result<()> {
             };
             println!("{}", serde_json::to_string(&receipt)?);
         }
+        "value-search-compare-bindings" => {
+            if args.len() != 1 {
+                return Err("value-search-compare-bindings accepts no flags".into());
+            }
+            println!(
+                "{}",
+                serde_json::to_string(&quoridor_runner::value_search_compare::bindings()?)?
+            );
+        }
+        "value-search-compare" => {
+            strict_pairs(&args, &["--plan", "--plan-sha256"], &[])?;
+            let report = quoridor_runner::value_search_compare::run(
+                &quoridor_runner::sigma_qualification::BoundControl {
+                    path: argument(&args, "--plan")?.into(),
+                    sha256: argument(&args, "--plan-sha256")?,
+                },
+            )?;
+            println!("{}", serde_json::to_string(&report)?);
+        }
         "sigma-cost-bindings" => {
             strict_pairs(&args, &["--config", "--config-sha256"], &[])?;
             println!(
