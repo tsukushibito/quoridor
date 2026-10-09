@@ -78,3 +78,15 @@ UV_NO_SYNC=1 UV_OFFLINE=1 PYTHONDONTWRITEBYTECODE=1 \
 一時ディレクトリ、人工短process、fake RPCでbackground生存/成功/失敗/timeout/子回収、idle再開/active保留/pause/期限/所有変更/応答不明を確認する。実モデル・GPU・研究セッション起動は試験に含まない。
 
 App Serverの保存thread再開とturn開始は[公式App Server資料](https://learn.chatgpt.com/docs/app-server)を参照。タスクの作成・通信・独立レビューの依頼は[タスク型研究の設計](../design/ai-research-team.md)に従う。定期LLM監督や枠終了時の全担当起床は設けない。
+
+## 明示許可された15分の軽量運用チェック
+
+2026-10-09に人間が `quoridor-4lc.352` の周期チェックを明示許可した。これは計算ジョブのguardianや上記のevent完了通知を置き換えない。周期処理は有界な現在のBeads（必ずwrapper経由）、App Serverのthread metadataと名指しruntime完了metadataだけを読む。モデル・Torch・Search・perf・browser・build・raw履歴walk・HTML生成・翻訳・科学Cargo/fair leaseは使わない。ソース・Main・Git/indexを書き換えない。
+
+稼働job、ActiveなLLM、通常review待ち、明示pause、human N待ち、deferredは正常として扱う。単なる経過時間・不変logから科学jobの停滞を推定しない。対象一致の完了依存・readerSTOPとidle consumerなどの実根拠、または30分以上離れた継続する同一actionable観測が必要で、読取不能はoperational UNKNOWNとする。重複抑制と保留参照は合計64KiB以内の小さなcursorに限り、Beadsの状態を複製しない。
+
+判断担当は既存の方針相談Root。候補はissue・対象・実job/依存の事実・観測・必要判断・証拠参照だけを保存する。初期は **CONSULTATION（相談モード）** で、検出は続けるが、このmonitorからRootや実行・統合を起こさず、健康チェックの緊急通知overrideも設けない。**AUTONOMOUS（自律確認モード）** へ明示変更した時だけ、保留を現在の事実で再検証して解消・古い候補を除き、Rootが実際にidleになる自然な境界で一度に通知する。相談中のActive turnや実行・統合への周期steerは行わない。修復の開始・進行を観測した候補は保留から除く。**STOPPED（チェック停止）** は周期検出とmonitor通知を止め、保留・cursor・設定を保持する。モード変更は明示的な人間指示だけで、再起動後も保持し、沈黙・時刻・browser操作で自律確認へ切り替えない。欠損・不正・読取不能のmodeはavailability UNKNOWNとして静かに止まり、自律確認へfallbackしない。watchdogは外国jobをkill・再起動しない。通常の成功したcheckや同じ問題でLLM・人間を毎回起こさない。
+
+ネイティブ自動化APIがこのhostで公開されず、DevContainerでsystemd-user/cronが使えない場合は、singleton lockと正確なPID・start ticks・boot IDを持つ単一timer processを使う。間隔は15分、利用者に示す日時はAsia/Tokyo。コンテナとhostが動作し続ける必要があり、停止・再構築をまたぐ動作を保証しない。install/readback・初回NN0読み取り確認・次回時刻の証拠が揃う前にenabledと記さない。実装・スケジューラ検証は有限のツール担当、sole Main/Git統合は実行・統合、周期結果の判断は方針相談Rootに分ける。新規枠はsource/test/config/log/失敗/admin/Git/cleanupを含む64MiBで、既存50GB内の明示配分を使う。
+
+全モードで、既存科学job自身のpause・資源・所有・cancel・cleanup安全制御は常に有効。相談モードが抑制するのはこのmonitorのtriageだけで、既存job完了・Sigma actualSTART・要求済み成果通知は従来のevent経路を続ける。
