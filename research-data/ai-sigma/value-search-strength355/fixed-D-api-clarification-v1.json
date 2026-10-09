@@ -1,0 +1,63 @@
+{
+  "schema": "quoridor.value-search-strength.fixed-D-meaning.v1",
+  "issue": "quoridor-4lc.355",
+  "UTC": "2026-10-09T23:09:02.720322+00:00",
+  "original_plan": "/workspaces/quoridor/research-data/ai-sigma/value-search-strength355/plan-v1.json",
+  "original_plan_SHA256": "b3e41602eeed250d120444cf65783012e87f8b5f860bef2862c7aac5fd9c24b2",
+  "original_phrase": "FixedD maintained accepted a0b8 logit units",
+  "reconciled_meaning": "a0b8 names pre-tanh affine coefficients on normalized wall distances. It does NOT request a raw-logit search score view. Primary games, matched COMPLETE-depth, common trees and stronger forced comparisons all consume the maintained returned tanh score.",
+  "fixed_config": {
+    "kind": "distance",
+    "distance_a": 0.0,
+    "distance_b": 8.0,
+    "model": null,
+    "constructor": "DistanceEvaluator::new(0f32,8f32)",
+    "mode": "Tanh",
+    "identity_kind": "distance-tanh-f32",
+    "identity_prefix": "QF1-STM-distances-div80-affine-tanh-f32-v1",
+    "nonterminal_abs_bound": 1.0,
+    "terminal_utility": 2.0
+  },
+  "exact_arithmetic": "d_self=(f64(wall_distance(STM))/80) as f32; d_opp=(f64(wall_distance(opponent))/80) as f32; raw=f32 a+b*(d_opp-d_self); finite check; returned=f64(raw).tanh() as f32. Preserve operation order; no integer-step shortcut/scale reinterpretation/FMA/raw-view substitution.",
+  "teacher_label_scope": "No teacher/view/labels are changed. Optional future diagnostic preactivation observation, if ever needed, is not a substituted evaluator or new authority from this correction.",
+  "current_source_refs": [
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/config.rs",
+      "SHA256": "8fd3903afec71b12e2d9fbff67e1255bfa44acf6a15f5c6330809ed81708e1a7",
+      "bytes": 8216,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/runtime.rs",
+      "SHA256": "79e8d6ccab2b9de45d720e0625250463324fde2e73f789173939249c665361b7",
+      "bytes": 214011,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-ai/src/alphabeta.rs",
+      "SHA256": "b976df272b273a147596f36ec503a2801b802b45389d8169ca62468d7a02b335",
+      "bytes": 92945,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-ai/src/score.rs",
+      "SHA256": "b1f0f7d096f8a2e9eefbd5f0ef15ec721dfd0d0c9c29d0a79a496781dff5655b",
+      "bytes": 16992,
+      "mode": "0644"
+    }
+  ],
+  "supplied_source_fact": {
+    "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/source-v1/fixed-D-source-fact-v1.json",
+    "SHA256": "e8b846c5a69b665569df67847bd4a880e2f15d38a2fa02aaf2b033b846a2ad66",
+    "bytes": 1631,
+    "mode": "0644",
+    "reader_STOP": "2026-10-09T23:07:53.193903+00:00"
+  },
+  "Main_vs_owned_runtime_distance_factory_branch": "byte-identical; producer runtime whole SHA differs due independent owned source work, no whole-source equality claimed",
+  "scope_change": false,
+  "count_generation_clock_models_resources": "unchanged",
+  "raw_logit_engine_option_authorized": false,
+  "source_native_model_Search_calls": 0,
+  "numeric_admission": "UNREADY; affected current config/source/private/software/resource/physical/fair proofs remain required",
+  "original_plan_retained": true
+}
