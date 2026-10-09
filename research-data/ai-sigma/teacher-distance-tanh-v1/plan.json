@@ -357,5 +357,22 @@
     ]
   },
   "new_resources": "research-data/ai-sigma/teacher-distance-tanh-v1/causal-resources-v2.json",
-  "runtime_admitted_by_plan_edit": false
+  "runtime_admitted_by_plan_edit": false,
+  "authorized_full_public_no_bypass_condition": {
+    "issue": "quoridor-4lc.353",
+    "human_authorized": true,
+    "priority": "Before extending causal diagnosis; current actual Sigma intervals naturally protected",
+    "fresh_fits": 1,
+    "dataset": "Original eligible T8413949 and openedV419150; exact unchanged provenance/cache/split/T-only scale; no sealedE",
+    "candidate_formula": "tanh(NN output)",
+    "incumbent_formula": "tanh(0.1 * integer distance_difference + NN residual)",
+    "head_D": "Same standardized D input; legacy logit units, not raw-step/F recipe",
+    "recipe": "Actual retainedBEST51 config/seeds/order/reflection/applicable same-seed initial parameters; exact convergence/finite/early-stop, no guessed hyperparameters or substituted wall/epoch cutoff",
+    "comparisons": "ONE prebound direct candidate-versus-retainedBEST51 colour-paired development cohort, preferably maintained8family16slots100ms",
+    "design": "docs/design/nnue-teacher-distance-tanh-v1.md#full-public-no-bypass-condition-authorized-separately-2026-10-09",
+    "resources": "research-data/ai-sigma/public-no-bypass-v1/resources-v1.json",
+    "runtime_admitted_by_plan_edit": false,
+    "N_fullschedule_pilot_original_fourfits96": "unchanged/unselected",
+    "no_gate": "Whole342 diagnosis, universal cause attribution and parent closures are not prerequisites"
+  }
 }

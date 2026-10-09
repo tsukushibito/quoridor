@@ -711,3 +711,11 @@ Rootは29固定参照945,981Bと、admitted packetが指定する小さいconfig
 提案はfixedDと採用BEST51 NNUEを分けた1 campaign、8 process・32 complete depth6 search calls、各engine1 perf record（199Hz/DWARF8192、最大30秒の受動window、解決済みuser samples1000件目標）である。production/plainとrecord/plain前後・sampledを照合し、実imageのcodegen/layout・same work/parent/history・overhead・self/inclusive/lost/unresolved/inliningの限界を残す。不足sampleやunderdepthを追加収集で救わず、旧171 sample割合をplain CPUやglobal Amdahlへ移さない。head/dot、FT arithmetic/copy/validation/pack、maps/bitsets、TT/history等は実証拠が示した範囲だけ判断し、poor ROIも有効な結論とする。
 
 whole保存3GiBは未発行の提案上限で、build/private/symbol/TMP/perfdata/RAW/failure/review/Git/cleanupを含む。実時間・NNUE depth6費・continuous/transient peaksはUNKNOWNで、old d3又はDの比から外挿しない。深さ6観測後の実価格・named capacity/lifetime支持と明示的な実行承認が揃う前に影響write・実行をしない。model/feature/FMA/cache/selective-search変更・教師・fits・game・default採用はこの計画から許可せず、323pause/seals/full N gateと全旧fees/UNKNOWNを保持する。
+
+## 全公開データのNNUE-only条件を一度検証する承認（2026-10-09）
+
+人間は、残差設計の出発点が96学習局/4653行だったことを確認したうえで、既存公開T8413949・openedV419150を使う**固定距離バイパスだけを外した新規1fit**と、retainedBEST51との直接色交換development最大16枠を承認した（`quoridor-4lc.353`）。これは大規模corpusでバイパスが悪いと既に分かったという結論ではない。因果診断の延長より先にこの条件を検証し、短い342の入力/scale/current-gradient診断は参考に再用できるが完了・原因特定をgateにしない。
+
+候補は同じlegacy logit単位のtanh(NN output)、現行はtanh(0.1×integer distance_difference+NN residual)。QF1・標準化D head入力・FP32 FT32/H32 Zero4・zSTM±1・tanh・batch2048・Adam・元BEST51の実config/seed/order/reflection/T-only尺度を保持し、正確なLR/plateau/warmup/early-stopは保存configから固定する。一つの現役実装で新条件をfresh学習し、訓練済みBEST51からバイパスだけを抜いたものやfine-tuneを候補にしない。初期予測が違うことは設計上の差で、等値を資格条件にしない。
+
+[設計の独立条件](design/nnue-teacher-distance-tanh-v1.md#full-public-no-bypass-condition-authorized-separately-2026-10-09)と[全工程4GiB支持](../research-data/ai-sigma/public-no-bypass-v1/resources-v1.json)に結び付ける。旧保持43,272,499,200B＋新4,294,967,296B＝47,567,466,496B<50GB、TT/342枠や旧RAW/失敗/UNKNOWNを返金・流用しない。VでINITIAL/BEST/LASTと軌跡を固定し、Torch/nativeと変更境界を確認後、同じ100ms時計・規則・TT・CPU/thread・bookの候補対BEST51一比較を固定する。MSEだけで昇格せず、同時刻の仕事・illegal/late/error/unfinishedと推論/探索全費を報告する。旧Sigma D16/NN16の一度きりの実行・実STOPを尊重し、extraD/Sigma・sweep・新教師/特徴/ラベル/封印E・default採用・323pause解除・N/fullschedule/pilot/common4fit/96を追加しない。これは承認と検証する問いであり、新fit/比較の結果ではない。
