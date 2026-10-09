@@ -141,27 +141,40 @@ pub(crate) struct Completion {
     pub at: Option<std::time::Instant>,
     pub result: Option<SearchResult>,
     pub invalid: bool,
+    // Includes late snapshots: an illegal earlier completion must not be
+    // hidden by a later valid one. Caller rules checks run only after receipt.
+    actions_to_validate: Vec<u16>,
 }
 impl Completion {
-    pub fn publish(
-        &mut self,
-        root: &quoridor_core::research::SigmaContext,
-        r: &SearchResult,
-        deadline: Option<std::time::Instant>,
-    ) {
-        let legal = r.completed_depth > 0
+    pub fn publish(&mut self, r: &SearchResult, deadline: Option<std::time::Instant>) {
+        let now = std::time::Instant::now();
+        // Even a malformed, late or superseded snapshot can carry an action.
+        // Retain every present action before any coherence/timeliness refusal.
+        if let Some(action) = r.action {
+            self.actions_to_validate.push(action);
+        }
+        let coherent = r.completed_depth > 0
             && r.value.is_some_and(f32::is_finite)
-            && r.action
-                .is_some_and(|a| r.pv.first() == Some(&a) && root.play(a).is_ok());
-        if !legal {
+            && r.action.is_some_and(|a| r.pv.first() == Some(&a));
+        if !coherent {
             self.invalid = true;
             return;
         }
-        let now = std::time::Instant::now();
         if deadline.is_none_or(|d| now < d) {
             self.at = Some(now);
             self.result = Some(r.clone());
         }
+    }
+    /// Called by the authority after timestamping return of the synchronous
+    /// search invocation, including its stack cleanup. No rules call is made
+    /// by the per-iteration observer. Validate every captured action, including
+    /// late or superseded snapshots, without changing the chosen result.
+    pub fn validate_actions(&self, mut legal: impl FnMut(u16) -> bool) -> bool {
+        let mut valid = !self.invalid;
+        for &action in &self.actions_to_validate {
+            valid &= legal(action);
+        }
+        valid
     }
     pub fn select(&self, r: &mut SearchResult) {
         if matches!(r.stop, StopReason::Terminal | StopReason::Cancelled) {
@@ -191,6 +204,160 @@ pub(crate) fn remaining(
         .saturating_sub(now.saturating_duration_since(start))
 }
 #[cfg(test)]
+mod completion_receipt_353_tests {
+    use super::*;
+    use std::cell::Cell;
+    use std::time::{Duration, Instant};
+
+    fn result(action: u16) -> SearchResult {
+        SearchResult {
+            action: Some(action),
+            value: Some(0.25),
+            completed_depth: 1,
+            pv: vec![action],
+            stats: Default::default(),
+            stop: StopReason::DepthComplete,
+            elapsed: Duration::ZERO,
+        }
+    }
+
+    #[test]
+    fn receipt_353_delayed_rules_do_not_change_snapshot_receipt_or_action() {
+        let mut c = Completion::default();
+        let r = result(13);
+        c.publish(&r, None);
+        let received = c.at.unwrap();
+        let synthetic_rules_time = Cell::new(received);
+        assert!(c.validate_actions(|a| {
+            synthetic_rules_time.set(received + Duration::from_millis(110));
+            a == 13
+        }));
+        assert!(synthetic_rules_time.get() > received + Duration::from_millis(100));
+        assert_eq!(c.at, Some(received));
+        assert_eq!(c.result.as_ref().unwrap().action, Some(13));
+    }
+
+    #[test]
+    fn receipt_353_superseded_and_late_illegal_snapshots_still_refuse() {
+        let mut c = Completion::default();
+        c.publish(&result(209), Some(Instant::now()));
+        assert!(c.result.is_none());
+        c.publish(&result(13), None);
+        let mut checked = Vec::new();
+        assert!(!c.validate_actions(|a| {
+            checked.push(a);
+            a == 13
+        }));
+        assert_eq!(checked, vec![209, 13]);
+        assert_eq!(c.result.as_ref().unwrap().action, Some(13));
+    }
+
+    #[test]
+    fn receipt_353_finite_depth_action_pv_errors_are_not_rescued() {
+        for kind in 0..6 {
+            let mut c = Completion::default();
+            let mut invalid = result(13);
+            match kind {
+                0 => invalid.value = Some(f32::NAN),
+                1 => invalid.value = Some(f32::INFINITY),
+                2 => invalid.value = None,
+                3 => invalid.completed_depth = 0,
+                4 => invalid.action = None,
+                _ => invalid.pv = vec![12],
+            }
+            c.publish(&invalid, Some(Instant::now()));
+            assert!(c.invalid && c.result.is_none());
+            c.publish(&result(13), None);
+            let chosen_at = c.at;
+            let mut late_invalid = result(209);
+            late_invalid.pv.clear();
+            c.publish(&late_invalid, Some(Instant::now()));
+            let authority_received = Instant::now();
+            let mut checked = Vec::new();
+            assert!(!c.validate_actions(|a| {
+                assert!(Instant::now() >= authority_received);
+                checked.push(a);
+                a != 209
+            }));
+            assert_eq!(
+                checked,
+                if kind == 4 {
+                    vec![13, 209]
+                } else {
+                    vec![13, 13, 209]
+                }
+            );
+            assert_eq!(c.at, chosen_at);
+            assert_eq!(c.result.as_ref().unwrap().action, Some(13));
+        }
+    }
+
+    #[test]
+    fn receipt_353_late_result_cannot_replace_timely_immutable_choice_or_work() {
+        let mut c = Completion::default();
+        let mut r = result(13);
+        c.publish(&r, None);
+        r.action = Some(12);
+        r.pv = vec![12];
+        r.completed_depth = 2;
+        r.stats.nodes = 99;
+        r.stop = StopReason::TimeLimit;
+        c.publish(&r, Some(Instant::now()));
+        c.select(&mut r);
+        assert_eq!(r.action, Some(13));
+        assert_eq!(r.pv, vec![13]);
+        assert_eq!(r.completed_depth, 1);
+        assert_eq!(r.stats.nodes, 99);
+        assert_eq!(r.stop, StopReason::TimeLimit);
+        assert!(c.validate_actions(|a| [12, 13].contains(&a)));
+    }
+
+    #[test]
+    fn receipt_353_terminal_and_cancelled_returns_are_never_rescued() {
+        let mut c = Completion::default();
+        c.publish(&result(13), None);
+        for stop in [StopReason::Terminal, StopReason::Cancelled] {
+            let mut r = result(12);
+            r.action = None;
+            r.value = None;
+            r.pv.clear();
+            r.completed_depth = 0;
+            r.stats.nodes = 101;
+            r.stop = stop;
+            c.select(&mut r);
+            assert!(r.action.is_none() && r.value.is_none() && r.pv.is_empty());
+            assert_eq!(r.completed_depth, 0);
+            assert_eq!(r.stats.nodes, 101);
+            assert_eq!(r.stop, stop);
+        }
+    }
+
+    #[test]
+    fn receipt_353_existing_reserve_and_all_snapshot_checks_remain() {
+        let start = Instant::now();
+        assert_eq!(
+            remaining(
+                start,
+                start + Duration::from_millis(7),
+                Duration::from_millis(100),
+                Duration::from_millis(5)
+            ),
+            Duration::from_millis(88)
+        );
+        let mut c = Completion::default();
+        c.publish(&result(209), None);
+        c.publish(&result(12), None);
+        c.publish(&result(13), None);
+        let mut checked = Vec::new();
+        assert!(!c.validate_actions(|a| {
+            checked.push(a);
+            a != 209
+        }));
+        assert_eq!(checked, vec![209, 12, 13]);
+    }
+}
+
+#[cfg(test)]
 mod completion_tests {
     use super::*;
     use std::time::{Duration, Instant};
@@ -206,7 +373,6 @@ mod completion_tests {
             ),
             Duration::ZERO
         );
-        let root = quoridor_core::research::SigmaContext::from_prefix(&[]).unwrap();
         let mut r = SearchResult {
             action: Some(13),
             value: Some(0.),
@@ -217,9 +383,9 @@ mod completion_tests {
             elapsed: Duration::ZERO,
         };
         let mut c = Completion::default();
-        c.publish(&root, &r, Some(start));
+        c.publish(&r, Some(start));
         assert!(c.at.is_none());
-        c.publish(&root, &r, None);
+        c.publish(&r, None);
         assert!(c.at.is_some());
         r.completed_depth = 2;
         r.stats.nodes = 99;

@@ -1,0 +1,31 @@
+{
+  "schema": "quoridor.current-clock.paired-source-integration.v1",
+  "issue": "quoridor-4lc.355",
+  "scope": "Exact adopted353 reviewed+eleven tested receipt boundaries. New campaign compiler/private/current hash-reuse coupling still unqualified.",
+  "actual_UTC": "2026-10-09T22:55:15.499348+00:00",
+  "current_source": [
+    {
+      "relative": "crates/quoridor-runner/src/arena_clock.rs",
+      "before_SHA256": "5a64b655bc9ab96558957abc24f8c0f8131b5a6bd95c5014a55f899401471267",
+      "after_SHA256": "910571aa729e57a88121888aab1a09c995d643ff13ca7bd5841c65cdabbfd42f",
+      "before_bytes": 10341,
+      "after_bytes": 16354
+    },
+    {
+      "relative": "crates/quoridor-runner/src/runtime.rs",
+      "before_SHA256": "18bac6a7373529aa09925978952f392373a90f480e7f4ac14811c2c7231d4ccc",
+      "after_SHA256": "79e8d6ccab2b9de45d720e0625250463324fde2e73f789173939249c665361b7",
+      "before_bytes": 203464,
+      "after_bytes": 214011
+    }
+  ],
+  "before_matches_retained_gzip": true,
+  "control": "/workspaces/quoridor/.artifacts/nnue-public-no-bypass-review353-v1/clock-related-v2/control.json",
+  "control_SHA256": "0d7ed90e30159786b48f818b3efea8ea7a3049a5d077de175fb1e434264cdaa7",
+  "actual_reader_STOP": "2026-10-09T17:36:21.742623+00:00",
+  "hardware_calls": 0,
+  "old_success_suite_replays": 0,
+  "producer_final_admin_STOP": "2026-10-09T22:04:13.666389+00:00",
+  "producer_actual_report_source_STOP": "2026-10-09T21:51:41.710814+00:00",
+  "scoped_Rustfmt_check": "PASS"
+}

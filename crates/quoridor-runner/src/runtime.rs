@@ -179,6 +179,274 @@ fn observe_sigma_receipt(
     }
 }
 
+/// Rules-side checks of the immutable returned action and every observed
+/// completion. The direct-alpha authority calls this after its receipt stamp.
+fn alpha_validate_completion(
+    completion: &crate::arena_clock::Completion,
+    action: Option<u16>,
+    mut legal: impl FnMut(u16) -> bool,
+) -> (bool, bool) {
+    let snapshots_valid = completion.validate_actions(&mut legal);
+    let action_legal = action.is_some_and(legal);
+    (snapshots_valid, action_legal)
+}
+
+#[cfg(test)]
+mod alpha_receipt_353_tests {
+    use super::*;
+    use std::cell::Cell;
+
+    fn result() -> alphabeta::SearchResult {
+        alphabeta::SearchResult {
+            action: Some(13),
+            value: Some(0.25),
+            completed_depth: 1,
+            pv: vec![13],
+            stats: Default::default(),
+            stop: alphabeta::StopReason::DepthComplete,
+            elapsed: Duration::ZERO,
+        }
+    }
+
+    struct C1Evaluator {
+        fail: bool,
+    }
+    impl StaticEvaluator for C1Evaluator {
+        fn evaluate(
+            &self,
+            _context: &SigmaContext,
+            _accumulator: Option<&alphabeta::EvalAccumulator>,
+        ) -> alphabeta::Result<f32> {
+            if self.fail {
+                Err(alphabeta::SearchError::Root(
+                    "353 original distinct search cause".into(),
+                ))
+            } else {
+                Ok(0.)
+            }
+        }
+    }
+
+    fn malformed_then_invoke(
+        fail: bool,
+    ) -> (
+        SigmaContext,
+        crate::arena_clock::Completion,
+        TtProfile,
+        alphabeta::Result<alphabeta::SearchResult>,
+    ) {
+        let root = SigmaContext::from_prefix(&[]).unwrap();
+        let mut completion = crate::arena_clock::Completion::default();
+        let mut malformed = result();
+        malformed.value = Some(f32::NAN);
+        completion.publish(&malformed, None);
+        assert!(completion.invalid);
+        let mut profile = TtProfile::default();
+        let returned = invoke_alpha_observed(
+            &mut None,
+            &mut profile,
+            Arc::new(C1Evaluator { fail }),
+            alphabeta::SearchNamespace {
+                evaluator: "353-new-malformed-completion-control-fixture".into(),
+                rules: root.ruleset().id().into(),
+                selectivity: "fullwidth".into(),
+            },
+            &root,
+            &SearchLimits {
+                max_depth: 1,
+                max_nodes: 1000,
+                time_limit: None,
+                tt_entries: 4096,
+                use_pvs: true,
+                use_tt: true,
+            },
+            &AtomicBool::new(false),
+            Instant::now(),
+            alphabeta::SearchSession::new,
+            Some(&mut completion),
+            None,
+            Duration::ZERO,
+        );
+        (root, completion, profile, returned)
+    }
+
+    #[test]
+    fn receipt_353_actual_invoke_malformed_then_ok_retains_work_and_refuses() {
+        let (root, completion, profile, returned) = malformed_then_invoke(false);
+        let authority_received = Instant::now();
+        let r = returned
+            .as_ref()
+            .expect("actual search Ok must not become snapshot Root Err");
+        assert_eq!(r.stop, alphabeta::StopReason::DepthComplete);
+        assert_eq!(r.completed_depth, 1);
+        assert!(r.stats.nodes > 0);
+        assert!(r.value.is_some_and(f32::is_finite));
+        assert_eq!(r.action, r.pv.first().copied());
+        assert_eq!(profile.successful_results, 1);
+        assert_eq!(profile.errors, 0);
+        assert_eq!(profile.search_errors_without_counters, 0);
+        assert_eq!(profile.probes, r.stats.tt_probes);
+        let work = crate::arena_clock::alpha_counters(r);
+        assert_eq!(work["nodes"].as_u64(), Some(r.stats.nodes));
+        let position = root.position();
+        let history = root.history_counts();
+        let (snapshots_valid, legal) = alpha_validate_completion(&completion, r.action, |a| {
+            assert!(Instant::now() >= authority_received);
+            root.play(a).is_ok()
+        });
+        assert!(!snapshots_valid && legal);
+        assert_eq!(
+            alpha_receipt_decision(
+                None,
+                0,
+                false,
+                legal,
+                true,
+                returned.is_err() || !snapshots_valid
+            ),
+            Err(crate::arena_clock::Failure::EngineError)
+        );
+        assert_eq!(root.position(), position);
+        assert_eq!(root.history_counts(), history);
+    }
+
+    #[test]
+    fn receipt_353_actual_invoke_malformed_then_original_error_retains_cause() {
+        let (root, completion, profile, returned) = malformed_then_invoke(true);
+        let authority_received = Instant::now();
+        match &returned {
+            Err(alphabeta::SearchError::Root(cause)) => {
+                assert_eq!(cause, "353 original distinct search cause")
+            }
+            other => panic!("original error object/text not preserved: {other:?}"),
+        }
+        assert_eq!(profile.successful_results, 0);
+        assert_eq!(profile.errors, 1);
+        assert_eq!(profile.search_errors_without_counters, 1);
+        let mut checked = Vec::new();
+        let (snapshots_valid, legal) = alpha_validate_completion(&completion, None, |a| {
+            assert!(Instant::now() >= authority_received);
+            checked.push(a);
+            root.play(a).is_ok()
+        });
+        assert_eq!(checked, vec![13]);
+        assert!(!snapshots_valid && !legal);
+        assert_eq!(
+            alpha_receipt_decision(
+                None,
+                0,
+                false,
+                legal,
+                false,
+                returned.is_err() || !snapshots_valid
+            ),
+            Err(crate::arena_clock::Failure::EngineError)
+        );
+        assert!(
+            returned
+                .as_ref()
+                .unwrap_err()
+                .to_string()
+                .contains("353 original distinct search cause")
+        );
+    }
+
+    #[test]
+    fn receipt_353_actual_validation_helper_keeps_pre_rules_receipt_and_action() {
+        let mut completion = crate::arena_clock::Completion::default();
+        let r = result();
+        completion.publish(&r, None);
+        let received_ns = 95_000_000;
+        let synthetic_now = Cell::new(received_ns);
+        let mut validated = Vec::new();
+        let (snapshots_valid, legal) = alpha_validate_completion(&completion, r.action, |a| {
+            validated.push(a);
+            synthetic_now.set(205_000_000);
+            a == 13
+        });
+        assert_eq!(validated, vec![13, 13]);
+        assert_eq!(r.action, Some(13));
+        assert!(synthetic_now.get() > 100_000_000);
+        assert_eq!(
+            alpha_receipt_decision(
+                Some(100_000_000),
+                received_ns,
+                false,
+                legal,
+                true,
+                !snapshots_valid
+            ),
+            Ok(())
+        );
+    }
+
+    #[test]
+    fn receipt_353_deferred_illegal_snapshot_error_and_deadline_priority() {
+        use crate::arena_clock::Failure;
+        let mut completion = crate::arena_clock::Completion::default();
+        let mut bad = result();
+        bad.action = Some(209);
+        bad.pv = vec![209];
+        completion.publish(&bad, None);
+        let good = result();
+        completion.publish(&good, None);
+        let (snapshots_valid, legal) =
+            alpha_validate_completion(&completion, good.action, |a| a == 13);
+        assert!(!snapshots_valid && legal);
+        assert_eq!(
+            alpha_receipt_decision(Some(100), 101, false, legal, true, !snapshots_valid),
+            Err(Failure::EngineError)
+        );
+        assert_eq!(
+            alpha_receipt_decision(Some(100), 101, true, legal, true, !snapshots_valid),
+            Err(Failure::Cancelled)
+        );
+        assert_eq!(
+            alpha_receipt_decision(Some(100), 100, false, true, true, false),
+            Err(Failure::TimeOverrun)
+        );
+        assert_eq!(
+            alpha_receipt_decision(Some(100), 99, false, true, false, false),
+            Err(Failure::NoCompletedIteration)
+        );
+    }
+
+    #[test]
+    fn receipt_353_synchronous_drop_precedes_rules_and_next_opponent() {
+        struct OwnedCall<'a>(&'a Cell<bool>);
+        impl Drop for OwnedCall<'_> {
+            fn drop(&mut self) {
+                self.0.set(true);
+            }
+        }
+        let drained = Cell::new(false);
+        let mut completion = crate::arena_clock::Completion::default();
+        let returned = (|| {
+            let _owned = OwnedCall(&drained);
+            let r = result();
+            completion.publish(&r, None);
+            r
+        })();
+        let received_ns = 95_000_000;
+        assert!(drained.get());
+        let (snapshots_valid, legal) =
+            alpha_validate_completion(&completion, returned.action, |a| {
+                assert!(drained.get());
+                a == 13
+            });
+        let accepted = alpha_receipt_decision(
+            Some(100_000_000),
+            received_ns,
+            false,
+            legal,
+            true,
+            !snapshots_valid,
+        )
+        .is_ok();
+        assert!(accepted && drained.get());
+    }
+}
+
 #[cfg(test)]
 mod sigma_receipt_tests {
     use super::*;
@@ -860,12 +1128,13 @@ fn invoke_alpha_observed(
                     ));
                 }
                 let result = session.search_with_updates(root, &bounded, cancel, &mut |r| {
-                    done.publish(root, r, deadline)
+                    done.publish(r, deadline)
                 });
                 if done.invalid {
-                    Err(alphabeta::SearchError::Root(
-                        "invalid completed-depth snapshot".into(),
-                    ))
+                    // Validation is a separate authority failure. Preserve
+                    // the actual full return or original search error, and
+                    // never replace a malformed return with an older choice.
+                    result
                 } else {
                     result.map(|mut r| {
                         done.select(&mut r);
@@ -2345,7 +2614,10 @@ fn worker(
                     };
                     let action = search_result.as_ref().ok().and_then(|r| r.action);
                     // Authority has already timestamped receipt; rules-side validation is outside thinking.
-                    let legal = action.is_some_and(|a| g.context.play(a).is_ok());
+                    let (snapshots_valid, legal) =
+                        alpha_validate_completion(&completion, action, |a| {
+                            g.context.play(a).is_ok()
+                        });
                     let checked = Instant::now();
                     let deadline = e
                         .time_ms
@@ -2364,7 +2636,7 @@ fn worker(
                         cancelled,
                         legal,
                         completed,
-                        search_result.is_err(),
+                        search_result.is_err() || !snapshots_valid,
                     );
                     // The run deadline is independent of each move clock.
                     if config.deadline_unix_ms > 0 && unix_ms() >= config.deadline_unix_ms {
@@ -2378,6 +2650,10 @@ fn worker(
                         SIGMA_RECEIPT_CONTRACT_SHA256.into();
                     receipt_counters["authority_receipt_ns"] = ns(returned).into();
                     receipt_counters["receipt_latency_ns"] = 0u64.into();
+                    // Keep all returned search work even when the caller's
+                    // deferred snapshot validation refuses publication.
+                    receipt_counters["completed_snapshot_validation_failed"] =
+                        (!snapshots_valid).into();
                     receipt_counters["legality_cost_ns"] =
                         ((checked.duration_since(returned).as_nanos()).min(u64::MAX as u128)
                             as u64)
@@ -2403,7 +2679,18 @@ fn worker(
                             .result
                             .as_ref()
                             .map(crate::arena_clock::alpha_counters),
-                        engine_error: search_result.as_ref().err().map(ToString::to_string),
+                        engine_error: search_result
+                            .as_ref()
+                            .err()
+                            .map(ToString::to_string)
+                            .or_else(|| {
+                                (!snapshots_valid).then(|| {
+                                    alphabeta::SearchError::Root(
+                                        "invalid completed-depth snapshot".into(),
+                                    )
+                                    .to_string()
+                                })
+                            }),
                         stop: r.map(|r| crate::arena_clock::stop_name(r.stop).into()),
                         completed_depth: r.map(|r| r.completed_depth),
                         value_stm: r.and_then(|r| r.value),
@@ -2412,7 +2699,12 @@ fn worker(
                     });
                     if let Err(f) = decision {
                         g.failure = Some(f);
-                        failure = Some(format!("move_rejected:{f:?}"));
+                        failure = Some(if !snapshots_valid && search_result.is_ok() {
+                            alphabeta::SearchError::Root("invalid completed-depth snapshot".into())
+                                .to_string()
+                        } else {
+                            format!("move_rejected:{f:?}")
+                        });
                     }
                 }
                 match search_result {
