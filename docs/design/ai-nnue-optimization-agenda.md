@@ -23,6 +23,19 @@ Rootは偏り・機会損失・早すぎる断念を観測と全工程費から�
 
 2026-10-09、人間は353の候補対BEST51評価を妨げない範囲で、Beads `quoridor-4lc.354` の一回のsource/design準備を承認した。観測時の4096 direct-map・完全履歴・1MiB課金について、byte admission拒否、異なるkeyの同slot配置、真のhash衝突を分け、適用可能なdepth/age eviction・session lifetime/reset・容量案と最小候補の意味・費用・不確実性を整理する。同じ停止済み成果物で、採用済みsame-owned-Key hash reuseのwholeSearch評価と下記349の限定perfを、既存証拠からbuild/private/symbol/TMP/RAW/failure/review/Git/cleanupまで価格化する。[準備専用8MiB支持](../../research-data/ai-sigma/search-optimization/tt-capacity-assessment-preparation-v1/resources-v1.json)は数値・build・3GiB提案の配分ではない。353のsource/image/configと実intervalを保護し、容量・置換・Zobrist・model/default・選択的探索の実装や新たな353の前提条件を加えない。重要なTT意味の選択は、競合案と全費を人間へ返してから決める。
 
+354の停止済み[設計](../../.worktree/search-optimization/.artifacts/tt-capacity-assessment-preparation-v1/design.md)と[全工程価格案](../../.worktree/search-optimization/.artifacts/tt-capacity-assessment-preparation-v1/future-whole-assessment-plan.json)を2026-10-09に受け付けた。現行persistent TTは4096 slots/1MiBで、Tableとslot vector容量、counted history容量を課金し、挿入先の旧履歴分だけを差し引く。同generationの深いentry保護がbyte判定に先行し、他slotをevictしない。`tt_collisions` は異なる完全Keyが同slotに入る事象で、64bit hash一致の実測ではない。課金tupleと実history tupleのstock差は物理RSS/ABI差の証明ではない。byte拒否への最小実装候補はdefault1MiBを維持した明示opt-in4096/2MiBであり、増量・bounded depth/age eviction・turn/resetはいずれも探索仕事や同時間結果を変え得る。完全Key/履歴、rules/evaluator namespace、深さ/bound有効性、root/PV/control/undo/割当失敗を保つ条件で、人間が介入案を選ぶまで実装しない。効果はUNKNOWN。
+
+未来評価は、まず採用済みsame-owned-Key hash reuseを厳密な同仕事で評価するH案を提示する。349のD/BEST51各4親のdepth6 perfと統合する場合は、観測前に3imagesすべてを資格化し、共通anchorを同じ実操作として凍結する。別工程の古いtimingを後から共通anchorへ読み替えない。
+
+| 未発行の将来案                     | whole上限 | 深さ6 logical calls | 現行保持47,575,855,104Bに加えた50GBとの差 |
+| ---------------------------------- | --------- | ------------------- | ----------------------------------------- |
+| H: hash reuse同仕事、perfなし      | 1376MiB   | 32                  | 981,304,320B残る                          |
+| C: Hと349の事前束縛したcompact統合 | 2272MiB   | 56                  | 41,780,224B残る                           |
+| C: conservative統合                | 2560MiB   | 56                  | 260,209,664B不足                          |
+| 349 canonical perf                 | 3072MiB   | 32                  | 797,080,576B不足                          |
+
+これはsource/build/private/symbol/TMP/RAW/failure/review/Git/cleanupを含む条件付き価格で、grant・実peak・速度結果ではない。compactはprivate/symbol/link/TMPの真の上限で成立しない可能性がある。Hとcompact Pを別々に保持すると1,401,060,352B不足し、serial実行や旧351/cacheの削除見込みをcreditにしない。実4prefix/context、現役wholeSearch inlet、current/reference/record imageと依存・symbol・counterの新しい狭い資格、fresh physical/fair/lifetime guardsは将来入口の未充足条件。353の有限評価を妨げず、この準備完了からbuild/数値/perf/容量介入を開始しない。
+
 ## 選択的探索
 
 LMRと必要な再探索、futility、ProbCut/MPC、重要手の延長、ゴール/接触/jump/強制防御を扱う静止探索・延長、壁なし/少数壁の厳密solverを候補とする。null move等はQuoridorの手番・待ち手の性質を確かめる。浅深の誤差と戦術的取りこぼしを測り、ノード削減だけで採用しない。MPCの校正データと最終評価を分ける。
@@ -78,7 +91,7 @@ record buildはrelease最適化を維持したdebug/symbol情報付きimageを�
 
 保存wholeは**3GiBの提案上限で未発行**。source64/build1536/private128/inputs32/perfdata256/raw・summary64/control64/review・Git128/TMP512/failure・cleanup288 MiBを含む。2 recordの199Hz×8192B×30秒によるstackだけの約97.8MBにmetadata/symbol情報が加わるため、perfdata256MiBを成功保証とせず実forecastを確認する。実symbol/link/build/privateサイズ・一時重なり・failed/partial保存が収まらなければ、証拠を切り捨てず具体的gapを戻す。
 
-実時間、BEST51深さ6の費用、transient/continuous peakはUNKNOWN。8 whole processにbuild/link/symbol/preflight/model load/replay/setup/record decode/検証/report/review/Git/cleanupを足した全工程を、深さ6観測後・影響write前に価格化する。d3比率やD費からNNUE費を外挿しない。現在の保持枠39,598,288,896Bに提案3GiBを足すと42,819,514,368Bで50GB未満だが、この発行時算術はfresh free容量・grant・実peakの証明ではない。現行named supportとserial lifetimesを再照合し、旧caps/assets/failed費/RAW/masks/UNKNOWNを保持する。
+実時間、BEST51深さ6の費用、transient/continuous peakはUNKNOWN。8 whole processにbuild/link/symbol/preflight/model load/replay/setup/record decode/検証/report/review/Git/cleanupを足した全工程を、深さ6観測後・影響write前に価格化する。d3比率やD費からNNUE費を外挿しない。提案時の保持枠39,598,288,896Bに提案3GiBを足すと42,819,514,368Bで50GB未満だが、この発行時算術はfresh free容量・grant・実peakの証明ではない。現行named supportとserial lifetimesを再照合し、旧caps/assets/failed費/RAW/masks/UNKNOWNを保持する。
 
 将来担当はSAME探索owner `01a11004-79f3-7c20-872c-432a2c347664`、元cwd `.worktree/search-optimization`。実行許可後の専用managed worktree候補 `.worktree/depth6-focused-perf` は未作成で、作成前に保存方針を読む。sole324がMain/Git/index/resourceを扱う。practical family6GiB（controller64MiB含む）・host4GiB reserve・GPU0を候補とし、compilerは共有Cargo有限lock、numericalはsingle search threadと別physical core guardian、実topologyを確認して公平な有限intervalを使う。logical CPU数を独立core数とみなさない。
 
