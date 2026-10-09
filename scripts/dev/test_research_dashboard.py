@@ -124,14 +124,20 @@ class DashboardTests(unittest.TestCase):
     def snapshot(self, ports):
         return dashboard.collect(ports, NOW)
 
-    def test_actual_thread_name_is_bounded_and_owner_identity_retained(self):
+    def test_actual_thread_name_is_complete_and_owner_identity_retained(self):
         ports = FakePorts([issue(1)])
         ports.names[OWNER[6:]] = "Actual task name " + "n" * 200
         group = self.snapshot(ports)["groups"][0]
-        self.assertEqual(group["name"], ports.names[OWNER[6:]][:160])
+        self.assertEqual(group["name"], ports.names[OWNER[6:]])
         self.assertEqual(group["owner"], OWNER)
         self.assertEqual(group["llm"], "active")
         self.assertNotIn("SECRET_PREVIEW", dashboard.render(self.snapshot(ports)).decode())
+
+    def test_oversize_supplied_thread_name_is_refused_without_clipping(self):
+        ports = FakePorts([issue(1)])
+        ports.names[OWNER[6:]] = "n" * (dashboard.DISPLAY_FIELD_BYTES + 1)
+        with self.assertRaises(dashboard.CollectionError):
+            self.snapshot(ports)
 
     def test_missing_or_invalid_name_never_uses_preview(self):
         ports = FakePorts([issue(1)])
@@ -158,12 +164,12 @@ class DashboardTests(unittest.TestCase):
         self.assertNotIn(attack, page)
         self.assertIn("\\u003c/script\\u003e", page)
         template = Path(dashboard.__file__).with_suffix(".html").read_text()
-        self.assertIn("make('div', group.name, 'owner-name')", template)
-        self.assertIn("make('div', group.owner, 'muted')", template)
+        self.assertIn("make('span', ownerName(group), 'owner-name')", template)
+        self.assertIn("original(identity, {", template)
         search = template[template.index("function filter()") :]
         self.assertIn("group.name", search)
 
-    def test_closed_task_has_bounded_administrative_outcome_and_date(self):
+    def test_closed_task_has_complete_bounded_administrative_outcome_and_date(self):
         row = issue(1)
         row.update(
             status="closed",
@@ -173,14 +179,70 @@ class DashboardTests(unittest.TestCase):
         ports = FakePorts([row])
         snapshot = self.snapshot(ports)
         view = snapshot["groups"][0]["issues"][0]
-        self.assertEqual(view["close_reason"], row["close_reason"][:512])
+        self.assertEqual(view["close_reason"], row["close_reason"])
         self.assertEqual(view["closed_at"], NOW.isoformat())
         self.assertEqual(view["jobs"], [])
         self.assertEqual(snapshot["counts"]["running_jobs"], 0)
         template = Path(dashboard.__file__).with_suffix(".html").read_text()
         self.assertIn("if (issue.status === 'closed')", template)
-        self.assertIn("field(facts, 'Administrative closure', issue.close_reason)", template)
-        self.assertIn("field(facts, 'Closed at (administrative)', issue.closed_at)", template)
+        self.assertIn("shown(issue, 'close_reason')", template)
+        self.assertIn("date(issue.closed_at)", template)
+
+    def test_display_fields_refuse_oversize_without_replacing_previous_html(self):
+        output = self.root / "index.html"
+        output.write_bytes(b"previous")
+        for key in ("title", "stage", "next_action", "wait_reason", "close_reason"):
+            row = issue(1)
+            if key in ("title", "close_reason"):
+                row[key] = "語" * 2731
+            else:
+                row["metadata"]["dashboard"][key] = "語" * 2731
+            if key == "close_reason":
+                row["status"] = "closed"
+            with self.subTest(key=key), self.assertRaises(dashboard.CollectionError):
+                dashboard.generate(FakePorts([row]), output)
+            self.assertEqual(output.read_bytes(), b"previous")
+
+    def test_long_display_fields_and_primary_selection_keep_other_tasks(self):
+        first = issue(
+            1,
+            stage="implementation " + "s" * 800,
+            next_action="next " + "n" * 1200,
+            wait_reason="wait " + "w" * 700,
+        )
+        first["title"] = "Title " + "t" * 400
+        first["status"] = "in_progress"
+        second = issue(2, stage="Other current")
+        second["status"] = "in_progress"
+        second["updated_at"] = "2026-10-09T00:00:00+00:00"
+        history = issue(3)
+        history["status"] = "closed"
+        snapshot = self.snapshot(FakePorts([first, second, history]))
+        group = snapshot["groups"][0]
+        self.assertEqual(group["primary_issue_id"], "demo-2")
+        self.assertEqual(len(group["issues"]), 3)
+        self.assertEqual(group["issues"][0]["title"], first["title"])
+        self.assertEqual(group["issues"][0]["stage"], first["metadata"]["dashboard"]["stage"])
+        self.assertEqual(
+            group["issues"][0]["next_action"], first["metadata"]["dashboard"]["next_action"]
+        )
+        self.assertEqual(
+            group["issues"][0]["wait_reason"], first["metadata"]["dashboard"]["wait_reason"]
+        )
+        self.assertIn(first["title"], dashboard.render(snapshot).decode())
+        second["status"] = "closed"
+        self.assertEqual(self.snapshot(FakePorts([second]))["groups"][0]["primary_issue_id"], None)
+
+    def test_verified_job_primary_does_not_depend_on_llm_idle_or_task_words(self):
+        running = issue(1, owner=IDLE, stage="Not supplied")
+        other = issue(2, owner=IDLE, stage="Implementation")
+        other["status"] = "in_progress"
+        self.runtime(running)
+        snapshot = self.snapshot(FakePorts([running, other]))
+        group = snapshot["groups"][0]
+        self.assertEqual(group["llm"], "idle")
+        self.assertEqual(group["primary_issue_id"], "demo-1")
+        self.assertEqual(snapshot["counts"]["running_jobs"], 1)
 
     def test_closure_missing_injection_and_open_task_fields(self):
         row = issue(1)
@@ -220,6 +282,7 @@ class DashboardTests(unittest.TestCase):
 
     def test_owner_groups_preserve_pause_and_multiple_issues(self):
         a = issue(1, stage="Preparation", next_action="Submit after checks")
+        a["status"] = "in_progress"
         b = issue(323, stage="Paused", wait_kind="human_decision")
         b["labels"] = ["paused-by-user"]
         c = issue(3, owner=None, stage="Review")
@@ -227,6 +290,7 @@ class DashboardTests(unittest.TestCase):
         self.assertEqual(len(snapshot["groups"]), 2)
         group = next(g for g in snapshot["groups"] if g["owner"] == OWNER)
         self.assertEqual(group["llm"], "active")
+        self.assertEqual(group["primary_issue_id"], "demo-1")
         self.assertTrue(group["issues"][1]["paused"])
         self.assertEqual(
             snapshot["counts"], {"running_jobs": 0, "waiting_issues": 1, "human_decisions": 1}
@@ -238,6 +302,17 @@ class DashboardTests(unittest.TestCase):
         self.runtime(row)
         snapshot = self.snapshot(FakePorts([row]))
         self.assertEqual(snapshot["groups"][0]["llm"], "idle")
+        self.assertEqual(snapshot["counts"]["running_jobs"], 1)
+
+    def test_closed_administrative_task_can_still_have_confirmed_running_child(self):
+        row = issue(1, owner=IDLE)
+        row["status"] = "closed"
+        self.runtime(row)
+        snapshot = self.snapshot(FakePorts([row]))
+        group = snapshot["groups"][0]
+        self.assertEqual(group["llm"], "idle")
+        self.assertIsNone(group["primary_issue_id"])
+        self.assertEqual(group["issues"][0]["jobs"][0]["status"], "running")
         self.assertEqual(snapshot["counts"]["running_jobs"], 1)
 
     def test_llm_active_job_none_and_closed_no_wait(self):

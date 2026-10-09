@@ -27,6 +27,7 @@ ROWS = 128
 JSON_BYTES = 1048576
 RUNTIME_BYTES = 65536
 HTML_BYTES = 524288
+DISPLAY_FIELD_BYTES = 8192
 ISSUE_ID = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,127}\Z")
 THREAD_ID = re.compile(r"codex:([0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12})\Z")
 
@@ -44,6 +45,34 @@ class CollectionError(Exception):
 
 def text(value, limit=1024):
     return value[:limit] if isinstance(value, str) else ""
+
+
+def display_text(value, field):
+    """Keep supplied display originals intact or refuse the whole snapshot."""
+    if not isinstance(value, str):
+        return ""
+    if len(value.encode("utf-8")) > DISPLAY_FIELD_BYTES:
+        raise CollectionError(f"{field} exceeds the bounded display field size")
+    return value
+
+
+def primary_issue(issues):
+    """Select one unresolved task from recorded status and exact job evidence."""
+    candidates = [issue for issue in issues if issue["status"] != "closed"]
+    if not candidates:
+        return None
+
+    def rank(issue):
+        return (
+            any(job["status"] == "running" for job in issue["jobs"]),
+            issue["status"] == "in_progress" and not issue["waiting"],
+            issue["status"] == "in_progress",
+            not issue["waiting"],
+            issue["updated_at"],
+            issue["id"],
+        )
+
+    return max(candidates, key=rank)["id"]
 
 
 def paths(value):
@@ -366,14 +395,14 @@ def collect(ports, now=None):
             deps.append(
                 {
                     **edge,
-                    "title": text(dependency.get("title"), 240),
+                    "title": display_text(dependency.get("title"), "dependency title"),
                     "status": text(dependency.get("status"), 40) or "unknown",
                 }
             )
         labels = row.get("labels", [])
         paused = isinstance(labels, list) and "paused-by-user" in labels
         wait_kind = text(dashboard.get("wait_kind"), 80)
-        wait_reason = text(dashboard.get("wait_reason"))
+        wait_reason = display_text(dashboard.get("wait_reason"), "wait_reason")
         blocked = any(
             d["type"] in ("blocks", "conditional-blocks", "waits-for") and d["status"] != "closed"
             for d in deps
@@ -387,17 +416,20 @@ def collect(ports, now=None):
         )
         issue = {
             "id": row["id"],
-            "title": text(row.get("title"), 240),
+            "title": display_text(row.get("title"), "title"),
             "status": text(row.get("status"), 40) or "unknown",
             "updated_at": text(row.get("updated_at"), 80),
-            "close_reason": (text(row.get("close_reason"), 512) or "Not supplied")
+            "close_reason": (
+                display_text(row.get("close_reason"), "close_reason") or "Not supplied"
+            )
             if row.get("status") == "closed"
             else "",
             "closed_at": (text(row.get("closed_at"), 80) or "Not supplied")
             if row.get("status") == "closed"
             else "",
-            "stage": text(dashboard.get("stage"), 120) or "Not supplied",
-            "next_action": text(dashboard.get("next_action")) or "Not supplied",
+            "stage": display_text(dashboard.get("stage"), "stage") or "Not supplied",
+            "next_action": display_text(dashboard.get("next_action"), "next_action")
+            or "Not supplied",
             "wait_reason": wait_reason or ("Paused by user" if paused else "Not supplied"),
             "wait_kind": wait_kind or "Not supplied",
             "paused": paused,
@@ -494,6 +526,7 @@ def collect(ports, now=None):
             )
         )
     for group in groups.values():
+        group["primary_issue_id"] = primary_issue(group["issues"])
         group["name"] = "Not supplied"
         group["name_supplied"] = False
         match = THREAD_ID.fullmatch(group["owner"])
@@ -507,8 +540,6 @@ def collect(ports, now=None):
                 if status not in ("active", "idle", "notLoaded", "systemError"):
                     raise CollectionError("Unknown thread status")
                 group["llm"] = status
-                group["name"] = text(thread.get("name"), 160).strip() or "Not supplied"
-                group["name_supplied"] = bool(text(thread.get("name"), 160).strip())
                 group["llm_source_at"] = datetime.now(timezone.utc).isoformat()
             except (OSError, ValueError, KeyError, TypeError, CollectionError):
                 group["name"] = "unavailable"
@@ -517,6 +548,10 @@ def collect(ports, now=None):
                     group["owner"],
                     f"{group['owner']}: actual thread status unavailable",
                 )
+            else:
+                name = display_text(thread.get("name"), "session name")
+                group["name"] = name if name.strip() else "Not supplied"
+                group["name_supplied"] = bool(name.strip())
         else:
             group["llm"] = "not a session owner" if group["owner"] != "Unassigned" else "unknown"
     issues = [issue for group in groups.values() for issue in group["issues"]]

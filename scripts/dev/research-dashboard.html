@@ -30,9 +30,11 @@
         font-size: 1.7rem;
         margin: 0 0 8px;
       }
-      .summary > div {
+      .owner-row > span {
         min-width: 0;
-        overflow-wrap: anywhere;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
       pre {
         white-space: pre-wrap;
@@ -89,10 +91,13 @@
         outline-offset: 3px;
       }
       .head,
-      .summary {
+      .owner-row {
         display: grid;
-        grid-template-columns: minmax(210px, 1.2fr) 1fr 1.3fr 1.3fr;
-        gap: 18px;
+        grid-template-columns:
+          minmax(170px, 1.1fr) minmax(180px, 1.15fr) minmax(220px, 1.5fr)
+          minmax(220px, 1.5fr);
+        gap: 14px;
+        align-items: center;
       }
       .head {
         padding: 10px 18px;
@@ -101,28 +106,20 @@
         text-transform: uppercase;
         letter-spacing: 0.04em;
       }
-      .owner {
+      .owner-row {
+        width: 100%;
+        text-align: left;
         border: 1px solid #c9d7e0;
         border-radius: 10px;
         background: white;
-        margin: 10px 0;
-        overflow: hidden;
-      }
-      .owner > summary {
-        padding: 18px;
+        margin: 5px 0;
+        padding: 12px 16px;
         cursor: pointer;
-        list-style: none;
       }
-      .owner > summary::marker,
-      .owner > summary::-webkit-details-marker {
-        display: none;
-      }
-      .owner[open] > summary {
+      .owner-row:hover {
         background: #f5f8fa;
-        border-bottom: 1px solid #d8e1e7;
       }
       .owner-name {
-        overflow-wrap: anywhere;
         font-weight: 600;
       }
       .label {
@@ -154,18 +151,9 @@
         color: #8b3228;
       }
       .issue {
-        padding: 20px;
+        padding: 16px 0;
         border-top: 1px solid #e0e7ed;
         overflow-wrap: anywhere;
-      }
-      .issue h2 {
-        font-size: 1rem;
-        margin: 0 0 10px;
-      }
-      .issue dl {
-        display: grid;
-        grid-template-columns: 130px minmax(0, 1fr);
-        gap: 8px 16px;
       }
       dt {
         color: #526675;
@@ -173,6 +161,7 @@
       dd {
         margin: 0;
         white-space: pre-wrap;
+        overflow-wrap: anywhere;
       }
       .job {
         border-left: 3px solid #9bb0be;
@@ -211,48 +200,55 @@
       [hidden] {
         display: none !important;
       }
-      @media (max-width: 780px) {
-        main {
-          padding: 16px;
-        }
-        .head {
-          display: none;
-        }
-        .summary {
-          grid-template-columns: 1fr 1fr;
-        }
-        .owner-name {
-          grid-column: 1 / -1;
-        }
-        .issue dl {
-          grid-template-columns: 1fr;
-          gap: 4px;
-        }
-        dd {
-          margin-bottom: 10px;
-        }
+      #session-dialog {
+        width: min(960px, 90vw);
+        max-height: 86vh;
+        border: 1px solid #a7bdca;
+        border-radius: 12px;
+        padding: 20px 26px;
+        color: #172c3d;
+        background: white;
+        overflow: auto;
       }
-      @media (max-width: 450px) {
-        .summary {
-          grid-template-columns: 1fr;
-        }
-        .count {
-          flex: 1;
-          padding: 12px;
-        }
-        .controls {
-          gap: 12px;
-        }
-        input[type='search'] {
-          width: 100%;
-        }
+      #session-dialog::backdrop {
+        background: #172c3dbb;
+      }
+      .dialog-head {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 18px;
+        position: sticky;
+        top: -20px;
+        background: white;
+        padding: 8px 0;
+        border-bottom: 1px solid #d8e1e7;
+      }
+      .dialog-head h2 {
+        margin: 0;
+      }
+      .detail-section {
+        padding: 12px 0;
+        border-bottom: 1px solid #d8e1e7;
+      }
+      .detail-section h3 {
+        margin: 8px 0;
+      }
+      .detail-section dl {
+        display: grid;
+        grid-template-columns: 150px minmax(0, 1fr);
+        gap: 8px 14px;
+      }
+      .original pre {
+        max-height: 260px;
+        overflow: auto;
       }
     </style>
   </head>
   <body>
     <main>
       <h1>研究状況のスナップショット</h1>
-      <p id="timestamp" class="muted"></p>
+      <p id="timestamp" class="count" role="status"></p>
       <p id="loaded-at" class="muted"></p>
       <p class="muted">
         LLMの活動と実際の計算ジョブは別の状態です。終了コード0や管理上の完了は、研究結果の成功を意味しません。
@@ -267,13 +263,20 @@
         <button id="reload" type="button">このファイルを再読み込み</button>
       </div>
       <div class="head" aria-hidden="true">
-        <span>担当者・セッション</span><span>LLM・計算ジョブ</span><span>現在の作業</span
+        <span>担当者・セッション</span><span>根拠のある活動</span><span>主な現在のタスク</span
         ><span>次の作業・待機理由</span>
       </div>
       <div id="owners"></div>
       <p id="empty" hidden>検索条件に一致する担当者はいません。</p>
       <p id="copy-status" class="muted" role="status"></p>
     </main>
+    <dialog id="session-dialog" aria-labelledby="dialog-title">
+      <div class="dialog-head">
+        <h2 id="dialog-title"></h2>
+        <button id="dialog-close" type="button">閉じる</button>
+      </div>
+      <div id="dialog-content"></div>
+    </dialog>
     <script id="snapshot" type="application/json">
       __SNAPSHOT_JSON__
     </script>
@@ -389,17 +392,28 @@
         identity_unavailable: '子プロセスの識別を確認できず、実行中のジョブは確定していません。',
         thread_unavailable: '実際のセッション状態を確認できません。',
       };
+      const snapshotAge = () => {
+        const elapsed = Date.now() - Date.parse(snapshot.generated_at);
+        if (!Number.isFinite(elapsed) || elapsed < 0) return '経過時間は未確認';
+        const minutes = Math.floor(elapsed / 60000);
+        if (minutes < 1) return '生成から1分未満';
+        if (minutes < 60) return '生成から' + minutes + '分';
+        const hours = Math.floor(minutes / 60);
+        if (hours < 24) return '生成から' + hours + '時間';
+        return '生成から' + Math.floor(hours / 24) + '日';
+      };
       document.getElementById('timestamp').textContent =
         '生成日時：' +
         date(snapshot.generated_at) +
-        ' ／ Beadsの収集開始：' +
-        date(snapshot.beads_read_at);
+        ' ／ ' +
+        snapshotAge() +
+        '。現在の状態は未確認です。';
       document.getElementById('loaded-at').textContent =
         'ファイル読込日時：' +
         date(new Date().toISOString()) +
         '。再読み込みは生成済みHTMLを読むだけです。最新情報の収集には手動生成が必要です。';
       document.getElementById('translation-status').textContent =
-        '日本語説明の更新待ち：' + display.pending + '項目。原文は展開して確認できます。';
+        '翻訳待ち ' + display.pending + '項目。該当箇所は英語原文を表示し、詳細で確認できます。';
       if (display.cache_warning)
         document
           .getElementById('warnings')
@@ -454,125 +468,225 @@
           (job.cleanup_unconfirmed ? ' プロセス回収は未完了または不明です。' : '')
         );
       };
-      const owners = [];
-      for (const group of snapshot.groups) {
-        const detail = make('details', '', 'owner');
-        const summary = make('summary', '', 'summary');
-        const name = make('div', display.owner_names[group.owner], 'owner-name');
-        name.append(make('div', group.issues.length + '件のタスクを展開', 'muted'));
-        const statuses = make('div');
-        statuses.append(make('span', 'LLMの状態', 'label'), badge(group.llm));
-        const jobs = group.issues.flatMap((issue) => issue.jobs);
-        statuses.append(
-          make(
-            'div',
-            jobs.length
-              ? '計算ジョブ：' + jobs.map((job) => stateName(job.status)).join('、')
-              : '計算ジョブ：記録なし',
-            'muted',
-          ),
+      const pendingText = '日本語説明の更新待ち';
+      const missingText = '未記入／確認不能';
+      const shown = (issue, key) => {
+        const translated = display.issues[issue.id]?.[key];
+        return translated && translated !== pendingText && translated !== missingText
+          ? translated
+          : issue[key] || missingText;
+      };
+      const ownerName = (group) => {
+        const translated = display.owner_names[group.owner];
+        return translated && translated !== pendingText && translated !== missingText
+          ? translated
+          : group.name_supplied
+            ? group.name
+            : group.owner;
+      };
+      const waitText = (issue) =>
+        issue.paused && !issue.source_fields.includes('wait_reason')
+          ? '人間の指示で一時停止'
+          : shown(issue, 'wait_reason');
+      const confirmedJobIssue = (group) =>
+        group.issues
+          .flatMap((issue) =>
+            issue.jobs
+              .filter((job) => job.status === 'running')
+              .map((job) => ({ issue, sourceAt: job.source_at })),
+          )
+          .sort(
+            (a, b) => b.sourceAt.localeCompare(a.sourceAt) || a.issue.id.localeCompare(b.issue.id),
+          )[0]?.issue;
+      const activity = (group, issue) => {
+        const jobIssue = confirmedJobIssue(group);
+        if (jobIssue)
+          return (
+            '生成時に計算ジョブの子プロセスを確認 [' +
+            jobIssue.id +
+            (jobIssue.status === 'closed' ? '・管理上は完了' : '') +
+            ']'
+          );
+        if (!issue) return '現在の活動は未確認';
+        if (issue.paused) return '人間の指示で一時停止';
+        if (issue.wait_kind === 'human_decision') return '人間の判断待ち';
+        if (issue.wait_kind === 'review') return 'レビュー待ち';
+        if (
+          issue.wait_kind === 'dependency' ||
+          issue.dependencies.some(
+            (dependency) =>
+              dependency.status !== 'closed' &&
+              ['blocks', 'conditional-blocks', 'waits-for'].includes(dependency.type),
+          )
+        )
+          return '依存タスク待ち';
+        if (issue.waiting)
+          return issue.source_fields.includes('wait_reason')
+            ? '待機理由を記録（詳細を参照）'
+            : '待機・保留の記録あり · 理由未確認';
+        if (issue.status === 'in_progress')
+          return issue.source_fields.includes('stage')
+            ? 'Beads記録上は進行中 · 段階「' + shown(issue, 'stage') + '」'
+            : 'Beads記録上は進行中 · 活動内容は未確認';
+        return '活動内容は未確認';
+      };
+      const section = (heading) => {
+        const node = make('section', '', 'detail-section');
+        node.append(make('h3', heading));
+        return node;
+      };
+      const addIssue = (container, issue) => {
+        const article = make('article', '', 'issue');
+        article.append(make('h3', shown(issue, 'title')), badge(issue.status));
+        if (issue.paused) article.append(badge('paused'));
+        if (issue.waiting)
+          article.append(badge(issue.wait_kind === 'Not supplied' ? 'waiting' : issue.wait_kind));
+        const facts = make('dl');
+        field(facts, '現在の段階', shown(issue, 'stage'));
+        field(facts, '次の作業', shown(issue, 'next_action'));
+        field(facts, '待機理由', waitText(issue));
+        field(facts, '待機の種類', stateName(issue.wait_kind));
+        field(facts, 'タスク更新日時', date(issue.updated_at));
+        if (issue.status === 'closed') {
+          field(facts, '管理上の完了理由（研究結果とは別）', shown(issue, 'close_reason'));
+          field(facts, '管理上の完了日時', date(issue.closed_at));
+        }
+        field(
+          facts,
+          '依存タスク',
+          issue.dependencies.length
+            ? issue.dependencies
+                .map(
+                  (dependency) =>
+                    (display.issues[dependency.id]?.title === pendingText
+                      ? dependency.title
+                      : display.issues[dependency.id]?.title || dependency.title) +
+                    ' · ' +
+                    stateName(dependency.status) +
+                    ' [' +
+                    dependency.id +
+                    ']',
+                )
+                .join('\n')
+            : '記録なし',
         );
-        const current = make('div');
-        current.append(make('span', '現在の作業', 'label'));
-        const next = make('div');
-        next.append(make('span', '次の作業・待機理由', 'label'));
-        for (const issue of group.issues) {
-          const translated = display.issues[issue.id];
-          current.append(
+        article.append(facts);
+        for (const job of [...issue.jobs].sort((a, b) => b.source_at.localeCompare(a.source_at))) {
+          const boundary = make('div', '', 'job');
+          boundary.append(
+            badge(job.status),
+            make('p', resultText(job)),
             make(
-              'div',
-              translated.title + '：' + translated.stage + ' · ' + stateName(issue.status),
+              'p',
+              '情報源のファイル日時：' +
+                date(job.source_at) +
+                (job.finished_at ? ' ／ コントローラー終了日時：' + date(job.finished_at) : ''),
+              'muted',
             ),
           );
-          if (issue.paused) current.append(badge('paused'));
-          next.append(make('div', translated.next_action));
-          if (issue.waiting)
-            next.append(
-              make(
-                'div',
-                '待機理由：' +
-                  (issue.paused && !issue.source_fields.includes('wait_reason')
-                    ? '人間の指示で一時停止'
-                    : translated.wait_reason),
-                'muted',
-              ),
-            );
+          showPath(boundary, job.root);
+          article.append(boundary);
         }
-        summary.append(name, statuses, current, next);
-        detail.append(
-          summary,
-          make('p', 'セッション状態の読取日時：' + date(group.llm_source_at), 'issue muted'),
+        article.append(make('span', '証拠の元のパス（表示・コピーのみ）', 'label'));
+        if (!issue.evidence_paths.length) article.append(make('p', '未記入／確認不能', 'muted'));
+        for (const path of issue.evidence_paths) showPath(article, path);
+        original(article, issue);
+        container.append(article);
+      };
+      const dialog = document.getElementById('session-dialog');
+      const dialogContent = document.getElementById('dialog-content');
+      let returnFocus = null;
+      const openDetail = (group, row) => {
+        const primary = group.issues.find((issue) => issue.id === group.primary_issue_id);
+        const unresolved = group.issues.filter(
+          (issue) => issue.status !== 'closed' && issue !== primary,
         );
-        original(detail, {
+        const completed = group.issues.filter((issue) => issue.status === 'closed');
+        document.getElementById('dialog-title').textContent = ownerName(group);
+        dialogContent.replaceChildren();
+        const current = section('現在のタスク・状態');
+        current.append(
+          make('p', '未完了のタスク：計' + (unresolved.length + (primary ? 1 : 0)) + '件'),
+        );
+        current.append(make('p', '活動判定：' + activity(group, primary)));
+        const jobIssue = confirmedJobIssue(group);
+        if (jobIssue && jobIssue !== primary)
+          current.append(
+            make(
+              'p',
+              '確認された計算ジョブの記録元：' +
+                shown(jobIssue, 'title') +
+                ' [' +
+                jobIssue.id +
+                ']。詳細は下の該当タスクにあります。',
+            ),
+          );
+        if (primary) addIssue(current, primary);
+        else current.append(make('p', '現在の未完了タスクはありません。'));
+        dialogContent.append(current);
+        const more = section('その他の未完了タスク（' + unresolved.length + '件）');
+        for (const issue of unresolved) addIssue(more, issue);
+        dialogContent.append(more);
+        const identity = section('原文・セッション識別');
+        identity.append(
+          make(
+            'p',
+            'LLM状態：' +
+              stateName(group.llm) +
+              ' ／ 読取日時：' +
+              date(group.llm_source_at) +
+              '。この状態だけから計算や作業の進行は判断しません。',
+          ),
+        );
+        original(identity, {
           owner: group.owner,
           name: group.name,
           llm: group.llm,
           llm_source_at: group.llm_source_at,
+          primary_issue_id: group.primary_issue_id,
         });
-        for (const issue of group.issues) {
-          const translated = display.issues[issue.id];
-          const article = make('article', '', 'issue');
-          article.append(make('h2', translated.title), badge(issue.status));
-          if (issue.waiting) article.append(badge('waiting'));
-          const facts = make('dl');
-          field(facts, '現在の段階', translated.stage);
-          field(facts, '次の作業', translated.next_action);
-          field(
-            facts,
-            '待機理由',
-            issue.paused && !issue.source_fields.includes('wait_reason')
-              ? '人間の指示で一時停止'
-              : translated.wait_reason,
-          );
-          field(facts, '待機の種類', stateName(issue.wait_kind));
-          field(facts, 'タスク更新日時', date(issue.updated_at));
-          if (issue.status === 'closed') {
-            field(facts, '管理上の完了理由（研究結果とは別）', translated.close_reason);
-            field(facts, '管理上の完了日時', date(issue.closed_at));
-          }
-          field(
-            facts,
-            '依存タスク',
-            issue.dependencies.length
-              ? issue.dependencies
-                  .map(
-                    (dependency) =>
-                      display.issues[dependency.id].title + ' · ' + stateName(dependency.status),
-                  )
-                  .join('\n')
-              : '記録なし',
-          );
-          article.append(facts);
-          for (const job of issue.jobs) {
-            const boundary = make('div', '', 'job');
-            boundary.append(
-              badge(job.status),
-              make('p', resultText(job)),
-              make(
-                'p',
-                '情報源のファイル日時：' +
-                  date(job.source_at) +
-                  (job.finished_at ? ' ／ コントローラー終了日時：' + date(job.finished_at) : ''),
-                'muted',
-              ),
-            );
-            showPath(boundary, job.root);
-            article.append(boundary);
-          }
-          article.append(make('span', '証拠の元のパス（表示・コピーのみ）', 'label'));
-          if (!issue.evidence_paths.length) article.append(make('p', '未記入／確認不能', 'muted'));
-          for (const path of issue.evidence_paths) showPath(article, path);
-          original(article, issue);
-          detail.append(article);
-        }
-        document.getElementById('owners').append(detail);
-        owners.push({ detail, group });
+        dialogContent.append(identity);
+        const history = section('完了した履歴（' + completed.length + '件）');
+        for (const issue of completed) addIssue(history, issue);
+        dialogContent.append(history);
+        returnFocus = row;
+        dialog.showModal();
+        document.getElementById('dialog-close').focus();
+      };
+      document.getElementById('dialog-close').addEventListener('click', () => dialog.close());
+      dialog.addEventListener('close', () => {
+        if (returnFocus?.isConnected && !returnFocus.hidden) returnFocus.focus();
+        else document.getElementById('search').focus();
+      });
+      const owners = [];
+      for (const group of snapshot.groups) {
+        const primary = group.issues.find((issue) => issue.id === group.primary_issue_id);
+        const row = make('button', '', 'owner-row');
+        row.type = 'button';
+        row.setAttribute('aria-haspopup', 'dialog');
+        row.setAttribute('aria-label', ownerName(group) + ' の詳細を開く');
+        row.append(
+          make('span', ownerName(group), 'owner-name'),
+          make('span', activity(group, primary)),
+          make('span', primary ? shown(primary, 'title') : '現在の未完了タスクなし'),
+          make(
+            'span',
+            primary
+              ? primary.waiting
+                ? '待機：' + waitText(primary)
+                : shown(primary, 'next_action')
+              : '次の作業は未記入',
+          ),
+        );
+        row.addEventListener('click', () => openDetail(group, row));
+        document.getElementById('owners').append(row);
+        owners.push({ row, group });
       }
       function filter() {
         const query = document.getElementById('search').value.trim().toLowerCase();
         const waiting = document.getElementById('waiting').checked;
         let visible = 0;
-        for (const { detail, group } of owners) {
+        for (const { row, group } of owners) {
           const matches = group.issues.some(
             (issue) =>
               (!waiting || issue.waiting) &&
@@ -591,7 +705,7 @@
                 .toLowerCase()
                 .includes(query),
           );
-          detail.hidden = !matches;
+          row.hidden = !matches;
           if (matches) visible += 1;
         }
         document.getElementById('empty').hidden = visible !== 0;
