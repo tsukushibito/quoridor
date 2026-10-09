@@ -658,6 +658,8 @@ game別の時間は並列実行で重なるため合計せず、主分母へ置�
 
 4固定prefixという小標本であり、game別0.519〜157.589秒の差とgame内の相関がある。観測率は全prefix分布・全量の所要時間・教師品質を保証せず、旧depth3の比率も外挿しない。次の人間判断はN・全prefix schedule・pilot包含の選択で、全量生成/intake/cache/T-only統計/4 fits・6 views・96枠のwhole費は別に支持する必要がある。N/full generation/fits96は未選択・未開始。348親の完了やこの報告受入れをSigma新時計live64→D16→BEST51 NNUE16のgateにせず、同ownerは自分のfresh source/private/library/input/proof/physical/peer/nonblocking lease条件で次入口を進める。323pause・seals・default weightsは変えない。
 
+人間は、この停止済みdepth6観測のcost/TT分析（351）を検証した後、根拠のあるTT高速化へ進む方向を指定した。[既存生成設計の条件付き後続](design/deeper-teacher-generation-v1.md#conditional-tt-improvement-after-verified-analysis)にまとめる。容量/admission拒否、age/置換の有用性、key/history構築・copy・hash、通常probe/insert費を分け、sourceで成立する機構と観測相関・未測定の因果寄与を区別する。4096 direct-map slots＋1MiB full-history予算、同generationの深いentry保護、容量evictionなしというsourceのleadは、凍結compiled版の関連解釈確認前に原因や改善利益として採用しない。351の固定reportを独立確認中で、まだ候補実装・TT数値sweepは開始しない。検証後は有用な同意味改善の有界計画と全工程費を選び、根拠がなければ無理にpatchを作らない。履歴省略・反復弱化・depth/time/label/search policy変更は認可せず、重要な意味変更は選択肢をpolicyへ戻す。N未選択、Sigma D16→NNUE16優先、全旧費用・caps・UNKNOWN・seals・default・323pauseを維持する。
+
 ## Sigma新時計の実live64資格（2026-10-09）
 
 固定campaignの実backendで16 explicit warmup・16 same-cursor measurement・32 fresh timed calls、合計64 logical callsを完了した。untimedとqualified-timedは各32 attempted/32 terminal replies、各16 indexed cases・workers joined・inflight0。framework warm/capture・failed・UNKNOWN・lateは0、provider physical rowsは各32、physical kernel callsはUNKNOWNとして保持する。各caseはこの有限qualification用に最大2 callsであり、K64全探索完了の資格やゲームのcall capへ読み替えない。13 software定義・caller/clock/math/model/privateの成功を再実行していない。[実資格の限定受入れ](../research-data/ai-sigma/sigma-receipt-reevaluation-v1/live64-acceptance-v1.json)。
