@@ -1,0 +1,39 @@
+{
+  "schema": "quoridor.research.lifecycle.related-findings.v3",
+  "issue": "quoridor-4lc.356.2",
+  "producer_source_target_sha256": "31e3421014341172c710e6145a5c282456e3dd26cb99e8cc006cc354d5898fff",
+  "producer_interface_sha256": "37ac24f928a72618b3180c3a4bf5033e65649678ea5a6770a9439987a8699c52",
+  "consumer_target_sha256": "d9dbc5a3815792e7457302327da7581a7fc6e31940ce2ef7b0527a6fa11bf396",
+  "source_clear": true,
+  "blockers": 0,
+  "ordinary": 0,
+  "resolutions": [
+    {
+      "id": "C1",
+      "resolved": true,
+      "scope": "producer metadata only",
+      "evidence": "Independent recursive JSON comparison finds only native_api.compare_intent and native_api.compare_scientific_result_failure_rows changed; both now identify compare v2 explicit experiment/config raw SHA subjects. All other JSON values unchanged. Producer code31e342 unchanged scope reused."
+    },
+    {
+      "id": "C2",
+      "resolved": true,
+      "scope": "source_projection",
+      "evidence": "Exact root Cargo.toml, root Cargo.lock and crates/quoridor-runner/Cargo.toml paths remain distinct. Lock equals its compiled FileRef; full35 projection SHA matches and duplicate-free adopted source.files membership includes every projected descriptor plus root manifest/lock. Producer-shaped new fixture and wrong path/membership/lock cases correspond."
+    },
+    {
+      "id": "C3",
+      "resolved": true,
+      "scope": "originating_build and its single authoritative caller",
+      "evidence": "Metadata.read verifies bounded raw config SHA/size/mode and caches for source-after. Default json.dumps(parsed_config,sort_keys=True).encode fingerprint is checked separately against config_sha256. No equality with raw hash. The single caller passes actual metadata; restoring that argument gives predecessor authoritative AST. New Unicode/pretty/compact/wrong fingerprint/raw drift fixtures correspond."
+    },
+    {
+      "id": "C4",
+      "resolved": true,
+      "scope": "child_entry outer handler",
+      "evidence": "Inherited secondary exception objects are merged before outer publication, owed-finalizer available facts are retained in partial. Bare raise preserves original primary/cause; failure data includes cause/notes/known secondary descriptions/owed facts. Later publication error appends actual object to same retained list and notes. No inner authoritative manifest, retry or fabricated unreturned facts. New actual owed_facts three-receipt synthetic helper and two outer paths discriminate identity/cause/list/available facts."
+    }
+  ],
+  "new_findings": [],
+  "unchanged_resolved_scopes": ["L1", "L2", "L3", "L4", "L5", "O1", "O2"],
+  "actual_runtime_qualification": "NOT_CERTIFIED"
+}

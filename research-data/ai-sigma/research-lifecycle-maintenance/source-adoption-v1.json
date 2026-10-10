@@ -1,0 +1,683 @@
+{
+  "schema": "quoridor.research.source-adoption.v1",
+  "status": "ACCEPTED",
+  "issue": "quoridor-4lc.356",
+  "source": {
+    "commit": "64c41e96094736b38803034e443f2bc56b07244b",
+    "patch": null,
+    "files": [
+      {
+        "path": "/workspaces/quoridor/Cargo.lock",
+        "sha256": "5b448d049178c9227ba2d51a784918f1ab192574a4c79f92cb61187f6f1732fe",
+        "bytes": 26256,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/Cargo.toml",
+        "sha256": "6cbcf3b38c98492322761e78db908195789021216be51aa37de2888cacd0ab0b",
+        "bytes": 284,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-ai/Cargo.toml",
+        "sha256": "9f2fb4a60f536e4f666c54db4cc221f3bdd075f73ef933e9692844f061616bb6",
+        "bytes": 653,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-ai/src/alphabeta.rs",
+        "sha256": "b976df272b273a147596f36ec503a2801b802b45389d8169ca62468d7a02b335",
+        "bytes": 92945,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-ai/src/lib.rs",
+        "sha256": "f1eb13715742f36bcc036204ec8c5e24586adac01b7dc181113f764746031149",
+        "bytes": 19113,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-ai/src/sigma_mcts.rs",
+        "sha256": "f1d7486510e1df3c09476de80f04927d664455547501265dddc118f16d50c400",
+        "bytes": 17101,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-core/Cargo.toml",
+        "sha256": "9e952267d75fd8b1cd51f72916e8fb97869f38d5ba4893a0ecedc297ebb74a27",
+        "bytes": 145,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-core/src/game.rs",
+        "sha256": "543995676fb46cc4e80d0fccb650875eb901a4b4d71187788ee09dfbaf01a420",
+        "bytes": 3968,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-core/src/lib.rs",
+        "sha256": "c41814c97164d8c59a3bfd45685b54b21942bdbb8acc035cf0d4d809b7741f3b",
+        "bytes": 342,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-core/src/position.rs",
+        "sha256": "6cb132a4e3f68c7cb739a926aad1ae5f0c8ad12ca8df60d22fb8fcc1c1aa173a",
+        "bytes": 17800,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-core/src/research.rs",
+        "sha256": "b7897456e8e791c2bb9ae83dced012c92254ebe203f81d327d357083f0653335",
+        "bytes": 33231,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-data/Cargo.toml",
+        "sha256": "e709d66b096e9657d125082e3e8111374b4a68b9bf7762bcf48b82d965018736",
+        "bytes": 393,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-data/src/lib.rs",
+        "sha256": "845ce307af69d513ef2a3ec08f560d8157dacf81bd573cfe8fc5b2651170428b",
+        "bytes": 43147,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-inference/Cargo.toml",
+        "sha256": "f06ffee3d5e4ab6ea3b590db0e7bf94b6e6861a91313329ed21e2fe983cb3c4f",
+        "bytes": 421,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-inference/build.rs",
+        "sha256": "59900bcae6e8c82a043ac26eae464fadcc1643287969c8377a206c1eb4d11d34",
+        "bytes": 3800,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-inference/src/cuda.rs",
+        "sha256": "f4c8816d15e60d4631b660085f56ff6bf5ff12d257d0866a217b25df1cf8bdac",
+        "bytes": 3351,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-inference/src/lib.rs",
+        "sha256": "d7656d85ba0e00fa2e4b2ac40ebfdc0b2c5fa56aca5a52d1e2e4d79f463cfc0f",
+        "bytes": 13843,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-inference/src/tensorrt.rs",
+        "sha256": "f32699f7065e7518c475d806a558f97d9305b23d3e057e530537441f815b78e3",
+        "bytes": 3439,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-nnue/Cargo.toml",
+        "sha256": "fb21d093cb8b1a5e430cc3faf220263b9e1d101e6132f7ed11c3465a81cca1bf",
+        "bytes": 462,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-nnue/src/features.rs",
+        "sha256": "25c2953e4805344fe27ea9f9480b08fee462a8ce5833602484491e2ce48f1531",
+        "bytes": 8230,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-nnue/src/lib.rs",
+        "sha256": "90734f895e21f49ad246837a76303a37f45783dbaf3932be8d05a14345b207cf",
+        "bytes": 24343,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-nnue/src/quantized.rs",
+        "sha256": "2553767bb6f045f5312d8759e185da518dbc2b211c2849b1b23f93d964c046d6",
+        "bytes": 18380,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-nnue/src/residual.rs",
+        "sha256": "99f5acd09eec12aa78142d62973e16fa8e0dcb377c26e6deca731897c519dabd",
+        "bytes": 38066,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-nnue/src/simd.rs",
+        "sha256": "1731f69385649ff5eb6d75f5cbbaf2fd046a2907ec968801cae8ac033b17d02a",
+        "bytes": 5880,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/Cargo.toml",
+        "sha256": "1b6ee35b55b28ae339900872dcdabe3b689641f543e31115f4d7c44b41609acd",
+        "bytes": 679,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/arena.rs",
+        "sha256": "957dfcebbc780c7b0dd71822606a8d9bb14c8cb4e4be285767c0fd881ee5b6c5",
+        "bytes": 14014,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/arena_book.rs",
+        "sha256": "3f2785ed498c9c301222532db9d520ee21ddd344f8ddf4fdb2ed6e9f4f1539ab",
+        "bytes": 3537,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/arena_clock.rs",
+        "sha256": "910571aa729e57a88121888aab1a09c995d643ff13ca7bd5841c65cdabbfd42f",
+        "bytes": 16354,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/arena_manifest.rs",
+        "sha256": "b4c4b56f3a8b8520a0584b3b89eaa68de41de2f7cbab987b6cef46cb5b90a70b",
+        "bytes": 29115,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/arena_statistics.rs",
+        "sha256": "7d48611bc32199c751e1d8e53986f3eaac6a8b82c0f90dc59c4f83b4866888f2",
+        "bytes": 7850,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/bin/nnue-diagnose.rs",
+        "sha256": "55206a74f63d4323753b99834e46ecc1721e5cc3508efe1f539af74817f88cd3",
+        "bytes": 40874,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/config.rs",
+        "sha256": "8fd3903afec71b12e2d9fbff67e1255bfa44acf6a15f5c6330809ed81708e1a7",
+        "bytes": 8216,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/lib.rs",
+        "sha256": "3cb885a0852dcec5cbd9c2249e638e799d9c5db0f5eeef83bfa58ef4cd5e6f46",
+        "bytes": 656,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/main.rs",
+        "sha256": "105b552caaf22a640e04fa7c6c052ab1d4aaf98a6a68917b1d3db8f028ab87d7",
+        "bytes": 20405,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/native_input.rs",
+        "sha256": "335d29824083aa9ffc05693c64bdb5357850fd6a31c24cceb46942efbffde264",
+        "bytes": 8182,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/research_manifest.rs",
+        "sha256": "283d113e3ba4dc7b930e85d5bf8806153db7abc42f33078bffe0d2243dd634b2",
+        "bytes": 9723,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/resources.rs",
+        "sha256": "52573320329b20a4051b188b0ba996a70f3e46033f252f43654adae43c463abe",
+        "bytes": 16674,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/runtime.rs",
+        "sha256": "0cc944db66ad356d7d86988c20923fbb98571007b0211a597876a2c8a53bec85",
+        "bytes": 214270,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/sigma_clock.rs",
+        "sha256": "0485d49daba990396ad21c19c15c21f75870d568d7c943850951b9d27e381cd1",
+        "bytes": 26363,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/sigma_qualification.rs",
+        "sha256": "15910bc69d4a6809ce0dea581551e8fe7611e529ca9724a5852e3687ac36d3bd",
+        "bytes": 38187,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/teacher_pilot/depth6.rs",
+        "sha256": "22f5cc126d5d3ef4612e2e452b355612f171ee4720ae6375321f7978fc86dc6d",
+        "bytes": 4017,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/teacher_pilot_execution.rs",
+        "sha256": "71750d3be749239f303310ab838d5316fdee1c1da2e9656629dfaf2d03528e7f",
+        "bytes": 46691,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/teacher_pilot_execution/depth6.rs",
+        "sha256": "c1ef35cfeeff0da65b980850c047530651e15b22c6481dd147c798a0bca12a7d",
+        "bytes": 28097,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/value_search_compare.rs",
+        "sha256": "16e336b0ac9b82c1f4900159f5881db75f737e22ed945a673c5ef92252dcfa65",
+        "bytes": 50541,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/value_search_strength.rs",
+        "sha256": "8fc7dac87228b960df7668652560bcd5439de53ce6ae8cd48c3866e63d322bef",
+        "bytes": 34648,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-wasm/Cargo.toml",
+        "sha256": "f95e164181ecd20373bee35ba0ba9490afcc9ae06fecf61018ccc44f7c541735",
+        "bytes": 1237,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/docs/development/research-jobs.md",
+        "sha256": "3136a6f788d887e676443d21af89de558bdf2cdac3f03e11cf43f3a9c649edf8",
+        "bytes": 15661,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/docs/development/research-lifecycle.md",
+        "sha256": "c11065df474540f0979ec5770780909c54c0ecd1da4386295a94889a8656895d",
+        "bytes": 16450,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/python/quoridor_training/cycle_process.py",
+        "sha256": "8ed30d655da5573fe3401e3ca3ff0347c0bea04c7fa24a05046b642d155b1532",
+        "bytes": 20666,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/python/quoridor_training/research355/io355.py",
+        "sha256": "fe524bde6322cc479078b0a8ef893ab8276609499a586a03f2d4b0becf7fdc0e",
+        "bytes": 3691,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/python/quoridor_training/research355/lifecycle355.py",
+        "sha256": "3451051be1a44b98cb1154d88312e686e57939392e3631f02c16015028e49429",
+        "bytes": 24771,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/python/quoridor_training/research355/observations355.py",
+        "sha256": "cd10055d8ceab12b982022708d6676c1178b7dec863b5b251246f705c82f44bc",
+        "bytes": 6130,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/python/quoridor_training/research355/producer355.py",
+        "sha256": "eaa3b74c1d046c75d1b9d5eb7360f2cf6410a542c8757eadabc29b55cc05bec2",
+        "bytes": 13114,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/python/quoridor_training/research355/stream355.py",
+        "sha256": "386e3b1358433cafd9bafdd040cd828b225d6bf0c8a47a7be1576be2157279d6",
+        "bytes": 15918,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/python/quoridor_training/research355/strength355.py",
+        "sha256": "a08eb19c1771b02b0fa1fa7a5fd7ea46c9a2de658dcd4be5ed47880b1470e718",
+        "bytes": 42738,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/python/quoridor_training/research355/test_lifecycle355.py",
+        "sha256": "cb2b650bb5f7c0af854c9f12b2868385f0e1d6996d707b2c997b75dd8d00a30f",
+        "bytes": 16036,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/python/quoridor_training/research355/test_lifecycle_related355.py",
+        "sha256": "40c183afdebd953d26a4875e635abc8a1c8396d846d00c4de346132ba126392c",
+        "bytes": 10846,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/python/quoridor_training/research355/test_lifecycle_repair355.py",
+        "sha256": "27a7dea85888001685fe754fff23bf473814f68ecaaff50f3a550e01ddf8d4f2",
+        "bytes": 10561,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/rust-toolchain.toml",
+        "sha256": "a295155a0b138ee09d908306393d2778135ebaab96cfbc29ea0a6cd647563b53",
+        "bytes": 152,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/scripts/dev/check-research.py",
+        "sha256": "f532b9233a10aadc67e76309387813be6ea77afd101a22381364c554c3406368",
+        "bytes": 8690,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/scripts/dev/research-job.py",
+        "sha256": "56b22511a7e3db80925f6d7372bc70c0bbe9b9d93058f4b58c80d32f18800a24",
+        "bytes": 30942,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+        "sha256": "260303a3c540748955a0900a9f3387d6b674168414a5e73cb1bc290c0bd28196",
+        "bytes": 49762,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/tools/research-session/fixtures/cargo-native-retained.jsonl",
+        "sha256": "473d58f1ae8bc9fe646e10f5eac7f08abd70b65f5c15a4f6fc645a07e1e999a5",
+        "bytes": 107087,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/tools/research-session/fixtures/native-context-retained.json",
+        "sha256": "672ca50ad0e2d340b8f4ca37ed993005f6fa9f688aa1ed2a8b60d9d19845f21a",
+        "bytes": 421,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/tools/research-session/test_lifecycle.py",
+        "sha256": "7cbe9fe16b4bbbe60dd1c473525749d7d2c90c3f837a4606ee5a6fa8370f9ca7",
+        "bytes": 41161,
+        "mode": "0644"
+      }
+    ],
+    "workspace": "/workspaces/quoridor",
+    "manifest": {
+      "path": "/workspaces/quoridor/Cargo.toml",
+      "sha256": "6cbcf3b38c98492322761e78db908195789021216be51aa37de2888cacd0ab0b",
+      "bytes": 284,
+      "mode": "0644"
+    },
+    "lock": {
+      "path": "/workspaces/quoridor/Cargo.lock",
+      "sha256": "5b448d049178c9227ba2d51a784918f1ab192574a4c79f92cb61187f6f1732fe",
+      "bytes": 26256,
+      "mode": "0644"
+    },
+    "compiled_sources": {
+      "Cargo.lock": {
+        "path": "/workspaces/quoridor/Cargo.lock",
+        "sha256": "5b448d049178c9227ba2d51a784918f1ab192574a4c79f92cb61187f6f1732fe",
+        "bytes": 26256,
+        "mode": "0644"
+      },
+      "ai/alphabeta.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-ai/src/alphabeta.rs",
+        "sha256": "b976df272b273a147596f36ec503a2801b802b45389d8169ca62468d7a02b335",
+        "bytes": 92945,
+        "mode": "0644"
+      },
+      "ai/lib.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-ai/src/lib.rs",
+        "sha256": "f1eb13715742f36bcc036204ec8c5e24586adac01b7dc181113f764746031149",
+        "bytes": 19113,
+        "mode": "0644"
+      },
+      "ai/sigma_mcts.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-ai/src/sigma_mcts.rs",
+        "sha256": "f1d7486510e1df3c09476de80f04927d664455547501265dddc118f16d50c400",
+        "bytes": 17101,
+        "mode": "0644"
+      },
+      "core/game.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-core/src/game.rs",
+        "sha256": "543995676fb46cc4e80d0fccb650875eb901a4b4d71187788ee09dfbaf01a420",
+        "bytes": 3968,
+        "mode": "0644"
+      },
+      "core/lib.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-core/src/lib.rs",
+        "sha256": "c41814c97164d8c59a3bfd45685b54b21942bdbb8acc035cf0d4d809b7741f3b",
+        "bytes": 342,
+        "mode": "0644"
+      },
+      "core/position.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-core/src/position.rs",
+        "sha256": "6cb132a4e3f68c7cb739a926aad1ae5f0c8ad12ca8df60d22fb8fcc1c1aa173a",
+        "bytes": 17800,
+        "mode": "0644"
+      },
+      "core/research.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-core/src/research.rs",
+        "sha256": "b7897456e8e791c2bb9ae83dced012c92254ebe203f81d327d357083f0653335",
+        "bytes": 33231,
+        "mode": "0644"
+      },
+      "data/lib.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-data/src/lib.rs",
+        "sha256": "845ce307af69d513ef2a3ec08f560d8157dacf81bd573cfe8fc5b2651170428b",
+        "bytes": 43147,
+        "mode": "0644"
+      },
+      "inference/cuda.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-inference/src/cuda.rs",
+        "sha256": "f4c8816d15e60d4631b660085f56ff6bf5ff12d257d0866a217b25df1cf8bdac",
+        "bytes": 3351,
+        "mode": "0644"
+      },
+      "inference/lib.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-inference/src/lib.rs",
+        "sha256": "d7656d85ba0e00fa2e4b2ac40ebfdc0b2c5fa56aca5a52d1e2e4d79f463cfc0f",
+        "bytes": 13843,
+        "mode": "0644"
+      },
+      "inference/tensorrt.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-inference/src/tensorrt.rs",
+        "sha256": "f32699f7065e7518c475d806a558f97d9305b23d3e057e530537441f815b78e3",
+        "bytes": 3439,
+        "mode": "0644"
+      },
+      "nnue/features.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-nnue/src/features.rs",
+        "sha256": "25c2953e4805344fe27ea9f9480b08fee462a8ce5833602484491e2ce48f1531",
+        "bytes": 8230,
+        "mode": "0644"
+      },
+      "nnue/lib.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-nnue/src/lib.rs",
+        "sha256": "90734f895e21f49ad246837a76303a37f45783dbaf3932be8d05a14345b207cf",
+        "bytes": 24343,
+        "mode": "0644"
+      },
+      "nnue/quantized.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-nnue/src/quantized.rs",
+        "sha256": "2553767bb6f045f5312d8759e185da518dbc2b211c2849b1b23f93d964c046d6",
+        "bytes": 18380,
+        "mode": "0644"
+      },
+      "nnue/residual.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-nnue/src/residual.rs",
+        "sha256": "99f5acd09eec12aa78142d62973e16fa8e0dcb377c26e6deca731897c519dabd",
+        "bytes": 38066,
+        "mode": "0644"
+      },
+      "nnue/simd.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-nnue/src/simd.rs",
+        "sha256": "1731f69385649ff5eb6d75f5cbbaf2fd046a2907ec968801cae8ac033b17d02a",
+        "bytes": 5880,
+        "mode": "0644"
+      },
+      "runner/Cargo.toml": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/Cargo.toml",
+        "sha256": "1b6ee35b55b28ae339900872dcdabe3b689641f543e31115f4d7c44b41609acd",
+        "bytes": 679,
+        "mode": "0644"
+      },
+      "runner/arena.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/arena.rs",
+        "sha256": "957dfcebbc780c7b0dd71822606a8d9bb14c8cb4e4be285767c0fd881ee5b6c5",
+        "bytes": 14014,
+        "mode": "0644"
+      },
+      "runner/arena_book.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/arena_book.rs",
+        "sha256": "3f2785ed498c9c301222532db9d520ee21ddd344f8ddf4fdb2ed6e9f4f1539ab",
+        "bytes": 3537,
+        "mode": "0644"
+      },
+      "runner/arena_clock.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/arena_clock.rs",
+        "sha256": "910571aa729e57a88121888aab1a09c995d643ff13ca7bd5841c65cdabbfd42f",
+        "bytes": 16354,
+        "mode": "0644"
+      },
+      "runner/arena_manifest.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/arena_manifest.rs",
+        "sha256": "b4c4b56f3a8b8520a0584b3b89eaa68de41de2f7cbab987b6cef46cb5b90a70b",
+        "bytes": 29115,
+        "mode": "0644"
+      },
+      "runner/arena_statistics.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/arena_statistics.rs",
+        "sha256": "7d48611bc32199c751e1d8e53986f3eaac6a8b82c0f90dc59c4f83b4866888f2",
+        "bytes": 7850,
+        "mode": "0644"
+      },
+      "runner/config.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/config.rs",
+        "sha256": "8fd3903afec71b12e2d9fbff67e1255bfa44acf6a15f5c6330809ed81708e1a7",
+        "bytes": 8216,
+        "mode": "0644"
+      },
+      "runner/lib.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/lib.rs",
+        "sha256": "3cb885a0852dcec5cbd9c2249e638e799d9c5db0f5eeef83bfa58ef4cd5e6f46",
+        "bytes": 656,
+        "mode": "0644"
+      },
+      "runner/main.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/main.rs",
+        "sha256": "105b552caaf22a640e04fa7c6c052ab1d4aaf98a6a68917b1d3db8f028ab87d7",
+        "bytes": 20405,
+        "mode": "0644"
+      },
+      "runner/native_input.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/native_input.rs",
+        "sha256": "335d29824083aa9ffc05693c64bdb5357850fd6a31c24cceb46942efbffde264",
+        "bytes": 8182,
+        "mode": "0644"
+      },
+      "runner/nnue-diagnose.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/bin/nnue-diagnose.rs",
+        "sha256": "55206a74f63d4323753b99834e46ecc1721e5cc3508efe1f539af74817f88cd3",
+        "bytes": 40874,
+        "mode": "0644"
+      },
+      "runner/research_manifest.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/research_manifest.rs",
+        "sha256": "283d113e3ba4dc7b930e85d5bf8806153db7abc42f33078bffe0d2243dd634b2",
+        "bytes": 9723,
+        "mode": "0644"
+      },
+      "runner/resources.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/resources.rs",
+        "sha256": "52573320329b20a4051b188b0ba996a70f3e46033f252f43654adae43c463abe",
+        "bytes": 16674,
+        "mode": "0644"
+      },
+      "runner/runtime.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/runtime.rs",
+        "sha256": "0cc944db66ad356d7d86988c20923fbb98571007b0211a597876a2c8a53bec85",
+        "bytes": 214270,
+        "mode": "0644"
+      },
+      "runner/sigma_clock.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/sigma_clock.rs",
+        "sha256": "0485d49daba990396ad21c19c15c21f75870d568d7c943850951b9d27e381cd1",
+        "bytes": 26363,
+        "mode": "0644"
+      },
+      "runner/sigma_qualification.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/sigma_qualification.rs",
+        "sha256": "15910bc69d4a6809ce0dea581551e8fe7611e529ca9724a5852e3687ac36d3bd",
+        "bytes": 38187,
+        "mode": "0644"
+      },
+      "runner/value_search_compare.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/value_search_compare.rs",
+        "sha256": "16e336b0ac9b82c1f4900159f5881db75f737e22ed945a673c5ef92252dcfa65",
+        "bytes": 50541,
+        "mode": "0644"
+      },
+      "runner/value_search_strength.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/value_search_strength.rs",
+        "sha256": "8fc7dac87228b960df7668652560bcd5439de53ce6ae8cd48c3866e63d322bef",
+        "bytes": 34648,
+        "mode": "0644"
+      }
+    },
+    "cargo_configs": [
+      {
+        "path": "/.cargo/config",
+        "file": null
+      },
+      {
+        "path": "/.cargo/config.toml",
+        "file": null
+      },
+      {
+        "path": "/usr/local/cargo/config",
+        "file": null
+      },
+      {
+        "path": "/usr/local/cargo/config.toml",
+        "file": null
+      },
+      {
+        "path": "/workspaces/.cargo/config",
+        "file": null
+      },
+      {
+        "path": "/workspaces/.cargo/config.toml",
+        "file": null
+      },
+      {
+        "path": "/workspaces/quoridor/.cargo/config",
+        "file": null
+      },
+      {
+        "path": "/workspaces/quoridor/.cargo/config.toml",
+        "file": null
+      }
+    ]
+  },
+  "adopted_at": "2026-10-10T06:18:48.393694+00:00",
+  "review_once_at_adoption": {
+    "control": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/research-lifecycle-maintenance/acceptance/control.json",
+      "sha256": "ef5410d1d785f990f4eb5a5668e113412de8dc989a8f230385c082a1b9d64efd",
+      "bytes": 6515,
+      "mode": "0644"
+    },
+    "learner_target_sha256": "d9dbc5a3815792e7457302327da7581a7fc6e31940ce2ef7b0527a6fa11bf396",
+    "producer_target_sha256": "31e3421014341172c710e6145a5c282456e3dd26cb99e8cc006cc354d5898fff",
+    "actual_reader_STOP": "2026-10-10T06:05:45.144779+00:00"
+  },
+  "routine_Main_adoption": "same scientific/runtime function bodies; removed inert strength-source-preview CLI; added maintained analysis test entry/documented child path; all45Mainintegrationtests PASS/scopedformat PASS",
+  "software_private_numerical_science_qualification": "PENDING actual common build/native inputs; source acceptance alone does not qualify them",
+  "foreign_Main_changes": "excluded from authored source/index; .devcontainer/update-toolchain.sh and tools/research-session/uv.lock preserved",
+  "cargo_home": "/usr/local/cargo",
+  "scope": "prospective trusted Cargo/isolated owned target/current manifest/current guardian; historical failure certificates/classifiers/salvage remain evidence only",
+  "resource": {
+    "whole_B": 4294967296,
+    "global_held_B": 49976205312,
+    "global_increment_B": 0,
+    "Root_adoption_inclusive_forward_B": 2097152
+  }
+}

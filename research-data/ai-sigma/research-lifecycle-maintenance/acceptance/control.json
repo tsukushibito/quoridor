@@ -1,0 +1,156 @@
+{
+  "schema": "quoridor.research.lifecycle.source-review.v3",
+  "issue": "quoridor-4lc.356.2",
+  "parent": "quoridor-4lc.356",
+  "producer": "quoridor-4lc.356.1",
+  "consumer": "quoridor-4lc.355.3",
+  "reviewed_boundary": "ONE coherent C1 metadata and C2/C3/C4 lifecycle adapter repair; unchanged prior guarantees reused",
+  "target_sha256": "d9dbc5a3815792e7457302327da7581a7fc6e31940ce2ef7b0527a6fa11bf396",
+  "consumer_target_sha256": "d9dbc5a3815792e7457302327da7581a7fc6e31940ce2ef7b0527a6fa11bf396",
+  "producer_source_target_sha256": "31e3421014341172c710e6145a5c282456e3dd26cb99e8cc006cc354d5898fff",
+  "producer_interface_sha256": "37ac24f928a72618b3180c3a4bf5033e65649678ea5a6770a9439987a8699c52",
+  "source_clear": true,
+  "blockers": 0,
+  "ordinary": 0,
+  "resolved": ["C1", "C2", "C3", "C4"],
+  "unchanged_resolved_scopes": ["L1", "L2", "L3", "L4", "L5", "O1", "O2"],
+  "prior_negative_controls_immutable": [
+    "b6dda511d50039781e24e503706e0eefc0e473ff5039facc7834604f69def649",
+    "27abde5fb47b36014971e545e5800b2dceba7b04b4f949e7cb03c8bd2132d682"
+  ],
+  "current_changed_refs": [
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/value-search-strength355-analysis-v1/lifecycle355.py",
+      "sha256": "3451051be1a44b98cb1154d88312e686e57939392e3631f02c16015028e49429",
+      "bytes": 24771,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/value-search-strength355-analysis-v1/stream355.py",
+      "sha256": "386e3b1358433cafd9bafdd040cd828b225d6bf0c8a47a7be1576be2157279d6",
+      "bytes": 15918,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/value-search-strength355-analysis-v1/test_lifecycle_related355.py",
+      "sha256": "40c183afdebd953d26a4875e635abc8a1c8396d846d00c4de346132ba126392c",
+      "bytes": 10846,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/value-search-strength355-analysis-v1/qualify_whole_support355.py",
+      "sha256": "4f6cc4aa5fe6ecc979d2b42b150a495c9945d1e6f2a9cdf15e40c188d67f6bfa",
+      "bytes": 4041,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/value-search-strength355-analysis-v1/test_lifecycle_repair355.py",
+      "sha256": "27a7dea85888001685fe754fff23bf473814f68ecaaff50f3a550e01ddf8d4f2",
+      "bytes": 10561,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/research-lifecycle-maintenance/.artifacts/research-lifecycle-maintenance/related-v3-metadata/interface-v3.json",
+      "sha256": "37ac24f928a72618b3180c3a4bf5033e65649678ea5a6770a9439987a8699c52",
+      "bytes": 10204,
+      "mode": "0644"
+    }
+  ],
+  "selected_binding": {
+    "unique_refs": 37,
+    "encoded_B": 268781,
+    "bounded_decoded_B": 53273,
+    "encoded_plus_decoded_B": 322054,
+    "directed_upper_B": 2097152,
+    "before_after_equal": true,
+    "before": {
+      "path": "/workspaces/quoridor/.artifacts/research-lifecycle-maintenance-review-v1/related-v3/selected-before.json",
+      "sha256": "aee858bea8f51cf1b323be8646564a8a6096b66e9c75a93d09c731fff634d5d1",
+      "bytes": 10010,
+      "mode": "0644"
+    },
+    "after": {
+      "path": "/workspaces/quoridor/.artifacts/research-lifecycle-maintenance-review-v1/related-v3/selected-after.json",
+      "sha256": "aee858bea8f51cf1b323be8646564a8a6096b66e9c75a93d09c731fff634d5d1",
+      "bytes": 10010,
+      "mode": "0644"
+    }
+  },
+  "report": {
+    "path": "/workspaces/quoridor/.artifacts/research-lifecycle-maintenance-review-v1/related-v3/review.md",
+    "sha256": "4c7523167878d20705a81614fe79d6778c2016ddadc04945f5300cd0ffce0e40",
+    "bytes": 6551,
+    "mode": "0644"
+  },
+  "findings": {
+    "path": "/workspaces/quoridor/.artifacts/research-lifecycle-maintenance-review-v1/related-v3/findings.json",
+    "sha256": "dfcb08c2a67b2eecbff6a9c3ade510fb6cc0c8e3e21f9ba3fcc24b9a5443f2d7",
+    "bytes": 2689,
+    "mode": "0644"
+  },
+  "static_proof": {
+    "path": "/workspaces/quoridor/.artifacts/research-lifecycle-maintenance-review-v1/related-v3/static-proof.json",
+    "sha256": "b52e2eff5c6d05bb1283feb5bc59a535ae08d05db5d420f4557443d4368199c0",
+    "bytes": 3632,
+    "mode": "0644"
+  },
+  "forecast": {
+    "path": "/workspaces/quoridor/.artifacts/research-lifecycle-maintenance-review-v1/related-v3/forecast.json",
+    "sha256": "dbfbcc671fdc1296eb249955ecb20c7ed6407e73631f70a7d67567675163471f",
+    "bytes": 1049,
+    "mode": "0644"
+  },
+  "reader_stop": {
+    "path": "/workspaces/quoridor/.artifacts/research-lifecycle-maintenance-review-v1/related-v3/reader-STOP.json",
+    "sha256": "4359ad105f806f87b33b8e08e4641e5fceda25d45b5f67e8344bd5819304e5f1",
+    "bytes": 935,
+    "mode": "0644"
+  },
+  "actual_reader_STOP": "2026-10-10T06:05:45.144779+00:00",
+  "owned_readers": [],
+  "owned_children": [],
+  "owned_jobs": [],
+  "owned_TMP": [],
+  "remaining": [],
+  "directwait": "all finite own static reads/hash/AST/exact in-memory patch helpers returned exit0; no outstanding sessions",
+  "source_leases": "both released before report/admin",
+  "supplied_test_scope": {
+    "NEW_affected_definitions": 6,
+    "current_bound_source_receipt": true,
+    "actual_START": "2026-10-10T05:55:01.714430+00:00",
+    "actual_STOP": "2026-10-10T05:55:01.783776+00:00",
+    "known_whole_s": 0.0693338830024004,
+    "reviewer_execution": false,
+    "scope": "synthetic owned metadata; mocked parent/manifest, actual owed_facts helper in supplied scope only"
+  },
+  "resource": {
+    "new_inclusive_phase_B": 262144,
+    "prior_phases_held_B": 1572864,
+    "new_total_phase_uppers_B": 1835008,
+    "whole_review_B": 8388608,
+    "global_held_B": 49976205312,
+    "increment_refund_borrow_B": 0,
+    "CPU": 3,
+    "stdlib_AS_B": 536870912,
+    "GPU": 0,
+    "formatter_heap_B": 134217728
+  },
+  "not_certified": [
+    "Main adoption",
+    "fresh common build/type/software",
+    "accepted current artifact/private custody",
+    "actual native/model/input/numerical qualification",
+    "actual external runtime/finalizers",
+    "current or future physical/fair quiet",
+    "scientific results or entry"
+  ],
+  "no_target_import_function_port_test_Cargo_native_model_Search_science_execution": true,
+  "context": {
+    "timestamp": "2026-10-10T06:02:59.391Z",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "cwd": "/workspaces/quoridor",
+    "sandbox": "danger-full-access",
+    "approval_policy": "never"
+  }
+}

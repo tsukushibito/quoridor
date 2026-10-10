@@ -1,0 +1,41 @@
+{
+  "START": "2026-10-10T06:14:34.711492+00:00",
+  "STOP": "2026-10-10T06:15:21.700848+00:00",
+  "elapsed_seconds": 47.0027120889863,
+  "commands": [
+    {
+      "argv": ["python3", "-B", "tools/research-session/test_lifecycle.py"],
+      "pid": 3609290,
+      "exit_code": 0,
+      "elapsed_seconds": 37.26518325600773,
+      "full_log_B": 124,
+      "full_log_sha256": "bdd6bb61ed46cf13dc2021ae4f4e29018dc881bece7a4412a4c26976c0ab0d5d",
+      "directwait": true,
+      "handles_closed": true
+    },
+    {
+      "argv": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "python/quoridor_training/research355",
+        "-p",
+        "test_lifecycle*.py"
+      ],
+      "pid": 3609446,
+      "exit_code": 0,
+      "elapsed_seconds": 9.73411935090553,
+      "full_log_B": 120,
+      "full_log_sha256": "dfcb63abcc83196c0c95988b87296048041d79f0d6689e93e9a99de9d87bdd4d",
+      "directwait": true,
+      "handles_closed": true
+    }
+  ],
+  "lease_released": true,
+  "owned_children_jobs_TMP_remaining": [],
+  "source_integration_only": true,
+  "actual_Cargo_native_model_Search_games": 0
+}
