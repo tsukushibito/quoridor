@@ -245,7 +245,7 @@ mod tests {
     use super::*;
     #[test]
     fn provisional_or_partial_build_does_not_admit() {
-        let mut b = json!({"schema":"quoridor.research.build-manifest.v1","status":"PASS","cleanup_complete":true,"remaining":[],"checks":["test","lint","build","bindings"].map(|r|json!({"role":r,"guardian_return":{"exit_code":0,"cleanup_complete":true}}))});
+        let mut b = json!({"schema":"quoridor.research.build-manifest.v1","status":"PASS","cleanup_complete":true,"remaining":[],"checks": (["test","lint","build","bindings"].map(|r|json!({"role":r,"guardian_return":{"exit_code":0,"cleanup_complete":true}})))});
         assert!(build_status(&b));
         b["status"] = json!("PENDING_FINALIZATION");
         assert!(!build_status(&b));
