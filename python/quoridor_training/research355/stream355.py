@@ -108,9 +108,22 @@ def scientific_inputs(index, inputs, metadata, build_ref, build, analysis_experi
             }
         )
         life.numerical(metadata, experiment, build)
-        for file in completed["data"]["files"]:
+        inventory = list(completed["data"]["files"])
+        for obligation in completed["owed_finalizers"]:
+            receipt_ref = obligation.get("actual_receipt")
+            s.require(
+                receipt_ref is not None and receipt_ref["path"] == obligation["path"],
+                "bound declared actual receipt inventory",
+            )
+            receipt = metadata.read(receipt_ref, min(obligation["limit_B"], io.MAX_INDEX_BYTES))
+            s.require(type(receipt["files"]) is list, "typed actual receipt file inventory")
+            inventory.extend(receipt["files"])
+        for file in inventory:
             name = life.index_ref(inputs, file)
-            s.require(name not in available, "one actual producer for each durable output")
+            s.require(
+                name not in available or available[name][0] is completed,
+                "one actual producer for each durable output",
+            )
             available[name] = (completed, experiment)
         contexts[ref["sha256"]] = (completed, experiment)
     compare_binding(
@@ -139,9 +152,13 @@ def scientific_inputs(index, inputs, metadata, build_ref, build, analysis_experi
     if index.get("engineering_intent"):
         used.append(index["engineering_intent"])
     for batch in index["batches"]:
-        used.extend(batch[k] for k in ("native_planned", "native_start", "completed"))
+        used.extend(batch[k] for k in ("completed", "result"))
         s.require(batch["completed"] in available, "finalized native journal")
-        _, arena = available[batch["completed"]]
+        completed, arena = available[batch["completed"]]
+        s.require(
+            batch["result"] in available and available[batch["result"]][0] is completed,
+            "journal and result belong to the same finalized operation",
+        )
         s.require(
             arena["phase"] == "arena"
             and arena["batch"] == batch["batch"]
@@ -152,6 +169,30 @@ def scientific_inputs(index, inputs, metadata, build_ref, build, analysis_experi
         s.require(life.index_ref(inputs, arena["config"]) == batch["config"], "actual arena config")
         life.arena_clock(config)
         life.arena_conditions(config, arena)
+        slots = [slot for slot in schedule["slots"] if slot["batch_id"] == batch["batch"]]
+        s.require(
+            len(slots) == 32
+            and sorted(slot["local_game"] for slot in slots) == list(range(32))
+            and config["games"] == 32
+            and type(config["run_id"]) is str
+            and bool(config["run_id"])
+            and len(config["arena"]["book"]["openings"]) == 16
+            and len(config["arena"]["first_candidate_colors"]) == 16,
+            "bound full batch context",
+        )
+        for slot in slots:
+            local_family = slot["local_game"] // 2
+            opening = config["arena"]["book"]["openings"][local_family]
+            s.require(
+                opening["reference"]["settings"]["family_id"] == slot["family_id"]
+                and opening["prefix"] == book["families"][slot["family_id"]]["prefix"]
+                and type(config["arena"]["first_candidate_colors"][local_family]) is int
+                and config["arena"]["first_candidate_colors"][local_family] in (0, 1)
+                and config["arena"]["first_candidate_colors"][local_family]
+                ^ (slot["local_game"] % 2)
+                == slot["candidate_colour"],
+                "config opening/global family/colour agrees with full512 schedule",
+            )
         expected_model = life.MODELS[(batch["batch"] // 2 + batch["batch"] % 2) % 2]
         s.require(
             arena["models"][0]["descriptor"]["sha256"] == expected_model[0],

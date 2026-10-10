@@ -29,24 +29,18 @@ def _aggregate_observations(index, inputs, partial, book, schedule, run_context)
     def games():
         for number, batch in sorted(by_batch.items()):
             config = inputs.get(batch["config"])
-            planned = inputs.get(batch["native_planned"])
-            start = inputs.get(batch["native_start"], 1048576)
-            s.require(
-                start["config"] == config
-                and start["planned_slots"] == planned
-                and start["config_sha256"] == s.digest(config)
-                and start["planned_sha256"] == s.digest(planned),
-                "durable native start coupling",
-            )
-            s.require(
-                len(planned) == 32 and sorted(r["game"] for r in planned) == list(range(32)),
-                "native planned slots",
-            )
-            native = {r["game"]: r for r in planned}
-            slots = {r["local_game"]: r for r in schedule["slots"] if r["batch"] == number}
+            slots = {r["local_game"]: r for r in schedule["slots"] if r["batch_id"] == number}
             for raw in inputs.lines(batch["completed"]):
                 local = s.integer(raw["game"], 0, 31)
-                yield s.adapt_native_game(raw, native[local], config, slots[local], book, schedule)
+                slot = slots[local]
+                # Expected scientific context, not an observed historical start receipt.
+                expected = {
+                    "game": local,
+                    "family": f"{config['run_id']}-family-{local // 2:06}",
+                    "candidate_color": slot["candidate_colour"],
+                    "opening": config["arena"]["book"]["openings"][local // 2]["prefix"],
+                }
+                yield s.adapt_native_game(raw, expected, config, slot, book, schedule)
 
     partial["games"] = s.aggregate_games(book, schedule, games(), inputs.progress)
     inputs.progress["available_sections"].append("games")
