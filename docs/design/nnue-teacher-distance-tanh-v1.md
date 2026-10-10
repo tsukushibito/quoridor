@@ -17,6 +17,16 @@ Beads remains the source of task state; this document defines the experiment.
 
 Depth6 is the selected future fixedD teacher policy. The accepted four-game/two-worker observation reports4goals/178eligible rows in externalwhole175.884201586s; the conditional81.872049games/hour is not a fullN bound. Its TTtail analysis and original64d3 contracts/data remain preserved. [Depth6 throughput, tail and scheduling](deeper-teacher-generation-v1.md) is independent of this diagnosis. N/fullschedule/pilotinclusion/fullgeneration/fourfits96 remain unselected, and all four fits must share one finally frozen commoncorpus. Sigma347 actual savedD completion then originalNN16 keeps priority; disjoint source preparation and TT351 proceed independently.
 
+## 当面の研究ベースラインと次のデータ改善案（2026-10-10）
+
+人間は fresh353 の **no-output-bypass BEST43** を、当面の NNUE 改善研究のベースラインに選んだ。ordered weights は `046fe926e56b955b0fb7de8f147a74ec33eace9cbc00a55c307f9b6541ab9841`、descriptor は `46ec2c4708f96dcf9fad579c2fb0d1299c6663df27412f0faac98267467715e1`、typed evaluator content ID は `96a5f41f875022d1752b9c999595ad58bfb2d42687a8f06de08d42b1c4215875` に固定する。標準化 distance は head input に残し、除去したのは固定 **OUTPUT bypass** だけである。accepted legacy logit units・T-only scale・モデル bytes は再解釈しない。plan.json の research_baseline に元 model paths と受入済み結果参照を保持し、BEST51 と歴史比較も参照のまま保存する。これは研究の比較基準の選択であり、製品 default 昇格や新しい fit・対局の許可ではない。
+
+次に準備する案は depth6 fixedD 生成データによる、win/loss teacher の一要因比較である。family coverage、コーパス量の選択肢、生成・cache・fit・qualification・evaluation と source/build/private/dependencies/raw/TMP/failure/review/Git/cleanup の全費を既存の観測に基づいて提示する。小さい depth6 pilot の条件付き速度は fullN の保証にせず、現在の保存余裕や歴史的 holds を新しい割当と見なさない。terminal-margin と raw-vs-tanh は別の重要な人間判断で、同時実行や黙った置換をしない。新fitの初期化・学習条件・N・fullschedule・pilot inclusion・実行範囲は未選択である。
+
+将来の候補は凍結 BEST43 と固定Dを相手に outcome-independent な paired book で評価し、full learning curves と same-teacher MSE、same completed-depth decisions、same-time play を別の証拠として報告する。完了した診断や355対局は繰り返さない。topology/features/policy は後続の競合案として人間の選択に留める。Sigma は後の milestone/opponent diversity check であり、旧 Sigma-vs-BEST51 を BEST43 の結果に読み替えず、新 Sigma cohort も開始しない。
+
+原 common-fourfit 契約は historical/current **未実行**のまま、人間が明示的に改訂するまで維持する。以下の A/B/C/D、common corpus、score/labels、six views96 の定義を、このベースライン選択で変更しない。現在の具体的配分は Beads `quoridor-4lc.342.15` の source/design/cost preparation のみで、数値実験・source mirror・継続review・scientific clock reservation はない。323 USERPAUSE、seals、defaults、旧 FAILED/RAW/費/UNKNOWN と資源 holds を保持する。
+
 ## Causal-diagnosis-first execution boundary
 
 Human steering on2026-10-09 first authorized this reorganization and then explicitly authorized **executing** its bounded saved-result, fixed-position and input/history/teacher diagnosis. This edit does not launch a model or numerical job. Task state/ownership/actual START/STOP belongs only to Beads; the seven phase definitions below (intake0 plus six phases1–6) describe questions and decision effects, not a parallel task list. Current task references are learner `quoridor-4lc.342.9` and engineering `quoridor-4lc.342.10`; reuse their existing sessions. Closed332/340/342.1 stay closed and323 stays paused.
