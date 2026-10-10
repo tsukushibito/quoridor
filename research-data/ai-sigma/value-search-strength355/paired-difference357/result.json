@@ -1,0 +1,104 @@
+{
+  "schema": "quoridor.saved-family-score-difference.v1",
+  "task": "quoridor-4lc.357",
+  "created_utc": "2026-10-10T22:49:54.592536+00:00",
+  "input": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/value-search-strength355-analysis-v1/joint-analysis-entry-v6/data/summary.json",
+    "sha256": "68f75563da88301dbc74290a3f50e180622eedc51fac5836b20488d0168c903d",
+    "bytes": 2231629
+  },
+  "families": 128,
+  "games": 512,
+  "old_wins": 76,
+  "new_wins": 87,
+  "net_extra_wins": 11,
+  "mean_difference": 0.04296875,
+  "better": 42,
+  "equal": 55,
+  "worse": 31,
+  "difference_histogram_pp": {
+    "-100": 3,
+    "-50": 28,
+    "0": 55,
+    "50": 39,
+    "100": 3
+  },
+  "joint_old_win_rows_new_win_columns": [
+    [
+      28,
+      28,
+      3
+    ],
+    [
+      24,
+      27,
+      11
+    ],
+    [
+      3,
+      4,
+      0
+    ]
+  ],
+  "prefix_strata_descriptive": [
+    {
+      "prefix_length": 4,
+      "families": 32,
+      "old_wins": 18,
+      "new_wins": 21,
+      "better": 12,
+      "equal": 13,
+      "worse": 7,
+      "mean_difference_pp": 4.6875
+    },
+    {
+      "prefix_length": 8,
+      "families": 32,
+      "old_wins": 17,
+      "new_wins": 24,
+      "better": 12,
+      "equal": 15,
+      "worse": 5,
+      "mean_difference_pp": 10.9375
+    },
+    {
+      "prefix_length": 12,
+      "families": 32,
+      "old_wins": 18,
+      "new_wins": 19,
+      "better": 9,
+      "equal": 14,
+      "worse": 9,
+      "mean_difference_pp": 1.5625
+    },
+    {
+      "prefix_length": 16,
+      "families": 32,
+      "old_wins": 23,
+      "new_wins": 23,
+      "better": 9,
+      "equal": 13,
+      "worse": 10,
+      "mean_difference_pp": 0.0
+    }
+  ],
+  "paired_bootstrap_exploratory": {
+    "confidence": 0.975,
+    "interval": [
+      -0.0390625,
+      0.125
+    ],
+    "resamples": 10000,
+    "seed": 35520261010,
+    "unit": "one full-history family, both colours and both models retained together",
+    "algorithm": "Python Random MT19937/randrange; percentile with linear interpolation",
+    "post_hoc": true,
+    "original355_confirmatory_comparison": false,
+    "scope": "Conditional empirical family-resampling illustration assuming exchangeable families; shared initial/generator/derived-seed lineage is not corrected and population/familywise/causal coverage is not guaranteed"
+  },
+  "new_games_model_search_build_calls": 0,
+  "known_previous_count_arithmetic_wall_seconds": 0.013693312997929752,
+  "initial_harness_syntax_error": "unterminated literal in final output line; parse failed before input read/calculation/writes, no model/science work",
+  "known_this_calculation_wall_seconds_before_write": 0.17919256701134145,
+  "child_peak_RSS_KiB": 23048
+}

@@ -834,3 +834,15 @@ saved analysis job `bc70437c-9c55-4469-8f1e-084b07f30ad8` は実controller START
 19 producer controller scopesのknown wholeは2,981.6611674929736秒、今回analysis wholeは4.588360871071927秒をそれぞれ一度数える。以前のanalysis五件FAILEDの9.524969232850709秒はFAILED/cleanupfalse/guardian UNKNOWN・原errors/RAWのまま残す。これは全工程費の総計ではなく、nested native/Search/helper/publication時計を追加しない。26,635 accepted authority clock decisions はphysical NNUE head-call総数・算術throughput・hard real-time・連続的公平性の証明ではない。exact worker/child UTC STOP、continuous peaks、fairness、adminfeesはUNKNOWN、returned completedとdisk pending/attemptedも別事実として保持する。
 
 固定355の許可済み有限workloadと結果解釈は完了した。全資源は既存355 whole4GiB/global49,976,205,312B内で旧floors/failedfees/RAW/UNKNOWNを保持し、暗黙返金・上限拡張・追加対局・学習・再選定は行わない。最高棋力目標は未達であり、次の重要な研究方向、N/fullschedule/fit/defaultの変更は別の人間判断に留める。323 USERPAUSE、seals、fits96、models/rules/clockは変更しない。
+
+## 357 保存済みfamily-pair差の探索的確認（2026-10-10）
+
+人間の依頼により、元355の同じ128 full-history familiesについて、両モデル・両色を一つのpair unitに保持したBEST43-minus-BEST51を保存結果だけから確認した。新しい対局・model・Search・buildは実行していない。256対局ずつのgoalはBEST51 76、BEST43 87で、42 familiesが改善、55が同点、31が悪化した。差の平均は11/256＝0.04296875（+4.296875 percentage points）。family内のscore差のsigned histogramは−100pp:3、−50pp:28、0:55、+50pp:39、+100pp:3。
+
+事後の探索的なpaired-family bootstrapは、両モデル・両色を保持した128 family draws、10,000 resamples、Random(35520261010)、linear percentiles .0125/.9875に固定し、97.5%区間は **[-0.0390625, 0.125]**（−3.90625〜+12.5pp）だった。点推定は改善方向で控えめに前向きな観測だが、区間は0を含み、優越性を確立していない。これはshared initial/generator/derived-seed lineageの依存を補正せずexchangeable familiesを仮定する条件付きの探索的要約で、元355の二つのconfirmatory比較を変更したり、第三のconfirmatory testへ昇格させたりしない。直接NN対戦の順位、母集団・同時被覆保証、bypassの因果効果、default採用には広げない。
+
+事前固定prefix length 4/8/12/16の各32 familiesで、BEST43のnet追加goalはそれぞれ+3/+7/+1/0。length8に最大の観測gain、length16にnet gainなしという記述的層別で、普遍的な特徴効果や因果機序の証明ではない。
+
+[派生結果](../research-data/ai-sigma/value-search-strength355/paired-difference357/result.json)、[全128family CSV](../research-data/ai-sigma/value-search-strength355/paired-difference357/family-scores.csv)、[独立レビュー](../research-data/ai-sigma/value-search-strength355/paired-difference357/review/report.md)と[control](../research-data/ai-sigma/value-search-strength355/paired-difference357/review/control.json)は停止済み原fileのbytes/size/modeを変えずGitに保存した小さい証拠である。元2.2MiB summary（SHA68f75563）は従来の元pathに保持し、複製も変更もしていない。357.1は3 inputs/2,236,375Bのbefore-after対応を確認し、指定した探索的resamplesを独立に一度計算して同じ区間を得た（clear、blockers0/ordinary0、reader STOP22:52:10.896944 UTC、owned remaining空）。統合では成功済みの計算を再実行していない。
+
+独立bootstrap-only clock0.17355890094768256秒とtool/read/admin clocksは別scopeで、合算しない。full fees/continuous peaksはUNKNOWN、元Rootのread overrunとpre-execution SyntaxError、旧355のFAILED/RAW/費/UNKNOWNも履歴のまま保持する。新しい資源配分・返金、model/data/default/N/seals/fits96/323 USERPAUSEの変更はない。357の終了と人間への提示は元担当Rootが扱い、この保存作業は新実験やACK gateではない。
