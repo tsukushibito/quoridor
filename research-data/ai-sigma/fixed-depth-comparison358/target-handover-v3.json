@@ -1,0 +1,47 @@
+{
+  "schema": "research.target-handover.v1",
+  "issue": "quoridor-4lc.358.1",
+  "status": "HANDED_OVER",
+  "old_target": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/common-software-v4/target",
+  "target": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target",
+  "target_writer": "codex:01a11062-b120-73a1-8aa3-fe2cb922c7c0",
+  "target_max_B": 1073741824,
+  "private_pool_B": 33554432,
+  "old_private_retained_allocated_B": 8892416,
+  "fresh_private_forward_max_B": 21553152,
+  "shared_serial_pool": true,
+  "retirement": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/research-lifecycle-maintenance/target-retirement-STOP.json",
+    "sha256": "1c3684bc64fe04354ccd6db53769230643195e5c79a6ea079d479c984eac4380",
+    "STOP": "2026-10-10T03:42:02.552827+00:00"
+  },
+  "preservation_commit": "2f93e117e0692a8b23a50a1f1d563e49a23263e3",
+  "source_reconstruction_commit": "1a7ca54253d31e67376d5d7431f3ec446fc9d5be",
+  "owned_remaining": [],
+  "global_held_B": 49978302464,
+  "global_increment_B": 0,
+  "physical_freebytes": "UNKNOWN; not credited",
+  "future_entry": "requires actual accepted new source/build intent/fresh current physical/fair/NB; handover does not qualify image/native/book/games",
+  "STOP": "2026-10-10T23:44:23.911974+00:00",
+  "prospective_private_pool_correspondence": {
+    "actual_current_fresh_directory_B": 8970240,
+    "candidate_inclusive_forward_B": 12582912,
+    "fresh_directory_max_B": 21553152,
+    "old_plus_fresh_max_B": 30445568,
+    "private_pool_B": 33554432,
+    "global_increment_refund_B": 0,
+    "reason": "One obsolete v2 rebuilt from exact Git source removed; original v3/image/data and old separate8892416 floor retained. Actual admission/source/ownership/physical predicates still required."
+  },
+  "retirement_358_v2": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/fixed-depth-comparison358/private-v2-retirement.json",
+    "sha256": "2d032cb6eb35fb2c214f926bf968816f6f03b54375bc1af6d0d2346fa4c279ba",
+    "bytes": 6263,
+    "mode": "0644"
+  },
+  "previous_handover": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/research-lifecycle-maintenance/target-handover-v2.json",
+    "sha256": "83733dfa3ab05fc37ab462db503c3c8269f8eec0f468793ae972014b3135d12c",
+    "bytes": 2782,
+    "mode": "0644"
+  }
+}
