@@ -1,0 +1,65 @@
+{
+  "issue": "quoridor-4lc.358",
+  "human_authorized_on": "2026-10-10",
+  "priority": "Before another major fit/new data quantity decision",
+  "integration": "quoridor-4lc.324",
+  "owner": "quoridor-4lc.358.1",
+  "preferred_families": 128,
+  "preferred_games": 256,
+  "final_priced_quantity_frozen": false,
+  "quantity_rule": "Prospectively choose128/256 if supported; justified smaller quantity before outputs if actualwhole cost requires, notify Policy actual fixedcount; no outcome-dependent extension",
+  "candidate": {
+    "model": "fresh353 no-output-bypass BEST43",
+    "descriptor": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/public-no-bypass-v1/candidate-v1/output/best-model/manifest.json",
+      "SHA256": "46ec2c4708f96dcf9fad579c2fb0d1299c6663df27412f0faac98267467715e1",
+      "bytes": 677,
+      "mode": "0600"
+    },
+    "ordered_weights": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/public-no-bypass-v1/candidate-v1/output/best-model/weights.f32",
+      "SHA256": "046fe926e56b955b0fb7de8f147a74ec33eace9cbc00a55c307f9b6541ab9841",
+      "bytes": 49284,
+      "mode": "0644"
+    },
+    "typed_evaluator_content_SHA256": "96a5f41f875022d1752b9c999595ad58bfb2d42687a8f06de08d42b1c4215875",
+    "parameterization": "tanh(NN output); standardized distance remains a head input; only fixed additive OUTPUT bypass removed; preserve accepted legacy logit units and T-only scale"
+  },
+  "opponent": "accepted fixedD Tanh a0/b8, no model",
+  "original_355_input_refs": {
+    "book": {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/campaign-generation-v1/data/book.json",
+      "SHA256": "a6abde1f3182ba0e876c9e7719d3389502a44b3406ca28b7af9a0456952a6878",
+      "bytes": 85083,
+      "mode": "0644"
+    },
+    "schedule": {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/campaign-materialization-v1/data/schedule.json",
+      "SHA256": "65a242a4ccec472a47a6aa0df806dd6dbf71a9e51bbdb27b550325765af5ebf3",
+      "bytes": 44027,
+      "mode": "0644"
+    }
+  },
+  "new_book_generation": false,
+  "both_requested_and_accepted_completed_depth": 4,
+  "per_move_time_ms": null,
+  "rules": "standard2p_threefold_goal_first/fullhistory/goalpriority/legal-third genuine draw",
+  "operational_ply_cap": 200,
+  "cap_outcome": "UNKNOWN",
+  "search": "Same PVS/fullwidth/TT4096/1MiB-percolour persistent lifetime, ScalarFT/guardedAVX2, solver/contact/continuationOFF; no model/head/input/rules/TTpolicy changes",
+  "admission": "Node/resource stops remainUNKNOWN, no lower-depth rescue; genuine ruleterminal shorterreturn separately explicit",
+  "records": "Requested/completeddepth/node/eval/TT work/search+wholecaller time/pair-outcome/setup/cleanup/fees; retain all scheduled/failed/UNKNOWN in denominator",
+  "caller": "ONE maintained arena fixeddepth pathway; reuse actualqualified image where compatible; smallest affected source/qualification otherwise",
+  "science_and_result_review": "Relevant changed scientific trust boundary and consequential stopped interpretation only, notperrun/fulloldsuite/reviewreceipt recursion",
+  "interpretation": "Depth4 advantage can support attention to search efficiency; disadvantage can support learning/objective work; no perfect evaluator-only causal isolation/generalstrength/singlecause/defaultpromotion",
+  "not_authorized": [
+    "BEST51 or Sigma extra matchup",
+    "replay355",
+    "regeneratedbook",
+    "new fit/data generation quantity",
+    "new model/features/teacher/tanh/policy",
+    "323 resume/seals/default/fourfits96 change"
+  ],
+  "source_preparation_resources": "resources-preparation.json",
+  "runtime_whole_resources": null
+}
