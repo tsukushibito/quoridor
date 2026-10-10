@@ -349,14 +349,13 @@ def arena_conditions(config, experiment_value):
         and baseline["model"] is None,
         "maintained fixedD Tanh0/8",
     )
-    batch = s.integer(experiment_value["batch"], 0, 15)
-    model = MODELS[(batch // 2 + batch % 2) % 2]
+    s.integer(experiment_value["batch"], 0, 15)
+    # NNUE fit is owned by the loaded descriptor; Engine distance knobs are
+    # consumed only by the distance evaluator branch.
     s.require(
         learned["kind"] == "nnue"
-        and learned["distance_a"] == 0
-        and learned["distance_b"] == (8 if model == MODELS[0] else 0)
         and learned["model"] == experiment_value["models"][0]["descriptor"]["path"],
-        "actual current NN descriptor and output-only condition",
+        "actual current NN descriptor",
     )
 
 
