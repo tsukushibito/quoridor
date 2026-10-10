@@ -1,0 +1,788 @@
+{
+  "schema": "quoridor.value-search-strength.failed-build-collection.v1",
+  "issue": "quoridor-4lc.355.1",
+  "job_id": "f9a87d14-a06f-49ce-8183-52194a18955c",
+  "actual_controller_START": "2026-10-10T06:30:28.788617+00:00",
+  "actual_worker_STOP": "2026-10-10T06:31:03.713432+00:00",
+  "actual_controller_STOP": "2026-10-10T06:31:03.916873+00:00",
+  "controller_whole_seconds": 35.13939786993433,
+  "nested_command_intervals_not_added": true,
+  "status": "FAILED",
+  "authoritative_manifest_status": "FAILED",
+  "authoritative_manifest_cleanup_complete": false,
+  "outer_cleanup_complete": true,
+  "outer_direct_child_reaped": true,
+  "outer_remaining": [],
+  "outer_cleanup_errors": [],
+  "command_facts": [
+    {
+      "name": "version-cargo",
+      "role": "version",
+      "status": "PASS",
+      "capture_complete": true,
+      "primary": null,
+      "secondary": [],
+      "guardian_return": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "--version"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 3616329,
+          "start_ticks": "86708963",
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        "log_bytes_seen": 36,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 36,
+        "wall_seconds": 0.011903449892997742,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/version-cargo.full.log",
+        "sha256": "1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566",
+        "bytes": 36,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/version-cargo.process.json",
+        "sha256": "eb28bd5c3be75c28bb23c20759a8922ef1f811156acace3455d78c1631f86963",
+        "bytes": 891,
+        "mode": "0600"
+      },
+      "persisted_fields_separate": {
+        "status": "complete",
+        "exit_code": 0,
+        "direct_child_reaped": true,
+        "cleanup_complete": true,
+        "remaining": [],
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted"
+      }
+    },
+    {
+      "name": "version-rustc",
+      "role": "version",
+      "status": "PASS",
+      "capture_complete": true,
+      "primary": null,
+      "secondary": [],
+      "guardian_return": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc",
+          "--version"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 3616330,
+          "start_ticks": "86708967",
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        "log_bytes_seen": 36,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 36,
+        "wall_seconds": 0.010611990932375193,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/version-rustc.full.log",
+        "sha256": "8dc912acd5bfeafc70b01b1d2a2afb0844afa02f5dba2f1ae8d5c212d005afb6",
+        "bytes": 36,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/version-rustc.process.json",
+        "sha256": "34eb1222d946c33f4478db30be562bc8d59130e9068dbcf477fe125d04c8fa7b",
+        "bytes": 891,
+        "mode": "0600"
+      },
+      "persisted_fields_separate": {
+        "status": "complete",
+        "exit_code": 0,
+        "direct_child_reaped": true,
+        "cleanup_complete": true,
+        "remaining": [],
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted"
+      }
+    },
+    {
+      "name": "version-rustdoc",
+      "role": "version",
+      "status": "PASS",
+      "capture_complete": true,
+      "primary": null,
+      "secondary": [],
+      "guardian_return": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustdoc",
+          "--version"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 3616332,
+          "start_ticks": "86708972",
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        "log_bytes_seen": 38,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 38,
+        "wall_seconds": 0.01940538000781089,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/version-rustdoc.full.log",
+        "sha256": "a37aafb914b7e4b94fbc9c7221a19ea3fd4d089bc6b6a9b398c079de321f3b6a",
+        "bytes": 38,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/version-rustdoc.process.json",
+        "sha256": "8ad52b95bcbe65e323d5b8379258796382052279171d85b2ae7a4a9531452e04",
+        "bytes": 892,
+        "mode": "0600"
+      },
+      "persisted_fields_separate": {
+        "status": "complete",
+        "exit_code": 0,
+        "direct_child_reaped": true,
+        "cleanup_complete": true,
+        "remaining": [],
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted"
+      }
+    },
+    {
+      "name": "version-cc",
+      "role": "version",
+      "status": "PASS",
+      "capture_complete": true,
+      "primary": null,
+      "secondary": [],
+      "guardian_return": {
+        "command": [
+          "/usr/bin/x86_64-linux-gnu-gcc-12",
+          "--version"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 3616333,
+          "start_ticks": "86708976",
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        "log_bytes_seen": 260,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 260,
+        "wall_seconds": 0.011432558996602893,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/version-cc.full.log",
+        "sha256": "ba4aa3688542d944b584afa84a6332469bed71c19d3c72e5bbdb069972d6db1d",
+        "bytes": 260,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/version-cc.process.json",
+        "sha256": "c849fb0c9277f23d9f0e92b84b969a7a3379c7df198ff80f2ca8b266c4bdbb9a",
+        "bytes": 855,
+        "mode": "0600"
+      },
+      "persisted_fields_separate": {
+        "status": "complete",
+        "exit_code": 0,
+        "direct_child_reaped": true,
+        "cleanup_complete": true,
+        "remaining": [],
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted"
+      }
+    },
+    {
+      "name": "version-cxx",
+      "role": "version",
+      "status": "PASS",
+      "capture_complete": true,
+      "primary": null,
+      "secondary": [],
+      "guardian_return": {
+        "command": [
+          "/usr/bin/x86_64-linux-gnu-g++-12",
+          "--version"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 3616334,
+          "start_ticks": "86708980",
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        "log_bytes_seen": 260,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 260,
+        "wall_seconds": 0.009845250053331256,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/version-cxx.full.log",
+        "sha256": "44c362af33f02d0f97e55219a8e35ba8374b0bf61352141287b86ac131355d36",
+        "bytes": 260,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/version-cxx.process.json",
+        "sha256": "b0df44b8021cfdd39151acd921567b3419b3431b716a8162b166b9aa6cf4a02d",
+        "bytes": 855,
+        "mode": "0600"
+      },
+      "persisted_fields_separate": {
+        "status": "complete",
+        "exit_code": 0,
+        "direct_child_reaped": true,
+        "cleanup_complete": true,
+        "remaining": [],
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted"
+      }
+    },
+    {
+      "name": "version-ar",
+      "role": "version",
+      "status": "PASS",
+      "capture_complete": true,
+      "primary": null,
+      "secondary": [],
+      "guardian_return": {
+        "command": [
+          "/usr/bin/x86_64-linux-gnu-ar",
+          "--version"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 3616335,
+          "start_ticks": "86708984",
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        "log_bytes_seen": 283,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 283,
+        "wall_seconds": 0.012283910997211933,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/version-ar.full.log",
+        "sha256": "d47749e5767b07210b628729d75fba5e16927cb4a7fd943cd6da87f60a335874",
+        "bytes": 283,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/version-ar.process.json",
+        "sha256": "05b0b01d2acea2be51f23ad4a06db802983084ee82c4b5228d4b20d168ecc1d4",
+        "bytes": 851,
+        "mode": "0600"
+      },
+      "persisted_fields_separate": {
+        "status": "complete",
+        "exit_code": 0,
+        "direct_child_reaped": true,
+        "cleanup_complete": true,
+        "remaining": [],
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted"
+      }
+    },
+    {
+      "name": "version-python",
+      "role": "version",
+      "status": "PASS",
+      "capture_complete": true,
+      "primary": null,
+      "secondary": [],
+      "guardian_return": {
+        "command": [
+          "/usr/bin/python3.11",
+          "--version"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 3616336,
+          "start_ticks": "86708989",
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        "log_bytes_seen": 14,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 14,
+        "wall_seconds": 0.009377942886203527,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/version-python.full.log",
+        "sha256": "cb64a3a0ddcaff0ce013ea3612beda0be4a4d3537087505bd8850d8f8476f4f8",
+        "bytes": 14,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/version-python.process.json",
+        "sha256": "2d46b3d952841818738203e7bc7ea1e725af1c090a2bd04f1e6f72b67b8120df",
+        "bytes": 840,
+        "mode": "0600"
+      },
+      "persisted_fields_separate": {
+        "status": "complete",
+        "exit_code": 0,
+        "direct_child_reaped": true,
+        "cleanup_complete": true,
+        "remaining": [],
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted"
+      }
+    },
+    {
+      "name": "new-research-manifest-tests",
+      "role": "test",
+      "status": "FAILED",
+      "capture_complete": false,
+      "primary": {
+        "type": "CycleStopped",
+        "message": "cycle child failed: ['/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--offline', '--locked', '--manifest-path', '/workspaces/quoridor/Cargo.toml', '-j1', '--message-format=json-render-diagnostics', '-p', 'quoridor-runner', '--lib', 'research_manifest::tests']: 101",
+        "notes": []
+      },
+      "secondary": [],
+      "guardian_return": null,
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/new-research-manifest-tests.full.log",
+        "sha256": "8fa252e8fe31be639176ffe1104cb92e7069d9e1b00f8524f48adb1e48edacf6",
+        "bytes": 80231,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/new-research-manifest-tests.process.json",
+        "sha256": "692c9ff607ddb379908f1fcc7007ddb88ba5449d25d61610cb84e650a4a4660b",
+        "bytes": 1809,
+        "mode": "0600"
+      },
+      "persisted_fields_separate": {
+        "status": "failed",
+        "exit_code": 101,
+        "direct_child_reaped": true,
+        "cleanup_complete": true,
+        "remaining": [],
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted"
+      }
+    }
+  ],
+  "exact_identity_observations": [
+    {
+      "identity": {
+        "pid": 3616231,
+        "start_ticks": "86708710",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "observed_UTC": "2026-10-10T06:34:52.114582+00:00",
+      "status": "EXACT_IDENTITY_ABSENT",
+      "scope": "finished notifier metadata only if supervisor remains; no compiler/native/game inference"
+    },
+    {
+      "identity": {
+        "pid": 3616292,
+        "start_ticks": "86708868",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "observed_UTC": "2026-10-10T06:34:52.114616+00:00",
+      "status": "EXACT_IDENTITY_ABSENT",
+      "scope": "finished notifier metadata only if supervisor remains; no compiler/native/game inference"
+    },
+    {
+      "identity": {
+        "pid": 3616329,
+        "start_ticks": "86708963",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "observed_UTC": "2026-10-10T06:34:52.114627+00:00",
+      "status": "EXACT_IDENTITY_ABSENT",
+      "scope": "finished notifier metadata only if supervisor remains; no compiler/native/game inference"
+    },
+    {
+      "identity": {
+        "pid": 3616330,
+        "start_ticks": "86708967",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "observed_UTC": "2026-10-10T06:34:52.114637+00:00",
+      "status": "EXACT_IDENTITY_ABSENT",
+      "scope": "finished notifier metadata only if supervisor remains; no compiler/native/game inference"
+    },
+    {
+      "identity": {
+        "pid": 3616332,
+        "start_ticks": "86708972",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "observed_UTC": "2026-10-10T06:34:52.114645+00:00",
+      "status": "EXACT_IDENTITY_ABSENT",
+      "scope": "finished notifier metadata only if supervisor remains; no compiler/native/game inference"
+    },
+    {
+      "identity": {
+        "pid": 3616333,
+        "start_ticks": "86708976",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "observed_UTC": "2026-10-10T06:34:52.114654+00:00",
+      "status": "EXACT_IDENTITY_ABSENT",
+      "scope": "finished notifier metadata only if supervisor remains; no compiler/native/game inference"
+    },
+    {
+      "identity": {
+        "pid": 3616334,
+        "start_ticks": "86708980",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "observed_UTC": "2026-10-10T06:34:52.114661+00:00",
+      "status": "EXACT_IDENTITY_ABSENT",
+      "scope": "finished notifier metadata only if supervisor remains; no compiler/native/game inference"
+    },
+    {
+      "identity": {
+        "pid": 3616335,
+        "start_ticks": "86708984",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "observed_UTC": "2026-10-10T06:34:52.114669+00:00",
+      "status": "EXACT_IDENTITY_ABSENT",
+      "scope": "finished notifier metadata only if supervisor remains; no compiler/native/game inference"
+    },
+    {
+      "identity": {
+        "pid": 3616336,
+        "start_ticks": "86708989",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "observed_UTC": "2026-10-10T06:34:52.114676+00:00",
+      "status": "EXACT_IDENTITY_ABSENT",
+      "scope": "finished notifier metadata only if supervisor remains; no compiler/native/game inference"
+    },
+    {
+      "identity": {
+        "pid": 3616337,
+        "start_ticks": "86708992",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "observed_UTC": "2026-10-10T06:34:52.114684+00:00",
+      "status": "EXACT_IDENTITY_ABSENT",
+      "scope": "finished notifier metadata only if supervisor remains; no compiler/native/game inference"
+    }
+  ],
+  "source65_after_match": true,
+  "all_tools_after_match": true,
+  "direct_Cargo_executions": 1,
+  "new_tests": "UNTYPED/NOT_RUN because NEW test fixture syntax compile failure",
+  "clippy_release_private_bindings": "NOT_RUN",
+  "compiler_failure": "json! checks value .map expression needs parentheses at research_manifest.rs248",
+  "Main_source_runtime_writes": 0,
+  "available_capture_provenance": "Cargo guardian_return missing; persisted seen/retained80231 and raw80231 accessible separately, not a returned capture certificate",
+  "signal_masks_and_persisted_fields": "Actual returned7 toolrecords completed vs persisted pending/attempted retained separately; failedCargo return facts UNKNOWN",
+  "actual_collection_reader_STOP": "2026-10-10T06:34:52.171635+00:00",
+  "canonical_nonblocking_lease_taken_for_collection": true,
+  "owned_readers_children_jobs_TMP_remaining": [],
+  "current_owned_compute_reservation": "NONE",
+  "no_future_quiet_certificate": true,
+  "allocated_samples_B": {
+    "target": 218861568,
+    "fresh_private": 4096,
+    "TMP": 0,
+    "operation": 335872,
+    "runtime": 40960
+  },
+  "historical_positive_maxima_not_refunded": true,
+  "known_prior_failed_whole_fees_seconds": 191.27399532997515,
+  "new_failed_whole_fee_seconds": 35.13939786993433,
+  "known_all_failed_whole_fees_seconds": 226.41339319990948,
+  "sampled_family_and_continuous_peak": "UNKNOWN; finite family6GiB held",
+  "physical_exclusive_freebytes": "UNKNOWN",
+  "references": [
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/runtime-v1/result.json",
+      "sha256": "e125f2bdad234c64a9265e11b845e4fe17bcbe8dafec74d8d791f348eedc06d5",
+      "bytes": 505,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/runtime-v1/state.json",
+      "sha256": "279774b8844fc72d561859b82719baed6b896bfff6f72e5308121915f339dfb7",
+      "bytes": 706,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/runtime-v1/config.json",
+      "sha256": "b8f0de0643772ded9146781ae89ae03263cf801aea5d358076729e7e1fa3b885",
+      "bytes": 952,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/runtime-v1/output.log",
+      "sha256": "374574c862bcdd4acebaf737f90c41fc93bcc2621f2e083994e385db3d4441a5",
+      "bytes": 16045,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/candidate.json",
+      "sha256": "bed981957a0c69c1e2dd10c884e957da7a57d8b925bbaf248862e76f108c5527",
+      "bytes": 18389,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/manifest.json",
+      "sha256": "3565d5fc063cf0e8b5f8a76e05c812a5f7c6b749e221d00b71b830ea816e417e",
+      "bytes": 20460,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/intent.json",
+      "sha256": "fc90c4bf55b1d490b069f8d2780eb8da9060a37f4db781adeebc009e2b0ee08d",
+      "bytes": 34066,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/intent-v1.json",
+      "sha256": "fc90c4bf55b1d490b069f8d2780eb8da9060a37f4db781adeebc009e2b0ee08d",
+      "bytes": 34066,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/admission-v1.json",
+      "sha256": "6732a4ea808226adf5fcaa188b7c929502bb93dd66b442d4ee5becd52cab7c1b",
+      "bytes": 1140,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/prewrite-v1.json",
+      "sha256": "720a331bcf5349dfcd1073301c241317afaf27ff73f19d1452c68b8223559f5f",
+      "bytes": 1345,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/preentry-v1.json",
+      "sha256": "2a3989f35515846d5b5b13668c1445eb09debd8772448b5ccebfab0836433e46",
+      "bytes": 5488,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/failed-finalize-receipt-v1.json",
+      "sha256": "8ba2526d836e8a6745aa83f140de8b8db02b65dfd74097fdbcc9c8f48a818dfb",
+      "bytes": 748,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/version-cargo.full.log",
+      "sha256": "1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566",
+      "bytes": 36,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/version-cargo.process.json",
+      "sha256": "eb28bd5c3be75c28bb23c20759a8922ef1f811156acace3455d78c1631f86963",
+      "bytes": 891,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/version-rustc.full.log",
+      "sha256": "8dc912acd5bfeafc70b01b1d2a2afb0844afa02f5dba2f1ae8d5c212d005afb6",
+      "bytes": 36,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/version-rustc.process.json",
+      "sha256": "34eb1222d946c33f4478db30be562bc8d59130e9068dbcf477fe125d04c8fa7b",
+      "bytes": 891,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/version-rustdoc.full.log",
+      "sha256": "a37aafb914b7e4b94fbc9c7221a19ea3fd4d089bc6b6a9b398c079de321f3b6a",
+      "bytes": 38,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/version-rustdoc.process.json",
+      "sha256": "8ad52b95bcbe65e323d5b8379258796382052279171d85b2ae7a4a9531452e04",
+      "bytes": 892,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/version-cc.full.log",
+      "sha256": "ba4aa3688542d944b584afa84a6332469bed71c19d3c72e5bbdb069972d6db1d",
+      "bytes": 260,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/version-cc.process.json",
+      "sha256": "c849fb0c9277f23d9f0e92b84b969a7a3379c7df198ff80f2ca8b266c4bdbb9a",
+      "bytes": 855,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/version-cxx.full.log",
+      "sha256": "44c362af33f02d0f97e55219a8e35ba8374b0bf61352141287b86ac131355d36",
+      "bytes": 260,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/version-cxx.process.json",
+      "sha256": "b0df44b8021cfdd39151acd921567b3419b3431b716a8162b166b9aa6cf4a02d",
+      "bytes": 855,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/version-ar.full.log",
+      "sha256": "d47749e5767b07210b628729d75fba5e16927cb4a7fd943cd6da87f60a335874",
+      "bytes": 283,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/version-ar.process.json",
+      "sha256": "05b0b01d2acea2be51f23ad4a06db802983084ee82c4b5228d4b20d168ecc1d4",
+      "bytes": 851,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/version-python.full.log",
+      "sha256": "cb64a3a0ddcaff0ce013ea3612beda0be4a4d3537087505bd8850d8f8476f4f8",
+      "bytes": 14,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/version-python.process.json",
+      "sha256": "2d46b3d952841818738203e7bc7ea1e725af1c090a2bd04f1e6f72b67b8120df",
+      "bytes": 840,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/new-research-manifest-tests.full.log",
+      "sha256": "8fa252e8fe31be639176ffe1104cb92e7069d9e1b00f8524f48adb1e48edacf6",
+      "bytes": 80231,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/operation-v1/new-research-manifest-tests.process.json",
+      "sha256": "692c9ff607ddb379908f1fcc7007ddb88ba5449d25d61610cb84e650a4a4660b",
+      "bytes": 1809,
+      "mode": "0600"
+    }
+  ],
+  "software_private_qualified": false,
+  "book_model_Search_games": 0
+}
