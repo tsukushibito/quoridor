@@ -101,6 +101,8 @@ record buildはrelease最適化を維持したdebug/symbol情報付きimageを�
 
 人間はTT entryごとの全履歴保存を止めるよう指示し、359で compact board-key TT と外部 canonical repetition history の実装を選んだ。この表現方向について354のcapacity-only未選択状態を置き換えるが、351/354を再開せず、2MiB化・eviction/reset・容量sweep・selective search・fit・新対局・349 perfの許可には広げない。4096 slots/1MiBから始める。
 
+人間は同じ359の変更境界に、versioned/domain-separated seedによる一つのincremental board Zobristを追加承認した。完全board identityと全再計算reference oracleを保持し、constructor/from-stateとchecked make/unmake/cancel/error/reentryの一致を確認する。board Zobristとcounts-sensitive128-bit context tokenは別domainで、board一致だけの数値再用は許さない。hash indexと再用availabilityの変更は探索仕事を変えるので、旧351 timingを今回のwhole benefitへ読み替えない。追加のhash sweep・351再開・予算増加ではない。
+
 Entryは固定長の完全board identity、best/depth/bound/value/generationと、数値再用を適格化する固定長context tokenだけを持つ。per-entry Vec、全履歴copy、shared full-history blobや同等の移設cacheは持たない。canonical counted historyとsearch pathはSigmaContext側に保持し、terminal確認をTT数値再用より先に行う。board一致・context欠落/不一致では、現在合法と確認したbest moveのorderingだけを許す。数値・bound cutoff・window tighteningにはcontext/depth/boundとrule/evaluator/score/session/plyの対応が必要で、局所のdraw checkだけでboard-only値を再用しない。
 
 context tokenはcanonical (HistoryKey,count) multisetのincremental128-bit fingerprintを第一案とする。rootの既存countを二重に足さず、base＋overlayから一度初期化し、make/unmakeのcount遷移を固定長tokenで増分更新・LIFO復元する。nodeごとのhistory_counts()/BTreeMap再構築・全履歴copyをなくす。domain-separated二laneと全repetition関連count/rules/ply/namespaceを扱い、fingerprintは履歴を復元する表現でも数学的に衝突しない証明でもない。従来型128-bit hashのcollision assumptionを明示する。context不変条件が証明できなければ修正または数値再用を制限し、単なるcurrent-branch draw guardでancestor GHIを解決したと主張しない。
