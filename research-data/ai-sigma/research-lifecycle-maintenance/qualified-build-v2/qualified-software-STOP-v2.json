@@ -1,0 +1,660 @@
+{
+  "schema": "quoridor.value-search-strength.common-build-collection.v2",
+  "issue": "quoridor-4lc.355.1",
+  "job_id": "8973cd21-f9d0-4842-9af1-b1e6f2962550",
+  "actual_controller_START": "2026-10-10T07:04:52.625963+00:00",
+  "candidate_finished_at_lifecycle_clock": "2026-10-10T07:07:32.877888+00:00",
+  "exact_worker_process_STOP": "UNKNOWN; canonical controller directwait/reap proves stopped by its exactSTOP",
+  "actual_controller_STOP": "2026-10-10T07:07:32.993311+00:00",
+  "controller_whole_seconds": 160.38719350402243,
+  "authoritative_finalization_at": "2026-10-10T07:09:18.009479+00:00",
+  "BuildManifest": {
+    "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/manifest.json",
+    "sha256": "18a49c083f40f93cb2dd126c17106064d3045f16fc059480872c90156524c4e4",
+    "bytes": 64275,
+    "mode": "0644"
+  },
+  "status": "PASS_CURRENT_SOFTWARE_PRIVATE_ONLY",
+  "artifact": {
+    "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/private-v1/quoridor-runner-v2",
+    "sha256": "55c8d984074ac156999a9f1555ecb63f663fa8e09b92d4ced4e9429edca320d7",
+    "bytes": 8951128,
+    "mode": "0755"
+  },
+  "source_adoption": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/research-lifecycle-maintenance/source-adoption-v2.json",
+    "sha256": "cf7ec12682ebee96d896bec75acd4b31c8f6d4357021314e8a0765c9231f1144",
+    "bytes": 27066,
+    "mode": "0644"
+  },
+  "source65_and_tools_after_match": true,
+  "compiled_projection35_match": true,
+  "model_calls": 0,
+  "two_NEW_tests_actualPASS": true,
+  "ordinary_fullaffectedClippy_actualPASS": true,
+  "release_commonprivate_bindings_actualPASS": true,
+  "direct_commands": [
+    {
+      "name": "version-cargo",
+      "role": "version",
+      "exit_code": 0,
+      "direct_wait_reaped": true,
+      "handles_process_cleanup": true,
+      "remaining": [],
+      "full_capture_bytes": 36,
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/version-cargo.full.log",
+        "sha256": "1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566",
+        "bytes": 36,
+        "mode": "0644"
+      },
+      "returned_signal_mask": "completed",
+      "returned_final_record": "completed",
+      "persisted_signal_mask_separate": "pending",
+      "persisted_final_record_separate": "attempted",
+      "wall_seconds_nested_not_added": 0.011170341051183641
+    },
+    {
+      "name": "version-rustc",
+      "role": "version",
+      "exit_code": 0,
+      "direct_wait_reaped": true,
+      "handles_process_cleanup": true,
+      "remaining": [],
+      "full_capture_bytes": 36,
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/version-rustc.full.log",
+        "sha256": "8dc912acd5bfeafc70b01b1d2a2afb0844afa02f5dba2f1ae8d5c212d005afb6",
+        "bytes": 36,
+        "mode": "0644"
+      },
+      "returned_signal_mask": "completed",
+      "returned_final_record": "completed",
+      "persisted_signal_mask_separate": "pending",
+      "persisted_final_record_separate": "attempted",
+      "wall_seconds_nested_not_added": 0.012340537970885634
+    },
+    {
+      "name": "version-rustdoc",
+      "role": "version",
+      "exit_code": 0,
+      "direct_wait_reaped": true,
+      "handles_process_cleanup": true,
+      "remaining": [],
+      "full_capture_bytes": 38,
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/version-rustdoc.full.log",
+        "sha256": "a37aafb914b7e4b94fbc9c7221a19ea3fd4d089bc6b6a9b398c079de321f3b6a",
+        "bytes": 38,
+        "mode": "0644"
+      },
+      "returned_signal_mask": "completed",
+      "returned_final_record": "completed",
+      "persisted_signal_mask_separate": "pending",
+      "persisted_final_record_separate": "attempted",
+      "wall_seconds_nested_not_added": 0.013140193070285022
+    },
+    {
+      "name": "version-cc",
+      "role": "version",
+      "exit_code": 0,
+      "direct_wait_reaped": true,
+      "handles_process_cleanup": true,
+      "remaining": [],
+      "full_capture_bytes": 260,
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/version-cc.full.log",
+        "sha256": "ba4aa3688542d944b584afa84a6332469bed71c19d3c72e5bbdb069972d6db1d",
+        "bytes": 260,
+        "mode": "0644"
+      },
+      "returned_signal_mask": "completed",
+      "returned_final_record": "completed",
+      "persisted_signal_mask_separate": "pending",
+      "persisted_final_record_separate": "attempted",
+      "wall_seconds_nested_not_added": 0.00972323096357286
+    },
+    {
+      "name": "version-cxx",
+      "role": "version",
+      "exit_code": 0,
+      "direct_wait_reaped": true,
+      "handles_process_cleanup": true,
+      "remaining": [],
+      "full_capture_bytes": 260,
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/version-cxx.full.log",
+        "sha256": "44c362af33f02d0f97e55219a8e35ba8374b0bf61352141287b86ac131355d36",
+        "bytes": 260,
+        "mode": "0644"
+      },
+      "returned_signal_mask": "completed",
+      "returned_final_record": "completed",
+      "persisted_signal_mask_separate": "pending",
+      "persisted_final_record_separate": "attempted",
+      "wall_seconds_nested_not_added": 0.009990376071073115
+    },
+    {
+      "name": "version-ar",
+      "role": "version",
+      "exit_code": 0,
+      "direct_wait_reaped": true,
+      "handles_process_cleanup": true,
+      "remaining": [],
+      "full_capture_bytes": 283,
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/version-ar.full.log",
+        "sha256": "d47749e5767b07210b628729d75fba5e16927cb4a7fd943cd6da87f60a335874",
+        "bytes": 283,
+        "mode": "0644"
+      },
+      "returned_signal_mask": "completed",
+      "returned_final_record": "completed",
+      "persisted_signal_mask_separate": "pending",
+      "persisted_final_record_separate": "attempted",
+      "wall_seconds_nested_not_added": 0.00939337897580117
+    },
+    {
+      "name": "version-python",
+      "role": "version",
+      "exit_code": 0,
+      "direct_wait_reaped": true,
+      "handles_process_cleanup": true,
+      "remaining": [],
+      "full_capture_bytes": 14,
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/version-python.full.log",
+        "sha256": "cb64a3a0ddcaff0ce013ea3612beda0be4a4d3537087505bd8850d8f8476f4f8",
+        "bytes": 14,
+        "mode": "0644"
+      },
+      "returned_signal_mask": "completed",
+      "returned_final_record": "completed",
+      "persisted_signal_mask_separate": "pending",
+      "persisted_final_record_separate": "attempted",
+      "wall_seconds_nested_not_added": 0.009432677063159645
+    },
+    {
+      "name": "new-research-manifest-tests",
+      "role": "test",
+      "exit_code": 0,
+      "direct_wait_reaped": true,
+      "handles_process_cleanup": true,
+      "remaining": [],
+      "full_capture_bytes": 79053,
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/new-research-manifest-tests.full.log",
+        "sha256": "7dfa9a16b89c77adf5abdcdda3330234a1545a5062733e8bec174b2735738568",
+        "bytes": 79053,
+        "mode": "0644"
+      },
+      "returned_signal_mask": "completed",
+      "returned_final_record": "completed",
+      "persisted_signal_mask_separate": "pending",
+      "persisted_final_record_separate": "attempted",
+      "wall_seconds_nested_not_added": 6.947421118966304,
+      "actual_raw_Cargo_finished_literal_True": true,
+      "structured_artifact_count": 1,
+      "warnings": 0
+    },
+    {
+      "name": "affected-runner-clippy",
+      "role": "lint",
+      "exit_code": 0,
+      "direct_wait_reaped": true,
+      "handles_process_cleanup": true,
+      "remaining": [],
+      "full_capture_bytes": 81484,
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/affected-runner-clippy.full.log",
+        "sha256": "d76a7f9ad3ca3959cd87186896bf44a36e0acaf42fd6f2a6d0940839db43b505",
+        "bytes": 81484,
+        "mode": "0644"
+      },
+      "returned_signal_mask": "completed",
+      "returned_final_record": "completed",
+      "persisted_signal_mask_separate": "pending",
+      "persisted_final_record_separate": "attempted",
+      "wall_seconds_nested_not_added": 19.071072940016165,
+      "actual_raw_Cargo_finished_literal_True": true,
+      "structured_artifact_count": 0,
+      "warnings": 0
+    },
+    {
+      "name": "fresh-runner-release",
+      "role": "build",
+      "exit_code": 0,
+      "direct_wait_reaped": true,
+      "handles_process_cleanup": true,
+      "remaining": [],
+      "full_capture_bytes": 83370,
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/fresh-runner-release.full.log",
+        "sha256": "706ac7fab977bb151708cda22d0064d4d674b441306ad449cbdef3f158cbe64c",
+        "bytes": 83370,
+        "mode": "0644"
+      },
+      "returned_signal_mask": "completed",
+      "returned_final_record": "completed",
+      "persisted_signal_mask_separate": "pending",
+      "persisted_final_record_separate": "attempted",
+      "wall_seconds_nested_not_added": 131.73901744897012,
+      "actual_raw_Cargo_finished_literal_True": true,
+      "structured_artifact_count": 1,
+      "warnings": 0
+    },
+    {
+      "name": "same-private-bindings",
+      "role": "bindings",
+      "exit_code": 0,
+      "direct_wait_reaped": true,
+      "handles_process_cleanup": true,
+      "remaining": [],
+      "full_capture_bytes": 3244,
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/same-private-bindings.full.log",
+        "sha256": "0b85d5b5e3bcedf27e1b5baf5cbf345b6c422b5c208db50832b3c1ea723cef3d",
+        "bytes": 3244,
+        "mode": "0644"
+      },
+      "returned_signal_mask": "completed",
+      "returned_final_record": "completed",
+      "persisted_signal_mask_separate": "pending",
+      "persisted_final_record_separate": "attempted",
+      "wall_seconds_nested_not_added": 0.03890487703029066
+    }
+  ],
+  "controller_direct_child_reaped": true,
+  "controller_cleanup_complete": true,
+  "controller_remaining": [],
+  "controller_cleanup_errors": [],
+  "exact_identity_observations": [
+    {
+      "identity": {
+        "pid": 3634769,
+        "start_ticks": "86915017",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "observationUTC": "2026-10-10T07:12:24.327531+00:00",
+      "status": "EXACT_IDENTITY_ABSENT",
+      "scope": "finished supervisor notification metadata separately classified; no foreign wait/kill"
+    },
+    {
+      "identity": {
+        "pid": 3634834,
+        "start_ticks": "86915290",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "observationUTC": "2026-10-10T07:12:24.327611+00:00",
+      "status": "EXACT_IDENTITY_ABSENT",
+      "scope": "finished supervisor notification metadata separately classified; no foreign wait/kill"
+    },
+    {
+      "identity": {
+        "pid": 3634894,
+        "start_ticks": "86915425",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "observationUTC": "2026-10-10T07:12:24.327632+00:00",
+      "status": "EXACT_IDENTITY_ABSENT",
+      "scope": "finished supervisor notification metadata separately classified; no foreign wait/kill"
+    },
+    {
+      "identity": {
+        "pid": 3634896,
+        "start_ticks": "86915432",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "observationUTC": "2026-10-10T07:12:24.327648+00:00",
+      "status": "EXACT_IDENTITY_ABSENT",
+      "scope": "finished supervisor notification metadata separately classified; no foreign wait/kill"
+    },
+    {
+      "identity": {
+        "pid": 3634899,
+        "start_ticks": "86915440",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "observationUTC": "2026-10-10T07:12:24.327665+00:00",
+      "status": "EXACT_IDENTITY_ABSENT",
+      "scope": "finished supervisor notification metadata separately classified; no foreign wait/kill"
+    },
+    {
+      "identity": {
+        "pid": 3634902,
+        "start_ticks": "86915447",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "observationUTC": "2026-10-10T07:12:24.327680+00:00",
+      "status": "EXACT_IDENTITY_ABSENT",
+      "scope": "finished supervisor notification metadata separately classified; no foreign wait/kill"
+    },
+    {
+      "identity": {
+        "pid": 3634903,
+        "start_ticks": "86915452",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "observationUTC": "2026-10-10T07:12:24.327694+00:00",
+      "status": "EXACT_IDENTITY_ABSENT",
+      "scope": "finished supervisor notification metadata separately classified; no foreign wait/kill"
+    },
+    {
+      "identity": {
+        "pid": 3634904,
+        "start_ticks": "86915457",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "observationUTC": "2026-10-10T07:12:24.327711+00:00",
+      "status": "EXACT_IDENTITY_ABSENT",
+      "scope": "finished supervisor notification metadata separately classified; no foreign wait/kill"
+    },
+    {
+      "identity": {
+        "pid": 3634905,
+        "start_ticks": "86915463",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "observationUTC": "2026-10-10T07:12:24.327727+00:00",
+      "status": "EXACT_IDENTITY_ABSENT",
+      "scope": "finished supervisor notification metadata separately classified; no foreign wait/kill"
+    },
+    {
+      "identity": {
+        "pid": 3634906,
+        "start_ticks": "86915468",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "observationUTC": "2026-10-10T07:12:24.327742+00:00",
+      "status": "EXACT_IDENTITY_ABSENT",
+      "scope": "finished supervisor notification metadata separately classified; no foreign wait/kill"
+    },
+    {
+      "identity": {
+        "pid": 3635062,
+        "start_ticks": "86916167",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "observationUTC": "2026-10-10T07:12:24.327757+00:00",
+      "status": "EXACT_IDENTITY_ABSENT",
+      "scope": "finished supervisor notification metadata separately classified; no foreign wait/kill"
+    },
+    {
+      "identity": {
+        "pid": 3635747,
+        "start_ticks": "86918080",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "observationUTC": "2026-10-10T07:12:24.327771+00:00",
+      "status": "EXACT_IDENTITY_ABSENT",
+      "scope": "finished supervisor notification metadata separately classified; no foreign wait/kill"
+    },
+    {
+      "identity": {
+        "pid": 3640543,
+        "start_ticks": "86931264",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "observationUTC": "2026-10-10T07:12:24.327785+00:00",
+      "status": "EXACT_IDENTITY_ABSENT",
+      "scope": "finished supervisor notification metadata separately classified; no foreign wait/kill"
+    }
+  ],
+  "INCOMPLETE_absent": true,
+  "primary": null,
+  "secondary": [],
+  "owned_readers_children_jobs_TMP_remaining": [],
+  "current_owned_compute_reservation": "NONE",
+  "collection_reader_STOP": "2026-10-10T07:12:24.338191+00:00",
+  "canonicalNB_lease_acquired_released_on_return": true,
+  "old_failed_jobs": "All FAILED unchanged; no stage salvage",
+  "old_failed_controller_fees_seconds": 226.41339319990948,
+  "new_successful_controller_fee_seconds": 160.38719350402243,
+  "known_combined_controller_fees_seconds": 386.8005867039319,
+  "nested_command_intervals_not_added": true,
+  "allocated_samples_positive_floors_B": {
+    "target": 548532224,
+    "fresh_private": 8957952,
+    "old_private_floor": 8892416,
+    "v1_operation_floor": 335872,
+    "v1_runtime_floor": 40960,
+    "v2_operation": 782336,
+    "v2_runtime": 24576,
+    "v2_TMP": 0
+  },
+  "physical_freebytes_and_continuous_peaks": "UNKNOWN; no refund",
+  "family6GiB_controller64MiB_host4GiB_GPU0": "Issued refusal bounds; continuous peak/scheduler isolation UNKNOWN",
+  "references": [
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/runtime-v2/state.json",
+      "sha256": "b9673dc23ee385bf1f9b252a8cf6815311987bb9a26a91465bb94d9482a663aa",
+      "bytes": 709,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/runtime-v2/config.json",
+      "sha256": "579f97c089101aa2726d701b749a825bc233d296ac5795139397ced9fc591860",
+      "bytes": 976,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/runtime-v2/result.json",
+      "sha256": "f16bb1179928f34c87e4ed1581198b46adfbe06248e9690275752b7fbc1b0e6c",
+      "bytes": 501,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/runtime-v2/output.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/candidate.json",
+      "sha256": "9e60c863b81ea287a27ea4672dda15a0523f5c6e0e011131cd54666818a87d18",
+      "bytes": 63600,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/manifest.json",
+      "sha256": "18a49c083f40f93cb2dd126c17106064d3045f16fc059480872c90156524c4e4",
+      "bytes": 64275,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/intent.json",
+      "sha256": "d20444d6b3353744e2302b20cfa2a0682e5ca2b6f85190c27d87c4fd4cb643fd",
+      "bytes": 34108,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/intent-v2-final.json",
+      "sha256": "d20444d6b3353744e2302b20cfa2a0682e5ca2b6f85190c27d87c4fd4cb643fd",
+      "bytes": 34108,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/admission-v2-final.json",
+      "sha256": "43eaa500488fc51ff4a791044e09b85f2efb5087c2285ac67a94e1be6a36ed28",
+      "bytes": 1171,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/preentry-v2-final.json",
+      "sha256": "436e05e52b16ca5961cdab45fd7c4e79e674b02a792cdda8ff7b7eafd025c7c6",
+      "bytes": 1601,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/prewrite-v2.json",
+      "sha256": "6b32efe152eee0444dc4216f91e9c2764b21e309991eafd33f0eaa2f135c0548",
+      "bytes": 1382,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/finalize-receipt-v2.json",
+      "sha256": "9ccb4b6582a7780afa67dad4c637f6cbca1d4e040e860dd9cf13ae69e6dd5799",
+      "bytes": 769,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/research-lifecycle-maintenance/source-adoption-v2.json",
+      "sha256": "cf7ec12682ebee96d896bec75acd4b31c8f6d4357021314e8a0765c9231f1144",
+      "bytes": 27066,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-lifecycle-maintenance/support-v1.json",
+      "sha256": "86b6191b9dbe1b1f57e91e8ec3b1c7f7ad62b3350f16e42464eb0f86eee4499e",
+      "bytes": 4716,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/research-lifecycle-maintenance/target-handover-v1.json",
+      "sha256": "7fe461db94526e68664bd654a01b0955cd7d30690841a1328ac1698955c6b3b2",
+      "bytes": 1380,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/private-v1/quoridor-runner-v2",
+      "sha256": "55c8d984074ac156999a9f1555ecb63f663fa8e09b92d4ced4e9429edca320d7",
+      "bytes": 8951128,
+      "mode": "0755"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/version-cargo.full.log",
+      "sha256": "1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566",
+      "bytes": 36,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/version-cargo.process.json",
+      "sha256": "bb42b53507d342f7af654151c174cc9ec77509b213d2fd47e1951a10b498d8f8",
+      "bytes": 891,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/version-rustc.full.log",
+      "sha256": "8dc912acd5bfeafc70b01b1d2a2afb0844afa02f5dba2f1ae8d5c212d005afb6",
+      "bytes": 36,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/version-rustc.process.json",
+      "sha256": "63a636bea1760002fd5fbeb80f5c91c08d48625d9f6c4256bea37a7be3017f9b",
+      "bytes": 891,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/version-rustdoc.full.log",
+      "sha256": "a37aafb914b7e4b94fbc9c7221a19ea3fd4d089bc6b6a9b398c079de321f3b6a",
+      "bytes": 38,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/version-rustdoc.process.json",
+      "sha256": "486ebe6a3d756d031c02b834c49cac3c124eae532e5cbfb3a24d968f8cde5ee6",
+      "bytes": 893,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/version-cc.full.log",
+      "sha256": "ba4aa3688542d944b584afa84a6332469bed71c19d3c72e5bbdb069972d6db1d",
+      "bytes": 260,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/version-cc.process.json",
+      "sha256": "79d364bc09d11a818d51b6f9acd41a5cb140d5a0dbfaf1847822585930026e37",
+      "bytes": 854,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/version-cxx.full.log",
+      "sha256": "44c362af33f02d0f97e55219a8e35ba8374b0bf61352141287b86ac131355d36",
+      "bytes": 260,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/version-cxx.process.json",
+      "sha256": "111252769a2dd5105cd539eb840c5eed25de698c9017ce9f0ebea9ddb73dc5ed",
+      "bytes": 855,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/version-ar.full.log",
+      "sha256": "d47749e5767b07210b628729d75fba5e16927cb4a7fd943cd6da87f60a335874",
+      "bytes": 283,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/version-ar.process.json",
+      "sha256": "7676f5686c03f04f8283661b42a1bdc65f1a52485db1e8ddb48241834c2e84fb",
+      "bytes": 850,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/version-python.full.log",
+      "sha256": "cb64a3a0ddcaff0ce013ea3612beda0be4a4d3537087505bd8850d8f8476f4f8",
+      "bytes": 14,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/version-python.process.json",
+      "sha256": "9d69f4d1b7d7e781812544bf85b75fb9e6385feade741ffe2316b97e6e9a5d95",
+      "bytes": 840,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/new-research-manifest-tests.full.log",
+      "sha256": "7dfa9a16b89c77adf5abdcdda3330234a1545a5062733e8bec174b2735738568",
+      "bytes": 79053,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/new-research-manifest-tests.process.json",
+      "sha256": "5d22da538122b6e3e4ea52c5234e7264c075df7ad9c288e59b250ba56c61cb4e",
+      "bytes": 1121,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/affected-runner-clippy.full.log",
+      "sha256": "d76a7f9ad3ca3959cd87186896bf44a36e0acaf42fd6f2a6d0940839db43b505",
+      "bytes": 81484,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/affected-runner-clippy.process.json",
+      "sha256": "c849751143480596cfa380641cfeaba42b639be70c9e837600e226961f1d0ac1",
+      "bytes": 1186,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/fresh-runner-release.full.log",
+      "sha256": "706ac7fab977bb151708cda22d0064d4d674b441306ad449cbdef3f158cbe64c",
+      "bytes": 83370,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/fresh-runner-release.process.json",
+      "sha256": "4ec40c2d89ee94938baa30ac41c0ebe8f61dfaec78a92fdd23e6a74548548c59",
+      "bytes": 1131,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/same-private-bindings.full.log",
+      "sha256": "0b85d5b5e3bcedf27e1b5baf5cbf345b6c422b5c208db50832b3c1ea723cef3d",
+      "bytes": 3244,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v2/operation-v2/same-private-bindings.process.json",
+      "sha256": "343b920d5ca87bc1381bea3da64ca50b63182438d393b7153187bc6af52f5cf6",
+      "bytes": 979,
+      "mode": "0600"
+    }
+  ],
+  "science_native_model_Search_book_games": 0,
+  "future_book_input_model_numeric_scope": "UNQUALIFIED; each actual fixed experiment needs accepted manifest and fresh lifetime conditions",
+  "collector_metadata_key_refusal": "Earlier build_finished key assumption retained in collector-key-refusal.json; corrected actual saved fields, no child replay"
+}
