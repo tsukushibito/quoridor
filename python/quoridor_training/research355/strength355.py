@@ -80,7 +80,7 @@ def strict_json(raw, maximum=MAX_GAME_BYTES):
     return value
 
 
-def validate_finite_tree(value, depth=0):
+def validate_finite_tree(value, depth=0, index_files=False):
     require(depth <= 24, "JSON nesting cap")
     if type(value) is float:
         finite(value)
@@ -91,11 +91,16 @@ def validate_finite_tree(value, depth=0):
         for item in value:
             validate_finite_tree(item, depth + 1)
     elif isinstance(value, dict):
-        require(len(value) <= 256, "object field cap")
+        require(len(value) <= (512 if index_files else 256), "object field cap")
         for key, item in value.items():
             require(isinstance(key, str), "JSON key type")
             validate_finite_tree(key, depth + 1)
-            validate_finite_tree(item, depth + 1)
+            root_files = (
+                depth == 0
+                and value.get("schema") == "quoridor.strength355.stopped-input-index.v1"
+                and key == "files"
+            )
+            validate_finite_tree(item, depth + 1, root_files)
     else:
         require(value is None or type(value) in (bool, int), "JSON value type")
 
