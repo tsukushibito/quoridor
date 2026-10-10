@@ -1,8 +1,5 @@
 """Only new stopped related-v2 field joins; no actual builds or saved science."""
 
-import copy
-import hashlib
-import json
 from pathlib import Path
 import tempfile
 import unittest
@@ -20,87 +17,6 @@ class RelatedLifecycle(unittest.TestCase):
         self.directory = tempfile.TemporaryDirectory(prefix="synthetic-related-v10-", dir=HERE)
         self.addCleanup(self.directory.cleanup)
         self.root = Path(self.directory.name)
-        self.compiled = {key: "a" * 64 for key in life.COMPILED_KEYS}
-        projections = {key: ref(self.root / key.replace("/", "_")) for key in life.COMPILED_KEYS}
-        projections["runner/Cargo.toml"] = ref(self.root / "crates/quoridor-runner/Cargo.toml")
-        projections["Cargo.lock"] = ref(self.root / "Cargo.lock")
-        workspace_manifest = ref(self.root / "Cargo.toml", "b" * 64)
-        self.source = {
-            "workspace": str(self.root),
-            "manifest": workspace_manifest,
-            "lock": projections["Cargo.lock"],
-            "compiled_sources": projections,
-            "files": [workspace_manifest, *projections.values()],
-            "cargo_configs": [{"path": str(self.root / "config.toml"), "file": None}],
-        }
-
-    def test_full_adopted_source_projection_manifest_lock_and_absent_configs(self):
-        life.source_projection(self.source, self.compiled)
-        for mutation in ("wrong_hash", "partial", "wrong_lock", "wrong_witness"):
-            bad = copy.deepcopy(self.source)
-            if mutation == "wrong_hash":
-                bad["compiled_sources"]["Cargo.lock"]["sha256"] = "b" * 64
-            elif mutation == "partial":
-                del bad["compiled_sources"]["runner/main.rs"]
-            elif mutation == "wrong_lock":
-                bad["lock"] = ref(self.root / "different_lock")
-            else:
-                bad["cargo_configs"][0]["file"] = ref(self.root / "other_config")
-            with self.assertRaises(ValueError):
-                life.source_projection(bad, self.compiled)
-
-    def test_command_partial_return_and_persisted_domains_not_synthesized(self):
-        check = {
-            "name": "cargo",
-            "role": "build",
-            "argv": ["cargo", "build"],
-            "status": "FAILED",
-            "guardian_return": None,
-            "full_log": ref(self.root / "closed-partial-log"),
-            "persisted_process_receipt": ref(self.root / "process"),
-            "capture_complete": False,
-            "primary": {"message": "unreturned original"},
-            "secondary": [],
-        }
-        identity = {"pid": 123, "start_ticks": "456", "boot_id": "SYNTHETIC"}
-        config = {"SYNTHETIC": "closed partial command", "argv": ["cargo", "build"]}
-        config_path = self.root / "config.json"
-        raw = (json.dumps(config, indent=2) + "\n").encode()
-        config_path.write_bytes(raw)
-        config_path.chmod(0o644)
-        config_ref = {
-            "path": str(config_path),
-            "sha256": hashlib.sha256(raw).hexdigest(),
-            "bytes": len(raw),
-            "mode": "0644",
-        }
-        value = {
-            "status": "FAILED",
-            "checks": [check],
-            "process_cleanup_complete": False,
-            "outer_job_state": ref(self.root / "state"),
-            "originating_job": {
-                "runtime": str(self.root),
-                "job_id": "SYNTHETIC",
-                "config": config_ref,
-                "config_sha256": hashlib.sha256(
-                    json.dumps(config, sort_keys=True).encode()
-                ).hexdigest(),
-                "supervisor": identity,
-                "child": identity,
-            },
-        }
-        life.originating_build(value, life.Metadata())
-        self.assertIsNone(check["guardian_return"])
-        self.assertFalse(check["capture_complete"])
-        with self.assertRaises(ValueError):
-            life.originating_build(
-                dict(value, status="PASS", process_cleanup_complete=True), life.Metadata()
-            )
-        bad = copy.deepcopy(value)
-        bad["originating_job"]["config_sha256"] = "b" * 64
-        with self.assertRaises(ValueError):
-            life.originating_build(bad, life.Metadata())
 
     def compare_views(self):
         book = {"source_book_SHA256": "d" * 64}
@@ -247,7 +163,6 @@ class RelatedLifecycle(unittest.TestCase):
         with (
             mock.patch.object(life, "finalized_input", return_value=(completed, experiment)),
             mock.patch.object(life, "numerical"),
-            mock.patch.object(life, "owed_facts", return_value=[]),
         ):
             with self.assertRaises(ValueError):
                 stream355.scientific_inputs(

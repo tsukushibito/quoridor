@@ -66,7 +66,7 @@ Generation request replaces `old_admission` with `old_prefixes`, a bound JSON ar
 
 Saved-only analysis uses the same accepted build and experiment manifest, with `phase=analysis`, a pinned Python tool from the build, exact inputs/config/argv and fresh report output. It is run by this same guardian. The child receives `QUORIDOR_LIFECYCLE_INTENT` and `QUORIDOR_LIFECYCLE_PARENT_PID`; it validates the maintained caller context and must not reacquire the canonical lease. No new registry, nested lock, build target or native/model call is needed for that saved phase.
 
-The maintained saved-analysis child is `python/quoridor_training/research355/stream355.py`. Its sibling modules contain the current scientific aggregation and file/lifecycle adapters; the adopted build source includes all six runtime modules. Configure its child argv as pinned Python, `-B`, the absolute script path, `--experiment`, the bound experiment path, `--experiment-sha256`, its raw SHA, and `--intent`, the exact parent intent path. This child writes only bounded report data; the parent remains the sole authoritative finalizer. Historical `.artifacts` source packets are reconstruction evidence, not current executable dependencies.
+The maintained saved-analysis child is `python/quoridor_training/research355/stream355.py`. Its sibling modules contain the current scientific aggregation and file/lifecycle adapters; the current run intent binds all six runtime modules separately from historical build provenance. Configure its child argv as pinned Python, `-B`, the absolute script path, `--experiment`, the bound experiment path, `--experiment-sha256`, its raw SHA, and `--intent`, the exact parent intent path. This child writes only bounded report data; the parent remains the sole authoritative finalizer. Historical `.artifacts` source packets are reconstruction evidence, not current executable dependencies.
 
 `scripts/dev/check-research.py` includes the maintained lifecycle adapter tests. The focused source-only command is `python3 -B -m unittest discover -s python/quoridor_training/research355 -p 'test_lifecycle*.py'`. These fixtures use synthetic inputs and mock the parent/build; they do not qualify a real build, model or scientific result.
 
@@ -103,3 +103,58 @@ Only the authoritative completion after directwait/cleanup/finalizers is consuma
 or INCOMPLETE files never admit success. Generation PASS is data-operation completion,
 not numerical PASS. Downstream materialize/compare/arena/analysis still require actual
 book/history/input/model/clock qualification under the current image.
+
+## Generation source domains and failed-origin inputs
+
+The native arena generation domain has exactly34 maintained keys. The qualified research
+artifact domain has exactly35: the same34 plus `runner/sigma_qualification.rs`. Publisher
+`generation_source_correspondence` requires both complete named key sets, lowercase SHA256
+values and equality of every shared value. Extra or missing keys are refused; there is no
+unknown-key filtering. Neither the generator body nor full qualified artifact/numerical source
+coverage changes. `data.generation.compiled_sources` remains the full35 qualified map;
+`native_compiled_sources` retains the exact34 start/book map, with explicit domain names.
+`generation_compiled_sources_sha256` is sorted-key compact JSON of the native34 map.
+Raw `book_sha256`/`schedule_sha256` still join the original native result; separate
+`book_semantic_sha256`/`schedule_semantic_sha256` describe sorted-key compact parsed values.
+The frozen Experiment schedule FileRef, semantic9bfb and native output raw digests remain
+separate. No source map or raw file is rewritten to force equality.
+
+The maintained publisher's read-only `generation_input_data(completion_FileRef)` checks
+an existing authoritative generation completion, whether PASS or FAILED, only after confirmed
+cleanup and no INCOMPLETE marker. It joins the original bound intent/Experiment/build and
+rechecks precisely the original four durable files, within their declared4MiB aggregate cap.
+It returns the normal data envelope with `origin_completion`, `origin_status`, `origin_primary`
+and `origin_secondary` intact. A data correspondence PASS does not change the failed origin,
+create a replacement generation success certificate, or qualify history/models/numerics.
+The helper starts no child and writes nothing; it copies no book or model and replays no
+geometry. The caller uses the existing guardian/lifetime when used for a saved-data phase,
+without nested lock acquisition. Downstream scientific input/history/model qualification and
+current-image numerical/clock/lifetime admission remain necessary. No actual scientific input
+qualification is minted by these synthetic source tests.
+
+## Native image and current caller bindings
+
+A successful immutable BuildManifest retains its complete authored source snapshot as build
+provenance. RUN reuses the qualified artifact with its complete native compiled-source projection,
+workspace Cargo manifest/lock, authored crate/build inputs, rust-toolchain, Cargo configurations
+(including absence), dependency and tool file/version bindings. Pure Python/documentation/test
+changes do not require another native build or a refresh of the historical authored snapshot.
+BUILD and its finalization continue to verify the complete frozen build source.
+
+Each current RUN intent requires `caller_sources`, an exact FileRef array for the adopted
+`scripts/dev/research-lifecycle.py`, `scripts/dev/research-job.py`,
+`python/quoridor_training/cycle_process.py`, and `python/quoridor_training/snapshot.py` in its
+current maintained root. An analysis intent additionally binds `stream355.py`, `lifecycle355.py`,
+`io355.py`, `observations355.py`, `producer355.py`, and `strength355.py` under
+`python/quoridor_training/research355`. Analysis uses the pinned Python tool and `-B` plus that
+exact maintained stream entry. The parent checks current caller/import and native/science refs
+before entry and after direct return; it never runs tool version commands to refresh them.
+Current source acceptance is recorded at adoption; these are ordinary entry FileRefs, not another
+review/admission chain. Experiment/native schemas, scientific counts and numerical requirements
+are unchanged. Caller source bindings belong to the run intent, not the old BuildManifest.
+
+`generation_input_data` accepts only a canonical absolute SHA-bound `manifest.json` with no
+`INCOMPLETE` sibling. A retained `candidate.json` is never authoritative even if the marker has
+been removed. Valid data correspondence from a finalized FAILED manifest preserves the original
+primary and all authoritative outer/owed secondary errors through its origin reference; it does
+not change that run to PASS or mint numerical qualification.

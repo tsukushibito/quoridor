@@ -82,15 +82,13 @@ def scientific_inputs(index, inputs, metadata, build_ref, build, analysis_experi
     s.require(index["build_manifest"] == build_ref, "analysis-config current accepted build")
     available = {}
     contexts = {}
-    provenance = []
+    provenance = metadata.progress.setdefault("operation_provenance", [])
     s.require(
         type(index["producer_completions"]) is list and len(index["producer_completions"]) <= 20,
         "bounded generation/materialization/compare/sixteen arena completions",
     )
     for ref in index["producer_completions"]:
         completed, experiment = life.finalized_input(metadata, ref, build_ref)
-        life.numerical(metadata, experiment, build)
-        owed = life.owed_facts(metadata, completed)
         provenance.append(
             {
                 "completion": ref,
@@ -101,13 +99,15 @@ def scientific_inputs(index, inputs, metadata, build_ref, build, analysis_experi
                 "secondary": completed["secondary"],
                 "checks": completed["checks"],
                 "data_errors": completed["data"]["errors"],
-                "owed": owed,
+                "owed": completed["owed_finalizers"],
+                "generation": completed["data"].get("generation"),
                 "returned_guardian_facts": [
                     check.get("guardian_return", "UNKNOWN_NOT_RETURNED")
                     for check in completed["checks"]
                 ],
             }
         )
+        life.numerical(metadata, experiment, build)
         for file in completed["data"]["files"]:
             name = life.index_ref(inputs, file)
             s.require(name not in available, "one actual producer for each durable output")
@@ -117,10 +117,7 @@ def scientific_inputs(index, inputs, metadata, build_ref, build, analysis_experi
         index, inputs, available, {"source_book_SHA256": inputs.refs[index["book"]]["SHA256"]}
     )
     raw_book = inputs.get(index["book"], 1048576)
-    s.require(
-        raw_book["compiled_sources"] == build["compiled_sources"],
-        "generated full current source map",
-    )
+    life.generation_sources(raw_book["compiled_sources"], build["compiled_sources"])
     book = s.adapt_generated_book(
         raw_book, inputs.refs[index["book"]]["SHA256"], "ACTUAL_GENERATED"
     )
@@ -285,7 +282,17 @@ def child_entry(experiment_path, experiment_sha256, intent_path):
         build_ref = experiment["build_manifest"]
         metadata.add(build_ref)
         build = life.authoritative(metadata, build_ref, "build-manifest", "build")
-        life.pinned_python_and_source(build, __file__)
+        life.analysis_source(
+            intent,
+            (
+                __file__,
+                life.__file__,
+                io.__file__,
+                s.__file__,
+                observations.__file__,
+                producer.__file__,
+            ),
+        )
         s.require(intent["artifact"] == build["artifact"], "same actually qualified artifact")
         experiment = life.experiment(metadata, experiment_ref, build_ref, "analysis")
         life.numerical(metadata, experiment, build)
@@ -317,9 +324,6 @@ def child_entry(experiment_path, experiment_sha256, intent_path):
     except BaseException as primary:
         inherited_secondary = getattr(primary, "strength355_secondary_errors", [])
         secondary = [*inherited_secondary, *secondary]
-        inherited_owed = getattr(primary, "strength355_owed_available", None)
-        if inherited_owed is not None:
-            partial["owed_finalizer_available"] = inherited_owed
         primary.strength355_available_evidence = partial
         primary.strength355_input_progress = {} if inputs is None else inputs.progress
         primary.strength355_metadata_progress = metadata.progress

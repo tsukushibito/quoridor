@@ -72,6 +72,15 @@ class LifecycleTests(unittest.TestCase):
         self.spec = {
             "schema": "quoridor.research.lifecycle-intent.v1",
             "kind": "build",
+            "caller_sources": [
+                ref(ROOT / name)
+                for name in (
+                    "scripts/dev/research-lifecycle.py",
+                    "scripts/dev/research-job.py",
+                    "python/quoridor_training/cycle_process.py",
+                    "python/quoridor_training/snapshot.py",
+                )
+            ],
             "owner": str(self.root),
             "writer": "codex:fixture",
             "cwd": str(self.root),
@@ -200,7 +209,9 @@ class LifecycleTests(unittest.TestCase):
                 json.dumps(
                     {
                         "executable_sha256": ref(self.private)["sha256"],
-                        "compiled_sources": {"source": ref(self.source)["sha256"]},
+                        "compiled_sources": {
+                            k: r["sha256"] for k, r in self.source_info["compiled_sources"].items()
+                        },
                         "model_calls": 0,
                     }
                 ).encode()
@@ -1044,6 +1055,18 @@ class LifecycleTests(unittest.TestCase):
             lc.accepted_build(ref(Path(self.spec["output"]) / "manifest.json"))
 
     def generation_fixture(self, *, omitted=False):
+        # Production-shaped key domains; file contents/outputs remain synthetic NN0 fixtures.
+        self.source_info["compiled_sources"] = {
+            k: ref(self.source) for k in lc.RESEARCH_SOURCE_KEYS
+        }
+        self.spec["source_adoption"] = self.json(
+            "adoption",
+            {
+                "schema": "quoridor.research.source-adoption.v1",
+                "status": "ACCEPTED",
+                "source": self.source_info,
+            },
+        )
         c = self.build()
         m = self.finalize(Path(self.spec["output"]), self.job(c))
         build = ref(Path(self.spec["output"]) / "manifest.json")
@@ -1136,7 +1159,7 @@ class LifecycleTests(unittest.TestCase):
     def generation_stub(self, argv, log, deadline, **kwargs):
         # Synthetic metadata only: no native geometry/model/Search is executed.
         self.geometry_stub_calls += 1
-        sources = {"source": ref(self.source)["sha256"]}
+        sources = {k: ref(self.source)["sha256"] for k in lc.GENERATION_SOURCE_KEYS}
         start = {
             "request": self.request,
             "compiled_sources": sources,
@@ -1201,7 +1224,7 @@ class LifecycleTests(unittest.TestCase):
         self.assertEqual(c["data"]["generation"]["numerical_qualification"], None)
         self.assertEqual(
             c["data"]["generation"]["compiled_sources"],
-            c["checks"] and {"source": ref(self.source)["sha256"]},
+            {k: r["sha256"] for k, r in self.source_info["compiled_sources"].items()},
         )
         self.assertTrue((Path(self.spec["output"]) / "INCOMPLETE").exists())
         final = self.finalize(Path(self.spec["output"]), self.job(c))
@@ -1315,6 +1338,281 @@ class LifecycleTests(unittest.TestCase):
                 self.assertEqual(self.geometry_stub_calls, 0)
                 self.assertFalse(Path(self.spec["output"]).exists())
                 self.assertFalse(Path(self.spec["data_root"]).exists())
+
+    def test_generation_source_domains_actual35_projection_and_exact_refusals(self):
+        p = Path(
+            "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v3/operation-v3/manifest.json"
+        )
+        raw = p.read_bytes()
+        self.assertEqual(
+            lc.sha(raw), "714314cd13a8adeb900752f78ecdee5960d099c62d9490c7c5c948054be7ec31"
+        )
+        qualified = json.loads(raw)["compiled_sources"]
+        native = {k: qualified[k] for k in lc.GENERATION_SOURCE_KEYS}
+        self.assertEqual(len(native), 34)
+        self.assertEqual(len(qualified), 35)
+        lc.generation_source_correspondence(native, qualified)
+        for key in lc.GENERATION_SOURCE_KEYS:
+            with self.subTest(missing=key):
+                bad = dict(native)
+                del bad[key]
+                with self.assertRaises(lc.Refused):
+                    lc.generation_source_correspondence(bad, qualified)
+        bad = dict(native)
+        bad["core/research.rs"] = "0" * 64
+        with self.assertRaises(lc.Refused):
+            lc.generation_source_correspondence(bad, qualified)
+        for bad in [dict(qualified), {**native, "unknown/new.rs": "1" * 64}]:
+            with self.assertRaises(lc.Refused):
+                lc.generation_source_correspondence(bad, qualified)
+        bad = dict(qualified)
+        del bad["runner/sigma_qualification.rs"]
+        with self.assertRaises(lc.Refused):
+            lc.generation_source_correspondence(native, bad)
+        bad = {**qualified, "unknown/extra.rs": "1" * 64}
+        with self.assertRaises(lc.Refused):
+            lc.generation_source_correspondence(native, bad)
+        bad = dict(qualified)
+        bad["runner/sigma_qualification.rs"] = "NOT_A_HASH"
+        with self.assertRaises(lc.Refused):
+            lc.generation_source_correspondence(native, bad)
+        self.assertEqual(p.read_bytes(), raw)
+
+    def failed_generation_fixture(self):
+        self.generation_e = self.generation_fixture()
+        c = self.generation_execute()
+        c["status"] = "FAILED"
+        c["primary"] = {
+            "type": "Refused",
+            "message": "retained generation source-domain mismatch",
+            "notes": [],
+        }
+        c["data"]["status"] = "FAILED"
+        c["data"]["errors"] = [
+            {"stage": "generation_metadata", "message": "old exact35 comparison"}
+        ]
+        p = Path(self.spec["output"]) / "candidate.json"
+        p.write_text(json.dumps(c))
+        final = self.finalize(Path(self.spec["output"]), self.job(c, outcome="failed"))
+        self.assertEqual(final["status"], "FAILED")
+        return ref(Path(self.spec["output"]) / "manifest.json"), final
+
+    def test_generation_source_domains_failed_origin_valid_data_keeps_errors_and_no_qualification(
+        self,
+    ):
+        completion, final = self.failed_generation_fixture()
+        before = Path(completion["path"]).read_bytes()
+        calls = len(self.calls)
+        data = lc.generation_input_data(completion)
+        self.assertEqual(data["status"], "PASS")
+        self.assertEqual(data["origin_status"], "FAILED")
+        self.assertEqual(data["origin_primary"], final["primary"])
+        self.assertEqual(data["origin_secondary"], final["secondary"])
+        self.assertEqual(data["files"], final["data"]["files"])
+        self.assertIsNone(data["numerical_qualification"])
+        self.assertIsNone(data["generation"]["numerical_qualification"])
+        self.assertEqual(len(data["generation"]["compiled_sources"]), 35)
+        self.assertEqual(len(data["generation"]["native_compiled_sources"]), 34)
+        self.assertEqual(len(self.calls), calls)
+        self.assertEqual(Path(completion["path"]).read_bytes(), before)
+
+    def test_generation_source_domains_saved_origin_marker_missing_and_drift_refuse(self):
+        completion, final = self.failed_generation_fixture()
+        p = Path(completion["path"])
+        marker = p.with_name("INCOMPLETE")
+        marker.write_text("pending")
+        with self.assertRaises(lc.Refused):
+            lc.generation_input_data(completion)
+        marker.unlink()
+        for field, value in [("status", "UNKNOWN"), ("cleanup_complete", False)]:
+            bad = copy.deepcopy(final)
+            bad[field] = value
+            alternate = self.json("bad-completion", bad)
+            with self.assertRaises(lc.Refused):
+                lc.generation_input_data(alternate)
+        bad = copy.deepcopy(final)
+        bad["data"]["files"] = bad["data"]["files"][:-1]
+        with self.assertRaises(lc.Refused):
+            lc.generation_input_data(self.json("missing-ref-completion", bad))
+        book = Path(self.request["output"]) / "book.json"
+        book.write_bytes(book.read_bytes() + b" ")
+        with self.assertRaises(lc.Refused):
+            lc.generation_input_data(completion)
+        self.assertEqual(json.loads(p.read_bytes())["status"], "FAILED")
+
+    def test_generation_source_domains_raw_and_semantic_hashes_are_separate(self):
+        self.generation_e = self.generation_fixture()
+        self.generation_execute()
+        data = lc.collect_data(self.spec, self.generation_e)
+        self.assertEqual(data["status"], "PASS")
+        g = data["generation"]
+        self.assertNotEqual(g["book_sha256"], g["book_semantic_sha256"])
+        self.assertNotEqual(g["schedule_sha256"], g["schedule_semantic_sha256"])
+        self.assertEqual(g["schedule_semantic_sha256"], lc.GENERATION_SCHEDULE)
+        self.assertEqual(
+            g["generation_compiled_sources_sha256"], lc.canonical_sha(g["native_compiled_sources"])
+        )
+        p = Path(self.request["output"]) / "generation-result.json"
+        result = json.loads(p.read_bytes())
+        result["schedule_sha256"] = g["schedule_semantic_sha256"]
+        p.write_text(json.dumps(result))
+        data = lc.collect_data(self.spec, self.generation_e)
+        self.assertEqual(data["status"], "FAILED")
+        self.assertEqual(len(data["files"]), 4)
+
+    def test_generation_source_domains_saved_native_return_and_log_bound_refuse(self):
+        completion, final = self.failed_generation_fixture()
+        for field, value in [
+            ("exit_code", 1),
+            ("direct_child_reaped", False),
+            ("cleanup_complete", False),
+        ]:
+            with self.subTest(field=field):
+                bad = copy.deepcopy(final)
+                bad["checks"][0]["guardian_return"][field] = value
+                with self.assertRaises(lc.Refused):
+                    lc.generation_input_data(self.json("bad-return", bad))
+        bad = copy.deepcopy(final)
+        bad["checks"][0]["argv"][1] = "strength-arena"
+        with self.assertRaises(lc.Refused):
+            lc.generation_input_data(self.json("bad-caller", bad))
+        bad = copy.deepcopy(final)
+        bad["checks"][0]["full_log"]["bytes"] = lc.CONTROL_BYTES + 1
+        with self.assertRaises(lc.Refused):
+            lc.generation_input_data(self.json("oversized-log", bad))
+        self.assertEqual(lc.document(completion)["status"], "FAILED")
+
+    def current_caller_fixture(self):
+        caller = self.file("scripts/dev/research-lifecycle.py", b"current adopted caller v1")
+        for name in (
+            "scripts/dev/research-job.py",
+            "python/quoridor_training/cycle_process.py",
+            "python/quoridor_training/snapshot.py",
+        ):
+            self.file(name, b"current adopted helper")
+        self.source_info["files"].append(ref(caller))
+        self.generation_e = self.generation_fixture()
+        # The native image was built with v1; v2 is accepted separately before the run.
+        caller.write_bytes(b"current adopted caller v2")
+        self.spec["caller_sources"] = [
+            ref(self.root / p.relative_to(ROOT))
+            for p in map(lambda r: Path(r["path"]), self.spec["caller_sources"])
+        ]
+        return caller
+
+    def test_current_caller_python_change_reuses_native_and_freezes_current_refs(self):
+        caller = self.current_caller_fixture()
+        build_ref = self.generation_e["build_manifest"]
+        build_bytes = Path(build_ref["path"]).read_bytes()
+        count = len(self.calls)
+        with patch.object(lc, "ROOT", self.root):
+            e, manifest, refs = lc.experiment_check(self.spec)
+        self.assertEqual(e["phase"], "generation")
+        self.assertEqual(
+            manifest["compiled_sources"],
+            {k: ref(self.source)["sha256"] for k in lc.RESEARCH_SOURCE_KEYS},
+        )
+        self.assertEqual(len(self.calls), count)
+        self.assertEqual(Path(build_ref["path"]).read_bytes(), build_bytes)
+        self.assertIn(ref(caller), refs)
+        historical = next(r for r in manifest["source"]["files"] if r["path"] == str(caller))
+        self.assertNotIn(historical, refs)
+        with self.assertRaises(lc.Refused):
+            lc.source_check(manifest["source"])
+        caller.write_bytes(b"unfrozen caller v3")
+        with patch.object(lc, "ROOT", self.root), self.assertRaises(lc.Refused):
+            lc.experiment_check(self.spec)
+        with self.assertRaises(lc.Refused):
+            for r in refs:
+                lc.read_ref(r, max(lc.CONTROL_BYTES, r["bytes"]))
+        self.assertFalse(Path(self.spec["output"]).exists())
+        self.assertFalse(Path(self.spec["data_root"]).exists())
+
+    def test_current_caller_native_artifact_lock_tool_input_and_config_drift_refuse(self):
+        self.current_caller_fixture()
+        for p in (
+            self.source,
+            self.private,
+            Path(self.source_info["lock"]["path"]),
+            self.tool,
+            Path(self.generation_e["config"]["path"]),
+            Path(self.generation_e["inputs"][1]["path"]),
+        ):
+            with self.subTest(path=p.name):
+                before = p.read_bytes()
+                p.write_bytes(before + b"drift")
+                with patch.object(lc, "ROOT", self.root), self.assertRaises(lc.Refused):
+                    lc.experiment_check(self.spec)
+                p.write_bytes(before)
+        cfg = self.root / ".cargo/config.toml"
+        cfg.parent.mkdir()
+        cfg.write_text("unexpected Cargo settings")
+        with patch.object(lc, "ROOT", self.root), self.assertRaises(lc.Refused):
+            lc.experiment_check(self.spec)
+        self.assertFalse(Path(self.spec["output"]).exists())
+        self.assertFalse(Path(self.spec["data_root"]).exists())
+
+    def test_current_analysis_import_membership_and_interpreter_are_bound(self):
+        self.current_caller_fixture()
+        e = copy.deepcopy(self.generation_e)
+        e.update(phase="analysis", numerical_qualification=self.json("numerical", {}))
+        script = self.root / "python/quoridor_training/research355/stream355.py"
+        e["argv"] = [str(self.tool), "-B", str(script), "--experiment", "@EXPERIMENT@"]
+        for name in (
+            "stream355",
+            "lifecycle355",
+            "io355",
+            "observations355",
+            "producer355",
+            "strength355",
+        ):
+            p = self.file(
+                "python/quoridor_training/research355/" + name + ".py", b"current analysis module"
+            )
+            self.spec["caller_sources"].append(ref(p))
+        self.generation_rebind(e)
+        with patch.object(lc, "ROOT", self.root):
+            _, _, refs = lc.experiment_check(self.spec)
+            self.assertIn(ref(self.tool), refs)
+            self.assertIn(ref(script), refs)
+            missing = self.spec["caller_sources"].pop()
+            with self.assertRaises(lc.Refused):
+                lc.experiment_check(self.spec)
+            self.spec["caller_sources"].append(missing)
+            Path(missing["path"]).write_bytes(b"analysis drift")
+            with self.assertRaises(lc.Refused):
+                lc.experiment_check(self.spec)
+        self.assertFalse(Path(self.spec["output"]).exists())
+
+    def test_saved_generation_candidate_refuses_and_manifest_retains_outer_owed_errors(self):
+        self.generation_e = self.generation_fixture()
+        self.spec["finalizers"] = [
+            {"kind": "data", "path": str(self.root / "missing-owed.json"), "limit_B": 1024}
+        ]
+        c = self.generation_execute()
+        c["status"] = "FAILED"
+        c["primary"] = {"type": "Refused", "message": "original domain mismatch", "notes": []}
+        candidate = Path(self.spec["output"]) / "candidate.json"
+        candidate.write_text(json.dumps(c))
+        before = candidate.read_bytes()
+        final = self.finalize(Path(self.spec["output"]), self.job(c, outcome="failed"))
+        self.assertFalse(candidate.with_name("INCOMPLETE").exists())
+        self.assertEqual(candidate.read_bytes(), before)
+        self.assertTrue(final["cleanup_complete"])
+        self.assertTrue({"outer_job", "owed_finalizer"} <= {x["stage"] for x in final["secondary"]})
+        with self.assertRaises(lc.Refused):
+            lc.generation_input_data(ref(candidate))
+        manifest = ref(candidate.with_name("manifest.json"))
+        calls = len(self.calls)
+        data = lc.generation_input_data(manifest)
+        self.assertEqual(data["status"], "PASS")
+        self.assertEqual(data["origin_status"], "FAILED")
+        self.assertEqual(data["origin_primary"], final["primary"])
+        self.assertEqual(data["origin_secondary"], final["secondary"])
+        self.assertEqual(data["origin_completion"], manifest)
+        self.assertIsNone(data["numerical_qualification"])
+        self.assertEqual(len(self.calls), calls)
+        self.assertEqual(candidate.read_bytes(), before)
 
 
 if __name__ == "__main__":

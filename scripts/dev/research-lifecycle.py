@@ -383,15 +383,16 @@ def command(spec, row, directory, resources, executor=process.execute, *, ledger
     return record, capture.path
 
 
-def source_check(source):
+def source_check(source, *, native_only=False):
     require("workspace" in source, "adopted workspace witness required")
     require(
         len(source["commit"]) == 40 and all(c in "0123456789abcdef" for c in source["commit"]),
         "frozen source commit",
     )
-    for ref in source["files"]:
-        read_ref(ref, max(CONTROL_BYTES, ref["bytes"]))
-    if source["patch"] is not None:
+    if not native_only:
+        for ref in source["files"]:
+            read_ref(ref, max(CONTROL_BYTES, ref["bytes"]))
+    if not native_only and source["patch"] is not None:
         read_ref(source["patch"])
     if "workspace" in source:
         workspace = Path(source["workspace"])
@@ -418,6 +419,68 @@ def source_check(source):
             else:
                 require(item["file"]["path"] == item["path"], "Cargo config identity")
                 read_ref(item["file"])
+        if native_only:
+            for ref in native_source_refs(source):
+                read_ref(ref, max(CONTROL_BYTES, ref["bytes"]))
+
+
+def native_source_refs(source):
+    # Python/docs/test files in source.files remain immutable build provenance;
+    # current caller files have their own run-intent binding.
+    workspace = Path(source["workspace"])
+    refs = list(source["compiled_sources"].values()) + [source["manifest"], source["lock"]]
+    refs += [
+        r
+        for r in source["files"]
+        if Path(r["path"]).is_relative_to(workspace / "crates")
+        or Path(r["path"]) == workspace / "rust-toolchain.toml"
+    ]
+    refs += [x["file"] for x in source["cargo_configs"] if x["file"] is not None]
+    return refs
+
+
+def build_input_refs(manifest):
+    return [
+        manifest["artifact"],
+        *native_source_refs(manifest["source"]),
+        *manifest["dependency_refs"],
+        *(x["file"] for x in manifest["tools"].values()),
+    ]
+
+
+def caller_source_refs(spec, experiment):
+    paths = {
+        ROOT / "scripts/dev/research-lifecycle.py",
+        ROOT / "scripts/dev/research-job.py",
+        ROOT / "python/quoridor_training/cycle_process.py",
+        ROOT / "python/quoridor_training/snapshot.py",
+    }
+    if experiment["phase"] == "analysis":
+        paths |= {
+            ROOT / "python/quoridor_training/research355" / (name + ".py")
+            for name in (
+                "stream355",
+                "lifecycle355",
+                "io355",
+                "observations355",
+                "producer355",
+                "strength355",
+            )
+        }
+        require(
+            len(spec["argv"]) > 2
+            and spec["argv"][1] == "-B"
+            and spec["argv"][2] == str(ROOT / "python/quoridor_training/research355/stream355.py"),
+            "current maintained analysis entry",
+        )
+    refs = spec["caller_sources"]
+    require(
+        isinstance(refs, list)
+        and len(refs) == len(paths)
+        and {r["path"] for r in refs} == {str(p) for p in paths},
+        "exact current caller/import membership",
+    )
+    return refs
 
 
 def accepted_build(ref):
@@ -436,9 +499,20 @@ def accepted_build(ref):
         "affected test/lint/build/bindings required",
     )
     read_ref(manifest["artifact"], 32 * 1024 * 1024)
-    source_check(manifest["source"])
+    source_check(manifest["source"], native_only=True)
+    require(
+        manifest["compiled_sources"]
+        == {k: r["sha256"] for k, r in manifest["source"]["compiled_sources"].items()},
+        "qualified native source projection",
+    )
     for r in manifest["dependency_refs"]:
         read_ref(r, max(CONTROL_BYTES, r["bytes"]))
+    for tool in manifest["tools"].values():
+        require(
+            isinstance(tool["version"], str) and bool(tool["version"].strip()),
+            "qualified tool version",
+        )
+        read_ref(tool["file"], max(CONTROL_BYTES, tool["file"]["bytes"]))
     return manifest
 
 
@@ -533,7 +607,6 @@ def experiment_check(spec):
     experiment_phase_check(experiment)
     manifest = accepted_build(experiment["build_manifest"])
     require(manifest["artifact"] == spec["artifact"], "same actual executable")
-    source_check(manifest["source"])
     refs = [
         experiment["config"],
         *experiment["inputs"],
@@ -550,14 +623,7 @@ def experiment_check(spec):
             "dynamically loaded library version required",
         )
         refs.append(library["file"])
-    refs.extend(
-        [
-            experiment["build_manifest"],
-            manifest["artifact"],
-            *manifest["source"]["files"],
-            *manifest["dependency_refs"],
-        ]
-    )
+    refs.extend(caller_source_refs(spec, experiment))
     for ref in refs:
         read_ref(ref, max(CONTROL_BYTES, ref["bytes"]))
     if experiment["phase"] == "generation":
@@ -588,7 +654,7 @@ def experiment_check(spec):
         )
     for finalizer in spec["finalizers"]:
         owned(finalizer["path"], spec["owner"])
-    return experiment, manifest, refs
+    return experiment, manifest, [*refs, experiment["build_manifest"], *build_input_refs(manifest)]
 
 
 def build_check(spec):
@@ -738,9 +804,76 @@ def copy_artifact(src, dst):
     return bound(dst, 32 * 1024 * 1024)[0]
 
 
+GENERATION_SOURCE_KEYS = frozenset(
+    (
+        "Cargo.lock",
+        "ai/alphabeta.rs",
+        "ai/lib.rs",
+        "ai/sigma_mcts.rs",
+        "core/game.rs",
+        "core/lib.rs",
+        "core/position.rs",
+        "core/research.rs",
+        "data/lib.rs",
+        "inference/cuda.rs",
+        "inference/lib.rs",
+        "inference/tensorrt.rs",
+        "nnue/features.rs",
+        "nnue/lib.rs",
+        "nnue/quantized.rs",
+        "nnue/residual.rs",
+        "nnue/simd.rs",
+        "runner/Cargo.toml",
+        "runner/arena.rs",
+        "runner/arena_book.rs",
+        "runner/arena_clock.rs",
+        "runner/arena_manifest.rs",
+        "runner/arena_statistics.rs",
+        "runner/config.rs",
+        "runner/lib.rs",
+        "runner/main.rs",
+        "runner/native_input.rs",
+        "runner/nnue-diagnose.rs",
+        "runner/research_manifest.rs",
+        "runner/resources.rs",
+        "runner/runtime.rs",
+        "runner/sigma_clock.rs",
+        "runner/value_search_compare.rs",
+        "runner/value_search_strength.rs",
+    )
+)
+RESEARCH_SOURCE_KEYS = GENERATION_SOURCE_KEYS | {"runner/sigma_qualification.rs"}
+
+
+def generation_source_correspondence(native, qualified):
+    """Exact maintained arena34 projection of the qualified research35 map."""
+    require(
+        isinstance(native, dict) and set(native) == GENERATION_SOURCE_KEYS,
+        "generation exact arena34 source domain",
+    )
+    require(
+        isinstance(qualified, dict) and set(qualified) == RESEARCH_SOURCE_KEYS,
+        "qualified exact research35 source domain",
+    )
+    require(
+        all(
+            isinstance(h, str) and len(h) == 64 and all(c in "0123456789abcdef" for c in h)
+            for h in qualified.values()
+        ),
+        "qualified source hash shape",
+    )
+    require(
+        native == {key: qualified[key] for key in GENERATION_SOURCE_KEYS},
+        "generation shared source hash drift",
+    )
+
+
 def generation_evidence(experiment, values):
     """Metadata correspondence only; legal history/model qualification remains downstream."""
     build = document(experiment["build_manifest"])
+    start, book, schedule, result = [json.loads(values[n]) for n in GENERATION_FILES]
+    generation_source_correspondence(start["compiled_sources"], build["compiled_sources"])
+    require(start["compiled_sources"] == book["compiled_sources"], "generation native maps drift")
     evidence = {
         "schema": "quoridor.research.generation-evidence.v1",
         "phase": "generation",
@@ -751,16 +884,22 @@ def generation_evidence(experiment, values):
         "scientific_planned_slots": 512,
         "artifact": build["artifact"],
         "compiled_sources": build["compiled_sources"],
+        "compiled_sources_domain": "research-qualified35-v1",
+        "native_compiled_sources": start["compiled_sources"],
+        "native_compiled_sources_domain": "arena-generation34-v1",
+        "generation_compiled_sources_sha256": canonical_sha(start["compiled_sources"]),
+        "book_sha256": sha(values["book"]),
+        "book_semantic_sha256": canonical_sha(book),
+        "schedule_sha256": sha(values["schedule"]),
+        "schedule_semantic_sha256": canonical_sha(schedule),
         "config": experiment["config"],
         "inputs": experiment["inputs"],
         "schedule": experiment["schedule"],
         "rules": experiment["rules"],
         "limitation": "bound generation metadata; no numerical/model/history qualification",
     }
-    start, book, schedule, result = [json.loads(values[n]) for n in GENERATION_FILES]
     require(
         start["request"] == document(experiment["config"])
-        and start["compiled_sources"] == book["compiled_sources"] == build["compiled_sources"]
         and start["planned_families"] == 128
         and start["attempt_upper"] == 1024
         and start["transition_upper"] == 16384,
@@ -894,6 +1033,93 @@ def collect_data(spec, experiment):
             data["errors"].append({"stage": "scientific_journal", **error_fact(error)})
     if data["errors"]:
         data["status"] = "FAILED"
+    return data
+
+
+def generation_input_data(completion_ref):
+    """Recheck original saved generation files; never promote the originating run or qualify models."""
+    origin = Path(completion_ref["path"])
+    require(
+        origin.is_absolute() and origin.resolve() == origin and origin.name == "manifest.json",
+        "canonical authoritative manifest.json required",
+    )
+    completion = document(completion_ref)
+    require(
+        completion["schema"] == COMPLETION_SCHEMA
+        and completion["kind"] == "run"
+        and completion["status"] in {"PASS", "FAILED"}
+        and completion["cleanup_complete"] is True
+        and completion["remaining"] == []
+        and not Path(completion_ref["path"]).with_name("INCOMPLETE").exists(),
+        "authoritative stopped generation origin required",
+    )
+    spec = document(completion["intent"])
+    require(origin == Path(spec["output"]) / "manifest.json", "origin operation manifest identity")
+    experiment = document(completion["experiment"])
+    require(
+        spec["kind"] == "run"
+        and spec["experiment"] == completion["experiment"]
+        and experiment["phase"] == "generation"
+        and experiment["build_manifest"] == completion["build_manifest"],
+        "same bound generation intent/experiment/build",
+    )
+    experiment_phase_check(experiment)
+    generation_check(spec, experiment)
+    require(len(completion["checks"]) == 1, "single original generation command required")
+    check = completion["checks"][0]
+    expected_argv = [
+        a.replace("@EXPERIMENT@", completion["experiment"]["path"]).replace(
+            "@EXPERIMENT_SHA256@", completion["experiment"]["sha256"]
+        )
+        for a in experiment["argv"]
+    ]
+    require(
+        check["role"] == "run"
+        and check["argv"] == spec["argv"] == expected_argv
+        and check["capture_complete"] is True
+        and not check["secondary"],
+        "original generation return/caller/capture required",
+    )
+    settled(check["guardian_return"])
+    read_ref(check["full_log"], min(CONTROL_BYTES, spec["limits"]["log_B"]))
+    require(
+        check["guardian_return"]["log_bytes_seen"] == check["full_log"]["bytes"],
+        "original generation full log identity",
+    )
+    require(isinstance(experiment["dynamic_libraries"], list), "declared libraries required")
+    require(
+        all(
+            isinstance(x["version"], str) and x["version"].strip()
+            for x in experiment["dynamic_libraries"]
+        ),
+        "declared library versions required",
+    )
+    build = document(experiment["build_manifest"])
+    require(
+        build["schema"] == BUILD_SCHEMA
+        and build["status"] == "PASS"
+        and build["cleanup_complete"] is True
+        and build["remaining"] == []
+        and not Path(experiment["build_manifest"]["path"]).with_name("INCOMPLETE").exists()
+        and build["artifact"] == spec["artifact"],
+        "origin bound qualified build required",
+    )
+    require(
+        all(type(x["limit_B"]) is int and 0 < x["limit_B"] <= 4 * 1024**2 for x in spec["data"])
+        and sum(x["limit_B"] for x in spec["data"]) <= 4 * 1024**2,
+        "saved generation data bound",
+    )
+    data = collect_data(spec, experiment)
+    require(
+        len(data["files"]) == 4 and data["files"] == completion["data"]["files"],
+        "original four durable generation identities required",
+    )
+    data["origin_completion"] = completion_ref
+    data["origin_status"] = completion["status"]
+    data["origin_primary"] = completion["primary"]
+    data["origin_secondary"] = completion["secondary"]
+    data["numerical_qualification"] = None
+    # data.status describes correspondence only. The completion and original errors remain immutable.
     return data
 
 
@@ -1110,6 +1336,11 @@ def execute(
                         raise run_error
                 for ref in refs:
                     read_ref(ref, max(CONTROL_BYTES, ref["bytes"]))
+                if spec["kind"] == "run":
+                    for item in manifest["source"]["cargo_configs"]:
+                        if item["file"] is None:
+                            p = Path(item["path"])
+                            require(not p.exists() and not p.is_symlink(), "Cargo config appeared")
                 result["status"] = "PENDING_FINALIZATION"
             finally:
                 if created_TMP:
