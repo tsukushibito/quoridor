@@ -1105,11 +1105,41 @@ def generation_input_data(completion_ref):
         "origin bound qualified build required",
     )
     require(
-        all(type(x["limit_B"]) is int and 0 < x["limit_B"] <= 4 * 1024**2 for x in spec["data"])
-        and sum(x["limit_B"] for x in spec["data"]) <= 4 * 1024**2,
+        all(
+            type(x.get("limit_B")) is int and 0 < x["limit_B"] <= 4 * 1024**2 for x in spec["data"]
+        ),
         "saved generation data bound",
     )
-    data = collect_data(spec, experiment)
+    saved = completion["data"].get("files")
+    require(
+        isinstance(saved, list) and len(saved) == 4, "four saved generation descriptors required"
+    )
+    for item, ref in zip(spec["data"], saved, strict=True):
+        require(
+            isinstance(ref, dict)
+            and set(ref) == {"path", "sha256", "bytes", "mode"}
+            and ref["path"] == item["path"]
+            and type(ref["bytes"]) is int
+            and 0 < ref["bytes"] <= item["limit_B"]
+            and isinstance(ref["sha256"], str)
+            and len(ref["sha256"]) == 64
+            and all(c in "0123456789abcdef" for c in ref["sha256"])
+            and isinstance(ref["mode"], str)
+            and len(ref["mode"]) == 4
+            and ref["mode"][0] == "0"
+            and all(c in "01234567" for c in ref["mode"]),
+            "saved generation descriptor/individual bound",
+        )
+    require(sum(ref["bytes"] for ref in saved) <= 4 * 1024**2, "saved generation aggregate bound")
+    # Individual allowances need not sum to the actual aggregate payload budget.
+    # Bound current reads by the saved sizes, so drift cannot consume spare allowances.
+    collection_spec = {
+        **spec,
+        "data": [
+            {**item, "limit_B": ref["bytes"]} for item, ref in zip(spec["data"], saved, strict=True)
+        ],
+    }
+    data = collect_data(collection_spec, experiment)
     require(
         len(data["files"]) == 4 and data["files"] == completion["data"]["files"],
         "original four durable generation identities required",

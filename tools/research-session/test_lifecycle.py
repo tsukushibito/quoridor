@@ -1614,6 +1614,91 @@ class LifecycleTests(unittest.TestCase):
         self.assertEqual(len(self.calls), calls)
         self.assertEqual(candidate.read_bytes(), before)
 
+    def test_saved_generation_individual_allowances_and_actual_aggregate_bound(self):
+        self.generation_e = self.generation_fixture()
+        caps = [65536, 4194304, 65536, 65536]
+        for item, cap in zip(self.spec["data"], caps, strict=True):
+            item["limit_B"] = cap
+        self.spec["finalizers"] = [
+            {"kind": "data", "path": str(self.root / "missing-owed.json"), "limit_B": 1024}
+        ]
+        c = self.generation_execute()
+        c.update(
+            status="FAILED",
+            primary={"type": "Refused", "message": "original source-domain mismatch", "notes": []},
+        )
+        candidate = Path(self.spec["output"]) / "candidate.json"
+        candidate.write_text(json.dumps(c))
+        final = self.finalize(Path(self.spec["output"]), self.job(c, outcome="failed"))
+        path = candidate.with_name("manifest.json")
+        original = path.read_bytes()
+        intent = lc.document(final["intent"])
+        self.assertEqual([x["limit_B"] for x in intent["data"]], caps)
+        self.assertGreater(sum(caps), 4194304)
+        self.assertLess(sum(x["bytes"] for x in final["data"]["files"]), 4194304)
+        calls = len(self.calls)
+        data = lc.generation_input_data(ref(path))
+        self.assertEqual(data["status"], "PASS")
+        self.assertEqual(data["origin_status"], "FAILED")
+        self.assertEqual(data["origin_primary"], final["primary"])
+        self.assertEqual(data["origin_secondary"], final["secondary"])
+        self.assertTrue(
+            {"outer_job", "owed_finalizer"} <= {x["stage"] for x in data["origin_secondary"]}
+        )
+        self.assertIsNone(data["numerical_qualification"])
+        self.assertEqual(data["files"], final["data"]["files"])
+        self.assertEqual(path.read_bytes(), original)
+
+        def refuses_before_collection(bad):
+            path.write_text(json.dumps(bad))
+            with (
+                patch.object(
+                    lc,
+                    "collect_data",
+                    side_effect=AssertionError("payload collection must not begin"),
+                ),
+                self.assertRaises(lc.Refused),
+            ):
+                lc.generation_input_data(ref(path))
+            path.write_bytes(original)
+
+        bad = copy.deepcopy(final)
+        bad["data"]["files"][1]["bytes"] = 4194304
+        refuses_before_collection(bad)  # individually valid, actual aggregate exceeds4MiB
+        for value in (True, -1, 4194305):
+            with self.subTest(saved_bytes=value):
+                bad = copy.deepcopy(final)
+                bad["data"]["files"][1]["bytes"] = value
+                refuses_before_collection(bad)
+        for field, value in (("sha256", "not-a-hash"), ("mode", "invalid")):
+            bad = copy.deepcopy(final)
+            bad["data"]["files"][1][field] = value
+            refuses_before_collection(bad)
+        bad = copy.deepcopy(final)
+        del bad["data"]["files"][1]["bytes"]
+        refuses_before_collection(bad)
+        bad = copy.deepcopy(final)
+        bad["data"]["files"].pop()
+        refuses_before_collection(bad)
+        for value in (True, -1, 4194305, 1):
+            with self.subTest(individual_allowance=value):
+                bad_intent = copy.deepcopy(intent)
+                bad_intent["data"][1]["limit_B"] = value
+                bad = copy.deepcopy(final)
+                bad["intent"] = self.json("bad-individual-intent", bad_intent)
+                refuses_before_collection(bad)
+        # Current growth must refuse within the saved-size read bound, even though
+        # the original per-file allowance would have allowed the larger bytes.
+        book = Path(self.request["output"]) / "book.json"
+        before = book.read_bytes()
+        book.write_bytes(before + b" ")
+        with self.assertRaises(lc.Refused):
+            lc.generation_input_data(ref(path))
+        book.write_bytes(before)
+        self.assertEqual(len(self.calls), calls)
+        self.assertEqual(path.read_bytes(), original)
+        self.assertEqual(lc.document(final["intent"]), intent)
+
 
 if __name__ == "__main__":
     unittest.main()
