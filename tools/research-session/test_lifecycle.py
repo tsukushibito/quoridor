@@ -1043,6 +1043,279 @@ class LifecycleTests(unittest.TestCase):
         with self.assertRaises(lc.Refused):
             lc.accepted_build(ref(Path(self.spec["output"]) / "manifest.json"))
 
+    def generation_fixture(self, *, omitted=False):
+        c = self.build()
+        m = self.finalize(Path(self.spec["output"]), self.job(c))
+        build = ref(Path(self.spec["output"]) / "manifest.json")
+        plan = ref(
+            Path(
+                "/workspaces/quoridor/research-data/ai-sigma/value-search-strength355/plan-v1.json"
+            )
+        )
+        prefixes = [
+            [],
+            [13, 67],
+            [3, 77, 152, 206],
+            [3, 75, 196, 182, 187, 66],
+            [95, 175, 13, 107, 198, 149, 116, 90],
+            [3, 208, 4, 140, 5, 75, 119, 148, 95, 182],
+            [3, 67, 4, 151, 192, 199, 141, 183, 179, 68, 105, 82],
+            [112, 115, 3, 75, 12, 83, 96, 145, 157, 66, 13, 136, 4, 67],
+        ]
+        old = self.json("generation-OPEN8", prefixes)
+        schedule = []
+        for group in range(8):
+            for order in range(2):
+                for family in range(group * 16, group * 16 + 16):
+                    for color in range(2):
+                        schedule.append(
+                            {
+                                "slot": len(schedule),
+                                "batch": 2 * group + order,
+                                "matchup": (group + order) % 2,
+                                "family_id": family,
+                                "candidate_color": (family + group + color) % 2,
+                                "local_game": 2 * (family % 16) + color,
+                            }
+                        )
+        self.schedule = schedule
+        self.request = {
+            "plan": {k: plan[k] for k in ("path", "sha256")},
+            "old_prefixes": {k: old[k] for k in ("path", "sha256")},
+            "output": str(self.root / "generation-data"),
+        }
+        e = {
+            "schema": lc.EXPERIMENT_SCHEMA,
+            "phase": "generation",
+            "build_manifest": build,
+            "config": self.json("generation-request", self.request),
+            "inputs": [plan, old],
+            "models": [],
+            "dynamic_libraries": [],
+            "schedule": self.json("generation-schedule", schedule),
+            "numerical_qualification": None,
+            "canonical_plan_sha256": lc.GENERATION_PLAN,
+            "rules": "research-standard-2p-threefold-goal-first-v1",
+            "distance_units": "wall-distance/80",
+            "value_perspective": "side-to-move",
+            "planned_slots": 0,
+            "batch": None,
+            "argv": [
+                str(self.private),
+                "strength-book",
+                "--experiment",
+                "@EXPERIMENT@",
+                "--experiment-sha256",
+                "@EXPERIMENT_SHA256@",
+            ],
+        }
+        if omitted:
+            del e["numerical_qualification"]
+        self.spec.update(
+            kind="run",
+            output=str(self.root / "generation-operation"),
+            artifact=m["artifact"],
+            data_root=self.request["output"],
+            data=[
+                {"name": n, "path": str(Path(self.request["output"]) / f), "limit_B": 65536}
+                for n, f in lc.GENERATION_FILES.items()
+            ],
+        )
+        self.generation_rebind(e)
+        return e
+
+    def generation_rebind(self, e):
+        self.spec["experiment"] = self.json("generation-experiment", e)
+        self.spec["argv"] = [
+            a.replace("@EXPERIMENT@", self.spec["experiment"]["path"]).replace(
+                "@EXPERIMENT_SHA256@", self.spec["experiment"]["sha256"]
+            )
+            for a in e["argv"]
+        ]
+
+    def generation_stub(self, argv, log, deadline, **kwargs):
+        # Synthetic metadata only: no native geometry/model/Search is executed.
+        self.geometry_stub_calls += 1
+        sources = {"source": ref(self.source)["sha256"]}
+        start = {
+            "request": self.request,
+            "compiled_sources": sources,
+            "planned_families": 128,
+            "attempt_upper": 1024,
+            "transition_upper": 16384,
+            "models_loaded": 0,
+            "search_calls": 0,
+            "games_started": 0,
+        }
+        book = {
+            "schema": "quoridor.value-search-strength.book.v1",
+            "plan_sha256": lc.GENERATION_PLAN,
+            "old_open8_sha256": self.generation_e["inputs"][1]["sha256"],
+            "old_open8_prefixes": lc.document(self.generation_e["inputs"][1]),
+            "rules": self.generation_e["rules"],
+            "compiled_sources": sources,
+            "complete": True,
+            "attempted": 128,
+            "transitions": 512,
+            "attempts": [{} for _ in range(128)],
+            "families": [{"family_id": f} for f in range(128)],
+        }
+        result = {
+            "schema": book["schema"],
+            "complete": True,
+            "families": 128,
+            "attempted": 128,
+            "transitions": 512,
+            "book_sha256": lc.sha(json.dumps(book, separators=(",", ":")).encode()),
+            "schedule_sha256": lc.sha(json.dumps(self.schedule, separators=(",", ":")).encode()),
+            "models_loaded": 0,
+            "search_calls": 0,
+            "games_started": 0,
+        }
+        for name, value in zip(
+            lc.GENERATION_FILES, (start, book, self.schedule, result), strict=True
+        ):
+            self.file(
+                "generation-data/" + lc.GENERATION_FILES[name],
+                json.dumps(value, separators=(",", ":")).encode(),
+            )
+        return self.executor(argv, log, deadline, **kwargs)
+
+    def generation_execute(self):
+        self.geometry_stub_calls = 0
+        return lc.execute(
+            self.intent(),
+            executor=self.generation_stub,
+            guard=lambda _: None,
+            lock=nullcontext,
+            resource_factory=NoResources,
+        )
+
+    def test_generation_bootstrap_null_enters_only_stub_and_normal_finalization(self):
+        self.generation_e = self.generation_fixture()
+        # Declared library metadata is preserved and verified even without a model.
+        self.generation_e["dynamic_libraries"] = [{"file": ref(self.tool), "version": "fixture1"}]
+        self.generation_rebind(self.generation_e)
+        c = self.generation_execute()
+        self.assertEqual(self.geometry_stub_calls, 1)
+        self.assertEqual(c["data"]["generation"]["numerical_qualification"], None)
+        self.assertEqual(
+            c["data"]["generation"]["compiled_sources"],
+            c["checks"] and {"source": ref(self.source)["sha256"]},
+        )
+        self.assertTrue((Path(self.spec["output"]) / "INCOMPLETE").exists())
+        final = self.finalize(Path(self.spec["output"]), self.job(c))
+        self.assertEqual(final["status"], "PASS")
+        self.assertEqual(final["planned_slots"], 0)
+        self.assertEqual(final["data"]["generation"]["scientific_planned_slots"], 512)
+        self.assertNotIn("numerical_qualification", final)
+
+    def test_generation_bootstrap_omitted_and_finalizer_failure_stays_failed(self):
+        self.generation_e = self.generation_fixture(omitted=True)
+        self.spec["finalizers"] = [
+            {"kind": "data", "path": str(self.root / "missing-finalizer.json"), "limit_B": 1024}
+        ]
+        c = self.generation_execute()
+        self.assertEqual(self.geometry_stub_calls, 1)
+        final = self.finalize(Path(self.spec["output"]), self.job(c))
+        self.assertEqual(final["status"], "FAILED")
+        self.assertEqual(final["data"]["generation"]["numerical_qualification"], None)
+        self.assertTrue(final["secondary"])
+
+    def test_generation_bootstrap_missing_numerical_refuses_all_other_phases_before_build_io(self):
+        e = self.generation_fixture()
+        for phase in ("materialize", "compare", "arena", "analysis", "unknown"):
+            for omitted in (False, True):
+                with self.subTest(phase=phase, omitted=omitted):
+                    bad = copy.deepcopy(e)
+                    bad["phase"] = phase
+                    if omitted:
+                        bad.pop("numerical_qualification")
+                    self.generation_rebind(bad)
+                    count = len(self.calls)
+                    with patch.object(
+                        lc, "accepted_build", side_effect=AssertionError("build must not open")
+                    ):
+                        with self.assertRaises(lc.Refused):
+                            self.generation_execute()
+                    self.assertEqual(len(self.calls), count)
+                    self.assertFalse(Path(self.spec["output"]).exists())
+
+    def test_generation_bootstrap_escalation_and_identity_drift_refuse_before_stub(self):
+        e = self.generation_fixture()
+        changes = [
+            lambda x: x.update(models=[{"descriptor": {}, "weights": {}}]),
+            lambda x: x.update(planned_slots=512),
+            lambda x: x.update(batch=0),
+            lambda x: x["argv"].__setitem__(1, "strength-arena"),
+            lambda x: x.update(numerical_qualification={}),
+            lambda x: x.update(dynamic_libraries=None),
+            lambda x: x.update(inputs=list(reversed(x["inputs"]))),
+            lambda x: x.update(canonical_plan_sha256="0" * 64),
+            lambda x: x["build_manifest"].update(sha256="0" * 64),
+            lambda x: x["config"].update(sha256="0" * 64),
+            lambda x: x["schedule"].update(sha256="0" * 64),
+            lambda x: x["dynamic_libraries"].append({"file": ref(self.tool), "version": " "}),
+        ]
+        for change in changes:
+            with self.subTest(change=changes.index(change)):
+                bad = copy.deepcopy(e)
+                change(bad)
+                self.generation_rebind(bad)
+                count = len(self.calls)
+                with self.assertRaises((lc.Refused, KeyError)):
+                    self.generation_execute()
+                self.assertEqual(self.geometry_stub_calls, 0)
+                self.assertEqual(len(self.calls), count)
+                self.assertFalse(Path(self.spec["output"]).exists())
+        self.generation_rebind(e)
+        self.spec["artifact"] = {**self.spec["artifact"], "sha256": "0" * 64}
+        with self.assertRaises(lc.Refused):
+            self.generation_execute()
+        self.assertEqual(self.geometry_stub_calls, 0)
+
+    def test_generation_bootstrap_partial_native_metadata_retains_files_without_pass(self):
+        self.generation_e = self.generation_fixture()
+        self.generation_execute()
+        p = Path(self.request["output"]) / "generation-result.json"
+        value = json.loads(p.read_bytes())
+        value["search_calls"] = 1
+        p.write_text(json.dumps(value))
+        data = lc.collect_data(self.spec, self.generation_e)
+        self.assertEqual(data["status"], "FAILED")
+        self.assertEqual(len(data["files"]), 4)
+        self.assertEqual(data["generation"]["numerical_qualification"], None)
+        self.assertTrue(data["errors"])
+
+    def test_generation_bootstrap_rebound_wrong_inputs_and_missing_build_refuse(self):
+        e = self.generation_fixture()
+        missing = copy.deepcopy(e)
+        missing["build_manifest"]["path"] = str(self.root / "missing-build.json")
+        self.generation_rebind(missing)
+        with self.assertRaises(FileNotFoundError):
+            self.generation_execute()
+        self.assertEqual(self.geometry_stub_calls, 0)
+        for field in ("plan", "old_prefixes", "schedule", "output"):
+            with self.subTest(field=field):
+                bad = copy.deepcopy(e)
+                request = copy.deepcopy(self.request)
+                if field == "schedule":
+                    bad["schedule"] = self.json("wrong-schedule", list(reversed(self.schedule)))
+                elif field == "output":
+                    request["output"] = str(self.root / "uncharged-output")
+                else:
+                    index = 0 if field == "plan" else 1
+                    full = self.json("wrong-" + field, [] if index == 0 else [[1]])
+                    bad["inputs"][index] = full
+                    request[field] = {k: full[k] for k in ("path", "sha256")}
+                bad["config"] = self.json("rebound-request", request)
+                self.generation_rebind(bad)
+                with self.assertRaises(lc.Refused):
+                    self.generation_execute()
+                self.assertEqual(self.geometry_stub_calls, 0)
+                self.assertFalse(Path(self.spec["output"]).exists())
+                self.assertFalse(Path(self.spec["data_root"]).exists())
+
 
 if __name__ == "__main__":
     unittest.main()

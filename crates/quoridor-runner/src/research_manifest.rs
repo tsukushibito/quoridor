@@ -95,7 +95,8 @@ pub struct Experiment {
     pub models: Vec<ModelRef>,
     pub dynamic_libraries: Vec<LibraryRef>,
     pub schedule: FileRef,
-    pub numerical_qualification: FileRef,
+    #[serde(default)]
+    pub numerical_qualification: Option<FileRef>,
     pub canonical_plan_sha256: String,
     pub rules: String,
     pub distance_units: String,
@@ -136,11 +137,56 @@ fn build_status(build: &Value) -> bool {
             })
         })
 }
+/// Generation is a model-free bootstrap, never a numerical qualification.
+fn phase_shape(e: &Experiment) -> bool {
+    match e.phase.as_str() {
+        "generation" => {
+            e.numerical_qualification.is_none()
+                && e.models.is_empty()
+                && e.planned_slots == 0
+                && e.batch.is_none()
+                && e.argv.len() == 6
+                && e.argv[1..]
+                    == [
+                        "strength-book",
+                        "--experiment",
+                        "@EXPERIMENT@",
+                        "--experiment-sha256",
+                        "@EXPERIMENT_SHA256@",
+                    ]
+        }
+        "materialize" | "compare" | "arena" | "analysis" => e.numerical_qualification.is_some(),
+        _ => false,
+    }
+}
+fn generation_inputs(e: &Experiment) -> Result<()> {
+    let request: crate::value_search_strength::GenerationRequest = e.config.read()?;
+    if e.inputs.len() != 2
+        || request.plan.sha256 != e.canonical_plan_sha256
+        || e.inputs[0].path != request.plan.path
+        || e.inputs[0].sha256 != request.plan.sha256
+        || e.inputs[1].path != request.old_prefixes.path
+        || e.inputs[1].sha256 != request.old_prefixes.sha256
+        || !request.output.is_absolute()
+    {
+        return Err("research generation exact plan/OPEN8 inputs required".into());
+    }
+    let _: Value = e.inputs[0].read()?;
+    let prefixes: Vec<Vec<u16>> = e.inputs[1].read()?;
+    let schedule: Value = e.schedule.read()?;
+    if arena::json_digest(&prefixes)? != crate::value_search_strength::OLD_PREFIX_SHA256
+        || schedule != serde_json::to_value(crate::value_search_strength::schedule())?
+    {
+        return Err("research generation fixed OPEN8/schedule required".into());
+    }
+    Ok(())
+}
 /// Validate all entry identities before resources/output/model factory. No recursive review controls.
 pub fn load(bound: &BoundControl, phase: &str) -> Result<(Experiment, Value)> {
     let e: Experiment = bound.read()?;
     if e.schema != "quoridor.research.experiment.v1"
         || e.phase != phase
+        || !phase_shape(&e)
         || e.canonical_plan_sha256 != crate::value_search_strength::PLAN_SHA256
         || e.rules != "research-standard-2p-threefold-goal-first-v1"
         || e.distance_units != "wall-distance/80"
@@ -201,7 +247,15 @@ pub fn load(bound: &BoundControl, phase: &str) -> Result<(Experiment, Value)> {
         }
         library.file.verify()?;
     }
-    let q: Value = e.numerical_qualification.read()?;
+    if phase == "generation" {
+        generation_inputs(&e)?;
+        return Ok((e, Value::Null));
+    }
+    let q: Value = e
+        .numerical_qualification
+        .as_ref()
+        .ok_or("research numerical qualification required")?
+        .read()?;
     if q["schema"] != "quoridor.research.numerical-qualification.v1"
         || q["status"] != "PASS"
         || q["phase"] != phase
@@ -262,5 +316,55 @@ mod tests {
             mode: "0600".into(),
         };
         assert!(r.verify().is_err());
+    }
+    fn generation_fixture() -> Experiment {
+        let r = json!({"path":"/bound/control","sha256":"0".repeat(64),"bytes":1,"mode":"0644"});
+        serde_json::from_value(json!({"schema":"quoridor.research.experiment.v1",
+            "phase":"generation","build_manifest":r,"config":r,"inputs":[],"models":[],
+            "dynamic_libraries":[],"schedule":r,"canonical_plan_sha256":"0".repeat(64),
+            "rules":"research-standard-2p-threefold-goal-first-v1","distance_units":"wall-distance/80",
+            "value_perspective":"side-to-move","planned_slots":0,"batch":null,
+            "argv":["/bound/runner","strength-book","--experiment","@EXPERIMENT@",
+                    "--experiment-sha256","@EXPERIMENT_SHA256@"]})).unwrap()
+    }
+    #[test]
+    fn generation_null_and_omitted_are_not_numerical_pass() {
+        let e = generation_fixture();
+        assert!(phase_shape(&e));
+        let mut value = serde_json::to_value(&e).unwrap();
+        assert!(value["numerical_qualification"].is_null());
+        value
+            .as_object_mut()
+            .unwrap()
+            .remove("numerical_qualification");
+        assert!(phase_shape(&serde_json::from_value(value).unwrap()));
+    }
+    #[test]
+    fn generation_option_cannot_escalate_phase_models_or_caller() {
+        let e = generation_fixture();
+        for phase in ["materialize", "compare", "arena", "analysis", "unknown"] {
+            let mut other = e.clone();
+            other.phase = phase.into();
+            assert!(!phase_shape(&other));
+        }
+        let mut other = e.clone();
+        other.argv[1] = "strength-arena".into();
+        assert!(!phase_shape(&other));
+        other = e.clone();
+        other.planned_slots = 512;
+        assert!(!phase_shape(&other));
+        other = e.clone();
+        other.batch = Some(0);
+        assert!(!phase_shape(&other));
+        other = e.clone();
+        other.numerical_qualification = Some(e.config.clone());
+        assert!(!phase_shape(&other));
+        other = e.clone();
+        other.models.push(ModelRef {
+            descriptor: e.config.clone(),
+            weights: e.config.clone(),
+            evaluator_sha256: "0".repeat(64),
+        });
+        assert!(!phase_shape(&other));
     }
 }

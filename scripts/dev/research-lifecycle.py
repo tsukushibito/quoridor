@@ -442,10 +442,95 @@ def accepted_build(ref):
     return manifest
 
 
+GENERATION_PLAN = "b3e41602eeed250d120444cf65783012e87f8b5f860bef2862c7aac5fd9c24b2"
+GENERATION_OPEN8 = "be50f486ccfdef3ae1c1bddde33d8369398a19c2a6ccd3d3324b64863f322dbc"
+GENERATION_SCHEDULE = "9bfb6135506f8d237f92d12d75de5e9131faaf5c8693f12f91f6a1698a487e1e"
+GENERATION_FILES = {
+    "start": "generation-start.json",
+    "book": "book.json",
+    "schedule": "schedule.json",
+    "result": "generation-result.json",
+}
+
+
+def canonical_sha(value):
+    return sha(json.dumps(value, sort_keys=True, separators=(",", ":")).encode())
+
+
+def experiment_phase_check(experiment):
+    phase = experiment["phase"]
+    require(phase in {"generation", "materialize", "compare", "arena", "analysis"}, "phase")
+    if phase != "generation":
+        require(
+            isinstance(experiment.get("numerical_qualification"), dict),
+            "non-generation numerical qualification required",
+        )
+        return
+    require(
+        experiment.get("numerical_qualification") is None
+        and experiment["models"] == []
+        and type(experiment["planned_slots"]) is int
+        and experiment["planned_slots"] == 0
+        and experiment.get("batch") is None,
+        "generation-only model-free non-game bootstrap",
+    )
+    require(
+        len(experiment["argv"]) == 6
+        and experiment["argv"][1:]
+        == [
+            "strength-book",
+            "--experiment",
+            "@EXPERIMENT@",
+            "--experiment-sha256",
+            "@EXPERIMENT_SHA256@",
+        ],
+        "generation exact strength-book argv",
+    )
+    require(
+        experiment["canonical_plan_sha256"] == GENERATION_PLAN
+        and experiment["rules"] == "research-standard-2p-threefold-goal-first-v1"
+        and experiment["distance_units"] == "wall-distance/80"
+        and experiment["value_perspective"] == "side-to-move",
+        "generation scientific identity",
+    )
+
+
+def generation_check(spec, experiment):
+    request = document(experiment["config"])
+    require(set(request) == {"plan", "old_prefixes", "output"}, "generation request shape")
+    require(request["output"] == spec["data_root"], "generation owned output binding")
+    require(len(experiment["inputs"]) == 2, "generation exact two inputs")
+    for field, full in zip(("plan", "old_prefixes"), experiment["inputs"], strict=True):
+        require(
+            request[field] == {k: full[k] for k in ("path", "sha256")},
+            "generation exact plan/OPEN8 references",
+        )
+    require(experiment["inputs"][0]["sha256"] == GENERATION_PLAN, "generation fixed plan")
+    document(experiment["inputs"][0])
+    require(
+        canonical_sha(document(experiment["inputs"][1])) == GENERATION_OPEN8,
+        "generation fixed OPEN8",
+    )
+    require(
+        canonical_sha(document(experiment["schedule"])) == GENERATION_SCHEDULE,
+        "generation fixed512 schedule",
+    )
+    require(
+        {r["name"]: r["path"] for r in spec["data"]}
+        == {
+            name: str(Path(spec["data_root"]) / filename)
+            for name, filename in GENERATION_FILES.items()
+        }
+        and len(spec["data"]) == 4,
+        "generation four durable outputs",
+    )
+
+
 def experiment_check(spec):
     charged_roots(spec)
     experiment = document(spec["experiment"])
     require(experiment["schema"] == EXPERIMENT_SCHEMA, "experiment schema")
+    experiment_phase_check(experiment)
     manifest = accepted_build(experiment["build_manifest"])
     require(manifest["artifact"] == spec["artifact"], "same actual executable")
     source_check(manifest["source"])
@@ -453,12 +538,17 @@ def experiment_check(spec):
         experiment["config"],
         *experiment["inputs"],
         experiment["schedule"],
-        experiment["numerical_qualification"],
     ]
+    if experiment.get("numerical_qualification") is not None:
+        refs.append(experiment["numerical_qualification"])
+    require(isinstance(experiment["dynamic_libraries"], list), "declared library array required")
     for model in experiment["models"]:
         refs.extend([model["descriptor"], model["weights"]])
     for library in experiment["dynamic_libraries"]:
-        require(bool(library["version"]), "dynamically loaded library version required")
+        require(
+            isinstance(library["version"], str) and bool(library["version"].strip()),
+            "dynamically loaded library version required",
+        )
         refs.append(library["file"])
     refs.extend(
         [
@@ -470,6 +560,8 @@ def experiment_check(spec):
     )
     for ref in refs:
         read_ref(ref, max(CONTROL_BYTES, ref["bytes"]))
+    if experiment["phase"] == "generation":
+        generation_check(spec, experiment)
     require(experiment["planned_slots"] in (0, 512), "planned512 or non-game stage")
     executable = manifest["artifact"]["path"]
     if experiment["phase"] == "analysis":
@@ -646,6 +738,67 @@ def copy_artifact(src, dst):
     return bound(dst, 32 * 1024 * 1024)[0]
 
 
+def generation_evidence(experiment, values):
+    """Metadata correspondence only; legal history/model qualification remains downstream."""
+    build = document(experiment["build_manifest"])
+    evidence = {
+        "schema": "quoridor.research.generation-evidence.v1",
+        "phase": "generation",
+        "numerical_qualification": None,
+        "models_loaded": 0,
+        "search_calls": 0,
+        "games_started": 0,
+        "scientific_planned_slots": 512,
+        "artifact": build["artifact"],
+        "compiled_sources": build["compiled_sources"],
+        "config": experiment["config"],
+        "inputs": experiment["inputs"],
+        "schedule": experiment["schedule"],
+        "rules": experiment["rules"],
+        "limitation": "bound generation metadata; no numerical/model/history qualification",
+    }
+    start, book, schedule, result = [json.loads(values[n]) for n in GENERATION_FILES]
+    require(
+        start["request"] == document(experiment["config"])
+        and start["compiled_sources"] == book["compiled_sources"] == build["compiled_sources"]
+        and start["planned_families"] == 128
+        and start["attempt_upper"] == 1024
+        and start["transition_upper"] == 16384,
+        "generation start/source correspondence",
+    )
+    require(
+        all(
+            row[key] == 0
+            for row in (start, result)
+            for key in ("models_loaded", "search_calls", "games_started")
+        ),
+        "generation zero model/Search/game calls",
+    )
+    require(
+        book["schema"] == result["schema"] == "quoridor.value-search-strength.book.v1"
+        and book["complete"] is True
+        and result["complete"] is True
+        and len(book["families"]) == result["families"] == 128
+        and [f["family_id"] for f in book["families"]] == list(range(128))
+        and book["plan_sha256"] == experiment["canonical_plan_sha256"]
+        and book["rules"] == experiment["rules"]
+        and book["old_open8_sha256"] == experiment["inputs"][1]["sha256"]
+        and book["old_open8_prefixes"] == document(experiment["inputs"][1])
+        and book["attempted"] == result["attempted"] == len(book["attempts"])
+        and 128 <= book["attempted"] <= 1024
+        and book["transitions"] == result["transitions"]
+        and 0 <= book["transitions"] <= 16384,
+        "generation complete fixed128 metadata",
+    )
+    require(
+        schedule == document(experiment["schedule"])
+        and result["book_sha256"] == sha(values["book"])
+        and result["schedule_sha256"] == sha(values["schedule"]),
+        "generation book/schedule/result correspondence",
+    )
+    return evidence
+
+
 def collect_data(spec, experiment):
     """Preserve actual durable files and partial facts; never substitute a console tail."""
     data = {
@@ -667,6 +820,18 @@ def collect_data(spec, experiment):
             values[item["name"]] = raw
         except BaseException as error:
             data["errors"].append({"stage": item["name"], **error_fact(error)})
+    if experiment.get("phase") == "generation":
+        data["generation"] = {
+            "schema": "quoridor.research.generation-evidence.v1",
+            "phase": "generation",
+            "numerical_qualification": None,
+            "scientific_planned_slots": 512,
+        }
+        try:
+            data["generation"] = generation_evidence(experiment, values)
+            data["generation"]["experiment"] = spec["experiment"]
+        except BaseException as error:
+            data["errors"].append({"stage": "generation_metadata", **error_fact(error)})
     if experiment["planned_slots"] == 512:
         try:
             schedule = document(experiment["schedule"])

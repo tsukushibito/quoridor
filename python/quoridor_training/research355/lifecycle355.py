@@ -273,7 +273,7 @@ def models(experiment):
     if phase == "arena":
         batch = s.integer(experiment["batch"], 0, 15)
         expected = [MODELS[(batch // 2 + batch % 2) % 2]]
-    elif phase == "generation" and rows == []:
+    elif phase == "generation":
         expected = []
     else:
         expected = MODELS
@@ -320,7 +320,10 @@ def experiment(inputs, ref, build_ref, phase):
     for row in value["inputs"]:
         descriptor(row)
     models(value)
-    descriptor(value["numerical_qualification"])
+    if phase == "generation":
+        generation_conditions(inputs, value)
+    else:
+        descriptor(value["numerical_qualification"])
     s.require(type(value["dynamic_libraries"]) is list, "explicit actual dynamic dependencies")
     for library in value["dynamic_libraries"]:
         descriptor(library["file"])
@@ -328,6 +331,74 @@ def experiment(inputs, ref, build_ref, phase):
             type(library["version"]) is str and bool(library["version"]), "actual library version"
         )
     return value
+
+
+def generation_conditions(metadata, value, build=None):
+    """Model-free geometry bootstrap, never a numerical qualification."""
+    s.require(
+        value["phase"] == "generation"
+        and value["models"] == []
+        and type(value["planned_slots"]) is int
+        and value["planned_slots"] == 0
+        and value["batch"] is None
+        and value.get("numerical_qualification") is None,
+        "generation-only null numerical scope with no models or games",
+    )
+    s.require(type(value["dynamic_libraries"]) is list, "explicit actual dynamic dependencies")
+    for library in value["dynamic_libraries"]:
+        descriptor(library["file"])
+        s.require(
+            type(library["version"]) is str and bool(library["version"]), "actual library version"
+        )
+    config = metadata.read(value["config"])
+    s.require(
+        type(config) is dict and set(config) == {"plan", "old_prefixes", "output"},
+        "exact generation request",
+    )
+    s.require(
+        type(value["inputs"]) is list and len(value["inputs"]) == 2,
+        "ordered generation plan and OPEN8 inputs",
+    )
+    for field, ref, expected in zip(
+        ("plan", "old_prefixes"),
+        value["inputs"],
+        (s.PLAN_SHA, "be50f486ccfdef3ae1c1bddde33d8369398a19c2a6ccd3d3324b64863f322dbc"),
+    ):
+        descriptor(ref)
+        s.require(
+            config[field] == {"path": ref["path"], "sha256": ref["sha256"]}
+            and ref["sha256"] == expected,
+            "same frozen ordered generation inputs",
+        )
+    descriptor(value["schedule"])
+    s.require(
+        value["schedule"]["sha256"]
+        == "65a242a4ccec472a47a6aa0df806dd6dbf71a9e51bbdb27b550325765af5ebf3"
+        and value["schedule"]["bytes"] == 44027
+        and value["schedule"]["mode"] == "0644",
+        "frozen raw schedule FileRef, distinct from semantic guard",
+    )
+    output = Path(config["output"])
+    s.require(
+        output.is_absolute() and str(output) == str(output.resolve()) and not output.is_symlink(),
+        "owned canonical generation output declaration",
+    )
+    if build is None:
+        build = metadata.read(value["build_manifest"])
+    artifact = descriptor(build["artifact"])
+    s.require(
+        value["argv"]
+        == [
+            artifact["path"],
+            "strength-book",
+            "--experiment",
+            "@EXPERIMENT@",
+            "--experiment-sha256",
+            "@EXPERIMENT_SHA256@",
+        ],
+        "only maintained model-free generation command",
+    )
+    return config
 
 
 class Metadata:
@@ -528,6 +599,9 @@ def arena_conditions(config, experiment_value):
 
 def numerical(metadata, experiment_value, build):
     """Ordered fingerprint arrays match their actual declared scientific inputs."""
+    if experiment_value["phase"] == "generation":
+        generation_conditions(metadata, experiment_value, build)
+        return None
     value = metadata.read(experiment_value["numerical_qualification"])
     required = {
         "schema": PREFIX + "numerical-qualification.v1",
@@ -573,7 +647,131 @@ def finalized_input(metadata, completion_ref, build_ref):
     )
     for ref in data["files"]:
         descriptor(ref)
+    if phase == "generation":
+        generation_evidence(metadata, completed, phase_value)
     return completed, phase_value
+
+
+def generation_evidence(metadata, completed, value):
+    """Descriptive native generation only; no model, history or numerical PASS."""
+    build = metadata.read(completed["build_manifest"])
+    config = generation_conditions(metadata, value, build)
+    data = completed["data"]
+    evidence = data.get("generation")
+    names = ("generation-start.json", "book.json", "schedule.json", "generation-result.json")
+    files = data["files"]
+    indices = []
+    for ref in files:
+        descriptor(ref)
+        path = Path(ref["path"])
+        s.require(
+            path.parent == Path(config["output"]) and path.name in names,
+            "actual declared generation output root and names",
+        )
+        indices.append(names.index(path.name))
+    s.require(indices == sorted(set(indices)), "ordered distinct available generation declarations")
+    if evidence is None and completed["status"] == "FAILED":
+        return None  # unavailable evidence; owned partial refs were still checked
+    required = {
+        "schema": PREFIX + "generation-evidence.v1",
+        "phase": "generation",
+        "numerical_qualification": None,
+        "models_loaded": 0,
+        "search_calls": 0,
+        "games_started": 0,
+        "scientific_planned_slots": 512,
+        "artifact": build["artifact"],
+        "compiled_sources": build["compiled_sources"],
+        "experiment": completed["experiment"],
+        "config": value["config"],
+        "inputs": value["inputs"],
+        "schedule": value["schedule"],
+        "rules": RULES,
+        "limitation": "bound generation metadata; no numerical/model/history qualification",
+    }
+    compiled_digest(build["compiled_sources"])
+    s.require(type(evidence) is dict, "actual descriptive generation evidence")
+    if completed["status"] == "FAILED":
+        base = {"schema", "phase", "numerical_qualification", "scientific_planned_slots"}
+        s.require(base <= set(evidence) <= set(required), "known sparse FAILED generation envelope")
+        checked = set(evidence)  # validate available facts; do not fill missing counters/identities
+    else:
+        checked = set(required)
+    for key in ("artifact", "experiment", "config", "schedule"):
+        if key in checked:
+            descriptor(evidence[key])
+    if "inputs" in checked:
+        s.require(type(evidence["inputs"]) is list, "typed generation ordered inputs")
+        for ref in evidence["inputs"]:
+            descriptor(ref)
+    if "compiled_sources" in checked:
+        compiled_digest(evidence["compiled_sources"])
+    for key in checked:
+        expected = required[key]
+        s.require(
+            type(evidence.get(key)) is type(expected) and evidence.get(key) == expected,
+            "bound descriptive generation " + key,
+        )
+    if completed["status"] == "FAILED":
+        return evidence  # original sparse facts remain sparse; unavailable success is UNKNOWN
+    s.require(data["errors"] == [], "complete generation has no data errors")
+    s.require(indices == list(range(4)), "full generation output declarations")
+    result = metadata.read(files[3])
+    s.require(
+        result["schema"] == "quoridor.value-search-strength.book.v1"
+        and result["complete"] is True
+        and type(result["families"]) is int
+        and result["families"] == 128
+        and result["external_finalization"]
+        == "PENDING; native receipt alone cannot admit campaign",
+        "complete native generation remains pending external authority",
+    )
+    for key in ("models_loaded", "search_calls", "games_started"):
+        s.require(
+            type(result[key]) is int and result[key] == 0, "actual generation zero-call " + key
+        )
+    for key in ("attempted", "transitions"):
+        s.integer(result[key], 0)
+    s.require(
+        result["book_sha256"] == files[1]["sha256"]
+        and result["schedule_sha256"] == files[2]["sha256"],
+        "native result binds raw durable hashes, not semantic or input hashes",
+    )
+    book = metadata.read(files[1], 1048576)
+    s.require(
+        book["compiled_sources"] == build["compiled_sources"],
+        "generated complete source projection",
+    )
+    native_schedule = metadata.read(files[2], 1048576)
+    frozen_schedule = metadata.read(value["schedule"], 1048576)
+    generation_schedule(
+        native_schedule,
+        frozen_schedule,
+        "9bfb6135506f8d237f92d12d75de5e9131faaf5c8693f12f91f6a1698a487e1e",
+    )
+    return evidence
+
+
+def generation_schedule(native_schedule, frozen_schedule, semantic_sha):
+    """Compare full arrays; the semantic digest never replaces a raw FileRef."""
+    s.require(
+        type(native_schedule) is list
+        and len(native_schedule) == 512
+        and type(frozen_schedule) is list
+        and len(frozen_schedule) == 512,
+        "full fixed ordered512 schedule arrays",
+    )
+
+    def compact(schedule):
+        return json.dumps(
+            schedule, sort_keys=True, separators=(",", ":"), ensure_ascii=True
+        ).encode()
+
+    s.require(
+        compact(native_schedule) == compact(frozen_schedule)
+        and hashlib.sha256(compact(frozen_schedule)).hexdigest() == semantic_sha,
+        "full schedule equality and separate pre-entry semantic guard",
+    )
 
 
 def owed_facts(metadata, manifest):

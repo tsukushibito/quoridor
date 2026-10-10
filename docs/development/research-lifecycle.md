@@ -77,3 +77,29 @@ Each check records attempted argv/role, status, nullable `guardian_return`, null
 Scientific status and cleanup are separate: an authoritative FAILED can have cleanup_complete=true ONLY when the actual returned commands and SAME joined outer job prove directwait/cleanup. Unreturned or missing cleanup remains false/UNKNOWN. Such a finalized FAILED preserves validated available files and planned-denominator missingness, never qualifies BUILD or scientific completion. Candidate/INCOMPLETE stays inadmissible.
 
 For saved analysis, phase=analysis/planned_slots=0 denotes a non-game operation; analysis config/report still retain the underlying512 scientific denominator. Numerical qualification remains a required non-null FileRef. Input/descriptor/weights/evaluator SHA fields are arrays in exact input/model order; compiled_sources_sha256 is SHA256 of serde JSON compact sorted full source map. Exact rules/units/perspective are research-standard-2p-threefold-goal-first-v1 / wall-distance/80 / side-to-move. Clock is in the exact bound arena config (engine time_ms100, strict_unknown, reserve5) and actual qualification, not a new experiment field. QUORIDOR_LIFECYCLE_INTENT is full intent-file SHA (not internal admission digest/path), PARENT_PID is actual immediate guardian parent. The saved-only child cannot reacquire the canonical lease.
+
+## Generation-only bootstrap
+
+`numerical_qualification` is null or omitted only for `phase=generation`. This phase requires
+`models=[]`, `planned_slots=0`, `batch=null`, and the exact six-argument `strength-book`
+Experiment template. The accepted matching build/artifact/source, explicit library file/version
+array, config, two ordered full input references (fixed plan then original OPEN8), and complete
+fixed512 schedule are checked before any output or geometry. A null library array is refused;
+an empty array must reflect the actual absence of required dynamically loaded libraries.
+The generation request output must equal the charged, fresh run `data_root`.
+Every other phase requires a non-null numerical FileRef before asset/output admission.
+
+Generation declares four durable data names: `start` → `generation-start.json`, `book` →
+`book.json`, `schedule` → `schedule.json`, and `result` → `generation-result.json`.
+There is no per-game journal because no games are played. The existing native bodies and
+native book/result schemas are unchanged. Lifecycle `data.generation` uses
+`quoridor.research.generation-evidence.v1`, binds the actual artifact, compiled source map,
+Experiment/config/input/schedule references and rules, and records zero models/Search/games,
+`numerical_qualification=null`, and the underlying scientific512 denominator. It checks
+complete128 metadata and native start/book/schedule/result correspondence, without replaying
+geometry or qualifying legal history, models or strength. Durable files remain individually
+bound in `data.files`; final status/partial errors/owed finalizers retain normal lifecycle semantics.
+Only the authoritative completion after directwait/cleanup/finalizers is consumable; candidate
+or INCOMPLETE files never admit success. Generation PASS is data-operation completion,
+not numerical PASS. Downstream materialize/compare/arena/analysis still require actual
+book/history/input/model/clock qualification under the current image.
