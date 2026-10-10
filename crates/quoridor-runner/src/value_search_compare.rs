@@ -382,21 +382,21 @@ fn differing(
         if selected[matchup] >= 8 {
             continue;
         }
-        if let (Some((d, true)), Some((nn, true))) = (proposals[0], proposals[matchup + 1]) {
-            if d != nn {
-                let mut actions = Vec::new();
-                for (a, ok) in proposals.iter().flatten() {
-                    if *ok && !actions.contains(a) {
-                        actions.push(*a);
-                    }
+        if let (Some((d, true)), Some((nn, true))) = (proposals[0], proposals[matchup + 1])
+            && d != nn
+        {
+            let mut actions = Vec::new();
+            for (a, ok) in proposals.iter().flatten() {
+                if *ok && !actions.contains(a) {
+                    actions.push(*a);
                 }
-                selected[matchup] += 1;
-                cases.push(Case {
-                    family,
-                    matchup,
-                    actions,
-                });
             }
+            selected[matchup] += 1;
+            cases.push(Case {
+                family,
+                matchup,
+                actions,
+            });
         }
     }
     cases
@@ -798,7 +798,7 @@ pub fn run(bound: &BoundControl) -> Result<Value> {
                 Ok(c) if c.terminal_value().is_none() => c,
                 other => {
                     let root_error = other.err().map(|e| error(&e));
-                    for engine in 0..3 {
+                    for (engine, _) in NAMES.iter().enumerate() {
                         records.push(write_observed(&mut output,&mut pending,&format!("matched-{family}-{engine}.json"),&json!({"family":family,"engine":NAMES[engine],"opening_id":families[family].id,"book_sha256":plan.book.sha256,"observed":unknown("book prefix unsupported/terminal"),"root_error":root_error}),ROW_BYTES)?);
                     }
                     continue;

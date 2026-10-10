@@ -563,14 +563,14 @@ fn batch_config_validated(template: &Config, book: &GeneratedBook, batch: usize)
 }
 /// No row truncation: overlarge records refuse complete capture and trigger the existing failure path.
 pub fn retained_outcome(config: &Config, o: &crate::runtime::Outcome) -> Result<()> {
-    if let Some(cap) = config.arena.as_ref().and_then(|a| a.retained_outcome_bytes) {
-        if o.observations
+    if let Some(cap) = config.arena.as_ref().and_then(|a| a.retained_outcome_bytes)
+        && (o
+            .observations
             .iter()
             .any(|m| serde_json::to_vec(m).map_or(true, |b| b.len() > OBSERVATION_BYTES))
-            || serde_json::to_vec(o)?.len() > cap
-        {
-            return Err("CAPTURE_OUTCOME_OR_OBSERVATION_LIMIT; no full-capture certificate".into());
-        }
+            || serde_json::to_vec(o)?.len() > cap)
+    {
+        return Err("CAPTURE_OUTCOME_OR_OBSERVATION_LIMIT; no full-capture certificate".into());
     }
     Ok(())
 }

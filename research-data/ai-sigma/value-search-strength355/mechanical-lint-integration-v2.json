@@ -1,0 +1,43 @@
+{
+  "schema": "quoridor.value-search-strength.mechanical-lint-integration.v1",
+  "issue": "quoridor-4lc.355",
+  "binding_path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/lint-source-repair-v6/source-STOP-binding-v6.json",
+  "binding_SHA256": "7d47ca9abc7cabf8a74aab3bfc81af70efad478f829072d62b4f73e454eddee3",
+  "producer_reader_writer_STOP": "2026-10-10T00:13:32.165164+00:00",
+  "patch_SHA256": "5999232d63a8b4a9ad19ba5894bf54e3dae1ca24e2d4f2798b70ce079dafc29f",
+  "changes": [
+    {
+      "relative_path": "crates/quoridor-runner/src/value_search_strength.rs",
+      "before_SHA256": "f02548c4c3004074a4c0b9a4641abd72aa3239ff78551c610a4c3ce0b0ad34d7",
+      "before_bytes": 31753,
+      "after_SHA256": "1e9ef7ac4d9dba35f4685a6ef5eb6c0a22a81bdda6593eb0ff9a65f17e4dcd38",
+      "bytes": 31748,
+      "mode": 420,
+      "strict_forward_inverse": true,
+      "entire_test_module_byte_unchanged": true
+    },
+    {
+      "relative_path": "crates/quoridor-runner/src/value_search_compare.rs",
+      "before_SHA256": "b81e5c4949084d9e0dc86966ae85be974b841a90223c0ac4e1ca81ebdd69c3ff",
+      "before_bytes": 53305,
+      "after_SHA256": "94fda09e07f6db245bcc281323d3b9b288562d964d4bef10b26166e14dfe5889",
+      "bytes": 53274,
+      "mode": 420,
+      "strict_forward_inverse": true,
+      "entire_test_module_byte_unchanged": true
+    }
+  ],
+  "only_three_declared_hunks": true,
+  "semantics": "Rust2024 short-circuit if-let forms and fixed NAMES length3 enumerate replace nested if/0..3; no evaluator/rule/clock/Search arguments or proposal order change",
+  "all_nineteen_test_definitions_byte_identical": true,
+  "passed_tests_reuse_scope": "Actual19 tests at old source retained; unchanged definitions and exact mechanical derivation recorded, no test execution replay or retargeted raw proof",
+  "source_review_scope": "Prior approved f025/b81 source controls remain immutable. Current1e9/94 are exact compiler-requested mechanical derivatives, never claimed identical to reviewer-read images. Newclassifier gate c337 is independently pending.",
+  "Root_inclusive_phase_B": 524288,
+  "inside_issued_Root_B": 67108864,
+  "global_held_B": 49976205312,
+  "global_increment_B": 0,
+  "actual_root_source_writer_STOP": "2026-10-10T00:25:28.315569+00:00",
+  "owned_readers_children_jobs_TMP": [],
+  "actual_Cargo_model_native_Search_game_calls": 0,
+  "current_common_software_private_book_input": "UNQUALIFIED; failed631 raw/costs/charges and privateNOT_RUN remain retained"
+}
