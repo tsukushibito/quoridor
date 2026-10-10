@@ -6,7 +6,7 @@
   "owner": "quoridor-4lc.358.1",
   "preferred_families": 128,
   "preferred_games": 256,
-  "final_priced_quantity_frozen": false,
+  "final_priced_quantity_frozen": true,
   "quantity_rule": "Prospectively choose128/256 if supported; justified smaller quantity before outputs if actualwhole cost requires, notify Policy actual fixedcount; no outcome-dependent extension",
   "candidate": {
     "model": "fresh353 no-output-bypass BEST43",
@@ -61,5 +61,7 @@
     "323 resume/seals/default/fourfits96 change"
   ],
   "source_preparation_resources": "resources-preparation.json",
-  "runtime_whole_resources": null
+  "runtime_whole_resources": "resources-whole.json",
+  "families": 128,
+  "games": 256
 }
