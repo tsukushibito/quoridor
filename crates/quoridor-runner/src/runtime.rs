@@ -421,12 +421,12 @@ mod alpha_receipt_353_tests {
         }
         let drained = Cell::new(false);
         let mut completion = crate::arena_clock::Completion::default();
-        let returned = (|| {
+        let returned = {
             let _owned = OwnedCall(&drained);
             let r = result();
             completion.publish(&r, None);
             r
-        })();
+        };
         let received_ns = 95_000_000;
         assert!(drained.get());
         let (snapshots_valid, legal) =

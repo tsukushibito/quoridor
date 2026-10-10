@@ -28,8 +28,10 @@ PY_FILES = (
     "scripts/dev/research-session.py",
     "scripts/dev/research-runtime.py",
     "scripts/dev/research-job.py",
+    "scripts/dev/research-lifecycle.py",
     "tools/research-session/test_client.py",
     "tools/research-session/test_job.py",
+    "tools/research-session/test_lifecycle.py",
     "tools/research-quality/test_maintenance.py",
     "tools/research-quality/test_quality_entrypoints.py",
 )
@@ -208,6 +210,18 @@ def main():
         "unittest",
         "tools/research-session/test_client.py",
         "tools/research-session/test_job.py",
+        "tools/research-session/test_lifecycle.py",
+    )
+    run(
+        sys.executable,
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        ROOT / "python/quoridor_training/research355",
+        "-p",
+        "test_lifecycle*.py",
     )
     print(
         json.dumps(

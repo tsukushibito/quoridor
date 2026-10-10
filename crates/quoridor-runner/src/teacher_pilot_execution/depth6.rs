@@ -35,7 +35,7 @@ enum Record {
     Header(Box<PilotHeader>),
     Game {
         index: usize,
-        result: Outcome<GameRecord>,
+        result: Box<Outcome<GameRecord>>,
     },
     Footer(Box<PilotReport>),
 }
@@ -205,7 +205,10 @@ pub(super) fn run(config: &PilotConfig, hash: String, cancel: &AtomicBool) -> Re
             },
             |index, result| {
                 audit_result(&header, index, &result)?;
-                stream.append(&Record::Game { index, result })?;
+                stream.append(&Record::Game {
+                    index,
+                    result: Box::new(result),
+                })?;
                 // Small four-case bounded ownership; deserialize the committed record
                 // is unnecessary: values move to the coordinator, never clone parents.
                 Ok(())
@@ -314,7 +317,7 @@ fn read_records(
                 if header.is_some() && index == records.len() && index < 4 =>
             {
                 audit_result(header.as_ref().ok_or("missing header")?, index, &result)?;
-                records.push(result);
+                records.push(*result);
             }
             Record::Footer(r) if header.is_some() && records.len() == 4 => {
                 let mut expected =
@@ -390,7 +393,7 @@ mod tests {
         }
     }
     fn fixture(index: usize) -> ScheduledGame {
-        let prefix = if index % 2 == 0 {
+        let prefix = if index.is_multiple_of(2) {
             vec![13, 67, 22, 58, 31, 49, 40, 31, 49, 22, 58, 13, 67]
         } else {
             vec![13, 75, 12, 76, 13, 75, 12, 76]
@@ -444,7 +447,7 @@ mod tests {
                             nodes,
                             ..SearchStats::default()
                         },
-                        ..returned(if index % 2 == 0 { 4 } else { 13 })
+                        ..returned(if index.is_multiple_of(2) { 4 } else { 13 })
                     })
                 },
             )
@@ -658,10 +661,10 @@ mod tests {
         s.append(&Record::Header(Box::new(h.clone()))).unwrap();
         s.append(&Record::Game {
             index: 0,
-            result: Outcome::Failed {
+            result: Box::new(Outcome::Failed {
                 started: false,
                 reason: "cancelled_before_game".into(),
-            },
+            }),
         })
         .unwrap();
         assert!(read_records(&path, true).is_err());
@@ -672,10 +675,10 @@ mod tests {
         for index in 1..4 {
             s.append(&Record::Game {
                 index,
-                result: Outcome::Failed {
+                result: Box::new(Outcome::Failed {
                     started: false,
                     reason: "cancelled_before_game".into(),
-                },
+                }),
             })
             .unwrap();
             outcomes.push(Outcome::Failed {

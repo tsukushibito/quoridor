@@ -980,6 +980,16 @@ pub fn audit(path: &Path) -> Result<PilotReport> {
         .ok_or_else(|| "pilot incomplete: scheduled remainder UNKNOWN".into())
 }
 
+/// Caller-owned cancellation for the explicit depth6 recipe. Legacy entry stays serial.
+pub fn run_depth6_with_cancel(
+    config: &PilotConfig,
+    config_sha256: String,
+    cancel: &AtomicBool,
+) -> Result<PilotReport> {
+    teacher_pilot::depth6::validate(config)?;
+    depth6::run(config, config_sha256, cancel)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -1239,14 +1249,4 @@ mod tests {
             );
         }
     }
-}
-
-/// Caller-owned cancellation for the explicit depth6 recipe. Legacy entry stays serial.
-pub fn run_depth6_with_cancel(
-    config: &PilotConfig,
-    config_sha256: String,
-    cancel: &AtomicBool,
-) -> Result<PilotReport> {
-    teacher_pilot::depth6::validate(config)?;
-    depth6::run(config, config_sha256, cancel)
 }

@@ -28,7 +28,7 @@ pub fn validate(c: &PilotConfig) -> Result<()> {
     if !matches!(c.phase, Phase::Depth6Throughput)
         || c.main_volume_n.is_some()
         || c.ruleset != Ruleset::Standard2pThreefold
-        || c.output != PathBuf::from(OUTPUT)
+        || c.output != std::path::Path::new(OUTPUT)
         || c.planned_games != 4
         || c.prefix_seed != PREFIX_SEED
         || c.attempts_per_prefix != PREFIX_ATTEMPTS

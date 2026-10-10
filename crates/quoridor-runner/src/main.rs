@@ -86,35 +86,39 @@ fn execute() -> Result<()> {
         strict_pairs(&args, &[route, "--report-mode"], &[])?;
     }
     match command {
-        "strength-book" | "strength-configs" => {
-            use quoridor_runner::sigma_qualification::BoundControl;
-            strict_pairs(&args, &["--request", "--request-sha256"], &[])?;
-            let bound = BoundControl {
-                path: argument(&args, "--request")?.into(),
-                sha256: argument(&args, "--request-sha256")?,
-            };
-            let receipt = if command == "strength-book" {
-                quoridor_runner::value_search_strength::generate_bound(bound.read()?)?
-            } else {
-                quoridor_runner::value_search_strength::materialize(bound.read()?)?
-            };
-            println!("{}", serde_json::to_string(&receipt)?);
-        }
-        "value-search-compare-bindings" => {
+        "research-bindings" => {
             if args.len() != 1 {
-                return Err("value-search-compare-bindings accepts no flags".into());
+                return Err("research-bindings accepts no flags".into());
             }
             println!(
                 "{}",
-                serde_json::to_string(&quoridor_runner::value_search_compare::bindings()?)?
+                serde_json::to_string(&quoridor_runner::research_manifest::bindings()?)?
+            );
+        }
+        "strength-book" | "strength-configs" | "strength-arena" => {
+            strict_pairs(&args, &["--experiment", "--experiment-sha256"], &[])?;
+            let bound = quoridor_runner::sigma_qualification::BoundControl {
+                path: argument(&args, "--experiment")?.into(),
+                sha256: argument(&args, "--experiment-sha256")?,
+            };
+            let phase = match command {
+                "strength-book" => "generation",
+                "strength-configs" => "materialize",
+                _ => "arena",
+            };
+            println!(
+                "{}",
+                serde_json::to_string(&quoridor_runner::value_search_strength::execute(
+                    &bound, phase
+                )?)?
             );
         }
         "value-search-compare" => {
-            strict_pairs(&args, &["--plan", "--plan-sha256"], &[])?;
+            strict_pairs(&args, &["--experiment", "--experiment-sha256"], &[])?;
             let report = quoridor_runner::value_search_compare::run(
                 &quoridor_runner::sigma_qualification::BoundControl {
-                    path: argument(&args, "--plan")?.into(),
-                    sha256: argument(&args, "--plan-sha256")?,
+                    path: argument(&args, "--experiment")?.into(),
+                    sha256: argument(&args, "--experiment-sha256")?,
                 },
             )?;
             println!("{}", serde_json::to_string(&report)?);
@@ -240,6 +244,9 @@ fn execute() -> Result<()> {
             } else {
                 let config: Config =
                     serde_json::from_reader(File::open(argument(&args, "--config")?)?)?;
+                if config.run_id.starts_with("strength355-batch-") {
+                    return Err("strength355 uses strength-arena --experiment, not the generic config route".into());
+                }
                 runtime::run(&config, command)?
             };
             if args.iter().any(|a| a == "--report-mode") {
@@ -389,7 +396,7 @@ fn execute() -> Result<()> {
     Ok(())
 }
 
-const HELP: &str = "quoridor-runner strength-book --request REQUEST --request-sha256 SHA256\nquoridor-runner strength-configs --request REQUEST --request-sha256 SHA256\nquoridor-runner arena --config CONFIG --report-mode receipt\nquoridor-runner <selfplay|arena|benchmark|cycle> --config CONFIG\nquoridor-runner arena --config CONFIG --sigma-cost-qualification PACKET --qualification-sha256 SHA256\nquoridor-runner sigma-cost-bindings --config CONFIG --config-sha256 SHA256\nquoridor-runner sigma-cost-measure --plan PLAN --plan-sha256 SHA256 [--sigma-cost-qualification VALIDATION_PACKET --qualification-sha256 SHA256]\nquoridor-runner arena --audit OUTPUT_DIRECTORY\nquoridor-runner arena --recover OUTPUT_DIRECTORY\nquoridor-runner dataset <cache|inspect> --input PATH [--output PATH] [--allow-test]\nquoridor-runner dataset evaluate --input PATH --model MODEL --output PATH [--simd] [--allow-test]\nquoridor-runner model-check --model MODEL\nquoridor-runner qf1-bulk --input PREFIXES.json --output FEATURES.json\nSigma dataset import: use the separate sigma-import binary";
+const HELP: &str = "quoridor-runner strength-book --experiment EXPERIMENT --experiment-sha256 SHA256\nquoridor-runner strength-configs --experiment EXPERIMENT --experiment-sha256 SHA256\nquoridor-runner arena --config CONFIG --report-mode receipt\nquoridor-runner <selfplay|arena|benchmark|cycle> --config CONFIG\nquoridor-runner arena --config CONFIG --sigma-cost-qualification PACKET --qualification-sha256 SHA256\nquoridor-runner sigma-cost-bindings --config CONFIG --config-sha256 SHA256\nquoridor-runner sigma-cost-measure --plan PLAN --plan-sha256 SHA256 [--sigma-cost-qualification VALIDATION_PACKET --qualification-sha256 SHA256]\nquoridor-runner arena --audit OUTPUT_DIRECTORY\nquoridor-runner arena --recover OUTPUT_DIRECTORY\nquoridor-runner dataset <cache|inspect> --input PATH [--output PATH] [--allow-test]\nquoridor-runner dataset evaluate --input PATH --model MODEL --output PATH [--simd] [--allow-test]\nquoridor-runner model-check --model MODEL\nquoridor-runner qf1-bulk --input PREFIXES.json --output FEATURES.json\nSigma dataset import: use the separate sigma-import binary";
 
 #[cfg(test)]
 mod tests {

@@ -286,6 +286,7 @@ def execute(directory, config, root, backend):
                 stdout=subprocess.PIPE,
                 stderr=subprocess.STDOUT,
                 start_new_session=True,
+                env={**os.environ, "QUORIDOR_RESEARCH_JOB_DIR": str(directory)},
             )
             direct_fd = os.pidfd_open(command.pid)
             child = runtime.process_identity(command.pid)

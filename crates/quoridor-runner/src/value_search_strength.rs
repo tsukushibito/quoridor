@@ -47,7 +47,7 @@ fn approved_model_identity(
 #[serde(deny_unknown_fields)]
 pub struct GenerationRequest {
     pub plan: crate::sigma_qualification::BoundControl,
-    pub old_admission: crate::sigma_qualification::BoundControl,
+    pub old_prefixes: crate::sigma_qualification::BoundControl,
     pub output: std::path::PathBuf,
 }
 fn bounded_read<T: serde::de::DeserializeOwned>(
@@ -79,19 +79,12 @@ fn write_new(output: &std::path::Path, name: &str, value: &impl Serialize) -> Re
 }
 /// The external owned job must hold the supported source/private/whole-phase lifetime lease.
 /// This inlet independently checks physical admission before any geometric generation.
-pub fn generate_bound(request: GenerationRequest) -> Result<serde_json::Value> {
+fn generate_bound(request: GenerationRequest) -> Result<serde_json::Value> {
     if request.plan.sha256 != PLAN_SHA256 {
         return Err("CAMPAIGN_FIXED_PLAN".into());
     }
     let _: serde_json::Value = bounded_read(&request.plan)?;
-    let old: serde_json::Value = bounded_read(&request.old_admission)?;
-    let openings = old["frozen_arena_config"]["arena"]["book"]["openings"]
-        .as_array()
-        .ok_or("CAMPAIGN_OLD_BOOK_POINTER")?;
-    let prefixes: Vec<Vec<u16>> = openings
-        .iter()
-        .map(|o| serde_json::from_value(o["prefix"].clone()))
-        .collect::<std::result::Result<_, _>>()?;
+    let prefixes: Vec<Vec<u16>> = bounded_read(&request.old_prefixes)?;
     if arena::json_digest(&prefixes)? != OLD_PREFIX_SHA256 {
         return Err("CAMPAIGN_EXACT_OLD_OPEN8".into());
     }
@@ -109,7 +102,7 @@ pub fn generate_bound(request: GenerationRequest) -> Result<serde_json::Value> {
         "generation-start.json",
         &serde_json::json!({"request":request,"admission":admission,"compiled_sources":crate::compiled_source_bindings(),"planned_families":128,"attempt_upper":1024,"transition_upper":16384,"models_loaded":0,"search_calls":0,"games_started":0}),
     )?;
-    let book = generate(&prefixes, request.old_admission.sha256.clone())?;
+    let book = generate(&prefixes, request.old_prefixes.sha256.clone())?;
     write_new(&request.output, "book.json", &book)?;
     write_new(&request.output, "schedule.json", &schedule())?;
     let receipt = serde_json::json!({"schema":SCHEMA,"complete":book.complete,"families":book.families.len(),"attempted":book.attempted,"transitions":book.transitions,"book_sha256":arena::json_digest(&book)?,"schedule_sha256":arena::json_digest(&schedule())?,"models_loaded":0,"search_calls":0,"games_started":0,"external_finalization":"PENDING; native receipt alone cannot admit campaign"});
@@ -131,7 +124,7 @@ pub struct CampaignRequest {
     pub output: std::path::PathBuf,
 }
 /// Config/512-slot publication only; no model load, calibration or games.
-pub fn materialize(request: CampaignRequest) -> Result<serde_json::Value> {
+fn materialize(request: CampaignRequest) -> Result<serde_json::Value> {
     if request.weights_sha256 != [BEST51_WEIGHTS.to_string(), BEST43_WEIGHTS.to_string()] {
         return Err("CAMPAIGN_FIXED_TWO_MODELS".into());
     }
@@ -202,6 +195,75 @@ pub fn materialize(request: CampaignRequest) -> Result<serde_json::Value> {
     let receipt = serde_json::json!({"book":request.book,"schedule_sha256":arena::json_digest(&schedule())?,"templates":request.templates,"model_descriptors":request.model_descriptors,"weights_sha256":request.weights_sha256,"batch_configs":bindings,"planned_slots":512,"games_started":0,"prepared":false,"limitation":"Whole supported resource/private/source/backend/clock/physical/peer/finalization admission remains mandatory. Weight metadata is not actual loaded model proof."});
     write_new(&request.output, "campaign.json", &receipt)?;
     Ok(receipt)
+}
+
+/// One current build/experiment/numerical identity; no historical admission joins.
+pub fn execute(
+    bound: &crate::sigma_qualification::BoundControl,
+    phase: &str,
+) -> Result<serde_json::Value> {
+    let (experiment, _) = crate::research_manifest::load(bound, phase)?;
+    match phase {
+        "generation" => {
+            let request: GenerationRequest = experiment.config.read()?;
+            if !experiment.inputs.iter().any(|r| {
+                r.path == request.old_prefixes.path && r.sha256 == request.old_prefixes.sha256
+            }) {
+                return Err("CAMPAIGN_BOUND_ORIGINAL_OPEN8_REFERENCE".into());
+            }
+            generate_bound(request)
+        }
+        "materialize" => {
+            let request: CampaignRequest = experiment.config.read()?;
+            if experiment.models.len() != 2
+                || !experiment
+                    .inputs
+                    .iter()
+                    .any(|r| r.path == request.book.path && r.sha256 == request.book.sha256)
+                || experiment
+                    .models
+                    .iter()
+                    .zip(&request.model_descriptors)
+                    .any(|(m, p)| m.descriptor.path != p.path || m.descriptor.sha256 != p.sha256)
+            {
+                return Err("CAMPAIGN_SAME_BOOK_APPROVED_MODEL_REFERENCES".into());
+            }
+            materialize(request)
+        }
+        "arena" => {
+            let c: Config = experiment.config.read()?;
+            let batch = experiment.batch.ok_or("CAMPAIGN_BATCH_REQUIRED")?;
+            let model_index = (batch / 2 + batch % 2) % 2;
+            if experiment.planned_slots != 512
+                || batch >= 16
+                || c.run_id != format!("strength355-batch-{batch:02}")
+                || experiment.models.len() != 1
+                || c.engines.len() != 2
+                || c.engines[0].model.as_ref() != Some(&experiment.models[0].descriptor.path)
+                || experiment.models[0].descriptor.sha256 != APPROVED_DESCRIPTOR_SHA256[model_index]
+                || experiment.models[0].evaluator_sha256 != APPROVED_EVALUATOR_SHA256[model_index]
+                || c.inference.is_some()
+                || c.inference_cpu_core.is_some()
+            {
+                return Err("CAMPAIGN_FIXED512_PURE_VALUE_CALLER".into());
+            }
+            let book_ref = experiment.inputs.first().ok_or("CAMPAIGN_BOOK_REFERENCE")?;
+            let book: GeneratedBook = book_ref.read()?;
+            let mut template = c.clone();
+            template.output = c.output.parent().ok_or("CAMPAIGN_BATCH_OUTPUT")?.into();
+            let reproduced = batch_config(&template, &book, batch)?;
+            if serde_json::to_value(&reproduced)? != serde_json::to_value(&c)? {
+                return Err("CAMPAIGN_EXACT_MAINTAINED_BATCH_CONFIG".into());
+            }
+            let report = crate::runtime::run(&c, "arena")?;
+            let receipt = result_receipt(&c, &report)?;
+            if report.stopped.is_some() || !report.all_workers_joined {
+                return Err("CAMPAIGN_PARTIAL; full journal retained".into());
+            }
+            Ok(receipt)
+        }
+        _ => Err("CAMPAIGN_PHASE".into()),
+    }
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

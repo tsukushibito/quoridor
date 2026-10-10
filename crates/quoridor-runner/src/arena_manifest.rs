@@ -24,6 +24,14 @@ pub fn source_bindings() -> BTreeMap<&'static str, String> {
         ("Cargo.lock", include_bytes!("../../../Cargo.lock")),
         ("runner/Cargo.toml", include_bytes!("../Cargo.toml")),
         ("runner/main.rs", include_bytes!("main.rs")),
+        (
+            "runner/research_manifest.rs",
+            include_bytes!("research_manifest.rs"),
+        ),
+        (
+            "runner/value_search_compare.rs",
+            include_bytes!("value_search_compare.rs"),
+        ),
         ("runner/lib.rs", include_bytes!("lib.rs")),
         ("runner/runtime.rs", include_bytes!("runtime.rs")),
         ("runner/config.rs", include_bytes!("config.rs")),

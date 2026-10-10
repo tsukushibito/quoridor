@@ -220,7 +220,9 @@ def save_record(path, record):
     write_json(path, record)
 
 
-def execute(command, log, deadline, cpu_core=None, resources=None):
+def execute(
+    command, log, deadline, cpu_core=None, resources=None, *, cwd=None, env=None, output_sink=None
+):
     """Always TERM→KILL→wait; retain a bounded tail plus exact cleanup evidence."""
     if resources:
         resources.check()
@@ -280,6 +282,8 @@ def execute(command, log, deadline, cpu_core=None, resources=None):
                 stderr=subprocess.STDOUT,
                 start_new_session=True,
                 preexec_fn=prepare_child,
+                cwd=cwd,
+                env=env,
             )
             direct_fd = os.pidfd_open(child.pid)
             root = identity(process_info(child.pid))
@@ -303,6 +307,8 @@ def execute(command, log, deadline, cpu_core=None, resources=None):
                     record["log_bytes_seen"] += len(data)
                     tail.extend(data)
                     del tail[: max(0, len(tail) - LOG_MAX_BYTES)]
+                    if output_sink is not None:
+                        output_sink(data)
         finally:
             signal.pthread_sigmask(signal.SIG_SETMASK, launch_mask)
         next_log = 0

@@ -11,6 +11,10 @@
 5. 保存済み結果を含む完了イベントを、元の担当の保存セッションへ一度だけ送る。Idleなら`turn/start`、notLoadedなら設定を変更せず`thread/resume`して開始する。Activeなら通知を待機し、完了通知のために別作業へsteerしない。
 6. 担当者は結果の回収・資格確認・次判断を続ける。exit0を科学的成功とみなさず、Beads close/実行・統合担当への引渡し/backupは引き続き担当者が行う。
 
+## 現行研究ビルドと実験の受入れ
+
+355の現行入口は[単一ビルド・実験・終了処理](research-lifecycle.md)を使う。既存のjob controllerとcycle_processが子を所有し、終了後のcollectorが一つのmanifestを確定する。旧software-v4〜v19のclassifierやsalvage結合は履歴として保持し、現行入口から実行しない。
+
 ## 設定と操作
 
 `tools/research-session/examples/job.json`を自域へコピーする。例は過去期限・仮パスなのでそのまま動かない。`argv`はshell文字列ではなく引数配列、先頭は存在する実行ファイルの絶対パスにする。生成本体のguardianは現在のCPU/GPU・RAM・NN・保存予算を維持する。このツールは新しい計算資源の配分を認めない。

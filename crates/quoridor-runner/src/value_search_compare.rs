@@ -39,7 +39,6 @@ pub struct Plan {
     pub schema: String,
     pub canonical_plan: BoundControl,
     pub resources: BoundControl,
-    pub qualification: BoundControl,
     pub book: BoundControl,
     pub manifests: [BoundControl; 2],
     pub output: PathBuf,
@@ -116,35 +115,8 @@ fn replay_family(f: &Family) -> Result<SigmaContext> {
     }
     Ok(c)
 }
-#[derive(Deserialize)]
-#[serde(deny_unknown_fields)]
-struct Qualification {
-    schema: String,
-    source_review: BoundControl,
-    software_receipt: BoundControl,
-    input_receipt: BoundControl,
-    executable_sha256: String,
-    compiled_sources_sha256: String,
-    book_sha256: String,
-    canonical_plan_sha256: String,
-    manifests_sha256: [String; 2],
-    generation_compiled_sources_sha256: String,
-    weights_sha256: [String; 2],
-}
 fn sources() -> BTreeMap<&'static str, String> {
-    let mut map = crate::sigma_qualification::sources();
-    map.insert(
-        "runner/value_search_compare.rs",
-        arena::digest(include_bytes!("value_search_compare.rs")),
-    );
-    map
-}
-/// Zero-model metadata inlet for the later actual compiler/private qualification.
-pub fn bindings() -> Result<Value> {
-    let compiled = sources();
-    Ok(
-        json!({"schema":"quoridor.value-search-strength.compare-bindings.v1","compiled_sources_sha256":arena::json_digest(&compiled)?,"compiled_sources":compiled,"executable_sha256":crate::arena_manifest::file_sha256(&std::env::current_exe()?)?,"evaluators":NAMES,"weights_sha256":[null,NN51,NN43],"D":{"a":0,"b":8,"distance_units":"wall-distance/80","returned_units":"tanh-logit, bounded1; canonical terminal2"},"model_loaded":false,"model_calls":0,"Search_calls":0,"runtime_qualified":false}),
-    )
+    crate::research_manifest::sources()
 }
 fn accepted_manifest_identity(index: usize, weights: &str, a: f32, b: f32) -> bool {
     let Some((expected_weights, expected_b)) = [(NN51, 8f32), (NN43, 0f32)].get(index).copied()
@@ -641,7 +613,7 @@ fn failure_snapshot(
     json!({"status":"FAILED","original_error":error(primary),"remaining_planned":"UNKNOWN","matched_census":matched.record(),"stronger_census":stronger.record(),"durable_outputs":records,"current_context":context,"current_publication":publication_summary(pending),"whole_phase_until_failure_seconds":seconds})
 }
 fn validate(plan: &Plan) -> Result<()> {
-    if plan.schema != "quoridor.value-search-strength.compare.v1" {
+    if plan.schema != "quoridor.value-search-strength.compare.v2" {
         return Err("355 diagnostic plan schema".into());
     }
     let policy: Value = plan.canonical_plan.read()?;
@@ -688,66 +660,38 @@ fn validate(plan: &Plan) -> Result<()> {
     if plan.manifests[0].sha256 != NN51_MANIFEST || plan.manifests[1].sha256 != NN43_MANIFEST {
         return Err("355 exact whole approved BEST51/BEST43 manifest identities required".into());
     }
-    let q: Qualification = plan.qualification.read()?;
-    if q.schema != "quoridor.value-search-strength.compare-qualification.v1"
-        || q.book_sha256 != plan.book.sha256
-        || q.canonical_plan_sha256 != plan.canonical_plan.sha256
-        || q.manifests_sha256
-            != [
-                plan.manifests[0].sha256.clone(),
-                plan.manifests[1].sha256.clone(),
-            ]
-        || q.weights_sha256 != [NN51.to_string(), NN43.to_string()]
-        || q.executable_sha256 != crate::arena_manifest::file_sha256(&std::env::current_exe()?)?
-        || q.compiled_sources_sha256 != arena::json_digest(&sources())?
-    {
-        return Err("355 exact new executable/source/book/model qualification required".into());
-    }
-    let source: Value = q.source_review.read()?;
-    if source["status"] != "SOURCE_CLEAR"
-        || source["module_sha256"] != sources()["runner/value_search_compare.rs"]
-        || source["remaining"] != json!([])
-    {
-        return Err("355 actual stopped changed-source review required".into());
-    }
-    let software: Value = q.software_receipt.read()?;
-    if software["status"] != "PASS"
-        || software["compiled_sources_sha256"] != q.compiled_sources_sha256
-        || software["executable_sha256"] != q.executable_sha256
-        || software["remaining"] != json!([])
-    {
-        return Err("355 actual stopped current software/private qualification required".into());
-    }
-    let input: Value = q.input_receipt.read()?;
-    if input["status"] != "PASS"
-        || input["book_sha256"] != q.book_sha256
-        || input["compiled_sources_sha256"] != q.compiled_sources_sha256
-        || input["executable_sha256"] != q.executable_sha256
-        || input["canonical_plan_sha256"] != q.canonical_plan_sha256
-        || input["manifest_sha256"] != json!(q.manifests_sha256)
-        || input["weights_sha256"] != json!(q.weights_sha256)
-        || input["generation_compiled_sources_sha256"] != q.generation_compiled_sources_sha256
-        || input["remaining"] != json!([])
-    {
-        return Err(
-            "355 actual stopped same-book/current-image/history/model input qualification required"
-                .into(),
-        );
-    }
     Ok(())
 }
 /// Caller accepts one immutable book/control; no free vector of fabricated positions/models.
 pub fn run(bound: &BoundControl) -> Result<Value> {
     let whole = Instant::now();
-    let plan: Plan = bound.read()?;
+    let (experiment, qualified_input) = crate::research_manifest::load(bound, "compare")?;
+    let plan: Plan = experiment.config.read()?;
     validate(&plan)?;
+    if experiment.canonical_plan_sha256 != plan.canonical_plan.sha256 {
+        return Err("355 exact canonical plan binding required".into());
+    }
+    if experiment.models.len() != 2
+        || experiment
+            .inputs
+            .iter()
+            .all(|r| r.path != plan.book.path || r.sha256 != plan.book.sha256)
+        || experiment
+            .models
+            .iter()
+            .zip(&plan.manifests)
+            .any(|(m, p)| m.descriptor.path != p.path || m.descriptor.sha256 != p.sha256)
+    {
+        return Err("355 same experiment/book/ordered models required".into());
+    }
     let book: Value = plan.book.read()?;
-    let q: Qualification = plan.qualification.read()?;
-    if q.generation_compiled_sources_sha256 != arena::json_digest(&book["compiled_sources"])? {
+    if qualified_input["generation_compiled_sources_sha256"]
+        != arena::json_digest(&book["compiled_sources"])?
+    {
         return Err("355 exact qualified generation-body lineage required".into());
     }
     let families = families(&book, &plan)?;
-    let header = json!({"schema":"quoridor.value-search-strength.compare-intent.v1","plan_sha256":bound.sha256,"book_sha256":plan.book.sha256,"matched_families":(0..128).step_by(4).collect::<Vec<_>>(),"common_families":(0..128).step_by(16).collect::<Vec<_>>(),"evaluators":NAMES,"weights_sha256":[null,NN51,NN43],"compiled_sources":sources(),"depth4_calls":96,"stronger_max_cases":16,"stronger_max_calls":192,"tree_max_nodes":800000,"no_lowerdepth_rescue":true,"unentered_slots":"UNKNOWN"});
+    let header = json!({"schema":"quoridor.value-search-strength.compare-intent.v2","experiment_sha256":bound.sha256,"config_sha256":experiment.config.sha256,"build_manifest":experiment.build_manifest,"book_sha256":plan.book.sha256,"matched_families":(0..128).step_by(4).collect::<Vec<_>>(),"common_families":(0..128).step_by(16).collect::<Vec<_>>(),"evaluators":NAMES,"weights_sha256":[null,NN51,NN43],"compiled_sources":sources(),"depth4_calls":96,"stronger_max_cases":16,"stronger_max_calls":192,"tree_max_nodes":800000,"no_lowerdepth_rescue":true,"unentered_slots":"UNKNOWN"});
     let mut output = Output::create(&plan.output, &header)?;
     let mut matched = Census::default();
     let mut stronger = Census::default();
@@ -928,7 +872,7 @@ pub fn run(bound: &BoundControl) -> Result<Value> {
                 TREE_BYTES,
             )?);
         }
-        let report = json!({"schema":"quoridor.value-search-strength.compare-result.v1","plan_sha256":bound.sha256,"book_sha256":plan.book.sha256,"fixed_denominator":{"matched_positions":32,"natural4":96,"common_trees":8,"stronger_max_cases":16},"matched_census":matched.record(),"stronger_census":stronger.record(),"frozen_selection":frozen,"outputs":records,"whole_phase_until_footer_seconds":whole.elapsed().as_secs_f64(),"solver":"OFF","interpretation":"complete estimates at requested depth only; exact canonical terminals separate; no game-outcome selection, lowerdepth rescue, groundtruth/strength or arithmetic-speed inference"});
+        let report = json!({"schema":"quoridor.value-search-strength.compare-result.v2","experiment_sha256":bound.sha256,"config_sha256":experiment.config.sha256,"book_sha256":plan.book.sha256,"fixed_denominator":{"matched_positions":32,"natural4":96,"common_trees":8,"stronger_max_cases":16},"matched_census":matched.record(),"stronger_census":stronger.record(),"frozen_selection":frozen,"outputs":records,"whole_phase_until_footer_seconds":whole.elapsed().as_secs_f64(),"solver":"OFF","interpretation":"complete estimates at requested depth only; exact canonical terminals separate; no game-outcome selection, lowerdepth rescue, groundtruth/strength or arithmetic-speed inference"});
         write_observed(&mut output, &mut pending, "result.json", &report, ROW_BYTES)?;
         output.finish()?;
         Ok(report)
@@ -1037,7 +981,7 @@ mod tests {
             sha256: "0".repeat(64),
         };
         let plan = Plan {
-            schema: "quoridor.value-search-strength.compare.v1".into(),
+            schema: "quoridor.value-search-strength.compare.v2".into(),
             canonical_plan: BoundControl {
                 path: policy_path,
                 sha256: arena::digest(policy),
@@ -1046,7 +990,6 @@ mod tests {
                 path: resources_path,
                 sha256: arena::digest(resources),
             },
-            qualification: missing.clone(),
             book: missing.clone(),
             manifests: [missing.clone(), missing],
             output: root.join("must-not-create"),

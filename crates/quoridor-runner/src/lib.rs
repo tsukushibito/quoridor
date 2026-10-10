@@ -5,6 +5,7 @@ pub mod arena_clock;
 mod arena_manifest;
 pub mod arena_statistics;
 pub mod config;
+pub mod research_manifest;
 pub mod resources;
 pub mod runtime;
 mod sigma_clock;
