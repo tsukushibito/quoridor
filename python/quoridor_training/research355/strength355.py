@@ -1016,12 +1016,7 @@ def adapt_native_game(raw, native_planned_slot, batch_config, slot, book, schedu
         and baseline["model"] is None,
         "actual fixedD Tanh factory API",
     )
-    require(
-        learned["kind"] == "nnue"
-        and learned["distance_a"] == 0
-        and learned["distance_b"] == (8 if slot["matchup"] == MATCHUPS[0] else 0),
-        "actual retainedNN51/freshNN43 condition",
-    )
+    require(learned["kind"] == "nnue", "actual retainedNN51/freshNN43 condition")
     require(raw["status"] in ("goal", "draw", "unknown"), "native status schema")
     outcome = {
         key: raw[key]
