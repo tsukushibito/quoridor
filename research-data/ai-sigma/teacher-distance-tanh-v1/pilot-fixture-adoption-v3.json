@@ -1,0 +1,33 @@
+{
+  "schema": "quoridor.research.source-adoption-delta.v1",
+  "status": "ACCEPTED_TEST_ONLY",
+  "target": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/fixture-repair-v3/source-STOP.json",
+    "sha256": "ab3f901f76e5a3eebd555f71048dc524ba21e272cc6ab3d1ea5c9c22210a3e3e",
+    "bytes": 2170,
+    "mode": "0644"
+  },
+  "before": {
+    "path": "/workspaces/quoridor/crates/quoridor-runner/src/research_manifest.rs",
+    "sha256": "e0e2a9d1c52cf8c0dbe973963b5ea0ce8242605e453c066a88858946f7bb42a2",
+    "bytes": 27235,
+    "mode": "0644"
+  },
+  "post": {
+    "path": "/workspaces/quoridor/crates/quoridor-runner/src/research_manifest.rs",
+    "sha256": "70eb71d1ea098b39094d4cf743551b146771e1e8b7e958c767142b6cc7360604",
+    "bytes": 27237,
+    "mode": "0644"
+  },
+  "exact_only_two_parentheses": true,
+  "production_prefix_exact": true,
+  "failed_build": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/build-v1/failed-STOP.json",
+    "sha256": "bf54508b88ca86bf628436d8b73ba66712c59f74cb63036413f48701ebe64a68",
+    "bytes": 25622,
+    "mode": "0644"
+  },
+  "actual_adoption_STOP": "2026-10-11T10:18:49.137154+00:00",
+  "11_data_successes_replayed": false,
+  "remaining": []
+}
