@@ -1,0 +1,82 @@
+{
+  "schema": "quoridor.lr-comparison366.configuration-adoption.v1",
+  "issue": "quoridor-4lc.366",
+  "status": "HUMAN_SELECTED_RECIPE_ADOPTED_FITS_NOT_RUN",
+  "adopted_at": "2026-10-11T22:55:14.587840+00:00",
+  "current_plan": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/plan.json",
+    "sha256": "1fcf82297654c3aa57bb86cbc3a8fd2cbb6416fc4c75daf47c3e828eab4e9650",
+    "bytes": 52043,
+    "mode": "0644"
+  },
+  "historical_plan": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/plan.json",
+    "sha256": "9779a274fcd0c7cbb5d46c07f02ee5500eb05bac0d65c7ec30e14002f5be55b9",
+    "bytes": 52044,
+    "mode": "0644"
+  },
+  "historical_plan_Git": "HEAD before this adoption exactly reconstructs9779 bytes; accepted362 snapshots/receipts and pilot_decision_proposal unchanged",
+  "changed_field": "next_learning_study.common_learner_settings.optimizer.lr:0.0001->0.001 only",
+  "current_configs": [
+    {
+      "original": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/pilot-fit-A-v2.json",
+        "sha256": "9865c84d97b1dace07dc5e7dcd6cfae162c6c969c3334d2d5a43ca397c85a700",
+        "bytes": 2540,
+        "mode": "0644"
+      },
+      "current": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/lr-comparison366/fit-A-v1.json",
+        "sha256": "b6ab0145ffc0427cb827de3312dad47da94018b3dd509471b9591e0f6aaf4cdb",
+        "bytes": 2539,
+        "mode": "0644"
+      }
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/pilot-fit-B-v2.json",
+        "sha256": "ad3fbff736a28f4fae03400f8679b15580a777b0fb24d8d49f369c9015aaa63e",
+        "bytes": 2557,
+        "mode": "0644"
+      },
+      "current": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/lr-comparison366/fit-B-v1.json",
+        "sha256": "da29ea1086c9dac3dfe9640d2a0856f5cd56201c4503d395a6b61d0af0047f09",
+        "bytes": 2556,
+        "mode": "0644"
+      }
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/pilot-common-settings-v2.json",
+        "sha256": "724d765fdef322e2fc13fb05f51a68aeeb37b4aa14ddf26c58de759129d051c4",
+        "bytes": 2521,
+        "mode": "0644"
+      },
+      "current": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/lr-comparison366/settings-v1.json",
+        "sha256": "fd6e6af9d3fafa6e3e879074d3e3f2a4fdeac5560640df409be780936438a35b",
+        "bytes": 2520,
+        "mode": "0644"
+      }
+    }
+  ],
+  "source_reader_release": {
+    "guardian": {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/distance-input-diagnostic364-v1/controls/guardian-receipt.json",
+      "sha256": "acb382b9ad42fb751ca73fa18d7db3d474b20d7c5120d4b59a01a66e7eb8b2eb",
+      "bytes": 3218,
+      "mode": "0644"
+    },
+    "actual_reader_STOP": "2026-10-11T22:45:34.971646+00:00",
+    "all_owned_readers_children_jobs_TMP_remaining": [],
+    "reservation": null
+  },
+  "support": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/lr-comparison366/support-v1.json",
+    "sha256": "9bb2925dccf9107bf9d0e988b9784dbdccb345183e46f781071cfecdf994911d",
+    "bytes": 5484,
+    "mode": "0644"
+  },
+  "limitations": "Current configuration/admission input only; not fitSTART/PASS/curves or diagnostic interpretation. No source/code/teacher/cache/model/scale/order/quantity change, no replay/refund/newglobalallocation."
+}
