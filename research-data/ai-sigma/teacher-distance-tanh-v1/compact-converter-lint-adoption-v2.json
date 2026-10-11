@@ -1,0 +1,56 @@
+{
+  "adopted_at": "2026-10-11T14:23:01.697978+00:00",
+  "producer_source_STOP": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/compact-lint-repair-v6/source-STOP-binding.json",
+    "sha256": "09c118ccb2282fae3c3641f3122381a06da82a5055246da7b754dc85d37d3389",
+    "bytes": 5464,
+    "mode": "0644"
+  },
+  "before": [
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-data/src/common_corpus.rs",
+      "sha256": "e12ef770d290d546bccbf905ee9acb31bb6bc45006ee941fe9e1fbb36c78a009",
+      "bytes": 11088,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-data/src/terminal_stream.rs",
+      "sha256": "81dee32c1120bdabc0544a14869d26f6e665eaad813b14d31dcb2beffca7bb07",
+      "bytes": 65582,
+      "mode": "0644"
+    }
+  ],
+  "after": [
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-data/src/common_corpus.rs",
+      "sha256": "2ffc1ed3b5b29af4f64711ac69a9d5bffdad97a6daa848addd8920e7eeec38a1",
+      "bytes": 11132,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-data/src/terminal_stream.rs",
+      "sha256": "aacff4439e200b955faf41e74e1c20cf26b3126fcf95367e91ccf8121d35fe93",
+      "bytes": 65609,
+      "mode": "0644"
+    }
+  ],
+  "scope": "Ordinary Clippy styles only: transparent Box<Game> + immediate explicit unbox; existing game hash/offset tuple + immediate unpack; exact positive/nonempty divisibility guard. JSON/history/teacher bits/masks/model/scales/partition and test bodies preserved.",
+  "verification": "Current before/post/gzip custody exact; supplied strict forward/inverse and preserved-body proof inspected; scoped Rustfmt format/check PASS. Native2 tests already PASS once in originalfailedv5; postlint typing/Clippy/release/private/bindings remain UNRUN. No new reviewer, tests/compiler/model/data execution by Root.",
+  "original_failed_Build": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/compact-build-v5/operation-v5/manifest.json",
+    "sha256": "d37066c02819e51e9b137859c1078218e5d17cc4a1918684578e47b0aee7ba51",
+    "bytes": 24871,
+    "mode": "0644"
+  },
+  "original_failed_STOP": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/compact-build-v5/completion-collection-v5/failed-build-STOP.json",
+    "sha256": "838cafd6be800c47934b46823c6f2492f0cc59e38f9e2f842ff3d57b2350f49b",
+    "bytes": 14921,
+    "mode": "0644"
+  },
+  "software_whole_seconds": 5.6054952970007434,
+  "experimental_consumed_seconds": 138.60220936406404,
+  "experimental_remaining_seconds": 5261.397790635936,
+  "target_retained_floor_B": 1106046976,
+  "funding": "Contained existing Root512KiB integration/pilot support, no increase/refund."
+}

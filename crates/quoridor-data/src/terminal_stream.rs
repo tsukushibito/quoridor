@@ -454,7 +454,7 @@ struct IndexedOutcome {
 #[derive(Serialize, Deserialize)]
 #[serde(tag = "status", rename_all = "snake_case", deny_unknown_fields)]
 enum WorkerOutcome {
-    Returned { value: Game, whole_ns: u64 },
+    Returned { value: Box<Game>, whole_ns: u64 },
     Failed { started: bool, reason: String },
 }
 
@@ -775,9 +775,9 @@ fn validate_game(
     row_ids: &mut BTreeSet<String>,
     census: &mut Census,
     writer: &mut Writer,
-    game_sha: &str,
-    source_record_offset: u64,
+    source_record: (&str, u64),
 ) -> Result<()> {
+    let (game_sha, source_record_offset) = source_record;
     let policy = SearchPolicy::from_config(&h.config)?;
     let slot = h.scheduled.get(census.recorded).ok_or("extra game")?;
     if g.game != slot.game || g.request_id != slot.request_id || g.initial_prefix != slot.prefix {
@@ -1057,7 +1057,7 @@ fn scan(input: &Path, b: &IntakeBinding, writer: &mut Writer) -> Result<Value> {
                         &record.result,
                     )?);
                     match record.result {
-                        WorkerOutcome::Returned { value, .. } => value,
+                        WorkerOutcome::Returned { value, .. } => *value,
                         WorkerOutcome::Failed { reason, .. } => {
                             if reason.is_empty() {
                                 return Err("failed worker lacks original cause".into());
@@ -1087,8 +1087,7 @@ fn scan(input: &Path, b: &IntakeBinding, writer: &mut Writer) -> Result<Value> {
                     &mut row_ids,
                     &mut census,
                     writer,
-                    &hex_digest(&raw),
-                    total_read - raw.len() as u64,
+                    (&hex_digest(&raw), total_read - raw.len() as u64),
                 )?;
                 if !common {
                     let game_facts = json!({"game":g.game,"request_id":g.request_id,"family":g.family,

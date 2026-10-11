@@ -41,7 +41,9 @@ impl Config {
             || self.families == 0
             || self.prefix_lengths.is_empty()
             || self.prefix_lengths.len() > 196
-            || self.families % self.prefix_lengths.len() as u64 != 0
+            || !self
+                .families
+                .is_multiple_of(self.prefix_lengths.len() as u64)
             || self.prefix_lengths.iter().any(|n| *n == 0 || *n >= 200)
             || self.prefix_lengths.windows(2).any(|p| p[0] >= p[1])
         {
