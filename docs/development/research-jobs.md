@@ -117,3 +117,9 @@ python3 -B scripts/dev/research-progress-health.py remove
 ```
 
 `stop` は正確に所有するtimerだけを止め、modeを変えない。停止の人間指示には `disable` を使う。再開は人間が明示選択したmodeと `start` の両方が必要で、コンテナ再起動後も自律確認へ自動復帰しない。`status` はlocal controlsだけを読み、STOPPEDでも保留件数を確認できる。`check --dry-run` はcursor・Beads・LLMを変更しない。UNKNOWNは未取得の事実として残し、稼働保証や研究結果成功と扱わない。timerのPID/start/boot/argv照合とpidfdを用いた停止は、このtimer自身にだけ適用する。
+
+## Preparation time and launched experimental budgets
+
+For the human-authorized362 continuation, implementation/repair/build/software qualification/review/integration/queue waits are preparation. They retain costs and ordinary per-command hang limits, but do not start an unlaunched scientific phase clock or impose a calendar expiry on future scientific entry. Preserve the old expired job configs/results; create fresh configs for genuinely unfinished commands.
+
+Use the existing controller `max_runtime_seconds` and command monotonic clocks at actual launch. The selected generation cap is1800s and each fit cap600s; the5400s cumulative bound covers launched experimental numerical/conversion/generation/fit/render commands. Sum their original command wall receipts once and set the next maximum to the smaller of its phase cap and the remaining experimental allowance. Do not include LLM/source/software repair/build/queue/collection/admin waits. For these fresh jobs `end_at` can be `null`; notification expiry is separate and must not reuse the old preparation deadline. No timer-state service, recurring LLM monitor or per-stage receipt ACK is required. Node/output/storage/error/pause/ownership/cleanup controls remain enforced, and cap failure retains partial/UNKNOWN rather than refilling or silently increasing limits.
