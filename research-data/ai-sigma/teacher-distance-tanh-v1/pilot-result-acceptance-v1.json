@@ -1,0 +1,222 @@
+{
+  "schema": "quoridor.research.result-acceptance.v1",
+  "issue": "quoridor-4lc.362",
+  "status": "ACCEPTED_FINITE_DESCRIPTIVE_PILOT",
+  "accepted_at": "2026-10-11T16:34:24.359780+00:00",
+  "stopped_pair": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/result-handoff-v1/stopped-result-binding.json",
+    "sha256": "dabe6a68e2da3ba4fc7a4a1701a2808ca96785d908b2fb563345c57056b05e3d",
+    "bytes": 9550,
+    "mode": "0644"
+  },
+  "original_author_report": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/result-handoff-v1/report.md",
+    "sha256": "f1abdb2bcb3c8c0d0ecee1d02b8f98a3191e4d7420a78df40f12906fcb038b51",
+    "bytes": 7298,
+    "mode": "0644"
+  },
+  "review_control": {
+    "path": "/workspaces/quoridor/.artifacts/common-corpus-warmstart-study/source-review-v1/paired-result-v6/control.json",
+    "sha256": "773d9b61e35a011864d7c96f38f0c3d0cbe95fcc65ccd36bce026642c61a33e1",
+    "bytes": 3339,
+    "mode": "0644"
+  },
+  "review_report": {
+    "path": "/workspaces/quoridor/.artifacts/common-corpus-warmstart-study/source-review-v1/paired-result-v6/review.md",
+    "sha256": "e0bc43783d66a7c6592f1184e2a66063eab58a98e1f1ad6a83da4bc31c699627",
+    "bytes": 6725,
+    "mode": "0644"
+  },
+  "review_findings": {
+    "path": "/workspaces/quoridor/.artifacts/common-corpus-warmstart-study/source-review-v1/paired-result-v6/findings.json",
+    "sha256": "8d73f2333a23d9cc99b8e33512bd7e034f5ac9363f605ec91a8250be28047cd4",
+    "bytes": 1582,
+    "mode": "0644"
+  },
+  "result_clear": true,
+  "blockers": 0,
+  "ordinary_C1": {
+    "applied": "Retained INITIAL0/BEST200/LAST200 model checkpoints plus all11 fullT/V evaluation points0,20,...,200. No additional scheduled weight snapshots.",
+    "canonical_presentation": "docs/research-findings.md#completed-common-corpus-two-teacher-pilot-362-2026-10-11",
+    "original_report_and_summaries_unchanged": true
+  },
+  "outcomes": [
+    {
+      "candidate": "A",
+      "authoritative_manifest": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v3/fit-A-entry-v1/operation-v1/manifest.json",
+        "sha256": "350502098c3f17c8aae7d8cea5b4de3a9f2e110a59272aa20a864036b1343c38",
+        "bytes": 13661,
+        "mode": "0644"
+      },
+      "actual_STOP": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v3/fit-A-entry-v1/qualified-fit-STOP.json",
+        "sha256": "38cc288e9b8ec02edcb532b84854799a46f58223b35b935c62d1353b3c7a08bf",
+        "bytes": 12952,
+        "mode": "0644"
+      },
+      "summary": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v3/fit-A-entry-v1/fit-summary.json",
+        "sha256": "2734030799d739a8778a874189a492785aaf47a8e6fca866ac50456ba3888525",
+        "bytes": 2381,
+        "mode": "0644"
+      },
+      "initial_weights": "046fe926e56b955b0fb7de8f147a74ec33eace9cbc00a55c307f9b6541ab9841",
+      "best_weights": "10d4a86b16a1798b120c9357d812265d70231f6ff2e869a89638e3525b05b744",
+      "last_weights": "10d4a86b16a1798b120c9357d812265d70231f6ff2e869a89638e3525b05b744",
+      "initial_step": 0,
+      "best_step": 200,
+      "last_step": 200,
+      "curve_points": [0, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200],
+      "original_command_wall_seconds_once": 3.0296568830963224,
+      "curve_files": [
+        {
+          "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-compact-v3/z-curves.svg",
+          "sha256": "2bb79f07245ec4a2ddd397e7579805bcc81af150b4a377e28249042737ac721c",
+          "bytes": 14816,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-compact-v3/completed_root_raw-curves.svg",
+          "sha256": "1b0adfa562fa6da895d2b8cd7bc0f5ef250e8b89e7feffa47f8631fb1f20ae35",
+          "bytes": 15240,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-compact-v3/curves.csv",
+          "sha256": "4cf078177c203ecd39524f6bd7880d1235ad9975afe1727fcf523e3807a58ebc",
+          "bytes": 6596,
+          "mode": "0644"
+        }
+      ],
+      "status": "COMPLETE200_AUTHORITATIVE_OPERATION_PASS",
+      "native_candidate_parity_or_strength": "NOT_RUN"
+    },
+    {
+      "candidate": "B",
+      "authoritative_manifest": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v3/fit-B-entry-v1/operation-v1/manifest.json",
+        "sha256": "13456bc329aaa0b4b0a17ebb6b6dbf102e6d937dc2347d08591a42faea64444c",
+        "bytes": 13660,
+        "mode": "0644"
+      },
+      "actual_STOP": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v3/fit-B-entry-v1/qualified-fit-STOP.json",
+        "sha256": "f5c61b7bc757c8f0dd4b69ade759a1d4160f6129a754f502e042866dd0330e78",
+        "bytes": 12597,
+        "mode": "0644"
+      },
+      "summary": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v3/fit-B-entry-v1/fit-summary.json",
+        "sha256": "a576e5b000d6f8ee5d0fe9c58a6c781e7d8dec0ff566fed91ece6836910e77d0",
+        "bytes": 4493,
+        "mode": "0644"
+      },
+      "initial_weights": "046fe926e56b955b0fb7de8f147a74ec33eace9cbc00a55c307f9b6541ab9841",
+      "best_weights": "4710d9f86aac6bb123d73e7d7dcae684ed31b771e954747df5104ecab73d7082",
+      "last_weights": "4710d9f86aac6bb123d73e7d7dcae684ed31b771e954747df5104ecab73d7082",
+      "initial_step": 0,
+      "best_step": 200,
+      "last_step": 200,
+      "curve_points": [0, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200],
+      "original_command_wall_seconds_once": 2.955343740992248,
+      "curve_files": [
+        {
+          "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-B-output-compact-v1/z-curves.svg",
+          "sha256": "a50dcc55d4bb6b2b890d7e609b3a3a085f425e665e05642e4981044bfe186e62",
+          "bytes": 14791,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-B-output-compact-v1/completed_root_raw-curves.svg",
+          "sha256": "02f3dd889dabec8bb550c256222b78a594d549f817a4ac08dfbcc1de195f7f6b",
+          "bytes": 15265,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-B-output-compact-v1/curves.csv",
+          "sha256": "4947272f82017d0e27bba968a6d66a453780af1277ef9f544380014158eeba25",
+          "bytes": 6790,
+          "mode": "0644"
+        }
+      ],
+      "status": "COMPLETE200_AUTHORITATIVE_OPERATION_PASS",
+      "native_candidate_parity_or_strength": "NOT_RUN"
+    }
+  ],
+  "current_selected_metadata": [
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/plan.json",
+      "sha256": "9779a274fcd0c7cbb5d46c07f02ee5500eb05bac0d65c7ec30e14002f5be55b9",
+      "bytes": 52044,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/pilot-common-settings-v2.json",
+      "sha256": "724d765fdef322e2fc13fb05f51a68aeeb37b4aa14ddf26c58de759129d051c4",
+      "bytes": 2521,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/pilot-fit-A-v2.json",
+      "sha256": "9865c84d97b1dace07dc5e7dcd6cfae162c6c969c3334d2d5a43ca397c85a700",
+      "bytes": 2540,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/pilot-fit-B-v2.json",
+      "sha256": "ad3fbff736a28f4fae03400f8679b15580a777b0fb24d8d49f369c9015aaa63e",
+      "bytes": 2557,
+      "mode": "0644"
+    }
+  ],
+  "shared_cache": {
+    "path": "/workspaces/quoridor/.worktree/assets/data/common-corpus-warmstart-study/pilot-v1/cache-compact-v3/cache.json",
+    "sha256": "522b2dd661ff3ddfdb858ca80a9fc5585dfe599cc3039fa9bbfa96f6703bc37d",
+    "bytes": 43204,
+    "mode": "0644"
+  },
+  "original_conversion": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/compact-migration-v1/operation-v1/manifest.json",
+    "sha256": "7a6821979e2c20229ccbd7117fa585af357aa6c13a9ba14e26e41b22d7fc1d40",
+    "bytes": 8685,
+    "mode": "0644"
+  },
+  "scope": "Human-selected8game/two200 BEST43 warmstarts completed; source/codec/actualarray/realfit simplification verified. Finite saved count/loss/guide observations only, current original normal operation manifests remain sole execution authorities.",
+  "counts_per_fit": {
+    "updates": 200,
+    "training_predictions": 10850,
+    "epochs": 50,
+    "full_selector_predictions": 3223,
+    "total": 14073,
+    "cap": 16023,
+    "full_T_V_evaluation_points": 11,
+    "model_checkpoint_kinds": ["INITIAL", "BEST", "LAST"]
+  },
+  "current_model_checkpoint_kinds": ["INITIAL0", "BEST200", "LAST200"],
+  "evaluation_steps": [0, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200],
+  "corpus": {
+    "rows": 341,
+    "eligible_train": 217,
+    "eligible_validation": 76,
+    "excluded_both": 48,
+    "families_train": 6,
+    "families_validation": 2,
+    "completed_depth": 6,
+    "games": 8,
+    "goals": 8,
+    "draws": 0,
+    "UNKNOWN": 0,
+    "nodes": 206264382
+  },
+  "limitations": "OpenedV/two relatedfamilies/sharedlineage/repeatedepochs; D6reference notoptimaltruth. No population/convergence/uniquecause/Elo/strength/speed/default claim. No postfitnativeparity/game/diagnostic or furtherfit authority.",
+  "actual_pair_reader_STOP": "2026-10-11T16:14:19.804368+00:00",
+  "actual_reviewer_reader_STOP": "2026-10-11T16:26:26.807618+00:00",
+  "reviewer_lease_release": "2026-10-11T16:26:26.808745+00:00",
+  "experimental_command_seconds_consumed": 150.2711004090961,
+  "experimental_command_seconds_remaining": 5249.728899590904,
+  "cost_domains": "Original launched experimentalcommand receipts once; software/build/source/admin/LLM/controller/nested separate, allworkcost/continuouspeaks/exactworkerUTCSTOPUNKNOWN. No new execution by acceptance.",
+  "preservation": "All originalfailed/raw/errors/masks/floors/partialA18123outputs/canonicalgzip/old-and-newcache/baseline/unique trainedcheckpoints retained. No deletion/refund/globalincrease.",
+  "funding": "Existing Root262144 review/presentation allowance within issued1MiB review and pilot192MiB control/review/Git/whole1GiB; record/docs/handoff64KiB forward contained, no newbudget.",
+  "owned_readers_children_jobs_TMP_remaining": []
+}
