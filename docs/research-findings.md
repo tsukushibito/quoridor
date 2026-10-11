@@ -1080,6 +1080,21 @@ Saved row-weighted MSE on this same finite eligible scope:
 
 A's selected outcome V loss declined; B's selected raw V loss declined while its outcome T loss increased. Both models' final V losses remained above the analytic-D guide on both views. The two teachers' MSE magnitudes are not a strength ranking. Each view retained its own T-only constant and analytic-D row/family guides; both own-V minima among the eleven observations occurred at200. Only two related V families were available, V was opened for BEST selection, and repeated trajectory rows/epochs share lineage. This is a feasibility and short learning observation, not convergence, population generalization, unique causal attribution, Elo or playing strength. D6 values are reference estimates, not optimal truth. Post-fit native parity and play were not run; no model promotion or further science is authorised by completion.
 
+Saved-only coverage analysis in closed Beads `quoridor-4lc.363` used the [same accepted compact cache](../.worktree/assets/data/common-corpus-warmstart-study/pilot-v1/cache-compact-v3/cache.json) (`522b2dd6`; all seven binary identities and lengths matched), with no model predictions or new games. All 341 geometry+D input combinations were distinct, but they came from eight correlated trajectories.
+
+| Trait among the 293 eligible rows          | Count | Share |
+| ------------------------------------------ | ----: | ----: |
+| Combined remaining wall stock <=5          |   237 | 80.9% |
+| Both players have no walls left            |   101 | 34.5% |
+| Combined remaining wall stock >=16         |     3 |  1.0% |
+| Absolute wall-goal distance difference <=2 |   214 | 73.0% |
+| Pawn Manhattan distance is 1               |    14 |  4.8% |
+| Either wall-goal distance <=2              |     0 |    0% |
+
+Manhattan adjacency is geometric only, not a legal-jump qualification. Low wall stock occurred in 170/217 T rows (78.3%) and 67/76 V rows (88.2%); both stocks were zero in 82/217 T rows (37.8%) and 19/76 V rows (25.0%). Outcome labels were balanced: T 110 positive/107 negative, V38/38. Eligible raw magnitudes were <=.25 in 188/293 rows (64.2%) and <=.5 in 243/293 (82.9%); mean raw values were -.05042 T/-.04854 V.
+
+The 48 excluded rows were exactly 24 raw terminal +2 and 24 raw terminal -2, six per family. All had combined stock <=2; 32/48 had either wall-goal distance<=2. The selected common mask therefore removed all such near-goal samples from this pilot. Most eligible rows had largely spent wall stocks and closely matched D distances; row count and repeated epochs do not imply full-game coverage. Per-position model errors, gradients and choices were not linked to these traits. This census establishes neither a weakness cause, a public-data mismatch, nor a sign/capacity defect, and authorises no feature, teacher, mask, draw, data-quantity or fit change. Full counts and schema/identity details remain in the existing 363 issue notes.
+
 Readable original maintained curves and full-precision tables:
 
 - A: [outcome curves](../.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-compact-v3/z-curves.svg), [raw-search curves](../.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-compact-v3/completed_root_raw-curves.svg), [CSV](../.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-compact-v3/curves.csv).
