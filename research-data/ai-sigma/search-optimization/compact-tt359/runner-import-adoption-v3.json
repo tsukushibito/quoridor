@@ -1,0 +1,36 @@
+{
+  "issue": "quoridor-4lc.359",
+  "status": "ORDINARY_RUNNER_IMPORT_ADOPTED_SOFTWARE_CLOSURE_PENDING",
+  "failure": {
+    "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/compact-tt359-v1/software-controls/candidate-entry-unfinished-v3/completion-collection-v1/failed-runner-closure-STOP.json",
+    "sha256": "0782a1ba9ab866eb247e2c10a96354e046c7598cf9be406978e7d39d30759a99",
+    "bytes": 26424,
+    "mode": "0644"
+  },
+  "actual_prior_reader_STOP": "2026-10-11T02:56:18.473292+00:00",
+  "before": {
+    "path": "/workspaces/quoridor/crates/quoridor-runner/src/arena.rs",
+    "sha256": "f7d444c693c8b7d518b9a05a5b8f90508223930f289cd6f2444d5766e26e2654",
+    "bytes": 36423,
+    "mode": "0644"
+  },
+  "postimages": [
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/arena.rs",
+      "sha256": "11775dc58a9a172de8417a0e0eaf77d1d2097b648b577e8c6ce98d554331a6cd",
+      "bytes": 36435,
+      "mode": "0644"
+    }
+  ],
+  "unchanged_candidate38": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/search-optimization/compact-tt359/candidate-source-map-signed-zero-v2.json",
+    "sha256": "fcb5cf6351cde8dd70eef252758315e8d8982842f5c93bc21b4d7c1151007027",
+    "bytes": 7968,
+    "mode": "0644"
+  },
+  "scope": "Only std::collections import adds BTreeMap already used by arena family coverage. Exact inverse restores beforebytes; all function/class/module bodies and TT/evaluator/rules semantics unchanged. Runner arena.rs outsideAI38 is an additional affectedsoftware dependency, not folded into or concealed by AI compiled map.",
+  "actual_source_reader_writer_STOP": "2026-10-11T03:01:08.002766+00:00",
+  "validation": "Scoped Rustfmt2024/check and exact inverse PASS; no Root tests/Cargo/model/Search/game. Actual9TT/3publicinlet definitionPASS reused; original00..13 successes not replayed. Failed14 closure and unrun15..17 are the next unique four commands.",
+  "funding": "New inclusive256KiB import/proof/source/control/dispatch/Git inside359 Root8MiB. All oldfailure/capture/raw/masks/fees120.34077442612033s/UNKNOWN/global49994555392 held.",
+  "owned_readers_children_jobs_TMP": []
+}

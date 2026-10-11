@@ -3,7 +3,7 @@ use crate::config::Config;
 use quoridor_core::research::{Ruleset, SigmaContext};
 use quoridor_data::Result;
 use serde::{Deserialize, Serialize};
-use std::collections::BTreeSet;
+use std::collections::{BTreeMap, BTreeSet};
 
 pub const SCHEMA: &str = "quoridor-arena-v2";
 
