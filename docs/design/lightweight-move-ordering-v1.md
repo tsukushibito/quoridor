@@ -117,3 +117,9 @@ staticは実際のlegal即goal、wall-only goal mapにおけるown pawn合法des
 実用上可能なら一つの必要比較入口でprior policy、continuation-only、continuation＋staticを同じqualified TT/model/input/limitsで比べ、static増分を識別する。三つの恒常source・targetやfull suiteを作らず、予定比較に必要なvariantだけ一時保持して終了後に不要入口を撤去する。既選択cold/real-warm、completed depth4/deeperとUNKNOWNは維持し、nodes/evaluations、cutoff rank/first child、static/dynamic被覆・実order変更、PVS/TTを先に見る。親map/route準備、sort、startup/drop/aging/stat-update全費とplain wall/memoryを含める。独立minimax/no-ordering/equal-best/alllegal、route alternatives/own penalty、legal jump/goal/colour/control/namespace/overflowが新しい変更境界で、旧成功を埋め草で再演しない。
 
 source成長に追加512KiBを50GB内で前向き支持する。360 source合計1.5MiB、global49,979,875,328B、残り20,124,672B。これはheavy build/private/TMP/raw/review/control/failure/Git/cleanup/assessmentの配分ではなく、具体的whole支持はentry前に必要。旧RAW/fees/UNKNOWNをrefundせず、359独立作業とactual entered intervals/soleCargo、323pause/default/N/fullgen/fits96/sealsを維持する。
+
+### 停止済み実装と前向き支持（2026-10-11）
+
+360.1のmain＋signed continuation＋static sourceは固定binding `ded66aaf`、actual source reader/writerSTOP00:52:55.199623Zで停止した。21 Rust＋2 Python定義は未build・未型検査・未実行で、独立360.2が一つの変更境界を確認する。現TT bodyは旧b976と同一で、359を未資格のまま混ぜない。geometry借用／fallback parent準備、session表900,376Bとinvocation DAG buffer104,976Bはsource上の設計値で、ABI/RSS・whole時間・利益は未測定である。
+
+[whole支持128MiB](../../research-data/ai-sigma/search-optimization/continuation360/whole-support-v1.json)は完了355の未使用future TMPを残320→192MiBへ再分類し、既存shared target1GiBを一度だけ課金する。元source1.5MiB、旧RAW/費/floor/UNKNOWNは保持する。private・targetのactual custody、現在のqualified image/model/inputとfresh lifetime guardsを満たすまでheavy entryではない。未実行assessment案の歴史的BEST51を選択済みBEST43へ対応させ、cold四familyを4/8/12/16 prefix strataに事前対応する。360 calls/depth/capsと実chronological warm traceの由来を保持し、結果後のselection/refillを行わない。全policyには同じ実際に資格済みTTを用いる。
