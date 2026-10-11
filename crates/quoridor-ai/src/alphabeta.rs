@@ -879,6 +879,7 @@ impl Table {
         self.slots[i] = Some(e);
     }
 }
+#[cfg_attr(test, derive(Debug))]
 enum Interrupted {
     Stop(StopReason),
     Error(SearchError),
@@ -2239,7 +2240,7 @@ mod persistent_tt_tests {
             &cancel,
             None,
             &mut |_| cancel.store(true, Ordering::Relaxed),
-            (&mut cancel_table, ScoreDomain::LEGACY),
+            (&mut cancel_table, ScoreDomain::LEGACY, None, false, false),
         )
         .unwrap();
         charge(r.stats.nodes);

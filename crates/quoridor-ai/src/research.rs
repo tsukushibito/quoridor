@@ -252,7 +252,7 @@ mod tests {
         let c = SigmaContext::synthetic_diagnostic(c.position(), 20, h).unwrap();
         assert!(!c.raw_legal_ids().is_empty());
         let (eval, calls) = spy(vec![], 0.25);
-        let mut s = SearchSession::new_sigma_diagnostic(c, limits(1, 1), 1979, eval).unwrap();
+        let s = SearchSession::new_sigma_diagnostic(c, limits(1, 1), 1979, eval).unwrap();
         assert!(!s.done());
         assert_eq!(s.research_context.as_ref().unwrap().terminal_value(), None);
         assert!(calls.borrow().is_empty());

@@ -1,0 +1,89 @@
+{
+  "schema": "quoridor.research.source-adoption.v1",
+  "status": "SOURCE_ADOPTED_AFFECTED_SOFTWARE_UNQUALIFIED",
+  "issue": "quoridor-4lc.360.1",
+  "source_packet": {
+    "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/ordering-build-v1/compile-repair-v1/source-STOP-binding.json",
+    "sha256": "e3d64893701d82c76b580732a277db34cd5dda98abee27684abd62036464f8ef",
+    "bytes": 3919,
+    "mode": "0644"
+  },
+  "patch": {
+    "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/ordering-build-v1/compile-repair-v1/compiler-requested-repair.patch",
+    "sha256": "4425e4b72d1693ab10f5dfec391263b3429b66f7a26103a5a9bf255a3363994a",
+    "bytes": 1365,
+    "mode": "0644"
+  },
+  "paths": [
+    {
+      "source_path": "crates/quoridor-ai/src/alphabeta.rs",
+      "before": {
+        "path": "/workspaces/quoridor/crates/quoridor-ai/src/alphabeta.rs",
+        "sha256": "5ca7e36a60f6a89ea3de52f433fdd49b45c3e87fa05b53ba5a49de497d71647b",
+        "bytes": 115756,
+        "mode": "0644"
+      },
+      "after": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/ordering-build-v1/compile-repair-v1/alphabeta.rs",
+        "sha256": "ed7c79eafb9f06aba0524c3e2deaf29e5876f880e350ef25bddca6c83ee24195",
+        "bytes": 115809,
+        "mode": "0644"
+      },
+      "before_gzip": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/ordering-build-v1/compile-repair-v1/alphabeta.rs.before.gz",
+        "sha256": "6726b6ce3f19539927aef3924769c1b70e1e9dfcd95ec9be3a4cad985ac70806",
+        "bytes": 23731,
+        "mode": "0644"
+      },
+      "forward_and_inverse_exact": true,
+      "only_test_attribute_or_fixture_binding_delta": true
+    },
+    {
+      "source_path": "crates/quoridor-ai/src/research.rs",
+      "before": {
+        "path": "/workspaces/quoridor/crates/quoridor-ai/src/research.rs",
+        "sha256": "93e5f211764b468c5e9c4412ba9591216ade0367ef60708ef4b75f975b83d76a",
+        "bytes": 13271,
+        "mode": "0644"
+      },
+      "after": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/ordering-build-v1/compile-repair-v1/research.rs",
+        "sha256": "033819dbd8be2c26922e241f27ba80d49c948b73ec5f8ad3186298780f97d398",
+        "bytes": 13267,
+        "mode": "0644"
+      },
+      "before_gzip": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/ordering-build-v1/compile-repair-v1/research.rs.before.gz",
+        "sha256": "fc196c707ed5ba4ffb29ded4850b12f32a02077b45e6c7d2330c22a6598266d3",
+        "bytes": 3292,
+        "mode": "0644"
+      },
+      "forward_and_inverse_exact": true,
+      "only_test_attribute_or_fixture_binding_delta": true
+    }
+  ],
+  "change": "Three exact compiler-requested test-only sites: cfg_attr(test, derive(Debug)), original legacy cancellation tuple with None/false/false, unusedmut removal. Production algorithm/control/TT/PV/order/evaluation bodies unchanged.",
+  "strict_forward_and_inverse_check": true,
+  "scoped_Rustfmt2024_write_check_and_posthash": true,
+  "new_definitions": 0,
+  "Rust37": "UNBUILT/UNTYPED/UNRUN; initial filtered Cargo compile exited101 before tests",
+  "Python3": "Actual prior PASS reused, no replay",
+  "failed_manifest": {
+    "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/ordering360-build-v1/operation-v2/manifest.json",
+    "sha256": "d2e2e5fa1ef68f33745537570a878dae9af997ae3146e387f2442eea0b45a6e5",
+    "bytes": 20852,
+    "mode": "0644"
+  },
+  "failed_software_known_controller_seconds": 21.236358070047572,
+  "failed_return_vs_disk_cleanup": "Original guardian_return NULL /innercleanupfalse vs persisted directwait+cleanuptrue/pendingmask/attemptedpersist and outercleanuptrue retained, no promotion.",
+  "retained_target_floor_B": 1284284416,
+  "target_cap_B": 1342177280,
+  "current_target_allocation_B": null,
+  "preceding_private_floor_B": 16244736,
+  "fresh_private_floor_B": 4096,
+  "preparation_growth": "Small source/normal source-record/Root admin growth inside existing2MiB forward/Root8MiB; repair512KiB contained, no global increase/refund.",
+  "source_reader_writer_STOP": "2026-10-11T17:15:20.240160+00:00",
+  "owned_readers_children_jobs_TMP_remaining": [],
+  "hardware_or_futurequiet_reservation": false,
+  "compiler_tests_native_model_Search_calls": 0
+}
