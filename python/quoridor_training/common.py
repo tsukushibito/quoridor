@@ -779,17 +779,16 @@ def dual_teacher_targets(row, mapping, draw_policy, *, raw_file_bits, mask_byte)
         or struct.unpack("<I", struct.pack("<f", row["search"]["value"]))[0] != bits
         or type(row["common_eligible"]) is not bool
         or row["common_eligible"] != bool(expected_eligible)
-        or row["completed_root_raw"] != raw
         or row["completed_root_raw_bits"] != bits
         or row["raw_value_perspective"] != "root_side_to_move"
         or row["raw_value_units"] != "maintained_fixedD_a0b8_tanh_nonterminal_abs1_terminal_abs2"
-        or row["teacher_B_target"] != (mapped if row["common_eligible"] else None)
+        or (None if row["teacher_B_target"] is None else struct.pack("<f", row["teacher_B_target"]))
+        != (struct.pack("<f", mapped) if row["common_eligible"] else None)
         or row["model_sha"] != "original-distance-a0-b8-tanh"
         or row["search"]
         != {
             **row["search"],
             "type": "alpha_beta",
-            "value": raw,
             "depth": 6,
             "bound": "completed_root",
         }
@@ -799,7 +798,9 @@ def dual_teacher_targets(row, mapping, draw_policy, *, raw_file_bits, mask_byte)
         "raw_score": raw,
         "score_bits": bits,
         "z": z,
-        "completed_root_target": row["teacher_B_target"],
+        "completed_root_target": (
+            struct.unpack("<f", struct.pack("<f", mapped))[0] if row["common_eligible"] else None
+        ),
         "eligible": row["common_eligible"],
         "completed_depth": search["completed_depth"],
         "reason": reason,
@@ -1085,13 +1086,20 @@ def common_row_metadata(index, record, cfg):
     }
     # Fixed units are derived from the canonical Header/AlphaBeta contract, not an
     # invented observed field. The original raw bits remain the selected B source.
-    dual_teacher_targets(
+    targets = dual_teacher_targets(
         row,
         cfg["root_value_policy"],
         cfg["draw_policy"],
         raw_file_bits=index["completed_root_raw_bits"],
         mask_byte=int(index["common_eligible"]),
     )
+    # Normalize only the transient view AFTER each original scalar's FP32 bits
+    # have independently matched. Canonical JSON and declared bits stay untouched.
+    raw = targets["raw_score"]
+    row["completed_root_raw"] = raw
+    row["search"] = {**row["search"], "value": raw}
+    row["teacher_B_target"] = targets["completed_root_target"]
+    row["rootmean"] = math.copysign(1.0, raw) if abs(raw) == 2 else raw
     return row
 
 
