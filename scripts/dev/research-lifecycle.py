@@ -562,9 +562,8 @@ FIT_OUTPUTS = (
 )
 
 
-def numerical_check(experiment, manifest):
-    q = document(experiment["numerical_qualification"])
-    expected = {
+def numerical_fields(experiment, manifest):
+    return {
         "schema": "quoridor.research.numerical-qualification.v1",
         "status": "PASS",
         "phase": experiment["phase"],
@@ -582,6 +581,155 @@ def numerical_check(experiment, manifest):
         "canonical_plan_sha256": experiment["canonical_plan_sha256"],
         "remaining": [],
     }
+
+
+def ordering_qualification_shape(experiment):
+    require(
+        experiment["phase"] == "ordering-qualification"
+        and experiment.get("numerical_qualification") is None
+        and type(experiment["planned_slots"]) is int
+        and experiment["planned_slots"] == 20
+        and experiment.get("batch") is None,
+        "only finite360 pre-Search qualification",
+    )
+    require(
+        experiment["config"]["sha256"]
+        == "4a1bb65baea495a99501a087aa59c8391fadbc9fa0719ad9c8350563388c2aa0"
+        and experiment["schedule"]["sha256"]
+        == "6671bbf8d04ed31fedbfeccdbfaf28dcf5c713e02866544f0d9c8de2110b8671"
+        and experiment["canonical_plan_sha256"]
+        == "ddb46782feb000f77f5e45d99ffde19d27bce9eaae0e7999afed97bb0a54948e",
+        "360 frozen config/schedule/plan",
+    )
+    require(
+        len(experiment["argv"]) == 6
+        and experiment["argv"][1:]
+        == [
+            "ordering-qualify",
+            "--experiment",
+            "@EXPERIMENT@",
+            "--experiment-sha256",
+            "@EXPERIMENT_SHA256@",
+        ]
+        and len(experiment["models"]) == 1
+        and len(experiment["dynamic_libraries"]) == 5,
+        "360 bounded caller/model/library scope",
+    )
+    model = experiment["models"][0]
+    require(
+        model["descriptor"]["sha256"]
+        == "46ec2c4708f96dcf9fad579c2fb0d1299c6663df27412f0faac98267467715e1"
+        and model["descriptor"]["bytes"] == 677
+        and model["descriptor"]["mode"] == "0600"
+        and model["weights"]["sha256"]
+        == "046fe926e56b955b0fb7de8f147a74ec33eace9cbc00a55c307f9b6541ab9841"
+        and model["weights"]["bytes"] == 49284
+        and model["weights"]["mode"] == "0644"
+        and model["evaluator_sha256"]
+        == "96a5f41f875022d1752b9c999595ad58bfb2d42687a8f06de08d42b1c4215875",
+        "360 exact BEST43 required",
+    )
+
+
+def ordering_qualification_evidence(experiment, manifest, values):
+    report = json.loads(values["result.json"])
+    rows = [json.loads(line) for line in values["observations.jsonl"].splitlines()]
+    require(
+        values["observations.jsonl"].endswith(b"\n")
+        and report["schema"] == "quoridor.continuation360.input-qualification.v1"
+        and report["status"] == "COMPLETE"
+        and report["planned"] == report["qualified"] == 20
+        and report["Search_calls"] == 0
+        and len(rows) == 20
+        and report["roots"] == rows,
+        "360 full20 qualification/journal required",
+    )
+    for i, row in enumerate(rows):
+        require(
+            row["id"] == i
+            and row["status"] == "QUALIFIED"
+            and row["Search_calls"] == 0
+            and row["model_evaluations_attempted"] == row["model_evaluations_returned"] == 2
+            and row["parent_unchanged"] is True
+            and row["plain_bits"] == row["scratch_bits"]
+            and type(row["plain_value"]) in (int, float)
+            and math.isfinite(row["plain_value"])
+            and abs(row["plain_value"]) <= 1
+            and row["scratch_value"] == row["plain_value"],
+            "360 partial/nonfinite/precision/root refusal",
+        )
+    expected = numerical_fields({**experiment, "phase": "compare"}, manifest)
+    expected["status"] = None
+    claim = report["numerical_qualification"]
+    require(claim == expected, "360 actual numerical subject drift")
+    return claim
+
+
+def finalize_numerical_claim(candidate):
+    if candidate.get("kind") != "run":
+        return
+    try:
+        if document(candidate["experiment"])["phase"] != "ordering-qualification":
+            return
+        claim = candidate.get("data", {}).get("numerical_qualification")
+        if claim is not None:
+            claim["status"] = (
+                "PASS"
+                if candidate["status"] == "PASS"
+                and candidate["cleanup_complete"] is True
+                and candidate["remaining"] == []
+                else "UNKNOWN"
+            )
+    except BaseException as error:
+        candidate["secondary"].append(
+            {"stage": "numerical_claim_finalization", **error_fact(error)}
+        )
+        if candidate["status"] != "CANCELLED":
+            candidate["status"] = "FAILED"
+        candidate["cleanup_complete"] = False
+        claim = candidate.get("data", {}).get("numerical_qualification")
+        if isinstance(claim, dict):
+            claim["status"] = "UNKNOWN"
+
+
+def numerical_check(experiment, manifest):
+    q = document(experiment["numerical_qualification"])
+    if experiment["argv"][1] == "ordering-assess":
+        reference = experiment["numerical_qualification"]
+        require(
+            Path(reference["path"]).name == "manifest.json"
+            and not Path(reference["path"]).with_name("INCOMPLETE").exists(),
+            "authoritative360 numerical manifest",
+        )
+        require(
+            q["schema"] == COMPLETION_SCHEMA
+            and q["status"] == "PASS"
+            and q["cleanup_complete"] is True
+            and q["remaining"] == []
+            and q["primary"] is None
+            and q["secondary"] == []
+            and q["data"]["status"] == "PASS",
+            "360 qualification outer/finalizer incomplete",
+        )
+        qualified = document(q["experiment"])
+        ordering_qualification_shape(qualified)
+        require(
+            all(
+                qualified[k] == experiment[k]
+                for k in (
+                    "build_manifest",
+                    "config",
+                    "schedule",
+                    "inputs",
+                    "models",
+                    "dynamic_libraries",
+                    "canonical_plan_sha256",
+                )
+            ),
+            "360 qualified source/model/input/library drift",
+        )
+        q = q["data"]["numerical_qualification"]
+    expected = numerical_fields(experiment, manifest)
     require(
         all(q.get(k) == v for k, v in expected.items()),
         "current numerical/source/model/input correspondence",
@@ -910,9 +1058,13 @@ def experiment_phase_check(experiment):
             "corpus",
             "fit",
             "software-qualification",
+            "ordering-qualification",
         },
         "phase",
     )
+    if phase == "ordering-qualification":
+        ordering_qualification_shape(experiment)
+        return
     if phase == "software-qualification":
         require(
             experiment.get("numerical_qualification") is None
@@ -1140,6 +1292,8 @@ def experiment_check(spec):
     )
     approved = approved_plan(spec, experiment)
     refs.append(spec["approved_plan"])
+    if experiment["phase"] == "compare" and experiment["argv"][1] == "ordering-assess":
+        numerical_check(experiment, manifest)
     if experiment["phase"] in {"corpus", "fit", "software-qualification"}:
         common_pilot_check(spec, experiment, manifest, approved)
     if experiment["phase"] == "arena":
@@ -1849,6 +2003,13 @@ def collect_data(spec, experiment):
             values[item["name"]] = raw
         except BaseException as error:
             data["errors"].append({"stage": item["name"], **error_fact(error)})
+    if experiment["phase"] == "ordering-qualification":
+        try:
+            data["numerical_qualification"] = ordering_qualification_evidence(
+                experiment, document(experiment["build_manifest"]), values
+            )
+        except BaseException as error:
+            data["errors"].append({"stage": "360_input_qualification", **error_fact(error)})
     if experiment.get("phase") == "generation":
         data["generation"] = {
             "schema": "quoridor.research.generation-evidence.v1",
@@ -2618,6 +2779,7 @@ def _prepare_completion(directory, job_ref):
                 candidate["status"] = "FAILED"
             candidate["cleanup_complete"] = False
             candidate["secondary"].append({"stage": "final_artifact_source", **error_fact(error)})
+    finalize_numerical_claim(candidate)
     new_json(directory / "manifest.json", candidate)
     fd = os.open(directory, os.O_DIRECTORY)
     try:

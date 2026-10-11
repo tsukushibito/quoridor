@@ -26,6 +26,9 @@ const DESCRIPTOR: &str = "46ec2c4708f96dcf9fad579c2fb0d1299c6663df27412f0faac982
 const WEIGHTS: &str = "046fe926e56b955b0fb7de8f147a74ec33eace9cbc00a55c307f9b6541ab9841";
 const EVALUATOR: &str = "96a5f41f875022d1752b9c999595ad58bfb2d42687a8f06de08d42b1c4215875";
 const BOOK: &str = "a6abde1f3182ba0e876c9e7719d3389502a44b3406ca28b7af9a0456952a6878";
+const CONFIG_SHA: &str = "4a1bb65baea495a99501a087aa59c8391fadbc9fa0719ad9c8350563388c2aa0";
+const SCHEDULE_SHA: &str = "6671bbf8d04ed31fedbfeccdbfaf28dcf5c713e02866544f0d9c8de2110b8671";
+const ASSESSMENT_SHA: &str = "ddb46782feb000f77f5e45d99ffde19d27bce9eaae0e7999afed97bb0a54948e";
 const COLD: [usize; 4] = [0, 34, 68, 102];
 const CAPS: [u64; 2] = [2_000_000, 8_000_000];
 const AGGREGATE: u64 = 1_800_000_000;
@@ -122,11 +125,13 @@ fn schedule() -> Vec<Request> {
     rows
 }
 fn validate(p: &Plan, e: &Experiment, requests: &[Request]) -> Result<()> {
+    let qualification = e.phase == "ordering-qualification";
     if p.schema != "quoridor.continuation360.plan.v1"
-        || e.phase != "compare"
-        || e.planned_slots != 360
+        || (!qualification && e.phase != "compare")
+        || (qualification && !qualification_shape(e))
+        || e.planned_slots != if qualification { 20 } else { 360 }
         || e.batch.is_some()
-        || e.numerical_qualification.is_none()
+        || (e.numerical_qualification.is_some() == qualification)
         || e.canonical_plan_sha256 != p.assessment.sha256
         || requests != schedule()
         || e.models.len() != 1
@@ -135,7 +140,11 @@ fn validate(p: &Plan, e: &Experiment, requests: &[Request]) -> Result<()> {
         || e.argv.len() != 6
         || e.argv[1..]
             != [
-                "ordering-assess",
+                if qualification {
+                    "ordering-qualify"
+                } else {
+                    "ordering-assess"
+                },
                 "--experiment",
                 "@EXPERIMENT@",
                 "--experiment-sha256",
@@ -164,6 +173,34 @@ fn validate(p: &Plan, e: &Experiment, requests: &[Request]) -> Result<()> {
         return Err("360 selected unchanged BEST43 required".into());
     }
     Ok(())
+}
+/// The only model-bearing bootstrap. It cannot call Search or admit comparison.
+pub(crate) fn qualification_shape(e: &Experiment) -> bool {
+    e.phase == "ordering-qualification"
+        && e.numerical_qualification.is_none()
+        && e.planned_slots == 20
+        && e.batch.is_none()
+        && e.config.sha256 == CONFIG_SHA
+        && e.schedule.sha256 == SCHEDULE_SHA
+        && e.canonical_plan_sha256 == ASSESSMENT_SHA
+        && e.models.len() == 1
+        && e.dynamic_libraries.len() == 5
+        && e.models[0].descriptor.sha256 == DESCRIPTOR
+        && e.models[0].descriptor.bytes == 677
+        && e.models[0].descriptor.mode == "0600"
+        && e.models[0].weights.sha256 == WEIGHTS
+        && e.models[0].weights.bytes == 49284
+        && e.models[0].weights.mode == "0644"
+        && e.models[0].evaluator_sha256 == EVALUATOR
+        && e.argv.len() == 6
+        && e.argv[1..]
+            == [
+                "ordering-qualify",
+                "--experiment",
+                "@EXPERIMENT@",
+                "--experiment-sha256",
+                "@EXPERIMENT_SHA256@",
+            ]
 }
 #[derive(Clone, Debug)]
 struct RootSpec {
@@ -422,7 +459,7 @@ impl Output {
         write(
             self,
             "INCOMPLETE",
-            &json!({"status":"INCOMPLETE","planned":360}),
+            &json!({"status":"INCOMPLETE","planned":planned["planned"]}),
             ROW_BYTES,
         )?;
         write(self, "planned.json", planned, 262144)?;
@@ -592,14 +629,10 @@ fn session(eval: Arc<dyn StaticEvaluator>, request: &Request) -> Result<SearchSe
     }
     Ok(session)
 }
-/// Uses the maintained generic Experiment/numerical/lifetime entry, not private TT access.
-pub fn run(bound: &BoundControl) -> Result<Value> {
-    let whole = Instant::now();
-    let (e, _) = research_manifest::load(bound, "compare")?;
+fn prepare_inputs(e: &Experiment) -> Result<(Plan, Vec<Request>, Vec<Option<RootSpec>>)> {
     let p: Plan = e.config.read()?;
     let requests: Vec<Request> = e.schedule.read()?;
-    validate(&p, &e, &requests)?;
-    output_correspondence(&p)?;
+    validate(&p, e, &requests)?;
     let assessment: Value = p.assessment.read()?;
     if assessment["assessment"]["all_planned_root_calls"] != 360
         || assessment["assessment"]["selection_before_outcomes"]["cold_family_ids"] != json!(COLD)
@@ -614,6 +647,238 @@ pub fn run(bound: &BoundControl) -> Result<Value> {
     }
     let book: Value = p.book.read()?;
     let roots = derive_roots(&book, warm_game(&p, &book)?.as_ref())?;
+    Ok((p, requests, roots))
+}
+fn load_evaluator(e: &Experiment) -> Result<Arc<dyn StaticEvaluator>> {
+    let metadata: quoridor_nnue::residual::ResidualManifest = e.models[0].descriptor.read()?;
+    if metadata.weights_sha != WEIGHTS
+        || metadata.distance_fit.a.to_bits() != 0f32.to_bits()
+        || metadata.distance_fit.b.to_bits() != 0f32.to_bits()
+    {
+        return Err("360 immutable BEST43 zero-bypass coefficients".into());
+    }
+    let model = Arc::new(quoridor_nnue::residual::ResidualModel::load(
+        &e.models[0].descriptor.path,
+    )?);
+    // Same maintained typed_identity content digest as runtime's residual branch.
+    if quoridor_data::hex_digest(&model.fingerprint()) != EVALUATOR {
+        return Err("360 actual loaded evaluator identity mismatch".into());
+    }
+    let eval: Arc<dyn StaticEvaluator> = Arc::new(alphabeta::ResidualEvaluator::new(model));
+    Ok(eval)
+}
+fn finish_output(
+    output: &mut Output,
+    outcome: Result<Value>,
+    mut secondary: Vec<Value>,
+    mut failure: Value,
+) -> Result<Value> {
+    let failed = match output.finalize(outcome, &mut secondary) {
+        Ok(v) => return Ok(v),
+        Err(e) => e,
+    };
+    failure["primary"] = fact(&*failed);
+    failure["secondary"] = json!(secondary);
+    // Independent best effort; publication/fallback failures never replace the object.
+    if let Err(e) = output.file("failure.json", &failure, 524288) {
+        let advisory = json!({"primary":fact(&*failed),"secondary":secondary,"failure_publication":fact(&*e),"failure_close_errors":output.close_errors});
+        let _ = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+            if let Ok(mut raw) = serde_json::to_vec(&advisory) {
+                raw.push(b'\n');
+                let _ = std::io::stderr().lock().write_all(&raw);
+            }
+        }));
+    }
+    Err(failed)
+}
+fn qualify_root(spec: &RootSpec, eval: &dyn StaticEvaluator, row: &mut Value) -> Result<()> {
+    let root = replay(spec)?;
+    let before = identity(&root);
+    row["context"] = before.clone();
+    row["prefix"] = json!(spec.prefix);
+    row["family"] = json!(spec.family);
+    row["local_ply"] = json!(spec.local_ply);
+    let accumulator = eval.prepare_context(&root)?;
+    let Some(alphabeta::EvalAccumulator::Float(a)) = accumulator.as_ref() else {
+        return Err("360 qualification needs current scalar FT accumulator".into());
+    };
+    if a.features.side != root.position().turn {
+        return Err("360 qualification STM mismatch".into());
+    }
+    row["features"] = json!({"ids":a.features.ids,"distance_bits":a.features.distance.map(f32::to_bits),"side":a.features.side});
+    row["model_evaluations_attempted"] = json!(1);
+    let plain = eval.evaluate(&root, accumulator.as_ref())?;
+    row["model_evaluations_returned"] = json!(1);
+    row["plain_value"] = json!(plain);
+    row["plain_bits"] = json!(plain.to_bits());
+    let mut scratch = eval.create_scratch();
+    row["model_evaluations_attempted"] = json!(2);
+    let cached = eval.evaluate_with_scratch(&root, accumulator.as_ref(), &mut scratch)?;
+    row["model_evaluations_returned"] = json!(2);
+    row["scratch_value"] = json!(cached);
+    row["scratch_bits"] = json!(cached.to_bits());
+    precision(plain, cached)?;
+    if identity(&root) != before {
+        return Err("360 qualification parent changed".into());
+    }
+    row["parent_unchanged"] = json!(true);
+    row["status"] = json!("QUALIFIED");
+    Ok(())
+}
+fn precision(plain: f32, cached: f32) -> Result<()> {
+    if !plain.is_finite()
+        || !cached.is_finite()
+        || plain.abs() > 1.
+        || plain.to_bits() != cached.to_bits()
+    {
+        return Err("360 current one-shot/scratch FP32 correspondence failed".into());
+    }
+    Ok(())
+}
+// Own returned root and journal facts outside fallible claim/publication work.
+#[derive(Default)]
+struct QualificationRecords {
+    rows: Vec<Value>,
+    journal_returned_ok: usize,
+}
+impl QualificationRecords {
+    fn census(&self) -> Value {
+        let processed = self.rows.len();
+        let qualified = self
+            .rows
+            .iter()
+            .filter(|r| r["status"] == "QUALIFIED")
+            .count();
+        json!({"planned":20,"processed":processed,"qualified":qualified,
+            "processed_UNKNOWN":processed-qualified,"remaining_UNKNOWN":20-qualified,
+            "unentered":20-processed,"journal_rows_attempted":processed,
+            "journal_rows_returned_Ok":self.journal_returned_ok,
+            "journal_rows_returned_Err":processed-self.journal_returned_ok})
+    }
+    fn failure(&self) -> Value {
+        let mut failure = self.census();
+        failure["schema"] = json!("quoridor.continuation360.input-qualification-failure.v1");
+        failure["roots"] = json!(self.rows);
+        failure["Search_calls"] = json!(0);
+        failure["numerical_qualification"] = Value::Null;
+        failure["INCOMPLETE"] = json!(true);
+        failure
+    }
+}
+// These narrow ports are also the production path: root evaluation, original bound
+// claim read, and the owned journal. Tests can exercise returned errors without NN/Search.
+fn qualification_records(
+    output: &mut Output,
+    experiment_sha: &str,
+    records: &mut QualificationRecords,
+    secondary: &mut Vec<Value>,
+    mut qualify: impl FnMut(usize, &mut Value) -> Result<()>,
+    prepare_claim: impl FnOnce() -> Result<Value>,
+    mut persist: impl FnMut(&mut Output, &Value) -> Result<()>,
+) -> Result<Value> {
+    let mut first_error = None;
+    // One funnel owns the original box; later returned errors never replace it.
+    let claim = {
+        let mut retain = |stage: &str, error: Box<dyn std::error::Error + Send + Sync>| {
+            if first_error.is_none() {
+                first_error = Some(error);
+            } else {
+                secondary.push(json!({"stage":stage,"error":fact(&*error)}));
+            }
+        };
+        for id in 0..20 {
+            let mut row = json!({"id":id,"status":"UNKNOWN","Search_calls":0,"model_evaluations_attempted":0,"model_evaluations_returned":0});
+            if let Err(error) = qualify(id, &mut row) {
+                row["status"] = json!("UNKNOWN");
+                row["error"] = fact(&*error);
+                retain("qualification_root", error);
+            }
+            records.rows.push(row.clone());
+            match persist(output, &row) {
+                Ok(()) => records.journal_returned_ok += 1,
+                Err(error) => {
+                    retain("qualification_journal", error);
+                    break;
+                }
+            }
+        }
+        match prepare_claim() {
+            Ok(claim) => claim,
+            Err(error) => {
+                retain("qualification_claim", error);
+                Value::Null
+            }
+        }
+    };
+    let mut report = records.census();
+    let complete = first_error.is_none() && report["qualified"] == 20;
+    report["schema"] = json!("quoridor.continuation360.input-qualification.v1");
+    report["status"] = json!(if complete { "COMPLETE" } else { "INCOMPLETE" });
+    report["experiment_sha256"] = json!(experiment_sha);
+    report["roots"] = json!(records.rows);
+    report["Search_calls"] = json!(0);
+    report["numerical_qualification"] = claim;
+    report["scope"] = json!(
+        "Actual current20 full-history/STM inputs and selected scalarFT/guardedhead one-shot versus scratch bit correspondence. Not new Torch/teacher/delta/strength evidence; unchanged math scope reused."
+    );
+    if !complete {
+        let error = first_error.unwrap_or_else(|| "360 original20 roots not all qualified".into());
+        if let Err(saved) = output.file("result.json", &report, 524288) {
+            secondary.push(json!({"stage":"partial_result","error":fact(&*saved)}));
+        }
+        return Err(error);
+    }
+    Ok(report)
+}
+/// Exactly20 original contexts; no Search/session, replacement, child move, teacher or fit.
+pub fn qualify(bound: &BoundControl) -> Result<Value> {
+    let (e, _) = research_manifest::load(bound, "ordering-qualification")?;
+    let (mut p, _, roots) = prepare_inputs(&e)?;
+    // A separate finite output lifetime; config4a1bb remains the original assessment config.
+    p.output = p
+        .output
+        .with_file_name("assessment-input-qualification-v1-data");
+    output_correspondence(&p)?;
+    let mut output = Output::new(&p.output);
+    let mut secondary = Vec::new();
+    let mut records = QualificationRecords {
+        rows: Vec::with_capacity(20),
+        journal_returned_ok: 0,
+    };
+    let header = json!({"schema":"quoridor.continuation360.input-qualification-intent.v1","planned":20,"experiment_sha256":bound.sha256,"config_sha256":e.config.sha256,"Search_calls":0});
+    let outcome: Result<Value> = (|| {
+        output.setup(&header)?;
+        let eval = load_evaluator(&e)?;
+        qualification_records(
+            &mut output,
+            &bound.sha256,
+            &mut records,
+            &mut secondary,
+            |id, row| {
+                roots
+                    .get(id)
+                    .and_then(Option::as_ref)
+                    .ok_or_else(|| "360 original root absent; no replacement".into())
+                    .and_then(|spec| qualify_root(spec, &*eval, row))
+            },
+            || {
+                let build: Value = e.build_manifest.read()?;
+                Ok(
+                    json!({"schema":"quoridor.research.numerical-qualification.v1","status":null,"phase":"compare","artifact_sha256":build["artifact"]["sha256"],"compiled_sources_sha256":arena::json_digest(&research_manifest::sources())?,"config_sha256":e.config.sha256,"schedule_sha256":e.schedule.sha256,"input_sha256":e.inputs.iter().map(|r| &r.sha256).collect::<Vec<_>>(),"descriptor_sha256":[e.models[0].descriptor.sha256],"weights_sha256":[e.models[0].weights.sha256],"evaluator_sha256":[e.models[0].evaluator_sha256],"rules":e.rules,"distance_units":e.distance_units,"value_perspective":e.value_perspective,"canonical_plan_sha256":e.canonical_plan_sha256,"remaining":[]}),
+                )
+            },
+            |output, row| output.row(row, false),
+        )
+    })();
+    finish_output(&mut output, outcome, secondary, records.failure())
+}
+
+/// Uses the maintained generic Experiment/numerical/lifetime entry, not private TT access.
+pub fn run(bound: &BoundControl) -> Result<Value> {
+    let whole = Instant::now();
+    let (e, _) = research_manifest::load(bound, "compare")?;
+    let (p, requests, roots) = prepare_inputs(&e)?;
+    output_correspondence(&p)?;
     let inputs_seconds = whole.elapsed().as_secs_f64();
     let header = json!({"schema":"quoridor.continuation360.intent.v1","experiment_sha256":bound.sha256,"config_sha256":e.config.sha256,"schedule_sha256":e.schedule.sha256,"build_manifest":e.build_manifest,"compiled_sources":research_manifest::sources(),"model":e.models[0],"input_refs":e.inputs,"requests":requests,"planned":360,"plain":240,"diagnostic":120,"no_refill":true,"pre_root_continuation":"absent; actual speculative LIFO only"});
     let mut output = Output::new(&p.output);
@@ -627,21 +892,7 @@ pub fn run(bound: &BoundControl) -> Result<Value> {
         output.setup(&header)?;
         pending = json!({"stage":"model_setup","Search_invoked":false});
         let model_start = Instant::now();
-        let metadata: quoridor_nnue::residual::ResidualManifest = e.models[0].descriptor.read()?;
-        if metadata.weights_sha != WEIGHTS
-            || metadata.distance_fit.a.to_bits() != 0f32.to_bits()
-            || metadata.distance_fit.b.to_bits() != 0f32.to_bits()
-        {
-            return Err("360 immutable BEST43 zero-bypass coefficients".into());
-        }
-        let model = Arc::new(quoridor_nnue::residual::ResidualModel::load(
-            &e.models[0].descriptor.path,
-        )?);
-        // Same maintained typed_identity content digest as runtime's residual branch.
-        if quoridor_data::hex_digest(&model.fingerprint()) != EVALUATOR {
-            return Err("360 actual loaded evaluator identity mismatch".into());
-        }
-        let eval: Arc<dyn StaticEvaluator> = Arc::new(alphabeta::ResidualEvaluator::new(model));
+        let eval = load_evaluator(&e)?;
         let model_setup_seconds = model_start.elapsed().as_secs_f64();
         let cancel = AtomicBool::new(false);
         let mut start = 0;
@@ -782,24 +1033,224 @@ pub fn run(bound: &BoundControl) -> Result<Value> {
             json!({"schema":"quoridor.continuation360.result.v1","status":if count.complete==360 {"COMPLETE"} else {"COMPLETED_WITH_UNKNOWN"},"experiment_sha256":bound.sha256,"config_sha256":e.config.sha256,"schedule_sha256":e.schedule.sha256,"planned":360,"session_setup_attempts":count.session_setup_attempts,"session_setup_Ok":count.session_setup_ok,"session_setup_Err":count.session_setup_err,"root_replay_attempts":count.attempted,"attempted":count.attempted,"actual_Search_invocations":count.invoked,"returned_Ok":count.ok,"returned_Err":count.err,"completed_requested_depth":count.complete,"durably_published_complete_rows":count.published_complete,"planned_UNKNOWN":360-count.complete,"node_liability":count.liability,"input_verification_and_derivation_seconds":inputs_seconds,"model_setup_seconds":model_setup_seconds,"model_drop_seconds":model_drop_seconds,"passes":pass_costs,"root_whole_intervals":root_costs,"root_interval_cost_domain":"Actual interval includes primary+cost-journal serialization/sync, setup on first and drop on last root. Shared model/input/header/footer/outer-finalizer costs retained separately in outer whole; no invented perroot causal shares or use of Search-only as whole.","whole_until_result_publication_seconds":whole.elapsed().as_secs_f64(),"final_authoritative_whole":"outer lifecycle directwait/finalizer; native receipt alone not completion/benefit PASS","benefit_interpretation":"NOT_ASSESSED; prebound gates need saved matched results and honest cost domains"}),
         )
     })();
-    let failed = match output.finalize(outcome, &mut secondary) {
-        Ok(result) => return Ok(result),
-        Err(e) => e,
-    };
-    let failure = json!({"schema":"quoridor.continuation360.failure.v1","status":"FAILED","experiment_sha256":bound.sha256,"config_sha256":e.config.sha256,"planned":360,"session_setup_attempts":count.session_setup_attempts,"session_setup_Ok":count.session_setup_ok,"session_setup_Err":count.session_setup_err,"root_replay_attempts":count.attempted,"attempted":count.attempted,"actual_Search_invocations":count.invoked,"returned_Ok":count.ok,"returned_Err":count.err,"completed_requested_depth":count.complete,"durably_published_complete_rows":count.published_complete,"remaining_unknown":360-count.published_complete,"node_liability":count.liability,"last_attempt_or_return":pending,"passes":pass_costs,"root_whole_intervals":root_costs,"primary":fact(&*failed),"secondary":secondary,"INCOMPLETE":true,"outer_completion":"NOT_FINALIZED"});
-    // Independent best effort; publication/fallback failures never replace the object.
-    if let Err(e) = output.file("failure.json", &failure, 524288) {
-        let advisory = json!({"primary":fact(&*failed),"secondary":secondary,"failure_publication":fact(&*e),"failure_close_errors":output.close_errors});
-        let _ = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
-            if let Ok(mut raw) = serde_json::to_vec(&advisory) {
-                raw.push(b'\n');
-                let _ = std::io::stderr().lock().write_all(&raw);
-            }
-        }));
-    }
-    Err(failed)
+    let failure = json!({"schema":"quoridor.continuation360.failure.v1","status":"FAILED","experiment_sha256":bound.sha256,"config_sha256":e.config.sha256,"planned":360,"session_setup_attempts":count.session_setup_attempts,"session_setup_Ok":count.session_setup_ok,"session_setup_Err":count.session_setup_err,"root_replay_attempts":count.attempted,"attempted":count.attempted,"actual_Search_invocations":count.invoked,"returned_Ok":count.ok,"returned_Err":count.err,"completed_requested_depth":count.complete,"durably_published_complete_rows":count.published_complete,"remaining_unknown":360-count.published_complete,"node_liability":count.liability,"last_attempt_or_return":pending,"passes":pass_costs,"root_whole_intervals":root_costs,"primary":Value::Null,"secondary":[],"INCOMPLETE":true,"outer_completion":"NOT_FINALIZED"});
+    finish_output(&mut output, outcome, secondary, failure)
 }
 
 #[cfg(test)]
 #[path = "ordering_assessment_tests.rs"]
 mod tests;
+
+#[cfg(test)]
+mod input_qualification_tests {
+    use super::*;
+    #[test]
+    fn ordering360_qualification_precision_refuses_nonfinite_or_changed_bits() {
+        assert!(precision(0.25, 0.25).is_ok());
+        for (a, b) in [
+            (f32::NAN, 0.),
+            (f32::INFINITY, 0.),
+            (0., -0.),
+            (1.01, 1.01),
+            (0.25, 0.25000003),
+        ] {
+            assert!(precision(a, b).is_err());
+        }
+    }
+    #[test]
+    fn ordering360_qualification_replay_preserves_full_order_and_counted_parent() {
+        let spec = RootSpec {
+            prefix: vec![13, 67],
+            family: 0,
+            local_ply: Some(0),
+            expected: None,
+        };
+        let root = replay(&spec).unwrap();
+        assert_eq!(root.total_ply(), 2);
+        let changed = RootSpec {
+            expected: Some(json!({"root_key":"wrong","history_counts":[]})),
+            ..spec
+        };
+        assert!(replay(&changed).is_err());
+        let reversed = RootSpec {
+            prefix: vec![67, 13],
+            family: 0,
+            local_ply: None,
+            expected: None,
+        };
+        assert!(replay(&reversed).is_err());
+    }
+
+    #[test]
+    fn ordering360_qualification_cannot_escalate_to_Search_or_change_frozen_inputs() {
+        let f = |h: &str| json!({"path":"/fake/input","sha256":h,"bytes":1,"mode":"0644"});
+        let value = json!({"schema":"quoridor.research.experiment.v1","phase":"ordering-qualification","build_manifest":f("a"),"config":f(CONFIG_SHA),"schedule":f(SCHEDULE_SHA),"inputs":[],"models":[{"descriptor":{"path":"/fake/manifest","sha256":DESCRIPTOR,"bytes":677,"mode":"0600"},"weights":{"path":"/fake/weights","sha256":WEIGHTS,"bytes":49284,"mode":"0644"},"evaluator_sha256":EVALUATOR}],"dynamic_libraries":(0..5).map(|_|json!({"file":f("b"),"version":"FAKE"})).collect::<Vec<_>>(),"numerical_qualification":null,"canonical_plan_sha256":ASSESSMENT_SHA,"rules":RULES,"distance_units":"wall-distance/80","value_perspective":"side-to-move","planned_slots":20,"batch":null,"argv":["/fake/runner","ordering-qualify","--experiment","@EXPERIMENT@","--experiment-sha256","@EXPERIMENT_SHA256@"]});
+        let e: Experiment = serde_json::from_value(value).unwrap();
+        assert!(qualification_shape(&e));
+        for mutation in 0..8 {
+            let mut other = e.clone();
+            match mutation {
+                0 => other.phase = "compare".into(),
+                1 => other.argv[1] = "ordering-assess".into(),
+                2 => other.planned_slots = 360,
+                3 => other.config.sha256 = "wrong".into(),
+                4 => other.schedule.sha256 = "wrong".into(),
+                5 => other.models[0].weights.sha256 = "wrong".into(),
+                6 => other.numerical_qualification = Some(other.config.clone()),
+                _ => other.models.clear(),
+            }
+            assert!(!qualification_shape(&other));
+        }
+    }
+
+    fn qualification_output(label: &str) -> (PathBuf, Output) {
+        let parent = std::env::temp_dir().canonicalize().unwrap().join(format!(
+            "ordering360-qualification-{label}-{}-{}",
+            std::process::id(),
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_nanos()
+        ));
+        fs::create_dir(&parent).unwrap();
+        let mut output = Output::new(&parent.join("data"));
+        output.setup(&json!({"planned":20})).unwrap();
+        (parent, output)
+    }
+    fn saved_value(path: &Path) -> Value {
+        serde_json::from_slice(&fs::read(path).unwrap()).unwrap()
+    }
+    #[test]
+    fn ordering360_qualification_first_root_error_survives_later_bound_read() {
+        let (parent, mut output) = qualification_output("root-then-read");
+        let missing = FileRef {
+            path: parent.join("later-build.json"),
+            sha256: "0".repeat(64),
+            bytes: 2,
+            mode: "0644".into(),
+        };
+        let original = Box::new(std::io::Error::other("first root E"));
+        let original_address = &*original as *const std::io::Error;
+        let mut original = Some(original);
+        let mut records = QualificationRecords::default();
+        let mut secondary = Vec::new();
+        let outcome = qualification_records(
+            &mut output,
+            "fixture",
+            &mut records,
+            &mut secondary,
+            |id, row| {
+                row["model_evaluations_attempted"] = json!(if id == 0 { 1 } else { 2 });
+                row["model_evaluations_returned"] = json!(if id == 0 { 0 } else { 2 });
+                if id == 0 {
+                    return Err(original.take().unwrap());
+                }
+                row["status"] = json!("QUALIFIED");
+                Ok(())
+            },
+            || missing.read::<Value>(),
+            |output, row| output.row(row, false),
+        );
+        let failed = finish_output(&mut output, outcome, secondary, records.failure()).unwrap_err();
+        assert_eq!(
+            failed.downcast_ref::<std::io::Error>().unwrap() as *const _,
+            original_address
+        );
+        let result = saved_value(&output.root.join("result.json"));
+        let failure = saved_value(&output.root.join("failure.json"));
+        for report in [&result, &failure] {
+            assert_eq!(report["planned"], 20);
+            assert_eq!(report["processed"], 20);
+            assert_eq!(report["qualified"], 19);
+            assert_eq!(report["processed_UNKNOWN"], 1);
+            assert_eq!(report["remaining_UNKNOWN"], 1);
+            assert_eq!(report["unentered"], 0);
+            assert_eq!(report["journal_rows_returned_Ok"], 20);
+            assert_eq!(report["journal_rows_returned_Err"], 0);
+            assert_eq!(report["roots"].as_array().unwrap().len(), 20);
+            assert_eq!(report["roots"][0]["model_evaluations_attempted"], 1);
+            assert_eq!(report["roots"][0]["model_evaluations_returned"], 0);
+            assert_eq!(report["Search_calls"], 0);
+            assert!(report["numerical_qualification"].is_null());
+        }
+        assert_eq!(failure["primary"]["text"], "first root E");
+        assert_eq!(failure["secondary"].as_array().unwrap().len(), 1);
+        assert_eq!(failure["secondary"][0]["stage"], "qualification_claim");
+        assert!(
+            !failure["secondary"][0]["error"]["text"]
+                .as_str()
+                .unwrap()
+                .is_empty()
+        );
+        let journal = fs::read_to_string(output.root.join("observations.jsonl")).unwrap();
+        let journal: Vec<Value> = journal
+            .lines()
+            .map(|s| serde_json::from_str(s).unwrap())
+            .collect();
+        assert_eq!(json!(journal), result["roots"]);
+        assert_eq!(result["status"], "INCOMPLETE");
+        assert!(output.root.join("INCOMPLETE").exists());
+        assert!(output.rows.is_none() && output.costs.is_none());
+        fs::remove_dir_all(parent).unwrap();
+    }
+    #[test]
+    fn ordering360_qualification_partial_journal_counts_failed_and_unentered_roots() {
+        let (parent, mut output) = qualification_output("partial-journal");
+        let original = Box::new(std::io::Error::other("first root E"));
+        let original_address = &*original as *const std::io::Error;
+        let mut original = Some(original);
+        let mut records = QualificationRecords::default();
+        let mut secondary = Vec::new();
+        let outcome = qualification_records(
+            &mut output,
+            "fixture",
+            &mut records,
+            &mut secondary,
+            |id, row| {
+                row["model_evaluations_attempted"] = json!(if id == 0 { 1 } else { 2 });
+                row["model_evaluations_returned"] = json!(if id == 0 { 0 } else { 2 });
+                if id == 0 {
+                    return Err(original.take().unwrap());
+                }
+                row["status"] = json!("QUALIFIED");
+                Ok(())
+            },
+            || Ok(json!({"status":null})),
+            |output, row| {
+                if row["id"] == 2 {
+                    close_file(output.rows.take().unwrap())?;
+                }
+                output.row(row, false)
+            },
+        );
+        let failed = finish_output(&mut output, outcome, secondary, records.failure()).unwrap_err();
+        assert_eq!(
+            failed.downcast_ref::<std::io::Error>().unwrap() as *const _,
+            original_address
+        );
+        let result = saved_value(&output.root.join("result.json"));
+        let failure = saved_value(&output.root.join("failure.json"));
+        for report in [&result, &failure] {
+            assert_eq!(report["planned"], 20);
+            assert_eq!(report["processed"], 3);
+            assert_eq!(report["qualified"], 2);
+            assert_eq!(report["processed_UNKNOWN"], 1);
+            assert_eq!(report["remaining_UNKNOWN"], 18);
+            assert_eq!(report["unentered"], 17);
+            assert_eq!(report["journal_rows_attempted"], 3);
+            assert_eq!(report["journal_rows_returned_Ok"], 2);
+            assert_eq!(report["journal_rows_returned_Err"], 1);
+            assert_eq!(report["roots"][2]["model_evaluations_returned"], 2);
+            assert_eq!(report["Search_calls"], 0);
+        }
+        assert!(result["numerical_qualification"]["status"].is_null());
+        assert!(failure["numerical_qualification"].is_null());
+        assert_eq!(failure["secondary"][0]["stage"], "qualification_journal");
+        assert_eq!(result["status"], "INCOMPLETE");
+        assert!(output.root.join("INCOMPLETE").exists());
+        assert!(output.rows.is_none() && output.costs.is_none());
+        let journal = fs::read_to_string(output.root.join("observations.jsonl")).unwrap();
+        assert_eq!(journal.lines().count(), 2);
+        fs::remove_dir_all(parent).unwrap();
+    }
+}

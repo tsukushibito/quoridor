@@ -190,6 +190,16 @@ fn phase_shape(e: &Experiment) -> bool {
                         "@EXPERIMENT_SHA256@",
                     ]
         }
+        "ordering-qualification" => {
+            #[cfg(feature = "ordering-assessment")]
+            {
+                crate::ordering_assessment::qualification_shape(e)
+            }
+            #[cfg(not(feature = "ordering-assessment"))]
+            {
+                false
+            }
+        }
         "materialize" | "compare" | "analysis" => e.numerical_qualification.is_some(),
         _ => false,
     }
@@ -365,11 +375,51 @@ fn load_checked(
         generation_inputs(&e)?;
         return Ok((e, Value::Null));
     }
+    if phase == "ordering-qualification" {
+        return Ok((e, Value::Null));
+    }
     let q: Value = e
         .numerical_qualification
         .as_ref()
         .ok_or("research numerical qualification required")?
         .read()?;
+    #[cfg(feature = "ordering-assessment")]
+    let q = {
+        let mut q = q;
+        if e.argv.get(1).is_some_and(|a| a == "ordering-assess") {
+            let reference = e.numerical_qualification.as_ref().unwrap();
+            if reference
+                .path
+                .file_name()
+                .is_none_or(|n| n != "manifest.json")
+                || reference.path.with_file_name("INCOMPLETE").exists()
+                || q["schema"] != "quoridor.research.completion.v1"
+                || q["status"] != "PASS"
+                || q["cleanup_complete"] != true
+                || q["remaining"] != json!([])
+                || !q["primary"].is_null()
+                || q["secondary"] != json!([])
+                || q["data"]["status"] != "PASS"
+            {
+                return Err("360 authoritative finalized input qualification required".into());
+            }
+            let origin: FileRef = serde_json::from_value(q["experiment"].clone())?;
+            let qualified: Experiment = origin.read()?;
+            if !crate::ordering_assessment::qualification_shape(&qualified)
+                || qualified.build_manifest != e.build_manifest
+                || qualified.config != e.config
+                || qualified.schedule != e.schedule
+                || qualified.inputs != e.inputs
+                || qualified.models != e.models
+                || serde_json::to_value(&qualified.dynamic_libraries)?
+                    != serde_json::to_value(&e.dynamic_libraries)?
+            {
+                return Err("360 qualified experiment/input/model/library drift".into());
+            }
+            q = q["data"]["numerical_qualification"].clone();
+        }
+        q
+    };
     if q["schema"] != "quoridor.research.numerical-qualification.v1"
         || q["status"] != "PASS"
         || q["phase"] != phase
