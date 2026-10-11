@@ -975,11 +975,7 @@ fn scan(input: &Path, b: &IntakeBinding, writer: &mut Writer) -> Result<Value> {
     let mut positions = BTreeSet::new();
     let mut row_ids = BTreeSet::new();
     let common = b.scope == "common-corpus";
-    let games_name = if common {
-        "stream-games.jsonl.gz"
-    } else {
-        "stream-games.jsonl"
-    };
+    let games_name = "stream-games.jsonl";
     let games_path = writer.output_path().join(games_name);
     let mut games_file = if common {
         None
@@ -991,34 +987,10 @@ fn scan(input: &Path, b: &IntakeBinding, writer: &mut Writer) -> Result<Value> {
                 .open(&games_path)?,
         )
     };
-    let games_raw_cap = b
-        .human_quantity_n
-        .unwrap_or(64)
-        .checked_mul(65537)
-        .ok_or("game index bound")?;
-    let mut games_gzip = if common {
-        Some(crate::lossless_jsonl::Writer::create(
-            &games_path,
-            games_raw_cap,
-            games_raw_cap
-                .checked_add(games_raw_cap / 20)
-                .and_then(|n| n.checked_add(1048576))
-                .ok_or("game gzip bound")?,
-        )?)
-    } else {
-        None
-    };
     let mut append_game = |value: &Value| -> Result<()> {
-        let mut raw = serde_json::to_vec(value)?;
-        if common && raw.len() > 65536 {
-            return Err("minimal game index upper refused; original source retained".into());
-        }
-        raw.push(b'\n');
-        if let Some(w) = &mut games_gzip {
-            w.append(&raw)?;
-        }
         if let Some(w) = &mut games_file {
-            w.write_all(&raw)?;
+            serde_json::to_writer(&mut *w, value)?;
+            w.write_all(b"\n")?;
         }
         Ok(())
     };
@@ -1095,11 +1067,6 @@ fn scan(input: &Path, b: &IntakeBinding, writer: &mut Writer) -> Result<Value> {
                             }
                             census.recorded += 1;
                             census.unknown += 1;
-                            append_game(
-                                &json!({"metadata_schema":"quoridor-common-corpus-game-index-v2","game":record.index,
-                                "source_record_offset":total_read-raw.len() as u64,"source_record_sha256":hex_digest(&raw),
-                                "result":event["record"]["result"],"row_count":0}),
-                            )?;
                             before_footer = before_footer
                                 .checked_add(raw.len() as u64)
                                 .ok_or("stream bytes overflow")?;
@@ -1123,20 +1090,13 @@ fn scan(input: &Path, b: &IntakeBinding, writer: &mut Writer) -> Result<Value> {
                     &hex_digest(&raw),
                     total_read - raw.len() as u64,
                 )?;
-                let game_facts = json!({"game":g.game,"request_id":g.request_id,"family":g.family,
-                    "initial_prefix":g.initial_prefix,"final_prefix":g.final_prefix,"final_context":g.final_context,
-                    "provenance":g.provenance,"termination":g.termination,"failed_search":g.failed_search,
-                    "attempted_search_calls":g.attempted_search_calls,"wall_ns":g.wall_ns,
-                    "row_ids":g.rows.iter().map(|r|&r.teacher.id).collect::<Vec<_>>(),
-                    "source_record_sha256":hex_digest(&raw),"origin":g.origin,"scientific_sha256":scientific_digest(&g)?});
-                if common {
-                    append_game(
-                        &json!({"metadata_schema":"quoridor-common-corpus-game-index-v2","game":g.game,
-                        "request_id":g.request_id,"family":g.family,"termination":g.termination,
-                        "source_record_offset":total_read-raw.len() as u64,"source_record_sha256":hex_digest(&raw),
-                        "row_count":g.rows.len(),"attempted_search_calls":g.attempted_search_calls,"wall_ns":g.wall_ns}),
-                    )?;
-                } else {
+                if !common {
+                    let game_facts = json!({"game":g.game,"request_id":g.request_id,"family":g.family,
+                        "initial_prefix":g.initial_prefix,"final_prefix":g.final_prefix,"final_context":g.final_context,
+                        "provenance":g.provenance,"termination":g.termination,"failed_search":g.failed_search,
+                        "attempted_search_calls":g.attempted_search_calls,"wall_ns":g.wall_ns,
+                        "row_ids":g.rows.iter().map(|r|&r.teacher.id).collect::<Vec<_>>(),
+                        "source_record_sha256":hex_digest(&raw),"origin":g.origin,"scientific_sha256":scientific_digest(&g)?});
                     append_game(&game_facts)?;
                 }
             }
@@ -1180,18 +1140,6 @@ fn scan(input: &Path, b: &IntakeBinding, writer: &mut Writer) -> Result<Value> {
         return Err("source stream changed during intake".into());
     }
     drop(append_game);
-    let mut game_content = None;
-    if let Some(mut w) = games_gzip.take() {
-        let mut content = w.finish()?;
-        crate::lossless_jsonl::verify(&content)?;
-        // Candidate FileRef in partial output, actual only after existing marker-last publication.
-        content.compressed.path = writer
-            .output_path()
-            .parent()
-            .ok_or("publication parent")?
-            .join(games_name);
-        game_content = Some(content);
-    }
     if let Some(f) = games_file.take() {
         f.sync_all()?;
         drop(f);
@@ -1207,7 +1155,7 @@ fn scan(input: &Path, b: &IntakeBinding, writer: &mut Writer) -> Result<Value> {
     };
     Ok(
         json!({"census":census,"requests":if common { Value::Null } else { requests.unwrap_or(Value::Null) },"header":header,
-        "games_file":{"file":games_name,"sha256":file_sha(&games_path)?,"content":game_content}}),
+        "games_file":if common { Value::Null } else { json!({"file":games_name,"sha256":file_sha(&games_path)?}) }}),
     )
 }
 #[derive(Debug)]
@@ -1437,14 +1385,9 @@ pub fn write_cache(
             extra,
         )?;
         let mut names = manifest.files.values().cloned().collect::<Vec<_>>();
-        names.push(
-            if b.scope == "common-corpus" {
-                "stream-games.jsonl.gz"
-            } else {
-                "stream-games.jsonl"
-            }
-            .into(),
-        );
+        if b.scope != "common-corpus" {
+            names.push("stream-games.jsonl".into());
+        }
         names.push("cache.json".into());
         complete_publication(&stage, output, &names, &mut io)?;
         Ok(manifest)
@@ -1733,46 +1676,33 @@ mod common_corpus_intake_tests {
 }
 
 #[cfg(test)]
-mod compressed_publication_tests {
+mod compact_publication_tests {
     use super::*;
-    fn root(name: &str) -> PathBuf {
-        std::env::temp_dir().join(format!("encoding362-{}-{name}", std::process::id()))
-    }
+
     #[test]
-    fn compressed_candidate_admits_only_after_marker_last_existing_publication() {
-        let out = root("publish");
+    fn compact_sampling_publication_missing_file_refuses_and_marker_commits_last() {
+        let out = std::env::temp_dir().join(format!("compact-publication-{}", std::process::id()));
         fs::create_dir(&out).unwrap();
         let stage = out.join(".intake.partial");
         fs::create_dir(&stage).unwrap();
         let mut io = FilesystemPublication;
         io.begin(&out).unwrap();
-        let mut writer =
-            crate::lossless_jsonl::Writer::create(&stage.join("rows.jsonl.gz"), 4096, 8192)
-                .unwrap();
-        writer.append(b"{\"source_record_offset\":0}\n").unwrap();
-        let mut c = writer.finish().unwrap();
-        assert!(out.join(INCOMPLETE).exists());
-        complete_publication(&stage, &out, &["rows.jsonl.gz".into()], &mut io).unwrap();
-        assert!(!out.join(INCOMPLETE).exists());
-        c.compressed.path = out.join("rows.jsonl.gz");
-        let mut bytes = vec![];
-        crate::lossless_jsonl::Reader::open(&c)
-            .unwrap()
-            .read_to_end(&mut bytes)
-            .unwrap();
-        assert_eq!(bytes, b"{\"source_record_offset\":0}\n");
-        fs::remove_dir_all(out).unwrap();
-    }
-    #[test]
-    fn missing_compressed_candidate_keeps_incomplete_and_original_failure() {
-        let out = root("missing");
-        fs::create_dir(&out).unwrap();
-        let stage = out.join(".intake.partial");
-        fs::create_dir(&stage).unwrap();
-        let mut io = FilesystemPublication;
-        io.begin(&out).unwrap();
-        assert!(complete_publication(&stage, &out, &["rows.jsonl.gz".into()], &mut io).is_err());
-        assert!(out.join(INCOMPLETE).exists());
+        fs::write(stage.join("cache.json"), b"synthetic compact candidate").unwrap();
+        let names = vec!["sampling.bin".into(), "cache.json".into()];
+        // Missing a newly required physical field cannot expose the compact manifest.
+        assert!(complete_publication(&stage, &out, &names, &mut io).is_err());
+        assert!(out.join(INCOMPLETE).exists() && !out.join("cache.json").exists());
+        fs::write(stage.join("sampling.bin"), [0, 0, 0, 0, 0, 1]).unwrap();
+        for name in &names {
+            File::open(stage.join(name)).unwrap().sync_all().unwrap();
+        }
+        complete_publication(&stage, &out, &names, &mut io).unwrap();
+        assert!(!out.join(INCOMPLETE).exists() && !stage.exists());
+        assert_eq!(
+            fs::read(out.join("sampling.bin")).unwrap(),
+            [0, 0, 0, 0, 0, 1]
+        );
+        assert!(out.join("cache.json").exists());
         fs::remove_dir_all(out).unwrap();
     }
 }

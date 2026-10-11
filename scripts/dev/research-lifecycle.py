@@ -263,6 +263,7 @@ def physical_and_quiet(spec):
             "rustc",
             "cc1plus",
             "quoridor-runner",
+            "terminal-cache",
             "chromium",
             "chrome",
         }:
@@ -716,7 +717,7 @@ def common_pilot_check(spec, experiment, manifest, approved):
         len(spec["argv"]) == 13
         and spec["argv"][:5] == [python, "-B", "-m", "quoridor_training.train", "train"]
         and spec["argv"][5:9]
-        == ["--cache", str(PILOT_DATA / "cache"), "--output", spec["data_root"]]
+        == ["--cache", str(PILOT_DATA / "cache-compact-v3"), "--output", spec["data_root"]]
         and spec["argv"][9:11] == ["--config", experiment["config"]["path"]]
         and spec["argv"][11] == "--input-binding",
         "fit exact trainer/cache/output/config inlet",
@@ -756,15 +757,29 @@ def common_pilot_check(spec, experiment, manifest, approved):
         "owed actual frozen fit outputs",
     )
     cache_ref = next(
-        (r for r in experiment["inputs"] if r["path"] == str(PILOT_DATA / "cache/cache.json")), None
+        (
+            r
+            for r in experiment["inputs"]
+            if r["path"] == str(PILOT_DATA / "cache-compact-v3/cache.json")
+        ),
+        None,
     )
     require(
         cache_ref is not None
         and cache_ref["sha256"] == binding["cache_manifest_sha"]
-        and not (PILOT_DATA / "cache/INCOMPLETE").exists(),
+        and not (PILOT_DATA / "cache-compact-v3/intake-incomplete.json").exists(),
         "authoritative shared cache",
     )
     cache = document(cache_ref)
+    for name, width in COMPACT_CACHE_WIDTHS.items():
+        path = str(Path(cache_ref["path"]).parent / name)
+        ref = next((r for r in experiment["inputs"] if r["path"] == path), None)
+        require(
+            ref is not None
+            and ref["sha256"] == cache["sha256"][name]
+            and ref["bytes"] == cache["file_bytes"][name] == cache["rows"] * width,
+            "same compact binary lifetime inputs",
+        )
     eligible = cache["common_corpus"]["common_eligible_by_split"]
     require(
         all(type(eligible.get(k)) is int and eligible[k] > 0 for k in ("train", "validation")),
@@ -772,7 +787,10 @@ def common_pilot_check(spec, experiment, manifest, approved):
     )
 
     require(
-        cache["stream_intake"]["status"] == "complete"
+        cache["schema"] == "quoridor-common-corpus-terminal-geometry-v3"
+        and cache["files"] == {name: name for name in COMPACT_CACHE_WIDTHS}
+        and set(cache["sha256"]) == set(cache["file_bytes"]) == set(COMPACT_CACHE_WIDTHS)
+        and cache["stream_intake"]["status"] == "complete"
         and cache["schedule_sha256"] == binding["schedule_sha256"]
         and cache["family_partition_sha256"] == binding["family_partition_sha256"]
         and cache["source_binding"] == binding["dataset"],
@@ -895,6 +913,14 @@ def experiment_phase_check(experiment):
             "software-only qualifier cannot claim numerical/game qualification",
         )
         return
+    if phase == "materialize" and experiment.get("numerical_qualification") is None:
+        require(
+            experiment["models"] == []
+            and experiment["planned_slots"] == 0
+            and experiment.get("batch") is None,
+            "saved codec cannot claim model/numerical/game qualification",
+        )
+        return
     if phase != "generation":
         require(
             isinstance(experiment.get("numerical_qualification"), dict),
@@ -961,6 +987,104 @@ def generation_check(spec, experiment):
     )
 
 
+COMPACT_CACHE_WIDTHS = {
+    "geometry.bin": 66,
+    "distance-steps.u8": 2,
+    "terminal-margin.f32": 4,
+    "labels.f32": 8,
+    "completed-root-raw.f32": 4,
+    "common-eligible.u8": 1,
+    "sampling.bin": 6,
+}
+
+
+def cache_materialize_check(spec, experiment, manifest):
+    """Only the existing saved-stream converter; no generation or empirical model calls."""
+    request = document(experiment["config"])
+    require(
+        set(request) == {"schema", "stream", "intake_binding", "previous_cache", "output"}
+        and request["schema"] == "quoridor.common-corpus-cache-materialization.v1"
+        and request["output"] == spec["data_root"],
+        "saved converter exact config/output",
+    )
+    require(
+        experiment["models"] == []
+        and experiment["planned_slots"] == 0
+        and experiment.get("batch") is None
+        and experiment.get("numerical_qualification") is None
+        and spec["approved_plan"]["path"] == str(PILOT_PLAN)
+        and experiment["rules"] == "research-standard-2p-threefold-goal-first-v1"
+        and experiment["distance_units"] == "wall-distance/80"
+        and experiment["value_perspective"] == "side-to-move",
+        "saved codec scope/current approved plan",
+    )
+    binding = document(request["intake_binding"])
+    require(
+        binding["scope"] == "common-corpus"
+        and binding["stream"] == {k: request["stream"][k] for k in ("path", "sha256")}
+        and binding["stream_content"]["compressed"] == request["stream"]
+        and binding["schedule"] == {k: experiment["schedule"][k] for k in ("path", "sha256")},
+        "actual stream/intake/schedule pairing",
+    )
+    previous = document(request["previous_cache"])
+    require(
+        not Path(request["previous_cache"]["path"]).with_name("intake-incomplete.json").exists()
+        and previous["schema"] == "quoridor-common-corpus-terminal-geometry-v2"
+        and previous["stream_intake"]["status"] == "complete"
+        and previous["source_content"] == binding["stream_content"]
+        and previous["schedule_sha256"] == experiment["schedule"]["sha256"]
+        and previous["common_corpus"]["config"]["selected_plan"]
+        == {k: spec["approved_plan"][k] for k in ("path", "sha256")},
+        "original retained cache/source identity; no plan substitution",
+    )
+    paths = {r["path"]: r for r in experiment["inputs"]}
+    expected = {request[k]["path"] for k in ("stream", "intake_binding", "previous_cache")}
+    expected |= {binding[k]["path"] for k in ("config", "sources", "schedule")}
+    expected.add(spec["approved_plan"]["path"])
+    for name in set(COMPACT_CACHE_WIDTHS) - {"sampling.bin"}:
+        path = str(Path(request["previous_cache"]["path"]).parent / name)
+        expected.add(path)
+        ref = paths.get(path)
+        require(
+            ref is not None
+            and ref["sha256"] == previous["sha256"][name]
+            and ref["bytes"] == previous["rows"] * COMPACT_CACHE_WIDTHS[name],
+            "original six binary custody",
+        )
+    require(
+        set(paths) == expected and len(paths) == len(experiment["inputs"]),
+        "closed saved codec input membership",
+    )
+    for key in ("stream", "intake_binding", "previous_cache"):
+        require(paths[request[key]["path"]] == request[key], "actual converter input FileRef")
+    for key in ("config", "sources", "schedule"):
+        require(
+            binding[key] == {k: paths[binding[key]["path"]][k] for k in ("path", "sha256")},
+            "intake control lifetime",
+        )
+    require(paths[spec["approved_plan"]["path"]] == spec["approved_plan"], "current plan lifetime")
+    require(
+        experiment["argv"]
+        == [
+            manifest["artifact"]["path"],
+            request["stream"]["path"],
+            spec["data_root"],
+            request["intake_binding"]["path"],
+            request["intake_binding"]["sha256"],
+        ],
+        "existing terminal-cache exact four positional arguments",
+    )
+    require(
+        len(spec["data"]) == 8
+        and {x["name"]: x["path"] for x in spec["data"]}
+        == {
+            **{n: str(Path(spec["data_root"]) / n) for n in COMPACT_CACHE_WIDTHS},
+            "cache_manifest": str(Path(spec["data_root"]) / "cache.json"),
+        },
+        "compact seven files plus last manifest",
+    )
+
+
 def experiment_check(spec):
     charged_roots(spec)
     experiment = document(spec["experiment"])
@@ -987,6 +1111,19 @@ def experiment_check(spec):
     refs.extend(caller_source_refs(spec, experiment))
     for ref in refs:
         read_ref(ref, max(CONTROL_BYTES, ref["bytes"]))
+    if manifest.get("artifact_target", "quoridor-runner") == "terminal-cache":
+        require(
+            experiment["phase"] in {"materialize", "fit"},
+            "converter only serves saved materialization or pinned Python fits",
+        )
+        if experiment["phase"] == "materialize":
+            cache_materialize_check(spec, experiment, manifest)
+    else:
+        require(
+            experiment["phase"] != "materialize"
+            or isinstance(experiment.get("numerical_qualification"), dict),
+            "ordinary model materialization still requires numerical qualification",
+        )
     if experiment["phase"] == "generation":
         generation_check(spec, experiment)
     require(
@@ -1036,6 +1173,26 @@ def experiment_check(spec):
 
 
 def build_check(spec):
+    artifact_target = spec.get("artifact_target", "quoridor-runner")
+    require(artifact_target in {"quoridor-runner", "terminal-cache"}, "maintained build artifact")
+    if artifact_target == "terminal-cache":
+        converter = str(
+            Path(spec["source"]["workspace"]) / "crates/quoridor-data/src/bin/terminal-cache.rs"
+        )
+        require(
+            any(r["path"] == converter for r in spec["source"]["compiled_sources"].values())
+            and "generator_compiled_sources" not in spec["source"],
+            "converter has its own actual compiled projection",
+        )
+        for row in spec["commands"]:
+            if row["role"] == "build":
+                require(
+                    row["argv"].count("--bin") == 1
+                    and row["argv"][row["argv"].index("--bin") + 1] == artifact_target
+                    and row["argv"].count("-p") == 1
+                    and row["argv"][row["argv"].index("-p") + 1] == "quoridor-data",
+                    "exact maintained converter build",
+                )
     require(Path(spec["target"]).is_relative_to(Path(spec["owner"])), "isolated owned target")
     for name in ("target", "TMP", "private"):
         owned(spec[name], spec["owner"])
@@ -1787,6 +1944,51 @@ def collect_data(spec, experiment):
                 data["raw_content_B"] = content["raw_bytes"]
         except BaseException as error:
             data["errors"].append({"stage": "common_pilot_data", **error_fact(error)})
+    if (
+        experiment["phase"] == "materialize"
+        and document(experiment["build_manifest"]).get("artifact_target") == "terminal-cache"
+    ):
+        try:
+            cache = json.loads(values["cache_manifest"])
+            request = document(experiment["config"])
+            previous = document(request["previous_cache"])
+            require(
+                not (Path(spec["data_root"]) / "intake-incomplete.json").exists()
+                and cache["schema"] == "quoridor-common-corpus-terminal-geometry-v3"
+                and cache["stream_intake"]["status"] == "complete"
+                and cache["rows"] == previous["rows"]
+                and cache["source_content"] == previous["source_content"]
+                and cache["schedule_sha256"] == previous["schedule_sha256"]
+                and cache["family_partition_sha256"] == previous["family_partition_sha256"]
+                and cache["common_corpus"]["common_eligible_by_split"]
+                == previous["common_corpus"]["common_eligible_by_split"]
+                and cache["common_corpus"]["common_eligible_rows"]
+                == previous["common_corpus"]["common_eligible_rows"],
+                "complete saved cache migration with original census/lineage",
+            )
+            require(
+                cache["files"] == {n: n for n in COMPACT_CACHE_WIDTHS}
+                and set(cache["sha256"]) == set(cache["file_bytes"]) == set(COMPACT_CACHE_WIDTHS),
+                "closed compact physical files",
+            )
+            for name, width in COMPACT_CACHE_WIDTHS.items():
+                raw = values[name]
+                require(
+                    len(raw) == cache["rows"] * width == cache["file_bytes"][name]
+                    and sha(raw) == cache["sha256"][name],
+                    "actual compact byte/hash/count",
+                )
+                if name != "sampling.bin":
+                    require(
+                        cache["sha256"][name] == previous["sha256"][name],
+                        "original binary bit identity",
+                    )
+            data["scope"] = "saved-only cache conversion; no games/Search/model/numerical PASS"
+            data["cache_manifest"] = next(
+                r for r in data["files"] if r["path"] == str(Path(spec["data_root"]) / "cache.json")
+            )
+        except BaseException as error:
+            data["errors"].append({"stage": "cache_materialization", **error_fact(error)})
     if data["errors"]:
         data["status"] = "FAILED"
     return data
@@ -2060,6 +2262,11 @@ def execute(
                                 and metadata["model_calls"] == 0,
                                 "actual zero-model bindings",
                             )
+                            require(
+                                metadata.get("artifact_target", "quoridor-runner")
+                                == spec.get("artifact_target", "quoridor-runner"),
+                                "actual selected executable metadata",
+                            )
                             result["compiled_sources"] = metadata["compiled_sources"]
                             if "generator_compiled_sources" in spec["source"]:
                                 expected_generator = {
@@ -2089,11 +2296,14 @@ def execute(
                                 matches = [
                                     a
                                     for a in cargo["artifacts"]
-                                    if a["target"]["name"] == "quoridor-runner"
+                                    if a["target"]["name"]
+                                    == spec.get("artifact_target", "quoridor-runner")
                                     and a["target"]["kind"] == ["bin"]
                                     and a["profile"]["test"] is False
                                 ]
-                                require(len(matches) == 1, "one normal runner executable artifact")
+                                require(
+                                    len(matches) == 1, "one selected maintained executable artifact"
+                                )
                                 src = owned(matches[0]["executable"], spec["target"])
                                 private_copy_check(spec, src)
                                 candidate = copy_artifact(src, spec["private"])
@@ -2104,6 +2314,7 @@ def execute(
                     )
                     result.update(
                         artifact=candidate,
+                        artifact_target=spec.get("artifact_target", "quoridor-runner"),
                         source=spec["source"],
                         source_adoption=spec["source_adoption"],
                         tools=spec["tools"],
@@ -2366,7 +2577,9 @@ def _prepare_completion(directory, job_ref):
                         "final generator bindings log",
                     )
                 require(
-                    metadata["compiled_sources"] == expected
+                    metadata.get("artifact_target", "quoridor-runner")
+                    == candidate.get("artifact_target", "quoridor-runner")
+                    and metadata["compiled_sources"] == expected
                     and metadata["executable_sha256"] == candidate["artifact"]["sha256"]
                     and metadata["model_calls"] == 0,
                     "final artifact/adopted metadata join",

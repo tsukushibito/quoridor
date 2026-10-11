@@ -462,7 +462,7 @@ def load(path, allow_test=False):
     manifest = Path(path) / "cache.json"
     if manifest.is_file() and json.loads(manifest.read_text()).get("schema") in (
         "quoridor-terminal-geometry-v1",
-        "quoridor-common-corpus-terminal-geometry-v2",
+        "quoridor-common-corpus-terminal-geometry-v3",
     ):
         from .terminal_cache import TerminalCorpus
 

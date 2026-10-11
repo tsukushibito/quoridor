@@ -2,29 +2,29 @@
 
 from array import array
 from collections.abc import Sequence
-from contextlib import ExitStack
 import json
 import hashlib
-import gzip
-import struct
 from pathlib import Path
 
 import numpy as np
 
 from .cache import sha
 from .distance_steps import require_completed_stream_cache
-from .common import (
-    common_cache_config,
-    dual_teacher_targets,
-    iter_common_cache_rows,
-    common_row_metadata,
-)
+from .common import common_cache_config
 from .compact_cache import CompactCorpus
 from .public_features import RECORD, validate_geometry, geometry_from_native
 
 SCHEMA = "quoridor-terminal-geometry-v1"
-COMMON_SCHEMA = "quoridor-common-corpus-terminal-geometry-v2"
-COMMON_FILES = {"completed-root-raw.f32", "common-eligible.u8"}
+COMMON_SCHEMA = "quoridor-common-corpus-terminal-geometry-v3"
+COMMON_WIDTHS = {
+    "geometry.bin": 66,
+    "distance-steps.u8": 2,
+    "terminal-margin.f32": 4,
+    "labels.f32": 8,
+    "completed-root-raw.f32": 4,
+    "common-eligible.u8": 1,
+    "sampling.bin": 6,
+}
 FILES = {"geometry.bin", "distance-steps.u8", "terminal-margin.f32", "labels.f32", "rows.jsonl"}
 
 
@@ -122,36 +122,39 @@ class TerminalRows(Sequence):
         if not 0 <= index < len(self):
             raise IndexError(index)
         if self.corpus.common:
-            content = self.corpus.manifest["source_content"]
-            with gzip.open(content["compressed"]["path"], "rb") as stream:
-                stream.seek(self.corpus.source_offsets[index])
-                raw = stream.readline(16 * 1024**2 + 1)
-            if (
-                len(raw) > 16 * 1024**2
-                or not raw.endswith(b"\n")
-                or hashlib.sha256(raw).digest() != self.corpus.source_hashes[index]
-            ):
-                raise ValueError("indexed canonical Game raw line drift")
-            with gzip.open(self.corpus.path / "rows.jsonl.gz", "rb") as stream:
-                stream.seek(self.corpus.row_offsets[index])
-                item = stream.readline(2050)
-            if len(item) > 2049 or not item.endswith(b"\n"):
-                raise ValueError("minimal index row cap/torn tail")
-            reference = json.loads(item)
-            if (
-                reference["source_record_offset"] != self.corpus.source_offsets[index]
-                or reference["source_row_index"] != self.corpus.source_rows[index]
-                or bytes.fromhex(reference["source_record_sha256"])
-                != self.corpus.source_hashes[index]
-            ):
-                raise ValueError("indexed canonical source pointer drift")
-            row = common_row_metadata(
-                reference, json.loads(raw), self.corpus.manifest["common_corpus"]["config"]
-            )
-        else:
-            with (self.corpus.path / "rows.jsonl").open("rb") as stream:
-                stream.seek(self.corpus.row_offsets[index])
-                row = json.loads(stream.readline())
+            # Only the published binaries and compact sampling table are current
+            # training inputs; canonical Game/history JSON stays outside this view.
+            group = int(self.corpus.groups[index])
+            labels = self.corpus.labels[index]
+            record = self.corpus.record(index)
+
+            def label(column):
+                value = float(labels[column])
+                return None if np.isnan(value) else value
+
+            return {
+                "id": self.corpus.row_ids[index],
+                "group": self.corpus.families[group],
+                "game": self.corpus.group_games[group],
+                "split": ("train", "validation")[int(self.corpus.splits[index])],
+                "primary_eligible": bool(self.corpus.primary_eligible[index]),
+                "teacher_type": "completedD6_root_and_final_outcome",
+                "rootmean": label(0),
+                "z": label(1),
+                "outcome_steps": None if label(1) is None else 80 * label(1),
+                "terminal_margin": label(2),
+                "completed_root_raw": label(3),
+                "distance": record["distance"].tolist(),
+                "source_shard": int(record["shard"]),
+                "source_row": int(record["row"]),
+                "source_alias": int(record["row"]),
+                "phase_proxy": 0
+                if int(record["geometry"]["stocks"].sum()) >= 16
+                else (1 if int(record["geometry"]["stocks"].sum()) >= 6 else 2),
+            }
+        with (self.corpus.path / "rows.jsonl").open("rb") as stream:
+            stream.seek(self.corpus.row_offsets[index])
+            row = json.loads(stream.readline())
         row["outcome_steps"] = None if row["z"] is None else 80 * row["z"]
         row["terminal_margin"] = row["terminal_targets"]["margin_target_steps"]
         return row
@@ -172,12 +175,11 @@ class TerminalCorpus(CompactCorpus):
         require_completed_stream_cache(self.path, self.manifest)
         self.manifest_sha = sha(self.path / "cache.json")
         m = self.manifest
-        self.common = m.get("schema") == COMMON_SCHEMA
-        self.cache_files = (
-            ((FILES - {"rows.jsonl"}) | COMMON_FILES | {"rows.jsonl.gz"}) if self.common else FILES
-        )
-        if self.common:
-            common_cache_config(m)
+        if m.get("schema") == COMMON_SCHEMA:
+            self._load_common()
+            return
+        self.common = False
+        self.cache_files = FILES
         if "stream_intake" in m and not self.common:
             games = m["stream_intake"]["provenance"]["games_file"]
             if (
@@ -186,15 +188,13 @@ class TerminalCorpus(CompactCorpus):
             ):
                 raise ValueError("authoritative game/failed search census changed")
         if (
-            m.get("schema") not in (SCHEMA, COMMON_SCHEMA)
+            m.get("schema") != SCHEMA
             or m.get("feature_count") != 312
             or type(m.get("rows")) is not int
             or m["rows"] < 0
             or type(m.get("allow_test")) is not bool
             or (m["allow_test"] and not allow_test)
-            or m.get("label_columns")
-            != ["rootmean", "z", "terminal_margin"]
-            + (["completed_root_raw"] if self.common else [])
+            or m.get("label_columns") != ["rootmean", "z", "terminal_margin"]
             or set(m.get("sha256", {})) != self.cache_files
             or m.get("files") != {name: name for name in self.cache_files}
         ):
@@ -205,83 +205,12 @@ class TerminalCorpus(CompactCorpus):
             ("distance-steps.u8", 2),
             ("terminal-margin.f32", 4),
             ("labels.f32", 8),
-        ] + ([("completed-root-raw.f32", 4), ("common-eligible.u8", 1)] if self.common else []):
+        ]:
             if (self.path / name).stat().st_size != width * self.row_count:
                 raise ValueError("terminal exact byte length: " + name)
         for name in self.cache_files:
             if sha(self.path / name) != m["sha256"][name]:
                 raise ValueError("terminal cache hash: " + name)
-
-        # Exhaust CRC/content/index/teacher correspondence before any array mapping.
-        # Only compact pointers survive; full Game/history/PV are transient.
-        self.source_offsets, self.source_rows = array("Q"), array("I")
-        self.source_hashes = []
-        if self.common:
-            # Producer RECORD bytes: geometry20 + distance8 + z1/shard1/row4 + SHA32.
-            # The hash-bound minimal canonical index supplies the input SHA; no
-            # second geometry/rules implementation or NumPy allocation is needed.
-            widths = {
-                "geometry.bin": 66,
-                "distance-steps.u8": 2,
-                "terminal-margin.f32": 4,
-                "labels.f32": 8,
-                "completed-root-raw.f32": 4,
-                "common-eligible.u8": 1,
-            }
-            with ExitStack() as stack:
-                streams = {
-                    name: stack.enter_context((self.path / name).open("rb")) for name in widths
-                }
-                for _, index, row in iter_common_cache_rows(self.path, m):
-                    targets = validate_terminal_metadata(row)
-                    fields = {name: streams[name].read(width) for name, width in widths.items()}
-                    if any(len(fields[name]) != width for name, width in widths.items()):
-                        raise ValueError("common binary row truncated")
-                    record = fields["geometry.bin"]
-                    steps = targets["current_distance_steps_stm_opponent"]
-                    normalized = struct.pack("<2f", *(d / 80 for d in steps))
-                    input_sha = hashlib.sha256(record[:28]).digest()
-                    if (
-                        input_sha.hex() != row["input_geometry_SHA256"]
-                        or input_sha != record[34:66]
-                        or record[20:28] != normalized
-                        or fields["distance-steps.u8"] != bytes(steps)
-                        or record[28:34]
-                        != struct.pack("<bBI", int(row["z"] or 0), 0, len(self.source_offsets))
-                    ):
-                        raise ValueError(
-                            "canonical geometry/input SHA/distance/record correspondence"
-                        )
-                    # Rust emits quiet f32 NAN for unavailable targets; exact bits remain bound.
-                    labels = struct.pack(
-                        "<2f",
-                        *(
-                            float("nan") if value is None else value
-                            for value in (row["rootmean"], row["z"])
-                        ),
-                    )
-                    margin = struct.pack(
-                        "<f",
-                        float("nan")
-                        if targets["margin_target_steps"] is None
-                        else targets["margin_target_steps"],
-                    )
-                    if fields["labels.f32"] != labels or fields["terminal-margin.f32"] != margin:
-                        raise ValueError("canonical legacy-root/z/margin label bits")
-                    dual_teacher_targets(
-                        row,
-                        m["common_corpus"]["config"]["root_value_policy"],
-                        m["common_corpus"]["config"]["draw_policy"],
-                        raw_file_bits=struct.unpack("<I", fields["completed-root-raw.f32"])[0],
-                        mask_byte=fields["common-eligible.u8"][0],
-                    )
-                    self.source_offsets.append(index["source_record_offset"])
-                    self.source_rows.append(index["source_row_index"])
-                    self.source_hashes.append(bytes.fromhex(index["source_record_sha256"]))
-                if len(self.source_offsets) != self.row_count or any(
-                    s.read(1) for s in streams.values()
-                ):
-                    raise ValueError("common source/binary row denominator")
 
         def mapped(name, dtype, shape):
             return (
@@ -294,35 +223,22 @@ class TerminalCorpus(CompactCorpus):
         self.integer_distances = mapped("distance-steps.u8", np.uint8, (self.row_count, 2))
         original = mapped("labels.f32", "<f4", (self.row_count, 2))
         margin = mapped("terminal-margin.f32", "<f4", (self.row_count,))
-        self.labels = np.empty((self.row_count, 4 if self.common else 3), dtype=np.float32)
+        self.labels = np.empty((self.row_count, 3), dtype=np.float32)
         self.labels[:, :2] = original
         self.labels[:, 2] = margin
-        if self.common:
-            self.raw_root_scores = mapped("completed-root-raw.f32", "<f4", (self.row_count,))
-            self.common_mask = mapped("common-eligible.u8", np.uint8, (self.row_count,))
-            if (
-                not np.isfinite(self.raw_root_scores).all()
-                or not np.isin(self.common_mask, [0, 1]).all()
-            ):
-                raise ValueError("finite raw f32 and literal common mask bytes")
-            self.labels[:, 3] = self.raw_root_scores
         self.offsets = np.array([0, self.row_count])
         self.row_offsets = array("Q")
         groups, splits, eligible, families, family_partition = [], [], [], {}, {}
         identities = set()
 
         def row_records():
-            if self.common:
-                for offset, _, row in iter_common_cache_rows(self.path, m):
-                    yield offset, row
-            else:
-                with (self.path / "rows.jsonl").open("rb") as stream:
-                    while True:
-                        offset = stream.tell()
-                        line = stream.readline()
-                        if not line:
-                            break
-                        yield offset, json.loads(line)
+            with (self.path / "rows.jsonl").open("rb") as stream:
+                while True:
+                    offset = stream.tell()
+                    line = stream.readline()
+                    if not line:
+                        break
+                    yield offset, json.loads(line)
 
         for offset, row in row_records():
             i = len(self.row_offsets)
@@ -345,24 +261,7 @@ class TerminalCorpus(CompactCorpus):
             families.setdefault(family, len(families))
             groups.append(families[family])
             splits.append(0 if split == "train" else 1)
-            if self.common:
-                cfg = m["common_corpus"]["config"]
-                facts = dual_teacher_targets(
-                    row,
-                    cfg["root_value_policy"],
-                    cfg["draw_policy"],
-                    raw_file_bits=struct.unpack("<I", self.raw_root_scores[i].tobytes())[0],
-                    mask_byte=int(self.common_mask[i]),
-                )
-                if (
-                    int(self.common_mask[i]) != int(facts["eligible"])
-                    or self.raw_root_scores[i].tobytes()
-                    != np.asarray(facts["raw_score"], dtype="<f4").tobytes()
-                ):
-                    raise ValueError("producer raw/mask bytes versus metadata")
-                eligible.append(bool(self.common_mask[i]))
-            else:
-                eligible.append(row["primary_eligible"])
+            eligible.append(row["primary_eligible"])
             record = self.maps[0][i]
             ids = row["ids"] if row["side"] == 1 else row["ids"][::-1]
             if len(ids) != 2 or any(
@@ -412,8 +311,180 @@ class TerminalCorpus(CompactCorpus):
         self.splits = np.asarray(splits, dtype=np.uint8)
         self.eligible = np.asarray(eligible, dtype=bool)
         self.families = list(families)
-        if self.common and int(self.eligible.sum()) != m["common_corpus"]["common_eligible_rows"]:
-            raise ValueError("literal producer mask census")
+        self.rows = TerminalRows(self)
+        self.binding = {
+            **m,
+            "dataset_sha": self.manifest_sha,
+            "path": str(self.path.resolve()),
+            "test_opened": False,
+        }
+
+    def _load_common(self):
+        """Read only the once-published binary cache and its compact sampling manifest."""
+        m = self.manifest
+        cfg = common_cache_config(m)
+        widths = COMMON_WIDTHS
+        if (
+            (self.path / "cache.json").stat().st_size > 1024**2
+            or m["feature_count"] != 312
+            or m["allow_test"] is not False
+            or type(m["rows"]) is not int
+            or not 0 <= m["rows"] <= cfg["families"] * 200
+            or m["label_columns"] != ["rootmean", "z", "terminal_margin", "completed_root_raw"]
+            or m["files"] != {name: name for name in widths}
+            or set(m["sha256"]) != set(widths)
+            or m["file_bytes"] != {name: width * m["rows"] for name, width in widths.items()}
+        ):
+            raise ValueError("compact common schema/columns/length/count")
+        self.row_count = m["rows"]
+        self.common = True
+        self.cache_files = set(widths)
+        for name, width in widths.items():
+            file = self.path / name
+            digest = m["sha256"][name]
+            if (
+                file.is_symlink()
+                or not file.is_file()
+                or file.stat().st_size != width * self.row_count
+                or not isinstance(digest, str)
+                or len(digest) != 64
+                or any(c not in "0123456789abcdef" for c in digest)
+                or sha(file) != digest
+            ):
+                raise ValueError("compact common file identity: " + name)
+        sampling = m["sampling"]
+        if (
+            set(sampling)
+            != {
+                "schema",
+                "file",
+                "format",
+                "width_B",
+                "families",
+                "row_ids",
+                "rows_by_family",
+                "common_eligible_by_family",
+            }
+            or sampling["schema"] != "quoridor-common-corpus-sampling-v1"
+            or sampling["file"] != "sampling.bin"
+            or sampling["format"] != "<IBB"
+            or sampling["width_B"] != 6
+            or not isinstance(sampling["families"], list)
+            or not isinstance(sampling["row_ids"], list)
+            or len(sampling["row_ids"]) != self.row_count
+            or len(set(sampling["row_ids"])) != self.row_count
+            or any(
+                not isinstance(v, str) or not 0 < len(v.encode()) <= 256
+                for v in sampling["row_ids"]
+            )
+        ):
+            raise ValueError("compact sampling layout/row identities")
+        families = sampling["families"]
+        if len(families) > cfg["families"]:
+            raise ValueError("compact sampling planned families")
+        seen = set()
+        for family in families:
+            if (
+                set(family) != {"family", "game", "split"}
+                or not isinstance(family["family"], str)
+                or len(family["family"]) != 64
+                or any(c not in "0123456789abcdef" for c in family["family"])
+                or family["family"] in seen
+                or family["split"] not in ("train", "validation")
+                or not isinstance(family["game"], str)
+                or not 0 < len(family["game"].encode()) <= 256
+            ):
+                raise ValueError("compact family/game/whole-family split")
+            seen.add(family["family"])
+        for name in ("rows_by_family", "common_eligible_by_family"):
+            counts = sampling[name]
+            if (
+                not isinstance(counts, list)
+                or len(counts) != len(families)
+                or any(type(v) is not int or not 0 <= v <= self.row_count for v in counts)
+            ):
+                raise ValueError("compact family census")
+
+        def mapped(name, dtype, shape):
+            return (
+                np.memmap(self.path / name, dtype=dtype, mode="r", shape=shape)
+                if self.row_count
+                else np.empty(shape, dtype=dtype)
+            )
+
+        self.maps = [mapped("geometry.bin", RECORD, (self.row_count,))]
+        self.offsets = np.array([0, self.row_count])
+        self.integer_distances = mapped("distance-steps.u8", np.uint8, (self.row_count, 2))
+        original = mapped("labels.f32", "<f4", (self.row_count, 2))
+        margin = mapped("terminal-margin.f32", "<f4", (self.row_count,))
+        self.raw_root_scores = mapped("completed-root-raw.f32", "<f4", (self.row_count,))
+        self.common_mask = mapped("common-eligible.u8", np.uint8, (self.row_count,))
+        dtype = np.dtype([("family_code", "<u4"), ("split", "u1"), ("primary_eligible", "u1")])
+        self.sampling = mapped("sampling.bin", dtype, (self.row_count,))
+        if (
+            not np.isfinite(self.raw_root_scores).all()
+            or np.any(np.abs(self.raw_root_scores) > 2)
+            or not np.isin(self.common_mask, [0, 1]).all()
+            or not np.isin(self.sampling["primary_eligible"], [0, 1]).all()
+            or not np.isin(self.sampling["split"], [0, 1]).all()
+            or np.any(self.sampling["family_code"] >= len(families))
+            or np.any(self.common_mask > self.sampling["primary_eligible"])
+        ):
+            raise ValueError("compact finite raw/mask/family/split bytes")
+        self.groups = self.sampling["family_code"]
+        self.splits = self.sampling["split"]
+        self.primary_eligible = self.sampling["primary_eligible"]
+        self.eligible = self.common_mask.astype(bool)
+        self.families = [v["family"] for v in families]
+        self.group_games = [v["game"] for v in families]
+        self.row_ids = sampling["row_ids"]
+        split_codes = np.asarray(
+            [0 if v["split"] == "train" else 1 for v in families], dtype=np.uint8
+        )
+        first_codes = list(dict.fromkeys(int(v) for v in self.groups))
+        if (
+            first_codes != list(range(len(families)))
+            or not np.array_equal(self.splits, split_codes[self.groups])
+            or np.bincount(self.groups, minlength=len(families)).tolist()
+            != sampling["rows_by_family"]
+            or np.bincount(self.groups[self.eligible], minlength=len(families)).tolist()
+            != sampling["common_eligible_by_family"]
+        ):
+            raise ValueError("compact first-arrival/family split/census")
+        counts = {
+            name: int(np.count_nonzero(self.eligible & (self.splits == code)))
+            for name, code in (("train", 0), ("validation", 1))
+        }
+        if (
+            int(self.eligible.sum()) != m["common_corpus"]["common_eligible_rows"]
+            or counts != m["common_corpus"]["common_eligible_by_split"]
+        ):
+            raise ValueError("literal common mask planned/split census")
+        self.labels = np.empty((self.row_count, 4), dtype=np.float32)
+        self.labels[:, :2] = original
+        self.labels[:, 2] = margin
+        self.labels[:, 3] = self.raw_root_scores
+        if (
+            not np.isfinite(self.labels[self.eligible]).all()
+            or np.any(~(np.isnan(original[:, 1]) | np.isin(original[:, 1], [-1, 0, 1])))
+            or np.any(np.abs(original[np.isfinite(original[:, 0]), 0]) > 1)
+            or np.any(np.abs(margin[np.isfinite(margin)]) > 80)
+            or (
+                cfg["root_value_policy"] == "exclude_outside_unit"
+                and np.any(np.abs(self.raw_root_scores[self.eligible]) > 1)
+            )
+            or (
+                cfg["draw_policy"] == "exclude_threefold"
+                and np.any(original[self.eligible, 1] == 0)
+            )
+            or not np.isfinite(self.maps[0]["distance"]).all()
+            or np.any(self.integer_distances > 80)
+        ):
+            raise ValueError("compact binary teacher/distance range")
+        normalized = self.integer_distances.astype("<f4") / np.float32(80)
+        if not np.array_equal(self.maps[0]["distance"].view("<u4"), normalized.view("<u4")):
+            raise ValueError("compact integer distance/D80 bits")
+        validate_geometry(self.maps[0]["geometry"])
         self.rows = TerminalRows(self)
         self.binding = {
             **m,
@@ -446,11 +517,3 @@ class TerminalCorpus(CompactCorpus):
             sha(self.path / name) != self.manifest["sha256"][name] for name in self.cache_files
         ):
             raise ValueError("terminal corpus changed")
-        if self.common:
-            source = self.manifest["source_content"]["compressed"]
-            games = self.manifest["stream_intake"]["provenance"]["games_file"]
-            if (
-                sha(source["path"]) != source["sha256"]
-                or sha(self.path / games["file"]) != games["sha256"]
-            ):
-                raise ValueError("canonical source or minimal game index changed")

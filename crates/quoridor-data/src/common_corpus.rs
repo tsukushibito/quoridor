@@ -5,7 +5,7 @@ use serde_json::{Value, json};
 
 pub const VERSION: &str = "fixed-d-common-corpus-warmstart-v1";
 pub const STREAM_SCHEMA: &str = "quoridor-fixed-d-common-corpus-v1";
-pub const CACHE_SCHEMA: &str = "quoridor-common-corpus-terminal-geometry-v2";
+pub const CACHE_SCHEMA: &str = "quoridor-common-corpus-terminal-geometry-v3";
 pub const PLAN: &str =
     "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/plan.json";
 pub const EVALUATOR: &str = "original-distance-a0-b8-tanh";
