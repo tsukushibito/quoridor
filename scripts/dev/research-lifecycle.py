@@ -100,7 +100,9 @@ def new_json(path, value):
         os.fsync(f.fileno())
 
 
-def allocated(path):
+def allocated(path, *, seen=None):
+    # The storage policy charges shared device/inode allocation once.
+    seen = set() if seen is None else seen
     total = 0
     pending = [Path(path)]
     while pending:
@@ -110,6 +112,10 @@ def allocated(path):
         except FileNotFoundError:
             continue
         require(not stat.S_ISLNK(info.st_mode), "owned namespace symlink")
+        identity = (info.st_dev, info.st_ino)
+        if identity in seen:
+            continue
+        seen.add(identity)
         total += info.st_blocks * 512
         if stat.S_ISDIR(info.st_mode):
             with os.scandir(base) as entries:
@@ -202,8 +208,10 @@ class Limits(process.CycleResources):
 
     def check(self, children=()):
         super().check(children)
+        seen = set()
         require(
-            sum(allocated(p) for p in self.charged_paths) <= self.spec["limits"]["owned_B"],
+            sum(allocated(p, seen=seen) for p in self.charged_paths)
+            <= self.spec["limits"]["owned_B"],
             "owned allocation limit",
         )
         require(

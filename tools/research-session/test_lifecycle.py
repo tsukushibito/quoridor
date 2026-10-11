@@ -7,6 +7,7 @@ import importlib.util
 import json
 import os
 from pathlib import Path
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -23,6 +24,58 @@ ORIGINATING_JOB = lc.originating_job
 
 def ref(path):
     return lc.bound(path, 32 * 1024 * 1024)[0]
+
+
+class LifecycleAllocationTests(unittest.TestCase):
+    def test_hardlink_accounting_and_distinct_growth_refusal(self):
+        tmp = ROOT / ".artifacts/research-lifecycle-maintenance/test-TMP"
+        tmp.mkdir(exist_ok=True)
+        with tempfile.TemporaryDirectory(prefix="inode-accounting-", dir=tmp) as name:
+            parent = Path(name)
+            first, second = parent / "first", parent / "second"
+            first.mkdir()
+            second.mkdir()
+            data = first / "data"
+            data.write_bytes(b"bounded filesystem fixture\n" * 2048)
+            os.link(data, first / "same-inode")
+            os.link(data, second / "same-inode")
+            observed = subprocess.check_output(
+                ["du", "--summarize", "--block-size=1", "--", str(first), str(second)],
+                text=True,
+                timeout=10,
+            )
+            expected = sum(int(line.split()[0]) for line in observed.splitlines())
+            seen = set()
+            self.assertEqual(
+                lc.allocated(first, seen=seen) + lc.allocated(second, seen=seen), expected
+            )
+            self.assertEqual(lc.allocated(parent / "missing"), 0)
+            info = data.stat()
+            self.assertEqual(
+                lc.allocated(data, seen={(info.st_dev + 1, info.st_ino)}),
+                info.st_blocks * 512,
+            )
+
+            # Exercise the owning limit check; unrelated process/RAM admission is stubbed.
+            resources = object.__new__(lc.Limits)
+            resources.spec = {
+                "kind": "run",
+                "owner": str(parent),
+                "limits": {"owned_B": expected, "free_B": 1},
+            }
+            resources.charged_paths = [first, second]
+            with patch.object(lc.process.CycleResources, "check", return_value=None):
+                resources.check()
+                copy = second / "distinct-inode"
+                copy.write_bytes(data.read_bytes())
+                self.assertNotEqual(copy.stat().st_ino, info.st_ino)
+                with self.assertRaisesRegex(lc.Refused, "owned allocation limit"):
+                    resources.check()
+                copy.unlink()
+                symlink = second / "refused-symlink"
+                symlink.symlink_to(data)
+                with self.assertRaisesRegex(lc.Refused, "owned namespace symlink"):
+                    resources.check()
 
 
 class NoResources:

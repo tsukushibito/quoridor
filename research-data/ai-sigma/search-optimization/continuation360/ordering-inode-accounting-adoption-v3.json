@@ -1,0 +1,79 @@
+{
+  "schema": "quoridor.research.source-adoption.v1",
+  "status": "SOURCE_ADOPTED_FILESYSTEM_BOUNDARY_QUALIFIED",
+  "issue": "quoridor-4lc.360.1",
+  "source_paths": [
+    {
+      "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+      "before_sha256": "211ebc84d4ef0205e856a306e4cb221a80d144a7708df43e0a4e06bae55f65d7",
+      "before_bytes": 111488,
+      "after": {
+        "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+        "sha256": "2775d3a0109f00051865f423931baa1b8ef4dc1328d5d2994e1f0718db192d5d",
+        "bytes": 111782,
+        "mode": "0644"
+      }
+    },
+    {
+      "path": "/workspaces/quoridor/tools/research-session/test_lifecycle.py",
+      "before_sha256": "42c9430824cdb9e3edde0d62c50c9e053e9c21d52acc4d5d6f3a0310c26eb1d5",
+      "before_bytes": 72312,
+      "after": {
+        "path": "/workspaces/quoridor/tools/research-session/test_lifecycle.py",
+        "sha256": "23862ac07625194bd1921241a39b4cf2376c768a7a73b951fc075a23b3f5b4b2",
+        "bytes": 74725,
+        "mode": "0644"
+      }
+    }
+  ],
+  "reason": "Existing allocated guard double-charged82 hardlinked namespace entries. Current storage policy requires shared device/inode allocated bytes once. Correct only allocated and Limits.check union accounting; caps/admission/physical/peer/source/proof/finalization/child controls unchanged.",
+  "independent_observation": {
+    "scope": "One explicitly named shared target, under fresh canonical LOCK_EX|LOCK_NB; no global scan/payload hashing/deletion.",
+    "target": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target",
+    "per_path_guard_B": 1342492672,
+    "unique_device_inode_allocated_B": 1254191104,
+    "duplicate_inode_B": 88301568,
+    "directory_entries": 5315,
+    "duplicate_entries": 82,
+    "wall_s": 0.037202985025942326,
+    "observed_date": "2026-10-11",
+    "exact_observation_UTC": null,
+    "target_cap_B": 1342177280,
+    "remaining_unique_allocated_margin_B": 87986176,
+    "physical_bytes_reclaimed_B": 0,
+    "no_storage_removed": true,
+    "historical_per_path_guard_overrun_B": 315392
+  },
+  "actual_affected_verification": {
+    "definition": "LifecycleAllocationTests.test_hardlink_accounting_and_distinct_growth_refusal",
+    "real_filesystem": "Temporary real regular file, hardlinks within/across charged roots; independent GNUdu oracle; real distinct-copy growth refuses old owned_B limit; symlink refuses; absent path0/device+inode discrimination.",
+    "runtime_boundary": "Actual owning Limits.check called; unrelated CycleResources process/RAM base check stubbed, so not physical/scientific/wholeguardian qualification.",
+    "test_result_exit_code": 0,
+    "full_test_stderr": ".\n----------------------------------------------------------------------\nRan 1 test in 0.225s\n\nOK\n",
+    "test_time_scope": "Unittest rounded0.225s; outer formatter+AST+test toolcommand0.657133239s separate, not experimental charges.",
+    "other_publisher_AST": "Only allocated and Limits.check differ; all other top-level functions/classes and all other Limits methods exact.",
+    "old_successful_suite_replay": 0,
+    "formats": "Scoped Ruff format/check/lint --no-cache PASS; no Cargo/native/model/book/root/array/game/Search calls."
+  },
+  "failed_worker_stop": {
+    "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/ordering-build-v1/partial-PASS-cap-failed-STOP-v3.json",
+    "sha256": "a959f634b71e84c3adcc3fe1cb2a6d4f75d7b254dd9635bc96bd944afa20cf63",
+    "bytes": 30849,
+    "mode": "0644"
+  },
+  "failed_target_observation": {
+    "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/ordering-build-v1/stopped-target-cap-v3.json",
+    "sha256": "856c41115144345a6fe0da382d95dd73030b6a228bffa47168f64f07ebccbd64",
+    "bytes": 24199,
+    "mode": "0644"
+  },
+  "failed_original_status": "FAILED target-cap primary; all37 Rust successes/3Python successes retained independently. Normal original FAILED finalize still NOT_ENTERED before this fix, candidate/INCOMPLETE remain unchanged. No status promotion/admission/cap expansion.",
+  "global_held_B": 46851026944,
+  "additional_global_grant_B": 0,
+  "whole_360_exclusive_B": 134217728,
+  "prewrite": "Source/tests/current Source+handover/evidence/admin inside existing2MiB Root preparationforward/8MiB Root component, fixture<256KiB TMP; no extra global budget, deletion or refund.",
+  "historical_floors_costs": "All per-path floors/overrun/known38.6505155930062766 failed softwarecontroller seconds/RAW/masks/workerUTCSTOP/continuouspeak UNKNOWN retained as dated facts, not restated as current unique-inode usage.",
+  "source_reader_writer_STOP": "2026-10-11T17:39:42.671825+00:00",
+  "owned_test_TMP_remaining": [],
+  "hardware_or_futurequiet_hold": false
+}
