@@ -1,0 +1,52 @@
+{
+  "schema": "quoridor.research.source-integration.v1",
+  "issue": "quoridor-4lc.324",
+  "status": "ADOPTED_CALLER_WITH_AFFECTED_SOFTWARE_PROOF",
+  "code_commit": "26a6d9254ef15aca04ca9c82bd6ebdf5271b7167",
+  "accepted_at": "2026-10-11T15:31:05.705342+00:00",
+  "author_stopped_binding": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/packed-arity-repair-v1/source-STOP-binding.json",
+    "sha256": "0ba8da0110865bd3a1d23cc46ba273a125c0c76b5e83e2a33a6540e0f1c83b79",
+    "bytes": 7171,
+    "mode": "0644"
+  },
+  "original_failed_fit": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v2/fit-A-entry-v1/failed-fit-STOP.json",
+    "sha256": "f50ca32202cc75830566f596ef43f7bfec6f28e3c6d01aa3d7f4685f116b40e8",
+    "bytes": 19778,
+    "mode": "0644"
+  },
+  "before": {
+    "path": "/workspaces/quoridor/python/quoridor_training/train.py",
+    "sha256": "4a023e1f9c2378db4610ba1b6392124111238fd48defa72cbe22dbd8689fd24c",
+    "bytes": 98958,
+    "mode": "0644"
+  },
+  "current_train": {
+    "path": "/workspaces/quoridor/python/quoridor_training/train.py",
+    "sha256": "49a9106a66c730d43d4989edb986cc9addf9f4449b58fee000ccc0dc1a8fe47e",
+    "bytes": 98988,
+    "mode": "0644"
+  },
+  "strict_patch": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/packed-arity-repair-v1/train.patch",
+    "sha256": "d335cd31be10c1c185240ac8670df7593c214db55aafaefec8e35d0db0284a01",
+    "bytes": 476,
+    "mode": "0644"
+  },
+  "actual_affected_software_receipt": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/packed-arity-repair-v1/affected-test-receipt.json",
+    "sha256": "464b90d98f4f3ebc12bee1349fa6ddd3f67f0e3748269576226574148d39eb43",
+    "bytes": 3527,
+    "mode": "0644"
+  },
+  "scope": "Only packed train.batch return expression: result if step_score else result[:3]. Residual/nonstep model gets3 inputs; distance_steps retains4. Supply targets/weights/release/transfer, model forward/math, full update loop, labels/scale/config/source/corpus unchanged. CurrentRUN train caller FileRef changes; historical Build/source/failed manifests not retargeted.",
+  "root_verification": "Author packet/refs/actual software receipt/full221B capture matched; exact before/post/minimumgzip/strictforward-inverse/restoredmoduleAST; Root freshcanonicalNB adopted exactpost and ran scoped Ruff no-cache format/check/lint; no affected test replay.",
+  "runtime_evidence_scope": "One new method/fourcases with realTorch/PackedSupply/actualbatch expression and random synthetic residual parameters/tiny fakepayload. Two synthetic residual forwards; distance_steps4 dispatch only. Zero BEST43/modelasset/corpus/native/Search/fitupdates; no old successful scopes replayed.",
+  "actual_source_test_reader_STOP": "2026-10-11T15:28:03.098885+00:00",
+  "scientific_status": "All previousA FAILED/0updates and partialINITIAL-LAST/raw preserved; BNOT_RUN. No newA until actualcurrentcaller/newunique output/freshguard.",
+  "experimental_consumed_seconds": 141.37064193107653,
+  "experimental_remaining_seconds": 5258.6293580689235,
+  "funding": "Existing Root source/control/Git and pilot1GiB components; prospective record+handoff+Git32KiB contained; no allocation increase/refund or software charge to experimental clock.",
+  "owned_readers_children_jobs_TMP_remaining": []
+}
