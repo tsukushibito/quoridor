@@ -1,0 +1,146 @@
+{
+  "schema": "quoridor.research.source-adoption.v1",
+  "status": "SOURCE_ADOPTED_AFFECTED_SOFTWARE_UNQUALIFIED",
+  "issue": "quoridor-4lc.360.1",
+  "code_commit": "d16dcb45d872bc7ec27c5df96b583803a53b7ffc",
+  "source_packet": {
+    "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/input-qualification-related-v2/source-STOP-v2.json",
+    "sha256": "c8aa77b94ce48082f5c57dc4daf8685c527bfeea6c656ad46c3b54c4252499ad",
+    "bytes": 5508,
+    "mode": "0644"
+  },
+  "patch": {
+    "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/input-qualification-related-v2/source-main-v3.patch",
+    "sha256": "7a9735981d768d640bd9c2f462cbd6e2263074182873ee24e62452a9a8284b33",
+    "bytes": 53005,
+    "mode": "0644"
+  },
+  "related_source_review": {
+    "path": "/workspaces/quoridor/.artifacts/search-optimization/continuation360/source-review-v1/input-qualification-v5/related-R1-R2-v6/control.json",
+    "sha256": "62df12b6112c192363212e00fc9f55504c2ca9502aaa75a1bf5bd9c5e0ed8c29",
+    "bytes": 6956,
+    "mode": "0644"
+  },
+  "original_negative_review": {
+    "path": "/workspaces/quoridor/.artifacts/search-optimization/continuation360/source-review-v1/input-qualification-v5/control.json",
+    "sha256": "8634a254cc5f281f8e72fc4e6569022232c52937372dbfd854490bbcd4d204e8",
+    "bytes": 6867,
+    "mode": "0644"
+  },
+  "paths": [
+    {
+      "relative": "crates/quoridor-runner/src/ordering_assessment.rs",
+      "Main_before": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/ordering_assessment.rs",
+        "sha256": "18424ab05c18d8c57932410c2e86268105be181adfe097cf75795ba0fc98d2af",
+        "bytes": 36864,
+        "mode": "0644"
+      },
+      "Main_after": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/ordering_assessment.rs",
+        "sha256": "d6fbe46bbf8eb3e2f3eea536f5ee338aac34c15125ba4e2b8a320b36ac63f328",
+        "bytes": 57338,
+        "mode": "0644"
+      }
+    },
+    {
+      "relative": "crates/quoridor-runner/src/research_manifest.rs",
+      "Main_before": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/research_manifest.rs",
+        "sha256": "0047e31122be2972fc755df49b0c08d2efb7788ba0e244a9a7d5d7b692b54d41",
+        "bytes": 27480,
+        "mode": "0644"
+      },
+      "Main_after": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/research_manifest.rs",
+        "sha256": "558c1353c37235b261f884209925b61347979dacc9c0b4fe2e9556c4397e5480",
+        "bytes": 29578,
+        "mode": "0644"
+      }
+    },
+    {
+      "relative": "crates/quoridor-runner/src/main.rs",
+      "Main_before": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/main.rs",
+        "sha256": "7f423f02b9f6462aaab7ba95680fd31150b1eb797dd8b5a64fcafea775192a3c",
+        "bytes": 23397,
+        "mode": "0644"
+      },
+      "Main_after": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/main.rs",
+        "sha256": "bedfc08f84717ec4e5f70600c114ca6c9e97a4b1dd417898db95eaa05a8013e9",
+        "bytes": 23942,
+        "mode": "0644"
+      }
+    },
+    {
+      "relative": "scripts/dev/research-lifecycle.py",
+      "Main_before": {
+        "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+        "sha256": "2775d3a0109f00051865f423931baa1b8ef4dc1328d5d2994e1f0718db192d5d",
+        "bytes": 111782,
+        "mode": "0644"
+      },
+      "Main_after": {
+        "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+        "sha256": "907205da56c915a849db02f3c550208acf1b0e1b005ca2b321ed3b94dc2de67c",
+        "bytes": 118238,
+        "mode": "0644"
+      }
+    },
+    {
+      "relative": "tools/research-session/test_ordering_input_qualification.py",
+      "Main_before": null,
+      "Main_after": {
+        "path": "/workspaces/quoridor/tools/research-session/test_ordering_input_qualification.py",
+        "sha256": "42a8d0b021dfd3eff8eff0020f78182fe04a330f0b4de8588265acd19e580da3",
+        "bytes": 8276,
+        "mode": "0644"
+      }
+    }
+  ],
+  "static_verification": "Root strict git apply forward/reverse checks, scoped Rustfmt2024 and project Ruff format/check/lint passed; all5 formatted Main postimages and Git blobs match target. No target imports/tests/compiler/native/model/root/Search/library probes.",
+  "Root_proof": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/ordering-input-qualification-Main-adoption-proof-v1.json",
+    "sha256": "7a43a29ba7c452a1186e69a603563b4b9d319bc78b044afb3b1a2e7d6dfd984c",
+    "bytes": 1239,
+    "mode": "0644"
+  },
+  "Root_retained_locator_refusal": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/ordering-input-qualification-source-record-refusal-v1.json",
+    "sha256": "06a61e3aa3eeb1664476227d192c56512aedeef0af8768713d9c22cbb7974b2f",
+    "bytes": 631,
+    "mode": "0644"
+  },
+  "expected_projection": {
+    "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/input-qualification-related-v2/expected-projection.json",
+    "sha256": "8a81aa420f88c75452ce049927a31c8a5b868b90fdfd7446d6a918ab409fbd43",
+    "bytes": 12238,
+    "mode": "0644"
+  },
+  "full_research_projection_count": 38,
+  "native_projection_count": 36,
+  "generator_projection_count": 47,
+  "current_source_files_count": 98,
+  "actual_source_reader_STOP": "2026-10-11T19:41:40.684517+00:00",
+  "related_reviewer_reader_STOP": "2026-10-11T19:30:28.763963+00:00",
+  "owned_readers_children_jobs_TMP_remaining": [],
+  "guard_scope": "Only explicit original20-root no-Search bootstrap may enter with numericalNULL; compare requires original clean authoritative qualification manifest. Owning first primary Box/census repair. No generation/software alias or weakened general native/model/input/custody check.",
+  "qualification_scope": "Source accepted only.5 genuinely newRust +5 Python definitionsUNRUN; original37Rust3Python assertion passes retained without replay. New normal build/private/map and real20root qualification required before original360calls90sessions. Old b5af/7c88 SOFTWARE and negative/failure subjects immutable.",
+  "phase_support": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/search-optimization/continuation360/ordering-phase-support-v2.json",
+    "sha256": "f3c32c03bd3ecf82e2dfe12c2393a294704eb3d7d0f6eb6e22df68bbe5ec737f",
+    "bytes": 3010,
+    "mode": "0644"
+  },
+  "target_handover": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/search-optimization/continuation360/ordering-target-handover-v5.json",
+    "sha256": "cfeb2c3b5c5a09e521358736d428f48e6612d967d80e86f31de2892900610798",
+    "bytes": 3918,
+    "mode": "0644"
+  },
+  "global_held_B": 46864396288,
+  "global_increment_refund_B": 0,
+  "source_Root_Git_forward": "Contained original2MiB/source8MiB/Root8MiB; relatedRoot131072 inside issuedreviewRoot262144, no new growth grant.",
+  "scientific_scope_unchanged": "OriginalBEST43/20roots/360calls90sessions/ABCCBAABC/depth4+6/2M8M/1.8G; no model/N/recipe/teacher/strength/perf349/default/323pause change."
+}
