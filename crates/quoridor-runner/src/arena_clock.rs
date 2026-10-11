@@ -126,11 +126,11 @@ pub fn stop_name(reason: StopReason) -> &'static str {
 }
 pub fn alpha_counters(r: &SearchResult) -> serde_json::Value {
     let s = &r.stats;
-    serde_json::json!({"nodes":s.nodes,"static_evaluations":s.evaluations,"terminal":s.terminal,
+    serde_json::json!({"TT_representation":quoridor_ai::alphabeta::TT_REPRESENTATION,"nodes":s.nodes,"static_evaluations":s.evaluations,"terminal":s.terminal,
         "cutoffs":s.cutoffs,"tt_probes":s.tt_probes,"tt_key_hits":s.tt_hits,"tt_exact_hits":s.tt_exact_hits,
         "tt_usable_depth":s.tt_usable_depth,"tt_bound_cutoffs":s.tt_cutoffs,"tt_order_only":s.tt_order_only,
-        "tt_key_builds":s.tt_key_builds,"tt_history_items":s.tt_history_items,
-        "tt_key_history_capacity_bytes":s.tt_key_history_capacity_bytes,"tt_hashes":s.tt_hashes,
+        "tt_key_builds":s.tt_key_builds,"tt_context_initial_items":s.tt_context_initial_items,
+        "tt_context_transitions":s.tt_context_transitions,"tt_hashes":s.tt_hashes,"tt_board_hash_reads":s.tt_board_hash_reads,"tt_board_hash_updates":s.tt_board_hash_updates,"tt_context_matches":s.tt_context_matches,"tt_context_misses":s.tt_context_misses,"tt_order_context_mismatch":s.tt_order_context_mismatch,"tt_hash_collisions":s.tt_hash_collisions,"tt_index_collisions":s.tt_index_collisions,
         "tt_collisions":s.tt_collisions,"tt_replacements":s.tt_replacements,"tt_capacity_skips":s.tt_capacity_skips,
         "tt_illegal_moves":s.tt_illegal_moves,"tt_retained_bytes":s.tt_retained_bytes,"tt_generation":s.tt_generation,
         "pvs_researches":s.pvs_researches,"delta_updates":s.delta_updates,"policy_calls":s.policy_calls,

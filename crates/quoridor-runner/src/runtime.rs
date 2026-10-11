@@ -983,8 +983,15 @@ pub struct TtProfile {
     pub capacity_skips: u64,
     pub illegal_moves: u64,
     pub key_builds: u64,
-    pub history_items: u64,
-    pub key_history_capacity_bytes_sum: u64,
+    pub context_initial_items: u64,
+    pub context_transitions: u64,
+    pub tt_board_hash_reads: u64,
+    pub tt_board_hash_updates: u64,
+    pub tt_context_matches: u64,
+    pub tt_context_misses: u64,
+    pub tt_order_context_mismatch: u64,
+    pub tt_hash_collisions: u64,
+    pub tt_index_collisions: u64,
     pub hashes: u64,
     pub retained_bytes_peak: usize,
     pub requested_tt_entries: Option<usize>,
@@ -1018,8 +1025,15 @@ impl TtProfile {
         self.capacity_skips += s.tt_capacity_skips;
         self.illegal_moves += s.tt_illegal_moves;
         self.key_builds += s.tt_key_builds;
-        self.history_items += s.tt_history_items;
-        self.key_history_capacity_bytes_sum += s.tt_key_history_capacity_bytes;
+        self.context_initial_items += s.tt_context_initial_items;
+        self.context_transitions += s.tt_context_transitions;
+        self.tt_board_hash_reads += s.tt_board_hash_reads;
+        self.tt_board_hash_updates += s.tt_board_hash_updates;
+        self.tt_context_matches += s.tt_context_matches;
+        self.tt_context_misses += s.tt_context_misses;
+        self.tt_order_context_mismatch += s.tt_order_context_mismatch;
+        self.tt_hash_collisions += s.tt_hash_collisions;
+        self.tt_index_collisions += s.tt_index_collisions;
         self.hashes += s.tt_hashes;
         self.retained_bytes_peak = self.retained_bytes_peak.max(s.tt_retained_bytes);
         self.successful_result_elapsed_seconds += result.elapsed.as_secs_f64();
@@ -4899,8 +4913,8 @@ mod telemetry317_tests {
                 tt_capacity_skips: 8,
                 tt_illegal_moves: 10,
                 tt_key_builds: 11,
-                tt_history_items: 12,
-                tt_key_history_capacity_bytes: 13,
+                tt_context_initial_items: 12,
+                tt_context_transitions: 13,
                 tt_hashes: 14,
                 tt_retained_bytes: 15,
                 ..SearchStats::default()
@@ -4921,8 +4935,8 @@ mod telemetry317_tests {
                 counters.capacity_skips,
                 counters.illegal_moves,
                 counters.key_builds,
-                counters.history_items,
-                counters.key_history_capacity_bytes_sum,
+                counters.context_initial_items,
+                counters.context_transitions,
                 counters.hashes
             ],
             [9, 7, 5, 4, 3, 2, 1, 6, 8, 10, 11, 12, 13, 14]

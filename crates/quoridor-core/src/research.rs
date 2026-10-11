@@ -190,8 +190,26 @@ pub struct ContextUndo {
     total_ply: u16,
     overlay_len: usize,
     child: Position,
+    arrival_previous_count: u16,
 }
 impl ContextUndo {
+    /// Checked counted arrival delta for invocation-owned incremental consumers.
+    /// No history allocation/coalescing. Root occurrences already include root.
+    pub fn checked_history_transition(
+        &self,
+        context: &SigmaContext,
+    ) -> Result<(HistoryKey, u16, u16), RulesError> {
+        self.checked_positions(context)?;
+        let arrival = HistoryKey::from(self.child);
+        let next = self
+            .arrival_previous_count
+            .checked_add(1)
+            .ok_or(RulesError::InvalidUndo)?;
+        if context.count(arrival) != next {
+            return Err(RulesError::InvalidUndo);
+        }
+        Ok((arrival, self.arrival_previous_count, next))
+    }
     /// Read a transition proved by make_move, only while its child is current.
     /// The token cannot be constructed by inference callers.
     pub fn checked_positions(
@@ -497,12 +515,17 @@ impl SigmaContext {
                 .try_reserve(1)
                 .map_err(|_| RulesError::InputTooLarge)?;
         }
+        let arrival_previous_count = self.count(child.into());
+        arrival_previous_count
+            .checked_add(1)
+            .ok_or(RulesError::InputTooLarge)?;
         let undo = ContextUndo {
             ruleset: self.ruleset,
             position: self.position,
             total_ply: self.total_ply,
             overlay_len: self.overlay.len(),
             child,
+            arrival_previous_count,
         };
         self.position = child;
         self.total_ply = next_ply;

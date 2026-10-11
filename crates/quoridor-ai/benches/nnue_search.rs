@@ -46,8 +46,8 @@ fn signature(r: &ab::SearchResult) -> Value {
     json!({"action":r.action,"value_bits":r.value.map(f32::to_bits),
         "depth":r.completed_depth,"pv":r.pv,"stop":format!("{:?}",r.stop),
         "counters":[s.nodes,s.evaluations,s.terminal,s.cutoffs,s.tt_hits,
-        s.tt_probes,s.tt_exact_hits,s.tt_key_builds,s.tt_history_items,
-        s.tt_key_history_capacity_bytes,s.tt_hashes,s.tt_usable_depth,
+        s.tt_probes,s.tt_exact_hits,s.tt_key_builds,s.tt_context_initial_items,
+        s.tt_context_transitions,s.tt_board_hash_reads,s.tt_board_hash_updates,s.tt_context_matches,s.tt_context_misses,s.tt_order_context_mismatch,s.tt_hash_collisions,s.tt_index_collisions,s.tt_hashes,s.tt_usable_depth,
         s.tt_order_only,s.tt_collisions,s.tt_replacements,s.tt_capacity_skips,
         s.tt_illegal_moves,s.tt_retained_bytes as u64,s.tt_generation,s.tt_cutoffs,
         s.pvs_researches,s.delta_updates,s.policy_calls]})

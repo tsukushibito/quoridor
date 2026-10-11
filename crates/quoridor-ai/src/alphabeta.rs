@@ -4,9 +4,7 @@ use quoridor_core::{Position, RulesError, research::SigmaContext};
 use quoridor_nnue::residual::{ResidualModel, ResidualScratch};
 use quoridor_nnue::{Accumulator, EvaluationMode, Model, QuantizedAccumulator, QuantizedModel};
 use std::{
-    collections::hash_map::DefaultHasher,
     fmt,
-    hash::{Hash, Hasher},
     sync::{
         Arc,
         atomic::{AtomicBool, Ordering},
@@ -404,6 +402,7 @@ pub enum StopReason {
     TimeLimit,
     Cancelled,
 }
+pub const TT_REPRESENTATION: &str = "compact359-board-zobrist-v1-context128-v1";
 #[derive(Debug, Default, Clone)]
 pub struct SearchStats {
     pub nodes: u64,
@@ -414,8 +413,15 @@ pub struct SearchStats {
     pub tt_probes: u64,
     pub tt_exact_hits: u64,
     pub tt_key_builds: u64,
-    pub tt_history_items: u64,
-    pub tt_key_history_capacity_bytes: u64,
+    pub tt_context_initial_items: u64,
+    pub tt_context_transitions: u64,
+    pub tt_board_hash_reads: u64,
+    pub tt_board_hash_updates: u64,
+    pub tt_context_matches: u64,
+    pub tt_context_misses: u64,
+    pub tt_order_context_mismatch: u64,
+    pub tt_hash_collisions: u64,
+    pub tt_index_collisions: u64,
     pub tt_hashes: u64,
     pub tt_usable_depth: u64,
     pub tt_order_only: u64,
@@ -441,22 +447,21 @@ pub struct SearchResult {
     pub elapsed: Duration,
 }
 
-// Verify full state on hash hits, including all repetition counts and total ply.
-// Position-only keys/hashes are insufficient for the repetition exclusion rule.
-type CountedHistoryEntry = ([u8; 2], [u8; 2], u8, u64, u64, u16);
-
-#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+// Compact359-v1: exact fixed board identity, authoritative history outside TT.
+// Fingerprint compatibility assumes conventional 128-bit collision resistance;
+// it neither reconstructs history nor implements a mathematical GHI proof.
+#[repr(C)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 struct Key {
-    ruleset: quoridor_core::research::Ruleset,
-    pawns: [u8; 2],
-    walls: [u8; 2],
     horizontal: u64,
     vertical: u64,
+    ply: u16,
+    pawns: [u8; 2],
+    walls: [u8; 2],
+    ruleset: quoridor_core::research::Ruleset,
     turn: u8,
     winner: Option<u8>,
-    ply: u16,
     synthetic: bool,
-    history: Vec<CountedHistoryEntry>,
 }
 impl Key {
     fn of(c: &SigmaContext) -> Self {
@@ -471,38 +476,194 @@ impl Key {
             winner: p.winner,
             ply: c.total_ply(),
             synthetic: c.is_synthetic(),
-            history: c
-                .history_counts()
-                .into_iter()
-                .map(|(k, n)| (k.pawns, k.stocks, k.turn, k.horizontal, k.vertical, n))
-                .collect(),
         }
     }
     fn hash(&self) -> u64 {
-        let mut h = DefaultHasher::new();
-        Hash::hash(self, &mut h);
-        h.finish()
+        // board-zobrist359-v1: independent seed from both context lanes.
+        self.scalars()
+            .into_iter()
+            .enumerate()
+            .fold(Self::feature(0, 1), |h, (i, value)| {
+                h ^ Self::feature(i as u64 + 1, value)
+            })
+            ^ Self::wall_features(10, self.horizontal)
+            ^ Self::wall_features(11, self.vertical)
+    }
+    fn scalars(&self) -> [u64; 9] {
+        let rule = match self.ruleset {
+            quoridor_core::research::Ruleset::Standard2pThreefold => 1,
+        };
+        [
+            u64::from(self.pawns[0]),
+            u64::from(self.pawns[1]),
+            u64::from(self.walls[0]),
+            u64::from(self.walls[1]),
+            u64::from(self.turn),
+            self.winner.map_or(2, u64::from),
+            u64::from(self.ply),
+            rule,
+            u64::from(self.synthetic),
+        ]
+    }
+    fn feature(domain: u64, value: u64) -> u64 {
+        ContextFingerprint::mix(0xb359_7aec_50d1_826f ^ (domain << 48) ^ value)
+    }
+    fn wall_features(domain: u64, mut bits: u64) -> u64 {
+        let mut hash = 0;
+        while bits != 0 {
+            hash ^= Self::feature(domain, u64::from(bits.trailing_zeros()));
+            bits &= bits - 1;
+        }
+        hash
+    }
+    fn delta(&self, child: &Self) -> u64 {
+        let mut delta = Self::wall_features(10, self.horizontal ^ child.horizontal)
+            ^ Self::wall_features(11, self.vertical ^ child.vertical);
+        for (i, (old, new)) in self.scalars().into_iter().zip(child.scalars()).enumerate() {
+            if old != new {
+                delta ^= Self::feature(i as u64 + 1, old) ^ Self::feature(i as u64 + 1, new);
+            }
+        }
+        delta
     }
 }
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+struct BoardCursor {
+    key: Key,
+    hash: u64,
+}
+struct OwnedBoardKey {
+    key: Key,
+    hash: u64,
+}
+impl BoardCursor {
+    fn of(c: &SigmaContext) -> Self {
+        let key = Key::of(c);
+        Self {
+            hash: key.hash(),
+            key,
+        }
+    }
+    fn capture(&self, key: Key) -> std::result::Result<OwnedBoardKey, RulesError> {
+        if key != self.key {
+            return Err(RulesError::InvalidUndo);
+        }
+        Ok(OwnedBoardKey {
+            key,
+            hash: self.hash,
+        })
+    }
+    fn advance(
+        &mut self,
+        undo: &quoridor_core::research::ContextUndo,
+        c: &SigmaContext,
+    ) -> std::result::Result<(), RulesError> {
+        let (parent, _) = undo.checked_positions(c)?;
+        let child = Key::of(c);
+        let parent_key = Key {
+            pawns: parent.pawns,
+            walls: parent.walls_remaining,
+            horizontal: parent.horizontal,
+            vertical: parent.vertical,
+            turn: parent.turn,
+            winner: parent.winner,
+            ply: child.ply.checked_sub(1).ok_or(RulesError::InvalidUndo)?,
+            ..child
+        };
+        if self.key != parent_key {
+            return Err(RulesError::InvalidUndo);
+        }
+        self.hash ^= self.key.delta(&child);
+        self.key = child;
+        Ok(())
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+struct ContextFingerprint([u64; 2]);
+impl ContextFingerprint {
+    // Pinned compact359-count-multiset-v1 independent lane domains.
+    const SEEDS: [u64; 2] = [0x3591_947b_3e62_8a15, 0xd4e8_61c7_a205_39bf];
+    fn mix(mut x: u64) -> u64 {
+        x = (x ^ (x >> 30)).wrapping_mul(0xbf58_476d_1ce4_e5b9);
+        x = (x ^ (x >> 27)).wrapping_mul(0x94d0_49bb_1331_11eb);
+        x ^ (x >> 31)
+    }
+    fn item(k: quoridor_core::research::HistoryKey) -> [u64; 2] {
+        // Exact field order/width is versioned. Never hash Rust struct padding.
+        let fields = [
+            u64::from(k.pawns[0]),
+            u64::from(k.pawns[1]),
+            u64::from(k.stocks[0]),
+            u64::from(k.stocks[1]),
+            u64::from(k.turn),
+            k.horizontal,
+            k.vertical,
+        ];
+        Self::SEEDS.map(|seed| {
+            fields.iter().enumerate().fold(seed, |h, (i, v)| {
+                Self::mix(h ^ Self::mix(v.wrapping_add((i as u64 + 1) << 56)))
+            })
+        })
+    }
+    fn of(c: &SigmaContext) -> Option<Self> {
+        // Search validates normal input before initialization. Synthetic contexts
+        // never acquire numeric authority, even if their fingerprint coincides.
+        if c.is_synthetic() {
+            return None;
+        }
+        let mut result = Self(Self::SEEDS.map(|s| Self::mix(s ^ 0x7265_7365_6172_6368)));
+        for (k, count) in c.occurrences() {
+            if count == 0 || count > 3 {
+                return None;
+            }
+            result.add(k, count);
+        }
+        Some(result)
+    }
+    fn add(&mut self, k: quoridor_core::research::HistoryKey, count: u16) {
+        let item = Self::item(k);
+        for (lane, term) in self.0.iter_mut().zip(item) {
+            *lane = lane.wrapping_add(term.wrapping_mul(u64::from(count)));
+        }
+    }
+    fn advance(
+        &mut self,
+        undo: &quoridor_core::research::ContextUndo,
+        c: &SigmaContext,
+    ) -> std::result::Result<(), RulesError> {
+        let (arrival, before, after) = undo.checked_history_transition(c)?;
+        // Additive weighted multiset: split base/overlay and coalesced counts
+        // agree, even counts do not disappear as they would with plain XOR.
+        self.add(arrival, after - before);
+        Ok(())
+    }
+}
+#[repr(u8)]
 #[derive(Debug, Clone, Copy)]
 enum Bound {
     Exact,
     Lower,
     Upper,
 }
+#[repr(C)]
 struct Entry {
-    generation: u64,
     key: Key,
-    depth: u16,
+    context: [u64; 2],
+    generation: u64,
+    hash: u64,
     value: f32,
-    bound: Bound,
     best: Option<u16>,
+    depth: u16,
+    bound: Bound,
+    context_valid: bool,
 }
-// Invocation-owned proof that this exact immutable key was hashed by probe.
-// Never stored in the table/session, and never detached from its owned key.
-type ProbeHit = (u16, f32, Bound, Option<u16>);
+// The hash and context cannot be detached from the same immutable owned key.
+type ProbeHit = (u16, f32, Bound, Option<u16>, bool);
 struct ProbedKey {
     key: Key,
+    context: Option<ContextFingerprint>,
     hash: Option<u64>,
 }
 struct NodeValue {
@@ -515,7 +676,6 @@ struct Table {
     slots: Vec<Option<Entry>>,
     generation: u64,
     committed: u64,
-    heap_bytes: usize,
     byte_limit: usize,
 }
 impl Table {
@@ -526,38 +686,49 @@ impl Table {
         Self::with_limit(n.min(4096), 1024 * 1024)
     }
     fn with_limit(n: usize, byte_limit: usize) -> Result<Self> {
+        let estimate = n
+            .checked_mul(std::mem::size_of::<Option<Entry>>())
+            .and_then(|b| b.checked_add(std::mem::size_of::<Self>()))
+            .ok_or_else(|| SearchError::Limits("transposition table byte overflow".into()))?;
+        if estimate > byte_limit {
+            return Err(SearchError::Limits("transposition table byte limit".into()));
+        }
         let mut slots = Vec::new();
         slots
             .try_reserve_exact(n)
             .map_err(|_| SearchError::Limits("transposition table allocation".into()))?;
         slots.resize_with(n, || None);
-        Ok(Self {
+        let table = Self {
             slots,
             generation: 0,
             committed: 0,
-            heap_bytes: 0,
             byte_limit,
-        })
+        };
+        // Capacity is observed after reserve, not assumed equal to request.
+        if table.retained_bytes() > byte_limit {
+            return Err(SearchError::Limits(
+                "transposition table allocated byte limit".into(),
+            ));
+        }
+        Ok(table)
     }
-    fn get(&self, key: &Key) -> Option<&Entry> {
+    fn compatible(e: &Entry, context: Option<ContextFingerprint>) -> bool {
+        e.context_valid && context.is_some_and(|c| c.0 == e.context)
+    }
+    fn get_hashed(&self, key: &Key, hash: u64) -> Option<&Entry> {
         if self.slots.is_empty() {
             None
         } else {
-            self.slots[(key.hash() % self.slots.len() as u64) as usize]
+            self.slots[(hash % self.slots.len() as u64) as usize]
                 .as_ref()
                 .filter(|e| e.key == *key)
         }
     }
     fn retained_bytes(&self) -> usize {
-        std::mem::size_of::<Self>()
-            + self.slots.capacity() * std::mem::size_of::<Option<Entry>>()
-            + self.heap_bytes
+        std::mem::size_of::<Self>() + self.slots.capacity() * std::mem::size_of::<Option<Entry>>()
     }
     fn clear(&mut self) {
-        for slot in &mut self.slots {
-            *slot = None;
-        }
-        self.heap_bytes = 0;
+        self.slots.iter_mut().for_each(|slot| *slot = None);
         self.generation = 0;
         self.committed = 0;
     }
@@ -570,53 +741,94 @@ impl Table {
     fn discard_uncommitted(&mut self) {
         for slot in &mut self.slots {
             if slot.as_ref().is_some_and(|e| e.generation > self.committed) {
-                self.heap_bytes -= slot.as_ref().unwrap().key.history.capacity()
-                    * std::mem::size_of::<([u8; 2], u8, u64, u64, u16)>();
                 *slot = None;
             }
         }
     }
-    fn probe(&self, key: &Key, stats: &mut SearchStats) -> Option<ProbeHit> {
+    fn probe(
+        &self,
+        key: &Key,
+        context: Option<ContextFingerprint>,
+        stats: &mut SearchStats,
+    ) -> Option<ProbeHit> {
         stats.tt_probes += 1;
         if self.slots.is_empty() {
             return None;
         }
         stats.tt_hashes += 1;
-        self.probe_hashed(key, key.hash(), stats)
+        self.probe_hashed(key, context, key.hash(), stats)
     }
-    fn probe_owned(&self, key: Key, stats: &mut SearchStats) -> (ProbedKey, Option<ProbeHit>) {
+    fn probe_owned(
+        &self,
+        key: OwnedBoardKey,
+        context: Option<ContextFingerprint>,
+        stats: &mut SearchStats,
+    ) -> (ProbedKey, Option<ProbeHit>) {
         stats.tt_probes += 1;
         let hash = if self.slots.is_empty() {
             None
         } else {
-            stats.tt_hashes += 1;
-            Some(key.hash())
+            stats.tt_board_hash_reads += 1;
+            Some(key.hash)
         };
-        let hit = hash.and_then(|hash| self.probe_hashed(&key, hash, stats));
-        (ProbedKey { key, hash }, hit)
+        let hit = hash.and_then(|h| self.probe_hashed(&key.key, context, h, stats));
+        (
+            ProbedKey {
+                key: key.key,
+                context,
+                hash,
+            },
+            hit,
+        )
     }
-    fn probe_hashed(&self, key: &Key, hash: u64, stats: &mut SearchStats) -> Option<ProbeHit> {
+    fn probe_hashed(
+        &self,
+        key: &Key,
+        context: Option<ContextFingerprint>,
+        hash: u64,
+        stats: &mut SearchStats,
+    ) -> Option<ProbeHit> {
+        if self.slots.is_empty() {
+            return None;
+        }
         let entry = self.slots[(hash % self.slots.len() as u64) as usize].as_ref()?;
         if entry.key != *key {
             stats.tt_collisions += 1;
+            if entry.hash == hash {
+                stats.tt_hash_collisions += 1;
+            } else {
+                stats.tt_index_collisions += 1;
+            }
             return None;
         }
         stats.tt_hits += 1;
-        stats.tt_exact_hits += u64::from(matches!(entry.bound, Bound::Exact));
-        Some((entry.depth, entry.value, entry.bound, entry.best))
+        let compatible = Self::compatible(entry, context);
+        if compatible {
+            stats.tt_context_matches += 1;
+            stats.tt_exact_hits += u64::from(matches!(entry.bound, Bound::Exact));
+        } else {
+            stats.tt_context_misses += 1;
+        }
+        Some((
+            entry.depth,
+            entry.value,
+            entry.bound,
+            entry.best,
+            compatible,
+        ))
     }
     fn insert_probed(&mut self, probe: ProbedKey, node: NodeValue, stats: &mut SearchStats) {
-        // Search never resizes its table during a node. No key may be supplied
-        // separately: insertion consumes the same key whose hash was computed.
         let Some(hash) = probe.hash else {
             debug_assert!(self.slots.is_empty());
             return;
         };
-        debug_assert!(!self.slots.is_empty());
         self.insert_hashed(
             Entry {
-                generation: 0,
                 key: probe.key,
+                context: probe.context.map_or([0; 2], |c| c.0),
+                context_valid: probe.context.is_some(),
+                hash,
+                generation: 0,
                 depth: node.depth,
                 value: node.value,
                 bound: node.bound,
@@ -635,6 +847,9 @@ impl Table {
         self.insert_hashed(e, hash, stats);
     }
     fn insert_hashed(&mut self, mut e: Entry, hash: u64, stats: &mut SearchStats) {
+        if self.slots.is_empty() {
+            return;
+        }
         let i = (hash % self.slots.len() as u64) as usize;
         if self.slots[i]
             .as_ref()
@@ -642,18 +857,14 @@ impl Table {
         {
             return;
         }
-        let item_bytes = |e: &Entry| {
-            e.key.history.capacity() * std::mem::size_of::<([u8; 2], u8, u64, u64, u16)>()
-        };
-        let old = self.slots[i].as_ref().map_or(0, item_bytes);
-        let new = item_bytes(&e);
-        if self.retained_bytes() - old + new > self.byte_limit {
+        // Fixed entry storage is entirely charged when the table is allocated.
+        if self.retained_bytes() > self.byte_limit {
             stats.tt_capacity_skips += 1;
             return;
         }
         stats.tt_replacements += u64::from(self.slots[i].is_some());
-        self.heap_bytes = self.heap_bytes - old + new;
         e.generation = self.generation;
+        e.hash = hash;
         self.slots[i] = Some(e);
     }
 }
@@ -684,6 +895,8 @@ struct Search<'a> {
     deadline: Option<Instant>,
     table: &'a mut Table,
     stats: SearchStats,
+    context: Option<ContextFingerprint>,
+    board: Option<BoardCursor>,
     killers: Vec<[Option<u16>; 2]>,
     history: [u64; 209],
 }
@@ -691,9 +904,6 @@ impl Search<'_> {
     fn key(&mut self, c: &SigmaContext) -> Key {
         let key = Key::of(c);
         self.stats.tt_key_builds += 1;
-        self.stats.tt_history_items += key.history.len() as u64;
-        self.stats.tt_key_history_capacity_bytes +=
-            (key.history.capacity() * std::mem::size_of::<([u8; 2], u8, u64, u64, u16)>()) as u64;
         key
     }
 
@@ -765,6 +975,24 @@ impl Search<'_> {
     ) -> NodeResult<f32> {
         self.control()?;
         let undo = c.make_move(action)?;
+        let parent_context = self.context;
+        let parent_board = self.board;
+        if let Some(ref mut board) = self.board {
+            if let Err(error) = board.advance(&undo, c) {
+                c.unmake_move(undo)?;
+                return Err(error.into());
+            }
+            self.stats.tt_board_hash_updates += 1;
+        }
+        if let Some(ref mut context) = self.context {
+            if let Err(error) = context.advance(&undo, c) {
+                c.unmake_move(undo)?;
+                self.context = parent_context;
+                self.board = parent_board;
+                return Err(error.into());
+            }
+            self.stats.tt_context_transitions += 1;
+        }
         // Taking the slot keeps payloads on the heap and the parent borrow local;
         // deeper recursion can never alias this active child.
         let pooled = ply < self.child_buffers.len();
@@ -784,7 +1012,15 @@ impl Search<'_> {
         if pooled {
             self.child_buffers[ply] = a;
         }
-        c.unmake_move(undo)?;
+        // If canonical undo fails, clear numeric authority and propagate failure.
+        // Do not report the context restored on a failed canonical undo.
+        if let Err(error) = c.unmake_move(undo) {
+            self.context = None;
+            self.board = None;
+            return Err(error.into());
+        }
+        self.context = parent_context;
+        self.board = parent_board;
         result.map(|v| -v)
     }
     fn negamax(
@@ -819,17 +1055,22 @@ impl Search<'_> {
         let beta_original = beta;
         let (key, hit) = if self.limits.use_tt {
             let key = self.key(c);
-            let (key, hit) = self.table.probe_owned(key, &mut self.stats);
+            let key = self
+                .board
+                .as_ref()
+                .ok_or(RulesError::InvalidUndo)?
+                .capture(key)?;
+            let (key, hit) = self.table.probe_owned(key, self.context, &mut self.stats);
             (Some(key), hit)
         } else {
             (None, None)
         };
         let mut tt_move = None;
-        if let Some((stored_depth, value, bound, best)) = hit {
+        if let Some((stored_depth, value, bound, best, context_matches)) = hit {
             if best.is_some_and(|action| c.legal_ids().contains(&action)) {
                 tt_move = best;
                 // A different horizon is ordering information, not this depth's exact value.
-                if stored_depth == depth {
+                if context_matches && stored_depth == depth {
                     self.stats.tt_usable_depth += 1;
                     match bound {
                         Bound::Exact => {
@@ -845,6 +1086,7 @@ impl Search<'_> {
                     }
                 } else {
                     self.stats.tt_order_only += 1;
+                    self.stats.tt_order_context_mismatch += u64::from(!context_matches);
                 }
             } else {
                 self.stats.tt_illegal_moves += 1;
@@ -919,17 +1161,18 @@ impl Search<'_> {
         let mut previous = previous;
         if self.limits.use_tt {
             let key = self.key(c);
-            if let Some((stored_depth, value, bound, best)) =
-                self.table.probe(&key, &mut self.stats)
+            if let Some((stored_depth, value, bound, best, context_matches)) =
+                self.table.probe(&key, self.context, &mut self.stats)
             {
                 if best.is_some_and(|action| c.legal_ids().contains(&action)) {
                     previous = previous.or(best);
-                    if stored_depth == depth && matches!(bound, Bound::Exact) {
+                    if context_matches && stored_depth == depth && matches!(bound, Bound::Exact) {
                         self.stats.tt_usable_depth += 1;
                         self.stats.tt_cutoffs += 1;
                         return Ok((best.unwrap(), value));
                     }
                     self.stats.tt_order_only += 1;
+                    self.stats.tt_order_context_mismatch += u64::from(!context_matches);
                 } else {
                     self.stats.tt_illegal_moves += 1;
                 }
@@ -963,6 +1206,9 @@ impl Search<'_> {
             self.table.insert(
                 Entry {
                     generation: 0,
+                    context: self.context.map_or([0; 2], |c| c.0),
+                    context_valid: self.context.is_some(),
+                    hash: 0,
                     key,
                     depth,
                     value,
@@ -977,9 +1223,19 @@ impl Search<'_> {
     fn pv(&self, c: &SigmaContext, action: u16, depth: u16) -> Vec<u16> {
         let mut c = c.clone();
         let mut pv = vec![action];
-        if let Ok(next) = c.play(action) {
-            c = next;
-        } else {
+        let mut context = self.context;
+        let Some(mut board) = self.board else {
+            return pv;
+        };
+        let Ok(undo) = c.make_move(action) else {
+            return Vec::new();
+        };
+        if let Some(ref mut tag) = context {
+            if tag.advance(&undo, &c).is_err() {
+                return Vec::new();
+            }
+        }
+        if board.advance(&undo, &c).is_err() {
             return Vec::new();
         }
         for remaining in (1..depth).rev() {
@@ -988,17 +1244,28 @@ impl Search<'_> {
             }
             let Some(action) = self
                 .table
-                .get(&Key::of(&c))
-                .filter(|e| e.depth == remaining && matches!(e.bound, Bound::Exact))
+                .get_hashed(&board.key, board.hash)
+                .filter(|e| {
+                    Table::compatible(e, context)
+                        && e.depth == remaining
+                        && matches!(e.bound, Bound::Exact)
+                })
                 .and_then(|e| e.best)
             else {
                 break;
             };
-            let Ok(next) = c.play(action) else {
+            let Ok(undo) = c.make_move(action) else {
                 break;
             };
+            if let Some(ref mut tag) = context {
+                if tag.advance(&undo, &c).is_err() {
+                    break;
+                }
+            }
+            if board.advance(&undo, &c).is_err() {
+                break;
+            }
             pv.push(action);
-            c = next;
         }
         pv
     }
@@ -1106,7 +1373,7 @@ impl SearchSession {
             score_domain,
         })
     }
-    /// Table accounting includes its header, slot storage and retained history.
+    /// Table accounting includes its header and fixed slot storage; no history payload.
     /// Metadata is outside that bound; shared evaluator/model allocation is unknown here.
     pub fn retained_memory_bytes(&self) -> (usize, usize) {
         let metadata = std::mem::size_of::<Self>() - std::mem::size_of::<Table>()
@@ -1212,6 +1479,16 @@ fn search_in_table(
                 .ok_or_else(|| SearchError::Limits("deadline overflow".into()))
         })
         .transpose()?;
+    let root_context = if limits.use_tt {
+        ContextFingerprint::of(root)
+    } else {
+        None
+    };
+    let root_board = if limits.use_tt {
+        Some(BoardCursor::of(root))
+    } else {
+        None
+    };
     let mut state = Search {
         eval: evaluator,
         score_domain,
@@ -1223,7 +1500,17 @@ fn search_in_table(
         start,
         deadline,
         table,
-        stats: SearchStats::default(),
+        stats: SearchStats {
+            tt_hashes: u64::from(limits.use_tt), // one full board initialization
+            tt_context_initial_items: if limits.use_tt {
+                root.occurrences().count() as u64
+            } else {
+                0
+            },
+            ..SearchStats::default()
+        },
+        context: root_context,
+        board: root_board,
         killers: vec![[None; 2]; limits.max_depth as usize + 1],
         history: [0; 209],
     };
@@ -1271,6 +1558,8 @@ fn search_in_table(
     if c.position() != root.position()
         || c.total_ply() != root.total_ply()
         || c.history_counts() != root.history_counts()
+        || state.context != root_context
+        || state.board != root_board
     {
         state.table.clear();
         return Err(SearchError::Root(
@@ -1386,7 +1675,7 @@ mod persistent_tt_tests {
             "cutoffs":r.stats.tt_cutoffs,"order_only":r.stats.tt_order_only,
             "collisions":r.stats.tt_collisions,"replacements":r.stats.tt_replacements,
             "retained_B":r.stats.tt_retained_bytes,"capacity_skips":r.stats.tt_capacity_skips,
-            "key_builds":r.stats.tt_key_builds,"history_items":r.stats.tt_history_items,"hashes":r.stats.tt_hashes,"key_history_capacity_B_sum":r.stats.tt_key_history_capacity_bytes})
+            "key_builds":r.stats.tt_key_builds,"context_initial_items":r.stats.tt_context_initial_items,"hashes":r.stats.tt_hashes,"context_transitions":r.stats.tt_context_transitions})
         );
     }
     struct Failing;
@@ -1434,7 +1723,8 @@ mod persistent_tt_tests {
         .unwrap();
         a.validate_normal().unwrap();
         b.validate_normal().unwrap();
-        assert_ne!(Key::of(&a), Key::of(&b));
+        assert_eq!(Key::of(&a), Key::of(&b));
+        assert_ne!(ContextFingerprint::of(&a), ContextFingerprint::of(&b));
         assert!(a.legal_ids().contains(&13));
         assert_eq!(a.play(13).unwrap().terminal_value(), Some(0.));
         assert!(b.legal_ids().contains(&13));
@@ -1444,6 +1734,9 @@ mod persistent_tt_tests {
         t.insert(
             Entry {
                 generation: 0,
+                context: ContextFingerprint::of(&a).unwrap().0,
+                context_valid: true,
+                hash: 0,
                 key: Key::of(&a),
                 depth: 1,
                 value: 0.75,
@@ -1452,11 +1745,19 @@ mod persistent_tt_tests {
             },
             &mut stats,
         );
-        assert!(t.probe(&Key::of(&b), &mut stats).is_none());
-        assert_eq!(stats.tt_collisions, 1);
+        assert!(
+            !t.probe(&Key::of(&b), ContextFingerprint::of(&b), &mut stats)
+                .unwrap()
+                .4
+        );
+        assert_eq!(stats.tt_context_misses, 1);
+        assert_eq!(stats.tt_collisions, 0);
         t.insert(
             Entry {
                 generation: 0,
+                context: ContextFingerprint::of(&b).unwrap().0,
+                context_valid: true,
+                hash: 0,
                 key: Key::of(&b),
                 depth: 1,
                 value: 0.25,
@@ -1468,18 +1769,23 @@ mod persistent_tt_tests {
         assert_eq!(stats.tt_replacements, 1);
         let mut changed = Key::of(&b);
         changed.ply += 2;
-        assert!(t.probe(&changed, &mut stats).is_none());
-        // Artificial keys here exercise allocation ceiling, not rule validity.
+        assert!(
+            t.probe(&changed, ContextFingerprint::of(&b), &mut stats)
+                .is_none()
+        );
+        // Artificial board encodings demonstrate fixed retention, not replay validity.
         let mut capped = Table::persistent(65536).unwrap();
         assert_eq!(capped.slots.len(), 4096);
         capped.next_generation();
         for i in 0..512u16 {
             let mut key = Key::of(&a);
             key.ply = i;
-            key.history = vec![key.history[0]; 201];
             capped.insert(
                 Entry {
                     generation: 0,
+                    context: [0; 2],
+                    context_valid: false,
+                    hash: 0,
                     key,
                     depth: 1,
                     value: 0.,
@@ -1490,7 +1796,7 @@ mod persistent_tt_tests {
             );
         }
         assert!(capped.retained_bytes() <= 1024 * 1024);
-        assert!(stats.tt_capacity_skips > 0);
+        assert_eq!(stats.tt_capacity_skips, 0);
         assert_eq!(Table::new(65536).unwrap().slots.len(), 65536);
 
         let (root, prefix) = legal_wall_sequence();
@@ -1524,6 +1830,9 @@ mod persistent_tt_tests {
             table.insert(
                 Entry {
                     generation: 0,
+                    context: ContextFingerprint::of(&root).unwrap().0,
+                    context_valid: true,
+                    hash: 0,
                     key: Key::of(&root),
                     depth: 1,
                     value: truth,
@@ -1547,6 +1856,8 @@ mod persistent_tt_tests {
                 deadline: None,
                 table: &mut table,
                 stats: SearchStats::default(),
+                context: ContextFingerprint::of(&root),
+                board: Some(BoardCursor::of(&root)),
                 killers: vec![[None; 2]; 2],
                 history: [0; 209],
             };
@@ -1565,6 +1876,9 @@ mod persistent_tt_tests {
         illegal.table.insert(
             Entry {
                 generation: 0,
+                context: ContextFingerprint::of(&root).unwrap().0,
+                context_valid: true,
+                hash: 0,
                 key: Key::of(&root),
                 depth: 1,
                 value: 0.99,
@@ -1598,7 +1912,7 @@ mod persistent_tt_tests {
             }
             session.reset(clip.clone(), namespace.clone());
             assert_eq!(session.namespace(), &namespace);
-            assert_eq!(session.table.heap_bytes, 0);
+            assert!(session.table.slots.iter().all(Option::is_none));
             let r = run(&mut session, &root, 1);
             verify(&root, clip.as_ref(), &r);
             assert_eq!(r.stats.tt_hits, 0);
@@ -1635,7 +1949,7 @@ mod persistent_tt_tests {
         );
         charge(2);
         assert_eq!(before, Key::of(&root));
-        assert_eq!(fail.table.heap_bytes, 0);
+        assert!(fail.table.slots.iter().all(Option::is_none));
         let mut limited = SearchSession::new(e.clone(), ns("D0,8"), 4096).unwrap();
         let mut l = limits(3, true, 4096);
         l.max_nodes = 2;
@@ -1643,7 +1957,7 @@ mod persistent_tt_tests {
         charge(r.stats.nodes);
         assert_eq!(r.completed_depth, 0);
         assert_eq!(r.action, None);
-        assert_eq!(limited.table.heap_bytes, 0);
+        assert!(limited.table.slots.iter().all(Option::is_none));
         // P2 jump/defense and a genuine completed terminal child, no forward model.
         for prefix in [
             vec![13, 67, 22, 58, 31, 49, 40],
@@ -2000,7 +2314,7 @@ mod fast_head_search_tests {
         json!({"action":r.action,"value":r.value,"value_bits":r.value.map(f32::to_bits),
             "depth":r.completed_depth,"pv":r.pv,"stop":format!("{:?}",r.stop),
             "counters":[s.nodes,s.evaluations,s.terminal,s.cutoffs,s.tt_hits,s.tt_probes,
-            s.tt_exact_hits,s.tt_key_builds,s.tt_history_items,s.tt_key_history_capacity_bytes,
+            s.tt_exact_hits,s.tt_key_builds,s.tt_context_initial_items,s.tt_context_transitions,
             s.tt_hashes,s.tt_usable_depth,s.tt_order_only,s.tt_collisions,s.tt_replacements,
             s.tt_capacity_skips,s.tt_illegal_moves,s.tt_retained_bytes as u64,s.tt_generation,
             s.tt_cutoffs,s.pvs_researches,s.delta_updates,s.policy_calls]})
@@ -2213,6 +2527,8 @@ mod child_buffer_tests {
                 deadline: None,
                 table: &mut table,
                 stats: SearchStats::default(),
+                context: ContextFingerprint::of(&c),
+                board: Some(BoardCursor::of(&c)),
                 killers: vec![[None; 2]; 4],
                 history: [0; 209],
             };
@@ -2508,7 +2824,7 @@ mod research_threefold_tests {
         );
     }
     #[test]
-    fn research_threefold_tt_full_history_and_true_boundary_terminals() {
+    fn research_threefold_tt_context_and_true_boundary_terminals() {
         let root = SigmaContext::from_prefix(&[]).unwrap();
         let second = SigmaContext::from_prefix(&[13, 67, 4, 76]).unwrap();
         assert_eq!(root.position(), second.position());
@@ -2540,5 +2856,5 @@ mod research_threefold_tests {
 }
 
 #[cfg(test)]
-#[path = "tt_hash_reuse351_tests.rs"]
-mod tt_hash_reuse351_tests;
+#[path = "compact_tt359_tests.rs"]
+mod compact_tt359_tests;

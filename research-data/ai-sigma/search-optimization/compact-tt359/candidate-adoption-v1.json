@@ -1,0 +1,88 @@
+{
+  "issue": "quoridor-4lc.359",
+  "status": "REVIEWED_CANDIDATE_SOURCE_ADOPTED_SOFTWARE_NUMERICAL_PENDING",
+  "actual_source_reader_writer_STOP": "2026-10-11T02:22:43.591097+00:00",
+  "fixed_source_handoff": {
+    "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/compact-tt359-v1/handoff.json",
+    "sha256": "5e90db3dafc918081fb13a1809430e5f6e519fcdbf0d92fd6367d4f328926d03",
+    "bytes": 7329,
+    "mode": "0644"
+  },
+  "source_review_control": {
+    "path": "/workspaces/quoridor/.artifacts/search-optimization/compact-tt359/source-review-v1/control.json",
+    "sha256": "ce1419a259c7dcabe3feb97dc77f94038e269a49d110770c3fb0b6b2c724e63b",
+    "bytes": 7320,
+    "mode": "0644"
+  },
+  "qualified_baseline_STOP": {
+    "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/compact-tt359-v1/software-controls/baseline-entry-recovery-v2/completion-collection-v1/qualified-baseline-STOP.json",
+    "sha256": "e36f6c4c70af48ffa0d95757aceabec00befe7aaac9e9680d57dfe657dc27ec7",
+    "bytes": 19241,
+    "mode": "0644"
+  },
+  "preserved_baseline_private": {
+    "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/compact-tt359-v1/private-images-v1/baseline-v1",
+    "sha256": "5a871079d278b8522a83b86c226005192994f071b5c8847071f7c1b0d3a97307",
+    "bytes": 1873032,
+    "mode": "0755"
+  },
+  "expected_baseline_map_sha256": "1a44de469225ba275b2c04eb1a80531b6713e15e9635997b11e100a97b9e4c59",
+  "expected_candidate_map_sha256": "588d72554c1f2ffe2e43fd9f9e3280107440b1f07d02539c398df9e7359c68a3",
+  "candidate_map": {
+    "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/compact-tt359-v1/caller-source-v1/candidate-source-map.json",
+    "sha256": "588d72554c1f2ffe2e43fd9f9e3280107440b1f07d02539c398df9e7359c68a3",
+    "bytes": 7968,
+    "mode": "0644"
+  },
+  "source_postimages": [
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-ai/src/alphabeta.rs",
+      "sha256": "848ead468d3e7d2edb3c85b1f2bbd893984efa97598d237987e3266912ef4ed6",
+      "bytes": 103607,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-core/src/research.rs",
+      "sha256": "0b87fb3e269278516d84674c21ad0a351288e1f9c2f4a7e219f14345f0e708fe",
+      "bytes": 34167,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-ai/src/compact_tt359_tests.rs",
+      "sha256": "9327c0122720d64a37f298b95803bbbea50a6905c49f908195dfd68c10a6d50a",
+      "bytes": 20063,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/runtime.rs",
+      "sha256": "6a9e077a3b494b1198642ab5fc699cb7724a0d0a8feaa8786a62740ea5d99f59",
+      "bytes": 215858,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/arena_clock.rs",
+      "sha256": "20a1c474b2c41b25e302ff5d96b59876d0603dbd4339556969140c3b0b7d6e2e",
+      "bytes": 18616,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/value_search_compare.rs",
+      "sha256": "72ad5494193701aaf326db44a09db99b435625c145dddc2cab37a40416bc9b3a",
+      "bytes": 50924,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-ai/benches/nnue_search.rs",
+      "sha256": "5ad173f399586fb970c10118f329e144b260271aa3a07a3a5ea618e2f6949cda",
+      "bytes": 19664,
+      "mode": "0644"
+    }
+  ],
+  "removed_old_source": "crates/quoridor-ai/src/tt_hash_reuse351_tests.rs; exact prior source preserved in Git and frozen baseline private, no current compatibility shim",
+  "strict_proof": "All8 before hash/mode identities matched;52-hunk patch applied and reverse check passed; all7 remaining postimages exact. Existing358 runtime/clock deltas and all6 reviewed361 source postimages retained byte-for-byte.",
+  "same_inlet_workload": "Caller33b43/workload892e8/Cargo.lock564f/devCargo8874 unchanged; candidate38 projection exactly matches current Main. Baseline checks embedded compiler inputs, not mutable Main; no dualTT/privateKey adapter or secondcheckout.",
+  "validation": "Scoped Rustfmt2024 skip_children format/check and git diff --check PASS. No tests/compiler/private candidate/model/Search/catalogue/geometry/game executed.",
+  "limits": "128-bit noncryptographic counted-history collision assumption explicit; structural GHI witness and entry/reentry cancellation scope retained, not mathematical collision-free proof. Requested capacity4096/1MiB/defaultmodel/rules/PVS/evaluation unchanged.",
+  "funding": "New inclusive256KiB Root source/proof/docs/dispatch/Git inside already issued359 Root8MiB; oldfloors/fees/RAW/FAILED/masks/UNKNOWN held; no global increase or resource credit.",
+  "next": "One fresh supported candidate software phase: nine TT and three caller definitions plus affected17closure/newprivate build; actual image/currentmodel/rootcatalogue qualification before frozen28 calls. No baseline replay or wholeparent/HumanACK gate."
+}
