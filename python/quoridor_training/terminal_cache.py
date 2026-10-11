@@ -247,7 +247,7 @@ class TerminalCorpus(CompactCorpus):
                         or record[20:28] != normalized
                         or fields["distance-steps.u8"] != bytes(steps)
                         or record[28:34]
-                        != struct.pack("<bBI", row["z"] or 0, 0, len(self.source_offsets))
+                        != struct.pack("<bBI", int(row["z"] or 0), 0, len(self.source_offsets))
                     ):
                         raise ValueError(
                             "canonical geometry/input SHA/distance/record correspondence"
