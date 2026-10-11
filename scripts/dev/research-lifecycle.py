@@ -715,6 +715,7 @@ def build_check(spec):
         and handover["private_pool_B"] == 33554432,
         "single issued writer/pool",
     )
+    private_copy_check(spec)
     adoption = document(spec["source_adoption"])
     require(
         adoption["schema"] == "quoridor.research.source-adoption.v1"
@@ -810,6 +811,37 @@ def build_check(spec):
                     "-Dwarnings" in a and "--no-deps" in a,
                     "ordinary scoped Clippy with warnings denied",
                 )
+
+
+def private_copy_check(spec, src=None):
+    handover = document(spec["target_handover"])
+    root = owned(handover["fresh_private_root"], spec["owner"])
+    require(root == Path(spec["private"]).parent, "fresh private root binding")
+    fresh = handover["fresh_private_forward_max_B"]
+    upper = handover["private_candidate_upper_B"]
+    group = handover["private_pool_B"]
+    preceding = handover["old_private_retained_allocated_B"]
+    require(
+        all(type(n) is int for n in (fresh, upper, group, preceding))
+        and 0 < upper <= fresh <= group
+        and 0 <= preceding <= group,
+        "positive private candidate/fresh/group bounds",
+    )
+    if src is None:
+        return
+    path = owned(src, spec["target"])
+    info = path.lstat()
+    require(
+        stat.S_ISREG(info.st_mode) and 0 < info.st_size <= upper,
+        "private candidate size/type before copy",
+    )
+    block = os.statvfs(root).f_frsize
+    require(0 < block <= 65536, "private allocation unit")
+    rounded = ((info.st_size + block - 1) // block) * block
+    # Retain allocation already in this domain, plus a bounded custody/directory margin.
+    prospective = allocated(root) + rounded + 65536
+    require(prospective <= fresh, "fresh private room before copy")
+    require(prospective + preceding <= group, "selected private group room before copy")
 
 
 def copy_artifact(src, dst):
@@ -1638,6 +1670,7 @@ def execute(
                                 ]
                                 require(len(matches) == 1, "one normal runner executable artifact")
                                 src = owned(matches[0]["executable"], spec["target"])
+                                private_copy_check(spec, src)
                                 candidate = copy_artifact(src, spec["private"])
                         result["active_command"] = None
                     require(
