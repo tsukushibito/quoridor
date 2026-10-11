@@ -1,0 +1,87 @@
+{
+  "issue": "quoridor-4lc.364",
+  "status": "ACCEPTED_FINITE_LOCAL_SENSITIVITY",
+  "accepted_at": "2026-10-11T23:11:08.050138+00:00",
+  "binding": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/distance-input-diagnostic364-v1/controls/result-binding.json",
+    "sha256": "cd4df6ca1869d954599cf5af8e149181d573532e662cfbaa9960b74682a67662",
+    "bytes": 2792,
+    "mode": "0644"
+  },
+  "report": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/distance-input-diagnostic364-v1/controls/report.md",
+    "sha256": "a7e36d175d1661344e1fe405f8d5ca36ffc686bd6ea2eefa0ef35ef1a225ba65",
+    "bytes": 16437,
+    "mode": "0644"
+  },
+  "original_result": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/distance-input-diagnostic364-v1/raw/result.json",
+    "sha256": "c30bee9af58decb1382a5184a7532a182c0a40c52cecfffa2f7465f554e71920",
+    "bytes": 175816,
+    "mode": "0644"
+  },
+  "original_guardian": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/distance-input-diagnostic364-v1/controls/guardian-receipt.json",
+    "sha256": "acb382b9ad42fb751ca73fa18d7db3d474b20d7c5120d4b59a01a66e7eb8b2eb",
+    "bytes": 3218,
+    "mode": "0644"
+  },
+  "original_job_result": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/distance-input-diagnostic364-v1/controls/runtime-v1/result.json",
+    "sha256": "895df3ece6e914d977565fdd6dbe4c6e8de3af60892ffcf492aa6ef8af58845e",
+    "bytes": 503,
+    "mode": "0600"
+  },
+  "row_forwards": 5115,
+  "omissions": 0,
+  "V_summary": [
+    {
+      "model": "INITIAL_BEST43",
+      "V_rows": 76,
+      "V_saturated_rows": 33,
+      "median_abs_head_delta_range_across_four_interventions": [
+        0.742011547088623, 0.7743805646896362
+      ],
+      "median_abs_final_delta_range_across_four_interventions": [
+        0.032997339963912964, 0.07691502571105957
+      ]
+    },
+    {
+      "model": "A200",
+      "V_rows": 76,
+      "V_saturated_rows": 32,
+      "median_abs_head_delta_range_across_four_interventions": [
+        0.7063995003700256, 0.7351993322372437
+      ],
+      "median_abs_final_delta_range_across_four_interventions": [
+        0.03654658794403076, 0.08643043041229248
+      ]
+    },
+    {
+      "model": "B200",
+      "V_rows": 76,
+      "V_saturated_rows": 29,
+      "median_abs_head_delta_range_across_four_interventions": [
+        0.6161432266235352, 0.6486165523529053
+      ],
+      "median_abs_final_delta_range_across_four_interventions": [
+        0.052991002798080444, 0.0822213739156723
+      ]
+    }
+  ],
+  "scope": "Three accepted immutable snapshots,341 fixed compact inputs; baseline plus independent own/opponent integer distance +/-1 with fixed geometry and normalization. Same-call pre-tanh/tanh/unchanged-FT/parameter checks passed. Binary-only intake. Owner saved-bit/statistic census reused, Root verified exact original receipt/report/result metadata and scalar summary; no duplicate raw census/model forward.",
+  "interpretation": "Substantial local distance-head response. Saturation attenuates many final-value responses. No claim of relative board-feature importance, legal alternatives, weakness cause, playing strength, population or universal monotonicity.",
+  "limits": [
+    "Eight correlated source trajectories;217T/76V/48excluded per snapshot",
+    "Saved aggregate MSE correspondence only; no saved per-row counterpart",
+    "Some large finite changes leave saturation; zero median does not bound every row",
+    "Exact child UTCSTOP/continuous family peak UNKNOWN"
+  ],
+  "command_wall_seconds_once": 2.7235995420487598,
+  "controller_whole_seconds_separate": 3.2960647749714553,
+  "source_reader_STOP": "2026-10-11T22:45:34.971646+00:00",
+  "collector_reader_STOP": "2026-10-11T22:56:41.409850+00:00",
+  "historical_source_results_failures_unchanged": true,
+  "new_execution_or_retirement": false,
+  "source_math_model_feature_recipe_default_323_pause_changes": false
+}
