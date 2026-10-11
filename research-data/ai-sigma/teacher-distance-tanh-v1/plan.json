@@ -534,17 +534,20 @@
       "source": "NEW fixedD self-play mainline decisions requested/completeddepth6; save actual final outcome z and raw completed root search value with STM/fullhistory/rules/source/model/units/family provenance",
       "quantity_families": 8,
       "blind_schedule": {
+        "version": "fixed-d-common-corpus-warmstart-v1",
+        "prefix_seed": 36220261013,
         "prefix_lengths": [4, 8, 12, 16],
-        "each": 2,
-        "generation_seed": 36220261013,
-        "partition_seed": 36220261014,
-        "preoutcome_selection": true
+        "ordering": "round_robin_lengths",
+        "attempts_per_family": 32,
+        "old_games_included": false,
+        "families_per_length": 2
       },
       "whole_family_T_V_partition": {
+        "algorithm": "canonical_LR_family_SHA256_seed_rank_train_floor_4F_over_5",
+        "seed": 36220261014,
+        "before_outcomes": true,
         "T": 6,
-        "V": 2,
-        "method": "canonical_LR_family_SHA256_seed_rank_train_floor_4F_over_5",
-        "partition_seed": 36220261014
+        "V": 2
       },
       "offtrajectory_rows": 0,
       "eligibility": "SAME fixed eligible rows for BOTH candidates; completed6 nonterminal mainline decisions plus actual final goal/draw outcome; partial/capped/missing/UNKNOWN explicit denominators. Root terminal +/-2 is not ordinary tanh target; target transformation/terminal handling must be explicitly bound before results, never silently clipped or invented."
@@ -564,8 +567,102 @@
       }
     ],
     "fixed_model_contract": "FT32/H32 Zero4/QF1 tanh FP32/native conventions; retain standardized head-distance INPUT/incumbent T-only head scale; OUTPUT bypass OFF. No newT renormalization, head reset/freeze, teacher mixing, extra fits or old optimizer resume.",
-    "common_learner_settings": null,
-    "range_terminal_handling": "exclude_outside_unit",
+    "common_learner_settings": {
+      "model": {
+        "feature_version": "QF1",
+        "architecture": "distance_residual",
+        "distance_a": 0.0,
+        "distance_b": 0.0,
+        "transformer_width": 32,
+        "hidden_width": 32,
+        "dropout": 0.0
+      },
+      "optimizer": {
+        "name": "adam",
+        "lr": 0.0001,
+        "weight_decay": 0.0,
+        "momentum": 0.0,
+        "betas": [0.9, 0.999],
+        "eps": 1e-8
+      },
+      "training": {
+        "steps": 200,
+        "batch_size": 64,
+        "seed": 36220261011,
+        "sampling": "epoch",
+        "loss_weighting": "row",
+        "scheduler": "none",
+        "warmup_steps": 20,
+        "lr_decay_factor": 0.5,
+        "lr_decay_patience": 2,
+        "min_lr": 1e-6,
+        "reflection_probability": 0.5,
+        "supply_workers": 0,
+        "reflection_seed": 36220261012,
+        "device": "cpu",
+        "threads": 1
+      },
+      "evaluation": {
+        "interval": 20,
+        "checkpoints": [0, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200],
+        "batch_size": 64,
+        "monitor": "row",
+        "early_stopping_patience": 0,
+        "early_stopping_unit": "observation",
+        "min_delta": 0.0,
+        "min_delta_relative": 0.0,
+        "diagnostic_rows": 0,
+        "diagnostic_interval": 20,
+        "diagnostic_checkpoints": [],
+        "full_train": true,
+        "full_train_checkpoints": [
+          0, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200
+        ],
+        "full_train_every_epochs": 0
+      },
+      "limits": {
+        "seconds": 600.0,
+        "samples": 12800
+      },
+      "data": {
+        "overlap_policy": "error"
+      },
+      "artifacts": {
+        "mode": "native",
+        "save_scheduled": false,
+        "checkpoint_steps": []
+      },
+      "experiment": {
+        "study": "common-corpus-warmstart-v1",
+        "teacher_mapping": "exclude_outside_unit",
+        "draw_policy": "include_threefold",
+        "warm_start": {
+          "descriptor": {
+            "path": "/workspaces/quoridor/.worktree/assets/checkpoints/public-no-bypass-v1/candidate-v1/output/best-model/manifest.json",
+            "sha256": "46ec2c4708f96dcf9fad579c2fb0d1299c6663df27412f0faac98267467715e1",
+            "bytes": 677,
+            "mode": "0600"
+          },
+          "weights": {
+            "path": "/workspaces/quoridor/.worktree/assets/checkpoints/public-no-bypass-v1/candidate-v1/output/best-model/weights.f32",
+            "sha256": "046fe926e56b955b0fb7de8f147a74ec33eace9cbc00a55c307f9b6541ab9841",
+            "bytes": 49284,
+            "mode": "0644"
+          },
+          "evaluator_sha256": "96a5f41f875022d1752b9c999595ad58bfb2d42687a8f06de08d42b1c4215875",
+          "optimizer": "fresh",
+          "scale": "incumbent"
+        },
+        "condition": null,
+        "main_volume_N": 8,
+        "main_volume_manifest": null,
+        "main_volume_manifest_sha256": null
+      }
+    },
+    "range_terminal_handling": {
+      "root_value_policy": "exclude_outside_unit",
+      "draw_policy": "include_threefold"
+    },
     "assessment_counts": {
       "pilot_only": true,
       "fit_runs": 2,
@@ -704,6 +801,26 @@
     },
     "pilot_selected_on": "2026-10-11 explicit human良いよ in Policy and epic notes",
     "whole_support": "research-data/ai-sigma/teacher-distance-tanh-v1/common-corpus-pilot-whole-support-v1.json",
-    "common_learner_settings_materialization": "SAME learner now materializes complete explicit canonical normalized recipe implementing these selected choices; no remaining human method/quantity/settings approval. Root binds exact draft before assets/framework execution."
+    "common_learner_settings_materialization": "COMPLETE explicit normalized selected recipe, only training.target omitted, hashbound e606a845; actual pairedconfigs differ only z/completed_root_raw; not renewed approval",
+    "selected_recipe_interface": {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/recipe-interface.json",
+      "sha256": "8f7245977379a746e3ab26e716a7474dd2ace097b730ed02eab02b141579d711",
+      "bytes": 3150,
+      "mode": "0644"
+    },
+    "paired_fit_configs": [
+      {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A.json",
+        "sha256": "56080b580eb6dd460764d02dbfa7526877bf995e59434c334503585cf77e0038",
+        "bytes": 2540,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-B.json",
+        "sha256": "8b125c6df1b1ec43434537ee02938b0696bbae5d5422346e0f983d1dfcb4e426",
+        "bytes": 2557,
+        "mode": "0644"
+      }
+    ]
   }
 }
