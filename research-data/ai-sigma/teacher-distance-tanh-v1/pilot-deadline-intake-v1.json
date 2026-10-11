@@ -1,0 +1,46 @@
+{
+  "observed_at": "2026-10-11T11:14:50.370493+00:00",
+  "fixed_deadline": "2026-10-11T11:07:41.369110Z",
+  "status": "DEADLINE_EXPIRED_WITH_UNFINISHED_WORK",
+  "owner_STOP_refs": [
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/deadline-STOP-v1.json",
+      "sha256": "47238c2c28f926694c5ef9e4952bfc9e23a107157f638450be99254a818d039c",
+      "bytes": 9200,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/deadline-STOP.json",
+      "sha256": "12084ed579df75af7e0aa8358f3286cc4ec467511f2cc178e2c727ee155c47ee",
+      "bytes": 5874,
+      "mode": "0644"
+    }
+  ],
+  "planned_games": 8,
+  "entered_games": 0,
+  "known_outcomes": 0,
+  "planned_unentered_UNKNOWN": 8,
+  "common_cache_created": false,
+  "fit_A": "NOT_RUN",
+  "fit_B": "NOT_RUN",
+  "framework_definitions": {
+    "planned": 3,
+    "successful": 0,
+    "last_attempt": "All three errored on first NumPy import; no array, tensor or model computation."
+  },
+  "reusable_current_BUILD": "4ce963dfea6af76885c0bd911e503e6c9c28a0b99bbd1e1b113facc6443b334f; SOFTWARE ONLY",
+  "known_BUILD_failed_controllers_seconds": 28.510209025000222,
+  "known_BUILD_successful_controller_seconds": 96.50126689695753,
+  "known_framework_failed_controllers_seconds": 4.663329571951181,
+  "fees_note": "Separate controller scopes, nested clocks not added. Collection/admin/LLM/all-work fees and continuous peaks remain UNKNOWN.",
+  "final_caller_fix_adoption": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/pilot-caller-repairs-adoption-v5.json",
+    "sha256": "6a7528c01820dedb554ab556673f62475a882200b1e9a1019f2504ed0d8960a9",
+    "bytes": 2196,
+    "mode": "0644"
+  },
+  "integration": "Root missed the stopped caller-fix integration window before the deadline. Corrections now preserved for reuse; no deadline reset, retry, new cycle or numerical qualification inferred.",
+  "remaining": "Actual correct-environment framework qualification, corpus/cache/numerical input qualification, both selected fits and readable curves. Existing selected scientific choices and baseline stay intact. Future scientific execution requires unexpired authority.",
+  "retention": "All original FAILED/raw/primary/secondary/returned-versus-persisted masks/cleanup UNKNOWNs and immutable evidence remain; no asset deletion or refund.",
+  "parents_closed": false
+}

@@ -1,0 +1,108 @@
+{
+  "scope": "Entire project including Git/control/worktrees/assets/all build targets, entire named inference volume including installed research environments and dependency/model caches, shared Cargo/Rustup/uv caches and project external control state. Conservative project/toolchain inclusion; unrelated host/user data and Codex conversation logs excluded.",
+  "scan_START": "2026-10-11T11:09:39.751034+00:00",
+  "scan_STOP": "2026-10-11T11:11:15.035530+00:00",
+  "whole_seconds": 95.26586110808421,
+  "argv": [
+    "du",
+    "--summarize",
+    "--block-size=1",
+    "--one-file-system",
+    "--",
+    "/workspaces/quoridor",
+    "/workspaces/quoridor/.worktree",
+    "/home/vscode/.cache/inference",
+    "/usr/local/cargo",
+    "/usr/local/rustup",
+    "/home/vscode/.cache/uv",
+    "/home/vscode/.local/share/quoridor"
+  ],
+  "exit": 0,
+  "stderr": "",
+  "rows": [
+    {
+      "path": "/workspaces/quoridor",
+      "allocated_B": 7079649280
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree",
+      "allocated_B": 7719051264
+    },
+    {
+      "path": "/home/vscode/.cache/inference",
+      "allocated_B": 7680712704
+    },
+    {
+      "path": "/usr/local/cargo",
+      "allocated_B": 244678656
+    },
+    {
+      "path": "/usr/local/rustup",
+      "allocated_B": 1437069312
+    },
+    {
+      "path": "/home/vscode/.cache/uv",
+      "allocated_B": 36864
+    },
+    {
+      "path": "/home/vscode/.local/share/quoridor",
+      "allocated_B": 16384
+    }
+  ],
+  "allocated_total_B": 24161214464,
+  "partial_observed_B": 24161214464,
+  "cap_B": 50000000000,
+  "cap_minus_current_B": 25838785536,
+  "filesystems": [
+    {
+      "representative_root": "/workspaces/quoridor",
+      "device": 120,
+      "available_B": 358550073344,
+      "filesystem_size_B": 2047258652672
+    },
+    {
+      "representative_root": "/workspaces/quoridor/.worktree",
+      "device": 2112,
+      "available_B": 510362603520,
+      "filesystem_size_B": 1081101176832
+    },
+    {
+      "representative_root": "/usr/local/cargo",
+      "device": 85,
+      "available_B": 510362603520,
+      "filesystem_size_B": 1081101176832
+    }
+  ],
+  "mounts": [
+    {
+      "path": "/workspaces/quoridor",
+      "device": "0:120"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree",
+      "device": "8:64"
+    },
+    {
+      "path": "/home/vscode/.cache/inference",
+      "device": "8:64"
+    }
+  ],
+  "method": "One GNU du invocation. Allocated st_blocks bytes, hardlinked device/inodes counted once across all arguments, no symlink following; separate mounts explicitly named. Reflink/shared extents are not deduplicated. Observation is not an atomic filesystem snapshot. No payload read or deletion.",
+  "reservations": "Administrative forecast is separate from current stored bytes; none added to this measurement.",
+  "output_forward_B": 65536,
+  "funding": "Existing Root cleanup/admin component 268435456B; no new allocation.",
+  "coverage": "All named legacy cap-covered roots and current research-paths.json destinations are inside declared measured roots. Project and inference roots conservatively include currently stored obsolete/generated/shared bytes.",
+  "uncovered_legacy_roots": [],
+  "missing_or_inaccessible_declared_roots": [],
+  "necessary_data_total_B": null,
+  "necessary_data_note": "This is current total allocated research-scope storage including code/build/dependencies/obsolete files, not an attribution of uniquely necessary scientific data.",
+  "administrative_held_forecast_B": 46851026944,
+  "administrative_unassigned_forward_B": 3148973056,
+  "measurement_is_new_science_or_storage_grant": false,
+  "source_evidence": {
+    "path": "/workspaces/quoridor/.artifacts/research-coordination/storage-reconciliation-v3/whole-current-v4/measurement.json",
+    "sha256": "3c4e7b58b3ceff5096586712d06cdce04b21d1668f69237bdc70ae5ee15ad6ba",
+    "bytes": 2920,
+    "mode": "0644"
+  }
+}
