@@ -107,6 +107,12 @@ pub struct Experiment {
 }
 pub fn sources() -> BTreeMap<&'static str, String> {
     let mut map = crate::sigma_qualification::sources();
+    // Artifact qualification covers the temporary public caller too.
+    #[cfg(feature = "ordering-assessment")]
+    map.insert(
+        "runner/ordering_assessment.rs",
+        arena::digest(include_bytes!("ordering_assessment.rs")),
+    );
     map.insert(
         "runner/value_search_compare.rs",
         arena::digest(include_bytes!("value_search_compare.rs")),

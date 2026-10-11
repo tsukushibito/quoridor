@@ -1,0 +1,484 @@
+{
+  "schema": "quoridor.research.source-adoption.v1",
+  "issue": "quoridor-4lc.360.1",
+  "status": "SOURCE_ADOPTED_AFFECTED_SOFTWARE_UNQUALIFIED",
+  "target": {
+    "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/current-publisher-v8/source-STOP-binding.json",
+    "sha256": "a2e7be74f4277cfb51e8742f21035425d8927daf83bb10df4004c79ecf488c0d",
+    "bytes": 7886,
+    "mode": "0644"
+  },
+  "source_map": {
+    "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/current-publisher-v8/current-Main-source-map.json",
+    "sha256": "5ab582c97f80ce6015589fe9964c33d97ca39a2a3dd484460f87407620ef9255",
+    "bytes": 20560,
+    "mode": "0644"
+  },
+  "patch": {
+    "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/current-publisher-v8/current-Main-source.patch.gz",
+    "sha256": "ead1b0fdc8f46da6eac4fa15fe200142b0f898e6b15dec90b71b5da284f9b29b",
+    "bytes": 35050,
+    "mode": "0644"
+  },
+  "source_paths": [
+    {
+      "source_path": "crates/quoridor-ai/src/alphabeta.rs",
+      "before": {
+        "path": "/workspaces/quoridor/crates/quoridor-ai/src/alphabeta.rs",
+        "sha256": "574614916311ea4d13a1d1026e4e8d5ca4738c697b7c60fb2d38e460bf86f33b",
+        "bytes": 103583,
+        "mode": "0644"
+      },
+      "after": {
+        "sha256": "5ca7e36a60f6a89ea3de52f433fdd49b45c3e87fa05b53ba5a49de497d71647b",
+        "bytes": 115756,
+        "mode": "0644"
+      },
+      "owned_after": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/related-setup-v6/alphabeta.rs",
+      "owned_encoding": "utf8",
+      "reused_stopped_body": false,
+      "owned_file_ref": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/related-setup-v6/alphabeta.rs",
+        "sha256": "5ca7e36a60f6a89ea3de52f433fdd49b45c3e87fa05b53ba5a49de497d71647b",
+        "bytes": 115756,
+        "mode": "0644"
+      },
+      "strict_forward_reverse": true,
+      "before_gzip": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/related-setup-v6/Main-alpha.before.gz",
+        "sha256": "86470faf391e52cef2fa7e23e85140ee140acf606eebe9e29a9e281a8655e207",
+        "bytes": 21426,
+        "mode": "0644"
+      }
+    },
+    {
+      "source_path": "crates/quoridor-ai/src/continuation_history.rs",
+      "before": null,
+      "after": {
+        "sha256": "f20dc7d18c3cffb5ab034049cb25883b7b762167bd9408e3234d88a82a58055e",
+        "bytes": 7460,
+        "mode": "0644"
+      },
+      "owned_after": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/static-v2/continuation_history.rs",
+      "owned_encoding": "utf8",
+      "reused_stopped_body": true,
+      "owned_file_ref": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/static-v2/continuation_history.rs",
+        "sha256": "f20dc7d18c3cffb5ab034049cb25883b7b762167bd9408e3234d88a82a58055e",
+        "bytes": 7460,
+        "mode": "0644"
+      },
+      "strict_forward_reverse": true
+    },
+    {
+      "source_path": "crates/quoridor-ai/src/continuation360_tests.rs",
+      "before": null,
+      "after": {
+        "sha256": "ee75113c52120b30e4191863b5a2e68b59879ea3dd5f38d8677157be4889cccd",
+        "bytes": 22216,
+        "mode": "0644"
+      },
+      "owned_after": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/compact-tt-composite-v5/continuation360_tests.rs",
+      "owned_encoding": "utf8",
+      "reused_stopped_body": false,
+      "owned_file_ref": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/compact-tt-composite-v5/continuation360_tests.rs",
+        "sha256": "ee75113c52120b30e4191863b5a2e68b59879ea3dd5f38d8677157be4889cccd",
+        "bytes": 22216,
+        "mode": "0644"
+      },
+      "strict_forward_reverse": true
+    },
+    {
+      "source_path": "crates/quoridor-ai/src/static_ordering.rs",
+      "before": null,
+      "after": {
+        "sha256": "d3807c120552e6f807b945df1bbaa51efac619ebd01ecab8f9bfcf18d605492c",
+        "bytes": 8543,
+        "mode": "0644"
+      },
+      "owned_after": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/static-v2/static_ordering.rs",
+      "owned_encoding": "utf8",
+      "reused_stopped_body": true,
+      "owned_file_ref": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/static-v2/static_ordering.rs",
+        "sha256": "d3807c120552e6f807b945df1bbaa51efac619ebd01ecab8f9bfcf18d605492c",
+        "bytes": 8543,
+        "mode": "0644"
+      },
+      "strict_forward_reverse": true
+    },
+    {
+      "source_path": "crates/quoridor-ai/src/static360_tests.rs",
+      "before": null,
+      "after": {
+        "sha256": "8c549e9f7898789e3a85f27914e165d1026bd500637872b0283d0467a878fdd6",
+        "bytes": 11079,
+        "mode": "0644"
+      },
+      "owned_after": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/static-v2/static360_tests.rs",
+      "owned_encoding": "utf8",
+      "reused_stopped_body": true,
+      "owned_file_ref": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/static-v2/static360_tests.rs",
+        "sha256": "8c549e9f7898789e3a85f27914e165d1026bd500637872b0283d0467a878fdd6",
+        "bytes": 11079,
+        "mode": "0644"
+      },
+      "strict_forward_reverse": true
+    },
+    {
+      "source_path": "crates/quoridor-nnue/src/lib.rs",
+      "before": {
+        "sha256": "90734f895e21f49ad246837a76303a37f45783dbaf3932be8d05a14345b207cf",
+        "bytes": 24343,
+        "mode": "0644"
+      },
+      "after": {
+        "sha256": "66f9ac049594390f9f457e3ea3076d77d0106d96f36b4ff81c3c4ee43809afa0",
+        "bytes": 26225,
+        "mode": "0644"
+      },
+      "owned_after": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/compact-tt-composite-v5/nnue-lib.rs",
+      "owned_encoding": "utf8",
+      "reused_stopped_body": false,
+      "owned_file_ref": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/compact-tt-composite-v5/nnue-lib.rs",
+        "sha256": "66f9ac049594390f9f457e3ea3076d77d0106d96f36b4ff81c3c4ee43809afa0",
+        "bytes": 26225,
+        "mode": "0644"
+      },
+      "strict_forward_reverse": true,
+      "before_gzip": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/compact-tt-composite-v5/nnue-lib.rs.before.gz",
+        "sha256": "c172038f04613f42a409dbfe8ca605cfe15213f2a754b1e251d3bea89521aa08",
+        "bytes": 6086,
+        "mode": "0644"
+      }
+    },
+    {
+      "source_path": "crates/quoridor-nnue/src/features.rs",
+      "before": {
+        "sha256": "25c2953e4805344fe27ea9f9480b08fee462a8ce5833602484491e2ce48f1531",
+        "bytes": 8230,
+        "mode": "0644"
+      },
+      "after": {
+        "sha256": "c116d52a6374809b3796fc53abc8ae8136241f271e770ea7e0471f37898a7a2c",
+        "bytes": 8435,
+        "mode": "0644"
+      },
+      "owned_after": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/compact-tt-composite-v5/nnue-features.rs",
+      "owned_encoding": "utf8",
+      "reused_stopped_body": false,
+      "owned_file_ref": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/compact-tt-composite-v5/nnue-features.rs",
+        "sha256": "c116d52a6374809b3796fc53abc8ae8136241f271e770ea7e0471f37898a7a2c",
+        "bytes": 8435,
+        "mode": "0644"
+      },
+      "strict_forward_reverse": true,
+      "before_gzip": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/compact-tt-composite-v5/nnue-features.rs.before.gz",
+        "sha256": "34d76b617b0f4d280fc318c59659ddb196ee7e23d9006d0f41e6e909ef8be38c",
+        "bytes": 2624,
+        "mode": "0644"
+      }
+    },
+    {
+      "source_path": "crates/quoridor-runner/src/arena_manifest.rs",
+      "before": {
+        "sha256": "b4c4b56f3a8b8520a0584b3b89eaa68de41de2f7cbab987b6cef46cb5b90a70b",
+        "bytes": 29115,
+        "mode": "0644"
+      },
+      "after": {
+        "sha256": "a78124e5cb64aa15a9d54943a6e33bd4b0cd137b62d3a980426845b73f9fa75c",
+        "bytes": 29385,
+        "mode": "0644"
+      },
+      "owned_after": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/compact-tt-composite-v5/arena_manifest.rs",
+      "owned_encoding": "utf8",
+      "reused_stopped_body": false,
+      "owned_file_ref": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/compact-tt-composite-v5/arena_manifest.rs",
+        "sha256": "a78124e5cb64aa15a9d54943a6e33bd4b0cd137b62d3a980426845b73f9fa75c",
+        "bytes": 29385,
+        "mode": "0644"
+      },
+      "strict_forward_reverse": true,
+      "before_gzip": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/compact-tt-composite-v5/arena_manifest.rs.before.gz",
+        "sha256": "55cf961e1cb48dd8216e0ce4304e71f1bf255157c492cb453ace27ff28ce783a",
+        "bytes": 7398,
+        "mode": "0644"
+      }
+    },
+    {
+      "source_path": "scripts/dev/research-lifecycle.py",
+      "before": {
+        "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+        "sha256": "d8ac96e750f828891733b8bb2ebd933c48044713fb3910bacdcece26d30a785f",
+        "bytes": 110510,
+        "mode": "0644"
+      },
+      "after": {
+        "sha256": "211ebc84d4ef0205e856a306e4cb221a80d144a7708df43e0a4e06bae55f65d7",
+        "bytes": 111488,
+        "mode": "0644"
+      },
+      "owned_after": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/current-publisher-v8/lifecycle-publisher.py.after.gz",
+      "owned_encoding": "gzip",
+      "reused_stopped_body": false,
+      "owned_file_ref": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/current-publisher-v8/lifecycle-publisher.py.after.gz",
+        "sha256": "c3e84853cd471611a7d77c75207df696582ef8e7b9878901d45bd19406ec7241",
+        "bytes": 26298,
+        "mode": "0644"
+      },
+      "strict_forward_reverse": true,
+      "before_gzip": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/current-publisher-v8/lifecycle-publisher.py.before.gz",
+        "sha256": "a8e99699a717a8dc5c21aa3575a5ccc4fe0e3bb921d9939148546e0136123f7c",
+        "bytes": 26048,
+        "mode": "0644"
+      }
+    },
+    {
+      "source_path": "python/quoridor_training/research355/lifecycle355.py",
+      "before": {
+        "sha256": "b85de2426e506a95515609a4064458c46f84a839f2ea807807a7ed10cb2471a5",
+        "bytes": 15518,
+        "mode": "0644"
+      },
+      "after": {
+        "sha256": "5d7a91e74259503c437364c8974e9fe3a36e642d72e9941461fccd4fcbd9fdc8",
+        "bytes": 15896,
+        "mode": "0644"
+      },
+      "owned_after": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/compact-tt-composite-v5/lifecycle-consumer.py.after.gz",
+      "owned_encoding": "gzip",
+      "reused_stopped_body": false,
+      "owned_file_ref": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/compact-tt-composite-v5/lifecycle-consumer.py.after.gz",
+        "sha256": "f9a52fb0a1c41e425e38dc461cbdcb0ae4c0ab70cc992d7141ec6e7614721f63",
+        "bytes": 5110,
+        "mode": "0644"
+      },
+      "strict_forward_reverse": true,
+      "before_gzip": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/compact-tt-composite-v5/lifecycle-consumer.py.before.gz",
+        "sha256": "16ed0bc4f4dc0764db5bdad387985a5508d258a524f9cf50f0b224c9cb0705bf",
+        "bytes": 5003,
+        "mode": "0644"
+      }
+    },
+    {
+      "source_path": "tools/research-session/test_continuation360_sources.py",
+      "before": null,
+      "after": {
+        "sha256": "653b7a19ae2c093c5102f23e45ed5947c378d2e64ef7cf6db399f968c91bd1d6",
+        "bytes": 4453,
+        "mode": "0644"
+      },
+      "owned_after": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/compact-tt-composite-v5/test_continuation360_sources.py",
+      "owned_encoding": "utf8",
+      "reused_stopped_body": false,
+      "owned_file_ref": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/compact-tt-composite-v5/test_continuation360_sources.py",
+        "sha256": "653b7a19ae2c093c5102f23e45ed5947c378d2e64ef7cf6db399f968c91bd1d6",
+        "bytes": 4453,
+        "mode": "0644"
+      },
+      "strict_forward_reverse": true
+    },
+    {
+      "source_path": "crates/quoridor-runner/src/main.rs",
+      "before": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/main.rs",
+        "sha256": "67ab79a2c5c8caabb97fc84a96c214285baa18665ee2335e731966629c07ec43",
+        "bytes": 22857,
+        "mode": "0644"
+      },
+      "after": {
+        "sha256": "7f423f02b9f6462aaab7ba95680fd31150b1eb797dd8b5a64fcafea775192a3c",
+        "bytes": 23397,
+        "mode": "0644"
+      },
+      "owned_after": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/current-readiness-v7/main.rs",
+      "owned_encoding": "utf8",
+      "reused_stopped_body": false,
+      "owned_file_ref": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/current-readiness-v7/main.rs",
+        "sha256": "7f423f02b9f6462aaab7ba95680fd31150b1eb797dd8b5a64fcafea775192a3c",
+        "bytes": 23397,
+        "mode": "0644"
+      },
+      "strict_forward_reverse": true,
+      "before_gzip": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/current-readiness-v7/main.rs.before.gz",
+        "sha256": "1181e979950005c5d68733775ba71877eec18d766bbe9c6d167dcaea0876cf6a",
+        "bytes": 4935,
+        "mode": "0644"
+      }
+    },
+    {
+      "source_path": "crates/quoridor-runner/src/lib.rs",
+      "before": {
+        "sha256": "3cb885a0852dcec5cbd9c2249e638e799d9c5db0f5eeef83bfa58ef4cd5e6f46",
+        "bytes": 656,
+        "mode": "0644"
+      },
+      "after": {
+        "sha256": "21177193aa107063cb335582da7f527a3a8e48ef7eb76484a5bc6bcb4a4a33b0",
+        "bytes": 792,
+        "mode": "0644"
+      },
+      "owned_after": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/assessment-inlet-v4/lib.rs",
+      "owned_encoding": "utf8",
+      "reused_stopped_body": true,
+      "owned_file_ref": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/assessment-inlet-v4/lib.rs",
+        "sha256": "21177193aa107063cb335582da7f527a3a8e48ef7eb76484a5bc6bcb4a4a33b0",
+        "bytes": 792,
+        "mode": "0644"
+      },
+      "strict_forward_reverse": true,
+      "before_gzip": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/assessment-inlet-v4/lib.rs.before.gz",
+        "sha256": "832a38a6dec47be2c33acf74ca9c23d320ce3db730b9baa1c8ced7148c5d1716",
+        "bytes": 293,
+        "mode": "0644"
+      }
+    },
+    {
+      "source_path": "crates/quoridor-runner/Cargo.toml",
+      "before": {
+        "sha256": "1b6ee35b55b28ae339900872dcdabe3b689641f543e31115f4d7c44b41609acd",
+        "bytes": 679,
+        "mode": "0644"
+      },
+      "after": {
+        "sha256": "970d76c8fe7e7b123ed1b6bed2ef5a540162c00d5137ef2a4e432e41108702df",
+        "bytes": 808,
+        "mode": "0644"
+      },
+      "owned_after": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/assessment-inlet-v4/runner-Cargo.toml",
+      "owned_encoding": "utf8",
+      "reused_stopped_body": true,
+      "owned_file_ref": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/assessment-inlet-v4/runner-Cargo.toml",
+        "sha256": "970d76c8fe7e7b123ed1b6bed2ef5a540162c00d5137ef2a4e432e41108702df",
+        "bytes": 808,
+        "mode": "0644"
+      },
+      "strict_forward_reverse": true,
+      "before_gzip": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/assessment-inlet-v4/runner-Cargo.toml.before.gz",
+        "sha256": "801d7c2fd45fd7857b50d5217e79c640f3c2b50a68e8c9b2f8867f1b6aae6eb0",
+        "bytes": 290,
+        "mode": "0644"
+      }
+    },
+    {
+      "source_path": "crates/quoridor-runner/src/research_manifest.rs",
+      "before": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/research_manifest.rs",
+        "sha256": "70eb71d1ea098b39094d4cf743551b146771e1e8b7e958c767142b6cc7360604",
+        "bytes": 27237,
+        "mode": "0644"
+      },
+      "after": {
+        "sha256": "0047e31122be2972fc755df49b0c08d2efb7788ba0e244a9a7d5d7b692b54d41",
+        "bytes": 27480,
+        "mode": "0644"
+      },
+      "owned_after": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/current-readiness-v7/research_manifest.rs",
+      "owned_encoding": "utf8",
+      "reused_stopped_body": false,
+      "owned_file_ref": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/current-readiness-v7/research_manifest.rs",
+        "sha256": "0047e31122be2972fc755df49b0c08d2efb7788ba0e244a9a7d5d7b692b54d41",
+        "bytes": 27480,
+        "mode": "0644"
+      },
+      "strict_forward_reverse": true,
+      "before_gzip": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/current-readiness-v7/research_manifest.rs.before.gz",
+        "sha256": "39239250d74ca8a9e2e6a1d8be7f6dbf4c786153775b020a4219205b4af1b341",
+        "bytes": 6510,
+        "mode": "0644"
+      }
+    },
+    {
+      "source_path": "crates/quoridor-runner/src/ordering_assessment.rs",
+      "before": null,
+      "after": {
+        "sha256": "18424ab05c18d8c57932410c2e86268105be181adfe097cf75795ba0fc98d2af",
+        "bytes": 36864,
+        "mode": "0644"
+      },
+      "owned_after": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/related-setup-v6/ordering_assessment.rs",
+      "owned_encoding": "utf8",
+      "reused_stopped_body": false,
+      "owned_file_ref": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/related-setup-v6/ordering_assessment.rs",
+        "sha256": "18424ab05c18d8c57932410c2e86268105be181adfe097cf75795ba0fc98d2af",
+        "bytes": 36864,
+        "mode": "0644"
+      },
+      "strict_forward_reverse": true
+    },
+    {
+      "source_path": "crates/quoridor-runner/src/ordering_assessment_tests.rs",
+      "before": null,
+      "after": {
+        "sha256": "80254ac233e50d3ca8f2247fdecf9fe787d03db9928ffddfbd2146c4600ddf19",
+        "bytes": 12004,
+        "mode": "0644"
+      },
+      "owned_after": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/related-setup-v6/ordering_assessment_tests.rs",
+      "owned_encoding": "utf8",
+      "reused_stopped_body": false,
+      "owned_file_ref": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/related-setup-v6/ordering_assessment_tests.rs",
+        "sha256": "80254ac233e50d3ca8f2247fdecf9fe787d03db9928ffddfbd2146c4600ddf19",
+        "bytes": 12004,
+        "mode": "0644"
+      },
+      "strict_forward_reverse": true
+    },
+    {
+      "source_path": "crates/quoridor-ai/src/continuation360_composite_tests.rs",
+      "before": null,
+      "owned_after": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/compact-tt-composite-v5/continuation360_composite_tests.rs",
+      "owned_encoding": "utf8",
+      "reused_stopped_body": false,
+      "after": {
+        "sha256": "75a4e91cd61c29d1e9d708f5c38d26d949d13c0cf6a2b66a0ecc0035efe9d228",
+        "bytes": 5680,
+        "mode": "0644"
+      },
+      "owned_file_ref": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/compact-tt-composite-v5/continuation360_composite_tests.rs",
+        "sha256": "75a4e91cd61c29d1e9d708f5c38d26d949d13c0cf6a2b66a0ecc0035efe9d228",
+        "bytes": 5680,
+        "mode": "0644"
+      },
+      "strict_forward_reverse": true
+    }
+  ],
+  "strict_forward_applied": true,
+  "inverse_check": true,
+  "current_before_and_after_SHA_size_mode_exact": true,
+  "prior_source_clear_reused": "b3f9d33d / related5da1b6961ecf35ee: R1resolved/blockers0/ordinary0; current caller correspondence mechanical, not retargeted independent review",
+  "new_definitions": "37 Rust /3 Python UNBUILT/UNTYPED/UNRUN",
+  "current_362_paths_preserved": true,
+  "source_reader_writer_STOP": "2026-10-11T16:44:52.416505+00:00",
+  "owned_readers_children_jobs_TMP_remaining": [],
+  "source_lock_released_on_return": true,
+  "whole_360_exclusive_B": 134217728,
+  "Root_contained_source_Git_handover_forward_B": 2097152,
+  "additional_global_grant_B": 0,
+  "scientific_or_software_entry": false
+}

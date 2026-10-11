@@ -201,6 +201,14 @@ pub struct Accumulator {
     mode: EvaluationMode,
     maps: Option<Arc<features::WallMaps>>,
 }
+impl Accumulator {
+    /// Readonly wall-only geometry already prepared for this accumulator.
+    /// Pawn occupancy, mover and jumps do not change these goal maps. A wall
+    /// mismatch refuses reuse; no feature, accumulator or head is modified.
+    pub fn cached_wall_distance_maps(&self, p: Position) -> Option<&[[u8; 81]; 2]> {
+        self.maps.as_deref()?.distances_for(p)
+    }
+}
 #[derive(Debug, Clone)]
 pub struct Model {
     topology: Topology,
@@ -658,4 +666,49 @@ pub(crate) fn validate_features(f: &Features) -> Result<()> {
         ));
     }
     Ok(())
+}
+
+#[cfg(test)]
+mod continuation360_geometry_borrow_tests {
+    use super::*;
+    #[test]
+    fn continuation360_readonly_maps_match_wall_namespace_not_pawn_occupancy() {
+        let p = Position::default();
+        let (features, maps) = features::encode_cached(p, None).unwrap();
+        let accumulator = Accumulator {
+            features,
+            values: [Vec::new(), Vec::new()],
+            fingerprint: [0; 32],
+            mode: EvaluationMode::Scalar,
+            maps: Some(maps),
+        };
+        let before = accumulator.features.clone();
+        let pawn = Position {
+            pawns: [13, 76],
+            ..p
+        };
+        assert_eq!(
+            accumulator.cached_wall_distance_maps(pawn),
+            Some(&pawn.wall_distance_maps())
+        );
+        assert_eq!(accumulator.features, before);
+        let wall = p.play(81).unwrap();
+        assert!(accumulator.cached_wall_distance_maps(wall).is_none());
+    }
+    #[test]
+    fn continuation360_missing_cached_maps_refuse_reuse_without_model_head() {
+        let (features, _) = features::encode_cached(Position::default(), None).unwrap();
+        let accumulator = Accumulator {
+            features,
+            values: [Vec::new(), Vec::new()],
+            fingerprint: [0; 32],
+            mode: EvaluationMode::Scalar,
+            maps: None,
+        };
+        assert!(
+            accumulator
+                .cached_wall_distance_maps(Position::default())
+                .is_none()
+        );
+    }
 }

@@ -48,6 +48,11 @@ COMPILED_KEYS = frozenset(
         "runner/value_search_strength.rs",
     ]
 )
+ORDERING_COMPILED_KEYS = COMPILED_KEYS | {
+    "ai/continuation_history.rs",
+    "ai/static_ordering.rs",
+}
+ASSESSMENT_COMPILED_KEYS = ORDERING_COMPILED_KEYS | {"runner/ordering_assessment.rs"}
 RULES = "research-standard-2p-threefold-goal-first-v1"
 UNITS = "wall-distance/80"
 PERSPECTIVE = "side-to-move"
@@ -123,11 +128,17 @@ def authoritative(inputs, ref, schema, kind, statuses=("PASS",)):
 
 
 def generation_sources(native, qualified):
-    """Exact native arena34 correspondence to the qualified research35 image."""
+    """Exact retained34/35, ordering36/37 or assessment36/38 projection; no source-key filtering."""
     compiled_digest(qualified)
-    keys = COMPILED_KEYS - {"runner/sigma_qualification.rs"}
-    s.require(type(native) is dict and set(native) == keys, "exact generation arena source domain")
-    s.require(all(native[key] == qualified[key] for key in keys), "generation source/image pairing")
+    keys = set(qualified) - {"runner/sigma_qualification.rs", "runner/ordering_assessment.rs"}
+    s.require(
+        type(native) is dict and set(native) == keys,
+        "exact generation arena source domain",
+    )
+    s.require(
+        all(native[key] == qualified[key] for key in keys),
+        "generation source/image pairing",
+    )
 
 
 def models(experiment):
@@ -249,7 +260,10 @@ def compiled_digest(compiled):
     for name, digest in compiled.items():
         s.require(type(name) is str and name.isascii(), "actual named compiled source")
         s.sha(digest)
-    s.require(set(compiled) == COMPILED_KEYS, "exact complete35 compiled source map")
+    s.require(
+        set(compiled) in (COMPILED_KEYS, ORDERING_COMPILED_KEYS, ASSESSMENT_COMPILED_KEYS),
+        "exact complete maintained compiled source map",
+    )
     return hashlib.sha256(
         json.dumps(compiled, sort_keys=True, separators=(",", ":"), ensure_ascii=True).encode()
     ).hexdigest()

@@ -12,6 +12,16 @@ use std::{
     time::Duration,
 };
 
+#[path = "continuation_history.rs"]
+mod continuation_history;
+#[cfg(feature = "research-diagnostics")]
+pub use continuation_history::OrderingProfile;
+pub use continuation_history::OrderingStats;
+use continuation_history::{ContinuationHistory, PlayedMove};
+#[path = "static_ordering.rs"]
+mod static_ordering;
+use static_ordering::StaticScratch;
+
 use crate::score::{ScoreDomain, TerminalOutcome};
 use web_time::Instant;
 
@@ -435,6 +445,7 @@ pub struct SearchStats {
     pub pvs_researches: u64,
     pub delta_updates: u64,
     pub policy_calls: u64,
+    pub ordering: OrderingStats,
 }
 #[derive(Debug, Clone)]
 pub struct SearchResult {
@@ -898,6 +909,11 @@ struct Search<'a> {
     context: Option<ContextFingerprint>,
     board: Option<BoardCursor>,
     killers: Vec<[Option<u16>; 2]>,
+    ordering: Option<&'a mut ContinuationHistory>,
+    path: Vec<PlayedMove>,
+    static_scratch: Option<StaticScratch>,
+    ordering_diagnostics: bool,
+    #[cfg(feature = "research-diagnostics")]
     history: [u64; 209],
 }
 impl Search<'_> {
@@ -924,7 +940,13 @@ impl Search<'_> {
         self.stats.nodes += 1;
         Ok(())
     }
-    fn ordered(&mut self, c: &SigmaContext, pv: Option<u16>, ply: usize) -> NodeResult<Vec<u16>> {
+    fn ordered(
+        &mut self,
+        c: &SigmaContext,
+        accumulator: Option<&EvalAccumulator>,
+        pv: Option<u16>,
+        ply: usize,
+    ) -> NodeResult<Vec<u16>> {
         let mut ids = c.legal_ids();
         let mut policy = [0f32; 209];
         if let Some(orderer) = self.orderer {
@@ -941,27 +963,155 @@ impl Search<'_> {
             self.stats.policy_calls += 1;
             self.control()?;
         }
+        self.control()?;
+        let static_scores = if let Some(scratch) = self.static_scratch.as_mut() {
+            let cached = match accumulator {
+                Some(EvalAccumulator::Float(a)) => a.cached_wall_distance_maps(c.position()),
+                _ => None,
+            };
+            let cancel = self.cancel;
+            let deadline = self.deadline;
+            Some(static_ordering::prepare(
+                c.position(),
+                cached,
+                &ids,
+                scratch,
+                || {
+                    if cancel.load(Ordering::Relaxed) {
+                        Err(Interrupted::Stop(StopReason::Cancelled))
+                    } else if deadline.is_some_and(|d| Instant::now() >= d) {
+                        Err(Interrupted::Stop(StopReason::TimeLimit))
+                    } else {
+                        Ok(())
+                    }
+                },
+            )?)
+        } else {
+            None
+        };
         let killers = self.killers.get(ply).copied().unwrap_or([None; 2]);
         let priority = |id: u16| {
             if Some(id) == pv {
                 0
-            } else if Some(id) == killers[0] {
+            } else if id < 81 && static_scores.as_ref().is_some_and(|s| s.goals[id as usize]) {
                 1
-            } else if Some(id) == killers[1] {
+            } else if Some(id) == killers[0] {
                 2
-            } else {
+            } else if Some(id) == killers[1] {
                 3
+            } else {
+                4
             }
         };
-        // TT/PV and killers first, then optional policy and history. Every legal
+        let mut combined = [0i32; 209];
+        if self.ordering_diagnostics {
+            self.stats.ordering.ordered_nodes += 1;
+            self.stats.ordering.scored_actions += ids.len() as u64;
+        }
+        if let Some(history) = self.ordering.as_deref() {
+            for &action in &ids {
+                let (score, continuation_nonzero) =
+                    history.scores(c.position(), action, &self.path);
+                combined[action as usize] = score;
+                if self.ordering_diagnostics {
+                    self.stats.ordering.nonzero_dynamic_actions += u64::from(score != 0);
+                    self.stats.ordering.nonzero_continuation_actions +=
+                        u64::from(continuation_nonzero);
+                }
+            }
+        }
+        #[cfg(feature = "research-diagnostics")]
+        if self.ordering.is_none() && self.ordering_diagnostics {
+            for &action in &ids {
+                self.stats.ordering.nonzero_dynamic_actions +=
+                    u64::from(self.history[action as usize] != 0);
+            }
+        }
+        let mut dynamic = [0i32; 209];
+        if self.ordering_diagnostics {
+            dynamic = combined;
+        }
+        if let Some(scores) = &static_scores {
+            if self.ordering_diagnostics {
+                self.stats.ordering.static_parents += 1;
+                self.stats.ordering.borrowed_goal_maps += u64::from(scores.borrowed_maps);
+                self.stats.ordering.computed_goal_map_pairs += u64::from(!scores.borrowed_maps);
+            }
+            for &id in &ids {
+                combined[id as usize] += i32::from(scores.scores[id as usize]);
+                debug_assert!(combined[id as usize].abs() <= 115_328);
+                if self.ordering_diagnostics {
+                    self.stats.ordering.nonzero_static_actions +=
+                        u64::from(scores.scores[id as usize] != 0);
+                    self.stats.ordering.exact_goal_actions +=
+                        u64::from(id < 81 && scores.goals[id as usize]);
+                }
+            }
+        }
+        if self.ordering_diagnostics {
+            for &id in &ids {
+                #[cfg(feature = "research-diagnostics")]
+                if self.ordering.is_none() {
+                    self.stats.ordering.nonzero_combined_actions +=
+                        u64::from(self.history[id as usize] != 0);
+                    continue;
+                }
+                self.stats.ordering.nonzero_combined_actions +=
+                    u64::from(combined[id as usize] != 0);
+            }
+        }
+        // TT/PV, exact legal goal (static profile), killers, optional policy,
+        // combined dynamic+static score. Every legal
         // action survives. Numeric Action order is the final deterministic tie.
         ids.sort_by(|a, b| {
             priority(*a)
                 .cmp(&priority(*b))
                 .then_with(|| policy[*b as usize].total_cmp(&policy[*a as usize]))
-                .then_with(|| self.history[*b as usize].cmp(&self.history[*a as usize]))
+                .then_with(|| {
+                    #[cfg(feature = "research-diagnostics")]
+                    if self.ordering.is_none() {
+                        return self.history[*b as usize].cmp(&self.history[*a as usize]);
+                    }
+                    combined[*b as usize].cmp(&combined[*a as usize])
+                })
                 .then_with(|| a.cmp(b))
         });
+        // With a total ActionID tie, detecting inversions against the same
+        // tiers without history needs no copied move vector or second sort.
+        if self.ordering_diagnostics {
+            let changed = ids.windows(2).any(|w| {
+                priority(w[0]) == priority(w[1])
+                    && policy[w[0] as usize]
+                        .total_cmp(&policy[w[1] as usize])
+                        .is_eq()
+                    && w[0] > w[1]
+            });
+            self.stats.ordering.history_changed_nodes += u64::from(changed);
+            if static_scores.is_some() {
+                let dynamic_priority = |id: u16| {
+                    if Some(id) == pv {
+                        0
+                    } else if Some(id) == killers[0] {
+                        1
+                    } else if Some(id) == killers[1] {
+                        2
+                    } else {
+                        3
+                    }
+                };
+                let static_changed = ids.windows(2).any(|w| {
+                    let a = w[0] as usize;
+                    let b = w[1] as usize;
+                    dynamic_priority(w[0])
+                        .cmp(&dynamic_priority(w[1]))
+                        .then_with(|| policy[b].total_cmp(&policy[a]))
+                        .then_with(|| dynamic[b].cmp(&dynamic[a]))
+                        .then_with(|| a.cmp(&b))
+                        .is_gt()
+                });
+                self.stats.ordering.static_changed_nodes += u64::from(static_changed);
+            }
+        }
         Ok(ids)
     }
     fn child(
@@ -974,6 +1124,7 @@ impl Search<'_> {
         ply: usize,
     ) -> NodeResult<f32> {
         self.control()?;
+        let mover = c.position().turn;
         let undo = c.make_move(action)?;
         let parent_context = self.context;
         let parent_board = self.board;
@@ -993,6 +1144,14 @@ impl Search<'_> {
             }
             self.stats.tt_context_transitions += 1;
         }
+        // Only signed history consumes speculative actor/lag contexts.
+        let track_path = self.ordering.is_some();
+        if track_path {
+            self.path.push(PlayedMove {
+                colour: mover,
+                action,
+            });
+        }
         // Taking the slot keeps payloads on the heap and the parent borrow local;
         // deeper recursion can never alias this active child.
         let pooled = ply < self.child_buffers.len();
@@ -1011,6 +1170,16 @@ impl Search<'_> {
         })();
         if pooled {
             self.child_buffers[ply] = a;
+        }
+        if track_path {
+            let popped = self.path.pop();
+            debug_assert_eq!(
+                popped,
+                Some(PlayedMove {
+                    colour: mover,
+                    action
+                })
+            );
         }
         // If canonical undo fails, clear numeric authority and propagate failure.
         // Do not report the context restored on a failed canonical undo.
@@ -1092,7 +1261,7 @@ impl Search<'_> {
                 self.stats.tt_illegal_moves += 1;
             }
         }
-        let moves = self.ordered(c, tt_move, ply)?;
+        let moves = self.ordered(c, a, tt_move, ply)?;
         self.control()?;
         if moves.is_empty() {
             return Err(Interrupted::Error(SearchError::Rules(
@@ -1101,6 +1270,12 @@ impl Search<'_> {
         }
         let mut value = f32::NEG_INFINITY;
         let mut best = None;
+        // Unsigned plain comparison does not train signed tables or observe
+        // cutoff ranks. Avoid initializing/writing their unused action records.
+        let mut returned = self.ordering.as_ref().map(|_| [0u16; 209]);
+        let track_returns = returned.is_some() || self.ordering_diagnostics;
+        let mut returned_count = 0;
+        let mut cutoff_winner = None;
         for (i, action) in moves.into_iter().enumerate() {
             let mut v = if self.limits.use_pvs && i > 0 && alpha.is_finite() {
                 self.child(c, a, action, depth - 1, [alpha, next_up(alpha)], ply + 1)?
@@ -1110,6 +1285,12 @@ impl Search<'_> {
             if self.limits.use_pvs && i > 0 && v > alpha && v < beta {
                 self.stats.pvs_researches += 1;
                 v = self.child(c, a, action, depth - 1, [alpha, beta], ply + 1)?;
+            }
+            if let Some(actions) = returned.as_mut() {
+                actions[returned_count] = action;
+            }
+            if track_returns {
+                returned_count += 1;
             }
             if v > value {
                 value = v;
@@ -1124,12 +1305,48 @@ impl Search<'_> {
                     k[1] = k[0];
                     k[0] = Some(action);
                 }
-                self.history[action as usize] = self.history[action as usize]
-                    .saturating_add(u64::from(depth) * u64::from(depth));
+                if track_returns {
+                    cutoff_winner = Some(action);
+                }
+                // Comparison-only baseline preserves its original update site.
+                #[cfg(feature = "research-diagnostics")]
+                if self.ordering.is_none() {
+                    self.history[action as usize] = self.history[action as usize]
+                        .saturating_add(u64::from(depth) * u64::from(depth));
+                }
                 break;
             }
         }
         self.control()?;
+        if let Some(winner) = cutoff_winner
+            && value.is_finite()
+            && let Some(history) = self.ordering.as_deref_mut()
+            && let Some(actions) = returned.as_ref()
+        {
+            history.completed_cutoff(
+                c.position(),
+                depth,
+                winner,
+                &actions[..returned_count],
+                &self.path,
+                if self.ordering_diagnostics {
+                    Some(&mut self.stats.ordering)
+                } else {
+                    None
+                },
+            );
+        }
+        #[cfg(feature = "research-diagnostics")]
+        if cutoff_winner.is_some()
+            && value.is_finite()
+            && self.ordering.is_none()
+            && self.ordering_diagnostics
+        {
+            self.stats.ordering.completed_cutoff_events += 1;
+            self.stats.ordering.cutoff_rank_sum += returned_count as u64;
+            self.stats.ordering.first_child_cutoffs += u64::from(returned_count == 1);
+            self.stats.ordering.positive_actions += 1;
+        }
         if let Some(key) = key {
             self.table.insert_probed(
                 key,
@@ -1178,7 +1395,7 @@ impl Search<'_> {
                 }
             }
         }
-        let moves = self.ordered(c, previous, 0)?;
+        let moves = self.ordered(c, a, previous, 0)?;
         self.control()?;
         let mut value = f32::NEG_INFINITY;
         let mut best = None;
@@ -1314,6 +1531,7 @@ pub fn search_with_orderer(
     on_completed: &mut dyn FnMut(&SearchResult),
 ) -> Result<SearchResult> {
     let mut table = Table::new(if limits.use_tt { limits.tt_entries } else { 0 })?;
+    let mut ordering = ContinuationHistory::new()?;
     search_in_table(
         root,
         evaluator,
@@ -1321,7 +1539,13 @@ pub fn search_with_orderer(
         cancel,
         orderer,
         on_completed,
-        (&mut table, ScoreDomain::LEGACY),
+        (
+            &mut table,
+            ScoreDomain::LEGACY,
+            Some(&mut ordering),
+            false,
+            true,
+        ),
     )
 }
 
@@ -1339,6 +1563,9 @@ pub struct SearchSession {
     evaluator: Arc<dyn StaticEvaluator>,
     table: Table,
     score_domain: ScoreDomain,
+    ordering: Option<ContinuationHistory>,
+    static_enabled: bool,
+    ordering_diagnostics: bool,
 }
 impl SearchSession {
     /// An immutable evaluator is owned by the session, so unchanged namespace
@@ -1356,9 +1583,40 @@ impl SearchSession {
     /// Original D's nonterminal formula can use this adapter without rescaling.
     pub fn new_with_score_domain(
         evaluator: Arc<dyn StaticEvaluator>,
+        namespace: SearchNamespace,
+        capacity: usize,
+        score_domain: ScoreDomain,
+    ) -> Result<Self> {
+        Self::create(evaluator, namespace, capacity, score_domain, true, true)
+    }
+    /// Temporary single-360-assessment selection, absent from normal runtime.
+    #[cfg(feature = "research-diagnostics")]
+    pub fn new_for_ordering_assessment(
+        evaluator: Arc<dyn StaticEvaluator>,
+        namespace: SearchNamespace,
+        capacity: usize,
+        score_domain: ScoreDomain,
+        profile: OrderingProfile,
+        observe_ordering: bool,
+    ) -> Result<Self> {
+        let mut session = Self::create(
+            evaluator,
+            namespace,
+            capacity,
+            score_domain,
+            profile != OrderingProfile::UnsignedHistoryBaseline,
+            profile == OrderingProfile::CombinedSignedStatic,
+        )?;
+        session.ordering_diagnostics = observe_ordering;
+        Ok(session)
+    }
+    fn create(
+        evaluator: Arc<dyn StaticEvaluator>,
         mut namespace: SearchNamespace,
         capacity: usize,
         score_domain: ScoreDomain,
+        signed: bool,
+        static_enabled: bool,
     ) -> Result<Self> {
         if score_domain != ScoreDomain::LEGACY {
             namespace.evaluator.push(':');
@@ -1371,6 +1629,13 @@ impl SearchSession {
             evaluator,
             table: Table::persistent(capacity)?,
             score_domain,
+            ordering: if signed {
+                Some(ContinuationHistory::new()?)
+            } else {
+                None
+            },
+            static_enabled,
+            ordering_diagnostics: false,
         })
     }
     /// Table accounting includes its header and fixed slot storage; no history payload.
@@ -1379,7 +1644,11 @@ impl SearchSession {
         let metadata = std::mem::size_of::<Self>() - std::mem::size_of::<Table>()
             + self.namespace.evaluator.capacity()
             + self.namespace.rules.capacity()
-            + self.namespace.selectivity.capacity();
+            + self.namespace.selectivity.capacity()
+            + self
+                .ordering
+                .as_ref()
+                .map_or(0, ContinuationHistory::retained_bytes);
         (self.table.retained_bytes(), metadata)
     }
     /// Live persistent slot count and byte limit; no table or history mutation.
@@ -1417,6 +1686,9 @@ impl SearchSession {
         self.namespace = namespace;
         self.score_domain = score_domain;
         self.table.clear();
+        if let Some(history) = self.ordering.as_mut() {
+            history.reset();
+        }
     }
     pub fn search(
         &mut self,
@@ -1441,7 +1713,13 @@ impl SearchSession {
             cancel,
             None,
             on_completed,
-            (&mut self.table, self.score_domain),
+            (
+                &mut self.table,
+                self.score_domain,
+                self.ordering.as_mut(),
+                self.ordering_diagnostics,
+                self.static_enabled,
+            ),
         )
     }
 }
@@ -1452,9 +1730,15 @@ fn search_in_table(
     cancel: &AtomicBool,
     orderer: Option<&dyn MoveOrderer>,
     on_completed: &mut dyn FnMut(&SearchResult),
-    table_and_domain: (&mut Table, ScoreDomain),
+    table_and_domain: (
+        &mut Table,
+        ScoreDomain,
+        Option<&mut ContinuationHistory>,
+        bool,
+        bool,
+    ),
 ) -> Result<SearchResult> {
-    let (table, score_domain) = table_and_domain;
+    let (table, score_domain, ordering, ordering_diagnostics, static_enabled) = table_and_domain;
     let start = Instant::now();
     if limits.max_depth == 0 || limits.max_nodes == 0 || limits.max_depth > 200 {
         return Err(SearchError::Limits(
@@ -1512,6 +1796,19 @@ fn search_in_table(
         context: root_context,
         board: root_board,
         killers: vec![[None; 2]; limits.max_depth as usize + 1],
+        path: if ordering.is_some() {
+            Vec::with_capacity(limits.max_depth as usize + 1)
+        } else {
+            Vec::new()
+        },
+        ordering,
+        static_scratch: if static_enabled {
+            Some(StaticScratch::new()?)
+        } else {
+            None
+        },
+        ordering_diagnostics,
+        #[cfg(feature = "research-diagnostics")]
         history: [0; 209],
     };
     let mut result = SearchResult {
@@ -1560,8 +1857,12 @@ fn search_in_table(
         || c.history_counts() != root.history_counts()
         || state.context != root_context
         || state.board != root_board
+        || !state.path.is_empty()
     {
         state.table.clear();
+        if let Some(history) = state.ordering.as_deref_mut() {
+            history.reset();
+        }
         return Err(SearchError::Root(
             "search did not restore root history".into(),
         ));
@@ -1573,6 +1874,11 @@ fn search_in_table(
     }
     state.stats.tt_retained_bytes = state.table.retained_bytes();
     state.stats.tt_generation = state.table.generation;
+    if result.completed_depth > 0
+        && let Some(history) = state.ordering.as_deref_mut()
+    {
+        history.finish_valid_root(&mut state.stats.ordering);
+    }
     result.stats = state.stats;
     result.elapsed = state.start.elapsed();
     Ok(result)
@@ -1859,6 +2165,11 @@ mod persistent_tt_tests {
                 context: ContextFingerprint::of(&root),
                 board: Some(BoardCursor::of(&root)),
                 killers: vec![[None; 2]; 2],
+                ordering: None,
+                path: Vec::with_capacity(l.max_depth as usize + 1),
+                static_scratch: None,
+                ordering_diagnostics: false,
+                #[cfg(feature = "research-diagnostics")]
                 history: [0; 209],
             };
             let mut child = root.clone();
@@ -2530,6 +2841,11 @@ mod child_buffer_tests {
                 context: ContextFingerprint::of(&c),
                 board: Some(BoardCursor::of(&c)),
                 killers: vec![[None; 2]; 4],
+                ordering: None,
+                path: Vec::with_capacity(limits.max_depth as usize + 1),
+                static_scratch: None,
+                ordering_diagnostics: false,
+                #[cfg(feature = "research-diagnostics")]
                 history: [0; 209],
             };
             let result = state.child(
@@ -2858,3 +3174,11 @@ mod research_threefold_tests {
 #[cfg(test)]
 #[path = "compact_tt359_tests.rs"]
 mod compact_tt359_tests;
+
+#[cfg(test)]
+#[path = "continuation360_tests.rs"]
+mod continuation360_tests;
+
+#[cfg(test)]
+#[path = "continuation360_composite_tests.rs"]
+mod continuation360_composite_tests;

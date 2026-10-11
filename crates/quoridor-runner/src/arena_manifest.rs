@@ -79,6 +79,14 @@ pub fn source_bindings() -> BTreeMap<&'static str, String> {
             include_bytes!("../../quoridor-ai/src/alphabeta.rs"),
         ),
         (
+            "ai/continuation_history.rs",
+            include_bytes!("../../quoridor-ai/src/continuation_history.rs"),
+        ),
+        (
+            "ai/static_ordering.rs",
+            include_bytes!("../../quoridor-ai/src/static_ordering.rs"),
+        ),
+        (
             "ai/sigma_mcts.rs",
             include_bytes!("../../quoridor-ai/src/sigma_mcts.rs"),
         ),

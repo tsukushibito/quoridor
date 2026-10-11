@@ -1415,17 +1415,25 @@ GENERATION_SOURCE_KEYS = frozenset(
     )
 )
 RESEARCH_SOURCE_KEYS = GENERATION_SOURCE_KEYS | {"runner/sigma_qualification.rs"}
+ORDERING_SOURCE_KEYS = frozenset(("ai/continuation_history.rs", "ai/static_ordering.rs"))
+GENERATION_ORDERING_KEYS = GENERATION_SOURCE_KEYS | ORDERING_SOURCE_KEYS
+RESEARCH_ORDERING_KEYS = RESEARCH_SOURCE_KEYS | ORDERING_SOURCE_KEYS
+ASSESSMENT_SOURCE_KEYS = frozenset(("runner/ordering_assessment.rs",))
+RESEARCH_ASSESSMENT_KEYS = RESEARCH_ORDERING_KEYS | ASSESSMENT_SOURCE_KEYS
 
 
 def generation_source_correspondence(native, qualified):
-    """Exact maintained arena34 projection of the qualified research35 map."""
+    """Exact arena projection: retained34/35, ordering36/37, or assessment36/38; never unknown keys."""
     require(
-        isinstance(native, dict) and set(native) == GENERATION_SOURCE_KEYS,
-        "generation exact arena34 source domain",
+        isinstance(qualified, dict)
+        and set(qualified)
+        in (RESEARCH_SOURCE_KEYS, RESEARCH_ORDERING_KEYS, RESEARCH_ASSESSMENT_KEYS),
+        "qualified exact maintained source domain",
     )
+    keys = set(qualified) - {"runner/sigma_qualification.rs"} - ASSESSMENT_SOURCE_KEYS
     require(
-        isinstance(qualified, dict) and set(qualified) == RESEARCH_SOURCE_KEYS,
-        "qualified exact research35 source domain",
+        isinstance(native, dict) and set(native) == keys,
+        "generation exact source domain",
     )
     require(
         all(
@@ -1435,7 +1443,7 @@ def generation_source_correspondence(native, qualified):
         "qualified source hash shape",
     )
     require(
-        native == {key: qualified[key] for key in GENERATION_SOURCE_KEYS},
+        native == {key: qualified[key] for key in keys},
         "generation shared source hash drift",
     )
 
@@ -1445,7 +1453,10 @@ def generation_evidence(experiment, values):
     build = document(experiment["build_manifest"])
     start, book, schedule, result = [json.loads(values[n]) for n in GENERATION_FILES]
     generation_source_correspondence(start["compiled_sources"], build["compiled_sources"])
-    require(start["compiled_sources"] == book["compiled_sources"], "generation native maps drift")
+    require(
+        start["compiled_sources"] == book["compiled_sources"],
+        "generation native maps drift",
+    )
     evidence = {
         "schema": "quoridor.research.generation-evidence.v1",
         "phase": "generation",
@@ -1456,9 +1467,19 @@ def generation_evidence(experiment, values):
         "scientific_planned_slots": 512,
         "artifact": build["artifact"],
         "compiled_sources": build["compiled_sources"],
-        "compiled_sources_domain": "research-qualified35-v1",
+        "compiled_sources_domain": (
+            "research-qualified38-assessment360-v1"
+            if set(build["compiled_sources"]) == RESEARCH_ASSESSMENT_KEYS
+            else "research-qualified37-continuation360-v1"
+            if set(build["compiled_sources"]) == RESEARCH_ORDERING_KEYS
+            else "research-qualified35-v1"
+        ),
         "native_compiled_sources": start["compiled_sources"],
-        "native_compiled_sources_domain": "arena-generation34-v1",
+        "native_compiled_sources_domain": (
+            "arena-generation36-continuation360-v1"
+            if set(start["compiled_sources"]) == GENERATION_ORDERING_KEYS
+            else "arena-generation34-v1"
+        ),
         "generation_compiled_sources_sha256": canonical_sha(start["compiled_sources"]),
         "book_sha256": sha(values["book"]),
         "book_semantic_sha256": canonical_sha(book),

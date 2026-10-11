@@ -114,6 +114,17 @@ fn execute() -> Result<()> {
                 )?)?
             );
         }
+        #[cfg(feature = "ordering-assessment")]
+        "ordering-assess" => {
+            strict_pairs(&args, &["--experiment", "--experiment-sha256"], &[])?;
+            let report = quoridor_runner::ordering_assessment::run(
+                &quoridor_runner::sigma_qualification::BoundControl {
+                    path: argument(&args, "--experiment")?.into(),
+                    sha256: argument(&args, "--experiment-sha256")?,
+                },
+            )?;
+            println!("{}", serde_json::to_string(&report)?);
+        }
         "value-search-compare" => {
             strict_pairs(&args, &["--experiment", "--experiment-sha256"], &[])?;
             let report = quoridor_runner::value_search_compare::run(

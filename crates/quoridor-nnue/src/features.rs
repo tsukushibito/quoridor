@@ -19,6 +19,12 @@ pub(crate) struct WallMaps {
     distances: [[u8; 81]; 2],
 }
 
+impl WallMaps {
+    pub(crate) fn distances_for(&self, p: Position) -> Option<&[[u8; 81]; 2]> {
+        (self.horizontal == p.horizontal && self.vertical == p.vertical).then_some(&self.distances)
+    }
+}
+
 pub fn encode_qf1(position: Position) -> Result<Features> {
     position
         .checked()

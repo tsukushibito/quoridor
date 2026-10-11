@@ -20,3 +20,7 @@ pub use config::{Config, Engine};
 pub use runtime::{RunReport, run};
 
 pub mod value_search_compare;
+
+// Single temporary 360 inlet; no normal arena profile selection.
+#[cfg(feature = "ordering-assessment")]
+pub mod ordering_assessment;
