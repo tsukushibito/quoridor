@@ -315,7 +315,7 @@ fn continuation360_signed_gravity_saturation_and_i32_wasm_arithmetic() {
     }
     assert_eq!(v, -16384);
     assert_eq!(2 * LIMIT + 5 * LIMIT, 114_688);
-    assert!(LIMIT * LIMIT < i32::MAX);
+    const { assert!(LIMIT * LIMIT < i32::MAX) };
 }
 #[test]
 fn continuation360_completed_event_signed_once_not_research_or_unsearched() {

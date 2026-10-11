@@ -92,13 +92,10 @@ fn static360_all_routes_union_matches_explicit_routes_and_core_wall_geometry() {
         let maps = p.wall_distance_maps();
         let legal = p.legal_action_ids();
         let mut scratch = StaticScratch::new().unwrap();
-        for player in 0..2 {
+        for (player, map) in maps.iter().enumerate() {
             let all = paths(p, player);
             let (coverage, cuts) =
-                player_coverage(p, player, &maps[player], &legal, &mut scratch, &mut || {
-                    Ok(())
-                })
-                .unwrap();
+                player_coverage(p, player, map, &legal, &mut scratch, &mut || Ok(())).unwrap();
             for &action in legal.iter().filter(|&&a| a >= 81) {
                 let after = after_wall(p, action);
                 let blocked = all

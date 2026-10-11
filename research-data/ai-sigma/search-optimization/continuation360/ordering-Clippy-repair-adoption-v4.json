@@ -1,0 +1,108 @@
+{
+  "schema": "quoridor.research.source-adoption.v1",
+  "status": "SOURCE_ADOPTED_AFFECTED_SOFTWARE_UNQUALIFIED",
+  "issue": "quoridor-4lc.360.1",
+  "source_packet": {
+    "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/ordering-build-v1/Clippy-repair-v4/source-STOP-binding.json",
+    "sha256": "b0589d03e13197b5434dd4c6c79629c30db2dddfec97b852fe1a7e3baef98ff7",
+    "bytes": 5082,
+    "mode": "0644"
+  },
+  "patch": {
+    "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/ordering-build-v1/Clippy-repair-v4/mechanical-Clippy.patch",
+    "sha256": "659b306a94ce921ee8a910b1587cce4cdfc127b3d93490d218b353cfba847303",
+    "bytes": 2041,
+    "mode": "0644"
+  },
+  "paths": [
+    {
+      "relative": "crates/quoridor-ai/src/static_ordering.rs",
+      "Main_before": {
+        "path": "/workspaces/quoridor/crates/quoridor-ai/src/static_ordering.rs",
+        "sha256": "d3807c120552e6f807b945df1bbaa51efac619ebd01ecab8f9bfcf18d605492c",
+        "bytes": 8543,
+        "mode": "0644"
+      },
+      "after": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/ordering-build-v1/Clippy-repair-v4/after/crates/quoridor-ai/src/static_ordering.rs",
+        "sha256": "b6a722b452a73da3a2889731c6dc875e96ab016bb7a9cb23e5d430a0ce8c8dec",
+        "bytes": 8581,
+        "mode": "0644"
+      },
+      "gzip_before": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/ordering-build-v1/Clippy-repair-v4/before/crates/quoridor-ai/src/static_ordering.rs.gz",
+        "sha256": "af01dfe3a543e8904660aab0bc6dd5d18314416f7ba2a10c3e3ae207493a3b11",
+        "bytes": 2971,
+        "mode": "0644"
+      }
+    },
+    {
+      "relative": "crates/quoridor-ai/src/static360_tests.rs",
+      "Main_before": {
+        "path": "/workspaces/quoridor/crates/quoridor-ai/src/static360_tests.rs",
+        "sha256": "8c549e9f7898789e3a85f27914e165d1026bd500637872b0283d0467a878fdd6",
+        "bytes": 11079,
+        "mode": "0644"
+      },
+      "after": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/ordering-build-v1/Clippy-repair-v4/after/crates/quoridor-ai/src/static360_tests.rs",
+        "sha256": "2957070972a771b07824cc5227d68e37bd9b6b60dace00c13846f7529c453545",
+        "bytes": 11038,
+        "mode": "0644"
+      },
+      "gzip_before": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/ordering-build-v1/Clippy-repair-v4/before/crates/quoridor-ai/src/static360_tests.rs.gz",
+        "sha256": "290c0e7499a28e437701eb3b12fbbfc33e2d5cd72380270c380e198a940e2bd0",
+        "bytes": 3271,
+        "mode": "0644"
+      }
+    },
+    {
+      "relative": "crates/quoridor-ai/src/continuation360_tests.rs",
+      "Main_before": {
+        "path": "/workspaces/quoridor/crates/quoridor-ai/src/continuation360_tests.rs",
+        "sha256": "ee75113c52120b30e4191863b5a2e68b59879ea3dd5f38d8677157be4889cccd",
+        "bytes": 22216,
+        "mode": "0644"
+      },
+      "after": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/ordering-build-v1/Clippy-repair-v4/after/crates/quoridor-ai/src/continuation360_tests.rs",
+        "sha256": "631c701ab3277ec8b00f99ccba0102b768d149c415fcfb3fc45e89a42ba4376f",
+        "bytes": 22226,
+        "mode": "0644"
+      },
+      "gzip_before": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/ordering-build-v1/Clippy-repair-v4/before/crates/quoridor-ai/src/continuation360_tests.rs.gz",
+        "sha256": "6bdc915882afe1e2f8816926861dce5bbea3af7bfb7ef5b5f59b1048e72f4107",
+        "bytes": 5242,
+        "mode": "0644"
+      }
+    }
+  ],
+  "change": "Four mechanical Clippy sites: usize modulo!=0 is !is_multiple_of9; immutable &[u8;81] enumerate same81 origins/order/control checks; maps2 enumerate sameplayer/map; constant i32 assertion exactsame predicate in constblock. No ordering/scoring/control/geometry/TT/model/data method change.",
+  "strict_forward_applied_inverse_checked": true,
+  "before_gzip_and_Main_after_SHA_size_mode_exact": true,
+  "Rustfmt2024_write_check_posthash": true,
+  "scientific_source_review": "Original clear scopes and exact mechanical derivation reused, not a retargeted source/test PASS. No new method/reviewer gate.",
+  "old_37_Rust_3_Python_successes": "Retained once; no assertion replay. Two compile-only passes in failed6d159680 are compilation scopes only.",
+  "failed_manifest": {
+    "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/ordering360-build-v1/operation-v4/manifest.json",
+    "sha256": "599a142bc25a0cac0aeeecb5c2719b65108e70296fe9720be6510ee5bc0cbf86",
+    "bytes": 31476,
+    "mode": "0644"
+  },
+  "known_four_failed_software_controller_seconds": "51.4146277160616606",
+  "failed_return_distinctions": "FailedguardianNULL vs disk directwait/cleanuptrue/maskpending/persistattempted and outercleanuptrue preserved; exact workerUTCSTOP/continuouspeaks UNKNOWN.",
+  "target_unique_retained_floor_B": 1274068992,
+  "target_cap_B": 1342177280,
+  "target_current_allocation_B": null,
+  "preceding_private_floor_B": 16244736,
+  "fresh_private_floor_B": 4096,
+  "additional_global_grant_B": 0,
+  "global_held_B": 46851026944,
+  "preparation_growth": "Inside existing2MiB preparationforward/Root8MiB, owner repair512KiB within source8MiB/exclusive128MiB; no refund/deletion/cap increase.",
+  "source_reader_writer_STOP": "2026-10-11T17:54:27.427619+00:00",
+  "owned_readers_children_jobs_TMP_remaining": [],
+  "hardware_or_futurequiet_reservation": false,
+  "Root_Cargo_tests_native_model_Search_calls": 0
+}

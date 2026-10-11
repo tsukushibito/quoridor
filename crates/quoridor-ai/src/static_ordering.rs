@@ -58,7 +58,7 @@ fn neighbours(cell: usize) -> [Option<usize>; 4] {
     [
         (cell / 9 > 0).then(|| cell - 9),
         (cell / 9 < 8).then(|| cell + 9),
-        (cell % 9 > 0).then(|| cell - 1),
+        (!cell.is_multiple_of(9)).then(|| cell - 1),
         (cell % 9 < 8).then(|| cell + 1),
     ]
 }
@@ -133,9 +133,9 @@ fn player_coverage(
     scratch.paths.fill(0);
     // O(V*(V+E)) all-pairs DAG propagation. One control checkpoint per source;
     // no child transitions, pawn obstruction, candidate BFS or model calls.
-    for origin in 0..81 {
+    for (origin, &distance) in distances.iter().enumerate() {
         control()?;
-        if distances[origin] >= 81 {
+        if distance >= 81 {
             continue;
         }
         let row = origin * 81;
