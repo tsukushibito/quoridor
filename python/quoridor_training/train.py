@@ -828,7 +828,7 @@ def train(
             if training:
                 training_payload = (targets, weights)
             phase_seconds["transfer"] += time.monotonic() - tick
-            return result
+            return result if step_score else result[:3]
         features, distances, _ = supply.batch(index, training=training)
         result = (
             torch.from_numpy(features).to(device),
