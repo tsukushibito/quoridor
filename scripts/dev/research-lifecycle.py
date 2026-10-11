@@ -15,6 +15,7 @@ from pathlib import Path
 import shutil
 import stat
 import sys
+import time
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "python"))
@@ -24,6 +25,7 @@ LEASE = Path("/workspaces/quoridor/.artifacts/rust-migration/target/arena-softwa
 BUILD_SCHEMA = "quoridor.research.build-manifest.v1"
 EXPERIMENT_SCHEMA = "quoridor.research.experiment.v1"
 COMPLETION_SCHEMA = "quoridor.research.completion.v1"
+ORIGIN_CUSTODY = ROOT / "research-data"
 CONTROL_BYTES = 1024 * 1024
 
 
@@ -358,6 +360,13 @@ def command(spec, row, directory, resources, executor=process.execute, *, ledger
         ledger.append(check)
     primary, record, capture = None, None, None
     try:
+        budget = spec.get("command_timeout_seconds")
+        if budget is not None:
+            require(type(budget) is int and budget > 0, "positive admitted command timeout")
+            if getattr(resources, "deadline", None) is None:
+                # Start at the first actual command, never during source preparation.
+                # All commands in this operation share this deadline and cleanup reserve.
+                resources.deadline = time.monotonic() + budget
         capture = Capture(directory / (row["name"] + ".full.log"), spec["limits"]["log_B"])
         cpu_args = {"cpu_core": spec["limits"]["worker_cpu"]}
         if "child_cpu_cores" in spec:
@@ -369,7 +378,7 @@ def command(spec, row, directory, resources, executor=process.execute, *, ledger
         record = executor(
             row["argv"],
             directory / (row["name"] + ".log"),
-            None,
+            getattr(resources, "deadline", None),
             resources=resources,
             cwd=spec["cwd"],
             env=spec["env"],
@@ -737,6 +746,25 @@ def numerical_check(experiment, manifest):
     return q
 
 
+def training_interpreter(experiment):
+    """Training ABI is an admitted input, independent of native BUILD tooling."""
+    expected = {
+        "path": "/home/vscode/.cache/inference/python/cpython-3.14.7-linux-x86_64-gnu/bin/python3.14",
+        "sha256": "5a91882290532b2719eaca77c0f3a7448bd73b9214e56df57bc59004560a80c6",
+        "bytes": 32418544,
+        "mode": "0755",
+    }
+    require(
+        experiment["phase"] in {"fit", "software-qualification"},
+        "training interpreter phase",
+    )
+    selected = [r for r in experiment["inputs"] if r["path"] == expected["path"]]
+    require(len(selected) == 1 and selected[0] == expected, "bound qualified training interpreter")
+    # experiment_check reads all ordered inputs before dispatch and returns them
+    # for the ordinary after-command lifetime check; no second authority record.
+    return selected[0]
+
+
 def common_pilot_check(spec, experiment, manifest, approved):
     phase = experiment["phase"]
     require(spec["approved_plan"]["path"] == str(PILOT_PLAN), "canonical common pilot plan")
@@ -811,7 +839,7 @@ def common_pilot_check(spec, experiment, manifest, approved):
         )
         return
     require(experiment["planned_slots"] == 0, "fit/qualification is a nongame operation")
-    python = manifest["tools"]["PYTHON"]["file"]["path"]
+    python = training_interpreter(experiment)["path"]
     require(
         spec["cwd"] == str(ROOT)
         and spec["env"].get("PYTHONDONTWRITEBYTECODE") == "1"
@@ -1304,7 +1332,11 @@ def experiment_check(spec):
         )
     executable = manifest["artifact"]["path"]
     if experiment["phase"] in {"analysis", "fit", "software-qualification"}:
-        python = manifest["tools"]["PYTHON"]["file"]
+        python = (
+            training_interpreter(experiment)
+            if experiment["phase"] in {"fit", "software-qualification"}
+            else manifest["tools"]["PYTHON"]["file"]
+        )
         read_ref(python, max(CONTROL_BYTES, python["bytes"]))
         executable = python["path"]
     require(spec["argv"][0] == executable, "executable argv drift")
@@ -2330,6 +2362,16 @@ def originating_job(spec_ref, spec):
         and state["phase"] in {"starting", "running"},
         "originating job/config join",
     )
+    budget = spec.get("command_timeout_seconds")
+    if budget is not None:
+        require(
+            type(budget) is int
+            and budget > 0
+            and type(cfg.get("max_runtime_seconds")) in (int, float)
+            and math.isfinite(cfg["max_runtime_seconds"])
+            and cfg["max_runtime_seconds"] >= budget + 60,
+            "admitted command budget must leave outer cleanup/publication time",
+        )
     child = process.identity(process.process_info(os.getpid()))
     require(child is not None, "actual lifecycle process identity")
     return {
@@ -2350,6 +2392,7 @@ def execute(
     lock=lease,
     resource_factory=Limits,
 ):
+    launched_at = time.monotonic()
     spec = document(spec_ref)
     require(spec["schema"] == "quoridor.research.lifecycle-intent.v1", "lifecycle intent schema")
     # The admitted hash excludes only the admission descriptor, to avoid a self-referential digest.
@@ -2384,6 +2427,11 @@ def execute(
         guard(spec)
         with lock():
             resources = resource_factory(spec)
+            budget = spec.get("command_timeout_seconds")
+            if budget is not None:
+                # Preparation inside an entered worker also consumes its finite budget.
+                # This is an executed-operation clock, never a source-preparation expiry.
+                resources.deadline = launched_at + budget
             resources.check()
             try:
                 if spec["kind"] == "build":
@@ -2402,7 +2450,14 @@ def execute(
                     )
                 directory.mkdir()
                 claimed = True
-                new_json(directory / "INCOMPLETE", {"intent": spec_ref, "status": "UNKNOWN"})
+                new_json(
+                    directory / "INCOMPLETE",
+                    {
+                        "intent": spec_ref,
+                        "status": "UNKNOWN",
+                        "originating_job": result["originating_job"],
+                    },
+                )
                 new_json(directory / "intent.json", spec)
                 if spec["kind"] == "build":
                     if not Path(spec["target"]).exists():
@@ -2601,7 +2656,219 @@ def execute(
     return result
 
 
-def _prepare_completion(directory, job_ref):
+def abnormal_run_failure(directory, job_ref, *, origin_ref=None):
+    """Join one stopped original run; return failure facts in memory, never a candidate file."""
+    require(
+        not (directory / "candidate.json").exists()
+        and not (directory / "finalizing").exists()
+        and not (directory / "manifest.json").exists(),
+        "ambiguous or duplicate abnormal finalization",
+    )
+    marker_ref, _ = bound(directory / "INCOMPLETE")
+    marker = document(marker_ref)
+    require(marker.get("status") == "UNKNOWN", "original pending operation marker")
+    intent_ref = marker["intent"]
+    spec = document(intent_ref)
+    owned(intent_ref["path"], spec["owner"])
+    require(
+        spec["schema"] == "quoridor.research.lifecycle-intent.v1"
+        and spec["kind"] == "run"
+        and owned(directory, spec["owner"]) == Path(spec["output"]),
+        "original owned run intent",
+    )
+    require(
+        bound(directory / "intent.json")[0]["sha256"] == intent_ref["sha256"],
+        "original copied intent drift",
+    )
+    admitted = {k: v for k, v in spec.items() if k not in {"admission", "intent_sha256"}}
+    require(
+        sha(json.dumps(admitted, sort_keys=True, separators=(",", ":")).encode())
+        == spec["intent_sha256"],
+        "original admitted intent digest",
+    )
+    runtime = Path(job_ref["path"]).parent
+    owned(runtime, spec["owner"])
+    require(Path(job_ref["path"]).name == "result.json", "canonical original result")
+    job = document(job_ref)
+    config_ref, raw = bound(runtime / "config.json")
+    cfg = json.loads(raw)
+    state_ref, raw = bound(runtime / "state.json")
+    state = json.loads(raw)
+    fingerprint = sha(json.dumps(cfg, sort_keys=True).encode())
+    expected = [
+        sys.executable,
+        "-B",
+        str(ROOT / "scripts/dev/research-lifecycle.py"),
+        spec["kind"],
+        "--intent",
+        intent_ref["path"],
+        "--sha256",
+        intent_ref["sha256"],
+    ]
+    require(
+        cfg["argv"] == expected
+        and cfg["cwd"] == spec["cwd"]
+        and cfg["resource_contract"] == spec["support"]["path"]
+        and state["config_sha256"] == fingerprint
+        and state["issue"] == cfg["issue"]
+        and state["thread_id"] == cfg["thread_id"]
+        and state["job_id"] == job["job_id"]
+        and state["phase"] == "finished"
+        and state["outcome"] == job["outcome"]
+        and job["outcome"] in {"failed", "timed_out", "cancelled"}
+        and type(job["exit_code"]) is int
+        and job["exit_code"] != 0
+        and bool(state.get("started_at"))
+        and bool(job.get("finished_at"))
+        and job.get("direct_child_reaped") is True
+        and job.get("cleanup_complete") is True
+        and job.get("remaining") == []
+        and job.get("cleanup_errors", []) == [],
+        "closed original abnormal job/config/owner/argv/directwait join",
+    )
+    # The operation independently selects its owner; the offered result cannot.
+    # Historical markers need an explicit SHA-bound Root integration decision.
+    origin = marker.get("originating_job")
+    custody_ref = None
+    if origin is None:
+        require(origin_ref is not None, "independent operation origin required")
+        custody_path = Path(origin_ref["path"])
+        require(
+            custody_path.is_relative_to(ORIGIN_CUSTODY) and custody_path.resolve() == custody_path,
+            "historical origin requires Root integration custody",
+        )
+        custody = document(origin_ref)
+        require(
+            custody["schema"] == "quoridor.research.operation-origin.v1"
+            and custody["status"] == "ACCEPTED"
+            and custody["operation_marker"] == marker_ref
+            and custody["intent"] == intent_ref
+            and custody["result"] == job_ref
+            and custody["state"] == state_ref,
+            "independent historical operation/result/state binding",
+        )
+        origin = custody["originating_job"]
+        custody_ref = origin_ref
+    else:
+        require(origin_ref is None, "ambiguous operation origin refused")
+    require(
+        origin
+        == {
+            "runtime": str(runtime),
+            "job_id": state["job_id"],
+            "config": config_ref,
+            "config_sha256": fingerprint,
+            "supervisor": state["supervisor"],
+            "child": state["child"],
+        },
+        "independent operation origin mismatch",
+    )
+    process_ref, raw = bound(directory / "run.process.json")
+    persisted = json.loads(raw)
+    if custody_ref is not None:
+        require(custody["persisted_process"] == process_ref, "historical native receipt binding")
+    require(persisted["command"] == spec["argv"], "original native command identity")
+    identities = [state["supervisor"], state["child"], persisted["child"]]
+    for identity in identities:
+        require(
+            set(identity) == {"pid", "start_ticks", "boot_id"}
+            and type(identity["pid"]) is int
+            and identity["pid"] > 0
+            and isinstance(identity["start_ticks"], str)
+            and identity["start_ticks"].isdigit()
+            and isinstance(identity["boot_id"], str)
+            and bool(identity["boot_id"]),
+            "unambiguous original process identity",
+        )
+    require(
+        len({x["pid"] for x in identities}) == 3
+        and len({x["boot_id"] for x in identities}) == 1
+        and int(identities[0]["start_ticks"])
+        <= int(identities[1]["start_ticks"])
+        <= int(identities[2]["start_ticks"]),
+        "original supervisor/lifecycle/native identity ordering",
+    )
+    # The supervisor may still deliver its completion notice. It is not the compute child.
+    require(
+        not process.alive(state["child"]) and not process.alive(persisted["child"]),
+        "original lifecycle/native still active",
+    )
+    experiment = document(spec["experiment"])
+    secondary = []
+    try:
+        data = collect_data(spec, experiment)
+    except BaseException as error:
+        secondary.append({"stage": "partial_data_collection", **error_fact(error)})
+        data = {"status": "FAILED", "files": [], "errors": secondary.copy()}
+    data["status"] = "FAILED"  # Available bytes never imply returned publication or completion.
+    data["numerical_qualification"] = None
+    data["journal_flush_sync_close"] = "UNKNOWN"
+    data["incomplete_marker"] = None
+    try:
+        if (Path(spec["data_root"]) / "INCOMPLETE").exists():
+            data["incomplete_marker"] = bound(Path(spec["data_root"]) / "INCOMPLETE")[0]
+    except BaseException as error:
+        secondary.append({"stage": "available_data_marker", **error_fact(error)})
+    check = {
+        "name": "run",
+        "role": "run",
+        "argv": spec["argv"],
+        "status": "UNKNOWN",
+        "guardian_return": None,
+        "persisted_process_receipt": process_ref,
+        "full_log": None,
+        "capture_complete": False,
+        "primary": None,
+        "secondary": [],
+    }
+    try:
+        check["full_log"] = bound(directory / "run.full.log", spec["limits"]["log_B"])[0]
+    except BaseException as error:
+        check["secondary"].append({"stage": "available_log", **error_fact(error)})
+    return {
+        "schema": COMPLETION_SCHEMA,
+        "kind": "run",
+        "status": "CANCELLED" if job["outcome"] == "cancelled" else "FAILED",
+        "intent": intent_ref,
+        "experiment": spec["experiment"],
+        "build_manifest": experiment["build_manifest"],
+        "planned_slots": experiment["planned_slots"],
+        "data": data,
+        "checks": [check],
+        "primary": {
+            "type": "AbnormalOuterExit",
+            "message": "original owner exited without candidate",
+            "original_result": job,
+            "result_ref": job_ref,
+        },
+        "secondary": secondary,
+        "cleanup_complete": False,
+        "process_cleanup_complete": False,
+        "remaining": [],
+        "owed_finalizers": spec["finalizers"],
+        "originating_job": {
+            "runtime": str(runtime),
+            "job_id": state["job_id"],
+            "config": config_ref,
+            "config_sha256": fingerprint,
+            "supervisor": state["supervisor"],
+            "child": state["child"],
+        },
+        "abnormal_origin": {
+            "marker": marker_ref,
+            "independent_origin_custody": custody_ref,
+            "state": state_ref,
+            "outer_cleanup_complete": True,
+            "command_cleanup": "UNKNOWN",
+            "journal_flush_sync_close": "UNKNOWN",
+            "native_errors": "UNKNOWN",
+            "persisted_process_facts": persisted,
+            "candidate_file_created": False,
+        },
+    }
+
+
+def _prepare_completion(directory, job_ref, *, failure=None):
     """No child launch. Authoritative publish happens after every independent owed finalizer."""
     directory = Path(directory)
     require(
@@ -2610,7 +2877,9 @@ def _prepare_completion(directory, job_ref):
     )
     with (directory / "finalizing").open("xb"):
         pass  # Restart cannot run a scientific command or independent finalizers twice.
-    candidate = json.loads((directory / "candidate.json").read_bytes())
+    candidate = (
+        failure if failure is not None else json.loads((directory / "candidate.json").read_bytes())
+    )
     errors = []
     job = {}
     outer_joined = False
@@ -2780,19 +3049,43 @@ def _prepare_completion(directory, job_ref):
             candidate["cleanup_complete"] = False
             candidate["secondary"].append({"stage": "final_artifact_source", **error_fact(error)})
     finalize_numerical_claim(candidate)
-    new_json(directory / "manifest.json", candidate)
-    fd = os.open(directory, os.O_DIRECTORY)
     try:
-        os.fsync(fd)
-    finally:
-        os.close(fd)
+        new_json(directory / "manifest.json", candidate)
+        fd = os.open(directory, os.O_DIRECTORY)
+        try:
+            os.fsync(fd)
+        finally:
+            os.close(fd)
+    except BaseException as error:
+        # No recursive IO reporting: keep the originating failure and every
+        # accumulated secondary available if authoritative publication fails.
+        error.add_note("unpublished completion facts: " + json.dumps(candidate, allow_nan=False))
+        raise
     return candidate
 
 
-def finalize(directory, job_ref, *, guard=physical_and_quiet, lock=lease, resource_factory=Limits):
+def finalize(
+    directory,
+    job_ref,
+    *,
+    origin_ref=None,
+    guard=physical_and_quiet,
+    lock=lease,
+    resource_factory=Limits,
+):
     directory = Path(directory)
-    candidate = json.loads((directory / "candidate.json").read_bytes())
-    spec = document(candidate["intent"])
+    require(
+        not (directory / "manifest.json").exists() and not (directory / "finalizing").exists(),
+        "duplicate finalization refused",
+    )
+    candidate_path = directory / "candidate.json"
+    # Missing-owner publication is admitted only after the original origin is joined,
+    # under the same lifetime lock. No synthetic candidate is written.
+    if candidate_path.exists():
+        require(origin_ref is None, "candidate already retains its originating job")
+        spec = document(json.loads(candidate_path.read_bytes())["intent"])
+    else:
+        spec = document(document(bound(directory / "INCOMPLETE")[0])["intent"])
     require(
         owned(directory, spec["owner"]) == Path(spec["output"]), "finalization operation ownership"
     )
@@ -2800,7 +3093,12 @@ def finalize(directory, job_ref, *, guard=physical_and_quiet, lock=lease, resour
     with lock():
         resources = resource_factory(spec)
         resources.check()
-        completion = _prepare_completion(directory, job_ref)
+        failure = (
+            None
+            if candidate_path.exists()
+            else abnormal_run_failure(directory, job_ref, origin_ref=origin_ref)
+        )
+        completion = _prepare_completion(directory, job_ref, failure=failure)
     # Critical reads, direct waits, data/log writes, lease/handle closes and
     # independent finalizers precede this last fallible publication operation.
     (directory / "INCOMPLETE").unlink()
@@ -2818,11 +3116,18 @@ def main():
     p.add_argument("--operation", type=Path, required=True)
     p.add_argument("--job-result", type=Path, required=True)
     p.add_argument("--sha256", required=True)
+    p.add_argument("--origin-record", type=Path)
+    p.add_argument("--origin-sha256")
     args = parser.parse_args()
     if args.command == "finalize":
         ref, _ = bound(args.job_result)
         require(ref["sha256"] == args.sha256, "actual job result binding")
-        result = finalize(args.operation, ref)
+        require(bool(args.origin_record) == bool(args.origin_sha256), "origin path/SHA pair")
+        origin_ref = None
+        if args.origin_record is not None:
+            origin_ref, _ = bound(args.origin_record)
+            require(origin_ref["sha256"] == args.origin_sha256, "independent origin binding")
+        result = finalize(args.operation, ref, origin_ref=origin_ref)
         return 0 if result["status"] == "PASS" else 1
     ref, _ = bound(args.intent)
     require(ref["sha256"] == args.sha256, "intent SHA")

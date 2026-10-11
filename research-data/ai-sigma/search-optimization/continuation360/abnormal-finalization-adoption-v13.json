@@ -1,0 +1,71 @@
+{
+  "schema": "quoridor.research.source-adoption.v1",
+  "status": "ADOPTED",
+  "issue": "quoridor-4lc.324",
+  "related_issues": ["quoridor-4lc.360.1", "quoridor-4lc.366"],
+  "adopted_at": "2026-10-11T23:32:48.870664+00:00",
+  "origin_source_binding": {
+    "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/origin-binding-repair-v12/source-STOP-binding.json",
+    "sha256": "e97cadc3797d4f92889f89f0e5c35a6e7b3ddf5f42f709938bbb629b4fd59a3b",
+    "bytes": 3559,
+    "mode": "0644"
+  },
+  "origin_review_control": {
+    "path": "/workspaces/quoridor/.artifacts/search-optimization/continuation360/source-review-v1/abnormal-finalization-v7/related-origin-v8/control.json",
+    "sha256": "69edfb229437f6bd570da4d3be4e1341e600a72cfc33efa239ab95a136485137",
+    "bytes": 9343,
+    "mode": "0644"
+  },
+  "origin_review_findings": {
+    "path": "/workspaces/quoridor/.artifacts/search-optimization/continuation360/source-review-v1/abnormal-finalization-v7/related-origin-v8/findings.json",
+    "sha256": "4db7b8346fc16e64abe377d51e581fae7bbfabee1db7becadbdaab5131c601ab",
+    "bytes": 1358,
+    "mode": "0644"
+  },
+  "origin_reader_STOP": "2026-10-11T23:23:05.379836+00:00",
+  "training_interpreter_binding": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/lr-comparison366-v1/source/training-interpreter-repair-v1/source-STOP-binding.json",
+    "sha256": "9f6f8fba587178f12b0f752f236dd9b6f2952f16d0dfdce59b213ffebc164283",
+    "bytes": 5341,
+    "mode": "0644"
+  },
+  "source_after": {
+    "scripts/dev/research-lifecycle.py": {
+      "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+      "sha256": "018e516fb1b55d0ee0af9e10da713a4f3c42fa4cbe8b343b6b2ced008f3be7ab",
+      "bytes": 131067,
+      "mode": "0644"
+    },
+    "docs/development/research-lifecycle.md": {
+      "path": "/workspaces/quoridor/docs/development/research-lifecycle.md",
+      "sha256": "9277f25ef0c10e80602dc6656c249df7f073274d2cb506baf61860d40e8aa25e",
+      "bytes": 29838,
+      "mode": "0644"
+    },
+    "tools/research-session/test_lifecycle_abnormal_exit.py": {
+      "path": "/workspaces/quoridor/tools/research-session/test_lifecycle_abnormal_exit.py",
+      "sha256": "2687958ab85b58a41eb4300a5eff427620ba85307e039a499cc6e8a1d1e5196c",
+      "bytes": 26775,
+      "mode": "0644"
+    }
+  },
+  "strict_composed_forward_inverse_exact": true,
+  "existing_changed_functions": [
+    "_prepare_completion",
+    "command",
+    "common_pilot_check",
+    "execute",
+    "experiment_check",
+    "finalize",
+    "main",
+    "originating_job"
+  ],
+  "unchanged_existing_functions": 44,
+  "new_functions": ["abnormal_run_failure", "training_interpreter"],
+  "composition_scope": "Only disjoint ordinary training-interpreter locator on clear e97 finalization/deadline repair. Immutable review/test subjects retained; native/maps/math/model/image/scientific inputs unchanged. No oldBuild retarget or successful replay.",
+  "Root_inclusive_source_composition_admin_upper_B": 1048576,
+  "contained_in": "Issued366 Root4MiB integration inside128MiB; globalincrement0/targetprivategrowth0",
+  "failure_retained": "First memfd GNUpatch refused regular-file validation before source mutation; reject saved in Root owned phase. Corrected standard regular-file temp reconstruction, no production partial write.",
+  "original_finalize_or_science_executed": false,
+  "format_lint": "ProjectRuff100/py311 no-cache format/check/lint PASS; Prettier scopedwrite/check. Initial Ruff without projectconfig refused default88/py310 style; no source mutation from check, corrected config."
+}
