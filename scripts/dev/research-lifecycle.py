@@ -471,11 +471,32 @@ def native_source_refs(source):
     return refs
 
 
-def build_input_refs(manifest):
+def runtime_dependency_refs(manifest, approved_plan_ref=None):
+    """Keep compiler dependencies fixed; the approved run plan is a new input."""
+    if approved_plan_ref is None:
+        return manifest["dependency_refs"]
+    source_paths = {r["path"] for r in manifest["source"]["files"]}
+    source_paths |= {t["file"]["path"] for t in manifest["tools"].values()}
+    result = []
+    for ref in manifest["dependency_refs"]:
+        if ref["path"] == approved_plan_ref["path"]:
+            require(
+                ref["path"] not in source_paths
+                and Path(ref["path"]).is_relative_to(ROOT / "research-data")
+                and Path(ref["path"]).suffix == ".json",
+                "runtime plan cannot replace a native/compiler source input",
+            )
+            result.append(approved_plan_ref)
+        else:
+            result.append(ref)
+    return result
+
+
+def build_input_refs(manifest, approved_plan_ref=None):
     return [
         manifest["artifact"],
         *native_source_refs(manifest["source"]),
-        *manifest["dependency_refs"],
+        *runtime_dependency_refs(manifest, approved_plan_ref),
         *(x["file"] for x in manifest["tools"].values()),
     ]
 
@@ -802,7 +823,7 @@ def caller_source_refs(spec, experiment):
     return refs
 
 
-def accepted_build(ref):
+def accepted_build(ref, approved_plan_ref=None):
     manifest = document(ref)
     require(not Path(ref["path"]).with_name("INCOMPLETE").exists(), "provisional manifest")
     require(
@@ -824,7 +845,7 @@ def accepted_build(ref):
         == {k: r["sha256"] for k, r in manifest["source"]["compiled_sources"].items()},
         "qualified native source projection",
     )
-    for r in manifest["dependency_refs"]:
+    for r in runtime_dependency_refs(manifest, approved_plan_ref):
         read_ref(r, max(CONTROL_BYTES, r["bytes"]))
     for tool in manifest["tools"].values():
         require(
@@ -945,7 +966,7 @@ def experiment_check(spec):
     experiment = document(spec["experiment"])
     require(experiment["schema"] == EXPERIMENT_SCHEMA, "experiment schema")
     experiment_phase_check(experiment)
-    manifest = accepted_build(experiment["build_manifest"])
+    manifest = accepted_build(experiment["build_manifest"], spec["approved_plan"])
     require(manifest["artifact"] == spec["artifact"], "same actual executable")
     refs = [
         experiment["config"],
@@ -1007,7 +1028,11 @@ def experiment_check(spec):
         )
     for finalizer in spec["finalizers"]:
         owned(finalizer["path"], spec["owner"])
-    return experiment, manifest, [*refs, experiment["build_manifest"], *build_input_refs(manifest)]
+    return (
+        experiment,
+        manifest,
+        [*refs, experiment["build_manifest"], *build_input_refs(manifest, spec["approved_plan"])],
+    )
 
 
 def build_check(spec):

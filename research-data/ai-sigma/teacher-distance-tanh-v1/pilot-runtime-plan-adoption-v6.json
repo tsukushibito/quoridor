@@ -1,0 +1,37 @@
+{
+  "adopted_at": "2026-10-11T11:51:26.700664+00:00",
+  "producer_source_STOP": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/runtime-plan-repair-v8/source-STOP.json",
+    "sha256": "7d39044c9abcb1d461b7d19fcae9ea9dfd6e2b7fedb47942980ccff09c1584f5",
+    "bytes": 4111,
+    "mode": "0644"
+  },
+  "source_before": {
+    "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+    "sha256": "274843077706986566551fc2005209791485f7de42dc215d5277fb784e7a6ebd",
+    "bytes": 99197,
+    "mode": "0644"
+  },
+  "source_after": {
+    "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+    "sha256": "36227fb91073ea3caaea38a5fa445aee83f5915dcdcc18e0c269d51a16c270f2",
+    "bytes": 100258,
+    "mode": "0644"
+  },
+  "current_approved_plan": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/plan.json",
+    "sha256": "285e6d9ecded3709d0e23dc8ff45e89184cec053e314d6d2f61fd2e5fc9eeac1",
+    "bytes": 48825,
+    "mode": "0644"
+  },
+  "immutable_BUILD": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/build-v4/operation-v4/manifest.json",
+    "sha256": "4ce963dfea6af76885c0bd911e503e6c9c28a0b99bbd1e1b113facc6443b334f",
+    "bytes": 85626,
+    "mode": "0644"
+  },
+  "verification": "Strict forward/inverse6 hunks, gzip custody, exact unrelated definition ASTs, actual approved-plan exclusion from source/native/generator/tool/compiler/artifact paths; supplied selected-AST synthetic case reused without replay. Scoped Ruff format/check/lint PASS.",
+  "scope": "New RUN acceptance and after-command custody bind current approved external test-plan input only. No BuildManifest/image/Rust/source-map retarget or rebuilding. All other dependencies and approved-plan/admission checks remain exact.",
+  "experimental_runtime_consumed_seconds": 0,
+  "funding": "Contained existing Root pilot control/integration support, original1GiB unchanged."
+}
