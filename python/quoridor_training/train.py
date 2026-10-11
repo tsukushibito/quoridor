@@ -21,6 +21,10 @@ from .common import (
     selected_teacher_types,
     validate_target_tensor,
     MeasurementAccumulator,
+    warmstart_inputs,
+    bound_file_bytes,
+    ordered_parameter_values,
+    PARAMETER_SHAPES,
 )
 import io, sys
 
@@ -393,6 +397,11 @@ def train(
         scale_path=scale_path,
         supply_workers=supply_workers,
     )
+    warm_admission = warmstart_inputs(
+        cfg, cache=cache, config_path=config_path, input_binding=input_binding
+    )
+    if warm_admission is not None and (scale_path is not None or steps is not None):
+        raise ValueError("warm-start keeps incumbent scale and selected horizon without overrides")
     import numpy as np
 
     os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
@@ -422,13 +431,35 @@ def train(
     corpus = load(cache)
     binding, rows, labels = (corpus.binding, corpus.rows, corpus.labels)
     target = cfg["training"]["target"]
-    column = {"rootmean": 0, "z": 1, "outcome_steps": 1, "terminal_margin": 2}[target]
+    if warm_admission is not None:
+        if not getattr(corpus, "terminal", False):
+            raise ValueError("warm-start requires actual common terminal/root teacher cache")
+        corpus.prepare_common_teachers(
+            cfg["experiment"]["teacher_mapping"], cfg["experiment"]["draw_policy"]
+        )
+    column = {
+        "rootmean": 0,
+        "z": 1,
+        "outcome_steps": 1,
+        "terminal_margin": 2,
+        "completed_root_raw": 3,
+    }[target]
     step_score = cfg["model"]["architecture"] == "distance_steps"
-    if step_score != getattr(corpus, "terminal", False):
+    if warm_admission is None and step_score != getattr(corpus, "terminal", False):
         raise ValueError("distance-step model requires its bound dual-teacher geometry corpus")
-    target_scale = 80 if target == "outcome_steps" else 1
+    target_scale = (
+        80
+        if target == "outcome_steps"
+        else (
+            0.5
+            if warm_admission is not None
+            and target == "completed_root_raw"
+            and cfg["experiment"]["teacher_mapping"] == "divide_by_two"
+            else 1
+        )
+    )
     compact = getattr(corpus, "compact", False)
-    public_compact = compact and not step_score
+    public_compact = compact and not step_score and warm_admission is None
     if public_compact and (
         target != "z"
         or cfg["training"]["sampling"] != "epoch"
@@ -457,7 +488,11 @@ def train(
     teacher_types = (
         {"terminal_pair"}
         if step_score
-        else ({"external_outcome"} if compact else selected_teacher_types(rows, target))
+        else (
+            {"completedD6_root_and_final_outcome"}
+            if warm_admission is not None
+            else ({"external_outcome"} if compact else selected_teacher_types(rows, target))
+        )
     )
     if not compact:
         validate_target_tensor(rows, labels[:, column], target)
@@ -494,12 +529,32 @@ def train(
         constant = float(np.mean(sums[family_codes] / counts[family_codes]))
         del codes, order, sorted_codes
     constant *= target_scale
+    dual_constants = None
+    if warm_admission is not None:
+        # Freeze each mapped teacher's constant from the SAME eligible T scope only.
+        dual_constants = {"z": 0.0, "completed_root_raw": 0.0}
+        for first in range(0, len(ix_train), 4096):
+            _, local_labels, _, _ = corpus.metadata(ix_train[first : first + 4096])
+            for teacher, col in (("z", 1), ("completed_root_raw", 3)):
+                scale = corpus.common_teacher_mapping["teacher_B_scale"] if col == 3 else 1
+                dual_constants[teacher] += float(
+                    (local_labels[:, col] * scale).sum(dtype=np.float64)
+                )
+        dual_constants = {
+            teacher: total / len(ix_train) for teacher, total in dual_constants.items()
+        }
     if step_score:
         cfg["training"]["warmup_steps"] = min(
             257, math.ceil(len(ix_train) / cfg["training"]["batch_size"])
         )
-    statistics, fitted = training_statistics(corpus, ix_train, column)
-    if input_binding is not None:
+    if warm_admission is not None:
+        # Incumbent T-only scale belongs to the warm-start function; never estimate new-T moments.
+        statistics = warm_admission["statistics"]
+        fitted = {"a": 0, "b": 0}
+        expected = warm_admission["expected"]
+    else:
+        statistics, fitted = training_statistics(corpus, ix_train, column)
+    if input_binding is not None and warm_admission is None:
         expected = (
             volume_admission["expected"]
             if volume_admission is not None
@@ -534,6 +589,8 @@ def train(
     if step_score:
         distance_fit = {"a": 0, "b": 1, "units": "integer-wall-distance-steps"}
     model = build_model(cfg["model"], statistics).to(device)
+    if warm_admission is not None:
+        restore_warmstart_parameters(model, warm_admission["warm_start"]["weights"])
     initial_state = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
     if volume_admission is not None:
         digest = hashlib.sha256()
@@ -550,6 +607,8 @@ def train(
     opt_kwargs = {"lr": cfg["optimizer"]["lr"], "weight_decay": cfg["optimizer"]["weight_decay"]}
     if cfg["optimizer"]["name"] == "sgd":
         opt_kwargs["momentum"] = cfg["optimizer"]["momentum"]
+    if warm_admission is not None:
+        opt_kwargs.update(betas=tuple(cfg["optimizer"]["betas"]), eps=cfg["optimizer"]["eps"])
     optimizer = optimizers[cfg["optimizer"]["name"]](model.parameters(), **opt_kwargs)
     scheduler = None
     if cfg["training"]["scheduler"] == "cosine":
@@ -572,6 +631,15 @@ def train(
     output.mkdir(parents=True)
     if volume_admission is not None:
         write(output / "main-volume-admission.json", volume_admission)
+    if warm_admission is not None:
+        write(
+            output / "warm-start.json",
+            {
+                **warm_admission,
+                "common_teachers": corpus.common_teacher_mapping,
+                "optimizer": "fresh; constructed after all six parameters loaded",
+            },
+        )
     write(output / "config.json", cfg)
     write(output / "scale.json", statistics)
     with gzip.open(output / "cache-binding.json.gz", "wt") as stream:
@@ -799,7 +867,18 @@ def train(
                 corpus, indices, values, target, constant, cfg["model"]["train_transform"]
             )
         if compact:
-            return compact_measurements(corpus, indices, values, constant, distance_fit, ix_train)
+            return compact_measurements(
+                corpus,
+                indices,
+                values,
+                constant,
+                {"a": 0, "b": 8} if warm_admission is not None else distance_fit,
+                ix_train,
+                column=column,
+                dual=warm_admission is not None,
+                teacher_scale=target_scale,
+                dual_constants=dual_constants,
+            )
         scope = hashlib.sha256(np.asarray(indices, dtype="<i8")).hexdigest()
         measured = MeasurementAccumulator(target, constant)
         reference = MeasurementAccumulator(target, constant)
@@ -1079,6 +1158,38 @@ def train(
                 append_curve_record(output / (name + ".jsonl.gz"), records[at])
                 _curve_csv([records[at]], output / (name + ".csv"), append=at > 0)
                 persisted_curve_counts[name] += 1
+        if warm_admission is not None and curve:
+            from .plotting import render_learning_curves
+
+            for teacher in ("z", "completed_root_raw"):
+                views = []
+                for record in curve:
+                    view = {**record}
+                    for scope in ("train", "validation"):
+                        part = record[scope]
+                        view[scope] = {
+                            **part,
+                            "target_mse": part[teacher + "_mse"],
+                            "target_game_equal_mse": part[teacher + "_game_equal_mse"],
+                        }
+                        for key in (
+                            "constant_mse",
+                            "constant_game_equal_mse",
+                            "distance_mse",
+                            "distance_group_equal_mse",
+                        ):
+                            view[scope][key] = part[teacher + "_" + key]
+                    view["used_for_selection"] = teacher == target
+                    if teacher != target:
+                        view["validation_scope"] = "full_held_family_not_selector"
+                    views.append(view)
+                render_learning_curves(
+                    views,
+                    output / (teacher + "-curves.svg"),
+                    selected_step=best_step,
+                    sampling="epoch",
+                    title="Common-family " + teacher + " MSE; INITIAL is frozen BEST43",
+                )
         phase_seconds["logging"] += time.monotonic() - tick
 
     def persist():
@@ -1486,7 +1597,11 @@ def train(
             persist()
     freeze = {
         "schema": "quoridor-candidate-freeze-v2",
-        "artifacts_sha256": {name: sha(output / name) for name in FROZEN_ARTIFACTS},
+        "artifacts_sha256": {
+            name: sha(output / name)
+            for name in FROZEN_ARTIFACTS
+            + (WARMSTART_ARTIFACTS if warm_admission is not None else ())
+        },
         "best_step": best_step,
         "best_validation_mse": best_loss,
         "selected_exposure": best_exposure,
@@ -1517,7 +1632,19 @@ def train(
     return freeze
 
 
-def compact_measurements(corpus, indices, values, constant, distance_fit, train_indices):
+def compact_measurements(
+    corpus,
+    indices,
+    values,
+    constant,
+    distance_fit,
+    train_indices,
+    *,
+    column=1,
+    dual=False,
+    teacher_scale=1,
+    dual_constants=None,
+):
     """Aggregate row and model-input-group metrics without per-row/group JSON."""
     import numpy as np
 
@@ -1530,6 +1657,27 @@ def compact_measurements(corpus, indices, values, constant, distance_fit, train_
     group_constant = np.zeros(len(corpus.families), dtype=np.float64)
     strata = {}
     error_sum = distance_sum = constant_sum = bias = 0.0
+    dual_errors = {
+        name: np.zeros(len(corpus.families), dtype=np.float64)
+        for name in ("z", "completed_root_raw")
+    }
+    dual_guides = (
+        {
+            teacher: {
+                key: np.zeros(len(corpus.families), dtype=np.float64)
+                for key in ("distance", "constant")
+            }
+            for teacher in dual_errors
+        }
+        if dual
+        else {}
+    )
+    if dual and (
+        not isinstance(dual_constants, dict)
+        or set(dual_constants) != set(dual_errors)
+        or any(not math.isfinite(value) for value in dual_constants.values())
+    ):
+        raise ValueError("frozen mapped T-only constants for BOTH teachers required")
     sign_correct = saturated = 0
     for first in range(0, len(indices), 4096):
         sub = indices[first : first + 4096]
@@ -1537,7 +1685,7 @@ def compact_measurements(corpus, indices, values, constant, distance_fit, train_
         if not np.isfinite(prediction).all():
             raise ValueError("nonfinite compact prediction")
         distance, labels, source, phase = corpus.metadata(sub)
-        target = labels[:, 1]
+        target = labels[:, column] * teacher_scale
         baseline = np.tanh(
             np.float32(distance_fit["a"])
             + np.float32(distance_fit["b"]) * (distance[:, 1] - distance[:, 0])
@@ -1547,6 +1695,31 @@ def compact_measurements(corpus, indices, values, constant, distance_fit, train_
         ce = (np.float32(constant).astype(np.float64) - target) ** 2
         groups = corpus.groups[sub]
         np.add.at(group_counts, groups, 1)
+        if dual:
+            for teacher, teacher_column in (("z", 1), ("completed_root_raw", 3)):
+                if not np.isfinite(labels[:, teacher_column]).all():
+                    raise ValueError("common eligible teachers must both be finite")
+                scale = (
+                    corpus.common_teacher_mapping["teacher_B_scale"]
+                    if teacher == "completed_root_raw"
+                    else 1
+                )
+                np.add.at(
+                    dual_errors[teacher],
+                    groups,
+                    (prediction.astype(np.float64) - labels[:, teacher_column] * scale) ** 2,
+                )
+                mapped_target = labels[:, teacher_column] * scale
+                for key, guide in (
+                    ("distance", baseline),
+                    ("constant", np.float32(dual_constants[teacher])),
+                ):
+                    np.add.at(
+                        dual_guides[teacher][key],
+                        groups,
+                        (np.asarray(guide, dtype=np.float64) - mapped_target) ** 2,
+                    )
+
         np.add.at(group_error, groups, errors)
         np.add.at(group_distance, groups, de)
         np.add.at(group_constant, groups, ce)
@@ -1554,7 +1727,7 @@ def compact_measurements(corpus, indices, values, constant, distance_fit, train_
         distance_sum += de.sum()
         constant_sum += ce.sum()
         bias += (prediction.astype(np.float64) - target).sum()
-        sign_correct += int(np.count_nonzero(prediction * target > 0))
+        sign_correct += int(np.count_nonzero(prediction * (labels[:, 1] if dual else target) > 0))
         saturated += int(np.count_nonzero(np.abs(prediction) >= 0.9))
         for dimension, codes in [
             ("source", source),
@@ -1571,7 +1744,7 @@ def compact_measurements(corpus, indices, values, constant, distance_fit, train_
     if not n:
         raise ValueError("empty measurement scope")
     group_mse = float(np.mean(group_error[mask] / group_counts[mask]))
-    return {
+    report = {
         "rows": n,
         "input_groups": int(mask.sum()),
         "group_kind": "QF1+distance model input; game/history UNKNOWN",
@@ -1588,6 +1761,20 @@ def compact_measurements(corpus, indices, values, constant, distance_fit, train_
         "bias": float(bias / n),
         "strata": {k: {"rows": v[0], "target_mse": v[1] / v[0]} for k, v in strata.items()},
     }
+    if dual:
+        report["group_kind"] = "prebound whole-family T/V; conditional shared-lineage metrics"
+        for teacher, errors in dual_errors.items():
+            report[teacher + "_mse"] = float(errors.sum() / n)
+            report[teacher + "_game_equal_mse"] = float(np.mean(errors[mask] / group_counts[mask]))
+            for key, guide_errors in dual_guides[teacher].items():
+                report[teacher + "_" + key + "_mse"] = float(guide_errors.sum() / n)
+                suffix = "_game_equal_mse" if key == "constant" else "_group_equal_mse"
+                report[teacher + "_" + key + suffix] = float(
+                    np.mean(guide_errors[mask] / group_counts[mask])
+                )
+            report[teacher + "_T_only_constant"] = dual_constants[teacher]
+
+    return report
 
 
 def _curve_csv(curves, path, *, append=False):
@@ -1623,6 +1810,10 @@ def _curve_csv(curves, path, *, append=False):
                     *[
                         scope + "_" + metric
                         for metric in (
+                            "z_mse",
+                            "completed_root_raw_mse",
+                            "completed_root_raw_game_equal_mse",
+                            "z_game_equal_mse",
                             "outcome_steps_raw_mse",
                             "terminal_margin_raw_mse",
                             "outcome_steps_mse",
@@ -1676,6 +1867,10 @@ def _curve_csv(curves, path, *, append=False):
                     *[
                         point[scope].get(metric)
                         for metric in (
+                            "z_mse",
+                            "completed_root_raw_mse",
+                            "completed_root_raw_game_equal_mse",
+                            "z_game_equal_mse",
                             "outcome_steps_raw_mse",
                             "terminal_margin_raw_mse",
                             "outcome_steps_mse",
@@ -1705,13 +1900,32 @@ FROZEN_ARTIFACTS = (
 )
 
 
+WARMSTART_ARTIFACTS = (
+    "last.pt",
+    "last-model/manifest.json",
+    "last-model/weights.f32",
+    "last-model/training-target.json",
+    "warm-start.json",
+    "z-curves.svg",
+    "completed_root_raw-curves.svg",
+    "curves.csv",
+    "observations.jsonl.gz",
+)
+
+
 def verify_freeze(training):
     training = Path(training)
     freeze = json.loads((training / "freeze.json").read_text())
     if freeze.get("schema") != "quoridor-candidate-freeze-v2":
         raise ValueError("unsupported freeze; historical guarantees cannot be inferred")
     digests = freeze.get("artifacts_sha256")
-    if not isinstance(digests, dict) or set(digests) != set(FROZEN_ARTIFACTS):
+    config = json.loads((training / "config.json").read_text())
+    required = FROZEN_ARTIFACTS + (
+        WARMSTART_ARTIFACTS
+        if config.get("experiment", {}).get("study") == "common-corpus-warmstart-v1"
+        else ()
+    )
+    if not isinstance(digests, dict) or set(digests) != set(required):
         raise ValueError("freeze missing required evaluation artifact bindings")
     for name, digest in digests.items():
         if sha(training / name) != digest:
@@ -1978,6 +2192,12 @@ def guarded_train(config_path):
         config_path=cfg["fit_config"],
         input_binding=cfg.get("input_binding"),
     )
+    warmstart_inputs(
+        resolve_config(cfg["fit_config"]),
+        cache=cfg["cache"],
+        config_path=cfg["fit_config"],
+        input_binding=cfg.get("input_binding"),
+    )
     from .cycle_process import GPUResources, cancellation_signals, execute
 
     for path, digest in cfg["expected_files_sha256"].items():
@@ -2072,6 +2292,27 @@ def main():
         if not args.training:
             parser.error("test requires --training")
         print(json.dumps(test(args.cache, args.training, args.output)))
+
+
+def restore_warmstart_parameters(model, weights):
+    """Full native weight load only in the already guarded fit; optimizer is fresh later."""
+    import torch
+
+    values = ordered_parameter_values(bound_file_bytes(weights, 49284))
+    state = model.state_dict()
+    if set(state) != set(PARAMETER_SHAPES):
+        raise ValueError("exact six incumbent trainable parameters required")
+    with torch.no_grad():
+        for name, shape in PARAMETER_SHAPES.items():
+            if tuple(state[name].shape) != shape or state[name].dtype != torch.float32:
+                raise ValueError("native warm-start tensor shape/dtype")
+            state[name].copy_(
+                torch.tensor(values[name], dtype=torch.float32, device=state[name].device).reshape(
+                    shape
+                )
+            )
+    if any(not p.requires_grad for p in model.parameters()):
+        raise ValueError("warm-start may not freeze/reset a head or transformer")
 
 
 if __name__ == "__main__":

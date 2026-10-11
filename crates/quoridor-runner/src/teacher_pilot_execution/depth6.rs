@@ -41,7 +41,7 @@ enum Record {
 }
 
 pub(super) fn is_stream(path: &Path) -> Result<bool> {
-    let mut reader = BufReader::new(File::open(path.join("pilot-stream.jsonl"))?);
+    let mut reader = BufReader::new(stream_reader(path)?);
     let mut line = Vec::new();
     reader
         .by_ref()
@@ -51,10 +51,35 @@ pub(super) fn is_stream(path: &Path) -> Result<bool> {
         return Err("invalid request journal; remaining UNKNOWN".into());
     }
     let value: Value = serde_json::from_slice(&line)?;
-    Ok(value["schema"] == SCHEMA)
+    Ok(value["schema"] == SCHEMA || value["schema"] == quoridor_data::common_corpus::STREAM_SCHEMA)
 }
 
+fn schema(c: &PilotConfig) -> &'static str {
+    if matches!(c.phase, teacher_pilot::Phase::CommonCorpus) {
+        quoridor_data::common_corpus::STREAM_SCHEMA
+    } else {
+        SCHEMA
+    }
+}
+fn policy(c: &PilotConfig) -> SearchPolicy {
+    SearchPolicy {
+        depth: 6,
+        nodes: c.max_nodes,
+        strict: true,
+    }
+}
 fn requests(config: &PilotConfig, hash: &str) -> Value {
+    if matches!(config.phase, teacher_pilot::Phase::CommonCorpus) {
+        let requested =
+            teacher_pilot::depth6::configured_requests(config).expect("validated request shape");
+        return serde_json::json!({"type":"requests", "schema":schema(config),
+            "generator_version":teacher_pilot::depth6::version(config),"config":config,"config_sha256":hash,
+            "planned":config.planned_games,"requested":requested,
+            "requested_lengths":requested.iter().map(|(_,n)|*n).collect::<Vec<_>>(),
+            "rng":"SHA256(version:prefix_seed:stable_request_id) first8 littleendian; fixedD search consumes no randomness",
+            "node_policy":"explicit_positive_node_ceiling", "requested_depth":6,
+            "unknown_rows":"source evidence only/ineligible/no terminal teachers"});
+    }
     serde_json::json!({"type":"requests", "schema":SCHEMA,
         "generator_version":teacher_pilot::depth6::VERSION,
         "config":config,"config_sha256":hash,"planned":4,
@@ -64,20 +89,27 @@ fn requests(config: &PilotConfig, hash: &str) -> Value {
         "unknown_rows":"source evidence only/ineligible/no terminal teachers"})
 }
 
-fn partition(slots: &[ScheduledGame]) -> Result<FamilyPartition> {
+fn configured_partition(config: &PilotConfig, slots: &[ScheduledGame]) -> Result<FamilyPartition> {
     let planned = slots
         .iter()
         .filter_map(|s| s.prefix.as_ref().map(|p| (s.request_id.clone(), p.clone())))
         .collect::<Vec<_>>();
-    partition_families(&planned, teacher_pilot::PREFIX_SEED)
+    if let Some(study) = &config.common_study {
+        partition_families(&planned, study.split_seed)
+    } else {
+        partition(slots)
+    }
 }
 
 fn audit_result(header: &PilotHeader, index: usize, result: &Outcome<GameRecord>) -> Result<()> {
     let slot = header.scheduled.get(index).ok_or("extra depth6 outcome")?;
     match result {
-        Outcome::Returned { value, .. } => {
-            audit_game_policy(slot, &header.family_partition, value, SearchPolicy::DEPTH6)
-        }
+        Outcome::Returned { value, .. } => audit_game_policy(
+            slot,
+            &header.family_partition,
+            value,
+            policy(&header.config),
+        ),
         Outcome::Failed { reason, .. } if !reason.is_empty() => Ok(()),
         _ => Err("failed worker lacks retained cause".into()),
     }
@@ -97,8 +129,9 @@ fn summarize_results(
         .collect::<Vec<_>>();
     let mut report = summarize(header, &games)?;
     report.recorded = records.len();
-    let mut details = Details { policy:teacher_pilot::depth6::VERSION.into(),requested_depth:6,max_nodes:u64::MAX,
-        game_workers:2,search_threads_per_game:1,queue_slots_per_worker:1,workers_joined:joined,
+    report.full_volume_n = header.config.main_volume_n;
+    let mut details = Details { policy:teacher_pilot::depth6::version(&header.config).into(),requested_depth:6,max_nodes:header.config.max_nodes,
+        game_workers:header.config.game_workers.ok_or("missing workers")?,search_threads_per_game:1,queue_slots_per_worker:1,workers_joined:joined,
         primary_interval:"NOT_RECORDED here: actual controller whole generation+serialization+savedonlyaudit+cleanup receipt required; native_whole_ns excludes final audit/cleanup".into(),..Details::default() };
     for (i, r) in records.iter().enumerate() {
         match r {
@@ -144,11 +177,102 @@ fn summarize_results(
     Ok(report)
 }
 
+/// Only footer statistics/position keys persist; completed game bodies move out after writing.
+struct StreamReport {
+    report: PilotReport,
+    positions: BTreeSet<String>,
+}
+impl StreamReport {
+    fn new(header: &PilotHeader) -> Result<Self> {
+        Ok(Self {
+            report: summarize_results(header, &[], 0)?,
+            positions: BTreeSet::new(),
+        })
+    }
+    fn push(
+        &mut self,
+        header: &PilotHeader,
+        index: usize,
+        outcome: &Outcome<GameRecord>,
+    ) -> Result<()> {
+        if index != self.report.recorded {
+            return Err("streamed report order differs".into());
+        }
+        let mut one = header.clone();
+        one.scheduled = vec![
+            header
+                .scheduled
+                .get(index)
+                .ok_or("extra report outcome")?
+                .clone(),
+        ];
+        let part = summarize_results(&one, std::slice::from_ref(outcome), 0)?;
+        macro_rules! add { ($($field:ident),+) => { $( self.report.$field=self.report.$field.checked_add(part.$field).ok_or("streamed census overflow")?; )+ }; }
+        add!(
+            recorded,
+            goals,
+            draws,
+            unknown,
+            rows,
+            eligible_rows,
+            contact_positions,
+            opening_positions,
+            endgame_positions,
+            search_nodes,
+            search_calls,
+            accepted_search_calls
+        );
+        for (k, n) in part.wall_stock_positions {
+            let old = self.report.wall_stock_positions.entry(k).or_default();
+            *old = old.checked_add(n).ok_or("stock census overflow")?;
+        }
+        for (k, n) in part.achieved_depths {
+            let old = self.report.achieved_depths.entry(k).or_default();
+            *old = old.checked_add(n).ok_or("depth census overflow")?;
+        }
+        if let Outcome::Returned { value, .. } = outcome {
+            for row in &value.rows {
+                if !self.positions.insert(row.teacher.state_key.clone()) {
+                    self.report.duplicate_positions = self
+                        .report
+                        .duplicate_positions
+                        .checked_add(1)
+                        .ok_or("duplicate census overflow")?;
+                }
+            }
+        }
+        self.report.distinct_positions = self.positions.len();
+        let a = self.report.depth6.as_mut().ok_or("depth footer")?;
+        let b = part.depth6.ok_or("depth footer")?;
+        macro_rules! work { ($($field:ident),+) => { $( a.$field=a.$field.checked_add(b.$field).ok_or("streamed work overflow")?; )+ }; }
+        work!(
+            started,
+            failed_workers_or_setup,
+            cancelled_before_start,
+            prefix_failures,
+            opaque_failed_work
+        );
+        a.game_whole_ns.extend(b.game_whole_ns);
+        a.final_plies.extend(b.final_plies);
+        a.returned_move_nodes.extend(b.returned_move_nodes);
+        a.returned_depths.extend(b.returned_depths);
+        Ok(())
+    }
+    fn finish(mut self, joined: usize) -> Result<PilotReport> {
+        self.report
+            .depth6
+            .as_mut()
+            .ok_or("depth footer")?
+            .workers_joined = joined;
+        Ok(self.report)
+    }
+}
+
 pub(super) fn run(config: &PilotConfig, hash: String, cancel: &AtomicBool) -> Result<PilotReport> {
     teacher_pilot::depth6::validate(config)?;
     let begin = Instant::now();
     let admission = resources::admit(
-        2,
+        config.game_workers.ok_or("missing workers")?,
         &config.worker_cores,
         false,
         config.host_ram_reserve,
@@ -158,23 +282,28 @@ pub(super) fn run(config: &PilotConfig, hash: String, cancel: &AtomicBool) -> Re
         return Err("two independent physical worker cores required".into());
     }
     fs::create_dir(&config.output)?;
-    let mut stream = Stream {
-        file: OpenOptions::new()
-            .create_new(true)
-            .write(true)
-            .open(config.output.join("pilot-stream.jsonl"))?,
-        used: 0,
-        cap: config.max_output_bytes,
+    let mut stream = if matches!(config.phase, teacher_pilot::Phase::CommonCorpus) {
+        Stream::compressed(&config.output, config.max_output_bytes)?
+    } else {
+        Stream {
+            file: OpenOptions::new()
+                .create_new(true)
+                .write(true)
+                .open(config.output.join("pilot-stream.jsonl"))?,
+            used: 0,
+            cap: config.max_output_bytes,
+            gzip: None,
+        }
     };
-    let attempt = (|| -> Result<PilotReport> {
+    let mut attempt = (|| -> Result<PilotReport> {
         // Complete planned denominator is durable before prefix/setup/game work.
         stream.append(&requests(config, &hash))?;
-        let scheduled = teacher_pilot::depth6::schedule()?;
-        teacher_pilot::depth6::audit(&scheduled)?;
-        let family_partition = partition(&scheduled)?;
+        let scheduled = teacher_pilot::depth6::configured_schedule(config)?;
+        teacher_pilot::depth6::configured_audit(config, &scheduled)?;
+        let family_partition = configured_partition(config, &scheduled)?;
         let header = PilotHeader {
-            schema: SCHEMA.into(),
-            generator_version: teacher_pilot::depth6::VERSION.into(),
+            schema: schema(config).into(),
+            generator_version: teacher_pilot::depth6::version(config).into(),
             config: config.clone(),
             config_sha256: hash,
             executable_sha256: format!("{:x}", Sha256::digest(fs::read(std::env::current_exe()?)?)),
@@ -185,10 +314,15 @@ pub(super) fn run(config: &PilotConfig, hash: String, cancel: &AtomicBool) -> Re
             resource_admission: serde_json::to_value(&admission)?,
         };
         stream.append(&Record::Header(Box::new(header.clone())))?;
-        let mut records = Vec::with_capacity(4);
+        let mut records = Vec::new();
+        let mut running = if matches!(config.phase, teacher_pilot::Phase::CommonCorpus) {
+            Some(StreamReport::new(&header)?)
+        } else {
+            None
+        };
         let joined = scheduling::ordered(
             &header.scheduled,
-            2,
+            config.game_workers.ok_or("missing workers")?,
             cancel,
             |worker, slot| {
                 resources::pin(admission.worker_cores[worker])?;
@@ -201,36 +335,61 @@ pub(super) fn run(config: &PilotConfig, hash: String, cancel: &AtomicBool) -> Re
                     .iter()
                     .find(|a| a.game == slot.request_id)
                     .ok_or("missing prebound input-only family")?;
-                play_with_policy(slot, a, cancel, SearchPolicy::DEPTH6)
+                play_with_policy(slot, a, cancel, policy(config))
             },
             |index, result| {
                 audit_result(&header, index, &result)?;
-                stream.append(&Record::Game {
+                let record = Record::Game {
                     index,
                     result: Box::new(result),
-                })?;
+                };
+                stream.append(&record)?;
+                if let Record::Game { result, .. } = record {
+                    if let Some(report) = &mut running {
+                        report.push(&header, index, &result)?;
+                    } else {
+                        records.push(*result);
+                    }
+                }
                 // Small four-case bounded ownership; deserialize the committed record
                 // is unnecessary: values move to the coordinator, never clone parents.
                 Ok(())
             },
         )?;
-        if joined.workers_joined != 2 || joined.committed != 4 {
+        if joined.workers_joined != config.game_workers.ok_or("missing workers")?
+            || joined.committed != config.planned_games
+        {
             return Err("incomplete exact worker census".into());
         }
-        // Saved-only authoritative read; no extra scientific reference/Search.
-        stream.file.sync_data()?;
-        let (_, saved, _) = read_records(&config.output, false)?;
-        records.extend(saved);
-        let mut report = summarize_results(&header, &records, joined.workers_joined)?;
+        // Values move once to the coordinator. No live raw file or incomplete gzip read.
+        // Completed compressed bytes are saved-audited only after actual encoder finalization.
+        let mut report = if let Some(report) = running {
+            report.finish(joined.workers_joined)?
+        } else {
+            summarize_results(&header, &records, joined.workers_joined)?
+        };
         report.committed_stream_bytes_before_footer = stream.used;
         report.native_whole_ns = begin.elapsed().as_nanos().min(u128::from(u64::MAX)) as u64;
         stream.append(&Record::Footer(Box::new(report.clone())))?;
         Ok(report)
     })();
+    // Keep the originating Result/type and its joined census when encoding also fails.
+    let mut secondary_encoding = None;
+    if let Err(secondary) = stream.finish(&config.output) {
+        if attempt.is_err() {
+            secondary_encoding = Some(secondary);
+        } else {
+            attempt = Err(secondary);
+        }
+    } else if attempt.is_ok() {
+        if let Err(error) = read_records(&config.output, true) {
+            attempt = Err(error);
+        }
+    }
     // Worker scheduler returned only after all joins; partial stream stays intact.
     if let Err(primary) = &attempt {
         cancel.store(true, Ordering::Release);
-        let receipt = serde_json::json!({"status":"FAILED","primary":primary.to_string(),"committed_bytes_known":stream.used,
+        let receipt = serde_json::json!({"status":"FAILED","primary":primary.to_string(),"secondary_encoding":secondary_encoding.as_ref().map(ToString::to_string),"committed_bytes_known":stream.used,
             "missing_or_partial_games":"UNKNOWN; no replacement/no teachers", "owned_thread_join":"scheduler joins before returning; inspect source/receipt, not wholehost cleanup",
             "scheduler_census":primary.downcast_ref::<scheduling::ScheduleFailure>().map(|e|&e.joined),
             "join_failures":primary.downcast_ref::<scheduling::ScheduleFailure>().map(|e|&e.cleanup_failures),
@@ -257,7 +416,7 @@ pub(super) fn run(config: &PilotConfig, hash: String, cancel: &AtomicBool) -> Re
         if let Err(e) = persisted {
             let _ = writeln!(
                 std::io::stderr(),
-                "failure_receipt_UNKNOWN:{e};primary:{primary}"
+                "failure_receipt_UNKNOWN:{e};primary:{primary};secondary_encoding:{secondary_encoding:?}"
             );
         }
     }
@@ -268,10 +427,12 @@ fn read_records(
     path: &Path,
     require_footer: bool,
 ) -> Result<(PilotHeader, Vec<Outcome<GameRecord>>, Option<PilotReport>)> {
-    let mut reader = BufReader::new(File::open(path.join("pilot-stream.jsonl"))?);
+    let mut reader = BufReader::new(stream_reader(path)?);
     let mut line = Vec::new();
     let mut header = None;
     let mut records = vec![];
+    let mut recorded = 0usize;
+    let mut running = None;
     let mut footer = None;
     let mut before_footer = 0u64;
     reader
@@ -296,32 +457,64 @@ fn read_records(
             return Err("partial/oversized/afterfooter depth6 stream".into());
         }
         match serde_json::from_slice::<Record>(&line)? {
-            Record::Header(h) if header.is_none() && records.is_empty() => {
+            Record::Header(h) if header.is_none() && recorded == 0 => {
                 teacher_pilot::depth6::validate(&h.config)?;
-                if h.schema != SCHEMA
-                    || h.generator_version != teacher_pilot::depth6::VERSION
+                if h.schema != schema(&h.config)
+                    || h.generator_version != teacher_pilot::depth6::version(&h.config)
                     || h.evaluator != EVALUATOR_ID
                     || request != requests(&h.config, &h.config_sha256)
                 {
                     return Err("depth6 request/header identity".into());
                 }
-                teacher_pilot::depth6::audit(&h.scheduled)?;
+                teacher_pilot::depth6::configured_audit(&h.config, &h.scheduled)?;
                 if serde_json::to_value(&h.family_partition)?
-                    != serde_json::to_value(partition(&h.scheduled)?)?
+                    != serde_json::to_value(configured_partition(&h.config, &h.scheduled)?)?
                 {
                     return Err("input-only family partition changed".into());
+                }
+                if matches!(h.config.phase, teacher_pilot::Phase::CommonCorpus) {
+                    running = Some(StreamReport::new(&h)?);
                 }
                 header = Some(*h);
             }
             Record::Game { index, result }
-                if header.is_some() && index == records.len() && index < 4 =>
+                if header.is_some()
+                    && index == recorded
+                    && index
+                        < header
+                            .as_ref()
+                            .ok_or("missing header")?
+                            .config
+                            .planned_games =>
             {
                 audit_result(header.as_ref().ok_or("missing header")?, index, &result)?;
-                records.push(*result);
+                if let Some(report) = &mut running {
+                    report.push(header.as_ref().ok_or("header")?, index, &result)?;
+                } else {
+                    records.push(*result);
+                }
+                recorded += 1;
             }
-            Record::Footer(r) if header.is_some() && records.len() == 4 => {
-                let mut expected =
-                    summarize_results(header.as_ref().ok_or("missing header")?, &records, 2)?;
+            Record::Footer(r)
+                if header.is_some()
+                    && recorded
+                        == header
+                            .as_ref()
+                            .ok_or("missing header")?
+                            .config
+                            .planned_games =>
+            {
+                let joined = header
+                    .as_ref()
+                    .ok_or("header")?
+                    .config
+                    .game_workers
+                    .ok_or("workers")?;
+                let mut expected = if let Some(report) = running.take() {
+                    report.finish(joined)?
+                } else {
+                    summarize_results(header.as_ref().ok_or("header")?, &records, joined)?
+                };
                 expected.native_whole_ns = r.native_whole_ns;
                 expected.committed_stream_bytes_before_footer = before_footer;
                 if serde_json::to_value(expected)? != serde_json::to_value(&r)? {
@@ -335,7 +528,14 @@ fn read_records(
             before_footer += line.len() as u64;
         }
     }
-    if records.len() != 4 || (require_footer && footer.is_none()) {
+    if recorded
+        != header
+            .as_ref()
+            .ok_or("missing header")?
+            .config
+            .planned_games
+        || (require_footer && footer.is_none())
+    {
         return Err("depth6 incomplete: all missing/partial outcomes UNKNOWN".into());
     }
     Ok((header.ok_or("missing depth6 header")?, records, footer))
@@ -346,6 +546,13 @@ pub(super) fn audit(path: &Path) -> Result<PilotReport> {
     footer.ok_or_else(|| "depth6 missing footer; UNKNOWN".into())
 }
 
+fn partition(slots: &[ScheduledGame]) -> Result<FamilyPartition> {
+    let planned = slots
+        .iter()
+        .filter_map(|s| s.prefix.as_ref().map(|p| (s.request_id.clone(), p.clone())))
+        .collect::<Vec<_>>();
+    partition_families(&planned, teacher_pilot::PREFIX_SEED)
+}
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -355,6 +562,7 @@ mod tests {
         PilotConfig {
             phase: teacher_pilot::Phase::Depth6Throughput,
             main_volume_n: None,
+            common_study: None,
             ruleset: Ruleset::Standard2pThreefold,
             run_id: "affected-source-fixture".into(),
             output: teacher_pilot::depth6::OUTPUT.into(),
@@ -656,6 +864,7 @@ mod tests {
                 .unwrap(),
             used: 0,
             cap: 4 * 1024 * 1024,
+            gzip: None,
         };
         s.append(&requests(&c, "fixture")).unwrap();
         s.append(&Record::Header(Box::new(h.clone()))).unwrap();
@@ -696,5 +905,52 @@ mod tests {
         assert_eq!(saved.depth6.unwrap().completed_games_per_hour, None);
         fs::remove_file(path.join("pilot-stream.jsonl")).unwrap();
         fs::remove_dir(path).unwrap();
+    }
+    #[test]
+    fn streaming_failure_footer_matches_original_census_without_game_body_vector() {
+        let scheduled = (0..4)
+            .map(|game| ScheduledGame {
+                game,
+                request_id: format!("synthetic-{game}"),
+                requested_prefix_length: 4,
+                prefix: None,
+                canonical_prefix: None,
+                root: None,
+                attempts: vec![],
+                scheduled_failure: Some("synthetic input failure".into()),
+            })
+            .collect();
+        let h = PilotHeader {
+            schema: SCHEMA.into(),
+            generator_version: teacher_pilot::depth6::VERSION.into(),
+            config: config(),
+            config_sha256: "synthetic".into(),
+            executable_sha256: "synthetic".into(),
+            compiled_sources: BTreeMap::new(),
+            evaluator: EVALUATOR_ID.into(),
+            scheduled,
+            family_partition: FamilyPartition {
+                schema: "synthetic".into(),
+                seed: 1,
+                rounding: "synthetic".into(),
+                assignments: vec![],
+            },
+            resource_admission: Value::Null,
+        };
+        let records = (0..4)
+            .map(|i| Outcome::Failed {
+                started: i % 2 == 0,
+                reason: "original synthetic failure".into(),
+            })
+            .collect::<Vec<Outcome<GameRecord>>>();
+        let expected = summarize_results(&h, &records, 2).unwrap();
+        let mut running = StreamReport::new(&h).unwrap();
+        for (i, r) in records.iter().enumerate() {
+            running.push(&h, i, r).unwrap();
+        }
+        assert_eq!(
+            serde_json::to_value(running.finish(2).unwrap()).unwrap(),
+            serde_json::to_value(expected).unwrap()
+        );
     }
 }

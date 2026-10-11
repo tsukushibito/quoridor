@@ -230,6 +230,12 @@ def require_completed_stream_cache(path, manifest, *, full_volume=False):
         raise ValueError("human full N is unset; reference/fixture cache cannot fit")
     if intake.get("publication_protocol") != "incomplete-marker-last-v1":
         raise ValueError("completed stream publication protocol required")
+    if manifest.get("schema") == "quoridor-common-corpus-terminal-geometry-v2":
+        if intake.get("scope") != "common-corpus":
+            raise ValueError("compressed common cache requires explicit common scope")
+        phase = "common_corpus"  # Its actual bound config is joined by the v2 source reader.
+    else:
+        phase = intake.get("provenance", {}).get("header", {}).get("config", {}).get("phase")
     if intake.get("scope") != "synthetic-fixture":
         header = intake.get("provenance", {}).get("header", {})
         source = header.get("compiled_sources")
@@ -241,7 +247,7 @@ def require_completed_stream_cache(path, manifest, *, full_volume=False):
             or any("synthetic" in key for key in source)
             or any(
                 not isinstance(v, str) or "synthetic" in v or "fixture" in v
-                for v in (header.get("generator_version"), header.get("config", {}).get("phase"))
+                for v in (header.get("generator_version"), phase)
             )
         ):
             raise ValueError(

@@ -21,6 +21,7 @@ pub const PILOT_OUTPUT: &str =
 pub enum Phase {
     Pilot64,
     Depth6Throughput,
+    CommonCorpus,
 }
 
 /// This entry has no full-generation, fitting or development-games mode.
@@ -29,6 +30,8 @@ pub enum Phase {
 pub struct PilotConfig {
     pub phase: Phase,
     pub main_volume_n: Option<u64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub common_study: Option<quoridor_data::common_corpus::Config>,
     #[serde(with = "crate::config::ruleset_serde")]
     pub ruleset: Ruleset,
     pub run_id: String,
@@ -58,10 +61,11 @@ pub struct PilotConfig {
 
 impl PilotConfig {
     pub fn validate(&self) -> Result<()> {
-        if matches!(self.phase, Phase::Depth6Throughput) {
+        if matches!(self.phase, Phase::Depth6Throughput | Phase::CommonCorpus) {
             return depth6::validate(self);
         }
-        if self.main_volume_n.is_some()
+        if self.common_study.is_some()
+            || self.main_volume_n.is_some()
             || self.game_workers.is_some()
             || !self.worker_cores.is_empty()
             || self.ruleset != Ruleset::Standard2pThreefold
@@ -254,13 +258,29 @@ fn schedule_requests(
     independent: bool,
     mut draw: impl FnMut(&mut Rng, u16) -> Result<(Vec<u16>, SigmaContext)>,
 ) -> Result<Vec<ScheduledGame>> {
-    let mut rng = Rng::new(PREFIX_SEED);
+    schedule_requests_with_seed(
+        requests,
+        independent,
+        PREFIX_SEED,
+        depth6::game_seed,
+        &mut draw,
+    )
+}
+
+fn schedule_requests_with_seed(
+    requests: Vec<(String, u16)>,
+    independent: bool,
+    seed: u64,
+    game_seed: impl Fn(&str) -> u64,
+    mut draw: impl FnMut(&mut Rng, u16) -> Result<(Vec<u16>, SigmaContext)>,
+) -> Result<Vec<ScheduledGame>> {
+    let mut rng = Rng::new(seed);
     let mut used = BTreeSet::new();
     let mut games = Vec::with_capacity(PILOT_GAMES);
     for (request_id, length) in requests {
         let game = games.len();
         if independent {
-            rng = Rng::new(depth6::game_seed(&request_id));
+            rng = Rng::new(game_seed(&request_id));
         }
         let mut slot = ScheduledGame {
             game,

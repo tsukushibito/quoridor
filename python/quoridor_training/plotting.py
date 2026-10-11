@@ -63,6 +63,7 @@ def render_learning_curves(
         "fixed_diagnostic_subset": "#1768c5",
         "train_scope_unavailable": "#67778b",
         "full_selector": "#ce3945",
+        "validation_full_not_selector": "#ce3945",
         "validation_diagnostic_subset": "#ab569a",
     }
     labels = {
@@ -70,6 +71,7 @@ def render_learning_curves(
         "fixed_diagnostic_subset": "Train: fixed diagnostic subset",
         "train_scope_unavailable": "Train: scope unavailable",
         "full_selector": "Validation: full selector",
+        "validation_full_not_selector": "Validation: full held-family, not used for selection",
         "validation_diagnostic_subset": "Validation: diagnostic subset",
     }
 
@@ -79,6 +81,8 @@ def render_learning_curves(
                 return "fixed_diagnostic_subset"
             current = point.get("train_scope", "train_scope_unavailable")
             return current if current in colors else "train_scope_unavailable"
+        if point.get("validation_scope") == "full_held_family_not_selector":
+            return "validation_full_not_selector"
         return (
             "validation_diagnostic_subset"
             if point.get("used_for_selection") is False

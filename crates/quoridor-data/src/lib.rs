@@ -1166,3 +1166,9 @@ pub fn write_input_references(dataset: &Path, output: &Path, allow_test: bool) -
     out.flush()?;
     Ok(count)
 }
+
+/// Selected common-corpus choices and lossless completed-root codec.
+pub mod common_corpus;
+
+/// Canonical lossless detailed streams and logical content identity.
+pub mod lossless_jsonl;

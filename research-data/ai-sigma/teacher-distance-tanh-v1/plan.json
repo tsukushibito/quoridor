@@ -519,7 +519,7 @@
   "next_learning_study": {
     "issue": "quoridor-4lc.362",
     "human_direction_record": "epicnotes2026-10-11T03:08:11Z",
-    "direction_status": "APPROVED_SOURCE_PREPARATION_AND_TWO_TEACHER_WARMSTART_DIRECTION",
+    "direction_status": "HUMAN_SELECTED_ONE8_GAME_TWO200_UPDATE_CYCLE_EXECUTION_AUTHORIZED",
     "source_tasks": {
       "learner": "quoridor-4lc.362.1",
       "data_generator": "quoridor-4lc.362.2"
@@ -532,9 +532,20 @@
     "starting_checkpoint_immutable": true,
     "corpus": {
       "source": "NEW fixedD self-play mainline decisions requested/completeddepth6; save actual final outcome z and raw completed root search value with STM/fullhistory/rules/source/model/units/family provenance",
-      "quantity_families": null,
-      "blind_schedule": null,
-      "whole_family_T_V_partition": null,
+      "quantity_families": 8,
+      "blind_schedule": {
+        "prefix_lengths": [4, 8, 12, 16],
+        "each": 2,
+        "generation_seed": 36220261013,
+        "partition_seed": 36220261014,
+        "preoutcome_selection": true
+      },
+      "whole_family_T_V_partition": {
+        "T": 6,
+        "V": 2,
+        "method": "canonical_LR_family_SHA256_seed_rank_train_floor_4F_over_5",
+        "partition_seed": 36220261014
+      },
       "offtrajectory_rows": 0,
       "eligibility": "SAME fixed eligible rows for BOTH candidates; completed6 nonterminal mainline decisions plus actual final goal/draw outcome; partial/capped/missing/UNKNOWN explicit denominators. Root terminal +/-2 is not ordinary tanh target; target transformation/terminal handling must be explicitly bound before results, never silently clipped or invented."
     },
@@ -554,15 +565,21 @@
     ],
     "fixed_model_contract": "FT32/H32 Zero4/QF1 tanh FP32/native conventions; retain standardized head-distance INPUT/incumbent T-only head scale; OUTPUT bypass OFF. No newT renormalization, head reset/freeze, teacher mixing, extra fits or old optimizer resume.",
     "common_learner_settings": null,
-    "range_terminal_handling": null,
-    "assessment_counts": null,
+    "range_terminal_handling": "exclude_outside_unit",
+    "assessment_counts": {
+      "pilot_only": true,
+      "fit_runs": 2,
+      "updates_each": 200,
+      "interval": 20,
+      "strength_games": 0
+    },
     "assessment_sequence": [
       "readable INITIAL/BEST/LAST/baseline curves on BOTH teachers, train versus held-familyV separately; oldopenedV only comparable; cross-teacher MSE not ranking",
       "Policy presentation by event BEFORE games, no human replyACK",
       "qualified candidates versus frozenBEST43 plus fixedD on outcome-independent disjointfamilies; same completed-depth decisions and100ms play separate"
     ],
-    "pending_human_decision_package": "Select the one8-game/two200-update pilot recommendation (quantity/horizon/LR/mapping/draw) once. Existing32/64/128 large option estimates retained unissued history; no pilot entry until selected and ordinarily supported source/runtime/whole guards.",
-    "scientific_entry": false,
+    "pending_human_decision_package": null,
+    "scientific_entry": true,
     "learning_or_games_started": false,
     "limits": "D6 estimates are teachers/reference estimates, not truth; controlled teacher-content contrast not universal cause proof. Sigma later only; original323USERPAUSE/seals/defaults/Nfullgen remain held.",
     "common_cache_interface": {
@@ -578,8 +595,8 @@
       "legacy_rootmean_is_raw": false,
       "required_range_options": ["exclude_outside_unit", "divide_by_two"],
       "required_draw_options": ["include_threefold", "exclude_threefold"],
-      "selected_range_policy": null,
-      "selected_draw_policy": null,
+      "selected_range_policy": "exclude_outside_unit",
+      "selected_draw_policy": "include_threefold",
       "common_partition": "canonical_LR_family_SHA256_seed_rank_train_floor_4F_over_5",
       "authority": "Selected issued plan identity; same producer mask and partition for both candidates. This interface reference is not source/software/numerical qualification.",
       "prior_v1_interface": {
@@ -641,9 +658,9 @@
         "sha256": "9b321d619fd5f86f6af48bd1f0eaff5633d310a84bbb177c9004bf01caa82736"
       }
     },
-    "preparation_process": "Human2026-10-11 prefers one short retained end-to-end pilot with approximate costs and one supported whole ceiling; stop extending speculative per-file forecasts/large options as entry prerequisite. Important quantity/recipe still needs one human choice; generic bounds/cleanup preserve50GB and UNKNOWN.",
+    "preparation_process": "Important pilot choices NOW selected; use one issued1GiB whole and practical bounds, ordinary repairs/materialization/affectedvalidation autonomously; no more speculative perfile estimates or replyACK.",
     "pilot_decision_proposal": {
-      "human_selected": false,
+      "human_selected": true,
       "planned_new_D6_games": 8,
       "blind_prefix_lengths": [4, 8, 12, 16],
       "families_per_length": 2,
@@ -673,7 +690,7 @@
       "strength_games": 0,
       "rough_wall": "Generation about6-15min and two short fits about1-10min each on retained software; affected build/qualification may dominate. Aim one short working session; not a deadline/completion guarantee.",
       "whole_NEW_storage_ceiling_B": 1073741824,
-      "ceiling_issued": false,
+      "ceiling_issued": true,
       "existing_shared_target_charged_once": true,
       "canonical_compressed_output_cap_B": 268435456,
       "whole_generation_nodes_cap": 1000000000,
@@ -684,6 +701,9 @@
       "whole_operational_wall_stop_seconds": 5400,
       "caps": "Node/wall/ply/IO/nonfinite/error stops preserve actual partial/failed outputs and planned missing UNKNOWN; no lower-depth rescue/refill/pretendedcompleted6 or invented convergence. Require nonempty common eligibleT andV before fits.",
       "estimation_only_labor": "UNKNOWN;03:29:23 to06:38:47=3h9m24s elapsed includes implementation/compression/repairs/review/scheduling, not estimation labor."
-    }
+    },
+    "pilot_selected_on": "2026-10-11 explicit human良いよ in Policy and epic notes",
+    "whole_support": "research-data/ai-sigma/teacher-distance-tanh-v1/common-corpus-pilot-whole-support-v1.json",
+    "common_learner_settings_materialization": "SAME learner now materializes complete explicit canonical normalized recipe implementing these selected choices; no remaining human method/quantity/settings approval. Root binds exact draft before assets/framework execution."
   }
 }

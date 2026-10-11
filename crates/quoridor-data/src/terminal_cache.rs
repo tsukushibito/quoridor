@@ -19,10 +19,66 @@ const NAMES: [&str; 5] = [
     "rows.jsonl",
 ];
 
+enum Output {
+    Plain(BufWriter<std::fs::File>),
+    Gzip(crate::lossless_jsonl::Writer),
+}
+impl Write for Output {
+    fn write(&mut self, raw: &[u8]) -> std::io::Result<usize> {
+        match self {
+            Self::Plain(w) => w.write(raw),
+            Self::Gzip(w) => {
+                w.append(raw)
+                    .map_err(|e| std::io::Error::other(e.to_string()))?;
+                Ok(raw.len())
+            }
+        }
+    }
+    fn flush(&mut self) -> std::io::Result<()> {
+        match self {
+            Self::Plain(w) => w.flush(),
+            Self::Gzip(w) => w
+                .sync_data()
+                .map_err(|e| std::io::Error::other(e.to_string())),
+        }
+    }
+}
+impl Output {
+    fn finish(self) -> Result<Option<crate::lossless_jsonl::Content>> {
+        match self {
+            Self::Gzip(mut w) => {
+                let c = w.finish()?;
+                crate::lossless_jsonl::verify(&c)?;
+                Ok(Some(c))
+            }
+            Self::Plain(mut w) => {
+                let primary = w.flush().err();
+                let secondary = w.get_ref().sync_all().err();
+                let (file, _) = w.into_parts();
+                drop(file);
+                if primary.is_some() || secondary.is_some() {
+                    return Err(
+                        format!("primary_flush:{primary:?};secondary_sync:{secondary:?}").into(),
+                    );
+                }
+                Ok(None)
+            }
+        }
+    }
+    fn abort(self) -> Vec<String> {
+        match self.finish() {
+            Ok(_) => vec![],
+            Err(e) => vec![e.to_string()],
+        }
+    }
+}
+
 pub(crate) struct Writer {
     output: PathBuf,
-    streams: Vec<BufWriter<std::fs::File>>,
+    streams: Vec<Output>,
     count: usize,
+    common: Option<crate::common_corpus::Config>,
+    common_eligible: usize,
 }
 
 impl Writer {
@@ -32,33 +88,64 @@ impl Writer {
 
     pub(crate) fn abort(mut self) -> Vec<String> {
         let mut failures = Vec::new();
-        for mut stream in self.streams.drain(..) {
-            if let Err(error) = stream.flush() {
-                failures.push(error.to_string());
-            }
-            // Avoid an unobserved second flush during BufWriter::drop.
-            let (file, _) = stream.into_parts();
-            drop(file);
+        for stream in self.streams.drain(..) {
+            failures.extend(stream.abort());
         }
         failures
     }
     pub(crate) fn new(output: &Path) -> Result<Self> {
+        Self::create(output, None)
+    }
+    pub(crate) fn new_common(output: &Path, common: crate::common_corpus::Config) -> Result<Self> {
+        common.validate_selected()?;
+        Self::create(output, Some(common))
+    }
+    fn names(common: bool) -> Vec<&'static str> {
+        let mut names = NAMES.to_vec();
+        if common {
+            names[4] = "rows.jsonl.gz";
+            names.extend(["completed-root-raw.f32", "common-eligible.u8"]);
+        }
+        names
+    }
+    fn create(output: &Path, common: Option<crate::common_corpus::Config>) -> Result<Self> {
         fs::create_dir(output)?;
-        let streams = NAMES
+        let streams = Self::names(common.is_some())
             .iter()
-            .map(|name| {
-                Ok(BufWriter::new(
-                    OpenOptions::new()
-                        .create_new(true)
-                        .write(true)
-                        .open(output.join(name))?,
-                ))
+            .enumerate()
+            .map(|(index, name)| {
+                if common.is_some() && index == 4 {
+                    let rows = common
+                        .as_ref()
+                        .ok_or("common metadata")?
+                        .families
+                        .checked_mul(200)
+                        .ok_or("index row bound")?;
+                    let raw_cap = rows.checked_mul(2049).ok_or("index byte bound")?;
+                    Ok(Output::Gzip(crate::lossless_jsonl::Writer::create(
+                        &output.join(name),
+                        raw_cap,
+                        raw_cap
+                            .checked_add(raw_cap / 20)
+                            .and_then(|n| n.checked_add(1048576))
+                            .ok_or("gzip index bound")?,
+                    )?))
+                } else {
+                    Ok(Output::Plain(BufWriter::new(
+                        OpenOptions::new()
+                            .create_new(true)
+                            .write(true)
+                            .open(output.join(name))?,
+                    )))
+                }
             })
             .collect::<Result<Vec<_>>>()?;
         Ok(Self {
             output: output.into(),
             streams,
             count: 0,
+            common,
+            common_eligible: 0,
         })
     }
 
@@ -67,6 +154,27 @@ impl Writer {
         r: &TeacherRow,
         evidence: Option<serde_json::Value>,
     ) -> Result<()> {
+        // Pure raw/provenance checks precede geometry or any row publication.
+        let common_labels = self
+            .common
+            .as_ref()
+            .map(|common| -> Result<_> {
+                let raw = crate::common_corpus::raw_completed_d6(
+                    r,
+                    evidence.as_ref().ok_or("missing D6 evidence")?,
+                )?;
+                let outcome = r
+                    .terminal_targets
+                    .as_ref()
+                    .ok_or("missing outcome provenance")?
+                    .outcome_z;
+                if r.z.map(f32::to_bits) != outcome.map(f32::from).map(f32::to_bits) {
+                    return Err("raw outcome z differs from actual terminal targets".into());
+                }
+                let (eligible, target) = common.targets(raw, outcome, r.eligible)?;
+                Ok((raw, eligible, target))
+            })
+            .transpose()?;
         // Both maintained callers validate before serialization.
         let targets = r
             .terminal_targets
@@ -131,10 +239,45 @@ impl Writer {
             "distance":r.distance, "distance_order":"STM_then_opponent_f32", "tensor_view_order":"STM_then_opponent",
             "input_geometry_SHA256":input_sha, "action":r.action, "search":r.teacher,
         });
+        if let Some((raw, eligible, target)) = common_labels {
+            self.streams[5].write_all(&raw.to_le_bytes())?;
+            self.streams[6].write_all(&[u8::from(eligible)])?;
+            self.common_eligible += usize::from(eligible);
+            metadata["completed_root_raw"] = serde_json::json!(raw);
+            metadata["completed_root_raw_bits"] = serde_json::json!(raw.to_bits());
+            metadata["common_eligible"] = serde_json::json!(eligible);
+            metadata["teacher_B_target"] = serde_json::json!(target);
+            metadata["raw_value_perspective"] = serde_json::json!("root_side_to_move");
+            metadata["raw_value_units"] =
+                serde_json::json!("maintained_fixedD_a0b8_tanh_nonterminal_abs1_terminal_abs2");
+            metadata["rootmean_semantics"] =
+                serde_json::json!("legacy_Teacher_value_terminal2_to_sign_NOT_raw_D6");
+        }
         if let Some(evidence) = evidence {
             metadata["stream_evidence"] = evidence;
         }
-        serde_json::to_writer(&mut self.streams[4], &metadata)?;
+        if self.common.is_some() {
+            let source = &metadata["stream_evidence"];
+            let index = serde_json::json!({"metadata_schema":"quoridor-common-corpus-row-index-v2",
+                "id":r.id,"group":r.family,"game":r.game,"split":r.split,"primary_eligible":r.eligible,
+                "common_eligible":metadata["common_eligible"],"completed_root_raw_bits":metadata["completed_root_raw_bits"],
+                "z":r.z,"teacher_B_target":metadata["teacher_B_target"],
+                "input_geometry_SHA256":metadata["input_geometry_SHA256"],
+                "source_record_offset":source["source_record_offset"],"source_row_index":source["source_row_index"],
+                "source_record_sha256":source["game_record_sha256"]});
+            if index["source_record_offset"].as_u64().is_none()
+                || index["source_row_index"].as_u64().is_none()
+            {
+                return Err("canonical source index required before metadata publication".into());
+            }
+            let raw = serde_json::to_vec(&index)?;
+            if raw.len() > 2048 {
+                return Err("minimal common cache index upper refused; partial unadmitted".into());
+            }
+            self.streams[4].write_all(&raw)?;
+        } else {
+            serde_json::to_writer(&mut self.streams[4], &metadata)?;
+        }
         self.streams[4].write_all(b"\n")?;
         self.count += 1;
         Ok(())
@@ -144,29 +287,44 @@ impl Writer {
         mut self,
         dataset_sha: String,
         allow_test: bool,
-        extra: serde_json::Map<String, serde_json::Value>,
+        mut extra: serde_json::Map<String, serde_json::Value>,
     ) -> Result<TensorCache> {
         let mut errors = Vec::new();
-        for mut stream in self.streams.drain(..) {
-            if let Err(e) = stream.flush() {
-                errors.push(e);
+        let mut compressed_metadata = serde_json::Map::new();
+        let names = Self::names(self.common.is_some());
+        for (index, stream) in self.streams.drain(..).enumerate() {
+            match stream.finish() {
+                Ok(Some(mut content)) => {
+                    // These references are candidates in the partial manifest until existing marker-last publication.
+                    let published = self
+                        .output
+                        .parent()
+                        .ok_or("publication parent")?
+                        .join(names[index]);
+                    content.compressed.path = published;
+                    compressed_metadata.insert(names[index].into(), serde_json::to_value(content)?);
+                }
+                Ok(None) => {}
+                Err(e) => errors.push(e.to_string()),
             }
-            if let Err(e) = stream.get_ref().sync_all() {
-                errors.push(e);
-            }
-            let (file, _) = stream.into_parts();
-            drop(file);
         }
         if !errors.is_empty() {
-            let primary = errors.remove(0);
-            return Err(Box::new(FinalizationError {
-                primary,
-                others: errors,
-            }));
+            return Err(format!(
+                "cache finalization primary:{};secondaries:{:?}",
+                errors[0],
+                &errors[1..]
+            )
+            .into());
+        }
+        if self.common.is_some() {
+            extra.insert(
+                "compressed_metadata".into(),
+                serde_json::Value::Object(compressed_metadata),
+            );
         }
         let mut files = BTreeMap::new();
         let mut hashes = BTreeMap::new();
-        for name in NAMES {
+        for name in Self::names(self.common.is_some()) {
             files.insert(name.into(), name.into());
             hashes.insert(name.into(), file_sha(&self.output.join(name))?);
         }
@@ -177,13 +335,37 @@ impl Writer {
             sha256: hashes,
             dataset_sha,
             allow_test,
-            schema: Some(CACHE_SCHEMA.into()),
-            label_columns: Some(vec![
-                "rootmean".into(),
-                "z".into(),
-                "terminal_margin".into(),
-            ]),
+            schema: Some(
+                if self.common.is_some() {
+                    crate::common_corpus::CACHE_SCHEMA
+                } else {
+                    CACHE_SCHEMA
+                }
+                .into(),
+            ),
+            label_columns: Some(if self.common.is_some() {
+                vec![
+                    "rootmean".into(),
+                    "z".into(),
+                    "terminal_margin".into(),
+                    "completed_root_raw".into(),
+                ]
+            } else {
+                vec!["rootmean".into(), "z".into(), "terminal_margin".into()]
+            }),
         };
+        if let Some(common) = &self.common {
+            extra.insert(
+                "common_corpus".into(),
+                serde_json::json!({"config":common,
+                "common_eligible_rows":self.common_eligible,"planned_families":common.families,
+                "raw_file":"completed-root-raw.f32","common_mask_file":"common-eligible.u8",
+                "teacher_A":"actual_final_z","teacher_B":"explicit_mapping_of_completed_root_raw",
+                "rootmean_is_raw":false,"same_mask_and_family_partition_for_both":true,
+                "row_index_file":"rows.jsonl.gz","source_offset_domain":"canonical_gzip_uncompressed_bytes_from_zero",
+                "cache_lifetime":"ONE shared binary cache until BOTH consumersSTOP; reconstructed from canonical source/schema/Git/config before authorized retirement"}),
+            );
+        }
         let mut value = serde_json::to_value(&manifest)?;
         value.as_object_mut().ok_or("cache object")?.extend(extra);
         let mut file = OpenOptions::new()
@@ -204,24 +386,4 @@ pub fn write(dataset: &Path, output: &Path, allow_test: bool) -> Result<TensorCa
         allow_test,
         serde_json::Map::new(),
     )
-}
-
-#[derive(Debug)]
-struct FinalizationError {
-    primary: std::io::Error,
-    others: Vec<std::io::Error>,
-}
-impl std::fmt::Display for FinalizationError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(
-            f,
-            "primary IO: {}; other flush/sync errors: {:?}",
-            self.primary, self.others
-        )
-    }
-}
-impl std::error::Error for FinalizationError {
-    fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
-        Some(&self.primary)
-    }
 }

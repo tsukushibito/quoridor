@@ -21,7 +21,7 @@ use sha2::{Digest, Sha256};
 use std::{
     collections::{BTreeMap, BTreeSet},
     fs::{self, File, OpenOptions},
-    io::{BufRead, BufReader, Write},
+    io::{BufRead, BufReader, Read, Write},
     path::Path,
     sync::{
         Arc,
@@ -450,16 +450,62 @@ struct Stream {
     file: File,
     used: u64,
     cap: u64,
+    gzip: Option<quoridor_data::lossless_jsonl::Writer>,
 }
 impl Stream {
+    fn compressed(path: &Path, cap: u64) -> Result<Self> {
+        let gzip = quoridor_data::lossless_jsonl::Writer::create(
+            &path.join("pilot-stream.jsonl.gz"),
+            cap,
+            cap,
+        )?;
+        let file = File::open(path.join("pilot-stream.jsonl.gz"))?;
+        Ok(Self {
+            file,
+            used: 0,
+            cap,
+            gzip: Some(gzip),
+        })
+    }
+    fn finish(&mut self, path: &Path) -> Result<()> {
+        if let Some(gzip) = &mut self.gzip {
+            let content = gzip.finish()?;
+            // Encoding correspondence only, never an authoritative science result.
+            quoridor_data::lossless_jsonl::verify(&content)?;
+            let raw = serde_json::to_vec(&content)?;
+            if raw.len() > 65536
+                || self
+                    .file
+                    .metadata()?
+                    .len()
+                    .checked_add(raw.len() as u64)
+                    .is_none_or(|n| n > self.cap)
+            {
+                return Err("compressed stream+content reference upper refused".into());
+            }
+            let mut f = OpenOptions::new()
+                .create_new(true)
+                .write(true)
+                .open(path.join("stream-content.json"))?;
+            f.write_all(&raw)?;
+            f.sync_all()?;
+        }
+        Ok(())
+    }
     fn append(&mut self, value: &impl Serialize) -> Result<()> {
         let raw = serde_json::to_vec(value)?;
         if raw.len() > GAME_BYTES || self.used + raw.len() as u64 + 1 > self.cap {
             return Err("pilot serialization/output upper refused".into());
         }
-        self.file.write_all(&raw)?;
-        self.file.write_all(b"\n")?;
-        self.file.sync_data()?;
+        if let Some(gzip) = &mut self.gzip {
+            gzip.append(&raw)?;
+            gzip.append(b"\n")?;
+            gzip.sync_data()?;
+        } else {
+            self.file.write_all(&raw)?;
+            self.file.write_all(b"\n")?;
+            self.file.sync_data()?;
+        }
         self.used += raw.len() as u64 + 1;
         Ok(())
     }
@@ -479,6 +525,26 @@ pub fn compiled_sources() -> BTreeMap<String, String> {
         .map(|(path, hash)| (path.to_owned(), hash))
         .collect();
     for (path, bytes) in [
+        (
+            "crates/quoridor-data/src/lossless_jsonl.rs",
+            include_bytes!("../../quoridor-data/src/lossless_jsonl.rs").as_slice(),
+        ),
+        (
+            "crates/quoridor-data/src/lib.rs",
+            include_bytes!("../../quoridor-data/src/lib.rs").as_slice(),
+        ),
+        (
+            "crates/quoridor-data/src/terminal_cache.rs",
+            include_bytes!("../../quoridor-data/src/terminal_cache.rs").as_slice(),
+        ),
+        (
+            "crates/quoridor-data/src/terminal_stream.rs",
+            include_bytes!("../../quoridor-data/src/terminal_stream.rs").as_slice(),
+        ),
+        (
+            "crates/quoridor-data/src/common_corpus.rs",
+            include_bytes!("../../quoridor-data/src/common_corpus.rs").as_slice(),
+        ),
         (
             "crates/quoridor-runner/src/teacher_pilot.rs",
             include_bytes!("teacher_pilot.rs").as_slice(),
@@ -509,9 +575,40 @@ pub fn compiled_sources() -> BTreeMap<String, String> {
     bindings
 }
 
+fn stream_reader(path: &Path) -> Result<Box<dyn Read>> {
+    if path.join("pilot-stream.jsonl.gz").exists() {
+        if path.join("pilot-stream.jsonl").exists() {
+            return Err("duplicate authoritative raw/gzip stream refused".into());
+        }
+        let content_path = path.join("stream-content.json");
+        if fs::metadata(&content_path)?.len() > 65536 {
+            return Err("encoding content reference bound".into());
+        }
+        let mut raw = Vec::new();
+        File::open(content_path)?
+            .take(65537)
+            .read_to_end(&mut raw)?;
+        if raw.len() > 65536 {
+            return Err("encoding content reference grew past bound".into());
+        }
+        let content: quoridor_data::lossless_jsonl::Content = serde_json::from_slice(&raw)?;
+        if content.compressed.path != path.join("pilot-stream.jsonl.gz") {
+            return Err("canonical compressed stream path differs".into());
+        }
+        Ok(Box::new(quoridor_data::lossless_jsonl::Reader::open(
+            &content,
+        )?))
+    } else {
+        Ok(Box::new(File::open(path.join("pilot-stream.jsonl"))?))
+    }
+}
+
 /// No inference backend or model loading: one serial fixed-D process.
 pub fn run(config: &PilotConfig, config_sha256: String) -> Result<PilotReport> {
-    if matches!(config.phase, teacher_pilot::Phase::Depth6Throughput) {
+    if matches!(
+        config.phase,
+        teacher_pilot::Phase::Depth6Throughput | teacher_pilot::Phase::CommonCorpus
+    ) {
         return depth6::run(config, config_sha256, &AtomicBool::new(false));
     }
     config.validate()?;
@@ -533,6 +630,7 @@ pub fn run(config: &PilotConfig, config_sha256: String) -> Result<PilotReport> {
             .open(config.output.join("pilot-stream.jsonl"))?,
         used: 0,
         cap: config.max_output_bytes,
+        gzip: None,
     };
     // All64 requests persist even if later prefix generation/setup fails.
     stream.append(
@@ -1171,6 +1269,7 @@ mod tests {
             config: PilotConfig {
                 phase: teacher_pilot::Phase::Pilot64,
                 main_volume_n: None,
+                common_study: None,
                 ruleset: Ruleset::Standard2pThreefold,
                 run_id: "isolated-footer-fixture".into(),
                 output: teacher_pilot::PILOT_OUTPUT.into(),

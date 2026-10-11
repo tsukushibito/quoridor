@@ -26,7 +26,7 @@ pub struct BoundJson {
     pub sha256: String,
 }
 impl BoundJson {
-    fn read(&self) -> Result<Value> {
+    pub(crate) fn read(&self) -> Result<Value> {
         valid_sha(&self.sha256)?;
         if fs::metadata(&self.path)?.len() > 64 * 1024 * 1024 {
             return Err("oversized control".into());
@@ -50,7 +50,12 @@ pub struct IntakeBinding {
     pub sources: BoundJson,
     pub schedule: BoundJson,
     pub requests_sha256: String,
+    /// Logical uncompressed byte allowance; actual gzip bytes are separately priced.
     pub max_stream_bytes: u64,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub max_compressed_bytes: Option<u64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub stream_content: Option<crate::lossless_jsonl::Content>,
     pub max_line_bytes: usize,
 }
 fn valid_sha(value: &str) -> Result<()> {
@@ -199,6 +204,8 @@ struct Census {
     committed_stream_bytes_before_footer: u64,
     native_whole_ns: u64,
     full_volume_n: Option<u64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    depth6: Option<Value>,
 }
 fn number(v: &Value, key: &str) -> Result<u64> {
     v[key]
@@ -221,7 +228,12 @@ fn validate_header(
     requests: &Value,
     requests_sha: &str,
 ) -> Result<()> {
-    if h.schema != STREAM_SCHEMA
+    if h.schema
+        != if b.scope == "common-corpus" {
+            crate::common_corpus::STREAM_SCHEMA
+        } else {
+            STREAM_SCHEMA
+        }
         || h.evaluator != EVALUATOR
         || h.config != b.config.read()?
         || h.config_sha256 != b.config.sha256
@@ -246,6 +258,27 @@ fn validate_header(
         return Err("header/request/fixedD configuration binding mismatch".into());
     }
     SearchPolicy::from_config(&h.config)?;
+    let common = if b.scope == "common-corpus" {
+        Some(common_config(&h.config)?)
+    } else {
+        None
+    };
+    if let Some(common) = &common {
+        if h.generator_version != crate::common_corpus::VERSION
+            || h.config["main_volume_n"].as_u64() != Some(common.families)
+            || b.human_quantity_n != Some(common.families)
+            || common.families != h.scheduled.len() as u64
+            || h.config["prefix_seed"].as_u64() != Some(common.prefix_seed)
+            || requests["requested"] != serde_json::to_value(common.requests()?)?
+        {
+            return Err("selected new-family request/depth/version/quantity binding".into());
+        }
+        for (slot, (id, length)) in h.scheduled.iter().zip(common.requests()?) {
+            if slot.request_id != id || slot.requested_prefix_length != length {
+                return Err("new-family fixed request order differs".into());
+            }
+        }
+    }
     if b.scope != "synthetic-fixture" {
         refuse_synthetic(&h.config, &b.sources.read()?)?;
     }
@@ -255,7 +288,7 @@ fn validate_header(
         {
             return Err("full schedule N mismatch".into());
         }
-    } else if !h.config["main_volume_n"].is_null() {
+    } else if b.scope != "common-corpus" && !h.config["main_volume_n"].is_null() {
         return Err("reference/fixture cannot declare full N".into());
     }
     if b.scope == "synthetic-fixture" && h.resource_admission["synthetic_fixture"] != true {
@@ -305,6 +338,23 @@ fn validate_header(
         {
             return Err("schedule identities/attempt census".into());
         }
+        if common.is_some()
+            && s.scheduled_failure
+                .as_deref()
+                .is_some_and(|e| e.starts_with("prefix_error:"))
+        {
+            if s.prefix.is_some()
+                || s.root.is_some()
+                || s.canonical_prefix.is_some()
+                || s.attempts.len() != 1
+                || s.attempts[0].attempt != 0
+                || !s.attempts[0].prefix.is_empty()
+                || s.attempts[0].rejection != s.scheduled_failure
+            {
+                return Err("opaque prefix failure cannot create input or labels".into());
+            }
+            continue;
+        }
         for (j, a) in s.attempts.iter().enumerate() {
             if a.attempt != j {
                 return Err("attempt chronology gap".into());
@@ -352,7 +402,9 @@ fn validate_header(
     }
     if serde_json::to_value(partition_families(
         &planned,
-        number(&h.config, "prefix_seed")?,
+        common
+            .as_ref()
+            .map_or(number(&h.config, "prefix_seed")?, |c| c.split_seed),
     )?)? != serde_json::to_value(&h.family_partition)?
     {
         return Err("input-only exact/reflected family partition mismatch".into());
@@ -379,6 +431,122 @@ fn scientific_digest(game: &Game) -> Result<String> {
     Ok(hex_digest(&serde_json::to_vec(&value)?))
 }
 
+fn common_config(config: &Value) -> Result<crate::common_corpus::Config> {
+    let common: crate::common_corpus::Config =
+        serde_json::from_value(config["common_study"].clone())?;
+    common.validate_selected()?;
+    if config["phase"] != "common_corpus"
+        || number(config, "depth")? != 6
+        || number(config, "max_nodes")? == 0
+        || config["main_volume_n"].as_u64() != Some(common.families)
+        || number(config, "planned_games")? != common.families
+    {
+        return Err("strict selected common-corpus D6 phase required".into());
+    }
+    Ok(common)
+}
+#[derive(Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct IndexedOutcome {
+    index: usize,
+    result: WorkerOutcome,
+}
+#[derive(Serialize, Deserialize)]
+#[serde(tag = "status", rename_all = "snake_case", deny_unknown_fields)]
+enum WorkerOutcome {
+    Returned { value: Game, whole_ns: u64 },
+    Failed { started: bool, reason: String },
+}
+
+fn common_outcome_work(header: &Header, index: usize, outcome: &WorkerOutcome) -> Result<Value> {
+    Ok(match outcome {
+        WorkerOutcome::Returned { value, whole_ns } => {
+            let mut searches = value.rows.iter().map(|r| &r.search).collect::<Vec<_>>();
+            if let Some(f) = &value.failed_search {
+                searches.push(f);
+            }
+            json!({"returned":true,"started":header.scheduled[index].prefix.is_some(),
+                "prefix_failure":header.scheduled[index].scheduled_failure.is_some(),"whole_ns":whole_ns,
+                "final_ply":value.final_context.as_ref().map(|c|c.ply),
+                "nodes":searches.iter().map(|s|number(&s.counters,"nodes")).collect::<Result<Vec<_>>>()?,
+                "depths":searches.iter().map(|s|s.completed_depth).collect::<Vec<_>>(),
+                "opaque":matches!(&value.termination,End::Unknown{reason} if reason.starts_with("search_error:"))})
+        }
+        WorkerOutcome::Failed { started, .. } => json!({"returned":false,"started":started}),
+    })
+}
+
+fn common_depth_census(header: &Header, outcomes: &[Value]) -> Result<Value> {
+    let workers = number(&header.config, "game_workers")?;
+    let mut d = json!({"policy":crate::common_corpus::VERSION,"requested_depth":6,
+        "max_nodes":number(&header.config,"max_nodes")?,"game_workers":workers,"search_threads_per_game":1,
+        "queue_slots_per_worker":1,"workers_joined":workers,"started":0,"failed_workers_or_setup":0,
+        "cancelled_before_start":0,"prefix_failures":0,"opaque_failed_work":0,"game_whole_ns":[],"final_plies":[],
+        "returned_move_nodes":[],"returned_depths":[],
+        "primary_interval":"NOT_RECORDED here: actual controller whole generation+serialization+savedonlyaudit+cleanup receipt required; native_whole_ns excludes final audit/cleanup",
+        "completed_games_per_hour":null,"eligible_rows_per_hour":null});
+    let add = |d: &mut Value, k: &str, n: u64| -> Result<()> {
+        d[k] = json!(
+            number(d, k)?
+                .checked_add(n)
+                .ok_or("depth census overflow")?
+        );
+        Ok(())
+    };
+    for r in outcomes {
+        if r["returned"] == true {
+            add(
+                &mut d,
+                "started",
+                u64::from(r["started"].as_bool().ok_or("start fact")?),
+            )?;
+            add(
+                &mut d,
+                "prefix_failures",
+                u64::from(r["prefix_failure"].as_bool().ok_or("prefix fact")?),
+            )?;
+            d["game_whole_ns"]
+                .as_array_mut()
+                .ok_or("whole census")?
+                .push(r["whole_ns"].clone());
+            d["final_plies"]
+                .as_array_mut()
+                .ok_or("ply census")?
+                .push(r["final_ply"].clone());
+            for node in r["nodes"].as_array().ok_or("node census")? {
+                d["returned_move_nodes"]
+                    .as_array_mut()
+                    .ok_or("node census")?
+                    .push(node.clone());
+            }
+            for depth in r["depths"].as_array().ok_or("depth census")? {
+                d["returned_depths"]
+                    .as_array_mut()
+                    .ok_or("depth census")?
+                    .push(depth.clone());
+            }
+            if r["opaque"] == true {
+                add(&mut d, "opaque_failed_work", 1)?;
+            }
+        } else {
+            let started = r["started"].as_bool().ok_or("failed start fact")?;
+            add(&mut d, "started", u64::from(started))?;
+            add(&mut d, "failed_workers_or_setup", u64::from(started))?;
+            add(&mut d, "cancelled_before_start", u64::from(!started))?;
+            add(&mut d, "opaque_failed_work", u64::from(started))?;
+            d["game_whole_ns"]
+                .as_array_mut()
+                .ok_or("whole census")?
+                .push(Value::Null);
+            d["final_plies"]
+                .as_array_mut()
+                .ok_or("ply census")?
+                .push(Value::Null);
+        }
+    }
+    Ok(d)
+}
+
 /// Configuration is bound input; this never changes the generator's work policy.
 struct SearchPolicy {
     depth: u16,
@@ -394,9 +562,14 @@ impl SearchPolicy {
             None => return Err("explicit node policy required".into()),
         };
         let strict_completed_depth = match config.get("strict_completed_depth") {
-            None => false, // Retained pilot configuration has no strict-depth flag.
+            None => config["phase"] == "common_corpus", // New common phase always requires exact completed6.
             Some(v) => v.as_bool().ok_or("explicit strict-depth boolean")?,
         };
+        if config["phase"] == "common_corpus"
+            && (!strict_completed_depth || depth != 6 || max_nodes.is_none())
+        {
+            return Err("common phase cannot weaken completed6/node policy".into());
+        }
         if depth == 0 {
             return Err("positive completed-depth policy".into());
         }
@@ -603,6 +776,7 @@ fn validate_game(
     census: &mut Census,
     writer: &mut Writer,
     game_sha: &str,
+    source_record_offset: u64,
 ) -> Result<()> {
     let policy = SearchPolicy::from_config(&h.config)?;
     let slot = h.scheduled.get(census.recorded).ok_or("extra game")?;
@@ -624,7 +798,7 @@ fn validate_game(
             || g.family.is_some()
             || g.attempted_search_calls != 0
             || g.failed_search.is_some()
-            || !matches!(&g.termination,End::Unknown{reason} if reason=="prefix_attempts_exhausted")
+            || !matches!(&g.termination,End::Unknown{reason} if Some(reason.as_str())==slot.scheduled_failure.as_deref())
         {
             return Err("exhausted request cannot produce rows/labels/search".into());
         }
@@ -673,7 +847,7 @@ fn validate_game(
     if provenance.reason != label_reason || provenance.detail != detail {
         return Err("terminal/error provenance mismatch".into());
     }
-    for r in &g.rows {
+    for (source_row_index, r) in g.rows.iter().enumerate() {
         if context.terminal_value().is_some()
             || context.total_ply() >= 200
             || r.teacher.prefix != prefix
@@ -734,7 +908,7 @@ fn validate_game(
             &mut census.achieved_depths,
             r.search.completed_depth.to_string(),
         );
-        let evidence = json!({"game_record_sha256":game_sha,"search":r.search,"game_wall_ns":g.wall_ns,"origin":g.origin});
+        let evidence = json!({"game_record_sha256":game_sha,"search":r.search,"game_wall_ns":g.wall_ns,"origin":g.origin,"source_record_offset":source_record_offset,"source_row_index":source_row_index});
         writer.push(&r.teacher, Some(evidence))?;
         context.make_move(action)?;
         prefix.push(action);
@@ -779,7 +953,16 @@ fn scan(input: &Path, b: &IntakeBinding, writer: &mut Writer) -> Result<Value> {
     } else {
         None
     };
-    let mut reader = BufReader::new(File::open(input)?);
+    let source_reader: Box<dyn Read> = if b.scope == "common-corpus" {
+        Box::new(crate::lossless_jsonl::Reader::open(
+            b.stream_content
+                .as_ref()
+                .ok_or("compressed source content required")?,
+        )?)
+    } else {
+        Box::new(File::open(input)?)
+    };
+    let mut reader = BufReader::new(source_reader);
     let mut raw = Vec::new();
     let mut header = None;
     let mut requests = None;
@@ -788,13 +971,57 @@ fn scan(input: &Path, b: &IntakeBinding, writer: &mut Writer) -> Result<Value> {
     let mut before_footer = 0u64;
     let mut total_read = 0u64;
     let mut census = Census::default();
+    let mut common_outcomes = Vec::new();
     let mut positions = BTreeSet::new();
     let mut row_ids = BTreeSet::new();
-    let games_path = writer.output_path().join("stream-games.jsonl");
-    let mut games_file = OpenOptions::new()
-        .create_new(true)
-        .write(true)
-        .open(&games_path)?;
+    let common = b.scope == "common-corpus";
+    let games_name = if common {
+        "stream-games.jsonl.gz"
+    } else {
+        "stream-games.jsonl"
+    };
+    let games_path = writer.output_path().join(games_name);
+    let mut games_file = if common {
+        None
+    } else {
+        Some(
+            OpenOptions::new()
+                .create_new(true)
+                .write(true)
+                .open(&games_path)?,
+        )
+    };
+    let games_raw_cap = b
+        .human_quantity_n
+        .unwrap_or(64)
+        .checked_mul(65537)
+        .ok_or("game index bound")?;
+    let mut games_gzip = if common {
+        Some(crate::lossless_jsonl::Writer::create(
+            &games_path,
+            games_raw_cap,
+            games_raw_cap
+                .checked_add(games_raw_cap / 20)
+                .and_then(|n| n.checked_add(1048576))
+                .ok_or("game gzip bound")?,
+        )?)
+    } else {
+        None
+    };
+    let mut append_game = |value: &Value| -> Result<()> {
+        let mut raw = serde_json::to_vec(value)?;
+        if common && raw.len() > 65536 {
+            return Err("minimal game index upper refused; original source retained".into());
+        }
+        raw.push(b'\n');
+        if let Some(w) = &mut games_gzip {
+            w.append(&raw)?;
+        }
+        if let Some(w) = &mut games_file {
+            w.write_all(&raw)?;
+        }
+        Ok(())
+    };
     loop {
         raw.clear();
         reader
@@ -847,7 +1074,41 @@ fn scan(input: &Path, b: &IntakeBinding, writer: &mut Writer) -> Result<Value> {
                 header = Some(h);
             }
             Some("game") if header.is_some() => {
-                let g: Game = serde_json::from_value(event["record"].clone())?;
+                let g: Game = if b.scope == "common-corpus" {
+                    let record: IndexedOutcome = serde_json::from_value(event["record"].clone())?;
+                    if record.index != census.recorded || record.index >= census.scheduled {
+                        return Err("common indexed planned order differs".into());
+                    }
+                    common_outcomes.push(common_outcome_work(
+                        header.as_ref().ok_or("header")?,
+                        record.index,
+                        &record.result,
+                    )?);
+                    match record.result {
+                        WorkerOutcome::Returned { value, .. } => value,
+                        WorkerOutcome::Failed { reason, .. } => {
+                            if reason.is_empty() {
+                                return Err("failed worker lacks original cause".into());
+                            }
+                            if census.recorded >= census.scheduled {
+                                return Err("extra failed outcome".into());
+                            }
+                            census.recorded += 1;
+                            census.unknown += 1;
+                            append_game(
+                                &json!({"metadata_schema":"quoridor-common-corpus-game-index-v2","game":record.index,
+                                "source_record_offset":total_read-raw.len() as u64,"source_record_sha256":hex_digest(&raw),
+                                "result":event["record"]["result"],"row_count":0}),
+                            )?;
+                            before_footer = before_footer
+                                .checked_add(raw.len() as u64)
+                                .ok_or("stream bytes overflow")?;
+                            continue;
+                        }
+                    }
+                } else {
+                    serde_json::from_value(event["record"].clone())?
+                };
                 validate_origin(&g, &b.scope, &origins)?;
                 if g.rows.len() > 200 {
                     return Err("game row bound".into());
@@ -860,6 +1121,7 @@ fn scan(input: &Path, b: &IntakeBinding, writer: &mut Writer) -> Result<Value> {
                     &mut census,
                     writer,
                     &hex_digest(&raw),
+                    total_read - raw.len() as u64,
                 )?;
                 let game_facts = json!({"game":g.game,"request_id":g.request_id,"family":g.family,
                     "initial_prefix":g.initial_prefix,"final_prefix":g.final_prefix,"final_context":g.final_context,
@@ -867,14 +1129,28 @@ fn scan(input: &Path, b: &IntakeBinding, writer: &mut Writer) -> Result<Value> {
                     "attempted_search_calls":g.attempted_search_calls,"wall_ns":g.wall_ns,
                     "row_ids":g.rows.iter().map(|r|&r.teacher.id).collect::<Vec<_>>(),
                     "source_record_sha256":hex_digest(&raw),"origin":g.origin,"scientific_sha256":scientific_digest(&g)?});
-                serde_json::to_writer(&mut games_file, &game_facts)?;
-                games_file.write_all(b"\n")?;
+                if common {
+                    append_game(
+                        &json!({"metadata_schema":"quoridor-common-corpus-game-index-v2","game":g.game,
+                        "request_id":g.request_id,"family":g.family,"termination":g.termination,
+                        "source_record_offset":total_read-raw.len() as u64,"source_record_sha256":hex_digest(&raw),
+                        "row_count":g.rows.len(),"attempted_search_calls":g.attempted_search_calls,"wall_ns":g.wall_ns}),
+                    )?;
+                } else {
+                    append_game(&game_facts)?;
+                }
             }
             Some("footer") if header.is_some() => {
                 let supplied: Census = serde_json::from_value(event["record"].clone())?;
                 census.distinct_positions = positions.len();
                 census.committed_stream_bytes_before_footer = before_footer;
                 census.native_whole_ns = supplied.native_whole_ns;
+                if b.scope == "common-corpus" {
+                    census.depth6 = Some(common_depth_census(
+                        header.as_ref().ok_or("header")?,
+                        &common_outcomes,
+                    )?);
+                }
                 if census.recorded != census.scheduled
                     || serde_json::to_value(&census)? != serde_json::to_value(&supplied)?
                 {
@@ -893,14 +1169,46 @@ fn scan(input: &Path, b: &IntakeBinding, writer: &mut Writer) -> Result<Value> {
     if !footer {
         return Err("missing footer: partial stream is not admitted".into());
     }
-    if fs::metadata(input)?.len() > b.max_stream_bytes || file_sha(input)? != b.stream.sha256 {
+    if fs::metadata(input)?.len()
+        > if common {
+            b.max_compressed_bytes.ok_or("compressed cap")?
+        } else {
+            b.max_stream_bytes
+        }
+        || file_sha(input)? != b.stream.sha256
+    {
         return Err("source stream changed during intake".into());
     }
-    games_file.sync_all()?;
-    drop(games_file);
+    drop(append_game);
+    let mut game_content = None;
+    if let Some(mut w) = games_gzip.take() {
+        let mut content = w.finish()?;
+        crate::lossless_jsonl::verify(&content)?;
+        // Candidate FileRef in partial output, actual only after existing marker-last publication.
+        content.compressed.path = writer
+            .output_path()
+            .parent()
+            .ok_or("publication parent")?
+            .join(games_name);
+        game_content = Some(content);
+    }
+    if let Some(f) = games_file.take() {
+        f.sync_all()?;
+        drop(f);
+    }
     let h = header.ok_or("missing header")?;
-    Ok(json!({"census":census,"requests":requests,"header":h,
-        "games_file":{"file":"stream-games.jsonl","sha256":file_sha(&games_path)?}}))
+    let header = if common {
+        json!({"schema":h.schema,"generator_version":h.generator_version,"config_sha256":h.config_sha256,
+            "compiled_sources":h.compiled_sources,"evaluator":h.evaluator,"executable_sha256":h.executable_sha256,
+            "family_partition_sha256":hex_digest(&serde_json::to_vec(&h.family_partition)?),"planned":h.scheduled.len(),
+            "detailed_schedule_history":"canonical source requests/header; input schedule bound by reference"})
+    } else {
+        serde_json::to_value(h)?
+    };
+    Ok(
+        json!({"census":census,"requests":if common { Value::Null } else { requests.unwrap_or(Value::Null) },"header":header,
+        "games_file":{"file":games_name,"sha256":file_sha(&games_path)?,"content":game_content}}),
+    )
 }
 #[derive(Debug)]
 struct IntakeFailure {
@@ -1021,19 +1329,31 @@ pub fn write_cache(
     if b.schema != "quoridor-terminal-stream-intake-v1"
         || !matches!(
             b.scope.as_str(),
-            "synthetic-fixture" | "pilot-reference" | "full-volume"
+            "synthetic-fixture" | "pilot-reference" | "full-volume" | "common-corpus"
         )
     {
         return Err("explicit intake scope".into());
     }
     // Quantity refusal precedes every non-control source byte and output.
-    if b.scope == "full-volume" && b.human_quantity_n.is_none_or(|n| n == 0) {
+    if matches!(b.scope.as_str(), "full-volume" | "common-corpus")
+        && b.human_quantity_n.is_none_or(|n| n == 0)
+    {
         return Err("human full N is unset".into());
     }
-    if b.scope != "full-volume" && b.human_quantity_n.is_some() {
+    if !matches!(b.scope.as_str(), "full-volume" | "common-corpus") && b.human_quantity_n.is_some()
+    {
         return Err("reference scope cannot select N".into());
     }
     let config = b.config.read()?;
+    let common = if b.scope == "common-corpus" {
+        let common = common_config(&config)?;
+        if b.human_quantity_n != Some(common.families) {
+            return Err("selected common N differs".into());
+        }
+        Some(common)
+    } else {
+        None
+    };
     let sources = b.sources.read()?;
     if b.scope != "synthetic-fixture" {
         refuse_synthetic(&config, &sources)?;
@@ -1047,7 +1367,31 @@ pub fn write_cache(
     }
     valid_sha(&b.stream.sha256)?;
     valid_sha(&b.requests_sha256)?;
-    if fs::metadata(input)?.len() > b.max_stream_bytes || file_sha(input)? != b.stream.sha256 {
+    if b.scope == "common-corpus" {
+        let c = b
+            .stream_content
+            .as_ref()
+            .ok_or("actual compressed source content required")?;
+        let cap = b
+            .max_compressed_bytes
+            .filter(|n| *n > 0)
+            .ok_or("explicit compressed byte allowance")?;
+        if c.compressed.path != b.stream.path
+            || c.compressed.sha256 != b.stream.sha256
+            || c.raw_bytes > b.max_stream_bytes
+            || c.compressed.bytes > cap
+        {
+            return Err("canonical compressed FileRef/raw identity/allowances differ".into());
+        }
+    }
+    if fs::metadata(input)?.len()
+        > if b.scope == "common-corpus" {
+            b.max_compressed_bytes.ok_or("compressed cap")?
+        } else {
+            b.max_stream_bytes
+        }
+        || file_sha(input)? != b.stream.sha256
+    {
         return Err("stream byte/hash admission".into());
     }
     b.schedule.read()?;
@@ -1057,17 +1401,31 @@ pub fn write_cache(
     let mut io = FilesystemPublication;
     let result = (|| -> Result<TensorCache> {
         io.begin(output)?;
-        writer = Some(Writer::new(&stage)?);
+        writer = Some(if let Some(common) = common.clone() {
+            Writer::new_common(&stage, common)?
+        } else {
+            Writer::new(&stage)?
+        });
         let provenance = scan(input, &b, writer.as_mut().ok_or("cache writer")?)?;
         let mut extra = serde_json::Map::new();
         extra.insert("source_binding".into(), serde_json::to_value(&b.stream)?);
         extra.insert("schedule_sha256".into(), json!(b.schedule.sha256));
         extra.insert(
             "family_partition_sha256".into(),
-            json!(hex_digest(&serde_json::to_vec(
-                &provenance["header"]["family_partition"]
-            )?)),
+            if b.scope == "common-corpus" {
+                provenance["header"]["family_partition_sha256"].clone()
+            } else {
+                json!(hex_digest(&serde_json::to_vec(
+                    &provenance["header"]["family_partition"]
+                )?))
+            },
         );
+        if b.scope == "common-corpus" {
+            extra.insert(
+                "source_content".into(),
+                serde_json::to_value(&b.stream_content)?,
+            );
+        }
         extra.insert(
             "stream_intake".into(),
             json!({"status":"complete","publication_protocol":"incomplete-marker-last-v1","scope":b.scope,"binding_sha256":binding_sha,"human_quantity_n":b.human_quantity_n,
@@ -1079,7 +1437,14 @@ pub fn write_cache(
             extra,
         )?;
         let mut names = manifest.files.values().cloned().collect::<Vec<_>>();
-        names.push("stream-games.jsonl".into());
+        names.push(
+            if b.scope == "common-corpus" {
+                "stream-games.jsonl.gz"
+            } else {
+                "stream-games.jsonl"
+            }
+            .into(),
+        );
         names.push("cache.json".into());
         complete_publication(&stage, output, &names, &mut io)?;
         Ok(manifest)
@@ -1338,5 +1703,76 @@ mod stream_repair_tests {
         search.completed_depth = 3;
         assert!(validate_search(&search, &context, &old).is_err());
         assert!(SearchPolicy::from_config(&json!({"depth":6})).is_err());
+    }
+}
+
+#[cfg(test)]
+mod common_corpus_intake_tests {
+    use super::*;
+    #[test]
+    fn common_search_policy_requires_exact_depth_and_explicit_node_limit() {
+        let p =
+            SearchPolicy::from_config(&json!({"phase":"common_corpus","depth":6,"max_nodes":100}))
+                .unwrap();
+        assert!(p.strict_completed_depth);
+        assert_eq!(p.depth, 6);
+        assert!(SearchPolicy::from_config(&json!({"phase":"common_corpus","depth":6,"max_nodes":100,"strict_completed_depth":false})).is_err());
+        assert!(SearchPolicy::from_config(&json!({"phase":"common_corpus","depth":6})).is_err());
+    }
+    #[test]
+    fn indexed_failure_preserves_actual_started_and_original_reason() {
+        let raw = json!({"index":3,"result":{"status":"failed","started":true,"reason":"original worker error"}});
+        let r: IndexedOutcome = serde_json::from_value(raw.clone()).unwrap();
+        assert!(
+            matches!(r.result,WorkerOutcome::Failed{started:true,reason} if reason=="original worker error")
+        );
+        let mut wrong = raw;
+        wrong["result"]["invented_cleanup"] = json!(true);
+        assert!(serde_json::from_value::<IndexedOutcome>(wrong).is_err());
+    }
+}
+
+#[cfg(test)]
+mod compressed_publication_tests {
+    use super::*;
+    fn root(name: &str) -> PathBuf {
+        std::env::temp_dir().join(format!("encoding362-{}-{name}", std::process::id()))
+    }
+    #[test]
+    fn compressed_candidate_admits_only_after_marker_last_existing_publication() {
+        let out = root("publish");
+        fs::create_dir(&out).unwrap();
+        let stage = out.join(".intake.partial");
+        fs::create_dir(&stage).unwrap();
+        let mut io = FilesystemPublication;
+        io.begin(&out).unwrap();
+        let mut writer =
+            crate::lossless_jsonl::Writer::create(&stage.join("rows.jsonl.gz"), 4096, 8192)
+                .unwrap();
+        writer.append(b"{\"source_record_offset\":0}\n").unwrap();
+        let mut c = writer.finish().unwrap();
+        assert!(out.join(INCOMPLETE).exists());
+        complete_publication(&stage, &out, &["rows.jsonl.gz".into()], &mut io).unwrap();
+        assert!(!out.join(INCOMPLETE).exists());
+        c.compressed.path = out.join("rows.jsonl.gz");
+        let mut bytes = vec![];
+        crate::lossless_jsonl::Reader::open(&c)
+            .unwrap()
+            .read_to_end(&mut bytes)
+            .unwrap();
+        assert_eq!(bytes, b"{\"source_record_offset\":0}\n");
+        fs::remove_dir_all(out).unwrap();
+    }
+    #[test]
+    fn missing_compressed_candidate_keeps_incomplete_and_original_failure() {
+        let out = root("missing");
+        fs::create_dir(&out).unwrap();
+        let stage = out.join(".intake.partial");
+        fs::create_dir(&stage).unwrap();
+        let mut io = FilesystemPublication;
+        io.begin(&out).unwrap();
+        assert!(complete_publication(&stage, &out, &["rows.jsonl.gz".into()], &mut io).is_err());
+        assert!(out.join(INCOMPLETE).exists());
+        fs::remove_dir_all(out).unwrap();
     }
 }

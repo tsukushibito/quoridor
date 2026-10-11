@@ -1,0 +1,258 @@
+{
+  "schema": "quoridor.common-corpus-reviewed-source-adoption.v1",
+  "issue": "quoridor-4lc.362",
+  "scope": "ActualMain source adoption only, not software/numerical qualification",
+  "review_original_target": "e9d98be4b86f33c7332d5298d987f301a4eb4e48dd16e6172f01a75130fdefea",
+  "review_related_target": "4a8d7cae35758c03d56a8808cb2cbf5ab8b162b5fd0ef2364c67868f29027192",
+  "review_related_control": "9b321d619fd5f86f6af48bd1f0eaff5633d310a84bbb177c9004bf01caa82736",
+  "reader_STOP": "2026-10-11T06:34:38.032332+00:00",
+  "source_postimages": [
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-data/src/common_corpus.rs",
+      "sha256": "f811b12c5a39e452cd2df71139bd573b8d5f722dd93c7527545152303b4980e2",
+      "bytes": 11088,
+      "mode": "0644",
+      "before_sha256": null,
+      "reviewed_derivative": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/source-data-v1/encoding-v2/derivatives/crates/quoridor-data/src/common_corpus.rs",
+        "sha256": "f811b12c5a39e452cd2df71139bd573b8d5f722dd93c7527545152303b4980e2",
+        "bytes": 11088,
+        "mode": "0644",
+        "relative": "crates/quoridor-data/src/common_corpus.rs"
+      }
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-data/src/lib.rs",
+      "sha256": "1213c01b040f76518099070cf1253ac9b73a024403a59a7755b2e89d86fe9bf9",
+      "bytes": 43336,
+      "mode": "0644",
+      "before_sha256": "845ce307af69d513ef2a3ec08f560d8157dacf81bd573cfe8fc5b2651170428b",
+      "reviewed_derivative": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/source-data-v1/encoding-v2/derivatives/crates/quoridor-data/src/lib.rs",
+        "sha256": "1213c01b040f76518099070cf1253ac9b73a024403a59a7755b2e89d86fe9bf9",
+        "bytes": 43336,
+        "mode": "0644",
+        "relative": "crates/quoridor-data/src/lib.rs"
+      }
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-data/src/terminal_cache.rs",
+      "sha256": "52c215322e9d1d482dfa00736d48f83c675b0d930583b34949ffd147f260ba1b",
+      "bytes": 15315,
+      "mode": "0644",
+      "before_sha256": "8af2b40cc0f5540d43c7c37b2035493a520d19e2ae8d0ab199e7abbb39abad8d",
+      "reviewed_derivative": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/source-data-v1/encoding-v2/derivatives/crates/quoridor-data/src/terminal_cache.rs",
+        "sha256": "52c215322e9d1d482dfa00736d48f83c675b0d930583b34949ffd147f260ba1b",
+        "bytes": 15315,
+        "mode": "0644",
+        "relative": "crates/quoridor-data/src/terminal_cache.rs"
+      }
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-data/src/terminal_stream.rs",
+      "sha256": "f8ee12ac76db3fab5d80b645b6a42ac056dc869feeecc97687e291071e7a12af",
+      "bytes": 68269,
+      "mode": "0644",
+      "before_sha256": "cc1cff8f43e220e38238cfae57f766c94159a0aeaf6a66dbf75381dce173d3d6",
+      "reviewed_derivative": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/source-data-v1/encoding-v2/derivatives/crates/quoridor-data/src/terminal_stream.rs",
+        "sha256": "f8ee12ac76db3fab5d80b645b6a42ac056dc869feeecc97687e291071e7a12af",
+        "bytes": 68269,
+        "mode": "0644",
+        "relative": "crates/quoridor-data/src/terminal_stream.rs"
+      }
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/teacher_pilot/depth6.rs",
+      "sha256": "4acb8792aab4f86a0ed8a8d439763c1f7c7413fc3a5759f207777cb19600ab0b",
+      "bytes": 9179,
+      "mode": "0644",
+      "before_sha256": "22f5cc126d5d3ef4612e2e452b355612f171ee4720ae6375321f7978fc86dc6d",
+      "reviewed_derivative": {
+        "relative": "crates/quoridor-runner/src/teacher_pilot/depth6.rs",
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/source-data-v1/derivatives/crates/quoridor-runner/src/teacher_pilot/depth6.rs",
+        "sha256": "4acb8792aab4f86a0ed8a8d439763c1f7c7413fc3a5759f207777cb19600ab0b",
+        "bytes": 9179,
+        "mode": "0644"
+      }
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/teacher_pilot.rs",
+      "sha256": "b04103ef82cc5b48d7b8964638b60917397b1a28dcfa9aae657275aeba84f196",
+      "bytes": 18810,
+      "mode": "0644",
+      "before_sha256": "b7de324feb5dea9fca47b95d06439fcaf1466fd6d49967afd8807915f2e3fd3d",
+      "reviewed_derivative": {
+        "relative": "crates/quoridor-runner/src/teacher_pilot.rs",
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/source-data-v1/derivatives/crates/quoridor-runner/src/teacher_pilot.rs",
+        "sha256": "b04103ef82cc5b48d7b8964638b60917397b1a28dcfa9aae657275aeba84f196",
+        "bytes": 18810,
+        "mode": "0644"
+      }
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/teacher_pilot_execution/depth6.rs",
+      "sha256": "bb3f6b49c2cd6dcc441660bee3ca3258109f84a15dff0bab05d67c554e573692",
+      "bytes": 38061,
+      "mode": "0644",
+      "before_sha256": "c1ef35cfeeff0da65b980850c047530651e15b22c6481dd147c798a0bca12a7d",
+      "reviewed_derivative": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/source-data-v1/encoding-v2/derivatives/crates/quoridor-runner/src/teacher_pilot_execution/depth6.rs",
+        "sha256": "bb3f6b49c2cd6dcc441660bee3ca3258109f84a15dff0bab05d67c554e573692",
+        "bytes": 38061,
+        "mode": "0644",
+        "relative": "crates/quoridor-runner/src/teacher_pilot_execution/depth6.rs"
+      }
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/teacher_pilot_execution.rs",
+      "sha256": "4adb77e2ee945d6565d4ebf3d5d99cedbb3f96334a5079623b4e6109194cff60",
+      "bytes": 50345,
+      "mode": "0644",
+      "before_sha256": "71750d3be749239f303310ab838d5316fdee1c1da2e9656629dfaf2d03528e7f",
+      "reviewed_derivative": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/source-data-v1/encoding-v2/derivatives/crates/quoridor-runner/src/teacher_pilot_execution.rs",
+        "sha256": "4adb77e2ee945d6565d4ebf3d5d99cedbb3f96334a5079623b4e6109194cff60",
+        "bytes": 50345,
+        "mode": "0644",
+        "relative": "crates/quoridor-runner/src/teacher_pilot_execution.rs"
+      }
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-data/Cargo.toml",
+      "sha256": "a0df9abe34ca445ce761d06b310affd1f01eb488272bae4dbd8af4795721477f",
+      "bytes": 481,
+      "mode": "0644",
+      "before_sha256": "e709d66b096e9657d125082e3e8111374b4a68b9bf7762bcf48b82d965018736",
+      "reviewed_derivative": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/source-data-v1/encoding-v2/derivatives/crates/quoridor-data/Cargo.toml",
+        "sha256": "a0df9abe34ca445ce761d06b310affd1f01eb488272bae4dbd8af4795721477f",
+        "bytes": 481,
+        "mode": "0644",
+        "relative": "crates/quoridor-data/Cargo.toml"
+      }
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-data/src/lossless_jsonl.rs",
+      "sha256": "76bde0a3cff239b414e0bff0ba5a651833a9f8aae031086ac97f2e97187b8c69",
+      "bytes": 12112,
+      "mode": "0644",
+      "before_sha256": null,
+      "reviewed_derivative": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/source-data-v1/encoding-v2/derivatives/crates/quoridor-data/src/lossless_jsonl.rs",
+        "sha256": "76bde0a3cff239b414e0bff0ba5a651833a9f8aae031086ac97f2e97187b8c69",
+        "bytes": 12112,
+        "mode": "0644",
+        "relative": "crates/quoridor-data/src/lossless_jsonl.rs"
+      }
+    },
+    {
+      "path": "/workspaces/quoridor/python/quoridor_training/common.py",
+      "sha256": "2da7ab1a486a5985346f6a24ddc321f800e213259a25176d842ec77a0661be66",
+      "bytes": 57330,
+      "mode": "0644",
+      "before_sha256": "44d9ad3fe5339ad1f1ed2de8cf4e00079a2f1d570f8080700c1a8ea5b7f43966",
+      "reviewed_derivative": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/source-learner-v1/related-R1-R2-C1-v5/common-post.py.gz",
+        "sha256": "187e63a49b064f97a5b9361ae599018a310aa5d4a3c5acbbd7ab1eb51379d88a",
+        "bytes": 14166,
+        "mode": "0644",
+        "encoding": "gzip",
+        "raw_SHA256": "2da7ab1a486a5985346f6a24ddc321f800e213259a25176d842ec77a0661be66",
+        "raw_bytes": 57330,
+        "relative": "python/quoridor_training/common.py"
+      }
+    },
+    {
+      "path": "/workspaces/quoridor/python/quoridor_training/terminal_cache.py",
+      "sha256": "c662e52aa7c01466d79f1aa7cac6a4698cd9548a112078f713b715187c919b38",
+      "bytes": 21159,
+      "mode": "0644",
+      "before_sha256": "5a0d328d60239306b8ab30f77a68499f31abab1a5c9e7ba8a0797e5619e06d82",
+      "reviewed_derivative": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/source-learner-v1/related-R1-R2-C1-v5/terminal_cache-post.py.gz",
+        "sha256": "a1a817903dc62012fbe2da7fb9b7f3a758839dcfa0763407556c85ab7d4b47ad",
+        "bytes": 5481,
+        "mode": "0644",
+        "encoding": "gzip",
+        "raw_SHA256": "c662e52aa7c01466d79f1aa7cac6a4698cd9548a112078f713b715187c919b38",
+        "raw_bytes": 21159,
+        "relative": "python/quoridor_training/terminal_cache.py"
+      }
+    },
+    {
+      "path": "/workspaces/quoridor/python/quoridor_training/cache.py",
+      "sha256": "6d1bb97cb8004914310c09087a53fcebca3207a8bb89fbddeca3c302a9f165c3",
+      "bytes": 20328,
+      "mode": "0644",
+      "before_sha256": "545854af9d145214db9e472f23ef6ba5ec9ed060e73ca8dd744da061fe6c4add",
+      "reviewed_derivative": {
+        "relative": "python/quoridor_training/cache.py",
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/source-learner-v1/encoding-related-v4/cache.py",
+        "sha256": "6d1bb97cb8004914310c09087a53fcebca3207a8bb89fbddeca3c302a9f165c3",
+        "bytes": 20328,
+        "mode": "0644"
+      }
+    },
+    {
+      "path": "/workspaces/quoridor/python/quoridor_training/distance_steps.py",
+      "sha256": "53c5ff413f38a90f87430555225cc093a6c452d18da4e63667710f3c808e3516",
+      "bytes": 18113,
+      "mode": "0644",
+      "before_sha256": "1c223f99df3319d957f9368b31aa0c773f59ce6945607f9de08e9bc136807f34",
+      "reviewed_derivative": {
+        "relative": "python/quoridor_training/distance_steps.py",
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/source-learner-v1/encoding-related-v4/distance_steps.py",
+        "sha256": "53c5ff413f38a90f87430555225cc093a6c452d18da4e63667710f3c808e3516",
+        "bytes": 18113,
+        "mode": "0644"
+      }
+    },
+    {
+      "path": "/workspaces/quoridor/python/quoridor_training/train.py",
+      "sha256": "4a023e1f9c2378db4610ba1b6392124111238fd48defa72cbe22dbd8689fd24c",
+      "bytes": 98958,
+      "mode": "0644",
+      "before_sha256": "61f4ffe268ce84364667e2f8007610412fdcc4ccaa7cddcd09a8e1e711061f05",
+      "reviewed_derivative": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/source-learner-v1/related-R1-R2-C1-v5/train-post.py.gz",
+        "sha256": "14f0ddc6386d85a0bb29fb020ddda2b54297267c043eadf79a6a10c319b83b55",
+        "bytes": 22509,
+        "mode": "0644",
+        "encoding": "gzip",
+        "raw_SHA256": "4a023e1f9c2378db4610ba1b6392124111238fd48defa72cbe22dbd8689fd24c",
+        "raw_bytes": 98958,
+        "relative": "python/quoridor_training/train.py"
+      }
+    },
+    {
+      "path": "/workspaces/quoridor/python/quoridor_training/plotting.py",
+      "sha256": "a26181e0174dfa30bcbd42b4c169d45c8498105b3e77c84067070bdb902400a3",
+      "bytes": 17034,
+      "mode": "0644",
+      "before_sha256": "d7956bb50917875dc40857da805b6dd9dbe4d039dd2ce58763f2905513e657ce",
+      "reviewed_derivative": {
+        "relative": "python/quoridor_training/plotting.py",
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/source-learner-v1/changed/python/quoridor_training/plotting.py",
+        "sha256": "a26181e0174dfa30bcbd42b4c169d45c8498105b3e77c84067070bdb902400a3",
+        "bytes": 17034,
+        "mode": "0644"
+      }
+    }
+  ],
+  "actual_source_adoption_STOP": "2026-10-11T09:25:00.962370+00:00",
+  "whole_support": "common-corpus-pilot-whole-support-v1.json",
+  "teacher_implementation": "CurrentacceptedMain compactTT359 plus versioned boardZobrist and a0b8 fixedD; no360ordering mixed. This NEW pilot binds actual source image at entry, not old347/348/355/358 image retargeting.",
+  "offline_lock_resolution": {
+    "path": "/workspaces/quoridor/Cargo.lock",
+    "sha256": "aa938a8537b68f62f383f3ae1538ee335f294f336173ea1ea06eb57503ebb38a",
+    "bytes": 27359,
+    "mode": "0644",
+    "command": "RUSTUP_TOOLCHAIN=stable RUSTUP_AUTO_INSTALL=0 cargo generate-lockfile --offline",
+    "source_resolution_only": true,
+    "software_qualification": false,
+    "preserved_existing_versions": true,
+    "unrelated_generate_lock_updates": "Initial offline generate-lock proposed either/zerocopy upgrades; explicitly restored exact pre-existing pins offline before source/admission publication, no build occurred."
+  }
+}
