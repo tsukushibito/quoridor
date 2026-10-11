@@ -173,6 +173,8 @@ impl Fixture {
                 schedule: schedule_ref,
                 requests_sha256: request_sha,
                 max_stream_bytes: 2 * 1024 * 1024,
+                max_compressed_bytes: None,
+                stream_content: None,
                 max_line_bytes: 1024 * 1024,
             },
             events: vec![
