@@ -1,0 +1,387 @@
+{
+  "schema": "quoridor.research.source-adoption.v1",
+  "status": "ACCEPTED",
+  "source": {
+    "commit": "1742730d4ff619fbda30b3c71186d25b93985e66",
+    "patch": null,
+    "files": [
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-data/src/bin/terminal-cache.rs",
+        "sha256": "943753c99782cf134549617c4a0ac3b15845c32941f3e89e5f887d19c66a5c9c",
+        "bytes": 4718,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-data/src/lib.rs",
+        "sha256": "1213c01b040f76518099070cf1253ac9b73a024403a59a7755b2e89d86fe9bf9",
+        "bytes": 43336,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-data/src/terminal.rs",
+        "sha256": "c3704349240a168c6408be89f6e00405f2093316e73d88cdfe1394dd207a6548",
+        "bytes": 12314,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-data/src/terminal_stream.rs",
+        "sha256": "aacff4439e200b955faf41e74e1c20cf26b3126fcf95367e91ccf8121d35fe93",
+        "bytes": 65609,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-data/src/terminal_cache.rs",
+        "sha256": "17b5ca087181d5ca69e79d45728d67f0c93f718f4fc3e02348e4bee2436974b2",
+        "bytes": 21296,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-data/src/common_corpus.rs",
+        "sha256": "2ffc1ed3b5b29af4f64711ac69a9d5bffdad97a6daa848addd8920e7eeec38a1",
+        "bytes": 11132,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-data/src/lossless_jsonl.rs",
+        "sha256": "76bde0a3cff239b414e0bff0ba5a651833a9f8aae031086ac97f2e97187b8c69",
+        "bytes": 12112,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-core/src/lib.rs",
+        "sha256": "c41814c97164d8c59a3bfd45685b54b21942bdbb8acc035cf0d4d809b7741f3b",
+        "bytes": 342,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-core/src/game.rs",
+        "sha256": "543995676fb46cc4e80d0fccb650875eb901a4b4d71187788ee09dfbaf01a420",
+        "bytes": 3968,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-core/src/position.rs",
+        "sha256": "6cb132a4e3f68c7cb739a926aad1ae5f0c8ad12ca8df60d22fb8fcc1c1aa173a",
+        "bytes": 17800,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-core/src/research.rs",
+        "sha256": "0b87fb3e269278516d84674c21ad0a351288e1f9c2f4a7e219f14345f0e708fe",
+        "bytes": 34167,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-core/src/profiling.rs",
+        "sha256": "1e26d96b6d443b4d54261e7e3cb742290f223b7e84ba450e3c2cf261af38255f",
+        "bytes": 6108,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-nnue/src/lib.rs",
+        "sha256": "90734f895e21f49ad246837a76303a37f45783dbaf3932be8d05a14345b207cf",
+        "bytes": 24343,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-nnue/src/features.rs",
+        "sha256": "25c2953e4805344fe27ea9f9480b08fee462a8ce5833602484491e2ce48f1531",
+        "bytes": 8230,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-nnue/src/quantized.rs",
+        "sha256": "2553767bb6f045f5312d8759e185da518dbc2b211c2849b1b23f93d964c046d6",
+        "bytes": 18380,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-nnue/src/residual.rs",
+        "sha256": "99f5acd09eec12aa78142d62973e16fa8e0dcb377c26e6deca731897c519dabd",
+        "bytes": 38066,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-nnue/src/simd.rs",
+        "sha256": "1731f69385649ff5eb6d75f5cbbaf2fd046a2907ec968801cae8ac033b17d02a",
+        "bytes": 5880,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-nnue/src/distance_step.rs",
+        "sha256": "a35d808eeb819aa0c9500364f4f12352d5e05bd455f92dc19fd63d7833c74225",
+        "bytes": 24573,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-data/Cargo.toml",
+        "sha256": "a0df9abe34ca445ce761d06b310affd1f01eb488272bae4dbd8af4795721477f",
+        "bytes": 481,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-core/Cargo.toml",
+        "sha256": "9e952267d75fd8b1cd51f72916e8fb97869f38d5ba4893a0ecedc297ebb74a27",
+        "bytes": 145,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-nnue/Cargo.toml",
+        "sha256": "fb21d093cb8b1a5e430cc3faf220263b9e1d101e6132f7ed11c3465a81cca1bf",
+        "bytes": 462,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/Cargo.toml",
+        "sha256": "6cbcf3b38c98492322761e78db908195789021216be51aa37de2888cacd0ab0b",
+        "bytes": 284,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/Cargo.lock",
+        "sha256": "aa938a8537b68f62f383f3ae1538ee335f294f336173ea1ea06eb57503ebb38a",
+        "bytes": 27359,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+        "sha256": "d8ac96e750f828891733b8bb2ebd933c48044713fb3910bacdcece26d30a785f",
+        "bytes": 110510,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/rust-toolchain.toml",
+        "sha256": "a295155a0b138ee09d908306393d2778135ebaab96cfbc29ea0a6cd647563b53",
+        "bytes": 152,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/crates/quoridor-data/tests/terminal_stream.rs",
+        "sha256": "c7d8e1673c6e928b8752f719e5d8f9c1ed94b70dc0b2739b72897d6b8dfe90fa",
+        "bytes": 18706,
+        "mode": "0644"
+      }
+    ],
+    "workspace": "/workspaces/quoridor",
+    "manifest": {
+      "path": "/workspaces/quoridor/Cargo.toml",
+      "sha256": "6cbcf3b38c98492322761e78db908195789021216be51aa37de2888cacd0ab0b",
+      "bytes": 284,
+      "mode": "0644"
+    },
+    "lock": {
+      "path": "/workspaces/quoridor/Cargo.lock",
+      "sha256": "aa938a8537b68f62f383f3ae1538ee335f294f336173ea1ea06eb57503ebb38a",
+      "bytes": 27359,
+      "mode": "0644"
+    },
+    "compiled_sources": {
+      "crates/quoridor-data/src/bin/terminal-cache.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-data/src/bin/terminal-cache.rs",
+        "sha256": "943753c99782cf134549617c4a0ac3b15845c32941f3e89e5f887d19c66a5c9c",
+        "bytes": 4718,
+        "mode": "0644"
+      },
+      "crates/quoridor-data/src/lib.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-data/src/lib.rs",
+        "sha256": "1213c01b040f76518099070cf1253ac9b73a024403a59a7755b2e89d86fe9bf9",
+        "bytes": 43336,
+        "mode": "0644"
+      },
+      "crates/quoridor-data/src/terminal.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-data/src/terminal.rs",
+        "sha256": "c3704349240a168c6408be89f6e00405f2093316e73d88cdfe1394dd207a6548",
+        "bytes": 12314,
+        "mode": "0644"
+      },
+      "crates/quoridor-data/src/terminal_stream.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-data/src/terminal_stream.rs",
+        "sha256": "aacff4439e200b955faf41e74e1c20cf26b3126fcf95367e91ccf8121d35fe93",
+        "bytes": 65609,
+        "mode": "0644"
+      },
+      "crates/quoridor-data/src/terminal_cache.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-data/src/terminal_cache.rs",
+        "sha256": "17b5ca087181d5ca69e79d45728d67f0c93f718f4fc3e02348e4bee2436974b2",
+        "bytes": 21296,
+        "mode": "0644"
+      },
+      "crates/quoridor-data/src/common_corpus.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-data/src/common_corpus.rs",
+        "sha256": "2ffc1ed3b5b29af4f64711ac69a9d5bffdad97a6daa848addd8920e7eeec38a1",
+        "bytes": 11132,
+        "mode": "0644"
+      },
+      "crates/quoridor-data/src/lossless_jsonl.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-data/src/lossless_jsonl.rs",
+        "sha256": "76bde0a3cff239b414e0bff0ba5a651833a9f8aae031086ac97f2e97187b8c69",
+        "bytes": 12112,
+        "mode": "0644"
+      },
+      "crates/quoridor-core/src/lib.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-core/src/lib.rs",
+        "sha256": "c41814c97164d8c59a3bfd45685b54b21942bdbb8acc035cf0d4d809b7741f3b",
+        "bytes": 342,
+        "mode": "0644"
+      },
+      "crates/quoridor-core/src/game.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-core/src/game.rs",
+        "sha256": "543995676fb46cc4e80d0fccb650875eb901a4b4d71187788ee09dfbaf01a420",
+        "bytes": 3968,
+        "mode": "0644"
+      },
+      "crates/quoridor-core/src/position.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-core/src/position.rs",
+        "sha256": "6cb132a4e3f68c7cb739a926aad1ae5f0c8ad12ca8df60d22fb8fcc1c1aa173a",
+        "bytes": 17800,
+        "mode": "0644"
+      },
+      "crates/quoridor-core/src/research.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-core/src/research.rs",
+        "sha256": "0b87fb3e269278516d84674c21ad0a351288e1f9c2f4a7e219f14345f0e708fe",
+        "bytes": 34167,
+        "mode": "0644"
+      },
+      "crates/quoridor-core/src/profiling.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-core/src/profiling.rs",
+        "sha256": "1e26d96b6d443b4d54261e7e3cb742290f223b7e84ba450e3c2cf261af38255f",
+        "bytes": 6108,
+        "mode": "0644"
+      },
+      "crates/quoridor-nnue/src/lib.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-nnue/src/lib.rs",
+        "sha256": "90734f895e21f49ad246837a76303a37f45783dbaf3932be8d05a14345b207cf",
+        "bytes": 24343,
+        "mode": "0644"
+      },
+      "crates/quoridor-nnue/src/features.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-nnue/src/features.rs",
+        "sha256": "25c2953e4805344fe27ea9f9480b08fee462a8ce5833602484491e2ce48f1531",
+        "bytes": 8230,
+        "mode": "0644"
+      },
+      "crates/quoridor-nnue/src/quantized.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-nnue/src/quantized.rs",
+        "sha256": "2553767bb6f045f5312d8759e185da518dbc2b211c2849b1b23f93d964c046d6",
+        "bytes": 18380,
+        "mode": "0644"
+      },
+      "crates/quoridor-nnue/src/residual.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-nnue/src/residual.rs",
+        "sha256": "99f5acd09eec12aa78142d62973e16fa8e0dcb377c26e6deca731897c519dabd",
+        "bytes": 38066,
+        "mode": "0644"
+      },
+      "crates/quoridor-nnue/src/simd.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-nnue/src/simd.rs",
+        "sha256": "1731f69385649ff5eb6d75f5cbbaf2fd046a2907ec968801cae8ac033b17d02a",
+        "bytes": 5880,
+        "mode": "0644"
+      },
+      "crates/quoridor-nnue/src/distance_step.rs": {
+        "path": "/workspaces/quoridor/crates/quoridor-nnue/src/distance_step.rs",
+        "sha256": "a35d808eeb819aa0c9500364f4f12352d5e05bd455f92dc19fd63d7833c74225",
+        "bytes": 24573,
+        "mode": "0644"
+      },
+      "crates/quoridor-data/Cargo.toml": {
+        "path": "/workspaces/quoridor/crates/quoridor-data/Cargo.toml",
+        "sha256": "a0df9abe34ca445ce761d06b310affd1f01eb488272bae4dbd8af4795721477f",
+        "bytes": 481,
+        "mode": "0644"
+      },
+      "crates/quoridor-core/Cargo.toml": {
+        "path": "/workspaces/quoridor/crates/quoridor-core/Cargo.toml",
+        "sha256": "9e952267d75fd8b1cd51f72916e8fb97869f38d5ba4893a0ecedc297ebb74a27",
+        "bytes": 145,
+        "mode": "0644"
+      },
+      "crates/quoridor-nnue/Cargo.toml": {
+        "path": "/workspaces/quoridor/crates/quoridor-nnue/Cargo.toml",
+        "sha256": "fb21d093cb8b1a5e430cc3faf220263b9e1d101e6132f7ed11c3465a81cca1bf",
+        "bytes": 462,
+        "mode": "0644"
+      },
+      "Cargo.toml": {
+        "path": "/workspaces/quoridor/Cargo.toml",
+        "sha256": "6cbcf3b38c98492322761e78db908195789021216be51aa37de2888cacd0ab0b",
+        "bytes": 284,
+        "mode": "0644"
+      },
+      "Cargo.lock": {
+        "path": "/workspaces/quoridor/Cargo.lock",
+        "sha256": "aa938a8537b68f62f383f3ae1538ee335f294f336173ea1ea06eb57503ebb38a",
+        "bytes": 27359,
+        "mode": "0644"
+      }
+    },
+    "cargo_configs": [
+      {
+        "path": "/.cargo/config",
+        "file": null
+      },
+      {
+        "path": "/.cargo/config.toml",
+        "file": null
+      },
+      {
+        "path": "/usr/local/cargo/config",
+        "file": null
+      },
+      {
+        "path": "/usr/local/cargo/config.toml",
+        "file": null
+      },
+      {
+        "path": "/workspaces/.cargo/config",
+        "file": null
+      },
+      {
+        "path": "/workspaces/.cargo/config.toml",
+        "file": null
+      },
+      {
+        "path": "/workspaces/quoridor/.cargo/config",
+        "file": null
+      },
+      {
+        "path": "/workspaces/quoridor/.cargo/config.toml",
+        "file": null
+      }
+    ]
+  },
+  "artifact_target": "terminal-cache",
+  "review": {
+    "path": "/workspaces/quoridor/.artifacts/common-corpus-warmstart-study/source-review-v1/compact-handoff-v5/control.json",
+    "sha256": "b9c49fc2b037752db98af6bd989de1d97b63d12c75610223a268cf5bfba0b6b0",
+    "bytes": 2947,
+    "mode": "0644"
+  },
+  "source_integration": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/pilot-compact-source-adoption-v9.json",
+    "sha256": "4c49a3c512ca7f8adc7367365f2d39894b17c5c935d1ac0c0d5290ab3c5cab93",
+    "bytes": 6143,
+    "mode": "0644"
+  },
+  "accepted_at": "2026-10-11T14:42:32.130013+00:00",
+  "scope": "Current converter compiled23 unchanged; source.files26 additionally binds repaired integration test. Source acceptance only. Next affected test role cargo test --test terminal_stream --no-run, then unfinished full Clippy/release/private/current23 bindings. Existing lib no-run/native2/old16 passing scopes retained without replay.",
+  "funding": "Existing pilot support/c2d0 compact target/private handover, no additional grant.",
+  "previous_adoption": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/compact-converter-BUILD-source-adoption-v2.json",
+    "sha256": "2fc1f30c4d3e6105d2b8bef0221be3178dd2dac3c9232361dad6fe97c3985f13",
+    "bytes": 14565,
+    "mode": "0644"
+  },
+  "ordinary_lint_adoption": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/compact-converter-lint-adoption-v2.json",
+    "sha256": "9f9f7dd3f91a99691498e0f00f49f241a9ed98e8bc78c900542f47c50ba77f57",
+    "bytes": 2835,
+    "mode": "0644"
+  },
+  "ordinary_fixture_adoption": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/compact-converter-fixture-adoption-v3.json",
+    "sha256": "d09f379e7fd57d3fe11a7676b76dd3137b3dab056bec929a1c6cfa94ad74c8b8",
+    "bytes": 2473,
+    "mode": "0644"
+  }
+}

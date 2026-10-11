@@ -1,0 +1,47 @@
+{
+  "schema": "quoridor.research.source-integration.v1",
+  "issue": "quoridor-4lc.324",
+  "status": "ADOPTED_SOURCE_ONLY",
+  "code_commit": "1742730d4ff619fbda30b3c71186d25b93985e66",
+  "accepted_at": "2026-10-11T14:42:32.130013+00:00",
+  "stopped_author_packet": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/compact-fixture-repair-v7/source-STOP-binding.json",
+    "sha256": "b445fc9fc81dd36797f6067d32a6a0a1919e94e6512c49cd3650d8cf6dfc6dfb",
+    "bytes": 5133,
+    "mode": "0644"
+  },
+  "failed_build": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/compact-build-v6/operation-v6/manifest.json",
+    "sha256": "341ef565cc71db908a563aad03c8206abd739aa55568f10625f441a775b13a14",
+    "bytes": 24811,
+    "mode": "0644"
+  },
+  "actual_builder_reader_STOP": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/compact-build-v6/completion-collection-v6/failed-build-STOP.json",
+    "sha256": "8f4242e144d6fc10eb616e75928fcf5afe5033649ced12a7680e05436d7566c9",
+    "bytes": 46684,
+    "mode": "0644"
+  },
+  "before": [
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-data/tests/terminal_stream.rs",
+      "sha256": "4a4ae371bc78db4632757b6c971ec2951975d410f1641d14ab7cb5dd3f1ece02",
+      "bytes": 18624,
+      "mode": "0644"
+    }
+  ],
+  "post": [
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-data/tests/terminal_stream.rs",
+      "sha256": "c7d8e1673c6e928b8752f719e5d8f9c1ed94b70dc0b2739b72897d6b8dfe90fa",
+      "bytes": 18706,
+      "mode": "0644"
+    }
+  ],
+  "scope": "Test initializer only: max_compressed_bytes=None and stream_content=None. Production/validator/test bodies unchanged outside two initializer lines. Exact patch, gzip, inverse and scoped Rustfmt write/check verified. No compiler or runtime qualification from adoption.",
+  "root_static_refusal": "First prewrite assertion used eight-space removal rather than actual sixteen-space initializer indentation; failed before mutation. Correct literal/strict diff passed. Original tool facts retained; not a target defect.",
+  "output_forward_B": 65536,
+  "funding": "Contained existing Root integration/source/control components and pilot1GiB; no additional global allocation.",
+  "experimental_consumed_seconds": 138.60220936406404,
+  "experimental_remaining_seconds": 5261.397790635936
+}
