@@ -1,0 +1,79 @@
+{
+  "schema": "quoridor.research.source-integration.v1",
+  "issue": "quoridor-4lc.324",
+  "status": "ADOPTED_ORDINARY_CALLER_WITH_AFFECTED_METADATA_PROOF",
+  "code_commit": "f11f56a35ac5810392b6de6216c53af2231fdffe",
+  "accepted_at": "2026-10-11T15:58:33.918058+00:00",
+  "stopped_author_packet": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/learner-plan-lineage-repair-v1/source-STOP-binding.json",
+    "sha256": "ad4ace0f251b46f2455ce6e4d27fef967437d118e1d150e3fa1f2b5f680e7269",
+    "bytes": 5913,
+    "mode": "0644"
+  },
+  "before": {
+    "path": "/workspaces/quoridor/python/quoridor_training/common.py",
+    "sha256": "8a8feba7c81af36081bb9eb5100f612b5364d8fc24e9a9e99148b2f0d546f9e5",
+    "bytes": 33416,
+    "mode": "0644"
+  },
+  "current_common": {
+    "path": "/workspaces/quoridor/python/quoridor_training/common.py",
+    "sha256": "c7b2c5c91a0cdd003145f0869f8614746c8f785241481f6e9f3d528b3de96fd2",
+    "bytes": 33406,
+    "mode": "0644"
+  },
+  "strict_patch": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/learner-plan-lineage-repair-v1/common.patch",
+    "sha256": "d53ba5d2aa48eb67e550414bb26e0b49629cd058eb738bff53519e0d27e17ca6",
+    "bytes": 612,
+    "mode": "0644"
+  },
+  "actual_affected_metadata_receipt": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/learner-plan-lineage-repair-v1/affected-test-receipt.json",
+    "sha256": "25662a91995af99b4af78989b831459b60bfec9e7a050a32e145dc17846ed8e4",
+    "bytes": 5466,
+    "mode": "0644"
+  },
+  "full_capture": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/learner-plan-lineage-repair-v1/affected.log",
+    "sha256": "1bf2c21f0353702a4e41d7253c9329b2b6c4eb3a656982a320ad9303743cf32d",
+    "bytes": 578,
+    "mode": "0644"
+  },
+  "scope": "Only warmstart_inputs call common_cache_config(manifest, config[\"experiment\"], plan=plan). Cache retains historical generation-plan285 and incumbent scale lineage; current learnerplan9779 owns current paired recipe and all existing semantic corpus/quantity/schedule/partition/range/draw/model/scale checks. All validators and other bytes/AST unchanged. Exact raw cache/schedule/partition/sevenbinary input identities and each normalized current recipe checks retained.",
+  "root_verification": "Fresh canonicalNB before/post/gzip/strictforward-inverse/restoredcallmoduleAST/current metadata refs/actualreceipt-full578B verified. Root scoped Ruff no-cache format/check/lint PASS. No author test replay/asset/framework/array/model/fit/native calls.",
+  "software_scope": "One genuinely new actual warmstart_inputs/common_cache_config metadata case,17 discriminators PASS; only synthetic descriptor/weight-byte hook, not actual baseline qualification.",
+  "actual_author_reader_STOP": "2026-10-11T15:54:14.048584+00:00",
+  "actual_author_writer_STOP": "2026-10-11T15:55:33.665997+00:00",
+  "current_plan": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/plan.json",
+    "sha256": "9779a274fcd0c7cbb5d46c07f02ee5500eb05bac0d65c7ec30e14002f5be55b9",
+    "bytes": 52044,
+    "mode": "0644"
+  },
+  "current_paired_fit_configs": [
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/pilot-fit-A-v2.json",
+      "sha256": "9865c84d97b1dace07dc5e7dcd6cfae162c6c969c3334d2d5a43ca397c85a700",
+      "bytes": 2540,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/pilot-fit-B-v2.json",
+      "sha256": "ad3fbff736a28f4fae03400f8679b15580a777b0fb24d8d49f369c9015aaa63e",
+      "bytes": 2557,
+      "mode": "0644"
+    }
+  ],
+  "unchanged_current_cache": {
+    "path": "/workspaces/quoridor/.worktree/assets/data/common-corpus-warmstart-study/pilot-v1/cache-compact-v3/cache.json",
+    "sha256": "522b2dd661ff3ddfdb858ca80a9fc5585dfe599cc3039fa9bbfa96f6703bc37d",
+    "bytes": 43204,
+    "mode": "0644"
+  },
+  "scientific_status": "A181 remains original FAILED/partial with23outputs and missing200endpoint; BNOT_RUN. Future new unique A200 then B after actualASTOP under600s/allwork16023. No originaljob resume/promotion/refinalize or cache regeneration/remigration.",
+  "experimental_consumed_seconds": 144.28609978500754,
+  "experimental_remaining_seconds": 5255.7139002149925,
+  "funding": "Record/handoff/Git prospective32KiB contained existing Root source/control/Git and pilot1GiB; no grant/refund or software charge to experimental clock.",
+  "owned_readers_children_jobs_TMP_remaining": []
+}
