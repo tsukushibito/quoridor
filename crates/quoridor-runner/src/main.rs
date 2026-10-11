@@ -64,7 +64,8 @@ fn execute() -> Result<()> {
     let command = args.first().map(String::as_str).unwrap_or("help");
     let qualified = qualified_route(command, &args)?;
     if command == "teacher-pilot"
-        && !(args.len() == 3 && matches!(args[1].as_str(), "--config" | "--audit")
+        && !(args.len() == 5 && args[1] == "--experiment" && args[3] == "--experiment-sha256"
+            || args.len() == 3 && matches!(args[1].as_str(), "--config" | "--audit")
             || args.len() == 4 && args[1] == "--config" && args[3] == "--check-config")
     {
         return Err(
@@ -169,6 +170,19 @@ fn execute() -> Result<()> {
                     "measurement incomplete: evidence retained; games are not qualified".into(),
                 );
             }
+        }
+        "teacher-pilot" if args.iter().any(|a| a == "--experiment") => {
+            strict_pairs(&args, &["--experiment", "--experiment-sha256"], &[])?;
+            let bound = quoridor_runner::sigma_qualification::BoundControl {
+                path: argument(&args, "--experiment")?.into(),
+                sha256: argument(&args, "--experiment-sha256")?,
+            };
+            println!(
+                "{}",
+                serde_json::to_string(&quoridor_runner::teacher_pilot_execution::run_bound(
+                    &bound
+                )?)?
+            );
         }
         "teacher-pilot" if args.iter().any(|a| a == "--audit") => {
             let output = PathBuf::from(argument(&args, "--audit")?);

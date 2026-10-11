@@ -314,12 +314,32 @@ pub(super) fn run(config: &PilotConfig, hash: String, cancel: &AtomicBool) -> Re
             resource_admission: serde_json::to_value(&admission)?,
         };
         stream.append(&Record::Header(Box::new(header.clone())))?;
+        if matches!(config.phase, teacher_pilot::Phase::CommonCorpus) {
+            let raw_requests = serde_json::to_vec(&requests(config, &header.config_sha256))?;
+            let mut request_line = raw_requests;
+            request_line.push(b'\n');
+            save_control(
+                &config.output.join("sources.json"),
+                &serde_json::json!({
+                "schema":header.schema,"generator_version":header.generator_version,
+                "executable_sha256":header.executable_sha256,"compiled_sources":header.compiled_sources,
+                "evaluator":header.evaluator,"resource_admission":header.resource_admission}),
+            )?;
+            save_control(
+                &config.output.join("schedule.json"),
+                &serde_json::json!({
+                "scheduled":header.scheduled,"family_partition":header.family_partition,
+                "requests_sha256":format!("{:x}",Sha256::digest(&request_line))}),
+            )?;
+        }
+
         let mut records = Vec::new();
         let mut running = if matches!(config.phase, teacher_pilot::Phase::CommonCorpus) {
             Some(StreamReport::new(&header)?)
         } else {
             None
         };
+        let budget = config.max_total_nodes.map(NodeBudget::new);
         let joined = scheduling::ordered(
             &header.scheduled,
             config.game_workers.ok_or("missing workers")?,
@@ -335,7 +355,7 @@ pub(super) fn run(config: &PilotConfig, hash: String, cancel: &AtomicBool) -> Re
                     .iter()
                     .find(|a| a.game == slot.request_id)
                     .ok_or("missing prebound input-only family")?;
-                play_with_policy(slot, a, cancel, policy(config))
+                play_with_budget(slot, a, cancel, policy(config), budget.as_ref())
             },
             |index, result| {
                 audit_result(&header, index, &result)?;
@@ -571,6 +591,7 @@ mod tests {
             attempts_per_prefix: 32,
             depth: 6,
             max_nodes: u64::MAX,
+            max_total_nodes: None,
             tt_slots: 4096,
             use_pvs: true,
             solver_order_contact: false,

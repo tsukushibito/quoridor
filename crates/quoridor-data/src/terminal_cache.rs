@@ -79,6 +79,7 @@ pub(crate) struct Writer {
     count: usize,
     common: Option<crate::common_corpus::Config>,
     common_eligible: usize,
+    common_eligible_by_split: BTreeMap<String, usize>,
 }
 
 impl Writer {
@@ -146,6 +147,7 @@ impl Writer {
             count: 0,
             common,
             common_eligible: 0,
+            common_eligible_by_split: BTreeMap::new(),
         })
     }
 
@@ -243,6 +245,11 @@ impl Writer {
             self.streams[5].write_all(&raw.to_le_bytes())?;
             self.streams[6].write_all(&[u8::from(eligible)])?;
             self.common_eligible += usize::from(eligible);
+            if eligible {
+                let split = serde_json::to_value(&r.split)?;
+                let key = split.as_str().ok_or("common row split")?.to_owned();
+                *self.common_eligible_by_split.entry(key).or_default() += 1;
+            }
             metadata["completed_root_raw"] = serde_json::json!(raw);
             metadata["completed_root_raw_bits"] = serde_json::json!(raw.to_bits());
             metadata["common_eligible"] = serde_json::json!(eligible);
@@ -358,7 +365,7 @@ impl Writer {
             extra.insert(
                 "common_corpus".into(),
                 serde_json::json!({"config":common,
-                "common_eligible_rows":self.common_eligible,"planned_families":common.families,
+                "common_eligible_rows":self.common_eligible,"common_eligible_by_split":self.common_eligible_by_split,"planned_families":common.families,
                 "raw_file":"completed-root-raw.f32","common_mask_file":"common-eligible.u8",
                 "teacher_A":"actual_final_z","teacher_B":"explicit_mapping_of_completed_root_raw",
                 "rootmean_is_raw":false,"same_mask_and_family_partition_for_both":true,

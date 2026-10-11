@@ -25,7 +25,7 @@ use std::{
     path::Path,
     sync::{
         Arc,
-        atomic::{AtomicBool, Ordering},
+        atomic::{AtomicBool, AtomicU64, Ordering},
     },
     time::Instant,
 };
@@ -346,6 +346,16 @@ fn play_with_policy(
     cancel: &AtomicBool,
     policy: SearchPolicy,
 ) -> Result<GameRecord> {
+    play_with_budget(slot, assignment, cancel, policy, None)
+}
+
+fn play_with_budget(
+    slot: &ScheduledGame,
+    assignment: &FamilyAssignment,
+    cancel: &AtomicBool,
+    policy: SearchPolicy,
+    budget: Option<&NodeBudget>,
+) -> Result<GameRecord> {
     let evaluator = Arc::new(DistanceEvaluator::new(0., 8.));
     let namespace = SearchNamespace {
         evaluator: EVALUATOR_ID.into(),
@@ -372,7 +382,7 @@ fn play_with_policy(
     {
         return Err("fixed pilot TT allocation differs".into());
     }
-    let limits = SearchLimits {
+    let mut limits = SearchLimits {
         max_depth: policy.depth,
         max_nodes: policy.nodes,
         time_limit: None,
@@ -382,10 +392,74 @@ fn play_with_policy(
     };
     // Normal genuine context: SearchSession clones it; no reserved-path claim.
     play_using_policy(slot, assignment, cancel, policy, |context| {
-        sessions[usize::from(context.position().turn)]
-            .search(context, &limits, cancel)
-            .map_err(Into::into)
+        let reserved = match budget {
+            Some(b) => b.reserve(policy.nodes)?,
+            None => policy.nodes,
+        };
+        limits.max_nodes = reserved;
+        let result =
+            sessions[usize::from(context.position().turn)].search(context, &limits, cancel);
+        // An Err has opaque work: retain the whole reservation, never charge zero.
+        if let (Some(b), Ok(r)) = (budget, &result) {
+            b.settle(reserved, r.stats.nodes)?;
+        }
+        result.map_err(Into::into)
     })
+}
+
+/// Shared finite work ceiling. Unreturned/error work retains its reservation.
+struct NodeBudget {
+    remaining: AtomicU64,
+}
+impl NodeBudget {
+    fn new(nodes: u64) -> Self {
+        Self {
+            remaining: AtomicU64::new(nodes),
+        }
+    }
+    fn reserve(&self, per_move: u64) -> Result<u64> {
+        let mut old = self.remaining.load(Ordering::Acquire);
+        loop {
+            let take = old.min(per_move);
+            if take == 0 {
+                return Err("common_total_node_cap; remaining decisions UNKNOWN".into());
+            }
+            match self.remaining.compare_exchange_weak(
+                old,
+                old - take,
+                Ordering::AcqRel,
+                Ordering::Acquire,
+            ) {
+                Ok(_) => return Ok(take),
+                Err(now) => old = now,
+            }
+        }
+    }
+    fn settle(&self, reserved: u64, returned: u64) -> Result<()> {
+        if returned > reserved {
+            return Err("returned nodes exceed reserved common ceiling".into());
+        }
+        self.remaining
+            .fetch_add(reserved - returned, Ordering::AcqRel);
+        Ok(())
+    }
+}
+#[cfg(test)]
+mod common_node_budget_tests {
+    use super::*;
+    #[test]
+    fn parallel_reservations_returned_work_and_opaque_error_cannot_exceed_total() {
+        let b = NodeBudget::new(11);
+        let a = b.reserve(7).unwrap();
+        let c = b.reserve(7).unwrap();
+        assert_eq!((a, c), (7, 4));
+        assert!(b.reserve(1).is_err());
+        b.settle(a, 5).unwrap();
+        assert_eq!(b.reserve(7).unwrap(), 2);
+        // The second reservation represents an unreturned Err; no refund.
+        assert!(b.reserve(1).is_err());
+        assert!(b.settle(c, 5).is_err());
+    }
 }
 
 fn scheduled_failure(slot: &ScheduledGame, reason: String) -> GameRecord {
@@ -601,6 +675,94 @@ fn stream_reader(path: &Path) -> Result<Box<dyn Read>> {
     } else {
         Ok(Box::new(File::open(path.join("pilot-stream.jsonl"))?))
     }
+}
+
+fn save_control(path: &Path, value: &Value) -> Result<()> {
+    let raw = serde_json::to_vec(value)?;
+    if raw.len() > 1024 * 1024 {
+        return Err("common control bound".into());
+    }
+    let mut f = OpenOptions::new().create_new(true).write(true).open(path)?;
+    f.write_all(&raw)?;
+    f.sync_all()?;
+    Ok(())
+}
+fn control_ref(path: &Path) -> Result<quoridor_data::terminal_stream::BoundJson> {
+    Ok(quoridor_data::terminal_stream::BoundJson {
+        path: path.into(),
+        sha256: quoridor_data::file_sha(path)?,
+    })
+}
+/// One qualified native invocation: retained compressed generation, then the shared cache.
+pub fn run_bound(bound: &crate::sigma_qualification::BoundControl) -> Result<Value> {
+    let (e, q) = crate::research_manifest::load(bound, "corpus")?;
+    let config: PilotConfig = e.config.read()?;
+    config.validate()?;
+    let study = config
+        .common_study
+        .as_ref()
+        .ok_or("common study required")?;
+    if !matches!(config.phase, teacher_pilot::Phase::CommonCorpus)
+        || study.selected_plan.sha256 != e.canonical_plan_sha256
+        || e.inputs.first().is_none_or(|r| {
+            r.path != study.selected_plan.path || r.sha256 != study.selected_plan.sha256
+        })
+        || e.schedule.read::<Value>()? != study.schedule_choice()
+        || q["generator_compiled_sources_sha256"] != crate::arena::json_digest(&compiled_sources())?
+    {
+        return Err("current common generator/approved plan/schedule qualification differs".into());
+    }
+    let build: Value = e.build_manifest.read()?;
+    if build["generator_compiled_sources"] != serde_json::to_value(compiled_sources())? {
+        return Err("qualified current generator source closure required".into());
+    }
+    let report = run(&config, e.config.sha256.clone())?;
+    save_control(
+        &config.output.join("generation-result.json"),
+        &serde_json::to_value(&report)?,
+    )?;
+    let content_path = config.output.join("stream-content.json");
+    if fs::metadata(&content_path)?.len() > 65536 {
+        return Err("content metadata bound".into());
+    }
+    let content: quoridor_data::lossless_jsonl::Content =
+        serde_json::from_slice(&fs::read(&content_path)?)?;
+    let schedule_path = config.output.join("schedule.json");
+    let schedule: Value = serde_json::from_slice(&fs::read(&schedule_path)?)?;
+    let binding = quoridor_data::terminal_stream::IntakeBinding {
+        schema: "quoridor-terminal-stream-intake-v1".into(),
+        scope: "common-corpus".into(),
+        human_quantity_n: Some(study.families),
+        stream: quoridor_data::terminal_stream::BoundJson {
+            path: content.compressed.path.clone(),
+            sha256: content.compressed.sha256.clone(),
+        },
+        config: quoridor_data::terminal_stream::BoundJson {
+            path: e.config.path.clone(),
+            sha256: e.config.sha256.clone(),
+        },
+        sources: control_ref(&config.output.join("sources.json"))?,
+        schedule: control_ref(&schedule_path)?,
+        requests_sha256: schedule["requests_sha256"]
+            .as_str()
+            .ok_or("request SHA")?
+            .into(),
+        max_stream_bytes: config.max_output_bytes,
+        max_compressed_bytes: Some(256 * 1024 * 1024),
+        stream_content: Some(content.clone()),
+        max_line_bytes: GAME_BYTES,
+    };
+    let path = config.output.join("intake-binding.json");
+    save_control(&path, &serde_json::to_value(binding)?)?;
+    let cache = quoridor_data::terminal_stream::write_cache(
+        &content.compressed.path,
+        &config.output.join("cache"),
+        &path,
+        &quoridor_data::file_sha(&path)?,
+    )?;
+    Ok(
+        serde_json::json!({"planned":config.planned_games,"generation":report,"shared_cache":cache,"status":"DATA_RETURNED_PENDING_EXTERNAL_FINALIZATION"}),
+    )
 }
 
 /// No inference backend or model loading: one serial fixed-D process.
@@ -1278,6 +1440,7 @@ mod tests {
                 attempts_per_prefix: 32,
                 depth: 3,
                 max_nodes: 100000,
+                max_total_nodes: None,
                 tt_slots: 4096,
                 use_pvs: true,
                 solver_order_contact: false,

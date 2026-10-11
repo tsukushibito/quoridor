@@ -79,7 +79,8 @@ fn validate_common(c: &PilotConfig) -> Result<()> {
         || u64::try_from(c.planned_games)? != study.families
         || c.prefix_seed != study.prefix_seed
         || c.depth != 6
-        || c.max_nodes == 0
+        || c.max_nodes != 100_000_000
+        || c.max_total_nodes != Some(1_000_000_000)
         || c.ruleset != Ruleset::Standard2pThreefold
         || c.attempts_per_prefix != PREFIX_ATTEMPTS
         || c.tt_slots != 4096
@@ -120,7 +121,8 @@ pub fn validate(c: &PilotConfig) -> Result<()> {
         return validate_common(c);
     }
 
-    if c.common_study.is_some()
+    if c.max_total_nodes.is_some()
+        || c.common_study.is_some()
         || !matches!(c.phase, Phase::Depth6Throughput)
         || c.main_volume_n.is_some()
         || c.ruleset != Ruleset::Standard2pThreefold

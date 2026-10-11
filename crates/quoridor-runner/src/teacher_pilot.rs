@@ -41,6 +41,8 @@ pub struct PilotConfig {
     pub attempts_per_prefix: usize,
     pub depth: u16,
     pub max_nodes: u64,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub max_total_nodes: Option<u64>,
     pub tt_slots: usize,
     pub use_pvs: bool,
     pub solver_order_contact: bool,
@@ -64,7 +66,8 @@ impl PilotConfig {
         if matches!(self.phase, Phase::Depth6Throughput | Phase::CommonCorpus) {
             return depth6::validate(self);
         }
-        if self.common_study.is_some()
+        if self.max_total_nodes.is_some()
+            || self.common_study.is_some()
             || self.main_volume_n.is_some()
             || self.game_workers.is_some()
             || !self.worker_cores.is_empty()

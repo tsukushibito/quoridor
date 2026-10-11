@@ -415,7 +415,10 @@ def source_check(source, *, native_only=False):
                 source[name]["path"] == str(expected) and files.get(str(expected)) == source[name],
                 "adopted Cargo " + name,
             )
-        for ref in source["compiled_sources"].values():
+        for ref in [
+            *source["compiled_sources"].values(),
+            *source.get("generator_compiled_sources", {}).values(),
+        ]:
             require(
                 files.get(ref["path"]) == ref, "compiled source projection outside adopted files"
             )
@@ -455,6 +458,271 @@ def build_input_refs(manifest):
     ]
 
 
+FIT_IMPORTS = (
+    "__init__",
+    "train",
+    "common",
+    "terminal_cache",
+    "cache",
+    "distance_steps",
+    "compact_cache",
+    "public_features",
+    "scaled_model",
+    "residual_model",
+    "model",
+    "sampling",
+    "supply",
+    "plotting",
+    "snapshot",
+    "cycle_process",
+)
+PILOT_DATA = ROOT / ".worktree/assets/data/common-corpus-warmstart-study/pilot-v1"
+PILOT_PLAN = ROOT / "research-data/ai-sigma/teacher-distance-tanh-v1/plan.json"
+QUALIFIER = (
+    ROOT
+    / ".worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/test_current_framework.py"
+)
+QUALIFIER_SHA = "283529837b13ec4d8976662488354d86adf983391449771b94ac45fe5351efcb"
+FIT_OUTPUTS = (
+    "freeze.json",
+    "config.json",
+    "scale.json",
+    "data.json",
+    "cache-binding.json.gz",
+    "initial.pt",
+    "best.pt",
+    "initial-model/manifest.json",
+    "initial-model/weights.f32",
+    "initial-model/training-target.json",
+    "best-model/manifest.json",
+    "best-model/weights.f32",
+    "best-model/training-target.json",
+    "last.pt",
+    "last-model/manifest.json",
+    "last-model/weights.f32",
+    "last-model/training-target.json",
+    "warm-start.json",
+    "z-curves.svg",
+    "completed_root_raw-curves.svg",
+    "curves.csv",
+    "observations.jsonl.gz",
+    "run-status.json",
+)
+
+
+def numerical_check(experiment, manifest):
+    q = document(experiment["numerical_qualification"])
+    expected = {
+        "schema": "quoridor.research.numerical-qualification.v1",
+        "status": "PASS",
+        "phase": experiment["phase"],
+        "artifact_sha256": manifest["artifact"]["sha256"],
+        "compiled_sources_sha256": canonical_sha(manifest["compiled_sources"]),
+        "config_sha256": experiment["config"]["sha256"],
+        "schedule_sha256": experiment["schedule"]["sha256"],
+        "input_sha256": [r["sha256"] for r in experiment["inputs"]],
+        "descriptor_sha256": [r["descriptor"]["sha256"] for r in experiment["models"]],
+        "weights_sha256": [r["weights"]["sha256"] for r in experiment["models"]],
+        "evaluator_sha256": [r["evaluator_sha256"] for r in experiment["models"]],
+        "rules": experiment["rules"],
+        "distance_units": experiment["distance_units"],
+        "value_perspective": experiment["value_perspective"],
+        "canonical_plan_sha256": experiment["canonical_plan_sha256"],
+        "remaining": [],
+    }
+    require(
+        all(q.get(k) == v for k, v in expected.items()),
+        "current numerical/source/model/input correspondence",
+    )
+    return q
+
+
+def common_pilot_check(spec, experiment, manifest, approved):
+    phase = experiment["phase"]
+    require(spec["approved_plan"]["path"] == str(PILOT_PLAN), "canonical common pilot plan")
+    study = approved["next_learning_study"]
+    require(
+        study["issue"] == "quoridor-4lc.362"
+        and study["scientific_entry"] is True
+        and study["corpus"]["quantity_families"] == 8,
+        "selected retained eight-game pilot",
+    )
+    require(
+        experiment["rules"] == "research-standard-2p-threefold-goal-first-v1"
+        and experiment["distance_units"] == "wall-distance/80"
+        and experiment["value_perspective"] == "side-to-move"
+        and experiment.get("batch") is None,
+        "common pilot rules/units/perspective",
+    )
+    config = document(experiment["config"])
+    if phase == "corpus":
+        q = numerical_check(experiment, manifest)
+        require(
+            experiment["planned_slots"] == 8
+            and experiment["models"] == []
+            and experiment["argv"][1:]
+            == [
+                "teacher-pilot",
+                "--experiment",
+                "@EXPERIMENT@",
+                "--experiment-sha256",
+                "@EXPERIMENT_SHA256@",
+            ],
+            "qualified corpus native entry",
+        )
+        require(
+            config["phase"] == "common_corpus"
+            and config["output"] == spec["data_root"] == str(PILOT_DATA)
+            and config["planned_games"] == config["main_volume_n"] == 8
+            and config["depth"] == 6
+            and config["max_nodes"] == 100_000_000
+            and config["max_total_nodes"] == 1_000_000_000
+            and config["max_total_plies"] == 200
+            and config["per_move_timeout_ms"] is None
+            and config["distance_a"] == 0
+            and config["distance_b"] == 8,
+            "selected corpus limits and owned output",
+        )
+        common = config["common_study"]
+        require(
+            common["selected_plan"] == {k: spec["approved_plan"][k] for k in ("path", "sha256")}
+            and experiment["inputs"][0] == spec["approved_plan"]
+            and document(experiment["schedule"]) == study["corpus"]["blind_schedule"],
+            "blind corpus selected-plan/schedule binding",
+        )
+        require(
+            q["generator_compiled_sources_sha256"]
+            == canonical_sha(manifest["generator_compiled_sources"]),
+            "actual current generator closure",
+        )
+        return
+    require(experiment["planned_slots"] == 0, "fit/qualification is a nongame operation")
+    python = manifest["tools"]["PYTHON"]["file"]["path"]
+    require(
+        spec["cwd"] == str(ROOT)
+        and spec["env"].get("PYTHONDONTWRITEBYTECODE") == "1"
+        and spec["env"].get("PYTHONPATH")
+        == "/home/vscode/.cache/inference/envs/quoridor-research-team/lib/python3.14/site-packages:"
+        + str(ROOT / "python")
+        and all(
+            spec["env"].get(k) == "1"
+            for k in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS")
+        ),
+        "pinned framework/import/thread environment",
+    )
+    warm = study["common_learner_settings"]["experiment"]["warm_start"]
+    require(
+        experiment["models"]
+        == [
+            {
+                "descriptor": warm["descriptor"],
+                "weights": warm["weights"],
+                "evaluator_sha256": warm["evaluator_sha256"],
+            }
+        ],
+        "same selected incumbent for fit or framework qualification",
+    )
+    if phase == "software-qualification":
+        require(
+            set(config) == {"definition", "helper_sources", "result"}
+            and config["definition"]["path"] == str(QUALIFIER)
+            and config["definition"]["sha256"] == QUALIFIER_SHA
+            and config["definition"] in experiment["inputs"],
+            "fixed affected framework definitions",
+        )
+        require(
+            all(r in experiment["inputs"] for r in config["helper_sources"]),
+            "bound qualifier helpers",
+        )
+        require(
+            config["result"] == str(Path(spec["data_root"]) / "qualification.json")
+            and spec["argv"] == [python, "-B", str(QUALIFIER), "--result", config["result"]],
+            "software qualifier exact entry/output",
+        )
+        require(
+            spec["data"] == [{"name": "qualification", "path": config["result"], "limit_B": 65536}],
+            "software qualifier durable receipt",
+        )
+        return
+    numerical_check(experiment, manifest)
+    require(
+        len(experiment["models"]) == 1
+        and experiment["models"][0]
+        == {
+            "descriptor": config["experiment"]["warm_start"]["descriptor"],
+            "weights": config["experiment"]["warm_start"]["weights"],
+            "evaluator_sha256": config["experiment"]["warm_start"]["evaluator_sha256"],
+        },
+        "fit same incumbent model",
+    )
+    require(
+        len(spec["argv"]) == 13
+        and spec["argv"][:5] == [python, "-B", "-m", "quoridor_training.train", "train"]
+        and spec["argv"][5:9]
+        == ["--cache", str(PILOT_DATA / "cache"), "--output", spec["data_root"]]
+        and spec["argv"][9:11] == ["--config", experiment["config"]["path"]]
+        and spec["argv"][11] == "--input-binding",
+        "fit exact trainer/cache/output/config inlet",
+    )
+    binding_ref = next((r for r in experiment["inputs"] if r["path"] == spec["argv"][12]), None)
+    require(binding_ref is not None, "actual fit input binding")
+    binding = document(binding_ref)
+    require(
+        binding["selected_plan"] == {k: spec["approved_plan"][k] for k in ("path", "sha256")}
+        and binding["fit_config_sha"] == experiment["config"]["sha256"],
+        "same approved fit decision",
+    )
+    pairs = binding["paired_fit_configs"]
+    require(
+        len(pairs) == 2
+        and experiment["config"] in pairs
+        and all(r in experiment["inputs"] for r in pairs),
+        "bound selected two-teacher config pair",
+    )
+    targets = []
+    for r in pairs:
+        recipe = document(r)
+        target = recipe["training"].pop("target")
+        require(
+            recipe == study["common_learner_settings"],
+            "no unselected learner defaults or recipe change",
+        )
+        targets.append(target)
+    require(targets == ["z", "completed_root_raw"], "ordered distinct teacher pair")
+    require(
+        config["training"]["steps"] == 200 and config["training"]["batch_size"] == 64,
+        "selected fit quantity",
+    )
+    require(
+        {r["path"] for r in spec["data"]}
+        >= {str(Path(spec["data_root"]) / name) for name in FIT_OUTPUTS},
+        "owed actual frozen fit outputs",
+    )
+    cache_ref = next(
+        (r for r in experiment["inputs"] if r["path"] == str(PILOT_DATA / "cache/cache.json")), None
+    )
+    require(
+        cache_ref is not None
+        and cache_ref["sha256"] == binding["cache_manifest_sha"]
+        and not (PILOT_DATA / "cache/INCOMPLETE").exists(),
+        "authoritative shared cache",
+    )
+    cache = document(cache_ref)
+    eligible = cache["common_corpus"]["common_eligible_by_split"]
+    require(
+        all(type(eligible.get(k)) is int and eligible[k] > 0 for k in ("train", "validation")),
+        "common eligible T and V must both be nonempty before trainer",
+    )
+
+    require(
+        cache["stream_intake"]["status"] == "complete"
+        and cache["schedule_sha256"] == binding["schedule_sha256"]
+        and cache["family_partition_sha256"] == binding["family_partition_sha256"]
+        and cache["source_binding"] == binding["dataset"],
+        "same source/schedule/partition/dual cache",
+    )
+
+
 def caller_source_refs(spec, experiment):
     paths = {
         ROOT / "scripts/dev/research-lifecycle.py",
@@ -462,6 +730,14 @@ def caller_source_refs(spec, experiment):
         ROOT / "python/quoridor_training/cycle_process.py",
         ROOT / "python/quoridor_training/snapshot.py",
     }
+    if experiment["phase"] in {"fit", "software-qualification"}:
+        paths |= {ROOT / "python/quoridor_training" / (name + ".py") for name in FIT_IMPORTS}
+        if experiment["phase"] == "software-qualification":
+            config = document(experiment["config"])
+            paths |= {
+                Path(config["definition"]["path"]),
+                *(Path(r["path"]) for r in config["helper_sources"]),
+            }
     if experiment["phase"] == "analysis":
         paths |= {
             ROOT / "python/quoridor_training/research355" / (name + ".py")
@@ -540,7 +816,28 @@ def canonical_sha(value):
 
 def experiment_phase_check(experiment):
     phase = experiment["phase"]
-    require(phase in {"generation", "materialize", "compare", "arena", "analysis"}, "phase")
+    require(
+        phase
+        in {
+            "generation",
+            "materialize",
+            "compare",
+            "arena",
+            "analysis",
+            "corpus",
+            "fit",
+            "software-qualification",
+        },
+        "phase",
+    )
+    if phase == "software-qualification":
+        require(
+            experiment.get("numerical_qualification") is None
+            and experiment["planned_slots"] == 0
+            and experiment.get("batch") is None,
+            "software-only qualifier cannot claim numerical/game qualification",
+        )
+        return
     if phase != "generation":
         require(
             isinstance(experiment.get("numerical_qualification"), dict),
@@ -641,6 +938,8 @@ def experiment_check(spec):
     )
     approved = approved_plan(spec, experiment)
     refs.append(spec["approved_plan"])
+    if experiment["phase"] in {"corpus", "fit", "software-qualification"}:
+        common_pilot_check(spec, experiment, manifest, approved)
     if experiment["phase"] == "arena":
         arena_plan_check(experiment, approved)
         require(
@@ -648,7 +947,7 @@ def experiment_check(spec):
             "arena owned runtime output",
         )
     executable = manifest["artifact"]["path"]
-    if experiment["phase"] == "analysis":
+    if experiment["phase"] in {"analysis", "fit", "software-qualification"}:
         python = manifest["tools"]["PYTHON"]["file"]
         read_ref(python, max(CONTROL_BYTES, python["bytes"]))
         executable = python["path"]
@@ -1380,6 +1679,52 @@ def collect_data(spec, experiment):
             )
         except BaseException as error:
             data["errors"].append({"stage": "scientific_journal", **error_fact(error)})
+    if experiment["phase"] in {"corpus", "fit", "software-qualification"}:
+        try:
+            if experiment["phase"] == "software-qualification":
+                receipt = json.loads(values["qualification"])
+                require(
+                    receipt["schema"] == "quoridor.common-corpus-framework-qualification.v1"
+                    and receipt["status"] == "PASS"
+                    and receipt["tests_run"] == 3
+                    and receipt["failures"] == receipt["errors"] == []
+                    and receipt["actual_model_forwards"] == receipt["fit_updates"] == 0
+                    and receipt["scientific_corpus_qualified"] is False,
+                    "affected framework qualification failed",
+                )
+                data["scope"] = "software-only; no corpus or numerical PASS"
+            elif experiment["phase"] == "fit":
+                state = json.loads(values["run_status"])
+                require(
+                    state["status"] == "COMPLETED"
+                    and state["fault"] is None
+                    and state["step"] == 200,
+                    "actual complete 200-update fit required",
+                )
+            else:
+                report = json.loads(values["generation_result"])
+                require(
+                    report["planned"] == 8 and report["recorded"] == 8,
+                    "full planned corpus denominator",
+                )
+                data["known_goals"] = report["goals"]
+                data["known_draws"] = report["draws"]
+                data["unknown"] = report["unknown"]
+                require(
+                    report["search_nodes"] <= 1_000_000_000, "actual returned corpus work ceiling"
+                )
+                cache = json.loads(values["cache_manifest"])
+                require(
+                    cache["stream_intake"]["status"] == "complete", "atomic shared cache intake"
+                )
+                content = json.loads(values["stream_content"])
+                ref = content["compressed"]
+                read_ref(ref, ref["bytes"])
+                data["canonical_compressed_source"] = ref
+                data["raw_content_sha256"] = content["raw_sha256"]
+                data["raw_content_B"] = content["raw_bytes"]
+        except BaseException as error:
+            data["errors"].append({"stage": "common_pilot_data", **error_fact(error)})
     if data["errors"]:
         data["status"] = "FAILED"
     return data
@@ -1654,6 +1999,19 @@ def execute(
                                 "actual zero-model bindings",
                             )
                             result["compiled_sources"] = metadata["compiled_sources"]
+                            if "generator_compiled_sources" in spec["source"]:
+                                expected_generator = {
+                                    k: r["sha256"]
+                                    for k, r in spec["source"]["generator_compiled_sources"].items()
+                                }
+                                require(
+                                    metadata.get("generator_compiled_sources")
+                                    == expected_generator,
+                                    "current generator source binding",
+                                )
+                                result["generator_compiled_sources"] = metadata[
+                                    "generator_compiled_sources"
+                                ]
                             require(
                                 metadata["compiled_sources"]
                                 == {
@@ -1697,6 +2055,8 @@ def execute(
                         "QUORIDOR_LIFECYCLE_INTENT_PATH": spec_ref["path"],
                         "QUORIDOR_LIFECYCLE_PARENT_PID": str(os.getpid()),
                     }
+                    if experiment["phase"] == "software-qualification":
+                        Path(spec["data_root"]).mkdir()
                     row = {"name": "run", "argv": spec["argv"]}
                     run_error = None
                     try:
@@ -1924,10 +2284,25 @@ def _prepare_completion(directory, job_ref):
                 k: ref["sha256"] for k, ref in candidate["source"]["compiled_sources"].items()
             }
             require(candidate["compiled_sources"] == expected, "final adopted source projection")
+            if "generator_compiled_sources" in candidate["source"]:
+                expected_generator = {
+                    k: r["sha256"]
+                    for k, r in candidate["source"]["generator_compiled_sources"].items()
+                }
+                require(
+                    candidate.get("generator_compiled_sources") == expected_generator,
+                    "final generator source projection",
+                )
             bindings = [c for c in candidate["checks"] if c["role"] == "bindings"]
             require(bool(bindings), "actual bindings missing")
             for check in bindings:
                 metadata = json.loads(read_ref(check["full_log"]))
+                if "generator_compiled_sources" in candidate["source"]:
+                    require(
+                        metadata.get("generator_compiled_sources")
+                        == candidate["generator_compiled_sources"],
+                        "final generator bindings log",
+                    )
                 require(
                     metadata["compiled_sources"] == expected
                     and metadata["executable_sha256"] == candidate["artifact"]["sha256"]

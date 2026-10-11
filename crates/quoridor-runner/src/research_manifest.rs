@@ -119,7 +119,7 @@ pub fn sources() -> BTreeMap<&'static str, String> {
 }
 pub fn bindings() -> Result<Value> {
     Ok(
-        json!({"schema":"quoridor.research.bindings.v1","compiled_sources":sources(),"executable_sha256":crate::arena_manifest::file_sha256(&std::env::current_exe()?)?,"model_calls":0}),
+        json!({"schema":"quoridor.research.bindings.v1","compiled_sources":sources(),"generator_compiled_sources":crate::teacher_pilot_execution::compiled_sources(),"executable_sha256":crate::arena_manifest::file_sha256(&std::env::current_exe()?)?,"model_calls":0}),
     )
 }
 fn build_status(build: &Value) -> bool {
@@ -149,6 +149,21 @@ fn phase_shape(e: &Experiment) -> bool {
                 && e.argv[1..]
                     == [
                         "strength-book",
+                        "--experiment",
+                        "@EXPERIMENT@",
+                        "--experiment-sha256",
+                        "@EXPERIMENT_SHA256@",
+                    ]
+        }
+        "corpus" => {
+            e.numerical_qualification.is_some()
+                && e.models.is_empty()
+                && e.planned_slots == 8
+                && e.batch.is_none()
+                && e.argv.len() == 6
+                && e.argv[1..]
+                    == [
+                        "teacher-pilot",
                         "--experiment",
                         "@EXPERIMENT@",
                         "--experiment-sha256",
@@ -382,12 +397,37 @@ fn load_checked(
         || q["distance_units"] != e.distance_units
         || q["value_perspective"] != e.value_perspective
         || q["remaining"] != json!([])
-        || (phase == "arena" && q["canonical_plan_sha256"] != approved.sha256)
+        || (matches!(phase, "arena" | "corpus") && q["canonical_plan_sha256"] != approved.sha256)
     {
         return Err("research current numerical/history/model/input qualification required".into());
     }
     Ok((e, q))
 }
+#[cfg(test)]
+mod common_corpus_phase_tests {
+    use super::*;
+    #[test]
+    fn corpus_requires_numerical_proof_exact_eight_and_maintained_caller() {
+        let r =
+            json!({"path":"/synthetic/control","sha256":"0".repeat(64),"bytes":1,"mode":"0644"});
+        let mut e:Experiment=serde_json::from_value(json!({"schema":"quoridor.research.experiment.v1",
+            "phase":"corpus","build_manifest":r,"config":r,"inputs":[r],"models":[],"dynamic_libraries":[],
+            "schedule":r,"numerical_qualification":r,"canonical_plan_sha256":"0".repeat(64),
+            "rules":"research-standard-2p-threefold-goal-first-v1","distance_units":"wall-distance/80",
+            "value_perspective":"side-to-move","planned_slots":8,"batch":null,
+            "argv":["/synthetic/native","teacher-pilot","--experiment","@EXPERIMENT@","--experiment-sha256","@EXPERIMENT_SHA256@"]})).unwrap();
+        assert!(phase_shape(&e));
+        e.numerical_qualification = None;
+        assert!(!phase_shape(&e));
+        e.numerical_qualification = Some(serde_json::from_value(r).unwrap());
+        e.planned_slots = 0;
+        assert!(!phase_shape(&e));
+        e.planned_slots = 8;
+        e.argv[1] = "strength-book".into();
+        assert!(!phase_shape(&e));
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -547,7 +587,7 @@ mod generic_arena_361_bound_entry_tests {
                 )
                 .unwrap(),
             );
-            let build=file(&format!("build-{i}.json"),&serde_json::to_vec(&json!({"schema":"quoridor.research.build-manifest.v1","status":"PASS","cleanup_complete":true,"remaining":[],"compiled_sources":sources(),"artifact":artifact,
+            let build=file(&format!("build-{i}.json"),&serde_json::to_vec(&json!({"schema":"quoridor.research.build-manifest.v1","status":"PASS","cleanup_complete":true,"remaining":[],"compiled_sources":sources(),"generator_compiled_sources":crate::teacher_pilot_execution::compiled_sources(),"artifact":artifact,
                 "checks":["test","lint","build","bindings"].map(|r|json!({"role":r,"guardian_return":{"exit_code":0,"cleanup_complete":true}}))})).unwrap());
             let evaluator = arena::digest(format!("fake-evaluator-{i}").as_bytes());
             let q=file(&format!("FAKE-Q-{i}.json"),&serde_json::to_vec(&json!({"fixture_only":"NOT NUMERICAL PROOF","schema":"quoridor.research.numerical-qualification.v1","status":"PASS","phase":"arena","artifact_sha256":artifact.sha256,"compiled_sources_sha256":arena::json_digest(&sources()).unwrap(),"config_sha256":config.sha256,"schedule_sha256":schedule.sha256,"input_sha256":[book.sha256],"descriptor_sha256":[descriptor.sha256],"weights_sha256":[weights.sha256],"evaluator_sha256":[evaluator],"rules":"research-standard-2p-threefold-goal-first-v1","distance_units":"wall-distance/80","value_perspective":"side-to-move","remaining":[],"canonical_plan_sha256":approved.sha256})).unwrap());
