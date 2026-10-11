@@ -307,12 +307,16 @@ fn warm_game(p: &Plan, book: &Value) -> Result<Option<Value>> {
     let experiment: Experiment = original.read()?;
     if experiment.phase != "arena"
         || experiment.batch != Some(0)
-        || experiment.planned_slots != 32
+        || experiment.planned_slots != 512
         || experiment.config != p.warm_config
     {
         return Err("360 original batch0 configuration provenance".into());
     }
     let config: Value = p.warm_config.read()?;
+    // The originating Experiment owns the global512 denominator; this config owns local32.
+    if config["games"] != 32 {
+        return Err("360 original batch0 local32 configuration required".into());
+    }
     let first = &config["arena"]["book"]["openings"][0];
     if first["reference"]["settings"]["family_id"] != 0
         || first["prefix"] != book["families"][0]["prefix"]
@@ -1252,5 +1256,71 @@ mod input_qualification_tests {
         let journal = fs::read_to_string(output.root.join("observations.jsonl")).unwrap();
         assert_eq!(journal.lines().count(), 2);
         fs::remove_dir_all(parent).unwrap();
+    }
+
+    #[test]
+    fn ordering360_qualification_warm_origin_global512_local32() {
+        // Synthetic publisher shape only: exercise the owning correspondence, no geometry/model.
+        let dir =
+            std::env::temp_dir().join(format!("ordering360-warm-domain-{}", std::process::id()));
+        std::fs::create_dir(&dir).unwrap();
+        let file = |name: &str, value: &Value| {
+            let path = dir.join(name);
+            let raw = serde_json::to_vec(value).unwrap();
+            std::fs::write(&path, &raw).unwrap();
+            FileRef {
+                path,
+                sha256: arena::digest(&raw),
+                bytes: raw.len() as u64,
+                mode: "0644".into(),
+            }
+        };
+        let book = json!({"families":[{"prefix":[13]}]});
+        let mut config = json!({"games":32,"run_id":"warm-fixture","arena":{"first_candidate_colors":[0],"book":{"openings":[{"prefix":[13],"reference":{"settings":{"family_id":0}}}]}}});
+        let journal = file(
+            "journal.jsonl",
+            &json!({"game":0,"candidate_color":0,"family":"warm-fixture-family-000000"}),
+        );
+        // warm_game requires a newline-complete journal, just as the real publisher writes.
+        let mut raw = std::fs::read(&journal.path).unwrap();
+        raw.push(b'\n');
+        std::fs::write(&journal.path, &raw).unwrap();
+        let journal = FileRef {
+            sha256: arena::digest(&raw),
+            bytes: raw.len() as u64,
+            ..journal
+        };
+        let dummy = file("not-numerical-proof.json", &json!({"fixture_only":true}));
+        let source_plan = json!({"schema":"quoridor.continuation360.plan.v1","assessment":dummy,"resources":dummy,"book":dummy,"warm_origin":dummy,"warm_config":dummy,"warm_journal":journal,"output":dir.join("unused-output")});
+        for (i, (global, local, accepted)) in [(512, 32, true), (32, 32, false), (512, 31, false)]
+            .into_iter()
+            .enumerate()
+        {
+            config["games"] = json!(local);
+            let config_ref = file(&format!("config-{i}.json"), &config);
+            let experiment = json!({"schema":"quoridor.research.experiment.v1","phase":"arena","build_manifest":dummy,"config":config_ref,"inputs":[],"models":[],"dynamic_libraries":[],"schedule":dummy,"numerical_qualification":null,"canonical_plan_sha256":"fixture-only","rules":RULES,"distance_units":"wall-distance/80","value_perspective":"side-to-move","planned_slots":global,"batch":0,"argv":[]});
+            let experiment_ref = file(&format!("experiment-{i}.json"), &experiment);
+            let origin_dir = dir.join(format!("origin-{i}"));
+            std::fs::create_dir(&origin_dir).unwrap();
+            let origin_path = origin_dir.join("manifest.json");
+            let origin = json!({"status":"PASS","cleanup_complete":true,"remaining":[],"data":{"files":[journal]},"experiment":experiment_ref});
+            let raw = serde_json::to_vec(&origin).unwrap();
+            std::fs::write(&origin_path, &raw).unwrap();
+            let origin_ref = FileRef {
+                path: origin_path,
+                sha256: arena::digest(&raw),
+                bytes: raw.len() as u64,
+                mode: "0644".into(),
+            };
+            let mut plan: Plan = serde_json::from_value(source_plan.clone()).unwrap();
+            plan.warm_origin = origin_ref;
+            plan.warm_config = config_ref;
+            let result = warm_game(&plan, &book);
+            assert_eq!(result.is_ok(), accepted, "global={global}, local={local}");
+            if accepted {
+                assert_eq!(result.unwrap().unwrap()["game"], 0);
+            }
+        }
+        std::fs::remove_dir_all(dir).unwrap();
     }
 }
