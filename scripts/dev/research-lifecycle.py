@@ -229,12 +229,27 @@ def physical_and_quiet(spec):
         "physical RAM admission",
     )
     cores = [cfg["worker_cpu"], cfg["guardian_cpu"]]
+    if "child_cpu_cores" in spec:
+        cores = spec["child_cpu_cores"]
+        require(
+            spec["kind"] == "run"
+            and isinstance(cores, list)
+            and len(cores) == 4
+            and all(type(c) is int and c >= 0 for c in cores)
+            and len(set(cores)) == 4
+            and cfg["worker_cpu"] in cores
+            and cfg["guardian_cpu"] in cores,
+            "declared two-worker corpus with two physical reserve cores",
+        )
     require(set(cores) <= os.sched_getaffinity(0), "CPU affinity admission")
     identities = []
     for core in cores:
         p = Path(f"/sys/devices/system/cpu/cpu{core}/topology")
         identities.append(((p / "physical_package_id").read_text(), (p / "core_id").read_text()))
-    require(identities[0] != identities[1], "worker/guardian must be distinct physical cores")
+    require(
+        len(set(identities)) == len(identities),
+        "worker/guardian/reserves must be distinct physical cores",
+    )
     # One instantaneous named scan. Lifetime conflicts serialize through the shared lease.
     for entry in Path("/proc").iterdir():
         if not entry.name.isdigit() or int(entry.name) == os.getpid():
@@ -335,15 +350,22 @@ def command(spec, row, directory, resources, executor=process.execute, *, ledger
     primary, record, capture = None, None, None
     try:
         capture = Capture(directory / (row["name"] + ".full.log"), spec["limits"]["log_B"])
+        cpu_args = {"cpu_core": spec["limits"]["worker_cpu"]}
+        if "child_cpu_cores" in spec:
+            require(
+                spec["kind"] == "run" and document(spec["experiment"])["phase"] == "corpus",
+                "multi-core launch is only the qualified corpus",
+            )
+            cpu_args = {"cpu_core": None, "cpu_cores": spec["child_cpu_cores"]}
         record = executor(
             row["argv"],
             directory / (row["name"] + ".log"),
             None,
-            cpu_core=spec["limits"]["worker_cpu"],
             resources=resources,
             cwd=spec["cwd"],
             env=spec["env"],
             output_sink=capture,
+            **cpu_args,
         )
         check["guardian_return"] = record
         settled(record)
@@ -555,7 +577,21 @@ def common_pilot_check(spec, experiment, manifest, approved):
         "common pilot rules/units/perspective",
     )
     config = document(experiment["config"])
+    if phase != "corpus":
+        require("child_cpu_cores" not in spec, "multi-core corpus cannot widen other phases")
     if phase == "corpus":
+        cpus = spec.get("child_cpu_cores")
+        require(
+            isinstance(cpus, list)
+            and len(cpus) == 4
+            and all(type(c) is int and c >= 0 for c in cpus)
+            and cpus == sorted(set(cpus))
+            and cpus[:2] == config["worker_cores"]
+            and config["cpu_core"] == cpus[0]
+            and spec["limits"]["worker_cpu"] in cpus[:2]
+            and spec["limits"]["guardian_cpu"] == cpus[2],
+            "native two-worker admission preserves two actual host reserve cores",
+        )
         q = numerical_check(experiment, manifest)
         require(
             experiment["planned_slots"] == 8
@@ -602,7 +638,7 @@ def common_pilot_check(spec, experiment, manifest, approved):
         spec["cwd"] == str(ROOT)
         and spec["env"].get("PYTHONDONTWRITEBYTECODE") == "1"
         and spec["env"].get("PYTHONPATH")
-        == "/home/vscode/.cache/inference/envs/quoridor-research-team/lib/python3.14/site-packages:"
+        == "/home/vscode/.cache/inference/envs/quoridor-training/lib/python3.14/site-packages:"
         + str(ROOT / "python")
         and all(
             spec["env"].get(k) == "1"

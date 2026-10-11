@@ -1,0 +1,48 @@
+{
+  "source_preimages": [
+    {
+      "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+      "sha256": "89d8e955f99f876741c6814b162836b60ebeeb0b6eb3c3507ff0355b8e7cd414",
+      "bytes": 97690,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/python/quoridor_training/cycle_process.py",
+      "sha256": "8ed30d655da5573fe3401e3ca3ff0347c0bea04c7fa24a05046b642d155b1532",
+      "bytes": 20666,
+      "mode": "0644"
+    }
+  ],
+  "source_postimages": [
+    {
+      "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+      "sha256": "274843077706986566551fc2005209791485f7de42dc215d5277fb784e7a6ebd",
+      "bytes": 99197,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/python/quoridor_training/cycle_process.py",
+      "sha256": "711c333a2b5821923c2fc36330ab06e479a375ebd300e3d63a700aecd8525709",
+      "bytes": 21263,
+      "mode": "0644"
+    }
+  ],
+  "producer_bindings": [
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/affinity-repair-v6/source-STOP.json",
+      "sha256": "ae556fa8668a09e895e357b7a6a15fe77aaf3d745133c6b4351c863484d2926e",
+      "bytes": 6023,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/environment-repair-v7/source-STOP.json",
+      "sha256": "0b40b1f7cfd119eff6874ea2ac336797634940b242a10d6c43aecc32c0468f85",
+      "bytes": 5118,
+      "mode": "0644"
+    }
+  ],
+  "verification": "Exact current preimages, gzip custody, strict unified-patch reconstruction and unaffected definition AST checks; supplied affected CPU child PASS and environment static check reused, no replay. Scoped Ruff formatting check and lint PASS; supplied affected boundary results reused without replay.",
+  "adopted_at": "2026-10-11T11:12:01.650458+00:00",
+  "build_reuse": "Original 4ce963 BuildManifest and 1d40 Rust image, generic35/generator45 remain immutable. Current caller references change through existing native_only port.",
+  "pilot": "Deadline 2026-10-11T11:07:41.369110Z expired; no new pilot operation authorized by this adoption."
+}

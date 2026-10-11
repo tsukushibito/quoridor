@@ -221,7 +221,16 @@ def save_record(path, record):
 
 
 def execute(
-    command, log, deadline, cpu_core=None, resources=None, *, cwd=None, env=None, output_sink=None
+    command,
+    log,
+    deadline,
+    cpu_core=None,
+    resources=None,
+    *,
+    cwd=None,
+    env=None,
+    output_sink=None,
+    cpu_cores=None,
 ):
     """Always TERM→KILL→wait; retain a bounded tail plus exact cleanup evidence."""
     if resources:
@@ -272,7 +281,17 @@ def execute(
 
             def prepare_child():
                 signal.pthread_sigmask(signal.SIG_SETMASK, launch_mask)
-                if cpu_core is not None:
+                if cpu_cores is not None:
+                    if (
+                        cpu_core is not None
+                        or not isinstance(cpu_cores, (list, tuple))
+                        or not cpu_cores
+                        or any(type(c) is not int or c < 0 for c in cpu_cores)
+                        or len(set(cpu_cores)) != len(cpu_cores)
+                    ):
+                        raise ValueError("one explicit nonempty unique child CPU allocation")
+                    os.sched_setaffinity(0, set(cpu_cores))
+                elif cpu_core is not None:
                     os.sched_setaffinity(0, {cpu_core})
 
             child = subprocess.Popen(
