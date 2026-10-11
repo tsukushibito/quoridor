@@ -1,0 +1,355 @@
+{
+  "counts": {
+    "D_goals": 157,
+    "accepted": 13919,
+    "BEST43_goals": 98
+  },
+  "statuses": {
+    "goal": 255,
+    "draw": 1
+  },
+  "stops": {
+    "depth_cap": 13919
+  },
+  "draws": [
+    {
+      "slot": 233,
+      "family": 116,
+      "total_plies": 17,
+      "new_plies": 1,
+      "reason": "threefold_draw"
+    }
+  ],
+  "unused_TT_contexts": [
+    {
+      "slot": 233,
+      "side_index": 1
+    }
+  ],
+  "colours": {
+    "0": {
+      "score": 48.5,
+      "games": 128
+    },
+    "1": {
+      "score": 50.0,
+      "games": 128
+    }
+  },
+  "score": 0.384765625,
+  "missing_UNKNOWN_rejected": 0,
+  "completed4_requested4_deadlineNULL_all": true,
+  "complete_pairs": 128,
+  "work_time": {
+    "BEST43": {
+      "completed_depth": {
+        "count": 6945,
+        "total": 27780,
+        "min": 4,
+        "p50": 4.0,
+        "p90": 4.0,
+        "p99": 4.0,
+        "max": 4
+      },
+      "caller_seconds": {
+        "count": 6945,
+        "total": 326.7834694009998,
+        "min": 7.2621e-05,
+        "p50": 0.022656323,
+        "p90": 0.12947071260000004,
+        "p99": 0.22150985755999966,
+        "max": 0.375145432
+      },
+      "thinking_seconds": {
+        "count": 6945,
+        "total": 326.5736467459994,
+        "min": 6.0084e-05,
+        "p50": 0.022620045,
+        "p90": 0.12943314880000004,
+        "p99": 0.22130678127999984,
+        "max": 0.375013224
+      },
+      "nodes": {
+        "count": 6945,
+        "total": 195196605,
+        "min": 18,
+        "p50": 14438.0,
+        "p90": 79979.20000000003,
+        "p99": 149563.39999999985,
+        "max": 242614
+      },
+      "static_evaluations": {
+        "count": 6945,
+        "total": 153497405,
+        "min": 2,
+        "p50": 9399.0,
+        "p90": 66138.40000000001,
+        "p99": 130004.95999999979,
+        "max": 216099
+      },
+      "tt_exact_hits": {
+        "count": 6945,
+        "total": 4486,
+        "min": 0,
+        "p50": 0.0,
+        "p90": 0.0,
+        "p99": 13.0,
+        "max": 21
+      },
+      "tt_key_builds": {
+        "count": 6945,
+        "total": 41006677,
+        "min": 14,
+        "p50": 4939.0,
+        "p90": 14348.800000000001,
+        "p99": 20150.239999999983,
+        "max": 26519
+      },
+      "tt_history_items": {
+        "count": 6945,
+        "total": 1139180525,
+        "min": 640,
+        "p50": 188930.0,
+        "p90": 297031.6,
+        "p99": 402967.75999999815,
+        "max": 592394
+      },
+      "tt_retained_bytes": {
+        "count": 6945,
+        "total": 7282295760,
+        "min": 1047832,
+        "p50": 1048576.0,
+        "p90": 1048576.0,
+        "p99": 1048576.0,
+        "max": 1048576
+      },
+      "tt_capacity_skips": {
+        "count": 6945,
+        "total": 38621983,
+        "min": 10,
+        "p50": 4895.0,
+        "p90": 13021.600000000008,
+        "p99": 19257.359999999997,
+        "max": 26515
+      },
+      "search_elapsed_seconds": {
+        "count": 6945,
+        "total": 326.5467858180013,
+        "min": 5.9276e-05,
+        "p50": 0.022617476,
+        "p90": 0.12942944100000003,
+        "p99": 0.22130314631999984,
+        "max": 0.375009091
+      }
+    },
+    "D0b8": {
+      "completed_depth": {
+        "count": 6974,
+        "total": 27896,
+        "min": 4,
+        "p50": 4.0,
+        "p90": 4.0,
+        "p99": 4.0,
+        "max": 4
+      },
+      "caller_seconds": {
+        "count": 6974,
+        "total": 141.89517458499935,
+        "min": 6.1361e-05,
+        "p50": 0.003054855,
+        "p90": 0.059412024699999996,
+        "p99": 0.0817474936399998,
+        "max": 0.144343788
+      },
+      "thinking_seconds": {
+        "count": 6974,
+        "total": 141.70525439800008,
+        "min": 5.009e-05,
+        "p50": 0.0030328175,
+        "p90": 0.059379048899999995,
+        "p99": 0.08170513372999981,
+        "max": 0.144312559
+      },
+      "nodes": {
+        "count": 6974,
+        "total": 134362417,
+        "min": 16,
+        "p50": 5768.5,
+        "p90": 55294.59999999999,
+        "p99": 84360.19999999992,
+        "max": 142652
+      },
+      "static_evaluations": {
+        "count": 6974,
+        "total": 105338255,
+        "min": 3,
+        "p50": 5403.0,
+        "p90": 41887.49999999999,
+        "p99": 69815.81,
+        "max": 126739
+      },
+      "tt_exact_hits": {
+        "count": 6974,
+        "total": 3047,
+        "min": 0,
+        "p50": 0.0,
+        "p90": 0.0,
+        "p99": 7.0,
+        "max": 12
+      },
+      "tt_key_builds": {
+        "count": 6974,
+        "total": 28977615,
+        "min": 14,
+        "p50": 327.0,
+        "p90": 13061.099999999999,
+        "p99": 17281.239999999994,
+        "max": 19016
+      },
+      "tt_history_items": {
+        "count": 6974,
+        "total": 655491141,
+        "min": 592,
+        "p50": 19724.5,
+        "p90": 261157.49999999997,
+        "p99": 343869.9299999998,
+        "max": 444732
+      },
+      "tt_retained_bytes": {
+        "count": 6974,
+        "total": 7312684856,
+        "min": 1047736,
+        "p50": 1048576.0,
+        "p90": 1048576.0,
+        "p99": 1048576.0,
+        "max": 1048576
+      },
+      "tt_capacity_skips": {
+        "count": 6974,
+        "total": 26794764,
+        "min": 10,
+        "p50": 323.0,
+        "p90": 12041.199999999999,
+        "p99": 16322.699999999995,
+        "max": 18748
+      },
+      "search_elapsed_seconds": {
+        "count": 6974,
+        "total": 141.6819849749997,
+        "min": 4.9663e-05,
+        "p50": 0.003026593,
+        "p90": 0.05937084419999999,
+        "p99": 0.0817017121399998,
+        "max": 0.144308152
+      }
+    }
+  },
+  "batches": [
+    {
+      "batch": 0,
+      "manifest_SHA256": "12223b8b288c7af7fae1a4c951ae7dd5b5b1543038e67ae26fe12c5391a30e15",
+      "original_journal_result_equal": true,
+      "local32_complete": true,
+      "controller_whole_s_once": 87.9283838920528,
+      "native_result_wall_s": 86.819912243,
+      "returned_cleanup_complete": true
+    },
+    {
+      "batch": 1,
+      "manifest_SHA256": "2df05c7b131257819c1336ca98270f83f81ee234d2650218e6525c881d90ceae",
+      "original_journal_result_equal": true,
+      "local32_complete": true,
+      "controller_whole_s_once": 70.31080658105202,
+      "native_result_wall_s": 68.788311338,
+      "returned_cleanup_complete": true
+    },
+    {
+      "batch": 2,
+      "manifest_SHA256": "8cca5dd7a280c9bc9980a93230c2e80e5b15ca1549956326e1ab4b8b304abbaa",
+      "original_journal_result_equal": true,
+      "local32_complete": true,
+      "controller_whole_s_once": 60.72207643697038,
+      "native_result_wall_s": 59.432582299,
+      "returned_cleanup_complete": true
+    },
+    {
+      "batch": 3,
+      "manifest_SHA256": "1e761ddc44ce9e6a3d601f496692ccee7aa5ba24319fdbe217446564afdd2572",
+      "original_journal_result_equal": true,
+      "local32_complete": true,
+      "controller_whole_s_once": 60.10999573604204,
+      "native_result_wall_s": 58.323985985,
+      "returned_cleanup_complete": true
+    },
+    {
+      "batch": 4,
+      "manifest_SHA256": "2cb2c5f9c4b3122dd7c35d49e1b1a04ec5c914bd881f8cd8215b92532977d2ad",
+      "original_journal_result_equal": true,
+      "local32_complete": true,
+      "controller_whole_s_once": 54.665183042990975,
+      "native_result_wall_s": 53.431608103,
+      "returned_cleanup_complete": true
+    },
+    {
+      "batch": 5,
+      "manifest_SHA256": "beff7b7b74a733a53f9df257238395db48896d9f2be491687b003a9cc82e701e",
+      "original_journal_result_equal": true,
+      "local32_complete": true,
+      "controller_whole_s_once": 54.45911108399741,
+      "native_result_wall_s": 53.247799935,
+      "returned_cleanup_complete": true
+    },
+    {
+      "batch": 6,
+      "manifest_SHA256": "0f4536d4b0d46082d087d7c5fe425aa0bb9795c58e5fa6d0e1661551efec448b",
+      "original_journal_result_equal": true,
+      "local32_complete": true,
+      "controller_whole_s_once": 43.7087469099788,
+      "native_result_wall_s": 42.634515903,
+      "returned_cleanup_complete": true
+    },
+    {
+      "batch": 7,
+      "manifest_SHA256": "e448955c417f075de29190f94e5e0f14872e1fa60cb0564de502c36070545ef4",
+      "original_journal_result_equal": true,
+      "local32_complete": true,
+      "controller_whole_s_once": 47.71739005995914,
+      "native_result_wall_s": 46.476882984,
+      "returned_cleanup_complete": true
+    }
+  ],
+  "source_image_model_book_fullhistory_colour_correspondence": true,
+  "bootstrap": {
+    "random": "random.Random(35520261010)",
+    "choice": "128 rng.choice(means) calls per draw, in ascending family_id order",
+    "draws": 10000,
+    "linear_percentiles": [
+      0.0125,
+      0.9875
+    ],
+    "central_mass_descriptive": 0.975,
+    "interval": [
+      0.314453125,
+      0.45703125
+    ],
+    "sampling_scope": "post-hoc exploratory conditional colour-paired-family; not confirmatory/population/IID/familywise coverage",
+    "fixed_denominators": {
+      "games": 256,
+      "families": 128
+    },
+    "wall_s": 0.1458896320546046
+  },
+  "guard": {
+    "UTC": "2026-10-11T01:36:27.746477+00:00",
+    "named": [],
+    "MemAvailable_B": 19505647616,
+    "CPU": 4,
+    "AS_B": 536870912
+  },
+  "aggregation_wall_s": 0.38717928796540946,
+  "whole_helper_wall_s": 0.5331213430035859,
+  "VmHWM_KiB": 38332,
+  "continuous_family_peak": "UNKNOWN",
+  "no_source_math_model_geometry_replay": true,
+  "canonical_finite_NB_lease_released": true
+}

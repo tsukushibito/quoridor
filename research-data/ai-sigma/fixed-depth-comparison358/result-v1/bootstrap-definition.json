@@ -1,0 +1,13 @@
+{
+  "frozen_before_any_bootstrap": true,
+  "seed": 35520261010,
+  "draws": 10000,
+  "family_sort": "ascending family_id 0..127",
+  "sampling_call": "sum(rng.choice(means) for _ in range(128))/128",
+  "linear_percentiles": [
+    0.0125,
+    0.9875
+  ],
+  "only_one_exploratory_run": true,
+  "previous_failed_checks_had_not_entered_bootstrap": true
+}

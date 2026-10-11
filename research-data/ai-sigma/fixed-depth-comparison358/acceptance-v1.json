@@ -1,0 +1,133 @@
+{
+  "issue": "quoridor-4lc.358",
+  "accepted": true,
+  "scientific_scope": "Original128families/256games/BEST43-v-fixedD/bothcompleteddepth4/no100ms/oldTT; no new experiment or future method choice",
+  "independent_control": {
+    "path": "/workspaces/quoridor/.artifacts/fixed-depth-comparison358/result-review-v1/control.json",
+    "sha256": "359f2276c316af5e9ac901a081857f9171404d8f846f1c02db505b7df7c1c761",
+    "bytes": 12189,
+    "mode": "0644"
+  },
+  "fixed_handoff_sha256": "9105a1d562fc7cab450b633bda39e7bb4d8e3b1becdf43d19ab51ce29c1d2af2",
+  "plan_sha256": "8bec5174a4f097ad66a870ef59ad6c3ad3e4a741c6d6d0eeedb98c862c3a9ef2",
+  "result": {
+    "fixed_games": 256,
+    "fixed_families": 128,
+    "complete_pairs": 128,
+    "BEST43_goals": 98,
+    "D_goals": 157,
+    "threefold_draws": 1,
+    "candidate_score": 0.384765625,
+    "score_total": 98.5,
+    "missing_UNKNOWN_rejected": 0,
+    "accepted_decisions": 13919,
+    "accepted_requested_completed_depth": 4,
+    "deadline": "NULL all",
+    "stop_fields": {
+      "depth_cap": 13919
+    },
+    "draw": [
+      {
+        "slot": 233,
+        "family": 116,
+        "total_plies": 17,
+        "new_plies": 1,
+        "reason": "threefold_draw"
+      }
+    ],
+    "short_terminal_unused_TT": [
+      {
+        "slot": 233,
+        "side_index": 1
+      }
+    ],
+    "paired_scores": "family-scores.json derived from originals",
+    "source_image_model_fullhistory_colour_same_approved": true,
+    "compiled_map_SHA256": "dbcfad3ff50924cac7a91eaaf1826bcf2b85b1f93807a9b65ebc17f62774b319",
+    "original_journal_result_identity_and_derived_census_agreement": true
+  },
+  "exploratory_uncertainty": {
+    "random": "random.Random(35520261010)",
+    "choice": "128 rng.choice(means) calls per draw, in ascending family_id order",
+    "draws": 10000,
+    "linear_percentiles": [0.0125, 0.9875],
+    "central_mass_descriptive": 0.975,
+    "interval": [0.314453125, 0.45703125],
+    "sampling_scope": "post-hoc exploratory conditional colour-paired-family; not confirmatory/population/IID/familywise coverage",
+    "fixed_denominators": {
+      "games": 256,
+      "families": 128
+    },
+    "wall_s": 0.1458896320546046
+  },
+  "interpretation": {
+    "supported": "BEST43 disadvantage in this frozen completed-depth4 shared-lineage cohort, with stated conditional exploratory uncertainty",
+    "unsupported": [
+      "population/IID/familywise coverage",
+      "generalstrength/Elo",
+      "perfect evaluator-only or unique causal isolation",
+      "physical head calls/arithmetic speed or throughput",
+      "default/model/TT/search/N/fits changes"
+    ],
+    "original355_tests": "unchanged; no original355 game data replay"
+  },
+  "original_errors_masks_costs": {
+    "eight_original_RUN_manifests_authority": "retained, no substitute inventory authority",
+    "directwait_cleanup": "fixed original owner/guardian receipts; no new universal host/fault qualification",
+    "returned_mask_final_record": "completed",
+    "original_persisted_mask_final_record": "pending/attempted retained",
+    "producer_reader_STOP": "2026-10-11T01:08:07.962189Z",
+    "continuous_fairness_RSS_workerUTC_admin_fees_UNKNOWN": "held"
+  },
+  "cost_scope": "Partial checks/tool/scheduling/LLM/admin costs not all exactly measured; UNKNOWN preserved. Scientific eight controller sum479.6216937430436 once, nested native not added; software fees separate. Own helper aggregation/bootstrap nested in own process, formatter/binding/admin separate.",
+  "original_eight_manifests_only_completion_authority": true,
+  "reviewer_reader_STOP": "2026-10-11T01:37:15.105963+00:00",
+  "reviewer_owned_remaining": [],
+  "canonical_small_preservation": [
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/fixed-depth-comparison358/result-v1/report.md",
+      "sha256": "82d4ccac712231b802fb126c1e3743952cab4e9a239825497858f64c720f1827",
+      "bytes": 6895,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/fixed-depth-comparison358/result-v1/control.json",
+      "sha256": "359f2276c316af5e9ac901a081857f9171404d8f846f1c02db505b7df7c1c761",
+      "bytes": 12189,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/fixed-depth-comparison358/result-v1/findings.json",
+      "sha256": "24e08a70129753af7cfcf5df1dc65670f1eb4993cadd2a3eddc4146a8fefe885",
+      "bytes": 593,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/fixed-depth-comparison358/result-v1/aggregation.json",
+      "sha256": "7eab61994a251493bc44d73186437514a567c21db2a53a8ec1c8c65a51492f7c",
+      "bytes": 9316,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/fixed-depth-comparison358/result-v1/family-scores.json",
+      "sha256": "d2ced8e5115d4d7c5943a7d73fc8b75873546cb02b883027e8c264b1c7840596",
+      "bytes": 32168,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/fixed-depth-comparison358/result-v1/bootstrap-definition.json",
+      "sha256": "32a145be032edaf886339f9a8598ec477a76bffe5809203061ccdd22f98819ee",
+      "bytes": 349,
+      "mode": "0644"
+    }
+  ],
+  "no_original_journal_result_model_private_or_summary_payload_copy": true,
+  "Root_new_forward_inclusive_B": 262144,
+  "inside_held_final_review_Root_B": 524288,
+  "global_held_B": 49994555392,
+  "global_increment_refund_B": 0,
+  "normal_own_closure": "SAME358.1 metadata-only acceptance verification/close only ownleaf;Root358parent after actualownerclosure. No science/reader/adminACK gate for otheracceptedwork.",
+  "actual_Root_selected_metadata_reader_STOP": "2026-10-11T01:45:06.237232+00:00",
+  "Root_science_execution": 0,
+  "old_RAW_floors_FAILEDfees_masks_UNKNOWN_and323pause_defaults_seals_N_fits": "HELD"
+}

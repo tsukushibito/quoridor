@@ -1,0 +1,303 @@
+{
+  "issue": "quoridor-4lc.358.3",
+  "purpose": "Independent consequential frozen completed-depth4 cohort interpretation and ONE authorised saved-data exploratory uncertainty calculation",
+  "verdict": "result_clear",
+  "result_clear": true,
+  "blockers": [],
+  "ordinary_findings": [],
+  "fixed_target": {
+    "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/fixed-depth-comparison358-v1/completion-collection-v1/cohort-handoff.json",
+    "SHA256": "9105a1d562fc7cab450b633bda39e7bb4d8e3b1becdf43d19ab51ce29c1d2af2",
+    "bytes": 34029,
+    "mode": 420
+  },
+  "original_plan_SHA256": "8bec5174a4f097ad66a870ef59ad6c3ad3e4a741c6d6d0eeedb98c862c3a9ef2",
+  "original_STOP_SHA256": "7f3544e95499359f78685dab1c8876df95698fe52e533860ac566a0ed989f032",
+  "original_census_SHA256": "78c517a06ef8c4720ad3fd4fbb84d07898a882860a8acc7fd2fc66701773ce20",
+  "actual_turn_context_before_first_ordinary_commands": {
+    "first": "2026-10-11T01:23:58.718Z",
+    "resume": "2026-10-11T01:29:16.890Z",
+    "thread": "01a118c2-7aa3-7563-9ec1-c0a101183da1",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "cwd": "/workspaces/quoridor",
+    "os_getcwd_matches": true,
+    "sandbox_policy_type": "danger-full-access",
+    "approval_policy": "never"
+  },
+  "result": {
+    "fixed_games": 256,
+    "fixed_families": 128,
+    "complete_pairs": 128,
+    "BEST43_goals": 98,
+    "D_goals": 157,
+    "threefold_draws": 1,
+    "candidate_score": 0.384765625,
+    "score_total": 98.5,
+    "missing_UNKNOWN_rejected": 0,
+    "accepted_decisions": 13919,
+    "accepted_requested_completed_depth": 4,
+    "deadline": "NULL all",
+    "stop_fields": {
+      "depth_cap": 13919
+    },
+    "draw": [
+      {
+        "slot": 233,
+        "family": 116,
+        "total_plies": 17,
+        "new_plies": 1,
+        "reason": "threefold_draw"
+      }
+    ],
+    "short_terminal_unused_TT": [
+      {
+        "slot": 233,
+        "side_index": 1
+      }
+    ],
+    "paired_scores": "family-scores.json derived from originals",
+    "source_image_model_fullhistory_colour_same_approved": true,
+    "compiled_map_SHA256": "dbcfad3ff50924cac7a91eaaf1826bcf2b85b1f93807a9b65ebc17f62774b319",
+    "original_journal_result_identity_and_derived_census_agreement": true
+  },
+  "bootstrap": {
+    "random": "random.Random(35520261010)",
+    "choice": "128 rng.choice(means) calls per draw, in ascending family_id order",
+    "draws": 10000,
+    "linear_percentiles": [
+      0.0125,
+      0.9875
+    ],
+    "central_mass_descriptive": 0.975,
+    "interval": [
+      0.314453125,
+      0.45703125
+    ],
+    "sampling_scope": "post-hoc exploratory conditional colour-paired-family; not confirmatory/population/IID/familywise coverage",
+    "fixed_denominators": {
+      "games": 256,
+      "families": 128
+    },
+    "wall_s": 0.1458896320546046
+  },
+  "interpretation": {
+    "supported": "BEST43 disadvantage in this frozen completed-depth4 shared-lineage cohort, with stated conditional exploratory uncertainty",
+    "unsupported": [
+      "population/IID/familywise coverage",
+      "generalstrength/Elo",
+      "perfect evaluator-only or unique causal isolation",
+      "physical head calls/arithmetic speed or throughput",
+      "default/model/TT/search/N/fits changes"
+    ],
+    "original355_tests": "unchanged; no original355 game data replay"
+  },
+  "receipt_limits": {
+    "eight_original_RUN_manifests_authority": "retained, no substitute inventory authority",
+    "directwait_cleanup": "fixed original owner/guardian receipts; no new universal host/fault qualification",
+    "returned_mask_final_record": "completed",
+    "original_persisted_mask_final_record": "pending/attempted retained",
+    "producer_reader_STOP": "2026-10-11T01:08:07.962189Z",
+    "continuous_fairness_RSS_workerUTC_admin_fees_UNKNOWN": "held"
+  },
+  "own_reader_STOP": "2026-10-11T01:37:15.105963+00:00",
+  "canonical_finite_NB_lease_released": true,
+  "owned_readers_children_jobs_TMP_remaining": [],
+  "current_next_reservation": "NONE",
+  "actual_helper": {
+    "source": "assess.py, scoped Ruff format/check and check PASS",
+    "execution_START": "2026-10-11T01:36:27.126194Z",
+    "execution_STOP": "2026-10-11T01:36:27.837974Z",
+    "pid": 167094,
+    "start_ticks": "93585525",
+    "directwait_exit": 0,
+    "identity_absent": true,
+    "whole_child_process_wall_s": 0.7118441479979083,
+    "internal_helper_wall_s": 0.5331213430035859,
+    "aggregation_wall_s": 0.38717928796540946,
+    "bootstrap_wall_s_nested": 0.1458896320546046,
+    "VmHWM_KiB": 38332,
+    "CPU": 4,
+    "AS_B": 536870912,
+    "GPU": 0
+  },
+  "resources": {
+    "selected_refs": 80,
+    "selected_bytes": 56777758,
+    "input_cap_B": 67108864,
+    "own_output_cap_B": 1572864,
+    "Root_dispatch_Git_held_B": 524288,
+    "whole_review_B": 2097152,
+    "inside_original_review4MiB": true,
+    "sample_output_allocated_B_before_final_control": 311296,
+    "forward_control_admin_notice_failure_upper_B": 196608,
+    "raw_bootstrap_samples_accounted": "helper/log/raw forecast; compact family scores in family-scores component",
+    "V8_heap_MiB": 128,
+    "V8_RSS_sample_KiB": 60756,
+    "continuous_family_peak": "UNKNOWN",
+    "all_prior_uppers_RAW_failures_fees_UNKNOWN": "held, no refund/global increment/borrow"
+  },
+  "own_failures_retained": [
+    "initial NB lease refusal; no reads/bootstrap",
+    "schedule shape mismatch",
+    "over-universal TT assertions for uninitialized opponent in early terminal",
+    "unavailable assumed formatter path",
+    "Ruff unused import; repaired"
+  ],
+  "cost_scope": "Partial checks/tool/scheduling/LLM/admin costs not all exactly measured; UNKNOWN preserved. Scientific eight controller sum479.6216937430436 once, nested native not added; software fees separate. Own helper aggregation/bootstrap nested in own process, formatter/binding/admin separate.",
+  "prohibited_execution_counts": {
+    "source_build_model_Search_geometry_game_library_private_payload": 0,
+    "successful_old_suite_replay": 0,
+    "new_experiment": 0
+  },
+  "evidence_refs": [
+    {
+      "path": "/workspaces/quoridor/.artifacts/fixed-depth-comparison358/result-review-v1/prewrite.json",
+      "SHA256": "509fc1a74d9ce035febe6859bd8867ea8d4e11c927e16b2d6a9c88321197388a",
+      "bytes": 1037,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/fixed-depth-comparison358/result-review-v1/entry-refusal-v1.json",
+      "SHA256": "ad5b8829c32301525e5942bc642994d1bee16ee828cf0d9842be70c444e83207",
+      "bytes": 1995,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/fixed-depth-comparison358/result-review-v1/deferred-reader-STOP.json",
+      "SHA256": "b1a5fb6fc056016106afe7093237486f576a584cb532c062ff552f9d39d00363",
+      "bytes": 823,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/fixed-depth-comparison358/result-review-v1/entry-refs.json",
+      "SHA256": "cc78c57bc58bc708c84ee7d13a583ea9b02624c7d2c233adf62616510aeccba1",
+      "bytes": 1527,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/fixed-depth-comparison358/result-review-v1/input-before.json",
+      "SHA256": "baab46b6f7da62a2daeb9ba3bd2204bd4e6ceec37c994406507d9526bef96b76",
+      "bytes": 22338,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/fixed-depth-comparison358/result-review-v1/input-after.json",
+      "SHA256": "1573ec9f09d759c2d497fb7fd463368a2dadbcbdc7af5ff45ae3c1cc707cefc7",
+      "bytes": 25032,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/fixed-depth-comparison358/result-review-v1/receipt-boundary.json",
+      "SHA256": "b01da3296ccf472467c904f04e12b43a4bdd3d44867926912bad2f6d2fed242a",
+      "bytes": 5419,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/fixed-depth-comparison358/result-review-v1/assess.py",
+      "SHA256": "2fb5b5c9449d7c4ca72e9342ef0144c17b6932f1386db52edc5d30a52f73c58b",
+      "bytes": 21775,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/fixed-depth-comparison358/result-review-v1/bootstrap-definition.json",
+      "SHA256": "32a145be032edaf886339f9a8598ec477a76bffe5809203061ccdd22f98819ee",
+      "bytes": 349,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/fixed-depth-comparison358/result-review-v1/aggregation.json",
+      "SHA256": "7eab61994a251493bc44d73186437514a567c21db2a53a8ec1c8c65a51492f7c",
+      "bytes": 9316,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/fixed-depth-comparison358/result-review-v1/family-scores.json",
+      "SHA256": "d2ced8e5115d4d7c5943a7d73fc8b75873546cb02b883027e8c264b1c7840596",
+      "bytes": 32168,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/fixed-depth-comparison358/result-review-v1/bootstrap-samples.json",
+      "SHA256": "618e5889e2db6fca555a419b9a1dd45f742d94574deb73fa3872175b858f61ea",
+      "bytes": 118870,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/fixed-depth-comparison358/result-review-v1/assessment.process.json",
+      "SHA256": "609d9719275adad92325a03148e886ab2a8cd3419c43a400a987a0b89eb7cc76",
+      "bytes": 594,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/fixed-depth-comparison358/result-review-v1/assessment.stdout",
+      "SHA256": "7ebb4ea0240211b2a0f28d4cda6376b0c633a0eff45b1b49bc1e38398b61eed7",
+      "bytes": 782,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/fixed-depth-comparison358/result-review-v1/assessment.stderr",
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/fixed-depth-comparison358/result-review-v1/report.md",
+      "SHA256": "82d4ccac712231b802fb126c1e3743952cab4e9a239825497858f64c720f1827",
+      "bytes": 6895,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/fixed-depth-comparison358/result-review-v1/findings.json",
+      "SHA256": "24e08a70129753af7cfcf5df1dc65670f1eb4993cadd2a3eddc4146a8fefe885",
+      "bytes": 593,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/fixed-depth-comparison358/result-review-v1/python-format.json",
+      "SHA256": "c08c49ad6e2c1cacb745ee1fcdbebc950c3316dc4311078ebeeb4292fe25e416",
+      "bytes": 1441,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/fixed-depth-comparison358/result-review-v1/python-format-repaired.json",
+      "SHA256": "59bb489b838f632e323cede83d50363bdd929f316541848fad319039805e1d5e",
+      "bytes": 1393,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/fixed-depth-comparison358/result-review-v1/report-format.json",
+      "SHA256": "0352b4b5ca53d8216cfea43990e4b14c315c091be78f0ad5f18a27cba9a2ee1f",
+      "bytes": 576,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/fixed-depth-comparison358/result-review-v1/shape-refusal.json",
+      "SHA256": "1a5b21e7977d6fca70523c6a0f8e620dfbcaeca9f7ae6f3746ddb051997d453d",
+      "bytes": 262,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/fixed-depth-comparison358/result-review-v1/aggregation-refusal-v1.json",
+      "SHA256": "624bd6186bd1a3147ac730e5758a15aaae49b3f12b71d6af3099aa9aeda2ff46",
+      "bytes": 251,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/fixed-depth-comparison358/result-review-v1/aggregation-refusal-v2.json",
+      "SHA256": "d0c7000aa77c8659e6a34ef52d682dc2dff1d19c6632b3e9a86fa8c0e3f1228f",
+      "bytes": 261,
+      "mode": 420
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/fixed-depth-comparison358/result-review-v1/formatter-path-refusal.json",
+      "SHA256": "d59302a6ae15ad63c6350ad0a6ecbfe2dbbe12cb4e4fca0a57d333b154cee8a3",
+      "bytes": 377,
+      "mode": 420
+    }
+  ],
+  "source_Main_Git_index_default_model_seals_writes": 0,
+  "intake_owner": "324 sole; parent358 workflow unchanged",
+  "323": "USERPAUSE preserved",
+  "immutable_final_control": true
+}
