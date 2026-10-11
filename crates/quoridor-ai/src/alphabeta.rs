@@ -1230,10 +1230,10 @@ impl Search<'_> {
         let Ok(undo) = c.make_move(action) else {
             return Vec::new();
         };
-        if let Some(ref mut tag) = context {
-            if tag.advance(&undo, &c).is_err() {
-                return Vec::new();
-            }
+        if let Some(ref mut tag) = context
+            && tag.advance(&undo, &c).is_err()
+        {
+            return Vec::new();
         }
         if board.advance(&undo, &c).is_err() {
             return Vec::new();
@@ -1257,10 +1257,10 @@ impl Search<'_> {
             let Ok(undo) = c.make_move(action) else {
                 break;
             };
-            if let Some(ref mut tag) = context {
-                if tag.advance(&undo, &c).is_err() {
-                    break;
-                }
+            if let Some(ref mut tag) = context
+                && tag.advance(&undo, &c).is_err()
+            {
+                break;
             }
             if board.advance(&undo, &c).is_err() {
                 break;

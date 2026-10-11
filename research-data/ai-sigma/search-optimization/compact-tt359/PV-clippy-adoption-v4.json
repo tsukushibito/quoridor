@@ -1,0 +1,57 @@
+{
+  "issue": "quoridor-4lc.359",
+  "status": "ORDINARY_PV_SYNTAX_ADOPTED_SOFTWARE_PENDING",
+  "failure": {
+    "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/compact-tt359-v1/software-controls/candidate-entry-unfinished-v4/completion-collection-v1/failed-clippy-closure-STOP.json",
+    "sha256": "fa735261b46a0070cd6ac7373f21f7d422f0d35af906f90fd32f9801c2593946",
+    "bytes": 10404,
+    "mode": "0644"
+  },
+  "actual_prior_reader_STOP": "2026-10-11T03:12:19.891494+00:00",
+  "before": {
+    "path": "/workspaces/quoridor/crates/quoridor-ai/src/alphabeta.rs",
+    "sha256": "848ead468d3e7d2edb3c85b1f2bbd893984efa97598d237987e3266912ef4ed6",
+    "bytes": 103607,
+    "mode": "0644"
+  },
+  "postimages": [
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-ai/src/alphabeta.rs",
+      "sha256": "574614916311ea4d13a1d1026e4e8d5ca4738c697b7c60fb2d38e460bf86f33b",
+      "bytes": 103583,
+      "mode": "0644"
+    }
+  ],
+  "candidate_source_map": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/search-optimization/compact-tt359/candidate-source-map-clippy-v3.json",
+    "sha256": "8726627105bd7ae2d50c665f37b5cac47178da6728e74f9e98b7bb3712106940",
+    "bytes": 7968,
+    "mode": "0644"
+  },
+  "candidate_postmaps": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/search-optimization/compact-tt359/candidate-postmaps-clippy-v3.json",
+    "sha256": "a9a5aa666fc7c7916c29ebf3fc99cc291034ff3a5e0f61511f91e06469e7c2d0",
+    "bytes": 3192,
+    "mode": "0644"
+  },
+  "source_candidate_adoption": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/search-optimization/compact-tt359/candidate-adoption-v1.json",
+    "sha256": "342228d12cdead12a9bb9429dcea4a81dbd8ceb0ed5c2bd590b41e6a28a578bd",
+    "bytes": 4966,
+    "mode": "0644"
+  },
+  "prior_publication": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/search-optimization/compact-tt359/signed-zero-fixture-adoption-v2.json",
+    "sha256": "9babc53b1ad2da9a9c2ac61f318add38f41b744dc72bc1fa9817cdbd88c25758",
+    "bytes": 2860,
+    "mode": "0644"
+  },
+  "expected_candidate_map_sha256": "8726627105bd7ae2d50c665f37b5cac47178da6728e74f9e98b7bb3712106940",
+  "expected_baseline_map_sha256": "1a44de469225ba275b2c04eb1a80531b6713e15e9635997b11e100a97b9e4c59",
+  "scope": "PV syntax only, all other source bytes exact. No numerical/evaluation/window/terminal/PV error-body change.",
+  "validation": "Scoped Rustfmt2024 format/check and strict byte inverse PASS; no Clippy/test/model/Search calls here; prior00..14 not replayed.",
+  "actual_source_reader_writer_STOP": "2026-10-11T03:27:44.988729+00:00",
+  "owned_readers_children_jobs_TMP": [],
+  "funding": "Inclusive256KiB inside existing359 Root8MiB; global unchanged; all old RAW/floors/fees held.",
+  "administrative_refusals": "First map binder incorrectly expected files rather than records and refused before metadata writes; subsequent missing-file formatter refusals retained here. No source/test replay; costs UNKNOWN."
+}
