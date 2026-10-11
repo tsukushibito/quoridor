@@ -5,6 +5,9 @@ use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 use std::{collections::BTreeMap, fs, io::Read, path::PathBuf};
 
+const FIXED_DEPTH_PLAN_SHA256: &str =
+    "8bec5174a4f097ad66a870ef59ad6c3ad3e4a741c6d6d0eeedb98c862c3a9ef2";
+
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(deny_unknown_fields)]
 pub struct FileRef {
@@ -155,7 +158,11 @@ fn phase_shape(e: &Experiment) -> bool {
                         "@EXPERIMENT_SHA256@",
                     ]
         }
-        "materialize" | "compare" | "arena" | "analysis" => e.numerical_qualification.is_some(),
+        "materialize" | "compare" | "arena" | "analysis" => {
+            e.numerical_qualification.is_some()
+                && (e.planned_slots != 256
+                    || (e.phase == "arena" && e.batch.is_some_and(|b| b < 8)))
+        }
         _ => false,
     }
 }
@@ -187,11 +194,19 @@ pub fn load(bound: &BoundControl, phase: &str) -> Result<(Experiment, Value)> {
     if e.schema != "quoridor.research.experiment.v1"
         || e.phase != phase
         || !phase_shape(&e)
-        || e.canonical_plan_sha256 != crate::value_search_strength::PLAN_SHA256
+        || !arena::sha_valid(&e.canonical_plan_sha256)
+        || e.canonical_plan_sha256
+            != if e.planned_slots == 256 {
+                FIXED_DEPTH_PLAN_SHA256
+            } else {
+                crate::value_search_strength::PLAN_SHA256
+            }
+        || (e.planned_slots == 256
+            && (e.inputs.len() != 3 || e.inputs[1].sha256 != e.canonical_plan_sha256))
         || e.rules != "research-standard-2p-threefold-goal-first-v1"
         || e.distance_units != "wall-distance/80"
         || e.value_perspective != "side-to-move"
-        || !matches!(e.planned_slots, 0 | 512)
+        || !matches!(e.planned_slots, 0 | 256 | 512)
     {
         return Err("research fixed scientific experiment identity".into());
     }
@@ -289,6 +304,7 @@ pub fn load(bound: &BoundControl, phase: &str) -> Result<(Experiment, Value)> {
         || q["distance_units"] != e.distance_units
         || q["value_perspective"] != e.value_perspective
         || q["remaining"] != json!([])
+        || (e.planned_slots == 256 && q["canonical_plan_sha256"] != e.canonical_plan_sha256)
     {
         return Err("research current numerical/history/model/input qualification required".into());
     }
@@ -366,5 +382,106 @@ mod tests {
             evaluator_sha256: "0".repeat(64),
         });
         assert!(!phase_shape(&other));
+    }
+    #[test]
+    fn fixed_depth256_shape_requires_arena_nonnull_qualification_and_bounded_batch() {
+        let mut e = generation_fixture();
+        e.phase = "arena".into();
+        e.planned_slots = 256;
+        e.numerical_qualification = Some(e.config.clone());
+        e.batch = Some(0);
+        assert!(phase_shape(&e));
+        e.batch = None;
+        assert!(!phase_shape(&e));
+        e.batch = Some(8);
+        assert!(!phase_shape(&e));
+        e.batch = Some(0);
+        e.phase = "compare".into();
+        assert!(!phase_shape(&e));
+        e.phase = "arena".into();
+        e.numerical_qualification = None;
+        assert!(!phase_shape(&e));
+    }
+    #[test]
+    fn fixed_depth256_rejects_substituted_actual_plan_with_matching_experiment_and_qualification() {
+        use std::os::unix::fs::PermissionsExt;
+        let nonce = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap()
+            .as_nanos();
+        let directory =
+            std::env::temp_dir().join(format!("research-plan358-{}-{nonce}", std::process::id()));
+        fs::create_dir(&directory).unwrap();
+        let write_ref = |name: &str, value: &Value| {
+            let path = directory.join(name);
+            let bytes = serde_json::to_vec(value).unwrap();
+            fs::write(&path, &bytes).unwrap();
+            FileRef {
+                mode: format!(
+                    "{:04o}",
+                    fs::metadata(&path).unwrap().permissions().mode() & 0o777
+                ),
+                path,
+                sha256: arena::digest(&bytes),
+                bytes: bytes.len() as u64,
+            }
+        };
+        let plan = FileRef {
+            path: PathBuf::from(
+                "/workspaces/quoridor/research-data/ai-sigma/fixed-depth-comparison358/plan.json",
+            ),
+            sha256: FIXED_DEPTH_PLAN_SHA256.into(),
+            bytes: fs::metadata(
+                "/workspaces/quoridor/research-data/ai-sigma/fixed-depth-comparison358/plan.json",
+            )
+            .unwrap()
+            .len(),
+            mode: "0644".into(),
+        };
+        plan.verify().unwrap();
+        let mut e = generation_fixture();
+        e.phase = "arena".into();
+        e.planned_slots = 256;
+        e.batch = Some(0);
+        e.argv = [
+            "/bound/runner",
+            "arena",
+            "--experiment",
+            "@EXPERIMENT@",
+            "--experiment-sha256",
+            "@EXPERIMENT_SHA256@",
+        ]
+        .map(String::from)
+        .to_vec();
+        e.inputs = vec![e.config.clone(), plan, e.schedule.clone()];
+        e.canonical_plan_sha256 = FIXED_DEPTH_PLAN_SHA256.into();
+        e.numerical_qualification = Some(write_ref(
+            "qualification.json",
+            &json!({"canonical_plan_sha256":e.canonical_plan_sha256}),
+        ));
+        let attempt = |e: &Experiment| {
+            let file = write_ref("experiment.json", &serde_json::to_value(e).unwrap());
+            load(
+                &BoundControl {
+                    path: file.path,
+                    sha256: file.sha256,
+                },
+                "arena",
+            )
+            .unwrap_err()
+            .to_string()
+        };
+        // Only the early identity gate is exercised: the test harness cannot be the bound caller.
+        assert_eq!(attempt(&e), "research exact prebound caller argv required");
+        let replacement = write_ref("replacement-plan.json", &json!({"changed_plan":true}));
+        replacement.verify().unwrap();
+        e.canonical_plan_sha256 = replacement.sha256.clone();
+        e.inputs[1] = replacement;
+        let q = json!({"canonical_plan_sha256":e.canonical_plan_sha256});
+        e.numerical_qualification = Some(write_ref("qualification.json", &q));
+        assert_eq!(e.inputs[1].sha256, e.canonical_plan_sha256);
+        assert_eq!(q["canonical_plan_sha256"], e.canonical_plan_sha256);
+        assert_eq!(attempt(&e), "research fixed scientific experiment identity");
+        fs::remove_dir_all(directory).unwrap();
     }
 }

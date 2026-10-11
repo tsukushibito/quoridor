@@ -2641,6 +2641,15 @@ fn worker(
                         completed,
                         search_result.is_err() || !snapshots_valid,
                     );
+                    let fixed_depth = config.arena.as_ref().is_some_and(|a| {
+                        a.comparison == crate::arena::Comparison::EvaluatorFixedDepth
+                    });
+                    let depth_complete = search_result
+                        .as_ref()
+                        .is_ok_and(|r| crate::arena_clock::fixed_depth_completed(e.depth, r));
+                    if fixed_depth && decision.is_ok() && !depth_complete {
+                        decision = Err(crate::arena_clock::Failure::IncompleteDepth);
+                    }
                     // The run deadline is independent of each move clock.
                     if config.deadline_unix_ms > 0 && unix_ms() >= config.deadline_unix_ms {
                         decision = Err(crate::arena_clock::Failure::Deadline);
@@ -2651,6 +2660,11 @@ fn worker(
                     receipt_counters["clock_contract"] = SIGMA_RECEIPT_CLOCK.into();
                     receipt_counters["clock_contract_sha256"] =
                         SIGMA_RECEIPT_CONTRACT_SHA256.into();
+                    receipt_counters["requested_depth"] = e.depth.into();
+                    receipt_counters["fixed_depth_required"] = fixed_depth.into();
+                    receipt_counters["fixed_depth_completed"] = depth_complete.into();
+                    receipt_counters["search_elapsed_seconds"] =
+                        r.map(|r| r.elapsed.as_secs_f64()).into();
                     receipt_counters["authority_receipt_ns"] = ns(returned).into();
                     receipt_counters["receipt_latency_ns"] = 0u64.into();
                     // Keep all returned search work even when the caller's

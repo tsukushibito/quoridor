@@ -10,6 +10,8 @@ pub enum Failure {
     IllegalMove,
     EngineError,
     NoCompletedIteration,
+    /// A fixed-depth caller must never play a capped lower-depth result.
+    IncompleteDepth,
     NoCompletedSimulation,
     Cancelled,
     JobBudget,
@@ -462,5 +464,56 @@ mod research_threefold_failure_tests {
             assert_eq!(failure_from_reason(reason), Failure::NotStarted);
         }
         assert_eq!(failure_from_reason("unknown:output"), Failure::Unclassified);
+    }
+}
+
+/// Exact nonterminal iteration completion; a terminal root is handled by the rules loop.
+pub fn fixed_depth_completed(requested: u16, r: &SearchResult) -> bool {
+    requested > 0
+        && r.completed_depth == requested
+        && r.stop == StopReason::DepthComplete
+        && r.value.is_some_and(f32::is_finite)
+        && r.action.is_some_and(|a| r.pv.first() == Some(&a))
+}
+#[cfg(test)]
+mod fixed_depth_358_tests {
+    use super::*;
+    fn result(depth: u16, stop: StopReason) -> SearchResult {
+        SearchResult {
+            action: Some(13),
+            value: Some(0.25),
+            completed_depth: depth,
+            pv: vec![13],
+            stats: Default::default(),
+            stop,
+            elapsed: std::time::Duration::ZERO,
+        }
+    }
+    #[test]
+    fn node_time_cancel_or_partial_depth_never_admits_an_action() {
+        assert!(fixed_depth_completed(
+            4,
+            &result(4, StopReason::DepthComplete)
+        ));
+        for stop in [
+            StopReason::DepthComplete,
+            StopReason::NodeLimit,
+            StopReason::TimeLimit,
+            StopReason::Cancelled,
+        ] {
+            assert!(!fixed_depth_completed(4, &result(3, stop)));
+        }
+        assert!(!fixed_depth_completed(4, &result(4, StopReason::NodeLimit)));
+        assert!(!forfeitable(Failure::IncompleteDepth));
+    }
+    #[test]
+    fn claimed_terminal_or_nonfinite_or_incoherent_result_is_not_a_depth_exception() {
+        assert!(!fixed_depth_completed(4, &result(0, StopReason::Terminal)));
+        let mut r = result(4, StopReason::DepthComplete);
+        r.value = Some(f32::NAN);
+        assert!(!fixed_depth_completed(4, &r));
+        r.value = Some(0.25);
+        r.pv.clear();
+        assert!(!fixed_depth_completed(4, &r));
     }
 }

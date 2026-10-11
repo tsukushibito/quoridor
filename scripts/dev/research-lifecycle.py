@@ -628,7 +628,18 @@ def experiment_check(spec):
         read_ref(ref, max(CONTROL_BYTES, ref["bytes"]))
     if experiment["phase"] == "generation":
         generation_check(spec, experiment)
-    require(experiment["planned_slots"] in (0, 512), "planned512 or non-game stage")
+    require(
+        type(experiment["planned_slots"]) is int and experiment["planned_slots"] in (0, 256, 512),
+        "planned256/512 or non-game stage",
+    )
+    if experiment["planned_slots"] == 256:
+        require(
+            experiment["phase"] == "arena"
+            and type(experiment.get("batch")) is int
+            and 0 <= experiment["batch"] < 8,
+            "fixed-depth256 arena scope",
+        )
+        planned_game_slice(experiment, document(experiment["schedule"]))
     executable = manifest["artifact"]["path"]
     if experiment["phase"] == "analysis":
         python = manifest["tools"]["PYTHON"]["file"]
@@ -647,7 +658,7 @@ def experiment_check(spec):
     require(
         not Path(spec["data_root"]).exists(), "exclusive scientific output; duplicate run refused"
     )
-    if experiment["planned_slots"] == 512:
+    if experiment["planned_slots"] in (256, 512):
         require(
             {x["name"] for x in spec["data"]} >= {"journal", "result"},
             "mandatory scientific journal/result",
@@ -938,6 +949,54 @@ def generation_evidence(experiment, values):
     return evidence
 
 
+def planned_game_slice(experiment, schedule):
+    """One existing schedule format; full fixed-depth cohort or original timed batch."""
+    count = experiment["planned_slots"]
+    require(type(count) is int and count in (256, 512), "planned game count")
+    require(
+        isinstance(schedule, list)
+        and len(schedule) == count
+        and [x["slot"] for x in schedule] == list(range(count)),
+        "full frozen schedule",
+    )
+    if count == 256:
+        require(
+            experiment["phase"] == "arena"
+            and type(experiment.get("batch")) is int
+            and 0 <= experiment["batch"] < 8,
+            "fixed-depth256 scope",
+        )
+        require(
+            all(
+                all(
+                    type(x[k]) is int
+                    for k in (
+                        "slot",
+                        "local_game",
+                        "family_id",
+                        "candidate_color",
+                        "batch",
+                        "source_355_slot",
+                    )
+                )
+                and x["local_game"] == i % 32
+                and x["batch"] == i // 32
+                and x["family_id"] == i // 2
+                and x["candidate_color"] == (i // 2 + i // 32 + i % 2) % 2
+                and x["source_355_slot"] == (i // 32) * 64 + (1 - (i // 32) % 2) * 32 + i % 32
+                for i, x in enumerate(schedule)
+            ),
+            "fixed-depth full128 family-colour order",
+        )
+        return [x for x in schedule if x["batch"] == experiment["batch"]]
+    planned = [x for x in schedule if x["batch"] == experiment["batch"]]
+    require(
+        len(planned) == 32 and sorted(x["local_game"] for x in planned) == list(range(32)),
+        "whole32 batch slice",
+    )
+    return planned
+
+
 def collect_data(spec, experiment):
     """Preserve actual durable files and partial facts; never substitute a console tail."""
     data = {
@@ -971,18 +1030,11 @@ def collect_data(spec, experiment):
             data["generation"]["experiment"] = spec["experiment"]
         except BaseException as error:
             data["errors"].append({"stage": "generation_metadata", **error_fact(error)})
-    if experiment["planned_slots"] == 512:
+    if experiment["planned_slots"] in (256, 512):
         try:
             schedule = document(experiment["schedule"])
-            require(
-                len(schedule) == 512 and [x["slot"] for x in schedule] == list(range(512)),
-                "full512 frozen schedule",
-            )
-            planned = [x for x in schedule if x["batch"] == experiment["batch"]]
-            require(
-                len(planned) == 32 and sorted(x["local_game"] for x in planned) == list(range(32)),
-                "whole32 batch slice",
-            )
+            planned = planned_game_slice(experiment, schedule)
+            local_count = len(planned)
             data["planned_global_slots"] = [x["slot"] for x in planned]
             config = document(experiment["config"])
             records = []
@@ -994,7 +1046,7 @@ def collect_data(spec, experiment):
                 game = row["game"]
                 require(
                     type(game) is int
-                    and 0 <= game < 32
+                    and 0 <= game < local_count
                     and game not in data["observed_local_games"],
                     "duplicate/unplanned journal game",
                 )
@@ -1012,14 +1064,16 @@ def collect_data(spec, experiment):
                 require(row["status"] in {"goal", "forfeit", "draw", "unknown"}, "typed outcome")
                 records.append(row)
                 data["observed_local_games"].append(game)
-            data["missing_local_games"] = sorted(set(range(32)) - set(data["observed_local_games"]))
+            data["missing_local_games"] = sorted(
+                set(range(local_count)) - set(data["observed_local_games"])
+            )
             require(
                 not data["missing_local_games"],
                 "missing planned games; retained UNKNOWN denominator",
             )
             report = json.loads(values["result"])
             require(
-                report["planned"] == 32
+                report["planned"] == local_count
                 and report["all_workers_joined"] is True
                 and report["stopped"] is None,
                 "native run incomplete",

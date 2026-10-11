@@ -218,6 +218,17 @@ fn execute() -> Result<()> {
                 serde_json::to_string(&quoridor_runner::audit_arena(&output)?)?
             );
         }
+        "arena" if args.iter().any(|a| a == "--experiment") => {
+            strict_pairs(&args, &["--experiment", "--experiment-sha256"], &[])?;
+            let bound = quoridor_runner::sigma_qualification::BoundControl {
+                path: argument(&args, "--experiment")?.into(),
+                sha256: argument(&args, "--experiment-sha256")?,
+            };
+            println!(
+                "{}",
+                serde_json::to_string(&quoridor_runner::arena::run_bound(&bound)?)?
+            );
+        }
         "selfplay" | "arena" => {
             if qualified {
                 if command != "arena" {
@@ -244,6 +255,11 @@ fn execute() -> Result<()> {
             } else {
                 let config: Config =
                     serde_json::from_reader(File::open(argument(&args, "--config")?)?)?;
+                if config.arena.as_ref().is_some_and(|a| {
+                    a.comparison == quoridor_runner::arena::Comparison::EvaluatorFixedDepth
+                }) {
+                    return Err("fixed-depth arena requires the bound --experiment entry".into());
+                }
                 if config.run_id.starts_with("strength355-batch-") {
                     return Err("strength355 uses strength-arena --experiment, not the generic config route".into());
                 }

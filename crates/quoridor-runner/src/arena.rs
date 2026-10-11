@@ -12,6 +12,8 @@ pub const SCHEMA: &str = "quoridor-arena-v2";
 pub enum Comparison {
     Functional,
     EvaluatorWallTime,
+    /// Equal requested depth across different evaluators; capped moves stay UNKNOWN.
+    EvaluatorFixedDepth,
     SearchWallTime,
     SearchFixedWork,
     WholeWallTime,
@@ -259,6 +261,24 @@ impl ArenaConfig {
                 );
             }
         }
+        if self.comparison == Comparison::EvaluatorFixedDepth {
+            let a = &c.engines[0];
+            let b = &c.engines[1];
+            if a.kind == "mcts"
+                || b.kind == "mcts"
+                || a.time_ms.is_some()
+                || b.time_ms.is_some()
+                || a.depth == 0
+                || a.depth != b.depth
+                || a.max_nodes != b.max_nodes
+                || a.simd != b.simd
+                || self.search_source_sha256[0] != self.search_source_sha256[1]
+                || self.clock_policy != ClockPolicy::StrictUnknown
+                || self.return_reserve_ms != 0
+            {
+                return Err("fixed-depth evaluator mode needs equal depth/node/implementation, no clocks, strict UNKNOWN".into());
+            }
+        }
         if self.comparison == Comparison::EvaluatorWallTime {
             let a = &c.engines[0];
             let b = &c.engines[1];
@@ -390,4 +410,143 @@ pub fn validate_loaded_bindings(
         }
     }
     Ok(())
+}
+
+/// Maintained arena entry for the frozen completed-depth comparison. No book generation.
+pub fn run_bound(bound: &crate::sigma_qualification::BoundControl) -> Result<serde_json::Value> {
+    let (e, _) = crate::research_manifest::load(bound, "arena")?;
+    let c: Config = e.config.read()?;
+    let batch = e.batch.ok_or("fixed-depth batch required")?;
+    c.validate()
+        .map_err(|x| format!("fixed-depth config: {x}"))?;
+    let a = c.arena.as_ref().ok_or("fixed-depth arena required")?;
+    if e.planned_slots != 256
+        || batch >= 8
+        || c.games != 32
+        || c.workers != 1
+        || c.active_games != 1
+        || c.max_batch != 1
+        || c.max_plies != 200
+        || c.inference.is_some()
+        || c.inference_cpu_core.is_some()
+        || c.train_games.is_some()
+        || c.validation_games.is_some()
+        || c.cycle.is_some()
+        || a.comparison != Comparison::EvaluatorFixedDepth
+        || a.tt_entries != 4096
+        || a.retained_outcome_bytes != Some(crate::value_search_strength::OUTCOME_BYTES)
+        || e.inputs.len() != 3
+        || e.models.len() != 1
+        || e.inputs[0].sha256 != "a6abde1f3182ba0e876c9e7719d3389502a44b3406ca28b7af9a0456952a6878"
+        || e.inputs[1].sha256 != e.canonical_plan_sha256
+        || e.inputs[2].sha256 != "65a242a4ccec472a47a6aa0df806dd6dbf71a9e51bbdb27b550325765af5ebf3"
+        || e.models[0].descriptor.sha256
+            != crate::value_search_strength::APPROVED_DESCRIPTOR_SHA256[1]
+        || e.models[0].weights.sha256 != crate::value_search_strength::BEST43_WEIGHTS
+        || e.models[0].evaluator_sha256
+            != crate::value_search_strength::APPROVED_EVALUATOR_SHA256[1]
+        || c.engines[0].kind != "nnue"
+        || c.engines[0].model.as_ref() != Some(&e.models[0].descriptor.path)
+        || c.engines[1].kind != "distance"
+        || c.engines[1].model.is_some()
+        || c.engines[1].distance_a != 0.0
+        || c.engines[1].distance_b != 8.0
+        || c.engines
+            .iter()
+            .any(|x| x.depth != 4 || x.max_nodes != 6_000_000 || x.simd)
+    {
+        return Err("fixed-depth frozen256 BEST43/D scope required".into());
+    }
+    let book: crate::value_search_strength::GeneratedBook = e.inputs[0].read()?;
+    let original: Vec<serde_json::Value> = e.inputs[2].read()?;
+    let planned: Vec<serde_json::Value> = e.schedule.read()?;
+    let selected: Vec<_> = original.iter().filter(|x| x["matchup"] == 1).collect();
+    if !book.complete
+        || book.families.len() != 128
+        || selected.len() != 256
+        || planned.len() != 256
+        || a.book.openings.len() != 16
+        || a.first_candidate_colors.len() != 16
+    {
+        return Err("fixed-depth full128 book and256 colour slots required".into());
+    }
+    for (i, (slot, source)) in planned.iter().zip(selected).enumerate() {
+        if slot["slot"] != i
+            || slot["local_game"] != i % 32
+            || slot["batch"] != i / 32
+            || slot["family_id"] != i / 2
+            || slot["candidate_color"] != source["candidate_color"]
+            || slot["source_355_slot"] != source["slot"]
+            || source["family_id"] != i / 2
+            || slot["candidate_color"] != ((i / 2 + i / 32 + i % 2) % 2)
+        {
+            return Err("fixed-depth exact original colour swaps/schedule required".into());
+        }
+    }
+    for (i, (opening, family)) in a
+        .book
+        .openings
+        .iter()
+        .zip(&book.families[batch * 16..batch * 16 + 16])
+        .enumerate()
+    {
+        let reference = opening
+            .reference
+            .as_ref()
+            .ok_or("fixed-depth fullhistory reference")?;
+        let family_id = batch * 16 + i;
+        if family.family_id != family_id
+            || opening.id != family.id
+            || opening.prefix != family.prefix
+            || opening.original_seed != Some(family.seed)
+            || reference.source_sha256 != e.inputs[0].sha256
+            || reference.settings["family_id"] != family_id
+            || reference.settings["root_key"] != family.root_key
+            || reference.settings["history_counts"] != serde_json::to_value(&family.history_counts)?
+            || a.first_candidate_colors[i] != ((family_id + batch) % 2) as u8
+        {
+            return Err("fixed-depth same original fullhistory family required".into());
+        }
+    }
+    let report = crate::runtime::run(&c, "arena")?;
+    let receipt = crate::value_search_strength::result_receipt(&c, &report)?;
+    if report.stopped.is_some() || !report.all_workers_joined {
+        return Err("fixed-depth incomplete: durable planned evidence retained".into());
+    }
+    Ok(receipt)
+}
+
+#[cfg(test)]
+mod fixed_depth_358_tests {
+    use super::*;
+    fn fixture() -> Config {
+        serde_json::from_value(serde_json::json!({"ruleset":"standard_2p_threefold","run_id":"fixed-depth-new-fixture","output":"unused","games":2,"workers":1,
+        "engines":[{"kind":"nnue","model":"/bound/manifest.json","depth":4,"max_nodes":6000000},{"kind":"distance","depth":4,"max_nodes":6000000}],
+        "arena":{"comparison":"evaluator_fixed_depth","clock_policy":"strict_unknown","return_reserve_ms":0,"tt_entries":4096,"bootstrap_seed":358,"bootstrap_resamples":1,
+        "evaluator_sha256":["a".repeat(64),"b".repeat(64)],"search_source_sha256":["c".repeat(64),"c".repeat(64)],
+        "book":{"id":"bound","usage":"main","frozen_before_candidate_results":true,"independence":"shared fixed cohort","openings":[{"id":"one","cohort":"main","lineage":"bound","siblings":[],"original_seed":1,"reference":null,"selection_reason":"frozen","candidate_pool_size":1,"prefix":[13]}]}}})).unwrap()
+    }
+    #[test]
+    fn different_evaluators_are_allowed_only_with_equal_completed_depth_contract() {
+        let c = fixture();
+        assert!(c.arena.as_ref().unwrap().validate(&c).is_ok());
+        let mut unequal = c.clone();
+        unequal.engines[1].depth = 3;
+        assert!(unequal.arena.as_ref().unwrap().validate(&unequal).is_err());
+    }
+    #[test]
+    fn fixed_depth_clocks_forfeits_and_search_limit_drift_refuse() {
+        let c = fixture();
+        for case in 0..5 {
+            let mut changed = c.clone();
+            match case {
+                0 => changed.engines[0].time_ms = Some(100),
+                1 => changed.engines[1].max_nodes = 1,
+                2 => changed.arena.as_mut().unwrap().clock_policy = ClockPolicy::StrictForfeit,
+                3 => changed.arena.as_mut().unwrap().return_reserve_ms = 5,
+                _ => changed.engines[0].simd = true,
+            }
+            assert!(changed.arena.as_ref().unwrap().validate(&changed).is_err());
+        }
+    }
 }
