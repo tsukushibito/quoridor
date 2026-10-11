@@ -332,7 +332,7 @@ fn compact359_ghi_future_draw_ordering_only_absence_and_numeric_match() {
     let mut session = SearchSession::new(Arc::new(Constant), ns("constant0.25"), 4096).unwrap();
     let cancel = AtomicBool::new(false);
     let ra = session.search(&a, &limits(1, true, true), &cancel).unwrap();
-    assert_eq!(ra.value.unwrap().to_bits(), 0f32.to_bits());
+    assert_eq!(ra.value.unwrap().to_bits(), (-0.0f32).to_bits());
     let rb = session.search(&b, &limits(1, true, true), &cancel).unwrap();
     assert_eq!(rb.value.unwrap().to_bits(), (-0.25f32).to_bits());
     assert!(rb.stats.tt_order_context_mismatch > 0);

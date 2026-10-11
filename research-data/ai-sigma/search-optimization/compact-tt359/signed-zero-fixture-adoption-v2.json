@@ -1,0 +1,50 @@
+{
+  "issue": "quoridor-4lc.359",
+  "status": "ORDINARY_GHI_EXPECTATION_REPAIR_ADOPTED_AFFECTED_SOFTWARE_PENDING",
+  "failure": {
+    "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/compact-tt359-v1/software-controls/candidate-entry-unfinished-v2/completion-collection-v1/failed-unfinished-candidate-STOP.json",
+    "sha256": "4c0650b39481f7df1067e41f6dcdb1c6ee684be4c468c5825acce13bfc36fe41",
+    "bytes": 10360,
+    "mode": "0644"
+  },
+  "actual_prior_reader_STOP": "2026-10-11T02:44:22.059171+00:00",
+  "before": {
+    "path": "/workspaces/quoridor/crates/quoridor-ai/src/compact_tt359_tests.rs",
+    "sha256": "9327c0122720d64a37f298b95803bbbea50a6905c49f908195dfd68c10a6d50a",
+    "bytes": 20063,
+    "mode": "0644"
+  },
+  "postimages": [
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-ai/src/compact_tt359_tests.rs",
+      "sha256": "ef03b164a61fe70fe341b176549c33c9a860e78f4f425a9135974186b7f888ce",
+      "bytes": 20068,
+      "mode": "0644"
+    }
+  ],
+  "candidate_source_map": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/search-optimization/compact-tt359/candidate-source-map-signed-zero-v2.json",
+    "sha256": "fcb5cf6351cde8dd70eef252758315e8d8982842f5c93bc21b4d7c1151007027",
+    "bytes": 7968,
+    "mode": "0644"
+  },
+  "original_candidate_map": {
+    "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/compact-tt359-v1/caller-source-v1/candidate-source-map.json",
+    "sha256": "588d72554c1f2ffe2e43fd9f9e3280107440b1f07d02539c398df9e7359c68a3",
+    "bytes": 7968,
+    "mode": "0644"
+  },
+  "source_candidate_adoption": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/search-optimization/compact-tt359/candidate-adoption-v1.json",
+    "sha256": "342228d12cdead12a9bb9429dcea4a81dbd8ceb0ed5c2bd590b41e6a28a578bd",
+    "bytes": 4966,
+    "mode": "0644"
+  },
+  "source_publication_scope": "One assertion expected bits +0.0 -> -0.0, exact inverse restores original test bytes. Child maps v to -v after undo; terminal draw is +0.0 before parent negation. All later GHI assertions and production TT/search/terminal/evaluator code unchanged. No normalization or test weakening.",
+  "validation": "Scoped Rustfmt2024/check and byte inverse PASS; no tests, Cargo, model, Search or games executed. Original00/01/02/03 definitionPASS retained without replay; GHI04 and05..17 unfinished.",
+  "actual_source_reader_writer_STOP": "2026-10-11T02:46:13.696148+00:00",
+  "funding": "New inclusive256KiB fixture/map/control/dispatch/Git inside existing359 Root8MiB. Old failures/RAW/fees/masks/UNKNOWN and global49994555392 retained.",
+  "owned_readers_children_jobs_TMP": [],
+  "expected_baseline_map_sha256": "1a44de469225ba275b2c04eb1a80531b6713e15e9635997b11e100a97b9e4c59",
+  "expected_candidate_map_sha256": "fcb5cf6351cde8dd70eef252758315e8d8982842f5c93bc21b4d7c1151007027"
+}
