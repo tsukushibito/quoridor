@@ -25,6 +25,8 @@ NodeはWeb/Vite/TypeScript、Wasm製品ビルド・検証、品質とソース�
 
 Rustの共通crateから過去frameのコードや管理scriptを呼ばない。PythonはRustが生成・検証したtensor又は66B canonical geometryを読み、学習loop内では限定batchのQF1特徴を展開する。ルール・距離・盤面の合法性を学習loopで再計算しない。モデル定義・設定・尺度は同packageに置き、`sys.path`で旧ツールを取り込まない。学習済み重みと凍結データはコード移行で書き換えない。
 
+各保証には一つの検証境界を定める。詳細なsource・履歴・teacherの対応はcache変換・公開で検証し、学習は固定binaryと必要な小さいconfig・identity・件数・family/split情報を消費する。下流でsource全体を再検証する追加処理には、既存境界では防げない具体的な失敗条件を示す。受渡しの精度・schema・単位は正本を一つにし、同じteacherをJSON数値とFP32で繰り返し解釈・比較しない。変更されたteacher bitsの拒否は維持し、数値許容差で代用しない。新しい接続処理はsource/mock検査だけで完了とせず、影響する実際の生成・変換・binary読込の小さいend-to-end経路を一度確認する。検証の追加が実行中の凍結入力・codeを変更したり、成功した科学runの再実行を要求したりしないようにする。
+
 ## 品質確認
 
 ```bash
