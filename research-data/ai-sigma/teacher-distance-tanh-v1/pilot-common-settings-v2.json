@@ -1,0 +1,90 @@
+{
+  "model": {
+    "feature_version": "QF1",
+    "architecture": "distance_residual",
+    "distance_a": 0.0,
+    "distance_b": 0.0,
+    "transformer_width": 32,
+    "hidden_width": 32,
+    "dropout": 0.0
+  },
+  "optimizer": {
+    "name": "adam",
+    "lr": 0.0001,
+    "weight_decay": 0.0,
+    "momentum": 0.0,
+    "betas": [0.9, 0.999],
+    "eps": 1e-8
+  },
+  "training": {
+    "steps": 200,
+    "batch_size": 64,
+    "seed": 36220261011,
+    "sampling": "epoch",
+    "loss_weighting": "row",
+    "scheduler": "none",
+    "warmup_steps": 20,
+    "lr_decay_factor": 0.5,
+    "lr_decay_patience": 2,
+    "min_lr": 1e-6,
+    "reflection_probability": 0.5,
+    "supply_workers": 0,
+    "reflection_seed": 36220261012,
+    "device": "cpu",
+    "threads": 1
+  },
+  "evaluation": {
+    "interval": 20,
+    "checkpoints": [0, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200],
+    "batch_size": 64,
+    "monitor": "row",
+    "early_stopping_patience": 0,
+    "early_stopping_unit": "observation",
+    "min_delta": 0.0,
+    "min_delta_relative": 0.0,
+    "diagnostic_rows": 0,
+    "diagnostic_interval": 20,
+    "diagnostic_checkpoints": [],
+    "full_train": true,
+    "full_train_checkpoints": [0, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200],
+    "full_train_every_epochs": 0
+  },
+  "limits": {
+    "seconds": 600.0,
+    "samples": 16023
+  },
+  "data": {
+    "overlap_policy": "error"
+  },
+  "artifacts": {
+    "mode": "native",
+    "save_scheduled": false,
+    "checkpoint_steps": []
+  },
+  "experiment": {
+    "study": "common-corpus-warmstart-v1",
+    "teacher_mapping": "exclude_outside_unit",
+    "draw_policy": "include_threefold",
+    "warm_start": {
+      "descriptor": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/public-no-bypass-v1/candidate-v1/output/best-model/manifest.json",
+        "sha256": "46ec2c4708f96dcf9fad579c2fb0d1299c6663df27412f0faac98267467715e1",
+        "bytes": 677,
+        "mode": "0600"
+      },
+      "weights": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/public-no-bypass-v1/candidate-v1/output/best-model/weights.f32",
+        "sha256": "046fe926e56b955b0fb7de8f147a74ec33eace9cbc00a55c307f9b6541ab9841",
+        "bytes": 49284,
+        "mode": "0644"
+      },
+      "evaluator_sha256": "96a5f41f875022d1752b9c999595ad58bfb2d42687a8f06de08d42b1c4215875",
+      "optimizer": "fresh",
+      "scale": "incumbent"
+    },
+    "condition": null,
+    "main_volume_N": 8,
+    "main_volume_manifest": null,
+    "main_volume_manifest_sha256": null
+  }
+}
