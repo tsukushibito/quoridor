@@ -1082,7 +1082,7 @@ mod input_qualification_tests {
     }
 
     #[test]
-    fn ordering360_qualification_cannot_escalate_to_Search_or_change_frozen_inputs() {
+    fn ordering360_qualification_cannot_escalate_to_search_or_change_frozen_inputs() {
         let f = |h: &str| json!({"path":"/fake/input","sha256":h,"bytes":1,"mode":"0644"});
         let value = json!({"schema":"quoridor.research.experiment.v1","phase":"ordering-qualification","build_manifest":f("a"),"config":f(CONFIG_SHA),"schedule":f(SCHEDULE_SHA),"inputs":[],"models":[{"descriptor":{"path":"/fake/manifest","sha256":DESCRIPTOR,"bytes":677,"mode":"0600"},"weights":{"path":"/fake/weights","sha256":WEIGHTS,"bytes":49284,"mode":"0644"},"evaluator_sha256":EVALUATOR}],"dynamic_libraries":(0..5).map(|_|json!({"file":f("b"),"version":"FAKE"})).collect::<Vec<_>>(),"numerical_qualification":null,"canonical_plan_sha256":ASSESSMENT_SHA,"rules":RULES,"distance_units":"wall-distance/80","value_perspective":"side-to-move","planned_slots":20,"batch":null,"argv":["/fake/runner","ordering-qualify","--experiment","@EXPERIMENT@","--experiment-sha256","@EXPERIMENT_SHA256@"]});
         let e: Experiment = serde_json::from_value(value).unwrap();
