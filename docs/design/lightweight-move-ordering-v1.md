@@ -103,3 +103,17 @@ i16の範囲±16384、i32のgravity更新、初期bonus `min(16*depth²,1024)` �
 独立小木のminimax/equal-best/legal全手、undo/control/colour/window/namespace/gravity/age/cancel/reentryを確認する。評価は一つのqualified TT/imageを両policyに使い、depth4＋実際にdeeper completed context、coldと同じ実入力列のwarm traceを事前固定する。nodes/evaluations、first-child cutoff・cutoff rank、非zero score被覆・実際のorder変更を主診断とし、plain whole wall・memory・startup/drop/更新/aging/warmup費も数える。partial horizonはUNKNOWN、結果後のsweep・refill・追加same-timegamesはしない。具体的有限workload・採否/悪化基準・whole priceは出力前に固定し、混合結果を一般的無効と呼ばない。
 
 同じ空き工程担当が独立OWN namespaceでsourceを実装する。359.1を中断せず、358旧TT/image・256gamesには変更を混ぜない。source準備はcurrent TT integrationやparent閉鎖を待たず進め、数値評価は適切なTT決定後にversionを明示する。[source準備1MiB](../../research-data/ai-sigma/search-optimization/continuation360/resources-preparation.json)だけを支持し、globalは49,979,351,040B、50GBまで20,648,960Bとなる。heavy build/private/TMP/raw/failure/review/Git/cleanupは未発行で、保持物のreuse/許可された停止済み再構成物の撤去により具体wholeを成立させる。one stopped変更境界の独立確認を行い、per-run証明・恒久role・新状態台帳を作らない。323 USERPAUSE/seals/defaults/N/fullgen/fits96、旧334 evidence/fees/UNKNOWNは維持する。
+
+### 人間選択のstaticとの組合せ（360の前向き拡張、2026-10-11）
+
+360のauthoritative human-choice commentにより、現行TT/PV/previous-best優先を維持し、main history＋continuation＋static scoreを一つの実装へ拡張する。先のcontinuation-only準備は比較用の履歴で、新writer・role・新しい人間ACKを追加しない。同じ360.1担当が更新し、358の旧ordering/TT/model/imageに混ぜない。
+
+staticは実際のlegal即goal、wall-only goal mapにおけるown pawn合法destinationへの進捗（straight/diagonal jumpを含む）、opponentの全最短経路への壁の被覆・代替経路/bottleneck、own route阻害へのpenaltyを使う。恣意的な一本の経路を選ばない。goalは現在のlegal/rulesで確認し、反復terminalを捏造しない。全legal手は残し、静的順位をpruning・評価値・teacher labelにしない。
+
+両者のgoal距離と最短経路DAGを親で一度準備し、既存の必要なgeometryを最小read-only境界で共有する。DAGのprefix/suffix経路数と二edge壁のunion被覆、代替/全最短経路遮断を扱い、必要なendpoint間の情報もbounded parent準備へ入れる。各壁のBFS・各候補のNN評価は追加しない。unionの重複を二重計上して「all routes blocked」と呼ばず、overflow-safe counts/quantisationとunreachable/error/cancel/undo/reentryを検証する。Route coverageはwall-only順位proxyで、実際の移動手数の遅延や勝ち手認定ではない。
+
+結果前の初期正規化はpawn距離進捗を±2へclipして256倍、route被覆を0..1024へ量子化し、opponent分512・own分−512、全最短経路遮断の差に±128とする。非terminal staticは±640以内、既選択dynamic `2*main+5 continuation` とi32で安全に合成し、成功経験が通常手で有効な尺度を維持する。TT/PV/previous-bestの下でexact legal即goalを優先し、その後の既存の正当化されたpriority stageとordinary scoreを整理する。係数はQuoridor向けの事前固定案で、最適性・NN/Dの棋力改善は未測定。実装上の具体的表現gapは結果前に根拠を示して修正する。
+
+実用上可能なら一つの必要比較入口でprior policy、continuation-only、continuation＋staticを同じqualified TT/model/input/limitsで比べ、static増分を識別する。三つの恒常source・targetやfull suiteを作らず、予定比較に必要なvariantだけ一時保持して終了後に不要入口を撤去する。既選択cold/real-warm、completed depth4/deeperとUNKNOWNは維持し、nodes/evaluations、cutoff rank/first child、static/dynamic被覆・実order変更、PVS/TTを先に見る。親map/route準備、sort、startup/drop/aging/stat-update全費とplain wall/memoryを含める。独立minimax/no-ordering/equal-best/alllegal、route alternatives/own penalty、legal jump/goal/colour/control/namespace/overflowが新しい変更境界で、旧成功を埋め草で再演しない。
+
+source成長に追加512KiBを50GB内で前向き支持する。360 source合計1.5MiB、global49,979,875,328B、残り20,124,672B。これはheavy build/private/TMP/raw/review/control/failure/Git/cleanup/assessmentの配分ではなく、具体的whole支持はentry前に必要。旧RAW/fees/UNKNOWNをrefundせず、359独立作業とactual entered intervals/soleCargo、323pause/default/N/fullgen/fits96/sealsを維持する。
