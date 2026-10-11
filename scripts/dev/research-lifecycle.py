@@ -705,16 +705,21 @@ def build_check(spec):
         handover["shared_serial_pool"] is True and not Path(handover["old_target"]).exists(),
         "old/new parallel target unsupported",
     )
+    support = document(spec["support"])
+    funded = support["funded_union_B"]
+    target = handover["target_max_B"]
+    private = handover["private_pool_B"]
     require(
-        spec["limits"]["owned_B"] <= 1073741824 + 33554432 + 67108864 + 8388608,
+        all(type(n) is int and n > 0 for n in (funded, target, private))
+        and target + private + 67108864 + 8388608 <= funded <= 50000000000,
+        "trusted handover pools inside issued whole support",
+    )
+    require(
+        type(spec["limits"]["owned_B"]) is int
+        and 0 < spec["limits"]["owned_B"] <= target + private + 67108864 + 8388608,
         "common build/private pool",
     )
-    require(
-        handover["target_writer"] == spec["writer"]
-        and handover["target_max_B"] == 1073741824
-        and handover["private_pool_B"] == 33554432,
-        "single issued writer/pool",
-    )
+    require(handover["target_writer"] == spec["writer"], "single issued writer/pool")
     private_copy_check(spec)
     adoption = document(spec["source_adoption"])
     require(

@@ -539,18 +539,16 @@
         "prefix_lengths": [4, 8, 12, 16],
         "ordering": "round_robin_lengths",
         "attempts_per_family": 32,
-        "old_games_included": false,
-        "families_per_length": 2
+        "old_games_included": false
       },
       "whole_family_T_V_partition": {
         "algorithm": "canonical_LR_family_SHA256_seed_rank_train_floor_4F_over_5",
         "seed": 36220261014,
-        "before_outcomes": true,
-        "T": 6,
-        "V": 2
+        "before_outcomes": true
       },
       "offtrajectory_rows": 0,
-      "eligibility": "SAME fixed eligible rows for BOTH candidates; completed6 nonterminal mainline decisions plus actual final goal/draw outcome; partial/capped/missing/UNKNOWN explicit denominators. Root terminal +/-2 is not ordinary tanh target; target transformation/terminal handling must be explicitly bound before results, never silently clipped or invented."
+      "eligibility": "SAME fixed eligible rows for BOTH candidates; completed6 nonterminal mainline decisions plus actual final goal/draw outcome; partial/capped/missing/UNKNOWN explicit denominators. Root terminal +/-2 is not ordinary tanh target; target transformation/terminal handling must be explicitly bound before results, never silently clipped or invented.",
+      "canonical_source_root": "/workspaces/quoridor/.worktree/assets/data/common-corpus-warmstart-study/pilot-v1"
     },
     "candidates": [
       {

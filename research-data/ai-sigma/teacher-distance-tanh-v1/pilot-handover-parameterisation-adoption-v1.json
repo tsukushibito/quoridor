@@ -1,0 +1,38 @@
+{
+  "schema": "quoridor.research.source-adoption-delta.v1",
+  "issue": "quoridor-4lc.362.2",
+  "status": "ACCEPTED",
+  "target": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/handover-repair-v1/source-STOP.json",
+    "sha256": "9829c8b49bac38b53cb4ca4cd934c39e04dbeb47347e5170d00ff2a33e5677a3",
+    "bytes": 2311,
+    "mode": "0644"
+  },
+  "changed_function": "build_check",
+  "before": {
+    "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+    "sha256": "6c332e4af1f832c884888ab8a3501f34af588583f53d68ac9a98165fb281d21c",
+    "bytes": 81837,
+    "mode": "0644",
+    "by_reference": true,
+    "scope": "Selected changing maintained CLI postimage only; no unmodified mirror or framework. Own pilot source/control32MiB funded. Current Main not edited."
+  },
+  "post": {
+    "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+    "sha256": "23eea540560e961d6ebecc272f136a0b1c1c28299ea0f715d76d61038a787bd4",
+    "bytes": 82150,
+    "mode": "0644"
+  },
+  "other_AST_equal": true,
+  "supplied_new_case": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/handover-repair-v1/new-case-receipt.json",
+    "sha256": "8b923c7f04516474c9e5c6da5c5785c8999351f7e305df00d7cdf5b52e866eb3",
+    "bytes": 854,
+    "mode": "0644"
+  },
+  "supplied_case_replayed": false,
+  "support_marker_current_exact": true,
+  "actual_source_reader_writer_STOP": "2026-10-11T09:44:03.327177+00:00",
+  "owned_remaining": [],
+  "software_or_numerical_qualification": false
+}
