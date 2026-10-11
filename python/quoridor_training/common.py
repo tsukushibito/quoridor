@@ -616,7 +616,7 @@ def warmstart_inputs(config, *, cache, config_path, input_binding):
     bound_file_bytes(warm["weights"], 49284)
     manifest = bound_json(Path(cache) / "cache.json", expected["cache_manifest_sha"])
     require_completed_stream_cache(cache, manifest)
-    common_cache_config(manifest, config["experiment"], selected_plan, plan)
+    common_cache_config(manifest, config["experiment"], plan=plan)
     if (
         expected.get("fit_config_sha") != hashlib.sha256(Path(config_path).read_bytes()).hexdigest()
         or expected.get("initial_weights_sha") != BEST43_WEIGHTS
