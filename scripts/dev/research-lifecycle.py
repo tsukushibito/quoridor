@@ -9,6 +9,7 @@ from datetime import datetime, timezone
 import fcntl
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import shutil
@@ -168,7 +169,11 @@ class Limits(process.CycleResources):
             "issued family/host envelope",
         )
         support = document(spec["support"])
-        require(support["funded_union_B"] == 4294967296, "issued whole355 support")
+        require(
+            type(support["funded_union_B"]) is int
+            and 0 < cfg["owned_B"] <= support["funded_union_B"] <= 50000000000,
+            "issued inclusive whole support",
+        )
         require(support["global_held_B"] <= 50000000000, "global holding")
         # Admission is issued phase-specific support, not a default scientific horizon.
         admission = document(spec["admission"])
@@ -180,6 +185,8 @@ class Limits(process.CycleResources):
         require(admission["spec_sha256"] == spec["intent_sha256"], "actual intent admission")
         require(admission["support_sha256"] == spec["support"]["sha256"], "same support")
         require(admission["ready"] is True, "phase not admitted")
+        if spec["kind"] == "run":
+            require(admission["approved_plan"] == spec["approved_plan"], "issued approved plan")
         require(cfg["controller_B"] == 64 * 1024 * 1024, "whole family includes controller")
         self.charged_paths = charged_roots(spec)
         super().__init__(
@@ -629,17 +636,17 @@ def experiment_check(spec):
     if experiment["phase"] == "generation":
         generation_check(spec, experiment)
     require(
-        type(experiment["planned_slots"]) is int and experiment["planned_slots"] in (0, 256, 512),
-        "planned256/512 or non-game stage",
+        type(experiment["planned_slots"]) is int and 0 <= experiment["planned_slots"] <= 4096,
+        "bounded planned denominator",
     )
-    if experiment["planned_slots"] == 256:
+    approved = approved_plan(spec, experiment)
+    refs.append(spec["approved_plan"])
+    if experiment["phase"] == "arena":
+        arena_plan_check(experiment, approved)
         require(
-            experiment["phase"] == "arena"
-            and type(experiment.get("batch")) is int
-            and 0 <= experiment["batch"] < 8,
-            "fixed-depth256 arena scope",
+            document(experiment["config"])["output"] == spec["data_root"],
+            "arena owned runtime output",
         )
-        planned_game_slice(experiment, document(experiment["schedule"]))
     executable = manifest["artifact"]["path"]
     if experiment["phase"] == "analysis":
         python = manifest["tools"]["PYTHON"]["file"]
@@ -658,7 +665,7 @@ def experiment_check(spec):
     require(
         not Path(spec["data_root"]).exists(), "exclusive scientific output; duplicate run refused"
     )
-    if experiment["planned_slots"] in (256, 512):
+    if experiment["phase"] == "arena":
         require(
             {x["name"] for x in spec["data"]} >= {"journal", "result"},
             "mandatory scientific journal/result",
@@ -949,52 +956,293 @@ def generation_evidence(experiment, values):
     return evidence
 
 
-def planned_game_slice(experiment, schedule):
-    """One existing schedule format; full fixed-depth cohort or original timed batch."""
-    count = experiment["planned_slots"]
-    require(type(count) is int and count in (256, 512), "planned game count")
+def approved_plan(spec, experiment):
+    """Use the integration-issued admission, not Experiment's self-declared plan."""
+    admission = document(spec["admission"])
     require(
-        isinstance(schedule, list)
-        and len(schedule) == count
-        and [x["slot"] for x in schedule] == list(range(count)),
-        "full frozen schedule",
+        admission["schema"] == "quoridor.research.phase-admission.v1"
+        and admission["ready"] is True
+        and admission["owner"] == spec["owner"]
+        and admission["limits"] == spec["limits"]
+        and admission["spec_sha256"] == spec["intent_sha256"]
+        and admission["support_sha256"] == spec["support"]["sha256"]
+        and admission["approved_plan"] == spec["approved_plan"],
+        "integration-issued approved launch plan",
     )
-    if count == 256:
-        require(
-            experiment["phase"] == "arena"
-            and type(experiment.get("batch")) is int
-            and 0 <= experiment["batch"] < 8,
-            "fixed-depth256 scope",
+    require(
+        experiment["canonical_plan_sha256"] == spec["approved_plan"]["sha256"],
+        "experiment substituted approved plan",
+    )
+    return document(spec["approved_plan"])
+
+
+def arena_plan_check(experiment, plan):
+    """One explicit JSON arena plan; config files own engines and search/clock limits."""
+    require(
+        set(plan)
+        == {
+            "schema",
+            "phase",
+            "comparison",
+            "rules",
+            "distance_units",
+            "value_perspective",
+            "book",
+            "inputs",
+            "models",
+            "schedule",
+            "family_ids",
+            "matchups",
+            "batches",
+            "planned_slots",
+        }
+        and plan["schema"] == "quoridor.research.arena-plan.v1"
+        and plan["phase"] == experiment["phase"] == "arena"
+        and len(experiment["argv"]) == 6
+        and experiment["argv"][1:]
+        == ["arena", "--experiment", "@EXPERIMENT@", "--experiment-sha256", "@EXPERIMENT_SHA256@"]
+        and plan["comparison"] in {"evaluator_fixed_depth", "evaluator_wall_time"}
+        and plan["rules"] == experiment["rules"] == "research-standard-2p-threefold-goal-first-v1"
+        and plan["distance_units"] == experiment["distance_units"] == "wall-distance/80"
+        and plan["value_perspective"] == experiment["value_perspective"] == "side-to-move"
+        and plan["inputs"] == experiment["inputs"]
+        and plan["book"] in plan["inputs"]
+        and plan["models"] == experiment["models"]
+        and plan["schedule"] == experiment["schedule"],
+        "arena declared scientific correspondence",
+    )
+    schedule = document(experiment["schedule"])
+    planned = planned_game_slice(experiment, schedule, plan)
+    config = document(experiment["config"])
+    batch = plan["batches"][experiment["batch"]]
+    require(experiment["config"] == batch["config"], "approved batch config")
+    matchup = next(m for m in plan["matchups"] if m["id"] == batch["matchup"])
+    a = config["arena"]
+    engines = config["engines"]
+    require(
+        config["ruleset"] == "standard_2p_threefold"
+        and config["games"] == len(planned)
+        and all(
+            type(config[k]) is int and config[k] == 1
+            for k in ("workers", "active_games", "max_batch")
         )
-        require(
-            all(
-                all(
-                    type(x[k]) is int
-                    for k in (
-                        "slot",
-                        "local_game",
-                        "family_id",
-                        "candidate_color",
-                        "batch",
-                        "source_355_slot",
-                    )
+        and config.get("inference") is None
+        and config.get("inference_cpu_core") is None
+        and config.get("cycle") is None
+        and config.get("train_games") is None
+        and config.get("validation_games") is None
+        and engines == matchup["engines"]
+        and len(engines) == 2
+        and a["evaluator_sha256"] == matchup["evaluator_sha256"]
+        and a["comparison"] == plan["comparison"]
+        and a["clock_policy"] == "strict_unknown"
+        and type(a["tt_entries"]) is int
+        and 0 < a["tt_entries"] <= 1048576
+        and type(a["retained_outcome_bytes"]) is int
+        and 0 < a["retained_outcome_bytes"] <= config["max_output_bytes"]
+        and a["search_source_sha256"][0] == a["search_source_sha256"][1],
+        "arena equal runtime/backend/retention conditions",
+    )
+    used = set()
+    for m in plan["matchups"]:
+        require(len(m["engines"]) == len(m["evaluator_sha256"]) == 2, "two declared engines")
+        for i, engine in enumerate(m["engines"]):
+            require(engine["kind"] in {"nnue", "distance"}, "supported numerical backend")
+            if engine["kind"] == "nnue":
+                model = next(
+                    (r for r in plan["models"] if r["descriptor"]["path"] == engine["model"]), None
                 )
-                and x["local_game"] == i % 32
-                and x["batch"] == i // 32
-                and x["family_id"] == i // 2
-                and x["candidate_color"] == (i // 2 + i // 32 + i % 2) % 2
-                and x["source_355_slot"] == (i // 32) * 64 + (1 - (i // 32) % 2) * 32 + i % 32
-                for i, x in enumerate(schedule)
+                require(
+                    model is not None and model["evaluator_sha256"] == m["evaluator_sha256"][i],
+                    "declared model/evaluator",
+                )
+                used.add(model["descriptor"]["path"])
+            else:
+                require(engine.get("model") is None, "pure distance model")
+    require(len(used) == len(plan["models"]), "duplicate/unused model")
+    for engine in engines:
+        require(
+            type(engine["depth"]) is int
+            and 0 < engine["depth"] <= 200
+            and type(engine["max_nodes"]) is int
+            and engine["max_nodes"] > 0
+            and type(engine["simd"]) is bool
+            and all(
+                type(engine[k]) in (int, float) and math.isfinite(engine[k])
+                for k in ("distance_a", "distance_b")
             ),
-            "fixed-depth full128 family-colour order",
+            "finite engine limits",
         )
-        return [x for x in schedule if x["batch"] == experiment["batch"]]
-    planned = [x for x in schedule if x["batch"] == experiment["batch"]]
     require(
-        len(planned) == 32 and sorted(x["local_game"] for x in planned) == list(range(32)),
-        "whole32 batch slice",
+        all(engines[0][k] == engines[1][k] for k in ("depth", "max_nodes", "simd")),
+        "equal search limits",
     )
-    return planned
+    if plan["comparison"] == "evaluator_fixed_depth":
+        require(
+            all(engine.get("time_ms") is None for engine in engines)
+            and a["return_reserve_ms"] == 0,
+            "completed depth has no move clock",
+        )
+    else:
+        require(
+            type(engines[0]["time_ms"]) is int
+            and engines[0]["time_ms"] > 0
+            and engines[1]["time_ms"] == engines[0]["time_ms"]
+            and type(a["return_reserve_ms"]) is int
+            and 0 <= a["return_reserve_ms"] < engines[0]["time_ms"],
+            "equal thinking clocks and reserve",
+        )
+    book = document(plan["book"])
+    require(book["complete"] is True and book["rules"] == plan["rules"], "complete bound book")
+    families = {f["family_id"]: f for f in book["families"]}
+    require(
+        len(families) == len(book["families"]) and set(plan["family_ids"]) <= families.keys(),
+        "book family coverage",
+    )
+    require(
+        len(a["book"]["openings"]) * 2 == len(planned)
+        and len(a["first_candidate_colors"]) == len(planned) // 2,
+        "local pair book",
+    )
+    for i, opening in enumerate(a["book"]["openings"]):
+        slot = planned[i * 2]
+        f = families[slot["family_id"]]
+        ref = opening["reference"]
+        require(
+            opening["id"] == f["id"]
+            and opening["prefix"] == f["prefix"]
+            and opening["original_seed"] == f["seed"]
+            and ref["source_sha256"] == plan["book"]["sha256"]
+            and all(ref["settings"][k] == f[k] for k in ("family_id", "root_key", "history_counts"))
+            and a["first_candidate_colors"][i] == slot["candidate_color"],
+            "immutable book/history/colour",
+        )
+    return planned, config
+
+
+def planned_game_slice(experiment, schedule, plan):
+    count = experiment["planned_slots"]
+    families = plan["family_ids"]
+    matchups = [m["id"] for m in plan["matchups"]]
+    require(
+        type(count) is int
+        and 0 < count <= 4096
+        and count == plan["planned_slots"]
+        and isinstance(families, list)
+        and families
+        and all(type(i) is int and i >= 0 for i in families)
+        and len(set(families)) == len(families)
+        and matchups
+        and all(type(i) is int and i >= 0 for i in matchups)
+        and len(set(matchups)) == len(matchups)
+        and count == 2 * len(families) * len(matchups),
+        "explicit planned family denominator",
+    )
+    require(isinstance(schedule, list) and len(schedule) == count, "full schedule")
+    colors = set()
+    for i, slot in enumerate(schedule):
+        require(
+            set(slot) == {"slot", "batch", "matchup", "local_game", "family_id", "candidate_color"}
+            and all(type(v) is int and v >= 0 for v in slot.values())
+            and slot["slot"] == i
+            and slot["family_id"] in families
+            and slot["matchup"] in matchups
+            and slot["candidate_color"] in (0, 1),
+            "typed unique planned slot",
+        )
+        colors.add((slot["matchup"], slot["family_id"], slot["candidate_color"]))
+    require(len(colors) == count, "full family/colour coverage")
+    covered = set()
+    require(isinstance(plan["batches"], list) and bool(plan["batches"]), "declared batches")
+    for i, batch in enumerate(plan["batches"]):
+        require(
+            set(batch) == {"batch", "matchup", "config", "slots"}
+            and type(batch["batch"]) is int
+            and batch["batch"] == i
+            and type(batch["matchup"]) is int
+            and batch["matchup"] in matchups
+            and isinstance(batch["slots"], list)
+            and batch["slots"]
+            and len(batch["slots"]) % 2 == 0,
+            "whole pair batch",
+        )
+        for local, global_slot in enumerate(batch["slots"]):
+            require(
+                type(global_slot) is int
+                and 0 <= global_slot < count
+                and global_slot not in covered,
+                "slot ownership",
+            )
+            covered.add(global_slot)
+            row = schedule[global_slot]
+            mate_id = batch["slots"][local ^ 1]
+            require(type(mate_id) is int and 0 <= mate_id < count, "pair slot")
+            mate = schedule[mate_id]
+            require(
+                row["batch"] == i
+                and row["matchup"] == batch["matchup"]
+                and row["local_game"] == local
+                and mate["family_id"] == row["family_id"]
+                and mate["candidate_color"] != row["candidate_color"],
+                "batch pair correspondence",
+            )
+    require(
+        len(covered) == count
+        and type(experiment.get("batch")) is int
+        and 0 <= experiment["batch"] < len(plan["batches"]),
+        "complete batch/planned coverage",
+    )
+    return [schedule[i] for i in plan["batches"][experiment["batch"]]["slots"]]
+
+
+def arena_observation(config, row):
+    """Audit owned native decisions without replaying geometry or Search."""
+    accepted = []
+    for obs in row["observations"]:
+        index = obs["engine_index"]
+        require(type(index) is int and 0 <= index < 2, "observation engine")
+        for key in ("caller_seconds", "thinking_seconds", "value_stm"):
+            value = obs.get(key)
+            require(
+                value is None or (type(value) in (int, float) and math.isfinite(value)),
+                "nonfinite observation",
+            )
+        require(type(obs["accepted"]) is bool, "typed acceptance")
+        if not obs["accepted"]:
+            continue
+        require(
+            obs["failure"] is None
+            and obs["engine_error"] is None
+            and type(obs["action"]) is int
+            and obs["pv"]
+            and obs["pv"][0] == obs["action"]
+            and type(obs["accepted_ns"]) is int
+            and type(obs["admission_checked_ns"]) is int
+            and type(obs["returned_ns"]) is int
+            and obs["accepted_ns"] >= obs["admission_checked_ns"] >= obs["returned_ns"]
+            and obs["counters"]["completed_snapshot_validation_failed"] is False,
+            "illegal/incoherent acceptance",
+        )
+        a = config["arena"]
+        if a["comparison"] == "evaluator_fixed_depth":
+            require(
+                type(obs["completed_depth"]) is int
+                and obs["completed_depth"] == config["engines"][index]["depth"]
+                and obs["stop"] == "depth_cap"
+                and obs["value_stm"] is not None
+                and obs["deadline_ns"] is None,
+                "partial depth cannot publish action",
+            )
+        else:
+            require(
+                type(obs["deadline_ns"]) is int
+                and obs["returned_ns"] <= obs["deadline_ns"]
+                and obs["counters"]["authority_receipt_ns"] == obs["returned_ns"]
+                and obs["counters"]["drain_finished_ns"] == obs["returned_ns"],
+                "thinking authority/drain",
+            )
+        accepted.append(obs["action"])
+    require(accepted == row["moves"], "accepted actions/durable moves")
 
 
 def collect_data(spec, experiment):
@@ -1030,17 +1278,17 @@ def collect_data(spec, experiment):
             data["generation"]["experiment"] = spec["experiment"]
         except BaseException as error:
             data["errors"].append({"stage": "generation_metadata", **error_fact(error)})
-    if experiment["planned_slots"] in (256, 512):
+    if experiment["phase"] == "arena":
         try:
-            schedule = document(experiment["schedule"])
-            planned = planned_game_slice(experiment, schedule)
+            plan = approved_plan(spec, experiment)
+            planned, config = arena_plan_check(experiment, plan)
             local_count = len(planned)
+            data["missing_local_games"] = list(range(local_count))
             data["planned_global_slots"] = [x["slot"] for x in planned]
             config = document(experiment["config"])
             records = []
             raw = values["journal"]
-            require(not raw or raw.endswith(b"\n"), "partial journal tail")
-            for line in raw.splitlines():
+            for line in raw.split(b"\n")[:-1]:
                 require(len(line) <= 630784, "full per-game record cap")
                 row = json.loads(line)
                 game = row["game"]
@@ -1056,14 +1304,23 @@ def collect_data(spec, experiment):
                     opening["reference"]["settings"]["family_id"] == slot["family_id"],
                     "global family via native batch config",
                 )
-                require(row["candidate_color"] == slot["candidate_color"], "journal colour drift")
+                require(
+                    row["candidate_color"] == slot["candidate_color"]
+                    and row["family"] == f"{config['run_id']}-family-{game // 2:06}",
+                    "journal family/colour drift",
+                )
                 require(
                     isinstance(row["observations"], list) and isinstance(row["moves"], list),
                     "full scientific per-game observations required",
                 )
                 require(row["status"] in {"goal", "forfeit", "draw", "unknown"}, "typed outcome")
+                arena_observation(config, row)
                 records.append(row)
                 data["observed_local_games"].append(game)
+                data["missing_local_games"] = sorted(
+                    set(range(local_count)) - set(data["observed_local_games"])
+                )
+            require(not raw or raw.endswith(b"\n"), "partial journal tail")
             data["missing_local_games"] = sorted(
                 set(range(local_count)) - set(data["observed_local_games"])
             )
@@ -1074,6 +1331,7 @@ def collect_data(spec, experiment):
             report = json.loads(values["result"])
             require(
                 report["planned"] == local_count
+                and report["run_id"] == config["run_id"]
                 and report["all_workers_joined"] is True
                 and report["stopped"] is None,
                 "native run incomplete",
@@ -1398,6 +1656,7 @@ def execute(
                     spec["env"] = {
                         **spec["env"],
                         "QUORIDOR_LIFECYCLE_INTENT": spec_ref["sha256"],
+                        "QUORIDOR_LIFECYCLE_INTENT_PATH": spec_ref["path"],
                         "QUORIDOR_LIFECYCLE_PARENT_PID": str(os.getpid()),
                     }
                     row = {"name": "run", "argv": spec["argv"]}
@@ -1589,8 +1848,15 @@ def _prepare_completion(directory, job_ref):
             require(doc["intent_sha256"] == candidate["intent"]["sha256"], "same finalizer intent")
             if obligation["kind"] == "journal":
                 require(
-                    doc["planned_slots"] == 512 and doc["complete_planned_census"] is True,
-                    "full scientific512 journal denominator",
+                    doc["planned_slots"]
+                    == (
+                        candidate["planned_slots"]
+                        if candidate["kind"] == "run"
+                        and document(candidate["experiment"])["phase"] == "arena"
+                        else 512
+                    )
+                    and doc["complete_planned_census"] is True,
+                    "full scientific journal denominator",
                 )
             elif obligation["kind"] != "data":
                 raise Refused("unknown independent finalizer kind")

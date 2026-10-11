@@ -5,9 +5,6 @@ use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 use std::{collections::BTreeMap, fs, io::Read, path::PathBuf};
 
-const FIXED_DEPTH_PLAN_SHA256: &str =
-    "8bec5174a4f097ad66a870ef59ad6c3ad3e4a741c6d6d0eeedb98c862c3a9ef2";
-
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(deny_unknown_fields)]
 pub struct FileRef {
@@ -74,7 +71,7 @@ impl FileRef {
         .read()
     }
 }
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(deny_unknown_fields)]
 pub struct ModelRef {
     pub descriptor: FileRef,
@@ -158,11 +155,21 @@ fn phase_shape(e: &Experiment) -> bool {
                         "@EXPERIMENT_SHA256@",
                     ]
         }
-        "materialize" | "compare" | "arena" | "analysis" => {
+        "arena" => {
             e.numerical_qualification.is_some()
-                && (e.planned_slots != 256
-                    || (e.phase == "arena" && e.batch.is_some_and(|b| b < 8)))
+                && e.planned_slots > 0
+                && e.batch.is_some()
+                && e.argv.len() == 6
+                && e.argv[1..]
+                    == [
+                        "arena",
+                        "--experiment",
+                        "@EXPERIMENT@",
+                        "--experiment-sha256",
+                        "@EXPERIMENT_SHA256@",
+                    ]
         }
+        "materialize" | "compare" | "analysis" => e.numerical_qualification.is_some(),
         _ => false,
     }
 }
@@ -188,28 +195,99 @@ fn generation_inputs(e: &Experiment) -> Result<()> {
     }
     Ok(())
 }
+
+/// Parent authority is the Root-issued admission bound to the immutable RUN intent.
+/// Experiment/plan/qualification agreement alone cannot select an approved plan.
+fn approved_launch_plan(
+    intent: &Value,
+    admission: &Value,
+    bound: &BoundControl,
+    e: &Experiment,
+) -> Result<FileRef> {
+    let expected: FileRef = serde_json::from_value(intent["approved_plan"].clone())?;
+    let experiment: FileRef = serde_json::from_value(intent["experiment"].clone())?;
+    if intent["schema"] != "quoridor.research.lifecycle-intent.v1"
+        || intent["kind"] != "run"
+        || admission["schema"] != "quoridor.research.phase-admission.v1"
+        || admission["ready"] != true
+        || admission["owner"] != intent["owner"]
+        || admission["limits"] != intent["limits"]
+        || admission["support_sha256"] != intent["support"]["sha256"]
+        || admission["spec_sha256"] != intent["intent_sha256"]
+        || admission["approved_plan"] != intent["approved_plan"]
+        || experiment.path != bound.path
+        || experiment.sha256 != bound.sha256
+        || expected.sha256 != e.canonical_plan_sha256
+    {
+        return Err("integration-issued launch/approved plan mismatch".into());
+    }
+    Ok(expected)
+}
+pub(crate) fn approved_arena_plan(bound: &BoundControl, e: &Experiment) -> Result<FileRef> {
+    launch_plan(bound, e)
+}
+fn launch_plan(bound: &BoundControl, e: &Experiment) -> Result<FileRef> {
+    let path = PathBuf::from(std::env::var("QUORIDOR_LIFECYCLE_INTENT_PATH")?);
+    let sha256 = std::env::var("QUORIDOR_LIFECYCLE_INTENT")?;
+    let parent = std::env::var("QUORIDOR_LIFECYCLE_PARENT_PID")?.parse::<u32>()?;
+    if parent != unsafe { libc::getppid() } as u32 {
+        return Err("immediate lifecycle parent required".into());
+    }
+    let args = fs::read(format!("/proc/{parent}/cmdline"))?;
+    let args: Vec<_> = args.split(|&b| b == 0).filter(|s| !s.is_empty()).collect();
+    let expected = [
+        b"run".as_slice(),
+        b"--intent",
+        path.as_os_str().as_encoded_bytes(),
+        b"--sha256",
+        sha256.as_bytes(),
+    ];
+    if !args.ends_with(&expected) {
+        return Err("parent immutable RUN intent argv required".into());
+    }
+    let intent: Value = BoundControl { path, sha256 }.read()?;
+    let admission_ref: FileRef = serde_json::from_value(intent["admission"].clone())?;
+    let admission: Value = admission_ref.read()?;
+    approved_launch_plan(&intent, &admission, bound, e)
+}
+
 /// Validate all entry identities before resources/output/model factory. No recursive review controls.
 pub fn load(bound: &BoundControl, phase: &str) -> Result<(Experiment, Value)> {
     let e: Experiment = bound.read()?;
+    let approved = launch_plan(bound, &e)?;
+    load_checked(
+        e,
+        bound,
+        phase,
+        &approved,
+        &std::env::args().collect::<Vec<_>>(),
+        &std::env::current_exe()?.canonicalize()?,
+    )
+}
+/// Shared preflight; only load() supplies the production integration-issued expectation.
+fn load_checked(
+    e: Experiment,
+    bound: &BoundControl,
+    phase: &str,
+    approved: &FileRef,
+    caller_argv: &[String],
+    executable: &std::path::Path,
+) -> Result<(Experiment, Value)> {
     if e.schema != "quoridor.research.experiment.v1"
         || e.phase != phase
         || !phase_shape(&e)
         || !arena::sha_valid(&e.canonical_plan_sha256)
-        || e.canonical_plan_sha256
-            != if e.planned_slots == 256 {
-                FIXED_DEPTH_PLAN_SHA256
-            } else {
-                crate::value_search_strength::PLAN_SHA256
-            }
-        || (e.planned_slots == 256
-            && (e.inputs.len() != 3 || e.inputs[1].sha256 != e.canonical_plan_sha256))
         || e.rules != "research-standard-2p-threefold-goal-first-v1"
         || e.distance_units != "wall-distance/80"
         || e.value_perspective != "side-to-move"
-        || !matches!(e.planned_slots, 0 | 256 | 512)
+        || e.planned_slots > 4096
     {
         return Err("research fixed scientific experiment identity".into());
     }
+    if e.canonical_plan_sha256 != approved.sha256 {
+        return Err("integration-issued approved plan substitution".into());
+    }
+    approved.verify()?;
     let expected_argv: Vec<String> = e
         .argv
         .iter()
@@ -218,7 +296,7 @@ pub fn load(bound: &BoundControl, phase: &str) -> Result<(Experiment, Value)> {
                 .replace("@EXPERIMENT_SHA256@", &bound.sha256)
         })
         .collect();
-    if expected_argv != std::env::args().collect::<Vec<_>>() {
+    if expected_argv.as_slice() != caller_argv {
         return Err("research exact prebound caller argv required".into());
     }
     let marker = e.build_manifest.path.with_file_name("INCOMPLETE");
@@ -231,7 +309,7 @@ pub fn load(bound: &BoundControl, phase: &str) -> Result<(Experiment, Value)> {
     }
     let artifact: FileRef = serde_json::from_value(build["artifact"].clone())?;
     artifact.verify()?;
-    if artifact.path != std::env::current_exe()?.canonicalize()? {
+    if artifact.path.as_path() != executable {
         return Err("research same qualified executable required".into());
     }
     e.config.verify()?;
@@ -304,7 +382,7 @@ pub fn load(bound: &BoundControl, phase: &str) -> Result<(Experiment, Value)> {
         || q["distance_units"] != e.distance_units
         || q["value_perspective"] != e.value_perspective
         || q["remaining"] != json!([])
-        || (e.planned_slots == 256 && q["canonical_plan_sha256"] != e.canonical_plan_sha256)
+        || (phase == "arena" && q["canonical_plan_sha256"] != approved.sha256)
     {
         return Err("research current numerical/history/model/input qualification required".into());
     }
@@ -383,105 +461,146 @@ mod tests {
         });
         assert!(!phase_shape(&other));
     }
+}
+
+#[cfg(test)]
+mod generic_arena_361_launch_tests {
+    use super::*;
+    use serde_json::json;
     #[test]
-    fn fixed_depth256_shape_requires_arena_nonnull_qualification_and_bounded_batch() {
-        let mut e = generation_fixture();
-        e.phase = "arena".into();
-        e.planned_slots = 256;
-        e.numerical_qualification = Some(e.config.clone());
-        e.batch = Some(0);
-        assert!(phase_shape(&e));
-        e.batch = None;
-        assert!(!phase_shape(&e));
-        e.batch = Some(8);
-        assert!(!phase_shape(&e));
-        e.batch = Some(0);
-        e.phase = "compare".into();
-        assert!(!phase_shape(&e));
-        e.phase = "arena".into();
-        e.numerical_qualification = None;
-        assert!(!phase_shape(&e));
+    fn generic_arena_361_consistent_substitution_cannot_select_expected_plan() {
+        // Synthetic metadata only, no file/model factory. Actual authority helper used by load().
+        let r = json!({"path":"/synthetic/plan","sha256":"a".repeat(64),"bytes":1,"mode":"0644"});
+        let er =
+            json!({"path":"/synthetic/experiment","sha256":"b".repeat(64),"bytes":1,"mode":"0644"});
+        let mut e:Experiment=serde_json::from_value(json!({"schema":"quoridor.research.experiment.v1","phase":"arena","build_manifest":r,"config":r,"inputs":[],"models":[],"dynamic_libraries":[],"schedule":r,"numerical_qualification":r,"canonical_plan_sha256":"a".repeat(64),"rules":"research-standard-2p-threefold-goal-first-v1","distance_units":"wall-distance/80","value_perspective":"side-to-move","planned_slots":6,"batch":0,"argv":[]})).unwrap();
+        let bound = BoundControl {
+            path: "/synthetic/experiment".into(),
+            sha256: "b".repeat(64),
+        };
+        let mut intent = json!({"schema":"quoridor.research.lifecycle-intent.v1","kind":"run","approved_plan":r,"experiment":er,"owner":"/synthetic","limits":{},"support":{"sha256":"c".repeat(64)},"intent_sha256":"d".repeat(64)});
+        let admission = json!({"schema":"quoridor.research.phase-admission.v1","ready":true,"approved_plan":r,"owner":"/synthetic","limits":{},"support_sha256":"c".repeat(64),"spec_sha256":"d".repeat(64)});
+        assert!(approved_launch_plan(&intent, &admission, &bound, &e).is_ok());
+        e.canonical_plan_sha256 = "e".repeat(64);
+        let _substituted_q = json!({"canonical_plan_sha256":e.canonical_plan_sha256});
+        assert!(approved_launch_plan(&intent, &admission, &bound, &e).is_err());
+        intent["approved_plan"]["sha256"] = json!(e.canonical_plan_sha256);
+        assert!(approved_launch_plan(&intent, &admission, &bound, &e).is_err());
     }
+}
+
+#[cfg(test)]
+mod generic_arena_361_bound_entry_tests {
+    use super::*;
+    use serde_json::json;
+    /// Fake artifact/model/Q and caller/executable ports, never execution or qualification.
     #[test]
-    fn fixed_depth256_rejects_substituted_actual_plan_with_matching_experiment_and_qualification() {
-        use std::os::unix::fs::PermissionsExt;
-        let nonce = std::time::SystemTime::now()
-            .duration_since(std::time::UNIX_EPOCH)
-            .unwrap()
-            .as_nanos();
-        let directory =
-            std::env::temp_dir().join(format!("research-plan358-{}-{nonce}", std::process::id()));
-        fs::create_dir(&directory).unwrap();
-        let write_ref = |name: &str, value: &Value| {
-            let path = directory.join(name);
-            let bytes = serde_json::to_vec(value).unwrap();
-            fs::write(&path, &bytes).unwrap();
+    fn generic_arena_361_two_bound_io_scopes_cross_actual_load_preflight() {
+        let root = std::env::temp_dir().join(format!(
+            "arena361-bound-{}-{}",
+            std::process::id(),
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_nanos()
+        ));
+        fs::create_dir(&root).unwrap();
+        struct Cleanup(PathBuf);
+        impl Drop for Cleanup {
+            fn drop(&mut self) {
+                let _ = fs::remove_dir_all(&self.0);
+            }
+        }
+        let _cleanup = Cleanup(root.clone());
+        let file = |name: &str, bytes: &[u8]| {
+            let path = root.join(name);
+            fs::write(&path, bytes).unwrap();
+            #[cfg(unix)]
+            {
+                use std::os::unix::fs::PermissionsExt;
+                fs::set_permissions(&path, fs::Permissions::from_mode(0o644)).unwrap();
+            }
             FileRef {
-                mode: format!(
-                    "{:04o}",
-                    fs::metadata(&path).unwrap().permissions().mode() & 0o777
-                ),
                 path,
-                sha256: arena::digest(&bytes),
+                sha256: arena::digest(bytes),
                 bytes: bytes.len() as u64,
+                mode: "0644".into(),
             }
         };
-        let plan = FileRef {
-            path: PathBuf::from(
-                "/workspaces/quoridor/research-data/ai-sigma/fixed-depth-comparison358/plan.json",
-            ),
-            sha256: FIXED_DEPTH_PLAN_SHA256.into(),
-            bytes: fs::metadata(
-                "/workspaces/quoridor/research-data/ai-sigma/fixed-depth-comparison358/plan.json",
-            )
-            .unwrap()
-            .len(),
-            mode: "0644".into(),
-        };
-        plan.verify().unwrap();
-        let mut e = generation_fixture();
-        e.phase = "arena".into();
-        e.planned_slots = 256;
-        e.batch = Some(0);
-        e.argv = [
-            "/bound/runner",
-            "arena",
-            "--experiment",
-            "@EXPERIMENT@",
-            "--experiment-sha256",
-            "@EXPERIMENT_SHA256@",
-        ]
-        .map(String::from)
-        .to_vec();
-        e.inputs = vec![e.config.clone(), plan, e.schedule.clone()];
-        e.canonical_plan_sha256 = FIXED_DEPTH_PLAN_SHA256.into();
-        e.numerical_qualification = Some(write_ref(
-            "qualification.json",
-            &json!({"canonical_plan_sha256":e.canonical_plan_sha256}),
-        ));
-        let attempt = |e: &Experiment| {
-            let file = write_ref("experiment.json", &serde_json::to_value(e).unwrap());
-            load(
-                &BoundControl {
-                    path: file.path,
-                    sha256: file.sha256,
-                },
-                "arena",
-            )
-            .unwrap_err()
-            .to_string()
-        };
-        // Only the early identity gate is exercised: the test harness cannot be the bound caller.
-        assert_eq!(attempt(&e), "research exact prebound caller argv required");
-        let replacement = write_ref("replacement-plan.json", &json!({"changed_plan":true}));
-        replacement.verify().unwrap();
-        e.canonical_plan_sha256 = replacement.sha256.clone();
-        e.inputs[1] = replacement;
-        let q = json!({"canonical_plan_sha256":e.canonical_plan_sha256});
-        e.numerical_qualification = Some(write_ref("qualification.json", &q));
-        assert_eq!(e.inputs[1].sha256, e.canonical_plan_sha256);
-        assert_eq!(q["canonical_plan_sha256"], e.canonical_plan_sha256);
-        assert_eq!(attempt(&e), "research fixed scientific experiment identity");
-        fs::remove_dir_all(directory).unwrap();
+        let artifact = file("FAKE_NOT_EXECUTABLE", b"fake");
+        let weights = file("weights.f32", b"not model weights");
+        let schedule = file("schedule.json", b"[]");
+        let book = file("book.json", b"{}");
+        for (i, depth, count) in [(0, 4, 4), (1, 5, 6)] {
+            let descriptor = file(
+                &format!("descriptor-{i}.json"),
+                &serde_json::to_vec(&json!({"weights_SHA":weights.sha256})).unwrap(),
+            );
+            let config = file(
+                &format!("config-{i}.json"),
+                &serde_json::to_vec(&json!({"fixture_only":true,"depth":depth})).unwrap(),
+            );
+            let approved = file(
+                &format!("approved-{i}.json"),
+                &serde_json::to_vec(
+                    &json!({"fixture_only":true,"depth":depth,"planned_slots":count}),
+                )
+                .unwrap(),
+            );
+            let build=file(&format!("build-{i}.json"),&serde_json::to_vec(&json!({"schema":"quoridor.research.build-manifest.v1","status":"PASS","cleanup_complete":true,"remaining":[],"compiled_sources":sources(),"artifact":artifact,
+                "checks":["test","lint","build","bindings"].map(|r|json!({"role":r,"guardian_return":{"exit_code":0,"cleanup_complete":true}}))})).unwrap());
+            let evaluator = arena::digest(format!("fake-evaluator-{i}").as_bytes());
+            let q=file(&format!("FAKE-Q-{i}.json"),&serde_json::to_vec(&json!({"fixture_only":"NOT NUMERICAL PROOF","schema":"quoridor.research.numerical-qualification.v1","status":"PASS","phase":"arena","artifact_sha256":artifact.sha256,"compiled_sources_sha256":arena::json_digest(&sources()).unwrap(),"config_sha256":config.sha256,"schedule_sha256":schedule.sha256,"input_sha256":[book.sha256],"descriptor_sha256":[descriptor.sha256],"weights_sha256":[weights.sha256],"evaluator_sha256":[evaluator],"rules":"research-standard-2p-threefold-goal-first-v1","distance_units":"wall-distance/80","value_perspective":"side-to-move","remaining":[],"canonical_plan_sha256":approved.sha256})).unwrap());
+            let e = Experiment {
+                schema: "quoridor.research.experiment.v1".into(),
+                phase: "arena".into(),
+                build_manifest: build,
+                config,
+                inputs: vec![book.clone()],
+                models: vec![ModelRef {
+                    descriptor,
+                    weights: weights.clone(),
+                    evaluator_sha256: evaluator,
+                }],
+                dynamic_libraries: vec![],
+                schedule: schedule.clone(),
+                numerical_qualification: Some(q),
+                canonical_plan_sha256: approved.sha256.clone(),
+                rules: "research-standard-2p-threefold-goal-first-v1".into(),
+                distance_units: "wall-distance/80".into(),
+                value_perspective: "side-to-move".into(),
+                planned_slots: count,
+                batch: Some(0),
+                argv: vec![
+                    artifact.path.to_string_lossy().into(),
+                    "arena".into(),
+                    "--experiment".into(),
+                    "@EXPERIMENT@".into(),
+                    "--experiment-sha256".into(),
+                    "@EXPERIMENT_SHA256@".into(),
+                ],
+            };
+            let er = file(
+                &format!("experiment-{i}.json"),
+                &serde_json::to_vec(&e).unwrap(),
+            );
+            let bound = BoundControl {
+                path: er.path,
+                sha256: er.sha256,
+            };
+            let argv = e
+                .argv
+                .iter()
+                .map(|a| {
+                    a.replace("@EXPERIMENT@", &bound.path.to_string_lossy())
+                        .replace("@EXPERIMENT_SHA256@", &bound.sha256)
+                })
+                .collect::<Vec<_>>();
+            let (actual, _) =
+                load_checked(e.clone(), &bound, "arena", &approved, &argv, &artifact.path).unwrap();
+            assert_eq!(actual.planned_slots, count);
+            let other = file("wrong-expected-plan.json", b"substitution");
+            assert!(load_checked(e, &bound, "arena", &other, &argv, &artifact.path).is_err());
+        }
     }
 }

@@ -95,7 +95,7 @@ fn execute() -> Result<()> {
                 serde_json::to_string(&quoridor_runner::research_manifest::bindings()?)?
             );
         }
-        "strength-book" | "strength-configs" | "strength-arena" => {
+        "strength-book" | "strength-configs" => {
             strict_pairs(&args, &["--experiment", "--experiment-sha256"], &[])?;
             let bound = quoridor_runner::sigma_qualification::BoundControl {
                 path: argument(&args, "--experiment")?.into(),
@@ -104,7 +104,7 @@ fn execute() -> Result<()> {
             let phase = match command {
                 "strength-book" => "generation",
                 "strength-configs" => "materialize",
-                _ => "arena",
+                _ => unreachable!(),
             };
             println!(
                 "{}",
@@ -255,13 +255,12 @@ fn execute() -> Result<()> {
             } else {
                 let config: Config =
                     serde_json::from_reader(File::open(argument(&args, "--config")?)?)?;
-                if config.arena.as_ref().is_some_and(|a| {
-                    a.comparison == quoridor_runner::arena::Comparison::EvaluatorFixedDepth
-                }) {
-                    return Err("fixed-depth arena requires the bound --experiment entry".into());
-                }
-                if config.run_id.starts_with("strength355-batch-") {
-                    return Err("strength355 uses strength-arena --experiment, not the generic config route".into());
+                if config
+                    .arena
+                    .as_ref()
+                    .is_some_and(|a| a.comparison != quoridor_runner::arena::Comparison::Functional)
+                {
+                    return Err("research arena requires the bound --experiment entry".into());
                 }
                 runtime::run(&config, command)?
             };
@@ -412,7 +411,7 @@ fn execute() -> Result<()> {
     Ok(())
 }
 
-const HELP: &str = "quoridor-runner strength-book --experiment EXPERIMENT --experiment-sha256 SHA256\nquoridor-runner strength-configs --experiment EXPERIMENT --experiment-sha256 SHA256\nquoridor-runner arena --config CONFIG --report-mode receipt\nquoridor-runner <selfplay|arena|benchmark|cycle> --config CONFIG\nquoridor-runner arena --config CONFIG --sigma-cost-qualification PACKET --qualification-sha256 SHA256\nquoridor-runner sigma-cost-bindings --config CONFIG --config-sha256 SHA256\nquoridor-runner sigma-cost-measure --plan PLAN --plan-sha256 SHA256 [--sigma-cost-qualification VALIDATION_PACKET --qualification-sha256 SHA256]\nquoridor-runner arena --audit OUTPUT_DIRECTORY\nquoridor-runner arena --recover OUTPUT_DIRECTORY\nquoridor-runner dataset <cache|inspect> --input PATH [--output PATH] [--allow-test]\nquoridor-runner dataset evaluate --input PATH --model MODEL --output PATH [--simd] [--allow-test]\nquoridor-runner model-check --model MODEL\nquoridor-runner qf1-bulk --input PREFIXES.json --output FEATURES.json\nSigma dataset import: use the separate sigma-import binary";
+const HELP: &str = "quoridor-runner arena --experiment EXPERIMENT --experiment-sha256 SHA256\nquoridor-runner strength-book --experiment EXPERIMENT --experiment-sha256 SHA256\nquoridor-runner strength-configs --experiment EXPERIMENT --experiment-sha256 SHA256\nquoridor-runner arena --config CONFIG --report-mode receipt\nquoridor-runner <selfplay|arena|benchmark|cycle> --config CONFIG\nquoridor-runner arena --config CONFIG --sigma-cost-qualification PACKET --qualification-sha256 SHA256\nquoridor-runner sigma-cost-bindings --config CONFIG --config-sha256 SHA256\nquoridor-runner sigma-cost-measure --plan PLAN --plan-sha256 SHA256 [--sigma-cost-qualification VALIDATION_PACKET --qualification-sha256 SHA256]\nquoridor-runner arena --audit OUTPUT_DIRECTORY\nquoridor-runner arena --recover OUTPUT_DIRECTORY\nquoridor-runner dataset <cache|inspect> --input PATH [--output PATH] [--allow-test]\nquoridor-runner dataset evaluate --input PATH --model MODEL --output PATH [--simd] [--allow-test]\nquoridor-runner model-check --model MODEL\nquoridor-runner qf1-bulk --input PREFIXES.json --output FEATURES.json\nSigma dataset import: use the separate sigma-import binary";
 
 #[cfg(test)]
 mod tests {
@@ -470,5 +469,40 @@ mod tests {
         assert!(super::HELP.contains("dataset <cache|inspect>"));
         assert!(!super::HELP.contains("dataset <import"));
         assert!(super::HELP.contains("model-check --model"));
+    }
+}
+
+#[cfg(test)]
+mod generic_arena_361_cli_tests {
+    #[test]
+    fn generic_arena_361_cli_cannot_override_parent_approved_plan_or_mix_config_route() {
+        let argv = |v: &[&str]| v.iter().map(|s| s.to_string()).collect::<Vec<_>>();
+        let required = ["--experiment", "--experiment-sha256"];
+        assert!(
+            super::strict_pairs(
+                &argv(&["arena", "--experiment", "e", "--experiment-sha256", "h"]),
+                &required,
+                &[]
+            )
+            .is_ok()
+        );
+        for suffix in ["--config", "--approved-plan-sha256", "--depth"] {
+            assert!(
+                super::strict_pairs(
+                    &argv(&[
+                        "arena",
+                        "--experiment",
+                        "e",
+                        "--experiment-sha256",
+                        "h",
+                        suffix,
+                        "x"
+                    ]),
+                    &required,
+                    &[]
+                )
+                .is_err()
+            );
+        }
     }
 }

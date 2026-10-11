@@ -13,7 +13,9 @@
 
 ## 現行研究ビルドと実験の受入れ
 
-355の現行入口は[単一ビルド・実験・終了処理](research-lifecycle.md)を使う。既存のjob controllerとcycle_processが子を所有し、終了後のcollectorが一つのmanifestを確定する。旧software-v4〜v19のclassifierやsalvage結合は履歴として保持し、現行入口から実行しない。
+現行の研究BUILD/RUNは[単一ビルド・実験・終了処理](research-lifecycle.md)を使う。既存のjob controllerとcycle_processが子を所有し、終了後のcollectorが一つのmanifestを確定する。旧software-v4〜v19のclassifierやsalvage結合は履歴として保持し、現行入口から実行しない。
+
+研究arena361の採用sourceでは、RUN intentとphase admissionが同じ `approved_plan: FileRef` を束縛する。jobのargvはraw intent SHAを固定し、guardianがintent path/SHAと直接parent PIDを渡す。Experiment・plan・qualificationの相互一致だけでは承認先を選べない。model/depth/clock/book/count/batchはplan/configで宣言し、modeを件数やrun名で判定しない。これは既存のtrusted integration境界で、新しいregistry・署名・毎runレビューではない。採用sourceのaffected buildは未資格で、元358のimage/resultsを交換せず、新しい数値対局も許可しない。
 
 ## 設定と操作
 

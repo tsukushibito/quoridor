@@ -1,0 +1,76 @@
+{
+  "issue": "quoridor-4lc.361",
+  "status": "REVIEWED_SOURCE_ADOPTED_SOFTWARE_PENDING",
+  "source_reader_writer_STOP": "2026-10-11T02:07:15.271848+00:00",
+  "fixed_initial_target_sha256": "6776a381bff2b3fccb820cbbb4cab75fffc7d291c779bb5062cef48157a08a30",
+  "fixed_related_target_sha256": "f59d9043c3a41d90a4ef1acab67e916f4ba3f0d935a2b7a0219da316be33d7c7",
+  "related_control": {
+    "path": "/workspaces/quoridor/.artifacts/arena-generalization361/source-review-v1/related-R1-v2/control.json",
+    "sha256": "efc15b58baa2e3097f846f1c4d1e9ad9378329ce9e07ea771710152ee9a3f1b0",
+    "bytes": 5641,
+    "mode": "0644"
+  },
+  "reviewed_sources": [
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/arena.rs",
+      "sha256": "f7d444c693c8b7d518b9a05a5b8f90508223930f289cd6f2444d5766e26e2654",
+      "bytes": 36423,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/main.rs",
+      "sha256": "25f3efac54367db81c9b3f5a356797f79187fc77234f274258b7d47150c29c22",
+      "bytes": 22178,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/research_manifest.rs",
+      "sha256": "f327304ea907c943f3cf7a240373bbfda2591806e88bf768c307b4add2039280",
+      "bytes": 25263,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/value_search_strength.rs",
+      "sha256": "6dcd5232b3deaf3b82b87c301c76b471af32113f6168a8d8a522a2449a4bd818",
+      "bytes": 32884,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+      "sha256": "b14f1e2dbcfb2e45c4f5d96e5a4eb30ab7177e55da3c1d3bf4d17103cd404484",
+      "bytes": 80398,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/tools/research-session/test_arena_plan.py",
+      "sha256": "3b02dc13024307421fdf57b7b16242e6a18f7d0c9abb5c9cc50c71075e62fd2a",
+      "bytes": 20078,
+      "mode": "0644"
+    }
+  ],
+  "strict_reconstruction": "Five Main beforeimages matched frozen gzip before mutation; original26-hunk patch plus2-production/1-test R1 patch applied exactly and inverse check passed; reviewed six postimages are byte exact.",
+  "format_checks": "Scoped Rustfmt2024 skip_children format/check previously passed; correct project Ruff format/check/lint and git diff --check PASS; all postimage hashes exact. No target test execution.",
+  "retained_admin_refusal": "First Root formatter lookup incorrectly used .venv/bin/ruff instead of tools/research-quality/.venv/bin/ruff and raised FileNotFoundError after exact patch adoption/Rustfmt; no formatter child started and no source mismatch. Correct path checked once, no test replay.",
+  "baseline_compatibility": {
+    "source38_before_after": "EXACT",
+    "lifecycle_helper_ASTs": [
+      "cargo_report",
+      "command",
+      "copy_artifact",
+      "error_fact",
+      "physical_and_quiet",
+      "process"
+    ],
+    "helper_ASTs_before_after": "EXACT",
+    "failed_release": {
+      "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/compact-tt359-v1/software-controls/baseline-entry-v1/completion-collection-v1/failed-baseline-STOP.json",
+      "sha256": "3fd6539e8b1c8895be0bce6dd6df9a48f5ccef9b200361a134e58d45b512b855",
+      "bytes": 14724,
+      "mode": "0644"
+    },
+    "next_entry": "Bind new current publisher80398B/b14f in a NEW intent. Old38db/32bf/runtime/source refs stay FAILED history; compiled baseline38 unchanged."
+  },
+  "qualification": "Six new Rust defs and four original Python scopes remain unexecuted. R1 supplied four-case method PASS reused without replay. No numerical/model/Search/geometry/game qualification.",
+  "funding": "Prospective inclusive256KiB Root source growth/receipt/docs/dispatch/Git inside existing361 Root1MiB. Source1MiB/private16MiB/other11MiB support/global49994555392 unchanged; oldfloors retained. Target handover/freshguards still required before software.",
+  "preserved": "Old355/358/359/360/361 RAW/failures/fees/masks/UNKNOWN/seals/defaults/N/323pause held; old358 images/results unchanged."
+}

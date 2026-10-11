@@ -230,38 +230,6 @@ pub fn execute(
             }
             materialize(request)
         }
-        "arena" => {
-            let c: Config = experiment.config.read()?;
-            let batch = experiment.batch.ok_or("CAMPAIGN_BATCH_REQUIRED")?;
-            let model_index = (batch / 2 + batch % 2) % 2;
-            if experiment.planned_slots != 512
-                || batch >= 16
-                || c.run_id != format!("strength355-batch-{batch:02}")
-                || experiment.models.len() != 1
-                || c.engines.len() != 2
-                || c.engines[0].model.as_ref() != Some(&experiment.models[0].descriptor.path)
-                || experiment.models[0].descriptor.sha256 != APPROVED_DESCRIPTOR_SHA256[model_index]
-                || experiment.models[0].evaluator_sha256 != APPROVED_EVALUATOR_SHA256[model_index]
-                || c.inference.is_some()
-                || c.inference_cpu_core.is_some()
-            {
-                return Err("CAMPAIGN_FIXED512_PURE_VALUE_CALLER".into());
-            }
-            let book_ref = experiment.inputs.first().ok_or("CAMPAIGN_BOOK_REFERENCE")?;
-            let book: GeneratedBook = book_ref.read()?;
-            let mut template = c.clone();
-            template.output = c.output.parent().ok_or("CAMPAIGN_BATCH_OUTPUT")?.into();
-            let reproduced = batch_config(&template, &book, batch)?;
-            if serde_json::to_value(&reproduced)? != serde_json::to_value(&c)? {
-                return Err("CAMPAIGN_EXACT_MAINTAINED_BATCH_CONFIG".into());
-            }
-            let report = crate::runtime::run(&c, "arena")?;
-            let receipt = result_receipt(&c, &report)?;
-            if report.stopped.is_some() || !report.all_workers_joined {
-                return Err("CAMPAIGN_PARTIAL; full journal retained".into());
-            }
-            Ok(receipt)
-        }
         _ => Err("CAMPAIGN_PHASE".into()),
     }
 }
