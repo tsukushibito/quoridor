@@ -1704,7 +1704,8 @@ def collect_data(spec, experiment):
             else:
                 report = json.loads(values["generation_result"])
                 require(
-                    report["planned"] == 8 and report["recorded"] == 8,
+                    report["scheduled"] == experiment["planned_slots"] == 8
+                    and report["recorded"] == 8,
                     "full planned corpus denominator",
                 )
                 data["known_goals"] = report["goals"]

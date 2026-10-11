@@ -1,0 +1,62 @@
+{
+  "schema": "quoridor.research.source-adoption-delta.v1",
+  "status": "ACCEPTED_SOURCE_ONLY",
+  "issue": "quoridor-4lc.362",
+  "stopped_lint_target": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/lint-repair-v5/source-STOP.json",
+    "sha256": "4c5323cae34cb8dfab3d27c73d967e377dbabd175baf29c9a1e8f6d062c3f9c3",
+    "bytes": 4567,
+    "mode": "0644"
+  },
+  "stopped_R1_target": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/report-repair-v4/source-STOP.json",
+    "sha256": "b4d8f2e9ff9a27de6372c32d29853873cb562327a58f83812102473e4073c9eb",
+    "bytes": 4566,
+    "mode": "0644"
+  },
+  "source_postimages": [
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/teacher_pilot/depth6.rs",
+      "sha256": "8e037e5c1e451db32d7a39dea2cf70a52b3add550f70e2c6cb28a1b84709182c",
+      "bytes": 8948,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/teacher_pilot_execution.rs",
+      "sha256": "1ab60b469e3279996d95b577b318c4147c231baba9d1bbad2acf45d44510553c",
+      "bytes": 56646,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/teacher_pilot_execution/depth6.rs",
+      "sha256": "10ca01c090aa694c60d73a391af2324ef67fb65cf9310ce0f10910fde369f310",
+      "bytes": 39153,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+      "sha256": "89d8e955f99f876741c6814b162836b60ebeeb0b6eb3c3507ff0355b8e7cd414",
+      "bytes": 97690,
+      "mode": "0644"
+    }
+  ],
+  "actual_failed_build_release": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/build-v2/failed-STOP.json",
+    "sha256": "910ebc931ebe52b0dc5f921c074f9a70f4fd00793b1be4a49d4c0a0e958467e1",
+    "bytes": 30460,
+    "mode": "0644"
+  },
+  "review_control": {
+    "path": "/workspaces/quoridor/.artifacts/common-corpus-warmstart-study/source-review-v1/pilot-inlet-v3/related-R1-v4/control.json",
+    "sha256": "d5fc0ba7f70824f81bfc223116b1d77a4c2f704da9605c7a249ef24739f89ab4",
+    "bytes": 2355,
+    "mode": "0644"
+  },
+  "strict_forward_inverse_all4": true,
+  "other_Python_AST_equal": true,
+  "Rust_test_bodies_unchanged_supplied": true,
+  "all16_new_Rust_PASS_replayed": false,
+  "actual_adoption_STOP": "2026-10-11T10:33:42.865658+00:00",
+  "remaining": [],
+  "software_private_numerical_qualification": false
+}

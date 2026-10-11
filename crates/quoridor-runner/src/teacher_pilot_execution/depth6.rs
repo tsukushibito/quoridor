@@ -401,10 +401,10 @@ pub(super) fn run(config: &PilotConfig, hash: String, cancel: &AtomicBool) -> Re
         } else {
             attempt = Err(secondary);
         }
-    } else if attempt.is_ok() {
-        if let Err(error) = read_records(&config.output, true) {
-            attempt = Err(error);
-        }
+    } else if attempt.is_ok()
+        && let Err(error) = read_records(&config.output, true)
+    {
+        attempt = Err(error);
     }
     // Worker scheduler returned only after all joins; partial stream stays intact.
     if let Err(primary) = &attempt {

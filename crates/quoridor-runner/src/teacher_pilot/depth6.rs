@@ -161,14 +161,6 @@ pub fn validate(c: &PilotConfig) -> Result<()> {
     Ok(())
 }
 
-pub(crate) fn audit(slots: &[ScheduledGame]) -> Result<()> {
-    // Input-only deterministic regeneration: never a model/search/label rerun.
-    if serde_json::to_value(slots)? != serde_json::to_value(schedule()?)? {
-        return Err("depth6 frozen ID/prefix/attempt census changed".into());
-    }
-    Ok(())
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -211,7 +203,6 @@ mod tests {
 
 #[cfg(test)]
 mod common_corpus_tests {
-    use super::*;
     #[test]
     fn required_schedule_fields_and_balanced_new_request_ids() {
         let study: quoridor_data::common_corpus::Config =

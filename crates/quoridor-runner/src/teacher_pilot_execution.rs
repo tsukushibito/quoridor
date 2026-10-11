@@ -50,6 +50,7 @@ impl SearchPolicy {
         nodes: 100000,
         strict: false,
     };
+    #[cfg(test)]
     const DEPTH6: Self = Self {
         depth: 6,
         nodes: u64::MAX,
