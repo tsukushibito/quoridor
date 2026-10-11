@@ -1,0 +1,189 @@
+{
+  "schema": "quoridor.common-corpus-warmstart.coherent-source-target.v1",
+  "issue": "quoridor-4lc.362.3",
+  "status": "STOPPED_CURRENT_PRODUCER_CONSUMER_SOURCE_FOR_ONE_REVIEW_NOT_CLEAR",
+  "producer_binding": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/source-data-v1/encoding-v2/source-STOP-binding-v4.json",
+    "sha256": "8750fe870026c4221422166c966724546a30384bc6b1eb1ced6c69d4f15642db",
+    "bytes": 7778,
+    "mode": "0644"
+  },
+  "consumer_binding": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/source-learner-v1/encoding-related-v4/source-STOP-binding.json",
+    "sha256": "724c776dcb8f21c54ff39b69548e33d2148d1c70e169e15cd9737702c6ccf586",
+    "bytes": 7397,
+    "mode": "0644"
+  },
+  "producer_current_postimages": [
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/source-data-v1/encoding-v2/derivatives/crates/quoridor-data/Cargo.toml",
+      "sha256": "a0df9abe34ca445ce761d06b310affd1f01eb488272bae4dbd8af4795721477f",
+      "bytes": 481,
+      "mode": "0644",
+      "relative": "crates/quoridor-data/Cargo.toml"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/source-data-v1/encoding-v2/derivatives/crates/quoridor-data/src/common_corpus.rs",
+      "sha256": "f811b12c5a39e452cd2df71139bd573b8d5f722dd93c7527545152303b4980e2",
+      "bytes": 11088,
+      "mode": "0644",
+      "relative": "crates/quoridor-data/src/common_corpus.rs"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/source-data-v1/encoding-v2/derivatives/crates/quoridor-data/src/lib.rs",
+      "sha256": "1213c01b040f76518099070cf1253ac9b73a024403a59a7755b2e89d86fe9bf9",
+      "bytes": 43336,
+      "mode": "0644",
+      "relative": "crates/quoridor-data/src/lib.rs"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/source-data-v1/encoding-v2/derivatives/crates/quoridor-data/src/lossless_jsonl.rs",
+      "sha256": "76bde0a3cff239b414e0bff0ba5a651833a9f8aae031086ac97f2e97187b8c69",
+      "bytes": 12112,
+      "mode": "0644",
+      "relative": "crates/quoridor-data/src/lossless_jsonl.rs"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/source-data-v1/encoding-v2/derivatives/crates/quoridor-data/src/terminal_cache.rs",
+      "sha256": "52c215322e9d1d482dfa00736d48f83c675b0d930583b34949ffd147f260ba1b",
+      "bytes": 15315,
+      "mode": "0644",
+      "relative": "crates/quoridor-data/src/terminal_cache.rs"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/source-data-v1/encoding-v2/derivatives/crates/quoridor-data/src/terminal_stream.rs",
+      "sha256": "f8ee12ac76db3fab5d80b645b6a42ac056dc869feeecc97687e291071e7a12af",
+      "bytes": 68269,
+      "mode": "0644",
+      "relative": "crates/quoridor-data/src/terminal_stream.rs"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/source-data-v1/encoding-v2/derivatives/crates/quoridor-runner/src/teacher_pilot_execution.rs",
+      "sha256": "4adb77e2ee945d6565d4ebf3d5d99cedbb3f96334a5079623b4e6109194cff60",
+      "bytes": 50345,
+      "mode": "0644",
+      "relative": "crates/quoridor-runner/src/teacher_pilot_execution.rs"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/source-data-v1/encoding-v2/derivatives/crates/quoridor-runner/src/teacher_pilot_execution/depth6.rs",
+      "sha256": "bb3f6b49c2cd6dcc441660bee3ca3258109f84a15dff0bab05d67c554e573692",
+      "bytes": 38061,
+      "mode": "0644",
+      "relative": "crates/quoridor-runner/src/teacher_pilot_execution/depth6.rs"
+    }
+  ],
+  "consumer_current_postimages": [
+    {
+      "relative": "python/quoridor_training/common.py",
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/source-learner-v1/encoding-related-v4/common.py",
+      "sha256": "18181a8f2f5f2748ba142b1229027c7015a29f031b5219eaaa33f5f19e490884",
+      "bytes": 56507,
+      "mode": "0644"
+    },
+    {
+      "relative": "python/quoridor_training/terminal_cache.py",
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/source-learner-v1/encoding-related-v4/terminal_cache.py",
+      "sha256": "ef08811bd940f2d5dc39a382436a609776984c7099ac354ae5ec1b30d7bf328c",
+      "bytes": 18665,
+      "mode": "0644"
+    },
+    {
+      "relative": "python/quoridor_training/cache.py",
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/source-learner-v1/encoding-related-v4/cache.py",
+      "sha256": "6d1bb97cb8004914310c09087a53fcebca3207a8bb89fbddeca3c302a9f165c3",
+      "bytes": 20328,
+      "mode": "0644"
+    },
+    {
+      "relative": "python/quoridor_training/distance_steps.py",
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/source-learner-v1/encoding-related-v4/distance_steps.py",
+      "sha256": "53c5ff413f38a90f87430555225cc093a6c452d18da4e63667710f3c808e3516",
+      "bytes": 18113,
+      "mode": "0644"
+    },
+    {
+      "relative": "python/quoridor_training/train.py",
+      "encoding": "gzip",
+      "raw_SHA256": "1db97097bf976adf7f20b6a4c7a14cfd004afd8da8e723cbc8ccf84ac52d4667",
+      "raw_bytes": 96611,
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/source-learner-v1/related-v2/train-post.py.gz",
+      "sha256": "2f2f80799b29574d7a40e21e0dceef0bab22a326f5387a1cd77b7e32f08a64fc",
+      "bytes": 22022,
+      "mode": "0644"
+    },
+    {
+      "relative": "python/quoridor_training/plotting.py",
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/source-learner-v1/changed/python/quoridor_training/plotting.py",
+      "sha256": "a26181e0174dfa30bcbd42b4c169d45c8498105b3e77c84067070bdb902400a3",
+      "bytes": 17034,
+      "mode": "0644"
+    }
+  ],
+  "producer_interface": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/source-data-v1/encoding-v2/interface-v2.json",
+    "sha256": "fb6bf107433abd26427c5532c1d86471328b3a17e882f626fe2536c86bed9dfe",
+    "bytes": 7957,
+    "mode": "0644"
+  },
+  "literal_shape_examples": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/source-data-v1/encoding-v2/shape-examples-v2.json",
+    "sha256": "a62f40ea11d8093c5d181981d42a31ff86c6fe0d932bdeac03eadf278997ae1c",
+    "bytes": 9184,
+    "mode": "0644"
+  },
+  "producer_proof": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/source-data-v1/encoding-v2/reconstruction-proof-v2.json",
+    "sha256": "2cb9ffcdcd108339e6f482fee5bb80c9ab99bfcd709cc35fad274565ef66d4c7",
+    "bytes": 11277,
+    "mode": "0644"
+  },
+  "consumer_proof": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/source-learner-v1/encoding-related-v4/static-proof.json",
+    "sha256": "d96e33345df35f2433dccd80528d8a4aff1fc0d2a075e1f0c01cf758fa6c9e0e",
+    "bytes": 5823,
+    "mode": "0644"
+  },
+  "producer_current_prices": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/source-data-v1/encoding-v2/quantity-schedule-cost-options-v2.json",
+    "sha256": "2d42971e834931dd012f9a64ee0f4ee63a0e94e8040f0a34dc2f8a55133b16e6",
+    "bytes": 14707,
+    "mode": "0644"
+  },
+  "consumer_current_cost_note": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/source-learner-v1/encoding-related-v4/encoding-cost-and-gaps.md",
+    "sha256": "8cddfc17d6e35977cf4a507eb9a410e11d0b00781f470b7e5a3ec49fcb00f26e",
+    "bytes": 6481,
+    "mode": "0644"
+  },
+  "warmstart_original_binding": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/source-learner-v1/handoff-STOP.json",
+    "sha256": "92a06df731e051d86682e06c6945090728e52a22014a121a448987d97167f5c6",
+    "bytes": 10485,
+    "mode": "0644"
+  },
+  "warmstart_alignment_proof": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/source-learner-v1/related-v2/static-proof.json",
+    "sha256": "5beef33e96629100216e1a6ad45c98ed5ae60e5a325dd64ea75cadaf27ac4511",
+    "bytes": 3521,
+    "mode": "0644"
+  },
+  "original_producer_before_binding": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/source-data-v1/source-STOP-binding-v1.json",
+    "sha256": "60f29fb9249c15cbd2410d56d99f8cf08343a557d3d063edb0555f6b9349b277",
+    "bytes": 9995,
+    "mode": "0644"
+  },
+  "support": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/common-corpus-warmstart-preparation-support-v3.json",
+    "sha256": "4a159fd7687e8d44866f24c12b988e6a0ee0e9fdc914849042c0c6bd1c9f0289",
+    "bytes": 6368,
+    "mode": "0644"
+  },
+  "expected_sha_domains": "Separate actualcompressed FileRefs from exact raw SHA/bytes/LF/record offsets; common v2 sevenfiles/mask/partition/units BOTH fits, no copied detailed data.",
+  "observed_preparation_qualifications": "Only saved labelled synthetic/reference scopes. Rust14new definitions unbuilt/untyped/unrun; realarrays/framework/native/producerpublication unqualified. No oldsuccess replay from target.",
+  "scientific_entry": false,
+  "human_N_range_draw_recipe_eval": "UNSELECTED",
+  "frozen_until_actual_related_reader_STOP": true,
+  "Root_source_target_writer_STOP": "2026-10-11T05:42:35.503516+00:00",
+  "Root_owned_readers_children_jobs_TMP": []
+}

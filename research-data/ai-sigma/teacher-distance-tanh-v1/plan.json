@@ -524,7 +524,7 @@
       "learner": "quoridor-4lc.362.1",
       "data_generator": "quoridor-4lc.362.2"
     },
-    "preparation_support": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/common-corpus-warmstart-preparation-support-v2.json",
+    "preparation_support": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/common-corpus-warmstart-preparation-support-v3.json",
     "baseline": "fresh353 no-output-bypass BEST43",
     "starting_weights_SHA256": "046fe926e56b955b0fb7de8f147a74ec33eace9cbc00a55c307f9b6541ab9841",
     "descriptor_SHA256": "46ec2c4708f96dcf9fad579c2fb0d1299c6663df27412f0faac98267467715e1",
@@ -567,12 +567,12 @@
     "limits": "D6 estimates are teachers/reference estimates, not truth; controlled teacher-content contrast not universal cause proof. Sigma later only; original323USERPAUSE/seals/defaults/Nfullgen remain held.",
     "common_cache_interface": {
       "producer_interface": {
-        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/source-data-v1/interface-v1.json",
-        "sha256": "687851f5bc79109df15ccd8d9ca92be78150073755e832d4441d886078159686",
-        "bytes": 7523,
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/source-data-v1/encoding-v2/interface-v2.json",
+        "sha256": "fb6bf107433abd26427c5532c1d86471328b3a17e882f626fe2536c86bed9dfe",
+        "bytes": 7957,
         "mode": "0644"
       },
-      "schema": "quoridor-common-corpus-terminal-geometry-v1",
+      "schema": "quoridor-common-corpus-terminal-geometry-v2",
       "raw_root_file": "completed-root-raw.f32",
       "shared_eligibility_file": "common-eligible.u8",
       "legacy_rootmean_is_raw": false,
@@ -581,7 +581,13 @@
       "selected_range_policy": null,
       "selected_draw_policy": null,
       "common_partition": "canonical_LR_family_SHA256_seed_rank_train_floor_4F_over_5",
-      "authority": "Selected issued plan identity; same producer mask and partition for both candidates. This interface reference is not source/software/numerical qualification."
+      "authority": "Selected issued plan identity; same producer mask and partition for both candidates. This interface reference is not source/software/numerical qualification.",
+      "prior_v1_interface": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/source-data-v1/interface-v1.json",
+        "sha256": "687851f5bc79109df15ccd8d9ca92be78150073755e832d4441d886078159686",
+        "bytes": 7523,
+        "mode": "0644"
+      }
     },
     "storage_encoding": {
       "direction": "HUMAN_SELECTED_LOSSLESS_CANONICAL_DETAIL_AND_ONE_SHARED_LIVE_BINARY_CACHE",
@@ -590,14 +596,39 @@
       "live_cache": "One qualified fixed-binary cache/partition/scale/eligibility shared by both fits; no per-model or dense-feature mirror. Keep noncompressed only while indexed consumers need it.",
       "retirement": "Original raw/cache retirement only after exact streamed reconstruction/hash/reference checks, source/schema/Git/config recovery and actual consumers readerSTOP; preserve irreproducible inputs/models/checkpoints/results/necessary failure facts.",
       "cost": "Budget canonical compressed bytes plus active binary cache, bounded conversion/finalization/failure/live overlap. No assumed compression ratio or saving credited as issued capacity.",
-      "producer_compressed_interface": null,
+      "producer_compressed_interface": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/source-data-v1/encoding-v2/interface-v2.json",
+        "sha256": "fb6bf107433abd26427c5532c1d86471328b3a17e882f626fe2536c86bed9dfe",
+        "bytes": 7957,
+        "mode": "0644"
+      },
       "consumer_reader_binding": {
         "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/source-learner-v1/encoding-v3/source-STOP-binding.json",
         "sha256": "38c44241433180fb1c56fd1245d51fb4794105f859a9374346b0701dd40df949",
         "bytes": 5312,
         "mode": "0644"
       },
-      "integration": "PROSPECTIVE_READER_ONLY; stopped producer compressed names/raw-content/index/seven-file inventory still required. No actual corpus conversion, cache/trainer hook or software/numerical qualification."
+      "integration": "CURRENT_SOURCE_PORTS_IMPLEMENTED_STOPPED; original362.3 review completed source_clear=false/blockers2/ordinary1. SAME learner R1 selected-recipe authority/R2 binary-before-array joins/C1 both-teacher baseline guides under related repair; no source adoption. RealRust/offline lock/atomic publication/arrays/framework/native qualification not established.",
+      "consumer_current_binding": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/source-learner-v1/encoding-related-v4/source-STOP-binding.json",
+        "sha256": "724c776dcb8f21c54ff39b69548e33d2148d1c70e169e15cd9737702c6ccf586",
+        "bytes": 7397,
+        "mode": "0644"
+      }
+    },
+    "current_stopped_source_target": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/common-corpus-source-target-v1.json",
+    "source_review_issue": "quoridor-4lc.362.3",
+    "whole_cost_proposal": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/common-corpus-whole-cost-options-v1.json",
+    "source_review_result": {
+      "target_SHA256": "e9d98be4b86f33c7332d5298d987f301a4eb4e48dd16e6172f01a75130fdefea",
+      "control": "/workspaces/quoridor/.artifacts/common-corpus-warmstart-study/source-review-v1/control.json",
+      "control_SHA256": "7215cd9a6e8198facc316944749e86085c19616b3773161c50b735e15e891107",
+      "source_clear": false,
+      "blockers": 2,
+      "ordinary": 1,
+      "reader_STOP": "2026-10-11T05:54:19.118062+00:00",
+      "ordinary_related_repair": "SAME362.1 and SAME362.3; selected settings identity, all binary semantic joins before arrays and both-teacher baseline guides; current original frozen target unchanged",
+      "contained_support": "research-data/ai-sigma/teacher-distance-tanh-v1/common-corpus-learner-repair-support-v1.json"
     }
   }
 }
