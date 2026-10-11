@@ -1,0 +1,115 @@
+{
+  "schema": "quoridor.research.whole-support.v1",
+  "issue": "quoridor-4lc.366",
+  "issued_at": "2026-10-11T22:45:27.037784+00:00",
+  "funded_union_B": 134217728,
+  "global_held_B": 47140171776,
+  "global_limit_B": 50000000000,
+  "additional_global_grant_B": 134217728,
+  "remaining_unassigned_global_forward_B": 2859828224,
+  "previous_phase_support": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/distance-input-diagnostic364/support-v1.json",
+    "sha256": "1a95fa6d23652bccabe16191ec3a33a81d4e14c9a7a884b4fb3b127c5bbb2543",
+    "bytes": 2539,
+    "mode": "0644"
+  },
+  "accepted_pilot": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/pilot-result-acceptance-v1.json",
+    "sha256": "ac3415333026fd825fdce16f5cb89fc8cafcdfa305c8396e60270ad85a56476e",
+    "bytes": 11091,
+    "mode": "0644"
+  },
+  "allocation": {
+    "worker_whole_B": 130023424,
+    "Root_integration_Git_support_report_admin_B": 4194304,
+    "worker_source_config_B": 8388608,
+    "worker_control_capture_report_B": 12582912,
+    "worker_outputs_PDF_raw_B": 67108864,
+    "worker_serial_TMP_B": 33554432,
+    "worker_failure_cleanup_forward_B": 8388608
+  },
+  "worker_thread": "01a1100f-6d45-78e0-8a87-84503ff0fbf6",
+  "worker_workspace": "/workspaces/quoridor/.worktree/learning-million",
+  "worker_write_root": "/workspaces/quoridor/.worktree/learning-million/.artifacts/lr-comparison366-v1",
+  "limits": {
+    "CPU": 1,
+    "threads": 1,
+    "family_RAM_B": 3221225472,
+    "GPU": 0,
+    "per_fit_launch_timeout_seconds": 600,
+    "per_fit_allwork_forwards": 16023,
+    "fits": 2,
+    "updates_per_fit": 200,
+    "epochs_per_fit": 50,
+    "pdf_max_B": 8388608
+  },
+  "selected_base_lr": 0.001,
+  "retained_low_lr": 0.0001,
+  "configs": [
+    {
+      "original": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/pilot-fit-A-v2.json",
+        "sha256": "9865c84d97b1dace07dc5e7dcd6cfae162c6c969c3334d2d5a43ca397c85a700",
+        "bytes": 2540,
+        "mode": "0644"
+      },
+      "current": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/lr-comparison366/fit-A-v1.json",
+        "sha256": "b6ab0145ffc0427cb827de3312dad47da94018b3dd509471b9591e0f6aaf4cdb",
+        "bytes": 2539,
+        "mode": "0644"
+      }
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/pilot-fit-B-v2.json",
+        "sha256": "ad3fbff736a28f4fae03400f8679b15580a777b0fb24d8d49f369c9015aaa63e",
+        "bytes": 2557,
+        "mode": "0644"
+      },
+      "current": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/lr-comparison366/fit-B-v1.json",
+        "sha256": "da29ea1086c9dac3dfe9640d2a0856f5cd56201c4503d395a6b61d0af0047f09",
+        "bytes": 2556,
+        "mode": "0644"
+      }
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/pilot-common-settings-v2.json",
+        "sha256": "724d765fdef322e2fc13fb05f51a68aeeb37b4aa14ddf26c58de759129d051c4",
+        "bytes": 2521,
+        "mode": "0644"
+      },
+      "current": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/lr-comparison366/settings-v1.json",
+        "sha256": "fd6e6af9d3fafa6e3e879074d3e3f2a4fdeac5560640df409be780936438a35b",
+        "bytes": 2520,
+        "mode": "0644"
+      }
+    }
+  ],
+  "prospective_current_plan": {
+    "before": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/plan.json",
+      "sha256": "9779a274fcd0c7cbb5d46c07f02ee5500eb05bac0d65c7ec30e14002f5be55b9",
+      "bytes": 52044,
+      "mode": "0644"
+    },
+    "after_sha256": "1fcf82297654c3aa57bb86cbc3a8fd2cbb6416fc4c75daf47c3e828eab4e9650",
+    "after_bytes": 52043,
+    "patch": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/lr-comparison366-plan-v1.patch",
+      "sha256": "d52bb90844928badebd250cd1fa3c033df0dbcaf6b436a779bbf1f61855c7d58",
+      "bytes": 338,
+      "mode": "0644"
+    },
+    "status": "NOT_ADOPTED; Root applies only after actual existing plan-reader STOP",
+    "changed_field": "next_learning_study.common_learner_settings.optimizer.lr only",
+    "lineage": "Original362 corpus/model/scale/partition/pilot_decision_proposal stays historical. Current prospective recipe LR1e-3 is human selected issue366; historical9779/low-LR results immutable."
+  },
+  "authority": "Human selects exactly two independent fresh BEST43 warmstarts1e-3/all other362 scientific fields unchanged. No lowLR replay/longertraining/sweep/generation/strength/default/323 wake. Root soleMain/Git/allocator.",
+  "runtime_rule": "Source/light preparation now. Actualfits on current bound recipe/plan and fresh finite source/model/cache/physical/quiet guards. Protect real performance intervals. Diagnostic364 independent, not scientific/closure prerequisite.",
+  "measurement_domain": "Held administrative forward distinct from stored usage; older proofs/costs/peaks/failures/UNKNOWN retained, no refund/model/dependency copies.",
+  "preparation_failure_retained": "Initial narrow patch assertion incorrectly expected only one LR literal, while current settings and historical pilot proposal each contain1e-4. Refusal before Mainplan mutation/support publication; new3configs preserved/formatted. Correction alters current settings scalar only, object diff proved; historical proposal untouched. All Rootdirs/configs/admin included in issued4MiB."
+}
