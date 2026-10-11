@@ -1,0 +1,74 @@
+{
+  "issue": "quoridor-4lc.359",
+  "postmaps": [
+    {
+      "relative": "crates/quoridor-ai/src/alphabeta.rs",
+      "before_SHA": "b976df272b273a147596f36ec503a2801b802b45389d8169ca62468d7a02b335",
+      "post_SHA": "848ead468d3e7d2edb3c85b1f2bbd893984efa97598d237987e3266912ef4ed6",
+      "post_bytes": 103607,
+      "mode": 420
+    },
+    {
+      "relative": "crates/quoridor-core/src/research.rs",
+      "before_SHA": "b7897456e8e791c2bb9ae83dced012c92254ebe203f81d327d357083f0653335",
+      "post_SHA": "0b87fb3e269278516d84674c21ad0a351288e1f9c2f4a7e219f14345f0e708fe",
+      "post_bytes": 34167,
+      "mode": 420
+    },
+    {
+      "relative": "crates/quoridor-ai/src/compact_tt359_tests.rs",
+      "before_SHA": null,
+      "post_SHA": "ef03b164a61fe70fe341b176549c33c9a860e78f4f425a9135974186b7f888ce",
+      "post_bytes": 20068,
+      "mode": 420
+    },
+    {
+      "relative": "crates/quoridor-runner/src/runtime.rs",
+      "before_SHA": "efc76816c053f5a1799fa8b4843d25ede88b546b8b6ca21d46e3cfbba9f2cc56",
+      "post_SHA": "6a9e077a3b494b1198642ab5fc699cb7724a0d0a8feaa8786a62740ea5d99f59",
+      "post_bytes": 215858,
+      "mode": 420
+    },
+    {
+      "relative": "crates/quoridor-runner/src/arena_clock.rs",
+      "before_SHA": "12734b0609f952da01faee86cfe454a13e57097e0a26704300979e28b65fa10a",
+      "post_SHA": "20a1c474b2c41b25e302ff5d96b59876d0603dbd4339556969140c3b0b7d6e2e",
+      "post_bytes": 18616,
+      "mode": 420
+    },
+    {
+      "relative": "crates/quoridor-runner/src/value_search_compare.rs",
+      "before_SHA": "16e336b0ac9b82c1f4900159f5881db75f737e22ed945a673c5ef92252dcfa65",
+      "post_SHA": "72ad5494193701aaf326db44a09db99b435625c145dddc2cab37a40416bc9b3a",
+      "post_bytes": 50924,
+      "mode": 420
+    },
+    {
+      "relative": "crates/quoridor-ai/benches/nnue_search.rs",
+      "before_SHA": "6f2929a75c6441151502780603528ae71a1d91a0a764ec5dcec1acba82870458",
+      "post_SHA": "5ad173f399586fb970c10118f329e144b260271aa3a07a3a5ea618e2f6949cda",
+      "post_bytes": 19664,
+      "mode": 420
+    },
+    {
+      "relative": "crates/quoridor-ai/src/tt_hash_reuse351_tests.rs",
+      "before_SHA": "966d455341714c37808993a15274fd97bf4781d5fa1595fc55b8435b1072191a",
+      "post_SHA": null,
+      "post_bytes": 0,
+      "mode": 420
+    }
+  ],
+  "original_stopped_proof": {
+    "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/compact-tt359-v1/verification.json",
+    "sha256": "d9a60a3ea7c5209f59338245f402e695554c419abc67039e0e4f2d46ae616c25",
+    "bytes": 6860,
+    "mode": "0644"
+  },
+  "ordinary_test_adoption": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/search-optimization/compact-tt359/signed-zero-fixture-adoption-v2.json",
+    "sha256": "9babc53b1ad2da9a9c2ac61f318add38f41b744dc72bc1fa9817cdbd88c25758",
+    "bytes": 2860,
+    "mode": "0644"
+  },
+  "scope": "Original8 postmaps with ONLY signed-zero assertion test hash/bytes replaced. All scientific source/same public inlet unchanged; no original review retarget or execution PASS."
+}
