@@ -520,7 +520,7 @@ pub fn run_bound(bound: &crate::sigma_qualification::BoundControl) -> Result<ser
 mod fixed_depth_358_tests {
     use super::*;
     fn fixture() -> Config {
-        serde_json::from_value(serde_json::json!({"ruleset":"standard_2p_threefold","run_id":"fixed-depth-new-fixture","output":"unused","games":2,"workers":1,
+        serde_json::from_value(serde_json::json!({"ruleset":"standard_2p_threefold","run_id":"fixed-depth-new-fixture","output":"unused","games":2,"workers":1,"opening_plies":0,
         "engines":[{"kind":"nnue","model":"/bound/manifest.json","depth":4,"max_nodes":6000000},{"kind":"distance","depth":4,"max_nodes":6000000}],
         "arena":{"comparison":"evaluator_fixed_depth","clock_policy":"strict_unknown","return_reserve_ms":0,"tt_entries":4096,"bootstrap_seed":358,"bootstrap_resamples":1,
         "evaluator_sha256":["a".repeat(64),"b".repeat(64)],"search_source_sha256":["c".repeat(64),"c".repeat(64)],
