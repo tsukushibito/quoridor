@@ -1,0 +1,137 @@
+{
+  "issue": "quoridor-4lc.371",
+  "status": "ACCEPTED_COMPLETE_FIXED_TWO_ARM_RESULT_LIMITED_PUBLIC_DETERIORATION_MITIGATION",
+  "target": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/result-binding.json",
+    "sha256": "7600b05d9cab11f53eff5428d236ec64820f3a0de62ac762b02cd1a1b93001ed",
+    "bytes": 26379,
+    "mode": "0644"
+  },
+  "independent_result_assessment": {
+    "path": "/workspaces/quoridor/.artifacts/ai-sigma/public-replay371-review-v1/result-v1/control.json",
+    "sha256": "b4b5081c7369dfcd6dae2fb25d863d548a2019bd2c0bef2e1144e5ef17c8c60f",
+    "bytes": 3997,
+    "mode": "0644"
+  },
+  "review_reader_STOP": {
+    "path": "/workspaces/quoridor/.artifacts/ai-sigma/public-replay371-review-v1/result-v1/reader-STOP.json",
+    "sha256": "2016fc8d62886e91bd07923b74293d6507195d5b5805e0919c6051097e08b269",
+    "bytes": 697,
+    "mode": "0644"
+  },
+  "source_plan_adoption": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/public-replay371/source-plan-adoption-v1.json",
+    "sha256": "bd92b21c5f2c3476c9d41fefcd8c070261fdf8bc90ec11ab3493961ee9fd49e2",
+    "bytes": 10386,
+    "mode": "0644"
+  },
+  "original_authoritative_manifests": [
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/operation-v1/manifest.json",
+      "sha256": "b8a67007ef5d7cc964d679875ff0c32e20b2eafa991d4dd0aa26426631a72710",
+      "bytes": 8841,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/operation-v1/manifest.json",
+      "sha256": "d4f8dd26f65dbabc50ac206ff23b09e368fbf7419ff11f39bb2d41b24155ddf8",
+      "bytes": 8748,
+      "mode": "0644"
+    }
+  ],
+  "artifacts": {
+    "report.md": {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/report.md",
+      "sha256": "45c3e4b9ac1ac769d11136dde4696b9e1183a286826e07cc3ac1c9978a879bed",
+      "bytes": 8984,
+      "mode": "0644"
+    },
+    "summary.json": {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/summary.json",
+      "sha256": "ad5f761f13b3e3bb4fba84338e9d1306e6f538b9d0fb34c9c1edcbbb04306ec2",
+      "bytes": 14611,
+      "mode": "0644"
+    },
+    "all-curves.csv": {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/all-curves.csv",
+      "sha256": "93141a355cebf2e1fa544e2b7474aec85b3d1541e9135d267ab2c813d5a6bb77",
+      "bytes": 7948,
+      "mode": "0644"
+    },
+    "public-replay371-comparison.pdf": {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/public-replay371-comparison.pdf",
+      "sha256": "4f7042dd3322e0304dcc042408fdf3c10df21df72daf0fcf8ea92fe45c10b5b8",
+      "bytes": 35147,
+      "mode": "0644"
+    },
+    "mse-curves.svg": {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/mse-curves.svg",
+      "sha256": "91773c08f3f259c3d325cba8ae7e47510cf9a913155a7d013ab84355714ed396",
+      "bytes": 162940,
+      "mode": "0644"
+    },
+    "saved-output-audit.json": {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/saved-output-audit.json",
+      "sha256": "50c8f9cce8ab5dae08d85f07bf39dc43635dcd59d909ebc4727c776563ec2cdf",
+      "bytes": 1978,
+      "mode": "0644"
+    },
+    "administrative-refusals.json": {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/administrative-refusals.json",
+      "sha256": "d8d2760ba8cdd311c039558e912e11b04c70853b47c17b7c4977a77a64f63cc4",
+      "bytes": 668,
+      "mode": "0644"
+    }
+  },
+  "verified_scope": "Fixed selected two200/full64 independentBEST43/freshAdam arms, all11 four-bank diagnostics and sharedINITIAL/twoLAST fullopenedV, saved-only PDF. Sole manifests PASS/cleanuptrue/nullprimary/secondary[]/remaining[]; source/result review scopes distinct. No new numerical calls.",
+  "accepted_observation": {
+    "full_opened_V_MSE": {
+      "INITIAL": 0.42387071268145143,
+      "added_only_LAST200": 0.6023255693909864,
+      "replay_LAST200": 0.4431305628519489
+    },
+    "added_V_MSE": {
+      "INITIAL": 0.9883186701832513,
+      "added_only_LAST200": 1.3838815088275727,
+      "replay_LAST200": 1.224835770625572
+    },
+    "conclusion": "Replay mitigates deterioration relative to added-only; both arms worsen public and addedV MSE versusINITIAL. AddedV replay sign42/76 belowadded-only43/76/INITIAL48/76, no uniform metric improvement."
+  },
+  "actual_forward_census": {
+    "added_only": 1034547,
+    "replay": 615397,
+    "original_synthetic_mixed_input_loss": 64,
+    "R1_cleanup": 0,
+    "render_and_final_saved_output_audit": 0,
+    "all_work": 1650008,
+    "upper": 2000000,
+    "remaining": 349992
+  },
+  "timing_domains": {
+    "fit_plus_eval_pair_command_seconds_once": 12.291051947977394,
+    "render_command_seconds_once": 2.0122639159671962,
+    "four_definition_qualifier_software_command_seconds_once": 1.5757230729795992,
+    "R1_qualifier_software_command_seconds_once": 0.26691446895711124,
+    "separate_train_and_evaluation_command_seconds": "UNKNOWN",
+    "source_preparation_formatter_beads_review_git_LLM_admin_fees_total": "UNKNOWN",
+    "new_BUILD_or_generation_or_model_diagnostic": "NONE",
+    "no_nested_controller_or_training_wall_added": true
+  },
+  "limits": [
+    "Reduced added repetition is a simultaneous change; not isolated replay-gradient causality",
+    "Fixed 50:50 and 200 updates are a diagnostic, not optimality or convergence",
+    "Two related added V families; public V was already opened; shared seeds/initializer",
+    "No IID/population/strength/legal strategy/default or paused323 implication",
+    "Public actualgame/history/winner/terminal/rules lineage UNKNOWN",
+    "PDF independent raster/text unavailable; original metadata/two-page structure/hash retained",
+    "Continuous peaks/exactworkerUTCexit/separatetraining-evaluationtime and wholeworkfees UNKNOWN"
+  ],
+  "actual_source_env_render_STOP": "2026-10-12T04:02:22.259214+00:00",
+  "actual_review_result_reader_STOP": "2026-10-12T04:30:05.876283+00:00",
+  "Root_metadata_reader_STOP": "2026-10-12T04:35:36.666302+00:00",
+  "owned_readers_children_jobs_TMP_remaining": [],
+  "reservation": "NONE",
+  "resource": "Root inclusive1MiB acceptance/docs/Git within alreadyissued8MiB; global49153437696 unchanged, no allocation/refund/borrow/retirement",
+  "owner_closure": "371.1 may verify this actualacceptance and close ONLY own leaf with backupbeforeafter; Root closes parent after ownclosure",
+  "paused323_defaults_seals_N_fullfits96": "UNCHANGED"
+}

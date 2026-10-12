@@ -1204,3 +1204,17 @@ COMPLETE f32values agree bit-for-bit across profiles/repetitions/diagnostics. Tw
 [最終受入れ](../research-data/python-environment367/acceptance-v1.json)により、Mainのroot pyproject/uv.lockと一つのregular3.14.7環境へ統合した。既存38パッケージの版を保持して不足11を追加し、全49pins・7実import・現役help・lazy CUDA/control・Main/managedWT/任意cwdの同一環境・外部環境拒否を確認した。通常入口は共通project-envのoffline/no-sync、syncは明示setupと実reader停止後のexclusive writerに限定する。
 
 旧research-team/plots/quality環境は13package instances・2713membersの復元/RECORD照合と実reader停止後に撤去した。旧入口・重複project/lock/requirements8ファイルもMainから撤去し、固有89ad session JSONはGit5f367d3に保全した。現役project環境・regular interpreter・科学版・モデル/データ/RAW・過去失敗を保持し、削除による資源返金はしない。環境の受入れは新しい学習・数値一致・棋力を証明せず、371/372の各source/config/input/実資源条件は別に成立させる。
+
+## Fixed public replay371 comparison completed (2026-10-12)
+
+The human-selected two200/full64 outcome-z arms completed all scheduled measurements and the saved-only [two-page PDF](../.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/public-replay371-comparison.pdf). [Canonical acceptance](../research-data/ai-sigma/public-replay371/result-acceptance-v1.json) and the [independent saved-result assessment](../.artifacts/ai-sigma/public-replay371-review-v1/result-v1/report.md) bind the original two PASS manifests, full-precision curves and exact exposures. No additional predictions, fit, public scan or games were performed.
+
+| Row MSE                |     INITIAL | Added-only LAST200 | Replay LAST200 |
+| ---------------------- | ----------: | -----------------: | -------------: |
+| Full opened V (419150) | 0.423870713 |        0.602325569 |    0.443130563 |
+| Added T (217)          | 0.607616551 |        0.075567458 |    0.210949456 |
+| Added V (76)           | 0.988318670 |        1.383881509 |    1.224835771 |
+
+Replay mitigated public deterioration relative to added-only, but both LAST models worsened public and added-V MSE versus INITIAL. Full opened-V sign accuracy was84.31% initially,78.37% added-only and83.59% replay. Added-V replay sign42/76 was below added-only43/76 and INITIAL48/76, so lower MSE does not establish uniform improvement. Added-only trained12800 added exposures on217 distinct rows; replay trained6400 added plus6400 public-T exposures (6398 distinct). Halving added repetition is a simultaneous change; this finite equal-update comparison does not isolate a replay-gradient cause or choose an optimal ratio. Shared initializer/seeds, opened validation and onlytwo related added-V families limit generalization; public actualgame/history/terminal/rules lineage remains UNKNOWN. No strength, convergence, IID/population or default claim follows.
+
+Actual forward census1650008/2000000 includes the64-row affected fixture; render and saved-output audit addzero forwards. The two fit-plus-evaluation command walls total12.291051947977394s once; saved-only render2.0122639159671962s is separate. Nested/controller/admin/software costs are not added; separate fit/evaluation time, continuous peaks and exactworkerUTCexit remain UNKNOWN. Actual render/source/env readerSTOP04:02:22.259214Z and independent result-readerSTOP04:30:05.876283Z released the lifetime. PDF structure/hash are verified; independent visual/text extraction was unavailable. Negative validation results complete this selected question; no extra replay ratio, data/method change, strength run, default or paused323 continuation is selected.
