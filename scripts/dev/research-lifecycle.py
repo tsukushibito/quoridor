@@ -805,8 +805,7 @@ def retained_ordering_source(current, original, adoption, qualification, origina
         and original["status"] == "PASS"
         and original["cleanup_complete"] is True
         and original["remaining"] == []
-        and original["source"]["workspace"] == current["source"]["workspace"]
-        and original["tools"] == current["tools"],
+        and original["source"]["workspace"] == current["source"]["workspace"],
         "ordering retained numerical adoption/subject mismatch",
     )
     require(
@@ -829,11 +828,39 @@ def retained_ordering_source(current, original, adoption, qualification, origina
             original["source"][field] == current["source"][field],
             "ordering native build input changed",
         )
+    # Reusing the old input/head result keeps its native compiler/codegen
+    # subject. Current BUILD and RUN own all other tools and runtime inputs;
+    # controller Python and unrelated environment keys are not this subject.
     require(
-        {k: v for k, v in original["env"].items() if k != "TMPDIR"}
-        == {k: v for k, v in current["env"].items() if k != "TMPDIR"},
-        "ordering compiler environment changed",
+        isinstance(original["tools"].get("RUSTC"), dict)
+        and isinstance(original["tools"]["RUSTC"].get("file"), dict)
+        and isinstance(original["tools"]["RUSTC"].get("version"), str)
+        and bool(original["tools"]["RUSTC"]["version"].strip())
+        and original["tools"]["RUSTC"] == current["tools"].get("RUSTC"),
+        "ordering native compiler changed",
     )
+    for flag in ("RUSTFLAGS", "CARGO_PROFILE_RELEASE_OPT_LEVEL", "CARGO_PROFILE_RELEASE_DEBUG"):
+        require(
+            isinstance(original["env"].get(flag), str)
+            and original["env"][flag] == current["env"].get(flag),
+            "ordering native release flags changed",
+        )
+    # Compare recorded Cargo/Rust configuration, not the runtime environment.
+    # This includes all profiles, target/compiler selectors, flags, wrappers and
+    # rustup selection. Even non-codegen Cargo settings must match in this scope;
+    # we do not decode options or certify unrecorded effective configuration.
+    native_env = []
+    for subject in (original, current):
+        require(isinstance(subject["env"], dict), "native build environment")
+        recorded = {
+            key: value for key, value in subject["env"].items() if key.startswith(("CARGO", "RUST"))
+        }
+        require(
+            all(isinstance(value, str) for value in recorded.values()),
+            "recorded native configuration values",
+        )
+        native_env.append(recorded)
+    require(native_env[0] == native_env[1], "ordering recorded native configuration changed")
 
 
 def numerical_check(experiment, manifest, *, refs=None):

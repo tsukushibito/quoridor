@@ -295,7 +295,6 @@ fn retained_ordering_source(
         || cheap.is_some_and(|identity| reuse["cheap_static376"] != *identity)
         || !build_status(original)
         || original["source"]["workspace"] != current["source"]["workspace"]
-        || original["tools"] != current["tools"]
     {
         return Err("ordering retained numerical adoption/subject mismatch".into());
     }
@@ -319,18 +318,46 @@ fn retained_ordering_source(
     if release_commands(original)? != release_commands(current)? {
         return Err("ordering actual release compiler flags changed".into());
     }
-    let mut old_env = original["env"]
-        .as_object()
-        .ok_or("original build environment")?
-        .clone();
-    let mut new_env = current["env"]
-        .as_object()
-        .ok_or("current build environment")?
-        .clone();
-    old_env.remove("TMPDIR");
-    new_env.remove("TMPDIR");
-    if old_env != new_env {
-        return Err("ordering compiler environment changed".into());
+    // Keep the original input/head native compiler/codegen subject. Current
+    // BUILD/RUN own other tools and runtime inputs, including controller Python.
+    if !original["tools"]["RUSTC"].is_object()
+        || !original["tools"]["RUSTC"]["file"].is_object()
+        || original["tools"]["RUSTC"]["version"]
+            .as_str()
+            .is_none_or(|version| version.trim().is_empty())
+        || original["tools"]["RUSTC"] != current["tools"]["RUSTC"]
+    {
+        return Err("ordering native compiler changed".into());
+    }
+    for flag in [
+        "RUSTFLAGS",
+        "CARGO_PROFILE_RELEASE_OPT_LEVEL",
+        "CARGO_PROFILE_RELEASE_DEBUG",
+    ] {
+        if !original["env"][flag].is_string() || original["env"][flag] != current["env"][flag] {
+            return Err("ordering native release flags changed".into());
+        }
+    }
+    // Compare recorded Cargo/Rust configuration, not the runtime environment.
+    // All profiles, target/compiler selectors, flags, wrappers and rustup
+    // selection belong here. Conservatively require even non-codegen Cargo
+    // settings to match; unrecorded effective configuration remains unknown.
+    let native_environment = |subject: &Value| -> Result<serde_json::Map<String, Value>> {
+        let env = subject["env"]
+            .as_object()
+            .ok_or("native build environment")?;
+        let recorded: serde_json::Map<String, Value> = env
+            .iter()
+            .filter(|(key, _)| key.starts_with("CARGO") || key.starts_with("RUST"))
+            .map(|(key, value)| (key.clone(), value.clone()))
+            .collect();
+        if recorded.values().any(|value| !value.is_string()) {
+            return Err("recorded native configuration values".into());
+        }
+        Ok(recorded)
+    };
+    if native_environment(original)? != native_environment(current)? {
+        return Err("ordering recorded native configuration changed".into());
     }
     Ok(())
 }
@@ -859,7 +886,10 @@ mod build379_provenance_tests {
                 "artifact":{"sha256":artifact.repeat(64)},
                 "source":{"workspace":"/synthetic379","commit":commit.repeat(40),"patch":null,
                     "manifest":{"sha256":"1".repeat(64)},"lock":{"sha256":"2".repeat(64)},"cargo_configs":[]},
-                "tools":{"RUSTC":"unchanged"},"env":{"RUSTFLAGS":"unchanged","TMPDIR":commit}
+                "tools":{"RUSTC":{"file":{"path":"/synthetic379/rustc","sha256":"7".repeat(64),
+                    "bytes":1,"mode":"0755"},"version":"fixed native compiler"},"PYTHON":"old-controller"},
+                "env":{"RUSTFLAGS":"unchanged","CARGO_PROFILE_RELEASE_OPT_LEVEL":"3",
+                    "CARGO_PROFILE_RELEASE_DEBUG":"0","TMPDIR":commit}
             })
         };
         let original = make("a", "3");
@@ -921,9 +951,29 @@ mod build379_provenance_tests {
                 .is_err()
             );
         }
-        for key in ["tools", "env"] {
-            let mut bad = current.clone();
-            bad[key] = json!({"drift":true});
+        let mut runtime_changed = current.clone();
+        runtime_changed["tools"]["PYTHON"] = json!("current-controller");
+        runtime_changed["env"]["OMP_NUM_THREADS"] = json!("1");
+        runtime_changed["env"]["CUDA_VISIBLE_DEVICES"] = json!("");
+        retained_ordering_source(
+            &runtime_changed,
+            &original,
+            &adoption,
+            &qualification,
+            &original_ref,
+            None,
+        )
+        .unwrap();
+        assert_eq!(original["tools"]["PYTHON"], json!("old-controller"));
+        assert!(original["env"]["OMP_NUM_THREADS"].is_null());
+        for (section, key) in [
+            ("tools", "RUSTC"),
+            ("env", "RUSTFLAGS"),
+            ("env", "CARGO_PROFILE_RELEASE_OPT_LEVEL"),
+            ("env", "CARGO_PROFILE_RELEASE_DEBUG"),
+        ] {
+            let mut bad = runtime_changed.clone();
+            bad[section][key] = json!("drift");
             assert!(
                 retained_ordering_source(
                     &bad,
@@ -936,6 +986,139 @@ mod build379_provenance_tests {
                 .is_err()
             );
         }
+        // The current-only LTO counterexample leaves every prior fact/ref equal.
+        let mut lto = runtime_changed.clone();
+        lto["env"]["CARGO_PROFILE_RELEASE_LTO"] = json!("fat");
+        assert_eq!(lto["tools"], runtime_changed["tools"]);
+        assert_eq!(lto["checks"], runtime_changed["checks"]);
+        assert_eq!(lto["source"], runtime_changed["source"]);
+        assert!(
+            retained_ordering_source(
+                &lto,
+                &original,
+                &adoption,
+                &qualification,
+                &original_ref,
+                None
+            )
+            .is_err()
+        );
+        for channel in [
+            "CARGO_ENCODED_RUSTFLAGS",
+            "RUSTC_WRAPPER",
+            "RUSTC_WORKSPACE_WRAPPER",
+            "CARGO_BUILD_RUSTC_WRAPPER",
+            "CARGO_BUILD_RUSTC_WORKSPACE_WRAPPER",
+            "CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_RUSTFLAGS",
+            "CARGO_BUILD_TARGET",
+            "RUSTUP_TOOLCHAIN",
+            "CARGO_NET_OFFLINE",
+        ] {
+            for original_side in [false, true] {
+                for value in ["-Ctarget-cpu=native", ""] {
+                    let mut old = original.clone();
+                    let mut now = runtime_changed.clone();
+                    let subject = if original_side { &mut old } else { &mut now };
+                    subject["env"][channel] = json!(value);
+                    assert!(
+                        retained_ordering_source(
+                            &now,
+                            &old,
+                            &adoption,
+                            &qualification,
+                            &original_ref,
+                            None
+                        )
+                        .is_err()
+                    );
+                }
+            }
+        }
+        for (section, key) in [
+            ("tools", "RUSTC"),
+            ("env", "RUSTFLAGS"),
+            ("env", "CARGO_PROFILE_RELEASE_OPT_LEVEL"),
+            ("env", "CARGO_PROFILE_RELEASE_DEBUG"),
+        ] {
+            for original_side in [false, true] {
+                let mut old = original.clone();
+                let mut now = runtime_changed.clone();
+                let subject = if original_side { &mut old } else { &mut now };
+                subject[section].as_object_mut().unwrap().remove(key);
+                assert!(
+                    retained_ordering_source(
+                        &now,
+                        &old,
+                        &adoption,
+                        &qualification,
+                        &original_ref,
+                        None
+                    )
+                    .is_err()
+                );
+            }
+        }
+        // Equally malformed declarations must not satisfy typed correspondence.
+        let mut malformed_old = original.clone();
+        let mut malformed_now = runtime_changed.clone();
+        malformed_old["tools"]["RUSTC"] = json!("not a ToolRef");
+        malformed_now["tools"]["RUSTC"] = json!("not a ToolRef");
+        assert!(
+            retained_ordering_source(
+                &malformed_now,
+                &malformed_old,
+                &adoption,
+                &qualification,
+                &original_ref,
+                None
+            )
+            .is_err()
+        );
+        malformed_old = original.clone();
+        malformed_now = runtime_changed.clone();
+        malformed_old["env"]["CARGO_PROFILE_RELEASE_LTO"] = Value::Null;
+        malformed_now["env"]["CARGO_PROFILE_RELEASE_LTO"] = Value::Null;
+        assert!(
+            retained_ordering_source(
+                &malformed_now,
+                &malformed_old,
+                &adoption,
+                &qualification,
+                &original_ref,
+                None
+            )
+            .is_err()
+        );
+        for field in ["manifest", "lock", "cargo_configs"] {
+            let mut bad = runtime_changed.clone();
+            bad["source"][field] = json!("drift");
+            let mut adopted = adoption.clone();
+            adopted["source"] = bad["source"].clone();
+            assert!(
+                retained_ordering_source(
+                    &bad,
+                    &original,
+                    &adopted,
+                    &qualification,
+                    &original_ref,
+                    None
+                )
+                .is_err()
+            );
+        }
+        let mut bad_release = runtime_changed.clone();
+        bad_release["checks"][2]["argv"] = json!(["cargo", "different-release"]);
+        assert!(
+            retained_ordering_source(
+                &bad_release,
+                &original,
+                &adoption,
+                &qualification,
+                &original_ref,
+                None
+            )
+            .is_err()
+        );
         let identity = json!({"algorithm":"synthetic unchanged input/head scope"});
         assert!(
             retained_ordering_source(
