@@ -1,0 +1,138 @@
+{
+  "issue": "quoridor-4lc.374",
+  "scope": "One stopped source-derived expectation correspondence for unchanged model/library/factory, not current actualbackend/clock qualification",
+  "current_stopped_tuple": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/runtime-binding-v2/stopped-tuple-binding.json",
+    "sha256": "7bc52119f3848a222d16c95a4226d083209db7a2d9df7704c08af79f39db670d",
+    "bytes": 23030,
+    "mode": "0644"
+  },
+  "origin_acceptance": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/sigma-receipt-reevaluation-v1/bounded-cohort-acceptance-v31.json",
+    "sha256": "6e070f7cae6a8ab0d72568cf13ef898d61942fc20bca7931564f030f7809b615",
+    "bytes": 20664,
+    "mode": "0644"
+  },
+  "origin_actual_admission": {
+    "path": "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/NNUE-entry-recovery-v30/admission.actual-v30.json",
+    "sha256": "a988c70ad258a46edc0d99f213f2a3e8f3f7ceb4171b204b712d73416141b73f",
+    "bytes": 94607,
+    "mode": "0644"
+  },
+  "origin_bound_library_ref": {
+    "path": "/home/vscode/.cache/inference/envs/quoridor-training/lib/python3.14/site-packages/onnxruntime/capi/libonnxruntime.so.1.30.0",
+    "sha256": "c902c70b3003c0e99fada202f37478c515ae9bba7944c2b2abd0017bae0c82ed",
+    "bytes": 28985152,
+    "mode": "0755"
+  },
+  "current_actual_CAPI_library_ref": {
+    "path": "/home/vscode/.cache/inference/envs/quoridor-training/lib/python3.14/site-packages/onnxruntime/capi/libonnxruntime.so.1.30.0",
+    "sha256": "c902c70b3003c0e99fada202f37478c515ae9bba7944c2b2abd0017bae0c82ed",
+    "bytes": 28985152,
+    "mode": "0755"
+  },
+  "current_actual_CAPI_loaded_version": "1.30.0",
+  "origin_bound_model_ref": {
+    "path": "/workspaces/quoridor/.worktree/assets/models/ai-sigma/reference/sigma-pcr250/best.onnx",
+    "sha256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+    "bytes": 11663428,
+    "mode": "0644"
+  },
+  "current_model_ref": {
+    "path": "/workspaces/quoridor/.worktree/assets/models/ai-sigma/reference/sigma-pcr250/best.onnx",
+    "sha256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+    "bytes": 11663428,
+    "mode": "0644"
+  },
+  "origin_source_refs_for_directed_semantic_proof_only": [
+    {
+      "path": "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/crates/quoridor-inference/src/lib.rs",
+      "sha256": "d7656d85ba0e00fa2e4b2ac40ebfdc0b2c5fa56aca5a52d1e2e4d79f463cfc0f",
+      "bytes": 13843,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/crates/quoridor-runner/src/sigma_qualification.rs",
+      "sha256": "15910bc69d4a6809ce0dea581551e8fe7611e529ca9724a5852e3687ac36d3bd",
+      "bytes": 38187,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/crates/quoridor-runner/src/arena.rs",
+      "sha256": "80ba731ae7d6b6328466f3b5dda29b824062fe2525b80542f1c147cd8e8479d6",
+      "bytes": 13248,
+      "mode": "0644"
+    }
+  ],
+  "current_genuine_Build": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/operation-v3/manifest.json",
+    "sha256": "f17b586dae08a081b370aebfacc1b5f0644fd3a91b724c3ebede30535f5cc8a1",
+    "bytes": 36487,
+    "mode": "0644"
+  },
+  "current_builtin_factory_Git_commit": "b54c836870b657d2172562a2f8963b7e6003f530",
+  "complete_BackendMetadata_source_derived_expectation": {
+    "backend": "onnxruntime-cpu",
+    "model_sha": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+    "max_batch": 4096,
+    "input_features": 648,
+    "output_values": 137
+  },
+  "actual_backend_tuple_recorded_as_runtime_observation": false,
+  "source_derivation": "Immutable original factory metadata() and OrtBackend::new fix name/max_batch/dimensions and lowercase configuredmodelsha. Exact entire factory source is unchanged at genuine currentBuild Gitrevision. Original/current backend_binding and owningjson_digest functions byteexact. LibrarySHA is independently bound by accepted original admission and equals current actual C API payload hash. Current Cargo build compiler-artifact shows default/std ordered serde map without preserve_order; descriptor is ASCII strings+positiveinteger fields, no float codec question.",
+  "current_actual_Cargo_serde_artifact_event": {
+    "reason": "compiler-artifact",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.151",
+    "manifest_path": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.151/Cargo.toml",
+    "target": {
+      "kind": ["lib"],
+      "crate_types": ["lib"],
+      "name": "serde_json",
+      "src_path": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.151/src/lib.rs",
+      "edition": "2021",
+      "doc": true,
+      "doctest": true,
+      "test": true
+    },
+    "profile": {
+      "opt_level": "3",
+      "debuginfo": 0,
+      "debug_assertions": false,
+      "overflow_checks": false,
+      "test": false
+    },
+    "features": ["default", "float_roundtrip", "std"],
+    "filenames": [
+      "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/release/deps/libserde_json-2f7f25768f641742.rlib",
+      "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/release/deps/libserde_json-2f7f25768f641742.rmeta"
+    ],
+    "executable": null,
+    "fresh": true
+  },
+  "owning_standard_build_capture_ref": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/operation-v3/release-build379.full.log",
+    "sha256": "4d7c9076e381e21b370df594c06620fb4956fae206d02108472385d76fe0e3a0",
+    "bytes": 87617,
+    "mode": "0644"
+  },
+  "original_backend_expectation_ref": {
+    "path": "/workspaces/quoridor/.worktree/sigma-receipt-reevaluation/.artifacts/sigma-receipt-reevaluation-v1/live-control-v9/source-config-backend-consistency.json",
+    "sha256": "e8297cd49ae03072a6caf2f264ca5afc3e28bbea2ebf3ea1abb1c678764bcf40",
+    "bytes": 519,
+    "mode": "0644"
+  },
+  "expected_backend_sha256_reused_by_reference": "ca4330c4b1dad25d7e16fc7def7d990a5e495235dc2faea38011cab3b1a21f60",
+  "new_Backend_JSON_digest_calculations": 0,
+  "independent_serializer_certifier_or_dependency_graph": false,
+  "actual_current_Rust_backend_factory_constructed_verified": false,
+  "mandatory_future_first_inference_boundary": "Existing measure_sigma_cost make_backend checks actual binding against this expectation and requires default initial counters before any inference; fresh current64 remains necessary for positive cost bounds/Q",
+  "old347_qualification_expiry_executable_config_bounds_unchanged": true,
+  "model_library_payload_loads_in_this_proof": 0,
+  "native_model_head_inference_Search_game_cost_calls": 0,
+  "Root_proof_controls_within_existing374Root16MiB": true,
+  "global_held_B": 49996492800,
+  "new_grant_refund_borrow": false,
+  "actual_saved_source_metadata_reader_STOP": "2026-10-12T20:06:32.840297+00:00",
+  "owned_readers_children_jobs_TMP_remaining": [],
+  "reservation": null
+}
