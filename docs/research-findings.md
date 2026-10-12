@@ -1239,6 +1239,8 @@ Actual forward census1650008/2000000 includes the64-row affected fixture; render
 
 これは承認済みの方向と資源支持の記録であり、実装正しさ・数値完了・改善の観測ではない。372の約半分のstatic時間と全体採用拒否は独立した過去結果として保持する。[240MiB支持](../research-data/ai-sigma/cheap-static-ordering376/support-v1.json)は終了済みタスクの未使用future TMP248MiBを正常な停止証拠で整理した後、decimal50GB内に発行した。元の使用cap・失敗・モデル/入力/RAW/UNKNOWNは保持する。374の実intervalとshared targetのsole writerを優先し、source準備と実build/評価を区別する。新しい棋力・NNUE/Dの優劣・defaultや323pause解除は選択していない。
 
+376の新規9件（AI5／runner4）は[元のtests-only実行](../.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/tests-only-v1/verified-tests-result.json)で一度ずつPASSした。これは実imageや固定80-callの数値結果ではない。旧入力／head資格370ca/ef4と現imageのcontroller Python・runtime環境の全面一致は成立せず、必要なnative設定の対応だけを残す修復は未採用である。[関連レビュー](../.artifacts/cheap-static-ordering376-review-v1/retained-input-RI1-v2/report.md)は、宣言されたRUSTC・RUSTFLAGS・opt/debugが等しくてもCARGO_PROFILE_RELEASE_LTOが異なる場合を拒否できない点を指摘した。これは静的な未処理ケースで、保存済みBuildの実LTO変更や数値失敗を観測したものではない。元の9件成功・入力／headのsubjectを変更せず、ordering改善と採用可否は未測定のまま保持する。
+
 ## 人間選択：Sigma／固定D／単独NNUEの比較（374、2026-10-12）
 
 人間は、三者の棋力と得意・不得意な盤面を同じ枠で比べ、NNUE改善の検証方針に使うことを選択した。対象NNUEは既存BEST43の単独勝敗予測で、Dの出力補正や混合評価ではない。distance head入力・scaleは既存のまま、重み・final tanh・output bypass OFFを固定する。新しいモデルや学習、比率、teacher、defaultの選択は含まない。
@@ -1246,6 +1248,10 @@ Actual forward census1650008/2000000 includes the64-row affected fixture; render
 [三者比較規約](design/ai-sigma-comparison-protocol.md)は128 families／768 gamesの三pairing・先後交換と100ms／5ms、保存traceからの78 parents／234 single proposals＋18 missingを固定している。部分／未決着はUNKNOWNで補充せず、engine間の一致を最適手の真実としない。公開labelsの実game/history/rules lineage不足と、既存book／有限family比較の限界を維持する。実結果が出る前の得意盤面やNNUE改善原因は未確定である。
 
 失敗時にavailable detailed outcomesと最初のerror／全publication secondariesを保持するR1/R2修復は、同じレビュアーの[限定source確認](../.artifacts/three-engine-comparison374-review-v1/fault-v3/report.md)で指摘なしとなり、停止済みの[現役Source](../research-data/ai-sigma/three-engine-comparison374/source-adoption-v1.json)を採用した。これは新規12 Rust／8 Pythonの実検証・Build・native backend/library・fresh Sigma cost qualification・対局の成功ではない。旧347 cost証拠は期限切れのまま保存し、current tupleの一回64-request qualificationを別工程で必要とする。原negative source phase、失敗、RAW、費用、masks、UNKNOWNを変更しない。374実intervalが376より優先し、377は完了後の設定駆動保守で今回のgateにはしない。
+
+現image875aの選択済みcost資格は元の64 requests（16 warm／16 untimed measurement／32 timed）を完了した。[最終packet](../.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/cost-qualification-v1/phase1-entry-v1/collection-v1/QualificationPacket.json)はそのimage/backend/config subjectと元の24時間windowだけに束縛する。phase0のnative32は保存componentとして受け入れたが、collectorのliteral interpreter不一致による元のfinalization FAILEDは変更していない。phase1の32は通常finalization PASSであり、両controllerの4.503002455690876秒を一度ずつ計上する。新imageのtimingや棋力の資格へ移し替えない。
+
+最初の実対局pairの[元job1a11停止記録](../.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-controls-v3/batch-000/collection-v1/failed-first-pair-STOP.json)はFAILEDである。RAWでは2局ともgoal終局（69／84 plies、計1166 model requests）しSigma側のraw scoreは1.0だったが、73件のaccepted Sigma observation中44件でreturned/drain時刻がauthority receiptより前だった。nativeとpublisherのchronology検査が拒否したため、検証済み2局はUNKNOWN、残り766局は未入場であり、棋力結果として採用しない。実callerがauthority.join()より前に採ったInstantを後のreturn/drain時刻として記録していたことを[限定した保存事実とコード](../.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-controls-v3/batch-000/collection-v1/smallest-condition.json)で確認した。RAW・timestamps・元FAILED・maskと費用を保持し、2局を再実行せず、正確な帰還記録のsource修復を進める。現jobのcontroller12.063042650930583秒と、別の出力cap拒否で0局だった旧job930の2.0111300128046423秒はそれぞれ一度だけ計上し、nested native時間を加算しない。continuous peak、後続admin/LLM全費、一般棋力と原因の一般化はUNKNOWNである。新しいimageとcurrent qualificationの対応は別の未完了条件で、元64の再測定や追加対局はこのsource修復から自動承認されない。
 
 ## 人間選択：重複したBUILD来歴機構の撤去（379、2026-10-12）
 
