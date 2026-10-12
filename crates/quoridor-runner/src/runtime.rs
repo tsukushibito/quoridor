@@ -111,6 +111,15 @@ fn receive_sigma_notification(
         legal,
     })
 }
+/// The owning caller returns only after terminal backend drain and authority join.
+/// The closure is the existing join operation; this samples the real post-join clock.
+fn finish_sigma_authority(
+    join_authority: impl FnOnce() -> std::result::Result<SigmaReceipt, String>,
+) -> std::result::Result<(SigmaReceipt, Instant), String> {
+    let receipt = join_authority()?;
+    let drained = Instant::now();
+    Ok((receipt, drained))
+}
 fn sigma_receipt_decision(
     deadline: Option<Instant>,
     receipt: &SigmaReceipt,
@@ -2166,14 +2175,15 @@ fn play_sigma_receipt(
             notify(call.completed.as_ref());
             call
         };
-        let drained = Instant::now();
         drop(notify_tx);
-        let receipt = authority
-            .join()
-            .map_err(|_| "sigma_authority_panicked".to_owned())
-            .and_then(|r| r);
+        let receipt = finish_sigma_authority(|| {
+            authority
+                .join()
+                .map_err(|_| "sigma_authority_panicked".to_owned())
+                .and_then(|r| r)
+        });
         match receipt {
-            Ok(receipt) => Ok((call, receipt, chosen_rng.into_inner(), drained)),
+            Ok((receipt, drained)) => Ok((call, receipt, chosen_rng.into_inner(), drained)),
             Err(receipt_error) => Err(call.error.unwrap_or(receipt_error)),
         }
     })?;
@@ -5906,5 +5916,133 @@ mod three_engine_374_failure_tests {
         assert!(!config.output.join("result.json").exists());
         assert!(!config.output.join("manifest.json").exists());
         fs::remove_dir_all(config.output).unwrap();
+    }
+}
+
+#[cfg(test)]
+mod three_engine_374_postjoin_tests {
+    use super::*;
+
+    // Metadata fixtures only. No Context, Search, backend, inference or rules calls.
+    fn metadata_receipt(received: Instant, chosen: bool, legal: bool) -> SigmaReceipt {
+        let snapshot = quoridor_ai::sigma_mcts::Snapshot {
+            generation: 1,
+            action: Some(13),
+            terminal_value: None,
+            root_visits: 1,
+            root_mean: 0.0,
+            nn_calls: 0,
+            terminal_no_nn: 0,
+            edges: Vec::new(),
+            nodes: 0,
+            max_depth: 0,
+        };
+        SigmaReceipt {
+            notification: SigmaNotification {
+                chosen: chosen.then_some((snapshot, 13)),
+                decision_started: received,
+                sent: received,
+            },
+            received,
+            legality_finished: received,
+            legal,
+        }
+    }
+
+    #[test]
+    fn three_engine_374_postjoin_return_follows_delayed_authority_receipt() {
+        thread::scope(|scope| {
+            let (release_tx, release_rx) = mpsc::channel();
+            let authority = scope.spawn(move || {
+                release_rx.recv().unwrap();
+                Ok(metadata_receipt(Instant::now(), true, true))
+            });
+            let mut backend_drained = None;
+            let (receipt, returned) = finish_sigma_authority(|| {
+                // This lies INSIDE the production join closure. Sampling before
+                // the closure would necessarily precede this delayed receipt.
+                backend_drained = Some(Instant::now());
+                release_tx.send(()).unwrap();
+                authority
+                    .join()
+                    .map_err(|_| "sigma_authority_panicked".to_owned())
+                    .and_then(|r| r)
+            })
+            .unwrap();
+            assert!(receipt.received >= backend_drained.unwrap());
+            assert!(returned >= receipt.legality_finished);
+            assert!(returned >= receipt.received);
+        });
+    }
+
+    #[test]
+    fn three_engine_374_postjoin_return_does_not_extend_authority_deadline() {
+        use crate::arena_clock::Failure;
+        let deadline = Instant::now();
+        let timely = metadata_receipt(deadline - Duration::from_nanos(1), true, true);
+        let (timely, returned) = finish_sigma_authority(|| Ok(timely)).unwrap();
+        assert!(returned >= deadline);
+        assert_eq!(
+            sigma_receipt_decision(Some(deadline), &timely, false),
+            Ok(())
+        );
+        for received in [deadline, deadline + Duration::from_nanos(1)] {
+            let late = metadata_receipt(received, true, true);
+            let (late, _) = finish_sigma_authority(|| Ok(late)).unwrap();
+            assert_eq!(
+                sigma_receipt_decision(Some(deadline), &late, false),
+                Err(Failure::TimeOverrun)
+            );
+        }
+    }
+
+    #[test]
+    fn three_engine_374_postjoin_authority_error_and_panic_remain_errors() {
+        thread::scope(|scope| {
+            let authority = scope.spawn(|| Err("distinctive_authority_error".to_owned()));
+            let result = finish_sigma_authority(|| {
+                authority
+                    .join()
+                    .map_err(|_| "sigma_authority_panicked".to_owned())
+                    .and_then(|r| r)
+            });
+            assert!(matches!(result, Err(error) if error == "distinctive_authority_error"));
+        });
+        thread::scope(|scope| {
+            let authority = scope.spawn(|| -> std::result::Result<SigmaReceipt, String> {
+                panic!("synthetic_authority_panic")
+            });
+            let result = finish_sigma_authority(|| {
+                authority
+                    .join()
+                    .map_err(|_| "sigma_authority_panicked".to_owned())
+                    .and_then(|r| r)
+            });
+            assert!(matches!(result, Err(error) if error == "sigma_authority_panicked"));
+        });
+    }
+
+    #[test]
+    fn three_engine_374_postjoin_cancel_noaction_illegal_keep_failure_priority() {
+        use crate::arena_clock::Failure;
+        let deadline = Instant::now();
+        let (receipt, _) =
+            finish_sigma_authority(|| Ok(metadata_receipt(deadline, true, true))).unwrap();
+        assert_eq!(
+            sigma_receipt_decision(Some(deadline), &receipt, true),
+            Err(Failure::Cancelled)
+        );
+        let (no_action, _) =
+            finish_sigma_authority(|| Ok(metadata_receipt(deadline, false, false))).unwrap();
+        assert_eq!(
+            sigma_receipt_decision(Some(deadline), &no_action, false),
+            Err(Failure::NoCompletedSimulation)
+        );
+        let (illegal, _) =
+            finish_sigma_authority(|| Ok(metadata_receipt(deadline, true, false))).unwrap();
+        assert_eq!(
+            sigma_receipt_decision(Some(deadline), &illegal, false),
+            Err(Failure::IllegalMove)
+        );
     }
 }
