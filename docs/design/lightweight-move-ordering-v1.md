@@ -137,3 +137,32 @@ source成長に追加512KiBを50GB内で前向き支持する。360 source合計
 [結果受入れ](../../research-data/ai-sigma/search-optimization/ordering372/result-acceptance-v1.json)は独立した停止結果確認と原四PASS manifestを束縛する。plain ordering countersの0は未観測であり、nodeごとのscore/order/updateを直接測定した証拠ではない。厳密変更境界と新規6assertionsの限定証拠は別に保持する。一回の固定ABBAから一般的速度・原因・棋力やCIは主張しない。数値controller415.78304357605520秒とsoftware180.39328987989575秒を各一度だけ計上し、nested native407.314297366秒は加えない。後のfinalize/回収/整形/admin/LLM費と連続RSS/transient peakは別/UNKNOWNである。
 
 [完了比較の撤去受入れ](../../research-data/ai-sigma/search-optimization/ordering372/comparison-retirement-acceptance-v1.json)により、ordering-cost-assessと372専用schema/dispatch/reuseおよび比較専用3test modulesを現役から撤去した。元のA計算・static360/現役correctness・ordinary ordering-assessの数学/IO/error/finalization・375のBUILD/RUN境界は保持する。廃止コードはGitから再構成でき、原入力/モデル/RAW/失敗/比較imageは不変更。撤去はsourceの厳密forward/inverse・構文・整形照合に限り、新しいruntime/typecheck/測定資格ではない。
+
+## 人間選択の小さい整数static score（376、2026-10-12）
+
+376は新しいorderingアルゴリズムの一回の評価である。完了した360/368/372を再開せず、leaf evaluator・teacher・モデル・履歴更新を変えない。controlは現行main-history＋continuation/static OFF、candidateは同じ動的スコアに次の整数項を加える。係数は人間が固定したもので、sweepや棋力対局は含まない。
+
+| 項                                    |                                         加点 |
+| ------------------------------------- | -------------------------------------------: |
+| Pawnのwall-only goal距離減少          | 128×進捗。負の進捗も符号付き、2マスjumpは256 |
+| 壁とopponent pawnの近接距離0 / 1 / ≥2 |                                 128 / 64 / 0 |
+| 壁とown pawnの近接距離0 / 1 / ≥2      |                                  64 / 32 / 0 |
+| 既存壁との接続                        |                                     64を一度 |
+| H壁の左端または右端anchor列           |                                           32 |
+| Opponentの隣接最短方向edgeを直接遮断  |                                     96を一度 |
+| Ownの隣接最短方向edgeを直接遮断       |                                    −96を一度 |
+| Own goal距離 > opponent goal距離      |                             wall64 / pawn−64 |
+| Own goal距離 < opponent goal距離      |                             pawn64 / wall−64 |
+| Goal距離が等しい                      |                                    距離差項0 |
+
+壁近接距離はpawn cellからfootprintの四cellへの最小Manhattan距離で、81×64表を両orientationで共有できる。接続はboundary-grid上で一点以上を共有することとし、H(r,c)の点は(r+1,c),(r+1,c+1),(r+1,c+2)、V(r,c)は(r,c+1),(r+1,c+1),(r+2,c+1)。固定maskで接続を判定し、候補ごとに既存壁を全走査しない。直接遮断は壁の二edgeのいずれかが対象pawnに接し、相手endpointのwall-only goal距離がpawnより1小さいというbooleanである。全経路被覆、実際の遅延、jump modelとは扱わない。
+
+既に利用できる一致した親distance mapsだけを使い、ordering用の追加BFS・子構築・NN呼出しをしない。mapsが無ければpawn進捗・距離差・直接遮断の全distance項を0にし、位置だけの項を残す。claimed cache不正は既存errorとして拒否し、map可用性を有限diagnosticsへ記録する。TT/PV/previous-best・合法即goal・killers・optional policy stage、全合法手と最終ID tie、history/continuation/age/TT/反復/terminal/leafの意味は維持する。
+
+結果前の固定比較は一imageのconfig選択でA control/B cheapをABBA四processとする。各processは独立した10-call sweepを二回行う。各sweepはD4 cold元family0/34/68/102、元family0 traceのwarm rootindices4/5/6/7（localply0/2/4/6、chronological）、D6 cold元COMPLETE family34/102。10種類の幾何context、全80 calls＝64D4＋16D6、56sessions、2M/8M per-call、256M aggregate node liabilityである。sweep1のcold D4 family0とwarm最後localply6だけを各processでinstrumentし、8 diagnosticsは80の内数、primaryは72 plainとする。計測費をplainと混ぜず、追加campaignはしない。
+
+各process/contextのplain反復中央値からmedian(B1,B2)/median(A0,A3)を求め、cold/warmを別に示す。各Bと両Aの比較、全contextと悪化例も保持する。合法集合・leaf math・完了深さvalue・合法move/PV・undoが必須で、equal-bestの異なる手を直ちに誤りとはしない。全予定要求深さのcommon COMPLETE coverageが必要で、cap/error/欠落はUNKNOWN、採用不支持とし、rescue/refillしない。
+
+事前採用基準はcoldとwarmの両方でnodesとevaluationsの中央値比≤0.95、score準備・sort・history setup/update/aging・teardown/journalを含むplain whole-root中央値比≤1.02。いずれかのcontextで両Bのplain中央値がA中央値よりnodes/evals/wholeのどれかで1.10を超えれば拒否する。NPSは補助とし、四processからCI・一般的棋力・唯一原因は主張しない。負または不明でも固定質問を完了し、追加block・重み変更・default切替を自動で行わない。
+
+[inclusive240MiB支持](../../research-data/ai-sigma/cheap-static-ordering376/support-v1.json)は一shared targetのpositive growthと一private imageを含む。[終了したfuture TMP予約の整理](../../research-data/ai-sigma/cheap-static-ordering376/settled-future-reservations-v1.json)は正常なSTOP/cleanupに基づく将来分だけで、過去の使用上限・失敗費・固有データ・RAW・UNKNOWNを変更しない。374の実際のbuild/計測/対局intervalが優先し、actual quiet/custody/sole-Cargo条件で新規affected softwareと有限評価へ入る。担当・状態はBeads376、source準備や支持発行は数値START・改善の証拠ではない。323 USERPAUSE/seals/defaults/N/fits96を保持する。

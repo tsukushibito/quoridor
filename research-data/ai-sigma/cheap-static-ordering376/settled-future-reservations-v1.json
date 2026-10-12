@@ -1,0 +1,103 @@
+{
+  "schema": "quoridor.research.settled-unused-future-reservations.v1",
+  "issue": "quoridor-4lc.376",
+  "authority": "Human376 explicitly authorizes cancellation of genuinely unused future reservations of finished tasks, preserving original used caps/failures/costs/unique data/models/RAW/UNKNOWN. Existing storage policy distinguishes settled transient lifetimes from retained bytes.",
+  "at": "2026-10-12T10:59:33.361324+00:00",
+  "current_global_basis": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/support-v2.json",
+    "sha256": "4a3a5d390eef2a70d280121d98644de98fc31f9547d4b28240245b7f870f1e3c",
+    "bytes": 6513,
+    "mode": "0644"
+  },
+  "closed_original_tasks": [
+    {
+      "issue": "quoridor-4lc.371",
+      "status": "closed",
+      "closed_at": "2026-10-12T04:41:35Z"
+    },
+    {
+      "issue": "quoridor-4lc.372",
+      "status": "closed",
+      "closed_at": "2026-10-12T10:36:20Z"
+    },
+    {
+      "issue": "quoridor-4lc.375",
+      "status": "closed",
+      "closed_at": "2026-10-12T09:58:15Z"
+    }
+  ],
+  "named_lifecycle_evidence": [
+    {
+      "path": "/workspaces/quoridor/.worktree/ordering-cost372/.artifacts/ordering-cost372-v1/fixed80-v1/result-handoff-v1/pipeline-STOP.json",
+      "sha256": "5b28ab9361dd3babc6f426850df42bea7f9100fcdd5be4bd60380a18c734174a",
+      "bytes": 10021,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/result-binding.json",
+      "sha256": "7600b05d9cab11f53eff5428d236ec64820f3a0de62ac762b02cd1a1b93001ed",
+      "bytes": 26379,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/runtime-provenance375-v1/test-TMP-cleanup-STOP-v1.json",
+      "sha256": "3275a2af1afcf4d9110cb5f0d515f86d8902505876bfa8d0c2304d5a5f9720de",
+      "bytes": 2867,
+      "mode": "0644"
+    }
+  ],
+  "directed_current_TMP_paths_absent": [
+    "/workspaces/quoridor/.worktree/ordering-cost372/.artifacts/ordering-cost372-v1/fixed80-v1/process-00-A/TMP-v1",
+    "/workspaces/quoridor/.worktree/ordering-cost372/.artifacts/ordering-cost372-v1/fixed80-v1/process-01-B/TMP-v1",
+    "/workspaces/quoridor/.worktree/ordering-cost372/.artifacts/ordering-cost372-v1/fixed80-v1/process-02-B/TMP-v1",
+    "/workspaces/quoridor/.worktree/ordering-cost372/.artifacts/ordering-cost372-v1/fixed80-v1/process-03-A/TMP-v1",
+    "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/TMP/added_only-v1",
+    "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/TMP/replay-v1",
+    "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/runtime-provenance375-v1/test-preparation-v1/TestTMP"
+  ],
+  "cancelled_future_only_components": [
+    {
+      "issue": "quoridor-4lc.372",
+      "original_support": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/search-optimization/ordering372/build-support-v2.json",
+        "sha256": "1adab042e9e9c9f0e125bfd2bcdd8115103e70cdb0a74625af778513374fe60e",
+        "bytes": 3710,
+        "mode": "0644"
+      },
+      "component": "serial_TMP",
+      "future_B": 150994944,
+      "basis": "All original jobs/finalizers/readers ended, all4 TMP absent and no next reservation; original per-command64MiB/wholeTMP144MiB caps and peakUNKNOWN remain immutable historical facts."
+    },
+    {
+      "issue": "quoridor-4lc.371",
+      "original_support": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/public-replay371/support-v1.json",
+        "sha256": "ae6ce3b912191799c9325a11138a7363f15b950285436f3b7051f8197bb7004f",
+        "bytes": 2690,
+        "mode": "0644"
+      },
+      "component": "serial_TMP",
+      "future_B": 100663296,
+      "basis": "Both original fits and saved render finalized/cleaned; allownedTMP remaining empty, named fit TMP absent, task closed. Retained source/control/models/curves/raw/fees untouched."
+    },
+    {
+      "issue": "quoridor-4lc.375",
+      "original_support": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/runtime-provenance375/support-v1.json",
+        "sha256": "fecdbf63f7d5b39f120a2412ad4e7cdacc1e29f2fd892e75b559b0f9e4e5c946",
+        "bytes": 2495,
+        "mode": "0644"
+      },
+      "component": "synthetic_test_TMP",
+      "future_B": 8388608,
+      "basis": "Original failed outer job and exact subsequent ownedTMP cleanup preserved; exact TestTMP absent/task closed. Five PASS assertions and wholeFAILED remain unchanged."
+    }
+  ],
+  "global_held_before_B": 49996492800,
+  "cancelled_ended_unused_future_B": 260046848,
+  "global_held_after_settlement_B": 49736445952,
+  "actual_retained_data_or_peak_reduction_claim_B": 0,
+  "retained_source_control_models_inputs_raw_images_targets_failure_cleanup_reviews_UNKNOWN_refund_B": 0,
+  "old_supports_limits_caps_masks_costs": "UNMODIFIED; no original scientific outcome/used limit rewritten; only ended tasks future temporary cover cancelled",
+  "scope": "Named normal lifecycle metadata and seven TMP existence checks only, no inventory/payload replay/deletion/census/model/native/build."
+}
