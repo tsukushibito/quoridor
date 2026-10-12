@@ -232,7 +232,7 @@ fn ordering360_returned_work_remains_available_before_validation_failure() {
         elapsed: std::time::Duration::from_millis(3),
     };
     let captured = observed(&result);
-    assert!(validate_return(&root, &result, &request).is_err());
+    assert!(validate_return(&root, &result, &request, None).is_err());
     assert_eq!(captured["action"], 209);
     assert_eq!(captured["PV"], json!([209]));
     assert_eq!(captured["work"]["nodes"], request.node_cap + 1);

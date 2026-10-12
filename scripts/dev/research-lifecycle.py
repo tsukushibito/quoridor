@@ -681,7 +681,66 @@ def finalize_numerical_claim(candidate):
             claim["status"] = "UNKNOWN"
 
 
-def retained_ordering_source(current, original, adoption, qualification, original_ref):
+def cheap_ordering_inputs(experiment, qualified):
+    """Fixed376 projection is new authority; oldQ remains original input/head only."""
+    config = document(experiment["config"])
+    plan = config["plan"]
+    process = config["process_index"]
+    require(
+        set(config) == {"schema", "algorithm", "process_index", "image_role", "plan"}
+        and config["schema"] == "quoridor.cheap-static376.process.v1"
+        and config["algorithm"] == "cheap-static376-integer-parent-v1"
+        and type(process) is int
+        and 0 <= process < 4
+        and config["image_role"] == ["A", "B", "B", "A"][process]
+        and experiment["phase"] == "compare"
+        and experiment["planned_slots"] == 20
+        and experiment["batch"] == process
+        and experiment["argv"][1:]
+        == [
+            "ordering-cheap-assess",
+            "--experiment",
+            "@EXPERIMENT@",
+            "--experiment-sha256",
+            "@EXPERIMENT_SHA256@",
+        ]
+        and plan["schema"] == "quoridor.cheap-static376.inputs.v1"
+        and experiment["canonical_plan_sha256"] == plan["assessment"]["sha256"]
+        and plan["resources"]["sha256"]
+        == "0cb8599c9c1359c6bf2ca38c371805cdf39f4146f51efc9d35045c884c5e61cb"
+        and plan["resources"]["bytes"] == 4372
+        and experiment["inputs"]
+        == [
+            plan[k]
+            for k in (
+                "book",
+                "warm_origin",
+                "warm_config",
+                "warm_journal",
+                "assessment",
+                "resources",
+            )
+        ],
+        "376 fixed process/profile/authority drift",
+    )
+    original = document(qualified["config"])
+    require(
+        all(plan[k] == original[k] for k in ("book", "warm_origin", "warm_config", "warm_journal"))
+        and all(
+            experiment[k] == qualified[k]
+            for k in ("rules", "distance_units", "value_perspective", "models", "dynamic_libraries")
+        ),
+        "376 original20 input/head/model/library scope drift",
+    )
+    return {
+        "algorithm": config["algorithm"],
+        "approved_plan": plan["assessment"],
+        "schedule": experiment["schedule"],
+        "resources": plan["resources"],
+    }
+
+
+def retained_ordering_source(current, original, adoption, qualification, original_ref, cheap=None):
     """One reviewed Source adoption; never rewrite the original numerical subject."""
     reuse = adoption["retained_ordering_numerical"]
     changed = reuse["changed_compiled_sources"]
@@ -694,7 +753,8 @@ def retained_ordering_source(current, original, adoption, qualification, origina
         and reuse["qualification"] == qualification
         and reuse["build_manifest"] == original_ref
         and isinstance(changed, dict)
-        and set(changed) == wrappers
+        and (cheap is not None or set(changed) == wrappers)
+        and (cheap is None or reuse["cheap_static376"] == cheap)
         and original["schema"] == BUILD_SCHEMA
         and original["status"] == "PASS"
         and original["cleanup_complete"] is True
@@ -738,7 +798,41 @@ def retained_ordering_source(current, original, adoption, qualification, origina
         )
     for field in ("compiled_sources", "generator_compiled_sources"):
         old, new = original[field], current[field]
-        require(set(old) == set(new), "ordering full source domain changed")
+        if cheap is None:
+            require(set(old) == set(new), "ordering full source domain changed")
+        else:
+            added = reuse.get("added_compiled_sources", {}).get(field, {})
+            require(
+                set(old) <= set(new) and set(new) - set(old) == set(added),
+                "376 exact compiled additions",
+            )
+            for key, ref in added.items():
+                require(
+                    key in {"ai/cheap_static_ordering.rs", "data/lossless_jsonl.rs"}
+                    and (
+                        key != "data/lossless_jsonl.rs"
+                        or ref["sha256"]
+                        == "76bde0a3cff239b414e0bff0ba5a651833a9f8aae031086ac97f2e97187b8c69"
+                    )
+                    and ref == current["source"][field][key]
+                    and ref["sha256"] == new[key],
+                    "376 unexpected compiled addition",
+                )
+            for key in (
+                "core/lib.rs",
+                "core/game.rs",
+                "core/position.rs",
+                "core/research.rs",
+                "nnue/lib.rs",
+                "nnue/features.rs",
+                "nnue/simd.rs",
+                "nnue/residual.rs",
+                "nnue/quantized.rs",
+                "inference/lib.rs",
+                "inference/cuda.rs",
+                "inference/tensorrt.rs",
+            ):
+                require(old.get(key) == new.get(key), "376 original input/head dependency drift")
         for key, old_sha in old.items():
             new_sha = new[key]
             require(
@@ -767,20 +861,37 @@ def retained_ordering_source(current, original, adoption, qualification, origina
 
     old_files, new_files = native(original["source"]), native(current["source"])
 
-    require(set(old_files) == set(new_files), "ordering native source membership changed")
+    if cheap is None:
+        require(set(old_files) == set(new_files), "ordering native source membership changed")
+
+    def declared(before, after):
+        return cheap is not None and any(
+            pair.get("before") == before and pair.get("after") == after
+            for pair in reuse.get("changed_native_sources", [])
+        )
+
     for path, old in old_files.items():
-        new = new_files[path]
+        new = new_files.get(path)
+        if new is None:
+            require(declared(old, None), "376 undeclared native removal")
+            continue
         require(
-            old == new or any(p["before"] == old and p["after"] == new for p in changed.values()),
+            old == new
+            or declared(old, new)
+            or any(p["before"] == old and p["after"] == new for p in changed.values()),
             "ordering native witness outside reviewed wrappers changed",
         )
+
+    for path in set(new_files) - set(old_files):
+        require(declared(None, new_files[path]), "376 undeclared native addition")
 
 
 def numerical_check(experiment, manifest, *, refs=None):
     q = document(experiment["numerical_qualification"])
     numerical_manifest = manifest
     claim_experiment = experiment
-    if experiment["argv"][1] == "ordering-assess":
+    cheap = experiment["argv"][1] == "ordering-cheap-assess"
+    if cheap or experiment["argv"][1] == "ordering-assess":
         reference = experiment["numerical_qualification"]
         require(
             Path(reference["path"]).name == "manifest.json"
@@ -799,8 +910,10 @@ def numerical_check(experiment, manifest, *, refs=None):
         )
         qualified = document(q["experiment"])
         ordering_qualification_shape(qualified)
+        correspondence = cheap_ordering_inputs(experiment, qualified) if cheap else None
         require(
-            all(
+            cheap
+            or all(
                 qualified[k] == experiment[k]
                 for k in (
                     "config",
@@ -829,10 +942,18 @@ def numerical_check(experiment, manifest, *, refs=None):
                 "ordering reuse belongs to normal integration source adoption",
             )
             adoption = document(adoption_ref)
-            retained_ordering_source(manifest, original, adoption, reference, original_ref)
+            retained_ordering_source(
+                manifest, original, adoption, reference, original_ref, correspondence
+            )
             numerical_manifest = original
             if refs is not None:
                 refs.extend([q["experiment"], original_ref, adoption_ref])
+        if cheap:
+            require(
+                qualified["build_manifest"] != experiment["build_manifest"],
+                "376 old20 artifact cannot be80 caller",
+            )
+            claim_experiment = {**qualified, "phase": "compare"}
         q = q["data"]["numerical_qualification"]
     expected = numerical_fields(claim_experiment, numerical_manifest)
     require(
@@ -1758,8 +1879,16 @@ def experiment_check(spec):
     refs.append(spec["approved_plan"])
     if experiment["phase"] == "sigma-cost-qualification":
         sigma_cost_check(spec, experiment, manifest, approved)
-    if experiment["phase"] == "compare" and experiment["argv"][1] == "ordering-assess":
+    if experiment["phase"] == "compare" and experiment["argv"][1] in {
+        "ordering-assess",
+        "ordering-cheap-assess",
+    }:
         numerical_check(experiment, manifest, refs=refs)
+        if experiment["argv"][1] == "ordering-cheap-assess":
+            require(
+                document(experiment["config"])["plan"]["output"] == spec["data_root"],
+                "376 owned runtime output",
+            )
     if experiment["phase"] in {"corpus", "fit", "software-qualification"} and not public_replay:
         common_pilot_check(spec, experiment, manifest, approved)
     if experiment["phase"] == "compare" and experiment["argv"][1] == "decisions":

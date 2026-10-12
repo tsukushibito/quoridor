@@ -14,6 +14,10 @@ pub(super) const CONT_LEN: usize = 2 * 5 * 209 * 209;
 pub enum OrderingProfile {
     CombinedSigned,
     CombinedSignedStatic,
+    /// Fixed376 control: static OFF, common exact legal goal tier.
+    CheapStaticControl,
+    /// Fixed376 candidate, never selected by product constructors.
+    CombinedSignedCheapStatic,
     UnsignedHistoryBaseline,
 }
 
@@ -36,6 +40,9 @@ pub struct OrderingStats {
     pub static_parents: u64,
     pub borrowed_goal_maps: u64,
     pub computed_goal_map_pairs: u64,
+    pub cheap_static_parents: u64,
+    pub missing_goal_map_pairs: u64,
+    pub available_goal_map_pairs: u64,
     pub nonzero_static_actions: u64,
     pub exact_goal_actions: u64,
     /// Static changes against identical dynamic tiers/scores with ActionID ties.

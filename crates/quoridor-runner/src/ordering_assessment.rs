@@ -54,6 +54,9 @@ enum Profile {
     Prior,
     Continuation,
     Static,
+    #[serde(rename = "cheap_control")]
+    CheapControl,
+    Cheap,
 }
 impl Profile {
     fn native(self) -> OrderingProfile {
@@ -61,6 +64,8 @@ impl Profile {
             Self::Prior => OrderingProfile::UnsignedHistoryBaseline,
             Self::Continuation => OrderingProfile::CombinedSigned,
             Self::Static => OrderingProfile::CombinedSignedStatic,
+            Self::CheapControl => OrderingProfile::CheapStaticControl,
+            Self::Cheap => OrderingProfile::CombinedSignedCheapStatic,
         }
     }
 }
@@ -75,6 +80,208 @@ struct Request {
     root: usize,
     warm: bool,
     node_cap: u64,
+}
+
+const CHEAP_ALGORITHM: &str = "cheap-static376-integer-parent-v1";
+const CHEAP_SUPPORT: &str = "0cb8599c9c1359c6bf2ca38c371805cdf39f4146f51efc9d35045c884c5e61cb";
+#[derive(Clone, Copy, Debug, Deserialize, Serialize, PartialEq, Eq)]
+enum CheapRole {
+    A,
+    B,
+}
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+struct CheapPlan {
+    schema: String,
+    algorithm: String,
+    process_index: usize,
+    image_role: CheapRole,
+    plan: Plan,
+}
+#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq)]
+#[serde(deny_unknown_fields)]
+struct CheapRequest {
+    id: usize,
+    process_index: usize,
+    image_role: CheapRole,
+    sweep: usize,
+    local_request_id: usize,
+    session: usize,
+    diagnostic: bool,
+    profile: Profile,
+    depth: u16,
+    original_root_index: usize,
+    family: usize,
+    warm: bool,
+    local_ply: Option<usize>,
+    node_cap: u64,
+}
+impl CheapRequest {
+    fn local(&self) -> Request {
+        Request {
+            id: self.local_request_id,
+            pass: self.session,
+            diagnostic: self.diagnostic,
+            profile: self.profile,
+            depth: self.depth,
+            root: self.original_root_index,
+            warm: self.warm,
+            node_cap: self.node_cap,
+        }
+    }
+}
+fn cheap_schedule() -> Vec<CheapRequest> {
+    let mut rows = Vec::with_capacity(80);
+    for (process, role) in [CheapRole::A, CheapRole::B, CheapRole::B, CheapRole::A]
+        .into_iter()
+        .enumerate()
+    {
+        let profile = if role == CheapRole::A {
+            Profile::CheapControl
+        } else {
+            Profile::Cheap
+        };
+        for sweep in 1..=2 {
+            for local in 0..10 {
+                let (root, family, warm, ply, depth, session) = match local {
+                    0..=3 => (local, COLD[local], false, None, 4, local),
+                    4..=7 => (local, 0, true, Some(2 * (local - 4)), 4, 4),
+                    8 => (1, 34, false, None, 6, 5),
+                    _ => (3, 102, false, None, 6, 6),
+                };
+                rows.push(CheapRequest {
+                    id: rows.len(),
+                    process_index: process,
+                    image_role: role,
+                    sweep,
+                    local_request_id: (sweep - 1) * 10 + local,
+                    session: (sweep - 1) * 7 + session,
+                    diagnostic: sweep == 1 && (local == 0 || local == 7),
+                    profile,
+                    depth,
+                    original_root_index: root,
+                    family,
+                    warm,
+                    local_ply: ply,
+                    node_cap: if depth == 4 { CAPS[0] } else { CAPS[1] },
+                });
+            }
+        }
+    }
+    rows
+}
+fn validate_cheap(p: &CheapPlan, e: &Experiment, rows: &[CheapRequest]) -> Result<()> {
+    if p.schema != "quoridor.cheap-static376.process.v1"
+        || p.algorithm != CHEAP_ALGORITHM
+        || p.process_index >= 4
+        || p.image_role != [CheapRole::A, CheapRole::B, CheapRole::B, CheapRole::A][p.process_index]
+        || p.plan.schema != "quoridor.cheap-static376.inputs.v1"
+        || e.phase != "compare"
+        || e.planned_slots != 20
+        || e.batch != Some(p.process_index)
+        || e.numerical_qualification.is_none()
+        || e.canonical_plan_sha256 != p.plan.assessment.sha256
+        || rows != cheap_schedule()
+        || p.plan.resources.sha256 != CHEAP_SUPPORT
+        || p.plan.resources.bytes != 4372
+        || p.plan.book.sha256 != BOOK
+        || p.plan.warm_journal.bytes > JOURNAL_BYTES
+        || e.models.len() != 1
+        || e.dynamic_libraries.len() != 5
+        || e.inputs
+            != [
+                p.plan.book.clone(),
+                p.plan.warm_origin.clone(),
+                p.plan.warm_config.clone(),
+                p.plan.warm_journal.clone(),
+                p.plan.assessment.clone(),
+                p.plan.resources.clone(),
+            ]
+        || e.argv.len() != 6
+        || e.argv[1..]
+            != [
+                "ordering-cheap-assess",
+                "--experiment",
+                "@EXPERIMENT@",
+                "--experiment-sha256",
+                "@EXPERIMENT_SHA256@",
+            ]
+    {
+        return Err("376 exact algorithm/ABBA/sweep/mask/input authority required".into());
+    }
+    let m = &e.models[0];
+    if m.descriptor.sha256 != DESCRIPTOR
+        || m.descriptor.bytes != 677
+        || m.descriptor.mode != "0600"
+        || m.weights.sha256 != WEIGHTS
+        || m.weights.bytes != 49284
+        || m.weights.mode != "0644"
+        || m.evaluator_sha256 != EVALUATOR
+    {
+        return Err("376 unchanged actual BEST43 model/units required".into());
+    }
+    Ok(())
+}
+fn prepare_cheap_inputs(
+    e: &Experiment,
+) -> Result<(CheapPlan, Vec<Request>, Vec<Option<RootSpec>>)> {
+    let p: CheapPlan = e.config.read()?;
+    let all: Vec<CheapRequest> = e.schedule.read()?;
+    validate_cheap(&p, e, &all)?;
+    let method: Value = p.plan.assessment.read()?;
+    if method["schema"] != "quoridor.cheap-static376.assessment.v1"
+        || method["algorithm"] != CHEAP_ALGORITHM
+        || method["planned_Search_calls"] != 80
+        || method["geometric_contexts"] != 10
+        || method["sweeps_per_process"] != 2
+        || method["planned_sessions"] != 56
+        || method["diagnostic_calls_included"] != 8
+        || method["primary_plain_calls"] != 72
+        || method["node_liability"] != 256000000u64
+        || method["fixed_order"] != json!(["A", "B", "B", "A"])
+        || method["schedule_sha256"] != e.schedule.sha256
+    {
+        return Err("376 fixed preoutcome workload/denominators required".into());
+    }
+    let support: Value = p.plan.resources.read()?;
+    if support["issue"] != "quoridor-4lc.376" || support["whole_B"] != 251658240u64 {
+        return Err("376 issued whole support required".into());
+    }
+    let book: Value = p.plan.book.read()?;
+    let roots = derive_roots_with_warm(&book, warm_game(&p.plan, &book)?.as_ref(), 4)?;
+    let requests = all
+        .iter()
+        .filter(|r| r.process_index == p.process_index)
+        .map(CheapRequest::local)
+        .collect();
+    Ok((p, requests, roots))
+}
+/// OriginalQ remains its original artifact20-input/head scope; never score evidence.
+pub(crate) fn retained_cheap_inputs(e: &Experiment, original: &Experiment) -> Result<Value> {
+    let p: CheapPlan = e.config.read()?;
+    let rows: Vec<CheapRequest> = e.schedule.read()?;
+    validate_cheap(&p, e, &rows)?;
+    let old: Plan = original.config.read()?;
+    if !qualification_shape(original)
+        || [old.book, old.warm_origin, old.warm_config, old.warm_journal]
+            != [
+                p.plan.book,
+                p.plan.warm_origin,
+                p.plan.warm_config,
+                p.plan.warm_journal,
+            ]
+        || e.rules != original.rules
+        || e.distance_units != original.distance_units
+        || e.value_perspective != original.value_perspective
+        || e.models != original.models
+        || serde_json::to_value(&e.dynamic_libraries)?
+            != serde_json::to_value(&original.dynamic_libraries)?
+    {
+        return Err("376 retained original input/head model/library correspondence drift".into());
+    }
+    Ok(
+        json!({"algorithm":CHEAP_ALGORITHM,"approved_plan":p.plan.assessment,"schedule":e.schedule,"resources":p.plan.resources}),
+    )
 }
 
 fn schedule() -> Vec<Request> {
@@ -214,6 +421,16 @@ fn identity(c: &SigmaContext) -> Value {
     json!({"root_key":HistoryKey::from(c.position()).history_string(),"history_counts":c.history_counts().into_iter().map(|(k,n)|(k.history_string(),n)).collect::<Vec<_>>(),"ply":c.total_ply(),"rules":c.ruleset().id(),"synthetic":c.is_synthetic()})
 }
 fn derive_roots(book: &Value, game: Option<&Value>) -> Result<Vec<Option<RootSpec>>> {
+    derive_roots_with_warm(book, game, 16)
+}
+fn derive_roots_with_warm(
+    book: &Value,
+    game: Option<&Value>,
+    warm_roots: usize,
+) -> Result<Vec<Option<RootSpec>>> {
+    if warm_roots != 4 && warm_roots != 16 {
+        return Err("fixed original warm projection required".into());
+    }
     if book["schema"] != "quoridor.value-search-strength.book.v1"
         || book["complete"] != true
         || book["rules"] != RULES
@@ -224,7 +441,7 @@ fn derive_roots(book: &Value, game: Option<&Value>) -> Result<Vec<Option<RootSpe
     if families.len() != 128 {
         return Err("360 original128 denominator".into());
     }
-    let mut roots = Vec::with_capacity(20);
+    let mut roots = Vec::with_capacity(4 + warm_roots);
     for (slot, family) in COLD.into_iter().enumerate() {
         let f = &families[family];
         let prefix: Vec<u16> = serde_json::from_value(f["prefix"].clone())?;
@@ -254,7 +471,7 @@ fn derive_roots(book: &Value, game: Option<&Value>) -> Result<Vec<Option<RootSpe
     } else {
         None
     };
-    for local_ply in (0..32).step_by(2) {
+    for local_ply in (0..2 * warm_roots).step_by(2) {
         let end = initial.len() + local_ply;
         roots.push(moves.as_ref().filter(|m| m.len() >= end).map(|m| RootSpec {
             prefix: m[..end].to_vec(),
@@ -402,15 +619,30 @@ fn observed(r: &SearchResult) -> Value {
     let o = &s.ordering;
     json!({"returned":"Ok","action":r.action,"value":r.value,"value_bits":r.value.map(f32::to_bits),"completed_depth":r.completed_depth,"PV":r.pv,"stop":format!("{:?}",r.stop),"Search_internal_elapsed_seconds":r.elapsed.as_secs_f64(),
         "work":{"nodes":s.nodes,"evaluations":s.evaluations,"terminal":s.terminal,"cutoffs":s.cutoffs,"TT_hits":s.tt_hits,"TT_probes":s.tt_probes,"TT_exact_hits":s.tt_exact_hits,"TT_key_builds":s.tt_key_builds,"tt_context_initial_items":s.tt_context_initial_items,"tt_context_transitions":s.tt_context_transitions,"tt_board_hash_reads":s.tt_board_hash_reads,"tt_board_hash_updates":s.tt_board_hash_updates,"tt_context_matches":s.tt_context_matches,"tt_context_misses":s.tt_context_misses,"tt_order_context_mismatch":s.tt_order_context_mismatch,"tt_hash_collisions":s.tt_hash_collisions,"tt_index_collisions":s.tt_index_collisions,"TT_hashes":s.tt_hashes,"TT_usable_depth":s.tt_usable_depth,"TT_order_only":s.tt_order_only,"TT_collisions":s.tt_collisions,"TT_replacements":s.tt_replacements,"TT_capacity_skips":s.tt_capacity_skips,"TT_illegal_moves":s.tt_illegal_moves,"TT_retained_bytes":s.tt_retained_bytes,"TT_generation":s.tt_generation,"TT_cutoffs":s.tt_cutoffs,"PVS_researches":s.pvs_researches,"delta_updates":s.delta_updates,"policy_calls":s.policy_calls},
-        "ordering":{"ordered_nodes":o.ordered_nodes,"scored_actions":o.scored_actions,"nonzero_dynamic_actions":o.nonzero_dynamic_actions,"nonzero_combined_actions":o.nonzero_combined_actions,"nonzero_continuation_actions":o.nonzero_continuation_actions,"history_changed_nodes":o.history_changed_nodes,"completed_cutoff_events":o.completed_cutoff_events,"cutoff_rank_sum":o.cutoff_rank_sum,"first_child_cutoffs":o.first_child_cutoffs,"positive_actions":o.positive_actions,"negative_actions":o.negative_actions,"continuation_updates":o.continuation_updates,"age_passes":o.age_passes,"static_parents":o.static_parents,"borrowed_goal_maps":o.borrowed_goal_maps,"computed_goal_map_pairs":o.computed_goal_map_pairs,"nonzero_static_actions":o.nonzero_static_actions,"exact_goal_actions":o.exact_goal_actions,"static_changed_nodes":o.static_changed_nodes}})
+        "ordering":{"ordered_nodes":o.ordered_nodes,"scored_actions":o.scored_actions,"nonzero_dynamic_actions":o.nonzero_dynamic_actions,"nonzero_combined_actions":o.nonzero_combined_actions,"nonzero_continuation_actions":o.nonzero_continuation_actions,"history_changed_nodes":o.history_changed_nodes,"completed_cutoff_events":o.completed_cutoff_events,"cutoff_rank_sum":o.cutoff_rank_sum,"first_child_cutoffs":o.first_child_cutoffs,"positive_actions":o.positive_actions,"negative_actions":o.negative_actions,"continuation_updates":o.continuation_updates,"age_passes":o.age_passes,"static_parents":o.static_parents,"borrowed_goal_maps":o.borrowed_goal_maps,"computed_goal_map_pairs":o.computed_goal_map_pairs,"cheap_static_parents":o.cheap_static_parents,"missing_goal_map_pairs":o.missing_goal_map_pairs,"available_goal_map_pairs":o.available_goal_map_pairs,"nonzero_static_actions":o.nonzero_static_actions,"exact_goal_actions":o.exact_goal_actions,"static_changed_nodes":o.static_changed_nodes}})
 }
-fn validate_return(root: &SigmaContext, r: &SearchResult, request: &Request) -> Result<bool> {
+fn validate_return(
+    root: &SigmaContext,
+    r: &SearchResult,
+    request: &Request,
+    legal_capture: Option<&mut Vec<u16>>,
+) -> Result<bool> {
     if r.stats.nodes > request.node_cap
         || r.pv.len() > 200
         || r.value.is_some_and(|v| !v.is_finite())
-        || r.action.is_some_and(|a| !root.legal_ids().contains(&a))
     {
         return Err("360 returned observation outside canonical bound".into());
+    }
+    if let Some(action) = r.action {
+        let legal = root.legal_ids();
+        if !legal.contains(&action) {
+            return Err("360 returned observation outside canonical bound".into());
+        }
+        // Move the already-computed validation vector: no extra legal generation
+        // or clone. No-action/failed returns do not claim complete legal capture.
+        if let Some(out) = legal_capture {
+            *out = legal;
+        }
     }
     let mut pv = root.clone();
     for &action in &r.pv {
@@ -894,16 +1126,47 @@ pub fn qualify(bound: &BoundControl) -> Result<Value> {
 }
 
 /// Uses the maintained generic Experiment/numerical/lifetime entry, not private TT access.
-pub fn run(bound: &BoundControl) -> Result<Value> {
+fn run_impl(bound: &BoundControl, cheap: bool) -> Result<Value> {
     let whole = Instant::now();
     let (e, _) = research_manifest::load(bound, "compare")?;
-    let (_, requests, roots) = prepare_inputs(&e)?;
-    let planned = 360;
-    let node_limit = AGGREGATE;
+    let (cheap_plan, requests, roots) = if cheap {
+        let (plan, requests, roots) = prepare_cheap_inputs(&e)?;
+        (Some(plan), requests, roots)
+    } else {
+        let (_, requests, roots) = prepare_inputs(&e)?;
+        (None, requests, roots)
+    };
+    let planned = if cheap { 20 } else { 360 };
+    let node_limit = if cheap { 64_000_000 } else { AGGREGATE };
     let output_root = output_correspondence()?;
     let inputs_seconds = whole.elapsed().as_secs_f64();
-    let header = json!({"schema":"quoridor.continuation360.intent.v1","experiment_sha256":bound.sha256,"config_sha256":e.config.sha256,"schedule_sha256":e.schedule.sha256,"build_manifest":e.build_manifest,"compiled_sources":research_manifest::sources(),"model":e.models[0],"input_refs":e.inputs,"requests":requests,"planned":planned,"plain":240,"diagnostic":120,"no_refill":true,"pre_root_continuation":"absent; actual speculative LIFO only"});
+    let mut header = json!({"schema":"quoridor.continuation360.intent.v1","experiment_sha256":bound.sha256,"config_sha256":e.config.sha256,"schedule_sha256":e.schedule.sha256,"build_manifest":e.build_manifest,"compiled_sources":research_manifest::sources(),"model":e.models[0],"input_refs":e.inputs,"requests":requests,"planned":planned,"plain":240,"diagnostic":120,"no_refill":true,"pre_root_continuation":"absent; actual speculative LIFO only"});
+    if let Some(plan) = &cheap_plan {
+        if plan.plan.output != output_root {
+            return Err("376 owned config/output drift".into());
+        }
+        header["schema"] = json!("quoridor.cheap-static376.intent.v1");
+        header["algorithm"] = json!(CHEAP_ALGORITHM);
+        header["process_index"] = json!(plan.process_index);
+        header["image_role"] = json!(plan.image_role);
+        header["plain"] = json!(18);
+        header["diagnostic"] = json!(2);
+        header["campaign_planned"] = json!(80);
+        header["campaign_sessions"] = json!(56);
+        header["geometric_contexts"] = json!(10);
+        header["independent_sweeps"] = json!(2);
+        header["process_sessions"] = json!(14);
+        header["fixed_projection"] = json!(
+            cheap_schedule()
+                .into_iter()
+                .filter(|r| r.process_index == plan.process_index)
+                .collect::<Vec<_>>()
+        );
+    }
     let mut output = Output::new(&output_root);
+    if cheap {
+        output.limit = 3 * 1048576;
+    }
     let mut count = Census::default();
     let mut pending = Value::Null;
     let mut secondary = Vec::new();
@@ -988,6 +1251,9 @@ pub fn run(bound: &BoundControl) -> Result<Value> {
                     use_pvs: true,
                     use_tt: true,
                 };
+                if cheap {
+                    s.set_ordering_observation(request.diagnostic);
+                }
                 count.invoked += 1;
                 pending = json!({"request":request,"stage":"Search_invoked","root":before,"prefix_sha256":arena::json_digest(&roots[request.root].as_ref().unwrap().prefix)?,"family":roots[request.root].as_ref().unwrap().family,"local_ply":roots[request.root].as_ref().unwrap().local_ply,"invoked":true,"reserved_nodes":cap});
                 // No observer, restoration check, serialization or clock nesting between these stamps.
@@ -1004,7 +1270,21 @@ pub fn run(bound: &BoundControl) -> Result<Value> {
                         if identity(&root) != before {
                             return Err("360 full parent restoration mismatch".into());
                         }
-                        let complete = validate_return(&root, &r, request)?;
+                        let mut legal_capture = Vec::new();
+                        let complete = validate_return(
+                            &root,
+                            &r,
+                            request,
+                            cheap.then_some(&mut legal_capture),
+                        )?;
+                        if cheap {
+                            pending["root_legal_action_ids"] = if r.action.is_some() {
+                                json!(legal_capture)
+                            } else {
+                                Value::Null
+                            };
+                        }
+
                         count.liability -= cap - r.stats.nodes;
                         count.complete += usize::from(complete);
                         pending["status"] = json!(if complete { "COMPLETE" } else { "UNKNOWN" });
@@ -1037,6 +1317,23 @@ pub fn run(bound: &BoundControl) -> Result<Value> {
                 last["includes_drop"] = json!(true);
             }
             pass_costs.push(json!({"pass":first.pass,"profile":first.profile,"diagnostic":first.diagnostic,"depth":first.depth,"warm":first.warm,"requests":end-start,"session_setup_seconds":setup_seconds,"session_drop_seconds":drop_seconds,"retained_TT_bytes":retained.0,"retained_session_metadata_and_history_bytes":retained.1,"pass_whole_until_cost_footer_seconds":pass_start.elapsed().as_secs_f64(),"includes":"setup/replay/Search/map-DAG-sort/aging/stats/observation+cost-ledger serialization and sync/drop; footer/finalization paid outer whole"}));
+            if cheap {
+                let cost = pass_costs.last_mut().expect("pass cost just appended");
+                cost["sweep"] = json!(first.pass / 7 + 1);
+                cost["diagnostic_requests"] = json!(
+                    requests[start..end]
+                        .iter()
+                        .filter(|r| r.diagnostic)
+                        .map(|r| r.id)
+                        .collect::<Vec<_>>()
+                );
+                cost["diagnostic_field_scope"] = json!(
+                    "first request only; mixed warm session has final-call observation; whole session cost is charged"
+                );
+                cost["includes"] = json!(
+                    "setup/replay/Search/borrowed-map validation/integer score/sort/history update+aging/stats/primary+cost journal serialization+sync/drop; footer and finalization paid outer whole"
+                );
+            }
             start = end;
         }
         let model_drop = Instant::now();
@@ -1052,12 +1349,46 @@ pub fn run(bound: &BoundControl) -> Result<Value> {
             m.weights.verify()?;
         }
         Ok(
-            json!({"schema":"quoridor.continuation360.result.v1","status":if count.complete==planned {"COMPLETE"} else {"COMPLETED_WITH_UNKNOWN"},"experiment_sha256":bound.sha256,"config_sha256":e.config.sha256,"schedule_sha256":e.schedule.sha256,"planned":planned,"session_setup_attempts":count.session_setup_attempts,"session_setup_Ok":count.session_setup_ok,"session_setup_Err":count.session_setup_err,"root_replay_attempts":count.attempted,"attempted":count.attempted,"actual_Search_invocations":count.invoked,"returned_Ok":count.ok,"returned_Err":count.err,"completed_requested_depth":count.complete,"durably_published_complete_rows":count.published_complete,"planned_UNKNOWN":planned-count.complete,"node_liability":count.liability,"input_verification_and_derivation_seconds":inputs_seconds,"model_setup_seconds":model_setup_seconds,"model_drop_seconds":model_drop_seconds,"passes":pass_costs,"root_whole_intervals":root_costs,"root_interval_cost_domain":"Actual interval includes primary+cost-journal serialization/sync, setup on first and drop on last root. Shared model/input/header/footer/outer-finalizer costs retained separately in outer whole; no invented perroot causal shares or use of Search-only as whole.","whole_until_result_publication_seconds":whole.elapsed().as_secs_f64(),"final_authoritative_whole":"outer lifecycle directwait/finalizer; native receipt alone not completion/benefit PASS","benefit_interpretation":"NOT_ASSESSED; prebound gates need saved matched results and honest cost domains"}),
+            json!({"schema":if cheap {"quoridor.cheap-static376.result.v1"} else {"quoridor.continuation360.result.v1"},"status":if count.complete==planned {"COMPLETE"} else {"COMPLETED_WITH_UNKNOWN"},"experiment_sha256":bound.sha256,"config_sha256":e.config.sha256,"schedule_sha256":e.schedule.sha256,"planned":planned,"session_setup_attempts":count.session_setup_attempts,"session_setup_Ok":count.session_setup_ok,"session_setup_Err":count.session_setup_err,"root_replay_attempts":count.attempted,"attempted":count.attempted,"actual_Search_invocations":count.invoked,"returned_Ok":count.ok,"returned_Err":count.err,"completed_requested_depth":count.complete,"durably_published_complete_rows":count.published_complete,"planned_UNKNOWN":planned-count.complete,"node_liability":count.liability,"input_verification_and_derivation_seconds":inputs_seconds,"model_setup_seconds":model_setup_seconds,"model_drop_seconds":model_drop_seconds,"passes":pass_costs,"root_whole_intervals":root_costs,"root_interval_cost_domain":"Actual interval includes primary+cost-journal serialization/sync, setup on first and drop on last root. Shared model/input/header/footer/outer-finalizer costs retained separately in outer whole; no invented perroot causal shares or use of Search-only as whole.","whole_until_result_publication_seconds":whole.elapsed().as_secs_f64(),"final_authoritative_whole":"outer lifecycle directwait/finalizer; native receipt alone not completion/benefit PASS","benefit_interpretation":"NOT_ASSESSED; prebound gates need saved matched results and honest cost domains"}),
         )
     })();
-    let failure = json!({"schema":"quoridor.continuation360.failure.v1","status":"FAILED","experiment_sha256":bound.sha256,"config_sha256":e.config.sha256,"planned":planned,"session_setup_attempts":count.session_setup_attempts,"session_setup_Ok":count.session_setup_ok,"session_setup_Err":count.session_setup_err,"root_replay_attempts":count.attempted,"attempted":count.attempted,"actual_Search_invocations":count.invoked,"returned_Ok":count.ok,"returned_Err":count.err,"completed_requested_depth":count.complete,"durably_published_complete_rows":count.published_complete,"remaining_unknown":planned-count.published_complete,"node_liability":count.liability,"last_attempt_or_return":pending,"passes":pass_costs,"root_whole_intervals":root_costs,"primary":Value::Null,"secondary":[],"INCOMPLETE":true,"outer_completion":"NOT_FINALIZED"});
-    finish_output(&mut output, outcome, secondary, failure)
+    let failure = json!({"schema":if cheap {"quoridor.cheap-static376.failure.v1"} else {"quoridor.continuation360.failure.v1"},"status":"FAILED","experiment_sha256":bound.sha256,"config_sha256":e.config.sha256,"planned":planned,"session_setup_attempts":count.session_setup_attempts,"session_setup_Ok":count.session_setup_ok,"session_setup_Err":count.session_setup_err,"root_replay_attempts":count.attempted,"attempted":count.attempted,"actual_Search_invocations":count.invoked,"returned_Ok":count.ok,"returned_Err":count.err,"completed_requested_depth":count.complete,"durably_published_complete_rows":count.published_complete,"remaining_unknown":planned-count.published_complete,"node_liability":count.liability,"last_attempt_or_return":pending,"passes":pass_costs,"root_whole_intervals":root_costs,"primary":Value::Null,"secondary":[],"INCOMPLETE":true,"outer_completion":"NOT_FINALIZED"});
+    let annotate = |mut value: Value| {
+        if let Some(plan) = &cheap_plan {
+            value["algorithm"] = json!(CHEAP_ALGORITHM);
+            value["process_index"] = json!(plan.process_index);
+            value["image_role"] = json!(plan.image_role);
+            value["campaign_planned"] = json!(80);
+            value["planned_sessions"] = json!(14);
+            value["geometric_contexts"] = json!(10);
+            value["planned_plain"] = json!(18);
+            value["planned_diagnostic"] = json!(2);
+            value["not_invoked"] = json!(planned - count.invoked);
+            value["attempted_without_invocation"] = json!(count.attempted - count.invoked);
+            value["Ok_without_complete_depth"] = json!(count.ok - count.complete);
+            value["diagnostic_scope"] = json!(
+                "sweep1 coldD4 family0 and finalwarm ply6; includes2/20, not primary plain time; no following warm call in that session"
+            );
+        }
+        value
+    };
+    finish_output(
+        &mut output,
+        outcome.map(annotate),
+        secondary,
+        annotate(failure),
+    )
 }
+pub fn run(bound: &BoundControl) -> Result<Value> {
+    run_impl(bound, false)
+}
+pub fn run_cheap(bound: &BoundControl) -> Result<Value> {
+    run_impl(bound, true)
+}
+
+#[cfg(test)]
+#[path = "ordering376_tests.rs"]
+mod cheap376_tests;
 
 #[cfg(test)]
 #[path = "ordering_assessment_tests.rs"]

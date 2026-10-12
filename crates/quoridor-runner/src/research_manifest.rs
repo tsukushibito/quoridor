@@ -113,6 +113,13 @@ pub fn sources() -> BTreeMap<&'static str, String> {
         "runner/ordering_assessment.rs",
         arena::digest(include_bytes!("ordering_assessment.rs")),
     );
+    #[cfg(feature = "ordering-assessment")]
+    map.insert(
+        "ai/cheap_static_ordering.rs",
+        arena::digest(include_bytes!(
+            "../../quoridor-ai/src/cheap_static_ordering.rs"
+        )),
+    );
     map.insert(
         "runner/value_search_compare.rs",
         arena::digest(include_bytes!("value_search_compare.rs")),
@@ -295,6 +302,7 @@ fn retained_ordering_source(
     adoption: &Value,
     qualification: &FileRef,
     original_ref: &FileRef,
+    cheap: Option<&Value>,
 ) -> Result<()> {
     // One source-adoption decision records the reviewed wrapper-only change.
     // Original numerical evidence still describes the ORIGINAL artifact and source.
@@ -312,8 +320,10 @@ fn retained_ordering_source(
         || reuse["scope"] != "ordering20-input-and-head-v1"
         || reuse["qualification"] != serde_json::to_value(qualification)?
         || reuse["build_manifest"] != serde_json::to_value(original_ref)?
-        || changed.len() != wrappers.len()
-        || !wrappers.iter().all(|k| changed.contains_key(*k))
+        || (cheap.is_none()
+            && (changed.len() != wrappers.len()
+                || !wrappers.iter().all(|k| changed.contains_key(*k))))
+        || cheap.is_some_and(|identity| reuse["cheap_static376"] != *identity)
         || !build_status(original)
         || original["source"]["workspace"] != current["source"]["workspace"]
         || original["tools"] != current["tools"]
@@ -350,8 +360,7 @@ fn retained_ordering_source(
     if old_env != new_env {
         return Err("ordering compiler environment changed".into());
     }
-    for key in wrappers {
-        let pair = &changed[key];
+    for (key, pair) in changed {
         if pair["before"] != original["source"]["compiled_sources"][key]
             || pair["after"] != current["source"]["compiled_sources"][key]
             || pair["before"]["path"] != pair["after"]["path"]
@@ -367,8 +376,50 @@ fn retained_ordering_source(
         let new = current[field]
             .as_object()
             .ok_or("current full source map")?;
-        if old.len() != new.len() || old.keys().ne(new.keys()) {
-            return Err("ordering full source domain changed".into());
+        let added = reuse["added_compiled_sources"][field].as_object();
+        if cheap.is_none() {
+            if old.len() != new.len() || old.keys().ne(new.keys()) {
+                return Err("ordering full source domain changed".into());
+            }
+        } else {
+            let additions = added.map_or(0, |a| a.len());
+            if new.len() != old.len() + additions || old.keys().any(|k| !new.contains_key(k)) {
+                return Err("376 exact source domain/additions required".into());
+            }
+            if let Some(add) = added {
+                for (key, ref_) in add {
+                    if !matches!(
+                        key.as_str(),
+                        "ai/cheap_static_ordering.rs" | "data/lossless_jsonl.rs"
+                    ) || old.contains_key(key)
+                        || (key == "data/lossless_jsonl.rs"
+                            && ref_["sha256"]
+                                != "76bde0a3cff239b414e0bff0ba5a651833a9f8aae031086ac97f2e97187b8c69")
+                        || ref_ != &current["source"][field][key]
+                        || ref_["sha256"] != new[key]
+                    {
+                        return Err("376 unexpected compiled addition".into());
+                    }
+                }
+            }
+            for key in [
+                "core/lib.rs",
+                "core/game.rs",
+                "core/position.rs",
+                "core/research.rs",
+                "nnue/lib.rs",
+                "nnue/features.rs",
+                "nnue/simd.rs",
+                "nnue/residual.rs",
+                "nnue/quantized.rs",
+                "inference/lib.rs",
+                "inference/cuda.rs",
+                "inference/tensorrt.rs",
+            ] {
+                if old.get(key) != new.get(key) {
+                    return Err("376 original input/head dependency changed; old qualification cannot certify new code".into());
+                }
+            }
         }
         for (key, old_sha) in old {
             let new_sha = &new[key];
@@ -405,19 +456,38 @@ fn retained_ordering_source(
     };
     let old_files = native(&original["source"])?;
     let new_files = native(&current["source"])?;
-    if old_files.keys().ne(new_files.keys()) {
+    if cheap.is_none() && old_files.keys().ne(new_files.keys()) {
         return Err("ordering native source membership changed".into());
     }
+    let native_changes = reuse["changed_native_sources"].as_array();
+    let declared = |before: Option<&Value>, after: Option<&Value>| {
+        cheap.is_some()
+            && native_changes.is_some_and(|pairs| {
+                pairs.iter().any(|p| {
+                    p.get("before").filter(|v| !v.is_null()) == before
+                        && p.get("after").filter(|v| !v.is_null()) == after
+                })
+            })
+    };
     for (path, old) in &old_files {
         let Some(new) = new_files.get(path) else {
+            if declared(Some(old), None) {
+                continue;
+            }
             return Err("ordering native source removal refused".into());
         };
         if *old != *new
+            && !declared(Some(old), Some(new))
             && !changed
                 .values()
                 .any(|p| p["before"] == *old && p["after"] == *new)
         {
             return Err("ordering native witness outside reviewed wrappers changed".into());
+        }
+    }
+    for (path, new) in &new_files {
+        if !old_files.contains_key(path) && !declared(None, Some(new)) {
+            return Err("376 undeclared native source addition".into());
         }
     }
     Ok(())
@@ -552,10 +622,12 @@ fn load_checked(
     #[cfg(not(feature = "ordering-assessment"))]
     let numerical_build = build.clone();
     #[cfg(feature = "ordering-assessment")]
-    let (q, numerical_build) = {
+    let (q, numerical_build, numerical_subject) = {
         let mut q = q;
         let mut numerical_build = build.clone();
-        if e.argv.get(1).is_some_and(|a| a == "ordering-assess") {
+        let mut numerical_subject = None;
+        let cheap = e.argv.get(1).is_some_and(|a| a == "ordering-cheap-assess");
+        if cheap || e.argv.get(1).is_some_and(|a| a == "ordering-assess") {
             let reference = e.numerical_qualification.as_ref().unwrap();
             if reference
                 .path
@@ -574,13 +646,21 @@ fn load_checked(
             }
             let origin: FileRef = serde_json::from_value(q["experiment"].clone())?;
             let qualified: Experiment = origin.read()?;
+            let correspondence = if cheap {
+                Some(crate::ordering_assessment::retained_cheap_inputs(
+                    &e, &qualified,
+                )?)
+            } else {
+                None
+            };
             if !crate::ordering_assessment::qualification_shape(&qualified)
-                || qualified.config != e.config
-                || qualified.schedule != e.schedule
-                || qualified.inputs != e.inputs
-                || qualified.models != e.models
-                || serde_json::to_value(&qualified.dynamic_libraries)?
-                    != serde_json::to_value(&e.dynamic_libraries)?
+                || (!cheap
+                    && (qualified.config != e.config
+                        || qualified.schedule != e.schedule
+                        || qualified.inputs != e.inputs
+                        || qualified.models != e.models
+                        || serde_json::to_value(&qualified.dynamic_libraries)?
+                            != serde_json::to_value(&e.dynamic_libraries)?))
             {
                 return Err("360 qualified experiment/input/model/library drift".into());
             }
@@ -619,13 +699,23 @@ fn load_checked(
                     &adoption,
                     reference,
                     &qualified.build_manifest,
+                    correspondence.as_ref(),
                 )?;
                 numerical_build = original;
             }
+            if cheap {
+                if qualified.build_manifest == e.build_manifest {
+                    return Err("376 requires genuinely new caller/image; old20 is not80".into());
+                }
+                numerical_subject = Some(qualified);
+            }
             q = q["data"]["numerical_qualification"].clone();
         }
-        (q, numerical_build)
+        (q, numerical_build, numerical_subject)
     };
+    #[cfg(feature = "ordering-assessment")]
+    let subject = numerical_subject.as_ref().unwrap_or(&e);
+    #[cfg(not(feature = "ordering-assessment"))]
     let subject = &e;
     if q["schema"] != "quoridor.research.numerical-qualification.v1"
         || q["status"] != "PASS"
@@ -663,6 +753,8 @@ fn load_checked(
         || q["distance_units"] != subject.distance_units
         || q["value_perspective"] != subject.value_perspective
         || q["remaining"] != json!([])
+        || (e.argv.get(1).is_some_and(|a| a == "ordering-cheap-assess")
+            && q["canonical_plan_sha256"] != subject.canonical_plan_sha256)
         || ((matches!(phase, "arena" | "corpus")
             || e.argv
                 .get(1)
@@ -720,6 +812,7 @@ mod ordering368_source_tests {
             &adoption,
             &qualification,
             &original_ref,
+            None,
         )
         .unwrap();
         assert_ne!(original["artifact"], current["artifact"]);
@@ -735,28 +828,56 @@ mod ordering368_source_tests {
                 .unwrap()
                 .remove(key);
             assert!(
-                retained_ordering_source(&current, &original, &bad, &qualification, &original_ref)
-                    .is_err()
+                retained_ordering_source(
+                    &current,
+                    &original,
+                    &bad,
+                    &qualification,
+                    &original_ref,
+                    None
+                )
+                .is_err()
             );
         }
         let mut bad = adoption.clone();
         bad["retained_ordering_numerical"]["changed_compiled_sources"][a]["after"]["sha256"] =
             json!("f".repeat(64));
         assert!(
-            retained_ordering_source(&current, &original, &bad, &qualification, &original_ref)
-                .is_err()
+            retained_ordering_source(
+                &current,
+                &original,
+                &bad,
+                &qualification,
+                &original_ref,
+                None
+            )
+            .is_err()
         );
         let mut drift = current.clone();
         drift["compiled_sources"][c] = json!("f".repeat(64));
         assert!(
-            retained_ordering_source(&drift, &original, &adoption, &qualification, &original_ref)
-                .is_err()
+            retained_ordering_source(
+                &drift,
+                &original,
+                &adoption,
+                &qualification,
+                &original_ref,
+                None
+            )
+            .is_err()
         );
         let mut bad = adoption.clone();
         bad["status"] = json!("PENDING");
         assert!(
-            retained_ordering_source(&current, &original, &bad, &qualification, &original_ref)
-                .is_err()
+            retained_ordering_source(
+                &current,
+                &original,
+                &bad,
+                &qualification,
+                &original_ref,
+                None
+            )
+            .is_err()
         );
     }
 }

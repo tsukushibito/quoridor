@@ -200,7 +200,9 @@ fn static360_goal_tier_below_pv_above_killers_and_all_legal_once() {
         &AtomicBool::new(false),
         &mut history,
         |state, c| {
-            state.static_scratch = Some(StaticScratch::new().unwrap());
+            state.static_scratch = Some(super::super::StaticScratch::Coverage(
+                StaticScratch::new().unwrap(),
+            ));
             let legal = c.legal_ids();
             let other = *legal.iter().find(|&&a| a != 76).unwrap();
             state.killers[0] = [Some(other), None];

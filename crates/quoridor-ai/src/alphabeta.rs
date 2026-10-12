@@ -18,9 +18,28 @@ mod continuation_history;
 pub use continuation_history::OrderingProfile;
 pub use continuation_history::OrderingStats;
 use continuation_history::{ContinuationHistory, PlayedMove};
+#[cfg(feature = "research-diagnostics")]
+#[path = "cheap_static_ordering.rs"]
+mod cheap_static_ordering;
 #[path = "static_ordering.rs"]
 mod static_ordering;
-use static_ordering::StaticScratch;
+
+#[derive(Clone, Copy, PartialEq, Eq)]
+enum StaticMode {
+    Off,
+    Coverage,
+    #[cfg(feature = "research-diagnostics")]
+    CheapControl,
+    #[cfg(feature = "research-diagnostics")]
+    Cheap,
+}
+enum StaticScratch {
+    Coverage(static_ordering::StaticScratch),
+    #[cfg(feature = "research-diagnostics")]
+    CheapControl,
+    #[cfg(feature = "research-diagnostics")]
+    Cheap,
+}
 
 use crate::score::{ScoreDomain, TerminalOutcome};
 use web_time::Instant;
@@ -970,23 +989,38 @@ impl Search<'_> {
                 Some(EvalAccumulator::Float(a)) => a.cached_wall_distance_maps(c.position()),
                 _ => None,
             };
+            #[cfg(feature = "research-diagnostics")]
+            if self.ordering_diagnostics
+                && matches!(scratch, StaticScratch::Cheap | StaticScratch::CheapControl)
+            {
+                self.stats.ordering.available_goal_map_pairs += u64::from(cached.is_some());
+                self.stats.ordering.missing_goal_map_pairs += u64::from(cached.is_none());
+            }
             let cancel = self.cancel;
             let deadline = self.deadline;
-            Some(static_ordering::prepare(
-                c.position(),
-                cached,
-                &ids,
-                scratch,
-                || {
-                    if cancel.load(Ordering::Relaxed) {
-                        Err(Interrupted::Stop(StopReason::Cancelled))
-                    } else if deadline.is_some_and(|d| Instant::now() >= d) {
-                        Err(Interrupted::Stop(StopReason::TimeLimit))
-                    } else {
-                        Ok(())
-                    }
-                },
-            )?)
+            let control = || {
+                if cancel.load(Ordering::Relaxed) {
+                    Err(Interrupted::Stop(StopReason::Cancelled))
+                } else if deadline.is_some_and(|d| Instant::now() >= d) {
+                    Err(Interrupted::Stop(StopReason::TimeLimit))
+                } else {
+                    Ok(())
+                }
+            };
+            Some(match scratch {
+                StaticScratch::Coverage(scratch) => {
+                    static_ordering::prepare(c.position(), cached, &ids, scratch, control)?
+                }
+                #[cfg(feature = "research-diagnostics")]
+                StaticScratch::Cheap => {
+                    cheap_static_ordering::prepare(c.position(), cached, &ids, control)?
+                }
+                #[cfg(feature = "research-diagnostics")]
+                StaticScratch::CheapControl => {
+                    control()?;
+                    cheap_static_ordering::goals_only(c.position(), &ids)?
+                }
+            })
         } else {
             None
         };
@@ -1034,13 +1068,23 @@ impl Search<'_> {
         }
         if let Some(scores) = &static_scores {
             if self.ordering_diagnostics {
-                self.stats.ordering.static_parents += 1;
+                let coverage = matches!(
+                    self.static_scratch.as_ref(),
+                    Some(StaticScratch::Coverage(_))
+                );
+                self.stats.ordering.static_parents += u64::from(coverage);
                 self.stats.ordering.borrowed_goal_maps += u64::from(scores.borrowed_maps);
-                self.stats.ordering.computed_goal_map_pairs += u64::from(!scores.borrowed_maps);
+                self.stats.ordering.computed_goal_map_pairs +=
+                    u64::from(coverage && !scores.borrowed_maps);
+                #[cfg(feature = "research-diagnostics")]
+                if matches!(self.static_scratch.as_ref(), Some(StaticScratch::Cheap)) {
+                    self.stats.ordering.static_parents += 1;
+                    self.stats.ordering.cheap_static_parents += 1;
+                }
             }
             for &id in &ids {
                 combined[id as usize] += i32::from(scores.scores[id as usize]);
-                debug_assert!(combined[id as usize].abs() <= 115_328);
+                debug_assert!(combined[id as usize].abs() <= 124_992);
                 if self.ordering_diagnostics {
                     self.stats.ordering.nonzero_static_actions +=
                         u64::from(scores.scores[id as usize] != 0);
@@ -1089,15 +1133,29 @@ impl Search<'_> {
             });
             self.stats.ordering.history_changed_nodes += u64::from(changed);
             if static_scores.is_some() {
+                #[cfg(feature = "research-diagnostics")]
+                let common_goal_tier = matches!(
+                    self.static_scratch.as_ref(),
+                    Some(StaticScratch::Cheap | StaticScratch::CheapControl)
+                );
+                #[cfg(not(feature = "research-diagnostics"))]
+                let common_goal_tier = false;
                 let dynamic_priority = |id: u16| {
                     if Some(id) == pv {
                         0
-                    } else if Some(id) == killers[0] {
+                    } else if common_goal_tier
+                        && id < 81
+                        && static_scores
+                            .as_ref()
+                            .is_some_and(|scores| scores.goals[id as usize])
+                    {
                         1
+                    } else if Some(id) == killers[0] {
+                        if common_goal_tier { 2 } else { 1 }
                     } else if Some(id) == killers[1] {
-                        2
+                        if common_goal_tier { 3 } else { 2 }
                     } else {
-                        3
+                        if common_goal_tier { 4 } else { 3 }
                     }
                 };
                 let static_changed = ids.windows(2).any(|w| {
@@ -1545,7 +1603,7 @@ pub fn search_with_orderer(
             ScoreDomain::LEGACY,
             Some(&mut ordering),
             false,
-            true,
+            StaticMode::Coverage,
         ),
     )
 }
@@ -1565,10 +1623,16 @@ pub struct SearchSession {
     table: Table,
     score_domain: ScoreDomain,
     ordering: Option<ContinuationHistory>,
-    static_enabled: bool,
+    static_enabled: StaticMode,
     ordering_diagnostics: bool,
 }
 impl SearchSession {
+    /// Observation only; fixed376 enables its two scheduled calls per process.
+    /// Does not reset/age tables/history or select a scoring algorithm.
+    #[cfg(feature = "research-diagnostics")]
+    pub fn set_ordering_observation(&mut self, enabled: bool) {
+        self.ordering_diagnostics = enabled;
+    }
     /// An immutable evaluator is owned by the session, so unchanged namespace
     /// text cannot accidentally substitute different weights between moves.
     pub fn new(
@@ -1625,6 +1689,25 @@ impl SearchSession {
             profile == OrderingProfile::CombinedSignedStatic,
         )?;
         session.ordering_diagnostics = observe_ordering;
+        match profile {
+            OrderingProfile::CheapStaticControl => {
+                session.static_enabled = StaticMode::CheapControl
+            }
+            OrderingProfile::CombinedSignedCheapStatic => {
+                session.static_enabled = StaticMode::Cheap
+            }
+            _ => {}
+        }
+        if matches!(
+            profile,
+            OrderingProfile::CheapStaticControl | OrderingProfile::CombinedSignedCheapStatic
+        ) {
+            session.namespace.selectivity.push(':');
+            session
+                .namespace
+                .selectivity
+                .push_str(cheap_static_ordering::ALGORITHM);
+        }
         Ok(session)
     }
     fn create(
@@ -1651,7 +1734,11 @@ impl SearchSession {
             } else {
                 None
             },
-            static_enabled,
+            static_enabled: if static_enabled {
+                StaticMode::Coverage
+            } else {
+                StaticMode::Off
+            },
             ordering_diagnostics: false,
         })
     }
@@ -1752,7 +1839,7 @@ fn search_in_table(
         ScoreDomain,
         Option<&mut ContinuationHistory>,
         bool,
-        bool,
+        StaticMode,
     ),
 ) -> Result<SearchResult> {
     let (table, score_domain, ordering, ordering_diagnostics, static_enabled) = table_and_domain;
@@ -1819,10 +1906,15 @@ fn search_in_table(
             Vec::new()
         },
         ordering,
-        static_scratch: if static_enabled {
-            Some(StaticScratch::new()?)
-        } else {
-            None
+        static_scratch: match static_enabled {
+            StaticMode::Off => None,
+            StaticMode::Coverage => Some(StaticScratch::Coverage(
+                static_ordering::StaticScratch::new()?,
+            )),
+            #[cfg(feature = "research-diagnostics")]
+            StaticMode::CheapControl => Some(StaticScratch::CheapControl),
+            #[cfg(feature = "research-diagnostics")]
+            StaticMode::Cheap => Some(StaticScratch::Cheap),
         },
         ordering_diagnostics,
         #[cfg(feature = "research-diagnostics")]
@@ -2256,7 +2348,13 @@ mod persistent_tt_tests {
             &cancel,
             None,
             &mut |_| cancel.store(true, Ordering::Relaxed),
-            (&mut cancel_table, ScoreDomain::LEGACY, None, false, false),
+            (
+                &mut cancel_table,
+                ScoreDomain::LEGACY,
+                None,
+                false,
+                StaticMode::Off,
+            ),
         )
         .unwrap();
         charge(r.stats.nodes);
@@ -3223,11 +3321,11 @@ mod three_engine_374_factory_tests {
         )
         .unwrap();
         assert!(baseline.ordering.is_none());
-        assert!(!baseline.static_enabled);
+        assert!(matches!(baseline.static_enabled, StaticMode::Off));
         assert_eq!(baseline.score_domain, ScoreDomain::LEGACY);
         assert!(baseline.retained_memory_bytes().0 <= 1024 * 1024);
         let current = SearchSession::new(Arc::new(NoCalls), namespace, 4096).unwrap();
         assert!(current.ordering.is_some());
-        assert!(current.static_enabled);
+        assert!(matches!(current.static_enabled, StaticMode::Coverage));
     }
 }

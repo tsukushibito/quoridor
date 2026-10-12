@@ -1,0 +1,253 @@
+{
+  "schema": "quoridor.research.source-adoption.v1",
+  "issue": "quoridor-4lc.376",
+  "status": "REVIEWED_SOURCE_ADOPTED_PENDING_AFFECTED_SOFTWARE",
+  "scope": "Exact eleven reviewed maintained derivatives including R1 repaired caller; no BUILD/dependency inventory or software/image/numerical authority",
+  "review": {
+    "path": "/workspaces/quoridor/.artifacts/cheap-static-ordering376-review-v1/related-R1-v1/control.json",
+    "sha256": "f85b9d72725b268b8e30a78a0e2fed51e911986ef4f30ff59a6cfa7ff5c1ae28",
+    "bytes": 7051,
+    "mode": "0644"
+  },
+  "original_source_target": {
+    "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/final-source-v2/control.json",
+    "sha256": "80886d39d17a40337dcf9fcdd37b14471e7dee504489c36f96f3a43dddcab139",
+    "bytes": 7295,
+    "mode": "0644"
+  },
+  "related_target": {
+    "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/related-R1-v1/control.json",
+    "sha256": "3a6011d087e641b8762f18d8cabf3a1d8e7c3896fea0c05da13e7f2ddf34aece",
+    "bytes": 3973,
+    "mode": "0644"
+  },
+  "source_clear": true,
+  "blockers": 0,
+  "ordinary": 0,
+  "actual_related_reader_STOP_UTC": "2026-10-12T14:21:33.656903+00:00",
+  "actual_379_shared_reader_release_UTC": "2026-10-12T14:34:31.968343+00:00",
+  "applied_changes": [
+    {
+      "relative": "crates/quoridor-ai/src/alphabeta.rs",
+      "before": {
+        "path": "/workspaces/quoridor/crates/quoridor-ai/src/alphabeta.rs",
+        "sha256": "fd245ce39c74532f6d89aa999d7ffc095d5d04832f844dc56c10ddbfda7ec6c9",
+        "bytes": 117499,
+        "mode": "0644"
+      },
+      "after": {
+        "path": "/workspaces/quoridor/crates/quoridor-ai/src/alphabeta.rs",
+        "sha256": "06c52398ed48335978a6b80f0b606695e04820b861508d3d2e99697c3e137bba",
+        "bytes": 121716,
+        "mode": "0644"
+      },
+      "reviewed_owned_subject": {
+        "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/crates/quoridor-ai/src/alphabeta.rs",
+        "sha256": "06c52398ed48335978a6b80f0b606695e04820b861508d3d2e99697c3e137bba",
+        "bytes": 121716,
+        "mode": "0644"
+      }
+    },
+    {
+      "relative": "crates/quoridor-ai/src/continuation_history.rs",
+      "before": {
+        "path": "/workspaces/quoridor/crates/quoridor-ai/src/continuation_history.rs",
+        "sha256": "f20dc7d18c3cffb5ab034049cb25883b7b762167bd9408e3234d88a82a58055e",
+        "bytes": 7460,
+        "mode": "0644"
+      },
+      "after": {
+        "path": "/workspaces/quoridor/crates/quoridor-ai/src/continuation_history.rs",
+        "sha256": "a46329ef53dbd212a12205d8cc57d11ec51fff1847d061aac533eb61e90538ea",
+        "bytes": 7762,
+        "mode": "0644"
+      },
+      "reviewed_owned_subject": {
+        "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/crates/quoridor-ai/src/continuation_history.rs",
+        "sha256": "a46329ef53dbd212a12205d8cc57d11ec51fff1847d061aac533eb61e90538ea",
+        "bytes": 7762,
+        "mode": "0644"
+      }
+    },
+    {
+      "relative": "crates/quoridor-runner/src/ordering_assessment.rs",
+      "before": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/ordering_assessment.rs",
+        "sha256": "7a9bc997449c6e61829bc04e00038c16c6559806fff0b03061301b436c7158e8",
+        "bytes": 63816,
+        "mode": "0644"
+      },
+      "after": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/ordering_assessment.rs",
+        "sha256": "b36ae96b4c61363990e547015fd6c3e099d7a1f1c112faf2e27cc7d0c323b713",
+        "bytes": 76616,
+        "mode": "0644"
+      },
+      "reviewed_owned_subject": {
+        "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/crates/quoridor-runner/src/ordering_assessment.rs",
+        "sha256": "b36ae96b4c61363990e547015fd6c3e099d7a1f1c112faf2e27cc7d0c323b713",
+        "bytes": 76616,
+        "mode": "0644"
+      }
+    },
+    {
+      "relative": "crates/quoridor-runner/src/research_manifest.rs",
+      "before": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/research_manifest.rs",
+        "sha256": "9258c0e06879e0356091bbd4465858690be48c494a488c12c0e3f56ba81ad400",
+        "bytes": 42769,
+        "mode": "0644"
+      },
+      "after": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/research_manifest.rs",
+        "sha256": "e4948db90468809c17227acee5a1a623300864a18cd95b659c51c8b2be67479e",
+        "bytes": 47305,
+        "mode": "0644"
+      },
+      "reviewed_owned_subject": {
+        "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/crates/quoridor-runner/src/research_manifest.rs",
+        "sha256": "e4948db90468809c17227acee5a1a623300864a18cd95b659c51c8b2be67479e",
+        "bytes": 47305,
+        "mode": "0644"
+      }
+    },
+    {
+      "relative": "crates/quoridor-runner/src/main.rs",
+      "before": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/main.rs",
+        "sha256": "d978095dd44f35d467bbb2f7f0ec6c2b8aa41fe86059e919f1ab3ba7bfb3066e",
+        "bytes": 21937,
+        "mode": "0644"
+      },
+      "after": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/main.rs",
+        "sha256": "2fc09982f73bc71c22b1022fe57b64138a73ba55343c93768dfa8832b890de36",
+        "bytes": 22489,
+        "mode": "0644"
+      },
+      "reviewed_owned_subject": {
+        "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/crates/quoridor-runner/src/main.rs",
+        "sha256": "2fc09982f73bc71c22b1022fe57b64138a73ba55343c93768dfa8832b890de36",
+        "bytes": 22489,
+        "mode": "0644"
+      }
+    },
+    {
+      "relative": "scripts/dev/research-lifecycle.py",
+      "before": {
+        "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+        "sha256": "2e2c348ef830f5ee85a73b0cf168fc8fec34b540c4a9b890ed286aa596d2f8d7",
+        "bytes": 204481,
+        "mode": "0644"
+      },
+      "after": {
+        "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+        "sha256": "b647307b9e6471ce52d291957a09ed3defadbc6d97e07783761b45e1e2b1dbb8",
+        "bytes": 209522,
+        "mode": "0644"
+      },
+      "reviewed_owned_subject": {
+        "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/scripts/dev/research-lifecycle.py",
+        "sha256": "b647307b9e6471ce52d291957a09ed3defadbc6d97e07783761b45e1e2b1dbb8",
+        "bytes": 209522,
+        "mode": "0644"
+      }
+    },
+    {
+      "relative": "crates/quoridor-ai/src/static360_tests.rs",
+      "before": {
+        "path": "/workspaces/quoridor/crates/quoridor-ai/src/static360_tests.rs",
+        "sha256": "2957070972a771b07824cc5227d68e37bd9b6b60dace00c13846f7529c453545",
+        "bytes": 11038,
+        "mode": "0644"
+      },
+      "after": {
+        "path": "/workspaces/quoridor/crates/quoridor-ai/src/static360_tests.rs",
+        "sha256": "da259cafef894d7abf386cab70c1bb60751e0bab9cf580ffbf8c4ad7456950e1",
+        "bytes": 11108,
+        "mode": "0644"
+      },
+      "reviewed_owned_subject": {
+        "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/crates/quoridor-ai/src/static360_tests.rs",
+        "sha256": "da259cafef894d7abf386cab70c1bb60751e0bab9cf580ffbf8c4ad7456950e1",
+        "bytes": 11108,
+        "mode": "0644"
+      }
+    },
+    {
+      "relative": "crates/quoridor-ai/src/cheap_static_ordering.rs",
+      "before": null,
+      "after": {
+        "path": "/workspaces/quoridor/crates/quoridor-ai/src/cheap_static_ordering.rs",
+        "sha256": "ebb3210dfaa7553ef9a177b3ffd91e754aeae09a4e927d0c4fe755e4b370254b",
+        "bytes": 7469,
+        "mode": "0644"
+      },
+      "reviewed_owned_subject": {
+        "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/crates/quoridor-ai/src/cheap_static_ordering.rs",
+        "sha256": "ebb3210dfaa7553ef9a177b3ffd91e754aeae09a4e927d0c4fe755e4b370254b",
+        "bytes": 7469,
+        "mode": "0644"
+      }
+    },
+    {
+      "relative": "crates/quoridor-ai/src/cheap376_tests.rs",
+      "before": null,
+      "after": {
+        "path": "/workspaces/quoridor/crates/quoridor-ai/src/cheap376_tests.rs",
+        "sha256": "c2868b57874e105198a286c61e90d7e4dc0bac983247115308594fd40def9c0d",
+        "bytes": 14136,
+        "mode": "0644"
+      },
+      "reviewed_owned_subject": {
+        "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/crates/quoridor-ai/src/cheap376_tests.rs",
+        "sha256": "c2868b57874e105198a286c61e90d7e4dc0bac983247115308594fd40def9c0d",
+        "bytes": 14136,
+        "mode": "0644"
+      }
+    },
+    {
+      "relative": "crates/quoridor-runner/src/ordering376_tests.rs",
+      "before": null,
+      "after": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/ordering376_tests.rs",
+        "sha256": "7eea44acbcaf36699597a93a27640d46ae4e1db8ee4be03ddec1486a91e82ec7",
+        "bytes": 9217,
+        "mode": "0644"
+      },
+      "reviewed_owned_subject": {
+        "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/crates/quoridor-runner/src/ordering376_tests.rs",
+        "sha256": "7eea44acbcaf36699597a93a27640d46ae4e1db8ee4be03ddec1486a91e82ec7",
+        "bytes": 9217,
+        "mode": "0644"
+      }
+    },
+    {
+      "relative": "crates/quoridor-runner/src/ordering_assessment_tests.rs",
+      "before": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/ordering_assessment_tests.rs",
+        "sha256": "80254ac233e50d3ca8f2247fdecf9fe787d03db9928ffddfbd2146c4600ddf19",
+        "bytes": 12004,
+        "mode": "0644"
+      },
+      "after": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/ordering_assessment_tests.rs",
+        "sha256": "9bde6e26c467c106300adaf4454d84fc4b4250971fa6f1c914f0ab3375a5c4ff",
+        "bytes": 12010,
+        "mode": "0644"
+      },
+      "reviewed_owned_subject": {
+        "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/crates/quoridor-runner/src/ordering_assessment_tests.rs",
+        "sha256": "9bde6e26c467c106300adaf4454d84fc4b4250971fa6f1c914f0ab3375a5c4ff",
+        "bytes": 12010,
+        "mode": "0644"
+      }
+    }
+  ],
+  "existing_nine_definitions": "UNBUILT_UNTYPED_UNRUN",
+  "fixed_method": "Original80/72plain8diagnostic/56sessions/ABBA/256M/singleimage; no method/count/default/NNUE/evaluator change beyond selected ordering algorithm",
+  "source_started_UTC": "2026-10-12T14:36:41.270622+00:00",
+  "preserved": "Standalone374 OFF factory/currentdefault Coverage protected; old808/bc7c negative/original numerical370ca/ef4 and all failed/raw/masks/UNKNOWN held",
+  "next_owning_boundary": "379 simplifies overlapping BUILD consumers on exact adopted current bytes; normal current target/private custody/fresh guards and genuinely affected checks remain. No parent/admin/recipientACK gate",
+  "resources": "Existing376Root8MiB; source/adoption/format/Git <=2MiB, no new allocation/refund/borrow; no build target/private growth"
+}
