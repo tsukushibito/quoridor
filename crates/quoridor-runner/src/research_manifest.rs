@@ -257,6 +257,140 @@ fn approved_launch_plan(
 pub(crate) fn approved_arena_plan(bound: &BoundControl, e: &Experiment) -> Result<FileRef> {
     launch_plan(bound, e)
 }
+
+#[cfg(feature = "ordering-assessment")]
+fn retained_ordering_source(
+    current: &Value,
+    original: &Value,
+    adoption: &Value,
+    qualification: &FileRef,
+    original_ref: &FileRef,
+) -> Result<()> {
+    // One source-adoption decision records the reviewed wrapper-only change.
+    // Original numerical evidence still describes the ORIGINAL artifact and source.
+    let reuse = &adoption["retained_ordering_numerical"];
+    let changed = reuse["changed_compiled_sources"]
+        .as_object()
+        .ok_or("ordering source adoption lacks exact changed FileRefs")?;
+    let wrappers = [
+        "runner/ordering_assessment.rs",
+        "runner/research_manifest.rs",
+    ];
+    if adoption["schema"] != "quoridor.research.source-adoption.v1"
+        || adoption["status"] != "ACCEPTED"
+        || adoption["source"] != current["source"]
+        || reuse["scope"] != "ordering20-input-and-head-v1"
+        || reuse["qualification"] != serde_json::to_value(qualification)?
+        || reuse["build_manifest"] != serde_json::to_value(original_ref)?
+        || changed.len() != wrappers.len()
+        || !wrappers.iter().all(|k| changed.contains_key(*k))
+        || !build_status(original)
+        || original["source"]["workspace"] != current["source"]["workspace"]
+        || original["tools"] != current["tools"]
+    {
+        return Err("ordering retained numerical source adoption/subject mismatch".into());
+    }
+    for field in ["manifest", "lock", "cargo_configs"] {
+        if original["source"][field] != current["source"][field] {
+            return Err("ordering native build input changed".into());
+        }
+    }
+    let release_commands = |subject: &Value| -> Result<Vec<Value>> {
+        Ok(subject["checks"]
+            .as_array()
+            .ok_or("actual build commands")?
+            .iter()
+            .filter(|c| c["role"] == "build")
+            .map(|c| c["argv"].clone())
+            .collect())
+    };
+    if release_commands(original)? != release_commands(current)? {
+        return Err("ordering actual release compiler flags changed".into());
+    }
+    let mut old_env = original["env"]
+        .as_object()
+        .ok_or("original build environment")?
+        .clone();
+    let mut new_env = current["env"]
+        .as_object()
+        .ok_or("current build environment")?
+        .clone();
+    old_env.remove("TMPDIR");
+    new_env.remove("TMPDIR");
+    if old_env != new_env {
+        return Err("ordering compiler environment changed".into());
+    }
+    for key in wrappers {
+        let pair = &changed[key];
+        if pair["before"] != original["source"]["compiled_sources"][key]
+            || pair["after"] != current["source"]["compiled_sources"][key]
+            || pair["before"]["path"] != pair["after"]["path"]
+            || pair["before"]["sha256"] == pair["after"]["sha256"]
+        {
+            return Err("ordering wrapper before/after source identity mismatch".into());
+        }
+    }
+    for field in ["compiled_sources", "generator_compiled_sources"] {
+        let old = original[field]
+            .as_object()
+            .ok_or("original full source map")?;
+        let new = current[field]
+            .as_object()
+            .ok_or("current full source map")?;
+        if old.len() != new.len() || old.keys().ne(new.keys()) {
+            return Err("ordering full source domain changed".into());
+        }
+        for (key, old_sha) in old {
+            let new_sha = &new[key];
+            if original["source"][field][key]["sha256"] != *old_sha
+                || current["source"][field][key]["sha256"] != *new_sha
+            {
+                return Err("ordering source projection differs from build provenance".into());
+            }
+            if old_sha != new_sha {
+                let pair = changed
+                    .get(key)
+                    .ok_or("ordering underlying numerical source changed")?;
+                if pair["before"]["sha256"] != *old_sha || pair["after"]["sha256"] != *new_sha {
+                    return Err("ordering source map differs from adopted wrapper pair".into());
+                }
+            }
+        }
+    }
+    // Retain all crate/toolchain witnesses, including members outside the embedded map.
+    let native = |source: &Value| -> Result<BTreeMap<PathBuf, Value>> {
+        let workspace = PathBuf::from(source["workspace"].as_str().ok_or("source workspace")?);
+        let files = source["files"].as_array().ok_or("source files")?;
+        let mut selected = BTreeMap::new();
+        for file in files {
+            let path = PathBuf::from(file["path"].as_str().ok_or("source FileRef path")?);
+            if (path.starts_with(workspace.join("crates"))
+                || path == workspace.join("rust-toolchain.toml"))
+                && selected.insert(path, file.clone()).is_some()
+            {
+                return Err("duplicate numerical native source witness".into());
+            }
+        }
+        Ok(selected)
+    };
+    let old_files = native(&original["source"])?;
+    let new_files = native(&current["source"])?;
+    if old_files.keys().ne(new_files.keys()) {
+        return Err("ordering native source membership changed".into());
+    }
+    for (path, old) in old_files {
+        let new = &new_files[&path];
+        if old != *new
+            && !changed
+                .values()
+                .any(|p| p["before"] == old && p["after"] == *new)
+        {
+            return Err("ordering native witness outside reviewed wrappers changed".into());
+        }
+    }
+    Ok(())
+}
+
 fn launch_plan(bound: &BoundControl, e: &Experiment) -> Result<FileRef> {
     let path = PathBuf::from(std::env::var("QUORIDOR_LIFECYCLE_INTENT_PATH")?);
     let sha256 = std::env::var("QUORIDOR_LIFECYCLE_INTENT")?;
@@ -383,9 +517,12 @@ fn load_checked(
         .as_ref()
         .ok_or("research numerical qualification required")?
         .read()?;
+    #[cfg(not(feature = "ordering-assessment"))]
+    let numerical_build = build.clone();
     #[cfg(feature = "ordering-assessment")]
-    let q = {
+    let (q, numerical_build) = {
         let mut q = q;
+        let mut numerical_build = build.clone();
         if e.argv.get(1).is_some_and(|a| a == "ordering-assess") {
             let reference = e.numerical_qualification.as_ref().unwrap();
             if reference
@@ -406,7 +543,6 @@ fn load_checked(
             let origin: FileRef = serde_json::from_value(q["experiment"].clone())?;
             let qualified: Experiment = origin.read()?;
             if !crate::ordering_assessment::qualification_shape(&qualified)
-                || qualified.build_manifest != e.build_manifest
                 || qualified.config != e.config
                 || qualified.schedule != e.schedule
                 || qualified.inputs != e.inputs
@@ -416,15 +552,53 @@ fn load_checked(
             {
                 return Err("360 qualified experiment/input/model/library drift".into());
             }
+            if qualified.build_manifest != e.build_manifest {
+                if qualified
+                    .build_manifest
+                    .path
+                    .file_name()
+                    .is_none_or(|n| n != "manifest.json")
+                    || qualified
+                        .build_manifest
+                        .path
+                        .with_file_name("INCOMPLETE")
+                        .exists()
+                {
+                    return Err("ordering original build is provisional".into());
+                }
+                let original: Value = qualified.build_manifest.read()?;
+                let adoption_ref: FileRef =
+                    serde_json::from_value(build["source_adoption"].clone())?;
+                let workspace = build["source"]["workspace"]
+                    .as_str()
+                    .ok_or("source workspace")?;
+                if !adoption_ref
+                    .path
+                    .starts_with(PathBuf::from(workspace).join("research-data"))
+                {
+                    return Err(
+                        "ordering reuse must belong to normal integration source adoption".into(),
+                    );
+                }
+                let adoption: Value = adoption_ref.read()?;
+                retained_ordering_source(
+                    &build,
+                    &original,
+                    &adoption,
+                    reference,
+                    &qualified.build_manifest,
+                )?;
+                numerical_build = original;
+            }
             q = q["data"]["numerical_qualification"].clone();
         }
-        q
+        (q, numerical_build)
     };
     if q["schema"] != "quoridor.research.numerical-qualification.v1"
         || q["status"] != "PASS"
         || q["phase"] != phase
-        || q["artifact_sha256"] != artifact.sha256
-        || q["compiled_sources_sha256"] != arena::json_digest(&sources())?
+        || q["artifact_sha256"] != numerical_build["artifact"]["sha256"]
+        || q["compiled_sources_sha256"] != arena::json_digest(&numerical_build["compiled_sources"])?
         || q["config_sha256"] != e.config.sha256
         || q["schedule_sha256"] != e.schedule.sha256
         || q["input_sha256"] != json!(e.inputs.iter().map(|r| &r.sha256).collect::<Vec<_>>())
@@ -453,12 +627,102 @@ fn load_checked(
         || q["distance_units"] != e.distance_units
         || q["value_perspective"] != e.value_perspective
         || q["remaining"] != json!([])
-        || (matches!(phase, "arena" | "corpus") && q["canonical_plan_sha256"] != approved.sha256)
+        || ((matches!(phase, "arena" | "corpus")
+            || e.argv.get(1).is_some_and(|a| a == "ordering-assess"))
+            && q["canonical_plan_sha256"] != approved.sha256)
     {
         return Err("research current numerical/history/model/input qualification required".into());
     }
     Ok((e, q))
 }
+#[cfg(all(test, feature = "ordering-assessment"))]
+mod ordering368_source_tests {
+    use super::*;
+
+    #[test]
+    fn ordering368_reuse_keeps_original_subject_and_rejects_unreviewed_source_or_authority() {
+        // Synthetic structural source/adoption facts, never model/numerical evidence.
+        let file = |name: &str, sha: &str| json!({"path":format!("/synthetic368/crates/{name}"),"sha256":sha.repeat(64),"bytes":1,"mode":"0644"});
+        let a = "runner/ordering_assessment.rs";
+        let b = "runner/research_manifest.rs";
+        let c = "nnue/residual.rs";
+        let old_refs = json!({a:file(a,"1"),b:file(b,"2"),c:file(c,"3")});
+        let new_refs = json!({a:file(a,"4"),b:file(b,"5"),c:file(c,"3")});
+        let make = |refs: Value, artifact: &str| {
+            let map = refs
+                .as_object()
+                .unwrap()
+                .iter()
+                .map(|(k, r)| (k.clone(), r["sha256"].clone()))
+                .collect::<serde_json::Map<_, _>>();
+            json!({"schema":"quoridor.research.build-manifest.v1","status":"PASS","cleanup_complete":true,"remaining":[],
+                "checks":(["test","lint","build","bindings"].map(|r|json!({"role":r,"argv":["/synthetic/cargo",r],"guardian_return":{"exit_code":0,"cleanup_complete":true}}))),
+                "artifact":{"sha256":artifact.repeat(64)},"compiled_sources":map,"generator_compiled_sources":map,
+                "source":{"workspace":"/synthetic368","manifest":file("Cargo.toml","6"),"lock":file("Cargo.lock","7"),"cargo_configs":[],
+                    "compiled_sources":refs,"generator_compiled_sources":refs,"files":refs.as_object().unwrap().values().collect::<Vec<_>>()},
+                "tools":{"fixture":"UNCHANGED"},"env":{"RUSTFLAGS":"UNCHANGED","TMPDIR":artifact}})
+        };
+        let original = make(old_refs, "8");
+        let current = make(new_refs, "9");
+        let reference = |label: &str| FileRef {
+            path: format!("/synthetic368/{label}/manifest.json").into(),
+            sha256: "a".repeat(64),
+            bytes: 1,
+            mode: "0644".into(),
+        };
+        let qualification = reference("qualification");
+        let original_ref = reference("original-build");
+        let adoption = json!({"schema":"quoridor.research.source-adoption.v1","status":"ACCEPTED","source":current["source"],
+            "retained_ordering_numerical":{"scope":"ordering20-input-and-head-v1","qualification":qualification,"build_manifest":original_ref,
+                "changed_compiled_sources":{a:{"before":original["source"]["compiled_sources"][a],"after":current["source"]["compiled_sources"][a]},
+                    b:{"before":original["source"]["compiled_sources"][b],"after":current["source"]["compiled_sources"][b]}}}});
+        retained_ordering_source(
+            &current,
+            &original,
+            &adoption,
+            &qualification,
+            &original_ref,
+        )
+        .unwrap();
+        assert_ne!(original["artifact"], current["artifact"]);
+        for key in [
+            "scope",
+            "qualification",
+            "build_manifest",
+            "changed_compiled_sources",
+        ] {
+            let mut bad = adoption.clone();
+            bad["retained_ordering_numerical"]
+                .as_object_mut()
+                .unwrap()
+                .remove(key);
+            assert!(
+                retained_ordering_source(&current, &original, &bad, &qualification, &original_ref)
+                    .is_err()
+            );
+        }
+        let mut bad = adoption.clone();
+        bad["retained_ordering_numerical"]["changed_compiled_sources"][a]["after"]["sha256"] =
+            json!("f".repeat(64));
+        assert!(
+            retained_ordering_source(&current, &original, &bad, &qualification, &original_ref)
+                .is_err()
+        );
+        let mut drift = current.clone();
+        drift["compiled_sources"][c] = json!("f".repeat(64));
+        assert!(
+            retained_ordering_source(&drift, &original, &adoption, &qualification, &original_ref)
+                .is_err()
+        );
+        let mut bad = adoption.clone();
+        bad["status"] = json!("PENDING");
+        assert!(
+            retained_ordering_source(&current, &original, &bad, &qualification, &original_ref)
+                .is_err()
+        );
+    }
+}
+
 #[cfg(test)]
 mod common_corpus_phase_tests {
     use super::*;

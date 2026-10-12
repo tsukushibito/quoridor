@@ -365,7 +365,7 @@ fn fact(e: &dyn std::fmt::Display) -> Value {
     }
     json!({"text":&raw[..end],"full_sha256":arena::digest(raw.as_bytes()),"full_bytes":raw.len(),"truncated":end!=raw.len()})
 }
-fn output_correspondence(p: &Plan) -> Result<()> {
+fn output_correspondence() -> Result<PathBuf> {
     // load() already validates this same SHA-bound originating guardian intent.
     // Read its priced output root, without a second lock or admission path.
     let intent: Value = BoundControl {
@@ -373,11 +373,28 @@ fn output_correspondence(p: &Plan) -> Result<()> {
         sha256: std::env::var("QUORIDOR_LIFECYCLE_INTENT")?,
     }
     .read()?;
-    let expected: PathBuf = serde_json::from_value(intent["data_root"].clone())?;
-    if p.output != expected {
-        return Err("360 same priced lifecycle data root required".into());
+    owned_output(&intent)
+}
+fn owned_output(intent: &Value) -> Result<PathBuf> {
+    let root: PathBuf = serde_json::from_value(intent["data_root"].clone())?;
+    let owner: PathBuf = serde_json::from_value(intent["owner"].clone())?;
+    if intent["schema"] != "quoridor.research.lifecycle-intent.v1"
+        || intent["kind"] != "run"
+        || !owner.is_absolute()
+        || !owner.is_dir()
+        || owner.canonicalize()? != owner
+        || !root.is_absolute()
+        || root == owner
+        || !root.starts_with(&owner)
+        || root.exists()
+        || fs::symlink_metadata(&root).is_ok()
+        || root
+            .parent()
+            .is_none_or(|p| p.canonicalize().ok().as_deref() != Some(p))
+    {
+        return Err("ordering fresh output must belong to admitted lifecycle owner".into());
     }
-    Ok(())
+    Ok(root)
 }
 fn observed(r: &SearchResult) -> Value {
     let s = &r.stats;
@@ -837,13 +854,9 @@ fn qualification_records(
 /// Exactly20 original contexts; no Search/session, replacement, child move, teacher or fit.
 pub fn qualify(bound: &BoundControl) -> Result<Value> {
     let (e, _) = research_manifest::load(bound, "ordering-qualification")?;
-    let (mut p, _, roots) = prepare_inputs(&e)?;
-    // A separate finite output lifetime; config4a1bb remains the original assessment config.
-    p.output = p
-        .output
-        .with_file_name("assessment-input-qualification-v1-data");
-    output_correspondence(&p)?;
-    let mut output = Output::new(&p.output);
+    let (_, _, roots) = prepare_inputs(&e)?;
+    let output_root = output_correspondence()?;
+    let mut output = Output::new(&output_root);
     let mut secondary = Vec::new();
     let mut records = QualificationRecords {
         rows: Vec::with_capacity(20),
@@ -881,11 +894,11 @@ pub fn qualify(bound: &BoundControl) -> Result<Value> {
 pub fn run(bound: &BoundControl) -> Result<Value> {
     let whole = Instant::now();
     let (e, _) = research_manifest::load(bound, "compare")?;
-    let (p, requests, roots) = prepare_inputs(&e)?;
-    output_correspondence(&p)?;
+    let (_, requests, roots) = prepare_inputs(&e)?;
+    let output_root = output_correspondence()?;
     let inputs_seconds = whole.elapsed().as_secs_f64();
     let header = json!({"schema":"quoridor.continuation360.intent.v1","experiment_sha256":bound.sha256,"config_sha256":e.config.sha256,"schedule_sha256":e.schedule.sha256,"build_manifest":e.build_manifest,"compiled_sources":research_manifest::sources(),"model":e.models[0],"input_refs":e.inputs,"requests":requests,"planned":360,"plain":240,"diagnostic":120,"no_refill":true,"pre_root_continuation":"absent; actual speculative LIFO only"});
-    let mut output = Output::new(&p.output);
+    let mut output = Output::new(&output_root);
     let mut count = Census::default();
     let mut pending = Value::Null;
     let mut secondary = Vec::new();
@@ -1044,6 +1057,56 @@ pub fn run(bound: &BoundControl) -> Result<Value> {
 #[cfg(test)]
 #[path = "ordering_assessment_tests.rs"]
 mod tests;
+
+#[cfg(test)]
+mod ordering368_output_tests {
+    use super::*;
+
+    #[test]
+    fn ordering368_output_uses_fresh_admitted_owner_not_frozen_config_destination() {
+        let owner = std::env::temp_dir().join(format!("ordering368-output-{}", std::process::id()));
+        fs::create_dir(&owner).unwrap();
+        let owner = owner.canonicalize().unwrap();
+        let old = owner.join("old360");
+        fs::create_dir(&old).unwrap();
+        fs::write(old.join("evidence"), b"immutable old failure").unwrap();
+        let fresh = owner.join("new368");
+        let intent = json!({"schema":"quoridor.research.lifecycle-intent.v1","kind":"run","owner":owner,"data_root":fresh});
+        let selected = owned_output(&intent).unwrap();
+        assert_eq!(selected, fresh);
+        let mut output = Output::new(&selected);
+        output.setup(&json!({"planned":360})).unwrap();
+        close_file(output.rows.take().unwrap()).unwrap();
+        close_file(output.costs.take().unwrap()).unwrap();
+        assert_eq!(
+            fs::read(old.join("evidence")).unwrap(),
+            b"immutable old failure"
+        );
+        for root in [
+            old,
+            owner.clone(),
+            owner.join("missing-parent/data"),
+            owner.join("../escape"),
+        ] {
+            let mut bad = intent.clone();
+            bad["data_root"] = json!(root);
+            assert!(owned_output(&bad).is_err());
+        }
+        #[cfg(unix)]
+        {
+            let dangling = owner.join("dangling");
+            std::os::unix::fs::symlink(owner.join("absent"), &dangling).unwrap();
+            let mut bad = intent.clone();
+            bad["data_root"] = json!(dangling);
+            assert!(owned_output(&bad).is_err());
+        }
+        let mut bad = intent;
+        bad["data_root"] = json!(owner.join("other-fresh"));
+        bad["kind"] = json!("build");
+        assert!(owned_output(&bad).is_err());
+        fs::remove_dir_all(owner).unwrap();
+    }
+}
 
 #[cfg(test)]
 mod input_qualification_tests {

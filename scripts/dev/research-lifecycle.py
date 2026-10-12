@@ -701,8 +701,103 @@ def finalize_numerical_claim(candidate):
             claim["status"] = "UNKNOWN"
 
 
-def numerical_check(experiment, manifest):
+def retained_ordering_source(current, original, adoption, qualification, original_ref):
+    """One reviewed Source adoption; never rewrite the original numerical subject."""
+    reuse = adoption["retained_ordering_numerical"]
+    changed = reuse["changed_compiled_sources"]
+    wrappers = {"runner/ordering_assessment.rs", "runner/research_manifest.rs"}
+    require(
+        adoption["schema"] == "quoridor.research.source-adoption.v1"
+        and adoption["status"] == "ACCEPTED"
+        and adoption["source"] == current["source"]
+        and reuse["scope"] == "ordering20-input-and-head-v1"
+        and reuse["qualification"] == qualification
+        and reuse["build_manifest"] == original_ref
+        and isinstance(changed, dict)
+        and set(changed) == wrappers
+        and original["schema"] == BUILD_SCHEMA
+        and original["status"] == "PASS"
+        and original["cleanup_complete"] is True
+        and original["remaining"] == []
+        and original["source"]["workspace"] == current["source"]["workspace"]
+        and original["tools"] == current["tools"],
+        "ordering retained numerical source adoption/subject mismatch",
+    )
+    require(
+        {"test", "lint", "build", "bindings"}
+        <= {
+            c["role"]
+            for c in original["checks"]
+            if c["guardian_return"]["exit_code"] == 0
+            and c["guardian_return"]["cleanup_complete"] is True
+        },
+        "ordering original build software incomplete",
+    )
+    require(
+        [c["argv"] for c in original["checks"] if c["role"] == "build"]
+        == [c["argv"] for c in current["checks"] if c["role"] == "build"],
+        "ordering actual release compiler flags changed",
+    )
+    for field in ("manifest", "lock", "cargo_configs"):
+        require(
+            original["source"][field] == current["source"][field],
+            "ordering native build input changed",
+        )
+    require(
+        {k: v for k, v in original["env"].items() if k != "TMPDIR"}
+        == {k: v for k, v in current["env"].items() if k != "TMPDIR"},
+        "ordering compiler environment changed",
+    )
+    for key, pair in changed.items():
+        require(
+            pair["before"] == original["source"]["compiled_sources"][key]
+            and pair["after"] == current["source"]["compiled_sources"][key]
+            and pair["before"]["path"] == pair["after"]["path"]
+            and pair["before"]["sha256"] != pair["after"]["sha256"],
+            "ordering wrapper before/after source identity mismatch",
+        )
+    for field in ("compiled_sources", "generator_compiled_sources"):
+        old, new = original[field], current[field]
+        require(set(old) == set(new), "ordering full source domain changed")
+        for key, old_sha in old.items():
+            new_sha = new[key]
+            require(
+                original["source"][field][key]["sha256"] == old_sha
+                and current["source"][field][key]["sha256"] == new_sha,
+                "ordering source projection differs from build provenance",
+            )
+            if old_sha != new_sha:
+                require(
+                    key in changed
+                    and changed[key]["before"]["sha256"] == old_sha
+                    and changed[key]["after"]["sha256"] == new_sha,
+                    "ordering underlying numerical source changed",
+                )
+
+    def native(source):
+        workspace = Path(source["workspace"])
+        files = [
+            r
+            for r in source["files"]
+            if Path(r["path"]).is_relative_to(workspace / "crates")
+            or Path(r["path"]) == workspace / "rust-toolchain.toml"
+        ]
+        require(len({r["path"] for r in files}) == len(files), "duplicate native witness")
+        return {r["path"]: r for r in files}
+
+    old_files, new_files = native(original["source"]), native(current["source"])
+    require(set(old_files) == set(new_files), "ordering native source membership changed")
+    for path, old in old_files.items():
+        new = new_files[path]
+        require(
+            old == new or any(p["before"] == old and p["after"] == new for p in changed.values()),
+            "ordering native witness outside reviewed wrappers changed",
+        )
+
+
+def numerical_check(experiment, manifest, *, refs=None):
     q = document(experiment["numerical_qualification"])
+    numerical_manifest = manifest
     if experiment["argv"][1] == "ordering-assess":
         reference = experiment["numerical_qualification"]
         require(
@@ -726,7 +821,6 @@ def numerical_check(experiment, manifest):
             all(
                 qualified[k] == experiment[k]
                 for k in (
-                    "build_manifest",
                     "config",
                     "schedule",
                     "inputs",
@@ -737,8 +831,28 @@ def numerical_check(experiment, manifest):
             ),
             "360 qualified source/model/input/library drift",
         )
+        if qualified["build_manifest"] != experiment["build_manifest"]:
+            original_ref = qualified["build_manifest"]
+            require(
+                Path(original_ref["path"]).name == "manifest.json"
+                and not Path(original_ref["path"]).with_name("INCOMPLETE").exists(),
+                "ordering original build is provisional",
+            )
+            original = document(original_ref)
+            adoption_ref = manifest["source_adoption"]
+            require(
+                Path(adoption_ref["path"]).is_relative_to(
+                    Path(manifest["source"]["workspace"]) / "research-data"
+                ),
+                "ordering reuse belongs to normal integration source adoption",
+            )
+            adoption = document(adoption_ref)
+            retained_ordering_source(manifest, original, adoption, reference, original_ref)
+            numerical_manifest = original
+            if refs is not None:
+                refs.extend([q["experiment"], original_ref, adoption_ref])
         q = q["data"]["numerical_qualification"]
-    expected = numerical_fields(experiment, manifest)
+    expected = numerical_fields(experiment, numerical_manifest)
     require(
         all(q.get(k) == v for k, v in expected.items()),
         "current numerical/source/model/input correspondence",
@@ -1321,7 +1435,7 @@ def experiment_check(spec):
     approved = approved_plan(spec, experiment)
     refs.append(spec["approved_plan"])
     if experiment["phase"] == "compare" and experiment["argv"][1] == "ordering-assess":
-        numerical_check(experiment, manifest)
+        numerical_check(experiment, manifest, refs=refs)
     if experiment["phase"] in {"corpus", "fit", "software-qualification"}:
         common_pilot_check(spec, experiment, manifest, approved)
     if experiment["phase"] == "arena":
