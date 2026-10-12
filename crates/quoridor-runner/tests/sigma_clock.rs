@@ -66,16 +66,20 @@ fn config() -> Config {
     }
     c.inference = Some(
         serde_json::from_value(serde_json::json!({"backend":"ort","model":"unused",
-        "model_sha":"0".repeat(64),"library":"unused"}))
+        "model_sha":"0".repeat(64),"library":std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/sigma-clock-config.json")}))
         .unwrap(),
     );
-    let sources = quoridor_runner::compiled_source_bindings();
     let a = c.arena.as_mut().unwrap();
     a.book.openings[0].prefix.clear();
     a.book.openings[0].id = "synthetic-initial-boundary".into();
     a.comparison = quoridor_runner::arena::Comparison::WholeWallTime;
     a.evaluator_sha256 = vec!["0".repeat(64); 2];
-    a.search_source_sha256 = vec![sources["ai/sigma_mcts.rs"].clone(); 2];
+    a.search_artifact_sha256 = vec![
+        quoridor_runner::arena::digest(
+            &std::fs::read(std::env::current_exe().unwrap()).unwrap()
+        );
+        2
+    ];
     c
 }
 fn backend(fail_second: bool, late: bool, delayed_second: bool) -> Replies {
@@ -100,9 +104,8 @@ fn qualification(c: &Config, backend: &Replies) -> SigmaCostQualification {
         decision_communication_upper_ns: 5_000_000,
         valid_until_unix_ms: quoridor_runner::config::unix_ms() + 30_000,
         config_sha256: quoridor_runner::arena::json_digest(c).unwrap(),
-        compiled_sources_sha256: quoridor_runner::arena::json_digest(&quoridor_runner::compiled_source_bindings()).unwrap(),
         executable_sha256: quoridor_runner::arena::digest(&std::fs::read(std::env::current_exe().unwrap()).unwrap()),
-        backend_sha256: quoridor_runner::arena::json_digest(&serde_json::json!({"backend":m.backend,"model_sha":m.model_sha,"max_batch":m.max_batch,"input_features":m.input_features,"output_values":m.output_values})).unwrap(),
+        backend_sha256: quoridor_runner::arena::json_digest(&serde_json::json!({"backend":m.backend,"model_sha":m.model_sha,"max_batch":m.max_batch,"input_features":m.input_features,"output_values":m.output_values,"library_sha256":quoridor_runner::arena::digest(&std::fs::read(c.inference.as_ref().unwrap().library.as_ref().unwrap()).unwrap())})).unwrap(),
         evidence_sha256: "1".repeat(64),
     }
 }
@@ -237,7 +240,7 @@ fn stale_zero_and_mismatched_cost_qualification_fail_before_requests() {
             0 => q.valid_until_unix_ms = 0,
             1 => q.whole_operation_upper_ns = 0,
             2 => q.backend_sha256 = "2".repeat(64),
-            _ => q.compiled_sources_sha256 = "2".repeat(64),
+            _ => q.executable_sha256 = "2".repeat(64),
         }
         assert!(run_with_sigma_cost_qualification(&c, "arena", Some(Box::new(b)), q).is_err());
         std::fs::remove_dir_all(&c.output).unwrap();

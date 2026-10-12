@@ -1116,7 +1116,7 @@ pub fn qualify(bound: &BoundControl) -> Result<Value> {
             || {
                 let build: Value = e.build_manifest.read()?;
                 Ok(
-                    json!({"schema":"quoridor.research.numerical-qualification.v1","status":null,"phase":"compare","artifact_sha256":build["artifact"]["sha256"],"compiled_sources_sha256":arena::json_digest(&research_manifest::sources())?,"config_sha256":e.config.sha256,"schedule_sha256":e.schedule.sha256,"input_sha256":e.inputs.iter().map(|r| &r.sha256).collect::<Vec<_>>(),"descriptor_sha256":[e.models[0].descriptor.sha256],"weights_sha256":[e.models[0].weights.sha256],"evaluator_sha256":[e.models[0].evaluator_sha256],"rules":e.rules,"distance_units":e.distance_units,"value_perspective":e.value_perspective,"canonical_plan_sha256":e.canonical_plan_sha256,"remaining":[]}),
+                    json!({"schema":"quoridor.research.numerical-qualification.v1","status":null,"phase":"compare","artifact_sha256":build["artifact"]["sha256"],"config_sha256":e.config.sha256,"schedule_sha256":e.schedule.sha256,"input_sha256":e.inputs.iter().map(|r| &r.sha256).collect::<Vec<_>>(),"descriptor_sha256":[e.models[0].descriptor.sha256],"weights_sha256":[e.models[0].weights.sha256],"evaluator_sha256":[e.models[0].evaluator_sha256],"rules":e.rules,"distance_units":e.distance_units,"value_perspective":e.value_perspective,"canonical_plan_sha256":e.canonical_plan_sha256,"remaining":[]}),
                 )
             },
             |output, row| output.row(row, false),
@@ -1140,7 +1140,7 @@ fn run_impl(bound: &BoundControl, cheap: bool) -> Result<Value> {
     let node_limit = if cheap { 64_000_000 } else { AGGREGATE };
     let output_root = output_correspondence()?;
     let inputs_seconds = whole.elapsed().as_secs_f64();
-    let mut header = json!({"schema":"quoridor.continuation360.intent.v1","experiment_sha256":bound.sha256,"config_sha256":e.config.sha256,"schedule_sha256":e.schedule.sha256,"build_manifest":e.build_manifest,"compiled_sources":research_manifest::sources(),"model":e.models[0],"input_refs":e.inputs,"requests":requests,"planned":planned,"plain":240,"diagnostic":120,"no_refill":true,"pre_root_continuation":"absent; actual speculative LIFO only"});
+    let mut header = json!({"schema":"quoridor.continuation360.intent.v1","experiment_sha256":bound.sha256,"config_sha256":e.config.sha256,"schedule_sha256":e.schedule.sha256,"build_manifest":e.build_manifest,"model":e.models[0],"input_refs":e.inputs,"requests":requests,"planned":planned,"plain":240,"diagnostic":120,"no_refill":true,"pre_root_continuation":"absent; actual speculative LIFO only"});
     if let Some(plan) = &cheap_plan {
         if plan.plan.output != output_root {
             return Err("376 owned config/output drift".into());

@@ -1,0 +1,79 @@
+{
+  "schema": "quoridor.cheap-static376.assessment.v1",
+  "algorithm": "cheap-static376-integer-parent-v1",
+  "issue": "quoridor-4lc.376",
+  "status": "PREBOUND_SOURCE_ONLY_NOT_ADMITTED",
+  "planned_Search_calls": 80,
+  "geometric_contexts": 10,
+  "sweeps_per_process": 2,
+  "planned_sessions": 56,
+  "diagnostic_calls_included": 8,
+  "primary_plain_calls": 72,
+  "node_liability": 256000000,
+  "fixed_order": ["A", "B", "B", "A"],
+  "schedule_sha256": "bed9101637b27840fb96095fc2b98b75898ad4cb338901d5ac5354ca4e4fbd1a",
+  "roles": {
+    "A": "2*main+signedcontinuation, static integer terms0, common exact legal goal tier",
+    "B": "identical plus human376 cheap integer score"
+  },
+  "limits": {
+    "D4": { "complete_depth": 4, "node_cap": 2000000 },
+    "D6": { "complete_depth": 6, "node_cap": 8000000 },
+    "TT_slots": 4096,
+    "TT_limit_B": 1048576,
+    "PVS": true,
+    "time_limit": null,
+    "total_runtime": null,
+    "end": null,
+    "notify": null,
+    "no_refill_or_lower_depth_rescue": true
+  },
+  "root_selection": {
+    "coldD4_families": [0, 34, 68, 102],
+    "warmD4_original_indices": [4, 5, 6, 7],
+    "warmD4_local_plies": [0, 2, 4, 6],
+    "coldD6_families": [34, 102],
+    "distinct_prefixes": 8,
+    "depth_contexts": 10,
+    "sessions_per_sweep": 7,
+    "sessions_per_process": 14
+  },
+  "diagnostic_mask": "sweep1 local_request0(coldD4family0) and7(warmD4lastply6); all sweep2 plain; fresh independent sweep sessions",
+  "coverage_gate": {
+    "required": "all80 returns complete at requested depth, all10 contexts x4 processes x2 sweeps; unchanged legal sets/leaf math/value agreement, legal PV and restored counted parent",
+    "any_cap_error_missing_pair": "UNKNOWN/adoption_UNSUPPORTED; retain attempts/errors/reserved liabilities; no context drop/refill",
+    "equal_best_moves": "different actions/PVs are allowed if legal and equal-value; no old372 same-work gate"
+  },
+  "estimand": {
+    "per_process_context": "median of available plain repetitions (1 or2)",
+    "paired_ratio": "median(B1,B2)/median(A0,A3)",
+    "cold_stratum": "six cold depth contexts, D4families0/34/68/102 +D6families34/102",
+    "warm_stratum": "four chronological D4contexts0/2/4/6",
+    "required_both_strata": {
+      "nodes_median_max": 0.95,
+      "evaluations_median_max": 0.95,
+      "plain_whole_root_median_max": 1.02
+    },
+    "adverse_rejection": "ANYcontext where BOTH B plain per-process medians >1.10*bracketing A median in ANY nodes/evals/whole",
+    "disclosure": "all context/stratum ratios and four individual B/A comparisons, plus eachB against bracketingA observations",
+    "zero_denominator": "UNKNOWN, no forged finite ratio",
+    "CI": "not inferred from four fixed processes",
+    "NPS": "secondary only"
+  },
+  "cost_domains": {
+    "whole_root": "existing actual root intervals: context/setup/replay/sort/map availability+validation/history setup/update/age/Search/PV/observations/primary+cost-journal serialization+sync/drop; setup on session firstroot/drop onlast, matched attribution retained",
+    "diagnostic": "eight included instrumented calls separate; mixed warm session diagnostic membership explicit",
+    "shared_process": "model/input/selfdigest/header/footer/guardian/directwait/finalization/cleanup costs separate original outer whole; not invented root causal share",
+    "nested": "not added to process whole",
+    "later_saved_collection_admin_LLM": "separate or UNKNOWN, not silently charged to controller"
+  },
+  "support": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/cheap-static-ordering376/support-v1.json",
+    "sha256": "0cb8599c9c1359c6bf2ca38c371805cdf39f4146f51efc9d35045c884c5e61cb",
+    "bytes": 4372,
+    "mode": "0644"
+  },
+  "reuse_scope": "old370ca/originalef4 numerical subject is20 input/head only; does not certify new score/caller/image/Search result",
+  "adoption": "negative/inconclusive ends this question; no automatic tuning/extra block/profile/default promotion",
+  "actual_legal_set_capture": "same validate_return Vec moved into cheap-only result row; noaction null/UNKNOWN, no extraSearch; actual vector capacity/allocation/serialization/drop remain charged"
+}

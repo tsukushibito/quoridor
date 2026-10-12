@@ -45,7 +45,7 @@ class ConsumerPublisherIntegration(unittest.TestCase):
         manifest = self.file("Cargo.toml", b"[workspace]\n")
         lock = self.file("Cargo.lock", b"SYNTHETIC lock\n")
         runner = self.file("crates/quoridor-runner/Cargo.toml", b"# SYNTHETIC crate\n")
-        self.compiled = {key: self.source for key in life.COMPILED_KEYS}
+        self.compiled = {"opaque-historical-provenance": self.source}
         self.compiled["Cargo.lock"] = lock
         self.compiled["runner/Cargo.toml"] = runner
         self.compiled_hashes = {key: ref["sha256"] for key, ref in self.compiled.items()}
@@ -53,13 +53,17 @@ class ConsumerPublisherIntegration(unittest.TestCase):
             "workspace": str(self.root),
             "commit": "1" * 40,
             "patch": None,
-            "files": [self.source, manifest, lock, runner],
+            "untracked_inputs": [],
             "manifest": manifest,
             "lock": lock,
-            "compiled_sources": self.compiled,
             "cargo_configs": [],
         }
         self.artifact = self.file("private/runner", b"SYNTHETIC artifact, never executed")
+        # Saved adapter tests use synthetic compiler/Git facts; the actual owning
+        # BUILD checks are covered by test_build_provenance.py, never claimed here.
+        source_port = mock.patch.object(publisher, "source_check", return_value=None)
+        source_port.start()
+        self.addCleanup(source_port.stop)
         self.build_ref, self.build = self.operation("build")
         models = []
         fingerprints = []
@@ -122,7 +126,6 @@ class ConsumerPublisherIntegration(unittest.TestCase):
                     "status": "PASS",
                     "phase": phase,
                     "artifact_sha256": self.artifact["sha256"],
-                    "compiled_sources_sha256": life.compiled_digest(self.compiled_hashes),
                     "config_sha256": self.config["sha256"],
                     "schedule_sha256": self.schedule["sha256"],
                     "input_sha256": [self.input["sha256"]],
@@ -159,6 +162,10 @@ class ConsumerPublisherIntegration(unittest.TestCase):
                 "kind": kind,
                 "owner": str(self.root),
                 "output": str(operation),
+                "source": self.source_info,
+                "tools": {},
+                "env": {},
+                "target": str(self.root),
             },
         )
         runtime = self.root / f"job-{self.serial}"
@@ -210,15 +217,17 @@ class ConsumerPublisherIntegration(unittest.TestCase):
             },
         )
         checks = []
-        roles = ("test", "lint", "build", "bindings") if kind == "build" else ("run",)
+        roles = ("test", "lint", "build") if kind == "build" else ("run",)
+        cargo_artifact = {
+            "reason": "compiler-artifact",
+            "target": {"name": "quoridor-runner", "kind": ["bin"]},
+            "profile": {"test": False},
+            "executable": self.artifact["path"],
+            "fresh": False,
+        }
         for role in roles:
-            raw = json.dumps(
-                {
-                    "compiled_sources": self.compiled_hashes,
-                    "executable_sha256": self.artifact["sha256"],
-                    "model_calls": 0,
-                }
-            ).encode()
+            events = [cargo_artifact, {"reason": "build-finished", "success": True}]
+            raw = b"\n".join(json.dumps(event).encode() for event in events) + b"\n"
             log = self.file(prefix + f"/{role}.full.log", raw)
             returned = {
                 "status": "failed" if command_failed else "complete",
@@ -267,7 +276,10 @@ class ConsumerPublisherIntegration(unittest.TestCase):
             candidate.update(
                 artifact=self.artifact,
                 source=self.source_info,
-                compiled_sources=self.compiled_hashes,
+                cargo_artifact=cargo_artifact,
+                artifact_target="quoridor-runner",
+                tools={},
+                env={},
             )
         else:
             candidate.update(build_manifest=self.build_ref, experiment=experiment, data=data)
@@ -371,23 +383,6 @@ class ConsumerPublisherIntegration(unittest.TestCase):
         build = life.authoritative(metadata, self.build_ref, "build-manifest", "build")
         with self.assertRaises((ValueError, KeyError)):
             life.descriptor(dict(build["artifact"], bytes=None))
-
-    def test_generation_domain_correspondence_keeps_full_image_coverage(self):
-        native = {
-            k: v for k, v in self.compiled_hashes.items() if k != "runner/sigma_qualification.rs"
-        }
-        life.generation_sources(native, self.compiled_hashes)
-        for changed in (
-            dict(native, **{"unknown/source.rs": "a" * 64}),
-            dict(native, **{"runner/sigma_qualification.rs": "a" * 64}),
-            {k: v for k, v in native.items() if k != "core/game.rs"},
-            dict(native, **{"core/game.rs": "f" * 64}),
-        ):
-            with self.assertRaises(ValueError):
-                life.generation_sources(changed, self.compiled_hashes)
-        with self.assertRaises(ValueError):
-            life.generation_sources(native, native)
-        self.assertEqual(len(self.compiled_hashes), 35)
 
     def test_non_authoritative_candidate_incomplete_and_hash_drift_refuse(self):
         metadata = life.Metadata()
@@ -710,13 +705,6 @@ class ConsumerPublisherIntegration(unittest.TestCase):
         self.assertEqual(accepted["secondary"][0], inherited[0])
         self.assertIsNone(life.numerical(metadata, actual_experiment, self.build))
         evidence = available["generation"]
-        self.assertEqual(evidence["compiled_sources_domain"], "research-qualified35-v1")
-        self.assertEqual(evidence["native_compiled_sources_domain"], "arena-generation34-v1")
-        life.generation_sources(evidence["native_compiled_sources"], evidence["compiled_sources"])
-        self.assertEqual(evidence["compiled_sources"], self.build["compiled_sources"])
-        self.assertEqual(
-            evidence["generation_compiled_sources_sha256"], actual.canonical_sha(native)
-        )
         self.assertEqual(evidence["book_sha256"], book_ref["sha256"])
         self.assertEqual(evidence["schedule_sha256"], schedule_ref["sha256"])
         self.assertNotEqual(evidence["book_sha256"], evidence["book_semantic_sha256"])

@@ -15,7 +15,6 @@ pub mod teacher_pilot_execution;
 pub mod value_search_strength;
 pub use arena_manifest::audit as audit_arena;
 pub use arena_manifest::recover as recover_arena;
-pub use arena_manifest::source_bindings as compiled_source_bindings;
 pub use config::{Config, Engine};
 pub use runtime::{RunReport, run};
 

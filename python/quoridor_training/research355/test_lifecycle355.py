@@ -25,22 +25,8 @@ class LifecycleAdapter(unittest.TestCase):
         self.directory = tempfile.TemporaryDirectory(prefix="synthetic-lifecycle-v9-", dir=HERE)
         self.root = Path(self.directory.name)
         self.addCleanup(self.directory.cleanup)
-        self.compiled = {
-            key: hashlib.sha256(key.encode()).hexdigest() for key in life.COMPILED_KEYS
-        }
 
-    def test_complete_compiled_map_and_raw_ordered_numerical_arrays(self):
-        expected = hashlib.sha256(
-            json.dumps(self.compiled, sort_keys=True, separators=(",", ":")).encode()
-        ).hexdigest()
-        self.assertEqual(life.compiled_digest(self.compiled), expected)
-        for bad in (
-            {k: v for k, v in self.compiled.items() if k != "Cargo.lock"},
-            dict(self.compiled, unexpected="a" * 64),
-            dict(self.compiled, **{"Cargo.lock": "PLACEHOLDER"}),
-        ):
-            with self.assertRaises((ValueError, AssertionError)):
-                life.compiled_digest(bad)
+    def test_artifact_and_raw_ordered_numerical_arrays(self):
         experiment = {
             "phase": "analysis",
             "config": ref(self.root / "config"),
@@ -51,14 +37,12 @@ class LifecycleAdapter(unittest.TestCase):
         }
         build = {
             "artifact": ref(self.root / "artifact", "e" * 64),
-            "compiled_sources": self.compiled,
         }
         numerical = {
             "schema": life.PREFIX + "numerical-qualification.v1",
             "status": "PASS",
             "phase": "analysis",
             "artifact_sha256": "e" * 64,
-            "compiled_sources_sha256": expected,
             "config_sha256": "a" * 64,
             "schedule_sha256": "b" * 64,
             "input_sha256": ["c" * 64, "d" * 64],

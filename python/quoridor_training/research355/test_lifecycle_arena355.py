@@ -436,7 +436,6 @@ class ArenaInputIntegration(unittest.TestCase):
             "status": "PASS",
             "phase": "arena",
             "artifact_sha256": f.artifact["sha256"],
-            "compiled_sources_sha256": life.compiled_digest(f.compiled_hashes),
             "config_sha256": config_ref["sha256"],
             "schedule_sha256": schedule_ref["sha256"],
             "input_sha256": [book_ref["sha256"]],

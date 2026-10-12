@@ -272,7 +272,7 @@ fn research_bindings_and_modes_reject_false_equal_time_or_duplicate_sample_claim
     let a = c.arena.as_mut().unwrap();
     a.comparison = arena::Comparison::EvaluatorWallTime;
     a.evaluator_sha256 = vec!["0".repeat(64); 2];
-    a.search_source_sha256 = vec!["1".repeat(64); 2];
+    a.search_artifact_sha256 = vec!["1".repeat(64); 2];
     a.book.frozen_before_candidate_results = true;
     assert!(c.validate().is_ok());
     c.engines[1].time_ms = Some(500);
@@ -285,7 +285,7 @@ fn research_bindings_and_modes_reject_false_equal_time_or_duplicate_sample_claim
     assert!(c.validate().is_err());
     c.engines.iter_mut().for_each(|e| e.time_ms = None);
     assert!(c.validate().is_ok());
-    c.arena.as_mut().unwrap().search_source_sha256[1] = "2".repeat(64);
+    c.arena.as_mut().unwrap().search_artifact_sha256[1] = "2".repeat(64);
     assert!(c.validate().is_err());
 }
 #[test]
@@ -293,7 +293,7 @@ fn model_and_search_bindings_require_actual_loaded_content() {
     let mut c = functional_config();
     let a = c.arena.as_mut().unwrap();
     a.evaluator_sha256 = vec!["0".repeat(64); 2];
-    a.search_source_sha256 = vec!["1".repeat(64); 2];
+    a.search_artifact_sha256 = vec!["1".repeat(64); 2];
     assert!(
         arena::validate_loaded_bindings(
             a,
@@ -352,7 +352,7 @@ fn timed_sigma_is_whole_engine_serial_and_has_distinct_source_binding() {
     let a = c.arena.as_mut().unwrap();
     a.comparison = arena::Comparison::WholeWallTime;
     a.evaluator_sha256 = vec!["0".repeat(64); 2];
-    a.search_source_sha256 = vec!["1".repeat(64), "2".repeat(64)];
+    a.search_artifact_sha256 = vec!["1".repeat(64), "2".repeat(64)];
     assert!(c.validate().is_ok());
     assert!(
         arena::validate_loaded_bindings(

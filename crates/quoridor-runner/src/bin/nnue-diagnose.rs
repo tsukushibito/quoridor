@@ -796,9 +796,12 @@ fn main() -> Result<()> {
         }
         let mut p = prepare(&c, start)?;
         p["generation"] = serde_json::from_slice::<Value>(&config_bytes)?["generate"].clone();
+        p["executable_sha256"] = serde_json::to_value(quoridor_runner::arena::digest(
+            &std::fs::read(std::env::current_exe()?)?,
+        ))?;
         let book = quoridor_runner::arena_book::from_preparation(
             &p,
-            quoridor_runner::arena::digest(include_bytes!("nnue-diagnose.rs")),
+            quoridor_runner::arena::json_digest(&p)?,
         )?;
         p["book"] = serde_json::to_value(book)?;
         Ok(p)
@@ -811,8 +814,6 @@ fn main() -> Result<()> {
         Ok(mut v) => {
             v["admission"] = serde_json::to_value(admission)?;
             v["config_sha256"] = json!(quoridor_runner::arena::digest(&config_bytes));
-            v["compiled_sources"] =
-                serde_json::to_value(quoridor_runner::compiled_source_bindings())?;
             if c.mode == "correspondence" {
                 v["NN_scope"] =
                     json!("caller pipeline attempts; physical head/FT kernel counts unavailable");

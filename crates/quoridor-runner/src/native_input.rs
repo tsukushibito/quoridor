@@ -162,7 +162,7 @@ pub(super) fn run(c: &Config, start: Instant) -> Result<Value> {
     let exe = std::env::current_exe()?;
     Ok(
         json!({"schema":p.schema,"status":if pass {"COMPATIBILITY_PASS_INPUT_ONLY"}else{"COMPATIBILITY_ALERT"},"input_sha256":digest(&bytes),"manifest_sha256":p.manifest_sha256,"weights_sha256":p.weights_sha256,"reference_source_sha256":p.reference_source_sha256,
-        "predictions":predictions,"NN":attempted,"processed":completed,"failed":failures,"abs_tol":1e-5,"rel_tol":1e-4,"compiled_sources":quoridor_runner::compiled_source_bindings(),"executable_sha256":digest(&fs::read(exe)?),
+        "predictions":predictions,"NN":attempted,"processed":completed,"failed":failures,"abs_tol":1e-5,"rel_tol":1e-4,"executable_sha256":digest(&fs::read(exe)?),
         "head_policy":"fp32_avx2_lane8_balanced_no_fma_guarded_scalar_fallback_v1","actual_per_input_guard_route":"predictions[].guard_route","qualification_complete":false,"limits":"Input correspondence only; legal/caller qualification separate.","wall_s":start.elapsed().as_secs_f64()}),
     )
 }

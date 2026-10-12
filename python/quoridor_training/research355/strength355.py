@@ -854,10 +854,6 @@ def adapt_generated_book(raw, artifact_sha256, provenance):
         "exact exclusion prefixes",
     )
     sha(raw["old_open8_sha256"])
-    require(
-        bool(raw["compiled_sources"]) and all(sha(v) for v in raw["compiled_sources"].values()),
-        "compiled generator bindings",
-    )
     attempted = defaultdict(list)
     for attempt in raw["attempts"]:
         fid = integer(attempt["family_id"], 0, 127)
@@ -935,7 +931,6 @@ def adapt_generated_book(raw, artifact_sha256, provenance):
         "plan_SHA256": PLAN_SHA,
         "provenance": provenance,
         "source_book_SHA256": artifact_sha256,
-        "source_compiled_generator": raw["compiled_sources"],
         "families": families,
         "eligibility_scope": "supplied accepted complete GeneratedBook; current native generator/geometry qualification required, this adapter executes none",
     }

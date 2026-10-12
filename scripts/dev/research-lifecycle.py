@@ -453,48 +453,90 @@ def command(spec, row, directory, resources, executor=process.execute, *, ledger
 
 
 def source_metadata_check(source):
-    """Validate immutable BUILD provenance without reading today's build inputs."""
-    require("workspace" in source, "adopted workspace witness required")
+    """Git/Cargo provenance, not an independently maintained Rust dependency graph."""
+    require(
+        set(source)
+        == {
+            "workspace",
+            "commit",
+            "patch",
+            "untracked_inputs",
+            "manifest",
+            "lock",
+            "cargo_configs",
+        },
+        "Git/Cargo source record",
+    )
     require(
         len(source["commit"]) == 40 and all(c in "0123456789abcdef" for c in source["commit"]),
-        "frozen source commit",
+        "Git revision",
     )
     workspace = Path(source["workspace"])
     require(workspace.is_absolute(), "adopted workspace")
-    files = {r["path"]: r for r in source["files"]}
+    for name, filename in (("manifest", "Cargo.toml"), ("lock", "Cargo.lock")):
+        require(source[name]["path"] == str(workspace / filename), "adopted Cargo " + name)
+    untracked = source["untracked_inputs"]
     require(
-        all(Path(p).is_relative_to(workspace) for p in files),
-        "adopted source outside workspace",
+        type(untracked) is list and len({r["path"] for r in untracked}) == len(untracked),
+        "unique used untracked inputs",
     )
-    for name in ("manifest", "lock"):
-        expected = workspace / ("Cargo.toml" if name == "manifest" else "Cargo.lock")
-        require(
-            source[name]["path"] == str(expected) and files.get(str(expected)) == source[name],
-            "adopted Cargo " + name,
-        )
-    for ref in [
-        *source["compiled_sources"].values(),
-        *source.get("generator_compiled_sources", {}).values(),
-    ]:
-        require(files.get(ref["path"]) == ref, "compiled source projection outside adopted files")
+    require(
+        all(Path(r["path"]).is_relative_to(workspace) for r in untracked),
+        "untracked input outside workspace",
+    )
     for item in source["cargo_configs"]:
         if item["file"] is not None:
             require(item["file"]["path"] == item["path"], "Cargo config identity")
 
 
 def source_check(source):
-    """BUILD and its finalizer check all frozen source and Cargo configuration."""
+    """BUILD owns a standard Git revision/delta and actual Cargo inputs.
+
+    Cargo/rustc own source dependency discovery. RUN does not inspect current Rust.
+    """
     source_metadata_check(source)
-    for ref in source["files"]:
-        read_ref(ref, max(CONTROL_BYTES, ref["bytes"]))
-    if source["patch"] is not None:
-        read_ref(source["patch"])
     workspace = Path(source["workspace"])
     require(workspace.resolve() == workspace, "adopted workspace")
+
+    def git(*args):
+        completed = subprocess.run(
+            ["git", "--no-optional-locks", "-C", str(workspace), *args],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            timeout=15,
+            check=True,
+        )
+        require(len(completed.stdout) <= CONTROL_BYTES, "bounded Git provenance")
+        return completed.stdout
+
+    require(git("rev-parse", "HEAD").decode().strip() == source["commit"], "Git revision drift")
+    patch = b"" if source["patch"] is None else read_ref(source["patch"])
+    require(
+        git("diff", "--binary", "--no-ext-diff", "--no-textconv", "HEAD", "--") == patch,
+        "actual uncommitted Git delta drift",
+    )
+    untracked = git(
+        "ls-files",
+        "--others",
+        "--exclude-standard",
+        "-z",
+        "--",
+        "Cargo.toml",
+        "Cargo.lock",
+        ".cargo",
+        "crates",
+    )
+    paths = {str(workspace / os.fsdecode(p)) for p in untracked.split(b"\0") if p}
+    require(
+        paths == {r["path"] for r in source["untracked_inputs"]},
+        "used untracked Cargo inputs drift",
+    )
+    for ref in [source["manifest"], source["lock"], *source["untracked_inputs"]]:
+        read_ref(ref, max(CONTROL_BYTES, ref["bytes"]))
     for item in source["cargo_configs"]:
-        p = Path(item["path"])
+        path = Path(item["path"])
         if item["file"] is None:
-            require(not p.exists() and not p.is_symlink(), "Cargo config appeared")
+            require(not path.exists() and not path.is_symlink(), "Cargo config appeared")
         else:
             read_ref(item["file"])
 
@@ -557,7 +599,6 @@ def numerical_fields(experiment, manifest):
         "status": "PASS",
         "phase": experiment["phase"],
         "artifact_sha256": manifest["artifact"]["sha256"],
-        "compiled_sources_sha256": canonical_sha(manifest["compiled_sources"]),
         "config_sha256": experiment["config"]["sha256"],
         "schedule_sha256": experiment["schedule"]["sha256"],
         "input_sha256": [r["sha256"] for r in experiment["inputs"]],
@@ -743,8 +784,15 @@ def cheap_ordering_inputs(experiment, qualified):
 def retained_ordering_source(current, original, adoption, qualification, original_ref, cheap=None):
     """One reviewed Source adoption; never rewrite the original numerical subject."""
     reuse = adoption["retained_ordering_numerical"]
-    changed = reuse["changed_compiled_sources"]
-    wrappers = {"runner/ordering_assessment.rs", "runner/research_manifest.rs"}
+    require(
+        type(reuse) is dict
+        and set(reuse)
+        == (
+            {"scope", "qualification", "build_manifest"}
+            | ({"cheap_static376"} if cheap is not None else set())
+        ),
+        "single adopted numerical scope; no source graph",
+    )
     require(
         adoption["schema"] == "quoridor.research.source-adoption.v1"
         and adoption["status"] == "ACCEPTED"
@@ -752,8 +800,6 @@ def retained_ordering_source(current, original, adoption, qualification, origina
         and reuse["scope"] == "ordering20-input-and-head-v1"
         and reuse["qualification"] == qualification
         and reuse["build_manifest"] == original_ref
-        and isinstance(changed, dict)
-        and (cheap is not None or set(changed) == wrappers)
         and (cheap is None or reuse["cheap_static376"] == cheap)
         and original["schema"] == BUILD_SCHEMA
         and original["status"] == "PASS"
@@ -761,10 +807,10 @@ def retained_ordering_source(current, original, adoption, qualification, origina
         and original["remaining"] == []
         and original["source"]["workspace"] == current["source"]["workspace"]
         and original["tools"] == current["tools"],
-        "ordering retained numerical source adoption/subject mismatch",
+        "ordering retained numerical adoption/subject mismatch",
     )
     require(
-        {"test", "lint", "build", "bindings"}
+        {"test", "lint", "build"}
         <= {
             c["role"]
             for c in original["checks"]
@@ -788,102 +834,6 @@ def retained_ordering_source(current, original, adoption, qualification, origina
         == {k: v for k, v in current["env"].items() if k != "TMPDIR"},
         "ordering compiler environment changed",
     )
-    for key, pair in changed.items():
-        require(
-            pair["before"] == original["source"]["compiled_sources"][key]
-            and pair["after"] == current["source"]["compiled_sources"][key]
-            and pair["before"]["path"] == pair["after"]["path"]
-            and pair["before"]["sha256"] != pair["after"]["sha256"],
-            "ordering wrapper before/after source identity mismatch",
-        )
-    for field in ("compiled_sources", "generator_compiled_sources"):
-        old, new = original[field], current[field]
-        if cheap is None:
-            require(set(old) == set(new), "ordering full source domain changed")
-        else:
-            added = reuse.get("added_compiled_sources", {}).get(field, {})
-            require(
-                set(old) <= set(new) and set(new) - set(old) == set(added),
-                "376 exact compiled additions",
-            )
-            for key, ref in added.items():
-                require(
-                    key in {"ai/cheap_static_ordering.rs", "data/lossless_jsonl.rs"}
-                    and (
-                        key != "data/lossless_jsonl.rs"
-                        or ref["sha256"]
-                        == "76bde0a3cff239b414e0bff0ba5a651833a9f8aae031086ac97f2e97187b8c69"
-                    )
-                    and ref == current["source"][field][key]
-                    and ref["sha256"] == new[key],
-                    "376 unexpected compiled addition",
-                )
-            for key in (
-                "core/lib.rs",
-                "core/game.rs",
-                "core/position.rs",
-                "core/research.rs",
-                "nnue/lib.rs",
-                "nnue/features.rs",
-                "nnue/simd.rs",
-                "nnue/residual.rs",
-                "nnue/quantized.rs",
-                "inference/lib.rs",
-                "inference/cuda.rs",
-                "inference/tensorrt.rs",
-            ):
-                require(old.get(key) == new.get(key), "376 original input/head dependency drift")
-        for key, old_sha in old.items():
-            new_sha = new[key]
-            require(
-                original["source"][field][key]["sha256"] == old_sha
-                and current["source"][field][key]["sha256"] == new_sha,
-                "ordering source projection differs from build provenance",
-            )
-            if old_sha != new_sha:
-                require(
-                    key in changed
-                    and changed[key]["before"]["sha256"] == old_sha
-                    and changed[key]["after"]["sha256"] == new_sha,
-                    "ordering underlying numerical source changed",
-                )
-
-    def native(source):
-        workspace = Path(source["workspace"])
-        files = [
-            r
-            for r in source["files"]
-            if Path(r["path"]).is_relative_to(workspace / "crates")
-            or Path(r["path"]) == workspace / "rust-toolchain.toml"
-        ]
-        require(len({r["path"] for r in files}) == len(files), "duplicate native witness")
-        return {r["path"]: r for r in files}
-
-    old_files, new_files = native(original["source"]), native(current["source"])
-
-    if cheap is None:
-        require(set(old_files) == set(new_files), "ordering native source membership changed")
-
-    def declared(before, after):
-        return cheap is not None and any(
-            pair.get("before") == before and pair.get("after") == after
-            for pair in reuse.get("changed_native_sources", [])
-        )
-
-    for path, old in old_files.items():
-        new = new_files.get(path)
-        if new is None:
-            require(declared(old, None), "376 undeclared native removal")
-            continue
-        require(
-            old == new
-            or declared(old, new)
-            or any(p["before"] == old and p["after"] == new for p in changed.values()),
-            "ordering native witness outside reviewed wrappers changed",
-        )
-
-    for path in set(new_files) - set(old_files):
-        require(declared(None, new_files[path]), "376 undeclared native addition")
 
 
 def numerical_check(experiment, manifest, *, refs=None):
@@ -1201,7 +1151,7 @@ def common_pilot_check(spec, experiment, manifest, approved):
             and spec["limits"]["guardian_cpu"] == cpus[2],
             "native two-worker admission preserves two actual host reserve cores",
         )
-        q = numerical_check(experiment, manifest)
+        numerical_check(experiment, manifest)
         require(
             experiment["planned_slots"] == 8
             and experiment["models"] == []
@@ -1234,11 +1184,6 @@ def common_pilot_check(spec, experiment, manifest, approved):
             and experiment["inputs"][0] == spec["approved_plan"]
             and document(experiment["schedule"]) == study["corpus"]["blind_schedule"],
             "blind corpus selected-plan/schedule binding",
-        )
-        require(
-            q["generator_compiled_sources_sha256"]
-            == canonical_sha(manifest["generator_compiled_sources"]),
-            "actual current generator closure",
         )
         return
     require(experiment["planned_slots"] == 0, "fit/qualification is a nongame operation")
@@ -1442,16 +1387,11 @@ def accepted_build(ref):
         "build completion required",
     )
     require(
-        {r["role"] for r in manifest["checks"]} >= {"test", "lint", "build", "bindings"},
-        "affected test/lint/build/bindings required",
+        {r["role"] for r in manifest["checks"]} >= {"test", "lint", "build"},
+        "affected test/lint/build required",
     )
     read_ref(manifest["artifact"], 32 * 1024 * 1024)
     source_metadata_check(manifest["source"])
-    require(
-        manifest["compiled_sources"]
-        == {k: r["sha256"] for k, r in manifest["source"]["compiled_sources"].items()},
-        "qualified native source projection",
-    )
     for tool in manifest["tools"].values():
         require(
             isinstance(tool["version"], str) and bool(tool["version"].strip()),
@@ -1725,21 +1665,8 @@ def sigma_cost_check(spec, experiment, manifest, approved):
         and campaign["maximum_total_logical_backend_rows_or_requests"] == 64
         and campaign["cost_formula_prebound"] == {"factor": 4, "additive_margin_ns": 2000000}
         and config["native"] == campaign["native"]
-        and config["native"]["executable_sha256"] == manifest["artifact"]["sha256"]
-        and config["native"]["compiled_sources_sha256"]
-        == canonical_sha(
-            {
-                k: v
-                for k, v in manifest["compiled_sources"].items()
-                if k
-                not in {
-                    "runner/research_manifest.rs",
-                    "runner/value_search_compare.rs",
-                    "runner/ordering_assessment.rs",
-                }
-            }
-        ),
-        "current approved cases/formula/actual native qualification source/image",
+        and config["native"]["executable_sha256"] == manifest["artifact"]["sha256"],
+        "current approved cases/formula/actual native qualification image",
     )
     launched = campaign["qualification_started_unix_ms"]
     require(
@@ -1959,14 +1886,6 @@ def build_check(spec):
     artifact_target = spec.get("artifact_target", "quoridor-runner")
     require(artifact_target in {"quoridor-runner", "terminal-cache"}, "maintained build artifact")
     if artifact_target == "terminal-cache":
-        converter = str(
-            Path(spec["source"]["workspace"]) / "crates/quoridor-data/src/bin/terminal-cache.rs"
-        )
-        require(
-            any(r["path"] == converter for r in spec["source"]["compiled_sources"].values())
-            and "generator_compiled_sources" not in spec["source"],
-            "converter has its own actual compiled projection",
-        )
         for row in spec["commands"]:
             if row["role"] == "build":
                 require(
@@ -1976,6 +1895,18 @@ def build_check(spec):
                     and row["argv"][row["argv"].index("-p") + 1] == "quoridor-data",
                     "exact maintained converter build",
                 )
+    builds = [row for row in spec["commands"] if row["role"] == "build"]
+    require(len(builds) == 1, "one selected Cargo release command")
+    argv = builds[0]["argv"]
+    package = "quoridor-data" if artifact_target == "terminal-cache" else "quoridor-runner"
+    require(
+        "--release" in argv
+        and argv.count("--bin") == 1
+        and argv[argv.index("--bin") + 1] == artifact_target
+        and argv.count("-p") == 1
+        and argv[argv.index("-p") + 1] == package,
+        "exact selected Cargo release target",
+    )
     require(Path(spec["target"]).is_relative_to(Path(spec["owner"])), "isolated owned target")
     for name in ("target", "TMP", "private"):
         owned(spec[name], spec["owner"])
@@ -2030,14 +1961,11 @@ def build_check(spec):
     require(adoption["source"] == spec["source"], "accepted frozen source/patch")
     source = spec["source"]
     require(spec["cwd"] == source["workspace"], "Cargo cwd differs from adopted workspace")
-    require(bool(source["compiled_sources"]), "adopted compiled-source projection required")
     source_check(spec["source"])
     require(
-        source["lock"] in spec["dependency_refs"],
-        "same adopted Cargo.lock required",
+        "dependency_refs" not in spec,
+        "Cargo owns dependency checks; no parallel dependency inventory",
     )
-    for ref in spec["dependency_refs"]:
-        read_ref(ref, max(CONTROL_BYTES, ref["bytes"]))
     env = spec["env"]
     cargo_home = Path(env["CARGO_HOME"])
     require(cargo_home.is_absolute() and cargo_home.resolve() == cargo_home, "frozen Cargo home")
@@ -2069,7 +1997,7 @@ def build_check(spec):
     for key in ("RUSTC", "RUSTDOC", "CC", "CXX", "AR"):
         require(env[key] == spec["tools"][key]["file"]["path"], "pinned relevant tool env")
     require(
-        {c["role"] for c in spec["commands"]} >= {"test", "lint", "build", "bindings"},
+        {c["role"] for c in spec["commands"]} >= {"test", "lint", "build"},
         "one affected qualification",
     )
     names = [c["name"] for c in spec["commands"]]
@@ -2078,44 +2006,41 @@ def build_check(spec):
         "unique safe command names",
     )
     for c in spec["commands"]:
+        require(c["role"] in {"test", "lint", "build"}, "affected software commands only")
+        a = c["argv"]
+        require(a[0] == spec["tools"]["CARGO"]["file"]["path"], "trusted Cargo argv")
         require(
-            c["role"] in {"test", "lint", "build", "bindings"}, "affected software commands only"
+            a.count("--manifest-path") == 1
+            and ("--" not in a or a.index("--manifest-path") < a.index("--"))
+            and a[a.index("--manifest-path") + 1] == source["manifest"]["path"]
+            and not any(
+                x.startswith("--manifest-path=")
+                or x in {"--config", "-C"}
+                or x.startswith("--config=")
+                for x in a
+            ),
+            "one adopted Cargo manifest/config",
         )
-        if c["role"] != "bindings":
-            a = c["argv"]
-            require(a[0] == spec["tools"]["CARGO"]["file"]["path"], "trusted Cargo argv")
+        require(
+            a[1] == {"test": "test", "lint": "clippy", "build": "build"}[c["role"]],
+            "no cargo-run/extra workload in software phase",
+        )
+        require(
+            "--offline" in a
+            and "--locked" in a
+            and "-j1" in a
+            and "--message-format=json-render-diagnostics" in a,
+            "Cargo pinned command/JSON",
+        )
+        require(
+            not any(x.startswith("-A") or x.startswith("--allow") for x in a),
+            "no compiler/lint allowance workaround",
+        )
+        if c["role"] == "lint":
             require(
-                a.count("--manifest-path") == 1
-                and ("--" not in a or a.index("--manifest-path") < a.index("--"))
-                and a[a.index("--manifest-path") + 1] == source["manifest"]["path"]
-                and not any(
-                    x.startswith("--manifest-path=")
-                    or x in {"--config", "-C"}
-                    or x.startswith("--config=")
-                    for x in a
-                ),
-                "one adopted Cargo manifest/config",
+                "-Dwarnings" in a and "--no-deps" in a,
+                "ordinary scoped Clippy with warnings denied",
             )
-            require(
-                a[1] == {"test": "test", "lint": "clippy", "build": "build"}[c["role"]],
-                "no cargo-run/extra workload in software phase",
-            )
-            require(
-                "--offline" in a
-                and "--locked" in a
-                and "-j1" in a
-                and "--message-format=json-render-diagnostics" in a,
-                "Cargo pinned command/JSON",
-            )
-            require(
-                not any(x.startswith("-A") or x.startswith("--allow") for x in a),
-                "no compiler/lint allowance workaround",
-            )
-            if c["role"] == "lint":
-                require(
-                    "-Dwarnings" in a and "--no-deps" in a,
-                    "ordinary scoped Clippy with warnings denied",
-                )
 
 
 def private_copy_check(spec, src=None):
@@ -2159,87 +2084,10 @@ def copy_artifact(src, dst):
     return bound(dst, 32 * 1024 * 1024)[0]
 
 
-GENERATION_SOURCE_KEYS = frozenset(
-    (
-        "Cargo.lock",
-        "ai/alphabeta.rs",
-        "ai/lib.rs",
-        "ai/sigma_mcts.rs",
-        "core/game.rs",
-        "core/lib.rs",
-        "core/position.rs",
-        "core/research.rs",
-        "data/lib.rs",
-        "inference/cuda.rs",
-        "inference/lib.rs",
-        "inference/tensorrt.rs",
-        "nnue/features.rs",
-        "nnue/lib.rs",
-        "nnue/quantized.rs",
-        "nnue/residual.rs",
-        "nnue/simd.rs",
-        "runner/Cargo.toml",
-        "runner/arena.rs",
-        "runner/arena_book.rs",
-        "runner/arena_clock.rs",
-        "runner/arena_manifest.rs",
-        "runner/arena_statistics.rs",
-        "runner/config.rs",
-        "runner/lib.rs",
-        "runner/main.rs",
-        "runner/native_input.rs",
-        "runner/nnue-diagnose.rs",
-        "runner/research_manifest.rs",
-        "runner/resources.rs",
-        "runner/runtime.rs",
-        "runner/sigma_clock.rs",
-        "runner/value_search_compare.rs",
-        "runner/value_search_strength.rs",
-    )
-)
-RESEARCH_SOURCE_KEYS = GENERATION_SOURCE_KEYS | {"runner/sigma_qualification.rs"}
-ORDERING_SOURCE_KEYS = frozenset(("ai/continuation_history.rs", "ai/static_ordering.rs"))
-GENERATION_ORDERING_KEYS = GENERATION_SOURCE_KEYS | ORDERING_SOURCE_KEYS
-RESEARCH_ORDERING_KEYS = RESEARCH_SOURCE_KEYS | ORDERING_SOURCE_KEYS
-ASSESSMENT_SOURCE_KEYS = frozenset(("runner/ordering_assessment.rs",))
-RESEARCH_ASSESSMENT_KEYS = RESEARCH_ORDERING_KEYS | ASSESSMENT_SOURCE_KEYS
-
-
-def generation_source_correspondence(native, qualified):
-    """Exact arena projection: retained34/35, ordering36/37, or assessment36/38; never unknown keys."""
-    require(
-        isinstance(qualified, dict)
-        and set(qualified)
-        in (RESEARCH_SOURCE_KEYS, RESEARCH_ORDERING_KEYS, RESEARCH_ASSESSMENT_KEYS),
-        "qualified exact maintained source domain",
-    )
-    keys = set(qualified) - {"runner/sigma_qualification.rs"} - ASSESSMENT_SOURCE_KEYS
-    require(
-        isinstance(native, dict) and set(native) == keys,
-        "generation exact source domain",
-    )
-    require(
-        all(
-            isinstance(h, str) and len(h) == 64 and all(c in "0123456789abcdef" for c in h)
-            for h in qualified.values()
-        ),
-        "qualified source hash shape",
-    )
-    require(
-        native == {key: qualified[key] for key in keys},
-        "generation shared source hash drift",
-    )
-
-
 def generation_evidence(experiment, values):
     """Metadata correspondence only; legal history/model qualification remains downstream."""
     build = document(experiment["build_manifest"])
     start, book, schedule, result = [json.loads(values[n]) for n in GENERATION_FILES]
-    generation_source_correspondence(start["compiled_sources"], build["compiled_sources"])
-    require(
-        start["compiled_sources"] == book["compiled_sources"],
-        "generation native maps drift",
-    )
     evidence = {
         "schema": "quoridor.research.generation-evidence.v1",
         "phase": "generation",
@@ -2249,21 +2097,6 @@ def generation_evidence(experiment, values):
         "games_started": 0,
         "scientific_planned_slots": 512,
         "artifact": build["artifact"],
-        "compiled_sources": build["compiled_sources"],
-        "compiled_sources_domain": (
-            "research-qualified38-assessment360-v1"
-            if set(build["compiled_sources"]) == RESEARCH_ASSESSMENT_KEYS
-            else "research-qualified37-continuation360-v1"
-            if set(build["compiled_sources"]) == RESEARCH_ORDERING_KEYS
-            else "research-qualified35-v1"
-        ),
-        "native_compiled_sources": start["compiled_sources"],
-        "native_compiled_sources_domain": (
-            "arena-generation36-continuation360-v1"
-            if set(start["compiled_sources"]) == GENERATION_ORDERING_KEYS
-            else "arena-generation34-v1"
-        ),
-        "generation_compiled_sources_sha256": canonical_sha(start["compiled_sources"]),
         "book_sha256": sha(values["book"]),
         "book_semantic_sha256": canonical_sha(book),
         "schedule_sha256": sha(values["schedule"]),
@@ -2629,7 +2462,7 @@ def arena_plan_check(experiment, plan):
         and 0 < a["retained_outcome_bytes"] <= config["max_output_bytes"]
         and (
             plan["comparison"] == "whole_wall_time"
-            or a["search_source_sha256"][0] == a["search_source_sha256"][1]
+            or a["search_artifact_sha256"][0] == a["search_artifact_sha256"][1]
         ),
         "arena equal runtime/backend/retention conditions",
     )
@@ -3009,11 +2842,6 @@ def arena_reference_report(config, files, values=None, expected_build=None):
             manifest["binding"]["executable_sha256"] == expected_build["artifact"]["sha256"],
             "actual current image publication",
         )
-        for key, digest in manifest["binding"]["compiled_sources"].items():
-            require(
-                expected_build["compiled_sources"].get(key) == digest,
-                "compiled publication source differs from current qualified image",
-            )
     report["outcomes"] = sorted(rows, key=lambda row: row["game"])
     return report
 
@@ -4249,8 +4077,9 @@ def execute(
                 if spec["kind"] == "build":
                     build_check(spec)
                     refs = [
-                        *spec["source"]["files"],
-                        *spec["dependency_refs"],
+                        spec["source"]["manifest"],
+                        spec["source"]["lock"],
+                        *spec["source"]["untracked_inputs"],
                         *[t["file"] for t in spec["tools"].values()],
                     ]
                 else:
@@ -4301,73 +4130,33 @@ def execute(
                         )
                     candidate = None
                     for row in spec["commands"]:
-                        if row["role"] == "bindings":
-                            require(
-                                candidate is not None
-                                and row["argv"] == [spec["private"], "research-bindings"],
-                                "same executable bindings",
-                            )
                         result["active_command"] = row
                         _, full = command(
                             spec, row, directory, resources, executor, ledger=result["checks"]
                         )
                         check = result["checks"][-1]
-                        if row["role"] == "bindings":
-                            metadata = json.loads(full.read_bytes())
+                        cargo = cargo_report(full.read_bytes())
+                        check["cargo"] = cargo
+                        if row["role"] == "build":
+                            matches = [
+                                a
+                                for a in cargo["artifacts"]
+                                if a["target"]["name"]
+                                == spec.get("artifact_target", "quoridor-runner")
+                                and a["target"]["kind"] == ["bin"]
+                                and a["profile"]["test"] is False
+                            ]
                             require(
-                                metadata["executable_sha256"] == candidate["sha256"]
-                                and metadata["model_calls"] == 0,
-                                "actual zero-model bindings",
+                                len(matches) == 1, "one selected maintained executable artifact"
                             )
-                            require(
-                                metadata.get("artifact_target", "quoridor-runner")
-                                == spec.get("artifact_target", "quoridor-runner"),
-                                "actual selected executable metadata",
-                            )
-                            result["compiled_sources"] = metadata["compiled_sources"]
-                            if "generator_compiled_sources" in spec["source"]:
-                                expected_generator = {
-                                    k: r["sha256"]
-                                    for k, r in spec["source"]["generator_compiled_sources"].items()
-                                }
-                                require(
-                                    metadata.get("generator_compiled_sources")
-                                    == expected_generator,
-                                    "current generator source binding",
-                                )
-                                result["generator_compiled_sources"] = metadata[
-                                    "generator_compiled_sources"
-                                ]
-                            require(
-                                metadata["compiled_sources"]
-                                == {
-                                    k: v["sha256"]
-                                    for k, v in spec["source"]["compiled_sources"].items()
-                                },
-                                "compiled image differs from adopted source projection",
-                            )
-                        else:
-                            cargo = cargo_report(full.read_bytes())
-                            check["cargo"] = cargo
-                            if row["role"] == "build":
-                                matches = [
-                                    a
-                                    for a in cargo["artifacts"]
-                                    if a["target"]["name"]
-                                    == spec.get("artifact_target", "quoridor-runner")
-                                    and a["target"]["kind"] == ["bin"]
-                                    and a["profile"]["test"] is False
-                                ]
-                                require(
-                                    len(matches) == 1, "one selected maintained executable artifact"
-                                )
-                                src = owned(matches[0]["executable"], spec["target"])
-                                private_copy_check(spec, src)
-                                candidate = copy_artifact(src, spec["private"])
+                            src = owned(matches[0]["executable"], spec["target"])
+                            private_copy_check(spec, src)
+                            result["cargo_artifact"] = matches[0]
+                            candidate = copy_artifact(src, spec["private"])
                         result["active_command"] = None
                     require(
-                        candidate is not None and result.get("compiled_sources"),
-                        "actual artifact/bindings required",
+                        candidate is not None,
+                        "actual Cargo artifact required",
                     )
                     result.update(
                         artifact=candidate,
@@ -4376,7 +4165,6 @@ def execute(
                         source_adoption=spec["source_adoption"],
                         tools=spec["tools"],
                         env=spec["env"],
-                        dependency_refs=spec["dependency_refs"],
                     )
                 else:
                     spec["env"] = {
@@ -4407,6 +4195,8 @@ def execute(
                         raise run_error
                 for ref in refs:
                     read_ref(ref, max(CONTROL_BYTES, ref["bytes"]))
+                if spec["kind"] == "build":
+                    source_check(spec["source"])
                 result["status"] = "PENDING_FINALIZATION"
             finally:
                 if created_TMP:
@@ -4819,37 +4609,40 @@ def _prepare_completion(directory, job_ref, *, failure=None):
         try:
             read_ref(candidate["artifact"], 32 * 1024 * 1024)
             source_check(candidate["source"])
-            expected = {
-                k: ref["sha256"] for k, ref in candidate["source"]["compiled_sources"].items()
-            }
-            require(candidate["compiled_sources"] == expected, "final adopted source projection")
-            if "generator_compiled_sources" in candidate["source"]:
-                expected_generator = {
-                    k: r["sha256"]
-                    for k, r in candidate["source"]["generator_compiled_sources"].items()
-                }
-                require(
-                    candidate.get("generator_compiled_sources") == expected_generator,
-                    "final generator source projection",
-                )
-            bindings = [c for c in candidate["checks"] if c["role"] == "bindings"]
-            require(bool(bindings), "actual bindings missing")
-            for check in bindings:
-                metadata = json.loads(read_ref(check["full_log"]))
-                if "generator_compiled_sources" in candidate["source"]:
-                    require(
-                        metadata.get("generator_compiled_sources")
-                        == candidate["generator_compiled_sources"],
-                        "final generator bindings log",
-                    )
-                require(
-                    metadata.get("artifact_target", "quoridor-runner")
-                    == candidate.get("artifact_target", "quoridor-runner")
-                    and metadata["compiled_sources"] == expected
-                    and metadata["executable_sha256"] == candidate["artifact"]["sha256"]
-                    and metadata["model_calls"] == 0,
-                    "final artifact/adopted metadata join",
-                )
+            spec = document(candidate["intent"])
+            require(candidate["source"] == spec["source"], "final adopted Git/Cargo record")
+            require(
+                candidate["tools"] == spec["tools"] and candidate["env"] == spec["env"],
+                "final build tool/environment identity",
+            )
+            builds = [c for c in candidate["checks"] if c["role"] == "build"]
+            require(len(builds) == 1, "one actual build command")
+            cargo = cargo_report(read_ref(builds[0]["full_log"]))
+            artifacts = [
+                a
+                for a in cargo["artifacts"]
+                if a["target"]["name"] == candidate["artifact_target"]
+                and a["target"]["kind"] == ["bin"]
+                and a["profile"]["test"] is False
+            ]
+            require(artifacts == [candidate["cargo_artifact"]], "actual Cargo artifact receipt")
+            emitted = owned(artifacts[0]["executable"], spec["target"])
+            require(
+                bound(emitted, 32 * 1024 * 1024)[0]["sha256"] == candidate["artifact"]["sha256"],
+                "Cargo/private artifact drift",
+            )
+            require(
+                {"test", "lint", "build"}
+                <= {
+                    c["role"]
+                    for c in candidate["checks"]
+                    if c["status"] == "PASS"
+                    and c["capture_complete"] is True
+                    and c["guardian_return"]["exit_code"] == 0
+                    and c["guardian_return"]["cleanup_complete"] is True
+                },
+                "actual completed software checks",
+            )
         except BaseException as error:
             if candidate["status"] != "CANCELLED":
                 candidate["status"] = "FAILED"

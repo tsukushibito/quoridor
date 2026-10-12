@@ -7,6 +7,7 @@ import json
 import os
 from pathlib import Path
 import sys
+import subprocess
 import tempfile
 import time
 import unittest
@@ -44,12 +45,30 @@ class RuntimeProvenanceTests(unittest.TestCase):
             "workspace": str(self.root),
             "commit": "a" * 40,
             "patch": None,
-            "files": [self.ref(p) for p in (self.source, manifest, lock)],
+            "untracked_inputs": [],
             "manifest": self.ref(manifest),
             "lock": self.ref(lock),
             "cargo_configs": [{"path": str(self.cargo_config), "file": None}],
-            "compiled_sources": {"fixture/native": self.ref(self.source)},
         }
+        for args in (
+            ["init", "-q"],
+            ["add", "crates/fixture/src/lib.rs", "Cargo.toml", "Cargo.lock"],
+            [
+                "-c",
+                "user.name=Synthetic379",
+                "-c",
+                "user.email=synthetic379@example.invalid",
+                "commit",
+                "-qm",
+                "synthetic source",
+            ],
+        ):
+            subprocess.run(["git", "-C", str(self.root), *args], check=True, capture_output=True)
+        self.source_info["commit"] = (
+            subprocess.check_output(["git", "-C", str(self.root), "rev-parse", "HEAD"])
+            .decode()
+            .strip()
+        )
         script = (
             f"#!{sys.executable}\n"
             "import json,pathlib,sys\n"
@@ -65,9 +84,8 @@ class RuntimeProvenanceTests(unittest.TestCase):
             "status": "PASS",
             "cleanup_complete": True,
             "remaining": [],
-            "checks": [{"role": role} for role in ("test", "lint", "build", "bindings")],
+            "checks": [{"role": role} for role in ("test", "lint", "build")],
             "source": copy.deepcopy(self.source_info),
-            "compiled_sources": {"fixture/native": self.ref(self.source)["sha256"]},
             "artifact": self.ref(artifact),
             "dependency_refs": [self.ref(dependency), self.ref(lock)],
             "tools": {"CARGO": {"file": self.ref(compiler), "version": "synthetic v1"}},
@@ -202,11 +220,10 @@ class RuntimeProvenanceTests(unittest.TestCase):
         self.cargo_config.write_text("[build]\n")
         self.intent()
         _, manifest, refs = lc.experiment_check(self.spec)
-        self.assertEqual(manifest["compiled_sources"], self.build["compiled_sources"])
         self.assertIn(self.build["artifact"], refs)
         self.assertNotIn(self.source_info["lock"], refs)
         self.assertNotIn(self.build["tools"]["CARGO"]["file"], refs)
-        self.assertNotIn(self.source_info["compiled_sources"]["fixture/native"], refs)
+        self.assertNotIn(self.ref(self.source), refs)
         candidate = self.run_child()
         returned = candidate["checks"][0]["guardian_return"]
         self.assertTrue(returned["direct_child_reaped"] and returned["cleanup_complete"])
@@ -277,7 +294,7 @@ class RuntimeProvenanceTests(unittest.TestCase):
         )
         self.experiment["config"] = self.config
         self.spec["experiment"] = self.json("experiment.json", self.experiment)
-        with self.assertRaisesRegex(lc.Refused, "reference drift"):
+        with self.assertRaisesRegex(lc.Refused, "Git delta drift"):
             self.run_child()
         candidate = json.loads((Path(self.spec["output"]) / "candidate.json").read_bytes())
         self.assertEqual(candidate["status"], "FAILED")
@@ -294,7 +311,6 @@ class RuntimeProvenanceTests(unittest.TestCase):
             ("remaining", ["unknown"]),
             ("schema", "unknown"),
             ("checks", []),
-            ("compiled_sources", {"fixture/native": "0" * 64}),
         ):
             with self.subTest(key=key):
                 bad = copy.deepcopy(self.build)
@@ -313,7 +329,7 @@ class RuntimeProvenanceTests(unittest.TestCase):
     def test_build_source_checks_retained_files_and_cargo_absence(self):
         lc.source_check(self.source_info)
         self.source.write_bytes(b"native B")
-        with self.assertRaisesRegex(lc.Refused, "reference drift"):
+        with self.assertRaisesRegex(lc.Refused, "Git delta drift"):
             lc.source_check(self.source_info)
         self.source.write_bytes(b"synthetic native source A\n")
         self.cargo_config.parent.mkdir()

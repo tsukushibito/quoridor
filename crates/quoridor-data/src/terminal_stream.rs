@@ -128,6 +128,8 @@ struct Header {
     config: Value,
     config_sha256: String,
     executable_sha256: String,
+    // Opaque provenance of immutable saved streams; Cargo owns current build dependencies.
+    #[serde(default)]
     compiled_sources: BTreeMap<String, String>,
     evaluator: String,
     scheduled: Vec<Slot>,
@@ -300,9 +302,6 @@ fn validate_header(
         return Err("pilot reference scope".into());
     }
     valid_sha(&h.executable_sha256)?;
-    if h.compiled_sources.is_empty() {
-        return Err("missing compiled source provenance".into());
-    }
     for (path, sha) in &h.compiled_sources {
         if path.is_empty() {
             return Err("empty source identity".into());
@@ -587,9 +586,6 @@ fn refuse_synthetic(config: &Value, source: &Value) -> Result<()> {
     if marker.is_some_and(|v| v != false)
         || source["generator_version"].as_str().is_none_or(synthetic)
         || config["phase"].as_str().is_none_or(synthetic)
-        || source["compiled_sources"]
-            .as_object()
-            .is_none_or(|m| m.is_empty() || m.keys().any(|k| k.contains("synthetic")))
     {
         return Err("synthetic provenance cannot be authoritative reference/full volume".into());
     }
@@ -637,7 +633,7 @@ fn validate_reference_policy(reference: &Value, header: &Header) -> Result<()> {
         || source["schema"] != header.schema
         || source["generator_version"] != header.generator_version
         || source["evaluator"] != header.evaluator
-        || source["compiled_sources"] != serde_json::to_value(&header.compiled_sources)?
+        || source["executable_sha256"] != header.executable_sha256
     {
         return Err("opened-pilot generator/source/scientific policy mismatch".into());
     }
@@ -1558,10 +1554,10 @@ mod stream_repair_tests {
         }
     }
     #[test]
-    fn stream_repair_reference_policy_exact_sources_and_only_schedule_changes() {
+    fn build379_reference_policy_binds_artifact_and_only_schedule_changes() {
         let root = controls();
         let config = json!({"phase":"pilot64","main_volume_n":null,"planned_games":64,"prefix_seed":20261008,"depth":3,"max_nodes":100000,"ruleset":"fixed-policy","cpu_core":0});
-        let source = json!({"schema":STREAM_SCHEMA,"generator_version":"fixed-d-dual-teacher-pilot-v1","evaluator":EVALUATOR,"compiled_sources":{"unexecuted-control-port":"b".repeat(64)},"resource_admission":{}});
+        let source = json!({"schema":STREAM_SCHEMA,"generator_version":"fixed-d-dual-teacher-pilot-v1","evaluator":EVALUATOR,"executable_sha256":"a".repeat(64),"compiled_sources":{"unexecuted-control-port":"b".repeat(64)},"resource_admission":{}});
         let partition = FamilyPartition {
             schema: "control-only-unexecuted-partition".into(),
             seed: 20261008,
@@ -1587,7 +1583,7 @@ mod stream_repair_tests {
             generator_version: source["generator_version"].as_str().unwrap().into(),
             config: new_config,
             config_sha256: "control-only".into(),
-            executable_sha256: "control-only".into(),
+            executable_sha256: "a".repeat(64),
             compiled_sources: BTreeMap::from([("unexecuted-control-port".into(), "b".repeat(64))]),
             evaluator: EVALUATOR.into(),
             scheduled: vec![],
@@ -1595,18 +1591,14 @@ mod stream_repair_tests {
             resource_admission: json!({"new_operational_receipt":true}),
         };
         validate_reference_policy(&reference, &header).unwrap();
-        header
-            .compiled_sources
-            .insert("unexecuted-control-port".into(), "c".repeat(64));
+        header.executable_sha256 = "c".repeat(64);
         assert!(
             validate_reference_policy(&reference, &header)
                 .unwrap_err()
                 .to_string()
                 .contains("policy mismatch")
         );
-        header
-            .compiled_sources
-            .insert("unexecuted-control-port".into(), "b".repeat(64));
+        header.executable_sha256 = "a".repeat(64);
         header.config["depth"] = json!(6);
         assert!(validate_reference_policy(&reference, &header).is_err());
         header.config["depth"] = json!(3);

@@ -100,7 +100,7 @@ fn generate_bound(request: GenerationRequest) -> Result<serde_json::Value> {
     write_new(
         &request.output,
         "generation-start.json",
-        &serde_json::json!({"request":request,"admission":admission,"compiled_sources":crate::compiled_source_bindings(),"planned_families":128,"attempt_upper":1024,"transition_upper":16384,"models_loaded":0,"search_calls":0,"games_started":0}),
+        &serde_json::json!({"request":request,"admission":admission,"planned_families":128,"attempt_upper":1024,"transition_upper":16384,"models_loaded":0,"search_calls":0,"games_started":0}),
     )?;
     let book = generate(&prefixes, request.old_prefixes.sha256.clone())?;
     write_new(&request.output, "book.json", &book)?;
@@ -265,6 +265,8 @@ pub struct GeneratedBook {
     pub old_open8_prefixes: Vec<Vec<u16>>,
     pub rules: String,
     pub action_encoding: String,
+    // Opaque historical producer provenance in immutable saved books; never a current source inventory.
+    #[serde(default, skip_serializing_if = "std::collections::BTreeMap::is_empty")]
     pub compiled_sources: std::collections::BTreeMap<String, String>,
     pub complete: bool,
     pub attempted: usize,
@@ -327,10 +329,7 @@ pub fn generate(old_open8: &[Vec<u16>], old_open8_sha256: String) -> Result<Gene
         old_open8_prefixes: old_open8.to_vec(),
         rules: rules.id().into(),
         action_encoding: "Rust ActionID: pawn0..80/horizontal81..144/vertical145..208".into(),
-        compiled_sources: crate::compiled_source_bindings()
-            .into_iter()
-            .map(|(k, v)| (k.into(), v))
-            .collect(),
+        compiled_sources: Default::default(),
         complete: false,
         attempted: 0,
         transitions: 0,
@@ -420,11 +419,6 @@ pub fn validate_book(book: &GeneratedBook) -> Result<()> {
         || book.attempted != book.attempts.len()
         || book.attempted > 1024
         || book.transitions > 16384
-        || book.compiled_sources
-            != crate::compiled_source_bindings()
-                .into_iter()
-                .map(|(k, v)| (k.into(), v))
-                .collect()
     {
         return Err("START_BOOK_INCOMPLETE_IDENTITY".into());
     }

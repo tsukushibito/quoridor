@@ -487,6 +487,8 @@ pub struct PilotHeader {
     pub config: PilotConfig,
     pub config_sha256: String,
     pub executable_sha256: String,
+    // Historical stream provenance retained for exact reconstruction, not checked against current compiler sources.
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
     pub compiled_sources: BTreeMap<String, String>,
     pub evaluator: String,
     pub scheduled: Vec<ScheduledGame>,
@@ -594,62 +596,6 @@ enum Event {
     Footer(Box<PilotReport>),
 }
 
-pub fn compiled_sources() -> BTreeMap<String, String> {
-    let mut bindings: BTreeMap<_, _> = crate::compiled_source_bindings()
-        .into_iter()
-        .map(|(path, hash)| (path.to_owned(), hash))
-        .collect();
-    for (path, bytes) in [
-        (
-            "crates/quoridor-data/src/lossless_jsonl.rs",
-            include_bytes!("../../quoridor-data/src/lossless_jsonl.rs").as_slice(),
-        ),
-        (
-            "crates/quoridor-data/src/lib.rs",
-            include_bytes!("../../quoridor-data/src/lib.rs").as_slice(),
-        ),
-        (
-            "crates/quoridor-data/src/terminal_cache.rs",
-            include_bytes!("../../quoridor-data/src/terminal_cache.rs").as_slice(),
-        ),
-        (
-            "crates/quoridor-data/src/terminal_stream.rs",
-            include_bytes!("../../quoridor-data/src/terminal_stream.rs").as_slice(),
-        ),
-        (
-            "crates/quoridor-data/src/common_corpus.rs",
-            include_bytes!("../../quoridor-data/src/common_corpus.rs").as_slice(),
-        ),
-        (
-            "crates/quoridor-runner/src/teacher_pilot.rs",
-            include_bytes!("teacher_pilot.rs").as_slice(),
-        ),
-        (
-            "crates/quoridor-runner/src/teacher_pilot_execution.rs",
-            include_bytes!("teacher_pilot_execution.rs").as_slice(),
-        ),
-        (
-            "crates/quoridor-runner/src/teacher_pilot/depth6.rs",
-            include_bytes!("teacher_pilot/depth6.rs").as_slice(),
-        ),
-        (
-            "crates/quoridor-runner/src/teacher_pilot_execution/depth6.rs",
-            include_bytes!("teacher_pilot_execution/depth6.rs").as_slice(),
-        ),
-        (
-            "crates/quoridor-runner/src/teacher_pilot_execution/scheduling.rs",
-            include_bytes!("teacher_pilot_execution/scheduling.rs").as_slice(),
-        ),
-        (
-            "crates/quoridor-data/src/terminal.rs",
-            include_bytes!("../../quoridor-data/src/terminal.rs").as_slice(),
-        ),
-    ] {
-        bindings.insert(path.into(), format!("{:x}", Sha256::digest(bytes)));
-    }
-    bindings
-}
-
 fn stream_reader(path: &Path) -> Result<Box<dyn Read>> {
     if path.join("pilot-stream.jsonl.gz").exists() {
         if path.join("pilot-stream.jsonl").exists() {
@@ -696,7 +642,7 @@ fn control_ref(path: &Path) -> Result<quoridor_data::terminal_stream::BoundJson>
 }
 /// One qualified native invocation: retained compressed generation, then the shared cache.
 pub fn run_bound(bound: &crate::sigma_qualification::BoundControl) -> Result<Value> {
-    let (e, q) = crate::research_manifest::load(bound, "corpus")?;
+    let (e, _) = crate::research_manifest::load(bound, "corpus")?;
     let config: PilotConfig = e.config.read()?;
     config.validate()?;
     let study = config
@@ -709,13 +655,8 @@ pub fn run_bound(bound: &crate::sigma_qualification::BoundControl) -> Result<Val
             r.path != study.selected_plan.path || r.sha256 != study.selected_plan.sha256
         })
         || e.schedule.read::<Value>()? != study.schedule_choice()
-        || q["generator_compiled_sources_sha256"] != crate::arena::json_digest(&compiled_sources())?
     {
         return Err("current common generator/approved plan/schedule qualification differs".into());
-    }
-    let build: Value = e.build_manifest.read()?;
-    if build["generator_compiled_sources"] != serde_json::to_value(compiled_sources())? {
-        return Err("qualified current generator source closure required".into());
     }
     let report = run(&config, e.config.sha256.clone())?;
     save_control(
@@ -820,7 +761,7 @@ pub fn run(config: &PilotConfig, config_sha256: String) -> Result<PilotReport> {
         config: config.clone(),
         config_sha256,
         executable_sha256,
-        compiled_sources: compiled_sources(),
+        compiled_sources: BTreeMap::new(),
         evaluator: EVALUATOR_ID.into(),
         scheduled,
         family_partition,

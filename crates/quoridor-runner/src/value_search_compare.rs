@@ -60,11 +60,10 @@ fn families(book: &Value, plan: &Plan) -> Result<Vec<Family>> {
         || book["plan_sha256"] != plan.canonical_plan.sha256
         || book["complete"] != true
         || book["rules"] != "research-standard-2p-threefold-goal-first-v1"
-        || !book_sources_match(&book["compiled_sources"])?
         || book["attempted"].as_u64().is_none_or(|v| v > 1024)
         || book["transitions"].as_u64().is_none_or(|v| v > 16384)
     {
-        return Err("355 exact complete/current-source generated book required".into());
+        return Err("355 exact complete bound generated book required".into());
     }
     let families: Vec<Family> = serde_json::from_value(book["families"].clone())?;
     if families.len() != 128 {
@@ -83,21 +82,6 @@ fn families(book: &Value, plan: &Plan) -> Result<Vec<Family>> {
     }
     Ok(families)
 }
-fn book_sources_match(value: &Value) -> Result<bool> {
-    let Some(book_sources) = value.as_object() else {
-        return Ok(false);
-    };
-    // Generator and consumer may declare their own additive module; every shared
-    // compiled body must agree, including CLI/lib/clock/math/models/rules.
-    for (name, sha) in crate::compiled_source_bindings() {
-        if book_sources.get(name) != Some(&json!(sha)) {
-            return Ok(false);
-        };
-    }
-    Ok(book_sources
-        .values()
-        .all(|v| v.as_str().is_some_and(arena::sha_valid)))
-}
 fn replay_family(f: &Family) -> Result<SigmaContext> {
     let c = SigmaContext::from_prefix(&f.prefix)?;
     let actual: Vec<_> = c
@@ -114,9 +98,6 @@ fn replay_family(f: &Family) -> Result<SigmaContext> {
         return Err("355 replay/full-history/key/ply mismatch or terminal family".into());
     }
     Ok(c)
-}
-fn sources() -> BTreeMap<&'static str, String> {
-    crate::research_manifest::sources()
 }
 fn accepted_manifest_identity(index: usize, weights: &str, a: f32, b: f32) -> bool {
     let Some((expected_weights, expected_b)) = [(NN51, 8f32), (NN43, 0f32)].get(index).copied()
@@ -665,7 +646,7 @@ fn validate(plan: &Plan) -> Result<()> {
 /// Caller accepts one immutable book/control; no free vector of fabricated positions/models.
 pub fn run(bound: &BoundControl) -> Result<Value> {
     let whole = Instant::now();
-    let (experiment, qualified_input) = crate::research_manifest::load(bound, "compare")?;
+    let (experiment, _) = crate::research_manifest::load(bound, "compare")?;
     let plan: Plan = experiment.config.read()?;
     validate(&plan)?;
     if experiment.canonical_plan_sha256 != plan.canonical_plan.sha256 {
@@ -685,13 +666,8 @@ pub fn run(bound: &BoundControl) -> Result<Value> {
         return Err("355 same experiment/book/ordered models required".into());
     }
     let book: Value = plan.book.read()?;
-    if qualified_input["generation_compiled_sources_sha256"]
-        != arena::json_digest(&book["compiled_sources"])?
-    {
-        return Err("355 exact qualified generation-body lineage required".into());
-    }
     let families = families(&book, &plan)?;
-    let header = json!({"schema":"quoridor.value-search-strength.compare-intent.v2","experiment_sha256":bound.sha256,"config_sha256":experiment.config.sha256,"build_manifest":experiment.build_manifest,"book_sha256":plan.book.sha256,"matched_families":(0..128).step_by(4).collect::<Vec<_>>(),"common_families":(0..128).step_by(16).collect::<Vec<_>>(),"evaluators":NAMES,"weights_sha256":[null,NN51,NN43],"compiled_sources":sources(),"depth4_calls":96,"stronger_max_cases":16,"stronger_max_calls":192,"tree_max_nodes":800000,"no_lowerdepth_rescue":true,"unentered_slots":"UNKNOWN"});
+    let header = json!({"schema":"quoridor.value-search-strength.compare-intent.v2","experiment_sha256":bound.sha256,"config_sha256":experiment.config.sha256,"build_manifest":experiment.build_manifest,"book_sha256":plan.book.sha256,"matched_families":(0..128).step_by(4).collect::<Vec<_>>(),"common_families":(0..128).step_by(16).collect::<Vec<_>>(),"evaluators":NAMES,"weights_sha256":[null,NN51,NN43],"depth4_calls":96,"stronger_max_cases":16,"stronger_max_calls":192,"tree_max_nodes":800000,"no_lowerdepth_rescue":true,"unentered_slots":"UNKNOWN"});
     let mut output = Output::create(&plan.output, &header)?;
     let mut matched = Census::default();
     let mut stronger = Census::default();

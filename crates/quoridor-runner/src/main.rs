@@ -82,15 +82,6 @@ fn execute() -> Result<()> {
         strict_pairs(&args, &[route, "--report-mode"], &[])?;
     }
     match command {
-        "research-bindings" => {
-            if args.len() != 1 {
-                return Err("research-bindings accepts no flags".into());
-            }
-            println!(
-                "{}",
-                serde_json::to_string(&quoridor_runner::research_manifest::bindings()?)?
-            );
-        }
         "strength-book" | "strength-configs" => {
             strict_pairs(&args, &["--experiment", "--experiment-sha256"], &[])?;
             let bound = quoridor_runner::sigma_qualification::BoundControl {
@@ -208,7 +199,6 @@ fn execute() -> Result<()> {
                 println!(
                     "{}",
                     serde_json::json!({"pilot_config_sha256":digest,"valid":true,"main_volume_n":null,
-                        "compiled_sources":quoridor_runner::teacher_pilot_execution::compiled_sources(),
                         "fixed_D":"original-distance-a0-b8-tanh","models_loaded":0})
                 );
                 return Ok(());

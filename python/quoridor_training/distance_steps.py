@@ -238,17 +238,10 @@ def require_completed_stream_cache(path, manifest, *, full_volume=False):
         phase = intake.get("provenance", {}).get("header", {}).get("config", {}).get("phase")
     if intake.get("scope") != "synthetic-fixture":
         header = intake.get("provenance", {}).get("header", {})
-        source = header.get("compiled_sources")
         marker = header.get("resource_admission", {}).get("synthetic_fixture", False)
-        if (
-            marker is not False
-            or not isinstance(source, dict)
-            or not source
-            or any("synthetic" in key for key in source)
-            or any(
-                not isinstance(v, str) or "synthetic" in v or "fixture" in v
-                for v in (header.get("generator_version"), phase)
-            )
+        if marker is not False or any(
+            not isinstance(v, str) or "synthetic" in v or "fixture" in v
+            for v in (header.get("generator_version"), phase)
         ):
             raise ValueError(
                 "synthetic/missing provenance cannot be authoritative full volume/reference"

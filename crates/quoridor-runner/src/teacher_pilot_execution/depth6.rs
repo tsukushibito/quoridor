@@ -307,7 +307,7 @@ pub(super) fn run(config: &PilotConfig, hash: String, cancel: &AtomicBool) -> Re
             config: config.clone(),
             config_sha256: hash,
             executable_sha256: format!("{:x}", Sha256::digest(fs::read(std::env::current_exe()?)?)),
-            compiled_sources: compiled_sources(),
+            compiled_sources: BTreeMap::new(),
             evaluator: EVALUATOR_ID.into(),
             scheduled,
             family_partition,

@@ -12,14 +12,6 @@ use std::{
 };
 
 const CONTROL_BYTES: u64 = 1024 * 1024;
-pub fn sources() -> std::collections::BTreeMap<&'static str, String> {
-    let mut sources = crate::arena_manifest::source_bindings();
-    sources.insert(
-        "runner/sigma_qualification.rs",
-        crate::arena::digest(include_bytes!("sigma_qualification.rs")),
-    );
-    sources
-}
 fn sha(value: &str) -> Result<()> {
     if value.len() != 64
         || !value
@@ -82,26 +74,20 @@ impl BoundConfig {
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct NativeIdentity {
-    pub compiled_sources_sha256: String,
     pub executable_sha256: String,
     pub backend_sha256: String,
     pub valid_until_unix_ms: u64,
 }
 impl NativeIdentity {
     pub fn check(&self) -> Result<()> {
-        for value in [
-            &self.compiled_sources_sha256,
-            &self.executable_sha256,
-            &self.backend_sha256,
-        ] {
+        for value in [&self.executable_sha256, &self.backend_sha256] {
             sha(value)?;
         }
         if self.valid_until_unix_ms <= unix_ms()
-            || self.compiled_sources_sha256 != crate::arena::json_digest(&sources())?
             || self.executable_sha256
                 != crate::arena_manifest::file_sha256(&std::env::current_exe()?)?
         {
-            return Err("native identity stale or source/executable mismatch".into());
+            return Err("native identity stale or executable mismatch".into());
         }
         Ok(())
     }
@@ -180,7 +166,7 @@ fn sigma_body(config: &Config) -> Result<serde_json::Value> {
     }
     let index = indices[0];
     if arena.evaluator_sha256.len() != config.engines.len()
-        || arena.search_source_sha256.len() != config.engines.len()
+        || arena.search_artifact_sha256.len() != config.engines.len()
         || arena.evaluator_sha256[index] != config.inference.as_ref().unwrap().model_sha
     {
         return Err("Sigma evaluator/source vector correspondence required".into());
@@ -201,8 +187,8 @@ fn sigma_body(config: &Config) -> Result<serde_json::Value> {
         serde_json::json!([arena.evaluator_sha256[index]]),
     );
     a.insert(
-        "search_source_sha256".into(),
-        serde_json::json!([arena.search_source_sha256[index]]),
+        "search_artifact_sha256".into(),
+        serde_json::json!([arena.search_artifact_sha256[index]]),
     );
     Ok(body)
 }
@@ -509,7 +495,6 @@ impl QualificationPacket {
             decision_communication_upper_ns: self.decision_communication_upper_ns,
             valid_until_unix_ms: self.native.valid_until_unix_ms,
             config_sha256: digest,
-            compiled_sources_sha256: self.native.compiled_sources_sha256.clone(),
             executable_sha256: self.native.executable_sha256.clone(),
             backend_sha256: self.native.backend_sha256.clone(),
             evidence_sha256: self.evidence.sha256.clone(),
@@ -866,7 +851,6 @@ pub fn inspect_config(file: BoundControl) -> Result<serde_json::Value> {
     Ok(
         serde_json::json!({"schema":"quoridor-sigma-cost-bindings-v1","config_file":file,
         "normalized_config_sha256":crate::arena::json_digest(&config)?,
-        "compiled_sources":sources(),"compiled_sources_sha256":crate::arena::json_digest(&sources())?,
         "executable_sha256":crate::arena_manifest::file_sha256(&std::env::current_exe()?)?,
         "backend_loaded":false,"model_calls":0,"cost_qualification":null}),
     )
@@ -876,7 +860,6 @@ mod tests {
     use super::*;
     fn identity() -> NativeIdentity {
         NativeIdentity {
-            compiled_sources_sha256: "a".repeat(64),
             executable_sha256: "b".repeat(64),
             backend_sha256: "c".repeat(64),
             valid_until_unix_ms: 0,
@@ -1077,7 +1060,7 @@ mod three_engine_374_cost_tests {
             "engines":[{"kind":"mcts","time_ms":100},{"kind":"distance","time_ms":100}],
             "inference":{"backend":"ort","model":"/not-loaded/onnx","model_sha":"a".repeat(64),"library":"/not-loaded/library","device":0,"cuda_graph":false},
             "arena":{"comparison":"whole_wall_time","clock_policy":"strict_unknown","return_reserve_ms":5,"disable_continuation_static_ordering":true,
-            "tt_entries":4096,"bootstrap_seed":1,"bootstrap_resamples":1,"evaluator_sha256":["a".repeat(64),"b".repeat(64)],"search_source_sha256":["c".repeat(64),"d".repeat(64)],
+            "tt_entries":4096,"bootstrap_seed":1,"bootstrap_resamples":1,"evaluator_sha256":["a".repeat(64),"b".repeat(64)],"search_artifact_sha256":["c".repeat(64),"d".repeat(64)],
             "first_candidate_colors":[0],"retained_outcome_bytes":32768,"book":{"id":"synthetic","usage":"main","frozen_before_candidate_results":true,"independence":"synthetic","openings":[]}}
         })).unwrap()
     }
@@ -1089,7 +1072,7 @@ mod three_engine_374_cost_tests {
         swap.engines.swap(0, 1);
         let a = swap.arena.as_mut().unwrap();
         a.evaluator_sha256.swap(0, 1);
-        a.search_source_sha256.swap(0, 1);
+        a.search_artifact_sha256.swap(0, 1);
         a.first_candidate_colors = vec![1];
         swap.run_id = "other-approved-science".into();
         swap.output = "/not-run/other".into();
@@ -1102,7 +1085,7 @@ mod three_engine_374_cost_tests {
         a.decision_only = true;
         a.retained_outcome_bytes = Some(16384);
         a.evaluator_sha256.truncate(1);
-        a.search_source_sha256.truncate(1);
+        a.search_artifact_sha256.truncate(1);
         assert_eq!(subject, sigma_body(&parent).unwrap());
         for change in 0..8 {
             let mut bad = base.clone();
@@ -1113,7 +1096,7 @@ mod three_engine_374_cost_tests {
                 3 => bad.inference.as_mut().unwrap().library = Some("/other/library".into()),
                 4 => bad.mcts_max_bytes += 1,
                 5 => bad.max_memory_bytes = Some(1),
-                6 => bad.arena.as_mut().unwrap().search_source_sha256[0] = "e".repeat(64),
+                6 => bad.arena.as_mut().unwrap().search_artifact_sha256[0] = "e".repeat(64),
                 _ => bad.engines[0].time_ms = Some(101),
             }
             assert!(sigma_body(&bad).is_err() || sigma_body(&bad).unwrap() != subject);
@@ -1125,7 +1108,6 @@ mod three_engine_374_cost_tests {
     fn window_is_one_preobserved_launch_and_cannot_be_reset_or_minted_by_selection() {
         let launched = unix_ms().saturating_sub(1000);
         let mut native = NativeIdentity {
-            compiled_sources_sha256: "a".repeat(64),
             executable_sha256: "b".repeat(64),
             backend_sha256: "c".repeat(64),
             valid_until_unix_ms: launched + 86400000,

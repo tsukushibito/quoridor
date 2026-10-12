@@ -1,7 +1,5 @@
 """Typed documented lifecycle manifests, no historical certificate joins."""
 
-import hashlib
-import json
 import os
 from pathlib import Path
 
@@ -9,50 +7,6 @@ import io355
 import strength355 as s
 
 PREFIX = "quoridor.research."
-COMPILED_KEYS = frozenset(
-    [
-        "Cargo.lock",
-        "ai/alphabeta.rs",
-        "ai/lib.rs",
-        "ai/sigma_mcts.rs",
-        "core/game.rs",
-        "core/lib.rs",
-        "core/position.rs",
-        "core/research.rs",
-        "data/lib.rs",
-        "inference/cuda.rs",
-        "inference/lib.rs",
-        "inference/tensorrt.rs",
-        "nnue/features.rs",
-        "nnue/lib.rs",
-        "nnue/quantized.rs",
-        "nnue/residual.rs",
-        "nnue/simd.rs",
-        "runner/Cargo.toml",
-        "runner/arena.rs",
-        "runner/arena_book.rs",
-        "runner/arena_clock.rs",
-        "runner/arena_manifest.rs",
-        "runner/arena_statistics.rs",
-        "runner/config.rs",
-        "runner/lib.rs",
-        "runner/main.rs",
-        "runner/native_input.rs",
-        "runner/nnue-diagnose.rs",
-        "runner/research_manifest.rs",
-        "runner/resources.rs",
-        "runner/runtime.rs",
-        "runner/sigma_clock.rs",
-        "runner/sigma_qualification.rs",
-        "runner/value_search_compare.rs",
-        "runner/value_search_strength.rs",
-    ]
-)
-ORDERING_COMPILED_KEYS = COMPILED_KEYS | {
-    "ai/continuation_history.rs",
-    "ai/static_ordering.rs",
-}
-ASSESSMENT_COMPILED_KEYS = ORDERING_COMPILED_KEYS | {"runner/ordering_assessment.rs"}
 RULES = "research-standard-2p-threefold-goal-first-v1"
 UNITS = "wall-distance/80"
 PERSPECTIVE = "side-to-move"
@@ -123,22 +77,7 @@ def authoritative(inputs, ref, schema, kind, statuses=("PASS",)):
     )
     if kind == "build":
         descriptor(value["artifact"])
-        compiled_digest(value["compiled_sources"])
     return value
-
-
-def generation_sources(native, qualified):
-    """Exact retained34/35, ordering36/37 or assessment36/38 projection; no source-key filtering."""
-    compiled_digest(qualified)
-    keys = set(qualified) - {"runner/sigma_qualification.rs", "runner/ordering_assessment.rs"}
-    s.require(
-        type(native) is dict and set(native) == keys,
-        "exact generation arena source domain",
-    )
-    s.require(
-        all(native[key] == qualified[key] for key in keys),
-        "generation source/image pairing",
-    )
 
 
 def models(experiment):
@@ -255,20 +194,6 @@ class Metadata:
             )
 
 
-def compiled_digest(compiled):
-    s.require(type(compiled) is dict and bool(compiled), "flat complete compiled sources")
-    for name, digest in compiled.items():
-        s.require(type(name) is str and name.isascii(), "actual named compiled source")
-        s.sha(digest)
-    s.require(
-        set(compiled) in (COMPILED_KEYS, ORDERING_COMPILED_KEYS, ASSESSMENT_COMPILED_KEYS),
-        "exact complete maintained compiled source map",
-    )
-    return hashlib.sha256(
-        json.dumps(compiled, sort_keys=True, separators=(",", ":"), ensure_ascii=True).encode()
-    ).hexdigest()
-
-
 def child_context(intent_path, metadata, environment=None, parent_pid=None, argv=None):
     """Validate passed raw intent SHA and immediate parent; no second lock."""
     environment = os.environ if environment is None else environment
@@ -383,7 +308,6 @@ def numerical(metadata, experiment_value, build):
         "status": "PASS",
         "phase": experiment_value["phase"],
         "artifact_sha256": build["artifact"]["sha256"],
-        "compiled_sources_sha256": compiled_digest(build["compiled_sources"]),
         "config_sha256": experiment_value["config"]["sha256"],
         "schedule_sha256": experiment_value["schedule"]["sha256"],
         "input_sha256": [r["sha256"] for r in experiment_value["inputs"]],

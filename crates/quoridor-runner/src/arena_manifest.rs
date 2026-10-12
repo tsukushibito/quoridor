@@ -10,131 +10,6 @@ use std::{
     path::Path,
 };
 
-pub fn search_source_sha256(kind: &str) -> String {
-    if kind == "mcts" {
-        arena::digest(include_bytes!("../../quoridor-ai/src/sigma_mcts.rs"))
-    } else {
-        arena::digest(include_bytes!("../../quoridor-ai/src/alphabeta.rs"))
-    }
-}
-pub fn source_bindings() -> BTreeMap<&'static str, String> {
-    // Compiled bytes, rather than a mutable source tree read after the run.
-    let sources: &[(&str, &[u8])] = &[
-        ("Cargo.lock", include_bytes!("../../../Cargo.lock")),
-        ("runner/Cargo.toml", include_bytes!("../Cargo.toml")),
-        ("runner/main.rs", include_bytes!("main.rs")),
-        (
-            "runner/research_manifest.rs",
-            include_bytes!("research_manifest.rs"),
-        ),
-        (
-            "runner/value_search_compare.rs",
-            include_bytes!("value_search_compare.rs"),
-        ),
-        ("runner/lib.rs", include_bytes!("lib.rs")),
-        ("runner/runtime.rs", include_bytes!("runtime.rs")),
-        ("runner/config.rs", include_bytes!("config.rs")),
-        ("runner/resources.rs", include_bytes!("resources.rs")),
-        ("runner/native_input.rs", include_bytes!("native_input.rs")),
-        ("runner/arena_book.rs", include_bytes!("arena_book.rs")),
-        (
-            "runner/value_search_strength.rs",
-            include_bytes!("value_search_strength.rs"),
-        ),
-        (
-            "runner/nnue-diagnose.rs",
-            include_bytes!("bin/nnue-diagnose.rs"),
-        ),
-        ("runner/arena.rs", include_bytes!("arena.rs")),
-        ("runner/arena_clock.rs", include_bytes!("arena_clock.rs")),
-        ("runner/sigma_clock.rs", include_bytes!("sigma_clock.rs")),
-        (
-            "runner/arena_statistics.rs",
-            include_bytes!("arena_statistics.rs"),
-        ),
-        (
-            "runner/arena_manifest.rs",
-            include_bytes!("arena_manifest.rs"),
-        ),
-        (
-            "core/lib.rs",
-            include_bytes!("../../quoridor-core/src/lib.rs"),
-        ),
-        (
-            "core/game.rs",
-            include_bytes!("../../quoridor-core/src/game.rs"),
-        ),
-        (
-            "core/position.rs",
-            include_bytes!("../../quoridor-core/src/position.rs"),
-        ),
-        (
-            "core/research.rs",
-            include_bytes!("../../quoridor-core/src/research.rs"),
-        ),
-        ("ai/lib.rs", include_bytes!("../../quoridor-ai/src/lib.rs")),
-        (
-            "ai/alphabeta.rs",
-            include_bytes!("../../quoridor-ai/src/alphabeta.rs"),
-        ),
-        (
-            "ai/continuation_history.rs",
-            include_bytes!("../../quoridor-ai/src/continuation_history.rs"),
-        ),
-        (
-            "ai/static_ordering.rs",
-            include_bytes!("../../quoridor-ai/src/static_ordering.rs"),
-        ),
-        (
-            "ai/sigma_mcts.rs",
-            include_bytes!("../../quoridor-ai/src/sigma_mcts.rs"),
-        ),
-        (
-            "nnue/lib.rs",
-            include_bytes!("../../quoridor-nnue/src/lib.rs"),
-        ),
-        (
-            "nnue/features.rs",
-            include_bytes!("../../quoridor-nnue/src/features.rs"),
-        ),
-        (
-            "nnue/simd.rs",
-            include_bytes!("../../quoridor-nnue/src/simd.rs"),
-        ),
-        (
-            "nnue/residual.rs",
-            include_bytes!("../../quoridor-nnue/src/residual.rs"),
-        ),
-        (
-            "nnue/quantized.rs",
-            include_bytes!("../../quoridor-nnue/src/quantized.rs"),
-        ),
-        (
-            "inference/lib.rs",
-            include_bytes!("../../quoridor-inference/src/lib.rs"),
-        ),
-        (
-            "inference/cuda.rs",
-            include_bytes!("../../quoridor-inference/src/cuda.rs"),
-        ),
-        (
-            "inference/tensorrt.rs",
-            include_bytes!("../../quoridor-inference/src/tensorrt.rs"),
-        ),
-        (
-            "data/lib.rs",
-            include_bytes!("../../quoridor-data/src/lib.rs"),
-        ),
-        (
-            "data/lossless_jsonl.rs",
-            include_bytes!("../../quoridor-data/src/lossless_jsonl.rs"),
-        ),
-    ];
-    sources
-        .iter()
-        .map(|&(p, b)| (p, arena::digest(b)))
-        .collect()
-}
 pub fn file_sha256(path: &Path) -> Result<String> {
     let mut file = File::open(path)?;
     let mut sha = Sha256::new();
@@ -249,13 +124,11 @@ pub fn begin(c: &Config, slots: &[Slot], admission: &crate::resources::Admission
         c,
         "manifest-start.json",
         &serde_json::json!({
-        "schema":arena::SCHEMA,"schema_sources_sha256":arena::json_digest(&serde_json::json!({
-            "arena":arena::digest(include_bytes!("arena.rs")),"clock":arena::digest(include_bytes!("arena_clock.rs")),
-            "statistics":arena::digest(include_bytes!("arena_statistics.rs")),"runtime":arena::digest(include_bytes!("runtime.rs"))}))?,
+        "schema":arena::SCHEMA,
             "run_id":c.run_id,"config":c,"config_sha256":arena::json_digest(c)?,
             "book_sha256":c.arena.as_ref().map(|a| arena::json_digest(&a.book)).transpose()?,
             "planned_slots":slots,"planned_sha256":arena::json_digest(&slots)?,
-        "compiled_sources":source_bindings(),"executable":exe,"executable_sha256":file_sha256(&exe)?,
+        "executable":exe,"executable_sha256":file_sha256(&exe)?,
         "build":{"os":std::env::consts::OS,"arch":std::env::consts::ARCH,"cuda_aoti":cfg!(feature="cuda-aoti"),"tensorrt":cfg!(feature="tensorrt")},
             "rules":c.ruleset.id(),"admission":admission,
             "engine_tt_source_policy":c.engines.iter().enumerate().filter(|(_,e)| e.kind != "mcts").map(|(index,e)| serde_json::json!({
@@ -808,15 +681,11 @@ pub fn audit(output: &Path) -> Result<crate::arena_statistics::Summary> {
                 &config
                     .engines
                     .iter()
-                    .map(|e| {
-                        binding["compiled_sources"][if e.kind == "mcts" {
-                            "ai/sigma_mcts.rs"
-                        } else {
-                            "ai/alphabeta.rs"
-                        }]
-                        .as_str()
-                        .map(str::to_owned)
-                        .ok_or("search source identity")
+                    .map(|_| {
+                        binding["executable_sha256"]
+                            .as_str()
+                            .map(str::to_owned)
+                            .ok_or("search artifact identity")
                     })
                     .collect::<std::result::Result<Vec<_>, _>>()?,
             )?;

@@ -130,7 +130,6 @@ def scientific_inputs(index, inputs, metadata, build_ref, build, analysis_experi
         index, inputs, available, {"source_book_SHA256": inputs.refs[index["book"]]["SHA256"]}
     )
     raw_book = inputs.get(index["book"], 1048576)
-    life.generation_sources(raw_book["compiled_sources"], build["compiled_sources"])
     book = s.adapt_generated_book(
         raw_book, inputs.refs[index["book"]]["SHA256"], "ACTUAL_GENERATED"
     )

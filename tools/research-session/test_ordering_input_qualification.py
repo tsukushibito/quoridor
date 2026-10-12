@@ -110,7 +110,7 @@ class OrderingQualificationTests(unittest.TestCase):
 
     def test_full_journal_partial_precision_and_current_artifact_subject(self):
         e = self.fixture()
-        build = {"artifact": {"sha256": "a" * 64}, "compiled_sources": {"fake": "b" * 64}}
+        build = {"artifact": {"sha256": "a" * 64}}
         claim = lc.numerical_fields({**e, "phase": "compare"}, build)
         claim["status"] = None
         rows = [

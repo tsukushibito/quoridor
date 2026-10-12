@@ -106,7 +106,7 @@ class ArenaPlanTests(unittest.TestCase):
                 "tt_entries": 37,
                 "retained_outcome_bytes": 32768,
                 "evaluator_sha256": [model["evaluator_sha256"], "b" * 64],
-                "search_source_sha256": ["c" * 64, "c" * 64],
+                "search_artifact_sha256": ["c" * 64, "c" * 64],
                 "first_candidate_colors": [0] * families,
                 "book": {
                     "openings": [
@@ -158,9 +158,8 @@ class ArenaPlanTests(unittest.TestCase):
             "cleanup_complete": True,
             "remaining": [],
             "artifact": artifact_ref,
-            "source": {"files": [], "compiled_sources": {}},
-            "compiled_sources": {},
-            "checks": [{"role": role} for role in ("test", "lint", "build", "bindings")],
+            "source": {"fixture_only": "NOT BUILD PROVENANCE"},
+            "checks": [{"role": role} for role in ("test", "lint", "build")],
             "dependency_refs": [],
             "tools": {},
         }
@@ -328,7 +327,6 @@ class ArenaPlanTests(unittest.TestCase):
             launched = lc.time.time_ns() // 1000000 - 1000
             native = {
                 "executable_sha256": spec["artifact"]["sha256"],
-                "compiled_sources_sha256": lc.canonical_sha({}),
                 "backend_sha256": "c" * 64,
                 "valid_until_unix_ms": launched + 86400000,
             }
@@ -387,7 +385,7 @@ class ArenaPlanTests(unittest.TestCase):
                     "limit_B": lc.CONTROL_BYTES,
                 }
             ]
-            build = {"artifact": spec["artifact"], "compiled_sources": {}}
+            build = {"artifact": spec["artifact"]}
             lc.sigma_cost_check(spec, e, build, approved)
             for change in ("plan", "image", "calls", "order", "output", "model", "partial_phase"):
                 bad = copy.deepcopy(plan)
@@ -501,7 +499,7 @@ class ArenaPlanTests(unittest.TestCase):
             a["disable_continuation_static_ordering"] = True
             a["return_reserve_ms"] = 5
             a["evaluator_sha256"] = a["evaluator_sha256"][:1]
-            a["search_source_sha256"] = a["search_source_sha256"][:1]
+            a["search_artifact_sha256"] = a["search_artifact_sha256"][:1]
             book = {"frozen_before_candidate_results": True, "openings": a["book"]["openings"]}
             plan["book"] = self.json_file("synthetic-decision-book.json", book)
             plan["inputs"] = [plan["book"]]
@@ -720,7 +718,6 @@ class ArenaPlanTests(unittest.TestCase):
                     "result": doc,
                     "binding": {
                         "config": config,
-                        "compiled_sources": {},
                         "executable_sha256": spec["artifact"]["sha256"],
                     },
                     "artifacts": {

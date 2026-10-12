@@ -96,16 +96,34 @@ class LifecycleTests(unittest.TestCase):
         self.calls = []
         self.source = self.file("source.rs", b"fn owned_source() {}\n")
         self.tool = self.file("trusted-tool", b"synthetic tool, never executed", 0o755)
-        self.source_info = {"commit": "1" * 40, "patch": None, "files": [ref(self.source)]}
+        self.source_info = {"commit": "1" * 40, "patch": None, "untracked_inputs": []}
         manifest = self.file("Cargo.toml", b"[workspace]\n")
         lock = self.file("Cargo.lock", b"synthetic lock fixture")
         self.source_info.update(
             workspace=str(self.root),
             manifest=ref(manifest),
             lock=ref(lock),
-            compiled_sources={"source": ref(self.source)},
         )
-        self.source_info["files"] += [ref(manifest), ref(lock)]
+        # Standard Git is the fixture's only source/delta authority; no map builder.
+        for args in (
+            ["init", "-q"],
+            ["add", "source.rs", "Cargo.toml", "Cargo.lock"],
+            [
+                "-c",
+                "user.name=Synthetic379",
+                "-c",
+                "user.email=synthetic379@example.invalid",
+                "commit",
+                "-qm",
+                "synthetic source",
+            ],
+        ):
+            subprocess.run(["git", "-C", str(self.root), *args], check=True, capture_output=True)
+        self.source_info["commit"] = (
+            subprocess.check_output(["git", "-C", str(self.root), "rev-parse", "HEAD"])
+            .decode()
+            .strip()
+        )
         cargo_home = self.root / "cargo-home"
         configurations = {
             str(p / ".cargo" / n)
@@ -164,7 +182,6 @@ class LifecycleTests(unittest.TestCase):
                     "private_pool_B": 33554432,
                 },
             ),
-            "dependency_refs": [ref(lock)],
             "tools": {
                 n: {"file": ref(self.tool), "version_args": ["--version"], "version": "fixture1"}
                 for n in ["CARGO", "RUSTC", "RUSTDOC", "CC", "CXX", "AR", "PYTHON"]
@@ -194,17 +211,15 @@ class LifecycleTests(unittest.TestCase):
                         "--locked",
                         "-j1",
                         "--message-format=json-render-diagnostics",
+                        *(
+                            ["--release", "-p", "quoridor-runner", "--bin", "quoridor-runner"]
+                            if role == "build"
+                            else []
+                        ),
                         *(["--no-deps", "--", "-Dwarnings"] if role == "lint" else []),
                     ],
                 }
                 for role in ["test", "lint", "build"]
-            ]
-            + [
-                {
-                    "name": "bindings",
-                    "role": "bindings",
-                    "argv": [str(self.private), "research-bindings"],
-                }
             ],
             "limits": {
                 "family_B": 536870912,
@@ -257,18 +272,6 @@ class LifecycleTests(unittest.TestCase):
         sink = kwargs["output_sink"]
         if argv[-1] == "--version":
             sink(b"fixture1\n")
-        elif argv[-1] == "research-bindings":
-            sink(
-                json.dumps(
-                    {
-                        "executable_sha256": ref(self.private)["sha256"],
-                        "compiled_sources": {
-                            k: r["sha256"] for k, r in self.source_info["compiled_sources"].items()
-                        },
-                        "model_calls": 0,
-                    }
-                ).encode()
-            )
         elif len(argv) > 1 and argv[1] in {"test", "clippy", "build"}:
             events = [
                 {
@@ -432,9 +435,9 @@ class LifecycleTests(unittest.TestCase):
             self.assertEqual(final["status"], "FAILED", mutation)
             self.assertTrue(any(e["stage"] == "outer_job" for e in final["secondary"]))
 
-    def test_final_adopted_projection_drift_refuses_after_successful_commands(self):
+    def test_build379_final_cargo_artifact_drift_refuses_after_successful_commands(self):
         c = self.build()
-        c["compiled_sources"] = {"source": "0" * 64}
+        c["cargo_artifact"]["target"]["name"] = "wrong-target"
         (Path(self.spec["output"]) / "candidate.json").write_text(json.dumps(c))
         final = self.finalize(Path(self.spec["output"]), self.job(c))
         self.assertEqual(final["status"], "FAILED")
@@ -542,7 +545,7 @@ class LifecycleTests(unittest.TestCase):
             resources.check()
         self.assertIsNotNone(bound)
 
-    def test_adopted_Cargo_workspace_manifest_config_and_compiled_projection(self):
+    def test_adopted_Cargo_workspace_manifest_and_configuration(self):
         self.spec["cwd"] = str(self.root.parent)
         with self.assertRaisesRegex(lc.Refused, "Cargo cwd"):
             lc.execute(
@@ -579,44 +582,6 @@ class LifecycleTests(unittest.TestCase):
                 resource_factory=NoResources,
             )
         (self.root / "cargo-home/config.toml").unlink()
-        executor = self.executor
-
-        def mismatch(argv, log, deadline, **kw):
-            if argv[-1] == "research-bindings":
-                sink = kw["output_sink"]
-                sink(
-                    json.dumps(
-                        {
-                            "executable_sha256": ref(self.private)["sha256"],
-                            "compiled_sources": {"source": "0" * 64},
-                            "model_calls": 0,
-                        }
-                    ).encode()
-                )
-                return {
-                    "status": "complete",
-                    "exit_code": 0,
-                    "log_bytes_seen": sink.seen,
-                    "direct_child_reaped": True,
-                    "cleanup_complete": True,
-                    "remaining": [],
-                    "finalization_errors": [],
-                    "signal_mask_restoration": "completed",
-                    "final_record_persist": "completed",
-                }
-            return executor(argv, log, deadline, **kw)
-
-        with self.assertRaisesRegex(lc.Refused, "adopted source projection"):
-            lc.execute(
-                self.intent(),
-                executor=mismatch,
-                guard=lambda _: None,
-                lock=nullcontext,
-                resource_factory=NoResources,
-            )
-        c = json.loads((Path(self.spec["output"]) / "candidate.json").read_bytes())
-        self.assertEqual(c["compiled_sources"], {"source": "0" * 64})
-        self.assertEqual(c["status"], "FAILED")
 
     def test_e2e_build_manifest_run_finalize_and_exact_source_config_separation(self):
         candidate = self.build()
@@ -1109,9 +1074,6 @@ class LifecycleTests(unittest.TestCase):
 
     def generation_fixture(self, *, omitted=False):
         # Production-shaped key domains; file contents/outputs remain synthetic NN0 fixtures.
-        self.source_info["compiled_sources"] = {
-            k: ref(self.source) for k in lc.RESEARCH_SOURCE_KEYS
-        }
         self.spec["source_adoption"] = self.json(
             "adoption",
             {
@@ -1212,7 +1174,7 @@ class LifecycleTests(unittest.TestCase):
     def generation_stub(self, argv, log, deadline, **kwargs):
         # Synthetic metadata only: no native geometry/model/Search is executed.
         self.geometry_stub_calls += 1
-        sources = {k: ref(self.source)["sha256"] for k in lc.GENERATION_SOURCE_KEYS}
+        sources = {"opaque-historical": ref(self.source)["sha256"]}
         start = {
             "request": self.request,
             "compiled_sources": sources,
@@ -1275,10 +1237,6 @@ class LifecycleTests(unittest.TestCase):
         c = self.generation_execute()
         self.assertEqual(self.geometry_stub_calls, 1)
         self.assertEqual(c["data"]["generation"]["numerical_qualification"], None)
-        self.assertEqual(
-            c["data"]["generation"]["compiled_sources"],
-            {k: r["sha256"] for k, r in self.source_info["compiled_sources"].items()},
-        )
         self.assertTrue((Path(self.spec["output"]) / "INCOMPLETE").exists())
         final = self.finalize(Path(self.spec["output"]), self.job(c))
         self.assertEqual(final["status"], "PASS")
@@ -1392,45 +1350,6 @@ class LifecycleTests(unittest.TestCase):
                 self.assertFalse(Path(self.spec["output"]).exists())
                 self.assertFalse(Path(self.spec["data_root"]).exists())
 
-    def test_generation_source_domains_actual35_projection_and_exact_refusals(self):
-        p = Path(
-            "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/entry-v3/operation-v3/manifest.json"
-        )
-        raw = p.read_bytes()
-        self.assertEqual(
-            lc.sha(raw), "714314cd13a8adeb900752f78ecdee5960d099c62d9490c7c5c948054be7ec31"
-        )
-        qualified = json.loads(raw)["compiled_sources"]
-        native = {k: qualified[k] for k in lc.GENERATION_SOURCE_KEYS}
-        self.assertEqual(len(native), 34)
-        self.assertEqual(len(qualified), 35)
-        lc.generation_source_correspondence(native, qualified)
-        for key in lc.GENERATION_SOURCE_KEYS:
-            with self.subTest(missing=key):
-                bad = dict(native)
-                del bad[key]
-                with self.assertRaises(lc.Refused):
-                    lc.generation_source_correspondence(bad, qualified)
-        bad = dict(native)
-        bad["core/research.rs"] = "0" * 64
-        with self.assertRaises(lc.Refused):
-            lc.generation_source_correspondence(bad, qualified)
-        for bad in [dict(qualified), {**native, "unknown/new.rs": "1" * 64}]:
-            with self.assertRaises(lc.Refused):
-                lc.generation_source_correspondence(bad, qualified)
-        bad = dict(qualified)
-        del bad["runner/sigma_qualification.rs"]
-        with self.assertRaises(lc.Refused):
-            lc.generation_source_correspondence(native, bad)
-        bad = {**qualified, "unknown/extra.rs": "1" * 64}
-        with self.assertRaises(lc.Refused):
-            lc.generation_source_correspondence(native, bad)
-        bad = dict(qualified)
-        bad["runner/sigma_qualification.rs"] = "NOT_A_HASH"
-        with self.assertRaises(lc.Refused):
-            lc.generation_source_correspondence(native, bad)
-        self.assertEqual(p.read_bytes(), raw)
-
     def failed_generation_fixture(self):
         self.generation_e = self.generation_fixture()
         c = self.generation_execute()
@@ -1464,8 +1383,6 @@ class LifecycleTests(unittest.TestCase):
         self.assertEqual(data["files"], final["data"]["files"])
         self.assertIsNone(data["numerical_qualification"])
         self.assertIsNone(data["generation"]["numerical_qualification"])
-        self.assertEqual(len(data["generation"]["compiled_sources"]), 35)
-        self.assertEqual(len(data["generation"]["native_compiled_sources"]), 34)
         self.assertEqual(len(self.calls), calls)
         self.assertEqual(Path(completion["path"]).read_bytes(), before)
 
@@ -1502,9 +1419,6 @@ class LifecycleTests(unittest.TestCase):
         self.assertNotEqual(g["book_sha256"], g["book_semantic_sha256"])
         self.assertNotEqual(g["schedule_sha256"], g["schedule_semantic_sha256"])
         self.assertEqual(g["schedule_semantic_sha256"], lc.GENERATION_SCHEDULE)
-        self.assertEqual(
-            g["generation_compiled_sources_sha256"], lc.canonical_sha(g["native_compiled_sources"])
-        )
         p = Path(self.request["output"]) / "generation-result.json"
         result = json.loads(p.read_bytes())
         result["schedule_sha256"] = g["schedule_semantic_sha256"]
@@ -1543,7 +1457,6 @@ class LifecycleTests(unittest.TestCase):
             "python/quoridor_training/snapshot.py",
         ):
             self.file(name, b"current adopted helper")
-        self.source_info["files"].append(ref(caller))
         self.generation_e = self.generation_fixture()
         # The native image was built with v1; v2 is accepted separately before the run.
         caller.write_bytes(b"current adopted caller v2")
@@ -1561,25 +1474,9 @@ class LifecycleTests(unittest.TestCase):
         with patch.object(lc, "ROOT", self.root):
             e, manifest, refs = lc.experiment_check(self.spec)
         self.assertEqual(e["phase"], "generation")
-        self.assertEqual(
-            manifest["compiled_sources"],
-            {k: ref(self.source)["sha256"] for k in lc.RESEARCH_SOURCE_KEYS},
-        )
         self.assertEqual(len(self.calls), count)
         self.assertEqual(Path(build_ref["path"]).read_bytes(), build_bytes)
         self.assertIn(ref(caller), refs)
-        historical = next(r for r in manifest["source"]["files"] if r["path"] == str(caller))
-        self.assertNotIn(historical, refs)
-        with self.assertRaises(lc.Refused):
-            lc.source_check(manifest["source"])
-        caller.write_bytes(b"unfrozen caller v3")
-        with patch.object(lc, "ROOT", self.root), self.assertRaises(lc.Refused):
-            lc.experiment_check(self.spec)
-        with self.assertRaises(lc.Refused):
-            for r in refs:
-                lc.read_ref(r, max(lc.CONTROL_BYTES, r["bytes"]))
-        self.assertFalse(Path(self.spec["output"]).exists())
-        self.assertFalse(Path(self.spec["data_root"]).exists())
 
     def test_current_caller_artifact_input_and_config_drift_refuse(self):
         self.current_caller_fixture()

@@ -138,7 +138,7 @@ pub struct ArenaConfig {
     /// Expected loaded evaluator identities, in candidate/reference order. Required for research.
     pub evaluator_sha256: Vec<String>,
     /// Expected maintained alpha-beta or MCTS source identities, in candidate/reference order.
-    pub search_source_sha256: Vec<String>,
+    pub search_artifact_sha256: Vec<String>,
     /// Explicit first candidate colour per family; empty preserves standard 0,1 order.
     #[serde(default)]
     pub first_candidate_colors: Vec<u8>,
@@ -192,7 +192,7 @@ impl ArenaConfig {
         if research && !self.book.frozen_before_candidate_results {
             return Err("research book must be frozen before candidate results".into());
         }
-        for hashes in [&self.evaluator_sha256, &self.search_source_sha256] {
+        for hashes in [&self.evaluator_sha256, &self.search_artifact_sha256] {
             if !(hashes.is_empty() && !research)
                 && (hashes.len() != width || hashes.iter().any(|s| !sha_valid(s)))
             {
@@ -283,7 +283,7 @@ impl ArenaConfig {
                 || a.depth != b.depth
                 || a.max_nodes != b.max_nodes
                 || a.simd != b.simd
-                || self.search_source_sha256[0] != self.search_source_sha256[1]
+                || self.search_artifact_sha256[0] != self.search_artifact_sha256[1]
                 || self.clock_policy != ClockPolicy::StrictUnknown
                 || self.return_reserve_ms != 0
             {
@@ -298,7 +298,7 @@ impl ArenaConfig {
                 || a.simd != b.simd
                 || a.kind == "mcts"
                 || b.kind == "mcts"
-                || self.search_source_sha256[0] != self.search_source_sha256[1]
+                || self.search_artifact_sha256[0] != self.search_artifact_sha256[1]
             {
                 return Err(
                     "evaluator comparison must hold search, ordering, TT and limits fixed".into(),
@@ -318,7 +318,7 @@ impl ArenaConfig {
                         .into(),
                 );
             }
-            if self.search_source_sha256[0] != self.search_source_sha256[1] {
+            if self.search_artifact_sha256[0] != self.search_artifact_sha256[1] {
                 return Err("two different search revisions require a versioned engine adapter; this binary owns one revision".into());
             }
         }
@@ -401,10 +401,10 @@ pub fn engine_index(turn: u8, candidate_color: u8) -> usize {
 pub fn validate_loaded_bindings(
     a: &ArenaConfig,
     evaluators: &[String],
-    search_sources: &[String],
+    search_artifacts: &[String],
 ) -> Result<()> {
     let width = if a.decision_only { 1 } else { 2 };
-    if evaluators.len() != width || search_sources.len() != width {
+    if evaluators.len() != width || search_artifacts.len() != width {
         return Err("arena needs two loaded evaluator identities".into());
     }
     for (i, sha) in evaluators.iter().enumerate() {
@@ -414,11 +414,11 @@ pub fn validate_loaded_bindings(
         {
             return Err(format!("loaded evaluator binding mismatch: engine {i}").into());
         }
-        if a.search_source_sha256
+        if a.search_artifact_sha256
             .get(i)
-            .is_some_and(|expected| expected != &search_sources[i])
+            .is_some_and(|expected| expected != &search_artifacts[i])
         {
-            return Err(format!("compiled search binding mismatch: engine {i}").into());
+            return Err(format!("search artifact binding mismatch: engine {i}").into());
         }
     }
     Ok(())
@@ -1011,7 +1011,7 @@ mod generic_arena_361_tests {
         let c: Config = serde_json::from_value(json!({"ruleset":"standard_2p_threefold","run_id":"fake361","output":"/synthetic/out","games":2*n,"workers":1,"active_games":1,"max_batch":1,"opening_plies":0,"max_output_bytes":1048576,
             "engines":[{"kind":"nnue","model":model.descriptor.path,"depth":depth,"max_nodes":999},{"kind":"distance","depth":depth,"max_nodes":999}],
             "arena":{"comparison":"evaluator_fixed_depth","clock_policy":"strict_unknown","return_reserve_ms":0,"tt_entries":37,"bootstrap_seed":1,"bootstrap_resamples":1,
-            "evaluator_sha256":[model.evaluator_sha256,"b".repeat(64)],"search_source_sha256":["c".repeat(64),"c".repeat(64)],"first_candidate_colors":vec![0;n],"retained_outcome_bytes":32768,
+            "evaluator_sha256":[model.evaluator_sha256,"b".repeat(64)],"search_artifact_sha256":["c".repeat(64),"c".repeat(64)],"first_candidate_colors":vec![0;n],"retained_outcome_bytes":32768,
             "book":{"id":"fake-book","usage":"main","frozen_before_candidate_results":true,"independence":"synthetic no model","openings":openings}}})).unwrap();
         let a = c.arena.as_ref().unwrap();
         let plan = ArenaPlan {
@@ -1146,7 +1146,7 @@ mod generic_arena_361_tests {
         a.disable_continuation_static_ordering = true;
         a.return_reserve_ms = 5;
         a.evaluator_sha256.truncate(1);
-        a.search_source_sha256.truncate(1);
+        a.search_artifact_sha256.truncate(1);
         let book = a.book.clone();
         plan.phase = "compare".into();
         plan.comparison = a.comparison;
@@ -1224,7 +1224,6 @@ mod generic_arena_361_tests {
             scope: "timed-arena".into(),
             configurations: vec![],
             native: crate::sigma_qualification::NativeIdentity {
-                compiled_sources_sha256: "a".repeat(64),
                 executable_sha256: "b".repeat(64),
                 backend_sha256: "c".repeat(64),
                 valid_until_unix_ms: 0,
@@ -1346,7 +1345,7 @@ mod generic_arena_361_tests {
         a.comparison = Comparison::WholeWallTime;
         a.return_reserve_ms = 5;
         a.evaluator_sha256.truncate(1);
-        a.search_source_sha256.truncate(1);
+        a.search_artifact_sha256.truncate(1);
         c.validate().unwrap();
         report.schema = "quoridor-decisions-v1".into();
         report.planned = 1;

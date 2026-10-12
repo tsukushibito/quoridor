@@ -39,7 +39,6 @@ pub struct SigmaCostQualification {
     pub decision_communication_upper_ns: u64,
     pub valid_until_unix_ms: u64,
     pub config_sha256: String,
-    pub compiled_sources_sha256: String,
     pub executable_sha256: String,
     pub backend_sha256: String,
     pub evidence_sha256: String,
@@ -54,8 +53,6 @@ impl SigmaCostQualification {
         if self.whole_operation_upper_ns == 0
             || self.decision_communication_upper_ns == 0
             || self.config_sha256 != crate::arena::json_digest(config)?
-            || self.compiled_sources_sha256
-                != crate::arena::json_digest(&crate::sigma_qualification::sources())?
             || self.executable_sha256
                 != crate::arena_manifest::file_sha256(&std::env::current_exe()?)?
             || self.backend_sha256 != binding
@@ -3152,8 +3149,8 @@ fn run_inner(
             &config
                 .engines
                 .iter()
-                .map(|e| crate::arena_manifest::search_source_sha256(&e.kind))
-                .collect::<Vec<_>>(),
+                .map(|_| crate::arena_manifest::file_sha256(&std::env::current_exe()?))
+                .collect::<Result<Vec<_>>>()?,
         )?;
     }
     let backend_start = Instant::now();
@@ -4059,8 +4056,6 @@ fn run_owned(
             || q.decision_communication_upper_ns == 0
             || q.valid_until_unix_ms <= unix_ms()
             || q.config_sha256 != crate::arena::json_digest(config)?
-            || q.compiled_sources_sha256
-                != crate::arena::json_digest(&crate::sigma_qualification::sources())?
             || q.executable_sha256
                 != crate::arena_manifest::file_sha256(&std::env::current_exe()?)?)
     {
