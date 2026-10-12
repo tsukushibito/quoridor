@@ -5705,6 +5705,7 @@ mod research_threefold_runtime_tests {
 #[cfg(test)]
 mod three_engine_374_failure_tests {
     use super::*;
+    use serde_json::json;
     use std::sync::atomic::{AtomicU64, Ordering};
     static SERIAL: AtomicU64 = AtomicU64::new(0);
     fn fixture() -> (Config, RunReport) {
