@@ -1,0 +1,101 @@
+{
+  "issue": "quoridor-4lc.366",
+  "status": "ACCEPTED_FINITE_FIXED_LR_COMPARISON",
+  "accepted_at": "2026-10-12T00:00:28.619727+00:00",
+  "binding": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/lr-comparison366-v1/result/result-binding.json",
+    "sha256": "645f2f93d5f2301facdac5cf106713f7e6d596ea9c3a6f797bb3c99bb011e0a6",
+    "bytes": 17611,
+    "mode": "0644"
+  },
+  "report": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/lr-comparison366-v1/result/report.md",
+    "sha256": "bca05544fabdbf33e763bbebbac066334444c92a3db132b95362744df30173f6",
+    "bytes": 7955,
+    "mode": "0644"
+  },
+  "PDF": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/lr-comparison366-v1/result/low-high-lr-curves.pdf",
+    "sha256": "29cb77e5cfcc4170904be193bff9b10a6a0e7072768560a45f38583863fc0a35",
+    "bytes": 33310,
+    "mode": "0644"
+  },
+  "outcome_table": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/lr-comparison366-v1/result/checkpoint-outcomes.json",
+    "sha256": "c02172160a862d6aa4eaa497f085a549e1f69d063958d859737e70ddf66ca776",
+    "bytes": 6615,
+    "mode": "0644"
+  },
+  "CSV": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/lr-comparison366-v1/result/checkpoint-outcomes.csv",
+    "sha256": "95219e040c2ca6e35cb962423e2c0d8e5517bd3ec3a0128678464e8afe1bea71",
+    "bytes": 1747,
+    "mode": "0644"
+  },
+  "original_authoritative_manifests": {
+    "low_A": {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v3/fit-A-entry-v1/operation-v1/manifest.json",
+      "sha256": "350502098c3f17c8aae7d8cea5b4de3a9f2e110a59272aa20a864036b1343c38",
+      "bytes": 13661,
+      "mode": "0644"
+    },
+    "low_B": {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v3/fit-B-entry-v1/operation-v1/manifest.json",
+      "sha256": "13456bc329aaa0b4b0a17ebb6b6dbf102e6d937dc2347d08591a42faea64444c",
+      "bytes": 13660,
+      "mode": "0644"
+    },
+    "high_A": {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/lr-comparison366-v1/controls/fit-A-entry-v3/operation-v3/manifest.json",
+      "sha256": "327fc11a20c6d3d172f065351bd6bc0c7a33d5f3eade7c1c38f9300e29cc0433",
+      "bytes": 12734,
+      "mode": "0644"
+    },
+    "high_B": {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/lr-comparison366-v1/controls/fit-B-entry-v1/operation-v1/manifest.json",
+      "sha256": "5dd7a6f629cce7dec9cef8a6a290e6a4371435627cfd5c1931e4938261b7de17",
+      "bytes": 12735,
+      "mode": "0644"
+    }
+  },
+  "final_STOP": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/lr-comparison366-v1/controls/final-result-STOP.json",
+    "sha256": "84c6cc012ff55bdf4138a49e07b4b1ba830838484232923c00af491be916d825",
+    "bytes": 1465,
+    "mode": "0644"
+  },
+  "actual_scope": "Two independent freshBEST43 LR1e-3 runs,200updates/50epochs each; savedLR1e-4 reused without replay. Same341/common217T76V/48excluded/scale/recipe/20warmup/freshAdam. 14073 allwork each<=16023. Eleven evaluations, INITIAL/BEST/LAST model checkpoints.",
+  "verified": "Root selected30 exact SHA-size-mode metadata/observation refs; saved11-step banks, fullprecision INITIAL/BEST/LAST table and ownV BEST minima/counters matched. PDF hash and owning extracted fourpanel/axis/legend content check verified. No model payload, forward, fit or native execution during intake.",
+  "own_teacher_LAST": {
+    "low_A": {
+      "train_z_mse": 0.5085433512888076,
+      "validation_z_mse": 0.9597626392938973,
+      "train_completed_root_raw_mse": 0.3138606321002812,
+      "validation_completed_root_raw_mse": 0.37228679851871693
+    },
+    "low_B": {
+      "train_z_mse": 0.6376360713147327,
+      "validation_z_mse": 0.9648896394619433,
+      "train_completed_root_raw_mse": 0.23132655040391137,
+      "validation_completed_root_raw_mse": 0.3460321773676772
+    },
+    "high_A": {
+      "train_z_mse": 0.0947032241471154,
+      "validation_z_mse": 1.3580039884410742,
+      "train_completed_root_raw_mse": 0.4898410162387511,
+      "validation_completed_root_raw_mse": 0.5659309981549758
+    },
+    "high_B": {
+      "train_z_mse": 0.6667244171684895,
+      "validation_z_mse": 0.643014426214945,
+      "train_completed_root_raw_mse": 0.07824104403076555,
+      "validation_completed_root_raw_mse": 0.14756811767316808
+    }
+  },
+  "interpretation": "HighLR A lowers training z MSE but worsens LAST Vz; BEST20 Vz also above savedlowLR BEST200. HighLR B lowers raw T/V MSE, but Vraw remains above frozen T-only constant and analyticD guides. Fixed descriptive opened-family results, no general LR optimality/strength/causal/default adoption.",
+  "fit_command_seconds_once": [2.921330839046277, 2.8646435249829665],
+  "saved_only_render_seconds_once": 0.9263629310298711,
+  "cost_domains": "Controllers/nested trainer/admin not added; exact childUTCSTART/STOP and continuous family peaks/wholeworkfees UNKNOWN. Prior failures and source/receipt masks distinctions retained.",
+  "cleanup": "Actual bothfit and render readers STOP, ownchildren/TMP empty; no366 environment lifetime remains.367 cutover independent of result/adminclosure.",
+  "authorities_unchanged": "No extra fit/generation/feature/model/default/N/323pause/seal change."
+}
