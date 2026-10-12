@@ -6,15 +6,15 @@ batch. NNUE weights use the CPU NNUE exporter/model format instead.
 
 ## Setup
 
-Use the existing training Python; framework versions are not updated here.
+Use the prepared common project entry and root lock; framework versions are not updated here.
 `prepare-native.py` adds isolated CCCL compile headers and CUDA compatibility
 symlinks. TensorRT is optional and isolated from the shared environment. Its
 installer verifies package hashes, retains LinuxSM86/PTX resources by default,
 and removes verified downloaded wheels. Use `--sm` for a different device.
 
 ```sh
-python3 tools/model-export/prepare-native.py
-/home/vscode/.cache/inference/envs/quoridor-training/bin/python \
+bash scripts/dev/project-env.sh python -B tools/model-export/prepare-native.py
+bash scripts/dev/project-env.sh python -B \
   tools/model-export/install-tensorrt.py \
   --root /home/vscode/.cache/inference/backends/tensorrt-11.3 --sm 86
 source tools/model-export/setup-native.sh
@@ -37,12 +37,12 @@ files, including its published artifact if manifest publication loses a race.
 Sibling ONNX assets are preserved; TensorRT output itself cannot use `.onnx`.
 
 ```sh
-QUORIDOR_MODEL="$(python3 scripts/dev/research-assets.py --kind models --name ai-sigma/reference/sigma-pcr250/best.onnx)"
+QUORIDOR_MODEL="$(bash scripts/dev/project-env.sh python -B scripts/dev/research-assets.py --kind models --name ai-sigma/reference/sigma-pcr250/best.onnx)"
 QUORIDOR_EXPORT=/home/vscode/.cache/inference/rust-migration/export
-/home/vscode/.cache/inference/envs/quoridor-training/bin/python \
+bash scripts/dev/project-env.sh python -B \
   tools/model-export/export.py --model "$QUORIDOR_MODEL" \
   --output "$QUORIDOR_EXPORT/sigma.pt2" --backend aoti --max-batch 24
-/home/vscode/.cache/inference/envs/quoridor-training/bin/python \
+bash scripts/dev/project-env.sh python -B \
   tools/model-export/export.py --model "$QUORIDOR_MODEL" \
   --output "$QUORIDOR_EXPORT/sigma.engine" --backend tensorrt --max-batch 24
 cargo build -p quoridor-inference --features cuda-aoti,tensorrt --release --example verify

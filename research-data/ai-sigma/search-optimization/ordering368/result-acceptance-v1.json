@@ -1,0 +1,152 @@
+{
+  "issue": "quoridor-4lc.368",
+  "status": "ACCEPTED_COMPLETED_FIXED_ASSESSMENT_STATIC_BENEFIT_REJECTED",
+  "accepted_at": "2026-10-12T02:43:21.112480+00:00",
+  "bound_result_refs": [
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/ordering-completion368-v1/result-handoff-v1/stopped-result-binding.json",
+      "sha256": "28f5634df500739e5b593faf3d7021ac0d4bb89c232e7fda22fdee856ef97dc0",
+      "bytes": 1939,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/ordering-completion368-v1/assessment-entry-v1-operation/manifest.json",
+      "sha256": "70dd012fa1a5fe3e410654b3796d6001abf5ecc55884a59dc567eca53cc80bb8",
+      "bytes": 6897,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/ordering-completion368-v1/result-handoff-v1/summary.json",
+      "sha256": "1e69f99b5f023dc2f68d53284c2e9d740aaf12ee9e44040f1903000540f09479",
+      "bytes": 38233,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/ordering-completion368-v1/result-handoff-v1/paired-contexts.csv",
+      "sha256": "cfc0d1629db3a20406478109b7e7d8178aa1eb82f97e8809d03999807d75448f",
+      "bytes": 12723,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/ordering-completion368-v1/result-handoff-v1/report.md",
+      "sha256": "31bc1d03a7acf7928fc136871dc798b32b8c09209bc6327b00e0fa8d6d8bbd89",
+      "bytes": 9852,
+      "mode": "0644"
+    }
+  ],
+  "independent_interpretation_refs": [
+    {
+      "path": "/workspaces/quoridor/.artifacts/search-optimization/ordering368/result-review-v1/control.json",
+      "sha256": "a73fef28efaeff52985a7682a106529320ed706503ec930500ac5c7d774debbb",
+      "bytes": 4087,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/search-optimization/ordering368/result-review-v1/report.md",
+      "sha256": "830fa705362e9e098a3d7019099248ecd7781959d1e701343702616739cd1dcb",
+      "bytes": 7794,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/search-optimization/ordering368/result-review-v1/findings.json",
+      "sha256": "d05b365f5faecbf32163d7b296db91a6a5c03ababdefcb0c7944e0caec383222",
+      "bytes": 1569,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/search-optimization/ordering368/result-review-v1/arithmetic-proof.json",
+      "sha256": "9daf8f3ae178b436e57d7018ac3cac22a5225a3ca5b69e9f4b2da55a714486f6",
+      "bytes": 10663,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/search-optimization/ordering368/result-review-v1/reader-STOP.json",
+      "sha256": "3eed2680e31d990fac5a318ee0d21147f430a73076bb6349ee978e9653a35514",
+      "bytes": 967,
+      "mode": "0644"
+    }
+  ],
+  "result_clear": true,
+  "blockers": 0,
+  "ordinary": 0,
+  "census": {
+    "planned_attempts": 360,
+    "returned_Ok_and_durable": 360,
+    "returned_Err": 0,
+    "requested_depth_COMPLETE": 342,
+    "NodeLimit_UNKNOWN": 18,
+    "missing": 0,
+    "sessions": 90,
+    "plain": 240,
+    "diagnostic": 120,
+    "planned_contexts": 40,
+    "paired_common_COMPLETE": 38,
+    "cold_complete_planned": [7, 8],
+    "warm_complete_planned": [31, 32],
+    "actual_nodes": 893462637,
+    "actual_evaluations": 681425946,
+    "node_upper": 1800000000
+  },
+  "frozen_gate_verdict": "Static node/evaluation medians fail <=.95 in both strata against prior and continuation; whole medians fail <=1.02. Negative finite result completes selected question.",
+  "paired_whole_medians_static_over": {
+    "prior": 4.111113915871831,
+    "continuation": 3.721875550362847
+  },
+  "whole_regressions_over1p10": {
+    "prior": [37, 38],
+    "continuation": [36, 38]
+  },
+  "scope_limits": "Two cappedcontexts remain UNKNOWN across allpolicies/repetitions/diagnostics. COMPLETEf32bitagreement finiteactualcaller, not newequal-best/terminal/strengthoracle. Knownbuffers not transient/continuousmemoryPASS; no causaloverhead/IID/general speed/Elo/defaultpromotion.",
+  "timing": {
+    "assessment_controller_once_seconds": 3102.942231384106,
+    "nested_command_not_added_seconds": 3101.668058649986,
+    "software_controller_separate_seconds": 79.87758891400881,
+    "two_entered_controllers_once_seconds": 3182.819820298115,
+    "worker_native_exact_UTC_STOP": "UNKNOWN",
+    "continuous_peaks": "UNKNOWN",
+    "whole_work_fees": "UNKNOWN",
+    "mask_domains": "returnedcompleted distinct from originaldiskpending/attempted"
+  },
+  "actual_author_source_input_library_reader_STOP": "2026-10-12T02:13:17.972900+00:00",
+  "actual_author_controlwriter_STOP": "2026-10-12T02:15:22.150274+00:00",
+  "actual_related_reader_STOP": "2026-10-12T02:26:25.325621+00:00",
+  "actual_Root_metadata_reader_STOP": "2026-10-12T02:43:21.112480+00:00",
+  "owned_readers_children_jobs_TMP_remaining": [],
+  "reservation": "NONE",
+  "current_native_scope": {
+    "current_build": {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/ordering368-build-v1/operation-v1/manifest.json",
+      "sha256": "70bbce08712e244786232bf0fd6928e9b5f8dab8ecfd8635b8d93415baafb955",
+      "bytes": 91743,
+      "mode": "0644"
+    },
+    "current_artifact": {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/ordering368-private-v1/quoridor-runner-v1",
+      "sha256": "1a2cc1caf164d4fc542bd9f9b09b1f9b34665db7f90505608cd2c3442e6071b4",
+      "bytes": 10680008,
+      "mode": "0755"
+    },
+    "source_adoption": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/search-optimization/ordering368/source-adoption-v1.json",
+      "sha256": "14fce1a629647bfb95319236cfd16cb53b71a9a37b8b06b670940bce0c8042a0",
+      "bytes": 49794,
+      "mode": "0644"
+    }
+  },
+  "retained_original_numerical_scope": {
+    "original_numerical_qualification": {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-engineering355/.artifacts/continuation360-v1/assessment-input-qualification-v2-operation/manifest.json",
+      "sha256": "370ca66d55d78feb05fc60e9b56179056b2e78018e0462ebd746e6d5b596d9a5",
+      "bytes": 8895,
+      "mode": "0644"
+    },
+    "original_numerical_build": {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/ordering360-build-v1/operation-v10/manifest.json",
+      "sha256": "ef4ba6e21407876f3462c15de1525bcf88d6b829587ba397149273e914b1801e",
+      "bytes": 91880,
+      "mode": "0644"
+    }
+  },
+  "unchanged": "Original360 CLOSEDFAILED/900s/168COMPLETE8capUNKNOWN184nodurable/source/raw/errors/costs/UNKNOWN remain. No default/seals/fullN/commonfourfits96/323USERPAUSE change, assetretirement/refund/newRUN. 367/371 remain independently authorised; administrativeclose/ACK is notgate.",
+  "verification": "Bound metadata exact, independent arithmetic reused; no Rootjournal/model/native/roots/software/20Q rerun. Root firstmetadata lookup usedwrongprimary_error key and missingformatfile refused beforewrites, corrected exactprimary/secondary schema; originalresults unchanged."
+}

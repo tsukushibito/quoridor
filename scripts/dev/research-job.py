@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Detach a contracted command and deliver one completion to its explicit idle session."""
 
 from __future__ import annotations
@@ -669,7 +668,9 @@ def submit(path, directory, root, backend):
     with (directory / "supervisor.log").open("ab") as log:
         supervisor = subprocess.Popen(
             [
-                sys.executable,
+                "bash",
+                str(Path(__file__).with_name("project-env.sh")),
+                "python",
                 "-B",
                 str(Path(__file__).resolve()),
                 "run",

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Produce an offline, bounded desktop dashboard fixture for browser verification."""
 
 import importlib.util

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Inspect or save an explicit writer handoff using the normal Git index.
 
 The project Git owner invokes save only after all relevant writers have stopped.

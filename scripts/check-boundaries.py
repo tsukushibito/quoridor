@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Check the local Wasm feature graph with Python's offline TOML parser."""
 
 from pathlib import Path

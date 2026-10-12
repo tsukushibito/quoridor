@@ -44,10 +44,16 @@
     "Tools are exact plan-time resolution snapshots; Node.js, uv and VS Code are image bootstrap inputs. Runtime stable versions resolve at postCreate or explicit update.",
     "Installed runtime versions and update time are recorded in /home/vscode/.local/share/quoridor/toolchain.json.",
     "Existing Godot cache volumes and installed assets are untouched; future containers do not mount the unused cache or install Godot tools/templates.",
-    "Training dependencies are optional: prepare with bash scripts/dev/setup-training.sh, separately from postCreate and project setup.",
+    "Repository Python uses one explicitly prepared root-locked environment: bash scripts/dev/setup-project.sh --python-only. postCreate remains infrastructure bootstrap; normal runs never sync.",
     "The base image, Debian indices, Dev Container features and transitive packages are not a hermetic Linux snapshot."
   ],
-  "enabled_tools": ["git-lfs", "github-cli", "image-tools", "ssh", "vscode-cli"],
+  "enabled_tools": [
+    "git-lfs",
+    "github-cli",
+    "image-tools",
+    "ssh",
+    "vscode-cli"
+  ],
   "ssh": {
     "mode": "fixed",
     "host_port": 2226

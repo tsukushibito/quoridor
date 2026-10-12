@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """One bounded read-only process-identity port in the existing session environment."""
 
 import importlib.util

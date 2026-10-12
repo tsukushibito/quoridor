@@ -1,75 +1,43 @@
-# Rust/Wasm・Python学習環境
+# Rust/Wasm・共通Python環境
 
-RustはDev Container Feature、学習用Pythonはuvで管理する。現在のコンテナには同じ構成をスクリプトから導入できる。OS管理用のPythonは変更しない。
+Repository Pythonは一つのregular CPython3.14.7と永続project環境を使う。Mainルートの`pyproject.toml`、`uv.lock`、`.python-version`が正本で、managed worktreeからも同じ正本・環境を消費する。OS3.11、service、CodexのPythonはインフラ専用であり、repository runtimeのfallbackにしない。
 
-## 導入・更新
-
-リポジトリルートから実行する。
+## 明示セットアップ
 
 ```bash
-# RustとBeadsを準備する（学習環境は個別に準備）
-bash scripts/dev/setup-project.sh
-
-# 明示的にRust/wasm-packとBeadsを更新する
-bash scripts/dev/setup-project.sh --update
-
-# 現在開いているシェルへRustのPATH等を反映
-source scripts/dev/project-env.sh
+bash scripts/dev/setup-project.sh                  # 明示したRust/Beads/Python準備
+bash scripts/dev/setup-project.sh --python-only    # 既設環境への移行・復元のみ
+bash scripts/dev/setup-project.sh --infrastructure-only
+bash scripts/dev/setup-project.sh --update         # インフラ更新; Python依存pinは維持
 ```
 
-スクリプトは呼出し元のカレントディレクトリに依存しない。Rust側の初回導入ではOS依存と`/usr/local`の準備にsudoを使用する。Featureと同じ`CARGO_HOME=/usr/local/cargo`、`RUSTUP_HOME=/usr/local/rustup`を使用する。
+Pythonの同期・取得はセットアップだけが行う。`--update`でも科学パッケージを暗黙upgradeせず、依存変更はRootのpyproject/lock変更と整合確認を別途行う。常時のlock更新、環境再同期、毎回のfull依存監査を通常runへ入れない。初回準備も現役のfit/render/performanceや旧環境readerが実停止した後に行い、学習を開始しない。postCreateのOS/Node/uv/Codex/Rust/Beadsブートストラップはこの科学環境同期とは別である。
 
-Rust Feature追加を反映するリビルドは今回実行しない。次回リビルドではFeatureが基盤を導入し、postCreateがRustの更新・検証とBeads準備を行う。Godotは製品・研究の必須環境から撤去した。学習用Pythonは必要時だけ`setup-training.sh`で明示準備する。Rust/Pythonだけを変更する場合は上記の専用スクリプトを使う。
+既存`$INFERENCE_CACHE_DIR/envs/quoridor-training`を共通project環境としてそのまま再利用する。Torch2.14.0+cu130、NumPy2.5.3、ONNX1.23.0、ORT1.30.0、ONNXScript0.7.2、CUDA依存とtransitive版は移行時のinstalled metadataに合わせて固定する。websockets17.1、Ruff0.13.1、Matplotlib3.11.2も同じlockへまとめる。旧専用環境・project lock・launcherは復元検査とreader停止を確認してから撤去する。過去runのGit、数値、入力、RAW、チェックポイント、環境記録を書き換えない。
 
-個別に操作する場合:
+## 通常の実行
 
 ```bash
-bash scripts/dev/setup-rust.sh           # 初回導入・不足componentの補充
-bash scripts/dev/setup-rust.sh --update  # rustup / stable / wasm-pack更新
-bash scripts/dev/verify-rust.sh          # nativeとWasmの検証
-bash scripts/dev/setup-training.sh      # Python環境復元・GPU検証
-bash scripts/dev/setup-training.sh --update  # Python・学習依存更新・GPU検証
+bash scripts/dev/project-env.sh python -B scripts/dev/check-research.py --syntax-only
+bash scripts/dev/project-env.sh python -B -m quoridor_training.train --help
+bash scripts/dev/project-env.sh ruff check --config tools/research-quality/ruff.toml PATH
+bash scripts/dev/research-session.sh list
+bash scripts/dev/research-job.sh --help
 ```
 
-明示した通常の導入は既存のstableツールチェーンやuv.lockの依存を維持する。`--update`は最新安定版を取得し、Pythonでは`uv.lock`も更新する。更新後は差分と検証結果を確認してlockfileをコミットする。新しいPythonに依存パッケージが未対応の場合はエラーを確認し、例えば`QUORIDOR_PYTHON=3.14`で対応する系列を一時指定できる。nightlyやPythonのプレリリースは既定にしない。
+共通入口はMainをGit common-dirから解決し、`uv run --locked --offline --no-sync --no-python-downloads`で既設環境を使う。Python指定は共通環境のbinaryへ正規化し、明示した別Python・欠落環境・異なる版を拒否する。通常runはpackageをdownload/syncしない。Pythonスクリプトの曖昧なsystem shebangと専用training wrapperは撤去する。`PYTHONPATH`はMainの`python`を使い、別環境のsite-packagesを注入しない。既存の明示TensorRT exportでは`QUORIDOR_TENSORRT_ROOT/python`のisolated backend bindingsだけを追加する。これは別venvやfallbackではなく、既存のoptional native backend配置を保つ。
 
-Feature自体の実装を更新するときは、Dev Container CLIの`upgrade`で`.devcontainer/devcontainer-lock.json`を更新してリビルドする。このlockfileはFeatureの解決記録であり、Rust stableの手動更新を妨げない。
+共有環境のreaderは実行期間だけshared flockを持つ。非同期jobのsupervisorも同じ入口を通る。明示setupは同じlockのexclusive nonblocking writerで、readerがいる間は同期を拒否する。これは環境writer/readersの排他であり、status registry・scheduler・科学runの追加許可ではない。旧launcherの消費者は新lockを持たないため、最初のcutoverでは実停止を別途確認する。
 
-## 学習環境
+環境pathはMain `research-paths.json`の`environments.project`が正本で、`QUORIDOR_PROJECT_ENV`の異なるoverrideを拒否する。`UV_CACHE_DIR`、`UV_PYTHON_INSTALL_DIR`、`QUORIDOR_ENV_REPORT_DIR`は共通設定である。callerやworktreeごとに別venvを作らない。保存方針のallocated inode accountingを使い、共有installed/cache bytesを一回だけ数える。未知のcache・削除見込みをfree capacityとして借りない。
 
-`tools/training/pyproject.toml`と`uv.lock`でPyTorch、NumPy、ONNX、ONNX Runtime、ONNX Scriptを管理する。現時点の対象はLinux x86_64、NVIDIA GPU。PyTorchは公式CUDA 13.0配布元の最新安定版を使う。CUDA配布系列はGPU・ドライバーとの互換条件として管理し、新しい系列へ変更するときはGPU検証も行う。
+## 検証と境界
 
 ```bash
-# 常に専用環境とlockfileを使って実行
-bash scripts/dev/training.sh python -c 'import torch; print(torch.__version__, torch.cuda.get_device_name())'
-
-# 学習・変換スクリプトを追加した後も同じ入口で実行
-# bash scripts/dev/training.sh python tools/training/train.py
+# metadata/場所/regular版確認。Torch/NumPy等をimportしない。
+bash scripts/dev/project-env.sh python -B scripts/dev/verify-python-environment.py
+# 別途supported smokeで実importを確認; weights/fit/game/CUDA初期化はしない。
+bash scripts/dev/project-env.sh python -B scripts/dev/verify-python-environment.py --imports
 ```
 
-Pythonの仮想環境を手動activateする必要はない。PyTorchをシステムPythonへ入れない。現役の学習・生成・評価は[学習手順](nnue-training.md)と[Rust運用](rust-ai.md)を参照する。環境セットアップは研究実行を開始しない。
-
-## 保存先
-
-| 対象                   | 既定の保存先                                  |
-| ---------------------- | --------------------------------------------- |
-| Rust / Cargo           | `/usr/local/rustup` / `/usr/local/cargo`      |
-| wasm-pack補助バイナリ  | `/usr/local/cargo/wasm-pack-cache`            |
-| uvの学習依存キャッシュ | `$INFERENCE_CACHE_DIR/uv`                     |
-| uv管理のPython         | `$INFERENCE_CACHE_DIR/python`                 |
-| 学習用仮想環境         | `$INFERENCE_CACHE_DIR/envs/quoridor-training` |
-| 使用版・検証結果       | `~/.local/share/quoridor/`                    |
-
-Pythonと学習依存は既存のinference-cache volumeへ保存し、ホストのcheckoutへ大量のパッケージを作らない。Rustは次回リビルド時にFeatureから再導入される。worktree間で学習環境を共有するので、異なる依存構成を同時に使う場合は`QUORIDOR_TRAINING_ENV`に別のパスを指定する。セットアップスクリプト同士の並行実行はロックで直列化する。学習実行中にはその環境を更新しない。
-
-`CARGO_HOME`、`RUSTUP_HOME`、`WASM_PACK_CACHE`、`UV_CACHE_DIR`、`UV_PYTHON_INSTALL_DIR`、`QUORIDOR_TRAINING_ENV`、`QUORIDOR_ENV_REPORT_DIR`で保存先を変更できる。ただしRustの配置はFeatureと揃えること。`project-env.sh`をsourceすると後続のuvコマンドにもキャッシュ設定が適用される。
-
-モデルの扱いはstorage policyに従い、最終採用モデルだけをGit管理する。仮想環境、キャッシュ、試作モデルはGit対象外。
-
-## 検証範囲
-
-- Rust: 小さなcrateのnativeテスト、rustfmt、clippy、wasm-packのwebターゲット生成、生成glueを使ったNode.js内Wasm呼出し。
-- PyTorch: 実GPU上のforward、backward、optimizerによる更新。
-- ONNX: 小さなモデルの書き出し、モデル検査、CPU ONNX Runtimeとの数値一致。
-
-`rust-toolchain.json`、`rust-verification.json`、`training-environment.json`に使用版と結果を記録する。これらはブラウザWorker、実際のコリドールモデルのRust/Wasm推論、VXGIの検証を代替しない。モデルの学習は開始しない。
+管理入口は科学moduleをlazyのまま扱う。metadata/import smokeは数値資格やモデルPASSではない。native BuildのPythonツール由来記録と、現在Python phaseが使うregular binary/venv/pyvenv.cfgは別入力として束縛する。過去のnative imageをPython caller移行のためだけにrebuildしない。現役fit/analysisのExperimentはcurrent regular binaryと`pyvenv.cfg`をordered inputsへ加え、venv `bin/python`をargvとし、元のmodel/input/recipe/rules/numerical guardsを維持する。

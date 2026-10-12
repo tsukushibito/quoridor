@@ -74,11 +74,11 @@ The compare config is `quoridor.value-search-strength.compare.v2`: canonical pla
 
 Generation request replaces `old_admission` with `old_prefixes`, a bound JSON array of the SAME eight preserved OPEN prefixes. Its canonical scientific prefix digest, rejection logic, RNG and all128 family selection are unchanged. Materialization keeps book/templates/descriptors/weights/output; it binds the same experiment models and current image. The arena entry validates the approved JSON plan, exact declared Config FileRef, model identities, book/full-history references and schedule family/colour partition before runtime. No copied engine, alternate evaluator, TT change, rule/clock change or automatic calibration is introduced.
 
-Saved-only analysis uses the same accepted build and experiment manifest, with `phase=analysis`, a pinned Python tool from the build, exact inputs/config/argv and fresh report output. It is run by this same guardian. The child receives `QUORIDOR_LIFECYCLE_INTENT` and `QUORIDOR_LIFECYCLE_PARENT_PID`; it validates the maintained caller context and must not reacquire the canonical lease. No new registry, nested lock, build target or native/model call is needed for that saved phase.
+Saved-only analysis uses the same accepted build and experiment manifest, with `phase=analysis`, the current shared project interpreter, separately bound regular binary and pyvenv.cfg inputs, exact config/argv and fresh report output. It is run by this same guardian. The child receives `QUORIDOR_LIFECYCLE_INTENT` and `QUORIDOR_LIFECYCLE_PARENT_PID`; it validates the maintained caller context and must not reacquire the canonical lease. No new registry, nested lock, build target or native/model call is needed for that saved phase.
 
 The maintained saved-analysis child is `python/quoridor_training/research355/stream355.py`. Its sibling modules contain the current scientific aggregation and file/lifecycle adapters; the current run intent binds all six runtime modules separately from historical build provenance. Configure its child argv as pinned Python, `-B`, the absolute script path, `--experiment`, the bound experiment path, `--experiment-sha256`, its raw SHA, and `--intent`, the exact parent intent path. This child writes only bounded report data; the parent remains the sole authoritative finalizer. Historical `.artifacts` source packets are reconstruction evidence, not current executable dependencies.
 
-`scripts/dev/check-research.py` includes the maintained lifecycle adapter tests. The focused source-only command is `python3 -B -m unittest discover -s python/quoridor_training/research355 -p 'test_lifecycle*.py'`. These fixtures use synthetic inputs and mock the parent/build; they do not qualify a real build, model or scientific result.
+`scripts/dev/check-research.py` includes the maintained lifecycle adapter tests. The focused source-only command is `bash scripts/dev/project-env.sh python -B -m unittest discover -s python/quoridor_training/research355 -p 'test_lifecycle*.py'`. These fixtures use synthetic inputs and mock the parent/build; they do not qualify a real build, model or scientific result.
 
 Frozen science remains 128 families/512 colour slots, matched32/96 COMPLETE4 calls,8 ALLlegal depth2 trees and at most16 prebound differing parents/192 stronger calls. D is maintained `(0,8)` tanh of normalized wall distance; BEST51 and BEST43 exact descriptors/weights/coefficients are unchanged. Standard2p goal-first/legal-third/200 UNKNOWN, 100ms authority receipt/5ms reserve, legality outside, matching drain, PVS/fullwidth/TT4096/1MiB, ScalarFT/guarded head and thread1 remain unchanged. No N/fit/default/seal/pause323 decision is altered.
 
@@ -156,7 +156,7 @@ Each current RUN intent requires `caller_sources`, an exact FileRef array for th
 `python/quoridor_training/cycle_process.py`, and `python/quoridor_training/snapshot.py` in its
 current maintained root. An analysis intent additionally binds `stream355.py`, `lifecycle355.py`,
 `io355.py`, `observations355.py`, `producer355.py`, and `strength355.py` under
-`python/quoridor_training/research355`. Analysis uses the pinned Python tool and `-B` plus that
+`python/quoridor_training/research355`. Analysis uses the current shared project venv Python and `-B` plus that
 exact maintained stream entry. The parent checks current caller/import and native/science refs
 before entry and after direct return; it never runs tool version commands to refresh them.
 Current source acceptance is recorded at adoption; these are ordinary entry FileRefs, not another
@@ -188,3 +188,18 @@ The first claim retains `originating_job` in the operation's `INCOMPLETE` marker
 Historical markers without this tuple require `finalize --origin-record PATH --origin-sha256 SHA`, naming one immutable Root integration-custody file under Main `research-data`. Schema `quoridor.research.operation-origin.v1`, status `ACCEPTED`, binds exact FileRefs `operation_marker`, `intent`, `result`, `state`, `persisted_process`, and the same `originating_job` tuple. Root derives that decision from already bound original STOP/origin evidence; the publisher never reconstructs a historical parent relationship from the offered runtime. This is one operation-specific input decision, not a recovery registry or another completion. Its FileRef remains in `abnormal_origin.independent_origin_custody`. Missing, mismatched, ambiguous or live origins refuse.
 
 The original assessment remains timed out and incomplete. No successful candidate, guardian return, inner cleanup, journal close, numerical PASS or complete census is manufactured. Normal finalization alone publishes FAILED/CANCELLED and removes only the operation marker last.
+
+## Current Python environment
+
+Repository management, fit, saved analysis and software qualification use the prepared
+regular Python3.14.7 shared project environment through `scripts/dev/project-env.sh`.
+The root `pyproject.toml`/`uv.lock` are canonical across worktrees; normal run is
+locked/offline/no-sync. Native Build `tools.PYTHON` remains immutable build-tool
+provenance; it is not the future fit/analysis interpreter selector and does not require
+a native rebuild solely for this Python migration. Python phase argv selects the
+shared venv `bin/python`; its resolved admitted regular binary and `pyvenv.cfg` must
+be separate ordered Experiment inputs. The publisher rechecks those inputs before
+and after the command, alongside the existing caller/model/input/numerical guards.
+No site-packages fallback, copied numerical status or secondary environment is admitted.
+The common entry/supervisor keeps the environment reader lock through the operation;
+only explicit setup may obtain the same environment's exclusive writer lock.

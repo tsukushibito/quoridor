@@ -157,7 +157,7 @@ bash scripts/dev/research-session.sh archive --thread <thread-id>
 
 クライアントはissueの状態・pauseと、send直前の`codex:<thread-id>`の担当一致を確認する。createは未担当または操作元が所有するissueだけを受け、担当・状態のCAS確認付きで新threadへ移譲してから実タスクを開始する。報告も宛先が所有するissueを指定する。担当が変わった場合は誤配せず、作成後の失敗はthread IDを残して再作成を自動反復しない。報告やready状態をpause解除として扱わない。activeへのsteerはcwd移動と別で、配置変更は自然idle後の新しい依頼で行う。モデル・effortはホストの現在設定を使い、追加依頼で無断変更しない。タスク固有の追加指示は`create --instructions-file`で渡せるが、恒常role promptとして複製しない。
 
-依存は`tools/research-session/pyproject.toml`と`uv.lock`に保持する。専用環境は共有学習環境へ混ぜない。既存専用環境の物理pathは移行で作り直さず、`QUORIDOR_RESEARCH_SESSION_ENV`で指定できる。依存準備済みで同期を行わない操作は`UV_NO_SYNC=1 UV_OFFLINE=1 PYTHONDONTWRITEBYTECODE=1`を付ける。
+依存はMainルートの`pyproject.toml`と`uv.lock`が正本である。session/jobの目的別CLIは既存の共通`project-env.sh`経由で、学習・解析・品質と同じprepared環境を`--no-sync`で消費する。別session環境へのfallbackや共有禁止は撤去する。明示環境writerと実readerの排他・旧消費者停止は[共通環境](../development/rust-python-environment.md)を参照する。
 
 ### Desktop と CLI で同じ保存セッションを開く
 

@@ -83,7 +83,7 @@ mainが持続的研究の統合正本で、managed worktreeは並行変更・比
 
 並行writerはファイル単位で担当を分け、Git index/commitは統合担当一人が操作する。全writerの停止と明示pathを引き渡し、`scripts/dev/research-save.py check`で通常index・既stage・一時物・保存forecastを確認し、Git担当が`save`を実行する。private indexでHEADだけ更新する旧保存helperは将来の標準に使わない。既stage/未保存変更をresetして整合させず、保存失敗時のstageも確認用に保持する。
 
-現役sourceの構文・契約・整形は`python3 scripts/dev/check-research.py`を入口とし、`--format`も対象を限定する。vendor/raw/凍結recipeを全体整形せず、製品buildや科学NNを研究構文検査の前提にしない。source checkpointとruntime/temp/index lockを分け、ローカル一時物を誤ってGit保存しない。
+現役sourceの構文・契約・整形は`bash scripts/dev/project-env.sh python scripts/dev/check-research.py`を入口とし、`--format`も対象を限定する。vendor/raw/凍結recipeを全体整形せず、製品buildや科学NNを研究構文検査の前提にしない。source checkpointとruntime/temp/index lockを分け、ローカル一時物を誤ってGit保存しない。
 
 保守タスクの担当は構成と依存境界を利用実態に応じて見直し、README/AGENTS/既手順へ反映する。必要な構造改善は到達構成・保守ルール・段階移行を合わせて定め、同一共通機能のコピーを新しいframeへ増やさない。互換shimは必要なcallerと撤去条件を記録し、二重実装として保守し続けない。定期全体監査・毎run文書更新は義務にしない。
 

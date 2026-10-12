@@ -12,4 +12,4 @@
 | managed並行worktree              | [dev/manage_worktree.sh](dev/manage_worktree.sh)・[保存方針](../.devcontainer/storage-policy.md)                                                             |
 | 軽量構文/限定整形                | [dev/check-research.py](dev/check-research.py)・[研究コード案内](../docs/development/ai-research-code.md)                                                    |
 
-`python3 scripts/dev/check-research.py --syntax-only`は科学を起動しない。full品質確認、Cargo/build、環境取得、task session/job start、生成/対局/学習はそれぞれ別操作。実行系は所有・pause・現期限/資源・明示configを確認する。index/commitは並行writerの単一統合ownerだけが扱う。
+`bash scripts/dev/project-env.sh python scripts/dev/check-research.py --syntax-only`は科学を起動しない。full品質確認、Cargo/build、環境取得、task session/job start、生成/対局/学習はそれぞれ別操作。実行系は所有・pause・現期限/資源・明示configを確認する。index/commitは並行writerの単一統合ownerだけが扱う。

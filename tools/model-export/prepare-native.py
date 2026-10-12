@@ -1,10 +1,10 @@
-#!/usr/bin/env python3
 """Prepare isolated CUDA compile headers/compatibility paths, preserving shared env."""
 
 import argparse
 import hashlib
 import json
-import subprocess
+import sys
+import sysconfig
 import urllib.request
 import zipfile
 from pathlib import Path
@@ -19,22 +19,8 @@ def main():
         type=Path,
         default=Path("/home/vscode/.cache/inference/rust-migration"),
     )
-    p.add_argument(
-        "--training",
-        type=Path,
-        default=Path("/home/vscode/.cache/inference/envs/quoridor-training"),
-    )
     a = p.parse_args()
-    site = Path(
-        subprocess.check_output(
-            [
-                str(a.training / "bin/python"),
-                "-c",
-                'import sysconfig; print(sysconfig.get_paths()["purelib"])',
-            ],
-            text=True,
-        ).strip()
-    )
+    site = Path(sysconfig.get_paths()["purelib"])
     cache = a.cache
     cache.mkdir(parents=True, exist_ok=True)
     cccl = cache / "cccl"
@@ -81,7 +67,7 @@ def main():
         else:
             link.symlink_to(target)
     manifest = {
-        "training_root": str(a.training.resolve()),
+        "project_environment": str(Path(sys.prefix).resolve()),
         "torch_root": str(site / "torch"),
         "cuda_headers": str(site / "nvidia/cu13/include"),
         "extra_headers": [

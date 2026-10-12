@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Worktree management regressions using isolated Git repositories only."""
 
 from pathlib import Path

@@ -22,9 +22,8 @@ class QualityEntryPointContracts(unittest.TestCase):
             root = Path(directory)
             for filename in (
                 "tools/research-quality/node_modules/.bin/prettier",
-                "tools/research-quality/.venv/bin/ruff",
-                "training/bin/python",
-                "sessions/bin/python",
+                "project/bin/ruff",
+                "project/bin/python",
             ):
                 file = root / filename
                 file.parent.mkdir(parents=True, exist_ok=True)
@@ -33,8 +32,7 @@ class QualityEntryPointContracts(unittest.TestCase):
                 json.dumps(
                     {
                         "environments": {
-                            "training": str(root / "training"),
-                            "sessions": str(root / "sessions"),
+                            "project": str(root / "project"),
                         }
                     }
                 )
@@ -57,7 +55,7 @@ class QualityEntryPointContracts(unittest.TestCase):
             training_call = next(
                 call
                 for call in execute.call_args_list
-                if call.args[0][0] == str(root / "training/bin/python")
+                if call.args[0][0] == str(root / "project/bin/python")
             )
             modules = training_call.args[0][4:]
             self.assertEqual(tuple(modules), QUALITY.NN0_TESTS)

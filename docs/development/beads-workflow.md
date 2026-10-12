@@ -22,7 +22,7 @@ bash scripts/dev/beads.sh close <issue-id> --reason '受入条件と検証結果
 bash scripts/dev/beads.sh backup sync
 
 # 共有アクセス・直列化・隔離先への完全復元を検証
-python3 scripts/dev/verify-beads.py
+bash scripts/dev/project-env.sh python scripts/dev/verify-beads.py
 ```
 
 CLIは`~/.local/bin/bd`に導入する。操作時は裸の`bd`を使わず、共有アクセス用の`beads.sh`を使う。担当者はCodexならスレッドIDから設定され、必要なら`BEADS_ACTOR`で指定できる。`prime`の既定テンプレートを読む場合も、このプロジェクトの運用とユーザー指示が優先する。
@@ -51,13 +51,13 @@ issueから設計文書、検証報告、commitまたはworktreeを参照する�
 
 ## 研究ダッシュボードのスナップショット
 
-`python3 -B scripts/dev/research-dashboard.py` で、自己完結した `.artifacts/research-dashboard/index.html` を生成する。手動更新、または人間が選んだ引き渡し・状態更新時に実行する。ブラウザの再読み込みは生成済みファイルを読み直すだけで、収集処理やBeadsの変更は行わない。単一HTMLをローカルへコピーして開くこともできる。
+`bash scripts/dev/project-env.sh python -B scripts/dev/research-dashboard.py` で、自己完結した `.artifacts/research-dashboard/index.html` を生成する。手動更新、または人間が選んだ引き渡し・状態更新時に実行する。ブラウザの再読み込みは生成済みファイルを読み直すだけで、収集処理やBeadsの変更は行わない。単一HTMLをローカルへコピーして開くこともできる。
 
 VS Code内で表示する場合は、手動生成後に `bash scripts/dev/research-dashboard-serve.sh` を実行し、表示されたURLを開く。既定ポートは8765で、末尾に1..65535のポート番号を指定できる。配信対象は `.artifacts/research-dashboard`、接続先は `127.0.0.1` に限定する。VS Code Remote Tunnel経由ではPortsビューでprivate転送し、エディター内プレビューまたはブラウザでの表示を選ぶ。再読み込みは配信中のHTMLを読み直すだけで、更新は別途手動生成する。閲覧後はCtrl+Cで停止する。
 
 対象issueに `dashboard` ラベルを付け、既存metadataを保持したまま `metadata.dashboard` に `stage`、`next_action`、`wait_reason`、`wait_kind`、`runtime_dirs`、`evidence_paths` を記録する。人間の判断待ちは明示的な `wait_kind: human_decision` のみで数える。状態・所有者・依存はBeads、LLMの状態は既存AppServerの読み取り、計算ジョブは指定したruntimeの記録と実プロセス識別で確認する。足りない情報は不明として表示する。
 
-日本語は表示だけに適用し、Beadsの英語フィールド・セッション名・状態・件数は変更しない。通常の作業報告で、担当者が対象の `kind`（`owner` / `issue`）、`id`、`field` と、表示用原文のUTF-8 SHA256（`originalEnglishSHA256`）、日本語の `ja` を供給する。実行・統合担当は `{"version":1,"entries":[...]}` のdeltaJSONを `python3 -B scripts/dev/research-dashboard-translations.py DELTA.json` で現在の読み取り元と照合して統合し、手動生成する。許可フィールドは `owner.name` と `issue.title/stage/next_action/wait_reason/close_reason` のみ。保存先は破棄可能な `.artifacts/research-dashboard/translations-ja.json` 一つ（1MiB以下）で、最新版を上書きし、表示対象外・原文不一致の項目を除去する。欠落・古い日本語は「日本語説明の更新待ち」とし、展開した原文を確認できる。生成処理は保存済みキャッシュを読むだけで、翻訳APIやセッション操作は行わない。
+日本語は表示だけに適用し、Beadsの英語フィールド・セッション名・状態・件数は変更しない。通常の作業報告で、担当者が対象の `kind`（`owner` / `issue`）、`id`、`field` と、表示用原文のUTF-8 SHA256（`originalEnglishSHA256`）、日本語の `ja` を供給する。実行・統合担当は `{"version":1,"entries":[...]}` のdeltaJSONを `bash scripts/dev/project-env.sh python -B scripts/dev/research-dashboard-translations.py DELTA.json` で現在の読み取り元と照合して統合し、手動生成する。許可フィールドは `owner.name` と `issue.title/stage/next_action/wait_reason/close_reason` のみ。保存先は破棄可能な `.artifacts/research-dashboard/translations-ja.json` 一つ（1MiB以下）で、最新版を上書きし、表示対象外・原文不一致の項目を除去する。欠落・古い日本語は「日本語説明の更新待ち」とし、展開した原文を確認できる。生成処理は保存済みキャッシュを読むだけで、翻訳APIやセッション操作は行わない。
 
 デスクトップではセッションごとに1行で担当名・活動・主タスク・次の作業／待機理由を表示する。長い値は省略し、行をクリックするかEnter／Spaceで詳細ダイアログを開く。詳細には未完了タスクの件数・待機や依存・ジョブと証拠・英語原文・完了履歴を残す。閉じるボタンまたはEscapeで閉じると検索・フィルター・スクロール位置と行のフォーカスを保つ。明示的なユーザー停止は主タスク以外でも表示し、管理上完了したタスクの計算ジョブが生成時点で確認された場合も、その事実を表示する。
 
@@ -103,7 +103,7 @@ VS Code内で表示する場合は、手動生成後に `bash scripts/dev/resear
 | 対象                                                      | 整形方法                                                                                                                                            |
 | --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Rust                                                      | rustfmt。担当crateなら `cargo fmt --package <crate名>`、workspace全体を担当する場合は `cargo fmt --all`。対応する `-- --check` で整形結果を確認する |
-| Python                                                    | 専用品質環境のRuffで、対象ファイルに `ruff format` を適用し、同じ設定の `ruff format --check` と `ruff check` を実行する                            |
+| Python                                                    | 共通project環境のRuffで、対象ファイルに `ruff format` を適用し、同じ設定の `ruff format --check` と `ruff check` を実行する                         |
 | JavaScript/TypeScript、JSX/TSX、CSS等・対応する手書き設定 | 専用品質環境のPrettierで、対象ファイルに `--write` を適用し、同じ設定の `--check` で確認する                                                        |
 | シェルスクリプトなどその他の言語                          | 言語に対応する整形方法と設定を確認して適用する。ツール未整備も対象外とはせず、必要な手段を定め、不足が残る場合は明示する                            |
 

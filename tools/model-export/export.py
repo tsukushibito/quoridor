@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Export deployable CPU ONNX / CUDA AOTI / TensorRT artifacts, never a forward service."""
 
 from __future__ import annotations

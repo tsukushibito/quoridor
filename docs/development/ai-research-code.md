@@ -17,9 +17,8 @@ Linuxネイティブを主経路とし、評価・探索・対局・推論queue�
 | `crates/quoridor-wasm`                  | 製品用Wasm境界。同じRust評価・探索を使用                           |
 | `python/quoridor_training`              | モデル、設定、尺度、指標、学習曲線、freeze/test                    |
 | `tools/model-export`                    | ONNX/AOTI/TensorRTへのオフライン変換                               |
-| `tools/training`                        | 学習依存lockと環境診断                                             |
 | `tools/research-session`・`scripts/dev` | 明示thread宛のタスク通信、非同期jobの回収・完了通知、Git保存と容量 |
-| `tools/research-quality`                | 専用lock付きPrettier/Ruffと保守テスト                              |
+| `tools/research-quality`                | Node用Prettierと共通PythonのRuff・保守テスト                       |
 
 NodeはWeb/Vite/TypeScript、Wasm製品ビルド・検証、品質とソース書き出しに必要。研究の対局・探索・推論・生成をNodeへ委譲しない。旧Node実装、互換shim、実験別コピー、旧Python学習recipe、旧実装との比較テストは削除済み。移行前コードはGit `54a294a`、[撤去manifest](../../research-data/ai-sigma/retired-code-cleanup/removed-source.json.gz)と[検証](../../research-data/ai-sigma/retired-code-cleanup/verification.json)で追跡する。[AGENTS.md](../../AGENTS.md)の方針に従い、保守コストを優先し、互換性維持を目的とした旧経路は保持しない。実施中・具体的に予定した直接比較に必要な旧版だけは比較専用に保持し、対象・用途・撤去条件を明示する。比較時にGitから復元する手順は挟まず、終了後に不要分を削除する。
 
@@ -31,9 +30,9 @@ Rustの共通crateから過去frameのコードや管理scriptを呼ばない。
 
 ```bash
 source scripts/dev/project-env.sh
-python3 scripts/dev/check-research.py --syntax-only
-python3 scripts/dev/check-research.py
-python3 scripts/dev/check-research.py --format
+bash scripts/dev/project-env.sh python scripts/dev/check-research.py --syntax-only
+bash scripts/dev/project-env.sh python scripts/dev/check-research.py
+bash scripts/dev/project-env.sh python scripts/dev/check-research.py --format
 npm run check:native
 # 製品とnative双方を変更した場合
 npm run check:all
@@ -45,11 +44,11 @@ npm run check:all
 
 共有Cargo targetでは、worktreeの凍結ソースを旧mtime付きで復元すると、別版のrlibをCargoが`fresh`と判定する場合がある。現在のsource SHAを記録しただけでは使用されたcache payloadの版を証明しない。唯一Cargo writerの次entryで、担当source・compiler/flags・lock・実使用artifactを束縛する。鮮度修復が必要なら、読者停止後にSHA確認済みの名前を指定した担当sourceだけのmtimeを更新し、必要scopeを再compileして新artifactとlinker/TMP費を記録する。数学・ソースbyte・凍結private ELF・失敗原記録を維持し、Cargo cleanやtarget全量走査・cache削除を修復の代用にしない。
 
-品質依存の初期導入は専用領域へ行う。共有学習envをformatter導入で変更しない。
+Python品質・学習・管理依存は同じルートlockと共通環境を使う。環境変更は既reader停止後の明示setupだけが行う。NodeのPrettierは既存Node lockを使う。
 
 ```bash
 npm ci --prefix tools/research-quality
-uv sync --locked --project tools/research-quality
+bash scripts/dev/setup-project.sh --python-only
 ```
 
 ## 保存と再構成
@@ -62,11 +61,11 @@ ONNX Runtime 1.30.0はtelemetry初期化時に`:memory:.ses`を生成する。`p
 
 ### 永続資産と旧pathの追跡
 
-`research-paths.json`のmodels/checkpoints/inputsは`.worktree/assets/`のカテゴリを指す。コードcheckoutを保存先にしない。現在の資産解決は`python3 scripts/dev/research-assets.py --kind models --name ai-sigma/reference/sigma-pcr250/best.onnx`。内容確認を伴う場合だけ`--sha256`を付ける。旧payloadの絶対pathは`--legacy-path <original-path>`で移動対応manifestへ照合できる。未対応・欠落・範囲外参照・SHA不一致はエラーとし、旧worktreeへのfallbackやsymlinkを作らない。
+`research-paths.json`のmodels/checkpoints/inputsは`.worktree/assets/`のカテゴリを指す。コードcheckoutを保存先にしない。現在の資産解決は`bash scripts/dev/project-env.sh python scripts/dev/research-assets.py --kind models --name ai-sigma/reference/sigma-pcr250/best.onnx`。内容確認を伴う場合だけ`--sha256`を付ける。旧payloadの絶対pathは`--legacy-path <original-path>`で移動対応manifestへ照合できる。未対応・欠落・範囲外参照・SHA不一致はエラーとし、旧worktreeへのfallbackやsymlinkを作らない。
 
 旧weight-manifestは元の絶対pathのままmain Gitへ保持する。現在のNNUE descriptorは`--kind models --name legacy/frame18-native-connection/manifest.json`で解決し、相対weights参照だけを移行先へ更新した。重み・特徴・scale・教師ラベル・split・旧runの条件は変更していない。新runは現在の解決済path/SHAを自身の設定へbindし、旧run原記録を上書きしない。既入力の移動は自然停止・子回収とbyte確認後に同volume renameで行う。資産移動・チェックは学習/推論/対局を起動しない。
 
-軽量検証は`python3 -B scripts/dev/test_research_assets.py`。資産解決、欠落、path traversal、symlink範囲外、旧payloadのSHA/size変化を合成fixtureで確認する。旧checkoutの撤去では未保存情報のGit/圧縮保存と復元を確認し、registered checkoutは`manage_worktree.sh remove`、Git操作窓は単一統合ownerと合わせる。保全・移動対応は`research-data/ai-sigma/1d2-worktree-consolidation/`、製品固有証拠は`research-data/worktree-consolidation/1d2/`へ分けて保存する。原pathとSHA・復元参照はこの保存先のmanifestで追跡し、終了済み報告は[文書索引](../README.md#過去文書と証拠を探す)からGit版を特定する。
+軽量検証は`bash scripts/dev/project-env.sh python -B scripts/dev/test_research_assets.py`。資産解決、欠落、path traversal、symlink範囲外、旧payloadのSHA/size変化を合成fixtureで確認する。旧checkoutの撤去では未保存情報のGit/圧縮保存と復元を確認し、registered checkoutは`manage_worktree.sh remove`、Git操作窓は単一統合ownerと合わせる。保全・移動対応は`research-data/ai-sigma/1d2-worktree-consolidation/`、製品固有証拠は`research-data/worktree-consolidation/1d2/`へ分けて保存する。原pathとSHA・復元参照はこの保存先のmanifestで追跡し、終了済み報告は[文書索引](../README.md#過去文書と証拠を探す)からGit版を特定する。
 
 ## Approved arena parameterisation (361)
 

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Source this file. No shared-environment changes or implicit downloads.
 set -euo pipefail
-quoridor_training_root="${QUORIDOR_TRAINING_ROOT:-/home/vscode/.cache/inference/envs/quoridor-training}"
-export QUORIDOR_TRAINING_ROOT="$quoridor_training_root"
-quoridor_site_root="$("$quoridor_training_root/bin/python" -c 'import sysconfig; print(sysconfig.get_paths()["purelib"])')"
+quoridor_native_script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+source "$quoridor_native_script_dir/../../scripts/dev/project-env.sh"
+quoridor_site_root="$(bash "$quoridor_native_script_dir/../../scripts/dev/project-env.sh" python -I -c 'import sysconfig; print(sysconfig.get_paths()["purelib"])')"
 export QUORIDOR_TORCH_ROOT="$quoridor_site_root/torch"
 export QUORIDOR_CUDA_ROOT="$quoridor_site_root/nvidia/cu13"
 export QUORIDOR_TENSORRT_ROOT="${QUORIDOR_TENSORRT_ROOT:-/home/vscode/.cache/inference/backends/tensorrt-11.3}"

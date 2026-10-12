@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """One-shot clients of the existing Codex App Server; no server or scheduler."""
 
 from __future__ import annotations

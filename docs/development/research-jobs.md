@@ -79,7 +79,7 @@ RPC送信直前に固有job markerとdispatching状態を保存する。応答�
 UV_NO_SYNC=1 UV_OFFLINE=1 PYTHONDONTWRITEBYTECODE=1 \
   bash scripts/dev/research-job.sh --help
 # 依存準備済みの専用Pythonで人工fixtureを実行
-/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B \
+bash scripts/dev/project-env.sh python -B \
   -m unittest discover -s tools/research-session -p 'test_job.py' -v
 ```
 
@@ -103,19 +103,19 @@ App Serverの保存thread再開とturn開始は[公式App Server資料](https://
 
 ```bash
 # 初回導入：相談モードを保存して読み返し、通知なしの有界確認を行う
-python3 -B scripts/dev/research-progress-health.py mode --set-mode consultation --confirm-human-choice
-python3 -B scripts/dev/research-progress-health.py mode
-python3 -B scripts/dev/research-progress-health.py check --dry-run
+bash scripts/dev/project-env.sh python -B scripts/dev/research-progress-health.py mode --set-mode consultation --confirm-human-choice
+bash scripts/dev/project-env.sh python -B scripts/dev/research-progress-health.py mode
+bash scripts/dev/project-env.sh python -B scripts/dev/research-progress-health.py check --dry-run
 # 単一の軽量timerを起動。重複startは追加processを残さない
-taskset -c 3 python3 -B scripts/dev/research-progress-health.py start
-python3 -B scripts/dev/research-progress-health.py status
+taskset -c 3 bash scripts/dev/project-env.sh python -B scripts/dev/research-progress-health.py start
+bash scripts/dev/project-env.sh python -B scripts/dev/research-progress-health.py status
 
 # 人間が「自律確認モード」を明示選択した場合だけ変更
-python3 -B scripts/dev/research-progress-health.py mode --set-mode autonomous --confirm-human-choice
+bash scripts/dev/project-env.sh python -B scripts/dev/research-progress-health.py mode --set-mode autonomous --confirm-human-choice
 # 人間の「チェック停止」：検出を止め、mode・保留参照を保持
-python3 -B scripts/dev/research-progress-health.py disable --confirm-human-choice
+bash scripts/dev/project-env.sh python -B scripts/dev/research-progress-health.py disable --confirm-human-choice
 # 停止後、schedulerの一時controlsを除去。mode/cursorは保持する
-python3 -B scripts/dev/research-progress-health.py remove
+bash scripts/dev/project-env.sh python -B scripts/dev/research-progress-health.py remove
 ```
 
 `stop` は正確に所有するtimerだけを止め、modeを変えない。停止の人間指示には `disable` を使う。再開は人間が明示選択したmodeと `start` の両方が必要で、コンテナ再起動後も自律確認へ自動復帰しない。`status` はlocal controlsだけを読み、STOPPEDでも保留件数を確認できる。`check --dry-run` はcursor・Beads・LLMを変更しない。UNKNOWNは未取得の事実として残し、稼働保証や研究結果成功と扱わない。timerのPID/start/boot/argv照合とpidfdを用いた停止は、このtimer自身にだけ適用する。

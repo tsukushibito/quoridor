@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """One bounded research progress-health observation, or an explicit local timer.
 
 The timer is an operational exception, not a research scheduler. It neither starts

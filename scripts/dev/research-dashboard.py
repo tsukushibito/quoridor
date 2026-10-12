@@ -1,10 +1,9 @@
-#!/usr/bin/env python3
 """Manually publish a bounded, read-only research snapshot; no server or live cache.
 
-Run: python3 -B scripts/dev/research-dashboard.py
+Run: bash scripts/dev/project-env.sh python -B scripts/dev/research-dashboard.py
 Metadata is supplied by task owners in Beads metadata.dashboard. Only named job
 state/result files are read. The optional identity port uses the already installed
-research-session environment (or --runtime-python); it installs nothing.
+shared project interpreter; it installs nothing.
 """
 
 import argparse
@@ -165,16 +164,10 @@ def command_json(argv, *, cwd, seconds, input_data=None):
 
 
 class Ports:
-    def __init__(self, root, runtime_python=None):
+    def __init__(self, root):
         self.root = root
         self.end = time.monotonic() + 90
-        cache = Path(os.environ.get("INFERENCE_CACHE_DIR", str(Path.home() / ".cache/inference")))
-        environment = Path(
-            os.environ.get(
-                "QUORIDOR_RESEARCH_SESSION_ENV", str(cache / "envs/quoridor-research-team")
-            )
-        )
-        self.runtime_python = runtime_python or environment / "bin/python"
+        self.runtime_python = Path(sys.executable)
 
     def run(self, argv, *, input_data=None, seconds=10):
         return command_json(
@@ -653,13 +646,10 @@ def main(argv=None):
     parser.add_argument(
         "--output", type=Path, help="Default: ROOT/.artifacts/research-dashboard/index.html"
     )
-    parser.add_argument(
-        "--runtime-python", type=Path, help="Python in the existing research-session environment"
-    )
     args = parser.parse_args(argv)
     output = args.output or args.root / ".artifacts/research-dashboard/index.html"
     try:
-        generate(Ports(args.root, args.runtime_python), output)
+        generate(Ports(args.root), output)
     except (OSError, ValueError, CollectionError, subprocess.SubprocessError) as error:
         print(
             f"Dashboard not published ({type(error).__name__}); previous HTML preserved",

@@ -87,7 +87,7 @@ forward前に実行行数を課金し、update完了後だけseen/rowcountsを�
 ```bash
 cargo test --workspace --features quoridor-wasm/research
 cargo clippy --workspace --features quoridor-wasm/research --all-targets -- -D warnings
-python3 scripts/dev/check-research.py
+bash scripts/dev/project-env.sh python -B scripts/dev/check-research.py
 cargo check -p quoridor-wasm --features nnue --target wasm32-unknown-unknown
 wasm-pack build crates/quoridor-wasm --target nodejs --dev \
   --out-dir "$PWD/.artifacts/rust-ai/wasm" -- --features nnue

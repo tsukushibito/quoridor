@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Run native numerical/whole-request benchmarks; no Python model forward."""
 
 import argparse

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Resolve retained research assets without importing models or starting jobs."""
 
 from __future__ import annotations

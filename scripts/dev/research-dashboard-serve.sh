@@ -19,9 +19,9 @@ dashboard_port="$((10#$dashboard_port))"
 dashboard_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd)"
 dashboard_directory="$dashboard_root/.artifacts/research-dashboard"
 if [[ ! -f "$dashboard_directory/index.html" ]]; then
-  printf 'Missing dashboard index.html. Generate it from %s with:\n  python3 -B scripts/dev/research-dashboard.py\n' "$dashboard_root" >&2
+  printf 'Missing dashboard index.html. Generate it from %s with:\n  bash scripts/dev/project-env.sh python -B scripts/dev/research-dashboard.py\n' "$dashboard_root" >&2
   exit 1
 fi
 
 printf 'Open http://127.0.0.1:%s/ (stop with Ctrl+C).\n' "$dashboard_port"
-exec python3 -B -m http.server "$dashboard_port" --bind 127.0.0.1 --directory "$dashboard_directory"
+exec bash "$dashboard_root/scripts/dev/project-env.sh" python -B -m http.server "$dashboard_port" --bind 127.0.0.1 --directory "$dashboard_directory"

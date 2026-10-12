@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Isolated, hash-bound TensorRT runtime installation; never modifies training env."""
 
 import argparse

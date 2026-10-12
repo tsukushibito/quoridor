@@ -2,15 +2,15 @@
 
 This project keeps generated state out of the host checkout and separates caches by purpose.
 
-| Data                                                 | Location                                                                                                | Persistence                                                  |
-| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| Managed Git worktrees                                | `${containerWorkspaceFolder}/.worktree`                                                                 | `volume` mode                                                |
-| Research models/checkpoints/inputs                   | `${containerWorkspaceFolder}/.worktree/assets`                                                          | same worktrees named volume; independent of checkouts        |
-| Shared Beads database                                | `${containerWorkspaceFolder}/.worktree/.beads-state`                                                    | worktrees named volume; independent of individual worktrees  |
-| Beads full database backup                           | `${containerWorkspaceFolder}/.artifacts/beads-backup`                                                   | host checkout, Git-ignored; not protection against host loss |
-| Inference models and framework downloads             | `/home/vscode/.cache/inference`                                                                         | named volume only in NVIDIA mode                             |
-| Training Python, uv packages and virtual environment | `$INFERENCE_CACHE_DIR/python`, `$INFERENCE_CACHE_DIR/uv`, `$INFERENCE_CACHE_DIR/envs/quoridor-training` | same named volume                                            |
-| Rust toolchains / Cargo / wasm-pack cache            | `/usr/local/rustup`, `/usr/local/cargo`                                                                 | container-local; restored by Feature and setup script        |
+| Data                                               | Location                                                                                                | Persistence                                                  |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| Managed Git worktrees                              | `${containerWorkspaceFolder}/.worktree`                                                                 | `volume` mode                                                |
+| Research models/checkpoints/inputs                 | `${containerWorkspaceFolder}/.worktree/assets`                                                          | same worktrees named volume; independent of checkouts        |
+| Shared Beads database                              | `${containerWorkspaceFolder}/.worktree/.beads-state`                                                    | worktrees named volume; independent of individual worktrees  |
+| Beads full database backup                         | `${containerWorkspaceFolder}/.artifacts/beads-backup`                                                   | host checkout, Git-ignored; not protection against host loss |
+| Inference models and framework downloads           | `/home/vscode/.cache/inference`                                                                         | named volume only in NVIDIA mode                             |
+| Project Python, uv packages and shared environment | `$INFERENCE_CACHE_DIR/python`, `$INFERENCE_CACHE_DIR/uv`, `$INFERENCE_CACHE_DIR/envs/quoridor-training` | same named volume                                            |
+| Rust toolchains / Cargo / wasm-pack cache          | `/usr/local/rustup`, `/usr/local/cargo`                                                                 | container-local; restored by Feature and setup script        |
 
 ## Current research resource policy
 
@@ -69,6 +69,6 @@ The updater does not run on each container start.
 
 ## Rust and Python setup
 
-Rust uses the official Dev Container Feature. `scripts/dev/setup-project.sh` also installs the project environment into an existing container without rebuilding. Its `--update` updates Rust stable, wasm-pack and Beads; it does not update managed Python or training dependencies. Explicit `setup-training.sh --update` handles those dependencies, recorded in `tools/training/uv.lock`; check and commit lock changes after successful updates. The current training target is Linux x86_64 with an NVIDIA GPU.
+Rust uses the official Dev Container Feature. `scripts/dev/setup-project.sh` also installs the project environment into an existing container without rebuilding. Its `--update` updates Rust stable, wasm-pack and Beads; it does not update managed Python or training dependencies. Explicit `setup-project.sh --python-only` prepares the root `pyproject.toml`/`uv.lock` in the single persistent environment; package upgrades require a separately reviewed pin/lock change. The current training target is Linux x86_64 with an NVIDIA GPU.
 
-postCreate prepares and verifies Rust and the shared Beads tools. Training is optional: explicitly run `bash scripts/dev/setup-training.sh` to restore and verify the existing locked environment, or add `--update` for a requested dependency update. Neither postCreate nor `setup-project.sh` starts training setup. Existing installed environments, dependency caches and models remain unchanged by this source maintenance. Runtime version and verification reports are written to `~/.local/share/quoridor/`. See `docs/development/rust-python-environment.md` for individual commands and storage overrides.
+postCreate prepares and verifies Rust and the shared Beads tools. Repository Python requires the explicitly prepared shared project environment: run `bash scripts/dev/setup-project.sh --python-only` after current readers stop. postCreate remains infrastructure bootstrap and does not synchronise scientific packages. Normal commands use the common no-sync entry; system Python is infrastructure-only. Existing installed environments, dependency caches and models remain unchanged by this source maintenance. Runtime version and verification reports are written to `~/.local/share/quoridor/`. See `docs/development/rust-python-environment.md` for individual commands and storage overrides.

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Directed current storage accounting. No deletions, history scan or reservation reset."""
 
 from __future__ import annotations

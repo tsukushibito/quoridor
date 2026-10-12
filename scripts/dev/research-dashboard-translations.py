@@ -1,7 +1,6 @@
-#!/usr/bin/env python3
 """Merge Japanese DISPLAY text bound to fresh read-only dashboard originals.
 
-Run: python3 -B scripts/dev/research-dashboard-translations.py DELTA.json
+Run: bash scripts/dev/project-env.sh python -B scripts/dev/research-dashboard-translations.py DELTA.json
 Only one latest, disposable cache is published; canonical sources never change.
 SHA256 is over the exact bounded English snapshot field encoded as UTF-8.
 """
@@ -205,13 +204,12 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("delta", type=Path)
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[2])
-    parser.add_argument("--runtime-python", type=Path)
     args = parser.parse_args(argv)
     dashboard = dashboard_module()
     try:
         pending = update(
             dashboard,
-            dashboard.Ports(args.root, args.runtime_python),
+            dashboard.Ports(args.root),
             args.delta,
             args.root / ".artifacts/research-dashboard/translations-ja.json",
         )

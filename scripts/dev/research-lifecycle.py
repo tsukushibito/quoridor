@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """One trusted build manifest and experiment entry, under research-job/cycle_process."""
 
 from __future__ import annotations
@@ -14,6 +13,7 @@ import os
 from pathlib import Path
 import shutil
 import stat
+import subprocess
 import sys
 import time
 
@@ -860,8 +860,8 @@ def numerical_check(experiment, manifest, *, refs=None):
     return q
 
 
-def training_interpreter(experiment):
-    """Training ABI is an admitted input, independent of native BUILD tooling."""
+def project_interpreter(experiment):
+    """Current Python ABI is an admitted input, independent of native BUILD tooling."""
     expected = {
         "path": "/home/vscode/.cache/inference/python/cpython-3.14.7-linux-x86_64-gnu/bin/python3.14",
         "sha256": "5a91882290532b2719eaca77c0f3a7448bd73b9214e56df57bc59004560a80c6",
@@ -869,14 +869,52 @@ def training_interpreter(experiment):
         "mode": "0755",
     }
     require(
-        experiment["phase"] in {"fit", "software-qualification"},
-        "training interpreter phase",
+        experiment["phase"] in {"analysis", "fit", "software-qualification"},
+        "project interpreter phase",
     )
     selected = [r for r in experiment["inputs"] if r["path"] == expected["path"]]
     require(len(selected) == 1 and selected[0] == expected, "bound qualified training interpreter")
+    require(
+        str(project_python().resolve(strict=True)) == expected["path"],
+        "shared venv/admitted regular binary correspondence",
+    )
+    cfg_path = str(project_python().parent.parent / "pyvenv.cfg")
+    require(
+        len([ref for ref in experiment["inputs"] if ref["path"] == cfg_path]) == 1,
+        "current environment configuration must be separately input-bound",
+    )
     # experiment_check reads all ordered inputs before dispatch and returns them
     # for the ordinary after-command lifetime check; no second authority record.
     return selected[0]
+
+
+def project_python():
+    """One prepared venv; the regular binary stays separately FileRef-bound."""
+    # Source/build/owner ROOT stays worktree-local; the existing shell binding
+    # selects only canonical Main project metadata, independently checked here.
+    common = Path(
+        subprocess.check_output(
+            ["git", "-C", str(ROOT), "rev-parse", "--path-format=absolute", "--git-common-dir"],
+            text=True,
+            timeout=5,
+        ).strip()
+    ).parent
+    selected = Path(os.environ["QUORIDOR_PROJECT_ROOT"])
+    require(
+        selected.is_absolute() and selected == common, "canonical Main project metadata binding"
+    )
+    layout = json.loads((selected / "research-paths.json").read_bytes())
+    environment = Path(layout["environments"]["project"])
+    require(
+        os.environ["QUORIDOR_PROJECT_ENV"] == str(environment),
+        "canonical shared project environment",
+    )
+    python = environment / "bin/python"
+    require(
+        environment.is_absolute() and (environment / "pyvenv.cfg").is_file() and python.is_file(),
+        "prepared shared project Python required",
+    )
+    return python
 
 
 def common_pilot_check(spec, experiment, manifest, approved):
@@ -953,13 +991,12 @@ def common_pilot_check(spec, experiment, manifest, approved):
         )
         return
     require(experiment["planned_slots"] == 0, "fit/qualification is a nongame operation")
-    python = training_interpreter(experiment)["path"]
+    project_interpreter(experiment)
+    python = str(project_python())
     require(
         spec["cwd"] == str(ROOT)
         and spec["env"].get("PYTHONDONTWRITEBYTECODE") == "1"
-        and spec["env"].get("PYTHONPATH")
-        == "/home/vscode/.cache/inference/envs/quoridor-training/lib/python3.14/site-packages:"
-        + str(ROOT / "python")
+        and spec["env"].get("PYTHONPATH") == str(ROOT / "python")
         and all(
             spec["env"].get(k) == "1"
             for k in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS")
@@ -1446,13 +1483,9 @@ def experiment_check(spec):
         )
     executable = manifest["artifact"]["path"]
     if experiment["phase"] in {"analysis", "fit", "software-qualification"}:
-        python = (
-            training_interpreter(experiment)
-            if experiment["phase"] in {"fit", "software-qualification"}
-            else manifest["tools"]["PYTHON"]["file"]
-        )
+        python = project_interpreter(experiment)
         read_ref(python, max(CONTROL_BYTES, python["bytes"]))
-        executable = python["path"]
+        executable = str(project_python())
     require(spec["argv"][0] == executable, "executable argv drift")
     expected_argv = [
         a.replace("@EXPERIMENT@", spec["experiment"]["path"]).replace(

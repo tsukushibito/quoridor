@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Scoped research syntax, formatting, dependency boundaries and NN0 contracts.
 
 Default gate: no build, Torch/ORT import, model forward, game, or scheduler start.
@@ -29,6 +28,9 @@ PY_FILES = (
     "scripts/dev/research-runtime.py",
     "scripts/dev/research-job.py",
     "scripts/dev/research-lifecycle.py",
+    "scripts/dev/verify-python-environment.py",
+    "tools/research-session/test_project_environment.py",
+    "tools/research-session/test_project_interpreter.py",
     "tools/research-session/test_client.py",
     "tools/research-session/test_job.py",
     "tools/research-session/test_lifecycle.py",
@@ -115,11 +117,11 @@ def main():
             parser.error("Model tests require an existing QUORIDOR_OBSERVATION_TEST_ROOT")
         layout = json.loads((ROOT / "research-paths.json").read_text())
         training_python = (
-            Path(os.environ.get("QUORIDOR_TRAINING_ENV", layout["environments"]["training"]))
+            Path(os.environ.get("QUORIDOR_PROJECT_ENV", layout["environments"]["project"]))
             / "bin/python"
         )
         if not training_python.exists():
-            parser.error("Existing training environment required; no automatic install")
+            parser.error("Existing project environment required; no automatic install")
         subprocess.run(
             [str(training_python), "-B", "-m", "unittest", *MODEL_TESTS],
             cwd=ROOT,
@@ -145,7 +147,15 @@ def main():
         )
         return
     prettier = ROOT / "tools/research-quality/node_modules/.bin/prettier"
-    ruff = ROOT / "tools/research-quality/.venv/bin/ruff"
+    ruff = (
+        Path(
+            os.environ.get(
+                "QUORIDOR_PROJECT_ENV",
+                json.loads((ROOT / "research-paths.json").read_text())["environments"]["project"],
+            )
+        )
+        / "bin/ruff"
+    )
     if not prettier.exists() or not ruff.exists():
         parser.error(
             "Install the locked project quality tools described in docs/development/ai-research-code.md"
@@ -175,10 +185,10 @@ def main():
     run(sys.executable, "-B", "scripts/dev/test_manage_worktree.py")
     run(sys.executable, "-B", "tools/model-export/test_export.py")
     layout = json.loads((ROOT / "research-paths.json").read_text())
-    training_env = Path(os.environ.get("QUORIDOR_TRAINING_ENV", layout["environments"]["training"]))
+    training_env = Path(os.environ.get("QUORIDOR_PROJECT_ENV", layout["environments"]["project"]))
     training_python = training_env / "bin/python"
     if not training_python.exists():
-        parser.error("Existing training environment required for tensor-loader contracts")
+        parser.error("Existing project environment required for tensor-loader contracts")
     env = {**os.environ, "PYTHONPATH": str(ROOT / "python"), "ORT_DISABLE_TELEMETRY": "1"}
     subprocess.run(
         [str(training_python), "-B", "-m", "unittest", *NN0_TESTS],
@@ -195,13 +205,11 @@ def main():
         "tools/research-quality/test_verify_production.mjs",
     )
     layout = json.loads((ROOT / "research-paths.json").read_text())
-    session_env = Path(
-        os.environ.get("QUORIDOR_RESEARCH_SESSION_ENV", layout["environments"]["sessions"])
-    )
+    session_env = Path(os.environ.get("QUORIDOR_PROJECT_ENV", layout["environments"]["project"]))
     session_python = session_env / "bin/python"
     if not session_python.exists():
         parser.error(
-            "Existing session environment required for client/job tests; no automatic install"
+            "Existing project environment required for client/job tests; no automatic install"
         )
     run(
         session_python,
@@ -211,6 +219,8 @@ def main():
         "tools/research-session/test_client.py",
         "tools/research-session/test_job.py",
         "tools/research-session/test_lifecycle.py",
+        "tools/research-session/test_project_environment.py",
+        "tools/research-session/test_project_interpreter.py",
     )
     run(
         sys.executable,

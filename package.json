@@ -21,11 +21,11 @@
     "test:audio:browsers": "PLAYWRIGHT_BROWSERS_PATH=./artifacts/playwright playwright test --config playwright.audio.config.ts",
     "preview": "npm run preview -w @quoridor/web",
     "verify:production": "node scripts/verify-production.mjs",
-    "check:research": "python3 -B scripts/dev/check-research.py",
-    "check:research:model": "python3 -B scripts/dev/check-research.py --model-tests",
+    "check:research": "bash scripts/dev/project-env.sh python -B scripts/dev/check-research.py",
+    "check:research:model": "bash scripts/dev/project-env.sh python -B scripts/dev/check-research.py --model-tests",
     "check:native": "cargo fmt --package quoridor-nnue --package quoridor-inference --package quoridor-data --package quoridor-runner -- --check && cargo check --locked -p quoridor-nnue -p quoridor-inference -p quoridor-data -p quoridor-runner && cargo clippy --locked -p quoridor-nnue -p quoridor-inference -p quoridor-data -p quoridor-runner -- -D warnings && cargo test --locked -p quoridor-nnue -p quoridor-inference -p quoridor-data -p quoridor-runner",
     "check:all": "npm run check && npm run check:native && npm run check:research",
-    "test:unit": "node --experimental-vm-modules --test tests/unit/*.test.mjs && python3 -B scripts/dev/test_wasm_boundaries.py"
+    "test:unit": "node --experimental-vm-modules --test tests/unit/*.test.mjs && bash scripts/dev/project-env.sh python -B scripts/dev/test_wasm_boundaries.py"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0"

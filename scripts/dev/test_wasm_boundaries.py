@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Offline Wasm feature-boundary fixtures; no compiler or model imports."""
 
 import copy
