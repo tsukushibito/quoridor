@@ -35,8 +35,6 @@ const AGGREGATE: u64 = 1_800_000_000;
 const RAW_BYTES: usize = 8 * 1048576;
 const ROW_BYTES: usize = 8192;
 const JOURNAL_BYTES: u64 = 4 * 1048576;
-const COST_SCHEDULE_SHA: &str = "79cbf20f954007d5c13e1904c8e337ab360056e18d2cd7537b67fa8b08de00c4";
-const COST_SUPPORT_SHA: &str = "9370c8271fd8958c7da0d035d8f31cc906ab1e4864aafcdaeeb6376b6be483b8";
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
@@ -79,232 +77,6 @@ struct Request {
     node_cap: u64,
 }
 
-/// One of four fixed processes. No profile/iteration/limit tuning interface.
-#[derive(Clone, Copy, Debug, Deserialize, Serialize, PartialEq, Eq)]
-enum ImageRole {
-    A,
-    B,
-}
-#[derive(Clone, Debug, Deserialize, Serialize)]
-#[serde(deny_unknown_fields)]
-struct CostPlan {
-    schema: String,
-    process_index: usize,
-    image_role: ImageRole,
-    plan: Plan,
-}
-#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq)]
-#[serde(deny_unknown_fields)]
-struct CostRequest {
-    id: usize,
-    process_index: usize,
-    image_role: ImageRole,
-    local_request_id: usize,
-    session: usize,
-    diagnostic: bool,
-    profile: Profile,
-    depth: u16,
-    original_root_index: usize,
-    family: usize,
-    warm: bool,
-    local_ply: Option<usize>,
-    node_cap: u64,
-}
-impl CostRequest {
-    fn local(&self) -> Request {
-        Request {
-            id: self.local_request_id,
-            pass: self.session,
-            diagnostic: self.diagnostic,
-            profile: self.profile,
-            depth: self.depth,
-            root: self.original_root_index,
-            warm: self.warm,
-            node_cap: self.node_cap,
-        }
-    }
-}
-fn cost_schedule() -> Vec<CostRequest> {
-    let mut rows = Vec::with_capacity(80);
-    for (process, role) in [ImageRole::A, ImageRole::B, ImageRole::B, ImageRole::A]
-        .into_iter()
-        .enumerate()
-    {
-        let mut local = 0;
-        let mut session = 0;
-        for profile in [Profile::Continuation, Profile::Static] {
-            for (root, family) in COLD.into_iter().enumerate() {
-                rows.push(CostRequest {
-                    id: rows.len(),
-                    process_index: process,
-                    image_role: role,
-                    local_request_id: local,
-                    session,
-                    diagnostic: false,
-                    profile,
-                    depth: 4,
-                    original_root_index: root,
-                    family,
-                    warm: false,
-                    local_ply: None,
-                    node_cap: CAPS[0],
-                });
-                local += 1;
-                session += 1;
-            }
-            for (index, ply) in [0, 2, 4, 6].into_iter().enumerate() {
-                rows.push(CostRequest {
-                    id: rows.len(),
-                    process_index: process,
-                    image_role: role,
-                    local_request_id: local,
-                    session,
-                    diagnostic: false,
-                    profile,
-                    depth: 4,
-                    original_root_index: 4 + index,
-                    family: 0,
-                    warm: true,
-                    local_ply: Some(ply),
-                    node_cap: CAPS[0],
-                });
-                local += 1;
-            }
-            session += 1;
-            for (root, family) in [(1, 34), (3, 102)] {
-                rows.push(CostRequest {
-                    id: rows.len(),
-                    process_index: process,
-                    image_role: role,
-                    local_request_id: local,
-                    session,
-                    diagnostic: false,
-                    profile,
-                    depth: 6,
-                    original_root_index: root,
-                    family,
-                    warm: false,
-                    local_ply: None,
-                    node_cap: CAPS[1],
-                });
-                local += 1;
-                session += 1;
-            }
-        }
-    }
-    rows
-}
-fn validate_cost(p: &CostPlan, e: &Experiment, rows: &[CostRequest]) -> Result<()> {
-    if p.schema != "quoridor.ordering372.process.v1"
-        || p.process_index >= 4
-        || p.image_role != [ImageRole::A, ImageRole::B, ImageRole::B, ImageRole::A][p.process_index]
-        || p.plan.schema != "quoridor.continuation360.plan.v1"
-        || e.phase != "compare"
-        || e.planned_slots != 20
-        || e.batch != Some(p.process_index)
-        || e.numerical_qualification.is_none()
-        || e.canonical_plan_sha256 != p.plan.assessment.sha256
-        || e.schedule.sha256 != COST_SCHEDULE_SHA
-        || rows != cost_schedule()
-        || p.plan.resources.sha256 != COST_SUPPORT_SHA
-        || p.plan.resources.bytes != 3150
-        || p.plan.book.sha256 != BOOK
-        || p.plan.warm_journal.bytes > JOURNAL_BYTES
-        || e.models.len() != 1
-        || e.dynamic_libraries.len() != 5
-        || e.inputs
-            != [
-                p.plan.book.clone(),
-                p.plan.warm_origin.clone(),
-                p.plan.warm_config.clone(),
-                p.plan.warm_journal.clone(),
-                p.plan.assessment.clone(),
-                p.plan.resources.clone(),
-            ]
-        || e.argv.len() != 6
-        || e.argv[1..]
-            != [
-                "ordering-cost-assess",
-                "--experiment",
-                "@EXPERIMENT@",
-                "--experiment-sha256",
-                "@EXPERIMENT_SHA256@",
-            ]
-    {
-        return Err("372 fixed80 projection/process/authority required".into());
-    }
-    let m = &e.models[0];
-    if m.descriptor.sha256 != DESCRIPTOR
-        || m.descriptor.bytes != 677
-        || m.descriptor.mode != "0600"
-        || m.weights.sha256 != WEIGHTS
-        || m.weights.bytes != 49284
-        || m.weights.mode != "0644"
-        || m.evaluator_sha256 != EVALUATOR
-    {
-        return Err("372 unchanged qualified BEST43 required".into());
-    }
-    Ok(())
-}
-fn prepare_cost_inputs(e: &Experiment) -> Result<(CostPlan, Vec<Request>, Vec<Option<RootSpec>>)> {
-    let p: CostPlan = e.config.read()?;
-    let all: Vec<CostRequest> = e.schedule.read()?;
-    validate_cost(&p, e, &all)?;
-    let method: Value = p.plan.assessment.read()?;
-    if method["schema"] != "quoridor.ordering372.assessment.v1"
-        || method["planned_Search_calls"] != 80
-        || method["node_liability"] != 256000000u64
-        || method["session_count"] != 56
-        || method["fixed_order"] != json!(["A", "B", "B", "A"])
-        || method["schedule_sha256"] != COST_SCHEDULE_SHA
-    {
-        return Err("372 immutable fixed80 approved method required".into());
-    }
-    let support: Value = p.plan.resources.read()?;
-    if support["issue"] != "quoridor-4lc.372"
-        || support["whole_inclusive_B"] != 536870912u64
-        || support["components_worker_MiB"]["raw"] != 16
-    {
-        return Err("372 actual contained whole/raw support required".into());
-    }
-    let book: Value = p.plan.book.read()?;
-    let roots = derive_roots(&book, warm_game(&p.plan, &book)?.as_ref())?;
-    let rows = all
-        .iter()
-        .filter(|r| r.process_index == p.process_index)
-        .map(CostRequest::local)
-        .collect();
-    Ok((p, rows, roots))
-}
-
-/// Original20-input/head evidence stays on its old artifact/config/schedule.
-/// This checks only the exact subset inputs and model/library correspondence.
-pub(crate) fn retained_cost_inputs(e: &Experiment, original: &Experiment) -> Result<Value> {
-    let p: CostPlan = e.config.read()?;
-    let rows: Vec<CostRequest> = e.schedule.read()?;
-    validate_cost(&p, e, &rows)?;
-    let old: Plan = original.config.read()?;
-    if !qualification_shape(original)
-        || [old.book, old.warm_origin, old.warm_config, old.warm_journal]
-            != [
-                p.plan.book,
-                p.plan.warm_origin,
-                p.plan.warm_config,
-                p.plan.warm_journal,
-            ]
-        || e.rules != original.rules
-        || e.distance_units != original.distance_units
-        || e.value_perspective != original.value_perspective
-        || e.models != original.models
-        || serde_json::to_value(&e.dynamic_libraries)?
-            != serde_json::to_value(&original.dynamic_libraries)?
-    {
-        return Err("372 retained original20 input/head/model/library scope drift".into());
-    }
-    Ok(
-        json!({"approved_plan":p.plan.assessment,"schedule":e.schedule,"resources":p.plan.resources,"image_role":p.image_role}),
-    )
-}
 fn schedule() -> Vec<Request> {
     let plain = [
         Profile::Prior,
@@ -1122,48 +894,17 @@ pub fn qualify(bound: &BoundControl) -> Result<Value> {
 }
 
 /// Uses the maintained generic Experiment/numerical/lifetime entry, not private TT access.
-fn run_impl(bound: &BoundControl, cost: bool) -> Result<Value> {
+pub fn run(bound: &BoundControl) -> Result<Value> {
     let whole = Instant::now();
     let (e, _) = research_manifest::load(bound, "compare")?;
-    let (cost_plan, requests, roots) = if cost {
-        let (plan, requests, roots) = prepare_cost_inputs(&e)?;
-        (Some(plan), requests, roots)
-    } else {
-        let (_, requests, roots) = prepare_inputs(&e)?;
-        (None, requests, roots)
-    };
-    let planned = if cost { 20 } else { 360 };
-    let node_limit = if cost { 64_000_000 } else { AGGREGATE };
+    let (_, requests, roots) = prepare_inputs(&e)?;
+    let planned = 360;
+    let node_limit = AGGREGATE;
     let output_root = output_correspondence()?;
     let inputs_seconds = whole.elapsed().as_secs_f64();
-    let mut header = json!({"schema":"quoridor.continuation360.intent.v1","experiment_sha256":bound.sha256,"config_sha256":e.config.sha256,"schedule_sha256":e.schedule.sha256,"build_manifest":e.build_manifest,"compiled_sources":research_manifest::sources(),"model":e.models[0],"input_refs":e.inputs,"requests":requests,"planned":planned,"plain":240,"diagnostic":120,"no_refill":true,"pre_root_continuation":"absent; actual speculative LIFO only"});
-    if let Some(plan) = &cost_plan {
-        if plan.plan.output != output_root {
-            return Err("372 config/output owner drift".into());
-        }
-        header["schema"] = json!("quoridor.ordering372.intent.v1");
-        header["planned"] = json!(planned);
-        header["plain"] = json!(20);
-        header["diagnostic"] = json!(0);
-        header["campaign_planned"] = json!(80);
-        header["campaign_sessions"] = json!(56);
-        header["process_index"] = json!(plan.process_index);
-        header["image_role"] = json!(plan.image_role);
-        header["process_sessions"] = json!(14);
-        header["declared_node_liability"] = json!(node_limit);
-        header["fixed_projection"] = json!(
-            cost_schedule()
-                .into_iter()
-                .filter(|r| r.process_index == plan.process_index)
-                .collect::<Vec<_>>()
-        );
-    }
+    let header = json!({"schema":"quoridor.continuation360.intent.v1","experiment_sha256":bound.sha256,"config_sha256":e.config.sha256,"schedule_sha256":e.schedule.sha256,"build_manifest":e.build_manifest,"compiled_sources":research_manifest::sources(),"model":e.models[0],"input_refs":e.inputs,"requests":requests,"planned":planned,"plain":240,"diagnostic":120,"no_refill":true,"pre_root_continuation":"absent; actual speculative LIFO only"});
     let mut output = Output::new(&output_root);
-    if cost {
-        output.limit = 3 * 1048576;
-    }
     let mut count = Census::default();
-    let mut cost_stops = [0usize; 4];
     let mut pending = Value::Null;
     let mut secondary = Vec::new();
     let mut pass_costs = Vec::new();
@@ -1259,15 +1000,6 @@ fn run_impl(bound: &BoundControl, cost: bool) -> Result<Value> {
                 match result {
                     Ok(r) => {
                         count.ok += 1;
-                        if cost {
-                            match r.stop {
-                                StopReason::NodeLimit => cost_stops[0] += 1,
-                                StopReason::TimeLimit => cost_stops[1] += 1,
-                                StopReason::Cancelled => cost_stops[2] += 1,
-                                StopReason::Terminal => cost_stops[3] += 1,
-                                StopReason::DepthComplete => {}
-                            }
-                        }
                         pending["observed"] = observed(&r);
                         if identity(&root) != before {
                             return Err("360 full parent restoration mismatch".into());
@@ -1320,40 +1052,11 @@ fn run_impl(bound: &BoundControl, cost: bool) -> Result<Value> {
             m.weights.verify()?;
         }
         Ok(
-            json!({"schema":if cost {"quoridor.ordering372.result.v1"} else {"quoridor.continuation360.result.v1"},"status":if count.complete==planned {"COMPLETE"} else {"COMPLETED_WITH_UNKNOWN"},"experiment_sha256":bound.sha256,"config_sha256":e.config.sha256,"schedule_sha256":e.schedule.sha256,"planned":planned,"session_setup_attempts":count.session_setup_attempts,"session_setup_Ok":count.session_setup_ok,"session_setup_Err":count.session_setup_err,"root_replay_attempts":count.attempted,"attempted":count.attempted,"actual_Search_invocations":count.invoked,"returned_Ok":count.ok,"returned_Err":count.err,"completed_requested_depth":count.complete,"durably_published_complete_rows":count.published_complete,"planned_UNKNOWN":planned-count.complete,"node_liability":count.liability,"input_verification_and_derivation_seconds":inputs_seconds,"model_setup_seconds":model_setup_seconds,"model_drop_seconds":model_drop_seconds,"passes":pass_costs,"root_whole_intervals":root_costs,"root_interval_cost_domain":"Actual interval includes primary+cost-journal serialization/sync, setup on first and drop on last root. Shared model/input/header/footer/outer-finalizer costs retained separately in outer whole; no invented perroot causal shares or use of Search-only as whole.","whole_until_result_publication_seconds":whole.elapsed().as_secs_f64(),"final_authoritative_whole":"outer lifecycle directwait/finalizer; native receipt alone not completion/benefit PASS","benefit_interpretation":"NOT_ASSESSED; prebound gates need saved matched results and honest cost domains"}),
+            json!({"schema":"quoridor.continuation360.result.v1","status":if count.complete==planned {"COMPLETE"} else {"COMPLETED_WITH_UNKNOWN"},"experiment_sha256":bound.sha256,"config_sha256":e.config.sha256,"schedule_sha256":e.schedule.sha256,"planned":planned,"session_setup_attempts":count.session_setup_attempts,"session_setup_Ok":count.session_setup_ok,"session_setup_Err":count.session_setup_err,"root_replay_attempts":count.attempted,"attempted":count.attempted,"actual_Search_invocations":count.invoked,"returned_Ok":count.ok,"returned_Err":count.err,"completed_requested_depth":count.complete,"durably_published_complete_rows":count.published_complete,"planned_UNKNOWN":planned-count.complete,"node_liability":count.liability,"input_verification_and_derivation_seconds":inputs_seconds,"model_setup_seconds":model_setup_seconds,"model_drop_seconds":model_drop_seconds,"passes":pass_costs,"root_whole_intervals":root_costs,"root_interval_cost_domain":"Actual interval includes primary+cost-journal serialization/sync, setup on first and drop on last root. Shared model/input/header/footer/outer-finalizer costs retained separately in outer whole; no invented perroot causal shares or use of Search-only as whole.","whole_until_result_publication_seconds":whole.elapsed().as_secs_f64(),"final_authoritative_whole":"outer lifecycle directwait/finalizer; native receipt alone not completion/benefit PASS","benefit_interpretation":"NOT_ASSESSED; prebound gates need saved matched results and honest cost domains"}),
         )
     })();
-    let failure = json!({"schema":if cost {"quoridor.ordering372.failure.v1"} else {"quoridor.continuation360.failure.v1"},"status":"FAILED","experiment_sha256":bound.sha256,"config_sha256":e.config.sha256,"planned":planned,"session_setup_attempts":count.session_setup_attempts,"session_setup_Ok":count.session_setup_ok,"session_setup_Err":count.session_setup_err,"root_replay_attempts":count.attempted,"attempted":count.attempted,"actual_Search_invocations":count.invoked,"returned_Ok":count.ok,"returned_Err":count.err,"completed_requested_depth":count.complete,"durably_published_complete_rows":count.published_complete,"remaining_unknown":planned-count.published_complete,"node_liability":count.liability,"last_attempt_or_return":pending,"passes":pass_costs,"root_whole_intervals":root_costs,"primary":Value::Null,"secondary":[],"INCOMPLETE":true,"outer_completion":"NOT_FINALIZED"});
-    let annotate = |mut value: Value| {
-        if let Some(plan) = &cost_plan {
-            value["process_index"] = json!(plan.process_index);
-            value["image_role"] = json!(plan.image_role);
-            value["campaign_planned"] = json!(80);
-            value["planned_sessions"] = json!(14);
-            value["declared_node_liability"] = json!(node_limit);
-            value["returned_NodeLimit"] = json!(cost_stops[0]);
-            value["returned_TimeLimit"] = json!(cost_stops[1]);
-            value["returned_Cancelled"] = json!(cost_stops[2]);
-            value["returned_Terminal"] = json!(cost_stops[3]);
-            value["not_invoked"] = json!(planned - count.invoked);
-            value["attempted_without_invocation"] = json!(count.attempted - count.invoked);
-            value["Ok_without_complete_depth"] = json!(count.ok - count.complete);
-        }
-        value
-    };
-    finish_output(
-        &mut output,
-        outcome.map(annotate),
-        secondary,
-        annotate(failure),
-    )
-}
-
-pub fn run(bound: &BoundControl) -> Result<Value> {
-    run_impl(bound, false)
-}
-pub fn run_cost(bound: &BoundControl) -> Result<Value> {
-    run_impl(bound, true)
+    let failure = json!({"schema":"quoridor.continuation360.failure.v1","status":"FAILED","experiment_sha256":bound.sha256,"config_sha256":e.config.sha256,"planned":planned,"session_setup_attempts":count.session_setup_attempts,"session_setup_Ok":count.session_setup_ok,"session_setup_Err":count.session_setup_err,"root_replay_attempts":count.attempted,"attempted":count.attempted,"actual_Search_invocations":count.invoked,"returned_Ok":count.ok,"returned_Err":count.err,"completed_requested_depth":count.complete,"durably_published_complete_rows":count.published_complete,"remaining_unknown":planned-count.published_complete,"node_liability":count.liability,"last_attempt_or_return":pending,"passes":pass_costs,"root_whole_intervals":root_costs,"primary":Value::Null,"secondary":[],"INCOMPLETE":true,"outer_completion":"NOT_FINALIZED"});
+    finish_output(&mut output, outcome, secondary, failure)
 }
 
 #[cfg(test)]
@@ -1689,7 +1392,3 @@ mod input_qualification_tests {
         std::fs::remove_dir_all(dir).unwrap();
     }
 }
-
-#[cfg(test)]
-#[path = "ordering372_tests.rs"]
-mod ordering372_tests;

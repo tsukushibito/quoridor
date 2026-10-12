@@ -1203,6 +1203,8 @@ COMPLETE f32values agree bit-for-bit across profiles/repetitions/diagnostics. Tw
 
 [原停止報告](../.worktree/ordering-cost372/.artifacts/ordering-cost372-v1/fixed80-v1/result-handoff-v1/report.md)、[独立結果確認](../.artifacts/search-optimization/ordering372-review-v1/result-v2/report.md)、[正本受入れ](../research-data/ai-sigma/search-optimization/ordering372/result-acceptance-v1.json)を保持する。数値controller415.78304357605520秒とsoftware180.39328987989575秒を一度ずつ数え、合計596.17633345595095秒、nested native407.314297366秒は加えない。後のfinalize/回収/整形/admin/LLM費、exact native UTC exit、連続RSS/transient peakは別/UNKNOWN。plain orderingstats0は未観測で、nodeごとのscore/order/update一致の直接証拠ではない。原FAILED20.54148446000181秒・RAW・returned対persisted masks・UNKNOWNは不変更。全科学readerSTOP08:46:32.830454Z、独立結果readerSTOP09:05:57.426600Zで解放済み。計画/基準は[ordering設計](design/lightweight-move-ordering-v1.md)、資源は既発行[512MiB支持](../research-data/ai-sigma/search-optimization/ordering372/support-v1.json)。
 
+372の比較専用入口・372 schema/reuse/dispatchと未参照の比較専用3test modulesは、実reader解放後に[撤去受入れ](../research-data/ai-sigma/search-optimization/ordering372/comparison-retirement-acceptance-v1.json)に従い現役から除去した。基準Aの計算・現役correctness/ordinary ordering-assess・375の実runtime束縛は維持する。Gitで再構成できる廃止コードと必要な原データ/モデル/RAW/imageを区別し、後者は変更せず、削除による資源返金や追加測定は行わない。
+
 ### BUILDとRUNの来歴境界の整理完了（375、2026-10-12）
 
 [受入れ](../research-data/ai-sigma/runtime-provenance375/acceptance-v1.json)とMain6fb5f2aにより、Rust source/compiler/build依存の照合は所有するBUILDで維持し、RUNは既存configが選んだaccepted PASS BuildManifestとimmutable artifact、実際のPython caller/import/environment/library/model/input/config/schedule/approved planを照合する。現在のMain Rustを保存済みA/B imageに合わせて書き戻す手順を現役RUNから除いた。実行時に読み込むコードやlibraryの束縛は保持し、第二のselector/registryは追加しない。
