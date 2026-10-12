@@ -31,7 +31,9 @@
 | `control_interval_seconds`, `notify_interval_seconds`, `request_timeout_seconds` | 所有・pauseの点検、通知待ち、RPCの各上限                     |
 | `log_max_bytes`                                                                  | 保存するstdout/stderr末尾のbyte上限                          |
 
-`end_at`は実commandの終了期限、`notify_until`は担当者を起こせる最終時刻、`max_runtime_seconds`はmonotonic実行上限。ユーザーが期限・計算上限を設けないと明示したタスクでは、それぞれ`null`を指定できる。有限の設定は再起動で取り直さない。`resource_contract`は現在の個別契約への参照であり、CPU/RAM/NNの機械的強制を代行しない。
+`end_at`は明示された実commandの終了期限、`notify_until`は通知期限、`max_runtime_seconds`は明示した安全用のmonotonic実行上限。予想所要時間は計画・報告の情報であり、停止条件や未開始の許可の有効期限にしない。固定された件数・node・メモリ・保存量・取消・所有者の制御で有限な処理を拘束できる場合、実行時間上限は`null`にできる。安全上限が必要なら目的と根拠、終了・回収の余裕を明記し、見積りをそのままhard killに使わない。有限の実際の上限は再起動で取り直さない。`resource_contract`は個別契約への参照であり、CPU/RAM/NNの機械的強制を代行しない。
+
+100msの手番、実験内sampling期間、固定depth/node/count/選択、人間が明示した期限は引き続き厳守する。RPC・lock・通信・cleanupの有界timeoutも目的を保つ。ソース準備・修正・レビュー・統合・queue時間や見積り超過だけで、未開始の承認済み作業を失効させたり再承認を求めたりしない。pause/cancel/所有・資源・実エラーでは停止し、自動再開始、件数の補充、周期LLM監視は追加しない。
 
 ```bash
 export UV_NO_SYNC=1 UV_OFFLINE=1 PYTHONDONTWRITEBYTECODE=1
