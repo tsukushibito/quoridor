@@ -1,5 +1,17 @@
 # Sigma比較の現行方法
 
+## 人間選択の三者比較（374、2026-10-12）
+
+現在選択された比較はSigma、固定D、単独BEST43 NNUEの三pairingである。NNUEは勝敗zの予測を目的とするモデルで、Dを出力へ加える補正器やD＋NNUE混合ではない。既存の標準化distance head入力とT-only scaleは保持し、final tanh・output bypass OFF、重み046fe/BEST43・descriptor46ec/evaluator96a5を固定する。Sigmaは保持ONNX d790と既存policy/value/PUCT設定、Dは既資格の固定評価を使う。新しい学習・teacher・重み・defaultは選択していない。
+
+固定予定は128 opening families、先後交換384 pairs／768 games、各pairing256 slots。100msの応答時計と5ms reserve、goal-first/true threefold、full history、200ply未決着UNKNOWNを保持する。Alpha側のcontinuation/static orderingは両方OFFとし、Sigmaの即時authority receiptと終了drainを区別する。保存358 traceから結果前に選んだ78 parentsへの234 single proposalsは別の診断分母で、欠けた18 milestonesを補充しない。診断は得意・不得意の仮説を作る有限比較で、他engineの一致やD6値を最適手の真実としない。
+
+旧347のSigma cost qualificationは期限切れであり、新しいcurrent Build／backend／model／library／資源tupleへの一回の64 requestsを先に行う。32 untimed＝16 warm＋16 measure、32 timedの二phaseと既存4×＋2ms計算、実launchから一度固定する24h windowを用いる。古い証拠の期限更新や静的source proofによるempirical PASS代用をしない。失敗・不足・期限切れではunsupportedのまま保存し、自動再qualificationや別の対局campaignを追加しない。
+
+詳細の正本は一つのlossless archive、result/manifestはcompact censusとexact referencesとする。missing/torn/不一致appendでは利用できるotherwise-unrecoverable outcomeだけをbounded failure evidenceへ保持し、canonical successを作らない。初期化の元error object、既知の最初の理由、返ったarchive/publication errorsを保持する。変更境界のレビューを受けた[現役Source採用](../../research-data/ai-sigma/three-engine-comparison374/source-adoption-v1.json)はsource-onlyであり、actual Build/private／backend／library／cost／gamesの成功を証明しない。各工程の実STOP・returned/persisted facts・UNKNOWN・費用を分ける。
+
+家族単位の結果と時間／エラー／UNKNOWN、保存された有限特徴・decision factsから改善方針を検討する。128 familiesや選択済みanalysis settingsを結果後に変えず、IID・Elo・母集団棋力・唯一原因を主張しない。既存の研究入口・正本と[inclusive772MiB支持](../../research-data/ai-sigma/three-engine-comparison374/support-v2.json)を用い、shared target・実reader/clock intervalを保護する。終了後の一般化保守377は実374 STOP・受入れ後に別途行い、今回の測定設定を遡及変更しない。
+
 [目標](ai-sigma-research-goal.md)と[実行枠](ai-sigma-continuation-20261001.md)を継承する。2026-10-02、契約改善指示により機能診断・探索的棋力評価・正式認定を分離した。過去の計画・標本・条件はGit/実行記録で参照し、変更していない。
 
 ## 参照と共通条件

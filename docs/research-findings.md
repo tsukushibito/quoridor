@@ -1238,3 +1238,11 @@ Actual forward census1650008/2000000 includes the64-row affected fixture; render
 問いは「完了深さのnodes/evaluations減少が、準備・sort・history・teardownまで含む費用を上回るか」である。一imageの固定80-call ABBA、cold/warmとD4/D6、72 plain＋内数8 diagnostics、256M node liabilityを結果前に指定した。cold/warm両方のnodes/evals中央値比≤0.95、plain whole≤1.02、両Bで再現するcontext悪化>1.10なしを採用条件とする。cap/欠落はUNKNOWNのまま保持し、refill・weight sweep・追加campaignをしない。
 
 これは承認済みの方向と資源支持の記録であり、実装正しさ・数値完了・改善の観測ではない。372の約半分のstatic時間と全体採用拒否は独立した過去結果として保持する。[240MiB支持](../research-data/ai-sigma/cheap-static-ordering376/support-v1.json)は終了済みタスクの未使用future TMP248MiBを正常な停止証拠で整理した後、decimal50GB内に発行した。元の使用cap・失敗・モデル/入力/RAW/UNKNOWNは保持する。374の実intervalとshared targetのsole writerを優先し、source準備と実build/評価を区別する。新しい棋力・NNUE/Dの優劣・defaultや323pause解除は選択していない。
+
+## 人間選択：Sigma／固定D／単独NNUEの比較（374、2026-10-12）
+
+人間は、三者の棋力と得意・不得意な盤面を同じ枠で比べ、NNUE改善の検証方針に使うことを選択した。対象NNUEは既存BEST43の単独勝敗予測で、Dの出力補正や混合評価ではない。distance head入力・scaleは既存のまま、重み・final tanh・output bypass OFFを固定する。新しいモデルや学習、比率、teacher、defaultの選択は含まない。
+
+[三者比較規約](design/ai-sigma-comparison-protocol.md)は128 families／768 gamesの三pairing・先後交換と100ms／5ms、保存traceからの78 parents／234 single proposals＋18 missingを固定している。部分／未決着はUNKNOWNで補充せず、engine間の一致を最適手の真実としない。公開labelsの実game/history/rules lineage不足と、既存book／有限family比較の限界を維持する。実結果が出る前の得意盤面やNNUE改善原因は未確定である。
+
+失敗時にavailable detailed outcomesと最初のerror／全publication secondariesを保持するR1/R2修復は、同じレビュアーの[限定source確認](../.artifacts/three-engine-comparison374-review-v1/fault-v3/report.md)で指摘なしとなり、停止済みの[現役Source](../research-data/ai-sigma/three-engine-comparison374/source-adoption-v1.json)を採用した。これは新規12 Rust／8 Pythonの実検証・Build・native backend/library・fresh Sigma cost qualification・対局の成功ではない。旧347 cost証拠は期限切れのまま保存し、current tupleの一回64-request qualificationを別工程で必要とする。原negative source phase、失敗、RAW、費用、masks、UNKNOWNを変更しない。374実intervalが376より優先し、377は完了後の設定駆動保守で今回のgateにはしない。
