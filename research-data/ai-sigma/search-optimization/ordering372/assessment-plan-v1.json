@@ -1,0 +1,111 @@
+{
+  "schema": "quoridor.ordering372.assessment.v1",
+  "issue": "quoridor-4lc.372",
+  "planned_Search_calls": 80,
+  "node_liability": 256000000,
+  "session_count": 56,
+  "fixed_order": ["A", "B", "B", "A"],
+  "schedule_sha256": "79cbf20f954007d5c13e1904c8e337ab360056e18d2cd7537b67fa8b08de00c4",
+  "schedule": {
+    "path": "/workspaces/quoridor/.worktree/ordering-cost372/.artifacts/ordering-cost372-v1/source-preparation-v1/fixed80-schedule.json",
+    "sha256": "79cbf20f954007d5c13e1904c8e337ab360056e18d2cd7537b67fa8b08de00c4",
+    "bytes": 23749,
+    "mode": "0644"
+  },
+  "criteria": {
+    "all80_requested_depth_COMPLETE_required_for_positive_acceptance": true,
+    "exact_completed_pairs": [
+      "valuebits",
+      "selected_action",
+      "PV",
+      "nodes",
+      "evaluations",
+      "cutoffs",
+      "PVS_researches",
+      "TT/key/probe/hit/collision/history/capacity_work",
+      "ordering_scores_orders_update_counts",
+      "parent_restored"
+    ],
+    "primary_context_ratio": "median(B1,B2 whole_root)/median(A0,A3 whole_root); median of two is arithmetic mean",
+    "primary_profile_ratio": "median of ten completed context ratios per profile",
+    "combined_static_profile_upper": 0.95,
+    "continuation_only_upper": 1.02,
+    "cold_warm_depth_strata": "report separately with all20 profile/context cases; no CI/population claim",
+    "reproducible_adverse_refusal": "both B repetitions / bracketing A median >1.05 for any completed paired context",
+    "all_four_B_over_A_ratios": "retain B1/A0,B1/A3,B2/A0,B2/A3; also flag bothB above bothA by>1.05",
+    "UNKNOWN": "nodecap/short history/unsupported input/model/source/output/control/cancel/error: keep original partial and fees, no lower-depth rescue/refill/extra run"
+  },
+  "limits": {
+    "use_pvs": true,
+    "use_tt": true,
+    "tt_entries": 4096,
+    "table_byte_limit": 1048576,
+    "depth4_node_limit": 2000000,
+    "depth6_node_limit": 8000000,
+    "time_limit": null
+  },
+  "original_inputs": {
+    "book": {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/campaign-generation-v1/data/book.json",
+      "sha256": "a6abde1f3182ba0e876c9e7719d3389502a44b3406ca28b7af9a0456952a6878",
+      "bytes": 85083,
+      "mode": "0644"
+    },
+    "warm_origin": {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/campaign-arena-v1/batch-00/operation-v1/manifest.json",
+      "sha256": "9943528719ecf8df0c09cf4bc19decacb3e2733f0ca16d504a4d3d23e25ce771",
+      "bytes": 7519,
+      "mode": "0644"
+    },
+    "warm_config": {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/campaign-materialization-v1/data/batch-00.json",
+      "sha256": "8aa5470da1cade255f8b2e6bf37f72f87acd4b66f7847d6183e9ecf5dc241c24",
+      "bytes": 14437,
+      "mode": "0644"
+    },
+    "warm_journal": {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/campaign-arena-v1/data/strength355-batch-00/completed.jsonl",
+      "sha256": "17172550229ce5e60c08617ab558af8e57909890445389ba2acf717524cfc3e1",
+      "bytes": 3333112,
+      "mode": "0644"
+    }
+  },
+  "processes": [
+    {
+      "process_index": 0,
+      "image_role": "A",
+      "planned": 20,
+      "session_count": 14,
+      "node_liability": 64000000
+    },
+    {
+      "process_index": 1,
+      "image_role": "B",
+      "planned": 20,
+      "session_count": 14,
+      "node_liability": 64000000
+    },
+    {
+      "process_index": 2,
+      "image_role": "B",
+      "planned": 20,
+      "session_count": 14,
+      "node_liability": 64000000
+    },
+    {
+      "process_index": 3,
+      "image_role": "A",
+      "planned": 20,
+      "session_count": 14,
+      "node_liability": 64000000
+    }
+  ],
+  "positive_acceptance": "all80 COMPLETE and exact matched work/value/action/PV; original saved criteria unchanged; no refill/rescue/sweep",
+  "horizons": {
+    "max_runtime": null,
+    "end_at": null,
+    "notify_until": null,
+    "command_timeout": null
+  },
+  "status": "APPROVED_HUMAN_SELECTED_FIXED80_COMPARISON"
+}

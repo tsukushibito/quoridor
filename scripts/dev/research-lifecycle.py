@@ -701,11 +701,79 @@ def finalize_numerical_claim(candidate):
             claim["status"] = "UNKNOWN"
 
 
-def retained_ordering_source(current, original, adoption, qualification, original_ref):
+def ordering_cost372_inputs(experiment, qualified):
+    """Current80 authority is separate from retained original20 input/head evidence."""
+    config = document(experiment["config"])
+    plan = config["plan"]
+    process = config["process_index"]
+    require(
+        set(config) == {"schema", "process_index", "image_role", "plan"}
+        and config["schema"] == "quoridor.ordering372.process.v1"
+        and type(process) is int
+        and 0 <= process < 4
+        and config["image_role"] == ["A", "B", "B", "A"][process]
+        and experiment["phase"] == "compare"
+        and experiment["planned_slots"] == 20
+        and experiment["batch"] == process
+        and experiment["argv"][1:]
+        == [
+            "ordering-cost-assess",
+            "--experiment",
+            "@EXPERIMENT@",
+            "--experiment-sha256",
+            "@EXPERIMENT_SHA256@",
+        ]
+        and plan["schema"] == "quoridor.continuation360.plan.v1"
+        and experiment["canonical_plan_sha256"] == plan["assessment"]["sha256"]
+        and experiment["schedule"]["sha256"]
+        == "79cbf20f954007d5c13e1904c8e337ab360056e18d2cd7537b67fa8b08de00c4"
+        and plan["resources"]["sha256"]
+        == "9370c8271fd8958c7da0d035d8f31cc906ab1e4864aafcdaeeb6376b6be483b8"
+        and plan["resources"]["bytes"] == 3150
+        and experiment["inputs"]
+        == [
+            plan[k]
+            for k in (
+                "book",
+                "warm_origin",
+                "warm_config",
+                "warm_journal",
+                "assessment",
+                "resources",
+            )
+        ],
+        "372 fixed80 process/role/authority drift",
+    )
+    original = document(qualified["config"])
+    require(
+        all(plan[k] == original[k] for k in ("book", "warm_origin", "warm_config", "warm_journal"))
+        and all(
+            experiment[k] == qualified[k] for k in ("rules", "distance_units", "value_perspective")
+        )
+        and experiment["models"] == qualified["models"]
+        and experiment["dynamic_libraries"] == qualified["dynamic_libraries"],
+        "372 original20 input/head/model/library scope drift",
+    )
+    return {
+        "approved_plan": plan["assessment"],
+        "schedule": experiment["schedule"],
+        "resources": plan["resources"],
+        "image_role": config["image_role"],
+    }
+
+
+def retained_ordering_source(current, original, adoption, qualification, original_ref, cost=None):
     """One reviewed Source adoption; never rewrite the original numerical subject."""
     reuse = adoption["retained_ordering_numerical"]
     changed = reuse["changed_compiled_sources"]
     wrappers = {"runner/ordering_assessment.rs", "runner/research_manifest.rs"}
+    if cost is not None:
+        require(reuse["ordering372"] == cost, "372 current reviewed reuse correspondence")
+        wrappers.add("runner/main.rs")
+        if cost["image_role"] == "B":
+            wrappers.update(
+                {"ai/alphabeta.rs", "ai/static_ordering.rs", "ai/continuation_history.rs"}
+            )
     require(
         adoption["schema"] == "quoridor.research.source-adoption.v1"
         and adoption["status"] == "ACCEPTED"
@@ -786,19 +854,46 @@ def retained_ordering_source(current, original, adoption, qualification, origina
         return {r["path"]: r for r in files}
 
     old_files, new_files = native(original["source"]), native(current["source"])
-    require(set(old_files) == set(new_files), "ordering native source membership changed")
+
+    def reviewed_test(before, after):
+        return cost is not None and any(
+            pair.get("before") == before
+            and pair.get("after") == after
+            and after is not None
+            and any(
+                Path(after["path"]).as_posix().endswith("/" + suffix)
+                for suffix in (
+                    "crates/quoridor-ai/src/static360_tests.rs",
+                    "crates/quoridor-ai/src/static372_tests.rs",
+                    "crates/quoridor-ai/src/continuation372_tests.rs",
+                    "crates/quoridor-runner/src/ordering372_tests.rs",
+                )
+            )
+            for pair in reuse.get("changed_native_tests", [])
+        )
+
+    require(set(old_files) <= set(new_files), "ordering native source removal refused")
+    if cost is None:
+        require(set(old_files) == set(new_files), "ordering native source membership changed")
     for path, old in old_files.items():
         new = new_files[path]
         require(
-            old == new or any(p["before"] == old and p["after"] == new for p in changed.values()),
+            old == new
+            or reviewed_test(old, new)
+            or any(p["before"] == old and p["after"] == new for p in changed.values()),
             "ordering native witness outside reviewed wrappers changed",
         )
+
+    for path in set(new_files) - set(old_files):
+        require(reviewed_test(None, new_files[path]), "372 unreviewed native source addition")
 
 
 def numerical_check(experiment, manifest, *, refs=None):
     q = document(experiment["numerical_qualification"])
     numerical_manifest = manifest
-    if experiment["argv"][1] == "ordering-assess":
+    claim_experiment = experiment
+    cost = experiment["argv"][1] == "ordering-cost-assess"
+    if cost or experiment["argv"][1] == "ordering-assess":
         reference = experiment["numerical_qualification"]
         require(
             Path(reference["path"]).name == "manifest.json"
@@ -817,8 +912,10 @@ def numerical_check(experiment, manifest, *, refs=None):
         )
         qualified = document(q["experiment"])
         ordering_qualification_shape(qualified)
+        correspondence = ordering_cost372_inputs(experiment, qualified) if cost else None
         require(
-            all(
+            cost
+            or all(
                 qualified[k] == experiment[k]
                 for k in (
                     "config",
@@ -847,12 +944,20 @@ def numerical_check(experiment, manifest, *, refs=None):
                 "ordering reuse belongs to normal integration source adoption",
             )
             adoption = document(adoption_ref)
-            retained_ordering_source(manifest, original, adoption, reference, original_ref)
+            retained_ordering_source(
+                manifest, original, adoption, reference, original_ref, correspondence
+            )
             numerical_manifest = original
             if refs is not None:
                 refs.extend([q["experiment"], original_ref, adoption_ref])
+        if cost:
+            require(
+                qualified["build_manifest"] != experiment["build_manifest"],
+                "372 new caller needs genuine new image",
+            )
+            claim_experiment = {**qualified, "phase": "compare"}
         q = q["data"]["numerical_qualification"]
-    expected = numerical_fields(experiment, numerical_manifest)
+    expected = numerical_fields(claim_experiment, numerical_manifest)
     require(
         all(q.get(k) == v for k, v in expected.items()),
         "current numerical/source/model/input correspondence",
@@ -1624,8 +1729,16 @@ def experiment_check(spec):
     )
     approved = approved_plan(spec, experiment)
     refs.append(spec["approved_plan"])
-    if experiment["phase"] == "compare" and experiment["argv"][1] == "ordering-assess":
+    if experiment["phase"] == "compare" and experiment["argv"][1] in {
+        "ordering-assess",
+        "ordering-cost-assess",
+    }:
         numerical_check(experiment, manifest, refs=refs)
+        if experiment["argv"][1] == "ordering-cost-assess":
+            require(
+                document(experiment["config"])["plan"]["output"] == spec["data_root"],
+                "372 owned runtime output",
+            )
     if experiment["phase"] in {"corpus", "fit", "software-qualification"} and not public_replay:
         common_pilot_check(spec, experiment, manifest, approved)
     if experiment["phase"] == "arena":
