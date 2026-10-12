@@ -1,0 +1,55 @@
+{
+  "issue": "quoridor-4lc.374",
+  "status": "ACCEPTED_COMPLETE_UNTIMED_MEASUREMENT_COMPONENT_ORIGINAL_LIFECYCLE_FAILED",
+  "original_stopped_binding": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/cost-qualification-v1/phase0-entry-v1/collection-v1/failed-phase0-STOP.json",
+    "sha256": "828fad586b39256610bd9c76bd78fee5672a37602a364a3ef78cf6af8d6b2914",
+    "bytes": 16485,
+    "mode": "0644"
+  },
+  "original_manifest": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/cost-qualification-v1/phase0-entry-v1/operation-v1/manifest.json",
+    "sha256": "1e8ee92c0e166a3d64bacc68ab07cc99872e21780d73c1c8ec1083ce7c44a2e3",
+    "bytes": 7071,
+    "mode": "0644"
+  },
+  "original_manifest_status_unchanged": "FAILED",
+  "measurement_result": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/cost-qualification-v1/phase0-entry-v1/data-v1/measurement-result.json",
+    "sha256": "70f6d4a7c0c186880e64734a113ed0e5d0644c55062560234e2d429819bc52bb",
+    "bytes": 62880,
+    "mode": "0644"
+  },
+  "original_job": "1231b3dc-7523-4099-9d8c-b9d4d1069f53",
+  "native_command_and_saved_data_status": "PASS in original authoritative FAILED manifest",
+  "measurement_warm_timed_requests": {
+    "warm": 16,
+    "measured": 16,
+    "timed": 0,
+    "attempted_and_returned": 32
+  },
+  "observed_operation_peak_ns": 8450054,
+  "observed_decision_peak_ns": 13510,
+  "prebound_formula": {
+    "factor": 4,
+    "additive_margin_ns": 2000000
+  },
+  "derived_untimed_operation_upper_ns": 35800216,
+  "derived_untimed_decision_upper_ns": 2054040,
+  "qualification_packet": null,
+  "phase1_admission": null,
+  "continuation": "Use this original complete32 native result with existing CostEvidence/QualificationPacket timed-validation ports. Native validator must check full order/counts/identity/formula before phase1 inference. No phase0 replay, failed lifecycle promotion, re-finalization, window reset, generic reuse/rescue or schema change.",
+  "collector_prevention": "Future phase1 submitter and collector both use current qualified common-entry sys.executable; bind actual runtime Python identity. Do not take a historical Build tool path as current caller selection.",
+  "same_underlying_Python": {
+    "resolved": "/home/vscode/.cache/inference/python/cpython-3.14.7-linux-x86_64-gnu/bin/python3.14",
+    "device": 2128,
+    "inode": 1548241
+  },
+  "Root_native_model_head_library_Search_game_cost_calls": 0,
+  "original_controller_seconds_once": 2.2749433268327266,
+  "original_native_command_seconds_nested_not_added": 0.5024778000079095,
+  "actual_saved_source_data_reader_STOP": "2026-10-12T20:47:26.257523+00:00",
+  "owned_readers_children_jobs_TMP_remaining": [],
+  "resources": "Existing374Root16MiB saved metadata, no grant/refund/borrow",
+  "global_held_B": 49996492800
+}
