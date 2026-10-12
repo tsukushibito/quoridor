@@ -1198,3 +1198,9 @@ COMPLETE f32values agree bit-for-bit across profiles/repetitions/diagnostics. Tw
 ### 人間選択：厳密なordering計算費の削減（372、2026-10-12）
 
 368の全360回完了とstatic benefit不支持は独立した確定結果として保持する。人間は次に同じスコア/更新/探索意味の計算費削減を選択した。全始点DAG伝播を必要な厳密prefix/suffix/intersectionへ縮め、continuationの同一履歴row解決をnode/cutoff単位にまとめる。固定80-call/256M ABBAで厳密仕事量一致とwhole-root比を確認し、改善不支持も完了結果とする。計画・基準は[ordering設計](design/lightweight-move-ordering-v1.md)とBeads372、資源は[512MiB支持](../research-data/ai-sigma/search-optimization/ordering372/support-v1.json)。source準備を並行し、371の2本の選択済み学習を優先する。現時点で候補software・実Search・改善結果はない。
+
+### 共通Python環境への統合完了（367、2026-10-12）
+
+[最終受入れ](../research-data/python-environment367/acceptance-v1.json)により、Mainのroot pyproject/uv.lockと一つのregular3.14.7環境へ統合した。既存38パッケージの版を保持して不足11を追加し、全49pins・7実import・現役help・lazy CUDA/control・Main/managedWT/任意cwdの同一環境・外部環境拒否を確認した。通常入口は共通project-envのoffline/no-sync、syncは明示setupと実reader停止後のexclusive writerに限定する。
+
+旧research-team/plots/quality環境は13package instances・2713membersの復元/RECORD照合と実reader停止後に撤去した。旧入口・重複project/lock/requirements8ファイルもMainから撤去し、固有89ad session JSONはGit5f367d3に保全した。現役project環境・regular interpreter・科学版・モデル/データ/RAW・過去失敗を保持し、削除による資源返金はしない。環境の受入れは新しい学習・数値一致・棋力を証明せず、371/372の各source/config/input/実資源条件は別に成立させる。

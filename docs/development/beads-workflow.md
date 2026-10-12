@@ -107,7 +107,7 @@ VS Code内で表示する場合は、手動生成後に `bash scripts/dev/resear
 | JavaScript/TypeScript、JSX/TSX、CSS等・対応する手書き設定 | 専用品質環境のPrettierで、対象ファイルに `--write` を適用し、同じ設定の `--check` で確認する                                                        |
 | シェルスクリプトなどその他の言語                          | 言語に対応する整形方法と設定を確認して適用する。ツール未整備も対象外とはせず、必要な手段を定め、不足が残る場合は明示する                            |
 
-研究用のPrettier/Ruffの設定と環境は[研究コードの配置と保守](ai-research-code.md#品質確認)を参照する。`check-research.py --format` は同scriptに列挙されたPython/JavaScriptだけを整形するため、Rustや範囲外の変更ファイルは別途整形する。`npm run check` のRust整形チェックも、整形の実行そのものを代替しない。
+研究用のPrettier設定と共通project環境のRuffは[研究コードの配置と保守](ai-research-code.md#品質確認)を参照する。`check-research.py --format` は同scriptに列挙されたPython/JavaScriptだけを整形するため、Rustや範囲外の変更ファイルは別途整形する。`npm run check` のRust整形チェックも、整形の実行そのものを代替しない。
 
 C++はclang-formatが導入済みなら担当native sourceへ限定して適用する。Bashはshfmtが導入済みなら担当scriptへ限定して適用する。未導入の場合は取得を自動実行せず、既存sourceに合わせた手動整形（字下げ・空白・引用・改行を統一）を行い、C++は限定compile、Bashは`bash -n`、両方に差分チェックを行う。TOMLも対応formatterが無い場合は既存の標準的な書式へ手動整形し、利用言語のparserで確認する。自動formatter検証が無いことと採用した方法を引渡しへ明示する。新たな統一formatterや保存時自動実行は必須としない。
 
