@@ -33,7 +33,7 @@ MODE_LABELS = {
     "STOPPED": "チェック停止：外部状態を読みません。再開には明示的なモード選択と start が必要です。",
 }
 POLICY_ISSUE = "quoridor-4lc"
-POLICY_THREAD = "01a0f2e9-357d-7ef3-a2fe-b16f80accda5"
+POLICY_THREAD = "01a12fdc-f6ec-7e93-9cfc-4bedb3ea1e94"
 TOKYO = ZoneInfo("Asia/Tokyo")
 SCRIPT = Path(__file__).resolve()
 OWNED_CHILDREN = {}
