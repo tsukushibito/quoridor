@@ -917,8 +917,156 @@ def project_python():
     return python
 
 
+def common_training_environment(spec):
+    """Shared current project import/thread predicate for admitted Python fits."""
+    require(
+        spec["cwd"] == str(ROOT)
+        and spec["env"].get("PYTHONDONTWRITEBYTECODE") == "1"
+        and spec["env"].get("PYTHONPATH") == str(ROOT / "python")
+        and all(
+            spec["env"].get(k) == "1"
+            for k in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS")
+        ),
+        "pinned framework/import/thread environment",
+    )
+
+
+def public_replay_fit_check(spec, experiment, manifest, approved):
+    """Current selected same-z arms through the ordinary fit custody boundary."""
+    require(
+        experiment["phase"] == "fit" and spec["approved_plan"]["path"] == str(PILOT_PLAN),
+        "canonical selected fit plan",
+    )
+    study = approved["public_replay_study"]
+    config = document(experiment["config"])
+    require(
+        study["issue"] == "quoridor-4lc.371"
+        and study["scientific_entry"] is True
+        and experiment["planned_slots"] == 0
+        and experiment.get("batch") is None
+        and experiment["rules"] == "research-standard-2p-threefold-goal-first-v1"
+        and experiment["distance_units"] == "wall-distance/80"
+        and experiment["value_perspective"] == "side-to-move"
+        and "child_cpu_cores" not in spec,
+        "human-selected nongame public replay rules/units/scope",
+    )
+    project_interpreter(experiment)
+    python = str(project_python())
+    common_training_environment(spec)
+    require(
+        len(spec["argv"]) == 13
+        and spec["argv"][:5] == [python, "-B", "-m", "quoridor_training.train", "train"]
+        and spec["argv"][5:9]
+        == ["--cache", str(PILOT_DATA / "cache-compact-v3"), "--output", spec["data_root"]]
+        and spec["argv"][9:11] == ["--config", experiment["config"]["path"]]
+        and spec["argv"][11] == "--input-binding",
+        "selected maintained replay trainer/config/output",
+    )
+    ref = next((r for r in experiment["inputs"] if r["path"] == spec["argv"][12]), None)
+    require(ref is not None, "ordinary guarded replay input binding required")
+    binding = document(ref)
+    require(
+        binding["selected_plan"] == spec["approved_plan"]
+        and binding["fit_config_sha"] == experiment["config"]["sha256"]
+        and binding["paired_fit_configs"] == study["paired_fit_configs"]
+        and experiment["config"] in binding["paired_fit_configs"],
+        "trusted current approved plan and same paired config digest",
+    )
+    require(
+        all(r in experiment["inputs"] for r in binding["paired_fit_configs"])
+        and all(
+            binding[k] in experiment["inputs"]
+            for k in (
+                "public_membership",
+                "public_acceptance",
+                "added_membership",
+                "diagnostic_indices",
+            )
+        ),
+        "ordered immutable input/config memberships",
+    )
+    cache = document(binding["added_membership"])
+    require(
+        binding["added_membership"]["path"] == str(PILOT_DATA / "cache-compact-v3/cache.json")
+        and not (PILOT_DATA / "cache-compact-v3/intake-incomplete.json").exists()
+        and cache["schedule_sha256"] == binding["schedule_sha256"]
+        and cache["family_partition_sha256"] == binding["family_partition_sha256"]
+        and cache["source_binding"] == binding["dataset"],
+        "same published binary common cache lineage",
+    )
+    for name, width in COMPACT_CACHE_WIDTHS.items():
+        path = str(PILOT_DATA / "cache-compact-v3" / name)
+        matched = [r for r in experiment["inputs"] if r["path"] == path]
+        require(
+            len(matched) == 1
+            and matched[0]["sha256"] == cache["sha256"][name]
+            and matched[0]["bytes"] == cache["rows"] * width == cache["file_bytes"][name],
+            "exact seven compact binary input refs",
+        )
+    warm = config["experiment"]["warm_start"]
+    require(
+        experiment["models"]
+        == [
+            {
+                "descriptor": warm["descriptor"],
+                "weights": warm["weights"],
+                "evaluator_sha256": warm["evaluator_sha256"],
+            }
+        ],
+        "same immutable BEST43 model",
+    )
+    require(
+        Path(spec["data_root"]).is_relative_to(
+            Path(spec["owner"]) / ".artifacts/public-replay371-v1"
+        )
+        and {x["path"] for x in spec["data"]}
+        == {
+            str(Path(spec["data_root"]) / name)
+            for name in (
+                "training.json",
+                "curves.json",
+                "curves.csv",
+                "exposure.npz",
+                "last.pt",
+                "last-model/manifest.json",
+                "last-model/weights.f32",
+                "last-model/training-target.json",
+            )
+        }
+        and {x["name"] for x in spec["data"]} >= {"training", "curves"},
+        "exclusive replay arm output and owed immutable evidence",
+    )
+    if config["experiment"]["condition"] == "replay":
+        require(
+            binding["prior_fit_manifest"] in experiment["inputs"]
+            and binding["prior_fit_result"] in experiment["inputs"],
+            "actual first arm completion/result inputs before second entry",
+        )
+    # Refuse all public payload inputs before the generic FileRef reader.
+    # Only manifest/acceptance and bounded indexed accesses carry this data.
+    public_root = Path(binding["public_membership"]["path"]).parent
+    require(
+        all(
+            not Path(r["path"]).resolve().is_relative_to(public_root.resolve())
+            or r == binding["public_membership"]
+            for r in experiment["inputs"]
+        ),
+        "no repeated public payload hash or sealed input",
+    )
+    from quoridor_training.public_replay import admit
+
+    admit(str(PILOT_DATA / "cache-compact-v3"), experiment["config"]["path"], ref["path"], config)
+    numerical_check(experiment, manifest)
+
+
 def common_pilot_check(spec, experiment, manifest, approved):
     phase = experiment["phase"]
+    if (
+        phase == "fit"
+        and document(experiment["config"])["experiment"]["study"] == "public-replay-v1"
+    ):
+        public_replay_fit_check(spec, experiment, manifest, approved)
+        return
     require(spec["approved_plan"]["path"] == str(PILOT_PLAN), "canonical common pilot plan")
     study = approved["next_learning_study"]
     require(
@@ -993,16 +1141,7 @@ def common_pilot_check(spec, experiment, manifest, approved):
     require(experiment["planned_slots"] == 0, "fit/qualification is a nongame operation")
     project_interpreter(experiment)
     python = str(project_python())
-    require(
-        spec["cwd"] == str(ROOT)
-        and spec["env"].get("PYTHONDONTWRITEBYTECODE") == "1"
-        and spec["env"].get("PYTHONPATH") == str(ROOT / "python")
-        and all(
-            spec["env"].get(k) == "1"
-            for k in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS")
-        ),
-        "pinned framework/import/thread environment",
-    )
+    common_training_environment(spec)
     warm = study["common_learner_settings"]["experiment"]["warm_start"]
     require(
         experiment["models"]
@@ -1142,6 +1281,11 @@ def caller_source_refs(spec, experiment):
     }
     if experiment["phase"] in {"fit", "software-qualification"}:
         paths |= {ROOT / "python/quoridor_training" / (name + ".py") for name in FIT_IMPORTS}
+        if (
+            experiment["phase"] == "fit"
+            and document(experiment["config"])["experiment"]["study"] == "public-replay-v1"
+        ):
+            paths.add(ROOT / "python/quoridor_training/public_replay.py")
         if experiment["phase"] == "software-qualification":
             config = document(experiment["config"])
             paths |= {
@@ -1431,6 +1575,15 @@ def experiment_check(spec):
     experiment_phase_check(experiment)
     manifest = accepted_build(experiment["build_manifest"], spec["approved_plan"])
     require(manifest["artifact"] == spec["artifact"], "same actual executable")
+    public_replay = (
+        experiment["phase"] == "fit"
+        and document(experiment["config"])["experiment"]["study"] == "public-replay-v1"
+    )
+    if public_replay:
+        # Current source hashes precede importing the new metadata-only admission.
+        for caller in caller_source_refs(spec, experiment):
+            read_ref(caller, max(CONTROL_BYTES, caller["bytes"]))
+        public_replay_fit_check(spec, experiment, manifest, approved_plan(spec, experiment))
     refs = [
         experiment["config"],
         *experiment["inputs"],
@@ -1473,7 +1626,7 @@ def experiment_check(spec):
     refs.append(spec["approved_plan"])
     if experiment["phase"] == "compare" and experiment["argv"][1] == "ordering-assess":
         numerical_check(experiment, manifest, refs=refs)
-    if experiment["phase"] in {"corpus", "fit", "software-qualification"}:
+    if experiment["phase"] in {"corpus", "fit", "software-qualification"} and not public_replay:
         common_pilot_check(spec, experiment, manifest, approved)
     if experiment["phase"] == "arena":
         arena_plan_check(experiment, approved)
@@ -2280,6 +2433,57 @@ def collect_data(spec, experiment):
                     "affected framework qualification failed",
                 )
                 data["scope"] = "software-only; no corpus or numerical PASS"
+            elif (
+                experiment["phase"] == "fit"
+                and document(experiment["config"])["experiment"]["study"] == "public-replay-v1"
+            ):
+                state = json.loads(values["training"])
+                curves = json.loads(values["curves"])
+                config = document(experiment["config"])
+                arm = config["experiment"]["condition"]
+                planned = 1034547 if arm == "added_only" else 615397
+                require(
+                    state["status"] == "COMPLETE"
+                    and state["step"] == 200
+                    and state["arm"] == arm
+                    and state["forward_rows"] == planned
+                    and state["added_seen"] == (12800 if arm == "added_only" else 6400)
+                    and state["public_seen"] == (0 if arm == "added_only" else 6400)
+                    and state["aggregate_forward_rows"] <= 2000000
+                    and [p["step"] for p in curves] == list(range(0, 201, 20))
+                    and state["curves"] == curves
+                    and all(
+                        set(point["scopes"])
+                        == {"added_train", "added_validation", "public_train", "public_validation"}
+                        and all(
+                            value["rows"]
+                            == {
+                                "added_train": 217,
+                                "added_validation": 76,
+                                "public_train": 8192,
+                                "public_validation": 8192,
+                            }[name]
+                            and math.isfinite(value["mse"])
+                            and value["mse"] >= 0
+                            and 0 <= value["sign_accuracy"] <= 1
+                            and 0 <= value["saturation_fraction"] <= 1
+                            for name, value in point["scopes"].items()
+                        )
+                        for point in curves
+                    )
+                    and len(state["learning_rates"]) == 200
+                    and state["learning_rates"] == [0.001 * min(1, i / 20) for i in range(1, 201)]
+                    and state["full_opened_validation"]["initial"]["rows"] == 419150
+                    and state["full_opened_validation"]["last"]["rows"] == 419150
+                    and not (Path(spec["data_root"]) / "INCOMPLETE").exists(),
+                    "complete preselected public replay arm/evaluation/exposure census",
+                )
+                data["public_replay"] = {
+                    "arm": arm,
+                    "forward_rows": state["forward_rows"],
+                    "aggregate_forward_rows": state["aggregate_forward_rows"],
+                    "scope": "outcome learning LAST200; no strength/default claim",
+                }
             elif experiment["phase"] == "fit":
                 state = json.loads(values["run_status"])
                 require(

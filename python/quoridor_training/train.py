@@ -387,6 +387,12 @@ def train(
 ):
     start = time.monotonic()
     cfg = resolve_config(config_path, () if steps is None else (f"training.steps={steps}",))
+    if cfg["experiment"]["study"] == "public-replay-v1":
+        if steps is not None or scale_path is not None or supply_workers is not None:
+            raise ValueError("public replay uses only its selected recipe and input binding")
+        from .public_replay import train_arm
+
+        return train_arm(cache, output, config_path, input_binding, cfg)
     from .distance_steps import require_main_volume
 
     volume_admission = require_main_volume(

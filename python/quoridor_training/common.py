@@ -455,7 +455,7 @@ PARAMETER_SHAPES = {
 
 def validate_warmstart_config(config, incoming, overrides=()):
     """No generic defaults select this study's quantity or fine-tuning method."""
-    if config["experiment"]["study"] != WARMSTART_STUDY or overrides:
+    if config["experiment"]["study"] not in (WARMSTART_STUDY, "public-replay-v1") or overrides:
         raise ValueError("explicit warm-start study; overrides are not selected recipes")
     for section in ("model", "optimizer", "training", "evaluation", "limits", "data", "artifacts"):
         required = set(DEFAULTS[section]) | ({"betas", "eps"} if section == "optimizer" else set())
@@ -482,6 +482,10 @@ def validate_warmstart_config(config, incoming, overrides=()):
         or config["training"]["target"] not in ("z", "completed_root_raw")
     ):
         raise ValueError("human N/teacher mapping/draw policy/selected teacher are required")
+    if e["study"] == "public-replay-v1" and (
+        config["training"]["target"] != "z" or e["condition"] not in ("added_only", "replay")
+    ):
+        raise ValueError("selected public replay arm and outcome-only target required")
     m = config["model"]
     if (
         m
@@ -555,7 +559,6 @@ def warmstart_inputs(config, *, cache, config_path, input_binding):
     if config_path is None or input_binding is None:
         raise ValueError("warm-start requires selected config and existing guarded input binding")
     from .distance_steps import bound_json, require_completed_stream_cache
-    from .scaled_model import validate_statistics
 
     expected = json.loads(Path(input_binding).read_bytes())
     selected_plan = expected["selected_plan"]
@@ -593,6 +596,35 @@ def warmstart_inputs(config, *, cache, config_path, input_binding):
         or selected not in {ref["sha256"] for ref in pairs}
     ):
         raise ValueError("both teachers must match canonical selected settings except target")
+    model_inputs = warmstart_model_inputs(config)
+    warm, descriptor = model_inputs["warm_start"], model_inputs["descriptor"]
+    manifest = bound_json(Path(cache) / "cache.json", expected["cache_manifest_sha"])
+    require_completed_stream_cache(cache, manifest)
+    common_cache_config(manifest, config["experiment"], plan=plan)
+    if (
+        expected.get("fit_config_sha") != hashlib.sha256(Path(config_path).read_bytes()).hexdigest()
+        or expected.get("initial_weights_sha") != BEST43_WEIGHTS
+        or expected.get("warm_start") != warm
+        or manifest["stream_intake"]["human_quantity_n"] != config["experiment"]["main_volume_N"]
+        or manifest["schedule_sha256"] != expected["schedule_sha256"]
+        or manifest["family_partition_sha256"] != expected["family_partition_sha256"]
+        or manifest["source_binding"] != expected["dataset"]
+    ):
+        raise ValueError(
+            "actual common corpus/quantity/schedule/partition/warm-start/config binding"
+        )
+    return {
+        "expected": expected,
+        "descriptor": descriptor,
+        "statistics": model_inputs["statistics"],
+        "warm_start": warm,
+    }
+
+
+def warmstart_model_inputs(config):
+    """Reuse the immutable BEST43 descriptor/weight/scale owning boundary."""
+    from .scaled_model import validate_statistics
+
     warm = config["experiment"]["warm_start"]
     descriptor = json.loads(bound_file_bytes(warm["descriptor"], 16384))
     if (
@@ -614,26 +646,10 @@ def warmstart_inputs(config, *, cache, config_path, input_binding):
     ):
         raise ValueError("BEST43 architecture/head-scale/output/source convention")
     bound_file_bytes(warm["weights"], 49284)
-    manifest = bound_json(Path(cache) / "cache.json", expected["cache_manifest_sha"])
-    require_completed_stream_cache(cache, manifest)
-    common_cache_config(manifest, config["experiment"], plan=plan)
-    if (
-        expected.get("fit_config_sha") != hashlib.sha256(Path(config_path).read_bytes()).hexdigest()
-        or expected.get("initial_weights_sha") != BEST43_WEIGHTS
-        or expected.get("warm_start") != warm
-        or manifest["stream_intake"]["human_quantity_n"] != config["experiment"]["main_volume_N"]
-        or manifest["schedule_sha256"] != expected["schedule_sha256"]
-        or manifest["family_partition_sha256"] != expected["family_partition_sha256"]
-        or manifest["source_binding"] != expected["dataset"]
-    ):
-        raise ValueError(
-            "actual common corpus/quantity/schedule/partition/warm-start/config binding"
-        )
     return {
-        "expected": expected,
+        "warm_start": warm,
         "descriptor": descriptor,
         "statistics": validate_statistics(descriptor),
-        "warm_start": warm,
     }
 
 

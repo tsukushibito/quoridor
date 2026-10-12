@@ -2,6 +2,10 @@
 
 from collections.abc import Sequence
 import json
+import datetime
+import calendar
+import stat
+import os
 from pathlib import Path
 
 import numpy as np
@@ -16,6 +20,149 @@ from .public_features import (
     phase_proxy,
     validate_geometry,
 )
+
+
+class IndexedPublicCorpus:
+    """Indexed T/opened-V access to an already qualified immutable public corpus.
+
+    Qualification hashes come from the accepted owning scan. Files must predate
+    that scan's STOP and keep their metadata identity throughout this reader.
+    No sealed file, global label/group array, hash pass or corpus scan is opened.
+    """
+
+    def __init__(self, manifest_ref, acceptance):
+        from .common import bound_file_bytes
+
+        self.path = Path(manifest_ref["path"]).parent
+        self.manifest = json.loads(bound_file_bytes(manifest_ref, 65536))
+        if (
+            acceptance["public_membership"] != manifest_ref
+            or self.manifest["schema"] != SCHEMA
+            or self.manifest["dataset_revision"] != REVISION_NAME
+            or self.manifest["original_only"] is not True
+            or self.manifest["test_sealed"] is not True
+            or self.manifest["record_bytes"] != RECORD.itemsize
+            or len(self.manifest["source_shards"]) != 43
+        ):
+            raise ValueError("qualified original-only public membership required")
+        cutoff = datetime.datetime.fromisoformat(acceptance["source_env_data_reader_STOP"])
+        if cutoff.tzinfo is None:
+            raise ValueError("actual aware accepted source STOP required")
+        cutoff_ns = (
+            calendar.timegm(cutoff.utctimetuple()) * 1_000_000_000 + cutoff.microsecond * 1000
+        )
+        self.maps, self.streams, self.identities = {}, {}, {}
+        try:
+            for split in ("train", "validation"):
+                parts = [p for p in self.manifest["partitions"] if p["name"] == split]
+                if len(parts) != 1:
+                    raise ValueError("exact opened public partition")
+                part = parts[0]
+                evidence = acceptance["accepted_observations"]["partitions"][split]
+                path = self.path / (split + ".bin")
+                info = path.lstat()
+                if (
+                    part["file"] != path.name
+                    or part["bytes"] != part["rows"] * RECORD.itemsize
+                    or evidence["scanned"] != part["rows"]
+                    or evidence["stream_SHA256"] != part["sha256"]
+                    or not stat.S_ISREG(info.st_mode)
+                    or info.st_size != part["bytes"]
+                    or info.st_mtime_ns > cutoff_ns
+                    or info.st_ctime_ns > cutoff_ns
+                ):
+                    raise ValueError("public file changed since accepted owning hash scan")
+                stream = os.fdopen(os.open(path, os.O_RDONLY | os.O_NOFOLLOW), "rb")
+                self.streams[split] = stream
+                self.identities[split] = self.identity(info)
+                if self.identity(os.fstat(stream.fileno())) != self.identities[split]:
+                    raise ValueError("public open changed file identity")
+                self.maps[split] = np.memmap(stream, dtype=RECORD, mode="r", shape=(part["rows"],))
+        except BaseException as error:
+            self.close(primary_error=error)
+            raise
+
+    @staticmethod
+    def identity(info):
+        return tuple(
+            getattr(info, key)
+            for key in ("st_dev", "st_ino", "st_mode", "st_size", "st_mtime_ns", "st_ctime_ns")
+        )
+
+    def records(self, split, indices, *, training=False):
+        if split not in self.maps or (training and split != "train"):
+            raise ValueError("public training must use T; only T/opened-V can be read")
+        index = np.asarray(indices)
+        if (
+            index.ndim != 1
+            or index.dtype.kind not in "iu"
+            or (np.any(index < 0) or np.any(index >= len(self.maps[split])))
+        ):
+            raise ValueError("public local partition indices")
+        rows = self.maps[split][index].copy()
+        validate_geometry(rows["geometry"])
+        halves = np.asarray([p["rows"] // 2 for p in self.manifest["source_shards"]])
+        if (
+            not np.isfinite(rows["distance"]).all()
+            or np.any(rows["distance"] < 0)
+            or np.any(rows["distance"] > 1)
+            or not np.isin(rows["z"], (-1, 1)).all()
+            or np.any(rows["shard"] >= len(halves))
+        ):
+            raise ValueError("selected public STM inputs/outcomes/provenance")
+        if np.any(rows["row"] >= halves[rows["shard"]]):
+            raise ValueError("selected public original-half provenance")
+        return rows
+
+    def batch(self, split, indices, reflection_mask=None, *, training=False):
+        if reflection_mask is not None and not training:
+            raise ValueError("public evaluation may not augment")
+        rows = self.records(split, indices, training=training)
+        return (
+            features(rows["geometry"], reflection_mask),
+            rows["distance"].copy(),
+            rows["z"].astype(np.float32),
+        )
+
+    def verify_binding(self):
+        for split, stream in self.streams.items():
+            expected = self.identities[split]
+            if (
+                self.identity((self.path / (split + ".bin")).lstat()) != expected
+                or self.identity(os.fstat(stream.fileno())) != expected
+            ):
+                raise ValueError("public indexed reader identity changed")
+
+    def close(self, *, primary_error=None):
+        failures, stages = [], []
+        for kind, handles in (("map", self.maps), ("stream", self.streams)):
+            for split, handle in tuple(handles.items()):
+                stage = kind + ":" + split
+                try:
+                    (handle._mmap if kind == "map" else handle).close()
+                except BaseException as error:
+                    error.add_note("indexed public finalization stage: " + stage)
+                    failures.append(error)
+                    stages.append({"stage": stage, "status": "FAILED_CLOSE_STATE_UNKNOWN"})
+                else:
+                    del handles[split]
+                    stages.append({"stage": stage, "status": "CLOSED"})
+        if failures:
+            errors = ([primary_error] if primary_error is not None else []) + failures
+            group = BaseExceptionGroup("indexed public primary/close failures", errors)
+            group.add_note(
+                json.dumps(
+                    {
+                        "primary": "setup" if primary_error is not None else None,
+                        "stages": stages,
+                        "remaining_maps": list(self.maps),
+                        "remaining_streams": list(self.streams),
+                        "cleanup_complete": False,
+                    },
+                    allow_nan=False,
+                )
+            )
+            raise group from None
 
 
 class CompactRows(Sequence):

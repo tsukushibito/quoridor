@@ -49,6 +49,22 @@ class EpochSampler:
         return 0.0 if self.cursor == len(self.indices) else self.cursor / len(self.indices)
 
 
+class FullBatchSampler(EpochSampler):
+    """Continue the same shuffled row stream through epoch tails, without refill."""
+
+    def take(self, count):
+        if type(count) is not int or count <= 0:
+            raise ValueError("positive full-batch row count required")
+        blocks = []
+        remaining = count
+        while remaining:
+            self.batch_size = remaining
+            part = self.next_batch()
+            blocks.append(part)
+            remaining -= len(part)
+        return np.concatenate(blocks)
+
+
 def update_steps(limit):
     """A true unbounded update iterator when no scientific horizon is specified."""
     return itertools.count(1) if limit is None else iter(range(1, limit + 1))

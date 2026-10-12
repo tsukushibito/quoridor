@@ -1,0 +1,241 @@
+{
+  "issue": "quoridor-4lc.371",
+  "status": "ACCEPTED_REVIEWED_SOURCE_AND_HUMAN_SELECTED_PLAN_ACTUALLY_ADOPTED",
+  "owner": "Root324",
+  "original_composite": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/qualification-v1/composite-binding.json",
+    "sha256": "afef3715ff6dbb40e3b70d80275424de99a37ab265e0589b7c5b481da6dd6e65",
+    "bytes": 13581,
+    "mode": "0644"
+  },
+  "R1_related_target": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/related-v2/source-STOP-binding.json",
+    "sha256": "82f63f2d4e3edcb2f8f0837a7c22f7c3f715370e35f3389a33fbb18ad427f7e5",
+    "bytes": 8629,
+    "mode": "0644"
+  },
+  "related_source_review": {
+    "path": "/workspaces/quoridor/.artifacts/ai-sigma/public-replay371-review-v1/related-v2/control.json",
+    "sha256": "8548f873b7ad13e8c0e900524c61ab25b1f42f7972c31cbc0694ac13388afcfa",
+    "bytes": 4364,
+    "mode": "0644"
+  },
+  "review_reader_STOP": "2026-10-12T03:37:06.521911+00:00",
+  "support": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/public-replay371/support-v1.json",
+    "sha256": "ae6ce3b912191799c9325a11138a7363f15b950285436f3b7051f8197bb7004f",
+    "bytes": 2690,
+    "mode": "0644"
+  },
+  "current_plan": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/plan.json",
+    "sha256": "e8ecd1869d3ceb7c3f5752767ed50630f2e9e98a26e32a658632a6656a65d564",
+    "bytes": 57471,
+    "mode": "0644"
+  },
+  "single_plan_field_added": "public_replay_study; all other existing objects unchanged",
+  "source_and_plan_actual_rows": [
+    {
+      "before": {
+        "path": "/workspaces/quoridor/python/quoridor_training/common.py",
+        "sha256": "c7b2c5c91a0cdd003145f0869f8614746c8f785241481f6e9f3d528b3de96fd2",
+        "bytes": 33406,
+        "mode": "0644"
+      },
+      "after_source": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/source/common.py",
+        "sha256": "cfb88486a0f58158b35eb707fd5cd754b107be99b41da2723b0ab6159e20c06f",
+        "bytes": 34043,
+        "mode": "0644"
+      },
+      "target": "/workspaces/quoridor/python/quoridor_training/common.py",
+      "actual_after": {
+        "path": "/workspaces/quoridor/python/quoridor_training/common.py",
+        "sha256": "cfb88486a0f58158b35eb707fd5cd754b107be99b41da2723b0ab6159e20c06f",
+        "bytes": 34043,
+        "mode": "0644"
+      }
+    },
+    {
+      "before": {
+        "path": "/workspaces/quoridor/python/quoridor_training/train.py",
+        "sha256": "49a9106a66c730d43d4989edb986cc9addf9f4449b58fee000ccc0dc1a8fe47e",
+        "bytes": 98988,
+        "mode": "0644"
+      },
+      "after_source": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/source/train.py",
+        "sha256": "ff67c0dbab8ae3d581d196281e791d72e0177a414099ca8e4e176bd9f0e7a447",
+        "bytes": 99344,
+        "mode": "0644"
+      },
+      "target": "/workspaces/quoridor/python/quoridor_training/train.py",
+      "actual_after": {
+        "path": "/workspaces/quoridor/python/quoridor_training/train.py",
+        "sha256": "ff67c0dbab8ae3d581d196281e791d72e0177a414099ca8e4e176bd9f0e7a447",
+        "bytes": 99344,
+        "mode": "0644"
+      }
+    },
+    {
+      "before": {
+        "path": "/workspaces/quoridor/python/quoridor_training/compact_cache.py",
+        "sha256": "f4145a0960254426c3dccee9129cd8515bf364268fd58077273cfa6f299c79f5",
+        "bytes": 8449,
+        "mode": "0644"
+      },
+      "after_source": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/related-v2/compact_cache.py",
+        "sha256": "b8f96bd11eeb330fee5d862d7f63bf00443d23b8c6133e5bd46058a54ae769b0",
+        "bytes": 15222,
+        "mode": "0644"
+      },
+      "target": "/workspaces/quoridor/python/quoridor_training/compact_cache.py",
+      "actual_after": {
+        "path": "/workspaces/quoridor/python/quoridor_training/compact_cache.py",
+        "sha256": "b8f96bd11eeb330fee5d862d7f63bf00443d23b8c6133e5bd46058a54ae769b0",
+        "bytes": 15222,
+        "mode": "0644"
+      }
+    },
+    {
+      "before": {
+        "path": "/workspaces/quoridor/python/quoridor_training/sampling.py",
+        "sha256": "64880b08aee572a394e33187eb09ca0ca4274a551b8ce41052b06f008c494ec6",
+        "bytes": 6912,
+        "mode": "0644"
+      },
+      "after_source": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/source/sampling.py",
+        "sha256": "9d449f88657c94e155dfd552cf0dfcd9d3b7174bb788e315c26b84b8d2ae453e",
+        "bytes": 7438,
+        "mode": "0644"
+      },
+      "target": "/workspaces/quoridor/python/quoridor_training/sampling.py",
+      "actual_after": {
+        "path": "/workspaces/quoridor/python/quoridor_training/sampling.py",
+        "sha256": "9d449f88657c94e155dfd552cf0dfcd9d3b7174bb788e315c26b84b8d2ae453e",
+        "bytes": 7438,
+        "mode": "0644"
+      }
+    },
+    {
+      "before": null,
+      "after_source": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/source/public_replay.py",
+        "sha256": "218ed67f1bf98816d639408d2f738fef0d12e01077cdc0a45744707e548f725a",
+        "bytes": 24490,
+        "mode": "0644"
+      },
+      "target": "/workspaces/quoridor/python/quoridor_training/public_replay.py",
+      "actual_after": {
+        "path": "/workspaces/quoridor/python/quoridor_training/public_replay.py",
+        "sha256": "218ed67f1bf98816d639408d2f738fef0d12e01077cdc0a45744707e548f725a",
+        "bytes": 24490,
+        "mode": "0644"
+      }
+    },
+    {
+      "before": null,
+      "after_source": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/qualification-v1/test_public_replay.py",
+        "sha256": "f430b33a69bafdabee9af00905552cfc3b82ab84c8892b8b9c3afd8c90406f7b",
+        "bytes": 23813,
+        "mode": "0644"
+      },
+      "target": "/workspaces/quoridor/python/quoridor_training/test_public_replay.py",
+      "actual_after": {
+        "path": "/workspaces/quoridor/python/quoridor_training/test_public_replay.py",
+        "sha256": "f430b33a69bafdabee9af00905552cfc3b82ab84c8892b8b9c3afd8c90406f7b",
+        "bytes": 23813,
+        "mode": "0644"
+      }
+    },
+    {
+      "before": null,
+      "after_source": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/related-v2/test_public_replay_cleanup.py",
+        "sha256": "292c0efd253f6fc77342dde3c48bf8372b8cc7862b30287eb0a1df062e165551",
+        "bytes": 10472,
+        "mode": "0644"
+      },
+      "target": "/workspaces/quoridor/python/quoridor_training/test_public_replay_cleanup.py",
+      "actual_after": {
+        "path": "/workspaces/quoridor/python/quoridor_training/test_public_replay_cleanup.py",
+        "sha256": "292c0efd253f6fc77342dde3c48bf8372b8cc7862b30287eb0a1df062e165551",
+        "bytes": 10472,
+        "mode": "0644"
+      }
+    },
+    {
+      "before": {
+        "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+        "sha256": "a347f55d4e419a91a8ed2a2ad1f267a7568b79711b8c17c7af44e3ce1f773c4d",
+        "bytes": 137694,
+        "mode": "0644"
+      },
+      "after_source": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/public371-source-compose-v1/research-lifecycle.py",
+        "sha256": "7c5b3d4e4a05720c20ee89d65e3344ae1d7fb0d0db98e9e3d941d3c563542bf9",
+        "bytes": 147066,
+        "mode": "0644"
+      },
+      "target": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+      "actual_after": {
+        "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+        "sha256": "7c5b3d4e4a05720c20ee89d65e3344ae1d7fb0d0db98e9e3d941d3c563542bf9",
+        "bytes": 147066,
+        "mode": "0644"
+      }
+    },
+    {
+      "before": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/plan.json",
+        "sha256": "1fcf82297654c3aa57bb86cbc3a8fd2cbb6416fc4c75daf47c3e828eab4e9650",
+        "bytes": 52043,
+        "mode": "0644"
+      },
+      "after_source": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/public371-source-compose-v1/canonical-plan-after.NOT_ADOPTED.json",
+        "sha256": "e8ecd1869d3ceb7c3f5752767ed50630f2e9e98a26e32a658632a6656a65d564",
+        "bytes": 57471,
+        "mode": "0644"
+      },
+      "target": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/plan.json",
+      "actual_after": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/plan.json",
+        "sha256": "e8ecd1869d3ceb7c3f5752767ed50630f2e9e98a26e32a658632a6656a65d564",
+        "bytes": 57471,
+        "mode": "0644"
+      }
+    }
+  ],
+  "actual_affected_software": [
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/qualification-v1/qualification.json",
+      "sha256": "1a26547342fb500cf02f39a3132fac02f09cc022e8572f16ce32f40ced24c0a9",
+      "bytes": 170,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/related-v2/qualification.json",
+      "sha256": "022c50bf215191237dc263fc89f1bf5fe73be9b4d5817d7586cbc0b654b6af4f",
+      "bytes": 171,
+      "mode": "0644"
+    }
+  ],
+  "synthetic_forward_rows_once": 64,
+  "new_cleanup_forward_rows": 0,
+  "prospective_science_rows": 1649944,
+  "all_work_prospective_rows": 1650008,
+  "all_work_upper": 2000000,
+  "entry_scope": "Source and selected decision only; no actual fit/model/public/numerical PASS from adoption. Qualified367 shared entry and actual native Build/caller/model/input/library correspondence and fresh per-arm guards stillrequired. No old suite/model/native/public scan replay.",
+  "source_writer_STOP": "2026-10-12T03:45:41.889080+00:00",
+  "owned_readers_children_jobs_TMP_remaining": [],
+  "reservation": "NONE",
+  "Root_inclusive_phase_B": 2097152,
+  "within_Root8MiB": true,
+  "global_held_B": 49153437696,
+  "new_grant_refund_borrow_B": 0,
+  "preserved": "Historical362/366/370 recipes/results, originalnegativeafef/4e3e,64-forward original andzero-forward repair receipts, failed/raw/costs/masks/floors/UNKNOWN;323USERPAUSE/seals/productdefault/fullN/fits96."
+}

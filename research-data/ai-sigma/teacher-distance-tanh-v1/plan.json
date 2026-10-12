@@ -790,7 +790,7 @@
       "caps": "Node/wall/ply/IO/nonfinite/error stops preserve actual partial/failed outputs and planned missing UNKNOWN; no lower-depth rescue/refill/pretendedcompleted6 or invented convergence. Require nonempty common eligibleT andV before fits.",
       "estimation_only_labor": "UNKNOWN;03:29:23 to06:38:47=3h9m24s elapsed includes implementation/compression/repairs/review/scheduling, not estimation labor."
     },
-    "pilot_selected_on": "2026-10-11 explicit human\u826f\u3044\u3088 in Policy and epic notes",
+    "pilot_selected_on": "2026-10-11 explicit human良いよ in Policy and epic notes",
     "whole_support": "research-data/ai-sigma/teacher-distance-tanh-v1/common-corpus-pilot-whole-support-v1.json",
     "common_learner_settings_materialization": "Current normalized settings pilot-common-settings-v2, only training.target omitted; paired pilot-fit-A-v2/B-v2 differ only target. limits.samples16023 counts all training and required fullT/V forwards; original e606/A56080/B8b125 are immutable history.",
     "selected_recipe_interface": {
@@ -814,7 +814,7 @@
       }
     ],
     "execution_timing_continuation": {
-      "human_authorization": "2026-10-11 explicit \u6539\u5584\u3057\u3066\u7d99\u7d9a\u3057\u3066\u306d; continue SAME approved8-game/two200-update cycle",
+      "human_authorization": "2026-10-11 explicit 改善して継続してね; continue SAME approved8-game/two200-update cycle",
       "effective_scope": "Prospective remaining NOT_RUN phases; all prior immutable jobs/configs/expired receipts retained as history",
       "preparation_calendar_deadline": null,
       "preparation": "Source/ordinary affected software/build/framework repair/review/queue/Root integration are preparation with ordinary per-command hang limits and retained actual costs; they do not start or exhaust scientific phase budgets.",
@@ -890,5 +890,156 @@
       "fit_runtime_cap_seconds": 600,
       "whole_storage_support_unchanged": true
     }
+  },
+  "public_replay_study": {
+    "issue": "quoridor-4lc.371",
+    "scientific_entry": true,
+    "common_learner_settings": {
+      "model": {
+        "feature_version": "QF1",
+        "architecture": "distance_residual",
+        "distance_a": 0.0,
+        "distance_b": 0.0,
+        "transformer_width": 32,
+        "hidden_width": 32,
+        "dropout": 0.0
+      },
+      "optimizer": {
+        "name": "adam",
+        "lr": 0.001,
+        "weight_decay": 0.0,
+        "momentum": 0.0,
+        "betas": [0.9, 0.999],
+        "eps": 1e-8
+      },
+      "training": {
+        "steps": 200,
+        "batch_size": 64,
+        "seed": 36220261011,
+        "target": "z",
+        "sampling": "epoch",
+        "loss_weighting": "row",
+        "scheduler": "none",
+        "warmup_steps": 20,
+        "lr_decay_factor": 0.5,
+        "lr_decay_patience": 2,
+        "min_lr": 1e-6,
+        "reflection_probability": 0.5,
+        "supply_workers": 0,
+        "reflection_seed": 36220261012,
+        "device": "cpu",
+        "threads": 1
+      },
+      "evaluation": {
+        "interval": 20,
+        "checkpoints": [0, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200],
+        "batch_size": 64,
+        "monitor": "row",
+        "early_stopping_patience": 0,
+        "early_stopping_unit": "observation",
+        "min_delta": 0.0,
+        "min_delta_relative": 0.0,
+        "diagnostic_rows": 0,
+        "diagnostic_interval": 20,
+        "diagnostic_checkpoints": [],
+        "full_train": true,
+        "full_train_checkpoints": [0, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200],
+        "full_train_every_epochs": 0
+      },
+      "limits": {
+        "seconds": null,
+        "samples": 2000000
+      },
+      "data": {
+        "overlap_policy": "error"
+      },
+      "artifacts": {
+        "mode": "native",
+        "save_scheduled": false,
+        "checkpoint_steps": []
+      },
+      "experiment": {
+        "study": "public-replay-v1",
+        "teacher_mapping": "exclude_outside_unit",
+        "draw_policy": "include_threefold",
+        "warm_start": {
+          "descriptor": {
+            "path": "/workspaces/quoridor/.worktree/assets/checkpoints/public-no-bypass-v1/candidate-v1/output/best-model/manifest.json",
+            "sha256": "46ec2c4708f96dcf9fad579c2fb0d1299c6663df27412f0faac98267467715e1",
+            "bytes": 677,
+            "mode": "0600"
+          },
+          "weights": {
+            "path": "/workspaces/quoridor/.worktree/assets/checkpoints/public-no-bypass-v1/candidate-v1/output/best-model/weights.f32",
+            "sha256": "046fe926e56b955b0fb7de8f147a74ec33eace9cbc00a55c307f9b6541ab9841",
+            "bytes": 49284,
+            "mode": "0644"
+          },
+          "evaluator_sha256": "96a5f41f875022d1752b9c999595ad58bfb2d42687a8f06de08d42b1c4215875",
+          "optimizer": "fresh",
+          "scale": "incumbent"
+        },
+        "condition": null,
+        "main_volume_N": 8,
+        "main_volume_manifest": null,
+        "main_volume_manifest_sha256": null
+      }
+    },
+    "paired_fit_configs": [
+      {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/controls/fit-added_only-draft.json",
+        "sha256": "62c2f8f97d4b8becc9152510d8ffbb1ba406d4a5cb7c0d58ebdec866a0bde054",
+        "bytes": 2538,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/controls/fit-replay-draft.json",
+        "sha256": "db2e675834c2776801843f38532049460032b6289ac3e070b1c9b01263e7dff9",
+        "bytes": 2534,
+        "mode": "0644"
+      }
+    ],
+    "public_sampling_seed": 37120261012,
+    "public_membership": {
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/public-full-learning/original-full-v1/recovery-r1/corpus/cache.json",
+      "sha256": "07d81abc2230b2fe6b7c5fb7a425e7e3109bf9af2c467f5c72f8d3bdb975279b",
+      "bytes": 11527,
+      "mode": "0644"
+    },
+    "public_acceptance": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/public-overlap370/acceptance-v1.json",
+      "sha256": "364bf6b45985dc7c445ac83aa3183f38b3a3838fc4d95f522358e2ed0150eb1d",
+      "bytes": 9946,
+      "mode": "0644"
+    },
+    "added_membership": {
+      "path": "/workspaces/quoridor/.worktree/assets/data/common-corpus-warmstart-study/pilot-v1/cache-compact-v3/cache.json",
+      "sha256": "522b2dd661ff3ddfdb858ca80a9fc5585dfe599cc3039fa9bbfa96f6703bc37d",
+      "bytes": 43204,
+      "mode": "0644"
+    },
+    "diagnostic_indices": {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/controls/diagnostic-indices.json",
+      "sha256": "ea0f01513339de1ca6518ba28027af5f7def57f77c584954d1cf05262278629d",
+      "bytes": 145329,
+      "mode": "0644"
+    },
+    "logical_forward_upper": 2000000,
+    "planned_pair_forwards": 1649944,
+    "comparison_checkpoint": "LAST200",
+    "full_opened_validation": {
+      "initial": "once_added_only",
+      "last": "each"
+    },
+    "sampling_contract": {
+      "batch_size": 64,
+      "added_only": [64, 0],
+      "replay": [32, 32],
+      "added": "cycling shuffled T stream; exact same prefix",
+      "public": "uniform indexed T with replacement; independent RNG",
+      "reflection": "same added mask prefix from approved reflection seed; public PCG64(seed).jumped() stream, probability0.5 unchanged"
+    },
+    "sealed_E_opened": false,
+    "public_game_history_winner_rules_lineage": "UNKNOWN"
   }
 }
