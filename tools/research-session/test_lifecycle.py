@@ -180,6 +180,10 @@ class LifecycleTests(unittest.TestCase):
                     "target_writer": "codex:fixture",
                     "target_max_B": 1073741824,
                     "private_pool_B": 33554432,
+                    "fresh_private_root": str(self.private.parent),
+                    "fresh_private_forward_max_B": 1048576,
+                    "private_candidate_upper_B": 65536,
+                    "old_private_retained_allocated_B": 0,
                 },
             ),
             "tools": {
