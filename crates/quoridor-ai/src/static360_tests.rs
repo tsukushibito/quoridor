@@ -128,7 +128,14 @@ fn static360_union_deduplicates_cooccurrence_and_checked_ratios_refuse_overflow(
     let mut suffix = [0; 81];
     suffix[1] = 1;
     suffix[3] = 1;
-    let both = intersection(&scratch, &prefix, &suffix, (0, 1), (2, 3)).unwrap();
+    let both = intersection(
+        |from, to| Ok(scratch.between(from, to)),
+        &prefix,
+        &suffix,
+        (0, 1),
+        (2, 3),
+    )
+    .unwrap();
     assert_eq!(both, 1);
     assert_eq!(2 - both, 1); // one path, not two blocked paths.
     assert!(normalized(u128::MAX / 2, u128::MAX).is_err());

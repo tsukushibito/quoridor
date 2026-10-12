@@ -17,7 +17,7 @@ mod continuation_history;
 #[cfg(feature = "research-diagnostics")]
 pub use continuation_history::OrderingProfile;
 pub use continuation_history::OrderingStats;
-use continuation_history::{ContinuationHistory, PlayedMove};
+use continuation_history::{ContinuationHistory, PlayedMove, ResolvedRows};
 #[path = "static_ordering.rs"]
 mod static_ordering;
 use static_ordering::StaticScratch;
@@ -1010,9 +1010,9 @@ impl Search<'_> {
             self.stats.ordering.scored_actions += ids.len() as u64;
         }
         if let Some(history) = self.ordering.as_deref() {
+            let rows = ResolvedRows::new(c.position(), &self.path);
             for &action in &ids {
-                let (score, continuation_nonzero) =
-                    history.scores(c.position(), action, &self.path);
+                let (score, continuation_nonzero) = history.scores_resolved(&rows, action);
                 combined[action as usize] = score;
                 if self.ordering_diagnostics {
                     self.stats.ordering.nonzero_dynamic_actions += u64::from(score != 0);

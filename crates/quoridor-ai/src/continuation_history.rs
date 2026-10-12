@@ -70,6 +70,29 @@ fn continuation_index(colour: u8, slot: usize, previous: u16, action: u16) -> us
     (((usize::from(colour) * 5 + slot) * 209 + usize::from(previous)) * 209) + usize::from(action)
 }
 
+/// Local to one scored parent or completed cutoff event. Owns only indices,
+/// never borrows a mutable history table/path across a child transition.
+pub(super) struct ResolvedRows {
+    pawn: usize,
+    wall: usize,
+    continuation: [Option<usize>; 5],
+}
+impl ResolvedRows {
+    pub fn new(p: Position, path: &[PlayedMove]) -> Self {
+        Self {
+            pawn: main_index(p, 0),
+            wall: main_index(p, 81) - 81,
+            continuation: std::array::from_fn(|slot| {
+                previous(path, p.turn, LAGS[slot])
+                    .map(|prev| continuation_index(p.turn, slot, prev, 0))
+            }),
+        }
+    }
+    fn main_index(&self, action: u16) -> usize {
+        (if action < 81 { self.pawn } else { self.wall }) + usize::from(action)
+    }
+}
+
 pub(super) fn gravity(entry: &mut i16, bonus: i32) {
     // Rust i32 division truncates toward zero on native and Wasm. Largest
     // product is 16384*16384 < i32::MAX; the update stays within +/-LIMIT.
@@ -126,35 +149,34 @@ impl ContinuationHistory {
             stats.age_passes += 1;
         }
     }
-    pub fn scores(&self, p: Position, action: u16, path: &[PlayedMove]) -> (i32, bool) {
-        let mut score = 2 * i32::from(self.main[main_index(p, action)]);
+    pub fn scores_resolved(&self, rows: &ResolvedRows, action: u16) -> (i32, bool) {
+        let mut score = 2 * i32::from(self.main[rows.main_index(action)]);
         let mut nonzero = false;
-        for (slot, lag) in LAGS.into_iter().enumerate() {
-            if let Some(prev) = previous(path, p.turn, lag) {
-                let h = self.continuation[continuation_index(p.turn, slot, prev, action)];
-                score += i32::from(h);
-                nonzero |= h != 0;
-            }
+        for row in rows.continuation.into_iter().flatten() {
+            let h = self.continuation[row + usize::from(action)];
+            score += i32::from(h);
+            nonzero |= h != 0;
         }
         debug_assert!(score.abs() <= 114_688);
         (score, nonzero)
     }
+    /// Single-action fixture convenience; production resolves once per parent.
+    #[cfg(test)]
+    pub fn scores(&self, p: Position, action: u16, path: &[PlayedMove]) -> (i32, bool) {
+        self.scores_resolved(&ResolvedRows::new(p, path), action)
+    }
     fn update(
         &mut self,
-        p: Position,
+        rows: &ResolvedRows,
         action: u16,
-        path: &[PlayedMove],
         amount: i32,
         mut stats: Option<&mut OrderingStats>,
     ) {
-        gravity(&mut self.main[main_index(p, action)], amount);
-        for (slot, lag) in LAGS.into_iter().enumerate() {
-            if let Some(prev) = previous(path, p.turn, lag) {
-                let i = continuation_index(p.turn, slot, prev, action);
-                gravity(&mut self.continuation[i], amount);
-                if let Some(stats) = stats.as_deref_mut() {
-                    stats.continuation_updates += 1;
-                }
+        gravity(&mut self.main[rows.main_index(action)], amount);
+        for row in rows.continuation.into_iter().flatten() {
+            gravity(&mut self.continuation[row + usize::from(action)], amount);
+            if let Some(stats) = stats.as_deref_mut() {
+                stats.continuation_updates += 1;
             }
         }
     }
@@ -171,6 +193,7 @@ impl ContinuationHistory {
         mut stats: Option<&mut OrderingStats>,
     ) {
         let b = bonus(depth);
+        let rows = ResolvedRows::new(p, path);
         let mut seen = [false; 209];
         let mut distinct = 0;
         for &action in returned {
@@ -180,9 +203,8 @@ impl ContinuationHistory {
             seen[action as usize] = true;
             distinct += 1;
             self.update(
-                p,
+                &rows,
                 action,
-                path,
                 if action == winner { b } else { -b },
                 stats.as_deref_mut(),
             );
@@ -202,3 +224,7 @@ impl ContinuationHistory {
         }
     }
 }
+
+#[cfg(test)]
+#[path = "continuation372_tests.rs"]
+mod cost_tests;
