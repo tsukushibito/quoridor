@@ -3225,7 +3225,7 @@ mod three_engine_374_factory_tests {
         assert!(baseline.ordering.is_none());
         assert!(!baseline.static_enabled);
         assert_eq!(baseline.score_domain, ScoreDomain::LEGACY);
-        assert!(baseline.retained_memory_bytes() <= 1024 * 1024);
+        assert!(baseline.retained_memory_bytes().0 <= 1024 * 1024);
         let current = SearchSession::new(Arc::new(NoCalls), namespace, 4096).unwrap();
         assert!(current.ordering.is_some());
         assert!(current.static_enabled);
