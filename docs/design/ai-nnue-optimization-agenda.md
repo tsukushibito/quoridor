@@ -132,3 +132,7 @@ board hashは `board-zobrist359-v1`、seed `b3597aec50d1826f`、version domain0�
 controller6.492365031968802sに含むのはin-controller checks/journal validationで、後のsaved collector/verification/admin/LLM費は別/UNKNOWNである。software＋numeric controller176.096679879236032sを一度だけ記録し、nested native時計を足さない。原FAILED/capture/RAW/fees/returned対persisted masks/UNKNOWNは不変更。
 
 [exact gzip証拠](../../research-data/ai-sigma/search-optimization/compact-tt359/fixed-assessment-evidence-v1.tar.gz)とGit再構成、producer/reviewer実readerSTOPを確認し、完了した比較専用public inlet/workload/dev sha2 edgeを現役から撤去した。compactTT correctness testsとproduction bodiesは保持する。旧image/mapは歴史比較の凍結証拠であり、新しいBUILDへ現在sourceとして付け替えない。360のthree-policy比較は同じ実資格TTを使い、今回の旧TTとの比較を再実行しない。
+
+## オーダリング計算費の限定削減（372、2026-10-12）
+
+368では静的順位のwork中央値はほぼ同じでwhole-root費は約4倍となり、人間は同じスコアの計算費削減を選択した。優先対象は全始点DAG伝播と候補ごとの同一continuation row解決であり、CPU費の因果割合を計測した主張ではない。[現行ordering設計](lightweight-move-ordering-v1.md#同じスコア計算の費用削減3722026-10-12)とBeads372の固定80-call ABBA・256M契約で、厳密性とwhole費を確認する。371の選択済み2学習とPDFを優先し、余分なperf349・旧360/368再実行・新ゲーム・モデル変更・default変更は含めない。

@@ -123,3 +123,11 @@ source成長に追加512KiBを50GB内で前向き支持する。360 source合計
 360.1のmain＋signed continuation＋static sourceは固定binding `ded66aaf`、actual source reader/writerSTOP00:52:55.199623Zで停止した。21 Rust＋2 Python定義は未build・未型検査・未実行で、独立360.2が一つの変更境界を確認する。現TT bodyは旧b976と同一で、359を未資格のまま混ぜない。geometry借用／fallback parent準備、session表900,376Bとinvocation DAG buffer104,976Bはsource上の設計値で、ABI/RSS・whole時間・利益は未測定である。
 
 [whole支持128MiB](../../research-data/ai-sigma/search-optimization/continuation360/whole-support-v1.json)は完了355の未使用future TMPを残320→192MiBへ再分類し、既存shared target1GiBを一度だけ課金する。元source1.5MiB、旧RAW/費/floor/UNKNOWNは保持する。private・targetのactual custody、現在のqualified image/model/inputとfresh lifetime guardsを満たすまでheavy entryではない。未実行assessment案の歴史的BEST51を選択済みBEST43へ対応させ、cold四familyを4/8/12/16 prefix strataに事前対応する。360 calls/depth/capsと実chronological warm traceの由来を保持し、結果後のselection/refillを行わない。全policyには同じ実際に資格済みTTを用いる。
+
+## 同じスコア計算の費用削減（372、2026-10-12）
+
+人間は368の完了結果を受け、静的スコアとsigned continuationの数学的意味を変えずに計算費を減らす372を選択した。最初に、各親で二人分の全始点81×81 DAG伝播を行う静的計算を、実始点prefix・goal suffix・寄与する壁対に必要な厳密な交差計算へ縮める。continuationはlag1/2/3/4/6の履歴rowをnode/cutoffごとに一度解決し、候補と兄弟で再用する。一人の著者が分離可能な両差分を持ち、整数正規化・union減算・符号付き更新・age・overflow/error・親undoを保つ。新しいグローバル壁cacheやスコア近似から始めない。
+
+結果前に固定した比較はBEST43と既存368入力による一回のABBA四process、continuation-only/continuation+staticの二profile、全80 Search・256M node liabilityである。D4はcold0/34/68/102と元family0のwarm0/2/4/6、D6は元COMPLETE cold34/102。同じセッション履歴・TT・2M/8M cap・setup/dropを含むwhole-rootを対応比較する。目標はstatic組合せwhole median比≤0.95、continuation-only≤1.02、完了した対応contextで再現する>1.05悪化なし。score・valuebits・action/PV・node/eval/TT仕事量の一致が必須で、実装内部のlookup/reuse countersは別に記録する。不支持でも固定質問は完了し、再campaignやprofile/default切替は自動で行わない。
+
+正本契約と担当はBeads quoridor-4lc.372、whole支持は[ordering372/support-v1.json](../../research-data/ai-sigma/search-optimization/ordering372/support-v1.json)。source準備は371と並行できるが、実build/測定は学習・評価・描画の実intervalと競合させない。368のnegative benefitと旧360の900秒FAILEDはそのまま保持する。
