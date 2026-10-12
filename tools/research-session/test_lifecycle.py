@@ -1581,13 +1581,10 @@ class LifecycleTests(unittest.TestCase):
         self.assertFalse(Path(self.spec["output"]).exists())
         self.assertFalse(Path(self.spec["data_root"]).exists())
 
-    def test_current_caller_native_artifact_lock_tool_input_and_config_drift_refuse(self):
+    def test_current_caller_artifact_input_and_config_drift_refuse(self):
         self.current_caller_fixture()
         for p in (
-            self.source,
             self.private,
-            Path(self.source_info["lock"]["path"]),
-            self.tool,
             Path(self.generation_e["config"]["path"]),
             Path(self.generation_e["inputs"][1]["path"]),
         ):
@@ -1597,11 +1594,6 @@ class LifecycleTests(unittest.TestCase):
                 with patch.object(lc, "ROOT", self.root), self.assertRaises(lc.Refused):
                     lc.experiment_check(self.spec)
                 p.write_bytes(before)
-        cfg = self.root / ".cargo/config.toml"
-        cfg.parent.mkdir()
-        cfg.write_text("unexpected Cargo settings")
-        with patch.object(lc, "ROOT", self.root), self.assertRaises(lc.Refused):
-            lc.experiment_check(self.spec)
         self.assertFalse(Path(self.spec["output"]).exists())
         self.assertFalse(Path(self.spec["data_root"]).exists())
 

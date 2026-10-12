@@ -232,9 +232,8 @@ class ArenaPlanTests(unittest.TestCase):
     def ports(self):
         # Only unrelated prior build/source/caller membership ports are synthetic.
         stack = ExitStack()
-        stack.enter_context(patch.object(lc, "source_check", return_value=None))
+        stack.enter_context(patch.object(lc, "source_metadata_check", return_value=None))
         stack.enter_context(patch.object(lc, "caller_source_refs", return_value=[]))
-        stack.enter_context(patch.object(lc, "build_input_refs", return_value=[]))
         return stack
 
     def test_two_counts_depths_and_model_refs_cross_actual_entry_then_publication(self):

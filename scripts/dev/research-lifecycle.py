@@ -430,93 +430,51 @@ def command(spec, row, directory, resources, executor=process.execute, *, ledger
     return record, capture.path
 
 
-def source_check(source, *, native_only=False):
+def source_metadata_check(source):
+    """Validate immutable BUILD provenance without reading today's build inputs."""
     require("workspace" in source, "adopted workspace witness required")
     require(
         len(source["commit"]) == 40 and all(c in "0123456789abcdef" for c in source["commit"]),
         "frozen source commit",
     )
-    if not native_only:
-        for ref in source["files"]:
-            read_ref(ref, max(CONTROL_BYTES, ref["bytes"]))
-    if not native_only and source["patch"] is not None:
-        read_ref(source["patch"])
-    if "workspace" in source:
-        workspace = Path(source["workspace"])
-        require(workspace.is_absolute() and workspace.resolve() == workspace, "adopted workspace")
-        files = {r["path"]: r for r in source["files"]}
-        require(
-            all(Path(p).is_relative_to(workspace) for p in files),
-            "adopted source outside workspace",
-        )
-        for name in ("manifest", "lock"):
-            expected = workspace / ("Cargo.toml" if name == "manifest" else "Cargo.lock")
-            require(
-                source[name]["path"] == str(expected) and files.get(str(expected)) == source[name],
-                "adopted Cargo " + name,
-            )
-        for ref in [
-            *source["compiled_sources"].values(),
-            *source.get("generator_compiled_sources", {}).values(),
-        ]:
-            require(
-                files.get(ref["path"]) == ref, "compiled source projection outside adopted files"
-            )
-        for item in source["cargo_configs"]:
-            p = Path(item["path"])
-            if item["file"] is None:
-                require(not p.exists() and not p.is_symlink(), "Cargo config appeared")
-            else:
-                require(item["file"]["path"] == item["path"], "Cargo config identity")
-                read_ref(item["file"])
-        if native_only:
-            for ref in native_source_refs(source):
-                read_ref(ref, max(CONTROL_BYTES, ref["bytes"]))
-
-
-def native_source_refs(source):
-    # Python/docs/test files in source.files remain immutable build provenance;
-    # current caller files have their own run-intent binding.
     workspace = Path(source["workspace"])
-    refs = list(source["compiled_sources"].values()) + [source["manifest"], source["lock"]]
-    refs += [
-        r
-        for r in source["files"]
-        if Path(r["path"]).is_relative_to(workspace / "crates")
-        or Path(r["path"]) == workspace / "rust-toolchain.toml"
-    ]
-    refs += [x["file"] for x in source["cargo_configs"] if x["file"] is not None]
-    return refs
+    require(workspace.is_absolute(), "adopted workspace")
+    files = {r["path"]: r for r in source["files"]}
+    require(
+        all(Path(p).is_relative_to(workspace) for p in files),
+        "adopted source outside workspace",
+    )
+    for name in ("manifest", "lock"):
+        expected = workspace / ("Cargo.toml" if name == "manifest" else "Cargo.lock")
+        require(
+            source[name]["path"] == str(expected) and files.get(str(expected)) == source[name],
+            "adopted Cargo " + name,
+        )
+    for ref in [
+        *source["compiled_sources"].values(),
+        *source.get("generator_compiled_sources", {}).values(),
+    ]:
+        require(files.get(ref["path"]) == ref, "compiled source projection outside adopted files")
+    for item in source["cargo_configs"]:
+        if item["file"] is not None:
+            require(item["file"]["path"] == item["path"], "Cargo config identity")
 
 
-def runtime_dependency_refs(manifest, approved_plan_ref=None):
-    """Keep compiler dependencies fixed; the approved run plan is a new input."""
-    if approved_plan_ref is None:
-        return manifest["dependency_refs"]
-    source_paths = {r["path"] for r in manifest["source"]["files"]}
-    source_paths |= {t["file"]["path"] for t in manifest["tools"].values()}
-    result = []
-    for ref in manifest["dependency_refs"]:
-        if ref["path"] == approved_plan_ref["path"]:
-            require(
-                ref["path"] not in source_paths
-                and Path(ref["path"]).is_relative_to(ROOT / "research-data")
-                and Path(ref["path"]).suffix == ".json",
-                "runtime plan cannot replace a native/compiler source input",
-            )
-            result.append(approved_plan_ref)
+def source_check(source):
+    """BUILD and its finalizer check all frozen source and Cargo configuration."""
+    source_metadata_check(source)
+    for ref in source["files"]:
+        read_ref(ref, max(CONTROL_BYTES, ref["bytes"]))
+    if source["patch"] is not None:
+        read_ref(source["patch"])
+    workspace = Path(source["workspace"])
+    require(workspace.resolve() == workspace, "adopted workspace")
+    for item in source["cargo_configs"]:
+        p = Path(item["path"])
+        if item["file"] is None:
+            require(not p.exists() and not p.is_symlink(), "Cargo config appeared")
         else:
-            result.append(ref)
-    return result
-
-
-def build_input_refs(manifest, approved_plan_ref=None):
-    return [
-        manifest["artifact"],
-        *native_source_refs(manifest["source"]),
-        *runtime_dependency_refs(manifest, approved_plan_ref),
-        *(x["file"] for x in manifest["tools"].values()),
-    ]
+            read_ref(item["file"])
 
 
 FIT_IMPORTS = (
@@ -1425,7 +1383,7 @@ def caller_source_refs(spec, experiment):
     return refs
 
 
-def accepted_build(ref, approved_plan_ref=None):
+def accepted_build(ref):
     manifest = document(ref)
     require(not Path(ref["path"]).with_name("INCOMPLETE").exists(), "provisional manifest")
     require(
@@ -1441,20 +1399,17 @@ def accepted_build(ref, approved_plan_ref=None):
         "affected test/lint/build/bindings required",
     )
     read_ref(manifest["artifact"], 32 * 1024 * 1024)
-    source_check(manifest["source"], native_only=True)
+    source_metadata_check(manifest["source"])
     require(
         manifest["compiled_sources"]
         == {k: r["sha256"] for k, r in manifest["source"]["compiled_sources"].items()},
         "qualified native source projection",
     )
-    for r in runtime_dependency_refs(manifest, approved_plan_ref):
-        read_ref(r, max(CONTROL_BYTES, r["bytes"]))
     for tool in manifest["tools"].values():
         require(
             isinstance(tool["version"], str) and bool(tool["version"].strip()),
             "qualified tool version",
         )
-        read_ref(tool["file"], max(CONTROL_BYTES, tool["file"]["bytes"]))
     return manifest
 
 
@@ -1678,7 +1633,7 @@ def experiment_check(spec):
     experiment = document(spec["experiment"])
     require(experiment["schema"] == EXPERIMENT_SCHEMA, "experiment schema")
     experiment_phase_check(experiment)
-    manifest = accepted_build(experiment["build_manifest"], spec["approved_plan"])
+    manifest = accepted_build(experiment["build_manifest"])
     require(manifest["artifact"] == spec["artifact"], "same actual executable")
     public_replay = (
         experiment["phase"] == "fit"
@@ -1775,7 +1730,7 @@ def experiment_check(spec):
     return (
         experiment,
         manifest,
-        [*refs, experiment["build_manifest"], *build_input_refs(manifest, spec["approved_plan"])],
+        [*refs, experiment["build_manifest"], manifest["artifact"]],
     )
 
 
@@ -3059,11 +3014,6 @@ def execute(
                         raise run_error
                 for ref in refs:
                     read_ref(ref, max(CONTROL_BYTES, ref["bytes"]))
-                if spec["kind"] == "run":
-                    for item in manifest["source"]["cargo_configs"]:
-                        if item["file"] is None:
-                            p = Path(item["path"])
-                            require(not p.exists() and not p.is_symlink(), "Cargo config appeared")
                 result["status"] = "PENDING_FINALIZATION"
             finally:
                 if created_TMP:

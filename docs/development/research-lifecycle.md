@@ -144,12 +144,21 @@ qualification is minted by these synthetic source tests.
 
 ## Native image and current caller bindings
 
-A successful immutable BuildManifest retains its complete authored source snapshot as build
-provenance. RUN reuses the qualified artifact with its complete native compiled-source projection,
-workspace Cargo manifest/lock, authored crate/build inputs, rust-toolchain, Cargo configurations
-(including absence), dependency and tool file/version bindings. Pure Python/documentation/test
-changes do not require another native build or a refresh of the historical authored snapshot.
-BUILD and its finalization continue to verify the complete frozen build source.
+A successful immutable BuildManifest retains its complete authored source snapshot, native
+compiled-source projection, Cargo manifest/lock/configuration, compiler tools/versions and build
+dependencies as BUILD provenance. BUILD and its finalization verify these files before and after
+compilation. RUN validates the accepted PASS manifest, completion roles and artifact bytes, and
+checks its recorded compiled-source projection against that recorded source metadata. Native entry
+also matches the selected artifact's embedded map. RUN does not read current Rust/Cargo/compiler
+inputs: the already-qualified executable may be selected while Main contains another Rust version.
+There is no per-role Main restoration or source-handover requirement to select such an image.
+Historical BuildManifest, Source and restoration records stay immutable.
+
+Actual RUN dependencies are the selected artifact, Experiment/approved plan/config/schedule/inputs,
+models, declared runtime-loaded libraries and current Python caller/import/environment/interpreter
+bindings. These files remain bound before dispatch and after direct return. Compiler tools and build
+inputs are not runtime dependencies unless the Experiment independently declares an actual runtime
+use. Pure source edits never refresh or retarget a historical build or numerical qualification.
 
 Each current RUN intent requires `caller_sources`, an exact FileRef array for the adopted
 `scripts/dev/research-lifecycle.py`, `scripts/dev/research-job.py`,
@@ -157,7 +166,7 @@ Each current RUN intent requires `caller_sources`, an exact FileRef array for th
 current maintained root. An analysis intent additionally binds `stream355.py`, `lifecycle355.py`,
 `io355.py`, `observations355.py`, `producer355.py`, and `strength355.py` under
 `python/quoridor_training/research355`. Analysis uses the current shared project venv Python and `-B` plus that
-exact maintained stream entry. The parent checks current caller/import and native/science refs
+exact maintained stream entry. The parent checks current caller/import, artifact and scientific/runtime refs
 before entry and after direct return; it never runs tool version commands to refresh them.
 Current source acceptance is recorded at adoption; these are ordinary entry FileRefs, not another
 review/admission chain. Experiment/native schemas, scientific counts and numerical requirements
