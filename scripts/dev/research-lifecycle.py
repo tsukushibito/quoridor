@@ -10,12 +10,14 @@ import hashlib
 import json
 import math
 import os
+import random
 from pathlib import Path
 import shutil
 import stat
 import subprocess
 import sys
 import time
+import zlib
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "python"))
@@ -163,6 +165,26 @@ def lease():
         yield
 
 
+def issued_family_upper(spec, support):
+    if spec["kind"] == "build":
+        return 6 * 1024**3
+    upper = 2 * 1024**3
+    # A larger RUN envelope needs the actual Root-issued selected support,
+    # independently bound again by the normal owner/spec/support admission.
+    if support.get("issue") == "quoridor-4lc.374":
+        resources = support.get("resources", {})
+        require(
+            support["schema"] == "quoridor.research.phase-support.v1"
+            and resources.get("CPU") == resources.get("threads") == 1
+            and resources.get("GPU") == 0
+            and resources.get("controller_included") is True
+            and resources.get("family_RAM_B") == 3 * 1024**3,
+            "selected actual single-CPU whole family support",
+        )
+        upper = resources["family_RAM_B"]
+    return upper
+
+
 class Limits(process.CycleResources):
     """Reuse guardian RSS/deadline/pause; add owned positive allocation bounds."""
 
@@ -171,12 +193,12 @@ class Limits(process.CycleResources):
         cfg = spec["limits"]
         for name in ("family_B", "host_reserve_B", "owned_B", "log_B", "free_B"):
             require(type(cfg[name]) is int and cfg[name] > 0, "positive priced limit: " + name)
+        support = document(spec["support"])
         require(
-            cfg["family_B"] <= (6 if spec["kind"] == "build" else 2) * 1024**3
+            cfg["family_B"] <= issued_family_upper(spec, support)
             and cfg["host_reserve_B"] >= 4 * 1024**3,
             "issued family/host envelope",
         )
-        support = document(spec["support"])
         require(
             type(support["funded_union_B"]) is int
             and 0 < cfg["owned_B"] <= support["funded_union_B"] <= 50000000000,
@@ -1253,23 +1275,30 @@ def caller_source_refs(spec, experiment):
                 *(Path(r["path"]) for r in config["helper_sources"]),
             }
     if experiment["phase"] == "analysis":
-        paths |= {
-            ROOT / "python/quoridor_training/research355" / (name + ".py")
-            for name in (
-                "stream355",
-                "lifecycle355",
-                "io355",
-                "observations355",
-                "producer355",
-                "strength355",
+        if len(spec["argv"]) > 3 and spec["argv"][2:4] == [
+            str(ROOT / "scripts/dev/research-lifecycle.py"),
+            "arena-analysis",
+        ]:
+            require(spec["argv"][1] == "-B", "pinned normal arena analysis")
+        else:
+            paths |= {
+                ROOT / "python/quoridor_training/research355" / (name + ".py")
+                for name in (
+                    "stream355",
+                    "lifecycle355",
+                    "io355",
+                    "observations355",
+                    "producer355",
+                    "strength355",
+                )
+            }
+            require(
+                len(spec["argv"]) > 2
+                and spec["argv"][1] == "-B"
+                and spec["argv"][2]
+                == str(ROOT / "python/quoridor_training/research355/stream355.py"),
+                "current maintained analysis entry",
             )
-        }
-        require(
-            len(spec["argv"]) > 2
-            and spec["argv"][1] == "-B"
-            and spec["argv"][2] == str(ROOT / "python/quoridor_training/research355/stream355.py"),
-            "current maintained analysis entry",
-        )
     refs = spec["caller_sources"]
     require(
         isinstance(refs, list)
@@ -1339,9 +1368,29 @@ def experiment_phase_check(experiment):
             "fit",
             "software-qualification",
             "ordering-qualification",
+            "sigma-cost-qualification",
         },
         "phase",
     )
+    if phase == "sigma-cost-qualification":
+        require(
+            experiment["models"] == []
+            and experiment["planned_slots"] == 64
+            and type(experiment.get("batch")) is int
+            and experiment["batch"] in (0, 1)
+            and (experiment.get("numerical_qualification") is not None)
+            == (experiment["batch"] == 1)
+            and experiment["argv"][1:]
+            == [
+                "sigma-cost-measure",
+                "--experiment",
+                "@EXPERIMENT@",
+                "--experiment-sha256",
+                "@EXPERIMENT_SHA256@",
+            ],
+            "explicit64 cost requests; timed bound is cost evidence, not model0 or numerical PASS",
+        )
+        return
     if phase == "ordering-qualification":
         ordering_qualification_shape(experiment)
         return
@@ -1525,6 +1574,132 @@ def cache_materialize_check(spec, experiment, manifest):
     )
 
 
+def sigma_cost_check(spec, experiment, manifest, approved):
+    """Normal current-plan/caller/image/input/output entry for the selected two cost phases.
+
+    Native owning qualification validates typed configs, source/native/backend,
+    exact formula, expiry, all requests and completed empirical cost evidence.
+    """
+    experiment_phase_check(experiment)
+    require(experiment["phase"] == "sigma-cost-qualification", "cost phase only")
+    cases_ref = approved["sigma_cost_cases"]
+    require(experiment["schedule"] == cases_ref, "approved frozen cost cases")
+    cases = document(cases_ref)
+    config = document(experiment["config"])
+    campaign_ref = next(
+        (
+            r
+            for r in experiment["inputs"]
+            if r["path"] == config["campaign"]["path"]
+            and r["sha256"] == config["campaign"]["sha256"]
+        ),
+        None,
+    )
+    require(campaign_ref is not None, "full current campaign lifetime input")
+    campaign = document(campaign_ref)
+    require(
+        campaign["approved_plan"] == spec["approved_plan"]
+        and config["configurations"] == campaign["configurations"] == cases["configurations"]
+        and campaign["phases"] == cases["phases"]
+        and campaign["maximum_total_logical_backend_rows_or_requests"] == 64
+        and campaign["cost_formula_prebound"] == {"factor": 4, "additive_margin_ns": 2000000}
+        and config["native"] == campaign["native"]
+        and config["native"]["executable_sha256"] == manifest["artifact"]["sha256"]
+        and config["native"]["compiled_sources_sha256"]
+        == canonical_sha(
+            {
+                k: v
+                for k, v in manifest["compiled_sources"].items()
+                if k
+                not in {
+                    "runner/research_manifest.rs",
+                    "runner/value_search_compare.rs",
+                    "runner/ordering_assessment.rs",
+                }
+            }
+        ),
+        "current approved cases/formula/actual native qualification source/image",
+    )
+    launched = campaign["qualification_started_unix_ms"]
+    require(
+        type(launched) is int
+        and 0 < launched <= time.time_ns() // 1000000
+        and campaign["valid_until_unix_ms"]
+        == config["native"]["valid_until_unix_ms"]
+        == launched + 86400000
+        and time.time_ns() // 1000000 < campaign["valid_until_unix_ms"],
+        "one fresh actual admitted24hour window; no reset",
+    )
+    phase = cases["phases"][experiment["batch"]]
+    require(
+        len(cases["phases"]) == 2
+        and [p["mode"] for p in cases["phases"]] == ["untimed", "qualified-timed"]
+        and all(p["max_logical_calls"] == 32 and len(p["workload"]) == 16 for p in cases["phases"])
+        and config["phase_id"] == phase["id"]
+        and config["mode"] == phase["mode"]
+        and config["workload"] == phase["workload"]
+        and config["max_logical_calls"] == 32
+        and config["prior_logical_calls"] == experiment["batch"] * 32
+        and len(config["prior_results"]) == experiment["batch"]
+        and config["output"] == spec["data_root"],
+        "fixed phase/order/count/prior/output identity",
+    )
+    for ref in [*config["prior_results"], *[c["file"] for c in config["configurations"]]]:
+        require(
+            any(
+                r["path"] == ref["path"] and r["sha256"] == ref["sha256"]
+                for r in experiment["inputs"]
+            ),
+            "cost config/prior lifetime",
+        )
+    if experiment["batch"] == 1:
+        require(
+            experiment["numerical_qualification"] in experiment["inputs"],
+            "timed validation packet lifetime",
+        )
+    for index, record in enumerate(config["configurations"]):
+        ref = next(
+            r
+            for r in experiment["inputs"]
+            if r["path"] == record["file"]["path"] and r["sha256"] == record["file"]["sha256"]
+        )
+        measured = document(ref)
+        selected = next(m for m in approved["matchups"] if m["id"] == index)
+        require(
+            measured["engines"] == selected["engines"]
+            and measured["inference"] == selected["inference"]
+            and measured["arena"]["evaluator_sha256"] == selected["evaluator_sha256"],
+            "selected exact Sigma-D/Sigma-BEST43 measurement configs",
+        )
+        inference = measured["inference"]
+        require(
+            any(
+                r["path"] == inference["model"] and r["sha256"] == inference["model_sha"]
+                for r in experiment["inputs"]
+            )
+            and any(
+                r["file"]["path"] == inference["library"] for r in experiment["dynamic_libraries"]
+            )
+            and measured["cpu_cores"] == [spec["limits"]["worker_cpu"]]
+            and measured["inference_cpu_core"] == spec["limits"]["worker_cpu"]
+            and measured["max_memory_bytes"]
+            <= spec["limits"]["family_B"] - spec["limits"]["controller_B"]
+            and measured["host_ram_reserve"] >= spec["limits"]["host_reserve_B"],
+            "actual qualified model/library/single CPU/family resource subject",
+        )
+    require(
+        spec["data"]
+        == [
+            {
+                "name": "measurement",
+                "path": str(Path(spec["data_root"]) / "measurement-result.json"),
+                "limit_B": CONTROL_BYTES,
+            }
+        ],
+        "sole full bounded measurement result",
+    )
+
+
 def experiment_check(spec):
     charged_roots(spec)
     experiment = document(spec["experiment"])
@@ -1581,16 +1756,33 @@ def experiment_check(spec):
     )
     approved = approved_plan(spec, experiment)
     refs.append(spec["approved_plan"])
+    if experiment["phase"] == "sigma-cost-qualification":
+        sigma_cost_check(spec, experiment, manifest, approved)
     if experiment["phase"] == "compare" and experiment["argv"][1] == "ordering-assess":
         numerical_check(experiment, manifest, refs=refs)
     if experiment["phase"] in {"corpus", "fit", "software-qualification"} and not public_replay:
         common_pilot_check(spec, experiment, manifest, approved)
+    if experiment["phase"] == "compare" and experiment["argv"][1] == "decisions":
+        arena_decision_plan_check(experiment, approved)
+        numerical_check(experiment, manifest, refs=refs)
+        require(
+            document(experiment["config"])["output"] == spec["data_root"],
+            "decision owned runtime output",
+        )
     if experiment["phase"] == "arena":
         arena_plan_check(experiment, approved)
+        numerical_check(experiment, manifest, refs=refs)
         require(
             document(experiment["config"])["output"] == spec["data_root"],
             "arena owned runtime output",
         )
+    if (
+        experiment["phase"] == "analysis"
+        and len(spec["argv"]) > 3
+        and spec["argv"][3] == "arena-analysis"
+    ):
+        arena_analysis_check(spec, experiment)
+        numerical_check(experiment, manifest, refs=refs)
     executable = manifest["artifact"]["path"]
     if experiment["phase"] in {"analysis", "fit", "software-qualification"}:
         python = project_interpreter(experiment)
@@ -1609,10 +1801,21 @@ def experiment_check(spec):
     require(
         not Path(spec["data_root"]).exists(), "exclusive scientific output; duplicate run refused"
     )
-    if experiment["phase"] == "arena":
+    if experiment["phase"] == "arena" or (
+        experiment["phase"] == "compare" and experiment["argv"][1] == "decisions"
+    ):
         require(
-            {x["name"] for x in spec["data"]} >= {"journal", "result"},
-            "mandatory scientific journal/result",
+            {
+                x["name"]: x["path"]
+                for x in spec["data"]
+                if x["name"] in {"journal", "result", "native_manifest"}
+            }
+            == {
+                "journal": str(Path(spec["data_root"]) / "completed.jsonl.gz"),
+                "result": str(Path(spec["data_root"]) / "result.json"),
+                "native_manifest": str(Path(spec["data_root"]) / "manifest.json"),
+            },
+            "mandatory canonical archive plus bounded native summary/manifest",
         )
     for finalizer in spec["finalizers"]:
         owned(finalizer["path"], spec["owner"])
@@ -2002,10 +2205,237 @@ def approved_plan(spec, experiment):
     return document(spec["approved_plan"])
 
 
+def arena_model_check(experiment, plan, width):
+    used = set()
+    for m in plan["matchups"]:
+        require(
+            set(m) <= {"id", "engines", "evaluator_sha256", "inference", "sigma_cost_qualification"}
+            and {"id", "engines", "evaluator_sha256"} <= set(m)
+            and len(m["engines"]) == len(m["evaluator_sha256"]) == width,
+            "declared engine identities",
+        )
+        sigma = False
+        cost = m.get("sigma_cost_qualification")
+        require(
+            any(engine["kind"] == "mcts" for engine in m["engines"]) == (cost is not None)
+            and (cost is None or cost in experiment["inputs"]),
+            "actual bound Sigma qualification required before launch; no cost_unqualified campaign",
+        )
+        for i, engine in enumerate(m["engines"]):
+            kind = engine["kind"]
+            require(kind in {"nnue", "distance", "mcts"}, "supported numerical backend")
+            if kind == "nnue":
+                model = next(
+                    (r for r in plan["models"] if r["descriptor"]["path"] == engine["model"]), None
+                )
+                require(
+                    model is not None and model["evaluator_sha256"] == m["evaluator_sha256"][i],
+                    "declared model/evaluator",
+                )
+                used.add(model["descriptor"]["path"])
+            elif kind == "distance":
+                require(engine.get("model") is None, "pure distance model")
+            else:
+                inference = m.get("inference")
+                require(
+                    plan["comparison"] == "whole_wall_time"
+                    and engine.get("model") is None
+                    and isinstance(inference, dict)
+                    and inference["backend"] == "ort"
+                    and inference.get("device", 0) == 0
+                    and inference.get("cuda_graph", False) is False
+                    and inference["model_sha"] == m["evaluator_sha256"][i]
+                    and any(
+                        r["path"] == inference["model"] and r["sha256"] == inference["model_sha"]
+                        for r in plan["inputs"]
+                    )
+                    and any(
+                        l["file"]["path"] == inference["library"]
+                        for l in experiment["dynamic_libraries"]
+                    ),
+                    "closed Sigma model/library/backend correspondence",
+                )
+                sigma = True
+        require(sigma == (m.get("inference") is not None), "unused/missing backend")
+    require(len(used) == len(plan["models"]), "duplicate/unused model")
+
+
+def arena_decision_plan_check(experiment, plan):
+    require(
+        set(plan) - {"sigma_cost_cases"}
+        == {
+            "schema",
+            "phase",
+            "comparison",
+            "rules",
+            "distance_units",
+            "value_perspective",
+            "book",
+            "inputs",
+            "models",
+            "schedule",
+            "family_ids",
+            "matchups",
+            "batches",
+            "planned_slots",
+        }
+        and plan["schema"] == "quoridor.research.arena-plan.v1"
+        and plan["phase"] == experiment["phase"] == "compare"
+        and plan["comparison"] == "whole_wall_time"
+        and experiment["argv"][1:]
+        == [
+            "decisions",
+            "--experiment",
+            "@EXPERIMENT@",
+            "--experiment-sha256",
+            "@EXPERIMENT_SHA256@",
+        ]
+        and all(
+            plan[k] == experiment[k]
+            for k in (
+                "rules",
+                "distance_units",
+                "value_perspective",
+                "inputs",
+                "models",
+                "schedule",
+                "planned_slots",
+            )
+        )
+        and plan["rules"] == "research-standard-2p-threefold-goal-first-v1"
+        and plan["distance_units"] == "wall-distance/80"
+        and plan["value_perspective"] == "side-to-move"
+        and plan["book"] in plan["inputs"],
+        "approved decision scientific correspondence",
+    )
+    families = plan["family_ids"]
+    matchups = [m["id"] for m in plan["matchups"]]
+    count = experiment["planned_slots"]
+    require(
+        families
+        and all(type(f) is int and f >= 0 for f in families)
+        and len(set(families)) == len(families)
+        and len(families) <= 96
+        and matchups
+        and all(type(m) is int and m >= 0 for m in matchups)
+        and len(set(matchups)) == len(matchups)
+        and type(count) is int
+        and 0 < count <= 288
+        and count == len(families) * len(matchups),
+        "decision full denominator",
+    )
+    schedule = document(experiment["schedule"])
+    require(isinstance(schedule, list) and len(schedule) == count, "decision full schedule")
+    pairs = set()
+    for i, slot in enumerate(schedule):
+        require(
+            set(slot) == {"slot", "batch", "matchup", "local_game", "family_id", "candidate_color"}
+            and all(type(v) is int and v >= 0 for v in slot.values())
+            and slot["slot"] == i
+            and slot["family_id"] in families
+            and slot["matchup"] in matchups
+            and slot["candidate_color"] == 0,
+            "decision typed parent/engine slot",
+        )
+        pairs.add((slot["family_id"], slot["matchup"]))
+    require(len(pairs) == count, "decision unique complete parent/engine coverage")
+    covered = set()
+    for i, batch in enumerate(plan["batches"]):
+        require(
+            set(batch) == {"batch", "matchup", "config", "slots"}
+            and batch["batch"] == i
+            and type(batch["batch"]) is int
+            and batch["matchup"] in matchups
+            and isinstance(batch["slots"], list)
+            and batch["slots"],
+            "decision batch",
+        )
+        for local, global_slot in enumerate(batch["slots"]):
+            require(
+                type(global_slot) is int
+                and 0 <= global_slot < count
+                and global_slot not in covered,
+                "decision batch ownership",
+            )
+            covered.add(global_slot)
+            slot = schedule[global_slot]
+            require(
+                slot["batch"] == i
+                and slot["matchup"] == batch["matchup"]
+                and slot["local_game"] == local,
+                "decision local/global correspondence",
+            )
+    require(
+        len(covered) == count
+        and type(experiment.get("batch")) is int
+        and 0 <= experiment["batch"] < len(plan["batches"]),
+        "decision complete coverage",
+    )
+    batch = plan["batches"][experiment["batch"]]
+    require(experiment["config"] == batch["config"], "approved decision config")
+    c = document(experiment["config"])
+    a = c["arena"]
+    m = next(m for m in plan["matchups"] if m["id"] == batch["matchup"])
+    require(
+        c["ruleset"] == "standard_2p_threefold"
+        and c["games"] == len(batch["slots"])
+        and all(type(c[k]) is int and c[k] == 1 for k in ("workers", "active_games", "max_batch"))
+        and c["engines"] == m["engines"]
+        and c.get("inference") == m.get("inference")
+        and (c.get("inference") is not None or c.get("inference_cpu_core") is None)
+        and all(c.get(k) is None for k in ("cycle", "train_games", "validation_games"))
+        and a["comparison"] == "whole_wall_time"
+        and a["clock_policy"] == "strict_unknown"
+        and a.get("decision_only") is True
+        and a.get("disable_continuation_static_ordering") is True
+        and a["evaluator_sha256"] == m["evaluator_sha256"]
+        and type(a["tt_entries"]) is int
+        and 0 < a["tt_entries"] <= 1048576
+        and type(a["retained_outcome_bytes"]) is int
+        and 0 < a["retained_outcome_bytes"] <= c["max_output_bytes"],
+        "decision single engine/receipt/retention contract",
+    )
+    arena_model_check(experiment, plan, 1)
+    engine = c["engines"][0]
+    require(
+        type(engine["depth"]) is int
+        and 0 < engine["depth"] <= 200
+        and type(engine["max_nodes"]) is int
+        and engine["max_nodes"] > 0
+        and type(engine["simd"]) is bool
+        and all(
+            type(engine[k]) in (int, float) and math.isfinite(engine[k])
+            for k in ("distance_a", "distance_b")
+        ),
+        "decision finite engine limits",
+    )
+    require(
+        type(engine["time_ms"]) is int
+        and engine["time_ms"] > 0
+        and type(a["return_reserve_ms"]) is int
+        and 0 <= a["return_reserve_ms"] < engine["time_ms"],
+        "decision clock",
+    )
+    book = document(plan["book"])
+    require(
+        book["frozen_before_candidate_results"] is True
+        and len(book["openings"]) == len(families)
+        and len(a["book"]["openings"]) == len(batch["slots"]),
+        "decision frozen parents",
+    )
+    for local, global_slot in enumerate(batch["slots"]):
+        index = families.index(schedule[global_slot]["family_id"])
+        require(
+            a["book"]["openings"][local] == book["openings"][index],
+            "immutable chronological parent/full history",
+        )
+    return [schedule[i] for i in batch["slots"]], c
+
+
 def arena_plan_check(experiment, plan):
     """One explicit JSON arena plan; config files own engines and search/clock limits."""
     require(
-        set(plan)
+        set(plan) - {"sigma_cost_cases"}
         == {
             "schema",
             "phase",
@@ -2027,7 +2457,8 @@ def arena_plan_check(experiment, plan):
         and len(experiment["argv"]) == 6
         and experiment["argv"][1:]
         == ["arena", "--experiment", "@EXPERIMENT@", "--experiment-sha256", "@EXPERIMENT_SHA256@"]
-        and plan["comparison"] in {"evaluator_fixed_depth", "evaluator_wall_time"}
+        and plan["comparison"]
+        in {"evaluator_fixed_depth", "evaluator_wall_time", "whole_wall_time"}
         and plan["rules"] == experiment["rules"] == "research-standard-2p-threefold-goal-first-v1"
         and plan["distance_units"] == experiment["distance_units"] == "wall-distance/80"
         and plan["value_perspective"] == experiment["value_perspective"] == "side-to-move"
@@ -2052,8 +2483,9 @@ def arena_plan_check(experiment, plan):
             type(config[k]) is int and config[k] == 1
             for k in ("workers", "active_games", "max_batch")
         )
-        and config.get("inference") is None
-        and config.get("inference_cpu_core") is None
+        and not a.get("decision_only", False)
+        and config.get("inference") == matchup.get("inference")
+        and (config.get("inference") is not None or config.get("inference_cpu_core") is None)
         and config.get("cycle") is None
         and config.get("train_games") is None
         and config.get("validation_games") is None
@@ -2066,26 +2498,13 @@ def arena_plan_check(experiment, plan):
         and 0 < a["tt_entries"] <= 1048576
         and type(a["retained_outcome_bytes"]) is int
         and 0 < a["retained_outcome_bytes"] <= config["max_output_bytes"]
-        and a["search_source_sha256"][0] == a["search_source_sha256"][1],
+        and (
+            plan["comparison"] == "whole_wall_time"
+            or a["search_source_sha256"][0] == a["search_source_sha256"][1]
+        ),
         "arena equal runtime/backend/retention conditions",
     )
-    used = set()
-    for m in plan["matchups"]:
-        require(len(m["engines"]) == len(m["evaluator_sha256"]) == 2, "two declared engines")
-        for i, engine in enumerate(m["engines"]):
-            require(engine["kind"] in {"nnue", "distance"}, "supported numerical backend")
-            if engine["kind"] == "nnue":
-                model = next(
-                    (r for r in plan["models"] if r["descriptor"]["path"] == engine["model"]), None
-                )
-                require(
-                    model is not None and model["evaluator_sha256"] == m["evaluator_sha256"][i],
-                    "declared model/evaluator",
-                )
-                used.add(model["descriptor"]["path"])
-            else:
-                require(engine.get("model") is None, "pure distance model")
-    require(len(used) == len(plan["models"]), "duplicate/unused model")
+    arena_model_check(experiment, plan, 2)
     for engine in engines:
         require(
             type(engine["depth"]) is int
@@ -2100,7 +2519,8 @@ def arena_plan_check(experiment, plan):
             "finite engine limits",
         )
     require(
-        all(engines[0][k] == engines[1][k] for k in ("depth", "max_nodes", "simd")),
+        plan["comparison"] == "whole_wall_time"
+        or all(engines[0][k] == engines[1][k] for k in ("depth", "max_nodes", "simd")),
         "equal search limits",
     )
     if plan["comparison"] == "evaluator_fixed_depth":
@@ -2117,6 +2537,11 @@ def arena_plan_check(experiment, plan):
             and type(a["return_reserve_ms"]) is int
             and 0 <= a["return_reserve_ms"] < engines[0]["time_ms"],
             "equal thinking clocks and reserve",
+        )
+    if plan["comparison"] == "whole_wall_time":
+        require(
+            a.get("disable_continuation_static_ordering") is True,
+            "declared retained alpha ordering OFF",
         )
     book = document(plan["book"])
     require(book["complete"] is True and book["rules"] == plan["rules"], "complete bound book")
@@ -2226,7 +2651,7 @@ def arena_observation(config, row):
     accepted = []
     for obs in row["observations"]:
         index = obs["engine_index"]
-        require(type(index) is int and 0 <= index < 2, "observation engine")
+        require(type(index) is int and 0 <= index < len(config["engines"]), "observation engine")
         for key in ("caller_seconds", "thinking_seconds", "value_stm"):
             value = obs.get(key)
             require(
@@ -2240,16 +2665,41 @@ def arena_observation(config, row):
             obs["failure"] is None
             and obs["engine_error"] is None
             and type(obs["action"]) is int
-            and obs["pv"]
-            and obs["pv"][0] == obs["action"]
             and type(obs["accepted_ns"]) is int
             and type(obs["admission_checked_ns"]) is int
             and type(obs["returned_ns"]) is int
-            and obs["accepted_ns"] >= obs["admission_checked_ns"] >= obs["returned_ns"]
-            and obs["counters"]["completed_snapshot_validation_failed"] is False,
+            and obs["accepted_ns"] >= obs["admission_checked_ns"] >= obs["returned_ns"],
             "illegal/incoherent acceptance",
         )
         a = config["arena"]
+        if config["engines"][index]["kind"] == "mcts":
+            counters = obs["counters"]
+            receipt = counters["authority_receipt_ns"]
+            require(
+                type(receipt) is int
+                and type(obs["deadline_ns"]) is int
+                and receipt < obs["deadline_ns"]
+                and counters["authority_legal"] is True
+                and counters["inflight_after_drain"] == 0
+                and type(counters["completed_simulations"]) is int
+                and counters["completed_simulations"] > 0
+                and counters["clock_contract"] == "authority-action-receipt-v1"
+                and counters["clock_contract_sha256"]
+                == "04062382f70648cdfd722e59c35be1100719169097a04749b0046ea5a19a280d"
+                and obs["returned_ns"] == counters["drain_finished_ns"]
+                and obs["returned_ns"] >= receipt
+                and obs["completed_depth"] is None
+                and obs["pv"] == [],
+                "Sigma receipt/drain/completed simulation",
+            )
+            accepted.append(obs["action"])
+            continue
+        require(
+            obs["pv"]
+            and obs["pv"][0] == obs["action"]
+            and obs["counters"]["completed_snapshot_validation_failed"] is False,
+            "alpha completed PV",
+        )
         if a["comparison"] == "evaluator_fixed_depth":
             require(
                 type(obs["completed_depth"]) is int
@@ -2262,13 +2712,778 @@ def arena_observation(config, row):
         else:
             require(
                 type(obs["deadline_ns"]) is int
-                and obs["returned_ns"] <= obs["deadline_ns"]
+                and obs["returned_ns"] < obs["deadline_ns"]
                 and obs["counters"]["authority_receipt_ns"] == obs["returned_ns"]
                 and obs["counters"]["drain_finished_ns"] == obs["returned_ns"],
                 "thinking authority/drain",
             )
         accepted.append(obs["action"])
-    require(accepted == row["moves"], "accepted actions/durable moves")
+    if not config["arena"].get("decision_only", False):
+        opening = config["arena"]["book"]["openings"][row["game"] // 2]["prefix"]
+        require(
+            row["moves"][: len(opening)] == opening and accepted == row["moves"][len(opening) :],
+            "full opening/accepted actions/durable moves",
+        )
+
+
+ARENA_PUBLICATION = "quoridor.arena.reference-result.v1"
+
+
+def arena_reference_report(config, files, values=None, expected_build=None):
+    """One maintained saved-result join for publication and analysis; no Search/model replay."""
+    required = {
+        "journal": "completed.jsonl.gz",
+        "result": "result.json",
+        "native_manifest": "manifest.json",
+    }
+    root = Path(config["output"])
+    require(
+        all(
+            name in files and files[name]["path"] == str(root / filename)
+            for name, filename in required.items()
+        ),
+        "exact canonical detail/summary/manifest paths",
+    )
+    if values is None:
+        values = {name: read_ref(files[name], files[name]["bytes"]) for name in required}
+    for name in required:
+        require(
+            len(values[name]) == files[name]["bytes"]
+            and sha(values[name]) == files[name]["sha256"],
+            "actual closed saved-file bytes",
+        )
+
+    def pairs(items):
+        result = {}
+        for key, value in items:
+            require(key not in result, "ambiguous duplicate JSON key")
+            result[key] = value
+        return result
+
+    def strict(raw):
+        def constant(value):
+            raise Refused("nonfinite JSON " + value)
+
+        return json.loads(raw, object_pairs_hook=pairs, parse_constant=constant)
+
+    publication = strict(values["result"])
+    require(
+        set(publication)
+        == {
+            "schema",
+            "report",
+            "archive",
+            "outcome_count",
+            "journal_count",
+            "journal_bytes",
+            "journal_sha256",
+            "failure_attribution",
+            "archive_wall_seconds",
+            "archive_allocated_bytes",
+        }
+        and publication["schema"] == ARENA_PUBLICATION,
+        "current bounded reference publication",
+    )
+    require(
+        type(publication["archive_wall_seconds"]) in (int, float)
+        and math.isfinite(publication["archive_wall_seconds"])
+        and publication["archive_wall_seconds"] >= 0
+        and type(publication["archive_allocated_bytes"]) is int
+        and publication["archive_allocated_bytes"] >= 0,
+        "actual encoding wall/allocation metadata",
+    )
+    report = publication["report"]
+    count = config["games"]
+    cap = config["arena"].get("retained_outcome_bytes") or config["max_plies"] * 16384 + 16384
+    raw_cap = count * (cap + 1)
+    require(
+        report["outcomes"] == []
+        and report["run_id"] == config["run_id"]
+        and report["planned"] == count
+        and publication["outcome_count"] == count
+        and type(publication["journal_count"]) is int
+        and 0 <= publication["journal_count"] <= count,
+        "summary contains no second detailed copy/full planned census",
+    )
+    content = publication["archive"]
+    require(
+        set(content) == {"encoding", "compressed", "raw_sha256", "raw_bytes"}
+        and content["encoding"] == "gzip-single-member-v1"
+        and content["compressed"] == files["journal"]
+        and type(content["raw_bytes"]) is int
+        and 0 < content["raw_bytes"] <= raw_cap
+        and files["journal"]["bytes"] <= raw_cap + ((raw_cap + 8191) // 8192) * 5 + 64,
+        "exact closed archive FileRef/logical envelope",
+    )
+    # stdlib counterpart of the installed maintained lossless_jsonl::Reader contract.
+    decoder = zlib.decompressobj(wbits=31)
+    raw = decoder.decompress(values["journal"], content["raw_bytes"] + 1)
+    require(
+        decoder.eof
+        and not decoder.unused_data
+        and not decoder.unconsumed_tail
+        and len(raw) == content["raw_bytes"]
+        and sha(raw) == content["raw_sha256"],
+        "truncated/trailing/multiple-member/raw-content mismatch",
+    )
+    require(raw.endswith(b"\n"), "torn canonical outcome tail")
+    lines = raw.splitlines(keepends=True)
+    require(
+        len(lines) == count
+        and all(len(line) <= cap + 1 and line.endswith(b"\n") for line in lines),
+        "bounded exact outcome records",
+    )
+    prefix = b"".join(lines[: publication["journal_count"]])
+    require(
+        len(prefix) == publication["journal_bytes"]
+        and sha(prefix) == publication["journal_sha256"],
+        "lossless original journal prefix identity",
+    )
+    attribution = publication["failure_attribution"]
+    require((report["stopped"] is None) == (attribution is None), "explicit primary attribution")
+    rows = []
+    seen = set()
+    for index, line in enumerate(lines):
+        row = strict(line)
+        game = row["game"]
+        require(
+            type(game) is int and 0 <= game < count and game not in seen,
+            "duplicate/unplanned/ambiguous outcome correspondence",
+        )
+        seen.add(game)
+        if index >= publication["journal_count"]:
+            require(
+                row["started"] is False and row["status"] == "unknown",
+                "missing journal record cannot become played completion",
+            )
+        if attribution is not None and row["failure"] in {"cancelled", "not_started"}:
+            row["failure"] = attribution
+        rows.append(row)
+    manifest = strict(values["native_manifest"])
+    require(
+        manifest["result"] == publication
+        and manifest["binding"]["config"] == config
+        and manifest["cleanup"]["archive_closed_verified"] is True
+        and manifest["cleanup"]["all_workers_joined"] == report["all_workers_joined"],
+        "closed native manifest/summary/config/cleanup correspondence",
+    )
+    for name, filename in required.items():
+        if name == "native_manifest":
+            continue
+        require(
+            manifest["artifacts"][filename]
+            == {k: files[name][k] for k in ("sha256", "bytes", "mode")},
+            "manifest actual archive/summary SHA-size-mode",
+        )
+    if expected_build is not None:
+        require(
+            manifest["binding"]["executable_sha256"] == expected_build["artifact"]["sha256"],
+            "actual current image publication",
+        )
+        for key, digest in manifest["binding"]["compiled_sources"].items():
+            require(
+                expected_build["compiled_sources"].get(key) == digest,
+                "compiled publication source differs from current qualified image",
+            )
+    report["outcomes"] = sorted(rows, key=lambda row: row["game"])
+    return report
+
+
+def arena_analysis_check(spec, experiment):
+    config = document(experiment["config"])
+    require(
+        set(config)
+        == {
+            "schema",
+            "arena_plan",
+            "decision_plan",
+            "diagnostic_selection",
+            "bootstrap_resamples",
+            "bootstrap_seed",
+            "central_interval",
+            "batches",
+            "decision_batches",
+        },
+        "exact saved-analysis config fields",
+    )
+    require(
+        config["schema"] == "quoridor.arena-analysis.v1"
+        and config["arena_plan"] == spec["approved_plan"]
+        and config["bootstrap_resamples"] == 10000
+        and config["bootstrap_seed"] == 37420261012
+        and config["central_interval"] == "98.33333333333333%"
+        and experiment["planned_slots"] == 768
+        and experiment["batch"] is None,
+        "fixed selected family analysis settings/authority",
+    )
+    require(
+        experiment["argv"][1:]
+        == [
+            "-B",
+            str(ROOT / "scripts/dev/research-lifecycle.py"),
+            "arena-analysis",
+            "--experiment",
+            "@EXPERIMENT@",
+            "--experiment-sha256",
+            "@EXPERIMENT_SHA256@",
+        ],
+        "one maintained reference analysis entry",
+    )
+    plan = document(config["arena_plan"])
+    require(
+        plan["family_ids"] == list(range(128))
+        and plan["planned_slots"] == 768
+        and [m["id"] for m in plan["matchups"]] == [0, 1, 2]
+        and [[e["kind"] for e in m["engines"]] for m in plan["matchups"]]
+        == [["mcts", "distance"], ["mcts", "nnue"], ["distance", "nnue"]]
+        and experiment["schedule"] == plan["schedule"],
+        "fixed three-engine/full-family schedule",
+    )
+    require(
+        len(config["batches"]) == len(plan["batches"])
+        and {b["batch"] for b in config["batches"]} == set(range(len(plan["batches"])))
+        and len(config["decision_batches"]) <= 288,
+        "one census descriptor per planned batch",
+    )
+    if config["decision_plan"] is not None:
+        dplan = document(config["decision_plan"])
+        require(
+            len(config["decision_batches"]) == len(dplan["batches"])
+            and {b["batch"] for b in config["decision_batches"]}
+            == set(range(len(dplan["batches"]))),
+            "full diagnostic batch census",
+        )
+    else:
+        require(config["decision_batches"] == [], "no unapproved diagnostic branch")
+    refs = {r["path"]: r for r in experiment["inputs"]}
+    require(len(refs) == len(experiment["inputs"]), "unique analysis inputs")
+
+    def selected(ref):
+        require(
+            ref is None or refs.get(ref["path"]) == ref,
+            "actual analysis FileRef outside lifetime inputs",
+        )
+
+    selected(config["arena_plan"])
+    selected(config["decision_plan"])
+    selected(config["diagnostic_selection"])
+    for section in (config["batches"], config["decision_batches"]):
+        for item in section:
+            require(set(item) == {"batch", "completion"}, "no invented per-run secondary authority")
+            selected(item["completion"])
+            if item["completion"] is not None:
+                completed = document(item["completion"])
+                require(
+                    completed["schema"] == COMPLETION_SCHEMA
+                    and completed["kind"] == "run"
+                    and not Path(item["completion"]["path"]).with_name("INCOMPLETE").exists(),
+                    "original sole authoritative completion required",
+                )
+                selected(completed["experiment"])
+                selected(completed["intent"])
+                producer = document(completed["experiment"])
+                selected(producer["config"])
+                for ref in completed["data"]["files"]:
+                    selected(ref)
+    require(
+        {item["name"]: item["path"] for item in spec["data"]}
+        == {
+            "summary": str(Path(spec["data_root"]) / "summary.json"),
+            "report": str(Path(spec["data_root"]) / "report.md"),
+        },
+        "owned bounded analysis outputs",
+    )
+    return config
+
+
+def arena_analysis(spec, experiment):
+    config = arena_analysis_check(spec, experiment)
+    plan = document(config["arena_plan"])
+    schedule = document(plan["schedule"])
+    require(
+        len(schedule) == 768 and [r["slot"] for r in schedule] == list(range(768)),
+        "fixed ordered slots",
+    )
+    selection = document(config["diagnostic_selection"])
+    require(
+        len(selection["parents"]) <= 96 and selection["selected_before_outputs"] is True,
+        "frozen chronological diagnostic selection",
+    )
+    decision_plan = (
+        document(config["decision_plan"]) if config["decision_plan"] is not None else None
+    )
+    decisions = document(decision_plan["schedule"]) if decision_plan is not None else []
+    if decision_plan is not None:
+        require(
+            [m["id"] for m in decision_plan["matchups"]] == [0, 1, 2]
+            and [m["engines"][0]["kind"] for m in decision_plan["matchups"]]
+            == ["mcts", "distance", "nnue"],
+            "diagnostic engine identities/metric roles",
+        )
+    require(
+        len(decisions) == 3 * len(selection["parents"]) and len(decisions) <= 288,
+        "exact selected parent/three-proposal denominator",
+    )
+    result = {
+        "schema": "quoridor.arena-comparison.summary.v1",
+        "planned": 768,
+        "bootstrap_resamples": 10000,
+        "bootstrap_seed": 37420261012,
+        "central_interval": "98.33333333333333%",
+        "operation_provenance": [],
+        "errors": [],
+        "diagnostic_selection": config["diagnostic_selection"],
+        "diagnostic_exclusions": selection["exclusions"],
+        "diagnostic_planned": len(decisions),
+        "limitations": [
+            "Conditional exploratory family resampling; no IID/population/Elo coverage guarantee.",
+            "Shared book/PRNG and interleaved matchups; incomplete pairs are never numerical wins or cap draws.",
+            "Descriptive correlated state occupancy; diverged trajectories do not identify counterfactual superiority.",
+            "Historical common-parent disagreement is not error or teacher truth; no forced-child/deeper oracle.",
+            "Model improvement, default adoption, new fit/features/teacher and general strength are unproved.",
+        ],
+    }
+    observed = {}
+    decision_rows = {}
+    strata = {}
+    result["native_costs"] = []
+
+    def consume(items, approved, phase, target):
+        for item in sorted(items, key=lambda row: row["batch"]):
+            if item["completion"] is None:
+                continue
+            completion = document(item["completion"])
+            e = document(completion["experiment"])
+            origin = document(completion["intent"])
+            result["operation_provenance"].append(
+                {
+                    "completion": item["completion"],
+                    "status": completion["status"],
+                    "primary": completion["primary"],
+                    "secondary_count": len(completion["secondary"]),
+                    "cleanup_complete": completion["cleanup_complete"],
+                    "remaining": completion["remaining"],
+                    "command_wall_seconds": [
+                        c.get("guardian_return", {}).get("wall_seconds")
+                        if c.get("guardian_return") is not None
+                        else None
+                        for c in completion["checks"]
+                    ],
+                    "cost_scope": "original command walls only; nested/controller/admin/continuous peaks not manufactured",
+                }
+            )
+            try:
+                require(
+                    origin["approved_plan"] == approved
+                    and e["canonical_plan_sha256"] == approved["sha256"]
+                    and origin["experiment"] == completion["experiment"]
+                    and e["build_manifest"] == experiment["build_manifest"]
+                    and e["phase"] == phase
+                    and e["batch"] == item["batch"],
+                    "original producer/current subject correspondence",
+                )
+                planned, c = (
+                    arena_plan_check(e, document(approved))
+                    if phase == "arena"
+                    else arena_decision_plan_check(e, document(approved))
+                )
+                inventory = {r["path"]: r for r in completion["data"]["files"]}
+                require(
+                    len(inventory) == len(completion["data"]["files"]),
+                    "unique producer file inventory",
+                )
+                files = {
+                    name: inventory[str(Path(c["output"]) / filename)]
+                    for name, filename in (
+                        ("journal", "completed.jsonl.gz"),
+                        ("result", "result.json"),
+                        ("native_manifest", "manifest.json"),
+                    )
+                }
+                native = arena_reference_report(
+                    c, files, expected_build=document(e["build_manifest"])
+                )
+                pub = json.loads(read_ref(files["result"]))
+                result["native_costs"].append(
+                    {
+                        "completion": item["completion"],
+                        "native_wall_seconds": native["wall_seconds"],
+                        "encoding_sync_verify_seconds": pub["archive_wall_seconds"],
+                        "canonical_compressed_bytes": pub["archive"]["compressed"]["bytes"],
+                        "canonical_raw_bytes": pub["archive"]["raw_bytes"],
+                        "canonical_allocated_bytes": pub["archive_allocated_bytes"],
+                        "compression_ratio_raw_over_compressed": pub["archive"]["raw_bytes"]
+                        / pub["archive"]["compressed"]["bytes"],
+                        "native_peak_rss_observation_bytes": native["peak_rss"],
+                        "evaluator_setup_seconds": native["pump"][
+                            "evaluator_initialization_seconds"
+                        ],
+                        "backend_setup_seconds": native["pump"]["backend_initialization_seconds"],
+                        "backend_cleanup_seconds": native["pump"]["backend_cleanup_seconds"],
+                        "thinking_seconds": sum(
+                            o["thinking_seconds"] or 0
+                            for row in native["outcomes"]
+                            for o in row["observations"]
+                        ),
+                        "classification_seconds": sum(
+                            o["counters"]
+                            .get("position_traits", {})
+                            .get("classification_seconds", 0)
+                            for row in native["outcomes"]
+                            for o in row["observations"]
+                        ),
+                        "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN",
+                    }
+                )
+                for row in native["outcomes"]:
+                    slot = next(slot for slot in planned if slot["local_game"] == row["game"])
+                    require(
+                        slot["slot"] not in target
+                        and row["candidate_color"] == slot["candidate_color"],
+                        "unique global scheduled outcome",
+                    )
+                    width = 2 if phase == "arena" else 1
+                    require(
+                        row["family"] == f"{c['run_id']}-family-{row['game'] // width:06}",
+                        "native family/local parent",
+                    )
+                    if phase == "compare":
+                        require(
+                            row["winner"] is None
+                            and row["moves"]
+                            == c["arena"]["book"]["openings"][row["game"]]["prefix"]
+                            and row["status"] in {"decision", "unknown"}
+                            and len(row["observations"]) <= 1,
+                            "same parent single proposal/no branch game",
+                        )
+                    arena_observation(c, row)
+                    target[slot["slot"]] = (row, c)
+            except BaseException as error:
+                result["errors"].append({"completion": item["completion"], **error_fact(error)})
+
+    consume(config["batches"], config["arena_plan"], "arena", observed)
+    if decision_plan is not None:
+        consume(config["decision_batches"], config["decision_plan"], "compare", decision_rows)
+    pair_scores = {}
+    tables = []
+    for m in plan["matchups"]:
+        counts = {
+            name: 0
+            for name in (
+                "planned",
+                "started",
+                "goal_first",
+                "goal_second",
+                "true_draw",
+                "forfeit",
+                "cap",
+                "late",
+                "illegal",
+                "error",
+                "unfinished",
+                "unknown",
+                "missing",
+            )
+        }
+        scores = []
+        families = []
+        for family in range(128):
+            values = []
+            for slot in (
+                r for r in schedule if r["matchup"] == m["id"] and r["family_id"] == family
+            ):
+                counts["planned"] += 1
+                row = observed.get(slot["slot"], (None, None))[0]
+                if row is None:
+                    counts["missing"] += 1
+                    counts["unknown"] += 1
+                    values.append(None)
+                    continue
+                counts["started"] += int(row["started"])
+                status = row["status"]
+                failure = row["failure"]
+                if status == "draw" and row["winner"] is None:
+                    counts["true_draw"] += 1
+                    value = 0.5
+                elif status in {"goal", "forfeit"} and row["winner"] in (0, 1):
+                    value = float(row["winner"] == slot["candidate_color"])
+                    counts[
+                        "forfeit"
+                        if status == "forfeit"
+                        else "goal_first"
+                        if value
+                        else "goal_second"
+                    ] += 1
+                else:
+                    value = None
+                    counts["unknown"] += 1
+                    counts["cap"] += int(failure == "ply_cap")
+                    counts["late"] += int(failure in {"time_overrun", "deadline"})
+                    counts["illegal"] += int(failure == "illegal_move")
+                    counts["error"] += int(
+                        failure
+                        in {"engine_error", "initialization", "output_limit", "memory_limit"}
+                    )
+                    counts["unfinished"] += int(
+                        failure in {"not_started", "worker_missing", "cancelled"}
+                    )
+                values.append(value)
+            require(len(values) == 2, "full original colour pair denominator")
+            scores.extend(v for v in values if v is not None)
+            families.append(None if any(v is None for v in values) else sum(values) / 2)
+        require(counts["planned"] == 256, "full matchup denominator")
+        pair_scores[m["id"]] = families
+        tables.append(
+            {
+                "matchup": m["id"],
+                "counts": counts,
+                "complete_colour_pairs": sum(v is not None for v in families),
+                "complete_pair_mean": None
+                if all(v is None for v in families)
+                else sum(v for v in families if v is not None)
+                / sum(v is not None for v in families),
+                "planned_game_missingness_bounds": [
+                    sum(scores) / 256,
+                    (sum(scores) + counts["unknown"]) / 256,
+                ],
+            }
+        )
+    samples = {m["id"]: [] for m in plan["matchups"]}
+    empty = {key: 0 for key in samples}
+    rng = random.Random(37420261012)
+    for _ in range(10000):
+        indices = [rng.randrange(128) for _ in range(128)]
+        for key, values in pair_scores.items():
+            known = [values[i] for i in indices if values[i] is not None]
+            if known:
+                samples[key].append(sum(known) / len(known))
+            else:
+                empty[key] += 1
+    for table in tables:
+        values = sorted(samples[table["matchup"]])
+        table["empty_family_resamples"] = empty[table["matchup"]]
+        table["conditional_complete_pair_interval"] = (
+            None
+            if len(values) != 10000
+            else [values[(len(values) - 1) // 120], values[(119 * (len(values) - 1) + 119) // 120]]
+        )
+    result["matchups"] = tables
+    # Per-state rows are correlated exposures. Every cell retains game/family/colour denominators.
+    for global_slot, (row, c) in observed.items():
+        slot = schedule[global_slot]
+        for observation in row["observations"]:
+            traits = observation.get("counters", {}).get("position_traits")
+            if traits is None:
+                continue
+            for name in (
+                "stock_sum_stratum",
+                "distance_difference_stratum",
+                "either_distance_le_2",
+                "pawn_contact",
+                "legal_jump_available",
+                "current_repetition_count",
+                "any_recorded_repetition",
+                "phase_stratum",
+            ):
+                key = (slot["matchup"], observation["engine_index"], name, str(traits[name]))
+                cell = strata.setdefault(
+                    key,
+                    {
+                        "states": 0,
+                        "games": set(),
+                        "families": set(),
+                        "colours": set(),
+                        "winning_side_states": 0,
+                        "unknown_outcome_states": 0,
+                        "by_colour": {},
+                    },
+                )
+                cell["states"] += 1
+                cell["games"].add(global_slot)
+                cell["families"].add(slot["family_id"])
+                cell["colours"].add(observation["side"])
+                cell["winning_side_states"] += int(row["winner"] == observation["side"])
+                cell["unknown_outcome_states"] += int(row["status"] == "unknown")
+                colour = cell["by_colour"].setdefault(
+                    observation["side"], {"states": 0, "games": set(), "families": set()}
+                )
+                colour["states"] += 1
+                colour["games"].add(global_slot)
+                colour["families"].add(slot["family_id"])
+    result["state_strata"] = [
+        {
+            "matchup": key[0],
+            "engine_index": key[1],
+            "trait": key[2],
+            "stratum": key[3],
+            **{k: len(v) if isinstance(v, set) else v for k, v in cell.items() if k != "by_colour"},
+            "by_colour": {
+                str(side): {k: len(v) if isinstance(v, set) else v for k, v in counts.items()}
+                for side, counts in sorted(cell["by_colour"].items())
+            },
+        }
+        for key, cell in sorted(strata.items())
+    ]
+    by_parent = {}
+    diagnostic_counts = {"planned": len(decisions), "proposed": 0, "unknown": 0, "missing": 0}
+    examples = []
+    for slot in decisions:
+        item = decision_rows.get(slot["slot"])
+        if item is None:
+            diagnostic_counts["missing"] += 1
+            diagnostic_counts["unknown"] += 1
+            continue
+        row, c = item
+        observation = row["observations"][0] if row["observations"] else None
+        if row["status"] != "decision" or observation is None or not observation["accepted"]:
+            diagnostic_counts["unknown"] += 1
+            continue
+        diagnostic_counts["proposed"] += 1
+        by_parent.setdefault(slot["family_id"], []).append((slot, observation))
+    disagreements = 0
+    complete = 0
+    for parent, rows in sorted(by_parent.items()):
+        if len(rows) != 3:
+            continue
+        complete += 1
+        if len({obs["action"] for _, obs in rows}) > 1:
+            disagreements += 1
+            if len(examples) < 12:
+                examples.append(
+                    {
+                        "parent": parent,
+                        "selection": config["diagnostic_selection"],
+                        "proposals": [
+                            {
+                                "slot": slot["slot"],
+                                "engine": slot["matchup"],
+                                "action": obs["action"],
+                                "PV": obs["pv"],
+                                "accepted_depth": obs["completed_depth"],
+                                "stop": obs["stop"],
+                                "searched_value_stm": obs["value_stm"]
+                                if slot["matchup"] != 0
+                                else None,
+                                "value_role": "Sigma rootmean"
+                                if slot["matchup"] == 0
+                                else "alpha searched root; not NNUE static",
+                                "Sigma_root_nn": obs["counters"].get("root_nn"),
+                                "Sigma_rootmean": obs["counters"].get("root_mean"),
+                                "Sigma_selected_child_q": obs["counters"].get("selected_child_q"),
+                                "counters": obs["counters"],
+                                "NNUE_static_pretanh": None,
+                                "NNUE_static_posttanh": None,
+                                "NNUE_saturation": None,
+                                "missing_metric_reason": "not recorded by admitted same-forward path; searched/terminal values are not NNUE static outputs",
+                            }
+                            for slot, obs in rows
+                        ],
+                    }
+                )
+    diagnostic_strata = {}
+    for parent, rows in sorted(by_parent.items()):
+        if len(rows) != 3:
+            continue
+        traits = rows[0][1]["counters"].get("position_traits")
+        if traits is None:
+            continue
+        disagreement = len({obs["action"] for _, obs in rows}) > 1
+        for name in (
+            "stock_sum_stratum",
+            "distance_difference_stratum",
+            "either_distance_le_2",
+            "pawn_contact",
+            "legal_jump_available",
+            "current_repetition_count",
+            "any_recorded_repetition",
+            "phase_stratum",
+        ):
+            key = (name, str(traits[name]))
+            cell = diagnostic_strata.setdefault(key, {"parents": 0, "disagreements": 0})
+            cell["parents"] += 1
+            cell["disagreements"] += int(disagreement)
+    result["diagnostic_strata"] = [
+        {"trait": key[0], "stratum": key[1], **cell}
+        for key, cell in sorted(diagnostic_strata.items())
+    ]
+    result["diagnostics"] = {
+        **diagnostic_counts,
+        "complete_three_engine_parents": complete,
+        "action_disagreement_parents": disagreements,
+        "linked_examples": examples,
+        "NNUE_pretanh_posttanh_saturation": "UNKNOWN_NOT_RECORDED_NO_EXTRA_FORWARD",
+    }
+    report = [
+        "Three-engine fixed comparison",
+        "",
+        "| Matchup | Goals first/second | True draws | UNKNOWN | Complete pairs | Conditional interval |",
+        "|---|---:|---:|---:|---:|---|",
+    ]
+    for table in tables:
+        c = table["counts"]
+        report.append(
+            f"| {table['matchup']} | {c['goal_first']}/{c['goal_second']} | {c['true_draw']} | {c['unknown']} | {table['complete_colour_pairs']} | {table['conditional_complete_pair_interval']} |"
+        )
+    report += [
+        "",
+        f"Common parents with all three proposals: {complete}; action disagreements: {disagreements}.",
+        "",
+        *result["limitations"],
+    ]
+    return result, "\n".join(report) + "\n"
+
+
+def arena_analysis_child(experiment_path, expected_sha):
+    path = os.environ["QUORIDOR_LIFECYCLE_INTENT_PATH"]
+    ref, _ = bound(path)
+    require(ref["sha256"] == os.environ["QUORIDOR_LIFECYCLE_INTENT"], "actual parent intent")
+    spec = document(ref)
+    require(
+        os.environ["QUORIDOR_LIFECYCLE_PARENT_PID"] == str(os.getppid()) and os.getppid() > 1,
+        "actual immediate parent; no second lifetime lock",
+    )
+    require(
+        spec["experiment"]["path"] == str(experiment_path)
+        and spec["experiment"]["sha256"] == expected_sha,
+        "exact analysis Experiment",
+    )
+    require(
+        spec["argv"]
+        == [os.fsdecode(v) for v in Path("/proc/self/cmdline").read_bytes().split(b"\0") if v],
+        "actual admitted child argv",
+    )
+    require(
+        (Path(spec["output"]) / "INCOMPLETE").is_file()
+        and not (Path(spec["output"]) / "manifest.json").exists(),
+        "active normal parent operation",
+    )
+    result, report = arena_analysis(spec, document(spec["experiment"]))
+    root = Path(spec["data_root"])
+    root.mkdir()
+    for name, raw in (
+        ("summary.json", json.dumps(result, allow_nan=False, indent=2).encode()),
+        ("report.md", report.encode()),
+    ):
+        item = next(item for item in spec["data"] if item["path"] == str(root / name))
+        require(len(raw) <= item["limit_B"], "bounded full analysis output")
+        with (root / name).open("xb") as f:
+            f.write(raw)
+            f.flush()
+            os.fsync(f.fileno())
+    fd = os.open(root, os.O_DIRECTORY)
+    try:
+        os.fsync(fd)
+    finally:
+        os.close(fd)
+    print(
+        json.dumps(
+            {
+                "planned": result["planned"],
+                "diagnostic_planned": result["diagnostic_planned"],
+                "scope": "saved-only conditional/descriptive analysis; no model/Search/game/default claim",
+            }
+        )
+    )
 
 
 def collect_data(spec, experiment):
@@ -2292,6 +3507,106 @@ def collect_data(spec, experiment):
             values[item["name"]] = raw
         except BaseException as error:
             data["errors"].append({"stage": item["name"], **error_fact(error)})
+    if experiment["phase"] == "arena" or (
+        experiment["phase"] == "compare" and experiment["argv"][1] == "decisions"
+    ):
+        failure = Path(spec["data_root"]) / "publication-failure.json"
+        if failure.exists():
+            try:
+                ref, raw = bound(failure)
+                data["files"].append(ref)
+                metadata = json.loads(raw)
+                require(
+                    metadata["schema"] == ARENA_PUBLICATION and metadata["closed_archive"] is False,
+                    "typed retained publication failure",
+                )
+                data["publication_failure"] = metadata
+                data["errors"].append(
+                    {
+                        "stage": "native_archive_publication",
+                        "type": "NativePublicationFailure",
+                        "message": metadata["report"]["stopped"],
+                        "secondary": metadata["report"]["pump"].get("publication_failures", []),
+                    }
+                )
+            except BaseException as error:
+                data["errors"].append(
+                    {"stage": "native_archive_failure_metadata", **error_fact(error)}
+                )
+        live = Path(spec["data_root"]) / "completed.jsonl"
+        if live.exists():
+            try:
+                c = document(experiment["config"])
+                cap = c["arena"].get("retained_outcome_bytes") or c["max_plies"] * 16384 + 16384
+                ref, _ = bound(live, c["games"] * (cap + 1))
+                data["files"].append(ref)
+                data["errors"].append(
+                    {
+                        "stage": "live_journal_not_retired",
+                        "type": "Refused",
+                        "message": "raw/partial facts retained; canonical publication not complete",
+                    }
+                )
+            except BaseException as error:
+                data["errors"].append({"stage": "live_journal_failure", **error_fact(error)})
+    if (
+        experiment["phase"] == "analysis"
+        and len(experiment["argv"]) > 3
+        and experiment["argv"][3] == "arena-analysis"
+    ):
+        try:
+            summary = json.loads(values["summary"])
+            require(
+                summary["schema"] == "quoridor.arena-comparison.summary.v1"
+                and summary["planned"] == 768
+                and len(summary["matchups"]) == 3
+                and all(t["counts"]["planned"] == 256 for t in summary["matchups"])
+                and summary["diagnostic_planned"] <= 288,
+                "full conditional saved-analysis census",
+            )
+            data["scope"] = (
+                "conditional/descriptive fixed analysis; native/model/default scientific scope unchanged"
+            )
+        except BaseException as error:
+            data["errors"].append({"stage": "arena_analysis", **error_fact(error)})
+    if experiment["phase"] == "sigma-cost-qualification":
+        try:
+            result = json.loads(values["measurement"])
+            plan = document(experiment["config"])
+            require(
+                result["schema"] == "quoridor-sigma-receipt-measurement-result-v1"
+                and result["complete"] is True
+                and result["all_workers_joined"] is True
+                and result["inflight_after_drain"] == 0
+                and result["stopped"] is None
+                and result["games_played"] == 0
+                and result["plan_sha256"] == experiment["config"]["sha256"]
+                and result["campaign_sha256"] == plan["campaign"]["sha256"]
+                and result["native"] == plan["native"]
+                and result["phase_id"] == plan["phase_id"]
+                and result["mode"] == plan["mode"]
+                and result["configuration_sha256"]
+                == [c["normalized_sha256"] for c in plan["configurations"]]
+                and result["logical_calls_attempted"]
+                == result["returned_terminal_replies"]
+                == result["backend_work"]["logical_rows"]
+                == result["backend_work"]["physical_rows"]
+                == 32
+                and result["backend_work"]["failed_rows"] == 0
+                and len(result["items"]) == len(plan["workload"]) == 16
+                and all(
+                    row["id"] == expected["id"]
+                    and row["configuration"] == expected["configuration"]
+                    and row["stage"] == expected["stage"]
+                    and row["parent"]["prefix"] == expected["prefix"]
+                    for row, expected in zip(result["items"], plan["workload"], strict=True)
+                ),
+                "current full32 cost requests/real native result/drain/order; missing means UNKNOWN",
+            )
+            data["scope"] = "one operational Sigma cost phase; no numerical/game/strength PASS"
+            data["cost_logical_requests"] = 32
+        except BaseException as error:
+            data["errors"].append({"stage": "sigma_cost_measurement", **error_fact(error)})
     if experiment["phase"] == "ordering-qualification":
         try:
             data["numerical_qualification"] = ordering_qualification_evidence(
@@ -2319,11 +3634,16 @@ def collect_data(spec, experiment):
             data["missing_local_games"] = list(range(local_count))
             data["planned_global_slots"] = [x["slot"] for x in planned]
             config = document(experiment["config"])
+            files = {
+                item["name"]: next(ref for ref in data["files"] if ref["path"] == item["path"])
+                for item in spec["data"]
+                if item["name"] in {"journal", "result", "native_manifest"}
+            }
+            report = arena_reference_report(
+                config, files, values, document(experiment["build_manifest"])
+            )
             records = []
-            raw = values["journal"]
-            for line in raw.split(b"\n")[:-1]:
-                require(len(line) <= 630784, "full per-game record cap")
-                row = json.loads(line)
+            for row in report["outcomes"]:
                 game = row["game"]
                 require(
                     type(game) is int
@@ -2353,7 +3673,6 @@ def collect_data(spec, experiment):
                 data["missing_local_games"] = sorted(
                     set(range(local_count)) - set(data["observed_local_games"])
                 )
-            require(not raw or raw.endswith(b"\n"), "partial journal tail")
             data["missing_local_games"] = sorted(
                 set(range(local_count)) - set(data["observed_local_games"])
             )
@@ -2361,7 +3680,6 @@ def collect_data(spec, experiment):
                 not data["missing_local_games"],
                 "missing planned games; retained UNKNOWN denominator",
             )
-            report = json.loads(values["result"])
             require(
                 report["planned"] == local_count
                 and report["run_id"] == config["run_id"]
@@ -2376,6 +3694,63 @@ def collect_data(spec, experiment):
             )
         except BaseException as error:
             data["errors"].append({"stage": "scientific_journal", **error_fact(error)})
+    if experiment["phase"] == "compare" and experiment["argv"][1] == "decisions":
+        try:
+            planned, config = arena_decision_plan_check(experiment, approved_plan(spec, experiment))
+            data["missing_local_games"] = list(range(len(planned)))
+            files = {
+                item["name"]: next(ref for ref in data["files"] if ref["path"] == item["path"])
+                for item in spec["data"]
+                if item["name"] in {"journal", "result", "native_manifest"}
+            }
+            report = arena_reference_report(
+                config, files, values, document(experiment["build_manifest"])
+            )
+            require(
+                report["schema"] == "quoridor-decisions-v1"
+                and report["planned"] == len(planned)
+                and report["run_id"] == config["run_id"]
+                and report["all_workers_joined"] is True
+                and report["stopped"] is None
+                and report["rows"] == 0
+                and report["dataset"] is None
+                and report["score"] is None
+                and len(report["outcomes"]) == len(planned),
+                "decision report/census/no game claim",
+            )
+            for row in report["outcomes"]:
+                game = row["game"]
+                require(
+                    type(game) is int
+                    and 0 <= game < len(planned)
+                    and game not in data["observed_local_games"],
+                    "decision unique local parent",
+                )
+                require(
+                    row["family"] == f"{config['run_id']}-family-{game:06}"
+                    and row["winner"] is None
+                    and row["moves"] == config["arena"]["book"]["openings"][game]["prefix"]
+                    and row["status"] in {"decision", "unknown"}
+                    and len(row["observations"]) <= 1
+                    and (
+                        row["status"] != "decision"
+                        or len(row["observations"]) == 1
+                        and row["observations"][0]["accepted"] is True
+                    ),
+                    "one proposal/no branch/UNKNOWN",
+                )
+                arena_observation(config, row)
+                data["observed_local_games"].append(game)
+                data["missing_local_games"] = sorted(
+                    set(range(len(planned))) - set(data["observed_local_games"])
+                )
+            require(not data["missing_local_games"], "missing planned decisions remain UNKNOWN")
+            data["planned_global_slots"] = [x["slot"] for x in planned]
+            data["scope"] = (
+                "single common-parent decision; no game, teacher truth or strength outcome"
+            )
+        except BaseException as error:
+            data["errors"].append({"stage": "decision_metadata", **error_fact(error)})
     if experiment["phase"] in {"corpus", "fit", "software-qualification"}:
         try:
             if experiment["phase"] == "software-qualification":
@@ -3415,6 +4790,9 @@ def main():
         p = commands.add_parser(name)
         p.add_argument("--intent", type=Path, required=True)
         p.add_argument("--sha256", required=True)
+    p = commands.add_parser("arena-analysis")
+    p.add_argument("--experiment", type=Path, required=True)
+    p.add_argument("--experiment-sha256", required=True)
     p = commands.add_parser("finalize")
     p.add_argument("--operation", type=Path, required=True)
     p.add_argument("--job-result", type=Path, required=True)
@@ -3422,6 +4800,9 @@ def main():
     p.add_argument("--origin-record", type=Path)
     p.add_argument("--origin-sha256")
     args = parser.parse_args()
+    if args.command == "arena-analysis":
+        arena_analysis_child(args.experiment, args.experiment_sha256)
+        return 0
     if args.command == "finalize":
         ref, _ = bound(args.job_result)
         require(ref["sha256"] == args.sha256, "actual job result binding")

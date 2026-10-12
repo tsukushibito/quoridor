@@ -124,38 +124,100 @@ pub(crate) fn backend_binding(
         "library_sha256":crate::arena_manifest::file_sha256(library)?}),
     )
 }
-/// Only the opponent and output identity may differ. No measured-cost-dependent
-/// change to Sigma, its book/seed, limits, threads, resources or clock is allowed.
+/// Cost subject of the SAME maintained timed adapter. The bound arena/decision Experiment
+/// owns complete scientific configurations; no accepted science config is rewritten here.
+/// These explicit differences are outside play_sigma_receipt: campaign identity/count,
+/// opponent, parent book/colour, durable output ceilings and whether the caller
+/// advances after this one proposal. Publication/output accounting occurs outside
+/// the timed Sigma adapter; each full target ceiling stays owned by its Experiment.
+/// Every remaining typed Config field, current full native image and real backend stays bound.
 fn sigma_body(config: &Config) -> Result<serde_json::Value> {
-    if config.ruleset != quoridor_core::research::Ruleset::Standard2pThreefold
+    let arena = config
+        .arena
+        .as_ref()
+        .ok_or("qualified arena/decision caller required")?;
+    let indices = config
+        .engines
+        .iter()
+        .enumerate()
+        .filter(|(_, e)| e.kind == "mcts")
+        .map(|(i, _)| i)
+        .collect::<Vec<_>>();
+    if indices.len() != 1
+        || config.ruleset != quoridor_core::research::Ruleset::Standard2pThreefold
         || config.max_plies != 200
-        || config.engines.len() != 2
-        || config.engines[0].kind != "mcts"
+        || config.engines.len() != if arena.decision_only { 1 } else { 2 }
         || config.engines.iter().any(|e| e.time_ms != Some(100))
         || config.simulations != 64
         || config.temperature != 1.0
         || config.seed != 32710001
+        || config.mcts_max_nodes != 200000
+        || config.mcts_max_bytes != 268435456
         || config.workers != 1
         || config.active_games != 1
         || config.max_batch != 1
-        || config.inference.as_ref().is_none_or(|i| i.backend != "ort")
         || config
-            .arena
+            .inference
             .as_ref()
-            .is_none_or(|a| a.return_reserve_ms != 5)
+            .is_none_or(|i| i.backend != "ort" || i.device != 0 || i.cuda_graph)
+        || config
+            .inference_cpu_core
+            .is_none_or(|core| config.cpu_cores.as_slice() != [core])
+        || arena.return_reserve_ms != 5
+        || arena.comparison != crate::arena::Comparison::WholeWallTime
+        || arena.clock_policy != crate::arena::ClockPolicy::StrictUnknown
+        || !arena.disable_continuation_static_ordering
         || config.wall_seconds.is_some()
         || config.deadline_unix_ms != 0
+        || config.cycle.is_some()
+        || config.train_games.is_some()
+        || config.validation_games.is_some()
     {
-        return Err("explicit frozen serial Sigma100ms/5ms/K64/tau1 scope required".into());
+        return Err(
+            "explicit frozen serial CPU Sigma100ms/5ms/K64/tau1/tree/resources scope required"
+                .into(),
+        );
+    }
+    let index = indices[0];
+    if arena.evaluator_sha256.len() != config.engines.len()
+        || arena.search_source_sha256.len() != config.engines.len()
+        || arena.evaluator_sha256[index] != config.inference.as_ref().unwrap().model_sha
+    {
+        return Err("Sigma evaluator/source vector correspondence required".into());
     }
     let mut body = serde_json::to_value(config)?;
     let object = body.as_object_mut().ok_or("configuration object")?;
-    object.remove("run_id");
-    object.remove("output");
-    body["engines"][1] = serde_json::Value::Null;
-    body["arena"]["evaluator_sha256"][1] = serde_json::Value::Null;
-    body["arena"]["search_source_sha256"][1] = serde_json::Value::Null;
+    for field in ["run_id", "output", "games", "max_output_bytes"] {
+        object.remove(field);
+    }
+    body["engines"] = serde_json::to_value(vec![config.engines[index].clone()])?;
+    let a = body["arena"].as_object_mut().ok_or("arena object")?;
+    a.remove("book");
+    a.remove("first_candidate_colors");
+    a.remove("retained_outcome_bytes");
+    a.insert("decision_only".into(), false.into());
+    a.insert(
+        "evaluator_sha256".into(),
+        serde_json::json!([arena.evaluator_sha256[index]]),
+    );
+    a.insert(
+        "search_source_sha256".into(),
+        serde_json::json!([arena.search_source_sha256[index]]),
+    );
     Ok(body)
+}
+/// A fresh window is a pre-observation launch fact, never minted by selection or refreshed.
+fn qualification_window(workload: &serde_json::Value, native: &NativeIdentity) -> Result<()> {
+    let launched = workload["qualification_started_unix_ms"]
+        .as_u64()
+        .filter(|t| *t > 0)
+        .ok_or("actual admitted qualification launch required")?;
+    if launched > unix_ms()
+        || launched.checked_add(24 * 60 * 60 * 1000) != Some(native.valid_until_unix_ms)
+    {
+        return Err("one original24hour qualification window required".into());
+    }
+    Ok(())
 }
 pub(crate) fn configs(records: &[BoundConfig]) -> Result<Vec<Config>> {
     if records.len() != 2 || records[0].normalized_sha256 == records[1].normalized_sha256 {
@@ -225,11 +287,10 @@ impl QualificationPacket {
         self.native.check()?;
         let admitted = configs(&self.configurations)?;
         let digest = crate::arena::json_digest(config)?;
-        if !admitted
-            .iter()
-            .any(|c| crate::arena::json_digest(c).ok().as_ref() == Some(&digest))
-        {
-            return Err("configuration absent from fixed qualification map".into());
+        // The two measured configs remain exact origin records. Return an admission bound
+        // to this FULL current target config only after the explicit cost-subject comparison.
+        if sigma_body(config)? != sigma_body(&admitted[0])? {
+            return Err("current approved caller changes the measured Sigma cost subject".into());
         }
         let evidence: CostEvidence = self.evidence.read()?;
         evidence.native.check()?;
@@ -261,6 +322,7 @@ impl QualificationPacket {
             return Err("incomplete or inconsistent qualification evidence".into());
         }
         let workload: serde_json::Value = evidence.workload.read()?;
+        qualification_window(&workload, &self.native)?;
         if workload["schema"] != "quoridor-sigma-cost-workload-v1"
             || workload["native"] != serde_json::to_value(&self.native)?
             || workload["configurations"] != serde_json::to_value(&self.configurations)?
@@ -500,6 +562,7 @@ impl MeasurementPlan {
         self.native.check()?;
         let configs = configs(&self.configurations)?;
         let campaign: serde_json::Value = self.campaign.read()?;
+        qualification_window(&campaign, &self.native)?;
         if campaign["schema"] != "quoridor-sigma-cost-workload-v1"
             || campaign["maximum_total_logical_backend_rows_or_requests"] != 64
             || campaign["native"] != serde_json::to_value(&self.native)?
@@ -620,24 +683,114 @@ impl MeasurementPlan {
 pub fn load_qualified_entry(
     path: &Path,
     digest: &str,
-    config_path: &Path,
+    config_ref: &crate::research_manifest::FileRef,
 ) -> Result<(Config, SigmaCostQualification)> {
     let packet: QualificationPacket = BoundControl {
         path: path.into(),
         sha256: digest.into(),
     }
     .read()?;
-    if !config_path.is_absolute() || config_path.canonicalize()? != config_path {
-        return Err("qualified config requires its exact canonical path".into());
-    }
-    let descriptor = packet
-        .configurations
-        .iter()
-        .find(|c| c.file.path == config_path)
-        .ok_or("qualified configuration path absent from frozen map")?;
-    let config = descriptor.read()?;
+    // Only the bound arena/decision caller supplies this exact approved FileRef.
+    let config: Config = config_ref.read()?;
+    config
+        .validate()
+        .map_err(|e| format!("current config:{e}"))?;
     let qualification = packet.select(&config)?;
     Ok((config, qualification))
+}
+/// Normal Root-approved finite cost qualification; model work is explicit, never software/model0.
+pub fn measure_bound(bound: &BoundControl) -> Result<serde_json::Value> {
+    let (e, _) = crate::research_manifest::load(bound, "sigma-cost-qualification")?;
+    let approved = crate::research_manifest::approved_arena_plan(bound, &e)?;
+    let plan: MeasurementPlan = e.config.read()?;
+    let campaign: serde_json::Value = plan.campaign.read()?;
+    let study: crate::arena::ArenaPlan = approved.read()?;
+    let cases = study
+        .sigma_cost_cases
+        .as_ref()
+        .ok_or("approved frozen cost cases required")?;
+    let definition: serde_json::Value = cases.read()?;
+    if e.planned_slots != 64
+        || e.models.len() != 0
+        || e.schedule != *cases
+        || campaign["approved_plan"] != serde_json::to_value(&approved)?
+        || campaign["phases"] != definition["phases"]
+        || campaign["configurations"] != definition["configurations"]
+        || e.batch != Some(if plan.mode == "untimed" { 0 } else { 1 })
+        || !e
+            .inputs
+            .iter()
+            .any(|r| r.path == plan.campaign.path && r.sha256 == plan.campaign.sha256)
+    {
+        return Err("current approved qualification plan/cases/phase identity".into());
+    }
+    for config in &plan.configurations {
+        if !e
+            .inputs
+            .iter()
+            .any(|r| r.path == config.file.path && r.sha256 == config.file.sha256)
+        {
+            return Err("measured config outside normal lifetime inputs".into());
+        }
+    }
+    for prior in &plan.prior_results {
+        if !e
+            .inputs
+            .iter()
+            .any(|r| r.path == prior.path && r.sha256 == prior.sha256)
+        {
+            return Err("prior measurement outside current lifetime inputs".into());
+        }
+    }
+    let configs = configs(&plan.configurations)?;
+    for (index, c) in configs.iter().enumerate() {
+        let matchup = study
+            .matchups
+            .iter()
+            .find(|m| m.id == index)
+            .ok_or("selected Sigma matchup required")?;
+        if serde_json::to_value(&c.engines)? != serde_json::to_value(&matchup.engines)?
+            || serde_json::to_value(&c.inference)? != serde_json::to_value(&matchup.inference)?
+            || c.arena.as_ref().ok_or("measured arena")?.evaluator_sha256
+                != matchup.evaluator_sha256
+        {
+            return Err("cost configurations differ from selected Sigma-D/Sigma-BEST43".into());
+        }
+        let inference = c
+            .inference
+            .as_ref()
+            .ok_or("actual Sigma inference required")?;
+        if !e
+            .inputs
+            .iter()
+            .any(|r| r.path == inference.model && r.sha256 == inference.model_sha)
+            || !e
+                .dynamic_libraries
+                .iter()
+                .any(|r| Some(&r.file.path) == inference.library.as_ref())
+        {
+            return Err("actual Sigma model/library outside current qualification inputs".into());
+        }
+    }
+    let packet = if plan.mode == "qualified-timed" {
+        let reference = e
+            .numerical_qualification
+            .as_ref()
+            .ok_or("timed phase requires exact validation packet")?;
+        if !e.inputs.contains(reference) {
+            return Err("validation packet outside current inputs".into());
+        }
+        Some(BoundControl {
+            path: reference.path.clone(),
+            sha256: reference.sha256.clone(),
+        })
+    } else {
+        if e.numerical_qualification.is_some() {
+            return Err("untimed refuses a validation packet".into());
+        }
+        None
+    };
+    crate::runtime::measure_sigma_cost(plan, e.config.sha256, packet)
 }
 /// Resolve new-entry evidence at the public boundary, before resource, output
 /// or backend ports. The resolved vector is never an external entry argument.
@@ -908,5 +1061,99 @@ mod tests {
         );
         std::fs::remove_file(path).unwrap();
         std::fs::remove_dir(root).unwrap();
+    }
+}
+
+#[cfg(test)]
+mod three_engine_374_cost_tests {
+    use super::*;
+    fn synthetic() -> Config {
+        // Pure serde/cost-subject fields; no native identity/backend/geometry/model calls.
+        serde_json::from_value(serde_json::json!({
+            "ruleset":"standard_2p_threefold", "run_id":"synthetic-only", "output":"/unexecuted/cost", "games":2,
+            "workers":1,"active_games":1,"max_batch":1,"max_plies":200,"seed":32710001,"simulations":64,"temperature":1.0,
+            "cpu_cores":[3],"inference_cpu_core":3,"wall_seconds":null,"deadline_unix_ms":0,
+            "mcts_max_nodes":200000,"mcts_max_bytes":268435456,
+            "engines":[{"kind":"mcts","time_ms":100},{"kind":"distance","time_ms":100}],
+            "inference":{"backend":"ort","model":"/not-loaded/onnx","model_sha":"a".repeat(64),"library":"/not-loaded/library","device":0,"cuda_graph":false},
+            "arena":{"comparison":"whole_wall_time","clock_policy":"strict_unknown","return_reserve_ms":5,"disable_continuation_static_ordering":true,
+            "tt_entries":4096,"bootstrap_seed":1,"bootstrap_resamples":1,"evaluator_sha256":["a".repeat(64),"b".repeat(64)],"search_source_sha256":["c".repeat(64),"d".repeat(64)],
+            "first_candidate_colors":[0],"retained_outcome_bytes":32768,"book":{"id":"synthetic","usage":"main","frozen_before_candidate_results":true,"independence":"synthetic","openings":[]}}
+        })).unwrap()
+    }
+    #[test]
+    fn cost_subject_covers_colour_and_one_parent_but_preserves_timed_resource_identity() {
+        let base = synthetic();
+        let subject = sigma_body(&base).unwrap();
+        let mut swap = base.clone();
+        swap.engines.swap(0, 1);
+        let a = swap.arena.as_mut().unwrap();
+        a.evaluator_sha256.swap(0, 1);
+        a.search_source_sha256.swap(0, 1);
+        a.first_candidate_colors = vec![1];
+        swap.run_id = "other-approved-science".into();
+        swap.output = "/not-run/other".into();
+        swap.games = 8;
+        assert_eq!(subject, sigma_body(&swap).unwrap());
+        let mut parent = base.clone();
+        parent.engines.truncate(1);
+        parent.max_output_bytes = 65536;
+        let a = parent.arena.as_mut().unwrap();
+        a.decision_only = true;
+        a.retained_outcome_bytes = Some(16384);
+        a.evaluator_sha256.truncate(1);
+        a.search_source_sha256.truncate(1);
+        assert_eq!(subject, sigma_body(&parent).unwrap());
+        for change in 0..8 {
+            let mut bad = base.clone();
+            match change {
+                0 => bad.simulations = 65,
+                1 => bad.arena.as_mut().unwrap().return_reserve_ms = 4,
+                2 => bad.seed += 1,
+                3 => bad.inference.as_mut().unwrap().library = Some("/other/library".into()),
+                4 => bad.mcts_max_bytes += 1,
+                5 => bad.max_memory_bytes = Some(1),
+                6 => bad.arena.as_mut().unwrap().search_source_sha256[0] = "e".repeat(64),
+                _ => bad.engines[0].time_ms = Some(101),
+            }
+            assert!(sigma_body(&bad).is_err() || sigma_body(&bad).unwrap() != subject);
+        }
+        parent.engines[0].kind = "distance".into();
+        assert!(sigma_body(&parent).is_err());
+    }
+    #[test]
+    fn window_is_one_preobserved_launch_and_cannot_be_reset_or_minted_by_selection() {
+        let launched = unix_ms().saturating_sub(1000);
+        let mut native = NativeIdentity {
+            compiled_sources_sha256: "a".repeat(64),
+            executable_sha256: "b".repeat(64),
+            backend_sha256: "c".repeat(64),
+            valid_until_unix_ms: launched + 86400000,
+        };
+        let workload = serde_json::json!({"qualification_started_unix_ms":launched});
+        assert!(qualification_window(&workload, &native).is_ok());
+        native.valid_until_unix_ms += 1;
+        assert!(qualification_window(&workload, &native).is_err());
+        assert!(qualification_window(&serde_json::json!({}), &native).is_err());
+        assert!(
+            qualification_window(
+                &serde_json::json!({"qualification_started_unix_ms":unix_ms()+86400000}),
+                &native
+            )
+            .is_err()
+        );
+        let empty = QualificationPacket {
+            schema: "quoridor-sigma-cost-qualification-v1".into(),
+            scope: "timed-arena".into(),
+            configurations: vec![],
+            native,
+            evidence: BoundControl {
+                path: "/not-opened/invalid".into(),
+                sha256: "d".repeat(64),
+            },
+            whole_operation_upper_ns: 0,
+            decision_communication_upper_ns: 0,
+        };
+        assert!(empty.select(&synthetic()).is_err());
     }
 }

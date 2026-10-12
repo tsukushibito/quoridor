@@ -1723,7 +1723,11 @@ fn planned(config: &Config) -> Result<Vec<Planned>> {
         let family = format!("{}-family-{family_id:06}", config.run_id);
         out.push(Planned {
             id,
-            candidate_color: crate::value_search_strength::candidate_color(config, id),
+            candidate_color: if config.arena.as_ref().is_some_and(|a| a.decision_only) {
+                0 // Diagnostic engine index, never a playing colour.
+            } else {
+                crate::value_search_strength::candidate_color(config, id)
+            },
             opening: prefix,
             family,
             split,
@@ -1875,6 +1879,42 @@ fn choose(
     }
     fallback
 }
+fn position_traits(game: &Game, config: &Config) -> serde_json::Value {
+    let start = Instant::now();
+    let p = game.context.position();
+    let distances = [p.wall_distance(0), p.wall_distance(1)];
+    let stock: u16 = p.walls_remaining.iter().map(|&n| u16::from(n)).sum();
+    let difference = distances[0].zip(distances[1]).map(|(a, b)| a.abs_diff(b));
+    let cell_distance = |a: u8, b: u8| (a / 9).abs_diff(b / 9) + (a % 9).abs_diff(b % 9);
+    let pawn_mask = p.legal_pawn_mask();
+    let legal_jump = pawn_mask.iter().enumerate().any(|(cell, &legal)| {
+        legal != 0 && cell_distance(p.pawns[p.turn as usize], cell as u8) > 1
+    });
+    let local = game
+        .context
+        .total_ply()
+        .saturating_sub(game.planned.opening.len() as u16);
+    let selection_local = config
+        .arena
+        .as_ref()
+        .filter(|a| a.decision_only)
+        .and_then(|a| a.book.openings.get(game.planned.id))
+        .and_then(|o| o.reference.as_ref())
+        .and_then(|r| r.settings["selection_local_ply"].as_u64());
+    let phase_ply = selection_local.unwrap_or(u64::from(local));
+    serde_json::json!({
+        "wall_goal_distances":distances,"stock_sum":stock,
+        "stock_sum_stratum":match stock {0=>"0",1..=5=>"1..5",6..=15=>"6..15",_=>"16..20"},
+        "distance_difference_stratum":difference.map(|n|match n {0..=2=>"0..2",3..=5=>"3..5",_=>">=6"}),
+        "either_distance_le_2":distances[0].zip(distances[1]).map(|(a,b)|a<=2 || b<=2),
+        "pawn_contact":cell_distance(p.pawns[0],p.pawns[1])==1,"legal_jump_available":legal_jump,
+        "current_repetition_count":game.context.count(p.into()),
+        "any_recorded_repetition":game.context.history_counts().iter().any(|(_,n)|*n>=2),
+        "local_ply":phase_ply,"phase_stratum":match phase_ply {0..=19=>"0..19",20..=59=>"20..59",_=>">=60"},
+        "classification_seconds":start.elapsed().as_secs_f64(),
+        "scope":"maintained rules geometry outside thinking; no model, prediction or counterfactual"
+    })
+}
 fn play_completed(
     game: &mut Game,
     action: u16,
@@ -1952,6 +1992,11 @@ fn play_completed(
             }
             return Err(format!("move_rejected:{f:?}").into());
         }
+    }
+    if config.arena.as_ref().is_some_and(|a| a.decision_only) {
+        // The exact same receipt/legality/drain admission has finished. The
+        // proposal is evidence only: no branch state, move or teacher row.
+        return Ok(());
     }
     game.context = next;
     game.prefix.push(action);
@@ -2260,6 +2305,9 @@ fn play_sigma_receipt(
         })
         .into();
     counters["selected_child_q_perspective"] = "root_side_to_move".into();
+    // Already returned by this same call; no additional inference or search.
+    counters["root_nn"] = call.root_nn.into();
+    counters["root_mean"] = selected.map(|snapshot| snapshot.root_mean).into();
     game.observations.push(crate::arena_clock::MoveObservation {
         ply: game.context.total_ply(),
         side: game.context.position().turn,
@@ -2432,6 +2480,13 @@ fn worker(
         while index < games.len() {
             let g = &mut games[index];
             if g.context.terminal_value().is_some() {
+                if config.arena.as_ref().is_some_and(|a| a.decision_only) {
+                    let g = games.swap_remove(index);
+                    let (o, r) = finish(g, "unknown", Some("terminal_diagnostic_parent".into()));
+                    let _ = events.send(Event::Finished(o, r));
+                    progressed = true;
+                    continue;
+                }
                 let g = games.swap_remove(index);
                 let status = if g.context.terminal_value() == Some(0.0) {
                     "draw"
@@ -2466,6 +2521,13 @@ fn worker(
                 crate::arena::engine_index(turn as u8, g.planned.candidate_color)
             };
             let e = &config.engines[engine_index];
+            // Geometry strata are declared independently of this engine's
+            // output and measured outside the move clock, including UNKNOWNs.
+            let parent_traits = config
+                .arena
+                .as_ref()
+                .filter(|a| a.disable_continuation_static_ordering)
+                .map(|_| position_traits(g, &config));
             let mut failure = None;
             if e.kind == "mcts" && e.time_ms.is_some() && !g.record_teacher {
                 if let Err(error) = play_timed_sigma(
@@ -2616,7 +2678,19 @@ fn worker(
                     &limits,
                     &cancel,
                     caller_start,
-                    alphabeta::SearchSession::new,
+                    |evaluator, namespace, capacity| {
+                        if config
+                            .arena
+                            .as_ref()
+                            .is_some_and(|a| a.disable_continuation_static_ordering)
+                        {
+                            alphabeta::SearchSession::new_without_continuation_or_static(
+                                evaluator, namespace, capacity,
+                            )
+                        } else {
+                            alphabeta::SearchSession::new(evaluator, namespace, capacity)
+                        }
+                    },
                     observed.then_some(&mut completion),
                     observed
                         .then_some(e.time_ms.map(Duration::from_millis))
@@ -2770,6 +2844,9 @@ fn worker(
                 }
                 progressed = true;
             }
+            if let (Some(observation), Some(traits)) = (g.observations.last_mut(), parent_traits) {
+                observation.counters["parent_traits"] = traits;
+            }
             if let Some(reason) = failure {
                 if g.failure.is_none() {
                     g.failure = Some(crate::arena_clock::Failure::EngineError);
@@ -2781,6 +2858,12 @@ fn worker(
                     "unknown"
                 };
                 let (o, r) = finish(g, status, Some(reason));
+                let _ = events.send(Event::Finished(o, r));
+            } else if config.arena.as_ref().is_some_and(|a| a.decision_only)
+                && !g.observations.is_empty()
+            {
+                let g = games.swap_remove(index);
+                let (o, r) = finish(g, "decision", None);
                 let _ = events.send(Event::Finished(o, r));
             } else {
                 index += 1;
@@ -2918,7 +3001,7 @@ fn serial_shared_inference_allowed(config: &Config, mode: &str, supplied_backend
     // Only the maintained CPU ORT factory path can take this exception. An
     // arbitrary held backend retains generic admission, regardless of labels.
     !supplied_backend
-        && mode == "arena"
+        && matches!(mode, "arena" | "decisions")
         && config
             .arena
             .as_ref()
@@ -2956,11 +3039,17 @@ fn run_inner(
     if mode == "arena" && (config.engines.len() != 2 || !config.games.is_multiple_of(2)) {
         return Err("arena requires two engines and paired even games".into());
     }
-    if config.arena.is_some() && mode != "arena" {
-        return Err("arena contract belongs to the arena command".into());
+    let decision_only = config.arena.as_ref().is_some_and(|a| a.decision_only);
+    if decision_only != (mode == "decisions")
+        || (config.arena.is_some() && !matches!(mode, "arena" | "decisions"))
+    {
+        return Err("arena/decision contract belongs to its bound command".into());
+    }
+    if decision_only && config.engines.len() != 1 {
+        return Err("one engine proposal per diagnostic parent".into());
     }
     let plans = planned(config)?;
-    let arena_slots = if mode == "arena" {
+    let arena_slots = if matches!(mode, "arena" | "decisions") {
         let slots = crate::arena_manifest::slots(
             config,
             &plans
@@ -3021,7 +3110,7 @@ fn run_inner(
     } else {
         serde_json::to_writer_pretty(OpenOptions::new().create_new(true).write(true).open(config.output.join("planned.json"))?,&plans.iter().map(|p|serde_json::json!({"game":p.id,"family":p.family,"split":p.split,"opening":p.opening})).collect::<Vec<_>>())?;
     }
-    let mut dataset_writer = if mode == "arena" {
+    let mut dataset_writer = if matches!(mode, "arena" | "decisions") {
         None
     } else {
         Some(quoridor_data::DatasetWriter::new(
@@ -3091,7 +3180,7 @@ fn run_inner(
             )
         })
         .transpose()?;
-    if mode == "arena" {
+    if matches!(mode, "arena" | "decisions") {
         let mut manifest: serde_json::Value =
             serde_json::from_slice(&fs::read(config.output.join("manifest-start.json"))?)?;
         // Runtime owns the actual caller clock. Replace historical descriptions
@@ -3322,6 +3411,7 @@ fn run_inner(
     pump.finalization_seconds = finalize_start.elapsed().as_secs_f64();
     let arena_summary = arena_slots
         .as_ref()
+        .filter(|_| mode == "arena")
         .map(|slots| {
             let a = config.arena.as_ref();
             crate::arena_statistics::summarize(
@@ -3336,6 +3426,8 @@ fn run_inner(
     let report = RunReport {
         schema: if mode == "arena" {
             crate::arena::SCHEMA
+        } else if mode == "decisions" {
+            "quoridor-decisions-v1"
         } else {
             "quoridor-run-v1"
         }
@@ -3359,8 +3451,8 @@ fn run_inner(
         pump,
         arena_summary,
     };
-    if arena_slots.is_some() {
-        crate::arena_manifest::write(config, "result.json", &report)?;
+    let report = if arena_slots.is_some() {
+        publish_arena(config, report)?
     } else {
         serde_json::to_writer_pretty(
             OpenOptions::new()
@@ -3369,10 +3461,8 @@ fn run_inner(
                 .open(config.output.join("result.json"))?,
             &report,
         )?;
-    }
-    if arena_slots.is_some() {
-        crate::arena_manifest::finish(config, &report)?;
-    }
+        report
+    };
     let bytes = crate::resources::directory_bytes(&config.output)?;
     if bytes > config.max_output_bytes {
         return Err(format!(
@@ -3498,7 +3588,7 @@ impl CompletionPublication<'_> {
         if let Some(reason) = self.stopped.as_deref() {
             attach_primary_failure(&mut o, reason);
         }
-        if self.mode == "arena"
+        if matches!(self.mode, "arena" | "decisions")
             && let Err(error) = crate::arena_manifest::journal(self.config, &o)
         {
             record_publication_failure(
@@ -3552,7 +3642,7 @@ impl CompletionPublication<'_> {
     }
 }
 
-fn attach_primary_failure(outcome: &mut Outcome, reason: &str) {
+pub(crate) fn attach_primary_failure(outcome: &mut Outcome, reason: &str) {
     if matches!(
         outcome.failure,
         Some(crate::arena_clock::Failure::Cancelled | crate::arena_clock::Failure::NotStarted)
@@ -3627,6 +3717,86 @@ pub fn run_with_sigma_cost_qualification(
     qualification: SigmaCostQualification,
 ) -> Result<RunReport> {
     run_owned(config, mode, backend, Some(qualification))
+}
+/// One ordinary arena error funnel, distinct from successful archive publication.
+/// Own the original primary object and report even if every evidence write failed.
+#[derive(Debug)]
+struct ArenaPublicationFailure {
+    primary: Box<dyn std::error::Error + Send + Sync>,
+    secondary: Vec<(&'static str, Box<dyn std::error::Error + Send + Sync>)>,
+    report: RunReport,
+    failed_evidence_persisted: bool,
+}
+impl std::fmt::Display for ArenaPublicationFailure {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.primary)?;
+        for (stage, error) in &self.secondary {
+            write!(f, "; {stage}:{error}")?;
+        }
+        if !self.failed_evidence_persisted {
+            // The normal caller's bounded full capture retains this fallback. Capture
+            // failure remains FAILED/UNKNOWN; this is not an archive/cleanup certificate.
+            match serde_json::to_string(&self.report) {
+                Ok(report) => write!(f, "; FAILED available_report:{report}"),
+                Err(error) => write!(
+                    f,
+                    "; available_report_serialization:{error}; original report remains owned by this error"
+                ),
+            }?;
+        }
+        Ok(())
+    }
+}
+impl std::error::Error for ArenaPublicationFailure {
+    fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
+        Some(self.primary.as_ref())
+    }
+}
+fn save_arena_failure(
+    config: &Config,
+    mut report: RunReport,
+    primary: Box<dyn std::error::Error + Send + Sync>,
+    mut secondary: Vec<(&'static str, Box<dyn std::error::Error + Send + Sync>)>,
+) -> Box<dyn std::error::Error + Send + Sync> {
+    let saved = crate::arena_manifest::save_failure(config, &report);
+    let failed_evidence_persisted = saved.is_ok();
+    if let Err(error) = saved {
+        record_publication_failure(
+            &mut report.pump,
+            &mut report.stopped,
+            None,
+            format!("failure_publication:{error}"),
+        );
+        secondary.push(("failure_publication", error));
+    }
+    Box::new(ArenaPublicationFailure {
+        primary,
+        secondary,
+        report,
+        failed_evidence_persisted,
+    })
+}
+fn publish_arena(config: &Config, mut report: RunReport) -> Result<RunReport> {
+    match crate::arena_manifest::finish(config, &report) {
+        Ok(()) => Ok(report),
+        Err(archive) => {
+            let known = report.stopped.clone();
+            record_publication_failure(
+                &mut report.pump,
+                &mut report.stopped,
+                None,
+                format!("archive_finalization:{archive}"),
+            );
+            let (primary, secondary) = match known {
+                Some(reason) => (
+                    Box::<dyn std::error::Error + Send + Sync>::from(reason),
+                    vec![("archive_finalization", archive)],
+                ),
+                None => (archive, vec![]),
+            };
+            Err(save_arena_failure(config, report, primary, secondary))
+        }
+    }
 }
 #[derive(Debug)]
 struct MeasurementPublicationFailure {
@@ -3897,9 +4067,18 @@ fn run_owned(
         return Err("sigma_cost_qualification_static_binding_invalid".into());
     }
     let mut output_owned = false;
-    let result = run_inner(config, mode, backend, &mut output_owned, qualification);
-    if let Err(error) = &result
-        && failure_publication_owned(output_owned, &config.output)
+    let error = match run_inner(config, mode, backend, &mut output_owned, qualification) {
+        Ok(report) => return Ok(report),
+        Err(error) => error,
+    };
+    // A finalized arena failure already owns its original report and every returned
+    // publication error. Never relabel it initialization or attempt another write.
+    if error.is::<ArenaPublicationFailure>() {
+        return Err(error);
+    }
+    if failure_publication_owned(output_owned, &config.output)
+        && !config.output.join("completed.jsonl").exists()
+        && !config.output.join("completed.jsonl.gz").exists()
     {
         let plans = planned(config).unwrap_or_default();
         let outcomes = plans
@@ -3931,6 +4110,8 @@ fn run_owned(
         let report = RunReport {
             schema: if mode == "arena" {
                 crate::arena::SCHEMA
+            } else if mode == "decisions" {
+                "quoridor-decisions-v1"
             } else {
                 "quoridor-run-v1"
             }
@@ -3954,18 +4135,18 @@ fn run_owned(
             pump: PumpProfile::default(),
             arena_summary,
         };
-        if let Ok(file) = OpenOptions::new()
+        if matches!(mode, "arena" | "decisions") {
+            // No claim of a closed archive or joined engine workers from an initialization error.
+            return Err(save_arena_failure(config, report, error, vec![]));
+        } else if let Ok(file) = OpenOptions::new()
             .create_new(true)
             .write(true)
             .open(config.output.join("result.json"))
         {
             let _ = serde_json::to_writer_pretty(file, &report);
         }
-        if mode == "arena" && config.output.join("manifest-start.json").exists() {
-            let _ = crate::arena_manifest::finish(config, &report);
-        }
     }
-    result
+    Err(error)
 }
 
 /// Fixed-work search measurements, distinct from generation throughput.
@@ -5518,5 +5699,216 @@ mod research_threefold_runtime_tests {
         record_completion(&mut pump, &o, 100, start);
         assert_eq!(pump.completions.len(), 25);
         assert_eq!(pump.first16_complete_rows, first_rows);
+    }
+}
+
+#[cfg(test)]
+mod three_engine_374_failure_tests {
+    use super::*;
+    use std::sync::atomic::{AtomicU64, Ordering};
+    static SERIAL: AtomicU64 = AtomicU64::new(0);
+    fn fixture() -> (Config, RunReport) {
+        // Owning file/publication ports only. No evaluator/model/geometry/Search/backend.
+        let mut config: Config =
+            serde_json::from_str(include_str!("../../../configs/arena/smoke.json")).unwrap();
+        config.games = 1;
+        config.max_output_bytes = 16 * 1024 * 1024;
+        config.output = std::env::temp_dir().join(format!(
+            "374-failure-{}-{}",
+            std::process::id(),
+            SERIAL.fetch_add(1, Ordering::Relaxed)
+        ));
+        fs::create_dir(&config.output).unwrap();
+        let observation = crate::arena_clock::MoveObservation {
+            ply: 1,
+            side: 0,
+            engine_index: 0,
+            action: Some(13),
+            accepted: false,
+            failure: Some(crate::arena_clock::Failure::EngineError),
+            caller_started_ns: 11,
+            deadline_ns: Some(100000011),
+            returned_ns: 12345,
+            admission_checked_ns: 12346,
+            accepted_ns: None,
+            caller_seconds: 0.000012,
+            thinking_seconds: Some(0.000011),
+            last_completed_iteration_ns: Some(12300),
+            completed_iteration_counters: Some(json!({"distinctive_snapshot":7654321})),
+            engine_error: Some("original move error E".into()),
+            stop: Some("cancelled".into()),
+            completed_depth: Some(4),
+            value_stm: Some(0.25),
+            pv: vec![13, 67],
+            counters: json!({"authority_receipt_ns":12345,"drain_finished_ns":12345,"distinctive_counter":1234567}),
+        };
+        let outcome = Outcome {
+            game: 0,
+            family: "distinctive-started-family".into(),
+            candidate_color: 1,
+            status: "unknown".into(),
+            winner: None,
+            plies: 2,
+            reason: Some("original per-game E".into()),
+            nn_calls: 0,
+            moves: vec![13, 67],
+            persistent_tt: vec![],
+            advance_calls: 1,
+            terminal_no_nn: 0,
+            allocated_nodes_peak: 7,
+            started: true,
+            failure: Some(crate::arena_clock::Failure::EngineError),
+            observations: vec![observation],
+        };
+        let report = RunReport {
+            schema: crate::arena::SCHEMA.into(),
+            run_id: config.run_id.clone(),
+            planned: 1,
+            outcomes: vec![outcome],
+            rows: 0,
+            eligible_rows: 0,
+            nn_calls: 0,
+            actual_batches: BTreeMap::new(),
+            wall_seconds: 0.1,
+            inference_seconds: 0.0,
+            peak_rss: 0,
+            stopped: Some("inference:original E".into()),
+            dataset: None,
+            score: None,
+            model_sha: None,
+            process_id: std::process::id(),
+            all_workers_joined: true,
+            pump: PumpProfile::default(),
+            arena_summary: None,
+        };
+        (config, report)
+    }
+    #[test]
+    fn r1_missing_and_torn_append_preserve_all_available_started_detail_without_success() {
+        for torn in [false, true] {
+            let (mut config, mut report) = fixture();
+            let expected = serde_json::to_value(&report.outcomes[0]).unwrap();
+            let raw = config.output.join("completed.jsonl");
+            let tail = b"{\"game\":0,\"torn\":true";
+            if torn {
+                fs::write(&raw, tail).unwrap();
+            }
+            // Only this synthetic I/O budget changes to force a real append refusal;
+            // no scientific operation is launched or rescued after the refusal.
+            config.max_output_bytes = 0;
+            let mut outcomes = vec![];
+            let mut writer = None;
+            let mut rows = 0;
+            let cancel = AtomicBool::new(false);
+            CompletionPublication {
+                config: &config,
+                mode: "arena",
+                pump: &mut report.pump,
+                dataset_writer: &mut writer,
+                row_count: &mut rows,
+                stopped: &mut report.stopped,
+                cancel: &cancel,
+                outcomes: &mut outcomes,
+                start: Instant::now(),
+            }
+            .record(report.outcomes.remove(0), vec![]);
+            assert!(cancel.load(Ordering::Relaxed));
+            assert_eq!(outcomes.len(), 1);
+            report.outcomes = outcomes;
+            config.max_output_bytes = 16 * 1024 * 1024;
+            let error = publish_arena(&config, report).unwrap_err();
+            let failure = error.downcast::<ArenaPublicationFailure>().unwrap();
+            assert_eq!(failure.primary.to_string(), "inference:original E");
+            assert!(failure.failed_evidence_persisted);
+            assert_eq!(failure.secondary.len(), 1);
+            let saved: serde_json::Value = serde_json::from_slice(
+                &fs::read(config.output.join("publication-failure.json")).unwrap(),
+            )
+            .unwrap();
+            assert_eq!(saved["closed_archive"], false);
+            assert_eq!(saved["available_outcomes"], json!([expected]));
+            assert_eq!(saved["report"]["stopped"], "inference:original E");
+            assert!(
+                saved["report"]["pump"]["publication_failures"]
+                    .as_array()
+                    .unwrap()
+                    .len()
+                    >= 2
+            );
+            assert!(!config.output.join("result.json").exists());
+            assert!(!config.output.join("manifest.json").exists());
+            if torn {
+                assert_eq!(fs::read(&raw).unwrap(), tail);
+            } else {
+                assert!(!raw.exists());
+            }
+            fs::remove_dir_all(config.output).unwrap();
+        }
+    }
+    #[derive(Debug)]
+    struct InitializationE;
+    impl std::fmt::Display for InitializationE {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            write!(f, "distinctive initialization E object")
+        }
+    }
+    impl std::error::Error for InitializationE {}
+    #[test]
+    fn r2_initialization_e_object_and_actual_failed_publication_f_both_survive() {
+        let (config, mut report) = fixture();
+        report.outcomes[0].started = false;
+        report.stopped = Some("initialization:distinctive initialization E object".into());
+        fs::create_dir(config.output.join("publication-failure.json")).unwrap();
+        let error = save_arena_failure(&config, report, Box::new(InitializationE), vec![]);
+        let source = std::error::Error::source(error.as_ref()).unwrap();
+        assert!(source.downcast_ref::<InitializationE>().is_some());
+        let display = error.to_string();
+        assert!(display.contains("distinctive initialization E object"));
+        assert!(display.contains("failure_publication:"));
+        assert!(display.contains("distinctive-started-family"));
+        let failure = error.downcast::<ArenaPublicationFailure>().unwrap();
+        assert!(!failure.failed_evidence_persisted);
+        assert_eq!(failure.secondary.len(), 1);
+        assert_eq!(failure.secondary[0].0, "failure_publication");
+        assert!(!failure.secondary[0].1.to_string().is_empty());
+        assert_eq!(failure.report.outcomes[0].moves, vec![13, 67]);
+        assert!(!config.output.join("result.json").exists());
+        assert!(!config.output.join("manifest.json").exists());
+        fs::remove_dir_all(config.output).unwrap();
+    }
+    #[test]
+    fn r2_known_e_archive_f_and_failed_metadata_g_retain_exact_partial_facts() {
+        let (config, report) = fixture();
+        let expected = serde_json::to_value(&report.outcomes[0]).unwrap();
+        let raw = config.output.join("completed.jsonl");
+        let torn = b"{\"original_torn_bytes\":17";
+        fs::write(&raw, torn).unwrap();
+        fs::create_dir(config.output.join("publication-failure.json")).unwrap();
+        let error = publish_arena(&config, report).unwrap_err();
+        let display = error.to_string();
+        assert!(display.starts_with("inference:original E"));
+        assert!(display.contains("archive_finalization:"));
+        assert!(display.contains("failure_publication:"));
+        assert!(display.contains("original move error E"));
+        assert!(display.contains("1234567"));
+        let failure = error.downcast::<ArenaPublicationFailure>().unwrap();
+        assert_eq!(
+            failure.secondary.iter().map(|s| s.0).collect::<Vec<_>>(),
+            vec!["archive_finalization", "failure_publication"]
+        );
+        assert!(!failure.failed_evidence_persisted);
+        assert_eq!(
+            serde_json::to_value(&failure.report.outcomes[0]).unwrap(),
+            expected
+        );
+        assert_eq!(
+            failure.report.stopped.as_deref(),
+            Some("inference:original E")
+        );
+        assert_eq!(failure.report.pump.publication_failures.len(), 2);
+        assert_eq!(fs::read(&raw).unwrap(), torn);
+        assert!(!config.output.join("result.json").exists());
+        assert!(!config.output.join("manifest.json").exists());
+        fs::remove_dir_all(config.output).unwrap();
     }
 }

@@ -1590,6 +1590,22 @@ impl SearchSession {
     ) -> Result<Self> {
         Self::create(evaluator, namespace, capacity, score_domain, true, true)
     }
+    /// Explicit retained unsigned-history baseline for a matched evaluator caller.
+    /// Score domain, PVS, full width, TT and evaluator are unchanged.
+    pub fn new_without_continuation_or_static(
+        evaluator: Arc<dyn StaticEvaluator>,
+        namespace: SearchNamespace,
+        capacity: usize,
+    ) -> Result<Self> {
+        Self::create(
+            evaluator,
+            namespace,
+            capacity,
+            ScoreDomain::LEGACY,
+            false,
+            false,
+        )
+    }
     /// Temporary single-360-assessment selection, absent from normal runtime.
     #[cfg(feature = "research-diagnostics")]
     pub fn new_for_ordering_assessment(
@@ -3183,3 +3199,35 @@ mod continuation360_tests;
 #[cfg(test)]
 #[path = "continuation360_composite_tests.rs"]
 mod continuation360_composite_tests;
+
+#[cfg(test)]
+mod three_engine_374_factory_tests {
+    use super::*;
+    struct NoCalls;
+    impl StaticEvaluator for NoCalls {
+        fn evaluate(&self, _: &SigmaContext, _: Option<&EvalAccumulator>) -> Result<f32> {
+            panic!("374 factory fixture forbids evaluator/Search calls")
+        }
+    }
+    #[test]
+    fn three_engine_374_explicit_off_factory_retains_domain_and_bounded_tt() {
+        let namespace = SearchNamespace {
+            evaluator: "synthetic-never-loaded".into(),
+            rules: "synthetic".into(),
+            selectivity: "fullwidth-PVS".into(),
+        };
+        let baseline = SearchSession::new_without_continuation_or_static(
+            Arc::new(NoCalls),
+            namespace.clone(),
+            4096,
+        )
+        .unwrap();
+        assert!(baseline.ordering.is_none());
+        assert!(!baseline.static_enabled);
+        assert_eq!(baseline.score_domain, ScoreDomain::LEGACY);
+        assert!(baseline.retained_memory_bytes() <= 1024 * 1024);
+        let current = SearchSession::new(Arc::new(NoCalls), namespace, 4096).unwrap();
+        assert!(current.ordering.is_some());
+        assert!(current.static_enabled);
+    }
+}

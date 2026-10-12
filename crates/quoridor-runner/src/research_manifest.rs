@@ -161,6 +161,21 @@ fn phase_shape(e: &Experiment) -> bool {
                         "@EXPERIMENT_SHA256@",
                     ]
         }
+        "sigma-cost-qualification" => {
+            e.models.is_empty()
+                && e.planned_slots == 64
+                && matches!(e.batch, Some(0) | Some(1))
+                && e.numerical_qualification.is_some() == (e.batch == Some(1))
+                && e.argv.len() == 6
+                && e.argv[1..]
+                    == [
+                        "sigma-cost-measure",
+                        "--experiment",
+                        "@EXPERIMENT@",
+                        "--experiment-sha256",
+                        "@EXPERIMENT_SHA256@",
+                    ]
+        }
         "corpus" => {
             e.numerical_qualification.is_some()
                 && e.models.is_empty()
@@ -199,6 +214,21 @@ fn phase_shape(e: &Experiment) -> bool {
             {
                 false
             }
+        }
+        "compare" if e.argv.get(1).is_some_and(|a| a == "decisions") => {
+            e.numerical_qualification.is_some()
+                && e.planned_slots > 0
+                && e.planned_slots <= 288
+                && e.batch.is_some()
+                && e.argv.len() == 6
+                && e.argv[1..]
+                    == [
+                        "decisions",
+                        "--experiment",
+                        "@EXPERIMENT@",
+                        "--experiment-sha256",
+                        "@EXPERIMENT_SHA256@",
+                    ]
         }
         "materialize" | "compare" | "analysis" => e.numerical_qualification.is_some(),
         _ => false,
@@ -511,7 +541,7 @@ fn load_checked(
         generation_inputs(&e)?;
         return Ok((e, Value::Null));
     }
-    if phase == "ordering-qualification" {
+    if matches!(phase, "ordering-qualification" | "sigma-cost-qualification") {
         return Ok((e, Value::Null));
     }
     let q: Value = e
@@ -634,7 +664,9 @@ fn load_checked(
         || q["value_perspective"] != subject.value_perspective
         || q["remaining"] != json!([])
         || ((matches!(phase, "arena" | "corpus")
-            || e.argv.get(1).is_some_and(|a| a == "ordering-assess"))
+            || e.argv
+                .get(1)
+                .is_some_and(|a| matches!(a.as_str(), "ordering-assess" | "decisions")))
             && q["canonical_plan_sha256"] != approved.sha256)
     {
         return Err("research current numerical/history/model/input qualification required".into());
