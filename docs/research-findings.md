@@ -1197,7 +1197,17 @@ COMPLETE f32values agree bit-for-bit across profiles/repetitions/diagnostics. Tw
 
 ### 人間選択：厳密なordering計算費の削減（372、2026-10-12）
 
-368の全360回完了とstatic benefit不支持は独立した確定結果として保持する。人間は次に同じスコア/更新/探索意味の計算費削減を選択した。全始点DAG伝播を必要な厳密prefix/suffix/intersectionへ縮め、continuationの同一履歴row解決をnode/cutoff単位にまとめる。固定80-call/256M ABBAで厳密仕事量一致とwhole-root比を確認し、改善不支持も完了結果とする。計画・基準は[ordering設計](design/lightweight-move-ordering-v1.md)とBeads372、資源は[512MiB支持](../research-data/ai-sigma/search-optimization/ordering372/support-v1.json)。source準備を並行し、371の2本の選択済み学習を優先する。現時点で候補software・実Search・改善結果はない。
+368の全360回完了とstatic benefit不支持は独立した確定結果として保持する。人間が選択した同じスコア/更新/探索意味の費用削減372は、新規6assertionsと必要なsoftware closureを終え、一回の固定80-call ABBAを完了した。全80要求深さCOMPLETE、UNKNOWN/Err0、56sessions、115077584nodes/256Mで、20contextsのvaluebits・action/PV・depth/stop・記録された探索仕事量が一致した。全始点DAGを必要なprefix/suffix/intersectionへ縮めたcombined staticのwhole-root中央値比は0.49958126954221954、履歴row解決をまとめたcontinuation-onlyは0.999854315331466だった。
+
+ただしcontinuation-only D4 cold family34のAは0.138057062/0.150023862秒、Bは0.160000309/0.162049324秒で、A中央値に対し1.11080113725267/1.1250264109816586、両Aそれぞれにも両Bが1.05を超えた。事前adverse gateに従い**全体の採用を拒否**する。静的部分だけの自動採用、profile/default切替、原因診断や追加campaignは行わず、Mainは元のA計算を維持する。約半分になった中央値はこの有限比較の観測であり、一般的速度・棋力・static対priorのbenefitや悪化の唯一原因を証明しない。
+
+[原停止報告](../.worktree/ordering-cost372/.artifacts/ordering-cost372-v1/fixed80-v1/result-handoff-v1/report.md)、[独立結果確認](../.artifacts/search-optimization/ordering372-review-v1/result-v2/report.md)、[正本受入れ](../research-data/ai-sigma/search-optimization/ordering372/result-acceptance-v1.json)を保持する。数値controller415.78304357605520秒とsoftware180.39328987989575秒を一度ずつ数え、合計596.17633345595095秒、nested native407.314297366秒は加えない。後のfinalize/回収/整形/admin/LLM費、exact native UTC exit、連続RSS/transient peakは別/UNKNOWN。plain orderingstats0は未観測で、nodeごとのscore/order/update一致の直接証拠ではない。原FAILED20.54148446000181秒・RAW・returned対persisted masks・UNKNOWNは不変更。全科学readerSTOP08:46:32.830454Z、独立結果readerSTOP09:05:57.426600Zで解放済み。計画/基準は[ordering設計](design/lightweight-move-ordering-v1.md)、資源は既発行[512MiB支持](../research-data/ai-sigma/search-optimization/ordering372/support-v1.json)。
+
+### BUILDとRUNの来歴境界の整理完了（375、2026-10-12）
+
+[受入れ](../research-data/ai-sigma/runtime-provenance375/acceptance-v1.json)とMain6fb5f2aにより、Rust source/compiler/build依存の照合は所有するBUILDで維持し、RUNは既存configが選んだaccepted PASS BuildManifestとimmutable artifact、実際のPython caller/import/environment/library/model/input/config/schedule/approved planを照合する。現在のMain Rustを保存済みA/B imageに合わせて書き戻す手順を現役RUNから除いた。実行時に読み込むコードやlibraryの束縛は保持し、第二のselector/registryは追加しない。
+
+新規5定義は一度ずつPASSし、A image/Main Rust Bの実stdlib childと通常finalizer、artifact/実caller/library/model/config/input/plan drift、invalid/incomplete Build、BUILD source拒否を限定fixtureで確認した。外側jobはuvの空TMP lock残留でFAILEDのまま保持し、別の正確なTMP清掃とreaderSTOPを記録してMainへ採用した。数値/model/native資格や新しい実験の許可ではなく、372の原source/image/結果/失敗費は不変更。374は実際のcurrent sourceへの独立した差分対応と新しい必要なBuild/資格を用いる。
 
 ### 共通Python環境への統合完了（367、2026-10-12）
 

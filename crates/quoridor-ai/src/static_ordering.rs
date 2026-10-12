@@ -6,13 +6,11 @@ const CELLS: usize = 81;
 const Q: u128 = 1024;
 pub(super) const SCRATCH_BYTES: usize = CELLS * CELLS * std::mem::size_of::<u128>();
 
-/// One invocation-owned lazy matrix, reused for both players and every parent.
+/// One invocation-owned matrix, reused for both players and every parent.
 /// Only the small scored result crosses the sort; the matrix is not cloned
-/// into a recursion frame. Validity is reset per player/parent; a demanded row
-/// is cleared and fully written before it becomes visible.
+/// into a recursion frame. All entries are overwritten before each reuse.
 pub(super) struct StaticScratch {
     paths: Box<[u128]>,
-    ready: [bool; CELLS],
 }
 impl StaticScratch {
     pub fn new() -> super::Result<Self> {
@@ -23,47 +21,10 @@ impl StaticScratch {
         paths.resize(CELLS * CELLS, 0);
         Ok(Self {
             paths: paths.into_boxed_slice(),
-            ready: [false; CELLS],
         })
     }
-    #[cfg(test)]
     fn between(&self, from: usize, to: usize) -> u128 {
         self.paths[from * CELLS + to]
-    }
-
-    fn count_between(
-        &mut self,
-        dag: &[[Option<usize>; 4]; CELLS],
-        distances: &[u8; CELLS],
-        topological: &[usize; CELLS],
-        pair: (usize, usize),
-        control: &mut impl FnMut() -> NodeResult<()>,
-    ) -> NodeResult<u128> {
-        let (from, to) = pair;
-        if from == to {
-            return Ok(1);
-        }
-        // Strictly decreasing goal distance proves this relation is empty.
-        if distances[from] <= distances[to] {
-            return Ok(0);
-        }
-        if !self.ready[from] {
-            control()?;
-            let row = &mut self.paths[from * CELLS..(from + 1) * CELLS];
-            row.fill(0);
-            row[from] = 1;
-            for &cell in topological {
-                if row[cell] == 0 {
-                    continue;
-                }
-                for next in dag[cell].into_iter().flatten() {
-                    row[next] = add(row[next], row[cell])?;
-                }
-            }
-            control()?;
-            self.ready[from] = true;
-        }
-        Ok(self.paths[from * CELLS + to])
     }
 }
 
@@ -129,17 +90,14 @@ fn blocked_edges(action: u16) -> [(usize, usize); 2] {
 /// Count paths that contain both edges in either order. Strictly decreasing
 /// distance makes the orders disjoint (and at most one can be nonzero).
 fn intersection(
-    mut between: impl FnMut(usize, usize) -> NodeResult<u128>,
+    scratch: &StaticScratch,
     prefix: &[u128; 81],
     suffix: &[u128; 81],
     first: (usize, usize),
     second: (usize, usize),
 ) -> NodeResult<u128> {
-    let mut count = |a: (usize, usize), b: (usize, usize)| {
-        if prefix[a.0] == 0 || suffix[b.1] == 0 {
-            return Ok(0);
-        }
-        mul(mul(prefix[a.0], between(a.1, b.0)?)?, suffix[b.1])
+    let count = |a: (usize, usize), b: (usize, usize)| {
+        mul(mul(prefix[a.0], scratch.between(a.1, b.0))?, suffix[b.1])
     };
     add(count(first, second)?, count(second, first)?)
 }
@@ -172,34 +130,32 @@ fn player_coverage(
     }
     let mut topological: [usize; 81] = std::array::from_fn(|i| i);
     topological.sort_unstable_by_key(|&i| std::cmp::Reverse(distances[i]));
-    scratch.ready.fill(false);
-    let mut prefix = [0u128; 81];
-    let mut suffix = [0u128; 81];
-    prefix[start] = 1;
-    // Only the actual pawn's prefix is needed. No child transition/BFS/model.
-    for (index, &from) in topological.iter().enumerate() {
-        if index.is_multiple_of(9) {
-            control()?;
-        }
-        if prefix[from] == 0 {
+    scratch.paths.fill(0);
+    // O(V*(V+E)) all-pairs DAG propagation. One control checkpoint per source;
+    // no child transitions, pawn obstruction, candidate BFS or model calls.
+    for (origin, &distance) in distances.iter().enumerate() {
+        control()?;
+        if distance >= 81 {
             continue;
         }
-        for to in dag[from].into_iter().flatten() {
-            prefix[to] = add(prefix[to], prefix[from])?;
+        let row = origin * 81;
+        scratch.paths[row + origin] = 1;
+        for &from in &topological {
+            if scratch.paths[row + from] == 0 {
+                continue;
+            }
+            for to in dag[from].into_iter().flatten() {
+                scratch.paths[row + to] = add(scratch.paths[row + to], scratch.paths[row + from])?;
+            }
         }
     }
+    let mut prefix = [0u128; 81];
+    let mut suffix = [0u128; 81];
     let goal_row = if player == 0 { 8 } else { 0 };
-    // Reverse DAG recurrence sums every goal endpoint, including its empty path.
-    for (index, &from) in topological.iter().rev().enumerate() {
-        if index.is_multiple_of(9) {
-            control()?;
-        }
-        if distances[from] >= 81 {
-            continue;
-        }
-        suffix[from] = u128::from(from / 9 == goal_row);
-        for to in dag[from].into_iter().flatten() {
-            suffix[from] = add(suffix[from], suffix[to])?;
+    for cell in 0..81 {
+        prefix[cell] = scratch.between(start, cell);
+        for column in 0..9 {
+            suffix[cell] = add(suffix[cell], scratch.between(cell, goal_row * 9 + column))?;
         }
     }
     let total = suffix[start];
@@ -215,15 +171,7 @@ fn player_coverage(
             edge.map_or(Ok(0), |(u, v)| mul(prefix[u], suffix[v]))
         };
         let both = match edges {
-            [Some(first), Some(second)] => intersection(
-                |from, to| {
-                    scratch.count_between(&dag, distances, &topological, (from, to), control)
-                },
-                &prefix,
-                &suffix,
-                first,
-                second,
-            )?,
+            [Some(first), Some(second)] => intersection(scratch, &prefix, &suffix, first, second)?,
             _ => 0,
         };
         let union = add(count(edges[0])?, count(edges[1])?)?
@@ -298,7 +246,3 @@ pub(super) fn prepare(
 #[cfg(test)]
 #[path = "static360_tests.rs"]
 mod tests;
-
-#[cfg(test)]
-#[path = "static372_tests.rs"]
-mod cost_tests;

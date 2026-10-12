@@ -136,3 +136,5 @@ controller6.492365031968802sに含むのはin-controller checks/journal validati
 ## オーダリング計算費の限定削減（372、2026-10-12）
 
 368では静的順位のwork中央値はほぼ同じでwhole-root費は約4倍となり、人間は同じスコアの計算費削減を選択した。優先対象は全始点DAG伝播と候補ごとの同一continuation row解決であり、CPU費の因果割合を計測した主張ではない。[現行ordering設計](lightweight-move-ordering-v1.md#同じスコア計算の費用削減3722026-10-12)とBeads372の固定80-call ABBA・256M契約で、厳密性とwhole費を確認する。371の選択済み2学習とPDFを優先し、余分なperf349・旧360/368再実行・新ゲーム・モデル変更・default変更は含めない。
+
+372は全80COMPLETE・全20contextsの記録された結果/探索仕事量一致で完了した。combined staticのwhole中央値比0.49958126954221954、continuation-only0.999854315331466に対し、continuation-only D4 cold family34では両BがA中央値より11.08%/12.50%遅く、両Aそれぞれにも5%超悪化した。事前adverse gateにより全体の採用を拒否し、元のA計算を維持する。[受入れ](../../research-data/ai-sigma/search-optimization/ordering372/result-acceptance-v1.json)はこの有限のnegative採否を記録する。静的部分だけの採用、原因診断、追加計測は未選択であり自動継続しない。一般速度/棋力/因果改善は証明しない。
