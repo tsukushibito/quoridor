@@ -142,7 +142,8 @@ fn cheap_schedule() -> Vec<CheapRequest> {
             Profile::Cheap
         };
         for sweep in 1..=2 {
-            for local in 0..10 {
+            let mut local = 0;
+            while local < 10 {
                 let (root, family, warm, ply, depth, session) = match local {
                     0..=3 => (local, COLD[local], false, None, 4, local),
                     4..=7 => (local, 0, true, Some(2 * (local - 4)), 4, 4),
@@ -165,6 +166,7 @@ fn cheap_schedule() -> Vec<CheapRequest> {
                     local_ply: ply,
                     node_cap: if depth == 4 { CAPS[0] } else { CAPS[1] },
                 });
+                local += 1;
             }
         }
     }
