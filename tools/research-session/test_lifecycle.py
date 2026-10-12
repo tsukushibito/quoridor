@@ -88,7 +88,7 @@ class NoResources:
 
 class LifecycleTests(unittest.TestCase):
     def setUp(self):
-        tmp = ROOT / ".artifacts/research-lifecycle-maintenance/test-TMP"
+        tmp = Path(tempfile.gettempdir())
         tmp.mkdir(exist_ok=True)
         self.tmp = tempfile.TemporaryDirectory(dir=tmp)
         self.addCleanup(self.tmp.cleanup)
