@@ -8,7 +8,7 @@ fn fixture(process: usize) -> (CostPlan, Experiment) {
         bytes,
         mode: mode.into(),
     };
-    let f = |name| file(name, &"a".repeat(64), 1, "0644");
+    let f = |name: &str| file(name, &"a".repeat(64), 1, "0644");
     let p = CostPlan {
         schema: "quoridor.ordering372.process.v1".into(),
         process_index: process,
