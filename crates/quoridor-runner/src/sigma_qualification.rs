@@ -711,7 +711,7 @@ pub fn measure_bound(bound: &BoundControl) -> Result<serde_json::Value> {
         .ok_or("approved frozen cost cases required")?;
     let definition: serde_json::Value = cases.read()?;
     if e.planned_slots != 64
-        || e.models.len() != 0
+        || !e.models.is_empty()
         || e.schedule != *cases
         || campaign["approved_plan"] != serde_json::to_value(&approved)?
         || campaign["phases"] != definition["phases"]
