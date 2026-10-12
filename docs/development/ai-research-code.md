@@ -26,6 +26,8 @@ Rustの共通crateから過去frameのコードや管理scriptを呼ばない。
 
 各保証には一つの検証境界を定める。詳細なsource・履歴・teacherの対応はcache変換・公開で検証し、学習は固定binaryと必要な小さいconfig・identity・件数・family/split情報を消費する。下流でsource全体を再検証する追加処理には、既存境界では防げない具体的な失敗条件を示す。受渡しの精度・schema・単位は正本を一つにし、同じteacherをJSON数値とFP32で繰り返し解釈・比較しない。変更されたteacher bitsの拒否は維持し、数値許容差で代用しない。新しい接続処理はsource/mock検査だけで完了とせず、影響する実際の生成・変換・binary読込の小さいend-to-end経路を一度確認する。検証の追加が実行中の凍結入力・codeを変更したり、成功した科学runの再実行を要求したりしないようにする。
 
+Rustのbuild依存管理はCargo/rustcを正本とする。同じbuildを認定する独立したsource一覧、alias、埋込みsourceコピー、第二の依存graphは維持しない。必要なfile依存記録は所有するBUILDの標準tool出力から得る。既存build記録には実Git revisionと関連する未commit差分、Cargo.lock・features・profile・target・実command、必要なtool版、artifact identityと実check結果を残し、Cargo.tomlだけを完全なfile一覧とみなさない。外部model/dataと実際に読み込むcaller/libraryは、それぞれの所有境界で束縛する。compiler/test/lintの成功は棋力結果ではなく、記録処理の失敗はmodel失敗ではない。変更していない成功checkは元の適用範囲で再用し、必要な変更checkや通常のdebug確認を行政的な再実行禁止と混同しない。
+
 ## 品質確認
 
 ```bash

@@ -1246,3 +1246,11 @@ Actual forward census1650008/2000000 includes the64-row affected fixture; render
 [三者比較規約](design/ai-sigma-comparison-protocol.md)は128 families／768 gamesの三pairing・先後交換と100ms／5ms、保存traceからの78 parents／234 single proposals＋18 missingを固定している。部分／未決着はUNKNOWNで補充せず、engine間の一致を最適手の真実としない。公開labelsの実game/history/rules lineage不足と、既存book／有限family比較の限界を維持する。実結果が出る前の得意盤面やNNUE改善原因は未確定である。
 
 失敗時にavailable detailed outcomesと最初のerror／全publication secondariesを保持するR1/R2修復は、同じレビュアーの[限定source確認](../.artifacts/three-engine-comparison374-review-v1/fault-v3/report.md)で指摘なしとなり、停止済みの[現役Source](../research-data/ai-sigma/three-engine-comparison374/source-adoption-v1.json)を採用した。これは新規12 Rust／8 Pythonの実検証・Build・native backend/library・fresh Sigma cost qualification・対局の成功ではない。旧347 cost証拠は期限切れのまま保存し、current tupleの一回64-request qualificationを別工程で必要とする。原negative source phase、失敗、RAW、費用、masks、UNKNOWNを変更しない。374実intervalが376より優先し、377は完了後の設定駆動保守で今回のgateにはしない。
+
+## 人間選択：重複したBUILD来歴機構の撤去（379、2026-10-12）
+
+374の実compiler・compile-only test・Clippy・release・private bindings commandは成功したが、別管理のgenerator一覧が現役lossless入力の一keyを欠き、原BUILDはFAILEDとなった。これはbookkeepingの失敗で、NNUEの数値や棋力の失敗ではない。原FAILED manifest、実成功commandの範囲、RAW、費用、未資格private imageを保持する。
+
+人間はmissing aliasの追加を維持するのではなく、重複source inventories・aliases・埋込みsource認定を撤去し、Cargo/rustcのBUILDと既存build/run/result経路へ責務を一本化する保守を選択した。Git revision/関連delta・lock/features/profile/target/command・tool版・artifactと実check結果を記録し、外部model/dataと実runtime caller/libraryのidentityを維持する。未採用のcompleted-prefix再利用機構は保全し、この重複検証を存続させるためには採用しない。
+
+[発行した支持](../research-data/ai-sigma/build-provenance379/support-v1.json)は既存374の196MiBを共用し、旧・新private imageを保全する重複分8MiBだけを追加した204MiBのinclusive phaseである。これは実装・consumer移行・必要なaffected checksと必要性/正しさの限定reviewを認可する記録で、撤去完了や新Build/science PASSを表さない。374の選択済み比較と376の固定方式を保持し、新しい数値campaign・model/default/N・323pause解除を含まない。
