@@ -1343,7 +1343,7 @@ fn run_impl(bound: &BoundControl, cost: bool) -> Result<Value> {
     };
     finish_output(
         &mut output,
-        outcome.map(&annotate),
+        outcome.map(annotate),
         secondary,
         annotate(failure),
     )
