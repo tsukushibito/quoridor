@@ -60,7 +60,7 @@ fn neighbours(cell: usize) -> [Option<usize>; 4] {
     [
         (cell >= 9).then(|| cell - 9),
         (cell < 72).then(|| cell + 9),
-        (cell % 9 > 0).then(|| cell - 1),
+        (!cell.is_multiple_of(9)).then(|| cell - 1),
         (cell % 9 < 8).then(|| cell + 1),
     ]
 }

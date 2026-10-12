@@ -181,8 +181,8 @@ fn cheap376_exact_integer_terms_orientations_colours_missing_and_borrowed_maps()
 #[test]
 fn cheap376_fixed_tables_cover_footprints_boundary_points_once_and_signed_jump() {
     // Table/orientation arithmetic, not extra scoring-parent admissions.
-    for pawn in 0..81usize {
-        for anchor in 0..64usize {
+    for (pawn, row) in PROXIMITY.iter().enumerate() {
+        for (anchor, &proximity) in row.iter().enumerate() {
             let cells = [
                 (anchor / 8, anchor % 8),
                 (anchor / 8, anchor % 8 + 1),
@@ -190,7 +190,7 @@ fn cheap376_fixed_tables_cover_footprints_boundary_points_once_and_signed_jump()
                 (anchor / 8 + 1, anchor % 8 + 1),
             ];
             assert_eq!(
-                PROXIMITY[pawn][anchor] as usize,
+                proximity as usize,
                 cells
                     .into_iter()
                     .map(|(r, c)| r.abs_diff(pawn / 9) + c.abs_diff(pawn % 9))
