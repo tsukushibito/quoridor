@@ -1,0 +1,169 @@
+{
+  "schema": "quoridor.research.maintenance-acceptance.v1",
+  "issue": "quoridor-4lc.379",
+  "status": "ACCEPTED_COMPLETE_CARGO_OWNED_BUILD_PROVENANCE",
+  "fixed_stopped_endstate": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/python-software-v2/stopped-maintenance-binding.json",
+    "sha256": "c35677b00c493d5476d05294815ac1e39b1e8e3e5116abd2a1f15b852aec523f",
+    "bytes": 10350,
+    "mode": "0644"
+  },
+  "independent_necessity_correctness_review": {
+    "path": "/workspaces/quoridor/.artifacts/build-provenance379-review-v1/related-R1-v1/control.json",
+    "sha256": "c6ee996ad4ec1cfa8bfc0c10d9c1870ad56ca493f00e6fd8b0415b5d82eeb13f",
+    "bytes": 4916,
+    "mode": "0644"
+  },
+  "genuine_Build": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/operation-v3/manifest.json",
+    "sha256": "f17b586dae08a081b370aebfacc1b5f0644fd3a91b724c3ebede30535f5cc8a1",
+    "bytes": 36487,
+    "mode": "0644"
+  },
+  "Build_original_Source": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/build-provenance379/source-adoption-v3.json",
+    "sha256": "1e4bb0b63daa589485e2ca6b4998d1eadfc423995f89d40ecb1d670cd33b910d",
+    "bytes": 7186,
+    "mode": "0644"
+  },
+  "artifact": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner379-v1",
+    "sha256": "875a49bcade5f4a0234a41eee07ea07d3d5561bdb8f344f5ac3173687e260a9d",
+    "bytes": 9628256,
+    "mode": "0755"
+  },
+  "Cargo_rebuild_proof": "Original emitted fresh=false after changed Rust source, one owning compiler-artifact copied to private; no independent dependency system",
+  "new_Rust_check_scopes": "Two379 definitions original first FAILED Build scope plus one affectedfixed80 definition genuineBuild3; old9cheap376/12arena assertions retained unchanged",
+  "four_Python_PASS_receipt": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/python-software-v2/receipt.json",
+    "sha256": "0c598436ce240eb94aaca8992b4d3aed52f3b963bf39b7e5b1e8993bf506c5c2",
+    "bytes": 7791,
+    "mode": "0644"
+  },
+  "four_actual_capture": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/python-software-v2/python-four379.full.log",
+    "sha256": "110b72002b92c849c4fe126b53dc1dc0ef3021bf490b7b7478df18713456a9b0",
+    "bytes": 774,
+    "mode": "0644"
+  },
+  "four_guardian_return": {
+    "command": [
+      "/bin/bash",
+      "/workspaces/quoridor/scripts/dev/project-env.sh",
+      "python",
+      "-B",
+      "/workspaces/quoridor/tools/research-session/test_build_provenance.py",
+      "BuildProvenanceTests.test_build379_cargo_receipt_single_image_and_normal_owning_completion",
+      "BuildProvenanceTests.test_build379_artifact_or_returned_capture_drift_cannot_complete",
+      "BuildProvenanceTests.test_build379_private_artifact_drift_is_failed_not_reused",
+      "BuildProvenanceTests.test_build379_obsolete_inventory_and_echo_role_refuse_before_child",
+      "-v"
+    ],
+    "status": "complete",
+    "child": {
+      "pid": 208466,
+      "start_ticks": "108547384",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "log_bytes_seen": 774,
+    "scope": "session group and periodically recorded descendants; no daemon adoption",
+    "exit_code": 0,
+    "remaining": [],
+    "direct_child_reaped": true,
+    "descendant_visibility": "observed",
+    "cleanup_complete": true,
+    "log_bytes_retained": 774,
+    "wall_seconds": 0.9375611240975559,
+    "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+    "primary_error": null,
+    "process_cleanup_complete": true,
+    "handle_closes_complete": true,
+    "signal_mask_restoration": "completed",
+    "final_record_persist": "completed",
+    "finalization_errors": []
+  },
+  "four_persisted_receipt": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/python-software-v2/python-four379.process.json",
+    "sha256": "fafd17171811dd4761474096f1ec6daca7d4b86fdf99ec7587fd3bca5b00b2f0",
+    "bytes": 1350,
+    "mode": "0600"
+  },
+  "four_returned_vs_disk_masks": "completed/completed versus persistedpending/attempted, both original",
+  "first_standardGit_raw_ok_original_scope": {
+    "original_failed_receipt": {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/python-software-v1/receipt.json",
+      "sha256": "d50873f0785589e266d7fc1a4f7a85e05cea9f0b3724e065a3d02856d36d1a95",
+      "bytes": 7588,
+      "mode": "0644"
+    },
+    "original_raw_full_log": {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/python-software-v1/python-five379.full.log",
+      "sha256": "60d1f6525b73a8ec3df275df861c7f67a075c434029d944c45e21f0d871c8c0a",
+      "bytes": 10240,
+      "mode": "0644"
+    },
+    "method": "test_build379_standard_git_revision_delta_and_untracked_input",
+    "first_method_not_replayed": true,
+    "original_guardian": null,
+    "original_capture_complete": false,
+    "original_overall_status": "FAILED"
+  },
+  "five_guarded_PASS_claim": false,
+  "eight374_assertions_and_original_failure": "Original8assertion capture plus separateTMPcleanup, originaloverallFAILED preserved",
+  "eight374_original_FAILED_receipt": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/python-software-v1/receipt.json",
+    "sha256": "c0e8ad3022c75480faedd6d176646961e5d9c69b62b11da3c52d76fccbce066d",
+    "bytes": 6945,
+    "mode": "0644"
+  },
+  "eight374_separate_cleanup": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/python-software-v1/TMP-cleanup-STOP.json",
+    "sha256": "0510ff0cd1b3a1b2d90bd46e75acda9ad72dca21798f27af001a5533b5aa9e6c",
+    "bytes": 1106,
+    "mode": "0644"
+  },
+  "ordinary_fixture_scope": "Only TMPDIR locator and four existing synthetic private handover fields; production/assertion bodies preserved",
+  "runtime_guarantees": "Accepted original immutableartifact +actualPythoncaller/env/loadedlibraries/model/config/input/approvedplan; currentMainRust graph notRUN authority",
+  "retired_mechanisms": "Overlapping Rust source inventories/aliases/include_bytes certification/research-bindings echo/completed-prefix rescue",
+  "specific_retention_exceptions": "HistoricalSHA-boundbook/header records opaque so existingdata provenance is not lost; original20 input/headQ+Build correspondence explicit so oldnumericalPASS cannot be retargeted. Neither is currentRust inventory",
+  "current_source_implementation_commit": "b03b3bb44c38b9a07a618c637c05925039d09949",
+  "findings_before": {
+    "path": "/workspaces/quoridor/docs/research-findings.md",
+    "sha256": "c8403ddedea3ed08d23f40d99805f7bec9873ecb2aa8ca4d3cdfc2f8c19a3ee8",
+    "bytes": 424910,
+    "mode": "0644"
+  },
+  "findings_after": {
+    "path": "/workspaces/quoridor/docs/research-findings.md",
+    "sha256": "79e0bc8cfb87713c0faa76465c80587bba5e9d2594e4f37f83143d660031a195",
+    "bytes": 427371,
+    "mode": "0644"
+  },
+  "instruction_document": {
+    "path": "/workspaces/quoridor/docs/design/ai-research-team.md",
+    "sha256": "c9eb279b6b40a50ab7031414363ee21514755f168cdf95b38c996d56503c91fd",
+    "bytes": 33853,
+    "mode": "0644"
+  },
+  "code_guidance": {
+    "path": "/workspaces/quoridor/docs/development/ai-research-code.md",
+    "sha256": "8828450ac75ce6f12877ad654918ed3ba9baf35cb44c9d2bc445c8c0d2388a41",
+    "bytes": 12586,
+    "mode": "0644"
+  },
+  "actual_original_scientific_or_model_runtime_qualification": "NOT_RUN; this ismaintenance notstrength/numericalPASS",
+  "actual_four_source_env_STOP": "2026-10-12T19:09:54.130844+00:00",
+  "actual_four_canonical_release": "2026-10-12T19:09:54.131308+00:00",
+  "actual_producer_final_metadata_STOP": "2026-10-12T19:11:32.917528+00:00",
+  "Build_controllers_seconds_once": 138.92212080117315,
+  "Python_command_seconds_separate": [0.8973201049957424, 0.7971302778460085, 0.9375611240975559],
+  "nested_added": false,
+  "later_full_admin_LLM_cost_continuous_peak": "UNKNOWN",
+  "support": "/workspaces/quoridor/research-data/ai-sigma/build-provenance379/support-v1.json",
+  "whole_inclusive_B": 213909504,
+  "global_held_B": 49996492800,
+  "new_grant_refund_borrow": false,
+  "historical_RAW_FAILED_models_data_inputs_unchanged": true,
+  "reader_children_jobs_TMP_remaining": [],
+  "reservation": null
+}

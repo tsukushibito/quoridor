@@ -1254,3 +1254,11 @@ Actual forward census1650008/2000000 includes the64-row affected fixture; render
 人間はmissing aliasの追加を維持するのではなく、重複source inventories・aliases・埋込みsource認定を撤去し、Cargo/rustcのBUILDと既存build/run/result経路へ責務を一本化する保守を選択した。Git revision/関連delta・lock/features/profile/target/command・tool版・artifactと実check結果を記録し、外部model/dataと実runtime caller/libraryのidentityを維持する。未採用のcompleted-prefix再利用機構は保全し、この重複検証を存続させるためには採用しない。
 
 [発行した支持](../research-data/ai-sigma/build-provenance379/support-v1.json)は既存374の196MiBを共用し、旧・新private imageを保全する重複分8MiBだけを追加した204MiBのinclusive phaseである。これは実装・consumer移行・必要なaffected checksと必要性/正しさの限定reviewを認可する記録で、撤去完了や新Build/science PASSを表さない。374の選択済み比較と376の固定方式を保持し、新しい数値campaign・model/default/N・323pause解除を含まない。
+
+### 379 保守完了：CargoをBUILD依存の正本にする
+
+重複したRust source一覧・alias・include_bytesによる認定・native research-bindings echo・parallel dependency_refsとそのconsumer/schemaを現役から撤去し、[必要性と正しさの限定レビュー](../.artifacts/build-provenance379-review-v1/related-R1-v1/report.md)を経て採用した。BUILDは標準Git revision/実delta・Cargo.lock/configs/features/profile/target/command・tool版・実check・Cargoが出力したartifactを既存のBuild記録に残す。RUNはaccepted artifactと実際のPython caller/environment/library/model/config/input/approved planを束縛し、現在のMain Rustを実行済みimageへ合わせる復元を要求しない。未採用のFAILED-prefix再利用機構は追加していない。凍結済みbook/headerの過去source記録は原データとして保持し、現役の第二の依存graphにしない。
+
+[真正なBUILD](../.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/operation-v3/manifest.json)は元のSource3でPASSし、変更後のCargo compiler-artifact fresh=false、影響する80件schedule確認1件、full Clippy/releaseとprivate imageのidentityを確認した。Pythonは元の失敗した5件のうちstandard-Git確認1件がrawにokを記録し、修復後の残り4件が完全capture・正常guardian・実cleanup付きでPASSした。元の5件全体はFAILED、returned guardian NULL/capture_complete=falseのままであり、guarded five-PASSとは扱わない。374の8件のassertion成功も元のTMP cleanup FAILEDと別の実cleanup記録を分けて保持する。[受入れと原scopeの対応](../research-data/ai-sigma/build-provenance379/acceptance-v1.json)を参照する。
+
+379の3 BUILD controllerは138.92212080117315秒を一度ずつ計上した（2 FAILEDを含む）。8件Pythonは0.8973201049957424秒、FAILED 5件は0.7971302778460085秒、修復後4件は0.9375611240975559秒の各commandで、nested時間を加算しない。後続集計/admin/LLM全費とcontinuous peakはUNKNOWN。新しいmodel/head/library/Sigma64/棋力・ordering80の成功を意味しない。既存のshared imageを374/376へ渡し、各current runtime/qualification/fair timing条件はその所有境界で満たす。50GB、元FAILED/RAW/費用/UNKNOWNと既存支持を保持し、新規科学run・model/default/N変更・323pause解除を伴わない。
