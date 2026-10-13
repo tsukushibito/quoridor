@@ -17,7 +17,7 @@
 
 現行の研究BUILD/RUNは[単一ビルド・実験・終了処理](research-lifecycle.md)を使う。既存のjob controllerとcycle_processが子を所有し、終了後のcollectorが一つのmanifestを確定する。旧software-v4〜v19のclassifierやsalvage結合は履歴として保持し、現行入口から実行しない。
 
-研究arena361の採用sourceでは、RUN intentとphase admissionが同じ `approved_plan: FileRef` を束縛する。jobのargvはraw intent SHAを固定し、guardianがintent path/SHAと直接parent PIDを渡す。Experiment・plan・qualificationの相互一致だけでは承認先を選べない。model/depth/clock/book/count/batchはplan/configで宣言し、modeを件数やrun名で判定しない。これは既存のtrusted integration境界で、新しいregistry・署名・毎runレビューではない。採用sourceのaffected buildは未資格で、元358のimage/resultsを交換せず、新しい数値対局も許可しない。
+統合担当が採用した有限範囲と実設定を一度だけjobへ渡す。既承認の連続operationはcodeが現在のentry/controller/guardianで直列に実行し、実childwait・結果保存・cleanupの後に次へ進む。pairごとのLLM準備・手書きready admission・Beads/backup・session wakeは行わない。二色のpairは統計上の結果単位として保ち、成功した元operationを再実行しない。unexpected error・pause・cancel・資源拒否で停止して実事実を残し、未実行分の自動補充・失敗再実行・skipはしない。通知は有限jobの完了又は実停止だけを現integrationへ配送する。実artifact/model/input/config/clock/CPU/RAM/所有・cleanupを保持し、source一覧や資格・認定台帳をoperationごとに作らない。15分monitorはfallbackであり実行driverではない。
 
 ## 設定と操作
 

@@ -930,7 +930,7 @@ def measurement_argv(spec, experiment, native_argv):
         "-m",
         str(perf["ring_pages"]),
         "--max-size",
-        str(perf["data_max_bytes"]),
+        str(perf["data_max_bytes"]) + "B",
     ]
     if perf["no_buildid_cache"]:
         argv.append("--no-buildid-cache")

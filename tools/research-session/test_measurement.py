@@ -229,6 +229,40 @@ class MeasurementTests(unittest.TestCase):
 
 
 class PerfRawOwnershipTests(unittest.TestCase):
+    def test_perf_max_size_renders_exact_byte_unit(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            owner = Path(temporary).resolve()
+            tool = owner / "metadata-only-tool"
+            tool.write_bytes(b"never executed")
+            tool.chmod(0o755)
+            raw = owner / "perf.data"
+            native = ["/native", "measure", "--experiment", "settings.json"]
+            for cap in (4096, 12582912):
+                perf = {
+                    "tool": lc.artifact_ref(tool),
+                    "output": str(raw),
+                    "event": "cpu-clock:u",
+                    "frequency_hz": 49,
+                    "call_graph": "dwarf,8192",
+                    "ring_pages": 64,
+                    "data_max_bytes": cap,
+                    "no_buildid_cache": True,
+                }
+                spec = {
+                    "owner": str(owner),
+                    "perf": perf,
+                    "data": [{"path": str(raw), "limit_B": cap}],
+                }
+                argv = lc.measurement_argv(spec, {"argv": native}, native)
+                self.assertEqual(argv[argv.index("--max-size") + 1], str(cap) + "B")
+                self.assertEqual(argv[-len(native) :], native)
+                self.assertEqual(argv[argv.index("-F") + 1], "49")
+                self.assertIn("--no-buildid-cache", argv)
+                self.assertFalse(raw.exists())
+                perf["data_max_bytes"] = 0
+                with self.assertRaisesRegex(lc.Refused, "positive perf data_max_bytes"):
+                    lc.measurement_argv(spec, {"argv": native}, native)
+
     def test_configured_raw_sibling_charged_and_absent_before_launch(self):
         with tempfile.TemporaryDirectory() as temporary:
             owner = Path(temporary).resolve()

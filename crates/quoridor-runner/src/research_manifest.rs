@@ -480,7 +480,7 @@ fn perf_launch_shape(
         "-m".into(),
         perf.ring_pages.to_string(),
         "--max-size".into(),
-        perf.data_max_bytes.to_string(),
+        format!("{}B", perf.data_max_bytes),
     ];
     if perf.no_buildid_cache {
         argv.push("--no-buildid-cache".into());
@@ -594,6 +594,78 @@ pub fn load(bound: &BoundControl, phase: &str) -> Result<(Experiment, Value)> {
 mod measurement_launch_tests {
     use super::*;
     #[test]
+    fn measurement_perf_max_size_requires_exact_byte_unit() {
+        struct Temp(PathBuf);
+        impl Drop for Temp {
+            fn drop(&mut self) {
+                let _ = fs::remove_dir_all(&self.0);
+            }
+        }
+        let stamp = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap()
+            .as_nanos();
+        let dir =
+            std::env::temp_dir().join(format!("measurement-origin-{}-{stamp}", std::process::id()));
+        fs::create_dir(&dir).unwrap();
+        let _temp = Temp(dir.clone());
+        let reference = FileRef {
+            path: dir.join("unread-control"),
+            sha256: "0".repeat(64),
+            bytes: 1,
+            mode: "0644".into(),
+        };
+        let bound = BoundControl {
+            path: dir.join("settings.json"),
+            sha256: "1".repeat(64),
+        };
+        let e:Experiment=serde_json::from_value(json!({"schema":"quoridor.research.experiment.v1","phase":"compare","build_manifest":reference,"config":reference,"schedule":reference,"inputs":[],"models":[],"dynamic_libraries":[],"rules":"standard","distance_units":"wall-distance/80","value_perspective":"side-to-move","planned_slots":2,"batch":null,"argv":["/native","measure","--experiment","@EXPERIMENT@","--experiment-sha256","@EXPERIMENT_SHA256@"]})).unwrap();
+        let native: Vec<String> = e
+            .argv
+            .iter()
+            .map(|a| {
+                a.replace("@EXPERIMENT@", &bound.path.to_string_lossy())
+                    .replace("@EXPERIMENT_SHA256@", &bound.sha256)
+            })
+            .collect();
+        for cap in [4096_u64, 12582912] {
+            let tool = FileRef {
+                path: "/usr/bin/perf".into(),
+                sha256: "2".repeat(64),
+                bytes: 1,
+                mode: "0755".into(),
+            };
+            let output = dir.join("sample.data");
+            let mut argv = vec![
+                "/usr/bin/perf".to_string(),
+                "record".into(),
+                "-e".into(),
+                "cpu-clock:u".into(),
+                "-F".into(),
+                "49".into(),
+                "--call-graph".into(),
+                "dwarf,8192".into(),
+                "-m".into(),
+                "64".into(),
+                "--max-size".into(),
+                format!("{cap}B"),
+                "--no-buildid-cache".into(),
+                "-o".into(),
+                output.to_string_lossy().to_string(),
+                "--".into(),
+            ];
+            argv.extend(native.clone());
+            let mut intent = json!({"owner":dir,"data_root":dir.join("native"),"perf":{"tool":tool,"output":output,"event":"cpu-clock:u","frequency_hz":49,"call_graph":"dwarf,8192","ring_pages":64,"data_max_bytes":cap,"no_buildid_cache":true},"argv":argv});
+            assert!(perf_launch_shape(&intent, &e, &bound).unwrap().is_some());
+            intent["argv"][12] = json!(cap.to_string());
+            assert!(perf_launch_shape(&intent, &e, &bound).is_err());
+            intent["argv"][12] = json!(format!("{}B", cap + 1));
+            assert!(perf_launch_shape(&intent, &e, &bound).is_err());
+            assert!(!output.exists());
+        }
+    }
+
+    #[test]
     fn measurement_configured_perf_and_actual_chain_shape() {
         struct Temp(PathBuf);
         impl Drop for Temp {
@@ -650,7 +722,7 @@ mod measurement_launch_tests {
                 "-m".into(),
                 pages.to_string(),
                 "--max-size".into(),
-                "12582912".into(),
+                "12582912B".into(),
                 "--no-buildid-cache".into(),
                 "-o".into(),
                 output.to_string_lossy().to_string(),

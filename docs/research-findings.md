@@ -1320,6 +1320,8 @@ ordinary storageは省略して一度のpost-work usageを記録した。BUILD4 
 
 [現plan-v5](../research-data/ai-sigma/three-engine-comparison374/approved-plan-v5.json)は完全未入場batch2..383の382configsだけを実artifactへ更新し、逆変換で他のJSONを完全に保つ。元batch0/1のFileRefs、768 slots、未完成slot3と全科学設定は不変で、新しい対局・refillを増やさない。三物理コアA/B1/4・main6、100ms receipt／5ms reserveと同じmodelsを保つ。現在の通常Experiment/numerical correspondence/admissionとfresh lifetimeを既存担当で準備し、実arenaとPerf36は直列に進める。旧RAW/FAILED/費用を新PASSへ移植せず、349完了やPolicy返信をarenaの前提にしない。
 
+人間はpairごとのLLM orchestrationを非効率と指摘し、一つの有限code-driven直列jobへ変更することを選択した。統合範囲・実設定を一度採用し、normal childwait/記録/cleanupから次の完全未入場operationへ進む。二色pair・元の順序/入力/model/100ms/5ms/三物理コアは不変で、失敗・pause・cancelで止まり再実行/refillしない。元batch2..5は8 validated games／4 pairs、原0/1/2 FAILEDとpartial3 UNKNOWNは保護する。suffix batch6..383の378 pairs／756 gamesだけが未入場で、元768 denominatorを保つ。Perfは最初のplain6がCOMPLETE、残り30は未実行。sampledの元2拒否は0 callsで、親affinity復元・実mask記録とstandard perf --max-sizeの必須B単位を通常修復する。source/affected検証・実image・有限job開始はまだ未完成で、配送受付やcode案を完了と扱わない。新しいmodel/training/sweep/calibration/323resumeやPolicy返信gateは選択していない。
+
 ## 人間選択：Sigma／固定D／単独NNUEの比較（374、2026-10-12）
 
 人間は、三者の棋力と得意・不得意な盤面を同じ枠で比べ、NNUE改善の検証方針に使うことを選択した。対象NNUEは既存BEST43の単独勝敗予測で、Dの出力補正や混合評価ではない。distance head入力・scaleは既存のまま、重み・final tanh・output bypass OFFを固定する。新しいモデルや学習、比率、teacher、defaultの選択は含まない。

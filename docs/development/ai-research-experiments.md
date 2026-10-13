@@ -33,6 +33,8 @@
 
 正式評価の集計を検証するための棋譜・応答・測定値は保持する。デバッグの大量traceや一時profileは、要点/再現手順を残し、利用中でないことを確認して担当がローテーション・整理できる。既存の成果を本改定だけで一括削除しない。保存容量の上限を守り、不要な複製で失敗ログを増やさない。
 
+連続する既承認の有限operationは、範囲・順序・実設定を一度jobへ渡しcodeで直列に進める。各operationの実結果・partial/error/UNKNOWNと必要なRAW参照を同じ設定＋結果へ保存し、通常成功の間にLLM・手書きadmission・個別handoffを挟まない。実childwait/cleanup後にだけ次へ進み、unexpected error/pause/cancelで停止する。元の失敗・完成・未入場を区別し、entered operationのreplay/refillや予定件数を実施数として扱うことを禁ずる。
+
 ## 実験・検証データの保存と整理
 
 実験・検証データは研究Gitの `research-data/ai-sigma/` に保存する。小さい設定・集計・再現manifestは直接保存し、大きい棋譜・応答・測定値・必要なログは課題/run単位の圧縮アーカイブにまとめる。manifestにissue/run、コード版、設定・入力・モデル・環境の参照、アーカイブの内容と展開先を記し、判断に必要な成功・失敗のデータを保持する。結果を書き換えるために旧runを置換しない。Git管理はmain正本へのローカル保存であり、push・公開を含まない。
