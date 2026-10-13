@@ -279,7 +279,7 @@ class Limits(process.CycleResources):
                 "retained private pool cap",
             )
             require(allocated(self.spec["TMP"]) <= 64 * 1024 * 1024, "TMP cap")
-        elif self.spec["support"]["sha256"] == PERF349_SUPPORT:
+        if self.spec["support"]["sha256"] == PERF349_SUPPORT:
             require(allocated(self.spec["TMP"]) <= 4 * 1048576, "349 serial TMP cap")
             if self.spec.get("perf") is not None:
                 path = Path(self.spec["perf"]["output"])
