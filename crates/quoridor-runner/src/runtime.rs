@@ -2917,14 +2917,14 @@ fn evaluation_turn(
             .map(|at| {
                 at.duration_since(game.origin)
                     .as_nanos()
-                    .min(u64::MAX as u128)
+                    .min(u64::MAX as u128) as u64
             })
             .into();
-        observation.counters["terminal_collected_ns"] = terminal
+        observation.counters["terminal_collected_ns"] = (terminal
             .1
             .duration_since(game.origin)
             .as_nanos()
-            .min(u64::MAX as u128)
+            .min(u64::MAX as u128) as u64)
             .into();
         observation.counters["first_receipt_or_control_error"] =
             received.first_error.clone().into();
@@ -3267,7 +3267,7 @@ fn run_inner(
     )?;
     let (
         mut pump,
-        mut outcomes,
+        outcomes,
         row_count,
         batches,
         inference_seconds,
