@@ -1137,5 +1137,91 @@ class BoundaryTests(unittest.TestCase):
             self.assertNotIn(children[0].pid, health.OWNED_CHILDREN)
 
 
+class RecoveryTests(unittest.TestCase):
+    def test_active_collection_hydrates_only_referenced_closed_dependencies(self):
+        active = {
+            "id": "quoridor-4lc.400",
+            "status": "in_progress",
+            "dependencies": [{"depends_on_id": "quoridor-4lc.401", "type": "blocks"}],
+        }
+        closed = {"id": "quoridor-4lc.401", "status": "closed", "dependencies": []}
+        requests = []
+        ports = dashboard.Ports(Path("/unused"))
+
+        def response(argv, **kwargs):
+            requests.append(argv)
+            return [closed] if "--id" in argv else [active]
+
+        with mock.patch.object(ports, "run", side_effect=response):
+            cached = health.CachedPorts(dashboard, Path("/unused"))
+            cached.delegate = ports
+            raw = dashboard.valid_rows(cached.issues())
+            targets = sorted(
+                {edge["id"] for row in raw for edge in dashboard.edges(row)}
+                - {row["id"] for row in raw}
+            )
+            self.assertEqual(cached.dependencies(targets), [closed])
+            self.assertEqual(raw, [active])
+        self.assertNotIn("--all", requests[0])
+        self.assertEqual(
+            requests[0][requests[0].index("--status") + 1], "open,in_progress,blocked,deferred"
+        )
+        self.assertIn("--all", requests[1])
+        self.assertEqual(requests[1][requests[1].index("--id") + 1], closed["id"])
+        with self.assertRaises(dashboard.CollectionError):
+            dashboard.valid_rows([active] * (dashboard.ROWS + 1))
+
+    def test_separate_collection_exception_is_unknown_and_check_continues(self):
+        other = health.dashboard_module()
+        with tempfile.TemporaryDirectory() as temporary:
+            state = Path(temporary)
+            health.set_mode(state, "AUTONOMOUS", human_confirmed=True)
+            with (
+                mock.patch.object(
+                    other, "collect", side_effect=other.CollectionError("too many rows")
+                ),
+                mock.patch.object(health, "dashboard_module", side_effect=[dashboard, other]),
+            ):
+                result = health.one_check(SCRIPT.parents[2], state, dry_run=True)
+            self.assertEqual(result["state"], "UNKNOWN")
+            self.assertEqual(result["reason"], "HealthError")
+            result = health.one_check(SCRIPT.parents[2], state, dry_run=True, observation=fixture())
+            self.assertEqual(result["state"], "dry-run")
+
+    def test_timer_waits_for_exec_argv_and_retains_singleton_cleanup(self):
+        root = SCRIPT.parents[2]
+        actual_identity = health.identity
+        attempts = 0
+
+        def delayed(pid):
+            nonlocal attempts
+            attempts += 1
+            current = actual_identity(pid)
+            if attempts <= 2 and current is not None:
+                return {**current, "argv": ["pre-exec parent"]}
+            return current
+
+        with tempfile.TemporaryDirectory() as temporary:
+            state = Path(temporary)
+            health.set_mode(state, "AUTONOMOUS", human_confirmed=True)
+            with (
+                mock.patch.dict(os.environ, {"RESEARCH_HEALTH_TEST_MODE": "1"}),
+                mock.patch.object(health, "identity", side_effect=delayed),
+            ):
+                first = health.start(root, state, test_idle=True)
+            try:
+                self.assertEqual(first["state"], "started")
+                self.assertGreater(attempts, 2)
+                self.assertTrue(health.same_timer(first["owner"]))
+                self.assertEqual(
+                    health.start(root, state, test_idle=True)["state"], "already-running"
+                )
+            finally:
+                self.assertEqual(health.stop_timer(state)["state"], "stopped")
+                self.assertNotIn(first["owner"]["pid"], health.OWNED_CHILDREN)
+            self.assertFalse(health.same_timer(first["owner"]))
+            self.assertEqual(health.read_mode(state), "AUTONOMOUS")
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -177,7 +177,7 @@ class Ports:
             input_data=input_data,
         )
 
-    def issues(self):
+    def issues(self, *, include_closed=True):
         # --deps=all is rejected with --json by this wrapper version. JSON list
         # already carries all typed edges; hydrate their target identities below.
         return self.run(
@@ -185,7 +185,11 @@ class Ports:
                 "bash",
                 str(self.root / "scripts/dev/beads.sh"),
                 "list",
-                "--all",
+                *(
+                    ["--all"]
+                    if include_closed
+                    else ["--status", "open,in_progress,blocked,deferred"]
+                ),
                 "--brief",
                 "--flat",
                 "--label",

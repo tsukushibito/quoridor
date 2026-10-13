@@ -141,7 +141,7 @@ class CachedPorts:
         self.dependencies_raw = None
 
     def issues(self):
-        self.raw = self.delegate.issues()
+        self.raw = self.delegate.issues(include_closed=False)
         return self.raw
 
     def dependencies(self, ids):
@@ -158,7 +158,10 @@ class CachedPorts:
 def read_observation(root):
     dashboard = dashboard_module()
     ports = CachedPorts(dashboard, root)
-    snapshot = dashboard.collect(ports)
+    try:
+        snapshot = dashboard.collect(ports)
+    except dashboard.CollectionError as error:
+        raise HealthError("Observation collection unavailable: " + str(error)) from error
     raw = dashboard.valid_rows(ports.raw)
     targets = dashboard.valid_rows(ports.dependencies_raw or [])
     return snapshot, {row["id"]: row for row in raw + targets}
@@ -1092,12 +1095,20 @@ def start(root, state_dir, *, test_idle=False, handshake_attempts=100):
         # Child blocks on the inherited gate, so failure to obtain its pidfd
         # can be handled by EOF + direct wait without any PID-based signal.
         pidfd = os.pidfd_open(child.pid, 0)
-        launched = identity(child.pid)
-        if (
-            launched is None
-            or str(SCRIPT) not in launched["argv"]
-            or "timer" not in launched["argv"]
-        ):
+        # Popen can return while /proc still exposes the fork's pre-exec argv.
+        # Keep the owned child behind the gate until its real timer argv appears.
+        for _ in range(100):
+            launched = identity(child.pid)
+            if (
+                launched is not None
+                and str(SCRIPT) in launched["argv"]
+                and "timer" in launched["argv"]
+            ):
+                break
+            if child.poll() is not None:
+                raise HealthError("New timer exited before gate release")
+            time.sleep(0.05)
+        else:
             raise HealthError("New timer identity unavailable before gate release")
         os.write(write_fd, b"1")
         os.close(write_fd)

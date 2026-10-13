@@ -30,7 +30,7 @@ Rustのbuild依存管理はCargo/rustcを正本とする。同じbuildを認定�
 
 ## 共通計測入口と実行記録
 
-人間は、Search/evaluator/sessionと既存caller/job・標準perfを再用する一つの計測入口を選択した。差し替えるのは計測operationと必要な準備/reset/後始末だけで、plugin/registry/frameworkは追加しない。入力・対象・探索設定・件数/順序/seed・cold/warm寿命・warmup・perf設定はconfig/scheduleへ置く。実験番号、固定SHA、20/80/36/6やsampling値を共通sourceの拒否条件にしない。直接比較中の376A/Bはconfigで対象を選び、比較終了後に不要な専用入口/schema/CLI/shim/testを撤去する。現役入口は`quoridor-runner measure`（Cargo feature `measurement`）へ統合した。旧360/376/349専用入口・schema・生成/資格判定は撤去した。対象A/B・入力順・件数・session・perfは設定から渡す。Pythonの既存限定検証を元scopeで受け入れ、統合時に見つけたteardown session名と途切れたjournal末尾の記録を修正した。新しいRust3定義の実検証と真正な現artifactは未完了であり、計測36回はまだ実行していない。
+人間は、Search/evaluator/sessionと既存caller/job・標準perfを再用する一つの計測入口を選択した。差し替えるのは計測operationと必要な準備/reset/後始末だけで、plugin/registry/frameworkは追加しない。入力・対象・探索設定・件数/順序/seed・cold/warm寿命・warmup・perf設定はconfig/scheduleへ置く。実験番号、固定SHA、20/80/36/6やsampling値を共通sourceの拒否条件にしない。直接比較中の376A/Bはconfigで対象を選び、比較終了後に不要な専用入口/schema/CLI/shim/testを撤去する。現役入口は`quoridor-runner measure`（Cargo feature `measurement`）へ統合した。旧360/376/349専用入口・schema・生成/資格判定は撤去した。対象A/B・入力順・件数・session・perfは設定から渡す。Pythonの既存限定検証を元scopeで受け入れ、統合時に見つけたteardown session名と途切れたjournal末尾の記録を修正した。新しいRust3定義は実PASSした。続くClippyのtest-module配置指摘はmoduleを末尾へ移すだけで修正し、成功した3定義のbodyを変えず再実行していない。必要なClippy/release・真正な現artifactは、374の新しい所有境界検証と共通buildで完成させる。計測36回はまだ実行していない。
 
 保存の基本単位は、実際に使った設定snapshotと結果の一組である。code版・共有model/input参照・実設定/環境・実測/件数/完了未完了/errorをmetadataへまとめ、perf RAW等は結果から参照する。別のsource一覧・資格/acceptance/certification/control台帳をrunの必須成果物にしない。job/processの一時cleanup状態は認定書ではない。予定36で実施24なら24と未完了12を記録し、計画差だけで停止・全結果拒否・別認定をしない。比較条件の差は解釈に明記し、不正入力/モデル読込errorや取消/未完了を成功へ変えない。旧科学RAW/FAILED・actual identity/ownership/cleanupを保持する。
 

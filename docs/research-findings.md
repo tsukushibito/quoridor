@@ -1338,4 +1338,8 @@ join後の実Instantをreturn/drainへ記録する最小修復はMainへ採用�
 
 ### 349共通計測sourceの統合（2026-10-13）
 
-SAME349の停止sourceを、設定からoperation/profile・件数/順序/session/perfを受ける一つの`measure`入口へ統合した。設定snapshotと結果の一組に実行事実を残し、旧実験別の固定count/SHA/資格/生成経路を撤去した。実行途中のjournal末尾が切れても正常prefixと末尾byte/hashを保存し、teardownを実sessionへ対応させる普通の修正を加えた。既存Python限定成功は元scopeで保持する。新Rust3検証・affected Clippy/release/真正artifactと実36call計測はこの時点で未完了。元37680 adoption FAIL/局所pruning観測・RAW/費用と374元2局FAILED/UNKNOWNを改変せず、新calibration/追加callは発行しない。
+SAME349の停止sourceを、設定からoperation/profile・件数/順序/session/perfを受ける一つの`measure`入口へ統合した。設定snapshotと結果の一組に実行事実を残し、旧実験別の固定count/SHA/資格/生成経路を撤去した。実行途中のjournal末尾が切れても正常prefixと末尾byte/hashを保存し、teardownを実sessionへ対応させる普通の修正を加えた。既存Python限定成功は元scopeで保持する。新Rust3定義は元c772111dで実PASS（3/0failed、123filtered）。同jobは続くClippyのtest-module配置で正常FAILED確定し、19.963126730999647秒を一度だけ保持した。moduleを末尾へ移す修正はtest body・productionを不変に保ち、3定義を再実行していない。Clippy/release・真正artifactは374の新しい必要検証と共通buildで完成させ、実36call計測は未開始。元37680 adoption FAIL/局所pruning観測・RAW/費用と374元2局FAILED/UNKNOWNを改変せず、新calibration/追加callは発行しない。
+
+### 352進捗monitorの通常復旧（2026-10-13）
+
+人間選択済みAUTONOMOUSと現在Policy宛先を保持し、完了履歴が128件収集上限を超えた拒否・独立ロードした例外classの取り逃し・Popen直後のpre-exec argv raceを修正した。healthの現役issue読取と完了依存の限定hydrate、運用UNKNOWNによる継続、既存startup gate/owned pidfd/singleton/cleanupだけを扱う。新3定義の収集/例外2件はPASSし、startup定義は新test自身の二重child回収だけを直してその1件がPASSした。旧suite・科学job・mode再選択・schedulerや役割追加は行わない。実監視のownership・新real check・next dueは現役記録で確認してから復旧完了と扱う。container-localで再起動永続性は保証しない。
