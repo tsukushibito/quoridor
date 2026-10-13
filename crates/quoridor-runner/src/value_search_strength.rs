@@ -718,7 +718,8 @@ mod tests {
     #[test]
     fn two_ai_374_complete_outcome_capture_roundtrips_metadata_and_refuses_overflow() {
         let mut c: Config =
-            serde_json::from_str(include_str!("../../../configs/arena/smoke.json")).unwrap();
+            serde_json::from_str(include_str!("../tests/fixtures/sigma-clock-config.json"))
+                .unwrap();
         c.arena.as_mut().unwrap().retained_outcome_bytes = Some(OUTCOME_BYTES);
         // NN0 saved metadata: selected/whole counters and actual clock/owner/error facts.
         // The fixture never evaluates a position, opens a model, or launches a game.
