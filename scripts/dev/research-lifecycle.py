@@ -568,7 +568,7 @@ def command(spec, row, directory, resources, executor=process.execute, *, ledger
                 )
                 cores = spec["child_cpu_cores"]
             cpu_args = {"cpu_core": None, "cpu_cores": cores}
-        if spec.get("perf") is not None and row.get("role") == "run":
+        if spec.get("perf") is not None and row.get("role", "run") == "run":
             require(
                 spec["kind"] == "run" and row["argv"] == spec["argv"],
                 "actual configured profiler launch",

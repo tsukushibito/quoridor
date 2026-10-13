@@ -195,3 +195,41 @@ class PerfLaunchPolicyTests(unittest.TestCase):
         with self.assertRaisesRegex(lc.Refused, "actual configured profiler launch"):
             lc.command(spec, row, self.root, resources, executor=cycle.execute)
         self.assertFalse((self.root / "wrong-dispatch.process.json").exists())
+
+    def test_default_run_role_applies_policy_to_actual_child(self):
+        original = parent_nnp()
+        argv = [sys.executable, "-B", "-c", STATUS]
+        resources = cycle.CycleResources(
+            {"host_ram_reserve": 4294967296, "max_memory_bytes": 536870912},
+            self.root,
+            None,
+        )
+        spec = {
+            "kind": "run",
+            "cwd": str(MAIN),
+            "env": dict(os.environ),
+            "limits": {"worker_cpu": min(os.sched_getaffinity(0)), "log_B": 65536},
+            "perf": {"tool": {"path": sys.executable}},
+            "argv": argv,
+        }
+        # Match execute's actual row shape, with no explicit role.
+        returned, full = lc.command(
+            spec,
+            {"name": "default-run", "argv": argv},
+            self.root,
+            resources,
+            executor=cycle.execute,
+        )
+        observation = json.loads(full.read_text().splitlines()[0])
+        self.assertEqual(observation["nnp"], 1)
+        self.assertEqual(
+            returned["launch_policy"], {"no_new_privs_requested": True, "verified_before_exec": 1}
+        )
+        self.assertEqual(observation["pid"], returned["child"]["pid"])
+        self.assertEqual(observation["parent"], os.getpid())
+        self.assert_settled(returned)
+        self.assertEqual(parent_nnp(), original)
+        wrong = {"name": "default-wrong", "argv": [sys.executable, "-B", "-c", "pass"]}
+        with self.assertRaisesRegex(lc.Refused, "actual configured profiler launch"):
+            lc.command(spec, wrong, self.root, resources, executor=cycle.execute)
+        self.assertFalse((self.root / "default-wrong.process.json").exists())
