@@ -3,7 +3,11 @@ use crate::arena;
 use quoridor_data::Result;
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
-use std::{fs, io::Read, path::PathBuf};
+use std::{
+    fs,
+    io::Read,
+    path::{Path, PathBuf},
+};
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
