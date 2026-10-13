@@ -156,11 +156,35 @@ def charged_roots(spec):
         if spec.get("TMP"):
             paths.append(spec["TMP"])
         data_root = owned(spec["data_root"], spec["owner"])
+        perf = spec.get("perf")
+        raw = None
+        if perf is not None:
+            raw = owned(perf["output"], spec["owner"])
+            require(
+                raw != data_root and raw.parent == data_root.parent,
+                "configured perf RAW must be a native output sibling",
+            )
+            require(
+                sum(
+                    item["name"] == "perf_RAW"
+                    and item["path"] == str(raw)
+                    and item["limit_B"] == perf["data_max_bytes"]
+                    for item in spec["data"]
+                )
+                == 1,
+                "one full configured perf RAW capture",
+            )
+            paths.append(raw)
         for item in spec["data"]:
             path = owned(item["path"], spec["owner"])
             require(
-                path.is_relative_to(data_root),
-                "declared data outside charged data root",
+                path.is_relative_to(data_root)
+                or (
+                    path == raw
+                    and item["name"] == "perf_RAW"
+                    and item["limit_B"] == perf["data_max_bytes"]
+                ),
+                "declared data outside charged data root/configured perf RAW",
             )
     roots = sorted({owned(p, spec["owner"]) for p in paths}, key=lambda p: len(p.parts))
     unique = []

@@ -357,6 +357,70 @@ struct PerfSettings {
     data_max_bytes: u64,
     no_buildid_cache: bool,
 }
+/// The caller has verified the actual tool/argv/parent chain. Bind RAW to that
+/// live profiler's writable FD, not merely to a file left at the configured path.
+fn profiler_open_raw(profiler: &LaunchIdentity, output: &std::path::Path) -> Result<Value> {
+    use std::os::unix::fs::{MetadataExt, OpenOptionsExt};
+    if launch_identity(profiler.pid)?.0 != *profiler
+        || !fs::symlink_metadata(output)?.is_file()
+        || output.canonicalize()? != output
+    {
+        return Err("live profiler regular RAW identity required".into());
+    }
+    let raw = fs::OpenOptions::new()
+        .read(true)
+        .custom_flags(libc::O_NOFOLLOW | libc::O_NONBLOCK | libc::O_CLOEXEC)
+        .open(output)?;
+    let metadata = raw.metadata()?;
+    if !metadata.is_file() || metadata.uid() != unsafe { libc::geteuid() } {
+        return Err("profiler RAW regular owner required".into());
+    }
+    for entry in fs::read_dir(format!("/proc/{}/fd", profiler.pid))? {
+        let entry = entry?;
+        let fd_path = entry.path();
+        let Ok(target) = fs::read_link(&fd_path) else {
+            continue;
+        };
+        if target != output {
+            continue;
+        }
+        let Ok(opened) = fs::metadata(&fd_path) else {
+            continue;
+        };
+        if !opened.is_file() || opened.dev() != metadata.dev() || opened.ino() != metadata.ino() {
+            continue;
+        }
+        let fd = entry.file_name().to_string_lossy().parse::<u32>()?;
+        let info = fs::read_to_string(format!("/proc/{}/fdinfo/{fd}", profiler.pid))?;
+        let flags = u32::from_str_radix(
+            info.lines()
+                .find_map(|line| line.strip_prefix("flags:").map(str::trim))
+                .ok_or("profiler FD flags")?,
+            8,
+        )?;
+        let access = flags & libc::O_ACCMODE as u32;
+        if access != libc::O_WRONLY as u32 && access != libc::O_RDWR as u32 {
+            continue;
+        }
+        let current = fs::symlink_metadata(output)?;
+        let still_open = fs::metadata(&fd_path)?;
+        if !current.is_file()
+            || current.dev() != metadata.dev()
+            || current.ino() != metadata.ino()
+            || still_open.dev() != metadata.dev()
+            || still_open.ino() != metadata.ino()
+            || fs::read_link(&fd_path)? != output
+            || launch_identity(profiler.pid)?.0 != *profiler
+        {
+            return Err("profiler RAW/FD/process drift".into());
+        }
+        return Ok(
+            json!({"path":output,"profiler":profiler,"fd":fd,"device":metadata.dev(),"inode":metadata.ino(),"uid":metadata.uid(),"flags_octal":format!("{flags:o}")}),
+        );
+    }
+    Err("configured RAW is not open for writing by verified profiler".into())
+}
+
 fn perf_launch_shape(
     intent: &Value,
     e: &Experiment,
@@ -382,6 +446,7 @@ fn perf_launch_shape(
     let perf: PerfSettings = serde_json::from_value(intent["perf"].clone())?;
     let owner = PathBuf::from(intent["owner"].as_str().ok_or("launch owner")?);
     let output = &perf.output;
+    let data_root = PathBuf::from(intent["data_root"].as_str().ok_or("native output root")?);
     if perf.event.is_empty()
         || perf.call_graph.is_empty()
         || perf.event.contains('\0')
@@ -392,7 +457,8 @@ fn perf_launch_shape(
         || !output.is_absolute()
         || output == &owner
         || !output.starts_with(&owner)
-        || fs::symlink_metadata(output).is_ok()
+        || output == &data_root
+        || output.parent() != data_root.parent()
         || output
             .parent()
             .ok_or("perf output parent")?
@@ -463,10 +529,14 @@ fn launch_plan(bound: &BoundControl, e: &Experiment) -> Result<(Option<FileRef>,
             (&launch_argv(immediate)?, &argv),
         )?;
         tool.verify()?;
+        let raw = profiler_open_raw(
+            &profiler,
+            &PathBuf::from(intent["perf"]["output"].as_str().ok_or("perf RAW output")?),
+        )?;
         if launch_identity(immediate)?.0 != profiler || launch_identity(parent)?.0 != guardian {
             return Err("launch process identity changed during admission".into());
         }
-        json!({"guardian":guardian,"profiler":profiler,"native":launch_identity(std::process::id())?.0,"perf_tool":tool,"perf_argv":argv})
+        json!({"guardian":guardian,"profiler":profiler,"native":launch_identity(std::process::id())?.0,"perf_tool":tool,"perf_argv":argv,"perf_RAW_open":raw})
     } else {
         if parent != immediate {
             return Err("immediate lifecycle parent required".into());
@@ -587,7 +657,7 @@ mod measurement_launch_tests {
                 "--".into(),
             ];
             argv.extend(native.clone());
-            let mut intent = json!({"owner":dir,"perf":{"tool":tool,"output":output,"event":"cpu-clock:u","frequency_hz":frequency,"call_graph":graph,"ring_pages":pages,"data_max_bytes":12582912,"no_buildid_cache":true},"argv":argv});
+            let mut intent = json!({"owner":dir,"data_root":dir.join("native"),"perf":{"tool":tool,"output":output,"event":"cpu-clock:u","frequency_hz":frequency,"call_graph":graph,"ring_pages":pages,"data_max_bytes":12582912,"no_buildid_cache":true},"argv":argv});
             assert!(perf_launch_shape(&intent, &e, &bound).unwrap().is_some());
             intent["perf"]["frequency_hz"] = json!(0);
             assert!(perf_launch_shape(&intent, &e, &bound).is_err());
@@ -1022,5 +1092,65 @@ mod generic_arena_361_bound_entry_tests {
             let other = file("wrong-expected-plan.json", b"substitution");
             assert!(load_checked(e, &bound, "arena", Some(&other), &argv, &artifact.path).is_err());
         }
+    }
+}
+
+#[cfg(test)]
+mod profiler_raw_tests {
+    use super::*;
+    #[test]
+    fn measurement_profiler_raw_live_fd_stale_foreign_symlink_and_identity() {
+        use std::os::fd::AsRawFd;
+        use std::os::unix::fs::symlink;
+        struct Temp(PathBuf);
+        impl Drop for Temp {
+            fn drop(&mut self) {
+                let _ = fs::remove_dir_all(&self.0);
+            }
+        }
+        let stamp = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap()
+            .as_nanos();
+        let dir = std::env::temp_dir().join(format!("profiler-raw-{}-{stamp}", std::process::id()));
+        fs::create_dir(&dir).unwrap();
+        let _temp = Temp(dir.clone());
+        let output = dir.join("perf.data");
+        let profiler = launch_identity(std::process::id()).unwrap().0;
+        assert!(profiler_open_raw(&profiler, &output).is_err());
+        let writer = fs::OpenOptions::new()
+            .write(true)
+            .create_new(true)
+            .open(&output)
+            .unwrap();
+        let evidence = profiler_open_raw(&profiler, &output).unwrap();
+        assert_eq!(evidence["fd"], json!(writer.as_raw_fd()));
+        let mut wrong = profiler.clone();
+        wrong.start_ticks.push('0');
+        assert!(profiler_open_raw(&wrong, &output).is_err());
+        wrong.pid = 0;
+        assert!(profiler_open_raw(&wrong, &output).is_err());
+        drop(writer);
+        assert!(profiler_open_raw(&profiler, &output).is_err());
+        let reader = fs::File::open(&output).unwrap();
+        assert!(profiler_open_raw(&profiler, &output).is_err());
+        drop(reader);
+        let other = dir.join("foreign.data");
+        let foreign_writer = fs::File::create(&other).unwrap();
+        assert!(profiler_open_raw(&profiler, &output).is_err());
+        drop(foreign_writer);
+        let stale_writer = fs::OpenOptions::new().write(true).open(&output).unwrap();
+        fs::remove_file(&output).unwrap();
+        fs::write(&output, b"replacement").unwrap();
+        assert!(profiler_open_raw(&profiler, &output).is_err());
+        drop(stale_writer);
+        fs::remove_file(&output).unwrap();
+        let live_writer = fs::OpenOptions::new().write(true).open(&other).unwrap();
+        symlink(&other, &output).unwrap();
+        assert!(profiler_open_raw(&profiler, &output).is_err());
+        drop(live_writer);
+        fs::remove_file(&output).unwrap();
+        fs::create_dir(&output).unwrap();
+        assert!(profiler_open_raw(&profiler, &output).is_err());
     }
 }

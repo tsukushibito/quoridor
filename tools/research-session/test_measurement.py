@@ -228,5 +228,61 @@ class MeasurementTests(unittest.TestCase):
         self.assertEqual(evidence["perf_RAW"], [raw_ref])
 
 
+class PerfRawOwnershipTests(unittest.TestCase):
+    def test_configured_raw_sibling_charged_and_absent_before_launch(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            owner = Path(temporary).resolve()
+            native = owner / "native"
+            raw = owner / "perf.data"
+            tool = owner / "metadata-only-tool"
+            tool.write_bytes(b"never executed")
+            tool.chmod(0o755)
+            perf = {
+                "tool": lc.artifact_ref(tool),
+                "output": str(raw),
+                "event": "cpu-clock:u",
+                "frequency_hz": 49,
+                "call_graph": "dwarf,8192",
+                "ring_pages": 64,
+                "data_max_bytes": 4096,
+                "no_buildid_cache": True,
+            }
+            spec = {
+                "kind": "run",
+                "owner": str(owner),
+                "output": str(owner / "operation"),
+                "owned_outputs": [],
+                "finalizers": [],
+                "data_root": str(native),
+                "data": [{"name": "perf_RAW", "path": str(raw), "limit_B": 4096}],
+                "perf": perf,
+            }
+            self.assertIn(raw, lc.charged_roots(spec))
+            lc.measurement_argv(spec, {"argv": ["/native", "measure"]}, ["/native"])
+            self.assertFalse(native.exists())
+            raw.write_bytes(b"stale")
+            self.assertGreater(lc.allocated(raw, seen=set()), 0)
+            with self.assertRaisesRegex(lc.Refused, "exclusive perf RAW"):
+                lc.measurement_argv(spec, {"argv": ["/native", "measure"]}, ["/native"])
+            raw.unlink()
+            raw.symlink_to(tool)
+            with self.assertRaises(lc.Refused):
+                lc.charged_roots(spec)
+            raw.unlink()
+            spec["data"].append(
+                {
+                    "name": "foreign",
+                    "path": str(owner / "unconfigured.data"),
+                    "limit_B": 4096,
+                }
+            )
+            with self.assertRaisesRegex(lc.Refused, "outside charged"):
+                lc.charged_roots(spec)
+            spec["data"].pop()
+            spec["perf"] = None
+            with self.assertRaisesRegex(lc.Refused, "outside charged"):
+                lc.charged_roots(spec)
+
+
 if __name__ == "__main__":
     unittest.main()
