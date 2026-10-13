@@ -55,6 +55,7 @@ fn config() -> Config {
     c.wall_seconds = None;
     c.host_ram_reserve = 1073741824;
     c.max_memory_bytes = Some(536870912);
+    c.max_output_bytes = Some(16 * 1024 * 1024);
     c.max_batch = 1;
     c.simulations = 3;
     c.max_plies = 1;
