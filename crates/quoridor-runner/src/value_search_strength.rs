@@ -46,12 +46,12 @@ fn approved_model_identity(
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct GenerationRequest {
-    pub plan: crate::sigma_qualification::BoundControl,
-    pub old_prefixes: crate::sigma_qualification::BoundControl,
+    pub plan: crate::research_manifest::BoundControl,
+    pub old_prefixes: crate::research_manifest::BoundControl,
     pub output: std::path::PathBuf,
 }
 fn bounded_read<T: serde::de::DeserializeOwned>(
-    b: &crate::sigma_qualification::BoundControl,
+    b: &crate::research_manifest::BoundControl,
 ) -> Result<T> {
     if std::fs::symlink_metadata(&b.path)?.file_type().is_symlink()
         || std::fs::metadata(&b.path)?.len() > 1024 * 1024
@@ -116,10 +116,10 @@ fn generate_bound(request: GenerationRequest) -> Result<serde_json::Value> {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct CampaignRequest {
-    pub book: crate::sigma_qualification::BoundControl,
+    pub book: crate::research_manifest::BoundControl,
     /// BEST51 then BEST43; configurations contain actual future evaluator identities.
-    pub templates: [crate::sigma_qualification::BoundControl; 2],
-    pub model_descriptors: [crate::sigma_qualification::BoundControl; 2],
+    pub templates: [crate::research_manifest::BoundControl; 2],
+    pub model_descriptors: [crate::research_manifest::BoundControl; 2],
     pub weights_sha256: [String; 2],
     pub output: std::path::PathBuf,
 }
@@ -199,7 +199,7 @@ fn materialize(request: CampaignRequest) -> Result<serde_json::Value> {
 
 /// One current build/experiment/numerical identity; no historical admission joins.
 pub fn execute(
-    bound: &crate::sigma_qualification::BoundControl,
+    bound: &crate::research_manifest::BoundControl,
     phase: &str,
 ) -> Result<serde_json::Value> {
     let (experiment, _) = crate::research_manifest::load(bound, phase)?;
@@ -775,7 +775,7 @@ mod tests {
         let changed = serde_json::json!({"weights_SHA":BEST51_WEIGHTS,"mu_f32":[17.,18.],"sigma_f32":[1.,1.],"distance_fit":{"a":0.,"b":8.}});
         f.write_all(&serde_json::to_vec(&changed).unwrap()).unwrap();
         drop(f);
-        let bound = crate::sigma_qualification::BoundControl {
+        let bound = crate::research_manifest::BoundControl {
             path: path.clone(),
             sha256: APPROVED_DESCRIPTOR_SHA256[0].into(),
         };

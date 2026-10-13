@@ -29,61 +29,12 @@ pub struct RequestId {
     pub generation: u64,
     pub token: u64,
 }
-/// Explicit, source/config/backend-bound empirical qualification. No default or
-/// first-call zero estimate exists. Qualification and live measurements require
-/// separate admission; these limits are not a hard real-time certificate.
-#[derive(Clone, Debug, Serialize, Deserialize)]
-#[serde(deny_unknown_fields)]
-pub struct SigmaCostQualification {
-    pub whole_operation_upper_ns: u64,
-    pub decision_communication_upper_ns: u64,
-    pub valid_until_unix_ms: u64,
-    pub config_sha256: String,
-    pub executable_sha256: String,
-    pub backend_sha256: String,
-    pub evidence_sha256: String,
-}
-impl SigmaCostQualification {
-    fn admission(
-        &self,
-        config: &Config,
-        backend: &dyn InferenceBackend,
-    ) -> Result<crate::sigma_clock::Admission> {
-        let binding = crate::sigma_qualification::backend_binding(config, backend.metadata())?;
-        if self.whole_operation_upper_ns == 0
-            || self.decision_communication_upper_ns == 0
-            || self.config_sha256 != crate::arena::json_digest(config)?
-            || self.executable_sha256
-                != crate::arena_manifest::file_sha256(&std::env::current_exe()?)?
-            || self.backend_sha256 != binding
-            || self.evidence_sha256.len() != 64
-            || !self.evidence_sha256.bytes().all(|b| b.is_ascii_hexdigit())
-        {
-            return Err("sigma_cost_qualification_binding_invalid".into());
-        }
-        let remaining = self
-            .valid_until_unix_ms
-            .checked_sub(unix_ms())
-            .filter(|n| *n > 0)
-            .ok_or("sigma_cost_qualification_stale")?;
-        let expires = Instant::now()
-            .checked_add(Duration::from_millis(remaining))
-            .ok_or("sigma_cost_qualification_expiry_invalid")?;
-        Ok(crate::sigma_clock::Admission {
-            operation: Duration::from_nanos(self.whole_operation_upper_ns),
-            decision_communication: Duration::from_nanos(self.decision_communication_upper_ns),
-            expires,
-            usable: Arc::new(AtomicBool::new(true)),
-        })
-    }
-}
-
 const SIGMA_RECEIPT_CLOCK: &str = "authority-action-receipt-v1";
 const SIGMA_RECEIPT_CONTRACT_SHA256: &str =
     "04062382f70648cdfd722e59c35be1100719169097a04749b0046ea5a19a280d";
 #[derive(Debug)]
 struct SigmaNotification {
-    chosen: Option<(quoridor_ai::sigma_mcts::Snapshot, u16)>,
+    chosen: Option<(Option<quoridor_ai::sigma_mcts::Snapshot>, u16)>,
     decision_started: Instant,
     sent: Instant,
 }
@@ -168,21 +119,6 @@ fn alpha_receipt_decision(
         return Err(Failure::TimeOverrun);
     }
     Ok(())
-}
-
-fn observe_sigma_receipt(
-    admission: Option<&crate::sigma_clock::Admission>,
-    receipt: &SigmaReceipt,
-) {
-    if let Some(admission) = admission {
-        // Entire choice/packing/notification through authority receipt. Rules
-        // validation and terminal draining are deliberately outside this span.
-        admission.observe_decision_communication(
-            receipt
-                .received
-                .saturating_duration_since(receipt.notification.decision_started),
-        );
-    }
 }
 
 /// Rules-side checks of the immutable returned action and every observed
@@ -462,7 +398,7 @@ mod sigma_receipt_tests {
             .snapshot();
         SigmaReceipt {
             notification: SigmaNotification {
-                chosen: Some((snapshot, 13)),
+                chosen: Some((Some(snapshot), 13)),
                 decision_started: received,
                 sent: received,
             },
@@ -515,171 +451,6 @@ mod sigma_receipt_tests {
         assert_eq!(root.position(), original);
     }
 
-    #[test]
-    fn disproven_choice_packing_communication_disables_next_inference_without_rescuing_errors() {
-        let start = Instant::now();
-        let admission = crate::sigma_clock::Admission {
-            operation: Duration::from_millis(20),
-            decision_communication: Duration::from_millis(5),
-            expires: start + Duration::from_secs(10),
-            usable: Arc::new(AtomicBool::new(true)),
-        };
-        let mut timely = receipt(start + Duration::from_millis(12), true);
-        timely.notification.decision_started = start;
-        timely.notification.sent = start + Duration::from_millis(10);
-        // The 2ms transport alone fits, while choice+packing+receipt is12ms.
-        assert!(
-            timely.received.duration_since(timely.notification.sent)
-                < admission.decision_communication
-        );
-        observe_sigma_receipt(Some(&admission), &timely);
-        assert!(!admission.usable.load(Ordering::Relaxed));
-        assert_eq!(
-            sigma_receipt_decision(Some(start + Duration::from_millis(100)), &timely, false),
-            Ok(())
-        );
-        let call = crate::sigma_clock::run(
-            &SigmaContext::from_prefix(&[]).unwrap(),
-            crate::sigma_clock::Budget {
-                started: Instant::now(),
-                duration: Duration::from_millis(100),
-                reserve: Duration::from_millis(5),
-                admission: Some(admission.clone()),
-                generation: 2,
-                simulations: 3,
-                limits: Limits::default(),
-            },
-            || false,
-            |_, _, _| panic!("disproven communication bound admitted inference"),
-        );
-        assert_eq!(call.attempted, 0);
-        assert_eq!(call.stop, "cost_stale");
-        let late = receipt(start + Duration::from_millis(101), true);
-        assert_eq!(
-            sigma_receipt_decision(Some(start + Duration::from_millis(100)), &late, false),
-            Err(crate::arena_clock::Failure::TimeOverrun)
-        );
-        assert_eq!(
-            sigma_receipt_decision(Some(start + Duration::from_millis(100)), &timely, true),
-            Err(crate::arena_clock::Failure::Cancelled)
-        );
-    }
-
-    #[test]
-    fn slow_legality_does_not_disprove_decision_communication() {
-        let start = Instant::now();
-        let admission = crate::sigma_clock::Admission {
-            operation: Duration::from_millis(20),
-            decision_communication: Duration::from_millis(5),
-            expires: start + Duration::from_secs(10),
-            usable: Arc::new(AtomicBool::new(true)),
-        };
-        let mut timely = receipt(start + Duration::from_millis(1), true);
-        timely.notification.decision_started = start;
-        timely.notification.sent = start;
-        timely.legality_finished = start + Duration::from_millis(201);
-        observe_sigma_receipt(Some(&admission), &timely);
-        assert!(admission.usable.load(Ordering::Relaxed));
-        assert_eq!(
-            sigma_receipt_decision(Some(start + Duration::from_millis(100)), &timely, false),
-            Ok(())
-        );
-    }
-
-    #[test]
-    fn actual_delayed_packing_disproves_only_communication_and_drains_original_error() {
-        let root = SigmaContext::from_prefix(&[]).unwrap();
-        let start = Instant::now();
-        let admission = crate::sigma_clock::Admission {
-            operation: Duration::from_millis(50),
-            decision_communication: Duration::from_millis(5),
-            expires: start + Duration::from_secs(10),
-            usable: Arc::new(AtomicBool::new(true)),
-        };
-        let call = crate::sigma_clock::run(
-            &root,
-            crate::sigma_clock::Budget {
-                started: start,
-                duration: Duration::from_millis(100),
-                reserve: Duration::from_millis(5),
-                admission: Some(admission.clone()),
-                generation: 1,
-                simulations: 1,
-                limits: Limits::default(),
-            },
-            || false,
-            |_, _, _| {
-                Ok(crate::sigma_clock::Reply {
-                    output: NetworkOutput {
-                        logits: [0.; 136],
-                        value: 0.25,
-                    },
-                    decision_notified: false,
-                })
-            },
-        );
-        assert_eq!(call.attempted, 1);
-        assert!(call.operation_peak <= admission.operation);
-        assert!(admission.usable.load(Ordering::Relaxed));
-        let snapshot = call.completed.unwrap();
-        let action = snapshot.action.unwrap();
-        let (reply_tx, reply_rx) = mpsc::channel();
-        let id = RequestId {
-            game: 0,
-            generation: 1,
-            token: 2,
-        };
-        let request = Request {
-            id,
-            input: Box::new([0.; 648]),
-            created: Instant::now(),
-            reply: Some(reply_tx),
-        };
-        let backend = thread::spawn(move || {
-            thread::sleep(Duration::from_millis(30));
-            request
-                .complete(Err("inference:communication-original".into()))
-                .unwrap();
-        });
-        let decision_started = Instant::now();
-        thread::sleep(Duration::from_millis(10));
-        let (tx, rx) = mpsc::channel();
-        tx.send(SigmaNotification {
-            chosen: Some((snapshot, action)),
-            decision_started,
-            sent: Instant::now(),
-        })
-        .unwrap();
-        let receipt = receive_sigma_notification(rx, |a| root.play(a).is_ok()).unwrap();
-        observe_sigma_receipt(Some(&admission), &receipt);
-        assert!(!admission.usable.load(Ordering::Relaxed));
-        assert_eq!(
-            sigma_receipt_decision(Some(start + Duration::from_millis(100)), &receipt, false),
-            Ok(())
-        );
-        assert_eq!(
-            wait_sigma_reply(&reply_rx, id, || {}).unwrap_err(),
-            "inference:communication-original"
-        );
-        backend.join().unwrap();
-        assert!(reply_rx.try_recv().is_err());
-        let next = crate::sigma_clock::run(
-            &root,
-            crate::sigma_clock::Budget {
-                started: Instant::now(),
-                duration: Duration::from_millis(100),
-                reserve: Duration::from_millis(5),
-                admission: Some(admission),
-                generation: 2,
-                simulations: 1,
-                limits: Limits::default(),
-            },
-            || false,
-            |_, _, _| panic!("next caller admitted with disproven decision bound"),
-        );
-        assert_eq!(next.attempted, 0);
-        assert_eq!(next.stop, "cost_stale");
-    }
     #[test]
     fn authority_receipt_exact_edges_and_slow_legality_are_separate() {
         let started = Instant::now();
@@ -860,14 +631,8 @@ mod sigma_receipt_tests {
                 }
                 calls
             });
-            let admission = crate::sigma_clock::Admission {
-                operation: Duration::from_millis(20),
-                decision_communication: Duration::from_millis(5),
-                expires: Instant::now() + Duration::from_secs(10),
-                usable: Arc::new(AtomicBool::new(true)),
-            };
             let start = Instant::now();
-            let result = play_timed_sigma(
+            let result = play_sigma_receipt(
                 &mut game,
                 0,
                 &config,
@@ -877,7 +642,6 @@ mod sigma_receipt_tests {
                     events: &events,
                     tx: &reply_tx,
                     rx: &reply_rx,
-                    admission: Some(admission),
                 },
                 &"0".repeat(64),
             );
@@ -928,14 +692,7 @@ mod sigma_receipt_tests {
                 let previous_drain = observation.counters["drain_finished_ns"].as_u64().unwrap();
                 assert_eq!(game.generation, 2);
                 // Opponent starts only after this call has drained and committed;
-                // a fresh qualification is synthetic here, not live recosting.
-                let admission = crate::sigma_clock::Admission {
-                    operation: Duration::from_millis(20),
-                    decision_communication: Duration::from_millis(5),
-                    expires: Instant::now() + Duration::from_secs(10),
-                    usable: Arc::new(AtomicBool::new(true)),
-                };
-                play_timed_sigma(
+                play_sigma_receipt(
                     &mut game,
                     1,
                     &config,
@@ -945,7 +702,6 @@ mod sigma_receipt_tests {
                         events: &events,
                         tx: &reply_tx,
                         rx: &reply_rx,
-                        admission: Some(admission),
                     },
                     &"0".repeat(64),
                 )
@@ -1945,6 +1701,16 @@ fn play_completed(
     } else {
         None
     };
+    commit_action(game, action, row, config, cancel, run_start)
+}
+fn commit_action(
+    game: &mut Game,
+    action: u16,
+    row: Option<TeacherRow>,
+    config: &Config,
+    cancel: &AtomicBool,
+    run_start: Instant,
+) -> Result<()> {
     let next = game.context.play(action).map_err(|e| format!("{e:?}"))?;
     if let Some(o) = game.observations.last_mut() {
         let policy = config
@@ -2025,33 +1791,19 @@ struct SigmaReplies<'a> {
     events: &'a SyncSender<Event>,
     tx: &'a Sender<Response>,
     rx: &'a mpsc::Receiver<Response>,
-    admission: Option<crate::sigma_clock::Admission>,
 }
-struct SigmaReceiptOptions<'a> {
-    model_sha: &'a str,
-    measurement: Option<(u64, bool)>,
-}
-fn play_timed_sigma(
-    game: &mut Game,
-    engine_index: usize,
-    config: &Config,
-    cancel: &AtomicBool,
-    run_start: Instant,
-    replies: SigmaReplies<'_>,
-    model_sha: &str,
-) -> std::result::Result<(), String> {
-    play_sigma_receipt(
-        game,
-        engine_index,
-        config,
-        cancel,
-        run_start,
-        replies,
-        SigmaReceiptOptions {
-            model_sha,
-            measurement: None,
-        },
-    )
+fn choose_sigma_action(
+    completed: Option<&quoridor_ai::sigma_mcts::Snapshot>,
+    fallback: Option<u16>,
+    temperature: f64,
+    rng: &mut Rng,
+) -> Option<(Option<quoridor_ai::sigma_mcts::Snapshot>, u16)> {
+    match completed {
+        Some(s) => {
+            choose(&s.edges, s.action, temperature, rng).map(|action| (Some(s.clone()), action))
+        }
+        None => fallback.map(|action| (None, action)),
+    }
 }
 fn play_sigma_receipt(
     game: &mut Game,
@@ -2060,36 +1812,19 @@ fn play_sigma_receipt(
     cancel: &AtomicBool,
     run_start: Instant,
     replies: SigmaReplies<'_>,
-    options: SigmaReceiptOptions<'_>,
+    model_sha: &str,
 ) -> std::result::Result<(), String> {
-    let SigmaReceiptOptions {
-        model_sha,
-        measurement,
-    } = options;
-    let admission = replies.admission.clone();
     let started = Instant::now();
     let e = &config.engines[engine_index];
     let duration = Duration::from_millis(e.time_ms.ok_or("missing MCTS caller clock")?);
     let reserve = Duration::from_millis(config.arena.as_ref().map_or(0, |a| a.return_reserve_ms));
     let id_game = game.planned.id;
     let generation = game.generation;
-    let timed = measurement.is_none_or(|(_, timed)| timed);
-    let until = if timed {
-        Some(
-            started
-                .checked_add(
-                    duration.saturating_sub(
-                        admission
-                            .as_ref()
-                            .map_or(reserve, |a| reserve.max(a.decision_communication)),
-                    ),
-                )
-                .ok_or("invalid_sigma_decision_deadline")?,
-        )
-    } else {
-        None
-    };
+    let until = started
+        .checked_add(duration.saturating_sub(reserve))
+        .ok_or("invalid_sigma_decision_deadline")?;
     let root = game.context.clone();
+    let fallback = root.legal_ids().into_iter().next();
     let initial_rng = game.rng.clone();
     let (call, receipt, rng, drained) = thread::scope(|scope| {
         let (notify_tx, notify_rx) = mpsc::channel();
@@ -2105,15 +1840,12 @@ fn play_sigma_receipt(
                     return;
                 }
                 let decision_started = Instant::now();
-                let chosen = completed.and_then(|s| {
-                    choose(
-                        &s.edges,
-                        s.action,
-                        config.temperature,
-                        &mut chosen_rng.borrow_mut(),
-                    )
-                    .map(|action| (s.clone(), action))
-                });
+                let chosen = choose_sigma_action(
+                    completed,
+                    fallback,
+                    config.temperature,
+                    &mut chosen_rng.borrow_mut(),
+                );
                 let _ = notify_tx.send(SigmaNotification {
                     chosen,
                     decision_started,
@@ -2124,7 +1856,6 @@ fn play_sigma_receipt(
                 started,
                 duration,
                 reserve,
-                admission: admission.clone(),
                 generation,
                 simulations: config.simulations,
                 limits: Limits {
@@ -2158,7 +1889,7 @@ fn play_sigma_receipt(
                     }
                     // Notify from a frozen prior completion while continuing
                     // to await this exact admitted request's terminal reply.
-                    if prior.completed.is_some() && until.is_some_and(|d| Instant::now() >= d) {
+                    if Instant::now() >= until {
                         notify(prior.completed.as_ref());
                     }
                 })?;
@@ -2167,11 +1898,7 @@ fn play_sigma_receipt(
                     decision_notified: notified.get(),
                 })
             };
-            let call = if let Some((max_calls, timed)) = measurement {
-                crate::sigma_clock::measure(&root, budget, max_calls, timed, cancelled, infer)
-            } else {
-                crate::sigma_clock::run(&root, budget, cancelled, infer)
-            };
+            let call = crate::sigma_clock::run(&root, budget, cancelled, infer);
             notify(call.completed.as_ref());
             call
         };
@@ -2187,7 +1914,6 @@ fn play_sigma_receipt(
             Err(receipt_error) => Err(call.error.unwrap_or(receipt_error)),
         }
     })?;
-    observe_sigma_receipt(admission.as_ref(), &receipt);
     game.rng = rng;
     let returned = drained;
     game.nn += call.returned;
@@ -2196,18 +1922,18 @@ fn play_sigma_receipt(
         game.allocated_nodes_peak = game.allocated_nodes_peak.max(s.nodes);
         game.terminal_no_nn += u64::from(s.terminal_no_nn);
     }
-    let selected = receipt.notification.chosen.as_ref().map(|(s, _)| s);
+    let selected = receipt
+        .notification
+        .chosen
+        .as_ref()
+        .and_then(|(s, _)| s.as_ref());
     let action = receipt.notification.chosen.as_ref().map(|(_, a)| *a);
     let ns = |at: Instant| {
         at.duration_since(game.origin)
             .as_nanos()
             .min(u64::MAX as u128) as u64
     };
-    let deadline = if timed {
-        ns(started).checked_add(duration.as_nanos().min(u64::MAX as u128) as u64)
-    } else {
-        None
-    };
+    let deadline = ns(started).checked_add(duration.as_nanos().min(u64::MAX as u128) as u64);
     let backend_failed = call.error.as_ref().is_some_and(|e| {
         !matches!(
             e.as_str(),
@@ -2220,15 +1946,7 @@ fn play_sigma_receipt(
         || call.stop == "cancelled"
         || config.pause_file.as_ref().is_some_and(|p| p.exists());
     let checked = Instant::now();
-    let mut decision = sigma_receipt_decision(
-        if timed {
-            started.checked_add(duration)
-        } else {
-            None
-        },
-        &receipt,
-        cancelled,
-    );
+    let mut decision = sigma_receipt_decision(started.checked_add(duration), &receipt, cancelled);
     if !cancelled && call.error.is_some() {
         decision = Err(crate::arena_clock::Failure::EngineError);
     }
@@ -2236,16 +1954,6 @@ fn play_sigma_receipt(
         decision = Err(crate::arena_clock::failure_from_reason(&reason));
     }
     let mut counters = call.counters();
-    counters["measurement_mode"] = measurement
-        .map(|(_, timed)| {
-            if timed {
-                "qualified-timed"
-            } else {
-                "explicit-untimed"
-            }
-        })
-        .into();
-    counters["measurement_call_limit"] = measurement.map(|(n, _)| n).into();
     counters["immutable_chosen_action"] = action.into();
     counters["authority_legal"] = receipt.legal.into();
     counters["inflight_after_drain"] = 0.into();
@@ -2278,19 +1986,6 @@ fn play_sigma_receipt(
         .as_nanos()
         .min(u64::MAX as u128) as u64)
         .into();
-    counters["cost_qualification_available"] = admission.is_some().into();
-    counters["cost_qualification_usable_after_drain"] = admission
-        .as_ref()
-        .map(|a| a.usable.load(Ordering::Relaxed))
-        .into();
-    counters["operation_upper_ns"] = admission
-        .as_ref()
-        .map(|a| a.operation.as_nanos().min(u64::MAX as u128) as u64)
-        .into();
-    counters["decision_communication_upper_ns"] = admission
-        .as_ref()
-        .map(|a| a.decision_communication.as_nanos().min(u64::MAX as u128) as u64)
-        .into();
     counters["terminal_request_error"] = call.error.clone().into();
     counters["cancellation_flag_at_return"] = cancel.load(Ordering::Relaxed).into();
     counters["pause_at_return"] = config
@@ -2300,7 +1995,15 @@ fn play_sigma_receipt(
         .into();
     counters["guard_reason_at_return"] = guard(config, run_start, u64::MAX).into();
     counters["last_completed_simulation_ns"] = call.completed_at.map(ns).into();
-    counters["completed_simulations"] = selected.map(|s| s.root_visits).into();
+    counters["completed_simulations"] = selected.map_or(0, |s| s.root_visits).into();
+    counters["selection_reason"] = if selected.is_some() {
+        "completed_simulation"
+    } else if action.is_some() {
+        "legal_fallback_no_completed_simulation"
+    } else {
+        "no_legal_action"
+    }
+    .into();
     counters["completed_simulation_counters"] =
         selected.map(crate::sigma_clock::snapshot_counters).into();
     counters["selected_child_q"] = action
@@ -2351,8 +2054,14 @@ fn play_sigma_receipt(
     if let Some(error) = call.error {
         return Err(error);
     }
-    let s = selected.ok_or("no_completed_mcts_simulation")?;
-    let action = action.ok_or("no_completed_mcts_simulation")?;
+    let action = action.ok_or("no_legal_mcts_action")?;
+    let Some(s) = selected else {
+        if game.record_teacher {
+            return Err("mcts_fallback_has_no_teacher".into());
+        }
+        return commit_action(game, action, None, config, cancel, run_start)
+            .map_err(|e| e.to_string());
+    };
     play_completed(
         game,
         action,
@@ -2414,9 +2123,8 @@ fn worker(
     cancel: Arc<AtomicBool>,
     evaluators: Vec<InitializedEvaluator>,
     record_teacher: bool,
-    clock: (Instant, Option<crate::sigma_clock::Admission>),
+    run_start: Instant,
 ) {
-    let (run_start, sigma_admission) = clock;
     let (reply_tx, reply_rx) = mpsc::channel::<Response>();
     let mut waiting = VecDeque::from(plans);
     let mut games: Vec<Game> = Vec::new();
@@ -2537,7 +2245,7 @@ fn worker(
                 .map(|_| position_traits(g, &config));
             let mut failure = None;
             if e.kind == "mcts" && e.time_ms.is_some() && !g.record_teacher {
-                if let Err(error) = play_timed_sigma(
+                if let Err(error) = play_sigma_receipt(
                     g,
                     engine_index,
                     &config,
@@ -2547,7 +2255,6 @@ fn worker(
                         events: &events,
                         tx: &reply_tx,
                         rx: &reply_rx,
-                        admission: sigma_admission.clone(),
                     },
                     &evaluators[engine_index].identity.row_identity,
                 ) {
@@ -3033,7 +2740,6 @@ fn run_inner(
     mode: &str,
     provided: Option<Box<dyn InferenceBackend>>,
     output_owned: &mut bool,
-    qualification: Option<SigmaCostQualification>,
 ) -> Result<RunReport> {
     config.validate().map_err(|e| format!("config: {e}"))?;
     if (config.games as u64)
@@ -3176,17 +2882,6 @@ fn run_inner(
     } else {
         make_backend(config)?
     };
-    let sigma_admission = qualification
-        .as_ref()
-        .map(|q| {
-            q.admission(
-                config,
-                backend
-                    .as_deref()
-                    .ok_or("sigma_cost_qualification_backend_missing")?,
-            )
-        })
-        .transpose()?;
     if matches!(mode, "arena" | "decisions") {
         let mut manifest: serde_json::Value =
             serde_json::from_slice(&fs::read(config.output.join("manifest-start.json"))?)?;
@@ -3204,7 +2899,6 @@ fn run_inner(
         manifest["clock"]["sigma_drain"] =
             "all admitted matching terminal replies and original errors before opponent clock"
                 .into();
-        manifest["clock"]["sigma_cost_qualification"] = serde_json::to_value(&qualification)?;
         manifest["clock"]["sigma_timeout_outcome"] =
             "UNKNOWN, no timeout-forfeit authorization".into();
         fs::write(
@@ -3240,12 +2934,11 @@ fn run_inner(
         let a = arc.clone();
         let e = evaluators.clone();
         let core = admission.worker_cores[w];
-        let sigma_admission = sigma_admission.clone();
         handles.push(thread::spawn(move || {
             if crate::resources::pin(core).is_err() {
                 c.store(true, Ordering::Relaxed);
             }
-            worker(a, p, tx, c, e, mode_is_selfplay, (start, sigma_admission))
+            worker(a, p, tx, c, e, mode_is_selfplay, start)
         }));
     }
     drop(tx);
@@ -3522,32 +3215,10 @@ fn deliver_inference(
     }
 }
 #[cfg(test)]
-mod sigma_measurement_delivery_tests {
+mod sigma_terminal_delivery_tests {
     use super::*;
     #[test]
-    fn measurement_publication_preserves_the_primary_error_object() {
-        use std::error::Error;
-        let error = MeasurementPublicationFailure {
-            primary: Box::new(std::io::Error::new(
-                std::io::ErrorKind::InvalidData,
-                "original",
-            )),
-            publication: "secondary".into(),
-        };
-        assert_eq!(
-            error
-                .source()
-                .unwrap()
-                .downcast_ref::<std::io::Error>()
-                .unwrap()
-                .kind(),
-            std::io::ErrorKind::InvalidData
-        );
-        assert!(error.to_string().contains("original"));
-        assert!(error.to_string().contains("secondary"));
-    }
-    #[test]
-    fn shared_measurement_delivery_keeps_the_original_terminal_error_after_cancel() {
+    fn terminal_delivery_keeps_the_original_error_after_cancel() {
         let (tx, rx) = mpsc::channel();
         let id = RequestId {
             game: 0,
@@ -3705,7 +3376,7 @@ fn failure_publication_owned(owned: bool, path: &Path) -> bool {
 /// Publish every planned slot even when initialization fails before workers
 /// start. Existing outputs are never touched by a rejected invocation.
 pub fn run(config: &Config, mode: &str) -> Result<RunReport> {
-    run_owned(config, mode, None, None)
+    run_owned(config, mode, None)
 }
 /// Embed a held runtime in the runner without an RPC/service boundary.
 pub fn run_with_backend(
@@ -3713,17 +3384,7 @@ pub fn run_with_backend(
     mode: &str,
     backend: Box<dyn InferenceBackend>,
 ) -> Result<RunReport> {
-    run_owned(config, mode, Some(backend), None)
-}
-/// Use a separately admitted, current qualification; never measure live costs
-/// implicitly as part of a timed decision or reuse an old compiler/config proof.
-pub fn run_with_sigma_cost_qualification(
-    config: &Config,
-    mode: &str,
-    backend: Option<Box<dyn InferenceBackend>>,
-    qualification: SigmaCostQualification,
-) -> Result<RunReport> {
-    run_owned(config, mode, backend, Some(qualification))
+    run_owned(config, mode, Some(backend))
 }
 /// One ordinary arena error funnel, distinct from successful archive publication.
 /// Own the original primary object and report even if every evidence write failed.
@@ -3805,274 +3466,13 @@ fn publish_arena(config: &Config, mut report: RunReport) -> Result<RunReport> {
         }
     }
 }
-#[derive(Debug)]
-struct MeasurementPublicationFailure {
-    primary: Box<dyn std::error::Error + Send + Sync>,
-    publication: String,
-}
-impl std::fmt::Display for MeasurementPublicationFailure {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(
-            f,
-            "{}; measurement evidence publication:{}",
-            self.primary, self.publication
-        )
-    }
-}
-impl std::error::Error for MeasurementPublicationFailure {
-    fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
-        Some(self.primary.as_ref())
-    }
-}
-/// A separately admitted, explicitly finite measurement workload, never a game
-/// or an implicit calibration in a timed arena. The arena owns the complete
-/// prebound <=64-call campaign and supplies all phase allocations before entry.
-pub fn measure_sigma_cost(
-    plan: crate::sigma_qualification::MeasurementPlan,
-    plan_sha256: String,
-    qualification: Option<crate::sigma_qualification::BoundControl>,
-) -> Result<serde_json::Value> {
-    let qualifications =
-        crate::sigma_qualification::resolve_measurement_entry(&plan, qualification.as_ref())?;
-    measure_sigma_cost_resolved(plan, plan_sha256, qualifications)
-}
-fn measure_sigma_cost_resolved(
-    plan: crate::sigma_qualification::MeasurementPlan,
-    plan_sha256: String,
-    qualifications: Option<Vec<SigmaCostQualification>>,
-) -> Result<serde_json::Value> {
-    use serde_json::json;
-    let configs = plan.validate()?;
-    let timed = plan.mode == "qualified-timed";
-    if timed != qualifications.is_some()
-        || qualifications
-            .as_ref()
-            .is_some_and(|q| q.len() != configs.len())
-    {
-        return Err("timed validation requires explicit mapped measurement evidence; untimed never uses a cost guess".into());
-    }
-    let config = &configs[0];
-    let _affinity = crate::resources::AffinityGuard::capture()?;
-    let admission = if let Some(core) = config.inference_cpu_core {
-        if serial_shared_inference_allowed(config, "arena", false) {
-            crate::resources::admit_serial_shared(
-                core,
-                config.host_ram_reserve,
-                config.max_memory_bytes,
-            )?
-        } else {
-            crate::resources::admit_explicit(
-                1,
-                &config.cpu_cores,
-                core,
-                config.host_ram_reserve,
-                config.max_memory_bytes,
-            )?
-        }
-    } else {
-        crate::resources::admit(
-            1,
-            &config.cpu_cores,
-            true,
-            config.host_ram_reserve,
-            config.max_memory_bytes,
-        )?
-    };
-    let mut output_owned = false;
-    acquire_output(&plan.output, &mut output_owned)?;
-    let result = (|| -> Result<serde_json::Value> {
-        let started = Instant::now();
-        let mut backend = make_backend(config)?.ok_or("measurement backend missing")?;
-        if crate::sigma_qualification::backend_binding(config, backend.metadata())?
-            != plan.native.backend_sha256
-        {
-            return Err("measurement backend/native binding mismatch".into());
-        }
-        let initial_work = backend.counters();
-        // CPU ORT construction has no implicit forward. Reject unknown capture,
-        // hidden warm/retry or an already-used runtime instead of refunding it.
-        if initial_work != InferenceCounters::default() {
-            return Err(
-                "measurement runtime already used or has unallocated startup model work".into(),
-            );
-        }
-        let sigma_admissions = qualifications
-            .as_ref()
-            .map(|q| {
-                q.iter()
-                    .zip(&configs)
-                    .map(|(q, c)| q.admission(c, backend.as_ref()))
-                    .collect::<Result<Vec<_>>>()
-            })
-            .transpose()?;
-        if let Some(core) = admission.inference_core {
-            crate::resources::pin(core)?;
-        }
-        let cancel = AtomicBool::new(false);
-        let (tx, rx) = mpsc::sync_channel(8);
-        let mut attempted = 0u64;
-        let mut terminal_replies = 0u64;
-        let mut stopped = None;
-        let mut inference_seconds = 0.0;
-        let worker_core = admission.worker_cores[0];
-        let (items, worker_error) = thread::scope(|scope| -> Result<_> {
-            let cancel = &cancel;
-            let configs = &configs;
-            let plan = &plan;
-            let sigma_admissions = &sigma_admissions;
-            let worker = scope.spawn(move || -> (Vec<serde_json::Value>, Option<String>) {
-                let mut items = Vec::new();
-                if let Err(error) = crate::resources::pin(worker_core) {
-                    return (items, Some(format!("measurement_worker_affinity:{error}")));
-                }
-                let (reply_tx, reply_rx) = mpsc::channel();
-                for (index, item) in plan.workload.iter().enumerate() {
-                    if cancel.load(Ordering::Relaxed) { return (items, Some("measurement_cancelled".into())); }
-                    let config = &configs[item.configuration];
-                    let context = match SigmaContext::from_prefix_with_rules(&item.prefix, config.ruleset) {
-                        Ok(context) => context,
-                        Err(error) => return (items, Some(format!("measurement_input:{error}"))),
-                    };
-                    let parent = serde_json::json!({"prefix":item.prefix,"state_key":quoridor_core::research::HistoryKey::from(context.position()).history_string(),"ply":context.total_ply()});
-                    let mut game = new_game(Planned { id:index, candidate_color:(index%2) as u8, opening:item.prefix.clone(), family:item.id.clone(), split:Split::Train }, context, config, false);
-                    let model_sha = &config.inference.as_ref().expect("validated inference").model_sha;
-                    let result = play_sigma_receipt(&mut game, 0, config, cancel, started, SigmaReplies {
-                        events:&tx, tx:&reply_tx, rx:&reply_rx,
-                        admission:sigma_admissions.as_ref().map(|a| a[item.configuration].clone()),
-                    }, SigmaReceiptOptions { model_sha, measurement: Some((item.max_logical_calls, timed)) });
-                    let observation = game.observations.last();
-                    let error = result.err().map(|error| observation
-                        .and_then(|o| o.counters["terminal_request_error"].as_str())
-                        .map(str::to_owned).unwrap_or(error));
-                    // The first explicitly admitted call is the warmup and
-                    // the second is its continuation on this SAME cursor.
-                    // No extra search, backend warmup, re-warm or retry occurs.
-                    let actual_calls=observation.and_then(|o|o.counters["nn_requests_attempted"].as_u64()).unwrap_or(0);
-                    let error=error.or_else(|| (actual_calls!=item.max_logical_calls).then(||"unsupported_measurement_prerequisite:fixed_two_calls_not_completed".into()));
-                    items.push(json!({"id":item.id,"stage":item.stage,"configuration":item.configuration,
-                        "config_sha256":plan.configurations[item.configuration].normalized_sha256,
-                        "parent":parent,"receipt":observation,"warmup_logical_calls":actual_calls.min(item.warmup_logical_calls),
-                        "error":error,"full_operation_scope":"maintained advance/pack/request queue/backend/matching reply/validation/supply/legal snapshot/return snapshot"}));
-                    if error.is_some() { return (items, error); }
-                }
-                (items, None)
-            });
-            while let Ok(event) = rx.recv() {
-                match event {
-                    Event::Request(request) => {
-                        let reason = if attempted >= plan.max_logical_calls {
-                            Some("measurement_call_allocation_exhausted".to_owned())
-                        } else if unix_ms() >= plan.native.valid_until_unix_ms {
-                            Some("measurement_identity_expired".to_owned())
-                        } else {
-                            guard(config, started, admission.memory_limit)
-                        };
-                        if let Some(reason) = reason {
-                            let _ = request.complete(Err(reason.clone()));
-                            stopped.get_or_insert(reason);
-                            cancel.store(true, Ordering::Relaxed);
-                            continue;
-                        }
-                        let requests = vec![request];
-                        let input: Vec<_> = requests.iter().map(|r| *r.input).collect();
-                        let before = Instant::now();
-                        let result = backend.infer(&input);
-                        inference_seconds += before.elapsed().as_secs_f64();
-                        attempted += 1;
-                        // Every admitted synchronous invocation returns exactly
-                        // one terminal response, including its original error.
-                        deliver_inference(requests, result, &mut stopped, cancel);
-                        terminal_replies += 1;
-                    }
-                    Event::Finished(_, _) | Event::WorkerStopped => {
-                        stopped.get_or_insert_with(|| "unexpected_measurement_event".into());
-                        cancel.store(true, Ordering::Relaxed);
-                    }
-                }
-            }
-            worker
-                .join()
-                .map_err(|_| "measurement_worker_panicked".into())
-        })?;
-        if let Some(error) = worker_error {
-            stopped.get_or_insert(error);
-        }
-        let work = backend.counters();
-        if work.logical_rows != attempted
-            || work.executed_rows != attempted
-            || work.warm_rows != 0
-            || work.failed_warm_rows != 0
-            || work.capture_rows != Some(0)
-        {
-            stopped.get_or_insert_with(|| {
-                "native work census differs from allocated logical requests".into()
-            });
-        }
-        let native_work = inference_work(work);
-        let cleanup_started = Instant::now();
-        drop(backend);
-        let cleanup_seconds = cleanup_started.elapsed().as_secs_f64();
-        Ok(
-            json!({"schema":"quoridor-sigma-receipt-measurement-result-v1",
-            "plan_sha256":plan_sha256,"campaign_sha256":plan.campaign.sha256,"phase_id":plan.phase_id,"native":plan.native,"mode":plan.mode,
-            "configuration_sha256":plan.configurations.iter().map(|c|&c.normalized_sha256).collect::<Vec<_>>(),
-            "complete":stopped.is_none() && items.len()==plan.workload.len(),"items":items,
-            "logical_calls_attempted":attempted,"returned_terminal_replies":terminal_replies,
-            "prior_logical_calls":plan.prior_logical_calls,"allocated_logical_calls":plan.max_logical_calls,
-            "backend_work":native_work,"pure_backend_seconds":inference_seconds,
-            "backend_cleanup_seconds":cleanup_seconds,"whole_entry_seconds":started.elapsed().as_secs_f64(),
-            "admission":admission,"inflight_after_drain":0,"all_workers_joined":true,
-            "stopped":stopped,"hard_realtime_certificate":false,"games_played":0}),
-        )
-    })();
-    let record = match &result {
-        Ok(record) => record.clone(),
-        Err(error) => json!({"schema":"quoridor-sigma-receipt-measurement-failure-v1",
-            "complete":false,"plan_sha256":plan_sha256,"native":plan.native,"primary_error":error.to_string(),
-            "remaining_work":"UNKNOWN on initialization/unwind; no successful qualification"}),
-    };
-    let publication = (|| -> Result<()> {
-        use std::io::Write;
-        let bytes = serde_json::to_vec_pretty(&record)?;
-        if bytes.len() as u64 > config.max_output_bytes {
-            return Err("measurement evidence output budget".into());
-        }
-        let mut file = OpenOptions::new()
-            .create_new(true)
-            .write(true)
-            .open(plan.output.join("measurement-result.json"))?;
-        file.write_all(&bytes)?;
-        file.sync_all()?;
-        Ok(())
-    })();
-    match (result, publication) {
-        (Err(primary), Err(publication)) => Err(Box::new(MeasurementPublicationFailure {
-            primary,
-            publication: publication.to_string(),
-        })),
-        (Err(primary), _) => Err(primary),
-        (Ok(_), Err(publication)) => Err(publication),
-        (Ok(record), Ok(())) => Ok(record),
-    }
-}
 fn run_owned(
     config: &Config,
     mode: &str,
     backend: Option<Box<dyn InferenceBackend>>,
-    qualification: Option<SigmaCostQualification>,
 ) -> Result<RunReport> {
-    if let Some(q) = &qualification
-        && (q.whole_operation_upper_ns == 0
-            || q.decision_communication_upper_ns == 0
-            || q.valid_until_unix_ms <= unix_ms()
-            || q.config_sha256 != crate::arena::json_digest(config)?
-            || q.executable_sha256
-                != crate::arena_manifest::file_sha256(&std::env::current_exe()?)?)
-    {
-        return Err("sigma_cost_qualification_static_binding_invalid".into());
-    }
     let mut output_owned = false;
-    let error = match run_inner(config, mode, backend, &mut output_owned, qualification) {
+    let error = match run_inner(config, mode, backend, &mut output_owned) {
         Ok(report) => return Ok(report),
         Err(error) => error,
     };
@@ -5939,7 +5339,7 @@ mod three_engine_374_postjoin_tests {
         };
         SigmaReceipt {
             notification: SigmaNotification {
-                chosen: chosen.then_some((snapshot, 13)),
+                chosen: chosen.then_some((Some(snapshot), 13)),
                 decision_started: received,
                 sent: received,
             },
@@ -6044,5 +5444,98 @@ mod three_engine_374_postjoin_tests {
             sigma_receipt_decision(Some(deadline), &illegal, false),
             Err(Failure::IllegalMove)
         );
+    }
+}
+
+#[cfg(test)]
+mod no_cost_prediction_tests {
+    use super::*;
+
+    // Metadata and channel fixtures only: no Context, Search, model or inference.
+    #[test]
+    fn no_cost_prediction_fallback_has_no_completed_snapshot_or_teacher() {
+        let mut rng = Rng::new(7);
+        let before = rng.clone().next_u64();
+        let chosen = choose_sigma_action(None, Some(13), 1.0, &mut rng).unwrap();
+        assert!(chosen.0.is_none());
+        assert_eq!(chosen.1, 13);
+        assert_eq!(rng.next_u64(), before);
+        assert!(choose_sigma_action(None, None, 1.0, &mut rng).is_none());
+    }
+
+    #[test]
+    fn no_cost_prediction_fallback_receipt_deadline_cancel_and_legality_are_strict() {
+        use crate::arena_clock::Failure;
+        let deadline = Instant::now();
+        let mut receipt = SigmaReceipt {
+            notification: SigmaNotification {
+                chosen: Some((None, 13)),
+                decision_started: deadline - Duration::from_nanos(2),
+                sent: deadline - Duration::from_nanos(1),
+            },
+            received: deadline - Duration::from_nanos(1),
+            legality_finished: deadline,
+            legal: true,
+        };
+        assert_eq!(
+            sigma_receipt_decision(Some(deadline), &receipt, false),
+            Ok(())
+        );
+        assert_eq!(
+            sigma_receipt_decision(Some(deadline), &receipt, true),
+            Err(Failure::Cancelled)
+        );
+        receipt.received = deadline;
+        assert_eq!(
+            sigma_receipt_decision(Some(deadline), &receipt, false),
+            Err(Failure::TimeOverrun)
+        );
+        receipt.legal = false;
+        assert_eq!(
+            sigma_receipt_decision(Some(deadline), &receipt, false),
+            Err(Failure::IllegalMove)
+        );
+    }
+
+    #[test]
+    fn no_cost_prediction_pending_terminal_error_drains_after_fallback_notification() {
+        // A timeout callback may publish a fallback; it cannot return or hide the
+        // terminal backend error, even if cancellation follows the notification.
+        thread::scope(|scope| {
+            let (tx, rx) = mpsc::channel();
+            let (notify_tx, notify_rx) = mpsc::channel();
+            let id = RequestId {
+                game: 0,
+                generation: 1,
+                token: 7,
+            };
+            let worker = scope.spawn(move || {
+                assert_eq!(notify_rx.recv().unwrap(), 13);
+                tx.send(Response {
+                    id,
+                    output: Err("distinctive-original-backend-error".into()),
+                })
+                .unwrap();
+                Instant::now()
+            });
+            let mut notified = false;
+            let cancel = AtomicBool::new(false);
+            let terminal = wait_sigma_reply(&rx, id, || {
+                if !notified {
+                    let chosen =
+                        choose_sigma_action(None, Some(13), 0.0, &mut Rng::new(1)).unwrap();
+                    assert!(chosen.0.is_none());
+                    notify_tx.send(chosen.1).unwrap();
+                    notified = true;
+                    cancel.store(true, Ordering::Relaxed);
+                }
+            });
+            assert!(notified && cancel.load(Ordering::Relaxed));
+            assert_eq!(terminal.unwrap_err(), "distinctive-original-backend-error");
+            let terminal_sent = worker.join().unwrap();
+            let next_slot_started = Instant::now();
+            assert!(next_slot_started >= terminal_sent);
+            assert!(rx.try_recv().is_err());
+        });
     }
 }

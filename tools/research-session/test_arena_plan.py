@@ -260,192 +260,6 @@ class ArenaPlanTests(unittest.TestCase):
             with self.assertRaises(lc.Refused):
                 lc.issued_family_upper(spec, bad)
 
-    def test_three_engine_374_actual_cost_phase_binds_case_order_image_plan_and_full_requests(self):
-        # Real metadata FileRefs and owning guards, fake image/library/model bytes only.
-        # No config/model factory, import, clock, native or backend invocation.
-        with tempfile.TemporaryDirectory() as t:
-            self.tmp = type("TMP", (), {"name": t})()
-            spec, e, approved, _, _ = self.fixture(1, 4)
-            onnx = self.json_file("FAKE-COST-MODEL.json", {"not_loaded": True})
-            lib = self.json_file("FAKE-COST-LIB.json", {"not_loaded": True})
-            measured = {
-                "engines": [{"kind": "mcts"}, {"kind": "distance"}],
-                "arena": {"evaluator_sha256": [onnx["sha256"], "b" * 64]},
-                "inference": {
-                    "model": onnx["path"],
-                    "model_sha": onnx["sha256"],
-                    "library": lib["path"],
-                },
-                "cpu_cores": [3],
-                "inference_cpu_core": 3,
-                "max_memory_bytes": 1024**3,
-                "host_ram_reserve": 4 * 1024**3,
-            }
-            configs = [
-                {
-                    "file": {k: r[k] for k in ("path", "sha256")},
-                    "normalized_sha256": str(i + 1) * 64,
-                }
-                for i, r in enumerate(
-                    [
-                        self.json_file("cost-D.json", measured),
-                        self.json_file("cost-NN.json", {**measured, "fixture_opponent": "NN"}),
-                    ]
-                )
-            ]
-            phases = [
-                {
-                    "id": mode,
-                    "mode": mode,
-                    "max_logical_calls": 32,
-                    "workload": [
-                        {
-                            "id": f"FAKE-{i}",
-                            "configuration": i % 2,
-                            "prefix": [13],
-                            "stage": "warmup-and-measurement" if index == 0 else "timed-receipt",
-                            "warmup_logical_calls": 1 - index,
-                            "max_logical_calls": 2,
-                        }
-                        for i in range(16)
-                    ],
-                }
-                for index, mode in enumerate(("untimed", "qualified-timed"))
-            ]
-            cases = self.json_file("cost-cases.json", {"configurations": configs, "phases": phases})
-            approved["matchups"] = [
-                {
-                    "id": i,
-                    "engines": measured["engines"],
-                    "inference": measured["inference"],
-                    "evaluator_sha256": measured["arena"]["evaluator_sha256"],
-                }
-                for i in range(2)
-            ]
-            approved["sigma_cost_cases"] = cases
-            spec["approved_plan"] = self.json_file("cost-approved.json", approved)
-            launched = lc.time.time_ns() // 1000000 - 1000
-            native = {
-                "executable_sha256": spec["artifact"]["sha256"],
-                "backend_sha256": "c" * 64,
-                "valid_until_unix_ms": launched + 86400000,
-            }
-            campaign = {
-                "approved_plan": spec["approved_plan"],
-                "configurations": configs,
-                "native": native,
-                "phases": phases,
-                "maximum_total_logical_backend_rows_or_requests": 64,
-                "cost_formula_prebound": {"factor": 4, "additive_margin_ns": 2000000},
-                "qualification_started_unix_ms": launched,
-                "valid_until_unix_ms": native["valid_until_unix_ms"],
-            }
-            campaign_ref = self.json_file("cost-campaign.json", campaign)
-            plan = {
-                "phase_id": "untimed",
-                "mode": "untimed",
-                "native": native,
-                "configurations": configs,
-                "campaign": {k: campaign_ref[k] for k in ("path", "sha256")},
-                "max_logical_calls": 32,
-                "prior_logical_calls": 0,
-                "prior_results": [],
-                "workload": phases[0]["workload"],
-                "output": spec["data_root"],
-            }
-            e.update(
-                phase="sigma-cost-qualification",
-                planned_slots=64,
-                batch=0,
-                models=[],
-                numerical_qualification=None,
-                schedule=cases,
-                config=self.json_file("cost-plan.json", plan),
-                inputs=[campaign_ref, onnx, *[lc.bound(c["file"]["path"])[0] for c in configs]],
-                dynamic_libraries=[{"file": lib, "version": "SYNTHETIC-not-loaded"}],
-                argv=[
-                    spec["artifact"]["path"],
-                    "sigma-cost-measure",
-                    "--experiment",
-                    "@EXPERIMENT@",
-                    "--experiment-sha256",
-                    "@EXPERIMENT_SHA256@",
-                ],
-            )
-            spec["limits"] = {
-                "worker_cpu": 3,
-                "family_B": 3 * 1024**3,
-                "controller_B": 64 * 1024**2,
-                "host_reserve_B": 4 * 1024**3,
-            }
-            spec["data"] = [
-                {
-                    "name": "measurement",
-                    "path": str(Path(spec["data_root"]) / "measurement-result.json"),
-                    "limit_B": lc.CONTROL_BYTES,
-                }
-            ]
-            build = {"artifact": spec["artifact"]}
-            lc.sigma_cost_check(spec, e, build, approved)
-            for change in ("plan", "image", "calls", "order", "output", "model", "partial_phase"):
-                bad = copy.deepcopy(plan)
-                wrong_e = copy.deepcopy(e)
-                wrong_spec = copy.deepcopy(spec)
-                wrong_build = copy.deepcopy(build)
-                if change == "plan":
-                    wrong_spec["approved_plan"]["sha256"] = "0" * 64
-                elif change == "image":
-                    wrong_build["artifact"]["sha256"] = "0" * 64
-                elif change == "calls":
-                    bad["max_logical_calls"] = 31
-                elif change == "order":
-                    bad["workload"].reverse()
-                elif change == "output":
-                    bad["output"] += "-wrong"
-                elif change == "model":
-                    wrong_e["inputs"] = [r for r in wrong_e["inputs"] if r != onnx]
-                else:
-                    wrong_e["batch"] = 1
-                wrong_e["config"] = self.json_file("changed-cost-plan.json", bad)
-                with self.assertRaises((lc.Refused, KeyError, StopIteration)):
-                    lc.sigma_cost_check(wrong_spec, wrong_e, wrong_build, approved)
-            root = Path(spec["data_root"])
-            root.mkdir()
-            result = {
-                "schema": "quoridor-sigma-receipt-measurement-result-v1",
-                "complete": True,
-                "all_workers_joined": True,
-                "inflight_after_drain": 0,
-                "stopped": None,
-                "games_played": 0,
-                "plan_sha256": e["config"]["sha256"],
-                "campaign_sha256": campaign_ref["sha256"],
-                "native": native,
-                "phase_id": "untimed",
-                "mode": "untimed",
-                "configuration_sha256": [c["normalized_sha256"] for c in configs],
-                "logical_calls_attempted": 32,
-                "returned_terminal_replies": 32,
-                "backend_work": {"logical_rows": 32, "physical_rows": 32, "failed_rows": 0},
-                "items": [
-                    {
-                        "id": w["id"],
-                        "configuration": w["configuration"],
-                        "stage": w["stage"],
-                        "parent": {"prefix": w["prefix"]},
-                    }
-                    for w in plan["workload"]
-                ],
-            }
-            output = root / "measurement-result.json"
-            output.write_text(json.dumps(result))
-            self.assertEqual(lc.collect_data(spec, e)["status"], "PASS")
-            result["returned_terminal_replies"] = 31
-            output.write_text(json.dumps(result))
-            data = lc.collect_data(spec, e)
-            self.assertEqual(data["status"], "FAILED")
-            self.assertEqual(data["planned_slots"], 64)
-
     def test_three_engine_374_closed_sigma_backend_and_current_libraries(self):
         with tempfile.TemporaryDirectory() as t:
             self.tmp = type("TMP", (), {"name": t})()
@@ -465,12 +279,6 @@ class ArenaPlanTests(unittest.TestCase):
             e["dynamic_libraries"] = [{"file": library, "version": "synthetic-not-loaded"}]
             plan["matchups"][0]["engines"][1]["kind"] = "mcts"
             plan["matchups"][0]["evaluator_sha256"][1] = onnx["sha256"]
-            cost = self.json_file(
-                "FAKE-COST-NOT-QUALIFIED.json",
-                {"fixture": "metadata only; not clock qualification"},
-            )
-            plan["matchups"][0]["sigma_cost_qualification"] = cost
-            e["inputs"].append(cost)
             plan["matchups"][0]["inference"] = inference
             lc.arena_model_check(e, plan, 2)
             wrong = copy.deepcopy(plan)
@@ -610,6 +418,64 @@ class ArenaPlanTests(unittest.TestCase):
         obs["engine_index"] = 1
         with self.assertRaises(lc.Refused):
             lc.arena_observation(c, row)
+
+    def test_no_cost_prediction_zero_work_fallback_requires_honest_null_metrics(self):
+        # Synthetic saved records; no native, geometry, backend or model execution.
+        c = {
+            "engines": [{"kind": "mcts"}],
+            "arena": {"decision_only": True, "comparison": "whole_wall_time"},
+        }
+        obs = {
+            "engine_index": 0,
+            "caller_seconds": 0.12,
+            "thinking_seconds": 0.09,
+            "value_stm": None,
+            "accepted": True,
+            "failure": None,
+            "engine_error": None,
+            "action": 13,
+            "pv": [],
+            "completed_depth": None,
+            "accepted_ns": 122,
+            "admission_checked_ns": 121,
+            "returned_ns": 120,
+            "deadline_ns": 100,
+            "counters": {
+                "authority_receipt_ns": 90,
+                "drain_finished_ns": 120,
+                "authority_legal": True,
+                "inflight_after_drain": 0,
+                "completed_simulations": 0,
+                "selection_reason": "legal_fallback_no_completed_simulation",
+                "completed_simulation_counters": None,
+                "last_completed_simulation_ns": None,
+                "clock_contract": "authority-action-receipt-v1",
+                "clock_contract_sha256": "04062382f70648cdfd722e59c35be1100719169097a04749b0046ea5a19a280d",
+            },
+        }
+        row = {"observations": [obs], "moves": []}
+        lc.arena_observation(c, row)
+        for field, value in [
+            ("selection_reason", "completed_simulation"),
+            ("completed_simulation_counters", {"root_visits": 1}),
+            ("last_completed_simulation_ns", 80),
+            ("authority_receipt_ns", 100),
+            ("drain_finished_ns", 89),
+            ("inflight_after_drain", 1),
+        ]:
+            wrong = copy.deepcopy(row)
+            wrong["observations"][0]["counters"][field] = value
+            with self.assertRaises(lc.Refused):
+                lc.arena_observation(c, wrong)
+        wrong = copy.deepcopy(row)
+        wrong["observations"][0]["value_stm"] = 0.2
+        with self.assertRaises(lc.Refused):
+            lc.arena_observation(c, wrong)
+        for missing in ["completed_simulation_counters", "last_completed_simulation_ns"]:
+            wrong = copy.deepcopy(row)
+            del wrong["observations"][0]["counters"][missing]
+            with self.assertRaises(lc.Refused):
+                lc.arena_observation(c, wrong)
 
     def test_three_engine_374_exact_full_prefix_is_distinct_from_accepted_suffix(self):
         c = {

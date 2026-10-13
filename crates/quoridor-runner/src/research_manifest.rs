@@ -1,9 +1,48 @@
 //! One adopted build plus one experiment. Source acceptance belongs to build adoption, not each run.
-use crate::{arena, sigma_qualification::BoundControl};
+use crate::arena;
 use quoridor_data::Result;
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 use std::{fs, io::Read, path::PathBuf};
+
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct BoundControl {
+    pub path: PathBuf,
+    pub sha256: String,
+}
+impl BoundControl {
+    pub fn read<T: serde::de::DeserializeOwned>(&self) -> Result<T> {
+        if self.sha256.len() != 64
+            || !self
+                .sha256
+                .bytes()
+                .all(|b| b.is_ascii_digit() || (b'a'..=b'f').contains(&b))
+        {
+            return Err("exact lower-case SHA256 required".into());
+        }
+        if !self.path.is_absolute() || self.path.canonicalize()? != self.path {
+            return Err("control path must be canonical absolute".into());
+        }
+        let mut options = std::fs::OpenOptions::new();
+        options.read(true);
+        #[cfg(unix)]
+        {
+            use std::os::unix::fs::OpenOptionsExt;
+            options.custom_flags(libc::O_NOFOLLOW);
+        }
+        let file = options.open(&self.path)?;
+        if !file.metadata()?.is_file() {
+            return Err("regular control file required".into());
+        }
+        let mut raw = Vec::new();
+        file.take(1024 * 1024 + 1).read_to_end(&mut raw)?;
+        if raw.len() as u64 > 1024 * 1024 || crate::arena::digest(&raw) != self.sha256 {
+            return Err("control size/SHA mismatch".into());
+        }
+        Ok(serde_json::from_slice(&raw)?)
+    }
+}
 
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(deny_unknown_fields)]
@@ -132,21 +171,6 @@ fn phase_shape(e: &Experiment) -> bool {
                 && e.argv[1..]
                     == [
                         "strength-book",
-                        "--experiment",
-                        "@EXPERIMENT@",
-                        "--experiment-sha256",
-                        "@EXPERIMENT_SHA256@",
-                    ]
-        }
-        "sigma-cost-qualification" => {
-            e.models.is_empty()
-                && e.planned_slots == 64
-                && matches!(e.batch, Some(0) | Some(1))
-                && e.numerical_qualification.is_some() == (e.batch == Some(1))
-                && e.argv.len() == 6
-                && e.argv[1..]
-                    == [
-                        "sigma-cost-measure",
                         "--experiment",
                         "@EXPERIMENT@",
                         "--experiment-sha256",
@@ -477,7 +501,7 @@ fn load_checked(
         generation_inputs(&e)?;
         return Ok((e, Value::Null));
     }
-    if matches!(phase, "ordering-qualification" | "sigma-cost-qualification") {
+    if phase == "ordering-qualification" {
         return Ok((e, Value::Null));
     }
     let q: Value = e
@@ -1154,5 +1178,38 @@ mod build379_provenance_tests {
             )
             .is_err()
         );
+    }
+}
+
+#[cfg(test)]
+mod bound_control_tests {
+    use super::*;
+    #[test]
+    fn bounded_control_uses_exact_hashed_bytes_and_refuses_growth() {
+        use std::sync::atomic::{AtomicU64, Ordering};
+        static SERIAL: AtomicU64 = AtomicU64::new(0);
+        let root = std::env::temp_dir().join(format!(
+            "sigma-control-{}-{}",
+            std::process::id(),
+            SERIAL.fetch_add(1, Ordering::Relaxed)
+        ));
+        std::fs::create_dir(&root).unwrap();
+        let path = root.join("control.json");
+        std::fs::write(&path, b"{}").unwrap();
+        let bound = BoundControl {
+            path: path.canonicalize().unwrap(),
+            sha256: crate::arena::digest(b"{}"),
+        };
+        assert!(bound.read::<serde_json::Value>().is_ok());
+        std::fs::write(&path, vec![b' '; (1024 * 1024 + 1) as usize]).unwrap();
+        assert!(
+            bound
+                .read::<serde_json::Value>()
+                .unwrap_err()
+                .to_string()
+                .contains("size/SHA")
+        );
+        std::fs::remove_file(path).unwrap();
+        std::fs::remove_dir(root).unwrap();
     }
 }

@@ -2,8 +2,8 @@
 //! No alternate evaluator, TT implementation, scheduler or admission registry.
 use crate::{
     arena,
+    research_manifest::BoundControl,
     research_manifest::{self, Experiment, FileRef},
-    sigma_qualification::BoundControl,
 };
 use quoridor_ai::alphabeta::{
     self, OrderingProfile, SearchLimits, SearchNamespace, SearchResult, SearchSession,

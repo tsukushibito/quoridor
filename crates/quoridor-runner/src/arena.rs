@@ -442,8 +442,6 @@ pub struct ArenaPlan {
     pub matchups: Vec<ArenaMatchup>,
     pub batches: Vec<ArenaBatch>,
     pub planned_slots: usize,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub sigma_cost_cases: Option<crate::research_manifest::FileRef>,
 }
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -451,8 +449,6 @@ pub struct ArenaMatchup {
     pub id: usize,
     #[serde(default)]
     pub inference: Option<crate::config::Inference>,
-    #[serde(default)]
-    pub sigma_cost_qualification: Option<crate::research_manifest::FileRef>,
     pub engines: Vec<crate::config::Engine>,
     pub evaluator_sha256: Vec<String>,
 }
@@ -479,15 +475,6 @@ impl ArenaPlan {
         let mut used = BTreeSet::new();
         let width = if self.phase == "compare" { 1 } else { 2 };
         for matchup in &self.matchups {
-            let has_sigma = matchup.engines.iter().any(|engine| engine.kind == "mcts");
-            if has_sigma != matchup.sigma_cost_qualification.is_some()
-                || matchup
-                    .sigma_cost_qualification
-                    .as_ref()
-                    .is_some_and(|q| !e.inputs.contains(q))
-            {
-                return Err("bound Sigma qualification required; selected timed input must not enter cost_unqualified".into());
-            }
             if matchup.engines.len() != width || matchup.evaluator_sha256.len() != width {
                 return Err("arena declared engine identities".into());
             }
@@ -734,9 +721,24 @@ fn validate_observations(
                     || obs.deadline_ns.is_none_or(|d| receipt >= d)
                     || obs.counters["authority_legal"] != true
                     || obs.counters["inflight_after_drain"] != 0
-                    || obs.counters["completed_simulations"]
-                        .as_u64()
-                        .is_none_or(|n| n == 0)
+                    || !match obs.counters["completed_simulations"].as_u64() {
+                        Some(n) if n > 0 => true,
+                        Some(0) => {
+                            [
+                                "completed_simulation_counters",
+                                "last_completed_simulation_ns",
+                            ]
+                            .iter()
+                            .all(|key| {
+                                obs.counters
+                                    .get(*key)
+                                    .is_some_and(serde_json::Value::is_null)
+                            }) && obs.counters["selection_reason"]
+                                == "legal_fallback_no_completed_simulation"
+                                && obs.value_stm.is_none()
+                        }
+                        _ => false,
+                    }
                     || obs.counters["clock_contract"] != "authority-action-receipt-v1"
                     || obs.counters["clock_contract_sha256"]
                         != "04062382f70648cdfd722e59c35be1100719169097a04749b0046ea5a19a280d"
@@ -912,44 +914,8 @@ fn validate_decision_report(c: &Config, report: &crate::runtime::RunReport) -> R
     Ok(())
 }
 /// Normal approved compare phase; the worker makes one proposal and never advances this parent.
-fn bound_runtime(
-    plan: &ArenaPlan,
-    e: &crate::research_manifest::Experiment,
-    c: &Config,
-    mode: &str,
-) -> Result<crate::runtime::RunReport> {
-    let batch = plan
-        .batches
-        .get(e.batch.ok_or("actual batch required")?)
-        .ok_or("unknown batch")?;
-    let matchup = plan
-        .matchups
-        .iter()
-        .find(|m| m.id == batch.matchup)
-        .ok_or("unknown matchup")?;
-    if let Some(reference) = &matchup.sigma_cost_qualification {
-        // Normal existing qualification port: current packet/config/native/backend checks stay strict.
-        let _: serde_json::Value = reference.read()?;
-        let (qualified_config, qualification) = crate::sigma_qualification::load_qualified_entry(
-            &reference.path,
-            &reference.sha256,
-            &e.config,
-        )?;
-        if json_digest(&qualified_config)? != json_digest(c)? {
-            return Err(
-                "qualified Sigma config differs from approved arena/decision config".into(),
-            );
-        }
-        crate::runtime::run_with_sigma_cost_qualification(c, mode, None, qualification)
-    } else {
-        if c.engines.iter().any(|engine| engine.kind == "mcts") {
-            return Err("unqualified Sigma inference must not enter the selected campaign".into());
-        }
-        crate::runtime::run(c, mode)
-    }
-}
 pub fn decisions_bound(
-    bound: &crate::sigma_qualification::BoundControl,
+    bound: &crate::research_manifest::BoundControl,
 ) -> Result<serde_json::Value> {
     let (e, _) = crate::research_manifest::load(bound, "compare")?;
     let approved = crate::research_manifest::approved_arena_plan(bound, &e)?;
@@ -958,12 +924,12 @@ pub fn decisions_bound(
     let slots: Vec<ArenaSlot> = e.schedule.read()?;
     let book: Book = plan.book.read()?;
     plan.validate_decision_config(&e, &c, &slots, &book)?;
-    let report = bound_runtime(&plan, &e, &c, "decisions")?;
+    let report = crate::runtime::run(&c, "decisions")?;
     validate_decision_report(&c, &report)?;
     crate::value_search_strength::result_receipt(&c, &report)
 }
 /// One maintained arena entry. Runtime/model/rules/clock implementations are unchanged.
-pub fn run_bound(bound: &crate::sigma_qualification::BoundControl) -> Result<serde_json::Value> {
+pub fn run_bound(bound: &crate::research_manifest::BoundControl) -> Result<serde_json::Value> {
     let (e, _) = crate::research_manifest::load(bound, "arena")?;
     let approved = crate::research_manifest::approved_arena_plan(bound, &e)?;
     let plan: ArenaPlan = approved.read()?;
@@ -971,7 +937,7 @@ pub fn run_bound(bound: &crate::sigma_qualification::BoundControl) -> Result<ser
     let slots: Vec<ArenaSlot> = e.schedule.read()?;
     let book: crate::value_search_strength::GeneratedBook = plan.book.read()?;
     plan.validate_config(&e, &c, &slots, &book)?;
-    let report = bound_runtime(&plan, &e, &c, "arena")?;
+    let report = crate::runtime::run(&c, "arena")?;
     validate_report(&c, &report)?;
     crate::value_search_strength::result_receipt(&c, &report)
 }
@@ -1029,7 +995,6 @@ mod generic_arena_361_tests {
             matchups: vec![ArenaMatchup {
                 id: 7,
                 inference: None,
-                sigma_cost_qualification: None,
                 engines: c.engines.clone(),
                 evaluator_sha256: a.evaluator_sha256.clone(),
             }],
@@ -1040,7 +1005,6 @@ mod generic_arena_361_tests {
                 slots: (0..2 * n).collect(),
             }],
             planned_slots: 2 * n,
-            sigma_cost_cases: None,
         };
         let e = Experiment {
             schema: "quoridor.research.experiment.v1".into(),
@@ -1205,47 +1169,7 @@ mod generic_arena_361_tests {
                 .is_err()
         );
     }
-    #[test]
-    fn three_engine_374_sigma_missing_or_expired_packet_refuses_before_runtime() {
-        // Owning metadata ports only: no model/backend/inference/factory calls.
-        let (mut plan, e, mut c, _, _) = fixture(1, 4);
-        for sigma_side in 0..2 {
-            c.engines
-                .iter_mut()
-                .for_each(|engine| engine.kind = "distance".into());
-            c.engines[sigma_side].kind = "mcts".into();
-            assert!(bound_runtime(&plan, &e, &c, "arena").is_err());
-        }
-        c.engines = vec![c.engines[1].clone()];
-        plan.phase = "compare".into();
-        assert!(bound_runtime(&plan, &e, &c, "decisions").is_err());
-        let mut packet = crate::sigma_qualification::QualificationPacket {
-            schema: "quoridor-sigma-cost-qualification-v1".into(),
-            scope: "timed-arena".into(),
-            configurations: vec![],
-            native: crate::sigma_qualification::NativeIdentity {
-                executable_sha256: "b".repeat(64),
-                backend_sha256: "c".repeat(64),
-                valid_until_unix_ms: 0,
-            },
-            evidence: crate::sigma_qualification::BoundControl {
-                path: "/never-read-expired-374-cost-evidence.json".into(),
-                sha256: "d".repeat(64),
-            },
-            whole_operation_upper_ns: 1,
-            decision_communication_upper_ns: 1,
-        };
-        assert!(packet.select(&c).is_err());
-        packet.scope = "timed-validation".into();
-        assert!(packet.select(&c).is_err());
-        packet.scope = "timed-arena".into();
-        packet.whole_operation_upper_ns = 0;
-        assert!(packet.select(&c).is_err());
-        // A synthetically present pointer is never evidence of a usable admission.
-        let mut wrong = plan.clone();
-        wrong.matchups[0].sigma_cost_qualification = Some(reference("missing-packet.json"));
-        assert!(bound_runtime(&wrong, &e, &c, "decisions").is_err());
-    }
+
     #[test]
     fn three_engine_374_sigma_closed_model_library_and_receipt_drain() {
         let (mut p, mut e, mut c, slots, book) = fixture(1, 4);
@@ -1275,9 +1199,6 @@ mod generic_arena_361_tests {
         p.matchups[0].evaluator_sha256 = a.evaluator_sha256.clone();
         p.matchups[0].inference = c.inference.clone();
         p.inputs.push(onnx);
-        let cost = reference("FAKE-cost-NOT-QUALIFIED.json");
-        p.inputs.push(cost.clone());
-        p.matchups[0].sigma_cost_qualification = Some(cost);
         e.inputs = p.inputs.clone();
         e.dynamic_libraries
             .push(crate::research_manifest::LibraryRef {
@@ -1366,5 +1287,31 @@ mod generic_arena_361_tests {
         let repeated = report.outcomes[0].observations[0].clone();
         report.outcomes[0].observations.push(repeated);
         assert!(validate_decision_report(&c, &report).is_err());
+    }
+    #[test]
+    fn no_cost_prediction_fallback_publication_rejects_invented_completed_work() {
+        // Existing synthetic FileRef fixture only; no model/geometry/Search.
+        let (_, _, mut c, _, _) = fixture(1, 4);
+        c.engines[0].kind = "mcts".into();
+        let mut obs: crate::arena_clock::MoveObservation = serde_json::from_value(json!({
+            "ply":0,"side":0,"engine_index":0,"action":13,"accepted":true,"failure":null,
+            "caller_started_ns":0,"deadline_ns":100,"returned_ns":120,"admission_checked_ns":121,"accepted_ns":122,
+            "caller_seconds":0.000000122,"thinking_seconds":0.00000009,"last_completed_iteration_ns":null,
+            "engine_error":null,"stop":"decision_notified","completed_depth":null,"value_stm":null,"pv":[],
+            "counters":{"authority_receipt_ns":90,"drain_finished_ns":120,"authority_legal":true,"inflight_after_drain":0,
+                "completed_simulations":0,"selection_reason":"legal_fallback_no_completed_simulation",
+                "completed_simulation_counters":null,"last_completed_simulation_ns":null,
+                "clock_contract":"authority-action-receipt-v1",
+                "clock_contract_sha256":"04062382f70648cdfd722e59c35be1100719169097a04749b0046ea5a19a280d"}
+        })).unwrap();
+        validate_observations(&c, &[obs.clone()]).unwrap();
+        obs.value_stm = Some(0.2);
+        assert!(validate_observations(&c, &[obs.clone()]).is_err());
+        obs.value_stm = None;
+        obs.counters["completed_simulation_counters"] = json!({"root_visits":1});
+        assert!(validate_observations(&c, &[obs.clone()]).is_err());
+        obs.counters["completed_simulation_counters"] = serde_json::Value::Null;
+        obs.counters["authority_receipt_ns"] = 100.into();
+        assert!(validate_observations(&c, &[obs]).is_err());
     }
 }

@@ -641,7 +641,7 @@ fn control_ref(path: &Path) -> Result<quoridor_data::terminal_stream::BoundJson>
     })
 }
 /// One qualified native invocation: retained compressed generation, then the shared cache.
-pub fn run_bound(bound: &crate::sigma_qualification::BoundControl) -> Result<Value> {
+pub fn run_bound(bound: &crate::research_manifest::BoundControl) -> Result<Value> {
     let (e, _) = crate::research_manifest::load(bound, "corpus")?;
     let config: PilotConfig = e.config.read()?;
     config.validate()?;

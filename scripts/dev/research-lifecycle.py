@@ -1456,29 +1456,9 @@ def experiment_phase_check(experiment):
             "fit",
             "software-qualification",
             "ordering-qualification",
-            "sigma-cost-qualification",
         },
         "phase",
     )
-    if phase == "sigma-cost-qualification":
-        require(
-            experiment["models"] == []
-            and experiment["planned_slots"] == 64
-            and type(experiment.get("batch")) is int
-            and experiment["batch"] in (0, 1)
-            and (experiment.get("numerical_qualification") is not None)
-            == (experiment["batch"] == 1)
-            and experiment["argv"][1:]
-            == [
-                "sigma-cost-measure",
-                "--experiment",
-                "@EXPERIMENT@",
-                "--experiment-sha256",
-                "@EXPERIMENT_SHA256@",
-            ],
-            "explicit64 cost requests; timed bound is cost evidence, not model0 or numerical PASS",
-        )
-        return
     if phase == "ordering-qualification":
         ordering_qualification_shape(experiment)
         return
@@ -1662,119 +1642,6 @@ def cache_materialize_check(spec, experiment, manifest):
     )
 
 
-def sigma_cost_check(spec, experiment, manifest, approved):
-    """Normal current-plan/caller/image/input/output entry for the selected two cost phases.
-
-    Native owning qualification validates typed configs, source/native/backend,
-    exact formula, expiry, all requests and completed empirical cost evidence.
-    """
-    experiment_phase_check(experiment)
-    require(experiment["phase"] == "sigma-cost-qualification", "cost phase only")
-    cases_ref = approved["sigma_cost_cases"]
-    require(experiment["schedule"] == cases_ref, "approved frozen cost cases")
-    cases = document(cases_ref)
-    config = document(experiment["config"])
-    campaign_ref = next(
-        (
-            r
-            for r in experiment["inputs"]
-            if r["path"] == config["campaign"]["path"]
-            and r["sha256"] == config["campaign"]["sha256"]
-        ),
-        None,
-    )
-    require(campaign_ref is not None, "full current campaign lifetime input")
-    campaign = document(campaign_ref)
-    require(
-        campaign["approved_plan"] == spec["approved_plan"]
-        and config["configurations"] == campaign["configurations"] == cases["configurations"]
-        and campaign["phases"] == cases["phases"]
-        and campaign["maximum_total_logical_backend_rows_or_requests"] == 64
-        and campaign["cost_formula_prebound"] == {"factor": 4, "additive_margin_ns": 2000000}
-        and config["native"] == campaign["native"]
-        and config["native"]["executable_sha256"] == manifest["artifact"]["sha256"],
-        "current approved cases/formula/actual native qualification image",
-    )
-    launched = campaign["qualification_started_unix_ms"]
-    require(
-        type(launched) is int
-        and 0 < launched <= time.time_ns() // 1000000
-        and campaign["valid_until_unix_ms"]
-        == config["native"]["valid_until_unix_ms"]
-        == launched + 86400000
-        and time.time_ns() // 1000000 < campaign["valid_until_unix_ms"],
-        "one fresh actual admitted24hour window; no reset",
-    )
-    phase = cases["phases"][experiment["batch"]]
-    require(
-        len(cases["phases"]) == 2
-        and [p["mode"] for p in cases["phases"]] == ["untimed", "qualified-timed"]
-        and all(p["max_logical_calls"] == 32 and len(p["workload"]) == 16 for p in cases["phases"])
-        and config["phase_id"] == phase["id"]
-        and config["mode"] == phase["mode"]
-        and config["workload"] == phase["workload"]
-        and config["max_logical_calls"] == 32
-        and config["prior_logical_calls"] == experiment["batch"] * 32
-        and len(config["prior_results"]) == experiment["batch"]
-        and config["output"] == spec["data_root"],
-        "fixed phase/order/count/prior/output identity",
-    )
-    for ref in [*config["prior_results"], *[c["file"] for c in config["configurations"]]]:
-        require(
-            any(
-                r["path"] == ref["path"] and r["sha256"] == ref["sha256"]
-                for r in experiment["inputs"]
-            ),
-            "cost config/prior lifetime",
-        )
-    if experiment["batch"] == 1:
-        require(
-            experiment["numerical_qualification"] in experiment["inputs"],
-            "timed validation packet lifetime",
-        )
-    for index, record in enumerate(config["configurations"]):
-        ref = next(
-            r
-            for r in experiment["inputs"]
-            if r["path"] == record["file"]["path"] and r["sha256"] == record["file"]["sha256"]
-        )
-        measured = document(ref)
-        selected = next(m for m in approved["matchups"] if m["id"] == index)
-        require(
-            measured["engines"] == selected["engines"]
-            and measured["inference"] == selected["inference"]
-            and measured["arena"]["evaluator_sha256"] == selected["evaluator_sha256"],
-            "selected exact Sigma-D/Sigma-BEST43 measurement configs",
-        )
-        inference = measured["inference"]
-        require(
-            any(
-                r["path"] == inference["model"] and r["sha256"] == inference["model_sha"]
-                for r in experiment["inputs"]
-            )
-            and any(
-                r["file"]["path"] == inference["library"] for r in experiment["dynamic_libraries"]
-            )
-            and measured["cpu_cores"] == [spec["limits"]["worker_cpu"]]
-            and measured["inference_cpu_core"] == spec["limits"]["worker_cpu"]
-            and measured["max_memory_bytes"]
-            <= spec["limits"]["family_B"] - spec["limits"]["controller_B"]
-            and measured["host_ram_reserve"] >= spec["limits"]["host_reserve_B"],
-            "actual qualified model/library/single CPU/family resource subject",
-        )
-    require(
-        spec["data"]
-        == [
-            {
-                "name": "measurement",
-                "path": str(Path(spec["data_root"]) / "measurement-result.json"),
-                "limit_B": CONTROL_BYTES,
-            }
-        ],
-        "sole full bounded measurement result",
-    )
-
-
 def experiment_check(spec):
     charged_roots(spec)
     experiment = document(spec["experiment"])
@@ -1831,8 +1698,6 @@ def experiment_check(spec):
     )
     approved = approved_plan(spec, experiment)
     refs.append(spec["approved_plan"])
-    if experiment["phase"] == "sigma-cost-qualification":
-        sigma_cost_check(spec, experiment, manifest, approved)
     if experiment["phase"] == "compare" and experiment["argv"][1] in {
         "ordering-assess",
         "ordering-cheap-assess",
@@ -2198,18 +2063,12 @@ def arena_model_check(experiment, plan, width):
     used = set()
     for m in plan["matchups"]:
         require(
-            set(m) <= {"id", "engines", "evaluator_sha256", "inference", "sigma_cost_qualification"}
+            set(m) <= {"id", "engines", "evaluator_sha256", "inference"}
             and {"id", "engines", "evaluator_sha256"} <= set(m)
             and len(m["engines"]) == len(m["evaluator_sha256"]) == width,
             "declared engine identities",
         )
         sigma = False
-        cost = m.get("sigma_cost_qualification")
-        require(
-            any(engine["kind"] == "mcts" for engine in m["engines"]) == (cost is not None)
-            and (cost is None or cost in experiment["inputs"]),
-            "actual bound Sigma qualification required before launch; no cost_unqualified campaign",
-        )
         for i, engine in enumerate(m["engines"]):
             kind = engine["kind"]
             require(kind in {"nnue", "distance", "mcts"}, "supported numerical backend")
@@ -2251,7 +2110,7 @@ def arena_model_check(experiment, plan, width):
 
 def arena_decision_plan_check(experiment, plan):
     require(
-        set(plan) - {"sigma_cost_cases"}
+        set(plan)
         == {
             "schema",
             "phase",
@@ -2424,7 +2283,7 @@ def arena_decision_plan_check(experiment, plan):
 def arena_plan_check(experiment, plan):
     """One explicit JSON arena plan; config files own engines and search/clock limits."""
     require(
-        set(plan) - {"sigma_cost_cases"}
+        set(plan)
         == {
             "schema",
             "phase",
@@ -2671,7 +2530,19 @@ def arena_observation(config, row):
                 and counters["authority_legal"] is True
                 and counters["inflight_after_drain"] == 0
                 and type(counters["completed_simulations"]) is int
-                and counters["completed_simulations"] > 0
+                and (
+                    (counters["completed_simulations"] > 0)
+                    or (
+                        counters["completed_simulations"] == 0
+                        and counters.get("selection_reason")
+                        == "legal_fallback_no_completed_simulation"
+                        and "completed_simulation_counters" in counters
+                        and "last_completed_simulation_ns" in counters
+                        and counters["completed_simulation_counters"] is None
+                        and counters["last_completed_simulation_ns"] is None
+                        and obs["value_stm"] is None
+                    )
+                )
                 and counters["clock_contract"] == "authority-action-receipt-v1"
                 and counters["clock_contract_sha256"]
                 == "04062382f70648cdfd722e59c35be1100719169097a04749b0046ea5a19a280d"
@@ -3553,44 +3424,6 @@ def collect_data(spec, experiment):
             )
         except BaseException as error:
             data["errors"].append({"stage": "arena_analysis", **error_fact(error)})
-    if experiment["phase"] == "sigma-cost-qualification":
-        try:
-            result = json.loads(values["measurement"])
-            plan = document(experiment["config"])
-            require(
-                result["schema"] == "quoridor-sigma-receipt-measurement-result-v1"
-                and result["complete"] is True
-                and result["all_workers_joined"] is True
-                and result["inflight_after_drain"] == 0
-                and result["stopped"] is None
-                and result["games_played"] == 0
-                and result["plan_sha256"] == experiment["config"]["sha256"]
-                and result["campaign_sha256"] == plan["campaign"]["sha256"]
-                and result["native"] == plan["native"]
-                and result["phase_id"] == plan["phase_id"]
-                and result["mode"] == plan["mode"]
-                and result["configuration_sha256"]
-                == [c["normalized_sha256"] for c in plan["configurations"]]
-                and result["logical_calls_attempted"]
-                == result["returned_terminal_replies"]
-                == result["backend_work"]["logical_rows"]
-                == result["backend_work"]["physical_rows"]
-                == 32
-                and result["backend_work"]["failed_rows"] == 0
-                and len(result["items"]) == len(plan["workload"]) == 16
-                and all(
-                    row["id"] == expected["id"]
-                    and row["configuration"] == expected["configuration"]
-                    and row["stage"] == expected["stage"]
-                    and row["parent"]["prefix"] == expected["prefix"]
-                    for row, expected in zip(result["items"], plan["workload"], strict=True)
-                ),
-                "current full32 cost requests/real native result/drain/order; missing means UNKNOWN",
-            )
-            data["scope"] = "one operational Sigma cost phase; no numerical/game/strength PASS"
-            data["cost_logical_requests"] = 32
-        except BaseException as error:
-            data["errors"].append({"stage": "sigma_cost_measurement", **error_fact(error)})
     if experiment["phase"] == "ordering-qualification":
         try:
             data["numerical_qualification"] = ordering_qualification_evidence(

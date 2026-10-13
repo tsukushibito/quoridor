@@ -189,3 +189,5 @@ cold中央値はnodes1.001816243/evaluations1.003524636/whole1.433261163、warm�
 候補の現役保持目的は、人間が指定したcache検証費の限定source inspectionと具体的な同意味最適化案である。prepareの81×2 maps検証が原因だという時間割合は未測定。既存accumulatorのposition/wall/colour対応、生成/更新/undoとinvalid claimed cache拒否境界、per-action準備/controlを先に調べる。score/順位/tie/探索数学/legal sets/cancel/deadline/errorを保つ案に限定し、新しい検証cache/certificate/framework、重み調整や新しいpruning ruleを追加しない。
 
 元採用gate FAILは変更せず、速度最適化で元80を再ラベルしない。将来の採用は実変更に必要な検証と、別の具体的Beads契約・whole支持・人間が選択した評価/採用条件のもとで判断する。数値campaignはこのsource inspectionから発行されない。この具体的用途を取り下げるか、完了後に次の用途を選ばない場合は、実consumer STOPとGit再構成/固有証拠保全を満たして比較専用hooks/sourceを撤去する。既定製品機能・必要なcorrectness tests・元RAW/モデル/入力/失敗/費用は保持する。374優先と全体240MiB/decimal50GB、323pause/models/defaults/N/seals/fits96を維持する。
+
+376の停止cache inspection案は両map検証/error/control順を維持するlocal wall-edge reuseだけで、未実装である。人間はその前に[349 current whole-search Perf](ai-nnue-optimization-agenda.md#現行whole-search-perf3492026-10-13)を選んだ。A/B各plain前／sampling／plain後、代表cold D4/D6とoriginal warm traceの36callsを固定し、元80を再実行しない。候補保持はこの具体的診断と最小same-semantics検討へ継続する。現行defaultや元採用FAILの意味は変えない。

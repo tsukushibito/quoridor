@@ -33,18 +33,7 @@ fn strict_pairs(args: &[String], required: &[&str], optional: &[&str]) -> Result
     }
     Ok(())
 }
-fn qualified_route(_command: &str, args: &[String]) -> Result<bool> {
-    let present = args.iter().any(|a| {
-        matches!(
-            a.as_str(),
-            "--sigma-cost-qualification" | "--qualification-sha256"
-        )
-    });
-    if present {
-        return Err("Sigma admission belongs only to a bound Experiment; unbound qualification flags are retired".into());
-    }
-    Ok(present)
-}
+
 fn main() {
     // Disable before dlopen/CreateEnv can initialize ORT's telemetry SDK.
     // SAFETY: entrypoint initialization, before this program starts any threads.
@@ -57,7 +46,6 @@ fn main() {
 fn execute() -> Result<()> {
     let args: Vec<_> = std::env::args().skip(1).collect();
     let command = args.first().map(String::as_str).unwrap_or("help");
-    qualified_route(command, &args)?;
     if command == "teacher-pilot"
         && !(args.len() == 5 && args[1] == "--experiment" && args[3] == "--experiment-sha256"
             || args.len() == 3 && matches!(args[1].as_str(), "--config" | "--audit")
@@ -84,7 +72,7 @@ fn execute() -> Result<()> {
     match command {
         "strength-book" | "strength-configs" => {
             strict_pairs(&args, &["--experiment", "--experiment-sha256"], &[])?;
-            let bound = quoridor_runner::sigma_qualification::BoundControl {
+            let bound = quoridor_runner::research_manifest::BoundControl {
                 path: argument(&args, "--experiment")?.into(),
                 sha256: argument(&args, "--experiment-sha256")?,
             };
@@ -104,7 +92,7 @@ fn execute() -> Result<()> {
         "ordering-qualify" => {
             strict_pairs(&args, &["--experiment", "--experiment-sha256"], &[])?;
             let report = quoridor_runner::ordering_assessment::qualify(
-                &quoridor_runner::sigma_qualification::BoundControl {
+                &quoridor_runner::research_manifest::BoundControl {
                     path: argument(&args, "--experiment")?.into(),
                     sha256: argument(&args, "--experiment-sha256")?,
                 },
@@ -115,7 +103,7 @@ fn execute() -> Result<()> {
         "ordering-assess" => {
             strict_pairs(&args, &["--experiment", "--experiment-sha256"], &[])?;
             let report = quoridor_runner::ordering_assessment::run(
-                &quoridor_runner::sigma_qualification::BoundControl {
+                &quoridor_runner::research_manifest::BoundControl {
                     path: argument(&args, "--experiment")?.into(),
                     sha256: argument(&args, "--experiment-sha256")?,
                 },
@@ -126,7 +114,7 @@ fn execute() -> Result<()> {
         "ordering-cheap-assess" => {
             strict_pairs(&args, &["--experiment", "--experiment-sha256"], &[])?;
             let report = quoridor_runner::ordering_assessment::run_cheap(
-                &quoridor_runner::sigma_qualification::BoundControl {
+                &quoridor_runner::research_manifest::BoundControl {
                     path: argument(&args, "--experiment")?.into(),
                     sha256: argument(&args, "--experiment-sha256")?,
                 },
@@ -136,42 +124,16 @@ fn execute() -> Result<()> {
         "value-search-compare" => {
             strict_pairs(&args, &["--experiment", "--experiment-sha256"], &[])?;
             let report = quoridor_runner::value_search_compare::run(
-                &quoridor_runner::sigma_qualification::BoundControl {
+                &quoridor_runner::research_manifest::BoundControl {
                     path: argument(&args, "--experiment")?.into(),
                     sha256: argument(&args, "--experiment-sha256")?,
                 },
             )?;
             println!("{}", serde_json::to_string(&report)?);
         }
-        "sigma-cost-bindings" => {
-            strict_pairs(&args, &["--config", "--config-sha256"], &[])?;
-            println!(
-                "{}",
-                serde_json::to_string(&quoridor_runner::sigma_qualification::inspect_config(
-                    quoridor_runner::sigma_qualification::BoundControl {
-                        path: argument(&args, "--config")?.into(),
-                        sha256: argument(&args, "--config-sha256")?,
-                    },
-                )?)?
-            );
-        }
-        "sigma-cost-measure" => {
-            strict_pairs(&args, &["--experiment", "--experiment-sha256"], &[])?;
-            let bound = quoridor_runner::sigma_qualification::BoundControl {
-                path: argument(&args, "--experiment")?.into(),
-                sha256: argument(&args, "--experiment-sha256")?,
-            };
-            let report = quoridor_runner::sigma_qualification::measure_bound(&bound)?;
-            println!("{}", serde_json::to_string(&report)?);
-            if report["complete"] != true {
-                return Err(
-                    "measurement incomplete: evidence retained; games are not qualified".into(),
-                );
-            }
-        }
         "teacher-pilot" if args.iter().any(|a| a == "--experiment") => {
             strict_pairs(&args, &["--experiment", "--experiment-sha256"], &[])?;
-            let bound = quoridor_runner::sigma_qualification::BoundControl {
+            let bound = quoridor_runner::research_manifest::BoundControl {
                 path: argument(&args, "--experiment")?.into(),
                 sha256: argument(&args, "--experiment-sha256")?,
             };
@@ -211,6 +173,7 @@ fn execute() -> Result<()> {
             );
         }
         "arena" if args.iter().any(|a| a == "--recover") => {
+            strict_pairs(&args, &["--recover"], &["--report-mode"])?;
             let output = PathBuf::from(argument(&args, "--recover")?);
             let recovered = quoridor_runner::recover_arena(&output)?;
             if args.iter().any(|a| a == "--report-mode") {
@@ -224,7 +187,7 @@ fn execute() -> Result<()> {
         }
         "decisions" => {
             strict_pairs(&args, &["--experiment", "--experiment-sha256"], &[])?;
-            let bound = quoridor_runner::sigma_qualification::BoundControl {
+            let bound = quoridor_runner::research_manifest::BoundControl {
                 path: argument(&args, "--experiment")?.into(),
                 sha256: argument(&args, "--experiment-sha256")?,
             };
@@ -234,6 +197,7 @@ fn execute() -> Result<()> {
             );
         }
         "arena" if args.iter().any(|a| a == "--audit") => {
+            strict_pairs(&args, &["--audit"], &["--report-mode"])?;
             let output = PathBuf::from(argument(&args, "--audit")?);
             println!(
                 "{}",
@@ -242,7 +206,7 @@ fn execute() -> Result<()> {
         }
         "arena" if args.iter().any(|a| a == "--experiment") => {
             strict_pairs(&args, &["--experiment", "--experiment-sha256"], &[])?;
-            let bound = quoridor_runner::sigma_qualification::BoundControl {
+            let bound = quoridor_runner::research_manifest::BoundControl {
                 path: argument(&args, "--experiment")?.into(),
                 sha256: argument(&args, "--experiment-sha256")?,
             };
@@ -252,6 +216,7 @@ fn execute() -> Result<()> {
             );
         }
         "selfplay" | "arena" => {
+            strict_pairs(&args, &["--config"], &["--report-mode"])?;
             let config: Config =
                 serde_json::from_reader(File::open(argument(&args, "--config")?)?)?;
             if config
@@ -277,6 +242,7 @@ fn execute() -> Result<()> {
             }
         }
         "benchmark" => {
+            strict_pairs(&args, &["--config"], &[])?;
             let config: Config =
                 serde_json::from_reader(File::open(argument(&args, "--config")?)?)?;
             println!("{}", serde_json::to_string(&runtime::benchmark(&config)?)?);
@@ -354,6 +320,7 @@ fn execute() -> Result<()> {
             }
         }
         "cycle" => {
+            strict_pairs(&args, &["--config"], &[])?;
             let config: Config =
                 serde_json::from_reader(File::open(argument(&args, "--config")?)?)?;
             let cycle = config.cycle.clone().ok_or("cycle settings required")?;
@@ -409,49 +376,11 @@ fn execute() -> Result<()> {
     Ok(())
 }
 
-const HELP: &str = "quoridor-runner arena --experiment EXPERIMENT --experiment-sha256 SHA256\nquoridor-runner strength-book --experiment EXPERIMENT --experiment-sha256 SHA256\nquoridor-runner strength-configs --experiment EXPERIMENT --experiment-sha256 SHA256\nquoridor-runner arena --config CONFIG --report-mode receipt\nquoridor-runner <selfplay|arena|benchmark|cycle> --config CONFIG\nquoridor-runner sigma-cost-bindings --config CONFIG --config-sha256 SHA256\nquoridor-runner sigma-cost-measure --experiment EXPERIMENT --experiment-sha256 SHA256\nquoridor-runner arena --audit OUTPUT_DIRECTORY\nquoridor-runner arena --recover OUTPUT_DIRECTORY\nquoridor-runner dataset <cache|inspect> --input PATH [--output PATH] [--allow-test]\nquoridor-runner dataset evaluate --input PATH --model MODEL --output PATH [--simd] [--allow-test]\nquoridor-runner model-check --model MODEL\nquoridor-runner qf1-bulk --input PREFIXES.json --output FEATURES.json\nSigma dataset import: use the separate sigma-import binary";
+const HELP: &str = "quoridor-runner arena --experiment EXPERIMENT --experiment-sha256 SHA256\nquoridor-runner strength-book --experiment EXPERIMENT --experiment-sha256 SHA256\nquoridor-runner strength-configs --experiment EXPERIMENT --experiment-sha256 SHA256\nquoridor-runner arena --config CONFIG --report-mode receipt\nquoridor-runner <selfplay|arena|benchmark|cycle> --config CONFIG\nquoridor-runner arena --audit OUTPUT_DIRECTORY\nquoridor-runner arena --recover OUTPUT_DIRECTORY\nquoridor-runner dataset <cache|inspect> --input PATH [--output PATH] [--allow-test]\nquoridor-runner dataset evaluate --input PATH --model MODEL --output PATH [--simd] [--allow-test]\nquoridor-runner model-check --model MODEL\nquoridor-runner qf1-bulk --input PREFIXES.json --output FEATURES.json\nSigma dataset import: use the separate sigma-import binary";
 
 #[cfg(test)]
 mod tests {
-    #[test]
-    fn three_engine_374_cost_cli_requires_bound_experiment_and_retires_unbound_admission() {
-        let args = |values: &[&str]| values.iter().map(|s| s.to_string()).collect::<Vec<_>>();
-        for command in ["arena", "sigma-cost-measure", "benchmark", "selfplay"] {
-            for flag in ["--sigma-cost-qualification", "--qualification-sha256"] {
-                assert!(super::qualified_route(command, &args(&[command, flag, "q"])).is_err());
-            }
-        }
-        let flags = ["--experiment", "--experiment-sha256"];
-        assert!(
-            super::strict_pairs(
-                &args(&[
-                    "sigma-cost-measure",
-                    "--experiment",
-                    "e",
-                    "--experiment-sha256",
-                    "h"
-                ]),
-                &flags,
-                &[]
-            )
-            .is_ok()
-        );
-        for values in [
-            vec!["sigma-cost-measure", "--plan", "p", "--plan-sha256", "h"],
-            vec!["sigma-cost-measure", "--experiment", "e"],
-            vec![
-                "sigma-cost-measure",
-                "--experiment",
-                "e",
-                "--experiment-sha256",
-                "h",
-                "--config",
-                "c",
-            ],
-        ] {
-            assert!(super::strict_pairs(&args(&values), &flags, &[]).is_err());
-        }
-    }
+
     #[test]
     fn help_exposes_supported_dataset_commands() {
         assert!(super::HELP.contains("dataset evaluate"));
@@ -493,5 +422,23 @@ mod generic_arena_361_cli_tests {
                 .is_err()
             );
         }
+    }
+}
+
+#[cfg(test)]
+mod no_cost_prediction_tests {
+    use super::*;
+    #[test]
+    fn no_cost_prediction_current_config_flags_refuse_obsolete_or_unknown_authority() {
+        for flag in [
+            "--sigma-cost-qualification",
+            "--qualification-sha256",
+            "--unknown",
+        ] {
+            let args = ["arena", "--config", "c", flag, "x"].map(String::from);
+            assert!(strict_pairs(&args, &["--config"], &["--report-mode"]).is_err());
+        }
+        let args = ["arena", "--config", "c"].map(String::from);
+        assert!(strict_pairs(&args, &["--config"], &["--report-mode"]).is_ok());
     }
 }

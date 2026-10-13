@@ -1,5 +1,5 @@
 //! Fixed355 matched/stronger comparisons. Search, evaluator math and rules stay canonical.
-use crate::{arena, sigma_qualification::BoundControl};
+use crate::{arena, research_manifest::BoundControl};
 use quoridor_ai::alphabeta::{
     self, EvalAccumulator, SearchLimits, SearchNamespace, SearchResult, SearchSession,
     StaticEvaluator, StopReason,

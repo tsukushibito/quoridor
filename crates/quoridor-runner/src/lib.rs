@@ -9,7 +9,6 @@ pub mod research_manifest;
 pub mod resources;
 pub mod runtime;
 mod sigma_clock;
-pub mod sigma_qualification;
 pub mod teacher_pilot;
 pub mod teacher_pilot_execution;
 pub mod value_search_strength;

@@ -6,9 +6,11 @@
 
 固定予定は128 opening families、先後交換384 pairs／768 games、各pairing256 slots。100msの応答時計と5ms reserve、goal-first/true threefold、full history、200ply未決着UNKNOWNを保持する。Alpha側のcontinuation/static orderingは両方OFFとし、Sigmaの即時authority receiptと終了drainを区別する。保存358 traceから結果前に選んだ78 parentsへの234 single proposalsは別の診断分母で、欠けた18 milestonesを補充しない。診断は得意・不得意の仮説を作る有限比較で、他engineの一致やD6値を最適手の真実としない。
 
-旧347のSigma cost qualificationは期限切れであり、新しいcurrent Build／backend／model／library／資源tupleへの一回の64 requestsを先に行う。32 untimed＝16 warm＋16 measure、32 timedの二phaseと既存4×＋2ms計算、実launchから一度固定する24h windowを用いる。古い証拠の期限更新や静的source proofによるempirical PASS代用をしない。失敗・不足・期限切れではunsupportedのまま保存し、自動再qualificationや別の対局campaignを追加しない。
+2026-10-13の人間選択で、推論時間の予測とその前提の経験的calibrationを現役入口から除去する。追加16 warm＋16 measure＋32 timed提案は撤回された。旧347・374の64 requests、packet、epoch、expiry、raw、FAILED記録は原条件の履歴であり、新しい実行の資格へ読み替えない。新しい予測・heuristic・期限更新・資格例外を追加しない。
 
-詳細の正本は一つのlossless archive、result/manifestはcompact censusとexact referencesとする。missing/torn/不一致appendでは利用できるotherwise-unrecoverable outcomeだけをbounded failure evidenceへ保持し、canonical successを作らない。初期化の元error object、既知の最初の理由、返ったarchive/publication errorsを保持する。変更境界のレビューを受けた[現役Source採用](../../research-data/ai-sigma/three-engine-comparison374/source-adoption-v1.json)はsource-onlyであり、actual Build/private／backend／library／cost／gamesの成功を証明しない。各工程の実STOP・returned/persisted facts・UNKNOWN・費用を分ける。
+Sigmaは実100ms authority receipt deadlineと5ms reserveを使う。reserve到達時に完成simulationがあればその記録済みsnapshotから選び、なければ合法fallbackを送る。fallbackはcompleted simulations=0、検索値・completed snapshot・teacher無しを明示する。authority receiptが期限以上なら拒否し、original error・cancel・違法手を救済しない。pending inferenceのmatching terminal replyとauthority joinを待った実postjoin時刻をreturn/drainへ記録し、次の共有timed slotはその完了後に入る。これは100ms以内の関数return保証ではない。実elapsed/counters/backend/library/model/artifact/config/inputと通常研究admission・numerical correspondenceは保持する。
+
+詳細の正本は一つのlossless archive、result/manifestはcompact censusとexact referencesとする。missing/torn/不一致appendでは利用できるotherwise-unrecoverable outcomeだけをbounded failure evidenceへ保持し、canonical successを作らない。初期化の元error object、既知の最初の理由、返ったarchive/publication errorsを保持する。変更境界のレビューを受けた[現役Source採用](../../research-data/ai-sigma/three-engine-comparison374/source-adoption-v1.json)はsource-onlyであり、actual Build/private／backend／library／gamesの成功を証明しない。各工程の実STOP・returned/persisted facts・UNKNOWN・費用を分ける。
 
 家族単位の結果と時間／エラー／UNKNOWN、保存された有限特徴・decision factsから改善方針を検討する。128 familiesや選択済みanalysis settingsを結果後に変えず、IID・Elo・母集団棋力・唯一原因を主張しない。既存の研究入口・正本と[inclusive772MiB支持](../../research-data/ai-sigma/three-engine-comparison374/support-v2.json)を用い、shared target・実reader/clock intervalを保護する。終了後の一般化保守377は実374 STOP・受入れ後に別途行い、今回の測定設定を遡及変更しない。
 
