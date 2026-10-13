@@ -12,8 +12,7 @@ pub const OLD_PREFIX_SHA256: &str =
 pub const FAMILIES: usize = 128;
 pub const SEED: u64 = 35520261009;
 pub const ATTEMPTS_PER_FAMILY: usize = 8;
-pub const OBSERVATION_BYTES: usize = 3072;
-pub const OUTCOME_BYTES: usize = 200 * OBSERVATION_BYTES + 16384;
+pub const OUTCOME_BYTES: usize = 630784;
 pub const BATCH_OUTPUT_BYTES: u64 = 96 * 1024 * 1024;
 pub const CONTROL_OUTPUT_BYTES: u64 = 4 * 1024 * 1024;
 pub const BEST51_WEIGHTS: &str = "9ca438e43b0c105ac5f802a302946f2ba71623ea2bc443b9c54cc9a8468b75b0";
@@ -585,16 +584,13 @@ fn batch_config_validated(template: &Config, book: &GeneratedBook, batch: usize)
     c.validate().map_err(|e| format!("CAMPAIGN_CONFIG:{e}"))?;
     Ok(c)
 }
-/// No row truncation: overlarge records refuse complete capture and trigger the existing failure path.
+/// Bound the complete lossless outcome, including every observation and counter snapshot.
+/// No truncation: overlarge records refuse capture through the existing failure path.
 pub fn retained_outcome(config: &Config, o: &crate::runtime::Outcome) -> Result<()> {
     if let Some(cap) = config.arena.as_ref().and_then(|a| a.retained_outcome_bytes)
-        && (o
-            .observations
-            .iter()
-            .any(|m| serde_json::to_vec(m).map_or(true, |b| b.len() > OBSERVATION_BYTES))
-            || serde_json::to_vec(o)?.len() > cap)
+        && serde_json::to_vec(o)?.len() > cap
     {
-        return Err("CAPTURE_OUTCOME_OR_OBSERVATION_LIMIT; no full-capture certificate".into());
+        return Err("CAPTURE_OUTCOME_LIMIT; no full-capture certificate".into());
     }
     Ok(())
 }
@@ -718,6 +714,181 @@ mod tests {
         assert!(retained_outcome(&c, &o).is_err());
         assert_eq!(serde_json::to_vec(&o).unwrap(), before);
         assert_eq!(o.status, "unknown");
+    }
+    #[test]
+    fn two_ai_374_complete_outcome_capture_roundtrips_metadata_and_refuses_overflow() {
+        let mut c: Config =
+            serde_json::from_str(include_str!("../../../configs/arena/smoke.json")).unwrap();
+        c.arena.as_mut().unwrap().retained_outcome_bytes = Some(OUTCOME_BYTES);
+        // NN0 saved metadata: selected/whole counters and actual clock/owner/error facts.
+        // The fixture never evaluates a position, opens a model, or launches a game.
+        let completed = serde_json::json!({
+                    "TT_representation": "compact359-board-zobrist-v1-context128-v1",
+                    "cutoffs": 414,
+                    "delta_updates": 18473,
+                    "leaf_count": null,
+                    "nodes": 18476,
+                    "physical_nn_calls": null,
+                    "policy_calls": 0,
+                    "pvs_researches": 18,
+                    "static_evaluations": 17926,
+                    "terminal": 0,
+                    "tt_board_hash_reads": 547,
+                    "tt_board_hash_updates": 18473,
+                    "tt_bound_cutoffs": 0,
+                    "tt_capacity_skips": 0,
+                    "tt_collisions": 34,
+                    "tt_context_initial_items": 6,
+                    "tt_context_matches": 120,
+                    "tt_context_misses": 0,
+                    "tt_context_transitions": 18473,
+                    "tt_exact_hits": 5,
+                    "tt_generation": 3,
+                    "tt_hash_collisions": 0,
+                    "tt_hashes": 7,
+                    "tt_illegal_moves": 0,
+                    "tt_index_collisions": 34,
+                    "tt_key_builds": 553,
+                    "tt_key_hits": 120,
+                    "tt_order_context_mismatch": 0,
+                    "tt_order_only": 117,
+                    "tt_probes": 550,
+                    "tt_replacements": 153,
+                    "tt_retained_bytes": 327728,
+                    "tt_usable_depth": 3
+        });
+        let mut whole = completed.clone();
+        whole["nodes"] = serde_json::json!(18477);
+        whole["tt_generation"] = serde_json::json!(4);
+        let observation: crate::arena_clock::MoveObservation = serde_json::from_value(
+            serde_json::json!({
+            "accepted": false,
+            "accepted_ns": null,
+            "action": null,
+            "admission_checked_ns": 95000000,
+            "caller_seconds": 0.101,
+            "caller_started_ns": 0,
+            "completed_depth": 3,
+            "counters": {
+                        "AI_terminal_finished_ns": 100000000,
+                        "AI_worker_core": 4,
+                        "AI_worker_tid": 103,
+                        "authority_core": 6,
+                        "authority_legal": true,
+                        "authority_receipt_ns": 95000000,
+                        "authority_tid": 101,
+                        "clock_contract": "authority-action-receipt-v1",
+                        "clock_contract_sha256": "04062382f70648cdfd722e59c35be1100719169097a04749b0046ea5a19a280d",
+                        "completed_snapshot_validation_failed": false,
+                        "drain_finished_ns": 101000000,
+                        "first_receipt_or_control_error": "original NN0 receipt error",
+                        "full_caller_ns": 101000000,
+                        "inflight_after_drain": 0,
+                        "last_completed_iteration_ns": 113187611,
+                        "matching_terminal_collected": true,
+                        "parent_traits": {
+                                    "any_recorded_repetition": false,
+                                    "classification_seconds": 2.874e-06,
+                                    "current_repetition_count": 1,
+                                    "distance_difference_stratum": "0..2",
+                                    "either_distance_le_2": false,
+                                    "legal_jump_available": false,
+                                    "local_ply": 0,
+                                    "pawn_contact": false,
+                                    "phase_stratum": "0..19",
+                                    "scope": "maintained rules geometry outside thinking; no model, prediction or counterfactual",
+                                    "stock_sum": 19,
+                                    "stock_sum_stratum": "16..20",
+                                    "wall_goal_distances": [
+                                                6,
+                                                7
+                                    ]
+                        },
+                        "reserve_stop_is_not_user_cancel": true,
+                        "selection_reason": "request_error",
+                        "state_commit_ns": null,
+                        "terminal_collected": true,
+                        "terminal_collected_ns": 100500000,
+                        "whole_search": whole
+            },
+            "deadline_ns": 100000000,
+            "engine_error": "original NN0 worker error",
+            "engine_index": 1,
+            "failure": null,
+            "last_completed_iteration_ns": 90000000,
+            "ply": 4,
+            "pv": [
+                        22,
+                        31
+            ],
+            "returned_ns": 101000000,
+            "side": 0,
+            "stop": "internal_time_limit",
+            "thinking_seconds": 0.095,
+            "value_stm": null,
+            "completed_iteration_counters": completed
+}),
+        )
+        .unwrap();
+        assert!(serde_json::to_vec(&observation).unwrap().len() > 3072);
+        let outcome = crate::runtime::Outcome {
+            game: 0,
+            family: "NN0-capture-layout".into(),
+            candidate_color: 0,
+            status: "unknown".into(),
+            winner: None,
+            plies: 4,
+            reason: Some("original NN0 worker error".into()),
+            nn_calls: 0,
+            moves: vec![186, 77, 13, 68],
+            persistent_tt: vec![],
+            advance_calls: 0,
+            terminal_no_nn: 0,
+            allocated_nodes_peak: 0,
+            started: true,
+            failure: None,
+            observations: vec![observation],
+        };
+        let before = serde_json::to_vec(&outcome).unwrap();
+        assert!(before.len() < OUTCOME_BYTES);
+        assert!(retained_outcome(&c, &outcome).is_ok());
+        let decoded: crate::runtime::Outcome = serde_json::from_slice(&before).unwrap();
+        assert_eq!(
+            serde_json::to_value(&decoded).unwrap(),
+            serde_json::to_value(&outcome).unwrap()
+        );
+        assert_eq!(decoded.reason.as_deref(), Some("original NN0 worker error"));
+        assert_eq!(decoded.moves, outcome.moves);
+        assert_eq!(
+            decoded.observations[0].counters,
+            outcome.observations[0].counters
+        );
+        assert_eq!(
+            decoded.observations[0].engine_error,
+            outcome.observations[0].engine_error
+        );
+        assert_eq!(decoded.observations[0].pv, outcome.observations[0].pv);
+        assert_eq!(decoded.observations[0].value_stm, None);
+        assert!(!decoded.observations[0].accepted);
+        c.arena.as_mut().unwrap().retained_outcome_bytes = Some(before.len());
+        assert!(retained_outcome(&c, &outcome).is_ok());
+        c.arena.as_mut().unwrap().retained_outcome_bytes = Some(before.len() - 1);
+        assert_eq!(
+            retained_outcome(&c, &outcome).unwrap_err().to_string(),
+            "CAPTURE_OUTCOME_LIMIT; no full-capture certificate"
+        );
+        assert_eq!(serde_json::to_vec(&outcome).unwrap(), before);
+        c.arena.as_mut().unwrap().retained_outcome_bytes = Some(OUTCOME_BYTES);
+        let mut oversized = outcome.clone();
+        oversized.reason = Some("original NN0 worker error".repeat(OUTCOME_BYTES));
+        let oversized_before = serde_json::to_vec(&oversized).unwrap();
+        assert!(retained_outcome(&c, &oversized).is_err());
+        assert_eq!(serde_json::to_vec(&oversized).unwrap(), oversized_before);
+        assert_eq!(
+            oversized.observations[0].counters,
+            outcome.observations[0].counters
+        );
+        assert_eq!(oversized.status, "unknown");
     }
     #[test]
     fn strength355_batch_forecast_keeps_four_copies_and_metadata_reserve() {
