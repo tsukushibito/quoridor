@@ -15,7 +15,7 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[2]
-PY_ROOTS = ("python/quoridor_training", "tools/model-export")
+PY_ROOTS = ("python/quoridor_training", "python/tests", "tools/model-export")
 PY_FILES = (
     "scripts/dev/research-save.py",
     "scripts/dev/research-storage.py",
@@ -36,6 +36,7 @@ PY_FILES = (
     "tools/research-session/test_lifecycle.py",
     "tools/research-session/test_lifecycle_storage.py",
     "tools/research-session/test_sequence.py",
+    "tools/research-session/test_configured_mixed_caller.py",
     "tools/research-session/test_perf_launch_policy.py",
     "tools/research-session/test_build_provenance.py",
     "tools/research-quality/test_maintenance.py",
@@ -47,6 +48,13 @@ NN0_TESTS = (
     "quoridor_training.test_contracts",
     "quoridor_training.test_residual_config",
     "quoridor_training.test_sampling",
+    "quoridor_training.test_public_replay",
+    "quoridor_training.test_mixed_entry",
+    "quoridor_training.test_mixed_lineage",
+    "quoridor_training.test_mixed_reflection",
+    "quoridor_training.test_mixed_update_observations",
+    "quoridor_training.test_common_outcome_contract",
+    "python/tests/test_configured_outcome_cache.py",
     "quoridor_training.test_public_sigma",
     "quoridor_training.test_public_features",
     "quoridor_training.test_supply",
@@ -237,6 +245,7 @@ def main():
         "tools/research-session/test_build_provenance.py",
         "tools/research-session/test_measurement.py",
         "tools/research-session/test_sequence.py",
+        "tools/research-session/test_configured_mixed_caller.py",
         "tools/research-session/test_perf_launch_policy.py",
         "tools/research-session/test_project_environment.py",
         "tools/research-session/test_project_interpreter.py",

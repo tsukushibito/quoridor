@@ -62,7 +62,11 @@ DEFAULTS = {
     },
     "limits": {"seconds": 60.0, "samples": 500000},
     "data": {"overlap_policy": "error"},
-    "artifacts": {"mode": "native_onnx", "save_scheduled": False, "checkpoint_steps": []},
+    "artifacts": {
+        "mode": "native_onnx",
+        "save_scheduled": False,
+        "checkpoint_steps": [],
+    },
     "experiment": {
         "study": None,
         "teacher_mapping": None,
@@ -74,7 +78,30 @@ DEFAULTS = {
         "main_volume_manifest_sha256": None,
     },
 }
-STEP_MODEL_DEFAULTS = {"distance_bypass": True, "train_transform": "F", "deploy_transform": "F"}
+MIXTURE_FIELDS = (
+    "train_family_row_cap",
+    "added_rows",
+    "public_rows",
+    "added_exposures",
+    "public_sampling_seed",
+    "added_reflection_probability",
+    "added_reflection_seed",
+    "public_reflection_probability",
+    "public_reflection_seed",
+    "diagnostic_seed",
+    "public_membership",
+    "public_acceptance",
+    "selector",
+    "output_limit_bytes",
+)
+DEFAULTS["mixture"] = dict.fromkeys(MIXTURE_FIELDS)
+
+
+STEP_MODEL_DEFAULTS = {
+    "distance_bypass": True,
+    "train_transform": "F",
+    "deploy_transform": "F",
+}
 
 
 def resolve_config(path=None, overrides=()):
@@ -115,7 +142,10 @@ def resolve_config(path=None, overrides=()):
         ("limits", "samples"),
     ]:
         value = result[section][key]
-        if (section, key) in (("training", "steps"), ("limits", "samples")) and value is None:
+        if (section, key) in (
+            ("training", "steps"),
+            ("limits", "samples"),
+        ) and value is None:
             continue
         if type(value) is not int or value <= 0:
             raise ValueError(f"positive integer required: {section}.{key}")
@@ -269,7 +299,7 @@ def resolve_config(path=None, overrides=()):
     elif result["training"]["target"] in ("outcome_steps", "terminal_margin"):
         raise ValueError("raw-step teachers require explicit distance_steps score version")
     if result["experiment"]["study"] is not None:
-        validate_warmstart_config(result, incoming, overrides)
+        validate_mixed_config(result, incoming, overrides)
     elif result["training"]["target"] == "completed_root_raw":
         raise ValueError("raw completed D6 target requires explicit common warm-start study")
     elif any(k in result["optimizer"] for k in ("betas", "eps")):
@@ -439,7 +469,6 @@ def np_float32(value):
     return struct.unpack("<f", struct.pack("<f", value))[0]
 
 
-WARMSTART_STUDY = "common-corpus-warmstart-v1"
 BEST43_WEIGHTS = "046fe926e56b955b0fb7de8f147a74ec33eace9cbc00a55c307f9b6541ab9841"
 BEST43_DESCRIPTOR = "46ec2c4708f96dcf9fad579c2fb0d1299c6663df27412f0faac98267467715e1"
 BEST43_EVALUATOR = "96a5f41f875022d1752b9c999595ad58bfb2d42687a8f06de08d42b1c4215875"
@@ -453,11 +482,19 @@ PARAMETER_SHAPES = {
 }
 
 
-def validate_warmstart_config(config, incoming, overrides=()):
+def validate_mixed_config(config, incoming, overrides=()):
     """No generic defaults select this study's quantity or fine-tuning method."""
-    if config["experiment"]["study"] not in (WARMSTART_STUDY, "public-replay-v1") or overrides:
+    if config["experiment"]["study"] != "mixed-outcome" or overrides:
         raise ValueError("explicit warm-start study; overrides are not selected recipes")
-    for section in ("model", "optimizer", "training", "evaluation", "limits", "data", "artifacts"):
+    for section in (
+        "model",
+        "optimizer",
+        "training",
+        "evaluation",
+        "limits",
+        "data",
+        "artifacts",
+    ):
         required = set(DEFAULTS[section]) | ({"betas", "eps"} if section == "optimizer" else set())
         if set(incoming.get(section, {})) != required:
             raise ValueError("warm-start requires explicit complete settings: " + section)
@@ -474,18 +511,7 @@ def validate_warmstart_config(config, incoming, overrides=()):
     ):
         raise ValueError("explicit selected fresh Adam beta/epsilon settings required")
     e = config["experiment"]
-    if (
-        type(e["main_volume_N"]) is not int
-        or e["main_volume_N"] <= 0
-        or e["teacher_mapping"] not in ("exclude_outside_unit", "divide_by_two")
-        or e["draw_policy"] not in ("include_threefold", "exclude_threefold")
-        or config["training"]["target"] not in ("z", "completed_root_raw")
-    ):
-        raise ValueError("human N/teacher mapping/draw policy/selected teacher are required")
-    if e["study"] == "public-replay-v1" and (
-        config["training"]["target"] != "z" or e["condition"] not in ("added_only", "replay")
-    ):
-        raise ValueError("selected public replay arm and outcome-only target required")
+    validate_mixture_config(config, incoming)
     m = config["model"]
     if (
         m
@@ -527,6 +553,82 @@ def validate_warmstart_config(config, incoming, overrides=()):
         )
 
 
+def validate_mixture_config(config, incoming):
+    """All scientific mixture choices must be explicit, including null row cap."""
+    m, t, e = config["mixture"], config["training"], config["evaluation"]
+    if set(incoming.get("mixture", {})) != set(MIXTURE_FIELDS):
+        raise ValueError("complete explicit mixture settings required; no selected defaults")
+    cap = m["train_family_row_cap"]
+    if cap is not None and (type(cap) is not int or cap <= 0):
+        raise ValueError("train_family_row_cap must be null or positive integer")
+    for name in ("added_rows", "output_limit_bytes"):
+        if type(m[name]) is not int or m[name] <= 0:
+            raise ValueError("positive mixture setting: " + name)
+    for name in (
+        "public_rows",
+        "public_sampling_seed",
+        "added_reflection_seed",
+        "public_reflection_seed",
+        "diagnostic_seed",
+    ):
+        if type(m[name]) is not int or m[name] < 0:
+            raise ValueError("nonnegative mixture setting: " + name)
+    if (
+        type(m["added_exposures"]) not in (int, float)
+        or not math.isfinite(m["added_exposures"])
+        or m["added_exposures"] <= 0
+    ):
+        raise ValueError("finite positive added exposure limit")
+    for name in ("added_reflection_probability", "public_reflection_probability"):
+        if type(m[name]) not in (int, float) or not math.isfinite(m[name]) or not 0 <= m[name] <= 1:
+            raise ValueError("finite source reflection probability: " + name)
+    if (
+        not isinstance(m["selector"], dict)
+        or set(m["selector"]) != {"public_non_regression"}
+        or type(m["selector"]["public_non_regression"]) is not bool
+    ):
+        raise ValueError("explicit optional public nonregression selector required")
+    for name in ("public_membership", "public_acceptance"):
+        ref = m[name]
+        if (
+            not isinstance(ref, dict)
+            or set(ref) != {"path", "sha256", "bytes", "mode"}
+            or not isinstance(ref["path"], str)
+            or not ref["path"]
+            or type(ref["bytes"]) is not int
+            or not 0 < ref["bytes"] <= 1024**2
+            or not isinstance(ref["sha256"], str)
+            or len(ref["sha256"]) != 64
+            or any(v not in "0123456789abcdef" for v in ref["sha256"])
+            or ref["mode"] not in ("0600", "0644")
+        ):
+            raise ValueError("actual bounded public membership/custody FileRef: " + name)
+    if (
+        t["target"] != "z"
+        or t["batch_size"] != m["added_rows"] + m["public_rows"]
+        or type(t["steps"]) is not int
+        or t["steps"] <= 0
+        or type(config["limits"]["samples"]) is not int
+        or config["limits"]["samples"] <= 0
+        or e["diagnostic_rows"] <= 0
+        or t["scheduler"] != "none"
+        or e["early_stopping_unit"] != "observation"
+        or t["supply_workers"] != 0
+    ):
+        raise ValueError(
+            "finite full-batch outcome mixture, all-work limit, observation selector and synchronous GPU supply required"
+        )
+    if t["reflection_probability"] != 0:
+        raise ValueError(
+            "source reflection configured only in mixture; no duplicate global augmentation"
+        )
+    if (
+        config["experiment"]["teacher_mapping"] is not None
+        or config["experiment"]["condition"] is not None
+    ):
+        raise ValueError("outcome mixture has no raw teacher mapping or paired arm selector")
+
+
 def bound_file_bytes(ref, limit):
     """Existing input FileRef byte domain, before any framework or model load."""
     if (
@@ -550,75 +652,6 @@ def bound_file_bytes(ref, limit):
     if hashlib.sha256(raw).hexdigest() != ref["sha256"]:
         raise ValueError("input FileRef raw SHA mismatch")
     return raw
-
-
-def warmstart_inputs(config, *, cache, config_path, input_binding):
-    """Join the existing immutable fit input binding; not a second fit permit."""
-    if config["experiment"]["study"] != WARMSTART_STUDY:
-        return None
-    if config_path is None or input_binding is None:
-        raise ValueError("warm-start requires selected config and existing guarded input binding")
-    from .distance_steps import bound_json, require_completed_stream_cache
-
-    expected = json.loads(Path(input_binding).read_bytes())
-    selected_plan = expected["selected_plan"]
-    if Path(selected_plan["path"]).stat().st_size > 65536:
-        raise ValueError("selected canonical plan byte bound")
-    plan = bound_json(selected_plan["path"], selected_plan["sha256"])
-    settings = plan["next_learning_study"]["common_learner_settings"]
-    if (
-        not isinstance(settings, dict)
-        or set(settings) != set(DEFAULTS)
-        or not isinstance(settings.get("training"), dict)
-        or "target" in settings["training"]
-    ):
-        raise ValueError("complete selected normalized recipe without teacher target required")
-    explicit = copy.deepcopy(settings)
-    explicit["training"]["target"] = "z"  # Validation only; the two teachers stay distinct.
-    selected_recipe = resolve_config(explicit)
-    if selected_recipe != explicit:
-        raise ValueError("selected canonical settings cannot use unselected defaults")
-    selected_recipe["training"].pop("target")
-    pairs = expected["paired_fit_configs"]
-    if not isinstance(pairs, list) or len(pairs) != 2:
-        raise ValueError("exact two independently bound common fit configs required")
-    recipes = []
-    selected = hashlib.sha256(Path(config_path).read_bytes()).hexdigest()
-    targets = set()
-    for ref in pairs:
-        bound_file_bytes(ref, 65536)
-        recipe = resolve_config(ref["path"])
-        targets.add(recipe["training"].pop("target"))
-        recipes.append(recipe)
-    if (
-        targets != {"z", "completed_root_raw"}
-        or any(recipe != selected_recipe for recipe in recipes)
-        or selected not in {ref["sha256"] for ref in pairs}
-    ):
-        raise ValueError("both teachers must match canonical selected settings except target")
-    model_inputs = warmstart_model_inputs(config)
-    warm, descriptor = model_inputs["warm_start"], model_inputs["descriptor"]
-    manifest = bound_json(Path(cache) / "cache.json", expected["cache_manifest_sha"])
-    require_completed_stream_cache(cache, manifest)
-    common_cache_config(manifest, config["experiment"], plan=plan)
-    if (
-        expected.get("fit_config_sha") != hashlib.sha256(Path(config_path).read_bytes()).hexdigest()
-        or expected.get("initial_weights_sha") != BEST43_WEIGHTS
-        or expected.get("warm_start") != warm
-        or manifest["stream_intake"]["human_quantity_n"] != config["experiment"]["main_volume_N"]
-        or manifest["schedule_sha256"] != expected["schedule_sha256"]
-        or manifest["family_partition_sha256"] != expected["family_partition_sha256"]
-        or manifest["source_binding"] != expected["dataset"]
-    ):
-        raise ValueError(
-            "actual common corpus/quantity/schedule/partition/warm-start/config binding"
-        )
-    return {
-        "expected": expected,
-        "descriptor": descriptor,
-        "statistics": model_inputs["statistics"],
-        "warm_start": warm,
-    }
 
 
 def warmstart_model_inputs(config):
@@ -669,28 +702,37 @@ def ordered_parameter_values(raw):
     return out
 
 
-def common_cache_config(manifest, experiment=None, selected_plan=None, plan=None):
-    """The opt-in cache, selected plan and literal family partition precede arrays."""
+def common_cache_config(manifest):
+    """Typed published outcome-cache lineage; no study/plan or raw-range selector."""
     c = manifest["common_corpus"]
     cfg = c["config"]
+    fields = {
+        "families",
+        "prefix_seed",
+        "prefix_lengths",
+        "split_seed",
+        "root_value_policy",
+        "schedule",
+        "partition",
+        "batch_start",
+        "batch_count",
+        "excluded_books",
+    }
+
+    def bound_json_ref(value):
+        return (
+            isinstance(value, dict)
+            and set(value) == {"path", "sha256"}
+            and isinstance(value["path"], str)
+            and bool(value["path"])
+            and isinstance(value["sha256"], str)
+            and len(value["sha256"]) == 64
+            and all(ch in "0123456789abcdef" for ch in value["sha256"])
+        )
+
     if (
         manifest["schema"] != "quoridor-common-corpus-terminal-geometry-v3"
-        or set(cfg)
-        != {
-            "selected_plan",
-            "families",
-            "prefix_seed",
-            "prefix_lengths",
-            "split_seed",
-            "root_value_policy",
-            "draw_policy",
-        }
-        or set(cfg["selected_plan"]) != {"path", "sha256"}
-        or cfg["selected_plan"]["path"]
-        != "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/plan.json"
-        or not isinstance(cfg["selected_plan"]["sha256"], str)
-        or len(cfg["selected_plan"]["sha256"]) != 64
-        or any(v not in "0123456789abcdef" for v in cfg["selected_plan"]["sha256"])
+        or set(cfg) != fields
         or type(cfg["families"]) is not int
         or cfg["families"] <= 0
         or any(
@@ -700,100 +742,104 @@ def common_cache_config(manifest, experiment=None, selected_plan=None, plan=None
         or not isinstance(cfg["prefix_lengths"], list)
         or not cfg["prefix_lengths"]
         or any(type(v) is not int or not 0 < v < 200 for v in cfg["prefix_lengths"])
-        or cfg["prefix_lengths"] != sorted(set(cfg["prefix_lengths"]))
-        or cfg["families"] % len(cfg["prefix_lengths"])
-        or cfg["root_value_policy"] not in ("exclude_outside_unit", "divide_by_two")
-        or cfg["draw_policy"] not in ("include_threefold", "exclude_threefold")
+        or len(cfg["prefix_lengths"]) != len(set(cfg["prefix_lengths"]))
+        or cfg["root_value_policy"] != "outcome_only"
+        or any(not bound_json_ref(cfg[k]) for k in ("schedule", "partition"))
+        or not isinstance(cfg["excluded_books"], list)
+        or any(not bound_json_ref(ref) for ref in cfg["excluded_books"])
+        or any(type(cfg[k]) is not int or cfg[k] < 0 for k in ("batch_start", "batch_count"))
+        or cfg["batch_count"] <= 0
+        or cfg["batch_start"] + cfg["batch_count"] > cfg["families"]
         or c["planned_families"] != cfg["families"]
         or c["raw_file"] != "completed-root-raw.f32"
         or c["common_mask_file"] != "common-eligible.u8"
         or c["sampling_file"] != "sampling.bin"
         or c["teacher_A"] != "actual_final_z"
-        or c["teacher_B"] != "explicit_mapping_of_completed_root_raw"
         or c["rootmean_is_raw"] is not False
-        or c["same_mask_and_family_partition_for_both"] is not True
+        or type(manifest["rows"]) is not int
+        or manifest["rows"] < 0
         or type(c["common_eligible_rows"]) is not int
         or not 0 <= c["common_eligible_rows"] <= manifest["rows"]
     ):
-        raise ValueError("common cache selected config/raw/mask contract")
+        raise ValueError("published configured outcome/raw/sampling contract")
+    counts = c["common_eligible_by_split"]
+    if (
+        set(counts) != {"train", "validation"}
+        or any(type(v) is not int or v < 0 for v in counts.values())
+        or sum(counts.values()) != c["common_eligible_rows"]
+    ):
+        raise ValueError("literal outcome T/V eligible census")
+
+    def digest(value):
+        return (
+            isinstance(value, str)
+            and len(value) == 64
+            and all(v in "0123456789abcdef" for v in value)
+        )
+
     authority = manifest["model_scale_authority"]
-    if authority != {
-        "selected_plan": cfg["selected_plan"],
-        "starting_weights_sha256": BEST43_WEIGHTS,
-        "descriptor_sha256": BEST43_DESCRIPTOR,
-        "evaluator_sha256": BEST43_EVALUATOR,
-        "scale_policy": "incumbent_descriptor_T_only",
-    }:
-        raise ValueError("common cache incumbent model/scale authority")
+    if (
+        set(authority)
+        != {
+            "starting_weights_sha256",
+            "descriptor_sha256",
+            "evaluator_sha256",
+            "scale_policy",
+        }
+        or any(
+            not digest(authority[k])
+            for k in (
+                "starting_weights_sha256",
+                "descriptor_sha256",
+                "evaluator_sha256",
+            )
+        )
+        or authority["scale_policy"] != "incumbent_descriptor_T_only"
+    ):
+        raise ValueError("published initializer/frozen scale authority")
     intake = manifest["stream_intake"]
-    header = intake["provenance"]["header"]
-    expected_header_keys = {
-        "schema",
-        "generator_version",
-        "config_sha256",
-        "compiled_sources",
-        "evaluator",
-        "executable_sha256",
-        "family_partition_sha256",
-        "planned",
-        "detailed_schedule_history",
-    }
-    source = manifest["source_content"]
+    sources, bindings = manifest["source_content"], manifest["source_binding"]
     if (
         intake["status"] != "complete"
         or intake["scope"] != "common-corpus"
         or intake["publication_protocol"] != "incomplete-marker-last-v1"
-        or intake["human_quantity_n"] != cfg["families"]
-        or set(header) != expected_header_keys
-        or header["schema"] != "quoridor-fixed-d-common-corpus-v1"
-        or header["generator_version"] != "fixed-d-common-corpus-warmstart-v1"
-        or header["evaluator"] != "original-distance-a0-b8-tanh"
-        or header["planned"] != cfg["families"]
-        or header["config_sha256"] != intake["config"]["sha256"]
-        or header["family_partition_sha256"] != manifest["family_partition_sha256"]
-        or intake["provenance"]["requests"] is not None
-        or manifest["dataset_sha"] != source["compressed"]["sha256"]
-        or manifest["source_binding"]
-        != {"path": source["compressed"]["path"], "sha256": source["compressed"]["sha256"]}
-        or (selected_plan is not None and selected_plan != cfg["selected_plan"])
-        or (
-            experiment is not None
-            and (
-                experiment["main_volume_N"] != cfg["families"]
-                or experiment["teacher_mapping"] != cfg["root_value_policy"]
-                or experiment["draw_policy"] != cfg["draw_policy"]
-            )
-        )
+        or manifest["schedule_sha256"] != cfg["schedule"]["sha256"]
+        or manifest["family_partition_sha256"] != cfg["partition"]["sha256"]
+        or not digest(manifest["dataset_sha"])
+        or not isinstance(sources, list)
+        or not sources
+        or not isinstance(bindings, list)
+        or len(bindings) != len(sources)
+        or len(intake["batches"]) != len(sources)
     ):
-        raise ValueError("completed common scope/header/learner config/selected-plan mismatch")
-    if plan is not None:
-        study = plan["next_learning_study"]
+        raise ValueError("published complete ordered source/global schedule/partition lineage")
+    seen, cursor = set(), cfg["batch_start"]
+    for source, binding, batch in zip(sources, bindings, intake["batches"]):
+        compressed = source["compressed"]
         if (
-            study["issue"] != "quoridor-4lc.362"
-            or study["scientific_entry"] is not True
-            or study["corpus"]["quantity_families"] != cfg["families"]
-            or study["corpus"]["offtrajectory_rows"] != 0
-            or study["starting_weights_SHA256"] != BEST43_WEIGHTS
-            or study["descriptor_SHA256"] != BEST43_DESCRIPTOR
-            or study["typed_evaluator_content_SHA256"] != BEST43_EVALUATOR
-            or study["common_learner_settings"] is None
-            or study["corpus"]["blind_schedule"]
-            != {
-                "version": "fixed-d-common-corpus-warmstart-v1",
-                "prefix_seed": cfg["prefix_seed"],
-                "prefix_lengths": cfg["prefix_lengths"],
-                "ordering": "round_robin_lengths",
-                "attempts_per_family": 32,
-                "old_games_included": False,
-            }
-            or study["corpus"]["whole_family_T_V_partition"]
-            != {
-                "algorithm": "canonical_LR_family_SHA256_seed_rank_train_floor_4F_over_5",
-                "seed": cfg["split_seed"],
-                "before_outcomes": True,
-            }
-            or study["range_terminal_handling"]
-            != {"root_value_policy": cfg["root_value_policy"], "draw_policy": cfg["draw_policy"]}
+            set(source) != {"encoding", "compressed", "raw_sha256", "raw_bytes"}
+            or source["encoding"] != "gzip-single-member-v1"
+            or set(compressed) != {"path", "sha256", "bytes", "mode"}
+            or not bound_json_ref(binding)
+            or not Path(binding["path"]).is_absolute()
+            or binding != {"path": compressed["path"], "sha256": compressed["sha256"]}
+            or binding["path"] in seen
+            or type(compressed["bytes"]) is not int
+            or compressed["bytes"] <= 0
+            or compressed["mode"] not in ("0600", "0644")
+            or not digest(source["raw_sha256"])
+            or type(source["raw_bytes"]) is not int
+            or source["raw_bytes"] <= 0
+            or set(batch) != {"batch_start", "batch_count", "config"}
+            or type(batch["batch_start"]) is not int
+            or batch["batch_start"] != cursor
+            or type(batch["batch_count"]) is not int
+            or batch["batch_count"] <= 0
+            or not bound_json_ref(batch["config"])
         ):
-            raise ValueError("selected human plan/partition/mapping is unresolved or incompatible")
+            raise ValueError("ordered disjoint source Content/configured batch interval")
+        seen.add(binding["path"])
+        cursor += batch["batch_count"]
+    if cursor != cfg["batch_start"] + cfg["batch_count"]:
+        raise ValueError("actual batch union does not cover published interval")
     return cfg

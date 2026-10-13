@@ -53,6 +53,14 @@ struct SamplingFamily {
     split: crate::Split,
 }
 
+#[derive(serde::Serialize)]
+struct SamplingGame {
+    game: String,
+    family_code: u32,
+    start: usize,
+    rows: usize,
+}
+
 pub(crate) struct Writer {
     output: PathBuf,
     streams: Vec<Output>,
@@ -63,16 +71,14 @@ pub(crate) struct Writer {
     family_codes: BTreeMap<String, u32>,
     families: Vec<SamplingFamily>,
     row_ids: Vec<String>,
+    games: Vec<SamplingGame>,
+    seen_games: BTreeSet<String>,
     identities: BTreeSet<String>,
     rows_by_family: Vec<u64>,
     common_eligible_by_family: Vec<u64>,
 }
 
 impl Writer {
-    pub(crate) fn output_path(&self) -> &Path {
-        &self.output
-    }
-
     pub(crate) fn abort(mut self) -> Vec<String> {
         let mut failures = Vec::new();
         for stream in self.streams.drain(..) {
@@ -84,7 +90,7 @@ impl Writer {
         Self::create(output, None)
     }
     pub(crate) fn new_common(output: &Path, common: crate::common_corpus::Config) -> Result<Self> {
-        common.validate_selected()?;
+        common.validate_shape()?;
         Self::create(output, Some(common))
     }
     fn names(common: bool) -> Vec<&'static str> {
@@ -114,10 +120,12 @@ impl Writer {
             count: 0,
             common,
             common_eligible: 0,
-            common_eligible_by_split: BTreeMap::new(),
+            common_eligible_by_split: [("train".into(), 0), ("validation".into(), 0)].into(),
             family_codes: BTreeMap::new(),
             families: Vec::new(),
             row_ids: Vec::new(),
+            games: Vec::new(),
+            seen_games: BTreeSet::new(),
             identities: BTreeSet::new(),
             rows_by_family: Vec::new(),
             common_eligible_by_family: Vec::new(),
@@ -127,7 +135,7 @@ impl Writer {
     fn sampling_code(&mut self, r: &TeacherRow) -> Result<u32> {
         let common = self.common.as_ref().ok_or("common sampling required")?;
         let max_rows = common
-            .families
+            .batch_count
             .checked_mul(200)
             .ok_or("sampling row bound")?;
         if u64::try_from(self.count)? >= max_rows
@@ -149,7 +157,7 @@ impl Writer {
         }
         if let Some(&code) = self.family_codes.get(&r.family) {
             let f = &self.families[code as usize];
-            if f.game != r.game || f.split != r.split {
+            if f.split != r.split {
                 return Err("whole family game/split drift".into());
             }
             return Ok(code);
@@ -257,6 +265,22 @@ impl Writer {
         }
         if let Some((raw, eligible, _target)) = common_labels {
             let code = sampling.ok_or("sampling code")?;
+            if self.games.last().is_none_or(|g| g.game != r.game) {
+                if !self.seen_games.insert(r.game.clone()) {
+                    return Err("chronological game block repeated after terminal boundary".into());
+                }
+                self.games.push(SamplingGame {
+                    game: r.game.clone(),
+                    family_code: code,
+                    start: self.count,
+                    rows: 0,
+                });
+            }
+            let block = self.games.last_mut().ok_or("sampling game block")?;
+            if block.family_code != code {
+                return Err("one game crossed a whole-family group".into());
+            }
+            block.rows += 1;
             self.streams[5].write_all(&raw.to_le_bytes())?;
             self.streams[6].write_all(&[u8::from(eligible)])?;
             self.streams[4].write_all(&code.to_le_bytes())?;
@@ -373,7 +397,9 @@ impl Writer {
                     return Err("compact cache byte/count mismatch".into());
                 }
             }
-            if self.row_ids.len() != self.count
+            if self.games.iter().map(|g| g.rows).sum::<usize>() != self.count
+                || self.games.iter().any(|g| g.rows == 0 || g.rows > 200)
+                || self.row_ids.len() != self.count
                 || self.rows_by_family.iter().sum::<u64>() != u64::try_from(self.count)?
                 || self.common_eligible_by_family.iter().sum::<u64>()
                     != u64::try_from(self.common_eligible)?
@@ -383,27 +409,17 @@ impl Writer {
             extra.insert("file_bytes".into(), serde_json::to_value(&file_bytes)?);
             extra.insert("sampling".into(),serde_json::json!({
                 "schema":"quoridor-common-corpus-sampling-v1","file":"sampling.bin","format":"<IBB","width_B":6,
-                "families":self.families,"row_ids":self.row_ids,"rows_by_family":self.rows_by_family,
+                "families":self.families,"games":self.games,"row_ids":self.row_ids,"rows_by_family":self.rows_by_family,
                 "common_eligible_by_family":self.common_eligible_by_family}));
-            let plan = common.selected_plan.read()?;
-            extra.insert(
-                "model_scale_authority".into(),
-                serde_json::json!({
-                "selected_plan":common.selected_plan,
-                "starting_weights_sha256":plan["next_learning_study"]["starting_weights_SHA256"],
-                "descriptor_sha256":plan["next_learning_study"]["descriptor_SHA256"],
-                "evaluator_sha256":plan["next_learning_study"]["typed_evaluator_content_SHA256"],
-                "scale_policy":"incumbent_descriptor_T_only"}),
-            );
             extra.insert(
                 "common_corpus".into(),
                 serde_json::json!({"config":common,
                 "common_eligible_rows":self.common_eligible,"common_eligible_by_split":self.common_eligible_by_split,"planned_families":common.families,
                 "raw_file":"completed-root-raw.f32","common_mask_file":"common-eligible.u8",
-                "teacher_A":"actual_final_z","teacher_B":"explicit_mapping_of_completed_root_raw",
-                "rootmean_is_raw":false,"same_mask_and_family_partition_for_both":true,
+                "teacher_A":"actual_final_z",
+                "rootmean_is_raw":false,
                 "sampling_file":"sampling.bin","source_validation":"native-cache-publication-once-v1",
-                "cache_lifetime":"ONE shared binary cache until BOTH consumersSTOP; reconstructed from canonical source/schema/Git/config before authorized retirement"}),
+                "cache_lifetime":"shared read-only binary cache while actual consumers own its readers"}),
             );
         }
         let mut value = serde_json::to_value(&manifest)?;
@@ -413,9 +429,6 @@ impl Writer {
             .write(true)
             .open(self.output.join("cache.json"))?;
         let raw = serde_json::to_vec_pretty(&value)?;
-        if self.common.is_some() && raw.len() > 1024 * 1024 {
-            return Err("compact manifest upper refused; partial cache unadmitted".into());
-        }
         file.write_all(&raw)?;
         file.sync_all()?;
         Ok(manifest)
@@ -433,35 +446,63 @@ pub fn write(dataset: &Path, output: &Path, allow_test: bool) -> Result<TensorCa
 }
 
 #[cfg(test)]
-mod compact_publication_tests {
+mod configured_outcome_codec_tests {
     use super::*;
     use crate::terminal::{TerminalProvenance, Termination, attach_terminal_targets};
-    use crate::{Split, Teacher};
+    use crate::{
+        Split, Teacher,
+        common_corpus::{Config, RootValuePolicy},
+        terminal_stream::BoundJson,
+    };
     use serde_json::json;
-
     #[test]
-    fn compact_sampling_native_binary_roundtrip_and_bit_drift_refuse() {
-        // New data-codec fixture: canonical legal chronology/geometry, no Search/model/fit.
-        let prefix = vec![13, 67, 22, 58, 31, 49, 40, 48, 49, 39, 58, 30, 67, 21, 76];
-        let final_context = SigmaContext::from_prefix(&prefix).unwrap();
-        let provenance = TerminalProvenance::from_context(
-            &final_context,
-            prefix,
+    fn configured_outcome_codec_preserves_raw_known_unknown_and_multi_game_family() {
+        let root =
+            std::env::temp_dir().join(format!("configured-outcome-codec-{}", std::process::id()));
+        fs::create_dir(&root).unwrap();
+        let reference = BoundJson {
+            path: root.join("unexecuted-global.json"),
+            sha256: "0".repeat(64),
+        };
+        let c = Config {
+            families: 3,
+            prefix_seed: 1,
+            prefix_lengths: vec![4],
+            split_seed: 2,
+            root_value_policy: RootValuePolicy::OutcomeOnly,
+            schedule: reference.clone(),
+            partition: reference,
+            batch_start: 0,
+            batch_count: 3,
+            excluded_books: vec![],
+        };
+        let cache = root.join("cache");
+        let mut writer = Writer::new_common(&cache, c).unwrap();
+        let context = SigmaContext::from_prefix(&[]).unwrap();
+        let final_prefix = vec![13, 67, 22, 58, 31, 49, 40, 48, 49, 39, 58, 30, 67, 21, 76];
+        let goal = TerminalProvenance::from_context(
+            &SigmaContext::from_prefix(&final_prefix).unwrap(),
+            final_prefix,
             Termination::Goal,
-            "SYNTHETIC codec goal chronology".into(),
+            "SYNTHETIC codec goal".into(),
         )
         .unwrap();
-        let context = SigmaContext::from_prefix(&[]).unwrap();
-        let raw = -0.09966802_f32;
-        let mut rows = vec![
-            TeacherRow::from_context(
-                "SYNTHETIC-original-row-id".into(),
-                "SYNTHETIC-game-id".into(),
+        let unknown = TerminalProvenance::from_context(
+            &context,
+            vec![],
+            Termination::Unknown,
+            "SYNTHETIC cancellation".into(),
+        )
+        .unwrap();
+        for (i, raw) in [2.0f32, -2.0, -0.0].into_iter().enumerate() {
+            let mut row = TeacherRow::from_context(
+                format!("row-{i}"),
+                format!("game-{i}"),
                 "a".repeat(64),
                 Split::Train,
                 vec![],
                 &context,
-                Some(13),
+                if i == 2 { None } else { Some(13) },
                 Teacher::AlphaBeta {
                     value: raw,
                     depth: 6,
@@ -471,73 +512,43 @@ mod compact_publication_tests {
                 },
                 crate::common_corpus::EVALUATOR.into(),
             )
-            .unwrap(),
-        ];
-        attach_terminal_targets(&mut rows, &provenance).unwrap();
-        let row = &rows[0];
-        row.validate().unwrap();
-        let mut history_drift = row.clone();
-        history_drift.history_key = "0".repeat(64);
-        assert!(history_drift.validate().is_err()); // Owning native validation, not sorted JSON.
-        let plan = Path::new(crate::common_corpus::PLAN);
-        let common = crate::common_corpus::Config {
-            selected_plan: crate::terminal_stream::BoundJson {
-                path: plan.into(),
-                sha256: file_sha(plan).unwrap(),
-            },
-            families: 8,
-            prefix_seed: 36220261013,
-            prefix_lengths: vec![4, 8, 12, 16],
-            split_seed: 36220261014,
-            root_value_policy: crate::common_corpus::RootValuePolicy::ExcludeOutsideUnit,
-            draw_policy: crate::common_corpus::DrawPolicy::IncludeThreefold,
-        };
-        let root =
-            std::env::temp_dir().join(format!("compact-publication-codec-{}", std::process::id()));
-        assert!(!root.exists());
-        let mut writer = Writer::new_common(&root, common).unwrap();
-        let evidence = json!({"search":{"accepted":true,"failure":null,"completed_depth":6,"stop":"depth_cap",
-            "raw_value":raw,"raw_value_bits":raw.to_bits(),"parent":{"stm":0,"ply":0,"ruleset":context.ruleset().id()}}});
-        let mut bad = evidence.clone();
-        bad["search"]["raw_value_bits"] = json!(raw.to_bits() ^ 1);
-        assert!(writer.push(row, Some(bad)).is_err());
-        assert_eq!(fs::metadata(root.join("geometry.bin")).unwrap().len(), 0);
-        writer.push(row, Some(evidence)).unwrap();
-        assert!(writer.sampling_code(row).is_err()); // Duplicate stable original row ID.
-        let manifest = writer
+            .unwrap();
+            attach_terminal_targets(
+                std::slice::from_mut(&mut row),
+                if i == 2 { &unknown } else { &goal },
+            )
+            .unwrap();
+            let evidence = json!({"search":{"accepted":true,"failure":null,"completed_depth":6,"stop":"depth_cap",
+                "raw_value":raw,"raw_value_bits":raw.to_bits(),"parent":{"stm":0,"ply":0,"ruleset":context.ruleset().id()}}});
+            let mut bad = evidence.clone();
+            bad["search"]["raw_value_bits"] = json!(raw.to_bits() ^ 1);
+            assert!(writer.push(&row, Some(bad)).is_err());
+            writer.push(&row, Some(evidence)).unwrap();
+        }
+        writer
             .finish("b".repeat(64), false, serde_json::Map::new())
             .unwrap();
         assert_eq!(
-            manifest.schema.as_deref(),
-            Some(crate::common_corpus::CACHE_SCHEMA)
+            fs::read(cache.join("completed-root-raw.f32")).unwrap(),
+            [2.0f32, -2.0, -0.0]
+                .into_iter()
+                .flat_map(f32::to_le_bytes)
+                .collect::<Vec<_>>()
         );
         assert_eq!(
-            fs::read(root.join("completed-root-raw.f32")).unwrap(),
-            raw.to_le_bytes()
+            fs::read(cache.join("common-eligible.u8")).unwrap(),
+            vec![1, 1, 0]
         );
-        assert_eq!(
-            fs::read(root.join("sampling.bin")).unwrap(),
-            [0, 0, 0, 0, 0, 1]
-        );
-        assert_eq!(fs::read(root.join("common-eligible.u8")).unwrap(), [1]);
-        let labels = fs::read(root.join("labels.f32")).unwrap();
-        assert_eq!(&labels[..4], &raw.to_le_bytes());
-        assert_eq!(&labels[4..], &1.0_f32.to_le_bytes());
-        let value: serde_json::Value =
-            serde_json::from_slice(&fs::read(root.join("cache.json")).unwrap()).unwrap();
-        assert_eq!(
-            value["sampling"]["row_ids"],
-            json!(["SYNTHETIC-original-row-id"])
-        );
-        assert_eq!(
-            value["sampling"]["families"][0]["game"],
-            "SYNTHETIC-game-id"
-        );
-        assert_eq!(value["sampling"]["rows_by_family"], json!([1]));
-        assert_eq!(value["file_bytes"]["sampling.bin"], 6);
-        assert!(
-            !root.join("rows.jsonl.gz").exists() && !root.join("stream-games.jsonl.gz").exists()
-        );
+        let labels = fs::read(cache.join("labels.f32")).unwrap();
+        assert_eq!(&labels[4..8], &1.0f32.to_le_bytes());
+        assert_eq!(&labels[12..16], &1.0f32.to_le_bytes());
+        assert!(f32::from_le_bytes(labels[20..24].try_into().unwrap()).is_nan());
+        let m: serde_json::Value =
+            serde_json::from_slice(&fs::read(cache.join("cache.json")).unwrap()).unwrap();
+        assert_eq!(m["sampling"]["families"].as_array().unwrap().len(), 1);
+        assert_eq!(m["sampling"]["games"].as_array().unwrap().len(), 3);
+        assert_eq!(m["sampling"]["games"][1]["game"], "game-1");
+        assert_eq!(m["sampling"]["games"][2]["start"], 2);
         fs::remove_dir_all(root).unwrap();
     }
 }

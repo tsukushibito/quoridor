@@ -51,7 +51,9 @@ class SequenceTests(unittest.TestCase):
         path.write_text(json.dumps(value))
         return lc.bound(path)[0]
 
-    def test_sequence_order_excludes_completed_prefix_and_interleaves_without_reordering(self):
+    def test_sequence_order_excludes_completed_prefix_and_interleaves_without_reordering(
+        self,
+    ):
         self.settings["arena"]["range"] = [6, 383]
         self.settings["arena_block"] = 32
         self.settings["measurements"] = [{} for _ in range(5)]
@@ -137,7 +139,9 @@ class SequenceTests(unittest.TestCase):
         with self.assertRaisesRegex(lc.Refused, "environment drift"):
             lc.selected_arena(spec)
 
-    def test_sequence_derives_current_pair_metadata_and_refuses_duplicate_namespace(self):
+    def test_sequence_derives_current_pair_metadata_and_refuses_duplicate_namespace(
+        self,
+    ):
         artifact = {"path": "/synthetic/native", "sha256": "a" * 64}
         config = self.metadata("config.json", {"output": str(self.root / "original-game-output")})
         plan = {
@@ -148,7 +152,8 @@ class SequenceTests(unittest.TestCase):
         }
         plan_ref = self.metadata("selected-plan.json", plan)
         numerical = self.metadata(
-            "old-numerical.json", {"original_evidence": self.plan, "correspondence_only": True}
+            "old-numerical.json",
+            {"original_evidence": self.plan, "correspondence_only": True},
         )
         experiment = {
             "phase": "arena",
@@ -187,7 +192,13 @@ class SequenceTests(unittest.TestCase):
             "env": {"TMPDIR": "old"},
             "data_root": "old-output",
             "owned_outputs": [],
-            "data": [{"name": "journal", "path": "old-output/completed.jsonl.gz", "limit_B": 4096}],
+            "data": [
+                {
+                    "name": "journal",
+                    "path": "old-output/completed.jsonl.gz",
+                    "limit_B": 4096,
+                }
+            ],
             "admission": {"obsolete": "per-pair"},
         }
         self.settings["arena"]["template"] = template
@@ -204,7 +215,8 @@ class SequenceTests(unittest.TestCase):
         self.assertEqual(current["config"], config)
         self.assertEqual(spec["data_root"], str(self.root / "original-game-output"))
         self.assertEqual(
-            lc.document(current["numerical_qualification"])["original_evidence"], self.plan
+            lc.document(current["numerical_qualification"])["original_evidence"],
+            self.plan,
         )
         self.assertFalse(Path(spec["TMP"]).exists())
 
@@ -289,7 +301,8 @@ class SequenceTests(unittest.TestCase):
             self.assertTrue(returned["cleanup_complete"])
             self.assertFalse(job.runtime.alive(state["child"]))
             self.assertEqual(
-                json.loads((operation.parent / "affinity.json").read_text()), sorted(self.affinity)
+                json.loads((operation.parent / "affinity.json").read_text()),
+                sorted(self.affinity),
             )
             (operation.parent / "TMP").rmdir()
             completion = {
@@ -353,7 +366,9 @@ class SequenceTests(unittest.TestCase):
         result = json.loads((Path(self.settings["output"]) / "result.json").read_bytes())
         return result, entered
 
-    def test_sequence_success_real_children_directwait_cleanup_and_affinity_restoration(self):
+    def test_sequence_success_real_children_directwait_cleanup_and_affinity_restoration(
+        self,
+    ):
         result, entered = self.run_fixture()
         self.assertEqual(entered, [("arena", 6), ("measure", 0), ("arena", 7)])
         self.assertEqual(result["status"], "PASS")
@@ -367,7 +382,9 @@ class SequenceTests(unittest.TestCase):
             self.assertNotIn("returned", operation)
             self.assertEqual(lc.document(operation["job_result"])["outcome"], "succeeded")
 
-    def test_sequence_error_preserves_completed_prefix_and_never_starts_next_or_replays(self):
+    def test_sequence_error_preserves_completed_prefix_and_never_starts_next_or_replays(
+        self,
+    ):
         result, entered = self.run_fixture(fail=("measure", 0))
         self.assertEqual(entered, [("arena", 6), ("measure", 0)])
         self.assertEqual(result["status"], "FAILED")
@@ -375,13 +392,172 @@ class SequenceTests(unittest.TestCase):
         self.assertEqual(lc.document(result["operations"][-1]["job_result"])["exit_code"], 3)
         self.assertTrue(result["cleanup_complete"])
 
-    def test_sequence_signal_cancels_exact_owned_child_cleans_TMP_and_stops_suffix(self):
+    def test_sequence_signal_cancels_exact_owned_child_cleans_TMP_and_stops_suffix(
+        self,
+    ):
         result, entered = self.run_fixture(cancel=True)
         self.assertEqual(entered, [("arena", 6)])
         self.assertEqual(result["status"], "CANCELLED")
         self.assertEqual(result["completed_operations"], 0)
         self.assertEqual(lc.document(result["operations"][0]["job_result"])["outcome"], "cancelled")
         self.assertTrue(result["cleanup_complete"])
+
+    def test_configured_run_projection_keeps_global_slice_and_refuses_repeated_output(
+        self,
+    ):
+        self.settings = {
+            "kind": "sequence",
+            "owner": str(self.root),
+            "output": str(self.root / "finite"),
+            "cwd": str(ROOT),
+            "runs": [],
+        }
+        for i in range(4):
+            config = self.metadata(
+                f"config-{i}.json",
+                {
+                    "common_study": {
+                        "schedule": self.plan,
+                        "partition": self.plan,
+                        "batch_start": i * 3,
+                        "batch_count": 3,
+                    }
+                },
+            )
+            experiment = self.metadata(
+                f"experiment-{i}.json",
+                {
+                    "phase": "corpus",
+                    "config": config,
+                    "canonical_plan_sha256": config["sha256"],
+                    "argv": [
+                        "/synthetic/native",
+                        "teacher-pilot",
+                        "--experiment",
+                        "@EXPERIMENT@",
+                        "--experiment-sha256",
+                        "@EXPERIMENT_SHA256@",
+                    ],
+                },
+            )
+            self.settings["runs"].append(
+                {
+                    "kind": "run",
+                    "owner": str(self.root),
+                    "cwd": str(ROOT),
+                    "limits": {},
+                    "support": {},
+                    "artifact": {},
+                    "caller_sources": [],
+                    "approved_plan": config,
+                    "experiment": experiment,
+                    "env": {"BOUND": "same"},
+                    "data_root": str(self.root / f"batch-{i}"),
+                    "data": [],
+                    "owned_outputs": [],
+                    "finalizers": [],
+                }
+            )
+        self.assertEqual(list(lc.operation_order(self.settings)), [("run", i) for i in range(4)])
+        ref = self.metadata("settings.json", self.settings)
+        for i in range(4):
+            with patch.object(lc, "measurement_argv", side_effect=lambda spec, e, argv: argv):
+                intent = lc.prepare_selected_operation(ref, "run", i)
+            spec = lc.document(intent)
+            experiment = lc.document(spec["experiment"])
+            self.assertEqual(
+                lc.selected_run(spec, experiment),
+                self.settings["runs"][i]["approved_plan"],
+            )
+            self.assertEqual(experiment, lc.document(self.settings["runs"][i]["experiment"]))
+            self.assertEqual(spec["data_root"], self.settings["runs"][i]["data_root"])
+            self.assertNotIn("admission", spec)
+            spec["env"]["QUORIDOR_LIFECYCLE_PARENT_PID"] = "actual-runtime-field"
+            self.assertEqual(
+                lc.selected_run(spec, experiment),
+                self.settings["runs"][i]["approved_plan"],
+            )
+            spec["env"]["BOUND"] = "foreign"
+            with self.assertRaisesRegex(lc.Refused, "environment drift"):
+                lc.selected_run(spec, experiment)
+            with self.assertRaisesRegex(lc.Refused, "never replay"):
+                lc.prepare_selected_operation(ref, "run", i)
+        self.settings["measurements"] = [{}]
+        with self.assertRaisesRegex(lc.Refused, "one serial order"):
+            list(lc.operation_order(self.settings))
+
+    def test_configured_four_run_actual_children_success_error_cancel_and_no_repeat(
+        self,
+    ):
+        for scenario in ("success", "error", "cancel"):
+            with (
+                self.subTest(scenario=scenario),
+                tempfile.TemporaryDirectory() as temporary,
+            ):
+                previous_root = self.root
+                self.root = Path(temporary).resolve()
+                self.settings = {
+                    "kind": "sequence",
+                    "owner": str(self.root),
+                    "output": str(self.root / "finite"),
+                    "cwd": str(ROOT),
+                    "runs": [{}, {}, {}, {}],
+                }
+                try:
+                    result, entered = self.run_fixture(
+                        fail=("run", 1) if scenario == "error" else None,
+                        cancel=scenario == "cancel",
+                    )
+                    expected = 4 if scenario == "success" else 2 if scenario == "error" else 1
+                    self.assertEqual(entered, [("run", i) for i in range(expected)])
+                    self.assertTrue(result["cleanup_complete"])
+                    self.assertEqual(result["remaining"], [])
+                    self.assertEqual(
+                        result["status"],
+                        {"success": "PASS", "error": "FAILED", "cancel": "CANCELLED"}[scenario],
+                    )
+                finally:
+                    self.root = previous_root
+
+    def test_configured_nonempty_finalizer_is_refused_before_output_or_child(self):
+        config = self.metadata("bound-input.json", {"global_slice": [0, 3]})
+        experiment = self.metadata(
+            "experiment.json",
+            {"phase": "corpus", "config": config, "argv": ["native", "teacher-pilot"]},
+        )
+        receipt = self.root / "required-receipt.json"
+        template = {
+            "kind": "run",
+            "owner": str(self.root),
+            "experiment": experiment,
+            "data_root": str(self.root / "batch"),
+            "finalizers": [{"kind": "data", "path": str(receipt), "limit_B": 4096}],
+        }
+        for failed_receipt in (False, True):
+            if failed_receipt:
+                receipt.write_text(
+                    json.dumps(
+                        {
+                            "schema": "quoridor.research.data-finalizer.v1",
+                            "status": "FAILED",
+                            "files": [],
+                            "remaining": [],
+                        }
+                    )
+                )
+            ref = self.metadata(
+                "selected-failed.json" if failed_receipt else "selected-missing.json",
+                {
+                    "kind": "sequence",
+                    "owner": str(self.root),
+                    "output": str(self.root / "finite"),
+                    "runs": [template],
+                },
+            )
+            with self.assertRaisesRegex(lc.Refused, "nonempty finalizers unsupported"):
+                lc.prepare_selected_operation(ref, "run", 0)
+            self.assertFalse((self.root / "finite/run-000").exists())
+            self.assertFalse(Path(template["data_root"]).exists())
 
 
 if __name__ == "__main__":

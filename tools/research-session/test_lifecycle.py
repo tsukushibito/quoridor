@@ -16,14 +16,10 @@ from unittest.mock import patch
 
 ROOT = Path(os.environ.get("RESEARCH_TEST_ROOT", Path(__file__).resolve().parents[2]))
 if os.environ.get("RESEARCH_CYCLE_SOURCE"):
-    quoridor_training.__path__.insert(
-        0, str(Path(os.environ["RESEARCH_CYCLE_SOURCE"]).parent)
-    )
+    quoridor_training.__path__.insert(0, str(Path(os.environ["RESEARCH_CYCLE_SOURCE"]).parent))
 spec = importlib.util.spec_from_file_location(
     "research_lifecycle",
-    os.environ.get(
-        "RESEARCH_LIFECYCLE_SOURCE", ROOT / "scripts/dev/research-lifecycle.py"
-    ),
+    os.environ.get("RESEARCH_LIFECYCLE_SOURCE", ROOT / "scripts/dev/research-lifecycle.py"),
 )
 lc = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(lc)
@@ -127,9 +123,7 @@ class LifecycleTests(unittest.TestCase):
                 "synthetic source",
             ],
         ):
-            subprocess.run(
-                ["git", "-C", str(self.root), *args], check=True, capture_output=True
-            )
+            subprocess.run(["git", "-C", str(self.root), *args], check=True, capture_output=True)
         self.source_info["commit"] = (
             subprocess.check_output(["git", "-C", str(self.root), "rev-parse", "HEAD"])
             .decode()
@@ -270,11 +264,7 @@ class LifecycleTests(unittest.TestCase):
         return ref(self.file(name + ".json", json.dumps(value).encode()))
 
     def intent(self):
-        view = {
-            k: v
-            for k, v in self.spec.items()
-            if k not in {"admission", "intent_sha256"}
-        }
+        view = {k: v for k, v in self.spec.items() if k not in {"admission", "intent_sha256"}}
         self.spec["intent_sha256"] = hashlib.sha256(
             json.dumps(view, sort_keys=True, separators=(",", ":")).encode()
         ).hexdigest()
@@ -434,9 +424,7 @@ class LifecycleTests(unittest.TestCase):
         original_allocated = lc.allocated
 
         def counted(*args, **kwargs):
-            self.assertTrue(
-                active[0], "completion observation must retain the owning lease"
-            )
+            self.assertTrue(active[0], "completion observation must retain the owning lease")
             return original_allocated(*args, **kwargs)
 
         with patch.object(lc, "allocated", counted):
@@ -449,9 +437,7 @@ class LifecycleTests(unittest.TestCase):
             )
         self.assertFalse(active[0])
         self.assertEqual(result["status"], "PASS")
-        usage = json.loads(
-            (Path(self.spec["output"]) / "storage-usage.json").read_bytes()
-        )
+        usage = json.loads((Path(self.spec["output"]) / "storage-usage.json").read_bytes())
         self.assertIsNone(usage["storage_budget_B"])
         self.assertIsNone(usage["global_actual_B"])
         self.assertGreater(usage["allocated_B"], 0)
@@ -508,9 +494,7 @@ class LifecycleTests(unittest.TestCase):
                         return original_write(path, value, **kwargs)
 
                     fault = (
-                        patch.object(
-                            lc, "allocated", side_effect=OSError("injected usage read")
-                        )
+                        patch.object(lc, "allocated", side_effect=OSError("injected usage read"))
                         if stage == "read"
                         else patch.object(lc, "new_json", fault_write)
                     )
@@ -584,9 +568,7 @@ class LifecycleTests(unittest.TestCase):
         (Path(self.spec["output"]) / "candidate.json").write_text(json.dumps(c))
         final = self.finalize(Path(self.spec["output"]), self.job(c))
         self.assertEqual(final["status"], "FAILED")
-        self.assertTrue(
-            any(e["stage"] == "final_artifact_source" for e in final["secondary"])
-        )
+        self.assertTrue(any(e["stage"] == "final_artifact_source" for e in final["secondary"]))
 
     def test_all_command_and_version_logs_rechecked_independently(self):
         c = self.build()
@@ -813,9 +795,7 @@ class LifecycleTests(unittest.TestCase):
         report = lc.cargo_report(fixture.read_bytes())
         self.assertEqual(report["warning_count"], 8)
         events = [
-            json.loads(line)
-            for line in fixture.read_bytes().splitlines()
-            if line.startswith(b"{")
+            json.loads(line) for line in fixture.read_bytes().splitlines() if line.startswith(b"{")
         ]
         self.assertTrue(
             any(
@@ -825,9 +805,7 @@ class LifecycleTests(unittest.TestCase):
         )
         self.assertTrue(any(e.get("reason") == "build-script-executed" for e in events))
         context = json.loads(
-            (
-                ROOT / "tools/research-session/fixtures/native-context-retained.json"
-            ).read_bytes()
+            (ROOT / "tools/research-session/fixtures/native-context-retained.json").read_bytes()
         )
         self.assertIn("deps", context)
 
@@ -1031,9 +1009,7 @@ class LifecycleTests(unittest.TestCase):
         config = {
             "arena": {
                 "book": {
-                    "openings": [
-                        {"reference": {"settings": {"family_id": f}}} for f in range(16)
-                    ]
+                    "openings": [{"reference": {"settings": {"family_id": f}}} for f in range(16)]
                 }
             }
         }
@@ -1153,9 +1129,7 @@ class LifecycleTests(unittest.TestCase):
         config = {
             "arena": {
                 "book": {
-                    "openings": [
-                        {"reference": {"settings": {"family_id": f}}} for f in range(16)
-                    ]
+                    "openings": [{"reference": {"settings": {"family_id": f}}} for f in range(16)]
                 }
             }
         }
@@ -1384,9 +1358,7 @@ class LifecycleTests(unittest.TestCase):
             "attempted": 128,
             "transitions": 512,
             "book_sha256": lc.sha(json.dumps(book, separators=(",", ":")).encode()),
-            "schedule_sha256": lc.sha(
-                json.dumps(self.schedule, separators=(",", ":")).encode()
-            ),
+            "schedule_sha256": lc.sha(json.dumps(self.schedule, separators=(",", ":")).encode()),
             "models_loaded": 0,
             "search_calls": 0,
             "games_started": 0,
@@ -1413,9 +1385,7 @@ class LifecycleTests(unittest.TestCase):
     def test_generation_bootstrap_null_enters_only_stub_and_normal_finalization(self):
         self.generation_e = self.generation_fixture()
         # Declared library metadata is preserved and verified even without a model.
-        self.generation_e["dynamic_libraries"] = [
-            {"file": ref(self.tool), "version": "fixture1"}
-        ]
+        self.generation_e["dynamic_libraries"] = [{"file": ref(self.tool), "version": "fixture1"}]
         self.generation_rebind(self.generation_e)
         c = self.generation_execute()
         self.assertEqual(self.geometry_stub_calls, 1)
@@ -1482,9 +1452,7 @@ class LifecycleTests(unittest.TestCase):
             lambda x: x["build_manifest"].update(sha256="0" * 64),
             lambda x: x["config"].update(sha256="0" * 64),
             lambda x: x["schedule"].update(sha256="0" * 64),
-            lambda x: x["dynamic_libraries"].append(
-                {"file": ref(self.tool), "version": " "}
-            ),
+            lambda x: x["dynamic_libraries"].append({"file": ref(self.tool), "version": " "}),
         ]
         for change in changes:
             with self.subTest(change=changes.index(change)):
@@ -1531,9 +1499,7 @@ class LifecycleTests(unittest.TestCase):
                 bad = copy.deepcopy(e)
                 request = copy.deepcopy(self.request)
                 if field == "schedule":
-                    bad["schedule"] = self.json(
-                        "wrong-schedule", list(reversed(self.schedule))
-                    )
+                    bad["schedule"] = self.json("wrong-schedule", list(reversed(self.schedule)))
                 elif field == "output":
                     request["output"] = str(self.root / "uncharged-output")
                 else:
@@ -1651,9 +1617,7 @@ class LifecycleTests(unittest.TestCase):
         self.assertEqual(lc.document(completion)["status"], "FAILED")
 
     def current_caller_fixture(self):
-        caller = self.file(
-            "scripts/dev/research-lifecycle.py", b"current adopted caller v1"
-        )
+        caller = self.file("scripts/dev/research-lifecycle.py", b"current adopted caller v1")
         for name in (
             "scripts/dev/research-job.py",
             "python/quoridor_training/cycle_process.py",
@@ -1755,9 +1719,7 @@ class LifecycleTests(unittest.TestCase):
         self.assertFalse(candidate.with_name("INCOMPLETE").exists())
         self.assertEqual(candidate.read_bytes(), before)
         self.assertTrue(final["cleanup_complete"])
-        self.assertTrue(
-            {"outer_job", "owed_finalizer"} <= {x["stage"] for x in final["secondary"]}
-        )
+        self.assertTrue({"outer_job", "owed_finalizer"} <= {x["stage"] for x in final["secondary"]})
         with self.assertRaises(lc.Refused):
             lc.generation_input_data(ref(candidate))
         manifest = ref(candidate.with_name("manifest.json"))
@@ -1809,8 +1771,7 @@ class LifecycleTests(unittest.TestCase):
         self.assertEqual(data["origin_primary"], final["primary"])
         self.assertEqual(data["origin_secondary"], final["secondary"])
         self.assertTrue(
-            {"outer_job", "owed_finalizer"}
-            <= {x["stage"] for x in data["origin_secondary"]}
+            {"outer_job", "owed_finalizer"} <= {x["stage"] for x in data["origin_secondary"]}
         )
         self.assertIsNone(data["numerical_qualification"])
         self.assertEqual(data["files"], final["data"]["files"])
@@ -1831,9 +1792,7 @@ class LifecycleTests(unittest.TestCase):
 
         bad = copy.deepcopy(final)
         bad["data"]["files"][1]["bytes"] = 4194304
-        refuses_before_collection(
-            bad
-        )  # individually valid, actual aggregate exceeds4MiB
+        refuses_before_collection(bad)  # individually valid, actual aggregate exceeds4MiB
         for value in (True, -1, 4194305):
             with self.subTest(saved_bytes=value):
                 bad = copy.deepcopy(final)
@@ -1867,6 +1826,369 @@ class LifecycleTests(unittest.TestCase):
         self.assertEqual(len(self.calls), calls)
         self.assertEqual(path.read_bytes(), original)
         self.assertEqual(lc.document(final["intent"]), intent)
+
+
+class CommonStudySettingsTests(unittest.TestCase):
+    def test_multistream_materialization_uses_ordered_inputs_and_optional_distinct_lineage(self):
+        streams = [
+            {"path": "/fixture/a.gz", "sha256": "a" * 64},
+            {"path": "/fixture/b.gz", "sha256": "b" * 64},
+        ]
+        binding = {"path": "/fixture/initializer.json", "sha256": "c" * 64}
+        request = {
+            "schema": "quoridor.common-corpus-cache-materialization.v1",
+            "streams": streams,
+            "output": "/fixture/cache",
+        }
+        spec = {
+            "data_root": request["output"],
+            "data": [
+                {"name": name, "path": str(Path(request["output"]) / name)}
+                for name in lc.COMPACT_CACHE_WIDTHS
+            ]
+            + [{"name": "cache_manifest", "path": "/fixture/cache/cache.json"}],
+        }
+        experiment = {
+            "config": {},
+            "models": [],
+            "planned_slots": 0,
+            "batch": None,
+            "numerical_qualification": None,
+            "rules": "research-standard-2p-threefold-goal-first-v1",
+            "distance_units": "wall-distance/80",
+            "value_perspective": "side-to-move",
+            "inputs": streams.copy(),
+            "argv": [
+                "converter",
+                "--input",
+                streams[0]["path"],
+                "--input",
+                streams[1]["path"],
+                "--output",
+                request["output"],
+            ],
+        }
+        manifest = {"artifact": {"path": "converter"}}
+        with patch.object(lc, "document", return_value=request):
+            lc.cache_materialize_check(spec, experiment, manifest)
+            request["input_binding"] = binding
+            experiment["inputs"].append(binding)
+            experiment["argv"] += [
+                "--input-binding",
+                binding["path"],
+                "--binding-sha256",
+                binding["sha256"],
+            ]
+            lc.cache_materialize_check(spec, experiment, manifest)
+            request["streams"] = list(reversed(streams))
+            with self.assertRaisesRegex(lc.Refused, "ordered argv"):
+                lc.cache_materialize_check(spec, experiment, manifest)
+            request["streams"] = streams
+            experiment["argv"].pop()
+            with self.assertRaisesRegex(lc.Refused, "ordered argv"):
+                lc.cache_materialize_check(spec, experiment, manifest)
+
+    def test_compact_collection_streams_binary_identity_and_rejects_reordered_or_partial_cache(
+        self,
+    ):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            streams = [
+                {"path": "/fixture/a.gz", "sha256": "a" * 64, "bytes": 3, "mode": "0644"},
+                {"path": "/fixture/b.gz", "sha256": "b" * 64, "bytes": 4, "mode": "0644"},
+            ]
+            cache = {
+                "schema": "quoridor-common-corpus-terminal-geometry-v3",
+                "rows": 2,
+                "stream_intake": {"status": "complete", "scope": "common-corpus"},
+                "source_binding": [{k: r[k] for k in ("path", "sha256")} for r in streams],
+                "source_content": [
+                    {
+                        "encoding": "gzip-single-member-v1",
+                        "compressed": r,
+                        "raw_sha256": "d" * 64,
+                        "raw_bytes": 8,
+                    }
+                    for r in streams
+                ],
+                "files": {n: n for n in lc.COMPACT_CACHE_WIDTHS},
+                "sha256": {},
+                "file_bytes": {},
+            }
+            data = []
+            for name, width in lc.COMPACT_CACHE_WIDTHS.items():
+                p = root / name
+                p.write_bytes(bytes(2 * width))
+                cache["sha256"][name] = lc.sha(p.read_bytes())
+                cache["file_bytes"][name] = 2 * width
+                data.append({"name": name, "path": str(p), "limit_B": 2 * width})
+            metadata = root / "cache.json"
+            metadata.write_text(json.dumps(cache))
+            data.append({"name": "cache_manifest", "path": str(metadata), "limit_B": 8192})
+            spec = {"owner": tmp, "data_root": tmp, "data": data}
+            experiment = {
+                "phase": "materialize",
+                "planned_slots": 0,
+                "config": {},
+                "build_manifest": {"path": "/fixture/build"},
+                "argv": ["converter", "--input"],
+            }
+            original_bound = lc.bound
+
+            def no_binary_allocation(path, *args, **kwargs):
+                self.assertNotIn(Path(path).name, lc.COMPACT_CACHE_WIDTHS)
+                return original_bound(path, *args, **kwargs)
+
+            with (
+                patch.object(
+                    lc,
+                    "document",
+                    side_effect=lambda ref: {"artifact_target": "terminal-cache"}
+                    if ref == experiment["build_manifest"]
+                    else {"streams": streams},
+                ),
+                patch.object(lc, "bound", side_effect=no_binary_allocation),
+            ):
+                actual = lc.collect_data(spec, experiment)
+                self.assertEqual(actual["status"], "PASS")
+                self.assertEqual(len(actual["files"]), 8)
+                cache["source_content"].reverse()
+                metadata.write_text(json.dumps(cache))
+                self.assertEqual(lc.collect_data(spec, experiment)["status"], "FAILED")
+                cache["source_content"].reverse()
+                metadata.write_text(json.dumps(cache))
+                (root / "intake-incomplete.json").write_text("incomplete")
+                self.assertEqual(lc.collect_data(spec, experiment)["status"], "FAILED")
+                (root / "intake-incomplete.json").unlink()
+                (root / "labels.f32").write_bytes(b"partial")
+                self.assertEqual(lc.collect_data(spec, experiment)["status"], "FAILED")
+
+    def test_decisions_use_finite_settings_and_preserve_scope_and_launch_environment(self):
+        plan = {"path": "/fixture/plan", "sha256": "a" * 64}
+        experiment = {"phase": "compare", "batch": 2, "argv": ["runner", "decisions"]}
+        spec = {
+            "settings": {"path": "/fixture/settings"},
+            "experiment": {"path": "/fixture/experiment"},
+            "owner": "/fixture",
+            "writer": "fixture",
+            "cwd": "/fixture",
+            "limits": {},
+            "support": {},
+            "approved_plan": plan,
+            "artifact": {},
+            "caller_sources": [],
+            "env": {"BOUND": "same"},
+        }
+        settings = {"kind": "sequence", "arena": {"range": [0, 3], "template": copy.deepcopy(spec)}}
+
+        def document(ref):
+            return settings if ref == spec["settings"] else experiment
+
+        with patch.object(lc, "document", side_effect=document):
+            spec["env"].update(QUORIDOR_LIFECYCLE_PARENT_PID="42", TMPDIR="/fixture/own-TMP")
+            self.assertEqual(lc.selected_arena(spec), plan)
+            spec["env"]["BOUND"] = "changed"
+            with self.assertRaisesRegex(lc.Refused, "environment drift"):
+                lc.selected_arena(spec)
+            spec["env"]["BOUND"] = "same"
+            experiment["argv"][1] = "other-operation"
+            with self.assertRaisesRegex(lc.Refused, "outside selected"):
+                lc.selected_arena(spec)
+            experiment["argv"][1] = "decisions"
+            experiment["batch"] = 4
+            with self.assertRaisesRegex(lc.Refused, "outside selected"):
+                lc.selected_arena(spec)
+
+    def test_corpus_quantity_is_configured_and_cpu_scope_is_owned(self):
+        config = {
+            "common_study": {"root_value_policy": "outcome_only", "batch_count": 3},
+            "output": "/tmp/owned-data",
+            "planned_games": 3,
+            "depth": 6,
+            "max_nodes": 100,
+            "max_total_nodes": 900,
+            "worker_cores": [1, 4],
+            "cpu_core": 1,
+            "game_workers": 2,
+        }
+        experiment = {
+            "phase": "corpus",
+            "config": {},
+            "models": [],
+            "rules": "research-standard-2p-threefold-goal-first-v1",
+            "distance_units": "wall-distance/80",
+            "value_perspective": "side-to-move",
+            "argv": [
+                "runner",
+                "teacher-pilot",
+                "--experiment",
+                "@EXPERIMENT@",
+                "--experiment-sha256",
+                "@EXPERIMENT_SHA256@",
+            ],
+        }
+        spec = {
+            "data_root": config["output"],
+            "child_cpu_cores": [1, 4, 6, 8],
+            "limits": {"worker_cpu": 1, "guardian_cpu": 6},
+        }
+        with (
+            patch.object(lc, "document", return_value=config),
+            patch.object(lc, "numerical_check") as numeric,
+        ):
+            for count in (3, 12):
+                config["planned_games"] = count
+                config["common_study"]["batch_count"] = count
+                lc.common_study_check(spec, experiment, {}, {})
+            self.assertEqual(numeric.call_count, 2)
+            bad = copy.deepcopy(spec)
+            bad["limits"]["guardian_cpu"] = 4
+            with self.assertRaisesRegex(lc.Refused, "workers/guardian"):
+                lc.common_study_check(bad, experiment, {}, {})
+            experiment["models"] = [{"descriptor": "foreign model"}]
+            with self.assertRaisesRegex(lc.Refused, "model-free"):
+                lc.common_study_check(spec, experiment, {}, {})
+
+    def test_mixed_inputs_are_shared_and_initializer_and_cache_custody_remain_checked(self):
+        warm = {
+            "descriptor": {"path": "/models/descriptor"},
+            "weights": {"path": "/models/weights"},
+            "evaluator_sha256": "a" * 64,
+            "optimizer": "fresh",
+            "scale": "incumbent",
+        }
+        public = {"path": "/shared-public/cache.json"}
+        acceptance = {"path": "/accepted-public.json"}
+        cache_ref = {"path": "/new-data/cache.json", "bytes": 4096}
+        cache = {
+            "rows": 10,
+            "stream_intake": {"status": "complete"},
+            "sha256": {},
+            "file_bytes": {},
+            "common_corpus": {"common_eligible_by_split": {"train": 6, "validation": 4}},
+        }
+        inputs = [public, acceptance, cache_ref]
+        for name, width in lc.COMPACT_CACHE_WIDTHS.items():
+            cache["sha256"][name] = "b" * 64
+            cache["file_bytes"][name] = 10 * width
+            inputs.append({"path": "/new-data/" + name, "sha256": "b" * 64, "bytes": 10 * width})
+        config = {
+            "training": {"target": "z"},
+            "experiment": {"study": "mixed-outcome", "warm_start": warm},
+            "mixture": {"public_membership": public, "public_acceptance": acceptance},
+        }
+        experiment = {
+            "phase": "fit",
+            "config": {"path": "/settings.json"},
+            "planned_slots": 0,
+            "rules": "research-standard-2p-threefold-goal-first-v1",
+            "distance_units": "wall-distance/80",
+            "value_perspective": "side-to-move",
+            "inputs": inputs,
+            "models": [{k: warm[k] for k in ("descriptor", "weights", "evaluator_sha256")}],
+        }
+        spec = {
+            "data_root": "/tmp/fit-data",
+            "argv": [
+                sys.executable,
+                "-B",
+                "-m",
+                "quoridor_training.train",
+                "train",
+                "--cache",
+                "/new-data",
+                "--output",
+                "/tmp/fit-data",
+                "--config",
+                "/settings.json",
+            ],
+        }
+
+        def document(ref):
+            return cache if ref == cache_ref else config
+
+        with (
+            patch.object(lc, "document", side_effect=document),
+            patch.object(lc, "read_ref", side_effect=lambda ref, limit: json.dumps(cache).encode()),
+            patch.object(lc, "project_python", return_value=Path(sys.executable)),
+            patch.object(lc, "project_interpreter"),
+            patch.object(lc, "common_training_environment"),
+            patch.object(lc, "numerical_check"),
+        ):
+            lc.common_study_check(spec, experiment, {}, {})
+            experiment["inputs"].append({"path": "/shared-public/train.bin"})
+            with self.assertRaisesRegex(lc.Refused, "indexed/shared"):
+                lc.common_study_check(spec, experiment, {}, {})
+            experiment["inputs"].pop()
+            warm["scale"] = "new-T-renormalized"
+            with self.assertRaisesRegex(lc.Refused, "original scale"):
+                lc.common_study_check(spec, experiment, {}, {})
+            warm["scale"] = "incumbent"
+            inputs[-1]["bytes"] += 1
+            with self.assertRaisesRegex(lc.Refused, "binary custody"):
+                lc.common_study_check(spec, experiment, {}, {})
+
+    def test_partial_corpus_result_retains_actual_counts_without_plan_census_gate(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            result = root / "generation.json"
+            saved = {
+                "scheduled": 5,
+                "recorded": 3,
+                "goals": 1,
+                "draws": 1,
+                "unknown": 1,
+                "search_nodes": 37,
+            }
+            result.write_text(json.dumps(saved))
+            spec = {
+                "owner": tmp,
+                "data_root": tmp,
+                "data": [{"name": "generation_result", "path": str(result), "limit_B": 4096}],
+            }
+            experiment = {
+                "phase": "corpus",
+                "planned_slots": 8,
+                "argv": ["runner", "teacher-pilot"],
+            }
+            actual = lc.collect_data(spec, experiment)
+            self.assertEqual(actual["status"], "PASS")
+            self.assertEqual(actual["corpus"], saved)
+            self.assertEqual(actual["planned_slots"], 8)
+            self.assertNotIn("evaluations", actual["corpus"])
+            self.assertFalse(actual["global_campaign_complete"])
+            saved["recorded"] = 6
+            result.write_text(json.dumps(saved))
+            refused = lc.collect_data(spec, experiment)
+            self.assertEqual(refused["status"], "FAILED")
+            self.assertIn("actual generation census", refused["errors"][0]["message"])
+
+    def test_early_stopped_fit_preserves_actual_exposure_and_original_failure(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            result = Path(tmp) / "training.json"
+            state = {
+                "status": "EARLY_STOPPED",
+                "step": 7,
+                "forward_rows": 29,
+                "added_seen": 12,
+                "public_seen": 12,
+            }
+            result.write_text(json.dumps(state))
+            spec = {
+                "owner": tmp,
+                "data_root": tmp,
+                "data": [{"name": "training", "path": str(result), "limit_B": 4096}],
+            }
+            experiment = {"phase": "fit", "planned_slots": 0, "argv": ["python", "-B"]}
+            actual = lc.collect_data(spec, experiment)
+            self.assertEqual(actual["status"], "PASS")
+            self.assertEqual(actual["fit"], state)
+            self.assertNotIn("aggregate_forward_rows", actual["fit"])
+            state["status"] = "FAILED"
+            result.write_text(json.dumps(state))
+            refused = lc.collect_data(spec, experiment)
+            self.assertEqual(refused["status"], "FAILED")
+            self.assertIn("did not complete", refused["errors"][0]["message"])
 
 
 if __name__ == "__main__":

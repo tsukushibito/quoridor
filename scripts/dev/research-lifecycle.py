@@ -226,7 +226,10 @@ def selected_arena(spec):
         and type(first) is int
         and type(last) is int
         and 0 <= first <= experiment["batch"] <= last
-        and experiment["phase"] == "arena",
+        and (
+            experiment["phase"] == "arena"
+            or (experiment["phase"] == "compare" and experiment["argv"][1] == "decisions")
+        ),
         "operation outside selected finite arena range",
     )
     for key in (
@@ -251,6 +254,52 @@ def selected_arena(spec):
         {k: v for k, v in spec["env"].items() if k not in launch_fields}
         == {k: v for k, v in template["env"].items() if k not in launch_fields},
         "selected arena environment drift",
+    )
+    return spec["approved_plan"]
+
+
+def selected_run(spec, experiment):
+    """A configured finite RUN keeps its original inputs and logical output."""
+    settings = document(spec["settings"])
+    index = spec["selection_index"]
+    runs = settings.get("runs")
+    require(
+        settings["kind"] == "sequence"
+        and isinstance(runs, list)
+        and type(index) is int
+        and 0 <= index < len(runs),
+        "selected finite RUN index",
+    )
+    template = runs[index]
+    require(
+        template.get("finalizers") == [],
+        "configured RUN with nonempty finalizers unsupported",
+    )
+    for key in (
+        "owner",
+        "cwd",
+        "limits",
+        "support",
+        "artifact",
+        "caller_sources",
+        "approved_plan",
+        "data_root",
+        "data",
+        "finalizers",
+    ):
+        require(spec[key] == template[key], "selected RUN settings drift: " + key)
+    require(experiment == document(template["experiment"]), "selected RUN experiment drift")
+    launch_fields = {
+        "TMPDIR",
+        "QUORIDOR_LIFECYCLE_INTENT",
+        "QUORIDOR_LIFECYCLE_INTENT_PATH",
+        "QUORIDOR_LIFECYCLE_PARENT_PID",
+        "QUORIDOR_LIFECYCLE_PARENT_IDENTITY",
+    }
+    require(
+        {k: v for k, v in spec["env"].items() if k not in launch_fields}
+        == {k: v for k, v in template["env"].items() if k not in launch_fields},
+        "selected RUN environment drift",
     )
     return spec["approved_plan"]
 
@@ -285,8 +334,16 @@ class Limits(process.CycleResources):
             cfg.get("owned_B") is None or cfg["owned_B"] <= 50000000000,
             "global storage cap",
         )
-        if spec["kind"] == "run" and document(spec["experiment"])["phase"] == "arena":
+        if spec["kind"] == "run" and (
+            document(spec["experiment"])["phase"] == "arena"
+            or (
+                document(spec["experiment"])["phase"] == "compare"
+                and document(spec["experiment"])["argv"][1] == "decisions"
+            )
+        ):
             selected_arena(spec)
+        elif spec.get("selection_index") is not None:
+            selected_run(spec, document(spec["experiment"]))
         elif not measurement:
             admission = document(spec["admission"])
             require(
@@ -739,38 +796,6 @@ FIT_IMPORTS = (
     "snapshot",
     "cycle_process",
 )
-PILOT_DATA = ROOT / ".worktree/assets/data/common-corpus-warmstart-study/pilot-v1"
-PILOT_PLAN = ROOT / "research-data/ai-sigma/teacher-distance-tanh-v1/plan.json"
-QUALIFIER = (
-    ROOT
-    / ".worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/test_current_framework.py"
-)
-QUALIFIER_SHA = "283529837b13ec4d8976662488354d86adf983391449771b94ac45fe5351efcb"
-FIT_OUTPUTS = (
-    "freeze.json",
-    "config.json",
-    "scale.json",
-    "data.json",
-    "cache-binding.json.gz",
-    "initial.pt",
-    "best.pt",
-    "initial-model/manifest.json",
-    "initial-model/weights.f32",
-    "initial-model/training-target.json",
-    "best-model/manifest.json",
-    "best-model/weights.f32",
-    "best-model/training-target.json",
-    "last.pt",
-    "last-model/manifest.json",
-    "last-model/weights.f32",
-    "last-model/training-target.json",
-    "warm-start.json",
-    "z-curves.svg",
-    "completed_root_raw-curves.svg",
-    "curves.csv",
-    "observations.jsonl.gz",
-    "run-status.json",
-)
 
 
 def numerical_fields(experiment, manifest):
@@ -1129,83 +1154,89 @@ def common_training_environment(spec):
     )
 
 
-def public_replay_fit_check(spec, experiment, manifest, approved):
-    """Current selected same-z arms through the ordinary fit custody boundary."""
-    require(
-        experiment["phase"] == "fit" and spec["approved_plan"]["path"] == str(PILOT_PLAN),
-        "canonical selected fit plan",
-    )
-    study = approved["public_replay_study"]
+def common_study_check(spec, experiment, manifest, approved):
+    """Functional generation/training inputs; quantities and recipes belong to settings."""
+    phase = experiment["phase"]
     config = document(experiment["config"])
     require(
-        study["issue"] == "quoridor-4lc.371"
-        and study["scientific_entry"] is True
-        and experiment["planned_slots"] == 0
-        and experiment.get("batch") is None
-        and experiment["rules"] == "research-standard-2p-threefold-goal-first-v1"
+        experiment["rules"] == "research-standard-2p-threefold-goal-first-v1"
         and experiment["distance_units"] == "wall-distance/80"
-        and experiment["value_perspective"] == "side-to-move"
-        and "child_cpu_cores" not in spec,
-        "human-selected nongame public replay rules/units/scope",
+        and experiment["value_perspective"] == "side-to-move",
+        "common study rules/units/perspective",
     )
-    project_interpreter(experiment)
-    python = str(project_python())
-    common_training_environment(spec)
-    require(
-        len(spec["argv"]) == 13
-        and spec["argv"][:5] == [python, "-B", "-m", "quoridor_training.train", "train"]
-        and spec["argv"][5:9]
-        == [
-            "--cache",
-            str(PILOT_DATA / "cache-compact-v3"),
-            "--output",
-            spec["data_root"],
-        ]
-        and spec["argv"][9:11] == ["--config", experiment["config"]["path"]]
-        and spec["argv"][11] == "--input-binding",
-        "selected maintained replay trainer/config/output",
-    )
-    ref = next((r for r in experiment["inputs"] if r["path"] == spec["argv"][12]), None)
-    require(ref is not None, "ordinary guarded replay input binding required")
-    binding = document(ref)
-    require(
-        binding["selected_plan"] == spec["approved_plan"]
-        and binding["fit_config_sha"] == experiment["config"]["sha256"]
-        and binding["paired_fit_configs"] == study["paired_fit_configs"]
-        and experiment["config"] in binding["paired_fit_configs"],
-        "trusted current approved plan and same paired config digest",
-    )
-    require(
-        all(r in experiment["inputs"] for r in binding["paired_fit_configs"])
-        and all(
-            binding[k] in experiment["inputs"]
-            for k in (
-                "public_membership",
-                "public_acceptance",
-                "added_membership",
-                "diagnostic_indices",
-            )
-        ),
-        "ordered immutable input/config memberships",
-    )
-    cache = document(binding["added_membership"])
-    require(
-        binding["added_membership"]["path"] == str(PILOT_DATA / "cache-compact-v3/cache.json")
-        and not (PILOT_DATA / "cache-compact-v3/intake-incomplete.json").exists()
-        and cache["schedule_sha256"] == binding["schedule_sha256"]
-        and cache["family_partition_sha256"] == binding["family_partition_sha256"]
-        and cache["source_binding"] == binding["dataset"],
-        "same published binary common cache lineage",
-    )
-    for name, width in COMPACT_CACHE_WIDTHS.items():
-        path = str(PILOT_DATA / "cache-compact-v3" / name)
-        matched = [r for r in experiment["inputs"] if r["path"] == path]
+    if phase == "corpus":
+        numerical_check(experiment, manifest)
         require(
-            len(matched) == 1
-            and matched[0]["sha256"] == cache["sha256"][name]
-            and matched[0]["bytes"] == cache["rows"] * width == cache["file_bytes"][name],
-            "exact seven compact binary input refs",
+            experiment["models"] == []
+            and experiment["argv"][1:]
+            == [
+                "teacher-pilot",
+                "--experiment",
+                "@EXPERIMENT@",
+                "--experiment-sha256",
+                "@EXPERIMENT_SHA256@",
+            ]
+            and config["common_study"]["root_value_policy"] == "outcome_only"
+            and config["planned_games"] == config["common_study"]["batch_count"]
+            and config["output"] == spec["data_root"]
+            and type(config["planned_games"]) is int
+            and config["planned_games"] > 0
+            and type(config["depth"]) is int
+            and config["depth"] > 0
+            and type(config["max_nodes"]) is int
+            and config["max_nodes"] > 0
+            and (
+                config["max_total_nodes"] is None
+                or type(config["max_total_nodes"]) is int
+                and config["max_total_nodes"] > 0
+            ),
+            "configured model-free corpus entry/output/work",
         )
+        cpus = spec.get("child_cpu_cores")
+        workers = config["worker_cores"]
+        require(
+            isinstance(cpus, list)
+            and all(type(c) is int and c >= 0 for c in cpus)
+            and cpus == sorted(set(cpus))
+            and len(workers) == config["game_workers"]
+            and workers
+            and workers == cpus[: len(workers)]
+            and config["cpu_core"] == workers[0]
+            and spec["limits"]["worker_cpu"] in workers
+            and spec["limits"]["guardian_cpu"] in cpus[len(workers) :]
+            and len(cpus) >= len(workers) + 2,
+            "configured generator workers/guardian and host reserve cores",
+        )
+        return
+    project_interpreter(experiment)
+    common_training_environment(spec)
+    python = str(project_python())
+    require("child_cpu_cores" not in spec, "nongame software/fit cannot widen child CPUs")
+    if phase == "software-qualification":
+        definition = config["definition"]
+        require(
+            definition in experiment["inputs"]
+            and all(r in experiment["inputs"] for r in config.get("helper_sources", []))
+            and config["result"] == str(Path(spec["data_root"]) / "qualification.json")
+            and spec["argv"] == [python, "-B", definition["path"], "--result", config["result"]],
+            "configured software definition and actual output",
+        )
+        return
+    require(phase == "fit" and experiment["planned_slots"] == 0, "nongame training scope")
+    argv = spec["argv"]
+    require(
+        len(argv) in {11, 13}
+        and argv[:5] == [python, "-B", "-m", "quoridor_training.train", "train"]
+        and argv[5] == "--cache"
+        and Path(argv[6]).is_absolute()
+        and argv[7:11] == ["--output", spec["data_root"], "--config", experiment["config"]["path"]]
+        and (
+            len(argv) == 11
+            or argv[11] == "--input-binding"
+            and any(r["path"] == argv[12] for r in experiment["inputs"])
+        ),
+        "maintained train/cache/output/config and optional distinct binding",
+    )
     warm = config["experiment"]["warm_start"]
     require(
         experiment["models"]
@@ -1215,268 +1246,49 @@ def public_replay_fit_check(spec, experiment, manifest, approved):
                 "weights": warm["weights"],
                 "evaluator_sha256": warm["evaluator_sha256"],
             }
-        ],
-        "same immutable BEST43 model",
-    )
-    require(
-        Path(spec["data_root"]).is_relative_to(
-            Path(spec["owner"]) / ".artifacts/public-replay371-v1"
-        )
-        and {x["path"] for x in spec["data"]}
-        == {
-            str(Path(spec["data_root"]) / name)
-            for name in (
-                "training.json",
-                "curves.json",
-                "curves.csv",
-                "exposure.npz",
-                "last.pt",
-                "last-model/manifest.json",
-                "last-model/weights.f32",
-                "last-model/training-target.json",
-            )
-        }
-        and {x["name"] for x in spec["data"]} >= {"training", "curves"},
-        "exclusive replay arm output and owed immutable evidence",
-    )
-    if config["experiment"]["condition"] == "replay":
-        require(
-            binding["prior_fit_manifest"] in experiment["inputs"]
-            and binding["prior_fit_result"] in experiment["inputs"],
-            "actual first arm completion/result inputs before second entry",
-        )
-    # Refuse all public payload inputs before the generic FileRef reader.
-    # Only manifest/acceptance and bounded indexed accesses carry this data.
-    public_root = Path(binding["public_membership"]["path"]).parent
-    require(
-        all(
-            not Path(r["path"]).resolve().is_relative_to(public_root.resolve())
-            or r == binding["public_membership"]
-            for r in experiment["inputs"]
-        ),
-        "no repeated public payload hash or sealed input",
-    )
-    from quoridor_training.public_replay import admit
-
-    admit(
-        str(PILOT_DATA / "cache-compact-v3"),
-        experiment["config"]["path"],
-        ref["path"],
-        config,
-    )
-    numerical_check(experiment, manifest)
-
-
-def common_pilot_check(spec, experiment, manifest, approved):
-    phase = experiment["phase"]
-    if (
-        phase == "fit"
-        and document(experiment["config"])["experiment"]["study"] == "public-replay-v1"
-    ):
-        public_replay_fit_check(spec, experiment, manifest, approved)
-        return
-    require(spec["approved_plan"]["path"] == str(PILOT_PLAN), "canonical common pilot plan")
-    study = approved["next_learning_study"]
-    require(
-        study["issue"] == "quoridor-4lc.362"
-        and study["scientific_entry"] is True
-        and study["corpus"]["quantity_families"] == 8,
-        "selected retained eight-game pilot",
-    )
-    require(
-        experiment["rules"] == "research-standard-2p-threefold-goal-first-v1"
-        and experiment["distance_units"] == "wall-distance/80"
-        and experiment["value_perspective"] == "side-to-move"
-        and experiment.get("batch") is None,
-        "common pilot rules/units/perspective",
-    )
-    config = document(experiment["config"])
-    if phase != "corpus":
-        require("child_cpu_cores" not in spec, "multi-core corpus cannot widen other phases")
-    if phase == "corpus":
-        cpus = spec.get("child_cpu_cores")
-        require(
-            isinstance(cpus, list)
-            and len(cpus) == 4
-            and all(type(c) is int and c >= 0 for c in cpus)
-            and cpus == sorted(set(cpus))
-            and cpus[:2] == config["worker_cores"]
-            and config["cpu_core"] == cpus[0]
-            and spec["limits"]["worker_cpu"] in cpus[:2]
-            and spec["limits"]["guardian_cpu"] == cpus[2],
-            "native two-worker admission preserves two actual host reserve cores",
-        )
-        numerical_check(experiment, manifest)
-        require(
-            experiment["planned_slots"] == 8
-            and experiment["models"] == []
-            and experiment["argv"][1:]
-            == [
-                "teacher-pilot",
-                "--experiment",
-                "@EXPERIMENT@",
-                "--experiment-sha256",
-                "@EXPERIMENT_SHA256@",
-            ],
-            "qualified corpus native entry",
-        )
-        require(
-            config["phase"] == "common_corpus"
-            and config["output"] == spec["data_root"] == str(PILOT_DATA)
-            and config["planned_games"] == config["main_volume_n"] == 8
-            and config["depth"] == 6
-            and config["max_nodes"] == 100_000_000
-            and config["max_total_nodes"] == 1_000_000_000
-            and config["max_total_plies"] == 200
-            and config["per_move_timeout_ms"] is None
-            and config["distance_a"] == 0
-            and config["distance_b"] == 8,
-            "selected corpus limits and owned output",
-        )
-        common = config["common_study"]
-        require(
-            common["selected_plan"] == {k: spec["approved_plan"][k] for k in ("path", "sha256")}
-            and experiment["inputs"][0] == spec["approved_plan"]
-            and document(experiment["schedule"]) == study["corpus"]["blind_schedule"],
-            "blind corpus selected-plan/schedule binding",
-        )
-        return
-    require(experiment["planned_slots"] == 0, "fit/qualification is a nongame operation")
-    project_interpreter(experiment)
-    python = str(project_python())
-    common_training_environment(spec)
-    warm = study["common_learner_settings"]["experiment"]["warm_start"]
-    require(
-        experiment["models"]
-        == [
-            {
-                "descriptor": warm["descriptor"],
-                "weights": warm["weights"],
-                "evaluator_sha256": warm["evaluator_sha256"],
-            }
-        ],
-        "same selected incumbent for fit or framework qualification",
-    )
-    if phase == "software-qualification":
-        require(
-            set(config) == {"definition", "helper_sources", "result"}
-            and config["definition"]["path"] == str(QUALIFIER)
-            and config["definition"]["sha256"] == QUALIFIER_SHA
-            and config["definition"] in experiment["inputs"],
-            "fixed affected framework definitions",
-        )
-        require(
-            all(r in experiment["inputs"] for r in config["helper_sources"]),
-            "bound qualifier helpers",
-        )
-        require(
-            config["result"] == str(Path(spec["data_root"]) / "qualification.json")
-            and spec["argv"] == [python, "-B", str(QUALIFIER), "--result", config["result"]],
-            "software qualifier exact entry/output",
-        )
-        require(
-            spec["data"] == [{"name": "qualification", "path": config["result"], "limit_B": 65536}],
-            "software qualifier durable receipt",
-        )
-        return
-    numerical_check(experiment, manifest)
-    require(
-        len(experiment["models"]) == 1
-        and experiment["models"][0]
-        == {
-            "descriptor": config["experiment"]["warm_start"]["descriptor"],
-            "weights": config["experiment"]["warm_start"]["weights"],
-            "evaluator_sha256": config["experiment"]["warm_start"]["evaluator_sha256"],
-        },
-        "fit same incumbent model",
-    )
-    require(
-        len(spec["argv"]) == 13
-        and spec["argv"][:5] == [python, "-B", "-m", "quoridor_training.train", "train"]
-        and spec["argv"][5:9]
-        == [
-            "--cache",
-            str(PILOT_DATA / "cache-compact-v3"),
-            "--output",
-            spec["data_root"],
         ]
-        and spec["argv"][9:11] == ["--config", experiment["config"]["path"]]
-        and spec["argv"][11] == "--input-binding",
-        "fit exact trainer/cache/output/config inlet",
+        and warm["optimizer"] == "fresh"
+        and warm["scale"] == "incumbent",
+        "declared immutable initializer and original scale",
     )
-    binding_ref = next((r for r in experiment["inputs"] if r["path"] == spec["argv"][12]), None)
-    require(binding_ref is not None, "actual fit input binding")
-    binding = document(binding_ref)
-    require(
-        binding["selected_plan"] == {k: spec["approved_plan"][k] for k in ("path", "sha256")}
-        and binding["fit_config_sha"] == experiment["config"]["sha256"],
-        "same approved fit decision",
-    )
-    pairs = binding["paired_fit_configs"]
-    require(
-        len(pairs) == 2
-        and experiment["config"] in pairs
-        and all(r in experiment["inputs"] for r in pairs),
-        "bound selected two-teacher config pair",
-    )
-    targets = []
-    for r in pairs:
-        recipe = document(r)
-        target = recipe["training"].pop("target")
+    numerical_check(experiment, manifest)
+    if config["experiment"]["study"] == "mixed-outcome":
+        mixture = config["mixture"]
+        require(config["training"]["target"] == "z", "mixed outcome teacher")
+        for key in ("public_membership", "public_acceptance"):
+            require(mixture[key] in experiment["inputs"], "actual indexed public " + key)
+        public_root = Path(mixture["public_membership"]["path"]).parent.resolve()
         require(
-            recipe == study["common_learner_settings"],
-            "no unselected learner defaults or recipe change",
+            all(
+                not Path(r["path"]).resolve().is_relative_to(public_root)
+                or r == mixture["public_membership"]
+                for r in experiment["inputs"]
+            ),
+            "public payload remains indexed/shared; no repeated full payload hashing",
         )
-        targets.append(target)
-    require(targets == ["z", "completed_root_raw"], "ordered distinct teacher pair")
-    require(
-        config["training"]["steps"] == 200 and config["training"]["batch_size"] == 64,
-        "selected fit quantity",
-    )
-    require(
-        {r["path"] for r in spec["data"]}
-        >= {str(Path(spec["data_root"]) / name) for name in FIT_OUTPUTS},
-        "owed actual frozen fit outputs",
-    )
     cache_ref = next(
-        (
-            r
-            for r in experiment["inputs"]
-            if r["path"] == str(PILOT_DATA / "cache-compact-v3/cache.json")
-        ),
+        (r for r in experiment["inputs"] if r["path"] == str(Path(argv[6]) / "cache.json")),
         None,
     )
     require(
-        cache_ref is not None
-        and cache_ref["sha256"] == binding["cache_manifest_sha"]
-        and not (PILOT_DATA / "cache-compact-v3/intake-incomplete.json").exists(),
-        "authoritative shared cache",
+        cache_ref is not None and not Path(argv[6]).joinpath("intake-incomplete.json").exists(),
+        "published actual added cache",
     )
-    cache = document(cache_ref)
+    cache = json.loads(read_ref(cache_ref, max(CONTROL_BYTES, cache_ref["bytes"])))
+    require(cache["stream_intake"]["status"] == "complete", "atomic cache intake")
     for name, width in COMPACT_CACHE_WIDTHS.items():
-        path = str(Path(cache_ref["path"]).parent / name)
+        path = str(Path(argv[6]) / name)
         ref = next((r for r in experiment["inputs"] if r["path"] == path), None)
         require(
             ref is not None
             and ref["sha256"] == cache["sha256"][name]
             and ref["bytes"] == cache["file_bytes"][name] == cache["rows"] * width,
-            "same compact binary lifetime inputs",
+            "actual compact binary custody",
         )
     eligible = cache["common_corpus"]["common_eligible_by_split"]
     require(
         all(type(eligible.get(k)) is int and eligible[k] > 0 for k in ("train", "validation")),
-        "common eligible T and V must both be nonempty before trainer",
-    )
-
-    require(
-        cache["schema"] == "quoridor-common-corpus-terminal-geometry-v3"
-        and cache["files"] == {name: name for name in COMPACT_CACHE_WIDTHS}
-        and set(cache["sha256"]) == set(cache["file_bytes"]) == set(COMPACT_CACHE_WIDTHS)
-        and cache["stream_intake"]["status"] == "complete"
-        and cache["schedule_sha256"] == binding["schedule_sha256"]
-        and cache["family_partition_sha256"] == binding["family_partition_sha256"]
-        and cache["source_binding"] == binding["dataset"],
-        "same source/schedule/partition/dual cache",
+        "nonempty actual eligible T/V",
     )
 
 
@@ -1491,7 +1303,7 @@ def caller_source_refs(spec, experiment):
         paths |= {ROOT / "python/quoridor_training" / (name + ".py") for name in FIT_IMPORTS}
         if (
             experiment["phase"] == "fit"
-            and document(experiment["config"])["experiment"]["study"] == "public-replay-v1"
+            and document(experiment["config"])["experiment"]["study"] == "mixed-outcome"
         ):
             paths.add(ROOT / "python/quoridor_training/public_replay.py")
         if experiment["phase"] == "software-qualification":
@@ -1691,87 +1503,42 @@ COMPACT_CACHE_WIDTHS = {
 
 
 def cache_materialize_check(spec, experiment, manifest):
-    """Only the existing saved-stream converter; no generation or empirical model calls."""
+    """Ordered saved streams enter the maintained converter; no previous-cache migration."""
     request = document(experiment["config"])
     require(
-        set(request) == {"schema", "stream", "intake_binding", "previous_cache", "output"}
+        {"schema", "streams", "output"} <= set(request)
+        and set(request) <= {"schema", "streams", "output", "input_binding"}
         and request["schema"] == "quoridor.common-corpus-cache-materialization.v1"
         and request["output"] == spec["data_root"],
-        "saved converter exact config/output",
+        "saved converter config/output",
     )
     require(
         experiment["models"] == []
         and experiment["planned_slots"] == 0
         and experiment.get("batch") is None
         and experiment.get("numerical_qualification") is None
-        and spec["approved_plan"]["path"] == str(PILOT_PLAN)
         and experiment["rules"] == "research-standard-2p-threefold-goal-first-v1"
         and experiment["distance_units"] == "wall-distance/80"
         and experiment["value_perspective"] == "side-to-move",
-        "saved codec scope/current approved plan",
+        "saved codec scope",
     )
-    binding = document(request["intake_binding"])
-    require(
-        binding["scope"] == "common-corpus"
-        and binding["stream"] == {k: request["stream"][k] for k in ("path", "sha256")}
-        and binding["stream_content"]["compressed"] == request["stream"]
-        and binding["schedule"] == {k: experiment["schedule"][k] for k in ("path", "sha256")},
-        "actual stream/intake/schedule pairing",
-    )
-    previous = document(request["previous_cache"])
-    require(
-        not Path(request["previous_cache"]["path"]).with_name("intake-incomplete.json").exists()
-        and previous["schema"] == "quoridor-common-corpus-terminal-geometry-v2"
-        and previous["stream_intake"]["status"] == "complete"
-        and previous["source_content"] == binding["stream_content"]
-        and previous["schedule_sha256"] == experiment["schedule"]["sha256"]
-        and previous["common_corpus"]["config"]["selected_plan"]
-        == {k: spec["approved_plan"][k] for k in ("path", "sha256")},
-        "original retained cache/source identity; no plan substitution",
-    )
-    paths = {r["path"]: r for r in experiment["inputs"]}
-    expected = {request[k]["path"] for k in ("stream", "intake_binding", "previous_cache")}
-    expected |= {binding[k]["path"] for k in ("config", "sources", "schedule")}
-    expected.add(spec["approved_plan"]["path"])
-    for name in set(COMPACT_CACHE_WIDTHS) - {"sampling.bin"}:
-        path = str(Path(request["previous_cache"]["path"]).parent / name)
-        expected.add(path)
-        ref = paths.get(path)
+    streams = request["streams"]
+    require(isinstance(streams, list) and streams, "nonempty ordered stream inputs")
+    require(len({r["path"] for r in streams}) == len(streams), "distinct stream inputs")
+    require(all(r in experiment["inputs"] for r in streams), "actual converter stream refs")
+    argv = [manifest["artifact"]["path"]]
+    for ref in streams:
+        require(Path(ref["path"]).is_absolute(), "absolute stream input")
+        argv.extend(["--input", ref["path"]])
+    argv.extend(["--output", spec["data_root"]])
+    binding = request.get("input_binding")
+    if binding is not None:
         require(
-            ref is not None
-            and ref["sha256"] == previous["sha256"][name]
-            and ref["bytes"] == previous["rows"] * COMPACT_CACHE_WIDTHS[name],
-            "original six binary custody",
+            binding in experiment["inputs"] and binding not in streams,
+            "distinct optional lineage input",
         )
-    require(
-        set(paths) == expected and len(paths) == len(experiment["inputs"]),
-        "closed saved codec input membership",
-    )
-    for key in ("stream", "intake_binding", "previous_cache"):
-        require(
-            paths[request[key]["path"]] == request[key],
-            "actual converter input FileRef",
-        )
-    for key in ("config", "sources", "schedule"):
-        require(
-            binding[key] == {k: paths[binding[key]["path"]][k] for k in ("path", "sha256")},
-            "intake control lifetime",
-        )
-    require(
-        paths[spec["approved_plan"]["path"]] == spec["approved_plan"],
-        "current plan lifetime",
-    )
-    require(
-        experiment["argv"]
-        == [
-            manifest["artifact"]["path"],
-            request["stream"]["path"],
-            spec["data_root"],
-            request["intake_binding"]["path"],
-            request["intake_binding"]["sha256"],
-        ],
-        "existing terminal-cache exact four positional arguments",
-    )
+        argv.extend(["--input-binding", binding["path"], "--binding-sha256", binding["sha256"]])
+    require(experiment["argv"] == argv, "maintained converter ordered argv")
     require(
         len(spec["data"]) == 8
         and {x["name"]: x["path"] for x in spec["data"]}
@@ -1779,7 +1546,7 @@ def cache_materialize_check(spec, experiment, manifest):
             **{n: str(Path(spec["data_root"]) / n) for n in COMPACT_CACHE_WIDTHS},
             "cache_manifest": str(Path(spec["data_root"]) / "cache.json"),
         },
-        "compact seven files plus last manifest",
+        "compact seven files plus final manifest",
     )
 
 
@@ -1790,15 +1557,15 @@ def experiment_check(spec):
     experiment_phase_check(experiment)
     manifest = accepted_build(experiment["build_manifest"])
     require(manifest["artifact"] == spec["artifact"], "same actual executable")
-    public_replay = (
+    mixed_outcome = (
         experiment["phase"] == "fit"
-        and document(experiment["config"])["experiment"]["study"] == "public-replay-v1"
+        and document(experiment["config"])["experiment"]["study"] == "mixed-outcome"
     )
-    if public_replay:
+    if mixed_outcome:
         # Current source hashes precede importing the new metadata-only admission.
         for caller in caller_source_refs(spec, experiment):
             read_ref(caller, max(CONTROL_BYTES, caller["bytes"]))
-        public_replay_fit_check(spec, experiment, manifest, approved_plan(spec, experiment))
+        common_study_check(spec, experiment, manifest, approved_plan(spec, experiment))
     refs = [
         experiment["config"],
         *experiment["inputs"],
@@ -1819,8 +1586,17 @@ def experiment_check(spec):
         )
         refs.append(library["file"])
     refs.extend(caller_source_refs(spec, experiment))
+    streamed_inputs = set()
+    if experiment["phase"] == "materialize" and manifest.get("artifact_target") == "terminal-cache":
+        streamed_inputs = {r["path"] for r in document(experiment["config"])["streams"]}
+    elif mixed_outcome:
+        cache_root = Path(spec["argv"][6])
+        streamed_inputs = {str(cache_root / name) for name in COMPACT_CACHE_WIDTHS}
     for ref in refs:
-        read_ref(ref, max(CONTROL_BYTES, ref["bytes"]))
+        if ref["path"] in streamed_inputs:
+            require(artifact_ref(ref["path"]) == ref, "actual streamed input identity")
+        else:
+            read_ref(ref, max(CONTROL_BYTES, ref["bytes"]))
     if manifest.get("artifact_target", "quoridor-runner") == "terminal-cache":
         require(
             experiment["phase"] in {"materialize", "fit"},
@@ -1847,8 +1623,8 @@ def experiment_check(spec):
     else:
         approved = approved_plan(spec, experiment)
         refs.append(spec["approved_plan"])
-    if experiment["phase"] in {"corpus", "fit", "software-qualification"} and not public_replay:
-        common_pilot_check(spec, experiment, manifest, approved)
+    if experiment["phase"] in {"corpus", "fit", "software-qualification"} and not mixed_outcome:
+        common_study_check(spec, experiment, manifest, approved)
     if experiment["phase"] == "compare" and experiment["argv"][1] == "decisions":
         arena_decision_plan_check(experiment, approved)
         if document(experiment["config"])["arena"]["comparison"] == "whole_wall_time":
@@ -1894,7 +1670,11 @@ def experiment_check(spec):
         refs.append(spec["perf"]["tool"])
     require(bool(spec["data"]), "actual durable data required")
     owned(spec["data_root"], spec["owner"])
-    if (measurement or experiment["phase"] == "arena") and spec.get("TMP") is not None:
+    if (
+        measurement
+        or experiment["phase"] == "arena"
+        or (experiment["phase"] == "compare" and experiment["argv"][1] == "decisions")
+    ) and spec.get("TMP") is not None:
         owned(spec["TMP"], spec["owner"])
         require(
             not os.path.lexists(spec["TMP"])
@@ -2277,11 +2057,20 @@ def generation_evidence(experiment, values):
 
 def approved_plan(spec, experiment):
     """Use selected settings for arena; preserve other owning phase admissions."""
-    if experiment["phase"] == "arena":
+    if experiment["phase"] == "arena" or (
+        experiment["phase"] == "compare" and experiment["argv"][1] == "decisions"
+    ):
         expected = selected_arena(spec)
         require(
             experiment["canonical_plan_sha256"] == expected["sha256"],
             "experiment substituted selected plan",
+        )
+        return document(expected)
+    if spec.get("selection_index") is not None:
+        expected = selected_run(spec, experiment)
+        require(
+            experiment["canonical_plan_sha256"] == expected["sha256"],
+            "selected RUN plan identity",
         )
         return document(expected)
     admission = document(spec["admission"])
@@ -3317,9 +3106,7 @@ def arena_analysis(spec, experiment):
                             for o in row["observations"]
                         ),
                         "classification_seconds": sum(
-                            o["counters"]
-                            .get("position_traits", {})
-                            .get("classification_seconds", 0)
+                            o["counters"].get("parent_traits", {}).get("classification_seconds", 0)
                             for row in native["outcomes"]
                             for o in row["observations"]
                         ),
@@ -3476,7 +3263,7 @@ def arena_analysis(spec, experiment):
     for global_slot, (row, c) in observed.items():
         slot = schedule[global_slot]
         for observation in row["observations"]:
-            traits = observation.get("counters", {}).get("position_traits")
+            traits = observation.get("counters", {}).get("parent_traits")
             if traits is None:
                 continue
             for name in (
@@ -3599,7 +3386,7 @@ def arena_analysis(spec, experiment):
     for parent, rows in sorted(by_parent.items()):
         if len(rows) != 3:
             continue
-        traits = rows[0][1]["counters"].get("position_traits")
+        traits = rows[0][1]["counters"].get("parent_traits")
         if traits is None:
             continue
         disagreement = len({obs["action"] for _, obs in rows}) > 1
@@ -3717,9 +3504,14 @@ def collect_data(spec, experiment):
     for item in spec["data"]:
         try:
             owned(item["path"], spec["owner"])
-            ref, raw = bound(item["path"], item["limit_B"])
-            data["files"].append(ref)
-            values[item["name"]] = raw
+            if experiment["phase"] == "materialize" and item["name"] in COMPACT_CACHE_WIDTHS:
+                ref = artifact_ref(item["path"])
+                require(ref["bytes"] <= item["limit_B"], "declared compact output size")
+                data["files"].append(ref)
+            else:
+                ref, raw = bound(item["path"], item["limit_B"])
+                data["files"].append(ref)
+                values[item["name"]] = raw
         except BaseException as error:
             data["errors"].append({"stage": item["name"], **error_fact(error)})
     if experiment["argv"][1] == "measure":
@@ -3939,106 +3731,87 @@ def collect_data(spec, experiment):
             if experiment["phase"] == "software-qualification":
                 receipt = json.loads(values["qualification"])
                 require(
-                    receipt["schema"] == "quoridor.common-corpus-framework-qualification.v1"
-                    and receipt["status"] == "PASS"
-                    and receipt["tests_run"] == 3
-                    and receipt["failures"] == receipt["errors"] == []
-                    and receipt["actual_model_forwards"] == receipt["fit_updates"] == 0
-                    and receipt["scientific_corpus_qualified"] is False,
-                    "affected framework qualification failed",
+                    receipt["status"] == "PASS"
+                    and not receipt.get("failures")
+                    and not receipt.get("errors"),
+                    "affected software failed",
                 )
                 data["scope"] = "software-only; no corpus or numerical PASS"
-            elif (
-                experiment["phase"] == "fit"
-                and document(experiment["config"])["experiment"]["study"] == "public-replay-v1"
-            ):
-                state = json.loads(values["training"])
-                curves = json.loads(values["curves"])
-                config = document(experiment["config"])
-                arm = config["experiment"]["condition"]
-                planned = 1034547 if arm == "added_only" else 615397
-                require(
-                    state["status"] == "COMPLETE"
-                    and state["step"] == 200
-                    and state["arm"] == arm
-                    and state["forward_rows"] == planned
-                    and state["added_seen"] == (12800 if arm == "added_only" else 6400)
-                    and state["public_seen"] == (0 if arm == "added_only" else 6400)
-                    and state["aggregate_forward_rows"] <= 2000000
-                    and [p["step"] for p in curves] == list(range(0, 201, 20))
-                    and state["curves"] == curves
-                    and all(
-                        set(point["scopes"])
-                        == {
-                            "added_train",
-                            "added_validation",
-                            "public_train",
-                            "public_validation",
-                        }
-                        and all(
-                            value["rows"]
-                            == {
-                                "added_train": 217,
-                                "added_validation": 76,
-                                "public_train": 8192,
-                                "public_validation": 8192,
-                            }[name]
-                            and math.isfinite(value["mse"])
-                            and value["mse"] >= 0
-                            and 0 <= value["sign_accuracy"] <= 1
-                            and 0 <= value["saturation_fraction"] <= 1
-                            for name, value in point["scopes"].items()
-                        )
-                        for point in curves
-                    )
-                    and len(state["learning_rates"]) == 200
-                    and state["learning_rates"] == [0.001 * min(1, i / 20) for i in range(1, 201)]
-                    and state["full_opened_validation"]["initial"]["rows"] == 419150
-                    and state["full_opened_validation"]["last"]["rows"] == 419150
-                    and not (Path(spec["data_root"]) / "INCOMPLETE").exists(),
-                    "complete preselected public replay arm/evaluation/exposure census",
-                )
-                data["public_replay"] = {
-                    "arm": arm,
-                    "forward_rows": state["forward_rows"],
-                    "aggregate_forward_rows": state["aggregate_forward_rows"],
-                    "scope": "outcome learning LAST200; no strength/default claim",
-                }
             elif experiment["phase"] == "fit":
-                state = json.loads(values["run_status"])
+                state = json.loads(
+                    values["run_status"] if "run_status" in values else values["training"]
+                )
                 require(
-                    state["status"] == "COMPLETED"
-                    and state["fault"] is None
-                    and state["step"] == 200,
-                    "actual complete 200-update fit required",
+                    state["status"] in {"COMPLETE", "COMPLETED", "EARLY_STOPPED"}
+                    and state.get("fault") is None,
+                    "actual training did not complete",
+                )
+                data["fit"] = {
+                    key: state[key]
+                    for key in (
+                        "status",
+                        "step",
+                        "forward_rows",
+                        "aggregate_forward_rows",
+                        "added_seen",
+                        "public_seen",
+                        "best_step",
+                        "last_step",
+                    )
+                    if key in state
+                }
+                for key in (
+                    "step",
+                    "forward_rows",
+                    "aggregate_forward_rows",
+                    "added_seen",
+                    "public_seen",
+                ):
+                    if key in data["fit"]:
+                        require(
+                            type(data["fit"][key]) is int and data["fit"][key] >= 0,
+                            "actual nonnegative training counter " + key,
+                        )
+                data["scope"] = (
+                    "actual configured training; absent counters remain unknown; no strength/default claim"
                 )
             else:
                 report = json.loads(values["generation_result"])
                 require(
-                    report["scheduled"] == experiment["planned_slots"] == 8
-                    and report["recorded"] == 8,
-                    "full planned corpus denominator",
+                    type(report["scheduled"]) is int
+                    and type(report["recorded"]) is int
+                    and 0 <= report["recorded"] <= report["scheduled"],
+                    "actual generation census",
                 )
-                data["known_goals"] = report["goals"]
-                data["known_draws"] = report["draws"]
-                data["unknown"] = report["unknown"]
-                require(
-                    report["search_nodes"] <= 1_000_000_000,
-                    "actual returned corpus work ceiling",
+                data["corpus"] = {
+                    key: report[key]
+                    for key in (
+                        "scheduled",
+                        "recorded",
+                        "goals",
+                        "draws",
+                        "unknown",
+                        "search_nodes",
+                    )
+                    if key in report
+                }
+                data["planned_slots"] = experiment["planned_slots"]
+                data["scope"] = (
+                    "actual completed-depth generation; partial/UNKNOWN retained without refill"
                 )
-                cache = json.loads(values["cache_manifest"])
-                require(
-                    cache["stream_intake"]["status"] == "complete",
-                    "atomic shared cache intake",
-                )
-                content = json.loads(values["stream_content"])
-                ref = content["compressed"]
-                read_ref(ref, ref["bytes"])
-                data["canonical_compressed_source"] = ref
-                data["raw_content_sha256"] = content["raw_sha256"]
-                data["raw_content_B"] = content["raw_bytes"]
+                if "cache_manifest" in values:
+                    cache = json.loads(values["cache_manifest"])
+                    require(cache["stream_intake"]["status"] == "complete", "atomic cache intake")
+                if "stream_content" in values:
+                    content = json.loads(values["stream_content"])
+                    ref = content["compressed"]
+                    read_ref(ref, ref["bytes"])
+                    data["canonical_compressed_source"] = ref
+                    data["raw_content_sha256"] = content["raw_sha256"]
+                    data["raw_content_B"] = content["raw_bytes"]
         except BaseException as error:
-            data["errors"].append({"stage": "common_pilot_data", **error_fact(error)})
+            data["errors"].append({"stage": "common_study_data", **error_fact(error)})
+
     if (
         experiment["phase"] == "materialize"
         and document(experiment["build_manifest"]).get("artifact_target") == "terminal-cache"
@@ -4046,38 +3819,37 @@ def collect_data(spec, experiment):
         try:
             cache = json.loads(values["cache_manifest"])
             request = document(experiment["config"])
-            previous = document(request["previous_cache"])
+            streams = request["streams"]
+            lineage = [{k: ref[k] for k in ("path", "sha256")} for ref in streams]
             require(
                 not (Path(spec["data_root"]) / "intake-incomplete.json").exists()
                 and cache["schema"] == "quoridor-common-corpus-terminal-geometry-v3"
                 and cache["stream_intake"]["status"] == "complete"
-                and cache["rows"] == previous["rows"]
-                and cache["source_content"] == previous["source_content"]
-                and cache["schedule_sha256"] == previous["schedule_sha256"]
-                and cache["family_partition_sha256"] == previous["family_partition_sha256"]
-                and cache["common_corpus"]["common_eligible_by_split"]
-                == previous["common_corpus"]["common_eligible_by_split"]
-                and cache["common_corpus"]["common_eligible_rows"]
-                == previous["common_corpus"]["common_eligible_rows"],
-                "complete saved cache migration with original census/lineage",
+                and cache["stream_intake"]["scope"] == "common-corpus"
+                and cache["source_binding"] == lineage
+                and isinstance(cache["source_content"], list)
+                and len(cache["source_content"]) == len(streams)
+                and all(
+                    content["compressed"] == ref and content["encoding"] == "gzip-single-member-v1"
+                    for content, ref in zip(cache["source_content"], streams)
+                )
+                and type(cache["rows"]) is int
+                and cache["rows"] >= 0,
+                "complete saved cache with actual ordered stream lineage",
             )
             require(
                 cache["files"] == {n: n for n in COMPACT_CACHE_WIDTHS}
                 and set(cache["sha256"]) == set(cache["file_bytes"]) == set(COMPACT_CACHE_WIDTHS),
                 "closed compact physical files",
             )
+            refs = {Path(ref["path"]).name: ref for ref in data["files"]}
             for name, width in COMPACT_CACHE_WIDTHS.items():
-                raw = values[name]
+                ref = refs[name]
                 require(
-                    len(raw) == cache["rows"] * width == cache["file_bytes"][name]
-                    and sha(raw) == cache["sha256"][name],
+                    ref["bytes"] == cache["rows"] * width == cache["file_bytes"][name]
+                    and ref["sha256"] == cache["sha256"][name],
                     "actual compact byte/hash/count",
                 )
-                if name != "sampling.bin":
-                    require(
-                        cache["sha256"][name] == previous["sha256"][name],
-                        "original binary bit identity",
-                    )
             data["scope"] = "saved-only cache conversion; no games/Search/model/numerical PASS"
             data["cache_manifest"] = next(
                 r for r in data["files"] if r["path"] == str(Path(spec["data_root"]) / "cache.json")
@@ -4434,7 +4206,12 @@ def execute(
                         ),
                     }
                     if (
-                        experiment["phase"] == "arena" or experiment["argv"][1] == "measure"
+                        experiment["phase"] == "arena"
+                        or (
+                            experiment["phase"] == "compare"
+                            and experiment["argv"][1] == "decisions"
+                        )
+                        or experiment["argv"][1] == "measure"
                     ) and spec.get("TMP") is not None:
                         Path(spec["TMP"]).mkdir()
                         created_TMP = True
@@ -5051,6 +4828,13 @@ def operation_order(settings):
     """Serial selected blocks preserve each method's order and arena priority."""
     arena = settings.get("arena")
     measurements = settings.get("measurements", [])
+    runs = settings.get("runs", [])
+    require(isinstance(runs, list), "finite configured RUN list")
+    if runs:
+        require(arena is None and not measurements, "configured RUNs have one serial order")
+        for index in range(len(runs)):
+            yield "run", index
+        return
     require(isinstance(measurements, list), "finite measurement settings")
     block = settings["arena_block"]
     require(type(block) is int and block > 0, "positive serial arena block")
@@ -5092,9 +4876,18 @@ def operation_order(settings):
 def prepare_selected_operation(settings_ref, kind, index):
     """Derive ordinary lifecycle parameters; never issue a per-operation admission."""
     settings = document(settings_ref)
-    template = settings["arena"]["template"] if kind == "arena" else settings["measurements"][index]
+    if kind == "arena":
+        template = settings["arena"]["template"]
+    else:
+        require(kind in {"measure", "run"}, "selected finite operation kind")
+        template = settings["runs" if kind == "run" else "measurements"][index]
     spec = copy.deepcopy(template)
     require(spec["kind"] == "run", "finite execution composes RUN operations only")
+    if kind == "run":
+        require(
+            template.get("finalizers") == [],
+            "configured RUN with nonempty finalizers unsupported before ownership",
+        )
     phase = owned(
         Path(spec["owner"]) / Path(settings["output"]).name / f"{kind}-{index:03d}",
         spec["owner"],
@@ -5122,6 +4915,12 @@ def prepare_selected_operation(settings_ref, kind, index):
             canonical_plan_sha256=spec["approved_plan"]["sha256"],
         )
         spec["data_root"] = document(experiment["config"])["output"]
+    elif kind == "run":
+        spec.update(settings=settings_ref, selection_index=index)
+        require(
+            not Path(spec["data_root"]).exists(),
+            "configured output already entered; never replay",
+        )
     else:
         require(experiment["argv"][1] == "measure", "selected common measurement only")
         old_root = Path(spec["data_root"])
@@ -5142,11 +4941,16 @@ def prepare_selected_operation(settings_ref, kind, index):
         dict.fromkeys([*spec.get("owned_outputs", []), str(phase), spec["TMP"]])
     )
     phase.mkdir(parents=True)
-    if experiment.get("numerical_qualification") is not None:
+    if kind != "run" and experiment.get("numerical_qualification") is not None:
         prior = document(original_experiment["numerical_qualification"])
         numerical = numerical_fields(experiment, accepted_build(experiment["build_manifest"]))
         # Retain the original evidence's scope; these are current loader bindings only.
-        for key in ("original_evidence", "correspondence_only", "scope", "new_model_or_head_calls"):
+        for key in (
+            "original_evidence",
+            "correspondence_only",
+            "scope",
+            "new_model_or_head_calls",
+        ):
             if key in prior:
                 numerical[key] = prior[key]
         new_json(phase / "numerical.json", numerical)

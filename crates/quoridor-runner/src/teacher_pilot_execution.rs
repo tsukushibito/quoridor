@@ -12,7 +12,7 @@ use quoridor_data::{
     Result, Teacher, TeacherRow,
     terminal::{
         FamilyAssignment, FamilyPartition, TerminalProvenance, Termination as LabelTermination,
-        attach_terminal_targets, partition_families,
+        attach_terminal_targets,
     },
 };
 use serde::{Deserialize, Serialize};
@@ -30,7 +30,6 @@ use std::{
     time::Instant,
 };
 
-const STREAM_SCHEMA: &str = "quoridor-fixed-d-dual-teacher-pilot-v1";
 const ROW_BYTES: usize = 65536;
 const GAME_BYTES: usize = 16 * 1024 * 1024;
 const EVALUATOR_ID: &str = "original-distance-a0-b8-tanh";
@@ -43,19 +42,6 @@ struct SearchPolicy {
     depth: u16,
     nodes: u64,
     strict: bool,
-}
-impl SearchPolicy {
-    const LEGACY: Self = Self {
-        depth: 3,
-        nodes: 100000,
-        strict: false,
-    };
-    #[cfg(test)]
-    const DEPTH6: Self = Self {
-        depth: 6,
-        nodes: u64::MAX,
-        strict: true,
-    };
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -208,16 +194,6 @@ fn finish_game(
     })
 }
 
-#[cfg(test)]
-fn play_using(
-    slot: &ScheduledGame,
-    assignment: &FamilyAssignment,
-    cancel: &AtomicBool,
-    search: impl FnMut(&SigmaContext) -> Result<SearchResult>,
-) -> Result<GameRecord> {
-    play_using_policy(slot, assignment, cancel, SearchPolicy::LEGACY, search)
-}
-
 fn play_using_policy(
     slot: &ScheduledGame,
     assignment: &FamilyAssignment,
@@ -333,23 +309,6 @@ fn play_using_policy(
     }
 }
 
-fn play(
-    slot: &ScheduledGame,
-    assignment: &FamilyAssignment,
-    cancel: &AtomicBool,
-) -> Result<GameRecord> {
-    play_with_policy(slot, assignment, cancel, SearchPolicy::LEGACY)
-}
-
-fn play_with_policy(
-    slot: &ScheduledGame,
-    assignment: &FamilyAssignment,
-    cancel: &AtomicBool,
-    policy: SearchPolicy,
-) -> Result<GameRecord> {
-    play_with_budget(slot, assignment, cancel, policy, None)
-}
-
 fn play_with_budget(
     slot: &ScheduledGame,
     assignment: &FamilyAssignment,
@@ -361,15 +320,11 @@ fn play_with_budget(
     let namespace = SearchNamespace {
         evaluator: EVALUATOR_ID.into(),
         rules: Ruleset::Standard2pThreefold.id().into(),
-        selectivity: if policy.strict {
-            format!(
-                "{}/d6/n{}/PVS/TT4096/no-time/no-solver-order-contact",
-                teacher_pilot::depth6::VERSION,
-                policy.nodes
-            )
-        } else {
-            "d3/n100000/PVS/TT4096/no-time/no-solver-order-contact".into()
-        },
+        selectivity: format!(
+            "{}/d6/n{}/PVS/TT4096/no-time/no-solver-order-contact",
+            quoridor_data::common_corpus::VERSION,
+            policy.nodes
+        ),
     };
     // Preserve the original independently retained per-colour sessions inside
     // every game. Only one search is active at a time; no cross-colour TT sharing.
@@ -486,10 +441,8 @@ pub struct PilotHeader {
     pub generator_version: String,
     pub config: PilotConfig,
     pub config_sha256: String,
+    pub config_ref: quoridor_data::terminal_stream::BoundJson,
     pub executable_sha256: String,
-    // Historical stream provenance retained for exact reconstruction, not checked against current compiler sources.
-    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
-    pub compiled_sources: BTreeMap<String, String>,
     pub evaluator: String,
     pub scheduled: Vec<ScheduledGame>,
     pub family_partition: FamilyPartition,
@@ -579,21 +532,11 @@ impl Stream {
             gzip.append(b"\n")?;
             gzip.sync_data()?;
         } else {
-            self.file.write_all(&raw)?;
-            self.file.write_all(b"\n")?;
-            self.file.sync_data()?;
+            return Err("encoder not available for append".into());
         }
         self.used += raw.len() as u64 + 1;
         Ok(())
     }
-}
-
-#[derive(Serialize, Deserialize)]
-#[serde(tag = "type", content = "record", rename_all = "snake_case")]
-enum Event {
-    Header(Box<PilotHeader>),
-    Game(Box<GameRecord>),
-    Footer(Box<PilotReport>),
 }
 
 fn stream_reader(path: &Path) -> Result<Box<dyn Read>> {
@@ -620,182 +563,45 @@ fn stream_reader(path: &Path) -> Result<Box<dyn Read>> {
             &content,
         )?))
     } else {
-        Ok(Box::new(File::open(path.join("pilot-stream.jsonl"))?))
+        Err("missing actual compressed generator stream".into())
     }
 }
 
 fn save_control(path: &Path, value: &Value) -> Result<()> {
     let raw = serde_json::to_vec(value)?;
-    if raw.len() > 1024 * 1024 {
-        return Err("common control bound".into());
-    }
     let mut f = OpenOptions::new().create_new(true).write(true).open(path)?;
     f.write_all(&raw)?;
     f.sync_all()?;
     Ok(())
 }
-fn control_ref(path: &Path) -> Result<quoridor_data::terminal_stream::BoundJson> {
-    Ok(quoridor_data::terminal_stream::BoundJson {
-        path: path.into(),
-        sha256: quoridor_data::file_sha(path)?,
-    })
-}
-/// One qualified native invocation: retained compressed generation, then the shared cache.
+/// The owning Run checks actual config/input/artifact identity; this produces one batch stream.
 pub fn run_bound(bound: &crate::research_manifest::BoundControl) -> Result<Value> {
     let (e, _) = crate::research_manifest::load(bound, "corpus")?;
     let config: PilotConfig = e.config.read()?;
-    config.validate()?;
-    let study = config
-        .common_study
-        .as_ref()
-        .ok_or("common study required")?;
-    if !matches!(config.phase, teacher_pilot::Phase::CommonCorpus)
-        || study.selected_plan.sha256 != e.canonical_plan_sha256
-        || e.inputs.first().is_none_or(|r| {
-            r.path != study.selected_plan.path || r.sha256 != study.selected_plan.sha256
-        })
-        || e.schedule.read::<Value>()? != study.schedule_choice()
-    {
-        return Err("current common generator/approved plan/schedule qualification differs".into());
-    }
-    let report = run(&config, e.config.sha256.clone())?;
+    let reference = quoridor_data::terminal_stream::BoundJson {
+        path: e.config.path.clone(),
+        sha256: e.config.sha256.clone(),
+    };
+    let report = run(&config, reference)?;
     save_control(
         &config.output.join("generation-result.json"),
         &serde_json::to_value(&report)?,
     )?;
-    let content_path = config.output.join("stream-content.json");
-    if fs::metadata(&content_path)?.len() > 65536 {
-        return Err("content metadata bound".into());
-    }
     let content: quoridor_data::lossless_jsonl::Content =
-        serde_json::from_slice(&fs::read(&content_path)?)?;
-    let schedule_path = config.output.join("schedule.json");
-    let schedule: Value = serde_json::from_slice(&fs::read(&schedule_path)?)?;
-    let binding = quoridor_data::terminal_stream::IntakeBinding {
-        schema: "quoridor-terminal-stream-intake-v1".into(),
-        scope: "common-corpus".into(),
-        human_quantity_n: Some(study.families),
-        stream: quoridor_data::terminal_stream::BoundJson {
-            path: content.compressed.path.clone(),
-            sha256: content.compressed.sha256.clone(),
-        },
-        config: quoridor_data::terminal_stream::BoundJson {
-            path: e.config.path.clone(),
-            sha256: e.config.sha256.clone(),
-        },
-        sources: control_ref(&config.output.join("sources.json"))?,
-        schedule: control_ref(&schedule_path)?,
-        requests_sha256: schedule["requests_sha256"]
-            .as_str()
-            .ok_or("request SHA")?
-            .into(),
-        max_stream_bytes: config.max_output_bytes,
-        max_compressed_bytes: Some(256 * 1024 * 1024),
-        stream_content: Some(content.clone()),
-        max_line_bytes: GAME_BYTES,
-    };
-    let path = config.output.join("intake-binding.json");
-    save_control(&path, &serde_json::to_value(binding)?)?;
-    let cache = quoridor_data::terminal_stream::write_cache(
-        &content.compressed.path,
-        &config.output.join("cache"),
-        &path,
-        &quoridor_data::file_sha(&path)?,
-    )?;
+        serde_json::from_slice(&fs::read(config.output.join("stream-content.json"))?)?;
     Ok(
-        serde_json::json!({"planned":config.planned_games,"generation":report,"shared_cache":cache,"status":"DATA_RETURNED_PENDING_EXTERNAL_FINALIZATION"}),
+        serde_json::json!({"planned":config.planned_games,"generation":report,
+        "source_content":content,"status":"DATA_RETURNED_PENDING_EXTERNAL_FINALIZATION"}),
     )
 }
 
-/// No inference backend or model loading: one serial fixed-D process.
-pub fn run(config: &PilotConfig, config_sha256: String) -> Result<PilotReport> {
-    if matches!(
-        config.phase,
-        teacher_pilot::Phase::Depth6Throughput | teacher_pilot::Phase::CommonCorpus
-    ) {
-        return depth6::run(config, config_sha256, &AtomicBool::new(false));
-    }
-    config.validate()?;
-    let begin = Instant::now();
-    let admission = resources::admit(
-        1,
-        &[config.cpu_core],
-        false,
-        config.host_ram_reserve,
-        Some(config.max_memory_bytes),
-    )?;
-    resources::pin(admission.worker_cores[0])?;
-    // Exclusive ownership, including race refusal, before any publication.
-    fs::create_dir(&config.output)?;
-    let mut stream = Stream {
-        file: OpenOptions::new()
-            .create_new(true)
-            .write(true)
-            .open(config.output.join("pilot-stream.jsonl"))?,
-        used: 0,
-        cap: config.max_output_bytes,
-        gzip: None,
-    };
-    // All64 requests persist even if later prefix generation/setup fails.
-    stream.append(
-        &serde_json::json!({"type":"requests","schema":STREAM_SCHEMA,
-        "generator_version":teacher_pilot::GENERATOR_VERSION,
-        "config":config,"config_sha256":config_sha256,"planned":64,
-        "requested_lengths":(4u16..=19).flat_map(|length| [length;4]).collect::<Vec<_>>() }),
-    )?;
-    let scheduled = teacher_pilot::schedule()?;
-    audit_schedule(&scheduled)?;
-    let planned: Vec<_> = scheduled
-        .iter()
-        .filter_map(|slot| {
-            slot.prefix
-                .as_ref()
-                .map(|prefix| (slot.request_id.clone(), prefix.clone()))
-        })
-        .collect();
-    let family_partition = partition_families(&planned, teacher_pilot::PREFIX_SEED)?;
-    let executable_sha256 = format!("{:x}", Sha256::digest(fs::read(std::env::current_exe()?)?));
-    let header = PilotHeader {
-        schema: STREAM_SCHEMA.into(),
-        generator_version: teacher_pilot::GENERATOR_VERSION.into(),
-        config: config.clone(),
-        config_sha256,
-        executable_sha256,
-        compiled_sources: BTreeMap::new(),
-        evaluator: EVALUATOR_ID.into(),
-        scheduled,
-        family_partition,
-        resource_admission: serde_json::to_value(&admission)?,
-    };
-    stream.append(&Event::Header(Box::new(header.clone())))?;
-    let cancel = AtomicBool::new(false);
-    let mut games = Vec::new();
-    for slot in &header.scheduled {
-        let game = if let Some(reason) = &slot.scheduled_failure {
-            scheduled_failure(slot, reason.clone())
-        } else {
-            let assignment = header
-                .family_partition
-                .assignments
-                .iter()
-                .find(|entry| entry.game == slot.request_id)
-                .ok_or("missing input-only family")?;
-            play(slot, assignment, &cancel)?
-        };
-        audit_game(slot, &header.family_partition, &game)?;
-        stream.append(&Event::Game(Box::new(game.clone())))?;
-        games.push(game);
-    }
-    let mut report = summarize(&header, &games)?;
-    report.committed_stream_bytes_before_footer = stream.used;
-    report.native_whole_ns = begin.elapsed().as_nanos().min(u128::from(u64::MAX)) as u64;
-    stream.append(&Event::Footer(Box::new(report.clone())))?;
-    Ok(report)
+pub fn run(
+    config: &PilotConfig,
+    config_ref: quoridor_data::terminal_stream::BoundJson,
+) -> Result<PilotReport> {
+    run_depth6_with_cancel(config, config_ref, &AtomicBool::new(false))
 }
 
-fn audit_game(slot: &ScheduledGame, partition: &FamilyPartition, game: &GameRecord) -> Result<()> {
-    audit_game_policy(slot, partition, game, SearchPolicy::LEGACY)
-}
 fn audit_game_policy(
     slot: &ScheduledGame,
     partition: &FamilyPartition,
@@ -929,72 +735,6 @@ fn audit_game_policy(
     Ok(())
 }
 
-fn audit_schedule(slots: &[ScheduledGame]) -> Result<()> {
-    if slots.len() != 64 {
-        return Err("pilot must preserve all64 requests".into());
-    }
-    let mut used = BTreeSet::new();
-    for (index, slot) in slots.iter().enumerate() {
-        if slot.game != index
-            || slot.request_id != format!("teacher-distance-pilot64-game-{index:03}")
-            || usize::from(slot.requested_prefix_length) != 4 + index / 4
-            || slot.attempts.is_empty()
-            || slot.attempts.len() > 32
-        {
-            return Err("pilot request/attempt census mismatch".into());
-        }
-        for (attempt, candidate) in slot.attempts.iter().enumerate() {
-            if candidate.attempt != attempt {
-                return Err("candidate attempt gap".into());
-            }
-            let context = SigmaContext::from_prefix_with_rules(
-                &candidate.prefix,
-                Ruleset::Standard2pThreefold,
-            )?;
-            let canonical = teacher_pilot::canonical_prefix(&candidate.prefix)?;
-            let expected = if context.terminal_value().is_some() {
-                Some("terminal_prefix")
-            } else if candidate.prefix.len() != usize::from(slot.requested_prefix_length)
-                || !context.has_legal_move()
-            {
-                Some("unsupported_no_legal_prefix")
-            } else if used.contains(&canonical) {
-                Some("exact_or_reflected_duplicate_prefix")
-            } else {
-                None
-            };
-            if candidate.rejection.as_deref() != expected {
-                return Err("pilot target-blind rejection provenance mismatch".into());
-            }
-            if expected.is_none() {
-                if attempt + 1 != slot.attempts.len()
-                    || slot.prefix.as_ref() != Some(&candidate.prefix)
-                    || slot.canonical_prefix.as_ref() != Some(&canonical)
-                    || slot.root.as_ref() != Some(&ContextRecord::from_context(&context))
-                    || slot.scheduled_failure.is_some()
-                {
-                    return Err("pilot accepted candidate substitution".into());
-                }
-                used.insert(canonical);
-            }
-        }
-        if slot.prefix.is_none()
-            && (slot.attempts.len() != 32
-                || slot.root.is_some()
-                || slot.canonical_prefix.is_some()
-                || slot.scheduled_failure.as_deref() != Some("prefix_attempts_exhausted"))
-        {
-            return Err("pilot scheduled failure must retain32 attempts".into());
-        }
-        if slot.prefix.is_some() != slot.attempts.last().is_some_and(|a| a.rejection.is_none()) {
-            return Err("pilot final candidate acceptance mismatch".into());
-        }
-    }
-    Ok(())
-}
-
-// Exact node census or an accounting refusal; original per-return records stay
-// in the committed stream. Never wrap/saturate into a purported exact total.
 fn add_search_nodes(report: &mut PilotReport, nodes: u64, stage: &str) -> Result<()> {
     report.search_nodes = report.search_nodes.checked_add(nodes).ok_or_else(|| {
         format!("aggregate_search_nodes_overflow:{stage};individual_return_counts_retained")
@@ -1074,383 +814,87 @@ fn summarize(header: &PilotHeader, games: &[GameRecord]) -> Result<PilotReport> 
     Ok(report)
 }
 
-/// Saved-only canonical replay; no evaluator, Search, model or extra label search.
+/// Saved-only canonical replay, with no evaluator or search.
 pub fn audit(path: &Path) -> Result<PilotReport> {
-    if depth6::is_stream(path)? {
-        return depth6::audit(path);
-    }
-    let file = File::open(path.join("pilot-stream.jsonl"))?;
-    let mut reader = BufReader::new(file);
-    let mut raw = Vec::new();
-    let mut header = None;
-    let mut games = Vec::new();
-    let mut footer = None;
-    let mut bytes_before_footer = 0u64;
-    let mut first = true;
-    let mut request = None;
-    loop {
-        raw.clear();
-        // Bound every line even if a corrupt stream omits its newline.
-        std::io::Read::take(&mut reader, (GAME_BYTES + 2) as u64).read_until(b'\n', &mut raw)?;
-        if raw.is_empty() {
-            break;
-        }
-        if raw.len() > GAME_BYTES + 1 || raw.last() != Some(&b'\n') {
-            return Err("truncated or oversized pilot stream; uncommitted game UNKNOWN".into());
-        }
-        if first {
-            let value: Value = serde_json::from_slice(&raw)?;
-            if value["type"] != "requests" || value["planned"] != 64 {
-                return Err("missing64 request journal".into());
-            }
-            request = Some(value);
-            first = false;
-            bytes_before_footer += raw.len() as u64;
-            continue;
-        }
-        if footer.is_some() {
-            return Err("records after pilot footer".into());
-        }
-        match serde_json::from_slice::<Event>(&raw)? {
-            Event::Header(h) if header.is_none() && games.is_empty() => {
-                h.config.validate()?;
-                if h.schema != STREAM_SCHEMA
-                    || h.generator_version != teacher_pilot::GENERATOR_VERSION
-                    || h.evaluator != EVALUATOR_ID
-                    || h.scheduled.len() != 64
-                {
-                    return Err("pilot header scope mismatch".into());
-                }
-                let requests = request.as_ref().ok_or("missing request declaration")?;
-                if requests["schema"] != h.schema
-                    || requests["generator_version"] != h.generator_version
-                    || requests["config_sha256"] != h.config_sha256
-                    || requests["config"] != serde_json::to_value(&h.config)?
-                    || requests["requested_lengths"]
-                        != serde_json::json!(
-                            (4u16..=19)
-                                .flat_map(|length| [length; 4])
-                                .collect::<Vec<_>>()
-                        )
-                {
-                    return Err("pilot request/header binding mismatch".into());
-                }
-                audit_schedule(&h.scheduled)?;
-                let planned: Vec<_> = h
-                    .scheduled
-                    .iter()
-                    .filter_map(|slot| {
-                        slot.prefix
-                            .as_ref()
-                            .map(|prefix| (slot.request_id.clone(), prefix.clone()))
-                    })
-                    .collect();
-                if serde_json::to_value(partition_families(&planned, teacher_pilot::PREFIX_SEED)?)?
-                    != serde_json::to_value(&h.family_partition)?
-                {
-                    return Err("pilot pre-outcome partition changed".into());
-                }
-                header = Some(h);
-            }
-            Event::Game(game) if header.is_some() => {
-                let h = header.as_ref().ok_or("missing header")?;
-                let slot = h.scheduled.get(games.len()).ok_or("extra pilot game")?;
-                audit_game(slot, &h.family_partition, &game)?;
-                games.push(*game);
-            }
-            Event::Footer(report) if header.is_some() => {
-                let h = header.as_ref().ok_or("missing header")?;
-                if games.len() != 64 {
-                    return Err("missing scheduled pilot records".into());
-                }
-                let mut expected = summarize(h, &games)?;
-                expected.native_whole_ns = report.native_whole_ns;
-                expected.committed_stream_bytes_before_footer = bytes_before_footer;
-                if serde_json::to_value(&expected)? != serde_json::to_value(&report)? {
-                    return Err("pilot footer census mismatch".into());
-                }
-                footer = Some(report);
-            }
-            _ => return Err("pilot stream order/identity mismatch".into()),
-        }
-        if footer.is_none() {
-            bytes_before_footer += raw.len() as u64;
-        }
-    }
-    footer
-        .map(|report| *report)
-        .ok_or_else(|| "pilot incomplete: scheduled remainder UNKNOWN".into())
+    depth6::audit(path)
 }
 
-/// Caller-owned cancellation for the explicit depth6 recipe. Legacy entry stays serial.
 pub fn run_depth6_with_cancel(
     config: &PilotConfig,
-    config_sha256: String,
+    config_ref: quoridor_data::terminal_stream::BoundJson,
     cancel: &AtomicBool,
 ) -> Result<PilotReport> {
+    if serde_json::to_value(config)? != config_ref.read()? {
+        return Err("actual generation config correspondence".into());
+    }
     teacher_pilot::depth6::validate(config)?;
-    depth6::run(config, config_sha256, cancel)
+    config.common_study.validate_inputs()?;
+    depth6::run(config, config_ref, cancel)
 }
 
 #[cfg(test)]
-mod tests {
+mod configured_generation_tests {
     use super::*;
-    use quoridor_ai::alphabeta::{SearchStats, StopReason};
     use quoridor_data::Split;
-    use std::time::Duration;
-
-    fn fixture(prefix: Vec<u16>) -> (ScheduledGame, FamilyAssignment) {
+    #[test]
+    fn configured_fixed_d_cancel_and_first_error_create_no_fabricated_label_or_reply() {
+        let prefix = vec![13, 75];
         let context = SigmaContext::from_prefix(&prefix).unwrap();
         let slot = ScheduledGame {
-            game: 0,
-            request_id: "changed-boundary-fixture".into(),
-            requested_prefix_length: prefix.len() as u16,
-            canonical_prefix: None,
-            root: Some(ContextRecord::from_context(&context)),
+            game: 17,
+            request_id: "configured-17".into(),
+            requested_prefix_length: 2,
             prefix: Some(prefix.clone()),
+            canonical_prefix: Some(prefix.clone()),
+            root: Some(ContextRecord::from_context(&context)),
             attempts: vec![],
             scheduled_failure: None,
         };
-        let assignment = FamilyAssignment {
+        let a = FamilyAssignment {
             game: slot.request_id.clone(),
-            prefix,
-            family: "fixture-family".into(),
+            prefix: prefix.clone(),
+            family: "a".repeat(64),
             split: Split::Train,
         };
-        (slot, assignment)
-    }
-    fn returned(action: u16) -> SearchResult {
-        SearchResult {
-            action: Some(action),
-            value: Some(0.25),
-            completed_depth: 1,
-            pv: vec![action],
-            stats: SearchStats {
-                nodes: 1,
-                ..SearchStats::default()
-            },
-            stop: StopReason::NodeLimit,
-            elapsed: Duration::ZERO,
-        }
-    }
-    #[test]
-    fn pilot_goal_draw_and_unknown_attach_both_teachers_from_actual_history() {
-        for (prefix, move_id, reason) in [
-            (
-                vec![13, 75, 12, 76, 13, 75, 12, 76],
-                13,
-                LabelTermination::Threefold,
-            ),
-            (
-                vec![13, 67, 22, 58, 31, 49, 40, 31, 49, 22, 58, 13, 67],
-                4,
-                LabelTermination::Goal,
-            ),
-        ] {
-            let (slot, assignment) = fixture(prefix);
-            let game = play_using(&slot, &assignment, &AtomicBool::new(false), |_| {
-                Ok(returned(move_id))
-            })
-            .unwrap();
-            assert_eq!(game.rows.len(), 1);
-            assert_eq!(game.provenance.as_ref().unwrap().reason, reason);
-            let target = game.rows[0].teacher.terminal_targets.as_ref().unwrap();
-            assert!(game.rows[0].teacher.eligible);
-            if reason == LabelTermination::Threefold {
-                assert_eq!(target.outcome_z, Some(0));
-                assert_eq!(target.margin_target_steps, Some(0));
-                assert_ne!(target.terminal_geometric_margin_steps, Some(0));
-            } else {
-                assert_eq!(target.outcome_z, Some(1));
-                assert_eq!(game.provenance.as_ref().unwrap().winner, Some(2));
-            }
-            audit_game(
-                &slot,
-                &FamilyPartition {
-                    schema: "fixture".into(),
-                    seed: 1,
-                    rounding: "fixture".into(),
-                    assignments: vec![assignment],
-                },
-                &game,
-            )
-            .unwrap();
-        }
-        let (slot, assignment) = fixture(vec![13]);
-        let mut calls = 0;
-        let game = play_using(&slot, &assignment, &AtomicBool::new(false), |_| {
-            calls += 1;
-            if calls == 1 {
-                Ok(SearchResult {
-                    value: Some(2.0),
-                    ..returned(67)
-                })
-            } else {
-                Err("forced search error".into())
-            }
+        let cancel = AtomicBool::new(true);
+        let calls = AtomicU64::new(0);
+        let policy = SearchPolicy {
+            depth: 6,
+            nodes: 100,
+            strict: true,
+        };
+        let g = play_using_policy(&slot, &a, &cancel, policy, |_| {
+            calls.fetch_add(1, Ordering::Relaxed);
+            Err("SYNTHETIC must not enter".into())
         })
         .unwrap();
-        assert_eq!(game.rows.len(), 1);
-        assert_eq!(game.rows[0].search.raw_value, Some(2.0));
-        assert!(!game.rows[0].teacher.eligible);
-        let target = game.rows[0].teacher.terminal_targets.as_ref().unwrap();
-        assert_eq!(target.outcome_z, None);
-        assert_eq!(target.margin_target_steps, None);
-        assert_eq!(game.provenance.unwrap().terminal_distance_p1_p2, None);
-    }
-
-    #[test]
-    fn pilot_fixed_d_actual_caller_and_saved_chronology_refuse_tampering() {
-        let (slot, assignment) = fixture(vec![13, 67, 22, 58, 31, 49, 40, 31, 49, 22, 58, 13, 67]);
-        let game = play(&slot, &assignment, &AtomicBool::new(false)).unwrap();
-        assert_eq!(game.termination, Termination::Goal);
-        assert_eq!(game.rows.len(), 1);
-        assert_eq!(game.rows[0].search.completed_depth, 3);
-        assert_eq!(game.rows[0].search.raw_value, Some(2.0));
-        let partition = FamilyPartition {
-            schema: "fixture".into(),
-            seed: 1,
-            rounding: "fixture".into(),
-            assignments: vec![assignment],
-        };
-        audit_game(&slot, &partition, &game).unwrap();
-        let mut bad = game.clone();
-        bad.rows[0].teacher.prefix.pop();
-        assert!(audit_game(&slot, &partition, &bad).is_err());
-        let mut bad = game.clone();
-        bad.rows[0].search.parent.stocks[0] = 9;
-        assert!(audit_game(&slot, &partition, &bad).is_err());
-        let mut bad = game;
-        bad.attempted_search_calls += 1;
-        assert!(audit_game(&slot, &partition, &bad).is_err());
-    }
-    #[test]
-    fn pilot_cancel_incomplete_or_invalid_return_never_labels() {
-        let (slot, assignment) = fixture(vec![13]);
-        let cancelled = play_using(&slot, &assignment, &AtomicBool::new(true), |_| {
-            panic!("no cancelled Search")
+        assert_eq!(calls.load(Ordering::Relaxed), 0);
+        assert!(g.rows.is_empty() && g.failed_search.is_none());
+        assert_eq!(g.attempted_search_calls, 0);
+        assert!(matches!(g.termination, Termination::Unknown { .. }));
+        cancel.store(false, Ordering::Release);
+        let g = play_using_policy(&slot, &a, &cancel, policy, |_| {
+            calls.fetch_add(1, Ordering::Relaxed);
+            Err("SYNTHETIC first search error".into())
         })
         .unwrap();
-        assert!(cancelled.rows.is_empty());
-        for result in [
-            SearchResult {
-                completed_depth: 0,
-                ..returned(67)
-            },
-            SearchResult {
-                stop: StopReason::Cancelled,
-                ..returned(67)
-            },
-            returned(209),
-        ] {
-            let game = play_using(&slot, &assignment, &AtomicBool::new(false), |_| {
-                Ok(result.clone())
-            })
-            .unwrap();
-            assert!(game.rows.is_empty());
-            assert!(game.failed_search.is_some());
-            assert_eq!(game.provenance.unwrap().terminal_distance_p1_p2, None);
-        }
-    }
-
-    #[test]
-    fn pilot_audit_requires_return_evidence_only_for_unaccepted_search() {
-        let (slot, assignment) = fixture(vec![13]);
-        let partition = FamilyPartition {
-            schema: "fixture".into(),
-            seed: 1,
-            rounding: "fixture".into(),
-            assignments: vec![assignment.clone()],
-        };
-        let unaccepted = play_using(&slot, &assignment, &AtomicBool::new(false), |_| {
-            Ok(returned(209))
-        })
-        .unwrap();
-        audit_game(&slot, &partition, &unaccepted).unwrap();
-        let header = PilotHeader {
-            schema: "isolated-footer-fixture".into(),
-            generator_version: teacher_pilot::GENERATOR_VERSION.into(),
-            config: PilotConfig {
-                phase: teacher_pilot::Phase::Pilot64,
-                main_volume_n: None,
-                common_study: None,
-                ruleset: Ruleset::Standard2pThreefold,
-                run_id: "isolated-footer-fixture".into(),
-                output: teacher_pilot::PILOT_OUTPUT.into(),
-                planned_games: 64,
-                prefix_seed: teacher_pilot::PREFIX_SEED,
-                attempts_per_prefix: 32,
-                depth: 3,
-                max_nodes: 100000,
-                max_total_nodes: None,
-                tt_slots: 4096,
-                use_pvs: true,
-                solver_order_contact: false,
-                distance_a: 0.,
-                distance_b: 8.,
-                per_move_timeout_ms: None,
-                max_total_plies: 200,
-                cpu_core: 0,
-                game_workers: None,
-                worker_cores: vec![],
-                host_ram_reserve: 4 * 1024 * 1024 * 1024,
-                max_memory_bytes: 2 * 1024 * 1024 * 1024 - 64 * 1024 * 1024,
-                max_output_bytes: 1024 * 1024 * 1024,
-            },
-            config_sha256: "isolated-fixture".into(),
-            executable_sha256: "isolated-fixture".into(),
-            compiled_sources: BTreeMap::new(),
-            evaluator: EVALUATOR_ID.into(),
-            scheduled: vec![slot.clone()],
-            family_partition: partition.clone(),
-            resource_admission: serde_json::Value::Null,
-        };
-        let report = summarize(&header, std::slice::from_ref(&unaccepted)).unwrap();
-        assert_eq!(unaccepted.attempted_search_calls, 1);
-        assert_eq!(
-            unaccepted.failed_search.as_ref().unwrap().counters["nodes"],
-            1
+        assert_eq!(calls.load(Ordering::Relaxed), 1);
+        assert_eq!(g.attempted_search_calls, 1);
+        assert!(
+            matches!(&g.termination,Termination::Unknown{reason} if reason.contains("SYNTHETIC first search error"))
         );
-        assert_eq!(report.search_calls, 1);
-        assert_eq!(report.accepted_search_calls, 0);
-        assert_eq!(report.search_nodes, 1);
-        assert_eq!(report.rows, 0);
-        let mut missing = unaccepted.clone();
-        missing.failed_search = None;
-        assert_eq!(
-            audit_game(&slot, &partition, &missing)
-                .unwrap_err()
-                .to_string(),
-            "pilot unaccepted-return attribution mismatch"
-        );
-
-        let search_error = play_using(&slot, &assignment, &AtomicBool::new(false), |_| {
-            Err("forced search error".into())
-        })
+        assert!(g.rows.is_empty() && g.failed_search.is_none());
+        audit_game_policy(
+            &slot,
+            &FamilyPartition {
+                schema: "quoridor-terminal-family-partition-v1".into(),
+                seed: 1,
+                rounding: "synthetic metadata".into(),
+                assignments: vec![a],
+            },
+            &g,
+            policy,
+        )
         .unwrap();
-        let cancelled = play_using(&slot, &assignment, &AtomicBool::new(true), |_| {
-            panic!("pre-search cancellation must not invoke Search")
-        })
-        .unwrap();
-        for mut game in [search_error, cancelled] {
-            assert!(game.failed_search.is_none());
-            audit_game(&slot, &partition, &game).unwrap();
-            let report = summarize(&header, std::slice::from_ref(&game)).unwrap();
-            let attempted = usize::from(matches!(&game.termination,
-                Termination::Unknown { reason } if reason.starts_with("search_error:")));
-            assert_eq!(game.attempted_search_calls, attempted);
-            assert_eq!(report.search_calls, attempted);
-            assert_eq!(report.accepted_search_calls, 0);
-            // No returned evidence means no known returned nodes, not no opaque work.
-            assert_eq!(report.search_nodes, 0);
-            assert_eq!(report.rows, 0);
-            game.failed_search = unaccepted.failed_search.clone();
-            assert_eq!(
-                audit_game(&slot, &partition, &game)
-                    .unwrap_err()
-                    .to_string(),
-                "pilot unaccepted-return attribution mismatch"
-            );
-        }
     }
 }

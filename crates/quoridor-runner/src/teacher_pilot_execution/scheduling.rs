@@ -231,4 +231,61 @@ mod tests {
         assert_eq!(j.workers_joined, 1);
         assert_eq!(failed, vec![(0, true), (1, true), (2, true), (3, true)]);
     }
+    #[test]
+    fn configured_slices_preserve_global_order_no_repeat_and_join_before_error_stop() {
+        let global = [0u64, 1, 2, 3, 4, 5, 6];
+        let cancel = AtomicBool::new(false);
+        let mut published = Vec::new();
+        for slice in [&global[..3], &global[3..]] {
+            let j = ordered(
+                slice,
+                1,
+                &cancel,
+                |_, id| Ok(*id),
+                |_, outcome| {
+                    if let Outcome::Returned { value, .. } = outcome {
+                        published.push(value);
+                    } else {
+                        return Err("unexpected synthetic outcome".into());
+                    }
+                    Ok(())
+                },
+            )
+            .unwrap();
+            assert_eq!(j.workers_spawned, j.workers_joined);
+            assert_eq!(j.committed, slice.len());
+        }
+        assert_eq!(published, global);
+        let mut later_entered = false;
+        let mut saved = Vec::new();
+        let e = ordered(
+            &global[..3],
+            1,
+            &cancel,
+            |_, id| Ok(*id),
+            |i, outcome| {
+                if i == 1 {
+                    return Err("SYNTHETIC first publication error".into());
+                }
+                if let Outcome::Returned { value, .. } = outcome {
+                    saved.push(value);
+                }
+                Ok(())
+            },
+        )
+        .unwrap_err();
+        if !cancel.load(Ordering::Acquire) {
+            later_entered = true;
+        }
+        assert!(!later_entered);
+        assert_eq!(saved, vec![0]);
+        assert_eq!(e.to_string(), "SYNTHETIC first publication error");
+        let failure = e.downcast_ref::<ScheduleFailure>().unwrap();
+        assert_eq!(
+            failure.joined.workers_spawned,
+            failure.joined.workers_joined
+        );
+        assert_eq!(failure.joined.committed, 1);
+        assert!(failure.cleanup_failures.is_empty());
+    }
 }

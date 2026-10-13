@@ -34,6 +34,18 @@ fn strict_pairs(args: &[String], required: &[&str], optional: &[&str]) -> Result
     Ok(())
 }
 
+fn prepare_teacher_inputs(args: &[String]) -> Result<serde_json::Value> {
+    strict_pairs(args, &["--prepare-inputs", "--input-sha256"], &[])?;
+    let bound = quoridor_data::terminal_stream::BoundJson {
+        path: argument(args, "--prepare-inputs")?.into(),
+        sha256: argument(args, "--input-sha256")?,
+    };
+    let config: quoridor_runner::teacher_pilot::depth6::InputConfig =
+        serde_json::from_value(bound.read()?)?;
+    let result = quoridor_runner::teacher_pilot::depth6::prepare_inputs(&config)?;
+    Ok(serde_json::json!({"config": bound, "result": result}))
+}
+
 fn main() {
     // Disable before dlopen/CreateEnv can initialize ORT's telemetry SDK.
     // SAFETY: entrypoint initialization, before this program starts any threads.
@@ -46,16 +58,6 @@ fn main() {
 fn execute() -> Result<()> {
     let args: Vec<_> = std::env::args().skip(1).collect();
     let command = args.first().map(String::as_str).unwrap_or("help");
-    if command == "teacher-pilot"
-        && !(args.len() == 5 && args[1] == "--experiment" && args[3] == "--experiment-sha256"
-            || args.len() == 3 && matches!(args[1].as_str(), "--config" | "--audit")
-            || args.len() == 4 && args[1] == "--config" && args[3] == "--check-config")
-    {
-        return Err(
-            "teacher-pilot accepts only the fixed config or saved audit; no fit/full/games inlet"
-                .into(),
-        );
-    }
     if args.iter().any(|a| a == "--report-mode") {
         if command != "arena" || argument(&args, "--report-mode")? != "receipt" {
             return Err("only arena report-mode receipt is supported".into());
@@ -122,7 +124,14 @@ fn execute() -> Result<()> {
                 )?)?
             );
         }
+        "teacher-pilot" if args.iter().any(|a| a == "--prepare-inputs") => {
+            println!(
+                "{}",
+                serde_json::to_string(&prepare_teacher_inputs(&args)?)?
+            );
+        }
         "teacher-pilot" if args.iter().any(|a| a == "--audit") => {
+            strict_pairs(&args, &["--audit"], &[])?;
             let output = PathBuf::from(argument(&args, "--audit")?);
             println!(
                 "{}",
@@ -130,24 +139,9 @@ fn execute() -> Result<()> {
             );
         }
         "teacher-pilot" => {
-            use sha2::{Digest, Sha256};
-            let raw = std::fs::read(argument(&args, "--config")?)?;
-            let config: quoridor_runner::teacher_pilot::PilotConfig = serde_json::from_slice(&raw)?;
-            config.validate()?;
-            let digest = format!("{:x}", Sha256::digest(&raw));
-            if args.iter().any(|a| a == "--check-config") {
-                println!(
-                    "{}",
-                    serde_json::json!({"pilot_config_sha256":digest,"valid":true,"main_volume_n":null,
-                        "fixed_D":"original-distance-a0-b8-tanh","models_loaded":0})
-                );
-                return Ok(());
-            }
-            println!(
-                "{}",
-                serde_json::to_string(&quoridor_runner::teacher_pilot_execution::run(
-                    &config, digest
-                )?)?
+            return Err(
+                "teacher-pilot requires bound --experiment, --prepare-inputs or saved --audit"
+                    .into(),
             );
         }
         "arena" if args.iter().any(|a| a == "--recover") => {
@@ -354,7 +348,7 @@ fn execute() -> Result<()> {
     Ok(())
 }
 
-const HELP: &str = "quoridor-runner arena --experiment EXPERIMENT --experiment-sha256 SHA256\nquoridor-runner strength-book --experiment EXPERIMENT --experiment-sha256 SHA256\nquoridor-runner strength-configs --experiment EXPERIMENT --experiment-sha256 SHA256\nquoridor-runner arena --config CONFIG --report-mode receipt\nquoridor-runner <selfplay|arena|benchmark|cycle> --config CONFIG\nquoridor-runner arena --audit OUTPUT_DIRECTORY\nquoridor-runner arena --recover OUTPUT_DIRECTORY\nquoridor-runner dataset <cache|inspect> --input PATH [--output PATH] [--allow-test]\nquoridor-runner dataset evaluate --input PATH --model MODEL --output PATH [--simd] [--allow-test]\nquoridor-runner model-check --model MODEL\nquoridor-runner qf1-bulk --input PREFIXES.json --output FEATURES.json\nSigma dataset import: use the separate sigma-import binary";
+const HELP: &str = "quoridor-runner teacher-pilot --prepare-inputs SETTINGS --input-sha256 SHA256\nquoridor-runner teacher-pilot --experiment EXPERIMENT --experiment-sha256 SHA256\nquoridor-runner arena --experiment EXPERIMENT --experiment-sha256 SHA256\nquoridor-runner strength-book --experiment EXPERIMENT --experiment-sha256 SHA256\nquoridor-runner strength-configs --experiment EXPERIMENT --experiment-sha256 SHA256\nquoridor-runner arena --config CONFIG --report-mode receipt\nquoridor-runner <selfplay|arena|benchmark|cycle> --config CONFIG\nquoridor-runner arena --audit OUTPUT_DIRECTORY\nquoridor-runner arena --recover OUTPUT_DIRECTORY\nquoridor-runner dataset <cache|inspect> --input PATH [--output PATH] [--allow-test]\nquoridor-runner dataset evaluate --input PATH --model MODEL --output PATH [--simd] [--allow-test]\nquoridor-runner model-check --model MODEL\nquoridor-runner qf1-bulk --input PREFIXES.json --output FEATURES.json\nSigma dataset import: use the separate sigma-import binary";
 
 #[cfg(test)]
 mod tests {
@@ -418,5 +412,59 @@ mod no_cost_prediction_tests {
         }
         let args = ["arena", "--config", "c"].map(String::from);
         assert!(strict_pairs(&args, &["--config"], &["--report-mode"]).is_ok());
+    }
+}
+
+#[cfg(test)]
+mod configured_teacher_input_tests {
+    use super::*;
+
+    #[test]
+    fn configured_input_entry_binds_settings_before_global_schedule_publication() {
+        struct Scratch(PathBuf);
+        impl Drop for Scratch {
+            fn drop(&mut self) {
+                let _ = std::fs::remove_dir_all(&self.0);
+            }
+        }
+        let scratch = Scratch(std::env::temp_dir().join(format!(
+                "configured-input-port-{}-{}",
+                std::process::id(),
+                std::time::SystemTime::now()
+                    .duration_since(std::time::UNIX_EPOCH)
+                    .unwrap()
+                    .as_nanos()
+            )));
+        std::fs::create_dir(&scratch.0).unwrap();
+        let output = scratch.0.join("inputs");
+        let path = scratch.0.join("settings.json");
+        let config = serde_json::json!({"families":3,"prefix_seed":17,"prefix_lengths":[4,2],"split_seed":23,"excluded_books":[],"output":output});
+        std::fs::write(&path, serde_json::to_vec(&config).unwrap()).unwrap();
+        let mut args = vec![
+            "teacher-pilot".into(),
+            "--prepare-inputs".into(),
+            path.to_string_lossy().into_owned(),
+            "--input-sha256".into(),
+            "0".repeat(64),
+        ];
+        assert!(prepare_teacher_inputs(&args).is_err());
+        assert!(!output.exists());
+        args[4] = quoridor_data::file_sha(&path).unwrap();
+        let mut unknown = args.clone();
+        unknown.extend(["--config".into(), "obsolete".into()]);
+        assert!(prepare_teacher_inputs(&unknown).is_err());
+        assert!(!output.exists());
+        let actual = prepare_teacher_inputs(&args).unwrap();
+        assert_eq!(actual["result"]["families"], 3);
+        assert_eq!(actual["result"]["search_calls"], 0);
+        assert_eq!(actual["result"]["outcomes_selected"], false);
+        let schedule: quoridor_data::terminal_stream::BoundJson =
+            serde_json::from_value(actual["result"]["schedule"].clone()).unwrap();
+        let rows = schedule.read().unwrap();
+        assert_eq!(rows["scheduled"].as_array().unwrap().len(), 3);
+        let partition: quoridor_data::terminal_stream::BoundJson =
+            serde_json::from_value(actual["result"]["partition"].clone()).unwrap();
+        assert!(partition.read().is_ok());
+        assert!(prepare_teacher_inputs(&args).is_err());
     }
 }

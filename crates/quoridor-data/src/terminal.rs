@@ -290,18 +290,63 @@ pub fn partition_families(planned: &[(String, Vec<u16>)], seed: u64) -> Result<F
             .collect::<Result<Vec<_>>>()?;
         canonical.push(std::cmp::min(prefix.clone(), reflected));
     }
-    // Prefix-of-another series also shares one pre-outcome family, transitively.
-    let families: Vec<_> = canonical
+    // Canonical prefix extensions and equal LR endpoint geometry share one
+    // pre-output family, transitively. Full histories remain in their source rows.
+    let endpoints = planned
         .iter()
-        .map(|prefix| {
-            let representative = canonical
+        .map(|(_, prefix)| -> Result<String> {
+            let reflected = prefix
                 .iter()
-                .filter(|other| prefix.starts_with(other))
-                .min_by_key(|v| v.len())
-                .unwrap();
-            hex_digest(&serde_json::to_vec(representative).expect("integer prefix serialization"))
+                .map(|v| reflect_action(*v))
+                .collect::<Result<Vec<_>>>()?;
+            let a = SigmaContext::from_prefix(prefix)?;
+            let b = SigmaContext::from_prefix(&reflected)?;
+            Ok(std::cmp::min(
+                quoridor_core::research::HistoryKey::from(a.position()).history_string(),
+                quoridor_core::research::HistoryKey::from(b.position()).history_string(),
+            ))
         })
-        .collect();
+        .collect::<Result<Vec<_>>>()?;
+    let mut parent: Vec<_> = (0..canonical.len()).collect();
+    fn root(parent: &mut [usize], mut i: usize) -> usize {
+        while parent[i] != i {
+            parent[i] = parent[parent[i]];
+            i = parent[i];
+        }
+        i
+    }
+    for i in 0..canonical.len() {
+        for j in 0..i {
+            if canonical[i].starts_with(&canonical[j])
+                || canonical[j].starts_with(&canonical[i])
+                || endpoints[i] == endpoints[j]
+            {
+                let a = root(&mut parent, i);
+                let b = root(&mut parent, j);
+                parent[a.max(b)] = a.min(b);
+            }
+        }
+    }
+    let mut representatives = BTreeMap::new();
+    for (i, prefix) in canonical.iter().enumerate() {
+        let key = root(&mut parent, i);
+        representatives
+            .entry(key)
+            .and_modify(|p: &mut Vec<u16>| {
+                if prefix < p {
+                    *p = prefix.clone();
+                }
+            })
+            .or_insert_with(|| prefix.clone());
+    }
+    let families = (0..canonical.len())
+        .map(|i| {
+            hex_digest(
+                &serde_json::to_vec(&representatives[&root(&mut parent, i)])
+                    .expect("integer prefix serialization"),
+            )
+        })
+        .collect::<Vec<_>>();
     let unique: BTreeSet<_> = families.iter().cloned().collect();
     let mut ranked: Vec<_> = unique.into_iter().collect();
     ranked.sort_by_key(|family| {
@@ -340,4 +385,36 @@ pub fn partition_families(planned: &[(String, Vec<u16>)], seed: u64) -> Result<F
             })
             .collect(),
     })
+}
+
+#[cfg(test)]
+mod configured_family_tests {
+    use super::*;
+    #[test]
+    fn configured_families_group_lr_extensions_and_endpoint_collisions_before_split() {
+        let a = vec![13, 75, 14, 74];
+        let b = vec![5, 75, 14, 74]; // Same endpoint, a different complete history.
+        let reflected = a
+            .iter()
+            .map(|v| reflect_action(*v).unwrap())
+            .collect::<Vec<_>>();
+        let planned = vec![
+            ("a".into(), a),
+            ("b".into(), b),
+            ("lr".into(), reflected),
+            ("extension-parent".into(), vec![13, 75]),
+        ];
+        let p = partition_families(&planned, 19).unwrap();
+        assert_eq!(p.assignments.len(), 4);
+        assert!(
+            p.assignments
+                .iter()
+                .all(|r| r.family == p.assignments[0].family && r.split == p.assignments[0].split)
+        );
+        assert_ne!(p.assignments[0].prefix, p.assignments[1].prefix);
+        assert_eq!(
+            serde_json::to_value(&p).unwrap(),
+            serde_json::to_value(partition_families(&planned, 19).unwrap()).unwrap()
+        );
+    }
 }

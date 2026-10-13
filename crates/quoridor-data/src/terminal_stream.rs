@@ -16,8 +16,7 @@ use std::{
     path::{Path, PathBuf},
 };
 
-pub const STREAM_SCHEMA: &str = "quoridor-fixed-d-dual-teacher-pilot-v1";
-const EVALUATOR: &str = "original-distance-a0-b8-tanh";
+const EVALUATOR: &str = crate::common_corpus::EVALUATOR;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -26,7 +25,7 @@ pub struct BoundJson {
     pub sha256: String,
 }
 impl BoundJson {
-    pub(crate) fn read(&self) -> Result<Value> {
+    pub fn read(&self) -> Result<Value> {
         valid_sha(&self.sha256)?;
         if fs::metadata(&self.path)?.len() > 64 * 1024 * 1024 {
             return Err("oversized control".into());
@@ -38,25 +37,16 @@ impl BoundJson {
         Ok(serde_json::from_slice(&raw)?)
     }
 }
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(deny_unknown_fields)]
-pub struct IntakeBinding {
-    pub schema: String,
-    /// synthetic-fixture, pilot-reference, or explicit full-volume.
-    pub scope: String,
-    pub human_quantity_n: Option<u64>,
-    pub stream: BoundJson,
-    pub config: BoundJson,
-    pub sources: BoundJson,
-    pub schedule: BoundJson,
-    pub requests_sha256: String,
-    /// Logical uncompressed byte allowance; actual gzip bytes are separately priced.
-    pub max_stream_bytes: u64,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub max_compressed_bytes: Option<u64>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub stream_content: Option<crate::lossless_jsonl::Content>,
-    pub max_line_bytes: usize,
+/// Derived from the actual source header and encoder sidecar, not an admission authority.
+struct StreamInput {
+    stream: BoundJson,
+    config: BoundJson,
+    sources: BoundJson,
+    schedule: BoundJson,
+    requests_sha256: String,
+    max_stream_bytes: u64,
+    max_line_bytes: usize,
+    content: crate::lossless_jsonl::Content,
 }
 fn valid_sha(value: &str) -> Result<()> {
     if value.len() != 64
@@ -127,10 +117,8 @@ struct Header {
     generator_version: String,
     config: Value,
     config_sha256: String,
+    config_ref: BoundJson,
     executable_sha256: String,
-    // Opaque provenance of immutable saved streams; Cargo owns current build dependencies.
-    #[serde(default)]
-    compiled_sources: BTreeMap<String, String>,
     evaluator: String,
     scheduled: Vec<Slot>,
     family_partition: FamilyPartition,
@@ -226,16 +214,11 @@ fn canonical(prefix: &[u16]) -> Result<Vec<u16>> {
 }
 fn validate_header(
     h: &Header,
-    b: &IntakeBinding,
+    b: &StreamInput,
     requests: &Value,
     requests_sha: &str,
 ) -> Result<()> {
-    if h.schema
-        != if b.scope == "common-corpus" {
-            crate::common_corpus::STREAM_SCHEMA
-        } else {
-            STREAM_SCHEMA
-        }
+    if h.schema != crate::common_corpus::STREAM_SCHEMA
         || h.evaluator != EVALUATOR
         || h.config != b.config.read()?
         || h.config_sha256 != b.config.sha256
@@ -260,56 +243,24 @@ fn validate_header(
         return Err("header/request/fixedD configuration binding mismatch".into());
     }
     SearchPolicy::from_config(&h.config)?;
-    let common = if b.scope == "common-corpus" {
-        Some(common_config(&h.config)?)
-    } else {
-        None
-    };
-    if let Some(common) = &common {
-        if h.generator_version != crate::common_corpus::VERSION
-            || h.config["main_volume_n"].as_u64() != Some(common.families)
-            || b.human_quantity_n != Some(common.families)
-            || common.families != h.scheduled.len() as u64
-            || h.config["prefix_seed"].as_u64() != Some(common.prefix_seed)
-            || requests["requested"] != serde_json::to_value(common.requests()?)?
-        {
-            return Err("selected new-family request/depth/version/quantity binding".into());
-        }
-        for (slot, (id, length)) in h.scheduled.iter().zip(common.requests()?) {
-            if slot.request_id != id || slot.requested_prefix_length != length {
-                return Err("new-family fixed request order differs".into());
-            }
-        }
-    }
-    if b.scope != "synthetic-fixture" {
-        refuse_synthetic(&h.config, &b.sources.read()?)?;
-    }
-    if b.scope == "full-volume" {
-        if h.config["main_volume_n"].as_u64() != b.human_quantity_n
-            || b.human_quantity_n != Some(h.scheduled.len() as u64)
-        {
-            return Err("full schedule N mismatch".into());
-        }
-    } else if b.scope != "common-corpus" && !h.config["main_volume_n"].is_null() {
-        return Err("reference/fixture cannot declare full N".into());
-    }
-    if b.scope == "synthetic-fixture" && h.resource_admission["synthetic_fixture"] != true {
-        return Err("fixture provenance marker required".into());
-    }
-    if b.scope == "pilot-reference"
-        && (h.scheduled.len() != 64 || number(&h.config, "prefix_seed")? != 20261008)
+    let common = common_config(&h.config)?;
+    common.validate_inputs()?;
+    if h.generator_version != crate::common_corpus::VERSION
+        || h.config["prefix_seed"].as_u64() != Some(common.prefix_seed)
+        || requests["requested"] != serde_json::to_value(common.requests()?)?
+        || h.config_ref.path != b.config.path
+        || h.config_ref.sha256 != b.config.sha256
     {
-        return Err("pilot reference scope".into());
+        return Err("configured request/depth/version/config binding".into());
+    }
+    for (slot, (id, length)) in h.scheduled.iter().zip(common.requests()?) {
+        if slot.request_id != id || slot.requested_prefix_length != length {
+            return Err("global batch request order differs".into());
+        }
     }
     valid_sha(&h.executable_sha256)?;
-    for (path, sha) in &h.compiled_sources {
-        if path.is_empty() {
-            return Err("empty source identity".into());
-        }
-        valid_sha(sha)?;
-    }
     let source = json!({"schema":h.schema,"generator_version":h.generator_version,
-        "executable_sha256":h.executable_sha256,"compiled_sources":h.compiled_sources,
+        "executable_sha256":h.executable_sha256,
         "evaluator":h.evaluator,"resource_admission":h.resource_admission});
     if source != b.sources.read()? {
         return Err("generator/source/resource provenance mismatch".into());
@@ -321,14 +272,16 @@ fn validate_header(
     {
         return Err("complete schedule freeze mismatch".into());
     }
-    // A full input manifest decides opened pilot membership before new outcomes.
-    if b.scope == "full-volume" {
-        validate_inclusion(&schedule, h)?;
+    let global: Vec<Slot> = serde_json::from_value(common.schedule.read()?["scheduled"].clone())?;
+    if serde_json::to_value(&global[common.batch_range()?])? != serde_json::to_value(&h.scheduled)?
+        || common.partition.read()? != serde_json::to_value(&h.family_partition)?
+    {
+        return Err("actual global schedule/partition batch correspondence".into());
     }
     let mut seen = BTreeSet::new();
     let mut ids = BTreeSet::new();
     let mut planned = Vec::new();
-    for (i, s) in h.scheduled.iter().enumerate() {
+    for (i, s) in global.iter().enumerate() {
         if s.game != i
             || s.request_id.is_empty()
             || !ids.insert(&s.request_id)
@@ -337,26 +290,24 @@ fn validate_header(
         {
             return Err("schedule identities/attempt census".into());
         }
-        if common.is_some()
-            && s.scheduled_failure
-                .as_deref()
-                .is_some_and(|e| e.starts_with("prefix_error:"))
+        let opaque_failure = s
+            .scheduled_failure
+            .as_deref()
+            .is_some_and(|e| e.starts_with("prefix_error:"));
+        if opaque_failure
+            && (s.prefix.is_some() || s.root.is_some() || s.canonical_prefix.is_some())
         {
-            if s.prefix.is_some()
-                || s.root.is_some()
-                || s.canonical_prefix.is_some()
-                || s.attempts.len() != 1
-                || s.attempts[0].attempt != 0
-                || !s.attempts[0].prefix.is_empty()
-                || s.attempts[0].rejection != s.scheduled_failure
-            {
-                return Err("opaque prefix failure cannot create input or labels".into());
-            }
-            continue;
+            return Err("opaque prefix failure cannot create input or labels".into());
         }
         for (j, a) in s.attempts.iter().enumerate() {
             if a.attempt != j {
                 return Err("attempt chronology gap".into());
+            }
+            if opaque_failure && j + 1 == s.attempts.len() {
+                if !a.prefix.is_empty() || a.rejection != s.scheduled_failure {
+                    return Err("opaque failed attempt chronology/cause differs".into());
+                }
+                continue;
             }
             let c = SigmaContext::from_prefix_with_rules(&a.prefix, Ruleset::Standard2pThreefold)?;
             let key = canonical(&a.prefix)?;
@@ -388,6 +339,7 @@ fn validate_header(
             }
         }
         if s.prefix.is_none()
+            && !opaque_failure
             && (s.attempts.len() != 32
                 || s.root.is_some()
                 || s.canonical_prefix.is_some()
@@ -399,14 +351,10 @@ fn validate_header(
             return Err("acceptance census".into());
         }
     }
-    if serde_json::to_value(partition_families(
-        &planned,
-        common
-            .as_ref()
-            .map_or(number(&h.config, "prefix_seed")?, |c| c.split_seed),
-    )?)? != serde_json::to_value(&h.family_partition)?
+    if serde_json::to_value(partition_families(&planned, common.split_seed)?)?
+        != serde_json::to_value(&h.family_partition)?
     {
-        return Err("input-only exact/reflected family partition mismatch".into());
+        return Err("global input-only family partition mismatch".into());
     }
     let lengths = h
         .scheduled
@@ -418,29 +366,15 @@ fn validate_header(
     }
     Ok(())
 }
-fn scientific_digest(game: &Game) -> Result<String> {
-    let mut value = serde_json::to_value(game)?;
-    value.as_object_mut().ok_or("game object")?.remove("origin");
-    value.as_object_mut().ok_or("game object")?.remove("family");
-    for row in value["rows"].as_array_mut().ok_or("rows")? {
-        let teacher = row["teacher"].as_object_mut().ok_or("teacher")?;
-        teacher.remove("family");
-        teacher.remove("split");
-    }
-    Ok(hex_digest(&serde_json::to_vec(&value)?))
-}
-
 fn common_config(config: &Value) -> Result<crate::common_corpus::Config> {
     let common: crate::common_corpus::Config =
         serde_json::from_value(config["common_study"].clone())?;
-    common.validate_selected()?;
-    if config["phase"] != "common_corpus"
-        || number(config, "depth")? != 6
+    common.validate_shape()?;
+    if number(config, "depth")? != 6
         || number(config, "max_nodes")? == 0
-        || config["main_volume_n"].as_u64() != Some(common.families)
-        || number(config, "planned_games")? != common.families
+        || number(config, "planned_games")? != common.batch_count
     {
-        return Err("strict selected common-corpus D6 phase required".into());
+        return Err("strict configured common-corpus D6 required".into());
     }
     Ok(common)
 }
@@ -560,17 +494,14 @@ impl SearchPolicy {
             Some(v) => Some(v.as_u64().filter(|n| *n > 0).ok_or("positive node limit")?),
             None => return Err("explicit node policy required".into()),
         };
-        let strict_completed_depth = match config.get("strict_completed_depth") {
-            None => config["phase"] == "common_corpus", // New common phase always requires exact completed6.
-            Some(v) => v.as_bool().ok_or("explicit strict-depth boolean")?,
-        };
-        if config["phase"] == "common_corpus"
-            && (!strict_completed_depth || depth != 6 || max_nodes.is_none())
+        let strict_completed_depth = true;
+        if depth != 6
+            || max_nodes.is_none()
+            || config
+                .get("strict_completed_depth")
+                .is_some_and(|v| v != true)
         {
-            return Err("common phase cannot weaken completed6/node policy".into());
-        }
-        if depth == 0 {
-            return Err("positive completed-depth policy".into());
+            return Err("common corpus cannot weaken completed6/node policy".into());
         }
         Ok(Self {
             depth,
@@ -578,162 +509,6 @@ impl SearchPolicy {
             strict_completed_depth,
         })
     }
-}
-
-fn refuse_synthetic(config: &Value, source: &Value) -> Result<()> {
-    let marker = source["resource_admission"].get("synthetic_fixture");
-    let synthetic = |value: &str| value.contains("synthetic") || value.contains("fixture");
-    if marker.is_some_and(|v| v != false)
-        || source["generator_version"].as_str().is_none_or(synthetic)
-        || config["phase"].as_str().is_none_or(synthetic)
-    {
-        return Err("synthetic provenance cannot be authoritative reference/full volume".into());
-    }
-    Ok(())
-}
-
-fn scientific_config(config: &Value) -> Result<Value> {
-    let mut config = config
-        .as_object()
-        .ok_or("scientific config object")?
-        .clone();
-    // Only explicit quantity/input scheduling and operational storage/resources vary.
-    // Every unlisted key, including depth/node/strictness/rules/evaluator, is compared.
-    for key in [
-        "phase",
-        "main_volume_n",
-        "planned_games",
-        "prefix_seed",
-        "run_id",
-        "output",
-        "cpu_core",
-        "host_ram_reserve",
-        "max_memory_bytes",
-        "max_output_bytes",
-    ] {
-        config.remove(key);
-    }
-    Ok(Value::Object(config))
-}
-
-fn validate_reference_policy(reference: &Value, header: &Header) -> Result<()> {
-    let mut old = Vec::new();
-    for key in ["config", "sources", "original_family_partition"] {
-        let descriptor: BoundJson = serde_json::from_value(reference[key].clone())?;
-        let sha_key = format!("{key}_sha256");
-        if reference[&sha_key] != descriptor.sha256 {
-            return Err("opened-pilot descriptor/identity mismatch".into());
-        }
-        old.push(descriptor.read()?);
-    }
-    let config = &old[0];
-    let source = &old[1];
-    refuse_synthetic(config, source)?;
-    if scientific_config(config)? != scientific_config(&header.config)?
-        || source["schema"] != header.schema
-        || source["generator_version"] != header.generator_version
-        || source["evaluator"] != header.evaluator
-        || source["executable_sha256"] != header.executable_sha256
-    {
-        return Err("opened-pilot generator/source/scientific policy mismatch".into());
-    }
-    // The old partition is read only as a provenance proof, never inherited.
-    let _: FamilyPartition = serde_json::from_value(old[2].clone())?;
-    Ok(())
-}
-
-fn inclusion_record(schedule: &Value) -> Result<Option<(BoundJson, Value)>> {
-    let inclusion = &schedule["opened_pilot_inclusion"];
-    if inclusion == "excluded" {
-        return Ok(None);
-    }
-    if inclusion["mode"] != "explicit-included-repartition" {
-        return Err("explicit opened-pilot schedule decision required".into());
-    }
-    let descriptor: BoundJson = serde_json::from_value(inclusion["reference"].clone())?;
-    let reference = descriptor.read()?;
-    if reference["scope"] != "opened-pilot-reference"
-        || reference["repartition_before_outcomes"] != true
-    {
-        return Err("opened-pilot source/repartition provenance required".into());
-    }
-    for name in [
-        "stream_sha256",
-        "config_sha256",
-        "sources_sha256",
-        "original_family_partition_sha256",
-    ] {
-        valid_sha(reference[name].as_str().ok_or("pilot reference SHA")?)?;
-    }
-    Ok(Some((descriptor, reference)))
-}
-fn validate_inclusion(schedule: &Value, header: &Header) -> Result<()> {
-    if let Some((_, reference)) = inclusion_record(schedule)? {
-        validate_reference_policy(&reference, header)?;
-        let full_sha = hex_digest(&serde_json::to_vec(&serde_json::to_value(
-            &header.family_partition,
-        )?)?);
-        if reference["full_family_partition_sha256"] != full_sha {
-            return Err("full repartition substitution".into());
-        }
-        let records = reference["games"]
-            .as_object()
-            .ok_or("explicit reused request census")?;
-        if records.is_empty() {
-            return Err("empty opened-pilot reuse is not inclusion".into());
-        }
-        for (id, old) in records {
-            let slot = header
-                .scheduled
-                .iter()
-                .find(|s| s.request_id == *id)
-                .ok_or("reused request absent from full schedule")?;
-            if serde_json::to_value(&slot.prefix)? != old["initial_prefix"] {
-                return Err("reused input prefix changed".into());
-            }
-            valid_sha(
-                old["original_game_record_sha256"]
-                    .as_str()
-                    .ok_or("old game record SHA")?,
-            )?;
-            valid_sha(
-                old["scientific_sha256"]
-                    .as_str()
-                    .ok_or("old scientific record SHA")?,
-            )?;
-        }
-    }
-    Ok(())
-}
-fn validate_origin(game: &Game, scope: &str, origins: &Option<(BoundJson, Value)>) -> Result<()> {
-    if scope != "full-volume" {
-        if game.origin.is_some() {
-            return Err("unexpected reference/synthetic origin override".into());
-        }
-        return Ok(());
-    }
-    if let Some((descriptor, reference)) = origins
-        && let Some(old) = reference["games"]
-            .as_object()
-            .ok_or("reused records")?
-            .get(&game.request_id)
-    {
-        let expected = json!({"reference_sha256":descriptor.sha256,
-                "original_game_record_sha256":old["original_game_record_sha256"],"scientific_sha256":old["scientific_sha256"]});
-        if game.origin.as_ref() != Some(&expected)
-            || scientific_digest(game)? != old["scientific_sha256"]
-        {
-            return Err(
-                "opened pilot scientific data changed beyond explicit family/split repartition"
-                    .into(),
-            );
-        }
-        return Ok(());
-    }
-    if game.origin.is_some() {
-        return Err("unplanned opened-pilot addition".into());
-    }
-    Ok(())
 }
 
 fn validate_search(s: &Search, c: &SigmaContext, policy: &SearchPolicy) -> Result<u16> {
@@ -943,21 +718,8 @@ fn validate_game(
     }
     Ok(())
 }
-fn scan(input: &Path, b: &IntakeBinding, writer: &mut Writer) -> Result<Value> {
-    let origins = if b.scope == "full-volume" {
-        inclusion_record(&b.schedule.read()?)?
-    } else {
-        None
-    };
-    let source_reader: Box<dyn Read> = if b.scope == "common-corpus" {
-        Box::new(crate::lossless_jsonl::Reader::open(
-            b.stream_content
-                .as_ref()
-                .ok_or("compressed source content required")?,
-        )?)
-    } else {
-        Box::new(File::open(input)?)
-    };
+fn scan(input: &Path, b: &StreamInput, writer: &mut Writer) -> Result<Value> {
+    let source_reader = crate::lossless_jsonl::Reader::open(&b.content)?;
     let mut reader = BufReader::new(source_reader);
     let mut raw = Vec::new();
     let mut header = None;
@@ -970,26 +732,6 @@ fn scan(input: &Path, b: &IntakeBinding, writer: &mut Writer) -> Result<Value> {
     let mut common_outcomes = Vec::new();
     let mut positions = BTreeSet::new();
     let mut row_ids = BTreeSet::new();
-    let common = b.scope == "common-corpus";
-    let games_name = "stream-games.jsonl";
-    let games_path = writer.output_path().join(games_name);
-    let mut games_file = if common {
-        None
-    } else {
-        Some(
-            OpenOptions::new()
-                .create_new(true)
-                .write(true)
-                .open(&games_path)?,
-        )
-    };
-    let mut append_game = |value: &Value| -> Result<()> {
-        if let Some(w) = &mut games_file {
-            serde_json::to_writer(&mut *w, value)?;
-            w.write_all(b"\n")?;
-        }
-        Ok(())
-    };
     loop {
         raw.clear();
         reader
@@ -1032,7 +774,7 @@ fn scan(input: &Path, b: &IntakeBinding, writer: &mut Writer) -> Result<Value> {
                 let h: Header = serde_json::from_value(event["record"].clone())?;
                 validate_header(&h, b, requests.as_ref().ok_or("requests")?, &request_sha)?;
                 census.scheduled = h.scheduled.len();
-                census.full_volume_n = b.human_quantity_n;
+                census.full_volume_n = Some(common_config(&h.config)?.families);
                 for s in &h.scheduled {
                     increment(
                         &mut census.planned_prefix_lengths,
@@ -1042,7 +784,7 @@ fn scan(input: &Path, b: &IntakeBinding, writer: &mut Writer) -> Result<Value> {
                 header = Some(h);
             }
             Some("game") if header.is_some() => {
-                let g: Game = if b.scope == "common-corpus" {
+                let g: Game = {
                     let record: IndexedOutcome = serde_json::from_value(event["record"].clone())?;
                     if record.index != census.recorded || record.index >= census.scheduled {
                         return Err("common indexed planned order differs".into());
@@ -1069,10 +811,10 @@ fn scan(input: &Path, b: &IntakeBinding, writer: &mut Writer) -> Result<Value> {
                             continue;
                         }
                     }
-                } else {
-                    serde_json::from_value(event["record"].clone())?
                 };
-                validate_origin(&g, &b.scope, &origins)?;
+                if g.origin.is_some() {
+                    return Err("unexpected game origin override".into());
+                }
                 if g.rows.len() > 200 {
                     return Err("game row bound".into());
                 }
@@ -1085,27 +827,16 @@ fn scan(input: &Path, b: &IntakeBinding, writer: &mut Writer) -> Result<Value> {
                     writer,
                     (&hex_digest(&raw), total_read - raw.len() as u64),
                 )?;
-                if !common {
-                    let game_facts = json!({"game":g.game,"request_id":g.request_id,"family":g.family,
-                        "initial_prefix":g.initial_prefix,"final_prefix":g.final_prefix,"final_context":g.final_context,
-                        "provenance":g.provenance,"termination":g.termination,"failed_search":g.failed_search,
-                        "attempted_search_calls":g.attempted_search_calls,"wall_ns":g.wall_ns,
-                        "row_ids":g.rows.iter().map(|r|&r.teacher.id).collect::<Vec<_>>(),
-                        "source_record_sha256":hex_digest(&raw),"origin":g.origin,"scientific_sha256":scientific_digest(&g)?});
-                    append_game(&game_facts)?;
-                }
             }
             Some("footer") if header.is_some() => {
                 let supplied: Census = serde_json::from_value(event["record"].clone())?;
                 census.distinct_positions = positions.len();
                 census.committed_stream_bytes_before_footer = before_footer;
                 census.native_whole_ns = supplied.native_whole_ns;
-                if b.scope == "common-corpus" {
-                    census.depth6 = Some(common_depth_census(
-                        header.as_ref().ok_or("header")?,
-                        &common_outcomes,
-                    )?);
-                }
+                census.depth6 = Some(common_depth_census(
+                    header.as_ref().ok_or("header")?,
+                    &common_outcomes,
+                )?);
                 if census.recorded != census.scheduled
                     || serde_json::to_value(&census)? != serde_json::to_value(&supplied)?
                 {
@@ -1124,34 +855,16 @@ fn scan(input: &Path, b: &IntakeBinding, writer: &mut Writer) -> Result<Value> {
     if !footer {
         return Err("missing footer: partial stream is not admitted".into());
     }
-    if fs::metadata(input)?.len()
-        > if common {
-            b.max_compressed_bytes.ok_or("compressed cap")?
-        } else {
-            b.max_stream_bytes
-        }
+    if fs::metadata(input)?.len() != b.content.compressed.bytes
         || file_sha(input)? != b.stream.sha256
+        || total_read != b.content.raw_bytes
     {
         return Err("source stream changed during intake".into());
     }
-    drop(append_game);
-    if let Some(f) = games_file.take() {
-        f.sync_all()?;
-        drop(f);
-    }
     let h = header.ok_or("missing header")?;
-    let header = if common {
-        json!({"schema":h.schema,"generator_version":h.generator_version,"config_sha256":h.config_sha256,
-            "compiled_sources":h.compiled_sources,"evaluator":h.evaluator,"executable_sha256":h.executable_sha256,
-            "family_partition_sha256":hex_digest(&serde_json::to_vec(&h.family_partition)?),"planned":h.scheduled.len(),
-            "detailed_schedule_history":"canonical source requests/header; input schedule bound by reference"})
-    } else {
-        serde_json::to_value(h)?
-    };
-    Ok(
-        json!({"census":census,"requests":if common { Value::Null } else { requests.unwrap_or(Value::Null) },"header":header,
-        "games_file":if common { Value::Null } else { json!({"file":games_name,"sha256":file_sha(&games_path)?}) }}),
-    )
+    Ok(json!({"census":census,"config":h.config_ref,
+        "batch_start":common_config(&h.config)?.batch_start,
+        "batch_count":h.scheduled.len()}))
 }
 #[derive(Debug)]
 struct IntakeFailure {
@@ -1258,131 +971,169 @@ fn failed_intake(
 }
 
 /// Explicit bound control entry; only the new output namespace is owned.
+fn open_input(input: &Path) -> Result<StreamInput> {
+    if !input.is_absolute()
+        || fs::symlink_metadata(input)?.file_type().is_symlink()
+        || !fs::metadata(input)?.is_file()
+    {
+        return Err("regular absolute input stream required".into());
+    }
+    let parent = input.parent().ok_or("stream parent")?;
+    if parent.join("generation-failure.json").exists() {
+        return Err("failed generation is not complete data".into());
+    }
+    let content: crate::lossless_jsonl::Content =
+        serde_json::from_slice(&fs::read(parent.join("stream-content.json"))?)?;
+    if content.compressed.path != input || file_sha(input)? != content.compressed.sha256 {
+        return Err("actual encoder content/source identity differs".into());
+    }
+    let mut reader = BufReader::new(crate::lossless_jsonl::Reader::open(&content)?);
+    let mut line = String::new();
+    reader
+        .by_ref()
+        .take(16 * 1024 * 1024 + 2)
+        .read_line(&mut line)?;
+    let requests: Value = serde_json::from_str(&line)?;
+    line.clear();
+    reader
+        .by_ref()
+        .take(16 * 1024 * 1024 + 2)
+        .read_line(&mut line)?;
+    let value: Value = serde_json::from_str(&line)?;
+    if value["type"] != "header" || requests["type"] != "requests" {
+        return Err("actual requests/header required".into());
+    }
+    let h: Header = serde_json::from_value(value["record"].clone())?;
+    let control = |name: &str| -> Result<BoundJson> {
+        let path = parent.join(name);
+        Ok(BoundJson {
+            sha256: file_sha(&path)?,
+            path,
+        })
+    };
+    let schedule = control("schedule.json")?;
+    let requests_sha256 = schedule.read()?["requests_sha256"]
+        .as_str()
+        .ok_or("requests SHA")?
+        .to_owned();
+    valid_sha(&requests_sha256)?;
+    Ok(StreamInput {
+        stream: BoundJson {
+            path: input.into(),
+            sha256: content.compressed.sha256.clone(),
+        },
+        config: h.config_ref,
+        sources: control("sources.json")?,
+        schedule,
+        requests_sha256,
+        max_stream_bytes: content.raw_bytes,
+        max_line_bytes: 16 * 1024 * 1024,
+        content,
+    })
+}
+
+/// Materialize actual complete streams in their original global slice order.
 pub fn write_cache(
-    input: &Path,
+    inputs: &[PathBuf],
     output: &Path,
-    binding_path: &Path,
-    binding_sha: &str,
+    binding: Option<&BoundJson>,
 ) -> Result<TensorCache> {
-    let control = BoundJson {
-        path: binding_path.into(),
-        sha256: binding_sha.into(),
-    };
-    let b: IntakeBinding = serde_json::from_value(control.read()?)?;
-    if b.schema != "quoridor-terminal-stream-intake-v1"
-        || !matches!(
-            b.scope.as_str(),
-            "synthetic-fixture" | "pilot-reference" | "full-volume" | "common-corpus"
-        )
-    {
-        return Err("explicit intake scope".into());
+    if inputs.is_empty() || !output.is_absolute() {
+        return Err("ordered inputs/fresh absolute output required".into());
     }
-    // Quantity refusal precedes every non-control source byte and output.
-    if matches!(b.scope.as_str(), "full-volume" | "common-corpus")
-        && b.human_quantity_n.is_none_or(|n| n == 0)
-    {
-        return Err("human full N is unset".into());
-    }
-    if !matches!(b.scope.as_str(), "full-volume" | "common-corpus") && b.human_quantity_n.is_some()
-    {
-        return Err("reference scope cannot select N".into());
-    }
-    let config = b.config.read()?;
-    let common = if b.scope == "common-corpus" {
-        let common = common_config(&config)?;
-        if b.human_quantity_n != Some(common.families) {
-            return Err("selected common N differs".into());
+    let mut unique = BTreeSet::new();
+    let mut sources = Vec::new();
+    let mut common: Option<crate::common_corpus::Config> = None;
+    for input in inputs {
+        if !unique.insert(input.clone()) {
+            return Err("repeated input stream".into());
         }
-        Some(common)
-    } else {
-        None
-    };
-    let sources = b.sources.read()?;
-    if b.scope != "synthetic-fixture" {
-        refuse_synthetic(&config, &sources)?;
-    }
-    if b.max_line_bytes == 0
-        || b.max_line_bytes > 64 * 1024 * 1024
-        || b.max_stream_bytes == 0
-        || fs::canonicalize(input)? != fs::canonicalize(&b.stream.path)?
-    {
-        return Err("explicit input/line capacity".into());
-    }
-    valid_sha(&b.stream.sha256)?;
-    valid_sha(&b.requests_sha256)?;
-    if b.scope == "common-corpus" {
-        let c = b
-            .stream_content
-            .as_ref()
-            .ok_or("actual compressed source content required")?;
-        let cap = b
-            .max_compressed_bytes
-            .filter(|n| *n > 0)
-            .ok_or("explicit compressed byte allowance")?;
-        if c.compressed.path != b.stream.path
-            || c.compressed.sha256 != b.stream.sha256
-            || c.raw_bytes > b.max_stream_bytes
-            || c.compressed.bytes > cap
-        {
-            return Err("canonical compressed FileRef/raw identity/allowances differ".into());
-        }
-    }
-    if fs::metadata(input)?.len()
-        > if b.scope == "common-corpus" {
-            b.max_compressed_bytes.ok_or("compressed cap")?
+        let source = open_input(input)?;
+        let cfg = common_config(&source.config.read()?)?;
+        cfg.validate_inputs()?;
+        if let Some(total) = &mut common {
+            let mut expected = total.clone();
+            expected.batch_start = cfg.batch_start;
+            expected.batch_count = cfg.batch_count;
+            if serde_json::to_value(&expected)? != serde_json::to_value(&cfg)?
+                || cfg.batch_start != total.batch_start + total.batch_count
+            {
+                return Err("global settings differ or batch slices overlap/gap/order".into());
+            }
+            total.batch_count = total
+                .batch_count
+                .checked_add(cfg.batch_count)
+                .ok_or("batch sum")?;
         } else {
-            b.max_stream_bytes
+            common = Some(cfg);
         }
-        || file_sha(input)? != b.stream.sha256
-    {
-        return Err("stream byte/hash admission".into());
+        sources.push(source);
     }
-    b.schedule.read()?;
-    fs::create_dir(output)?; // Atomic ownership reservation; never overwrite an existing output.
+    let common = common.ok_or("common config")?;
+    common.validate_shape()?;
+    let input_binding = binding.map(BoundJson::read).transpose()?;
+    let scale = input_binding
+        .as_ref()
+        .map(|v| -> Result<Value> {
+            let scale = v["model_scale_authority"].clone();
+            if scale.as_object().is_none_or(|o| o.len() != 4)
+                || scale["scale_policy"] != "incumbent_descriptor_T_only"
+            {
+                return Err("actual distinct initializer scale lineage".into());
+            }
+            for key in [
+                "starting_weights_sha256",
+                "descriptor_sha256",
+                "evaluator_sha256",
+            ] {
+                valid_sha(scale[key].as_str().ok_or("model scale SHA")?)?;
+            }
+            Ok(scale)
+        })
+        .transpose()?;
+    fs::create_dir(output)?;
     let stage = output.join(".intake.partial");
     let mut writer = None;
     let mut io = FilesystemPublication;
     let result = (|| -> Result<TensorCache> {
         io.begin(output)?;
-        writer = Some(if let Some(common) = common.clone() {
-            Writer::new_common(&stage, common)?
-        } else {
-            Writer::new(&stage)?
-        });
-        let provenance = scan(input, &b, writer.as_mut().ok_or("cache writer")?)?;
+        writer = Some(Writer::new_common(&stage, common.clone())?);
+        let mut batches = Vec::new();
+        for source in &sources {
+            batches.push(scan(
+                &source.stream.path,
+                source,
+                writer.as_mut().ok_or("cache writer")?,
+            )?);
+        }
+        let bindings = sources.iter().map(|s| &s.stream).collect::<Vec<_>>();
+        let dataset_sha = hex_digest(&serde_json::to_vec(&bindings)?);
         let mut extra = serde_json::Map::new();
-        extra.insert("source_binding".into(), serde_json::to_value(&b.stream)?);
-        extra.insert("schedule_sha256".into(), json!(b.schedule.sha256));
+        extra.insert("source_binding".into(), serde_json::to_value(&bindings)?);
+        extra.insert(
+            "source_content".into(),
+            serde_json::to_value(sources.iter().map(|s| &s.content).collect::<Vec<_>>())?,
+        );
+        extra.insert("schedule_sha256".into(), json!(common.schedule.sha256));
         extra.insert(
             "family_partition_sha256".into(),
-            if b.scope == "common-corpus" {
-                provenance["header"]["family_partition_sha256"].clone()
-            } else {
-                json!(hex_digest(&serde_json::to_vec(
-                    &provenance["header"]["family_partition"]
-                )?))
-            },
+            json!(common.partition.sha256),
         );
-        if b.scope == "common-corpus" {
-            extra.insert(
-                "source_content".into(),
-                serde_json::to_value(&b.stream_content)?,
-            );
+        if let Some(scale) = scale {
+            extra.insert("model_scale_authority".into(), scale);
         }
-        extra.insert(
-            "stream_intake".into(),
-            json!({"status":"complete","publication_protocol":"incomplete-marker-last-v1","scope":b.scope,"binding_sha256":binding_sha,"human_quantity_n":b.human_quantity_n,
-            "config":b.config,"sources":b.sources,"schedule":b.schedule,"provenance":provenance}),
-        );
-        let manifest = writer.take().ok_or("writer finalization")?.finish(
-            b.stream.sha256.clone(),
-            false,
-            extra,
-        )?;
+        if let Some(binding) = binding {
+            extra.insert("input_binding".into(), serde_json::to_value(binding)?);
+        }
+        extra.insert("stream_intake".into(), json!({"status":"complete","scope":"common-corpus",
+            "publication_protocol":"incomplete-marker-last-v1","batches":batches.iter().map(|b|
+                json!({"batch_start":b["batch_start"],"batch_count":b["batch_count"],"config":b["config"]})).collect::<Vec<_>>()}));
+        let manifest =
+            writer
+                .take()
+                .ok_or("writer finalization")?
+                .finish(dataset_sha, false, extra)?;
         let mut names = manifest.files.values().cloned().collect::<Vec<_>>();
-        if b.scope != "common-corpus" {
-            names.push("stream-games.jsonl".into());
-        }
         names.push("cache.json".into());
         complete_publication(&stage, output, &names, &mut io)?;
         Ok(manifest)
@@ -1391,8 +1142,8 @@ pub fn write_cache(
         Ok(manifest) => Ok(manifest),
         Err(primary) => {
             let finalization = writer.take().map(Writer::abort).unwrap_or_default();
-            let record = json!({"status":"FAILED","admitted":false,"primary":primary.to_string(),"finalization":finalization,
-                "binding_sha256":binding_sha,"stream":b.stream,"owned_partial":stage,"partial_rows_not_admitted":true});
+            let record = json!({"status":"FAILED","primary":primary.to_string(),"finalization":finalization,
+                "streams":inputs,"owned_partial":stage,"partial_rows_not_admitted":true});
             Err(failed_intake(
                 primary,
                 finalization,
@@ -1407,10 +1158,7 @@ pub fn write_cache(
 #[cfg(test)]
 mod stream_repair_tests {
     use super::*;
-    use std::{
-        io,
-        sync::atomic::{AtomicUsize, Ordering},
-    };
+    use std::io;
 
     struct FakeIo {
         fail: &'static str,
@@ -1529,87 +1277,10 @@ mod stream_repair_tests {
         );
     }
 
-    static SERIAL: AtomicUsize = AtomicUsize::new(0);
-    struct ControlDir(PathBuf);
-    impl Drop for ControlDir {
-        fn drop(&mut self) {
-            fs::remove_dir_all(&self.0).unwrap();
-        }
-    }
-    fn controls() -> ControlDir {
-        let root = std::env::temp_dir().join(format!(
-            "stream-repair-controls-{}-{}",
-            std::process::id(),
-            SERIAL.fetch_add(1, Ordering::Relaxed)
-        ));
-        fs::create_dir(&root).unwrap();
-        ControlDir(root)
-    }
-    fn bound(root: &Path, name: &str, value: &Value) -> BoundJson {
-        let path = root.join(name);
-        fs::write(&path, serde_json::to_vec(value).unwrap()).unwrap();
-        BoundJson {
-            sha256: file_sha(&path).unwrap(),
-            path,
-        }
-    }
-    #[test]
-    fn build379_reference_policy_binds_artifact_and_only_schedule_changes() {
-        let root = controls();
-        let config = json!({"phase":"pilot64","main_volume_n":null,"planned_games":64,"prefix_seed":20261008,"depth":3,"max_nodes":100000,"ruleset":"fixed-policy","cpu_core":0});
-        let source = json!({"schema":STREAM_SCHEMA,"generator_version":"fixed-d-dual-teacher-pilot-v1","evaluator":EVALUATOR,"executable_sha256":"a".repeat(64),"compiled_sources":{"unexecuted-control-port":"b".repeat(64)},"resource_admission":{}});
-        let partition = FamilyPartition {
-            schema: "control-only-unexecuted-partition".into(),
-            seed: 20261008,
-            rounding: "control-only".into(),
-            assignments: vec![],
-        };
-        let cfg = bound(&root.0, "config.json", &config);
-        let src = bound(&root.0, "source.json", &source);
-        let part = bound(
-            &root.0,
-            "partition.json",
-            &serde_json::to_value(&partition).unwrap(),
-        );
-        let reference = json!({"config":cfg,"config_sha256":cfg.sha256,"sources":src,"sources_sha256":src.sha256,"original_family_partition":part,"original_family_partition_sha256":part.sha256});
-        let mut new_config = config.clone();
-        new_config["phase"] = json!("full_volume");
-        new_config["main_volume_n"] = json!(640);
-        new_config["planned_games"] = json!(640);
-        new_config["prefix_seed"] = json!(99);
-        new_config["cpu_core"] = json!(2);
-        let mut header = Header {
-            schema: STREAM_SCHEMA.into(),
-            generator_version: source["generator_version"].as_str().unwrap().into(),
-            config: new_config,
-            config_sha256: "control-only".into(),
-            executable_sha256: "a".repeat(64),
-            compiled_sources: BTreeMap::from([("unexecuted-control-port".into(), "b".repeat(64))]),
-            evaluator: EVALUATOR.into(),
-            scheduled: vec![],
-            family_partition: partition,
-            resource_admission: json!({"new_operational_receipt":true}),
-        };
-        validate_reference_policy(&reference, &header).unwrap();
-        header.executable_sha256 = "c".repeat(64);
-        assert!(
-            validate_reference_policy(&reference, &header)
-                .unwrap_err()
-                .to_string()
-                .contains("policy mismatch")
-        );
-        header.executable_sha256 = "a".repeat(64);
-        header.config["depth"] = json!(6);
-        assert!(validate_reference_policy(&reference, &header).is_err());
-        header.config["depth"] = json!(3);
-        let mut bad = reference.clone();
-        bad["sources_sha256"] = json!("d".repeat(64));
-        assert!(validate_reference_policy(&bad, &header).is_err());
-    }
     #[test]
     fn stream_repair_depth_policy_bound_not_rebranded() {
         let strict = SearchPolicy::from_config(
-            &json!({"depth":6,"max_nodes":null,"strict_completed_depth":true}),
+            &json!({"depth":6,"max_nodes":600000,"strict_completed_depth":true}),
         )
         .unwrap();
         let context = SigmaContext::from_prefix(&[13, 75]).unwrap();
@@ -1632,68 +1303,25 @@ mod stream_repair_tests {
         search.completed_depth = 6;
         search.stop = "node_cap".into();
         assert!(validate_search(&search, &context, &strict).is_err());
-        let old = SearchPolicy::from_config(&json!({"depth":3,"max_nodes":100000})).unwrap();
-        search.stop = "depth_cap".into();
-        search.completed_depth = 3;
-        assert!(validate_search(&search, &context, &old).is_err());
+        assert!(SearchPolicy::from_config(&json!({"depth":3,"max_nodes":100000})).is_err());
         assert!(SearchPolicy::from_config(&json!({"depth":6})).is_err());
     }
 }
 
 #[cfg(test)]
-mod common_corpus_intake_tests {
+mod configured_intake_tests {
     use super::*;
     #[test]
-    fn common_search_policy_requires_exact_depth_and_explicit_node_limit() {
-        let p =
-            SearchPolicy::from_config(&json!({"phase":"common_corpus","depth":6,"max_nodes":100}))
-                .unwrap();
+    fn configured_intake_requires_completed_d6_without_closed_phase_or_quantity() {
+        let c = json!({"depth":6,"max_nodes":123});
+        let p = SearchPolicy::from_config(&c).unwrap();
         assert!(p.strict_completed_depth);
-        assert_eq!(p.depth, 6);
-        assert!(SearchPolicy::from_config(&json!({"phase":"common_corpus","depth":6,"max_nodes":100,"strict_completed_depth":false})).is_err());
-        assert!(SearchPolicy::from_config(&json!({"phase":"common_corpus","depth":6})).is_err());
-    }
-    #[test]
-    fn indexed_failure_preserves_actual_started_and_original_reason() {
-        let raw = json!({"index":3,"result":{"status":"failed","started":true,"reason":"original worker error"}});
-        let r: IndexedOutcome = serde_json::from_value(raw.clone()).unwrap();
-        assert!(
-            matches!(r.result,WorkerOutcome::Failed{started:true,reason} if reason=="original worker error")
-        );
-        let mut wrong = raw;
-        wrong["result"]["invented_cleanup"] = json!(true);
-        assert!(serde_json::from_value::<IndexedOutcome>(wrong).is_err());
-    }
-}
-
-#[cfg(test)]
-mod compact_publication_tests {
-    use super::*;
-
-    #[test]
-    fn compact_sampling_publication_missing_file_refuses_and_marker_commits_last() {
-        let out = std::env::temp_dir().join(format!("compact-publication-{}", std::process::id()));
-        fs::create_dir(&out).unwrap();
-        let stage = out.join(".intake.partial");
-        fs::create_dir(&stage).unwrap();
-        let mut io = FilesystemPublication;
-        io.begin(&out).unwrap();
-        fs::write(stage.join("cache.json"), b"synthetic compact candidate").unwrap();
-        let names = vec!["sampling.bin".into(), "cache.json".into()];
-        // Missing a newly required physical field cannot expose the compact manifest.
-        assert!(complete_publication(&stage, &out, &names, &mut io).is_err());
-        assert!(out.join(INCOMPLETE).exists() && !out.join("cache.json").exists());
-        fs::write(stage.join("sampling.bin"), [0, 0, 0, 0, 0, 1]).unwrap();
-        for name in &names {
-            File::open(stage.join(name)).unwrap().sync_all().unwrap();
+        for bad in [
+            json!({"depth":3,"max_nodes":123}),
+            json!({"depth":6,"max_nodes":null}),
+            json!({"depth":6,"max_nodes":123,"strict_completed_depth":false}),
+        ] {
+            assert!(SearchPolicy::from_config(&bad).is_err());
         }
-        complete_publication(&stage, &out, &names, &mut io).unwrap();
-        assert!(!out.join(INCOMPLETE).exists() && !stage.exists());
-        assert_eq!(
-            fs::read(out.join("sampling.bin")).unwrap(),
-            [0, 0, 0, 0, 0, 1]
-        );
-        assert!(out.join("cache.json").exists());
-        fs::remove_dir_all(out).unwrap();
     }
 }

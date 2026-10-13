@@ -1,12 +1,14 @@
-//! New intake fixtures only. Search values/counters are explicitly synthetic ports.
+//! Complete configured gzip-to-cache fixtures. Search returns are synthetic, not model probes.
 use quoridor_core::research::{HistoryKey, Ruleset, SigmaContext};
 use quoridor_data::{
-    Teacher, TeacherRow, file_sha,
+    Teacher, TeacherRow,
+    common_corpus::{EVALUATOR, STREAM_SCHEMA, VERSION},
+    file_sha, hex_digest,
     terminal::{
         TerminalProvenance, Termination, attach_terminal_targets, partition_families,
         reflect_action,
     },
-    terminal_stream::{BoundJson, IntakeBinding, STREAM_SCHEMA, write_cache},
+    terminal_stream::{BoundJson, write_cache},
 };
 use serde_json::{Value, json};
 use std::{
@@ -17,8 +19,7 @@ use std::{
 static SERIAL: AtomicUsize = AtomicUsize::new(0);
 struct Fixture {
     root: PathBuf,
-    binding: IntakeBinding,
-    events: Vec<Value>,
+    events: Vec<Vec<Value>>,
 }
 impl Drop for Fixture {
     fn drop(&mut self) {
@@ -40,405 +41,400 @@ fn control(path: &Path, value: &Value) -> BoundJson {
     }
 }
 impl Fixture {
-    fn new(unknown: bool) -> Self {
-        Self::with_case(unknown, false)
-    }
-    fn with_case(unknown: bool, goal: bool) -> Self {
-        let root = PathBuf::from(std::env::var_os("TMPDIR").unwrap_or_else(|| "/tmp".into())).join(
-            format!(
-                "terminal-stream-synthetic-{}-{}",
-                std::process::id(),
-                SERIAL.fetch_add(1, Ordering::Relaxed)
-            ),
-        );
+    fn new() -> Self {
+        let root = std::env::temp_dir().join(format!(
+            "configured-stream-{}-{}",
+            std::process::id(),
+            SERIAL.fetch_add(1, Ordering::Relaxed)
+        ));
         fs::create_dir(&root).unwrap();
-        let prefix = if goal {
-            vec![13, 67, 22, 58, 31, 49, 40, 50, 49, 51, 58, 52, 67, 53]
-        } else if unknown {
-            vec![13, 75]
-        } else {
-            vec![13, 75, 14, 76, 13, 75, 14, 76]
-        };
-        let move_id = if goal {
-            76
-        } else if unknown {
-            14
-        } else {
-            13
-        };
-        let c = SigmaContext::from_prefix(&prefix).unwrap();
-        let partition =
-            partition_families(&[("synthetic-game".into(), prefix.clone())], 20261008).unwrap();
-        let assignment = &partition.assignments[0];
-        let mut final_c = c.clone();
-        final_c.make_move(move_id).unwrap();
-        let mut final_prefix = prefix.clone();
-        final_prefix.push(move_id);
-        let reason = if goal {
-            Termination::Goal
-        } else if unknown {
-            Termination::Unknown
-        } else {
-            Termination::Threefold
-        };
-        let detail = if goal {
-            "canonical_goal"
-        } else if unknown {
-            "unaccepted_search:synthetic refused port"
-        } else {
-            "canonical_legal_third_occurrence"
-        };
-        let provenance =
-            TerminalProvenance::from_context(&final_c, final_prefix.clone(), reason, detail.into())
-                .unwrap();
-        let row = TeacherRow::from_context(
-            "synthetic-row".into(),
-            "synthetic-game".into(),
-            assignment.family.clone(),
-            assignment.split.clone(),
-            prefix.clone(),
-            &c,
-            Some(move_id),
-            Teacher::AlphaBeta {
-                value: 0.25,
-                depth: 3,
-                nodes: 1,
-                bound: "completed_root".into(),
-                pv: vec![move_id],
-            },
-            "original-distance-a0-b8-tanh".into(),
-        )
-        .unwrap();
-        let mut rows = vec![row];
-        attach_terminal_targets(&mut rows, &provenance).unwrap();
-        let search = json!({"action":move_id,"raw_value":0.25,"raw_value_bits":0.25f32.to_bits(),
-        "completed_depth":3,"pv":[move_id],"stop":"depth_cap","counters":{"nodes":1,"policy_calls":0,"tt_retained_bytes":0},
-        "returned_search_wall_ns":0,"parent":context(&c),"accepted":true,"failure":null});
-        let failed = if unknown {
-            json!({"action":null,"raw_value":null,"raw_value_bits":null,"completed_depth":0,
-        "pv":[],"stop":"synthetic_refusal","counters":{"nodes":9},"returned_search_wall_ns":0,
-        "parent":context(&final_c),"accepted":false,"failure":"synthetic refused port"})
-        } else {
-            Value::Null
-        };
-        let config = json!({"phase":"synthetic_fixture","main_volume_n":null,"ruleset":Ruleset::Standard2pThreefold.config_name(),
-        "planned_games":1,"prefix_seed":20261008,"attempts_per_prefix":32,"depth":3,"max_nodes":100000,"tt_slots":4096,
-        "use_pvs":true,"solver_order_contact":false,"distance_a":0.0,"distance_b":8.0,"per_move_timeout_ms":null,"max_total_plies":200});
-        let config_ref = control(&root.join("config.json"), &config);
-        let request = json!({"type":"requests","schema":STREAM_SCHEMA,"generator_version":"synthetic-fixture-v1",
-        "config":config,"config_sha256":config_ref.sha256,"planned":1,"requested_lengths":[prefix.len()]});
-        let request_line = format!("{}\n", serde_json::to_string(&request).unwrap());
-        let request_sha = quoridor_data::hex_digest(request_line.as_bytes());
-        let canonical = std::cmp::min(
-            prefix.clone(),
-            prefix.iter().map(|a| reflect_action(*a).unwrap()).collect(),
+        let prefixes = [
+            vec![13, 67, 22, 58, 31, 49, 40, 50, 49, 51, 58, 52, 67, 53],
+            vec![13, 75],
+            vec![13, 75, 14, 76, 13, 75, 14, 76],
+        ];
+        let planned = prefixes
+            .iter()
+            .enumerate()
+            .map(|(i, p)| (format!("fixed-d-family-{i:06}"), p.clone()))
+            .collect::<Vec<_>>();
+        let partition = partition_families(&planned, 91).unwrap();
+        let schedule = prefixes.iter().enumerate().map(|(i,p)| {
+            let c=SigmaContext::from_prefix(p).unwrap();
+            let reflected=p.iter().map(|a|reflect_action(*a).unwrap()).collect::<Vec<_>>();
+            json!({"game":i,"request_id":planned[i].0,"requested_prefix_length":p.len(),"prefix":p,
+                "canonical_prefix":std::cmp::min(p.clone(),reflected),"root":context(&c),
+                "attempts":[{"attempt":0,"prefix":p,"rejection":null}],"scheduled_failure":null})
+        }).collect::<Vec<_>>();
+        let global = control(
+            &root.join("global-schedule.json"),
+            &json!({"scheduled":schedule}),
         );
-        let schedule = json!([{"game":0,"request_id":"synthetic-game","requested_prefix_length":prefix.len(),"prefix":prefix,
-        "canonical_prefix":canonical,"root":context(&c),"attempts":[{"attempt":0,"prefix":prefix,"rejection":null}],"scheduled_failure":null}]);
-        let sources = json!({"schema":STREAM_SCHEMA,"generator_version":"synthetic-fixture-v1","executable_sha256":"a".repeat(64),
-        "compiled_sources":{"synthetic-port-source":"b".repeat(64)},"evaluator":"original-distance-a0-b8-tanh",
-        "resource_admission":{"synthetic_fixture":true}});
-        let source_ref = control(&root.join("sources.json"), &sources);
-        let schedule_ref = control(
-            &root.join("schedule.json"),
-            &json!({"scheduled":schedule,"family_partition":partition,"requests_sha256":request_sha,
-        "opened_pilot_inclusion":"excluded"}),
+        let partition_ref = control(
+            &root.join("partition.json"),
+            &serde_json::to_value(&partition).unwrap(),
         );
-        let mut header = sources;
-        header["config"] = config;
-        header["config_sha256"] = json!(config_ref.sha256);
-        header["scheduled"] = schedule;
-        header["family_partition"] = serde_json::to_value(&partition).unwrap();
-        let game = json!({"game":0,"request_id":"synthetic-game","family":assignment.family,"initial_prefix":prefix,
-        "final_prefix":final_prefix,"final_context":context(&final_c),"provenance":provenance,
-        "termination":if goal{json!({"type":"goal"})}else if unknown{json!({"type":"unknown","reason":detail})}else{json!({"type":"threefold"})},
-        "rows":[{"teacher":rows[0],"search":search}],"failed_search":failed,"attempted_search_calls":if unknown{2}else{1},"wall_ns":0});
-        let footer = json!({"scheduled":1,"recorded":1,"goals":if goal{1}else{0},"draws":if unknown||goal{0}else{1},"unknown":if unknown{1}else{0},
-        "rows":1,"eligible_rows":if unknown{0}else{1},"distinct_positions":1,"duplicate_positions":0,"contact_positions":0,
-        "wall_stock_positions":{"10,10":1},"opening_positions":1,"endgame_positions":if goal{1}else{0},"search_nodes":if unknown{10}else{1},
-        "search_calls":if unknown{2}else{1},"accepted_search_calls":1,"achieved_depths":{"3":1},
-        "planned_prefix_lengths":{prefix.len().to_string():1},"committed_stream_bytes_before_footer":0,"native_whole_ns":0,"full_volume_n":null});
-        Self {
-            root: root.clone(),
-            binding: IntakeBinding {
-                schema: "quoridor-terminal-stream-intake-v1".into(),
-                scope: "synthetic-fixture".into(),
-                human_quantity_n: None,
-                stream: BoundJson {
-                    path: root.join("stream.jsonl"),
-                    sha256: String::new(),
-                },
-                config: config_ref,
-                sources: source_ref,
-                schedule: schedule_ref,
-                requests_sha256: request_sha,
-                max_stream_bytes: 2 * 1024 * 1024,
-                max_compressed_bytes: None,
-                stream_content: None,
-                max_line_bytes: 1024 * 1024,
-            },
-            events: vec![
-                request,
-                json!({"type":"header","record":header}),
-                json!({"type":"game","record":game}),
-                json!({"type":"footer","record":footer}),
-            ],
-        }
-    }
-    fn save(&mut self) -> BoundJson {
-        if self.events.last().is_some_and(|v| v["type"] == "footer") {
-            let bytes = self.events[..self.events.len() - 1]
-                .iter()
-                .map(|v| serde_json::to_vec(v).unwrap().len() + 1)
-                .sum::<usize>();
-            self.events.last_mut().unwrap()["record"]["committed_stream_bytes_before_footer"] =
-                json!(bytes);
-        }
-        let mut raw = Vec::new();
-        for e in &self.events {
-            raw.extend(serde_json::to_vec(e).unwrap());
-            raw.push(b'\n');
-        }
-        fs::write(&self.binding.stream.path, raw).unwrap();
-        self.binding.stream.sha256 = file_sha(&self.binding.stream.path).unwrap();
-        control(
-            &self.root.join("intake.json"),
-            &serde_json::to_value(&self.binding).unwrap(),
-        )
-    }
-    fn run(&mut self) -> quoridor_data::Result<TensorCacheAlias> {
-        let b = self.save();
-        write_cache(
-            &self.binding.stream.path,
-            &self.root.join("output"),
-            &b.path,
-            &b.sha256,
-        )
-    }
-    fn refused(&mut self) {
-        let e = self.run().unwrap_err();
-        assert!(e.source().is_some(), "primary must remain explicit: {e}");
-        assert!(!self.root.join("output/cache.json").exists());
-        let f: Value = serde_json::from_slice(
-            &fs::read(self.root.join("output/intake-failure.json")).unwrap(),
-        )
-        .unwrap();
-        assert_eq!(f["admitted"], false);
-        assert!(!f["primary"].as_str().unwrap().is_empty());
-    }
-}
-type TensorCacheAlias = quoridor_data::TensorCache;
-
-#[test]
-fn stream_valid_draw_and_unknown_keep_distinct_teachers_and_failed_census() {
-    for unknown in [false, true] {
-        let mut f = Fixture::new(unknown);
-        let c = f.run().unwrap();
-        assert_eq!(c.rows, 1);
-        let path = f.root.join("output");
-        let meta: Value =
-            serde_json::from_slice(&fs::read(path.join("cache.json")).unwrap()).unwrap();
-        assert_eq!(meta["stream_intake"]["status"], "complete");
-        assert!(!path.join(".intake.partial").exists());
-        let margin = f32::from_le_bytes(
-            fs::read(path.join("terminal-margin.f32"))
-                .unwrap()
-                .try_into()
-                .unwrap(),
-        );
-        let row: Value =
-            serde_json::from_str(&fs::read_to_string(path.join("rows.jsonl")).unwrap()).unwrap();
-        if unknown {
-            assert!(margin.is_nan());
-            assert_eq!(row["primary_eligible"], false);
-            assert!(row["z"].is_null());
-        } else {
-            assert_eq!(margin, 0.0);
-            assert_ne!(
-                row["terminal_targets"]["terminal_geometric_margin_steps"],
-                0
-            );
-        }
-        let games = fs::read_to_string(path.join("stream-games.jsonl")).unwrap();
-        assert!(games.contains("attempted_search_calls"));
-        assert_eq!(
-            file_sha(&path.join("stream-games.jsonl")).unwrap(),
-            meta["stream_intake"]["provenance"]["games_file"]["sha256"]
-        );
-    }
-}
-#[test]
-fn stream_partial_and_malformed_fail_without_cache_admission() {
-    let mut f = Fixture::new(false);
-    f.events.pop();
-    f.refused();
-    let mut f = Fixture::new(false);
-    let b = f.save();
-    fs::write(&f.binding.stream.path, b"{bad}\n").unwrap();
-    f.binding.stream.sha256 = file_sha(&f.binding.stream.path).unwrap();
-    let b2 = control(&b.path, &serde_json::to_value(&f.binding).unwrap());
-    assert!(
-        write_cache(
-            &f.binding.stream.path,
-            &f.root.join("output"),
-            &b2.path,
-            &b2.sha256
-        )
-        .is_err()
-    );
-    assert!(!f.root.join("output/cache.json").exists());
-}
-#[test]
-fn stream_row_chronology_ids_and_action_must_match() {
-    for field in ["ply", "ids", "action"] {
-        let mut f = Fixture::new(false);
-        f.events[2]["record"]["rows"][0]["teacher"][field] = match field {
-            "ply" => json!(7),
-            "ids" => json!([[], []]),
-            _ => json!(12),
-        };
-        f.refused();
-    }
-}
-#[test]
-fn stream_unknown_cannot_disguise_true_terminal_or_lose_failed_return() {
-    let mut f = Fixture::new(false);
-    f.events[2]["record"]["termination"] = json!({"type":"unknown","reason":"synthetic"});
-    f.refused();
-    let mut f = Fixture::new(true);
-    f.events[2]["record"]["failed_search"] = Value::Null;
-    f.refused();
-}
-#[test]
-fn stream_family_split_footer_and_parent_corruption_refuse() {
-    for change in 0..4 {
-        let mut f = Fixture::new(false);
-        match change {
-            0 => f.events[2]["record"]["family"] = json!("unrelated"),
-            1 => f.events[2]["record"]["rows"][0]["teacher"]["split"] = json!("train"),
-            2 => f.events[3]["record"]["search_calls"] = json!(99),
-            _ => f.events[2]["record"]["rows"][0]["search"]["parent"]["history"] = json!([]),
-        }
-        f.refused();
-    }
-}
-#[test]
-fn stream_future_n_refuses_before_source_or_output() {
-    let mut f = Fixture::new(false);
-    f.binding.scope = "full-volume".into();
-    f.binding.stream.path = f.root.join("never-read");
-    let b = control(
-        &f.root.join("intake.json"),
-        &serde_json::to_value(&f.binding).unwrap(),
-    );
-    let e = write_cache(
-        &f.binding.stream.path,
-        &f.root.join("output"),
-        &b.path,
-        &b.sha256,
-    )
-    .unwrap_err();
-    assert!(e.to_string().contains("N is unset"));
-    assert!(!f.root.join("output").exists());
-}
-#[test]
-fn stream_existing_output_is_not_overwritten() {
-    let mut f = Fixture::new(false);
-    fs::create_dir(f.root.join("output")).unwrap();
-    fs::write(f.root.join("output/keep"), b"held").unwrap();
-    assert!(f.run().is_err());
-    assert_eq!(fs::read(f.root.join("output/keep")).unwrap(), b"held");
-    assert!(!f.root.join("output/intake-failure.json").exists());
-}
-
-#[test]
-fn stream_goal_priority_and_exhausted_input_requests_keep_true_census() {
-    let mut goal = Fixture::with_case(false, true);
-    goal.run().unwrap();
-    let row: Value =
-        serde_json::from_str(&fs::read_to_string(goal.root.join("output/rows.jsonl")).unwrap())
+        let mut events = vec![];
+        for (i, prefix) in prefixes.iter().enumerate() {
+            let dir = root.join(format!("batch-{i}"));
+            fs::create_dir(&dir).unwrap();
+            let unknown = i == 1;
+            let goal = i == 0;
+            let action = if goal {
+                76
+            } else if unknown {
+                14
+            } else {
+                13
+            };
+            let raw = if goal {
+                2.0f32
+            } else if unknown {
+                -0.0
+            } else {
+                -2.0
+            };
+            let c = SigmaContext::from_prefix(prefix).unwrap();
+            let mut final_c = c.clone();
+            final_c.make_move(action).unwrap();
+            let mut final_prefix = prefix.clone();
+            final_prefix.push(action);
+            let reason = if goal {
+                Termination::Goal
+            } else if unknown {
+                Termination::Unknown
+            } else {
+                Termination::Threefold
+            };
+            let detail = if goal {
+                "canonical_goal"
+            } else if unknown {
+                "unaccepted_search:synthetic refused port"
+            } else {
+                "canonical_legal_third_occurrence"
+            };
+            let provenance = TerminalProvenance::from_context(
+                &final_c,
+                final_prefix.clone(),
+                reason,
+                detail.into(),
+            )
             .unwrap();
-    assert_eq!(row["z"], 1.0);
-    assert!(
-        row["terminal_targets"]["margin_target_steps"]
-            .as_i64()
-            .unwrap()
-            > 0
-    );
-    let mut disguised = Fixture::with_case(false, true);
-    disguised.events[2]["record"]["termination"] = json!({"type":"unknown","reason":"fake"});
-    disguised.refused();
-
-    let mut f = Fixture::new(false);
-    let terminal = vec![13, 75, 14, 76, 13, 75, 14, 76, 13];
-    let slot = &mut f.events[1]["record"]["scheduled"][0];
-    slot["prefix"] = Value::Null;
-    slot["canonical_prefix"] = Value::Null;
-    slot["root"] = Value::Null;
-    slot["attempts"] = json!(
-        (0..32)
-            .map(|i| json!({"attempt":i,"prefix":terminal,"rejection":"terminal_prefix"}))
-            .collect::<Vec<_>>()
-    );
-    slot["scheduled_failure"] = json!("prefix_attempts_exhausted");
-    let partition = partition_families(&[], 20261008).unwrap();
-    f.events[1]["record"]["family_partition"] = serde_json::to_value(partition).unwrap();
-    f.binding.schedule = control(
-        &f.root.join("schedule.json"),
-        &json!({"scheduled":f.events[1]["record"]["scheduled"],
-        "family_partition":f.events[1]["record"]["family_partition"],"requests_sha256":f.binding.requests_sha256,
-        "opened_pilot_inclusion":"excluded"}),
-    );
-    f.events[2]["record"] = json!({"game":0,"request_id":"synthetic-game","family":null,"initial_prefix":null,
-        "final_prefix":null,"final_context":null,"provenance":null,"termination":{"type":"unknown","reason":"prefix_attempts_exhausted"},
-        "rows":[],"failed_search":null,"attempted_search_calls":0,"wall_ns":0});
-    let footer = &mut f.events[3]["record"];
-    for field in [
-        "draws",
-        "rows",
-        "eligible_rows",
-        "distinct_positions",
-        "opening_positions",
-        "search_nodes",
-        "search_calls",
-        "accepted_search_calls",
-    ] {
-        footer[field] = json!(0);
+            let assignment = partition
+                .assignments
+                .iter()
+                .find(|a| a.game == planned[i].0)
+                .unwrap();
+            let row = TeacherRow::from_context(
+                format!("synthetic-row-{i}"),
+                planned[i].0.clone(),
+                assignment.family.clone(),
+                assignment.split.clone(),
+                prefix.clone(),
+                &c,
+                Some(action),
+                Teacher::AlphaBeta {
+                    value: raw,
+                    depth: 6,
+                    nodes: 1,
+                    bound: "completed_root".into(),
+                    pv: vec![action],
+                },
+                EVALUATOR.into(),
+            )
+            .unwrap();
+            let mut rows = vec![row];
+            attach_terminal_targets(&mut rows, &provenance).unwrap();
+            let search = json!({"action":action,"raw_value":raw,"raw_value_bits":raw.to_bits(),"completed_depth":6,"pv":[action],"stop":"depth_cap","counters":{"nodes":1,"policy_calls":0,"tt_retained_bytes":0},"returned_search_wall_ns":0,"parent":context(&c),"accepted":true,"failure":null});
+            let failed = if unknown {
+                json!({"action":null,"raw_value":null,"raw_value_bits":null,"completed_depth":0,"pv":[],"stop":"synthetic_refusal","counters":{"nodes":9},"returned_search_wall_ns":0,"parent":context(&final_c),"accepted":false,"failure":"synthetic refused port"})
+            } else {
+                Value::Null
+            };
+            let config = json!({"ruleset":Ruleset::Standard2pThreefold.config_name(),"planned_games":1,"prefix_seed":90,"attempts_per_prefix":32,"depth":6,"strict_completed_depth":true,"max_nodes":100000,"game_workers":1,"tt_slots":4096,"use_pvs":true,"solver_order_contact":false,"distance_a":0.0,"distance_b":8.0,"per_move_timeout_ms":null,"max_total_plies":200,
+                "common_study":{"families":3,"prefix_seed":90,"prefix_lengths":[14,2,8],"split_seed":91,"root_value_policy":"outcome_only","schedule":global,"partition":partition_ref,"batch_start":i,"batch_count":1,"excluded_books":[]}});
+            let config_ref = control(&dir.join("config.json"), &config);
+            let request = json!({"type":"requests","schema":STREAM_SCHEMA,"generator_version":VERSION,"config":config,"config_sha256":config_ref.sha256,"planned":1,"requested_lengths":[prefix.len()],"requested":[[planned[i].0,prefix.len()]]});
+            let request_sha =
+                hex_digest(format!("{}\n", serde_json::to_string(&request).unwrap()).as_bytes());
+            let sources = json!({"schema":STREAM_SCHEMA,"generator_version":VERSION,"executable_sha256":"a".repeat(64),"evaluator":EVALUATOR,"resource_admission":{"synthetic_fixture":true}});
+            control(&dir.join("sources.json"), &sources);
+            control(
+                &dir.join("schedule.json"),
+                &json!({"scheduled":[schedule[i]],"family_partition":partition,"requests_sha256":request_sha}),
+            );
+            let mut header = sources;
+            header["config"] = config;
+            header["config_sha256"] = json!(config_ref.sha256);
+            header["config_ref"] = serde_json::to_value(config_ref).unwrap();
+            header["scheduled"] = json!([schedule[i]]);
+            header["family_partition"] = serde_json::to_value(&partition).unwrap();
+            let game = json!({"game":i,"request_id":planned[i].0,"family":assignment.family,"initial_prefix":prefix,"final_prefix":final_prefix,"final_context":context(&final_c),"provenance":provenance,"termination":if goal {json!({"type":"goal"})} else if unknown {json!({"type":"unknown","reason":detail})} else {json!({"type":"threefold"})},"rows":[{"teacher":rows[0],"search":search}],"failed_search":failed,"attempted_search_calls":if unknown {2} else {1},"wall_ns":0});
+            let [a, b] = c.position().pawns;
+            let contact = (a / 9).abs_diff(b / 9) + (a % 9).abs_diff(b % 9) == 1
+                && c.position().is_edge_open(a, b);
+            let endgame = c
+                .position()
+                .wall_distance(0)
+                .unwrap()
+                .min(c.position().wall_distance(1).unwrap())
+                <= 2;
+            let depth = json!({"policy":VERSION,"requested_depth":6,"max_nodes":100000,"game_workers":1,"search_threads_per_game":1,"queue_slots_per_worker":1,"workers_joined":1,"started":1,"failed_workers_or_setup":0,"cancelled_before_start":0,"prefix_failures":0,"opaque_failed_work":0,"game_whole_ns":[0],"final_plies":[final_c.total_ply()],"returned_move_nodes":if unknown {json!([1,9])} else {json!([1])},"returned_depths":if unknown {json!([6,0])} else {json!([6])},"primary_interval":"NOT_RECORDED here: actual controller whole generation+serialization+savedonlyaudit+cleanup receipt required; native_whole_ns excludes final audit/cleanup","completed_games_per_hour":null,"eligible_rows_per_hour":null});
+            let footer = json!({"scheduled":1,"recorded":1,"goals":usize::from(goal),"draws":usize::from(!unknown&&!goal),"unknown":usize::from(unknown),"rows":1,"eligible_rows":usize::from(!unknown),"distinct_positions":1,"duplicate_positions":0,"contact_positions":usize::from(contact),"wall_stock_positions":{"10,10":1},"opening_positions":1,"endgame_positions":usize::from(endgame),"search_nodes":if unknown {10} else {1},"search_calls":if unknown {2} else {1},"accepted_search_calls":1,"achieved_depths":{"6":1},"planned_prefix_lengths":{prefix.len().to_string():1},"committed_stream_bytes_before_footer":0,"native_whole_ns":0,"full_volume_n":3,"depth6":depth});
+            events.push(vec![request,json!({"type":"header","record":header}),json!({"type":"game","record":{"index":0,"result":{"status":"returned","value":game,"whole_ns":0}}}),json!({"type":"footer","record":footer})]);
+        }
+        Self { root, events }
     }
-    footer["unknown"] = json!(1);
-    footer["wall_stock_positions"] = json!({});
-    footer["achieved_depths"] = json!({});
-    assert_eq!(f.run().unwrap().rows, 0);
-    let manifest: Value =
-        serde_json::from_slice(&fs::read(f.root.join("output/cache.json")).unwrap()).unwrap();
+    fn save(&mut self) -> Vec<PathBuf> {
+        self.events
+            .iter_mut()
+            .enumerate()
+            .map(|(i, events)| {
+                if events.last().is_some_and(|v| v["type"] == "footer") {
+                    let bytes = events[..events.len() - 1]
+                        .iter()
+                        .map(|e| serde_json::to_vec(e).unwrap().len() + 1)
+                        .sum::<usize>();
+                    events.last_mut().unwrap()["record"]["committed_stream_bytes_before_footer"] =
+                        json!(bytes);
+                }
+                let path = self.root.join(format!("batch-{i}/stream.jsonl.gz"));
+                let mut writer = quoridor_data::lossless_jsonl::Writer::create(
+                    &path,
+                    2 * 1024 * 1024,
+                    2 * 1024 * 1024,
+                )
+                .unwrap();
+                for e in events {
+                    writer
+                        .append(format!("{}\n", serde_json::to_string(e).unwrap()).as_bytes())
+                        .unwrap();
+                }
+                let content = writer.finish().unwrap();
+                control(
+                    &path.parent().unwrap().join("stream-content.json"),
+                    &serde_json::to_value(content).unwrap(),
+                );
+                path
+            })
+            .collect()
+    }
+}
+#[test]
+fn configured_compressed_batches_preserve_outcome_raw_bits_unknown_and_order() {
+    let mut f = Fixture::new();
+    let inputs = f.save();
+    let output = f.root.join("cache");
+    let cache = write_cache(&inputs, &output, None).unwrap();
+    assert_eq!(cache.rows, 3);
+    assert!(!output.join("intake-incomplete.json").exists());
+    assert!(!output.join(".intake.partial").exists());
     assert_eq!(
-        manifest["stream_intake"]["provenance"]["census"]["scheduled"],
-        1
+        fs::read(output.join("common-eligible.u8")).unwrap(),
+        [1, 0, 1]
     );
+    let raw = fs::read(output.join("completed-root-raw.f32")).unwrap();
     assert_eq!(
-        manifest["stream_intake"]["provenance"]["census"]["unknown"],
-        1
+        raw,
+        [
+            2.0f32.to_le_bytes(),
+            (-0.0f32).to_le_bytes(),
+            (-2.0f32).to_le_bytes()
+        ]
+        .concat()
     );
+    let labels = fs::read(output.join("labels.f32")).unwrap();
+    assert_eq!(f32::from_le_bytes(labels[4..8].try_into().unwrap()), 1.0);
+    assert!(f32::from_le_bytes(labels[12..16].try_into().unwrap()).is_nan());
+    assert_eq!(f32::from_le_bytes(labels[20..24].try_into().unwrap()), 0.0);
+    let meta: Value =
+        serde_json::from_slice(&fs::read(output.join("cache.json")).unwrap()).unwrap();
+    assert_eq!(meta["source_binding"].as_array().unwrap().len(), 3);
+    assert_eq!(meta["source_content"].as_array().unwrap().len(), 3);
+    assert!(meta.get("model_scale_authority").is_none());
+    for (i, input) in inputs.iter().enumerate() {
+        assert_eq!(meta["source_binding"][i]["path"], input.to_str().unwrap());
+        assert_eq!(meta["stream_intake"]["batches"][i]["batch_start"], i);
+        assert_eq!(
+            meta["sampling"]["games"][i]["game"],
+            format!("fixed-d-family-{i:06}")
+        );
+    }
+    let bindings = inputs
+        .iter()
+        .map(|path| BoundJson {
+            path: path.clone(),
+            sha256: file_sha(path).unwrap(),
+        })
+        .collect::<Vec<_>>();
+    assert_eq!(
+        cache.dataset_sha,
+        hex_digest(&serde_json::to_vec(&bindings).unwrap())
+    );
+    assert!(!output.join("rows.jsonl").exists());
+}
+#[test]
+fn configured_batches_refuse_overlap_gap_reverse_and_existing_output_before_publication() {
+    let mut f = Fixture::new();
+    let inputs = f.save();
+    for (i, indices) in [vec![0, 0], vec![0, 2], vec![1, 0]].iter().enumerate() {
+        let selected = indices
+            .iter()
+            .map(|n| inputs[*n].clone())
+            .collect::<Vec<_>>();
+        let output = f.root.join(format!("refused-{i}"));
+        assert!(write_cache(&selected, &output, None).is_err());
+        assert!(!output.exists());
+    }
+    let output = f.root.join("held");
+    fs::create_dir(&output).unwrap();
+    fs::write(output.join("keep"), b"held").unwrap();
+    assert!(write_cache(&inputs, &output, None).is_err());
+    assert_eq!(fs::read(output.join("keep")).unwrap(), b"held");
+    assert!(!output.join("intake-incomplete.json").exists());
+}
+#[test]
+fn configured_partial_and_foreign_row_keep_failure_and_incomplete_marker() {
+    for partial in [true, false] {
+        let mut f = Fixture::new();
+        if partial {
+            f.events[0].pop();
+        } else {
+            f.events[0][2]["record"]["result"]["value"]["rows"][0]["search"]["parent"]["history"] =
+                json!([]);
+        }
+        let inputs = f.save();
+        let output = f.root.join("failed");
+        let error = write_cache(&inputs, &output, None).unwrap_err();
+        assert!(error.source().is_some());
+        assert!(output.join("intake-incomplete.json").exists());
+        assert!(!output.join("cache.json").exists());
+        let failure: Value =
+            serde_json::from_slice(&fs::read(output.join("intake-failure.json")).unwrap()).unwrap();
+        assert_eq!(failure["status"], "FAILED");
+        assert!(failure["primary"].as_str().is_some_and(|e| !e.is_empty()));
+    }
 }
 
 #[test]
-fn stream_repair_synthetic_cannot_be_relabelled_authoritative() {
-    let mut f = Fixture::new(false);
-    f.binding.scope = "full-volume".into();
-    f.binding.human_quantity_n = Some(1);
-    f.events[0]["config"]["main_volume_n"] = json!(1);
-    f.events[1]["record"]["config"] = f.events[0]["config"].clone();
-    f.binding.config = control(&f.root.join("config.json"), &f.events[0]["config"]);
-    f.events[0]["config_sha256"] = json!(f.binding.config.sha256);
-    f.events[1]["record"]["config_sha256"] = json!(f.binding.config.sha256);
-    let line = format!("{}\n", serde_json::to_string(&f.events[0]).unwrap());
-    f.binding.requests_sha256 = quoridor_data::hex_digest(line.as_bytes());
-    let mut schedule: Value =
-        serde_json::from_slice(&fs::read(&f.binding.schedule.path).unwrap()).unwrap();
-    schedule["requests_sha256"] = json!(f.binding.requests_sha256);
-    f.binding.schedule = control(&f.root.join("schedule.json"), &schedule);
-    f.events[3]["record"]["full_volume_n"] = json!(1);
-    let error = f.run().unwrap_err();
-    assert!(error.to_string().contains("synthetic provenance"));
-    assert!(!f.root.join("output").exists());
+fn configured_converter_cli_and_python_loader_share_actual_published_contract() {
+    // The standard Cargo executable is usable in ordinary tests. The guarded integration
+    // check selects its accepted immutable release image and current project interpreter.
+    let converter = std::env::var_os("QUORIDOR_TEST_CONVERTER")
+        .map(PathBuf::from)
+        .unwrap_or_else(|| PathBuf::from(env!("CARGO_BIN_EXE_terminal-cache")));
+    let python = std::env::var_os("QUORIDOR_TEST_PYTHON")
+        .map(PathBuf::from)
+        .unwrap_or_else(|| PathBuf::from("python3"));
+    let mut fixture = Fixture::new();
+    let binding_path = std::env::var_os("QUORIDOR_TEST_INITIALIZER_BINDING")
+        .map(PathBuf::from)
+        .unwrap_or_else(|| {
+            // Default software fixtures are explicitly synthetic. The configured
+            // guarded check supplies the existing baseline's declared identities.
+            let mut identities = Vec::new();
+            for name in ["weights", "descriptor", "evaluator"] {
+                let path = fixture.root.join(format!("synthetic-{name}.json"));
+                control(&path, &json!({"fixture_only":true,"role":name}));
+                identities.push(file_sha(&path).unwrap());
+            }
+            let path = fixture.root.join("synthetic-input-binding.json");
+            control(
+                &path,
+                &json!({"fixture_only":true,"model_scale_authority":{
+                "starting_weights_sha256":identities[0],"descriptor_sha256":identities[1],
+                "evaluator_sha256":identities[2],"scale_policy":"incumbent_descriptor_T_only"}}),
+            );
+            path
+        });
+    let binding_sha = file_sha(&binding_path).unwrap();
+    let inputs = fixture.save();
+    let output = fixture.root.join("cli-cache");
+    let mut command = std::process::Command::new(converter);
+    for input in &inputs {
+        command.arg("--input").arg(input);
+    }
+    let returned = command
+        .arg("--output")
+        .arg(&output)
+        .arg("--input-binding")
+        .arg(&binding_path)
+        .arg("--binding-sha256")
+        .arg(binding_sha)
+        .output()
+        .unwrap();
+    assert!(
+        returned.status.success(),
+        "converter: {}",
+        String::from_utf8_lossy(&returned.stderr)
+    );
+    let script = r#"
+import json, sys
+from pathlib import Path
+import numpy as np
+from quoridor_training.common import common_cache_config
+from quoridor_training.terminal_cache import TerminalCorpus
+
+path = Path(sys.argv[1])
+meta = json.loads((path / "cache.json").read_text())
+config = common_cache_config(meta)
+assert config["prefix_lengths"] == [14, 2, 8]
+assert config["batch_start"] == 0 and config["batch_count"] == 3
+assert len(meta["source_content"]) == len(meta["source_binding"]) == 3
+expected = json.loads(Path(sys.argv[2]).read_text())["model_scale_authority"]
+assert meta["model_scale_authority"] == expected
+corpus = TerminalCorpus(path)
+assert corpus.row_count == 3
+assert corpus.eligible.tolist() == [True, False, True]
+assert (
+    corpus.labels[0, 1] == 1
+    and np.isnan(corpus.labels[1, 1])
+    and corpus.labels[2, 1] == 0
+)
+assert (
+    corpus.raw_root_scores.view("<u4").tolist()
+    == np.array([2, -0.0, -2], dtype="<f4").view("<u4").tolist()
+)
+assert [corpus.rows[i]["game"] for i in range(3)] == [
+    f"fixed-d-family-{i:06}" for i in range(3)
+]
+assert corpus.rows[1]["z"] is None
+families = {}
+for i in range(3):
+    row = corpus.rows[i]
+    assert families.setdefault(row["group"], row["split"]) == row["split"]
+assert not (path / "intake-incomplete.json").exists()
+(path / "intake-incomplete.json").write_text("synthetic interrupted publication")
+try:
+    TerminalCorpus(path)
+except ValueError:
+    pass
+else:
+    raise AssertionError("incomplete publication was accepted")
+print(
+    "actual converter/common_cache_config/TerminalCorpus: PASS; model forwards=0; fit updates=0"
+)
+"#;
+    let returned = std::process::Command::new(python)
+        .args(["-B", "-c", script])
+        .arg(&output)
+        .arg(binding_path)
+        .env(
+            "PYTHONPATH",
+            Path::new(env!("CARGO_MANIFEST_DIR"))
+                .join("../../python")
+                .canonicalize()
+                .unwrap(),
+        )
+        .env("OMP_NUM_THREADS", "1")
+        .env("MKL_NUM_THREADS", "1")
+        .env("CUDA_VISIBLE_DEVICES", "")
+        .output()
+        .unwrap();
+    assert!(
+        returned.status.success(),
+        "Python loader: {}",
+        String::from_utf8_lossy(&returned.stderr)
+    );
+    assert!(String::from_utf8_lossy(&returned.stdout).contains("fit updates=0"));
 }

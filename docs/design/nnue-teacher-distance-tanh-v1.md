@@ -519,6 +519,24 @@ bulk保存は**実保持増分を含むwhole8GiB（8589934592B）**を第一提�
 
 生成は既存2 CPU workers／family RAM2GiB級、learnerは既存GPU1／VRAM6GiB・family RAM8GiBを実配置後に使う提案である。軽量saved分析CPU3/RAM512MiB/GPU0と重複しない実cores/host reserveをallocatorが確認する。学習と生成の同時走行はRAM/IO競合があれば直列へ戻し、timed評価は全て直列。source/docs/限定tests/通常incremental build/private copy/reviewはstorage未設定で実施後一度量を確認し、bulk wholeに実増分を重複加算しない。実job controller時間を各command一度だけ記録し、nested native/forward/setupを重ねて足さない。所要時間・全LLM/admin費とcontinuous peakは実行前UNKNOWNである。
 
+### 381：実装する設定・cache・学習の境界
+
+生成の`common_study`は`families`、`prefix_seed`、`prefix_lengths`、`split_seed`、`root_value_policy`、`schedule`、`partition`、`batch_start`、`batch_count`、`excluded_books`を持つ。schedule/partitionは生成前の実BoundJson、excluded_booksはその参照のlistである。prefix_lengthsの設定順を保存し、global family順とchronological mainlineをoutcome順へ並べ替えない。実batch sliceと実node上限を使い、旧issue・N4/N8・固定batch数量・旧paired teacher maskを共通consumerの条件にしない。
+
+意味のselectorは`root_value_policy="outcome_only"`一つである。既存v3 compact layoutのz列に実final STM outcomeを保存し、common eligibilityは元eligibleかつfinite zとする。UNKNOWNはNaN/mask0、真正threefoldは0のまま適格となる。raw FP32は±2と正負zeroを含め原bitを保持し、near-goalのoutcome行を旧raw範囲で除外しない。複数の圧縮streamを設定slice順にconverterへ渡し、実ordered `source_content`／`source_binding`とbatch unionをmetadataへ保存する。T/Vと評価bookのcanonical/reflected/extension/endpoint系列衝突は生成・partition境界で拒否し、loaderがoutcomeからsplitを作り直さない。
+
+learnerは通常の`train --cache --output --config`に`experiment.study="mixed-outcome"`、target zと明示的`mixture`を渡す。train_family_row_capはnullまたは正整数、added/public行数はbatch_sizeに一致させ、source別reflection probability/seed・public sampling/diagnostic seed・実public membership/custody参照・selector.public_non_regression・output_limit_bytesを指定する。有限horizonはconfigured stepsとadded露出上限の小さい方で、端数でも全batchを続ける。Tだけを更新し、full new/public T/V curvesと実attempted／returned forwardを分け、既存尺度・BEST43 initializer・fresh optimizerを使う。INITIALは元initializerの参照、変更weightsはBEST/LASTとして保存する。
+
+381のsource/software準備をMainで検証した。learnerの元11 NN0、R2の実full-T/diagnostic scope、R1のmutable update失敗後LAST UNKNOWN／保存JSON／独立cleanupを各元scopeで確認した。producerの元8 data定義はFAILED Build内の成功として保全し、後続の[converter BUILD](../../.artifacts/research-team/integration324/mixed-outcome381-v1/converter-build-v3/operation-v1/manifest.json)は新3 stream integration・全対象Clippy・release・通常7versionsを正常once-finalize PASSにした。[runner BUILD](../../.artifacts/research-team/integration324/mixed-outcome381-v1/runner-build-v1/operation-v1/manifest.json)は未実行だった6定義とClippy/release/7versionsが実PASSで、global input CLI／実batch slice／取消とno-repeat／通常corpus／indexed RUNを確認した。実private converter3ba55549/1,644,840B、runner9a63d2f3/8,726,256BはそれぞれのCargo/Git/BUILDに束縛する。
+
+[一件の実接続確認](../../.artifacts/research-team/integration324/mixed-outcome381-v1/actual-codec-loader-interop-v2/result.json)では、設定済みの三つの小さいsynthetic圧縮streamをaccepted converterで変換し、stubなしのPython common_cache_config／TerminalCorpusで読み込んだ。goal/draw/UNKNOWN、raw2/-0/-2、連続slice・family split・incomplete拒否を確認した。実model forward/fit updateは0で、モデルpayloadや公開corpus全体は読まない。GPU配置とtrain loopは既存GPU path＋fake frameworkのNN0で確認した範囲であり、新しいcacheの実fitや新weights対応確認は未実行である。
+
+入力は `teacher-pilot --prepare-inputs SETTINGS --input-sha256 SHA` で一度準備し、実schedule/partition参照をbatch configへ渡す。既存finite sequenceの `settings.runs` が通常RUNを設定順に実行し、元childwait／結果・正常finalization／cleanup後に次へ進む。現在のconfigured RUNは明示的な `finalizers=[]` だけを扱い、missing/null/nonemptyはoutput/TMP/child所有前に拒否する。必要な別finalizerを黙って捨てない。重要なlabel/split/mixtureとこの義務境界の限定reviewはclearであり、batch毎のreview/ACKは追加しない。
+
+[未選択のreview用設定と結果](../../.artifacts/research-team/integration324/mixed-outcome381-v1/runtime-settings-v1/settings.UNSELECTED.json)に、現BUILD/artifact、既存public membership/acceptance・BEST43 metadata参照、InputConfig、4 slices、converter、通常train CLIと出力先案をまとめた。生成後のschedule/partition・streams/cache、新weightsや実physical配置は未作成で、nullを実FileRef/実行jobとして扱わない。推奨curveは100更新毎＋最終のselector/diagnosticでfull_train=falseとし、8192行panelと元6M提案を超えるfull-T・25更新診断を無断追加しない。full-Tや別diagnostic checkpointsはAPIと実forward boundで対応できる。
+
+上記1280生成・新fit・256評価は未開始である。抽出64対全行、public-V非悪化selector、bulk容量／部分停止と欠測は未選択差分として一度提示する。1280は開始request上限であり、LR/extension/endpoint衝突をまとめた実独立family数とT/V数は入力準備で記録する。独立1280なら1024T/256Vとなるが、衝突で減った群をoutcomeから再分割・補充しない。source/softwareの準備完了から科学設定を無断選択しない。
+
 実行を選択した場合の出力先案は `.worktree/assets/data/fixed-d-sigma-mixture380-v1/`（schedule/partition・generation・compact）、`.worktree/assets/checkpoints/fixed-d-sigma-mixture380-v1/`（候補と曲線）、`.worktree/arena-evaluation/.artifacts/fixed-d-sigma-mixture380-v1/`（evaluation/analysis）とする。現時点では作成しない。各段階の記録単位は**実設定snapshot＋結果の一組**で、モデル・入力・RAWは結果内の参照、progressは同じ結果のjournalに保存する。別のsource一覧・control/acceptance証明・バッチ毎手書き台帳を必須成果物にしない。
 
 次の人間判断は、この1280/64-row/50:50/batch2048/LR1e-4/最大8 newD露出/上記BEST条件/256局/whole8GiBと未完了方針を一回案として選ぶか、どの重要設定を変えるかである。計画leafの完了は新生成・fit・対局・任意N配分の発行ではない。既承認の374診断/349解釈と元RAW/FAILED/費用、models/defaults/N/seals/fits96/323pauseは保持する。

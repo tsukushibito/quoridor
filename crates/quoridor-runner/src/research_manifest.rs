@@ -185,7 +185,7 @@ fn phase_shape(e: &Experiment) -> bool {
         "corpus" => {
             e.numerical_qualification.is_some()
                 && e.models.is_empty()
-                && e.planned_slots == 8
+                && e.planned_slots > 0
                 && e.batch.is_none()
                 && e.argv.len() == 6
                 && e.argv[1..]
@@ -288,12 +288,59 @@ fn configured_arena_plan(intent: &Value, bound: &BoundControl, e: &Experiment) -
     let experiment: FileRef = serde_json::from_value(intent["experiment"].clone())?;
     if intent["schema"] != "quoridor.research.lifecycle-intent.v1"
         || intent["kind"] != "run"
-        || e.phase != "arena"
+        || (e.phase != "arena"
+            && !(e.phase == "compare" && e.argv.get(1).is_some_and(|a| a == "decisions")))
         || experiment.path != bound.path
         || experiment.sha256 != bound.sha256
         || plan.sha256 != e.canonical_plan_sha256
     {
         return Err("actual arena settings/experiment/plan identity mismatch".into());
+    }
+    Ok(plan)
+}
+/// The finite job selects existing configured corpus RUNs once. Each actual
+/// child retains the original config/input identity, without a batch admission file.
+fn configured_run_plan(intent: &Value, bound: &BoundControl, e: &Experiment) -> Result<FileRef> {
+    let settings_ref: FileRef = serde_json::from_value(intent["settings"].clone())?;
+    let settings: Value = settings_ref.read()?;
+    let index = intent["selection_index"]
+        .as_u64()
+        .ok_or("finite RUN index")? as usize;
+    let template = settings["runs"]
+        .as_array()
+        .and_then(|runs| runs.get(index))
+        .ok_or("selected finite RUN index")?;
+    let original_ref: FileRef = serde_json::from_value(template["experiment"].clone())?;
+    let original: Experiment = original_ref.read()?;
+    let actual: FileRef = serde_json::from_value(intent["experiment"].clone())?;
+    let plan: FileRef = serde_json::from_value(intent["approved_plan"].clone())?;
+    if intent["schema"] != "quoridor.research.lifecycle-intent.v1"
+        || settings["kind"] != "sequence"
+        || intent["kind"] != "run"
+        || e.phase != "corpus"
+        || template["finalizers"] != json!([])
+        || actual.path != bound.path
+        || actual.sha256 != bound.sha256
+        || serde_json::to_value(e)? != serde_json::to_value(original)?
+        || plan.sha256 != e.canonical_plan_sha256
+    {
+        return Err("selected finite RUN experiment/config identity".into());
+    }
+    for key in [
+        "owner",
+        "cwd",
+        "limits",
+        "support",
+        "artifact",
+        "caller_sources",
+        "approved_plan",
+        "data_root",
+        "data",
+        "finalizers",
+    ] {
+        if intent[key] != template[key] {
+            return Err(format!("selected finite RUN settings drift: {key}").into());
+        }
     }
     Ok(plan)
 }
@@ -626,8 +673,12 @@ fn launch_plan(bound: &BoundControl, e: &Experiment) -> Result<(Option<FileRef>,
             return Err("actual measurement RUN settings identity".into());
         }
         None
-    } else if e.phase == "arena" {
+    } else if e.phase == "arena"
+        || (e.phase == "compare" && e.argv.get(1).is_some_and(|a| a == "decisions"))
+    {
         Some(configured_arena_plan(&intent, bound, e)?)
+    } else if intent.get("selection_index").is_some() {
+        Some(configured_run_plan(&intent, bound, e)?)
     } else {
         let admission_ref: FileRef = serde_json::from_value(intent["admission"].clone())?;
         let admission: Value = admission_ref.read()?;
@@ -1048,7 +1099,7 @@ fn load_checked(
 mod common_corpus_phase_tests {
     use super::*;
     #[test]
-    fn corpus_requires_numerical_proof_exact_eight_and_maintained_caller() {
+    fn configured_corpus_positive_quantity_preserves_model_free_and_maintained_caller() {
         let r =
             json!({"path":"/synthetic/control","sha256":"0".repeat(64),"bytes":1,"mode":"0644"});
         let mut e:Experiment=serde_json::from_value(json!({"schema":"quoridor.research.experiment.v1",
@@ -1057,7 +1108,10 @@ mod common_corpus_phase_tests {
             "rules":"research-standard-2p-threefold-goal-first-v1","distance_units":"wall-distance/80",
             "value_perspective":"side-to-move","planned_slots":8,"batch":null,
             "argv":["/synthetic/native","teacher-pilot","--experiment","@EXPERIMENT@","--experiment-sha256","@EXPERIMENT_SHA256@"]})).unwrap();
-        assert!(phase_shape(&e));
+        for quantity in [1, 3, 12, 320] {
+            e.planned_slots = quantity;
+            assert!(phase_shape(&e));
+        }
         e.numerical_qualification = None;
         assert!(!phase_shape(&e));
         e.numerical_qualification = Some(serde_json::from_value(r).unwrap());
@@ -1147,6 +1201,44 @@ mod tests {
 #[cfg(test)]
 mod arena_settings_launch_tests {
     use super::*;
+    #[test]
+    fn decisions_configuration_preserves_bound_plan_and_experiment_identity() {
+        let plan =
+            json!({"path":"/synthetic/plan","sha256":"a".repeat(64),"bytes":1,"mode":"0644"});
+        let experiment =
+            json!({"path":"/synthetic/experiment","sha256":"b".repeat(64),"bytes":1,"mode":"0644"});
+        let mut e: Experiment = serde_json::from_value(json!({
+            "schema":"quoridor.research.experiment.v1","phase":"compare",
+            "build_manifest":plan,"config":plan,"inputs":[],"models":[],
+            "dynamic_libraries":[],"schedule":plan,"numerical_qualification":plan,
+            "canonical_plan_sha256":"a".repeat(64),"rules":"research-standard-2p-threefold-goal-first-v1",
+            "distance_units":"wall-distance/80","value_perspective":"side-to-move",
+            "planned_slots":1,"batch":0,"argv":["runner","decisions"]
+        })).unwrap();
+        let bound = BoundControl {
+            path: "/synthetic/experiment".into(),
+            sha256: "b".repeat(64),
+        };
+        let intent = json!({"schema":"quoridor.research.lifecycle-intent.v1","kind":"run",
+            "approved_plan":plan,"experiment":experiment});
+        assert!(intent.get("admission").is_none());
+        assert_eq!(
+            configured_arena_plan(&intent, &bound, &e).unwrap().sha256,
+            e.canonical_plan_sha256
+        );
+        e.argv[1] = "other-operation".into();
+        assert!(configured_arena_plan(&intent, &bound, &e).is_err());
+        e.argv[1] = "decisions".into();
+        e.canonical_plan_sha256 = "c".repeat(64);
+        assert!(configured_arena_plan(&intent, &bound, &e).is_err());
+        e.canonical_plan_sha256 = "a".repeat(64);
+        let mut changed = intent.clone();
+        changed["experiment"]["path"] = json!("/foreign/experiment");
+        assert!(configured_arena_plan(&changed, &bound, &e).is_err());
+        changed = intent.clone();
+        changed["kind"] = json!("build");
+        assert!(configured_arena_plan(&changed, &bound, &e).is_err());
+    }
     #[test]
     fn arena_configuration_plan_and_experiment_identity_are_admission_free() {
         let plan =
@@ -1402,5 +1494,99 @@ mod profiler_raw_tests {
         fs::remove_file(&output).unwrap();
         fs::create_dir(&output).unwrap();
         assert!(profiler_open_raw(&profiler, &output).is_err());
+    }
+}
+
+#[cfg(test)]
+mod configured_run_launch_tests {
+    use super::*;
+    #[test]
+    fn configured_batch_settings_bind_original_experiment_and_reject_foreign_selection() {
+        use sha2::{Digest, Sha256};
+        struct Temp(PathBuf);
+        impl Drop for Temp {
+            fn drop(&mut self) {
+                let _ = fs::remove_dir_all(&self.0);
+            }
+        }
+        let dir = std::env::temp_dir().join(format!(
+            "configured-runs-{}-{}",
+            std::process::id(),
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_nanos()
+        ));
+        fs::create_dir(&dir).unwrap();
+        let _temp = Temp(dir.clone());
+        let write = |name: &str, value: &Value| {
+            let path = dir.join(name);
+            let bytes = serde_json::to_vec(value).unwrap();
+            fs::write(&path, &bytes).unwrap();
+            #[cfg(unix)]
+            {
+                use std::os::unix::fs::PermissionsExt;
+                fs::set_permissions(&path, fs::Permissions::from_mode(0o600)).unwrap();
+            }
+            FileRef {
+                path,
+                sha256: format!("{:x}", Sha256::digest(&bytes)),
+                bytes: bytes.len() as u64,
+                mode: "0600".into(),
+            }
+        };
+        let config = write(
+            "config.json",
+            &json!({"global_schedule":"shared", "batch_start":3, "batch_count":3}),
+        );
+        let e: Experiment = serde_json::from_value(json!({"schema":"quoridor.research.experiment.v1", "phase":"corpus", "build_manifest":config, "config":config, "inputs":[config], "models":[], "dynamic_libraries":[], "schedule":config, "numerical_qualification":config, "canonical_plan_sha256":config.sha256, "rules":"research-standard-2p-threefold-goal-first-v1", "distance_units":"wall-distance/80", "value_perspective":"side-to-move", "planned_slots":3, "batch":null, "argv":["runner","teacher-pilot","--experiment","@EXPERIMENT@","--experiment-sha256","@EXPERIMENT_SHA256@"]})).unwrap();
+        let original = write(
+            "original-experiment.json",
+            &serde_json::to_value(&e).unwrap(),
+        );
+        let actual = write("actual-experiment.json", &serde_json::to_value(&e).unwrap());
+        let template = json!({"kind":"run", "owner":dir, "cwd":dir, "limits":{"family_B":1024}, "support":config, "artifact":config, "caller_sources":[], "approved_plan":config, "data_root":dir.join("batch"), "data":[], "finalizers":[], "experiment":original});
+        let selected = write(
+            "settings.json",
+            &json!({"kind":"sequence", "runs":[template]}),
+        );
+        let mut intent = template.clone();
+        intent["schema"] = json!("quoridor.research.lifecycle-intent.v1");
+        intent["settings"] = serde_json::to_value(selected).unwrap();
+        intent["selection_index"] = json!(0);
+        intent["experiment"] = serde_json::to_value(&actual).unwrap();
+        let bound = BoundControl {
+            path: actual.path,
+            sha256: actual.sha256,
+        };
+        assert!(intent.get("admission").is_none());
+        assert_eq!(
+            configured_run_plan(&intent, &bound, &e).unwrap().sha256,
+            config.sha256
+        );
+        for key in [
+            "owner",
+            "cwd",
+            "limits",
+            "support",
+            "artifact",
+            "caller_sources",
+            "approved_plan",
+            "data_root",
+            "data",
+            "finalizers",
+        ] {
+            let mut changed = intent.clone();
+            changed[key] = Value::Null;
+            assert!(configured_run_plan(&changed, &bound, &e).is_err());
+        }
+        intent["selection_index"] = json!(1);
+        assert!(configured_run_plan(&intent, &bound, &e).is_err());
+        intent["selection_index"] = json!(0);
+        let mut different = e.clone();
+        different.planned_slots = 4;
+        assert!(configured_run_plan(&intent, &bound, &different).is_err());
+        fs::write(&original.path, b"{}").unwrap();
+        assert!(configured_run_plan(&intent, &bound, &e).is_err());
     }
 }

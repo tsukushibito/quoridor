@@ -1,112 +1,154 @@
-//! Required study choices and lossless D6 labels; no model, search or geometry.
+//! Configured global fixed-D schedule and lossless outcome labels.
 use crate::{Result, Teacher, TeacherRow, terminal_stream::BoundJson};
 use serde::{Deserialize, Serialize};
-use serde_json::{Value, json};
+use serde_json::Value;
+use std::{collections::BTreeSet, ops::Range};
 
-pub const VERSION: &str = "fixed-d-common-corpus-warmstart-v1";
+pub const VERSION: &str = "fixed-d-common-outcome-v1";
 pub const STREAM_SCHEMA: &str = "quoridor-fixed-d-common-corpus-v1";
 pub const CACHE_SCHEMA: &str = "quoridor-common-corpus-terminal-geometry-v3";
-pub const PLAN: &str =
-    "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/plan.json";
 pub const EVALUATOR: &str = "original-distance-a0-b8-tanh";
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum RootValuePolicy {
-    ExcludeOutsideUnit,
-    DivideByTwo,
-}
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "snake_case")]
-pub enum DrawPolicy {
-    IncludeThreefold,
-    ExcludeThreefold,
+    OutcomeOnly,
 }
 
-/// No field has a default. The canonical human decision must select this shape.
+/// Global pre-output inputs are shared by every configured batch slice.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct Config {
-    pub selected_plan: BoundJson,
     pub families: u64,
     pub prefix_seed: u64,
     pub prefix_lengths: Vec<u16>,
     pub split_seed: u64,
     pub root_value_policy: RootValuePolicy,
-    pub draw_policy: DrawPolicy,
+    pub schedule: BoundJson,
+    pub partition: BoundJson,
+    pub batch_start: u64,
+    pub batch_count: u64,
+    pub excluded_books: Vec<BoundJson>,
 }
 impl Config {
     pub fn validate_shape(&self) -> Result<()> {
-        if self.selected_plan.path != std::path::Path::new(PLAN)
-            || self.families == 0
+        if self.families == 0
+            || self.batch_count == 0
+            || self
+                .batch_start
+                .checked_add(self.batch_count)
+                .is_none_or(|n| n > self.families)
             || self.prefix_lengths.is_empty()
-            || self.prefix_lengths.len() > 196
-            || !self
-                .families
-                .is_multiple_of(self.prefix_lengths.len() as u64)
             || self.prefix_lengths.iter().any(|n| *n == 0 || *n >= 200)
-            || self.prefix_lengths.windows(2).any(|p| p[0] >= p[1])
-        {
-            return Err("explicit positive balanced fresh family/prefix contract required".into());
-        }
-        Ok(())
-    }
-    pub fn validate_decision(&self, plan: &Value) -> Result<()> {
-        self.validate_shape()?;
-        let study = &plan["next_learning_study"];
-        if study["issue"] != "quoridor-4lc.362"
-            || study["starting_weights_SHA256"]
-                != "046fe926e56b955b0fb7de8f147a74ec33eace9cbc00a55c307f9b6541ab9841"
-            || study["descriptor_SHA256"]
-                != "46ec2c4708f96dcf9fad579c2fb0d1299c6663df27412f0faac98267467715e1"
-            || study["typed_evaluator_content_SHA256"]
-                != "96a5f41f875022d1752b9c999595ad58bfb2d42687a8f06de08d42b1c4215875"
-            || study["corpus"]["offtrajectory_rows"] != 0
-            || study["scientific_entry"] != true
-            || study["corpus"]["quantity_families"] != self.families
-            || study["corpus"]["blind_schedule"] != self.schedule_choice()
-            || study["corpus"]["whole_family_T_V_partition"] != self.partition_choice()
-            || study["range_terminal_handling"] != self.range_choice()
-            || study["common_learner_settings"].is_null()
+            || self.prefix_lengths.iter().collect::<BTreeSet<_>>().len()
+                != self.prefix_lengths.len()
         {
             return Err(
-                "human N/schedule/partition/range/learner choices remain unset or differ".into(),
+                "positive configured global quantity/length order/batch interval required".into(),
             );
+        }
+        for reference in [&self.schedule, &self.partition]
+            .into_iter()
+            .chain(&self.excluded_books)
+        {
+            if !reference.path.is_absolute()
+                || reference.sha256.len() != 64
+                || !reference
+                    .sha256
+                    .bytes()
+                    .all(|b| b.is_ascii_digit() || (b'a'..=b'f').contains(&b))
+            {
+                return Err(
+                    "absolute SHA-bound global schedule/partition/book input required".into(),
+                );
+            }
         }
         Ok(())
     }
-    pub fn validate_selected(&self) -> Result<()> {
-        // The fixed canonical path is checked before any producer output/geometry.
+    /// Validate the one actual global input partition, before output/search.
+    pub fn validate_inputs(&self) -> Result<()> {
         self.validate_shape()?;
-        if std::fs::metadata(&self.selected_plan.path)?.len() > 65536 {
-            return Err("canonical selected-study control exceeds bound".into());
+        let value = self.schedule.read()?;
+        let slots = value["scheduled"]
+            .as_array()
+            .ok_or("global scheduled array")?;
+        let requests = self.global_requests()?;
+        if slots.len() != requests.len() {
+            return Err("global schedule denominator".into());
         }
-        self.validate_decision(&self.selected_plan.read()?)
+        let mut planned = Vec::new();
+        for (i, (slot, (id, length))) in slots.iter().zip(&requests).enumerate() {
+            if slot["game"].as_u64() != Some(u64::try_from(i)?)
+                || slot["request_id"] != *id
+                || slot["requested_prefix_length"] != *length
+            {
+                return Err("global request/order binding".into());
+            }
+            if !slot["prefix"].is_null() {
+                planned.push((
+                    id.clone(),
+                    serde_json::from_value::<Vec<u16>>(slot["prefix"].clone())?,
+                ));
+            } else if slot["scheduled_failure"].is_null() {
+                return Err("missing scheduled prefix/failure".into());
+            }
+        }
+        let actual: crate::terminal::FamilyPartition =
+            serde_json::from_value(self.partition.read()?)?;
+        let expected = crate::terminal::partition_families(&planned, self.split_seed)?;
+        if serde_json::to_value(&actual)? != serde_json::to_value(&expected)? {
+            return Err("global input-only LR/extension/endpoint partition differs".into());
+        }
+        let mut joined = planned.clone();
+        for (book_index, reference) in self.excluded_books.iter().enumerate() {
+            let book = reference.read()?;
+            for (i, opening) in book["openings"]
+                .as_array()
+                .ok_or("excluded book openings")?
+                .iter()
+                .enumerate()
+            {
+                joined.push((
+                    format!("excluded-book-{book_index}-{i}"),
+                    serde_json::from_value(opening["prefix"].clone())?,
+                ));
+            }
+        }
+        if joined.len() != planned.len() {
+            let partition = crate::terminal::partition_families(&joined, self.split_seed)?;
+            let training = partition.assignments[..planned.len()]
+                .iter()
+                .map(|a| &a.family)
+                .collect::<BTreeSet<_>>();
+            if partition.assignments[planned.len()..]
+                .iter()
+                .any(|a| training.contains(&a.family))
+            {
+                return Err("evaluation-book LR/extension/endpoint family collision".into());
+            }
+        }
+        Ok(())
     }
-    pub fn schedule_choice(&self) -> Value {
-        json!({"version":VERSION,"prefix_seed":self.prefix_seed,"prefix_lengths":self.prefix_lengths,
-            "ordering":"round_robin_lengths","attempts_per_family":32,"old_games_included":false})
-    }
-    pub fn partition_choice(&self) -> Value {
-        json!({"algorithm":"canonical_LR_family_SHA256_seed_rank_train_floor_4F_over_5",
-            "seed":self.split_seed,"before_outcomes":true})
-    }
-    pub fn range_choice(&self) -> Value {
-        json!({"root_value_policy":self.root_value_policy,"draw_policy":self.draw_policy})
-    }
-    pub fn requests(&self) -> Result<Vec<(String, u16)>> {
+    pub fn batch_range(&self) -> Result<Range<usize>> {
         self.validate_shape()?;
-        let n = usize::try_from(self.families)?;
-        Ok((0..n)
+        Ok(usize::try_from(self.batch_start)?
+            ..usize::try_from(self.batch_start + self.batch_count)?)
+    }
+    pub fn global_requests(&self) -> Result<Vec<(String, u16)>> {
+        self.validate_shape()?;
+        Ok((0..usize::try_from(self.families)?)
             .map(|i| {
                 (
-                    format!("common-corpus362-family-{i:06}"),
+                    format!("fixed-d-family-{i:06}"),
                     self.prefix_lengths[i % self.prefix_lengths.len()],
                 )
             })
             .collect())
     }
-    /// Returns a common mask and the explicitly mapped B target, never mutating raw.
+    pub fn requests(&self) -> Result<Vec<(String, u16)>> {
+        Ok(self.global_requests()?[self.batch_range()?].to_vec())
+    }
+    /// The score is preserved as evidence, never used to exclude a real outcome.
     pub fn targets(
         &self,
         raw: f32,
@@ -116,15 +158,8 @@ impl Config {
         if !raw.is_finite() || raw.abs() > 2.0 || outcome.is_some_and(|z| !(-1..=1).contains(&z)) {
             return Err("finite original D score/true outcome range".into());
         }
-        let mapped = match self.root_value_policy {
-            RootValuePolicy::ExcludeOutsideUnit => (raw.abs() <= 1.0).then_some(raw),
-            RootValuePolicy::DivideByTwo => Some(raw / 2.0),
-        };
-        let eligible = primary_eligible
-            && outcome.is_some()
-            && mapped.is_some()
-            && !(outcome == Some(0) && self.draw_policy == DrawPolicy::ExcludeThreefold);
-        Ok((eligible, if eligible { mapped } else { None }))
+        let eligible = primary_eligible && outcome.is_some();
+        Ok((eligible, outcome.map(f32::from)))
     }
 }
 
@@ -166,100 +201,104 @@ pub fn raw_completed_d6(row: &TeacherRow, evidence: &Value) -> Result<f32> {
 mod tests {
     use super::*;
     fn config() -> Config {
+        let reference = BoundJson {
+            path: "/synthetic-pre-output.json".into(),
+            sha256: "0".repeat(64),
+        };
         Config {
-            selected_plan: BoundJson {
-                path: PLAN.into(),
-                sha256: "0".repeat(64),
-            },
-            families: 32,
-            prefix_seed: 362,
-            prefix_lengths: vec![4, 8, 12, 16],
-            split_seed: 3621,
-            root_value_policy: RootValuePolicy::ExcludeOutsideUnit,
-            draw_policy: DrawPolicy::IncludeThreefold,
+            families: 7,
+            prefix_seed: 91,
+            prefix_lengths: vec![16, 4, 8],
+            split_seed: 92,
+            root_value_policy: RootValuePolicy::OutcomeOnly,
+            schedule: reference.clone(),
+            partition: reference,
+            batch_start: 2,
+            batch_count: 3,
+            excluded_books: vec![],
         }
     }
     #[test]
-    fn unselected_and_consistently_changed_decision_refuse() {
-        let c = config();
-        assert!(
-            c.validate_decision(&json!({"next_learning_study": {"scientific_entry":false}}))
-                .is_err()
+    fn configured_global_batch_slice_preserves_ids_and_length_order() {
+        let mut c = config();
+        let all = c.global_requests().unwrap();
+        assert_eq!(
+            all.iter().map(|v| v.1).collect::<Vec<_>>(),
+            vec![16, 4, 8, 16, 4, 8, 16]
         );
-        let mut p = json!({"next_learning_study":{
-            "issue":"quoridor-4lc.362","starting_weights_SHA256":"046fe926e56b955b0fb7de8f147a74ec33eace9cbc00a55c307f9b6541ab9841",
-            "descriptor_SHA256":"46ec2c4708f96dcf9fad579c2fb0d1299c6663df27412f0faac98267467715e1",
-            "typed_evaluator_content_SHA256":"96a5f41f875022d1752b9c999595ad58bfb2d42687a8f06de08d42b1c4215875","scientific_entry":true,"corpus":{
-            "offtrajectory_rows":0,"quantity_families":32,"blind_schedule":c.schedule_choice(),"whole_family_T_V_partition":c.partition_choice()},
-            "range_terminal_handling":c.range_choice(),"common_learner_settings":{"selected":true}}});
-        assert!(c.validate_decision(&p).is_ok());
-        p["next_learning_study"]["corpus"]["quantity_families"] = json!(64);
-        assert!(c.validate_decision(&p).is_err());
+        assert_eq!(c.requests().unwrap(), all[2..5]);
+        c.batch_start = 6;
+        c.batch_count = 2;
+        assert!(c.requests().is_err());
+        c.batch_start = 0;
+        c.batch_count = 7;
+        c.prefix_lengths.push(4);
+        assert!(c.validate_shape().is_err());
     }
     #[test]
-    fn raw_terminal_range_and_unknown_use_one_common_mask() {
-        let mut c = config();
-        assert_eq!(c.targets(2., Some(1), true).unwrap(), (false, None));
-        assert_eq!(
-            c.targets(-0.75, Some(-1), true).unwrap(),
-            (true, Some(-0.75))
-        );
-        assert_eq!(c.targets(0.5, None, false).unwrap(), (false, None));
-        c.root_value_policy = RootValuePolicy::DivideByTwo;
-        assert_eq!(c.targets(-2., Some(-1), true).unwrap(), (true, Some(-1.)));
-        c.draw_policy = DrawPolicy::ExcludeThreefold;
-        assert_eq!(c.targets(0.5, Some(0), true).unwrap(), (false, None));
+    fn outcome_only_keeps_near_goal_raw_bits_and_unknown_has_no_label() {
+        let c = config();
+        for raw in [2.0, -2.0, -0.0, 0.75] {
+            let bits = f32::to_bits(raw);
+            assert_eq!(c.targets(raw, Some(1), true).unwrap(), (true, Some(1.0)));
+            assert_eq!(c.targets(raw, Some(0), true).unwrap(), (true, Some(0.0)));
+            assert_eq!(f32::to_bits(raw), bits);
+            assert_eq!(c.targets(raw, None, false).unwrap(), (false, None));
+            assert_eq!(
+                c.targets(raw, Some(-1), false).unwrap(),
+                (false, Some(-1.0))
+            );
+        }
         assert!(c.targets(f32::NAN, Some(1), true).is_err());
     }
     #[test]
-    fn raw_terminal_return_does_not_use_legacy_rootmean_and_depth_drift_refuses() {
-        let row = TeacherRow {
-            id: "synthetic".into(),
-            game: "synthetic".into(),
-            family: "synthetic".into(),
-            split: crate::Split::Train,
-            ply: 4,
-            prefix: vec![1, 2, 3, 4],
-            state_key: "synthetic".into(),
-            history_key: "synthetic".into(),
-            research_ruleset: Some("standard2p-threefold-v1".into()),
-            ids: [vec![], vec![]],
-            distance: [0., 0.],
-            side: 1,
-            action: Some(5),
-            teacher: Teacher::AlphaBeta {
-                value: 2.,
-                depth: 6,
-                nodes: 10,
-                bound: "completed_root".into(),
-                pv: vec![5],
-            },
-            z: Some(1.),
-            terminal_targets: None,
-            eligible: true,
-            model_sha: EVALUATOR.into(),
-            feature_signature: "synthetic".into(),
+    fn configured_global_partition_refuses_eval_extension_and_bound_input_drift() {
+        let root =
+            std::env::temp_dir().join(format!("configured-global-input-{}", std::process::id()));
+        std::fs::create_dir(&root).unwrap();
+        let write = |name: &str, value: Value| {
+            let path = root.join(name);
+            std::fs::write(&path, serde_json::to_vec(&value).unwrap()).unwrap();
+            BoundJson {
+                sha256: crate::file_sha(&path).unwrap(),
+                path,
+            }
         };
-        let mut evidence = json!({"search":{"accepted":true,"failure":null,"completed_depth":6,"stop":"depth_cap",
-            "raw_value":2.0,"raw_value_bits":2.0f32.to_bits(),"parent":{"stm":0,"ply":4,"ruleset":"standard2p-threefold-v1"}}});
-        assert_eq!(row.teacher.value(), Some(1.));
-        assert_eq!(
-            raw_completed_d6(&row, &evidence).unwrap().to_bits(),
-            2.0f32.to_bits()
+        let mut c = config();
+        c.families = 2;
+        c.batch_start = 0;
+        c.batch_count = 2;
+        c.prefix_lengths = vec![2];
+        let roots = vec![
+            (c.global_requests().unwrap()[0].0.clone(), vec![13, 75]),
+            (c.global_requests().unwrap()[1].0.clone(), vec![5, 75]),
+        ];
+        c.schedule = write(
+            "schedule.json",
+            serde_json::json!({"scheduled":roots.iter().enumerate().map(|(i,(id,prefix))|
+            serde_json::json!({"game":i,"request_id":id,"requested_prefix_length":2,"prefix":prefix,"scheduled_failure":null})).collect::<Vec<_>>()}),
         );
-        evidence["search"]["completed_depth"] = json!(5);
-        assert!(raw_completed_d6(&row, &evidence).is_err());
-        evidence["search"]["completed_depth"] = json!(6);
-        evidence["search"]["raw_value_bits"] = json!(1.0f32.to_bits());
-        assert!(raw_completed_d6(&row, &evidence).is_err());
-    }
-    #[test]
-    fn raw_f32_codec_preserves_terminal_and_signed_zero() {
-        for raw in [2.0f32, -2.0, -0.0, 0.125] {
-            assert_eq!(
-                f32::from_le_bytes(raw.to_le_bytes()).to_bits(),
-                raw.to_bits()
-            );
-        }
+        c.partition = write(
+            "partition.json",
+            serde_json::to_value(
+                crate::terminal::partition_families(&roots, c.split_seed).unwrap(),
+            )
+            .unwrap(),
+        );
+        c.validate_inputs().unwrap();
+        c.excluded_books = vec![write(
+            "book.json",
+            serde_json::json!({"openings":[{"prefix":[13,75,22]}]}),
+        )];
+        assert!(
+            c.validate_inputs()
+                .unwrap_err()
+                .to_string()
+                .contains("evaluation-book")
+        );
+        c.excluded_books.clear();
+        std::fs::write(&c.schedule.path, b"{}").unwrap();
+        assert!(c.validate_inputs().unwrap_err().to_string().contains("SHA"));
+        std::fs::remove_dir_all(root).unwrap();
     }
 }

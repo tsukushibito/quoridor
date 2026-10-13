@@ -197,3 +197,30 @@ class EarlyStopping:
         else:
             self.stale += 1
         return improved, bool(self.patience and self.stale >= self.patience)
+
+
+def family_training_view(groups, splits, eligible, cap):
+    """Chronological T-only indices; never relabel/delete canonical or V rows."""
+    if cap is not None and (type(cap) is not int or cap <= 0):
+        raise ValueError("train_family_row_cap must be explicit null or positive integer")
+    groups, splits, eligible = map(np.asarray, (groups, splits, eligible))
+    if groups.ndim != 1 or splits.shape != groups.shape or eligible.shape != groups.shape:
+        raise ValueError("parallel compact family/split/eligibility arrays")
+    if not np.isin(splits, (0, 1)).all() or eligible.dtype != np.dtype(bool):
+        raise ValueError("literal T/V and eligibility required")
+    # Every family retains one split, including ineligible rows.
+    families = {}
+    for i, (group, split, valid) in enumerate(zip(groups, splits, eligible)):
+        bank = families.setdefault(int(group), (int(split), []))
+        if bank[0] != split:
+            raise ValueError("whole family leaked across T/V")
+        if split == 0 and valid:
+            bank[1].append(i)
+    selected = []
+    for _, indices in families.values():
+        count = len(indices) if cap is None else min(len(indices), cap)
+        if count == 1:
+            selected.append(indices[0])
+        elif count > 1:
+            selected.extend(indices[j * (len(indices) - 1) // (count - 1)] for j in range(count))
+    return np.asarray(sorted(selected), dtype=np.int64)

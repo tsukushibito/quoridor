@@ -233,7 +233,9 @@ def require_completed_stream_cache(path, manifest, *, full_volume=False):
     if manifest.get("schema") == "quoridor-common-corpus-terminal-geometry-v3":
         if intake.get("scope") != "common-corpus":
             raise ValueError("compressed common cache requires explicit common scope")
-        phase = "common_corpus"  # Detailed source/config was joined once at publication.
+        # The common cache owner validates its published typed lineage and binary
+        # sampling. Do not require a duplicate detailed generator header here.
+        return
     else:
         phase = intake.get("provenance", {}).get("header", {}).get("config", {}).get("phase")
     if intake.get("scope") != "synthetic-fixture":
@@ -401,7 +403,10 @@ def nonterminal_bound(arrays, statistics, bypass):
 
     additions = 24 + 48 * 200
     ft = [
-        rounded(add(abs(float(b)), mul(float(additions), float(np.max(np.abs(w))))), additions)
+        rounded(
+            add(abs(float(b)), mul(float(additions), float(np.max(np.abs(w))))),
+            additions,
+        )
         for w, b in zip(ft_w, ft_b, strict=True)
     ]
     dense = [

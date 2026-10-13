@@ -1,4 +1,4 @@
-"""New dual-terminal-teacher cache behind the maintained geometry batch API."""
+"""Published terminal outcomes behind the maintained geometry batch API."""
 
 from array import array
 from collections.abc import Sequence
@@ -25,7 +25,13 @@ COMMON_WIDTHS = {
     "common-eligible.u8": 1,
     "sampling.bin": 6,
 }
-FILES = {"geometry.bin", "distance-steps.u8", "terminal-margin.f32", "labels.f32", "rows.jsonl"}
+FILES = {
+    "geometry.bin",
+    "distance-steps.u8",
+    "terminal-margin.f32",
+    "labels.f32",
+    "rows.jsonl",
+}
 
 
 def validate_terminal_metadata(row):
@@ -135,10 +141,10 @@ class TerminalRows(Sequence):
             return {
                 "id": self.corpus.row_ids[index],
                 "group": self.corpus.families[group],
-                "game": self.corpus.group_games[group],
+                "game": self.corpus.game_names[int(self.corpus.row_game_codes[index])],
                 "split": ("train", "validation")[int(self.corpus.splits[index])],
                 "primary_eligible": bool(self.corpus.primary_eligible[index]),
-                "teacher_type": "completedD6_root_and_final_outcome",
+                "teacher_type": "terminal_outcome",
                 "rootmean": label(0),
                 "z": label(1),
                 "outcome_steps": None if label(1) is None else 80 * label(1),
@@ -325,11 +331,10 @@ class TerminalCorpus(CompactCorpus):
         cfg = common_cache_config(m)
         widths = COMMON_WIDTHS
         if (
-            (self.path / "cache.json").stat().st_size > 1024**2
-            or m["feature_count"] != 312
+            m["feature_count"] != 312
             or m["allow_test"] is not False
             or type(m["rows"]) is not int
-            or not 0 <= m["rows"] <= cfg["families"] * 200
+            or not 0 <= m["rows"] <= cfg["batch_count"] * 200
             or m["label_columns"] != ["rootmean", "z", "terminal_margin", "completed_root_raw"]
             or m["files"] != {name: name for name in widths}
             or set(m["sha256"]) != set(widths)
@@ -361,6 +366,7 @@ class TerminalCorpus(CompactCorpus):
                 "format",
                 "width_B",
                 "families",
+                "games",
                 "row_ids",
                 "rows_by_family",
                 "common_eligible_by_family",
@@ -438,6 +444,40 @@ class TerminalCorpus(CompactCorpus):
         self.families = [v["family"] for v in families]
         self.group_games = [v["game"] for v in families]
         self.row_ids = sampling["row_ids"]
+        blocks = sampling["games"]
+        if not isinstance(blocks, list) or len(blocks) > cfg["batch_count"]:
+            raise ValueError("compact chronological game blocks")
+        self.game_names = []
+        self.row_game_codes = np.empty(self.row_count, dtype=np.uint32)
+        offset = 0
+        for code, block in enumerate(blocks):
+            if (
+                not isinstance(block, dict)
+                or set(block) != {"game", "family_code", "start", "rows"}
+                or not isinstance(block["game"], str)
+                or not 0 < len(block["game"].encode()) <= 256
+                or block["game"] in self.game_names
+                or type(block["family_code"]) is not int
+                or not 0 <= block["family_code"] < len(families)
+                or type(block["start"]) is not int
+                or block["start"] != offset
+                or type(block["rows"]) is not int
+                or not 0 < block["rows"] <= 200
+                or offset + block["rows"] > self.row_count
+            ):
+                raise ValueError("compact game chronology/count/family")
+            end = offset + block["rows"]
+            if np.any(self.groups[offset:end] != block["family_code"]):
+                raise ValueError("compact game family drift")
+            self.game_names.append(block["game"])
+            self.row_game_codes[offset:end] = code
+            offset = end
+        if offset != self.row_count:
+            raise ValueError("compact game row census")
+        for code, family in enumerate(families):
+            first = next((b for b in blocks if b["family_code"] == code), None)
+            if first is None or first["game"] != family["game"]:
+                raise ValueError("compact first-arrival game identity")
         split_codes = np.asarray(
             [0 if v["split"] == "train" else 1 for v in families], dtype=np.uint8
         )
@@ -464,19 +504,13 @@ class TerminalCorpus(CompactCorpus):
         self.labels[:, :2] = original
         self.labels[:, 2] = margin
         self.labels[:, 3] = self.raw_root_scores
+        expected_mask = self.primary_eligible.astype(bool) & np.isfinite(original[:, 1])
         if (
-            not np.isfinite(self.labels[self.eligible]).all()
+            not np.array_equal(self.eligible, expected_mask)
+            or not np.isfinite(self.labels[self.eligible]).all()
             or np.any(~(np.isnan(original[:, 1]) | np.isin(original[:, 1], [-1, 0, 1])))
             or np.any(np.abs(original[np.isfinite(original[:, 0]), 0]) > 1)
             or np.any(np.abs(margin[np.isfinite(margin)]) > 80)
-            or (
-                cfg["root_value_policy"] == "exclude_outside_unit"
-                and np.any(np.abs(self.raw_root_scores[self.eligible]) > 1)
-            )
-            or (
-                cfg["draw_policy"] == "exclude_threefold"
-                and np.any(original[self.eligible, 1] == 0)
-            )
             or not np.isfinite(self.maps[0]["distance"]).all()
             or np.any(self.integer_distances > 80)
         ):
@@ -491,25 +525,6 @@ class TerminalCorpus(CompactCorpus):
             "dataset_sha": self.manifest_sha,
             "path": str(self.path.resolve()),
             "test_opened": False,
-        }
-
-    def prepare_common_teachers(self, mapping, draw_policy):
-        """Validate the selected projection; raw labels and producer eligibility stay intact."""
-        if not self.common:
-            raise ValueError("common study cannot use legacy terminal/rootmean cache")
-        cfg = self.manifest["common_corpus"]["config"]
-        if mapping != cfg["root_value_policy"] or draw_policy != cfg["draw_policy"]:
-            raise ValueError("learner cannot change producer mapping/draw policy")
-        self.verify_binding()
-        self.common_teacher_mapping = {
-            "mapping": mapping,
-            "draw_policy": draw_policy,
-            "planned_rows": self.row_count,
-            "eligible_rows": int(self.eligible.sum()),
-            "unavailable_rows": int((~self.eligible).sum()),
-            "teacher_B_scale": 0.5 if mapping == "divide_by_two" else 1.0,
-            "source_mask": "common-eligible.u8",
-            "family_partition_sha256": self.manifest["family_partition_sha256"],
         }
 
     def verify_binding(self):
