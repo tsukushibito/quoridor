@@ -240,9 +240,16 @@ def selected_arena(spec):
         "caller_sources",
     ):
         require(spec[key] == template[key], "selected arena settings drift: " + key)
+    launch_fields = {
+        "TMPDIR",
+        "QUORIDOR_LIFECYCLE_INTENT",
+        "QUORIDOR_LIFECYCLE_INTENT_PATH",
+        "QUORIDOR_LIFECYCLE_PARENT_PID",
+        "QUORIDOR_LIFECYCLE_PARENT_IDENTITY",
+    }
     require(
-        {k: v for k, v in spec["env"].items() if k != "TMPDIR"}
-        == {k: v for k, v in template["env"].items() if k != "TMPDIR"},
+        {k: v for k, v in spec["env"].items() if k not in launch_fields}
+        == {k: v for k, v in template["env"].items() if k not in launch_fields},
         "selected arena environment drift",
     )
     return spec["approved_plan"]

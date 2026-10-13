@@ -97,6 +97,46 @@ class SequenceTests(unittest.TestCase):
         with self.assertRaisesRegex(lc.Refused, "outside selected"):
             lc.selected_arena(spec)
 
+    def test_sequence_generated_launch_fields_preserve_configured_environment(self):
+        spec = {
+            "experiment": self.metadata("experiment.json", {"phase": "arena", "batch": 6}),
+            "owner": str(self.root),
+            "writer": "fixture",
+            "cwd": str(ROOT),
+            "limits": {},
+            "support": {},
+            "approved_plan": self.plan,
+            "artifact": {},
+            "caller_sources": [],
+            "env": {"BOUND": "same", "TMPDIR": "configured-TMP"},
+        }
+        self.settings["arena"]["template"] = copy.deepcopy(spec)
+        spec["settings"] = self.metadata("selected.json", self.settings)
+        spec_ref = self.metadata("intent.json", spec)
+        spec["env"].update(
+            TMPDIR="operation-TMP",
+            QUORIDOR_LIFECYCLE_INTENT=spec_ref["sha256"],
+            QUORIDOR_LIFECYCLE_INTENT_PATH=spec_ref["path"],
+            QUORIDOR_LIFECYCLE_PARENT_PID=str(os.getpid()),
+            QUORIDOR_LIFECYCLE_PARENT_IDENTITY=json.dumps(
+                lc.process.identity(lc.process.process_info(os.getpid()))
+            ),
+        )
+        actual_launch = copy.deepcopy(spec["env"])
+        self.assertEqual(lc.selected_arena(spec), self.plan)
+        self.assertEqual(spec["env"], actual_launch)
+        self.assertEqual(
+            lc.document(spec["settings"])["arena"]["template"]["env"],
+            {"BOUND": "same", "TMPDIR": "configured-TMP"},
+        )
+        spec["env"]["BOUND"] = "foreign"
+        with self.assertRaisesRegex(lc.Refused, "environment drift"):
+            lc.selected_arena(spec)
+        spec["env"]["BOUND"] = "same"
+        spec["env"]["QUORIDOR_LIFECYCLE_UNDECLARED"] = "foreign"
+        with self.assertRaisesRegex(lc.Refused, "environment drift"):
+            lc.selected_arena(spec)
+
     def test_sequence_derives_current_pair_metadata_and_refuses_duplicate_namespace(self):
         artifact = {"path": "/synthetic/native", "sha256": "a" * 64}
         config = self.metadata("config.json", {"output": str(self.root / "original-game-output")})
