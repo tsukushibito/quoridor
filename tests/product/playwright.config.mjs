@@ -12,6 +12,8 @@ export default defineConfig({
   retries: 0,
   reporter: 'list',
   timeout: 30_000,
+  // Shader initialization and one real AI turn share the single browser CPU.
+  expect: { ...maintained.expect, timeout: 45_000 },
   outputDir: process.env.N3L_RAW_DIR,
   webServer: undefined,
   use: { ...maintained.use, baseURL: process.env.E2E_BASE_URL },

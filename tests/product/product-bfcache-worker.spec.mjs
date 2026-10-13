@@ -1,4 +1,6 @@
 import { expect, test } from '@playwright/test';
+import { writeFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 // One current-product lifecycle check. No synthetic events or research engine.
 test.use({
@@ -31,6 +33,7 @@ async function capture(page) {
       rendererPhase: diagnostics.phase,
       audio: app.audio(),
       ai: app.aiDiagnostics(),
+      renderer: app.resources(),
       canvasCount: document.querySelectorAll('#board canvas').length,
       documentToken: window.__N3L_CACHE_OBSERVATION__?.token,
     };
@@ -74,7 +77,9 @@ function assertConnected(record) {
 test('trusted BFCache return preserves connected product Worker-Wasm and controls', async ({
   page,
 }, testInfo) => {
-  test.setTimeout(30_000);
+  // The single-core SwiftShader setup can consume most of the former 30s limit.
+  // Leave time for the unchanged AI work, cache return and failure journal.
+  test.setTimeout(90_000);
   const journal = {
     schema: 'quoridor.product-bfcache-worker.v1',
     outcome: 'PARTIAL',
@@ -89,6 +94,7 @@ test('trusted BFCache return preserves connected product Worker-Wasm and control
     postInput: null,
     cache: null,
     primary: null,
+    failureState: null,
     claims:
       'One completed opening AI turn and idle connected Worker across cache; no in-flight cancellation, second search, physical request-count or sound-output proof.',
   };
@@ -99,7 +105,7 @@ test('trusted BFCache return preserves connected product Worker-Wasm and control
   };
   page.on('pageerror', (error) => noteError(error.message));
   page.on('console', (message) => {
-    if (message.type() === 'error') noteError(message.text());
+    if (message.type() === 'error') noteError(`${message.text()} (${message.location().url})`);
   });
   page.on('worker', (worker) => {
     if (journal.observedWorkerUrls.length < 4)
@@ -148,7 +154,9 @@ test('trusted BFCache return preserves connected product Worker-Wasm and control
     await page.locator('#dialog-start').click();
     await expect(page.locator('#startup-dialog')).toBeHidden();
     await expect
-      .poll(() => page.evaluate(() => window.__QUORIDOR_APP_TEST_API__?.state().phase))
+      .poll(() => page.evaluate(() => window.__QUORIDOR_APP_TEST_API__?.state().phase), {
+        timeout: 45_000,
+      })
       .toBe('humanTurn');
     await expect
       .poll(() => page.evaluate(() => window.__QUORIDOR_APP_TEST_API__?.state().view?.ply))
@@ -192,7 +200,20 @@ test('trusted BFCache return preserves connected product Worker-Wasm and control
       });
     });
     await page.goto('./assets/ui/quoridor-title-logo.png');
-    await page.goBack();
+    // A restored cached document does not issue a new load event. Observe the
+    // real history commit, then the trusted pageshow that proves restoration.
+    await page.goBack({ waitUntil: 'commit', timeout: 15_000 });
+    await expect
+      .poll(() =>
+        page.evaluate((token) => {
+          const observation = window.__N3L_CACHE_OBSERVATION__;
+          return (
+            !!observation?.shows.length &&
+            (observation.token !== token || observation.shows.at(-1)?.persisted)
+          );
+        }, journal.before.documentToken),
+      )
+      .toBe(true);
     journal.cache = await page.evaluate(() => {
       const observation = window.__N3L_CACHE_OBSERVATION__;
       return {
@@ -265,11 +286,19 @@ test('trusted BFCache return preserves connected product Worker-Wasm and control
     primary = error;
     if (journal.outcome === 'PARTIAL') journal.outcome = 'ASSERTION_OR_SETUP_FAILED';
     journal.primary = String(error?.stack ?? error).slice(0, 4096);
+    try {
+      journal.failureState = await capture(page);
+    } catch (snapshotError) {
+      journal.failureState = { unavailable: String(snapshotError).slice(0, 1024) };
+    }
   }
   // Full bounded journal on success, UNKNOWN or failure. Attachment failure cannot erase primary.
   try {
     const body = Buffer.from(JSON.stringify(journal, null, 2));
     if (body.length > 262_144) throw new Error('PRODUCT_JOURNAL_BOUND');
+    // Framework attachments may be cancelled when a test times out. Preserve
+    // the same bounded bytes in the owned raw directory before attaching them.
+    writeFileSync(join(process.env.N3L_RAW_DIR, 'product-journal.json'), body, { flag: 'wx' });
     await testInfo.attach('product-bfcache-worker-journal', {
       body,
       contentType: 'application/json',
