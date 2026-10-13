@@ -10,10 +10,10 @@
     "integration": "quoridor-4lc.342.4"
   },
   "current_executable": [
-    "Finite source/design/cost preparation for BEST43 depth6 fixedD win/loss-teacher data improvement proposal; no numerical experiment or replay"
+    "quoridor-4lc.380 concrete recommendation and ordinary preparation only; no new generation, fit, native model validation or evaluation job"
   ],
   "main_volume_N": null,
-  "human_gate": "Current study362 requires human selection of corpus N/full blind schedule and important common fine-tuning hyperparameters/terminal-range semantics after ONE completed priced recommendation; direction/two BEST43 warm-start candidates already approved. Source preparation and independent authorised maintenance do not wait for an ACK or all-owner closure.",
+  "human_gate": "380 quantity/starts/split/outcome eligibility/extraction/mixing/learning/checkpoint/evaluation/bulk support remain a recommendation for human selection. Closed362/371 execution permissions and paused323 are not inherited. Routine preparation needs no ACK or storage micro-budget.",
   "pilot": {
     "games": 64,
     "prefix_lengths": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
@@ -1041,5 +1041,132 @@
     },
     "sealed_E_opened": false,
     "public_game_history_winner_rules_lineage": "UNKNOWN"
+  },
+  "mixed_learning_proposal": {
+    "issue": "quoridor-4lc.380",
+    "status": "RECOMMENDATION_NOT_SCIENCE_AUTHORIZATION",
+    "scientific_entry": false,
+    "design": "docs/design/nnue-teacher-distance-tanh-v1.md#380多様な固定dデータと公開sigma勝敗の混合学習案2026-10-13",
+    "baseline_ref": "public_replay_study; immutable BEST43 descriptor46ec/weights046fe/evaluator96a5 and incumbent T-only scale",
+    "generation": {
+      "families_upper": 1280,
+      "mainlines_per_family": 1,
+      "batch_sizes": [320, 320, 320, 320],
+      "prefix_lengths": [4, 8, 12, 16],
+      "families_per_prefix_length": 320,
+      "prefix_seed": 38020261013,
+      "prefix_attempts": 32,
+      "selection": "existing sorted legal-action xorshift64, target blind; global canonical/reflected prefixes, extension-lineage and bounded endpoint-geometry dedupe before outcomes",
+      "split_seed": 38020261014,
+      "split": "existing canonical-family SHA rank, frozen1024T/256V; failures leave holes; descendants/reflections retain split",
+      "fixed_D": [0, 8],
+      "score": "tanh",
+      "completed_depth": 6,
+      "TT": 4096,
+      "PVS": true,
+      "nodes_per_move": 100000000,
+      "total_ply_cap_including_prefix": 200,
+      "teacher": "goal outcome zSTM or true threefold0; UNKNOWN unlabelled; no raw-root outside-unit exclusion",
+      "failure": "unexpected error/cancel stops suffix; normal censored games retained; no replay/refill",
+      "nodes_per_batch_aggregate": 40000000000,
+      "nodes_scope": "existing shared NodeBudget per batch, scaled old8game1G; no new per-game pool"
+    },
+    "learning": {
+      "candidates": 1,
+      "warm_start": "same immutable BEST43 parameters, fresh Adam; incumbent scale, no output bypass or feature/math change",
+      "train_view": "per T-family <=64 evenly spaced eligible chronological rows; canonical/all V rows retained",
+      "T_view_rows_upper": 65536,
+      "batch": 2048,
+      "newD_rows_per_batch": 1024,
+      "public_T_rows_per_batch": 1024,
+      "objective": "one mean FP32 outcome MSE over2048; no optimal-ratio claim",
+      "newD_sampler": "existing shuffled FullBatchSampler cycling",
+      "public_sampler": "uniform replacement",
+      "reflection_probability": 0.5,
+      "seeds": {
+        "model_order": 38020261015,
+        "reflection": 38020261016,
+        "public_sampler": 38020261017,
+        "public_T_diagnostic": 38020261019
+      },
+      "LR": 0.0001,
+      "optimizer": {
+        "name": "Adam",
+        "betas": [0.9, 0.999],
+        "eps": 1e-8,
+        "weight_decay": 0
+      },
+      "updates": "ceil(8*actual_newD_T_view_rows/1024), max512; no fit if T or V empty",
+      "updates_upper": 512,
+      "warmup": "min(100,actual U), then constant",
+      "early_stop": "100-update and final observations;5 consecutive newD V improvements below max(1e-8,1e-4*previous best) stop",
+      "observations_upper": 7,
+      "validation": "full opened public V419150 and full newD V<=51200 separately; sealed E untouched",
+      "diagnostic_T_rows_each_upper": 8192,
+      "checkpoints": ["INITIAL", "BEST", "LAST"],
+      "BEST": "min newD V MSE among observations with public V<=same actual INITIAL and newD V<INITIAL; earliest tie; none ->INITIAL/no improvement",
+      "all_row_forwards_cap_proposed": 6000000,
+      "device_proposal": "existing GPU1/VRAM6GiB/family RAM8GiB; actual placement pending; no LR/ratio sweep"
+    },
+    "evaluation": {
+      "new_start_families": 64,
+      "families_per_prefix_length": 16,
+      "seed": 38020261018,
+      "opponents": ["immutable BEST43", "fixedD"],
+      "colours": 2,
+      "games_upper": 256,
+      "method": "current two-AI-workers+main CPU/thread1,100ms actual receipt/5ms reserve, total200plies; same rules/history/cancel/drain",
+      "work_stop": "no concurrent generation/learner/analysis/build during timed evaluation",
+      "selection": "disjoint before outcomes; fixed chosen checkpoint; no outcome-driven rescue or Sigma follow-up",
+      "retained_outcome_bytes": 630784
+    },
+    "work_upper": {
+      "prefix_plies": 12800,
+      "prefix_attempt_steps": 409600,
+      "D6_turns_after_prefix": 243200,
+      "generation_nodes": 160000000000,
+      "training_row_forwards": 1048576,
+      "curve_row_forwards": 3407138,
+      "training_plus_curves": 4455714,
+      "evaluation_turns": 51200
+    },
+    "storage_proposal": {
+      "whole_B": 8589934592,
+      "issued": false,
+      "composition_B": {
+        "canonical_generation": 6442450944,
+        "compact_config_progress": 536870912,
+        "learner_curves_checkpoints": 134217728,
+        "actual_compile_artifact_growth": 536870912,
+        "evaluation_RAW": 536870912,
+        "serial_TMP_failure_review_Git": 402653184
+      },
+      "classification": "bulk aggregate; components are pricing, not subcaps; ordinary work storageNone/postusage",
+      "completion_guarantee": false,
+      "limitation": "16MiB per game event *1280=20GiB logical worst case. Practical8GiB may stop partial, no deletion/refill/automatic extension; whole22GiB+ is alternative worst-case support subject to actual retention",
+      "global_cap_B": 50000000000,
+      "current_global_allocated_B": null,
+      "dated_covered_observation": {
+        "at": "2026-10-11",
+        "allocated_B": 24161214464
+      },
+      "before_bulk": "limited current coverage/known delta and actual FS4GiB reserve; historical holds are not occupancy; no whole old-assets audit"
+    },
+    "outputs_proposed": {
+      "data": ".worktree/assets/data/fixed-d-sigma-mixture380-v1/",
+      "candidate": ".worktree/assets/checkpoints/fixed-d-sigma-mixture380-v1/",
+      "evaluation_analysis": ".worktree/arena-evaluation/.artifacts/fixed-d-sigma-mixture380-v1/",
+      "unit": "actual configuration snapshot + result/journal; shared input/model/RAW refs, no duplicate acceptance ledger"
+    },
+    "implementation": "existing generator/common_corpus/Python publisher pilot hardbindings; outcome eligibility; existing mix functions+normal GPU train; ordinary current arena/sequence. Details and affected checks in design. No source implementation or scientific data created by380.",
+    "cause_analysis": "saved355/358/364/370/371 and mixed-cohort374; saved349 ordering hypothesis only, validator attribution unresolved. No new model inference/Search/census prerequisite.",
+    "unchanged": [
+      "323 USERPAUSE",
+      "BEST43/models/defaults",
+      "fullN/seals",
+      "old common-fourfit/96",
+      "all original RAW/FAILED/UNKNOWN/costs",
+      "no new calibration or inference-time prediction"
+    ]
   }
 }
