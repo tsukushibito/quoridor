@@ -136,6 +136,7 @@ pub struct Experiment {
     pub schedule: FileRef,
     #[serde(default)]
     pub numerical_qualification: Option<FileRef>,
+    #[serde(default)]
     pub canonical_plan_sha256: String,
     pub rules: String,
     pub distance_units: String,
@@ -206,16 +207,7 @@ fn phase_shape(e: &Experiment) -> bool {
                         "@EXPERIMENT_SHA256@",
                     ]
         }
-        "ordering-qualification" => {
-            #[cfg(feature = "ordering-assessment")]
-            {
-                crate::ordering_assessment::qualification_shape(e)
-            }
-            #[cfg(not(feature = "ordering-assessment"))]
-            {
-                false
-            }
-        }
+        "compare" if e.argv.get(1).is_some_and(|a| a == "measure") => e.models.len() == 1,
         "compare" if e.argv.get(1).is_some_and(|a| a == "decisions") => {
             e.numerical_qualification.is_some()
                 && e.planned_slots > 0
@@ -286,104 +278,9 @@ fn approved_launch_plan(
     Ok(expected)
 }
 pub(crate) fn approved_arena_plan(bound: &BoundControl, e: &Experiment) -> Result<FileRef> {
-    launch_plan(bound, e).map(|(plan, _)| plan)
-}
-
-#[cfg(feature = "ordering-assessment")]
-fn retained_ordering_source(
-    current: &Value,
-    original: &Value,
-    adoption: &Value,
-    qualification: &FileRef,
-    original_ref: &FileRef,
-    cheap: Option<&Value>,
-) -> Result<()> {
-    // One source-adoption decision records the reviewed wrapper-only change.
-    // Original numerical evidence still describes the ORIGINAL artifact and source.
-    let reuse = &adoption["retained_ordering_numerical"];
-    if reuse.as_object().is_none_or(|fields| {
-        fields.len() != 3 + usize::from(cheap.is_some())
-            || !["scope", "qualification", "build_manifest"]
-                .iter()
-                .all(|key| fields.contains_key(*key))
-            || (cheap.is_some() && !fields.contains_key("cheap_static376"))
-    }) {
-        return Err("single adopted numerical scope required; no source graph".into());
-    }
-    if adoption["schema"] != "quoridor.research.source-adoption.v1"
-        || adoption["status"] != "ACCEPTED"
-        || adoption["source"] != current["source"]
-        || reuse["scope"] != "ordering20-input-and-head-v1"
-        || reuse["qualification"] != serde_json::to_value(qualification)?
-        || reuse["build_manifest"] != serde_json::to_value(original_ref)?
-        || cheap.is_some_and(|identity| reuse["cheap_static376"] != *identity)
-        || !build_status(original)
-        || original["source"]["workspace"] != current["source"]["workspace"]
-    {
-        return Err("ordering retained numerical adoption/subject mismatch".into());
-    }
-    // This exact accepted Source owns the independently reviewed input/head scope
-    // correspondence. Cargo and its artifact record own the new image, not a
-    // second embedded source graph. The ORIGINAL numerical artifact stays original.
-    for field in ["manifest", "lock", "cargo_configs"] {
-        if original["source"][field] != current["source"][field] {
-            return Err("ordering native build input changed".into());
-        }
-    }
-    let release_commands = |subject: &Value| -> Result<Vec<Value>> {
-        Ok(subject["checks"]
-            .as_array()
-            .ok_or("actual build commands")?
-            .iter()
-            .filter(|c| c["role"] == "build")
-            .map(|c| c["argv"].clone())
-            .collect())
-    };
-    if release_commands(original)? != release_commands(current)? {
-        return Err("ordering actual release compiler flags changed".into());
-    }
-    // Keep the original input/head native compiler/codegen subject. Current
-    // BUILD/RUN own other tools and runtime inputs, including controller Python.
-    if !original["tools"]["RUSTC"].is_object()
-        || !original["tools"]["RUSTC"]["file"].is_object()
-        || original["tools"]["RUSTC"]["version"]
-            .as_str()
-            .is_none_or(|version| version.trim().is_empty())
-        || original["tools"]["RUSTC"] != current["tools"]["RUSTC"]
-    {
-        return Err("ordering native compiler changed".into());
-    }
-    for flag in [
-        "RUSTFLAGS",
-        "CARGO_PROFILE_RELEASE_OPT_LEVEL",
-        "CARGO_PROFILE_RELEASE_DEBUG",
-    ] {
-        if !original["env"][flag].is_string() || original["env"][flag] != current["env"][flag] {
-            return Err("ordering native release flags changed".into());
-        }
-    }
-    // Compare recorded Cargo/Rust configuration, not the runtime environment.
-    // All profiles, target/compiler selectors, flags, wrappers and rustup
-    // selection belong here. Conservatively require even non-codegen Cargo
-    // settings to match; unrecorded effective configuration remains unknown.
-    let native_environment = |subject: &Value| -> Result<serde_json::Map<String, Value>> {
-        let env = subject["env"]
-            .as_object()
-            .ok_or("native build environment")?;
-        let recorded: serde_json::Map<String, Value> = env
-            .iter()
-            .filter(|(key, _)| key.starts_with("CARGO") || key.starts_with("RUST"))
-            .map(|(key, value)| (key.clone(), value.clone()))
-            .collect();
-        if recorded.values().any(|value| !value.is_string()) {
-            return Err("recorded native configuration values".into());
-        }
-        Ok(recorded)
-    };
-    if native_environment(original)? != native_environment(current)? {
-        return Err("ordering recorded native configuration changed".into());
-    }
-    Ok(())
+    launch_plan(bound, e)?
+        .0
+        .ok_or_else(|| "arena approved plan missing".into())
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
@@ -444,6 +341,18 @@ fn check_perf_chain(
     }
     Ok(())
 }
+#[derive(Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PerfSettings {
+    tool: FileRef,
+    output: PathBuf,
+    event: String,
+    frequency_hz: u64,
+    call_graph: String,
+    ring_pages: u64,
+    data_max_bytes: u64,
+    no_buildid_cache: bool,
+}
 fn perf_launch_shape(
     intent: &Value,
     e: &Experiment,
@@ -457,76 +366,67 @@ fn perf_launch_shape(
                 .replace("@EXPERIMENT_SHA256@", &bound.sha256)
         })
         .collect();
-    let config: Value = e.config.read()?;
-    let selected = e.phase == "compare"
-        && e.argv.get(1).is_some_and(|a| a == "ordering-cheap-assess")
-        && config["schema"] == "quoridor.current-search-perf349.process.v1";
-    let sampled = selected
-        && config["process_index"]
-            .as_u64()
-            .is_some_and(|n| n < 6 && n % 3 == 1);
-    if !sampled {
-        if !intent["perf"].is_null() || intent["argv"] != json!(native) {
+    if intent["perf"].is_null() {
+        if intent["argv"] != json!(native) {
             return Err("direct native launch argv required".into());
         }
         return Ok(None);
     }
-    if intent["perf"]
-        .as_object()
-        .is_none_or(|p| p.len() != 2 || !p.contains_key("tool") || !p.contains_key("output"))
-        || intent["support"] != config["plan"]["resources"]
-        || intent["support"]["sha256"]
-            != "22e2138fe41ddbe142aa05f01ea1e30367219b2465195f4db5b4878e7dd1bf6b"
-        || e.planned_slots != 6
-        || e.batch.map(|n| json!(n)) != Some(config["process_index"].clone())
-    {
-        return Err("349 sampled launch authority required".into());
+    if !e.argv.get(1).is_some_and(|a| a == "measure") {
+        return Err("standard profiling belongs to measurement entry".into());
     }
-    let tool: FileRef = serde_json::from_value(intent["perf"]["tool"].clone())?;
-    let output =
-        PathBuf::from(intent["output"].as_str().ok_or("owning operation path")?).join("perf.data");
+    let perf: PerfSettings = serde_json::from_value(intent["perf"].clone())?;
     let owner = PathBuf::from(intent["owner"].as_str().ok_or("launch owner")?);
-    if tool.path != PathBuf::from("/usr/bin/perf")
-        || tool.bytes > 16 * 1048576
+    let output = &perf.output;
+    if perf.event.is_empty()
+        || perf.call_graph.is_empty()
+        || perf.event.contains('\0')
+        || perf.call_graph.contains('\0')
+        || perf.frequency_hz == 0
+        || !perf.ring_pages.is_power_of_two()
+        || perf.data_max_bytes == 0
         || !output.is_absolute()
+        || output == &owner
         || !output.starts_with(&owner)
-        || intent["perf"]["output"] != json!(output)
+        || fs::symlink_metadata(output).is_ok()
         || output
             .parent()
             .ok_or("perf output parent")?
             .canonicalize()?
-            .join("perf.data")
-            != output
+            .join(output.file_name().ok_or("perf filename")?)
+            != *output
     {
-        return Err("349 standard perf tool/output required".into());
+        return Err("standard perf settings/output shape".into());
     }
-    let mut argv: Vec<String> = [
-        "/usr/bin/perf",
-        "record",
-        "-e",
-        "cpu-clock:u",
-        "-F",
-        "49",
-        "--call-graph",
-        "dwarf,8192",
-        "-m",
-        "64",
-        "--max-size",
-        "12M",
-        "--no-buildid-cache",
-        "-o",
-    ]
-    .map(str::to_string)
-    .into();
-    argv.push(output.to_string_lossy().to_string());
-    argv.push("--".into());
+    let mut argv = vec![
+        perf.tool.path.to_string_lossy().to_string(),
+        "record".into(),
+        "-e".into(),
+        perf.event,
+        "-F".into(),
+        perf.frequency_hz.to_string(),
+        "--call-graph".into(),
+        perf.call_graph,
+        "-m".into(),
+        perf.ring_pages.to_string(),
+        "--max-size".into(),
+        perf.data_max_bytes.to_string(),
+    ];
+    if perf.no_buildid_cache {
+        argv.push("--no-buildid-cache".into());
+    }
+    argv.extend([
+        "-o".into(),
+        output.to_string_lossy().to_string(),
+        "--".into(),
+    ]);
     argv.extend(native);
     if intent["argv"] != json!(argv) {
-        return Err("349 exact perf/native argv required".into());
+        return Err("actual configured perf/native argv required".into());
     }
-    Ok(Some((tool, argv)))
+    Ok(Some((perf.tool, argv)))
 }
-fn launch_plan(bound: &BoundControl, e: &Experiment) -> Result<(FileRef, Value)> {
+fn launch_plan(bound: &BoundControl, e: &Experiment) -> Result<(Option<FileRef>, Value)> {
     let path = PathBuf::from(std::env::var("QUORIDOR_LIFECYCLE_INTENT_PATH")?);
     let sha256 = std::env::var("QUORIDOR_LIFECYCLE_INTENT")?;
     let parent = std::env::var("QUORIDOR_LIFECYCLE_PARENT_PID")?.parse::<u32>()?;
@@ -535,9 +435,17 @@ fn launch_plan(bound: &BoundControl, e: &Experiment) -> Result<(FileRef, Value)>
         sha256: sha256.clone(),
     }
     .read()?;
-    let admission_ref: FileRef = serde_json::from_value(intent["admission"].clone())?;
-    let admission: Value = admission_ref.read()?;
-    let approved = approved_launch_plan(&intent, &admission, bound, e)?;
+    let approved = if e.argv.get(1).is_some_and(|a| a == "measure") {
+        let actual: FileRef = serde_json::from_value(intent["experiment"].clone())?;
+        if intent["kind"] != "run" || actual.path != bound.path || actual.sha256 != bound.sha256 {
+            return Err("actual measurement RUN settings identity".into());
+        }
+        None
+    } else {
+        let admission_ref: FileRef = serde_json::from_value(intent["admission"].clone())?;
+        let admission: Value = admission_ref.read()?;
+        Some(approved_launch_plan(&intent, &admission, bound, e)?)
+    };
     let immediate = unsafe { libc::getppid() } as u32;
     let origin = if let Some((tool, argv)) = perf_launch_shape(&intent, e, bound)? {
         let expected: LaunchIdentity =
@@ -559,13 +467,12 @@ fn launch_plan(bound: &BoundControl, e: &Experiment) -> Result<(FileRef, Value)>
         if parent != immediate {
             return Err("immediate lifecycle parent required".into());
         }
-        let config: Value = e.config.read()?;
-        if config["schema"] == "quoridor.current-search-perf349.process.v1" {
+        if e.argv.get(1).is_some_and(|a| a == "measure") {
             let expected: LaunchIdentity =
                 serde_json::from_str(&std::env::var("QUORIDOR_LIFECYCLE_PARENT_IDENTITY")?)?;
             let guardian = launch_identity(parent)?.0;
             if expected != guardian {
-                return Err("349 direct guardian identity drift".into());
+                return Err("direct guardian identity drift".into());
             }
             json!({"guardian":guardian,"native":launch_identity(std::process::id())?.0})
         } else {
@@ -583,7 +490,10 @@ fn launch_plan(bound: &BoundControl, e: &Experiment) -> Result<(FileRef, Value)>
     if !args.ends_with(&expected) {
         return Err("parent immutable RUN intent argv required".into());
     }
-    Ok((approved, origin))
+    Ok((
+        approved,
+        json!({"runtime_launch_origin":origin,"environment":intent["env"],"perf":intent["perf"]}),
+    ))
 }
 
 /// Validate all entry identities before resources/output/model factory. No recursive review controls.
@@ -594,89 +504,23 @@ pub fn load(bound: &BoundControl, phase: &str) -> Result<(Experiment, Value)> {
         e,
         bound,
         phase,
-        &approved,
+        approved.as_ref(),
         &std::env::args().collect::<Vec<_>>(),
         &std::env::current_exe()?.canonicalize()?,
     )?;
-    if !origin.is_null() {
-        q["runtime_launch_origin"] = origin;
+    if e.argv.get(1).is_some_and(|a| a == "measure") {
+        q = origin;
+    } else if !origin["runtime_launch_origin"].is_null() {
+        q["runtime_launch_origin"] = origin["runtime_launch_origin"].clone();
     }
     Ok((e, q))
 }
+
 #[cfg(test)]
-mod perf349_launch_tests {
+mod measurement_launch_tests {
     use super::*;
     #[test]
-    fn perf349_exact_chain_rejects_pid_boot_start_executable_and_argv_drift() {
-        let guardian = LaunchIdentity {
-            pid: 10,
-            start_ticks: "100".into(),
-            boot_id: "boot".into(),
-        };
-        let profiler = LaunchIdentity {
-            pid: 11,
-            start_ticks: "101".into(),
-            boot_id: "boot".into(),
-        };
-        let tool = FileRef {
-            path: "/usr/bin/perf".into(),
-            sha256: "a".repeat(64),
-            bytes: 1,
-            mode: "0750".into(),
-        };
-        let argv = vec!["/usr/bin/perf".to_string(), "record".into()];
-        let check = |expected: &LaunchIdentity,
-                     actual: &LaunchIdentity,
-                     p: &LaunchIdentity,
-                     parent,
-                     exe: &Path,
-                     args: &[String]| {
-            check_perf_chain(
-                (expected, actual, p),
-                (parent, 11),
-                (exe, &tool),
-                (args, &argv),
-            )
-        };
-        assert!(check(&guardian, &guardian, &profiler, 10, &tool.path, &argv).is_ok());
-        let mut wrong = guardian.clone();
-        wrong.start_ticks = "99".into();
-        assert!(check(&wrong, &guardian, &profiler, 10, &tool.path, &argv).is_err());
-        wrong = guardian.clone();
-        wrong.boot_id = "other".into();
-        assert!(check(&wrong, &guardian, &profiler, 10, &tool.path, &argv).is_err());
-        let mut p = profiler.clone();
-        p.pid = 12;
-        assert!(check(&guardian, &guardian, &p, 10, &tool.path, &argv).is_err());
-        p = profiler.clone();
-        p.boot_id = "other".into();
-        assert!(check(&guardian, &guardian, &p, 10, &tool.path, &argv).is_err());
-        assert!(check(&guardian, &guardian, &profiler, 99, &tool.path, &argv).is_err());
-        assert!(
-            check(
-                &guardian,
-                &guardian,
-                &profiler,
-                10,
-                Path::new("/fake/perf"),
-                &argv
-            )
-            .is_err()
-        );
-        assert!(
-            check(
-                &guardian,
-                &guardian,
-                &profiler,
-                10,
-                &tool.path,
-                &["wrong".into()]
-            )
-            .is_err()
-        );
-    }
-    #[test]
-    fn perf349_only_exact_sampled_wrapper_and_plain_direct_argv_admit() {
+    fn measurement_configured_perf_and_actual_chain_shape() {
         struct Temp(PathBuf);
         impl Drop for Temp {
             fn drop(&mut self) {
@@ -688,73 +532,110 @@ mod perf349_launch_tests {
             .unwrap()
             .as_nanos();
         let dir =
-            std::env::temp_dir().join(format!("perf349-metadata-{}-{stamp}", std::process::id()));
+            std::env::temp_dir().join(format!("measurement-origin-{}-{stamp}", std::process::id()));
         fs::create_dir(&dir).unwrap();
-        let _cleanup = Temp(dir.clone());
-        let config_path = dir.join("config.json");
-        let write_config = |process| {
-            let raw = serde_json::to_vec(&json!({"schema":"quoridor.current-search-perf349.process.v1","process_index":process,"plan":{"resources":{"sha256":"22e2138fe41ddbe142aa05f01ea1e30367219b2465195f4db5b4878e7dd1bf6b"}}})).unwrap();
-            fs::write(&config_path, &raw).unwrap();
-            use std::os::unix::fs::PermissionsExt;
-            fs::set_permissions(&config_path, fs::Permissions::from_mode(0o644)).unwrap();
-            FileRef {
-                path: config_path.clone(),
-                sha256: arena::digest(&raw),
-                bytes: raw.len() as u64,
-                mode: "0644".into(),
-            }
+        let _temp = Temp(dir.clone());
+        let reference = FileRef {
+            path: dir.join("unread-control"),
+            sha256: "0".repeat(64),
+            bytes: 1,
+            mode: "0644".into(),
         };
-        let mut e: Experiment = serde_json::from_value(json!({"schema":"quoridor.research.experiment.v1","phase":"compare","build_manifest":write_config(1),"config":write_config(1),"inputs":[],"models":[],"dynamic_libraries":[],"schedule":write_config(1),"numerical_qualification":null,"canonical_plan_sha256":"a".repeat(64),"rules":"unused","distance_units":"unused","value_perspective":"unused","planned_slots":6,"batch":1,"argv":["/fake/current-image","ordering-cheap-assess","--experiment","@EXPERIMENT@","--experiment-sha256","@EXPERIMENT_SHA256@"]})).unwrap();
         let bound = BoundControl {
-            path: dir.join("experiment.json"),
-            sha256: "b".repeat(64),
+            path: dir.join("settings.json"),
+            sha256: "1".repeat(64),
         };
-        let config: Value = e.config.read().unwrap();
-        let mut intent = json!({"owner":dir,"output":dir,"support":config["plan"]["resources"],"perf":{"tool":{"path":"/usr/bin/perf","sha256":"c".repeat(64),"bytes":1,"mode":"0750"},"output":dir.join("perf.data")}});
-        let native: Vec<String> = e
+        let e:Experiment=serde_json::from_value(json!({"schema":"quoridor.research.experiment.v1","phase":"compare","build_manifest":reference,"config":reference,"schedule":reference,"inputs":[],"models":[],"dynamic_libraries":[],"rules":"standard","distance_units":"wall-distance/80","value_perspective":"side-to-move","planned_slots":2,"batch":null,"argv":["/native","measure","--experiment","@EXPERIMENT@","--experiment-sha256","@EXPERIMENT_SHA256@"]})).unwrap();
+        let native = e
             .argv
             .iter()
             .map(|a| {
                 a.replace("@EXPERIMENT@", &bound.path.to_string_lossy())
                     .replace("@EXPERIMENT_SHA256@", &bound.sha256)
             })
-            .collect();
-        let mut argv: Vec<String> = [
-            "/usr/bin/perf",
-            "record",
-            "-e",
-            "cpu-clock:u",
-            "-F",
-            "49",
-            "--call-graph",
-            "dwarf,8192",
-            "-m",
-            "64",
-            "--max-size",
-            "12M",
-            "--no-buildid-cache",
-            "-o",
-        ]
-        .map(str::to_string)
-        .into();
-        argv.push(dir.join("perf.data").to_string_lossy().into());
-        argv.push("--".into());
-        argv.extend(native.clone());
-        intent["argv"] = json!(argv);
-        assert!(perf_launch_shape(&intent, &e, &bound).unwrap().is_some());
-        for index in [5usize, 7, 11, 16] {
-            let mut wrong = intent.clone();
-            wrong["argv"][index] = json!("wrong");
-            assert!(perf_launch_shape(&wrong, &e, &bound).is_err());
+            .collect::<Vec<_>>();
+        let direct = json!({"argv":native});
+        assert!(perf_launch_shape(&direct, &e, &bound).unwrap().is_none());
+        for (frequency, pages, graph) in [(17, 8, "dwarf,4096"), (49, 64, "dwarf,8192")] {
+            let tool = FileRef {
+                path: "/usr/bin/perf".into(),
+                sha256: "2".repeat(64),
+                bytes: 1,
+                mode: "0755".into(),
+            };
+            let output = dir.join("sample.data");
+            let mut argv = vec![
+                "/usr/bin/perf".to_string(),
+                "record".into(),
+                "-e".into(),
+                "cpu-clock:u".into(),
+                "-F".into(),
+                frequency.to_string(),
+                "--call-graph".into(),
+                graph.into(),
+                "-m".into(),
+                pages.to_string(),
+                "--max-size".into(),
+                "12582912".into(),
+                "--no-buildid-cache".into(),
+                "-o".into(),
+                output.to_string_lossy().to_string(),
+                "--".into(),
+            ];
+            argv.extend(native.clone());
+            let mut intent = json!({"owner":dir,"perf":{"tool":tool,"output":output,"event":"cpu-clock:u","frequency_hz":frequency,"call_graph":graph,"ring_pages":pages,"data_max_bytes":12582912,"no_buildid_cache":true},"argv":argv});
+            assert!(perf_launch_shape(&intent, &e, &bound).unwrap().is_some());
+            intent["perf"]["frequency_hz"] = json!(0);
+            assert!(perf_launch_shape(&intent, &e, &bound).is_err());
+            let guardian = LaunchIdentity {
+                pid: 10,
+                start_ticks: "100".into(),
+                boot_id: "boot".into(),
+            };
+            let profiler = LaunchIdentity {
+                pid: 11,
+                start_ticks: "101".into(),
+                boot_id: "boot".into(),
+            };
+            assert!(
+                check_perf_chain(
+                    (&guardian, &guardian, &profiler),
+                    (10, 11),
+                    (&tool.path, &tool),
+                    (&argv, &argv)
+                )
+                .is_ok()
+            );
+            assert!(
+                check_perf_chain(
+                    (&guardian, &guardian, &profiler),
+                    (9, 11),
+                    (&tool.path, &tool),
+                    (&argv, &argv)
+                )
+                .is_err()
+            );
+            let mut wrong = profiler.clone();
+            wrong.start_ticks = "previous".into();
+            assert!(
+                check_perf_chain(
+                    (&wrong, &guardian, &profiler),
+                    (10, 11),
+                    (&tool.path, &tool),
+                    (&argv, &argv)
+                )
+                .is_err()
+            );
+            assert!(
+                check_perf_chain(
+                    (&guardian, &guardian, &profiler),
+                    (10, 11),
+                    (Path::new("/other"), &tool),
+                    (&argv, &argv)
+                )
+                .is_err()
+            );
         }
-        e.config = write_config(0);
-        e.batch = Some(0);
-        assert!(perf_launch_shape(&intent, &e, &bound).is_err());
-        intent["perf"] = Value::Null;
-        intent["argv"] = json!(native);
-        assert!(perf_launch_shape(&intent, &e, &bound).unwrap().is_none());
-        intent["argv"][0] = json!("/fake/other-image");
-        assert!(perf_launch_shape(&intent, &e, &bound).is_err());
     }
 }
 /// Shared preflight; only load() supplies the production integration-issued expectation.
@@ -762,14 +643,15 @@ fn load_checked(
     e: Experiment,
     bound: &BoundControl,
     phase: &str,
-    approved: &FileRef,
+    approved: Option<&FileRef>,
     caller_argv: &[String],
     executable: &std::path::Path,
 ) -> Result<(Experiment, Value)> {
+    let measurement = e.argv.get(1).is_some_and(|a| a == "measure");
     if e.schema != "quoridor.research.experiment.v1"
         || e.phase != phase
         || !phase_shape(&e)
-        || !arena::sha_valid(&e.canonical_plan_sha256)
+        || (!measurement && !arena::sha_valid(&e.canonical_plan_sha256))
         || e.rules != "research-standard-2p-threefold-goal-first-v1"
         || e.distance_units != "wall-distance/80"
         || e.value_perspective != "side-to-move"
@@ -777,10 +659,13 @@ fn load_checked(
     {
         return Err("research fixed scientific experiment identity".into());
     }
-    if e.canonical_plan_sha256 != approved.sha256 {
-        return Err("integration-issued approved plan substitution".into());
+    if !measurement {
+        let approved = approved.ok_or("approved plan missing")?;
+        if e.canonical_plan_sha256 != approved.sha256 {
+            return Err("integration-issued approved plan substitution".into());
+        }
+        approved.verify()?;
     }
-    approved.verify()?;
     let expected_argv: Vec<String> = e
         .argv
         .iter()
@@ -834,7 +719,7 @@ fn load_checked(
         generation_inputs(&e)?;
         return Ok((e, Value::Null));
     }
-    if phase == "ordering-qualification" {
+    if measurement {
         return Ok((e, Value::Null));
     }
     let q: Value = e
@@ -842,103 +727,7 @@ fn load_checked(
         .as_ref()
         .ok_or("research numerical qualification required")?
         .read()?;
-    #[cfg(not(feature = "ordering-assessment"))]
-    let numerical_build = build.clone();
-    #[cfg(feature = "ordering-assessment")]
-    let (q, numerical_build, numerical_subject) = {
-        let mut q = q;
-        let mut numerical_build = build.clone();
-        let mut numerical_subject = None;
-        let cheap = e.argv.get(1).is_some_and(|a| a == "ordering-cheap-assess");
-        if cheap || e.argv.get(1).is_some_and(|a| a == "ordering-assess") {
-            let reference = e.numerical_qualification.as_ref().unwrap();
-            if reference
-                .path
-                .file_name()
-                .is_none_or(|n| n != "manifest.json")
-                || reference.path.with_file_name("INCOMPLETE").exists()
-                || q["schema"] != "quoridor.research.completion.v1"
-                || q["status"] != "PASS"
-                || q["cleanup_complete"] != true
-                || q["remaining"] != json!([])
-                || !q["primary"].is_null()
-                || q["secondary"] != json!([])
-                || q["data"]["status"] != "PASS"
-            {
-                return Err("360 authoritative finalized input qualification required".into());
-            }
-            let origin: FileRef = serde_json::from_value(q["experiment"].clone())?;
-            let qualified: Experiment = origin.read()?;
-            let correspondence = if cheap {
-                Some(crate::ordering_assessment::retained_cheap_inputs(
-                    &e, &qualified,
-                )?)
-            } else {
-                None
-            };
-            if !crate::ordering_assessment::qualification_shape(&qualified)
-                || (!cheap
-                    && (qualified.config != e.config
-                        || qualified.schedule != e.schedule
-                        || qualified.inputs != e.inputs
-                        || qualified.models != e.models
-                        || serde_json::to_value(&qualified.dynamic_libraries)?
-                            != serde_json::to_value(&e.dynamic_libraries)?))
-            {
-                return Err("360 qualified experiment/input/model/library drift".into());
-            }
-            if qualified.build_manifest != e.build_manifest {
-                if qualified
-                    .build_manifest
-                    .path
-                    .file_name()
-                    .is_none_or(|n| n != "manifest.json")
-                    || qualified
-                        .build_manifest
-                        .path
-                        .with_file_name("INCOMPLETE")
-                        .exists()
-                {
-                    return Err("ordering original build is provisional".into());
-                }
-                let original: Value = qualified.build_manifest.read()?;
-                let adoption_ref: FileRef =
-                    serde_json::from_value(build["source_adoption"].clone())?;
-                let workspace = build["source"]["workspace"]
-                    .as_str()
-                    .ok_or("source workspace")?;
-                if !adoption_ref
-                    .path
-                    .starts_with(PathBuf::from(workspace).join("research-data"))
-                {
-                    return Err(
-                        "ordering reuse must belong to normal integration source adoption".into(),
-                    );
-                }
-                let adoption: Value = adoption_ref.read()?;
-                retained_ordering_source(
-                    &build,
-                    &original,
-                    &adoption,
-                    reference,
-                    &qualified.build_manifest,
-                    correspondence.as_ref(),
-                )?;
-                numerical_build = original;
-            }
-            if cheap {
-                if qualified.build_manifest == e.build_manifest {
-                    return Err("376 requires genuinely new caller/image; old20 is not80".into());
-                }
-                numerical_subject = Some(qualified);
-            }
-            q = q["data"]["numerical_qualification"].clone();
-        }
-        (q, numerical_build, numerical_subject)
-    };
-    #[cfg(feature = "ordering-assessment")]
-    let subject = numerical_subject.as_ref().unwrap_or(&e);
-    #[cfg(not(feature = "ordering-assessment"))]
+    let numerical_build = build;
     let subject = &e;
     if q["schema"] != "quoridor.research.numerical-qualification.v1"
         || q["status"] != "PASS"
@@ -975,13 +764,9 @@ fn load_checked(
         || q["distance_units"] != subject.distance_units
         || q["value_perspective"] != subject.value_perspective
         || q["remaining"] != json!([])
-        || (e.argv.get(1).is_some_and(|a| a == "ordering-cheap-assess")
-            && q["canonical_plan_sha256"] != subject.canonical_plan_sha256)
         || ((matches!(phase, "arena" | "corpus")
-            || e.argv
-                .get(1)
-                .is_some_and(|a| matches!(a.as_str(), "ordering-assess" | "decisions")))
-            && q["canonical_plan_sha256"] != approved.sha256)
+            || e.argv.get(1).is_some_and(|a| a.as_str() == "decisions"))
+            && q["canonical_plan_sha256"] != approved.ok_or("approved plan missing")?.sha256)
     {
         return Err("research current numerical/history/model/input qualification required".into());
     }
@@ -1220,329 +1005,18 @@ mod generic_arena_361_bound_entry_tests {
                         .replace("@EXPERIMENT_SHA256@", &bound.sha256)
                 })
                 .collect::<Vec<_>>();
-            let (actual, _) =
-                load_checked(e.clone(), &bound, "arena", &approved, &argv, &artifact.path).unwrap();
+            let (actual, _) = load_checked(
+                e.clone(),
+                &bound,
+                "arena",
+                Some(&approved),
+                &argv,
+                &artifact.path,
+            )
+            .unwrap();
             assert_eq!(actual.planned_slots, count);
             let other = file("wrong-expected-plan.json", b"substitution");
-            assert!(load_checked(e, &bound, "arena", &other, &argv, &artifact.path).is_err());
+            assert!(load_checked(e, &bound, "arena", Some(&other), &argv, &artifact.path).is_err());
         }
-    }
-}
-
-#[cfg(all(test, feature = "ordering-assessment"))]
-mod build379_provenance_tests {
-    use super::*;
-    #[test]
-    fn build379_retained_input_scope_never_relabels_original_image() {
-        let make = |commit: &str, artifact: &str| {
-            json!({
-                "schema":"quoridor.research.build-manifest.v1","status":"PASS",
-                "cleanup_complete":true,"remaining":[],
-                "checks":(["test","lint","build"].map(|r|json!({"role":r,"argv":["cargo",r],
-                    "guardian_return":{"exit_code":0,"cleanup_complete":true}}))),
-                "artifact":{"sha256":artifact.repeat(64)},
-                "source":{"workspace":"/synthetic379","commit":commit.repeat(40),"patch":null,
-                    "manifest":{"sha256":"1".repeat(64)},"lock":{"sha256":"2".repeat(64)},"cargo_configs":[]},
-                "tools":{"RUSTC":{"file":{"path":"/synthetic379/rustc","sha256":"7".repeat(64),
-                    "bytes":1,"mode":"0755"},"version":"fixed native compiler"},"PYTHON":"old-controller"},
-                "env":{"RUSTFLAGS":"unchanged","CARGO_PROFILE_RELEASE_OPT_LEVEL":"3",
-                    "CARGO_PROFILE_RELEASE_DEBUG":"0","TMPDIR":commit}
-            })
-        };
-        let original = make("a", "3");
-        let current = make("b", "4");
-        let reference = |name: &str| FileRef {
-            path: format!("/synthetic379/{name}/manifest.json").into(),
-            sha256: "5".repeat(64),
-            bytes: 1,
-            mode: "0644".into(),
-        };
-        let qualification = reference("qualification");
-        let original_ref = reference("original");
-        let adoption = json!({"schema":"quoridor.research.source-adoption.v1","status":"ACCEPTED",
-            "source":current["source"],"retained_ordering_numerical":{
-                "scope":"ordering20-input-and-head-v1","qualification":qualification,"build_manifest":original_ref}});
-        retained_ordering_source(
-            &current,
-            &original,
-            &adoption,
-            &qualification,
-            &original_ref,
-            None,
-        )
-        .unwrap();
-        assert_ne!(original["artifact"], current["artifact"]);
-        for key in ["scope", "qualification", "build_manifest"] {
-            let mut bad = adoption.clone();
-            bad["retained_ordering_numerical"]
-                .as_object_mut()
-                .unwrap()
-                .remove(key);
-            assert!(
-                retained_ordering_source(
-                    &current,
-                    &original,
-                    &bad,
-                    &qualification,
-                    &original_ref,
-                    None
-                )
-                .is_err()
-            );
-        }
-        for (key, value) in [
-            ("status", json!("FAILED")),
-            ("source", json!({"commit":"wrong"})),
-        ] {
-            let mut bad = adoption.clone();
-            bad[key] = value;
-            assert!(
-                retained_ordering_source(
-                    &current,
-                    &original,
-                    &bad,
-                    &qualification,
-                    &original_ref,
-                    None
-                )
-                .is_err()
-            );
-        }
-        let mut runtime_changed = current.clone();
-        runtime_changed["tools"]["PYTHON"] = json!("current-controller");
-        runtime_changed["env"]["OMP_NUM_THREADS"] = json!("1");
-        runtime_changed["env"]["CUDA_VISIBLE_DEVICES"] = json!("");
-        retained_ordering_source(
-            &runtime_changed,
-            &original,
-            &adoption,
-            &qualification,
-            &original_ref,
-            None,
-        )
-        .unwrap();
-        assert_eq!(original["tools"]["PYTHON"], json!("old-controller"));
-        assert!(original["env"]["OMP_NUM_THREADS"].is_null());
-        for (section, key) in [
-            ("tools", "RUSTC"),
-            ("env", "RUSTFLAGS"),
-            ("env", "CARGO_PROFILE_RELEASE_OPT_LEVEL"),
-            ("env", "CARGO_PROFILE_RELEASE_DEBUG"),
-        ] {
-            let mut bad = runtime_changed.clone();
-            bad[section][key] = json!("drift");
-            assert!(
-                retained_ordering_source(
-                    &bad,
-                    &original,
-                    &adoption,
-                    &qualification,
-                    &original_ref,
-                    None
-                )
-                .is_err()
-            );
-        }
-        // The current-only LTO counterexample leaves every prior fact/ref equal.
-        let mut lto = runtime_changed.clone();
-        lto["env"]["CARGO_PROFILE_RELEASE_LTO"] = json!("fat");
-        assert_eq!(lto["tools"], runtime_changed["tools"]);
-        assert_eq!(lto["checks"], runtime_changed["checks"]);
-        assert_eq!(lto["source"], runtime_changed["source"]);
-        assert!(
-            retained_ordering_source(
-                &lto,
-                &original,
-                &adoption,
-                &qualification,
-                &original_ref,
-                None
-            )
-            .is_err()
-        );
-        for channel in [
-            "CARGO_ENCODED_RUSTFLAGS",
-            "RUSTC_WRAPPER",
-            "RUSTC_WORKSPACE_WRAPPER",
-            "CARGO_BUILD_RUSTC_WRAPPER",
-            "CARGO_BUILD_RUSTC_WORKSPACE_WRAPPER",
-            "CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_RUSTFLAGS",
-            "CARGO_BUILD_TARGET",
-            "RUSTUP_TOOLCHAIN",
-            "CARGO_NET_OFFLINE",
-        ] {
-            for original_side in [false, true] {
-                for value in ["-Ctarget-cpu=native", ""] {
-                    let mut old = original.clone();
-                    let mut now = runtime_changed.clone();
-                    let subject = if original_side { &mut old } else { &mut now };
-                    subject["env"][channel] = json!(value);
-                    assert!(
-                        retained_ordering_source(
-                            &now,
-                            &old,
-                            &adoption,
-                            &qualification,
-                            &original_ref,
-                            None
-                        )
-                        .is_err()
-                    );
-                }
-            }
-        }
-        for (section, key) in [
-            ("tools", "RUSTC"),
-            ("env", "RUSTFLAGS"),
-            ("env", "CARGO_PROFILE_RELEASE_OPT_LEVEL"),
-            ("env", "CARGO_PROFILE_RELEASE_DEBUG"),
-        ] {
-            for original_side in [false, true] {
-                let mut old = original.clone();
-                let mut now = runtime_changed.clone();
-                let subject = if original_side { &mut old } else { &mut now };
-                subject[section].as_object_mut().unwrap().remove(key);
-                assert!(
-                    retained_ordering_source(
-                        &now,
-                        &old,
-                        &adoption,
-                        &qualification,
-                        &original_ref,
-                        None
-                    )
-                    .is_err()
-                );
-            }
-        }
-        // Equally malformed declarations must not satisfy typed correspondence.
-        let mut malformed_old = original.clone();
-        let mut malformed_now = runtime_changed.clone();
-        malformed_old["tools"]["RUSTC"] = json!("not a ToolRef");
-        malformed_now["tools"]["RUSTC"] = json!("not a ToolRef");
-        assert!(
-            retained_ordering_source(
-                &malformed_now,
-                &malformed_old,
-                &adoption,
-                &qualification,
-                &original_ref,
-                None
-            )
-            .is_err()
-        );
-        malformed_old = original.clone();
-        malformed_now = runtime_changed.clone();
-        malformed_old["env"]["CARGO_PROFILE_RELEASE_LTO"] = Value::Null;
-        malformed_now["env"]["CARGO_PROFILE_RELEASE_LTO"] = Value::Null;
-        assert!(
-            retained_ordering_source(
-                &malformed_now,
-                &malformed_old,
-                &adoption,
-                &qualification,
-                &original_ref,
-                None
-            )
-            .is_err()
-        );
-        for field in ["manifest", "lock", "cargo_configs"] {
-            let mut bad = runtime_changed.clone();
-            bad["source"][field] = json!("drift");
-            let mut adopted = adoption.clone();
-            adopted["source"] = bad["source"].clone();
-            assert!(
-                retained_ordering_source(
-                    &bad,
-                    &original,
-                    &adopted,
-                    &qualification,
-                    &original_ref,
-                    None
-                )
-                .is_err()
-            );
-        }
-        let mut bad_release = runtime_changed.clone();
-        bad_release["checks"][2]["argv"] = json!(["cargo", "different-release"]);
-        assert!(
-            retained_ordering_source(
-                &bad_release,
-                &original,
-                &adoption,
-                &qualification,
-                &original_ref,
-                None
-            )
-            .is_err()
-        );
-        let identity = json!({"algorithm":"synthetic unchanged input/head scope"});
-        assert!(
-            retained_ordering_source(
-                &current,
-                &original,
-                &adoption,
-                &qualification,
-                &original_ref,
-                Some(&identity)
-            )
-            .is_err()
-        );
-        let mut paired = adoption.clone();
-        paired["retained_ordering_numerical"]["cheap_static376"] = identity.clone();
-        retained_ordering_source(
-            &current,
-            &original,
-            &paired,
-            &qualification,
-            &original_ref,
-            Some(&identity),
-        )
-        .unwrap();
-        paired["retained_ordering_numerical"]["obsolete_source_graph"] = json!({});
-        assert!(
-            retained_ordering_source(
-                &current,
-                &original,
-                &paired,
-                &qualification,
-                &original_ref,
-                Some(&identity)
-            )
-            .is_err()
-        );
-    }
-}
-
-#[cfg(test)]
-mod bound_control_tests {
-    use super::*;
-    #[test]
-    fn bounded_control_uses_exact_hashed_bytes_and_refuses_growth() {
-        use std::sync::atomic::{AtomicU64, Ordering};
-        static SERIAL: AtomicU64 = AtomicU64::new(0);
-        let root = std::env::temp_dir().join(format!(
-            "sigma-control-{}-{}",
-            std::process::id(),
-            SERIAL.fetch_add(1, Ordering::Relaxed)
-        ));
-        std::fs::create_dir(&root).unwrap();
-        let path = root.join("control.json");
-        std::fs::write(&path, b"{}").unwrap();
-        let bound = BoundControl {
-            path: path.canonicalize().unwrap(),
-            sha256: crate::arena::digest(b"{}"),
-        };
-        assert!(bound.read::<serde_json::Value>().is_ok());
-        std::fs::write(&path, vec![b' '; (1024 * 1024 + 1) as usize]).unwrap();
-        assert!(
-            bound
-                .read::<serde_json::Value>()
-                .unwrap_err()
-                .to_string()
-                .contains("size/SHA")
-        );
-        std::fs::remove_file(path).unwrap();
-        std::fs::remove_dir(root).unwrap();
     }
 }

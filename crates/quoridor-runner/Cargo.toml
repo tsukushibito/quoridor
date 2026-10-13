@@ -4,8 +4,8 @@ version = "0.1.0"
 edition = "2024"
 [features]
 default = []
-# Comparison-only; retire after the fixed continuation360 assessment.
-ordering-assessment = ["quoridor-ai/research-diagnostics"]
+# Maintained configurable Search measurement entry.
+measurement = ["quoridor-ai/research-diagnostics"]
 cuda-aoti = ["quoridor-inference/cuda-aoti"]
 tensorrt = ["quoridor-inference/tensorrt"]
 [dependencies]

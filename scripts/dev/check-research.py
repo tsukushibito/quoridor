@@ -91,8 +91,12 @@ def check_boundaries(py):
         tree = ast.parse(file.read_text(), filename=str(file))
         if file.is_relative_to(ROOT / "python/quoridor_training"):
             for node in ast.walk(tree):
-                if isinstance(node, ast.ImportFrom) and (node.module or "").startswith("frame"):
-                    raise ValueError(f"Generic API imports frame recipe: {file}: {node.module}")
+                if isinstance(node, ast.ImportFrom) and (node.module or "").startswith(
+                    "frame"
+                ):
+                    raise ValueError(
+                        f"Generic API imports frame recipe: {file}: {node.module}"
+                    )
     # Importing the model codec/features/client must stay side-effect free; process entrypoints are explicit.
 
 
@@ -106,20 +110,30 @@ def main():
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--syntax-only", action="store_true")
     mode.add_argument(
-        "--model-tests", action="store_true", help="Run explicitly admitted synthetic model tests"
+        "--model-tests",
+        action="store_true",
+        help="Run explicitly admitted synthetic model tests",
     )
     args = parser.parse_args()
     if args.model_tests:
         if args.format:
             parser.error("--model-tests cannot be combined with --format")
         if os.environ.get("QUORIDOR_OBSERVATION_LIVE_TESTS") != "1":
-            parser.error("Model tests require explicit QUORIDOR_OBSERVATION_LIVE_TESTS=1 admission")
+            parser.error(
+                "Model tests require explicit QUORIDOR_OBSERVATION_LIVE_TESTS=1 admission"
+            )
         test_root = os.environ.get("QUORIDOR_OBSERVATION_TEST_ROOT")
         if not test_root or not Path(test_root).is_dir():
-            parser.error("Model tests require an existing QUORIDOR_OBSERVATION_TEST_ROOT")
+            parser.error(
+                "Model tests require an existing QUORIDOR_OBSERVATION_TEST_ROOT"
+            )
         layout = json.loads((ROOT / "research-paths.json").read_text())
         training_python = (
-            Path(os.environ.get("QUORIDOR_PROJECT_ENV", layout["environments"]["project"]))
+            Path(
+                os.environ.get(
+                    "QUORIDOR_PROJECT_ENV", layout["environments"]["project"]
+                )
+            )
             / "bin/python"
         )
         if not training_python.exists():
@@ -127,7 +141,11 @@ def main():
         subprocess.run(
             [str(training_python), "-B", "-m", "unittest", *MODEL_TESTS],
             cwd=ROOT,
-            env={**os.environ, "PYTHONPATH": str(ROOT / "python"), "ORT_DISABLE_TELEMETRY": "1"},
+            env={
+                **os.environ,
+                "PYTHONPATH": str(ROOT / "python"),
+                "ORT_DISABLE_TELEMETRY": "1",
+            },
             check=True,
             timeout=120,
         )
@@ -153,7 +171,9 @@ def main():
         Path(
             os.environ.get(
                 "QUORIDOR_PROJECT_ENV",
-                json.loads((ROOT / "research-paths.json").read_text())["environments"]["project"],
+                json.loads((ROOT / "research-paths.json").read_text())["environments"][
+                    "project"
+                ],
             )
         )
         / "bin/ruff"
@@ -187,11 +207,19 @@ def main():
     run(sys.executable, "-B", "scripts/dev/test_manage_worktree.py")
     run(sys.executable, "-B", "tools/model-export/test_export.py")
     layout = json.loads((ROOT / "research-paths.json").read_text())
-    training_env = Path(os.environ.get("QUORIDOR_PROJECT_ENV", layout["environments"]["project"]))
+    training_env = Path(
+        os.environ.get("QUORIDOR_PROJECT_ENV", layout["environments"]["project"])
+    )
     training_python = training_env / "bin/python"
     if not training_python.exists():
-        parser.error("Existing project environment required for tensor-loader contracts")
-    env = {**os.environ, "PYTHONPATH": str(ROOT / "python"), "ORT_DISABLE_TELEMETRY": "1"}
+        parser.error(
+            "Existing project environment required for tensor-loader contracts"
+        )
+    env = {
+        **os.environ,
+        "PYTHONPATH": str(ROOT / "python"),
+        "ORT_DISABLE_TELEMETRY": "1",
+    }
     subprocess.run(
         [str(training_python), "-B", "-m", "unittest", *NN0_TESTS],
         cwd=ROOT,
@@ -207,7 +235,9 @@ def main():
         "tools/research-quality/test_verify_production.mjs",
     )
     layout = json.loads((ROOT / "research-paths.json").read_text())
-    session_env = Path(os.environ.get("QUORIDOR_PROJECT_ENV", layout["environments"]["project"]))
+    session_env = Path(
+        os.environ.get("QUORIDOR_PROJECT_ENV", layout["environments"]["project"])
+    )
     session_python = session_env / "bin/python"
     if not session_python.exists():
         parser.error(
@@ -223,6 +253,7 @@ def main():
         "tools/research-session/test_lifecycle.py",
         "tools/research-session/test_lifecycle_storage.py",
         "tools/research-session/test_build_provenance.py",
+        "tools/research-session/test_measurement.py",
         "tools/research-session/test_project_environment.py",
         "tools/research-session/test_project_interpreter.py",
     )

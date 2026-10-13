@@ -1335,3 +1335,7 @@ join後の実Instantをreturn/drainへ記録する最小修復はMainへ採用�
 ### 349現行whole-search Perfの選択（2026-10-13）
 
 人間は最適化前のcurrent BEST43 whole-search Perfを実行承認した。376の元固定80採用FAIL・正しい動作・局所pruningの観測は不変で、全盤面validationの因果時間割合は未測定。停止した[source inspection案](../.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/cost-inspection-v1/proposal.md)は両81-cell検証とerror/control順序を保持し、同parent内でcolour0のwall-edge booleanをcolour1へ再用する案（source query576→288）だが、未実装・速度未検証である。先にA/B各plain-before／cpu-clock sampled／plain-afterで36 calls、cold D4 family102・cold D6 family34・fresh warm D4 family0の0→2→4→6を固定する。2M D4／8M D6、TT4096/PVS/BEST43/score/tie/history/rules/cancelは同じで、追加root・sweep・旧80 replayはない。sample self/inclusive/callchain、lost/unresolved/inline/unwind限界とplain overheadを分ける。旧349 BEST51/fixedD32call・3GiB案は現役許可ではない。[既存agenda](design/ai-nnue-optimization-agenda.md#現行whole-search-perf3492026-10-13)が現在のscopeを持つ。SAME担当の1MiB preparationは376 source16/whole240内で、実whole支持/custodyの発行後にのみ数値entryへ進む。374実timing優先、323pause/defaults/models/N/seals/fits96を維持し、Policy返信や全374対局終了はgateにしない。
+
+### 349共通計測sourceの統合（2026-10-13）
+
+SAME349の停止sourceを、設定からoperation/profile・件数/順序/session/perfを受ける一つの`measure`入口へ統合した。設定snapshotと結果の一組に実行事実を残し、旧実験別の固定count/SHA/資格/生成経路を撤去した。実行途中のjournal末尾が切れても正常prefixと末尾byte/hashを保存し、teardownを実sessionへ対応させる普通の修正を加えた。既存Python限定成功は元scopeで保持する。新Rust3検証・affected Clippy/release/真正artifactと実36call計測はこの時点で未完了。元37680 adoption FAIL/局所pruning観測・RAW/費用と374元2局FAILED/UNKNOWNを改変せず、新calibration/追加callは発行しない。

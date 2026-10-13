@@ -1,0 +1,915 @@
+//! Configured measurements through the maintained evaluator/Search/session path.
+use crate::{
+    arena,
+    research_manifest::{self, BoundControl, Experiment},
+};
+use quoridor_ai::alphabeta::{
+    self, OrderingProfile, SearchLimits, SearchNamespace, SearchResult, SearchSession,
+    StaticEvaluator, StopReason,
+};
+use quoridor_core::research::{HistoryKey, SigmaContext};
+use quoridor_data::Result;
+use serde::{Deserialize, Serialize};
+use serde_json::{Value, json};
+use std::{
+    fs::{self, File, OpenOptions},
+    io::{Read, Write},
+    path::{Path, PathBuf},
+    sync::{
+        Arc,
+        atomic::{AtomicBool, Ordering},
+    },
+    time::Instant,
+};
+
+#[derive(Clone, Copy, Debug, Deserialize, Serialize, PartialEq, Eq)]
+#[serde(rename_all = "snake_case")]
+enum Profile {
+    Control,
+    Cheap,
+}
+impl Profile {
+    fn native(self) -> OrderingProfile {
+        match self {
+            Self::Control => OrderingProfile::CheapStaticControl,
+            Self::Cheap => OrderingProfile::CombinedSignedCheapStatic,
+        }
+    }
+}
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+struct RootInput {
+    input: usize,
+    #[serde(default)]
+    jsonl_match: Option<serde_json::Map<String, Value>>,
+    pointer: String,
+    field: String,
+    #[serde(default)]
+    prefix_len: Option<usize>,
+    #[serde(default)]
+    check_history: bool,
+    label: String,
+}
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+struct Settings {
+    roots: Vec<RootInput>,
+    profile: Profile,
+    tt_entries: usize,
+    use_tt: bool,
+    use_pvs: bool,
+    namespace: SearchNamespaceSettings,
+    output_bytes: usize,
+    record_bytes: usize,
+    #[serde(default)]
+    seed: Option<u64>,
+}
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+struct SearchNamespaceSettings {
+    evaluator: String,
+    rules: String,
+    selectivity: String,
+}
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+struct Request {
+    id: String,
+    session: String,
+    root: usize,
+    depth: u16,
+    node_cap: u64,
+    #[serde(default)]
+    time_limit_ms: Option<u64>,
+    #[serde(default)]
+    diagnostic: bool,
+    #[serde(default)]
+    warmup: bool,
+}
+#[derive(Clone, Debug)]
+struct RootSpec {
+    prefix: Vec<u16>,
+    expected: Option<Value>,
+}
+
+fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
+    if settings.roots.is_empty()
+        || settings.tt_entries == 0
+        || settings.output_bytes == 0
+        || settings.record_bytes == 0
+        || settings.record_bytes > settings.output_bytes
+        || settings.namespace.evaluator.is_empty()
+        || settings.namespace.rules.is_empty()
+        || settings.namespace.selectivity.is_empty()
+    {
+        return Err("measurement settings range".into());
+    }
+    let mut ids = std::collections::BTreeSet::new();
+    let mut closed_sessions = std::collections::BTreeSet::new();
+    let mut active = None;
+    for request in requests {
+        if request.id.is_empty()
+            || !ids.insert(&request.id)
+            || request.session.is_empty()
+            || request.root >= settings.roots.len()
+            || request.depth == 0
+            || request.node_cap == 0
+            || request.time_limit_ms == Some(0)
+        {
+            return Err("measurement request type/range/identity".into());
+        }
+        if active != Some(&request.session) {
+            if closed_sessions.contains(&request.session) {
+                return Err("measurement session reused after teardown".into());
+            }
+            if let Some(previous) = active {
+                closed_sessions.insert(previous);
+            }
+            active = Some(&request.session);
+        }
+    }
+    Ok(())
+}
+
+fn root_spec(value: &Value, selector: &RootInput) -> Result<RootSpec> {
+    let row = value
+        .pointer(&selector.pointer)
+        .ok_or("measurement input pointer")?;
+    let mut prefix: Vec<u16> = serde_json::from_value(
+        row.get(&selector.field)
+            .ok_or("measurement prefix field")?
+            .clone(),
+    )?;
+    if let Some(length) = selector.prefix_len {
+        if length > prefix.len() {
+            return Err("measurement chronological prefix unavailable".into());
+        }
+        prefix.truncate(length);
+    }
+    let expected = selector
+        .check_history
+        .then(|| json!({"root_key":row["root_key"],"history_counts":row["history_counts"]}));
+    Ok(RootSpec { prefix, expected })
+}
+fn prepare_roots(e: &Experiment, selectors: &[RootInput]) -> Result<Vec<RootSpec>> {
+    // Read each selected input once, as the existing book/chronological replay
+    // preparation does. This temporary grouping never persists into Search.
+    let mut inputs = std::collections::BTreeMap::<usize, Vec<(usize, &RootInput)>>::new();
+    for (index, selector) in selectors.iter().enumerate() {
+        inputs
+            .entry(selector.input)
+            .or_default()
+            .push((index, selector));
+    }
+    let mut roots = vec![None; selectors.len()];
+    for (index, selected) in inputs {
+        let input = e.inputs.get(index).ok_or("measurement input index")?;
+        if selected
+            .iter()
+            .all(|(_, selector)| selector.jsonl_match.is_none())
+        {
+            let value: Value = input.read()?;
+            for (index, selector) in selected {
+                roots[index] = Some(root_spec(&value, selector)?);
+            }
+            continue;
+        }
+        if selected
+            .iter()
+            .any(|(_, selector)| selector.jsonl_match.is_none())
+        {
+            return Err("one input encoding per file".into());
+        }
+        input.verify()?;
+        use sha2::{Digest, Sha256};
+        use std::io::BufRead;
+        let mut reader = std::io::BufReader::new(File::open(&input.path)?);
+        let mut hash = Sha256::new();
+        let mut bytes = 0u64;
+        loop {
+            let mut line = Vec::new();
+            let count = reader
+                .by_ref()
+                .take(1024 * 1024 + 1)
+                .read_until(b'\n', &mut line)?;
+            if count == 0 {
+                break;
+            }
+            if count > 1024 * 1024 || !line.ends_with(b"\n") {
+                return Err("measurement input record memory bound/partial tail".into());
+            }
+            bytes = bytes
+                .checked_add(count as u64)
+                .ok_or("input byte count overflow")?;
+            hash.update(&line);
+            if bytes > input.bytes {
+                return Err("measurement input growth".into());
+            }
+            if line == b"\n" {
+                continue;
+            }
+            let row: Value = serde_json::from_slice(&line)?;
+            for (index, selector) in &selected {
+                if selector
+                    .jsonl_match
+                    .as_ref()
+                    .unwrap()
+                    .iter()
+                    .all(|(key, expected)| row.get(key) == Some(expected))
+                {
+                    if roots[*index].is_some() {
+                        return Err("ambiguous measurement input selector".into());
+                    }
+                    roots[*index] = Some(root_spec(&row, selector)?);
+                }
+            }
+        }
+        if bytes != input.bytes || format!("{:x}", hash.finalize()) != input.sha256 {
+            return Err("measurement input length/hash drift".into());
+        }
+    }
+    roots
+        .into_iter()
+        .map(|root| root.ok_or_else(|| "measurement selected input missing".into()))
+        .collect()
+}
+
+// A single operation adapter. It owns preparation/reset/teardown; the driver owns
+// clocks, publication, partial accounting and cancellation. No target registry.
+trait Target {
+    fn reset(&mut self, request: &Request) -> Result<Value>;
+    fn prepare(&mut self, request: &Request) -> Result<Value>;
+    fn call(&mut self, request: &Request, cancel: &AtomicBool) -> Result<Value>;
+    fn finish_call(&mut self) -> Result<()>;
+    fn teardown(&mut self) -> Result<Value>;
+}
+
+struct SearchTarget {
+    settings: Settings,
+    roots: Vec<RootSpec>,
+    evaluator: Arc<dyn StaticEvaluator>,
+    session: Option<SearchSession>,
+    root: Option<SigmaContext>,
+    before: Value,
+}
+impl Target for SearchTarget {
+    fn reset(&mut self, request: &Request) -> Result<Value> {
+        if self.session.is_some() || self.root.is_some() {
+            return Err("measurement target still live at reset".into());
+        }
+        let session = SearchSession::new_for_ordering_assessment(
+            self.evaluator.clone(),
+            SearchNamespace {
+                evaluator: self.settings.namespace.evaluator.clone(),
+                rules: self.settings.namespace.rules.clone(),
+                selectivity: self.settings.namespace.selectivity.clone(),
+            },
+            self.settings.tt_entries,
+            quoridor_ai::score::ScoreDomain::LEGACY,
+            self.settings.profile.native(),
+            request.diagnostic,
+        )?;
+        let retained = session.retained_memory_bytes();
+        let capacity = session.tt_capacity();
+        self.session = Some(session);
+        Ok(
+            json!({"TT_capacity":capacity,"retained_TT_bytes":retained.0,"retained_session_metadata_history_bytes":retained.1}),
+        )
+    }
+    fn prepare(&mut self, request: &Request) -> Result<Value> {
+        let root = replay(&self.roots[request.root], &self.settings.namespace.rules)?;
+        self.before = identity(&root);
+        self.root = Some(root);
+        Ok(self.before.clone())
+    }
+    fn call(&mut self, request: &Request, cancel: &AtomicBool) -> Result<Value> {
+        let root = self.root.as_ref().ok_or("measurement root not prepared")?;
+        let session = self
+            .session
+            .as_mut()
+            .ok_or("measurement session not prepared")?;
+        session.set_ordering_observation(request.diagnostic);
+        let limits = SearchLimits {
+            max_depth: request.depth,
+            max_nodes: request.node_cap,
+            time_limit: request.time_limit_ms.map(std::time::Duration::from_millis),
+            tt_entries: self.settings.tt_entries,
+            use_pvs: self.settings.use_pvs,
+            use_tt: self.settings.use_tt,
+        };
+        let search_started = Instant::now();
+        let result = session.search(root, &limits, cancel);
+        let search_seconds = search_started.elapsed().as_secs_f64();
+        let after = identity(root);
+        let mut row = match result {
+            Ok(result) => {
+                let mut legal = Vec::new();
+                let mut row = observed(&result);
+                let complete = match validate_return(root, &result, request, Some(&mut legal)) {
+                    Ok(complete) => complete,
+                    Err(error) => {
+                        row["validation_error"] = fact(&*error);
+                        false
+                    }
+                };
+                // Observer-disabled counters are absent, not invented zero measurements.
+                if !request.diagnostic {
+                    row.as_object_mut().unwrap().remove("ordering");
+                }
+                row["root_legal_action_ids"] = json!(legal);
+                row["status"] = json!(if complete { "COMPLETE" } else { "UNKNOWN" });
+                row
+            }
+            Err(error) => json!({"status":"UNKNOWN","returned":"Err","error":fact(&error)}),
+        };
+        row["Search_call_seconds"] = json!(search_seconds);
+        row["parent_unchanged"] = json!(after == self.before);
+        if after != self.before {
+            row["status"] = json!("UNKNOWN");
+            row["parent_error"] = json!("parent restoration mismatch");
+        }
+        Ok(row)
+    }
+    fn finish_call(&mut self) -> Result<()> {
+        self.root.take();
+        Ok(())
+    }
+    fn teardown(&mut self) -> Result<Value> {
+        self.root.take();
+        self.session.take();
+        Ok(Value::Null)
+    }
+}
+
+fn timed<T>(run: impl FnOnce() -> Result<T>) -> (Result<T>, f64) {
+    let started = Instant::now();
+    let result = run();
+    (result, started.elapsed().as_secs_f64())
+}
+fn load_evaluator(e: &Experiment) -> Result<Arc<dyn StaticEvaluator>> {
+    let selected = e.models.first().ok_or("measurement model")?;
+    let model = Arc::new(quoridor_nnue::residual::ResidualModel::load(
+        &selected.descriptor.path,
+    )?);
+    if quoridor_data::hex_digest(&model.fingerprint()) != selected.evaluator_sha256 {
+        return Err("actual loaded evaluator identity mismatch".into());
+    }
+    Ok(Arc::new(alphabeta::ResidualEvaluator::new(model)))
+}
+fn drive(
+    requests: &[Request],
+    planned: usize,
+    target: &mut impl Target,
+    cancel: &AtomicBool,
+    mut publish: impl FnMut(&Value) -> Result<()>,
+) -> Value {
+    let whole = Instant::now();
+    let mut rows = Vec::new();
+    let mut sessions = Vec::new();
+    let mut active: Option<&str> = None;
+    let mut errors = Vec::new();
+    let mut calls = 0;
+    for request in requests {
+        if cancel.load(Ordering::Relaxed) {
+            errors.push(json!({"stage":"cancel","request":request.id}));
+            break;
+        }
+        if active != Some(request.session.as_str()) {
+            if let Some(previous) = active.take() {
+                let (result, seconds) = timed(|| target.teardown());
+                sessions.push(
+                    json!({"session":previous,"domain":"teardown","seconds":seconds,"facts":result.as_ref().ok()}),
+                );
+                if let Err(error) = result {
+                    errors.push(json!({"stage":"teardown","error":fact(&*error)}));
+                    break;
+                }
+            }
+            let (result, seconds) = timed(|| target.reset(request));
+            sessions.push(json!({"session":request.session,"domain":"reset","seconds":seconds,"facts":result.as_ref().ok()}));
+            // Reset can acquire partial resources even when it returns an error.
+            active = Some(&request.session);
+            if let Err(error) = result {
+                errors.push(json!({"stage":"reset","request":request.id,"error":fact(&*error)}));
+                break;
+            }
+        }
+        let root_whole = Instant::now();
+        let (prepared, prepare_seconds) = timed(|| target.prepare(request));
+        let mut row = json!({"request":request,"preparation_seconds":prepare_seconds});
+        if let Err(error) = prepared {
+            row["status"] = json!("UNKNOWN");
+            row["error"] = fact(&*error);
+            errors.push(json!({"stage":"prepare","request":request.id,"error":fact(&*error)}));
+        } else {
+            row["root"] = prepared.unwrap();
+            calls += 1;
+            let (measured, seconds) = timed(|| target.call(request, cancel));
+            row["measured_seconds"] = json!(seconds);
+            match measured {
+                Ok(value) => row["measurement"] = value,
+                Err(error) => {
+                    row["error"] = fact(&*error);
+                    errors.push(json!({"stage":"call","request":request.id,"error":fact(&*error)}));
+                }
+            }
+        }
+        let (finished, seconds) = timed(|| target.finish_call());
+        row["call_teardown_seconds"] = json!(seconds);
+        if let Err(error) = finished {
+            errors.push(json!({"stage":"finish_call","request":request.id,"error":fact(&*error)}));
+        }
+        if row["measurement"]["status"] != "COMPLETE" || !errors.is_empty() {
+            row["status"] = json!("UNKNOWN");
+        } else {
+            row["status"] = json!("COMPLETE");
+        }
+        if row["measurement"]["returned"] == "Err"
+            || !row["measurement"]["parent_error"].is_null()
+            || !row["measurement"]["validation_error"].is_null()
+        {
+            errors.push(json!({"stage":"target","request":request.id,"facts":row["measurement"]}));
+        }
+        row["root_body_before_journal_seconds"] = json!(root_whole.elapsed().as_secs_f64());
+        let (publication, seconds) = timed(|| publish(&row));
+        row["journal_seconds"] = json!(seconds);
+        row["root_body_including_journal_seconds"] = json!(root_whole.elapsed().as_secs_f64());
+        rows.push(row);
+        if let Err(error) = publication {
+            errors.push(json!({"stage":"journal","error":fact(&*error)}));
+        }
+        if !errors.is_empty() {
+            break;
+        }
+    }
+    if let Some(session) = active {
+        let (result, seconds) = timed(|| target.teardown());
+        sessions.push(json!({"session":session,"domain":"teardown","seconds":seconds,"facts":result.as_ref().ok()}));
+        if let Err(error) = result {
+            errors.push(json!({"stage":"teardown","error":fact(&*error)}));
+        }
+    }
+    let complete = rows.iter().filter(|r| r["status"] == "COMPLETE").count();
+    json!({"planned":planned,"scheduled":requests.len(),"calls":calls,"attempted":rows.len(),"complete":complete,
+        "uncompleted":planned.saturating_sub(complete),"unperformed":planned.saturating_sub(calls),"unscheduled":planned.saturating_sub(requests.len()),"extra_calls":calls.saturating_sub(planned),
+        "remaining_requests":requests[rows.len()..],"measurements":rows,"session_domains":sessions,"errors":errors,
+        "whole_driver_seconds":whole.elapsed().as_secs_f64(),"status":if complete==planned && complete==requests.len() && errors.is_empty(){"COMPLETE"}else{"PARTIAL"}})
+}
+
+pub fn run(bound: &BoundControl) -> Result<Value> {
+    let whole = Instant::now();
+    let (e, runtime) = research_manifest::load(bound, "compare")?;
+    let settings: Settings = e.config.read()?;
+    let requests: Vec<Request> = e.schedule.read()?;
+    validate(&settings, &requests)?;
+    if e.models.len() != 1 || settings.namespace.rules != e.rules {
+        return Err("measurement loaded model/rules settings".into());
+    }
+    let root = output_correspondence()?;
+    let mut output = Output::new(&root, settings.output_bytes, settings.record_bytes);
+    let build: Value = e.build_manifest.read()?;
+    let snapshot = json!({"execution":e,"settings":settings,"requests":requests,"runtime_launch_origin":runtime["runtime_launch_origin"],"code_version":build["source"],"artifact":build["artifact"],"code_build":e.build_manifest,"environment":runtime["environment"]});
+    output.setup(&snapshot)?;
+    let cancel = Arc::new(AtomicBool::new(false));
+    // The existing guardian owns signal forwarding, directwait and partial capture.
+    // Cooperative cancellation remains the target/driver AtomicBool boundary.
+    let (prepared, preparation_seconds) = timed(|| -> Result<SearchTarget> {
+        let roots = prepare_roots(&e, &settings.roots)?;
+        let evaluator = load_evaluator(&e)?;
+        Ok(SearchTarget {
+            settings,
+            roots,
+            evaluator,
+            session: None,
+            root: None,
+            before: Value::Null,
+        })
+    });
+    let mut result = match prepared {
+        Ok(mut target) => {
+            let mut result = drive(&requests, e.planned_slots, &mut target, &cancel, |row| {
+                output.row(row)
+            });
+            let start = Instant::now();
+            drop(target);
+            result["target_drop_seconds"] = json!(start.elapsed().as_secs_f64());
+            result
+        }
+        Err(error) => {
+            json!({"planned":e.planned_slots,"scheduled":requests.len(),"calls":0,"complete":0,"uncompleted":e.planned_slots,"unperformed":e.planned_slots,"remaining_requests":requests,"measurements":[],"errors":[{"stage":"setup","error":fact(&*error)}],"status":"PARTIAL"})
+        }
+    };
+    result["setup_seconds"] = json!(preparation_seconds);
+    result["runtime_launch_origin"] = runtime["runtime_launch_origin"].clone();
+    // Reverify the actual consumed assets, not an old qualification/source graph.
+    for reference in [&e.config, &e.schedule]
+        .into_iter()
+        .chain(e.inputs.iter())
+        .chain(e.models.iter().flat_map(|m| [&m.descriptor, &m.weights]))
+        .chain(e.dynamic_libraries.iter().map(|l| &l.file))
+    {
+        if let Err(error) = reference.verify() {
+            result["status"] = json!("PARTIAL");
+            result["errors"]
+                .as_array_mut()
+                .unwrap()
+                .push(json!({"stage":"input_after","error":fact(&*error)}));
+        }
+    }
+    result["whole_before_result_publication_seconds"] = json!(whole.elapsed().as_secs_f64());
+    output.finish(&result)?;
+    Ok(result)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    struct Fake {
+        trace: Vec<String>,
+        factor: u64,
+        fail_at: Option<usize>,
+        calls: usize,
+        cancel_after: bool,
+    }
+    impl Target for Fake {
+        fn reset(&mut self, r: &Request) -> Result<Value> {
+            self.trace.push(format!("reset:{}", r.session));
+            Ok(Value::Null)
+        }
+        fn prepare(&mut self, r: &Request) -> Result<Value> {
+            self.trace.push(format!("prepare:{}", r.id));
+            Ok(Value::Null)
+        }
+        fn call(&mut self, r: &Request, cancel: &AtomicBool) -> Result<Value> {
+            self.trace.push(format!("call:{}", r.id));
+            self.calls += 1;
+            if self.fail_at == Some(self.calls) {
+                return Err("injected target failure".into());
+            }
+            if self.cancel_after {
+                cancel.store(true, Ordering::Relaxed);
+            }
+            Ok(json!({"status":"COMPLETE","work":{"nodes":self.factor*r.node_cap}}))
+        }
+        fn finish_call(&mut self) -> Result<()> {
+            self.trace.push("finish_call".into());
+            Ok(())
+        }
+        fn teardown(&mut self) -> Result<Value> {
+            self.trace.push("teardown".into());
+            Ok(Value::Null)
+        }
+    }
+    fn request(id: &str, session: &str) -> Request {
+        Request {
+            id: id.into(),
+            session: session.into(),
+            root: 0,
+            depth: 1,
+            node_cap: 1,
+            time_limit_ms: None,
+            diagnostic: false,
+            warmup: false,
+        }
+    }
+    fn fake(factor: u64) -> Fake {
+        Fake {
+            trace: Vec::new(),
+            factor,
+            fail_at: None,
+            calls: 0,
+            cancel_after: false,
+        }
+    }
+    #[test]
+    fn measurement_variable_counts_orders_targets_and_domains() {
+        for (rows, factor) in [
+            (vec![request("b", "warm"), request("a", "warm")], 2),
+            (
+                vec![
+                    request("x", "cold"),
+                    request("y", "warm"),
+                    request("z", "warm"),
+                ],
+                3,
+            ),
+        ] {
+            let mut target = fake(factor);
+            let cancel = AtomicBool::new(false);
+            let mut published = Vec::new();
+            let result = drive(&rows, rows.len(), &mut target, &cancel, |v| {
+                published.push(v.clone());
+                Ok(())
+            });
+            assert_eq!(result["calls"], rows.len());
+            assert_eq!(result["status"], "COMPLETE");
+            assert_eq!(
+                published
+                    .iter()
+                    .map(|v| v["request"]["id"].as_str().unwrap())
+                    .collect::<Vec<_>>(),
+                rows.iter().map(|r| r.id.as_str()).collect::<Vec<_>>()
+            );
+            assert_eq!(
+                result["measurements"][0]["measurement"]["work"]["nodes"],
+                factor
+            );
+            assert!(
+                result["measurements"][0]["measurement"]["work"]
+                    .get("evaluations")
+                    .is_none()
+            );
+            assert!(
+                result["measurements"][0]
+                    .get("preparation_seconds")
+                    .is_some()
+            );
+            assert!(result["measurements"][0].get("measured_seconds").is_some());
+            assert!(target.trace.first().unwrap().starts_with("reset:"));
+            let domains = result["sessions"].as_array().unwrap();
+            let labels = |domain| {
+                domains
+                    .iter()
+                    .filter(|row| row["domain"] == domain)
+                    .map(|row| row["session"].as_str().unwrap())
+                    .collect::<Vec<_>>()
+            };
+            assert_eq!(labels("reset"), labels("teardown"));
+            assert_eq!(target.trace.last().unwrap(), "teardown");
+            assert_eq!(
+                target.trace.iter().filter(|s| *s == "finish_call").count(),
+                rows.len()
+            );
+        }
+    }
+    #[test]
+    fn measurement_partial_error_cancel_and_publication_cleanup() {
+        let rows = vec![
+            request("a", "warm"),
+            request("b", "warm"),
+            request("c", "warm"),
+        ];
+        let mut target = fake(1);
+        target.fail_at = Some(2);
+        let result = drive(
+            &rows,
+            rows.len(),
+            &mut target,
+            &AtomicBool::new(false),
+            |_| Ok(()),
+        );
+        assert_eq!(result["calls"], 2);
+        assert_eq!(result["complete"], 1);
+        assert_eq!(result["unperformed"], 1);
+        assert_eq!(result["remaining_requests"][0]["id"], "c");
+        assert_eq!(target.trace.last().unwrap(), "teardown");
+        let mut target = fake(1);
+        target.cancel_after = true;
+        let result = drive(
+            &rows,
+            rows.len(),
+            &mut target,
+            &AtomicBool::new(false),
+            |_| Ok(()),
+        );
+        assert_eq!(result["calls"], 1);
+        assert_eq!(result["unperformed"], 2);
+        assert_eq!(target.trace.last().unwrap(), "teardown");
+        let mut target = fake(1);
+        let result = drive(
+            &rows,
+            rows.len(),
+            &mut target,
+            &AtomicBool::new(false),
+            |_| Err("write failure".into()),
+        );
+        assert_eq!(result["calls"], 1);
+        assert_eq!(result["status"], "PARTIAL");
+        assert_eq!(target.trace.last().unwrap(), "teardown");
+        let mut target = fake(1);
+        let result = drive(&rows, 5, &mut target, &AtomicBool::new(false), |_| Ok(()));
+        assert_eq!(result["calls"], 3);
+        assert_eq!(result["unperformed"], 2);
+        assert_eq!(result["unscheduled"], 2);
+        assert_eq!(result["status"], "PARTIAL");
+        let stamp = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap()
+            .as_nanos();
+        let root = std::env::temp_dir().join(format!(
+            "measurement-publication-{}-{stamp}",
+            std::process::id()
+        ));
+        let mut output = Output::new(&root, 65536, 16384);
+        output
+            .setup(&json!({"settings":"synthetic metadata only"}))
+            .unwrap();
+        output.row(&json!({"status":"COMPLETE"})).unwrap();
+        fs::write(root.join("result.json"), b"prior unfinished write").unwrap();
+        assert!(output.finish(&json!({"calls":1})).is_err());
+        assert!(root.join("INCOMPLETE").exists());
+        assert!(output.journal.is_none());
+        assert_eq!(
+            fs::read(root.join("result.json")).unwrap(),
+            b"prior unfinished write"
+        );
+        fs::remove_dir_all(root).unwrap();
+    }
+}
+
+fn identity(c: &SigmaContext) -> Value {
+    json!({"root_key":HistoryKey::from(c.position()).history_string(),"history_counts":c.history_counts().into_iter().map(|(k,n)|(k.history_string(),n)).collect::<Vec<_>>(),"ply":c.total_ply(),"rules":c.ruleset().id(),"synthetic":c.is_synthetic()})
+}
+fn replay(spec: &RootSpec, rules: &str) -> Result<SigmaContext> {
+    let root = SigmaContext::from_prefix(&spec.prefix)?;
+    root.validate_normal()?;
+    if root.is_synthetic()
+        || root.ruleset().id() != rules
+        || root.total_ply() as usize != spec.prefix.len()
+        || root.terminal_value().is_some()
+    {
+        return Err("measurement unsupported/terminal root, no replacement".into());
+    }
+    if let Some(expected) = &spec.expected {
+        let actual = identity(&root);
+        if actual["root_key"] != expected["root_key"]
+            || actual["history_counts"] != expected["history_counts"]
+        {
+            return Err("measurement exact counted-history/root mismatch".into());
+        }
+    }
+    Ok(root)
+}
+fn fact(e: &dyn std::fmt::Display) -> Value {
+    let raw = e.to_string();
+    let mut end = raw.len().min(1024);
+    while !raw.is_char_boundary(end) {
+        end -= 1;
+    }
+    json!({"text":&raw[..end],"full_sha256":arena::digest(raw.as_bytes()),"full_bytes":raw.len(),"truncated":end!=raw.len()})
+}
+fn output_correspondence() -> Result<PathBuf> {
+    // load() already validates this same SHA-bound originating guardian intent.
+    // Read its priced output root, without a second lock or admission path.
+    let intent: Value = BoundControl {
+        path: std::env::var("QUORIDOR_LIFECYCLE_INTENT_PATH")?.into(),
+        sha256: std::env::var("QUORIDOR_LIFECYCLE_INTENT")?,
+    }
+    .read()?;
+    owned_output(&intent)
+}
+fn owned_output(intent: &Value) -> Result<PathBuf> {
+    let root: PathBuf = serde_json::from_value(intent["data_root"].clone())?;
+    let owner: PathBuf = serde_json::from_value(intent["owner"].clone())?;
+    if intent["schema"] != "quoridor.research.lifecycle-intent.v1"
+        || intent["kind"] != "run"
+        || !owner.is_absolute()
+        || !owner.is_dir()
+        || owner.canonicalize()? != owner
+        || !root.is_absolute()
+        || root == owner
+        || !root.starts_with(&owner)
+        || root.exists()
+        || fs::symlink_metadata(&root).is_ok()
+        || root
+            .parent()
+            .is_none_or(|p| p.canonicalize().ok().as_deref() != Some(p))
+    {
+        return Err("ordering fresh output must belong to admitted lifecycle owner".into());
+    }
+    Ok(root)
+}
+fn observed(r: &SearchResult) -> Value {
+    let s = &r.stats;
+    let o = &s.ordering;
+    json!({"returned":"Ok","action":r.action,"value":r.value,"value_bits":r.value.map(f32::to_bits),"completed_depth":r.completed_depth,"PV":r.pv,"stop":format!("{:?}",r.stop),"Search_internal_elapsed_seconds":r.elapsed.as_secs_f64(),
+        "work":{"nodes":s.nodes,"evaluations":s.evaluations,"terminal":s.terminal,"cutoffs":s.cutoffs,"TT_hits":s.tt_hits,"TT_probes":s.tt_probes,"TT_exact_hits":s.tt_exact_hits,"TT_key_builds":s.tt_key_builds,"tt_context_initial_items":s.tt_context_initial_items,"tt_context_transitions":s.tt_context_transitions,"tt_board_hash_reads":s.tt_board_hash_reads,"tt_board_hash_updates":s.tt_board_hash_updates,"tt_context_matches":s.tt_context_matches,"tt_context_misses":s.tt_context_misses,"tt_order_context_mismatch":s.tt_order_context_mismatch,"tt_hash_collisions":s.tt_hash_collisions,"tt_index_collisions":s.tt_index_collisions,"TT_hashes":s.tt_hashes,"TT_usable_depth":s.tt_usable_depth,"TT_order_only":s.tt_order_only,"TT_collisions":s.tt_collisions,"TT_replacements":s.tt_replacements,"TT_capacity_skips":s.tt_capacity_skips,"TT_illegal_moves":s.tt_illegal_moves,"TT_retained_bytes":s.tt_retained_bytes,"TT_generation":s.tt_generation,"TT_cutoffs":s.tt_cutoffs,"PVS_researches":s.pvs_researches,"delta_updates":s.delta_updates,"policy_calls":s.policy_calls},
+        "ordering":{"ordered_nodes":o.ordered_nodes,"scored_actions":o.scored_actions,"nonzero_dynamic_actions":o.nonzero_dynamic_actions,"nonzero_combined_actions":o.nonzero_combined_actions,"nonzero_continuation_actions":o.nonzero_continuation_actions,"history_changed_nodes":o.history_changed_nodes,"completed_cutoff_events":o.completed_cutoff_events,"cutoff_rank_sum":o.cutoff_rank_sum,"first_child_cutoffs":o.first_child_cutoffs,"positive_actions":o.positive_actions,"negative_actions":o.negative_actions,"continuation_updates":o.continuation_updates,"age_passes":o.age_passes,"static_parents":o.static_parents,"borrowed_goal_maps":o.borrowed_goal_maps,"computed_goal_map_pairs":o.computed_goal_map_pairs,"cheap_static_parents":o.cheap_static_parents,"missing_goal_map_pairs":o.missing_goal_map_pairs,"available_goal_map_pairs":o.available_goal_map_pairs,"nonzero_static_actions":o.nonzero_static_actions,"exact_goal_actions":o.exact_goal_actions,"static_changed_nodes":o.static_changed_nodes}})
+}
+fn validate_return(
+    root: &SigmaContext,
+    r: &SearchResult,
+    request: &Request,
+    legal_capture: Option<&mut Vec<u16>>,
+) -> Result<bool> {
+    if r.stats.nodes > request.node_cap
+        || r.pv.len() > 200
+        || r.value.is_some_and(|v| !v.is_finite())
+    {
+        return Err("measurement returned observation outside canonical bound".into());
+    }
+    if let Some(action) = r.action {
+        let legal = root.legal_ids();
+        if !legal.contains(&action) {
+            return Err("measurement returned observation outside canonical bound".into());
+        }
+        // Move the already-computed validation vector: no extra legal generation
+        // or clone. No-action/failed returns do not claim complete legal capture.
+        if let Some(out) = legal_capture {
+            *out = legal;
+        }
+    }
+    let mut pv = root.clone();
+    for &action in &r.pv {
+        pv = pv.play(action)?;
+    }
+    Ok(r.completed_depth == request.depth
+        && r.stop == StopReason::DepthComplete
+        && r.value.is_some()
+        && r.action.is_some())
+}
+fn close_file(file: File) -> std::io::Result<()> {
+    #[cfg(unix)]
+    {
+        use std::os::fd::IntoRawFd;
+        if unsafe { libc::close(file.into_raw_fd()) } != 0 {
+            return Err(std::io::Error::last_os_error());
+        }
+    }
+    #[cfg(not(unix))]
+    drop(file);
+    Ok(())
+}
+
+struct Output {
+    root: PathBuf,
+    limit: usize,
+    record_limit: usize,
+    used: usize,
+    journal: Option<File>,
+}
+impl Output {
+    fn new(root: &Path, limit: usize, record_limit: usize) -> Self {
+        Self {
+            root: root.into(),
+            limit,
+            record_limit,
+            used: 0,
+            journal: None,
+        }
+    }
+    fn bytes(&mut self, value: &Value) -> Result<Vec<u8>> {
+        let mut raw = serde_json::to_vec(value)?;
+        raw.push(b'\n');
+        let used = self
+            .used
+            .checked_add(raw.len())
+            .ok_or("measurement output size overflow")?;
+        if raw.len() > self.record_limit || used > self.limit {
+            return Err("measurement full capture limit; no truncation".into());
+        }
+        self.used = used;
+        Ok(raw)
+    }
+    fn file(&mut self, name: &str, value: &Value) -> Result<()> {
+        let raw = self.bytes(value)?;
+        let mut file = OpenOptions::new()
+            .create_new(true)
+            .write(true)
+            .open(self.root.join(name))?;
+        let written = file.write_all(&raw).and_then(|()| file.sync_all());
+        let closed = close_file(file);
+        written?;
+        closed?;
+        Ok(())
+    }
+    fn setup(&mut self, settings: &Value) -> Result<()> {
+        fs::create_dir(&self.root)?;
+        self.file("INCOMPLETE", &json!({"status":"INCOMPLETE"}))?;
+        self.file("settings.json", settings)?;
+        self.journal = Some(
+            OpenOptions::new()
+                .create_new(true)
+                .write(true)
+                .open(self.root.join("measurements.jsonl"))?,
+        );
+        self.sync_directory()
+    }
+    fn row(&mut self, row: &Value) -> Result<()> {
+        let raw = self.bytes(row)?;
+        let file = self.journal.as_mut().ok_or("measurement journal closed")?;
+        file.write_all(&raw)?;
+        file.sync_data()?;
+        Ok(())
+    }
+    fn sync_directory(&self) -> Result<()> {
+        let file = File::open(&self.root)?;
+        let synced = file.sync_all();
+        let closed = close_file(file);
+        synced?;
+        closed?;
+        Ok(())
+    }
+    fn finish(&mut self, result: &Value) -> Result<()> {
+        if let Some(file) = self.journal.take() {
+            let synced = file.sync_all();
+            let closed = close_file(file);
+            synced?;
+            closed?;
+        }
+        self.file("result.json", result)?;
+        self.sync_directory()?;
+        fs::remove_file(self.root.join("INCOMPLETE"))?;
+        Ok(())
+    }
+}
