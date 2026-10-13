@@ -22,7 +22,7 @@ Sigmaは実100ms authority receipt deadlineと5ms reserveを使う。reserve到�
 
 mainはfull history/反復/goal/合法着手、手番開始、実response receipt/deadline、取消、terminal回収と記録を所有し、receiptのcritical pathへ推論・長い探索・遅い保存を置かない。100ms receipt/5ms reserve、完成済み結果の選択、zero-completion合法fallback/null value、original error/cancelと次手番前の旧work回収は共通条件である。同期ORTを強制停止できるとは仮定せず、期限前の応答とterminal完了を別に保存する。遅いreplyを採用せず、errorを過去snapshotで救済しない。
 
-管理mainと等条件のAI二者を利用可能な3物理コアへ配置する第一案は、実physical/affinity/cgroup/SMT/host reserveと実CPU/RAM支持でallocatorが確認する。コア番号をfixtureへ固定せず、game workersを3にして並列対局へ変えない。実runにはこのCPU/thread条件を記録し、旧結果を同一timing cohortへ混ぜない。source・config・callerの移行とaffected checks、変更した所有/時計境界の一度のrelated reviewは未完了であり、旧構成imageのPASSから新構成の資格を作らない。
+管理mainと等条件のAI二者を利用可能な3物理コアへ配置し、実physical/affinity/cgroup/SMT/host reserveと実CPU/RAM支持を毎回の通常入口で確認する。現配置はAI A/BがCPU1/4、mainがCPU6で、package0の物理core0/2/3を使う。コア番号をfixtureへ固定せず、game workersを3にして並列対局へ変えない。実runにはこのCPU/thread条件を記録し、旧結果を同一timing cohortへ混ぜない。所有/時計境界の一度のrelated reviewはclearとなり、native6件・NN0 integration1件・Python3件とClippy/releaseのaffected software検証が揃った。実際の[現BUILD](../../.artifacts/research-team/integration324/two-ai-composition-v1/build-v4/operation-v1/manifest.json)は通常finalize PASS、artifactは742c817dである。これはソフトウェアの結果で、未実行の対局・model/head・棋力のPASSではない。
 
 元768 slots中、入場済み0/1のFAILED/raw/validatedUNKNOWNを保持して再実行しない。新構成で進めるのは残り766と既存診断だけで、model/math/score/float/rules/temperature/時計、323pause/defaults/N/seals/fits96と772MiB/decimal50GBは保持する。追加64/calibration/推論時間予測は撤回済みである。
 
@@ -33,7 +33,7 @@ worker CPUはA、guardian CPUはmainと一致させ、Rootの実RUN支持CPU3/th
 physical/affinity/cgroup/SMT/host reserve検査を通す。別corpusの四コア権限は流用しない。
 モデル無しintegrationを実三コアで検査する必要があるBUILDだけ、実Source-bound handoverに
 `test_cpu_cores` を記録し、test roleへ三コアを渡す。lint/release/version roleは従来の一CPUであり、
-このsource提案はBuild/Run/コアadmissionではない。
+現役の[承認plan](../../research-data/ai-sigma/three-engine-comparison374/approved-plan-v4.json)と[三コア実行支持](../../research-data/ai-sigma/three-engine-comparison374/support-two-ai-runtime-v1.json)を用い、各実RunのSHA-bound intent/admissionと現在のmodel/library/input/artifact/CPU/RAM検査は通常入口で行う。planの元batch0は原物を保持し、実行対象は未入場batch1..383だけである。
 
 mainは手番前に合法fallbackをcacheし、開始時刻を記録して完全historyのcloneと仕事をAIへ渡す。
 AIは自分の完成結果だけを更新通知し、mainは実受領時刻で最新の期限内完成を保持する。
