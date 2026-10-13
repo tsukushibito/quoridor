@@ -1,5 +1,7 @@
+#[cfg(feature = "research-diagnostics")]
+use super::super::continuation360_tests::namespace;
 use super::super::{
-    continuation360_tests::{PawnRows, namespace, with_state},
+    continuation360_tests::{PawnRows, with_state},
     *,
 };
 use super::*;
@@ -42,7 +44,7 @@ fn ordering382_rank_tiers_policy_total_cmp_and_integer_boundaries() {
     // Some policy must retain total_cmp: +0 precedes -0 descending,
     // before signed history and ActionID. No policy uses all +0 ties.
     policy[2] = -0.0;
-    assert_eq!(sort(&policy), [208, 80, 13, 3, 4, 2, 5]);
+    assert_eq!(sort(&policy), [208, 80, 13, 3, 4, 5, 2]);
     policy[5] = 1.0;
     assert_eq!(sort(&policy), [208, 80, 13, 3, 5, 4, 2]);
 

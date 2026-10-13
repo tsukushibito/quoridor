@@ -191,3 +191,26 @@ cold中央値はnodes1.001816243/evaluations1.003524636/whole1.433261163、warm�
 元採用gate FAILは変更せず、速度最適化で元80を再ラベルしない。将来の採用は実変更に必要な検証と、別の具体的Beads契約・whole支持・人間が選択した評価/採用条件のもとで判断する。数値campaignはこのsource inspectionから発行されない。この具体的用途を取り下げるか、完了後に次の用途を選ばない場合は、実consumer STOPとGit再構成/固有証拠保全を満たして比較専用hooks/sourceを撤去する。既定製品機能・必要なcorrectness tests・元RAW/モデル/入力/失敗/費用は保持する。374優先と全体240MiB/decimal50GB、323pause/models/defaults/N/seals/fits96を維持する。
 
 376の停止cache inspection案は両map検証/error/control順を維持するlocal wall-edge reuseだけで、未実装である。人間はその前に[349 current whole-search Perf](ai-nnue-optimization-agenda.md#現行whole-search-perf3492026-10-13)を選んだ。A/B各plain前／sampling／plain後、代表cold D4/D6とoriginal warm traceの36callsを固定し、元80を再実行しない。候補保持はこの具体的診断と最小same-semantics検討へ継続する。現行defaultや元採用FAILの意味は変えない。
+
+## 順序を保つ構造整理と重複削減（382、2026-10-13）
+
+人間が選んだ変更は、合法手取得・既存採点・stable sort・必要な診断を読み分ける構造整理と、合法手ごとのPV／即goal／killer順位を一度だけ求める削減である。順位と診断は一つの内部定義を使い、policyなし／ありをsort前に分岐する。ありの場合の`total_cmp`（正負zeroを含む）、history/static score、ActionID tieを保つ。診断OFFでは専用snapshot・copy・scanを行わず、追加heap allocationを入れない。map検証・係数・continuation更新・TT/PVS・評価数学・合法集合・取消/error/undoは変更しない。段階MovePickerへの変更や旧372削減の一括復活は含めない。
+
+現役measureのControl/Cheapと製品constructorを保ち、三つの旧test-only研究profileを撤去する。現在のcorrectness定義は製品constructorと既存private設定へ移す。構造整理と削減は別commitとし、削減だけを逆適用できる。停止済み[382.1 source packet](../../.worktree/cheap-static-ordering376/.artifacts/ordering-structure382-v1/source-STOP.json)は静的整形・forward/inverse確認までで、native型検査・assertion・image・性能は未検証である。独立確認は変更した順序とfactory境界に一度限定し、通常修復や各runの追加レビューを要求しない。
+
+承認された比較はControlのO→N→N→O、続いてCheapのO→N→N→Oの8process／48calls／24sessionsである。各processは既存349のcold D4 family102、cold D6 family34、warm family0のlocal ply0→2→4→6を使う。coldはfresh、warmだけ同一sessionのTT/historyを保持する。2M D4／8M D6、合計144M nodes上限、TT4096/PVS/BEST43・full history・rulesを固定し、sampling・補充・旧80/36再演をしない。Oは比較専用の真正なreadonly fbd0 artifact、Nは必要なaffected softwareと実BUILD後に参照する。結果は実設定snapshotと各operationの結果／RAW参照で残す。
+
+profile内で完成depth・value bits・action・exact PV・探索仕事量・親restoreが一致することを確認する。時間は同じnative whole-before-publication境界を使い、setup/reset/prepare/Search/drop/journalを含め、outer guardianやnested時間を加算しない。profileごとのO二値／N二値の中央値で両方N/O≤1.00、各contextで両NがO中央値の1.10を超える例なしを採用条件とする。error/incomplete/missing/capは不支持またはUNKNOWNのまま保持する。削減が不支持ならその差分だけ戻し、構造整理はsoftware確認と未測定の限界を別に記録する。追加native campaignを発行せず、有限結果を一般speedup・棋力・既定Coverageへの普遍的改善へ拡張しない。
+
+Mainは構造7e959048／削減61a2fea1を別commitで統合し、限定order/factory reviewはclearである。必要な8 native定義は元scopeで成功し、signed-zero fixture期待値とfeature専用importの通常修正を保持した。現BUILD afb2faa9はresearch compile、両featureのClippy、measurement releaseと7 versionsがPASS、N imageは1b631ac7/9,501,640Bである。旧FAILED／成功scopeは不変で、assertionの全面再実行はしていない。性能比較はこのsoftware確認とは別に実設定と結果で判断する。
+
+### 382有限比較の結果
+
+元job49829e34は8process／48 calls／24 sessionsを完了し、各operationが通常once-finalize PASS、child/TMP/readerも停止した。[保存結果の解釈](../../.artifacts/research-team/integration324/ordering382-v1/finite48-v3/collection-v3/result.json)と[元結果・実STOP](../../.artifacts/research-team/integration324/ordering382-v1/finite48-v3/collection-v3/collection.json)を保持する。両profileの全6contextで完成depth・value bits・action・exact PV・全記録済み仕事量・合法集合・親restore・rootが一致した。欠測・追加call・errorはない。
+
+| Profile | O全体中央値（秒） | N全体中央値（秒） |      N/O | 両NがcontextのO中央値×1.10超 |
+| ------- | ----------------: | ----------------: | -------: | ---------------------------- |
+| Control |         15.015910 |         11.878699 | 0.791074 | なし                         |
+| Cheap   |         21.093110 |         17.896051 | 0.848431 | なし                         |
+
+指定された有限採用条件は両profileでPASSとなり、構造整理とcached-rank削減を保持する。既定Coverage・別モデル・一般CPU性能・棋力改善への主張はしない。元outer controller171.56642206900142秒は一度だけ計上し、native／inner controllerを重ねて加算しない。結果consumerは省略したRootInputの既定値とnativeの明示値を区別できなかったため、既存serdeのnull／false／seed既定値だけを適用する通常修正と新1 NN0を確認した。実設定・結果・原UNKNOWN解釈は書き換えず、実測を再実行していない。元FAILED／RAW／mask差・未測定範囲は保持する。実測namespaceの事後量は2,326,528 allocated Bで、ordinary storage予算は未設定だった。
