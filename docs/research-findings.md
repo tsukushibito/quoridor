@@ -1316,6 +1316,10 @@ ordinary storageは省略して一度のpost-work usageを記録した。BUILD4 
 
 349のconfigured perf RAW siblingを通常charged rootへ含め、実profilerのwritable FDとpath/dev/inode・PID/start/bootを照合する薄い修復をMain f47bad46へ採用した。現Mainの新Python所有検証1件は実PASSで、source/TMP STOP09:02:35.279774Zまで確認済みである。新native FD検証と修復済みimageは未完成で、旧742cを新predicateの成功へ移植しない。arena保存修復とまとめて未完了のaffected native checks・Clippy・releaseを行い、既存の成功suite/80/モデル資格は再実行しない。
 
+保存修復とPerf RAW所有修復を合わせた[compatible BUILD2の通常finalize](../.artifacts/research-team/integration324/arena-entry-v1/compatible-build-v2/operation-v1/manifest.json)はPASS/primarynull/secondary[]/cleanuptrue/remaining[]となった。新しいlossless outcome roundtrip・exact cap／overflow検証1件と、profiler RAWのlive FD／stale／foreign／symlink／identity検証1件、Clippy/release・7versionsが実PASSである。全outcome630784B／pair16MiBは保持し、obsolete3072B個別拒否だけを撤去した。新capture testの旧fixture schema失敗は元BUILD1 FAILEDとして保持し、参照先だけを現schemaの既存fixtureへ修正した。既存Python・native・80・model/headの成功は再実行していない。実artifact dd199514/9,472,400B、Gitcbf967f、controller91.81346065199978秒を一度だけ計上し、nested Cargoは加算しない。これはソフトウェアの結果で、対局／棋力のPASSではない。
+
+[現plan-v5](../research-data/ai-sigma/three-engine-comparison374/approved-plan-v5.json)は完全未入場batch2..383の382configsだけを実artifactへ更新し、逆変換で他のJSONを完全に保つ。元batch0/1のFileRefs、768 slots、未完成slot3と全科学設定は不変で、新しい対局・refillを増やさない。三物理コアA/B1/4・main6、100ms receipt／5ms reserveと同じmodelsを保つ。現在の通常Experiment/numerical correspondence/admissionとfresh lifetimeを既存担当で準備し、実arenaとPerf36は直列に進める。旧RAW/FAILED/費用を新PASSへ移植せず、349完了やPolicy返信をarenaの前提にしない。
+
 ## 人間選択：Sigma／固定D／単独NNUEの比較（374、2026-10-12）
 
 人間は、三者の棋力と得意・不得意な盤面を同じ枠で比べ、NNUE改善の検証方針に使うことを選択した。対象NNUEは既存BEST43の単独勝敗予測で、Dの出力補正や混合評価ではない。distance head入力・scaleは既存のまま、重み・final tanh・output bypass OFFを固定する。新しいモデルや学習、比率、teacher、defaultの選択は含まない。
