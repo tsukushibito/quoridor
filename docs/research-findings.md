@@ -1239,7 +1239,22 @@ Actual forward census1650008/2000000 includes the64-row affected fixture; render
 
 これは承認済みの方向と資源支持の記録であり、実装正しさ・数値完了・改善の観測ではない。372の約半分のstatic時間と全体採用拒否は独立した過去結果として保持する。[240MiB支持](../research-data/ai-sigma/cheap-static-ordering376/support-v1.json)は終了済みタスクの未使用future TMP248MiBを正常な停止証拠で整理した後、decimal50GB内に発行した。元の使用cap・失敗・モデル/入力/RAW/UNKNOWNは保持する。374の実intervalとshared targetのsole writerを優先し、source準備と実build/評価を区別する。新しい棋力・NNUE/Dの優劣・defaultや323pause解除は選択していない。
 
-376の新規9件（AI5／runner4）は[元のtests-only実行](../.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/tests-only-v1/verified-tests-result.json)で一度ずつPASSした。これは実imageや固定80-callの数値結果ではない。旧入力／head資格370ca/ef4と現imageのcontroller Python・runtime環境の全面一致は成立せず、必要なnative設定の対応だけを残す修復をMainへ採用した。[最新の限定確認](../.artifacts/cheap-static-ordering376-review-v1/retained-input-RI1-v3/report.md)を受け、記録されたCARGO*/RUST*文字列の一致と必須native設定・元資格/Build・trusted adoptionを束縛する。Python/runtimeの差を許容し、未記録/暗黙設定や外部wrapper/linker/build-script内容・普遍的なcompiler同等性はUNKNOWNのまま保持する。[関連レビュー](../.artifacts/cheap-static-ordering376-review-v1/retained-input-RI1-v2/report.md)は、宣言されたRUSTC・RUSTFLAGS・opt/debugが等しくてもCARGO_PROFILE_RELEASE_LTOが異なる場合を拒否できない点を指摘した。これは静的な未処理ケースで、保存済みBuildの実LTO変更や数値失敗を観測したものではない。元の9件成功・入力／headのsubjectを変更せず、ordering改善と採用可否は未測定のまま保持する。
+376の新規9件（AI5／runner4）は[元のtests-only実行](../.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/tests-only-v1/verified-tests-result.json)で一度ずつPASSした。これは実imageや固定80-callの数値結果ではない。旧入力／head資格370ca/ef4と現imageのcontroller Python・runtime環境の全面一致は成立せず、必要なnative設定の対応だけを残す修復をMainへ採用した。[最新の限定確認](../.artifacts/cheap-static-ordering376-review-v1/retained-input-RI1-v3/report.md)を受け、記録されたCARGO*/RUST*文字列の一致と必須native設定・元資格/Build・trusted adoptionを束縛する。Python/runtimeの差を許容し、未記録/暗黙設定や外部wrapper/linker/build-script内容・普遍的なcompiler同等性はUNKNOWNのまま保持する。[関連レビュー](../.artifacts/cheap-static-ordering376-review-v1/retained-input-RI1-v2/report.md)は、宣言されたRUSTC・RUSTFLAGS・opt/debugが等しくてもCARGO_PROFILE_RELEASE_LTOが異なる場合を拒否できない点を指摘した。これは静的な未処理ケースで、保存済みBuildの実LTO変更や数値失敗を観測したものではない。元の9件成功・入力／headのsubjectを変更せず、このsource修復時点ではordering改善と採用可否は未測定だった。
+
+### 376固定80の受入れと費用inspection（2026-10-13）
+
+[固定80の停止結果](../.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/adopted379-preparation-v1/execution-v1/fixed-result-control.json)を[独立した保存結果解釈](../.artifacts/cheap-static-ordering376-review-v1/final-result-v1/report.md)で確認し、元の採用gate FAILを受け入れた。80 requested-depth COMPLETE／0 UNKNOWN／0 Err、72 plain＋内数8 diagnostic、64 D4＋16 D6、56 sessions、114,824,148 actual nodes（reserved256M）である。20対応groupの有限f32 value bits・action・root/legal set/historyは一致し、18 exact PV／2 legal PV差分とparent undoは元のqualified native範囲で支えられる。新しいgeometry/model/head/oracleやsuccessful suiteは実行していない。
+
+| Stratum |     Nodes比 | Evaluations比 | Plain whole-root比 |
+| ------- | ----------: | ------------: | -----------------: |
+| cold    | 1.001816243 |   1.003524636 |        1.433261163 |
+| warm    | 0.995836861 |   0.994179813 |        1.372345577 |
+
+各processのavailable plain中央値からB／bracketing A比を作る元の推定方法で、nodes/evaluations≤0.95とwhole≤1.02の全6中央値gateがFAILした。全10contextで両Bがwhole1.10の悪化基準を超え、全40個の個別B/A whole比較も1.10を超える。cold D4 family102はnodes＋19.993%／evaluations＋25.030%。一方warm family0/ply6はnodes−11.377%／evaluations−14.330%の局所的枝刈り改善を示すが、wholeは＋33.528%。詳細context表は[既存設計](design/lightweight-move-ordering-v1.md#376固定80の結果と費用inspection2026-10-13)に保持する。diagnostic warm0/ply6のcutoff平均rank1.07818→1.05526、first-child share97.8617%→98.0302%と、cold0のrank1.21001→1.22462を混ぜずに記録する。単一非ランダムblockの観測で、CI・population・一般速度・棋力・唯一原因は主張しない。
+
+元4 Runは一度ずつcanonical PASSした。controller計255.961599059868595秒を一度だけ計上し、nested native253.06250512599945秒を加算しない。保存collector0.13919583009555936秒は別で、元wrapperのtuple-as-dict TypeError／exit1と失われたreturned guardian completion UNKNOWNを保持する。persisted pending/attemptedを戻り値へ置換せず、whole-pipeline PASSやcontinuous peak、後続admin/LLM全費はUNKNOWNのままである。
+
+人間は、元の既定採用FAILと、正しい動作・局所的枝刈りという中間成果を区別し、候補を具体的な費用最適化のため保持するよう指示した。SAME376担当がcheap_static_ordering::prepareによる毎parentの81×2 cached maps検証と、既存accumulatorの位置対応・生成/更新/undo・error境界・per-action準備/controlを限定source inspectionする。全盤面検証の因果時間寄与は未測定であり、保証を無条件に削らず、score/rank/tie/探索数学/legal/error/cancel/deadlineを保つ最小案だけを提案する。source inspection1MiBは既存source16MiB／whole240MiB内で、数値job・重み/pruning rule変更・新cache/certificate/frameworkは未選択。既定profile・models・teacher N・seals・fits96・USERPAUSE323は維持する。将来の採用/撤去条件を既存設計に明記し、旧RAW/FAILED/費用/UNKNOWNを変更しない。
 
 ## 人間選択：Sigma／固定D／単独NNUEの比較（374、2026-10-12）
 

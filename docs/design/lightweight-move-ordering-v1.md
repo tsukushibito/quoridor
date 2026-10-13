@@ -166,3 +166,26 @@ source成長に追加512KiBを50GB内で前向き支持する。360 source合計
 事前採用基準はcoldとwarmの両方でnodesとevaluationsの中央値比≤0.95、score準備・sort・history setup/update/aging・teardown/journalを含むplain whole-root中央値比≤1.02。いずれかのcontextで両Bのplain中央値がA中央値よりnodes/evals/wholeのどれかで1.10を超えれば拒否する。NPSは補助とし、四processからCI・一般的棋力・唯一原因は主張しない。負または不明でも固定質問を完了し、追加block・重み変更・default切替を自動で行わない。
 
 [inclusive240MiB支持](../../research-data/ai-sigma/cheap-static-ordering376/support-v1.json)は一shared targetのpositive growthと一private imageを含む。[終了したfuture TMP予約の整理](../../research-data/ai-sigma/cheap-static-ordering376/settled-future-reservations-v1.json)は正常なSTOP/cleanupに基づく将来分だけで、過去の使用上限・失敗費・固有データ・RAW・UNKNOWNを変更しない。374の実際のbuild/計測/対局intervalが優先し、actual quiet/custody/sole-Cargo条件で新規affected softwareと有限評価へ入る。担当・状態はBeads376、source準備や支持発行は数値START・改善の証拠ではない。323 USERPAUSE/seals/defaults/N/fits96を保持する。
+
+### 376固定80の結果と費用inspection（2026-10-13）
+
+[独立した停止結果解釈](../../.artifacts/cheap-static-ordering376-review-v1/final-result-v1/report.md)を受け入れた。元の固定80は全要求深さCOMPLETE／0 UNKNOWN／0 Err、56 sessions、72 plain＋8 diagnostics、114,824,148 nodes／256M liability。20対応groupのvalue/actionが一致し、PV差分2件は元qualified nativeのlegal-return/undo範囲に留める。元のcold/warm中央値と全10context悪化基準はFAILで、既定採用は行わない。
+
+| Depth | Family | Warm local ply |     Nodes比 | Evaluations比 | Plain whole-root比 |
+| ----: | -----: | -------------- | ----------: | ------------: | -----------------: |
+|     4 |      0 | cold           | 1.005523193 |   1.006159773 |        1.585043484 |
+|     4 |     34 | cold           | 0.977779172 |   0.977448279 |        1.369496569 |
+|     4 |     68 | cold           | 1.025078912 |   1.032934247 |        1.461035600 |
+|     4 |    102 | cold           | 1.199930283 |   1.250296242 |        1.605758348 |
+|     4 |      0 | 0              | 1.005523193 |   1.006159773 |        1.393422433 |
+|     4 |      0 | 2              | 1.022743624 |   1.031596377 |        1.509615962 |
+|     4 |      0 | 4              | 0.986150530 |   0.982199853 |        1.351268721 |
+|     4 |      0 | 6              | 0.886232860 |   0.856700869 |        1.335284545 |
+|     6 |     34 | cold           | 0.992044845 |   0.988402597 |        1.405486725 |
+|     6 |    102 | cold           | 0.998109294 |   1.000889500 |        1.328903205 |
+
+cold中央値はnodes1.001816243/evaluations1.003524636/whole1.433261163、warmは0.995836861/0.994179813/1.372345577。全40個の個別B/A whole比も1.10を超えた。warm0/ply6の局所的枝刈り改善（nodes−11.377%、evaluations−14.330%）と正しい動作は中間成果として保持する。diagnosticsの同context cutoff平均rank1.07818→1.05526／first-child share97.8617%→98.0302%、cold0 rank1.21001→1.22462は8内数diagnosticの観測で、72 plain時間や因果時間配分と混ぜない。元controller255.961599059868595秒を一度計上し、nested時間を加算しない。保存collector wrapper失敗・returned-record UNKNOWN／後続admin・continuous peak UNKNOWNを保持する。
+
+候補の現役保持目的は、人間が指定したcache検証費の限定source inspectionと具体的な同意味最適化案である。prepareの81×2 maps検証が原因だという時間割合は未測定。既存accumulatorのposition/wall/colour対応、生成/更新/undoとinvalid claimed cache拒否境界、per-action準備/controlを先に調べる。score/順位/tie/探索数学/legal sets/cancel/deadline/errorを保つ案に限定し、新しい検証cache/certificate/framework、重み調整や新しいpruning ruleを追加しない。
+
+元採用gate FAILは変更せず、速度最適化で元80を再ラベルしない。将来の採用は実変更に必要な検証と、別の具体的Beads契約・whole支持・人間が選択した評価/採用条件のもとで判断する。数値campaignはこのsource inspectionから発行されない。この具体的用途を取り下げるか、完了後に次の用途を選ばない場合は、実consumer STOPとGit再構成/固有証拠保全を満たして比較専用hooks/sourceを撤去する。既定製品機能・必要なcorrectness tests・元RAW/モデル/入力/失敗/費用は保持する。374優先と全体240MiB/decimal50GB、323pause/models/defaults/N/seals/fits96を維持する。
