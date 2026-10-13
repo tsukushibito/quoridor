@@ -26,57 +26,93 @@ impl HistoryScores<'_> {
 }
 
 pub(super) struct Ranking<'a> {
-    pv: Option<u16>,
-    killers: [Option<u16>; 2],
-    goals: Option<&'a [bool; 81]>,
-    policy: &'a [f32; 209],
+    ranks: [Rank; 209],
+    policy: Option<&'a [f32; 209]>,
     scores: HistoryScores<'a>,
 }
+
+#[derive(Clone, Copy, Default)]
+struct Rank {
+    with_goals: u8,
+    without_goals: u8,
+}
+
 impl<'a> Ranking<'a> {
     pub fn new(
+        ids: &[u16],
         pv: Option<u16>,
         killers: [Option<u16>; 2],
         goals: Option<&'a [bool; 81]>,
-        policy: &'a [f32; 209],
+        policy: Option<&'a [f32; 209]>,
         scores: HistoryScores<'a>,
     ) -> Self {
+        let mut ranks = [Rank::default(); 209];
+        for &id in ids {
+            let rank = if Some(id) == pv {
+                Rank {
+                    with_goals: 0,
+                    without_goals: 0,
+                }
+            } else {
+                let killer = if Some(id) == killers[0] {
+                    1
+                } else if Some(id) == killers[1] {
+                    2
+                } else {
+                    3
+                };
+                let goal = id < 81 && goals.is_some_and(|g| g[id as usize]);
+                Rank {
+                    with_goals: if goal { 1 } else { killer + 1 },
+                    without_goals: killer,
+                }
+            };
+            ranks[id as usize] = rank;
+        }
         Self {
-            pv,
-            killers,
-            goals,
+            ranks,
             policy,
             scores,
         }
     }
 
     fn priority(&self, id: u16, goal_tier: bool) -> u8 {
-        if Some(id) == self.pv {
-            0
-        } else if goal_tier && id < 81 && self.goals.is_some_and(|g| g[id as usize]) {
-            1
-        } else if Some(id) == self.killers[0] {
-            1 + u8::from(goal_tier)
-        } else if Some(id) == self.killers[1] {
-            2 + u8::from(goal_tier)
+        let rank = self.ranks[id as usize];
+        if goal_tier {
+            rank.with_goals
         } else {
-            3 + u8::from(goal_tier)
+            rank.without_goals
         }
     }
 
-    fn tiers(&self, a: u16, b: u16, goal_tier: bool) -> Ordering {
+    fn tiers(&self, a: u16, b: u16, goal_tier: bool, policy: Option<&[f32; 209]>) -> Ordering {
         self.priority(a, goal_tier)
             .cmp(&self.priority(b, goal_tier))
-            .then_with(|| self.policy[b as usize].total_cmp(&self.policy[a as usize]))
+            .then_with(|| {
+                policy.map_or(Ordering::Equal, |p| p[b as usize].total_cmp(&p[a as usize]))
+            })
     }
 
-    fn compare(&self, a: u16, b: u16, goal_tier: bool, scores: HistoryScores<'_>) -> Ordering {
-        self.tiers(a, b, goal_tier)
+    fn compare(
+        &self,
+        a: u16,
+        b: u16,
+        goal_tier: bool,
+        scores: HistoryScores<'_>,
+        policy: Option<&[f32; 209]>,
+    ) -> Ordering {
+        self.tiers(a, b, goal_tier, policy)
             .then_with(|| scores.compare(a as usize, b as usize))
             .then_with(|| a.cmp(&b))
     }
 
     pub fn sort(&self, ids: &mut [u16]) {
-        ids.sort_by(|&a, &b| self.compare(a, b, true, self.scores));
+        match self.policy {
+            Some(policy) => {
+                ids.sort_by(|&a, &b| self.compare(a, b, true, self.scores, Some(policy)))
+            }
+            None => ids.sort_by(|&a, &b| self.compare(a, b, true, self.scores, None)),
+        }
     }
 }
 
@@ -104,7 +140,7 @@ impl Observation {
         // Exact priority/policy tiers with ActionID ties and no history.
         let history_changed = ids
             .windows(2)
-            .any(|w| ranking.tiers(w[0], w[1], true).is_eq() && w[0] > w[1]);
+            .any(|w| ranking.tiers(w[0], w[1], true, ranking.policy).is_eq() && w[0] > w[1]);
         stats.history_changed_nodes += u64::from(history_changed);
         if has_static {
             // Coverage omits the goal tier in its dynamic-only comparison;
@@ -116,6 +152,7 @@ impl Observation {
                         w[1],
                         self.common_goal_tier,
                         HistoryScores::Signed(&self.dynamic),
+                        ranking.policy,
                     )
                     .is_gt()
             });

@@ -16,10 +16,11 @@ fn ordering382_rank_tiers_policy_total_cmp_and_integer_boundaries() {
     scores[5] = -124_992;
     let sort = |policy: &[f32; 209]| {
         let ranking = Ranking::new(
+            &input,
             Some(208),
             [Some(13), Some(3)],
             Some(&goals),
-            policy,
+            Some(policy),
             HistoryScores::Signed(&scores),
         );
         let mut ids = input;
@@ -27,6 +28,17 @@ fn ordering382_rank_tiers_policy_total_cmp_and_integer_boundaries() {
         ids
     };
     assert_eq!(sort(&policy), [208, 80, 13, 3, 2, 4, 5]);
+    let no_policy = Ranking::new(
+        &input,
+        Some(208),
+        [Some(13), Some(3)],
+        Some(&goals),
+        None,
+        HistoryScores::Signed(&scores),
+    );
+    let mut no_policy_ids = input;
+    no_policy.sort(&mut no_policy_ids);
+    assert_eq!(no_policy_ids, [208, 80, 13, 3, 2, 4, 5]);
     // Some policy must retain total_cmp: +0 precedes -0 descending,
     // before signed history and ActionID. No policy uses all +0 ties.
     policy[2] = -0.0;
@@ -39,12 +51,12 @@ fn ordering382_rank_tiers_policy_total_cmp_and_integer_boundaries() {
         let mut unsigned = [0; 209];
         unsigned[5] = u64::MAX;
         unsigned[4] = 1_u64 << 63;
-        let zeros = [0.0; 209];
         let ranking = Ranking::new(
+            &input,
             Some(208),
             [Some(13), Some(3)],
             Some(&goals),
-            &zeros,
+            None,
             HistoryScores::Unsigned(&unsigned),
         );
         let mut ids = input;
@@ -54,12 +66,12 @@ fn ordering382_rank_tiers_policy_total_cmp_and_integer_boundaries() {
 
     // Static's before-order differs for Coverage, but Cheap's control
     // shares the exact goal tier. Both observations use the ranking rule.
-    let zeros = [0.0; 209];
     let ranking = Ranking::new(
+        &input,
         None,
         [None; 2],
         Some(&goals),
-        &zeros,
+        None,
         HistoryScores::Signed(&scores),
     );
     let mut ids = input;

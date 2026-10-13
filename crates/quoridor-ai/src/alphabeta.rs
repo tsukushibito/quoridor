@@ -980,10 +980,11 @@ impl Search<'_> {
         #[cfg(not(feature = "research-diagnostics"))]
         let history = move_ordering::HistoryScores::Signed(&scores.combined);
         let ranking = move_ordering::Ranking::new(
+            &ids,
             pv,
             self.killers.get(ply).copied().unwrap_or([None; 2]),
             scores.static_scores.as_ref().map(|s| &s.goals),
-            &scores.policy,
+            self.orderer.map(|_| &scores.policy),
             history,
         );
         ranking.sort(&mut ids);
