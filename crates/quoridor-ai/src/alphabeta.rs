@@ -21,6 +21,8 @@ use continuation_history::{ContinuationHistory, PlayedMove};
 #[cfg(feature = "research-diagnostics")]
 #[path = "cheap_static_ordering.rs"]
 mod cheap_static_ordering;
+#[path = "move_ordering.rs"]
+mod move_ordering;
 #[path = "static_ordering.rs"]
 mod static_ordering;
 
@@ -968,10 +970,44 @@ impl Search<'_> {
         ply: usize,
     ) -> NodeResult<Vec<u16>> {
         let mut ids = c.legal_ids();
+        let scores = self.ordering_scores(c, accumulator, &ids)?;
+        #[cfg(feature = "research-diagnostics")]
+        let history = if self.ordering.is_none() {
+            move_ordering::HistoryScores::Unsigned(&self.history)
+        } else {
+            move_ordering::HistoryScores::Signed(&scores.combined)
+        };
+        #[cfg(not(feature = "research-diagnostics"))]
+        let history = move_ordering::HistoryScores::Signed(&scores.combined);
+        let ranking = move_ordering::Ranking::new(
+            pv,
+            self.killers.get(ply).copied().unwrap_or([None; 2]),
+            scores.static_scores.as_ref().map(|s| &s.goals),
+            &scores.policy,
+            history,
+        );
+        ranking.sort(&mut ids);
+        if let Some(observation) = scores.observation {
+            observation.after(
+                &ranking,
+                &ids,
+                scores.static_scores.is_some(),
+                &mut self.stats.ordering,
+            );
+        }
+        Ok(ids)
+    }
+
+    fn ordering_scores(
+        &mut self,
+        c: &SigmaContext,
+        accumulator: Option<&EvalAccumulator>,
+        ids: &[u16],
+    ) -> NodeResult<move_ordering::ScoredMoves> {
         let mut policy = [0f32; 209];
         if let Some(orderer) = self.orderer {
             self.control()?;
-            let scores = orderer.scores(c, &ids)?;
+            let scores = orderer.scores(c, ids)?;
             if scores.len() != ids.len() || scores.iter().any(|v| !v.is_finite()) {
                 return Err(Interrupted::Error(SearchError::Evaluation(
                     "ordering scores must be finite and cover all legal moves".into(),
@@ -1009,34 +1045,20 @@ impl Search<'_> {
             };
             Some(match scratch {
                 StaticScratch::Coverage(scratch) => {
-                    static_ordering::prepare(c.position(), cached, &ids, scratch, control)?
+                    static_ordering::prepare(c.position(), cached, ids, scratch, control)?
                 }
                 #[cfg(feature = "research-diagnostics")]
                 StaticScratch::Cheap => {
-                    cheap_static_ordering::prepare(c.position(), cached, &ids, control)?
+                    cheap_static_ordering::prepare(c.position(), cached, ids, control)?
                 }
                 #[cfg(feature = "research-diagnostics")]
                 StaticScratch::CheapControl => {
                     control()?;
-                    cheap_static_ordering::goals_only(c.position(), &ids)?
+                    cheap_static_ordering::goals_only(c.position(), ids)?
                 }
             })
         } else {
             None
-        };
-        let killers = self.killers.get(ply).copied().unwrap_or([None; 2]);
-        let priority = |id: u16| {
-            if Some(id) == pv {
-                0
-            } else if id < 81 && static_scores.as_ref().is_some_and(|s| s.goals[id as usize]) {
-                1
-            } else if Some(id) == killers[0] {
-                2
-            } else if Some(id) == killers[1] {
-                3
-            } else {
-                4
-            }
         };
         let mut combined = [0i32; 209];
         if self.ordering_diagnostics {
@@ -1044,7 +1066,7 @@ impl Search<'_> {
             self.stats.ordering.scored_actions += ids.len() as u64;
         }
         if let Some(history) = self.ordering.as_deref() {
-            for &action in &ids {
+            for &action in ids {
                 let (score, continuation_nonzero) =
                     history.scores(c.position(), action, &self.path);
                 combined[action as usize] = score;
@@ -1057,15 +1079,21 @@ impl Search<'_> {
         }
         #[cfg(feature = "research-diagnostics")]
         if self.ordering.is_none() && self.ordering_diagnostics {
-            for &action in &ids {
+            for &action in ids {
                 self.stats.ordering.nonzero_dynamic_actions +=
                     u64::from(self.history[action as usize] != 0);
             }
         }
-        let mut dynamic = [0i32; 209];
-        if self.ordering_diagnostics {
-            dynamic = combined;
-        }
+        let observation = self.ordering_diagnostics.then(|| {
+            #[cfg(feature = "research-diagnostics")]
+            let common_goal_tier = matches!(
+                self.static_scratch.as_ref(),
+                Some(StaticScratch::Cheap | StaticScratch::CheapControl)
+            );
+            #[cfg(not(feature = "research-diagnostics"))]
+            let common_goal_tier = false;
+            move_ordering::Observation::before(combined, common_goal_tier)
+        });
         if let Some(scores) = &static_scores {
             if self.ordering_diagnostics {
                 let coverage = matches!(
@@ -1082,7 +1110,7 @@ impl Search<'_> {
                     self.stats.ordering.cheap_static_parents += 1;
                 }
             }
-            for &id in &ids {
+            for &id in ids {
                 combined[id as usize] += i32::from(scores.scores[id as usize]);
                 debug_assert!(combined[id as usize].abs() <= 124_992);
                 if self.ordering_diagnostics {
@@ -1094,7 +1122,7 @@ impl Search<'_> {
             }
         }
         if self.ordering_diagnostics {
-            for &id in &ids {
+            for &id in ids {
                 #[cfg(feature = "research-diagnostics")]
                 if self.ordering.is_none() {
                     self.stats.ordering.nonzero_combined_actions +=
@@ -1105,73 +1133,12 @@ impl Search<'_> {
                     u64::from(combined[id as usize] != 0);
             }
         }
-        // TT/PV, exact legal goal (static profile), killers, optional policy,
-        // combined dynamic+static score. Every legal
-        // action survives. Numeric Action order is the final deterministic tie.
-        ids.sort_by(|a, b| {
-            priority(*a)
-                .cmp(&priority(*b))
-                .then_with(|| policy[*b as usize].total_cmp(&policy[*a as usize]))
-                .then_with(|| {
-                    #[cfg(feature = "research-diagnostics")]
-                    if self.ordering.is_none() {
-                        return self.history[*b as usize].cmp(&self.history[*a as usize]);
-                    }
-                    combined[*b as usize].cmp(&combined[*a as usize])
-                })
-                .then_with(|| a.cmp(b))
-        });
-        // With a total ActionID tie, detecting inversions against the same
-        // tiers without history needs no copied move vector or second sort.
-        if self.ordering_diagnostics {
-            let changed = ids.windows(2).any(|w| {
-                priority(w[0]) == priority(w[1])
-                    && policy[w[0] as usize]
-                        .total_cmp(&policy[w[1] as usize])
-                        .is_eq()
-                    && w[0] > w[1]
-            });
-            self.stats.ordering.history_changed_nodes += u64::from(changed);
-            if static_scores.is_some() {
-                #[cfg(feature = "research-diagnostics")]
-                let common_goal_tier = matches!(
-                    self.static_scratch.as_ref(),
-                    Some(StaticScratch::Cheap | StaticScratch::CheapControl)
-                );
-                #[cfg(not(feature = "research-diagnostics"))]
-                let common_goal_tier = false;
-                let dynamic_priority = |id: u16| {
-                    if Some(id) == pv {
-                        0
-                    } else if common_goal_tier
-                        && id < 81
-                        && static_scores
-                            .as_ref()
-                            .is_some_and(|scores| scores.goals[id as usize])
-                    {
-                        1
-                    } else if Some(id) == killers[0] {
-                        if common_goal_tier { 2 } else { 1 }
-                    } else if Some(id) == killers[1] {
-                        if common_goal_tier { 3 } else { 2 }
-                    } else {
-                        if common_goal_tier { 4 } else { 3 }
-                    }
-                };
-                let static_changed = ids.windows(2).any(|w| {
-                    let a = w[0] as usize;
-                    let b = w[1] as usize;
-                    dynamic_priority(w[0])
-                        .cmp(&dynamic_priority(w[1]))
-                        .then_with(|| policy[b].total_cmp(&policy[a]))
-                        .then_with(|| dynamic[b].cmp(&dynamic[a]))
-                        .then_with(|| a.cmp(&b))
-                        .is_gt()
-                });
-                self.stats.ordering.static_changed_nodes += u64::from(static_changed);
-            }
-        }
-        Ok(ids)
+        Ok(move_ordering::ScoredMoves {
+            policy,
+            combined,
+            static_scores,
+            observation,
+        })
     }
     fn child(
         &mut self,
@@ -1670,7 +1637,7 @@ impl SearchSession {
             false,
         )
     }
-    /// Temporary single-360-assessment selection, absent from normal runtime.
+    /// Current research Control/Cheap selection; product constructors are unchanged.
     #[cfg(feature = "research-diagnostics")]
     pub fn new_for_ordering_assessment(
         evaluator: Arc<dyn StaticEvaluator>,
@@ -1680,14 +1647,7 @@ impl SearchSession {
         profile: OrderingProfile,
         observe_ordering: bool,
     ) -> Result<Self> {
-        let mut session = Self::create(
-            evaluator,
-            namespace,
-            capacity,
-            score_domain,
-            profile != OrderingProfile::UnsignedHistoryBaseline,
-            profile == OrderingProfile::CombinedSignedStatic,
-        )?;
+        let mut session = Self::create(evaluator, namespace, capacity, score_domain, true, false)?;
         session.ordering_diagnostics = observe_ordering;
         match profile {
             OrderingProfile::CheapStaticControl => {
@@ -1696,18 +1656,12 @@ impl SearchSession {
             OrderingProfile::CombinedSignedCheapStatic => {
                 session.static_enabled = StaticMode::Cheap
             }
-            _ => {}
         }
-        if matches!(
-            profile,
-            OrderingProfile::CheapStaticControl | OrderingProfile::CombinedSignedCheapStatic
-        ) {
-            session.namespace.selectivity.push(':');
-            session
-                .namespace
-                .selectivity
-                .push_str(cheap_static_ordering::ALGORITHM);
-        }
+        session.namespace.selectivity.push(':');
+        session
+            .namespace
+            .selectivity
+            .push_str(cheap_static_ordering::ALGORITHM);
         Ok(session)
     }
     fn create(

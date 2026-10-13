@@ -7,18 +7,14 @@ pub(super) const MAIN_STRIDE: usize = 81 * 81 + 128;
 pub(super) const MAIN_LEN: usize = 2 * MAIN_STRIDE;
 pub(super) const CONT_LEN: usize = 2 * 5 * 209 * 209;
 
-/// The baseline is retained only for the single prebound 360 three-policy assessment.
-/// Remove its constructor/switch after assessment; it is not a runtime option.
+/// The two current research targets; product constructors use their own settings.
 #[cfg(feature = "research-diagnostics")]
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum OrderingProfile {
-    CombinedSigned,
-    CombinedSignedStatic,
     /// Fixed376 control: static OFF, common exact legal goal tier.
     CheapStaticControl,
     /// Fixed376 candidate, never selected by product constructors.
     CombinedSignedCheapStatic,
-    UnsignedHistoryBaseline,
 }
 
 #[derive(Clone, Debug, Default)]

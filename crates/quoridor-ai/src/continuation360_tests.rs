@@ -496,29 +496,15 @@ fn continuation360_completed_noncutoff_and_tt_only_do_not_train() {
     assert!(r.stats.tt_cutoffs > 0);
     assert_eq!(r.stats.ordering.completed_cutoff_events, 0);
 }
-#[cfg(feature = "research-diagnostics")]
 #[test]
-fn continuation360_baseline_assessment_only_and_plain_observer_off() {
+fn continuation360_product_unsigned_and_signed_plain_observer_off() {
     let e: Arc<dyn StaticEvaluator> = Arc::new(PawnRows);
     let root = small_root();
-    let mut a = SearchSession::new_for_ordering_assessment(
-        e.clone(),
-        namespace("assessment"),
-        4096,
-        ScoreDomain::LEGACY,
-        OrderingProfile::UnsignedHistoryBaseline,
-        false,
-    )
-    .unwrap();
-    let mut b = SearchSession::new_for_ordering_assessment(
-        e,
-        namespace("assessment"),
-        4096,
-        ScoreDomain::LEGACY,
-        OrderingProfile::CombinedSigned,
-        false,
-    )
-    .unwrap();
+    let mut a =
+        SearchSession::new_without_continuation_or_static(e.clone(), namespace("assessment"), 4096)
+            .unwrap();
+    let mut b = SearchSession::new(e, namespace("assessment"), 4096).unwrap();
+    b.static_enabled = StaticMode::Off;
     assert!(a.ordering.is_none());
     assert!(b.ordering.is_some());
     assert_eq!(a.tt_capacity(), b.tt_capacity());

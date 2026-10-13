@@ -1,29 +1,29 @@
-//! New composite boundary definitions only; UNBUILT/UNTYPED/UNRUN.
+//! Product ordering settings, compact TT and history-correct reentry boundaries.
 use super::continuation360_tests::{
     PawnRows, exhaustive, limits, namespace, small_root, with_state,
 };
 use super::*;
 use quoridor_core::research::HistoryKey;
 
-#[cfg(feature = "research-diagnostics")]
 #[test]
-fn continuation360_compact_three_profiles_complete_value_ties_and_warm_reentry() {
+fn continuation360_compact_product_settings_complete_value_ties_and_warm_reentry() {
     let root = small_root();
     let child = root.play(root.legal_ids()[0]).unwrap();
-    for profile in [
-        OrderingProfile::UnsignedHistoryBaseline,
-        OrderingProfile::CombinedSigned,
-        OrderingProfile::CombinedSignedStatic,
-    ] {
-        let mut session = SearchSession::new_for_ordering_assessment(
-            Arc::new(PawnRows),
-            namespace("composite-NN0"),
-            4096,
-            ScoreDomain::LEGACY,
-            profile,
-            true,
-        )
+    for (signed, with_static) in [(false, false), (true, false), (true, true)] {
+        let mut session = if signed {
+            SearchSession::new(Arc::new(PawnRows), namespace("composite-NN0"), 4096)
+        } else {
+            SearchSession::new_without_continuation_or_static(
+                Arc::new(PawnRows),
+                namespace("composite-NN0"),
+                4096,
+            )
+        }
         .unwrap();
+        if !with_static {
+            session.static_enabled = StaticMode::Off;
+        }
+        session.ordering_diagnostics = true;
         for c in [&root, &child, &root] {
             let before = (c.position(), c.total_ply(), c.history_counts());
             let oracle = exhaustive(c, 2, &mut 0);
@@ -90,9 +90,8 @@ fn continuation360_compact_child_error_and_wrong_board_restore_before_path() {
     }
 }
 
-#[cfg(feature = "research-diagnostics")]
 #[test]
-fn continuation360_compact_mismatched_count_context_is_only_ordering_for_every_profile() {
+fn continuation360_compact_mismatched_count_context_is_only_ordering_for_product_settings() {
     // Structural GHI witness, not a chronological warm trace or research input.
     let p = Position::default();
     let other = HistoryKey {
@@ -118,20 +117,21 @@ fn continuation360_compact_mismatched_count_context_is_only_ordering_for_every_p
     .unwrap();
     assert_eq!(Key::of(&a), Key::of(&b));
     assert_ne!(ContextFingerprint::of(&a), ContextFingerprint::of(&b));
-    for profile in [
-        OrderingProfile::UnsignedHistoryBaseline,
-        OrderingProfile::CombinedSigned,
-        OrderingProfile::CombinedSignedStatic,
-    ] {
-        let mut s = SearchSession::new_for_ordering_assessment(
-            Arc::new(PawnRows),
-            namespace("GHI-composite-NN0"),
-            4096,
-            ScoreDomain::LEGACY,
-            profile,
-            true,
-        )
+    for (signed, with_static) in [(false, false), (true, false), (true, true)] {
+        let mut s = if signed {
+            SearchSession::new(Arc::new(PawnRows), namespace("GHI-composite-NN0"), 4096)
+        } else {
+            SearchSession::new_without_continuation_or_static(
+                Arc::new(PawnRows),
+                namespace("GHI-composite-NN0"),
+                4096,
+            )
+        }
         .unwrap();
+        if !with_static {
+            s.static_enabled = StaticMode::Off;
+        }
+        s.ordering_diagnostics = true;
         s.table.insert(
             Entry {
                 key: Key::of(&a),

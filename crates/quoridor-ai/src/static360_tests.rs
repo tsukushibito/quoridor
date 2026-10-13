@@ -297,20 +297,18 @@ fn static360_complete_independent_minimax_all_policies_and_real_warm_undo() {
             cursor = cursor.play(action).unwrap();
         }
         assert_eq!(Key::of(&root), before);
-        #[cfg(feature = "research-diagnostics")]
-        for profile in [
-            super::super::OrderingProfile::UnsignedHistoryBaseline,
-            super::super::OrderingProfile::CombinedSigned,
-        ] {
-            let mut other = SearchSession::new_for_ordering_assessment(
-                Arc::new(PawnRows),
-                namespace("static-oracle"),
-                4096,
-                super::super::ScoreDomain::LEGACY,
-                profile,
-                false,
-            )
+        for signed in [false, true] {
+            let mut other = if signed {
+                SearchSession::new(Arc::new(PawnRows), namespace("static-oracle"), 4096)
+            } else {
+                SearchSession::new_without_continuation_or_static(
+                    Arc::new(PawnRows),
+                    namespace("static-oracle"),
+                    4096,
+                )
+            }
             .unwrap();
+            other.static_enabled = super::super::StaticMode::Off;
             let r = other
                 .search(&root, &limits(2, tt, pvs), &AtomicBool::new(false))
                 .unwrap();
