@@ -23,7 +23,7 @@
 
 ## 方針相談への通知
 
-2026-10-12の人間指示で、方針相談はthread `01a12fdc-f6ec-7e93-9cfc-4bedb3ea1e94`へ移管した。epic `quoridor-4lc`の人間窓口は新Policy、実行・統合は引き続きthread `01a1153d-7900-7740-837f-c300ca54764f`／issue `quoridor-4lc.324`で、sole Main/Git/index writerと資源配分を持つ。旧Policyへ再開・配送せず、現役Policy通知の宛先だけを新threadへ合わせる。worker所有・job完了通知先・許可枠・相談/自律/停止mode・保留候補を移管のために変更しない。
+2026-10-12の人間指示で、方針相談はthread `01a12fdc-f6ec-7e93-9cfc-4bedb3ea1e94`へ移管した。epic `quoridor-4lc`の人間窓口はこのPolicyを維持する。2026-10-14の人間指示による未完了作業の引継ぎで、実行・統合はthread `01a1376a-bfd3-75d2-bd64-61e9416b3b13`／issue `quoridor-4lc.324`へ移管し、sole Main/Git/index writerと資源配分を持つ。現在の送付先はBeadsのissue所有から解決し、旧Policy・旧統合セッションへ再開・配送しない。既存worker所有・凍結したjob完了通知先・過去artifactや通信履歴・許可枠・相談/自律/停止mode・保留候補を移管のために変更しない。
 
 ジョブの完了イベントは元のワーカーへ届ける。START/STOP、通常の修復、詳細ログ、少額の保存再分類などの通常報告は実行・統合担当へ届け、方針相談の会話へ毎回転送しない。担当間の必要なSTOP/依存通知は直接連絡する。
 
