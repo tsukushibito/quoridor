@@ -181,9 +181,7 @@ class PerfLaunchPolicyTests(unittest.TestCase):
         }
         # Owning command dispatch unit: synthetic Python child, not a perf/Run certificate.
         row = {"name": "dispatch", "role": "run", "argv": argv}
-        returned, full = lc.command(
-            spec, row, self.root, resources, executor=cycle.execute
-        )
+        returned, full = lc.command(spec, row, self.root, resources, executor=cycle.execute)
         self.assertEqual(returned["launch_policy"]["verified_before_exec"], 1)
         self.assertEqual(json.loads(full.read_text().splitlines()[0])["nnp"], 1)
         self.assert_settled(returned)
