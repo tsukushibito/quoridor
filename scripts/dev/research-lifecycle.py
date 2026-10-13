@@ -3,20 +3,24 @@
 from __future__ import annotations
 
 import argparse
+import copy
 from contextlib import contextmanager
 from datetime import datetime, timezone
 import fcntl
 import hashlib
+import importlib.util
 import json
 import math
 import os
 import random
 from pathlib import Path
 import shutil
+import signal
 import stat
 import subprocess
 import sys
 import time
+import uuid
 import zlib
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -210,6 +214,40 @@ def issued_family_upper(spec, support):
     return upper
 
 
+def selected_arena(spec):
+    """The finite settings select the range once; child intents select no authority."""
+    settings = document(spec["settings"])
+    selection = settings["arena"]
+    template = selection["template"]
+    experiment = document(spec["experiment"])
+    first, last = selection["range"]
+    require(
+        settings["kind"] == "sequence"
+        and type(first) is int
+        and type(last) is int
+        and 0 <= first <= experiment["batch"] <= last
+        and experiment["phase"] == "arena",
+        "operation outside selected finite arena range",
+    )
+    for key in (
+        "owner",
+        "writer",
+        "cwd",
+        "limits",
+        "support",
+        "approved_plan",
+        "artifact",
+        "caller_sources",
+    ):
+        require(spec[key] == template[key], "selected arena settings drift: " + key)
+    require(
+        {k: v for k, v in spec["env"].items() if k != "TMPDIR"}
+        == {k: v for k, v in template["env"].items() if k != "TMPDIR"},
+        "selected arena environment drift",
+    )
+    return spec["approved_plan"]
+
+
 class Limits(process.CycleResources):
     """Reuse guardian RSS/deadline/pause; add owned positive allocation bounds."""
 
@@ -240,7 +278,9 @@ class Limits(process.CycleResources):
             cfg.get("owned_B") is None or cfg["owned_B"] <= 50000000000,
             "global storage cap",
         )
-        if not measurement:
+        if spec["kind"] == "run" and document(spec["experiment"])["phase"] == "arena":
+            selected_arena(spec)
+        elif not measurement:
             admission = document(spec["admission"])
             require(
                 admission["schema"] == "quoridor.research.phase-admission.v1",
@@ -521,6 +561,12 @@ def command(spec, row, directory, resources, executor=process.execute, *, ledger
                 )
                 cores = spec["child_cpu_cores"]
             cpu_args = {"cpu_core": None, "cpu_cores": cores}
+        if spec.get("perf") is not None and row.get("role") == "run":
+            require(
+                spec["kind"] == "run" and row["argv"] == spec["argv"],
+                "actual configured profiler launch",
+            )
+            cpu_args["no_new_privs"] = True
         record = executor(
             row["argv"],
             directory / (row["name"] + ".log"),
@@ -1841,13 +1887,13 @@ def experiment_check(spec):
         refs.append(spec["perf"]["tool"])
     require(bool(spec["data"]), "actual durable data required")
     owned(spec["data_root"], spec["owner"])
-    if measurement and spec.get("TMP") is not None:
+    if (measurement or experiment["phase"] == "arena") and spec.get("TMP") is not None:
         owned(spec["TMP"], spec["owner"])
         require(
             not os.path.lexists(spec["TMP"])
             and spec["env"].get("TMPDIR") == spec["TMP"]
             and spec["TMP"] in spec.get("owned_outputs", []),
-            "fresh owned measurement TMP",
+            "fresh owned execution TMP",
         )
     require(
         not Path(spec["data_root"]).exists(),
@@ -2223,7 +2269,14 @@ def generation_evidence(experiment, values):
 
 
 def approved_plan(spec, experiment):
-    """Use the integration-issued admission, not Experiment's self-declared plan."""
+    """Use selected settings for arena; preserve other owning phase admissions."""
+    if experiment["phase"] == "arena":
+        expected = selected_arena(spec)
+        require(
+            experiment["canonical_plan_sha256"] == expected["sha256"],
+            "experiment substituted selected plan",
+        )
+        return document(expected)
     admission = document(spec["admission"])
     require(
         admission["schema"] == "quoridor.research.phase-admission.v1"
@@ -4373,7 +4426,9 @@ def execute(
                             process.identity(process.process_info(os.getpid()))
                         ),
                     }
-                    if experiment["argv"][1] == "measure" and spec.get("TMP") is not None:
+                    if (
+                        experiment["phase"] == "arena" or experiment["argv"][1] == "measure"
+                    ) and spec.get("TMP") is not None:
                         Path(spec["TMP"]).mkdir()
                         created_TMP = True
                     if experiment["phase"] == "software-qualification":
@@ -4985,6 +5040,290 @@ def finalize(
     return completion
 
 
+def operation_order(settings):
+    """Serial selected blocks preserve each method's order and arena priority."""
+    arena = settings.get("arena")
+    measurements = settings.get("measurements", [])
+    require(isinstance(measurements, list), "finite measurement settings")
+    block = settings["arena_block"]
+    require(type(block) is int and block > 0, "positive serial arena block")
+    serial_order = settings.get("serial_order", ["arena", "measure"])
+    require(
+        isinstance(serial_order, list)
+        and len(serial_order) == 2
+        and set(serial_order) == {"arena", "measure"},
+        "serial arena/measurement order",
+    )
+    require(
+        arena is None or not measurements or serial_order[0] == "arena",
+        "arena precedes measurement when both are selected",
+    )
+    if arena is None:
+        first, last = 0, -1
+    else:
+        first, last = arena["range"]
+        require(
+            type(first) is int and type(last) is int and 0 <= first <= last,
+            "finite selected arena range",
+        )
+        plan = document(arena["template"]["approved_plan"])
+        require(last < len(plan["batches"]), "selected arena range exceeds plan")
+    batch = first
+    measurement = 0
+    while batch <= last or measurement < len(measurements):
+        for kind in serial_order:
+            if kind == "arena":
+                end = min(last + 1, batch + block)
+                for selected in range(batch, end):
+                    yield kind, selected
+                batch = end
+            elif measurement < len(measurements):
+                yield kind, measurement
+                measurement += 1
+
+
+def prepare_selected_operation(settings_ref, kind, index):
+    """Derive ordinary lifecycle parameters; never issue a per-operation admission."""
+    settings = document(settings_ref)
+    template = settings["arena"]["template"] if kind == "arena" else settings["measurements"][index]
+    spec = copy.deepcopy(template)
+    require(spec["kind"] == "run", "finite execution composes RUN operations only")
+    phase = owned(
+        Path(spec["owner"]) / Path(settings["output"]).name / f"{kind}-{index:03d}",
+        spec["owner"],
+    )
+    require(not phase.exists(), "selected operation already exists; never replay")
+    experiment = document(template["experiment"])
+    original_experiment = copy.deepcopy(experiment)
+    spec.pop("admission", None)
+    spec.pop("intent_sha256", None)
+    spec.update(output=str(phase / "operation"), TMP=str(phase / "TMP"), finalizers=[])
+    spec["env"]["TMPDIR"] = spec["TMP"]
+    if "PERF_BUILDID_DIR" in spec["env"]:
+        spec["env"]["PERF_BUILDID_DIR"] = str(phase / "buildid-cache")
+    if kind == "arena":
+        spec["settings"] = settings_ref
+        plan = document(spec["approved_plan"])
+        batch = plan["batches"][index]
+        require(batch["batch"] == index, "selected plan batch index")
+        experiment.update(
+            batch=index,
+            config=batch["config"],
+            inputs=plan["inputs"],
+            models=plan["models"],
+            schedule=plan["schedule"],
+            canonical_plan_sha256=spec["approved_plan"]["sha256"],
+        )
+        spec["data_root"] = document(experiment["config"])["output"]
+    else:
+        require(experiment["argv"][1] == "measure", "selected common measurement only")
+        old_root = Path(spec["data_root"])
+        spec["data_root"] = str(phase / "data")
+        for item in spec["data"]:
+            if item["name"] == "perf_RAW":
+                item["path"] = str(phase / "perf.data")
+            else:
+                item["path"] = str(
+                    Path(spec["data_root"]) / Path(item["path"]).relative_to(old_root)
+                )
+        if spec.get("perf") is not None:
+            spec["perf"]["output"] = str(phase / "perf.data")
+    if kind == "arena":
+        for item in spec["data"]:
+            item["path"] = str(Path(spec["data_root"]) / Path(item["path"]).name)
+    spec["owned_outputs"] = list(
+        dict.fromkeys([*spec.get("owned_outputs", []), str(phase), spec["TMP"]])
+    )
+    phase.mkdir(parents=True)
+    if experiment.get("numerical_qualification") is not None:
+        prior = document(original_experiment["numerical_qualification"])
+        numerical = numerical_fields(experiment, accepted_build(experiment["build_manifest"]))
+        # Retain the original evidence's scope; these are current loader bindings only.
+        for key in ("original_evidence", "correspondence_only", "scope", "new_model_or_head_calls"):
+            if key in prior:
+                numerical[key] = prior[key]
+        new_json(phase / "numerical.json", numerical)
+        experiment["numerical_qualification"] = bound(phase / "numerical.json")[0]
+    new_json(phase / "experiment.json", experiment)
+    spec["experiment"] = bound(phase / "experiment.json")[0]
+    native = [
+        a.replace("@EXPERIMENT@", spec["experiment"]["path"]).replace(
+            "@EXPERIMENT_SHA256@", spec["experiment"]["sha256"]
+        )
+        for a in experiment["argv"]
+    ]
+    spec["argv"] = measurement_argv(spec, experiment, native)
+    spec["intent_sha256"] = canonical_sha(spec)
+    new_json(phase / "intent.json", spec)
+    return bound(phase / "intent.json")[0]
+
+
+def sequence(
+    settings_ref,
+    *,
+    job_module=None,
+    backend=None,
+    prepare=prepare_selected_operation,
+    complete=finalize,
+):
+    """One finite controller; inner execute/directwait/finalize never dispatch a turn."""
+    settings = document(settings_ref)
+    require(settings["kind"] == "sequence", "selected finite settings")
+    require(sys.executable == str(project_python()), "current common-entry interpreter")
+    origin = originating_job(settings_ref, settings)
+    config = document(origin["config"])
+    order = list(operation_order(settings))
+    output = owned(settings["output"], settings["owner"])
+    require(not output.exists(), "finite controller already entered; no automatic restart")
+    if job_module is None:
+        loader = importlib.util.spec_from_file_location(
+            "sequence_job", ROOT / "scripts/dev/research-job.py"
+        )
+        job_module = importlib.util.module_from_spec(loader)
+        loader.loader.exec_module(job_module)
+    if backend is None:
+        backend = job_module.runtime.AppBackend(ROOT)
+    output.mkdir(parents=True)
+    initial_affinity = os.sched_getaffinity(0)
+    active = None
+    stopped = False
+    result = {
+        "settings": settings_ref,
+        "originating_job": origin,
+        "operations": [],
+        "primary": None,
+        "secondary": [],
+    }
+
+    def cancel(signum, frame):
+        nonlocal stopped
+        stopped = True
+        if active is not None:
+            job_module.write(active, "cancel.json", {"requested_at": stamp(), "signal": signum})
+
+    previous = {sig: signal.signal(sig, cancel) for sig in (signal.SIGTERM, signal.SIGINT)}
+    try:
+        for kind, index in order:
+            require(not stopped, "finite controller cancelled; remaining work UNKNOWN")
+            job_module.authority(config, ROOT, backend, horizon=config["end_at"])
+            read_ref(settings_ref)
+            os.sched_setaffinity(0, initial_affinity)
+            spec_ref = prepare(settings_ref, kind, index)
+            spec = document(spec_ref)
+            physical_and_quiet(spec)
+            os.sched_setaffinity(0, initial_affinity)
+            active = Path(spec_ref["path"]).parent / "runtime"
+            active.mkdir()
+            child_config = job_module.validate(
+                {
+                    **config,
+                    "cwd": spec["cwd"],
+                    "resource_contract": settings_ref["path"],
+                    "log_max_bytes": spec["limits"]["log_B"],
+                    "argv": [
+                        sys.executable,
+                        "-B",
+                        str(ROOT / "scripts/dev/research-lifecycle.py"),
+                        "run",
+                        "--intent",
+                        spec_ref["path"],
+                        "--sha256",
+                        spec_ref["sha256"],
+                    ],
+                },
+                active,
+            )
+            job_module.write(active, "config.json", child_config)
+            job_module.write(
+                active,
+                "state.json",
+                {
+                    "schema_version": 1,
+                    "job_id": str(uuid.uuid4()),
+                    "issue": child_config["issue"],
+                    "thread_id": child_config["thread_id"],
+                    "phase": "queued",
+                    "created_at": stamp(),
+                    "config_sha256": sha(json.dumps(child_config, sort_keys=True).encode()),
+                },
+            )
+            entry = {
+                "kind": kind,
+                "index": index,
+                "launch_affinity": sorted(os.sched_getaffinity(0)),
+            }
+            result["operations"].append(entry)
+            require(not stopped, "finite controller cancelled before child entry")
+            with job_module.lock(active, "process.lock"):
+                returned = job_module.execute(active, child_config, ROOT, backend)
+            entry["job_result"] = bound(active / "result.json")[0]
+            operation = Path(spec["output"])
+            if (operation / "INCOMPLETE").exists():
+                os.sched_setaffinity(0, initial_affinity)
+                completion = complete(operation, entry["job_result"])
+                entry["manifest"] = bound(operation / "manifest.json")[0]
+                require(
+                    completion["status"] == "PASS"
+                    and completion["cleanup_complete"] is True
+                    and completion["remaining"] == [],
+                    "owning operation failed or not cleaned",
+                )
+            else:
+                raise Refused("operation refused before ownership; remaining work UNKNOWN")
+            require(
+                returned["outcome"] == "succeeded"
+                and returned.get("direct_child_reaped") is True
+                and returned.get("cleanup_complete") is True
+                and returned.get("remaining") == [],
+                "original child failed or not cleaned",
+            )
+            require(not Path(spec["TMP"]).exists(), "owned child TMP remains")
+            read_ref(settings_ref)
+            entry["completed"] = True
+            entry["reader_STOP"] = stamp()
+            active = None
+            os.sched_setaffinity(0, initial_affinity)
+        require(not stopped, "finite controller cancelled after terminal collection")
+    except BaseException as error:
+        result["primary"] = error_fact(error)
+    finally:
+        for sig, handler in previous.items():
+            try:
+                signal.signal(sig, handler)
+            except BaseException as error:
+                result["secondary"].append({"stage": "signal_restore", **error_fact(error)})
+        try:
+            os.sched_setaffinity(0, initial_affinity)
+        except BaseException as error:
+            result["secondary"].append({"stage": "affinity_restore", **error_fact(error)})
+        child_results = []
+        for entry in result["operations"]:
+            try:
+                child_results.append(document(entry["job_result"]))
+            except BaseException as error:
+                child_results.append(None)
+                result["secondary"].append({"stage": "job_result", **error_fact(error)})
+        result.update(
+            status="CANCELLED"
+            if stopped
+            else ("FAILED" if result["primary"] or result["secondary"] else "PASS"),
+            completed_operations=sum(x.get("completed") is True for x in result["operations"]),
+            selected_operations=len(order),
+            reader_STOP=stamp(),
+            launch_affinity_restored=sorted(os.sched_getaffinity(0)),
+            cleanup_complete=all(
+                child is not None and child.get("cleanup_complete") is True
+                for child in child_results
+            ),
+            remaining=None
+            if any(child is None or child.get("remaining") is None for child in child_results)
+            else [member for child in child_results for member in child["remaining"]],
+        )
+        new_json(output / "result.json", result)
+    require(result["status"] == "PASS", "finite execution stopped; see its original result")
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
@@ -4995,6 +5334,11 @@ def main():
     p = commands.add_parser("arena-analysis")
     p.add_argument("--experiment", type=Path, required=True)
     p.add_argument("--experiment-sha256", required=True)
+    p = commands.add_parser("sequence")
+    p.add_argument(
+        "--intent", type=Path, required=True, help="One selected finite settings snapshot"
+    )
+    p.add_argument("--sha256", required=True)
     p = commands.add_parser("finalize")
     p.add_argument("--operation", type=Path, required=True)
     p.add_argument("--job-result", type=Path, required=True)
@@ -5018,6 +5362,9 @@ def main():
     ref, _ = bound(args.intent)
     require(ref["sha256"] == args.sha256, "intent SHA")
     require(document(ref)["kind"] == args.command, "operation kind")
+    if args.command == "sequence":
+        sequence(ref)
+        return 0
     execute(ref)
     return 0
 

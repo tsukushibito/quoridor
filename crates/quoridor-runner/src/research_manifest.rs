@@ -281,6 +281,22 @@ fn approved_launch_plan(
     }
     Ok(expected)
 }
+/// Arena selection belongs to the finite job's settings. Preserve the actual
+/// intent/experiment/plan identity without a separate admission for each pair.
+fn configured_arena_plan(intent: &Value, bound: &BoundControl, e: &Experiment) -> Result<FileRef> {
+    let plan: FileRef = serde_json::from_value(intent["approved_plan"].clone())?;
+    let experiment: FileRef = serde_json::from_value(intent["experiment"].clone())?;
+    if intent["schema"] != "quoridor.research.lifecycle-intent.v1"
+        || intent["kind"] != "run"
+        || e.phase != "arena"
+        || experiment.path != bound.path
+        || experiment.sha256 != bound.sha256
+        || plan.sha256 != e.canonical_plan_sha256
+    {
+        return Err("actual arena settings/experiment/plan identity mismatch".into());
+    }
+    Ok(plan)
+}
 pub(crate) fn approved_arena_plan(bound: &BoundControl, e: &Experiment) -> Result<FileRef> {
     launch_plan(bound, e)?
         .0
@@ -357,41 +373,119 @@ struct PerfSettings {
     data_max_bytes: u64,
     no_buildid_cache: bool,
 }
+fn profiler_io<T>(
+    operation: &str,
+    path: &Path,
+    pid: u32,
+    fd: Option<u32>,
+    result: std::io::Result<T>,
+) -> Result<T> {
+    result.map_err(|error| {
+        format!(
+            "profiler origin {operation}: path={} pid={pid} fd={fd:?} errno={:?}: {error}",
+            path.display(),
+            error.raw_os_error(),
+        )
+        .into()
+    })
+}
+
 /// The caller has verified the actual tool/argv/parent chain. Bind RAW to that
 /// live profiler's writable FD, not merely to a file left at the configured path.
 fn profiler_open_raw(profiler: &LaunchIdentity, output: &std::path::Path) -> Result<Value> {
     use std::os::unix::fs::{MetadataExt, OpenOptionsExt};
     if launch_identity(profiler.pid)?.0 != *profiler
-        || !fs::symlink_metadata(output)?.is_file()
-        || output.canonicalize()? != output
+        || !profiler_io(
+            "symlink_metadata RAW",
+            output,
+            profiler.pid,
+            None,
+            fs::symlink_metadata(output),
+        )?
+        .is_file()
+        || profiler_io(
+            "canonicalize RAW",
+            output,
+            profiler.pid,
+            None,
+            output.canonicalize(),
+        )? != output
     {
         return Err("live profiler regular RAW identity required".into());
     }
-    let raw = fs::OpenOptions::new()
-        .read(true)
-        .custom_flags(libc::O_NOFOLLOW | libc::O_NONBLOCK | libc::O_CLOEXEC)
-        .open(output)?;
-    let metadata = raw.metadata()?;
+    let raw = profiler_io(
+        "open RAW",
+        output,
+        profiler.pid,
+        None,
+        fs::OpenOptions::new()
+            .read(true)
+            .custom_flags(libc::O_NOFOLLOW | libc::O_NONBLOCK | libc::O_CLOEXEC)
+            .open(output),
+    )?;
+    let metadata = profiler_io("fstat RAW", output, profiler.pid, None, raw.metadata())?;
     if !metadata.is_file() || metadata.uid() != unsafe { libc::geteuid() } {
         return Err("profiler RAW regular owner required".into());
     }
-    for entry in fs::read_dir(format!("/proc/{}/fd", profiler.pid))? {
-        let entry = entry?;
+    let directory = PathBuf::from(format!("/proc/{}/fd", profiler.pid));
+    let mut inaccessible_fd = None;
+    for entry in profiler_io(
+        "read_dir",
+        &directory,
+        profiler.pid,
+        None,
+        fs::read_dir(&directory),
+    )? {
+        let entry = profiler_io("read_dir entry", &directory, profiler.pid, None, entry)?;
         let fd_path = entry.path();
-        let Ok(target) = fs::read_link(&fd_path) else {
-            continue;
+        let target = match fs::read_link(&fd_path) {
+            Ok(target) => target,
+            Err(error) => {
+                if error.kind() == std::io::ErrorKind::PermissionDenied && inaccessible_fd.is_none()
+                {
+                    inaccessible_fd = profiler_io::<()>(
+                        "read_link FD",
+                        &fd_path,
+                        profiler.pid,
+                        entry.file_name().to_string_lossy().parse().ok(),
+                        Err(error),
+                    )
+                    .err();
+                }
+                continue;
+            }
         };
         if target != output {
             continue;
         }
-        let Ok(opened) = fs::metadata(&fd_path) else {
-            continue;
+        let opened = match fs::metadata(&fd_path) {
+            Ok(opened) => opened,
+            Err(error) => {
+                if inaccessible_fd.is_none() {
+                    inaccessible_fd = profiler_io::<()>(
+                        "stat RAW FD",
+                        &fd_path,
+                        profiler.pid,
+                        entry.file_name().to_string_lossy().parse().ok(),
+                        Err(error),
+                    )
+                    .err();
+                }
+                continue;
+            }
         };
         if !opened.is_file() || opened.dev() != metadata.dev() || opened.ino() != metadata.ino() {
             continue;
         }
         let fd = entry.file_name().to_string_lossy().parse::<u32>()?;
-        let info = fs::read_to_string(format!("/proc/{}/fdinfo/{fd}", profiler.pid))?;
+        let info_path = PathBuf::from(format!("/proc/{}/fdinfo/{fd}", profiler.pid));
+        let info = profiler_io(
+            "read fdinfo",
+            &info_path,
+            profiler.pid,
+            Some(fd),
+            fs::read_to_string(&info_path),
+        )?;
         let flags = u32::from_str_radix(
             info.lines()
                 .find_map(|line| line.strip_prefix("flags:").map(str::trim))
@@ -402,14 +496,32 @@ fn profiler_open_raw(profiler: &LaunchIdentity, output: &std::path::Path) -> Res
         if access != libc::O_WRONLY as u32 && access != libc::O_RDWR as u32 {
             continue;
         }
-        let current = fs::symlink_metadata(output)?;
-        let still_open = fs::metadata(&fd_path)?;
+        let current = profiler_io(
+            "recheck RAW",
+            output,
+            profiler.pid,
+            Some(fd),
+            fs::symlink_metadata(output),
+        )?;
+        let still_open = profiler_io(
+            "recheck FD",
+            &fd_path,
+            profiler.pid,
+            Some(fd),
+            fs::metadata(&fd_path),
+        )?;
         if !current.is_file()
             || current.dev() != metadata.dev()
             || current.ino() != metadata.ino()
             || still_open.dev() != metadata.dev()
             || still_open.ino() != metadata.ino()
-            || fs::read_link(&fd_path)? != output
+            || profiler_io(
+                "recheck FD target",
+                &fd_path,
+                profiler.pid,
+                Some(fd),
+                fs::read_link(&fd_path),
+            )? != output
             || launch_identity(profiler.pid)?.0 != *profiler
         {
             return Err("profiler RAW/FD/process drift".into());
@@ -417,6 +529,9 @@ fn profiler_open_raw(profiler: &LaunchIdentity, output: &std::path::Path) -> Res
         return Ok(
             json!({"path":output,"profiler":profiler,"fd":fd,"device":metadata.dev(),"inode":metadata.ino(),"uid":metadata.uid(),"flags_octal":format!("{flags:o}")}),
         );
+    }
+    if let Some(error) = inaccessible_fd {
+        return Err(error);
     }
     Err("configured RAW is not open for writing by verified profiler".into())
 }
@@ -511,6 +626,8 @@ fn launch_plan(bound: &BoundControl, e: &Experiment) -> Result<(Option<FileRef>,
             return Err("actual measurement RUN settings identity".into());
         }
         None
+    } else if e.phase == "arena" {
+        Some(configured_arena_plan(&intent, bound, e)?)
     } else {
         let admission_ref: FileRef = serde_json::from_value(intent["admission"].clone())?;
         let admission: Value = admission_ref.read()?;
@@ -525,7 +642,16 @@ fn launch_plan(bound: &BoundControl, e: &Experiment) -> Result<(Option<FileRef>,
         check_perf_chain(
             (&expected, &guardian, &profiler),
             (profiler_parent, immediate),
-            (&fs::canonicalize(format!("/proc/{immediate}/exe"))?, &tool),
+            (
+                &profiler_io(
+                    "canonicalize exe",
+                    &PathBuf::from(format!("/proc/{immediate}/exe")),
+                    immediate,
+                    None,
+                    fs::canonicalize(format!("/proc/{immediate}/exe")),
+                )?,
+                &tool,
+            ),
             (&launch_argv(immediate)?, &argv),
         )?;
         tool.verify()?;
@@ -1019,28 +1145,51 @@ mod tests {
 }
 
 #[cfg(test)]
-mod generic_arena_361_launch_tests {
+mod arena_settings_launch_tests {
     use super::*;
-    use serde_json::json;
     #[test]
-    fn generic_arena_361_consistent_substitution_cannot_select_expected_plan() {
-        // Synthetic metadata only, no file/model factory. Actual authority helper used by load().
-        let r = json!({"path":"/synthetic/plan","sha256":"a".repeat(64),"bytes":1,"mode":"0644"});
-        let er =
+    fn arena_configuration_plan_and_experiment_identity_are_admission_free() {
+        let plan =
+            json!({"path":"/synthetic/plan","sha256":"a".repeat(64),"bytes":1,"mode":"0644"});
+        let experiment =
             json!({"path":"/synthetic/experiment","sha256":"b".repeat(64),"bytes":1,"mode":"0644"});
-        let mut e:Experiment=serde_json::from_value(json!({"schema":"quoridor.research.experiment.v1","phase":"arena","build_manifest":r,"config":r,"inputs":[],"models":[],"dynamic_libraries":[],"schedule":r,"numerical_qualification":r,"canonical_plan_sha256":"a".repeat(64),"rules":"research-standard-2p-threefold-goal-first-v1","distance_units":"wall-distance/80","value_perspective":"side-to-move","planned_slots":6,"batch":0,"argv":[]})).unwrap();
+        let mut e: Experiment = serde_json::from_value(json!({
+            "schema":"quoridor.research.experiment.v1","phase":"arena",
+            "build_manifest":plan,"config":plan,"inputs":[],"models":[],
+            "dynamic_libraries":[],"schedule":plan,"numerical_qualification":plan,
+            "canonical_plan_sha256":"a".repeat(64),"rules":"research-standard-2p-threefold-goal-first-v1",
+            "distance_units":"wall-distance/80","value_perspective":"side-to-move",
+            "planned_slots":6,"batch":1,"argv":[]
+        })).unwrap();
         let bound = BoundControl {
             path: "/synthetic/experiment".into(),
             sha256: "b".repeat(64),
         };
-        let mut intent = json!({"schema":"quoridor.research.lifecycle-intent.v1","kind":"run","approved_plan":r,"experiment":er,"owner":"/synthetic","limits":{},"support":{"sha256":"c".repeat(64)},"intent_sha256":"d".repeat(64)});
-        let admission = json!({"schema":"quoridor.research.phase-admission.v1","ready":true,"approved_plan":r,"owner":"/synthetic","limits":{},"support_sha256":"c".repeat(64),"spec_sha256":"d".repeat(64)});
-        assert!(approved_launch_plan(&intent, &admission, &bound, &e).is_ok());
-        e.canonical_plan_sha256 = "e".repeat(64);
-        let _substituted_q = json!({"canonical_plan_sha256":e.canonical_plan_sha256});
-        assert!(approved_launch_plan(&intent, &admission, &bound, &e).is_err());
-        intent["approved_plan"]["sha256"] = json!(e.canonical_plan_sha256);
-        assert!(approved_launch_plan(&intent, &admission, &bound, &e).is_err());
+        let intent = json!({"schema":"quoridor.research.lifecycle-intent.v1","kind":"run",
+            "approved_plan":plan,"experiment":experiment});
+        assert!(intent.get("admission").is_none());
+        assert_eq!(
+            configured_arena_plan(&intent, &bound, &e).unwrap().sha256,
+            e.canonical_plan_sha256
+        );
+        for (key, value) in [("kind", json!("build")), ("schema", json!("invalid"))] {
+            let mut changed = intent.clone();
+            changed[key] = value;
+            assert!(configured_arena_plan(&changed, &bound, &e).is_err());
+        }
+        for (key, value) in [
+            ("path", json!("/other/experiment")),
+            ("sha256", json!("c".repeat(64))),
+        ] {
+            let mut changed = intent.clone();
+            changed["experiment"][key] = value;
+            assert!(configured_arena_plan(&changed, &bound, &e).is_err());
+        }
+        e.canonical_plan_sha256 = "d".repeat(64);
+        assert!(configured_arena_plan(&intent, &bound, &e).is_err());
+        e.canonical_plan_sha256 = "a".repeat(64);
+        e.phase = "compare".into();
+        assert!(configured_arena_plan(&intent, &bound, &e).is_err());
     }
 }
 
@@ -1170,6 +1319,35 @@ mod generic_arena_361_bound_entry_tests {
 #[cfg(test)]
 mod profiler_raw_tests {
     use super::*;
+    #[test]
+    fn measurement_profiler_io_error_preserves_stage_path_pid_fd_errno() {
+        for (operation, path, fd) in [
+            ("canonicalize exe", "/proc/19/exe", None),
+            ("read_dir", "/proc/19/fd", None),
+            ("read fdinfo", "/proc/19/fdinfo/7", Some(7)),
+        ] {
+            let error = profiler_io::<()>(
+                operation,
+                Path::new(path),
+                19,
+                fd,
+                Err(std::io::Error::from_raw_os_error(libc::EACCES)),
+            )
+            .unwrap_err()
+            .to_string();
+            assert!(error.contains(operation));
+            assert!(error.contains(&format!("path={path}")));
+            assert!(error.contains("pid=19"));
+            assert!(error.contains(&format!("fd={fd:?}")));
+            assert!(error.contains(&format!("errno=Some({})", libc::EACCES)));
+            assert!(error.contains(&std::io::Error::from_raw_os_error(libc::EACCES).to_string()));
+        }
+        assert_eq!(
+            profiler_io("fixture", Path::new("/unused"), 19, None, Ok(42)).unwrap(),
+            42
+        );
+    }
+
     #[test]
     fn measurement_profiler_raw_live_fd_stale_foreign_symlink_and_identity() {
         use std::os::fd::AsRawFd;

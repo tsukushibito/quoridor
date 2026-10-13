@@ -254,8 +254,11 @@ def execute(
     env=None,
     output_sink=None,
     cpu_cores=None,
+    no_new_privs=False,
 ):
     """Always TERM→KILL→wait; retain a bounded tail plus exact cleanup evidence."""
+    if type(no_new_privs) is not bool:
+        raise ValueError("no_new_privs must be a boolean")
     if resources:
         resources.check()
     elif deadline is not None and time.monotonic() >= deadline:
@@ -266,6 +269,10 @@ def execute(
         "command": [str(arg) for arg in command],
         "status": "starting",
         "child": None,
+        "launch_policy": {
+            "no_new_privs_requested": no_new_privs,
+            "verified_before_exec": None,
+        },
         "log_bytes_seen": 0,
         "scope": "session group and periodically recorded descendants; no daemon adoption",
     }
@@ -299,6 +306,12 @@ def execute(
 
     try:
         stream = log.open("xb")
+        # Initialize libc in the parent; the existing child callback only calls it.
+        prctl = None
+        if no_new_privs:
+            prctl = ctypes.CDLL(None, use_errno=True).prctl
+            prctl.argtypes = [ctypes.c_int, *([ctypes.c_ulong] * 4)]
+            prctl.restype = ctypes.c_int
         launch_mask = signal.pthread_sigmask(
             signal.SIG_BLOCK, {signal.SIGINT, signal.SIGTERM}
         )
@@ -306,6 +319,12 @@ def execute(
 
             def prepare_child():
                 signal.pthread_sigmask(signal.SIG_SETMASK, launch_mask)
+                if no_new_privs:
+                    if prctl(38, 1, 0, 0, 0) != 0:  # PR_SET_NO_NEW_PRIVS
+                        error = ctypes.get_errno()
+                        raise OSError(error, "PR_SET_NO_NEW_PRIVS failed")
+                    if prctl(39, 0, 0, 0, 0) != 1:  # PR_GET_NO_NEW_PRIVS
+                        raise OSError("PR_GET_NO_NEW_PRIVS did not return 1")
                 if cpu_cores is not None:
                     if (
                         cpu_core is not None
@@ -331,6 +350,9 @@ def execute(
                 cwd=cwd,
                 env=env,
             )
+            if no_new_privs:
+                # Popen returned only after the callback and exec succeeded.
+                record["launch_policy"]["verified_before_exec"] = 1
             direct_fd = os.pidfd_open(child.pid)
             root = identity(process_info(child.pid))
             if root is None:
