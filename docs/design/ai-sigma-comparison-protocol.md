@@ -33,7 +33,7 @@ worker CPUはA、guardian CPUはmainと一致させ、Rootの実RUN支持CPU3/th
 physical/affinity/cgroup/SMT/host reserve検査を通す。別corpusの四コア権限は流用しない。
 モデル無しintegrationを実三コアで検査する必要があるBUILDだけ、実Source-bound handoverに
 `test_cpu_cores` を記録し、test roleへ三コアを渡す。lint/release/version roleは従来の一CPUであり、
-現役の[承認plan](../../research-data/ai-sigma/three-engine-comparison374/approved-plan-v4.json)と[三コア実行支持](../../research-data/ai-sigma/three-engine-comparison374/support-two-ai-runtime-v1.json)を用い、各実RunのSHA-bound intent/admissionと現在のmodel/library/input/artifact/CPU/RAM検査は通常入口で行う。planの元batch0は原物を保持し、実行対象は未入場batch1..383だけである。
+現役の[承認plan](../../research-data/ai-sigma/three-engine-comparison374/approved-plan-v4.json)と[三コア実行支持](../../research-data/ai-sigma/three-engine-comparison374/support-two-ai-runtime-v1.json)を用い、各実RunのSHA-bound intent/admissionと現在のmodel/library/input/artifact/CPU/RAM検査は通常入口で行う。planの元batch0は原物を保持する。新構成batch1も元結果FAILEDを保持し、slot2は入場済みで再実行せず、slot3の補充もしない。次の実行対象は完全未入場batch2..383（382組764局）であり、元768 slotsと未入場UNKNOWNのslot3は結果の分母から消さない。
 
 mainは手番前に合法fallbackをcacheし、開始時刻を記録して完全historyのcloneと仕事をAIへ渡す。
 AIは自分の完成結果だけを更新通知し、mainは実受領時刻で最新の期限内完成を保持する。

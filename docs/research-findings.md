@@ -1306,11 +1306,15 @@ mainは実full history・反復・goal・合法着手、手番開始、実応答
 
 新definitionのnative unit6 + NN0 integration1、Python metadata3が実PASSとなった。元BUILD3のnative5成功を保持し、失敗したconfig fixtureだけを修正して再検証し、全面suite再実行はしていない。変更所有/時計境界の一度の独立確認はclear/blockers0。[現BUILD4の通常finalize](../.artifacts/research-team/integration324/two-ai-composition-v1/build-v4/operation-v1/manifest.json)はPASS/primarynull/secondary[]/cleanuptrueで、fullClippy・releaseと7versionsを確認した。actual private artifact742c817d/9,460,736B、Git20dcb16、管理mainとAI二者の実三コアNN0検証である。これはソフトウェアの結果であり、実model/head・対局・棋力のPASSではない。BUILD4 controller107.49238782499742秒を一度だけ数え、nested Cargo/nativeは加算しない。前の失敗・返ったguardianとdisk masksの区別を保持する。
 
-[現plan-v4](../research-data/ai-sigma/three-engine-comparison374/approved-plan-v4.json)は、元batch0/slots0,1を変えず、未入場383configsだけをAI A/B CPU1/4・mainCPU6、同期worker内推論、現artifactへ移した。package0/core0,2,3は別物理coreで、100ms/5ms、models/rules/OFF/seed、768 denominatorと全scientific fieldsは保った。不要calibration pointers/旧qualification-only inputsを現planから撤去し、旧64/Q/epoch/RAWは履歴に残す。対局はまだ未開始で、通常の現在Experiment/numerical correspondence/実Run admissionとfresh fairness/lifetimeを続ける。349の有限36call計画は同imageを再用できるが、実timed entryは対局優先で直列にする。
+[現plan-v4](../research-data/ai-sigma/three-engine-comparison374/approved-plan-v4.json)は、元batch0/slots0,1を変えず、未入場383configsだけをAI A/B CPU1/4・mainCPU6、同期worker内推論、現artifactへ移した。package0/core0,2,3は別物理coreで、100ms/5ms、models/rules/OFF/seed、768 denominatorと全scientific fieldsは保った。不要calibration pointers/旧qualification-only inputsを現planから撤去し、旧64/Q/epoch/RAWは履歴に残す。この移行時点では対局未開始だった。その後の最初の新構成pairは下記の保存拒否でFAILEDとなった。349は別途RAW所有の修復が必要で、742c imageを修復済みと扱わない。実timed entryは対局優先で直列にする。
 
 ordinary storageは省略して一度のpost-work usageを記録した。BUILD4 finalizationのdirected target/private/control/TMP実保持は1,542,778,880B、当時のFS free357,311,991,808Bで、global実使用/continuous peakではない。旧private/target/category forecastを新開始gateへ戻さず、大量primary outputは既存772MiB whole/decimal50GBの実契約で管理する。
 
 旧entered slots0/1のFAILED/raw goals2/1166calls/validated UNKNOWN、旧architecture Build/image/Qと各料金/returned-vs-disk masksは固定履歴。0/1を再実行せず、未来の766 games/batches1..383、78parents234proposals/18missingを同じ選択と時計で移行する。extra64/prediction/calibration、model/head replay、training/fit/default/score/N/seals/323 pauseの変更はない。
+
+二AI/main構成の最初の[実pair178ab21f停止記録](../.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-controls-two-ai-v1/batch-001/failed-STOP-binding.json)は通常once-finalize FAILEDである。slot2は実入場してSigma raw goal（51 plies、47 observations、584 requests）まで進んだが、NNUEの必要なmetadataが内部の一observation 3072B制限を超え、保存を拒否した。全23件が超過し最大3219Bで、実outcome detail140572Bは既存630784B上限内だった。slot3は未入場UNKNOWN、validated slots2/3もUNKNOWN、完成colour pairは0であり、raw goalを棋力結果に使わない。controller5.057206943998608秒を一度だけ数え、nested nativeは加算しない。元RAW/FAILED/errorsとreturned guardian NULL・disk/outer cleanupの違いを保持する。入場済み0/1/2を再実行せず、未完成pairのslot3を補充しない。次の完全未入場pairはbatch2のslots4/5で、残る完全pairは382組764局、slot3は別の未入場UNKNOWNとして残す。SAME374が時計・数学・全metadataと630784B/16MiBの実保存上限を保つ通常修復を進める。
+
+349のconfigured perf RAW siblingを通常charged rootへ含め、実profilerのwritable FDとpath/dev/inode・PID/start/bootを照合する薄い修復をMain f47bad46へ採用した。現Mainの新Python所有検証1件は実PASSで、source/TMP STOP09:02:35.279774Zまで確認済みである。新native FD検証と修復済みimageは未完成で、旧742cを新predicateの成功へ移植しない。arena保存修復とまとめて未完了のaffected native checks・Clippy・releaseを行い、既存の成功suite/80/モデル資格は再実行しない。
 
 ## 人間選択：Sigma／固定D／単独NNUEの比較（374、2026-10-12）
 
