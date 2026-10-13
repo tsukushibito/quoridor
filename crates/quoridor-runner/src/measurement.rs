@@ -626,7 +626,7 @@ mod tests {
             );
             assert!(result["measurements"][0].get("measured_seconds").is_some());
             assert!(target.trace.first().unwrap().starts_with("reset:"));
-            let domains = result["sessions"].as_array().unwrap();
+            let domains = result["session_domains"].as_array().unwrap();
             let labels = |domain| {
                 domains
                     .iter()
