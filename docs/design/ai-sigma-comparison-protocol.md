@@ -22,7 +22,7 @@ Sigmaは実100ms authority receipt deadlineと5ms reserveを使う。reserve到�
 
 mainはfull history/反復/goal/合法着手、手番開始、実response receipt/deadline、取消、terminal回収と記録を所有し、receiptのcritical pathへ推論・長い探索・遅い保存を置かない。100ms receipt/5ms reserve、完成済み結果の選択、zero-completion合法fallback/null value、original error/cancelと次手番前の旧work回収は共通条件である。同期ORTを強制停止できるとは仮定せず、期限前の応答とterminal完了を別に保存する。遅いreplyを採用せず、errorを過去snapshotで救済しない。
 
-管理mainと等条件のAI二者を利用可能な3物理コアへ配置し、実physical/affinity/cgroup/SMT/host reserveと実CPU/RAM支持を毎回の通常入口で確認する。現配置はAI A/BがCPU1/4、mainがCPU6で、package0の物理core0/2/3を使う。コア番号をfixtureへ固定せず、game workersを3にして並列対局へ変えない。実runにはこのCPU/thread条件を記録し、旧結果を同一timing cohortへ混ぜない。所有/時計境界の一度のrelated reviewはclearとなり、native6件・NN0 integration1件・Python3件とClippy/releaseのaffected software検証が揃った。二AI所有/時計の成功は元BUILD4 scopeで保持する。保存とPerf RAW所有のaffected検証を加えた[現BUILD](../../.artifacts/research-team/integration324/arena-entry-v1/compatible-build-v2/operation-v1/manifest.json)は通常finalize PASS、artifactはdd199514である。全outcomeのlossless JSONを630784Bで制限し、pair16MiBと完全captureを保つ。個々のobservationへ古い3072B上限を重ねない。これはソフトウェアの結果で、未実行の対局・model/head・棋力のPASSではない。
+管理mainと等条件のAI二者を利用可能な3物理コアへ配置し、実physical/affinity/cgroup/SMT/host reserveと実CPU/RAM支持を毎回の通常入口で確認する。現配置はAI A/BがCPU1/4、mainがCPU6で、package0の物理core0/2/3を使う。コア番号をfixtureへ固定せず、game workersを3にして並列対局へ変えない。実runにはこのCPU/thread条件を記録し、旧結果を同一timing cohortへ混ぜない。所有/時計境界の一度のrelated reviewはclearとなり、native6件・NN0 integration1件・Python3件とClippy/releaseのaffected software検証が揃った。二AI所有/時計の成功は元BUILD4 scopeで保持する。保存とPerf RAW所有のaffected検証を加えた旧BUILDのartifact dd199514はその元scopeで保持する。現在の[有限sequence compatible BUILD](../../.artifacts/research-team/integration324/finite-continuation-v1/compatible-build-v2/operation-v1/manifest.json)は通常finalize PASS、artifact fbd0ab82で、設定選択とprofiler error contextの新native各1件・full Clippy/release・7versionsを確認した。全outcomeのlossless JSONを630784Bで制限し、pair16MiBと完全captureを保つ。個々のobservationへ古い3072B上限を重ねない。これはソフトウェアの結果で、未実行の対局・model/head・棋力のPASSではない。
 
 元768 slots中、入場済み0/1のFAILED/raw/validatedUNKNOWNを保持して再実行しない。新構成で進めるのは残り766と既存診断だけで、model/math/score/float/rules/temperature/時計、323pause/defaults/N/seals/fits96と772MiB/decimal50GBは保持する。追加64/calibration/推論時間予測は撤回済みである。
 
@@ -33,7 +33,7 @@ worker CPUはA、guardian CPUはmainと一致させ、Rootの実RUN支持CPU3/th
 physical/affinity/cgroup/SMT/host reserve検査を通す。別corpusの四コア権限は流用しない。
 モデル無しintegrationを実三コアで検査する必要があるBUILDだけ、実Source-bound handoverに
 `test_cpu_cores` を記録し、test roleへ三コアを渡す。lint/release/version roleは従来の一CPUであり、
-現役の[承認plan](../../research-data/ai-sigma/three-engine-comparison374/approved-plan-v5.json)と[三コア実行支持](../../research-data/ai-sigma/three-engine-comparison374/support-two-ai-runtime-v2.json)を用い、各実RunのSHA-bound intent/admissionと現在のmodel/library/input/artifact/CPU/RAM検査は通常入口で行う。planの元batch0は原物を保持する。新構成batch1も元結果FAILEDを保持し、slot2は入場済みで再実行せず、slot3の補充もしない。次の実行対象は完全未入場batch2..383（382組764局）であり、元768 slotsと未入場UNKNOWNのslot3は結果の分母から消さない。
+現役の[選択plan](../../research-data/ai-sigma/three-engine-comparison374/approved-plan-finite-v1.json)と[三コア実行支持](../../research-data/ai-sigma/three-engine-comparison374/support-two-ai-runtime-v2.json)を用いる。統合済みの有限sequenceは一つの設定snapshotから既に承認された完全未入場pairだけを導き、既存controllerのexecute/directwait/通常finalize/cleanup後に次operationへ進む。現在のmodel/library/input/artifact/CPU/RAM、元error/cancel/pauseと親/intent認証は通常入口で保持する。pairごとの手書きready admission・LLM turn・Beads/backup・配送packetを要求しない。結果は元の設定と実operation結果参照へ保存し、unexpected failureで止めて再実行/refillしない。
 
 mainは手番前に合法fallbackをcacheし、開始時刻を記録して完全historyのcloneと仕事をAIへ渡す。
 AIは自分の完成結果だけを更新通知し、mainは実受領時刻で最新の期限内完成を保持する。
@@ -45,10 +45,7 @@ journal・archive・モデルload・探索・長いforwardは受領critical path
 初期化のworker別durationは重なるためrun wallへ加算しない。TTはゲームごとにresetし、
 model/evaluator/backendの構築・呼出し・破棄を同じAI ownerに保つ。
 
-sourceのreview/採用後、既存recipeで将来のbatches1..383だけを現image/三コアconfigへ移行する。
-768枠のdenominatorと入力・色・順序・100ms/5ms・K/TT/温度・OFF/mathを保存し、
-既に入ったslots0/1のFAILED/raw/validated UNKNOWNは元参照のままとし再実行しない。
-source・静的整形は新architectureのsoftware/model/game PASSではない。
+実行済み[有限結果](../../.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/finite-arena374-v3/result.json)と前の正常結果を合わせ、762 validated games/381 complete pairsを記録した。元768 denominatorのうちslots0/1/2/3/12/13のFAILED/UNKNOWNは原物として残し、未完成pairを補充しない。完全未入場pairはなく、次は保存結果の解釈と既存78parents/234singleproposals/18missing診断の未完了範囲を扱う。対局の記録完了をmodel/head資格・母集団棋力や診断完了へ読み替えない。
 普通のsource/test/build/artifact/reviewはstorageを省略し終了後に実使用を一度観察する。
 旧容量予測は履歴であり開始gateではない。bulk RAW/model出力、異常増大や実FS/50GB不足は
 必要な範囲で対処し、所有・RAM/CPU・clock/cancel・実reader STOPを維持する。
