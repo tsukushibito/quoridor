@@ -1,7 +1,7 @@
 """New lifecycle ports: no real Cargo/native/model/Search or old successful suite."""
 
 import copy
-from contextlib import nullcontext
+from contextlib import contextmanager, nullcontext
 import hashlib
 import importlib.util
 import json
@@ -10,12 +10,20 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
+import quoridor_training
 import unittest
 from unittest.mock import patch
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(os.environ.get("RESEARCH_TEST_ROOT", Path(__file__).resolve().parents[2]))
+if os.environ.get("RESEARCH_CYCLE_SOURCE"):
+    quoridor_training.__path__.insert(
+        0, str(Path(os.environ["RESEARCH_CYCLE_SOURCE"]).parent)
+    )
 spec = importlib.util.spec_from_file_location(
-    "research_lifecycle", ROOT / "scripts/dev/research-lifecycle.py"
+    "research_lifecycle",
+    os.environ.get(
+        "RESEARCH_LIFECYCLE_SOURCE", ROOT / "scripts/dev/research-lifecycle.py"
+    ),
 )
 lc = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(lc)
@@ -47,7 +55,8 @@ class LifecycleAllocationTests(unittest.TestCase):
             expected = sum(int(line.split()[0]) for line in observed.splitlines())
             seen = set()
             self.assertEqual(
-                lc.allocated(first, seen=seen) + lc.allocated(second, seen=seen), expected
+                lc.allocated(first, seen=seen) + lc.allocated(second, seen=seen),
+                expected,
             )
             self.assertEqual(lc.allocated(parent / "missing"), 0)
             info = data.stat()
@@ -82,7 +91,7 @@ class NoResources:
     def __init__(self, _spec):
         pass
 
-    def check(self, _children=()):
+    def check(self, _children=(), **_kwargs):
         pass
 
 
@@ -118,7 +127,9 @@ class LifecycleTests(unittest.TestCase):
                 "synthetic source",
             ],
         ):
-            subprocess.run(["git", "-C", str(self.root), *args], check=True, capture_output=True)
+            subprocess.run(
+                ["git", "-C", str(self.root), *args], check=True, capture_output=True
+            )
         self.source_info["commit"] = (
             subprocess.check_output(["git", "-C", str(self.root), "rev-parse", "HEAD"])
             .decode()
@@ -178,16 +189,15 @@ class LifecycleTests(unittest.TestCase):
                     "owned_remaining": [],
                     "shared_serial_pool": True,
                     "target_writer": "codex:fixture",
-                    "target_max_B": 1073741824,
-                    "private_pool_B": 33554432,
                     "fresh_private_root": str(self.private.parent),
-                    "fresh_private_forward_max_B": 1048576,
-                    "private_candidate_upper_B": 65536,
-                    "old_private_retained_allocated_B": 0,
                 },
             ),
             "tools": {
-                n: {"file": ref(self.tool), "version_args": ["--version"], "version": "fixture1"}
+                n: {
+                    "file": ref(self.tool),
+                    "version_args": ["--version"],
+                    "version": "fixture1",
+                }
                 for n in ["CARGO", "RUSTC", "RUSTDOC", "CC", "CXX", "AR", "PYTHON"]
             },
             "env": {
@@ -216,7 +226,13 @@ class LifecycleTests(unittest.TestCase):
                         "-j1",
                         "--message-format=json-render-diagnostics",
                         *(
-                            ["--release", "-p", "quoridor-runner", "--bin", "quoridor-runner"]
+                            [
+                                "--release",
+                                "-p",
+                                "quoridor-runner",
+                                "--bin",
+                                "quoridor-runner",
+                            ]
                             if role == "build"
                             else []
                         ),
@@ -254,7 +270,11 @@ class LifecycleTests(unittest.TestCase):
         return ref(self.file(name + ".json", json.dumps(value).encode()))
 
     def intent(self):
-        view = {k: v for k, v in self.spec.items() if k not in {"admission", "intent_sha256"}}
+        view = {
+            k: v
+            for k, v in self.spec.items()
+            if k not in {"admission", "intent_sha256"}
+        }
         self.spec["intent_sha256"] = hashlib.sha256(
             json.dumps(view, sort_keys=True, separators=(",", ":")).encode()
         ).hexdigest()
@@ -332,7 +352,11 @@ class LifecycleTests(unittest.TestCase):
 
     def finalize(self, directory, job_ref):
         return lc.finalize(
-            directory, job_ref, guard=lambda _: None, lock=nullcontext, resource_factory=NoResources
+            directory,
+            job_ref,
+            guard=lambda _: None,
+            lock=nullcontext,
+            resource_factory=NoResources,
         )
 
     def origin(self, spec_ref, spec):
@@ -341,7 +365,7 @@ class LifecycleTests(unittest.TestCase):
             "argv": [
                 sys.executable,
                 "-B",
-                str(ROOT / "scripts/dev/research-lifecycle.py"),
+                str(lc.ROOT / "scripts/dev/research-lifecycle.py"),
                 spec["kind"],
                 "--intent",
                 spec_ref["path"],
@@ -394,6 +418,115 @@ class LifecycleTests(unittest.TestCase):
         self.spec["commands"][-1]["argv"][0] = str(self.private)
         return self.build()
 
+    def test_whole_storage_unbudgeted_completion_records_current_usage(self):
+        self.spec["limits"].update(owned_B=None, free_B=None)
+        candidate = self.build()
+        active = [False]
+
+        @contextmanager
+        def held():
+            active[0] = True
+            try:
+                yield
+            finally:
+                active[0] = False
+
+        original_allocated = lc.allocated
+
+        def counted(*args, **kwargs):
+            self.assertTrue(
+                active[0], "completion observation must retain the owning lease"
+            )
+            return original_allocated(*args, **kwargs)
+
+        with patch.object(lc, "allocated", counted):
+            result = lc.finalize(
+                self.spec["output"],
+                self.job(candidate),
+                guard=lambda _: None,
+                lock=held,
+                resource_factory=NoResources,
+            )
+        self.assertFalse(active[0])
+        self.assertEqual(result["status"], "PASS")
+        usage = json.loads(
+            (Path(self.spec["output"]) / "storage-usage.json").read_bytes()
+        )
+        self.assertIsNone(usage["storage_budget_B"])
+        self.assertIsNone(usage["global_actual_B"])
+        self.assertGreater(usage["allocated_B"], 0)
+        self.assertIn(str(self.target), usage["roots"])
+        self.assertIn(str(self.private.parent), usage["roots"])
+        self.assertFalse(Path(self.spec["TMP"]).exists())
+
+    def test_whole_storage_final_publication_overflow_preserves_unpublished_candidate(
+        self,
+    ):
+        candidate = self.build()
+
+        def resources(spec):
+            value = object.__new__(lc.Limits)
+            value.spec = spec
+            value.charged_paths = lc.charged_roots(spec)
+            seen = set()
+            value.spec["limits"]["owned_B"] = sum(
+                lc.allocated(p, seen=seen) for p in value.charged_paths
+            )
+            value.spec["limits"]["free_B"] = None
+            return value
+
+        with (
+            patch.object(lc.process.CycleResources, "check", return_value=None),
+            self.assertRaisesRegex(lc.Refused, "owned allocation limit"),
+        ):
+            lc.finalize(
+                self.spec["output"],
+                self.job(candidate),
+                guard=lambda _: None,
+                lock=nullcontext,
+                resource_factory=resources,
+            )
+        self.assertTrue((Path(self.spec["output"]) / "candidate.json").exists())
+        self.assertFalse((Path(self.spec["output"]) / "manifest.json").exists())
+        self.assertTrue((Path(self.spec["output"]) / "INCOMPLETE").exists())
+
+    def test_whole_storage_usage_fault_keeps_final_marker_and_refuses_completed_claim(
+        self,
+    ):
+        for stage in ("read", "write"):
+            with self.subTest(stage=stage):
+                other = LifecycleTests("runTest")
+                other.setUp()
+                try:
+                    other.spec["limits"].update(owned_B=None, free_B=None)
+                    candidate = other.build()
+                    original_write = lc.new_json
+
+                    def fault_write(path, value, **kwargs):
+                        if Path(path).name == "storage-usage.json":
+                            raise OSError("injected usage write")
+                        return original_write(path, value, **kwargs)
+
+                    fault = (
+                        patch.object(
+                            lc, "allocated", side_effect=OSError("injected usage read")
+                        )
+                        if stage == "read"
+                        else patch.object(lc, "new_json", fault_write)
+                    )
+                    with (
+                        fault,
+                        self.assertRaisesRegex(OSError, "injected usage " + stage),
+                    ):
+                        other.finalize(other.spec["output"], other.job(candidate))
+                    directory = Path(other.spec["output"])
+                    self.assertTrue((directory / "INCOMPLETE").exists())
+                    self.assertFalse((directory / "storage-usage.json").exists())
+                    with self.assertRaisesRegex(lc.Refused, "provisional manifest"):
+                        lc.accepted_build(lc.bound(directory / "manifest.json")[0])
+                finally:
+                    other.doCleanups()
+
     def test_originating_job_entry_and_final_runtime_state_directwait_join(self):
         bound = self.intent()
         origin = self.origin(bound, self.spec)
@@ -401,7 +534,11 @@ class LifecycleTests(unittest.TestCase):
             "phase": "starting",
             "job_id": origin["job_id"],
             "config_sha256": origin["config_sha256"],
-            "supervisor": {"pid": os.getppid(), "start_ticks": "1", "boot_id": "fixture"},
+            "supervisor": {
+                "pid": os.getppid(),
+                "start_ticks": "1",
+                "boot_id": "fixture",
+            },
         }
         self.json("job/state", state)
         with (
@@ -439,13 +576,17 @@ class LifecycleTests(unittest.TestCase):
             self.assertEqual(final["status"], "FAILED", mutation)
             self.assertTrue(any(e["stage"] == "outer_job" for e in final["secondary"]))
 
-    def test_build379_final_cargo_artifact_drift_refuses_after_successful_commands(self):
+    def test_build379_final_cargo_artifact_drift_refuses_after_successful_commands(
+        self,
+    ):
         c = self.build()
         c["cargo_artifact"]["target"]["name"] = "wrong-target"
         (Path(self.spec["output"]) / "candidate.json").write_text(json.dumps(c))
         final = self.finalize(Path(self.spec["output"]), self.job(c))
         self.assertEqual(final["status"], "FAILED")
-        self.assertTrue(any(e["stage"] == "final_artifact_source" for e in final["secondary"]))
+        self.assertTrue(
+            any(e["stage"] == "final_artifact_source" for e in final["secondary"])
+        )
 
     def test_all_command_and_version_logs_rechecked_independently(self):
         c = self.build()
@@ -518,7 +659,8 @@ class LifecycleTests(unittest.TestCase):
         self.assertFalse(entry["capture_complete"])
         self.assertEqual(lc.read_ref(entry["full_log"]), b"retained partial")
         self.assertEqual(
-            lc.document(entry["persisted_process_receipt"])["signal_mask_restoration"], "pending"
+            lc.document(entry["persisted_process_receipt"])["signal_mask_restoration"],
+            "pending",
         )
         self.assertFalse(c["cleanup_complete"])
 
@@ -606,7 +748,13 @@ class LifecycleTests(unittest.TestCase):
             artifact=manifest["artifact"],
             argv=[str(self.private), "fixture-run"],
             data_root=str(self.root / "data"),
-            data=[{"name": "result", "path": str(self.root / "data/result.json"), "limit_B": 1024}],
+            data=[
+                {
+                    "name": "result",
+                    "path": str(self.root / "data/result.json"),
+                    "limit_B": 1024,
+                }
+            ],
         )
         config = self.json("scientific-config", {"not_source": True})
         experiment = {
@@ -641,7 +789,9 @@ class LifecycleTests(unittest.TestCase):
         self.assertEqual(final["planned_slots"], 0)
         self.assertNotIn("scientific-config", json.dumps(manifest["source"]))
 
-    def test_maintained_guardian_actual_stdlib_child_full_capture_and_returned_cleanup(self):
+    def test_maintained_guardian_actual_stdlib_child_full_capture_and_returned_cleanup(
+        self,
+    ):
         self.spec["limits"]["worker_cpu"] = 3
         record, full = lc.command(
             self.spec,
@@ -663,7 +813,9 @@ class LifecycleTests(unittest.TestCase):
         report = lc.cargo_report(fixture.read_bytes())
         self.assertEqual(report["warning_count"], 8)
         events = [
-            json.loads(line) for line in fixture.read_bytes().splitlines() if line.startswith(b"{")
+            json.loads(line)
+            for line in fixture.read_bytes().splitlines()
+            if line.startswith(b"{")
         ]
         self.assertTrue(
             any(
@@ -673,7 +825,9 @@ class LifecycleTests(unittest.TestCase):
         )
         self.assertTrue(any(e.get("reason") == "build-script-executed" for e in events))
         context = json.loads(
-            (ROOT / "tools/research-session/fixtures/native-context-retained.json").read_bytes()
+            (
+                ROOT / "tools/research-session/fixtures/native-context-retained.json"
+            ).read_bytes()
         )
         self.assertIn("deps", context)
 
@@ -774,7 +928,10 @@ class LifecycleTests(unittest.TestCase):
                 raise OSError("candidate save secondary")
             return write(path, value)
 
-        with patch.object(lc.Capture, "close", close), patch.object(lc, "new_json", save):
+        with (
+            patch.object(lc.Capture, "close", close),
+            patch.object(lc, "new_json", save),
+        ):
             with self.assertRaises(OSError) as caught:
                 lc.execute(
                     self.intent(),
@@ -830,7 +987,8 @@ class LifecycleTests(unittest.TestCase):
         m = self.finalize(Path(self.spec["output"]), job)
         self.assertEqual(m["status"], "FAILED")
         self.assertEqual(
-            [e["stage"] for e in m["secondary"]], ["outer_job", "owed_finalizer", "owed_finalizer"]
+            [e["stage"] for e in m["secondary"]],
+            ["outer_job", "owed_finalizer", "owed_finalizer"],
         )
         with self.assertRaises(lc.Refused):
             self.finalize(Path(self.spec["output"]), job)
@@ -873,7 +1031,9 @@ class LifecycleTests(unittest.TestCase):
         config = {
             "arena": {
                 "book": {
-                    "openings": [{"reference": {"settings": {"family_id": f}}} for f in range(16)]
+                    "openings": [
+                        {"reference": {"settings": {"family_id": f}}} for f in range(16)
+                    ]
                 }
             }
         }
@@ -892,7 +1052,11 @@ class LifecycleTests(unittest.TestCase):
             "config": self.json("config", config),
         }
         self.spec["data"] = [
-            {"name": "journal", "path": str(self.root / "data/completed.jsonl"), "limit_B": 1024}
+            {
+                "name": "journal",
+                "path": str(self.root / "data/completed.jsonl"),
+                "limit_B": 1024,
+            }
         ]
         data = lc.collect_data(self.spec, experiment)
         self.assertEqual(data["status"], "FAILED")
@@ -920,7 +1084,11 @@ class LifecycleTests(unittest.TestCase):
             "config": config,
             "inputs": [],
             "models": [
-                {"descriptor": descriptor, "weights": missing, "evaluator_sha256": "0" * 64}
+                {
+                    "descriptor": descriptor,
+                    "weights": missing,
+                    "evaluator_sha256": "0" * 64,
+                }
             ],
             "dynamic_libraries": [],
             "schedule": self.json("run-schedule", []),
@@ -985,7 +1153,9 @@ class LifecycleTests(unittest.TestCase):
         config = {
             "arena": {
                 "book": {
-                    "openings": [{"reference": {"settings": {"family_id": f}}} for f in range(16)]
+                    "openings": [
+                        {"reference": {"settings": {"family_id": f}}} for f in range(16)
+                    ]
                 }
             }
         }
@@ -1000,7 +1170,8 @@ class LifecycleTests(unittest.TestCase):
             for g in range(32)
         ]
         journal = self.file(
-            "data/completed.jsonl", b"".join(json.dumps(r).encode() + b"\n" for r in records)
+            "data/completed.jsonl",
+            b"".join(json.dumps(r).encode() + b"\n" for r in records),
         )
         result = self.file(
             "data/result.json",
@@ -1159,7 +1330,11 @@ class LifecycleTests(unittest.TestCase):
             artifact=m["artifact"],
             data_root=self.request["output"],
             data=[
-                {"name": n, "path": str(Path(self.request["output"]) / f), "limit_B": 65536}
+                {
+                    "name": n,
+                    "path": str(Path(self.request["output"]) / f),
+                    "limit_B": 65536,
+                }
                 for n, f in lc.GENERATION_FILES.items()
             ],
         )
@@ -1209,7 +1384,9 @@ class LifecycleTests(unittest.TestCase):
             "attempted": 128,
             "transitions": 512,
             "book_sha256": lc.sha(json.dumps(book, separators=(",", ":")).encode()),
-            "schedule_sha256": lc.sha(json.dumps(self.schedule, separators=(",", ":")).encode()),
+            "schedule_sha256": lc.sha(
+                json.dumps(self.schedule, separators=(",", ":")).encode()
+            ),
             "models_loaded": 0,
             "search_calls": 0,
             "games_started": 0,
@@ -1236,7 +1413,9 @@ class LifecycleTests(unittest.TestCase):
     def test_generation_bootstrap_null_enters_only_stub_and_normal_finalization(self):
         self.generation_e = self.generation_fixture()
         # Declared library metadata is preserved and verified even without a model.
-        self.generation_e["dynamic_libraries"] = [{"file": ref(self.tool), "version": "fixture1"}]
+        self.generation_e["dynamic_libraries"] = [
+            {"file": ref(self.tool), "version": "fixture1"}
+        ]
         self.generation_rebind(self.generation_e)
         c = self.generation_execute()
         self.assertEqual(self.geometry_stub_calls, 1)
@@ -1251,7 +1430,11 @@ class LifecycleTests(unittest.TestCase):
     def test_generation_bootstrap_omitted_and_finalizer_failure_stays_failed(self):
         self.generation_e = self.generation_fixture(omitted=True)
         self.spec["finalizers"] = [
-            {"kind": "data", "path": str(self.root / "missing-finalizer.json"), "limit_B": 1024}
+            {
+                "kind": "data",
+                "path": str(self.root / "missing-finalizer.json"),
+                "limit_B": 1024,
+            }
         ]
         c = self.generation_execute()
         self.assertEqual(self.geometry_stub_calls, 1)
@@ -1260,7 +1443,9 @@ class LifecycleTests(unittest.TestCase):
         self.assertEqual(final["data"]["generation"]["numerical_qualification"], None)
         self.assertTrue(final["secondary"])
 
-    def test_generation_bootstrap_missing_numerical_refuses_all_other_phases_before_build_io(self):
+    def test_generation_bootstrap_missing_numerical_refuses_all_other_phases_before_build_io(
+        self,
+    ):
         e = self.generation_fixture()
         for phase in ("materialize", "compare", "arena", "analysis", "unknown"):
             for omitted in (False, True):
@@ -1272,14 +1457,18 @@ class LifecycleTests(unittest.TestCase):
                     self.generation_rebind(bad)
                     count = len(self.calls)
                     with patch.object(
-                        lc, "accepted_build", side_effect=AssertionError("build must not open")
+                        lc,
+                        "accepted_build",
+                        side_effect=AssertionError("build must not open"),
                     ):
                         with self.assertRaises(lc.Refused):
                             self.generation_execute()
                     self.assertEqual(len(self.calls), count)
                     self.assertFalse(Path(self.spec["output"]).exists())
 
-    def test_generation_bootstrap_escalation_and_identity_drift_refuse_before_stub(self):
+    def test_generation_bootstrap_escalation_and_identity_drift_refuse_before_stub(
+        self,
+    ):
         e = self.generation_fixture()
         changes = [
             lambda x: x.update(models=[{"descriptor": {}, "weights": {}}]),
@@ -1293,7 +1482,9 @@ class LifecycleTests(unittest.TestCase):
             lambda x: x["build_manifest"].update(sha256="0" * 64),
             lambda x: x["config"].update(sha256="0" * 64),
             lambda x: x["schedule"].update(sha256="0" * 64),
-            lambda x: x["dynamic_libraries"].append({"file": ref(self.tool), "version": " "}),
+            lambda x: x["dynamic_libraries"].append(
+                {"file": ref(self.tool), "version": " "}
+            ),
         ]
         for change in changes:
             with self.subTest(change=changes.index(change)):
@@ -1312,7 +1503,9 @@ class LifecycleTests(unittest.TestCase):
             self.generation_execute()
         self.assertEqual(self.geometry_stub_calls, 0)
 
-    def test_generation_bootstrap_partial_native_metadata_retains_files_without_pass(self):
+    def test_generation_bootstrap_partial_native_metadata_retains_files_without_pass(
+        self,
+    ):
         self.generation_e = self.generation_fixture()
         self.generation_execute()
         p = Path(self.request["output"]) / "generation-result.json"
@@ -1338,7 +1531,9 @@ class LifecycleTests(unittest.TestCase):
                 bad = copy.deepcopy(e)
                 request = copy.deepcopy(self.request)
                 if field == "schedule":
-                    bad["schedule"] = self.json("wrong-schedule", list(reversed(self.schedule)))
+                    bad["schedule"] = self.json(
+                        "wrong-schedule", list(reversed(self.schedule))
+                    )
                 elif field == "output":
                     request["output"] = str(self.root / "uncharged-output")
                 else:
@@ -1390,7 +1585,9 @@ class LifecycleTests(unittest.TestCase):
         self.assertEqual(len(self.calls), calls)
         self.assertEqual(Path(completion["path"]).read_bytes(), before)
 
-    def test_generation_source_domains_saved_origin_marker_missing_and_drift_refuse(self):
+    def test_generation_source_domains_saved_origin_marker_missing_and_drift_refuse(
+        self,
+    ):
         completion, final = self.failed_generation_fixture()
         p = Path(completion["path"])
         marker = p.with_name("INCOMPLETE")
@@ -1454,7 +1651,9 @@ class LifecycleTests(unittest.TestCase):
         self.assertEqual(lc.document(completion)["status"], "FAILED")
 
     def current_caller_fixture(self):
-        caller = self.file("scripts/dev/research-lifecycle.py", b"current adopted caller v1")
+        caller = self.file(
+            "scripts/dev/research-lifecycle.py", b"current adopted caller v1"
+        )
         for name in (
             "scripts/dev/research-job.py",
             "python/quoridor_training/cycle_process.py",
@@ -1513,7 +1712,8 @@ class LifecycleTests(unittest.TestCase):
             "strength355",
         ):
             p = self.file(
-                "python/quoridor_training/research355/" + name + ".py", b"current analysis module"
+                "python/quoridor_training/research355/" + name + ".py",
+                b"current analysis module",
             )
             self.spec["caller_sources"].append(ref(p))
         self.generation_rebind(e)
@@ -1530,14 +1730,24 @@ class LifecycleTests(unittest.TestCase):
                 lc.experiment_check(self.spec)
         self.assertFalse(Path(self.spec["output"]).exists())
 
-    def test_saved_generation_candidate_refuses_and_manifest_retains_outer_owed_errors(self):
+    def test_saved_generation_candidate_refuses_and_manifest_retains_outer_owed_errors(
+        self,
+    ):
         self.generation_e = self.generation_fixture()
         self.spec["finalizers"] = [
-            {"kind": "data", "path": str(self.root / "missing-owed.json"), "limit_B": 1024}
+            {
+                "kind": "data",
+                "path": str(self.root / "missing-owed.json"),
+                "limit_B": 1024,
+            }
         ]
         c = self.generation_execute()
         c["status"] = "FAILED"
-        c["primary"] = {"type": "Refused", "message": "original domain mismatch", "notes": []}
+        c["primary"] = {
+            "type": "Refused",
+            "message": "original domain mismatch",
+            "notes": [],
+        }
         candidate = Path(self.spec["output"]) / "candidate.json"
         candidate.write_text(json.dumps(c))
         before = candidate.read_bytes()
@@ -1545,7 +1755,9 @@ class LifecycleTests(unittest.TestCase):
         self.assertFalse(candidate.with_name("INCOMPLETE").exists())
         self.assertEqual(candidate.read_bytes(), before)
         self.assertTrue(final["cleanup_complete"])
-        self.assertTrue({"outer_job", "owed_finalizer"} <= {x["stage"] for x in final["secondary"]})
+        self.assertTrue(
+            {"outer_job", "owed_finalizer"} <= {x["stage"] for x in final["secondary"]}
+        )
         with self.assertRaises(lc.Refused):
             lc.generation_input_data(ref(candidate))
         manifest = ref(candidate.with_name("manifest.json"))
@@ -1566,12 +1778,20 @@ class LifecycleTests(unittest.TestCase):
         for item, cap in zip(self.spec["data"], caps, strict=True):
             item["limit_B"] = cap
         self.spec["finalizers"] = [
-            {"kind": "data", "path": str(self.root / "missing-owed.json"), "limit_B": 1024}
+            {
+                "kind": "data",
+                "path": str(self.root / "missing-owed.json"),
+                "limit_B": 1024,
+            }
         ]
         c = self.generation_execute()
         c.update(
             status="FAILED",
-            primary={"type": "Refused", "message": "original source-domain mismatch", "notes": []},
+            primary={
+                "type": "Refused",
+                "message": "original source-domain mismatch",
+                "notes": [],
+            },
         )
         candidate = Path(self.spec["output"]) / "candidate.json"
         candidate.write_text(json.dumps(c))
@@ -1589,7 +1809,8 @@ class LifecycleTests(unittest.TestCase):
         self.assertEqual(data["origin_primary"], final["primary"])
         self.assertEqual(data["origin_secondary"], final["secondary"])
         self.assertTrue(
-            {"outer_job", "owed_finalizer"} <= {x["stage"] for x in data["origin_secondary"]}
+            {"outer_job", "owed_finalizer"}
+            <= {x["stage"] for x in data["origin_secondary"]}
         )
         self.assertIsNone(data["numerical_qualification"])
         self.assertEqual(data["files"], final["data"]["files"])
@@ -1610,7 +1831,9 @@ class LifecycleTests(unittest.TestCase):
 
         bad = copy.deepcopy(final)
         bad["data"]["files"][1]["bytes"] = 4194304
-        refuses_before_collection(bad)  # individually valid, actual aggregate exceeds4MiB
+        refuses_before_collection(
+            bad
+        )  # individually valid, actual aggregate exceeds4MiB
         for value in (True, -1, 4194305):
             with self.subTest(saved_bytes=value):
                 bad = copy.deepcopy(final)

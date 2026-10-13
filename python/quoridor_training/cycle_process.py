@@ -27,7 +27,9 @@ def cancellation_signals():
     def cancel(signum, _frame):
         raise CycleStopped(f"cycle signal: {signal.Signals(signum).name}")
 
-    previous = {sig: signal.signal(sig, cancel) for sig in (signal.SIGINT, signal.SIGTERM)}
+    previous = {
+        sig: signal.signal(sig, cancel) for sig in (signal.SIGINT, signal.SIGTERM)
+    }
     try:
         yield
     finally:
@@ -53,7 +55,9 @@ def process_info(pid):
 
 
 def identity(info):
-    return {key: info[key] for key in ("pid", "start_ticks", "boot_id")} if info else None
+    return (
+        {key: info[key] for key in ("pid", "start_ticks", "boot_id")} if info else None
+    )
 
 
 def alive(member):
@@ -110,7 +114,9 @@ def available_memory():
     try:
         limit = (cgroup / "memory.max").read_text().strip()
         if limit != "max":
-            value = min(value, max(0, int(limit) - int((cgroup / "memory.current").read_text())))
+            value = min(
+                value, max(0, int(limit) - int((cgroup / "memory.current").read_text()))
+            )
     except OSError:
         pass
     return value
@@ -128,7 +134,10 @@ class DeviceMemory:
             ctypes.c_uint,
             ctypes.POINTER(ctypes.c_void_p),
         ]
-        self.library.nvmlDeviceGetMemoryInfo.argtypes = [ctypes.c_void_p, ctypes.POINTER(self.Info)]
+        self.library.nvmlDeviceGetMemoryInfo.argtypes = [
+            ctypes.c_void_p,
+            ctypes.POINTER(self.Info),
+        ]
         self.handle = ctypes.c_void_p()
         if self.library.nvmlInit_v2() or self.library.nvmlDeviceGetHandleByIndex_v2(
             0, ctypes.byref(self.handle)
@@ -146,14 +155,21 @@ class CycleResources:
     def __init__(self, config, output, deadline):
         self.output = Path(output)
         self.deadline = deadline
-        self.pause_file = Path(config["pause_file"]) if config.get("pause_file") else None
+        self.pause_file = (
+            Path(config["pause_file"]) if config.get("pause_file") else None
+        )
         self.reserve = config.get("host_ram_reserve", 4 * 1024**3)
         usable = max(0, available_memory() - self.reserve)
         maximum = config.get("max_memory_bytes")
         self.memory_limit = min(maximum, usable) if maximum is not None else usable
-        self.output_limit = config.get("max_output_bytes", 512 * 1024**2)
-        if self.memory_limit <= 0 or self.output_limit <= 0:
-            raise CycleStopped("cycle resource budget must be positive after host reserve")
+        self.output_limit = config.get("max_output_bytes")
+        if self.memory_limit <= 0 or (
+            self.output_limit is not None
+            and (type(self.output_limit) is not int or self.output_limit <= 0)
+        ):
+            raise CycleStopped(
+                "cycle resource budget must be positive after host reserve"
+            )
 
     def check(self, owned=()):
         if self.deadline is not None and time.monotonic() >= self.deadline:
@@ -162,32 +178,37 @@ class CycleResources:
             raise CycleStopped("cycle paused")
         if available_memory() < self.reserve:
             raise CycleStopped("cycle host RAM reserve")
-        infos = [process_info(os.getpid()), *(process_info(member["pid"]) for member in owned)]
+        infos = [
+            process_info(os.getpid()),
+            *(process_info(member["pid"]) for member in owned),
+        ]
         rss = sum((info["rss"] for info in infos if info))
         if rss > self.memory_limit:
             raise CycleStopped("cycle memory_limit")
-        output_bytes = directory_bytes(self.output)
-        if output_bytes > self.output_limit:
+        if (
+            self.output_limit is not None
+            and directory_bytes(self.output) > self.output_limit
+        ):
             raise CycleStopped("cycle output_limit")
 
 
 def directory_bytes(root):
-    """Sample owned regular-file bytes with one stat; vanished temporaries are absent."""
-    pending, total = ([root], 0)
+    """Current owned allocation, with shared device/inode charged once."""
+    pending, total, seen = [Path(root)], 0, set()
     while pending:
+        path = pending.pop()
         try:
-            with os.scandir(pending.pop()) as entries:
-                for entry in entries:
-                    try:
-                        info = entry.stat(follow_symlinks=False)
-                    except FileNotFoundError:
-                        continue
-                    if stat.S_ISDIR(info.st_mode):
-                        pending.append(entry.path)
-                    elif stat.S_ISREG(info.st_mode):
-                        total += info.st_size
+            info = path.lstat()
         except FileNotFoundError:
             continue
+        identity = (info.st_dev, info.st_ino)
+        if identity in seen:
+            continue
+        seen.add(identity)
+        total += info.st_blocks * 512
+        if stat.S_ISDIR(info.st_mode):
+            with os.scandir(path) as entries:
+                pending.extend(Path(e.path) for e in entries)
     return total
 
 
@@ -206,7 +227,9 @@ class GPUResources(CycleResources):
         infos = [process_info(os.getpid()), *(process_info(x["pid"]) for x in owned)]
         rss = sum((x["rss"] for x in infos if x)) + self.controller_reserve
         used = self.device.used()
-        self.observed["peak_family_RSS_bytes"] = max(self.observed["peak_family_RSS_bytes"], rss)
+        self.observed["peak_family_RSS_bytes"] = max(
+            self.observed["peak_family_RSS_bytes"], rss
+        )
         self.observed["peak_whole_device_used_bytes"] = max(
             self.observed["peak_whole_device_used_bytes"], used
         )
@@ -276,7 +299,9 @@ def execute(
 
     try:
         stream = log.open("xb")
-        launch_mask = signal.pthread_sigmask(signal.SIG_BLOCK, {signal.SIGINT, signal.SIGTERM})
+        launch_mask = signal.pthread_sigmask(
+            signal.SIG_BLOCK, {signal.SIGINT, signal.SIGTERM}
+        )
         try:
 
             def prepare_child():
@@ -289,7 +314,9 @@ def execute(
                         or any(type(c) is not int or c < 0 for c in cpu_cores)
                         or len(set(cpu_cores)) != len(cpu_cores)
                     ):
-                        raise ValueError("one explicit nonempty unique child CPU allocation")
+                        raise ValueError(
+                            "one explicit nonempty unique child CPU allocation"
+                        )
                     os.sched_setaffinity(0, set(cpu_cores))
                 elif cpu_core is not None:
                     os.sched_setaffinity(0, {cpu_core})
@@ -352,7 +379,9 @@ def execute(
         record.update(status="failed", error=str(error), reason=type(error).__name__)
     finally:
         try:
-            mask = signal.pthread_sigmask(signal.SIG_BLOCK, {signal.SIGINT, signal.SIGTERM})
+            mask = signal.pthread_sigmask(
+                signal.SIG_BLOCK, {signal.SIGINT, signal.SIGTERM}
+            )
         except BaseException as error:
             final_errors.append(("signal_mask_block", error))
         try:
@@ -367,10 +396,14 @@ def execute(
 
                 if direct_fd is not None and attempt_final(
                     stage + "_pidfd",
-                    lambda: send_owned(lambda: signal.pidfd_send_signal(direct_fd, sig)),
+                    lambda: send_owned(
+                        lambda: signal.pidfd_send_signal(direct_fd, sig)
+                    ),
                 ):
                     return
-                attempt_final(stage + "_popen", lambda: send_owned(lambda: child.send_signal(sig)))
+                attempt_final(
+                    stage + "_popen", lambda: send_owned(lambda: child.send_signal(sig))
+                )
 
             def observe():
                 return [member for member in owned if alive(member)]
@@ -384,7 +417,8 @@ def execute(
                 attempt_final("descendant_discovery", discover)
                 direct_running = [True]
                 attempt_final(
-                    "direct_poll", lambda: direct_running.__setitem__(0, child.poll() is None)
+                    "direct_poll",
+                    lambda: direct_running.__setitem__(0, child.poll() is None),
                 )
                 live = True
                 try:
@@ -398,11 +432,14 @@ def execute(
                     for member in owned:
                         attempt_final(
                             "descendant_term",
-                            lambda member=member: signal_members([member], signal.SIGTERM),
+                            lambda member=member: signal_members(
+                                [member], signal.SIGTERM
+                            ),
                         )
                     if direct_running[0]:
                         attempt_final(
-                            "direct_term", lambda: stop_direct(signal.SIGTERM, "direct_term")
+                            "direct_term",
+                            lambda: stop_direct(signal.SIGTERM, "direct_term"),
                         )
                     until = time.monotonic() + TERM_SECONDS
                     while time.monotonic() < until:
@@ -421,10 +458,15 @@ def execute(
                     for member in owned:
                         attempt_final(
                             "descendant_kill",
-                            lambda member=member: signal_members([member], signal.SIGKILL),
+                            lambda member=member: signal_members(
+                                [member], signal.SIGKILL
+                            ),
                         )
                     # Signal the owned direct pidfd independently even if discovery failed.
-                    attempt_final("direct_kill", lambda: stop_direct(signal.SIGKILL, "direct_kill"))
+                    attempt_final(
+                        "direct_kill",
+                        lambda: stop_direct(signal.SIGKILL, "direct_kill"),
+                    )
                 attempt_final("direct_wait", lambda: child.wait(timeout=3))
                 until = time.monotonic() + 1
                 while time.monotonic() < until:
@@ -442,12 +484,18 @@ def execute(
                     else:
                         time.sleep(POLL_SECONDS)
                 record["exit_code"] = child.returncode
-                record["remaining"] = list(owned)  # Retain UNKNOWN members if observation fails.
-                attempt_final("remaining_observation", lambda: record.update(remaining=observe()))
+                record["remaining"] = list(
+                    owned
+                )  # Retain UNKNOWN members if observation fails.
+                attempt_final(
+                    "remaining_observation", lambda: record.update(remaining=observe())
+                )
             direct_reaped = child is None or child.returncode is not None
             record.update(
                 direct_child_reaped=direct_reaped,
-                descendant_visibility="unavailable" if child and root is None else "observed",
+                descendant_visibility="unavailable"
+                if child and root is None
+                else "observed",
                 cleanup_complete=direct_reaped
                 and (child is None or root is not None)
                 and (not record.get("remaining"))
@@ -490,35 +538,48 @@ def execute(
                 record["process_cleanup_complete"] and record["handle_closes_complete"]
             )
             if final_errors:
-                record.update(status="failed", finalization_failed_stage=final_errors[0][0])
+                record.update(
+                    status="failed", finalization_failed_stage=final_errors[0][0]
+                )
             record["signal_mask_restoration"] = "pending"
             if stream is not None:
                 record["final_record_persist"] = "attempted"
                 record["finalization_errors"] = final_error_facts()
-                attempt_final("receipt_persist", lambda: save_record(record_path, record))
+                attempt_final(
+                    "receipt_persist", lambda: save_record(record_path, record)
+                )
                 record["final_record_persist"] = (
                     "failed_or_partial_UNKNOWN"
                     if any((stage == "receipt_persist" for stage, _ in final_errors))
                     else "completed"
                 )
             else:
-                record["final_record_persist"] = "unavailable; new log ownership not acquired"
+                record["final_record_persist"] = (
+                    "unavailable; new log ownership not acquired"
+                )
             if mask is not None:
                 attempt_final(
-                    "signal_mask_restore", lambda: signal.pthread_sigmask(signal.SIG_SETMASK, mask)
+                    "signal_mask_restore",
+                    lambda: signal.pthread_sigmask(signal.SIG_SETMASK, mask),
                 )
                 record["signal_mask_restoration"] = (
                     "failed_UNKNOWN"
-                    if any((stage == "signal_mask_restore" for stage, _ in final_errors))
+                    if any(
+                        (stage == "signal_mask_restore" for stage, _ in final_errors)
+                    )
                     else "completed"
                 )
             else:
                 record["signal_mask_restoration"] = "unavailable; block did not return"
     if final_errors:
         record.update(status="failed", finalization_errors=final_error_facts())
-        errors = ([failure] if failure is not None else []) + [error for _, error in final_errors]
+        errors = ([failure] if failure is not None else []) + [
+            error for _, error in final_errors
+        ]
         group = BaseExceptionGroup("cycle primary/finalization failures", errors)
-        group.add_note("nonrecursive cycle fallback facts: " + json.dumps(record, allow_nan=False))
+        group.add_note(
+            "nonrecursive cycle fallback facts: " + json.dumps(record, allow_nan=False)
+        )
         raise group
     if failure:
         raise failure

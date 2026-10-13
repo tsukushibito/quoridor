@@ -102,13 +102,18 @@ def document(ref):
     return json.loads(read_ref(ref))
 
 
-def new_json(path, value):
+def new_json(path, value, *, resources=None):
     data = (json.dumps(value, indent=2, allow_nan=False) + "\n").encode()
     require(len(data) <= CONTROL_BYTES, "control publication cap")
+    if resources is not None:
+        block = os.statvfs(Path(path).parent).f_frsize
+        resources.check(extra_B=((len(data) + block - 1) // block) * block)
     with Path(path).open("xb") as f:
         f.write(data)
         f.flush()
         os.fsync(f.fileno())
+    if resources is not None:
+        resources.check()
 
 
 def allocated(path, *, seen=None):
@@ -146,14 +151,14 @@ def owned(path, owner):
 
 
 def charged_roots(spec):
-    paths = [spec["output"]]
+    paths = [spec["output"], *spec.get("owned_outputs", [])]
+    paths += [x["path"] for x in spec["finalizers"]]
     if spec["kind"] == "build":
         paths += [spec["target"], str(Path(spec["private"]).parent), spec["TMP"]]
     else:
-        paths += [spec["data_root"], *spec.get("owned_outputs", [])]
+        paths.append(spec["data_root"])
         if spec.get("TMP"):
             paths.append(spec["TMP"])
-        paths += [x["path"] for x in spec["finalizers"]]
         data_root = owned(spec["data_root"], spec["owner"])
         for item in spec["data"]:
             path = owned(item["path"], spec["owner"])
@@ -202,7 +207,7 @@ class Limits(process.CycleResources):
     def __init__(self, spec):
         self.spec = spec
         cfg = spec["limits"]
-        for name in ("family_B", "host_reserve_B", "owned_B", "log_B", "free_B"):
+        for name in ("family_B", "host_reserve_B", "log_B"):
             require(
                 type(cfg[name]) is int and cfg[name] > 0,
                 "positive priced limit: " + name,
@@ -213,12 +218,17 @@ class Limits(process.CycleResources):
             and cfg["host_reserve_B"] >= 4 * 1024**3,
             "issued family/host envelope",
         )
+        # Omitted/None storage is ordinary work, not a default allowance.
+        for name in ("owned_B", "free_B"):
+            value = cfg.get(name)
+            require(
+                value is None or (type(value) is int and value > 0),
+                "declared storage limit: " + name,
+            )
         require(
-            type(support["funded_union_B"]) is int
-            and 0 < cfg["owned_B"] <= support["funded_union_B"] <= 50000000000,
-            "issued inclusive whole support",
+            cfg.get("owned_B") is None or cfg["owned_B"] <= 50000000000,
+            "global storage cap",
         )
-        require(support["global_held_B"] <= 50000000000, "global holding")
         # Admission is issued phase-specific support, not a default scientific horizon.
         admission = document(spec["admission"])
         require(
@@ -249,46 +259,41 @@ class Limits(process.CycleResources):
             {
                 "host_ram_reserve": cfg["host_reserve_B"],
                 "max_memory_bytes": cfg["family_B"] - cfg["controller_B"],
-                "max_output_bytes": cfg["owned_B"],
+                "max_output_bytes": None,  # This owner counts actual allocated shared inodes below.
                 "pause_file": spec.get("pause_file"),
             },
             spec["output"],
             None,
         )
 
-    def check(self, children=()):
+    def check(self, children=(), *, extra_B=0):
         super().check(children)
-        seen = set()
-        require(
-            sum(allocated(p, seen=seen) for p in self.charged_paths)
-            <= self.spec["limits"]["owned_B"],
-            "owned allocation limit",
-        )
-        require(
-            shutil.disk_usage(self.spec["owner"]).free >= self.spec["limits"]["free_B"],
-            "FS reserve",
-        )
-        if self.spec["kind"] == "build":
-            h = document(self.spec["target_handover"])
-            require(allocated(self.spec["target"]) <= h["target_max_B"], "target cap")
-            private = allocated(Path(self.spec["private"]).parent)
+        budget = self.spec["limits"].get("owned_B")
+        require(type(extra_B) is int and extra_B >= 0, "prospective allocation")
+        if budget is not None:
+            seen = set()
             require(
-                private <= h["fresh_private_forward_max_B"]
-                and private + h["old_private_retained_allocated_B"]
-                <= h["private_pool_B"],
-                "retained private pool cap",
+                sum(allocated(p, seen=seen) for p in self.charged_paths) + extra_B
+                <= budget,
+                "owned allocation limit",
             )
-            require(allocated(self.spec["TMP"]) <= 64 * 1024 * 1024, "TMP cap")
-        if self.spec["support"]["sha256"] == PERF349_SUPPORT:
-            require(allocated(self.spec["TMP"]) <= 4 * 1048576, "349 serial TMP cap")
-            if self.spec.get("perf") is not None:
-                path = Path(self.spec["perf"]["output"])
-                if path.exists():
-                    info = path.lstat()
-                    require(
-                        stat.S_ISREG(info.st_mode) and info.st_size < 12 * 1048576,
-                        "349 perf cap; remaining samples/work UNKNOWN",
-                    )
+        reserve = self.spec["limits"].get("free_B")
+        if reserve is not None:
+            require(
+                shutil.disk_usage(self.spec["owner"]).free >= reserve + extra_B,
+                "FS reserve",
+            )
+        if (
+            self.spec["support"]["sha256"] == PERF349_SUPPORT
+            and self.spec.get("perf") is not None
+        ):
+            path = Path(self.spec["perf"]["output"])
+            if path.exists():
+                info = path.lstat()
+                require(
+                    stat.S_ISREG(info.st_mode) and info.st_size < 12 * 1048576,
+                    "349 perf cap; remaining samples/work UNKNOWN",
+                )
 
 
 def physical_and_quiet(spec):
@@ -1876,7 +1881,10 @@ def accepted_build(ref):
         {r["role"] for r in manifest["checks"]} >= {"test", "lint", "build"},
         "affected test/lint/build required",
     )
-    read_ref(manifest["artifact"], 32 * 1024 * 1024)
+    require(
+        artifact_ref(manifest["artifact"]["path"]) == manifest["artifact"],
+        "artifact identity drift",
+    )
     source_metadata_check(manifest["source"])
     for tool in manifest["tools"].values():
         require(
@@ -2329,20 +2337,6 @@ def build_check(spec):
         and not Path(handover["old_target"]).exists(),
         "old/new parallel target unsupported",
     )
-    support = document(spec["support"])
-    funded = support["funded_union_B"]
-    target = handover["target_max_B"]
-    private = handover["private_pool_B"]
-    require(
-        all(type(n) is int and n > 0 for n in (funded, target, private))
-        and target + private + 67108864 + 8388608 <= funded <= 50000000000,
-        "trusted handover pools inside issued whole support",
-    )
-    require(
-        type(spec["limits"]["owned_B"]) is int
-        and 0 < spec["limits"]["owned_B"] <= target + private + 67108864 + 8388608,
-        "common build/private pool",
-    )
     require(handover["target_writer"] == spec["writer"], "single issued writer/pool")
     private_copy_check(spec)
     adoption = document(spec["source_adoption"])
@@ -2449,45 +2443,129 @@ def build_check(spec):
             )
 
 
-def private_copy_check(spec, src=None):
+def private_copy_check(spec, src=None, *, resources=None):
     handover = document(spec["target_handover"])
     root = owned(handover["fresh_private_root"], spec["owner"])
     require(root == Path(spec["private"]).parent, "fresh private root binding")
-    fresh = handover["fresh_private_forward_max_B"]
-    upper = handover["private_candidate_upper_B"]
-    group = handover["private_pool_B"]
-    preceding = handover["old_private_retained_allocated_B"]
-    require(
-        all(type(n) is int for n in (fresh, upper, group, preceding))
-        and 0 < upper <= fresh <= group
-        and 0 <= preceding <= group,
-        "positive private candidate/fresh/group bounds",
-    )
     if src is None:
         return
     path = owned(src, spec["target"])
     info = path.lstat()
     require(
-        stat.S_ISREG(info.st_mode) and 0 < info.st_size <= upper,
-        "private candidate size/type before copy",
+        stat.S_ISREG(info.st_mode) and info.st_size > 0,
+        "private candidate type before copy",
     )
-    block = os.statvfs(root).f_frsize
-    require(0 < block <= 65536, "private allocation unit")
-    rounded = ((info.st_size + block - 1) // block) * block
-    # Retain allocation already in this domain, plus a bounded custody/directory margin.
-    prospective = allocated(root) + rounded + 65536
-    require(prospective <= fresh, "fresh private room before copy")
-    require(prospective + preceding <= group, "selected private group room before copy")
+    if resources is not None:
+        block = os.statvfs(root).f_frsize
+        rounded = ((info.st_size + block - 1) // block) * block
+        resources.check(
+            extra_B=rounded
+        )  # Source inode already belongs to the whole union.
 
 
-def copy_artifact(src, dst):
-    desc, data = bound(src, 32 * 1024 * 1024)
-    with Path(dst).open("xb") as f:
-        f.write(data)
-        f.flush()
-        os.fsync(f.fileno())
-    Path(dst).chmod(int(desc["mode"], 8))
-    return bound(dst, 32 * 1024 * 1024)[0]
+def artifact_ref(path, *, resources=None):
+    """Stream regular artifact identity, with fixed memory and no executable-size budget."""
+    path = Path(path)
+    require(path.is_absolute() and path.resolve() == path, "absolute artifact path")
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
+    try:
+        info = os.fstat(fd)
+        require(stat.S_ISREG(info.st_mode), "regular artifact required")
+    except BaseException:
+        os.close(fd)
+        raise
+    with os.fdopen(fd, "rb") as file:
+        digest, total = hashlib.sha256(), 0
+        while True:
+            if resources is not None:
+                resources.check()
+            block = file.read(min(65536, info.st_size - total + 1))
+            if not block:
+                break
+            total += len(block)
+            require(total <= info.st_size, "artifact grew during read")
+            digest.update(block)
+        after = os.fstat(file.fileno())
+        named = path.lstat()
+        require(
+            total == info.st_size
+            and all(
+                getattr(info, k) == getattr(after, k)
+                for k in (
+                    "st_dev",
+                    "st_ino",
+                    "st_mode",
+                    "st_size",
+                    "st_mtime_ns",
+                    "st_ctime_ns",
+                )
+            )
+            and (named.st_dev, named.st_ino) == (info.st_dev, info.st_ino),
+            "artifact changed during read",
+        )
+    return {
+        "path": str(path),
+        "sha256": digest.hexdigest(),
+        "bytes": total,
+        "mode": format(stat.S_IMODE(info.st_mode), "04o"),
+    }
+
+
+def copy_artifact(src, dst, *, resources=None):
+    dst = Path(dst)
+    require(dst.is_absolute() and dst.resolve() == dst, "absolute copy destination")
+    expected = artifact_ref(src, resources=resources)
+    fd = os.open(src, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
+    try:
+        info = os.fstat(fd)
+        require(
+            stat.S_ISREG(info.st_mode) and info.st_size == expected["bytes"],
+            "copy source type/length",
+        )
+    except BaseException:
+        os.close(fd)
+        raise
+    with os.fdopen(fd, "rb") as source, Path(dst).open("xb") as destination:
+        digest, total = hashlib.sha256(), 0
+        while True:
+            if resources is not None:
+                resources.check()
+            block = source.read(min(65536, expected["bytes"] - total + 1))
+            if not block:
+                break
+            total += len(block)
+            require(total <= expected["bytes"], "copy source grew")
+            digest.update(block)
+            destination.write(block)
+        named = Path(src).lstat()
+        require(
+            (named.st_dev, named.st_ino) == (info.st_dev, info.st_ino),
+            "copy source path drift",
+        )
+        destination.flush()
+        os.fchmod(destination.fileno(), int(expected["mode"], 8))
+        os.fsync(destination.fileno())
+        require(
+            total == expected["bytes"]
+            and digest.hexdigest() == expected["sha256"]
+            and all(
+                getattr(info, k) == getattr(os.fstat(source.fileno()), k)
+                for k in (
+                    "st_dev",
+                    "st_ino",
+                    "st_mode",
+                    "st_size",
+                    "st_mtime_ns",
+                    "st_ctime_ns",
+                )
+            ),
+            "copy source drift",
+        )
+    actual = artifact_ref(dst, resources=resources)
+    require({**actual, "path": str(src)} == expected, "copied artifact drift")
+    if resources is not None:
+        resources.check()
+    return actual
 
 
 def generation_evidence(experiment, values):
@@ -4745,9 +4823,11 @@ def execute(
                                 "one selected maintained executable artifact",
                             )
                             src = owned(matches[0]["executable"], spec["target"])
-                            private_copy_check(spec, src)
+                            private_copy_check(spec, src, resources=resources)
                             result["cargo_artifact"] = matches[0]
-                            candidate = copy_artifact(src, spec["private"])
+                            candidate = copy_artifact(
+                                src, spec["private"], resources=resources
+                            )
                         result["active_command"] = None
                     require(
                         candidate is not None,
@@ -4831,7 +4911,13 @@ def execute(
                     if run_error is not None:
                         raise run_error
                 for ref in refs:
-                    read_ref(ref, max(CONTROL_BYTES, ref["bytes"]))
+                    if spec["kind"] == "run" and ref == manifest["artifact"]:
+                        require(
+                            artifact_ref(ref["path"], resources=resources) == ref,
+                            "artifact identity drift",
+                        )
+                    else:
+                        read_ref(ref, max(CONTROL_BYTES, ref["bytes"]))
                 if spec["kind"] == "build":
                     source_check(spec["source"])
                 result["status"] = "PENDING_FINALIZATION"
@@ -4880,7 +4966,7 @@ def execute(
         # This candidate is not a completion or run-admissible manifest.
         if claimed:
             try:
-                new_json(directory / "candidate.json", result)
+                new_json(directory / "candidate.json", result, resources=resources)
             except BaseException as error:
                 if primary is not None:
                     primary.add_note("candidate save secondary: " + repr(error))
@@ -5116,7 +5202,7 @@ def abnormal_run_failure(directory, job_ref, *, origin_ref=None):
     }
 
 
-def _prepare_completion(directory, job_ref, *, failure=None):
+def _prepare_completion(directory, job_ref, *, failure=None, resources=None):
     """No child launch. Authoritative publish happens after every independent owed finalizer."""
     directory = Path(directory)
     require(
@@ -5293,7 +5379,10 @@ def _prepare_completion(directory, job_ref, *, failure=None):
     )
     if candidate["kind"] == "build" and candidate.get("artifact") is not None:
         try:
-            read_ref(candidate["artifact"], 32 * 1024 * 1024)
+            require(
+                artifact_ref(candidate["artifact"]["path"]) == candidate["artifact"],
+                "artifact identity drift",
+            )
             source_check(candidate["source"])
             spec = document(candidate["intent"])
             require(
@@ -5319,8 +5408,7 @@ def _prepare_completion(directory, job_ref, *, failure=None):
             )
             emitted = owned(artifacts[0]["executable"], spec["target"])
             require(
-                bound(emitted, 32 * 1024 * 1024)[0]["sha256"]
-                == candidate["artifact"]["sha256"],
+                artifact_ref(emitted)["sha256"] == candidate["artifact"]["sha256"],
                 "Cargo/private artifact drift",
             )
             require(
@@ -5344,7 +5432,7 @@ def _prepare_completion(directory, job_ref, *, failure=None):
             )
     finalize_numerical_claim(candidate)
     try:
-        new_json(directory / "manifest.json", candidate)
+        new_json(directory / "manifest.json", candidate, resources=resources)
         fd = os.open(directory, os.O_DIRECTORY)
         try:
             os.fsync(fd)
@@ -5396,10 +5484,25 @@ def finalize(
             if candidate_path.exists()
             else abnormal_run_failure(directory, job_ref, origin_ref=origin_ref)
         )
-        completion = _prepare_completion(directory, job_ref, failure=failure)
-    # Critical reads, direct waits, data/log writes, lease/handle closes and
-    # independent finalizers precede this last fallible publication operation.
-    (directory / "INCOMPLETE").unlink()
+        completion = _prepare_completion(
+            directory, job_ref, failure=failure, resources=resources
+        )
+        # Critical reads, direct waits, data/log writes, lease/handle closes and
+        # independent finalizers precede this last fallible publication operation.
+        seen = set()
+        roots = charged_roots(spec)
+        usage = {
+            "observed_at": stamp(),
+            "roots": [str(p) for p in roots],
+            "allocated_B": sum(allocated(p, seen=seen) for p in roots),
+            "storage_budget_B": spec["limits"].get("owned_B"),
+            "FS_free_B": shutil.disk_usage(spec["owner"]).free,
+            "global_actual_B": None,
+            "scope": "Current directed retention after manifest publication/cleanup, before final INCOMPLETE removal; not historical peak, forecast support, or a whole-global inventory. Serial TMP is counted only if retained now. This receipt is published after the observation.",
+        }
+        new_json(directory / "storage-usage.json", usage, resources=resources)
+        # All fallible observation/publication/check/sync work precedes this final marker.
+        (directory / "INCOMPLETE").unlink()
     return completion
 
 

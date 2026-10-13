@@ -71,11 +71,13 @@ Linux nativeを主にし、Wasmは必要な製品・数値・取消経路の確�
 
 現行BEST43のA（main-history＋continuation／common goal tier）とB（同じ経路＋376 static integer score）を、一つのauthentic optimized imageで各plain-before／perf-sampled／plain-afterの3 passesに固定する。各passはcold D4 family102、cold D6 family34とwarm D4 family0 chronological0→2→4→6の6 calls、合計36 calls。cold sessions fresh、warm TT/historyは同sequence内だけ保持する。2M D4／8M D6の108M maximum node liability、TT4096/PVS/current math/rules/scores/ties/cancelを維持し、追加root/warmup/refill/tuningを行わない。setup/drop/replay/model/input/outer費も実domainで記録する。
 
-標準perf software cpu-clockを用い、available frequency／unwinder／full output capsをentry前に固定する（199Hz/DWARF8192は候補）。既存optimized artifactのsymbolsを優先し、symbol buildが実際に必要ならsole324がwhole支持とshared-target custodyを先に発行する。比較3 passesは同じsampled imageで行い、別production imageの対応をflags一致だけで推定しない。各role内でdepth/value/action/PV/work/parentを対応させ、A/B間の元work差は保持する。
+現在の設定は標準perf software cpu-clock:u、49Hz、DWARF8192、ring64、二つの12MiB出力とno-buildid-cacheである。これらは設定に保持し共通sourceの実験認定条件にしない。既存optimized artifactのsymbolsを優先し、symbol buildが実際に必要ならsole324のshared-target writer/readers管理で行う。通常incremental buildに事前保存予算を要求しない。比較3 passesは同じsampled imageで行い、別production imageの対応をflags一致だけで推定しない。各role内でdepth/value/action/PV/work/parentを対応させ、A/B間の元work差は保持する。
 
 maps生成/validation、prepare/score/sort、TT/hash/context/history、NNUE feature/delta/head、legalgen/make-unmakeを、sampleで解ける範囲のself/inclusive/callchainとして示す。重複inclusive費は足さず、lost/unresolved/inline/unwind/finite-sample不足を残す。sampling rankは原因・普遍的CPU率・最適化利益ではなく仮説であり、perf overheadはplain speedと分離する。標本不足でも自動追加campaignはしない。
 
-SAME349 ownerの保存cwd/model/effort/fullneverを維持し、Main/Git/docs/allocatorは324のみ。準備1MiBは既存376 source16/whole240内で、旧3GiBは未発行。実whole支持はsource／必要ならcompile/link/symbol/private／reused model-input／perf.data-report-RAW／TMP／failure-cleanup／必要review-Gitを含み、decimal50GB内で影響write前に発行する。旧使用caps/RAW/fees/UNKNOWNをrefundせず、elapsed予測やkilldeadlineを作らない。374の実timingを優先し、actual quiet/readers/custodyで入る。全766games/admin/Policy返信を前提にせず、323 USERPAUSE/seals/models/defaults/N/fits96は不変である。
+SAME349 ownerの保存cwd/model/effort/fullneverを維持し、Main/Git/docs/allocatorは324のみ。旧3GiBと小source/private/target/TMP枠は通常準備のgateにしない。通常source/test/incremental build/reviewは予算なしで進め対象の実使用を事後確認し、具体的に大容量の保存だけ事前budgetを設定する。decimal50GBと実資源/所有を保持し、旧RAW/費用/FAILED/peak/UNKNOWNを書き換えず、elapsed予測やkilldeadlineを作らない。374の実timingを優先し、actual quiet/readers/custodyで入る。全766games/admin/Policy返信を前提にせず、323 USERPAUSE/seals/models/defaults/N/fits96は不変である。
+
+計測は一つの共通入口へ移し、operationと対象の準備/reset/teardown以外のinput/model/settings/count/order/session/perfはconfig/scheduleで指定する。今回の36は承認済み計画の値であり、共通sourceへ36専用branchを作らない。実設定snapshotと結果の一組にactual calls/completions/failures/unknownsとRAW参照を残す。途中終了や計画差だけで認定gate・再実行・refillを加えず、A/B条件差は結果解釈で説明する。共通化・affected検証はSAME349で進行中で、提案又はsourceだけを完了とは扱わない。
 
 376停止inspectionのlocal direction mask案は未実装で、validation causalshareは未測定。この診断後に実sampleとplain費を見て最小same-semantics案を選ぶ。必要なfocused follow-upや重要validity変更は具体scope/whole支持と既存review閾値で扱い、恒久worker/registry/periodic monitor/per-run reviewerを追加しない。
 

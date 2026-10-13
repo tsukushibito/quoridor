@@ -28,6 +28,12 @@ Rustの共通crateから過去frameのコードや管理scriptを呼ばない。
 
 Rustのbuild依存管理はCargo/rustcを正本とする。同じbuildを認定する独立したsource一覧、alias、埋込みsourceコピー、第二の依存graphは維持しない。必要なfile依存記録は所有するBUILDの標準tool出力から得る。既存build記録には実Git revisionと関連する未commit差分、Cargo.lock・features・profile・target・実command、必要なtool版、artifact identityと実check結果を残し、Cargo.tomlだけを完全なfile一覧とみなさない。外部model/dataと実際に読み込むcaller/libraryは、それぞれの所有境界で束縛する。compiler/test/lintの成功は棋力結果ではなく、記録処理の失敗はmodel失敗ではない。変更していない成功checkは元の適用範囲で再用し、必要な変更checkや通常のdebug確認を行政的な再実行禁止と混同しない。
 
+## 共通計測入口と実行記録
+
+人間は、Search/evaluator/sessionと既存caller/job・標準perfを再用する一つの計測入口を選択した。差し替えるのは計測operationと必要な準備/reset/後始末だけで、plugin/registry/frameworkは追加しない。入力・対象・探索設定・件数/順序/seed・cold/warm寿命・warmup・perf設定はconfig/scheduleへ置く。実験番号、固定SHA、20/80/36/6やsampling値を共通sourceの拒否条件にしない。直接比較中の376A/Bはconfigで対象を選び、比較終了後に不要な専用入口/schema/CLI/shim/testを撤去する。現在の349共通化は実装中で、採用・affected検証前に完了とは扱わない。
+
+保存の基本単位は、実際に使った設定snapshotと結果の一組である。code版・共有model/input参照・実設定/環境・実測/件数/完了未完了/errorをmetadataへまとめ、perf RAW等は結果から参照する。別のsource一覧・資格/acceptance/certification/control台帳をrunの必須成果物にしない。job/processの一時cleanup状態は認定書ではない。予定36で実施24なら24と未完了12を記録し、計画差だけで停止・全結果拒否・別認定をしない。比較条件の差は解釈に明記し、不正入力/モデル読込errorや取消/未完了を成功へ変えない。旧科学RAW/FAILED・actual identity/ownership/cleanupを保持する。
+
 ## 品質確認
 
 ```bash
