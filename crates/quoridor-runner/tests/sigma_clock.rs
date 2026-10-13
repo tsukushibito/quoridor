@@ -59,6 +59,7 @@ fn config() -> Config {
     c.max_batch = 1;
     c.simulations = 3;
     c.max_plies = 1;
+    c.cpu_cores.clear();
     for e in &mut c.engines {
         e.kind = "mcts".into();
     }
