@@ -1276,6 +1276,18 @@ This is a stopped source target, not a new empirical PASS. Historical347/374 cal
 
 人間選択のsourceをMainへ採用した。推論時間予測と事前empirical calibrationの現役producer/CLI/module/schema/phase/gatesを撤去し、generic BoundControlは既存research_manifestへ移した。実100ms authority receiptと5ms reserve、failureなしの合法fallback、zero completed simulations/null searched value、error/cancel優先、matching terminal replyとjoin後の実return/drainを保持する。旧64/Q/epoch/RAWは記録として不変で、現役の資格条件にはしない。[限定source review](../.artifacts/three-engine-comparison374-review-v1/no-cost-prediction-v1/report.md)と[テスト期待値R1確認](../.artifacts/three-engine-comparison374-review-v1/no-cost-prediction-v1/related-R1-v1/report.md)を受け入れた。8 native＋2 Pythonのaffected検証と実imageはまだ未完了で、source採用からsoftware/strength PASSを作らない。元entered0/1はFAILED/validatedUNKNOWNのまま再実行せず、766 unentered gamesと診断範囲のみを維持する。
 
+### 人間選択：AI二者のworkerとmain対局管理（374、2026-10-13）
+
+棋力評価は同時対局1、AI A/Bごとに長寿命worker1本、main threadによる対局・時計管理へ移す。各AI workerが自分のmodel/evaluator/session/TT、探索と同期評価を所有し、Sigma CPU ORTはintra/inter threads1・sequential・batch1とする。両AIの同時探索やponder、評価用の共有推論pump・専用推論thread・Sigmaだけのauthority受領threadは採用しない。並列自己対局・CPU/GPU batch生成が実際に使う共有queueは別機能として維持する。
+
+mainは実full history・反復・goal・合法着手、手番開始、実応答receipt/deadline、取消・terminal回収・記録を持つ。モデル推論・長い探索・遅い保存をreceiptのcritical pathへ置かない。実100ms receipt/5ms reserve、完成済み結果の選択、zero-completion合法fallback/null value、original error/cancel、実receipt-return-terminal drainと次手番前の旧work回収を保持する。同期ORTの強制停止は仮定せず、期限前receiptとterminal完了を区別し、遅いreplyやerrorを過去snapshotで救済しない。
+
+利用可能な3物理コアに管理mainと等条件の二者を配置する案を、実affinity/cgroup/SMT/host reserveとwhole費用で確認する。configのworkersを3へ増やして並列対局にする変更ではない。CPU/thread構成は旧timing cohortと異なる条件として記録する。固定Sigma-Web751186と現mainはCPU WASMを明示するが、crossOriginIsolated時の最大8推論threadsとその他1を区別し、公開版の通常対局が常に1threadとは主張しない。今回のCPU・AI各1worker/推論1threadは人間選択の評価条件である。
+
+[旧構成BUILD7の実結果](../.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/no-cost-prediction-v1/software-build-v1/build-v7/qualified-collection-v1/completion-handoff.json)は通常PASSで、未完了だったsynthetic integration1、Clippy、releaseと7versionsを確認した。旧7native/Python2は元scopeで保持し、再実行・新構成への証拠移植をしない。private8d066438は旧構成imageとして保存し、旧構成を完成させるだけの追加build・対局は発行しない。新しい所有/時計境界はSAME374の実装・affected checksと既存related reviewerの一度の限定確認を経てMainへ採用する。現時点では新構成のsource/software/棋力PASSではない。
+
+元0/1局はFAILED/raw2goal/validatedUNKNOWNのまま再実行せず、残り766局と既存78parents/234proposals/18missingだけを継続する。models/weights/features/float、Sigma policy/value/PUCT/K、alpha math/PVS/TT、rules/temperature/100ms/5msは不変。追加64・calibration・推論時間予測を復活させない。既存772MiB/global decimal50GB内で実source/build/private/test/review/RAW/TMP/failureを配分し、実CPU・保存不足だけを具体的に報告する。349継続と374実timing優先、sole Main/Cargo writer、323 USERPAUSE/defaults/N/seals/fits96を保持し、Policy返信・全task完了をgateにしない。
+
 ## 人間選択：Sigma／固定D／単独NNUEの比較（374、2026-10-12）
 
 人間は、三者の棋力と得意・不得意な盤面を同じ枠で比べ、NNUE改善の検証方針に使うことを選択した。対象NNUEは既存BEST43の単独勝敗予測で、Dの出力補正や混合評価ではない。distance head入力・scaleは既存のまま、重み・final tanh・output bypass OFFを固定する。新しいモデルや学習、比率、teacher、defaultの選択は含まない。

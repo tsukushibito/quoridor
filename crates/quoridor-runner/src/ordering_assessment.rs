@@ -84,6 +84,8 @@ struct Request {
 
 const CHEAP_ALGORITHM: &str = "cheap-static376-integer-parent-v1";
 const CHEAP_SUPPORT: &str = "0cb8599c9c1359c6bf2ca38c371805cdf39f4146f51efc9d35045c884c5e61cb";
+const PERF_PROCESS: &str = "quoridor.current-search-perf349.process.v1";
+const PERF_SUPPORT: &str = "22e2138fe41ddbe142aa05f01ea1e30367219b2465195f4db5b4878e7dd1bf6b";
 #[derive(Clone, Copy, Debug, Deserialize, Serialize, PartialEq, Eq)]
 enum CheapRole {
     A,
@@ -172,6 +174,133 @@ fn cheap_schedule() -> Vec<CheapRequest> {
     }
     rows
 }
+fn perf_schedule() -> Vec<CheapRequest> {
+    let mut rows = Vec::with_capacity(36);
+    for process in 0..6 {
+        let role = if process < 3 {
+            CheapRole::A
+        } else {
+            CheapRole::B
+        };
+        let profile = if role == CheapRole::A {
+            Profile::CheapControl
+        } else {
+            Profile::Cheap
+        };
+        for local in 0..6 {
+            let (root, family, warm, ply, depth, session) = match local {
+                0 => (3, 102, false, None, 4, 0),
+                1 => (1, 34, false, None, 6, 1),
+                _ => (local + 2, 0, true, Some(2 * (local - 2)), 4, 2),
+            };
+            rows.push(CheapRequest {
+                id: rows.len(),
+                process_index: process,
+                image_role: role,
+                sweep: 1,
+                local_request_id: local,
+                session,
+                diagnostic: false,
+                profile,
+                depth,
+                original_root_index: root,
+                family,
+                warm,
+                local_ply: ply,
+                node_cap: if depth == 4 { CAPS[0] } else { CAPS[1] },
+            });
+        }
+    }
+    rows
+}
+fn validate_perf(p: &CheapPlan, e: &Experiment, rows: &[CheapRequest]) -> Result<()> {
+    if p.schema != PERF_PROCESS
+        || p.algorithm != CHEAP_ALGORITHM
+        || p.process_index >= 6
+        || p.image_role
+            != if p.process_index < 3 {
+                CheapRole::A
+            } else {
+                CheapRole::B
+            }
+        || p.plan.schema != "quoridor.current-search-perf349.inputs.v1"
+        || e.phase != "compare"
+        || e.planned_slots != 6
+        || e.batch != Some(p.process_index)
+        || e.numerical_qualification.is_none()
+        || e.canonical_plan_sha256 != p.plan.assessment.sha256
+        || rows != perf_schedule()
+        || p.plan.resources.sha256 != PERF_SUPPORT
+        || p.plan.resources.bytes != 7126
+        || p.plan.resources.mode != "0644"
+        || p.plan.book.sha256 != BOOK
+        || p.plan.warm_journal.bytes > JOURNAL_BYTES
+        || e.models.len() != 1
+        || e.dynamic_libraries.len() != 5
+        || e.inputs
+            != [
+                p.plan.book.clone(),
+                p.plan.warm_origin.clone(),
+                p.plan.warm_config.clone(),
+                p.plan.warm_journal.clone(),
+                p.plan.assessment.clone(),
+                p.plan.resources.clone(),
+            ]
+        || e.argv.len() != 6
+        || e.argv[1..]
+            != [
+                "ordering-cheap-assess",
+                "--experiment",
+                "@EXPERIMENT@",
+                "--experiment-sha256",
+                "@EXPERIMENT_SHA256@",
+            ]
+    {
+        return Err("349 exact six-call role/session/input authority required".into());
+    }
+    let m = &e.models[0];
+    if m.descriptor.sha256 != DESCRIPTOR
+        || m.descriptor.bytes != 677
+        || m.descriptor.mode != "0600"
+        || m.weights.sha256 != WEIGHTS
+        || m.weights.bytes != 49284
+        || m.weights.mode != "0644"
+        || m.evaluator_sha256 != EVALUATOR
+    {
+        return Err("349 unchanged actual BEST43 model/units required".into());
+    }
+    let method: Value = p.plan.assessment.read()?;
+    if method["schema"] != "quoridor.current-search-perf349.assessment.v1"
+        || method["algorithm"] != CHEAP_ALGORITHM
+        || method["planned_Search_calls"] != 36
+        || method["D4_calls"] != 30
+        || method["D6_calls"] != 6
+        || method["planned_sessions"] != 18
+        || method["node_liability"] != 108000000u64
+        || method["plain_calls"] != 24
+        || method["sampled_calls"] != 12
+        || method["calls_per_process"] != 6
+        || method["schedule_sha256"] != e.schedule.sha256
+        || method["fixed_order"]
+            != json!([
+                "A/plain-before",
+                "A/perf-sampled",
+                "A/plain-after",
+                "B/plain-before",
+                "B/perf-sampled",
+                "B/plain-after"
+            ])
+        || method["sampling"]
+            != json!({"event":"cpu-clock:u","frequency_Hz":49,"call_graph":"dwarf,8192","ring_pages":64,"data_max_B":12582912,"no_buildid_cache":true})
+    {
+        return Err("349 fixed method/sampling/denominators required".into());
+    }
+    let support: Value = p.plan.resources.read()?;
+    if support["issue"] != "quoridor-4lc.349" || support["whole_B"] != 83886080u64 {
+        return Err("349 issued whole support required".into());
+    }
+    Ok(())
+}
 fn validate_cheap(p: &CheapPlan, e: &Experiment, rows: &[CheapRequest]) -> Result<()> {
     if p.schema != "quoridor.cheap-static376.process.v1"
         || p.algorithm != CHEAP_ALGORITHM
@@ -229,6 +358,17 @@ fn prepare_cheap_inputs(
 ) -> Result<(CheapPlan, Vec<Request>, Vec<Option<RootSpec>>)> {
     let p: CheapPlan = e.config.read()?;
     let all: Vec<CheapRequest> = e.schedule.read()?;
+    if p.schema == PERF_PROCESS {
+        validate_perf(&p, e, &all)?;
+        let book: Value = p.plan.book.read()?;
+        let roots = derive_roots_with_warm(&book, warm_game(&p.plan, &book)?.as_ref(), 4)?;
+        let requests = all
+            .iter()
+            .filter(|r| r.process_index == p.process_index)
+            .map(CheapRequest::local)
+            .collect();
+        return Ok((p, requests, roots));
+    }
     validate_cheap(&p, e, &all)?;
     let method: Value = p.plan.assessment.read()?;
     if method["schema"] != "quoridor.cheap-static376.assessment.v1"
@@ -262,7 +402,11 @@ fn prepare_cheap_inputs(
 pub(crate) fn retained_cheap_inputs(e: &Experiment, original: &Experiment) -> Result<Value> {
     let p: CheapPlan = e.config.read()?;
     let rows: Vec<CheapRequest> = e.schedule.read()?;
-    validate_cheap(&p, e, &rows)?;
+    if p.schema == PERF_PROCESS {
+        validate_perf(&p, e, &rows)?;
+    } else {
+        validate_cheap(&p, e, &rows)?;
+    }
     let old: Plan = original.config.read()?;
     if !qualification_shape(original)
         || [old.book, old.warm_origin, old.warm_config, old.warm_journal]
@@ -1130,7 +1274,7 @@ pub fn qualify(bound: &BoundControl) -> Result<Value> {
 /// Uses the maintained generic Experiment/numerical/lifetime entry, not private TT access.
 fn run_impl(bound: &BoundControl, cheap: bool) -> Result<Value> {
     let whole = Instant::now();
-    let (e, _) = research_manifest::load(bound, "compare")?;
+    let (e, qualification) = research_manifest::load(bound, "compare")?;
     let (cheap_plan, requests, roots) = if cheap {
         let (plan, requests, roots) = prepare_cheap_inputs(&e)?;
         (Some(plan), requests, roots)
@@ -1138,8 +1282,23 @@ fn run_impl(bound: &BoundControl, cheap: bool) -> Result<Value> {
         let (_, requests, roots) = prepare_inputs(&e)?;
         (None, requests, roots)
     };
-    let planned = if cheap { 20 } else { 360 };
-    let node_limit = if cheap { 64_000_000 } else { AGGREGATE };
+    let perf = cheap_plan
+        .as_ref()
+        .is_some_and(|p| p.schema == PERF_PROCESS);
+    let planned = if perf {
+        6
+    } else if cheap {
+        20
+    } else {
+        360
+    };
+    let node_limit = if perf {
+        18_000_000
+    } else if cheap {
+        64_000_000
+    } else {
+        AGGREGATE
+    };
     let output_root = output_correspondence()?;
     let inputs_seconds = whole.elapsed().as_secs_f64();
     let mut header = json!({"schema":"quoridor.continuation360.intent.v1","experiment_sha256":bound.sha256,"config_sha256":e.config.sha256,"schedule_sha256":e.schedule.sha256,"build_manifest":e.build_manifest,"model":e.models[0],"input_refs":e.inputs,"requests":requests,"planned":planned,"plain":240,"diagnostic":120,"no_refill":true,"pre_root_continuation":"absent; actual speculative LIFO only"});
@@ -1165,9 +1324,33 @@ fn run_impl(bound: &BoundControl, cheap: bool) -> Result<Value> {
                 .collect::<Vec<_>>()
         );
     }
+    if perf {
+        let plan = cheap_plan.as_ref().expect("349 selected cheap plan");
+        header["schema"] = json!("quoridor.current-search-perf349.intent.v1");
+        header["plain"] = json!(if plan.process_index % 3 == 1 { 0 } else { 6 });
+        header["diagnostic"] = json!(0);
+        header["perf_sampled"] = json!(plan.process_index % 3 == 1);
+        header["pass_kind"] =
+            json!(["plain-before", "perf-sampled", "plain-after"][plan.process_index % 3]);
+        header["campaign_planned"] = json!(36);
+        header["campaign_sessions"] = json!(18);
+        header["geometric_contexts"] = json!(6);
+        header["independent_sweeps"] = json!(1);
+        header["process_sessions"] = json!(3);
+        header["runtime_launch_origin"] = qualification["runtime_launch_origin"].clone();
+        header["fixed_projection"] = json!(
+            perf_schedule()
+                .into_iter()
+                .filter(|r| r.process_index == plan.process_index)
+                .collect::<Vec<_>>()
+        );
+    }
     let mut output = Output::new(&output_root);
     if cheap {
         output.limit = 3 * 1048576;
+    }
+    if perf {
+        output.limit = 512 * 1024;
     }
     let mut count = Census::default();
     let mut pending = Value::Null;
@@ -1335,6 +1518,12 @@ fn run_impl(bound: &BoundControl, cheap: bool) -> Result<Value> {
                 cost["includes"] = json!(
                     "setup/replay/Search/borrowed-map validation/integer score/sort/history update+aging/stats/primary+cost journal serialization+sync/drop; footer and finalization paid outer whole"
                 );
+                if perf {
+                    cost["sweep"] = json!(1);
+                    cost["diagnostic_field_scope"] = json!(
+                        "none; standard perf samples are separate from native ordering observation"
+                    );
+                }
             }
             start = end;
         }
@@ -1371,6 +1560,26 @@ fn run_impl(bound: &BoundControl, cheap: bool) -> Result<Value> {
             value["diagnostic_scope"] = json!(
                 "sweep1 coldD4 family0 and finalwarm ply6; includes2/20, not primary plain time; no following warm call in that session"
             );
+            if perf {
+                value["schema"] = json!(if value["status"] == "FAILED" {
+                    "quoridor.current-search-perf349.failure.v1"
+                } else {
+                    "quoridor.current-search-perf349.result.v1"
+                });
+                value["campaign_planned"] = json!(36);
+                value["planned_sessions"] = json!(3);
+                value["geometric_contexts"] = json!(6);
+                value["planned_plain"] = json!(if plan.process_index % 3 == 1 { 0 } else { 6 });
+                value["planned_sampled"] = json!(if plan.process_index % 3 == 1 { 6 } else { 0 });
+                value["planned_diagnostic"] = json!(0);
+                value["perf_sampled"] = json!(plan.process_index % 3 == 1);
+                value["pass_kind"] =
+                    json!(["plain-before", "perf-sampled", "plain-after"][plan.process_index % 3]);
+                value["diagnostic_scope"] = json!(
+                    "none; no extra Search or ordering observer; sampling cost separately retained"
+                );
+                value["runtime_launch_origin"] = qualification["runtime_launch_origin"].clone();
+            }
         }
         value
     };
@@ -1386,6 +1595,52 @@ pub fn run(bound: &BoundControl) -> Result<Value> {
 }
 pub fn run_cheap(bound: &BoundControl) -> Result<Value> {
     run_impl(bound, true)
+}
+
+#[cfg(test)]
+mod perf349_projection_tests {
+    use super::*;
+    #[test]
+    fn perf349_exact_projection_and_independent_pass_sessions() {
+        let rows = perf_schedule();
+        assert_eq!(rows.len(), 36);
+        assert_eq!(rows.iter().map(|r| r.node_cap).sum::<u64>(), 108_000_000);
+        assert_eq!(rows.iter().filter(|r| r.depth == 6).count(), 6);
+        for process in 0..6 {
+            let local: Vec<_> = rows.iter().filter(|r| r.process_index == process).collect();
+            assert_eq!(local.len(), 6);
+            assert_eq!(
+                local
+                    .iter()
+                    .map(|r| (r.original_root_index, r.depth, r.session))
+                    .collect::<Vec<_>>(),
+                vec![
+                    (3, 4, 0),
+                    (1, 6, 1),
+                    (4, 4, 2),
+                    (5, 4, 2),
+                    (6, 4, 2),
+                    (7, 4, 2)
+                ]
+            );
+            assert_eq!(
+                local.iter().map(|r| r.local_ply).collect::<Vec<_>>(),
+                vec![None, None, Some(0), Some(2), Some(4), Some(6)]
+            );
+            assert!(local.iter().all(|r| !r.diagnostic
+                && r.image_role
+                    == if process < 3 {
+                        CheapRole::A
+                    } else {
+                        CheapRole::B
+                    }));
+            assert_eq!(
+                local.iter().map(|r| r.local().id).collect::<Vec<_>>(),
+                (0..6).collect::<Vec<_>>()
+            );
+        }
+        assert_eq!(cheap_schedule().len(), 80);
+    }
 }
 
 #[cfg(test)]

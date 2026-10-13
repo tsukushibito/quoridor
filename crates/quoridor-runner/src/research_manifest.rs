@@ -286,7 +286,7 @@ fn approved_launch_plan(
     Ok(expected)
 }
 pub(crate) fn approved_arena_plan(bound: &BoundControl, e: &Experiment) -> Result<FileRef> {
-    launch_plan(bound, e)
+    launch_plan(bound, e).map(|(plan, _)| plan)
 }
 
 #[cfg(feature = "ordering-assessment")]
@@ -386,43 +386,376 @@ fn retained_ordering_source(
     Ok(())
 }
 
-fn launch_plan(bound: &BoundControl, e: &Experiment) -> Result<FileRef> {
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(deny_unknown_fields)]
+struct LaunchIdentity {
+    pid: u32,
+    start_ticks: String,
+    boot_id: String,
+}
+fn launch_identity(pid: u32) -> Result<(LaunchIdentity, u32)> {
+    let raw = fs::read_to_string(format!("/proc/{pid}/stat"))?;
+    let fields: Vec<_> = raw
+        .rsplit_once(')')
+        .ok_or("process stat")?
+        .1
+        .split_whitespace()
+        .collect();
+    let start = fields.get(19).ok_or("process start ticks")?.to_string();
+    start.parse::<u64>()?;
+    let parent = fields.get(1).ok_or("process parent")?.parse()?;
+    Ok((
+        LaunchIdentity {
+            pid,
+            start_ticks: start,
+            boot_id: fs::read_to_string("/proc/sys/kernel/random/boot_id")?
+                .trim()
+                .to_string(),
+        },
+        parent,
+    ))
+}
+fn launch_argv(pid: u32) -> Result<Vec<String>> {
+    fs::read(format!("/proc/{pid}/cmdline"))?
+        .split(|&b| b == 0)
+        .filter(|s| !s.is_empty())
+        .map(|s| String::from_utf8(s.to_vec()).map_err(Into::into))
+        .collect()
+}
+fn check_perf_chain(
+    identities: (&LaunchIdentity, &LaunchIdentity, &LaunchIdentity),
+    parents: (u32, u32),
+    executable: (&Path, &FileRef),
+    arguments: (&[String], &[String]),
+) -> Result<()> {
+    let (expected_guardian, guardian, profiler) = identities;
+    let (profiler_parent, immediate) = parents;
+    let (executable, tool) = executable;
+    let (actual_argv, argv) = arguments;
+    if guardian.pid == immediate
+        || profiler.pid != immediate
+        || expected_guardian != guardian
+        || profiler_parent != guardian.pid
+        || executable != tool.path
+        || actual_argv != argv
+        || guardian.boot_id != profiler.boot_id
+    {
+        return Err("actual guardian/perf/native chain drift".into());
+    }
+    Ok(())
+}
+fn perf_launch_shape(
+    intent: &Value,
+    e: &Experiment,
+    bound: &BoundControl,
+) -> Result<Option<(FileRef, Vec<String>)>> {
+    let native: Vec<String> = e
+        .argv
+        .iter()
+        .map(|a| {
+            a.replace("@EXPERIMENT@", &bound.path.to_string_lossy())
+                .replace("@EXPERIMENT_SHA256@", &bound.sha256)
+        })
+        .collect();
+    let config: Value = e.config.read()?;
+    let selected = e.phase == "compare"
+        && e.argv.get(1).is_some_and(|a| a == "ordering-cheap-assess")
+        && config["schema"] == "quoridor.current-search-perf349.process.v1";
+    let sampled = selected
+        && config["process_index"]
+            .as_u64()
+            .is_some_and(|n| n < 6 && n % 3 == 1);
+    if !sampled {
+        if !intent["perf"].is_null() || intent["argv"] != json!(native) {
+            return Err("direct native launch argv required".into());
+        }
+        return Ok(None);
+    }
+    if intent["perf"]
+        .as_object()
+        .is_none_or(|p| p.len() != 2 || !p.contains_key("tool") || !p.contains_key("output"))
+        || intent["support"] != config["plan"]["resources"]
+        || intent["support"]["sha256"]
+            != "22e2138fe41ddbe142aa05f01ea1e30367219b2465195f4db5b4878e7dd1bf6b"
+        || e.planned_slots != 6
+        || e.batch.map(|n| json!(n)) != Some(config["process_index"].clone())
+    {
+        return Err("349 sampled launch authority required".into());
+    }
+    let tool: FileRef = serde_json::from_value(intent["perf"]["tool"].clone())?;
+    let output =
+        PathBuf::from(intent["output"].as_str().ok_or("owning operation path")?).join("perf.data");
+    let owner = PathBuf::from(intent["owner"].as_str().ok_or("launch owner")?);
+    if tool.path != PathBuf::from("/usr/bin/perf")
+        || tool.bytes > 16 * 1048576
+        || !output.is_absolute()
+        || !output.starts_with(&owner)
+        || intent["perf"]["output"] != json!(output)
+        || output
+            .parent()
+            .ok_or("perf output parent")?
+            .canonicalize()?
+            .join("perf.data")
+            != output
+    {
+        return Err("349 standard perf tool/output required".into());
+    }
+    let mut argv: Vec<String> = [
+        "/usr/bin/perf",
+        "record",
+        "-e",
+        "cpu-clock:u",
+        "-F",
+        "49",
+        "--call-graph",
+        "dwarf,8192",
+        "-m",
+        "64",
+        "--max-size",
+        "12M",
+        "--no-buildid-cache",
+        "-o",
+    ]
+    .map(str::to_string)
+    .into();
+    argv.push(output.to_string_lossy().to_string());
+    argv.push("--".into());
+    argv.extend(native);
+    if intent["argv"] != json!(argv) {
+        return Err("349 exact perf/native argv required".into());
+    }
+    Ok(Some((tool, argv)))
+}
+fn launch_plan(bound: &BoundControl, e: &Experiment) -> Result<(FileRef, Value)> {
     let path = PathBuf::from(std::env::var("QUORIDOR_LIFECYCLE_INTENT_PATH")?);
     let sha256 = std::env::var("QUORIDOR_LIFECYCLE_INTENT")?;
     let parent = std::env::var("QUORIDOR_LIFECYCLE_PARENT_PID")?.parse::<u32>()?;
-    if parent != unsafe { libc::getppid() } as u32 {
-        return Err("immediate lifecycle parent required".into());
+    let intent: Value = BoundControl {
+        path: path.clone(),
+        sha256: sha256.clone(),
     }
-    let args = fs::read(format!("/proc/{parent}/cmdline"))?;
-    let args: Vec<_> = args.split(|&b| b == 0).filter(|s| !s.is_empty()).collect();
+    .read()?;
+    let admission_ref: FileRef = serde_json::from_value(intent["admission"].clone())?;
+    let admission: Value = admission_ref.read()?;
+    let approved = approved_launch_plan(&intent, &admission, bound, e)?;
+    let immediate = unsafe { libc::getppid() } as u32;
+    let origin = if let Some((tool, argv)) = perf_launch_shape(&intent, e, bound)? {
+        let expected: LaunchIdentity =
+            serde_json::from_str(&std::env::var("QUORIDOR_LIFECYCLE_PARENT_IDENTITY")?)?;
+        let (guardian, _) = launch_identity(parent)?;
+        let (profiler, profiler_parent) = launch_identity(immediate)?;
+        check_perf_chain(
+            (&expected, &guardian, &profiler),
+            (profiler_parent, immediate),
+            (&fs::canonicalize(format!("/proc/{immediate}/exe"))?, &tool),
+            (&launch_argv(immediate)?, &argv),
+        )?;
+        tool.verify()?;
+        if launch_identity(immediate)?.0 != profiler || launch_identity(parent)?.0 != guardian {
+            return Err("launch process identity changed during admission".into());
+        }
+        json!({"guardian":guardian,"profiler":profiler,"native":launch_identity(std::process::id())?.0,"perf_tool":tool,"perf_argv":argv})
+    } else {
+        if parent != immediate {
+            return Err("immediate lifecycle parent required".into());
+        }
+        let config: Value = e.config.read()?;
+        if config["schema"] == "quoridor.current-search-perf349.process.v1" {
+            let expected: LaunchIdentity =
+                serde_json::from_str(&std::env::var("QUORIDOR_LIFECYCLE_PARENT_IDENTITY")?)?;
+            let guardian = launch_identity(parent)?.0;
+            if expected != guardian {
+                return Err("349 direct guardian identity drift".into());
+            }
+            json!({"guardian":guardian,"native":launch_identity(std::process::id())?.0})
+        } else {
+            Value::Null
+        }
+    };
+    let args = launch_argv(parent)?;
     let expected = [
-        b"run".as_slice(),
-        b"--intent",
-        path.as_os_str().as_encoded_bytes(),
-        b"--sha256",
-        sha256.as_bytes(),
+        "run".to_string(),
+        "--intent".to_string(),
+        path.to_string_lossy().to_string(),
+        "--sha256".to_string(),
+        sha256,
     ];
     if !args.ends_with(&expected) {
         return Err("parent immutable RUN intent argv required".into());
     }
-    let intent: Value = BoundControl { path, sha256 }.read()?;
-    let admission_ref: FileRef = serde_json::from_value(intent["admission"].clone())?;
-    let admission: Value = admission_ref.read()?;
-    approved_launch_plan(&intent, &admission, bound, e)
+    Ok((approved, origin))
 }
 
 /// Validate all entry identities before resources/output/model factory. No recursive review controls.
 pub fn load(bound: &BoundControl, phase: &str) -> Result<(Experiment, Value)> {
     let e: Experiment = bound.read()?;
-    let approved = launch_plan(bound, &e)?;
-    load_checked(
+    let (approved, origin) = launch_plan(bound, &e)?;
+    let (e, mut q) = load_checked(
         e,
         bound,
         phase,
         &approved,
         &std::env::args().collect::<Vec<_>>(),
         &std::env::current_exe()?.canonicalize()?,
-    )
+    )?;
+    if !origin.is_null() {
+        q["runtime_launch_origin"] = origin;
+    }
+    Ok((e, q))
+}
+#[cfg(test)]
+mod perf349_launch_tests {
+    use super::*;
+    #[test]
+    fn perf349_exact_chain_rejects_pid_boot_start_executable_and_argv_drift() {
+        let guardian = LaunchIdentity {
+            pid: 10,
+            start_ticks: "100".into(),
+            boot_id: "boot".into(),
+        };
+        let profiler = LaunchIdentity {
+            pid: 11,
+            start_ticks: "101".into(),
+            boot_id: "boot".into(),
+        };
+        let tool = FileRef {
+            path: "/usr/bin/perf".into(),
+            sha256: "a".repeat(64),
+            bytes: 1,
+            mode: "0750".into(),
+        };
+        let argv = vec!["/usr/bin/perf".to_string(), "record".into()];
+        let check = |expected: &LaunchIdentity,
+                     actual: &LaunchIdentity,
+                     p: &LaunchIdentity,
+                     parent,
+                     exe: &Path,
+                     args: &[String]| {
+            check_perf_chain(
+                (expected, actual, p),
+                (parent, 11),
+                (exe, &tool),
+                (args, &argv),
+            )
+        };
+        assert!(check(&guardian, &guardian, &profiler, 10, &tool.path, &argv).is_ok());
+        let mut wrong = guardian.clone();
+        wrong.start_ticks = "99".into();
+        assert!(check(&wrong, &guardian, &profiler, 10, &tool.path, &argv).is_err());
+        wrong = guardian.clone();
+        wrong.boot_id = "other".into();
+        assert!(check(&wrong, &guardian, &profiler, 10, &tool.path, &argv).is_err());
+        let mut p = profiler.clone();
+        p.pid = 12;
+        assert!(check(&guardian, &guardian, &p, 10, &tool.path, &argv).is_err());
+        p = profiler.clone();
+        p.boot_id = "other".into();
+        assert!(check(&guardian, &guardian, &p, 10, &tool.path, &argv).is_err());
+        assert!(check(&guardian, &guardian, &profiler, 99, &tool.path, &argv).is_err());
+        assert!(
+            check(
+                &guardian,
+                &guardian,
+                &profiler,
+                10,
+                Path::new("/fake/perf"),
+                &argv
+            )
+            .is_err()
+        );
+        assert!(
+            check(
+                &guardian,
+                &guardian,
+                &profiler,
+                10,
+                &tool.path,
+                &["wrong".into()]
+            )
+            .is_err()
+        );
+    }
+    #[test]
+    fn perf349_only_exact_sampled_wrapper_and_plain_direct_argv_admit() {
+        struct Temp(PathBuf);
+        impl Drop for Temp {
+            fn drop(&mut self) {
+                let _ = fs::remove_dir_all(&self.0);
+            }
+        }
+        let stamp = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap()
+            .as_nanos();
+        let dir =
+            std::env::temp_dir().join(format!("perf349-metadata-{}-{stamp}", std::process::id()));
+        fs::create_dir(&dir).unwrap();
+        let _cleanup = Temp(dir.clone());
+        let config_path = dir.join("config.json");
+        let write_config = |process| {
+            let raw = serde_json::to_vec(&json!({"schema":"quoridor.current-search-perf349.process.v1","process_index":process,"plan":{"resources":{"sha256":"22e2138fe41ddbe142aa05f01ea1e30367219b2465195f4db5b4878e7dd1bf6b"}}})).unwrap();
+            fs::write(&config_path, &raw).unwrap();
+            use std::os::unix::fs::PermissionsExt;
+            fs::set_permissions(&config_path, fs::Permissions::from_mode(0o644)).unwrap();
+            FileRef {
+                path: config_path.clone(),
+                sha256: arena::digest(&raw),
+                bytes: raw.len() as u64,
+                mode: "0644".into(),
+            }
+        };
+        let mut e: Experiment = serde_json::from_value(json!({"schema":"quoridor.research.experiment.v1","phase":"compare","build_manifest":write_config(1),"config":write_config(1),"inputs":[],"models":[],"dynamic_libraries":[],"schedule":write_config(1),"numerical_qualification":null,"canonical_plan_sha256":"a".repeat(64),"rules":"unused","distance_units":"unused","value_perspective":"unused","planned_slots":6,"batch":1,"argv":["/fake/current-image","ordering-cheap-assess","--experiment","@EXPERIMENT@","--experiment-sha256","@EXPERIMENT_SHA256@"]})).unwrap();
+        let bound = BoundControl {
+            path: dir.join("experiment.json"),
+            sha256: "b".repeat(64),
+        };
+        let config: Value = e.config.read().unwrap();
+        let mut intent = json!({"owner":dir,"output":dir,"support":config["plan"]["resources"],"perf":{"tool":{"path":"/usr/bin/perf","sha256":"c".repeat(64),"bytes":1,"mode":"0750"},"output":dir.join("perf.data")}});
+        let native: Vec<String> = e
+            .argv
+            .iter()
+            .map(|a| {
+                a.replace("@EXPERIMENT@", &bound.path.to_string_lossy())
+                    .replace("@EXPERIMENT_SHA256@", &bound.sha256)
+            })
+            .collect();
+        let mut argv: Vec<String> = [
+            "/usr/bin/perf",
+            "record",
+            "-e",
+            "cpu-clock:u",
+            "-F",
+            "49",
+            "--call-graph",
+            "dwarf,8192",
+            "-m",
+            "64",
+            "--max-size",
+            "12M",
+            "--no-buildid-cache",
+            "-o",
+        ]
+        .map(str::to_string)
+        .into();
+        argv.push(dir.join("perf.data").to_string_lossy().into());
+        argv.push("--".into());
+        argv.extend(native.clone());
+        intent["argv"] = json!(argv);
+        assert!(perf_launch_shape(&intent, &e, &bound).unwrap().is_some());
+        for index in [5usize, 7, 11, 16] {
+            let mut wrong = intent.clone();
+            wrong["argv"][index] = json!("wrong");
+            assert!(perf_launch_shape(&wrong, &e, &bound).is_err());
+        }
+        e.config = write_config(0);
+        e.batch = Some(0);
+        assert!(perf_launch_shape(&intent, &e, &bound).is_err());
+        intent["perf"] = Value::Null;
+        intent["argv"] = json!(native);
+        assert!(perf_launch_shape(&intent, &e, &bound).unwrap().is_none());
+        intent["argv"][0] = json!("/fake/other-image");
+        assert!(perf_launch_shape(&intent, &e, &bound).is_err());
+    }
 }
 /// Shared preflight; only load() supplies the production integration-issued expectation.
 fn load_checked(

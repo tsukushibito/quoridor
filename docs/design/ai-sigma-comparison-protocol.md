@@ -8,7 +8,7 @@
 
 2026-10-13の人間選択で、推論時間の予測とその前提の経験的calibrationを現役入口から除去する。追加16 warm＋16 measure＋32 timed提案は撤回された。旧347・374の64 requests、packet、epoch、expiry、raw、FAILED記録は原条件の履歴であり、新しい実行の資格へ読み替えない。新しい予測・heuristic・期限更新・資格例外を追加しない。
 
-Sigmaは実100ms authority receipt deadlineと5ms reserveを使う。reserve到達時に完成simulationがあればその記録済みsnapshotから選び、なければ合法fallbackを送る。fallbackはcompleted simulations=0、検索値・completed snapshot・teacher無しを明示する。authority receiptが期限以上なら拒否し、original error・cancel・違法手を救済しない。pending inferenceのmatching terminal replyとauthority joinを待った実postjoin時刻をreturn/drainへ記録し、次の共有timed slotはその完了後に入る。これは100ms以内の関数return保証ではない。実elapsed/counters/backend/library/model/artifact/config/inputと通常研究admission・numerical correspondenceは保持する。
+Sigmaは実100ms authority receipt deadlineと5ms reserveを使う。reserve到達時に完成simulationがあればその記録済みsnapshotから選び、なければ合法fallbackを送る。fallbackはcompleted simulations=0、検索値・completed snapshot・teacher無しを明示する。authority receiptが期限以上なら拒否し、original error・cancel・違法手を救済しない。mainによる実receiptとworkerのmatching terminal reply・実return/drainを分けて記録し、次の手番は旧workのterminal回収後に入る。これは100ms以内の関数return保証ではない。実elapsed/counters/backend/library/model/artifact/config/inputと通常研究admission・numerical correspondenceは保持する。
 
 詳細の正本は一つのlossless archive、result/manifestはcompact censusとexact referencesとする。missing/torn/不一致appendでは利用できるotherwise-unrecoverable outcomeだけをbounded failure evidenceへ保持し、canonical successを作らない。初期化の元error object、既知の最初の理由、返ったarchive/publication errorsを保持する。変更境界のレビューを受けた[現役Source採用](../../research-data/ai-sigma/three-engine-comparison374/source-adoption-v1.json)はsource-onlyであり、actual Build/private／backend／library／gamesの成功を証明しない。各工程の実STOP・returned/persisted facts・UNKNOWN・費用を分ける。
 
@@ -16,9 +16,19 @@ Sigmaは実100ms authority receipt deadlineと5ms reserveを使う。reserve到�
 
 [目標](ai-sigma-research-goal.md)と[実行枠](ai-sigma-continuation-20261001.md)を継承する。2026-10-02、契約改善指示により機能診断・探索的棋力評価・正式認定を分離した。過去の計画・標本・条件はGit/実行記録で参照し、変更していない。
 
+## 人間選択の実行所有（374、2026-10-13）
+
+到達構成は同時対局1、AI A/B各1本の長寿命workerと管理main threadである。各workerが自分のmodel/evaluator/session/TT・探索・同期推論を所有する。SigmaはCPU ORT intra/inter threads1・sequential・batch1、NNUE/Dも自分のworker内で直接評価する。両AIの同時探索・ponderは行わず、評価の共有推論pump・専用推論thread・Sigma専用authority受領threadを撤去する。並列自己対局や実CPU/GPU batch生成の必要な共有queueはその機能に保持する。
+
+mainはfull history/反復/goal/合法着手、手番開始、実response receipt/deadline、取消、terminal回収と記録を所有し、receiptのcritical pathへ推論・長い探索・遅い保存を置かない。100ms receipt/5ms reserve、完成済み結果の選択、zero-completion合法fallback/null value、original error/cancelと次手番前の旧work回収は共通条件である。同期ORTを強制停止できるとは仮定せず、期限前の応答とterminal完了を別に保存する。遅いreplyを採用せず、errorを過去snapshotで救済しない。
+
+管理mainと等条件のAI二者を利用可能な3物理コアへ配置する第一案は、実physical/affinity/cgroup/SMT/host reserveとwhole支持でallocatorが確認する。コア番号をfixtureへ固定せず、game workersを3にして並列対局へ変えない。実runにはこのCPU/thread条件を記録し、旧結果を同一timing cohortへ混ぜない。source・config・callerの移行とaffected checks、変更した所有/時計境界の一度のrelated reviewは未完了であり、旧構成imageのPASSから新構成の資格を作らない。
+
+元768 slots中、入場済み0/1のFAILED/raw/validatedUNKNOWNを保持して再実行しない。新構成で進めるのは残り766と既存診断だけで、model/math/score/float/rules/temperature/時計、323pause/defaults/N/seals/fits96と772MiB/decimal50GBは保持する。追加64/calibration/推論時間予測は撤回済みである。
+
 ## 参照と共通条件
 
-固定Sigma-Web commit `751186344fc52ad0c29bc65922e62c6fa915f006`、9x9/10壁、NN-MCTS、`best.onnx`、C_PUCT1/FPU.2/temp0、ORT WASM推論1スレッドを参照する。root noise/先読み/analysisなし。参照原版の機能を弱めた別設定へ無断で置き換えない。モデル/依存/sourceの実版はrunから参照する。
+固定Sigma-Web commit `751186344fc52ad0c29bc65922e62c6fa915f006`、9x9/10壁、NN-MCTS、`best.onnx`、C_PUCT1/FPU.2/temp0、CPU WASMを明示したORTを参照する。固定参照と現mainのdocs/mcts_worker.jsはcrossOriginIsolated時に最大8推論threads、その他1を選ぶため、原版の通常対局が常に1threadとは記録しない。今回のCPU・推論1thread評価は人間選択の条件で、公開ブラウザ既定構成の直接再現とは区別する。root noise/先読み/analysisなし。参照原版の機能を弱めた別設定へ無断で置き換えない。モデル/依存/sourceの実版はrunから参照する。
 
 最初のnative/localはRust-native対ローカルSigma-Webであり、Sigma C++ nativeの成績ではない。Rust-Wasm対Sigma-Webは別に測る。
 
