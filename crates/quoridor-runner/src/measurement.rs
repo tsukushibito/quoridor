@@ -521,202 +521,6 @@ pub fn run(bound: &BoundControl) -> Result<Value> {
     Ok(result)
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-    struct Fake {
-        trace: Vec<String>,
-        factor: u64,
-        fail_at: Option<usize>,
-        calls: usize,
-        cancel_after: bool,
-    }
-    impl Target for Fake {
-        fn reset(&mut self, r: &Request) -> Result<Value> {
-            self.trace.push(format!("reset:{}", r.session));
-            Ok(Value::Null)
-        }
-        fn prepare(&mut self, r: &Request) -> Result<Value> {
-            self.trace.push(format!("prepare:{}", r.id));
-            Ok(Value::Null)
-        }
-        fn call(&mut self, r: &Request, cancel: &AtomicBool) -> Result<Value> {
-            self.trace.push(format!("call:{}", r.id));
-            self.calls += 1;
-            if self.fail_at == Some(self.calls) {
-                return Err("injected target failure".into());
-            }
-            if self.cancel_after {
-                cancel.store(true, Ordering::Relaxed);
-            }
-            Ok(json!({"status":"COMPLETE","work":{"nodes":self.factor*r.node_cap}}))
-        }
-        fn finish_call(&mut self) -> Result<()> {
-            self.trace.push("finish_call".into());
-            Ok(())
-        }
-        fn teardown(&mut self) -> Result<Value> {
-            self.trace.push("teardown".into());
-            Ok(Value::Null)
-        }
-    }
-    fn request(id: &str, session: &str) -> Request {
-        Request {
-            id: id.into(),
-            session: session.into(),
-            root: 0,
-            depth: 1,
-            node_cap: 1,
-            time_limit_ms: None,
-            diagnostic: false,
-            warmup: false,
-        }
-    }
-    fn fake(factor: u64) -> Fake {
-        Fake {
-            trace: Vec::new(),
-            factor,
-            fail_at: None,
-            calls: 0,
-            cancel_after: false,
-        }
-    }
-    #[test]
-    fn measurement_variable_counts_orders_targets_and_domains() {
-        for (rows, factor) in [
-            (vec![request("b", "warm"), request("a", "warm")], 2),
-            (
-                vec![
-                    request("x", "cold"),
-                    request("y", "warm"),
-                    request("z", "warm"),
-                ],
-                3,
-            ),
-        ] {
-            let mut target = fake(factor);
-            let cancel = AtomicBool::new(false);
-            let mut published = Vec::new();
-            let result = drive(&rows, rows.len(), &mut target, &cancel, |v| {
-                published.push(v.clone());
-                Ok(())
-            });
-            assert_eq!(result["calls"], rows.len());
-            assert_eq!(result["status"], "COMPLETE");
-            assert_eq!(
-                published
-                    .iter()
-                    .map(|v| v["request"]["id"].as_str().unwrap())
-                    .collect::<Vec<_>>(),
-                rows.iter().map(|r| r.id.as_str()).collect::<Vec<_>>()
-            );
-            assert_eq!(
-                result["measurements"][0]["measurement"]["work"]["nodes"],
-                factor
-            );
-            assert!(
-                result["measurements"][0]["measurement"]["work"]
-                    .get("evaluations")
-                    .is_none()
-            );
-            assert!(
-                result["measurements"][0]
-                    .get("preparation_seconds")
-                    .is_some()
-            );
-            assert!(result["measurements"][0].get("measured_seconds").is_some());
-            assert!(target.trace.first().unwrap().starts_with("reset:"));
-            let domains = result["session_domains"].as_array().unwrap();
-            let labels = |domain| {
-                domains
-                    .iter()
-                    .filter(|row| row["domain"] == domain)
-                    .map(|row| row["session"].as_str().unwrap())
-                    .collect::<Vec<_>>()
-            };
-            assert_eq!(labels("reset"), labels("teardown"));
-            assert_eq!(target.trace.last().unwrap(), "teardown");
-            assert_eq!(
-                target.trace.iter().filter(|s| *s == "finish_call").count(),
-                rows.len()
-            );
-        }
-    }
-    #[test]
-    fn measurement_partial_error_cancel_and_publication_cleanup() {
-        let rows = vec![
-            request("a", "warm"),
-            request("b", "warm"),
-            request("c", "warm"),
-        ];
-        let mut target = fake(1);
-        target.fail_at = Some(2);
-        let result = drive(
-            &rows,
-            rows.len(),
-            &mut target,
-            &AtomicBool::new(false),
-            |_| Ok(()),
-        );
-        assert_eq!(result["calls"], 2);
-        assert_eq!(result["complete"], 1);
-        assert_eq!(result["unperformed"], 1);
-        assert_eq!(result["remaining_requests"][0]["id"], "c");
-        assert_eq!(target.trace.last().unwrap(), "teardown");
-        let mut target = fake(1);
-        target.cancel_after = true;
-        let result = drive(
-            &rows,
-            rows.len(),
-            &mut target,
-            &AtomicBool::new(false),
-            |_| Ok(()),
-        );
-        assert_eq!(result["calls"], 1);
-        assert_eq!(result["unperformed"], 2);
-        assert_eq!(target.trace.last().unwrap(), "teardown");
-        let mut target = fake(1);
-        let result = drive(
-            &rows,
-            rows.len(),
-            &mut target,
-            &AtomicBool::new(false),
-            |_| Err("write failure".into()),
-        );
-        assert_eq!(result["calls"], 1);
-        assert_eq!(result["status"], "PARTIAL");
-        assert_eq!(target.trace.last().unwrap(), "teardown");
-        let mut target = fake(1);
-        let result = drive(&rows, 5, &mut target, &AtomicBool::new(false), |_| Ok(()));
-        assert_eq!(result["calls"], 3);
-        assert_eq!(result["unperformed"], 2);
-        assert_eq!(result["unscheduled"], 2);
-        assert_eq!(result["status"], "PARTIAL");
-        let stamp = std::time::SystemTime::now()
-            .duration_since(std::time::UNIX_EPOCH)
-            .unwrap()
-            .as_nanos();
-        let root = std::env::temp_dir().join(format!(
-            "measurement-publication-{}-{stamp}",
-            std::process::id()
-        ));
-        let mut output = Output::new(&root, 65536, 16384);
-        output
-            .setup(&json!({"settings":"synthetic metadata only"}))
-            .unwrap();
-        output.row(&json!({"status":"COMPLETE"})).unwrap();
-        fs::write(root.join("result.json"), b"prior unfinished write").unwrap();
-        assert!(output.finish(&json!({"calls":1})).is_err());
-        assert!(root.join("INCOMPLETE").exists());
-        assert!(output.journal.is_none());
-        assert_eq!(
-            fs::read(root.join("result.json")).unwrap(),
-            b"prior unfinished write"
-        );
-        fs::remove_dir_all(root).unwrap();
-    }
-}
-
 fn identity(c: &SigmaContext) -> Value {
     json!({"root_key":HistoryKey::from(c.position()).history_string(),"history_counts":c.history_counts().into_iter().map(|(k,n)|(k.history_string(),n)).collect::<Vec<_>>(),"ply":c.total_ply(),"rules":c.ruleset().id(),"synthetic":c.is_synthetic()})
 }
@@ -911,5 +715,201 @@ impl Output {
         self.sync_directory()?;
         fs::remove_file(self.root.join("INCOMPLETE"))?;
         Ok(())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    struct Fake {
+        trace: Vec<String>,
+        factor: u64,
+        fail_at: Option<usize>,
+        calls: usize,
+        cancel_after: bool,
+    }
+    impl Target for Fake {
+        fn reset(&mut self, r: &Request) -> Result<Value> {
+            self.trace.push(format!("reset:{}", r.session));
+            Ok(Value::Null)
+        }
+        fn prepare(&mut self, r: &Request) -> Result<Value> {
+            self.trace.push(format!("prepare:{}", r.id));
+            Ok(Value::Null)
+        }
+        fn call(&mut self, r: &Request, cancel: &AtomicBool) -> Result<Value> {
+            self.trace.push(format!("call:{}", r.id));
+            self.calls += 1;
+            if self.fail_at == Some(self.calls) {
+                return Err("injected target failure".into());
+            }
+            if self.cancel_after {
+                cancel.store(true, Ordering::Relaxed);
+            }
+            Ok(json!({"status":"COMPLETE","work":{"nodes":self.factor*r.node_cap}}))
+        }
+        fn finish_call(&mut self) -> Result<()> {
+            self.trace.push("finish_call".into());
+            Ok(())
+        }
+        fn teardown(&mut self) -> Result<Value> {
+            self.trace.push("teardown".into());
+            Ok(Value::Null)
+        }
+    }
+    fn request(id: &str, session: &str) -> Request {
+        Request {
+            id: id.into(),
+            session: session.into(),
+            root: 0,
+            depth: 1,
+            node_cap: 1,
+            time_limit_ms: None,
+            diagnostic: false,
+            warmup: false,
+        }
+    }
+    fn fake(factor: u64) -> Fake {
+        Fake {
+            trace: Vec::new(),
+            factor,
+            fail_at: None,
+            calls: 0,
+            cancel_after: false,
+        }
+    }
+    #[test]
+    fn measurement_variable_counts_orders_targets_and_domains() {
+        for (rows, factor) in [
+            (vec![request("b", "warm"), request("a", "warm")], 2),
+            (
+                vec![
+                    request("x", "cold"),
+                    request("y", "warm"),
+                    request("z", "warm"),
+                ],
+                3,
+            ),
+        ] {
+            let mut target = fake(factor);
+            let cancel = AtomicBool::new(false);
+            let mut published = Vec::new();
+            let result = drive(&rows, rows.len(), &mut target, &cancel, |v| {
+                published.push(v.clone());
+                Ok(())
+            });
+            assert_eq!(result["calls"], rows.len());
+            assert_eq!(result["status"], "COMPLETE");
+            assert_eq!(
+                published
+                    .iter()
+                    .map(|v| v["request"]["id"].as_str().unwrap())
+                    .collect::<Vec<_>>(),
+                rows.iter().map(|r| r.id.as_str()).collect::<Vec<_>>()
+            );
+            assert_eq!(
+                result["measurements"][0]["measurement"]["work"]["nodes"],
+                factor
+            );
+            assert!(
+                result["measurements"][0]["measurement"]["work"]
+                    .get("evaluations")
+                    .is_none()
+            );
+            assert!(
+                result["measurements"][0]
+                    .get("preparation_seconds")
+                    .is_some()
+            );
+            assert!(result["measurements"][0].get("measured_seconds").is_some());
+            assert!(target.trace.first().unwrap().starts_with("reset:"));
+            let domains = result["session_domains"].as_array().unwrap();
+            let labels = |domain| {
+                domains
+                    .iter()
+                    .filter(|row| row["domain"] == domain)
+                    .map(|row| row["session"].as_str().unwrap())
+                    .collect::<Vec<_>>()
+            };
+            assert_eq!(labels("reset"), labels("teardown"));
+            assert_eq!(target.trace.last().unwrap(), "teardown");
+            assert_eq!(
+                target.trace.iter().filter(|s| *s == "finish_call").count(),
+                rows.len()
+            );
+        }
+    }
+    #[test]
+    fn measurement_partial_error_cancel_and_publication_cleanup() {
+        let rows = vec![
+            request("a", "warm"),
+            request("b", "warm"),
+            request("c", "warm"),
+        ];
+        let mut target = fake(1);
+        target.fail_at = Some(2);
+        let result = drive(
+            &rows,
+            rows.len(),
+            &mut target,
+            &AtomicBool::new(false),
+            |_| Ok(()),
+        );
+        assert_eq!(result["calls"], 2);
+        assert_eq!(result["complete"], 1);
+        assert_eq!(result["unperformed"], 1);
+        assert_eq!(result["remaining_requests"][0]["id"], "c");
+        assert_eq!(target.trace.last().unwrap(), "teardown");
+        let mut target = fake(1);
+        target.cancel_after = true;
+        let result = drive(
+            &rows,
+            rows.len(),
+            &mut target,
+            &AtomicBool::new(false),
+            |_| Ok(()),
+        );
+        assert_eq!(result["calls"], 1);
+        assert_eq!(result["unperformed"], 2);
+        assert_eq!(target.trace.last().unwrap(), "teardown");
+        let mut target = fake(1);
+        let result = drive(
+            &rows,
+            rows.len(),
+            &mut target,
+            &AtomicBool::new(false),
+            |_| Err("write failure".into()),
+        );
+        assert_eq!(result["calls"], 1);
+        assert_eq!(result["status"], "PARTIAL");
+        assert_eq!(target.trace.last().unwrap(), "teardown");
+        let mut target = fake(1);
+        let result = drive(&rows, 5, &mut target, &AtomicBool::new(false), |_| Ok(()));
+        assert_eq!(result["calls"], 3);
+        assert_eq!(result["unperformed"], 2);
+        assert_eq!(result["unscheduled"], 2);
+        assert_eq!(result["status"], "PARTIAL");
+        let stamp = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap()
+            .as_nanos();
+        let root = std::env::temp_dir().join(format!(
+            "measurement-publication-{}-{stamp}",
+            std::process::id()
+        ));
+        let mut output = Output::new(&root, 65536, 16384);
+        output
+            .setup(&json!({"settings":"synthetic metadata only"}))
+            .unwrap();
+        output.row(&json!({"status":"COMPLETE"})).unwrap();
+        fs::write(root.join("result.json"), b"prior unfinished write").unwrap();
+        assert!(output.finish(&json!({"calls":1})).is_err());
+        assert!(root.join("INCOMPLETE").exists());
+        assert!(output.journal.is_none());
+        assert_eq!(
+            fs::read(root.join("result.json")).unwrap(),
+            b"prior unfinished write"
+        );
+        fs::remove_dir_all(root).unwrap();
     }
 }
