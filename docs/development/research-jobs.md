@@ -122,6 +122,8 @@ bash scripts/dev/project-env.sh python -B scripts/dev/research-progress-health.p
 
 2026-10-13の通常復旧では、既存AUTONOMOUS選択（2026-10-09T23:18:48.233258+09:00）を保持したまま、healthはactiveなdashboard issueだけを読み、参照された完了依存だけをhydrateする。完了履歴の増加を監視停止理由にせず、live rowsが実boundを超えれば黙ってtruncateせずUNKNOWNにする。独立ロードのCollectionErrorを現役境界でHealthErrorへまとめ、timerを落とさない。起動時はowned childを既存gate内で待ち、pre-exec argvが実timer argvへ変わってからgateを解放する。通知先は現在のPolicyで、container-local timerは停止/再作成を跨ぐ永続実行を保証しない。
 
+完了workerは実process・reader・TMP停止後、Beadsへ結果を残し、維持されている `research-session.sh send` で現integrationを一度だけ起こす。Beadsコメントはevent配送の代用ではなく、返信ACKや周期wakeを追加しない。`runtime_dirs` は実jobのissue/ownerへ記録し、coordinatorへ別ownerのruntimeを登録しない。完了待ちでも終了済みjobを読み、通常のidle継続は既存status/next_action/pause/dependencyから判定する。別のhealth許可フラグは不要。関連する読取不能はUNKNOWNを保ったまま同じ30分継続・重複抑制・Policy idle通知で可視化し、科学成功や実行許可へ変換しない。
+
 `stop` は正確に所有するtimerだけを止め、modeを変えない。停止の人間指示には `disable` を使う。再開は人間が明示選択したmodeと `start` の両方が必要で、コンテナ再起動後も自律確認へ自動復帰しない。`status` はlocal controlsだけを読み、STOPPEDでも保留件数を確認できる。`check --dry-run` はcursor・Beads・LLMを変更しない。UNKNOWNは未取得の事実として残し、稼働保証や研究結果成功と扱わない。timerのPID/start/boot/argv照合とpidfdを用いた停止は、このtimer自身にだけ適用する。
 
 ## Preparation time and launched experimental budgets

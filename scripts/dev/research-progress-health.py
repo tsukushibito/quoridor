@@ -429,12 +429,34 @@ def candidates(snapshot, rows, dashboard):
             jobs = issue["jobs"]
             if any(job["status"] == "running" for job in jobs):
                 continue
-            if any(job["status"] in ("unavailable", "unconfirmed", "preparing") for job in jobs):
-                unknown.append(ident)
-                continue
             if llm not in ("idle", "notLoaded"):
                 continue
             version = issue_version(row)
+            ordinary_wait = wait_kind in (None, "", "none", "job_completion", "task_progress")
+            idle_continuation = (
+                ordinary_wait
+                and issue["status"] == "in_progress"
+                and isinstance(info.get("next_action"), str)
+                and bool(info["next_action"].strip())
+                and all(
+                    d["status"] == "closed"
+                    for d in issue["dependencies"]
+                    if d["type"] != "parent-child"
+                )
+            )
+            if any(job["status"] in ("unavailable", "unconfirmed", "preparing") for job in jobs):
+                unknown.append(ident)
+                if idle_continuation:
+                    found.append(
+                        candidate(
+                            "operational_unknown_idle",
+                            ident,
+                            version,
+                            "Runtime files could not be verified",
+                            reference=f"Beads:{ident}",
+                        )
+                    )
+                continue
             health = info.get("health", {})
             if not isinstance(health, dict):
                 unknown.append(ident)
@@ -487,7 +509,7 @@ def candidates(snapshot, rows, dashboard):
                 else:
                     unknown.append(ident)
                 continue
-            if wait_kind not in (None, "", "none"):
+            if not ordinary_wait:
                 continue
             for job in jobs:
                 if job["status"] not in (
@@ -530,7 +552,11 @@ def candidates(snapshot, rows, dashboard):
                         continue
                     finished = parse_time(result.get("finished_at"))
                     updated = parse_time(version)
-                    if finished is None or updated is None or updated >= finished:
+                    if (
+                        finished is None
+                        or updated is None
+                        or (updated >= finished and wait_kind != "job_completion")
+                    ):
                         continue
                     kind = (
                         "finished_unconsumed_idle"
@@ -557,7 +583,6 @@ def candidates(snapshot, rows, dashboard):
                     and isinstance(info.get("next_action"), str)
                     and info["stage"]
                     and info["next_action"]
-                    and health.get("authorized_active") is True
                 ):
                     found.append(
                         candidate(
@@ -570,6 +595,20 @@ def candidates(snapshot, rows, dashboard):
                     )
                 else:
                     unknown.append(ident)
+            if (
+                ident in unknown
+                and idle_continuation
+                and not any(c["issue"] == ident for c in found)
+            ):
+                found.append(
+                    candidate(
+                        "operational_unknown_idle",
+                        ident,
+                        version,
+                        "Completion metadata could not be verified",
+                        reference=f"Beads:{ident}",
+                    )
+                )
     return sorted(found, key=lambda c: (c["issue"], c["kind"])), sorted(set(unknown))
 
 

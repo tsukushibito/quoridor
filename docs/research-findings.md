@@ -1361,3 +1361,5 @@ SAME349の停止sourceを、設定からoperation/profile・件数/順序/sessio
 ### 352進捗monitorの通常復旧（2026-10-13）
 
 人間選択済みAUTONOMOUSと現在Policy宛先を保持し、完了履歴が128件収集上限を超えた拒否・独立ロードした例外classの取り逃し・Popen直後のpre-exec argv raceを修正した。healthの現役issue読取と完了依存の限定hydrate、運用UNKNOWNによる継続、既存startup gate/owned pidfd/singleton/cleanupだけを扱う。新3定義の収集/例外2件はPASSし、startup定義は新test自身の二重child回収だけを直してその1件がPASSした。旧suite・科学job・mode再選択・schedulerや役割追加は行わない。実監視のownership・新real check・next dueは現役記録で確認してから復旧完了と扱う。container-localで再起動永続性は保証しない。
+
+同日の継続検出修復では、374完了がBeadsコメントだけに留まり324を起こさなかった事実を区別し、実reader/TMP STOP後の一度だけのsession配送へ修正した。batch003の実配送が現324へ到達した。monitorは別ownerのruntimeを324へ登録していた参照を実ownerへ整理し、job_completionを読み飛ばす分岐と通常next_actionへの追加healthフラグ要求を撤去した。関連UNKNOWNは科学成功へ補わず、既存30分継続・重複抑制・Policy idle通知へ載せる。対象6件がPASS。人間のAUTONOMOUS選択と通知先を保持して同一timerを再開し、10:38:20Zの実有界checkは候補2/UNKNOWN0、次回10:53:25Z・900秒間隔を確認した。これは運用検出の確認であり研究完了やコンテナ再起動永続性の保証ではない。検証は `.artifacts/research-team/integration324/progress-monitor-handoff-repair-v1/result.json`、現timer記録は `.artifacts/research-progress-health-v1/`。

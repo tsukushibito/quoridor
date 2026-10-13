@@ -74,8 +74,8 @@ class ClassificationTests(unittest.TestCase):
                 self.assertEqual(self.classify(*fixture(**kwargs))[0], [])
 
     def test_idle_llm_alone_not_source_or_science_stall(self):
-        self.assertEqual(self.classify(*fixture())[0], [])
-        snapshot, rows = fixture(metadata={"health": {"authorized_active": True}})
+        self.assertEqual(self.classify(*fixture(metadata={"next_action": ""}))[0], [])
+        snapshot, rows = fixture()
         found, _ = self.classify(snapshot, rows)
         self.assertEqual([item["kind"] for item in found], ["authorized_idle_no_job"])
         self.assertFalse(found[0]["immediate"])
@@ -382,7 +382,8 @@ class ClassificationTests(unittest.TestCase):
         rows[parent]["dependencies"] = []
         snapshot["groups"][0]["issues"][0]["jobs"] = [{"status": "unavailable"}]
         found, unknown = self.classify(snapshot, rows)
-        self.assertEqual(found, [])
+        self.assertEqual([x["kind"] for x in found], ["operational_unknown_idle"])
+        self.assertFalse(found[0]["immediate"])
         self.assertEqual(unknown, ["quoridor-4lc.400"])
 
     def test_exact_finished_runtime_and_notification_with_no_owner_update(self):
@@ -414,7 +415,9 @@ class ClassificationTests(unittest.TestCase):
             found, _ = self.classify(snapshot, rows)
             self.assertEqual([x["kind"] for x in found], ["failed_unhandled_idle"])
             (root / "notification.json").write_text(json.dumps({"status": "uncertain"}))
-            self.assertEqual(self.classify(snapshot, rows)[0], [])
+            self.assertEqual(
+                [x["kind"] for x in self.classify(snapshot, rows)[0]], ["operational_unknown_idle"]
+            )
             (root / "notification.json").write_text(json.dumps({"status": "delivered"}))
             result.update(
                 outcome="cleanup_required",
@@ -428,6 +431,77 @@ class ClassificationTests(unittest.TestCase):
                 [x["kind"] for x in self.classify(snapshot, rows)[0]],
                 ["failed_unhandled_idle"],
             )
+
+    def test_finished_job_completion_survives_later_beads_comment(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            ident = "quoridor-4lc.400"
+            thread = OWNER.removeprefix("codex:")
+            config = {"issue": ident, "thread_id": thread}
+            state = {**config, "job_id": "job1", "phase": "finished"}
+            result = {
+                "job_id": "job1",
+                "outcome": "succeeded",
+                "cleanup_complete": True,
+                "remaining": [],
+                "finished_at": NOW.isoformat(),
+            }
+            for name, value in (
+                ("config", config),
+                ("state", state),
+                ("result", result),
+                ("notification", {"status": "delivered"}),
+            ):
+                (root / f"{name}.json").write_text(json.dumps(value))
+            snapshot, rows = fixture(
+                wait="job_completion", jobs=[{"status": "command finished", "root": str(root)}]
+            )
+            rows[ident]["updated_at"] = (NOW + timedelta(minutes=1)).isoformat()
+            self.assertEqual(
+                [x["kind"] for x in self.classify(snapshot, rows)[0]], ["finished_unconsumed_idle"]
+            )
+            snapshot["groups"][0]["llm"] = "active"
+            self.assertEqual(self.classify(snapshot, rows)[0], [])
+            dashboard.runtime_files(str(root), ident)
+            with self.assertRaises(dashboard.CollectionError):
+                dashboard.runtime_files(str(root), "quoridor-4lc.324")
+
+    def test_unknown_idle_repeats_before_notification_and_stays_unknown(self):
+        snapshot, rows = fixture(wait="job_completion", jobs=[{"status": "unavailable"}])
+        found, unknown = self.classify(snapshot, rows)
+        self.assertEqual(unknown, ["quoridor-4lc.400"])
+        cursor, eligible = health.advance(
+            health.empty_cursor(), found, NOW, unavailable_issues=set(unknown)
+        )
+        self.assertEqual(eligible, [])
+        cursor, eligible = health.advance(
+            cursor, found, NOW + timedelta(minutes=15), unavailable_issues=set(unknown)
+        )
+        self.assertEqual(eligible, [])
+        cursor, eligible = health.advance(
+            cursor, found, NOW + timedelta(minutes=30), unavailable_issues=set(unknown)
+        )
+        self.assertEqual([x["kind"] for x in eligible], ["operational_unknown_idle"])
+        cursor["delivered"][found[0]["fingerprint"]] = NOW.isoformat()
+        self.assertEqual(health.advance(cursor, found, NOW + timedelta(minutes=45))[1], [])
+        for kwargs in (
+            {"llm": "active"},
+            {"wait": "human_decision"},
+            {"labels": ["dashboard", "paused-by-user"]},
+        ):
+            self.assertEqual(
+                self.classify(*fixture(jobs=[{"status": "unavailable"}], **kwargs))[0], []
+            )
+
+    def test_task_progress_uses_existing_next_action_without_health_flag(self):
+        snapshot, rows = fixture(wait="task_progress")
+        self.assertEqual(
+            [x["kind"] for x in self.classify(snapshot, rows)[0]], ["authorized_idle_no_job"]
+        )
+        snapshot["groups"][0]["issues"][0]["dependencies"] = [
+            {"type": "blocks", "status": "in_progress"}
+        ]
+        self.assertEqual(self.classify(snapshot, rows)[0], [])
 
 
 class CursorTests(unittest.TestCase):
