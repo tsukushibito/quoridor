@@ -1276,6 +1276,14 @@ This is a stopped source target, not a new empirical PASS. Historical347/374 cal
 
 人間選択のsourceをMainへ採用した。推論時間予測と事前empirical calibrationの現役producer/CLI/module/schema/phase/gatesを撤去し、generic BoundControlは既存research_manifestへ移した。実100ms authority receiptと5ms reserve、failureなしの合法fallback、zero completed simulations/null searched value、error/cancel優先、matching terminal replyとjoin後の実return/drainを保持する。旧64/Q/epoch/RAWは記録として不変で、現役の資格条件にはしない。[限定source review](../.artifacts/three-engine-comparison374-review-v1/no-cost-prediction-v1/report.md)と[テスト期待値R1確認](../.artifacts/three-engine-comparison374-review-v1/no-cost-prediction-v1/related-R1-v1/report.md)を受け入れた。8 native＋2 Pythonのaffected検証と実imageはまだ未完了で、source採用からsoftware/strength PASSを作らない。元entered0/1はFAILED/validatedUNKNOWNのまま再実行せず、766 unentered gamesと診断範囲のみを維持する。
 
+### 人間選択：通常作業の保存予算を事後確認へ（2026-10-13）
+
+人間は、通常のsource/docs修正・限定test・既存環境のincremental build・実行ファイルcopy・関連reviewを保存予算なしで進め、完了後に対象の実使用を一度確認する運用を明示した。source/control/private/target/TMP/wholeの事前枠・preprice・カテゴリ振替・historical予約一致は通常入口の条件にしない。具体的な大量データ/model/依存/checkpoint/RAW/cache工程だけ事前保存予算を設定し、実budgetがある仕事の容量制御は残す。異常な実増加・copy・巨大な残存TMP/log・実空き不足・50GB到達のみ限定対応する。任意の小byte閾値、巨大dummy予算、skip/救済flag、全域audit、新certificate/監視を追加しない。
+
+50GB decimalは不変である。2026-10-11のwhole観測24,161,214,464Bとforecasts/global held49,996,492,800Bを区別し、古い観測から現在の空きを断言しない。必要なmodel/input/科学RAW/失敗/未保存内容/復元元/Beadsと実readerを保護し、未使用で復元可能なELF/cache/copyは限定整理できる。historicalFAILED/費用/cap/peakを保持することは、旧予約や不要複製を現在retentionへ永久加算する意味ではない。
+
+既存349担当がlifecycle/CycleResources/実consumer/fixtureの予算未設定・実budget付き制御・artifact所有/失敗/cleanupを整合させ、SAME324が正本とMainへ反映する。配送受付と文書だけを撤去完了と扱わず、affected実検証後に完了を記録する。374二AI/mainと349既承認準備はstorage枠発行を待たず継続する。CPU/RAM/VRAM・科学許可/封印/時計/取消/cleanup、323 USERPAUSE/models/defaults/N/seals/fits96は不変で、追加校正64・新対局/学習/sweepの許可ではない。
+
 ### 人間選択：AI二者のworkerとmain対局管理（374、2026-10-13）
 
 棋力評価は同時対局1、AI A/Bごとに長寿命worker1本、main threadによる対局・時計管理へ移す。各AI workerが自分のmodel/evaluator/session/TT、探索と同期評価を所有し、Sigma CPU ORTはintra/inter threads1・sequential・batch1とする。両AIの同時探索やponder、評価用の共有推論pump・専用推論thread・Sigmaだけのauthority受領threadは採用しない。並列自己対局・CPU/GPU batch生成が実際に使う共有queueは別機能として維持する。

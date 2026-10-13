@@ -11,6 +11,8 @@
 5. 保存済み結果を含む完了イベントを、元の担当の保存セッションへ一度だけ送る。Idleなら`turn/start`、notLoadedなら設定を変更せず`thread/resume`して開始する。Activeなら通知を待機し、完了通知のために別作業へsteerしない。
 6. 担当者は結果の回収・資格確認・次判断を続ける。exit0を科学的成功とみなさず、Beads close/実行・統合担当への引渡し/backupは引き続き担当者が行う。
 
+通常のsource/docs・限定software test・incremental build・artifact copy・reviewは事前保存枠なしで進め、実施後に対象の実保持/build/cache/log/TMP使用を一度確認する。storage未設定は正常なjob設定であり、巨大dummy予算・旧カテゴリsubcap・historical予約一致で迂回しない。大量生成/取得/checkpoint/RAWや実際に大きなcache増加を見込む工程だけ実保存予算を宣言し、その契約の容量制御を維持する。global50GB・CPU/RAM/VRAM・科学許可/封印/取消・sole writer/reader・時計公平性・正確cleanupは不変。bounded log/captureは必要な出力・メモリ制御として保持し、予算の有無を科学的件数や再試行許可に読み替えない。
+
 ## 現行研究ビルドと実験の受入れ
 
 現行の研究BUILD/RUNは[単一ビルド・実験・終了処理](research-lifecycle.md)を使う。既存のjob controllerとcycle_processが子を所有し、終了後のcollectorが一つのmanifestを確定する。旧software-v4〜v19のclassifierやsalvage結合は履歴として保持し、現行入口から実行しない。

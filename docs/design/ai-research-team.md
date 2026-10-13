@@ -17,7 +17,7 @@
 
 速度比較・perf・時間制御対局・明示的なtiming診断は共有hardware上で直列にし、計測中は substantial build、学習/GPU、CPU解析、ブラウザ検証、大きなdisk IOを止める。CPU affinityの分離だけではcache・memory bandwidth・power/thermal・diskの干渉を防げない。軽いsource/metadata準備は継続でき、計測外の通常build/test/reviewは実資源と独立writer/immutable入力が成立すれば並行できる。sole共有Cargo writerとsole main/Git writerは維持する。
 
-支持は承認済み各工程のsource、build/link、private、raw、関連review、Git、失敗とcleanupを含むwhole phaseへ一括配分する。個々の小ファイル増分に再承認を要求しない。旧job/proof/cap/failure費は変更せず、未来entryで新proofと実source/private/physics/quietを束縛する。323 USERPAUSE、封印、固定モデル/default、研究方法の判断境界は変えない。
+2026-10-13の明示指示により、通常のsource/docs修正・限定test・既存環境のincremental build・実行ファイルcopy・関連reviewは保存予算なしで進める。事前のsource/control/private/target/TMP/whole枠、preprice、カテゴリ振替やforecast/custodyのサイズ一致を開始・継続条件にしない。完了後に対象変更先・成果物/build/cache/log/TMPの実使用を一度確認し、異常な増加・繰り返すcopy・巨大な残存TMP/log・実空き不足・50GB到達などがある場合だけ限定対応する。大量データ生成・bulk model/依存取得・大規模checkpoint/RAWや実際に大きな新cache増加が見込まれる工程だけ事前保存予算を設定し、その工程全体を覆う。BUILDという名前だけで大容量と扱わず、予算未設定を正常とする。CPU/RAM/VRAM・実source/artifact/reader/physics/quiet・科学許可・取消/cleanupは維持する。旧job/cap/peak/FAILED/RAW/費用は履歴のまま保ち、現在retentionや永久重複予約へ読み替えない。巨大dummy予算・skip/救済flag・新certificate・全域auditを通常入口に足さず、323 USERPAUSE・封印・model/default・研究判断境界は変えない。
 
 不要な再構築可能cache・旧未使用ELF・obsolete worktree・重複working copyは、復元確認・unique未保存内容・実reader STOPを確認して指定範囲だけ除去できる。固有の科学データ・必要model/input・圧縮した原因/来歴/失敗証拠・Git/archive復元元・Beads/locksを保護する。過去peak/予約は記録として保持するが、現在retentionと終了した一時寿命が証明された後も重複して永久加算しない。同inodeは一度、実証済み直列TMPは最大寿命で数える。UNKNOWNを根拠なしにzeroへ変えず、全体auditを次工程のgateにしない。
 
@@ -53,7 +53,7 @@
 
 ## タスクの依頼と並行作業
 
-依頼にはBeads issue、目的と対象外、書込範囲・一人のowner・作業場所、実資源予算、停止条件、受入条件と必要な検証を含める。既存設計と実行規約を参照し、必要な差分だけ渡す。共通の保守・Beads・整形規則はAGENTSと既存手順に置き、担当ごとの常設role定義は作らない。
+依頼にはBeads issue、目的と対象外、書込範囲・一人のowner・作業場所、実CPU/RAM/VRAM制御、大容量工程だけの保存予算、停止条件、受入条件と必要な検証を含める。既存設計と実行規約を参照し、必要な差分だけ渡す。共通の保守・Beads・整形規則はAGENTSと既存手順に置き、担当ごとの常設role定義は作らない。
 
 依存しない実装・解析は並行できる。並行writerはfile/worktree単位で分け、Git index/commitは一人の統合担当だけが操作する。CPU/GPU・RAM・保存・測定競合は実プロセスとタスク予算で判断し、LLMセッションのactive人数を計算資源の使用量に置き換えない。再帰的な委譲をタスク指示だけで許可されたとみなさない。
 
@@ -67,9 +67,9 @@ mainは持続的研究の統合正本。並行変更・具体的な比較にはm
 
 2026-10-08の人間の明示指示で、短期補助を同時に最大2件とする従前の制限を撤廃した。[現行の前向き運用overlay](../../research-data/ai-sigma/execution-auxiliary-policy-20261008.json)が、SHA固定した資源証明の旧人数fieldだけを上書きする。容量配分と過去jobの証拠は変更しない。別の固定人数上限は設けない。独立して必要な受入れ・source・依存確認がある場合に、実資源、immutable入力とread/write所有権、期待する調整費から並行数を決める。適した空き保存セッションを再用し、必要なら具体的な有界タスクの新規セッションを作れる。常設役割、定期監視、重複する科学レビュー、不要な全履歴監査は増やさない。
 
-各補助はBeads leaf、限定path・問い・出力・writer、支持されたwhole資源予測・STOP・検証を持つ。main/Git/index・最終採用・資源承認は実行・統合担当に留め、通常検証の実行はタスクに明示して配分する。実計測中のsubstantial compute/IOは停止を待ち、supplied成功証拠を担当を埋めるために再実行しない。作成・再開時にdanger-full-access/approvalPolicy neverを明示し、適用されたmodel/effort/cwdと実turn_contextを通常command前に確認する。過去の最大2件計画と使用済み契約は履歴として保持するが、現行の依頼には人数gateとして適用しない。50GB、sole共有Cargo writer、fairclock、研究方法の承認境界、323 USERPAUSE・封印・model/defaultは変えない。
+各補助はBeads leaf、限定path・問い・出力・writer、実CPU/RAM/VRAM制御・STOP・検証を持ち、保存予算は具体的に大容量の工程だけに設定する。main/Git/index・最終採用・資源承認は実行・統合担当に留め、通常検証の実行はタスクに明示して配分する。実計測中のsubstantial compute/IOは停止を待ち、supplied成功証拠を担当を埋めるために再実行しない。作成・再開時にdanger-full-access/approvalPolicy neverを明示し、適用されたmodel/effort/cwdと実turn_contextを通常command前に確認する。過去の最大2件計画と使用済み契約は履歴として保持するが、現行の依頼には人数gateとして適用しない。50GB、sole共有Cargo writer、fairclock、研究方法の承認境界、323 USERPAUSE・封印・model/defaultは変えない。
 
-各phaseのsource/control/runtime/log・必要な関連review・統合分とbounded overheadを一つのinclusive予測へまとめ、支持された上限内の個々のファイルを受領返信待ちにしない。未配分枠は実行・統合担当が根拠つきで配分し、actual資産・旧失敗費・buildUNKNOWNを返金しない。修復担当は指定された問い・予算内で同レビュアーへ固定版と検証を直接渡し、blocker解消・実readerSTOPを受けて次の条件付き工程へ進む。source/private版・resource proof変更は明示し、機械検査で全条件を満たしても追加の324/human ACKを要求しない。実行・統合担当は最終bundleと新たな不足・矛盾を受け取り、同じSHA全検査や独立レビューを重ねず、変更境界と重大未解決指摘を確認する。Cargo writerと公平な数値時計の直列化、未配分工程・pause・封印境界は維持する。
+通常作業のsource/control/runtime/log・関連review・統合に保存枠の発行や返信を要求しない。実使用を事後に一度確認し、正常ならそのまま進める。具体的な大容量工程だけ、必要なbuild/private/raw/TMP/failure overlapを実行・統合担当が一括で配分する。歴史上のcap/peak/費用/UNKNOWNと現在の実保持を区別し、確認済みの終了予約や共有inodeを重複加算しない。修復担当は指定された問い・予算内で同レビュアーへ固定版と検証を直接渡し、blocker解消・実readerSTOPを受けて次の条件付き工程へ進む。source/private版・resource proof変更は明示し、機械検査で全条件を満たしても追加の324/human ACKを要求しない。実行・統合担当は最終bundleと新たな不足・矛盾を受け取り、同じSHA全検査や独立レビューを重ねず、変更境界と重大未解決指摘を確認する。Cargo writerと公平な数値時計の直列化、未配分工程・pause・封印境界は維持する。
 
 人間が不在中の自律配分を明示承認した場合も、次回確認日は科学jobの強制停止期限にしない。意味ある完了/依存待ちのイベントで、他担当の解除、近い成果の検証・統合、承認済み実装・有限計測、次判断の設計調査の順に有用で実行可能な仕事を選ぶ。同価値なら全費が小さく実CPU/RAM/保存/所有が成立する候補を選び、具体issueと同保存担当へ直接渡す。先行工程が未準備なら未予約slotを状態名だけで保持せず、実ready工程を調整する。実予約・jobは正確STOPまで保護し、mainへの実採否/version引渡しや固定入力・実readerSTOPという必要依存を残す。新method/モデル/特徴/学習条件はこの配分から自動承認しない。実行可能な有用候補がない時だけ具体理由をBeadsへ残してIdleにし、周期LLM監督や翌日要約の自動起床を作らない。
 

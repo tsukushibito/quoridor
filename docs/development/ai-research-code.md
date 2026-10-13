@@ -55,6 +55,8 @@ bash scripts/dev/setup-project.sh --python-only
 
 ## 保存と再構成
 
+通常のsource/docs変更・限定test・incremental build・実行artifact copy・reviewは保存予算なしで実装/検証し、終了後に対象の実量を一度確認する。異常な大きさや残存TMP/log/copy、実空き不足のみ限定対応する。具体的なbulk生成/取得/checkpoint/RAW/cache仕事だけ事前保存予算を設定し、歴史subcap/予約一致を通常入口へ復活させない。CPU/RAM/VRAM・50GB・科学許可・所有/reader STOP・artifact identityとcleanupは維持する。
+
 Gitにはコード・設定・必要な実験検証データを保存する。実行出力、モデル、build、依存cacheは[保存方針](../../.devcontainer/storage-policy.md)の領域に置く。利用中の入力や未追跡資産をコード整理に巻き込まない。保存・復元・参照終了を確認してから展開重複を整理する。過去結果の再現に必要な旧ソースは記録Git版から復元する。
 
 `node scripts/export-fresh-source.mjs --scope research --destination <新出力先> --max-bytes 67108864`は現役crate、Python、管理・品質ツールと文書を書き出す。モデル・科学データ・runtime・一時sessionは含まない。限定集合は`--paths-file`で指定できる。既存出力やindexは上書きしない。
