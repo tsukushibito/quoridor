@@ -318,7 +318,11 @@ mod two_ai_374_config_tests {
         let mut c: Config =
             serde_json::from_str(include_str!("../tests/fixtures/sigma-clock-config.json"))
                 .unwrap();
-        c.arena.as_mut().unwrap().comparison = crate::arena::Comparison::WholeWallTime;
+        let arena = c.arena.as_mut().unwrap();
+        arena.comparison = crate::arena::Comparison::WholeWallTime;
+        // Metadata-only declarations; this config test does not load engines.
+        arena.evaluator_sha256 = vec!["a".repeat(64); 2];
+        arena.search_artifact_sha256 = vec!["b".repeat(64); 2];
         for e in &mut c.engines {
             e.time_ms = Some(100);
         }
@@ -326,7 +330,7 @@ mod two_ai_374_config_tests {
         c.management_cpu_core = Some(13);
         c.inference_cpu_core = None;
         c.max_batch = 1;
-        assert!(c.validate().is_ok());
+        c.validate().expect("complete whole-wall metadata fixture");
         for wrong in 0..4 {
             let mut bad = c.clone();
             match wrong {
