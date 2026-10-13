@@ -120,6 +120,10 @@ pub fn journal(c: &Config, outcome: &crate::runtime::Outcome) -> Result<()> {
 pub fn begin(c: &Config, slots: &[Slot], admission: &crate::resources::Admission) -> Result<()> {
     let exe = std::env::current_exe()?;
     let requested_tt = c.arena.as_ref().map_or(65536, |a| a.tt_entries);
+    let main_owned = c
+        .arena
+        .as_ref()
+        .is_some_and(|a| a.comparison == arena::Comparison::WholeWallTime);
     write(
         c,
         "manifest-start.json",
@@ -138,13 +142,13 @@ pub fn begin(c: &Config, slots: &[Slot], admission: &crate::resources::Admission
                 "measurement":"source policy only; bind actual allocation in the software/runtime receipt"
             })).collect::<Vec<_>>(),
             "cpu_model":fs::read_to_string("/proc/cpuinfo").ok().and_then(|s| s.lines().find(|l| l.starts_with("model name")).map(str::to_owned)),
-            "clock":{"origin":"monotonic, per game worker","start":"before session/limits setup","acceptance":"after legal replay immediately before state publication",
-                "last_completed_iteration_timestamp":"after completed-depth full-history legal check, before caller deadline","persistent_session_completion_callback":true,"hard_realtime_guarantee":false,
+            "clock":{"origin":if main_owned {"monotonic, main-owned game"} else {"monotonic, per game worker"},"start":if main_owned {"main before turn dispatch/session/limits setup"} else {"before session/limits setup"},"acceptance":if main_owned {"actual main receipt before100ms; legal replay and terminal collection before state commit"} else {"after legal replay immediately before state publication"},
+                "last_completed_iteration_timestamp":if main_owned {"actual main receipt of immutable completed result before decision cutoff"} else {"after completed-depth full-history legal check, before caller deadline"},"persistent_session_completion_callback":true,"hard_realtime_guarantee":false,
                 "internal_spans":"search elapsed nested in whole caller; startup/model load separate; do not sum",
                 "cap_stop":"depth/node/K stop does not imply full clock consumption"},
             "cancel":{"mechanism":"runner guard AtomicBool, joined workers; external research-job handles exact process cleanup",
                 "poll_ms":1,"forced_engine_return_guarantee":false},
-            "limitations":["Single compiled search revision; versioned dual search adapter pending.","Timed Sigma waits for synchronous inference; no hard real-time guarantee. Completed simulations and alpha-beta depths are distinct.",
+            "limitations":["Single compiled search revision; versioned dual search adapter pending.",if main_owned {"AI worker synchronous ORT is not preemptible. Main deadline response and actual terminal collection are distinct; no next turn before terminal. Completed simulations and alpha-beta depths are distinct."} else {"Timed Sigma waits for synchronous inference; no hard real-time guarantee. Completed simulations and alpha-beta depths are distinct."},
                 "Legacy books have unknown lineage/selection; research uses explicit frozen provenance.","Deterministic repeats are not independent samples."]
         }),
     )

@@ -26,7 +26,7 @@ pub(crate) struct Call {
     pub error: Option<String>,
 }
 impl Call {
-    fn new() -> Self {
+    pub(crate) fn new() -> Self {
         Self {
             completed: None,
             completed_at: None,

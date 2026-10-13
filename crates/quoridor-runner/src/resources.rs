@@ -13,9 +13,8 @@ pub struct Admission {
     pub reserved_physical: Vec<usize>,
     pub memory_limit: u64,
     pub memory_available: u64,
-    /// One serial timed caller and its synchronous inference pump share the
-    /// exact logical CPU. This never grants a second worker or sibling CPU.
-    pub serial_shared_inference: bool,
+    /// Evaluation main manages one game; the two worker cores own the engines.
+    pub management_core: Option<usize>,
 }
 fn number(path: &str) -> Option<u64> {
     fs::read_to_string(path).ok()?.trim().parse().ok()
@@ -119,7 +118,7 @@ pub fn admit(
         reserved_physical: reserved,
         memory_limit: limit,
         memory_available: available,
-        serial_shared_inference: false,
+        management_core: None,
     })
 }
 /// Explicit per-job allocation does not redefine host headroom as process affinity.
@@ -130,12 +129,50 @@ pub fn admit_explicit(
     reserve: u64,
     maximum: Option<u64>,
 ) -> Result<Admission> {
-    admit_explicit_policy(workers, requested, inference_core, reserve, maximum, false)
+    admit_explicit_policy(workers, requested, inference_core, reserve, maximum)
 }
-/// Explicit serial arena allocation; the runtime must first validate the timed
-/// whole-engine, one-worker/game/batch CPU backend contract.
-pub fn admit_serial_shared(core: usize, reserve: u64, maximum: Option<u64>) -> Result<Admission> {
-    admit_explicit_policy(1, &[core], core, reserve, maximum, true)
+/// One serial evaluation game, with equally fixed A/B cores and a distinct main core.
+/// The existing explicit allocator retains actual affinity/cpuset/SMT/quota/host guards.
+pub fn admit_evaluation(
+    requested: &[usize],
+    management: Option<usize>,
+    reserve: u64,
+    maximum: Option<u64>,
+) -> Result<Admission> {
+    let mut admission = if let Some(main) = management {
+        admit_explicit(2, requested, main, reserve, maximum)?
+    } else {
+        if !requested.is_empty() {
+            return Err("evaluation needs both engine cores and its management core".into());
+        }
+        // Fixtures select only from their genuine launch affinity. Host
+        // reserves remain checked against the actual effective cgroup topology.
+        let status = fs::read_to_string("/proc/self/status")?;
+        let allowed = cpu_list(
+            status
+                .lines()
+                .find_map(|line| line.strip_prefix("Cpus_allowed_list:"))
+                .ok_or("CPU affinity unavailable")?,
+        )?;
+        let mut physical = BTreeMap::new();
+        for cpu in allowed {
+            let base = format!("/sys/devices/system/cpu/cpu{cpu}/topology");
+            let pair = (
+                number(&format!("{base}/physical_package_id"))
+                    .ok_or("package topology unavailable")?,
+                number(&format!("{base}/core_id")).ok_or("core topology unavailable")?,
+            );
+            physical.entry(pair).or_insert(cpu);
+        }
+        let mut selected: Vec<_> = physical.values().copied().collect();
+        selected.sort_unstable();
+        if selected.len() < 3 {
+            return Err("evaluation launch needs three physical cores".into());
+        }
+        admit_explicit(2, &selected[..2], selected[2], reserve, maximum)?
+    };
+    admission.management_core = admission.inference_core.take();
+    Ok(admission)
 }
 fn admit_explicit_policy(
     workers: usize,
@@ -143,7 +180,6 @@ fn admit_explicit_policy(
     inference_core: usize,
     reserve: u64,
     maximum: Option<u64>,
-    serial_shared: bool,
 ) -> Result<Admission> {
     let status = fs::read_to_string("/proc/self/status")?;
     let affinity = cpu_list(
@@ -180,26 +216,14 @@ fn admit_explicit_policy(
         }
         Some(values[0].parse::<u64>()? as f64 / period as f64)
     };
-    let reserved = if serial_shared {
-        explicit_cpu_selection_policy(
-            workers,
-            requested,
-            inference_core,
-            &affinity,
-            &topology,
-            quota,
-            true,
-        )?
-    } else {
-        explicit_cpu_selection(
-            workers,
-            requested,
-            inference_core,
-            &affinity,
-            &topology,
-            quota,
-        )?
-    };
+    let reserved = explicit_cpu_selection(
+        workers,
+        requested,
+        inference_core,
+        &affinity,
+        &topology,
+        quota,
+    )?;
     let available = available_memory();
     let limit = admitted_memory(available, reserve, maximum)?;
     Ok(Admission {
@@ -208,7 +232,7 @@ fn admit_explicit_policy(
         reserved_physical: reserved,
         memory_limit: limit,
         memory_available: available,
-        serial_shared_inference: serial_shared,
+        management_core: None,
     })
 }
 fn admitted_memory(available: u64, reserve: u64, maximum: Option<u64>) -> Result<u64> {
@@ -227,24 +251,8 @@ fn explicit_cpu_selection(
     topology: &BTreeMap<usize, (u64, u64)>,
     quota: Option<f64>,
 ) -> Result<Vec<usize>> {
-    explicit_cpu_selection_policy(
-        workers, requested, inference, affinity, topology, quota, false,
-    )
-}
-fn explicit_cpu_selection_policy(
-    workers: usize,
-    requested: &[usize],
-    inference: usize,
-    affinity: &[usize],
-    topology: &BTreeMap<usize, (u64, u64)>,
-    quota: Option<f64>,
-    serial_shared: bool,
-) -> Result<Vec<usize>> {
     if workers == 0 || requested.len() != workers {
         return Err("explicit workers require exact cpu_cores".into());
-    }
-    if serial_shared && (workers != 1 || requested != [inference]) {
-        return Err("serial inference requires one worker on the exact same logical CPU".into());
     }
     let mut occupied = BTreeSet::new();
     for cpu in requested.iter().copied().chain(std::iter::once(inference)) {
@@ -254,7 +262,7 @@ fn explicit_cpu_selection_policy(
         let pair = topology
             .get(&cpu)
             .ok_or("explicit CPU outside effective cpuset")?;
-        if !occupied.insert(*pair) && !(serial_shared && cpu == inference) {
+        if !occupied.insert(*pair) {
             return Err("explicit CPU duplicates physical sibling".into());
         }
     }
@@ -267,14 +275,10 @@ fn explicit_cpu_selection_policy(
             free.entry(*pair).or_insert(*cpu);
         }
     }
-    // Sharing the caller/backend CPU does not turn its formerly separate CPU
-    // allowance into host credit. Retain one control/headroom core in addition
-    // to the existing two physical host cores; the quota threshold is unchanged.
-    let headroom = if serial_shared { 3 } else { 2 };
-    if free.len() < headroom {
+    if free.len() < 2 {
         return Err("host topology cannot retain two physical cores".into());
     }
-    Ok(free.values().copied().take(headroom).collect())
+    Ok(free.values().copied().take(2).collect())
 }
 
 pub fn pin(core: usize) -> Result<()> {
@@ -436,44 +440,18 @@ mod explicit_tests {
         assert!(admitted_memory(128 * 1024 * 1024, 128 * 1024 * 1024, None).is_err());
     }
     #[test]
-    fn serial_shared_exact_cpu_preserves_topology_quota_and_memory_guards() {
-        let t = topology();
-        let select =
-            |workers, requested: &[usize], inference, affinity: &[usize], topology, quota| {
-                explicit_cpu_selection_policy(
-                    workers, requested, inference, affinity, topology, quota, true,
-                )
-            };
+    fn two_ai_374_three_core_allocation_preserves_affinity_smt_quota_and_host_reserve() {
+        let t: BTreeMap<_, _> = (0..6).map(|n| (n, (0, n as u64))).collect();
         assert_eq!(
-            select(1, &[2], 2, &[2], &t, Some(4.)).unwrap(),
-            vec![0, 1, 3]
+            explicit_cpu_selection(2, &[0, 1], 2, &[0, 1, 2], &t, Some(5.)).unwrap(),
+            vec![3, 4]
         );
-        assert!(explicit_cpu_selection(1, &[2], 2, &[2], &t, Some(4.)).is_err());
-        assert!(select(1, &[2], 12, &[2, 12], &t, Some(4.)).is_err());
-        assert!(select(1, &[2], 3, &[2, 3], &t, Some(4.)).is_err());
-        assert!(select(0, &[], 2, &[2], &t, Some(4.)).is_err());
-        assert!(select(2, &[2, 3], 2, &[2, 3], &t, Some(5.)).is_err());
-        assert!(select(1, &[2], 2, &[3], &t, Some(4.)).is_err());
-        let missing_effective = [(0, (0, 0)), (1, (0, 1))].into_iter().collect();
-        assert!(select(1, &[2], 2, &[2], &missing_effective, Some(4.)).is_err());
-        let one_host = [(0, (0, 0)), (2, (0, 2))].into_iter().collect();
-        assert!(select(1, &[2], 2, &[2], &one_host, Some(4.)).is_err());
-        let two_host = [(0, (0, 0)), (1, (0, 1)), (2, (0, 2))]
-            .into_iter()
-            .collect();
-        assert!(select(1, &[2], 2, &[2], &two_host, Some(4.)).is_err());
-        for quota in [3.99, f64::NAN, f64::INFINITY] {
-            assert!(select(1, &[2], 2, &[2], &t, Some(quota)).is_err());
-        }
-        assert!(admitted_memory(128 * 1024 * 1024, 128 * 1024 * 1024, None).is_err());
-        assert_eq!(
-            admitted_memory(
-                1024 * 1024 * 1024,
-                128 * 1024 * 1024,
-                Some(256 * 1024 * 1024)
-            )
-            .unwrap(),
-            256 * 1024 * 1024
-        );
+        assert!(explicit_cpu_selection(2, &[0, 1], 2, &[0, 1], &t, Some(5.)).is_err());
+        assert!(explicit_cpu_selection(2, &[0, 1], 2, &[0, 1, 2], &t, Some(4.99)).is_err());
+        let mut siblings = t.clone();
+        siblings.insert(1, (0, 0));
+        assert!(explicit_cpu_selection(2, &[0, 1], 2, &[0, 1, 2], &siblings, Some(5.)).is_err());
+        let no_reserve = t.into_iter().take(4).collect();
+        assert!(explicit_cpu_selection(2, &[0, 1], 2, &[0, 1, 2], &no_reserve, None).is_err());
     }
 }

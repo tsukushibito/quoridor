@@ -1302,6 +1302,12 @@ mainは実full history・反復・goal・合法着手、手番開始、実応答
 
 元0/1局はFAILED/raw2goal/validatedUNKNOWNのまま再実行せず、残り766局と既存78parents/234proposals/18missingだけを継続する。models/weights/features/float、Sigma policy/value/PUCT/K、alpha math/PVS/TT、rules/temperature/100ms/5msは不変。追加64・calibration・推論時間予測を復活させない。既存772MiB/global decimal50GB内で実source/build/private/test/review/RAW/TMP/failureを配分し、実CPU・保存不足だけを具体的に報告する。349継続と374実timing優先、sole Main/Cargo writer、323 USERPAUSE/defaults/N/seals/fits96を保持し、Policy返信・全task完了をgateにしない。
 
+374二AI/mainのMainへ統合したsourceでは、WholeWallTimeだけをmain管理のserial pathへ分け、各AI worker内にevaluator/backend/sessionを置く。CPUのgame worker数1とengine owner数2を分け、nativeのmanagement core・順序付きA/B coresとnormal callerの実三コアlaunchを一致させる。mainは95msで期限内完成またはcache済み合法ゼロ仕事fallbackを固定し、実100ms receiptを拒否境界とする。遅い同期forward・元のエラー・cancel・matching terminal回収を別の事実として保持し、回収前に次手を始めない。self-play CPU/GPU queueは実機能に残す。
+
+新definitionはnative unit6 + NN0 integration1、Python metadata3。まだUNBUILT/UNTYPED/UNRUNで、静的整形・unchanged scopeの再利用は新architecture/image/gameのPASSではない。変更所有/時計境界の一度の独立確認はclear/blockers0となり、通常の採用・affected software・current immutable artifact・実RUN admissionへ進む。ordinary storageは省略し一度のpost-work usageを記録する。旧private/target/category forecastを新開始gateへ戻さない。
+
+旧entered slots0/1のFAILED/raw goals2/1166calls/validated UNKNOWN、旧architecture Build/image/Qと各料金/returned-vs-disk masksは固定履歴。0/1を再実行せず、未来の766 games/batches1..383、78parents234proposals/18missingを同じ選択と時計で移行する。extra64/prediction/calibration、model/head replay、training/fit/default/score/N/seals/323 pauseの変更はない。
+
 ## 人間選択：Sigma／固定D／単独NNUEの比較（374、2026-10-12）
 
 人間は、三者の棋力と得意・不得意な盤面を同じ枠で比べ、NNUE改善の検証方針に使うことを選択した。対象NNUEは既存BEST43の単独勝敗予測で、Dの出力補正や混合評価ではない。distance head入力・scaleは既存のまま、重み・final tanh・output bypass OFFを固定する。新しいモデルや学習、比率、teacher、defaultの選択は含まない。

@@ -749,10 +749,22 @@ fn validate_observations(
                 }
                 continue;
             }
-            if obs.pv.first() != obs.action.as_ref()
-                || obs.counters["completed_snapshot_validation_failed"] != false
+            let fallback = a.comparison == Comparison::WholeWallTime
+                && obs.counters["selection_reason"] == "legal_fallback_no_completed_iteration";
+            if obs.counters["completed_snapshot_validation_failed"] != false
+                || if fallback {
+                    obs.completed_depth.is_some()
+                        || obs.value_stm.is_some()
+                        || !obs.pv.is_empty()
+                        || obs.last_completed_iteration_ns.is_some()
+                        || obs.completed_iteration_counters.is_some()
+                } else {
+                    obs.pv.first() != obs.action.as_ref()
+                        || obs.completed_depth.is_none_or(|d| d == 0)
+                        || obs.value_stm.is_none()
+                }
             {
-                return Err("arena alpha completion/PV".into());
+                return Err("arena alpha completion/PV or truthful zero-work fallback".into());
             }
             if a.comparison == Comparison::EvaluatorFixedDepth {
                 if obs.completed_depth != Some(engine.depth)
@@ -762,13 +774,20 @@ fn validate_observations(
                 {
                     return Err("arena partial depth cannot publish an action".into());
                 }
-            } else if obs
-                .deadline_ns
-                .is_none_or(|deadline| obs.returned_ns >= deadline)
-                || obs.counters["authority_receipt_ns"] != obs.returned_ns
-                || obs.counters["drain_finished_ns"] != obs.returned_ns
-            {
-                return Err("arena thinking-clock authority/drain".into());
+            } else {
+                let receipt = obs.counters["authority_receipt_ns"]
+                    .as_u64()
+                    .ok_or("alpha receipt missing")?;
+                if obs.deadline_ns.is_none_or(|deadline| receipt >= deadline)
+                    || obs.counters["drain_finished_ns"] != obs.returned_ns
+                    || if a.comparison == Comparison::WholeWallTime {
+                        obs.returned_ns < receipt || obs.counters["inflight_after_drain"] != 0
+                    } else {
+                        obs.returned_ns != receipt
+                    }
+                {
+                    return Err("arena main receipt/terminal drain".into());
+                }
             }
         }
     }

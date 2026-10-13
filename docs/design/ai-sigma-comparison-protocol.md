@@ -22,9 +22,36 @@ Sigmaは実100ms authority receipt deadlineと5ms reserveを使う。reserve到�
 
 mainはfull history/反復/goal/合法着手、手番開始、実response receipt/deadline、取消、terminal回収と記録を所有し、receiptのcritical pathへ推論・長い探索・遅い保存を置かない。100ms receipt/5ms reserve、完成済み結果の選択、zero-completion合法fallback/null value、original error/cancelと次手番前の旧work回収は共通条件である。同期ORTを強制停止できるとは仮定せず、期限前の応答とterminal完了を別に保存する。遅いreplyを採用せず、errorを過去snapshotで救済しない。
 
-管理mainと等条件のAI二者を利用可能な3物理コアへ配置する第一案は、実physical/affinity/cgroup/SMT/host reserveとwhole支持でallocatorが確認する。コア番号をfixtureへ固定せず、game workersを3にして並列対局へ変えない。実runにはこのCPU/thread条件を記録し、旧結果を同一timing cohortへ混ぜない。source・config・callerの移行とaffected checks、変更した所有/時計境界の一度のrelated reviewは未完了であり、旧構成imageのPASSから新構成の資格を作らない。
+管理mainと等条件のAI二者を利用可能な3物理コアへ配置する第一案は、実physical/affinity/cgroup/SMT/host reserveと実CPU/RAM支持でallocatorが確認する。コア番号をfixtureへ固定せず、game workersを3にして並列対局へ変えない。実runにはこのCPU/thread条件を記録し、旧結果を同一timing cohortへ混ぜない。source・config・callerの移行とaffected checks、変更した所有/時計境界の一度のrelated reviewは未完了であり、旧構成imageのPASSから新構成の資格を作らない。
 
 元768 slots中、入場済み0/1のFAILED/raw/validatedUNKNOWNを保持して再実行しない。新構成で進めるのは残り766と既存診断だけで、model/math/score/float/rules/temperature/時計、323pause/defaults/N/seals/fits96と772MiB/decimal50GBは保持する。追加64/calibration/推論時間予測は撤回済みである。
+
+通常configの `workers=1`、`active_games=1`、`max_batch=1` は同時対局数を表す。
+`cpu_cores=[A,B]` はAIの順序付き所有コア、`management_cpu_core=main` は管理コアで、
+評価では `inference_cpu_core=null` とする。RUNの `child_cpu_cores` はこの三者のsorted集合、
+worker CPUはA、guardian CPUはmainと一致させ、Rootの実RUN支持CPU3/thread1/G0と通常の
+physical/affinity/cgroup/SMT/host reserve検査を通す。別corpusの四コア権限は流用しない。
+モデル無しintegrationを実三コアで検査する必要があるBUILDだけ、実Source-bound handoverに
+`test_cpu_cores` を記録し、test roleへ三コアを渡す。lint/release/version roleは従来の一CPUであり、
+このsource提案はBuild/Run/コアadmissionではない。
+
+mainは手番前に合法fallbackをcacheし、開始時刻を記録して完全historyのcloneと仕事をAIへ渡す。
+AIは自分の完成結果だけを更新通知し、mainは実受領時刻で最新の期限内完成を保持する。
+95msのreserve境界で選択を固定する。完成結果がなければcache済み合法手をゼロ完成/null値で
+固定し、以後のreplyは選び直さない。実受領が100ms以上なら拒否する。同期forwardが残る場合も
+mainは応答時計を止め、cancel/wall/RAM検査を続け、元のエラーとmatching terminalを回収する。
+terminal回収・遅いsnapshotも含む合法検査・mainでのmove適用が終わる前に次turnを開始しない。
+journal・archive・モデルload・探索・長いforwardは受領critical pathに置かない。
+初期化のworker別durationは重なるためrun wallへ加算しない。TTはゲームごとにresetし、
+model/evaluator/backendの構築・呼出し・破棄を同じAI ownerに保つ。
+
+sourceのreview/採用後、既存recipeで将来のbatches1..383だけを現image/三コアconfigへ移行する。
+768枠のdenominatorと入力・色・順序・100ms/5ms・K/TT/温度・OFF/mathを保存し、
+既に入ったslots0/1のFAILED/raw/validated UNKNOWNは元参照のままとし再実行しない。
+source・静的整形は新architectureのsoftware/model/game PASSではない。
+普通のsource/test/build/artifact/reviewはstorageを省略し終了後に実使用を一度観察する。
+旧容量予測は履歴であり開始gateではない。bulk RAW/model出力、異常増大や実FS/50GB不足は
+必要な範囲で対処し、所有・RAM/CPU・clock/cancel・実reader STOPを維持する。
 
 ## 参照と共通条件
 

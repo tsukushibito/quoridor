@@ -818,5 +818,182 @@ class ArenaPlanTests(unittest.TestCase):
             self.assertEqual(ledger[0]["guardian_return"]["cleanup_complete"], False)
 
 
+class EvaluationOwnershipTests(unittest.TestCase):
+    """Current CPU/receipt boundary, synthetic metadata/guardian; no native entry."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.root = Path(self.tmp.name)
+
+    def ref(self, name, value):
+        p = self.root / name
+        p.write_text(json.dumps(value))
+        return lc.bound(p)[0]
+
+    def spec(self):
+        config = {
+            "workers": 1,
+            "active_games": 1,
+            "max_batch": 1,
+            "cpu_cores": [11, 12],
+            "management_cpu_core": 13,
+            "inference_cpu_core": None,
+            "arena": {"comparison": "whole_wall_time"},
+        }
+        experiment = {"phase": "arena", "config": self.ref("config.json", config)}
+        support = {
+            "schema": "quoridor.research.phase-support.v1",
+            "issue": "quoridor-4lc.374",
+            "resources": {
+                "CPU": 3,
+                "threads": 1,
+                "GPU": 0,
+                "controller_included": True,
+                "family_RAM_B": 3 * 1024**3,
+            },
+        }
+        return {
+            "kind": "run",
+            "child_cpu_cores": [11, 12, 13],
+            "experiment": self.ref("experiment.json", experiment),
+            "support": self.ref("support.json", support),
+            "limits": {"worker_cpu": 11, "guardian_cpu": 13, "log_B": 1024},
+            "cwd": str(self.root),
+            "env": {},
+        }
+
+    def test_two_ai_374_launch_cpu_roles_require_actual_selected_support(self):
+        spec = self.spec()
+        self.assertEqual(lc.arena_cpu_cores(spec), [11, 12, 13])
+        self.assertEqual(lc.issued_family_upper(spec, lc.document(spec["support"])), 3 * 1024**3)
+        for change in [
+            lambda s: s.update(child_cpu_cores=[11]),
+            lambda s: s["limits"].update(guardian_cpu=12),
+            lambda s: s.update(kind="build"),
+        ]:
+            wrong = copy.deepcopy(spec)
+            change(wrong)
+            with self.assertRaises(lc.Refused):
+                lc.arena_cpu_cores(wrong)
+        support = lc.document(spec["support"])
+        for issue, cpu in [("quoridor-4lc.374", 1), ("quoridor-4lc.362", 3)]:
+            support["issue"] = issue
+            support["resources"]["CPU"] = cpu
+            spec["support"] = self.ref("wrong-support.json", support)
+            with self.assertRaises(lc.Refused):
+                lc.arena_cpu_cores(spec)
+
+    def test_two_ai_374_actual_command_cpu_set_and_source_bound_test_handover(self):
+        spec = self.spec()
+        record = {
+            "status": "complete",
+            "exit_code": 0,
+            "direct_child_reaped": True,
+            "cleanup_complete": True,
+            "remaining": [],
+            "finalization_errors": [],
+            "signal_mask_restoration": "completed",
+            "final_record_persist": "completed",
+        }
+        calls = []
+
+        def executor(_argv, _log, _deadline, **kw):
+            calls.append(kw)
+            record["log_bytes_seen"] = len(b"synthetic full capture\n")
+            kw["output_sink"](b"synthetic full capture\n")
+            return record
+
+        lc.command(
+            spec,
+            {"name": "evaluation", "argv": ["SYNTHETIC_NOT_EXECUTED"]},
+            self.root,
+            None,
+            executor=executor,
+        )
+        self.assertIsNone(calls[-1]["cpu_core"])
+        self.assertEqual(calls[-1]["cpu_cores"], [11, 12, 13])
+        spec = {
+            "kind": "build",
+            "test_cpu_cores": [11, 12, 13],
+            "target_handover": self.ref("handover.json", {"test_cpu_cores": [11, 12, 13]}),
+            "limits": {"worker_cpu": 11, "guardian_cpu": 13, "log_B": 1024},
+            "cwd": str(self.root),
+            "env": {},
+        }
+        lc.command(
+            spec,
+            {"name": "NN0-test", "role": "test", "argv": ["SYNTHETIC_NOT_EXECUTED"]},
+            self.root,
+            None,
+            executor=executor,
+        )
+        self.assertEqual(calls[-1]["cpu_cores"], [11, 12, 13])
+        lc.command(
+            spec,
+            {"name": "release", "role": "build", "argv": ["SYNTHETIC_NOT_EXECUTED"]},
+            self.root,
+            None,
+            executor=executor,
+        )
+        self.assertEqual(calls[-1]["cpu_core"], 11)
+        self.assertNotIn("cpu_cores", calls[-1])
+        spec["target_handover"] = self.ref("wrong-handover.json", {})
+        with self.assertRaises(lc.Refused):
+            lc.build_test_cpu_cores(spec)
+
+    def test_two_ai_374_alpha_zero_work_fallback_uses_receipt_not_late_terminal(self):
+        config = {
+            "engines": [{"kind": "distance", "depth": 4}],
+            "arena": {"decision_only": True, "comparison": "whole_wall_time"},
+        }
+        observation = {
+            "engine_index": 0,
+            "accepted": True,
+            "failure": None,
+            "engine_error": None,
+            "action": 13,
+            "pv": [],
+            "completed_depth": None,
+            "value_stm": None,
+            "stop": "cancelled",
+            "accepted_ns": 122,
+            "admission_checked_ns": 121,
+            "returned_ns": 120,
+            "deadline_ns": 100,
+            "caller_seconds": 0.12,
+            "thinking_seconds": 0.095,
+            "last_completed_iteration_ns": None,
+            "completed_iteration_counters": None,
+            "counters": {
+                "authority_receipt_ns": 95,
+                "drain_finished_ns": 120,
+                "inflight_after_drain": 0,
+                "selection_reason": "legal_fallback_no_completed_iteration",
+                "completed_snapshot_validation_failed": False,
+            },
+        }
+        row = {"moves": [], "observations": [observation]}
+        lc.arena_observation(config, row)
+        for key, value in [
+            ("authority_receipt_ns", 100),
+            ("drain_finished_ns", 94),
+            ("inflight_after_drain", 1),
+        ]:
+            wrong = copy.deepcopy(row)
+            wrong["observations"][0]["counters"][key] = value
+            with self.assertRaises(lc.Refused):
+                lc.arena_observation(config, wrong)
+        for key, value in [
+            ("completed_depth", 1),
+            ("value_stm", 0.2),
+            ("engine_error", "original late failure"),
+        ]:
+            wrong = copy.deepcopy(row)
+            wrong["observations"][0][key] = value
+            with self.assertRaises(lc.Refused):
+                lc.arena_observation(config, wrong)
+
+
 if __name__ == "__main__":
     unittest.main()

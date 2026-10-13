@@ -277,6 +277,68 @@ class Limits(process.CycleResources):
                 )
 
 
+def build_test_cpu_cores(spec):
+    """The owning BUILD handover can issue the three-core NN0 integration scope."""
+    cores = spec.get("test_cpu_cores")
+    require(
+        spec["kind"] == "build"
+        and isinstance(cores, list)
+        and len(cores) == 3
+        and all(type(c) is int and c >= 0 for c in cores)
+        and cores == sorted(set(cores))
+        and spec["limits"]["worker_cpu"] == cores[0]
+        and spec["limits"]["guardian_cpu"] == cores[2]
+        and document(spec["target_handover"]).get("test_cpu_cores") == cores,
+        "source-bound Root handover for actual three-core model-free tests",
+    )
+    return cores
+
+
+def arena_cpu_cores(spec):
+    """Bind this native evaluation's launch affinity to its current AI/main roles."""
+    require(spec["kind"] == "run", "evaluation CPU allocation belongs to RUN")
+    experiment = document(spec["experiment"])
+    require(
+        experiment["phase"] == "arena"
+        or (experiment["phase"] == "compare" and experiment["argv"][1] == "decisions"),
+        "three cores belong to serial arena/one-parent decisions",
+    )
+    config = document(experiment["config"])
+    ai = config.get("cpu_cores")
+    main = config.get("management_cpu_core")
+    require(
+        config.get("arena", {}).get("comparison") == "whole_wall_time"
+        and all(config.get(k) == 1 for k in ("workers", "active_games", "max_batch"))
+        and config.get("inference_cpu_core") is None
+        and isinstance(ai, list)
+        and len(ai) == 2
+        and all(type(cpu) is int and cpu >= 0 for cpu in ai)
+        and type(main) is int
+        and main >= 0
+        and len(set([*ai, main])) == 3,
+        "one game, fixed A/B worker cores and distinct main core",
+    )
+    cores = sorted([*ai, main])
+    require(
+        spec.get("child_cpu_cores") == cores
+        and spec["limits"]["worker_cpu"] == ai[0]
+        and spec["limits"]["guardian_cpu"] == main,
+        "actual native launch affinity equals AI/main allocation",
+    )
+    support = document(spec["support"])
+    resources = support.get("resources", {})
+    require(
+        support["issue"] == "quoridor-4lc.374"
+        and resources.get("CPU") == 3
+        and resources.get("threads") == 1
+        and resources.get("GPU") == 0
+        and resources.get("controller_included") is True
+        and resources.get("family_RAM_B") == 3 * 1024**3,
+        "actual issued three-core evaluation family, not corpus/source-only authority",
+    )
+    return cores
+
+
 def physical_and_quiet(spec):
     cfg = spec["limits"]
     require(
@@ -284,18 +346,23 @@ def physical_and_quiet(spec):
         "physical RAM admission",
     )
     cores = [cfg["worker_cpu"], cfg["guardian_cpu"]]
+    if spec["kind"] == "build" and "test_cpu_cores" in spec:
+        cores = build_test_cpu_cores(spec)
     if "child_cpu_cores" in spec:
         cores = spec["child_cpu_cores"]
-        require(
-            spec["kind"] == "run"
-            and isinstance(cores, list)
-            and len(cores) == 4
-            and all(type(c) is int and c >= 0 for c in cores)
-            and len(set(cores)) == 4
-            and cfg["worker_cpu"] in cores
-            and cfg["guardian_cpu"] in cores,
-            "declared two-worker corpus with two physical reserve cores",
-        )
+        if len(cores) == 3:
+            cores = arena_cpu_cores(spec)
+        else:
+            require(
+                spec["kind"] == "run"
+                and isinstance(cores, list)
+                and len(cores) == 4
+                and all(type(c) is int and c >= 0 for c in cores)
+                and len(set(cores)) == 4
+                and cfg["worker_cpu"] in cores
+                and cfg["guardian_cpu"] in cores,
+                "declared two-worker corpus with two physical reserve cores",
+            )
     require(set(cores) <= os.sched_getaffinity(0), "CPU affinity admission")
     identities = []
     for core in cores:
@@ -418,12 +485,18 @@ def command(spec, row, directory, resources, executor=process.execute, *, ledger
                 resources.deadline = time.monotonic() + budget
         capture = Capture(directory / (row["name"] + ".full.log"), spec["limits"]["log_B"])
         cpu_args = {"cpu_core": spec["limits"]["worker_cpu"]}
+        if spec.get("kind") == "build" and row.get("role") == "test" and "test_cpu_cores" in spec:
+            cpu_args = {"cpu_core": None, "cpu_cores": build_test_cpu_cores(spec)}
         if "child_cpu_cores" in spec:
-            require(
-                spec["kind"] == "run" and document(spec["experiment"])["phase"] == "corpus",
-                "multi-core launch is only the qualified corpus",
-            )
-            cpu_args = {"cpu_core": None, "cpu_cores": spec["child_cpu_cores"]}
+            if len(spec["child_cpu_cores"]) == 3:
+                cores = arena_cpu_cores(spec)
+            else:
+                require(
+                    spec["kind"] == "run" and document(spec["experiment"])["phase"] == "corpus",
+                    "four-core launch is only the qualified corpus",
+                )
+                cores = spec["child_cpu_cores"]
+            cpu_args = {"cpu_core": None, "cpu_cores": cores}
         record = executor(
             row["argv"],
             directory / (row["name"] + ".log"),
@@ -1701,6 +1774,8 @@ def experiment_check(spec):
         common_pilot_check(spec, experiment, manifest, approved)
     if experiment["phase"] == "compare" and experiment["argv"][1] == "decisions":
         arena_decision_plan_check(experiment, approved)
+        if document(experiment["config"])["arena"]["comparison"] == "whole_wall_time":
+            arena_cpu_cores(spec)
         numerical_check(experiment, manifest, refs=refs)
         require(
             document(experiment["config"])["output"] == spec["data_root"],
@@ -1708,6 +1783,8 @@ def experiment_check(spec):
         )
     if experiment["phase"] == "arena":
         arena_plan_check(experiment, approved)
+        if document(experiment["config"])["arena"]["comparison"] == "whole_wall_time":
+            arena_cpu_cores(spec)
         numerical_check(experiment, manifest, refs=refs)
         require(
             document(experiment["config"])["output"] == spec["data_root"],
@@ -2665,11 +2742,31 @@ def arena_observation(config, row):
             )
             accepted.append(obs["action"])
             continue
+        counters = obs["counters"]
+        fallback = (
+            a["comparison"] == "whole_wall_time"
+            and counters.get("selection_reason") == "legal_fallback_no_completed_iteration"
+        )
         require(
-            obs["pv"]
-            and obs["pv"][0] == obs["action"]
-            and obs["counters"]["completed_snapshot_validation_failed"] is False,
-            "alpha completed PV",
+            counters["completed_snapshot_validation_failed"] is False
+            and (
+                (
+                    obs["completed_depth"] is None
+                    and obs["value_stm"] is None
+                    and obs["pv"] == []
+                    and obs["last_completed_iteration_ns"] is None
+                    and obs["completed_iteration_counters"] is None
+                )
+                if fallback
+                else (
+                    obs["pv"]
+                    and obs["pv"][0] == obs["action"]
+                    and type(obs["completed_depth"]) is int
+                    and obs["completed_depth"] > 0
+                    and obs["value_stm"] is not None
+                )
+            ),
+            "alpha completion/PV or truthful zero-work fallback",
         )
         if a["comparison"] == "evaluator_fixed_depth":
             require(
@@ -2681,12 +2778,18 @@ def arena_observation(config, row):
                 "partial depth cannot publish action",
             )
         else:
+            receipt = counters["authority_receipt_ns"]
             require(
-                type(obs["deadline_ns"]) is int
-                and obs["returned_ns"] < obs["deadline_ns"]
-                and obs["counters"]["authority_receipt_ns"] == obs["returned_ns"]
-                and obs["counters"]["drain_finished_ns"] == obs["returned_ns"],
-                "thinking authority/drain",
+                type(receipt) is int
+                and type(obs["deadline_ns"]) is int
+                and receipt < obs["deadline_ns"]
+                and counters["drain_finished_ns"] == obs["returned_ns"]
+                and (
+                    (obs["returned_ns"] >= receipt and counters["inflight_after_drain"] == 0)
+                    if a["comparison"] == "whole_wall_time"
+                    else obs["returned_ns"] == receipt
+                ),
+                "main receipt/terminal drain",
             )
         accepted.append(obs["action"])
     if not config["arena"].get("decision_only", False):
@@ -2834,6 +2937,38 @@ def arena_reference_report(config, files, values=None, expected_build=None):
             row["failure"] = attribution
         rows.append(row)
     manifest = strict(values["native_manifest"])
+    if config.get("management_cpu_core") is not None:
+        execution = manifest["binding"].get("execution", {})
+        require(
+            execution.get("main_pid") == execution.get("main_tid") == report["process_id"]
+            and execution.get("management_core")
+            == execution.get("management_core_observed")
+            == config["management_cpu_core"]
+            and execution.get("AI_cores") == config["cpu_cores"]
+            and execution.get("AI_workers") == len(config["engines"])
+            and execution.get("simultaneous_games") == 1
+            and execution.get("inference_pump") is False,
+            "actual process main and fixed AI owners, from the emitted runtime record",
+        )
+        for row in rows:
+            for observation in row["observations"]:
+                if not observation["accepted"]:
+                    continue
+                counters = observation["counters"]
+                require(
+                    counters.get("authority_tid") == report["process_id"]
+                    and counters.get("authority_core") == config["management_cpu_core"]
+                    and counters.get("AI_worker_core")
+                    == config["cpu_cores"][observation["engine_index"]]
+                    and type(counters.get("AI_worker_tid")) is int
+                    and counters["AI_worker_tid"] != report["process_id"]
+                    and counters.get("matching_terminal_collected") is True
+                    and type(counters.get("AI_terminal_finished_ns")) is int
+                    and counters["AI_terminal_finished_ns"]
+                    <= counters["terminal_collected_ns"]
+                    <= observation["returned_ns"],
+                    "actual AI/main CPU ownership and matching terminal chronology",
+                )
     require(
         manifest["result"] == publication
         and manifest["binding"]["config"] == config

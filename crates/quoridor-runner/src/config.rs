@@ -102,6 +102,10 @@ pub struct Config {
     /// Opt-in inference owner core; workers must then be explicit too.
     #[serde(default)]
     pub inference_cpu_core: Option<usize>,
+    /// Whole-wall evaluation only: cpu_cores are A/B, this core owns game/receipt clocks.
+    /// workers/active_games still count games, never engine threads.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub management_cpu_core: Option<usize>,
     #[serde(default)]
     pub engines: Vec<Engine>,
     #[serde(default)]
@@ -209,6 +213,33 @@ impl Config {
         Ok((train, validation))
     }
     pub fn validate(&self) -> Result<(), String> {
+        let evaluation = self
+            .arena
+            .as_ref()
+            .is_some_and(|a| a.comparison == crate::arena::Comparison::WholeWallTime);
+        if evaluation {
+            if self.workers != 1
+                || self.active_games != 1
+                || self.max_batch != 1
+                || self.inference_cpu_core.is_some()
+                || !matches!(self.engines.len(), 1 | 2)
+                || self
+                    .engines
+                    .iter()
+                    .any(|e| e.time_ms.is_none_or(|ms| ms == 0))
+                || self
+                    .inference
+                    .as_ref()
+                    .is_some_and(|i| i.backend != "ort" || i.cuda_graph)
+                || (self.management_cpu_core.is_some() && self.cpu_cores.len() != 2)
+                || (self.management_cpu_core.is_none() && !self.cpu_cores.is_empty())
+            {
+                return Err("evaluation requires one serial game, two AI cores and main management; CPU ORT batch1".into());
+            }
+        } else if self.management_cpu_core.is_some() {
+            return Err("management_cpu_core belongs only to whole-wall evaluation".into());
+        }
+
         if self.run_id.is_empty()
             || !self
                 .run_id
@@ -277,4 +308,36 @@ pub fn unix_ms() -> u64 {
         .duration_since(UNIX_EPOCH)
         .unwrap_or_default()
         .as_millis() as u64
+}
+
+#[cfg(test)]
+mod two_ai_374_config_tests {
+    use super::*;
+    #[test]
+    fn two_ai_374_game_worker_count_is_distinct_from_two_engine_cpu_owners() {
+        let mut c: Config =
+            serde_json::from_str(include_str!("../tests/fixtures/sigma-clock-config.json"))
+                .unwrap();
+        c.arena.as_mut().unwrap().comparison = crate::arena::Comparison::WholeWallTime;
+        for e in &mut c.engines {
+            e.time_ms = Some(100);
+        }
+        c.cpu_cores = vec![11, 12];
+        c.management_cpu_core = Some(13);
+        c.inference_cpu_core = None;
+        c.max_batch = 1;
+        assert!(c.validate().is_ok());
+        for wrong in 0..4 {
+            let mut bad = c.clone();
+            match wrong {
+                0 => bad.workers = 3,
+                1 => bad.active_games = 2,
+                2 => bad.max_batch = 2,
+                _ => bad.inference_cpu_core = Some(12),
+            };
+            assert!(bad.validate().is_err());
+        }
+        c.management_cpu_core = None;
+        assert!(c.validate().is_err());
+    }
 }

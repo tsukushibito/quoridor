@@ -35,6 +35,7 @@ const SIGMA_RECEIPT_CONTRACT_SHA256: &str =
 #[derive(Debug)]
 struct SigmaNotification {
     chosen: Option<(Option<quoridor_ai::sigma_mcts::Snapshot>, u16)>,
+    completed_at: Option<Instant>,
     decision_started: Instant,
     sent: Instant,
 }
@@ -43,33 +44,6 @@ struct SigmaReceipt {
     received: Instant,
     legality_finished: Instant,
     legal: bool,
-}
-/// The receiving side timestamps before executing any rules-side validation.
-fn receive_sigma_notification(
-    rx: mpsc::Receiver<SigmaNotification>,
-    validate: impl FnOnce(u16) -> bool,
-) -> std::result::Result<SigmaReceipt, String> {
-    let notification = rx.recv().map_err(|_| "sigma_notification_channel_closed")?;
-    let received = Instant::now();
-    let legal = notification
-        .chosen
-        .as_ref()
-        .is_some_and(|(_, action)| validate(*action));
-    Ok(SigmaReceipt {
-        notification,
-        received,
-        legality_finished: Instant::now(),
-        legal,
-    })
-}
-/// The owning caller returns only after terminal backend drain and authority join.
-/// The closure is the existing join operation; this samples the real post-join clock.
-fn finish_sigma_authority(
-    join_authority: impl FnOnce() -> std::result::Result<SigmaReceipt, String>,
-) -> std::result::Result<(SigmaReceipt, Instant), String> {
-    let receipt = join_authority()?;
-    let drained = Instant::now();
-    Ok((receipt, drained))
 }
 fn sigma_receipt_decision(
     deadline: Option<Instant>,
@@ -133,6 +107,95 @@ fn alpha_validate_completion(
     (snapshots_valid, action_legal)
 }
 
+#[cfg(test)]
+mod sigma_receipt_tests {
+    use super::*;
+    fn receipt(received: Instant, legal: bool) -> SigmaReceipt {
+        let snapshot = Search::new(SigmaContext::from_prefix(&[]).unwrap(), 1, 1)
+            .unwrap()
+            .snapshot();
+        SigmaReceipt {
+            notification: SigmaNotification {
+                chosen: Some((Some(snapshot), 13)),
+                completed_at: None,
+                decision_started: received,
+                sent: received,
+            },
+            received,
+            legality_finished: received + Duration::from_millis(110),
+            legal,
+        }
+    }
+
+    #[test]
+    fn alpha_receipt_rule_violation_precedes_lateness_without_state_application() {
+        use crate::arena_clock::Failure;
+        let root = SigmaContext::from_prefix(&[]).unwrap();
+        let original = root.position();
+        for received in [99_000_000, 100_000_000, 101_000_000] {
+            let legal = root.play(209).is_ok();
+            assert!(!legal);
+            let decision =
+                alpha_receipt_decision(Some(100_000_000), received, false, legal, true, false);
+            assert_eq!(decision, Err(Failure::IllegalMove));
+            assert_eq!(root.position(), original);
+            assert_eq!(root.terminal_value(), None);
+        }
+        assert_eq!(
+            alpha_receipt_decision(Some(100), 100, false, true, true, false),
+            Err(Failure::TimeOverrun)
+        );
+        assert_eq!(
+            alpha_receipt_decision(Some(100), 99, true, false, true, true),
+            Err(Failure::Cancelled)
+        );
+        assert_eq!(
+            alpha_receipt_decision(Some(100), 101, false, false, false, true),
+            Err(Failure::EngineError)
+        );
+        assert_eq!(
+            alpha_receipt_decision(Some(100), 99, false, false, false, false),
+            Err(Failure::NoCompletedIteration)
+        );
+        let origin = Instant::now();
+        let received_ns = origin.elapsed().as_nanos() as u64;
+        let deadline = received_ns + 1_000_000;
+        thread::sleep(Duration::from_millis(5));
+        let legal = root.play(13).is_ok();
+        assert!(origin.elapsed().as_nanos() >= u128::from(deadline));
+        assert_eq!(
+            alpha_receipt_decision(Some(deadline), received_ns, false, legal, true, false),
+            Ok(())
+        );
+        assert_eq!(root.position(), original);
+    }
+
+    #[test]
+    fn authority_receipt_exact_edges_and_slow_legality_are_separate() {
+        let started = Instant::now();
+        let deadline = started + Duration::from_millis(100);
+        let timely = receipt(deadline - Duration::from_nanos(1), true);
+        assert!(timely.legality_finished > deadline);
+        assert_eq!(
+            sigma_receipt_decision(Some(deadline), &timely, false),
+            Ok(())
+        );
+        for received in [deadline, deadline + Duration::from_nanos(1)] {
+            assert_eq!(
+                sigma_receipt_decision(Some(deadline), &receipt(received, true), false),
+                Err(crate::arena_clock::Failure::TimeOverrun)
+            );
+        }
+        assert_eq!(
+            sigma_receipt_decision(Some(deadline), &receipt(deadline, false), false),
+            Err(crate::arena_clock::Failure::IllegalMove)
+        );
+        assert_eq!(
+            sigma_receipt_decision(Some(deadline), &timely, true),
+            Err(crate::arena_clock::Failure::Cancelled)
+        );
+    }
+}
 #[cfg(test)]
 mod alpha_receipt_353_tests {
     use super::*;
@@ -208,6 +271,7 @@ mod alpha_receipt_353_tests {
             Some(&mut completion),
             None,
             Duration::ZERO,
+            None,
         );
         (root, completion, profile, returned)
     }
@@ -389,337 +453,6 @@ mod alpha_receipt_353_tests {
     }
 }
 
-#[cfg(test)]
-mod sigma_receipt_tests {
-    use super::*;
-    fn receipt(received: Instant, legal: bool) -> SigmaReceipt {
-        let snapshot = Search::new(SigmaContext::from_prefix(&[]).unwrap(), 1, 1)
-            .unwrap()
-            .snapshot();
-        SigmaReceipt {
-            notification: SigmaNotification {
-                chosen: Some((Some(snapshot), 13)),
-                decision_started: received,
-                sent: received,
-            },
-            received,
-            legality_finished: received + Duration::from_millis(110),
-            legal,
-        }
-    }
-
-    #[test]
-    fn alpha_receipt_rule_violation_precedes_lateness_without_state_application() {
-        use crate::arena_clock::Failure;
-        let root = SigmaContext::from_prefix(&[]).unwrap();
-        let original = root.position();
-        for received in [99_000_000, 100_000_000, 101_000_000] {
-            let legal = root.play(209).is_ok();
-            assert!(!legal);
-            let decision =
-                alpha_receipt_decision(Some(100_000_000), received, false, legal, true, false);
-            assert_eq!(decision, Err(Failure::IllegalMove));
-            assert_eq!(root.position(), original);
-            assert_eq!(root.terminal_value(), None);
-        }
-        assert_eq!(
-            alpha_receipt_decision(Some(100), 100, false, true, true, false),
-            Err(Failure::TimeOverrun)
-        );
-        assert_eq!(
-            alpha_receipt_decision(Some(100), 99, true, false, true, true),
-            Err(Failure::Cancelled)
-        );
-        assert_eq!(
-            alpha_receipt_decision(Some(100), 101, false, false, false, true),
-            Err(Failure::EngineError)
-        );
-        assert_eq!(
-            alpha_receipt_decision(Some(100), 99, false, false, false, false),
-            Err(Failure::NoCompletedIteration)
-        );
-        let origin = Instant::now();
-        let received_ns = origin.elapsed().as_nanos() as u64;
-        let deadline = received_ns + 1_000_000;
-        thread::sleep(Duration::from_millis(5));
-        let legal = root.play(13).is_ok();
-        assert!(origin.elapsed().as_nanos() >= u128::from(deadline));
-        assert_eq!(
-            alpha_receipt_decision(Some(deadline), received_ns, false, legal, true, false),
-            Ok(())
-        );
-        assert_eq!(root.position(), original);
-    }
-
-    #[test]
-    fn authority_receipt_exact_edges_and_slow_legality_are_separate() {
-        let started = Instant::now();
-        let deadline = started + Duration::from_millis(100);
-        let timely = receipt(deadline - Duration::from_nanos(1), true);
-        assert!(timely.legality_finished > deadline);
-        assert_eq!(
-            sigma_receipt_decision(Some(deadline), &timely, false),
-            Ok(())
-        );
-        for received in [deadline, deadline + Duration::from_nanos(1)] {
-            assert_eq!(
-                sigma_receipt_decision(Some(deadline), &receipt(received, true), false),
-                Err(crate::arena_clock::Failure::TimeOverrun)
-            );
-        }
-        assert_eq!(
-            sigma_receipt_decision(Some(deadline), &receipt(deadline, false), false),
-            Err(crate::arena_clock::Failure::IllegalMove)
-        );
-        assert_eq!(
-            sigma_receipt_decision(Some(deadline), &timely, true),
-            Err(crate::arena_clock::Failure::Cancelled)
-        );
-    }
-    #[test]
-    fn receiving_authority_timestamps_before_delayed_rules_validation() {
-        let (tx, rx) = mpsc::channel();
-        let sent = Instant::now();
-        tx.send(receipt(sent, true).notification).unwrap();
-        let rules_entered = std::cell::Cell::new(None);
-        let result = receive_sigma_notification(rx, |a| {
-            assert_eq!(a, 13);
-            rules_entered.set(Some(Instant::now()));
-            thread::sleep(Duration::from_millis(20));
-            true
-        })
-        .unwrap();
-        assert!(result.received >= sent);
-        assert!(result.received <= rules_entered.get().unwrap());
-        assert!(
-            result.legality_finished.duration_since(result.received) >= Duration::from_millis(20)
-        );
-        // Deadline supplied from the recorded receipt, not an engine timestamp.
-        assert_eq!(
-            sigma_receipt_decision(
-                Some(result.received + Duration::from_millis(1)),
-                &result,
-                false
-            ),
-            Ok(())
-        );
-    }
-    #[test]
-    fn communication_delay_uses_actual_authority_receipt_not_engine_timestamp() {
-        let (tx, rx) = mpsc::channel();
-        let sent = Instant::now();
-        tx.send(receipt(sent, true).notification).unwrap();
-        let deadline = sent + Duration::from_millis(100);
-        thread::sleep(Duration::from_millis(110));
-        let receipt = receive_sigma_notification(rx, |_| true).unwrap();
-        assert!(receipt.notification.sent < deadline);
-        assert!(receipt.received >= deadline);
-        assert!(
-            receipt.received.duration_since(receipt.notification.sent)
-                >= Duration::from_millis(110)
-        );
-        assert_eq!(
-            sigma_receipt_decision(Some(deadline), &receipt, false),
-            Err(crate::arena_clock::Failure::TimeOverrun)
-        );
-    }
-    #[test]
-    fn original_terminal_error_and_matching_cleanup_survive_notification() {
-        let (tx, rx) = mpsc::channel();
-        let id = RequestId {
-            game: 0,
-            generation: 1,
-            token: 1,
-        };
-        let mut notified = false;
-        let result = wait_sigma_reply(&rx, id, || {
-            assert!(!notified);
-            notified = true;
-            tx.send(Response {
-                id: RequestId {
-                    generation: 2,
-                    ..id
-                },
-                output: Ok(NetworkOutput {
-                    logits: [0.; 136],
-                    value: 0.,
-                }),
-            })
-            .unwrap();
-            tx.send(Response {
-                id,
-                output: Err("inference:post-notification-original".into()),
-            })
-            .unwrap();
-        });
-        assert!(notified);
-        assert_eq!(result.unwrap_err(), "inference:post-notification-original");
-        assert!(rx.try_recv().is_err());
-    }
-
-    #[test]
-    fn actual_timed_controller_freezes_action_drains_then_starts_opponent() {
-        for case in 0..4 {
-            let mut config: Config =
-                serde_json::from_str(include_str!("../tests/fixtures/sigma-clock-config.json"))
-                    .unwrap();
-            config.wall_seconds = None;
-            config.simulations = 3;
-            config.temperature = 0.;
-            for engine in &mut config.engines {
-                engine.kind = "mcts".into();
-            }
-            let mut game = Game {
-                planned: Planned {
-                    id: 0,
-                    candidate_color: 0,
-                    opening: vec![],
-                    family: "synthetic-boundary".into(),
-                    split: Split::Test,
-                },
-                context: SigmaContext::from_prefix(&[]).unwrap(),
-                prefix: vec![],
-                rows: vec![],
-                search: None,
-                alpha_sessions: vec![None, None],
-                tt_profiles: vec![TtProfile::default(), TtProfile::default()],
-                pending: None,
-                generation: 1,
-                root_nn: None,
-                rng: Rng::new(7),
-                nn: 0,
-                advance_calls: 0,
-                terminal_no_nn: 0,
-                allocated_nodes_peak: 0,
-                origin: Instant::now(),
-                observations: vec![],
-                failure: None,
-                forfeit_winner: None,
-                record_teacher: false,
-                move_started: None,
-            };
-            let cancel = Arc::new(AtomicBool::new(false));
-            let (events, requests) = mpsc::sync_channel(8);
-            let (reply_tx, reply_rx) = mpsc::channel();
-            let completed_request = Arc::new(std::sync::atomic::AtomicU64::new(0));
-            let done = completed_request.clone();
-            let pump_cancel = cancel.clone();
-            let pump = thread::spawn(move || {
-                let mut calls = 0;
-                while let Ok(event) = requests.recv() {
-                    let Event::Request(request) = event else {
-                        panic!("unexpected fixture event")
-                    };
-                    calls += 1;
-                    if case != 0 && calls == 2 {
-                        thread::sleep(Duration::from_millis(110));
-                        if case == 3 {
-                            pump_cancel.store(true, Ordering::Relaxed);
-                        }
-                    }
-                    done.store(calls, Ordering::Relaxed);
-                    request
-                        .complete(if case == 2 && calls == 2 {
-                            Err("inference:delayed-original".into())
-                        } else {
-                            Ok(NetworkOutput {
-                                logits: [0.; 136],
-                                value: 0.25,
-                            })
-                        })
-                        .unwrap();
-                }
-                calls
-            });
-            let start = Instant::now();
-            let result = play_sigma_receipt(
-                &mut game,
-                0,
-                &config,
-                &cancel,
-                start,
-                SigmaReplies {
-                    events: &events,
-                    tx: &reply_tx,
-                    rx: &reply_rx,
-                },
-                &"0".repeat(64),
-            );
-            let observation = &game.observations[0];
-            assert!(completed_request.load(Ordering::Relaxed) >= 2);
-            assert!(
-                reply_rx.try_recv().is_err(),
-                "terminal response not drained"
-            );
-            assert!(game.forfeit_winner.is_none());
-            if case == 0 {
-                assert!(result.is_ok());
-                assert_eq!(observation.counters["completed_simulations"], 3);
-            } else {
-                assert_eq!(observation.counters["completed_simulations"], 1);
-                assert!(
-                    observation.counters["authority_receipt_ns"]
-                        .as_u64()
-                        .unwrap()
-                        < observation.deadline_ns.unwrap()
-                );
-                assert!(observation.returned_ns > observation.deadline_ns.unwrap());
-                if case == 1 {
-                    assert!(result.is_ok());
-                    assert!(observation.accepted);
-                    assert_eq!(observation.counters["discarded_late_replies"], 1);
-                    assert_eq!(observation.counters["whole_search"]["root_visits"], 1);
-                } else {
-                    assert!(result.is_err());
-                    assert!(!observation.accepted);
-                    assert_eq!(
-                        observation.failure,
-                        Some(if case == 2 {
-                            crate::arena_clock::Failure::EngineError
-                        } else {
-                            crate::arena_clock::Failure::Cancelled
-                        })
-                    );
-                    if case == 2 {
-                        assert_eq!(
-                            observation.engine_error.as_deref(),
-                            Some("inference:delayed-original")
-                        );
-                    }
-                }
-            }
-            if result.is_ok() {
-                let previous_drain = observation.counters["drain_finished_ns"].as_u64().unwrap();
-                assert_eq!(game.generation, 2);
-                // Opponent starts only after this call has drained and committed;
-                play_sigma_receipt(
-                    &mut game,
-                    1,
-                    &config,
-                    &cancel,
-                    start,
-                    SigmaReplies {
-                        events: &events,
-                        tx: &reply_tx,
-                        rx: &reply_rx,
-                    },
-                    &"0".repeat(64),
-                )
-                .unwrap();
-                assert!(game.observations[1].caller_started_ns >= previous_drain);
-                assert_eq!(game.observations[1].counters["completed_simulations"], 3);
-            }
-            drop(events);
-            pump.join().unwrap();
-            assert!(reply_rx.try_recv().is_err());
-        }
-    }
-}
-/// Per-player TT caller accounting. `whole_caller_seconds` includes namespace /
-/// limits setup, initialization/reset, invocation and counter recording, through
-/// return of the search result/error. It excludes move application and provider
-/// spans. Invocation errors and successful Result.elapsed are nested subsets;
-/// never sum them with invocation or whole-caller time.
 #[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct TtProfile {
     pub attempts: u64,
@@ -833,6 +566,7 @@ fn invoke_alpha(
         None,
         None,
         Duration::ZERO,
+        None,
     )
 }
 #[allow(clippy::too_many_arguments)]
@@ -853,6 +587,7 @@ fn invoke_alpha_observed(
     mut completion: Option<&mut crate::arena_clock::Completion>,
     budget: Option<Duration>,
     reserve: Duration,
+    mut observer: Option<&mut dyn FnMut(&alphabeta::SearchResult)>,
 ) -> alphabeta::Result<alphabeta::SearchResult> {
     profile.attempts += 1;
     let outcome = (|| {
@@ -905,7 +640,10 @@ fn invoke_alpha_observed(
                     ));
                 }
                 let result = session.search_with_updates(root, &bounded, cancel, &mut |r| {
-                    done.publish(r, deadline)
+                    done.publish(r, deadline);
+                    if let Some(observe) = observer.as_mut() {
+                        observe(r);
+                    }
                 });
                 if done.invalid {
                     // Validation is a separate authority failure. Preserve
@@ -1068,158 +806,6 @@ impl Drop for Request {
 fn finish_pending(pending: &mut VecDeque<Request>, reason: &str) {
     for request in pending.drain(..) {
         let _ = request.complete(Err(reason.into()));
-    }
-}
-/// Cancellation asks the pump to stop admission, but never substitutes for the
-/// terminal result of a request the pump already owns.
-fn wait_sigma_reply(
-    rx: &mpsc::Receiver<Response>,
-    id: RequestId,
-    mut request_stop: impl FnMut(),
-) -> std::result::Result<NetworkOutput, String> {
-    let mut stale = false;
-    loop {
-        match rx.recv_timeout(Duration::from_millis(1)) {
-            Ok(response) if response.id == id => {
-                return match response.output {
-                    Err(original) => Err(original),
-                    Ok(_) if stale => {
-                        Err("STALE_INFERENCE_RESPONSE:matching_backend_succeeded".into())
-                    }
-                    Ok(output) => Ok(output),
-                };
-            }
-            Ok(_) => stale = true,
-            Err(mpsc::RecvTimeoutError::Timeout) => request_stop(),
-            Err(mpsc::RecvTimeoutError::Disconnected) => {
-                return Err("inference_channel_closed".into());
-            }
-        }
-    }
-}
-
-#[cfg(test)]
-mod sigma_reply_tests {
-    use super::*;
-    fn request(tx: Sender<Response>) -> Request {
-        Request {
-            id: RequestId {
-                game: 0,
-                generation: 1,
-                token: 1,
-            },
-            input: Box::new([0.; 648]),
-            created: Instant::now(),
-            reply: Some(tx),
-        }
-    }
-    #[test]
-    fn timeout_then_enqueued_error_and_cancel_retains_original_terminal_result() {
-        let (tx, rx) = mpsc::channel();
-        let mut admitted = Some(request(tx));
-        let id = admitted.as_ref().unwrap().id;
-        let cancel = AtomicBool::new(false);
-        let result = wait_sigma_reply(&rx, id, || {
-            admitted
-                .take()
-                .unwrap()
-                .complete(Err("inference:original-fixture".into()))
-                .unwrap();
-            cancel.store(true, Ordering::Relaxed);
-        });
-        assert!(cancel.load(Ordering::Relaxed));
-        assert_eq!(result.unwrap_err(), "inference:original-fixture");
-        assert!(rx.try_recv().is_err());
-    }
-    #[test]
-    fn queued_cancel_and_abandoned_request_each_have_one_terminal_reply() {
-        let (tx, rx) = mpsc::channel();
-        let r = request(tx.clone());
-        let id = r.id;
-        let mut pending = VecDeque::from([r]);
-        finish_pending(&mut pending, "cancelled");
-        assert!(pending.is_empty());
-        assert_eq!(
-            wait_sigma_reply(&rx, id, || panic!("queued cancel reply absent")).unwrap_err(),
-            "cancelled"
-        );
-        assert!(rx.try_recv().is_err());
-        drop(request(tx));
-        assert_eq!(
-            wait_sigma_reply(&rx, id, || panic!("abandoned reply absent")).unwrap_err(),
-            "inference_request_abandoned"
-        );
-        assert!(rx.try_recv().is_err());
-        // The lint repair boxes a failed send without losing its original
-        // response payload or attempting a second terminal reply.
-        let (tx, rx) = mpsc::channel();
-        let rejected = request(tx);
-        drop(rx);
-        let error = rejected
-            .complete(Err("inference:receiver-closed-original".into()))
-            .unwrap_err();
-        assert_eq!(error.0.id, id);
-        assert_eq!(
-            error.0.output.unwrap_err(),
-            "inference:receiver-closed-original"
-        );
-    }
-    #[test]
-    fn stale_reply_does_not_end_wait_or_hide_matching_backend_failure() {
-        let (tx, rx) = mpsc::channel();
-        let r = request(tx.clone());
-        let id = r.id;
-        tx.send(Response {
-            id: RequestId {
-                generation: 2,
-                ..id
-            },
-            output: Err("stale".into()),
-        })
-        .unwrap();
-        r.complete(Err("inference:matching-original".into()))
-            .unwrap();
-        assert_eq!(
-            wait_sigma_reply(&rx, id, || panic!("matching reply missing")).unwrap_err(),
-            "inference:matching-original"
-        );
-    }
-    #[test]
-    fn cancellation_request_waits_for_running_backend_terminal_result() {
-        let (tx, rx) = mpsc::channel();
-        let r = request(tx);
-        let id = r.id;
-        let (notified, started) = mpsc::sync_channel(1);
-        let (done_tx, done_rx) = mpsc::channel();
-        let waiting = thread::spawn(move || {
-            let mut first = true;
-            let result = wait_sigma_reply(&rx, id, || {
-                if first {
-                    notified.send(()).unwrap();
-                    first = false;
-                }
-            });
-            done_tx.send(result).unwrap();
-        });
-        started.recv_timeout(Duration::from_secs(2)).unwrap();
-        assert!(
-            done_rx.try_recv().is_err(),
-            "returned before backend terminal reply"
-        );
-        r.complete(Ok(NetworkOutput {
-            logits: [0.; 136],
-            value: 0.25,
-        }))
-        .unwrap();
-        assert_eq!(
-            done_rx
-                .recv_timeout(Duration::from_secs(2))
-                .unwrap()
-                .unwrap()
-                .value,
-            0.25
-        );
-        waiting.join().unwrap();
     }
 }
 struct Response {
@@ -1785,13 +1371,7 @@ fn commit_action(
     game.move_started = None;
     Ok(())
 }
-/// The same inference pump owns the synchronous backend; a timed caller waits for
-/// its reply before returning, so a late engine error cannot be hidden by a snapshot.
-struct SigmaReplies<'a> {
-    events: &'a SyncSender<Event>,
-    tx: &'a Sender<Response>,
-    rx: &'a mpsc::Receiver<Response>,
-}
+/// Select the actual completed Sigma snapshot or an honest legal no-work fallback.
 fn choose_sigma_action(
     completed: Option<&quoridor_ai::sigma_mcts::Snapshot>,
     fallback: Option<u16>,
@@ -1805,116 +1385,20 @@ fn choose_sigma_action(
         None => fallback.map(|action| (None, action)),
     }
 }
-fn play_sigma_receipt(
+#[allow(clippy::too_many_arguments)]
+fn record_sigma_turn(
     game: &mut Game,
     engine_index: usize,
     config: &Config,
     cancel: &AtomicBool,
     run_start: Instant,
-    replies: SigmaReplies<'_>,
     model_sha: &str,
+    started: Instant,
+    call: crate::sigma_clock::Call,
+    receipt: SigmaReceipt,
+    drained: Instant,
 ) -> std::result::Result<(), String> {
-    let started = Instant::now();
-    let e = &config.engines[engine_index];
-    let duration = Duration::from_millis(e.time_ms.ok_or("missing MCTS caller clock")?);
-    let reserve = Duration::from_millis(config.arena.as_ref().map_or(0, |a| a.return_reserve_ms));
-    let id_game = game.planned.id;
-    let generation = game.generation;
-    let until = started
-        .checked_add(duration.saturating_sub(reserve))
-        .ok_or("invalid_sigma_decision_deadline")?;
-    let root = game.context.clone();
-    let fallback = root.legal_ids().into_iter().next();
-    let initial_rng = game.rng.clone();
-    let (call, receipt, rng, drained) = thread::scope(|scope| {
-        let (notify_tx, notify_rx) = mpsc::channel();
-        let authority_root = root.clone();
-        let authority = scope.spawn(move || {
-            receive_sigma_notification(notify_rx, |action| authority_root.play(action).is_ok())
-        });
-        let chosen_rng = std::cell::RefCell::new(initial_rng);
-        let notified = std::cell::Cell::new(false);
-        let call = {
-            let notify = |completed: Option<&quoridor_ai::sigma_mcts::Snapshot>| {
-                if notified.replace(true) {
-                    return;
-                }
-                let decision_started = Instant::now();
-                let chosen = choose_sigma_action(
-                    completed,
-                    fallback,
-                    config.temperature,
-                    &mut chosen_rng.borrow_mut(),
-                );
-                let _ = notify_tx.send(SigmaNotification {
-                    chosen,
-                    decision_started,
-                    sent: Instant::now(),
-                });
-            };
-            let budget = crate::sigma_clock::Budget {
-                started,
-                duration,
-                reserve,
-                generation,
-                simulations: config.simulations,
-                limits: Limits {
-                    max_nodes: config.mcts_max_nodes,
-                    max_depth: 200,
-                    max_bytes: config.mcts_max_bytes,
-                },
-            };
-            let cancelled = || {
-                cancel.load(Ordering::Relaxed)
-                    || config.pause_file.as_ref().is_some_and(|p| p.exists())
-            };
-            let infer = |token, input, prior: &crate::sigma_clock::Call| {
-                let id = RequestId {
-                    game: id_game,
-                    generation,
-                    token,
-                };
-                replies
-                    .events
-                    .send(Event::Request(Request {
-                        id,
-                        input,
-                        created: Instant::now(),
-                        reply: Some(replies.tx.clone()),
-                    }))
-                    .map_err(|_| "inference_channel_closed".to_owned())?;
-                let output = wait_sigma_reply(replies.rx, id, || {
-                    if guard(config, run_start, u64::MAX).is_some() {
-                        cancel.store(true, Ordering::Relaxed);
-                    }
-                    // Notify from a frozen prior completion while continuing
-                    // to await this exact admitted request's terminal reply.
-                    if Instant::now() >= until {
-                        notify(prior.completed.as_ref());
-                    }
-                })?;
-                Ok(crate::sigma_clock::Reply {
-                    output,
-                    decision_notified: notified.get(),
-                })
-            };
-            let call = crate::sigma_clock::run(&root, budget, cancelled, infer);
-            notify(call.completed.as_ref());
-            call
-        };
-        drop(notify_tx);
-        let receipt = finish_sigma_authority(|| {
-            authority
-                .join()
-                .map_err(|_| "sigma_authority_panicked".to_owned())
-                .and_then(|r| r)
-        });
-        match receipt {
-            Ok((receipt, drained)) => Ok((call, receipt, chosen_rng.into_inner(), drained)),
-            Err(receipt_error) => Err(call.error.unwrap_or(receipt_error)),
-        }
-    })?;
-    game.rng = rng;
+    let duration = Duration::from_millis(config.engines[engine_index].time_ms.unwrap());
     let returned = drained;
     game.nn += call.returned;
     game.advance_calls += call.advance_calls;
@@ -1940,10 +1424,9 @@ fn play_sigma_receipt(
             "cancelled" | "paused" | "wall_limit" | "deadline" | "memory_limit"
         )
     });
-    // The pump also raises its cancellation flag after a backend failure. Keep
-    // that engine error distinct from explicit cancellation in the move record.
+    // Preserve the original synchronous backend error; reserve stop is separate
+    // from explicit user/whole-job cancellation.
     let cancelled = (cancel.load(Ordering::Relaxed) && !backend_failed)
-        || call.stop == "cancelled"
         || config.pause_file.as_ref().is_some_and(|p| p.exists());
     let checked = Instant::now();
     let mut decision = sigma_receipt_decision(started.checked_add(duration), &receipt, cancelled);
@@ -1987,6 +1470,9 @@ fn play_sigma_receipt(
         .min(u64::MAX as u128) as u64)
         .into();
     counters["terminal_request_error"] = call.error.clone().into();
+    counters["terminal_collected"] = true.into();
+    counters["authority_tid"] = serde_json::json!(unsafe { libc::syscall(libc::SYS_gettid) });
+    counters["authority_core"] = serde_json::json!(unsafe { libc::sched_getcpu() });
     counters["cancellation_flag_at_return"] = cancel.load(Ordering::Relaxed).into();
     counters["pause_at_return"] = config
         .pause_file
@@ -1994,7 +1480,7 @@ fn play_sigma_receipt(
         .is_some_and(|p| p.exists())
         .into();
     counters["guard_reason_at_return"] = guard(config, run_start, u64::MAX).into();
-    counters["last_completed_simulation_ns"] = call.completed_at.map(ns).into();
+    counters["last_completed_simulation_ns"] = receipt.notification.completed_at.map(ns).into();
     counters["completed_simulations"] = selected.map_or(0, |s| s.root_visits).into();
     counters["selection_reason"] = if selected.is_some() {
         "completed_simulation"
@@ -2244,24 +1730,7 @@ fn worker(
                 .filter(|a| a.disable_continuation_static_ordering)
                 .map(|_| position_traits(g, &config));
             let mut failure = None;
-            if e.kind == "mcts" && e.time_ms.is_some() && !g.record_teacher {
-                if let Err(error) = play_sigma_receipt(
-                    g,
-                    engine_index,
-                    &config,
-                    &cancel,
-                    run_start,
-                    SigmaReplies {
-                        events: &events,
-                        tx: &reply_tx,
-                        rx: &reply_rx,
-                    },
-                    &evaluators[engine_index].identity.row_identity,
-                ) {
-                    failure = Some(error);
-                }
-                progressed = true;
-            } else if e.kind == "mcts" {
+            if e.kind == "mcts" {
                 if g.search.is_none() {
                     g.move_started = Some(Instant::now());
                     match Search::with_limits(
@@ -2410,6 +1879,7 @@ fn worker(
                         .then_some(e.time_ms.map(Duration::from_millis))
                         .flatten(),
                     Duration::from_millis(config.arena.as_ref().map_or(0, |a| a.return_reserve_ms)),
+                    None,
                 );
                 if !g.record_teacher {
                     let returned = Instant::now();
@@ -2589,152 +2059,1106 @@ fn worker(
     }
     let _ = events.send(Event::WorkerStopped);
 }
-#[cfg(test)]
-mod serial_shared_inference_tests {
-    use super::*;
-    fn config() -> Config {
-        let mut c: Config =
-            serde_json::from_str(include_str!("../../../configs/arena/smoke.json")).unwrap();
-        c.workers = 1;
-        c.active_games = 1;
-        c.max_batch = 1;
-        c.cpu_cores = vec![2];
-        c.inference_cpu_core = Some(2);
-        c.arena.as_mut().unwrap().comparison = crate::arena::Comparison::WholeWallTime;
-        c.engines[1].kind = "mcts".into();
-        c.engines[1].time_ms = Some(100);
-        c.inference = Some(crate::config::Inference {
-            backend: "ort".into(),
-            model: "unopened-fixture.onnx".into(),
-            model_sha: "0".repeat(64),
-            library: None,
-            device: 0,
-            cuda_graph: false,
-        });
-        c
+// Timed evaluation owns exactly one game in the process main thread. Engine
+// threads retain their evaluator/backend/session; no inference pump is involved.
+struct EvaluationTurn {
+    id: RequestId,
+    root: SigmaContext,
+    started: Instant,
+    rng: Rng,
+    stop: Arc<AtomicBool>,
+}
+enum EvaluationCommand {
+    Turn(Box<EvaluationTurn>),
+    Shutdown,
+}
+enum EvaluationUpdate {
+    Sigma(SigmaNotification, Rng),
+    Alpha(Box<alphabeta::SearchResult>),
+}
+enum EvaluationResult {
+    Sigma(Box<crate::sigma_clock::Call>),
+    Alpha {
+        result: std::result::Result<Box<alphabeta::SearchResult>, String>,
+        completion: Box<crate::arena_clock::Completion>,
+        profile: Box<TtProfile>,
+    },
+    Error(String),
+}
+enum EvaluationEvent {
+    Ready(
+        usize,
+        std::result::Result<
+            (EvaluatorIdentity, f64, f64),
+            Box<dyn std::error::Error + Send + Sync>,
+        >,
+    ),
+    Update(usize, RequestId, EvaluationUpdate),
+    Terminal {
+        engine: usize,
+        id: RequestId,
+        result: EvaluationResult,
+        requests: u64,
+        callbacks: u64,
+        outputs: u64,
+        worker_tid: i64,
+        worker_core: usize,
+        finished: Instant,
+        inference_seconds: f64,
+        backend_work: Option<InferenceCounters>,
+    },
+    Stopped(usize, Option<InferenceCounters>, f64),
+}
+struct EvaluationWorker {
+    commands: Sender<EvaluationCommand>,
+    handle: Option<thread::JoinHandle<()>>,
+}
+// A failed initialization still records the actual engine-thread join result.
+// This stays in the existing arena error funnel; no second publication authority.
+#[derive(Debug)]
+struct EvaluationInitializationFailure {
+    primary: Box<dyn std::error::Error + Send + Sync>,
+    joined: bool,
+}
+impl std::fmt::Display for EvaluationInitializationFailure {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}; AI_workers_joined={}", self.primary, self.joined)
     }
-    #[test]
-    fn serial_shared_gate_rejects_every_supplied_backend() {
-        let c = config();
-        struct MetadataOnly(quoridor_inference::BackendMetadata);
-        impl InferenceBackend for MetadataOnly {
-            fn infer(
-                &mut self,
-                _: &[[f32; quoridor_inference::FEATURES]],
-            ) -> std::result::Result<Vec<NetworkOutput>, quoridor_inference::InferenceError>
+}
+impl std::error::Error for EvaluationInitializationFailure {
+    fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
+        Some(self.primary.as_ref())
+    }
+}
+struct EvaluationWorkers {
+    workers: Vec<EvaluationWorker>,
+    events: mpsc::Receiver<EvaluationEvent>,
+    cancel: Arc<AtomicBool>,
+}
+impl EvaluationWorkers {
+    fn start(
+        config: &Config,
+        admission: &crate::resources::Admission,
+        mut provided: Option<Box<dyn InferenceBackend>>,
+    ) -> Result<(Self, Vec<EvaluatorIdentity>, f64, f64)> {
+        if provided.is_some() && config.engines.iter().filter(|e| e.kind == "mcts").count() != 1 {
+            return Err("supplied backend needs exactly one owning Sigma engine".into());
+        }
+        let (events, rx) = mpsc::channel();
+        let cancel = Arc::new(AtomicBool::new(false));
+        let mut owned = Self {
+            workers: Vec::new(),
+            events: rx,
+            cancel,
+        };
+        for engine in 0..config.engines.len() {
+            let (commands, requests) = mpsc::channel();
+            let tx = events.clone();
+            let c = config.clone();
+            let cancelled = owned.cancel.clone();
+            let core = admission.worker_cores[engine];
+            let backend = if c.engines[engine].kind == "mcts" {
+                provided.take()
+            } else {
+                None
+            };
+            let handle = thread::spawn(move || {
+                // Pin before construction: ORT and NNUE are constructed and
+                // destroyed by the same AI owner that executes their calls.
+                let initialized = (|| -> Result<_> {
+                    crate::resources::pin(core)?;
+                    let initialized = Instant::now();
+                    let e = evaluator(&c.engines[engine], &c)?;
+                    let evaluator_seconds = initialized.elapsed().as_secs_f64();
+                    let initialized = Instant::now();
+                    let backend = if c.engines[engine].kind == "mcts" {
+                        let backend = match backend {
+                            Some(backend) => backend,
+                            None => make_backend(&c)?.ok_or("missing Sigma backend")?,
+                        };
+                        if c.inference
+                            .as_ref()
+                            .is_none_or(|i| i.model_sha != backend.metadata().model_sha)
+                            || backend.counters() != InferenceCounters::default()
+                        {
+                            return Err("owning backend identity/initial counters".into());
+                        }
+                        Some(backend)
+                    } else {
+                        None
+                    };
+                    Ok((
+                        e,
+                        backend,
+                        evaluator_seconds,
+                        initialized.elapsed().as_secs_f64(),
+                    ))
+                })();
+                let (evaluator, mut backend, evaluator_seconds, backend_seconds) = match initialized
+                {
+                    Ok(value) => value,
+                    Err(error) => {
+                        let _ = tx.send(EvaluationEvent::Ready(engine, Err(error)));
+                        return;
+                    }
+                };
+                if tx
+                    .send(EvaluationEvent::Ready(
+                        engine,
+                        Ok((
+                            evaluator.identity.clone(),
+                            evaluator_seconds,
+                            backend_seconds,
+                        )),
+                    ))
+                    .is_err()
+                {
+                    return;
+                }
+                let mut session = None;
+                let mut profile = TtProfile::default();
+                let mut game = None;
+                while let Ok(command) = requests.recv() {
+                    let EvaluationCommand::Turn(turn) = command else {
+                        break;
+                    };
+                    if game != Some(turn.id.game) {
+                        // Preserve the original per-game TT lifetime, without
+                        // transferring evaluator or search ownership to main.
+                        session = None;
+                        profile = TtProfile::default();
+                        game = Some(turn.id.game);
+                    }
+                    let mut requests = 0u64;
+                    let mut callbacks = 0u64;
+                    let mut outputs = 0u64;
+                    let mut inference_seconds = 0.0;
+                    let searched = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+                        let e = &c.engines[engine];
+                        if e.kind == "mcts" {
+                            let mut sent_at = None;
+                            let publish =
+                                |snapshot: &quoridor_ai::sigma_mcts::Snapshot,
+                                 rng: &Rng,
+                                 completed_at: Option<Instant>| {
+                                    let mut chosen_rng = rng.clone();
+                                    let decision_started = Instant::now();
+                                    let chosen = choose_sigma_action(
+                                        Some(snapshot),
+                                        None,
+                                        c.temperature,
+                                        &mut chosen_rng,
+                                    );
+                                    let notification = SigmaNotification {
+                                        chosen,
+                                        completed_at,
+                                        decision_started,
+                                        sent: Instant::now(),
+                                    };
+                                    let _ = tx.send(EvaluationEvent::Update(
+                                        engine,
+                                        turn.id,
+                                        EvaluationUpdate::Sigma(notification, chosen_rng),
+                                    ));
+                                };
+                            let call = crate::sigma_clock::run(
+                                &turn.root,
+                                crate::sigma_clock::Budget {
+                                    started: turn.started,
+                                    duration: Duration::from_millis(e.time_ms.unwrap()),
+                                    reserve: Duration::from_millis(
+                                        c.arena.as_ref().unwrap().return_reserve_ms,
+                                    ),
+                                    generation: turn.id.generation,
+                                    simulations: c.simulations,
+                                    limits: Limits {
+                                        max_nodes: c.mcts_max_nodes,
+                                        max_depth: 200,
+                                        max_bytes: c.mcts_max_bytes,
+                                    },
+                                },
+                                || cancelled.load(Ordering::Relaxed),
+                                |_, input, prior| {
+                                    if prior.completed_at != sent_at
+                                        && let Some(snapshot) = &prior.completed
+                                    {
+                                        publish(snapshot, &turn.rng, prior.completed_at);
+                                        sent_at = prior.completed_at;
+                                    }
+                                    requests += 1;
+                                    let start = Instant::now();
+                                    // Exactly one synchronous row on this AI
+                                    // thread. ORT uses intra/inter1,sequential.
+                                    let output = backend.as_mut().unwrap().infer(&[*input]);
+                                    inference_seconds += start.elapsed().as_secs_f64();
+                                    callbacks += 1;
+                                    if let Ok(rows) = &output {
+                                        outputs += rows.len() as u64;
+                                    }
+                                    let mut rows = output.map_err(|e| format!("inference:{e}"))?;
+                                    if rows.len() != 1 {
+                                        return Err("backend_output_shape".into());
+                                    }
+                                    Ok(crate::sigma_clock::Reply {
+                                        output: rows.pop().unwrap(),
+                                        decision_notified: turn.stop.load(Ordering::Relaxed),
+                                    })
+                                },
+                            );
+                            if call.completed_at != sent_at
+                                && let Some(snapshot) = &call.completed
+                            {
+                                publish(snapshot, &turn.rng, call.completed_at);
+                            }
+                            EvaluationResult::Sigma(Box::new(call))
+                        } else {
+                            let limits = SearchLimits {
+                                max_depth: e.depth,
+                                max_nodes: e.max_nodes,
+                                time_limit: e.time_ms.map(|ms| {
+                                    Duration::from_millis(ms.saturating_sub(
+                                        c.arena.as_ref().unwrap().return_reserve_ms,
+                                    ))
+                                }),
+                                tt_entries: c.arena.as_ref().unwrap().tt_entries,
+                                use_pvs: true,
+                                use_tt: true,
+                            };
+                            let namespace = alphabeta::SearchNamespace {
+                                evaluator: format!(
+                                    "{}:simd={}",
+                                    evaluator.identity.row_identity, e.simd
+                                ),
+                                rules: turn.root.ruleset().id().into(),
+                                selectivity: "fullwidth-PVS-MPC-OFF-v1".into(),
+                            };
+                            let mut completion = crate::arena_clock::Completion::default();
+                            let mut publish = |result: &alphabeta::SearchResult| {
+                                let _ = tx.send(EvaluationEvent::Update(
+                                    engine,
+                                    turn.id,
+                                    EvaluationUpdate::Alpha(Box::new(result.clone())),
+                                ));
+                            };
+                            let result = invoke_alpha_observed(
+                                &mut session, &mut profile, evaluator.evaluator.as_ref().unwrap().clone(), namespace,
+                                &turn.root, &limits, &turn.stop, turn.started,
+                                |evaluator, namespace, capacity| {
+                                    if c.arena.as_ref().unwrap().disable_continuation_static_ordering {
+                                        alphabeta::SearchSession::new_without_continuation_or_static(evaluator, namespace, capacity)
+                                    } else { alphabeta::SearchSession::new(evaluator, namespace, capacity) }
+                                },
+                                Some(&mut completion), e.time_ms.map(Duration::from_millis),
+                                Duration::from_millis(c.arena.as_ref().unwrap().return_reserve_ms), Some(&mut publish),
+                            ).map_err(|error| error.to_string());
+                            EvaluationResult::Alpha {
+                                result: result.map(Box::new),
+                                completion: Box::new(completion),
+                                profile: Box::new(profile.clone()),
+                            }
+                        }
+                    }));
+                    let result = searched.unwrap_or_else(|cause| {
+                        let message = cause
+                            .downcast_ref::<String>()
+                            .cloned()
+                            .or_else(|| cause.downcast_ref::<&str>().map(|s| (*s).to_owned()))
+                            .unwrap_or_else(|| "non-string panic".into());
+                        EvaluationResult::Error(format!("worker_panicked:{message}"))
+                    });
+                    if tx
+                        .send(EvaluationEvent::Terminal {
+                            engine,
+                            id: turn.id,
+                            result,
+                            requests,
+                            callbacks,
+                            outputs,
+                            worker_tid: unsafe { libc::syscall(libc::SYS_gettid) },
+                            worker_core: unsafe { libc::sched_getcpu() } as usize,
+                            finished: Instant::now(),
+                            inference_seconds,
+                            backend_work: backend.as_ref().map(|b| b.counters()),
+                        })
+                        .is_err()
+                    {
+                        break;
+                    }
+                }
+                let work = backend.as_ref().map(|b| b.counters());
+                let cleanup = Instant::now();
+                drop(backend);
+                drop(session);
+                drop(evaluator);
+                let _ = tx.send(EvaluationEvent::Stopped(
+                    engine,
+                    work,
+                    cleanup.elapsed().as_secs_f64(),
+                ));
+            });
+            owned.workers.push(EvaluationWorker {
+                commands,
+                handle: Some(handle),
+            });
+        }
+        drop(events);
+        let mut identities = vec![None; config.engines.len()];
+        while identities.iter().any(Option::is_none) {
+            match owned.events.recv_timeout(Duration::from_millis(1)) {
+                Ok(EvaluationEvent::Ready(index, result))
+                    if index < identities.len() && identities[index].is_none() =>
+                {
+                    match result {
+                        Ok(identity) => identities[index] = Some(identity),
+                        Err(error) => {
+                            let joined = owned.close();
+                            return Err(Box::new(EvaluationInitializationFailure {
+                                primary: error,
+                                joined,
+                            }));
+                        }
+                    }
+                }
+                Err(mpsc::RecvTimeoutError::Timeout) => {
+                    if owned.workers.iter().enumerate().any(|(i, w)| {
+                        identities[i].is_none() && w.handle.as_ref().unwrap().is_finished()
+                    }) {
+                        let joined = owned.close();
+                        return Err(Box::new(EvaluationInitializationFailure {
+                            primary: "initialization:AI worker stopped without identity".into(),
+                            joined,
+                        }));
+                    }
+                }
+                _ => {
+                    let joined = owned.close();
+                    return Err(Box::new(EvaluationInitializationFailure {
+                        primary: "initialization:unexpected AI reply".into(),
+                        joined,
+                    }));
+                }
+            }
+        }
+        let mut evaluator_seconds = 0.0;
+        let mut backend_seconds = 0.0;
+        let identities = identities
+            .into_iter()
+            .map(|value| {
+                let (identity, evaluator, backend) = value.unwrap();
+                evaluator_seconds += evaluator;
+                backend_seconds += backend;
+                identity
+            })
+            .collect();
+        Ok((owned, identities, evaluator_seconds, backend_seconds))
+    }
+    fn close(&mut self) -> bool {
+        self.cancel.store(true, Ordering::Relaxed);
+        for worker in &self.workers {
+            let _ = worker.commands.send(EvaluationCommand::Shutdown);
+        }
+        let mut joined = true;
+        for worker in &mut self.workers {
+            if let Some(handle) = worker.handle.take() {
+                joined &= handle.join().is_ok();
+            }
+        }
+        joined
+    }
+}
+impl Drop for EvaluationWorkers {
+    fn drop(&mut self) {
+        self.close();
+    }
+}
+
+struct ReceivedEvaluation {
+    sigma: Option<(SigmaReceipt, Rng)>,
+    alpha: crate::arena_clock::Completion,
+    response: Option<Instant>,
+    first_error: Option<String>,
+    fallback: Option<u16>,
+}
+impl ReceivedEvaluation {
+    fn new(fallback: Option<u16>) -> Self {
+        Self {
+            fallback,
+            sigma: None,
+            alpha: Default::default(),
+            response: None,
+            first_error: None,
+        }
+    }
+    fn update(&mut self, update: EvaluationUpdate, received: Instant, until: Instant) {
+        match update {
+            EvaluationUpdate::Sigma(notification, rng) => {
+                if received < until && self.response.is_none() {
+                    self.sigma = Some((
+                        SigmaReceipt {
+                            notification,
+                            received,
+                            legality_finished: received,
+                            legal: false,
+                        },
+                        rng,
+                    ));
+                }
+            }
+            EvaluationUpdate::Alpha(result) => {
+                // Completion validates even superseded/late malformed output.
+                // Its timestamp is sampled here, on the receiving main thread.
+                self.alpha.publish(
+                    &result,
+                    Some(if self.response.is_some() {
+                        received
+                    } else {
+                        until
+                    }),
+                );
+            }
+        }
+    }
+    fn freeze(&mut self, game: &mut Game, sigma: bool) {
+        if self.response.is_some() {
+            return;
+        }
+        let now = Instant::now();
+        let response = if sigma {
+            if self.sigma.is_none() {
+                let chosen = choose_sigma_action(None, self.fallback, 0.0, &mut game.rng);
+                self.sigma = Some((
+                    SigmaReceipt {
+                        notification: SigmaNotification {
+                            chosen,
+                            completed_at: None,
+                            decision_started: now,
+                            sent: Instant::now(),
+                        },
+                        received: Instant::now(),
+                        legality_finished: now,
+                        legal: false,
+                    },
+                    game.rng.clone(),
+                ));
+            }
+            self.sigma.as_ref().unwrap().0.received
+        } else {
+            self.alpha.at.unwrap_or(now)
+        };
+        self.response = Some(response);
+    }
+}
+
+#[allow(clippy::too_many_arguments)]
+fn record_evaluation_alpha(
+    game: &mut Game,
+    engine: usize,
+    config: &Config,
+    owners: &EvaluationWorkers,
+    started: Instant,
+    received: Instant,
+    drained: Instant,
+    completion: &crate::arena_clock::Completion,
+    terminal: EvaluationResult,
+    run_start: Instant,
+    first_error: Option<String>,
+    fallback: Option<u16>,
+) -> std::result::Result<(), String> {
+    let (result, worker_completion, profile, error) = match terminal {
+        EvaluationResult::Alpha {
+            result,
+            completion,
+            profile,
+        } => {
+            let error = result.as_ref().err().cloned();
+            (result.ok(), Some(completion), Some(profile), error)
+        }
+        EvaluationResult::Error(error) => (None, None, None, Some(error)),
+        _ => (None, None, None, Some("wrong engine terminal kind".into())),
+    };
+    if let Some(profile) = profile {
+        game.tt_profiles[engine] = *profile;
+    }
+    let selected = completion.result.as_ref();
+    let action = selected.and_then(|r| r.action).or(fallback);
+    let legal = action.is_some_and(|a| game.context.play(a).is_ok());
+    let valid = completion.validate_actions(|a| game.context.play(a).is_ok())
+        && worker_completion
+            .as_ref()
+            .is_none_or(|c| c.validate_actions(|a| game.context.play(a).is_ok()));
+    let snapshot_error = (!valid).then(|| {
+        alphabeta::SearchError::Root("invalid completed-depth snapshot".into()).to_string()
+    });
+    let primary = first_error
+        .clone()
+        .or_else(|| error.clone())
+        .or_else(|| snapshot_error.clone());
+    let engine_error = error.or(snapshot_error).or_else(|| first_error.clone());
+    let cancelled = owners.cancel.load(Ordering::Relaxed);
+    let ns = |t: Instant| {
+        t.duration_since(game.origin)
+            .as_nanos()
+            .min(u64::MAX as u128) as u64
+    };
+    let deadline = started + Duration::from_millis(config.engines[engine].time_ms.unwrap());
+    let mut failure = if engine_error.is_some() {
+        Some(crate::arena_clock::Failure::EngineError)
+    } else if cancelled {
+        Some(crate::arena_clock::Failure::Cancelled)
+    } else if !legal || !valid {
+        Some(crate::arena_clock::Failure::IllegalMove)
+    } else if received >= deadline {
+        Some(crate::arena_clock::Failure::TimeOverrun)
+    } else {
+        None
+    };
+    if let Some(reason) = guard(config, run_start, u64::MAX) {
+        failure = Some(crate::arena_clock::failure_from_reason(&reason));
+    }
+    let checked = Instant::now();
+    let counters = serde_json::json!({
+        "authority_receipt_ns": ns(received), "drain_finished_ns": ns(drained),
+        "authority_legal":legal, "inflight_after_drain":0,
+        "clock_contract":SIGMA_RECEIPT_CLOCK,"clock_contract_sha256":SIGMA_RECEIPT_CONTRACT_SHA256,
+        "completed_snapshot_validation_failed":!valid,
+        "last_completed_iteration_ns":completion.at.map(ns),
+        "selection_reason":if selected.is_some() {"completed_iteration"} else {"legal_fallback_no_completed_iteration"},
+        "whole_search":result.as_deref().map(crate::arena_clock::alpha_counters),
+        "first_receipt_or_control_error":first_error,
+        "terminal_collected":true,"reserve_stop_is_not_user_cancel":true,
+        "authority_tid":unsafe {libc::syscall(libc::SYS_gettid)},
+        "authority_core":unsafe {libc::sched_getcpu()},
+    });
+    game.observations.push(crate::arena_clock::MoveObservation {
+        ply: game.context.total_ply(),
+        side: game.context.position().turn,
+        engine_index: engine,
+        action,
+        accepted: false,
+        failure,
+        caller_started_ns: ns(started),
+        deadline_ns: Some(ns(deadline)),
+        returned_ns: ns(drained),
+        admission_checked_ns: ns(checked),
+        accepted_ns: None,
+        caller_seconds: checked.duration_since(started).as_secs_f64(),
+        thinking_seconds: Some(received.duration_since(started).as_secs_f64()),
+        last_completed_iteration_ns: completion.at.map(ns),
+        completed_iteration_counters: selected.map(crate::arena_clock::alpha_counters),
+        engine_error: engine_error.clone(),
+        stop: result
+            .as_ref()
+            .map(|r| crate::arena_clock::stop_name(r.stop).into()),
+        completed_depth: selected.map(|r| r.completed_depth),
+        value_stm: selected.and_then(|r| r.value),
+        pv: selected.map_or(Vec::new(), |r| r.pv.clone()),
+        counters,
+    });
+    if let Some(failure) = failure {
+        game.failure = Some(failure);
+        return Err(primary.unwrap_or_else(|| format!("move_rejected:{failure:?}")));
+    }
+    commit_action(
+        game,
+        action.ok_or("no_legal_action")?,
+        None,
+        config,
+        &owners.cancel,
+        run_start,
+    )
+    .map_err(|e| e.to_string())
+}
+
+#[allow(clippy::too_many_arguments)]
+fn evaluation_turn(
+    game: &mut Game,
+    engine: usize,
+    config: &Config,
+    owners: &EvaluationWorkers,
+    identity: &EvaluatorIdentity,
+    run_start: Instant,
+    nn_calls: &mut u64,
+    inference_seconds: &mut f64,
+    pump: &mut PumpProfile,
+    memory_limit: u64,
+) -> std::result::Result<(), String> {
+    // Cache the legal no-work fallback outside the receipt critical path. The
+    // immutable choice is frozen by main before a later terminal is processed.
+    let fallback = game.context.legal_ids().into_iter().next();
+    let started = Instant::now();
+    let stop = Arc::new(AtomicBool::new(false));
+    let until = started
+        + Duration::from_millis(
+            config.engines[engine]
+                .time_ms
+                .unwrap()
+                .saturating_sub(config.arena.as_ref().unwrap().return_reserve_ms),
+        );
+    let id = RequestId {
+        game: game.planned.id,
+        generation: game.generation,
+        token: 0,
+    };
+    owners.workers[engine]
+        .commands
+        .send(EvaluationCommand::Turn(Box::new(EvaluationTurn {
+            id,
+            root: game.context.clone(),
+            started,
+            rng: game.rng.clone(),
+            stop: stop.clone(),
+        })))
+        .map_err(|_| "AI turn channel closed")?;
+    let mut received = ReceivedEvaluation::new(fallback);
+    let sigma = config.engines[engine].kind == "mcts";
+    let terminal = loop {
+        // Existing wall/pause/memory guards remain active while synchronous
+        // inference drains; no journal/output walk or model work on this path.
+        if let Some(reason) = guard(config, run_start, memory_limit) {
+            received.first_error.get_or_insert(reason);
+            owners.cancel.store(true, Ordering::Relaxed);
+        }
+        if owners.cancel.load(Ordering::Relaxed) || Instant::now() >= until {
+            received.freeze(game, sigma);
+            stop.store(true, Ordering::Relaxed);
+        }
+        let wait = until
+            .saturating_duration_since(Instant::now())
+            .min(Duration::from_millis(1));
+        match owners.events.recv_timeout(if received.response.is_some() {
+            Duration::from_millis(1)
+        } else {
+            wait
+        }) {
+            Ok(EvaluationEvent::Update(owner, origin, update))
+                if owner == engine && origin == id =>
             {
-                panic!("metadata-only admission fixture must not infer");
+                let at = Instant::now(); // Actual main receipt, before legality/writes.
+                received.update(update, at, until);
             }
-            fn metadata(&self) -> &quoridor_inference::BackendMetadata {
-                &self.0
+            Ok(EvaluationEvent::Terminal {
+                engine: owner,
+                id: origin,
+                result,
+                requests,
+                callbacks,
+                outputs,
+                worker_tid,
+                worker_core,
+                finished,
+                inference_seconds: seconds,
+                backend_work,
+            }) if owner == engine && origin == id => {
+                let collected = Instant::now();
+                received.freeze(game, sigma);
+                *nn_calls += requests;
+                *inference_seconds += seconds;
+                if let Some(work) = backend_work {
+                    pump.backend_work = Some(inference_work(work));
+                    pump.backend_warmup_nn = work.warm_rows;
+                }
+                break (
+                    result,
+                    collected,
+                    requests,
+                    callbacks,
+                    outputs,
+                    Some(worker_tid),
+                    Some(worker_core),
+                    Some(finished),
+                );
             }
-            fn counters(&self) -> InferenceCounters {
-                InferenceCounters::default()
+            Err(mpsc::RecvTimeoutError::Timeout) => {
+                if owners.workers[engine]
+                    .handle
+                    .as_ref()
+                    .unwrap()
+                    .is_finished()
+                {
+                    break (
+                        EvaluationResult::Error("worker_panicked:missing terminal reply".into()),
+                        Instant::now(),
+                        0,
+                        0,
+                        0,
+                        None,
+                        None,
+                        None,
+                    );
+                }
+            }
+            Err(mpsc::RecvTimeoutError::Disconnected) => {
+                break (
+                    EvaluationResult::Error("AI terminal channel closed".into()),
+                    Instant::now(),
+                    0,
+                    0,
+                    0,
+                    None,
+                    None,
+                    None,
+                );
+            }
+            Ok(event) => {
+                let reason = match event {
+                    EvaluationEvent::Update(owner, origin, _) => format!(
+                        "wrong owning turn update: engine={owner}, origin={origin:?}, expected={id:?}"
+                    ),
+                    EvaluationEvent::Terminal {
+                        engine: owner,
+                        id: origin,
+                        result,
+                        requests,
+                        callbacks,
+                        outputs,
+                        ..
+                    } => {
+                        let error = match result {
+                            EvaluationResult::Error(error) => Some(error),
+                            EvaluationResult::Sigma(call) => call.error,
+                            EvaluationResult::Alpha { result, .. } => result.err(),
+                        };
+                        format!(
+                            "wrong owning terminal: engine={owner}, origin={origin:?}, expected={id:?}, requests={requests}, callbacks={callbacks}, outputs={outputs}, original_error={error:?}"
+                        )
+                    }
+                    EvaluationEvent::Ready(owner, result) => format!(
+                        "unexpected initialization reply: engine={owner}, error={:?}",
+                        result.err()
+                    ),
+                    EvaluationEvent::Stopped(owner, work, _) => format!(
+                        "unexpected worker stop: engine={owner}, work={:?}",
+                        work.map(inference_work)
+                    ),
+                };
+                received.first_error.get_or_insert(reason);
+                owners.cancel.store(true, Ordering::Relaxed);
+                stop.store(true, Ordering::Relaxed);
             }
         }
-        for kind in ["non-cpu-backend", "onnxruntime-cpu"] {
-            let provided: Option<Box<dyn InferenceBackend>> = Some(Box::new(MetadataOnly(
-                quoridor_inference::BackendMetadata {
-                    backend: kind.into(),
-                    model_sha: c.inference.as_ref().unwrap().model_sha.clone(),
-                    max_batch: 1,
-                    input_features: quoridor_inference::FEATURES,
-                    output_values: quoridor_inference::POLICY + 1,
-                },
-            )));
-            assert_eq!(
-                provided.as_ref().unwrap().metadata().model_sha,
-                c.inference.as_ref().unwrap().model_sha
-            );
-            // The actual callsite passes this presence check before admission.
-            assert!(!serial_shared_inference_allowed(
-                &c,
-                "arena",
-                provided.is_some()
-            ));
-            assert_eq!(provided.as_ref().unwrap().counters().logical_rows, 0);
+    };
+    // No next turn or write occurs before this exact terminal is collected.
+    received.freeze(game, sigma);
+    let drained = Instant::now();
+    let incomplete_counters = !matches!(
+        &terminal.0,
+        EvaluationResult::Sigma(_) | EvaluationResult::Alpha { .. }
+    );
+    let result = if sigma {
+        let (mut receipt, rng) = received.sigma.take().unwrap();
+        game.rng = rng;
+        receipt.legal = receipt
+            .notification
+            .chosen
+            .as_ref()
+            .is_some_and(|(_, a)| game.context.play(*a).is_ok());
+        receipt.legality_finished = Instant::now();
+        let mut call = match terminal.0 {
+            EvaluationResult::Sigma(call) => *call,
+            EvaluationResult::Error(error) => {
+                let mut call = crate::sigma_clock::Call::new();
+                call.error = Some(error);
+                call.attempted = terminal.2;
+                call.callback_results = terminal.3;
+                call.returned = terminal.4;
+                call.stop = "engine_error";
+                call
+            }
+            _ => {
+                let mut call = crate::sigma_clock::Call::new();
+                call.error = Some("wrong engine terminal kind".into());
+                call.stop = "engine_error";
+                call
+            }
+        };
+        if call.error.is_none() {
+            call.error = received.first_error.clone();
         }
-        // The maintained factory is selected only when no backend was supplied.
-        assert!(serial_shared_inference_allowed(&c, "arena", false));
+        record_sigma_turn(
+            game,
+            engine,
+            config,
+            &owners.cancel,
+            run_start,
+            &identity.row_identity,
+            started,
+            call,
+            receipt,
+            drained,
+        )
+    } else {
+        record_evaluation_alpha(
+            game,
+            engine,
+            config,
+            owners,
+            started,
+            received.response.unwrap(),
+            drained,
+            &received.alpha,
+            terminal.0,
+            run_start,
+            received.first_error.clone(),
+            received.fallback,
+        )
+    };
+    if let Some(observation) = game.observations.last_mut() {
+        observation.counters["matching_terminal_collected"] = terminal.5.is_some().into();
+        if terminal.5.is_none() {
+            observation.counters["terminal_collected"] = false.into();
+            observation.counters["inflight_after_drain"] = serde_json::Value::Null;
+            observation.counters["partial_counter_origin"] =
+                "worker exited without a matching terminal; aggregate counts contain observed requests only".into();
+        }
+        observation.counters["AI_worker_tid"] = terminal.5.into();
+        observation.counters["AI_worker_core"] = terminal.6.into();
+        observation.counters["AI_terminal_finished_ns"] = terminal
+            .7
+            .map(|at| {
+                at.duration_since(game.origin)
+                    .as_nanos()
+                    .min(u64::MAX as u128)
+            })
+            .into();
+        observation.counters["terminal_collected_ns"] = terminal
+            .1
+            .duration_since(game.origin)
+            .as_nanos()
+            .min(u64::MAX as u128)
+            .into();
+        observation.counters["first_receipt_or_control_error"] =
+            received.first_error.clone().into();
+        if sigma && incomplete_counters {
+            for key in [
+                "nn_valid_replies_returned",
+                "discarded_late_replies",
+                "advance_calls",
+                "operation_peak_ns",
+                "whole_search",
+            ] {
+                observation.counters[key] = serde_json::Value::Null;
+            }
+            observation.counters["partial_counters_after_worker_error"] = true.into();
+            observation.counters["nn_requests_attempted"] = terminal.2.into();
+            observation.counters["inference_callback_results"] = terminal.3.into();
+            observation.counters["nn_outputs_returned"] = terminal.4.into();
+            if terminal.5.is_none() {
+                for key in [
+                    "nn_requests_attempted",
+                    "inference_callback_results",
+                    "nn_outputs_returned",
+                ] {
+                    observation.counters[key] = serde_json::Value::Null;
+                }
+            }
+        }
+        if let Some(primary) = &received.first_error {
+            observation.accepted = false;
+            observation.accepted_ns = None;
+            observation.failure = Some(crate::arena_clock::failure_from_reason(primary));
+            game.failure = observation.failure;
+        }
     }
-    #[test]
-    fn serial_shared_gate_accepts_only_the_timed_serial_cpu_arena() {
-        let c = config();
-        assert!(serial_shared_inference_allowed(&c, "arena", false));
-        for mode in ["selfplay", "benchmark", "other"] {
-            assert!(!serial_shared_inference_allowed(&c, mode, false));
-        }
-        for workers in [0, 2] {
-            let mut x = c.clone();
-            x.workers = workers;
-            assert!(!serial_shared_inference_allowed(&x, "arena", false));
-        }
-        for active in [0, 2] {
-            let mut x = c.clone();
-            x.active_games = active;
-            assert!(!serial_shared_inference_allowed(&x, "arena", false));
-        }
-        for batch in [0, 2] {
-            let mut x = c.clone();
-            x.max_batch = batch;
-            assert!(!serial_shared_inference_allowed(&x, "arena", false));
-        }
-        for cores in [vec![], vec![2, 12], vec![12]] {
-            let mut x = c.clone();
-            x.cpu_cores = cores;
-            assert!(!serial_shared_inference_allowed(&x, "arena", false));
-        }
-        for core in [None, Some(12)] {
-            let mut x = c.clone();
-            x.inference_cpu_core = core;
-            assert!(!serial_shared_inference_allowed(&x, "arena", false));
-        }
-        for time in [None, Some(0)] {
-            let mut x = c.clone();
-            x.engines[1].time_ms = time;
-            assert!(!serial_shared_inference_allowed(&x, "arena", false));
-        }
-        let mut x = c.clone();
-        x.engines[1].kind = "distance".into();
-        assert!(!serial_shared_inference_allowed(&x, "arena", false));
-        let mut x = c.clone();
-        x.inference.as_mut().unwrap().backend = "aoti".into();
-        assert!(!serial_shared_inference_allowed(&x, "arena", false));
-        let mut x = c.clone();
-        x.inference = None;
-        assert!(!serial_shared_inference_allowed(&x, "arena", false));
-        let mut x = c.clone();
-        x.arena.as_mut().unwrap().comparison = crate::arena::Comparison::Functional;
-        assert!(!serial_shared_inference_allowed(&x, "arena", false));
-        let mut x = c;
-        x.arena = None;
-        assert!(!serial_shared_inference_allowed(&x, "arena", false));
+    match received.first_error {
+        Some(primary) => Err(primary),
+        None => result,
     }
 }
-fn serial_shared_inference_allowed(config: &Config, mode: &str, supplied_backend: bool) -> bool {
-    // Only the maintained CPU ORT factory path can take this exception. An
-    // arbitrary held backend retains generic admission, regardless of labels.
-    !supplied_backend
-        && matches!(mode, "arena" | "decisions")
-        && config
-            .arena
-            .as_ref()
-            .is_some_and(|a| a.comparison == crate::arena::Comparison::WholeWallTime)
-        && config.workers == 1
-        && config.active_games == 1
-        && config.max_batch == 1
-        && config
-            .inference_cpu_core
-            .is_some_and(|core| config.cpu_cores.as_slice() == [core])
-        && config
-            .inference
-            .as_ref()
-            .is_some_and(|i| i.backend == "ort")
-        && config
-            .engines
+
+type EvaluationCensus = (
+    PumpProfile,
+    Vec<Outcome>,
+    usize,
+    BTreeMap<usize, u64>,
+    f64,
+    u64,
+    u64,
+    Option<String>,
+    bool,
+);
+fn evaluate_serial_games(
+    config: &Config,
+    plans: &[Planned],
+    admission: &crate::resources::Admission,
+    provided: Option<Box<dyn InferenceBackend>>,
+    start: Instant,
+) -> Result<EvaluationCensus> {
+    // Workers inherit the admitted three-core launch affinity and pin before
+    // constructing their evaluator/backend. Main then narrows to its own core.
+    let (mut owners, identities, evaluator_seconds, backend_seconds) =
+        EvaluationWorkers::start(config, admission, provided)?;
+    crate::resources::pin(
+        admission
+            .management_core
+            .ok_or("evaluation management core")?,
+    )?;
+    let mut manifest: serde_json::Value =
+        serde_json::from_slice(&fs::read(config.output.join("manifest-start.json"))?)?;
+    manifest["clock"]["sigma_contract"] = SIGMA_RECEIPT_CLOCK.into();
+    manifest["clock"]["contract_sha256"] = SIGMA_RECEIPT_CONTRACT_SHA256.into();
+    manifest["clock"]["acceptance"] = "actual main receipt before configured deadline (selected374:100ms); post-receipt legal validation and matching terminal collection before commit/next turn".into();
+    manifest["execution"] = serde_json::json!({"simultaneous_games":1,"AI_workers":config.engines.len(),"AI_cores":admission.worker_cores,"management_core":admission.management_core,"management_core_observed":unsafe {libc::sched_getcpu()},"main_tid":unsafe {libc::syscall(libc::SYS_gettid)},"main_pid":std::process::id(),"Sigma_inference":"synchronous on its AI worker, intra1/inter1/sequential/batch1","parallel_search":false,"ponder":false,"inference_pump":false,"per_game_TT_reset":true,"initialization_spans":"sum of actual worker spans; overlapping, not added to run wall"});
+    fs::write(
+        config.output.join("manifest-start.json"),
+        serde_json::to_vec_pretty(&manifest)?,
+    )?;
+    let mut pump = PumpProfile {
+        evaluator_initialization_seconds: evaluator_seconds,
+        backend_initialization_seconds: backend_seconds,
+        ..Default::default()
+    };
+    let mut outcomes = Vec::new();
+    let mut row_count = 0usize;
+    let mut stopped = None;
+    let mut nn_calls = 0u64;
+    let mut inference_seconds = 0.0;
+    let mut peak = memory();
+    serde_json::to_writer_pretty(
+        OpenOptions::new()
+            .create_new(true)
+            .write(true)
+            .open(config.output.join("evaluator-identities.json"))?,
+        &identities,
+    )?;
+    crate::arena::validate_loaded_bindings(
+        config.arena.as_ref().unwrap(),
+        &identities
             .iter()
-            .any(|e| e.kind == "mcts" && e.time_ms.is_some_and(|ms| ms > 0))
+            .map(|i| i.content_sha256.clone())
+            .collect::<Vec<_>>(),
+        &identities
+            .iter()
+            .map(|_| crate::arena_manifest::file_sha256(&std::env::current_exe()?))
+            .collect::<Result<Vec<_>>>()?,
+    )?;
+    for plan in plans {
+        if stopped.is_some() || owners.cancel.load(Ordering::Relaxed) {
+            outcomes.push(unknown(plan, "not_started_cancelled".into()));
+            continue;
+        }
+        let context = SigmaContext::from_prefix_with_rules(&plan.opening, config.ruleset)?;
+        let mut game = new_game(plan.clone(), context, config, false);
+        let (status, reason) = loop {
+            peak = peak.max(memory());
+            if let Some(reason) = guard(config, start, admission.memory_limit) {
+                stopped.get_or_insert(reason.clone());
+                owners.cancel.store(true, Ordering::Relaxed);
+                break ("unknown", Some(reason));
+            }
+            if game.context.terminal_value().is_some() {
+                if config.arena.as_ref().unwrap().decision_only {
+                    break ("unknown", Some("terminal_diagnostic_parent".into()));
+                }
+                break (
+                    if game.context.terminal_value() == Some(0.0) {
+                        "draw"
+                    } else {
+                        "goal"
+                    },
+                    Some(
+                        if game.context.position().winner.is_some() {
+                            "goal"
+                        } else {
+                            "threefold_draw"
+                        }
+                        .into(),
+                    ),
+                );
+            }
+            if game.context.total_ply() >= config.max_plies {
+                break ("unknown", Some("ply_cap_before_terminal".into()));
+            }
+            let engine = if config.engines.len() == 1 {
+                0
+            } else {
+                crate::arena::engine_index(
+                    game.context.position().turn,
+                    game.planned.candidate_color,
+                )
+            };
+            let traits = config
+                .arena
+                .as_ref()
+                .filter(|a| a.disable_continuation_static_ordering)
+                .map(|_| position_traits(&game, config));
+            let result = evaluation_turn(
+                &mut game,
+                engine,
+                config,
+                &owners,
+                &identities[engine],
+                start,
+                &mut nn_calls,
+                &mut inference_seconds,
+                &mut pump,
+                admission.memory_limit,
+            );
+            if let (Some(observation), Some(traits)) = (game.observations.last_mut(), traits) {
+                observation.counters["parent_traits"] = traits;
+            }
+            if let Err(error) = result {
+                stopped.get_or_insert(error.clone());
+                break ("unknown", Some(error));
+            }
+            if config.arena.as_ref().unwrap().decision_only {
+                break ("decision", None);
+            }
+        };
+        let (outcome, rows) = finish(game, status, reason);
+        let mut dataset_writer = None;
+        CompletionPublication {
+            config,
+            mode: if config.arena.as_ref().unwrap().decision_only {
+                "decisions"
+            } else {
+                "arena"
+            },
+            pump: &mut pump,
+            dataset_writer: &mut dataset_writer,
+            row_count: &mut row_count,
+            stopped: &mut stopped,
+            cancel: &owners.cancel,
+            outcomes: &mut outcomes,
+            start,
+        }
+        .record(outcome, rows);
+    }
+    let joined = owners.close();
+    if !joined {
+        stopped.get_or_insert_with(|| "worker_panicked".into());
+    }
+    for event in owners.events.try_iter() {
+        if let EvaluationEvent::Stopped(_engine, work, seconds) = event {
+            pump.backend_cleanup_seconds += seconds;
+            if let Some(work) = work {
+                pump.backend_work = Some(inference_work(work));
+                pump.backend_warmup_nn = work.warm_rows;
+            }
+        }
+    }
+    for outcome in &mut outcomes {
+        if let Some(reason) = &stopped {
+            attach_primary_failure(outcome, reason);
+        }
+    }
+    let batches = if nn_calls == 0 {
+        BTreeMap::new()
+    } else {
+        [(1, nn_calls)].into_iter().collect()
+    };
+    Ok((
+        pump,
+        outcomes,
+        row_count,
+        batches,
+        inference_seconds,
+        nn_calls,
+        peak,
+        stopped,
+        joined,
+    ))
 }
+
 fn run_inner(
     config: &Config,
     mode: &str,
@@ -2777,25 +3201,28 @@ fn run_inner(
     };
     let _affinity = crate::resources::AffinityGuard::capture()?;
     let start = Instant::now();
-    let admission = if let Some(core) = config.inference_cpu_core {
+    let evaluation = config
+        .arena
+        .as_ref()
+        .is_some_and(|a| a.comparison == crate::arena::Comparison::WholeWallTime);
+    let admission = if evaluation {
+        crate::resources::admit_evaluation(
+            &config.cpu_cores,
+            config.management_cpu_core,
+            config.host_ram_reserve,
+            config.max_memory_bytes,
+        )?
+    } else if let Some(core) = config.inference_cpu_core {
         if config.inference.is_none() {
             return Err("explicit inference core requires backend".into());
         }
-        if serial_shared_inference_allowed(config, mode, provided.is_some()) {
-            crate::resources::admit_serial_shared(
-                core,
-                config.host_ram_reserve,
-                config.max_memory_bytes,
-            )?
-        } else {
-            crate::resources::admit_explicit(
-                config.workers.min(config.games),
-                &config.cpu_cores,
-                core,
-                config.host_ram_reserve,
-                config.max_memory_bytes,
-            )?
-        }
+        crate::resources::admit_explicit(
+            config.workers.min(config.games),
+            &config.cpu_cores,
+            core,
+            config.host_ram_reserve,
+            config.max_memory_bytes,
+        )?
     } else {
         crate::resources::admit(
             config.workers.min(config.games),
@@ -2838,165 +3265,150 @@ fn run_inner(
             .open(config.output.join("admission.json"))?,
         &admission,
     )?;
-    let evaluator_start = Instant::now();
-    let evaluators: Vec<_> = config
-        .engines
-        .iter()
-        .map(|e| evaluator(e, config))
-        .collect::<Result<_>>()?;
-    serde_json::to_writer_pretty(
-        OpenOptions::new()
-            .create_new(true)
-            .write(true)
-            .open(config.output.join("evaluator-identities.json"))?,
-        &evaluators.iter().map(|e| &e.identity).collect::<Vec<_>>(),
-    )?;
-    let mut pump = PumpProfile {
-        evaluator_initialization_seconds: evaluator_start.elapsed().as_secs_f64(),
-        ..PumpProfile::default()
-    };
-    if let Some(a) = &config.arena {
-        crate::arena::validate_loaded_bindings(
-            a,
-            &evaluators
-                .iter()
-                .map(|e| e.identity.content_sha256.clone())
-                .collect::<Vec<_>>(),
-            &config
-                .engines
-                .iter()
-                .map(|_| crate::arena_manifest::file_sha256(&std::env::current_exe()?))
-                .collect::<Result<Vec<_>>>()?,
-        )?;
-    }
-    let backend_start = Instant::now();
-    let mut backend = if let Some(backend) = provided {
-        if config
-            .inference
-            .as_ref()
-            .is_none_or(|i| i.model_sha != backend.metadata().model_sha)
-        {
-            return Err("supplied backend provenance mismatch".into());
-        }
-        Some(backend)
+    let (
+        mut pump,
+        mut outcomes,
+        row_count,
+        batches,
+        inference_seconds,
+        nn_calls,
+        peak,
+        mut stopped,
+        joined,
+    ) = if evaluation {
+        evaluate_serial_games(config, &plans, &admission, provided, start)?
     } else {
-        make_backend(config)?
-    };
-    if matches!(mode, "arena" | "decisions") {
-        let mut manifest: serde_json::Value =
-            serde_json::from_slice(&fs::read(config.output.join("manifest-start.json"))?)?;
-        // Runtime owns the actual caller clock. Replace historical descriptions
-        // in this new output only; frozen old manifests are never rewritten.
-        manifest["clock"]["sigma_contract"] = SIGMA_RECEIPT_CLOCK.into();
-        manifest["clock"]["contract_sha256"] = SIGMA_RECEIPT_CONTRACT_SHA256.into();
-        manifest["clock"]["acceptance"] = "timed callers: authority receipt ends thinking; legal replay and state commit afterward".into();
-        manifest["clock"]["alpha_receipt"] =
+        let evaluator_start = Instant::now();
+        let evaluators: Vec<_> = config
+            .engines
+            .iter()
+            .map(|e| evaluator(e, config))
+            .collect::<Result<_>>()?;
+        serde_json::to_writer_pretty(
+            OpenOptions::new()
+                .create_new(true)
+                .write(true)
+                .open(config.output.join("evaluator-identities.json"))?,
+            &evaluators.iter().map(|e| &e.identity).collect::<Vec<_>>(),
+        )?;
+        let mut pump = PumpProfile {
+            evaluator_initialization_seconds: evaluator_start.elapsed().as_secs_f64(),
+            ..PumpProfile::default()
+        };
+        if let Some(a) = &config.arena {
+            crate::arena::validate_loaded_bindings(
+                a,
+                &evaluators
+                    .iter()
+                    .map(|e| e.identity.content_sha256.clone())
+                    .collect::<Vec<_>>(),
+                &config
+                    .engines
+                    .iter()
+                    .map(|_| crate::arena_manifest::file_sha256(&std::env::current_exe()?))
+                    .collect::<Result<Vec<_>>>()?,
+            )?;
+        }
+        let backend_start = Instant::now();
+        let mut backend = if let Some(backend) = provided {
+            if config
+                .inference
+                .as_ref()
+                .is_none_or(|i| i.model_sha != backend.metadata().model_sha)
+            {
+                return Err("supplied backend provenance mismatch".into());
+            }
+            Some(backend)
+        } else {
+            make_backend(config)?
+        };
+        if matches!(mode, "arena" | "decisions") {
+            let mut manifest: serde_json::Value =
+                serde_json::from_slice(&fs::read(config.output.join("manifest-start.json"))?)?;
+            // Runtime owns the actual caller clock. Replace historical descriptions
+            // in this new output only; frozen old manifests are never rewritten.
+            manifest["clock"]["sigma_contract"] = SIGMA_RECEIPT_CLOCK.into();
+            manifest["clock"]["contract_sha256"] = SIGMA_RECEIPT_CONTRACT_SHA256.into();
+            manifest["clock"]["acceptance"] = "timed callers: authority receipt ends thinking; legal replay and state commit afterward".into();
+            manifest["clock"]["alpha_receipt"] =
             "direct synchronous result receipt timestamped by worker before rules-side legality"
                 .into();
-        manifest["clock"]["sigma_thinking_end"] =
-            "authority timestamped immutable Action receipt, including communication".into();
-        manifest["clock"]["sigma_legality"] = "after receipt, outside thinking clock".into();
-        manifest["clock"]["sigma_drain"] =
-            "all admitted matching terminal replies and original errors before opponent clock"
-                .into();
-        manifest["clock"]["sigma_timeout_outcome"] =
-            "UNKNOWN, no timeout-forfeit authorization".into();
-        fs::write(
-            config.output.join("manifest-start.json"),
-            serde_json::to_vec_pretty(&manifest)?,
-        )?;
-    }
-    pump.backend_initialization_seconds = backend_start.elapsed().as_secs_f64();
-    if let Some(core) = admission.inference_core {
-        crate::resources::pin(core)?;
-    }
-    let cancel = Arc::new(AtomicBool::new(false));
-    let arc = Arc::new(config.clone());
-    let workers = config.workers.min(config.games);
-    let (tx, rx) = mpsc::sync_channel(
-        config
-            .active_games
-            .min(config.games)
-            .saturating_add(workers)
-            .saturating_mul(2)
-            .max(8),
-    );
-    let mut handles = Vec::new();
-    let mode_is_selfplay = mode == "selfplay";
-    for w in 0..workers {
-        let p = plans
-            .iter()
-            .filter(|p| p.id % workers == w)
-            .cloned()
-            .collect();
-        let tx = tx.clone();
-        let c = cancel.clone();
-        let a = arc.clone();
-        let e = evaluators.clone();
-        let core = admission.worker_cores[w];
-        handles.push(thread::spawn(move || {
-            if crate::resources::pin(core).is_err() {
-                c.store(true, Ordering::Relaxed);
-            }
-            worker(a, p, tx, c, e, mode_is_selfplay, start)
-        }));
-    }
-    drop(tx);
-    let mut live = workers;
-    let mut pending = VecDeque::new();
-    let mut outcomes = Vec::new();
-    let mut row_count = 0;
-    let mut first_pending: Option<Instant> = None;
-    let mut batches = BTreeMap::new();
-    let mut inference_seconds = 0.0;
-    let mut nn_calls = 0;
-    let mut peak = memory();
-    let mut stopped = None;
-    while live > 0 || !pending.is_empty() {
-        peak = peak.max(memory());
-        if stopped.is_none()
-            && let Some(reason) = guard(config, start, limit)
-        {
-            stopped = Some(reason);
-            cancel.store(true, Ordering::Relaxed)
+            manifest["clock"]["sigma_thinking_end"] =
+                "authority timestamped immutable Action receipt, including communication".into();
+            manifest["clock"]["sigma_legality"] = "after receipt, outside thinking clock".into();
+            manifest["clock"]["sigma_drain"] =
+                "all admitted matching terminal replies and original errors before opponent clock"
+                    .into();
+            manifest["clock"]["sigma_timeout_outcome"] =
+                "UNKNOWN, no timeout-forfeit authorization".into();
+            fs::write(
+                config.output.join("manifest-start.json"),
+                serde_json::to_vec_pretty(&manifest)?,
+            )?;
         }
-        let event = rx.recv_timeout(Duration::from_millis(1));
-        match event {
-            Ok(Event::Request(r)) => {
-                if first_pending.is_none() {
-                    first_pending = Some(Instant::now())
-                }
-                pending.push_back(r)
-            }
-            Ok(Event::Finished(o, r)) => {
-                CompletionPublication {
-                    config,
-                    mode,
-                    pump: &mut pump,
-                    dataset_writer: &mut dataset_writer,
-                    row_count: &mut row_count,
-                    stopped: &mut stopped,
-                    cancel: &cancel,
-                    outcomes: &mut outcomes,
-                    start,
-                }
-                .record(o, r);
-            }
-            Ok(Event::WorkerStopped) => live -= 1,
-            Err(mpsc::RecvTimeoutError::Timeout) => {}
-            Err(mpsc::RecvTimeoutError::Disconnected) => {
-                live = 0;
-            }
+        pump.backend_initialization_seconds = backend_start.elapsed().as_secs_f64();
+        if let Some(core) = admission.inference_core {
+            crate::resources::pin(core)?;
         }
-        while let Ok(event) = rx.try_recv() {
+        let cancel = Arc::new(AtomicBool::new(false));
+        let arc = Arc::new(config.clone());
+        let workers = config.workers.min(config.games);
+        let (tx, rx) = mpsc::sync_channel(
+            config
+                .active_games
+                .min(config.games)
+                .saturating_add(workers)
+                .saturating_mul(2)
+                .max(8),
+        );
+        let mut handles = Vec::new();
+        let mode_is_selfplay = mode == "selfplay";
+        for w in 0..workers {
+            let p = plans
+                .iter()
+                .filter(|p| p.id % workers == w)
+                .cloned()
+                .collect();
+            let tx = tx.clone();
+            let c = cancel.clone();
+            let a = arc.clone();
+            let e = evaluators.clone();
+            let core = admission.worker_cores[w];
+            handles.push(thread::spawn(move || {
+                if crate::resources::pin(core).is_err() {
+                    c.store(true, Ordering::Relaxed);
+                }
+                worker(a, p, tx, c, e, mode_is_selfplay, start)
+            }));
+        }
+        drop(tx);
+        let mut live = workers;
+        let mut pending = VecDeque::new();
+        let mut outcomes = Vec::new();
+        let mut row_count = 0;
+        let mut first_pending: Option<Instant> = None;
+        let mut batches = BTreeMap::new();
+        let mut inference_seconds = 0.0;
+        let mut nn_calls = 0;
+        let mut peak = memory();
+        let mut stopped = None;
+        while live > 0 || !pending.is_empty() {
+            peak = peak.max(memory());
+            if stopped.is_none()
+                && let Some(reason) = guard(config, start, limit)
+            {
+                stopped = Some(reason);
+                cancel.store(true, Ordering::Relaxed)
+            }
+            let event = rx.recv_timeout(Duration::from_millis(1));
             match event {
-                Event::Request(r) => {
+                Ok(Event::Request(r)) => {
                     if first_pending.is_none() {
                         first_pending = Some(Instant::now())
                     }
                     pending.push_back(r)
                 }
-                Event::Finished(o, r) => {
+                Ok(Event::Finished(o, r)) => {
                     CompletionPublication {
                         config,
                         mode,
@@ -3010,87 +3422,127 @@ fn run_inner(
                     }
                     .record(o, r);
                 }
-                Event::WorkerStopped => live -= 1,
+                Ok(Event::WorkerStopped) => live -= 1,
+                Err(mpsc::RecvTimeoutError::Timeout) => {}
+                Err(mpsc::RecvTimeoutError::Disconnected) => {
+                    live = 0;
+                }
+            }
+            while let Ok(event) = rx.try_recv() {
+                match event {
+                    Event::Request(r) => {
+                        if first_pending.is_none() {
+                            first_pending = Some(Instant::now())
+                        }
+                        pending.push_back(r)
+                    }
+                    Event::Finished(o, r) => {
+                        CompletionPublication {
+                            config,
+                            mode,
+                            pump: &mut pump,
+                            dataset_writer: &mut dataset_writer,
+                            row_count: &mut row_count,
+                            stopped: &mut stopped,
+                            cancel: &cancel,
+                            outcomes: &mut outcomes,
+                            start,
+                        }
+                        .record(o, r);
+                    }
+                    Event::WorkerStopped => live -= 1,
+                }
+            }
+            if !pending.is_empty() {
+                if cancel.load(Ordering::Relaxed) {
+                    finish_pending(&mut pending, stopped.as_deref().unwrap_or("cancelled"));
+                    first_pending = None;
+                    continue;
+                }
+                let Some(b) = backend.as_mut() else {
+                    stopped = Some("missing_backend".into());
+                    cancel.store(true, Ordering::Relaxed);
+                    finish_pending(&mut pending, "missing_backend");
+                    first_pending = None;
+                    continue;
+                };
+                let n = pending
+                    .len()
+                    .min(config.max_batch)
+                    .min(b.metadata().max_batch);
+                if n == 0 {
+                    stopped = Some("invalid_backend_batch_limit".into());
+                    cancel.store(true, Ordering::Relaxed);
+                    continue;
+                }
+                if pending.len() < config.max_batch
+                    && live > 0
+                    && first_pending.is_some_and(|t| t.elapsed() < Duration::from_millis(2))
+                {
+                    continue;
+                }
+                pump.queued_requests_peak = pump.queued_requests_peak.max(pending.len());
+                let requests: Vec<_> = pending.drain(..n).collect();
+                for r in &requests {
+                    let wait = r.created.elapsed().as_secs_f64();
+                    pump.queue_wait_seconds_sum += wait;
+                    pump.queue_wait_seconds_max = pump.queue_wait_seconds_max.max(wait);
+                }
+                first_pending = if pending.is_empty() {
+                    None
+                } else {
+                    Some(Instant::now())
+                };
+                let input: Vec<_> = requests.iter().map(|r| *r.input).collect();
+                let t = Instant::now();
+                let result = b.infer(&input);
+                inference_seconds += t.elapsed().as_secs_f64();
+                nn_calls += n as u64;
+                pump.backend_warmup_nn = b.counters().warm_rows;
+                pump.backend_work = Some(inference_work(b.counters()));
+                *batches.entry(n).or_insert(0) += 1;
+                deliver_inference(requests, result, &mut stopped, &cancel);
             }
         }
-        if !pending.is_empty() {
-            if cancel.load(Ordering::Relaxed) {
-                finish_pending(&mut pending, stopped.as_deref().unwrap_or("cancelled"));
-                first_pending = None;
-                continue;
+        cancel.store(true, Ordering::Relaxed);
+        let mut joined = true;
+        for handle in handles {
+            if handle.join().is_err() {
+                joined = false;
+                stopped.get_or_insert_with(|| "worker_panicked".into());
             }
-            let Some(b) = backend.as_mut() else {
-                stopped = Some("missing_backend".into());
-                cancel.store(true, Ordering::Relaxed);
-                finish_pending(&mut pending, "missing_backend");
-                first_pending = None;
-                continue;
-            };
-            let n = pending
-                .len()
-                .min(config.max_batch)
-                .min(b.metadata().max_batch);
-            if n == 0 {
-                stopped = Some("invalid_backend_batch_limit".into());
-                cancel.store(true, Ordering::Relaxed);
-                continue;
+        }
+        let ids: std::collections::BTreeSet<_> = outcomes.iter().map(|o| o.game).collect();
+        for p in &plans {
+            if !ids.contains(&p.id) {
+                outcomes.push(unknown(p, "worker_missing_outcome".into()))
             }
-            if pending.len() < config.max_batch
-                && live > 0
-                && first_pending.is_some_and(|t| t.elapsed() < Duration::from_millis(2))
-            {
-                continue;
+        }
+        outcomes.sort_by_key(|o| o.game);
+        if let Some(reason) = &stopped {
+            for o in &mut outcomes {
+                attach_primary_failure(o, reason);
             }
-            pump.queued_requests_peak = pump.queued_requests_peak.max(pending.len());
-            let requests: Vec<_> = pending.drain(..n).collect();
-            for r in &requests {
-                let wait = r.created.elapsed().as_secs_f64();
-                pump.queue_wait_seconds_sum += wait;
-                pump.queue_wait_seconds_max = pump.queue_wait_seconds_max.max(wait);
-            }
-            first_pending = if pending.is_empty() {
-                None
-            } else {
-                Some(Instant::now())
-            };
-            let input: Vec<_> = requests.iter().map(|r| *r.input).collect();
-            let t = Instant::now();
-            let result = b.infer(&input);
-            inference_seconds += t.elapsed().as_secs_f64();
-            nn_calls += n as u64;
+        }
+        if let Some(b) = backend.as_ref() {
             pump.backend_warmup_nn = b.counters().warm_rows;
             pump.backend_work = Some(inference_work(b.counters()));
-            *batches.entry(n).or_insert(0) += 1;
-            deliver_inference(requests, result, &mut stopped, &cancel);
         }
-    }
-    cancel.store(true, Ordering::Relaxed);
-    let mut joined = true;
-    for handle in handles {
-        if handle.join().is_err() {
-            joined = false;
-            stopped.get_or_insert_with(|| "worker_panicked".into());
-        }
-    }
-    let ids: std::collections::BTreeSet<_> = outcomes.iter().map(|o| o.game).collect();
-    for p in &plans {
-        if !ids.contains(&p.id) {
-            outcomes.push(unknown(p, "worker_missing_outcome".into()))
-        }
-    }
-    outcomes.sort_by_key(|o| o.game);
-    if let Some(reason) = &stopped {
-        for o in &mut outcomes {
-            attach_primary_failure(o, reason);
-        }
-    }
-    if let Some(b) = backend.as_ref() {
-        pump.backend_warmup_nn = b.counters().warm_rows;
-        pump.backend_work = Some(inference_work(b.counters()));
-    }
-    let cleanup_start = Instant::now();
-    drop(backend);
-    pump.backend_cleanup_seconds = cleanup_start.elapsed().as_secs_f64();
+        let cleanup_start = Instant::now();
+        drop(backend);
+        pump.backend_cleanup_seconds = cleanup_start.elapsed().as_secs_f64();
+        (
+            pump,
+            outcomes,
+            row_count,
+            batches,
+            inference_seconds,
+            nn_calls,
+            peak,
+            stopped,
+            joined,
+        )
+    };
     let mut dataset = None;
     let mut eligible_rows = 0;
     let finalize_start = Instant::now();
@@ -3481,6 +3933,15 @@ fn run_owned(
     if error.is::<ArenaPublicationFailure>() {
         return Err(error);
     }
+    // Preserve the original initialization error object across the AI channel.
+    let (error, initialized_workers_joined) =
+        match error.downcast::<EvaluationInitializationFailure>() {
+            Ok(failure) => {
+                let failure = *failure;
+                (failure.primary, Some(failure.joined))
+            }
+            Err(error) => (error, None),
+        };
     if failure_publication_owned(output_owned, &config.output)
         && !config.output.join("completed.jsonl").exists()
         && !config.output.join("completed.jsonl.gz").exists()
@@ -3536,7 +3997,7 @@ fn run_owned(
             score: None,
             model_sha: config.inference.as_ref().map(|i| i.model_sha.clone()),
             process_id: std::process::id(),
-            all_workers_joined: true,
+            all_workers_joined: initialized_workers_joined.unwrap_or(true),
             pump: PumpProfile::default(),
             arena_summary,
         };
@@ -4570,6 +5031,7 @@ mod completed_error_tests {
             Some(&mut done),
             None,
             Duration::ZERO,
+            None,
         );
         assert!(r.is_err());
         assert!(done.result.is_some());
@@ -4621,6 +5083,7 @@ mod live_caller_clock_tests {
                 Some(&mut done),
                 Some(Duration::from_millis(100)),
                 Duration::from_millis(5),
+                None,
             )
             .unwrap();
             let returned_ns = start.elapsed().as_nanos() as u64;
@@ -5304,134 +5767,6 @@ mod three_engine_374_failure_tests {
 }
 
 #[cfg(test)]
-mod three_engine_374_postjoin_tests {
-    use super::*;
-
-    // Metadata fixtures only. No Context, Search, backend, inference or rules calls.
-    fn metadata_receipt(received: Instant, chosen: bool, legal: bool) -> SigmaReceipt {
-        let snapshot = quoridor_ai::sigma_mcts::Snapshot {
-            generation: 1,
-            action: Some(13),
-            terminal_value: None,
-            root_visits: 1,
-            root_mean: 0.0,
-            nn_calls: 0,
-            terminal_no_nn: 0,
-            edges: Vec::new(),
-            nodes: 0,
-            max_depth: 0,
-        };
-        SigmaReceipt {
-            notification: SigmaNotification {
-                chosen: chosen.then_some((Some(snapshot), 13)),
-                decision_started: received,
-                sent: received,
-            },
-            received,
-            legality_finished: received,
-            legal,
-        }
-    }
-
-    #[test]
-    fn three_engine_374_postjoin_return_follows_delayed_authority_receipt() {
-        thread::scope(|scope| {
-            let (release_tx, release_rx) = mpsc::channel();
-            let authority = scope.spawn(move || {
-                release_rx.recv().unwrap();
-                Ok(metadata_receipt(Instant::now(), true, true))
-            });
-            let mut backend_drained = None;
-            let (receipt, returned) = finish_sigma_authority(|| {
-                // This lies INSIDE the production join closure. Sampling before
-                // the closure would necessarily precede this delayed receipt.
-                backend_drained = Some(Instant::now());
-                release_tx.send(()).unwrap();
-                authority
-                    .join()
-                    .map_err(|_| "sigma_authority_panicked".to_owned())
-                    .and_then(|r| r)
-            })
-            .unwrap();
-            assert!(receipt.received >= backend_drained.unwrap());
-            assert!(returned >= receipt.legality_finished);
-            assert!(returned >= receipt.received);
-        });
-    }
-
-    #[test]
-    fn three_engine_374_postjoin_return_does_not_extend_authority_deadline() {
-        use crate::arena_clock::Failure;
-        let deadline = Instant::now();
-        let timely = metadata_receipt(deadline - Duration::from_nanos(1), true, true);
-        let (timely, returned) = finish_sigma_authority(|| Ok(timely)).unwrap();
-        assert!(returned >= deadline);
-        assert_eq!(
-            sigma_receipt_decision(Some(deadline), &timely, false),
-            Ok(())
-        );
-        for received in [deadline, deadline + Duration::from_nanos(1)] {
-            let late = metadata_receipt(received, true, true);
-            let (late, _) = finish_sigma_authority(|| Ok(late)).unwrap();
-            assert_eq!(
-                sigma_receipt_decision(Some(deadline), &late, false),
-                Err(Failure::TimeOverrun)
-            );
-        }
-    }
-
-    #[test]
-    fn three_engine_374_postjoin_authority_error_and_panic_remain_errors() {
-        thread::scope(|scope| {
-            let authority = scope.spawn(|| Err("distinctive_authority_error".to_owned()));
-            let result = finish_sigma_authority(|| {
-                authority
-                    .join()
-                    .map_err(|_| "sigma_authority_panicked".to_owned())
-                    .and_then(|r| r)
-            });
-            assert!(matches!(result, Err(error) if error == "distinctive_authority_error"));
-        });
-        thread::scope(|scope| {
-            let authority = scope.spawn(|| -> std::result::Result<SigmaReceipt, String> {
-                panic!("synthetic_authority_panic")
-            });
-            let result = finish_sigma_authority(|| {
-                authority
-                    .join()
-                    .map_err(|_| "sigma_authority_panicked".to_owned())
-                    .and_then(|r| r)
-            });
-            assert!(matches!(result, Err(error) if error == "sigma_authority_panicked"));
-        });
-    }
-
-    #[test]
-    fn three_engine_374_postjoin_cancel_noaction_illegal_keep_failure_priority() {
-        use crate::arena_clock::Failure;
-        let deadline = Instant::now();
-        let (receipt, _) =
-            finish_sigma_authority(|| Ok(metadata_receipt(deadline, true, true))).unwrap();
-        assert_eq!(
-            sigma_receipt_decision(Some(deadline), &receipt, true),
-            Err(Failure::Cancelled)
-        );
-        let (no_action, _) =
-            finish_sigma_authority(|| Ok(metadata_receipt(deadline, false, false))).unwrap();
-        assert_eq!(
-            sigma_receipt_decision(Some(deadline), &no_action, false),
-            Err(Failure::NoCompletedSimulation)
-        );
-        let (illegal, _) =
-            finish_sigma_authority(|| Ok(metadata_receipt(deadline, true, false))).unwrap();
-        assert_eq!(
-            sigma_receipt_decision(Some(deadline), &illegal, false),
-            Err(Failure::IllegalMove)
-        );
-    }
-}
-
-#[cfg(test)]
 mod no_cost_prediction_tests {
     use super::*;
 
@@ -5454,6 +5789,7 @@ mod no_cost_prediction_tests {
         let mut receipt = SigmaReceipt {
             notification: SigmaNotification {
                 chosen: Some((None, 13)),
+                completed_at: None,
                 decision_started: deadline - Duration::from_nanos(2),
                 sent: deadline - Duration::from_nanos(1),
             },
@@ -5480,46 +5816,248 @@ mod no_cost_prediction_tests {
             Err(Failure::IllegalMove)
         );
     }
+}
 
-    #[test]
-    fn no_cost_prediction_pending_terminal_error_drains_after_fallback_notification() {
-        // A timeout callback may publish a fallback; it cannot return or hide the
-        // terminal backend error, even if cancellation follows the notification.
-        thread::scope(|scope| {
-            let (tx, rx) = mpsc::channel();
-            let (notify_tx, notify_rx) = mpsc::channel();
-            let id = RequestId {
-                game: 0,
-                generation: 1,
-                token: 7,
-            };
-            let worker = scope.spawn(move || {
-                assert_eq!(notify_rx.recv().unwrap(), 13);
-                tx.send(Response {
-                    id,
-                    output: Err("distinctive-original-backend-error".into()),
-                })
+#[cfg(test)]
+mod two_ai_374_tests {
+    use super::*;
+    fn game() -> (Config, Game) {
+        let c: Config =
+            serde_json::from_str(include_str!("../tests/fixtures/sigma-clock-config.json"))
                 .unwrap();
-                Instant::now()
-            });
-            let mut notified = false;
-            let cancel = AtomicBool::new(false);
-            let terminal = wait_sigma_reply(&rx, id, || {
-                if !notified {
-                    let chosen =
-                        choose_sigma_action(None, Some(13), 0.0, &mut Rng::new(1)).unwrap();
-                    assert!(chosen.0.is_none());
-                    notify_tx.send(chosen.1).unwrap();
-                    notified = true;
-                    cancel.store(true, Ordering::Relaxed);
-                }
-            });
-            assert!(notified && cancel.load(Ordering::Relaxed));
-            assert_eq!(terminal.unwrap_err(), "distinctive-original-backend-error");
-            let terminal_sent = worker.join().unwrap();
-            let next_slot_started = Instant::now();
-            assert!(next_slot_started >= terminal_sent);
-            assert!(rx.try_recv().is_err());
+        let p = Planned {
+            id: 0,
+            candidate_color: 0,
+            opening: vec![],
+            family: "NN0-owning-metadata".into(),
+            split: Split::Test,
+        };
+        let g = new_game(p, SigmaContext::from_prefix(&[]).unwrap(), &c, false);
+        (c, g)
+    }
+    fn alpha(action: u16) -> alphabeta::SearchResult {
+        alphabeta::SearchResult {
+            action: Some(action),
+            value: Some(0.25),
+            completed_depth: 1,
+            pv: vec![action],
+            stats: Default::default(),
+            stop: alphabeta::StopReason::DepthComplete,
+            elapsed: Duration::ZERO,
+        }
+    }
+    #[test]
+    fn two_ai_374_frozen_fallback_and_late_alpha_updates_never_fabricate_work() {
+        let (_, mut game) = game();
+        let action = game.context.legal_ids()[0];
+        let mut receipt = ReceivedEvaluation::new(Some(action));
+        receipt.freeze(&mut game, false);
+        let first = receipt.response.unwrap();
+        receipt.update(
+            EvaluationUpdate::Alpha(Box::new(alpha(action))),
+            Instant::now(),
+            first + Duration::from_secs(1),
+        );
+        assert!(receipt.alpha.result.is_none());
+        let mut invalid = alpha(action);
+        invalid.value = Some(f32::NAN);
+        receipt.update(
+            EvaluationUpdate::Alpha(Box::new(invalid)),
+            Instant::now(),
+            first + Duration::from_secs(1),
+        );
+        assert!(
+            !receipt
+                .alpha
+                .validate_actions(|a| game.context.play(a).is_ok())
+        );
+        assert!(receipt.alpha.result.is_none());
+        assert!(receipt.alpha.at.is_none());
+        assert_eq!(receipt.fallback, Some(action));
+        assert_eq!(receipt.response, Some(first));
+        assert_eq!(game.context.total_ply(), 0);
+    }
+    #[test]
+    fn two_ai_374_main_receives_sigma_before_slow_rules_and_terminal_collection() {
+        let (_, mut game) = game();
+        let fallback = game.context.legal_ids()[0];
+        let (tx, rx) = mpsc::channel();
+        let worker = thread::spawn(move || {
+            let at = Instant::now();
+            tx.send(EvaluationUpdate::Sigma(
+                SigmaNotification {
+                    chosen: Some((None, fallback)),
+                    completed_at: None,
+                    decision_started: at,
+                    sent: at,
+                },
+                Rng::new(7),
+            ))
+            .unwrap();
         });
+        let update = rx.recv().unwrap();
+        let at = Instant::now();
+        let mut received = ReceivedEvaluation::new(Some(fallback));
+        received.update(update, at, at + Duration::from_millis(100));
+        received.freeze(&mut game, true);
+        worker.join().unwrap();
+        thread::sleep(Duration::from_millis(5));
+        let (mut receipt, _) = received.sigma.unwrap();
+        receipt.legal = game.context.play(fallback).is_ok();
+        receipt.legality_finished = Instant::now();
+        assert!(receipt.received >= receipt.notification.sent);
+        assert!(receipt.legality_finished > receipt.received + Duration::from_millis(1));
+        assert!(
+            sigma_receipt_decision(Some(at + Duration::from_millis(1)), &receipt, false).is_ok()
+        );
+        assert_eq!(game.context.total_ply(), 0);
+    }
+    #[test]
+    fn two_ai_374_terminal_error_preserves_first_receipt_error_and_never_applies_snapshot() {
+        let (mut c, mut game) = game();
+        c.wall_seconds = None;
+        c.deadline_unix_ms = 0;
+        c.engines[0].time_ms = Some(100);
+        let mut completion = crate::arena_clock::Completion::default();
+        let at = Instant::now();
+        completion.publish(
+            &alpha(game.context.legal_ids()[0]),
+            Some(at + Duration::from_millis(95)),
+        );
+        let (_, rx) = mpsc::channel();
+        let owners = EvaluationWorkers {
+            workers: vec![],
+            events: rx,
+            cancel: Arc::new(AtomicBool::new(false)),
+        };
+        let received = completion.at.unwrap();
+        let result = record_evaluation_alpha(
+            &mut game,
+            0,
+            &c,
+            &owners,
+            at,
+            received,
+            Instant::now(),
+            &completion,
+            EvaluationResult::Error("original late backend failure".into()),
+            at,
+            Some("wrong owning turn reply".into()),
+            None,
+        );
+        assert_eq!(result.unwrap_err(), "wrong owning turn reply");
+        let observation = &game.observations[0];
+        assert!(!observation.accepted);
+        assert_eq!(
+            observation.engine_error.as_deref(),
+            Some("original late backend failure")
+        );
+        assert_eq!(
+            observation.counters["first_receipt_or_control_error"],
+            "wrong owning turn reply"
+        );
+        assert_eq!(game.context.total_ply(), 0);
+        assert!(game.prefix.is_empty());
+    }
+    struct DelayedAlpha;
+    impl StaticEvaluator for DelayedAlpha {
+        fn evaluate(
+            &self,
+            _root: &SigmaContext,
+            _accumulator: Option<&alphabeta::EvalAccumulator>,
+        ) -> alphabeta::Result<f32> {
+            thread::sleep(Duration::from_millis(110));
+            Err(alphabeta::SearchError::Root(
+                "NN0 delayed original alpha error".into(),
+            ))
+        }
+    }
+    #[test]
+    fn two_ai_374_delayed_alpha_evaluation_stays_off_main_and_drains_original_error() {
+        let (mut config, mut game) = game();
+        config.wall_seconds = None;
+        config.deadline_unix_ms = 0;
+        config.engines[0].time_ms = Some(100);
+        let fallback = game.context.legal_ids()[0];
+        let root = game.context.clone();
+        let (tx, rx) = mpsc::channel();
+        let started = Instant::now();
+        let stop = Arc::new(AtomicBool::new(false));
+        let ai_stop = stop.clone();
+        let handle = thread::spawn(move || {
+            let mut session = None;
+            let mut profile = TtProfile::default();
+            let mut completion = crate::arena_clock::Completion::default();
+            let evaluator = Arc::new(DelayedAlpha);
+            let namespace = alphabeta::SearchNamespace {
+                evaluator: "NN0 delayed metadata".into(),
+                rules: root.ruleset().id().into(),
+                selectivity: "fullwidth-PVS-MPC-OFF-v1".into(),
+            };
+            let limits = SearchLimits {
+                max_depth: 1,
+                max_nodes: 200,
+                time_limit: Some(Duration::from_millis(95)),
+                tt_entries: 4096,
+                use_pvs: true,
+                use_tt: true,
+            };
+            let result = invoke_alpha_observed(
+                &mut session,
+                &mut profile,
+                evaluator,
+                namespace,
+                &root,
+                &limits,
+                &ai_stop,
+                started,
+                alphabeta::SearchSession::new_without_continuation_or_static,
+                Some(&mut completion),
+                Some(Duration::from_millis(100)),
+                Duration::from_millis(5),
+                None,
+            );
+            tx.send(result.map_err(|e| e.to_string())).unwrap();
+        });
+        let mut received = ReceivedEvaluation::new(Some(fallback));
+        assert!(matches!(
+            rx.recv_timeout(Duration::from_millis(95)),
+            Err(mpsc::RecvTimeoutError::Timeout)
+        ));
+        received.freeze(&mut game, false);
+        stop.store(true, Ordering::Relaxed);
+        let terminal = rx.recv().unwrap();
+        handle.join().unwrap();
+        assert!(started.elapsed() >= Duration::from_millis(110));
+        let (_, events) = mpsc::channel();
+        let owners = EvaluationWorkers {
+            workers: vec![],
+            events,
+            cancel: Arc::new(AtomicBool::new(false)),
+        };
+        let result = record_evaluation_alpha(
+            &mut game,
+            0,
+            &config,
+            &owners,
+            started,
+            received.response.unwrap(),
+            Instant::now(),
+            &received.alpha,
+            EvaluationResult::Error(terminal.unwrap_err()),
+            started,
+            None,
+            received.fallback,
+        );
+        assert!(
+            result
+                .unwrap_err()
+                .contains("NN0 delayed original alpha error")
+        );
+        assert!(!game.observations[0].accepted);
+        assert!(game.observations[0].value_stm.is_none());
+        assert!(game.observations[0].completed_depth.is_none());
+        assert!(game.observations[0].completed_iteration_counters.is_none());
+        assert_eq!(game.context.total_ply(), 0);
     }
 }
