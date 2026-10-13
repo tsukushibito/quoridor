@@ -1166,6 +1166,18 @@ No exact or declared augmentation occurrence establishes only absence from these
 
 [Full report and per-query provenance](../.worktree/learning-million/.artifacts/public-overlap370-v1/result/report.md) and [canonical finite acceptance](../research-data/ai-sigma/public-overlap370/acceptance-v1.json) bind the stopped evidence. Actual child command11.663633174961433 seconds is counted once; outer controller12.018081499962136 and key-fixture guardian.20963828300591558 are separate nested scopes. Exact child UTCSTOP, continuous peak and whole-work fees remain UNKNOWN. Actual source/env/data readers stopped00:54:15.594552Z, lease released00:54:15.595669Z, with no owned children/TMP/reservation. Later Main source integration does not retarget the scan's original recorded source. No model, fit, native, Search or game call was made for this check.
 
+### αβ自己対局の多様化：未採択案と次の判断（2026-10-13）
+
+[362/363の既存pilot結果](#completed-common-corpus-two-teacher-pilot-362-2026-10-11)は8局・293適格行で、80.9%が両者合計の残り壁<=5だった。pilot内の341入力が異なることは、独立した展開数や公開Sigmaとの非重複を証明しない。[追加学習371](#fixed-public-replay371-comparison-completed-2026-10-12)ではTrain低下とValidation悪化が観測されたが、多様化だけで解消するとは確定していない。
+
+未採択の第一候補は、合法な異なる序盤棋譜から開始し、その後は通常の固定D同士のαβ探索で対局する方法である。反復判定に必要な実履歴を保持し、毎手の複数候補探索を増やさずに展開を変える。競合案は序盤に限って探索評価が最善に近い複数候補から確率的に着手する方法だが、通常PVS/Null Windowの候補値は上限・下限の場合があり、そのまま僅差比較に使えない。必要な候補の再探索またはMultiPV相当の評価には追加探索費がかかる。静的評価の僅差も探索評価の代わりにはならず、MCTS訪問回数やDirichletルートノイズをαβへそのまま移植しない。[Stockfishの歴史的生成例](https://github.com/official-stockfish/nnue-pytorch/wiki/Training-datasets)は序盤bookとrandom_multi_pv/random_multi_pv_diffを併用するが、Chessの数値設定を転用しない。[AlphaZero](https://arxiv.org/pdf/1712.01815)のMCTSルートノイズ・訪問回数着手、[KataGo](https://arxiv.org/pdf/1902.10565)のランダム序盤・温度減衰・途中分岐は、別方式の参考例である。
+
+学習側では、少数の長い棋譜が占有しない抽出、過去データとの混合、ルールに沿った左右反転が候補となる。反転は新しい独立展開の代用ではなく、抽出/混合率は未選択である。Validationは対局・派生元系列を分離して近接/同系列局面の漏れを抑える。展開、残り壁、壁配置、距離差、接近/合法ジャンプ等でcoverageを見る案はあるが、追加全域censusを実行gateとして発行しない。
+
+局面を訪れる着手方針と教師付けは別に選べる。探索評価教師なら訪れた局面を通常探索で評価する案があり、勝敗教師なら後続のランダム悪手もラベルに影響する。いずれも最適値の真実ではない。固定D/NNUE/Sigmaや過去版の相手混合は別候補で、現在の必須工程ではない。[OpenAI Five](https://cdn.openai.com/dota-2.pdf)の過去相手混合は参考例に留め、比率を標準値として移植しない。公開Sigmaに必要局面が欠けるか/分布がずれるかは直接比較しておらず、固定Dデータの大量追加で固定Dより強くなることも未証明である。MCTSであることだけでSigmaの優位を説明しない。
+
+次の人間判断は、実生成を選ぶ場合の序盤生成/選択法、確率着手の有無、相手、教師、対局規模・分割・学習抽出と、生成/保存/学習/評価全工程費である。今回の相談と文書化は新しい対局生成・fit・MultiPV実装・sampler変更を承認しない。既承認374/349、323 USERPAUSE、models/defaults/N/seals/fits96と資源上限は不変である。
+
 ## 2026-10-12: selected two-arm public replay diagnostic (371)
 
 After the saved-only370 correspondence check, the human selected one existing-data outcome-z comparison: two independent fresh BEST43 warmstarts,200 full-batch64 Adam updates each at LR.001 with the same20-update warmup, scale, model, seeds and reflection. The control samples64 added-T rows per update; replay samples32 added-T plus32 uniformly indexed public-T rows with replacement. Added217T/76V and48 exclusions retain the accepted compact whole-family split. Public T8413949 supplies training; already-opened V419150 is evaluation-only, with sealed E unopened. Recorded public outcome/history/rules provenance remains limited as established by370.

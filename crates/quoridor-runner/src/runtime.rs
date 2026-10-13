@@ -3999,15 +3999,7 @@ mod tests {
         let c = cancel.clone();
         let loaded = evaluator(&cfg.engines[0], &cfg).unwrap();
         let thread = thread::spawn(move || {
-            worker(
-                cfg,
-                vec![plan()],
-                tx,
-                c,
-                vec![loaded],
-                true,
-                (Instant::now(), None),
-            )
+            worker(cfg, vec![plan()], tx, c, vec![loaded], true, Instant::now())
         });
         let mut r = match rx.recv_timeout(Duration::from_secs(2)).unwrap() {
             Event::Request(r) => r,
@@ -4058,7 +4050,7 @@ mod tests {
                 cancel,
                 vec![loaded],
                 true,
-                (Instant::now(), None),
+                Instant::now(),
             )
         });
         let mut calls = 0;
@@ -4100,15 +4092,7 @@ mod tests {
         let c = cancel.clone();
         let loaded = evaluator(&cfg.engines[0], &cfg).unwrap();
         let thread = thread::spawn(move || {
-            worker(
-                cfg,
-                vec![plan()],
-                tx,
-                c,
-                vec![loaded],
-                true,
-                (Instant::now(), None),
-            )
+            worker(cfg, vec![plan()], tx, c, vec![loaded], true, Instant::now())
         });
         let pending = match rx.recv_timeout(Duration::from_secs(2)).unwrap() {
             Event::Request(r) => r,
