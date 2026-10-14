@@ -1627,3 +1627,15 @@ setup/drop・判定/copy/cache構築込みwholeはO9.856085093/9.868371370秒、
 source/必要software/一度の限定review後、同じ現役measurement入口で固定D Coverage→Control→Control→Coverage、既存6roots×4＝24calls/12sessions/72Mだけを行う。D4各2M/D6各8M・同D(0,8tanh)/PVS/TT4096/rules/inputを固定し、depth/finite value/合法action・PV/親復元を確認し、順位変更のaction/PV/work差を実記録として区別する。setup/drop込みwhole中央値N≤O、同root両NともO中央値1.10超なしを有限支持基準とする。具体的candidate/settingsは真正build後の実refsだけを結び、追加roots/warmup/sampling/selfplay/fit/refillを発行しない。混合試行とその準備はUSERPAUSE、旧36records/未終端gzip/UNKNOWN/全費/FAILED、323pause/oldfits96/models/defaults/N/sealsは保持する。
 
 追加保存を含む距離マップ差分更新は、393の新しい人間指示で、非保存／cell4bit-u8（162B）／方向bitboard（128B）／WallEdges併用（160B）の作成・維持・copy/cache・影響伝播/距離修復を比較し、一候補を準備する。[比較範囲と厳密更新条件](design/distance-map-first-v1.md#下降接続の追加保存を含む厳密差分更新3932026-10-14)を追加した。実際の392source intakeにcore/NNUE pathが無いことを確認し、空いた既存担当へCPU5/RAM512MiB/GPU0で独立配分した。392担当へ割り込まず、共有Cargoと実timingを324が調整する。方式選択・source/software・実費は未確定、BFS回避/影響頻度/速度利益はUNKNOWNである。既承認393 Control24は392の実timingSTOP後とし、混合生成/学習/256と追加準備のUSERPAUSEを解除しない。
+
+### 固定D Control有限確認：D6未完了のため接続未採用（2026-10-14）
+
+同一真正image59d2a79c／Build7d449fe8でCoverage→Control→Control→Coverage、既存6roots×4＝24calls／12sessionsを一度実行した。[実設定・部分結果](../.artifacts/research-team/integration324/fixed-d-generation392-v1/finite24-v1/collection-v2/result.json)、[局面別PV/workと日本語報告](../.artifacts/research-team/integration324/fixed-d-generation392-v1/finite24-v1/collection-v2/report-ja.md)、[実STOP](../.artifacts/research-team/integration324/fixed-d-generation392-v1/finite24-v1/STOP.json)に対応する。D4は20COMPLETE、D6は全4callsが8M-node上限・completedD5・UNKNOWN。記録nodes33,127,032／上限72M、追加call・上限変更・補充なし。D6完成条件を満たさないためControlの生成factory接続は未採用とし、元Coverageへ戻した。旧結果や停止した混合試行を成功に変更しない。
+
+whole中央値はO25.4288964045s／N3.9992552645s、N/O0.15727207350580405。ただし未完了D6を含む入場区間の時間であり、完成D6のspeedupや同仕事の高速化ではない。五つの完成D4 rootはdepth/valuebits/root着手/合法集合/親復元が一致し、全rootでPVとworkは異なる。返却PVは既存checked full-history validationを通ったが、代替継続の同値性や棋力を追加測定していない。旧381imageからの総利益でもない。
+
+新規7＋関連3のnative、必要compile/Clippy/真正optimized BUILDと限定review0/0はPASS。固定IDのatomic動的割当・容量Wのcompletion queue・index対応consumer・Pythonのworker幅転送は保持する。within-batch stream/cacheは完成順となり、schedule/family/partition/gameID/labelのmembershipは固定、後続fitは実cache順を記録する。body数2W+1はbyte/RAM上限ではなく、実gameの待ち費・throughput・per-game RSSはUNKNOWN。8物理worker案（0/2/4/6/8/10/12/14、guardian16・main reserve18、family8GiB/host4GiB/GPU0）は準備案であり、allocation・whole8GiB支持・大量生成許可を意味しない。
+
+初回saved-only collectorの全24COMPLETE assertion失敗を保持し、partial20/4を受ける修正後の保存解析だけを実施した。元失敗・guardianNULLとdisk pending/attemptedは成功記録へ置き換えず、engine/Searchの再実行はない。混合生成・変換・fit/newweights/native/256と追加準備のUSERPAUSEは維持し、新しい条件やcampaignを発行しない。
+
+[固定Dのexact-byte保存receipt](../research-data/ai-sigma/fixed-d-generation392/receipt.json)は、設定・各journal/result・実STOP・software/review・原collector失敗とpartial修正・factory復帰を含む130filesに対応する。sourceの未測定部分を性能採用へ昇格しない。

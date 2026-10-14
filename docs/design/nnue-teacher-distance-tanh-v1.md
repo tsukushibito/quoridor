@@ -572,3 +572,9 @@ Whole8GiB部分停止を選択した。これは最大1280完了の保証では�
 新しい独立task392は、現役固定D generatorへのControl/no-policy/signed接続、固定IDのdynamic assignmentとbounded完成回収、必要software/限定review、既存6rootsのCoverage→Control→Control→Coverage 24Search calls/12sessions/72Mの費用確認までを承認された。既存measurementのNNUE専用loader/selectorと生成report/auditの番号順契約に必要な最小修正を施し、別harness/scheduler/registryを作らない。D(0,8tanh)/D6/full-width/PVS/TT4096/rules/STM z教師を維持し、action/PV/work差は記録する。NNUE mapの約6.588%を固定Dの利益にしない。
 
 [資源・未完成入口の準備](../../.artifacts/research-team/integration324/fixed-d-generation392-v1/runtime-preparation.json)は10physicalに対する8game workers＋guardian1＋main/reserve1、family8GiB/host4GiB/GPU0案を保存する。各game1search thread、queue/inflightはworker数に比例する有限量とし、payload/実RSS/時間は必要な実境界で確認する。旧whole8GiB部分停止とdecimal50GBは保持し、fresh bulk支持・新input/出力namespace・設定確定・明示resumeは大量生成の別の未充足条件である。今回のsource/finite24は独立に進め、停止した混合生成・変換・fit/newweights/native/256やその追加準備を再開しない。旧RAW/未終端36records/UNKNOWN/費は原物保持する。
+
+### 固定D高速化・並列準備の有限結果（392、2026-10-14）
+
+固定DのCoverage/Control一候補24callsは20COMPLETE D4＋4UNKNOWN D6（8M上限、completedD5）。D6完成が条件だったため、Controlのgenerator接続は未採用・元Coverageへ戻す。追加calls/roots/上限変更や停止trialの再開は発行しない。whole25.4288964045s→3.9992552645sは未完了D6込みの入場費で、完成D6または同workの速度利益ではない。[実設定・work/PV・未完了の保存報告](../../.artifacts/research-team/integration324/fixed-d-generation392-v1/finite24-v1/collection-v2/report-ja.md)と[factory復帰](../../.artifacts/research-team/integration324/fixed-d-generation392-v1/generator-profile-rollback-v1/result.json)を正本とする。
+
+動的固定ID割当・容量W completion queue・完了順stream/cacheをunique schedule indexへjoinする現役consumerはソフトウェア確認済みとして保持する。完成順はmembership/teacher/splitを選ばないが、将来の実cache順と共通node上限による完了/欠測分布は記録する。8物理gameworkers＋guardian/main reserve案は将来のfresh CPU/RAM/whole8GiB・decimal50GB支持と明示resumeを要する。per-game heap/queue bytes、wait削減量、実throughputは未測定。混合342.17と後段/準備はUSERPAUSEのまま。データ・学習条件の自律委任はこの明示pauseを解除しない。

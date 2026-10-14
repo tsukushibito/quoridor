@@ -329,18 +329,8 @@ fn play_with_budget(
     // Preserve the original independently retained per-colour sessions inside
     // every game. Only one search is active at a time; no cross-colour TT sharing.
     let mut sessions = [
-        SearchSession::new_with_control_ordering(
-            evaluator.clone(),
-            namespace.clone(),
-            4096,
-            quoridor_ai::score::ScoreDomain::LEGACY,
-        )?,
-        SearchSession::new_with_control_ordering(
-            evaluator,
-            namespace,
-            4096,
-            quoridor_ai::score::ScoreDomain::LEGACY,
-        )?,
+        SearchSession::new(evaluator.clone(), namespace.clone(), 4096)?,
+        SearchSession::new(evaluator, namespace, 4096)?,
     ];
     if sessions
         .iter()
