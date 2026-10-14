@@ -596,3 +596,9 @@ D6上限は反復深化の累積8MでありcompletedD5はD6未着手を意味し
 人間の「100万エントリを検証」で2^20=1,048,576 slotsを一候補として選択した。現persistentのmin4096/1MiBと、外側default16384/request65536の違いを正す最小sourceを準備する。製品/三者比較/既存callerの実4096、4096生成と旧記録を維持し、同じcurrent imageの固定D Control A4096→B1048576→B→A、既存6roots×4=24calls/12sessions/72Mだけを行う。TT policy/history/ordering/eval/rulesは同じで、別容量sweep/追加call/生成/fitは発行しない。実設定とcapacity/retained/overflow/clear/error境界のsoftware・限定review後にentryする。通常工程で人間/Policy ACKは挟まない。
 
 現ABIの原327728B=header48+4096×80から、候補はTT本体80MiB/個、二色160MiB/game、8games1.25GiBの算術。2^18/2^19/2^21はそれぞれ20/40/160MiB/TT、8games320/640MiB/2.5GiBで、header/allocator/history/queue/その他RSSは別。2^20の最適性/利益は未確認で、全leafをTTへ格納する実装でもない。新callback Request.observe_completed_depths(defaultfalse)の実完成深さ累積を394/397の同actual callへ共有する方向で、入場前に同modeとsubjectを固定し二重entry/費を避ける。診断ONならその費用を含み純speedupとしない。以後の観測を原392へ遡及補完せず、D6完成や容量効果は実結果まで未確認。人間選択Control接続の現BUILDはPASS/image59d2だが、大量混合生成/全後段/準備と323 USERPAUSEは解除しない。
+
+### 約100万TTの固定D有限支持と生成の停止境界（397、2026-10-14）
+
+[実比較receipt](../../research-data/ai-sigma/fixed-d-tt-capacity397/receipt.json)に同じControl/D/math/history/画像のA4096-B1048576-B-A、24calls/12sessionsを保存した。実TTは327728→83886128B、whole中央値B/A0.911111292で有限支持、同完成深さの値/着手/合法/親は整合した。20D4 COMPLETE/4D6 NodeLimit completed5、PV/work差を保持し、D6完成/同仕事/棋力・通常OFFの速度とはしない。callbackは原392の欠測を遡及補完しない新subjectで、396追加call0・394固定D6も共有した。
+
+研究constructorは実要求容量をhonorし、必要な既存callerは従来実4096を明示する。現generatorのControl二色sessionと製品/三者比較の実4096を、この比較だけで一括変更していない。100万を次の生成設定へ選ぶ場合も、二色約160MiB/game・8games約1.25GiBというTT算術と、実RSS/他buffer/family/whole8GiB/decimal50GBを分けて設定する必要がある。混合生成からconverter/fit/newweights/native/256までと準備のUSERPAUSEは継続し、今回の有限支持は再開許可ではない。

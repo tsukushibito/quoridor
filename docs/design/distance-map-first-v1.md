@@ -155,3 +155,15 @@ Main7386b54のcore/NNUE5pathsを保持する。[exact保存receipt](../../resear
 新core5＋必要API移行core3＋NNUE玩具3、必要compile/Clippy/真正build、cache/差分境界の独立review0/0はPASS。正しさと費用の支持を区別する。構築/copy/repair/Arcを含む全体費での不支持であり、追加保存一般の不利や普遍的最適は主張しない。actual layout/alignment/hit/BFS回避/影響領域分布/各inline費はUNKNOWN。Nには現392共有softwareも含む版差があり、個別内部処理の因果費へ分解しない。software outer116.622988289秒と数値job57.092101375秒は別に記録しnested費を加算しない。
 
 保存collectorのclock_scope末文の「両N adverseなし」は継承された誤記で、原物を保持しerratumに実3rootsとnumeric FAILを記した。最初のarchiveはreview report名の誤参照で失敗し、既に作成済みreportを再生成せずその完全一致を確認して未完了exportだけ修復した。元失敗/RAW/費を保持し、native/Search再演や追加候補/測定はない。mixed/learnerの生成・全後段・準備と323のUSERPAUSEは不変。
+
+### 元候補のsource費用の解釈（2026-10-14）
+
+固定393sourceには、markedが小さくても81\*u128 bucket（1296B/player）の固定初期化、markedの複数段階の走査と同cellのopen neighbors再導出、marked>40の早期影響判定後full BFS＋接続構築がある。距離不変時にも追加direction/edge metadataのcopy/維持があり、元391のrow copy/newArcとの差を分ける。伝播は閾値超で早期停止し、修復はstack構造でheapではなく、全81を何度もBFSした実装でもない。各codegen/inline/部位費は未測定で、これらを全9.581%悪化へ帰属しない。追加保存/差分更新一般の不利は未証明である。
+
+## 固定準備と隣接先再導出を減らす新候補（398、2026-10-14）
+
+人間の「そこまで対応してどうなるか知りたい」に基づく別の一候補で、旧393の結果・撤回を変更しない。少数修復の81bucket固定準備を避け、距離の異なるboundary seedを正しく処理する小scratch/bitfrontierを選ぶ。markedの各段階とopen neighborsの再導出をまとめ、広域full BFSへ進むときに不要なclone/部分準備/方向再構成を先行させない。一つの処理量根拠を持つfallbackを事前に選び、閾値sweepは行わない。
+
+parent-after/child-after完全hitを先行し、親geometryはimmutable、pawnはArc共有、変わらないdistanceでも閉じた下降edgeを正しく除く。新wall-keyへの新cache、厳密一枚追加以外のcanonical exact BFS、goal/unreachable/twoedge/seed順序/undo/errorを維持する。既存queue oracleと玩具FTの変更境界だけを確認し、元11成功suiteの全再演を入口にしない。
+
+同じ最新採用基盤のNNUE/BEST43 Control O-N-N-O、既存6roots×4=24calls/12sessions/72M、TT4096/PVS/rules/観測モード固定、全depth/valuebits/action/exactPV/all30work/legal/history/parent/stop MATCHとwhole N中央値≤O・同root両NがO中央値1.10超なしで一度だけ判断する。O/N間は今回geometry差分だけにし、100万TT・history projection・固定D・モデル変更を混ぜない。初期full構築/保存維持/copy/Arc/部分修復/fallbackを全体費に含める。未記録hit/skip/影響範囲/部位費はUNKNOWN、追加sampling/roots/refill/tuning/対局/fitは発行しない。

@@ -182,3 +182,11 @@ controller6.492365031968802sに含むのはin-controller checks/journal validati
 人間の「100万エントリを検証」で2^20=1,048,576 slotsを一候補として選択した。現persistentのmin4096/1MiBと、外側default16384/request65536の違いを正す最小sourceを準備する。製品/三者比較/既存callerの実4096、4096生成と旧記録を維持し、同じcurrent imageの固定D Control A4096→B1048576→B→A、既存6roots×4=24calls/12sessions/72Mだけを行う。TT policy/history/ordering/eval/rulesは同じで、別容量sweep/追加call/生成/fitは発行しない。実設定とcapacity/retained/overflow/clear/error境界のsoftware・限定review後にentryする。通常工程で人間/Policy ACKは挟まない。
 
 現ABIの原327728B=header48+4096×80から、候補はTT本体80MiB/個、二色160MiB/game、8games1.25GiBの算術。2^18/2^19/2^21はそれぞれ20/40/160MiB/TT、8games320/640MiB/2.5GiBで、header/allocator/history/queue/その他RSSは別。2^20の最適性/利益は未確認で、全leafをTTへ格納する実装でもない。新callback Request.observe_completed_depths(defaultfalse)の実完成深さ累積を394/397の同actual callへ共有する方向で、入場前に同modeとsubjectを固定し二重entry/費を避ける。診断ONならその費用を含み純speedupとしない。以後の観測を原392へ遡及補完せず、D6完成や容量効果は実結果まで未確認。人間選択Control接続の現BUILDはPASS/image59d2だが、大量混合生成/全後段/準備と323 USERPAUSEは解除しない。
+
+### 約100万TTの実容量と有限結果（397、2026-10-14）
+
+[同image ABBA24のexact evidence](../../research-data/ai-sigma/fixed-d-tt-capacity397/receipt.json)では、4096/1048576要求が各session/callの実容量・327728/83886128Bと一致した。新clampを設けず、既存product/nonarena/teacher/selectedarenaの実4096を明示して維持する。新容量6定義と任意ordering/depth観測8定義、必要compile/Clippy/真正BUILD、allocation/caller限定review0/0を確認した。
+
+固定D Control・同history/TT policy・同diagnosticONで20D4 COMPLETE/4D6 NodeLimit completedD5、同完成深さ/valuebits/root着手/合法/root/parentは整合。PV3rootとworkは異なる。whole中央値4.029465713→3.671291713秒、B/A0.911111292、両B悪化1.10超root0で研究容量候補として支持する。通常OFFの速度/棋力/既定やpaused大量生成へ自動転用しない。容量をhonorする現役softwareを保持し、旧clamp/比較互換shimは残さない。現役研究容量指定機能が不要になればその入口と案内を一緒に撤去する。
+
+D6のKey hitは21882→367054だがcontext/depthのnumeric資格は別で、cutoff217→30。現在のTT-firstによるfinished no-sort cutoff20688→332689、finished非自明sort835244→541503も別分母で記録し、唯一の時刻原因とはしない。共有callbackから現在AのD6途中6,179,454nodesを分離できたが、原392のdepth UNKNOWNは維持する。D6は未解決、history projection/cap増量/別容量sweepを追加していない。

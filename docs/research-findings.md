@@ -1673,3 +1673,21 @@ D6上限は反復深化の累積8MでありcompletedD5はD6未着手を意味し
 人間の「100万エントリを検証」で2^20=1,048,576 slotsを一候補として選択した。現persistentのmin4096/1MiBと、外側default16384/request65536の違いを正す最小sourceを準備する。製品/三者比較/既存callerの実4096、4096生成と旧記録を維持し、同じcurrent imageの固定D Control A4096→B1048576→B→A、既存6roots×4=24calls/12sessions/72Mだけを行う。TT policy/history/ordering/eval/rulesは同じで、別容量sweep/追加call/生成/fitは発行しない。実設定とcapacity/retained/overflow/clear/error境界のsoftware・限定review後にentryする。通常工程で人間/Policy ACKは挟まない。
 
 現ABIの原327728B=header48+4096×80から、候補はTT本体80MiB/個、二色160MiB/game、8games1.25GiBの算術。2^18/2^19/2^21はそれぞれ20/40/160MiB/TT、8games320/640MiB/2.5GiBで、header/allocator/history/queue/その他RSSは別。2^20の最適性/利益は未確認で、全leafをTTへ格納する実装でもない。新callback Request.observe_completed_depths(defaultfalse)の実完成深さ累積を394/397の同actual callへ共有する方向で、入場前に同modeとsubjectを固定し二重entry/費を避ける。診断ONならその費用を含み純speedupとしない。以後の観測を原392へ遡及補完せず、D6完成や容量効果は実結果まで未確認。人間選択Control接続の現BUILDはPASS/image59d2だが、大量混合生成/全後段/準備と323 USERPAUSEは解除しない。
+
+### 固定Dの約100万TT：有限支持と残るD6未完了（2026-10-14）
+
+[exact保存receipt](../research-data/ai-sigma/fixed-d-tt-capacity397/receipt.json)は150filesの疎なsource合成、allocation/caller限定review、必要software、原入口拒否と修復、同一imageのABBA24、原journal/結果/STOP、共有した深さ別観測を結ぶ。persistentが要求nを実際に確保し、checked slots+header・fallible reserve・実retained拒否を維持する。新たなsilent clampは設けず、従来実4096だったnonarena defaultを明示4096へ直した。製品/三者比較/現generatorの実4096は不変。新AI5+runner1の容量境界、AI6+runner2の任意診断、必要compile/Clippy/真正BUILDがPASSし、割当/caller reviewは0/0。image fa1954be/Build76a051c1で両容量を比較した。
+
+24calls/12sessions/33,136,840 nodes（上限72M）のうち20D4 COMPLETE、4D6 NodeLimit/completedD5。全6rootで完成深さ/valuebits/root着手/全合法集合/fullhistory/親復元が一致し、各容量内の反復二回のPV/全workも一致。容量間では3rootのPVとworkが異なり、同仕事の比較とは呼ばない。PVはcompatible context・remaining depth・Exact TT bestだけを辿り、欠損で短くなり得る。全PVは実callerのchecked playを通ったが、各descendantの同値候補集合/唯一解はUNKNOWN。setup/drop込みwhole中央値はA4096 4.029465713秒、B1048576 3.671291713秒、B/A0.911111292（約8.889%短縮）。同rootで両BともA中央値1.10超は0、depth到達も悪化せず、この有限研究容量候補を支持する。全passで同じdiagnostic ONとdepth callbackを固定したため、通常OFFの純speedup・普遍速度・棋力・製品default昇格へは転用しない。paused大量生成の全設定を100万へ自動変更したことでもない。
+
+実TT保持は327728B→83886128B（80MiB+48B）、全reset/callで要求容量と一致。family4GiBの既存guardを通ったが、過去peak RSSは未記録でUNKNOWN。coldD6ではKey hit/probe 21882/856155→367054/874227、index conflict830177→118552、context一致/不一致566/21316→16825/350229、usabledepth241→44、numeric cutoff217→30。hit機会が増えてもnumeric資格の増加とは同義でない。既存386が合法なcached moveをcontext不一致時にもorderingで使うことと、実TT-only no-sort cutoff20688→332689、finished非自明sort835244→541503という別の観測を区別する。これを全時刻差の唯一原因へ分解せず、履歴/depth資格の改善利益も未測定とする。
+
+今回の共有coldD6 callbackでは、AのD5累積1,820,546nodes/1,693,720eval/0.644049346秒から最終8Mまでに、D6途中6,179,454nodes/5,450,125eval/3.070787884秒を使った。BもD5累積1,815,627nodesからD6途中6,184,373nodesを使い、いずれも完成D6ではない。これは新しいactual subjectだけの観測で、原392の空callback/深さ別UNKNOWNを遡及補完しない。396用の別8M callは0、394固定D6rootsも同A-first passを共有し二重実行/費用計数はしない。直接の停止は反復深化累積8Mであり、広い合法集合と少ないnumeric reuseは根拠になるが、必要D6総量・PVS再探索内訳・同値頻度・単独原因はUNKNOWN。完全historyを保った再到達不能wall-subsetだけのTT資格projectionは次のsource候補に留め、今回実装しない。
+
+原finite v1は新optional depth flagをPython入口が拒否し、operation所有/native前で停止した。原FAILED/remaining UNKNOWN文言と8.085669245秒の費用は維持し、checks[]/operationとTMP不存在/実source順序からSearch入場0を別に確認した。許可keyとbool検査だけを修復し、新NN0 owning定義1件がPASS、Rust/image再buildや成功callの再演はない。software outer95.461809528秒と修復後数値job63.382437715秒を別記しnested時間を加算しない。保存collectorのcallback/final counter名差とRoot helperの拒否/誤assertも保持する。mixed/learner全段階と323のUSERPAUSE、旧RAW/FAILED/費/UNKNOWN・models/defaults/sealsを維持する。
+
+### 距離差分候補のsource費用と改善版の比較範囲（2026-10-14）
+
+393の不支持は追加保存/差分更新一般の無効を示さない。固定sourceには、小領域でも81×u128のbucket初期化（1296B/playerの情報本体）、markedの初期化/境界seed/確定/接続再構成の多段走査、boundaryと接続再構成で同じcellのopen neighborsを再導出する経路、影響伝播で40超を検出してからfull BFSと方向mask構築へ進む二段費用がある。伝播は40超で早期停止し、元391にもrow copy/newArcはある。heap repair/全81を何度もBFS/距離完成後一律81scanだったとはしない。実memset/copy/inline費・hit/BFS skip/影響分布は未分離で、全9.581%悪化の原因には認定しない。
+
+人間の新指示で、この固定準備と重複導出を減らした別の一候補を、現在の合法手/TT共通softwareを含む同じ基盤で比較する。小scratch/距離順seed、まとめたfrontier処理、広域fallback前の不要準備回避、完全hitとimmutable wall-keyを検討し、作成/維持/copy/Arcを含む費用で選ぶ。[範囲と未確定条件](design/distance-map-first-v1.md#固定準備と隣接先再導出を減らす新候補3982026-10-14)に従い、元393のFAIL/CLOSED/rollback/費を維持する。新候補の利益は未測定であり、TT/履歴/モデル/math/合法手順序は混ぜない。
