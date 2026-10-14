@@ -1703,3 +1703,5 @@ finishedのsort対象96,963,438（D）/201,308,175（NNUE）中、cutoffで未�
 Controlのstatic0加算と診断ONでの同一ranking対照にはsource上の省略候補があるが、コンパイラ除去や部位時間は未分離で、今回は実装しない。全手を読むnode/最後の手でcutoffするnode/rootの既存consumerは全順序を使う。尾部を必要時まで整列しない方式は次の提案だけとし、採点省略・heap/MovePicker/radix/TT変更や新比較を発行しない。通常OFFは追加snapshot/copy/scan無しの任意観測として維持する。
 
 NNUE sequence outer21.159437576秒は一度、Dは397のouter63.382437715秒の一部を共有し追加費へ加算しない。native whole4.041877575/9.498989077秒は観測ONを含み、sort/score単体費・observer overhead・一般speedupを分離しない。旧profile14%から回避時間を逆算せず、モデル間にも転用しない。新AI6+runner2のcounter/途中/error/cancel/TT-only/PVS境界は共通softwareでPASS、optional depth入口の新metadata1もPASS、旧成功suite/原RAW decode/科学callsの再演無し。混合/learnerの準備から全後段までと323 USERPAUSE、oldfits96/models/defaults/N/sealsを保持する。
+
+四つのwarm rootsは同一sessionでTT/historyを共有する時系列で、独立replicatesではありません。[最終報告書への追記保存](../research-data/ai-sigma/sort-opportunity394/report-addendum-receipt.json)はこの注記と対応するFileRefだけを補い、元96filesと数値結果を変更しない。
