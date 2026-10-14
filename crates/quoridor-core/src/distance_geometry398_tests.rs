@@ -90,7 +90,7 @@ fn wall398_two_edges_mixed_partial_fallback_and_unchanged_alternates_match_queue
     }
     assert_eq!(classes, [true; 4]);
     let geometry = empty.wall_distance_geometry();
-    let removed = [(3u128 << 0) << 9, 3, 0, 0];
+    let removed = [3u128 << 9, 3, 0, 0];
     let mut first = geometry.descent[0];
     let mut second = geometry.descent[1];
     assert_eq!(invalidate(&mut first, removed).count_ones(), 2);
