@@ -147,3 +147,11 @@ Main7386b54のcore/NNUE5pathsを保持する。[exact保存receipt](../../resear
 距離不変でも塞いだ下降edgeをcacheから除き、未影響cellから修復領域への接続も整合させる。immutable親、pawn Arc共有、exact parent/child hit優先、after-keyの新cache、削除/置換/multi差分の元exact経路、FT/features/model/error/undoを保持する。既存独立cellqueue oracleと必要な玩具full/delta/bit/key/strict-add/undo/error scopeで検証し、四方向maskを独立距離/open-edgeへ照合する。誤距離が広く影響するcache/差分境界へ限定reviewを一度行う。
 
 固定D生成の392が優先で、実際の編集pathを確認したcore/NNUE私有sourceだけを別の空いた既存担当へ配分する。Root/Main/Git/Cargo writerは324のみ。sourceCPU5/RAM512MiB/GPU0、actualtiming時だけheavy source/IOを実checkpointSTOPへ調整する。正しい一候補の必要software/真正build後、392の実timingSTOPから通常Control O→N→N→O24calls/12sessions/72Mで有限採否を行う。O86ca5d4c/Build1568a988、同6roots/BEST43/TT4096/PVS/rules、D4各2M/D6各8M、全depth/valuebits/action/exactPV/all30work/legal/history/parent/stop一致とwhole中央値N≤O/no bothN>Omedian1.10を要求する。追加roots/sampling/warmup/refill/tuning/game/fitは発行せず、不支持なら一候補だけ戻す。普遍的最適/棋力/defaultや未記録BFS回避回数を主張しない。混合試行と準備のUSERPAUSE、旧RAW/FAILED/費/UNKNOWN/323pause/oldfits96/defaults/sealsを維持する。
+
+### 下降接続の追加保存候補は有限不支持（2026-10-14）
+
+追加情報本体160Bのdirection bitboards＋WallEdges、旧下降DAGからの影響伝播・固定bucket修復・marked>40のexact BFS fallbackを一候補として評価した。[exact保存receipt](../../research-data/ai-sigma/distance-map-delta393/receipt.json)に105filesのsource差分・限定review・software・設定・全結果/journal・STOP・撤回を結んだ。全24calls/12sessionsがCOMPLETEし、全6rootsのdepth/valuebits/action/exactPV/全30work/legal/fullhistoryroot/parent/stopは一致した。setup/drop込みwhole中央値はO391 9.2165193155秒、N393 10.099569894秒、N/O1.095811721。warm local2/4/6も両NがO中央値1.10超で、有限基準に不支持のため候補だけを戻し、既採用391の局所不変判定を維持する。
+
+新core5＋必要API移行core3＋NNUE玩具3、必要compile/Clippy/真正build、cache/差分境界の独立review0/0はPASS。正しさと費用の支持を区別する。構築/copy/repair/Arcを含む全体費での不支持であり、追加保存一般の不利や普遍的最適は主張しない。actual layout/alignment/hit/BFS回避/影響領域分布/各inline費はUNKNOWN。Nには現392共有softwareも含む版差があり、個別内部処理の因果費へ分解しない。software outer116.622988289秒と数値job57.092101375秒は別に記録しnested費を加算しない。
+
+保存collectorのclock_scope末文の「両N adverseなし」は継承された誤記で、原物を保持しerratumに実3rootsとnumeric FAILを記した。最初のarchiveはreview report名の誤参照で失敗し、既に作成済みreportを再生成せずその完全一致を確認して未完了exportだけ修復した。元失敗/RAW/費を保持し、native/Search再演や追加候補/測定はない。mixed/learnerの生成・全後段・準備と323のUSERPAUSEは不変。

@@ -1639,3 +1639,17 @@ whole中央値はO25.4288964045s／N3.9992552645s、N/O0.15727207350580405。た
 初回saved-only collectorの全24COMPLETE assertion失敗を保持し、partial20/4を受ける修正後の保存解析だけを実施した。元失敗・guardianNULLとdisk pending/attemptedは成功記録へ置き換えず、engine/Searchの再実行はない。混合生成・変換・fit/newweights/native/256と追加準備のUSERPAUSEは維持し、新しい条件やcampaignを発行しない。
 
 [固定Dのexact-byte保存receipt](../research-data/ai-sigma/fixed-d-generation392/receipt.json)は、設定・各journal/result・実STOP・software/review・原collector失敗とpartial修正・factory復帰を含む130filesに対応する。sourceの未測定部分を性能採用へ昇格しない。
+
+### 下降接続の追加保存候補は有限不支持（2026-10-14）
+
+追加情報本体160Bのdirection bitboards＋WallEdges、旧下降DAGからの影響伝播・固定bucket修復・marked>40のexact BFS fallbackを一候補として評価した。[exact保存receipt](../research-data/ai-sigma/distance-map-delta393/receipt.json)に105filesのsource差分・限定review・software・設定・全結果/journal・STOP・撤回を結んだ。全24calls/12sessionsがCOMPLETEし、全6rootsのdepth/valuebits/action/exactPV/全30work/legal/fullhistoryroot/parent/stopは一致した。setup/drop込みwhole中央値はO391 9.2165193155秒、N393 10.099569894秒、N/O1.095811721。warm local2/4/6も両NがO中央値1.10超で、有限基準に不支持のため候補だけを戻し、既採用391の局所不変判定を維持する。
+
+新core5＋必要API移行core3＋NNUE玩具3、必要compile/Clippy/真正build、cache/差分境界の独立review0/0はPASS。正しさと費用の支持を区別する。構築/copy/repair/Arcを含む全体費での不支持であり、追加保存一般の不利や普遍的最適は主張しない。actual layout/alignment/hit/BFS回避/影響領域分布/各inline費はUNKNOWN。Nには現392共有softwareも含む版差があり、個別内部処理の因果費へ分解しない。software outer116.622988289秒と数値job57.092101375秒は別に記録しnested費を加算しない。
+
+保存collectorのclock_scope末文の「両N adverseなし」は継承された誤記で、原物を保持しerratumに実3rootsとnumeric FAILを記した。最初のarchiveはreview report名の誤参照で失敗し、既に作成済みreportを再生成せずその完全一致を確認して未完了exportだけ修復した。元失敗/RAW/費を保持し、native/Search再演や追加候補/測定はない。mixed/learnerの生成・全後段・準備と323のUSERPAUSEは不変。
+
+### 人間選択による固定D Control採用とD6上限分析（2026-10-14）
+
+人間が「固定DのControlは採用するとして、800万ノード打ち切りの原因を分析」と明示したため、現役研究generatorの二つのper-colour sessionを既存Control/no-policy/signedへ接続した。新しい採用理由であり、閉鎖済み392の4D6 NodeLimit/completedD5/UNKNOWNと旧未採用判断を成功へ書き換えない。[接続差分とexact旧Control postimage照合](../.artifacts/research-team/integration324/fixed-d-depth396-v1/human-adoption-v1/result.json)を保持し、元392のconstructor/consumer/software/review成功を再演しない。D(0,8tanh)/D6/PVS/TT4096/fullwidth/rules/STM label、dynamic固定ID・bounded完成回収・indexconsumerと製品defaultを維持する。現構成の必要buildは別に行い、D6完成性能/棋力は未確認である。大量生成/混合全後段/準備のUSERPAUSEは解除しない。
+
+D6上限は反復深化の累積8MでありcompletedD5はD6未着手を意味しない。原coldD6 family34は合法122手（駒2/壁120）。Control各callのTT probes856155/hits21882、context matches566/misses21316、usabledepth241/cutoffs217は各実call総計で、depth別や因果利益ではない。direct-mapped slotの異Key衝突と、同Key hit後のfull-history/depth資格を分離して保存/sourceから調査する。total_plyを含むKeyを単なる駒壁一致と呼ばず、tt_capacity_skips0を容量十分の証明にしない。irreversible wallより古い再到達不能なHistoryKeyまで要求する構造は次のsource仮説として扱い、履歴/Key/深さ資格をここで変更しない。必要な深さ別累積は既存on_completed経路と未入場の省ソート診断の同call共有を優先し、新call/上限変更/sweepは本保存調査から発行しない。
