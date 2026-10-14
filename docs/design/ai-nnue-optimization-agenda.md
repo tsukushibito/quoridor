@@ -99,6 +99,14 @@ diagnosticsのprepared/scored eventは実際に行った残りの処理だけを
 
 採否はControl O→N→N→Oの既存6roots×4passes、24calls／12sessions／上限72M nodesを一度だけ行う。Oは385accepted b6c2c1ab／Build04324e1c、Nは必要な真正BUILDで、BEST43/TT4096/PVS/rules/入力/D4各2M・D6各8Mを固定する。同完成depth/valuebits、全合法集合、合法PV、fullhistoryroot/parent復元を必須とし、action/PV/workの変化とtieの根拠を記録する。workが変わった観測をsame-work speedにせず、value不一致を順序許容で免責しない。whole中央値N<=Oかつ同root両NがともにO中央値×1.10超の例なしを有限基準とし、不支持なら一差分を戻す。追加sampling/warmup/refill/tuning/roots/Cheap/対局/生成/学習は未発行。普通のsource/software/copy/reviewは保存事前枠なし・対象実usageを終了後一度確認、timing中だけ重い処理を直列化する。原結果/RAW/FAILED/費/UNKNOWN、323pause/fits96/models/defaults/N/seals/mixed3未回答は維持する。
 
+## NNUE child bufferの私有wall map再利用の並行準備（387、2026-10-14）
+
+人間の並行作業指示により、386のquoridor-ai orderingとは別pathで、現NNUEの呼出・コピー・検査を具体的に確認し、一候補の最小patch/testsを準備する。既存383担当を保存cwd/model/effort/fullneverで再用し、sourceはCPU1／RAM512MiB／GPU0、Mainはreadonly、成果は本人のtask namespaceへ置く。sole Main/Git/Cargoは324で、新worktree・全source mirror・新恒久roleを入口にしない。386のsource完了やmixed3回答を準備開始条件にせず、実timing時だけsubstantial CPU/IOを実STOPへ調整する。
+
+対象はPVS同actionの再探索からResidualEvaluator→delta_move_into→move_features_into→maps_forへ至る既存経路で、child bufferに残るprivate wall-only mapがexact H/V maskを満たす場合、そのmapを既存distances_for/ownerで再利用する一差分だけとする。通常のparent-map一致・pawn共有・子buffer/make-unmakeは既存機能として保持する。FT/IDコピーやshape/finite/feature/model/transition検査は必要な保証と対応づけ、削減対象へ自動分類しない。parent優先、map不一致、取消/error、部分上書き後、general valid features、公開可変accumulatorと私有geometryの境界を保ち、NNUE数学/加算順/特徴/重み/head/API/schema・検査・persistent cacheを変更しない。小差分が安全に成立しない、又は削減対象の呼出が無い場合は具体的な理由と最小代案を返す。
+
+384のControl map10.68%／delta5.25%／validation3.15%／head11.03%は旧有限標本で、385/386後のshareやmap再利用頻度・利益はUNKNOWN。prepared sourceを386の一差分比較へ混ぜず、必要affected software/buildと一度のcache/geometry/error境界reviewをsole324が順序調整する。387の数値比較は、実patchと386最終基準が分かった段階で、最小の同意味設定と全費をRootへ提示する。本準備は新Perf/Search/forward/対局/生成/fitを発行せず、現行保存/資源/STOPと旧RAW/FAILED/費/UNKNOWN、323pause/fits96/models/defaults/N/seals/mixed3未回答を維持する。
+
 ## Compact board TT と外部の反復履歴（359、2026-10-10）
 
 人間はTT entryごとの全履歴保存を止めるよう指示し、359で compact board-key TT と外部 canonical repetition history の実装を選んだ。この表現方向について354のcapacity-only未選択状態を置き換えるが、351/354を再開せず、2MiB化・eviction/reset・容量sweep・selective search・fit・新対局・349 perfの許可には広げない。4096 slots/1MiBから始める。
