@@ -2,7 +2,11 @@ mod game;
 mod position;
 
 pub use game::{Game, GameView, MAX_REPLAY_ACTIONS};
-pub use position::{Action, Position, RULESET_ID, RulesError};
+pub use position::{Action, Position, RULESET_ID, RulesError, WallDistanceGeometry};
+
+// Reuse the existing independent integration-test queue oracle in private tests.
+#[cfg(test)]
+extern crate self as quoridor_core;
 
 pub const INITIAL_PAWNS: [(u8, u8); 2] = [(4, 0), (4, 8)];
 pub const INITIAL_WALLS: [u8; 2] = [10, 10];

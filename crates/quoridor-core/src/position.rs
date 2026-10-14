@@ -1,5 +1,9 @@
 use std::fmt;
 
+#[path = "distance_geometry.rs"]
+mod distance_geometry;
+pub use distance_geometry::WallDistanceGeometry;
+
 pub const RULESET_ID: &str = "standard-2p-v1";
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -188,45 +192,10 @@ impl Position {
         let edges = WallEdges::of(self);
         std::array::from_fn(|player| edges.distance_map(player))
     }
-    /// Reuse exact parent rows after strictly one H/V wall-bit addition.
-    /// `parent_maps` must be the exact wall-only tables for `parent`'s walls;
-    /// this is a trusted-table operation, not validation of arbitrary input.
-    /// Pawns/turn are irrelevant. Non-addition geometry returns None. Even when
-    /// both rows are unchanged, the caller must bind them to the new wall key.
-    pub fn wall_distance_maps_after_addition(
-        self,
-        parent: Self,
-        parent_maps: &[[u8; 81]; 2],
-    ) -> Option<[[u8; 81]; 2]> {
-        let added_h = self.horizontal & !parent.horizontal;
-        let added_v = self.vertical & !parent.vertical;
-        let (horizontal, anchor) = if self.vertical == parent.vertical
-            && self.horizontal & parent.horizontal == parent.horizontal
-            && added_h.is_power_of_two()
-        {
-            (true, added_h.trailing_zeros() as u8)
-        } else if self.horizontal == parent.horizontal
-            && self.vertical & parent.vertical == parent.vertical
-            && added_v.is_power_of_two()
-        {
-            (false, added_v.trailing_zeros() as u8)
-        } else {
-            return None;
-        };
-        let cell = (anchor / 8) * 9 + anchor % 8;
-        let removed = if horizontal {
-            [(cell, cell + 9), (cell + 1, cell + 10)]
-        } else {
-            [(cell, cell + 1), (cell + 9, cell + 10)]
-        };
-        let edges = WallEdges::of(self);
-        Some(std::array::from_fn(|player| {
-            if edges.retains_distances(&parent_maps[player], removed) {
-                parent_maps[player]
-            } else {
-                edges.distance_map(player)
-            }
-        }))
+    /// Immutable wall-keyed distances and shortest-path descents for cached callers.
+    /// Unlike checked(), this constructs wall-only geometry, not game validity.
+    pub fn wall_distance_geometry(self) -> WallDistanceGeometry {
+        WallDistanceGeometry::of(self)
     }
     pub fn legal_pawn_mask(self) -> [u8; 81] {
         let mut mask = [0; 81];
@@ -385,56 +354,59 @@ fn neighbors(cell: u8) -> [Option<u8>; 4] {
     [step(cell, 0), step(cell, 1), step(cell, 2), step(cell, 3)]
 }
 
+const WALL_COL8: u128 = (1u128 << 8)
+    | (1u128 << 17)
+    | (1u128 << 26)
+    | (1u128 << 35)
+    | (1u128 << 44)
+    | (1u128 << 53)
+    | (1u128 << 62)
+    | (1u128 << 71)
+    | (1u128 << 80);
+
 /// Source cells of blocked south/east edges; the graph is undirected.
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
 struct WallEdges {
     south: u128,
     east: u128,
 }
 impl WallEdges {
-    // One reverse BFS implementation for both full rebuild and changed rows.
+    // One reverse BFS implementation; plain callers need no saved descent data.
     fn distance_map(&self, player: usize) -> [u8; 81] {
+        self.distance_map_with_descent(player, None)
+    }
+    fn distance_map_with_descent(
+        &self,
+        player: usize,
+        mut descent: Option<&mut [u128; 4]>,
+    ) -> [u8; 81] {
+        if let Some(links) = descent.as_deref_mut() {
+            *links = [0; 4];
+        }
         let mut result = [81u8; 81];
         let mut frontier = if player == 0 { 0x1ffu128 << 72 } else { 0x1ff };
+        let mut previous = 0;
         let mut reached = frontier;
         let mut distance = 0;
         while frontier != 0 {
+            if let Some(links) = descent.as_deref_mut() {
+                // Only adjacent BFS layers can be shortest-path descents.
+                links[0] |= frontier & ((previous & !self.south) << 9);
+                links[1] |= frontier & (previous >> 9) & !self.south;
+                links[2] |= frontier & (previous >> 1) & !self.east & !WALL_COL8;
+                links[3] |= frontier & ((previous & !self.east & !WALL_COL8) << 1);
+            }
             let mut cells = frontier;
             while cells != 0 {
                 result[cells.trailing_zeros() as usize] = distance;
                 cells &= cells - 1;
             }
+            previous = frontier;
             frontier = self.expand(frontier) & !reached;
             reached |= frontier;
             distance += 1;
         }
         result
-    }
-    fn retains_distances(&self, distances: &[u8; 81], removed: [(u8, u8); 2]) -> bool {
-        for (a, b) in removed {
-            for (high, low) in [(a, b), (b, a)] {
-                let d = distances[high as usize];
-                if !(1..81).contains(&d) || d != distances[low as usize] + 1 {
-                    continue;
-                }
-                // Both deletions are already in self; the alternative must
-                // survive their combined effect, not each edge independently.
-                let mut neighbors = self.expand(1u128 << high);
-                let mut descent = false;
-                while neighbors != 0 {
-                    let cell = neighbors.trailing_zeros() as usize;
-                    if distances[cell] == d - 1 {
-                        descent = true;
-                        break;
-                    }
-                    neighbors &= neighbors - 1;
-                }
-                if !descent {
-                    return false;
-                }
-            }
-        }
-        true
     }
     fn with_wall(self, horizontal: bool, anchor: u8) -> Self {
         let cell = (anchor as u32 / 8) * 9 + anchor as u32 % 8;
@@ -492,19 +464,10 @@ impl WallEdges {
     #[inline]
     fn expand(&self, frontier: u128) -> u128 {
         const BOARD: u128 = (1u128 << 81) - 1;
-        const COL8: u128 = (1u128 << 8)
-            | (1u128 << 17)
-            | (1u128 << 26)
-            | (1u128 << 35)
-            | (1u128 << 44)
-            | (1u128 << 53)
-            | (1u128 << 62)
-            | (1u128 << 71)
-            | (1u128 << 80);
         let south = ((frontier & !self.south) << 9) & BOARD;
         let north = (frontier >> 9) & !self.south;
-        let east = ((frontier & !self.east & !COL8) << 1) & BOARD;
-        let west = (frontier >> 1) & !self.east & !COL8;
+        let east = ((frontier & !self.east & !WALL_COL8) << 1) & BOARD;
+        let west = (frontier >> 1) & !self.east & !WALL_COL8;
         south | north | east | west
     }
 }
