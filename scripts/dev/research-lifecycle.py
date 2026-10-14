@@ -1513,7 +1513,7 @@ def experiment_phase_check(experiment):
             (
                 fixed_d
                 and experiment["models"] == []
-                and config["profile"] in {"control", "coverage"}
+                and config["profile"] in {"control", "coverage", "cheap"}
             )
             or (
                 not fixed_d

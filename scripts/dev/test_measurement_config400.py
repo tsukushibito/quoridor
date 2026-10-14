@@ -59,6 +59,37 @@ class LmrMeasurementConfig400Tests(unittest.TestCase):
                 ):
                     lc.measurement_config(experiment)
 
+    def test_fixed_d_cheap_phase_model_binding_and_rejections(self):
+        experiment = dict(phase="compare", argv=["runner", "measure"], config=None)
+        for fixed_d, profiles, models in [
+            (True, ["control", "cheap", "coverage"], []),
+            (False, ["control", "cheap"], ["model"]),
+        ]:
+            evaluator = "original-distance-a0-b8-tanh" if fixed_d else "nnue"
+            for profile in profiles:
+                config = dict(namespace=dict(evaluator=evaluator), profile=profile)
+                with patch.object(lc, "document", return_value=config):
+                    lc.experiment_phase_check(dict(experiment, models=models))
+                    wrong_models = ["model"] if fixed_d else []
+                    with self.assertRaisesRegex(
+                        ValueError, "measurement evaluator/model/profile binding"
+                    ):
+                        lc.experiment_phase_check(dict(experiment, models=wrong_models))
+        for evaluator, profile, models in [
+            ("original-distance-a0-b8-tanh", "policy", []),
+            ("nnue", "coverage", ["model"]),
+            ("nnue", "cheap", ["model", "second"]),
+        ]:
+            with patch.object(
+                lc,
+                "document",
+                return_value=dict(namespace=dict(evaluator=evaluator), profile=profile),
+            ):
+                with self.assertRaisesRegex(
+                    ValueError, "measurement evaluator/model/profile binding"
+                ):
+                    lc.experiment_phase_check(dict(experiment, models=models))
+
 
 if __name__ == "__main__":
     unittest.main()
