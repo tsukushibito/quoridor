@@ -143,7 +143,7 @@ fn runtime400_raw_reset_and_qualified_compare_x_x_y_y_reset_once() {
             for (label, resets) in [("X", 0), ("X", 0), ("Y", 1), ("Y", 1)] {
                 let mut base = namespace();
                 base.evaluator.push_str(label);
-                let expected = arena_alpha_namespace(&e, base.clone());
+                let expected = arena_alpha_namespace(&e, base.clone()).unwrap();
                 invoke_alpha_observed(
                     &mut session,
                     &mut profile,
