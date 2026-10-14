@@ -170,3 +170,15 @@ controller6.492365031968802sに含むのはin-controller checks/journal validati
 368では静的順位のwork中央値はほぼ同じでwhole-root費は約4倍となり、人間は同じスコアの計算費削減を選択した。優先対象は全始点DAG伝播と候補ごとの同一continuation row解決であり、CPU費の因果割合を計測した主張ではない。[現行ordering設計](lightweight-move-ordering-v1.md#同じスコア計算の費用削減3722026-10-12)とBeads372の固定80-call ABBA・256M契約で、厳密性とwhole費を確認する。371の選択済み2学習とPDFを優先し、余分なperf349・旧360/368再実行・新ゲーム・モデル変更・default変更は含めない。
 
 372は全80COMPLETE・全20contextsの記録された結果/探索仕事量一致で完了した。combined staticのwhole中央値比0.49958126954221954、continuation-only0.999854315331466に対し、continuation-only D4 cold family34では両BがA中央値より11.08%/12.50%遅く、両Aそれぞれにも5%超悪化した。事前adverse gateにより全体の採用を拒否し、元のA計算を維持する。[受入れ](../../research-data/ai-sigma/search-optimization/ordering372/result-acceptance-v1.json)はこの有限のnegative採否を記録する。静的部分だけの採用、原因診断、追加計測は未選択であり自動継続しない。一般速度/棋力/因果改善は証明しない。
+
+### 固定D D6上限の保存/source分析と容量候補（396/397、2026-10-14）
+
+[保存/source分析receipt](../../research-data/ai-sigma/fixed-d-depth396/receipt.json)は原392のD6 NodeLimitを成功へ変更しない。直接停止はD1からの累積8M、最後の完成D5値と最終workは別時点で、当時の空callbackから深さ別workを復元できない。未完了D6の増分は0の可能性を含むUNKNOWN。rootはply8/両stock9・合法122（駒2/壁120）。Control原N-firstはeval7,143,845（nodesの89.2981%）、TT probes856,155/hits21,882、occupied unequal-Key index conflicts830,177、context matches566/misses21,316、usabledepth241/cutoffs217/PVS researches17。広いrootと少ないnumeric reuseは実観測だが、root分岐のべき乗を実訪問数にせず、PVS17の内部node費/同値頻度/原root距離はUNKNOWNとする。
+
+4096slotのdirect mappingで容量conflictとKey hit後のfull occurrences fingerprint/depth資格を分離する。Keyはtotal_plyも含み、index conflictはfull-hash collisionや全missの同義語ではない。tt_capacity_skips0はbyte-limit skip0だけ。capacity不足と97.413%のhit後context不一致のどちらを直す利益が大きいかは保存counterから認定できない。不一致cached moveは合法性確認後のorderingには使われる。
+
+将来の合法前進で壁は増えるだけなので、現在のH/V bitを欠くHistoryKeyは今後のthreefoldへ寄与しない、という条件付きlemmaが成立する。from_countsはchronologyを証明せず現在wallの未来superset keyを持ち得るため「異なるwall配置全部を捨てる」は不可。確実な除外は(oldH & currentH)!=currentHまたは(oldV & currentV)!=currentV。候補は完全history/rootcount/total_plyを維持したTT資格projectionであり、update/undo/error復元を別に確認する必要がある。今回履歴/Key/深さ条件を実装変更せず、単独の主原因や実hit/node利益とも認定しない。
+
+人間の「100万エントリを検証」で2^20=1,048,576 slotsを一候補として選択した。現persistentのmin4096/1MiBと、外側default16384/request65536の違いを正す最小sourceを準備する。製品/三者比較/既存callerの実4096、4096生成と旧記録を維持し、同じcurrent imageの固定D Control A4096→B1048576→B→A、既存6roots×4=24calls/12sessions/72Mだけを行う。TT policy/history/ordering/eval/rulesは同じで、別容量sweep/追加call/生成/fitは発行しない。実設定とcapacity/retained/overflow/clear/error境界のsoftware・限定review後にentryする。通常工程で人間/Policy ACKは挟まない。
+
+現ABIの原327728B=header48+4096×80から、候補はTT本体80MiB/個、二色160MiB/game、8games1.25GiBの算術。2^18/2^19/2^21はそれぞれ20/40/160MiB/TT、8games320/640MiB/2.5GiBで、header/allocator/history/queue/その他RSSは別。2^20の最適性/利益は未確認で、全leafをTTへ格納する実装でもない。新callback Request.observe_completed_depths(defaultfalse)の実完成深さ累積を394/397の同actual callへ共有する方向で、入場前に同modeとsubjectを固定し二重entry/費を避ける。診断ONならその費用を含み純speedupとしない。以後の観測を原392へ遡及補完せず、D6完成や容量効果は実結果まで未確認。人間選択Control接続の現BUILDはPASS/image59d2だが、大量混合生成/全後段/準備と323 USERPAUSEは解除しない。

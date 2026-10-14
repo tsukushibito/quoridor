@@ -224,3 +224,11 @@ Control/no-policy/signedの比較キーを一度作る変更は、389のONNO24�
 reported lost0でもunresolved leaf41／全485のunknown ancestorがあり、inline責務・完全unwind・cachehit/skipBFS/FT-IDcopyは未分離。plain whole中央値9.990382656秒／sampled9.961989159秒、比0.997157917は近傍変動を含む記述値で純overheadではない。coldD6がroot時間95.811%で、root別sample分母は未取得。旧388との全work保存対応は一致してもimage/code/boot/時刻/分母が異なり、share差を因果速度や普遍的順位へ変換しない。
 
 今回の計測・保存解析は完了し、新instrumentation/build/samplingや別source候補を自動発行しない。次の方式・候補は具体的ownerと必要保証を改めて選ぶ。既存TT-firstのwork差、Cheap元376採用FAIL、全RAW/FAILED/費/UNKNOWN、pause/defaults/sealsを保持する。
+
+### 合法手ビット集合の有限採用（395、2026-10-14）
+
+壁の設置済み/交差/同向き重なりをH/V maskでまとめて除外し、残bitだけを昇順列挙する。駒の一つのprivate destination u128からpublic81配列と内部ascending IDsを作り、内部legal IDsで81初期化/scanを避ける。WallPosts・必要exact到達性・unchecked baseline、壁stock/winner、jump/横回避/盤端/両colour、public legal_wall/play/Game APIと集合/順序を維持する。source review0/0はlegal-ownerだけを確認し、歴史393のwholepositionを現391へ上書きせず、before region2dbc一致から最小合成した。
+
+[exact保存receipt](../../research-data/ai-sigma/legal-action-bits395/receipt.json)の123filesに原source/限定review/整形/型補正/software/全結果・journal/STOPを結んだ。Control O59d2a79c（人間選択396の現構成）→N c50f5da4/Buildfdc5e393、既存6roots×4の24calls/12sessions全COMPLETE。depth/valuebits/action/exactPV/全30work/legal/fullhistoryroot/parent/stopが一致し、setup/drop込みwhole中央値9.1349915755→8.9628772655秒、N/O0.9811587883、同root両NともO中央値1.10超は0で保持する。wall/pawn二つを合わせた一候補の有限結果であり、個別利益/一般speedup/棋力/固定D throughput/新hotspotは推定しない。394観測/397容量はこのO/Nへ混ぜていない。
+
+原softwareはnewtest整数sliceの型不足でcompile停止した。u16注記だけを補正し、期待IDs3/5/13とproductionは不変。元bothAIcompile PASSは再用し、未入場core5assertionsと未実行Clippy/releaseだけをPASSした。元FAILED/guardianNULL/disk masks/費を保持する。壁は独立scalar+cellqueue oracleを再用、pawn referenceの一部は同publicmaskを使うため独立oracleと呼ばず、明示expectedsetsを別に確認した。実STOP/元子exact identity/directwait/reap/handles/TMP cleanupからTT準備を再開し、追加call/候補/測定なし。対象一回のallocated1,565,097,984Bは396前提と全retained sharedtarget込みで新増分ではなく、conservative47.026GB<decimal50GB/globalactual/peakUNKNOWN。mixed/learner/323のUSERPAUSEは不変。
