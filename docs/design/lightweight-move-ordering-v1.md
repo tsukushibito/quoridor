@@ -292,3 +292,39 @@ Nをbase records＋overlay arrivals、Mをfilter後recordsとすると、rootは
 これは更新/undo/費用と最小必要検証を具体化した設計保持まで。実patch/compile/Clippy/build/test/Search/Perf/arena/forward/生成/fitは0、数学資格・実装/方式採用・新有限比較を発行していない。将来の実装選択ではcounted-once/base-overlay/from_counts/strict-add/goal-threefold/undo-error-cancel/namespace・evaluator制約を必要scopeで確認する。400のLMR image・設定・比較へ後混入せず、LMRの実装/評価を優先する。source readerSTOP14:31:41.015389Z、既知helper/Git childrenのdirectwait・freshidentity・handles/TMP/lease解放を確認、初期grepの未記録PID/厳密childUTC/peakはUNKNOWNを維持。mixed/learnerのsource準備から全pipelineと323 USERPAUSE、oldfits96/models/defaults/N/seals/旧RAWFAILED費UNKNOWNは不変。
 
 400の中間保存では、LMR ONのnominal depthと全幅OFFのdepthを区別する。原cost96はNNUE Control／Cheapと固定D Controlの72callsを保存し、固定D Cheapの未入場24callsは旧phase binding拒否を保持し、修復後に元scopeのcontinuationとして完遂する。成功72callsの再演や実行済み失敗callの再実行ではない。現在のfinite whole比は同仕事・棋力の認定に使わない。先頭のNNUE Control OFF対ONは原16局を一度だけ実行し、8勝8敗・8family pairsの95% bootstrap範囲[0.25,0.75]。原lifecycle FAILEDを保持したまま、Serdeの既存false省略とtyped evaluator identityのconsumer対応を修復して保存検証する。原16の再演と未入場112の対照を混同せず、各元設定／結果／STOPと新consumer版を対応づける。製品／generator既定・paused学習と旧RAWには反映しない。
+
+### LMRとControl／Cheapの有限評価完了（400、2026-10-14）
+
+元96探索／48sessions（上限288M、actual77,091,458nodes）と、事前固定した8family×2色×4対照×2評価器の元128局／64色pairを一度ずつ回収した。同じ真正image `66c0daac`／Build `de4a7995`、NNUE BEST43／TT4096と固定D(0,8tanh)／TT1048576を分けた。通常diagnostics／depthcallback OFF、探索費はOFF→ON→ON→OFF・既存6roots・D4各2M／D6各8M。対局は100ms authority receipt／5ms reserve／depth64／node安全上限1M／200ply、AI2/6とmain4だった。
+
+研究判断は、**検証済みLMRを既定OFFの任意設定として保持し、LMR ONまたはCheapの一律昇格は保留**とする。今回の有限費用低下は支持されるが、同時間の棋力優位・非劣性は確立していない。製品・実generatorの既定、モデル、mixed／learnerの全準備／pipelineと323 USERPAUSEは変更しない。
+
+| 評価器／ordering | LMR OFF whole中央値s | ON whole中央値s |   ON/OFF |
+| ---------------- | -------------------: | --------------: | -------: |
+| NNUE Control     |             7.757735 |        2.339680 | 0.301593 |
+| NNUE Cheap       |            17.103007 |        3.339701 | 0.195270 |
+| 固定D Control    |             3.121735 |        1.153453 | 0.369491 |
+| 固定D Cheap      |            12.877199 |        2.476077 | 0.192284 |
+
+wholeは6roots・setup/drop・採点・cache・再探索込み。ON/OFFはvalue/action/PV/workが変わる選択的探索で、同仕事speedupではない。各同条件の2回は完成深さ・valuebits・action・exactPV・全記録workが一致した。探索94COMPLETE、固定D Control OFFの二回だけは8M／completed5／targetD6 UNKNOWN。Cheap OFFは当該D6を6,610,616nodesで完成し、ONは両orderingで名目D6を完成した。名目深さを全幅minimaxの保証にしない。固定D Cheapの修復継続には時刻差があり、別stratumの時間を一般化しない。Cheapの絶対wholeは同じLMR条件のControlより大きく、Cheap内のON/OFF比だけで優位を決めない。
+
+| 評価器 | 左対右                 | 左の勝-分-負 | 保存family bootstrap95%範囲 |
+| ------ | ---------------------- | -----------: | --------------------------- |
+| NNUE   | Control OFF対ON        |        8-0-8 | [0.25, 0.75]                |
+| NNUE   | Cheap OFF対ON          |       10-0-6 | [0.375, 0.875]              |
+| NNUE   | Control OFF対Cheap OFF |       14-0-2 | [0.625, 1]                  |
+| NNUE   | Control ON対Cheap ON   |       10-0-6 | [0.375, 0.8125]             |
+| 固定D  | Control OFF対ON        |        7-0-9 | [0.25, 0.625]               |
+| 固定D  | Cheap OFF対ON          |        9-0-7 | [0.375, 0.75]               |
+| 固定D  | Control OFF対Cheap OFF |       10-0-6 | [0.3125, 0.875]             |
+| 固定D  | Control ON対Cheap ON   |       5-0-11 | [0.125, 0.4375]             |
+
+全128局はgoal、UNKNOWN/draw/forfeitは0。6765手すべてで実method／LMR getter・receipt／main-AI／terminal drainを検証し、fallback/error/lateは0。reserve由来stopcancelled14手も全て完成snapshotを選んでおり、ユーザー取消へ読み替えない。区間は原native summaryの引用で追加bootstrap0。同じ8familyを全対照で共有する条件付き探索的観測であり、128独立標本、補正済み多重検定、population superiority／正式棋力認定ではない。
+
+NNUEのControl OFF対Cheap OFFではControl14勝2敗、LMR自体のControl対照は8勝8敗。固定DのON同士ではCheap11勝5敗だったが、Control OFF対Cheap ONの直接比較はなく、間接結果を足して4条件の首位を認定しない。Cheapの低nodes／LMRの高い名目選択深さを、そのまま時間・強さ改善へ変換しない。terminal workだけを加算し、selected snapshot／persistent TTの内包viewは別に保持した。costのTT retained327,728／83,886,128Bとgenerationはcall別gaugeで、加算メモリやRSSではない。物理NN呼出し・全検索時間・孤立した採点/map/LMR費・continuous RSS peakはUNKNOWN。
+
+原cost96-v2は72calls後の固定D Cheap入口拒否でFAILEDのまま保存し、普通loader修復とNN0確認後に元未入場24callsだけを継続した。原arena先頭16局もconsumer対応によるFAILED manifestを保存したまま、別SAVED_DATA_VALIDATEDで一度だけ解釈し、元未入場112局を七batchで完了した。成功call/gameの再演、実科学失敗の救済、追加root/cap/parameter/sampling/生成/fitは0。既存Serde false省略とtyped evaluator/content identityのconsumer修復、namespace raw-reset/qualified-compareのO1修復は元失敗と別scopeで保持する。通常softwareの新17Rust＋影響3、新7Python NN0、必要compile/Clippy/真正buildと限定source/O1/consumer確認を再用し、重要な今回の解釈も同関連reviewerが確認した。
+
+数値jobの非重複outer費は964.170029259秒、必要Build v1..v6の非重複outer費は240.259264835秒。元失敗を含み、各native/guardian/sequenceのnested時間を加えない。source/LLM/adminの全時間はUNKNOWN、保存解析と個別source/software費はそれぞれのreceiptへ残した。実STOP/directwait/reap/handles/freshidentity/TMP撤去を保存し、対象使用を終了後一度確認する。共有targetは既知正増分5,713,920Bだけを数え、同inodeを重複加算しない。oldfits96/models/defaults/seals/旧RAW/FAILED/全費UNKNOWNとforeign devcontainer変更は不変。
+
+設定・原結果・source/修復・software/review・元FAILED・STOPのexact保存は [保存receipt](../../research-data/ai-sigma/lmr-control-cheap400/receipt.json)、[結果報告](../../research-data/ai-sigma/lmr-control-cheap400/report-ja.md)。Beadsが状態と所有の正本。今回から新campaignやpaused生成再開を自動発行しない。

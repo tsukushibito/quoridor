@@ -1,0 +1,1493 @@
+{
+  "issue": "quoridor-4lc.400",
+  "archive": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/lmr-control-cheap400/saved-evaluation.json.gz",
+    "sha256": "e0c1242378f59a36920d5db339b041f142ea8e3908176bc863be3fa149d86547",
+    "bytes": 6383844,
+    "mode": "0644"
+  },
+  "exact_file_count": 1017,
+  "roundtrip": "PASS SHA-size-mode/UTF8-or-binary exact",
+  "original_calls": 96,
+  "sessions": 48,
+  "root_node_cap": 288000000,
+  "actual_root_nodes": 77091458,
+  "root_COMPLETE": 94,
+  "root_targetD6_UNKNOWN": 2,
+  "original_games": 128,
+  "complete_pairs": 64,
+  "allgoal": 128,
+  "arena_UNKNOWN": 0,
+  "accepted_moves": 6765,
+  "extra_calls_games": 0,
+  "condition_whole_medians": [
+    {
+      "stratum": "nnue4k-control",
+      "LMR": false,
+      "depth_semantics": "fullwidth",
+      "passes": [0, 3],
+      "whole_seconds": [7.74631662, 7.769153273],
+      "whole_median_seconds": 7.757734946499999,
+      "setup_seconds": [0.018246125, 0.018698826],
+      "drop_seconds": [1.0985e-5, 1.1672e-5],
+      "work_totals_per_pass": [
+        {
+          "LMR_attempts": 0,
+          "LMR_full_depth_confirmations": 0,
+          "LMR_full_window_researches": 0,
+          "PVS_researches": 334,
+          "TT_capacity_skips": 0,
+          "TT_collisions": 1824485,
+          "TT_cutoffs": 5591,
+          "TT_exact_hits": 77,
+          "TT_hashes": 58,
+          "TT_hits": 39648,
+          "TT_illegal_moves": 0,
+          "TT_key_builds": 1875962,
+          "TT_order_only": 32990,
+          "TT_probes": 1875936,
+          "TT_replacements": 220092,
+          "TT_usable_depth": 6658,
+          "cutoffs": 1822697,
+          "delta_updates": 7049361,
+          "evaluations": 5173451,
+          "nodes": 7049387,
+          "policy_calls": 0,
+          "terminal": 0,
+          "tt_board_hash_reads": 1875910,
+          "tt_board_hash_updates": 7049361,
+          "tt_context_initial_items": 58,
+          "tt_context_matches": 8349,
+          "tt_context_misses": 31299,
+          "tt_context_transitions": 7049361,
+          "tt_hash_collisions": 0,
+          "tt_index_collisions": 1824485,
+          "tt_order_context_mismatch": 31299
+        },
+        {
+          "LMR_attempts": 0,
+          "LMR_full_depth_confirmations": 0,
+          "LMR_full_window_researches": 0,
+          "PVS_researches": 334,
+          "TT_capacity_skips": 0,
+          "TT_collisions": 1824485,
+          "TT_cutoffs": 5591,
+          "TT_exact_hits": 77,
+          "TT_hashes": 58,
+          "TT_hits": 39648,
+          "TT_illegal_moves": 0,
+          "TT_key_builds": 1875962,
+          "TT_order_only": 32990,
+          "TT_probes": 1875936,
+          "TT_replacements": 220092,
+          "TT_usable_depth": 6658,
+          "cutoffs": 1822697,
+          "delta_updates": 7049361,
+          "evaluations": 5173451,
+          "nodes": 7049387,
+          "policy_calls": 0,
+          "terminal": 0,
+          "tt_board_hash_reads": 1875910,
+          "tt_board_hash_updates": 7049361,
+          "tt_context_initial_items": 58,
+          "tt_context_matches": 8349,
+          "tt_context_misses": 31299,
+          "tt_context_transitions": 7049361,
+          "tt_hash_collisions": 0,
+          "tt_index_collisions": 1824485,
+          "tt_order_context_mismatch": 31299
+        }
+      ],
+      "COMPLETE": 12,
+      "UNKNOWN": 0,
+      "repeat_depth_value_action_PV_allrecordedwork_exact": true,
+      "per_call_gauges_per_pass": [
+        [
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 6
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 8
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 12
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 16
+          }
+        ],
+        [
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 6
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 8
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 12
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 16
+          }
+        ]
+      ]
+    },
+    {
+      "stratum": "nnue4k-control",
+      "LMR": true,
+      "depth_semantics": "selective nominal",
+      "passes": [1, 2],
+      "whole_seconds": [2.345647029, 2.333713691],
+      "whole_median_seconds": 2.33968036,
+      "setup_seconds": [0.020666629, 0.018968767],
+      "drop_seconds": [1.1363e-5, 1.0334e-5],
+      "work_totals_per_pass": [
+        {
+          "LMR_attempts": 33038,
+          "LMR_full_depth_confirmations": 514,
+          "LMR_full_window_researches": 9,
+          "PVS_researches": 222,
+          "TT_capacity_skips": 0,
+          "TT_collisions": 297558,
+          "TT_cutoffs": 4337,
+          "TT_exact_hits": 78,
+          "TT_hashes": 58,
+          "TT_hits": 25143,
+          "TT_illegal_moves": 0,
+          "TT_key_builds": 334462,
+          "TT_order_only": 20283,
+          "TT_probes": 334436,
+          "TT_replacements": 200195,
+          "TT_usable_depth": 4860,
+          "cutoffs": 311768,
+          "delta_updates": 2424243,
+          "evaluations": 2089833,
+          "nodes": 2424269,
+          "policy_calls": 0,
+          "terminal": 0,
+          "tt_board_hash_reads": 334410,
+          "tt_board_hash_updates": 2424243,
+          "tt_context_initial_items": 58,
+          "tt_context_matches": 6638,
+          "tt_context_misses": 18505,
+          "tt_context_transitions": 2424243,
+          "tt_hash_collisions": 0,
+          "tt_index_collisions": 297558,
+          "tt_order_context_mismatch": 18505
+        },
+        {
+          "LMR_attempts": 33038,
+          "LMR_full_depth_confirmations": 514,
+          "LMR_full_window_researches": 9,
+          "PVS_researches": 222,
+          "TT_capacity_skips": 0,
+          "TT_collisions": 297558,
+          "TT_cutoffs": 4337,
+          "TT_exact_hits": 78,
+          "TT_hashes": 58,
+          "TT_hits": 25143,
+          "TT_illegal_moves": 0,
+          "TT_key_builds": 334462,
+          "TT_order_only": 20283,
+          "TT_probes": 334436,
+          "TT_replacements": 200195,
+          "TT_usable_depth": 4860,
+          "cutoffs": 311768,
+          "delta_updates": 2424243,
+          "evaluations": 2089833,
+          "nodes": 2424269,
+          "policy_calls": 0,
+          "terminal": 0,
+          "tt_board_hash_reads": 334410,
+          "tt_board_hash_updates": 2424243,
+          "tt_context_initial_items": 58,
+          "tt_context_matches": 6638,
+          "tt_context_misses": 18505,
+          "tt_context_transitions": 2424243,
+          "tt_hash_collisions": 0,
+          "tt_index_collisions": 297558,
+          "tt_order_context_mismatch": 18505
+        }
+      ],
+      "COMPLETE": 12,
+      "UNKNOWN": 0,
+      "repeat_depth_value_action_PV_allrecordedwork_exact": true,
+      "per_call_gauges_per_pass": [
+        [
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 6
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 8
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 12
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 16
+          }
+        ],
+        [
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 6
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 8
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 12
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 16
+          }
+        ]
+      ]
+    },
+    {
+      "stratum": "nnue4k-cheap",
+      "LMR": false,
+      "depth_semantics": "fullwidth",
+      "passes": [4, 7],
+      "whole_seconds": [17.119240039, 17.086774919],
+      "whole_median_seconds": 17.103007479,
+      "setup_seconds": [0.018560979, 0.021056503],
+      "drop_seconds": [9.977e-6, 1.0146e-5],
+      "work_totals_per_pass": [
+        {
+          "LMR_attempts": 0,
+          "LMR_full_depth_confirmations": 0,
+          "LMR_full_window_researches": 0,
+          "PVS_researches": 295,
+          "TT_capacity_skips": 0,
+          "TT_collisions": 1843357,
+          "TT_cutoffs": 5016,
+          "TT_exact_hits": 79,
+          "TT_hashes": 58,
+          "TT_hits": 36822,
+          "TT_illegal_moves": 0,
+          "TT_key_builds": 1892089,
+          "TT_order_only": 30784,
+          "TT_probes": 1892063,
+          "TT_replacements": 214748,
+          "TT_usable_depth": 6038,
+          "cutoffs": 1838397,
+          "delta_updates": 7174545,
+          "evaluations": 5282508,
+          "nodes": 7174571,
+          "policy_calls": 0,
+          "terminal": 0,
+          "tt_board_hash_reads": 1892037,
+          "tt_board_hash_updates": 7174545,
+          "tt_context_initial_items": 58,
+          "tt_context_matches": 7733,
+          "tt_context_misses": 29089,
+          "tt_context_transitions": 7174545,
+          "tt_hash_collisions": 0,
+          "tt_index_collisions": 1843357,
+          "tt_order_context_mismatch": 29089
+        },
+        {
+          "LMR_attempts": 0,
+          "LMR_full_depth_confirmations": 0,
+          "LMR_full_window_researches": 0,
+          "PVS_researches": 295,
+          "TT_capacity_skips": 0,
+          "TT_collisions": 1843357,
+          "TT_cutoffs": 5016,
+          "TT_exact_hits": 79,
+          "TT_hashes": 58,
+          "TT_hits": 36822,
+          "TT_illegal_moves": 0,
+          "TT_key_builds": 1892089,
+          "TT_order_only": 30784,
+          "TT_probes": 1892063,
+          "TT_replacements": 214748,
+          "TT_usable_depth": 6038,
+          "cutoffs": 1838397,
+          "delta_updates": 7174545,
+          "evaluations": 5282508,
+          "nodes": 7174571,
+          "policy_calls": 0,
+          "terminal": 0,
+          "tt_board_hash_reads": 1892037,
+          "tt_board_hash_updates": 7174545,
+          "tt_context_initial_items": 58,
+          "tt_context_matches": 7733,
+          "tt_context_misses": 29089,
+          "tt_context_transitions": 7174545,
+          "tt_hash_collisions": 0,
+          "tt_index_collisions": 1843357,
+          "tt_order_context_mismatch": 29089
+        }
+      ],
+      "COMPLETE": 12,
+      "UNKNOWN": 0,
+      "repeat_depth_value_action_PV_allrecordedwork_exact": true,
+      "per_call_gauges_per_pass": [
+        [
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 6
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 8
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 12
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 16
+          }
+        ],
+        [
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 6
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 8
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 12
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 16
+          }
+        ]
+      ]
+    },
+    {
+      "stratum": "nnue4k-cheap",
+      "LMR": true,
+      "depth_semantics": "selective nominal",
+      "passes": [5, 6],
+      "whole_seconds": [3.211977488, 3.467424512],
+      "whole_median_seconds": 3.339701,
+      "setup_seconds": [0.018119301, 0.018837748],
+      "drop_seconds": [1.0713e-5, 9.701e-6],
+      "work_totals_per_pass": [
+        {
+          "LMR_attempts": 30153,
+          "LMR_full_depth_confirmations": 205,
+          "LMR_full_window_researches": 2,
+          "PVS_researches": 175,
+          "TT_capacity_skips": 0,
+          "TT_collisions": 208936,
+          "TT_cutoffs": 2808,
+          "TT_exact_hits": 81,
+          "TT_hashes": 58,
+          "TT_hits": 20989,
+          "TT_illegal_moves": 0,
+          "TT_key_builds": 241748,
+          "TT_order_only": 17943,
+          "TT_probes": 241722,
+          "TT_replacements": 164277,
+          "TT_usable_depth": 3046,
+          "cutoffs": 221735,
+          "delta_updates": 2191621,
+          "evaluations": 1949925,
+          "nodes": 2191647,
+          "policy_calls": 0,
+          "terminal": 0,
+          "tt_board_hash_reads": 241696,
+          "tt_board_hash_updates": 2191621,
+          "tt_context_initial_items": 58,
+          "tt_context_matches": 4473,
+          "tt_context_misses": 16516,
+          "tt_context_transitions": 2191621,
+          "tt_hash_collisions": 0,
+          "tt_index_collisions": 208936,
+          "tt_order_context_mismatch": 16516
+        },
+        {
+          "LMR_attempts": 30153,
+          "LMR_full_depth_confirmations": 205,
+          "LMR_full_window_researches": 2,
+          "PVS_researches": 175,
+          "TT_capacity_skips": 0,
+          "TT_collisions": 208936,
+          "TT_cutoffs": 2808,
+          "TT_exact_hits": 81,
+          "TT_hashes": 58,
+          "TT_hits": 20989,
+          "TT_illegal_moves": 0,
+          "TT_key_builds": 241748,
+          "TT_order_only": 17943,
+          "TT_probes": 241722,
+          "TT_replacements": 164277,
+          "TT_usable_depth": 3046,
+          "cutoffs": 221735,
+          "delta_updates": 2191621,
+          "evaluations": 1949925,
+          "nodes": 2191647,
+          "policy_calls": 0,
+          "terminal": 0,
+          "tt_board_hash_reads": 241696,
+          "tt_board_hash_updates": 2191621,
+          "tt_context_initial_items": 58,
+          "tt_context_matches": 4473,
+          "tt_context_misses": 16516,
+          "tt_context_transitions": 2191621,
+          "tt_hash_collisions": 0,
+          "tt_index_collisions": 208936,
+          "tt_order_context_mismatch": 16516
+        }
+      ],
+      "COMPLETE": 12,
+      "UNKNOWN": 0,
+      "repeat_depth_value_action_PV_allrecordedwork_exact": true,
+      "per_call_gauges_per_pass": [
+        [
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 6
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 8
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 12
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 16
+          }
+        ],
+        [
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 6
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 8
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 12
+          },
+          {
+            "TT_retained_bytes": 327728,
+            "TT_generation": 16
+          }
+        ]
+      ]
+    },
+    {
+      "stratum": "fixedD1M-control",
+      "LMR": false,
+      "depth_semantics": "fullwidth",
+      "passes": [8, 11],
+      "whole_seconds": [3.12464774, 3.118821661],
+      "whole_median_seconds": 3.1217347005000002,
+      "setup_seconds": [0.023808391, 0.018482006],
+      "drop_seconds": [4.239e-6, 3.18e-6],
+      "work_totals_per_pass": [
+        {
+          "LMR_attempts": 0,
+          "LMR_full_depth_confirmations": 0,
+          "LMR_full_window_researches": 0,
+          "PVS_researches": 36,
+          "TT_capacity_skips": 0,
+          "TT_collisions": 119551,
+          "TT_cutoffs": 107,
+          "TT_exact_hits": 50,
+          "TT_hashes": 57,
+          "TT_hits": 387294,
+          "TT_illegal_moves": 0,
+          "TT_key_builds": 947138,
+          "TT_order_only": 387140,
+          "TT_probes": 947113,
+          "TT_replacements": 490634,
+          "TT_usable_depth": 154,
+          "cutoffs": 880135,
+          "delta_updates": 0,
+          "evaluations": 7336398,
+          "nodes": 8283511,
+          "policy_calls": 0,
+          "terminal": 0,
+          "tt_board_hash_reads": 947087,
+          "tt_board_hash_updates": 8283486,
+          "tt_context_initial_items": 58,
+          "tt_context_matches": 19305,
+          "tt_context_misses": 367989,
+          "tt_context_transitions": 8283486,
+          "tt_hash_collisions": 0,
+          "tt_index_collisions": 119551,
+          "tt_order_context_mismatch": 367989
+        },
+        {
+          "LMR_attempts": 0,
+          "LMR_full_depth_confirmations": 0,
+          "LMR_full_window_researches": 0,
+          "PVS_researches": 36,
+          "TT_capacity_skips": 0,
+          "TT_collisions": 119551,
+          "TT_cutoffs": 107,
+          "TT_exact_hits": 50,
+          "TT_hashes": 57,
+          "TT_hits": 387294,
+          "TT_illegal_moves": 0,
+          "TT_key_builds": 947138,
+          "TT_order_only": 387140,
+          "TT_probes": 947113,
+          "TT_replacements": 490634,
+          "TT_usable_depth": 154,
+          "cutoffs": 880135,
+          "delta_updates": 0,
+          "evaluations": 7336398,
+          "nodes": 8283511,
+          "policy_calls": 0,
+          "terminal": 0,
+          "tt_board_hash_reads": 947087,
+          "tt_board_hash_updates": 8283486,
+          "tt_context_initial_items": 58,
+          "tt_context_matches": 19305,
+          "tt_context_misses": 367989,
+          "tt_context_transitions": 8283486,
+          "tt_hash_collisions": 0,
+          "tt_index_collisions": 119551,
+          "tt_order_context_mismatch": 367989
+        }
+      ],
+      "COMPLETE": 10,
+      "UNKNOWN": 2,
+      "repeat_depth_value_action_PV_allrecordedwork_exact": true,
+      "per_call_gauges_per_pass": [
+        [
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 6
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 8
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 12
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 16
+          }
+        ],
+        [
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 6
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 8
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 12
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 16
+          }
+        ]
+      ]
+    },
+    {
+      "stratum": "fixedD1M-control",
+      "LMR": true,
+      "depth_semantics": "selective nominal",
+      "passes": [9, 10],
+      "whole_seconds": [1.148993575, 1.157913162],
+      "whole_median_seconds": 1.1534533685000001,
+      "setup_seconds": [0.018234799, 0.019127992],
+      "drop_seconds": [4.034e-6, 4.018e-6],
+      "work_totals_per_pass": [
+        {
+          "LMR_attempts": 30659,
+          "LMR_full_depth_confirmations": 689,
+          "LMR_full_window_researches": 0,
+          "PVS_researches": 38,
+          "TT_capacity_skips": 0,
+          "TT_collisions": 24916,
+          "TT_cutoffs": 9702,
+          "TT_exact_hits": 49,
+          "TT_hashes": 58,
+          "TT_hits": 105265,
+          "TT_illegal_moves": 0,
+          "TT_key_builds": 374671,
+          "TT_order_only": 95467,
+          "TT_probes": 374645,
+          "TT_replacements": 119273,
+          "TT_usable_depth": 9798,
+          "cutoffs": 347047,
+          "delta_updates": 0,
+          "evaluations": 1980281,
+          "nodes": 2354926,
+          "policy_calls": 0,
+          "terminal": 0,
+          "tt_board_hash_reads": 374619,
+          "tt_board_hash_updates": 2354900,
+          "tt_context_initial_items": 58,
+          "tt_context_matches": 21779,
+          "tt_context_misses": 83486,
+          "tt_context_transitions": 2354900,
+          "tt_hash_collisions": 0,
+          "tt_index_collisions": 24916,
+          "tt_order_context_mismatch": 83486
+        },
+        {
+          "LMR_attempts": 30659,
+          "LMR_full_depth_confirmations": 689,
+          "LMR_full_window_researches": 0,
+          "PVS_researches": 38,
+          "TT_capacity_skips": 0,
+          "TT_collisions": 24916,
+          "TT_cutoffs": 9702,
+          "TT_exact_hits": 49,
+          "TT_hashes": 58,
+          "TT_hits": 105265,
+          "TT_illegal_moves": 0,
+          "TT_key_builds": 374671,
+          "TT_order_only": 95467,
+          "TT_probes": 374645,
+          "TT_replacements": 119273,
+          "TT_usable_depth": 9798,
+          "cutoffs": 347047,
+          "delta_updates": 0,
+          "evaluations": 1980281,
+          "nodes": 2354926,
+          "policy_calls": 0,
+          "terminal": 0,
+          "tt_board_hash_reads": 374619,
+          "tt_board_hash_updates": 2354900,
+          "tt_context_initial_items": 58,
+          "tt_context_matches": 21779,
+          "tt_context_misses": 83486,
+          "tt_context_transitions": 2354900,
+          "tt_hash_collisions": 0,
+          "tt_index_collisions": 24916,
+          "tt_order_context_mismatch": 83486
+        }
+      ],
+      "COMPLETE": 12,
+      "UNKNOWN": 0,
+      "repeat_depth_value_action_PV_allrecordedwork_exact": true,
+      "per_call_gauges_per_pass": [
+        [
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 6
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 8
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 12
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 16
+          }
+        ],
+        [
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 6
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 8
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 12
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 16
+          }
+        ]
+      ]
+    },
+    {
+      "stratum": "fixedD1M-cheap",
+      "LMR": false,
+      "depth_semantics": "fullwidth",
+      "passes": [12, 15],
+      "whole_seconds": [12.910529707, 12.843869251],
+      "whole_median_seconds": 12.877199479,
+      "setup_seconds": [0.018456418, 0.018490036],
+      "drop_seconds": [3.186e-6, 3.005e-6],
+      "work_totals_per_pass": [
+        {
+          "LMR_attempts": 0,
+          "LMR_full_depth_confirmations": 0,
+          "LMR_full_window_researches": 0,
+          "PVS_researches": 47,
+          "TT_capacity_skips": 0,
+          "TT_collisions": 251884,
+          "TT_cutoffs": 297,
+          "TT_exact_hits": 57,
+          "TT_hashes": 58,
+          "TT_hits": 965044,
+          "TT_illegal_moves": 0,
+          "TT_key_builds": 1759516,
+          "TT_order_only": 964474,
+          "TT_probes": 1759490,
+          "TT_replacements": 1181926,
+          "TT_usable_depth": 570,
+          "cutoffs": 1711921,
+          "delta_updates": 0,
+          "evaluations": 5142559,
+          "nodes": 6902049,
+          "policy_calls": 0,
+          "terminal": 0,
+          "tt_board_hash_reads": 1759464,
+          "tt_board_hash_updates": 6902023,
+          "tt_context_initial_items": 58,
+          "tt_context_matches": 22935,
+          "tt_context_misses": 942109,
+          "tt_context_transitions": 6902023,
+          "tt_hash_collisions": 0,
+          "tt_index_collisions": 251884,
+          "tt_order_context_mismatch": 942109
+        },
+        {
+          "LMR_attempts": 0,
+          "LMR_full_depth_confirmations": 0,
+          "LMR_full_window_researches": 0,
+          "PVS_researches": 47,
+          "TT_capacity_skips": 0,
+          "TT_collisions": 251884,
+          "TT_cutoffs": 297,
+          "TT_exact_hits": 57,
+          "TT_hashes": 58,
+          "TT_hits": 965044,
+          "TT_illegal_moves": 0,
+          "TT_key_builds": 1759516,
+          "TT_order_only": 964474,
+          "TT_probes": 1759490,
+          "TT_replacements": 1181926,
+          "TT_usable_depth": 570,
+          "cutoffs": 1711921,
+          "delta_updates": 0,
+          "evaluations": 5142559,
+          "nodes": 6902049,
+          "policy_calls": 0,
+          "terminal": 0,
+          "tt_board_hash_reads": 1759464,
+          "tt_board_hash_updates": 6902023,
+          "tt_context_initial_items": 58,
+          "tt_context_matches": 22935,
+          "tt_context_misses": 942109,
+          "tt_context_transitions": 6902023,
+          "tt_hash_collisions": 0,
+          "tt_index_collisions": 251884,
+          "tt_order_context_mismatch": 942109
+        }
+      ],
+      "COMPLETE": 12,
+      "UNKNOWN": 0,
+      "repeat_depth_value_action_PV_allrecordedwork_exact": true,
+      "per_call_gauges_per_pass": [
+        [
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 6
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 8
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 12
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 16
+          }
+        ],
+        [
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 6
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 8
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 12
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 16
+          }
+        ]
+      ]
+    },
+    {
+      "stratum": "fixedD1M-cheap",
+      "LMR": true,
+      "depth_semantics": "selective nominal",
+      "passes": [13, 14],
+      "whole_seconds": [2.456550381, 2.49560327],
+      "whole_median_seconds": 2.4760768255,
+      "setup_seconds": [0.018667653, 0.018829992],
+      "drop_seconds": [4.02e-6, 4.141e-6],
+      "work_totals_per_pass": [
+        {
+          "LMR_attempts": 29621,
+          "LMR_full_depth_confirmations": 439,
+          "LMR_full_window_researches": 1,
+          "PVS_researches": 39,
+          "TT_capacity_skips": 0,
+          "TT_collisions": 11246,
+          "TT_cutoffs": 6967,
+          "TT_exact_hits": 55,
+          "TT_hashes": 58,
+          "TT_hits": 98182,
+          "TT_illegal_moves": 0,
+          "TT_key_builds": 287232,
+          "TT_order_only": 91124,
+          "TT_probes": 287206,
+          "TT_replacements": 101774,
+          "TT_usable_depth": 7058,
+          "cutoffs": 263052,
+          "delta_updates": 0,
+          "evaluations": 1878163,
+          "nodes": 2165369,
+          "policy_calls": 0,
+          "terminal": 0,
+          "tt_board_hash_reads": 287180,
+          "tt_board_hash_updates": 2165343,
+          "tt_context_initial_items": 58,
+          "tt_context_matches": 17270,
+          "tt_context_misses": 80912,
+          "tt_context_transitions": 2165343,
+          "tt_hash_collisions": 0,
+          "tt_index_collisions": 11246,
+          "tt_order_context_mismatch": 80912
+        },
+        {
+          "LMR_attempts": 29621,
+          "LMR_full_depth_confirmations": 439,
+          "LMR_full_window_researches": 1,
+          "PVS_researches": 39,
+          "TT_capacity_skips": 0,
+          "TT_collisions": 11246,
+          "TT_cutoffs": 6967,
+          "TT_exact_hits": 55,
+          "TT_hashes": 58,
+          "TT_hits": 98182,
+          "TT_illegal_moves": 0,
+          "TT_key_builds": 287232,
+          "TT_order_only": 91124,
+          "TT_probes": 287206,
+          "TT_replacements": 101774,
+          "TT_usable_depth": 7058,
+          "cutoffs": 263052,
+          "delta_updates": 0,
+          "evaluations": 1878163,
+          "nodes": 2165369,
+          "policy_calls": 0,
+          "terminal": 0,
+          "tt_board_hash_reads": 287180,
+          "tt_board_hash_updates": 2165343,
+          "tt_context_initial_items": 58,
+          "tt_context_matches": 17270,
+          "tt_context_misses": 80912,
+          "tt_context_transitions": 2165343,
+          "tt_hash_collisions": 0,
+          "tt_index_collisions": 11246,
+          "tt_order_context_mismatch": 80912
+        }
+      ],
+      "COMPLETE": 12,
+      "UNKNOWN": 0,
+      "repeat_depth_value_action_PV_allrecordedwork_exact": true,
+      "per_call_gauges_per_pass": [
+        [
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 6
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 8
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 12
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 16
+          }
+        ],
+        [
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 6
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 4
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 8
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 12
+          },
+          {
+            "TT_retained_bytes": 83886128,
+            "TT_generation": 16
+          }
+        ]
+      ]
+    }
+  ],
+  "arena_contrasts": [
+    {
+      "evaluator": "nnue",
+      "left": "control OFF",
+      "right": "control ON",
+      "wdl_left": {
+        "wins": 8,
+        "draws": 0,
+        "losses": 8,
+        "unknown": 0
+      },
+      "score": 0.5,
+      "conditional_native_family_bootstrap95": [0.25, 0.75],
+      "family_scores": [
+        {
+          "family_id": 23,
+          "score_left": 0.5
+        },
+        {
+          "family_id": 29,
+          "score_left": 0.5
+        },
+        {
+          "family_id": 34,
+          "score_left": 1.0
+        },
+        {
+          "family_id": 46,
+          "score_left": 0.5
+        },
+        {
+          "family_id": 64,
+          "score_left": 0.5
+        },
+        {
+          "family_id": 93,
+          "score_left": 0.0
+        },
+        {
+          "family_id": 105,
+          "score_left": 0.0
+        },
+        {
+          "family_id": 108,
+          "score_left": 1.0
+        }
+      ]
+    },
+    {
+      "evaluator": "nnue",
+      "left": "cheap OFF",
+      "right": "cheap ON",
+      "wdl_left": {
+        "wins": 10,
+        "draws": 0,
+        "losses": 6,
+        "unknown": 0
+      },
+      "score": 0.625,
+      "conditional_native_family_bootstrap95": [0.375, 0.875],
+      "family_scores": [
+        {
+          "family_id": 23,
+          "score_left": 0.5
+        },
+        {
+          "family_id": 29,
+          "score_left": 1.0
+        },
+        {
+          "family_id": 34,
+          "score_left": 1.0
+        },
+        {
+          "family_id": 46,
+          "score_left": 0.5
+        },
+        {
+          "family_id": 64,
+          "score_left": 1.0
+        },
+        {
+          "family_id": 93,
+          "score_left": 0.5
+        },
+        {
+          "family_id": 105,
+          "score_left": 0.5
+        },
+        {
+          "family_id": 108,
+          "score_left": 0.0
+        }
+      ]
+    },
+    {
+      "evaluator": "nnue",
+      "left": "control OFF",
+      "right": "cheap OFF",
+      "wdl_left": {
+        "wins": 14,
+        "draws": 0,
+        "losses": 2,
+        "unknown": 0
+      },
+      "score": 0.875,
+      "conditional_native_family_bootstrap95": [0.625, 1.0],
+      "family_scores": [
+        {
+          "family_id": 23,
+          "score_left": 1.0
+        },
+        {
+          "family_id": 29,
+          "score_left": 1.0
+        },
+        {
+          "family_id": 34,
+          "score_left": 1.0
+        },
+        {
+          "family_id": 46,
+          "score_left": 1.0
+        },
+        {
+          "family_id": 64,
+          "score_left": 1.0
+        },
+        {
+          "family_id": 93,
+          "score_left": 1.0
+        },
+        {
+          "family_id": 105,
+          "score_left": 1.0
+        },
+        {
+          "family_id": 108,
+          "score_left": 0.0
+        }
+      ]
+    },
+    {
+      "evaluator": "nnue",
+      "left": "control ON",
+      "right": "cheap ON",
+      "wdl_left": {
+        "wins": 10,
+        "draws": 0,
+        "losses": 6,
+        "unknown": 0
+      },
+      "score": 0.625,
+      "conditional_native_family_bootstrap95": [0.375, 0.8125],
+      "family_scores": [
+        {
+          "family_id": 23,
+          "score_left": 0.0
+        },
+        {
+          "family_id": 29,
+          "score_left": 0.5
+        },
+        {
+          "family_id": 34,
+          "score_left": 1.0
+        },
+        {
+          "family_id": 46,
+          "score_left": 0.5
+        },
+        {
+          "family_id": 64,
+          "score_left": 1.0
+        },
+        {
+          "family_id": 93,
+          "score_left": 1.0
+        },
+        {
+          "family_id": 105,
+          "score_left": 0.5
+        },
+        {
+          "family_id": 108,
+          "score_left": 0.5
+        }
+      ]
+    },
+    {
+      "evaluator": "distance",
+      "left": "control OFF",
+      "right": "control ON",
+      "wdl_left": {
+        "wins": 7,
+        "draws": 0,
+        "losses": 9,
+        "unknown": 0
+      },
+      "score": 0.4375,
+      "conditional_native_family_bootstrap95": [0.25, 0.625],
+      "family_scores": [
+        {
+          "family_id": 23,
+          "score_left": 0.5
+        },
+        {
+          "family_id": 29,
+          "score_left": 0.5
+        },
+        {
+          "family_id": 34,
+          "score_left": 0.0
+        },
+        {
+          "family_id": 46,
+          "score_left": 0.0
+        },
+        {
+          "family_id": 64,
+          "score_left": 0.5
+        },
+        {
+          "family_id": 93,
+          "score_left": 1.0
+        },
+        {
+          "family_id": 105,
+          "score_left": 0.5
+        },
+        {
+          "family_id": 108,
+          "score_left": 0.5
+        }
+      ]
+    },
+    {
+      "evaluator": "distance",
+      "left": "cheap OFF",
+      "right": "cheap ON",
+      "wdl_left": {
+        "wins": 9,
+        "draws": 0,
+        "losses": 7,
+        "unknown": 0
+      },
+      "score": 0.5625,
+      "conditional_native_family_bootstrap95": [0.375, 0.75],
+      "family_scores": [
+        {
+          "family_id": 23,
+          "score_left": 0.5
+        },
+        {
+          "family_id": 29,
+          "score_left": 0.0
+        },
+        {
+          "family_id": 34,
+          "score_left": 0.5
+        },
+        {
+          "family_id": 46,
+          "score_left": 1.0
+        },
+        {
+          "family_id": 64,
+          "score_left": 1.0
+        },
+        {
+          "family_id": 93,
+          "score_left": 0.5
+        },
+        {
+          "family_id": 105,
+          "score_left": 0.5
+        },
+        {
+          "family_id": 108,
+          "score_left": 0.5
+        }
+      ]
+    },
+    {
+      "evaluator": "distance",
+      "left": "control OFF",
+      "right": "cheap OFF",
+      "wdl_left": {
+        "wins": 10,
+        "draws": 0,
+        "losses": 6,
+        "unknown": 0
+      },
+      "score": 0.625,
+      "conditional_native_family_bootstrap95": [0.3125, 0.875],
+      "family_scores": [
+        {
+          "family_id": 23,
+          "score_left": 1.0
+        },
+        {
+          "family_id": 29,
+          "score_left": 0.0
+        },
+        {
+          "family_id": 34,
+          "score_left": 1.0
+        },
+        {
+          "family_id": 46,
+          "score_left": 0.5
+        },
+        {
+          "family_id": 64,
+          "score_left": 1.0
+        },
+        {
+          "family_id": 93,
+          "score_left": 1.0
+        },
+        {
+          "family_id": 105,
+          "score_left": 0.5
+        },
+        {
+          "family_id": 108,
+          "score_left": 0.0
+        }
+      ]
+    },
+    {
+      "evaluator": "distance",
+      "left": "control ON",
+      "right": "cheap ON",
+      "wdl_left": {
+        "wins": 5,
+        "draws": 0,
+        "losses": 11,
+        "unknown": 0
+      },
+      "score": 0.3125,
+      "conditional_native_family_bootstrap95": [0.125, 0.4375],
+      "family_scores": [
+        {
+          "family_id": 23,
+          "score_left": 0.5
+        },
+        {
+          "family_id": 29,
+          "score_left": 0.5
+        },
+        {
+          "family_id": 34,
+          "score_left": 0.0
+        },
+        {
+          "family_id": 46,
+          "score_left": 0.5
+        },
+        {
+          "family_id": 64,
+          "score_left": 0.5
+        },
+        {
+          "family_id": 93,
+          "score_left": 0.5
+        },
+        {
+          "family_id": 105,
+          "score_left": 0.0
+        },
+        {
+          "family_id": 108,
+          "score_left": 0.0
+        }
+      ]
+    }
+  ],
+  "research_decision": "RETAIN_VERIFIED_LMR_OPT_IN_DEFAULT_OFF; HOLD_BROAD_LMR_ON_OR_CHEAP_PROMOTION",
+  "related_interpretation": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/lmr400-v1/interpretation-review-acceptance.json",
+    "sha256": "959886b0b87594860a5c30bda97092a7061feb85e7cbfd25d8aa10ed3edfcc93",
+    "bytes": 1842,
+    "mode": "0644"
+  },
+  "original_failed_manifests_preserved": true,
+  "scope": "Finite selective cost and exploratory same-time fixed8families; no formal strength/noninferiority/default/bulkresume",
+  "mixed_learner_323_USERPAUSE": true
+}
