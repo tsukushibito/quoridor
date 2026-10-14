@@ -92,6 +92,27 @@ pub(super) struct ContinuationHistory {
     continuation: Box<[i16]>,
     valid_roots_since_age: u8,
 }
+
+/// Borrowed only while scoring one unchanged parent; no table or path updates.
+pub(super) struct PositionScores<'a> {
+    position: Position,
+    main: &'a [i16],
+    continuation: [Option<&'a [i16]>; 5],
+}
+impl PositionScores<'_> {
+    pub fn score(&self, action: u16) -> (i32, bool) {
+        let mut score = 2 * i32::from(self.main[main_index(self.position, action)]);
+        let mut nonzero = false;
+        for row in self.continuation.iter().flatten() {
+            let h = row[usize::from(action)];
+            score += i32::from(h);
+            nonzero |= h != 0;
+        }
+        debug_assert!(score.abs() <= 114_688);
+        (score, nonzero)
+    }
+}
+
 impl ContinuationHistory {
     pub fn new() -> super::Result<Self> {
         fn zeroed(n: usize) -> super::Result<Box<[i16]>> {
@@ -129,18 +150,18 @@ impl ContinuationHistory {
             stats.age_passes += 1;
         }
     }
-    pub fn scores(&self, p: Position, action: u16, path: &[PlayedMove]) -> (i32, bool) {
-        let mut score = 2 * i32::from(self.main[main_index(p, action)]);
-        let mut nonzero = false;
-        for (slot, lag) in LAGS.into_iter().enumerate() {
-            if let Some(prev) = previous(path, p.turn, lag) {
-                let h = self.continuation[continuation_index(p.turn, slot, prev, action)];
-                score += i32::from(h);
-                nonzero |= h != 0;
-            }
+    pub fn prepare_scores(&self, p: Position, path: &[PlayedMove]) -> PositionScores<'_> {
+        let continuation = std::array::from_fn(|slot| {
+            previous(path, p.turn, LAGS[slot]).map(|prev| {
+                let start = continuation_index(p.turn, slot, prev, 0);
+                &self.continuation[start..start + 209]
+            })
+        });
+        PositionScores {
+            position: p,
+            main: &self.main,
+            continuation,
         }
-        debug_assert!(score.abs() <= 114_688);
-        (score, nonzero)
     }
     fn update(
         &mut self,
@@ -203,5 +224,71 @@ impl ContinuationHistory {
             stats.cutoff_rank_sum += distinct;
             stats.first_child_cutoffs += u64::from(distinct == 1);
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn control385_prepared_lags_preserve_missing_colour_and_signed_rows() {
+        let p = Position::default();
+        let mut history = ContinuationHistory::new().unwrap();
+        let path: Vec<_> = [0, 81, 208, 80, 82, 1]
+            .into_iter()
+            .enumerate()
+            .map(|(i, action)| PlayedMove {
+                colour: (i % 2) as u8,
+                action,
+            })
+            .collect();
+        for (action, sign) in [(13, 1), (81, -1)] {
+            history.main[main_index(p, action)] = (sign * LIMIT) as i16;
+            for (slot, lag) in LAGS.into_iter().enumerate() {
+                let prev = path[path.len() - lag].action;
+                history.continuation[continuation_index(p.turn, slot, prev, action)] =
+                    (sign * LIMIT) as i16;
+            }
+        }
+        let scores = history.prepare_scores(p, &path);
+        assert_eq!(scores.score(13), (114_688, true));
+        assert_eq!(scores.score(81), (-114_688, true));
+        assert_eq!(scores.score(14), (0, false));
+        for (length, rows) in [0, 1, 2, 3, 4, 4, 5].into_iter().enumerate() {
+            let scores = history.prepare_scores(p, &path[path.len() - length..]);
+            assert_eq!(scores.score(13), ((2 + rows) * LIMIT, rows != 0));
+            assert_eq!(scores.score(81), (-(2 + rows) * LIMIT, rows != 0));
+        }
+        for lag in LAGS {
+            let index = path.len() - lag;
+            let mut wrong = path.clone();
+            wrong[index].colour ^= 1;
+            assert_eq!(history.prepare_scores(p, &wrong).score(13), (98_304, true));
+            wrong[index] = PlayedMove {
+                colour: path[index].colour,
+                action: 209,
+            };
+            assert_eq!(history.prepare_scores(p, &wrong).score(81), (-98_304, true));
+        }
+        // The lag6 row uses real ActionID0, not a missing-context sentinel.
+        assert_eq!(
+            history
+                .prepare_scores(Position { turn: 1, ..p }, &path)
+                .score(13),
+            (0, false)
+        );
+        let other = Position {
+            pawns: [5, p.pawns[1]],
+            ..p
+        };
+        assert_eq!(
+            history.prepare_scores(other, &path).score(13),
+            (81_920, true)
+        );
+        assert_eq!(
+            history.prepare_scores(other, &path).score(81),
+            (-114_688, true)
+        );
     }
 }

@@ -94,7 +94,12 @@ fn continuation360_o1_signed_plain_still_records_completed_updates_and_restores_
         assert_eq!(s.stats.ordering.completed_cutoff_events, 0);
         assert!(s.path.is_empty());
     });
-    assert!(h.scores(root.position(), winner.unwrap(), &[]).0 > 0);
+    assert!(
+        h.prepare_scores(root.position(), &[])
+            .score(winner.unwrap())
+            .0
+            > 0
+    );
 }
 
 pub(super) fn namespace(name: &str) -> SearchNamespace {
@@ -234,19 +239,22 @@ fn continuation360_namespace_step_jump_colour_and_wall_orientation() {
         action: 145,
     }];
     h.completed_cutoff(p, 4, 22, &[22], &path, Some(&mut s));
-    assert_eq!(h.scores(p, 22, &[]).0, 512);
-    assert_eq!(h.scores(q, 22, &[]).0, 0);
-    assert_eq!(h.scores(q, 22, &path), (256, true)); // intentional continuation from sharing.
-    assert_eq!(h.scores(Position { turn: 1, ..q }, 22, &path), (0, false));
+    assert_eq!(h.prepare_scores(p, &[]).score(22).0, 512);
+    assert_eq!(h.prepare_scores(q, &[]).score(22).0, 0);
+    assert_eq!(h.prepare_scores(q, &path).score(22), (256, true)); // intentional continuation from sharing.
     assert_eq!(
-        h.scores(
+        h.prepare_scores(Position { turn: 1, ..q }, &path).score(22),
+        (0, false)
+    );
+    assert_eq!(
+        h.prepare_scores(
             q,
-            22,
             &[PlayedMove {
                 colour: 1,
                 action: 81
             }]
-        ),
+        )
+        .score(22),
         (0, false)
     );
 }
@@ -263,17 +271,17 @@ fn continuation360_missing_sentinel_actor_parity_and_all_five_lags() {
     let mut s = OrderingStats::default();
     h.completed_cutoff(p, 1, 13, &[13], &path, Some(&mut s));
     assert_eq!(s.continuation_updates, 5);
-    assert_eq!(h.scores(p, 13, &path), (112, true));
-    assert_eq!(h.scores(p, 13, &[]), (32, false));
+    assert_eq!(h.prepare_scores(p, &path).score(13), (112, true));
+    assert_eq!(h.prepare_scores(p, &[]).score(13), (32, false));
     assert_eq!(
-        h.scores(
+        h.prepare_scores(
             p,
-            13,
             &[PlayedMove {
                 colour: 0,
                 action: 86
             }]
-        ),
+        )
+        .score(13),
         (32, false)
     );
     // A real action0 is not the missing-context sentinel.
@@ -282,7 +290,7 @@ fn continuation360_missing_sentinel_actor_parity_and_all_five_lags() {
         action: 0,
     }];
     h.completed_cutoff(p, 1, 5, &[5], &real, None);
-    assert!(h.scores(p, 5, &real).0 > h.scores(p, 5, &[]).0);
+    assert!(h.prepare_scores(p, &real).score(5).0 > h.prepare_scores(p, &[]).score(5).0);
     assert_eq!(LAGS, [1, 2, 3, 4, 6]);
 }
 #[test]
@@ -326,9 +334,9 @@ fn continuation360_completed_event_signed_once_not_research_or_unsearched() {
     assert_eq!((s.positive_actions, s.negative_actions), (1, 1));
     assert_eq!(s.cutoff_rank_sum, 2);
     assert_eq!(s.first_child_cutoffs, 0);
-    assert_eq!(h.scores(p, 13, &[]).0, 128);
-    assert_eq!(h.scores(p, 5, &[]).0, -128);
-    assert_eq!(h.scores(p, 3, &[]).0, 0);
+    assert_eq!(h.prepare_scores(p, &[]).score(13).0, 128);
+    assert_eq!(h.prepare_scores(p, &[]).score(5).0, -128);
+    assert_eq!(h.prepare_scores(p, &[]).score(3).0, 0);
 }
 #[test]
 fn continuation360_order_combines_unequal_main_and_preserves_all_tiers() {
@@ -409,17 +417,17 @@ fn continuation360_age_reset_owned_allocation_and_namespace() {
         h.finish_valid_root(&mut s);
     }
     assert_eq!(s.age_passes, 0);
-    assert_eq!(h.scores(p, 13, &[]).0, 512);
+    assert_eq!(h.prepare_scores(p, &[]).score(13).0, 512);
     h.finish_valid_root(&mut s);
     assert_eq!(s.age_passes, 1);
-    assert_eq!(h.scores(p, 13, &[]).0, 256);
+    assert_eq!(h.prepare_scores(p, &[]).score(13).0, 256);
     for _ in 0..16 {
         h.finish_valid_root(&mut s);
     }
     assert_eq!(s.age_passes, 2);
-    assert_eq!(h.scores(p, 13, &[]).0, 128);
+    assert_eq!(h.prepare_scores(p, &[]).score(13).0, 128);
     h.reset();
-    assert_eq!(h.scores(p, 13, &[]).0, 0);
+    assert_eq!(h.prepare_scores(p, &[]).score(13).0, 0);
     let mut session = SearchSession::new(Arc::new(PawnRows), namespace("one"), 4096).unwrap();
     session
         .ordering
@@ -427,7 +435,16 @@ fn continuation360_age_reset_owned_allocation_and_namespace() {
         .unwrap()
         .completed_cutoff(p, 2, 13, &[13], &[], None);
     session.reset_with_score_domain(Arc::new(PawnRows), namespace("two"), ScoreDomain::LEGACY);
-    assert_eq!(session.ordering.as_ref().unwrap().scores(p, 13, &[]).0, 0);
+    assert_eq!(
+        session
+            .ordering
+            .as_ref()
+            .unwrap()
+            .prepare_scores(p, &[])
+            .score(13)
+            .0,
+        0
+    );
     assert!(session.retained_memory_bytes().1 >= 900_376);
 }
 struct Failing;
