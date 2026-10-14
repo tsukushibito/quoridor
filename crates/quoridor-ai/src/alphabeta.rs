@@ -1291,9 +1291,34 @@ impl Search<'_> {
                 self.stats.tt_illegal_moves += 1;
             }
         }
-        let moves = self.ordered(c, a, tt_move, ply, legal.unwrap_or_else(|| c.legal_ids()))?;
+        let legal = legal.unwrap_or_else(|| c.legal_ids());
+        // The verified TT move already outranks every other tier. Only the
+        // Control target without a provider may defer preparing its siblings.
+        #[cfg(feature = "research-diagnostics")]
+        let mut first_tt = if self.orderer.is_none()
+            && matches!(self.static_scratch, Some(StaticScratch::CheapControl))
+        {
+            tt_move
+        } else {
+            None
+        };
+        #[cfg(not(feature = "research-diagnostics"))]
+        let mut first_tt: Option<u16> = None;
+        let mut deferred = None;
+        // Ordering diagnostics cover only actions actually prepared below.
+        // A TT-only cutoff still has one returned child/cutoff event, but no
+        // scored node or sibling scores; OFF adds no observation work.
+        let mut moves = if first_tt.is_some() {
+            deferred = Some(legal);
+            None
+        } else {
+            Some(self.ordered(c, a, tt_move, ply, legal)?.into_iter())
+        };
         self.control()?;
-        if moves.is_empty() {
+        if moves
+            .as_ref()
+            .is_some_and(|moves| moves.as_slice().is_empty())
+        {
             return Err(Interrupted::Error(SearchError::Rules(
                 RulesError::InvalidPosition,
             )));
@@ -1306,7 +1331,26 @@ impl Search<'_> {
         let track_returns = returned.is_some() || self.ordering_diagnostics;
         let mut returned_count = 0;
         let mut cutoff_winner = None;
-        for (i, action) in moves.into_iter().enumerate() {
+        let mut i = 0usize;
+        loop {
+            let action = if let Some(action) = first_tt.take() {
+                action
+            } else {
+                if let Some(mut remaining) = deferred.take() {
+                    // Child restored this parent, but may have trained history.
+                    // Rank only its still-unvisited legal siblings at this point.
+                    remaining.retain(|&action| Some(action) != tt_move);
+                    if remaining.is_empty() {
+                        break;
+                    }
+                    moves = Some(self.ordered(c, a, None, ply, remaining)?.into_iter());
+                    self.control()?;
+                }
+                let Some(action) = moves.as_mut().and_then(|moves| moves.next()) else {
+                    break;
+                };
+                action
+            };
             let mut v = if self.limits.use_pvs && i > 0 && alpha.is_finite() {
                 self.child(c, a, action, depth - 1, [alpha, next_up(alpha)], ply + 1)?
             } else {
@@ -1346,6 +1390,7 @@ impl Search<'_> {
                 }
                 break;
             }
+            i += 1;
         }
         self.control()?;
         if let Some(winner) = cutoff_winner
@@ -3258,6 +3303,10 @@ mod continuation360_tests;
 #[cfg(test)]
 #[path = "continuation360_composite_tests.rs"]
 mod continuation360_composite_tests;
+
+#[cfg(all(test, feature = "research-diagnostics"))]
+#[path = "tt_first386_tests.rs"]
+mod tt_first386_tests;
 
 #[cfg(test)]
 mod three_engine_374_factory_tests {
