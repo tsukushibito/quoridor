@@ -100,3 +100,5 @@ ONNX Runtime 1.30.0はtelemetry初期化時に`:memory:.ses`を生成する。`p
 配置は既存crate内で責務を分ける。AIのalphabetaがsession設定・method・探索、move_orderingがrank/keyと準備・整列、二scorerが異なる採点数学、static_geometryが同じ盤面算術だけを所有する。runnerのmeasurement／arena／runtimeはoperation固有の拒否・時計・回収を保持し、typed profile／method／factoryの正本をAIから呼ぶ。旧new_for_ordering_assessmentの互換aliasは残さない。
 
 再利用する条件列生成と明示field解決は既存scripts/dev/research-lifecycle.pyの準備関数へ置き、namespace文字列をPythonで再合成しない。今回一度のprepare-cost96.py／prepare-arena128.pyと有限recipe値はartifactのrun記録とし、再利用処理の実装コピーを残さない。nativeは省略overlayではなく解決済みJSONを読む。実行設定snapshot＋結果が記録単位で、別の逐次認定台帳・runtime継承設定・generic merge・registry・毎run reviewは増やさない。live outputは専用owner、Git保存する設定・結果はresearch-data、models／inputs／checkpointsはresearch-paths.jsonの永続assetsに保持する。旧path／SHA、固有RAW・モデルの移動／複製は不要で、全repo移動を比較gateにしない。
+
+今回選択した共通準備・typed method/constructor・採点幾何・準備入口の配置は、限定Rust14確認／NN0新1と必要compile/Clippy/release・関連source確認を経て採用した。整理後96探索／128探索的対局の設定と結果・深さ分布・UNKNOWN・費の範囲は[保存receipt](../../research-data/ai-sigma/shared-signed-ordering402/receipt.json)に保持する。実imageはsource93cbcd70の凍結版であり、後続の文書commitに合わせた再buildは行わない。全repoの重複不存在を認定したものではなく、別算法やoperation固有の拒否・時計・回収はそれぞれの責務に残す。

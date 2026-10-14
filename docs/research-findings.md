@@ -1825,3 +1825,54 @@ TTを揃えても評価値と順位による探索木、到達局面、手数の
 配置は既存crate内で責務を分ける。AIのalphabetaがsession設定・method・探索、move_orderingがrank/keyと準備・整列、二scorerが異なる採点数学、static_geometryが同じ盤面算術だけを所有する。runnerのmeasurement／arena／runtimeはoperation固有の拒否・時計・回収を保持し、typed profile／method／factoryの正本をAIから呼ぶ。旧new_for_ordering_assessmentの互換aliasは残さない。
 
 再利用する条件列生成と明示field解決は既存scripts/dev/research-lifecycle.pyの準備関数へ置き、namespace文字列をPythonで再合成しない。今回一度のprepare-cost96.py／prepare-arena128.pyと有限recipe値はartifactのrun記録とし、再利用処理の実装コピーを残さない。nativeは省略overlayではなく解決済みJSONを読む。実行設定snapshot＋結果が記録単位で、別の逐次認定台帳・runtime継承設定・generic merge・registry・毎run reviewは増やさない。live outputは専用owner、Git保存する設定・結果はresearch-data、models／inputs／checkpointsはresearch-paths.jsonの永続assetsに保持する。旧path／SHA、固有RAW・モデルの移動／複製は不要で、全repo移動を比較gateにしない。
+
+### 共通準備・設定整理後の有限比較（402／403、2026-10-14）
+
+Control／Cheapのsigned・no-policy経路を、同じinteger key・合法TT先行・exact先頭選択・必要時一度だけの凍結tail整列・LMR保護情報へ統合した。採点正本の静的整数項／係数と真正parent距離の検査を保持する。typed OrderingProfile／private SessionMethodが設定→factory→実method／raw resetの正本となり、namespaceから設定を逆算しない。二scorerの同じ盤面幾何だけをprivate static_geometryへ寄せ、CoverageとCheapの異なる算法を残した。旧constructor aliasは現callerごと撤去した。
+
+到達配置は既存crate内の探索・順位付け・採点・共通幾何、runnerの計測／arena／runtime固有の拒否・時計・回収に分かれる。再利用する条件生成／明示field解決は既存research-lifecycle.pyの3pure helperだけ、artifactのrecipeとbindingは今回一度のrun記録であり、実装コピー・runtime継承／generic merge／registryはない。解決済みJSONとprepared条件表に、変動する評価器＋対応model/identity・static採点・LMR、共通TT/PVS/rules/history/input/operation上限／clock／physicals、導出namespaceとrunID/outputを分けて保存した。models/inputs/checkpointsはresearch-pathsの永続assets、live outputとGit evidenceは別用途を保つ。旧path/SHA・固有RAW/modelの移動や全repoの一括整理はしていない。
+
+一image1cc34b4b／Build1108141f／source93cbcd70で、NNUE BEST43とD(0,8tanh)双方TT1,048,576に統一し、元の新96探索／48sessionsと128局／64色pairを一度ずつ完了した。旧400は当時の異なるprofile準備・非対称TTの真正結果として保持し、静的整数項単独／評価器演算単独の効果へ読み替えない。今回も入力距離・検査・異なる探索木を含むwholeであり、旧400との別時刻比から整理だけの因果speedupを認定しない。
+
+研究判断は、共通経路と選択した責務整理を保持し、LMRを研究用opt-in・既定OFFで保持する。Cheapも研究optionとして残し、一律昇格はしない。LMRの費用低下と名目depth上昇は観測したが、同時間の一般的棋力優位・非劣性は確立していない。製品／実generator既定、weights/models/seals、TT履歴projection未採用、mixed/learner全prep/pipelineと323 USERPAUSEは不変。追加実験／tuning／追試を自動発行しない。
+
+| 評価器／採点     | OFF whole中央値s | ON whole中央値s |   ON/OFF |
+| ---------------- | ---------------: | --------------: | -------: |
+| nnue/control     |         7.488890 |        2.123487 | 0.283552 |
+| nnue/cheap       |        10.027708 |        3.262289 | 0.325327 |
+| distance/control |         3.165968 |        1.183031 | 0.373671 |
+| distance/cheap   |         6.180688 |        2.239717 | 0.362373 |
+
+wholeは6root body・setup/drop・採点・key保存/cache・再探索込みの二pass中央値。OFF→ON→ON→OFF、D4各2M/D6各8M、diagnostics/depthcallback OFF、96calls上限288Mに対し実76,305,132nodes。94COMPLETE、固定D Control OFFのcoldD6二反復は8M/completedD5/targetD6 UNKNOWN。Cheap OFFはD6を完成し、ONは両profileで選択的名目D6を完成。各同条件二反復はdepth/valuebits/action/exactPV/allwork一致。同完成深さの全幅OFF Control/Cheap11rootでvaluebits一致、着手/PV差は保持。Cheapの絶対wholeは同じLMR設定のControlより大きい。ON/OFFは同仕事speedupではない。nodes/evals/LMR/TT/PVS・局面別時間とsetup/dropは保存詳細へ残す。
+
+| 評価器   | 左対右                 | 左の勝-分-負 | 保存family bootstrap95%範囲 |
+| -------- | ---------------------- | -----------: | --------------------------- |
+| nnue     | Control OFF対ON        |        9-0-7 | [0.375, 0.75]               |
+| nnue     | Cheap OFF対ON          |        8-0-8 | [0.3125, 0.6875]            |
+| nnue     | Control OFF対Cheap OFF |       11-0-5 | [0.4375, 0.9375]            |
+| nnue     | Control ON対Cheap ON   |       6-0-10 | [0.125, 0.625]              |
+| distance | Control OFF対ON        |        7-0-9 | [0.1875, 0.6875]            |
+| distance | Cheap OFF対ON          |        8-0-8 | [0.5, 0.5]                  |
+| distance | Control OFF対Cheap OFF |       10-0-6 | [0.375, 0.875]              |
+| distance | Control ON対Cheap ON   |        8-0-8 | [0.25, 0.75]                |
+
+128unique・64完成色pairは全goal、UNKNOWN/draw/forfeit0。全保存区間は0.5を含む。固定D Cheap OFF/ONの[0.5,0.5]は各family二色scoreがすべて0.5だったことに由来し、一般同等性の証明ではない。同じ8family23/29/34/46/64/93/105/108を全対照で共有した固定book条件付き観測で、128独立標本・補正済み多重比較・正式棋力/Eloではない。Control OFF対Cheap ONの直接比較はなく、間接的な4条件首位も認定しない。再bootstrap0。
+
+対局は100ms authority receipt/5ms reserve/depth64/node safety1M/200ply、AI2/6・main4。下表はaccepted completed snapshotのみのn・中央値・平均と小分布。LMR ONは選択的nominalで全幅深さの保証ではなく、各条件は局面軌跡・手数・終盤比が異なる。深い尾部で平均が膨らむため中央値を主指標とする。
+
+| method               |   n | 中央値 |   平均 | depth 1..3 / 4..5 / 6..8 / 9..15 / 16..31 / 32..63 / 64 |
+| -------------------- | --: | -----: | -----: | ------------------------------------------------------- |
+| nnue/control/OFF     | 790 |      5 | 10.306 | 53 / 385 / 68 / 125 / 127 / 2 / 30                      |
+| nnue/control/ON      | 779 |      6 | 11.072 | 3 / 361 / 95 / 131 / 162 / 4 / 23                       |
+| nnue/cheap/OFF       | 794 |      5 |  9.379 | 144 / 290 / 121 / 72 / 145 / 1 / 21                     |
+| nnue/cheap/ON        | 789 |      6 | 10.227 | 79 / 311 / 104 / 93 / 181 / 2 / 19                      |
+| distance/control/OFF | 885 |      8 | 12.295 | 0 / 382 / 68 / 112 / 293 / 7 / 23                       |
+| distance/control/ON  | 876 |     10 | 12.784 | 0 / 314 / 105 / 145 / 288 / 7 / 17                      |
+| distance/cheap/OFF   | 887 |      8 | 11.874 | 29 / 374 / 68 / 146 / 228 / 8 / 34                      |
+| distance/cheap/ON    | 879 |      9 | 11.474 | 23 / 324 / 73 / 189 / 251 / 4 / 15                      |
+
+6679 accepted movesの実method/LMR/clock/core/terminal/drainを照合し、fallback/engine error/failure/late-or-equal receipt/未回収terminal/inflightは0。stopcancelled8件はreserve由来の完成snapshot選択で、ユーザー取消ではない。TT実容量1,048,576・retained83,886,128B/session（2色167,772,256B）はRSSではない。terminalworkだけを加算し、selected snapshot/persistent TTの内包viewは別にした。物理NNforward件数・孤立した採点/map/LMR費・全検索時間・continuous RSS peakと正確な終盤属性はUNKNOWN。評価器を跨ぐnodes/sec・depthからNNUE演算単体費を推定しない。
+
+必要softwareは新6＋影響4のordering確認、設定／幾何新4Rust、共通準備NN0新1、必要compile/research＋diagnostics Clippy／真正releaseと限定source関連確認を使用。元のfixture InvalidPosition/Result unwrap、proof/guard/helper/collectorの失敗・費・NULL/returnedとpersisted masksは原scopeで保持し、成功suiteを再演していない。非重複数値outerは848.439982407s、元失敗を含む必要software五job outerは231.679882676s。nested native/guardian/sequenceを加算しない。source/LLM/admin/saved解析の全費はUNKNOWN、個別receiptは別に保存。実STOP/directwait/reap/handles/freshidentity/TMP消失と一回のaffected実使用を記録し、共有targetは正の増分だけを扱う。
+
+設定・原結果・source/修復・software/review・失敗・STOPは[保存receipt](../research-data/ai-sigma/shared-signed-ordering402/receipt.json)、[結果報告](../research-data/ai-sigma/shared-signed-ordering402/report-ja.md)へ結ぶ。旧393/398不採用・旧400結果・全RAW/FAILED/費UNKNOWN、oldfits96/defaults/weights/seals、foreign devcontainer変更は不変。
