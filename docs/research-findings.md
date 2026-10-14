@@ -1797,3 +1797,19 @@ NNUEのControl OFF対Cheap OFFではControl14勝2敗、LMR自体のControl対照
 数値jobの非重複outer費は964.170029259秒、必要Build v1..v6の非重複outer費は240.259264835秒。元失敗を含み、各native/guardian/sequenceのnested時間を加えない。source/LLM/adminの全時間はUNKNOWN、保存解析と個別source/software費はそれぞれのreceiptへ残した。実STOP/directwait/reap/handles/freshidentity/TMP撤去を保存し、対象使用を終了後一度確認する。共有targetは既知正増分5,713,920Bだけを数え、同inodeを重複加算しない。oldfits96/models/defaults/seals/旧RAW/FAILED/全費UNKNOWNとforeign devcontainer変更は不変。
 
 設定・原結果・source/修復・software/review・元FAILED・STOPのexact保存は [保存receipt](../research-data/ai-sigma/lmr-control-cheap400/receipt.json)、[結果報告](../research-data/ai-sigma/lmr-control-cheap400/report-ja.md)。Beadsが状態と所有の正本。今回から新campaignやpaused生成再開を自動発行しない。
+
+### Control／Cheap比較の準備・整列条件を揃える（402、2026-10-14）
+
+人間の確認を受け、元376が意図した「同じmain／continuationへ静的整数項を加える比較」と、400で実行した現役profile比較の適用範囲を明確にする。後の389／399等の高速化はControl側へ限定され、400基盤ではControlが合成integer key・合法TT手の先行探索・exact先頭選択と必要時の遅延tail整列を使い、Cheap側は別の準備・整列経路を使っていた。同じhistory採点・LMR規則を共有していても、静的採点以外の処理費と手順も異なった。
+
+したがって、400の96探索／128局は**当時の二つの真正な現役profileの比較**として保持し、静的採点だけの孤立効果とは解釈しない。400の設定・原RAW・勝敗・FAILED・費・LMR opt-in／既定OFFの判断は変更・再演しない。Rootの以前の説明も、この準備・整列経路の差を十分に区別していなかった点をここで補足する。
+
+新402ではsigned／no-policyのControlとCheapに同じ既存key・TT先行・先頭1手選択／tail一度整列・LMR保護情報の表現を使い、静的整数項を加えるかだけを採点側へ残す一候補を準備する。順位tier・goal/killer・Action ID tie・採点時点とkey freeze・PVS同手再探索・root全順序消費を共通化し、policy／unsigned／Coverageの意味、静的係数／正確距離／検証、ルール／fullhistory／モデルを保つ。静的機能にはその入力距離と検査・順位変化による探索workも含まれ、共通化後も時間差を整数加算だけの孤立費へ割り振らない。
+
+必要softwareと関連境界の独立確認後、新しい同一imageでNNUE BEST43／TT4096と固定D(0,8tanh)／TT1048576の各Control/Cheap内OFF→ON→ON→OFFを測る。既存6roots・96calls／48sessions／288M上限、D4各2M／D6各8M、通常diagnostics/depthcallback OFF、追加root/cap/warmup/sampling/sweepなし。同じ8family×2色・4対照・2評価器の新128局／64pairsを100ms receipt／5ms reserve／depth64／node安全上限1M／200plyで行う。旧400との別時刻比から共通化だけの因果speedupを認定せず、旧対局を新対局と混ぜない。共有family・多重対照の不確実性とUNKNOWN、直接比較のない4条件順位の未確立を保持する。
+
+実装・費用・指し手差・同時間結果を合わせて研究経路の採否／保留を記録する。製品／実generator既定や重みを昇格せず、全結果後の追加candidate/tuning/生成/fitを自動発行しない。混合・learner全prep/pipelineと323 USERPAUSE、封印・oldfits96・TT履歴projection設計のみ、393／398不採用とforeign devcontainer変更は不変。source/configの独立準備を並行し、同path writer／共有Cargo／actual fairtimingだけを直列にする。状態と所有はBeads402、実根拠は `.artifacts/research-team/integration324/shared-signed-ordering402-v1/` と既存findings／本設計へ保持する。
+
+整理後の比較には、402の共通準備に加え、403で選択する設定・namespace・採点幾何の挙動保存差分を別commitで含める。一つの真正imageを実設定へ結び、既承認の96探索／128局だけを行う。整理前の半分だけの版を先に測ってから繰り返さない。methodは設定から生成し、namespace文字列を設定へ逆変換しない。幾何の同じ盤面操作は共有しても、CoverageとCheapの異なる採点算法・係数は別の責務として保つ。製品・生成の既定とTT履歴資格を変更しない。
+
+対局は既存accepted observationsだけから各evaluator×静的採点×LMRの選択済み完成snapshot depthの件数・中央値・分布・平均を保存し、中央値を主に表示する。LMR ONは選択的nominal depthであり、OFFの全幅深さと同じ保証ではない。対局条件によって軌跡・手数・終盤比率が異なり、平均は終盤の高深度で膨らみ得る。同一局面の深さ差や棋力の原因へ読み替えず、追加Search／forward／depthcallbackは行わない。
