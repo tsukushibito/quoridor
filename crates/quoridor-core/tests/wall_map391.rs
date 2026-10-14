@@ -34,8 +34,10 @@ fn wall391_seeded_legal_additions_match_queue_for_each_row_class() {
                     .play(if horizontal { 81 } else { 145 } + u16::from(anchor))
                     .unwrap();
                 let expected = oracle(after);
-                let result = after
-                    .wall_distance_maps_after_addition(parent, &old)
+                let result = parent
+                    .wall_distance_geometry()
+                    .after_addition(after)
+                    .map(|geometry| *geometry.distances())
                     .unwrap();
                 assert_eq!(result, expected);
                 classes
@@ -57,8 +59,10 @@ fn wall391_two_edges_goal_border_and_unreachable_are_exact() {
     let parent = Position::default();
     let old = parent.wall_distance_maps();
     let after = parent.play(81).unwrap();
-    let result = after
-        .wall_distance_maps_after_addition(parent, &old)
+    let result = parent
+        .wall_distance_geometry()
+        .after_addition(after)
+        .map(|geometry| *geometry.distances())
         .unwrap();
     assert_eq!(result, oracle(after));
     // Both parallel edges of H0 must be removed, including their detours.
@@ -66,8 +70,10 @@ fn wall391_two_edges_goal_border_and_unreachable_are_exact() {
     assert!(result[1][9] > old[1][9] && result[1][10] > old[1][10]);
     for id in [88, 137, 144, 145, 208] {
         let after = parent.play(id).unwrap();
-        let maps = after
-            .wall_distance_maps_after_addition(parent, &old)
+        let maps = parent
+            .wall_distance_geometry()
+            .after_addition(after)
+            .map(|geometry| *geometry.distances())
             .unwrap();
         assert_eq!(maps, oracle(after));
         assert_eq!(&maps[0][72..81], &[0; 9]);
@@ -88,8 +94,10 @@ fn wall391_two_edges_goal_border_and_unreachable_are_exact() {
             vertical: 1u64 << anchor,
             ..isolated
         };
-        let maps = after
-            .wall_distance_maps_after_addition(isolated, &old)
+        let maps = isolated
+            .wall_distance_geometry()
+            .after_addition(after)
+            .map(|geometry| *geometry.distances())
             .unwrap();
         assert_eq!(maps, oracle(after));
         assert_eq!(maps, old);
@@ -100,7 +108,6 @@ fn wall391_two_edges_goal_border_and_unreachable_are_exact() {
 fn wall391_strict_addition_excludes_delete_replace_multidiff_and_ignores_pawns() {
     let empty = Position::default();
     let parent = empty.play(81).unwrap();
-    let old = parent.wall_distance_maps();
     for after in [
         empty,
         Position {
@@ -118,14 +125,18 @@ fn wall391_strict_addition_excludes_delete_replace_multidiff_and_ignores_pawns()
         },
     ] {
         assert!(
-            after
-                .wall_distance_maps_after_addition(parent, &old)
+            parent
+                .wall_distance_geometry()
+                .after_addition(after)
+                .map(|geometry| *geometry.distances())
                 .is_none()
         );
     }
     let after = parent.play(153).unwrap();
-    let maps = after
-        .wall_distance_maps_after_addition(parent, &old)
+    let maps = parent
+        .wall_distance_geometry()
+        .after_addition(after)
+        .map(|geometry| *geometry.distances())
         .unwrap();
     let shifted = Position {
         pawns: [10, 70],
@@ -133,7 +144,10 @@ fn wall391_strict_addition_excludes_delete_replace_multidiff_and_ignores_pawns()
         ..after
     };
     assert_eq!(
-        shifted.wall_distance_maps_after_addition(parent, &old),
+        parent
+            .wall_distance_geometry()
+            .after_addition(shifted)
+            .map(|geometry| *geometry.distances()),
         Some(maps)
     );
     assert_eq!(maps, oracle(after));
