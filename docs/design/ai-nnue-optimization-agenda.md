@@ -81,6 +81,14 @@ SAME349 ownerの保存cwd/model/effort/fullneverを維持し、Main/Git/docs/all
 
 376停止inspectionのlocal direction mask案は未実装で、validation causalshareは未測定。この診断後に実sampleとplain費を見て最小same-semantics案を選ぶ。必要なfocused follow-upや重要validity変更は具体scope/whole支持と既存review閾値で扱い、恒久worker/registry/periodic monitor/per-run reviewerを追加しない。
 
+## Control優先の最初の処理改善（385、2026-10-14）
+
+人間はControlで有用な高速化を先に進め、順序変更も今後の検討で許容する方針を選んだ。384の有限profileはsort self30.47%、ordered9.98%、legal generation9.81%、wall maps10.68%、head11.03%だが、shareを未実装変更の利益予測へ換算しない。Cheap専用edge/staticは今回発行しない。
+
+最初の小差分は、TT best確認とorderedでの合法手一覧の局面内再利用、continuation lag1/2/3/4/6の共通path/colour/index参照のhoist、同一Ranking comparatorによる標準sort_unstable_byに限定する。TT cutoffで不要な採点/sort/生成を増やさず、TT/context/depth/bound/illegal counter、goal-first/fullhistory、取消/error/undo、history整数係数/更新/aging/gravity、policy total_cmpと最終ActionID tieを保つ。永続cache/unsafe API/MovePicker/NNUE/maps/head/PVS accumulator/検証省略/TT容量/重みの変更は含めない。各小commitを独立に戻せる形で統合する。
+
+関連ordering/TT/history/cancel/error/undo/cold-warmを通常researchとresearch-diagnosticsで確認し、変更した合法性・履歴参照・比較に限定する一度の関連独立確認を行う。承認済み採否確認はControlのみO→N→N→O、各6既存rootsで24calls／12sessions／最大72M nodes、BEST43/TT4096/PVS/rules/inputs固定、Oは382accepted1b631ac7、真正Nをsole324がbuildする。既存sequenceをext4上で使い、同意味depth/valuebits/action/PV/work/legal/fullhistoryroot/parentを対応させる。setup/drop込みwhole中央値N<=O、各rootの両NがO中央値1.10を超えないことを有限採用条件にする。不明な不一致を順序変更許容で免責せず、不支持部分を戻して自動tuning/追加campaignを増やさない。実測・採用は未完了で、Cheap既定/一般speedup/棋力、旧結果・費・UNKNOWN、323pause、models/defaults/N/seals、mixed3未選択を変更しない。
+
 ## Compact board TT と外部の反復履歴（359、2026-10-10）
 
 人間はTT entryごとの全履歴保存を止めるよう指示し、359で compact board-key TT と外部 canonical repetition history の実装を選んだ。この表現方向について354のcapacity-only未選択状態を置き換えるが、351/354を再開せず、2MiB化・eviction/reset・容量sweep・selective search・fit・新対局・349 perfの許可には広げない。4096 slots/1MiBから始める。
