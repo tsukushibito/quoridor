@@ -71,7 +71,9 @@ def write_sampling_counts(path, indices, row_counts, attempted_row_counts):
         "attempted_row_counts": attempted_row_counts,
     }
     payload["training_index_range" if contiguous else "training_indices"] = (
-        np.asarray([start, start + len(indices)], dtype=np.int64) if contiguous else indices
+        np.asarray([start, start + len(indices)], dtype=np.int64)
+        if contiguous
+        else indices
     )
     path = Path(path)
     temporary = path.with_suffix(path.suffix + ".tmp")
@@ -87,7 +89,9 @@ def write_sampling_counts(path, indices, row_counts, attempted_row_counts):
 def verify_initial_binding(expected, weights_path):
     """Reject a different initialization before any selector or optimizer forward."""
     if sha(weights_path) != expected.get("initial_weights_sha"):
-        raise ValueError("initial native weights differ from fixed qualified initialization")
+        raise ValueError(
+            "initial native weights differ from fixed qualified initialization"
+        )
 
 
 def prepare_statistics(cache, output):
@@ -105,7 +109,9 @@ def prepare_statistics(cache, output):
     if not getattr(corpus, "compact", False) or (
         not terminal and corpus.manifest.get("dataset_revision") != "original-full-v1"
     ):
-        raise ValueError("statistics requires qualified original-full-v1 compact observations")
+        raise ValueError(
+            "statistics requires qualified original-full-v1 compact observations"
+        )
     indices = np.flatnonzero((corpus.splits == 0) & corpus.eligible)
     if not len(indices):
         raise ValueError("statistics requires nonempty training observations")
@@ -134,7 +140,9 @@ def prepare_statistics(cache, output):
             write(
                 file,
                 {
-                    "row_mean_constant": margin_constant if condition == "B" else outcome_constant,
+                    "row_mean_constant": margin_constant
+                    if condition == "B"
+                    else outcome_constant,
                     "binding": {
                         "cache_manifest_sha": corpus.binding["dataset_sha"],
                         "partition": "train",
@@ -162,7 +170,10 @@ def prepare_statistics(cache, output):
         write(output / "result.json", result)
         return result
     write(output / "train-only-scale.json", {**statistics, "binding": binding})
-    write(output / "train-only-constant.json", {"row_mean_constant": constant, "binding": binding})
+    write(
+        output / "train-only-constant.json",
+        {"row_mean_constant": constant, "binding": binding},
+    )
     result = {
         **binding,
         "scale_sha": sha(output / "train-only-scale.json"),
@@ -178,17 +189,24 @@ def prepare_statistics(cache, output):
 
 def _finalize_training(output, actions, primary_error, facts, *, prior_failures=()):
     failures = list(prior_failures)
-    stages = [{"stage": "primary_stop_record", "status": "FAILED"} for _ in prior_failures]
+    stages = [
+        {"stage": "primary_stop_record", "status": "FAILED"} for _ in prior_failures
+    ]
     for stage, action in actions:
         before = len(failures)
         _attempt_finalization(stage, action, failures)
         stages.append(
-            {"stage": stage, "status": "FAILED" if len(failures) > before else "COMPLETED"}
+            {
+                "stage": stage,
+                "status": "FAILED" if len(failures) > before else "COMPLETED",
+            }
         )
     if not failures:
         return
     receipt = {
-        "primary_exception": None if primary_error is None else _exception_record(primary_error),
+        "primary_exception": None
+        if primary_error is None
+        else _exception_record(primary_error),
         "original_stop_and_position": facts(),
         "stages": stages,
         "finalization_errors": [_exception_record(error) for error in failures],
@@ -303,7 +321,10 @@ def export(model, config, statistics, distance_fit, path):
         "distance_fit": distance_fit,
         "source_kind": "native-QF1-learning-cycle",
     }
-    if config["model"]["transformer_width"] != 32 or config["model"]["hidden_width"] != 32:
+    if (
+        config["model"]["transformer_width"] != 32
+        or config["model"]["hidden_width"] != 32
+    ):
         manifest["feature"] = "QF1-f32-STM-scaled-v2"
         manifest["topology"] = {
             "ft_width": config["model"]["transformer_width"],
@@ -369,7 +390,9 @@ def export(model, config, statistics, distance_fit, path):
                 "condition": config["experiment"]["condition"],
             }
         )
-    write(path / "training-target.json", {"training_target": config["training"]["target"]})
+    write(
+        path / "training-target.json", {"training_target": config["training"]["target"]}
+    )
     write(path / "manifest.json", manifest)
     return path / "manifest.json"
 
@@ -416,7 +439,9 @@ def train(
     supply_workers=None,
 ):
     start = time.monotonic()
-    cfg = resolve_config(config_path, () if steps is None else (f"training.steps={steps}",))
+    cfg = resolve_config(
+        config_path, () if steps is None else (f"training.steps={steps}",)
+    )
     if cfg["experiment"]["study"] == "mixed-outcome":
         if steps is not None or scale_path is not None or supply_workers is not None:
             raise ValueError(
@@ -443,7 +468,9 @@ def train(
     if supply_workers is None:
         supply_workers = cfg["training"]["supply_workers"]
     if type(supply_workers) is not int or supply_workers not in (0, 2):
-        raise ValueError("supply workers must be 0 (synchronous) or 2 (qualified prefetch)")
+        raise ValueError(
+            "supply workers must be 0 (synchronous) or 2 (qualified prefetch)"
+        )
     if input_binding and supply_workers != cfg["training"]["supply_workers"]:
         raise ValueError("bound input requires the configured supply worker mode")
     cfg["training"]["supply_workers"] = supply_workers
@@ -463,7 +490,9 @@ def train(
     }[target]
     step_score = cfg["model"]["architecture"] == "distance_steps"
     if step_score != getattr(corpus, "terminal", False):
-        raise ValueError("distance-step model requires its bound dual-teacher geometry corpus")
+        raise ValueError(
+            "distance-step model requires its bound dual-teacher geometry corpus"
+        )
     target_scale = 80 if target == "outcome_steps" else (1)
     compact = getattr(corpus, "compact", False)
     public_compact = compact and not step_score and True
@@ -491,7 +520,9 @@ def train(
         or (cfg["optimizer"]["name"] != "adam")
         or (cfg["optimizer"]["weight_decay"] != 0)
     ):
-        raise ValueError("public full fit requires fixed QF1+D FT32/H32/dropout0/a0b8 Adam/wd0")
+        raise ValueError(
+            "public full fit requires fixed QF1+D FT32/H32/dropout0/a0b8 Adam/wd0"
+        )
     teacher_types = (
         {"terminal_pair"}
         if step_score
@@ -521,7 +552,9 @@ def train(
         starts = np.searchsorted(sorted_codes, family_codes, side="left")
         ends = np.searchsorted(sorted_codes, family_codes, side="right")
         group_flat_sorted = ix_train[order]
-        group_indices = [group_flat_sorted[first:last] for first, last in zip(starts, ends)]
+        group_indices = [
+            group_flat_sorted[first:last] for first, last in zip(starts, ends)
+        ]
         families = [corpus.families[code] for code in family_codes]
         sums = np.zeros(len(corpus.families), dtype=np.float64)
         counts = np.zeros(len(corpus.families), dtype=np.int64)
@@ -551,13 +584,18 @@ def train(
             binding["dataset_sha"] != expected["cache_manifest_sha"]
             or sha(expected["scale_artifact"]) != expected["scale_artifact_sha"]
             or sha(constant_path) != expected["constant_artifact_sha"]
-            or (config_path is not None and sha(config_path) != expected["fit_config_sha"])
+            or (
+                config_path is not None
+                and sha(config_path) != expected["fit_config_sha"]
+            )
             or (statistics["mu_f32"] != expected_scale["mu_f32"])
             or (statistics["sigma_f32"] != expected_scale["sigma_f32"])
             or (constant != expected_constant["row_mean_constant"])
             or (scale_path is not None)
         ):
-            raise ValueError("fit train-only statistics/constant/input binding mismatch")
+            raise ValueError(
+                "fit train-only statistics/constant/input binding mismatch"
+            )
     from .distance_steps import verify_main_statistics
 
     verify_main_statistics(volume_admission, statistics)
@@ -577,24 +615,42 @@ def train(
     initial_state = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
     if volume_admission is not None:
         digest = hashlib.sha256()
-        for key in ("ft.weight", "ft.bias", "h.weight", "h.bias", "out.weight", "out.bias"):
+        for key in (
+            "ft.weight",
+            "ft.bias",
+            "h.weight",
+            "h.bias",
+            "out.weight",
+            "out.bias",
+        ):
             digest.update(initial_state[key].numpy().astype("<f4").tobytes())
         if digest.hexdigest() != volume_admission["expected"]["initial_weights_sha"]:
-            raise ValueError("actual common initialization differs before optimizer/forward")
+            raise ValueError(
+                "actual common initialization differs before optimizer/forward"
+            )
     if device == "cuda":
         free, total = torch.cuda.mem_get_info()
         if free <= 2 * 1024**3:
             raise RuntimeError("CUDA host/display reserve leaves no training window")
     generator = torch.Generator().manual_seed(cfg["training"]["seed"] + 1)
-    optimizers = {"adam": torch.optim.Adam, "adamw": torch.optim.AdamW, "sgd": torch.optim.SGD}
-    opt_kwargs = {"lr": cfg["optimizer"]["lr"], "weight_decay": cfg["optimizer"]["weight_decay"]}
+    optimizers = {
+        "adam": torch.optim.Adam,
+        "adamw": torch.optim.AdamW,
+        "sgd": torch.optim.SGD,
+    }
+    opt_kwargs = {
+        "lr": cfg["optimizer"]["lr"],
+        "weight_decay": cfg["optimizer"]["weight_decay"],
+    }
     if cfg["optimizer"]["name"] == "sgd":
         opt_kwargs["momentum"] = cfg["optimizer"]["momentum"]
 
     optimizer = optimizers[cfg["optimizer"]["name"]](model.parameters(), **opt_kwargs)
     scheduler = None
     if cfg["training"]["scheduler"] == "cosine":
-        scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, cfg["training"]["steps"])
+        scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
+            optimizer, cfg["training"]["steps"]
+        )
     elif cfg["training"]["scheduler"] == "plateau":
         scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
             optimizer,
@@ -621,7 +677,10 @@ def train(
     write(
         output / "data.json",
         {
-            "binding": {"dataset_sha": binding["dataset_sha"], "file": "cache-binding.json.gz"},
+            "binding": {
+                "dataset_sha": binding["dataset_sha"],
+                "file": "cache-binding.json.gz",
+            },
             "train": len(ix_train),
             "validation": len(ix_validation),
             "constant": constant,
@@ -635,7 +694,9 @@ def train(
     curve, diagnostics, diagnostic_curve = ([], [], [])
     group_lengths = np.array([len(group) for group in group_indices], dtype=np.int64)
     group_offsets = np.concatenate([[0], np.cumsum(group_lengths)[:-1]])
-    group_flat = np.concatenate(group_indices) if group_indices else np.empty(0, dtype=np.int64)
+    group_flat = (
+        np.concatenate(group_indices) if group_indices else np.empty(0, dtype=np.int64)
+    )
     from .sampling import (
         EpochSampler,
         EarlyStopping,
@@ -661,7 +722,9 @@ def train(
         else None
     )
     supply = ReflectionBatches(
-        corpus, cfg["training"]["reflection_probability"], cfg["training"]["reflection_seed"]
+        corpus,
+        cfg["training"]["reflection_probability"],
+        cfg["training"]["reflection_seed"],
     )
     evaluation_steps = (
         set()
@@ -697,7 +760,9 @@ def train(
         rng = np.random.default_rng(cfg["training"]["seed"] + 2)
         diag_train = np.sort(
             rng.choice(
-                ix_train, min(len(ix_train), cfg["evaluation"]["diagnostic_rows"]), replace=False
+                ix_train,
+                min(len(ix_train), cfg["evaluation"]["diagnostic_rows"]),
+                replace=False,
             )
         )
         diag_val = np.sort(
@@ -709,16 +774,24 @@ def train(
         )
     else:
         diag_train = diagnostic_indices(
-            rows, ix_train, cfg["evaluation"]["diagnostic_rows"], cfg["training"]["seed"]
+            rows,
+            ix_train,
+            cfg["evaluation"]["diagnostic_rows"],
+            cfg["training"]["seed"],
         )
         diag_val = diagnostic_indices(
-            rows, ix_validation, cfg["evaluation"]["diagnostic_rows"], cfg["training"]["seed"]
+            rows,
+            ix_validation,
+            cfg["evaluation"]["diagnostic_rows"],
+            cfg["training"]["seed"],
         )
     train_eval = ix_train if cfg["evaluation"]["full_train"] else diag_train
     if not len(train_eval):
         raise ValueError("full_train=false requires nonempty diagnostic subset")
     epoch_sampler = (
-        EpochSampler(ix_train, batch_size, cfg["training"]["seed"]) if mode == "epoch" else None
+        EpochSampler(ix_train, batch_size, cfg["training"]["seed"])
+        if mode == "epoch"
+        else None
     )
     stopper = EarlyStopping(
         cfg["evaluation"]["early_stopping_patience"],
@@ -811,7 +884,9 @@ def train(
         )
         if step_score:
             result += (
-                torch.from_numpy(corpus.integer_distances[index].astype(np.float32)).to(device),
+                torch.from_numpy(corpus.integer_distances[index].astype(np.float32)).to(
+                    device
+                ),
             )
         sync()
         phase_seconds["transfer"] += time.monotonic() - tick
@@ -838,7 +913,12 @@ def train(
             from .step_measurements import measurements as step_measurements
 
             return step_measurements(
-                corpus, indices, values, target, constant, cfg["model"]["train_transform"]
+                corpus,
+                indices,
+                values,
+                target,
+                constant,
+                cfg["model"]["train_transform"],
             )
         if compact:
             return compact_measurements(
@@ -866,10 +946,14 @@ def train(
                 measured.add(row, values[first + j])
                 reference.add(row, baseline[j])
                 for store, error in (
-                    (group_distance, (baseline[j] - local_labels[j, column]) ** np.float32(2)),
+                    (
+                        group_distance,
+                        (baseline[j] - local_labels[j, column]) ** np.float32(2),
+                    ),
                     (
                         group_constant,
-                        (np.float32(constant) - local_labels[j, column]) ** np.float32(2),
+                        (np.float32(constant) - local_labels[j, column])
+                        ** np.float32(2),
                     ),
                 ):
                     pair = store.setdefault(row["group"], [0.0, 0])
@@ -888,10 +972,12 @@ def train(
                 "distance": reference.result(),
                 "constant": constant,
                 "group_distance_mse_f32": [
-                    float(np.float32(group_distance[g][0] / group_distance[g][1])) for g in ordered
+                    float(np.float32(group_distance[g][0] / group_distance[g][1]))
+                    for g in ordered
                 ],
                 "group_constant_mse_f32": [
-                    float(np.float32(group_constant[g][0] / group_constant[g][1])) for g in ordered
+                    float(np.float32(group_constant[g][0] / group_constant[g][1]))
+                    for g in ordered
                 ],
             }
             write(output / "measurement-sets.json", measurement_sets)
@@ -912,7 +998,9 @@ def train(
             "encoding": "little-endian-f32-base64; NaN means missing, never zero",
             "order_ref": scope,
             "fields": {
-                field: base64.b64encode(np.asarray(vector, dtype="<f4").tobytes()).decode()
+                field: base64.b64encode(
+                    np.asarray(vector, dtype="<f4").tobytes()
+                ).decode()
                 for field, vector in vectors.items()
             },
         }
@@ -980,7 +1068,11 @@ def train(
     def save_checkpoint(step):
         tick = time.monotonic()
         torch.save(
-            {"model": model.state_dict(), "model_config": cfg["model"], "scale": statistics},
+            {
+                "model": model.state_dict(),
+                "model_config": cfg["model"],
+                "scale": statistics,
+            },
             output / f"step{step}.pt",
         )
         export(model, cfg, statistics, distance_fit, output / f"step{step}-model")
@@ -1062,7 +1154,8 @@ def train(
                 if improved:
                     best_step, best_loss = (step, loss)
                     best_state = {
-                        k: v.detach().cpu().clone() for k, v in model.state_dict().items()
+                        k: v.detach().cpu().clone()
+                        for k, v in model.state_dict().items()
                     }
                     best_exposure = position()
                     save_named_checkpoint("best")
@@ -1081,10 +1174,14 @@ def train(
                             reused[int(i)] = float(values[at])
                 if scheduled:
                     write_values(
-                        ptrain, output / f"train-step{step}.f32", cfg["evaluation"]["batch_size"]
+                        ptrain,
+                        output / f"train-step{step}.f32",
+                        cfg["evaluation"]["batch_size"],
                     )
                     write_values(
-                        praw, output / f"validation-step{step}.f32", cfg["evaluation"]["batch_size"]
+                        praw,
+                        output / f"validation-step{step}.f32",
+                        cfg["evaluation"]["batch_size"],
                     )
                 phase_seconds["full_selector"] += time.monotonic() - tick
             if diagnostic:
@@ -1101,7 +1198,9 @@ def train(
                                 for i, v in zip(missing, predict(missing, "diagnostic"))
                             }
                         )
-                    values = np.asarray([reused[int(i)] for i in indices], dtype=np.float32)
+                    values = np.asarray(
+                        [reused[int(i)] for i in indices], dtype=np.float32
+                    )
                     parts[name] = summarize(indices, values)
                 record = {
                     **position(),
@@ -1124,7 +1223,10 @@ def train(
 
     def persist_curves():
         tick = time.monotonic()
-        for name, records in [("curves", curve), ("diagnostic-curves", diagnostic_curve)]:
+        for name, records in [
+            ("curves", curve),
+            ("diagnostic-curves", diagnostic_curve),
+        ]:
             while persisted_curve_counts[name] < len(records):
                 at = persisted_curve_counts[name]
                 append_curve_record(output / (name + ".jsonl.gz"), records[at])
@@ -1159,7 +1261,10 @@ def train(
             count_encoding = _attempt_finalization(
                 "sampling-counts.npz",
                 lambda: write_sampling_counts(
-                    output / "sampling-counts.npz", ix_train, sampled_rows, attempted_rows
+                    output / "sampling-counts.npz",
+                    ix_train,
+                    sampled_rows,
+                    attempted_rows,
                 ),
                 failures,
             )
@@ -1181,8 +1286,12 @@ def train(
                     "training_row_min_visits": int(sampled_rows[ix_train].min()),
                     "training_row_max_visits": int(sampled_rows[ix_train].max()),
                     "compact_counts_file": "sampling-counts.npz" if compact else None,
-                    "compact_counts_schema": "quoridor-visit-counts-v2" if compact else None,
-                    "compact_training_index_encoding": count_encoding if compact else None,
+                    "compact_counts_schema": "quoridor-visit-counts-v2"
+                    if compact
+                    else None,
+                    "compact_training_index_encoding": count_encoding
+                    if compact
+                    else None,
                     "family_counts": {
                         family: int(sampled_rows[group].sum())
                         for family, group in zip(families, group_indices)
@@ -1195,7 +1304,9 @@ def train(
                         "independent_game_count": "UNKNOWN",
                         "saved_augmentation_rows": 0,
                     },
-                    "sampler_advanced_seen": epoch_sampler.seen if epoch_sampler else None,
+                    "sampler_advanced_seen": epoch_sampler.seen
+                    if epoch_sampler
+                    else None,
                     "packed_supply": None
                     if packed_supply is None
                     else {
@@ -1235,7 +1346,9 @@ def train(
             failures,
         )
         if failures:
-            raise BaseExceptionGroup("training numerical record persistence failures", failures)
+            raise BaseExceptionGroup(
+                "training numerical record persistence failures", failures
+            )
 
     def curve_summary(record, kind):
         result = dict(record)
@@ -1253,7 +1366,9 @@ def train(
 
     with (
         gzip.open(output / "batch.jsonl.gz", "wt", compresslevel=1) as batch_log,
-        gzip.open(output / "observations.jsonl.gz", "wt", compresslevel=1) as observation_log,
+        gzip.open(
+            output / "observations.jsonl.gz", "wt", compresslevel=1
+        ) as observation_log,
     ):
         primary_error = None
         stop_record_failures = []
@@ -1274,7 +1389,9 @@ def train(
             phase_seconds["initialization"] += time.monotonic() - supply_started
             save_named_checkpoint("initial")
             if compact and input_binding is not None:
-                verify_initial_binding(expected, output / "initial-model" / "weights.f32")
+                verify_initial_binding(
+                    expected, output / "initial-model" / "weights.f32"
+                )
             save_named_checkpoint("last")
             if unbounded:
                 evaluation_steps.add(0)
@@ -1308,7 +1425,9 @@ def train(
                         ]
                     else:
                         index = ix_train[
-                            torch.randint(len(ix_train), (batch_size,), generator=generator).numpy()
+                            torch.randint(
+                                len(ix_train), (batch_size,), generator=generator
+                            ).numpy()
                         ]
                     np.add.at(attempted_rows, index, 1)
                     planned_seen = training_seen + len(index)
@@ -1346,9 +1465,9 @@ def train(
                         prediction,
                         training_payload[0]
                         if packed_supply is not None
-                        else torch.from_numpy((labels[index, column] * target_scale).copy()).to(
-                            device
-                        ),
+                        else torch.from_numpy(
+                            (labels[index, column] * target_scale).copy()
+                        ).to(device),
                         reduction="none",
                     )
                     weights = (
@@ -1381,19 +1500,26 @@ def train(
                     if step <= cfg["training"]["warmup_steps"]:
                         for group in optimizer.param_groups:
                             group["lr"] = (
-                                cfg["optimizer"]["lr"] * step / cfg["training"]["warmup_steps"]
+                                cfg["optimizer"]["lr"]
+                                * step
+                                / cfg["training"]["warmup_steps"]
                             )
                     lr = [group["lr"] for group in optimizer.param_groups]
                     model_state_status = "UPDATE_IN_PROGRESS_OR_FAILED_UNKNOWN"
                     optimizer.step()
                     sync()
-                    if not torch.stack([torch.isfinite(v).all() for v in model.parameters()]).all():
+                    if not torch.stack(
+                        [torch.isfinite(v).all() for v in model.parameters()]
+                    ).all():
                         raise ValueError("nonfinite parameter after update")
                     completed_step = step
                     training_seen += len(index)
                     np.add.at(sampled_rows, index, 1)
                     model_state_status = "LAST_COMPLETED_UPDATE"
-                    if scheduler is not None and cfg["training"]["scheduler"] == "cosine":
+                    if (
+                        scheduler is not None
+                        and cfg["training"]["scheduler"] == "cosine"
+                    ):
                         scheduler.step()
                     phase_seconds["update"] += time.monotonic() - tick
                     if packed_supply is not None:
@@ -1424,10 +1550,15 @@ def train(
                             evaluation_steps.add(step)
                         if diagnostic_point:
                             diagnostic_steps.add(step)
-                        if evaluate(step, selector_point, diagnostic_point, full_train_point):
+                        if evaluate(
+                            step, selector_point, diagnostic_point, full_train_point
+                        ):
                             status = "EARLY_STOPPED"
                             break
-                    if not (selector_point or diagnostic_point) and step in checkpoint_steps:
+                    if (
+                        not (selector_point or diagnostic_point)
+                        and step in checkpoint_steps
+                    ):
                         save_checkpoint(step)
                 else:
                     status = "COMPLETED"
@@ -1458,7 +1589,10 @@ def train(
             )
         except BaseException as error:
             primary_error = error
-            status, fault = ("INTERRUPTED", {"type": type(error).__name__, "message": str(error)})
+            status, fault = (
+                "INTERRUPTED",
+                {"type": type(error).__name__, "message": str(error)},
+            )
             _attempt_finalization(
                 "primary_stop_record",
                 lambda: append_record(
@@ -1478,7 +1612,9 @@ def train(
             if packed_supply is not None:
                 actions.append(("supply_cleanup", packed_supply.close))
             if model_state_status == "LAST_COMPLETED_UPDATE":
-                actions.append(("last_checkpoint", lambda: save_named_checkpoint("last")))
+                actions.append(
+                    ("last_checkpoint", lambda: save_named_checkpoint("last"))
+                )
             actions.append(("persist", persist))
             _finalize_training(
                 output,
@@ -1538,7 +1674,9 @@ def train(
             persist()
     freeze = {
         "schema": "quoridor-candidate-freeze-v2",
-        "artifacts_sha256": {name: sha(output / name) for name in FROZEN_ARTIFACTS + (())},
+        "artifacts_sha256": {
+            name: sha(output / name) for name in FROZEN_ARTIFACTS + (())
+        },
         "best_step": best_step,
         "best_validation_mse": best_loss,
         "selected_exposure": best_exposure,
@@ -1621,7 +1759,10 @@ def compact_measurements(
         for dimension, codes in [
             ("source", source),
             ("phase", phase),
-            ("original_train_input_known", corpus.train_known_groups[groups].astype(np.int8)),
+            (
+                "original_train_input_known",
+                corpus.train_known_groups[groups].astype(np.int8),
+            ),
         ]:
             for code in np.unique(codes):
                 mask = codes == code
@@ -1643,12 +1784,18 @@ def compact_measurements(
         "z_game_equal_mse": group_mse,
         "distance_mse": float(distance_sum / n),
         "constant_mse": float(constant_sum / n),
-        "distance_group_equal_mse": float(np.mean(group_distance[mask] / group_counts[mask])),
-        "constant_game_equal_mse": float(np.mean(group_constant[mask] / group_counts[mask])),
+        "distance_group_equal_mse": float(
+            np.mean(group_distance[mask] / group_counts[mask])
+        ),
+        "constant_game_equal_mse": float(
+            np.mean(group_constant[mask] / group_counts[mask])
+        ),
         "z_sign_accuracy": sign_correct / n,
         "saturation_fraction": saturated / n,
         "bias": float(bias / n),
-        "strata": {k: {"rows": v[0], "target_mse": v[1] / v[0]} for k, v in strata.items()},
+        "strata": {
+            k: {"rows": v[0], "target_mse": v[1] / v[0]} for k, v in strata.items()
+        },
     }
     return report
 
@@ -1734,7 +1881,9 @@ def _curve_csv(curves, path, *, append=False):
                     point["train"].get("saturation_fraction"),
                     point["validation"].get("saturation_fraction"),
                     point.get("kind"),
-                    point.get("used_for_selection", point.get("kind") == "full_selector"),
+                    point.get(
+                        "used_for_selection", point.get("kind") == "full_selector"
+                    ),
                     "fixed_diagnostic_subset"
                     if point.get("used_for_selection") is False
                     else "full_selector",
@@ -1873,20 +2022,27 @@ def training_statistics(corpus, indices, column, size=4096):
             difference = (d[:, 1] - d[:, 0]).astype(np.float64)
             design = np.column_stack((np.ones(len(d)), difference))
             q, r = np.linalg.qr(np.vstack((r, design)), mode="reduced")
-            projected = q.T @ np.concatenate((projected, y[:, column].astype(np.float64)))
+            projected = q.T @ np.concatenate(
+                (projected, y[:, column].astype(np.float64))
+            )
     if getattr(corpus, "terminal", False):
         return (
             {
                 "mu_f32": mu64.astype(np.float32).tolist(),
                 "sigma_f32": np.maximum(
-                    np.sqrt(squared / len(indices)).astype(np.float32), np.float32(0.0001)
+                    np.sqrt(squared / len(indices)).astype(np.float32),
+                    np.float32(0.0001),
                 ).tolist(),
                 "distance_input_units": "canonical-integer-D/80",
                 "fit_partition": "train",
                 "fit_rows": len(indices),
                 "cache_manifest_sha": corpus.binding["dataset_sha"],
-                "source_stream_sha256": corpus.manifest.get("source_binding", {}).get("sha256"),
-                "family_partition_sha256": corpus.manifest.get("family_partition_sha256"),
+                "source_stream_sha256": corpus.manifest.get("source_binding", {}).get(
+                    "sha256"
+                ),
+                "family_partition_sha256": corpus.manifest.get(
+                    "family_partition_sha256"
+                ),
                 "sigma_floor_f32": float(np.float32(0.0001)),
                 "zero_variance_coordinates": (squared == 0).tolist(),
                 "target_independent": True,
@@ -1894,7 +2050,9 @@ def training_statistics(corpus, indices, column, size=4096):
             },
             {"a": 0, "b": 1, "units": "integer-steps"},
         )
-    fit, *_ = np.linalg.lstsq(r, projected, rcond=np.finfo(np.float64).eps * max(len(indices), 2))
+    fit, *_ = np.linalg.lstsq(
+        r, projected, rcond=np.finfo(np.float64).eps * max(len(indices), 2)
+    )
     return (
         {
             "mu_f32": mu64.astype(np.float32).tolist(),
@@ -1912,10 +2070,12 @@ def verify_native_parameters(path, state):
     native = np.memmap(path, dtype="<f4", mode="r")
     offset = 0
     for key in ("ft.weight", "ft.bias", "h.weight", "h.bias", "out.weight", "out.bias"):
-        values = state[key].detach().numpy().reshape(-1)
+        values = state[key].detach().cpu().numpy().reshape(-1)
         for first in range(0, len(values), 4096):
             part = values[first : first + 4096]
-            if not np.array_equal(part, native[offset + first : offset + first + len(part)]):
+            if not np.array_equal(
+                part, native[offset + first : offset + first + len(part)]
+            ):
                 raise ValueError("frozen checkpoint/native parameters differ")
         offset += len(values)
     if offset != len(native):
@@ -1956,17 +2116,23 @@ def test(cache, training, output):
     primary_count = int(corpus.eligible[test_index].sum())
     checkpoint_predictions = {}
     size = cfg["evaluation"]["batch_size"]
-    checkpoint_names = ("best",) if getattr(corpus, "compact", False) else ("initial", "best")
+    checkpoint_names = (
+        ("best",) if getattr(corpus, "compact", False) else ("initial", "best")
+    )
     for name in checkpoint_names:
         digest = freeze["artifacts_sha256"][name + "-model/weights.f32"]
-        cp = torch.load(training / (name + ".pt"), map_location="cpu", weights_only=True)
+        cp = torch.load(
+            training / (name + ".pt"), map_location="cpu", weights_only=True
+        )
         if (
             cp["model_config"] != cfg["model"]
             or cp["scale"] != stats
             or cp["target"] != target
             or (cp["dataset_sha"] != freeze["dataset_sha"])
         ):
-            raise ValueError("checkpoint descriptor differs from frozen evaluation configuration")
+            raise ValueError(
+                "checkpoint descriptor differs from frozen evaluation configuration"
+            )
         verify_native_parameters(training / (name + "-model/weights.f32"), cp["model"])
         if digest not in checkpoint_predictions:
             model.load_state_dict(cp["model"])
@@ -2128,8 +2294,14 @@ def main():
         return
     if args.command == "train":
         if args.guard_config:
-            if args.supply_workers is not None or args.steps is not None or args.scale is not None:
-                parser.error("guarded training uses only its fixed config/input binding")
+            if (
+                args.supply_workers is not None
+                or args.steps is not None
+                or args.scale is not None
+            ):
+                parser.error(
+                    "guarded training uses only its fixed config/input binding"
+                )
             guarded_train(args.guard_config)
             return
         print(
@@ -2164,9 +2336,9 @@ def restore_warmstart_parameters(model, weights):
             if tuple(state[name].shape) != shape or state[name].dtype != torch.float32:
                 raise ValueError("native warm-start tensor shape/dtype")
             state[name].copy_(
-                torch.tensor(values[name], dtype=torch.float32, device=state[name].device).reshape(
-                    shape
-                )
+                torch.tensor(
+                    values[name], dtype=torch.float32, device=state[name].device
+                ).reshape(shape)
             )
     if any(not p.requires_grad for p in model.parameters()):
         raise ValueError("warm-start may not freeze/reset a head or transformer")

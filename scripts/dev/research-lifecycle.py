@@ -3714,9 +3714,11 @@ def collect_data(spec, experiment):
             if (
                 experiment["phase"] == "materialize"
                 and item["name"] in COMPACT_CACHE_WIDTHS
-            ):
+            ) or (experiment["phase"] == "corpus" and item["name"] == "pilot_stream"):
                 ref = artifact_ref(item["path"])
-                require(ref["bytes"] <= item["limit_B"], "declared compact output size")
+                require(
+                    ref["bytes"] <= item["limit_B"], "declared streamed output size"
+                )
                 data["files"].append(ref)
             else:
                 ref, raw = bound(item["path"], item["limit_B"])
@@ -4057,7 +4059,10 @@ def collect_data(spec, experiment):
                 if "stream_content" in values:
                     content = json.loads(values["stream_content"])
                     ref = content["compressed"]
-                    read_ref(ref, ref["bytes"])
+                    require(
+                        artifact_ref(ref["path"]) == ref,
+                        "canonical corpus stream identity drift",
+                    )
                     data["canonical_compressed_source"] = ref
                     data["raw_content_sha256"] = content["raw_sha256"]
                     data["raw_content_B"] = content["raw_bytes"]
@@ -5208,7 +5213,7 @@ def prepare_selected_operation(settings_ref, kind, index):
             "configured RUN with nonempty finalizers unsupported before ownership",
         )
     phase = owned(
-        Path(spec["owner"]) / Path(settings["output"]).name / f"{kind}-{index:03d}",
+        Path(settings["output"]) / f"{kind}-{index:03d}",
         spec["owner"],
     )
     require(not phase.exists(), "selected operation already exists; never replay")
