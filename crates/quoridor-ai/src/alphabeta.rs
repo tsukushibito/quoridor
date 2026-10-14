@@ -713,13 +713,15 @@ impl Table {
         Self::with_limit(n, usize::MAX)
     }
     fn persistent(n: usize) -> Result<Self> {
-        Self::with_limit(n.min(4096), 1024 * 1024)
+        Self::with_limit(n, Self::requested_bytes(n)?.max(1024 * 1024))
+    }
+    fn requested_bytes(n: usize) -> Result<usize> {
+        n.checked_mul(std::mem::size_of::<Option<Entry>>())
+            .and_then(|b| b.checked_add(std::mem::size_of::<Self>()))
+            .ok_or_else(|| SearchError::Limits("transposition table byte overflow".into()))
     }
     fn with_limit(n: usize, byte_limit: usize) -> Result<Self> {
-        let estimate = n
-            .checked_mul(std::mem::size_of::<Option<Entry>>())
-            .and_then(|b| b.checked_add(std::mem::size_of::<Self>()))
-            .ok_or_else(|| SearchError::Limits("transposition table byte overflow".into()))?;
+        let estimate = Self::requested_bytes(n)?;
         if estimate > byte_limit {
             return Err(SearchError::Limits("transposition table byte limit".into()));
         }
@@ -1700,6 +1702,8 @@ impl SearchSession {
     }
     /// An immutable evaluator is owned by the session, so unchanged namespace
     /// text cannot accidentally substitute different weights between moves.
+    /// Capacity is the requested slot count, without a persistent-table clamp.
+    /// Allocation is fallible; live retained bytes are reported separately.
     pub fn new(
         evaluator: Arc<dyn StaticEvaluator>,
         namespace: SearchNamespace,
@@ -2253,7 +2257,7 @@ mod persistent_tt_tests {
                 .is_none()
         );
         // Artificial board encodings demonstrate fixed retention, not replay validity.
-        let mut capped = Table::persistent(65536).unwrap();
+        let mut capped = Table::persistent(4096).unwrap();
         assert_eq!(capped.slots.len(), 4096);
         capped.next_generation();
         for i in 0..512u16 {
@@ -2284,7 +2288,7 @@ mod persistent_tt_tests {
             serde_json::json!({"fixture_prefix":prefix,"root_legal":root.legal_ids(),"history":root.history_counts().len()})
         );
         let e: Arc<dyn StaticEvaluator> = Arc::new(DistanceEvaluator::new(0., 8.));
-        let mut session = SearchSession::new(e.clone(), ns("D0,8:tanh"), 65536).unwrap();
+        let mut session = SearchSession::new(e.clone(), ns("D0,8:tanh"), 4096).unwrap();
         let seed = run(&mut session, &root, 3);
         emit("seed-depth3", &seed);
         assert_eq!(seed.completed_depth, 3);
@@ -3353,6 +3357,10 @@ mod research_threefold_tests {
 #[cfg(test)]
 #[path = "compact_tt359_tests.rs"]
 mod compact_tt359_tests;
+
+#[cfg(all(test, feature = "research"))]
+#[path = "tt_capacity397_tests.rs"]
+mod tt_capacity397_tests;
 
 #[cfg(test)]
 #[path = "continuation360_tests.rs"]

@@ -183,7 +183,7 @@ fn compact359_fixed_layout_admission_allocation_and_paired_hash() {
     assert!(std::mem::size_of::<Entry>() <= 96);
     assert!(std::mem::size_of::<Option<Entry>>() <= 104);
     let c = SigmaContext::from_prefix(&[]).unwrap();
-    let mut t = Table::persistent(65536).unwrap();
+    let mut t = Table::persistent(4096).unwrap();
     assert_eq!(t.slots.len(), 4096);
     let fixed = t.retained_bytes();
     println!(

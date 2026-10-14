@@ -1838,7 +1838,7 @@ fn worker(
                             config.arena.as_ref().map_or(0, |a| a.return_reserve_ms),
                         ))
                     }),
-                    tt_entries: config.arena.as_ref().map_or(65536, |a| a.tt_entries),
+                    tt_entries: config.arena.as_ref().map_or(4096, |a| a.tt_entries),
                     use_pvs: true,
                     use_tt: true,
                 };
@@ -5044,6 +5044,62 @@ mod completed_error_tests {
 mod live_caller_clock_tests {
     use super::*;
     #[test]
+    fn tt_capacity397_runtime_requested_effective_and_retained_precancel() {
+        let root = SigmaContext::from_prefix(&[]).unwrap();
+        let before = root.clone();
+        for requested in [4096, 1_048_576] {
+            let mut session = None;
+            let mut profile = TtProfile::default();
+            let limits = SearchLimits {
+                max_depth: 1,
+                max_nodes: 1,
+                time_limit: None,
+                tt_entries: requested,
+                use_pvs: true,
+                use_tt: true,
+            };
+            let result = invoke_alpha_observed(
+                &mut session,
+                &mut profile,
+                Arc::new(DistanceEvaluator::new(0., 8.)),
+                alphabeta::SearchNamespace {
+                    evaluator: "397-D0,8:tanh-caller-capacity".into(),
+                    rules: "research-standard-2p-threefold-goal-first-v1".into(),
+                    selectivity: "fullwidth-PVS-MPC-OFF-v1".into(),
+                },
+                &root,
+                &limits,
+                &AtomicBool::new(true),
+                Instant::now(),
+                alphabeta::SearchSession::new,
+                None,
+                None,
+                Duration::ZERO,
+                None,
+            )
+            .unwrap();
+            assert_eq!(result.stop, alphabeta::StopReason::Cancelled);
+            assert_eq!(result.completed_depth, 0);
+            assert!(result.value.is_none());
+            assert_eq!(profile.requested_tt_entries, Some(requested));
+            assert_eq!(profile.effective_tt_slots, Some(requested));
+            let actual = session.as_ref().unwrap();
+            assert_eq!(profile.persistent_tt_byte_cap, Some(actual.tt_capacity().1));
+            assert_eq!(
+                profile.retained_bytes_peak,
+                actual.retained_memory_bytes().0
+            );
+            assert!(profile.retained_bytes_peak <= actual.tt_capacity().1);
+            if requested == 4096 {
+                assert_eq!(actual.tt_capacity().1, 1024 * 1024);
+            }
+            assert_eq!(root.position(), before.position());
+            assert_eq!(root.total_ply(), before.total_ply());
+            assert_eq!(root.history_counts(), before.history_counts());
+        }
+    }
+
+    #[test]
     fn distance_live_deadline_completed_cap_cancel_and_tt_nn0() {
         let root = SigmaContext::from_prefix(&[]).unwrap();
         let root_history = root.history_counts();
@@ -5058,7 +5114,7 @@ mod live_caller_clock_tests {
                     1_000_000
                 },
                 time_limit: Some(Duration::from_millis(100)),
-                tt_entries: 65536,
+                tt_entries: 4096,
                 use_pvs: false,
                 use_tt: true,
             };
@@ -5097,7 +5153,7 @@ mod live_caller_clock_tests {
                 legal,
                 r.completed_depth > 0,
             );
-            assert_eq!(profile.requested_tt_entries, Some(65536));
+            assert_eq!(profile.requested_tt_entries, Some(4096));
             assert_eq!(profile.effective_tt_slots, Some(4096));
             assert_eq!(profile.persistent_tt_byte_cap, Some(1024 * 1024));
             assert!(profile.retained_bytes_peak <= 1024 * 1024);
