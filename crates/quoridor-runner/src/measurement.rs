@@ -87,6 +87,8 @@ struct Request {
     diagnostic: bool,
     #[serde(default)]
     warmup: bool,
+    #[serde(default)]
+    observe_completed_depths: bool,
 }
 #[derive(Clone, Debug)]
 struct RootSpec {
@@ -320,7 +322,14 @@ impl Target for SearchTarget {
             use_tt: self.settings.use_tt,
         };
         let search_started = Instant::now();
-        let result = session.search(root, &limits, cancel);
+        let mut completed_depths = Vec::new();
+        let result = if request.observe_completed_depths {
+            session.search_with_updates(root, &limits, cancel, &mut |completed| {
+                completed_depths.push(completed_depth_observation(completed));
+            })
+        } else {
+            session.search(root, &limits, cancel)
+        };
         let search_seconds = search_started.elapsed().as_secs_f64();
         let after = identity(root);
         let mut row = match result {
@@ -344,6 +353,9 @@ impl Target for SearchTarget {
             }
             Err(error) => json!({"status":"UNKNOWN","returned":"Err","error":fact(&error)}),
         };
+        if request.observe_completed_depths {
+            row["completed_depth_observations"] = json!(completed_depths);
+        }
         row["Search_call_seconds"] = json!(search_seconds);
         row["parent_unchanged"] = json!(after == self.before);
         if after != self.before {
@@ -625,12 +637,61 @@ fn owned_output(intent: &Value) -> Result<PathBuf> {
     }
     Ok(root)
 }
+// The existing completed-depth callback is outside per-node hot paths. These
+// are cumulative actual counters, not predicted branching/cost or a D6 result.
+fn completed_depth_observation(r: &SearchResult) -> Value {
+    let s = &r.stats;
+    json!({"completed_depth":r.completed_depth,"action":r.action,
+        "value_bits":r.value.map(f32::to_bits),"elapsed_seconds":r.elapsed.as_secs_f64(),
+        "cumulative_work":{"nodes":s.nodes,"evaluations":s.evaluations,
+            "terminal":s.terminal,"cutoffs":s.cutoffs,"TT_probes":s.tt_probes,
+            "TT_hits":s.tt_hits,"TT_usable_depth":s.tt_usable_depth,
+            "TT_cutoffs":s.tt_cutoffs,"TT_order_only":s.tt_order_only,
+            "TT_index_collisions":s.tt_index_collisions,"TT_replacements":s.tt_replacements,
+            "PVS_researches":s.pvs_researches,"delta_updates":s.delta_updates,
+            "TT_generation":s.tt_generation,"TT_retained_bytes":s.tt_retained_bytes}})
+}
 fn observed(r: &SearchResult) -> Value {
     let s = &r.stats;
     let o = &s.ordering;
-    json!({"returned":"Ok","action":r.action,"value":r.value,"value_bits":r.value.map(f32::to_bits),"completed_depth":r.completed_depth,"PV":r.pv,"stop":format!("{:?}",r.stop),"Search_internal_elapsed_seconds":r.elapsed.as_secs_f64(),
+    let mut result = json!({"returned":"Ok","action":r.action,"value":r.value,"value_bits":r.value.map(f32::to_bits),"completed_depth":r.completed_depth,"PV":r.pv,"stop":format!("{:?}",r.stop),"Search_internal_elapsed_seconds":r.elapsed.as_secs_f64(),
         "work":{"nodes":s.nodes,"evaluations":s.evaluations,"terminal":s.terminal,"cutoffs":s.cutoffs,"TT_hits":s.tt_hits,"TT_probes":s.tt_probes,"TT_exact_hits":s.tt_exact_hits,"TT_key_builds":s.tt_key_builds,"tt_context_initial_items":s.tt_context_initial_items,"tt_context_transitions":s.tt_context_transitions,"tt_board_hash_reads":s.tt_board_hash_reads,"tt_board_hash_updates":s.tt_board_hash_updates,"tt_context_matches":s.tt_context_matches,"tt_context_misses":s.tt_context_misses,"tt_order_context_mismatch":s.tt_order_context_mismatch,"tt_hash_collisions":s.tt_hash_collisions,"tt_index_collisions":s.tt_index_collisions,"TT_hashes":s.tt_hashes,"TT_usable_depth":s.tt_usable_depth,"TT_order_only":s.tt_order_only,"TT_collisions":s.tt_collisions,"TT_replacements":s.tt_replacements,"TT_capacity_skips":s.tt_capacity_skips,"TT_illegal_moves":s.tt_illegal_moves,"TT_retained_bytes":s.tt_retained_bytes,"TT_generation":s.tt_generation,"TT_cutoffs":s.tt_cutoffs,"PVS_researches":s.pvs_researches,"delta_updates":s.delta_updates,"policy_calls":s.policy_calls},
-        "ordering":{"ordered_nodes":o.ordered_nodes,"scored_actions":o.scored_actions,"nonzero_dynamic_actions":o.nonzero_dynamic_actions,"nonzero_combined_actions":o.nonzero_combined_actions,"nonzero_continuation_actions":o.nonzero_continuation_actions,"history_changed_nodes":o.history_changed_nodes,"completed_cutoff_events":o.completed_cutoff_events,"cutoff_rank_sum":o.cutoff_rank_sum,"first_child_cutoffs":o.first_child_cutoffs,"positive_actions":o.positive_actions,"negative_actions":o.negative_actions,"continuation_updates":o.continuation_updates,"age_passes":o.age_passes,"static_parents":o.static_parents,"borrowed_goal_maps":o.borrowed_goal_maps,"computed_goal_map_pairs":o.computed_goal_map_pairs,"cheap_static_parents":o.cheap_static_parents,"missing_goal_map_pairs":o.missing_goal_map_pairs,"available_goal_map_pairs":o.available_goal_map_pairs,"nonzero_static_actions":o.nonzero_static_actions,"exact_goal_actions":o.exact_goal_actions,"static_changed_nodes":o.static_changed_nodes}})
+        "ordering":{"ordered_nodes":o.ordered_nodes,"scored_actions":o.scored_actions,"nonzero_dynamic_actions":o.nonzero_dynamic_actions,"nonzero_combined_actions":o.nonzero_combined_actions,"nonzero_continuation_actions":o.nonzero_continuation_actions,"history_changed_nodes":o.history_changed_nodes,"completed_cutoff_events":o.completed_cutoff_events,"cutoff_rank_sum":o.cutoff_rank_sum,"first_child_cutoffs":o.first_child_cutoffs,"positive_actions":o.positive_actions,"negative_actions":o.negative_actions,"continuation_updates":o.continuation_updates,"age_passes":o.age_passes,"static_parents":o.static_parents,"borrowed_goal_maps":o.borrowed_goal_maps,"computed_goal_map_pairs":o.computed_goal_map_pairs,"cheap_static_parents":o.cheap_static_parents,"missing_goal_map_pairs":o.missing_goal_map_pairs,"available_goal_map_pairs":o.available_goal_map_pairs,"nonzero_static_actions":o.nonzero_static_actions,"exact_goal_actions":o.exact_goal_actions,"static_changed_nodes":o.static_changed_nodes}});
+    if let Some(w) = o.work.as_deref() {
+        result["ordering"]["work"] = json!({
+            "nodes_started": w.nodes_started,
+            "nodes_finished": w.nodes_finished,
+            "roots_finished": w.roots_finished,
+            "preparation_calls_started": w.preparation_calls_started,
+            "preparation_actions_requested": w.preparation_actions_requested,
+            "sort_calls_started": w.sort_calls_started,
+            "sort_actions_started": w.sort_actions_started,
+            "nontrivial_sort_calls_started": w.nontrivial_sort_calls_started,
+            "sorted_reads_started": w.sorted_reads_started,
+            "sorted_returns_started": w.sorted_returns_started,
+            "tt_first_reads_started": w.tt_first_reads_started,
+            "tt_first_returns_started": w.tt_first_returns_started,
+            "sort_nodes_finished": w.sort_nodes_finished,
+            "scored_actions_finished": w.scored_actions_finished,
+            "sort_actions_finished": w.sort_actions_finished,
+            "nontrivial_sort_nodes_finished": w.nontrivial_sort_nodes_finished,
+            "sorted_reads_finished": w.sorted_reads_finished,
+            "sorted_returns_finished": w.sorted_returns_finished,
+            "tt_first_returns_finished": w.tt_first_returns_finished,
+            "cutoff_nodes_finished": w.cutoff_nodes_finished,
+            "cutoff_unread_sorted_actions": w.cutoff_unread_sorted_actions,
+            "all_sorted_read_nodes": w.all_sorted_read_nodes,
+            "first_sorted_cutoff_nodes": w.first_sorted_cutoff_nodes,
+            "tt_only_no_sort_cutoff_nodes": w.tt_only_no_sort_cutoff_nodes,
+            "empty_sorted_nodes_finished": w.empty_sorted_nodes_finished,
+            "single_sorted_nodes_finished": w.single_sorted_nodes_finished,
+            "sort_size_started": w.sort_size_started,
+            "sort_size_finished": w.sort_size_finished,
+            "consumed_fraction_finished": w.consumed_fraction_finished,
+            "nodes_unfinished": w.nodes_started - w.nodes_finished
+        });
+    }
+    result
 }
 fn validate_return(
     root: &SigmaContext,
@@ -825,6 +886,7 @@ mod tests {
             time_limit_ms: None,
             diagnostic: false,
             warmup: false,
+            observe_completed_depths: false,
         }
     }
     fn fake(factor: u64) -> Fake {
@@ -971,3 +1033,7 @@ mod tests {
         fs::remove_dir_all(root).unwrap();
     }
 }
+
+#[cfg(test)]
+#[path = "measurement_ordering394_tests.rs"]
+mod measurement_ordering394_tests;

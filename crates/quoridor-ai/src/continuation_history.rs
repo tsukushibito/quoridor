@@ -19,6 +19,8 @@ pub enum OrderingProfile {
 
 #[derive(Clone, Debug, Default)]
 pub struct OrderingStats {
+    /// None with observation OFF; existing cutoff-rank fields keep their old scope.
+    pub work: Option<Box<OrderingWorkStats>>,
     pub ordered_nodes: u64,
     pub scored_actions: u64,
     pub nonzero_dynamic_actions: u64,
@@ -290,5 +292,153 @@ mod tests {
             history.prepare_scores(other, &path).score(81),
             (-114_688, true)
         );
+    }
+}
+
+/// Observation-only work. Absent with observation OFF: no histogram allocation,
+/// move/history snapshot, extra move scan, or prepared-ID copy.
+#[derive(Clone, Debug, Default)]
+pub struct OrderingWorkStats {
+    pub nodes_started: u64,
+    pub nodes_finished: u64,
+    pub roots_finished: u64,
+    pub preparation_calls_started: u64,
+    pub preparation_actions_requested: u64,
+    pub sort_calls_started: u64,
+    pub sort_actions_started: u64,
+    pub nontrivial_sort_calls_started: u64,
+    pub sorted_reads_started: u64,
+    pub sorted_returns_started: u64,
+    pub tt_first_reads_started: u64,
+    pub tt_first_returns_started: u64,
+    pub sort_nodes_finished: u64,
+    pub scored_actions_finished: u64,
+    pub sort_actions_finished: u64,
+    pub nontrivial_sort_nodes_finished: u64,
+    pub sorted_reads_finished: u64,
+    pub sorted_returns_finished: u64,
+    pub tt_first_returns_finished: u64,
+    pub cutoff_nodes_finished: u64,
+    pub cutoff_unread_sorted_actions: u64,
+    pub all_sorted_read_nodes: u64,
+    pub first_sorted_cutoff_nodes: u64,
+    pub tt_only_no_sort_cutoff_nodes: u64,
+    pub empty_sorted_nodes_finished: u64,
+    pub single_sorted_nodes_finished: u64,
+    /// Sort sizes: 0, 1, 2..4, 5..16, 17..64, 65..209.
+    pub sort_size_started: [u64; 6],
+    pub sort_size_finished: [u64; 6],
+    /// Consumption: empty, none, <=1/4, <=1/2, partial>1/2, all.
+    pub consumed_fraction_finished: [u64; 6],
+}
+
+fn sort_size_bucket(size: usize) -> usize {
+    match size {
+        0 => 0,
+        1 => 1,
+        2..=4 => 2,
+        5..=16 => 3,
+        17..=64 => 4,
+        _ => 5,
+    }
+}
+
+impl OrderingStats {
+    pub(super) fn work_mut(&mut self) -> &mut OrderingWorkStats {
+        self.work.get_or_insert_with(Box::default)
+    }
+    pub(super) fn observe_preparation(&mut self, size: usize) {
+        let work = self.work_mut();
+        work.preparation_calls_started += 1;
+        work.preparation_actions_requested += size as u64;
+    }
+    pub(super) fn observe_sort(&mut self, size: usize) {
+        let work = self.work_mut();
+        work.sort_calls_started += 1;
+        work.sort_actions_started += size as u64;
+        work.nontrivial_sort_calls_started += u64::from(size > 1);
+        work.sort_size_started[sort_size_bucket(size)] += 1;
+    }
+}
+
+/// Four scalar consumption facts at one active node, constructed only with ON.
+/// Re-search of the same PVS action is inside one read/terminal-return pair.
+pub(super) struct OrderingNodeWork {
+    pub sorted_size: Option<usize>,
+    sorted_reads: usize,
+    sorted_returns: usize,
+    tt_first_returned: bool,
+    last_sorted: bool,
+    root: bool,
+}
+impl OrderingNodeWork {
+    pub fn start(stats: &mut OrderingStats, root: bool) -> Self {
+        stats.work_mut().nodes_started += 1;
+        Self {
+            sorted_size: None,
+            sorted_reads: 0,
+            sorted_returns: 0,
+            tt_first_returned: false,
+            last_sorted: false,
+            root,
+        }
+    }
+    pub fn read(&mut self, sorted: bool, stats: &mut OrderingStats) {
+        self.last_sorted = sorted;
+        if sorted {
+            self.sorted_reads += 1;
+            stats.work_mut().sorted_reads_started += 1;
+        } else {
+            stats.work_mut().tt_first_reads_started += 1;
+        }
+    }
+    pub fn returned(&mut self, stats: &mut OrderingStats) {
+        if self.last_sorted {
+            self.sorted_returns += 1;
+            stats.work_mut().sorted_returns_started += 1;
+        } else {
+            self.tt_first_returned = true;
+            stats.work_mut().tt_first_returns_started += 1;
+        }
+    }
+    /// Called after the original node control/restoration and TT publication.
+    /// Stops/errors leave started work unmatched, never a zero-work completion.
+    pub fn finish(self, stats: &mut OrderingStats, cutoff: bool) {
+        let work = stats.work_mut();
+        work.nodes_finished += 1;
+        work.roots_finished += u64::from(self.root);
+        work.cutoff_nodes_finished += u64::from(cutoff);
+        work.tt_first_returns_finished += u64::from(self.tt_first_returned);
+        if let Some(size) = self.sorted_size {
+            work.sort_nodes_finished += 1;
+            work.scored_actions_finished += size as u64;
+            work.sort_actions_finished += size as u64;
+            work.nontrivial_sort_nodes_finished += u64::from(size > 1);
+            work.sorted_reads_finished += self.sorted_reads as u64;
+            work.sorted_returns_finished += self.sorted_returns as u64;
+            work.cutoff_unread_sorted_actions +=
+                u64::from(cutoff) * (size - self.sorted_reads) as u64;
+            work.all_sorted_read_nodes += u64::from(size == self.sorted_reads);
+            work.first_sorted_cutoff_nodes += u64::from(cutoff && self.sorted_reads == 1);
+            work.empty_sorted_nodes_finished += u64::from(size == 0);
+            work.single_sorted_nodes_finished += u64::from(size == 1);
+            work.sort_size_finished[sort_size_bucket(size)] += 1;
+            let fraction = if size == 0 {
+                0
+            } else if self.sorted_reads == 0 {
+                1
+            } else if self.sorted_reads == size {
+                5
+            } else if self.sorted_reads * 4 <= size {
+                2
+            } else if self.sorted_reads * 2 <= size {
+                3
+            } else {
+                4
+            };
+            work.consumed_fraction_finished[fraction] += 1;
+        } else {
+            work.tt_only_no_sort_cutoff_nodes += u64::from(cutoff && self.tt_first_returned);
+        }
     }
 }

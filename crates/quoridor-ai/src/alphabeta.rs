@@ -17,7 +17,7 @@ mod continuation_history;
 #[cfg(feature = "research-diagnostics")]
 pub use continuation_history::OrderingProfile;
 pub use continuation_history::OrderingStats;
-use continuation_history::{ContinuationHistory, PlayedMove};
+use continuation_history::{ContinuationHistory, OrderingNodeWork, PlayedMove};
 #[cfg(feature = "research-diagnostics")]
 #[path = "cheap_static_ordering.rs"]
 mod cheap_static_ordering;
@@ -968,6 +968,9 @@ impl Search<'_> {
         ply: usize,
         mut ids: Vec<u16>,
     ) -> NodeResult<Vec<u16>> {
+        if self.ordering_diagnostics {
+            self.stats.ordering.observe_preparation(ids.len());
+        }
         let scores = self.ordering_scores(c, accumulator, &ids)?;
         #[cfg(feature = "research-diagnostics")]
         let history = if self.ordering.is_none() {
@@ -985,6 +988,9 @@ impl Search<'_> {
             self.orderer.map(|_| &scores.policy),
             history,
         );
+        if self.ordering_diagnostics {
+            self.stats.ordering.observe_sort(ids.len());
+        }
         if matches!(
             self.static_scratch.as_ref(),
             Some(StaticScratch::CheapControl)
@@ -1309,6 +1315,9 @@ impl Search<'_> {
             None
         };
         let mut deferred = None;
+        let mut node_work = self
+            .ordering_diagnostics
+            .then(|| OrderingNodeWork::start(&mut self.stats.ordering, false));
         // Ordering diagnostics cover only actions actually prepared below.
         // A TT-only cutoff still has one returned child/cutoff event, but no
         // scored node or sibling scores; OFF adds no observation work.
@@ -1318,6 +1327,9 @@ impl Search<'_> {
         } else {
             Some(self.ordered(c, a, tt_move, ply, legal)?.into_iter())
         };
+        if let Some(work) = node_work.as_mut() {
+            work.sorted_size = moves.as_ref().map(|moves| moves.len());
+        }
         self.control()?;
         if moves
             .as_ref()
@@ -1338,6 +1350,9 @@ impl Search<'_> {
         let mut i = 0usize;
         loop {
             let action = if let Some(action) = first_tt.take() {
+                if let Some(work) = node_work.as_mut() {
+                    work.read(false, &mut self.stats.ordering);
+                }
                 action
             } else {
                 if let Some(mut remaining) = deferred.take() {
@@ -1348,11 +1363,17 @@ impl Search<'_> {
                         break;
                     }
                     moves = Some(self.ordered(c, a, None, ply, remaining)?.into_iter());
+                    if let Some(work) = node_work.as_mut() {
+                        work.sorted_size = moves.as_ref().map(|moves| moves.len());
+                    }
                     self.control()?;
                 }
                 let Some(action) = moves.as_mut().and_then(|moves| moves.next()) else {
                     break;
                 };
+                if let Some(work) = node_work.as_mut() {
+                    work.read(true, &mut self.stats.ordering);
+                }
                 action
             };
             let mut v = if self.limits.use_pvs && i > 0 && alpha.is_finite() {
@@ -1363,6 +1384,9 @@ impl Search<'_> {
             if self.limits.use_pvs && i > 0 && v > alpha && v < beta {
                 self.stats.pvs_researches += 1;
                 v = self.child(c, a, action, depth - 1, [alpha, beta], ply + 1)?;
+            }
+            if let Some(work) = node_work.as_mut() {
+                work.returned(&mut self.stats.ordering);
             }
             if let Some(actions) = returned.as_mut() {
                 actions[returned_count] = action;
@@ -1444,6 +1468,9 @@ impl Search<'_> {
                 &mut self.stats,
             );
         }
+        if let Some(work) = node_work {
+            work.finish(&mut self.stats.ordering, cutoff_winner.is_some());
+        }
         Ok(value)
     }
     fn root_depth(
@@ -1477,11 +1504,20 @@ impl Search<'_> {
                 }
             }
         }
+        let mut node_work = self
+            .ordering_diagnostics
+            .then(|| OrderingNodeWork::start(&mut self.stats.ordering, true));
         let moves = self.ordered(c, a, previous, 0, legal.unwrap_or_else(|| c.legal_ids()))?;
+        if let Some(work) = node_work.as_mut() {
+            work.sorted_size = Some(moves.len());
+        }
         self.control()?;
         let mut value = f32::NEG_INFINITY;
         let mut best = None;
         for (i, action) in moves.into_iter().enumerate() {
+            if let Some(work) = node_work.as_mut() {
+                work.read(true, &mut self.stats.ordering);
+            }
             let mut v = if self.limits.use_pvs && i > 0 {
                 self.child(c, a, action, depth - 1, [value, next_up(value)], 1)?
             } else {
@@ -1490,6 +1526,9 @@ impl Search<'_> {
             if self.limits.use_pvs && i > 0 && v > value {
                 self.stats.pvs_researches += 1;
                 v = self.child(c, a, action, depth - 1, [value, f32::INFINITY], 1)?;
+            }
+            if let Some(work) = node_work.as_mut() {
+                work.returned(&mut self.stats.ordering);
             }
             if v > value {
                 value = v;
@@ -1516,6 +1555,9 @@ impl Search<'_> {
                 },
                 &mut self.stats,
             );
+        }
+        if let Some(work) = node_work {
+            work.finish(&mut self.stats.ordering, false);
         }
         Ok((best, value))
     }
@@ -3395,3 +3437,7 @@ mod fixed_d392_factory_tests {
         assert!(static_ordering::goals_only(p, &[209]).is_err());
     }
 }
+
+#[cfg(all(test, feature = "research-diagnostics"))]
+#[path = "ordering_work394_tests.rs"]
+mod ordering_work394_tests;
