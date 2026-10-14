@@ -1476,3 +1476,16 @@ whole中央値O11.607296245秒／N11.560028594秒、N/O0.995927764（観測上�
 距離マップ再計算削減は、親のH/V一致を優先し、不一致時のみ既存child bufferのimmutable wall mapを既存一致判定へ渡す小差分をsource候補として統合した（Main ada27a0）。新5 toy FT/geometry確認、research compile、NNUE/researchとAI/research-diagnostics Clippy、真正BUILDが実PASS。限定cache/geometry/error reviewはsource_clear=true／blockers0／ordinary0で、private geometryからpublic FT/features/modelの正常性を推定せず、部分失敗childは成功上書き前に評価しない境界を確認した。source/software成功から実hit頻度・利益はまだ分からない。Nの真正imageはced70ad8／Buildf4482c31、実software outer98.862206789秒、実STOPで全子回収・TMP消去・owned[]を確認した。
 
 人間の「可能な限り並列で」「自律的に」という直接指示により、このmap一候補はaccepted TT-firstとのControl24 calls／12sessions／72Mの有限採否まで承認された。当初の数値提示待ちを通常工程の入口にせず、同義の全workを含む対応と既定whole基準を検証する。TT-first元結果のwork差/旧exact_order_work_status FAILは変更しない。独立して混合学習の実運用準備を既存学習担当へ配分し、381の成功interop/softwareを再演せず、current refs・未選択proposal・既存4batches→train→初回256評価の接続・限定保存/物理資源観測を整える。人間への科学委任一括確認は未回答であり、推奨cap64／newD-V選定／whole8GiB部分停止等を選択済みにせず、生成/fit/forward/Search/新対局はこの準備から発行しない。速度測定中だけ重い準備を実STOPへ調整し、その終了で再開する。旧RAW/FAILED/費/UNKNOWN、323USERPAUSE／fits96／models/defaults/N/sealsを維持する。
+
+距離マップ再計算削減の有限比較はControl O→N→N→Oの24 calls／12 sessionsが全COMPLETEで、全6rootsのdepth/valuebits/action/exactPV/全30記録work/legalsets/fullhistoryroot/parent復元が一致した。[保存比較](../.artifacts/research-team/integration324/nnue-map-reuse387-v1/finite24-v1/collection-v1/report-ja.md)のOはaccepted TT-first c5333ce8／Build5b203d6a、Nはmap差分ced70ad8／Buildf4482c31。BEST43／TT4096／PVS／同6roots・rules・inputs・D4各2M/D6各8Mで、実nodes28,197,548／72M、各pass7,049,387 nodes／5,173,451 evaluations。TT-first元結果のwork差・exact_order_work_status FAILは別原物で保全する。今回は全記録探索workの一致であり、内部のBFS回数まで同じという意味ではない。実cache hit頻度・実skip BFS件数は未記録のUNKNOWNである。
+
+| 距離マップ比較pass | setup/drop込みwhole秒 |
+| ------------------ | --------------------: |
+| O-before           |          11.610439640 |
+| N-first            |          11.755304776 |
+| N-second           |          11.498141783 |
+| O-after            |          11.664649855 |
+
+whole中央値O11.637544748秒／N11.626723279秒、N/O0.999070124（観測上約0.093%短い）、同rootの両NがともにO中央値×1.10超の例0で、指定した一度の有限条件を満たしmap一差分を保持する。N-firstは両Oより遅くN-secondは両Oより速い。warm localply4の片方は約8.18%遅い。差の小ささ・2回/版のばらつきから、統計的有意差・再現性・全局面改善・一般speedup・棋力・defaultを推定しない。post387 hotspot shareや回避BFSの個別時間もUNKNOWNのままで、追加sampling/refill/tuning/rootsを発行しない。
+
+[元95file exact-byte証拠のGit receipt](../research-data/ai-sigma/nnue-map-reuse387/receipt.json)に設定・全結果/journal・BUILD/software logs・review・原版差を対応させた。実job99dad725 outer68.847853582秒とsoftware a65b2410 outer98.862206789秒は別記、source失敗/format/guard費はauthor原物に保持しnested費を重複加算しない。[実STOP](../.artifacts/research-team/integration324/nnue-map-reuse387-v1/finite24-v1/STOP.json)で全元native/guardian/outeridentity absent/different・directwait/reap/handles・TMP消去・owned[]を確認した。実CPU2一つ／guardian4／family4GiB／GPU0／ext4 common sequenceで実施し、混合学習の重い準備は計測後に再開通知済み。source/softwareの対象実usageを一度確認する。混合学習の条件委任は未回答、生成/fit/forward/256評価は未発行。旧RAW/FAILED/費/UNKNOWN、323USERPAUSE／fits96／models/defaults/N/sealsは不変。
