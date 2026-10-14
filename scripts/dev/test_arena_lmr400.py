@@ -53,7 +53,7 @@ def fixture():
             "drain_finished_ns": 25_000_000,
             "inflight_after_drain": 0,
             "actual_search_namespace": {
-                "evaluator": "e" * 64 + ":simd=false",
+                "evaluator": "distance-tanh-f32:sha256:" + "e" * 64 + ":simd=false",
                 "rules": "research-standard-2p-threefold-goal-first-v1",
                 "selectivity": "fullwidth-PVS-MPC-OFF-v1:cheap-static376-integer-parent-v1:control:lmr400-late4-depth3-minus1-pvs-verify-v1",
             },
@@ -263,6 +263,45 @@ class ArenaLmr400Tests(unittest.TestCase):
         values["journal"] += b"x"
         with self.assertRaisesRegex(ValueError, "actual closed saved-file bytes"):
             lc.arena_reference_report(base, files, values)
+
+    def test_arena400_typed_evaluator_content_binding_and_foreign_refusal(self):
+        config, row = fixture()
+        for engine, kind in [
+            ("distance", "distance-tanh-f32"),
+            ("nnue", "nnue-f32"),
+            ("nnue", "nnue-residual-f32"),
+            ("nnue_quantized", "nnue-i16"),
+        ]:
+            config["engines"][0]["kind"] = engine
+            selected = copy.deepcopy(row)
+            selected["observations"][0]["counters"]["actual_search_namespace"][
+                "evaluator"
+            ] = kind + ":sha256:" + "e" * 64 + ":simd=false"
+            lc.arena_observation(config, selected)
+            for wrong in [
+                "e" * 64 + ":simd=false",
+                kind + ":sha256:" + "f" * 64 + ":simd=false",
+                "foreign:sha256:" + "e" * 64 + ":simd=false",
+                kind + ":sha256:" + "e" * 64 + ":simd=true",
+            ]:
+                bad = copy.deepcopy(selected)
+                bad["observations"][0]["counters"]["actual_search_namespace"][
+                    "evaluator"
+                ] = wrong
+                with self.assertRaisesRegex(
+                    ValueError,
+                    "configured/actual arena ordering-LMR method correspondence",
+                ):
+                    lc.arena_observation(config, bad)
+        config["engines"][0]["kind"] = "distance"
+        wrong = copy.deepcopy(row)
+        wrong["observations"][0]["counters"]["actual_search_namespace"]["evaluator"] = (
+            "nnue-residual-f32:sha256:" + "e" * 64 + ":simd=false"
+        )
+        with self.assertRaisesRegex(
+            ValueError, "configured/actual arena ordering-LMR method correspondence"
+        ):
+            lc.arena_observation(config, wrong)
 
 
 if __name__ == "__main__":

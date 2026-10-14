@@ -2743,7 +2743,18 @@ def arena_observation(config, row):
                 and all(isinstance(v, str) and v for v in method.values())
                 and method["rules"] == "research-standard-2p-threefold-goal-first-v1"
                 and method["evaluator"]
-                == a["evaluator_sha256"][index] + ":simd=" + str(engine["simd"]).lower()
+                in {
+                    kind
+                    + ":sha256:"
+                    + a["evaluator_sha256"][index]
+                    + ":simd="
+                    + str(engine["simd"]).lower()
+                    for kind in {
+                        "distance": ("distance-tanh-f32",),
+                        "nnue": ("nnue-f32", "nnue-residual-f32"),
+                        "nnue_quantized": ("nnue-i16",),
+                    }.get(engine["kind"], ())
+                }
                 and method["selectivity"].endswith(
                     ":cheap-static376-integer-parent-v1:"
                     + engine["ordering_profile"]
