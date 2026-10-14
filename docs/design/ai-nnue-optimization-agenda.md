@@ -91,6 +91,14 @@ SAME349 ownerの保存cwd/model/effort/fullneverを維持し、Main/Git/docs/all
 
 385の実24callsは全COMPLETE／12sessions、全6rootsでdepth/valuebits/action/exactPV/全30work counters/legal/fullhistoryroot/parent復元が一致した。whole中央値O11.832429620秒、N11.723740566秒、N/O0.990814308、両Nがともに10%超遅いroot0で、3差分を組として採用する（Main4509a115／df2f739e／33a2d0a、実Nb6c2c1ab／Build04324e1c）。新4＋関連既存9assertions、research compile／両Clippy／release PASS、限定独立reviewはblockers0／ordinary0。短いwarm localply4はNが約8.56%／8.76%遅く、約0.92%のwhole差から全局面改善・個別寄与・一般speedup・棋力は推定しない。[結果と保存根拠](../../research-data/ai-sigma/control-optimization385/receipt.json)、[詳細](../../.artifacts/research-team/integration324/control-optimization385-v1/finite24-v1/collection-v1/report-ja.md)を参照する。385後のhotspot順位は未計測で、Controlのordering準備・map/delta/head等の同義処理は次の検討候補に留める。段階MovePicker等の別方式は具体的な別評価契約で扱い、追加tuning/計測を自動発行しない。Cheap既定、旧結果・費・UNKNOWN、323pause、models/defaults/N/seals、mixed3未選択は不変。
 
+## Control内部TT-firstと残り採点の遅延（386、2026-10-14）
+
+人間は385後もControl高速化を進め、順序変更許容を継続する。次の一差分は、内部negamaxで合法TT ordering moveがありnumeric TT cutoffしていない場合、既存Control modeかつoptional policyなしの経路でTT手をfull-windowの最初のchildとして先行探索する方式とする。そこでcutoffすれば残りの採点/Ranking/sortを作らず、非cutoffなら元の合法VecからTT手だけを除き、変化後のhistoryを参照する既存rankingで残りを探索する。root、TT手なし、providerあり、Cheap/製品Coverageは既存eager契約を保つ。PVSのfirst/nonfirst、取消/error/親復元、TT条件/store、history cutoff更新一度、terminal/threefold/goal-firstを維持し、履歴copyや新pruning/trait/一般MovePicker/state frameworkを追加しない。大きな構造が必要と判明したら具体的な費用と代案へ戻す。
+
+diagnosticsのprepared/scored eventは実際に行った残りの処理だけを数え、TT-first cutoffで全候補を採点済みと表示しない。既存counterの対象/分母が変わる場合は明記し、OFFに観測専用scan/copyを加えない。forced cutoff/noncutoff、全合法手一度、残りPVS/research、cancel/error復元、cutoff更新一度、provider/対象外維持を小さい既存参考と確認し、変更したordering/TT/history/復元の境界へ一度だけ独立reviewを適用する。
+
+採否はControl O→N→N→Oの既存6roots×4passes、24calls／12sessions／上限72M nodesを一度だけ行う。Oは385accepted b6c2c1ab／Build04324e1c、Nは必要な真正BUILDで、BEST43/TT4096/PVS/rules/入力/D4各2M・D6各8Mを固定する。同完成depth/valuebits、全合法集合、合法PV、fullhistoryroot/parent復元を必須とし、action/PV/workの変化とtieの根拠を記録する。workが変わった観測をsame-work speedにせず、value不一致を順序許容で免責しない。whole中央値N<=Oかつ同root両NがともにO中央値×1.10超の例なしを有限基準とし、不支持なら一差分を戻す。追加sampling/warmup/refill/tuning/roots/Cheap/対局/生成/学習は未発行。普通のsource/software/copy/reviewは保存事前枠なし・対象実usageを終了後一度確認、timing中だけ重い処理を直列化する。原結果/RAW/FAILED/費/UNKNOWN、323pause/fits96/models/defaults/N/seals/mixed3未回答は維持する。
+
 ## Compact board TT と外部の反復履歴（359、2026-10-10）
 
 人間はTT entryごとの全履歴保存を止めるよう指示し、359で compact board-key TT と外部 canonical repetition history の実装を選んだ。この表現方向について354のcapacity-only未選択状態を置き換えるが、351/354を再開せず、2MiB化・eviction/reset・容量sweep・selective search・fit・新対局・349 perfの許可には広げない。4096 slots/1MiBから始める。
