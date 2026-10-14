@@ -94,7 +94,7 @@ fn legal_bits395_cross_overlap_stock_and_terminal() {
 fn legal_bits395_pawn_jumps_sides_colours_and_edges() {
     // Explicit rule destinations, independent of the new bit representation.
     let cases = [
-        (4, 76, &[] as &[u8], &[] as &[u8], &[3, 5, 13] as &[u16]),
+        (4, 76, &[] as &[u8], &[] as &[u8], &[3u16, 5, 13] as &[u16]),
         (0, 76, &[], &[], &[1, 9]),
         (4, 76, &[4], &[], &[3, 5]),
         (40, 31, &[], &[], &[22, 39, 41, 49]),
