@@ -522,13 +522,20 @@ impl Model {
         let (before, after) = transition
             .checked_positions(context)
             .map_err(|e| Error::Input(e.to_string()))?;
+        // A pooled destination can retain immutable geometry from the preceding
+        // child at this ply. Keep the matching parent-map path preferred.
+        let previous_maps = parent
+            .maps
+            .as_ref()
+            .filter(|maps| maps.distances_for(after).is_some())
+            .or(child.maps.as_ref());
         if features::matches_position(&parent.features, before) {
             let (deltas, maps) = features::move_features_into(
                 &parent.features,
                 before,
                 after,
                 &mut child.features,
-                parent.maps.as_ref(),
+                previous_maps,
             )?;
             for (p, delta) in deltas.iter().enumerate() {
                 child.values[p].copy_from_slice(&parent.values[p]);
@@ -543,7 +550,7 @@ impl Model {
         } else {
             // General valid features need full child encoding and membership;
             // do not silently reinterpret them as the board's single-move IDs.
-            let (input, maps) = features::encode_cached(after, parent.maps.as_ref())?;
+            let (input, maps) = features::encode_cached(after, previous_maps)?;
             validate_features(&input)?;
             for (p, out) in child.values.iter_mut().enumerate() {
                 out.copy_from_slice(&parent.values[p]);
@@ -712,3 +719,6 @@ mod continuation360_geometry_borrow_tests {
         );
     }
 }
+
+#[cfg(all(test, feature = "research"))]
+mod map_reuse_tests;
