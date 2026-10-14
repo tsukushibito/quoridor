@@ -1,0 +1,45 @@
+{
+  "issue": "quoridor-4lc.399",
+  "archive": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/deferred-tail399/saved-comparison.json.gz",
+    "sha256": "6e9fc03018e25b74ffb6bf90ce9a99a08d4102f833f1c21f32b7ba14b92f1c14",
+    "bytes": 347618,
+    "mode": "0644"
+  },
+  "exact_file_count": 209,
+  "roundtrip": "PASS original SHA-size-mode/UTF8-or-binary exact",
+  "calls": 48,
+  "sessions": 24,
+  "COMPLETE": 44,
+  "target_D6_UNKNOWN": 4,
+  "approved_node_cap": 144000000,
+  "actual_nodes": 61331592,
+  "all_mandatory_and_30work": "MATCH",
+  "strata": [
+    {
+      "name": "NNUE4K",
+      "complete_calls": 24,
+      "unknown_calls": 0,
+      "O_median_seconds": 8.9560383065,
+      "N_median_seconds": 7.564864168,
+      "N_over_O_median": 0.8446663478995694,
+      "same_return_all30work_status": "PASS",
+      "timing_gate": "PASS"
+    },
+    {
+      "name": "fixedD1M",
+      "complete_calls": 20,
+      "unknown_calls": 4,
+      "O_median_seconds": 3.461344534,
+      "N_median_seconds": 3.2423227905000003,
+      "N_over_O_median": 0.9367235069064639,
+      "same_return_all30work_status": "PASS",
+      "timing_gate": "PASS"
+    }
+  ],
+  "both_N_adverse_roots": 0,
+  "decision": "SUPPORTED_BOTH_STRATA_RETAINED_ONLY399",
+  "original_393_398_397_394_unchanged": true,
+  "scope": "Finite same-work whole criteria only; fixedD pairedD6UNKNOWN retained; no general speed/strength/default/isolated cost or extra calls",
+  "mixed_USERPAUSE": true
+}

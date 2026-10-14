@@ -602,3 +602,15 @@ D6上限は反復深化の累積8MでありcompletedD5はD6未着手を意味し
 [実比較receipt](../../research-data/ai-sigma/fixed-d-tt-capacity397/receipt.json)に同じControl/D/math/history/画像のA4096-B1048576-B-A、24calls/12sessionsを保存した。実TTは327728→83886128B、whole中央値B/A0.911111292で有限支持、同完成深さの値/着手/合法/親は整合した。20D4 COMPLETE/4D6 NodeLimit completed5、PV/work差を保持し、D6完成/同仕事/棋力・通常OFFの速度とはしない。callbackは原392の欠測を遡及補完しない新subjectで、396追加call0・394固定D6も共有した。
 
 研究constructorは実要求容量をhonorし、必要な既存callerは従来実4096を明示する。現generatorのControl二色sessionと製品/三者比較の実4096を、この比較だけで一括変更していない。100万を次の生成設定へ選ぶ場合も、二色約160MiB/game・8games約1.25GiBというTT算術と、実RSS/他buffer/family/whole8GiB/decimal50GBを分けて設定する必要がある。混合生成からconverter/fit/newweights/native/256までと準備のUSERPAUSEは継続し、今回の有限支持は再開許可ではない。
+
+### 最優先1手＋必要時tail整列を有限採用（399、2026-10-14）
+
+[exact保存receipt](../../research-data/ai-sigma/deferred-tail399/receipt.json)はsource、元失敗とtest-only修復、必要software、限定review、48callsの設定・原journal・結果・STOPを保存する。Control/no-policy/signed内部nodeで、旧時点に全候補を採点して既存Rankingのkeyを一度作り、exact最小1手を先に探索する。cutoffならtail整列なし、次の異なる手が必要なときだけ同じ保存keyでtailを一度整列する。TT先行後の旧準備時点とchild後のkey freezeを維持し、PVS同手再探索では進めない。root/provider/unsigned/Cheap/Coverageとpolicy符号zero/goal/killer/ID tie、TT/history/math/undoを維持する。新heap/Vec clone/全ID copy/毎手min再選択はない。
+
+O fa1954be/Build76a051c1、N f37325c7/Buildeeb98d27は399差分だけ。NNUE/BEST43 Control TT4096と固定D(0,8tanh) Control TT1048576を別stratum各ONNO24/12sessions、計48calls/24sessions/144M上限、実61,331,592nodesで一度比較した。両方diagnosticsOFF/depthcallbackOFF、D4各2M/D6各8M/no time limit、既存6roots。同depth/valuebits/action/exactPV/全30work/legal/fullhistoryroot/parent/stopが全4passes一致した。NNUE24COMPLETEのsetup/drop込みwhole中央値O8.9560383065秒→N7.5648641680秒（N/O0.8446663479、約15.5334%短縮）、固定DはO3.4613445340秒→N3.2423227905秒（0.9367235069、約6.3276%短縮）。両stratumとも両Nが同rootのO中央値1.10超の例0、N中央値<=Oを満たしたため共有候補を保持する。warm4rootsは同一sessionの時系列で独立反復ではない。
+
+固定Dは20D4 COMPLETE＋4D6 NodeLimit/completed5/8Mで、同じ累積打切りworkまでの時間であり完成D6速度/棋力ではない。原UNKNOWNを維持し、旧397ON容量比較や392旧depth欠測へ遡及しない。398の不支持geometryは含まず、391局所不変map・395合法手・394/397共通softwareが双方の基盤。約15.53%/6.33%は有限whole観測で、sort単体や各未読手の利益、一般speedup/生成throughput/棋力/defaultへ外挿しない。
+
+新6＋影響394三件の9assertions、必要compile/Clippy/真正buildと限定source review clear0/0を確認した。元v1のnew-test参照寿命E0597 FAILED8.445832476秒と元mask/captureは保持、unit Policyをstatic fixtureへ替えただけでproduction/期待値不変。研究compile成功を再演せず、failed/unrun検証v2は111.717411749秒。数値job89.316316059秒を一度、source/build/保存解析と別記しnested加算しない。全originalnative/inner/outer directwait/reap/handles/freshidentity/TMP不在/owned[]を確認、family4GiB guardで完了したがRSSpeakはUNKNOWN。
+
+診断のpreparedはTT手を除き、線形先頭選択と実tail/full sort、selected/sortedのdistinct read/returnを分ける。selectedには1要素tailも含む。full-order history/static比較分母は実eager listだけ、deferred first-choice比較は別で、未整列tailのfull-order関係はUNKNOWN。OFFに専用snapshot/copy/scan/隠れsortを置かない。このOFF比較でskip回数は観測していない。1672B key本体に加えenum/frame/再帰live copy/cache/stackの孤立費はUNKNOWNでwholeに含める。製品default/モデル/TT容量既定は維持し、混合/learnerのsource準備から全生成/converter/fit/newweights/native/256、323 USERPAUSE、oldfits96/models/defaults/N/seals、旧RAW/FAILED/全費UNKNOWNを維持する。新candidate/追加profile/比較/生成再開は発行しない。
