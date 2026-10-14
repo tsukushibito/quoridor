@@ -16,7 +16,7 @@ fn oracle(p: Position) -> [[u8; 81]; 2] {
 }
 
 #[test]
-fn wall393_adapted_seeded_legal_additions_match_queue_for_each_row_class() {
+fn wall391_seeded_legal_additions_match_queue_for_each_row_class() {
     let empty = Position::default();
     let parents = [empty, empty.play(81).unwrap(), empty.play(144).unwrap()];
     let anchors = [0, 7, 8, 15, 27, 48, 55, 56, 63];
@@ -34,10 +34,8 @@ fn wall393_adapted_seeded_legal_additions_match_queue_for_each_row_class() {
                     .play(if horizontal { 81 } else { 145 } + u16::from(anchor))
                     .unwrap();
                 let expected = oracle(after);
-                let result = parent
-                    .wall_distance_geometry()
-                    .after_addition(after)
-                    .map(|geometry| *geometry.distances())
+                let result = after
+                    .wall_distance_maps_after_addition(parent, &old)
                     .unwrap();
                 assert_eq!(result, expected);
                 classes
@@ -55,14 +53,12 @@ fn wall393_adapted_seeded_legal_additions_match_queue_for_each_row_class() {
 }
 
 #[test]
-fn wall393_adapted_two_edges_goal_border_and_unreachable_are_exact() {
+fn wall391_two_edges_goal_border_and_unreachable_are_exact() {
     let parent = Position::default();
     let old = parent.wall_distance_maps();
     let after = parent.play(81).unwrap();
-    let result = parent
-        .wall_distance_geometry()
-        .after_addition(after)
-        .map(|geometry| *geometry.distances())
+    let result = after
+        .wall_distance_maps_after_addition(parent, &old)
         .unwrap();
     assert_eq!(result, oracle(after));
     // Both parallel edges of H0 must be removed, including their detours.
@@ -70,10 +66,8 @@ fn wall393_adapted_two_edges_goal_border_and_unreachable_are_exact() {
     assert!(result[1][9] > old[1][9] && result[1][10] > old[1][10]);
     for id in [88, 137, 144, 145, 208] {
         let after = parent.play(id).unwrap();
-        let maps = parent
-            .wall_distance_geometry()
-            .after_addition(after)
-            .map(|geometry| *geometry.distances())
+        let maps = after
+            .wall_distance_maps_after_addition(parent, &old)
             .unwrap();
         assert_eq!(maps, oracle(after));
         assert_eq!(&maps[0][72..81], &[0; 9]);
@@ -94,10 +88,8 @@ fn wall393_adapted_two_edges_goal_border_and_unreachable_are_exact() {
             vertical: 1u64 << anchor,
             ..isolated
         };
-        let maps = isolated
-            .wall_distance_geometry()
-            .after_addition(after)
-            .map(|geometry| *geometry.distances())
+        let maps = after
+            .wall_distance_maps_after_addition(isolated, &old)
             .unwrap();
         assert_eq!(maps, oracle(after));
         assert_eq!(maps, old);
@@ -105,9 +97,10 @@ fn wall393_adapted_two_edges_goal_border_and_unreachable_are_exact() {
 }
 
 #[test]
-fn wall393_adapted_strict_addition_excludes_delete_replace_multidiff_and_ignores_pawns() {
+fn wall391_strict_addition_excludes_delete_replace_multidiff_and_ignores_pawns() {
     let empty = Position::default();
     let parent = empty.play(81).unwrap();
+    let old = parent.wall_distance_maps();
     for after in [
         empty,
         Position {
@@ -125,18 +118,14 @@ fn wall393_adapted_strict_addition_excludes_delete_replace_multidiff_and_ignores
         },
     ] {
         assert!(
-            parent
-                .wall_distance_geometry()
-                .after_addition(after)
-                .map(|geometry| *geometry.distances())
+            after
+                .wall_distance_maps_after_addition(parent, &old)
                 .is_none()
         );
     }
     let after = parent.play(153).unwrap();
-    let maps = parent
-        .wall_distance_geometry()
-        .after_addition(after)
-        .map(|geometry| *geometry.distances())
+    let maps = after
+        .wall_distance_maps_after_addition(parent, &old)
         .unwrap();
     let shifted = Position {
         pawns: [10, 70],
@@ -144,10 +133,7 @@ fn wall393_adapted_strict_addition_excludes_delete_replace_multidiff_and_ignores
         ..after
     };
     assert_eq!(
-        parent
-            .wall_distance_geometry()
-            .after_addition(shifted)
-            .map(|geometry| *geometry.distances()),
+        shifted.wall_distance_maps_after_addition(parent, &old),
         Some(maps)
     );
     assert_eq!(maps, oracle(after));

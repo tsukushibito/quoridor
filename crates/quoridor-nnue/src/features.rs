@@ -1,6 +1,6 @@
 //! QF1 uses a full 180 degree rotation for P2 (distinct from Sigma's NN input).
 use crate::{Error, Result};
-use quoridor_core::{Position, WallDistanceGeometry};
+use quoridor_core::Position;
 use std::sync::Arc;
 
 pub const FEATURE_COUNT: usize = 312;
@@ -14,12 +14,14 @@ pub struct Features {
 }
 #[derive(Debug)]
 pub(crate) struct WallMaps {
-    geometry: WallDistanceGeometry,
+    horizontal: u64,
+    vertical: u64,
+    distances: [[u8; 81]; 2],
 }
 
 impl WallMaps {
     pub(crate) fn distances_for(&self, p: Position) -> Option<&[[u8; 81]; 2]> {
-        self.geometry.distances_for(p)
+        (self.horizontal == p.horizontal && self.vertical == p.vertical).then_some(&self.distances)
     }
 }
 
@@ -76,18 +78,24 @@ fn maps_for(
     if let Some(m) = previous.filter(|m| m.distances_for(p).is_some()) {
         return Arc::clone(m);
     }
-    let geometry = parent
-        .filter(|(before, maps)| maps.distances_for(*before).is_some())
-        .and_then(|(_, maps)| maps.geometry.after_addition(p))
-        .unwrap_or_else(|| p.wall_distance_geometry());
-    Arc::new(WallMaps { geometry })
+    let distances = parent
+        .and_then(|(before, maps)| {
+            maps.distances_for(before)
+                .and_then(|rows| p.wall_distance_maps_after_addition(before, rows))
+        })
+        .unwrap_or_else(|| p.wall_distance_maps());
+    Arc::new(WallMaps {
+        horizontal: p.horizontal,
+        vertical: p.vertical,
+        distances,
+    })
 }
 
 fn distance(p: Position, maps: &WallMaps) -> Result<[f32; 2]> {
     let side = p.turn as usize;
     let mut distance = [0.; 2];
     for (i, player) in [side, side ^ 1].into_iter().enumerate() {
-        let d = maps.geometry.distances()[player][p.pawns[player] as usize];
+        let d = maps.distances[player][p.pawns[player] as usize];
         if d > 80 {
             return Err(Error::Input("unreachable pawn".into()));
         }
@@ -99,13 +107,13 @@ fn distance(p: Position, maps: &WallMaps) -> Result<[f32; 2]> {
 /// Exact cached integer geometry for the explicit distance-step bypass.
 /// This reads the wall maps directly, never reconstructing D from rounded f32.
 pub(crate) fn integer_distance(p: Position, maps: &WallMaps) -> Result<[u8; 2]> {
-    let rows = maps
-        .distances_for(p)
-        .ok_or_else(|| Error::Input("integer distance wall-map mismatch".into()))?;
+    if maps.horizontal != p.horizontal || maps.vertical != p.vertical {
+        return Err(Error::Input("integer distance wall-map mismatch".into()));
+    }
     let side = usize::from(p.turn);
     let distances = [
-        rows[side][usize::from(p.pawns[side])],
-        rows[side ^ 1][usize::from(p.pawns[side ^ 1])],
+        maps.distances[side][usize::from(p.pawns[side])],
+        maps.distances[side ^ 1][usize::from(p.pawns[side ^ 1])],
     ];
     if distances.iter().any(|d| *d > 80) {
         return Err(Error::Input("unreachable integer distance".into()));
@@ -218,7 +226,7 @@ pub(crate) fn move_features_into(
 mod tests {
     use super::*;
     #[test]
-    fn wall393_private_parent_key_and_exact_child_hit_precede_local_rebuild() {
+    fn wall391_private_parent_key_and_exact_child_hit_precede_local_rebuild() {
         let p = Position::default();
         let (_, parent) = encode_cached(p, None).unwrap();
         let (_, alternate) = encode_cached(p, None).unwrap();
@@ -232,7 +240,7 @@ mod tests {
             fresh.distances_for(after),
             Some(&after.wall_distance_maps())
         );
-        assert_eq!(fresh.geometry.distances(), parent.geometry.distances());
+        assert_eq!(fresh.distances, parent.distances);
         let hit = maps_for(after, Some(&fresh), Some((p, &parent)));
         assert!(Arc::ptr_eq(&hit, &fresh));
         let unrelated = maps_for(p.play(81).unwrap(), None, None);
@@ -240,7 +248,7 @@ mod tests {
         // parent of p, even if supplied in that argument by a bad caller.
         let miss = maps_for(after, Some(&unrelated), Some((p, &unrelated)));
         assert!(!Arc::ptr_eq(&miss, &unrelated));
-        assert_eq!(*miss.geometry.distances(), after.wall_distance_maps());
+        assert_eq!(miss.distances, after.wall_distance_maps());
         for other in [
             p,
             Position { horizontal: 2, ..p },
@@ -252,7 +260,7 @@ mod tests {
             },
         ] {
             let maps = maps_for(other, None, Some((p.play(81).unwrap(), &unrelated)));
-            assert_eq!(*maps.geometry.distances(), other.wall_distance_maps());
+            assert_eq!(maps.distances, other.wall_distance_maps());
             assert!(maps.distances_for(other).is_some());
         }
     }
