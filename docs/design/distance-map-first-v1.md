@@ -106,3 +106,19 @@ do not inherit old full-caller acceptance silently. N remains a later explicit
 human decision; no full generation/four fits/96 games now. Source consumers and
 reviews depend on immutable stopped interfaces, not whole-owner completion or
 received-reply ACKs.
+
+## 一枚壁追加の局所不変判定（391、2026-10-14）
+
+人間の「最適な判定方法を改めて考えて最適化してみよう」により、現在accepted比較キーimage09149bda／Builda2ae2162を対照とする一候補を新たに選択した。上記344の旧baseline・件数・bootstrap・資格・保存配分や停止状態を今回へ継承せず、元結果/FAILED/費/UNKNOWNを保持する。現在profileのmaps self70/485（14.433%）は候補を選ぶ有限観測で、削減利益の予測ではない。
+
+正確な私有親distance表とH/V wall-keyがあり、削除なし・片orientationの厳密な一bit追加だけの場合、壁が閉じる両隣接edgeを同時に考える。各playerについて、削除edgeが旧distanceを1減らす向きだった時、その有限正距離の高い端点にafterでも開いたdistance−1近隣が残るかを調べる。全影響端点で残れば旧81マス表の下降経路はgoal0まで残り、edge削除で短縮は起こらないため全表は正確である。下降edgeを全て失う端点があればその旧距離は維持できない。goal0／unreachable81／同距離edge／境界・orientationを明示し、独立した既存cell-queue BFS oracleでこの限定境界を確認する。実装・検証前の候補根拠であり、普遍的に最適な判定の証明や性能採用ではない。
+
+再利用順は完全一致parent→完全一致child-slot→真正parentから厳密一枚追加判定→必要rowの既存exact BFSとする。現在delta_move_intoはafter一致parent又はchild-slotを渡すため、after不一致でも真正before geometryが残る最小内部受渡しが必要である。任意旧childを親として扱わず、general feature/model/shape/transition/error/取消/undoと親FT/features/historyを保持する。変わらないrowも新H/Vに束縛した新WallMapsへcopyし、一回の既存Arc構築を使う。旧Arcを新wall-keyへ偽装しない。変わるrowだけ既存BFSを呼び、両BFSで共有するWallEdges構築を重複させない。経路/DAG恒久保存・動的最短路・広域cache・近似・検査省略・新trait/registry/互換shim/旧BFSコピーは導入しない。
+
+既存managed探索担当をcore/NNUE限定path・sourceCPU3/RAM512MiB/GPU0で再用し、混合生成のimmutable381 native/config/caller/supportを変えずに私有source準備を並行する。Main/Git/index/Cargoは実行統合324のみ。source前後の正本と実reader/child/TMP/STOPを保持し、Main適用・必要software/build・有限timingは最初の実際に安全な既存工程境界へ調整する。混合fit/256局の全完了や返信ACKを依存にせず、任意jobの取消/再演で枠を作らない。
+
+検証は小さな固定seed状態の合法H/V追加で両81マスを独立oracleへ照合し、双方不変／片方変化／双方変化、二edgeの連合、別最短路・遠隔迂回・goal/境界/未到達を含める。既存玩具モデルの必要FT/full/delta/floatbits/親不変/makeundo/cache優先/fallback/model/shape/transition/error/取消を関連scopeで確認する。限定整形、必要core/NNUE/research/research-diagnostics compile/Clippy/関連testsと真正candidate BUILD、変更した局所判定・cache wall-key・parent受渡しだけの独立確認を一度行う。全成功suiteや旧資格の再演はしない。
+
+一候補の採否はControl O→N→N→O、既存6rootsずつ24calls／12sessions／72M上限。coldD4 family102・coldD6 family34・warmD4 family0 localply0/2/4/6、D4各2M/D6各8M、BEST43/TT4096/PVS/rules/input固定。nativeCPU2／guardian4／family4GiB／GPU0／既存ext4/common coded jobを用い、実timingだけheavy compute/IOを直列にする。予測kill期限、追加roots/warmup/refill/tuning/sampling/Cheap/ゲーム/fitなし。
+
+完成depth/valuebits/action/exactPV/all30work/legal/fullhistoryroot/parent/stopの一致、copy・判定・Arc・setup/drop込みwhole中央値N≤O、同rootの両NともO中央値×1.10超の例なしを有限基準とする。不支持なら候補差分だけを戻す。predicate/BFS回避の実回数が未記録ならUNKNOWNを保ち、profile比率で補わない。一般speedup/棋力/defaultを主張せず、元RAW/FAILED/全費/UNKNOWNと323USERPAUSE/oldfits96/models/defaults/seals、現在の混合学習自律委任を維持する。
