@@ -1,0 +1,39 @@
+{
+  "issue": "quoridor-4lc.401",
+  "archive": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/tt-history-projection401/saved-design.json.gz",
+    "sha256": "5de0176c63ae9c49b105cf9f5d6ee7aea89b53d03ab902c4d88c3738bf823afe",
+    "bytes": 10123,
+    "mode": "0644"
+  },
+  "exact_file_count": 12,
+  "roundtrip": "PASS original SHA-size-mode/UTF8-or-binary exact",
+  "pinned_commit": "5f79e21a6c6380c7ac7e19225bec562846e110ad",
+  "proposal": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/tt-history-projection401-v1/author-v1/proposal.md",
+    "sha256": "d6f554f42f35a6af67a43f7b43819c47cd7523b5f2aa0251fd2f1c3a0ac6fb29",
+    "bytes": 13476,
+    "mode": "0644"
+  },
+  "reader_STOP": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/tt-history-projection401-v1/author-v1/reader-STOP.json",
+    "sha256": "1d0d2260f8e207f5e1869da5cff41ad56dbfb19d86afd9d7f8818fd7bf7e8654",
+    "bytes": 762,
+    "mode": "0644"
+  },
+  "helper_fresh_identity": {
+    "original": {
+      "pid": 467536,
+      "start_ticks": "3681952",
+      "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+    },
+    "current": null
+  },
+  "decision": "DESIGN_PREPARATION_ONLY_COMPLETE_NO_IMPLEMENTATION_OR_ADOPTION",
+  "qualifying_filter": "keep iff oldH contains currentH and oldV contains currentV; retain future-superset",
+  "evaluator_condition": "Accepted current-position-only scope; arbitrary history-dependent StaticEvaluator excluded",
+  "scan_cost": "root N scan+Mhash, pawn fingerprintconstant, wall Nrescan+Mhash; actual time/hit/D6/strength UNKNOWN",
+  "new_production_patch_test_build_native_Search_model_calls": 0,
+  "not_mixed_into_LMR400": true,
+  "mixed_learner_323_USERPAUSE": true
+}

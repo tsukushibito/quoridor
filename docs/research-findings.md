@@ -1745,3 +1745,15 @@ O fa1954be/Build76a051c1、N f37325c7/Buildeeb98d27は399差分だけ。NNUE/BES
 必要なsoftwareと重要なLMR/PVS/TTmethod/現役consumer境界を一度関連独立確認する。速度だけで採用や棋力改善とせず、完成度・指し手差・同時間の勝分負とfamily別score/不確実性・fallback/errorを合わせて研究経路への採否/保留を判断する。重要な方式/棋力結論は同じ関連reviewerへ必要な比較根拠だけを渡す。探索的128局を正式最高棋力・非劣性認定にしない。source/対局準備を並行、sole Main/Git/index/Cargoは324、実timingだけheavy工程を直列にする。既存coded連続sequenceと取消/directwait/reap/TMP/STOPを使い、通常工程の人間/Root ACKを追加しない。
 
 これは新sourceと有限評価の許可であり、現時点の実LMR image/設定/結果・速度/棋力採用は未確定。新scheduler/registry/certificate/旧engine copy/恒常source mirrorや追加warmup/roots/refill/cap/sampling/tuningを発行しない。製品/default・実generator既定・モデル/尺度/特徴/ルールは維持する。普通source/software/copy/reviewに事前保存枠を置かず、bounded capturesと対象実使用一回、共有targetは正の増分だけをdecimal50GBへ数える。mixed/learnerのsource準備から全生成/converter/fit/newweights/native/256と323 USERPAUSE、oldfits96/models/defaults/N/seals/foreign devcontainer、旧RAW/FAILED/全費UNKNOWNを維持する。担当/状態/依存はBeads、実設定・原結果とSTOPは既存artifact入口で保持する。
+
+### TT資格history projectionの更新・復元案（401、2026-10-14、設計のみ）
+
+[固定source設計の保存receipt](../research-data/ai-sigma/tt-history-projection401/receipt.json)はaccepted399の不変Git `5f79e21a` のalpha/research/positionだけを読んだ一案を結ぶ。完全history/total_ply/threefold/terminal/入力検査・TT Key/depth/boundは残し、TT資格fingerprintだけから、現在H/V壁のいずれかを欠く古いkeyを除外する。`(oldH & currentH)==currentH` かつ `(oldV & currentV)==currentV` のkeyを残す。from_countsはchronologyを保証しないため、未来supersetや同壁・別pawn/stock/turnは残し、異なる壁mask全部を落とさない。元396/397の数字・lemmaは背景参照だけで再集計・再証明しない。
+
+最小案はpawnで既存weighted差分、厳密一bit壁追加でだけfull occurrencesをfilter再foldする。make後のscanには到着keyが既に含まれ、追加でarrivalを二重加算しない。parent fingerprint/boardは既存の値保存を使い、canonical undo成功時だけ復元、失敗時はnumeric authorityをNoneとして返す。TT OFF/元context NoneをSomeへ昇格しない。その他の壁置換/除去/複数差分や不正tokenを救済せず拒否する。full入力検査を投影前に保ち、不正履歴をfilterで合法化しない。追加group/heap/history clone/API/新registryは提案しない。
+
+Nをbase records＋overlay arrivals、Mをfilter後recordsとすると、rootはN走査/filter＋M hash、pawnのfingerprint更新は定数、wallは元1key差分からN再走査＋M hashへ増える。unique key数やnodesとの混同はしない。depth0/terminal到着にも現位置ではscan費がかかり、wall頻度・長い履歴で遅くなる可能性と取消遅延はUNKNOWN。既存canonical count照合にも履歴読取があり、child全体がO(1)だったとは言わない。既存の親F保存16Bとlocal Fの情報本体16Bを区別し、実Option padding/stack/cache/copy・hit増・実時間・完成D6・棋力は未確認。
+
+重要な適用条件は、除外する履歴へ評価が依存しない受入れ済みcurrent-position/model入口に限定すること。任意StaticEvaluatorはSigmaContext全体を読めるため一律の安全性は主張できない。将来選ぶなら資格policyのdomain/versionを既存namespaceへ明示し、LMR methodとは別に束縛、切替時は既存resetでTable clearする。128bit fingerprintのconventional collision assumptionも維持し、collision-free GHI証明にしない。context不一致でも合法cachedTT手はorderingに使われるので、projectionのnumeric再利用増を、順序/work不変や単独利益と同一視しない。
+
+これは更新/undo/費用と最小必要検証を具体化した設計保持まで。実patch/compile/Clippy/build/test/Search/Perf/arena/forward/生成/fitは0、数学資格・実装/方式採用・新有限比較を発行していない。将来の実装選択ではcounted-once/base-overlay/from_counts/strict-add/goal-threefold/undo-error-cancel/namespace・evaluator制約を必要scopeで確認する。400のLMR image・設定・比較へ後混入せず、LMRの実装/評価を優先する。source readerSTOP14:31:41.015389Z、既知helper/Git childrenのdirectwait・freshidentity・handles/TMP/lease解放を確認、初期grepの未記録PID/厳密childUTC/peakはUNKNOWNを維持。mixed/learnerのsource準備から全pipelineと323 USERPAUSE、oldfits96/models/defaults/N/seals/旧RAWFAILED費UNKNOWNは不変。
