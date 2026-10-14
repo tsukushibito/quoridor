@@ -2995,9 +2995,15 @@ def arena_reference_report(config, files, values=None, expected_build=None):
                     <= observation["returned_ns"],
                     "actual AI/main CPU ownership and matching terminal chronology",
                 )
+    # Match ArenaConfig's two default=false/skip_serializing_if=false_flag fields.
+    # All true values and every other declared field remain exact.
+    serialized_config = copy.deepcopy(config)
+    for flag in ("disable_continuation_static_ordering", "decision_only"):
+        if serialized_config["arena"].get(flag) is False:
+            del serialized_config["arena"][flag]
     require(
         manifest["result"] == publication
-        and manifest["binding"]["config"] == config
+        and manifest["binding"]["config"] == serialized_config
         and manifest["cleanup"]["archive_closed_verified"] is True
         and manifest["cleanup"]["all_workers_joined"] == report["all_workers_joined"],
         "closed native manifest/summary/config/cleanup correspondence",

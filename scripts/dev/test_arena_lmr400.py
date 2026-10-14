@@ -154,6 +154,116 @@ class ArenaLmr400Tests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, "launch affinity"):
                     lc.arena_cpu_cores(bad)
 
+    def test_arena400_false_serde_defaults_and_exact_publication_boundaries(self):
+        import gzip
+        import json
+
+        def encode(value):
+            return json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+
+        def saved(config, actual):
+            raw = (
+                encode(
+                    dict(
+                        game=0,
+                        started=False,
+                        status="unknown",
+                        failure="not_started",
+                        observations=[],
+                    )
+                )
+                + b"\n"
+            )
+            journal = gzip.compress(raw, mtime=0)
+
+            def ref(name, data):
+                return dict(
+                    path=config["output"] + "/" + name,
+                    sha256=lc.sha(data),
+                    bytes=len(data),
+                    mode="0644",
+                )
+
+            files = dict(journal=ref("completed.jsonl.gz", journal))
+            publication = dict(
+                schema=lc.ARENA_PUBLICATION,
+                report=dict(
+                    outcomes=[],
+                    run_id="toy",
+                    planned=1,
+                    stopped=None,
+                    all_workers_joined=True,
+                ),
+                archive=dict(
+                    encoding="gzip-single-member-v1",
+                    compressed=files["journal"],
+                    raw_sha256=lc.sha(raw),
+                    raw_bytes=len(raw),
+                ),
+                outcome_count=1,
+                journal_count=1,
+                journal_bytes=len(raw),
+                journal_sha256=lc.sha(raw),
+                failure_attribution=None,
+                archive_wall_seconds=0.0,
+                archive_allocated_bytes=4096,
+            )
+            result = encode(publication)
+            files["result"] = ref("result.json", result)
+            manifest = dict(
+                result=publication,
+                binding=dict(config=actual),
+                cleanup=dict(archive_closed_verified=True, all_workers_joined=True),
+                artifacts={
+                    "completed.jsonl.gz": {
+                        k: files["journal"][k] for k in ("sha256", "bytes", "mode")
+                    },
+                    "result.json": {
+                        k: files["result"][k] for k in ("sha256", "bytes", "mode")
+                    },
+                },
+            )
+            native = encode(manifest)
+            files["native_manifest"] = ref("manifest.json", native)
+            return files, dict(journal=journal, result=result, native_manifest=native)
+
+        base = dict(
+            output="/synthetic-not-written/arena",
+            games=1,
+            run_id="toy",
+            max_plies=1,
+            arena=dict(retained_outcome_bytes=16384),
+        )
+        for flag in ("disable_continuation_static_ordering", "decision_only"):
+            for enabled in (False, True):
+                declared = copy.deepcopy(base)
+                declared["arena"][flag] = enabled
+                actual = copy.deepcopy(base)
+                if enabled:
+                    actual["arena"][flag] = True
+                files, values = saved(declared, actual)
+                result = lc.arena_reference_report(declared, files, values)
+                self.assertEqual(result["outcomes"][0]["status"], "unknown")
+                bad = copy.deepcopy(actual)
+                bad["arena"][flag] = not enabled
+                files, values = saved(declared, bad)
+                with self.assertRaisesRegex(
+                    ValueError,
+                    "closed native manifest/summary/config/cleanup correspondence",
+                ):
+                    lc.arena_reference_report(declared, files, values)
+        changed = copy.deepcopy(base)
+        changed["max_plies"] = 2
+        files, values = saved(base, changed)
+        with self.assertRaisesRegex(
+            ValueError, "closed native manifest/summary/config/cleanup correspondence"
+        ):
+            lc.arena_reference_report(base, files, values)
+        files, values = saved(base, base)
+        values["journal"] += b"x"
+        with self.assertRaisesRegex(ValueError, "actual closed saved-file bytes"):
+            lc.arena_reference_report(base, files, values)
+
 
 if __name__ == "__main__":
     unittest.main()
