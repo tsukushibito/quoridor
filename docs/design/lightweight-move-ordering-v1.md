@@ -214,3 +214,13 @@ Mainは構造7e959048／削減61a2fea1を別commitで統合し、限定order/fac
 | Cheap   |         21.093110 |         17.896051 | 0.848431 | なし                         |
 
 指定された有限採用条件は両profileでPASSとなり、構造整理とcached-rank削減を保持する。既定Coverage・別モデル・一般CPU性能・棋力改善への主張はしない。元outer controller171.56642206900142秒は一度だけ計上し、native／inner controllerを重ねて加算しない。結果consumerは省略したRootInputの既定値とnativeの明示値を区別できなかったため、既存serdeのnull／false／seed既定値だけを適用する通常修正と新1 NN0を確認した。実設定・結果・原UNKNOWN解釈は書き換えず、実測を再実行していない。元FAILED／RAW／mask差・未測定範囲は保持する。実測namespaceの事後量は2,326,528 allocated Bで、ordinary storage予算は未設定だった。
+
+## 合成比較キー採用後の保存Perf（390、2026-10-14）
+
+Control/no-policy/signedの比較キーを一度作る変更は、389のONNO24でdepth/valuebits/action/exactPV/all30work/legal/history/parentが一致し、whole N/O0.856186312の有限基準を満たして保持した。その後の一度の18-call profileはimage09149bda／Builda2ae2162を再buildせず使い、全3passesの同対応が一致した。[全結果と原RAWの保存receipt](../../research-data/ai-sigma/control-ranking-perf390/receipt.json)／[詳細知見](../research-findings.md)に対応する。
+
+485samples中、sorting self68（14.021%）、内訳quicksort52／insertion13／pivot3。これらはkey比較closureを含むsort関数のselfであり、整数比較／partition／exchange／move等の単独費用ではない。inclusiveは包含・重複するため加算しない。small_sort_network、merge、key準備は独立帰属できずUNKNOWNで、ordered self66（13.608%）全部をkey作成としない。maps70（14.433%）／head54（11.134%）等も有限窓の観測で、各処理の削減利益を予測しない。
+
+reported lost0でもunresolved leaf41／全485のunknown ancestorがあり、inline責務・完全unwind・cachehit/skipBFS/FT-IDcopyは未分離。plain whole中央値9.990382656秒／sampled9.961989159秒、比0.997157917は近傍変動を含む記述値で純overheadではない。coldD6がroot時間95.811%で、root別sample分母は未取得。旧388との全work保存対応は一致してもimage/code/boot/時刻/分母が異なり、share差を因果速度や普遍的順位へ変換しない。
+
+今回の計測・保存解析は完了し、新instrumentation/build/samplingや別source候補を自動発行しない。次の方式・候補は具体的ownerと必要保証を改めて選ぶ。既存TT-firstのwork差、Cheap元376採用FAIL、全RAW/FAILED/費/UNKNOWN、pause/defaults/sealsを保持する。

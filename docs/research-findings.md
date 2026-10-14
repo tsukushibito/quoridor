@@ -1561,3 +1561,35 @@ whole中央値O11.613133087秒／N9.943005585秒、N/O0.856186312（この有限
 [whole8GiB部分停止の実支持](../.artifacts/research-team/integration324/mixed-study342-17-v1/resources.json)はdated covered観測と以後の限定的な保持確認による保守的retained上限32,210,563,072Bにwhole8GiBを加え、40,800,497,664Bとしてdecimal50GB内を支持した。これは実global占有の測定値ではなく、global actualはUNKNOWNのまま。共有入力・モデルをコピーせず、whole unionは全batch/cache/checkpoint/評価/control/TMPを数える。最大1280件の完了や全学習完遂を容量で保証しない。
 
 開始前の通常修復には、sequence最上位cwd欠落（native未入場）、source readerとのcanonical lease EAGAIN（所有・native未入場）、native出力親generation/不足（native commandは入場、output作成前でSearch0）があった。各元FAILED／planned UNKNOWN／partial collector error／返却NULLとpersisted receiptの差／原費をgeneration-v2/v3/v4へ保全し、元失敗をPASSへ変更しない。最後のSearch0はexitや欠測だけからでなく、出力作成がstream/worker/searchより前という所有sourceと実output不在に基づく。[原native失敗と実STOP](../.artifacts/research-team/integration324/mixed-study342-17-v1/generation-v4/native-failure-STOP.json)を保持し、必要な親だけを作成して同じ未実施範囲を新wrapperで開始した。旧RAW/FAILED/費/UNKNOWN、323USERPAUSE／旧fits96／models/defaults/N/sealsは不変。
+
+合成比較キー採用後のControl保存Perfは解析まで完了した（390、2026-10-14）。accepted image09149bda／Builda2ae2162／code177b006を全3passesで再用し、18 calls／9sessionsが全COMPLETE。全6rootsの完成depth/valuebits/action/exactPV/全30記録work/合法集合/fullhistoryroot/parent復元/stopが一致し、実21,148,161 nodes／15,520,353 evaluations／上限54Mだった。[日本語詳細](../.worktree/arena-generalization377/.artifacts/research-team/control-ranking-perf390-v1/report-ja.md)、[設定・全結果・decode・原RAWのexact-byte保存receipt](../research-data/ai-sigma/control-ranking-perf390/receipt.json)へ対応する。既存388 decoderの入力パスだけを替え、新RAW392610f1／4,115,320Bを一度だけdecodeした。新build・instrumentation・追加sampling・389成功24比較の再演はない。
+
+| 比較キー採用後Control | setup/drop込みwhole秒 |     setup秒 | target drop秒 |
+| --------------------- | --------------------: | ----------: | ------------: |
+| plain-before          |           9.920899369 | 0.019302551 |   0.000009200 |
+| sampled               |           9.961989159 | 0.022062484 |   0.000009743 |
+| plain-after           |          10.059865943 | 0.054737242 |   0.000009023 |
+
+plain whole中央値9.990382656秒、sampled/plain中央値0.997157917（観測上約0.284%短い）。これはprofilerが高速化する証拠や純粋なsampling overhead推定ではない。局面別の時計は元reportに残し、sampledのroot時間はcoldD6が95.811%を占める。sampleをroot別に分割していないため、この時間比をD6 sample比率としない。
+
+| 解決したgroup                  | self samples／485（%） | any-frame union samples／485（%） |
+| ------------------------------ | ---------------------: | --------------------------------: |
+| wall maps                      |           70（14.433） |                      71（14.639） |
+| sorting                        |           68（14.021） |                      68（14.021） |
+| ordered                        |           66（13.608） |                     152（31.340） |
+| NNUE head                      |           54（11.134） |                      72（14.845） |
+| legal generation               |            41（8.454） |                       43（8.866） |
+| NNUE delta                     |            34（7.010） |                     138（28.454） |
+| feature/accumulator validation |            23（4.742） |                       23（4.742） |
+| repetition/history context     |            15（3.093） |                       15（3.093） |
+| context fingerprint            |             8（1.649） |                        8（1.649） |
+| make/unmake                    |             7（1.443） |                       37（7.629） |
+| TT table／board hash（各）     |             2（0.412） |                        2（0.412） |
+
+ソートself68の内訳はquicksort52（10.722%）、insertion_sort_shift_left13（2.680%）、median3_rec pivot3（0.619%）。解決したものはRanking::sort_controlのkey比較closureを含む標準sort関数で、整数比較だけの費用ではない。quicksortのinclusive14.02%にinsertion2.68%／pivot0.62%が含まれるため加算しない。全groupのany-frame unionも相互に重複する。partition／比較／exchange／move／merge／small_sort_network／合成key準備は独立symbolとして費用を分離できず、UNKNOWNのままでゼロ費としない。ordered self66もその全てがkey作成だとは言えない。
+
+標準cpu-clock:u49Hz／DWARF8192／ring64／RAW最大12MiB／no-buildid-cache／no_new_privs=1で485samples、period合計9,897,959,055、reported lost0。unresolved leaf41（8.454%）、全485chainにunknown ancestor/terminal sentinelがあり、完全unwindやinline責務を保証しない。map→delta→advance_move_context→child等のchainは保存表に残るが、call数/cache-hit/skipBFS/FT-IDcopy/重複率はUNKNOWN。次の小差分を調べる材料はmap・sort内包処理・ordered/head/legal等の具体的ownerに残り、今回のshareから削減利益を予測せず、新candidateや別数値比較は発行しない。
+
+旧388のced70ad8／ada27a0／boot2c53965e／565samplesに対し、今回は09149bda／177b006／boot6c2e177d／485samplesで時刻も異なる。保存summaryでは旧新の全workを含む6root対応が一致したが、旧sorting27.788%→今回14.021%等の割合差や別時刻whole比を合成key単独の因果効果・普遍CPU率・一般speedup／棋力へ変換しない。389の同boot内ONNO有限採用は別の元結果として保持する。
+
+元profile job798b9a99 outer47.402634102秒と保存decode3command計3.318270302秒は別記しnested費を足さない。[実STOP](../.artifacts/research-team/integration324/control-ranking-perf390-v1/STOP.json)で元native/perf/guardian/outerのfresh absent/different、directwait/reap/handles/TMP消失/owned[]を確認した。decoder readerSTOP05:29:51.430985Zにcanonical leaseを解放し、以後の報告はOWN凍結summaryだけで作成、混合生成と独立に進めた。原generation lease/出力親FAILED・返却NULL/persisted mask差・費/UNKNOWNを保全し、CPU分離だけでglobalquietを主張しない。今回の完了で新sampling/roots/refill/build/最適化campaignを追加せず、323USERPAUSE／oldfits96／models/defaults/N/sealsは不変。
