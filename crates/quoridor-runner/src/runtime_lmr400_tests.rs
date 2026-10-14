@@ -111,9 +111,19 @@ fn runtime400_partial_result_retains_lmr_work_without_completed_iteration() {
 fn runtime400_raw_reset_and_qualified_compare_x_x_y_y_reset_once() {
     let p = quoridor_core::Position {
         pawns: [76, 67],
+        turn: 1,
+        winner: Some(0),
         ..Default::default()
     };
-    let root = SigmaContext::from_counts(p, 0, vec![(p.into(), 1)]).unwrap();
+    let root = SigmaContext::from_counts(
+        p,
+        1,
+        vec![
+            (quoridor_core::Position::default().into(), 1),
+            (p.into(), 1),
+        ],
+    )
+    .unwrap();
     let limits = SearchLimits {
         max_depth: 1,
         max_nodes: 100,
