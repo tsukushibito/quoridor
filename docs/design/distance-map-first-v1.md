@@ -122,3 +122,11 @@ received-reply ACKs.
 一候補の採否はControl O→N→N→O、既存6rootsずつ24calls／12sessions／72M上限。coldD4 family102・coldD6 family34・warmD4 family0 localply0/2/4/6、D4各2M/D6各8M、BEST43/TT4096/PVS/rules/input固定。nativeCPU2／guardian4／family4GiB／GPU0／既存ext4/common coded jobを用い、実timingだけheavy compute/IOを直列にする。予測kill期限、追加roots/warmup/refill/tuning/sampling/Cheap/ゲーム/fitなし。
 
 完成depth/valuebits/action/exactPV/all30work/legal/fullhistoryroot/parent/stopの一致、copy・判定・Arc・setup/drop込みwhole中央値N≤O、同rootの両NともO中央値×1.10超の例なしを有限基準とする。不支持なら候補差分だけを戻す。predicate/BFS回避の実回数が未記録ならUNKNOWNを保ち、profile比率で補わない。一般speedup/棋力/defaultを主張せず、元RAW/FAILED/全費/UNKNOWNと323USERPAUSE/oldfits96/models/defaults/seals、現在の混合学習自律委任を維持する。
+
+### 一枚壁追加候補の有限採用結果（2026-10-14）
+
+Main7386b54のcore/NNUE5pathsを保持する。[exact保存receipt](../../research-data/ai-sigma/wall-map-invariance391/receipt.json)に設定、全24calls/12sessionsの結果とjournal、BUILD、限定6tests/compile/Clippy、source限定review、STOPを結んだ。O09149bda/Builda2ae2162→N86ca5d4c/Build1568a988の全6rootsでdepth/valuebits/action/exactPV/全30work/legal/fullhistoryroot/parent/stopが一致し、whole中央値9.8622282315→9.2125359105秒、N/O0.934123171、両Nとも同root O中央値1.10超は0。判定・row copy・新WallMaps/Arc構築・setup/drop込みの有限観測として採用し、一般speedup/棋力/defaultや各内部費は推定しない。warm local0第一Nの1.037291倍も保持する。
+
+独立reviewの局所下降帰納とprivate親key境界はclear0/0。新core3件の独立cell-queue oracleとNNUE3件の玩具モデルfull/delta/bit/ownership/undo/errorがPASSし、必要software/buildもPASS。完全一致parent-after、完全一致child-after、真正parent-beforeのstrict-add局所判定、full BFSの順を保持する。別keyでも不変rowなら新key/newArcへcopyし、旧Arcを付け替えない。公開core操作はexact parent表を前提とし、その保証は実callerのprivate immutable生成とkey一致から得る。predicate/BFS回避/hitの実回数と変更後hotspotは未記録UNKNOWN。新instrumentation/profile/候補を追加せず、次の独立範囲は未発行である。
+
+混合生成は人間の直接停止でUSERPAUSEになり、元native/readerの実停止・lease解放後に今回のsoftware/比較を実行した。混合の生成・変換・fit・newweights/native・256評価や新準備は再開しない。元旧契約/失敗・費・UNKNOWN、323pause/oldfits96/models/defaults/N/sealsを保持する。
