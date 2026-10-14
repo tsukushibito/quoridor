@@ -1595,3 +1595,11 @@ plain whole中央値9.990382656秒、sampled/plain中央値0.997157917（観測�
 元profile job798b9a99 outer47.402634102秒と保存decode3command計3.318270302秒は別記しnested費を足さない。[実STOP](../.artifacts/research-team/integration324/control-ranking-perf390-v1/STOP.json)で元native/perf/guardian/outerのfresh absent/different、directwait/reap/handles/TMP消失/owned[]を確認した。decoder readerSTOP05:29:51.430985Zにcanonical leaseを解放し、以後の報告はOWN凍結summaryだけで作成、混合生成と独立に進めた。原generation lease/出力親FAILED・返却NULL/persisted mask差・費/UNKNOWNを保全し、CPU分離だけでglobalquietを主張しない。今回の完了で新sampling/roots/refill/build/最適化campaignを追加せず、323USERPAUSE／oldfits96／models/defaults/N/sealsは不変。
 
 次の距離マップ候補は、391の新しい人間指示により、真正private親geometryから一枚の壁追加後に両81マス表が不変かを局所判定し、変わるplayer rowだけ既存exact BFSへ戻す一差分とした。[現在の候補と有限契約](design/distance-map-first-v1.md#一枚壁追加の局所不変判定3912026-10-14)を記録し、既存探索担当へcore/NNUE限定の私有実装を配分した。現在maps self14.433%から利益を予測せず、source/検証/独立確認/24-call有限採否はまだ未完了である。完全一致parent/child-slotの優先順位、after不一致時の真正親map受渡し、新wall-keyへの新WallMaps/Arcとshared WallEdgesを保つ。混合生成の実native/config/callerを変えずにsourceを並行し、Main/Cargo/実timingは実STOP後の最初の安全な工程境界へ調整する。旧distance-map-firstのbaseline/件数/資格や元失敗を今回の結果へ転用せず、新candidate群・追加sampling・特徴/モデル/探索数学変更は発行しない。
+
+### 混合試行を人間の直接指示で停止（2026-10-14）
+
+人間の「時間かかりすぎ。止めて。」により、固定D自己対局とその後段はUSERPAUSEとした。[実停止回収](../.artifacts/research-team/integration324/mixed-study342-17-v1/user-stop-v1/STOP.json)ではjob8570adc4が07:15:03Zにcancelled、sequenceはCANCELLED・完了operation0/4、未入場batch1〜3を確認した。変換・fit・newweights/native・256局評価は未入場で、明示再開まで進めない。別条件への置換や並列増員も発行しない。元config/RAW/失敗/費/UNKNOWNを保持し、停止を科学完了にしない。
+
+[停止後の限定prefix観測](../.artifacts/research-team/integration324/mixed-study342-17-v1/user-stop-v1/stopped-prefix-observation.json)は完全JSON Game36件（すべてreturned/goal）、記録nodes合計1,038,388,085、gzip1,340,060B・未終端で、07:11Zの観測と同じ記録数だった。バッチfinalize/audit/学習可用PASSではなく、進行中未記録work・未記録対局はUNKNOWN。outer5984.569617032秒とnested guardian5976.356722737秒は重複加算せず、過去費も返金しない。
+
+元native/guardian/sequence/supervisorのexact identityはfresh不在、TMP消失、canonical leaseの取得・解放を確認した。outerとinner controllerの直接子reap/remaining[]/cleanuptrueは保存された一方、nativeの元run.process.jsonはrunningのまま、guardianはSIGTERM終了でnative直接waitの確定receiptはUNKNOWN。この欠落を成功記録へ書き換えず、container-localの観測範囲を保つ。学習準備sourceは凍結保全し、追加科学entryを止める。独立した壁距離マップ候補のsource/reviewは指摘0件で受領済みであり、実停止により空いた既存境界で必要software/buildと承認済み24call比較へ進める。混合USERPAUSEを全研究停止へ拡大しない。

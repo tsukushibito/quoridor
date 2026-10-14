@@ -562,3 +562,7 @@ T-viewはfamily当たり最大64行をchronological等間隔抽出し、V全行�
 Whole8GiB部分停止を選択した。これは最大1280完了の保証ではなく、実新規output/cache/checkpoint/必要build増分/serialTMP/evaluation/failureのunionを既存whole guardで覆う。fit-local128MiBをwholeへ読み替えない。既存covered＋以後の既知増分・対象の限定観測からdecimal50GBとfresh FS reserveを確認し、実support/configへ束縛して生成を開始する。実schedule/partition/stream/cache/weightsは各生成後の本物のrefsだけを既存Root preparationで後段へつなぐ。旧UNSELECTED artifactへ架空refsを補わず、新scheduler/資格/手動ACK chainを増やさない。成功381/342.16 scopeの再演は不要で、変わったinput/weights/library/callerの必要確認を行う。
 
 初期試行の実入力は1280 accepted／unique family1280／T1024・V256、独立評価64系列で固定した。[現行生成settingsと実entry](../../.artifacts/research-team/integration324/mixed-study342-17-v1/generation-v5/actual-entry.json)は旧提案とは別の実configとして保存し、4batchを既存sequenceで連続実行する。[whole8GiB・decimal50GB支持](../../.artifacts/research-team/integration324/mixed-study342-17-v1/resources.json)は限定保持確認に基づく保守的上限でglobal actualや全1280完了保証ではない。事前cwd／canonical lease／出力親の通常修復の元FAILEDと費は保持する。実生成後のstream/cache/weightsは通常prepareで本物のrefsへ結合し、静的sequenceへ未来refを作らない。生成中はMain publisherを固定し、GPU親のwhole-device6GiB監視の小修正を私有の限定class材料で並行準備する。
+
+### 初期混合試行の明示停止（2026-10-14）
+
+上記選択・実entryの後、人間が「時間かかりすぎ。止めて。」と指示したため、現在の混合試行はUSERPAUSEである。[実STOPと欠落範囲](../../.artifacts/research-team/integration324/mixed-study342-17-v1/user-stop-v1/STOP.json)を正本とし、生成の再開・条件置換・converter/fit/newweights/native/256評価へ進めない。旧selected plan/settingsと途中RAWを当時の実configとして保持し、現在のpauseで過去の選択・費・UNKNOWNを改変しない。停止prefix36件/1,038,388,085 recorded nodesは未終端gzipの観測であり、finalized/audited/学習可用データとは扱わない。データ・学習条件の一般的な自律委任は明示pauseを解除しない。独立した壁距離マップ最適化の既承認scopeは継続する。
