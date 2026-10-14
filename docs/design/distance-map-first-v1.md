@@ -130,3 +130,20 @@ Main7386b54のcore/NNUE5pathsを保持する。[exact保存receipt](../../resear
 独立reviewの局所下降帰納とprivate親key境界はclear0/0。新core3件の独立cell-queue oracleとNNUE3件の玩具モデルfull/delta/bit/ownership/undo/errorがPASSし、必要software/buildもPASS。完全一致parent-after、完全一致child-after、真正parent-beforeのstrict-add局所判定、full BFSの順を保持する。別keyでも不変rowなら新key/newArcへcopyし、旧Arcを付け替えない。公開core操作はexact parent表を前提とし、その保証は実callerのprivate immutable生成とkey一致から得る。predicate/BFS回避/hitの実回数と変更後hotspotは未記録UNKNOWN。新instrumentation/profile/候補を追加せず、次の独立範囲は未発行である。
 
 混合生成は人間の直接停止でUSERPAUSEになり、元native/readerの実停止・lease解放後に今回のsoftware/比較を実行した。混合の生成・変換・fit・newweights/native・256評価や新準備は再開しない。元旧契約/失敗・費・UNKNOWN、323pause/oldfits96/models/defaults/N/sealsを保持する。
+
+## 下降接続の追加保存を含む厳密差分更新（393、2026-10-14）
+
+人間は計算費用削減のための追加保存を明示許可した。保存量の最小化を目的にせず、作成/維持/copy/cache/影響伝播/距離修復の合計を比較して一候補を選ぶ。現時点ではどの方式も速さ未測定で、byte数を利益へ換算しない。
+
+| 方式                               | 追加情報本体 | 比較する計算費用                                                                       |
+| ---------------------------------- | -----------: | -------------------------------------------------------------------------------------- |
+| distanceから下降接続をその都度導く |           0B | 準備不要、更新時の近隣distance/open-edge参照と再導出                                   |
+| cellごとの4方向u8                  |         162B | 生成・copyと、影響cellごとのsupport削除/伝播                                           |
+| 各方向u128のbitboard、両player     |         128B | BFS layer/frontierからの作成とshift/ANDによる集合伝播、copy/cache費                    |
+| 上記bitboard＋south/east WallEdges |         160B | 追加32Bの作成/copyと、壁一覧からのedge mask再構築を真正一枚追加のbit操作へ置換する費用 |
+
+情報本体以外のalignment/Arc/stack/allocatorと実費は別に確認する。後付けの81scanだけを足して差分で安いとしない。真正親keyとexact distance/下降接続から二edgeを同時削除し、goal0/未到達81以外で全supportを失うcellだけをmarkして古い距離DAGの依存元へ伝播する。代替supportがあれば停止し、不変領域の確定距離を境界に影響領域だけを距離順に修復する。境界seedは不等距離なので一括FIFOに依存せず、固定bucket/既存bitfrontierなどを使う。必要ならsource仕事量に基づく一つの固定fallbackを比較する。全経路列挙・all-pairs/path-count行列・候補sweepはしない。
+
+距離不変でも塞いだ下降edgeをcacheから除き、未影響cellから修復領域への接続も整合させる。immutable親、pawn Arc共有、exact parent/child hit優先、after-keyの新cache、削除/置換/multi差分の元exact経路、FT/features/model/error/undoを保持する。既存独立cellqueue oracleと必要な玩具full/delta/bit/key/strict-add/undo/error scopeで検証し、四方向maskを独立距離/open-edgeへ照合する。誤距離が広く影響するcache/差分境界へ限定reviewを一度行う。
+
+固定D生成の392が優先で、実際の編集pathを確認したcore/NNUE私有sourceだけを別の空いた既存担当へ配分する。Root/Main/Git/Cargo writerは324のみ。sourceCPU5/RAM512MiB/GPU0、actualtiming時だけheavy source/IOを実checkpointSTOPへ調整する。正しい一候補の必要software/真正build後、392の実timingSTOPから通常Control O→N→N→O24calls/12sessions/72Mで有限採否を行う。O86ca5d4c/Build1568a988、同6roots/BEST43/TT4096/PVS/rules、D4各2M/D6各8M、全depth/valuebits/action/exactPV/all30work/legal/history/parent/stop一致とwhole中央値N≤O/no bothN>Omedian1.10を要求する。追加roots/sampling/warmup/refill/tuning/game/fitは発行せず、不支持なら一候補だけ戻す。普遍的最適/棋力/defaultや未記録BFS回避回数を主張しない。混合試行と準備のUSERPAUSE、旧RAW/FAILED/費/UNKNOWN/323pause/oldfits96/defaults/sealsを維持する。

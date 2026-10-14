@@ -1,5 +1,8 @@
 //! Human376 integer ranking only. Borrowed parent maps, never BFS or child/NN work.
-use super::{Interrupted, NodeResult, SearchError, static_ordering::StaticScores};
+use super::{
+    Interrupted, NodeResult, SearchError,
+    static_ordering::{StaticScores, goals_only},
+};
 use quoridor_core::Position;
 
 pub(super) const ALGORITHM: &str = "cheap-static376-integer-parent-v1";
@@ -126,20 +129,6 @@ fn directly_blocks(p: Position, maps: &[[u8; 81]; 2], player: usize, action: u16
             p.is_edge_open(pawn as u8, to as u8)
                 && maps[player][to].checked_add(1) == Some(maps[player][pawn])
         })
-    })
-}
-pub(super) fn goals_only(p: Position, legal: &[u16]) -> NodeResult<StaticScores> {
-    if p.turn > 1 || p.pawns.iter().any(|&id| id >= 81) || legal.iter().any(|&id| id >= 209) {
-        return Err(invalid("position/action domain"));
-    }
-    let mut goals = [false; 81];
-    for &id in legal.iter().filter(|&&id| id < 81) {
-        goals[id as usize] = id / 9 == if p.turn == 0 { 8 } else { 0 };
-    }
-    Ok(StaticScores {
-        scores: [0; 209],
-        goals,
-        borrowed_maps: false,
     })
 }
 pub(super) fn prepare(

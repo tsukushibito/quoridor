@@ -498,19 +498,18 @@ def physical_and_quiet(spec):
         cores = build_test_cpu_cores(spec)
     if "child_cpu_cores" in spec:
         cores = spec["child_cpu_cores"]
-        if len(cores) == 3:
-            cores = arena_cpu_cores(spec)
-        else:
+        if spec["kind"] == "run" and document(spec["experiment"])["phase"] == "corpus":
             require(
-                spec["kind"] == "run"
-                and isinstance(cores, list)
-                and len(cores) == 4
+                isinstance(cores, list)
+                and len(cores) >= 3
                 and all(type(c) is int and c >= 0 for c in cores)
-                and len(set(cores)) == 4
+                and len(set(cores)) == len(cores)
                 and cfg["worker_cpu"] in cores
                 and cfg["guardian_cpu"] in cores,
-                "declared two-worker corpus with two physical reserve cores",
+                "declared corpus workers and distinct physical reserve cores",
             )
+        else:
+            cores = arena_cpu_cores(spec)
     require(set(cores) <= os.sched_getaffinity(0), "CPU affinity admission")
     identities = []
     for core in cores:
@@ -650,15 +649,13 @@ def command(spec, row, directory, resources, executor=process.execute, *, ledger
         ):
             cpu_args = {"cpu_core": None, "cpu_cores": build_test_cpu_cores(spec)}
         if "child_cpu_cores" in spec:
-            if len(spec["child_cpu_cores"]) == 3:
-                cores = arena_cpu_cores(spec)
-            else:
-                require(
-                    spec["kind"] == "run"
-                    and document(spec["experiment"])["phase"] == "corpus",
-                    "four-core launch is only the qualified corpus",
-                )
+            if (
+                spec["kind"] == "run"
+                and document(spec["experiment"])["phase"] == "corpus"
+            ):
                 cores = spec["child_cpu_cores"]
+            else:
+                cores = arena_cpu_cores(spec)
             cpu_args = {"cpu_core": None, "cpu_cores": cores}
         if spec.get("perf") is not None and row.get("role", "run") == "run":
             require(
@@ -897,7 +894,10 @@ def measurement_config(experiment):
         <= set(config),
         "measurement settings shape",
     )
-    require(config["profile"] in {"control", "cheap"}, "configured ordering target")
+    require(
+        config["profile"] in {"control", "cheap", "coverage"},
+        "configured ordering target",
+    )
     for key in ("tt_entries", "output_bytes", "record_bytes"):
         require(
             type(config[key]) is int and config[key] > 0, "measurement positive " + key
@@ -1495,7 +1495,21 @@ def experiment_phase_check(experiment):
         "phase",
     )
     if phase == "compare" and experiment["argv"][1] == "measure":
-        require(len(experiment["models"]) == 1, "measurement model binding")
+        config = document(experiment["config"])
+        fixed_d = config["namespace"]["evaluator"] == "original-distance-a0-b8-tanh"
+        require(
+            (
+                fixed_d
+                and experiment["models"] == []
+                and config["profile"] in {"control", "coverage"}
+            )
+            or (
+                not fixed_d
+                and len(experiment["models"]) == 1
+                and config["profile"] in {"control", "cheap"}
+            ),
+            "measurement evaluator/model/profile binding",
+        )
         return
     if phase == "software-qualification":
         require(

@@ -8,17 +8,20 @@ const SCHEMA: &str = quoridor_data::common_corpus::STREAM_SCHEMA;
 #[derive(Debug, Clone, Default, Serialize, Deserialize)]
 pub struct Details {
     pub policy: String,
+    pub ordering: String,
     pub requested_depth: u16,
     pub max_nodes: u64,
     pub game_workers: usize,
     pub search_threads_per_game: usize,
-    pub queue_slots_per_worker: usize,
+    pub result_queue_capacity: usize,
     pub workers_joined: usize,
     pub started: usize,
     pub failed_workers_or_setup: usize,
     pub cancelled_before_start: usize,
     pub prefix_failures: usize,
     pub opaque_failed_work: usize,
+    /// Completion order paired with the per-game whole/ply vectors.
+    pub completed_indices: Vec<usize>,
     pub game_whole_ns: Vec<Option<u64>>,
     pub final_plies: Vec<Option<u16>>,
     pub returned_move_nodes: Vec<u64>,
@@ -99,8 +102,8 @@ fn summarize_results(
     let mut report = summarize(header, &games)?;
     report.recorded = records.len();
     report.full_volume_n = Some(header.config.common_study.families);
-    let mut details = Details { policy:teacher_pilot::depth6::version(&header.config).into(),requested_depth:6,max_nodes:header.config.max_nodes,
-        game_workers:header.config.game_workers.ok_or("missing workers")?,search_threads_per_game:1,queue_slots_per_worker:1,workers_joined:joined,
+    let mut details = Details { policy:teacher_pilot::depth6::version(&header.config).into(),ordering:"control-no-policy-signed".into(),requested_depth:6,max_nodes:header.config.max_nodes,
+        game_workers:header.config.game_workers.ok_or("missing workers")?,search_threads_per_game:1,result_queue_capacity:header.config.game_workers.ok_or("missing workers")?,workers_joined:joined,
         primary_interval:"NOT_RECORDED here: actual controller whole generation+serialization+savedonlyaudit+cleanup receipt required; native_whole_ns excludes final audit/cleanup".into(),..Details::default() };
     for (i, r) in records.iter().enumerate() {
         match r {
@@ -150,12 +153,14 @@ fn summarize_results(
 struct StreamReport {
     report: PilotReport,
     positions: BTreeSet<String>,
+    seen: Vec<bool>,
 }
 impl StreamReport {
     fn new(header: &PilotHeader) -> Result<Self> {
         Ok(Self {
             report: summarize_results(header, &[], 0)?,
             positions: BTreeSet::new(),
+            seen: vec![false; header.scheduled.len()],
         })
     }
     fn push(
@@ -164,9 +169,11 @@ impl StreamReport {
         index: usize,
         outcome: &Outcome<GameRecord>,
     ) -> Result<()> {
-        if index != self.report.recorded {
-            return Err("streamed report order differs".into());
+        let seen = self.seen.get_mut(index).ok_or("extra report outcome")?;
+        if *seen {
+            return Err("duplicate fixed game index".into());
         }
+        *seen = true;
         let mut one = header.clone();
         one.scheduled = vec![
             header
@@ -221,6 +228,7 @@ impl StreamReport {
             prefix_failures,
             opaque_failed_work
         );
+        a.completed_indices.push(index);
         a.game_whole_ns.extend(b.game_whole_ns);
         a.final_plies.extend(b.final_plies);
         a.returned_move_nodes.extend(b.returned_move_nodes);
@@ -228,6 +236,9 @@ impl StreamReport {
         Ok(())
     }
     fn finish(mut self, joined: usize) -> Result<PilotReport> {
+        if self.seen.iter().any(|seen| !seen) {
+            return Err("missing fixed game outcome; UNKNOWN".into());
+        }
         self.report
             .depth6
             .as_mut()
@@ -297,7 +308,7 @@ pub(super) fn run(
 
         let mut running = StreamReport::new(&header)?;
         let budget = config.max_total_nodes.map(NodeBudget::new);
-        let joined = scheduling::ordered(
+        let joined = scheduling::dynamic(
             &header.scheduled,
             config.game_workers.ok_or("missing workers")?,
             cancel,
@@ -444,7 +455,6 @@ fn read_records(path: &Path, require_footer: bool) -> Result<(PilotHeader, Optio
             }
             Record::Game { index, result }
                 if header.is_some()
-                    && index == recorded
                     && index
                         < header
                             .as_ref()
@@ -505,4 +515,94 @@ fn read_records(path: &Path, require_footer: bool) -> Result<(PilotHeader, Optio
 pub(super) fn audit(path: &Path) -> Result<PilotReport> {
     let (_, footer) = read_records(path, true)?;
     footer.ok_or_else(|| "depth6 missing footer; UNKNOWN".into())
+}
+
+#[cfg(test)]
+mod fixed_d392_stream_tests {
+    use super::*;
+    #[test]
+    fn fixed_d392_stream_report_preserves_completion_indices_and_refuses_duplicate_missing() {
+        let reference = quoridor_data::terminal_stream::BoundJson {
+            path: "/synthetic-control.json".into(),
+            sha256: "0".repeat(64),
+        };
+        let config = PilotConfig {
+            common_study: quoridor_data::common_corpus::Config {
+                families: 3,
+                prefix_seed: 1,
+                prefix_lengths: vec![4],
+                split_seed: 2,
+                root_value_policy: quoridor_data::common_corpus::RootValuePolicy::OutcomeOnly,
+                schedule: reference.clone(),
+                partition: reference.clone(),
+                batch_start: 0,
+                batch_count: 3,
+                excluded_books: vec![],
+            },
+            ruleset: Ruleset::Standard2pThreefold,
+            run_id: "synthetic".into(),
+            output: "/synthetic-output".into(),
+            planned_games: 3,
+            prefix_seed: 1,
+            attempts_per_prefix: 32,
+            depth: 6,
+            max_nodes: 1,
+            max_total_nodes: None,
+            tt_slots: 4096,
+            use_pvs: true,
+            solver_order_contact: false,
+            distance_a: 0.,
+            distance_b: 8.,
+            per_move_timeout_ms: None,
+            max_total_plies: 200,
+            cpu_core: 0,
+            game_workers: Some(2),
+            worker_cores: vec![0, 2],
+            host_ram_reserve: 4 * 1024 * 1024 * 1024,
+            max_memory_bytes: 512 * 1024 * 1024,
+            max_output_bytes: 100000,
+        };
+        let slots = (0..3)
+            .map(|game| ScheduledGame {
+                game,
+                request_id: format!("fixed-{game}"),
+                requested_prefix_length: 4,
+                prefix: None,
+                canonical_prefix: None,
+                root: None,
+                attempts: vec![],
+                scheduled_failure: Some("synthetic-unentered".into()),
+            })
+            .collect();
+        let header = PilotHeader {
+            schema: SCHEMA.into(),
+            generator_version: teacher_pilot::depth6::version(&config).into(),
+            config,
+            config_sha256: "0".repeat(64),
+            config_ref: reference,
+            executable_sha256: "0".repeat(64),
+            evaluator: EVALUATOR_ID.into(),
+            scheduled: slots,
+            family_partition: quoridor_data::terminal::partition_families(&[], 2).unwrap(),
+            resource_admission: Value::Null,
+        };
+        let mut report = StreamReport::new(&header).unwrap();
+        let failed = Outcome::Failed {
+            started: false,
+            reason: "synthetic-cancelled".into(),
+        };
+        for i in [2, 0, 1] {
+            report.push(&header, i, &failed).unwrap();
+        }
+        assert!(report.push(&header, 2, &failed).is_err());
+        assert!(report.push(&header, 3, &failed).is_err());
+        let completed = report.finish(2).unwrap();
+        assert_eq!(completed.recorded, 3);
+        assert_eq!(completed.unknown, 3);
+        let details = completed.depth6.unwrap();
+        assert_eq!(details.completed_indices, [2, 0, 1]);
+        assert_eq!(details.game_whole_ns, [None, None, None]);
+        assert_eq!(details.result_queue_capacity, 2);
+        assert!(StreamReport::new(&header).unwrap().finish(2).is_err());
+    }
 }

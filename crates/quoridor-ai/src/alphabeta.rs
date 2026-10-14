@@ -30,14 +30,12 @@ mod static_ordering;
 enum StaticMode {
     Off,
     Coverage,
-    #[cfg(feature = "research-diagnostics")]
     CheapControl,
     #[cfg(feature = "research-diagnostics")]
     Cheap,
 }
 enum StaticScratch {
     Coverage(static_ordering::StaticScratch),
-    #[cfg(feature = "research-diagnostics")]
     CheapControl,
     #[cfg(feature = "research-diagnostics")]
     Cheap,
@@ -987,7 +985,6 @@ impl Search<'_> {
             self.orderer.map(|_| &scores.policy),
             history,
         );
-        #[cfg(feature = "research-diagnostics")]
         if matches!(
             self.static_scratch.as_ref(),
             Some(StaticScratch::CheapControl)
@@ -996,8 +993,6 @@ impl Search<'_> {
         } else {
             ranking.sort(&mut ids);
         }
-        #[cfg(not(feature = "research-diagnostics"))]
-        ranking.sort(&mut ids);
         if let Some(observation) = scores.observation {
             observation.after(
                 &ranking,
@@ -1062,10 +1057,9 @@ impl Search<'_> {
                 StaticScratch::Cheap => {
                     cheap_static_ordering::prepare(c.position(), cached, ids, control)?
                 }
-                #[cfg(feature = "research-diagnostics")]
                 StaticScratch::CheapControl => {
                     control()?;
-                    cheap_static_ordering::goals_only(c.position(), ids)?
+                    static_ordering::goals_only(c.position(), ids)?
                 }
             })
         } else {
@@ -1102,7 +1096,10 @@ impl Search<'_> {
                 Some(StaticScratch::Cheap | StaticScratch::CheapControl)
             );
             #[cfg(not(feature = "research-diagnostics"))]
-            let common_goal_tier = false;
+            let common_goal_tier = matches!(
+                self.static_scratch.as_ref(),
+                Some(StaticScratch::CheapControl)
+            );
             move_ordering::Observation::before(combined, common_goal_tier)
         });
         if let Some(scores) = &static_scores {
@@ -1304,7 +1301,6 @@ impl Search<'_> {
         let legal = legal.unwrap_or_else(|| c.legal_ids());
         // The verified TT move already outranks every other tier. Only the
         // Control target without a provider may defer preparing its siblings.
-        #[cfg(feature = "research-diagnostics")]
         let mut first_tt = if self.orderer.is_none()
             && matches!(self.static_scratch, Some(StaticScratch::CheapControl))
         {
@@ -1312,8 +1308,6 @@ impl Search<'_> {
         } else {
             None
         };
-        #[cfg(not(feature = "research-diagnostics"))]
-        let mut first_tt: Option<u16> = None;
         let mut deferred = None;
         // Ordering diagnostics cover only actions actually prepared below.
         // A TT-only cutoff still has one returned child/cutoff event, but no
@@ -1699,6 +1693,19 @@ impl SearchSession {
             false,
         )
     }
+    /// Explicit signed Control ordering for maintained fixed-D/research callers.
+    /// Keeps evaluator/domain/full-width/TT semantics; product defaults stay Coverage.
+    pub fn new_with_control_ordering(
+        evaluator: Arc<dyn StaticEvaluator>,
+        mut namespace: SearchNamespace,
+        capacity: usize,
+        score_domain: ScoreDomain,
+    ) -> Result<Self> {
+        namespace.selectivity.push_str(":signed-control-goal-first");
+        let mut session = Self::create(evaluator, namespace, capacity, score_domain, true, false)?;
+        session.static_enabled = StaticMode::CheapControl;
+        Ok(session)
+    }
     /// Current research Control/Cheap selection; product constructors are unchanged.
     #[cfg(feature = "research-diagnostics")]
     pub fn new_for_ordering_assessment(
@@ -1927,7 +1934,6 @@ fn search_in_table(
             StaticMode::Coverage => Some(StaticScratch::Coverage(
                 static_ordering::StaticScratch::new()?,
             )),
-            #[cfg(feature = "research-diagnostics")]
             StaticMode::CheapControl => Some(StaticScratch::CheapControl),
             #[cfg(feature = "research-diagnostics")]
             StaticMode::Cheap => Some(StaticScratch::Cheap),
@@ -3347,5 +3353,45 @@ mod three_engine_374_factory_tests {
         let current = SearchSession::new(Arc::new(NoCalls), namespace, 4096).unwrap();
         assert!(current.ordering.is_some());
         assert!(matches!(current.static_enabled, StaticMode::Coverage));
+    }
+}
+
+#[cfg(test)]
+mod fixed_d392_factory_tests {
+    use super::*;
+    #[test]
+    fn fixed_d392_control_factory_is_available_without_diagnostics_and_defaults_stay_coverage() {
+        let evaluator = Arc::new(DistanceEvaluator::new(0., 8.));
+        let ns = SearchNamespace {
+            evaluator: "original-distance-a0-b8-tanh".into(),
+            rules: "standard".into(),
+            selectivity: "fixed-D".into(),
+        };
+        let control = SearchSession::new_with_control_ordering(
+            evaluator.clone(),
+            ns.clone(),
+            4096,
+            ScoreDomain::LEGACY,
+        )
+        .unwrap();
+        assert!(matches!(control.static_enabled, StaticMode::CheapControl));
+        assert!(control.ordering.is_some());
+        assert!(!control.ordering_diagnostics);
+        assert_eq!(control.tt_capacity(), (4096, 1024 * 1024));
+        assert_eq!(control.score_domain(), ScoreDomain::LEGACY);
+        assert_eq!(control.namespace().evaluator, ns.evaluator);
+        let product = SearchSession::new(evaluator, ns, 4096).unwrap();
+        assert!(matches!(product.static_enabled, StaticMode::Coverage));
+        assert!(product.ordering.is_some());
+    }
+    #[test]
+    fn fixed_d392_common_goal_helper_retains_domain_errors_and_zero_static_score() {
+        let p = Position::default();
+        let result = static_ordering::goals_only(p, &[72, 73, 0, 81]).unwrap();
+        assert!(result.goals[72] && result.goals[73]);
+        assert!(!result.goals[0]);
+        assert_eq!(result.scores, [0; 209]);
+        assert!(!result.borrowed_maps);
+        assert!(static_ordering::goals_only(p, &[209]).is_err());
     }
 }

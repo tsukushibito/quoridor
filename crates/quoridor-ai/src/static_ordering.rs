@@ -34,6 +34,22 @@ pub(super) struct StaticScores {
     pub borrowed_maps: bool,
 }
 
+pub(super) fn goals_only(p: Position, legal: &[u16]) -> NodeResult<StaticScores> {
+    if p.turn > 1 || p.pawns.iter().any(|&id| id >= 81) || legal.iter().any(|&id| id >= 209) {
+        return Err(Interrupted::Error(SearchError::Evaluation(
+            "cheap376: position/action domain".into(),
+        )));
+    }
+    let mut goals = [false; 81];
+    for &id in legal.iter().filter(|&&id| id < 81) {
+        goals[id as usize] = id / 9 == if p.turn == 0 { 8 } else { 0 };
+    }
+    Ok(StaticScores {
+        scores: [0; 209],
+        goals,
+        borrowed_maps: false,
+    })
+}
 fn arithmetic() -> Interrupted {
     Interrupted::Error(SearchError::Evaluation(
         "static shortest-route count/normalization overflow".into(),

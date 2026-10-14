@@ -27,12 +27,14 @@ use std::{
 enum Profile {
     Control,
     Cheap,
+    Coverage,
 }
 impl Profile {
-    fn native(self) -> OrderingProfile {
+    fn native(self) -> Option<OrderingProfile> {
         match self {
-            Self::Control => OrderingProfile::CheapStaticControl,
-            Self::Cheap => OrderingProfile::CombinedSignedCheapStatic,
+            Self::Control => Some(OrderingProfile::CheapStaticControl),
+            Self::Cheap => Some(OrderingProfile::CombinedSignedCheapStatic),
+            Self::Coverage => None,
         }
     }
 }
@@ -257,18 +259,38 @@ impl Target for SearchTarget {
         if self.session.is_some() || self.root.is_some() {
             return Err("measurement target still live at reset".into());
         }
-        let session = SearchSession::new_for_ordering_assessment(
-            self.evaluator.clone(),
-            SearchNamespace {
-                evaluator: self.settings.namespace.evaluator.clone(),
-                rules: self.settings.namespace.rules.clone(),
-                selectivity: self.settings.namespace.selectivity.clone(),
-            },
-            self.settings.tt_entries,
-            quoridor_ai::score::ScoreDomain::LEGACY,
-            self.settings.profile.native(),
-            request.diagnostic,
-        )?;
+        let namespace = SearchNamespace {
+            evaluator: self.settings.namespace.evaluator.clone(),
+            rules: self.settings.namespace.rules.clone(),
+            selectivity: self.settings.namespace.selectivity.clone(),
+        };
+        let session = match self.settings.profile {
+            Profile::Coverage => {
+                SearchSession::new(self.evaluator.clone(), namespace, self.settings.tt_entries)?
+            }
+            Profile::Control
+                if self.settings.namespace.evaluator
+                    == crate::teacher_pilot_execution::EVALUATOR_ID =>
+            {
+                SearchSession::new_with_control_ordering(
+                    self.evaluator.clone(),
+                    namespace,
+                    self.settings.tt_entries,
+                    quoridor_ai::score::ScoreDomain::LEGACY,
+                )?
+            }
+            _ => SearchSession::new_for_ordering_assessment(
+                self.evaluator.clone(),
+                namespace,
+                self.settings.tt_entries,
+                quoridor_ai::score::ScoreDomain::LEGACY,
+                self.settings
+                    .profile
+                    .native()
+                    .ok_or("missing ordering target")?,
+                request.diagnostic,
+            )?,
+        };
         let retained = session.retained_memory_bytes();
         let capacity = session.tt_capacity();
         self.session = Some(session);
@@ -346,7 +368,26 @@ fn timed<T>(run: impl FnOnce() -> Result<T>) -> (Result<T>, f64) {
     let result = run();
     (result, started.elapsed().as_secs_f64())
 }
-fn load_evaluator(e: &Experiment) -> Result<Arc<dyn StaticEvaluator>> {
+fn evaluator_binding(settings: &Settings, model_count: usize) -> Result<()> {
+    let fixed_d = settings.namespace.evaluator == crate::teacher_pilot_execution::EVALUATOR_ID;
+    if (fixed_d
+        && (model_count != 0 || !matches!(settings.profile, Profile::Control | Profile::Coverage)))
+        || (!fixed_d && (model_count != 1 || matches!(settings.profile, Profile::Coverage)))
+    {
+        return Err("measurement evaluator/model/profile binding".into());
+    }
+    Ok(())
+}
+/// Called by the existing native Experiment shape owner, before any model load.
+pub(crate) fn validate_evaluator_binding(e: &Experiment) -> Result<()> {
+    let settings: Settings = e.config.read()?;
+    evaluator_binding(&settings, e.models.len())
+}
+fn load_evaluator(e: &Experiment, settings: &Settings) -> Result<Arc<dyn StaticEvaluator>> {
+    evaluator_binding(settings, e.models.len())?;
+    if e.models.is_empty() {
+        return Ok(Arc::new(alphabeta::DistanceEvaluator::new(0., 8.)));
+    }
     let selected = e.models.first().ok_or("measurement model")?;
     let model = Arc::new(quoridor_nnue::residual::ResidualModel::load(
         &selected.descriptor.path,
@@ -462,7 +503,8 @@ pub fn run(bound: &BoundControl) -> Result<Value> {
     let settings: Settings = e.config.read()?;
     let requests: Vec<Request> = e.schedule.read()?;
     validate(&settings, &requests)?;
-    if e.models.len() != 1 || settings.namespace.rules != e.rules {
+    evaluator_binding(&settings, e.models.len())?;
+    if settings.namespace.rules != e.rules {
         return Err("measurement loaded model/rules settings".into());
     }
     let root = output_correspondence()?;
@@ -475,7 +517,7 @@ pub fn run(bound: &BoundControl) -> Result<Value> {
     // Cooperative cancellation remains the target/driver AtomicBool boundary.
     let (prepared, preparation_seconds) = timed(|| -> Result<SearchTarget> {
         let roots = prepare_roots(&e, &settings.roots)?;
-        let evaluator = load_evaluator(&e)?;
+        let evaluator = load_evaluator(&e, &settings)?;
         Ok(SearchTarget {
             settings,
             roots,
@@ -721,6 +763,22 @@ impl Output {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn fixed_d392_binding_allows_only_exact_empty_model_d_and_preserves_nnue_binding() {
+        let mut settings: Settings = serde_json::from_value(json!({"roots":[],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,
+            "namespace":{"evaluator":crate::teacher_pilot_execution::EVALUATOR_ID,"rules":"standard","selectivity":"fixed-D"},"output_bytes":100,"record_bytes":10})).unwrap();
+        assert!(evaluator_binding(&settings, 0).is_ok());
+        assert!(evaluator_binding(&settings, 1).is_err());
+        settings.profile = Profile::Coverage;
+        assert!(evaluator_binding(&settings, 0).is_ok());
+        settings.profile = Profile::Cheap;
+        assert!(evaluator_binding(&settings, 0).is_err());
+        settings.namespace.evaluator = "loaded-NNUE-sha".into();
+        assert!(evaluator_binding(&settings, 1).is_ok());
+        assert!(evaluator_binding(&settings, 0).is_err());
+        settings.profile = Profile::Coverage;
+        assert!(evaluator_binding(&settings, 1).is_err());
+    }
     struct Fake {
         trace: Vec<String>,
         factor: u64,

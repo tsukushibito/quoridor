@@ -115,7 +115,6 @@ impl<'a> Ranking<'a> {
         }
     }
 
-    #[cfg(feature = "research-diagnostics")]
     pub fn sort_control(&self, ids: &mut [u16]) {
         let scores = match self.scores {
             HistoryScores::Signed(scores) if self.policy.is_none() => scores,

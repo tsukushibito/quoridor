@@ -392,7 +392,7 @@ enum WorkerOutcome {
 }
 
 fn common_outcome_work(header: &Header, index: usize, outcome: &WorkerOutcome) -> Result<Value> {
-    Ok(match outcome {
+    let mut work = match outcome {
         WorkerOutcome::Returned { value, whole_ns } => {
             let mut searches = value.rows.iter().map(|r| &r.search).collect::<Vec<_>>();
             if let Some(f) = &value.failed_search {
@@ -406,15 +406,17 @@ fn common_outcome_work(header: &Header, index: usize, outcome: &WorkerOutcome) -
                 "opaque":matches!(&value.termination,End::Unknown{reason} if reason.starts_with("search_error:"))})
         }
         WorkerOutcome::Failed { started, .. } => json!({"returned":false,"started":started}),
-    })
+    };
+    work["index"] = json!(index);
+    Ok(work)
 }
 
 fn common_depth_census(header: &Header, outcomes: &[Value]) -> Result<Value> {
     let workers = number(&header.config, "game_workers")?;
-    let mut d = json!({"policy":crate::common_corpus::VERSION,"requested_depth":6,
+    let mut d = json!({"policy":crate::common_corpus::VERSION,"ordering":"control-no-policy-signed","requested_depth":6,
         "max_nodes":number(&header.config,"max_nodes")?,"game_workers":workers,"search_threads_per_game":1,
-        "queue_slots_per_worker":1,"workers_joined":workers,"started":0,"failed_workers_or_setup":0,
-        "cancelled_before_start":0,"prefix_failures":0,"opaque_failed_work":0,"game_whole_ns":[],"final_plies":[],
+        "result_queue_capacity":workers,"workers_joined":workers,"started":0,"failed_workers_or_setup":0,
+        "cancelled_before_start":0,"prefix_failures":0,"opaque_failed_work":0,"completed_indices":[],"game_whole_ns":[],"final_plies":[],
         "returned_move_nodes":[],"returned_depths":[],
         "primary_interval":"NOT_RECORDED here: actual controller whole generation+serialization+savedonlyaudit+cleanup receipt required; native_whole_ns excludes final audit/cleanup",
         "completed_games_per_hour":null,"eligible_rows_per_hour":null});
@@ -427,6 +429,10 @@ fn common_depth_census(header: &Header, outcomes: &[Value]) -> Result<Value> {
         Ok(())
     };
     for r in outcomes {
+        d["completed_indices"]
+            .as_array_mut()
+            .ok_or("completion census")?
+            .push(r["index"].clone());
         if r["returned"] == true {
             add(
                 &mut d,
@@ -539,21 +545,36 @@ fn validate_search(s: &Search, c: &SigmaContext, policy: &SearchPolicy) -> Resul
     }
     Ok(action)
 }
+fn validate_completion_index(
+    index: usize,
+    scheduled: usize,
+    seen: &mut BTreeSet<usize>,
+) -> Result<()> {
+    if index >= scheduled || !seen.insert(index) {
+        return Err("duplicate/extra common fixed game index".into());
+    }
+    Ok(())
+}
+fn validate_game_slot(g: &Game, slot: &Slot) -> Result<()> {
+    if g.game != slot.game || g.request_id != slot.request_id || g.initial_prefix != slot.prefix {
+        return Err("game scheduled identity".into());
+    }
+    Ok(())
+}
 fn validate_game(
     g: &Game,
-    h: &Header,
+    scheduled: (&Header, usize),
     position_keys: &mut BTreeSet<String>,
     row_ids: &mut BTreeSet<String>,
     census: &mut Census,
     writer: &mut Writer,
     source_record: (&str, u64),
 ) -> Result<()> {
+    let (h, index) = scheduled;
     let (game_sha, source_record_offset) = source_record;
     let policy = SearchPolicy::from_config(&h.config)?;
-    let slot = h.scheduled.get(census.recorded).ok_or("extra game")?;
-    if g.game != slot.game || g.request_id != slot.request_id || g.initial_prefix != slot.prefix {
-        return Err("game scheduled identity".into());
-    }
+    let slot = h.scheduled.get(index).ok_or("extra game")?;
+    validate_game_slot(g, slot)?;
     census.recorded += 1;
     census.search_calls += g.attempted_search_calls;
     match g.termination {
@@ -730,6 +751,7 @@ fn scan(input: &Path, b: &StreamInput, writer: &mut Writer) -> Result<Value> {
     let mut total_read = 0u64;
     let mut census = Census::default();
     let mut common_outcomes = Vec::new();
+    let mut seen_indices = BTreeSet::new();
     let mut positions = BTreeSet::new();
     let mut row_ids = BTreeSet::new();
     loop {
@@ -784,11 +806,10 @@ fn scan(input: &Path, b: &StreamInput, writer: &mut Writer) -> Result<Value> {
                 header = Some(h);
             }
             Some("game") if header.is_some() => {
+                let record: IndexedOutcome = serde_json::from_value(event["record"].clone())?;
+                let index = record.index;
                 let g: Game = {
-                    let record: IndexedOutcome = serde_json::from_value(event["record"].clone())?;
-                    if record.index != census.recorded || record.index >= census.scheduled {
-                        return Err("common indexed planned order differs".into());
-                    }
+                    validate_completion_index(record.index, census.scheduled, &mut seen_indices)?;
                     common_outcomes.push(common_outcome_work(
                         header.as_ref().ok_or("header")?,
                         record.index,
@@ -820,7 +841,7 @@ fn scan(input: &Path, b: &StreamInput, writer: &mut Writer) -> Result<Value> {
                 }
                 validate_game(
                     &g,
-                    header.as_ref().ok_or("header")?,
+                    (header.as_ref().ok_or("header")?, index),
                     &mut positions,
                     &mut row_ids,
                     &mut census,
@@ -1323,5 +1344,38 @@ mod configured_intake_tests {
         ] {
             assert!(SearchPolicy::from_config(&bad).is_err());
         }
+    }
+}
+
+#[cfg(test)]
+mod fixed_d392_consumer_tests {
+    use super::*;
+    #[test]
+    fn fixed_d392_completion_indices_accept_permutation_but_refuse_duplicate_extra() {
+        let mut seen = BTreeSet::new();
+        for i in [2, 0, 1] {
+            validate_completion_index(i, 3, &mut seen).unwrap();
+        }
+        assert_eq!(seen, BTreeSet::from([0, 1, 2]));
+        assert!(validate_completion_index(2, 3, &mut seen).is_err());
+        assert!(validate_completion_index(3, 3, &mut seen).is_err());
+        assert!(validate_completion_index(usize::MAX, 3, &mut seen).is_err());
+    }
+    #[test]
+    fn fixed_d392_game_identity_is_fixed_slot_not_completion_ordinal() {
+        let slot: Slot = serde_json::from_value(json!({"game":101,"request_id":"fixed-ID-101","requested_prefix_length":4,
+            "prefix":null,"canonical_prefix":null,"root":null,"attempts":[],"scheduled_failure":"synthetic-unentered"})).unwrap();
+        let mut g: Game = serde_json::from_value(json!({"game":101,"request_id":"fixed-ID-101","family":null,"initial_prefix":null,
+            "final_prefix":null,"final_context":null,"provenance":null,"termination":{"type":"unknown","reason":"synthetic-unentered"},
+            "rows":[],"failed_search":null,"attempted_search_calls":0,"wall_ns":0})).unwrap();
+        validate_game_slot(&g, &slot).unwrap();
+        g.game = 0;
+        assert!(validate_game_slot(&g, &slot).is_err());
+        g.game = 101;
+        g.request_id = "other-ID".into();
+        assert!(validate_game_slot(&g, &slot).is_err());
+        g.request_id = slot.request_id.clone();
+        g.initial_prefix = Some(vec![13]);
+        assert!(validate_game_slot(&g, &slot).is_err());
     }
 }

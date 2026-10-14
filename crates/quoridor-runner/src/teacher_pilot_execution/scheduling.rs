@@ -1,10 +1,10 @@
-//! At most one queued result per worker. Writer order cannot select inputs.
+//! Fixed-ID dynamic assignment; a bounded shared completion queue never selects inputs.
 use quoridor_data::Result;
 use serde::{Deserialize, Serialize};
 use std::{
     panic::{AssertUnwindSafe, catch_unwind},
     sync::{
-        atomic::{AtomicBool, Ordering},
+        atomic::{AtomicBool, AtomicUsize, Ordering},
         mpsc,
     },
     time::Instant,
@@ -22,7 +22,7 @@ pub(super) struct Joined {
     pub workers_spawned: usize,
     pub workers_joined: usize,
     pub committed: usize,
-    pub result_queue_slots_per_worker: usize,
+    pub result_queue_capacity: usize,
 }
 
 #[derive(Debug)]
@@ -42,7 +42,7 @@ impl std::error::Error for ScheduleFailure {
     }
 }
 
-pub(super) fn ordered<T: Sync, R: Send>(
+pub(super) fn dynamic<T: Sync, R: Send>(
     jobs: &[T],
     workers: usize,
     cancel: &AtomicBool,
@@ -52,17 +52,23 @@ pub(super) fn ordered<T: Sync, R: Send>(
     if workers == 0 || workers > jobs.len() {
         return Err("invalid finite game worker count".into());
     }
+    let next = AtomicUsize::new(0);
     std::thread::scope(|scope| -> Result<Joined> {
-        let mut receivers = Vec::with_capacity(workers);
+        let (send, receive) = mpsc::sync_channel(workers);
         let mut handles = Vec::with_capacity(workers);
         let mut primary = None;
         for worker in 0..workers {
-            let (send, receive) = mpsc::sync_channel(1);
+            let send = send.clone();
             let run = &run;
+            let next = &next;
             match std::thread::Builder::new()
                 .name(format!("teacher-game-{worker}"))
                 .spawn_scoped(scope, move || {
-                    for i in (worker..jobs.len()).step_by(workers) {
+                    loop {
+                        let i = next.fetch_add(1, Ordering::Relaxed);
+                        if i >= jobs.len() {
+                            break;
+                        }
                         let outcome = if cancel.load(Ordering::Acquire) {
                             Outcome::Failed {
                                 started: false,
@@ -99,7 +105,6 @@ pub(super) fn ordered<T: Sync, R: Send>(
                 }) {
                 Ok(h) => {
                     handles.push(h);
-                    receivers.push(receive);
                 }
                 Err(e) => {
                     primary = Some(e.into());
@@ -108,16 +113,16 @@ pub(super) fn ordered<T: Sync, R: Send>(
                 }
             }
         }
+        drop(send);
         let mut joined = Joined {
             workers_spawned: handles.len(),
-            result_queue_slots_per_worker: 1,
+            result_queue_capacity: workers,
             ..Joined::default()
         };
         if primary.is_none() {
-            for i in 0..jobs.len() {
-                let result = match receivers[i % workers].recv() {
-                    Ok((actual, v)) if actual == i => consume(i, v),
-                    Ok(_) => Err("worker changed authoritative game order".into()),
+            for _ in 0..jobs.len() {
+                let result = match receive.recv() {
+                    Ok((index, v)) => consume(index, v),
                     Err(e) => Err(format!("worker result missing; remaining UNKNOWN:{e}").into()),
                 };
                 if let Err(e) = result {
@@ -129,7 +134,7 @@ pub(super) fn ordered<T: Sync, R: Send>(
             }
         }
         // Release every bounded send before joining, including writer IO failure.
-        drop(receivers);
+        drop(receive);
         let mut cleanup_failures = Vec::new();
         for handle in handles {
             if handle.join().is_err() {
@@ -158,11 +163,64 @@ pub(super) fn ordered<T: Sync, R: Send>(
 mod tests {
     use super::*;
     #[test]
+    fn fixed_d392_dynamic_completion_drains_fast_worker_without_slow_index_or_stride_wait() {
+        use std::sync::{Barrier, Condvar, Mutex};
+        let jobs = [0, 1, 2, 3, 4, 5, 6, 7];
+        let start = Barrier::new(2);
+        let released = (Mutex::new(false), Condvar::new());
+        let mut completed = Vec::new();
+        let mut fast = Vec::new();
+        let joined = dynamic(
+            &jobs,
+            2,
+            &AtomicBool::new(false),
+            |worker, &id| {
+                if id <= 1 {
+                    start.wait();
+                }
+                if id == 0 {
+                    let mut ready = released.0.lock().unwrap();
+                    while !*ready {
+                        ready = released.1.wait(ready).unwrap();
+                    }
+                }
+                Ok((worker, id))
+            },
+            |index, result| {
+                let Outcome::Returned {
+                    value: (worker, id),
+                    ..
+                } = result
+                else {
+                    panic!("unexpected failure")
+                };
+                assert_eq!(index, id);
+                completed.push(index);
+                if (1..=4).contains(&id) {
+                    fast.push(worker);
+                }
+                if id == 4 {
+                    *released.0.lock().unwrap() = true;
+                    released.1.notify_all();
+                }
+                Ok(())
+            },
+        )
+        .unwrap();
+        assert_eq!(&completed[..4], &[1, 2, 3, 4]);
+        assert!(fast.iter().all(|w| *w == fast[0]));
+        completed.sort_unstable();
+        assert_eq!(completed, jobs);
+        assert_eq!(joined.committed, jobs.len());
+        assert_eq!(joined.result_queue_capacity, 2);
+        assert_eq!(joined.workers_spawned, joined.workers_joined);
+    }
+    #[test]
     fn depth6_scheduler_order_bound_failure_cancel_and_exact_join() {
         let jobs = [0, 1, 2, 3];
         for n in [1, 2] {
             let mut saved = vec![];
-            let j = ordered(
+            let j = dynamic(
                 &jobs,
                 n,
                 &AtomicBool::new(false),
@@ -177,13 +235,14 @@ mod tests {
                 },
             )
             .unwrap();
+            saved.sort_unstable();
             assert_eq!(saved, vec![(0, 0), (1, 1), (2, 2), (3, 3)]);
             assert_eq!(j.workers_joined, n);
-            assert_eq!(j.result_queue_slots_per_worker, 1);
+            assert_eq!(j.result_queue_capacity, n);
         }
         let cancelled = AtomicBool::new(true);
         let mut skipped = 0;
-        let j = ordered(
+        let j = dynamic(
             &jobs,
             2,
             &cancelled,
@@ -198,7 +257,7 @@ mod tests {
         assert_eq!(skipped, 4);
         assert_eq!(j.workers_joined, 2);
         let flag = AtomicBool::new(false);
-        let e = ordered(
+        let e = dynamic(
             &jobs,
             2,
             &flag,
@@ -212,7 +271,7 @@ mod tests {
         assert_eq!(failure.joined.workers_joined, 2);
         assert_eq!(failure.joined.committed, 0);
         let mut failed = vec![];
-        let j = ordered(
+        let j = dynamic(
             &jobs,
             1,
             &AtomicBool::new(false),
@@ -237,7 +296,7 @@ mod tests {
         let cancel = AtomicBool::new(false);
         let mut published = Vec::new();
         for slice in [&global[..3], &global[3..]] {
-            let j = ordered(
+            let j = dynamic(
                 slice,
                 1,
                 &cancel,
@@ -258,7 +317,7 @@ mod tests {
         assert_eq!(published, global);
         let mut later_entered = false;
         let mut saved = Vec::new();
-        let e = ordered(
+        let e = dynamic(
             &global[..3],
             1,
             &cancel,

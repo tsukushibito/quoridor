@@ -32,7 +32,7 @@ use std::{
 
 const ROW_BYTES: usize = 65536;
 const GAME_BYTES: usize = 16 * 1024 * 1024;
-const EVALUATOR_ID: &str = "original-distance-a0-b8-tanh";
+pub(crate) const EVALUATOR_ID: &str = "original-distance-a0-b8-tanh";
 
 pub mod depth6;
 mod scheduling;
@@ -329,8 +329,18 @@ fn play_with_budget(
     // Preserve the original independently retained per-colour sessions inside
     // every game. Only one search is active at a time; no cross-colour TT sharing.
     let mut sessions = [
-        SearchSession::new(evaluator.clone(), namespace.clone(), 4096)?,
-        SearchSession::new(evaluator, namespace, 4096)?,
+        SearchSession::new_with_control_ordering(
+            evaluator.clone(),
+            namespace.clone(),
+            4096,
+            quoridor_ai::score::ScoreDomain::LEGACY,
+        )?,
+        SearchSession::new_with_control_ordering(
+            evaluator,
+            namespace,
+            4096,
+            quoridor_ai::score::ScoreDomain::LEGACY,
+        )?,
     ];
     if sessions
         .iter()

@@ -211,7 +211,20 @@ fn phase_shape(e: &Experiment) -> bool {
                         "@EXPERIMENT_SHA256@",
                     ]
         }
-        "compare" if e.argv.get(1).is_some_and(|a| a == "measure") => e.models.len() == 1,
+        "compare" if e.argv.get(1).is_some_and(|a| a == "measure") => {
+            if e.models.len() == 1 {
+                true
+            } else {
+                #[cfg(feature = "measurement")]
+                {
+                    e.models.is_empty() && crate::measurement::validate_evaluator_binding(e).is_ok()
+                }
+                #[cfg(not(feature = "measurement"))]
+                {
+                    false
+                }
+            }
+        }
         "compare" if e.argv.get(1).is_some_and(|a| a == "decisions") => {
             e.numerical_qualification.is_some()
                 && e.planned_slots > 0
