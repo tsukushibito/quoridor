@@ -236,11 +236,7 @@ fn warm_child(s: &mut Search<'_>, root: &SigmaContext, action: u16, value: f32) 
 #[test]
 #[cfg(feature = "research-diagnostics")]
 fn shared402_lmr_confirmation_research_keeps_frozen_same_hand_and_tail_cursor() {
-    let p = Position {
-        pawns: [40, 76],
-        ..Position::default()
-    };
-    let root = SigmaContext::synthetic_diagnostic(p, 0, vec![(p.into(), 1)]).unwrap();
+    let root = SigmaContext::from_prefix(&[]).unwrap();
     assert!(root.legal_ids().len() >= 4);
     static L: std::sync::LazyLock<SearchLimits> =
         std::sync::LazyLock::new(|| limits(3, true, true));
