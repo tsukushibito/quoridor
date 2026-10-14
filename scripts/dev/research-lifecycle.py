@@ -971,6 +971,7 @@ def measurement_config(experiment):
                 "time_limit_ms",
                 "diagnostic",
                 "warmup",
+                "observe_completed_depths",
             }
             and all(
                 isinstance(request[k], str) and request[k] for k in ("id", "session")
@@ -993,7 +994,10 @@ def measurement_config(experiment):
             "measurement optional deadline",
         )
         require(
-            all(type(request.get(k, False)) is bool for k in ("diagnostic", "warmup")),
+            all(
+                type(request.get(k, False)) is bool
+                for k in ("diagnostic", "warmup", "observe_completed_depths")
+            ),
             "measurement request switches",
         )
         ids.add(request["id"])
