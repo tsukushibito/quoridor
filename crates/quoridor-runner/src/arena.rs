@@ -190,7 +190,7 @@ impl ArenaConfig {
         }
         for engine in &c.engines {
             if let Some(profile) = engine.ordering_profile.as_deref() {
-                if !matches!(profile, "control" | "cheap")
+                if quoridor_ai::alphabeta::OrderingProfile::from_name(profile).is_err()
                     || !matches!(engine.kind.as_str(), "nnue" | "distance")
                     || self.disable_continuation_static_ordering
                 {

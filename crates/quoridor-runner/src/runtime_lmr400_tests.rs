@@ -29,7 +29,10 @@ fn runtime400_factory_modes_match_actual_namespace_and_separate_four_domains() {
         for lmr in [false, true] {
             let e = engine(Some(profile), lmr);
             let s = arena_alpha_session(Arc::new(MetadataOnly), namespace(), 64, &e, None).unwrap();
-            assert_eq!(s.namespace(), &arena_alpha_namespace(&e, namespace()));
+            assert_eq!(
+                s.namespace(),
+                &arena_alpha_namespace(&e, namespace()).unwrap()
+            );
             assert_eq!(s.lmr_enabled(), lmr);
             assert!(domains.insert(s.namespace().selectivity.clone()));
             let expected = format!(

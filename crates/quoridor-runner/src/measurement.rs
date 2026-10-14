@@ -30,12 +30,13 @@ enum Profile {
     Coverage,
 }
 impl Profile {
-    fn native(self) -> Option<OrderingProfile> {
-        match self {
-            Self::Control => Some(OrderingProfile::CheapStaticControl),
-            Self::Cheap => Some(OrderingProfile::CombinedSignedCheapStatic),
-            Self::Coverage => None,
-        }
+    fn native(self) -> Result<Option<OrderingProfile>> {
+        let name = match self {
+            Self::Control => "control",
+            Self::Cheap => "cheap",
+            Self::Coverage => return Ok(None),
+        };
+        Ok(Some(OrderingProfile::from_name(name)?))
     }
 }
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -271,34 +272,20 @@ impl Target for SearchTarget {
             rules: self.settings.namespace.rules.clone(),
             selectivity: self.settings.namespace.selectivity.clone(),
         };
-        let mut session = match self.settings.profile {
-            Profile::Coverage => {
+        let session = match self.settings.profile.native()? {
+            None => {
                 SearchSession::new(self.evaluator.clone(), namespace, self.settings.tt_entries)?
             }
-            Profile::Control
-                if self.settings.namespace.evaluator
-                    == crate::teacher_pilot_execution::EVALUATOR_ID =>
-            {
-                SearchSession::new_with_control_ordering(
-                    self.evaluator.clone(),
-                    namespace,
-                    self.settings.tt_entries,
-                    quoridor_ai::score::ScoreDomain::LEGACY,
-                )?
-            }
-            _ => SearchSession::new_for_ordering_assessment(
+            Some(profile) => SearchSession::new_with_ordering(
                 self.evaluator.clone(),
                 namespace,
                 self.settings.tt_entries,
                 quoridor_ai::score::ScoreDomain::LEGACY,
-                self.settings
-                    .profile
-                    .native()
-                    .ok_or("missing ordering target")?,
+                profile,
                 request.diagnostic,
+                self.settings.lmr,
             )?,
         };
-        session.set_lmr(self.settings.lmr)?;
         let method = session.namespace().selectivity.clone();
         let lmr = session.lmr_enabled();
         let retained = session.retained_memory_bytes();

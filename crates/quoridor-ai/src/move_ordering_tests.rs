@@ -524,12 +524,13 @@ fn ordering382_two_research_targets_preserve_product_factories() {
             StaticMode::Cheap,
         ),
     ] {
-        let session = SearchSession::new_for_ordering_assessment(
+        let session = SearchSession::new_with_ordering(
             evaluator.clone(),
             namespace("research"),
             4096,
             ScoreDomain::LEGACY,
             profile,
+            false,
             false,
         )
         .unwrap();

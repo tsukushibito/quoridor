@@ -348,3 +348,11 @@ NNUEのControl OFF対Cheap OFFではControl14勝2敗、LMR自体のControl対照
 今回の未入場の整理後比較は、人間の設定訂正によりNNUE BEST43・固定DともTTを1,048,576エントリへ揃える。先のNNUE4096指定だけを置き換え、原400の設定・結果は変更しない。397の固定D容量選択を後続へ引き継いだ研究設定の非対称性であり、評価器の構造的要件ではなかった。旧400のNNUE4096／固定D1048576の結果は、NNUE演算単体の負荷や評価器単体の棋力差を分離していない。
 
 TTを揃えても評価値と順位による探索木、到達局面、手数の差は残る。nodes/secと完成深さからNNUE演算単体の費用は断定しない。既存constructorの要求容量をhonorするsoftwareを再用し、容量訂正だけによるRust再build・成功suite再演・容量sweep・追加call/gameは行わない。入場時に実effective slotsとretained bytesを既存観測から確認し、retainedとRSSを区別する。TT本体は約80MiB/個・対局二個約160MiBという算術であり、実family4GiBとfresh物理資源の成立は通常のguardで確認する。製品・実generator既定容量は変えない。
+
+### 比較条件とコード配置の正本（403）
+
+評価器（対応model・identity）、Control／Cheapの静的採点、LMR OFF／ONだけを比較要因とする。TT1048576・TT利用・PVS・rules・full history・入力、operation内の深さ／node上限・時計／reserve・物理配置は今回の共通条件から解決する。計測の固定depth/nodeと対局の100ms receipt／5ms reserve／node safety1Mは異なる意味を保ち、それぞれの条件内で揃える。最終prepared metadataに実設定の小さい条件表を保存し、model／namespace導出、runID／出力pathを比較要因と混同しない。旧400は当時profileと非対称TT容量の有限結果であり、評価器演算単体・静的整数項単独の効果ではない。
+
+配置は既存crate内で責務を分ける。AIのalphabetaがsession設定・method・探索、move_orderingがrank/keyと準備・整列、二scorerが異なる採点数学、static_geometryが同じ盤面算術だけを所有する。runnerのmeasurement／arena／runtimeはoperation固有の拒否・時計・回収を保持し、typed profile／method／factoryの正本をAIから呼ぶ。旧new_for_ordering_assessmentの互換aliasは残さない。
+
+再利用する条件列生成と明示field解決は既存scripts/dev/research-lifecycle.pyの準備関数へ置き、namespace文字列をPythonで再合成しない。今回一度のprepare-cost96.py／prepare-arena128.pyと有限recipe値はartifactのrun記録とし、再利用処理の実装コピーを残さない。nativeは省略overlayではなく解決済みJSONを読む。実行設定snapshot＋結果が記録単位で、別の逐次認定台帳・runtime継承設定・generic merge・registry・毎run reviewは増やさない。live outputは専用owner、Git保存する設定・結果はresearch-data、models／inputs／checkpointsはresearch-paths.jsonの永続assetsに保持する。旧path／SHA、固有RAW・モデルの移動／複製は不要で、全repo移動を比較gateにしない。

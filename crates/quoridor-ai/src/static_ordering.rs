@@ -1,4 +1,5 @@
 //! Parent-only ranking proxies. No candidate search/evaluation or wall BFS.
+use super::static_geometry::{blocked_edges, neighbours};
 use super::{Interrupted, NodeResult, SearchError};
 use quoridor_core::Position;
 
@@ -70,14 +71,6 @@ fn normalized(covered: u128, total: u128) -> NodeResult<i32> {
     Ok((mul(covered, Q)? / total) as i32)
 }
 
-fn neighbours(cell: usize) -> [Option<usize>; 4] {
-    [
-        (cell / 9 > 0).then(|| cell - 9),
-        (cell / 9 < 8).then(|| cell + 9),
-        (!cell.is_multiple_of(9)).then(|| cell - 1),
-        (cell % 9 < 8).then(|| cell + 1),
-    ]
-}
 fn directed_edge(p: Position, distances: &[u8; 81], a: usize, b: usize) -> Option<(usize, usize)> {
     if !p.is_edge_open(a as u8, b as u8) {
         return None;
@@ -88,18 +81,6 @@ fn directed_edge(p: Position, distances: &[u8; 81], a: usize, b: usize) -> Optio
         Some((b, a))
     } else {
         None
-    }
-}
-/// Core wall geometry: two vertical edges for H, two horizontal edges for V.
-fn blocked_edges(action: u16) -> [(usize, usize); 2] {
-    debug_assert!((81..209).contains(&action));
-    let horizontal = action < 145;
-    let anchor = usize::from(action - if horizontal { 81 } else { 145 });
-    let cell = (anchor / 8) * 9 + anchor % 8;
-    if horizontal {
-        [(cell, cell + 9), (cell + 1, cell + 10)]
-    } else {
-        [(cell, cell + 1), (cell + 9, cell + 10)]
     }
 }
 

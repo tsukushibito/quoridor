@@ -20,12 +20,13 @@ fn lmr400_method_profile_switch_and_reset_clear_real_tt_and_keep_defaults_off() 
         OrderingProfile::CheapStaticControl,
         OrderingProfile::CombinedSignedCheapStatic,
     ] {
-        let mut session = SearchSession::new_for_ordering_assessment(
+        let mut session = SearchSession::new_with_ordering(
             Arc::new(NoCalls),
             namespace("toy"),
             4096,
             ScoreDomain::LEGACY,
             profile,
+            false,
             false,
         )
         .unwrap();

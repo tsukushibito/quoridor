@@ -22,6 +22,8 @@ use continuation_history::{ContinuationHistory, OrderingNodeWork, PlayedMove};
 mod cheap_static_ordering;
 #[path = "move_ordering.rs"]
 mod move_ordering;
+#[path = "static_geometry.rs"]
+mod static_geometry;
 #[path = "static_ordering.rs"]
 mod static_ordering;
 
@@ -1803,6 +1805,61 @@ pub struct SearchNamespace {
     pub rules: String,
     pub selectivity: String,
 }
+
+/// Profile names are configuration, never inferred from an evaluator/namespace.
+impl OrderingProfile {
+    pub fn from_name(name: &str) -> Result<Self> {
+        match name {
+            "control" => Ok(Self::CheapStaticControl),
+            "cheap" => Ok(Self::CombinedSignedCheapStatic),
+            _ => Err(SearchError::Limits(
+                "unsupported signed ordering profile".into(),
+            )),
+        }
+    }
+    pub fn name(self) -> &'static str {
+        match self {
+            Self::CheapStaticControl => "control",
+            Self::CombinedSignedCheapStatic => "cheap",
+        }
+    }
+    pub fn namespace(self, namespace: SearchNamespace, lmr: bool) -> SearchNamespace {
+        SessionMethod::Profile(self).namespace(namespace, lmr)
+    }
+}
+// SignedControl is still an actual teacher/fixed-D constructor, not a shim.
+// Keep that explicitly selected method identity across resets as well.
+#[derive(Clone, Copy)]
+enum SessionMethod {
+    Plain,
+    SignedControl,
+    Profile(OrderingProfile),
+}
+fn append_lmr_method(namespace: &mut SearchNamespace) {
+    namespace.selectivity.push(':');
+    namespace.selectivity.push_str(LMR_METHOD);
+}
+impl SessionMethod {
+    fn namespace(self, mut namespace: SearchNamespace, lmr: bool) -> SearchNamespace {
+        match self {
+            Self::Plain => {}
+            Self::SignedControl => namespace.selectivity.push_str(":signed-control-goal-first"),
+            Self::Profile(profile) => {
+                namespace.selectivity.push(':');
+                namespace
+                    .selectivity
+                    .push_str(cheap_static_ordering::ALGORITHM);
+                namespace.selectivity.push(':');
+                namespace.selectivity.push_str(profile.name());
+            }
+        }
+        if lmr {
+            append_lmr_method(&mut namespace);
+        }
+        namespace
+    }
+}
+
 /// A player/game owns this bounded table across its real move sequence.
 /// New games explicitly reset or create a session; namespace switches clear all entries.
 pub struct SearchSession {
@@ -1814,6 +1871,7 @@ pub struct SearchSession {
     static_enabled: StaticMode,
     ordering_diagnostics: bool,
     lmr: bool,
+    method: SessionMethod,
 }
 impl SearchSession {
     /// Explicit opt-in for the two signed research ordering targets. Switching
@@ -1836,8 +1894,7 @@ impl SearchSession {
                     .selectivity
                     .truncate(self.namespace.selectivity.len() - LMR_METHOD.len() - 1);
             } else {
-                self.namespace.selectivity.push(':');
-                self.namespace.selectivity.push_str(LMR_METHOD);
+                append_lmr_method(&mut self.namespace);
             }
             self.lmr = enabled;
             self.table.clear();
@@ -1898,43 +1955,35 @@ impl SearchSession {
     /// Keeps evaluator/domain/full-width/TT semantics; product defaults stay Coverage.
     pub fn new_with_control_ordering(
         evaluator: Arc<dyn StaticEvaluator>,
-        mut namespace: SearchNamespace,
+        namespace: SearchNamespace,
         capacity: usize,
         score_domain: ScoreDomain,
     ) -> Result<Self> {
-        namespace.selectivity.push_str(":signed-control-goal-first");
         let mut session = Self::create(evaluator, namespace, capacity, score_domain, true, false)?;
         session.static_enabled = StaticMode::CheapControl;
+        session.method = SessionMethod::SignedControl;
+        session.namespace = session.method.namespace(session.namespace, false);
         Ok(session)
     }
-    /// Current research Control/Cheap selection; product constructors are unchanged.
-    pub fn new_for_ordering_assessment(
+    /// Shared explicit Control/Cheap construction; product defaults are separate.
+    pub fn new_with_ordering(
         evaluator: Arc<dyn StaticEvaluator>,
         namespace: SearchNamespace,
         capacity: usize,
         score_domain: ScoreDomain,
         profile: OrderingProfile,
         observe_ordering: bool,
+        lmr: bool,
     ) -> Result<Self> {
         let mut session = Self::create(evaluator, namespace, capacity, score_domain, true, false)?;
         session.ordering_diagnostics = observe_ordering;
-        match profile {
-            OrderingProfile::CheapStaticControl => {
-                session.static_enabled = StaticMode::CheapControl
-            }
-            OrderingProfile::CombinedSignedCheapStatic => {
-                session.static_enabled = StaticMode::Cheap
-            }
-        }
-        session.namespace.selectivity.push(':');
-        session
-            .namespace
-            .selectivity
-            .push_str(cheap_static_ordering::ALGORITHM);
-        session.namespace.selectivity.push_str(match profile {
-            OrderingProfile::CheapStaticControl => ":control",
-            OrderingProfile::CombinedSignedCheapStatic => ":cheap",
-        });
+        session.static_enabled = match profile {
+            OrderingProfile::CheapStaticControl => StaticMode::CheapControl,
+            OrderingProfile::CombinedSignedCheapStatic => StaticMode::Cheap,
+        };
+        session.method = SessionMethod::Profile(profile);
+        session.namespace = session.method.namespace(session.namespace, false);
+        session.set_lmr(lmr)?;
         Ok(session)
     }
     fn create(
@@ -1968,6 +2017,7 @@ impl SearchSession {
             },
             ordering_diagnostics: false,
             lmr: false,
+            method: SessionMethod::Plain,
         })
     }
     /// Table accounting includes its header and fixed slot storage; no history payload.
@@ -2015,29 +2065,7 @@ impl SearchSession {
                 .push_str(&score_domain.namespace_suffix());
         }
         self.evaluator = evaluator;
-        // Bind current real profile/method again after caller namespace reset.
-        match self.static_enabled {
-            StaticMode::CheapControl => {
-                namespace.selectivity.push(':');
-                namespace
-                    .selectivity
-                    .push_str(cheap_static_ordering::ALGORITHM);
-                namespace.selectivity.push_str(":control");
-            }
-            StaticMode::Cheap => {
-                namespace.selectivity.push(':');
-                namespace
-                    .selectivity
-                    .push_str(cheap_static_ordering::ALGORITHM);
-                namespace.selectivity.push_str(":cheap");
-            }
-            _ => {}
-        }
-        if self.lmr {
-            namespace.selectivity.push(':');
-            namespace.selectivity.push_str(LMR_METHOD);
-        }
-        self.namespace = namespace;
+        self.namespace = self.method.namespace(namespace, self.lmr);
         self.score_domain = score_domain;
         self.table.clear();
         if let Some(history) = self.ordering.as_mut() {
@@ -3658,3 +3686,7 @@ mod fixed_d392_factory_tests {
 #[cfg(all(test, feature = "research-diagnostics"))]
 #[path = "ordering_work394_tests.rs"]
 mod ordering_work394_tests;
+
+#[cfg(test)]
+#[path = "search_settings403_tests.rs"]
+mod search_settings403_tests;

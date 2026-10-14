@@ -65,13 +65,14 @@ fn measurement394_completed_callback_preserves_cumulative_and_final_partial_scop
             rules: "toy".into(),
             selectivity: "PVS".into(),
         };
-        let session = SearchSession::new_for_ordering_assessment(
+        let session = SearchSession::new_with_ordering(
             evaluator.clone(),
             namespace,
             4096,
             quoridor_ai::score::ScoreDomain::LEGACY,
             OrderingProfile::CheapStaticControl,
             true,
+            false,
         )
         .unwrap();
         let mut target = SearchTarget {

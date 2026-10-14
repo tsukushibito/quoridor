@@ -1,4 +1,5 @@
 //! Existing Cheap integer coefficients; genuine parent maps, no child/NN work.
+use super::static_geometry::{blocked_edges, neighbours};
 use super::{
     Interrupted, NodeResult, SearchError,
     static_ordering::{StaticScores, goals_only},
@@ -59,14 +60,7 @@ static POINT_MASKS: [u128; 128] = point_masks();
 fn invalid(message: &str) -> Interrupted {
     Interrupted::Error(SearchError::Evaluation(format!("cheap376: {message}")))
 }
-fn neighbours(cell: usize) -> [Option<usize>; 4] {
-    [
-        (cell >= 9).then(|| cell - 9),
-        (cell < 72).then(|| cell + 9),
-        (!cell.is_multiple_of(9)).then(|| cell - 1),
-        (cell % 9 < 8).then(|| cell + 1),
-    ]
-}
+
 fn validate_maps(
     p: Position,
     maps: &[[u8; 81]; 2],
@@ -105,16 +99,7 @@ fn validate_maps(
     }
     Ok(())
 }
-fn blocked_edges(action: u16) -> [(usize, usize); 2] {
-    let horizontal = action < 145;
-    let anchor = usize::from(action - if horizontal { 81 } else { 145 });
-    let cell = (anchor / 8) * 9 + anchor % 8;
-    if horizontal {
-        [(cell, cell + 9), (cell + 1, cell + 10)]
-    } else {
-        [(cell, cell + 1), (cell + 9, cell + 10)]
-    }
-}
+
 fn directly_blocks(p: Position, maps: &[[u8; 81]; 2], player: usize, action: u16) -> bool {
     let pawn = usize::from(p.pawns[player]);
     blocked_edges(action).into_iter().any(|(a, b)| {

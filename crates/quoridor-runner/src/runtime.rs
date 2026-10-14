@@ -558,18 +558,15 @@ impl TtProfile {
 /// invocation/reset boundary. It is never used to enable a mode.
 fn arena_alpha_namespace(
     engine: &Engine,
-    mut base: alphabeta::SearchNamespace,
-) -> alphabeta::SearchNamespace {
-    if let Some(profile) = engine.ordering_profile.as_deref() {
-        base.selectivity
-            .push_str(":cheap-static376-integer-parent-v1:");
-        base.selectivity.push_str(profile);
-        if engine.lmr {
-            base.selectivity.push(':');
-            base.selectivity.push_str(alphabeta::LMR_METHOD);
-        }
+    base: alphabeta::SearchNamespace,
+) -> alphabeta::Result<alphabeta::SearchNamespace> {
+    match engine.ordering_profile.as_deref() {
+        Some(name) => Ok(alphabeta::OrderingProfile::from_name(name)?.namespace(base, engine.lmr)),
+        None if engine.lmr => Err(alphabeta::SearchError::Limits(
+            "LMR needs an explicit ordering target".into(),
+        )),
+        None => Ok(base),
     }
-    base
 }
 fn arena_alpha_session(
     evaluator: Arc<dyn StaticEvaluator>,
@@ -579,26 +576,16 @@ fn arena_alpha_session(
     arena: Option<&crate::arena::ArenaConfig>,
 ) -> alphabeta::Result<alphabeta::SearchSession> {
     let session = if let Some(profile) = engine.ordering_profile.as_deref() {
-        let profile = match profile {
-            "control" => alphabeta::OrderingProfile::CheapStaticControl,
-            "cheap" => alphabeta::OrderingProfile::CombinedSignedCheapStatic,
-            _ => {
-                return Err(alphabeta::SearchError::Limits(
-                    "unknown arena ordering target".into(),
-                ));
-            }
-        };
-        // Preserve the actual existing arena score domain; no new evaluator math.
-        let mut session = alphabeta::SearchSession::new_for_ordering_assessment(
+        let profile = alphabeta::OrderingProfile::from_name(profile)?;
+        alphabeta::SearchSession::new_with_ordering(
             evaluator,
             base,
             capacity,
             quoridor_ai::score::ScoreDomain::LEGACY,
             profile,
             false,
-        )?;
-        session.set_lmr(engine.lmr)?;
-        session
+            engine.lmr,
+        )?
     } else if arena.is_some_and(|a| a.disable_continuation_static_ordering) {
         alphabeta::SearchSession::new_without_continuation_or_static(evaluator, base, capacity)?
     } else {
@@ -1950,32 +1937,36 @@ fn worker(
                 let namespace = arena_alpha_namespace(e, base_namespace.clone());
                 let mut completion = crate::arena_clock::Completion::default();
                 let observed = !g.record_teacher;
-                let search_result = invoke_alpha_observed(
-                    &mut g.alpha_sessions[engine_index],
-                    &mut g.tt_profiles[engine_index],
-                    evaluators[engine_index].evaluator.as_ref().unwrap().clone(),
-                    namespace,
-                    &base_namespace,
-                    &g.context,
-                    &limits,
-                    &cancel,
-                    caller_start,
-                    |evaluator, raw_namespace, capacity| {
-                        arena_alpha_session(
-                            evaluator,
-                            raw_namespace,
-                            capacity,
-                            e,
-                            config.arena.as_ref(),
-                        )
-                    },
-                    observed.then_some(&mut completion),
-                    observed
-                        .then_some(e.time_ms.map(Duration::from_millis))
-                        .flatten(),
-                    Duration::from_millis(config.arena.as_ref().map_or(0, |a| a.return_reserve_ms)),
-                    None,
-                );
+                let search_result = namespace.and_then(|namespace| {
+                    invoke_alpha_observed(
+                        &mut g.alpha_sessions[engine_index],
+                        &mut g.tt_profiles[engine_index],
+                        evaluators[engine_index].evaluator.as_ref().unwrap().clone(),
+                        namespace,
+                        &base_namespace,
+                        &g.context,
+                        &limits,
+                        &cancel,
+                        caller_start,
+                        |evaluator, raw_namespace, capacity| {
+                            arena_alpha_session(
+                                evaluator,
+                                raw_namespace,
+                                capacity,
+                                e,
+                                config.arena.as_ref(),
+                            )
+                        },
+                        observed.then_some(&mut completion),
+                        observed
+                            .then_some(e.time_ms.map(Duration::from_millis))
+                            .flatten(),
+                        Duration::from_millis(
+                            config.arena.as_ref().map_or(0, |a| a.return_reserve_ms),
+                        ),
+                        None,
+                    )
+                });
                 if !g.record_teacher {
                     let returned = Instant::now();
                     let origin = g.origin;
@@ -2437,31 +2428,36 @@ impl EvaluationWorkers {
                                     EvaluationUpdate::Alpha(Box::new(result.clone())),
                                 ));
                             };
-                            let result = invoke_alpha_observed(
-                                &mut session,
-                                &mut profile,
-                                evaluator.evaluator.as_ref().unwrap().clone(),
-                                namespace,
-                                &base_namespace,
-                                &turn.root,
-                                &limits,
-                                &turn.stop,
-                                turn.started,
-                                |evaluator, raw_namespace, capacity| {
-                                    arena_alpha_session(
-                                        evaluator,
-                                        raw_namespace,
-                                        capacity,
-                                        e,
-                                        c.arena.as_ref(),
+                            let result = namespace
+                                .and_then(|namespace| {
+                                    invoke_alpha_observed(
+                                        &mut session,
+                                        &mut profile,
+                                        evaluator.evaluator.as_ref().unwrap().clone(),
+                                        namespace,
+                                        &base_namespace,
+                                        &turn.root,
+                                        &limits,
+                                        &turn.stop,
+                                        turn.started,
+                                        |evaluator, raw_namespace, capacity| {
+                                            arena_alpha_session(
+                                                evaluator,
+                                                raw_namespace,
+                                                capacity,
+                                                e,
+                                                c.arena.as_ref(),
+                                            )
+                                        },
+                                        Some(&mut completion),
+                                        e.time_ms.map(Duration::from_millis),
+                                        Duration::from_millis(
+                                            c.arena.as_ref().unwrap().return_reserve_ms,
+                                        ),
+                                        Some(&mut publish),
                                     )
-                                },
-                                Some(&mut completion),
-                                e.time_ms.map(Duration::from_millis),
-                                Duration::from_millis(c.arena.as_ref().unwrap().return_reserve_ms),
-                                Some(&mut publish),
-                            )
-                            .map_err(|error| error.to_string());
+                                })
+                                .map_err(|error| error.to_string());
                             EvaluationResult::Alpha {
                                 result: result.map(Box::new),
                                 completion: Box::new(completion),

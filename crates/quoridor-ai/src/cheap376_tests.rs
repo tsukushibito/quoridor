@@ -436,12 +436,13 @@ fn cheap376_complete_depth1_matches_independent_no_tt_and_observer_is_only_obser
     ] {
         let mut returns = Vec::new();
         for observe in [false, true] {
-            let mut s = SearchSession::new_for_ordering_assessment(
+            let mut s = SearchSession::new_with_ordering(
                 eval.clone(),
                 namespace("376-NN0"),
                 4096,
                 super::super::ScoreDomain::LEGACY,
                 profile,
+                false,
                 false,
             )
             .unwrap();
@@ -469,12 +470,13 @@ fn cheap376_complete_depth1_matches_independent_no_tt_and_observer_is_only_obser
         }
         assert_eq!(returns[0], returns[1]);
     }
-    let mut s = SearchSession::new_for_ordering_assessment(
+    let mut s = SearchSession::new_with_ordering(
         eval,
         namespace("376-cancel"),
         4096,
         super::super::ScoreDomain::LEGACY,
         OrderingProfile::CombinedSignedCheapStatic,
+        false,
         false,
     )
     .unwrap();

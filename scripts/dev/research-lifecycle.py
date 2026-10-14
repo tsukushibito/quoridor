@@ -5276,6 +5276,45 @@ def operation_order(settings):
                 measurement += 1
 
 
+def comparison_conditions(common):
+    """The only varied research factors; evaluator-specific identities stay bound."""
+    return [
+        dict(evaluator=evaluator, profile=profile, lmr=lmr)
+        for evaluator in common["evaluators"]
+        for profile in common["profiles"]
+        for lmr in common["lmr_values"]
+    ]
+
+
+def apply_comparison_cost(config, common, variant):
+    config["tt_entries"] = common["tt_entries"]
+    config["use_tt"] = common["use_tt"]
+    config["use_pvs"] = common["use_pvs"]
+    config["namespace"]["rules"] = common["rules"]
+    config["profile"] = variant["profile"]
+    config["lmr"] = variant["lmr"]
+
+
+def apply_comparison_arena(config, common, pair):
+    arena = common["arena"]
+    # The existing arena entry fixes these flags true; it has no override fields.
+    assert common["use_tt"] is True and common["use_pvs"] is True
+    config["ruleset"] = common["ruleset"]
+    config["arena"]["tt_entries"] = common["tt_entries"]
+    config["arena"]["return_reserve_ms"] = arena["return_reserve_ms"]
+    config["management_cpu_core"] = arena["management_guardian"]
+    config["cpu_cores"] = list(arena["AI_workers"])
+    config["host_ram_reserve"] = common["host_reserve_B"]
+    config["max_plies"] = arena["max_plies"]
+    config["max_memory_bytes"] = common["family_B"] - common["controller_B"]
+    for engine, variant in zip(config["engines"], pair, strict=True):
+        assert engine["kind"] == variant["evaluator"]
+        engine["ordering_profile"] = variant["profile"]
+        engine["lmr"] = variant["lmr"]
+        for key in ("depth", "max_nodes", "time_ms"):
+            engine[key] = arena[key]
+
+
 def prepare_selected_operation(settings_ref, kind, index):
     """Derive ordinary lifecycle parameters; never issue a per-operation admission."""
     settings = document(settings_ref)
