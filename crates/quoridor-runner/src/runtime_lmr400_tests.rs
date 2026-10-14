@@ -106,3 +106,56 @@ fn runtime400_partial_result_retains_lmr_work_without_completed_iteration() {
     assert_eq!(profile.actual_lmr_enabled, None);
     assert!(result.action.is_none() && result.value.is_none());
 }
+
+#[test]
+fn runtime400_raw_reset_and_qualified_compare_x_x_y_y_reset_once() {
+    let p = quoridor_core::Position {
+        pawns: [76, 67],
+        ..Default::default()
+    };
+    let root = SigmaContext::from_counts(p, 0, vec![(p.into(), 1)]).unwrap();
+    let limits = SearchLimits {
+        max_depth: 1,
+        max_nodes: 100,
+        time_limit: None,
+        tt_entries: 64,
+        use_pvs: true,
+        use_tt: true,
+    };
+    for ordering in ["control", "cheap"] {
+        for enabled in [false, true] {
+            let e = engine(Some(ordering), enabled);
+            let mut session = None;
+            let mut profile = TtProfile::default();
+            for (label, resets) in [("X", 0), ("X", 0), ("Y", 1), ("Y", 1)] {
+                let mut base = namespace();
+                base.evaluator.push_str(label);
+                let expected = arena_alpha_namespace(&e, base.clone());
+                invoke_alpha_observed(
+                    &mut session,
+                    &mut profile,
+                    Arc::new(MetadataOnly),
+                    expected.clone(),
+                    &base,
+                    &root,
+                    &limits,
+                    &AtomicBool::new(false),
+                    Instant::now(),
+                    |evaluator, raw, capacity| {
+                        arena_alpha_session(evaluator, raw, capacity, &e, None)
+                    },
+                    None,
+                    None,
+                    Duration::ZERO,
+                    None,
+                )
+                .unwrap();
+                assert_eq!(session.as_ref().unwrap().namespace(), &expected);
+                assert_eq!(session.as_ref().unwrap().lmr_enabled(), enabled);
+                assert_eq!(profile.namespace_resets, resets);
+                assert_eq!(profile.initialization_successes, 1);
+                assert_eq!(profile.actual_lmr_enabled, Some(enabled));
+            }
+        }
+    }
+}

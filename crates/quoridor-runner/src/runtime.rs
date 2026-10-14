@@ -251,11 +251,17 @@ mod alpha_receipt_353_tests {
             &mut None,
             &mut profile,
             Arc::new(C1Evaluator { fail }),
-            alphabeta::SearchNamespace {
+            (alphabeta::SearchNamespace {
                 evaluator: "353-new-malformed-completion-control-fixture".into(),
                 rules: root.ruleset().id().into(),
                 selectivity: "fullwidth".into(),
-            },
+            })
+            .clone(),
+            &(alphabeta::SearchNamespace {
+                evaluator: "353-new-malformed-completion-control-fixture".into(),
+                rules: root.ruleset().id().into(),
+                selectivity: "fullwidth".into(),
+            }),
             &root,
             &SearchLimits {
                 max_depth: 1,
@@ -635,7 +641,8 @@ fn invoke_alpha(
         session,
         profile,
         evaluator,
-        namespace,
+        namespace.clone(),
+        &namespace,
         root,
         limits,
         cancel,
@@ -653,6 +660,7 @@ fn invoke_alpha_observed(
     profile: &mut TtProfile,
     evaluator: Arc<dyn StaticEvaluator>,
     namespace: alphabeta::SearchNamespace,
+    reset_namespace: &alphabeta::SearchNamespace,
     root: &SigmaContext,
     limits: &SearchLimits,
     cancel: &AtomicBool,
@@ -672,7 +680,11 @@ fn invoke_alpha_observed(
         if session.is_none() {
             profile.initialization_attempts += 1;
             let start = Instant::now();
-            let new = initialize(evaluator.clone(), namespace.clone(), limits.tt_entries);
+            let new = initialize(
+                evaluator.clone(),
+                reset_namespace.clone(),
+                limits.tt_entries,
+            );
             profile.session_initialization_seconds += start.elapsed().as_secs_f64();
             match new {
                 Ok(new) => {
@@ -693,7 +705,7 @@ fn invoke_alpha_observed(
         profile.persistent_tt_byte_cap = Some(byte_cap);
         if session.namespace() != &namespace {
             let start = Instant::now();
-            session.reset(evaluator, namespace);
+            session.reset(evaluator, reset_namespace.clone());
             profile.session_reset_seconds += start.elapsed().as_secs_f64();
             profile.namespace_resets += 1;
         }
@@ -1943,14 +1955,15 @@ fn worker(
                     &mut g.tt_profiles[engine_index],
                     evaluators[engine_index].evaluator.as_ref().unwrap().clone(),
                     namespace,
+                    &base_namespace,
                     &g.context,
                     &limits,
                     &cancel,
                     caller_start,
-                    |evaluator, _qualified_namespace, capacity| {
+                    |evaluator, raw_namespace, capacity| {
                         arena_alpha_session(
                             evaluator,
-                            base_namespace.clone(),
+                            raw_namespace,
                             capacity,
                             e,
                             config.arena.as_ref(),
@@ -2429,14 +2442,15 @@ impl EvaluationWorkers {
                                 &mut profile,
                                 evaluator.evaluator.as_ref().unwrap().clone(),
                                 namespace,
+                                &base_namespace,
                                 &turn.root,
                                 &limits,
                                 &turn.stop,
                                 turn.started,
-                                |evaluator, _qualified_namespace, capacity| {
+                                |evaluator, raw_namespace, capacity| {
                                     arena_alpha_session(
                                         evaluator,
-                                        base_namespace.clone(),
+                                        raw_namespace,
                                         capacity,
                                         e,
                                         c.arena.as_ref(),
@@ -5123,7 +5137,8 @@ mod completed_error_tests {
             &mut None,
             &mut profile,
             Arc::new(FailDepth2),
-            ns,
+            ns.clone(),
+            &ns,
             &root,
             &limits,
             &AtomicBool::new(false),
@@ -5163,11 +5178,17 @@ mod live_caller_clock_tests {
                 &mut session,
                 &mut profile,
                 Arc::new(DistanceEvaluator::new(0., 8.)),
-                alphabeta::SearchNamespace {
+                (alphabeta::SearchNamespace {
                     evaluator: "397-D0,8:tanh-caller-capacity".into(),
                     rules: "research-standard-2p-threefold-goal-first-v1".into(),
                     selectivity: "fullwidth-PVS-MPC-OFF-v1".into(),
-                },
+                })
+                .clone(),
+                &(alphabeta::SearchNamespace {
+                    evaluator: "397-D0,8:tanh-caller-capacity".into(),
+                    rules: "research-standard-2p-threefold-goal-first-v1".into(),
+                    selectivity: "fullwidth-PVS-MPC-OFF-v1".into(),
+                }),
                 &root,
                 &limits,
                 &AtomicBool::new(true),
@@ -5227,11 +5248,17 @@ mod live_caller_clock_tests {
                 &mut session,
                 &mut profile,
                 Arc::new(DistanceEvaluator::new(0., 8.)),
-                alphabeta::SearchNamespace {
+                (alphabeta::SearchNamespace {
                     evaluator: "D_a0b8_clock_probe".into(),
                     rules: "research-standard-2p-threefold-goal-first-v1".into(),
                     selectivity: "fullwidth".into(),
-                },
+                })
+                .clone(),
+                &(alphabeta::SearchNamespace {
+                    evaluator: "D_a0b8_clock_probe".into(),
+                    rules: "research-standard-2p-threefold-goal-first-v1".into(),
+                    selectivity: "fullwidth".into(),
+                }),
                 &root,
                 &limits,
                 &AtomicBool::new(cancelled),
@@ -6163,7 +6190,8 @@ mod two_ai_374_tests {
                 &mut session,
                 &mut profile,
                 evaluator,
-                namespace,
+                namespace.clone(),
+                &namespace,
                 &root,
                 &limits,
                 &ai_stop,
