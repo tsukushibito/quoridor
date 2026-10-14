@@ -337,10 +337,14 @@ NNUEのControl OFF対Cheap OFFではControl14勝2敗、LMR自体のControl対照
 
 新402ではsigned／no-policyのControlとCheapに同じ既存key・TT先行・先頭1手選択／tail一度整列・LMR保護情報の表現を使い、静的整数項を加えるかだけを採点側へ残す一候補を準備する。順位tier・goal/killer・Action ID tie・採点時点とkey freeze・PVS同手再探索・root全順序消費を共通化し、policy／unsigned／Coverageの意味、静的係数／正確距離／検証、ルール／fullhistory／モデルを保つ。静的機能にはその入力距離と検査・順位変化による探索workも含まれ、共通化後も時間差を整数加算だけの孤立費へ割り振らない。
 
-必要softwareと関連境界の独立確認後、新しい同一imageでNNUE BEST43／TT4096と固定D(0,8tanh)／TT1048576の各Control/Cheap内OFF→ON→ON→OFFを測る。既存6roots・96calls／48sessions／288M上限、D4各2M／D6各8M、通常diagnostics/depthcallback OFF、追加root/cap/warmup/sampling/sweepなし。同じ8family×2色・4対照・2評価器の新128局／64pairsを100ms receipt／5ms reserve／depth64／node安全上限1M／200plyで行う。旧400との別時刻比から共通化だけの因果speedupを認定せず、旧対局を新対局と混ぜない。共有family・多重対照の不確実性とUNKNOWN、直接比較のない4条件順位の未確立を保持する。
+必要softwareと関連境界の独立確認後、新しい同一imageでNNUE BEST43／TT1048576と固定D(0,8tanh)／TT1048576の各Control/Cheap内OFF→ON→ON→OFFを測る。既存6roots・96calls／48sessions／288M上限、D4各2M／D6各8M、通常diagnostics/depthcallback OFF、追加root/cap/warmup/sampling/sweepなし。同じ8family×2色・4対照・2評価器の新128局／64pairsを100ms receipt／5ms reserve／depth64／node安全上限1M／200plyで行う。旧400との別時刻比から共通化だけの因果speedupを認定せず、旧対局を新対局と混ぜない。共有family・多重対照の不確実性とUNKNOWN、直接比較のない4条件順位の未確立を保持する。
 
 実装・費用・指し手差・同時間結果を合わせて研究経路の採否／保留を記録する。製品／実generator既定や重みを昇格せず、全結果後の追加candidate/tuning/生成/fitを自動発行しない。混合・learner全prep/pipelineと323 USERPAUSE、封印・oldfits96・TT履歴projection設計のみ、393／398不採用とforeign devcontainer変更は不変。source/configの独立準備を並行し、同path writer／共有Cargo／actual fairtimingだけを直列にする。状態と所有はBeads402、実根拠は `.artifacts/research-team/integration324/shared-signed-ordering402-v1/` と既存findings／本設計へ保持する。
 
 整理後の比較には、402の共通準備に加え、403で選択する設定・namespace・採点幾何の挙動保存差分を別commitで含める。一つの真正imageを実設定へ結び、既承認の96探索／128局だけを行う。整理前の半分だけの版を先に測ってから繰り返さない。methodは設定から生成し、namespace文字列を設定へ逆変換しない。幾何の同じ盤面操作は共有しても、CoverageとCheapの異なる採点算法・係数は別の責務として保つ。製品・生成の既定とTT履歴資格を変更しない。
 
 対局は既存accepted observationsだけから各evaluator×静的採点×LMRの選択済み完成snapshot depthの件数・中央値・分布・平均を保存し、中央値を主に表示する。LMR ONは選択的nominal depthであり、OFFの全幅深さと同じ保証ではない。対局条件によって軌跡・手数・終盤比率が異なり、平均は終盤の高深度で膨らみ得る。同一局面の深さ差や棋力の原因へ読み替えず、追加Search／forward／depthcallbackは行わない。
+
+今回の未入場の整理後比較は、人間の設定訂正によりNNUE BEST43・固定DともTTを1,048,576エントリへ揃える。先のNNUE4096指定だけを置き換え、原400の設定・結果は変更しない。397の固定D容量選択を後続へ引き継いだ研究設定の非対称性であり、評価器の構造的要件ではなかった。旧400のNNUE4096／固定D1048576の結果は、NNUE演算単体の負荷や評価器単体の棋力差を分離していない。
+
+TTを揃えても評価値と順位による探索木、到達局面、手数の差は残る。nodes/secと完成深さからNNUE演算単体の費用は断定しない。既存constructorの要求容量をhonorするsoftwareを再用し、容量訂正だけによるRust再build・成功suite再演・容量sweep・追加call/gameは行わない。入場時に実effective slotsとretained bytesを既存観測から確認し、retainedとRSSを区別する。TT本体は約80MiB/個・対局二個約160MiBという算術であり、実family4GiBとfresh物理資源の成立は通常のguardで確認する。製品・実generator既定容量は変えない。
