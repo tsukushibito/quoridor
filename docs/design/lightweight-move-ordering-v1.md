@@ -264,3 +264,17 @@ O fa1954be/Build76a051c1、N f37325c7/Buildeeb98d27は399差分だけ。NNUE/BES
 新6＋影響394三件の9assertions、必要compile/Clippy/真正buildと限定source review clear0/0を確認した。元v1のnew-test参照寿命E0597 FAILED8.445832476秒と元mask/captureは保持、unit Policyをstatic fixtureへ替えただけでproduction/期待値不変。研究compile成功を再演せず、failed/unrun検証v2は111.717411749秒。数値job89.316316059秒を一度、source/build/保存解析と別記しnested加算しない。全originalnative/inner/outer directwait/reap/handles/freshidentity/TMP不在/owned[]を確認、family4GiB guardで完了したがRSSpeakはUNKNOWN。
 
 診断のpreparedはTT手を除き、線形先頭選択と実tail/full sort、selected/sortedのdistinct read/returnを分ける。selectedには1要素tailも含む。full-order history/static比較分母は実eager listだけ、deferred first-choice比較は別で、未整列tailのfull-order関係はUNKNOWN。OFFに専用snapshot/copy/scan/隠れsortを置かない。このOFF比較でskip回数は観測していない。1672B key本体に加えenum/frame/再帰live copy/cache/stackの孤立費はUNKNOWNでwholeに含める。製品default/モデル/TT容量既定は維持し、混合/learnerのsource準備から全生成/converter/fit/newweights/native/256、323 USERPAUSE、oldfits96/models/defaults/N/seals、旧RAW/FAILED/全費UNKNOWNを維持する。新candidate/追加profile/比較/生成再開は発行しない。
+
+### LMR一候補をControl／Cheap込みで評価する直接指示（400、2026-10-14）
+
+人間がLMRの実装とCheap有無込みの評価を直接指示した。399のexact-first/frozen-key tail採用基盤を保ち、LMR既定OFFの小さい設定を既存SearchSessionと共通alpha-beta/PVSへ追加する。初期一候補は内部残depth>=3・4番目以降の異なる合法手を1ply減深、TT手・即goal・killer・rootと先行手を除外する。既存scoutで浅い結果が元alphaを上回れば通常child深さで確認し、必要なfull-window PVSへ続く。source構造による最小整理は結果前に実設定と理由を固定し、開始順位・削減量のsweepは行わない。LMR ONは選択的探索であり、nominal completed depthを全幅minimaxの証明にしない。
+
+現ControlとCombinedSignedCheapStaticを同じLMR規則で比較し、LMR ON/OFFとorderingの実method・TT namespaceを分離する。既存fullhistory/context/depth/bounds/score/rules/repetition、TT-firstと399key freeze、同手再探索・history更新・checked undo/取消/errorを保持する。固定DはNNUE accumulator mapを持たず、現Cheapのcached Noneでpawn progress/gap/directblock特徴が消える経路がある。既存の正確な親距離計算を再用する最小対応を準備し、係数・既存検査を保って計算/検査/copyの費用を比較へ含める。stub/偽cache/新conditional-static/head/資格省略は用いない。Controlへ不要なmap計算を足さない。
+
+探索費は同じ真正imageでNNUE BEST43/TT4096と固定D(0,8tanh)/研究TT1048576を分け、各Control/CheapでOFF-ON-ON-OFF・既存6rootsを一度測る。計96calls/48sessions、D4各2M/D6各8M、288M上限、diagnosticsOFF/depthcallbackOFF/no time limit。depth/value/action/PV/work差は観測として保存し、LMR ON/OFFへ399のsame-work採用gateを移植しない。合法集合/parent/fullhistory復元/停止と実入力対応を必須とし、固定Dの旧8M未完成D6を今回の選択的深さから遡及補完しない。
+
+同時間arenaは各evaluator内でControl OFF対ON、Cheap OFF対ON、Control OFF対Cheap OFF、Control ON対Cheap ONの4対照。同じ事前固定8opening families×2色で各16局、計128games/64colour pairs、未封印bookから開幕層を含め選び、条件/colour順を結果前に固定する。共有familyを独立標本へ水増ししない。既存100ms authority receipt/5ms return reserve/200ply/同TT・PVS・node safety capと実arena nominal depthを使い、2AI各1worker＋main、family4GiB/GPU0。fresh topologyでCPU2/3がSMT兄弟と判明したため、AI2/6・main/guardian4を準備案とし、実allocation/quietはlaunch前に別確認する。旧core配置や原結果は変更しない。
+
+必要なsoftwareと重要なLMR/PVS/TTmethod/現役consumer境界を一度関連独立確認する。速度だけで採用や棋力改善とせず、完成度・指し手差・同時間の勝分負とfamily別score/不確実性・fallback/errorを合わせて研究経路への採否/保留を判断する。重要な方式/棋力結論は同じ関連reviewerへ必要な比較根拠だけを渡す。探索的128局を正式最高棋力・非劣性認定にしない。source/対局準備を並行、sole Main/Git/index/Cargoは324、実timingだけheavy工程を直列にする。既存coded連続sequenceと取消/directwait/reap/TMP/STOPを使い、通常工程の人間/Root ACKを追加しない。
+
+これは新sourceと有限評価の許可であり、現時点の実LMR image/設定/結果・速度/棋力採用は未確定。新scheduler/registry/certificate/旧engine copy/恒常source mirrorや追加warmup/roots/refill/cap/sampling/tuningを発行しない。製品/default・実generator既定・モデル/尺度/特徴/ルールは維持する。普通source/software/copy/reviewに事前保存枠を置かず、bounded capturesと対象実使用一回、共有targetは正の増分だけをdecimal50GBへ数える。mixed/learnerのsource準備から全生成/converter/fit/newweights/native/256と323 USERPAUSE、oldfits96/models/defaults/N/seals/foreign devcontainer、旧RAW/FAILED/全費UNKNOWNを維持する。担当/状態/依存はBeads、実設定・原結果とSTOPは既存artifact入口で保持する。
