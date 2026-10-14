@@ -167,3 +167,11 @@ Main7386b54のcore/NNUE5pathsを保持する。[exact保存receipt](../../resear
 parent-after/child-after完全hitを先行し、親geometryはimmutable、pawnはArc共有、変わらないdistanceでも閉じた下降edgeを正しく除く。新wall-keyへの新cache、厳密一枚追加以外のcanonical exact BFS、goal/unreachable/twoedge/seed順序/undo/errorを維持する。既存queue oracleと玩具FTの変更境界だけを確認し、元11成功suiteの全再演を入口にしない。
 
 同じ最新採用基盤のNNUE/BEST43 Control O-N-N-O、既存6roots×4=24calls/12sessions/72M、TT4096/PVS/rules/観測モード固定、全depth/valuebits/action/exactPV/all30work/legal/history/parent/stop MATCHとwhole N中央値≤O・同root両NがO中央値1.10超なしで一度だけ判断する。O/N間は今回geometry差分だけにし、100万TT・history projection・固定D・モデル変更を混ぜない。初期full構築/保存維持/copy/Arc/部分修復/fallbackを全体費に含める。未記録hit/skip/影響範囲/部位費はUNKNOWN、追加sampling/roots/refill/tuning/対局/fitは発行しない。
+
+### 固定準備を減らした距離差分候補も有限不支持（398、2026-10-14）
+
+[exact保存receipt](../../research-data/ai-sigma/distance-map-delta398/receipt.json)は177filesのsource/必要software/限定review/設定/原結果・journal/STOP/撤回を結ぶ。81\*u128 bucket初期化をなくし、81Bの出力行に候補labelを置く少数セル修復、frontier方向maskのrelax/link共用、m(m+1)/2+16m<=81（m<=4）のsource-work方針による早期fullBFSを一候補にした。広域fallback前の距離copy/小修復準備を避けたが、保存metadata160B情報本体の作成・維持、row/mask copy/newArcは残る。閾値は実時間交差点ではなく、layout/hit/skipBFS/影響領域分布/部位費はUNKNOWN。
+
+O fa1954be/Build76a051c1は391局所不変＋395合法手＋394/397共通software、N fffad75a/Buildbac78328はgeometry候補だけ。NNUE/BEST43 Control/TT4096/PVS/rules、diagnosticsOFF/callbackOFF、既存6roots×ONNO24/12sessionsが全COMPLETE。depth/valuebits/action/exactPV/全30work/legal/fullhistoryroot/parent/stop一致、実28,197,548nodes/72M。setup/drop込みwhole中央値O8.8774449105秒/N8.8833642125秒、N/O1.0006667799（約0.0667%遅い）。両Nとも同rootのO中央値1.10超は0でも、N<=Oを満たさず候補だけを戻した。微小差の有意性/一般速度/棋力や追加保存一般の不利を認定せず、追加測定で補充しない。別基盤の旧393の9.581%不支持との差を、今回処理整理の単独因果利益にしない。
+
+新core4＋NNUE2と必要compileはv1でPASS。Clippyが新testのidentity shiftを拒否した元FAILED17.344435170秒/NULL/persisted masksを保持し、同値定数だけ修復した。成功6assertionsを再演せず残Clippy/optimized BUILDをv2でPASS（92.082929668秒）、geometry/seed/cache review clear0/0。最初の保存集計は新serde bool省略falseを旧expected Requestへ展開せずUNKNOWNだったため元collection-v1を残し、observe_completed_depthsの宣言default一項目だけを投影したv2で全条件整合/時間FAILを確認した。RAW/config/callsを変更せず新Search0。数値job outer58.713720384秒は一度、nested費を加算しない。実STOP/元子identity/directwait/reap/handles/TMPを確認して並行tail実装を直ちに再開した。混合/learnerの準備と全後段・323 USERPAUSE、oldfits96/models/defaults/N/seals/旧RAW/FAILED/全費UNKNOWNは不変。

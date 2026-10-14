@@ -1705,3 +1705,17 @@ Controlのstatic0加算と診断ONでの同一ranking対照にはsource上の省
 NNUE sequence outer21.159437576秒は一度、Dは397のouter63.382437715秒の一部を共有し追加費へ加算しない。native whole4.041877575/9.498989077秒は観測ONを含み、sort/score単体費・observer overhead・一般speedupを分離しない。旧profile14%から回避時間を逆算せず、モデル間にも転用しない。新AI6+runner2のcounter/途中/error/cancel/TT-only/PVS境界は共通softwareでPASS、optional depth入口の新metadata1もPASS、旧成功suite/原RAW decode/科学callsの再演無し。混合/learnerの準備から全後段までと323 USERPAUSE、oldfits96/models/defaults/N/sealsを保持する。
 
 四つのwarm rootsは同一sessionでTT/historyを共有する時系列で、独立replicatesではありません。[最終報告書への追記保存](../research-data/ai-sigma/sort-opportunity394/report-addendum-receipt.json)はこの注記と対応するFileRefだけを補い、元96filesと数値結果を変更しない。
+
+### 固定準備を減らした距離差分候補も有限不支持（398、2026-10-14）
+
+[exact保存receipt](../research-data/ai-sigma/distance-map-delta398/receipt.json)は177filesのsource/必要software/限定review/設定/原結果・journal/STOP/撤回を結ぶ。81\*u128 bucket初期化をなくし、81Bの出力行に候補labelを置く少数セル修復、frontier方向maskのrelax/link共用、m(m+1)/2+16m<=81（m<=4）のsource-work方針による早期fullBFSを一候補にした。広域fallback前の距離copy/小修復準備を避けたが、保存metadata160B情報本体の作成・維持、row/mask copy/newArcは残る。閾値は実時間交差点ではなく、layout/hit/skipBFS/影響領域分布/部位費はUNKNOWN。
+
+O fa1954be/Build76a051c1は391局所不変＋395合法手＋394/397共通software、N fffad75a/Buildbac78328はgeometry候補だけ。NNUE/BEST43 Control/TT4096/PVS/rules、diagnosticsOFF/callbackOFF、既存6roots×ONNO24/12sessionsが全COMPLETE。depth/valuebits/action/exactPV/全30work/legal/fullhistoryroot/parent/stop一致、実28,197,548nodes/72M。setup/drop込みwhole中央値O8.8774449105秒/N8.8833642125秒、N/O1.0006667799（約0.0667%遅い）。両Nとも同rootのO中央値1.10超は0でも、N<=Oを満たさず候補だけを戻した。微小差の有意性/一般速度/棋力や追加保存一般の不利を認定せず、追加測定で補充しない。別基盤の旧393の9.581%不支持との差を、今回処理整理の単独因果利益にしない。
+
+新core4＋NNUE2と必要compileはv1でPASS。Clippyが新testのidentity shiftを拒否した元FAILED17.344435170秒/NULL/persisted masksを保持し、同値定数だけ修復した。成功6assertionsを再演せず残Clippy/optimized BUILDをv2でPASS（92.082929668秒）、geometry/seed/cache review clear0/0。最初の保存集計は新serde bool省略falseを旧expected Requestへ展開せずUNKNOWNだったため元collection-v1を残し、observe_completed_depthsの宣言default一項目だけを投影したv2で全条件整合/時間FAILを確認した。RAW/config/callsを変更せず新Search0。数値job outer58.713720384秒は一度、nested費を加算しない。実STOP/元子identity/directwait/reap/handles/TMPを確認して並行tail実装を直ちに再開した。混合/learnerの準備と全後段・323 USERPAUSE、oldfits96/models/defaults/N/seals/旧RAW/FAILED/全費UNKNOWNは不変。
+
+### 最優先1手のexact選択と必要時tail整列の有限検証（399、2026-10-14）
+
+人間が394の確認結果を受け、Control/no-policy/signed合成keyで最小1手だけを線形選択し、次の異なる手を読む時だけ残りを一度sortする一候補を承認した。全対象の採点/key作成は既存時点に一度、子history/killer更新後も保存keyをfreezeする。既存TT-firstは先行探索/復元後のsiblings準備時点を保ち、同一手のPVS再探索でtailを進めない。root等の全消費入口はeagerを維持でき、policy±0/unsigned/Cheap/Coverage、goal/ID tie、TT/history/math/legality/cancel/undoを変えない。追加heap/Vec clone/全ID copy/各手の再選択や汎用MovePickerを作らず、任意診断は実際のfirst選択とtail整列を区別する。
+
+NNUE/BEST43 Control TT4096と固定D(0,8tanh) Control TT1048576を各既存6roots×ONNO24/12sessions、計48calls/24sessions/144M上限、D4各2M/D6各8M、diagnosticsOFF/callbackOFFで一度比較する。Oは最新採用基盤、Nはこの一差分のみ（398不採用は両者へ混ぜない）。NNUE全COMPLETE、固定Dは双方D6未完成でも原UNKNOWN/完成深さを区別し、両stratumでdepth/valuebits/action/exactPV/全30work/legal/history/parent/stop一致を要求する。各wholeN中央値<=O・同root両NともO中央値1.10超なしが基準。不支持なら一候補を戻し、別方式/sweep/追加calls/cap/生成/fitを自動発行しない。8Mは反復深化の有限比較上限でD6完成保証ではなく、paused生成の100M per-move/40G batchとは別設定である。実装/数値成功や採用はまだ主張しない。

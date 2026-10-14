@@ -246,3 +246,9 @@ Controlのstatic0加算と診断ONでの同一ranking対照にはsource上の省
 NNUE sequence outer21.159437576秒は一度、Dは397のouter63.382437715秒の一部を共有し追加費へ加算しない。native whole4.041877575/9.498989077秒は観測ONを含み、sort/score単体費・observer overhead・一般speedupを分離しない。旧profile14%から回避時間を逆算せず、モデル間にも転用しない。新AI6+runner2のcounter/途中/error/cancel/TT-only/PVS境界は共通softwareでPASS、optional depth入口の新metadata1もPASS、旧成功suite/原RAW decode/科学callsの再演無し。混合/learnerの準備から全後段までと323 USERPAUSE、oldfits96/models/defaults/N/sealsを保持する。
 
 四つのwarm rootsは同一sessionでTT/historyを共有する時系列で、独立replicatesではありません。[最終報告書への追記保存](../../research-data/ai-sigma/sort-opportunity394/report-addendum-receipt.json)はこの注記と対応するFileRefだけを補い、元96filesと数値結果を変更しない。
+
+### 最優先1手のexact選択と必要時tail整列の有限検証（399、2026-10-14）
+
+人間が394の確認結果を受け、Control/no-policy/signed合成keyで最小1手だけを線形選択し、次の異なる手を読む時だけ残りを一度sortする一候補を承認した。全対象の採点/key作成は既存時点に一度、子history/killer更新後も保存keyをfreezeする。既存TT-firstは先行探索/復元後のsiblings準備時点を保ち、同一手のPVS再探索でtailを進めない。root等の全消費入口はeagerを維持でき、policy±0/unsigned/Cheap/Coverage、goal/ID tie、TT/history/math/legality/cancel/undoを変えない。追加heap/Vec clone/全ID copy/各手の再選択や汎用MovePickerを作らず、任意診断は実際のfirst選択とtail整列を区別する。
+
+NNUE/BEST43 Control TT4096と固定D(0,8tanh) Control TT1048576を各既存6roots×ONNO24/12sessions、計48calls/24sessions/144M上限、D4各2M/D6各8M、diagnosticsOFF/callbackOFFで一度比較する。Oは最新採用基盤、Nはこの一差分のみ（398不採用は両者へ混ぜない）。NNUE全COMPLETE、固定Dは双方D6未完成でも原UNKNOWN/完成深さを区別し、両stratumでdepth/valuebits/action/exactPV/全30work/legal/history/parent/stop一致を要求する。各wholeN中央値<=O・同root両NともO中央値1.10超なしが基準。不支持なら一候補を戻し、別方式/sweep/追加calls/cap/生成/fitを自動発行しない。8Mは反復深化の有限比較上限でD6完成保証ではなく、paused生成の100M per-move/40G batchとは別設定である。実装/数値成功や採用はまだ主張しない。
