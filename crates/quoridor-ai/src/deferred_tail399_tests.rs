@@ -276,7 +276,7 @@ fn control399_excluded_modes_provider_and_empty_single_keep_eager_validation() {
     let legal = root.legal_ids();
     let eval = Toy::new(0.0);
     let mut history = ContinuationHistory::new().unwrap();
-    let policy = Policy;
+    static POLICY: Policy = Policy;
     with_state(
         &root,
         &eval,
@@ -285,7 +285,7 @@ fn control399_excluded_modes_provider_and_empty_single_keep_eager_validation() {
         |s, c| {
             warm(s, c, legal[0], 2);
             for mode in 0..4 {
-                s.orderer = (mode == 0).then_some(&policy as &dyn MoveOrderer);
+                s.orderer = (mode == 0).then_some(&POLICY as &dyn MoveOrderer);
                 s.static_scratch = Some(match mode {
                     1 => StaticScratch::Cheap,
                     2 => StaticScratch::Coverage(static_ordering::StaticScratch::new().unwrap()),
