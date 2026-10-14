@@ -1044,8 +1044,8 @@
   },
   "mixed_learning_proposal": {
     "issue": "quoridor-4lc.380",
-    "status": "RECOMMENDATION_NOT_SCIENCE_AUTHORIZATION",
-    "scientific_entry": false,
+    "status": "INITIAL_TRIAL_SELECTED_EXECUTION_AUTHORIZED",
+    "scientific_entry": true,
     "design": "docs/design/nnue-teacher-distance-tanh-v1.md#380多様な固定dデータと公開sigma勝敗の混合学習案2026-10-13",
     "baseline_ref": "public_replay_study; immutable BEST43 descriptor46ec/weights046fe/evaluator96a5 and incumbent T-only scale",
     "generation": {
@@ -1058,7 +1058,7 @@
       "prefix_attempts": 32,
       "selection": "existing sorted legal-action xorshift64, target blind; global canonical/reflected prefixes, extension-lineage and bounded endpoint-geometry dedupe before outcomes",
       "split_seed": 38020261014,
-      "split": "existing canonical-family SHA rank, frozen1024T/256V; failures leave holes; descendants/reflections retain split",
+      "split": "before outcomes rank unique collision families by existing canonical-family SHA and splitseed; floor(4F/5)T/restV, requests not fixed1024/256; failures leave holes, reflections/descendants retain split",
       "fixed_D": [0, 8],
       "score": "tanh",
       "completed_depth": 6,
@@ -1101,12 +1101,13 @@
       "warmup": "min(100,actual U), then constant",
       "early_stop": "100-update and final observations;5 consecutive newD V improvements below max(1e-8,1e-4*previous best) stop",
       "observations_upper": 7,
-      "validation": "full opened public V419150 and full newD V<=51200 separately; sealed E untouched",
+      "validation": "full opened public V419150 and full actual newD V; conservative upper243200, sealedE untouched",
       "diagnostic_T_rows_each_upper": 8192,
       "checkpoints": ["INITIAL", "BEST", "LAST"],
-      "BEST": "min newD V MSE among observations with public V<=same actual INITIAL and newD V<INITIAL; earliest tie; none ->INITIAL/no improvement",
+      "BEST": "min improved newD V MSE, earliest tie; no public_non_regression gate (false), publicV separate monitoring; none ->INITIAL/no improvement",
       "all_row_forwards_cap_proposed": 6000000,
-      "device_proposal": "existing GPU1/VRAM6GiB/family RAM8GiB; actual placement pending; no LR/ratio sweep"
+      "device_proposal": "selected learner GPUindex0/VRAM6GiB/familyRAM8GiB; actual physical placement/support before launch",
+      "public_non_regression": false
     },
     "evaluation": {
       "new_start_families": 64,
@@ -1126,8 +1127,8 @@
       "D6_turns_after_prefix": 243200,
       "generation_nodes": 160000000000,
       "training_row_forwards": 1048576,
-      "curve_row_forwards": 3407138,
-      "training_plus_curves": 4455714,
+      "curve_row_forwards": 4751138,
+      "training_plus_curves": 5799714,
       "evaluation_turns": 51200
     },
     "storage_proposal": {
@@ -1143,14 +1144,15 @@
       },
       "classification": "bulk aggregate; components are pricing, not subcaps; ordinary work storageNone/postusage",
       "completion_guarantee": false,
-      "limitation": "16MiB per game event *1280=20GiB logical worst case. Practical8GiB may stop partial, no deletion/refill/automatic extension; whole22GiB+ is alternative worst-case support subject to actual retention",
+      "limitation": "16MiB/game *1280=20GiB logical worstcase; selected8GiB permits partialstop. Preserve original RAW/failures/no refund/refill; any later autonomous recipe change needs new immutable settings and recorded costs.",
       "global_cap_B": 50000000000,
       "current_global_allocated_B": null,
       "dated_covered_observation": {
         "at": "2026-10-11",
         "allocated_B": 24161214464
       },
-      "before_bulk": "limited current coverage/known delta and actual FS4GiB reserve; historical holds are not occupancy; no whole old-assets audit"
+      "before_bulk": "limited current coverage/known delta and actual FS4GiB reserve; historical holds are not occupancy; no whole old-assets audit",
+      "selection": "whole8GiB partialstop; no guarantee1280complete, actual bulk support pending current retained+serialpeak check"
     },
     "outputs_proposed": {
       "data": ".worktree/assets/data/fixed-d-sigma-mixture380-v1/",
@@ -1167,6 +1169,8 @@
       "old common-fourfit/96",
       "all original RAW/FAILED/UNKNOWN/costs",
       "no new calibration or inference-time prediction"
-    ]
+    ],
+    "execution_issue": "quoridor-4lc.342.17",
+    "selection_revision": "2026-10-14 human delegated data/training choices; former unanswered choices withdrawn. Initial recipe selected; actual runtime refs/support still required, not implied by plan edit."
   }
 }

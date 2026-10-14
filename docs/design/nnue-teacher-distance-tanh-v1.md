@@ -445,7 +445,7 @@ Actual exposures are12800added versus6400added+6400public, both200updates; reduc
 
 ## 380：多様な固定Dデータと公開Sigma勝敗の混合学習案（2026-10-13）
 
-今回の承認は具体的計画の準備までである。以下の数量・抽出・混合率・学習・評価は推奨案で、[既存planのmixed_learning_proposal](../../research-data/ai-sigma/teacher-distance-tanh-v1/plan.json)も`scientific_entry=false`とする。362/371の終了済み科学許可を転用せず、旧common-fourfit/96と323 USERPAUSEを保持する。BEST43を不変の比較基準とし、その重み046feから別の候補一つを追加学習する。基準モデル自体を書き換えない。
+380/381準備時点では以下は推奨案で、科学entryは未発行だった。2026-10-14の新しい直接指示によりデータ・学習条件を自律選択できるようになり、下記「混合学習の初期試行を選択して実行」のレシピを採択した。[現行planのmixed_learning_proposal](../../research-data/ai-sigma/teacher-distance-tanh-v1/plan.json)はその現在選択と実行許可を表す。過去のUNSELECTED設定・実準備結果・PAUSEは変更しない。362/371の終了済み許可を転用せず、旧common-fourfit/96と323 USERPAUSEは保持する。BEST43を不変基準として別候補一つを追加学習し、基準weightsや製品既定を変更しない。
 
 ### 観測と目的
 
@@ -541,10 +541,22 @@ learnerは通常の`train --cache --output --config`に`experiment.study="mixed-
 
 次の人間判断は、この1280/64-row/50:50/batch2048/LR1e-4/最大8 newD露出/上記BEST条件/256局/whole8GiBと未完了方針を一回案として選ぶか、どの重要設定を変えるかである。計画leafの完了は新生成・fit・対局・任意N配分の発行ではない。既承認の374診断/349解釈と元RAW/FAILED/費用、models/defaults/N/seals/fits96/323pauseは保持する。
 
-### 混合学習の実運用準備（2026-10-14、科学entryなし）
+### 混合学習の実運用準備（2026-10-14、当時は科学entryなし）
 
 [保存した未選択設定・参照・資源/保存観測](../../research-data/ai-sigma/mixed-runtime342-16/receipt.json)は、既存381のconverter Build14764cb2／runner Buildf8890ea6／interop2961d46cを元scopeで再用したもので、新資格や成功suite再演ではない。current refs／同じ設定形式／必要parser一度と整形前後JSON値一致／実readerSTOP・owned[]を確認した。実未生成schedule/partition/stream/cache/newweightsのFileRefsはnullで、空の入力やdummy hashで実行可能とは表示しない。混合率・cap64/all・publicV gate・whole8GiB/十分容量・一試行委任は未選択のままである。
 
 既存sequenceのrunsは事前に束縛したExperimentの静的列で、prepare_selected_operationは未来のstream/cache/weightsを自動発見しない。4通常生成RUN→1converter→通常train→実weights対応→初回256arenaという接続は、選択後に既存の同preparation境界で実際の先行出力を後段へ束縛する残作業である。新scheduler/registry/認定や各stageの手動ACK chainを増やさない。現在の未選択設定はこのまま起動可能なjobではない。
 
 dated covered24.161GBと後続の限定保持観測は現在global占有の証明ではなく、8GiB支持は未発行。fit-local128MiB guardは全工程8GiB unionでない。科学委任後、既存covered＋実際の既知増分・対象dest/cache/serialtarget/private/log/TMPに限定してwholeのowned unionとdecimal50GBの成立を確定する。旧49.99GB forecastをactual扱いせず、全asset監査・モデル/RAW削除・compression creditを入口にしない。02:54ZのCPU/RAM/RTX3060・installed package METADATA観測は将来のallocation/静穏・ABI/学習resident/速度の資格ではなく、sourceCPU3／GPU0の準備でGPU/modelを初期化していない。生成2workersとGPU learnerの配置/競合/whole資源は、実起動境界で調整する未選択案に留める。
+
+### 混合学習の初期試行を選択して実行（2026-10-14）
+
+人間の「データ・学習条件の選択は人間判断不要、事後確認で良い」という直接指示により、旧一括委任質問・混合3未回答待ちを撤回する。Root/実行・統合は研究目標と実資源内で設定を選択・変更し、実config・理由・元試行との差・validation/結果/全費を事後報告する。方向/特徴/モデル設計、明示pause・封印・製品既定・decimal50GBは別境界として保持する。以下は最初の有限レシピで、永久固定の学習規則ではない。
+
+初期選択は上限1280requests／4×320／序盤4/8/12/16・prefixseed38020261013、生成前のcanonical/reflection/extension/endpoint系列と既存book除外、splitseed38020261014によるunique family数Fのfloor(4F/5)T／残りV。固定1024T/256V requestsを保証しない。固定D(0,8 tanh)・completedD6/PVS/TT4096・1手100M／batch共有40G／全160G nodes・序盤込み200ply、GOAL/真正threefold zSTMのみを教師にし、UNKNOWN/error/near-goal raw値と全RAWを原物保全する。既存coded sequenceで4batchを続け、勝敗によるrefillや失敗の成功昇格をしない。
+
+T-viewはfamily当たり最大64行をchronological等間隔抽出し、V全行は保持。公開T:newDT=1024:1024／batch2048／freshAdam LR1e-4／BEST43固定init一候補、既存FT32/H32/QF1/Zero4/FP32/tanh/尺度/outputbypassOFF。model/order38020261015・reflection38020261016・publicsampler38020261017、newD露出8回相当のfullbatch端数／max512updates／既存warmup/earlystop。BESTはnewD-Vで選び、public_non_regression=falseを選択して公開Vは別曲線・別監視にする。INITIAL/BEST/LASTのみ、0/100/.../500/512で両Vと既存8192T panelsを観測する。6M row-forward capには必要なinitial/native対応も含め、旧保守的5,799,714＋余裕200,286は実cache件数で置き換える。空T/Vならfitしない。
+
+独立64開始棋譜をseed38020261018で事前固定し、2色×BEST43/Dの256局を初回評価とする。実newweightsの必要native/scalar/最適化/delta/undo対応後、既存2AIworker＋main/100ms receipt/5ms reserve/正確drain/取消/合法fallbackで行う。評価をcheckpoint選び直しへ使わず、Sigma追加比較や製品既定への自動昇格をしない。実timing/棋力評価は生成・GPU学習・解析・build/大IOと直列、独立source/保存解析は実空きに応じ並行する。
+
+Whole8GiB部分停止を選択した。これは最大1280完了の保証ではなく、実新規output/cache/checkpoint/必要build増分/serialTMP/evaluation/failureのunionを既存whole guardで覆う。fit-local128MiBをwholeへ読み替えない。既存covered＋以後の既知増分・対象の限定観測からdecimal50GBとfresh FS reserveを確認し、実support/configへ束縛して生成を開始する。実schedule/partition/stream/cache/weightsは各生成後の本物のrefsだけを既存Root preparationで後段へつなぐ。旧UNSELECTED artifactへ架空refsを補わず、新scheduler/資格/手動ACK chainを増やさない。成功381/342.16 scopeの再演は不要で、変わったinput/weights/library/callerの必要確認を行う。
