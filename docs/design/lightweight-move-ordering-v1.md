@@ -232,3 +232,15 @@ reported lost0でもunresolved leaf41／全485のunknown ancestorがあり、inl
 [exact保存receipt](../../research-data/ai-sigma/legal-action-bits395/receipt.json)の123filesに原source/限定review/整形/型補正/software/全結果・journal/STOPを結んだ。Control O59d2a79c（人間選択396の現構成）→N c50f5da4/Buildfdc5e393、既存6roots×4の24calls/12sessions全COMPLETE。depth/valuebits/action/exactPV/全30work/legal/fullhistoryroot/parent/stopが一致し、setup/drop込みwhole中央値9.1349915755→8.9628772655秒、N/O0.9811587883、同root両NともO中央値1.10超は0で保持する。wall/pawn二つを合わせた一候補の有限結果であり、個別利益/一般speedup/棋力/固定D throughput/新hotspotは推定しない。394観測/397容量はこのO/Nへ混ぜていない。
 
 原softwareはnewtest整数sliceの型不足でcompile停止した。u16注記だけを補正し、期待IDs3/5/13とproductionは不変。元bothAIcompile PASSは再用し、未入場core5assertionsと未実行Clippy/releaseだけをPASSした。元FAILED/guardianNULL/disk masks/費を保持する。壁は独立scalar+cellqueue oracleを再用、pawn referenceの一部は同publicmaskを使うため独立oracleと呼ばず、明示expectedsetsを別に確認した。実STOP/元子exact identity/directwait/reap/handles/TMP cleanupからTT準備を再開し、追加call/候補/測定なし。対象一回のallocated1,565,097,984Bは396前提と全retained sharedtarget込みで新増分ではなく、conservative47.026GB<decimal50GB/globalactual/peakUNKNOWN。mixed/learner/323のUSERPAUSEは不変。
+
+### 採点・ソートの未使用尾部を有界診断で確認（394、2026-10-14）
+
+[exact保存receipt](../../research-data/ai-sigma/sort-opportunity394/receipt.json)に、任意観測のsource/必要software、設定、原journal/結果、分母の照合と実STOPを結ぶ。同一image fa1954be/Build76a051c1、Control/TT4096/PVS/no-policyの固定D6roots（容量比較A-firstを共有）と新NNUE/BEST43の6roots、計12calls/6sessions/36M上限、実15,334,296nodes。固定Dは5COMPLETEとcoldD6 NodeLimit/completed5の1UNKNOWN、NNUEは6COMPLETE。固定D用追加6callや396追加D6callは0、397B-firstの関連付録は394の反復・分母・費用へ加えない。
+
+finishedのsort対象96,963,438（D）/201,308,175（NNUE）中、cutoffで未読の尾部は88,709,937（91.488%）/194,293,184（96.515%）だった。これは相互順序を使わなかった量であり、時間削減率ではない。最優先手の選択には候補採点・比較が必要で、「未読の手は採点も不要」「heapが有利」とは結論しない。first sorted手でcutoffした割合はfinished prepared nodesの91.85%/96.35%、全sorted手消費は7.50%/2.59%。D6が各群sort actionsの92.66%/96.37%を占める有限work-weighted観測で、一般局面へ外挿しない。
+
+既に省かれているTT-only no-sort cutoffはD29,982/NNUE31,406で、数値TT cutoffとは別。started ordering929,230/1,870,345、finished929,224/1,870,345、finished prepared899,242/1,838,939を分けた。Dの未完了6nodesにはprepared682actions/read starts141/returns135があり、zero workにしない。PVS同じ手の再探索はdistinct sorted readを二重に増やさない。0/1対象は今回0件で、標準sortが比較しない場合も入口準備まで省けるとはしていない。全rootと合計のscalar/histogram収支は一致した。
+
+Controlのstatic0加算と診断ONでの同一ranking対照にはsource上の省略候補があるが、コンパイラ除去や部位時間は未分離で、今回は実装しない。全手を読むnode/最後の手でcutoffするnode/rootの既存consumerは全順序を使う。尾部を必要時まで整列しない方式は次の提案だけとし、採点省略・heap/MovePicker/radix/TT変更や新比較を発行しない。通常OFFは追加snapshot/copy/scan無しの任意観測として維持する。
+
+NNUE sequence outer21.159437576秒は一度、Dは397のouter63.382437715秒の一部を共有し追加費へ加算しない。native whole4.041877575/9.498989077秒は観測ONを含み、sort/score単体費・observer overhead・一般speedupを分離しない。旧profile14%から回避時間を逆算せず、モデル間にも転用しない。新AI6+runner2のcounter/途中/error/cancel/TT-only/PVS境界は共通softwareでPASS、optional depth入口の新metadata1もPASS、旧成功suite/原RAW decode/科学callsの再演無し。混合/learnerの準備から全後段までと323 USERPAUSE、oldfits96/models/defaults/N/sealsを保持する。

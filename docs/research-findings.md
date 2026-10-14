@@ -1691,3 +1691,15 @@ D6上限は反復深化の累積8MでありcompletedD5はD6未着手を意味し
 393の不支持は追加保存/差分更新一般の無効を示さない。固定sourceには、小領域でも81×u128のbucket初期化（1296B/playerの情報本体）、markedの初期化/境界seed/確定/接続再構成の多段走査、boundaryと接続再構成で同じcellのopen neighborsを再導出する経路、影響伝播で40超を検出してからfull BFSと方向mask構築へ進む二段費用がある。伝播は40超で早期停止し、元391にもrow copy/newArcはある。heap repair/全81を何度もBFS/距離完成後一律81scanだったとはしない。実memset/copy/inline費・hit/BFS skip/影響分布は未分離で、全9.581%悪化の原因には認定しない。
 
 人間の新指示で、この固定準備と重複導出を減らした別の一候補を、現在の合法手/TT共通softwareを含む同じ基盤で比較する。小scratch/距離順seed、まとめたfrontier処理、広域fallback前の不要準備回避、完全hitとimmutable wall-keyを検討し、作成/維持/copy/Arcを含む費用で選ぶ。[範囲と未確定条件](design/distance-map-first-v1.md#固定準備と隣接先再導出を減らす新候補3982026-10-14)に従い、元393のFAIL/CLOSED/rollback/費を維持する。新候補の利益は未測定であり、TT/履歴/モデル/math/合法手順序は混ぜない。
+
+### 採点・ソートの未使用尾部を有界診断で確認（394、2026-10-14）
+
+[exact保存receipt](../research-data/ai-sigma/sort-opportunity394/receipt.json)に、任意観測のsource/必要software、設定、原journal/結果、分母の照合と実STOPを結ぶ。同一image fa1954be/Build76a051c1、Control/TT4096/PVS/no-policyの固定D6roots（容量比較A-firstを共有）と新NNUE/BEST43の6roots、計12calls/6sessions/36M上限、実15,334,296nodes。固定Dは5COMPLETEとcoldD6 NodeLimit/completed5の1UNKNOWN、NNUEは6COMPLETE。固定D用追加6callや396追加D6callは0、397B-firstの関連付録は394の反復・分母・費用へ加えない。
+
+finishedのsort対象96,963,438（D）/201,308,175（NNUE）中、cutoffで未読の尾部は88,709,937（91.488%）/194,293,184（96.515%）だった。これは相互順序を使わなかった量であり、時間削減率ではない。最優先手の選択には候補採点・比較が必要で、「未読の手は採点も不要」「heapが有利」とは結論しない。first sorted手でcutoffした割合はfinished prepared nodesの91.85%/96.35%、全sorted手消費は7.50%/2.59%。D6が各群sort actionsの92.66%/96.37%を占める有限work-weighted観測で、一般局面へ外挿しない。
+
+既に省かれているTT-only no-sort cutoffはD29,982/NNUE31,406で、数値TT cutoffとは別。started ordering929,230/1,870,345、finished929,224/1,870,345、finished prepared899,242/1,838,939を分けた。Dの未完了6nodesにはprepared682actions/read starts141/returns135があり、zero workにしない。PVS同じ手の再探索はdistinct sorted readを二重に増やさない。0/1対象は今回0件で、標準sortが比較しない場合も入口準備まで省けるとはしていない。全rootと合計のscalar/histogram収支は一致した。
+
+Controlのstatic0加算と診断ONでの同一ranking対照にはsource上の省略候補があるが、コンパイラ除去や部位時間は未分離で、今回は実装しない。全手を読むnode/最後の手でcutoffするnode/rootの既存consumerは全順序を使う。尾部を必要時まで整列しない方式は次の提案だけとし、採点省略・heap/MovePicker/radix/TT変更や新比較を発行しない。通常OFFは追加snapshot/copy/scan無しの任意観測として維持する。
+
+NNUE sequence outer21.159437576秒は一度、Dは397のouter63.382437715秒の一部を共有し追加費へ加算しない。native whole4.041877575/9.498989077秒は観測ONを含み、sort/score単体費・observer overhead・一般speedupを分離しない。旧profile14%から回避時間を逆算せず、モデル間にも転用しない。新AI6+runner2のcounter/途中/error/cancel/TT-only/PVS境界は共通softwareでPASS、optional depth入口の新metadata1もPASS、旧成功suite/原RAW decode/科学callsの再演無し。混合/learnerの準備から全後段までと323 USERPAUSE、oldfits96/models/defaults/N/sealsを保持する。
