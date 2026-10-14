@@ -1,0 +1,492 @@
+{
+  "issue": "quoridor-4lc.388",
+  "archive": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/current-control-perf388/saved-profile.json.gz",
+    "sha256": "70f949bc9e7fb651a9bf95119ced78105c86fb725d35bc5e1cb30245e13bc572",
+    "bytes": 123094,
+    "mode": "0644"
+  },
+  "RAW_original": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/current-control388-v1/execution-v1/measure-001/perf.data",
+    "sha256": "a9e2ee3b7ebae13b80dfb805e0c92aabddc914e8de5559312dbe2abe14c800fa",
+    "bytes": 4790616,
+    "mode": "0600"
+  },
+  "RAW_gzip": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/current-control-perf388/perf.data.gz",
+    "sha256": "c4fa8f43bfe423f28e79f2448d6ab30c6de50c9f4229bc0852908a52bb0652a4",
+    "bytes": 607841,
+    "mode": "0644"
+  },
+  "exact_file_count": 64,
+  "complete_calls": 18,
+  "sessions": 9,
+  "approved_node_cap": 54000000,
+  "recorded_nodes": 21148161,
+  "recorded_evaluations": 15520353,
+  "all_passes_same_image": {
+    "bytes": 8731008,
+    "mode": "0755",
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner387-child-map-v1",
+    "sha256": "ced70ad8f21babbc802fe2aaae017cd79e567a215283bf0d918b832c19781c2b"
+  },
+  "all_recorded_correspondence": "PASS: depth/valuebits/action/exactPV/allwork/legal/fullhistory/parent/stop",
+  "sampling": {
+    "sample_count": 565,
+    "sample_period_sum": 11530612095,
+    "reported_lost_samples": 0,
+    "unresolved_leaf_samples": 33,
+    "unresolved_leaf_percent": 5.84070796460177,
+    "unresolved_ancestor_samples": 565,
+    "unknown_terminal_sentinel_samples": 565,
+    "named_frame_count_range": [
+      2,
+      11
+    ],
+    "first_sample_time": 93708.188984,
+    "last_sample_time": 93719.730777
+  },
+  "groups": {
+    "map_generation": {
+      "resolved_self_samples": 59,
+      "resolved_self_percent": 10.442477876106194,
+      "resolved_any_frame_samples": 63,
+      "resolved_any_frame_percent": 11.150442477876107,
+      "resolved_symbols": [
+        "<quoridor_core::position::Position>::wall_distance_maps"
+      ],
+      "meaning": "Overlapping named-symbol groups, not additive causal costs. No resolved symbol/sample means unresolved, not zero cost."
+    },
+    "map_validation_distinct_symbol": {
+      "resolved_self_samples": 0,
+      "resolved_self_percent": 0.0,
+      "resolved_any_frame_samples": 0,
+      "resolved_any_frame_percent": 0.0,
+      "resolved_symbols": [],
+      "meaning": "Overlapping named-symbol groups, not additive causal costs. No resolved symbol/sample means unresolved, not zero cost."
+    },
+    "cheap_prepare_distinct_symbol": {
+      "resolved_self_samples": 0,
+      "resolved_self_percent": 0.0,
+      "resolved_any_frame_samples": 0,
+      "resolved_any_frame_percent": 0.0,
+      "resolved_symbols": [],
+      "meaning": "Overlapping named-symbol groups, not additive causal costs. No resolved symbol/sample means unresolved, not zero cost."
+    },
+    "cheap_scoring_resolved_direct_edge": {
+      "resolved_self_samples": 0,
+      "resolved_self_percent": 0.0,
+      "resolved_any_frame_samples": 0,
+      "resolved_any_frame_percent": 0.0,
+      "resolved_symbols": [],
+      "meaning": "Overlapping named-symbol groups, not additive causal costs. No resolved symbol/sample means unresolved, not zero cost."
+    },
+    "sorting": {
+      "resolved_self_samples": 157,
+      "resolved_self_percent": 27.787610619469028,
+      "resolved_any_frame_samples": 160,
+      "resolved_any_frame_percent": 28.31858407079646,
+      "resolved_symbols": [
+        "core::slice::sort::shared::smallsort::small_sort_network::<u16, <[u16]>::sort_unstable_by<<quoridor_ai::alphabeta::move_ordering::Ranking>::sort::{closure#1}>::{closure#0}>",
+        "core::slice::sort::unstable::quicksort::quicksort::<u16, <[u16]>::sort_unstable_by<<quoridor_ai::alphabeta::move_ordering::Ranking>::sort::{closure#1}>::{closure#0}>",
+        "core::slice::sort::shared::smallsort::insertion_sort_shift_left::<u16, <[u16]>::sort_unstable_by<<quoridor_ai::alphabeta::move_ordering::Ranking>::sort::{closure#1}>::{closure#0}>",
+        "core::slice::sort::shared::pivot::median3_rec::<u16, <[u16]>::sort_unstable_by<<quoridor_ai::alphabeta::move_ordering::Ranking>::sort::{closure#1}>::{closure#0}>",
+        "core::slice::sort::unstable::ipnsort::<u16, <[u16]>::sort_unstable_by<<quoridor_ai::alphabeta::move_ordering::Ranking>::sort::{closure#1}>::{closure#0}>"
+      ],
+      "meaning": "Overlapping named-symbol groups, not additive causal costs. No resolved symbol/sample means unresolved, not zero cost.",
+      "label": "sorting/unstable/comparator where resolved"
+    },
+    "ordered": {
+      "resolved_self_samples": 62,
+      "resolved_self_percent": 10.973451327433628,
+      "resolved_any_frame_samples": 227,
+      "resolved_any_frame_percent": 40.176991150442475,
+      "resolved_symbols": [
+        "<quoridor_ai::alphabeta::Search>::ordered"
+      ],
+      "meaning": "Overlapping named-symbol groups, not additive causal costs. No resolved symbol/sample means unresolved, not zero cost."
+    },
+    "edge_queries": {
+      "resolved_self_samples": 0,
+      "resolved_self_percent": 0.0,
+      "resolved_any_frame_samples": 0,
+      "resolved_any_frame_percent": 0.0,
+      "resolved_symbols": [],
+      "meaning": "Overlapping named-symbol groups, not additive causal costs. No resolved symbol/sample means unresolved, not zero cost."
+    },
+    "TT_table": {
+      "resolved_self_samples": 3,
+      "resolved_self_percent": 0.5309734513274337,
+      "resolved_any_frame_samples": 3,
+      "resolved_any_frame_percent": 0.5309734513274337,
+      "resolved_symbols": [
+        "<quoridor_ai::alphabeta::Table>::probe_hashed"
+      ],
+      "meaning": "Overlapping named-symbol groups, not additive causal costs. No resolved symbol/sample means unresolved, not zero cost."
+    },
+    "board_hash": {
+      "resolved_self_samples": 4,
+      "resolved_self_percent": 0.7079646017699115,
+      "resolved_any_frame_samples": 6,
+      "resolved_any_frame_percent": 1.0619469026548674,
+      "resolved_symbols": [
+        "<quoridor_ai::alphabeta::BoardCursor>::advance"
+      ],
+      "meaning": "Overlapping named-symbol groups, not additive causal costs. No resolved symbol/sample means unresolved, not zero cost."
+    },
+    "context_fingerprint": {
+      "resolved_self_samples": 5,
+      "resolved_self_percent": 0.8849557522123894,
+      "resolved_any_frame_samples": 5,
+      "resolved_any_frame_percent": 0.8849557522123894,
+      "resolved_symbols": [
+        "<quoridor_ai::alphabeta::ContextFingerprint>::add"
+      ],
+      "meaning": "Overlapping named-symbol groups, not additive causal costs. No resolved symbol/sample means unresolved, not zero cost."
+    },
+    "history_context": {
+      "resolved_self_samples": 9,
+      "resolved_self_percent": 1.592920353982301,
+      "resolved_any_frame_samples": 9,
+      "resolved_any_frame_percent": 1.592920353982301,
+      "resolved_symbols": [
+        "<quoridor_core::research::SigmaContext>::is_repetition_draw",
+        "<quoridor_core::research::ContextUndo>::checked_positions",
+        "<quoridor_core::research::ContextUndo>::checked_history_transition"
+      ],
+      "meaning": "Overlapping named-symbol groups, not additive causal costs. No resolved symbol/sample means unresolved, not zero cost."
+    },
+    "history_ordering_distinct_symbol": {
+      "resolved_self_samples": 0,
+      "resolved_self_percent": 0.0,
+      "resolved_any_frame_samples": 0,
+      "resolved_any_frame_percent": 0.0,
+      "resolved_symbols": [],
+      "meaning": "Overlapping named-symbol groups, not additive causal costs. No resolved symbol/sample means unresolved, not zero cost."
+    },
+    "NNUE_delta": {
+      "resolved_self_samples": 37,
+      "resolved_self_percent": 6.548672566371682,
+      "resolved_any_frame_samples": 117,
+      "resolved_any_frame_percent": 20.707964601769913,
+      "resolved_symbols": [
+        "<quoridor_nnue::Model>::delta_move_into",
+        "<core::iter::adapters::flatten::FlattenCompat<core::slice::iter::Iter<alloc::vec::Vec<f32>>, core::slice::iter::Iter<f32>>>::iter_try_fold::<(), <core::iter::adapters::flatten::FlattenCompat<_, _> as core::iter::traits::iterator::Iterator>::try_fold::flatten<core::slice::iter::Iter<f32>, (), core::ops::control_flow::ControlFlow<()>, core::iter::traits::iterator::Iterator::any::check<&f32, <quoridor_nnue::Model>::delta_move_into::{closure#6}>::{closure#0}>::{closure#0}, core::ops::control_flow::ControlFlow<()>>"
+      ],
+      "meaning": "Overlapping named-symbol groups, not additive causal costs. No resolved symbol/sample means unresolved, not zero cost."
+    },
+    "NNUE_feature_validation": {
+      "resolved_self_samples": 15,
+      "resolved_self_percent": 2.6548672566371683,
+      "resolved_any_frame_samples": 15,
+      "resolved_any_frame_percent": 2.6548672566371683,
+      "resolved_symbols": [
+        "quoridor_nnue::validate_features",
+        "<quoridor_nnue::Model>::validate_accumulator"
+      ],
+      "meaning": "Overlapping named-symbol groups, not additive causal costs. No resolved symbol/sample means unresolved, not zero cost."
+    },
+    "NNUE_features": {
+      "resolved_self_samples": 3,
+      "resolved_self_percent": 0.5309734513274337,
+      "resolved_any_frame_samples": 3,
+      "resolved_any_frame_percent": 0.5309734513274337,
+      "resolved_symbols": [
+        "<alloc::sync::Arc<quoridor_nnue::features::WallMaps>>::drop_slow"
+      ],
+      "meaning": "Overlapping named-symbol groups, not additive causal costs. No resolved symbol/sample means unresolved, not zero cost."
+    },
+    "NNUE_head": {
+      "resolved_self_samples": 70,
+      "resolved_self_percent": 12.389380530973451,
+      "resolved_any_frame_samples": 89,
+      "resolved_any_frame_percent": 15.752212389380531,
+      "resolved_symbols": [
+        "<quoridor_nnue::residual::ResidualModel>::evaluate_with_scratch",
+        "quoridor_nnue::simd::avx2_dot_fast"
+      ],
+      "meaning": "Overlapping named-symbol groups, not additive causal costs. No resolved symbol/sample means unresolved, not zero cost."
+    },
+    "legal_generation": {
+      "resolved_self_samples": 66,
+      "resolved_self_percent": 11.68141592920354,
+      "resolved_any_frame_samples": 67,
+      "resolved_any_frame_percent": 11.858407079646017,
+      "resolved_symbols": [
+        "<quoridor_core::position::Position>::legal_action_ids",
+        "<quoridor_core::position::WallEdges>::both_reachable"
+      ],
+      "meaning": "Overlapping named-symbol groups, not additive causal costs. No resolved symbol/sample means unresolved, not zero cost."
+    },
+    "make_unmake": {
+      "resolved_self_samples": 5,
+      "resolved_self_percent": 0.8849557522123894,
+      "resolved_any_frame_samples": 21,
+      "resolved_any_frame_percent": 3.7168141592920354,
+      "resolved_symbols": [
+        "<quoridor_core::position::Position>::play",
+        "<quoridor_core::research::SigmaContext>::make_move"
+      ],
+      "meaning": "Overlapping named-symbol groups, not additive causal costs. No resolved symbol/sample means unresolved, not zero cost."
+    }
+  },
+  "passes": [
+    {
+      "label": "A plain-before",
+      "counts": {
+        "planned": 6,
+        "scheduled": 6,
+        "calls": 6,
+        "attempted": 6,
+        "complete": 6,
+        "uncompleted": 0,
+        "unperformed": 0,
+        "unscheduled": 0,
+        "extra_calls": 0
+      },
+      "cost_domains": {
+        "setup_seconds": 0.018860473,
+        "target_drop_seconds": 9.939e-06,
+        "session_domains": [
+          {
+            "domain": "reset",
+            "facts": {
+              "TT_capacity": [
+                4096,
+                1048576
+              ],
+              "retained_TT_bytes": 327728,
+              "retained_session_metadata_history_bytes": 900727
+            },
+            "seconds": 0.000274474,
+            "session": "cold-D4-102"
+          },
+          {
+            "domain": "teardown",
+            "facts": null,
+            "seconds": 4.0826e-05,
+            "session": "cold-D4-102"
+          },
+          {
+            "domain": "reset",
+            "facts": {
+              "TT_capacity": [
+                4096,
+                1048576
+              ],
+              "retained_TT_bytes": 327728,
+              "retained_session_metadata_history_bytes": 900727
+            },
+            "seconds": 0.000270327,
+            "session": "cold-D6-34"
+          },
+          {
+            "domain": "teardown",
+            "facts": null,
+            "seconds": 7.38e-07,
+            "session": "cold-D6-34"
+          },
+          {
+            "domain": "reset",
+            "facts": {
+              "TT_capacity": [
+                4096,
+                1048576
+              ],
+              "retained_TT_bytes": 327728,
+              "retained_session_metadata_history_bytes": 900727
+            },
+            "seconds": 5.4396e-05,
+            "session": "warm-family0"
+          },
+          {
+            "domain": "teardown",
+            "facts": null,
+            "seconds": 1.794e-06,
+            "session": "warm-family0"
+          }
+        ],
+        "whole_driver_seconds": 11.502078477,
+        "whole_before_result_publication_seconds": 11.583107747
+      }
+    },
+    {
+      "label": "A sampled",
+      "counts": {
+        "planned": 6,
+        "scheduled": 6,
+        "calls": 6,
+        "attempted": 6,
+        "complete": 6,
+        "uncompleted": 0,
+        "unperformed": 0,
+        "unscheduled": 0,
+        "extra_calls": 0
+      },
+      "cost_domains": {
+        "setup_seconds": 0.018567331,
+        "target_drop_seconds": 1.0465e-05,
+        "session_domains": [
+          {
+            "domain": "reset",
+            "facts": {
+              "TT_capacity": [
+                4096,
+                1048576
+              ],
+              "retained_TT_bytes": 327728,
+              "retained_session_metadata_history_bytes": 900727
+            },
+            "seconds": 0.000328832,
+            "session": "cold-D4-102"
+          },
+          {
+            "domain": "teardown",
+            "facts": null,
+            "seconds": 0.000138194,
+            "session": "cold-D4-102"
+          },
+          {
+            "domain": "reset",
+            "facts": {
+              "TT_capacity": [
+                4096,
+                1048576
+              ],
+              "retained_TT_bytes": 327728,
+              "retained_session_metadata_history_bytes": 900727
+            },
+            "seconds": 0.000576891,
+            "session": "cold-D6-34"
+          },
+          {
+            "domain": "teardown",
+            "facts": null,
+            "seconds": 1.721e-06,
+            "session": "cold-D6-34"
+          },
+          {
+            "domain": "reset",
+            "facts": {
+              "TT_capacity": [
+                4096,
+                1048576
+              ],
+              "retained_TT_bytes": 327728,
+              "retained_session_metadata_history_bytes": 900727
+            },
+            "seconds": 5.9097e-05,
+            "session": "warm-family0"
+          },
+          {
+            "domain": "teardown",
+            "facts": null,
+            "seconds": 1.228e-06,
+            "session": "warm-family0"
+          }
+        ],
+        "whole_driver_seconds": 11.567520092,
+        "whole_before_result_publication_seconds": 11.667982548
+      }
+    },
+    {
+      "label": "A plain-after",
+      "counts": {
+        "planned": 6,
+        "scheduled": 6,
+        "calls": 6,
+        "attempted": 6,
+        "complete": 6,
+        "uncompleted": 0,
+        "unperformed": 0,
+        "unscheduled": 0,
+        "extra_calls": 0
+      },
+      "cost_domains": {
+        "setup_seconds": 0.024043008,
+        "target_drop_seconds": 9.375e-06,
+        "session_domains": [
+          {
+            "domain": "reset",
+            "facts": {
+              "TT_capacity": [
+                4096,
+                1048576
+              ],
+              "retained_TT_bytes": 327728,
+              "retained_session_metadata_history_bytes": 900727
+            },
+            "seconds": 0.000604247,
+            "session": "cold-D4-102"
+          },
+          {
+            "domain": "teardown",
+            "facts": null,
+            "seconds": 3.9489e-05,
+            "session": "cold-D4-102"
+          },
+          {
+            "domain": "reset",
+            "facts": {
+              "TT_capacity": [
+                4096,
+                1048576
+              ],
+              "retained_TT_bytes": 327728,
+              "retained_session_metadata_history_bytes": 900727
+            },
+            "seconds": 0.000250934,
+            "session": "cold-D6-34"
+          },
+          {
+            "domain": "teardown",
+            "facts": null,
+            "seconds": 9.58e-07,
+            "session": "cold-D6-34"
+          },
+          {
+            "domain": "reset",
+            "facts": {
+              "TT_capacity": [
+                4096,
+                1048576
+              ],
+              "retained_TT_bytes": 327728,
+              "retained_session_metadata_history_bytes": 900727
+            },
+            "seconds": 6.5517e-05,
+            "session": "warm-family0"
+          },
+          {
+            "domain": "teardown",
+            "facts": null,
+            "seconds": 1.13e-06,
+            "session": "warm-family0"
+          }
+        ],
+        "whole_driver_seconds": 11.504303033,
+        "whole_before_result_publication_seconds": 11.625947852
+      }
+    }
+  ],
+  "plain_whole_median_seconds": 11.6045277995,
+  "sampled_over_plain_whole_median": 1.0054681025886063,
+  "limits": [
+    "Self and any-frame periods divided by total11530612095; union per group, overlapping groups never added.",
+    "Every565 chain has unknown ancestor/terminal sentinel: unwind completeness UNKNOWN; no inline-separated cost.",
+    "No distinct validation/prepare/history/FT-IDcopy means unresolved responsibility, not zero cost. Current Control goals_only does not invoke cheap validate_maps.",
+    "D6 accounts95.598% of sampled pass root wall time; per-root samples are not partitioned.",
+    "49Hz single process,565 finite samples; no confidence interval/general CPU/causal benefit/adoption.",
+    "Dynamic cache-hit/skip-BFS/call frequencies UNKNOWN."
+  ],
+  "next_candidate": {
+    "owner": "move_ordering.rs Ranking::new/sort/compare and alphabeta.rs ordered",
+    "scope": "Control/no optional policy and signed scores only: compute exact scalar rank+descending signed-score+ActionID key once per legal action; comparator compares stored scalar. Keep unsigned legacy and policy total_cmp paths unchanged.",
+    "necessity": "Current sorting157/565 self samples (27.7876%) resolved in standard unstable sort/comparator instantiations; ordered62/565 separately. Repeated comparator ladder is actual source, its isolated instruction share and benefit remain UNMEASURED.",
+    "semantics": "Same existing PV/goal/killer rank, signed integer descending and ascendingActionID total tie. No legalset/score/history/TT/PVS/maps/provider/cancel/undo or order change. Diagnostics must retain current definitions.",
+    "cost_unknown": "One bounded per-ID key preparation, possible ~1672B stack array/no heap; reuse existing rank storage if minimal. Cache footprint, extra initial stores, sample/whole benefit UNKNOWN.",
+    "verification_if_selected": "Independent rank hierarchy/negative score extremes/ties/policy \u00b10/excluded path/diagnostic ON-OFF boundaries and existing parent/error/cancel tests; Root-owned actual build and separately selected finite assessment. Not implemented or launched."
+  },
+  "new_Search_model_perf_record_calls_by_export": 0,
+  "archive_roundtrip": "All selected original UTF8 bytes/SHA/size/mode match; RAW gzip restores original SHA and size."
+}

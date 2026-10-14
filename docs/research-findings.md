@@ -1495,3 +1495,36 @@ whole中央値O11.637544748秒／N11.626723279秒、N/O0.999070124（観測上�
 native80/20は反転/延長/同endpointをまとめたunique collision familyのfloor(4F/5)をTへ分けるので、固定1024T/256V requestsは保証されない。newD Vを全243200 potential rowsで保守的に計算し直すと、training512×2048＋7測定点×(publicV419150＋newD V243200＋8192×2)=5,799,714 forwards、6Mまで200,286余裕。旧4,455,714はV51200行という条件付き価格で、無条件boundではない。[既存設計](design/nnue-teacher-distance-tanh-v1.md)へ訂正と元条件を残した。実cacheのempty T/V/forward cap拒否を維持し、最低行数・全完了・収束を保証しない。
 
 既存sequence.runsは静的にboundされたExperimentの列で、4生成batch→1converter→通常train→実newweights→初回256評価に未来出力を自動結合する入口ではない。実stream/cache/weightsへの後段bindingは既存prepare_selected_operation/sequence owner324に残る通常準備で、架空FileRefsや新scheduler/認定/手動ACK chainを作らない。fit-local128MiBも全工程8GiB guardではなく、bulk支持とwhole owned union／decimal50GBは未発行。dated covered24.161GB＋後続限定観測はglobal現占有を保証せず、FS空き約508GBも50GB支持にはならない。全asset walkや旧RAW/model削除はしていない。CPU10physical/20logical、02:54ZのRAMavailable17,217,524KiB・RTX3060free10,715MiB等はmetadata事実で、将来quiet/予約/ABI/性能ではない。実生成2workers/GPU learnerの配置とsource/Perf/buildの競合調整は未選択の実起動境界へ残す。科学委任未回答、323USERPAUSE／fits96／models/defaults/N/seals／原RAW/FAILED/費/UNKNOWNは維持する。
+
+改善後Controlの全探索Perfは、accepted child-map image ced70ad8／Buildf4482c31を全3passesで再用し、plain-before→sampled→plain-afterの18 calls／9sessionsを全COMPLETEで終えた（388、2026-10-14）。同BEST43／TT4096／PVS／既存cold D4 family102・cold D6 family34・warm D4 family0 chronological0→2→4→6、D4各2M/D6各8M、上限54Mに対して実21,148,161 nodes／15,520,353 evaluations。全6contextsでdepth/valuebits/action/exactPV/全30記録work/legalsets/fullhistoryroot/parent復元/stopが一致する。[日本語詳細](../.worktree/arena-generalization377/.artifacts/research-team/current-control-perf388-v1/report-ja.md)、[全設定・結果・decode・RAWの保存receipt](../research-data/ai-sigma/current-control-perf388/receipt.json)へ対応する。元RAW4,790,616B／SHAa9e2ee3bは変更せず、Gitの[RAW gzip](../research-data/ai-sigma/current-control-perf388/perf.data.gz)は元bytesへの復元一致を確認した。新build／追加sampling／model呼出はない。
+
+| 改善後Control pass | setup/drop込みwhole秒 |     setup秒 |      drop秒 |
+| ------------------ | --------------------: | ----------: | ----------: |
+| plain-before       |          11.583107747 | 0.018860473 | 0.000009939 |
+| sampled            |          11.667982548 | 0.018567331 | 0.000010465 |
+| plain-after        |          11.625947852 | 0.024043008 | 0.000009375 |
+
+plain whole中央値11.604527800秒、sampled/中央値1.005468103（約0.547%長い観測）で、純粋なsampling因果費とは断定しない。局面別のroot_body_including_journal_secondsは原結果に保持し、sampled passのroot時間はcold D6が95.598%を占める。この時間比をsampleの局面別配分と同一視しない。
+
+| 解決したsymbol group           | self samples／565（%） | any-frame union samples／565（%） |
+| ------------------------------ | ---------------------: | --------------------------------: |
+| sort/comparator                |          157（27.788） |                     160（28.319） |
+| NNUE head                      |           70（12.389） |                      89（15.752） |
+| legal generation               |           66（11.681） |                      67（11.858） |
+| ordered                        |           62（10.973） |                     227（40.177） |
+| wall maps                      |           59（10.442） |                      63（11.150） |
+| NNUE delta                     |            37（6.549） |                     117（20.708） |
+| feature/accumulator validation |            15（2.655） |                       15（2.655） |
+| history context                |             9（1.593） |                        9（1.593） |
+| context fingerprint            |             5（0.885） |                        5（0.885） |
+| make/unmake                    |             5（0.885） |                       21（3.717） |
+| board hash                     |             4（0.708） |                        6（1.062） |
+| TT table                       |             3（0.531） |                        3（0.531） |
+
+inclusiveはcallchain内のgroup unionで互いに重複し、合計しない。標準cpu-clock:u／49Hz／DWARF8192／ring64／RAW12MiB／no-buildid-cache／no_new_privs=1で565samples、period合計11,530,612,095、reported lost0。未解決leaf33（5.841%）、全565にunknown ancestor/terminal sentinelがあり、完全unwindやinline帰属を保証しない。名前が解けない独立symbolをゼロ費とせず、FT/ID copy、各lagの採点、map hit/skipBFS/call数はUNKNOWN。sortは既存Ranking closureを使うu16標準unstable sortの5symbolsで、orderedのselfからinline prepare/score/comparatorを分離できない。wall_distance_maps→delta_move_into→advance_move_context→Search::childのchainは支持されるが、map shareからcache再用の失敗や利益を推定しない。現ControlはCheapControl→goals_onlyであり、Cheapのprepare/validate_maps最適化へ読み替えない。
+
+旧384 Controlはimage1b631ac7／source61a2fea1・571samples、今回はced70ad8／sourceada27a0・565samplesで、時刻も異なる。旧self sort30.473%／ordered9.982%／maps10.683%等との差は記述だけに留める。TT-first後は5rootsのworkが変化しているため、旧whole時間との比をsame-work speedやmap差分の単独効果にしない。raw再decode／追加計測／instrumentationは発行していない。
+
+次の小差分候補は、Controlのpolicyなし・signed score経路だけで既存PV/goal/killer rank＋降順score＋昇順ActionIDの比較用合成キーを各合法手につき一度作り、比較器の反復処理を減らす案である。policy total_cmp（±0を含む）とunsigned既存経路は対象外に保つ。sort self157samplesが選択材料だが比較器だけの費用・速度利益は未測定で、固定長keyの追加store/cache footprintにも費用がある。既存rank storageの再用又は最大209×u64程度の局面内領域を検討する提案に留め、実装・採用・別の有限比較は未発行。map/head/検査削除を一括追加しない。
+
+実timingはCPU2一つ／guardian4／family4GiB／GPU0／既存ext4で直列に行い、[実STOP](../.artifacts/research-team/integration324/current-control-perf388-v1/STOP.json)に全元native/perf/guardian/outerのfresh absent/different、直接commandのreap/handles、TMP消失、owned[]を記録した。guardianの直接回収とperf配下nativeの消失確認は区別する。outer52.318079782秒、保存decode3commands計3.805325612秒を別記し、nested費を重複加算しない。返却済みsettled maskと元persisted receiptの状態は別原物のまま。保存exportのbinary分類／acceptance directory修復は通常保存処理で、成功計測やdecodeの再演はない。対象実usageを一度確認し、混合学習準備の閉鎖は科学委任や生成/fit/256評価開始へ広げない。旧RAW/FAILED/費/UNKNOWN、323USERPAUSE／fits96／models/defaults/N/seals／mixed未選択を維持する。

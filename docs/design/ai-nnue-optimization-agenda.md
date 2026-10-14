@@ -111,6 +111,16 @@ diagnosticsのprepared/scored eventは実際に行った残りの処理だけを
 
 距離マップ一差分は実24 calls全COMPLETE／12sessions、全6rootsでdepth/valuebits/action/exactPV/全30記録work/legal/fullhistoryroot/parent一致、実nodes28,197,548／72M。whole中央値O11.637544748秒／N11.626723279秒、N/O0.999070124（観測約0.093%短い）、両Nとも10%超悪化root0で指定の有限基準を満たし、Main ada27a0／真正N ced70ad8／Buildf4482c31を保持する。N-firstは両Oより遅くN-secondは両Oより速く、warm localply4の片方約8.18%悪化も残す。新5 toy FT/geometry確認／compile／NNUE-researchとAI-research-diagnostics Clippy／release実PASS、限定review clear0/0。小差から一般speedup/再現性/棋力/default、実cachehit頻度/skipBFS件数/post387 hotspotを主張せず、追加計測を自動発行しない。[結果と全根拠](../../research-data/ai-sigma/nnue-map-reuse387/receipt.json)を参照する。次は未選択の混合学習実準備を並行継続し、科学委任未回答を独立準備の停止理由にも自動選択の根拠にも使わない。旧TT-first work差/FAIL表記、RAW/FAILED/費/UNKNOWN、323pause/fits96/models/defaults/N/sealsを維持する。
 
+## 改善後Controlの一度の全探索Perf（388、2026-10-14）
+
+TT-firstとchild-map採用後のaccepted ced70ad8／Buildf4482c31で、Control plain-before→sampled→plain-after各既存6roots、18calls／9sessions／54M nodes上限の有限profileを実行した。現HEAD合わせのrebuildやsymbol専用buildはしない。CPU2一つ／guardian4／family4GiB／GPU0、既存ext4 owner/output、cpu-clock:u／49Hz／DWARF8192／ring64／RAW最大12MiB／no-buildid-cache／no_new_privs=1を保持し、実timing中だけ重い作業を直列にした。独立した混合学習の未選択設定・資源準備は並行し、その科学委任未回答をprofile開始条件にしなかった。
+
+18calls全COMPLETEで全6contextsのdepth/valuebits/action/exactPV/全30work/legal/fullhistoryroot/parent/stopが一致。565samplesのselfはsort/comparator27.788%、head12.389%、legal generation11.681%、ordered10.973%、wall maps10.442%、delta6.549%、feature/accumulator validation2.655%。any-frame unionはsort28.319%、ordered40.177%、maps11.150%、delta20.708%、head15.752%等で、inclusiveを合算しない。lost0、未解決leaf5.841%、全sampleにunknown ancestor/terminal sentinelがあり、inline・FT/ID copy・完全unwind・cache hit/skipBFSはUNKNOWN。独立symbol未解決をゼロ費にせず、Control goals_onlyとCheap prepare/validate_mapsを混ぜない。
+
+setup/drop込みwholeはplain-before11.583107747秒／sampled11.667982548秒／plain-after11.625947852秒、sampled/plain中央値1.005468103。局面別時間を保持し、sampled root時間の95.598%はcold D6である。旧384とはimage/source/時刻/有限標本と5rootsのworkが異なるため、share/whole差を普遍的speedup、最適化の単独利益や棋力へ換算しない。[詳細と全保存根拠](../../research-data/ai-sigma/current-control-perf388/receipt.json)、[findings](../research-findings.md)を参照する。元RAWは維持し、Gitのgzip復元一致を確認した。
+
+次の候補はControl/no-policy/signed-score限定で既存Rankingのrank＋降順score＋昇順ActionIDを局面内で一度だけ合成する案である。policy total_cmp/±0とunsigned経路は保持し、順序・score・TT・PVS・history・合法性を変えない方向。比較器単体費・利益は未測定で、追加keyのstore/cache領域が逆効果にもなり得る。現profileは選択材料の収集まで完了で、候補の実装/build/数値比較、追加sampling/instrumentation/roots/warmup/refill/Cheap/対局/fitは未発行。重要な方式/特徴/model/学習条件変更は具体案と費用をPolicyへ戻す。通常の保存解析・STOP/cleanup/usage・owner closeにACKや新reviewを挟まない。元結果/RAW/FAILED/費/UNKNOWN、323pause/fits96/models/defaults/N/seals、混合学習未選択は維持する。
+
 ## Compact board TT と外部の反復履歴（359、2026-10-10）
 
 人間はTT entryごとの全履歴保存を止めるよう指示し、359で compact board-key TT と外部 canonical repetition history の実装を選んだ。この表現方向について354のcapacity-only未選択状態を置き換えるが、351/354を再開せず、2MiB化・eviction/reset・容量sweep・selective search・fit・新対局・349 perfの許可には広げない。4096 slots/1MiBから始める。
