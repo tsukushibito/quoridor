@@ -1746,6 +1746,10 @@ O fa1954be/Build76a051c1、N f37325c7/Buildeeb98d27は399差分だけ。NNUE/BES
 
 これは新sourceと有限評価の許可であり、現時点の実LMR image/設定/結果・速度/棋力採用は未確定。新scheduler/registry/certificate/旧engine copy/恒常source mirrorや追加warmup/roots/refill/cap/sampling/tuningを発行しない。製品/default・実generator既定・モデル/尺度/特徴/ルールは維持する。普通source/software/copy/reviewに事前保存枠を置かず、bounded capturesと対象実使用一回、共有targetは正の増分だけをdecimal50GBへ数える。mixed/learnerのsource準備から全生成/converter/fit/newweights/native/256と323 USERPAUSE、oldfits96/models/defaults/N/seals/foreign devcontainer、旧RAW/FAILED/全費UNKNOWNを維持する。担当/状態/依存はBeads、実設定・原結果とSTOPは既存artifact入口で保持する。
 
+LMRの最初の実保存では、同じ真正image `66c0daac`／Build `de4a7995`、診断OFFで原12passes／72callsを回収した。NNUE Control・NNUE Cheap・固定D Controlの各OFF-ON-ON-OFFでwhole中央値ON/OFFはそれぞれ0.301593／0.195270／0.369491。ONは選択的探索でvalue/PV/workが変わるため、同仕事の速度比や棋力利益とは解釈しない。固定D Controlの当該coldD6はOFF二回が累積8M・completed5 UNKNOWN、ON二回が名目D6 COMPLETEだったが、全幅D6の保証や旧392の補完ではない。固定D Cheapは旧Python phase bindingの拒否で24calls未入場となり、原FAILEDと費を保持して補充しない。原設定／結果は `.artifacts/research-team/integration324/lmr400-v1/cost96-v2/` に保持する。
+
+同imageの最初のNNUE Control OFF対ON・8families×2色はnative側で16goal／8pairsを完了し、OFFは8勝8敗、family平均0.5・既存bootstrap95%範囲[0.25,0.75]だった。8familiesの探索的結果だけで強さ改善を確立しない。原lifecycleは明示falseがSerdeで省略されるconfig表現差とtyped evaluator ID／content hashのconsumer混同を検出してFAILEDとなった。探索／モデル／対局を再演せず、既存二false flagのcanonical比較と型名・content SHA・simdの正しい束縛だけを修復し、原RAWの別保存検証で16件を照合した。原FAILED manifestは上書きせず、残112局は元の未入場対照として区別する。`.artifacts/research-team/integration324/lmr400-v1/arena128-v4/saved-batch0-validation-v3/result.json` は原refs前後一致の保存解釈であり、全128局の完了／採用結果ではない。
+
 ### TT資格history projectionの更新・復元案（401、2026-10-14、設計のみ）
 
 [固定source設計の保存receipt](../research-data/ai-sigma/tt-history-projection401/receipt.json)はaccepted399の不変Git `5f79e21a` のalpha/research/positionだけを読んだ一案を結ぶ。完全history/total_ply/threefold/terminal/入力検査・TT Key/depth/boundは残し、TT資格fingerprintだけから、現在H/V壁のいずれかを欠く古いkeyを除外する。`(oldH & currentH)==currentH` かつ `(oldV & currentV)==currentV` のkeyを残す。from_countsはchronologyを保証しないため、未来supersetや同壁・別pawn/stock/turnは残し、異なる壁mask全部を落とさない。元396/397の数字・lemmaは背景参照だけで再集計・再証明しない。
