@@ -31,6 +31,107 @@ fn unchanged(a: &Accumulator, expected: &Accumulator) {
 }
 
 #[test]
+fn wall391_checked_add_rows_full_delta_bits_parent_child_hit_and_undo() {
+    let cases: &[(&[u16], u16)] = &[(&[], 145), (&[81], 153), (&[], 81)];
+    for mode in [EvaluationMode::Scalar, EvaluationMode::Simd] {
+        let m = model(0.);
+        for &(prefix, action) in cases {
+            let mut c = SigmaContext::from_prefix(prefix).unwrap();
+            let root = (c.position(), c.total_ply(), c.history_counts());
+            let parent = m.full_context(&c, mode).unwrap();
+            let saved = parent.clone();
+            let mut child = m.child_buffer(mode);
+            let undo = c.make_move(action).unwrap();
+            m.delta_move_into(&parent, &undo, &c, &mut child).unwrap();
+            equivalent(&child, &m.delta(&parent, c.position()).unwrap());
+            equivalent(&child, &m.full_context(&c, mode).unwrap());
+            assert_eq!(
+                child.cached_wall_distance_maps(c.position()).unwrap(),
+                &c.position().wall_distance_maps()
+            );
+            assert!(!Arc::ptr_eq(
+                child.maps.as_ref().unwrap(),
+                parent.maps.as_ref().unwrap()
+            ));
+            let hit = Arc::clone(child.maps.as_ref().unwrap());
+            unchanged(&parent, &saved);
+            c.unmake_move(undo).unwrap();
+            assert_eq!((c.position(), c.total_ply(), c.history_counts()), root);
+            let undo = c.make_move(action).unwrap();
+            m.delta_move_into(&parent, &undo, &c, &mut child).unwrap();
+            assert!(Arc::ptr_eq(&hit, child.maps.as_ref().unwrap()));
+            c.unmake_move(undo).unwrap();
+            // Two exact-key maps for a pawn child: actual parent must still win.
+            let alternate = m.full_context(&c, mode).unwrap();
+            child.maps = alternate.maps;
+            let pawn = c.legal_ids().into_iter().find(|id| *id < 81).unwrap();
+            let undo = c.make_move(pawn).unwrap();
+            m.delta_move_into(&parent, &undo, &c, &mut child).unwrap();
+            assert!(Arc::ptr_eq(
+                parent.maps.as_ref().unwrap(),
+                child.maps.as_ref().unwrap()
+            ));
+            unchanged(&parent, &saved);
+            c.unmake_move(undo).unwrap();
+            assert_eq!((c.position(), c.total_ply(), c.history_counts()), root);
+        }
+    }
+}
+
+#[test]
+fn wall391_stale_parent_wall_key_falls_back_and_errors_preserve_ownership() {
+    let m = model(0.);
+    let mut c = SigmaContext::from_prefix(&[]).unwrap();
+    let mut parent = m.full_context(&c, EvaluationMode::Scalar).unwrap();
+    let other = m
+        .full_context(&c.play(81).unwrap(), EvaluationMode::Scalar)
+        .unwrap();
+    // Deliberate private fixture corruption: a different old wall key cannot
+    // become the genuine before table just because it is in the parent slot.
+    parent.maps = other.maps;
+    let saved = parent.clone();
+    let mut child = m.child_buffer(EvaluationMode::Scalar);
+    let undo = c.make_move(145).unwrap();
+    m.delta_move_into(&parent, &undo, &c, &mut child).unwrap();
+    equivalent(&child, &m.delta(&parent, c.position()).unwrap());
+    equivalent(&child, &m.full_context(&c, EvaluationMode::Scalar).unwrap());
+    assert_eq!(
+        child.cached_wall_distance_maps(c.position()).unwrap(),
+        &c.position().wall_distance_maps()
+    );
+    unchanged(&parent, &saved);
+    let saved_child = child.clone();
+    let foreign = model(0.125)
+        .full_context(
+            &SigmaContext::from_prefix(&[]).unwrap(),
+            EvaluationMode::Scalar,
+        )
+        .unwrap();
+    assert!(m.delta_move_into(&foreign, &undo, &c, &mut child).is_err());
+    unchanged(&child, &saved_child);
+    let root = SigmaContext::from_prefix(&[]).unwrap();
+    assert!(
+        m.delta_move_into(&parent, &undo, &root, &mut child)
+            .is_err()
+    );
+    unchanged(&child, &saved_child);
+    c.unmake_move(undo).unwrap();
+    assert_eq!(c.position(), root.position());
+    assert_eq!(c.history_counts(), root.history_counts());
+    // General valid features keep the old encoding/delta path and validation.
+    let mut input = m.full_context(&c, EvaluationMode::Scalar).unwrap().features;
+    input.ids[0].remove(0);
+    input.distance = [0.25, 0.75];
+    let general = m.full_features(input, EvaluationMode::Scalar).unwrap();
+    let saved_general = general.clone();
+    let undo = c.make_move(145).unwrap();
+    m.delta_move_into(&general, &undo, &c, &mut child).unwrap();
+    equivalent(&child, &m.delta(&general, c.position()).unwrap());
+    unchanged(&general, &saved_general);
+    c.unmake_move(undo).unwrap();
+}
+
+#[test]
 fn wall_retry_keeps_destination_map_and_parent_bits() {
     for mode in [EvaluationMode::Scalar, EvaluationMode::Simd] {
         let m = model(0.);

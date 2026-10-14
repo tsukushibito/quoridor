@@ -536,6 +536,7 @@ impl Model {
                 after,
                 &mut child.features,
                 previous_maps,
+                parent.maps.as_ref(),
             )?;
             for (p, delta) in deltas.iter().enumerate() {
                 child.values[p].copy_from_slice(&parent.values[p]);

@@ -37,7 +37,7 @@ pub(crate) fn encode_cached(
     p: Position,
     previous: Option<&Arc<WallMaps>>,
 ) -> Result<(Features, Arc<WallMaps>)> {
-    let maps = maps_for(p, previous);
+    let maps = maps_for(p, previous, None);
     let ids = std::array::from_fn(|player| {
         let rotate = player == 1;
         let square = |cell: u8| if rotate { 80 - cell } else { cell };
@@ -67,15 +67,28 @@ pub(crate) fn encode_cached(
     ))
 }
 
-fn maps_for(p: Position, previous: Option<&Arc<WallMaps>>) -> Arc<WallMaps> {
-    match previous {
-        Some(m) if m.horizontal == p.horizontal && m.vertical == p.vertical => Arc::clone(m),
-        _ => Arc::new(WallMaps {
-            horizontal: p.horizontal,
-            vertical: p.vertical,
-            distances: p.wall_distance_maps(),
-        }),
+fn maps_for(
+    p: Position,
+    previous: Option<&Arc<WallMaps>>,
+    parent: Option<(Position, &Arc<WallMaps>)>,
+) -> Arc<WallMaps> {
+    if let Some((_, m)) = parent.filter(|(_, m)| m.distances_for(p).is_some()) {
+        return Arc::clone(m);
     }
+    if let Some(m) = previous.filter(|m| m.distances_for(p).is_some()) {
+        return Arc::clone(m);
+    }
+    let distances = parent
+        .and_then(|(before, maps)| {
+            maps.distances_for(before)
+                .and_then(|rows| p.wall_distance_maps_after_addition(before, rows))
+        })
+        .unwrap_or_else(|| p.wall_distance_maps());
+    Arc::new(WallMaps {
+        horizontal: p.horizontal,
+        vertical: p.vertical,
+        distances,
+    })
 }
 
 fn distance(p: Position, maps: &WallMaps) -> Result<[f32; 2]> {
@@ -157,6 +170,7 @@ pub(crate) fn move_features_into(
     child: Position,
     out: &mut Features,
     previous: Option<&Arc<WallMaps>>,
+    parent_maps: Option<&Arc<WallMaps>>,
 ) -> Result<([FeatureDelta; 2], Arc<WallMaps>)> {
     let mover = usize::from(before.turn);
     let pawn = before.horizontal == child.horizontal && before.vertical == child.vertical;
@@ -202,7 +216,7 @@ pub(crate) fn move_features_into(
             }
         }
     }
-    let maps = maps_for(child, previous);
+    let maps = maps_for(child, previous, parent_maps.map(|maps| (before, maps)));
     out.distance = distance(child, &maps)?;
     out.side = child.turn;
     Ok((deltas, maps))
@@ -211,6 +225,45 @@ pub(crate) fn move_features_into(
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn wall391_private_parent_key_and_exact_child_hit_precede_local_rebuild() {
+        let p = Position::default();
+        let (_, parent) = encode_cached(p, None).unwrap();
+        let (_, alternate) = encode_cached(p, None).unwrap();
+        let preferred = maps_for(p.play(13).unwrap(), Some(&alternate), Some((p, &parent)));
+        assert!(Arc::ptr_eq(&preferred, &parent));
+        let after = p.play(145).unwrap();
+        let fresh = maps_for(after, None, Some((p, &parent)));
+        assert!(!Arc::ptr_eq(&fresh, &parent));
+        assert!(fresh.distances_for(p).is_none());
+        assert_eq!(
+            fresh.distances_for(after),
+            Some(&after.wall_distance_maps())
+        );
+        assert_eq!(fresh.distances, parent.distances);
+        let hit = maps_for(after, Some(&fresh), Some((p, &parent)));
+        assert!(Arc::ptr_eq(&hit, &fresh));
+        let unrelated = maps_for(p.play(81).unwrap(), None, None);
+        // An arbitrary old child with a different wall key is never a genuine
+        // parent of p, even if supplied in that argument by a bad caller.
+        let miss = maps_for(after, Some(&unrelated), Some((p, &unrelated)));
+        assert!(!Arc::ptr_eq(&miss, &unrelated));
+        assert_eq!(miss.distances, after.wall_distance_maps());
+        for other in [
+            p,
+            Position { horizontal: 2, ..p },
+            Position { horizontal: 7, ..p },
+            Position {
+                horizontal: 3,
+                vertical: 1,
+                ..p
+            },
+        ] {
+            let maps = maps_for(other, None, Some((p.play(81).unwrap(), &unrelated)));
+            assert_eq!(maps.distances, other.wall_distance_maps());
+            assert!(maps.distances_for(other).is_some());
+        }
+    }
     #[test]
     fn map_cache_pawn_share_wall_replace_and_unreachable() {
         let p = Position::default();
