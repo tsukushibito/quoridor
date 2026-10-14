@@ -7,6 +7,124 @@ use super::super::{
 use super::*;
 
 #[test]
+fn control385_legal_vector_is_scored_and_sorted_in_place() {
+    struct Policy;
+    impl MoveOrderer for Policy {
+        fn scores(&self, _: &SigmaContext, legal: &[u16]) -> Result<Vec<f32>> {
+            Ok(vec![0.0; legal.len()])
+        }
+    }
+    let root = SigmaContext::from_prefix(&[]).unwrap();
+    let mut history = ContinuationHistory::new().unwrap();
+    let legal = root.legal_ids();
+    let expected = legal.clone();
+    let pointer = legal.as_ptr();
+    let capacity = legal.capacity();
+    let best = *legal.last().unwrap();
+    with_state(
+        &root,
+        &PawnRows,
+        &AtomicBool::new(false),
+        &mut history,
+        |s, c| {
+            s.orderer = Some(&Policy);
+            let ordered = s.ordered(c, None, Some(best), 0, legal).unwrap();
+            assert_eq!(ordered.as_ptr(), pointer);
+            assert_eq!(ordered.capacity(), capacity);
+            assert_eq!(ordered[0], best);
+            let mut census = ordered;
+            census.sort_unstable();
+            assert_eq!(census, expected);
+            assert_eq!(s.stats.policy_calls, 1);
+        },
+    );
+}
+
+#[test]
+fn control385_tt_cutoff_and_order_only_preserve_legality_and_parent() {
+    struct Policy;
+    impl MoveOrderer for Policy {
+        fn scores(&self, _: &SigmaContext, legal: &[u16]) -> Result<Vec<f32>> {
+            Ok(vec![0.0; legal.len()])
+        }
+    }
+    let root = super::super::continuation360_tests::small_root();
+    let legal = root.legal_ids()[0];
+    const TT_LIMITS: SearchLimits = SearchLimits {
+        max_depth: 1,
+        max_nodes: 50_000,
+        time_limit: None,
+        tt_entries: 4096,
+        use_pvs: true,
+        use_tt: true,
+    };
+    for root_call in [false, true] {
+        for (best, stored_depth, context_valid, bound, value) in [
+            (Some(legal), 1, true, Bound::Exact, 0.25),
+            (Some(208), 1, true, Bound::Exact, 0.25),
+            (None, 1, true, Bound::Exact, 0.25),
+            (Some(legal), 2, true, Bound::Exact, 0.25),
+            (Some(legal), 1, false, Bound::Exact, 0.25),
+            (Some(legal), 1, true, Bound::Lower, 1.0),
+            (Some(legal), 1, true, Bound::Upper, -1.0),
+        ] {
+            let mut history = ContinuationHistory::new().unwrap();
+            with_state(
+                &root,
+                &PawnRows,
+                &AtomicBool::new(false),
+                &mut history,
+                |s, c| {
+                    s.limits = &TT_LIMITS;
+                    s.orderer = Some(&Policy);
+                    s.context = ContextFingerprint::of(c);
+                    s.board = Some(BoardCursor::of(c));
+                    *s.table = Table::new(4096).unwrap();
+                    s.table.next_generation();
+                    s.table.insert(
+                        Entry {
+                            key: Key::of(c),
+                            context: s.context.unwrap().0,
+                            context_valid,
+                            generation: 0,
+                            hash: 0,
+                            depth: stored_depth,
+                            value,
+                            best,
+                            bound,
+                        },
+                        &mut s.stats,
+                    );
+                    s.table.committed = s.table.generation;
+                    let before = (c.position(), c.total_ply(), c.history_counts());
+                    let legal_best = best == Some(legal);
+                    let numeric = legal_best
+                        && context_valid
+                        && stored_depth == 1
+                        && (matches!(bound, Bound::Exact) || !root_call);
+                    let actual = if root_call {
+                        s.root_depth(c, None, 1, None).unwrap().1
+                    } else {
+                        s.negamax(c, None, 1, -1.0, 1.0, 0).unwrap()
+                    };
+                    assert_eq!(s.stats.tt_illegal_moves, u64::from(!legal_best));
+                    assert_eq!(s.stats.tt_cutoffs, u64::from(numeric));
+                    assert_eq!(s.stats.tt_order_only, u64::from(legal_best && !numeric));
+                    assert_eq!(s.stats.policy_calls, u64::from(!numeric));
+                    assert_eq!(s.stats.ordering.ordered_nodes, u64::from(!numeric));
+                    if numeric {
+                        assert_eq!(actual.to_bits(), value.to_bits());
+                        assert_eq!(s.stats.nodes, 1);
+                        assert_eq!(s.stats.evaluations, 0);
+                    }
+                    assert_eq!((c.position(), c.total_ply(), c.history_counts()), before);
+                },
+            );
+        }
+    }
+}
+
+#[test]
 fn ordering382_rank_tiers_policy_total_cmp_and_integer_boundaries() {
     let input = [5, 3, 13, 2, 4, 80, 208];
     let mut goals = [false; 81];
@@ -119,7 +237,9 @@ fn ordering382_policy_and_observation_preserve_legal_order_parent_and_interrupts
                     s.ordering_diagnostics = observe;
                     let legal = c.legal_ids();
                     s.killers[0] = [Some(legal[1]), Some(legal[2])];
-                    let ordered = s.ordered(c, None, Some(legal[0]), 0).unwrap();
+                    let ordered = s
+                        .ordered(c, None, Some(legal[0]), 0, c.legal_ids())
+                        .unwrap();
                     assert_eq!(&ordered[..3], &legal[..3]);
                     let mut unique = ordered.clone();
                     unique.sort_unstable();
@@ -140,7 +260,7 @@ fn ordering382_policy_and_observation_preserve_legal_order_parent_and_interrupts
         |s, c| {
             s.orderer = Some(&BadPolicy);
             assert!(matches!(
-                s.ordered(c, None, None, 0),
+                s.ordered(c, None, None, 0, c.legal_ids()),
                 Err(Interrupted::Error(SearchError::Evaluation(_)))
             ));
             assert_eq!(s.stats.policy_calls, 0);
@@ -150,7 +270,7 @@ fn ordering382_policy_and_observation_preserve_legal_order_parent_and_interrupts
     with_state(&root, &PawnRows, &cancel, &mut history, |s, c| {
         s.orderer = Some(&Policy);
         assert!(matches!(
-            s.ordered(c, None, None, 0),
+            s.ordered(c, None, None, 0, c.legal_ids()),
             Err(Interrupted::Stop(StopReason::Cancelled))
         ));
         assert_eq!(s.stats.policy_calls, 0);

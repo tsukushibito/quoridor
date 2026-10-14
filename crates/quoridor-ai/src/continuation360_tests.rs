@@ -352,13 +352,13 @@ fn continuation360_order_combines_unequal_main_and_preserves_all_tiers() {
         &mut h,
         |state, c| {
             state.path.extend_from_slice(&path); // Explicit typed path for this ordering port only.
-            let ids = state.ordered(c, None, None, 0).unwrap();
+            let ids = state.ordered(c, None, None, 0, c.legal_ids()).unwrap();
             assert!(ids.iter().position(|a| *a == 5) < ids.iter().position(|a| *a == 13));
             let mut unique = ids.clone();
             unique.sort_unstable();
             assert_eq!(unique, c.legal_ids());
             state.killers[0] = [Some(13), Some(3)];
-            let ids = state.ordered(c, None, Some(5), 0).unwrap();
+            let ids = state.ordered(c, None, Some(5), 0, c.legal_ids()).unwrap();
             assert_eq!(&ids[..3], &[5, 13, 3]);
             assert!(state.stats.ordering.nonzero_continuation_actions > 0);
             assert!(state.stats.ordering.history_changed_nodes > 0);

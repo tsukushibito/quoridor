@@ -275,14 +275,20 @@ fn cheap376_tiers_legal_set_id_ties_parent_reentry_and_returned_child_error() {
                 let before = Key::of(c);
                 let counted = c.occurrences().collect::<Vec<_>>();
                 let ply = c.total_ply();
-                let got = s.ordered(c, None, Some(legal[0]), 0).unwrap();
+                let got = s
+                    .ordered(c, None, Some(legal[0]), 0, c.legal_ids())
+                    .unwrap();
                 assert_eq!(got[0], legal[0]);
                 let mut set = got.clone();
                 set.sort_unstable();
                 let mut wanted = legal.clone();
                 wanted.sort_unstable();
                 assert_eq!(set, wanted);
-                assert_eq!(s.ordered(c, None, Some(legal[0]), 0).unwrap(), got);
+                assert_eq!(
+                    s.ordered(c, None, Some(legal[0]), 0, c.legal_ids())
+                        .unwrap(),
+                    got
+                );
                 assert_eq!(Key::of(c), before);
                 assert_eq!(c.occurrences().collect::<Vec<_>>(), counted);
                 assert_eq!(c.total_ply(), ply);
@@ -320,7 +326,7 @@ fn cheap376_tiers_legal_set_id_ties_parent_reentry_and_returned_child_error() {
                     StaticScratch::CheapControl
                 });
                 s.killers[0] = [Some(other), None];
-                assert_eq!(s.ordered(c, None, None, 0).unwrap()[0], goal);
+                assert_eq!(s.ordered(c, None, None, 0, c.legal_ids()).unwrap()[0], goal);
             },
         );
     }

@@ -968,8 +968,8 @@ impl Search<'_> {
         accumulator: Option<&EvalAccumulator>,
         pv: Option<u16>,
         ply: usize,
+        mut ids: Vec<u16>,
     ) -> NodeResult<Vec<u16>> {
-        let mut ids = c.legal_ids();
         let scores = self.ordering_scores(c, accumulator, &ids)?;
         #[cfg(feature = "research-diagnostics")]
         let history = if self.ordering.is_none() {
@@ -1262,8 +1262,11 @@ impl Search<'_> {
             (None, None)
         };
         let mut tt_move = None;
+        let mut legal = None;
         if let Some((stored_depth, value, bound, best, context_matches)) = hit {
-            if best.is_some_and(|action| c.legal_ids().contains(&action)) {
+            if best
+                .is_some_and(|action| legal.get_or_insert_with(|| c.legal_ids()).contains(&action))
+            {
                 tt_move = best;
                 // A different horizon is ordering information, not this depth's exact value.
                 if context_matches && stored_depth == depth {
@@ -1288,7 +1291,7 @@ impl Search<'_> {
                 self.stats.tt_illegal_moves += 1;
             }
         }
-        let moves = self.ordered(c, a, tt_move, ply)?;
+        let moves = self.ordered(c, a, tt_move, ply, legal.unwrap_or_else(|| c.legal_ids()))?;
         self.control()?;
         if moves.is_empty() {
             return Err(Interrupted::Error(SearchError::Rules(
@@ -1403,12 +1406,15 @@ impl Search<'_> {
     ) -> NodeResult<(u16, f32)> {
         self.enter()?;
         let mut previous = previous;
+        let mut legal = None;
         if self.limits.use_tt {
             let key = self.key(c);
             if let Some((stored_depth, value, bound, best, context_matches)) =
                 self.table.probe(&key, self.context, &mut self.stats)
             {
-                if best.is_some_and(|action| c.legal_ids().contains(&action)) {
+                if best.is_some_and(|action| {
+                    legal.get_or_insert_with(|| c.legal_ids()).contains(&action)
+                }) {
                     previous = previous.or(best);
                     if context_matches && stored_depth == depth && matches!(bound, Bound::Exact) {
                         self.stats.tt_usable_depth += 1;
@@ -1422,7 +1428,7 @@ impl Search<'_> {
                 }
             }
         }
-        let moves = self.ordered(c, a, previous, 0)?;
+        let moves = self.ordered(c, a, previous, 0, legal.unwrap_or_else(|| c.legal_ids()))?;
         self.control()?;
         let mut value = f32::NEG_INFINITY;
         let mut best = None;
