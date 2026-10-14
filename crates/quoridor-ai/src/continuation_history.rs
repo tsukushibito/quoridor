@@ -1,4 +1,5 @@
 //! Session-owned ordering statistics, never search values or legal-move filters.
+use super::move_ordering::MoveRead;
 use quoridor_core::Position;
 
 pub(super) const LAGS: [usize; 5] = [1, 2, 3, 4, 6];
@@ -26,8 +27,12 @@ pub struct OrderingStats {
     pub nonzero_dynamic_actions: u64,
     pub nonzero_combined_actions: u64,
     pub nonzero_continuation_actions: u64,
-    /// Combined dynamic/static changes from current priority/policy tiers with ActionID ties; not a history-only causal share.
+    /// Full-order changes among history_compared_nodes only. Deferred nodes
+    /// use first-choice comparisons; an unassessed tail is not a zero change.
     pub history_changed_nodes: u64,
+    pub history_compared_nodes: u64,
+    pub first_choice_compared_nodes: u64,
+    pub first_choice_changed_nodes: u64,
     pub completed_cutoff_events: u64,
     pub cutoff_rank_sum: u64,
     pub first_child_cutoffs: u64,
@@ -43,8 +48,9 @@ pub struct OrderingStats {
     pub available_goal_map_pairs: u64,
     pub nonzero_static_actions: u64,
     pub exact_goal_actions: u64,
-    /// Static changes against identical dynamic tiers/scores with ActionID ties.
+    /// Static changes among static_compared_nodes only, never an unsorted tail.
     pub static_changed_nodes: u64,
+    pub static_compared_nodes: u64,
 }
 
 /// Actual mover before make_move, not a colour inferred from an ActionID.
@@ -304,6 +310,10 @@ pub struct OrderingWorkStats {
     pub roots_finished: u64,
     pub preparation_calls_started: u64,
     pub preparation_actions_requested: u64,
+    pub first_selection_calls_started: u64,
+    pub first_selection_actions_started: u64,
+    pub selected_reads_started: u64,
+    pub selected_returns_started: u64,
     pub sort_calls_started: u64,
     pub sort_actions_started: u64,
     pub nontrivial_sort_calls_started: u64,
@@ -312,6 +322,10 @@ pub struct OrderingWorkStats {
     pub tt_first_reads_started: u64,
     pub tt_first_returns_started: u64,
     pub sort_nodes_finished: u64,
+    pub prepared_nodes_finished: u64,
+    pub selected_reads_finished: u64,
+    pub selected_returns_finished: u64,
+    pub selected_cutoff_no_tail_sort_nodes: u64,
     pub scored_actions_finished: u64,
     pub sort_actions_finished: u64,
     pub nontrivial_sort_nodes_finished: u64,
@@ -328,7 +342,8 @@ pub struct OrderingWorkStats {
     /// Sort sizes: 0, 1, 2..4, 5..16, 17..64, 65..209.
     pub sort_size_started: [u64; 6],
     pub sort_size_finished: [u64; 6],
-    /// Consumption: empty, none, <=1/4, <=1/2, partial>1/2, all.
+    /// Distinct reads / all prepared actions: empty, none, <=1/4, <=1/2,
+    /// partial>1/2, all. Unlike historical394, prepared need not all be sorted.
     pub consumed_fraction_finished: [u64; 6],
 }
 
@@ -361,44 +376,74 @@ impl OrderingStats {
     }
 }
 
-/// Four scalar consumption facts at one active node, constructed only with ON.
+/// Scalar preparation/consumption facts at one active node, only with ON.
 /// Re-search of the same PVS action is inside one read/terminal-return pair.
 pub(super) struct OrderingNodeWork {
+    pub prepared_size: Option<usize>,
     pub sorted_size: Option<usize>,
+    selected_reads: usize,
+    selected_returns: usize,
     sorted_reads: usize,
     sorted_returns: usize,
     tt_first_returned: bool,
-    last_sorted: bool,
+    last_read: MoveRead,
     root: bool,
 }
 impl OrderingNodeWork {
     pub fn start(stats: &mut OrderingStats, root: bool) -> Self {
         stats.work_mut().nodes_started += 1;
         Self {
+            prepared_size: None,
             sorted_size: None,
+            selected_reads: 0,
+            selected_returns: 0,
             sorted_reads: 0,
             sorted_returns: 0,
             tt_first_returned: false,
-            last_sorted: false,
+            last_read: MoveRead::Tt,
             root,
         }
     }
     pub fn read(&mut self, sorted: bool, stats: &mut OrderingStats) {
-        self.last_sorted = sorted;
-        if sorted {
-            self.sorted_reads += 1;
-            stats.work_mut().sorted_reads_started += 1;
-        } else {
-            stats.work_mut().tt_first_reads_started += 1;
+        self.read_choice(
+            if sorted {
+                MoveRead::Sorted
+            } else {
+                MoveRead::Tt
+            },
+            stats,
+        );
+    }
+    pub fn read_choice(&mut self, kind: MoveRead, stats: &mut OrderingStats) {
+        self.last_read = kind;
+        match kind {
+            MoveRead::Sorted => {
+                self.sorted_reads += 1;
+                stats.work_mut().sorted_reads_started += 1;
+            }
+            MoveRead::Selected => {
+                self.selected_reads += 1;
+                stats.work_mut().selected_reads_started += 1;
+            }
+            MoveRead::Tt => {
+                stats.work_mut().tt_first_reads_started += 1;
+            }
         }
     }
     pub fn returned(&mut self, stats: &mut OrderingStats) {
-        if self.last_sorted {
-            self.sorted_returns += 1;
-            stats.work_mut().sorted_returns_started += 1;
-        } else {
-            self.tt_first_returned = true;
-            stats.work_mut().tt_first_returns_started += 1;
+        match self.last_read {
+            MoveRead::Sorted => {
+                self.sorted_returns += 1;
+                stats.work_mut().sorted_returns_started += 1;
+            }
+            MoveRead::Selected => {
+                self.selected_returns += 1;
+                stats.work_mut().selected_returns_started += 1;
+            }
+            MoveRead::Tt => {
+                self.tt_first_returned = true;
+                stats.work_mut().tt_first_returns_started += 1;
+            }
         }
     }
     /// Called after the original node control/restoration and TT publication.
@@ -409,9 +454,29 @@ impl OrderingNodeWork {
         work.roots_finished += u64::from(self.root);
         work.cutoff_nodes_finished += u64::from(cutoff);
         work.tt_first_returns_finished += u64::from(self.tt_first_returned);
+        work.selected_reads_finished += self.selected_reads as u64;
+        work.selected_returns_finished += self.selected_returns as u64;
+        if let Some(size) = self.prepared_size.or(self.sorted_size) {
+            work.prepared_nodes_finished += 1;
+            work.scored_actions_finished += size as u64;
+            let reads = self.selected_reads + self.sorted_reads;
+            let fraction = if size == 0 {
+                0
+            } else if reads == 0 {
+                1
+            } else if reads == size {
+                5
+            } else if reads * 4 <= size {
+                2
+            } else if reads * 2 <= size {
+                3
+            } else {
+                4
+            };
+            work.consumed_fraction_finished[fraction] += 1;
+        }
         if let Some(size) = self.sorted_size {
             work.sort_nodes_finished += 1;
-            work.scored_actions_finished += size as u64;
             work.sort_actions_finished += size as u64;
             work.nontrivial_sort_nodes_finished += u64::from(size > 1);
             work.sorted_reads_finished += self.sorted_reads as u64;
@@ -423,22 +488,11 @@ impl OrderingNodeWork {
             work.empty_sorted_nodes_finished += u64::from(size == 0);
             work.single_sorted_nodes_finished += u64::from(size == 1);
             work.sort_size_finished[sort_size_bucket(size)] += 1;
-            let fraction = if size == 0 {
-                0
-            } else if self.sorted_reads == 0 {
-                1
-            } else if self.sorted_reads == size {
-                5
-            } else if self.sorted_reads * 4 <= size {
-                2
-            } else if self.sorted_reads * 2 <= size {
-                3
-            } else {
-                4
-            };
-            work.consumed_fraction_finished[fraction] += 1;
         } else {
-            work.tt_only_no_sort_cutoff_nodes += u64::from(cutoff && self.tt_first_returned);
+            work.tt_only_no_sort_cutoff_nodes +=
+                u64::from(cutoff && self.tt_first_returned && self.prepared_size.is_none());
+            work.selected_cutoff_no_tail_sort_nodes +=
+                u64::from(cutoff && self.selected_returns > 0);
         }
     }
 }

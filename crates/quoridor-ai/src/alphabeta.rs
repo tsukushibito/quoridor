@@ -1012,6 +1012,47 @@ impl Search<'_> {
         Ok(ids)
     }
 
+    fn prepared_moves(
+        &mut self,
+        c: &SigmaContext,
+        accumulator: Option<&EvalAccumulator>,
+        pv: Option<u16>,
+        ply: usize,
+        ids: Vec<u16>,
+    ) -> NodeResult<move_ordering::PreparedMoves> {
+        if self.orderer.is_some()
+            || self.ordering.is_none()
+            || !matches!(self.static_scratch, Some(StaticScratch::CheapControl))
+        {
+            return self
+                .ordered(c, accumulator, pv, ply, ids)
+                .map(move_ordering::PreparedMoves::eager);
+        }
+        if self.ordering_diagnostics {
+            self.stats.ordering.observe_preparation(ids.len());
+        }
+        // Same eager scoring/validation point, including goals and all siblings.
+        let scores = self.ordering_scores(c, accumulator, &ids)?;
+        let ranking = move_ordering::Ranking::new(
+            &ids,
+            pv,
+            self.killers.get(ply).copied().unwrap_or([None; 2]),
+            scores.static_scores.as_ref().map(|s| &s.goals),
+            None,
+            move_ordering::HistoryScores::Signed(&scores.combined),
+        );
+        let baseline = scores
+            .observation
+            .as_ref()
+            .and_then(|observation| observation.baseline_first(&ranking, &ids));
+        let keys = ranking.control_keys(&ids).ok_or_else(|| {
+            Interrupted::Error(SearchError::Evaluation(
+                "signed Control ordering keys unavailable".into(),
+            ))
+        })?;
+        Ok(move_ordering::PreparedMoves::control(ids, keys, baseline))
+    }
+
     fn ordering_scores(
         &mut self,
         c: &SigmaContext,
@@ -1327,16 +1368,14 @@ impl Search<'_> {
             deferred = Some(legal);
             None
         } else {
-            Some(self.ordered(c, a, tt_move, ply, legal)?.into_iter())
+            Some(self.prepared_moves(c, a, tt_move, ply, legal)?)
         };
         if let Some(work) = node_work.as_mut() {
-            work.sorted_size = moves.as_ref().map(|moves| moves.len());
+            work.prepared_size = moves.as_ref().map(|moves| moves.len());
+            work.sorted_size = moves.as_ref().and_then(|moves| moves.sorted_size());
         }
         self.control()?;
-        if moves
-            .as_ref()
-            .is_some_and(|moves| moves.as_slice().is_empty())
-        {
+        if moves.as_ref().is_some_and(|moves| moves.is_empty()) {
             return Err(Interrupted::Error(SearchError::Rules(
                 RulesError::InvalidPosition,
             )));
@@ -1364,17 +1403,28 @@ impl Search<'_> {
                     if remaining.is_empty() {
                         break;
                     }
-                    moves = Some(self.ordered(c, a, None, ply, remaining)?.into_iter());
+                    moves = Some(self.prepared_moves(c, a, None, ply, remaining)?);
                     if let Some(work) = node_work.as_mut() {
-                        work.sorted_size = moves.as_ref().map(|moves| moves.len());
+                        work.prepared_size = moves.as_ref().map(|moves| moves.len());
+                        work.sorted_size = moves.as_ref().and_then(|moves| moves.sorted_size());
                     }
                     self.control()?;
                 }
-                let Some(action) = moves.as_mut().and_then(|moves| moves.next()) else {
+                let Some(moves) = moves.as_mut() else {
+                    break;
+                };
+                let Some((action, kind)) = moves.next(if self.ordering_diagnostics {
+                    Some(&mut self.stats.ordering)
+                } else {
+                    None
+                }) else {
                     break;
                 };
                 if let Some(work) = node_work.as_mut() {
-                    work.read(true, &mut self.stats.ordering);
+                    if work.sorted_size.is_none() {
+                        work.sorted_size = moves.sorted_size();
+                    }
+                    work.read_choice(kind, &mut self.stats.ordering);
                 }
                 action
             };
@@ -3373,6 +3423,10 @@ mod continuation360_composite_tests;
 #[cfg(all(test, feature = "research-diagnostics"))]
 #[path = "tt_first386_tests.rs"]
 mod tt_first386_tests;
+
+#[cfg(all(test, feature = "research-diagnostics"))]
+#[path = "deferred_tail399_tests.rs"]
+mod deferred_tail399_tests;
 
 #[cfg(test)]
 mod three_engine_374_factory_tests {

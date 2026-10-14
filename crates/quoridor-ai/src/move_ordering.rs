@@ -116,9 +116,16 @@ impl<'a> Ranking<'a> {
     }
 
     pub fn sort_control(&self, ids: &mut [u16]) {
+        let Some(keys) = self.control_keys(ids) else {
+            return self.sort(ids);
+        };
+        ids.sort_unstable_by(|&a, &b| keys[a as usize].cmp(&keys[b as usize]));
+    }
+
+    pub fn control_keys(&self, ids: &[u16]) -> Option<[u64; 209]> {
         let scores = match self.scores {
             HistoryScores::Signed(scores) if self.policy.is_none() => scores,
-            _ => return self.sort(ids),
+            _ => return None,
         };
         let mut keys = [0u64; 209];
         for &id in ids.iter() {
@@ -130,7 +137,102 @@ impl<'a> Ranking<'a> {
                 | (u64::from(descending) << 8)
                 | u64::from(id);
         }
-        ids.sort_unstable_by(|&a, &b| keys[a as usize].cmp(&keys[b as usize]));
+        Some(keys)
+    }
+}
+
+/// Existing legal Vec owns each ID once; only eligible Control retains keys.
+/// No score/history borrow survives preparation. Keys cannot change after a child.
+// The fixed 209-key area is deliberately inline: boxing this variant would add
+// one allocation per eligible node. Its live stack/cache cost is assessed as
+// part of the candidate, including the enum footprint on excluded eager paths.
+#[allow(clippy::large_enum_variant)]
+pub(super) enum PreparedMoves {
+    Eager(std::vec::IntoIter<u16>),
+    Control {
+        ids: Vec<u16>,
+        keys: [u64; 209],
+        next: usize,
+        baseline_first: Option<u16>,
+    },
+}
+
+#[derive(Clone, Copy)]
+pub(super) enum MoveRead {
+    Tt,
+    Selected,
+    Sorted,
+}
+
+impl PreparedMoves {
+    pub fn eager(ids: Vec<u16>) -> Self {
+        Self::Eager(ids.into_iter())
+    }
+    pub fn control(ids: Vec<u16>, keys: [u64; 209], baseline_first: Option<u16>) -> Self {
+        Self::Control {
+            ids,
+            keys,
+            next: 0,
+            baseline_first,
+        }
+    }
+    pub fn len(&self) -> usize {
+        match self {
+            Self::Eager(ids) => ids.len(),
+            Self::Control { ids, next, .. } => ids.len() - next,
+        }
+    }
+    pub fn is_empty(&self) -> bool {
+        self.len() == 0
+    }
+    pub fn sorted_size(&self) -> Option<usize> {
+        match self {
+            Self::Eager(ids) => Some(ids.len()),
+            Self::Control { ids, next, .. } if *next > 1 && ids.len() > 2 => Some(ids.len() - 1),
+            Self::Control { .. } => None,
+        }
+    }
+    pub fn next(&mut self, stats: Option<&mut OrderingStats>) -> Option<(u16, MoveRead)> {
+        match self {
+            Self::Eager(ids) => ids.next().map(|id| (id, MoveRead::Sorted)),
+            Self::Control {
+                ids,
+                keys,
+                next,
+                baseline_first,
+            } => {
+                if *next == ids.len() {
+                    return None;
+                }
+                if *next == 0 {
+                    let first = (0..ids.len()).min_by_key(|&i| keys[ids[i] as usize])?;
+                    if let Some(stats) = stats {
+                        let work = stats.work_mut();
+                        work.first_selection_calls_started += 1;
+                        work.first_selection_actions_started += ids.len() as u64;
+                        if let Some(baseline) = baseline_first {
+                            stats.first_choice_compared_nodes += 1;
+                            stats.first_choice_changed_nodes += u64::from(ids[first] != *baseline);
+                        }
+                    }
+                    ids.swap(0, first);
+                } else if *next == 1 && ids.len() > 2 {
+                    if let Some(stats) = stats {
+                        stats.observe_sort(ids.len() - 1);
+                    }
+                    ids[1..].sort_unstable_by(|&a, &b| keys[a as usize].cmp(&keys[b as usize]));
+                }
+                let kind = if *next > 0 && ids.len() > 2 {
+                    MoveRead::Sorted
+                } else {
+                    // First minimum, or a one-element tail needing no sort.
+                    MoveRead::Selected
+                };
+                let id = ids[*next];
+                *next += 1;
+                Some((id, kind))
+            }
+        }
     }
 }
 
@@ -155,12 +257,14 @@ impl Observation {
         has_static: bool,
         stats: &mut OrderingStats,
     ) {
+        stats.history_compared_nodes += 1;
         // Exact priority/policy tiers with ActionID ties and no history.
         let history_changed = ids
             .windows(2)
             .any(|w| ranking.tiers(w[0], w[1], true, ranking.policy).is_eq() && w[0] > w[1]);
         stats.history_changed_nodes += u64::from(history_changed);
         if has_static {
+            stats.static_compared_nodes += 1;
             // Coverage omits the goal tier in its dynamic-only comparison;
             // Cheap and its control keep their common legal-goal tier.
             let static_changed = ids.windows(2).any(|w| {
@@ -176,6 +280,15 @@ impl Observation {
             });
             stats.static_changed_nodes += u64::from(static_changed);
         }
+    }
+
+    /// First choice versus the same priority tiers/ID ties without history.
+    /// Deferred nodes have no full-order adjacency comparison; its denominator
+    /// remains explicit rather than sorting/copying the tail for observation.
+    pub fn baseline_first(&self, ranking: &Ranking<'_>, ids: &[u16]) -> Option<u16> {
+        ids.iter()
+            .min_by(|&&a, &&b| ranking.tiers(a, b, true, None).then_with(|| a.cmp(&b)))
+            .copied()
     }
 }
 

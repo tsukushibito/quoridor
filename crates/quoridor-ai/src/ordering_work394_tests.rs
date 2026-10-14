@@ -11,7 +11,7 @@ const LIMITS: SearchLimits = SearchLimits {
     use_pvs: true,
     use_tt: true,
 };
-const NO_TT: SearchLimits = SearchLimits {
+pub(super) const NO_TT: SearchLimits = SearchLimits {
     use_tt: false,
     ..LIMITS
 };
@@ -20,7 +20,7 @@ const ONE_NODE: SearchLimits = SearchLimits {
     ..NO_TT
 };
 
-fn warm(s: &mut Search<'_>, c: &SigmaContext, best: u16, depth: u16) {
+pub(super) fn warm(s: &mut Search<'_>, c: &SigmaContext, best: u16, depth: u16) {
     s.limits = &LIMITS;
     s.static_scratch = Some(StaticScratch::CheapControl);
     s.ordering_diagnostics = true;
@@ -46,14 +46,14 @@ fn warm(s: &mut Search<'_>, c: &SigmaContext, best: u16, depth: u16) {
     s.table.next_generation();
 }
 
-struct Toy<'a> {
-    values: [f32; 209],
-    reads: Mutex<Vec<u16>>,
-    error: bool,
-    cancel: Option<&'a AtomicBool>,
+pub(super) struct Toy<'a> {
+    pub(super) values: [f32; 209],
+    pub(super) reads: Mutex<Vec<u16>>,
+    pub(super) error: bool,
+    pub(super) cancel: Option<&'a AtomicBool>,
 }
 impl Toy<'_> {
-    fn new(value: f32) -> Self {
+    pub(super) fn new(value: f32) -> Self {
         Self {
             values: [value; 209],
             reads: Mutex::new(Vec::new()),
@@ -169,8 +169,9 @@ fn control394_deferred_remainder_excludes_tt_and_counts_all_consumed() {
                     w.sorted_reads_finished,
                     w.sorted_returns_finished
                 ),
-                (residual, residual, residual, residual)
+                (residual, residual - 1, residual - 1, residual - 1)
             );
+            assert_eq!(w.selected_returns_finished, 1);
             assert_eq!(
                 (
                     w.tt_first_reads_started,
@@ -216,24 +217,35 @@ fn control394_first_last_sorted_cutoffs_and_root_pvs_count_distinct_moves() {
                 }
                 let w = s.stats.ordering.work.as_deref().unwrap();
                 let read = if case == 0 { 1 } else { legal.len() as u64 };
+                let sorted = match case {
+                    0 => 0,
+                    1 => legal.len() as u64 - 1,
+                    _ => legal.len() as u64,
+                };
                 assert_eq!(
                     (w.sort_nodes_finished, w.sort_actions_finished),
-                    (1, legal.len() as u64)
+                    (u64::from(case != 0), sorted)
                 );
+                let sorted_read = if case == 1 {
+                    read - 1
+                } else if case == 0 {
+                    0
+                } else {
+                    read
+                };
                 assert_eq!(
                     (
                         w.sorted_reads_started,
                         w.sorted_reads_finished,
                         w.sorted_returns_finished
                     ),
-                    (read, read, read)
+                    (sorted_read, sorted_read, sorted_read)
                 );
                 assert_eq!(w.tt_first_returns_finished, 0);
-                assert_eq!(
-                    w.cutoff_unread_sorted_actions,
-                    if case == 0 { legal.len() as u64 - 1 } else { 0 }
-                );
-                assert_eq!(w.first_sorted_cutoff_nodes, u64::from(case == 0));
+                assert_eq!(w.cutoff_unread_sorted_actions, 0);
+                assert_eq!(w.first_sorted_cutoff_nodes, 0);
+                assert_eq!(w.selected_cutoff_no_tail_sort_nodes, u64::from(case == 0));
+                assert_eq!(w.selected_returns_finished, u64::from(case != 2));
                 assert_eq!(w.all_sorted_read_nodes, u64::from(case != 0));
                 assert_eq!(w.roots_finished, u64::from(case == 2));
                 if case == 2 {
@@ -322,12 +334,12 @@ fn control394_cancel_error_and_limit_leave_started_work_unfinished_parent_exact(
             let w = s.stats.ordering.work.as_deref().unwrap();
             assert_eq!(
                 (w.nodes_started, w.nodes_finished, w.sort_calls_started),
-                (1, 0, 1)
+                (1, 0, 0)
             );
             assert_eq!(
                 (
-                    w.sorted_reads_started,
-                    w.sorted_returns_started,
+                    w.selected_reads_started,
+                    w.selected_returns_started,
                     w.sort_nodes_finished
                 ),
                 (1, 0, 0)
