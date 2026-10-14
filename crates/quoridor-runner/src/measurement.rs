@@ -60,6 +60,8 @@ struct Settings {
     tt_entries: usize,
     use_tt: bool,
     use_pvs: bool,
+    #[serde(default)]
+    lmr: bool,
     namespace: SearchNamespaceSettings,
     output_bytes: usize,
     record_bytes: usize,
@@ -97,6 +99,9 @@ struct RootSpec {
 }
 
 fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
+    if settings.lmr && (!settings.use_pvs || settings.profile == Profile::Coverage) {
+        return Err("measurement LMR requires PVS and Control/Cheap".into());
+    }
     if settings.roots.is_empty()
         || settings.tt_entries == 0
         || settings.output_bytes == 0
@@ -266,7 +271,7 @@ impl Target for SearchTarget {
             rules: self.settings.namespace.rules.clone(),
             selectivity: self.settings.namespace.selectivity.clone(),
         };
-        let session = match self.settings.profile {
+        let mut session = match self.settings.profile {
             Profile::Coverage => {
                 SearchSession::new(self.evaluator.clone(), namespace, self.settings.tt_entries)?
             }
@@ -293,11 +298,17 @@ impl Target for SearchTarget {
                 request.diagnostic,
             )?,
         };
+        session.set_lmr(self.settings.lmr)?;
+        let method = session.namespace().selectivity.clone();
+        let lmr = session.lmr_enabled();
         let retained = session.retained_memory_bytes();
         let capacity = session.tt_capacity();
         self.session = Some(session);
         Ok(
-            json!({"TT_capacity":capacity,"retained_TT_bytes":retained.0,"retained_session_metadata_history_bytes":retained.1}),
+            json!({"TT_capacity":capacity,"retained_TT_bytes":retained.0,"retained_session_metadata_history_bytes":retained.1,
+                "actual_selectivity":method,"lmr":lmr,
+                "completed_depth_semantics":if lmr {"selective-nominal"} else {"full-width"},
+                "lmr_rule":if lmr {Some(alphabeta::LMR_METHOD)} else {None}}),
         )
     }
     fn prepare(&mut self, request: &Request) -> Result<Value> {
@@ -382,8 +393,7 @@ fn timed<T>(run: impl FnOnce() -> Result<T>) -> (Result<T>, f64) {
 }
 fn evaluator_binding(settings: &Settings, model_count: usize) -> Result<()> {
     let fixed_d = settings.namespace.evaluator == crate::teacher_pilot_execution::EVALUATOR_ID;
-    if (fixed_d
-        && (model_count != 0 || !matches!(settings.profile, Profile::Control | Profile::Coverage)))
+    if (fixed_d && model_count != 0)
         || (!fixed_d && (model_count != 1 || matches!(settings.profile, Profile::Coverage)))
     {
         return Err("measurement evaluator/model/profile binding".into());
@@ -649,6 +659,7 @@ fn completed_depth_observation(r: &SearchResult) -> Value {
             "TT_cutoffs":s.tt_cutoffs,"TT_order_only":s.tt_order_only,
             "TT_index_collisions":s.tt_index_collisions,"TT_replacements":s.tt_replacements,
             "PVS_researches":s.pvs_researches,"delta_updates":s.delta_updates,
+            "LMR_attempts":s.lmr_attempts,"LMR_full_depth_confirmations":s.lmr_full_depth_confirmations,"LMR_full_window_researches":s.lmr_full_window_researches,
             "TT_generation":s.tt_generation,"TT_retained_bytes":s.tt_retained_bytes}})
 }
 fn observed(r: &SearchResult) -> Value {
@@ -657,6 +668,9 @@ fn observed(r: &SearchResult) -> Value {
     let mut result = json!({"returned":"Ok","action":r.action,"value":r.value,"value_bits":r.value.map(f32::to_bits),"completed_depth":r.completed_depth,"PV":r.pv,"stop":format!("{:?}",r.stop),"Search_internal_elapsed_seconds":r.elapsed.as_secs_f64(),
         "work":{"nodes":s.nodes,"evaluations":s.evaluations,"terminal":s.terminal,"cutoffs":s.cutoffs,"TT_hits":s.tt_hits,"TT_probes":s.tt_probes,"TT_exact_hits":s.tt_exact_hits,"TT_key_builds":s.tt_key_builds,"tt_context_initial_items":s.tt_context_initial_items,"tt_context_transitions":s.tt_context_transitions,"tt_board_hash_reads":s.tt_board_hash_reads,"tt_board_hash_updates":s.tt_board_hash_updates,"tt_context_matches":s.tt_context_matches,"tt_context_misses":s.tt_context_misses,"tt_order_context_mismatch":s.tt_order_context_mismatch,"tt_hash_collisions":s.tt_hash_collisions,"tt_index_collisions":s.tt_index_collisions,"TT_hashes":s.tt_hashes,"TT_usable_depth":s.tt_usable_depth,"TT_order_only":s.tt_order_only,"TT_collisions":s.tt_collisions,"TT_replacements":s.tt_replacements,"TT_capacity_skips":s.tt_capacity_skips,"TT_illegal_moves":s.tt_illegal_moves,"TT_retained_bytes":s.tt_retained_bytes,"TT_generation":s.tt_generation,"TT_cutoffs":s.tt_cutoffs,"PVS_researches":s.pvs_researches,"delta_updates":s.delta_updates,"policy_calls":s.policy_calls},
         "ordering":{"ordered_nodes":o.ordered_nodes,"scored_actions":o.scored_actions,"nonzero_dynamic_actions":o.nonzero_dynamic_actions,"nonzero_combined_actions":o.nonzero_combined_actions,"nonzero_continuation_actions":o.nonzero_continuation_actions,"history_changed_nodes":o.history_changed_nodes,"first_choice_changed_nodes":o.first_choice_changed_nodes,"first_choice_compared_nodes":o.first_choice_compared_nodes,"history_compared_nodes":o.history_compared_nodes,"completed_cutoff_events":o.completed_cutoff_events,"cutoff_rank_sum":o.cutoff_rank_sum,"first_child_cutoffs":o.first_child_cutoffs,"positive_actions":o.positive_actions,"negative_actions":o.negative_actions,"continuation_updates":o.continuation_updates,"age_passes":o.age_passes,"static_parents":o.static_parents,"borrowed_goal_maps":o.borrowed_goal_maps,"computed_goal_map_pairs":o.computed_goal_map_pairs,"cheap_static_parents":o.cheap_static_parents,"missing_goal_map_pairs":o.missing_goal_map_pairs,"available_goal_map_pairs":o.available_goal_map_pairs,"nonzero_static_actions":o.nonzero_static_actions,"exact_goal_actions":o.exact_goal_actions,"static_changed_nodes":o.static_changed_nodes,"static_compared_nodes":o.static_compared_nodes}});
+    result["work"]["LMR_attempts"] = json!(s.lmr_attempts);
+    result["work"]["LMR_full_depth_confirmations"] = json!(s.lmr_full_depth_confirmations);
+    result["work"]["LMR_full_window_researches"] = json!(s.lmr_full_window_researches);
     if let Some(w) = o.work.as_deref() {
         result["ordering"]["work"] = json!({
             "nodes_started": w.nodes_started,
@@ -833,6 +847,84 @@ impl Output {
 mod tests {
     use super::*;
     #[test]
+    fn measurement400_lmr_defaults_refusals_real_method_and_scalar_output() {
+        struct NeverEvaluate;
+        impl StaticEvaluator for NeverEvaluate {
+            fn evaluate(
+                &self,
+                _: &SigmaContext,
+                _: Option<&alphabeta::EvalAccumulator>,
+            ) -> quoridor_ai::alphabeta::Result<f32> {
+                Err(alphabeta::SearchError::Evaluation(
+                    "400 metadata fixture forbids model forward".into(),
+                ))
+            }
+        }
+        let base = json!({"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"cheap","tt_entries":4096,"use_tt":true,"use_pvs":true,
+            "namespace":{"evaluator":crate::teacher_pilot_execution::EVALUATOR_ID,"rules":"standard","selectivity":"synthetic"},"output_bytes":10000,"record_bytes":1000});
+        let mut settings: Settings = serde_json::from_value(base.clone()).unwrap();
+        assert!(!settings.lmr);
+        validate(&settings, &[]).unwrap();
+        evaluator_binding(&settings, 0).unwrap();
+        settings.lmr = true;
+        settings.use_pvs = false;
+        assert!(validate(&settings, &[]).is_err());
+        settings.use_pvs = true;
+        settings.profile = Profile::Coverage;
+        assert!(validate(&settings, &[]).is_err());
+        settings.profile = Profile::Cheap;
+        validate(&settings, &[]).unwrap();
+        let mut malformed = base;
+        malformed["lmr"] = json!(1);
+        assert!(serde_json::from_value::<Settings>(malformed).is_err());
+        let request = Request {
+            id: "one".into(),
+            session: "one".into(),
+            root: 0,
+            depth: 3,
+            node_cap: 16,
+            time_limit_ms: None,
+            diagnostic: false,
+            warmup: false,
+            observe_completed_depths: false,
+        };
+        let mut target = SearchTarget {
+            settings,
+            roots: vec![],
+            evaluator: Arc::new(NeverEvaluate),
+            session: None,
+            root: None,
+            before: Value::Null,
+        };
+        let setup = target.reset(&request).unwrap();
+        assert_eq!(setup["lmr"], true);
+        assert_eq!(setup["completed_depth_semantics"], "selective-nominal");
+        assert!(
+            setup["actual_selectivity"]
+                .as_str()
+                .unwrap()
+                .ends_with(alphabeta::LMR_METHOD)
+        );
+        let result = SearchResult {
+            action: None,
+            value: None,
+            completed_depth: 0,
+            pv: vec![],
+            stats: alphabeta::SearchStats {
+                lmr_attempts: 3,
+                lmr_full_depth_confirmations: 2,
+                lmr_full_window_researches: 1,
+                ..Default::default()
+            },
+            stop: StopReason::NodeLimit,
+            elapsed: std::time::Duration::ZERO,
+        };
+        let row = observed(&result);
+        assert_eq!(row["work"]["LMR_attempts"], 3);
+        assert_eq!(row["work"]["LMR_full_depth_confirmations"], 2);
+        assert_eq!(row["work"]["LMR_full_window_researches"], 1);
+    }
+    #[test]
     fn fixed_d392_binding_allows_only_exact_empty_model_d_and_preserves_nnue_binding() {
         let mut settings: Settings = serde_json::from_value(json!({"roots":[],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,
             "namespace":{"evaluator":crate::teacher_pilot_execution::EVALUATOR_ID,"rules":"standard","selectivity":"fixed-D"},"output_bytes":100,"record_bytes":10})).unwrap();
@@ -841,7 +933,7 @@ mod tests {
         settings.profile = Profile::Coverage;
         assert!(evaluator_binding(&settings, 0).is_ok());
         settings.profile = Profile::Cheap;
-        assert!(evaluator_binding(&settings, 0).is_err());
+        assert!(evaluator_binding(&settings, 0).is_ok());
         settings.namespace.evaluator = "loaded-NNUE-sha".into();
         assert!(evaluator_binding(&settings, 1).is_ok());
         assert!(evaluator_binding(&settings, 0).is_err());

@@ -1,4 +1,4 @@
-//! Human376 integer ranking only. Borrowed parent maps, never BFS or child/NN work.
+//! Existing Cheap integer coefficients; genuine parent maps, no child/NN work.
 use super::{
     Interrupted, NodeResult, SearchError,
     static_ordering::{StaticScores, goals_only},
@@ -139,9 +139,19 @@ pub(super) fn prepare(
 ) -> NodeResult<StaticScores> {
     control()?;
     let mut result = goals_only(p, legal)?;
-    if let Some(maps) = cached {
-        validate_maps(p, maps, &mut control)?;
-    }
+    let owned;
+    let maps = match cached {
+        Some(maps) => maps,
+        None => {
+            control()?;
+            owned = p.wall_distance_maps();
+            control()?;
+            &owned
+        }
+    };
+    // Claimed NNUE cache checks are unchanged. Generated maps pass the same
+    // boundary, too; fixed-D does not fabricate a cache or omit coefficients.
+    validate_maps(p, maps, &mut control)?;
     let own = usize::from(p.turn);
     let opponent = own ^ 1;
     let mut existing_points = 0u128;
@@ -152,25 +162,22 @@ pub(super) fn prepare(
             walls &= walls - 1;
         }
     }
-    let gap = cached.map_or(0, |m| {
-        match m[own][p.pawns[own] as usize].cmp(&m[opponent][p.pawns[opponent] as usize]) {
+    let gap = {
+        match maps[own][p.pawns[own] as usize].cmp(&maps[opponent][p.pawns[opponent] as usize]) {
             std::cmp::Ordering::Greater => 64,
             std::cmp::Ordering::Less => -64,
             std::cmp::Ordering::Equal => 0,
         }
-    });
+    };
     for &action in legal {
         control()?;
         let score = if action < 81 {
-            let progress = match cached {
-                Some(maps) => {
-                    let to = maps[own][action as usize];
-                    if to >= 81 {
-                        return Err(invalid("claimed cache has unreachable legal destination"));
-                    }
-                    128 * (i16::from(maps[own][p.pawns[own] as usize]) - i16::from(to))
+            let progress = {
+                let to = maps[own][action as usize];
+                if to >= 81 {
+                    return Err(invalid("claimed cache has unreachable legal destination"));
                 }
-                None => 0,
+                128 * (i16::from(maps[own][p.pawns[own] as usize]) - i16::from(to))
             };
             progress - gap
         } else {
@@ -187,10 +194,8 @@ pub(super) fn prepare(
                 + proximity(own, 64, 32)
                 + 64 * i16::from(POINT_MASKS[index] & existing_points != 0)
                 + 32 * i16::from(action < 145 && (anchor % 8 == 0 || anchor % 8 == 7))
-                + cached.map_or(0, |m| {
-                    96 * (i16::from(directly_blocks(p, m, opponent, action))
-                        - i16::from(directly_blocks(p, m, own, action)))
-                })
+                + 96 * (i16::from(directly_blocks(p, maps, opponent, action))
+                    - i16::from(directly_blocks(p, maps, own, action)))
                 + gap
         };
         result.scores[action as usize] = score;

@@ -155,6 +155,13 @@ pub struct Engine {
     pub time_ms: Option<u64>,
     #[serde(default)]
     pub simd: bool,
+    /// Arena-only selection of the two existing research ordering targets.
+    /// None retains the current product/generation constructor.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub ordering_profile: Option<String>,
+    /// Explicit runtime mode; input namespace strings never enable it.
+    #[serde(default)]
+    pub lmr: bool,
 }
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -266,6 +273,14 @@ impl Config {
             || self.mcts_max_bytes == 0
         {
             return Err("invalid execution config".into());
+        }
+        if self.arena.is_none()
+            && self
+                .engines
+                .iter()
+                .any(|e| e.ordering_profile.is_some() || e.lmr)
+        {
+            return Err("explicit ordering/LMR settings belong to an arena config".into());
         }
         if self.engines.is_empty() || self.engines.len() > 2 {
             return Err("supply one selfplay engine or two arena engines".into());

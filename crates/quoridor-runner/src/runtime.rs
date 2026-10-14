@@ -501,6 +501,16 @@ pub struct TtProfile {
     pub session_metadata_bytes_peak: usize,
     /// Evaluator Arc/model weights are shared; their allocation is not a TT cap.
     pub shared_evaluator_bytes: Option<usize>,
+    #[serde(default)]
+    pub actual_namespace: Option<serde_json::Value>,
+    #[serde(default)]
+    pub actual_lmr_enabled: Option<bool>,
+    #[serde(default)]
+    pub lmr_attempts: u64,
+    #[serde(default)]
+    pub lmr_full_depth_confirmations: u64,
+    #[serde(default)]
+    pub lmr_full_window_researches: u64,
 }
 impl TtProfile {
     fn record(&mut self, result: &alphabeta::SearchResult) {
@@ -509,6 +519,9 @@ impl TtProfile {
         self.cancellations += u64::from(result.stop == alphabeta::StopReason::Cancelled);
         self.no_completed_iteration_results += u64::from(result.completed_depth == 0);
         self.terminal_results += u64::from(result.stop == alphabeta::StopReason::Terminal);
+        self.lmr_attempts += s.lmr_attempts;
+        self.lmr_full_depth_confirmations += s.lmr_full_depth_confirmations;
+        self.lmr_full_window_researches += s.lmr_full_window_researches;
         self.probes += s.tt_probes;
         self.key_hits += s.tt_hits;
         self.exact_hits += s.tt_exact_hits;
@@ -534,6 +547,71 @@ impl TtProfile {
         self.successful_result_elapsed_seconds += result.elapsed.as_secs_f64();
     }
 }
+/// Config-driven selection only: existing factory owns ranking and LMR.
+/// Expected namespace is checked against the actual session by the unchanged
+/// invocation/reset boundary. It is never used to enable a mode.
+fn arena_alpha_namespace(
+    engine: &Engine,
+    mut base: alphabeta::SearchNamespace,
+) -> alphabeta::SearchNamespace {
+    if let Some(profile) = engine.ordering_profile.as_deref() {
+        base.selectivity
+            .push_str(":cheap-static376-integer-parent-v1:");
+        base.selectivity.push_str(profile);
+        if engine.lmr {
+            base.selectivity.push(':');
+            base.selectivity.push_str(alphabeta::LMR_METHOD);
+        }
+    }
+    base
+}
+fn arena_alpha_session(
+    evaluator: Arc<dyn StaticEvaluator>,
+    base: alphabeta::SearchNamespace,
+    capacity: usize,
+    engine: &Engine,
+    arena: Option<&crate::arena::ArenaConfig>,
+) -> alphabeta::Result<alphabeta::SearchSession> {
+    let session = if let Some(profile) = engine.ordering_profile.as_deref() {
+        let profile = match profile {
+            "control" => alphabeta::OrderingProfile::CheapStaticControl,
+            "cheap" => alphabeta::OrderingProfile::CombinedSignedCheapStatic,
+            _ => {
+                return Err(alphabeta::SearchError::Limits(
+                    "unknown arena ordering target".into(),
+                ));
+            }
+        };
+        // Preserve the actual existing arena score domain; no new evaluator math.
+        let mut session = alphabeta::SearchSession::new_for_ordering_assessment(
+            evaluator,
+            base,
+            capacity,
+            alphabeta::ScoreDomain::LEGACY,
+            profile,
+            false,
+        )?;
+        session.set_lmr(engine.lmr)?;
+        session
+    } else if arena.is_some_and(|a| a.disable_continuation_static_ordering) {
+        alphabeta::SearchSession::new_without_continuation_or_static(evaluator, base, capacity)?
+    } else {
+        alphabeta::SearchSession::new(evaluator, base, capacity)?
+    };
+    if engine.ordering_profile.is_none() && engine.lmr {
+        return Err(alphabeta::SearchError::Limits(
+            "LMR needs an explicit ordering target".into(),
+        ));
+    }
+    // The setter acts on configuration, not the namespace string; log the getter.
+    if session.lmr_enabled() != engine.lmr {
+        return Err(alphabeta::SearchError::Limits(
+            "arena/session LMR mode mismatch".into(),
+        ));
+    }
+    Ok(session)
+}
+
 /// One TT caller attempt, including allocation errors and early cancellation.
 /// The owned evaluator/session and numerical search semantics are unchanged.
 #[cfg(test)]
@@ -619,6 +697,12 @@ fn invoke_alpha_observed(
             profile.session_reset_seconds += start.elapsed().as_secs_f64();
             profile.namespace_resets += 1;
         }
+        profile.actual_namespace = Some(serde_json::json!({
+            "evaluator":session.namespace().evaluator,
+            "rules":session.namespace().rules,
+            "selectivity":session.namespace().selectivity,
+        }));
+        profile.actual_lmr_enabled = Some(session.lmr_enabled());
         profile.search_invocations += 1;
         let start = Instant::now();
         let mut bounded = limits.clone();
@@ -1850,6 +1934,8 @@ fn worker(
                     rules: g.context.ruleset().id().into(),
                     selectivity: "fullwidth-PVS-MPC-OFF-v1".into(),
                 };
+                let base_namespace = namespace;
+                let namespace = arena_alpha_namespace(e, base_namespace.clone());
                 let mut completion = crate::arena_clock::Completion::default();
                 let observed = !g.record_teacher;
                 let search_result = invoke_alpha_observed(
@@ -1861,18 +1947,14 @@ fn worker(
                     &limits,
                     &cancel,
                     caller_start,
-                    |evaluator, namespace, capacity| {
-                        if config
-                            .arena
-                            .as_ref()
-                            .is_some_and(|a| a.disable_continuation_static_ordering)
-                        {
-                            alphabeta::SearchSession::new_without_continuation_or_static(
-                                evaluator, namespace, capacity,
-                            )
-                        } else {
-                            alphabeta::SearchSession::new(evaluator, namespace, capacity)
-                        }
+                    |evaluator, _qualified_namespace, capacity| {
+                        arena_alpha_session(
+                            evaluator,
+                            base_namespace.clone(),
+                            capacity,
+                            e,
+                            config.arena.as_ref(),
+                        )
                     },
                     observed.then_some(&mut completion),
                     observed
@@ -2332,6 +2414,8 @@ impl EvaluationWorkers {
                                 rules: turn.root.ruleset().id().into(),
                                 selectivity: "fullwidth-PVS-MPC-OFF-v1".into(),
                             };
+                            let base_namespace = namespace;
+                            let namespace = arena_alpha_namespace(&e, base_namespace.clone());
                             let mut completion = crate::arena_clock::Completion::default();
                             let mut publish = |result: &alphabeta::SearchResult| {
                                 let _ = tx.send(EvaluationEvent::Update(
@@ -2341,16 +2425,29 @@ impl EvaluationWorkers {
                                 ));
                             };
                             let result = invoke_alpha_observed(
-                                &mut session, &mut profile, evaluator.evaluator.as_ref().unwrap().clone(), namespace,
-                                &turn.root, &limits, &turn.stop, turn.started,
-                                |evaluator, namespace, capacity| {
-                                    if c.arena.as_ref().unwrap().disable_continuation_static_ordering {
-                                        alphabeta::SearchSession::new_without_continuation_or_static(evaluator, namespace, capacity)
-                                    } else { alphabeta::SearchSession::new(evaluator, namespace, capacity) }
+                                &mut session,
+                                &mut profile,
+                                evaluator.evaluator.as_ref().unwrap().clone(),
+                                namespace,
+                                &turn.root,
+                                &limits,
+                                &turn.stop,
+                                turn.started,
+                                |evaluator, _qualified_namespace, capacity| {
+                                    arena_alpha_session(
+                                        evaluator,
+                                        base_namespace.clone(),
+                                        capacity,
+                                        &e,
+                                        c.arena.as_ref(),
+                                    )
                                 },
-                                Some(&mut completion), e.time_ms.map(Duration::from_millis),
-                                Duration::from_millis(c.arena.as_ref().unwrap().return_reserve_ms), Some(&mut publish),
-                            ).map_err(|error| error.to_string());
+                                Some(&mut completion),
+                                e.time_ms.map(Duration::from_millis),
+                                Duration::from_millis(c.arena.as_ref().unwrap().return_reserve_ms),
+                                Some(&mut publish),
+                            )
+                            .map_err(|error| error.to_string());
                             EvaluationResult::Alpha {
                                 result: result.map(Box::new),
                                 completion: Box::new(completion),
@@ -2621,6 +2718,10 @@ fn record_evaluation_alpha(
         "authority_legal":legal, "inflight_after_drain":0,
         "clock_contract":SIGMA_RECEIPT_CLOCK,"clock_contract_sha256":SIGMA_RECEIPT_CONTRACT_SHA256,
         "completed_snapshot_validation_failed":!valid,
+        "actual_search_namespace":game.tt_profiles[engine].actual_namespace,
+        "actual_lmr_enabled":game.tt_profiles[engine].actual_lmr_enabled,
+        "lmr_work_completed":selected.map(|r| serde_json::json!({"attempts":r.stats.lmr_attempts,"full_depth_confirmations":r.stats.lmr_full_depth_confirmations,"full_window_researches":r.stats.lmr_full_window_researches})),
+        "lmr_work_terminal":result.as_deref().map(|r| serde_json::json!({"attempts":r.stats.lmr_attempts,"full_depth_confirmations":r.stats.lmr_full_depth_confirmations,"full_window_researches":r.stats.lmr_full_window_researches})),
         "last_completed_iteration_ns":completion.at.map(ns),
         "selection_reason":if selected.is_some() {"completed_iteration"} else {"legal_fallback_no_completed_iteration"},
         "whole_search":result.as_deref().map(crate::arena_clock::alpha_counters),
@@ -6117,3 +6218,7 @@ mod two_ai_374_tests {
         assert_eq!(game.context.total_ply(), 0);
     }
 }
+
+#[cfg(test)]
+#[path = "runtime_lmr400_tests.rs"]
+mod runtime_lmr400_tests;

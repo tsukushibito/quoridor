@@ -139,6 +139,17 @@ impl<'a> Ranking<'a> {
         }
         Some(keys)
     }
+
+    /// Only LMR ON requests this fixed bitset, at the same score/rank freeze.
+    pub fn protected_bits(&self, ids: &[u16]) -> [u64; 4] {
+        let mut bits = [0; 4];
+        for &id in ids {
+            if self.priority(id, true) < 4 {
+                bits[id as usize / 64] |= 1 << (id % 64);
+            }
+        }
+        bits
+    }
 }
 
 /// Existing legal Vec owns each ID once; only eligible Control retains keys.
@@ -148,13 +159,18 @@ impl<'a> Ranking<'a> {
 // part of the candidate, including the enum footprint on excluded eager paths.
 #[allow(clippy::large_enum_variant)]
 pub(super) enum PreparedMoves {
-    Eager(std::vec::IntoIter<u16>),
+    Eager(EagerMoves),
     Control {
         ids: Vec<u16>,
         keys: [u64; 209],
         next: usize,
         baseline_first: Option<u16>,
     },
+}
+
+pub(super) struct EagerMoves {
+    ids: std::vec::IntoIter<u16>,
+    protected: Option<[u64; 4]>,
 }
 
 #[derive(Clone, Copy)]
@@ -166,7 +182,19 @@ pub(super) enum MoveRead {
 
 impl PreparedMoves {
     pub fn eager(ids: Vec<u16>) -> Self {
-        Self::Eager(ids.into_iter())
+        Self::Eager(EagerMoves {
+            ids: ids.into_iter(),
+            protected: None,
+        })
+    }
+    pub fn eager_lmr(ids: Vec<u16>, protected: Option<[u64; 4]>) -> Self {
+        if protected.is_none() {
+            return Self::eager(ids);
+        }
+        Self::Eager(EagerMoves {
+            ids: ids.into_iter(),
+            protected,
+        })
     }
     pub fn control(ids: Vec<u16>, keys: [u64; 209], baseline_first: Option<u16>) -> Self {
         Self::Control {
@@ -178,7 +206,7 @@ impl PreparedMoves {
     }
     pub fn len(&self) -> usize {
         match self {
-            Self::Eager(ids) => ids.len(),
+            Self::Eager(moves) => moves.ids.len(),
             Self::Control { ids, next, .. } => ids.len() - next,
         }
     }
@@ -187,14 +215,14 @@ impl PreparedMoves {
     }
     pub fn sorted_size(&self) -> Option<usize> {
         match self {
-            Self::Eager(ids) => Some(ids.len()),
+            Self::Eager(moves) => Some(moves.ids.len()),
             Self::Control { ids, next, .. } if *next > 1 && ids.len() > 2 => Some(ids.len() - 1),
             Self::Control { .. } => None,
         }
     }
     pub fn next(&mut self, stats: Option<&mut OrderingStats>) -> Option<(u16, MoveRead)> {
         match self {
-            Self::Eager(ids) => ids.next().map(|id| (id, MoveRead::Sorted)),
+            Self::Eager(moves) => moves.ids.next().map(|id| (id, MoveRead::Sorted)),
             Self::Control {
                 ids,
                 keys,
@@ -232,6 +260,16 @@ impl PreparedMoves {
                 *next += 1;
                 Some((id, kind))
             }
+        }
+    }
+
+    pub fn lmr_protected(&self, id: u16) -> bool {
+        match self {
+            Self::Control { keys, .. } => keys[id as usize] >> 40 < 4,
+            Self::Eager(moves) => moves
+                .protected
+                .as_ref()
+                .is_none_or(|bits| bits[id as usize / 64] & (1 << (id % 64)) != 0),
         }
     }
 }

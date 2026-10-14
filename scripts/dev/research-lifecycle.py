@@ -880,6 +880,7 @@ def measurement_config(experiment):
             "output_bytes",
             "record_bytes",
             "seed",
+            "lmr",
         }
         and {
             "roots",
@@ -909,6 +910,12 @@ def measurement_config(experiment):
     require(
         all(type(config[key]) is bool for key in ("use_tt", "use_pvs")),
         "measurement Boolean switches",
+    )
+    require(type(config.get("lmr", False)) is bool, "measurement LMR switch")
+    require(
+        not config.get("lmr", False)
+        or (config["use_pvs"] and config["profile"] in {"control", "cheap"}),
+        "measurement LMR requires PVS and Control/Cheap",
     )
     require(
         config.get("seed") is None
@@ -2499,6 +2506,19 @@ def arena_plan_check(experiment, plan):
             and type(engine["max_nodes"]) is int
             and engine["max_nodes"] > 0
             and type(engine["simd"]) is bool
+            and type(engine.get("lmr", False)) is bool
+            and engine.get("ordering_profile") in {None, "control", "cheap"}
+            and (
+                not engine.get("lmr", False)
+                or engine.get("ordering_profile") is not None
+            )
+            and (
+                engine.get("ordering_profile") is None
+                or (
+                    engine["kind"] in {"nnue", "distance"}
+                    and not a.get("disable_continuation_static_ordering", False)
+                )
+            )
             and all(
                 type(engine[k]) in (int, float) and math.isfinite(engine[k])
                 for k in ("distance_a", "distance_b")
@@ -2713,6 +2733,29 @@ def arena_observation(config, row):
             accepted.append(obs["action"])
             continue
         counters = obs["counters"]
+        engine = config["engines"][index]
+        if engine.get("ordering_profile") is not None:
+            method = counters.get("actual_search_namespace")
+            require(
+                isinstance(method, dict)
+                and set(method) == {"evaluator", "rules", "selectivity"}
+                and all(isinstance(v, str) and v for v in method.values())
+                and method["rules"] == "research-standard-2p-threefold-goal-first-v1"
+                and method["evaluator"]
+                == a["evaluator_sha256"][index] + ":simd=" + str(engine["simd"]).lower()
+                and method["selectivity"].endswith(
+                    ":cheap-static376-integer-parent-v1:"
+                    + engine["ordering_profile"]
+                    + (
+                        ":lmr400-late4-depth3-minus1-pvs-verify-v1"
+                        if engine.get("lmr", False)
+                        else ""
+                    )
+                )
+                and type(counters.get("actual_lmr_enabled")) is bool
+                and counters["actual_lmr_enabled"] == engine.get("lmr", False),
+                "configured/actual arena ordering-LMR method correspondence",
+            )
         fallback = (
             a["comparison"] == "whole_wall_time"
             and counters.get("selection_reason")

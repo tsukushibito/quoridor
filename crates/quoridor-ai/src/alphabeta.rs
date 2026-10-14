@@ -1,5 +1,6 @@
 //! Native iterative deepening / PVS over the history-correct Sigma rule cursor.
-//! No speculative pruning. A result is published only after a whole root depth.
+//! Default full width; explicitly selected LMR uses nominal selective depths.
+//! A result is published only after a whole root iteration finishes.
 use quoridor_core::{Position, RulesError, research::SigmaContext};
 use quoridor_nnue::residual::{ResidualModel, ResidualScratch};
 use quoridor_nnue::{Accumulator, EvaluationMode, Model, QuantizedAccumulator, QuantizedModel};
@@ -14,11 +15,9 @@ use std::{
 
 #[path = "continuation_history.rs"]
 mod continuation_history;
-#[cfg(feature = "research-diagnostics")]
 pub use continuation_history::OrderingProfile;
 pub use continuation_history::OrderingStats;
 use continuation_history::{ContinuationHistory, OrderingNodeWork, PlayedMove};
-#[cfg(feature = "research-diagnostics")]
 #[path = "cheap_static_ordering.rs"]
 mod cheap_static_ordering;
 #[path = "move_ordering.rs"]
@@ -31,13 +30,11 @@ enum StaticMode {
     Off,
     Coverage,
     CheapControl,
-    #[cfg(feature = "research-diagnostics")]
     Cheap,
 }
 enum StaticScratch {
     Coverage(static_ordering::StaticScratch),
     CheapControl,
-    #[cfg(feature = "research-diagnostics")]
     Cheap,
 }
 
@@ -432,6 +429,8 @@ pub enum StopReason {
     Cancelled,
 }
 pub const TT_REPRESENTATION: &str = "compact359-board-zobrist-v1-context128-v1";
+/// One selected LMR rule; OFF retains full-width depth semantics.
+pub const LMR_METHOD: &str = "lmr400-late4-depth3-minus1-pvs-verify-v1";
 #[derive(Debug, Default, Clone)]
 pub struct SearchStats {
     pub nodes: u64,
@@ -462,6 +461,12 @@ pub struct SearchStats {
     pub tt_generation: u64,
     pub tt_cutoffs: u64,
     pub pvs_researches: u64,
+    /// Started reduced scout calls, including a call interrupted by control/error.
+    pub lmr_attempts: u64,
+    /// Started normal child-depth confirmations, not proof of full-width minimax.
+    pub lmr_full_depth_confirmations: u64,
+    /// Started LMR full-window re-searches; a subset of pvs_researches.
+    pub lmr_full_window_researches: u64,
     pub delta_updates: u64,
     pub policy_calls: u64,
     pub ordering: OrderingStats,
@@ -935,6 +940,7 @@ struct Search<'a> {
     path: Vec<PlayedMove>,
     static_scratch: Option<StaticScratch>,
     ordering_diagnostics: bool,
+    lmr: bool,
     #[cfg(feature = "research-diagnostics")]
     history: [u64; 209],
 }
@@ -968,8 +974,21 @@ impl Search<'_> {
         accumulator: Option<&EvalAccumulator>,
         pv: Option<u16>,
         ply: usize,
-        mut ids: Vec<u16>,
+        ids: Vec<u16>,
     ) -> NodeResult<Vec<u16>> {
+        self.eager_ordered(c, accumulator, pv, ply, ids, false)
+            .map(|(ids, _)| ids)
+    }
+
+    fn eager_ordered(
+        &mut self,
+        c: &SigmaContext,
+        accumulator: Option<&EvalAccumulator>,
+        pv: Option<u16>,
+        ply: usize,
+        mut ids: Vec<u16>,
+        capture_lmr: bool,
+    ) -> NodeResult<(Vec<u16>, Option<[u64; 4]>)> {
         if self.ordering_diagnostics {
             self.stats.ordering.observe_preparation(ids.len());
         }
@@ -990,6 +1009,7 @@ impl Search<'_> {
             self.orderer.map(|_| &scores.policy),
             history,
         );
+        let protected = capture_lmr.then(|| ranking.protected_bits(&ids));
         if self.ordering_diagnostics {
             self.stats.ordering.observe_sort(ids.len());
         }
@@ -1009,7 +1029,7 @@ impl Search<'_> {
                 &mut self.stats.ordering,
             );
         }
-        Ok(ids)
+        Ok((ids, protected))
     }
 
     fn prepared_moves(
@@ -1024,9 +1044,12 @@ impl Search<'_> {
             || self.ordering.is_none()
             || !matches!(self.static_scratch, Some(StaticScratch::CheapControl))
         {
-            return self
-                .ordered(c, accumulator, pv, ply, ids)
-                .map(move_ordering::PreparedMoves::eager);
+            let capture_lmr = self.lmr
+                && self.orderer.is_none()
+                && self.ordering.is_some()
+                && matches!(self.static_scratch, Some(StaticScratch::Cheap));
+            let (ids, protected) = self.eager_ordered(c, accumulator, pv, ply, ids, capture_lmr)?;
+            return Ok(move_ordering::PreparedMoves::eager_lmr(ids, protected));
         }
         if self.ordering_diagnostics {
             self.stats.ordering.observe_preparation(ids.len());
@@ -1080,7 +1103,6 @@ impl Search<'_> {
                 Some(EvalAccumulator::Float(a)) => a.cached_wall_distance_maps(c.position()),
                 _ => None,
             };
-            #[cfg(feature = "research-diagnostics")]
             if self.ordering_diagnostics
                 && matches!(scratch, StaticScratch::Cheap | StaticScratch::CheapControl)
             {
@@ -1102,7 +1124,6 @@ impl Search<'_> {
                 StaticScratch::Coverage(scratch) => {
                     static_ordering::prepare(c.position(), cached, ids, scratch, control)?
                 }
-                #[cfg(feature = "research-diagnostics")]
                 StaticScratch::Cheap => {
                     cheap_static_ordering::prepare(c.position(), cached, ids, control)?
                 }
@@ -1139,15 +1160,9 @@ impl Search<'_> {
             }
         }
         let observation = self.ordering_diagnostics.then(|| {
-            #[cfg(feature = "research-diagnostics")]
             let common_goal_tier = matches!(
                 self.static_scratch.as_ref(),
                 Some(StaticScratch::Cheap | StaticScratch::CheapControl)
-            );
-            #[cfg(not(feature = "research-diagnostics"))]
-            let common_goal_tier = matches!(
-                self.static_scratch.as_ref(),
-                Some(StaticScratch::CheapControl)
             );
             move_ordering::Observation::before(combined, common_goal_tier)
         });
@@ -1159,9 +1174,12 @@ impl Search<'_> {
                 );
                 self.stats.ordering.static_parents += u64::from(coverage);
                 self.stats.ordering.borrowed_goal_maps += u64::from(scores.borrowed_maps);
-                self.stats.ordering.computed_goal_map_pairs +=
-                    u64::from(coverage && !scores.borrowed_maps);
-                #[cfg(feature = "research-diagnostics")]
+                self.stats.ordering.computed_goal_map_pairs += u64::from(
+                    matches!(
+                        self.static_scratch,
+                        Some(StaticScratch::Coverage(_) | StaticScratch::Cheap)
+                    ) && !scores.borrowed_maps,
+                );
                 if matches!(self.static_scratch.as_ref(), Some(StaticScratch::Cheap)) {
                     self.stats.ordering.static_parents += 1;
                     self.stats.ordering.cheap_static_parents += 1;
@@ -1428,13 +1446,20 @@ impl Search<'_> {
                 }
                 action
             };
-            let mut v = if self.limits.use_pvs && i > 0 && alpha.is_finite() {
+            let reduced = self.lmr
+                && moves
+                    .as_ref()
+                    .is_some_and(|moves| self.lmr_allowed(action, depth, i, alpha, tt_move, moves));
+            let mut v = if reduced {
+                self.reduced_child(c, a, action, depth - 1, alpha, ply + 1)?
+            } else if self.limits.use_pvs && i > 0 && alpha.is_finite() {
                 self.child(c, a, action, depth - 1, [alpha, next_up(alpha)], ply + 1)?
             } else {
                 self.child(c, a, action, depth - 1, [alpha, beta], ply + 1)?
             };
             if self.limits.use_pvs && i > 0 && v > alpha && v < beta {
                 self.stats.pvs_researches += 1;
+                self.stats.lmr_full_window_researches += u64::from(reduced);
                 v = self.child(c, a, action, depth - 1, [alpha, beta], ply + 1)?;
             }
             if let Some(work) = node_work.as_mut() {
@@ -1524,6 +1549,58 @@ impl Search<'_> {
             work.finish(&mut self.stats.ordering, cutoff_winner.is_some());
         }
         Ok(value)
+    }
+    fn lmr_allowed(
+        &self,
+        action: u16,
+        depth: u16,
+        index: usize,
+        alpha: f32,
+        tt: Option<u16>,
+        moves: &move_ordering::PreparedMoves,
+    ) -> bool {
+        self.lmr
+            && self.limits.use_pvs
+            && self.orderer.is_none()
+            && self.ordering.is_some()
+            && matches!(
+                self.static_scratch,
+                Some(StaticScratch::CheapControl | StaticScratch::Cheap)
+            )
+            && depth >= 3
+            && index >= 3
+            && alpha.is_finite()
+            && Some(action) != tt
+            && !moves.lmr_protected(action)
+    }
+    /// One child/scout path, not another search loop. A fail-high must traverse
+    /// the ordinary child depth before the caller can use/cut off/re-search it.
+    fn reduced_child(
+        &mut self,
+        c: &mut SigmaContext,
+        parent: Option<&EvalAccumulator>,
+        action: u16,
+        child_depth: u16,
+        alpha: f32,
+        ply: usize,
+    ) -> NodeResult<f32> {
+        self.stats.lmr_attempts += 1;
+        let shallow = self.child(
+            c,
+            parent,
+            action,
+            child_depth - 1,
+            [alpha, next_up(alpha)],
+            ply,
+        )?;
+        if shallow > alpha {
+            self.stats.lmr_full_depth_confirmations += 1;
+            self.child(c, parent, action, child_depth, [alpha, next_up(alpha)], ply)
+        } else {
+            // Selective fail-low; the child stores only its actual reduced
+            // depth. Parent nominal TT depth belongs exclusively to LMR method.
+            Ok(shallow)
+        }
     }
     fn root_depth(
         &mut self,
@@ -1721,6 +1798,7 @@ pub fn search_with_orderer(
             Some(&mut ordering),
             false,
             StaticMode::Coverage,
+            false,
         ),
     )
 }
@@ -1742,11 +1820,45 @@ pub struct SearchSession {
     ordering: Option<ContinuationHistory>,
     static_enabled: StaticMode,
     ordering_diagnostics: bool,
+    lmr: bool,
 }
 impl SearchSession {
+    /// Explicit opt-in for the two signed research ordering targets. Switching
+    /// methods clears all values/history; arbitrary namespace text cannot opt in.
+    pub fn set_lmr(&mut self, enabled: bool) -> Result<()> {
+        if enabled
+            && (self.ordering.is_none()
+                || !matches!(
+                    self.static_enabled,
+                    StaticMode::CheapControl | StaticMode::Cheap
+                ))
+        {
+            return Err(SearchError::Limits(
+                "LMR requires signed Control/Cheap".into(),
+            ));
+        }
+        if enabled != self.lmr {
+            if self.lmr {
+                self.namespace
+                    .selectivity
+                    .truncate(self.namespace.selectivity.len() - LMR_METHOD.len() - 1);
+            } else {
+                self.namespace.selectivity.push(':');
+                self.namespace.selectivity.push_str(LMR_METHOD);
+            }
+            self.lmr = enabled;
+            self.table.clear();
+            if let Some(history) = self.ordering.as_mut() {
+                history.reset();
+            }
+        }
+        Ok(())
+    }
+    pub fn lmr_enabled(&self) -> bool {
+        self.lmr
+    }
     /// Observation only; fixed376 enables its two scheduled calls per process.
     /// Does not reset/age tables/history or select a scoring algorithm.
-    #[cfg(feature = "research-diagnostics")]
     pub fn set_ordering_observation(&mut self, enabled: bool) {
         self.ordering_diagnostics = enabled;
     }
@@ -1803,7 +1915,6 @@ impl SearchSession {
         Ok(session)
     }
     /// Current research Control/Cheap selection; product constructors are unchanged.
-    #[cfg(feature = "research-diagnostics")]
     pub fn new_for_ordering_assessment(
         evaluator: Arc<dyn StaticEvaluator>,
         namespace: SearchNamespace,
@@ -1827,6 +1938,10 @@ impl SearchSession {
             .namespace
             .selectivity
             .push_str(cheap_static_ordering::ALGORITHM);
+        session.namespace.selectivity.push_str(match profile {
+            OrderingProfile::CheapStaticControl => ":control",
+            OrderingProfile::CombinedSignedCheapStatic => ":cheap",
+        });
         Ok(session)
     }
     fn create(
@@ -1859,6 +1974,7 @@ impl SearchSession {
                 StaticMode::Off
             },
             ordering_diagnostics: false,
+            lmr: false,
         })
     }
     /// Table accounting includes its header and fixed slot storage; no history payload.
@@ -1906,6 +2022,28 @@ impl SearchSession {
                 .push_str(&score_domain.namespace_suffix());
         }
         self.evaluator = evaluator;
+        // Bind current real profile/method again after caller namespace reset.
+        match self.static_enabled {
+            StaticMode::CheapControl => {
+                namespace.selectivity.push(':');
+                namespace
+                    .selectivity
+                    .push_str(cheap_static_ordering::ALGORITHM);
+                namespace.selectivity.push_str(":control");
+            }
+            StaticMode::Cheap => {
+                namespace.selectivity.push(':');
+                namespace
+                    .selectivity
+                    .push_str(cheap_static_ordering::ALGORITHM);
+                namespace.selectivity.push_str(":cheap");
+            }
+            _ => {}
+        }
+        if self.lmr {
+            namespace.selectivity.push(':');
+            namespace.selectivity.push_str(LMR_METHOD);
+        }
         self.namespace = namespace;
         self.score_domain = score_domain;
         self.table.clear();
@@ -1942,6 +2080,7 @@ impl SearchSession {
                 self.ordering.as_mut(),
                 self.ordering_diagnostics,
                 self.static_enabled,
+                self.lmr,
             ),
         )
     }
@@ -1959,9 +2098,11 @@ fn search_in_table(
         Option<&mut ContinuationHistory>,
         bool,
         StaticMode,
+        bool,
     ),
 ) -> Result<SearchResult> {
-    let (table, score_domain, ordering, ordering_diagnostics, static_enabled) = table_and_domain;
+    let (table, score_domain, ordering, ordering_diagnostics, static_enabled, lmr) =
+        table_and_domain;
     let start = Instant::now();
     if limits.max_depth == 0 || limits.max_nodes == 0 || limits.max_depth > 200 {
         return Err(SearchError::Limits(
@@ -1970,6 +2111,16 @@ fn search_in_table(
     }
     if limits.use_tt && limits.tt_entries == 0 {
         return Err(SearchError::Limits("enabled TT requires capacity".into()));
+    }
+    if lmr
+        && (!limits.use_pvs
+            || orderer.is_some()
+            || ordering.is_none()
+            || !matches!(static_enabled, StaticMode::CheapControl | StaticMode::Cheap))
+    {
+        return Err(SearchError::Limits(
+            "LMR requires PVS and no-policy signed Control/Cheap".into(),
+        ));
     }
     if root.is_synthetic() {
         return Err(SearchError::Root(
@@ -2031,10 +2182,10 @@ fn search_in_table(
                 static_ordering::StaticScratch::new()?,
             )),
             StaticMode::CheapControl => Some(StaticScratch::CheapControl),
-            #[cfg(feature = "research-diagnostics")]
             StaticMode::Cheap => Some(StaticScratch::Cheap),
         },
         ordering_diagnostics,
+        lmr,
         #[cfg(feature = "research-diagnostics")]
         history: [0; 209],
     };
@@ -2396,6 +2547,7 @@ mod persistent_tt_tests {
                 path: Vec::with_capacity(l.max_depth as usize + 1),
                 static_scratch: None,
                 ordering_diagnostics: false,
+                lmr: false,
                 #[cfg(feature = "research-diagnostics")]
                 history: [0; 209],
             };
@@ -2472,6 +2624,7 @@ mod persistent_tt_tests {
                 None,
                 false,
                 StaticMode::Off,
+                false,
             ),
         )
         .unwrap();
@@ -3078,6 +3231,7 @@ mod child_buffer_tests {
                 path: Vec::with_capacity(limits.max_depth as usize + 1),
                 static_scratch: None,
                 ordering_diagnostics: false,
+                lmr: false,
                 #[cfg(feature = "research-diagnostics")]
                 history: [0; 209],
             };
@@ -3427,6 +3581,10 @@ mod tt_first386_tests;
 #[cfg(all(test, feature = "research-diagnostics"))]
 #[path = "deferred_tail399_tests.rs"]
 mod deferred_tail399_tests;
+
+#[cfg(test)]
+#[path = "lmr400_tests.rs"]
+mod lmr400_tests;
 
 #[cfg(test)]
 mod three_engine_374_factory_tests {

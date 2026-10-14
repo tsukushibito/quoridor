@@ -188,6 +188,20 @@ impl ArenaConfig {
         {
             return Err("arena explicit colour order or retained outcome bound".into());
         }
+        for engine in &c.engines {
+            if let Some(profile) = engine.ordering_profile.as_deref() {
+                if !matches!(profile, "control" | "cheap")
+                    || !matches!(engine.kind.as_str(), "nnue" | "distance")
+                    || self.disable_continuation_static_ordering
+                {
+                    return Err(
+                        "explicit arena ordering requires signed alpha Control/Cheap".into(),
+                    );
+                }
+            } else if engine.lmr {
+                return Err("LMR requires an explicit Control/Cheap arena ordering target".into());
+            }
+        }
         let research = self.comparison != Comparison::Functional;
         if c.engines
             .iter()
@@ -285,6 +299,8 @@ impl ArenaConfig {
                     || b.time_ms.is_some()
                     || b.depth == 0
                     || a.depth != b.depth
+                    || a.ordering_profile != b.ordering_profile
+                    || a.lmr != b.lmr
                     || a.max_nodes != b.max_nodes
                     || a.simd != b.simd
                     || self.search_artifact_sha256[0] != self.search_artifact_sha256[i]
@@ -298,6 +314,8 @@ impl ArenaConfig {
             let a = &c.engines[0];
             if c.engines.iter().enumerate().any(|(i, b)| {
                 a.depth != b.depth
+                    || a.ordering_profile != b.ordering_profile
+                    || a.lmr != b.lmr
                     || a.max_nodes != b.max_nodes
                     || a.simd != b.simd
                     || b.kind == "mcts"
@@ -978,7 +996,7 @@ mod generic_arena_361_tests {
         }
     }
     // Fake geometry/model identities for admission only. No evaluator/geometry/Search.
-    fn fixture(
+    pub(super) fn fixture(
         n: usize,
         depth: u16,
     ) -> (
@@ -1417,3 +1435,7 @@ mod generic_arena_361_tests {
         assert!(validate_observations(&c, &[obs]).is_err());
     }
 }
+
+#[cfg(test)]
+#[path = "arena_lmr400_tests.rs"]
+mod arena_lmr400_tests;

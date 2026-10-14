@@ -9,7 +9,6 @@ pub(super) const MAIN_LEN: usize = 2 * MAIN_STRIDE;
 pub(super) const CONT_LEN: usize = 2 * 5 * 209 * 209;
 
 /// The two current research targets; product constructors use their own settings.
-#[cfg(feature = "research-diagnostics")]
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum OrderingProfile {
     /// Fixed376 control: static OFF, common exact legal goal tier.

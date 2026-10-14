@@ -182,6 +182,7 @@ pub(super) fn with_state<T>(
         path: Vec::with_capacity(4),
         static_scratch: None,
         ordering_diagnostics: true,
+        lmr: false,
         #[cfg(feature = "research-diagnostics")]
         history: [0; 209],
     };

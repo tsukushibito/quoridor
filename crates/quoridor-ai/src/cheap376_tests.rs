@@ -56,6 +56,77 @@ fn fixtures() -> [Position; 8] {
         },
     ]
 }
+
+#[test]
+fn cheap400_missing_cache_uses_genuine_parent_maps_same_coefficients_and_control_no_bfs() {
+    let p = Position::default();
+    let legal = p.legal_action_ids();
+    let maps = p.wall_distance_maps();
+    let generated = prepare(p, None, &legal, || Ok(())).unwrap();
+    let borrowed = prepare(p, Some(&maps), &legal, || Ok(())).unwrap();
+    assert_eq!(generated.scores, borrowed.scores);
+    assert_eq!(generated.goals, borrowed.goals);
+    assert_eq!(generated.scores[13], 128);
+    assert!(!generated.borrowed_maps && borrowed.borrowed_maps);
+    for &id in &legal {
+        assert_eq!(generated.scores[id as usize], reference(p, Some(&maps), id));
+    }
+    let root = SigmaContext::from_prefix(&[]).unwrap();
+    for cheap in [false, true] {
+        let mut history = super::super::ContinuationHistory::new().unwrap();
+        with_state(
+            &root,
+            &PawnRows,
+            &AtomicBool::new(false),
+            &mut history,
+            |s, c| {
+                s.static_scratch = Some(if cheap {
+                    StaticScratch::Cheap
+                } else {
+                    StaticScratch::CheapControl
+                });
+                let before = Key::of(c);
+                s.ordered(c, None, None, 0, c.legal_ids()).unwrap();
+                assert_eq!(Key::of(c), before);
+                assert_eq!(s.stats.ordering.computed_goal_map_pairs, u64::from(cheap));
+                assert_eq!(s.stats.ordering.borrowed_goal_maps, 0);
+            },
+        );
+    }
+}
+
+#[test]
+fn cheap400_generated_map_boundary_cancel_error_and_claimed_corruption_refuse() {
+    let p = Position::default();
+    let legal = p.legal_action_ids();
+    for boundary in [1, 2, 3, 4] {
+        let mut calls = 0;
+        assert!(matches!(
+            prepare(p, None, &legal, || {
+                calls += 1;
+                if calls == boundary {
+                    Err(Interrupted::Stop(super::super::StopReason::Cancelled))
+                } else {
+                    Ok(())
+                }
+            }),
+            Err(Interrupted::Stop(_))
+        ));
+        assert_eq!(p, Position::default());
+    }
+    assert!(matches!(
+        prepare(p, None, &legal, || Err(Interrupted::Error(
+            SearchError::Evaluation("400 control failure".into())
+        ))),
+        Err(Interrupted::Error(SearchError::Evaluation(_)))
+    ));
+    let mut wrong = p.wall_distance_maps();
+    wrong[0][4] = 0;
+    assert!(matches!(
+        prepare(p, Some(&wrong), &legal, || Ok(())),
+        Err(Interrupted::Error(SearchError::Evaluation(_)))
+    ));
+}
 fn points(action: u16) -> [(usize, usize); 3] {
     let horizontal = action < 145;
     let anchor = usize::from(action - if horizontal { 81 } else { 145 });
@@ -164,7 +235,7 @@ fn cheap376_exact_integer_terms_orientations_colours_missing_and_borrowed_maps()
             for &id in &legal {
                 assert_eq!(
                     got.scores[id as usize],
-                    reference(p, cached, id),
+                    reference(p, Some(&maps), id),
                     "{p:?} id{id} maps{}",
                     cached.is_some()
                 );
