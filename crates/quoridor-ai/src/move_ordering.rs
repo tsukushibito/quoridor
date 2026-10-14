@@ -109,9 +109,9 @@ impl<'a> Ranking<'a> {
     pub fn sort(&self, ids: &mut [u16]) {
         match self.policy {
             Some(policy) => {
-                ids.sort_by(|&a, &b| self.compare(a, b, true, self.scores, Some(policy)))
+                ids.sort_unstable_by(|&a, &b| self.compare(a, b, true, self.scores, Some(policy)))
             }
-            None => ids.sort_by(|&a, &b| self.compare(a, b, true, self.scores, None)),
+            None => ids.sort_unstable_by(|&a, &b| self.compare(a, b, true, self.scores, None)),
         }
     }
 }

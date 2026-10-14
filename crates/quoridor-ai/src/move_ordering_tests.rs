@@ -125,6 +125,68 @@ fn control385_tt_cutoff_and_order_only_preserve_legality_and_parent() {
 }
 
 #[test]
+fn control385_unstable_sort_full_legal_ties_and_policy_signed_zero() {
+    let root = SigmaContext::from_prefix(&[]).unwrap();
+    let mut legal = root.legal_ids();
+    legal.sort_unstable();
+    let mut signed = [0; 209];
+    let mut policy = [0.0; 209];
+    for (id, (score, weight)) in signed.iter_mut().zip(&mut policy).enumerate() {
+        *score = [-114_688, 0, 114_688][id % 3];
+        *weight = if id % 2 == 0 { -0.0 } else { 0.0 };
+    }
+    for with_policy in [false, true] {
+        let mut expected = Vec::new();
+        // Explicit buckets: optional +0 before -0, then signed score
+        // descending, then unique ActionID ascending. No copied comparator.
+        for parity in if with_policy {
+            vec![Some(1), Some(0)]
+        } else {
+            vec![None]
+        } {
+            for level in [2, 1, 0] {
+                expected.extend(legal.iter().copied().filter(|&id| {
+                    id as usize % 3 == level && parity.is_none_or(|p| id as usize % 2 == p)
+                }));
+            }
+        }
+        for rotation in [0, 7] {
+            let mut ids = legal.clone();
+            ids.reverse();
+            ids.rotate_left(rotation);
+            let ranking = Ranking::new(
+                &ids,
+                None,
+                [None; 2],
+                None,
+                with_policy.then_some(&policy),
+                HistoryScores::Signed(&signed),
+            );
+            ranking.sort(&mut ids);
+            assert_eq!(ids, expected);
+            #[cfg(feature = "research-diagnostics")]
+            {
+                let mut unsigned = [0; 209];
+                for (id, score) in unsigned.iter_mut().enumerate() {
+                    *score = [0, 1_u64 << 63, u64::MAX][id % 3];
+                }
+                ids.reverse();
+                let ranking = Ranking::new(
+                    &ids,
+                    None,
+                    [None; 2],
+                    None,
+                    with_policy.then_some(&policy),
+                    HistoryScores::Unsigned(&unsigned),
+                );
+                ranking.sort(&mut ids);
+                assert_eq!(ids, expected);
+            }
+        }
+    }
+}
+
+#[test]
 fn ordering382_rank_tiers_policy_total_cmp_and_integer_boundaries() {
     let input = [5, 3, 13, 2, 4, 80, 208];
     let mut goals = [false; 81];
