@@ -987,6 +987,16 @@ impl Search<'_> {
             self.orderer.map(|_| &scores.policy),
             history,
         );
+        #[cfg(feature = "research-diagnostics")]
+        if matches!(
+            self.static_scratch.as_ref(),
+            Some(StaticScratch::CheapControl)
+        ) {
+            ranking.sort_control(&mut ids);
+        } else {
+            ranking.sort(&mut ids);
+        }
+        #[cfg(not(feature = "research-diagnostics"))]
         ranking.sort(&mut ids);
         if let Some(observation) = scores.observation {
             observation.after(

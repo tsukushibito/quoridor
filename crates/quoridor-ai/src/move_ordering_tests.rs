@@ -6,6 +6,155 @@ use super::super::{
 };
 use super::*;
 
+#[cfg(feature = "research-diagnostics")]
+#[test]
+fn control389_key_preserves_rank_signed_extremes_and_id_ties() {
+    let mut ids = [0, 3, 81, 1, 208, 4, 80, 2];
+    let mut goals = [false; 81];
+    goals[80] = true;
+    let mut signed = [i32::MIN; 209];
+    signed[1] = -1;
+    signed[2] = i32::MAX;
+    signed[3] = i32::MAX;
+    let ranking = Ranking::new(
+        &ids,
+        Some(208),
+        [Some(4), Some(81)],
+        Some(&goals),
+        None,
+        HistoryScores::Signed(&signed),
+    );
+    ranking.sort_control(&mut ids);
+    assert_eq!(ids, [208, 80, 4, 81, 2, 3, 1, 0]);
+    for pair in ids.windows(2) {
+        assert!(
+            ranking
+                .compare(pair[0], pair[1], true, ranking.scores, None)
+                .is_lt()
+        );
+    }
+}
+
+#[cfg(feature = "research-diagnostics")]
+#[test]
+fn control389_key_full_legal_order_is_in_place_and_observation_uses_same_rank() {
+    let root = SigmaContext::from_prefix(&[]).unwrap();
+    let before = (root.position(), root.total_ply(), root.history_counts());
+    let legal = root.legal_ids();
+    let mut signed = [0; 209];
+    let levels = [i32::MIN, -1, 0, i32::MAX];
+    for &id in &legal {
+        signed[id as usize] = levels[id as usize % levels.len()];
+    }
+    let mut expected = Vec::new();
+    for level in (0..levels.len()).rev() {
+        expected.extend(
+            legal
+                .iter()
+                .copied()
+                .filter(|id| *id as usize % levels.len() == level),
+        );
+    }
+    for rotate in [0, 7] {
+        let mut ids = legal.clone();
+        ids.reverse();
+        ids.rotate_left(rotate);
+        let pointer = ids.as_ptr();
+        let capacity = ids.capacity();
+        let ranking = Ranking::new(
+            &ids,
+            None,
+            [None; 2],
+            None,
+            None,
+            HistoryScores::Signed(&signed),
+        );
+        ranking.sort_control(&mut ids);
+        assert_eq!(ids, expected);
+        assert_eq!(ids.as_ptr(), pointer);
+        assert_eq!(ids.capacity(), capacity);
+        let mut stats = OrderingStats::default();
+        Observation::before(signed, true).after(&ranking, &ids, true, &mut stats);
+        assert_eq!(stats.static_changed_nodes, 0);
+        assert_eq!(stats.history_changed_nodes, 1);
+    }
+    assert_eq!(
+        (root.position(), root.total_ply(), root.history_counts()),
+        before
+    );
+}
+
+#[cfg(feature = "research-diagnostics")]
+#[test]
+fn control389_key_excludes_policy_signed_zero_and_unsigned_scores() {
+    let mut signed = [0; 209];
+    signed[2] = i32::MAX;
+    let mut policy = [0.0; 209];
+    policy[2] = -0.0;
+    let mut ids = [2, 4, 3];
+    let ranking = Ranking::new(
+        &ids,
+        None,
+        [None; 2],
+        None,
+        Some(&policy),
+        HistoryScores::Signed(&signed),
+    );
+    ranking.sort_control(&mut ids);
+    assert_eq!(ids, [3, 4, 2]);
+    let mut unsigned = [0; 209];
+    unsigned[2] = u64::MAX;
+    unsigned[4] = 1u64 << 63;
+    let ranking = Ranking::new(
+        &ids,
+        None,
+        [None; 2],
+        None,
+        None,
+        HistoryScores::Unsigned(&unsigned),
+    );
+    ranking.sort_control(&mut ids);
+    assert_eq!(ids, [2, 4, 3]);
+}
+
+#[cfg(feature = "research-diagnostics")]
+#[test]
+fn control389_key_control_call_keeps_diagnostic_on_off_order_and_parent() {
+    let root = SigmaContext::from_prefix(&[]).unwrap();
+    let before = (root.position(), root.total_ply(), root.history_counts());
+    let legal = root.legal_ids();
+    let mut expected = vec![legal[0], legal[2], legal[1]];
+    expected.extend(legal.iter().copied().skip(3));
+    for observe in [false, true] {
+        let mut history = ContinuationHistory::new().unwrap();
+        with_state(
+            &root,
+            &PawnRows,
+            &AtomicBool::new(false),
+            &mut history,
+            |s, c| {
+                s.static_scratch = Some(StaticScratch::CheapControl);
+                s.ordering_diagnostics = observe;
+                s.killers[0] = [Some(legal[2]), Some(legal[1])];
+                let mut input = legal.clone();
+                input.reverse();
+                let pointer = input.as_ptr();
+                let ordered = s.ordered(c, None, Some(legal[0]), 0, input).unwrap();
+                assert_eq!(ordered, expected);
+                assert_eq!(ordered.as_ptr(), pointer);
+                assert_eq!(s.stats.ordering.ordered_nodes, u64::from(observe));
+                assert_eq!(
+                    s.stats.ordering.scored_actions,
+                    if observe { legal.len() as u64 } else { 0 }
+                );
+                assert_eq!(s.stats.ordering.static_changed_nodes, 0);
+                assert_eq!(s.stats.policy_calls, 0);
+                assert_eq!((c.position(), c.total_ply(), c.history_counts()), before);
+            },
+        );
+    }
+}
+
 #[test]
 fn control385_legal_vector_is_scored_and_sorted_in_place() {
     struct Policy;

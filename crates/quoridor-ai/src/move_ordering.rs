@@ -114,6 +114,25 @@ impl<'a> Ranking<'a> {
             None => ids.sort_unstable_by(|&a, &b| self.compare(a, b, true, self.scores, None)),
         }
     }
+
+    #[cfg(feature = "research-diagnostics")]
+    pub fn sort_control(&self, ids: &mut [u16]) {
+        let scores = match self.scores {
+            HistoryScores::Signed(scores) if self.policy.is_none() => scores,
+            _ => return self.sort(ids),
+        };
+        let mut keys = [0u64; 209];
+        for &id in ids.iter() {
+            // XOR maps the complete signed domain to ascending unsigned order;
+            // complement reverses it. Rank and ID occupy disjoint higher/lower
+            // bits, preserving priority first and the final ascending ID tie.
+            let descending = !(scores[id as usize] as u32 ^ (1u32 << 31));
+            keys[id as usize] = (u64::from(self.priority(id, true)) << 40)
+                | (u64::from(descending) << 8)
+                | u64::from(id);
+        }
+        ids.sort_unstable_by(|&a, &b| keys[a as usize].cmp(&keys[b as usize]));
+    }
 }
 
 /// Constructed only with observation ON, before static is added to dynamic scores.
