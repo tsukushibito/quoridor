@@ -160,7 +160,13 @@ impl ArenaConfig {
     pub fn validate(&self, c: &Config) -> std::result::Result<(), String> {
         let width = if self.decision_only { 1 } else { 2 };
         if c.engines.len() != width
-            || (self.decision_only && self.comparison != Comparison::WholeWallTime)
+            || (self.decision_only
+                && !matches!(
+                    self.comparison,
+                    Comparison::WholeWallTime
+                        | Comparison::EvaluatorFixedDepth
+                        | Comparison::EvaluatorWallTime
+                ))
             || !c.openings.is_empty()
             || c.opening_plies != 0
             || c.games != self.book.openings.len().saturating_mul(width)
@@ -274,17 +280,15 @@ impl ArenaConfig {
         }
         if self.comparison == Comparison::EvaluatorFixedDepth {
             let a = &c.engines[0];
-            let b = &c.engines[1];
-            if a.kind == "mcts"
-                || b.kind == "mcts"
-                || a.time_ms.is_some()
-                || b.time_ms.is_some()
-                || a.depth == 0
-                || a.depth != b.depth
-                || a.max_nodes != b.max_nodes
-                || a.simd != b.simd
-                || self.search_artifact_sha256[0] != self.search_artifact_sha256[1]
-                || self.clock_policy != ClockPolicy::StrictUnknown
+            if c.engines.iter().enumerate().any(|(i, b)| {
+                b.kind == "mcts"
+                    || b.time_ms.is_some()
+                    || b.depth == 0
+                    || a.depth != b.depth
+                    || a.max_nodes != b.max_nodes
+                    || a.simd != b.simd
+                    || self.search_artifact_sha256[0] != self.search_artifact_sha256[i]
+            }) || self.clock_policy != ClockPolicy::StrictUnknown
                 || self.return_reserve_ms != 0
             {
                 return Err("fixed-depth evaluator mode needs equal depth/node/implementation, no clocks, strict UNKNOWN".into());
@@ -292,14 +296,13 @@ impl ArenaConfig {
         }
         if self.comparison == Comparison::EvaluatorWallTime {
             let a = &c.engines[0];
-            let b = &c.engines[1];
-            if a.depth != b.depth
-                || a.max_nodes != b.max_nodes
-                || a.simd != b.simd
-                || a.kind == "mcts"
-                || b.kind == "mcts"
-                || self.search_artifact_sha256[0] != self.search_artifact_sha256[1]
-            {
+            if c.engines.iter().enumerate().any(|(i, b)| {
+                a.depth != b.depth
+                    || a.max_nodes != b.max_nodes
+                    || a.simd != b.simd
+                    || b.kind == "mcts"
+                    || self.search_artifact_sha256[0] != self.search_artifact_sha256[i]
+            }) {
                 return Err(
                     "evaluator comparison must hold search, ordering, TT and limits fixed".into(),
                 );
@@ -642,8 +645,6 @@ impl ArenaPlan {
             || c.active_games != 1
             || c.max_batch != 1
             || a.decision_only
-            || (self.comparison == Comparison::WholeWallTime
-                && !a.disable_continuation_static_ordering)
             || serde_json::to_value(&c.inference)? != serde_json::to_value(&m.inference)?
             || (c.inference.is_none() && c.inference_cpu_core.is_some())
             || c.cycle.is_some()
@@ -848,7 +849,12 @@ impl ArenaPlan {
         let a = c.arena.as_ref().ok_or("decision clock/book required")?;
         if self.phase != "compare"
             || e.phase != self.phase
-            || self.comparison != Comparison::WholeWallTime
+            || !matches!(
+                self.comparison,
+                Comparison::WholeWallTime
+                    | Comparison::EvaluatorFixedDepth
+                    | Comparison::EvaluatorWallTime
+            )
             || e.planned_slots != self.planned_slots
             || e.inputs != self.inputs
             || e.models != self.models
@@ -860,7 +866,6 @@ impl ArenaPlan {
             || c.ruleset.config_name() != "standard_2p_threefold"
             || a.comparison != self.comparison
             || !a.decision_only
-            || !a.disable_continuation_static_ordering
             || a.clock_policy != ClockPolicy::StrictUnknown
             || c.games != b.slots.len()
             || c.workers != 1
@@ -876,8 +881,6 @@ impl ArenaPlan {
             || a.retained_outcome_bytes.is_none()
             || book.openings.len() != self.family_ids.len()
             || !book.frozen_before_candidate_results
-            || self.planned_slots > 288
-            || self.family_ids.len() > 96
         {
             return Err("decision approved input/model/clock/count correspondence".into());
         }
@@ -1055,6 +1058,86 @@ mod generic_arena_361_tests {
             .collect();
         let book = serde_json::from_value(json!({"schema":"quoridor.value-search-strength.book.v1","plan_sha256":"0".repeat(64),"old_open8_sha256":"0".repeat(64),"old_open8_prefixes":[],"rules":plan.rules,"action_encoding":"fake","compiled_sources":{},"complete":true,"attempted":n,"transitions":0,"attempts":[],"families":families})).unwrap();
         (plan, e, c, slots, book)
+    }
+    #[test]
+    fn generic_arena377_decision_modes_counts_ordering_and_unsupported_sigma() {
+        // Admission metadata only:97 parents/four arbitrary engine IDs; NN0.
+        let (mut p, mut e, mut c, _, _) = fixture(97, 3);
+        c.engines.truncate(1);
+        c.games = 97;
+        let a = c.arena.as_mut().unwrap();
+        a.decision_only = true;
+        a.evaluator_sha256.truncate(1);
+        a.search_artifact_sha256.truncate(1);
+        let book = a.book.clone();
+        p.phase = "compare".into();
+        p.planned_slots = 388;
+        p.matchups = [73, 2, 900, 11]
+            .into_iter()
+            .map(|id| ArenaMatchup {
+                id,
+                inference: None,
+                engines: c.engines.clone(),
+                evaluator_sha256: c.arena.as_ref().unwrap().evaluator_sha256.clone(),
+            })
+            .collect();
+        p.batches = p
+            .matchups
+            .iter()
+            .enumerate()
+            .map(|(i, m)| ArenaBatch {
+                batch: i,
+                matchup: m.id,
+                config: reference(&format!("decision-{i}")),
+                slots: (i * 97..(i + 1) * 97).collect(),
+            })
+            .collect();
+        let slots: Vec<_> = (0..388)
+            .map(|i| ArenaSlot {
+                slot: i,
+                batch: i / 97,
+                matchup: p.matchups[i / 97].id,
+                local_game: i % 97,
+                family_id: 100 + i % 97,
+                candidate_color: 0,
+            })
+            .collect();
+        e.phase = "compare".into();
+        e.config = p.batches[0].config.clone();
+        e.planned_slots = p.planned_slots;
+        for off in [false, true] {
+            c.arena
+                .as_mut()
+                .unwrap()
+                .disable_continuation_static_ordering = off;
+            p.validate_decision_config(&e, &c, &slots, &book).unwrap();
+        }
+        let mut bad = slots.clone();
+        bad[1].family_id = bad[0].family_id;
+        assert!(p.validate_decision_config(&e, &c, &bad, &book).is_err());
+        let mut wrong = book.clone();
+        wrong.openings[0].prefix.push(13);
+        assert!(p.validate_decision_config(&e, &c, &slots, &wrong).is_err());
+        c.engines[0].kind = "mcts".into();
+        c.engines[0].model = None;
+        assert!(c.arena.as_ref().unwrap().validate(&c).is_err());
+    }
+    #[test]
+    fn generic_arena377_declared_engine_order_and_ordering_selector() {
+        let (mut p, e, mut c, slots, book) = fixture(2, 5);
+        c.engines.reverse();
+        c.arena.as_mut().unwrap().evaluator_sha256.reverse();
+        p.matchups[0].engines = c.engines.clone();
+        p.matchups[0].evaluator_sha256 = c.arena.as_ref().unwrap().evaluator_sha256.clone();
+        for off in [false, true] {
+            c.arena
+                .as_mut()
+                .unwrap()
+                .disable_continuation_static_ordering = off;
+            p.validate_config(&e, &c, &slots, &book).unwrap();
+        }
+        c.engines[0].time_ms = Some(100);
+        assert!(p.validate_config(&e, &c, &slots, &book).is_err());
     }
     #[test]
     fn generic_arena_361_two_depth_count_model_scopes_use_current_config_validation() {

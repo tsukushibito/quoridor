@@ -7,6 +7,7 @@ import copy
 from contextlib import contextmanager
 from datetime import datetime, timezone
 import fcntl
+from fractions import Fraction
 import hashlib
 import importlib.util
 import json
@@ -27,7 +28,9 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "python"))
 from quoridor_training import cycle_process as process  # noqa: E402
 
-LEASE = Path("/workspaces/quoridor/.artifacts/rust-migration/target/arena-software-writer.lock")
+LEASE = Path(
+    "/workspaces/quoridor/.artifacts/rust-migration/target/arena-software-writer.lock"
+)
 BUILD_SCHEMA = "quoridor.research.build-manifest.v1"
 EXPERIMENT_SCHEMA = "quoridor.research.experiment.v1"
 COMPLETION_SCHEMA = "quoridor.research.completion.v1"
@@ -74,7 +77,9 @@ def bound(path, limit=CONTROL_BYTES):
     fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
     with os.fdopen(fd, "rb") as f:
         info = os.fstat(f.fileno())
-        require(stat.S_ISREG(info.st_mode) and info.st_size <= limit, "reference size/type")
+        require(
+            stat.S_ISREG(info.st_mode) and info.st_size <= limit, "reference size/type"
+        )
         data = f.read(limit + 1)
         require(
             len(data) == info.st_size and len(data) <= limit,
@@ -228,7 +233,10 @@ def selected_arena(spec):
         and 0 <= first <= experiment["batch"] <= last
         and (
             experiment["phase"] == "arena"
-            or (experiment["phase"] == "compare" and experiment["argv"][1] == "decisions")
+            or (
+                experiment["phase"] == "compare"
+                and experiment["argv"][1] == "decisions"
+            )
         ),
         "operation outside selected finite arena range",
     )
@@ -288,7 +296,9 @@ def selected_run(spec, experiment):
         "finalizers",
     ):
         require(spec[key] == template[key], "selected RUN settings drift: " + key)
-    require(experiment == document(template["experiment"]), "selected RUN experiment drift")
+    require(
+        experiment == document(template["experiment"]), "selected RUN experiment drift"
+    )
     launch_fields = {
         "TMPDIR",
         "QUORIDOR_LIFECYCLE_INTENT",
@@ -315,9 +325,14 @@ class Limits(process.CycleResources):
                 type(cfg[name]) is int and cfg[name] > 0,
                 "positive priced limit: " + name,
             )
-        measurement = spec["kind"] == "run" and document(spec["experiment"])["argv"][1] == "measure"
+        measurement = (
+            spec["kind"] == "run"
+            and document(spec["experiment"])["argv"][1] == "measure"
+        )
         support = document(spec["support"]) if spec.get("support") is not None else {}
-        require(measurement or bool(support), "owning support for non-measurement operation")
+        require(
+            measurement or bool(support), "owning support for non-measurement operation"
+        )
         require(
             cfg["family_B"] <= issued_family_upper(spec, support)
             and cfg["host_reserve_B"] >= 4 * 1024**3,
@@ -358,14 +373,18 @@ class Limits(process.CycleResources):
                 admission["spec_sha256"] == spec["intent_sha256"],
                 "actual intent admission",
             )
-            require(admission["support_sha256"] == spec["support"]["sha256"], "same support")
+            require(
+                admission["support_sha256"] == spec["support"]["sha256"], "same support"
+            )
             require(admission["ready"] is True, "phase not admitted")
             if spec["kind"] == "run":
                 require(
                     admission["approved_plan"] == spec["approved_plan"],
                     "issued approved plan",
                 )
-        require(cfg["controller_B"] == 64 * 1024 * 1024, "whole family includes controller")
+        require(
+            cfg["controller_B"] == 64 * 1024 * 1024, "whole family includes controller"
+        )
         self.charged_paths = charged_roots(spec)
         super().__init__(
             {
@@ -385,7 +404,8 @@ class Limits(process.CycleResources):
         if budget is not None:
             seen = set()
             require(
-                sum(allocated(p, seen=seen) for p in self.charged_paths) + extra_B <= budget,
+                sum(allocated(p, seen=seen) for p in self.charged_paths) + extra_B
+                <= budget,
                 "owned allocation limit",
             )
         reserve = self.spec["limits"].get("free_B")
@@ -495,7 +515,9 @@ def physical_and_quiet(spec):
     identities = []
     for core in cores:
         p = Path(f"/sys/devices/system/cpu/cpu{core}/topology")
-        identities.append(((p / "physical_package_id").read_text(), (p / "core_id").read_text()))
+        identities.append(
+            ((p / "physical_package_id").read_text(), (p / "core_id").read_text())
+        )
     require(
         len(set(identities)) == len(identities),
         "worker/guardian/reserves must be distinct physical cores",
@@ -558,7 +580,10 @@ def cargo_report(data):
         if not isinstance(item, dict):
             continue
         reason = item.get("reason")
-        if reason == "compiler-message" and item.get("message", {}).get("level") == "warning":
+        if (
+            reason == "compiler-message"
+            and item.get("message", {}).get("level") == "warning"
+        ):
             warnings.append(item)
         elif reason == "compiler-artifact" and item.get("executable"):
             artifacts.append(item)
@@ -574,7 +599,8 @@ def settled(record):
         "command not successful",
     )
     require(
-        record.get("direct_child_reaped") is True and record.get("cleanup_complete") is True,
+        record.get("direct_child_reaped") is True
+        and record.get("cleanup_complete") is True,
         "directwait/cleanup incomplete",
     )
     require(
@@ -606,21 +632,30 @@ def command(spec, row, directory, resources, executor=process.execute, *, ledger
     try:
         budget = spec.get("command_timeout_seconds")
         if budget is not None:
-            require(type(budget) is int and budget > 0, "positive admitted command timeout")
+            require(
+                type(budget) is int and budget > 0, "positive admitted command timeout"
+            )
             if getattr(resources, "deadline", None) is None:
                 # Start at the first actual command, never during source preparation.
                 # All commands in this operation share this deadline and cleanup reserve.
                 resources.deadline = time.monotonic() + budget
-        capture = Capture(directory / (row["name"] + ".full.log"), spec["limits"]["log_B"])
+        capture = Capture(
+            directory / (row["name"] + ".full.log"), spec["limits"]["log_B"]
+        )
         cpu_args = {"cpu_core": spec["limits"]["worker_cpu"]}
-        if spec.get("kind") == "build" and row.get("role") == "test" and "test_cpu_cores" in spec:
+        if (
+            spec.get("kind") == "build"
+            and row.get("role") == "test"
+            and "test_cpu_cores" in spec
+        ):
             cpu_args = {"cpu_core": None, "cpu_cores": build_test_cpu_cores(spec)}
         if "child_cpu_cores" in spec:
             if len(spec["child_cpu_cores"]) == 3:
                 cores = arena_cpu_cores(spec)
             else:
                 require(
-                    spec["kind"] == "run" and document(spec["experiment"])["phase"] == "corpus",
+                    spec["kind"] == "run"
+                    and document(spec["experiment"])["phase"] == "corpus",
                     "four-core launch is only the qualified corpus",
                 )
                 cores = spec["child_cpu_cores"]
@@ -662,9 +697,13 @@ def command(spec, row, directory, resources, executor=process.execute, *, ledger
                 and not check["secondary"]
             )
             if primary is None:
-                require(check["capture_complete"], "full returned capture missing/partial")
+                require(
+                    check["capture_complete"], "full returned capture missing/partial"
+                )
         except BaseException as error:
-            check["secondary"].append({"stage": "capture_identity", **error_fact(error)})
+            check["secondary"].append(
+                {"stage": "capture_identity", **error_fact(error)}
+            )
             if primary is not None:
                 primary.add_note("capture identity secondary: " + repr(error))
             else:
@@ -674,7 +713,9 @@ def command(spec, row, directory, resources, executor=process.execute, *, ledger
         try:
             check["persisted_process_receipt"] = bound(persisted)[0]
         except BaseException as error:
-            check["secondary"].append({"stage": "persisted_process_identity", **error_fact(error)})
+            check["secondary"].append(
+                {"stage": "persisted_process_identity", **error_fact(error)}
+            )
             if primary is not None:
                 primary.add_note("persisted process secondary: " + repr(error))
             else:
@@ -702,16 +743,20 @@ def source_metadata_check(source):
         "Git/Cargo source record",
     )
     require(
-        len(source["commit"]) == 40 and all(c in "0123456789abcdef" for c in source["commit"]),
+        len(source["commit"]) == 40
+        and all(c in "0123456789abcdef" for c in source["commit"]),
         "Git revision",
     )
     workspace = Path(source["workspace"])
     require(workspace.is_absolute(), "adopted workspace")
     for name, filename in (("manifest", "Cargo.toml"), ("lock", "Cargo.lock")):
-        require(source[name]["path"] == str(workspace / filename), "adopted Cargo " + name)
+        require(
+            source[name]["path"] == str(workspace / filename), "adopted Cargo " + name
+        )
     untracked = source["untracked_inputs"]
     require(
-        type(untracked) is list and len({r["path"] for r in untracked}) == len(untracked),
+        type(untracked) is list
+        and len({r["path"] for r in untracked}) == len(untracked),
         "unique used untracked inputs",
     )
     require(
@@ -749,7 +794,8 @@ def source_check(source):
     )
     patch = b"" if source["patch"] is None else read_ref(source["patch"])
     require(
-        git("diff", "--binary", "--no-ext-diff", "--no-textconv", "HEAD", "--") == patch,
+        git("diff", "--binary", "--no-ext-diff", "--no-textconv", "HEAD", "--")
+        == patch,
         "actual uncommitted Git delta drift",
     )
     untracked = git(
@@ -773,7 +819,9 @@ def source_check(source):
     for item in source["cargo_configs"]:
         path = Path(item["path"])
         if item["file"] is None:
-            require(not path.exists() and not path.is_symlink(), "Cargo config appeared")
+            require(
+                not path.exists() and not path.is_symlink(), "Cargo config appeared"
+            )
         else:
             read_ref(item["file"])
 
@@ -851,7 +899,9 @@ def measurement_config(experiment):
     )
     require(config["profile"] in {"control", "cheap"}, "configured ordering target")
     for key in ("tt_entries", "output_bytes", "record_bytes"):
-        require(type(config[key]) is int and config[key] > 0, "measurement positive " + key)
+        require(
+            type(config[key]) is int and config[key] > 0, "measurement positive " + key
+        )
     require(
         config["record_bytes"] <= config["output_bytes"],
         "measurement record/output limit",
@@ -861,7 +911,8 @@ def measurement_config(experiment):
         "measurement Boolean switches",
     )
     require(
-        config.get("seed") is None or (type(config["seed"]) is int and 0 <= config["seed"] < 2**64),
+        config.get("seed") is None
+        or (type(config["seed"]) is int and 0 <= config["seed"] < 2**64),
         "measurement seed metadata",
     )
     namespace = config["namespace"]
@@ -921,7 +972,9 @@ def measurement_config(experiment):
                 "diagnostic",
                 "warmup",
             }
-            and all(isinstance(request[k], str) and request[k] for k in ("id", "session"))
+            and all(
+                isinstance(request[k], str) and request[k] for k in ("id", "session")
+            )
             and request["id"] not in ids
             and type(request["root"]) is int
             and 0 <= request["root"] < len(config["roots"])
@@ -933,7 +986,10 @@ def measurement_config(experiment):
         )
         require(
             request.get("time_limit_ms") is None
-            or (type(request["time_limit_ms"]) is int and 0 < request["time_limit_ms"] < 2**64),
+            or (
+                type(request["time_limit_ms"]) is int
+                and 0 < request["time_limit_ms"] < 2**64
+            ),
             "measurement optional deadline",
         )
         require(
@@ -954,7 +1010,9 @@ def measurement_argv(spec, experiment, native_argv):
     perf = spec.get("perf")
     if perf is None:
         return native_argv
-    require(experiment["argv"][1] == "measure", "profiling belongs to measurement entry")
+    require(
+        experiment["argv"][1] == "measure", "profiling belongs to measurement entry"
+    )
     require(
         set(perf)
         == {
@@ -970,7 +1028,9 @@ def measurement_argv(spec, experiment, native_argv):
         "standard perf settings",
     )
     for key in ("frequency_hz", "ring_pages", "data_max_bytes"):
-        require(type(perf[key]) is int and 0 < perf[key] < 2**64, "positive perf " + key)
+        require(
+            type(perf[key]) is int and 0 < perf[key] < 2**64, "positive perf " + key
+        )
     require(
         perf["ring_pages"] & (perf["ring_pages"] - 1) == 0,
         "perf ring pages power of two",
@@ -1038,7 +1098,11 @@ def measurement_evidence(spec, experiment, values, *, files=()):
                 "measurement count type: " + key,
             )
         require(isinstance(result.get("errors"), list), "measurement errors array")
-    raw_refs = [ref for ref in files if spec.get("perf") and ref["path"] == spec["perf"]["output"]]
+    raw_refs = [
+        ref
+        for ref in files
+        if spec.get("perf") and ref["path"] == spec["perf"]["output"]
+    ]
     if result is not None and spec.get("perf"):
         result = {**result, "perf_RAW": raw_refs}
     return {
@@ -1049,7 +1113,9 @@ def measurement_evidence(spec, experiment, values, *, files=()):
         "journal_tail_bytes": len(tail),
         "journal_tail_sha256": sha(tail) if tail else None,
         "observed_complete": sum(row.get("status") == "COMPLETE" for row in rows),
-        "journal_result_rows_agree": len(rows) == len(result["measurements"]) if result else None,
+        "journal_result_rows_agree": len(rows) == len(result["measurements"])
+        if result
+        else None,
         "unreturned_tail": result is None,
         "recorded_prefix": rows if result is None else None,
         "runtime_launch_origin": result.get("runtime_launch_origin")
@@ -1134,7 +1200,9 @@ def project_python():
     )
     python = environment / "bin/python"
     require(
-        environment.is_absolute() and (environment / "pyvenv.cfg").is_file() and python.is_file(),
+        environment.is_absolute()
+        and (environment / "pyvenv.cfg").is_file()
+        and python.is_file(),
         "prepared shared project Python required",
     )
     return python
@@ -1211,25 +1279,31 @@ def common_study_check(spec, experiment, manifest, approved):
     project_interpreter(experiment)
     common_training_environment(spec)
     python = str(project_python())
-    require("child_cpu_cores" not in spec, "nongame software/fit cannot widen child CPUs")
+    require(
+        "child_cpu_cores" not in spec, "nongame software/fit cannot widen child CPUs"
+    )
     if phase == "software-qualification":
         definition = config["definition"]
         require(
             definition in experiment["inputs"]
             and all(r in experiment["inputs"] for r in config.get("helper_sources", []))
             and config["result"] == str(Path(spec["data_root"]) / "qualification.json")
-            and spec["argv"] == [python, "-B", definition["path"], "--result", config["result"]],
+            and spec["argv"]
+            == [python, "-B", definition["path"], "--result", config["result"]],
             "configured software definition and actual output",
         )
         return
-    require(phase == "fit" and experiment["planned_slots"] == 0, "nongame training scope")
+    require(
+        phase == "fit" and experiment["planned_slots"] == 0, "nongame training scope"
+    )
     argv = spec["argv"]
     require(
         len(argv) in {11, 13}
         and argv[:5] == [python, "-B", "-m", "quoridor_training.train", "train"]
         and argv[5] == "--cache"
         and Path(argv[6]).is_absolute()
-        and argv[7:11] == ["--output", spec["data_root"], "--config", experiment["config"]["path"]]
+        and argv[7:11]
+        == ["--output", spec["data_root"], "--config", experiment["config"]["path"]]
         and (
             len(argv) == 11
             or argv[11] == "--input-binding"
@@ -1256,7 +1330,9 @@ def common_study_check(spec, experiment, manifest, approved):
         mixture = config["mixture"]
         require(config["training"]["target"] == "z", "mixed outcome teacher")
         for key in ("public_membership", "public_acceptance"):
-            require(mixture[key] in experiment["inputs"], "actual indexed public " + key)
+            require(
+                mixture[key] in experiment["inputs"], "actual indexed public " + key
+            )
         public_root = Path(mixture["public_membership"]["path"]).parent.resolve()
         require(
             all(
@@ -1267,11 +1343,16 @@ def common_study_check(spec, experiment, manifest, approved):
             "public payload remains indexed/shared; no repeated full payload hashing",
         )
     cache_ref = next(
-        (r for r in experiment["inputs"] if r["path"] == str(Path(argv[6]) / "cache.json")),
+        (
+            r
+            for r in experiment["inputs"]
+            if r["path"] == str(Path(argv[6]) / "cache.json")
+        ),
         None,
     )
     require(
-        cache_ref is not None and not Path(argv[6]).joinpath("intake-incomplete.json").exists(),
+        cache_ref is not None
+        and not Path(argv[6]).joinpath("intake-incomplete.json").exists(),
         "published actual added cache",
     )
     cache = json.loads(read_ref(cache_ref, max(CONTROL_BYTES, cache_ref["bytes"])))
@@ -1287,7 +1368,10 @@ def common_study_check(spec, experiment, manifest, approved):
         )
     eligible = cache["common_corpus"]["common_eligible_by_split"]
     require(
-        all(type(eligible.get(k)) is int and eligible[k] > 0 for k in ("train", "validation")),
+        all(
+            type(eligible.get(k)) is int and eligible[k] > 0
+            for k in ("train", "validation")
+        ),
         "nonempty actual eligible T/V",
     )
 
@@ -1300,7 +1384,9 @@ def caller_source_refs(spec, experiment):
         ROOT / "python/quoridor_training/snapshot.py",
     }
     if experiment["phase"] in {"fit", "software-qualification"}:
-        paths |= {ROOT / "python/quoridor_training" / (name + ".py") for name in FIT_IMPORTS}
+        paths |= {
+            ROOT / "python/quoridor_training" / (name + ".py") for name in FIT_IMPORTS
+        }
         if (
             experiment["phase"] == "fit"
             and document(experiment["config"])["experiment"]["study"] == "mixed-outcome"
@@ -1349,7 +1435,9 @@ def caller_source_refs(spec, experiment):
 
 def accepted_build(ref):
     manifest = document(ref)
-    require(not Path(ref["path"]).with_name("INCOMPLETE").exists(), "provisional manifest")
+    require(
+        not Path(ref["path"]).with_name("INCOMPLETE").exists(), "provisional manifest"
+    )
     require(
         manifest["schema"] == BUILD_SCHEMA and manifest["status"] == "PASS",
         "accepted build required",
@@ -1462,7 +1550,9 @@ def experiment_phase_check(experiment):
 
 def generation_check(spec, experiment):
     request = document(experiment["config"])
-    require(set(request) == {"plan", "old_prefixes", "output"}, "generation request shape")
+    require(
+        set(request) == {"plan", "old_prefixes", "output"}, "generation request shape"
+    )
     require(request["output"] == spec["data_root"], "generation owned output binding")
     require(len(experiment["inputs"]) == 2, "generation exact two inputs")
     for field, full in zip(("plan", "old_prefixes"), experiment["inputs"], strict=True):
@@ -1470,7 +1560,9 @@ def generation_check(spec, experiment):
             request[field] == {k: full[k] for k in ("path", "sha256")},
             "generation exact plan/OPEN8 references",
         )
-    require(experiment["inputs"][0]["sha256"] == GENERATION_PLAN, "generation fixed plan")
+    require(
+        experiment["inputs"][0]["sha256"] == GENERATION_PLAN, "generation fixed plan"
+    )
     document(experiment["inputs"][0])
     require(
         canonical_sha(document(experiment["inputs"][1])) == GENERATION_OPEN8,
@@ -1525,7 +1617,9 @@ def cache_materialize_check(spec, experiment, manifest):
     streams = request["streams"]
     require(isinstance(streams, list) and streams, "nonempty ordered stream inputs")
     require(len({r["path"] for r in streams}) == len(streams), "distinct stream inputs")
-    require(all(r in experiment["inputs"] for r in streams), "actual converter stream refs")
+    require(
+        all(r in experiment["inputs"] for r in streams), "actual converter stream refs"
+    )
     argv = [manifest["artifact"]["path"]]
     for ref in streams:
         require(Path(ref["path"]).is_absolute(), "absolute stream input")
@@ -1537,7 +1631,9 @@ def cache_materialize_check(spec, experiment, manifest):
             binding in experiment["inputs"] and binding not in streams,
             "distinct optional lineage input",
         )
-        argv.extend(["--input-binding", binding["path"], "--binding-sha256", binding["sha256"]])
+        argv.extend(
+            ["--input-binding", binding["path"], "--binding-sha256", binding["sha256"]]
+        )
     require(experiment["argv"] == argv, "maintained converter ordered argv")
     require(
         len(spec["data"]) == 8
@@ -1587,7 +1683,10 @@ def experiment_check(spec):
         refs.append(library["file"])
     refs.extend(caller_source_refs(spec, experiment))
     streamed_inputs = set()
-    if experiment["phase"] == "materialize" and manifest.get("artifact_target") == "terminal-cache":
+    if (
+        experiment["phase"] == "materialize"
+        and manifest.get("artifact_target") == "terminal-cache"
+    ):
         streamed_inputs = {r["path"] for r in document(experiment["config"])["streams"]}
     elif mixed_outcome:
         cache_root = Path(spec["argv"][6])
@@ -1613,17 +1712,23 @@ def experiment_check(spec):
     if experiment["phase"] == "generation":
         generation_check(spec, experiment)
     require(
-        type(experiment["planned_slots"]) is int and 0 <= experiment["planned_slots"] <= 4096,
+        type(experiment["planned_slots"]) is int
+        and 0 <= experiment["planned_slots"] <= 4096,
         "bounded planned denominator",
     )
-    measurement = experiment["phase"] == "compare" and experiment["argv"][1] == "measure"
+    measurement = (
+        experiment["phase"] == "compare" and experiment["argv"][1] == "measure"
+    )
     if measurement:
         measurement_config(experiment)
         approved = None
     else:
         approved = approved_plan(spec, experiment)
         refs.append(spec["approved_plan"])
-    if experiment["phase"] in {"corpus", "fit", "software-qualification"} and not mixed_outcome:
+    if (
+        experiment["phase"] in {"corpus", "fit", "software-qualification"}
+        and not mixed_outcome
+    ):
         common_study_check(spec, experiment, manifest, approved)
     if experiment["phase"] == "compare" and experiment["argv"][1] == "decisions":
         arena_decision_plan_check(experiment, approved)
@@ -1730,7 +1835,9 @@ def build_check(spec):
     builds = [row for row in spec["commands"] if row["role"] == "build"]
     require(len(builds) == 1, "one selected Cargo release command")
     argv = builds[0]["argv"]
-    package = "quoridor-data" if artifact_target == "terminal-cache" else "quoridor-runner"
+    package = (
+        "quoridor-data" if artifact_target == "terminal-cache" else "quoridor-runner"
+    )
     require(
         "--release" in argv
         and argv.count("--bin") == 1
@@ -1760,7 +1867,8 @@ def build_check(spec):
         )
     handover = document(spec["target_handover"])
     require(
-        handover["schema"] == "research.target-handover.v1" and handover["status"] == "HANDED_OVER",
+        handover["schema"] == "research.target-handover.v1"
+        and handover["status"] == "HANDED_OVER",
         "serial target handover required",
     )
     require(
@@ -1768,7 +1876,8 @@ def build_check(spec):
         "target handover identity",
     )
     require(
-        handover["shared_serial_pool"] is True and not Path(handover["old_target"]).exists(),
+        handover["shared_serial_pool"] is True
+        and not Path(handover["old_target"]).exists(),
         "old/new parallel target unsupported",
     )
     require(handover["target_writer"] == spec["writer"], "single issued writer/pool")
@@ -1781,7 +1890,9 @@ def build_check(spec):
     )
     require(adoption["source"] == spec["source"], "accepted frozen source/patch")
     source = spec["source"]
-    require(spec["cwd"] == source["workspace"], "Cargo cwd differs from adopted workspace")
+    require(
+        spec["cwd"] == source["workspace"], "Cargo cwd differs from adopted workspace"
+    )
     source_check(spec["source"])
     require(
         "dependency_refs" not in spec,
@@ -1817,22 +1928,28 @@ def build_check(spec):
         "serial bounded build",
     )
     require(
-        env["CARGO_PROFILE_RELEASE_OPT_LEVEL"] == "3" and env["CARGO_PROFILE_RELEASE_DEBUG"] == "0",
+        env["CARGO_PROFILE_RELEASE_OPT_LEVEL"] == "3"
+        and env["CARGO_PROFILE_RELEASE_DEBUG"] == "0",
         "frozen release flags",
     )
     for key in ("RUSTC", "RUSTDOC", "CC", "CXX", "AR"):
-        require(env[key] == spec["tools"][key]["file"]["path"], "pinned relevant tool env")
+        require(
+            env[key] == spec["tools"][key]["file"]["path"], "pinned relevant tool env"
+        )
     require(
         {c["role"] for c in spec["commands"]} >= {"test", "lint", "build"},
         "one affected qualification",
     )
     names = [c["name"] for c in spec["commands"]]
     require(
-        len(names) == len(set(names)) and all(n.replace("-", "").isalnum() for n in names),
+        len(names) == len(set(names))
+        and all(n.replace("-", "").isalnum() for n in names),
         "unique safe command names",
     )
     for c in spec["commands"]:
-        require(c["role"] in {"test", "lint", "build"}, "affected software commands only")
+        require(
+            c["role"] in {"test", "lint", "build"}, "affected software commands only"
+        )
         a = c["argv"]
         require(a[0] == spec["tools"]["CARGO"]["file"]["path"], "trusted Cargo argv")
         require(
@@ -1884,7 +2001,9 @@ def private_copy_check(spec, src=None, *, resources=None):
     if resources is not None:
         block = os.statvfs(root).f_frsize
         rounded = ((info.st_size + block - 1) // block) * block
-        resources.check(extra_B=rounded)  # Source inode already belongs to the whole union.
+        resources.check(
+            extra_B=rounded
+        )  # Source inode already belongs to the whole union.
 
 
 def artifact_ref(path, *, resources=None):
@@ -2106,11 +2225,16 @@ def arena_model_check(experiment, plan, width):
             require(kind in {"nnue", "distance", "mcts"}, "supported numerical backend")
             if kind == "nnue":
                 model = next(
-                    (r for r in plan["models"] if r["descriptor"]["path"] == engine["model"]),
+                    (
+                        r
+                        for r in plan["models"]
+                        if r["descriptor"]["path"] == engine["model"]
+                    ),
                     None,
                 )
                 require(
-                    model is not None and model["evaluator_sha256"] == m["evaluator_sha256"][i],
+                    model is not None
+                    and model["evaluator_sha256"] == m["evaluator_sha256"][i],
                     "declared model/evaluator",
                 )
                 used.add(model["descriptor"]["path"])
@@ -2127,12 +2251,13 @@ def arena_model_check(experiment, plan, width):
                     and inference.get("cuda_graph", False) is False
                     and inference["model_sha"] == m["evaluator_sha256"][i]
                     and any(
-                        r["path"] == inference["model"] and r["sha256"] == inference["model_sha"]
+                        r["path"] == inference["model"]
+                        and r["sha256"] == inference["model_sha"]
                         for r in plan["inputs"]
                     )
                     and any(
-                        l["file"]["path"] == inference["library"]
-                        for l in experiment["dynamic_libraries"]
+                        library["file"]["path"] == inference["library"]
+                        for library in experiment["dynamic_libraries"]
                     ),
                     "closed Sigma model/library/backend correspondence",
                 )
@@ -2162,7 +2287,8 @@ def arena_decision_plan_check(experiment, plan):
         }
         and plan["schema"] == "quoridor.research.arena-plan.v1"
         and plan["phase"] == experiment["phase"] == "compare"
-        and plan["comparison"] == "whole_wall_time"
+        and plan["comparison"]
+        in {"whole_wall_time", "evaluator_fixed_depth", "evaluator_wall_time"}
         and experiment["argv"][1:]
         == [
             "decisions",
@@ -2190,76 +2316,8 @@ def arena_decision_plan_check(experiment, plan):
         "approved decision scientific correspondence",
     )
     families = plan["family_ids"]
-    matchups = [m["id"] for m in plan["matchups"]]
-    count = experiment["planned_slots"]
-    require(
-        families
-        and all(type(f) is int and f >= 0 for f in families)
-        and len(set(families)) == len(families)
-        and len(families) <= 96
-        and matchups
-        and all(type(m) is int and m >= 0 for m in matchups)
-        and len(set(matchups)) == len(matchups)
-        and type(count) is int
-        and 0 < count <= 288
-        and count == len(families) * len(matchups),
-        "decision full denominator",
-    )
     schedule = document(experiment["schedule"])
-    require(isinstance(schedule, list) and len(schedule) == count, "decision full schedule")
-    pairs = set()
-    for i, slot in enumerate(schedule):
-        require(
-            set(slot)
-            == {
-                "slot",
-                "batch",
-                "matchup",
-                "local_game",
-                "family_id",
-                "candidate_color",
-            }
-            and all(type(v) is int and v >= 0 for v in slot.values())
-            and slot["slot"] == i
-            and slot["family_id"] in families
-            and slot["matchup"] in matchups
-            and slot["candidate_color"] == 0,
-            "decision typed parent/engine slot",
-        )
-        pairs.add((slot["family_id"], slot["matchup"]))
-    require(len(pairs) == count, "decision unique complete parent/engine coverage")
-    covered = set()
-    for i, batch in enumerate(plan["batches"]):
-        require(
-            set(batch) == {"batch", "matchup", "config", "slots"}
-            and batch["batch"] == i
-            and type(batch["batch"]) is int
-            and batch["matchup"] in matchups
-            and isinstance(batch["slots"], list)
-            and batch["slots"],
-            "decision batch",
-        )
-        for local, global_slot in enumerate(batch["slots"]):
-            require(
-                type(global_slot) is int
-                and 0 <= global_slot < count
-                and global_slot not in covered,
-                "decision batch ownership",
-            )
-            covered.add(global_slot)
-            slot = schedule[global_slot]
-            require(
-                slot["batch"] == i
-                and slot["matchup"] == batch["matchup"]
-                and slot["local_game"] == local,
-                "decision local/global correspondence",
-            )
-    require(
-        len(covered) == count
-        and type(experiment.get("batch")) is int
-        and 0 <= experiment["batch"] < len(plan["batches"]),
-        "decision complete coverage",
-    )
+    planned = planned_game_slice(experiment, schedule, plan, width=1)
     batch = plan["batches"][experiment["batch"]]
     require(experiment["config"] == batch["config"], "approved decision config")
     c = document(experiment["config"])
@@ -2268,15 +2326,18 @@ def arena_decision_plan_check(experiment, plan):
     require(
         c["ruleset"] == "standard_2p_threefold"
         and c["games"] == len(batch["slots"])
-        and all(type(c[k]) is int and c[k] == 1 for k in ("workers", "active_games", "max_batch"))
+        and all(
+            type(c[k]) is int and c[k] == 1
+            for k in ("workers", "active_games", "max_batch")
+        )
         and c["engines"] == m["engines"]
         and c.get("inference") == m.get("inference")
         and (c.get("inference") is not None or c.get("inference_cpu_core") is None)
         and all(c.get(k) is None for k in ("cycle", "train_games", "validation_games"))
-        and a["comparison"] == "whole_wall_time"
+        and a["comparison"] == plan["comparison"]
         and a["clock_policy"] == "strict_unknown"
         and a.get("decision_only") is True
-        and a.get("disable_continuation_static_ordering") is True
+        and type(a.get("disable_continuation_static_ordering", False)) is bool
         and a["evaluator_sha256"] == m["evaluator_sha256"]
         and type(a["tt_entries"]) is int
         and 0 < a["tt_entries"] <= 1048576
@@ -2298,13 +2359,19 @@ def arena_decision_plan_check(experiment, plan):
         ),
         "decision finite engine limits",
     )
-    require(
-        type(engine["time_ms"]) is int
-        and engine["time_ms"] > 0
-        and type(a["return_reserve_ms"]) is int
-        and 0 <= a["return_reserve_ms"] < engine["time_ms"],
-        "decision clock",
-    )
+    if plan["comparison"] == "evaluator_fixed_depth":
+        require(
+            engine.get("time_ms") is None and a["return_reserve_ms"] == 0,
+            "completed-depth decision has no move clock/reserve",
+        )
+    else:
+        require(
+            type(engine["time_ms"]) is int
+            and engine["time_ms"] > 0
+            and type(a["return_reserve_ms"]) is int
+            and 0 <= a["return_reserve_ms"] < engine["time_ms"],
+            "decision clock",
+        )
     book = document(plan["book"])
     require(
         book["frozen_before_candidate_results"] is True
@@ -2318,7 +2385,7 @@ def arena_decision_plan_check(experiment, plan):
             a["book"]["openings"][local] == book["openings"][index],
             "immutable chronological parent/full history",
         )
-    return [schedule[i] for i in batch["slots"]], c
+    return planned, c
 
 
 def arena_plan_check(experiment, plan):
@@ -2354,9 +2421,13 @@ def arena_plan_check(experiment, plan):
         ]
         and plan["comparison"]
         in {"evaluator_fixed_depth", "evaluator_wall_time", "whole_wall_time"}
-        and plan["rules"] == experiment["rules"] == "research-standard-2p-threefold-goal-first-v1"
+        and plan["rules"]
+        == experiment["rules"]
+        == "research-standard-2p-threefold-goal-first-v1"
         and plan["distance_units"] == experiment["distance_units"] == "wall-distance/80"
-        and plan["value_perspective"] == experiment["value_perspective"] == "side-to-move"
+        and plan["value_perspective"]
+        == experiment["value_perspective"]
+        == "side-to-move"
         and plan["inputs"] == experiment["inputs"]
         and plan["book"] in plan["inputs"]
         and plan["models"] == experiment["models"]
@@ -2380,7 +2451,10 @@ def arena_plan_check(experiment, plan):
         )
         and not a.get("decision_only", False)
         and config.get("inference") == matchup.get("inference")
-        and (config.get("inference") is not None or config.get("inference_cpu_core") is None)
+        and (
+            config.get("inference") is not None
+            or config.get("inference_cpu_core") is None
+        )
         and config.get("cycle") is None
         and config.get("train_games") is None
         and config.get("validation_games") is None
@@ -2433,11 +2507,10 @@ def arena_plan_check(experiment, plan):
             and 0 <= a["return_reserve_ms"] < engines[0]["time_ms"],
             "equal thinking clocks and reserve",
         )
-    if plan["comparison"] == "whole_wall_time":
-        require(
-            a.get("disable_continuation_static_ordering") is True,
-            "declared retained alpha ordering OFF",
-        )
+    require(
+        type(a.get("disable_continuation_static_ordering", False)) is bool,
+        "explicit alpha ordering selector",
+    )
     book = document(plan["book"])
     require(
         book["complete"] is True and book["rules"] == plan["rules"],
@@ -2445,7 +2518,8 @@ def arena_plan_check(experiment, plan):
     )
     families = {f["family_id"]: f for f in book["families"]}
     require(
-        len(families) == len(book["families"]) and set(plan["family_ids"]) <= families.keys(),
+        len(families) == len(book["families"])
+        and set(plan["family_ids"]) <= families.keys(),
         "book family coverage",
     )
     require(
@@ -2462,14 +2536,17 @@ def arena_plan_check(experiment, plan):
             and opening["prefix"] == f["prefix"]
             and opening["original_seed"] == f["seed"]
             and ref["source_sha256"] == plan["book"]["sha256"]
-            and all(ref["settings"][k] == f[k] for k in ("family_id", "root_key", "history_counts"))
+            and all(
+                ref["settings"][k] == f[k]
+                for k in ("family_id", "root_key", "history_counts")
+            )
             and a["first_candidate_colors"][i] == slot["candidate_color"],
             "immutable book/history/colour",
         )
     return planned, config
 
 
-def planned_game_slice(experiment, schedule, plan):
+def planned_game_slice(experiment, schedule, plan, width=2):
     count = experiment["planned_slots"]
     families = plan["family_ids"]
     matchups = [m["id"] for m in plan["matchups"]]
@@ -2484,7 +2561,7 @@ def planned_game_slice(experiment, schedule, plan):
         and matchups
         and all(type(i) is int and i >= 0 for i in matchups)
         and len(set(matchups)) == len(matchups)
-        and count == 2 * len(families) * len(matchups),
+        and count == width * len(families) * len(matchups),
         "explicit planned family denominator",
     )
     require(isinstance(schedule, list) and len(schedule) == count, "full schedule")
@@ -2504,13 +2581,15 @@ def planned_game_slice(experiment, schedule, plan):
             and slot["slot"] == i
             and slot["family_id"] in families
             and slot["matchup"] in matchups
-            and slot["candidate_color"] in (0, 1),
+            and slot["candidate_color"] in range(width),
             "typed unique planned slot",
         )
         colors.add((slot["matchup"], slot["family_id"], slot["candidate_color"]))
     require(len(colors) == count, "full family/colour coverage")
     covered = set()
-    require(isinstance(plan["batches"], list) and bool(plan["batches"]), "declared batches")
+    require(
+        isinstance(plan["batches"], list) and bool(plan["batches"]), "declared batches"
+    )
     for i, batch in enumerate(plan["batches"]):
         require(
             set(batch) == {"batch", "matchup", "config", "slots"}
@@ -2520,7 +2599,7 @@ def planned_game_slice(experiment, schedule, plan):
             and batch["matchup"] in matchups
             and isinstance(batch["slots"], list)
             and batch["slots"]
-            and len(batch["slots"]) % 2 == 0,
+            and len(batch["slots"]) % width == 0,
             "whole pair batch",
         )
         for local, global_slot in enumerate(batch["slots"]):
@@ -2532,7 +2611,7 @@ def planned_game_slice(experiment, schedule, plan):
             )
             covered.add(global_slot)
             row = schedule[global_slot]
-            mate_id = batch["slots"][local ^ 1]
+            mate_id = batch["slots"][local ^ 1] if width == 2 else global_slot
             require(type(mate_id) is int and 0 <= mate_id < count, "pair slot")
             mate = schedule[mate_id]
             require(
@@ -2540,7 +2619,7 @@ def planned_game_slice(experiment, schedule, plan):
                 and row["matchup"] == batch["matchup"]
                 and row["local_game"] == local
                 and mate["family_id"] == row["family_id"]
-                and mate["candidate_color"] != row["candidate_color"],
+                and (width == 1 or mate["candidate_color"] != row["candidate_color"]),
                 "batch pair correspondence",
             )
     require(
@@ -2618,7 +2697,8 @@ def arena_observation(config, row):
         counters = obs["counters"]
         fallback = (
             a["comparison"] == "whole_wall_time"
-            and counters.get("selection_reason") == "legal_fallback_no_completed_iteration"
+            and counters.get("selection_reason")
+            == "legal_fallback_no_completed_iteration"
         )
         require(
             counters["completed_snapshot_validation_failed"] is False
@@ -2658,7 +2738,10 @@ def arena_observation(config, row):
                 and receipt < obs["deadline_ns"]
                 and counters["drain_finished_ns"] == obs["returned_ns"]
                 and (
-                    (obs["returned_ns"] >= receipt and counters["inflight_after_drain"] == 0)
+                    (
+                        obs["returned_ns"] >= receipt
+                        and counters["inflight_after_drain"] == 0
+                    )
                     if a["comparison"] == "whole_wall_time"
                     else obs["returned_ns"] == receipt
                 ),
@@ -2668,7 +2751,8 @@ def arena_observation(config, row):
     if not config["arena"].get("decision_only", False):
         opening = config["arena"]["book"]["openings"][row["game"] // 2]["prefix"]
         require(
-            row["moves"][: len(opening)] == opening and accepted == row["moves"][len(opening) :],
+            row["moves"][: len(opening)] == opening
+            and accepted == row["moves"][len(opening) :],
             "full opening/accepted actions/durable moves",
         )
 
@@ -2692,7 +2776,9 @@ def arena_reference_report(config, files, values=None, expected_build=None):
         "exact canonical detail/summary/manifest paths",
     )
     if values is None:
-        values = {name: read_ref(files[name], files[name]["bytes"]) for name in required}
+        values = {
+            name: read_ref(files[name], files[name]["bytes"]) for name in required
+        }
     for name in required:
         require(
             len(values[name]) == files[name]["bytes"]
@@ -2741,7 +2827,10 @@ def arena_reference_report(config, files, values=None, expected_build=None):
     )
     report = publication["report"]
     count = config["games"]
-    cap = config["arena"].get("retained_outcome_bytes") or config["max_plies"] * 16384 + 16384
+    cap = (
+        config["arena"].get("retained_outcome_bytes")
+        or config["max_plies"] * 16384 + 16384
+    )
     raw_cap = count * (cap + 1)
     require(
         report["outcomes"] == []
@@ -2813,7 +2902,9 @@ def arena_reference_report(config, files, values=None, expected_build=None):
     if config.get("management_cpu_core") is not None:
         execution = manifest["binding"].get("execution", {})
         require(
-            execution.get("main_pid") == execution.get("main_tid") == report["process_id"]
+            execution.get("main_pid")
+            == execution.get("main_tid")
+            == report["process_id"]
             and execution.get("management_core")
             == execution.get("management_core_observed")
             == config["management_cpu_core"]
@@ -2859,17 +2950,57 @@ def arena_reference_report(config, files, values=None, expected_build=None):
         )
     if expected_build is not None:
         require(
-            manifest["binding"]["executable_sha256"] == expected_build["artifact"]["sha256"],
+            manifest["binding"]["executable_sha256"]
+            == expected_build["artifact"]["sha256"],
             "actual current image publication",
         )
     report["outcomes"] = sorted(rows, key=lambda row: row["game"])
     return report
 
 
+def diagnostic_proposal(slot, obs, engine):
+    """Metric role follows the declared engine, never an arbitrary matchup ID."""
+    sigma = engine["kind"] == "mcts"
+    return {
+        "slot": slot["slot"],
+        "engine": slot["matchup"],
+        "kind": engine["kind"],
+        "action": obs["action"],
+        "PV": obs["pv"],
+        "accepted_depth": obs["completed_depth"],
+        "stop": obs["stop"],
+        "searched_value_stm": None if sigma else obs["value_stm"],
+        "value_role": "Sigma rootmean"
+        if sigma
+        else "alpha searched root; not NNUE static",
+        "Sigma_root_nn": obs["counters"].get("root_nn"),
+        "Sigma_rootmean": obs["counters"].get("root_mean"),
+        "Sigma_selected_child_q": obs["counters"].get("selected_child_q"),
+        "counters": obs["counters"],
+        "NNUE_static_pretanh": None,
+        "NNUE_static_posttanh": None,
+        "NNUE_saturation": None,
+        "missing_metric_reason": "not recorded by admitted same-forward path; searched/terminal values are not NNUE static outputs",
+    }
+
+
+def interval_tail(interval):
+    require(
+        isinstance(interval, str) and interval.endswith("%"),
+        "central interval percentage",
+    )
+    try:
+        central = Fraction(interval[:-1]) / 100
+    except (ValueError, ZeroDivisionError) as error:
+        raise Refused("finite central interval percentage") from error
+    require(0 < central < 1, "central interval strictly between0 and100 percent")
+    return (1 - central) / 2
+
+
 def arena_analysis_check(spec, experiment):
     config = document(experiment["config"])
     require(
-        set(config)
+        set(config) - {"linked_examples_limit"}
         == {
             "schema",
             "arena_plan",
@@ -2886,12 +3017,12 @@ def arena_analysis_check(spec, experiment):
     require(
         config["schema"] == "quoridor.arena-analysis.v1"
         and config["arena_plan"] == spec["approved_plan"]
-        and config["bootstrap_resamples"] == 10000
-        and config["bootstrap_seed"] == 37420261012
-        and config["central_interval"] == "98.33333333333333%"
-        and experiment["planned_slots"] == 768
+        and type(config["bootstrap_resamples"]) is int
+        and config["bootstrap_resamples"] > 0
+        and type(config["bootstrap_seed"]) is int
+        and 0 <= config["bootstrap_seed"] < 2**64
         and experiment["batch"] is None,
-        "fixed selected family analysis settings/authority",
+        "selected family analysis settings/authority",
     )
     require(
         experiment["argv"][1:]
@@ -2906,32 +3037,60 @@ def arena_analysis_check(spec, experiment):
         ],
         "one maintained reference analysis entry",
     )
-    plan = document(config["arena_plan"])
+    interval_tail(config["central_interval"])
     require(
-        plan["family_ids"] == list(range(128))
-        and plan["planned_slots"] == 768
-        and [m["id"] for m in plan["matchups"]] == [0, 1, 2]
-        and [[e["kind"] for e in m["engines"]] for m in plan["matchups"]]
-        == [["mcts", "distance"], ["mcts", "nnue"], ["distance", "nnue"]]
+        type(config.get("linked_examples_limit", 12)) is int
+        and config.get("linked_examples_limit", 12) >= 0,
+        "linked example retention count",
+    )
+    plan = approved_plan(spec, experiment)
+    require(
+        plan == document(config["arena_plan"])
+        and plan["phase"] == "arena"
+        and experiment["planned_slots"] == plan["planned_slots"]
         and experiment["schedule"] == plan["schedule"],
-        "fixed three-engine/full-family schedule",
+        "selected arena analysis correspondence",
     )
-    require(
-        len(config["batches"]) == len(plan["batches"])
-        and {b["batch"] for b in config["batches"]} == set(range(len(plan["batches"])))
-        and len(config["decision_batches"]) <= 288,
-        "one census descriptor per planned batch",
+    planned_game_slice(
+        {"planned_slots": plan["planned_slots"], "batch": 0},
+        document(plan["schedule"]),
+        plan,
     )
+
+    def census(items, selected):
+        require(
+            isinstance(items, list)
+            and len(items) == len(selected["batches"])
+            and all(type(i.get("batch")) is int for i in items)
+            and {i["batch"] for i in items} == set(range(len(selected["batches"]))),
+            "one census descriptor per planned batch",
+        )
+
+    census(config["batches"], plan)
     if config["decision_plan"] is not None:
         dplan = document(config["decision_plan"])
         require(
-            len(config["decision_batches"]) == len(dplan["batches"])
-            and {b["batch"] for b in config["decision_batches"]}
-            == set(range(len(dplan["batches"]))),
-            "full diagnostic batch census",
+            dplan["phase"] == "compare" and config["diagnostic_selection"] is not None,
+            "declared diagnostic plan/selection",
+        )
+        planned_game_slice(
+            {"planned_slots": dplan["planned_slots"], "batch": 0},
+            document(dplan["schedule"]),
+            dplan,
+            width=1,
+        )
+        census(config["decision_batches"], dplan)
+        selection = document(config["diagnostic_selection"])
+        require(
+            selection["selected_before_outputs"] is True
+            and len(selection["parents"]) == len(dplan["family_ids"]),
+            "declared diagnostic selection flag/count; parent correspondence unverified",
         )
     else:
-        require(config["decision_batches"] == [], "no unapproved diagnostic branch")
+        require(
+            config["decision_batches"] == [] and config["diagnostic_selection"] is None,
+            "no unapproved diagnostic branch",
+        )
     refs = {r["path"]: r for r in experiment["inputs"]}
     require(len(refs) == len(experiment["inputs"]), "unique analysis inputs")
 
@@ -2956,13 +3115,17 @@ def arena_analysis_check(spec, experiment):
                 require(
                     completed["schema"] == COMPLETION_SCHEMA
                     and completed["kind"] == "run"
-                    and not Path(item["completion"]["path"]).with_name("INCOMPLETE").exists(),
+                    and not Path(item["completion"]["path"])
+                    .with_name("INCOMPLETE")
+                    .exists(),
                     "original sole authoritative completion required",
                 )
                 selected(completed["experiment"])
                 selected(completed["intent"])
                 producer = document(completed["experiment"])
                 selected(producer["config"])
+                if producer["build_manifest"] != experiment["build_manifest"]:
+                    selected(producer["build_manifest"])
                 for ref in completed["data"]["files"]:
                     selected(ref)
     require(
@@ -2976,177 +3139,8 @@ def arena_analysis_check(spec, experiment):
     return config
 
 
-def arena_analysis(spec, experiment):
-    config = arena_analysis_check(spec, experiment)
-    plan = document(config["arena_plan"])
-    schedule = document(plan["schedule"])
-    require(
-        len(schedule) == 768 and [r["slot"] for r in schedule] == list(range(768)),
-        "fixed ordered slots",
-    )
-    selection = document(config["diagnostic_selection"])
-    require(
-        len(selection["parents"]) <= 96 and selection["selected_before_outputs"] is True,
-        "frozen chronological diagnostic selection",
-    )
-    decision_plan = (
-        document(config["decision_plan"]) if config["decision_plan"] is not None else None
-    )
-    decisions = document(decision_plan["schedule"]) if decision_plan is not None else []
-    if decision_plan is not None:
-        require(
-            [m["id"] for m in decision_plan["matchups"]] == [0, 1, 2]
-            and [m["engines"][0]["kind"] for m in decision_plan["matchups"]]
-            == ["mcts", "distance", "nnue"],
-            "diagnostic engine identities/metric roles",
-        )
-    require(
-        len(decisions) == 3 * len(selection["parents"]) and len(decisions) <= 288,
-        "exact selected parent/three-proposal denominator",
-    )
-    result = {
-        "schema": "quoridor.arena-comparison.summary.v1",
-        "planned": 768,
-        "bootstrap_resamples": 10000,
-        "bootstrap_seed": 37420261012,
-        "central_interval": "98.33333333333333%",
-        "operation_provenance": [],
-        "errors": [],
-        "diagnostic_selection": config["diagnostic_selection"],
-        "diagnostic_exclusions": selection["exclusions"],
-        "diagnostic_planned": len(decisions),
-        "limitations": [
-            "Conditional exploratory family resampling; no IID/population/Elo coverage guarantee.",
-            "Shared book/PRNG and interleaved matchups; incomplete pairs are never numerical wins or cap draws.",
-            "Descriptive correlated state occupancy; diverged trajectories do not identify counterfactual superiority.",
-            "Historical common-parent disagreement is not error or teacher truth; no forced-child/deeper oracle.",
-            "Model improvement, default adoption, new fit/features/teacher and general strength are unproved.",
-        ],
-    }
-    observed = {}
-    decision_rows = {}
-    strata = {}
-    result["native_costs"] = []
-
-    def consume(items, approved, phase, target):
-        for item in sorted(items, key=lambda row: row["batch"]):
-            if item["completion"] is None:
-                continue
-            completion = document(item["completion"])
-            e = document(completion["experiment"])
-            origin = document(completion["intent"])
-            result["operation_provenance"].append(
-                {
-                    "completion": item["completion"],
-                    "status": completion["status"],
-                    "primary": completion["primary"],
-                    "secondary_count": len(completion["secondary"]),
-                    "cleanup_complete": completion["cleanup_complete"],
-                    "remaining": completion["remaining"],
-                    "command_wall_seconds": [
-                        c.get("guardian_return", {}).get("wall_seconds")
-                        if c.get("guardian_return") is not None
-                        else None
-                        for c in completion["checks"]
-                    ],
-                    "cost_scope": "original command walls only; nested/controller/admin/continuous peaks not manufactured",
-                }
-            )
-            try:
-                require(
-                    origin["approved_plan"] == approved
-                    and e["canonical_plan_sha256"] == approved["sha256"]
-                    and origin["experiment"] == completion["experiment"]
-                    and e["build_manifest"] == experiment["build_manifest"]
-                    and e["phase"] == phase
-                    and e["batch"] == item["batch"],
-                    "original producer/current subject correspondence",
-                )
-                planned, c = (
-                    arena_plan_check(e, document(approved))
-                    if phase == "arena"
-                    else arena_decision_plan_check(e, document(approved))
-                )
-                inventory = {r["path"]: r for r in completion["data"]["files"]}
-                require(
-                    len(inventory) == len(completion["data"]["files"]),
-                    "unique producer file inventory",
-                )
-                files = {
-                    name: inventory[str(Path(c["output"]) / filename)]
-                    for name, filename in (
-                        ("journal", "completed.jsonl.gz"),
-                        ("result", "result.json"),
-                        ("native_manifest", "manifest.json"),
-                    )
-                }
-                native = arena_reference_report(
-                    c, files, expected_build=document(e["build_manifest"])
-                )
-                pub = json.loads(read_ref(files["result"]))
-                result["native_costs"].append(
-                    {
-                        "completion": item["completion"],
-                        "native_wall_seconds": native["wall_seconds"],
-                        "encoding_sync_verify_seconds": pub["archive_wall_seconds"],
-                        "canonical_compressed_bytes": pub["archive"]["compressed"]["bytes"],
-                        "canonical_raw_bytes": pub["archive"]["raw_bytes"],
-                        "canonical_allocated_bytes": pub["archive_allocated_bytes"],
-                        "compression_ratio_raw_over_compressed": pub["archive"]["raw_bytes"]
-                        / pub["archive"]["compressed"]["bytes"],
-                        "native_peak_rss_observation_bytes": native["peak_rss"],
-                        "evaluator_setup_seconds": native["pump"][
-                            "evaluator_initialization_seconds"
-                        ],
-                        "backend_setup_seconds": native["pump"]["backend_initialization_seconds"],
-                        "backend_cleanup_seconds": native["pump"]["backend_cleanup_seconds"],
-                        "thinking_seconds": sum(
-                            o["thinking_seconds"] or 0
-                            for row in native["outcomes"]
-                            for o in row["observations"]
-                        ),
-                        "classification_seconds": sum(
-                            o["counters"].get("parent_traits", {}).get("classification_seconds", 0)
-                            for row in native["outcomes"]
-                            for o in row["observations"]
-                        ),
-                        "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN",
-                    }
-                )
-                for row in native["outcomes"]:
-                    slot = next(slot for slot in planned if slot["local_game"] == row["game"])
-                    require(
-                        slot["slot"] not in target
-                        and row["candidate_color"] == slot["candidate_color"],
-                        "unique global scheduled outcome",
-                    )
-                    width = 2 if phase == "arena" else 1
-                    require(
-                        row["family"] == f"{c['run_id']}-family-{row['game'] // width:06}",
-                        "native family/local parent",
-                    )
-                    if phase == "compare":
-                        require(
-                            row["winner"] is None
-                            and row["moves"]
-                            == c["arena"]["book"]["openings"][row["game"]]["prefix"]
-                            and row["status"] in {"decision", "unknown"}
-                            and len(row["observations"]) <= 1,
-                            "same parent single proposal/no branch game",
-                        )
-                    arena_observation(c, row)
-                    target[slot["slot"]] = (row, c)
-            except BaseException as error:
-                result["errors"].append({"completion": item["completion"], **error_fact(error)})
-
-    consume(config["batches"], config["arena_plan"], "arena", observed)
-    if decision_plan is not None:
-        consume(
-            config["decision_batches"],
-            config["decision_plan"],
-            "compare",
-            decision_rows,
-        )
+def arena_score_tables(plan, schedule, observed, config):
+    """Colour-pair counts and selected conditional family resampling, NN0."""
     pair_scores = {}
     tables = []
     for m in plan["matchups"]:
@@ -3170,10 +3164,12 @@ def arena_analysis(spec, experiment):
         }
         scores = []
         families = []
-        for family in range(128):
+        for family in plan["family_ids"]:
             values = []
             for slot in (
-                r for r in schedule if r["matchup"] == m["id"] and r["family_id"] == family
+                r
+                for r in schedule
+                if r["matchup"] == m["id"] and r["family_id"] == family
             ):
                 counts["planned"] += 1
                 row = observed.get(slot["slot"], (None, None))[0]
@@ -3219,7 +3215,9 @@ def arena_analysis(spec, experiment):
             require(len(values) == 2, "full original colour pair denominator")
             scores.extend(v for v in values if v is not None)
             families.append(None if any(v is None for v in values) else sum(values) / 2)
-        require(counts["planned"] == 256, "full matchup denominator")
+        require(
+            counts["planned"] == 2 * len(plan["family_ids"]), "full matchup denominator"
+        )
         pair_scores[m["id"]] = families
         tables.append(
             {
@@ -3231,16 +3229,16 @@ def arena_analysis(spec, experiment):
                 else sum(v for v in families if v is not None)
                 / sum(v is not None for v in families),
                 "planned_game_missingness_bounds": [
-                    sum(scores) / 256,
-                    (sum(scores) + counts["unknown"]) / 256,
+                    sum(scores) / counts["planned"],
+                    (sum(scores) + counts["unknown"]) / counts["planned"],
                 ],
             }
         )
     samples = {m["id"]: [] for m in plan["matchups"]}
     empty = {key: 0 for key in samples}
-    rng = random.Random(37420261012)
-    for _ in range(10000):
-        indices = [rng.randrange(128) for _ in range(128)]
+    rng = random.Random(config["bootstrap_seed"])
+    for _ in range(config["bootstrap_resamples"]):
+        indices = [rng.randrange(len(plan["family_ids"])) for _ in plan["family_ids"]]
         for key, values in pair_scores.items():
             known = [values[i] for i in indices if values[i] is not None]
             if known:
@@ -3250,14 +3248,223 @@ def arena_analysis(spec, experiment):
     for table in tables:
         values = sorted(samples[table["matchup"]])
         table["empty_family_resamples"] = empty[table["matchup"]]
+        unavailable = (
+            "fewer_than_two_complete_colour_pairs"
+            if table["complete_colour_pairs"] < 2
+            else "empty_family_resample"
+            if len(values) != config["bootstrap_resamples"]
+            else None
+        )
+        table["conditional_interval_unavailable_reason"] = unavailable
         table["conditional_complete_pair_interval"] = (
             None
-            if len(values) != 10000
+            if unavailable is not None
             else [
-                values[(len(values) - 1) // 120],
-                values[(119 * (len(values) - 1) + 119) // 120],
+                values[
+                    math.floor(
+                        (len(values) - 1) * interval_tail(config["central_interval"])
+                    )
+                ],
+                values[
+                    math.ceil(
+                        (len(values) - 1)
+                        * (1 - interval_tail(config["central_interval"]))
+                    )
+                ],
             ]
         )
+    return tables
+
+
+def arena_analysis(spec, experiment):
+    config = arena_analysis_check(spec, experiment)
+    plan = document(config["arena_plan"])
+    schedule = document(plan["schedule"])
+    selection = (
+        document(config["diagnostic_selection"])
+        if config["diagnostic_selection"] is not None
+        else {"exclusions": []}
+    )
+    decision_plan = (
+        document(config["decision_plan"])
+        if config["decision_plan"] is not None
+        else None
+    )
+    decisions = document(decision_plan["schedule"]) if decision_plan is not None else []
+    diagnostic_engines = (
+        {m["id"]: m["engines"][0] for m in decision_plan["matchups"]}
+        if decision_plan is not None
+        else {}
+    )
+    result = {
+        "schema": "quoridor.arena-comparison.summary.v1",
+        "planned": plan["planned_slots"],
+        "bootstrap_resamples": config["bootstrap_resamples"],
+        "bootstrap_seed": config["bootstrap_seed"],
+        "central_interval": config["central_interval"],
+        "operation_provenance": [],
+        "errors": [],
+        "diagnostic_selection": config["diagnostic_selection"],
+        "diagnostic_selection_relation": "OPAQUE_UNVERIFIED"
+        if config["diagnostic_selection"] is not None
+        else None,
+        "diagnostic_exclusions": selection["exclusions"],
+        "diagnostic_planned": len(decisions),
+        "limitations": [
+            "Conditional exploratory family resampling; no IID/population/Elo coverage guarantee.",
+            "Shared book/PRNG and interleaved matchups; incomplete pairs are never numerical wins or cap draws.",
+            "Descriptive correlated state occupancy; diverged trajectories do not identify counterfactual superiority.",
+            "Historical common-parent disagreement is not error or teacher truth; no forced-child/deeper oracle.",
+            "Model improvement, default adoption, new fit/features/teacher and general strength are unproved.",
+        ],
+    }
+    if config["diagnostic_selection"] is not None:
+        result["limitations"].append(
+            "Diagnostic selection reference has pre-output flag/count checks only; "
+            "its parent correspondence is opaque/unverified. Actual proposals retain "
+            "the admitted decision book/config full-history authority."
+        )
+    observed = {}
+    decision_rows = {}
+    strata = {}
+    result["native_costs"] = []
+
+    def consume(items, approved, phase, target):
+        for item in sorted(items, key=lambda row: row["batch"]):
+            if item["completion"] is None:
+                continue
+            completion = document(item["completion"])
+            e = document(completion["experiment"])
+            origin = document(completion["intent"])
+            result["operation_provenance"].append(
+                {
+                    "completion": item["completion"],
+                    "producer_build": e["build_manifest"],
+                    "status": completion["status"],
+                    "primary": completion["primary"],
+                    "secondary_count": len(completion["secondary"]),
+                    "cleanup_complete": completion["cleanup_complete"],
+                    "remaining": completion["remaining"],
+                    "command_wall_seconds": [
+                        c.get("guardian_return", {}).get("wall_seconds")
+                        if c.get("guardian_return") is not None
+                        else None
+                        for c in completion["checks"]
+                    ],
+                    "cost_scope": "original command walls only; nested/controller/admin/continuous peaks not manufactured",
+                }
+            )
+            try:
+                require(
+                    origin["approved_plan"] == approved
+                    and approved_plan(origin, e) == document(approved)
+                    and e["canonical_plan_sha256"] == approved["sha256"]
+                    and origin["experiment"] == completion["experiment"]
+                    and e["phase"] == phase
+                    and e["batch"] == item["batch"],
+                    "original producer/current subject correspondence",
+                )
+                planned, c = (
+                    arena_plan_check(e, document(approved))
+                    if phase == "arena"
+                    else arena_decision_plan_check(e, document(approved))
+                )
+                inventory = {r["path"]: r for r in completion["data"]["files"]}
+                require(
+                    len(inventory) == len(completion["data"]["files"]),
+                    "unique producer file inventory",
+                )
+                files = {
+                    name: inventory[str(Path(c["output"]) / filename)]
+                    for name, filename in (
+                        ("journal", "completed.jsonl.gz"),
+                        ("result", "result.json"),
+                        ("native_manifest", "manifest.json"),
+                    )
+                }
+                native = arena_reference_report(
+                    c, files, expected_build=document(e["build_manifest"])
+                )
+                pub = json.loads(read_ref(files["result"]))
+                result["native_costs"].append(
+                    {
+                        "completion": item["completion"],
+                        "native_wall_seconds": native["wall_seconds"],
+                        "encoding_sync_verify_seconds": pub["archive_wall_seconds"],
+                        "canonical_compressed_bytes": pub["archive"]["compressed"][
+                            "bytes"
+                        ],
+                        "canonical_raw_bytes": pub["archive"]["raw_bytes"],
+                        "canonical_allocated_bytes": pub["archive_allocated_bytes"],
+                        "compression_ratio_raw_over_compressed": pub["archive"][
+                            "raw_bytes"
+                        ]
+                        / pub["archive"]["compressed"]["bytes"],
+                        "native_peak_rss_observation_bytes": native["peak_rss"],
+                        "evaluator_setup_seconds": native["pump"][
+                            "evaluator_initialization_seconds"
+                        ],
+                        "backend_setup_seconds": native["pump"][
+                            "backend_initialization_seconds"
+                        ],
+                        "backend_cleanup_seconds": native["pump"][
+                            "backend_cleanup_seconds"
+                        ],
+                        "thinking_seconds": sum(
+                            o["thinking_seconds"] or 0
+                            for row in native["outcomes"]
+                            for o in row["observations"]
+                        ),
+                        "classification_seconds": sum(
+                            o["counters"]
+                            .get("parent_traits", {})
+                            .get("classification_seconds", 0)
+                            for row in native["outcomes"]
+                            for o in row["observations"]
+                        ),
+                        "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN",
+                    }
+                )
+                for row in native["outcomes"]:
+                    slot = next(
+                        slot for slot in planned if slot["local_game"] == row["game"]
+                    )
+                    require(
+                        slot["slot"] not in target
+                        and row["candidate_color"] == slot["candidate_color"],
+                        "unique global scheduled outcome",
+                    )
+                    width = 2 if phase == "arena" else 1
+                    require(
+                        row["family"]
+                        == f"{c['run_id']}-family-{row['game'] // width:06}",
+                        "native family/local parent",
+                    )
+                    if phase == "compare":
+                        require(
+                            row["winner"] is None
+                            and row["moves"]
+                            == c["arena"]["book"]["openings"][row["game"]]["prefix"]
+                            and row["status"] in {"decision", "unknown"}
+                            and len(row["observations"]) <= 1,
+                            "same parent single proposal/no branch game",
+                        )
+                    arena_observation(c, row)
+                    target[slot["slot"]] = (row, c)
+            except BaseException as error:
+                result["errors"].append(
+                    {"completion": item["completion"], **error_fact(error)}
+                )
+
+    consume(config["batches"], config["arena_plan"], "arena", observed)
+    if decision_plan is not None:
+        consume(
+            config["decision_batches"],
+            config["decision_plan"],
+            "compare",
+            decision_rows,
+        )
+    tables = arena_score_tables(plan, schedule, observed, config)
     result["matchups"] = tables
     # Per-state rows are correlated exposures. Every cell retains game/family/colour denominators.
     for global_slot, (row, c) in observed.items():
@@ -3313,9 +3520,15 @@ def arena_analysis(spec, experiment):
             "engine_index": key[1],
             "trait": key[2],
             "stratum": key[3],
-            **{k: len(v) if isinstance(v, set) else v for k, v in cell.items() if k != "by_colour"},
+            **{
+                k: len(v) if isinstance(v, set) else v
+                for k, v in cell.items()
+                if k != "by_colour"
+            },
             "by_colour": {
-                str(side): {k: len(v) if isinstance(v, set) else v for k, v in counts.items()}
+                str(side): {
+                    k: len(v) if isinstance(v, set) else v for k, v in counts.items()
+                }
                 for side, counts in sorted(cell["by_colour"].items())
             },
         }
@@ -3337,7 +3550,11 @@ def arena_analysis(spec, experiment):
             continue
         row, c = item
         observation = row["observations"][0] if row["observations"] else None
-        if row["status"] != "decision" or observation is None or not observation["accepted"]:
+        if (
+            row["status"] != "decision"
+            or observation is None
+            or not observation["accepted"]
+        ):
             diagnostic_counts["unknown"] += 1
             continue
         diagnostic_counts["proposed"] += 1
@@ -3345,46 +3562,28 @@ def arena_analysis(spec, experiment):
     disagreements = 0
     complete = 0
     for parent, rows in sorted(by_parent.items()):
-        if len(rows) != 3:
+        if {slot["matchup"] for slot, _ in rows} != set(diagnostic_engines):
             continue
         complete += 1
         if len({obs["action"] for _, obs in rows}) > 1:
             disagreements += 1
-            if len(examples) < 12:
+            if len(examples) < config.get("linked_examples_limit", 12):
                 examples.append(
                     {
                         "parent": parent,
                         "selection": config["diagnostic_selection"],
+                        "selection_relation": result["diagnostic_selection_relation"],
                         "proposals": [
-                            {
-                                "slot": slot["slot"],
-                                "engine": slot["matchup"],
-                                "action": obs["action"],
-                                "PV": obs["pv"],
-                                "accepted_depth": obs["completed_depth"],
-                                "stop": obs["stop"],
-                                "searched_value_stm": obs["value_stm"]
-                                if slot["matchup"] != 0
-                                else None,
-                                "value_role": "Sigma rootmean"
-                                if slot["matchup"] == 0
-                                else "alpha searched root; not NNUE static",
-                                "Sigma_root_nn": obs["counters"].get("root_nn"),
-                                "Sigma_rootmean": obs["counters"].get("root_mean"),
-                                "Sigma_selected_child_q": obs["counters"].get("selected_child_q"),
-                                "counters": obs["counters"],
-                                "NNUE_static_pretanh": None,
-                                "NNUE_static_posttanh": None,
-                                "NNUE_saturation": None,
-                                "missing_metric_reason": "not recorded by admitted same-forward path; searched/terminal values are not NNUE static outputs",
-                            }
+                            diagnostic_proposal(
+                                slot, obs, diagnostic_engines[slot["matchup"]]
+                            )
                             for slot, obs in rows
                         ],
                     }
                 )
     diagnostic_strata = {}
     for parent, rows in sorted(by_parent.items()):
-        if len(rows) != 3:
+        if {slot["matchup"] for slot, _ in rows} != set(diagnostic_engines):
             continue
         traits = rows[0][1]["counters"].get("parent_traits")
         if traits is None:
@@ -3410,13 +3609,14 @@ def arena_analysis(spec, experiment):
     ]
     result["diagnostics"] = {
         **diagnostic_counts,
-        "complete_three_engine_parents": complete,
+        "complete_all_engine_parents": complete,
+        "engine_ids": list(diagnostic_engines),
         "action_disagreement_parents": disagreements,
         "linked_examples": examples,
         "NNUE_pretanh_posttanh_saturation": "UNKNOWN_NOT_RECORDED_NO_EXTRA_FORWARD",
     }
     report = [
-        "Three-engine fixed comparison",
+        "Configured arena comparison",
         "",
         "| Matchup | Goals first/second | True draws | UNKNOWN | Complete pairs | Conditional interval |",
         "|---|---:|---:|---:|---:|---|",
@@ -3428,7 +3628,7 @@ def arena_analysis(spec, experiment):
         )
     report += [
         "",
-        f"Common parents with all three proposals: {complete}; action disagreements: {disagreements}.",
+        f"Common parents with all configured proposals: {complete}; action disagreements: {disagreements}.",
         "",
         *result["limitations"],
     ]
@@ -3438,10 +3638,13 @@ def arena_analysis(spec, experiment):
 def arena_analysis_child(experiment_path, expected_sha):
     path = os.environ["QUORIDOR_LIFECYCLE_INTENT_PATH"]
     ref, _ = bound(path)
-    require(ref["sha256"] == os.environ["QUORIDOR_LIFECYCLE_INTENT"], "actual parent intent")
+    require(
+        ref["sha256"] == os.environ["QUORIDOR_LIFECYCLE_INTENT"], "actual parent intent"
+    )
     spec = document(ref)
     require(
-        os.environ["QUORIDOR_LIFECYCLE_PARENT_PID"] == str(os.getppid()) and os.getppid() > 1,
+        os.environ["QUORIDOR_LIFECYCLE_PARENT_PID"] == str(os.getppid())
+        and os.getppid() > 1,
         "actual immediate parent; no second lifetime lock",
     )
     require(
@@ -3451,7 +3654,11 @@ def arena_analysis_child(experiment_path, expected_sha):
     )
     require(
         spec["argv"]
-        == [os.fsdecode(v) for v in Path("/proc/self/cmdline").read_bytes().split(b"\0") if v],
+        == [
+            os.fsdecode(v)
+            for v in Path("/proc/self/cmdline").read_bytes().split(b"\0")
+            if v
+        ],
         "actual admitted child argv",
     )
     require(
@@ -3504,7 +3711,10 @@ def collect_data(spec, experiment):
     for item in spec["data"]:
         try:
             owned(item["path"], spec["owner"])
-            if experiment["phase"] == "materialize" and item["name"] in COMPACT_CACHE_WIDTHS:
+            if (
+                experiment["phase"] == "materialize"
+                and item["name"] in COMPACT_CACHE_WIDTHS
+            ):
                 ref = artifact_ref(item["path"])
                 require(ref["bytes"] <= item["limit_B"], "declared compact output size")
                 data["files"].append(ref)
@@ -3531,7 +3741,8 @@ def collect_data(spec, experiment):
                 data["files"].append(ref)
                 metadata = json.loads(raw)
                 require(
-                    metadata["schema"] == ARENA_PUBLICATION and metadata["closed_archive"] is False,
+                    metadata["schema"] == ARENA_PUBLICATION
+                    and metadata["closed_archive"] is False,
                     "typed retained publication failure",
                 )
                 data["publication_failure"] = metadata
@@ -3540,7 +3751,9 @@ def collect_data(spec, experiment):
                         "stage": "native_archive_publication",
                         "type": "NativePublicationFailure",
                         "message": metadata["report"]["stopped"],
-                        "secondary": metadata["report"]["pump"].get("publication_failures", []),
+                        "secondary": metadata["report"]["pump"].get(
+                            "publication_failures", []
+                        ),
                     }
                 )
             except BaseException as error:
@@ -3551,7 +3764,10 @@ def collect_data(spec, experiment):
         if live.exists():
             try:
                 c = document(experiment["config"])
-                cap = c["arena"].get("retained_outcome_bytes") or c["max_plies"] * 16384 + 16384
+                cap = (
+                    c["arena"].get("retained_outcome_bytes")
+                    or c["max_plies"] * 16384 + 16384
+                )
                 ref, _ = bound(live, c["games"] * (cap + 1))
                 data["files"].append(ref)
                 data["errors"].append(
@@ -3562,7 +3778,9 @@ def collect_data(spec, experiment):
                     }
                 )
             except BaseException as error:
-                data["errors"].append({"stage": "live_journal_failure", **error_fact(error)})
+                data["errors"].append(
+                    {"stage": "live_journal_failure", **error_fact(error)}
+                )
     if (
         experiment["phase"] == "analysis"
         and len(experiment["argv"]) > 3
@@ -3570,12 +3788,33 @@ def collect_data(spec, experiment):
     ):
         try:
             summary = json.loads(values["summary"])
+            selected = arena_analysis_check(spec, experiment)
+            plan = document(selected["arena_plan"])
+            decisions = (
+                document(selected["decision_plan"])
+                if selected["decision_plan"] is not None
+                else None
+            )
             require(
                 summary["schema"] == "quoridor.arena-comparison.summary.v1"
-                and summary["planned"] == 768
-                and len(summary["matchups"]) == 3
-                and all(t["counts"]["planned"] == 256 for t in summary["matchups"])
-                and summary["diagnostic_planned"] <= 288,
+                and summary["planned"] == plan["planned_slots"]
+                and len(summary["matchups"]) == len(plan["matchups"])
+                and {t["matchup"] for t in summary["matchups"]}
+                == {m["id"] for m in plan["matchups"]}
+                and all(
+                    t["counts"]["planned"] == 2 * len(plan["family_ids"])
+                    for t in summary["matchups"]
+                )
+                and summary["diagnostic_planned"]
+                == (decisions["planned_slots"] if decisions else 0)
+                and all(
+                    summary[k] == selected[k]
+                    for k in (
+                        "bootstrap_seed",
+                        "bootstrap_resamples",
+                        "central_interval",
+                    )
+                ),
                 "full conditional saved-analysis census",
             )
             data["scope"] = (
@@ -3604,7 +3843,9 @@ def collect_data(spec, experiment):
             data["planned_global_slots"] = [x["slot"] for x in planned]
             config = document(experiment["config"])
             files = {
-                item["name"]: next(ref for ref in data["files"] if ref["path"] == item["path"])
+                item["name"]: next(
+                    ref for ref in data["files"] if ref["path"] == item["path"]
+                )
                 for item in spec["data"]
                 if item["name"] in {"journal", "result", "native_manifest"}
             }
@@ -3632,7 +3873,8 @@ def collect_data(spec, experiment):
                     "journal family/colour drift",
                 )
                 require(
-                    isinstance(row["observations"], list) and isinstance(row["moves"], list),
+                    isinstance(row["observations"], list)
+                    and isinstance(row["moves"], list),
                     "full scientific per-game observations required",
                 )
                 require(
@@ -3668,10 +3910,14 @@ def collect_data(spec, experiment):
             data["errors"].append({"stage": "scientific_journal", **error_fact(error)})
     if experiment["phase"] == "compare" and experiment["argv"][1] == "decisions":
         try:
-            planned, config = arena_decision_plan_check(experiment, approved_plan(spec, experiment))
+            planned, config = arena_decision_plan_check(
+                experiment, approved_plan(spec, experiment)
+            )
             data["missing_local_games"] = list(range(len(planned)))
             files = {
-                item["name"]: next(ref for ref in data["files"] if ref["path"] == item["path"])
+                item["name"]: next(
+                    ref for ref in data["files"] if ref["path"] == item["path"]
+                )
                 for item in spec["data"]
                 if item["name"] in {"journal", "result", "native_manifest"}
             }
@@ -3701,7 +3947,8 @@ def collect_data(spec, experiment):
                 require(
                     row["family"] == f"{config['run_id']}-family-{game:06}"
                     and row["winner"] is None
-                    and row["moves"] == config["arena"]["book"]["openings"][game]["prefix"]
+                    and row["moves"]
+                    == config["arena"]["book"]["openings"][game]["prefix"]
                     and row["status"] in {"decision", "unknown"}
                     and len(row["observations"]) <= 1
                     and (
@@ -3739,7 +3986,9 @@ def collect_data(spec, experiment):
                 data["scope"] = "software-only; no corpus or numerical PASS"
             elif experiment["phase"] == "fit":
                 state = json.loads(
-                    values["run_status"] if "run_status" in values else values["training"]
+                    values["run_status"]
+                    if "run_status" in values
+                    else values["training"]
                 )
                 require(
                     state["status"] in {"COMPLETE", "COMPLETED", "EARLY_STOPPED"}
@@ -3801,7 +4050,10 @@ def collect_data(spec, experiment):
                 )
                 if "cache_manifest" in values:
                     cache = json.loads(values["cache_manifest"])
-                    require(cache["stream_intake"]["status"] == "complete", "atomic cache intake")
+                    require(
+                        cache["stream_intake"]["status"] == "complete",
+                        "atomic cache intake",
+                    )
                 if "stream_content" in values:
                     content = json.loads(values["stream_content"])
                     ref = content["compressed"]
@@ -3814,7 +4066,8 @@ def collect_data(spec, experiment):
 
     if (
         experiment["phase"] == "materialize"
-        and document(experiment["build_manifest"]).get("artifact_target") == "terminal-cache"
+        and document(experiment["build_manifest"]).get("artifact_target")
+        == "terminal-cache"
     ):
         try:
             cache = json.loads(values["cache_manifest"])
@@ -3830,7 +4083,8 @@ def collect_data(spec, experiment):
                 and isinstance(cache["source_content"], list)
                 and len(cache["source_content"]) == len(streams)
                 and all(
-                    content["compressed"] == ref and content["encoding"] == "gzip-single-member-v1"
+                    content["compressed"] == ref
+                    and content["encoding"] == "gzip-single-member-v1"
                     for content, ref in zip(cache["source_content"], streams)
                 )
                 and type(cache["rows"]) is int
@@ -3839,7 +4093,9 @@ def collect_data(spec, experiment):
             )
             require(
                 cache["files"] == {n: n for n in COMPACT_CACHE_WIDTHS}
-                and set(cache["sha256"]) == set(cache["file_bytes"]) == set(COMPACT_CACHE_WIDTHS),
+                and set(cache["sha256"])
+                == set(cache["file_bytes"])
+                == set(COMPACT_CACHE_WIDTHS),
                 "closed compact physical files",
             )
             refs = {Path(ref["path"]).name: ref for ref in data["files"]}
@@ -3850,12 +4106,18 @@ def collect_data(spec, experiment):
                     and ref["sha256"] == cache["sha256"][name],
                     "actual compact byte/hash/count",
                 )
-            data["scope"] = "saved-only cache conversion; no games/Search/model/numerical PASS"
+            data["scope"] = (
+                "saved-only cache conversion; no games/Search/model/numerical PASS"
+            )
             data["cache_manifest"] = next(
-                r for r in data["files"] if r["path"] == str(Path(spec["data_root"]) / "cache.json")
+                r
+                for r in data["files"]
+                if r["path"] == str(Path(spec["data_root"]) / "cache.json")
             )
         except BaseException as error:
-            data["errors"].append({"stage": "cache_materialization", **error_fact(error)})
+            data["errors"].append(
+                {"stage": "cache_materialization", **error_fact(error)}
+            )
     if data["errors"]:
         data["status"] = "FAILED"
     return data
@@ -3865,7 +4127,9 @@ def generation_input_data(completion_ref):
     """Recheck original saved generation files; never promote the originating run or qualify models."""
     origin = Path(completion_ref["path"])
     require(
-        origin.is_absolute() and origin.resolve() == origin and origin.name == "manifest.json",
+        origin.is_absolute()
+        and origin.resolve() == origin
+        and origin.name == "manifest.json",
         "canonical authoritative manifest.json required",
     )
     completion = document(completion_ref)
@@ -3893,7 +4157,9 @@ def generation_input_data(completion_ref):
     )
     experiment_phase_check(experiment)
     generation_check(spec, experiment)
-    require(len(completion["checks"]) == 1, "single original generation command required")
+    require(
+        len(completion["checks"]) == 1, "single original generation command required"
+    )
     check = completion["checks"][0]
     expected_argv = [
         a.replace("@EXPERIMENT@", completion["experiment"]["path"]).replace(
@@ -3914,7 +4180,9 @@ def generation_input_data(completion_ref):
         check["guardian_return"]["log_bytes_seen"] == check["full_log"]["bytes"],
         "original generation full log identity",
     )
-    require(isinstance(experiment["dynamic_libraries"], list), "declared libraries required")
+    require(
+        isinstance(experiment["dynamic_libraries"], list), "declared libraries required"
+    )
     require(
         all(
             isinstance(x["version"], str) and x["version"].strip()
@@ -3928,13 +4196,16 @@ def generation_input_data(completion_ref):
         and build["status"] == "PASS"
         and build["cleanup_complete"] is True
         and build["remaining"] == []
-        and not Path(experiment["build_manifest"]["path"]).with_name("INCOMPLETE").exists()
+        and not Path(experiment["build_manifest"]["path"])
+        .with_name("INCOMPLETE")
+        .exists()
         and build["artifact"] == spec["artifact"],
         "origin bound qualified build required",
     )
     require(
         all(
-            type(x.get("limit_B")) is int and 0 < x["limit_B"] <= 4 * 1024**2 for x in spec["data"]
+            type(x.get("limit_B")) is int and 0 < x["limit_B"] <= 4 * 1024**2
+            for x in spec["data"]
         ),
         "saved generation data bound",
     )
@@ -3968,7 +4239,8 @@ def generation_input_data(completion_ref):
     collection_spec = {
         **spec,
         "data": [
-            {**item, "limit_B": ref["bytes"]} for item, ref in zip(spec["data"], saved, strict=True)
+            {**item, "limit_B": ref["bytes"]}
+            for item, ref in zip(spec["data"], saved, strict=True)
         ],
     }
     data = collect_data(collection_spec, experiment)
@@ -4054,7 +4326,9 @@ def execute(
         "lifecycle intent schema",
     )
     # The admitted hash excludes only the admission descriptor, to avoid a self-referential digest.
-    admission_view = {k: v for k, v in spec.items() if k not in {"admission", "intent_sha256"}}
+    admission_view = {
+        k: v for k, v in spec.items() if k not in {"admission", "intent_sha256"}
+    }
     require(
         sha(json.dumps(admission_view, sort_keys=True, separators=(",", ":")).encode())
         == spec["intent_sha256"],
@@ -4133,7 +4407,9 @@ def execute(
                     created_TMP = True
                     Path(spec["private"]).parent.mkdir(exist_ok=True)
                     for name, tool in spec["tools"].items():
-                        read_ref(tool["file"], max(CONTROL_BYTES, tool["file"]["bytes"]))
+                        read_ref(
+                            tool["file"], max(CONTROL_BYTES, tool["file"]["bytes"])
+                        )
                         row = {
                             "name": "version-" + name.lower(),
                             "role": "version",
@@ -4181,7 +4457,9 @@ def execute(
                             src = owned(matches[0]["executable"], spec["target"])
                             private_copy_check(spec, src, resources=resources)
                             result["cargo_artifact"] = matches[0]
-                            candidate = copy_artifact(src, spec["private"], resources=resources)
+                            candidate = copy_artifact(
+                                src, spec["private"], resources=resources
+                            )
                         result["active_command"] = None
                     require(
                         candidate is not None,
@@ -4233,7 +4511,9 @@ def execute(
                     result["data"] = collect_data(spec, experiment)
                     if result["data"].get("measurement") is not None:
                         try:
-                            origin = result["data"]["measurement"]["runtime_launch_origin"]
+                            origin = result["data"]["measurement"][
+                                "runtime_launch_origin"
+                            ]
                             direct = result["checks"][-1]["guardian_return"]["child"]
                             expected = (
                                 origin["profiler"]
@@ -4242,21 +4522,26 @@ def execute(
                             )
                             require(
                                 direct == expected
-                                and origin["guardian"] == result["originating_job"]["child"],
+                                and origin["guardian"]
+                                == result["originating_job"]["child"],
                                 "measurement native origin joins actual guardian directchild identity",
                             )
                         except BaseException as error:
                             if run_error is None:
                                 run_error = error
                             else:
-                                run_error.add_note("measurement origin secondary: " + repr(error))
+                                run_error.add_note(
+                                    "measurement origin secondary: " + repr(error)
+                                )
                     if result["data"]["status"] != "PASS":
                         error = Refused(
                             "durable data finalization incomplete: "
                             + json.dumps(result["data"]["errors"])
                         )
                         if run_error is not None:
-                            run_error.add_note("data finalization secondary: " + str(error))
+                            run_error.add_note(
+                                "data finalization secondary: " + str(error)
+                            )
                         else:
                             run_error = error
                     if run_error is not None:
@@ -4282,7 +4567,9 @@ def execute(
                             {"stage": "TMP_cleanup", **error_fact(cleanup_error)}
                         )
                         if active_error is not None:
-                            active_error.add_note("TMP cleanup secondary: " + repr(cleanup_error))
+                            active_error.add_note(
+                                "TMP cleanup secondary: " + repr(cleanup_error)
+                            )
                         else:
                             raise
                     finally:
@@ -4322,7 +4609,9 @@ def execute(
                 else:
                     primary = error
     if primary is not None:
-        primary.add_note("lifecycle partial facts: " + json.dumps(result, allow_nan=False))
+        primary.add_note(
+            "lifecycle partial facts: " + json.dumps(result, allow_nan=False)
+        )
         raise primary
     return result
 
@@ -4351,7 +4640,9 @@ def abnormal_run_failure(directory, job_ref, *, origin_ref=None):
         bound(directory / "intent.json")[0]["sha256"] == intent_ref["sha256"],
         "original copied intent drift",
     )
-    admitted = {k: v for k, v in spec.items() if k not in {"admission", "intent_sha256"}}
+    admitted = {
+        k: v for k, v in spec.items() if k not in {"admission", "intent_sha256"}
+    }
     require(
         sha(json.dumps(admitted, sort_keys=True, separators=(",", ":")).encode())
         == spec["intent_sha256"],
@@ -4405,7 +4696,8 @@ def abnormal_run_failure(directory, job_ref, *, origin_ref=None):
         require(origin_ref is not None, "independent operation origin required")
         custody_path = Path(origin_ref["path"])
         require(
-            custody_path.is_relative_to(ORIGIN_CUSTODY) and custody_path.resolve() == custody_path,
+            custody_path.is_relative_to(ORIGIN_CUSTODY)
+            and custody_path.resolve() == custody_path,
             "historical origin requires Root integration custody",
         )
         custody = document(origin_ref)
@@ -4474,7 +4766,9 @@ def abnormal_run_failure(directory, job_ref, *, origin_ref=None):
     except BaseException as error:
         secondary.append({"stage": "partial_data_collection", **error_fact(error)})
         data = {"status": "FAILED", "files": [], "errors": secondary.copy()}
-    data["status"] = "FAILED"  # Available bytes never imply returned publication or completion.
+    data["status"] = (
+        "FAILED"  # Available bytes never imply returned publication or completion.
+    )
     data["numerical_qualification"] = None
     data["journal_flush_sync_close"] = "UNKNOWN"
     data["incomplete_marker"] = None
@@ -4496,7 +4790,9 @@ def abnormal_run_failure(directory, job_ref, *, origin_ref=None):
         "secondary": [],
     }
     try:
-        check["full_log"] = bound(directory / "run.full.log", spec["limits"]["log_B"])[0]
+        check["full_log"] = bound(directory / "run.full.log", spec["limits"]["log_B"])[
+            0
+        ]
     except BaseException as error:
         check["secondary"].append({"stage": "available_log", **error_fact(error)})
     return {
@@ -4552,12 +4848,17 @@ def _prepare_completion(directory, job_ref, *, failure=None, resources=None):
     with (directory / "finalizing").open("xb"):
         pass  # Restart cannot run a scientific command or independent finalizers twice.
     candidate = (
-        failure if failure is not None else json.loads((directory / "candidate.json").read_bytes())
+        failure
+        if failure is not None
+        else json.loads((directory / "candidate.json").read_bytes())
     )
     errors = []
     job = {}
     outer_joined = False
-    if candidate["status"] != "PENDING_FINALIZATION" or candidate["cleanup_complete"] is not True:
+    if (
+        candidate["status"] != "PENDING_FINALIZATION"
+        or candidate["cleanup_complete"] is not True
+    ):
         errors.append({"stage": "candidate", "facts": candidate["primary"]})
     try:
         job = document(job_ref)
@@ -4605,7 +4906,9 @@ def _prepare_completion(directory, job_ref, *, failure=None, resources=None):
         ]
         require(cfg["argv"] == expected, "different lifecycle job")
     except BaseException as error:
-        errors.append({"stage": "outer_job", **error_fact(error), "available_result": job})
+        errors.append(
+            {"stage": "outer_job", **error_fact(error), "available_result": job}
+        )
     for check in candidate["checks"]:
         for field in ("full_log", "persisted_process_receipt"):
             try:
@@ -4633,7 +4936,8 @@ def _prepare_completion(directory, job_ref, *, failure=None, resources=None):
             settled(check["guardian_return"])
             require(
                 check.get("capture_complete") is True
-                and check["guardian_return"]["log_bytes_seen"] == check["full_log"]["bytes"],
+                and check["guardian_return"]["log_bytes_seen"]
+                == check["full_log"]["bytes"],
                 "full returned command capture not complete",
             )
         except BaseException as error:
@@ -4692,11 +4996,15 @@ def _prepare_completion(directory, job_ref, *, failure=None, resources=None):
     candidate["outer_job_result"] = job_ref
     candidate["secondary"].extend(errors)
     prior_status = candidate["status"]
-    candidate["status"] = "FAILED" if candidate["primary"] or candidate["secondary"] else "PASS"
+    candidate["status"] = (
+        "FAILED" if candidate["primary"] or candidate["secondary"] else "PASS"
+    )
     if prior_status == "CANCELLED" or job.get("outcome") == "cancelled":
         candidate["status"] = "CANCELLED"
     candidate["authoritative_finished_at"] = stamp()
-    candidate["remaining"] = [] if candidate["status"] == "PASS" else job.get("remaining", [])
+    candidate["remaining"] = (
+        [] if candidate["status"] == "PASS" else job.get("remaining", [])
+    )
     candidate["cleanup_complete"] = (
         outer_joined
         and candidate.get("cleanup_complete") is True
@@ -4713,7 +5021,9 @@ def _prepare_completion(directory, job_ref, *, failure=None, resources=None):
             )
             source_check(candidate["source"])
             spec = document(candidate["intent"])
-            require(candidate["source"] == spec["source"], "final adopted Git/Cargo record")
+            require(
+                candidate["source"] == spec["source"], "final adopted Git/Cargo record"
+            )
             require(
                 candidate["tools"] == spec["tools"] and candidate["env"] == spec["env"],
                 "final build tool/environment identity",
@@ -4753,7 +5063,9 @@ def _prepare_completion(directory, job_ref, *, failure=None, resources=None):
             if candidate["status"] != "CANCELLED":
                 candidate["status"] = "FAILED"
             candidate["cleanup_complete"] = False
-            candidate["secondary"].append({"stage": "final_artifact_source", **error_fact(error)})
+            candidate["secondary"].append(
+                {"stage": "final_artifact_source", **error_fact(error)}
+            )
     try:
         new_json(directory / "manifest.json", candidate, resources=resources)
         fd = os.open(directory, os.O_DIRECTORY)
@@ -4764,7 +5076,9 @@ def _prepare_completion(directory, job_ref, *, failure=None, resources=None):
     except BaseException as error:
         # No recursive IO reporting: keep the originating failure and every
         # accumulated secondary available if authoritative publication fails.
-        error.add_note("unpublished completion facts: " + json.dumps(candidate, allow_nan=False))
+        error.add_note(
+            "unpublished completion facts: " + json.dumps(candidate, allow_nan=False)
+        )
         raise
     return candidate
 
@@ -4780,7 +5094,8 @@ def finalize(
 ):
     directory = Path(directory)
     require(
-        not (directory / "manifest.json").exists() and not (directory / "finalizing").exists(),
+        not (directory / "manifest.json").exists()
+        and not (directory / "finalizing").exists(),
         "duplicate finalization refused",
     )
     candidate_path = directory / "candidate.json"
@@ -4804,7 +5119,9 @@ def finalize(
             if candidate_path.exists()
             else abnormal_run_failure(directory, job_ref, origin_ref=origin_ref)
         )
-        completion = _prepare_completion(directory, job_ref, failure=failure, resources=resources)
+        completion = _prepare_completion(
+            directory, job_ref, failure=failure, resources=resources
+        )
         # Critical reads, direct waits, data/log writes, lease/handle closes and
         # independent finalizers precede this last fallible publication operation.
         seen = set()
@@ -4831,7 +5148,9 @@ def operation_order(settings):
     runs = settings.get("runs", [])
     require(isinstance(runs, list), "finite configured RUN list")
     if runs:
-        require(arena is None and not measurements, "configured RUNs have one serial order")
+        require(
+            arena is None and not measurements, "configured RUNs have one serial order"
+        )
         for index in range(len(runs)):
             yield "run", index
         return
@@ -4943,7 +5262,9 @@ def prepare_selected_operation(settings_ref, kind, index):
     phase.mkdir(parents=True)
     if kind != "run" and experiment.get("numerical_qualification") is not None:
         prior = document(original_experiment["numerical_qualification"])
-        numerical = numerical_fields(experiment, accepted_build(experiment["build_manifest"]))
+        numerical = numerical_fields(
+            experiment, accepted_build(experiment["build_manifest"])
+        )
         # Retain the original evidence's scope; these are current loader bindings only.
         for key in (
             "original_evidence",
@@ -4985,7 +5306,9 @@ def sequence(
     config = document(origin["config"])
     order = list(operation_order(settings))
     output = owned(settings["output"], settings["owner"])
-    require(not output.exists(), "finite controller already entered; no automatic restart")
+    require(
+        not output.exists(), "finite controller already entered; no automatic restart"
+    )
     if job_module is None:
         loader = importlib.util.spec_from_file_location(
             "sequence_job", ROOT / "scripts/dev/research-job.py"
@@ -5010,9 +5333,13 @@ def sequence(
         nonlocal stopped
         stopped = True
         if active is not None:
-            job_module.write(active, "cancel.json", {"requested_at": stamp(), "signal": signum})
+            job_module.write(
+                active, "cancel.json", {"requested_at": stamp(), "signal": signum}
+            )
 
-    previous = {sig: signal.signal(sig, cancel) for sig in (signal.SIGTERM, signal.SIGINT)}
+    previous = {
+        sig: signal.signal(sig, cancel) for sig in (signal.SIGTERM, signal.SIGINT)
+    }
     try:
         for kind, index in order:
             require(not stopped, "finite controller cancelled; remaining work UNKNOWN")
@@ -5055,7 +5382,9 @@ def sequence(
                     "thread_id": child_config["thread_id"],
                     "phase": "queued",
                     "created_at": stamp(),
-                    "config_sha256": sha(json.dumps(child_config, sort_keys=True).encode()),
+                    "config_sha256": sha(
+                        json.dumps(child_config, sort_keys=True).encode()
+                    ),
                 },
             )
             entry = {
@@ -5080,7 +5409,9 @@ def sequence(
                     "owning operation failed or not cleaned",
                 )
             else:
-                raise Refused("operation refused before ownership; remaining work UNKNOWN")
+                raise Refused(
+                    "operation refused before ownership; remaining work UNKNOWN"
+                )
             require(
                 returned["outcome"] == "succeeded"
                 and returned.get("direct_child_reaped") is True
@@ -5102,11 +5433,15 @@ def sequence(
             try:
                 signal.signal(sig, handler)
             except BaseException as error:
-                result["secondary"].append({"stage": "signal_restore", **error_fact(error)})
+                result["secondary"].append(
+                    {"stage": "signal_restore", **error_fact(error)}
+                )
         try:
             os.sched_setaffinity(0, initial_affinity)
         except BaseException as error:
-            result["secondary"].append({"stage": "affinity_restore", **error_fact(error)})
+            result["secondary"].append(
+                {"stage": "affinity_restore", **error_fact(error)}
+            )
         child_results = []
         for entry in result["operations"]:
             try:
@@ -5118,7 +5453,9 @@ def sequence(
             status="CANCELLED"
             if stopped
             else ("FAILED" if result["primary"] or result["secondary"] else "PASS"),
-            completed_operations=sum(x.get("completed") is True for x in result["operations"]),
+            completed_operations=sum(
+                x.get("completed") is True for x in result["operations"]
+            ),
             selected_operations=len(order),
             reader_STOP=stamp(),
             launch_affinity_restored=sorted(os.sched_getaffinity(0)),
@@ -5127,11 +5464,16 @@ def sequence(
                 for child in child_results
             ),
             remaining=None
-            if any(child is None or child.get("remaining") is None for child in child_results)
+            if any(
+                child is None or child.get("remaining") is None
+                for child in child_results
+            )
             else [member for child in child_results for member in child["remaining"]],
         )
         new_json(output / "result.json", result)
-    require(result["status"] == "PASS", "finite execution stopped; see its original result")
+    require(
+        result["status"] == "PASS", "finite execution stopped; see its original result"
+    )
     return result
 
 
@@ -5147,7 +5489,10 @@ def main():
     p.add_argument("--experiment-sha256", required=True)
     p = commands.add_parser("sequence")
     p.add_argument(
-        "--intent", type=Path, required=True, help="One selected finite settings snapshot"
+        "--intent",
+        type=Path,
+        required=True,
+        help="One selected finite settings snapshot",
     )
     p.add_argument("--sha256", required=True)
     p = commands.add_parser("finalize")
@@ -5163,11 +5508,15 @@ def main():
     if args.command == "finalize":
         ref, _ = bound(args.job_result)
         require(ref["sha256"] == args.sha256, "actual job result binding")
-        require(bool(args.origin_record) == bool(args.origin_sha256), "origin path/SHA pair")
+        require(
+            bool(args.origin_record) == bool(args.origin_sha256), "origin path/SHA pair"
+        )
         origin_ref = None
         if args.origin_record is not None:
             origin_ref, _ = bound(args.origin_record)
-            require(origin_ref["sha256"] == args.origin_sha256, "independent origin binding")
+            require(
+                origin_ref["sha256"] == args.origin_sha256, "independent origin binding"
+            )
         result = finalize(args.operation, ref, origin_ref=origin_ref)
         return 0 if result["status"] == "PASS" else 1
     ref, _ = bound(args.intent)

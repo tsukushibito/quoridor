@@ -36,6 +36,10 @@ Rustのbuild依存管理はCargo/rustcを正本とする。同じbuildを認定�
 
 ## 品質確認
 
+arena/decisionsと保存解析の現役ownerは既存plan/configを消費し、family/slot/matchup/engine順序・model/history・depth/time/reserve・ordering設定と予定分母を照合する。解析seed/resamples/central intervalは選択configから取り、engine IDをSigma/Alphaの意味へ固定しない。選択authorityは実親job/Run/settings又は既存issued admissionで、二つの可変fileが相互一致するだけでは代用できない。元native publicationは元Build/imageに束縛したまま、解析toolの版と混同しない。詳細と未対応backend/modeは[runner手順](../../crates/quoridor-runner/README.md#configured-research-plans-and-saved-analysis)を参照する。
+
+generation-onlyの固定plan/hash・件数は、その明示issued generation subjectの入口に残る。generic arena解析の128/768/三engine等とは別のcallerで、既承認生成や381の選択をarena保守だけで変更しない。保存解析/NN0 metadata試験の成功はmodel/backend/実棋力資格ではない。
+
 ```bash
 source scripts/dev/project-env.sh
 bash scripts/dev/project-env.sh python scripts/dev/check-research.py --syntax-only

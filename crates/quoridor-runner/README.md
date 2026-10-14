@@ -79,15 +79,57 @@ them. Stats include discarded partial work; unavailable leaf/physical NN counter
 last-completed-iteration timestamps are explicit nulls. NNUE has no extra warmup here;
 backend counters separately record any provider warmup.
 
-`whole_wall_time` is a future comparison boundary. Current Sigma uses fixed K and
-cannot qualify wall time; attempts to configure timed MCTS are rejected. For later
-Sigma-vs-Sigma confirmation, use `sigma_fixed_k_diagnostic`, two `mcts` engines and the
-same explicit frozen `inference` backend/model, seed and K; it is a diagnostic with a
-different denominator. Root mean, root NN and selected-child mean are distinct typed
+`whole_wall_time` uses the maintained timed Sigma/Alpha caller, with one game and
+two AI workers plus the main receipt/deadline owner. Sigma requires the declared ORT
+model/library/backend and a positive caller clock/reserve; it does not support
+completed-depth evaluator mode. Fixed K alone is not an equal-time qualification.
+Root mean, root NN and selected-child mean are distinct typed
 book Q definitions, with explicit perspective and aggregation. Saved Q is signed to
 side-to-move; abs(Q)<=0.2 is tagged provisional main, 0.2–0.4 auxiliary, otherwise tilted
 diagnostic. Tags neither select a book automatically nor guarantee calibrated balance.
 No Sigma book generation, GPU matches or model acquisition is performed by these presets.
+
+### Configured research plans and saved analysis
+
+The existing integration-selected `quoridor.research.arena-plan.v1` owns family IDs,
+matchup IDs and engine order, model references, batch/config references and the full
+slot schedule. Every game matchup covers both colours of every selected family;
+`decisions` covers one proposal per selected parent/declared engine. IDs need not be
+consecutive and need not identify a backend. Owners check unique slots/batches,
+local/global order and exact book prefixes/full history. The generic plan retains
+its bounded-control maximum of4096 slots; obsolete96-parent/288-decision experiment
+ceilings are removed.
+
+Alpha research modes are `evaluator_fixed_depth`, `evaluator_wall_time` and
+`whole_wall_time`. Depth/node limits, caller time, return reserve and TT request are
+actual config settings. Fixed depth has no move clock/reserve; evaluator comparisons
+keep paired search limits/implementation equal. The arena boolean
+`disable_continuation_static_ordering` selects existing Alpha factories: false/omitted
+uses current product ordering, true disables continuation/static. It changes neither
+Alpha into Sigma nor Sigma into a completed-depth search. Book replay, cancellation,
+legality, receipt/drain and loaded identities stay with their existing owners; valid
+JSON alone is no scientific qualification.
+
+Saved `quoridor.arena-analysis.v1` config selects positive `bootstrap_resamples`, a
+u64 `bootstrap_seed` and percentage `central_interval` strictly between0 and100%.
+Family resampling is conditional on complete colour pairs and remains exploratory;
+the same sampled family indices are shared across matchups. Endpoints use floor/ceil
+indices of the central interval. Optional `linked_examples_limit` controls diagnostic
+display retention (default12), never the planned denominator or parent replacement.
+Diagnostic plan/selection may both be null; otherwise their complete batch census and
+declared pre-output selection flag/count are required. Selection parent correspondence
+is reported as opaque/unverified; actual proposals retain the admitted decision
+book/config full-history authority. Metric roles follow engine kinds, even when
+Sigma has an arbitrary ID or Alpha has ID0. Missing/failed/partial results remain
+UNKNOWN in the complete selected denominators and bounds.
+
+The immutable selected Run/settings or existing issued admission supplies authority;
+two substituted agreeing config/plan files are insufficient. Saved producer archives
+retain their own Build/image references; a different saved-analysis executable does
+not require replay or image relabelling. Distinct producer Builds must be declared
+analysis inputs and match their original native publications. Runtime image/model/
+library/clock changes require their owning checks; count/display/analysis settings
+outside that timed subject do not create new inference calls.
 
 Arena `score` is now the complete-pair mean under schema `quoridor-arena-v2`. The summary
 also records planned/started/completed games, complete/incomplete pairs, typed unknown
