@@ -455,11 +455,11 @@ Actual exposures are12800added versus6400added+6400public, both200updates; reduc
 
 ### 生成・分割・教師の推奨設定
 
-上限1280の新規familyを一度だけ用意し、1 familyにつき固定D同士の1 mainlineを生成する。序盤長4/8/12/16を各320、round-robin順、prefix seed38020261013とする。既存teacher-pilotの合法action idをsortしてxorshift64で選ぶ方式を再用し、探索値・モデル・勝敗による開始局面の選別をしない。familyごとのseed導出と32候補attemptも既存方式を再用する。終局済み・不正・重複候補はこの有限準備内で拒否し、32回で得られなかったfamilyを欠測として残す。対局後の不都合な結果を置き換えない。
+上限1280の生成requestsを一度だけ用意し、1 requestにつき固定D同士の1 mainlineを生成する。反転・延長・同endpointをまとめるcollision familyの数Fとrequest数は区別する。序盤長4/8/12/16を各320、round-robin順、prefix seed38020261013とする。既存teacher-pilotの合法action idをsortしてxorshift64で選ぶ方式を再用し、探索値・モデル・勝敗による開始局面の選別をしない。familyごとのseed導出と32候補attemptも既存方式を再用する。終局済み・不正・重複候補はこの有限準備内で拒否し、32回で得られなかったfamilyを欠測として残す。対局後の不都合な結果を置き換えない。
 
 全1280開始棋譜と別評価用64開始棋譜は、生成結果を見る前に固定する。左右反転を同じ系列として正規化し、既存の比較bookと新しいT/V/evaluationの間で同一・反転同一の開始棋譜や、その延長系列を別familyへ振り分けない。新しい開始局面の同一・反転同一geometryも限定集合内で確認する。これには現在のexact-prefix重複検査の小さな拡張が必要で、公開全corpus走査や新しい全域censusを前提にしない。公開側の元対局・派生元系列がUNKNOWNである制約は残る。
 
-canonical familyのSHA256＋split seed38020261014による既存rank方式で、対局前に1024T/256Vへ固定する。反転・派生行は元familyのsplitを継承し、失敗でT/Vの穴が生じても再割当てしない。四つの320局バッチは同じglobal schedule/partitionを参照し、通常childwait・保存・cleanup後にcodeで次バッチへ進む。バッチ毎のLLM受付や新しいadmission文書は不要である。D/Dの色交換を別familyとして倍増しない。
+canonical collision familyのSHA256＋split seed38020261014による既存rank方式で、対局前にunique family数Fのfloor(4F/5)をT、残りをVへ固定する。1024T/256Vというrequest数は保証されず、実family/requestの各分母を保存する。反転・派生行は元familyのsplitを継承し、失敗でT/Vの穴が生じても再割当てしない。四つの320局バッチは同じglobal schedule/partitionを参照し、通常childwait・保存・cleanup後にcodeで次バッチへ進む。バッチ毎のLLM受付や新しいadmission文書は不要である。D/Dの色交換を別familyとして倍増しない。
 
 固定Dは現行(0,8 tanh)、PVS/TT4096、completed depth6、1手100M nodes、標準ルール・実full historyを再用する。現pilotの1G max_total_nodesは全gamesで共有するaggregate NodeBudgetであり、1局枠ではない。推奨案ではその同じ共有budgetへ1バッチ40G／全4バッチ160G nodesを明示設定する（旧8局1Gの数量比例）。これは未採択のwhole-work上限で、全局D6完了の保証ではない。上限到達で未完了になった局を補充せず停止する。200plyは序盤を含むtotal plyで、goal→真正threefold→200ply censorの既存順序を保つ。1手がD6未完了・実error・取消なら原事実を保存して停止し、完了した別familyを失敗扱いへ巻き込まない。通常の200ply UNKNOWNには勝敗教師を付けず、欠測数・実深さ・費用を記録する。実error後の自動再実行/refillはしない。
 
@@ -475,9 +475,9 @@ batch2048の各半分をnewD T1024／公開T1024とし、全2048のrow MSEを一
 
 Rを実際に残ったnewD T-view行数とし、U=ceil(8R/1024)、最大512更新とする。newD露出は1024U（8Rからのfull-batch端数増加は最大1023行）、公開露出も同数。T-view上限65536行なので全training forwardsは最大1048576。TまたはVが空ならfitへ進まず欠測として報告する。early-stopは100更新毎と最終更新の観測で、有意改善max(1e-8,1e-4×直前best newD-V MSE)が5回連続なくなれば停止する。追加epoch/fitで救済しない。
 
-各観測ではfull opened-public Vとfull newD Vを測り、固定8192 public-T診断行（seed38020261019、without replacement）と最大8192 newD T-view行も別panelへ保存する。checkpointはINITIAL参照／BEST／実最終LASTだけで、途中観測ごとに重みコピーを増やさない。BESTは「public V MSEが同じ実INITIAL以下、かつnewD V MSEがINITIALより小さい」観測の中で最小newD V MSE、同値は早い更新を選ぶ。該当しなければINITIALをBESTとして改善なしと報告する。これはopened Vを選択に使う条件付き判断で、独立汎化評価ではない。後の256局をcheckpoint選び直しへ使わない。
+各観測ではfull opened-public Vとfull newD Vを測り、固定8192 public-T診断行（seed38020261019、without replacement）と最大8192 newD T-view行も別panelへ保存する。checkpointはINITIAL参照／BEST／実最終LASTだけで、途中観測ごとに重みコピーを増やさない。旧提案settings66cbd755のBESTは「public V MSEが同じ実INITIAL以下、かつnewD V MSEがINITIALより小さい」観測の中で最小newD V MSE、同値は早い更新を選ぶpublic_non_regression=true gateである。現在の未選択提案settingse268c0f7はfalseとして、newD VでBESTを選びpublic Vは別監視とする案を明示した。true gateも代案で、どちらも人間の選択済み条件にはしない。該当する改善がなければINITIALをBESTとして改善なしと報告する。これはopened Vを選択に使う条件付き判断で、独立汎化評価ではない。後の256局をcheckpoint選び直しへ使わない。
 
-最大512更新なら観測は0/100/200/300/400/500/512の7点。256V families×200plyの51200行を保守的上限として、各観測486734 forwards以下、全曲線3407138以下。trainingと合わせ4455714以下で、必要なexport/native対応確認・初期binding・最終読出し等も含む一回fitの提案上限は**6M実row-forwards**とする。存在しないcounterを0にせず、計測forwardも合算する。重複済みの測定をcheckpoint確認名目で再実行しない。経過時間の予測や推論校正は置かない。
+最大512更新なら観測は0/100/200/300/400/500/512の7点。旧4455714の計算はVを256requests×200plyの51200行と仮定した条件付き価格で、collision family分割では無条件の上限にできない。現在はnewD Vに全243200 potential rowsを割り当てる保守的計算とし、7×(public V419150＋newD V243200＋T診断8192×2)=4751138、training1048576と合わせ**5799714 forwards**、6Mまで200286余裕と訂正する。必要なexport/native対応確認・初期binding・最終読出し等も含む一回fitの提案上限は**6M実row-forwards**のままで、実cache件数を使う既存planned_workがempty T/Vや上限超過をmodel開始前に拒否する。存在しないcounterを0にせず、計測forwardも合算する。重複済みの測定をcheckpoint確認名目で再実行しない。経過時間の予測や推論校正は置かない。
 
 ### 評価と原因分析
 
@@ -540,3 +540,11 @@ learnerは通常の`train --cache --output --config`に`experiment.study="mixed-
 実行を選択した場合の出力先案は `.worktree/assets/data/fixed-d-sigma-mixture380-v1/`（schedule/partition・generation・compact）、`.worktree/assets/checkpoints/fixed-d-sigma-mixture380-v1/`（候補と曲線）、`.worktree/arena-evaluation/.artifacts/fixed-d-sigma-mixture380-v1/`（evaluation/analysis）とする。現時点では作成しない。各段階の記録単位は**実設定snapshot＋結果の一組**で、モデル・入力・RAWは結果内の参照、progressは同じ結果のjournalに保存する。別のsource一覧・control/acceptance証明・バッチ毎手書き台帳を必須成果物にしない。
 
 次の人間判断は、この1280/64-row/50:50/batch2048/LR1e-4/最大8 newD露出/上記BEST条件/256局/whole8GiBと未完了方針を一回案として選ぶか、どの重要設定を変えるかである。計画leafの完了は新生成・fit・対局・任意N配分の発行ではない。既承認の374診断/349解釈と元RAW/FAILED/費用、models/defaults/N/seals/fits96/323pauseは保持する。
+
+### 混合学習の実運用準備（2026-10-14、科学entryなし）
+
+[保存した未選択設定・参照・資源/保存観測](../../research-data/ai-sigma/mixed-runtime342-16/receipt.json)は、既存381のconverter Build14764cb2／runner Buildf8890ea6／interop2961d46cを元scopeで再用したもので、新資格や成功suite再演ではない。current refs／同じ設定形式／必要parser一度と整形前後JSON値一致／実readerSTOP・owned[]を確認した。実未生成schedule/partition/stream/cache/newweightsのFileRefsはnullで、空の入力やdummy hashで実行可能とは表示しない。混合率・cap64/all・publicV gate・whole8GiB/十分容量・一試行委任は未選択のままである。
+
+既存sequenceのrunsは事前に束縛したExperimentの静的列で、prepare_selected_operationは未来のstream/cache/weightsを自動発見しない。4通常生成RUN→1converter→通常train→実weights対応→初回256arenaという接続は、選択後に既存の同preparation境界で実際の先行出力を後段へ束縛する残作業である。新scheduler/registry/認定や各stageの手動ACK chainを増やさない。現在の未選択設定はこのまま起動可能なjobではない。
+
+dated covered24.161GBと後続の限定保持観測は現在global占有の証明ではなく、8GiB支持は未発行。fit-local128MiB guardは全工程8GiB unionでない。科学委任後、既存covered＋実際の既知増分・対象dest/cache/serialtarget/private/log/TMPに限定してwholeのowned unionとdecimal50GBの成立を確定する。旧49.99GB forecastをactual扱いせず、全asset監査・モデル/RAW削除・compression creditを入口にしない。02:54ZのCPU/RAM/RTX3060・installed package METADATA観測は将来のallocation/静穏・ABI/学習resident/速度の資格ではなく、sourceCPU3／GPU0の準備でGPU/modelを初期化していない。生成2workersとGPU learnerの配置/競合/whole資源は、実起動境界で調整する未選択案に留める。
