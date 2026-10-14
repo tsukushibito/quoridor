@@ -78,6 +78,7 @@ fn measurement394_completed_callback_preserves_cumulative_and_final_partial_scop
             settings: Settings {
                 roots: vec![],
                 profile: Profile::Control,
+                lmr: false,
                 tt_entries: 4096,
                 use_tt: false,
                 use_pvs: true,

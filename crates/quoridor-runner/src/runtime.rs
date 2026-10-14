@@ -587,7 +587,7 @@ fn arena_alpha_session(
             evaluator,
             base,
             capacity,
-            alphabeta::ScoreDomain::LEGACY,
+            quoridor_ai::score::ScoreDomain::LEGACY,
             profile,
             false,
         )?;
