@@ -121,6 +121,14 @@ setup/drop込みwholeはplain-before11.583107747秒／sampled11.667982548秒／p
 
 次の候補はControl/no-policy/signed-score限定で既存Rankingのrank＋降順score＋昇順ActionIDを局面内で一度だけ合成する案である。policy total_cmp/±0とunsigned経路は保持し、順序・score・TT・PVS・history・合法性を変えない方向。比較器単体費・利益は未測定で、追加keyのstore/cache領域が逆効果にもなり得る。現profileは選択材料の収集まで完了で、候補の実装/build/数値比較、追加sampling/instrumentation/roots/warmup/refill/Cheap/対局/fitは未発行。重要な方式/特徴/model/学習条件変更は具体案と費用をPolicyへ戻す。通常の保存解析・STOP/cleanup/usage・owner closeにACKや新reviewを挟まない。元結果/RAW/FAILED/費/UNKNOWN、323pause/fits96/models/defaults/N/seals、混合学習未選択は維持する。
 
+## Controlの局面内合成比較キー（389、2026-10-14）
+
+環境復旧後の明示指示で、388の候補からControl/no-policy/signedの一差分だけを実装し、必要software・順位/key境界の独立確認・一度のControl O→N→N→O24calls／12sessions／72M有限採否まで実施した。旧bootで完了した388を再測定せず、今回の両O/両Nはfresh boot6c2e177d内で計測した。Main177b006のRanking::sort_controlは既存priorityからrank/降順signedscore/昇順ActionIDを一つのu64へ一度符号化し、標準unstable sortはkeyだけを比較する。rank bits40+／32bit score bits8..39／合法ID0..208 low8を分離し、signed変換は全i32域で2^31-1-scoreに等しい。nominal1,672Bの一時stack/初期化/合法手一巡を加え、heap・永続cache・trait・設定/profile・score/model/TT/pruningを加えない。既存Rank/Observationを正本とし、policy total_cmp/±0・unsigned・非Control eagerと検査/取消/error/復元を保つ。
+
+新4＋関連既存3 assertions／research compile／researchとresearch-diagnostics Clippy／optimized BUILD実PASS、限定reviewはclear0/0。O accepted child-map ced70ad8/Buildf4482c31と真正N09149bda/Builda2ae2162、同BEST43/TT4096/PVS/rules/既存6roots/capsを使用した。全24COMPLETE、depth/valuebits/action/exactPV/全30記録work/legal/fullhistoryroot/parent/stopは全6contextsで一致。setup/drop込みwhole中央値O11.613133087秒／N9.943005585秒、N/O0.856186312（観測約14.381%短い）、両Nとも同root O中央値×1.10超の例0で一差分を保持する。両Nは全6rootsでO中央値より短いが、2回/版・有限rootsから普遍的speedup/統計的有意差/棋力/defaultを推定しない。key作成/store/cache費も含むwhole差であり、比較器単体の因果時間や旧sort shareの回収率ではない。
+
+[保存receipt](../../research-data/ai-sigma/control-ranking-key389/receipt.json)と[局面・費・限界の詳細](../../.artifacts/research-team/integration324/control-ranking-key389-v1/finite24-v1/collection-v1/report-ja.md)を参照する。CPU2/guardian4/family4GiB/GPU0、ext4/common sequence、実STOP/reap/handles/TMP消去/owned[]、ordinary postusageとdecimal50GBを維持した。変更後hotspot/実stack frame/cache量はUNKNOWN。Control ordering全体の完了や新方式の採用を意味せず、追加candidate/sampling/roots/warmup/refill/tuning/Cheap/対局/生成/fitは未発行。元RAW/FAILED/費/UNKNOWN、323pause/fits96/models/defaults/N/seals、混合学習未選択は不変。
+
 ## Compact board TT と外部の反復履歴（359、2026-10-10）
 
 人間はTT entryごとの全履歴保存を止めるよう指示し、359で compact board-key TT と外部 canonical repetition history の実装を選んだ。この表現方向について354のcapacity-only未選択状態を置き換えるが、351/354を再開せず、2MiB化・eviction/reset・容量sweep・selective search・fit・新対局・349 perfの許可には広げない。4096 slots/1MiBから始める。

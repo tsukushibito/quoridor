@@ -1528,3 +1528,22 @@ inclusiveはcallchain内のgroup unionで互いに重複し、合計しない。
 次の小差分候補は、Controlのpolicyなし・signed score経路だけで既存PV/goal/killer rank＋降順score＋昇順ActionIDの比較用合成キーを各合法手につき一度作り、比較器の反復処理を減らす案である。policy total_cmp（±0を含む）とunsigned既存経路は対象外に保つ。sort self157samplesが選択材料だが比較器だけの費用・速度利益は未測定で、固定長keyの追加store/cache footprintにも費用がある。既存rank storageの再用又は最大209×u64程度の局面内領域を検討する提案に留め、実装・採用・別の有限比較は未発行。map/head/検査削除を一括追加しない。
 
 実timingはCPU2一つ／guardian4／family4GiB／GPU0／既存ext4で直列に行い、[実STOP](../.artifacts/research-team/integration324/current-control-perf388-v1/STOP.json)に全元native/perf/guardian/outerのfresh absent/different、直接commandのreap/handles、TMP消失、owned[]を記録した。guardianの直接回収とperf配下nativeの消失確認は区別する。outer52.318079782秒、保存decode3commands計3.805325612秒を別記し、nested費を重複加算しない。返却済みsettled maskと元persisted receiptの状態は別原物のまま。保存exportのbinary分類／acceptance directory修復は通常保存処理で、成功計測やdecodeの再演はない。対象実usageを一度確認し、混合学習準備の閉鎖は科学委任や生成/fit/256評価開始へ広げない。旧RAW/FAILED/費/UNKNOWN、323USERPAUSE／fits96／models/defaults/N/seals／mixed未選択を維持する。
+
+Controlの比較用キーを一度合成する一候補は、環境復旧後の明示承認により実装・検証・一度の有限採否まで進めた（389、2026-10-14）。Main177b006の3pathsだけを変更し、Control/no-policy/signed限定で既存Rankingのpriorityから`rank << 40 | descending_score << 8 | ActionID`を合法IDごとに一度作る。signed変換は`!(score as u32 ^ (1 << 31))`、全i32域で数学的に`2^31-1-score`となり、rank bits40+／score bits8..39／合法ID0..208の下位8bitsが重ならない。既存の順位階層・降順score・昇順IDを保ち、nominal1,672Bの局面内stackと初期化/合法手一巡を加える。heap/persistent cache/API/profile/score/model/TT/pruning変更はなく、policy total_cmp/±0、unsigned、非Control eager、provider/検査/error/cancel/undoとObservationの順位正本を保持する。
+
+新4＋関連既存3 assertions、research compile、research/research-diagnostics Clippy、真正optimized BUILDが実PASS。[固定3postimagesの限定review](../.artifacts/control-ranking-key389-review-v1/report.md)はsource_clear=true／blockers0／ordinary0。review自身のUNRUNは静的確認のscopeで、実software成功と別に保持した。元author helper literal-format refusalとreview blank-line normalization refusalも変更せず、成功suiteの再演はない。
+
+承認済みControl O→N→N→Oの[24calls保存比較](../.artifacts/research-team/integration324/control-ranking-key389-v1/finite24-v1/collection-v1/report-ja.md)は全COMPLETE／12sessions。Oはaccepted child-map ced70ad8／Buildf4482c31、Nは真正09149bda／Builda2ae2162。同BEST43／TT4096／PVS／rules／原349の6roots・D4各2M/D6各8M、今回boot6c2e177d内で両O/両Nを測定し、旧bootの時間比は使わない。全6contextsの完成depth/valuebits/action/exactPV/全30記録work/legalsets/fullhistoryroot/parent/stopが一致し、既存native checked replayでPV合法性を確認した。
+
+| Control比較キー pass | setup/drop込みwhole秒 |     nodes | evaluations |
+| -------------------- | --------------------: | --------: | ----------: |
+| O-before             |          11.597644543 | 7,049,387 |   5,173,451 |
+| N-first              |           9.818010708 | 7,049,387 |   5,173,451 |
+| N-second             |          10.068000462 | 7,049,387 |   5,173,451 |
+| O-after              |          11.628621631 | 7,049,387 |   5,173,451 |
+
+whole中央値O11.613133087秒／N9.943005585秒、N/O0.856186312（この有限比較では約14.381%短い）。同rootの両NがともにO中央値×1.10を超える例0で、指定基準を満たすため一差分を保持する。両Nは全6rootsで各O中央値より短かった。coldD6のO root中央値11.042867496秒に対してNは9.249331360／9.572823425秒で、wholeの大半を占める。局面別時間、setup/drop/reset/teardown、出力bits/PV/workは[詳細](../.artifacts/research-team/integration324/control-ranking-key389-v1/finite24-v1/collection-v1/interpretation.json)に保存した。同じ記録探索workでの実whole差にはkeyの追加store/stack/cache費も含むが、比較器単体の因果費や内部命令数を測ったものではない。2回/版・有限6rootsから一般speedup/全局面改善/統計的有意性/棋力/defaultを断定しない。変更後のhotspot順位、実stack frame/cache量はUNKNOWNで、旧profile shareをそのまま現在へ転記しない。
+
+実nodes28,197,548／72M。software job8eab3f5f outer89.735175555秒とfinite joba4409543 outer64.270327678秒は別記しnested費を加算しない。source/read/static/formatの成功・失敗費は各元receiptへ保持する。CPU2一つ／guardian4／family4GiB／GPU0／ext4/common sequenceで実timingだけ重い処理を直列化し、[実STOP](../.artifacts/research-team/integration324/control-ranking-key389-v1/finite24-v1/STOP.json)で元native/guardian/outerのfresh absent/different・directwait/reap/handles・TMP消失・owned[]を確認した。[109file exact-byte保存receipt](../research-data/ai-sigma/control-ranking-key389/receipt.json)に設定・全結果/journal・BUILD/チェックlogs・review・source patchを対応させた。対象実usageを一度確認し、元資産やshared targetの保持を新規増分/peak/global現占有と混同しない。
+
+今回の一候補は有限採用まで完了。Controlのordering全体をやり切ったとはせず、追加candidate/新Perf/roots/warmup/refill/tuning/Cheap/対局/生成/fitは未発行。次の改善箇所を選ぶ時は、比較キーの追加準備・順位/score準備・legal/map/head等の具体的な重複と変更費を確認し、未計測の利益を約束しない。混合学習の実準備CLOSEDを科学委任の回答に読み替えず、323USERPAUSE／旧fits96／models/defaults/N/seals／旧RAW/FAILED/全費/UNKNOWNを維持する。
