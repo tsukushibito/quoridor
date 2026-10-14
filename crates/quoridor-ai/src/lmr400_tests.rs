@@ -102,14 +102,15 @@ fn lmr400_eligibility_uses_frozen_rank_for_tt_goal_killers_and_exact_late_bounda
     let cheap =
         move_ordering::PreparedMoves::eager_lmr(ids.clone(), Some(ranking.protected_bits(&ids)));
     let mut history = ContinuationHistory::new().unwrap();
-    let l = limits(3, false, true);
+    static L: std::sync::LazyLock<SearchLimits> =
+        std::sync::LazyLock::new(|| limits(3, false, true));
     with_state(
         &root,
         &NoCalls,
         &AtomicBool::new(false),
         &mut history,
         |s, _| {
-            s.limits = &l;
+            s.limits = &L;
             s.lmr = true;
             for (mode, prepared) in [
                 (StaticScratch::CheapControl, control),
@@ -235,14 +236,15 @@ fn lmr400_reduced_fail_low_stores_actual_child_depth_and_restores_parent() {
     let action = root.legal_ids()[3];
     let eval = Horizon::new(&root, action, -0.5, 0.5);
     let mut history = ContinuationHistory::new().unwrap();
-    let l = limits(3, true, true);
+    static L: std::sync::LazyLock<SearchLimits> =
+        std::sync::LazyLock::new(|| limits(3, true, true));
     with_state(
         &root,
         &eval,
         &AtomicBool::new(false),
         &mut history,
         |s, c| {
-            s.limits = &l;
+            s.limits = &L;
             let child = warm_child(s, c, action, 0.5);
             let before = (Key::of(c), s.context, s.board);
             assert_eq!(s.reduced_child(c, None, action, 2, 0.0, 1).unwrap(), -0.5);
@@ -275,9 +277,10 @@ fn lmr400_shallow_fail_high_requires_full_child_and_confirmation_error_cancel_re
         eval.fail = failure == 1 || failure == 3;
         eval.cancel = (failure == 2 || failure == 4).then_some(&cancel);
         let mut history = ContinuationHistory::new().unwrap();
-        let l = limits(3, true, true);
+        static L: std::sync::LazyLock<SearchLimits> =
+            std::sync::LazyLock::new(|| limits(3, true, true));
         with_state(&root, &eval, &cancel, &mut history, |s, c| {
-            s.limits = &l;
+            s.limits = &L;
             let child = warm_child(s, c, action, -0.5);
             if failure == 1 || failure == 2 {
                 s.table.clear();
@@ -327,14 +330,15 @@ fn lmr400_fail_high_normal_scout_then_full_window_counts_one_distinct_return() {
     let target = root.legal_ids()[3];
     let eval = Horizon::new(&root, target, 0.5, 0.25);
     let mut history = ContinuationHistory::new().unwrap();
-    let l = limits(3, false, true);
+    static L: std::sync::LazyLock<SearchLimits> =
+        std::sync::LazyLock::new(|| limits(3, false, true));
     with_state(
         &root,
         &eval,
         &AtomicBool::new(false),
         &mut history,
         |s, c| {
-            s.limits = &l;
+            s.limits = &L;
             s.lmr = true;
             s.static_scratch = Some(StaticScratch::CheapControl);
             let before = Key::of(c);
@@ -371,14 +375,15 @@ fn lmr400_selective_fail_low_can_miss_full_width_value_without_claiming_equal_mi
     for enabled in [false, true] {
         let eval = Horizon::new(&root, target, 0.0, 0.5);
         let mut history = ContinuationHistory::new().unwrap();
-        let l = limits(3, false, true);
+        static L: std::sync::LazyLock<SearchLimits> =
+            std::sync::LazyLock::new(|| limits(3, false, true));
         with_state(
             &root,
             &eval,
             &AtomicBool::new(false),
             &mut history,
             |s, c| {
-                s.limits = &l;
+                s.limits = &L;
                 s.lmr = enabled;
                 s.static_scratch = Some(StaticScratch::CheapControl);
                 let before = Key::of(c);
@@ -398,14 +403,15 @@ fn lmr400_shallow_root_goal_repetition_keep_full_depth_and_terminal_contract() {
     let truth = exhaustive(&small, 2, &mut 0);
     for enabled in [false, true] {
         let mut history = ContinuationHistory::new().unwrap();
-        let l = limits(3, false, true);
+        static L: std::sync::LazyLock<SearchLimits> =
+            std::sync::LazyLock::new(|| limits(3, false, true));
         with_state(
             &small,
             &PawnRows,
             &AtomicBool::new(false),
             &mut history,
             |s, c| {
-                s.limits = &l;
+                s.limits = &L;
                 s.lmr = enabled;
                 s.static_scratch = Some(StaticScratch::CheapControl);
                 assert_eq!(
@@ -425,14 +431,15 @@ fn lmr400_shallow_root_goal_repetition_keep_full_depth_and_terminal_contract() {
     let repetition = SigmaContext::from_prefix(&[3, 75, 4, 76, 3, 75, 4, 76]).unwrap();
     for (root, expected) in [(&goal, TERMINAL_SCORE), (&repetition, 0.0)] {
         let mut history = ContinuationHistory::new().unwrap();
-        let l = limits(3, false, true);
+        static L: std::sync::LazyLock<SearchLimits> =
+            std::sync::LazyLock::new(|| limits(3, false, true));
         with_state(
             root,
             &NoCalls,
             &AtomicBool::new(false),
             &mut history,
             |s, c| {
-                s.limits = &l;
+                s.limits = &L;
                 s.lmr = true;
                 s.static_scratch = Some(StaticScratch::CheapControl);
                 assert_eq!(s.negamax(c, None, 3, -1.0, 1.0, 0).unwrap(), expected);
