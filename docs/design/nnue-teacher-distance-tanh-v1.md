@@ -566,3 +566,9 @@ Whole8GiB部分停止を選択した。これは最大1280完了の保証では�
 ### 初期混合試行の明示停止（2026-10-14）
 
 上記選択・実entryの後、人間が「時間かかりすぎ。止めて。」と指示したため、現在の混合試行はUSERPAUSEである。[実STOPと欠落範囲](../../.artifacts/research-team/integration324/mixed-study342-17-v1/user-stop-v1/STOP.json)を正本とし、生成の再開・条件置換・converter/fit/newweights/native/256評価へ進めない。旧selected plan/settingsと途中RAWを当時の実configとして保持し、現在のpauseで過去の選択・費・UNKNOWNを改変しない。停止prefix36件/1,038,388,085 recorded nodesは未終端gzipの観測であり、finalized/audited/学習可用データとは扱わない。データ・学習条件の一般的な自律委任は明示pauseを解除しない。独立した壁距離マップ最適化の既承認scopeは継続する。
+
+### 固定D生成の高速化・並列構成の独立準備（2026-10-14）
+
+新しい独立task392は、現役固定D generatorへのControl/no-policy/signed接続、固定IDのdynamic assignmentとbounded完成回収、必要software/限定review、既存6rootsのCoverage→Control→Control→Coverage 24Search calls/12sessions/72Mの費用確認までを承認された。既存measurementのNNUE専用loader/selectorと生成report/auditの番号順契約に必要な最小修正を施し、別harness/scheduler/registryを作らない。D(0,8tanh)/D6/full-width/PVS/TT4096/rules/STM z教師を維持し、action/PV/work差は記録する。NNUE mapの約6.588%を固定Dの利益にしない。
+
+[資源・未完成入口の準備](../../.artifacts/research-team/integration324/fixed-d-generation392-v1/runtime-preparation.json)は10physicalに対する8game workers＋guardian1＋main/reserve1、family8GiB/host4GiB/GPU0案を保存する。各game1search thread、queue/inflightはworker数に比例する有限量とし、payload/実RSS/時間は必要な実境界で確認する。旧whole8GiB部分停止とdecimal50GBは保持し、fresh bulk支持・新input/出力namespace・設定確定・明示resumeは大量生成の別の未充足条件である。今回のsource/finite24は独立に進め、停止した混合生成・変換・fit/newweights/native/256やその追加準備を再開しない。旧RAW/未終端36records/UNKNOWN/費は原物保持する。
