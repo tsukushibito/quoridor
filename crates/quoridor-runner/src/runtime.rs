@@ -2415,7 +2415,7 @@ impl EvaluationWorkers {
                                 selectivity: "fullwidth-PVS-MPC-OFF-v1".into(),
                             };
                             let base_namespace = namespace;
-                            let namespace = arena_alpha_namespace(&e, base_namespace.clone());
+                            let namespace = arena_alpha_namespace(e, base_namespace.clone());
                             let mut completion = crate::arena_clock::Completion::default();
                             let mut publish = |result: &alphabeta::SearchResult| {
                                 let _ = tx.send(EvaluationEvent::Update(
@@ -2438,7 +2438,7 @@ impl EvaluationWorkers {
                                         evaluator,
                                         base_namespace.clone(),
                                         capacity,
-                                        &e,
+                                        e,
                                         c.arena.as_ref(),
                                     )
                                 },
