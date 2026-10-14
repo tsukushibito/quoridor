@@ -100,6 +100,60 @@ class ArenaLmr400Tests(unittest.TestCase):
         with self.assertRaises(Exception):
             lc.arena_observation(config, forged)
 
+    def test_lmr400_declared_arena_resources_match_actual_family_and_roles(self):
+        from unittest.mock import patch
+
+        config = dict(
+            workers=1,
+            active_games=1,
+            max_batch=1,
+            cpu_cores=[2, 6],
+            management_cpu_core=4,
+            inference_cpu_core=None,
+            arena=dict(comparison="whole_wall_time"),
+        )
+        for issue, gib in [("quoridor-4lc.374", 3), ("quoridor-4lc.400", 4)]:
+            spec = dict(
+                kind="run",
+                experiment={},
+                support={},
+                child_cpu_cores=[2, 4, 6],
+                limits=dict(worker_cpu=2, guardian_cpu=4, family_B=gib * 1024**3),
+            )
+            support = dict(
+                issue=issue,
+                resources=dict(
+                    CPU=3,
+                    threads=1,
+                    GPU=0,
+                    controller_included=True,
+                    family_RAM_B=gib * 1024**3,
+                ),
+            )
+            with patch.object(
+                lc,
+                "document",
+                side_effect=[dict(phase="arena", config={}), config, support],
+            ):
+                self.assertEqual(lc.arena_cpu_cores(spec), [2, 4, 6])
+            for invalid in [0, -1, True, (gib + 1) * 1024**3]:
+                bad = copy.deepcopy(support)
+                bad["resources"]["family_RAM_B"] = invalid
+                with patch.object(
+                    lc,
+                    "document",
+                    side_effect=[dict(phase="arena", config={}), config, bad],
+                ):
+                    with self.assertRaisesRegex(ValueError, "issued three-core"):
+                        lc.arena_cpu_cores(spec)
+            bad = copy.deepcopy(spec)
+            bad["child_cpu_cores"] = [2, 3, 4]
+            with patch.object(
+                lc, "document", side_effect=[dict(phase="arena", config={}), config]
+            ):
+                with self.assertRaisesRegex(ValueError, "launch affinity"):
+                    lc.arena_cpu_cores(bad)
+
 
 if __name__ == "__main__":
     unittest.main()

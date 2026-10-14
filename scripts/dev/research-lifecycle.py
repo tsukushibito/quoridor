@@ -476,12 +476,13 @@ def arena_cpu_cores(spec):
     support = document(spec["support"])
     resources = support.get("resources", {})
     require(
-        support["issue"] == "quoridor-4lc.374"
-        and resources.get("CPU") == 3
+        resources.get("CPU") == 3
         and resources.get("threads") == 1
         and resources.get("GPU") == 0
         and resources.get("controller_included") is True
-        and resources.get("family_RAM_B") == 3 * 1024**3,
+        and type(resources.get("family_RAM_B")) is int
+        and resources["family_RAM_B"] > 0
+        and resources["family_RAM_B"] == spec["limits"]["family_B"],
         "actual issued three-core evaluation family, not corpus/source-only authority",
     )
     return cores
