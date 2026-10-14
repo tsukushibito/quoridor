@@ -230,8 +230,17 @@ impl Position {
     }
     pub fn legal_pawn_mask(self) -> [u8; 81] {
         let mut mask = [0; 81];
+        let mut destinations = self.pawn_destinations();
+        while destinations != 0 {
+            mask[destinations.trailing_zeros() as usize] = 1;
+            destinations &= destinations - 1;
+        }
+        mask
+    }
+    fn pawn_destinations(self) -> u128 {
+        let mut destinations = 0;
         if self.winner.is_some() {
-            return mask;
+            return destinations;
         }
         let own = self.pawns[self.turn as usize];
         let other = self.pawns[(self.turn ^ 1) as usize];
@@ -243,24 +252,24 @@ impl Position {
                 continue;
             }
             if adjacent != other {
-                mask[adjacent as usize] = 1;
+                destinations |= 1u128 << adjacent;
                 continue;
             }
             let behind = step(other, direction);
             if let Some(dest) = behind.filter(|&dest| self.is_edge_open(other, dest)) {
-                mask[dest as usize] = 1;
+                destinations |= 1u128 << dest;
             } else {
                 let sides = if direction < 2 { [2, 3] } else { [0, 1] };
                 for side in sides {
                     if let Some(dest) =
                         step(other, side).filter(|&dest| self.is_edge_open(other, dest))
                     {
-                        mask[dest as usize] = 1;
+                        destinations |= 1u128 << dest;
                     }
                 }
             }
         }
-        mask
+        destinations
     }
     pub fn legal_wall(self, horizontal: bool, anchor: u8) -> bool {
         if !self.wall_geometry(horizontal, anchor) {
@@ -278,19 +287,27 @@ impl Position {
         if self.winner.is_some() || anchor >= 64 || self.walls_remaining[self.turn as usize] == 0 {
             return false;
         }
-        let row = anchor / 8;
-        let col = anchor % 8;
-        if self.has_h(anchor) || self.has_v(anchor) {
-            return false;
-        }
+        let bit = 1u64 << anchor;
+        let walls = if horizontal {
+            self.horizontal
+        } else {
+            self.vertical
+        };
+        (self.horizontal | self.vertical) & bit == 0
+            && walls & Self::overlapping_wall_anchors(bit, horizontal) == 0
+    }
+    /// Same-orientation neighbours on the 8 by 8 anchor grid. Symmetric, so
+    /// this serves both one-wall queries and bulk installed-wall exclusion.
+    fn overlapping_wall_anchors(bits: u64, horizontal: bool) -> u64 {
         if horizontal {
-            if (col > 0 && self.has_h(anchor - 1)) || (col < 7 && self.has_h(anchor + 1)) {
-                return false;
-            }
-        } else if (row > 0 && self.has_v(anchor - 8)) || (row < 7 && self.has_v(anchor + 8)) {
-            return false;
+            const COL0: u64 = 0x0101_0101_0101_0101;
+            const COL7: u64 = 0x8080_8080_8080_8080;
+            ((bits & !COL0) >> 1) | ((bits & !COL7) << 1)
+        } else {
+            const ROW0: u64 = 0xff;
+            const ROW7: u64 = 0xff << 56;
+            ((bits & !ROW0) >> 8) | ((bits & !ROW7) << 8)
         }
-        true
     }
     /// Ascending common Action ID order; the same generator serves Game and AI.
     pub fn legal_action_ids(self) -> Vec<u16> {
@@ -300,10 +317,10 @@ impl Position {
             return Vec::new();
         }
         let mut ids = Vec::with_capacity(209);
-        for (cell, legal) in self.legal_pawn_mask().into_iter().enumerate() {
-            if legal != 0 {
-                ids.push(cell as u16);
-            }
+        let mut destinations = self.pawn_destinations();
+        while destinations != 0 {
+            ids.push(destinations.trailing_zeros() as u16);
+            destinations &= destinations - 1;
         }
         if self.walls_remaining[self.turn as usize] == 0 {
             return ids;
@@ -316,18 +333,23 @@ impl Position {
             return ids;
         }
         let mut posts = WallPosts::of(self);
-        for anchor in 0..64u8 {
-            if self.wall_geometry(true, anchor)
-                && (!posts.closes_cycle(true, anchor)
-                    || edges.with_wall(true, anchor).both_reachable(self.pawns))
+        let occupied = self.horizontal | self.vertical;
+        let mut candidates = !(occupied | Self::overlapping_wall_anchors(self.horizontal, true));
+        while candidates != 0 {
+            let anchor = candidates.trailing_zeros() as u8;
+            candidates &= candidates - 1;
+            if !posts.closes_cycle(true, anchor)
+                || edges.with_wall(true, anchor).both_reachable(self.pawns)
             {
                 ids.push(81 + anchor as u16);
             }
         }
-        for anchor in 0..64u8 {
-            if self.wall_geometry(false, anchor)
-                && (!posts.closes_cycle(false, anchor)
-                    || edges.with_wall(false, anchor).both_reachable(self.pawns))
+        let mut candidates = !(occupied | Self::overlapping_wall_anchors(self.vertical, false));
+        while candidates != 0 {
+            let anchor = candidates.trailing_zeros() as u8;
+            candidates &= candidates - 1;
+            if !posts.closes_cycle(false, anchor)
+                || edges.with_wall(false, anchor).both_reachable(self.pawns)
             {
                 ids.push(145 + anchor as u16);
             }
