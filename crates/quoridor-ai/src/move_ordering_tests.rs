@@ -24,7 +24,7 @@ fn control389_key_preserves_rank_signed_extremes_and_id_ties() {
         None,
         HistoryScores::Signed(&signed),
     );
-    ranking.sort_control(&mut ids);
+    ranking.sort_signed_keys(&mut ids);
     assert_eq!(ids, [208, 80, 4, 81, 2, 3, 1, 0]);
     for pair in ids.windows(2) {
         assert!(
@@ -69,7 +69,7 @@ fn control389_key_full_legal_order_is_in_place_and_observation_uses_same_rank() 
             None,
             HistoryScores::Signed(&signed),
         );
-        ranking.sort_control(&mut ids);
+        ranking.sort_signed_keys(&mut ids);
         assert_eq!(ids, expected);
         assert_eq!(ids.as_ptr(), pointer);
         assert_eq!(ids.capacity(), capacity);
@@ -100,7 +100,7 @@ fn control389_key_excludes_policy_signed_zero_and_unsigned_scores() {
         Some(&policy),
         HistoryScores::Signed(&signed),
     );
-    ranking.sort_control(&mut ids);
+    ranking.sort_signed_keys(&mut ids);
     assert_eq!(ids, [3, 4, 2]);
     let mut unsigned = [0; 209];
     unsigned[2] = u64::MAX;
@@ -113,7 +113,7 @@ fn control389_key_excludes_policy_signed_zero_and_unsigned_scores() {
         None,
         HistoryScores::Unsigned(&unsigned),
     );
-    ranking.sort_control(&mut ids);
+    ranking.sort_signed_keys(&mut ids);
     assert_eq!(ids, [2, 4, 3]);
 }
 

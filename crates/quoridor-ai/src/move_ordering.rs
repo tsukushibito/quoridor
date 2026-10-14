@@ -115,14 +115,14 @@ impl<'a> Ranking<'a> {
         }
     }
 
-    pub fn sort_control(&self, ids: &mut [u16]) {
-        let Some(keys) = self.control_keys(ids) else {
+    pub fn sort_signed_keys(&self, ids: &mut [u16]) {
+        let Some(keys) = self.signed_keys(ids) else {
             return self.sort(ids);
         };
         ids.sort_unstable_by(|&a, &b| keys[a as usize].cmp(&keys[b as usize]));
     }
 
-    pub fn control_keys(&self, ids: &[u16]) -> Option<[u64; 209]> {
+    pub fn signed_keys(&self, ids: &[u16]) -> Option<[u64; 209]> {
         let scores = match self.scores {
             HistoryScores::Signed(scores) if self.policy.is_none() => scores,
             _ => return None,
@@ -139,38 +139,22 @@ impl<'a> Ranking<'a> {
         }
         Some(keys)
     }
-
-    /// Only LMR ON requests this fixed bitset, at the same score/rank freeze.
-    pub fn protected_bits(&self, ids: &[u16]) -> [u64; 4] {
-        let mut bits = [0; 4];
-        for &id in ids {
-            if self.priority(id, true) < 4 {
-                bits[id as usize / 64] |= 1 << (id % 64);
-            }
-        }
-        bits
-    }
 }
 
-/// Existing legal Vec owns each ID once; only eligible Control retains keys.
+/// Existing legal Vec owns each ID once; eligible signed targets retain keys.
 /// No score/history borrow survives preparation. Keys cannot change after a child.
 // The fixed 209-key area is deliberately inline: boxing this variant would add
 // one allocation per eligible node. Its live stack/cache cost is assessed as
 // part of the candidate, including the enum footprint on excluded eager paths.
 #[allow(clippy::large_enum_variant)]
 pub(super) enum PreparedMoves {
-    Eager(EagerMoves),
-    Control {
+    Eager(std::vec::IntoIter<u16>),
+    SignedKeys {
         ids: Vec<u16>,
         keys: [u64; 209],
         next: usize,
         baseline_first: Option<u16>,
     },
-}
-
-pub(super) struct EagerMoves {
-    ids: std::vec::IntoIter<u16>,
-    protected: Option<[u64; 4]>,
 }
 
 #[derive(Clone, Copy)]
@@ -182,22 +166,10 @@ pub(super) enum MoveRead {
 
 impl PreparedMoves {
     pub fn eager(ids: Vec<u16>) -> Self {
-        Self::Eager(EagerMoves {
-            ids: ids.into_iter(),
-            protected: None,
-        })
+        Self::Eager(ids.into_iter())
     }
-    pub fn eager_lmr(ids: Vec<u16>, protected: Option<[u64; 4]>) -> Self {
-        if protected.is_none() {
-            return Self::eager(ids);
-        }
-        Self::Eager(EagerMoves {
-            ids: ids.into_iter(),
-            protected,
-        })
-    }
-    pub fn control(ids: Vec<u16>, keys: [u64; 209], baseline_first: Option<u16>) -> Self {
-        Self::Control {
+    pub fn deferred_signed(ids: Vec<u16>, keys: [u64; 209], baseline_first: Option<u16>) -> Self {
+        Self::SignedKeys {
             ids,
             keys,
             next: 0,
@@ -206,8 +178,8 @@ impl PreparedMoves {
     }
     pub fn len(&self) -> usize {
         match self {
-            Self::Eager(moves) => moves.ids.len(),
-            Self::Control { ids, next, .. } => ids.len() - next,
+            Self::Eager(moves) => moves.len(),
+            Self::SignedKeys { ids, next, .. } => ids.len() - next,
         }
     }
     pub fn is_empty(&self) -> bool {
@@ -215,15 +187,15 @@ impl PreparedMoves {
     }
     pub fn sorted_size(&self) -> Option<usize> {
         match self {
-            Self::Eager(moves) => Some(moves.ids.len()),
-            Self::Control { ids, next, .. } if *next > 1 && ids.len() > 2 => Some(ids.len() - 1),
-            Self::Control { .. } => None,
+            Self::Eager(moves) => Some(moves.len()),
+            Self::SignedKeys { ids, next, .. } if *next > 1 && ids.len() > 2 => Some(ids.len() - 1),
+            Self::SignedKeys { .. } => None,
         }
     }
     pub fn next(&mut self, stats: Option<&mut OrderingStats>) -> Option<(u16, MoveRead)> {
         match self {
-            Self::Eager(moves) => moves.ids.next().map(|id| (id, MoveRead::Sorted)),
-            Self::Control {
+            Self::Eager(moves) => moves.next().map(|id| (id, MoveRead::Sorted)),
+            Self::SignedKeys {
                 ids,
                 keys,
                 next,
@@ -265,11 +237,8 @@ impl PreparedMoves {
 
     pub fn lmr_protected(&self, id: u16) -> bool {
         match self {
-            Self::Control { keys, .. } => keys[id as usize] >> 40 < 4,
-            Self::Eager(moves) => moves
-                .protected
-                .as_ref()
-                .is_none_or(|bits| bits[id as usize / 64] & (1 << (id % 64)) != 0),
+            Self::SignedKeys { keys, .. } => keys[id as usize] >> 40 < 4,
+            Self::Eager(_) => true,
         }
     }
 }
@@ -320,7 +289,9 @@ impl Observation {
         }
     }
 
-    /// First choice versus the same priority tiers/ID ties without history.
+    /// First choice versus priority tiers/ID ties without history or static
+    /// scores. This measures their combined first-choice effect, not either
+    /// contribution alone; both signed targets use this same denominator.
     /// Deferred nodes have no full-order adjacency comparison; its denominator
     /// remains explicit rather than sorting/copying the tail for observation.
     pub fn baseline_first(&self, ranking: &Ranking<'_>, ids: &[u16]) -> Option<u16> {

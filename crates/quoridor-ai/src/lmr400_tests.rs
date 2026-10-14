@@ -94,13 +94,16 @@ fn lmr400_eligibility_uses_frozen_rank_for_tt_goal_killers_and_exact_late_bounda
         None,
         move_ordering::HistoryScores::Signed(&scores),
     );
-    let control = move_ordering::PreparedMoves::control(
+    let control = move_ordering::PreparedMoves::deferred_signed(
         ids.clone(),
-        ranking.control_keys(&ids).unwrap(),
+        ranking.signed_keys(&ids).unwrap(),
         None,
     );
-    let cheap =
-        move_ordering::PreparedMoves::eager_lmr(ids.clone(), Some(ranking.protected_bits(&ids)));
+    let cheap = move_ordering::PreparedMoves::deferred_signed(
+        ids.clone(),
+        ranking.signed_keys(&ids).unwrap(),
+        None,
+    );
     let mut history = ContinuationHistory::new().unwrap();
     static L: std::sync::LazyLock<SearchLimits> =
         std::sync::LazyLock::new(|| limits(3, false, true));
@@ -228,6 +231,87 @@ fn warm_child(s: &mut Search<'_>, root: &SigmaContext, action: u16, value: f32) 
     s.table.committed = s.table.generation;
     s.table.next_generation();
     key
+}
+
+#[test]
+#[cfg(feature = "research-diagnostics")]
+fn shared402_lmr_confirmation_research_keeps_frozen_same_hand_and_tail_cursor() {
+    let p = Position {
+        pawns: [40, 76],
+        walls_remaining: [0, 0],
+        ..Position::default()
+    };
+    let root = SigmaContext::synthetic_diagnostic(p, 0, vec![(p.into(), 1)]).unwrap();
+    assert_eq!(root.legal_ids().len(), 4);
+    static L: std::sync::LazyLock<SearchLimits> =
+        std::sync::LazyLock::new(|| limits(3, true, true));
+    for cheap in [false, true] {
+        let mut history = ContinuationHistory::new().unwrap();
+        // Select the fourth target from the actual current eager rank authority.
+        let target = with_state(
+            &root,
+            &NoCalls,
+            &AtomicBool::new(false),
+            &mut history,
+            |s, c| {
+                s.static_scratch = Some(if cheap {
+                    StaticScratch::Cheap
+                } else {
+                    StaticScratch::CheapControl
+                });
+                s.ordered(c, None, None, 0, c.legal_ids()).unwrap()[3]
+            },
+        );
+        let eval = Horizon::new(&root, target, 0.5, 0.25);
+        let mut history = ContinuationHistory::new().unwrap();
+        with_state(
+            &root,
+            &eval,
+            &AtomicBool::new(false),
+            &mut history,
+            |s, c| {
+                s.limits = &L;
+                s.lmr = true;
+                s.static_scratch = Some(if cheap {
+                    StaticScratch::Cheap
+                } else {
+                    StaticScratch::CheapControl
+                });
+                let expected = s.ordered(c, None, None, 0, c.legal_ids()).unwrap();
+                let mut prepared = s.prepared_moves(c, None, None, 0, c.legal_ids()).unwrap();
+                let mut reads = OrderingStats::default();
+                for &action in &expected[..4] {
+                    assert_eq!(prepared.next(Some(&mut reads)).unwrap().0, action);
+                }
+                let before_keys = match &prepared {
+                    move_ordering::PreparedMoves::SignedKeys { keys, .. } => *keys,
+                    _ => panic!("both LMR targets require the same saved keys"),
+                };
+                assert!(s.lmr_allowed(target, 3, 3, 0.0, None, &prepared));
+                warm_child(s, c, target, -0.5);
+                let before = (Key::of(c), s.context, s.board);
+                assert_eq!(s.reduced_child(c, None, target, 2, 0.0, 1).unwrap(), 0.25);
+                assert_eq!(
+                    (s.stats.lmr_attempts, s.stats.lmr_full_depth_confirmations),
+                    (1, 1)
+                );
+                assert_eq!(s.child(c, None, target, 2, [0.0, 1.0], 1).unwrap(), 0.25);
+                assert_eq!((Key::of(c), s.context, s.board), before);
+                assert_eq!(*eval.root_actions.lock().unwrap(), [target, target, target]);
+                match &prepared {
+                    move_ordering::PreparedMoves::SignedKeys { keys, next, .. } => {
+                        assert_eq!(keys, &before_keys);
+                        assert_eq!(*next, 4);
+                    }
+                    _ => unreachable!(),
+                }
+                assert_eq!(reads.work.as_deref().unwrap().sort_calls_started, 1);
+                let tail: Vec<_> =
+                    std::iter::from_fn(|| prepared.next(None).map(|(id, _)| id)).collect();
+                assert_eq!(tail, expected[4..]);
+            },
+        );
+    }
 }
 
 #[test]

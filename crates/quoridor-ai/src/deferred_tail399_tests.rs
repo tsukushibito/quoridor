@@ -26,9 +26,10 @@ fn control399_first_and_tail_share_exact_rank_key_for_all_ids_and_extremes() {
         HistoryScores::Signed(&scores),
     );
     let mut expected = ids.clone();
-    ranking.sort_control(&mut expected);
+    ranking.sort_signed_keys(&mut expected);
     assert_eq!(&expected[..6], &[13, 80, 145, 81, 208, 1]);
-    let mut moves = PreparedMoves::control(ids, ranking.control_keys(&expected).unwrap(), None);
+    let mut moves =
+        PreparedMoves::deferred_signed(ids, ranking.signed_keys(&expected).unwrap(), None);
     let mut stats = OrderingStats::default();
     assert_eq!(moves.next(Some(&mut stats)).unwrap().0, expected[0]);
     assert_eq!(stats.work.as_deref().unwrap().sort_calls_started, 0);
@@ -53,7 +54,7 @@ fn control399_first_and_tail_share_exact_rank_key_for_all_ids_and_extremes() {
             HistoryScores::Signed(&scores),
         );
         let mut moves =
-            PreparedMoves::control(ids.clone(), ranking.control_keys(&ids).unwrap(), None);
+            PreparedMoves::deferred_signed(ids.clone(), ranking.signed_keys(&ids).unwrap(), None);
         let mut stats = OrderingStats::default();
         assert_eq!(drain(&mut moves, &mut stats), ids);
         assert_eq!(stats.work.as_deref().map_or(0, |w| w.sort_calls_started), 0);
@@ -74,7 +75,7 @@ fn control399_policy_signed_zero_and_unsigned_stay_authoritative_eager() {
         Some(&policy),
         HistoryScores::Signed(&scores),
     );
-    assert!(ranking.control_keys(&ids).is_none());
+    assert!(ranking.signed_keys(&ids).is_none());
     let mut expected = ids.clone();
     ranking.sort(&mut expected);
     assert_eq!(expected, [81, 208, 0]);
@@ -90,9 +91,9 @@ fn control399_policy_signed_zero_and_unsigned_stay_authoritative_eager() {
         None,
         HistoryScores::Unsigned(&unsigned),
     );
-    assert!(ranking.control_keys(&ids).is_none());
+    assert!(ranking.signed_keys(&ids).is_none());
     let mut expected = ids;
-    ranking.sort_control(&mut expected);
+    ranking.sort_signed_keys(&mut expected);
     assert_eq!(expected, [208, 0, 81]);
 }
 
@@ -286,11 +287,13 @@ fn control399_excluded_modes_provider_and_empty_single_keep_eager_validation() {
             warm(s, c, legal[0], 2);
             for mode in 0..4 {
                 s.orderer = (mode == 0).then_some(&POLICY as &dyn MoveOrderer);
-                s.static_scratch = Some(match mode {
-                    1 => StaticScratch::Cheap,
-                    2 => StaticScratch::Coverage(static_ordering::StaticScratch::new().unwrap()),
-                    _ => StaticScratch::CheapControl,
-                });
+                s.static_scratch = match mode {
+                    1 => None,
+                    2 => Some(StaticScratch::Coverage(
+                        static_ordering::StaticScratch::new().unwrap(),
+                    )),
+                    _ => Some(StaticScratch::CheapControl),
+                };
                 let signed = if mode == 3 { s.ordering.take() } else { None };
                 let prepared = s.prepared_moves(c, None, None, 0, legal.clone()).unwrap();
                 assert!(matches!(prepared, PreparedMoves::Eager(_)));

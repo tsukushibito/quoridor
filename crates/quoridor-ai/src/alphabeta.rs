@@ -976,8 +976,18 @@ impl Search<'_> {
         ply: usize,
         ids: Vec<u16>,
     ) -> NodeResult<Vec<u16>> {
-        self.eager_ordered(c, accumulator, pv, ply, ids, false)
-            .map(|(ids, _)| ids)
+        self.eager_ordered(c, accumulator, pv, ply, ids)
+    }
+
+    /// Profile differences stop at score production. Both signed/no-policy
+    /// targets use the same key, TT-first and frozen deferred-tail contract.
+    fn shared_signed_ordering(&self) -> bool {
+        self.orderer.is_none()
+            && self.ordering.is_some()
+            && matches!(
+                self.static_scratch,
+                Some(StaticScratch::CheapControl | StaticScratch::Cheap)
+            )
     }
 
     fn eager_ordered(
@@ -987,8 +997,7 @@ impl Search<'_> {
         pv: Option<u16>,
         ply: usize,
         mut ids: Vec<u16>,
-        capture_lmr: bool,
-    ) -> NodeResult<(Vec<u16>, Option<[u64; 4]>)> {
+    ) -> NodeResult<Vec<u16>> {
         if self.ordering_diagnostics {
             self.stats.ordering.observe_preparation(ids.len());
         }
@@ -1009,15 +1018,11 @@ impl Search<'_> {
             self.orderer.map(|_| &scores.policy),
             history,
         );
-        let protected = capture_lmr.then(|| ranking.protected_bits(&ids));
         if self.ordering_diagnostics {
             self.stats.ordering.observe_sort(ids.len());
         }
-        if matches!(
-            self.static_scratch.as_ref(),
-            Some(StaticScratch::CheapControl)
-        ) {
-            ranking.sort_control(&mut ids);
+        if self.shared_signed_ordering() {
+            ranking.sort_signed_keys(&mut ids);
         } else {
             ranking.sort(&mut ids);
         }
@@ -1029,7 +1034,7 @@ impl Search<'_> {
                 &mut self.stats.ordering,
             );
         }
-        Ok((ids, protected))
+        Ok(ids)
     }
 
     fn prepared_moves(
@@ -1040,16 +1045,9 @@ impl Search<'_> {
         ply: usize,
         ids: Vec<u16>,
     ) -> NodeResult<move_ordering::PreparedMoves> {
-        if self.orderer.is_some()
-            || self.ordering.is_none()
-            || !matches!(self.static_scratch, Some(StaticScratch::CheapControl))
-        {
-            let capture_lmr = self.lmr
-                && self.orderer.is_none()
-                && self.ordering.is_some()
-                && matches!(self.static_scratch, Some(StaticScratch::Cheap));
-            let (ids, protected) = self.eager_ordered(c, accumulator, pv, ply, ids, capture_lmr)?;
-            return Ok(move_ordering::PreparedMoves::eager_lmr(ids, protected));
+        if !self.shared_signed_ordering() {
+            let ids = self.eager_ordered(c, accumulator, pv, ply, ids)?;
+            return Ok(move_ordering::PreparedMoves::eager(ids));
         }
         if self.ordering_diagnostics {
             self.stats.ordering.observe_preparation(ids.len());
@@ -1068,12 +1066,14 @@ impl Search<'_> {
             .observation
             .as_ref()
             .and_then(|observation| observation.baseline_first(&ranking, &ids));
-        let keys = ranking.control_keys(&ids).ok_or_else(|| {
+        let keys = ranking.signed_keys(&ids).ok_or_else(|| {
             Interrupted::Error(SearchError::Evaluation(
-                "signed Control ordering keys unavailable".into(),
+                "signed ordering keys unavailable".into(),
             ))
         })?;
-        Ok(move_ordering::PreparedMoves::control(ids, keys, baseline))
+        Ok(move_ordering::PreparedMoves::deferred_signed(
+            ids, keys, baseline,
+        ))
     }
 
     fn ordering_scores(
@@ -1367,10 +1367,8 @@ impl Search<'_> {
         }
         let legal = legal.unwrap_or_else(|| c.legal_ids());
         // The verified TT move already outranks every other tier. Only the
-        // Control target without a provider may defer preparing its siblings.
-        let mut first_tt = if self.orderer.is_none()
-            && matches!(self.static_scratch, Some(StaticScratch::CheapControl))
-        {
+        // Shared signed targets without a provider defer preparing siblings.
+        let mut first_tt = if self.shared_signed_ordering() {
             tt_move
         } else {
             None
@@ -1561,12 +1559,7 @@ impl Search<'_> {
     ) -> bool {
         self.lmr
             && self.limits.use_pvs
-            && self.orderer.is_none()
-            && self.ordering.is_some()
-            && matches!(
-                self.static_scratch,
-                Some(StaticScratch::CheapControl | StaticScratch::Cheap)
-            )
+            && self.shared_signed_ordering()
             && depth >= 3
             && index >= 3
             && alpha.is_finite()
@@ -3585,6 +3578,10 @@ mod deferred_tail399_tests;
 #[cfg(test)]
 #[path = "lmr400_tests.rs"]
 mod lmr400_tests;
+
+#[cfg(all(test, feature = "research-diagnostics"))]
+#[path = "shared_signed402_tests.rs"]
+mod shared_signed402_tests;
 
 #[cfg(test)]
 mod three_engine_374_factory_tests {
