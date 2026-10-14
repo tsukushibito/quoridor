@@ -1,9 +1,5 @@
 use std::fmt;
 
-#[path = "distance_geometry.rs"]
-mod distance_geometry;
-pub use distance_geometry::WallDistanceGeometry;
-
 pub const RULESET_ID: &str = "standard-2p-v1";
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -192,10 +188,45 @@ impl Position {
         let edges = WallEdges::of(self);
         std::array::from_fn(|player| edges.distance_map(player))
     }
-    /// Private-lineage cached wall geometry; pawns and turn do not obstruct it.
-    /// This is not legal-game or mutable-feature validation.
-    pub fn wall_distance_geometry(self) -> WallDistanceGeometry {
-        WallDistanceGeometry::of(self)
+    /// Reuse exact parent rows after strictly one H/V wall-bit addition.
+    /// `parent_maps` must be the exact wall-only tables for `parent`'s walls;
+    /// this is a trusted-table operation, not validation of arbitrary input.
+    /// Pawns/turn are irrelevant. Non-addition geometry returns None. Even when
+    /// both rows are unchanged, the caller must bind them to the new wall key.
+    pub fn wall_distance_maps_after_addition(
+        self,
+        parent: Self,
+        parent_maps: &[[u8; 81]; 2],
+    ) -> Option<[[u8; 81]; 2]> {
+        let added_h = self.horizontal & !parent.horizontal;
+        let added_v = self.vertical & !parent.vertical;
+        let (horizontal, anchor) = if self.vertical == parent.vertical
+            && self.horizontal & parent.horizontal == parent.horizontal
+            && added_h.is_power_of_two()
+        {
+            (true, added_h.trailing_zeros() as u8)
+        } else if self.horizontal == parent.horizontal
+            && self.vertical & parent.vertical == parent.vertical
+            && added_v.is_power_of_two()
+        {
+            (false, added_v.trailing_zeros() as u8)
+        } else {
+            return None;
+        };
+        let cell = (anchor / 8) * 9 + anchor % 8;
+        let removed = if horizontal {
+            [(cell, cell + 9), (cell + 1, cell + 10)]
+        } else {
+            [(cell, cell + 1), (cell + 9, cell + 10)]
+        };
+        let edges = WallEdges::of(self);
+        Some(std::array::from_fn(|player| {
+            if edges.retains_distances(&parent_maps[player], removed) {
+                parent_maps[player]
+            } else {
+                edges.distance_map(player)
+            }
+        }))
     }
     pub fn legal_pawn_mask(self) -> [u8; 81] {
         let mut mask = [0; 81];
@@ -377,49 +408,55 @@ fn neighbors(cell: u8) -> [Option<u8>; 4] {
 }
 
 /// Source cells of blocked south/east edges; the graph is undirected.
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Clone, Copy)]
 struct WallEdges {
     south: u128,
     east: u128,
 }
 impl WallEdges {
-    // One canonical reverse BFS. Plain callers construct no descent metadata.
+    // One reverse BFS implementation for both full rebuild and changed rows.
     fn distance_map(&self, player: usize) -> [u8; 81] {
-        self.distance_map_with_descent(player, None)
-    }
-    fn distance_map_and_descent(&self, player: usize) -> ([u8; 81], [u128; 4]) {
-        let mut descent = [0; 4];
-        let row = self.distance_map_with_descent(player, Some(&mut descent));
-        (row, descent)
-    }
-    fn distance_map_with_descent(
-        &self,
-        player: usize,
-        mut descent: Option<&mut [u128; 4]>,
-    ) -> [u8; 81] {
         let mut result = [81u8; 81];
         let mut frontier = if player == 0 { 0x1ffu128 << 72 } else { 0x1ff };
-        let mut previous = 0;
         let mut reached = frontier;
         let mut distance = 0;
         while frontier != 0 {
-            if let Some(links) = descent.as_deref_mut() {
-                let sources = distance_geometry::descent_sources(self, previous);
-                for direction in 0..4 {
-                    links[direction] |= frontier & sources[direction];
-                }
-            }
             let mut cells = frontier;
             while cells != 0 {
                 result[cells.trailing_zeros() as usize] = distance;
                 cells &= cells - 1;
             }
-            previous = frontier;
             frontier = self.expand(frontier) & !reached;
             reached |= frontier;
             distance += 1;
         }
         result
+    }
+    fn retains_distances(&self, distances: &[u8; 81], removed: [(u8, u8); 2]) -> bool {
+        for (a, b) in removed {
+            for (high, low) in [(a, b), (b, a)] {
+                let d = distances[high as usize];
+                if !(1..81).contains(&d) || d != distances[low as usize] + 1 {
+                    continue;
+                }
+                // Both deletions are already in self; the alternative must
+                // survive their combined effect, not each edge independently.
+                let mut neighbors = self.expand(1u128 << high);
+                let mut descent = false;
+                while neighbors != 0 {
+                    let cell = neighbors.trailing_zeros() as usize;
+                    if distances[cell] == d - 1 {
+                        descent = true;
+                        break;
+                    }
+                    neighbors &= neighbors - 1;
+                }
+                if !descent {
+                    return false;
+                }
+            }
+        }
+        true
     }
     fn with_wall(self, horizontal: bool, anchor: u8) -> Self {
         let cell = (anchor as u32 / 8) * 9 + anchor as u32 % 8;
