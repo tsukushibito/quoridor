@@ -77,6 +77,7 @@ fn measurement394_completed_callback_preserves_cumulative_and_final_partial_scop
         .unwrap();
         let mut target = SearchTarget {
             settings: Settings {
+                loss_leaf_419: false,
                 roots: vec![],
                 profile: Profile::Control,
                 lmr: false,

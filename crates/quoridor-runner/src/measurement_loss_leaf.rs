@@ -237,7 +237,7 @@ fn call(
         eval,
         namespace,
         1_048_576,
-        alphabeta::ScoreDomain::LEGACY,
+        quoridor_ai::score::ScoreDomain::LEGACY,
         OrderingProfile::CheapStaticControl,
         false,
         false,
