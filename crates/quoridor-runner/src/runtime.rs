@@ -1023,6 +1023,22 @@ struct EvaluatorIdentity {
 struct InitializedEvaluator {
     evaluator: Option<Arc<dyn StaticEvaluator + Send + Sync>>,
     identity: EvaluatorIdentity,
+    sigma_value: Option<Arc<crate::sigma_evaluator::SigmaValueEvaluator>>,
+}
+pub(crate) fn sigma_value_evaluator(
+    i: &crate::config::Inference,
+) -> Result<(Arc<crate::sigma_evaluator::SigmaValueEvaluator>, String)> {
+    crate::sigma_evaluator::validate_config(i)?;
+    let library = i.library.as_ref().ok_or("ORT library")?;
+    let identity =
+        crate::sigma_evaluator::identity(i, &crate::arena_manifest::file_sha256(library)?)?;
+    let backend = Box::new(OrtBackend::new(&i.model, library, &i.model_sha)?);
+    Ok((
+        Arc::new(crate::sigma_evaluator::SigmaValueEvaluator::new(
+            backend, i,
+        )?),
+        identity,
+    ))
 }
 fn typed_identity(kind: &str, bytes: &[u8]) -> EvaluatorIdentity {
     let content_sha256 = quoridor_data::hex_digest(bytes);
@@ -1042,6 +1058,7 @@ fn float_identity(model: &quoridor_nnue::Model) -> EvaluatorIdentity {
     typed_identity("nnue-f32", &bytes)
 }
 fn evaluator(e: &Engine, config: &Config) -> Result<InitializedEvaluator> {
+    let mut sigma_value = None;
     let (evaluator, identity): (Option<Arc<dyn StaticEvaluator + Send + Sync>>, _) = match e
         .kind
         .as_str()
@@ -1059,6 +1076,19 @@ fn evaluator(e: &Engine, config: &Config) -> Result<InitializedEvaluator> {
                     kind: "sigma-onnx".into(),
                     content_sha256: sha.clone(),
                     row_identity: sha,
+                },
+            )
+        }
+        "sigma_value" => {
+            let (value, hash) =
+                sigma_value_evaluator(config.inference.as_ref().ok_or("Sigma value backend")?)?;
+            sigma_value = Some(value.clone());
+            (
+                Some(value as Arc<dyn StaticEvaluator + Send + Sync>),
+                EvaluatorIdentity {
+                    kind: "sigma-value-onnx-cpu".into(),
+                    row_identity: format!("sigma-value-onnx-cpu:sha256:{hash}"),
+                    content_sha256: hash,
                 },
             )
         }
@@ -1122,6 +1152,7 @@ fn evaluator(e: &Engine, config: &Config) -> Result<InitializedEvaluator> {
     Ok(InitializedEvaluator {
         evaluator,
         identity,
+        sigma_value,
     })
 }
 fn planned(config: &Config) -> Result<Vec<Planned>> {
@@ -2338,8 +2369,14 @@ impl EvaluationWorkers {
                     let mut callbacks = 0u64;
                     let mut outputs = 0u64;
                     let mut inference_seconds = 0.0;
+                    let sigma_before = evaluator.sigma_value.as_ref().map(|e| e.work()).transpose();
                     let searched = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
                         let e = &c.engines[engine];
+                        if let Err(error) = &sigma_before {
+                            return EvaluationResult::Error(format!(
+                                "Sigma counters unavailable:{error}"
+                            ));
+                        }
                         if e.kind == "mcts" {
                             let mut sent_at = None;
                             let publish =
@@ -2492,6 +2529,30 @@ impl EvaluationWorkers {
                             .unwrap_or_else(|| "non-string panic".into());
                         EvaluationResult::Error(format!("worker_panicked:{message}"))
                     });
+                    if let (Ok(Some(before)), Some(value)) =
+                        (&sigma_before, evaluator.sigma_value.as_ref())
+                    {
+                        if let Ok(after) = value.work() {
+                            requests = after["backend"]["logical_rows"]
+                                .as_u64()
+                                .unwrap()
+                                .saturating_sub(
+                                    before["backend"]["logical_rows"].as_u64().unwrap(),
+                                );
+                            callbacks = requests;
+                            outputs = requests.saturating_sub(
+                                after["adapter_failed_rows"]
+                                    .as_u64()
+                                    .unwrap()
+                                    .saturating_sub(
+                                        before["adapter_failed_rows"].as_u64().unwrap(),
+                                    ),
+                            );
+                            inference_seconds =
+                                after["synchronous_inference_seconds"].as_f64().unwrap()
+                                    - before["synchronous_inference_seconds"].as_f64().unwrap();
+                        }
+                    }
                     if tx
                         .send(EvaluationEvent::Terminal {
                             engine,
@@ -2504,14 +2565,20 @@ impl EvaluationWorkers {
                             worker_core: unsafe { libc::sched_getcpu() } as usize,
                             finished: Instant::now(),
                             inference_seconds,
-                            backend_work: backend.as_ref().map(|b| b.counters()),
+                            backend_work: match &evaluator.sigma_value {
+                                Some(e) => e.counters().ok(),
+                                None => backend.as_ref().map(|b| b.counters()),
+                            },
                         })
                         .is_err()
                     {
                         break;
                     }
                 }
-                let work = backend.as_ref().map(|b| b.counters());
+                let work = match &evaluator.sigma_value {
+                    Some(e) => e.counters().ok(),
+                    None => backend.as_ref().map(|b| b.counters()),
+                };
                 let cleanup = Instant::now();
                 drop(backend);
                 drop(session);
@@ -2726,14 +2793,25 @@ fn record_evaluation_alpha(
             .as_nanos()
             .min(u64::MAX as u128) as u64
     };
-    let deadline = started + Duration::from_millis(config.engines[engine].time_ms.unwrap());
+    let deadline = config.engines[engine]
+        .time_ms
+        .map(|ms| started + Duration::from_millis(ms));
+    let fixed_depth = config
+        .arena
+        .as_ref()
+        .is_some_and(|a| a.comparison == crate::arena::Comparison::EvaluatorFixedDepth);
+    let depth_complete = result.as_deref().is_some_and(|r| {
+        crate::arena_clock::fixed_depth_completed(config.engines[engine].depth, r)
+    });
     let mut failure = if engine_error.is_some() {
         Some(crate::arena_clock::Failure::EngineError)
     } else if cancelled {
         Some(crate::arena_clock::Failure::Cancelled)
     } else if !legal || !valid {
         Some(crate::arena_clock::Failure::IllegalMove)
-    } else if received >= deadline {
+    } else if fixed_depth && !depth_complete {
+        Some(crate::arena_clock::Failure::IncompleteDepth)
+    } else if deadline.is_some_and(|d| received >= d) {
         Some(crate::arena_clock::Failure::TimeOverrun)
     } else {
         None
@@ -2743,6 +2821,7 @@ fn record_evaluation_alpha(
     }
     let checked = Instant::now();
     let counters = serde_json::json!({
+        "requested_depth":config.engines[engine].depth,"fixed_depth_required":fixed_depth,"fixed_depth_completed":depth_complete,
         "authority_receipt_ns": ns(received), "drain_finished_ns": ns(drained),
         "authority_legal":legal, "inflight_after_drain":0,
         "clock_contract":SIGMA_RECEIPT_CLOCK,"clock_contract_sha256":SIGMA_RECEIPT_CONTRACT_SHA256,
@@ -2770,7 +2849,7 @@ fn record_evaluation_alpha(
         accepted: false,
         failure,
         caller_started_ns: ns(started),
-        deadline_ns: Some(ns(deadline)),
+        deadline_ns: deadline.map(ns),
         returned_ns: ns(drained),
         admission_checked_ns: ns(checked),
         accepted_ns: None,
@@ -2820,13 +2899,12 @@ fn evaluation_turn(
     let fallback = game.context.legal_ids().into_iter().next();
     let started = Instant::now();
     let stop = Arc::new(AtomicBool::new(false));
-    let until = started
-        + Duration::from_millis(
-            config.engines[engine]
-                .time_ms
-                .unwrap()
-                .saturating_sub(config.arena.as_ref().unwrap().return_reserve_ms),
-        );
+    let until = config.engines[engine].time_ms.map(|ms| {
+        started
+            + Duration::from_millis(
+                ms.saturating_sub(config.arena.as_ref().unwrap().return_reserve_ms),
+            )
+    });
     let id = RequestId {
         game: game.planned.id,
         generation: game.generation,
@@ -2851,13 +2929,16 @@ fn evaluation_turn(
             received.first_error.get_or_insert(reason);
             owners.cancel.store(true, Ordering::Relaxed);
         }
-        if owners.cancel.load(Ordering::Relaxed) || Instant::now() >= until {
+        if owners.cancel.load(Ordering::Relaxed) || until.is_some_and(|u| Instant::now() >= u) {
             received.freeze(game, sigma);
             stop.store(true, Ordering::Relaxed);
         }
         let wait = until
-            .saturating_duration_since(Instant::now())
-            .min(Duration::from_millis(1));
+            .map(|u| {
+                u.saturating_duration_since(Instant::now())
+                    .min(Duration::from_millis(1))
+            })
+            .unwrap_or(Duration::from_millis(1));
         match owners.events.recv_timeout(if received.response.is_some() {
             Duration::from_millis(1)
         } else {
@@ -2867,7 +2948,15 @@ fn evaluation_turn(
                 if owner == engine && origin == id =>
             {
                 let at = Instant::now(); // Actual main receipt, before legality/writes.
-                received.update(update, at, until);
+                if let Some(until) = until {
+                    received.update(update, at, until);
+                } else if let EvaluationUpdate::Alpha(result) = update {
+                    received.alpha.publish(&result, None);
+                } else {
+                    received.first_error.get_or_insert(
+                        "unexpected timed Sigma update in fixed-depth evaluation".into(),
+                    );
+                }
             }
             Ok(EvaluationEvent::Terminal {
                 engine: owner,
@@ -2889,6 +2978,10 @@ fn evaluation_turn(
                 if let Some(work) = backend_work {
                     pump.backend_work = Some(inference_work(work));
                     pump.backend_warmup_nn = work.warm_rows;
+                } else if config.engines[engine].kind == "sigma_value" {
+                    pump.backend_work = Some(
+                        serde_json::json!({"counts":"UNKNOWN","reason":"owning backend counter snapshot unavailable"}),
+                    );
                 }
                 break (
                     result,
@@ -3127,9 +3220,22 @@ fn evaluate_serial_games(
     )?;
     let mut manifest: serde_json::Value =
         serde_json::from_slice(&fs::read(config.output.join("manifest-start.json"))?)?;
+    manifest["clock"]["origin"] = "monotonic, main-owned game".into();
+    manifest["clock"]["start"] = "main before turn dispatch/session/limits setup".into();
+    manifest["clock"]["last_completed_iteration_timestamp"] =
+        "actual main receipt of immutable completed result; no deadline in fixed-depth mode".into();
+    manifest["limitations"][1] = "AI worker synchronous ORT is not preemptible. Matching terminal collection precedes next turn; fixed-depth mode has no move clock. Completed simulations and alpha-beta depths are distinct.".into();
+    manifest["engine_tt_source_policy"] = serde_json::json!(config.engines.iter().enumerate().map(|(index, e)| serde_json::json!({
+        "engine_index":index,"kind":e.kind,
+        "requested_slots":config.arena.as_ref().unwrap().tt_entries,
+        "actual_build_capacity":null,"actual_retained_bytes":null,
+        "measurement":"actual admitted persistent Table capacity/bytes are recorded in per-game TT profiles; no legacy4096 capacity inference"
+    })).collect::<Vec<_>>());
     manifest["clock"]["sigma_contract"] = SIGMA_RECEIPT_CLOCK.into();
     manifest["clock"]["contract_sha256"] = SIGMA_RECEIPT_CONTRACT_SHA256.into();
-    manifest["clock"]["acceptance"] = "actual main receipt before configured deadline (selected374:100ms); post-receipt legal validation and matching terminal collection before commit/next turn".into();
+    manifest["clock"]["acceptance"] = if config.arena.as_ref().is_some_and(|a| a.comparison == crate::arena::Comparison::EvaluatorFixedDepth) {
+        "requested depth COMPLETE; no move clock; post-return legal validation and matching terminal collection before commit"
+    } else { "actual main receipt before configured deadline; post-receipt legal validation and matching terminal collection before commit/next turn" }.into();
     manifest["execution"] = serde_json::json!({"simultaneous_games":1,"AI_workers":config.engines.len(),"AI_cores":admission.worker_cores,"management_core":admission.management_core,"management_core_observed":unsafe {libc::sched_getcpu()},"main_tid":unsafe {libc::syscall(libc::SYS_gettid)},"main_pid":std::process::id(),"Sigma_inference":"synchronous on its AI worker, intra1/inter1/sequential/batch1","parallel_search":false,"ponder":false,"inference_pump":false,"per_game_TT_reset":true,"initialization_spans":"sum of actual worker spans; overlapping, not added to run wall"});
     fs::write(
         config.output.join("manifest-start.json"),
@@ -3266,6 +3372,10 @@ fn evaluate_serial_games(
             if let Some(work) = work {
                 pump.backend_work = Some(inference_work(work));
                 pump.backend_warmup_nn = work.warm_rows;
+            } else if config.engines[_engine].kind == "sigma_value" {
+                pump.backend_work = Some(
+                    serde_json::json!({"counts":"UNKNOWN","reason":"owning backend final counter snapshot unavailable"}),
+                );
             }
         }
     }
@@ -3334,10 +3444,7 @@ fn run_inner(
     };
     let _affinity = crate::resources::AffinityGuard::capture()?;
     let start = Instant::now();
-    let evaluation = config
-        .arena
-        .as_ref()
-        .is_some_and(|a| a.comparison == crate::arena::Comparison::WholeWallTime);
+    let evaluation = config.evaluation_workers();
     let admission = if evaluation {
         crate::resources::admit_evaluation(
             &config.cpu_cores,
@@ -6272,3 +6379,128 @@ mod runtime_lmr400_tests;
 #[cfg(test)]
 #[path = "runtime_lmr_method_tests.rs"]
 mod runtime_lmr_method_tests;
+
+#[cfg(test)]
+mod sigma_value_runtime_tests {
+    use super::*;
+
+    struct FakeValue;
+    impl StaticEvaluator for FakeValue {
+        fn evaluate(
+            &self,
+            _: &SigmaContext,
+            _: Option<&alphabeta::EvalAccumulator>,
+        ) -> alphabeta::Result<f32> {
+            Ok(0.125)
+        }
+    }
+
+    #[test]
+    fn sigma_value_fixed_depth_same_factory_no_clock_or_shallow_fallback_nn0() {
+        let mut c: Config =
+            serde_json::from_str(include_str!("../tests/fixtures/sigma-clock-config.json"))
+                .unwrap();
+        c.arena.as_mut().unwrap().comparison = crate::arena::Comparison::EvaluatorFixedDepth;
+        c.arena.as_mut().unwrap().return_reserve_ms = 0;
+        c.arena.as_mut().unwrap().evaluator_sha256 = vec!["a".repeat(64), "b".repeat(64)];
+        c.arena.as_mut().unwrap().search_artifact_sha256 = vec!["c".repeat(64); 2];
+        c.arena
+            .as_mut()
+            .unwrap()
+            .disable_continuation_static_ordering = false;
+        c.cpu_cores = vec![2, 6];
+        c.management_cpu_core = Some(4);
+        c.inference_cpu_core = None;
+        c.workers = 1;
+        c.active_games = 1;
+        c.max_batch = 1;
+        for e in &mut c.engines {
+            e.kind = "distance".into();
+            e.model = None;
+            e.time_ms = None;
+            e.depth = 2;
+            e.max_nodes = 50000;
+            e.ordering_profile = Some("control".into());
+            e.lmr = false;
+            e.lmr_method = None;
+        }
+        c.engines[0].kind = "sigma_value".into();
+        c.inference = Some(serde_json::from_value(serde_json::json!({"backend":"ort","model":"/FAKE/model","model_sha":"a".repeat(64),"library":"/FAKE/library","logical_row_limit":1000})).unwrap());
+        c.validate().unwrap();
+        assert!(c.evaluation_workers());
+        let mut wrong = c.clone();
+        wrong.inference.as_mut().unwrap().logical_row_limit = None;
+        assert!(wrong.validate().is_err());
+        let plan = planned(&c).unwrap().remove(0);
+        let root = SigmaContext::from_prefix_with_rules(&plan.opening, c.ruleset).unwrap();
+        let namespace = alphabeta::SearchNamespace {
+            evaluator: "FAKE-sigma-value".into(),
+            rules: root.ruleset().id().into(),
+            selectivity: "fullwidth-PVS".into(),
+        };
+        let mut session = arena_alpha_session(
+            Arc::new(FakeValue),
+            namespace,
+            37,
+            &c.engines[0],
+            c.arena.as_ref(),
+        )
+        .unwrap();
+        assert!(!session.lmr_enabled());
+        let result = session
+            .search(
+                &root,
+                &SearchLimits {
+                    max_depth: 1,
+                    max_nodes: 50000,
+                    time_limit: None,
+                    tt_entries: 37,
+                    use_pvs: true,
+                    use_tt: true,
+                },
+                &AtomicBool::new(false),
+            )
+            .unwrap();
+        assert!(crate::arena_clock::fixed_depth_completed(1, &result));
+        let started = Instant::now();
+        let mut completion = crate::arena_clock::Completion::default();
+        completion.publish(&result, None);
+        let mut worker_completion = crate::arena_clock::Completion::default();
+        worker_completion.publish(&result, None);
+        let mut game = new_game(plan, root, &c, false);
+        let board = game.context.position();
+        let (_, receiver) = mpsc::channel();
+        let owners = EvaluationWorkers {
+            workers: vec![],
+            events: receiver,
+            cancel: Arc::new(AtomicBool::new(false)),
+        };
+        let returned = record_evaluation_alpha(
+            &mut game,
+            0,
+            &c,
+            &owners,
+            started,
+            Instant::now(),
+            Instant::now(),
+            &completion,
+            EvaluationResult::Alpha {
+                result: Ok(Box::new(result)),
+                completion: Box::new(worker_completion),
+                profile: Box::new(TtProfile::default()),
+            },
+            started,
+            None,
+            Some(13),
+        );
+        assert!(returned.is_err());
+        let observation = game.observations.last().unwrap();
+        assert_eq!(
+            observation.failure,
+            Some(crate::arena_clock::Failure::IncompleteDepth)
+        );
+        assert_eq!(observation.deadline_ns, None);
+        assert!(!observation.accepted);
+        assert_eq!(game.context.position(), board);
+    }
+}

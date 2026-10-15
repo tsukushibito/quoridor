@@ -62,6 +62,9 @@ struct Settings {
     #[serde(default)]
     loss_leaf_419: bool,
     roots: Vec<RootInput>,
+    /// Native Sigma static value; ONNX/library live in Experiment inputs, not NNUE descriptors.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    inference: Option<crate::config::Inference>,
     profile: Profile,
     tt_entries: usize,
     use_tt: bool,
@@ -353,6 +356,7 @@ struct SearchTarget {
     settings: Settings,
     roots: Vec<RootSpec>,
     evaluator: Arc<dyn StaticEvaluator>,
+    sigma_value: Option<Arc<crate::sigma_evaluator::SigmaValueEvaluator>>,
     session: Option<SearchSession>,
     root: Option<SigmaContext>,
     before: Value,
@@ -452,6 +456,7 @@ impl Target for SearchTarget {
         let mut lmr_observation = request
             .observe_lmr
             .then(|| Box::new(alphabeta::LmrObservation::default()));
+        let inference_before = self.sigma_value.as_ref().map(|e| e.work()).transpose()?;
         let search_started = Instant::now();
         let mut completed_depths = Vec::new();
         let result = if let Some(observation) = lmr_observation.as_deref_mut() {
@@ -486,6 +491,16 @@ impl Target for SearchTarget {
             }
             Err(error) => json!({"status":"UNKNOWN","returned":"Err","error":fact(&error)}),
         };
+        if let Some(value) = &self.sigma_value {
+            row["inference_before"] = json!(inference_before);
+            match value.work() {
+                Ok(work) => row["inference_after"] = work,
+                Err(error) => {
+                    row["inference_error"] = fact(&*error);
+                    row["status"] = json!("UNKNOWN");
+                }
+            }
+        }
         let lmr_output = lmr_observation.as_deref().map(|observation| {
             lmr_observation_output(
                 session,
@@ -573,6 +588,21 @@ fn timed<T>(run: impl FnOnce() -> Result<T>) -> (Result<T>, f64) {
     (result, started.elapsed().as_secs_f64())
 }
 fn evaluator_binding(settings: &Settings, model_count: usize) -> Result<()> {
+    if let Some(i) = &settings.inference {
+        crate::sigma_evaluator::validate_config(i)?;
+        if model_count != 0
+            || settings.loss_leaf_419
+            || settings.profile != Profile::Control
+            || settings.lmr
+            || settings.zero_stock_approx_min_root_walls.is_some()
+            || settings.zero_stock_safe_race
+        {
+            return Err(
+                "Sigma value requires model-free Control, no selective approximations".into(),
+            );
+        }
+        return Ok(());
+    }
     let fixed_d = settings.namespace.evaluator == crate::teacher_pilot_execution::EVALUATOR_ID;
     if (fixed_d && model_count != 0)
         || (!fixed_d && (model_count != 1 || matches!(settings.profile, Profile::Coverage)))
@@ -584,16 +614,48 @@ fn evaluator_binding(settings: &Settings, model_count: usize) -> Result<()> {
 /// Called by the existing native Experiment shape owner, before any model load.
 pub(crate) fn validate_evaluator_binding(e: &Experiment) -> Result<()> {
     let settings: Settings = e.config.read()?;
-    evaluator_binding(&settings, e.models.len())
+    evaluator_binding(&settings, e.models.len())?;
+    sigma_value_binding(e, &settings)
 }
-fn load_evaluator(e: &Experiment, settings: &Settings) -> Result<Arc<dyn StaticEvaluator>> {
-    evaluator_binding(settings, e.models.len())?;
-    if e.models.is_empty() {
-        return Ok(Arc::new(alphabeta::DistanceEvaluator::new(0., 8.)));
+fn sigma_value_binding(e: &Experiment, settings: &Settings) -> Result<()> {
+    if let Some(i) = &settings.inference {
+        let library = e
+            .dynamic_libraries
+            .iter()
+            .find(|l| Some(&l.file.path) == i.library.as_ref())
+            .ok_or("Sigma value actual library input")?;
+        let identity = crate::sigma_evaluator::identity(i, &library.file.sha256)?;
+        if !e
+            .inputs
+            .iter()
+            .any(|r| r.path == i.model && r.sha256 == i.model_sha)
+            || settings.namespace.evaluator != format!("sigma-value-onnx-cpu:sha256:{identity}")
+        {
+            return Err("measurement Sigma value closed model/library/typed namespace".into());
+        }
     }
-    Ok(Arc::new(alphabeta::ResidualEvaluator::new(
-        load_residual_model(e)?,
-    )))
+    Ok(())
+}
+type LoadedEvaluator = (
+    Arc<dyn StaticEvaluator>,
+    Option<Arc<crate::sigma_evaluator::SigmaValueEvaluator>>,
+);
+fn load_evaluator(e: &Experiment, settings: &Settings) -> Result<LoadedEvaluator> {
+    validate_evaluator_binding(e)?;
+    if let Some(i) = &settings.inference {
+        let (value, identity) = crate::runtime::sigma_value_evaluator(i)?;
+        if settings.namespace.evaluator != format!("sigma-value-onnx-cpu:sha256:{identity}") {
+            return Err("measurement actual loaded Sigma value identity".into());
+        }
+        return Ok((value.clone(), Some(value)));
+    }
+    if e.models.is_empty() {
+        return Ok((Arc::new(alphabeta::DistanceEvaluator::new(0., 8.)), None));
+    }
+    Ok((
+        Arc::new(alphabeta::ResidualEvaluator::new(load_residual_model(e)?)),
+        None,
+    ))
 }
 
 fn load_residual_model(e: &Experiment) -> Result<Arc<quoridor_nnue::residual::ResidualModel>> {
@@ -605,6 +667,74 @@ fn load_residual_model(e: &Experiment) -> Result<Arc<quoridor_nnue::residual::Re
         return Err("actual loaded evaluator identity mismatch".into());
     }
     Ok(model)
+}
+
+#[cfg(test)]
+mod sigma_value_binding_tests {
+    use super::*;
+
+    #[test]
+    fn sigma_value_measurement_closed_inputs_and_common_control_nn0() {
+        // Metadata-only fake paths, never a numerical qualification or backend load.
+        let fake = |path: &str, sha: String| research_manifest::FileRef {
+            path: path.into(),
+            sha256: sha,
+            bytes: 1,
+            mode: "0644".into(),
+        };
+        let i: crate::config::Inference = serde_json::from_value(json!({"backend":"ort","model":"/FAKE/model.onnx","model_sha":"a".repeat(64),"library":"/FAKE/libort.so","logical_row_limit":7})).unwrap();
+        let id = crate::sigma_evaluator::identity(&i, &"b".repeat(64)).unwrap();
+        let settings: Settings = serde_json::from_value(json!({"roots":[],"inference":i,"profile":"control","tt_entries":37,"use_tt":true,"use_pvs":true,"lmr":false,"zero_stock_approx_min_root_walls":null,"zero_stock_safe_race":false,"namespace":{"evaluator":format!("sigma-value-onnx-cpu:sha256:{id}"),"rules":"research-standard-2p-threefold-goal-first-v1","selectivity":"fullwidth-PVS"},"output_bytes":4096,"record_bytes":1024})).unwrap();
+        let control = fake("/FAKE/control", "c".repeat(64));
+        let e = Experiment {
+            schema: "FAKE-not-an-admission".into(),
+            phase: "compare".into(),
+            build_manifest: control.clone(),
+            config: control.clone(),
+            schedule: control,
+            inputs: vec![fake("/FAKE/model.onnx", "a".repeat(64))],
+            models: vec![],
+            dynamic_libraries: vec![research_manifest::LibraryRef {
+                file: fake("/FAKE/libort.so", "b".repeat(64)),
+                version: "FAKE".into(),
+            }],
+            numerical_qualification: None,
+            canonical_plan_sha256: String::new(),
+            rules: "research-standard-2p-threefold-goal-first-v1".into(),
+            distance_units: "wall-distance/80".into(),
+            value_perspective: "side-to-move".into(),
+            planned_slots: 1,
+            batch: None,
+            argv: vec![],
+        };
+        evaluator_binding(&settings, 0).unwrap();
+        sigma_value_binding(&e, &settings).unwrap();
+        assert!(evaluator_binding(&settings, 1).is_err());
+        for case in 0..4 {
+            let mut wrong = e.clone();
+            match case {
+                0 => wrong.inputs.clear(),
+                1 => wrong.inputs[0].sha256 = "d".repeat(64),
+                2 => wrong.dynamic_libraries.clear(),
+                _ => wrong.dynamic_libraries[0].file.sha256 = "e".repeat(64),
+            }
+            assert!(sigma_value_binding(&wrong, &settings).is_err());
+        }
+        let mut wrong = settings.clone();
+        wrong.namespace.evaluator = "distance".into();
+        assert!(sigma_value_binding(&e, &wrong).is_err());
+        for case in 0..5 {
+            let mut wrong = settings.clone();
+            match case {
+                0 => wrong.profile = Profile::Cheap,
+                1 => wrong.lmr = true,
+                2 => wrong.zero_stock_approx_min_root_walls = Some(0),
+                3 => wrong.zero_stock_safe_race = true,
+                _ => wrong.loss_leaf_419 = true,
+            }
+            assert!(evaluator_binding(&wrong, 0).is_err());
+        }
+    }
 }
 fn drive(
     requests: &[Request],
@@ -731,11 +861,12 @@ pub fn run(bound: &BoundControl) -> Result<Value> {
     } else {
         let (prepared, preparation_seconds) = timed(|| -> Result<SearchTarget> {
             let roots = prepare_roots(&e, &settings.roots, false)?;
-            let evaluator = load_evaluator(&e, &settings)?;
+            let (evaluator, sigma_value) = load_evaluator(&e, &settings)?;
             Ok(SearchTarget {
                 settings,
                 roots,
                 evaluator,
+                sigma_value,
                 session: None,
                 root: None,
                 before: Value::Null,
@@ -746,6 +877,15 @@ pub fn run(bound: &BoundControl) -> Result<Value> {
                 let mut result = drive(&requests, e.planned_slots, &mut target, &cancel, |row| {
                     output.row(row)
                 });
+                if let Some(value) = &target.sigma_value {
+                    result["inference_work"] = match value.work() {
+                        Ok(work) => work,
+                        Err(error) => {
+                            result["status"] = json!("PARTIAL");
+                            json!({"error":fact(&*error),"counts":"UNKNOWN"})
+                        }
+                    };
+                }
                 let start = Instant::now();
                 drop(target);
                 result["target_drop_seconds"] = json!(start.elapsed().as_secs_f64());
@@ -1411,6 +1551,7 @@ mod tests {
         let mut target = SearchTarget {
             settings,
             roots: vec![],
+            sigma_value: None,
             evaluator: Arc::new(NeverEvaluate),
             session: None,
             root: None,

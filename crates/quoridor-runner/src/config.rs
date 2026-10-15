@@ -178,6 +178,9 @@ pub struct Inference {
     pub device: i32,
     #[serde(default)]
     pub cuda_graph: bool,
+    /// Cumulative logical rows for an owned Sigma static-value backend.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub logical_row_limit: Option<u64>,
 }
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -195,6 +198,13 @@ pub struct Cycle {
     pub adoption_margin: f64,
 }
 impl Config {
+    pub(crate) fn evaluation_workers(&self) -> bool {
+        self.arena.as_ref().is_some_and(|a| {
+            a.comparison == crate::arena::Comparison::WholeWallTime
+                || (a.comparison == crate::arena::Comparison::EvaluatorFixedDepth
+                    && self.management_cpu_core.is_some())
+        })
+    }
     /// Split the independent opening families; paired colors stay together.
     pub fn split_counts(&self) -> Result<(usize, usize), String> {
         let family_size = if self.engines.len() == 2 { 2 } else { 1 };
@@ -223,20 +233,24 @@ impl Config {
         Ok((train, validation))
     }
     pub fn validate(&self) -> Result<(), String> {
-        let evaluation = self
+        let wall_time = self
             .arena
             .as_ref()
             .is_some_and(|a| a.comparison == crate::arena::Comparison::WholeWallTime);
+        let evaluation = self.evaluation_workers();
         if evaluation {
             if self.workers != 1
                 || self.active_games != 1
                 || self.max_batch != 1
                 || self.inference_cpu_core.is_some()
                 || !matches!(self.engines.len(), 1 | 2)
-                || self
-                    .engines
-                    .iter()
-                    .any(|e| e.time_ms.is_none_or(|ms| ms == 0))
+                || self.engines.iter().any(|e| {
+                    if wall_time {
+                        e.time_ms.is_none_or(|ms| ms == 0)
+                    } else {
+                        e.time_ms.is_some()
+                    }
+                })
                 || self
                     .inference
                     .as_ref()
@@ -247,7 +261,9 @@ impl Config {
                 return Err("evaluation requires one serial game, two AI cores and main management; CPU ORT batch1".into());
             }
         } else if self.management_cpu_core.is_some() {
-            return Err("management_cpu_core belongs only to whole-wall evaluation".into());
+            return Err(
+                "management_cpu_core belongs only to whole-wall or fixed-depth evaluation".into(),
+            );
         }
 
         if self.run_id.is_empty()
@@ -291,7 +307,7 @@ impl Config {
         if self.engines.iter().any(|e| {
             !matches!(
                 e.kind.as_str(),
-                "distance" | "nnue" | "nnue_quantized" | "mcts"
+                "distance" | "nnue" | "nnue_quantized" | "mcts" | "sigma_value"
             ) || e.depth == 0
                 || e.max_nodes == 0
                 || !e.distance_a.is_finite()
@@ -299,6 +315,37 @@ impl Config {
                 || (e.kind == "nnue" || e.kind == "nnue_quantized") && e.model.is_none()
         }) {
             return Err("invalid engine".into());
+        }
+        if self.engines.iter().any(|e| e.kind == "sigma_value") {
+            if !evaluation
+                || wall_time
+                || self
+                    .engines
+                    .iter()
+                    .filter(|e| e.kind == "sigma_value")
+                    .count()
+                    != 1
+                || self
+                    .engines
+                    .iter()
+                    .any(|e| e.kind == "mcts" || (e.kind == "sigma_value" && e.model.is_some()))
+            {
+                return Err(
+                    "Sigma value requires one synchronous owner in fixed-depth evaluation".into(),
+                );
+            }
+            crate::sigma_evaluator::validate_config(
+                self.inference
+                    .as_ref()
+                    .ok_or("Sigma value inference required")?,
+            )
+            .map_err(|e| e.to_string())?;
+        } else if self
+            .inference
+            .as_ref()
+            .is_some_and(|i| i.logical_row_limit.is_some())
+        {
+            return Err("logical_row_limit belongs to Sigma static-value inference".into());
         }
         if self.engines.iter().any(|e| e.kind == "mcts") && self.inference.is_none() {
             return Err("MCTS needs an explicit inference backend".into());

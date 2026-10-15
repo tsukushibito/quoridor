@@ -192,7 +192,7 @@ impl ArenaConfig {
             crate::runtime::arena_lmr_method(engine).map_err(|e| e.to_string())?;
             if let Some(profile) = engine.ordering_profile.as_deref() {
                 if quoridor_ai::alphabeta::OrderingProfile::from_name(profile).is_err()
-                    || !matches!(engine.kind.as_str(), "nnue" | "distance")
+                    || !matches!(engine.kind.as_str(), "nnue" | "distance" | "sigma_value")
                     || self.disable_continuation_static_ordering
                 {
                     return Err(
@@ -521,6 +521,28 @@ impl ArenaPlan {
                         used.insert(model.descriptor.path.clone());
                     }
                     "distance" if engine.model.is_none() => {}
+                    "sigma_value"
+                        if engine.model.is_none()
+                            && self.comparison == Comparison::EvaluatorFixedDepth =>
+                    {
+                        let infer = matchup.inference.as_ref().ok_or("Sigma value backend")?;
+                        crate::sigma_evaluator::validate_config(infer)?;
+                        let lib = e
+                            .dynamic_libraries
+                            .iter()
+                            .find(|l| Some(&l.file.path) == infer.library.as_ref())
+                            .ok_or("Sigma value library input")?;
+                        if !self
+                            .inputs
+                            .iter()
+                            .any(|r| r.path == infer.model && r.sha256 == infer.model_sha)
+                            || crate::sigma_evaluator::identity(infer, &lib.file.sha256)?
+                                != matchup.evaluator_sha256[i]
+                        {
+                            return Err("arena Sigma value typed model/library identity".into());
+                        }
+                        sigma = true;
+                    }
                     "mcts"
                         if engine.model.is_none()
                             && self.comparison == Comparison::WholeWallTime =>
@@ -1328,6 +1350,7 @@ mod generic_arena_361_tests {
             library: Some(library.path.clone()),
             device: 0,
             cuda_graph: false,
+            logical_row_limit: None,
         });
         let a = c.arena.as_mut().unwrap();
         a.comparison = Comparison::WholeWallTime;
