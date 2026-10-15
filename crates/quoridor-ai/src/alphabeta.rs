@@ -2435,6 +2435,16 @@ impl SearchSession {
         )
     }
 }
+type SearchTableAndDomain<'table, 'history> = (
+    &'table mut Table,
+    ScoreDomain,
+    Option<&'history mut ContinuationHistory>,
+    bool,
+    StaticMode,
+    (bool, LmrMethod),
+    (bool, ZeroStockApproxMethod),
+);
+
 fn search_in_table(
     root: &SigmaContext,
     evaluator: &dyn StaticEvaluator,
@@ -2442,15 +2452,7 @@ fn search_in_table(
     cancel: &AtomicBool,
     orderer: Option<&dyn MoveOrderer>,
     on_completed: &mut dyn FnMut(&SearchResult),
-    table_and_domain: (
-        &mut Table,
-        ScoreDomain,
-        Option<&mut ContinuationHistory>,
-        bool,
-        StaticMode,
-        (bool, LmrMethod),
-        (bool, ZeroStockApproxMethod),
-    ),
+    table_and_domain: SearchTableAndDomain<'_, '_>,
 ) -> Result<SearchResult> {
     let (
         table,
