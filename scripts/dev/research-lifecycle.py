@@ -883,6 +883,7 @@ def measurement_config(experiment):
             "seed",
             "lmr",
             "zero_stock_approx_min_root_walls",
+            "zero_stock_approx_method",
         }
         and {
             "roots",
@@ -914,6 +915,11 @@ def measurement_config(experiment):
         "measurement Boolean switches",
     )
     require(type(config.get("lmr", False)) is bool, "measurement LMR switch")
+    method = config.get("zero_stock_approx_method", "race")
+    require(
+        type(method) is str and method in {"race", "fixed_d"},
+        "measurement zero-stock approximation method",
+    )
     threshold = config.get("zero_stock_approx_min_root_walls")
     require(
         threshold is None or (type(threshold) is int and 0 <= threshold <= 20),

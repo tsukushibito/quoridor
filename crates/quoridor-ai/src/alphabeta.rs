@@ -177,14 +177,20 @@ impl StaticEvaluator for DistanceEvaluator {
     fn evaluate(&self, c: &SigmaContext, _a: Option<&EvalAccumulator>) -> Result<f32> {
         let p = c.position();
         let side = p.turn as usize;
-        let d0 = (f64::from(
-            p.wall_distance(side)
-                .ok_or_else(|| SearchError::Evaluation("unreachable pawn".into()))?,
-        ) / 80.) as f32;
-        let d1 = (f64::from(
-            p.wall_distance(side ^ 1)
-                .ok_or_else(|| SearchError::Evaluation("unreachable pawn".into()))?,
-        ) / 80.) as f32;
+        let d0 = p
+            .wall_distance(side)
+            .ok_or_else(|| SearchError::Evaluation("unreachable pawn".into()))?;
+        let d1 = p
+            .wall_distance(side ^ 1)
+            .ok_or_else(|| SearchError::Evaluation("unreachable pawn".into()))?;
+        self.evaluate_distances(d0, d1)
+    }
+}
+impl DistanceEvaluator {
+    // One math owner for ordinary fixed D and the optional approximate leaf.
+    fn evaluate_distances(&self, own: u8, other: u8) -> Result<f32> {
+        let d0 = (f64::from(own) / 80.) as f32;
+        let d1 = (f64::from(other) / 80.) as f32;
         let raw = self.a + self.b * (d1 - d0);
         if !raw.is_finite() {
             return Err(SearchError::Evaluation(
@@ -436,6 +442,37 @@ pub const LMR_METHOD: &str = "lmr400-late4-depth3-minus1-pvs-verify-v1";
 /// Heuristic leaves, not exact WDL or full-width minimax values.
 pub const ZERO_STOCK_APPROX_METHOD: &str = "zero-stock406-wall-distance-stm-tie-win-v1";
 
+/// Evaluation at an already permitted approximate leaf; activation is separate.
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq)]
+pub enum ZeroStockApproxMethod {
+    #[default]
+    Race,
+    FixedD,
+}
+impl ZeroStockApproxMethod {
+    pub fn from_name(name: &str) -> Result<Self> {
+        match name {
+            "race" => Ok(Self::Race),
+            "fixed_d" => Ok(Self::FixedD),
+            _ => Err(SearchError::Limits(
+                "unsupported zero-stock approximation method".into(),
+            )),
+        }
+    }
+    pub fn name(self) -> &'static str {
+        match self {
+            Self::Race => "race",
+            Self::FixedD => "fixed_d",
+        }
+    }
+    pub fn id(self) -> &'static str {
+        match self {
+            Self::Race => ZERO_STOCK_APPROX_METHOD,
+            Self::FixedD => "zero-stock407-fixed-D-a0-b8-tanh-v1",
+        }
+    }
+}
+
 fn permit_zero_stock_approx(threshold: Option<u8>, root_walls: u16, max_depth: u16) -> bool {
     threshold.is_some_and(|threshold| threshold == 0 || root_walls >= u16::from(threshold))
         && max_depth > root_walls.max(1)
@@ -446,6 +483,8 @@ pub struct SearchStats {
     /// Per-Search root snapshot; fixed throughout iterative deepening.
     pub root_walls_remaining: u16,
     pub zero_stock_approx_permitted: bool,
+    /// Effective only when permitted; OFF leaves this default value unused.
+    pub zero_stock_approx_method: ZeroStockApproxMethod,
     /// Successfully returned heuristic leaves, separate from true terminals/head calls.
     pub zero_stock_approx_terminations: u64,
     pub nodes: u64,
@@ -1361,7 +1400,18 @@ impl Search<'_> {
                 "approximate leaf unreachable opponent".into(),
             ))
         })?;
-        let value = if ds <= other { 1.0 } else { -1.0 };
+        let value = match self.stats.zero_stock_approx_method {
+            ZeroStockApproxMethod::Race => {
+                if ds <= other {
+                    1.0
+                } else {
+                    -1.0
+                }
+            }
+            ZeroStockApproxMethod::FixedD => DistanceEvaluator::new(0.0, 8.0)
+                .evaluate_distances(ds, other)
+                .map_err(Interrupted::Error)?,
+        };
         if !self.score_domain.admits(value) {
             return Err(Interrupted::Error(SearchError::Evaluation(
                 "approximate leaf outside declared nonterminal score domain".into(),
@@ -1869,7 +1919,7 @@ pub fn search_with_orderer(
             false,
             StaticMode::Coverage,
             false,
-            false,
+            (false, ZeroStockApproxMethod::Race),
         ),
     )
 }
@@ -1915,9 +1965,9 @@ fn append_lmr_method(namespace: &mut SearchNamespace) {
     namespace.selectivity.push(':');
     namespace.selectivity.push_str(LMR_METHOD);
 }
-fn append_zero_stock_approx_method(namespace: &mut SearchNamespace) {
+fn append_zero_stock_approx_method(namespace: &mut SearchNamespace, method: ZeroStockApproxMethod) {
     namespace.selectivity.push(':');
-    namespace.selectivity.push_str(ZERO_STOCK_APPROX_METHOD);
+    namespace.selectivity.push_str(method.id());
 }
 impl SessionMethod {
     fn namespace(self, mut namespace: SearchNamespace, lmr: bool) -> SearchNamespace {
@@ -1953,9 +2003,34 @@ pub struct SearchSession {
     lmr: bool,
     method: SessionMethod,
     zero_stock_approx_min_root_walls: Option<u8>,
+    zero_stock_approx_method: ZeroStockApproxMethod,
     zero_stock_approx_effective: bool,
 }
 impl SearchSession {
+    /// Selecting a method alone never activates approximation. Only an effective
+    /// ON method switch changes numeric TT/history authority.
+    pub fn set_zero_stock_approx_method(&mut self, method: ZeroStockApproxMethod) {
+        if method == self.zero_stock_approx_method {
+            return;
+        }
+        if self.zero_stock_approx_effective {
+            self.namespace.selectivity.truncate(
+                self.namespace.selectivity.len() - self.zero_stock_approx_method.id().len() - 1,
+            );
+            append_zero_stock_approx_method(&mut self.namespace, method);
+            self.table.clear();
+            if let Some(history) = self.ordering.as_mut() {
+                history.reset();
+            }
+        }
+        self.zero_stock_approx_method = method;
+    }
+
+    pub fn zero_stock_approx_method(&self) -> Option<ZeroStockApproxMethod> {
+        self.zero_stock_approx_effective
+            .then_some(self.zero_stock_approx_method)
+    }
+
     /// A requested threshold is configuration, not numeric TT authority. The
     /// effective method is resolved once by each Search, not at each depth/node.
     pub fn set_zero_stock_approx_min_root_walls(&mut self, threshold: Option<u8>) -> Result<()> {
@@ -1976,11 +2051,11 @@ impl SearchSession {
             return;
         }
         if self.zero_stock_approx_effective {
-            self.namespace
-                .selectivity
-                .truncate(self.namespace.selectivity.len() - ZERO_STOCK_APPROX_METHOD.len() - 1);
+            self.namespace.selectivity.truncate(
+                self.namespace.selectivity.len() - self.zero_stock_approx_method.id().len() - 1,
+            );
         } else {
-            append_zero_stock_approx_method(&mut self.namespace);
+            append_zero_stock_approx_method(&mut self.namespace, self.zero_stock_approx_method);
         }
         self.zero_stock_approx_effective = enabled;
         self.table.clear();
@@ -2012,7 +2087,7 @@ impl SearchSession {
             // Approximation, when resolved ON, is the last method component.
             if self.zero_stock_approx_effective {
                 self.namespace.selectivity.truncate(
-                    self.namespace.selectivity.len() - ZERO_STOCK_APPROX_METHOD.len() - 1,
+                    self.namespace.selectivity.len() - self.zero_stock_approx_method.id().len() - 1,
                 );
             }
             if self.lmr {
@@ -2023,7 +2098,7 @@ impl SearchSession {
                 append_lmr_method(&mut self.namespace);
             }
             if self.zero_stock_approx_effective {
-                append_zero_stock_approx_method(&mut self.namespace);
+                append_zero_stock_approx_method(&mut self.namespace, self.zero_stock_approx_method);
             }
             self.lmr = enabled;
             self.table.clear();
@@ -2148,6 +2223,7 @@ impl SearchSession {
             lmr: false,
             method: SessionMethod::Plain,
             zero_stock_approx_min_root_walls: None,
+            zero_stock_approx_method: ZeroStockApproxMethod::Race,
             zero_stock_approx_effective: false,
         })
     }
@@ -2247,7 +2323,10 @@ impl SearchSession {
                 self.ordering_diagnostics,
                 self.static_enabled,
                 self.lmr,
-                self.zero_stock_approx_effective,
+                (
+                    self.zero_stock_approx_effective,
+                    self.zero_stock_approx_method,
+                ),
             ),
         )
     }
@@ -2266,7 +2345,7 @@ fn search_in_table(
         bool,
         StaticMode,
         bool,
-        bool,
+        (bool, ZeroStockApproxMethod),
     ),
 ) -> Result<SearchResult> {
     let (
@@ -2276,7 +2355,7 @@ fn search_in_table(
         ordering_diagnostics,
         static_enabled,
         lmr,
-        zero_stock_approx_permitted,
+        (zero_stock_approx_permitted, zero_stock_approx_method),
     ) = table_and_domain;
     let start = Instant::now();
     if limits.max_depth == 0 || limits.max_nodes == 0 || limits.max_depth > 200 {
@@ -2342,6 +2421,7 @@ fn search_in_table(
         stats: SearchStats {
             root_walls_remaining,
             zero_stock_approx_permitted,
+            zero_stock_approx_method,
             tt_hashes: u64::from(limits.use_tt), // one full board initialization
             tt_context_initial_items: if limits.use_tt {
                 root.occurrences().count() as u64
@@ -2808,7 +2888,7 @@ mod persistent_tt_tests {
                 false,
                 StaticMode::Off,
                 false,
-                false,
+                (false, ZeroStockApproxMethod::Race),
             ),
         )
         .unwrap();
@@ -3769,6 +3849,10 @@ mod deferred_tail399_tests;
 #[cfg(test)]
 #[path = "lmr400_tests.rs"]
 mod lmr400_tests;
+
+#[cfg(test)]
+#[path = "zero_stock407_tests.rs"]
+mod zero_stock407_tests;
 
 #[cfg(test)]
 #[path = "zero_stock406_tests.rs"]

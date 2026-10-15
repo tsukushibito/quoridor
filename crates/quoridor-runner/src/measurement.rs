@@ -5,7 +5,7 @@ use crate::{
 };
 use quoridor_ai::alphabeta::{
     self, OrderingProfile, SearchLimits, SearchNamespace, SearchResult, SearchSession,
-    StaticEvaluator, StopReason,
+    StaticEvaluator, StopReason, ZeroStockApproxMethod,
 };
 use quoridor_core::research::{HistoryKey, SigmaContext};
 use quoridor_data::Result;
@@ -65,6 +65,8 @@ struct Settings {
     lmr: bool,
     #[serde(default)]
     zero_stock_approx_min_root_walls: Option<u8>,
+    #[serde(default = "default_zero_stock_approx_method")]
+    zero_stock_approx_method: String,
     namespace: SearchNamespaceSettings,
     output_bytes: usize,
     record_bytes: usize,
@@ -101,7 +103,12 @@ struct RootSpec {
     expected: Option<Value>,
 }
 
+fn default_zero_stock_approx_method() -> String {
+    ZeroStockApproxMethod::default().name().into()
+}
+
 fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
+    ZeroStockApproxMethod::from_name(&settings.zero_stock_approx_method)?;
     if settings
         .zero_stock_approx_min_root_walls
         .is_some_and(|n| n > 20)
@@ -294,6 +301,9 @@ impl Target for SearchTarget {
                 self.settings.lmr,
             )?,
         };
+        session.set_zero_stock_approx_method(ZeroStockApproxMethod::from_name(
+            &self.settings.zero_stock_approx_method,
+        )?);
         session
             .set_zero_stock_approx_min_root_walls(self.settings.zero_stock_approx_min_root_walls)?;
         let method = session.namespace().selectivity.clone();
@@ -305,6 +315,8 @@ impl Target for SearchTarget {
             json!({"TT_capacity":capacity,"retained_TT_bytes":retained.0,"retained_session_metadata_history_bytes":retained.1,
                 "actual_selectivity":method,"lmr":lmr,
                 "zero_stock_approx_min_root_walls":self.settings.zero_stock_approx_min_root_walls,
+                "zero_stock_approx_method_requested":self.settings.zero_stock_approx_method,
+                "zero_stock_approx_method":Value::Null,
                 "zero_stock_approx_permitted":Value::Null,
                 "completed_depth_semantics":if lmr {"selective-nominal"} else if self.settings.zero_stock_approx_min_root_walls.is_some() {"root-resolution-pending"} else {"full-width"},
                 "lmr_rule":if lmr {Some(alphabeta::LMR_METHOD)} else {None}}),
@@ -366,6 +378,12 @@ impl Target for SearchTarget {
         row["actual_selectivity"] = json!(session.namespace().selectivity);
         row["zero_stock_approx_min_root_walls"] =
             json!(self.settings.zero_stock_approx_min_root_walls);
+        row["zero_stock_approx_method_requested"] = json!(self.settings.zero_stock_approx_method);
+        row["zero_stock_approx_method"] = json!(
+            session
+                .zero_stock_approx_method()
+                .map(ZeroStockApproxMethod::id)
+        );
         row["completed_depth_semantics"] = json!(if session.zero_stock_approx_permitted() {
             "approximate-leaf-nominal-not-game-WDL"
         } else if self.settings.lmr {
@@ -662,6 +680,7 @@ fn completed_depth_observation(r: &SearchResult) -> Value {
     let s = &r.stats;
     json!({"completed_depth":r.completed_depth,"action":r.action,
         "root_walls_remaining":s.root_walls_remaining,"zero_stock_approx_permitted":s.zero_stock_approx_permitted,
+        "zero_stock_approx_method":s.zero_stock_approx_permitted.then(|| s.zero_stock_approx_method.id()),
         "value_bits":r.value.map(f32::to_bits),"elapsed_seconds":r.elapsed.as_secs_f64(),
         "cumulative_work":{"nodes":s.nodes,"evaluations":s.evaluations,
             "terminal":s.terminal,"zero_stock_approx_terminations":s.zero_stock_approx_terminations,"cutoffs":s.cutoffs,"TT_probes":s.tt_probes,
@@ -685,7 +704,7 @@ fn observed(r: &SearchResult) -> Value {
     result["zero_stock_approx_permitted"] = json!(s.zero_stock_approx_permitted);
     result["work"]["zero_stock_approx_terminations"] = json!(s.zero_stock_approx_terminations);
     result["zero_stock_approx_method"] = json!(if s.zero_stock_approx_permitted {
-        Some(alphabeta::ZERO_STOCK_APPROX_METHOD)
+        Some(s.zero_stock_approx_method.id())
     } else {
         None
     });
@@ -867,6 +886,54 @@ impl Output {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn measurement407_method_default_refusal_and_resolved_output() {
+        let base = json!({"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,
+            "namespace":{"evaluator":crate::teacher_pilot_execution::EVALUATOR_ID,"rules":"standard","selectivity":"synthetic"},"output_bytes":10000,"record_bytes":1000});
+        let settings: Settings = serde_json::from_value(base.clone()).unwrap();
+        assert_eq!(settings.zero_stock_approx_method, "race");
+        for (value, valid) in [
+            (json!("race"), true),
+            (json!("fixed_d"), true),
+            (Value::Null, false),
+            (json!(true), false),
+            (json!(0), false),
+            (json!("solver"), false),
+        ] {
+            let mut config = base.clone();
+            config["zero_stock_approx_method"] = value;
+            assert_eq!(
+                serde_json::from_value::<Settings>(config).is_ok_and(|s| validate(&s, &[]).is_ok()),
+                valid
+            );
+        }
+        for permitted in [false, true] {
+            let result = SearchResult {
+                action: None,
+                value: None,
+                completed_depth: 0,
+                pv: vec![],
+                stats: alphabeta::SearchStats {
+                    zero_stock_approx_permitted: permitted,
+                    zero_stock_approx_method: ZeroStockApproxMethod::FixedD,
+                    ..Default::default()
+                },
+                stop: StopReason::NodeLimit,
+                elapsed: std::time::Duration::ZERO,
+            };
+            let expected = if permitted {
+                json!(ZeroStockApproxMethod::FixedD.id())
+            } else {
+                Value::Null
+            };
+            assert_eq!(observed(&result)["zero_stock_approx_method"], expected);
+            assert_eq!(
+                completed_depth_observation(&result)["zero_stock_approx_method"],
+                expected
+            );
+        }
+    }
+
     #[test]
     fn measurement406_optional_threshold_refusals_and_actual_result_metadata() {
         let base = json!({"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,
