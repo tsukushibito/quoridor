@@ -145,16 +145,13 @@ fn sigma_value_terminal_cancel_and_common_search_do_not_infer_nn0() {
     }
     let context = root(&[]);
     let board = context.position();
-    let history = serde_json::to_vec(&context.history_counts()).unwrap();
+    let history = context.history_counts();
     let result = search
         .search(&context, &limits(), &AtomicBool::new(true))
         .unwrap();
     assert_eq!(result.stop, StopReason::Cancelled);
     assert_eq!(context.position(), board);
-    assert_eq!(
-        serde_json::to_vec(&context.history_counts()).unwrap(),
-        history
-    );
+    assert_eq!(context.history_counts(), history);
     assert!(inputs.lock().unwrap().is_empty());
     assert_eq!(evaluator.counters().unwrap().logical_rows, 0);
     assert_eq!(evaluator.counters().unwrap().warm_rows, 0); // Fake setup, not a real ORT warm claim.
@@ -164,7 +161,7 @@ fn sigma_value_terminal_cancel_and_common_search_do_not_infer_nn0() {
 fn sigma_value_backend_error_range_budget_and_reset_preserve_failure_nn0() {
     let context = root(&[]);
     let board = context.position();
-    let history = serde_json::to_vec(&context.history_counts()).unwrap();
+    let history = context.history_counts();
     for reply in 1..=5 {
         let (evaluator, _) = fixture(reply, 1000);
         let failure =
@@ -180,10 +177,7 @@ fn sigma_value_backend_error_range_budget_and_reset_preserve_failure_nn0() {
         }
         assert_eq!(evaluator.work().unwrap()["adapter_failed_rows"], 1);
         assert_eq!(context.position(), board);
-        assert_eq!(
-            serde_json::to_vec(&context.history_counts()).unwrap(),
-            history
-        );
+        assert_eq!(context.history_counts(), history);
     }
     let (evaluator, _) = fixture(0, 1);
     assert_eq!(evaluator.evaluate(&context, None).unwrap(), 0.375);
