@@ -1942,3 +1942,11 @@ setup/drop等込み8 calls/passのwhole二反復中央値は、NNUEがなし14.3
 限定source reviewはblockers0/ordinary0、source STOP df653e8a。必要softwareは新AI4・runner1・Python NN0 1・影響2とresearch/diagnostics/runner compile/Clippy/真正release PASS。原job outer102.857040425秒を一度、nested非加算で記録した。真正image883442d1/Build715d8cf4、原source ae70b864と既存Settings literalのdefault追加b732259を区別する。source用CPU12に固定した初回collectorは元buildCPU2/4 admissionを満たさず拒否、通常controllerの既存finalizerで同じ原結果を初めて保存した。build/assertionの再演0、元拒否/費/NULLとdisk masksは保持する。
 
 研究optionとして保持するが発動既定は無効のまま。今回407の数値campaign/arenaは0、速度・棋力や既定昇格を認定しない。原406のimage/式/96calls/結果は変更しない。設定・source・software・review・原失敗とSTOPは[407保存結果](../research-data/ai-sigma/zero-stock-approx-method407/result.json)、[保存参照](../research-data/ai-sigma/zero-stock-approx-method407/preservation.json)へ結ぶ。追加数値範囲は未発行、408比較は全条件で零在庫近似OFFという別subjectである。全mixed/learner prep/pipeline/323 USERPAUSE、defaults/models/weights/seals/oldfits96/旧RAWFAILED費UNKNOWNは維持する。
+
+### 5×5 Drawと全最短経路の非重複（409、2026-10-15）
+
+既存405のD-positive3,872壁配置／39,708盤面Dを対象に、壁だけの通常最短路の頂点非交差を二条件で確認した。一組が存在するのは308状態／100配置、全最短DAGの頂点unionまで非交差なのは44状態／44配置。偶数壁ではそれぞれ148／48、24／24、奇数壁では160／52、20／20。UNKNOWN0、一組だけ264、どちらでもない39,400で全33壁数行と元D censusへ一致し、全union条件⇒一組存在を確認した。
+
+代表mask152073、H a1,d1,b3,a4,c4／V b1、P0=a4/P1=b2/P0手番raw762は保存board-D。両通常最短路は一意で、P0 a4-b4-c4-d4-e4-e5、P1 b2-b3-c3-c2-c1の頂点集合が交わらない。それでも相手の全合法応手を含む盤面ゲームはDであり、全通常最短DAG非重複だけでは距離raceのexact WDLを返せない。6壁=2×3は枚数条件だけで、この新例への真正非終端prefixはUNKNOWN。405の真正m3 prefixは別mask67882/raw376（今回の両flag false）で、到達可能性や初期最善playを移植しない。9×9／全履歴や製品Searchへの結論ではなく、成分分離の既存十分条件とも区別する。
+
+四保存graphを再用し、未保存ラベルの3,868配置だけ原405 Python参照で復元。全2,532,560配置や旧52suiteの再演は0、新predicate4 PASSと限定独立確認0/0を受入れた。原数学job8.803503909sを一回計上し、内包guard8.161304867s／Python復元7.284432596sを足さない。全費・continuous peakはUNKNOWN。設定・compact全flags・単一代表graph・source・原失敗とSTOPは[409保存結果](../research-data/ai-sigma/zero-stock-shortest-path409/results-v1/report-ja.md)、[保存対応](../research-data/ai-sigma/zero-stock-shortest-path409/results-v1/preservation.json)、[独立確認](../research-data/ai-sigma/zero-stock-shortest-path409/results-v1/related-review/report-ja.md)へ結ぶ。新しい現役solver・Search接続・science追加・pause解除はない。

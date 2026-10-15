@@ -427,3 +427,9 @@ wholeは6root body・setup/drop・採点・key保存/cache・再探索込みの�
 `ZeroStockApproxMethod::{Race, FixedD}` と `zero_stock_approx_method` は発動閾値から独立し、省略race、null/未知名/型違いを拒否する。FixedDは既存 `DistanceEvaluator::evaluate_distances` で通常固定Dと同じ正規化・算術・tanhを共用する。OFFの実効IDはnull、ONでは選択method IDを既存namespace/resetへ束縛する。OFF中の方法変更は通常TTを維持し、ON実効切替だけclear、LMR/resetを通して同一方式warm再利用を保つ。近似leaf・真終端・通常depth0と要求/実効metadataは別責務である。
 
 必要softwareと限定source reviewを受入れたが、407数値比較は発行していない。406固定raceの速度96を変更/再演せず、既定無効を保持する。[保存結果](../../research-data/ai-sigma/zero-stock-approx-method407/result.json)と既存findingsに実版・費・限界を記録した。
+
+## 零在庫exact leaf候補への有限反例（409）
+
+5×5の既存board-D39,708状態を対象に、一組の通常最短路が頂点非交差なもの308、全通常最短DAG unionまで非交差なもの44を確認した。mask152073/raw762には互いに非交差な唯一最短路があるがboard-Dであり、この幾何条件だけを一般の盤面race exact WDLへ使わない。真正初期prefix・9×9・全historyは別資格で、新例のprefixはUNKNOWN。在庫0＋壁graphの到達成分分離の既存十分条件は別に保つ。
+
+これはone-off有限数学確認で、Search/TT/距離kernel/モデル/既定は変更しない。設定・色付きDAGのexact一組存在判定、compact全flags・代表graph、必要softwareと限定独立解釈・原費/失敗/STOPは[409保存報告](../../research-data/ai-sigma/zero-stock-shortest-path409/results-v1/report-ja.md)に保存した。近似leafをgame-exactと呼ぶ根拠にはしない。

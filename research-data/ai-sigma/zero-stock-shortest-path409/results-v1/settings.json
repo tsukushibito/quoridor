@@ -1,0 +1,299 @@
+{
+  "issue": "quoridor-4lc.409.1",
+  "original_census": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/full-collection-v1/result.json",
+    "sha256": "5b83c41c9b5d51d7bd112112b22ac3162a640b29b71725076107cae52e7747fb",
+    "bytes": 31903,
+    "mode": "0644"
+  },
+  "input": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-shortest-path409-v1/D-layouts.json",
+    "sha256": "c1a0213297486b3a004878f7a5a42003613d9946bad94fac06b458c92484b758",
+    "bytes": 437018,
+    "mode": "0644"
+  },
+  "original_streams": [
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/pilot-v1/records.bin",
+      "sha256": "06bc7f4eff02031967873774cd928878e2581a44fac74f76e28c69798511e435",
+      "bytes": 30464,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-0/records.bin",
+      "sha256": "bb058896a9c8531b9f1319b6f44722063a2c9a391fbf097a5f9d8156b4f8f161",
+      "bytes": 30360896,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-1/records.bin",
+      "sha256": "82ac87988fbca78282678c7173451da049d814d7fa0c5a5665afb5a1c5a5adfc",
+      "bytes": 30390560,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-2/records.bin",
+      "sha256": "734045ef19d6e4de57551c8f49dcb64e9d0c8692096dc6abdf52ce5e615538b6",
+      "bytes": 30390560,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-3/records.bin",
+      "sha256": "b8b75338b117763bc5810e87ff2a7c373cff4fbb841918ac6c5c09a1e4a5cfbe",
+      "bytes": 30390560,
+      "mode": "0644"
+    }
+  ],
+  "saved_graphs": [
+    {
+      "first": {
+        "ordinal": 11604,
+        "mask": 264713,
+        "raw_state": 418
+      },
+      "graph": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-0/first-D.bin",
+        "sha256": "0605f6d847464c8bbb19d6125b39875f2403dfd6257f2ec50919fc9cdda0ea8b",
+        "bytes": 12910,
+        "mode": "0644"
+      }
+    },
+    {
+      "first": {
+        "ordinal": 6853,
+        "mask": 132361,
+        "raw_state": 262
+      },
+      "graph": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-1/first-D.bin",
+        "sha256": "f86284a35213bf6a75d378d1af1c31181763edd3d955447820b25cf0ee88b864",
+        "bytes": 12910,
+        "mode": "0644"
+      }
+    },
+    {
+      "first": {
+        "ordinal": 4350,
+        "mask": 67882,
+        "raw_state": 315
+      },
+      "graph": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-2/first-D.bin",
+        "sha256": "4e2e7aa33cc8d510b5cbccc24fb2d87d4aa21a8f2cf7e3d214b7557bcd5eb385",
+        "bytes": 11908,
+        "mode": "0644"
+      },
+      "wall_count": 6,
+      "anchors": [
+        {
+          "orientation": "H",
+          "row0": 0,
+          "col0": 1,
+          "bit": 1
+        },
+        {
+          "orientation": "H",
+          "row0": 0,
+          "col0": 3,
+          "bit": 3
+        },
+        {
+          "orientation": "H",
+          "row0": 1,
+          "col0": 1,
+          "bit": 5
+        },
+        {
+          "orientation": "H",
+          "row0": 2,
+          "col0": 0,
+          "bit": 8
+        },
+        {
+          "orientation": "H",
+          "row0": 2,
+          "col0": 3,
+          "bit": 11
+        },
+        {
+          "orientation": "V",
+          "row0": 0,
+          "col0": 0,
+          "bit": 16
+        }
+      ],
+      "active": 610,
+      "edges": 1460,
+      "saved_strategy_trace": [
+        {
+          "raw_state": 315,
+          "P0_cell": 6,
+          "P1_cell": 7,
+          "turn": 1,
+          "choice_action_cell": 8,
+          "next_raw_state": 316,
+          "all_saved_legal_edges": [
+            [
+              8,
+              316
+            ]
+          ]
+        },
+        {
+          "raw_state": 316,
+          "P0_cell": 6,
+          "P1_cell": 8,
+          "turn": 0,
+          "choice_action_cell": 7,
+          "next_raw_state": 367,
+          "all_saved_legal_edges": [
+            [
+              7,
+              367
+            ]
+          ]
+        },
+        {
+          "raw_state": 367,
+          "P0_cell": 7,
+          "P1_cell": 8,
+          "turn": 1,
+          "choice_action_cell": 9,
+          "next_raw_state": 368,
+          "all_saved_legal_edges": [
+            [
+              6,
+              362
+            ],
+            [
+              9,
+              368
+            ],
+            [
+              13,
+              376
+            ]
+          ]
+        },
+        {
+          "raw_state": 368,
+          "P0_cell": 7,
+          "P1_cell": 9,
+          "turn": 0,
+          "choice_action_cell": 6,
+          "next_raw_state": 319,
+          "all_saved_legal_edges": [
+            [
+              6,
+              319
+            ],
+            [
+              8,
+              419
+            ]
+          ]
+        },
+        {
+          "raw_state": 319,
+          "P0_cell": 6,
+          "P1_cell": 9,
+          "turn": 1,
+          "choice_action_cell": 8,
+          "next_raw_state": 316,
+          "all_saved_legal_edges": [
+            [
+              8,
+              316
+            ],
+            [
+              14,
+              328
+            ]
+          ]
+        }
+      ],
+      "cycle_start": 1,
+      "cycle_state": 316,
+      "independent_check": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/full-collection-v1/independent-first-D.full.log",
+        "sha256": "d7c8eff2118c738269ba35ab9ccb9b6357176945f942c7cbbf36675019b8092e",
+        "bytes": 172,
+        "mode": "0644"
+      }
+    },
+    {
+      "first": {
+        "ordinal": 6879,
+        "mask": 132481,
+        "raw_state": 262
+      },
+      "graph": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-3/first-D.bin",
+        "sha256": "97ed784657420f5ed6225db41d9d519592158596b0cfee59160c385cbbaef54f",
+        "bytes": 12802,
+        "mode": "0644"
+      }
+    }
+  ],
+  "original_reference": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/reference.py",
+    "sha256": "34b04d533501813a4f80bc85500060621aeed862839320babdee500a18afd5d5",
+    "bytes": 11533,
+    "mode": "0644"
+  },
+  "expected_layouts": 3872,
+  "expected_D": 39708,
+  "D_layouts_by_walls": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    24,
+    224,
+    780,
+    1292,
+    1056,
+    424,
+    72,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "resources": {
+    "worker_cpu": 10,
+    "guardian_cpu": 13,
+    "family_B": 1073741824,
+    "child_guard_B": 939524096,
+    "host_reserve_B": 4294967296,
+    "GPU": 0
+  },
+  "predicates": {
+    "one_pair": "Enumerate all shortest paths of the smaller-path-count colour; test the other colour's DAG reachability avoiding every path vertex; starts/goals included",
+    "all_union": "Disjoint vertex unions of both complete own-goal shortest DAGs; starts/goals included",
+    "implication": "all_union => one_pair"
+  },
+  "branch_limit": null,
+  "source_scope": "Only original D-positive layouts; original labels reused where saved, otherwise original reference.oracle(5,mask) only; no old52 suite or full2532560 solver",
+  "output": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-shortest-path409-v1/analysis-v1",
+  "software_checks": "new shortest-path predicate definitions only",
+  "limits": "5x5 board D only; all wall parity kept; equal initial stock/nonterminal prefix separate UNKNOWN except already verified405 candidate if applicable"
+}
