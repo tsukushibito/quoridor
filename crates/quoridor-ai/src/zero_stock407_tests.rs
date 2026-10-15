@@ -131,7 +131,11 @@ fn zero_stock407_effective_switch_reset_and_threshold_equivalence_clear_only_whe
             .selectivity
             .ends_with(ZeroStockApproxMethod::FixedD.id())
     );
-    assert!(s.namespace().selectivity.contains(LMR_METHOD));
+    assert!(
+        s.namespace()
+            .selectivity
+            .contains(LmrMethod::default().id())
+    );
     s.set_lmr(false).unwrap();
     s.set_zero_stock_approx_min_root_walls(Some(4)).unwrap();
     s.search(&root, &l, &cancel).unwrap();

@@ -532,8 +532,8 @@ pub const LMR_METHOD: &str = "lmr400-late4-depth3-minus1-pvs-verify-v1";
 /// Additional reduction from normal child depth, not the ordinary played ply.
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq)]
 pub enum LmrMethod {
-    #[default]
     FixedOne,
+    #[default]
     DepthRank,
 }
 static LMR_DEPTH_RANK: std::sync::OnceLock<[[u8; 64]; 64]> = std::sync::OnceLock::new();
@@ -2669,7 +2669,7 @@ impl SearchSession {
             },
             ordering_diagnostics: false,
             lmr: false,
-            lmr_method: LmrMethod::FixedOne,
+            lmr_method: LmrMethod::default(),
             method: SessionMethod::Plain,
             zero_stock_approx_min_root_walls: None,
             zero_stock_approx_method: ZeroStockApproxMethod::Race,
@@ -4317,6 +4317,10 @@ mod lmr408_tests;
 #[cfg(test)]
 #[path = "lmr400_tests.rs"]
 mod lmr400_tests;
+
+#[cfg(test)]
+#[path = "lmr412_tests.rs"]
+mod lmr412_tests;
 
 #[cfg(test)]
 #[path = "zero_stock411_tests.rs"]

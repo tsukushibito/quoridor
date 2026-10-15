@@ -38,7 +38,7 @@ fn runtime400_factory_modes_match_actual_namespace_and_separate_four_domains() {
             let expected = format!(
                 "fullwidth-PVS-MPC-OFF-v1:cheap-static376-integer-parent-v1:{profile}{}",
                 if lmr {
-                    format!(":{}", alphabeta::LMR_METHOD)
+                    format!(":{}", alphabeta::LmrMethod::default().id())
                 } else {
                     String::new()
                 }

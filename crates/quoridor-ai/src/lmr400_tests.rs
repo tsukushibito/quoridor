@@ -50,17 +50,33 @@ fn lmr400_method_profile_switch_and_reset_clear_real_tt_and_keep_defaults_off() 
         assert!(session.table.slots.iter().any(Option::is_some));
         session.set_lmr(true).unwrap();
         assert!(session.table.slots.iter().all(Option::is_none));
-        assert!(session.namespace().selectivity.ends_with(LMR_METHOD));
+        assert!(
+            session
+                .namespace()
+                .selectivity
+                .ends_with(LmrMethod::default().id())
+        );
         methods.push(session.namespace().selectivity.clone());
         session.reset(Arc::new(NoCalls), namespace("reset"));
-        assert!(session.lmr_enabled() && session.namespace().selectivity.ends_with(LMR_METHOD));
+        assert!(
+            session.lmr_enabled()
+                && session
+                    .namespace()
+                    .selectivity
+                    .ends_with(LmrMethod::default().id())
+        );
         let no_pvs = limits(1, false, false);
         assert!(matches!(
             session.search(&root, &no_pvs, &AtomicBool::new(false)),
             Err(SearchError::Limits(_))
         ));
         session.set_lmr(false).unwrap();
-        assert!(!session.namespace().selectivity.ends_with(LMR_METHOD));
+        assert!(
+            !session
+                .namespace()
+                .selectivity
+                .ends_with(LmrMethod::default().id())
+        );
         assert!(!session.lmr_enabled());
     }
     methods.sort();
@@ -115,6 +131,7 @@ fn lmr400_eligibility_uses_frozen_rank_for_tt_goal_killers_and_exact_late_bounda
         &mut history,
         |s, _| {
             s.limits = &L;
+            s.stats.lmr_method = LmrMethod::FixedOne;
             s.lmr = true;
             for (mode, prepared) in [
                 (StaticScratch::CheapControl, control),
@@ -267,6 +284,7 @@ fn shared402_lmr_confirmation_research_keeps_frozen_same_hand_and_tail_cursor() 
             &mut history,
             |s, c| {
                 s.limits = &L;
+                s.stats.lmr_method = LmrMethod::FixedOne;
                 s.lmr = true;
                 s.static_scratch = Some(if cheap {
                     StaticScratch::Cheap
@@ -425,6 +443,7 @@ fn lmr400_fail_high_normal_scout_then_full_window_counts_one_distinct_return() {
         &mut history,
         |s, c| {
             s.limits = &L;
+            s.stats.lmr_method = LmrMethod::FixedOne;
             s.lmr = true;
             s.static_scratch = Some(StaticScratch::CheapControl);
             let before = Key::of(c);
@@ -470,6 +489,7 @@ fn lmr400_selective_fail_low_can_miss_full_width_value_without_claiming_equal_mi
             &mut history,
             |s, c| {
                 s.limits = &L;
+                s.stats.lmr_method = LmrMethod::FixedOne;
                 s.lmr = enabled;
                 s.static_scratch = Some(StaticScratch::CheapControl);
                 let before = Key::of(c);
@@ -498,6 +518,7 @@ fn lmr400_shallow_root_goal_repetition_keep_full_depth_and_terminal_contract() {
             &mut history,
             |s, c| {
                 s.limits = &L;
+                s.stats.lmr_method = LmrMethod::FixedOne;
                 s.lmr = enabled;
                 s.static_scratch = Some(StaticScratch::CheapControl);
                 assert_eq!(
@@ -526,6 +547,7 @@ fn lmr400_shallow_root_goal_repetition_keep_full_depth_and_terminal_contract() {
             &mut history,
             |s, c| {
                 s.limits = &L;
+                s.stats.lmr_method = LmrMethod::FixedOne;
                 s.lmr = true;
                 s.static_scratch = Some(StaticScratch::CheapControl);
                 assert_eq!(s.negamax(c, None, 3, -1.0, 1.0, 0).unwrap(), expected);

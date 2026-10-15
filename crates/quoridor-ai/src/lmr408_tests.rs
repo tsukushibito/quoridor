@@ -12,7 +12,6 @@ impl StaticEvaluator for NoHead {
 
 #[test]
 fn lmr408_names_table_units_zero_edges_and_sixty_three_clamps() {
-    assert_eq!(LmrMethod::default(), LmrMethod::FixedOne);
     for method in [LmrMethod::FixedOne, LmrMethod::DepthRank] {
         assert_eq!(LmrMethod::from_name(method.name()).unwrap(), method);
         method.prepare();

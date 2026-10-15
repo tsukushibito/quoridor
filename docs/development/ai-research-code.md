@@ -83,6 +83,18 @@ ONNX Runtime 1.30.0はtelemetry初期化時に`:memory:.ses`を生成する。`p
 
 ## 設定を使うarena／計測の有限実行
 
+### 通常研究の探索標準（412、2026-10-15）
+
+人間が選択した今後の通常研究探索・棋力評価の基本設定は **LMR ON / `depth_rank`**。これは研究上の選択であり、一般棋力の優越を確定したという意味ではない。比較対照の明示LMR OFF / `fixed_one`はそのまま使える。減深tableの係数・保護・full-depth scout確認/PVSは408の既存方式を変えない。
+
+既存 `research-lifecycle.py::comparison_conditions(common)` が通常研究の省略を解決し、`lmr_values`省略ならONだけ、`lmr_method`省略なら`depth_rank`を条件へ明示する。`apply_comparison_cost` / `apply_comparison_arena` はその条件を同じ既存measurement/engine設定fieldへ書く。明示`lmr_values`やmethodは保持する。live preparation helperが標準の解決ownerであり、artifactの古いrecipeや別preset registryを正本にしない。
+
+この研究準備と、汎用設定reader・製品・実generatorのenable既定は別である。直接measurement/Engine JSONやSearchSessionでenableを省略してもOFFのまま。method省略はAIのtyped `LmrMethod::default()` = `DepthRank`へ揃えるが、method選択だけではONにならない。measurementのmethod null/未知名/型違い拒否、Engineの既存Optionとarena planの型規則を変えない。typed method・namespace/reset正本はAIだけで、Pythonは設定名を解決しID/suffixを再構築しない。既存`configs/arena/distance-control-*`は明示source SHAを持つ調整用D/D例であり、この標準を理由に凍結値をretargetしない。
+
+各runは解決した`lmr` / `lmr_method`、実methodとnamespace、実image/Build、入力、費用・結果・UNKNOWNを保存する。410/411の発行済み比較は元LMR OFF/imageのまま保持し、この既定更新を混入しない。412追加対局も真正408の同一imageを用い、A固定1手/B深さ順位を両方明示するため、新しいdefault imageへ合わせた再buildや元成功局の再演を要求しない。旧400/402/408の有限判断は当時の設定として保持する。
+
+製品・実generator・paused mixed/learner全prep/pipelineと323、models/weights/seals/oldfits96の変更や新科学実行を、この標準から許可しない。
+
 モデル・book・数量・順序・範囲・clock／探索limitは実設定へ置く。arenaの既承認範囲・入力と実Experimentの対応を既存入口で確認し、有限sequenceはその設定からoperationを導出する。個別pairの手書きready admissionやLLM受付を前提にしない。共通`measure`は対象profile・入力schedule・cold/warm session・任意の標準perf設定を読み、実際のcalls／completion／error／UNKNOWNを結果へ記録する。実験番号・固定数量・literal SHAとの完全一致を共通sourceの認定gateへ戻さない。真正artifact／model／input／caller identityとCPU/RAM・取消・exact cleanupは維持し、予定との差は実施数と未完了数で説明する。
 
 既承認のarena suffixとPerfの残りは、一つの有限code-driven jobで既存entry/guardianを直列に合成する方針へ改めた。実設定・範囲・順序を一度採用し、成功したpair/pass間のLLM準備・手書きadmission・個別配送を撤去する。pairの統計単位・method/models/math/clock・actual identity/cleanupは保ち、unexpected error/pauseで停止して記録する。旧frozen helpers/RAW/FAILEDは原記録であり、現役の互換・起動gateにしない。

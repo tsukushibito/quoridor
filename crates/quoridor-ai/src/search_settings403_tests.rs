@@ -56,14 +56,14 @@ fn settings403_typed_profile_methods_match_factory_and_reject_unsupported_names(
             .unwrap();
             assert_eq!(
                 session.namespace(),
-                &profile.namespace(base, lmr.then_some(LmrMethod::FixedOne))
+                &profile.namespace(base, lmr.then_some(LmrMethod::default()))
             );
             assert_eq!(
                 session.namespace().selectivity,
                 format!(
                     "raw{expected_suffix}{}",
                     if lmr {
-                        format!(":{LMR_METHOD}")
+                        format!(":{}", LmrMethod::default().id())
                     } else {
                         String::new()
                     }
@@ -98,14 +98,14 @@ fn settings403_method_switch_and_raw_reset_keep_profile_clear_tt_and_defaults() 
     assert!(session.table.slots.iter().all(Option::is_none));
     assert_eq!(
         session.namespace(),
-        &profile.namespace(namespace("base"), Some(LmrMethod::FixedOne))
+        &profile.namespace(namespace("base"), Some(LmrMethod::default()))
     );
     seed_table(&mut session);
     session.reset(Arc::new(NoEvaluation), namespace("reset"));
     assert!(session.table.slots.iter().all(Option::is_none));
     assert_eq!(
         session.namespace(),
-        &profile.namespace(namespace("reset"), Some(LmrMethod::FixedOne))
+        &profile.namespace(namespace("reset"), Some(LmrMethod::default()))
     );
     session.set_lmr(false).unwrap();
     assert_eq!(
@@ -142,7 +142,10 @@ fn settings403_active_signed_control_identity_survives_reset_without_profile_ali
     session.reset(Arc::new(NoEvaluation), namespace("newteacher"));
     assert_eq!(
         session.namespace().selectivity,
-        format!("newteacher:signed-control-goal-first:{LMR_METHOD}")
+        format!(
+            "newteacher:signed-control-goal-first:{}",
+            LmrMethod::default().id()
+        )
     );
     assert!(
         !session

@@ -325,10 +325,10 @@ fn zero_stock406_effective_namespace_switch_reset_and_same_mode_warm_reuse() {
     s.search(&root, &l, &cancel).unwrap();
     s.set_lmr(true).unwrap();
     assert!(s.namespace.selectivity.ends_with(ZERO_STOCK_APPROX_METHOD));
-    assert!(s.namespace.selectivity.contains(LMR_METHOD));
+    assert!(s.namespace.selectivity.contains(LmrMethod::default().id()));
     s.set_lmr(false).unwrap();
     assert!(s.namespace.selectivity.ends_with(ZERO_STOCK_APPROX_METHOD));
-    assert!(!s.namespace.selectivity.contains(LMR_METHOD));
+    assert!(!s.namespace.selectivity.contains(LmrMethod::default().id()));
     s.set_zero_stock_approx_min_root_walls(None).unwrap();
     assert!(s.table.slots.iter().all(Option::is_none));
     assert!(!s.namespace.selectivity.contains(ZERO_STOCK_APPROX_METHOD));

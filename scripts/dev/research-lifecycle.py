@@ -921,7 +921,7 @@ def measurement_config(experiment):
         type(config.get("zero_stock_safe_race", False)) is bool,
         "measurement safe-race switch",
     )
-    lmr_method = config.get("lmr_method", "fixed_one")
+    lmr_method = config.get("lmr_method", "depth_rank")
     require(
         type(lmr_method) is str and lmr_method in {"fixed_one", "depth_rank"},
         "measurement LMR method",
@@ -2788,7 +2788,7 @@ def arena_observation(config, row):
                 == (
                     engine.get("lmr_method")
                     if engine.get("lmr_method") is not None
-                    else "fixed_one"
+                    else "depth_rank"
                 )
                 and (
                     all(
@@ -5314,12 +5314,21 @@ def operation_order(settings):
 
 
 def comparison_conditions(common):
-    """The only varied research factors; evaluator-specific identities stay bound."""
+    """Normal research uses ON/depth_rank; explicit controls stay explicit.
+
+    This preparation owner resolves settings, never session namespace IDs.
+    Product/generator and direct raw config enable defaults remain OFF.
+    """
     return [
-        dict(evaluator=evaluator, profile=profile, lmr=lmr)
+        dict(
+            evaluator=evaluator,
+            profile=profile,
+            lmr=lmr,
+            lmr_method=common.get("lmr_method", "depth_rank"),
+        )
         for evaluator in common["evaluators"]
         for profile in common["profiles"]
-        for lmr in common["lmr_values"]
+        for lmr in common.get("lmr_values", (True,))
     ]
 
 
@@ -5330,6 +5339,7 @@ def apply_comparison_cost(config, common, variant):
     config["namespace"]["rules"] = common["rules"]
     config["profile"] = variant["profile"]
     config["lmr"] = variant["lmr"]
+    config["lmr_method"] = variant["lmr_method"]
 
 
 def apply_comparison_arena(config, common, pair):
@@ -5348,6 +5358,7 @@ def apply_comparison_arena(config, common, pair):
         assert engine["kind"] == variant["evaluator"]
         engine["ordering_profile"] = variant["profile"]
         engine["lmr"] = variant["lmr"]
+        engine["lmr_method"] = variant["lmr_method"]
         for key in ("depth", "max_nodes", "time_ms"):
             engine[key] = arena[key]
 

@@ -565,7 +565,7 @@ pub(crate) fn arena_lmr_method(engine: &Engine) -> alphabeta::Result<alphabeta::
         engine
             .lmr_method
             .as_deref()
-            .unwrap_or(alphabeta::LmrMethod::FixedOne.name()),
+            .unwrap_or(alphabeta::LmrMethod::default().name()),
     )
 }
 fn arena_alpha_namespace(
@@ -2749,7 +2749,7 @@ fn record_evaluation_alpha(
         "completed_snapshot_validation_failed":!valid,
         "actual_search_namespace":game.tt_profiles[engine].actual_namespace,
         "actual_lmr_enabled":game.tt_profiles[engine].actual_lmr_enabled,
-        "requested_lmr_method":config.engines[engine].lmr_method.as_deref().unwrap_or(alphabeta::LmrMethod::FixedOne.name()),
+        "requested_lmr_method":config.engines[engine].lmr_method.as_deref().unwrap_or(alphabeta::LmrMethod::default().name()),
         "actual_lmr_method_id":game.tt_profiles[engine].actual_lmr_method_id,
         "lmr_reduction_rule":game.tt_profiles[engine].lmr_reduction_rule,
         "lmr_work_completed":selected.map(|r| serde_json::json!({"attempts":r.stats.lmr_attempts,"full_depth_confirmations":r.stats.lmr_full_depth_confirmations,"full_window_researches":r.stats.lmr_full_window_researches})),

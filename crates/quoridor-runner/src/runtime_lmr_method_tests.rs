@@ -51,8 +51,6 @@ fn runtime408_methods_bind_actual_namespace_and_off_selection() {
         }
     }
     assert_eq!(on_domains.len(), 4);
-    let e = engine("control", false, None);
-    assert_eq!(arena_lmr_method(&e).unwrap(), LmrMethod::FixedOne);
 }
 
 #[test]
@@ -64,4 +62,28 @@ fn runtime408_invalid_method_refused_even_when_off() {
             assert!(arena_alpha_session(Arc::new(NoForward), base(), 64, &e, None).is_err());
         }
     }
+}
+
+#[test]
+fn runtime412_method_omission_binds_default_but_never_enables_lmr() {
+    use alphabeta::LmrMethod;
+    for profile in ["control", "cheap"] {
+        for enabled in [false, true] {
+            let e = engine(profile, enabled, None);
+            assert_eq!(arena_lmr_method(&e).unwrap(), LmrMethod::DepthRank);
+            let session = arena_alpha_session(Arc::new(NoForward), base(), 64, &e, None).unwrap();
+            assert_eq!(session.lmr_enabled(), enabled);
+            assert_eq!(
+                session.lmr_method(),
+                enabled.then_some(LmrMethod::DepthRank)
+            );
+            assert_eq!(
+                session.namespace(),
+                &arena_alpha_namespace(&e, base()).unwrap()
+            );
+        }
+    }
+    let e = engine("control", true, Some("fixed_one"));
+    let session = arena_alpha_session(Arc::new(NoForward), base(), 64, &e, None).unwrap();
+    assert_eq!(session.lmr_method(), Some(LmrMethod::FixedOne));
 }

@@ -957,6 +957,37 @@ impl Output {
 mod tests {
     use super::*;
     #[test]
+    fn measurement412_method_omission_keeps_enable_off_and_explicit_controls() {
+        let base = json!({"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,"namespace":{"evaluator":"toy","rules":"standard","selectivity":"full"},"output_bytes":1000,"record_bytes":100});
+        let omitted: Settings = serde_json::from_value(base.clone()).unwrap();
+        assert!(!omitted.lmr);
+        assert_eq!(omitted.lmr_method, "depth_rank");
+        for enabled in [false, true] {
+            let mut selected = base.clone();
+            selected["lmr"] = json!(enabled);
+            let settings: Settings = serde_json::from_value(selected.clone()).unwrap();
+            assert_eq!(settings.lmr, enabled);
+            assert_eq!(settings.lmr_method, "depth_rank");
+            selected["lmr_method"] = json!("fixed_one");
+            let settings: Settings = serde_json::from_value(selected).unwrap();
+            validate(&settings, &[]).unwrap();
+            assert_eq!(settings.lmr, enabled);
+            assert_eq!(settings.lmr_method, "fixed_one");
+        }
+        for bad in [Value::Null, json!(true), json!(1), json!("unknown")] {
+            let mut selected = base.clone();
+            selected["lmr_method"] = bad;
+            assert!(
+                !serde_json::from_value::<Settings>(selected).is_ok_and(|settings| validate(
+                    &settings,
+                    &[]
+                )
+                .is_ok())
+            );
+        }
+    }
+
+    #[test]
     fn safe_race411_measurement_boolean_default_and_partial_counters() {
         let base = json!({"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,
             "namespace":{"evaluator":"toy","rules":"standard","selectivity":"full"},"output_bytes":10000,"record_bytes":1000});
@@ -1033,8 +1064,6 @@ mod tests {
     fn measurement408_lmr_method_default_refusal_namespace_and_result_roundtrip() {
         let base = json!({"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,
             "namespace":{"evaluator":crate::teacher_pilot_execution::EVALUATOR_ID,"rules":"standard","selectivity":"synthetic"},"output_bytes":10000,"record_bytes":1000});
-        let settings: Settings = serde_json::from_value(base.clone()).unwrap();
-        assert_eq!(settings.lmr_method, "fixed_one");
         for (value, valid) in [
             (json!("fixed_one"), true),
             (json!("depth_rank"), true),
@@ -1245,7 +1274,7 @@ mod tests {
             setup["actual_selectivity"]
                 .as_str()
                 .unwrap()
-                .ends_with(alphabeta::LMR_METHOD)
+                .ends_with(LmrMethod::default().id())
         );
         let result = SearchResult {
             action: None,
