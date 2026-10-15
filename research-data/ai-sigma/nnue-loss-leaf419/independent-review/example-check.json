@@ -1,0 +1,92 @@
+{
+  "interpretation_clear": true,
+  "blockers": [],
+  "ordinary": [],
+  "example": {
+    "parent": "distance-slot004-ply011",
+    "H": 2,
+    "node": 12765,
+    "path": [
+      156,
+      91
+    ],
+    "root_STM": 1,
+    "child_STM": 0,
+    "leaf_STM": 1,
+    "pre": 1.2772226333618164,
+    "N_post": 0.8557431697845459,
+    "D_post": -0.29131263494491577,
+    "candidates": [
+      {
+        "action": 68,
+        "responses": 111,
+        "old_parent_value": 0.2705877721309662,
+        "new_parent_value": 0.2705877721309662,
+        "old_parent_bits": 1049266811,
+        "new_parent_bits": 1049266811,
+        "old_response": 131,
+        "new_response": 131
+      },
+      {
+        "action": 156,
+        "responses": 106,
+        "old_parent_value": 0.8557431697845459,
+        "new_parent_value": -0.29131263494491577,
+        "old_parent_bits": 1062932988,
+        "new_parent_bits": 3197445870,
+        "old_response": 91,
+        "new_response": 91
+      }
+    ],
+    "old_ties": [
+      156
+    ],
+    "new_ties": [
+      68
+    ],
+    "root_alllegal_count": 109,
+    "C_count": 2,
+    "old_actual_reply": 123,
+    "new_PV": [
+      68,
+      131
+    ]
+  },
+  "recalculation_scope": "One saved parent H2 and one singleton intervention, 217 frontier values; no six-backup or 23-intervention replay",
+  "original_operational_outcome": "FAILED; stdout full capture limit after data finish; original manifest/result unchanged",
+  "original_cleanup": {
+    "process_cleanup_complete": false,
+    "cleanup_complete": false,
+    "handles": true,
+    "masks": "pending",
+    "persist": "attempted"
+  },
+  "original_census": {
+    "diagnostic_delta_contexts_started": 32,
+    "diagnostic_full_contexts_started": 47634,
+    "diagnostic_head_calls_started": 47698,
+    "nnue_logical_charge_including_unknown_reservations": 84673,
+    "nnue_search_calls_entered": 20,
+    "nnue_search_requests_admitted": 20,
+    "parity_nnue_logical_evaluations": 131,
+    "parity_states": 35,
+    "saved_interventions": 23,
+    "search_calls_entered": 40,
+    "search_nnue_evaluations_observed": 36975,
+    "search_nodes_observed": 74064,
+    "search_nodes_unknown_calls": 0,
+    "search_requests_admitted": 40,
+    "tree_nnue_logical_evaluations": 47567,
+    "tree_visits": 47577
+  },
+  "limits": [
+    "finite fixed C only",
+    "D is not an oracle",
+    "old-game cause UNKNOWN",
+    "true WDL UNKNOWN",
+    "full-root post-intervention argmax UNKNOWN",
+    "general NNUE weakness not established"
+  ],
+  "reader_STOP": "2026-10-15T22:16:38.996499+00:00",
+  "new_Search_forward_native_test_model_RAWstream_bootstrap": 0
+}

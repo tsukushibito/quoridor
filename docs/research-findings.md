@@ -2076,3 +2076,15 @@ R96/96は浅いfail-lowで確認条件/開始/完了0。returned depth1とnormal
 Sol High実装・Sol Max限定source確認・SAME Astra High固定設計/保存分析を分担し、重要な新因果/棋力主張は採用しない。新/関連15 assertionsは元FAILED内PASSを保持、consumer JSON型とtest initializerのみ通常修復、未完了Clippy/releaseを実完了した。旧416独立二scout APIを現共通診断へ置換し、研究標準depth_rank/製品generator enable OFFを維持する。原software outer129.736579663秒、診断14.892771785秒を各一度、nested非加算。全source/LLM/admin費・physical NN・連続RSS・時計分解能・孤立費はUNKNOWN。
 
 [詳細・4 raw ns/反復・原設定/結果/失敗/STOP](../research-data/ai-sigma/lmr-internal-sequence417/report-ja.md)。次の確認発動層とq0深さ/順位の観測は提案のみで新入場なし。414計画は未発行、全mixed/learner prep/pipeline・323 USERPAUSE、models/weights/seals/oldfits96/foreign変更と旧RAW/FAILED/費UNKNOWNを保持する。
+
+### NNUE敗戦局面の候補手と葉評価を結ぶ有限診断（419、2026-10-15）
+
+原operationは**FAILED**。計算と`Output.finish`後、CLIが共通木全体をstdoutへ重複出力してcapture上限に達し、native exit−15/pipe drain失敗・原cleanup=falseとなった。outer cleanup=trueと後続停止確認は別scopeである。成功再演・失敗補充は0。保存された40 unique requestsは全COMPLETE/Exact・親復元済みで、固定候補数2/3/2による`12+4×(2+3+2)=40`が今回の全件数。最大48との差8は追加実験枠ではない。Search74,064 nodes、共通木47,577 visits、logical NNUE84,673、限定parity35状態を保存した。
+
+同じ開始family・2対局から固定した3親、H2/H3、BEST43 fresh353とD(0,8,tanh)、Control/PVS/TT1M、LMR/Cheap/近似/safe OFF、time=Noneの別cold診断である。全合法rootの通常探索と、固定C内だけの完全な有限木backupを区別する。6組中5組でNNUE/DのC内argmax集合が異なり、事前固定23介入では単一葉置換4件と同時置換3件でC内選択が変わった。依存する記述的な例数で、誤評価率や独立標本数ではない。
+
+具体例slot4/ply11 H2では、葉`[156,91]`の同じP1視点値がNNUE pre-tanh +1.277222633/post +0.855743170、D −0.291312635。ここだけを同じ葉のD値へ置換して全応手を再backupすると、C内選択が壁手156から68へ変わる。これは保存有限木における計算上の依存を示す。原対局の実応手は123であり、この葉を踏んだ、68なら勝てた、原敗戦の唯一の原因だったとは言えない。C外を含む介入後のroot順位と真のWDLもUNKNOWN。
+
+H3の同親とslot5/ply12では固定4endpointを同時置換しても、別の未置換応手へbackupが切り替わり元のNNUE候補が残った。低在庫slot4/ply39 H3の単一置換は60→192で、D推奨184とは異なる。全3木にterminal葉はなく、飽和したheuristicを確定勝敗へ読み替えない。追跡35状態の特徴/親復元はexact、32edgeのpost最大差2.384e−7・alert0だが、全状態・全物理FT/headや旧warm状態の保証ではない。
+
+[日本語報告・候補表・静的SVG・原設定/結果/FAILED/STOP](../research-data/ai-sigma/nnue-loss-leaf419/report-ja.md)。新しい学習、モデル/特徴/係数変更、追加Search/対局/介入は発行しない。別枠420への既存4endpoint参照は補助入力候補だけで、この診断の設定や件数を変えない。全mixed/learner prep/pipeline・323 USERPAUSE、製品/generator既定、models/weights/seals/oldfits96/foreign、旧RAW/FAILED/費UNKNOWNを保持する。

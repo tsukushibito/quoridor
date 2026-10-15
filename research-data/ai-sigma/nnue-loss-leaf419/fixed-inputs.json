@@ -1,0 +1,597 @@
+{
+  "issue": "quoridor-4lc.419.1",
+  "kind": "fixed_saved_inputs_before_new_numerical_results",
+  "parents": [
+    {
+      "id": "distance-slot004-ply011",
+      "slot": 4,
+      "case_index_383": 8,
+      "position_index_383": 1,
+      "family_id_383": 0,
+      "actual_raw_family": "374-primary-batch-002-v1-family-000000",
+      "nnue_colour": 1,
+      "rules": "research-standard-2p-threefold-goal-first-v1",
+      "from_prefix_actions": [186, 77, 13, 68, 85, 59, 87, 202, 22, 125, 198],
+      "source_prefix_actions_sha256": "71d535e9880ecb07aeae3864da71a62edb3223651dbe03bf1c2e6dcca97757c1",
+      "source_position_record": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/nnue-loss-cases383-v1/analysis-v2/positions/case-08-p1.json",
+        "sha256": "4b356e77592930238e68c54369e277abaefda3f564173e1f046daecf1effe9ed",
+        "bytes": 16061,
+        "mode": "0644"
+      },
+      "source_raw": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-output-v1/batch-002/data/completed.jsonl.gz",
+          "sha256": "9a0a9a705a79750dd654380d5de2f8f6681c80d1cdb016154236c564e953d78a",
+          "bytes": 62344,
+          "mode": "0644"
+        },
+        "line_1_based": 1,
+        "game": 0,
+        "raw_line_sha256": "647ea66a602519d3fe8344cb2204a4aadfb837750be61dbc7dcd5df1792bf4b9",
+        "raw_line_bytes": 166565,
+        "line_hash_convention": "full_line",
+        "prefix_slice": [0, 11],
+        "action_index_zero_based": 11,
+        "observation_ply": 11
+      },
+      "expected_maintained_rules_view": {
+        "schemaVersion": 1,
+        "rulesetId": "standard-2p-v1",
+        "pawns": [22, 59],
+        "wallsRemaining": [6, 8],
+        "horizontalWalls": [4, 6, 44],
+        "verticalWalls": [41, 53, 57],
+        "turn": 1,
+        "winner": null,
+        "ply": 11,
+        "positionKey": "163b06081200001000000000500220020000000000",
+        "researchHistoryKey": "4,2|5,6|1|4,0;4,5;6,0|1,5;1,7;5,6|6,8"
+      },
+      "expected_native_history_key_from_maintained_rules_view": "4,2|5,6|1|4,0;4,5;6,0|1,5;1,7;5,6|6,8",
+      "expected_ordered_history_keys": [
+        "4,0|4,8|0|||10,10",
+        "4,0|4,8|1||1,5|9,10",
+        "4,0|5,8|0||1,5|9,10",
+        "4,1|5,8|1||1,5|9,10",
+        "4,1|5,7|0||1,5|9,10",
+        "4,1|5,7|1|4,0|1,5|8,10",
+        "4,1|5,6|0|4,0|1,5|8,10",
+        "4,1|5,6|1|4,0;6,0|1,5|7,10",
+        "4,1|5,6|0|4,0;6,0|1,5;1,7|7,9",
+        "4,2|5,6|1|4,0;6,0|1,5;1,7|7,9",
+        "4,2|5,6|0|4,0;4,5;6,0|1,5;1,7|7,8",
+        "4,2|5,6|1|4,0;4,5;6,0|1,5;1,7;5,6|6,8"
+      ],
+      "source_ordered_history_sha256": "dab53ed2800ad2561a5240a3266978da657aaa2fed3fc4448aa37ff9c2951beb",
+      "expected_history_multiset_for_comparison_only": [
+        ["4,0|4,8|0|||10,10", 1],
+        ["4,0|4,8|1||1,5|9,10", 1],
+        ["4,0|5,8|0||1,5|9,10", 1],
+        ["4,1|5,6|0|4,0;6,0|1,5;1,7|7,9", 1],
+        ["4,1|5,6|0|4,0|1,5|8,10", 1],
+        ["4,1|5,6|1|4,0;6,0|1,5|7,10", 1],
+        ["4,1|5,7|0||1,5|9,10", 1],
+        ["4,1|5,7|1|4,0|1,5|8,10", 1],
+        ["4,1|5,8|1||1,5|9,10", 1],
+        ["4,2|5,6|0|4,0;4,5;6,0|1,5;1,7|7,8", 1],
+        ["4,2|5,6|1|4,0;4,5;6,0|1,5;1,7;5,6|6,8", 1],
+        ["4,2|5,6|1|4,0;6,0|1,5;1,7|7,9", 1]
+      ],
+      "expected_current_repetition_count": 1,
+      "original_nnue_observation": {
+        "side": 1,
+        "action": 156,
+        "accepted": true,
+        "failure": null,
+        "completed_depth": 3,
+        "value_stm": 0.95947003,
+        "pv": [156, 193, 207],
+        "stop": "internal_time_limit",
+        "thinking_seconds": 0.014306545,
+        "caller_seconds": 0.095073102,
+        "completed_iteration_counters": {
+          "TT_representation": "compact359-board-zobrist-v1-context128-v1",
+          "cutoffs": 360,
+          "delta_updates": 13166,
+          "leaf_count": null,
+          "nodes": 13169,
+          "physical_nn_calls": null,
+          "policy_calls": 0,
+          "pvs_researches": 17,
+          "static_evaluations": 12691,
+          "terminal": 0,
+          "tt_board_hash_reads": 475,
+          "tt_board_hash_updates": 13166,
+          "tt_bound_cutoffs": 0,
+          "tt_capacity_skips": 0,
+          "tt_collisions": 35,
+          "tt_context_initial_items": 12,
+          "tt_context_matches": 105,
+          "tt_context_misses": 1,
+          "tt_context_transitions": 13166,
+          "tt_exact_hits": 3,
+          "tt_generation": 15,
+          "tt_hash_collisions": 0,
+          "tt_hashes": 7,
+          "tt_illegal_moves": 0,
+          "tt_index_collisions": 35,
+          "tt_key_builds": 481,
+          "tt_key_hits": 106,
+          "tt_order_context_mismatch": 1,
+          "tt_order_only": 102,
+          "tt_probes": 478,
+          "tt_replacements": 138,
+          "tt_retained_bytes": 327728,
+          "tt_usable_depth": 4
+        },
+        "value_stm_f32_bits": 1064673236
+      },
+      "original_actual_continuation_first_six": [156, 123, 203, 133, 58, 96],
+      "parent_horizons": [2, 3],
+      "candidate_anchor_horizon": 3,
+      "historical_candidate_action": 156,
+      "native_full_prefix_admission": "PENDING_NORMAL_CANONICAL_REPLAY",
+      "saved_byte_correspondence": "MATCH"
+    },
+    {
+      "id": "distance-slot004-ply039",
+      "slot": 4,
+      "case_index_383": 8,
+      "position_index_383": 2,
+      "family_id_383": 0,
+      "actual_raw_family": "374-primary-batch-002-v1-family-000000",
+      "nnue_colour": 1,
+      "rules": "research-standard-2p-threefold-goal-first-v1",
+      "from_prefix_actions": [
+        186, 77, 13, 68, 85, 59, 87, 202, 22, 125, 198, 156, 123, 203, 133, 58,
+        96, 114, 127, 108, 83, 165, 13, 57, 14, 121, 23, 66, 94, 67, 24, 76, 33,
+        77, 42, 78, 51, 69, 52
+      ],
+      "source_prefix_actions_sha256": "44f59e22d483a225f158522a4deabf4b8ccaf76ff6c94d81babacbf414941b3c",
+      "source_position_record": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/nnue-loss-cases383-v1/analysis-v2/positions/case-08-p2.json",
+        "sha256": "1368ae9e07f2c6b6adca58d27b3b2cf0fde9f77e2fa26cd5d219ad08ba3605c8",
+        "bytes": 18921,
+        "mode": "0644"
+      },
+      "source_raw": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-output-v1/batch-002/data/completed.jsonl.gz",
+          "sha256": "9a0a9a705a79750dd654380d5de2f8f6681c80d1cdb016154236c564e953d78a",
+          "bytes": 62344,
+          "mode": "0644"
+        },
+        "line_1_based": 1,
+        "game": 0,
+        "raw_line_sha256": "647ea66a602519d3fe8344cb2204a4aadfb837750be61dbc7dcd5df1792bf4b9",
+        "raw_line_bytes": 166565,
+        "line_hash_convention": "full_line",
+        "prefix_slice": [0, 39],
+        "action_index_zero_based": 39,
+        "observation_ply": 39
+      },
+      "expected_maintained_rules_view": {
+        "schemaVersion": 1,
+        "rulesetId": "standard-2p-v1",
+        "pawns": [52, 69],
+        "wallsRemaining": [0, 2],
+        "horizontalWalls": [2, 4, 6, 13, 15, 27, 33, 40, 42, 44, 46, 52],
+        "verticalWalls": [11, 20, 41, 53, 57, 58],
+        "turn": 1,
+        "winner": null,
+        "ply": 39,
+        "positionKey": "3445000212001055020800a0540620020000100800",
+        "researchHistoryKey": "7,5|6,7|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2"
+      },
+      "expected_native_history_key_from_maintained_rules_view": "7,5|6,7|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+      "expected_ordered_history_keys": [
+        "4,0|4,8|0|||10,10",
+        "4,0|4,8|1||1,5|9,10",
+        "4,0|5,8|0||1,5|9,10",
+        "4,1|5,8|1||1,5|9,10",
+        "4,1|5,7|0||1,5|9,10",
+        "4,1|5,7|1|4,0|1,5|8,10",
+        "4,1|5,6|0|4,0|1,5|8,10",
+        "4,1|5,6|1|4,0;6,0|1,5|7,10",
+        "4,1|5,6|0|4,0;6,0|1,5;1,7|7,9",
+        "4,2|5,6|1|4,0;6,0|1,5;1,7|7,9",
+        "4,2|5,6|0|4,0;4,5;6,0|1,5;1,7|7,8",
+        "4,2|5,6|1|4,0;4,5;6,0|1,5;1,7;5,6|6,8",
+        "4,2|5,6|0|4,0;4,5;6,0|1,5;1,7;3,1;5,6|6,7",
+        "4,2|5,6|1|2,5;4,0;4,5;6,0|1,5;1,7;3,1;5,6|5,7",
+        "4,2|5,6|0|2,5;4,0;4,5;6,0|1,5;1,7;2,7;3,1;5,6|5,6",
+        "4,2|5,6|1|2,5;4,0;4,5;4,6;6,0|1,5;1,7;2,7;3,1;5,6|4,6",
+        "4,2|4,6|0|2,5;4,0;4,5;4,6;6,0|1,5;1,7;2,7;3,1;5,6|4,6",
+        "4,2|4,6|1|2,5;4,0;4,5;4,6;6,0;7,1|1,5;1,7;2,7;3,1;5,6|3,6",
+        "4,2|4,6|0|1,4;2,5;4,0;4,5;4,6;6,0;7,1|1,5;1,7;2,7;3,1;5,6|3,5",
+        "4,2|4,6|1|1,4;2,5;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;5,6|2,5",
+        "4,2|4,6|0|1,4;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;5,6|2,4",
+        "4,2|4,6|1|1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;5,6|1,4",
+        "4,2|4,6|0|1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,3",
+        "4,1|4,6|1|1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,3",
+        "4,1|3,6|0|1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,3",
+        "5,1|3,6|1|1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,3",
+        "5,1|3,6|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,2",
+        "5,2|3,6|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,2",
+        "5,2|3,7|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,2",
+        "5,2|3,7|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+        "5,2|4,7|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+        "6,2|4,7|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+        "6,2|4,8|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+        "6,3|4,8|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+        "6,3|5,8|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+        "6,4|5,8|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+        "6,4|6,8|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+        "6,5|6,8|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+        "6,5|6,7|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+        "7,5|6,7|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2"
+      ],
+      "source_ordered_history_sha256": "0545911a2d8b01c9fb48be9fd75b204e8c738afb81020e7f6953dc6962e597de",
+      "expected_history_multiset_for_comparison_only": [
+        ["4,0|4,8|0|||10,10", 1],
+        ["4,0|4,8|1||1,5|9,10", 1],
+        ["4,0|5,8|0||1,5|9,10", 1],
+        [
+          "4,1|3,6|0|1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,3",
+          1
+        ],
+        [
+          "4,1|4,6|1|1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,3",
+          1
+        ],
+        ["4,1|5,6|0|4,0;6,0|1,5;1,7|7,9", 1],
+        ["4,1|5,6|0|4,0|1,5|8,10", 1],
+        ["4,1|5,6|1|4,0;6,0|1,5|7,10", 1],
+        ["4,1|5,7|0||1,5|9,10", 1],
+        ["4,1|5,7|1|4,0|1,5|8,10", 1],
+        ["4,1|5,8|1||1,5|9,10", 1],
+        [
+          "4,2|4,6|0|1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,3",
+          1
+        ],
+        [
+          "4,2|4,6|0|1,4;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;5,6|2,4",
+          1
+        ],
+        ["4,2|4,6|0|1,4;2,5;4,0;4,5;4,6;6,0;7,1|1,5;1,7;2,7;3,1;5,6|3,5", 1],
+        ["4,2|4,6|0|2,5;4,0;4,5;4,6;6,0|1,5;1,7;2,7;3,1;5,6|4,6", 1],
+        [
+          "4,2|4,6|1|1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;5,6|1,4",
+          1
+        ],
+        [
+          "4,2|4,6|1|1,4;2,5;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;5,6|2,5",
+          1
+        ],
+        ["4,2|4,6|1|2,5;4,0;4,5;4,6;6,0;7,1|1,5;1,7;2,7;3,1;5,6|3,6", 1],
+        ["4,2|5,6|0|2,5;4,0;4,5;6,0|1,5;1,7;2,7;3,1;5,6|5,6", 1],
+        ["4,2|5,6|0|4,0;4,5;6,0|1,5;1,7;3,1;5,6|6,7", 1],
+        ["4,2|5,6|0|4,0;4,5;6,0|1,5;1,7|7,8", 1],
+        ["4,2|5,6|1|2,5;4,0;4,5;4,6;6,0|1,5;1,7;2,7;3,1;5,6|4,6", 1],
+        ["4,2|5,6|1|2,5;4,0;4,5;6,0|1,5;1,7;3,1;5,6|5,7", 1],
+        ["4,2|5,6|1|4,0;4,5;6,0|1,5;1,7;5,6|6,8", 1],
+        ["4,2|5,6|1|4,0;6,0|1,5;1,7|7,9", 1],
+        [
+          "5,1|3,6|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,2",
+          1
+        ],
+        [
+          "5,1|3,6|1|1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,3",
+          1
+        ],
+        [
+          "5,2|3,6|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,2",
+          1
+        ],
+        [
+          "5,2|3,7|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,2",
+          1
+        ],
+        [
+          "5,2|3,7|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+          1
+        ],
+        [
+          "5,2|4,7|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+          1
+        ],
+        [
+          "6,2|4,7|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+          1
+        ],
+        [
+          "6,2|4,8|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+          1
+        ],
+        [
+          "6,3|4,8|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+          1
+        ],
+        [
+          "6,3|5,8|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+          1
+        ],
+        [
+          "6,4|5,8|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+          1
+        ],
+        [
+          "6,4|6,8|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+          1
+        ],
+        [
+          "6,5|6,7|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+          1
+        ],
+        [
+          "6,5|6,8|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+          1
+        ],
+        [
+          "7,5|6,7|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+          1
+        ]
+      ],
+      "expected_current_repetition_count": 1,
+      "original_nnue_observation": {
+        "side": 1,
+        "action": 192,
+        "accepted": true,
+        "failure": null,
+        "completed_depth": 5,
+        "value_stm": 0.99928635,
+        "pv": [192, 43],
+        "stop": "internal_time_limit",
+        "thinking_seconds": 0.058821538,
+        "caller_seconds": 0.09506958,
+        "completed_iteration_counters": {
+          "TT_representation": "compact359-board-zobrist-v1-context128-v1",
+          "cutoffs": 9328,
+          "delta_updates": 61067,
+          "leaf_count": null,
+          "nodes": 61072,
+          "physical_nn_calls": null,
+          "policy_calls": 0,
+          "pvs_researches": 12,
+          "static_evaluations": 47008,
+          "terminal": 0,
+          "tt_board_hash_reads": 14059,
+          "tt_board_hash_updates": 61067,
+          "tt_bound_cutoffs": 1,
+          "tt_capacity_skips": 0,
+          "tt_collisions": 6796,
+          "tt_context_initial_items": 40,
+          "tt_context_matches": 644,
+          "tt_context_misses": 3655,
+          "tt_context_transitions": 61067,
+          "tt_exact_hits": 12,
+          "tt_generation": 92,
+          "tt_hash_collisions": 0,
+          "tt_hashes": 11,
+          "tt_illegal_moves": 0,
+          "tt_index_collisions": 6796,
+          "tt_key_builds": 14069,
+          "tt_key_hits": 4299,
+          "tt_order_context_mismatch": 3655,
+          "tt_order_only": 4286,
+          "tt_probes": 14064,
+          "tt_replacements": 9414,
+          "tt_retained_bytes": 327728,
+          "tt_usable_depth": 13
+        },
+        "value_stm_f32_bits": 1065341243
+      },
+      "original_actual_continuation_first_six": [192, 43, 78, 44, 79, 53],
+      "parent_horizons": [2, 3],
+      "candidate_anchor_horizon": 3,
+      "historical_candidate_action": 192,
+      "native_full_prefix_admission": "PENDING_NORMAL_CANONICAL_REPLAY",
+      "saved_byte_correspondence": "MATCH"
+    },
+    {
+      "id": "distance-slot005-ply012",
+      "slot": 5,
+      "case_index_383": 7,
+      "position_index_383": 1,
+      "family_id_383": 0,
+      "actual_raw_family": "374-primary-batch-002-v1-family-000000",
+      "nnue_colour": 0,
+      "rules": "research-standard-2p-threefold-goal-first-v1",
+      "from_prefix_actions": [
+        186, 77, 13, 68, 22, 59, 31, 50, 97, 116, 40, 173
+      ],
+      "source_prefix_actions_sha256": "9bd4ad18a8b33ed611beaee58d891ef13c301e15e220895c45e7df2fcda21bf3",
+      "source_position_record": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/nnue-loss-cases383-v1/analysis-v2/positions/case-07-p1.json",
+        "sha256": "d9221cc5d1280d3a9d705477284c5eaba66469954ccc1cf3a53e677ed814502d",
+        "bytes": 16057,
+        "mode": "0644"
+      },
+      "source_raw": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-output-v1/batch-002/data/completed.jsonl.gz",
+          "sha256": "9a0a9a705a79750dd654380d5de2f8f6681c80d1cdb016154236c564e953d78a",
+          "bytes": 62344,
+          "mode": "0644"
+        },
+        "line_1_based": 2,
+        "game": 1,
+        "raw_line_sha256": "ec10e1a6ae533b04d2c29c5c72c40730dd9a159e297bd0db43b2d3d0624959a6",
+        "raw_line_bytes": 162799,
+        "line_hash_convention": "full_line",
+        "prefix_slice": [0, 12],
+        "action_index_zero_based": 12,
+        "observation_ply": 12
+      },
+      "expected_maintained_rules_view": {
+        "schemaVersion": 1,
+        "rulesetId": "standard-2p-v1",
+        "pawns": [40, 50],
+        "wallsRemaining": [8, 8],
+        "horizontalWalls": [16, 35],
+        "verticalWalls": [28, 41],
+        "turn": 0,
+        "winner": null,
+        "ply": 12,
+        "positionKey": "283208080200000008000100000000020010000000",
+        "researchHistoryKey": "4,4|5,5|0|0,2;3,4|1,5;4,3|8,8"
+      },
+      "expected_native_history_key_from_maintained_rules_view": "4,4|5,5|0|0,2;3,4|1,5;4,3|8,8",
+      "expected_ordered_history_keys": [
+        "4,0|4,8|0|||10,10",
+        "4,0|4,8|1||1,5|9,10",
+        "4,0|5,8|0||1,5|9,10",
+        "4,1|5,8|1||1,5|9,10",
+        "4,1|5,7|0||1,5|9,10",
+        "4,2|5,7|1||1,5|9,10",
+        "4,2|5,6|0||1,5|9,10",
+        "4,3|5,6|1||1,5|9,10",
+        "4,3|5,5|0||1,5|9,10",
+        "4,3|5,5|1|0,2|1,5|8,10",
+        "4,3|5,5|0|0,2;3,4|1,5|8,9",
+        "4,4|5,5|1|0,2;3,4|1,5|8,9",
+        "4,4|5,5|0|0,2;3,4|1,5;4,3|8,8"
+      ],
+      "source_ordered_history_sha256": "bde833b00641e50956e5fae48012d2e5d8c3d03acd5fb00461d2e06608af0d69",
+      "expected_history_multiset_for_comparison_only": [
+        ["4,0|4,8|0|||10,10", 1],
+        ["4,0|4,8|1||1,5|9,10", 1],
+        ["4,0|5,8|0||1,5|9,10", 1],
+        ["4,1|5,7|0||1,5|9,10", 1],
+        ["4,1|5,8|1||1,5|9,10", 1],
+        ["4,2|5,6|0||1,5|9,10", 1],
+        ["4,2|5,7|1||1,5|9,10", 1],
+        ["4,3|5,5|0|0,2;3,4|1,5|8,9", 1],
+        ["4,3|5,5|0||1,5|9,10", 1],
+        ["4,3|5,5|1|0,2|1,5|8,10", 1],
+        ["4,3|5,6|1||1,5|9,10", 1],
+        ["4,4|5,5|0|0,2;3,4|1,5;4,3|8,8", 1],
+        ["4,4|5,5|1|0,2;3,4|1,5|8,9", 1]
+      ],
+      "expected_current_repetition_count": 1,
+      "original_nnue_observation": {
+        "side": 0,
+        "action": 104,
+        "accepted": true,
+        "failure": null,
+        "completed_depth": 3,
+        "value_stm": 0.87524366,
+        "pv": [104, 149, 87],
+        "stop": "internal_time_limit",
+        "thinking_seconds": 0.016835576,
+        "caller_seconds": 0.095115427,
+        "completed_iteration_counters": {
+          "TT_representation": "compact359-board-zobrist-v1-context128-v1",
+          "cutoffs": 728,
+          "delta_updates": 15918,
+          "leaf_count": null,
+          "nodes": 15921,
+          "physical_nn_calls": null,
+          "policy_calls": 0,
+          "pvs_researches": 26,
+          "static_evaluations": 14966,
+          "terminal": 0,
+          "tt_board_hash_reads": 952,
+          "tt_board_hash_updates": 15918,
+          "tt_bound_cutoffs": 99,
+          "tt_capacity_skips": 0,
+          "tt_collisions": 87,
+          "tt_context_initial_items": 13,
+          "tt_context_matches": 214,
+          "tt_context_misses": 9,
+          "tt_context_transitions": 15918,
+          "tt_exact_hits": 4,
+          "tt_generation": 19,
+          "tt_hash_collisions": 0,
+          "tt_hashes": 7,
+          "tt_illegal_moves": 0,
+          "tt_index_collisions": 87,
+          "tt_key_builds": 958,
+          "tt_key_hits": 223,
+          "tt_order_context_mismatch": 9,
+          "tt_order_only": 106,
+          "tt_probes": 955,
+          "tt_replacements": 211,
+          "tt_retained_bytes": 327728,
+          "tt_usable_depth": 117
+        },
+        "value_stm_f32_bits": 1063260152
+      },
+      "original_actual_continuation_first_six": [104, 171, 88, 101, 31, 164],
+      "parent_horizons": [2, 3],
+      "candidate_anchor_horizon": 3,
+      "historical_candidate_action": 104,
+      "native_full_prefix_admission": "PENDING_NORMAL_CANONICAL_REPLAY",
+      "saved_byte_correspondence": "MATCH"
+    }
+  ],
+  "selection": {
+    "rule": "exact_three_named_human_candidates_in_given_order_no_replacement",
+    "new_search_or_forward_results_used": false,
+    "parents": 3,
+    "games": 2,
+    "shared_start_families": 1,
+    "independent_three_samples": false,
+    "raw_streams_decoded_once": 1,
+    "raw_lines_selected": 2,
+    "native_chronology_certificate": false,
+    "history_constructor": "SigmaContext::from_prefix"
+  },
+  "evaluator_bindings": {
+    "N": {
+      "description": "fresh353 no-output-bypass BEST43",
+      "factory": "measurement::load_evaluator/ResidualModel/ResidualEvaluator",
+      "descriptor": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/public-no-bypass-v1/candidate-v1/output/best-model/manifest.json",
+        "sha256": "46ec2c4708f96dcf9fad579c2fb0d1299c6663df27412f0faac98267467715e1",
+        "bytes": 677,
+        "mode": "0600"
+      },
+      "weights_sha256": "046fe926e56b955b0fb7de8f147a74ec33eace9cbc00a55c307f9b6541ab9841",
+      "weights_bytes": 49284,
+      "typed_evaluator_sha256": "96a5f41f875022d1752b9c999595ad58bfb2d42687a8f06de08d42b1c4215875",
+      "distance_head_input": "existing standardized D/80; retained with a=b=0",
+      "simd": false,
+      "model_payload_read_by_analyst": false
+    },
+    "D": {
+      "factory": "measurement::load_evaluator/DistanceEvaluator::new(0,8)",
+      "evaluator_namespace": "original-distance-a0-b8-tanh",
+      "models": [],
+      "simd": false
+    }
+  },
+  "source_evidence_refs": [
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/nnue-loss-cases383-v1/analysis-v2/result.json",
+      "sha256": "bd2f5cb333ceae21a06c509af57c7bc7fedf3da0b74d0c9f75fd19e87ac8bdff",
+      "bytes": 459603,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/nnue-loss-cases383-v1/analysis-v2/positions/case-08-p1.json",
+      "sha256": "4b356e77592930238e68c54369e277abaefda3f564173e1f046daecf1effe9ed",
+      "bytes": 16061,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/nnue-loss-cases383-v1/analysis-v2/positions/case-08-p2.json",
+      "sha256": "1368ae9e07f2c6b6adca58d27b3b2cf0fde9f77e2fa26cd5d219ad08ba3605c8",
+      "bytes": 18921,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/nnue-loss-cases383-v1/analysis-v2/positions/case-07-p1.json",
+      "sha256": "d9221cc5d1280d3a9d705477284c5eaba66469954ccc1cf3a53e677ed814502d",
+      "bytes": 16057,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/nnue-premise418/facts/facts.json",
+      "sha256": "92eb4e0264c4f01d3fb4c7a0a812b6d06713250aa68a3d15a55fb8cbbb07688c",
+      "bytes": 9869,
+      "mode": "0644"
+    }
+  ]
+}

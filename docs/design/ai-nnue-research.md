@@ -79,3 +79,9 @@ GPU学習は明示タスクの期限・資源上限に従って具体化する�
 - [Claustrophobia入力](https://github.com/Plaaasma/Claustrophobia/blob/main/src/encode.rs)：16チャンネルと20チャンネル拡張。距離、最短経路、合法壁、距離差、壁1枚の影響を明示特徴化。手番視点へ180度回転。採用モデルでの有効構成は別途版を固定して確認する。
 
 これらの特徴から棋力の優劣を断定しない。比較に使用するコード・モデルはGit版と入力仕様を特定する。
+
+### 419：候補順位へ戻る葉評価の有限診断
+
+[419保存報告](../../research-data/ai-sigma/nnue-loss-leaf419/report-ja.md)は、固定3親・H2/H3の共通候補木において、同じ葉のNNUE/D値を用いる完全backupと事前固定endpoint介入を対応させた。slot4/ply11 H2の同一葉[156,91]をD値へ置くと固定C内の156→68が変わる一方、H3には代替応手の未置換葉が元候補を維持する例がある。これは保存木内の数値的依存であり、Dの正しさ、C外を含む介入後root argmax、旧敗戦の因果、真のWDLや一般棋力を認定しない。旧warm95ms/TT4Kと今回cold/timeNone/TT1Mも区別する。
+
+原nativeはOutput.finish後の全stdout再出力でcapture上限に達しFAILED、保存40COMPLETEとouter/later cleanupは別scopeとして保全した。今後のmeasure CLIは保存結果の小receiptだけを返す通常consumer修復を採用し、元40を再演していない。単一PV葉への説明を全代替応手へ拡張せず、未確定部分の新Search/介入/fitは自動発行しない。

@@ -1,0 +1,5005 @@
+{
+  "issue": "quoridor-4lc.419.1",
+  "original_operational_outcome": "FAILED; saved finite observations only",
+  "source_result_ref_before_after": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-loss-leaf419-diagnostic48-v1/execution-v1/measure-000/data/result.json",
+    "sha256": "12032a29bc11706bcb9da81ad9388423d82e87c123dbf238afc49d8520e27122",
+    "bytes": 18954604,
+    "mode": "0644"
+  },
+  "conditions": [
+    {
+      "parent": 0,
+      "root_id": "distance-slot004-ply011",
+      "H": 2,
+      "C": [
+        68,
+        156
+      ],
+      "N": {
+        "candidate_values": [
+          {
+            "action": 68,
+            "value_parent_bits": 1049266811
+          },
+          {
+            "action": 156,
+            "value_parent_bits": 1062932988
+          }
+        ],
+        "canonical_action": 156,
+        "argmax_ties": [
+          156
+        ],
+        "value_bits": 1062932988,
+        "status": "COMPLETE"
+      },
+      "D": {
+        "candidate_values": [
+          {
+            "action": 68,
+            "value_parent_bits": 3200420013
+          },
+          {
+            "action": 156,
+            "value_parent_bits": 3203177120
+          }
+        ],
+        "canonical_action": 68,
+        "argmax_ties": [
+          68
+        ],
+        "value_bits": 3200420013,
+        "status": "COMPLETE"
+      },
+      "N_PV": [
+        156,
+        91
+      ],
+      "D_PV": [
+        68,
+        83
+      ],
+      "normal": {
+        "N": {
+          "id": "distance-slot004-ply011:N:H2:normal",
+          "parent": 0,
+          "evaluator": "N",
+          "H": 2,
+          "forced": null,
+          "status": "COMPLETE",
+          "bound": "Exact",
+          "requested_value_bits": 1062932987,
+          "value": 0.8557431101799011,
+          "action": 156,
+          "PV": [
+            156,
+            91
+          ],
+          "completed_depth": 2,
+          "stop": "DepthComplete",
+          "parent_restored": true,
+          "Search_s": 0.000649451,
+          "setup_Search_drop_s": 0.022244602,
+          "nodes": 493,
+          "evals": 382,
+          "terminal": 0,
+          "PVS": 6,
+          "TT_probes": 111,
+          "TT_hits": 1,
+          "TT_cutoffs": 0,
+          "child_depth": null,
+          "nonroot_ply": null,
+          "restricted_root_TT": null,
+          "window": [
+            "-infinity",
+            "+infinity"
+          ],
+          "source_value_origin": "searched; static/TT origin UNKNOWN"
+        },
+        "D": {
+          "id": "distance-slot004-ply011:D:H2:normal",
+          "parent": 0,
+          "evaluator": "D",
+          "H": 2,
+          "forced": null,
+          "status": "COMPLETE",
+          "bound": "Exact",
+          "requested_value_bits": 3200420013,
+          "value": -0.37994900345802307,
+          "action": 68,
+          "PV": [
+            68,
+            83
+          ],
+          "completed_depth": 2,
+          "stop": "DepthComplete",
+          "parent_restored": true,
+          "Search_s": 0.000371239,
+          "setup_Search_drop_s": 0.020572238,
+          "nodes": 655,
+          "evals": 543,
+          "terminal": 0,
+          "PVS": 4,
+          "TT_probes": 112,
+          "TT_hits": 2,
+          "TT_cutoffs": 0,
+          "child_depth": null,
+          "nonroot_ply": null,
+          "restricted_root_TT": null,
+          "window": [
+            "-infinity",
+            "+infinity"
+          ],
+          "source_value_origin": "searched; static/TT origin UNKNOWN"
+        }
+      },
+      "different_argmax": true,
+      "single_intervention_action_flips": 2,
+      "joint_intervention_action_flip": true,
+      "intervention_count": 5,
+      "root_original_completed_depth": 3
+    },
+    {
+      "parent": 0,
+      "root_id": "distance-slot004-ply011",
+      "H": 3,
+      "C": [
+        68,
+        156
+      ],
+      "N": {
+        "candidate_values": [
+          {
+            "action": 68,
+            "value_parent_bits": 1060004478
+          },
+          {
+            "action": 156,
+            "value_parent_bits": 1064673237
+          }
+        ],
+        "canonical_action": 156,
+        "argmax_ties": [
+          156
+        ],
+        "value_bits": 1064673237,
+        "status": "COMPLETE"
+      },
+      "D": {
+        "candidate_values": [
+          {
+            "action": 68,
+            "value_parent_bits": 3197445870
+          },
+          {
+            "action": 156,
+            "value_parent_bits": 3200420013
+          }
+        ],
+        "canonical_action": 68,
+        "argmax_ties": [
+          68
+        ],
+        "value_bits": 3197445870,
+        "status": "COMPLETE"
+      },
+      "N_PV": [
+        156,
+        193,
+        207
+      ],
+      "D_PV": [
+        68,
+        83,
+        59
+      ],
+      "normal": {
+        "N": {
+          "id": "distance-slot004-ply011:N:H3:normal",
+          "parent": 0,
+          "evaluator": "N",
+          "H": 3,
+          "forced": null,
+          "status": "COMPLETE",
+          "bound": "Exact",
+          "requested_value_bits": 1064673236,
+          "value": 0.9594700336456299,
+          "action": 156,
+          "PV": [
+            156,
+            193,
+            207
+          ],
+          "completed_depth": 3,
+          "stop": "DepthComplete",
+          "parent_restored": true,
+          "Search_s": 0.01144099,
+          "setup_Search_drop_s": 0.035124619,
+          "nodes": 12909,
+          "evals": 12452,
+          "terminal": 0,
+          "PVS": 14,
+          "TT_probes": 457,
+          "TT_hits": 115,
+          "TT_cutoffs": 0,
+          "child_depth": null,
+          "nonroot_ply": null,
+          "restricted_root_TT": null,
+          "window": [
+            "-infinity",
+            "+infinity"
+          ],
+          "source_value_origin": "searched; static/TT origin UNKNOWN"
+        },
+        "D": {
+          "id": "distance-slot004-ply011:D:H3:normal",
+          "parent": 0,
+          "evaluator": "D",
+          "H": 3,
+          "forced": null,
+          "status": "COMPLETE",
+          "bound": "Exact",
+          "requested_value_bits": 3197445870,
+          "value": -0.29131263494491577,
+          "action": 68,
+          "PV": [
+            68,
+            83,
+            59
+          ],
+          "completed_depth": 3,
+          "stop": "DepthComplete",
+          "parent_restored": true,
+          "Search_s": 0.003585394,
+          "setup_Search_drop_s": 0.02337723,
+          "nodes": 12194,
+          "evals": 11749,
+          "terminal": 0,
+          "PVS": 4,
+          "TT_probes": 445,
+          "TT_hits": 113,
+          "TT_cutoffs": 0,
+          "child_depth": null,
+          "nonroot_ply": null,
+          "restricted_root_TT": null,
+          "window": [
+            "-infinity",
+            "+infinity"
+          ],
+          "source_value_origin": "searched; static/TT origin UNKNOWN"
+        }
+      },
+      "different_argmax": true,
+      "single_intervention_action_flips": 0,
+      "joint_intervention_action_flip": false,
+      "intervention_count": 5,
+      "root_original_completed_depth": 3
+    },
+    {
+      "parent": 1,
+      "root_id": "distance-slot004-ply039",
+      "H": 2,
+      "C": [
+        60,
+        184,
+        192
+      ],
+      "N": {
+        "candidate_values": [
+          {
+            "action": 60,
+            "value_parent_bits": 1065350724
+          },
+          {
+            "action": 184,
+            "value_parent_bits": 1065350082
+          },
+          {
+            "action": 192,
+            "value_parent_bits": 1065352334
+          }
+        ],
+        "canonical_action": 192,
+        "argmax_ties": [
+          192
+        ],
+        "value_bits": 1065352334,
+        "status": "COMPLETE"
+      },
+      "D": {
+        "candidate_values": [
+          {
+            "action": 60,
+            "value_parent_bits": 3210046052
+          },
+          {
+            "action": 184,
+            "value_parent_bits": 3209489792
+          },
+          {
+            "action": 192,
+            "value_parent_bits": 3209489793
+          }
+        ],
+        "canonical_action": 184,
+        "argmax_ties": [
+          184
+        ],
+        "value_bits": 3209489792,
+        "status": "COMPLETE"
+      },
+      "N_PV": [
+        192,
+        43
+      ],
+      "D_PV": [
+        184,
+        43
+      ],
+      "normal": {
+        "N": {
+          "id": "distance-slot004-ply039:N:H2:normal",
+          "parent": 1,
+          "evaluator": "N",
+          "H": 2,
+          "forced": null,
+          "status": "COMPLETE",
+          "bound": "Exact",
+          "requested_value_bits": 1065352334,
+          "value": 0.9999474287033081,
+          "action": 192,
+          "PV": [
+            192,
+            43
+          ],
+          "completed_depth": 2,
+          "stop": "DepthComplete",
+          "parent_restored": true,
+          "Search_s": 0.000287949,
+          "setup_Search_drop_s": 0.019904714,
+          "nodes": 224,
+          "evals": 151,
+          "terminal": 0,
+          "PVS": 4,
+          "TT_probes": 73,
+          "TT_hits": 3,
+          "TT_cutoffs": 0,
+          "child_depth": null,
+          "nonroot_ply": null,
+          "restricted_root_TT": null,
+          "window": [
+            "-infinity",
+            "+infinity"
+          ],
+          "source_value_origin": "searched; static/TT origin UNKNOWN"
+        },
+        "D": {
+          "id": "distance-slot004-ply039:D:H2:normal",
+          "parent": 1,
+          "evaluator": "D",
+          "H": 2,
+          "forced": null,
+          "status": "COMPLETE",
+          "bound": "Exact",
+          "requested_value_bits": 3209489792,
+          "value": -0.8004989624023438,
+          "action": 184,
+          "PV": [
+            184,
+            43
+          ],
+          "completed_depth": 2,
+          "stop": "DepthComplete",
+          "parent_restored": true,
+          "Search_s": 0.000189374,
+          "setup_Search_drop_s": 0.021139726,
+          "nodes": 214,
+          "evals": 143,
+          "terminal": 0,
+          "PVS": 2,
+          "TT_probes": 71,
+          "TT_hits": 1,
+          "TT_cutoffs": 0,
+          "child_depth": null,
+          "nonroot_ply": null,
+          "restricted_root_TT": null,
+          "window": [
+            "-infinity",
+            "+infinity"
+          ],
+          "source_value_origin": "searched; static/TT origin UNKNOWN"
+        }
+      },
+      "different_argmax": true,
+      "single_intervention_action_flips": 1,
+      "joint_intervention_action_flip": true,
+      "intervention_count": 3,
+      "root_original_completed_depth": 5
+    },
+    {
+      "parent": 1,
+      "root_id": "distance-slot004-ply039",
+      "H": 3,
+      "C": [
+        60,
+        184,
+        192
+      ],
+      "N": {
+        "candidate_values": [
+          {
+            "action": 60,
+            "value_parent_bits": 1065343547
+          },
+          {
+            "action": 184,
+            "value_parent_bits": 1065333315
+          },
+          {
+            "action": 192,
+            "value_parent_bits": 1065337337
+          }
+        ],
+        "canonical_action": 60,
+        "argmax_ties": [
+          60
+        ],
+        "value_bits": 1065343547,
+        "status": "COMPLETE"
+      },
+      "D": {
+        "candidate_values": [
+          {
+            "action": 60,
+            "value_parent_bits": 3208837078
+          },
+          {
+            "action": 184,
+            "value_parent_bits": 3206199256
+          },
+          {
+            "action": 192,
+            "value_parent_bits": 3208077132
+          }
+        ],
+        "canonical_action": 184,
+        "argmax_ties": [
+          184
+        ],
+        "value_bits": 3206199256,
+        "status": "COMPLETE"
+      },
+      "N_PV": [
+        60,
+        53,
+        61
+      ],
+      "D_PV": [
+        184,
+        43,
+        111
+      ],
+      "normal": {
+        "N": {
+          "id": "distance-slot004-ply039:N:H3:normal",
+          "parent": 1,
+          "evaluator": "N",
+          "H": 3,
+          "forced": null,
+          "status": "COMPLETE",
+          "bound": "Exact",
+          "requested_value_bits": 1065343547,
+          "value": 0.9994236826896667,
+          "action": 60,
+          "PV": [
+            60,
+            53
+          ],
+          "completed_depth": 3,
+          "stop": "DepthComplete",
+          "parent_restored": true,
+          "Search_s": 0.004850734,
+          "setup_Search_drop_s": 0.025229232,
+          "nodes": 4885,
+          "evals": 4662,
+          "terminal": 0,
+          "PVS": 6,
+          "TT_probes": 223,
+          "TT_hits": 75,
+          "TT_cutoffs": 0,
+          "child_depth": null,
+          "nonroot_ply": null,
+          "restricted_root_TT": null,
+          "window": [
+            "-infinity",
+            "+infinity"
+          ],
+          "source_value_origin": "searched; static/TT origin UNKNOWN"
+        },
+        "D": {
+          "id": "distance-slot004-ply039:D:H3:normal",
+          "parent": 1,
+          "evaluator": "D",
+          "H": 3,
+          "forced": null,
+          "status": "COMPLETE",
+          "bound": "Exact",
+          "requested_value_bits": 3206199256,
+          "value": -0.604367733001709,
+          "action": 184,
+          "PV": [
+            184,
+            43,
+            111
+          ],
+          "completed_depth": 3,
+          "stop": "DepthComplete",
+          "parent_restored": true,
+          "Search_s": 0.002416963,
+          "setup_Search_drop_s": 0.02192811,
+          "nodes": 4873,
+          "evals": 4662,
+          "terminal": 0,
+          "PVS": 3,
+          "TT_probes": 211,
+          "TT_hits": 71,
+          "TT_cutoffs": 0,
+          "child_depth": null,
+          "nonroot_ply": null,
+          "restricted_root_TT": null,
+          "window": [
+            "-infinity",
+            "+infinity"
+          ],
+          "source_value_origin": "searched; static/TT origin UNKNOWN"
+        }
+      },
+      "different_argmax": true,
+      "single_intervention_action_flips": 1,
+      "joint_intervention_action_flip": true,
+      "intervention_count": 5,
+      "root_original_completed_depth": 5
+    },
+    {
+      "parent": 2,
+      "root_id": "distance-slot005-ply012",
+      "H": 2,
+      "C": [
+        100,
+        104
+      ],
+      "N": {
+        "candidate_values": [
+          {
+            "action": 100,
+            "value_parent_bits": 3208393592
+          },
+          {
+            "action": 104,
+            "value_parent_bits": 3212499476
+          }
+        ],
+        "canonical_action": 100,
+        "argmax_ties": [
+          100
+        ],
+        "value_bits": 3208393592,
+        "status": "COMPLETE"
+      },
+      "D": {
+        "candidate_values": [
+          {
+            "action": 100,
+            "value_parent_bits": 3197445870
+          },
+          {
+            "action": 104,
+            "value_parent_bits": 3200420011
+          }
+        ],
+        "canonical_action": 100,
+        "argmax_ties": [
+          100
+        ],
+        "value_bits": 3197445870,
+        "status": "COMPLETE"
+      },
+      "N_PV": [
+        100,
+        114
+      ],
+      "D_PV": [
+        100,
+        114
+      ],
+      "normal": {
+        "N": {
+          "id": "distance-slot005-ply012:N:H2:normal",
+          "parent": 2,
+          "evaluator": "N",
+          "H": 2,
+          "forced": null,
+          "status": "COMPLETE",
+          "bound": "Exact",
+          "requested_value_bits": 1051628742,
+          "value": 0.34097880125045776,
+          "action": 101,
+          "PV": [
+            101,
+            145
+          ],
+          "completed_depth": 2,
+          "stop": "DepthComplete",
+          "parent_restored": true,
+          "Search_s": 0.000934095,
+          "setup_Search_drop_s": 0.021161675,
+          "nodes": 801,
+          "evals": 682,
+          "terminal": 0,
+          "PVS": 11,
+          "TT_probes": 119,
+          "TT_hits": 3,
+          "TT_cutoffs": 0,
+          "child_depth": null,
+          "nonroot_ply": null,
+          "restricted_root_TT": null,
+          "window": [
+            "-infinity",
+            "+infinity"
+          ],
+          "source_value_origin": "searched; static/TT origin UNKNOWN"
+        },
+        "D": {
+          "id": "distance-slot005-ply012:D:H2:normal",
+          "parent": 2,
+          "evaluator": "D",
+          "H": 2,
+          "forced": null,
+          "status": "COMPLETE",
+          "bound": "Exact",
+          "requested_value_bits": 3197445868,
+          "value": -0.291312575340271,
+          "action": 85,
+          "PV": [
+            85,
+            171
+          ],
+          "completed_depth": 2,
+          "stop": "DepthComplete",
+          "parent_restored": true,
+          "Search_s": 0.000369687,
+          "setup_Search_drop_s": 0.020909998,
+          "nodes": 664,
+          "evals": 546,
+          "terminal": 0,
+          "PVS": 5,
+          "TT_probes": 118,
+          "TT_hits": 2,
+          "TT_cutoffs": 0,
+          "child_depth": null,
+          "nonroot_ply": null,
+          "restricted_root_TT": null,
+          "window": [
+            "-infinity",
+            "+infinity"
+          ],
+          "source_value_origin": "searched; static/TT origin UNKNOWN"
+        }
+      },
+      "different_argmax": false,
+      "single_intervention_action_flips": 0,
+      "joint_intervention_action_flip": false,
+      "intervention_count": 0,
+      "root_original_completed_depth": 3
+    },
+    {
+      "parent": 2,
+      "root_id": "distance-slot005-ply012",
+      "H": 3,
+      "C": [
+        100,
+        104
+      ],
+      "N": {
+        "candidate_values": [
+          {
+            "action": 100,
+            "value_parent_bits": 1059871239
+          },
+          {
+            "action": 104,
+            "value_parent_bits": 1063260151
+          }
+        ],
+        "canonical_action": 104,
+        "argmax_ties": [
+          104
+        ],
+        "value_bits": 1063260151,
+        "status": "COMPLETE"
+      },
+      "D": {
+        "candidate_values": [
+          {
+            "action": 100,
+            "value_parent_bits": 3184271039
+          },
+          {
+            "action": 104,
+            "value_parent_bits": 3192528065
+          }
+        ],
+        "canonical_action": 100,
+        "argmax_ties": [
+          100
+        ],
+        "value_bits": 3184271039,
+        "status": "COMPLETE"
+      },
+      "N_PV": [
+        104,
+        149,
+        87
+      ],
+      "D_PV": [
+        100,
+        114,
+        102
+      ],
+      "normal": {
+        "N": {
+          "id": "distance-slot005-ply012:N:H3:normal",
+          "parent": 2,
+          "evaluator": "N",
+          "H": 3,
+          "forced": null,
+          "status": "COMPLETE",
+          "bound": "Exact",
+          "requested_value_bits": 1063260152,
+          "value": 0.8752436637878418,
+          "action": 104,
+          "PV": [
+            104,
+            149,
+            87
+          ],
+          "completed_depth": 3,
+          "stop": "DepthComplete",
+          "parent_restored": true,
+          "Search_s": 0.01240514,
+          "setup_Search_drop_s": 0.032045953,
+          "nodes": 14754,
+          "evals": 13998,
+          "terminal": 0,
+          "PVS": 25,
+          "TT_probes": 756,
+          "TT_hits": 240,
+          "TT_cutoffs": 102,
+          "child_depth": null,
+          "nonroot_ply": null,
+          "restricted_root_TT": null,
+          "window": [
+            "-infinity",
+            "+infinity"
+          ],
+          "source_value_origin": "searched; static/TT origin UNKNOWN"
+        },
+        "D": {
+          "id": "distance-slot005-ply012:D:H3:normal",
+          "parent": 2,
+          "evaluator": "D",
+          "H": 3,
+          "forced": null,
+          "status": "COMPLETE",
+          "bound": "Exact",
+          "requested_value_bits": 3184271039,
+          "value": -0.09966801851987839,
+          "action": 100,
+          "PV": [
+            100,
+            114
+          ],
+          "completed_depth": 3,
+          "stop": "DepthComplete",
+          "parent_restored": true,
+          "Search_s": 0.003632585,
+          "setup_Search_drop_s": 0.023740271,
+          "nodes": 13671,
+          "evals": 13094,
+          "terminal": 0,
+          "PVS": 6,
+          "TT_probes": 577,
+          "TT_hits": 122,
+          "TT_cutoffs": 0,
+          "child_depth": null,
+          "nonroot_ply": null,
+          "restricted_root_TT": null,
+          "window": [
+            "-infinity",
+            "+infinity"
+          ],
+          "source_value_origin": "searched; static/TT origin UNKNOWN"
+        }
+      },
+      "different_argmax": true,
+      "single_intervention_action_flips": 0,
+      "joint_intervention_action_flip": false,
+      "intervention_count": 5,
+      "root_original_completed_depth": 3
+    }
+  ],
+  "interventions": [
+    {
+      "parent": 0,
+      "H": 2,
+      "index": 0,
+      "joint": false,
+      "paths": [
+        [
+          68,
+          83
+        ]
+      ],
+      "node_ids": [
+        661
+      ],
+      "old_rank": {
+        "candidate_values": [
+          {
+            "action": 68,
+            "value_parent_bits": 1049266811
+          },
+          {
+            "action": 156,
+            "value_parent_bits": 1062932988
+          }
+        ],
+        "canonical_action": 156,
+        "argmax_ties": [
+          156
+        ],
+        "value_bits": 1062932988,
+        "status": "COMPLETE"
+      },
+      "new_rank": {
+        "candidate_values": [
+          {
+            "action": 68,
+            "value_parent_bits": 3200420013
+          },
+          {
+            "action": 156,
+            "value_parent_bits": 1062932988
+          }
+        ],
+        "canonical_action": 156,
+        "argmax_ties": [
+          156
+        ],
+        "value_bits": 1062932988,
+        "status": "COMPLETE"
+      },
+      "new_PV": [
+        156,
+        91
+      ],
+      "canonical_action_changed": false,
+      "argmax_ties_changed": false,
+      "recorded_intervention_pointer": "$.trees[0].comparisons[0].interventions[0]"
+    },
+    {
+      "parent": 0,
+      "H": 2,
+      "index": 1,
+      "joint": false,
+      "paths": [
+        [
+          68,
+          131
+        ]
+      ],
+      "node_ids": [
+        4852
+      ],
+      "old_rank": {
+        "candidate_values": [
+          {
+            "action": 68,
+            "value_parent_bits": 1049266811
+          },
+          {
+            "action": 156,
+            "value_parent_bits": 1062932988
+          }
+        ],
+        "canonical_action": 156,
+        "argmax_ties": [
+          156
+        ],
+        "value_bits": 1062932988,
+        "status": "COMPLETE"
+      },
+      "new_rank": {
+        "candidate_values": [
+          {
+            "action": 68,
+            "value_parent_bits": 3184271031
+          },
+          {
+            "action": 156,
+            "value_parent_bits": 1062932988
+          }
+        ],
+        "canonical_action": 156,
+        "argmax_ties": [
+          156
+        ],
+        "value_bits": 1062932988,
+        "status": "COMPLETE"
+      },
+      "new_PV": [
+        156,
+        91
+      ],
+      "canonical_action_changed": false,
+      "argmax_ties_changed": false,
+      "recorded_intervention_pointer": "$.trees[0].comparisons[0].interventions[1]"
+    },
+    {
+      "parent": 0,
+      "H": 2,
+      "index": 2,
+      "joint": false,
+      "paths": [
+        [
+          156,
+          91
+        ]
+      ],
+      "node_ids": [
+        12765
+      ],
+      "old_rank": {
+        "candidate_values": [
+          {
+            "action": 68,
+            "value_parent_bits": 1049266811
+          },
+          {
+            "action": 156,
+            "value_parent_bits": 1062932988
+          }
+        ],
+        "canonical_action": 156,
+        "argmax_ties": [
+          156
+        ],
+        "value_bits": 1062932988,
+        "status": "COMPLETE"
+      },
+      "new_rank": {
+        "candidate_values": [
+          {
+            "action": 68,
+            "value_parent_bits": 1049266811
+          },
+          {
+            "action": 156,
+            "value_parent_bits": 3197445870
+          }
+        ],
+        "canonical_action": 68,
+        "argmax_ties": [
+          68
+        ],
+        "value_bits": 1049266811,
+        "status": "COMPLETE"
+      },
+      "new_PV": [
+        68,
+        131
+      ],
+      "canonical_action_changed": true,
+      "argmax_ties_changed": true,
+      "recorded_intervention_pointer": "$.trees[0].comparisons[0].interventions[2]"
+    },
+    {
+      "parent": 0,
+      "H": 2,
+      "index": 3,
+      "joint": false,
+      "paths": [
+        [
+          156,
+          196
+        ]
+      ],
+      "node_ids": [
+        21769
+      ],
+      "old_rank": {
+        "candidate_values": [
+          {
+            "action": 68,
+            "value_parent_bits": 1049266811
+          },
+          {
+            "action": 156,
+            "value_parent_bits": 1062932988
+          }
+        ],
+        "canonical_action": 156,
+        "argmax_ties": [
+          156
+        ],
+        "value_bits": 1062932988,
+        "status": "COMPLETE"
+      },
+      "new_rank": {
+        "candidate_values": [
+          {
+            "action": 68,
+            "value_parent_bits": 1049266811
+          },
+          {
+            "action": 156,
+            "value_parent_bits": 3203177120
+          }
+        ],
+        "canonical_action": 68,
+        "argmax_ties": [
+          68
+        ],
+        "value_bits": 1049266811,
+        "status": "COMPLETE"
+      },
+      "new_PV": [
+        68,
+        131
+      ],
+      "canonical_action_changed": true,
+      "argmax_ties_changed": true,
+      "recorded_intervention_pointer": "$.trees[0].comparisons[0].interventions[3]"
+    },
+    {
+      "parent": 0,
+      "H": 2,
+      "index": 4,
+      "joint": true,
+      "paths": [
+        [
+          68,
+          83
+        ],
+        [
+          68,
+          131
+        ],
+        [
+          156,
+          91
+        ],
+        [
+          156,
+          196
+        ]
+      ],
+      "node_ids": [
+        661,
+        4852,
+        12765,
+        21769
+      ],
+      "old_rank": {
+        "candidate_values": [
+          {
+            "action": 68,
+            "value_parent_bits": 1049266811
+          },
+          {
+            "action": 156,
+            "value_parent_bits": 1062932988
+          }
+        ],
+        "canonical_action": 156,
+        "argmax_ties": [
+          156
+        ],
+        "value_bits": 1062932988,
+        "status": "COMPLETE"
+      },
+      "new_rank": {
+        "candidate_values": [
+          {
+            "action": 68,
+            "value_parent_bits": 3200420013
+          },
+          {
+            "action": 156,
+            "value_parent_bits": 3203177120
+          }
+        ],
+        "canonical_action": 68,
+        "argmax_ties": [
+          68
+        ],
+        "value_bits": 3200420013,
+        "status": "COMPLETE"
+      },
+      "new_PV": [
+        68,
+        83
+      ],
+      "canonical_action_changed": true,
+      "argmax_ties_changed": true,
+      "recorded_intervention_pointer": "$.trees[0].comparisons[0].interventions[4]"
+    },
+    {
+      "parent": 0,
+      "H": 3,
+      "index": 0,
+      "joint": false,
+      "paths": [
+        [
+          68,
+          83,
+          59
+        ]
+      ],
+      "node_ids": [
+        662
+      ],
+      "old_rank": {
+        "candidate_values": [
+          {
+            "action": 68,
+            "value_parent_bits": 1060004478
+          },
+          {
+            "action": 156,
+            "value_parent_bits": 1064673237
+          }
+        ],
+        "canonical_action": 156,
+        "argmax_ties": [
+          156
+        ],
+        "value_bits": 1064673237,
+        "status": "COMPLETE"
+      },
+      "new_rank": {
+        "candidate_values": [
+          {
+            "action": 68,
+            "value_parent_bits": 1060004478
+          },
+          {
+            "action": 156,
+            "value_parent_bits": 1064673237
+          }
+        ],
+        "canonical_action": 156,
+        "argmax_ties": [
+          156
+        ],
+        "value_bits": 1064673237,
+        "status": "COMPLETE"
+      },
+      "new_PV": [
+        156,
+        193,
+        207
+      ],
+      "canonical_action_changed": false,
+      "argmax_ties_changed": false,
+      "recorded_intervention_pointer": "$.trees[0].comparisons[1].interventions[0]"
+    },
+    {
+      "parent": 0,
+      "H": 3,
+      "index": 1,
+      "joint": false,
+      "paths": [
+        [
+          68,
+          146,
+          193
+        ]
+      ],
+      "node_ids": [
+        6342
+      ],
+      "old_rank": {
+        "candidate_values": [
+          {
+            "action": 68,
+            "value_parent_bits": 1060004478
+          },
+          {
+            "action": 156,
+            "value_parent_bits": 1064673237
+          }
+        ],
+        "canonical_action": 156,
+        "argmax_ties": [
+          156
+        ],
+        "value_bits": 1064673237,
+        "status": "COMPLETE"
+      },
+      "new_rank": {
+        "candidate_values": [
+          {
+            "action": 68,
+            "value_parent_bits": 1058252556
+          },
+          {
+            "action": 156,
+            "value_parent_bits": 1064673237
+          }
+        ],
+        "canonical_action": 156,
+        "argmax_ties": [
+          156
+        ],
+        "value_bits": 1064673237,
+        "status": "COMPLETE"
+      },
+      "new_PV": [
+        156,
+        193,
+        207
+      ],
+      "canonical_action_changed": false,
+      "argmax_ties_changed": false,
+      "recorded_intervention_pointer": "$.trees[0].comparisons[1].interventions[1]"
+    },
+    {
+      "parent": 0,
+      "H": 3,
+      "index": 2,
+      "joint": false,
+      "paths": [
+        [
+          156,
+          193,
+          207
+        ]
+      ],
+      "node_ids": [
+        21665
+      ],
+      "old_rank": {
+        "candidate_values": [
+          {
+            "action": 68,
+            "value_parent_bits": 1060004478
+          },
+          {
+            "action": 156,
+            "value_parent_bits": 1064673237
+          }
+        ],
+        "canonical_action": 156,
+        "argmax_ties": [
+          156
+        ],
+        "value_bits": 1064673237,
+        "status": "COMPLETE"
+      },
+      "new_rank": {
+        "candidate_values": [
+          {
+            "action": 68,
+            "value_parent_bits": 1060004478
+          },
+          {
+            "action": 156,
+            "value_parent_bits": 1064314595
+          }
+        ],
+        "canonical_action": 156,
+        "argmax_ties": [
+          156
+        ],
+        "value_bits": 1064314595,
+        "status": "COMPLETE"
+      },
+      "new_PV": [
+        156,
+        193,
+        140
+      ],
+      "canonical_action_changed": false,
+      "argmax_ties_changed": false,
+      "recorded_intervention_pointer": "$.trees[0].comparisons[1].interventions[2]"
+    },
+    {
+      "parent": 0,
+      "H": 3,
+      "index": 3,
+      "joint": false,
+      "paths": [
+        [
+          156,
+          196,
+          58
+        ]
+      ],
+      "node_ids": [
+        21770
+      ],
+      "old_rank": {
+        "candidate_values": [
+          {
+            "action": 68,
+            "value_parent_bits": 1060004478
+          },
+          {
+            "action": 156,
+            "value_parent_bits": 1064673237
+          }
+        ],
+        "canonical_action": 156,
+        "argmax_ties": [
+          156
+        ],
+        "value_bits": 1064673237,
+        "status": "COMPLETE"
+      },
+      "new_rank": {
+        "candidate_values": [
+          {
+            "action": 68,
+            "value_parent_bits": 1060004478
+          },
+          {
+            "action": 156,
+            "value_parent_bits": 1064673237
+          }
+        ],
+        "canonical_action": 156,
+        "argmax_ties": [
+          156
+        ],
+        "value_bits": 1064673237,
+        "status": "COMPLETE"
+      },
+      "new_PV": [
+        156,
+        193,
+        207
+      ],
+      "canonical_action_changed": false,
+      "argmax_ties_changed": false,
+      "recorded_intervention_pointer": "$.trees[0].comparisons[1].interventions[3]"
+    },
+    {
+      "parent": 0,
+      "H": 3,
+      "index": 4,
+      "joint": true,
+      "paths": [
+        [
+          68,
+          83,
+          59
+        ],
+        [
+          68,
+          146,
+          193
+        ],
+        [
+          156,
+          193,
+          207
+        ],
+        [
+          156,
+          196,
+          58
+        ]
+      ],
+      "node_ids": [
+        662,
+        6342,
+        21665,
+        21770
+      ],
+      "old_rank": {
+        "candidate_values": [
+          {
+            "action": 68,
+            "value_parent_bits": 1060004478
+          },
+          {
+            "action": 156,
+            "value_parent_bits": 1064673237
+          }
+        ],
+        "canonical_action": 156,
+        "argmax_ties": [
+          156
+        ],
+        "value_bits": 1064673237,
+        "status": "COMPLETE"
+      },
+      "new_rank": {
+        "candidate_values": [
+          {
+            "action": 68,
+            "value_parent_bits": 1058252556
+          },
+          {
+            "action": 156,
+            "value_parent_bits": 1064314595
+          }
+        ],
+        "canonical_action": 156,
+        "argmax_ties": [
+          156
+        ],
+        "value_bits": 1064314595,
+        "status": "COMPLETE"
+      },
+      "new_PV": [
+        156,
+        193,
+        140
+      ],
+      "canonical_action_changed": false,
+      "argmax_ties_changed": false,
+      "recorded_intervention_pointer": "$.trees[0].comparisons[1].interventions[4]"
+    },
+    {
+      "parent": 1,
+      "H": 2,
+      "index": 0,
+      "joint": false,
+      "paths": [
+        [
+          184,
+          43
+        ]
+      ],
+      "node_ids": [
+        210
+      ],
+      "old_rank": {
+        "candidate_values": [
+          {
+            "action": 60,
+            "value_parent_bits": 1065350724
+          },
+          {
+            "action": 184,
+            "value_parent_bits": 1065350082
+          },
+          {
+            "action": 192,
+            "value_parent_bits": 1065352334
+          }
+        ],
+        "canonical_action": 192,
+        "argmax_ties": [
+          192
+        ],
+        "value_bits": 1065352334,
+        "status": "COMPLETE"
+      },
+      "new_rank": {
+        "candidate_values": [
+          {
+            "action": 60,
+            "value_parent_bits": 1065350724
+          },
+          {
+            "action": 184,
+            "value_parent_bits": 3209489792
+          },
+          {
+            "action": 192,
+            "value_parent_bits": 1065352334
+          }
+        ],
+        "canonical_action": 192,
+        "argmax_ties": [
+          192
+        ],
+        "value_bits": 1065352334,
+        "status": "COMPLETE"
+      },
+      "new_PV": [
+        192,
+        43
+      ],
+      "canonical_action_changed": false,
+      "argmax_ties_changed": false,
+      "recorded_intervention_pointer": "$.trees[1].comparisons[0].interventions[0]"
+    },
+    {
+      "parent": 1,
+      "H": 2,
+      "index": 1,
+      "joint": false,
+      "paths": [
+        [
+          192,
+          43
+        ]
+      ],
+      "node_ids": [
+        339
+      ],
+      "old_rank": {
+        "candidate_values": [
+          {
+            "action": 60,
+            "value_parent_bits": 1065350724
+          },
+          {
+            "action": 184,
+            "value_parent_bits": 1065350082
+          },
+          {
+            "action": 192,
+            "value_parent_bits": 1065352334
+          }
+        ],
+        "canonical_action": 192,
+        "argmax_ties": [
+          192
+        ],
+        "value_bits": 1065352334,
+        "status": "COMPLETE"
+      },
+      "new_rank": {
+        "candidate_values": [
+          {
+            "action": 60,
+            "value_parent_bits": 1065350724
+          },
+          {
+            "action": 184,
+            "value_parent_bits": 1065350082
+          },
+          {
+            "action": 192,
+            "value_parent_bits": 3209489793
+          }
+        ],
+        "canonical_action": 60,
+        "argmax_ties": [
+          60
+        ],
+        "value_bits": 1065350724,
+        "status": "COMPLETE"
+      },
+      "new_PV": [
+        60,
+        53
+      ],
+      "canonical_action_changed": true,
+      "argmax_ties_changed": true,
+      "recorded_intervention_pointer": "$.trees[1].comparisons[0].interventions[1]"
+    },
+    {
+      "parent": 1,
+      "H": 2,
+      "index": 2,
+      "joint": true,
+      "paths": [
+        [
+          184,
+          43
+        ],
+        [
+          192,
+          43
+        ]
+      ],
+      "node_ids": [
+        210,
+        339
+      ],
+      "old_rank": {
+        "candidate_values": [
+          {
+            "action": 60,
+            "value_parent_bits": 1065350724
+          },
+          {
+            "action": 184,
+            "value_parent_bits": 1065350082
+          },
+          {
+            "action": 192,
+            "value_parent_bits": 1065352334
+          }
+        ],
+        "canonical_action": 192,
+        "argmax_ties": [
+          192
+        ],
+        "value_bits": 1065352334,
+        "status": "COMPLETE"
+      },
+      "new_rank": {
+        "candidate_values": [
+          {
+            "action": 60,
+            "value_parent_bits": 1065350724
+          },
+          {
+            "action": 184,
+            "value_parent_bits": 3209489792
+          },
+          {
+            "action": 192,
+            "value_parent_bits": 3209489793
+          }
+        ],
+        "canonical_action": 60,
+        "argmax_ties": [
+          60
+        ],
+        "value_bits": 1065350724,
+        "status": "COMPLETE"
+      },
+      "new_PV": [
+        60,
+        53
+      ],
+      "canonical_action_changed": true,
+      "argmax_ties_changed": true,
+      "recorded_intervention_pointer": "$.trees[1].comparisons[0].interventions[2]"
+    },
+    {
+      "parent": 1,
+      "H": 3,
+      "index": 0,
+      "joint": false,
+      "paths": [
+        [
+          60,
+          53,
+          61
+        ]
+      ],
+      "node_ids": [
+        141
+      ],
+      "old_rank": {
+        "candidate_values": [
+          {
+            "action": 60,
+            "value_parent_bits": 1065343547
+          },
+          {
+            "action": 184,
+            "value_parent_bits": 1065333315
+          },
+          {
+            "action": 192,
+            "value_parent_bits": 1065337337
+          }
+        ],
+        "canonical_action": 60,
+        "argmax_ties": [
+          60
+        ],
+        "value_bits": 1065343547,
+        "status": "COMPLETE"
+      },
+      "new_rank": {
+        "candidate_values": [
+          {
+            "action": 60,
+            "value_parent_bits": 1065320716
+          },
+          {
+            "action": 184,
+            "value_parent_bits": 1065333315
+          },
+          {
+            "action": 192,
+            "value_parent_bits": 1065337337
+          }
+        ],
+        "canonical_action": 192,
+        "argmax_ties": [
+          192
+        ],
+        "value_bits": 1065337337,
+        "status": "COMPLETE"
+      },
+      "new_PV": [
+        192,
+        43,
+        70
+      ],
+      "canonical_action_changed": true,
+      "argmax_ties_changed": true,
+      "recorded_intervention_pointer": "$.trees[1].comparisons[1].interventions[0]"
+    },
+    {
+      "parent": 1,
+      "H": 3,
+      "index": 1,
+      "joint": false,
+      "paths": [
+        [
+          60,
+          53,
+          136
+        ]
+      ],
+      "node_ids": [
+        168
+      ],
+      "old_rank": {
+        "candidate_values": [
+          {
+            "action": 60,
+            "value_parent_bits": 1065343547
+          },
+          {
+            "action": 184,
+            "value_parent_bits": 1065333315
+          },
+          {
+            "action": 192,
+            "value_parent_bits": 1065337337
+          }
+        ],
+        "canonical_action": 60,
+        "argmax_ties": [
+          60
+        ],
+        "value_bits": 1065343547,
+        "status": "COMPLETE"
+      },
+      "new_rank": {
+        "candidate_values": [
+          {
+            "action": 60,
+            "value_parent_bits": 1065343547
+          },
+          {
+            "action": 184,
+            "value_parent_bits": 1065333315
+          },
+          {
+            "action": 192,
+            "value_parent_bits": 1065337337
+          }
+        ],
+        "canonical_action": 60,
+        "argmax_ties": [
+          60
+        ],
+        "value_bits": 1065343547,
+        "status": "COMPLETE"
+      },
+      "new_PV": [
+        60,
+        53,
+        61
+      ],
+      "canonical_action_changed": false,
+      "argmax_ties_changed": false,
+      "recorded_intervention_pointer": "$.trees[1].comparisons[1].interventions[1]"
+    },
+    {
+      "parent": 1,
+      "H": 3,
+      "index": 2,
+      "joint": false,
+      "paths": [
+        [
+          184,
+          43,
+          60
+        ]
+      ],
+      "node_ids": [
+        211
+      ],
+      "old_rank": {
+        "candidate_values": [
+          {
+            "action": 60,
+            "value_parent_bits": 1065343547
+          },
+          {
+            "action": 184,
+            "value_parent_bits": 1065333315
+          },
+          {
+            "action": 192,
+            "value_parent_bits": 1065337337
+          }
+        ],
+        "canonical_action": 60,
+        "argmax_ties": [
+          60
+        ],
+        "value_bits": 1065343547,
+        "status": "COMPLETE"
+      },
+      "new_rank": {
+        "candidate_values": [
+          {
+            "action": 60,
+            "value_parent_bits": 1065343547
+          },
+          {
+            "action": 184,
+            "value_parent_bits": 1065213588
+          },
+          {
+            "action": 192,
+            "value_parent_bits": 1065337337
+          }
+        ],
+        "canonical_action": 60,
+        "argmax_ties": [
+          60
+        ],
+        "value_bits": 1065343547,
+        "status": "COMPLETE"
+      },
+      "new_PV": [
+        60,
+        53,
+        61
+      ],
+      "canonical_action_changed": false,
+      "argmax_ties_changed": false,
+      "recorded_intervention_pointer": "$.trees[1].comparisons[1].interventions[2]"
+    },
+    {
+      "parent": 1,
+      "H": 3,
+      "index": 3,
+      "joint": false,
+      "paths": [
+        [
+          184,
+          43,
+          111
+        ]
+      ],
+      "node_ids": [
+        228
+      ],
+      "old_rank": {
+        "candidate_values": [
+          {
+            "action": 60,
+            "value_parent_bits": 1065343547
+          },
+          {
+            "action": 184,
+            "value_parent_bits": 1065333315
+          },
+          {
+            "action": 192,
+            "value_parent_bits": 1065337337
+          }
+        ],
+        "canonical_action": 60,
+        "argmax_ties": [
+          60
+        ],
+        "value_bits": 1065343547,
+        "status": "COMPLETE"
+      },
+      "new_rank": {
+        "candidate_values": [
+          {
+            "action": 60,
+            "value_parent_bits": 1065343547
+          },
+          {
+            "action": 184,
+            "value_parent_bits": 1065333315
+          },
+          {
+            "action": 192,
+            "value_parent_bits": 1065337337
+          }
+        ],
+        "canonical_action": 60,
+        "argmax_ties": [
+          60
+        ],
+        "value_bits": 1065343547,
+        "status": "COMPLETE"
+      },
+      "new_PV": [
+        60,
+        53,
+        61
+      ],
+      "canonical_action_changed": false,
+      "argmax_ties_changed": false,
+      "recorded_intervention_pointer": "$.trees[1].comparisons[1].interventions[3]"
+    },
+    {
+      "parent": 1,
+      "H": 3,
+      "index": 4,
+      "joint": true,
+      "paths": [
+        [
+          60,
+          53,
+          61
+        ],
+        [
+          60,
+          53,
+          136
+        ],
+        [
+          184,
+          43,
+          60
+        ],
+        [
+          184,
+          43,
+          111
+        ]
+      ],
+      "node_ids": [
+        141,
+        168,
+        211,
+        228
+      ],
+      "old_rank": {
+        "candidate_values": [
+          {
+            "action": 60,
+            "value_parent_bits": 1065343547
+          },
+          {
+            "action": 184,
+            "value_parent_bits": 1065333315
+          },
+          {
+            "action": 192,
+            "value_parent_bits": 1065337337
+          }
+        ],
+        "canonical_action": 60,
+        "argmax_ties": [
+          60
+        ],
+        "value_bits": 1065343547,
+        "status": "COMPLETE"
+      },
+      "new_rank": {
+        "candidate_values": [
+          {
+            "action": 60,
+            "value_parent_bits": 1065320716
+          },
+          {
+            "action": 184,
+            "value_parent_bits": 1065213588
+          },
+          {
+            "action": 192,
+            "value_parent_bits": 1065337337
+          }
+        ],
+        "canonical_action": 192,
+        "argmax_ties": [
+          192
+        ],
+        "value_bits": 1065337337,
+        "status": "COMPLETE"
+      },
+      "new_PV": [
+        192,
+        43,
+        70
+      ],
+      "canonical_action_changed": true,
+      "argmax_ties_changed": true,
+      "recorded_intervention_pointer": "$.trees[1].comparisons[1].interventions[4]"
+    },
+    {
+      "parent": 2,
+      "H": 3,
+      "index": 0,
+      "joint": false,
+      "paths": [
+        [
+          100,
+          114,
+          102
+        ]
+      ],
+      "node_ids": [
+        3334
+      ],
+      "old_rank": {
+        "candidate_values": [
+          {
+            "action": 100,
+            "value_parent_bits": 1059871239
+          },
+          {
+            "action": 104,
+            "value_parent_bits": 1063260151
+          }
+        ],
+        "canonical_action": 104,
+        "argmax_ties": [
+          104
+        ],
+        "value_bits": 1063260151,
+        "status": "COMPLETE"
+      },
+      "new_rank": {
+        "candidate_values": [
+          {
+            "action": 100,
+            "value_parent_bits": 1059871239
+          },
+          {
+            "action": 104,
+            "value_parent_bits": 1063260151
+          }
+        ],
+        "canonical_action": 104,
+        "argmax_ties": [
+          104
+        ],
+        "value_bits": 1063260151,
+        "status": "COMPLETE"
+      },
+      "new_PV": [
+        104,
+        149,
+        87
+      ],
+      "canonical_action_changed": false,
+      "argmax_ties_changed": false,
+      "recorded_intervention_pointer": "$.trees[2].comparisons[1].interventions[0]"
+    },
+    {
+      "parent": 2,
+      "H": 3,
+      "index": 1,
+      "joint": false,
+      "paths": [
+        [
+          100,
+          208,
+          160
+        ]
+      ],
+      "node_ids": [
+        11798
+      ],
+      "old_rank": {
+        "candidate_values": [
+          {
+            "action": 100,
+            "value_parent_bits": 1059871239
+          },
+          {
+            "action": 104,
+            "value_parent_bits": 1063260151
+          }
+        ],
+        "canonical_action": 104,
+        "argmax_ties": [
+          104
+        ],
+        "value_bits": 1063260151,
+        "status": "COMPLETE"
+      },
+      "new_rank": {
+        "candidate_values": [
+          {
+            "action": 100,
+            "value_parent_bits": 1059100482
+          },
+          {
+            "action": 104,
+            "value_parent_bits": 1063260151
+          }
+        ],
+        "canonical_action": 104,
+        "argmax_ties": [
+          104
+        ],
+        "value_bits": 1063260151,
+        "status": "COMPLETE"
+      },
+      "new_PV": [
+        104,
+        149,
+        87
+      ],
+      "canonical_action_changed": false,
+      "argmax_ties_changed": false,
+      "recorded_intervention_pointer": "$.trees[2].comparisons[1].interventions[1]"
+    },
+    {
+      "parent": 2,
+      "H": 3,
+      "index": 2,
+      "joint": false,
+      "paths": [
+        [
+          104,
+          149,
+          87
+        ]
+      ],
+      "node_ids": [
+        18749
+      ],
+      "old_rank": {
+        "candidate_values": [
+          {
+            "action": 100,
+            "value_parent_bits": 1059871239
+          },
+          {
+            "action": 104,
+            "value_parent_bits": 1063260151
+          }
+        ],
+        "canonical_action": 104,
+        "argmax_ties": [
+          104
+        ],
+        "value_bits": 1063260151,
+        "status": "COMPLETE"
+      },
+      "new_rank": {
+        "candidate_values": [
+          {
+            "action": 100,
+            "value_parent_bits": 1059871239
+          },
+          {
+            "action": 104,
+            "value_parent_bits": 1062048456
+          }
+        ],
+        "canonical_action": 104,
+        "argmax_ties": [
+          104
+        ],
+        "value_bits": 1062048456,
+        "status": "COMPLETE"
+      },
+      "new_PV": [
+        104,
+        149,
+        110
+      ],
+      "canonical_action_changed": false,
+      "argmax_ties_changed": false,
+      "recorded_intervention_pointer": "$.trees[2].comparisons[1].interventions[2]"
+    },
+    {
+      "parent": 2,
+      "H": 3,
+      "index": 3,
+      "joint": false,
+      "paths": [
+        [
+          104,
+          171,
+          102
+        ]
+      ],
+      "node_ids": [
+        20844
+      ],
+      "old_rank": {
+        "candidate_values": [
+          {
+            "action": 100,
+            "value_parent_bits": 1059871239
+          },
+          {
+            "action": 104,
+            "value_parent_bits": 1063260151
+          }
+        ],
+        "canonical_action": 104,
+        "argmax_ties": [
+          104
+        ],
+        "value_bits": 1063260151,
+        "status": "COMPLETE"
+      },
+      "new_rank": {
+        "candidate_values": [
+          {
+            "action": 100,
+            "value_parent_bits": 1059871239
+          },
+          {
+            "action": 104,
+            "value_parent_bits": 1063260151
+          }
+        ],
+        "canonical_action": 104,
+        "argmax_ties": [
+          104
+        ],
+        "value_bits": 1063260151,
+        "status": "COMPLETE"
+      },
+      "new_PV": [
+        104,
+        149,
+        87
+      ],
+      "canonical_action_changed": false,
+      "argmax_ties_changed": false,
+      "recorded_intervention_pointer": "$.trees[2].comparisons[1].interventions[3]"
+    },
+    {
+      "parent": 2,
+      "H": 3,
+      "index": 4,
+      "joint": true,
+      "paths": [
+        [
+          100,
+          114,
+          102
+        ],
+        [
+          100,
+          208,
+          160
+        ],
+        [
+          104,
+          149,
+          87
+        ],
+        [
+          104,
+          171,
+          102
+        ]
+      ],
+      "node_ids": [
+        3334,
+        11798,
+        18749,
+        20844
+      ],
+      "old_rank": {
+        "candidate_values": [
+          {
+            "action": 100,
+            "value_parent_bits": 1059871239
+          },
+          {
+            "action": 104,
+            "value_parent_bits": 1063260151
+          }
+        ],
+        "canonical_action": 104,
+        "argmax_ties": [
+          104
+        ],
+        "value_bits": 1063260151,
+        "status": "COMPLETE"
+      },
+      "new_rank": {
+        "candidate_values": [
+          {
+            "action": 100,
+            "value_parent_bits": 1059100482
+          },
+          {
+            "action": 104,
+            "value_parent_bits": 1062048456
+          }
+        ],
+        "canonical_action": 104,
+        "argmax_ties": [
+          104
+        ],
+        "value_bits": 1062048456,
+        "status": "COMPLETE"
+      },
+      "new_PV": [
+        104,
+        149,
+        110
+      ],
+      "canonical_action_changed": false,
+      "argmax_ties_changed": false,
+      "recorded_intervention_pointer": "$.trees[2].comparisons[1].interventions[4]"
+    }
+  ],
+  "endpoint_facts": [
+    {
+      "parent": 0,
+      "H": 2,
+      "node": 661,
+      "path": [
+        68,
+        83
+      ],
+      "path_names": [
+        "f8",
+        "H(c1)"
+      ],
+      "leaf": {
+        "baseline_bits": 0,
+        "distance_post_bits": 3200420013,
+        "nnue_post_bits": 1063260611,
+        "pre_tanh_bits": 1068332704,
+        "residual_bits": 1068332704,
+        "scaled_distance_bits": [
+          1041026253,
+          1035154227
+        ]
+      },
+      "leaf_local_STM": 1,
+      "root_STM": 1,
+      "root_sign": 1,
+      "original_pointer": "$.trees[0].tree.nodes[661]"
+    },
+    {
+      "parent": 0,
+      "H": 2,
+      "node": 4852,
+      "path": [
+        68,
+        131
+      ],
+      "path_names": [
+        "f8",
+        "H(c7)"
+      ],
+      "leaf": {
+        "baseline_bits": 0,
+        "distance_post_bits": 3184271031,
+        "nnue_post_bits": 1049266811,
+        "pre_tanh_bits": 1049498677,
+        "residual_bits": 1049498677,
+        "scaled_distance_bits": [
+          1038509670,
+          1036831949
+        ]
+      },
+      "leaf_local_STM": 1,
+      "root_STM": 1,
+      "root_sign": 1,
+      "original_pointer": "$.trees[0].tree.nodes[4852]"
+    },
+    {
+      "parent": 0,
+      "H": 2,
+      "node": 12765,
+      "path": [
+        156,
+        91
+      ],
+      "path_names": [
+        "V(d2)",
+        "H(c2)"
+      ],
+      "leaf": {
+        "baseline_bits": 0,
+        "distance_post_bits": 3197445870,
+        "nnue_post_bits": 1062932988,
+        "pre_tanh_bits": 1067678728,
+        "residual_bits": 1067678728,
+        "scaled_distance_bits": [
+          1040187392,
+          1035154227
+        ]
+      },
+      "leaf_local_STM": 1,
+      "root_STM": 1,
+      "root_sign": 1,
+      "original_pointer": "$.trees[0].tree.nodes[12765]"
+    },
+    {
+      "parent": 0,
+      "H": 2,
+      "node": 21769,
+      "path": [
+        156,
+        196
+      ],
+      "path_names": [
+        "V(d2)",
+        "V(d7)"
+      ],
+      "leaf": {
+        "baseline_bits": 0,
+        "distance_post_bits": 3203177120,
+        "nnue_post_bits": 1063526398,
+        "pre_tanh_bits": 1068937718,
+        "residual_bits": 1068937718,
+        "scaled_distance_bits": [
+          1041865114,
+          1035154227
+        ]
+      },
+      "leaf_local_STM": 1,
+      "root_STM": 1,
+      "root_sign": 1,
+      "original_pointer": "$.trees[0].tree.nodes[21769]"
+    },
+    {
+      "parent": 0,
+      "H": 3,
+      "node": 662,
+      "path": [
+        68,
+        83,
+        59
+      ],
+      "path_names": [
+        "f8",
+        "H(c1)",
+        "f7"
+      ],
+      "leaf": {
+        "baseline_bits": 0,
+        "distance_post_bits": 1049962222,
+        "nnue_post_bits": 3210320746,
+        "pre_tanh_bits": 3214986467,
+        "residual_bits": 3214986467,
+        "scaled_distance_bits": [
+          1035154227,
+          1040187392
+        ]
+      },
+      "leaf_local_STM": 0,
+      "root_STM": 1,
+      "root_sign": -1,
+      "original_pointer": "$.trees[0].tree.nodes[662]"
+    },
+    {
+      "parent": 0,
+      "H": 3,
+      "node": 6342,
+      "path": [
+        68,
+        146,
+        193
+      ],
+      "path_names": [
+        "f8",
+        "V(b1)",
+        "V(a7)"
+      ],
+      "leaf": {
+        "baseline_bits": 0,
+        "distance_post_bits": 1045044417,
+        "nnue_post_bits": 3207488126,
+        "pre_tanh_bits": 3210007078,
+        "residual_bits": 3210007078,
+        "scaled_distance_bits": [
+          1035154227,
+          1038509670
+        ]
+      },
+      "leaf_local_STM": 0,
+      "root_STM": 1,
+      "root_sign": -1,
+      "original_pointer": "$.trees[0].tree.nodes[6342]"
+    },
+    {
+      "parent": 0,
+      "H": 3,
+      "node": 21665,
+      "path": [
+        156,
+        193,
+        207
+      ],
+      "path_names": [
+        "V(d2)",
+        "V(a7)",
+        "V(g8)"
+      ],
+      "leaf": {
+        "baseline_bits": 0,
+        "distance_post_bits": 1036787391,
+        "nnue_post_bits": 3212156885,
+        "pre_tanh_bits": 3220715400,
+        "residual_bits": 3220715400,
+        "scaled_distance_bits": [
+          1035154227,
+          1036831949
+        ]
+      },
+      "leaf_local_STM": 0,
+      "root_STM": 1,
+      "root_sign": -1,
+      "original_pointer": "$.trees[0].tree.nodes[21665]"
+    },
+    {
+      "parent": 0,
+      "H": 3,
+      "node": 21770,
+      "path": [
+        156,
+        196,
+        58
+      ],
+      "path_names": [
+        "V(d2)",
+        "V(d7)",
+        "e7"
+      ],
+      "leaf": {
+        "baseline_bits": 0,
+        "distance_post_bits": 1052936365,
+        "nnue_post_bits": 3206365991,
+        "pre_tanh_bits": 3208068912,
+        "residual_bits": 3208068912,
+        "scaled_distance_bits": [
+          1035154227,
+          1041026253
+        ]
+      },
+      "leaf_local_STM": 0,
+      "root_STM": 1,
+      "root_sign": -1,
+      "original_pointer": "$.trees[0].tree.nodes[21770]"
+    },
+    {
+      "parent": 1,
+      "H": 2,
+      "node": 210,
+      "path": [
+        184,
+        43
+      ],
+      "path_names": [
+        "V(h5)",
+        "h5"
+      ],
+      "leaf": {
+        "baseline_bits": 0,
+        "distance_post_bits": 3209489792,
+        "nnue_post_bits": 1065350082,
+        "pre_tanh_bits": 1083471177,
+        "residual_bits": 1083471177,
+        "scaled_distance_bits": [
+          1046898278,
+          1035154227
+        ]
+      },
+      "leaf_local_STM": 1,
+      "root_STM": 1,
+      "root_sign": 1,
+      "original_pointer": "$.trees[1].tree.nodes[210]"
+    },
+    {
+      "parent": 1,
+      "H": 2,
+      "node": 339,
+      "path": [
+        192,
+        43
+      ],
+      "path_names": [
+        "V(h6)",
+        "h5"
+      ],
+      "leaf": {
+        "baseline_bits": 0,
+        "distance_post_bits": 3209489793,
+        "nnue_post_bits": 1065352334,
+        "pre_tanh_bits": 1084801089,
+        "residual_bits": 1084801089,
+        "scaled_distance_bits": [
+          1045220557,
+          1031798784
+        ]
+      },
+      "leaf_local_STM": 1,
+      "root_STM": 1,
+      "root_sign": 1,
+      "original_pointer": "$.trees[1].tree.nodes[339]"
+    },
+    {
+      "parent": 1,
+      "H": 3,
+      "node": 141,
+      "path": [
+        60,
+        53,
+        61
+      ],
+      "path_names": [
+        "g7",
+        "i6",
+        "h7"
+      ],
+      "leaf": {
+        "baseline_bits": 0,
+        "distance_post_bits": 1062006144,
+        "nnue_post_bits": 3212827195,
+        "pre_tanh_bits": 3229773191,
+        "residual_bits": 3229773191,
+        "scaled_distance_bits": [
+          1025087898,
+          1043542835
+        ]
+      },
+      "leaf_local_STM": 0,
+      "root_STM": 1,
+      "root_sign": -1,
+      "original_pointer": "$.trees[1].tree.nodes[141]"
+    },
+    {
+      "parent": 1,
+      "H": 3,
+      "node": 168,
+      "path": [
+        60,
+        53,
+        136
+      ],
+      "path_names": [
+        "g7",
+        "i6",
+        "H(h7)"
+      ],
+      "leaf": {
+        "baseline_bits": 0,
+        "distance_post_bits": 1061353430,
+        "nnue_post_bits": 3212719821,
+        "pre_tanh_bits": 3224696026,
+        "residual_bits": 3224696026,
+        "scaled_distance_bits": [
+          1031798784,
+          1044381696
+        ]
+      },
+      "leaf_local_STM": 0,
+      "root_STM": 1,
+      "root_sign": -1,
+      "original_pointer": "$.trees[1].tree.nodes[168]"
+    },
+    {
+      "parent": 1,
+      "H": 3,
+      "node": 211,
+      "path": [
+        184,
+        43,
+        60
+      ],
+      "path_names": [
+        "V(h5)",
+        "h5",
+        "g7"
+      ],
+      "leaf": {
+        "baseline_bits": 0,
+        "distance_post_bits": 1061353430,
+        "nnue_post_bits": 3212816963,
+        "pre_tanh_bits": 3228417804,
+        "residual_bits": 3228417804,
+        "scaled_distance_bits": [
+          1035154227,
+          1046059418
+        ]
+      },
+      "leaf_local_STM": 0,
+      "root_STM": 1,
+      "root_sign": -1,
+      "original_pointer": "$.trees[1].tree.nodes[211]"
+    },
+    {
+      "parent": 1,
+      "H": 3,
+      "node": 228,
+      "path": [
+        184,
+        43,
+        111
+      ],
+      "path_names": [
+        "V(h5)",
+        "h5",
+        "H(g4)"
+      ],
+      "leaf": {
+        "baseline_bits": 0,
+        "distance_post_bits": 1058715608,
+        "nnue_post_bits": 1065342878,
+        "pre_tanh_bits": 1082219362,
+        "residual_bits": 1082219362,
+        "scaled_distance_bits": [
+          1041026253,
+          1046898278
+        ]
+      },
+      "leaf_local_STM": 0,
+      "root_STM": 1,
+      "root_sign": -1,
+      "original_pointer": "$.trees[1].tree.nodes[228]"
+    },
+    {
+      "parent": 2,
+      "H": 2,
+      "node": 3315,
+      "path": [
+        100,
+        114
+      ],
+      "path_names": [
+        "H(d3)",
+        "H(b5)"
+      ],
+      "leaf": {
+        "baseline_bits": 0,
+        "distance_post_bits": 3197445870,
+        "nnue_post_bits": 3208393592,
+        "pre_tanh_bits": 3211827971,
+        "residual_bits": 3211827971,
+        "scaled_distance_bits": [
+          1036831949,
+          1031798784
+        ]
+      },
+      "leaf_local_STM": 0,
+      "root_STM": 0,
+      "root_sign": 1,
+      "original_pointer": "$.trees[2].tree.nodes[3315]"
+    },
+    {
+      "parent": 2,
+      "H": 3,
+      "node": 3334,
+      "path": [
+        100,
+        114,
+        102
+      ],
+      "path_names": [
+        "H(d3)",
+        "H(b5)",
+        "H(f3)"
+      ],
+      "leaf": {
+        "baseline_bits": 0,
+        "distance_post_bits": 1036787391,
+        "nnue_post_bits": 1064697621,
+        "pre_tanh_bits": 1073388035,
+        "residual_bits": 1073388035,
+        "scaled_distance_bits": [
+          1035154227,
+          1036831949
+        ]
+      },
+      "leaf_local_STM": 1,
+      "root_STM": 0,
+      "root_sign": -1,
+      "original_pointer": "$.trees[2].tree.nodes[3334]"
+    },
+    {
+      "parent": 2,
+      "H": 3,
+      "node": 11798,
+      "path": [
+        100,
+        208,
+        160
+      ],
+      "path_names": [
+        "H(d3)",
+        "V(h8)",
+        "V(h2)"
+      ],
+      "leaf": {
+        "baseline_bits": 0,
+        "distance_post_bits": 1036787391,
+        "nnue_post_bits": 3207354887,
+        "pre_tanh_bits": 3209760955,
+        "residual_bits": 3209760955,
+        "scaled_distance_bits": [
+          1031798784,
+          1033476506
+        ]
+      },
+      "leaf_local_STM": 1,
+      "root_STM": 0,
+      "root_sign": -1,
+      "original_pointer": "$.trees[2].tree.nodes[11798]"
+    },
+    {
+      "parent": 2,
+      "H": 3,
+      "node": 18749,
+      "path": [
+        104,
+        149,
+        87
+      ],
+      "path_names": [
+        "H(h3)",
+        "V(e1)",
+        "H(g1)"
+      ],
+      "leaf": {
+        "baseline_bits": 0,
+        "distance_post_bits": 1036787391,
+        "nnue_post_bits": 3210743799,
+        "pre_tanh_bits": 3215815368,
+        "residual_bits": 3215815368,
+        "scaled_distance_bits": [
+          1031798784,
+          1033476506
+        ]
+      },
+      "leaf_local_STM": 1,
+      "root_STM": 0,
+      "root_sign": -1,
+      "original_pointer": "$.trees[2].tree.nodes[18749]"
+    },
+    {
+      "parent": 2,
+      "H": 3,
+      "node": 20844,
+      "path": [
+        104,
+        171,
+        102
+      ],
+      "path_names": [
+        "H(h3)",
+        "V(c4)",
+        "H(f3)"
+      ],
+      "leaf": {
+        "baseline_bits": 0,
+        "distance_post_bits": 1045044417,
+        "nnue_post_bits": 3198538182,
+        "pre_tanh_bits": 3198943994,
+        "residual_bits": 3198943994,
+        "scaled_distance_bits": [
+          1036831949,
+          1040187392
+        ]
+      },
+      "leaf_local_STM": 1,
+      "root_STM": 0,
+      "root_sign": -1,
+      "original_pointer": "$.trees[2].tree.nodes[20844]"
+    }
+  ],
+  "tree_checks": [
+    {
+      "parent": 0,
+      "nodes": 22791,
+      "depth_counts": {
+        "0": 1,
+        "1": 2,
+        "2": 217,
+        "3": 22571
+      },
+      "terminal_nodes": 0,
+      "node_parent_and_recorded_alllegal_expansion_counts": "MATCH",
+      "candidate_root_legal_count": 109,
+      "candidate_root_expanded": 2,
+      "new_geometry_or_legal_move_execution": 0
+    },
+    {
+      "parent": 1,
+      "nodes": 467,
+      "depth_counts": {
+        "0": 1,
+        "1": 3,
+        "2": 7,
+        "3": 456
+      },
+      "terminal_nodes": 0,
+      "node_parent_and_recorded_alllegal_expansion_counts": "MATCH",
+      "candidate_root_legal_count": 69,
+      "candidate_root_expanded": 3,
+      "new_geometry_or_legal_move_execution": 0
+    },
+    {
+      "parent": 2,
+      "nodes": 24319,
+      "depth_counts": {
+        "0": 1,
+        "1": 2,
+        "2": 225,
+        "3": 24091
+      },
+      "terminal_nodes": 0,
+      "node_parent_and_recorded_alllegal_expansion_counts": "MATCH",
+      "candidate_root_legal_count": 115,
+      "candidate_root_expanded": 2,
+      "new_geometry_or_legal_move_execution": 0
+    }
+  ],
+  "parity": {
+    "states": 35,
+    "root_states": 3,
+    "edge_states": 32,
+    "parent_exact_all": true,
+    "features_exact_all": true,
+    "shape_exact_all": true,
+    "FT_alerts": 0,
+    "value_alerts": 0,
+    "value_bit_equal": 21,
+    "max_FT_error": 7.62939453125e-06,
+    "max_value_abs_error": 2.384185791015625e-07,
+    "recorded_tolerances": {
+      "abs": 1e-05,
+      "rel": 0.0001
+    },
+    "logical_evaluations": 131,
+    "tree_leaf_correspondences": [
+      {
+        "parent": 0,
+        "path": [
+          68,
+          83
+        ],
+        "node": 661,
+        "full_head_matches_saved_tree_leaf_bits": true
+      },
+      {
+        "parent": 0,
+        "path": [
+          68,
+          83,
+          59
+        ],
+        "node": 662,
+        "full_head_matches_saved_tree_leaf_bits": true
+      },
+      {
+        "parent": 0,
+        "path": [
+          68,
+          131
+        ],
+        "node": 4852,
+        "full_head_matches_saved_tree_leaf_bits": true
+      },
+      {
+        "parent": 0,
+        "path": [
+          68,
+          146
+        ],
+        "node": 6246,
+        "full_head_matches_saved_tree_leaf_bits": true
+      },
+      {
+        "parent": 0,
+        "path": [
+          68,
+          146,
+          193
+        ],
+        "node": 6342,
+        "full_head_matches_saved_tree_leaf_bits": true
+      },
+      {
+        "parent": 0,
+        "path": [
+          156,
+          91
+        ],
+        "node": 12765,
+        "full_head_matches_saved_tree_leaf_bits": true
+      },
+      {
+        "parent": 0,
+        "path": [
+          156,
+          193
+        ],
+        "node": 21565,
+        "full_head_matches_saved_tree_leaf_bits": true
+      },
+      {
+        "parent": 0,
+        "path": [
+          156,
+          193,
+          207
+        ],
+        "node": 21665,
+        "full_head_matches_saved_tree_leaf_bits": true
+      },
+      {
+        "parent": 0,
+        "path": [
+          156,
+          196
+        ],
+        "node": 21769,
+        "full_head_matches_saved_tree_leaf_bits": true
+      },
+      {
+        "parent": 0,
+        "path": [
+          156,
+          196,
+          58
+        ],
+        "node": 21770,
+        "full_head_matches_saved_tree_leaf_bits": true
+      },
+      {
+        "parent": 1,
+        "path": [
+          60,
+          53
+        ],
+        "node": 140,
+        "full_head_matches_saved_tree_leaf_bits": true
+      },
+      {
+        "parent": 1,
+        "path": [
+          60,
+          53,
+          61
+        ],
+        "node": 141,
+        "full_head_matches_saved_tree_leaf_bits": true
+      },
+      {
+        "parent": 1,
+        "path": [
+          60,
+          53,
+          136
+        ],
+        "node": 168,
+        "full_head_matches_saved_tree_leaf_bits": true
+      },
+      {
+        "parent": 1,
+        "path": [
+          184,
+          43
+        ],
+        "node": 210,
+        "full_head_matches_saved_tree_leaf_bits": true
+      },
+      {
+        "parent": 1,
+        "path": [
+          184,
+          43,
+          60
+        ],
+        "node": 211,
+        "full_head_matches_saved_tree_leaf_bits": true
+      },
+      {
+        "parent": 1,
+        "path": [
+          184,
+          43,
+          111
+        ],
+        "node": 228,
+        "full_head_matches_saved_tree_leaf_bits": true
+      },
+      {
+        "parent": 1,
+        "path": [
+          192,
+          43
+        ],
+        "node": 339,
+        "full_head_matches_saved_tree_leaf_bits": true
+      },
+      {
+        "parent": 2,
+        "path": [
+          100,
+          114
+        ],
+        "node": 3315,
+        "full_head_matches_saved_tree_leaf_bits": true
+      },
+      {
+        "parent": 2,
+        "path": [
+          100,
+          114,
+          102
+        ],
+        "node": 3334,
+        "full_head_matches_saved_tree_leaf_bits": true
+      },
+      {
+        "parent": 2,
+        "path": [
+          100,
+          208
+        ],
+        "node": 11727,
+        "full_head_matches_saved_tree_leaf_bits": true
+      },
+      {
+        "parent": 2,
+        "path": [
+          100,
+          208,
+          160
+        ],
+        "node": 11798,
+        "full_head_matches_saved_tree_leaf_bits": true
+      },
+      {
+        "parent": 2,
+        "path": [
+          104,
+          149
+        ],
+        "node": 18741,
+        "full_head_matches_saved_tree_leaf_bits": true
+      },
+      {
+        "parent": 2,
+        "path": [
+          104,
+          149,
+          87
+        ],
+        "node": 18749,
+        "full_head_matches_saved_tree_leaf_bits": true
+      },
+      {
+        "parent": 2,
+        "path": [
+          104,
+          171
+        ],
+        "node": 20823,
+        "full_head_matches_saved_tree_leaf_bits": true
+      },
+      {
+        "parent": 2,
+        "path": [
+          104,
+          171,
+          102
+        ],
+        "node": 20844,
+        "full_head_matches_saved_tree_leaf_bits": true
+      }
+    ],
+    "head_input_lengths": [
+      70
+    ]
+  },
+  "forced_Search_vs_tree": [
+    {
+      "call_id": "distance-slot004-ply011:N:H2:forced-68",
+      "evaluator": "N",
+      "parent": 0,
+      "H": 2,
+      "action": 68,
+      "Search_value_bits": 1049266814,
+      "tree_value_bits": 1049266811,
+      "abs_difference": 8.940696716308594e-08,
+      "ULP_difference": 3
+    },
+    {
+      "call_id": "distance-slot004-ply011:D:H2:forced-68",
+      "evaluator": "D",
+      "parent": 0,
+      "H": 2,
+      "action": 68,
+      "Search_value_bits": 3200420013,
+      "tree_value_bits": 3200420013,
+      "abs_difference": 0.0,
+      "ULP_difference": 0
+    },
+    {
+      "call_id": "distance-slot004-ply011:N:H2:forced-156",
+      "evaluator": "N",
+      "parent": 0,
+      "H": 2,
+      "action": 156,
+      "Search_value_bits": 1062932987,
+      "tree_value_bits": 1062932988,
+      "abs_difference": 5.960464477539063e-08,
+      "ULP_difference": 1
+    },
+    {
+      "call_id": "distance-slot004-ply011:D:H2:forced-156",
+      "evaluator": "D",
+      "parent": 0,
+      "H": 2,
+      "action": 156,
+      "Search_value_bits": 3203177120,
+      "tree_value_bits": 3203177120,
+      "abs_difference": 0.0,
+      "ULP_difference": 0
+    },
+    {
+      "call_id": "distance-slot004-ply011:N:H3:forced-68",
+      "evaluator": "N",
+      "parent": 0,
+      "H": 3,
+      "action": 68,
+      "Search_value_bits": 1060004478,
+      "tree_value_bits": 1060004478,
+      "abs_difference": 0.0,
+      "ULP_difference": 0
+    },
+    {
+      "call_id": "distance-slot004-ply011:D:H3:forced-68",
+      "evaluator": "D",
+      "parent": 0,
+      "H": 3,
+      "action": 68,
+      "Search_value_bits": 3197445870,
+      "tree_value_bits": 3197445870,
+      "abs_difference": 0.0,
+      "ULP_difference": 0
+    },
+    {
+      "call_id": "distance-slot004-ply011:N:H3:forced-156",
+      "evaluator": "N",
+      "parent": 0,
+      "H": 3,
+      "action": 156,
+      "Search_value_bits": 1064673236,
+      "tree_value_bits": 1064673237,
+      "abs_difference": 5.960464477539063e-08,
+      "ULP_difference": 1
+    },
+    {
+      "call_id": "distance-slot004-ply011:D:H3:forced-156",
+      "evaluator": "D",
+      "parent": 0,
+      "H": 3,
+      "action": 156,
+      "Search_value_bits": 3200420013,
+      "tree_value_bits": 3200420013,
+      "abs_difference": 0.0,
+      "ULP_difference": 0
+    },
+    {
+      "call_id": "distance-slot004-ply039:N:H2:forced-60",
+      "evaluator": "N",
+      "parent": 1,
+      "H": 2,
+      "action": 60,
+      "Search_value_bits": 1065350724,
+      "tree_value_bits": 1065350724,
+      "abs_difference": 0.0,
+      "ULP_difference": 0
+    },
+    {
+      "call_id": "distance-slot004-ply039:D:H2:forced-60",
+      "evaluator": "D",
+      "parent": 1,
+      "H": 2,
+      "action": 60,
+      "Search_value_bits": 3210046052,
+      "tree_value_bits": 3210046052,
+      "abs_difference": 0.0,
+      "ULP_difference": 0
+    },
+    {
+      "call_id": "distance-slot004-ply039:N:H2:forced-184",
+      "evaluator": "N",
+      "parent": 1,
+      "H": 2,
+      "action": 184,
+      "Search_value_bits": 1065350082,
+      "tree_value_bits": 1065350082,
+      "abs_difference": 0.0,
+      "ULP_difference": 0
+    },
+    {
+      "call_id": "distance-slot004-ply039:D:H2:forced-184",
+      "evaluator": "D",
+      "parent": 1,
+      "H": 2,
+      "action": 184,
+      "Search_value_bits": 3209489792,
+      "tree_value_bits": 3209489792,
+      "abs_difference": 0.0,
+      "ULP_difference": 0
+    },
+    {
+      "call_id": "distance-slot004-ply039:N:H2:forced-192",
+      "evaluator": "N",
+      "parent": 1,
+      "H": 2,
+      "action": 192,
+      "Search_value_bits": 1065352334,
+      "tree_value_bits": 1065352334,
+      "abs_difference": 0.0,
+      "ULP_difference": 0
+    },
+    {
+      "call_id": "distance-slot004-ply039:D:H2:forced-192",
+      "evaluator": "D",
+      "parent": 1,
+      "H": 2,
+      "action": 192,
+      "Search_value_bits": 3209489793,
+      "tree_value_bits": 3209489793,
+      "abs_difference": 0.0,
+      "ULP_difference": 0
+    },
+    {
+      "call_id": "distance-slot004-ply039:N:H3:forced-60",
+      "evaluator": "N",
+      "parent": 1,
+      "H": 3,
+      "action": 60,
+      "Search_value_bits": 1065343547,
+      "tree_value_bits": 1065343547,
+      "abs_difference": 0.0,
+      "ULP_difference": 0
+    },
+    {
+      "call_id": "distance-slot004-ply039:D:H3:forced-60",
+      "evaluator": "D",
+      "parent": 1,
+      "H": 3,
+      "action": 60,
+      "Search_value_bits": 3208837078,
+      "tree_value_bits": 3208837078,
+      "abs_difference": 0.0,
+      "ULP_difference": 0
+    },
+    {
+      "call_id": "distance-slot004-ply039:N:H3:forced-184",
+      "evaluator": "N",
+      "parent": 1,
+      "H": 3,
+      "action": 184,
+      "Search_value_bits": 1065333315,
+      "tree_value_bits": 1065333315,
+      "abs_difference": 0.0,
+      "ULP_difference": 0
+    },
+    {
+      "call_id": "distance-slot004-ply039:D:H3:forced-184",
+      "evaluator": "D",
+      "parent": 1,
+      "H": 3,
+      "action": 184,
+      "Search_value_bits": 3206199256,
+      "tree_value_bits": 3206199256,
+      "abs_difference": 0.0,
+      "ULP_difference": 0
+    },
+    {
+      "call_id": "distance-slot004-ply039:N:H3:forced-192",
+      "evaluator": "N",
+      "parent": 1,
+      "H": 3,
+      "action": 192,
+      "Search_value_bits": 1065337337,
+      "tree_value_bits": 1065337337,
+      "abs_difference": 0.0,
+      "ULP_difference": 0
+    },
+    {
+      "call_id": "distance-slot004-ply039:D:H3:forced-192",
+      "evaluator": "D",
+      "parent": 1,
+      "H": 3,
+      "action": 192,
+      "Search_value_bits": 3208077132,
+      "tree_value_bits": 3208077132,
+      "abs_difference": 0.0,
+      "ULP_difference": 0
+    },
+    {
+      "call_id": "distance-slot005-ply012:N:H2:forced-100",
+      "evaluator": "N",
+      "parent": 2,
+      "H": 2,
+      "action": 100,
+      "Search_value_bits": 3208393588,
+      "tree_value_bits": 3208393592,
+      "abs_difference": 2.384185791015625e-07,
+      "ULP_difference": 4
+    },
+    {
+      "call_id": "distance-slot005-ply012:D:H2:forced-100",
+      "evaluator": "D",
+      "parent": 2,
+      "H": 2,
+      "action": 100,
+      "Search_value_bits": 3197445870,
+      "tree_value_bits": 3197445870,
+      "abs_difference": 0.0,
+      "ULP_difference": 0
+    },
+    {
+      "call_id": "distance-slot005-ply012:N:H2:forced-104",
+      "evaluator": "N",
+      "parent": 2,
+      "H": 2,
+      "action": 104,
+      "Search_value_bits": 3212499475,
+      "tree_value_bits": 3212499476,
+      "abs_difference": 5.960464477539063e-08,
+      "ULP_difference": 1
+    },
+    {
+      "call_id": "distance-slot005-ply012:D:H2:forced-104",
+      "evaluator": "D",
+      "parent": 2,
+      "H": 2,
+      "action": 104,
+      "Search_value_bits": 3200420011,
+      "tree_value_bits": 3200420011,
+      "abs_difference": 0.0,
+      "ULP_difference": 0
+    },
+    {
+      "call_id": "distance-slot005-ply012:N:H3:forced-100",
+      "evaluator": "N",
+      "parent": 2,
+      "H": 3,
+      "action": 100,
+      "Search_value_bits": 1059871239,
+      "tree_value_bits": 1059871239,
+      "abs_difference": 0.0,
+      "ULP_difference": 0
+    },
+    {
+      "call_id": "distance-slot005-ply012:D:H3:forced-100",
+      "evaluator": "D",
+      "parent": 2,
+      "H": 3,
+      "action": 100,
+      "Search_value_bits": 3184271039,
+      "tree_value_bits": 3184271039,
+      "abs_difference": 0.0,
+      "ULP_difference": 0
+    },
+    {
+      "call_id": "distance-slot005-ply012:N:H3:forced-104",
+      "evaluator": "N",
+      "parent": 2,
+      "H": 3,
+      "action": 104,
+      "Search_value_bits": 1063260152,
+      "tree_value_bits": 1063260151,
+      "abs_difference": 5.960464477539063e-08,
+      "ULP_difference": 1
+    },
+    {
+      "call_id": "distance-slot005-ply012:D:H3:forced-104",
+      "evaluator": "D",
+      "parent": 2,
+      "H": 3,
+      "action": 104,
+      "Search_value_bits": 3192528065,
+      "tree_value_bits": 3192528065,
+      "abs_difference": 0.0,
+      "ULP_difference": 0
+    }
+  ],
+  "calls": [
+    {
+      "id": "distance-slot004-ply011:N:H2:normal",
+      "parent": 0,
+      "evaluator": "N",
+      "H": 2,
+      "forced": null,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 1062932987,
+      "value": 0.8557431101799011,
+      "action": 156,
+      "PV": [
+        156,
+        91
+      ],
+      "completed_depth": 2,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 0.000649451,
+      "setup_Search_drop_s": 0.022244602,
+      "nodes": 493,
+      "evals": 382,
+      "terminal": 0,
+      "PVS": 6,
+      "TT_probes": 111,
+      "TT_hits": 1,
+      "TT_cutoffs": 0,
+      "child_depth": null,
+      "nonroot_ply": null,
+      "restricted_root_TT": null,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot004-ply011:D:H2:normal",
+      "parent": 0,
+      "evaluator": "D",
+      "H": 2,
+      "forced": null,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 3200420013,
+      "value": -0.37994900345802307,
+      "action": 68,
+      "PV": [
+        68,
+        83
+      ],
+      "completed_depth": 2,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 0.000371239,
+      "setup_Search_drop_s": 0.020572238,
+      "nodes": 655,
+      "evals": 543,
+      "terminal": 0,
+      "PVS": 4,
+      "TT_probes": 112,
+      "TT_hits": 2,
+      "TT_cutoffs": 0,
+      "child_depth": null,
+      "nonroot_ply": null,
+      "restricted_root_TT": null,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot004-ply011:N:H3:normal",
+      "parent": 0,
+      "evaluator": "N",
+      "H": 3,
+      "forced": null,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 1064673236,
+      "value": 0.9594700336456299,
+      "action": 156,
+      "PV": [
+        156,
+        193,
+        207
+      ],
+      "completed_depth": 3,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 0.01144099,
+      "setup_Search_drop_s": 0.035124619,
+      "nodes": 12909,
+      "evals": 12452,
+      "terminal": 0,
+      "PVS": 14,
+      "TT_probes": 457,
+      "TT_hits": 115,
+      "TT_cutoffs": 0,
+      "child_depth": null,
+      "nonroot_ply": null,
+      "restricted_root_TT": null,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot004-ply011:D:H3:normal",
+      "parent": 0,
+      "evaluator": "D",
+      "H": 3,
+      "forced": null,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 3197445870,
+      "value": -0.29131263494491577,
+      "action": 68,
+      "PV": [
+        68,
+        83,
+        59
+      ],
+      "completed_depth": 3,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 0.003585394,
+      "setup_Search_drop_s": 0.02337723,
+      "nodes": 12194,
+      "evals": 11749,
+      "terminal": 0,
+      "PVS": 4,
+      "TT_probes": 445,
+      "TT_hits": 113,
+      "TT_cutoffs": 0,
+      "child_depth": null,
+      "nonroot_ply": null,
+      "restricted_root_TT": null,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot004-ply039:N:H2:normal",
+      "parent": 1,
+      "evaluator": "N",
+      "H": 2,
+      "forced": null,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 1065352334,
+      "value": 0.9999474287033081,
+      "action": 192,
+      "PV": [
+        192,
+        43
+      ],
+      "completed_depth": 2,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 0.000287949,
+      "setup_Search_drop_s": 0.019904714,
+      "nodes": 224,
+      "evals": 151,
+      "terminal": 0,
+      "PVS": 4,
+      "TT_probes": 73,
+      "TT_hits": 3,
+      "TT_cutoffs": 0,
+      "child_depth": null,
+      "nonroot_ply": null,
+      "restricted_root_TT": null,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot004-ply039:D:H2:normal",
+      "parent": 1,
+      "evaluator": "D",
+      "H": 2,
+      "forced": null,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 3209489792,
+      "value": -0.8004989624023438,
+      "action": 184,
+      "PV": [
+        184,
+        43
+      ],
+      "completed_depth": 2,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 0.000189374,
+      "setup_Search_drop_s": 0.021139726,
+      "nodes": 214,
+      "evals": 143,
+      "terminal": 0,
+      "PVS": 2,
+      "TT_probes": 71,
+      "TT_hits": 1,
+      "TT_cutoffs": 0,
+      "child_depth": null,
+      "nonroot_ply": null,
+      "restricted_root_TT": null,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot004-ply039:N:H3:normal",
+      "parent": 1,
+      "evaluator": "N",
+      "H": 3,
+      "forced": null,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 1065343547,
+      "value": 0.9994236826896667,
+      "action": 60,
+      "PV": [
+        60,
+        53
+      ],
+      "completed_depth": 3,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 0.004850734,
+      "setup_Search_drop_s": 0.025229232,
+      "nodes": 4885,
+      "evals": 4662,
+      "terminal": 0,
+      "PVS": 6,
+      "TT_probes": 223,
+      "TT_hits": 75,
+      "TT_cutoffs": 0,
+      "child_depth": null,
+      "nonroot_ply": null,
+      "restricted_root_TT": null,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot004-ply039:D:H3:normal",
+      "parent": 1,
+      "evaluator": "D",
+      "H": 3,
+      "forced": null,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 3206199256,
+      "value": -0.604367733001709,
+      "action": 184,
+      "PV": [
+        184,
+        43,
+        111
+      ],
+      "completed_depth": 3,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 0.002416963,
+      "setup_Search_drop_s": 0.02192811,
+      "nodes": 4873,
+      "evals": 4662,
+      "terminal": 0,
+      "PVS": 3,
+      "TT_probes": 211,
+      "TT_hits": 71,
+      "TT_cutoffs": 0,
+      "child_depth": null,
+      "nonroot_ply": null,
+      "restricted_root_TT": null,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot005-ply012:N:H2:normal",
+      "parent": 2,
+      "evaluator": "N",
+      "H": 2,
+      "forced": null,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 1051628742,
+      "value": 0.34097880125045776,
+      "action": 101,
+      "PV": [
+        101,
+        145
+      ],
+      "completed_depth": 2,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 0.000934095,
+      "setup_Search_drop_s": 0.021161675,
+      "nodes": 801,
+      "evals": 682,
+      "terminal": 0,
+      "PVS": 11,
+      "TT_probes": 119,
+      "TT_hits": 3,
+      "TT_cutoffs": 0,
+      "child_depth": null,
+      "nonroot_ply": null,
+      "restricted_root_TT": null,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot005-ply012:D:H2:normal",
+      "parent": 2,
+      "evaluator": "D",
+      "H": 2,
+      "forced": null,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 3197445868,
+      "value": -0.291312575340271,
+      "action": 85,
+      "PV": [
+        85,
+        171
+      ],
+      "completed_depth": 2,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 0.000369687,
+      "setup_Search_drop_s": 0.020909998,
+      "nodes": 664,
+      "evals": 546,
+      "terminal": 0,
+      "PVS": 5,
+      "TT_probes": 118,
+      "TT_hits": 2,
+      "TT_cutoffs": 0,
+      "child_depth": null,
+      "nonroot_ply": null,
+      "restricted_root_TT": null,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot005-ply012:N:H3:normal",
+      "parent": 2,
+      "evaluator": "N",
+      "H": 3,
+      "forced": null,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 1063260152,
+      "value": 0.8752436637878418,
+      "action": 104,
+      "PV": [
+        104,
+        149,
+        87
+      ],
+      "completed_depth": 3,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 0.01240514,
+      "setup_Search_drop_s": 0.032045953,
+      "nodes": 14754,
+      "evals": 13998,
+      "terminal": 0,
+      "PVS": 25,
+      "TT_probes": 756,
+      "TT_hits": 240,
+      "TT_cutoffs": 102,
+      "child_depth": null,
+      "nonroot_ply": null,
+      "restricted_root_TT": null,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot005-ply012:D:H3:normal",
+      "parent": 2,
+      "evaluator": "D",
+      "H": 3,
+      "forced": null,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 3184271039,
+      "value": -0.09966801851987839,
+      "action": 100,
+      "PV": [
+        100,
+        114
+      ],
+      "completed_depth": 3,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 0.003632585,
+      "setup_Search_drop_s": 0.023740271,
+      "nodes": 13671,
+      "evals": 13094,
+      "terminal": 0,
+      "PVS": 6,
+      "TT_probes": 577,
+      "TT_hits": 122,
+      "TT_cutoffs": 0,
+      "child_depth": null,
+      "nonroot_ply": null,
+      "restricted_root_TT": null,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot004-ply011:N:H2:forced-68",
+      "parent": 0,
+      "evaluator": "N",
+      "H": 2,
+      "forced": 68,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 1049266814,
+      "value": 0.27058786153793335,
+      "action": 68,
+      "PV": [
+        68,
+        131
+      ],
+      "completed_depth": 2,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 0.00015253,
+      "setup_Search_drop_s": 0.020165547,
+      "nodes": 119,
+      "evals": 116,
+      "terminal": 0,
+      "PVS": 4,
+      "TT_probes": 1,
+      "TT_hits": 0,
+      "TT_cutoffs": 0,
+      "child_depth": 1,
+      "nonroot_ply": 1,
+      "restricted_root_TT": false,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot004-ply011:N:H2:forced-156",
+      "parent": 0,
+      "evaluator": "N",
+      "H": 2,
+      "forced": 156,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 1062932987,
+      "value": 0.8557431101799011,
+      "action": 156,
+      "PV": [
+        156,
+        91
+      ],
+      "completed_depth": 2,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 0.00014702,
+      "setup_Search_drop_s": 0.022505072,
+      "nodes": 113,
+      "evals": 110,
+      "terminal": 0,
+      "PVS": 3,
+      "TT_probes": 1,
+      "TT_hits": 0,
+      "TT_cutoffs": 0,
+      "child_depth": 1,
+      "nonroot_ply": 1,
+      "restricted_root_TT": false,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot004-ply011:D:H2:forced-68",
+      "parent": 0,
+      "evaluator": "D",
+      "H": 2,
+      "forced": 68,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 3200420013,
+      "value": -0.37994900345802307,
+      "action": 68,
+      "PV": [
+        68,
+        83
+      ],
+      "completed_depth": 2,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 4.8713e-05,
+      "setup_Search_drop_s": 0.019264695,
+      "nodes": 117,
+      "evals": 114,
+      "terminal": 0,
+      "PVS": 2,
+      "TT_probes": 1,
+      "TT_hits": 0,
+      "TT_cutoffs": 0,
+      "child_depth": 1,
+      "nonroot_ply": 1,
+      "restricted_root_TT": false,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot004-ply011:D:H2:forced-156",
+      "parent": 0,
+      "evaluator": "D",
+      "H": 2,
+      "forced": 156,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 3203177120,
+      "value": -0.46211719512939453,
+      "action": 156,
+      "PV": [
+        156,
+        196
+      ],
+      "completed_depth": 2,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 4.9572e-05,
+      "setup_Search_drop_s": 0.02029433,
+      "nodes": 115,
+      "evals": 112,
+      "terminal": 0,
+      "PVS": 5,
+      "TT_probes": 1,
+      "TT_hits": 0,
+      "TT_cutoffs": 0,
+      "child_depth": 1,
+      "nonroot_ply": 1,
+      "restricted_root_TT": false,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot004-ply011:N:H3:forced-68",
+      "parent": 0,
+      "evaluator": "N",
+      "H": 3,
+      "forced": 68,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 1060004478,
+      "value": 0.6811903715133667,
+      "action": 68,
+      "PV": [
+        68,
+        146,
+        193
+      ],
+      "completed_depth": 3,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 0.000837927,
+      "setup_Search_drop_s": 0.020850752,
+      "nodes": 749,
+      "evals": 632,
+      "terminal": 0,
+      "PVS": 12,
+      "TT_probes": 114,
+      "TT_hits": 2,
+      "TT_cutoffs": 0,
+      "child_depth": 2,
+      "nonroot_ply": 1,
+      "restricted_root_TT": false,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot004-ply011:N:H3:forced-156",
+      "parent": 0,
+      "evaluator": "N",
+      "H": 3,
+      "forced": 156,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 1064673236,
+      "value": 0.9594700336456299,
+      "action": 156,
+      "PV": [
+        156,
+        193,
+        207
+      ],
+      "completed_depth": 3,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 0.001078945,
+      "setup_Search_drop_s": 0.020681771,
+      "nodes": 1070,
+      "evals": 956,
+      "terminal": 0,
+      "PVS": 11,
+      "TT_probes": 111,
+      "TT_hits": 4,
+      "TT_cutoffs": 0,
+      "child_depth": 2,
+      "nonroot_ply": 1,
+      "restricted_root_TT": false,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot004-ply011:D:H3:forced-68",
+      "parent": 0,
+      "evaluator": "D",
+      "H": 3,
+      "forced": 68,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 3197445870,
+      "value": -0.29131263494491577,
+      "action": 68,
+      "PV": [
+        68,
+        83,
+        59
+      ],
+      "completed_depth": 3,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 0.000322873,
+      "setup_Search_drop_s": 0.020038609,
+      "nodes": 450,
+      "evals": 334,
+      "terminal": 0,
+      "PVS": 2,
+      "TT_probes": 113,
+      "TT_hits": 1,
+      "TT_cutoffs": 0,
+      "child_depth": 2,
+      "nonroot_ply": 1,
+      "restricted_root_TT": false,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot004-ply011:D:H3:forced-156",
+      "parent": 0,
+      "evaluator": "D",
+      "H": 3,
+      "forced": 156,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 3200420013,
+      "value": -0.37994900345802307,
+      "action": 156,
+      "PV": [
+        156,
+        196,
+        58
+      ],
+      "completed_depth": 3,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 0.000333802,
+      "setup_Search_drop_s": 0.020950664,
+      "nodes": 428,
+      "evals": 317,
+      "terminal": 0,
+      "PVS": 5,
+      "TT_probes": 108,
+      "TT_hits": 1,
+      "TT_cutoffs": 0,
+      "child_depth": 2,
+      "nonroot_ply": 1,
+      "restricted_root_TT": false,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot004-ply039:N:H2:forced-60",
+      "parent": 1,
+      "evaluator": "N",
+      "H": 2,
+      "forced": 60,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 1065350724,
+      "value": 0.9998514652252197,
+      "action": 60,
+      "PV": [
+        60,
+        53
+      ],
+      "completed_depth": 2,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 5.4908e-05,
+      "setup_Search_drop_s": 0.021646449,
+      "nodes": 9,
+      "evals": 6,
+      "terminal": 0,
+      "PVS": 2,
+      "TT_probes": 1,
+      "TT_hits": 0,
+      "TT_cutoffs": 0,
+      "child_depth": 1,
+      "nonroot_ply": 1,
+      "restricted_root_TT": false,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot004-ply039:N:H2:forced-184",
+      "parent": 1,
+      "evaluator": "N",
+      "H": 2,
+      "forced": 184,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 1065350082,
+      "value": 0.9998131990432739,
+      "action": 184,
+      "PV": [
+        184,
+        43
+      ],
+      "completed_depth": 2,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 5.3915e-05,
+      "setup_Search_drop_s": 0.021732364,
+      "nodes": 6,
+      "evals": 3,
+      "terminal": 0,
+      "PVS": 0,
+      "TT_probes": 1,
+      "TT_hits": 0,
+      "TT_cutoffs": 0,
+      "child_depth": 1,
+      "nonroot_ply": 1,
+      "restricted_root_TT": false,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot004-ply039:N:H2:forced-192",
+      "parent": 1,
+      "evaluator": "N",
+      "H": 2,
+      "forced": 192,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 1065352334,
+      "value": 0.9999474287033081,
+      "action": 192,
+      "PV": [
+        192,
+        43
+      ],
+      "completed_depth": 2,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 5.2686e-05,
+      "setup_Search_drop_s": 0.019479523,
+      "nodes": 6,
+      "evals": 3,
+      "terminal": 0,
+      "PVS": 0,
+      "TT_probes": 1,
+      "TT_hits": 0,
+      "TT_cutoffs": 0,
+      "child_depth": 1,
+      "nonroot_ply": 1,
+      "restricted_root_TT": false,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot004-ply039:D:H2:forced-60",
+      "parent": 1,
+      "evaluator": "D",
+      "H": 2,
+      "forced": 60,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 3210046052,
+      "value": -0.8336546421051025,
+      "action": 60,
+      "PV": [
+        60,
+        53
+      ],
+      "completed_depth": 2,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 4.1661e-05,
+      "setup_Search_drop_s": 0.01930555,
+      "nodes": 8,
+      "evals": 5,
+      "terminal": 0,
+      "PVS": 1,
+      "TT_probes": 1,
+      "TT_hits": 0,
+      "TT_cutoffs": 0,
+      "child_depth": 1,
+      "nonroot_ply": 1,
+      "restricted_root_TT": false,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot004-ply039:D:H2:forced-184",
+      "parent": 1,
+      "evaluator": "D",
+      "H": 2,
+      "forced": 184,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 3209489792,
+      "value": -0.8004989624023438,
+      "action": 184,
+      "PV": [
+        184,
+        43
+      ],
+      "completed_depth": 2,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 4.2266e-05,
+      "setup_Search_drop_s": 0.019766289,
+      "nodes": 6,
+      "evals": 3,
+      "terminal": 0,
+      "PVS": 0,
+      "TT_probes": 1,
+      "TT_hits": 0,
+      "TT_cutoffs": 0,
+      "child_depth": 1,
+      "nonroot_ply": 1,
+      "restricted_root_TT": false,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot004-ply039:D:H2:forced-192",
+      "parent": 1,
+      "evaluator": "D",
+      "H": 2,
+      "forced": 192,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 3209489793,
+      "value": -0.8004990220069885,
+      "action": 192,
+      "PV": [
+        192,
+        43
+      ],
+      "completed_depth": 2,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 3.8864e-05,
+      "setup_Search_drop_s": 0.019872271,
+      "nodes": 6,
+      "evals": 3,
+      "terminal": 0,
+      "PVS": 0,
+      "TT_probes": 1,
+      "TT_hits": 0,
+      "TT_cutoffs": 0,
+      "child_depth": 1,
+      "nonroot_ply": 1,
+      "restricted_root_TT": false,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot004-ply039:N:H3:forced-60",
+      "parent": 1,
+      "evaluator": "N",
+      "H": 3,
+      "forced": 60,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 1065343547,
+      "value": 0.9994236826896667,
+      "action": 60,
+      "PV": [
+        60,
+        53,
+        61
+      ],
+      "completed_depth": 3,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 0.000162239,
+      "setup_Search_drop_s": 0.020084758,
+      "nodes": 84,
+      "evals": 76,
+      "terminal": 0,
+      "PVS": 2,
+      "TT_probes": 5,
+      "TT_hits": 1,
+      "TT_cutoffs": 0,
+      "child_depth": 2,
+      "nonroot_ply": 1,
+      "restricted_root_TT": false,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot004-ply039:N:H3:forced-184",
+      "parent": 1,
+      "evaluator": "N",
+      "H": 3,
+      "forced": 184,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 1065333315,
+      "value": 0.998813807964325,
+      "action": 184,
+      "PV": [
+        184,
+        43,
+        60
+      ],
+      "completed_depth": 3,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 0.000151767,
+      "setup_Search_drop_s": 0.020737991,
+      "nodes": 74,
+      "evals": 67,
+      "terminal": 0,
+      "PVS": 0,
+      "TT_probes": 4,
+      "TT_hits": 1,
+      "TT_cutoffs": 0,
+      "child_depth": 2,
+      "nonroot_ply": 1,
+      "restricted_root_TT": false,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot004-ply039:N:H3:forced-192",
+      "parent": 1,
+      "evaluator": "N",
+      "H": 3,
+      "forced": 192,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 1065337337,
+      "value": 0.9990535378456116,
+      "action": 192,
+      "PV": [
+        192,
+        43,
+        70
+      ],
+      "completed_depth": 3,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 0.000191178,
+      "setup_Search_drop_s": 0.020711182,
+      "nodes": 75,
+      "evals": 68,
+      "terminal": 0,
+      "PVS": 1,
+      "TT_probes": 4,
+      "TT_hits": 1,
+      "TT_cutoffs": 0,
+      "child_depth": 2,
+      "nonroot_ply": 1,
+      "restricted_root_TT": false,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot004-ply039:D:H3:forced-60",
+      "parent": 1,
+      "evaluator": "D",
+      "H": 3,
+      "forced": 60,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 3208837078,
+      "value": -0.7615941762924194,
+      "action": 60,
+      "PV": [
+        60,
+        53,
+        136
+      ],
+      "completed_depth": 3,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 7.5883e-05,
+      "setup_Search_drop_s": 0.020346793,
+      "nodes": 84,
+      "evals": 76,
+      "terminal": 0,
+      "PVS": 2,
+      "TT_probes": 5,
+      "TT_hits": 1,
+      "TT_cutoffs": 0,
+      "child_depth": 2,
+      "nonroot_ply": 1,
+      "restricted_root_TT": false,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot004-ply039:D:H3:forced-184",
+      "parent": 1,
+      "evaluator": "D",
+      "H": 3,
+      "forced": 184,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 3206199256,
+      "value": -0.604367733001709,
+      "action": 184,
+      "PV": [
+        184,
+        43,
+        111
+      ],
+      "completed_depth": 3,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 9.1888e-05,
+      "setup_Search_drop_s": 0.019631274,
+      "nodes": 92,
+      "evals": 85,
+      "terminal": 0,
+      "PVS": 1,
+      "TT_probes": 4,
+      "TT_hits": 1,
+      "TT_cutoffs": 0,
+      "child_depth": 2,
+      "nonroot_ply": 1,
+      "restricted_root_TT": false,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot004-ply039:D:H3:forced-192",
+      "parent": 1,
+      "evaluator": "D",
+      "H": 3,
+      "forced": 192,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 3208077132,
+      "value": -0.7162978649139404,
+      "action": 192,
+      "PV": [
+        192,
+        43,
+        144
+      ],
+      "completed_depth": 3,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 8.4452e-05,
+      "setup_Search_drop_s": 0.020665399,
+      "nodes": 77,
+      "evals": 70,
+      "terminal": 0,
+      "PVS": 2,
+      "TT_probes": 4,
+      "TT_hits": 1,
+      "TT_cutoffs": 0,
+      "child_depth": 2,
+      "nonroot_ply": 1,
+      "restricted_root_TT": false,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot005-ply012:N:H2:forced-100",
+      "parent": 2,
+      "evaluator": "N",
+      "H": 2,
+      "forced": 100,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 3208393588,
+      "value": -0.7351601123809814,
+      "action": 100,
+      "PV": [
+        100,
+        114
+      ],
+      "completed_depth": 2,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 0.000143612,
+      "setup_Search_drop_s": 0.020370031,
+      "nodes": 118,
+      "evals": 115,
+      "terminal": 0,
+      "PVS": 3,
+      "TT_probes": 1,
+      "TT_hits": 0,
+      "TT_cutoffs": 0,
+      "child_depth": 1,
+      "nonroot_ply": 1,
+      "restricted_root_TT": false,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot005-ply012:N:H2:forced-104",
+      "parent": 2,
+      "evaluator": "N",
+      "H": 2,
+      "forced": 104,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 3212499475,
+      "value": -0.9798900485038757,
+      "action": 104,
+      "PV": [
+        104,
+        172
+      ],
+      "completed_depth": 2,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 0.0001448,
+      "setup_Search_drop_s": 0.019621844,
+      "nodes": 123,
+      "evals": 120,
+      "terminal": 0,
+      "PVS": 5,
+      "TT_probes": 1,
+      "TT_hits": 0,
+      "TT_cutoffs": 0,
+      "child_depth": 1,
+      "nonroot_ply": 1,
+      "restricted_root_TT": false,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot005-ply012:D:H2:forced-100",
+      "parent": 2,
+      "evaluator": "D",
+      "H": 2,
+      "forced": 100,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 3197445870,
+      "value": -0.29131263494491577,
+      "action": 100,
+      "PV": [
+        100,
+        114
+      ],
+      "completed_depth": 2,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 4.3878e-05,
+      "setup_Search_drop_s": 0.020139073,
+      "nodes": 116,
+      "evals": 113,
+      "terminal": 0,
+      "PVS": 1,
+      "TT_probes": 1,
+      "TT_hits": 0,
+      "TT_cutoffs": 0,
+      "child_depth": 1,
+      "nonroot_ply": 1,
+      "restricted_root_TT": false,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot005-ply012:D:H2:forced-104",
+      "parent": 2,
+      "evaluator": "D",
+      "H": 2,
+      "forced": 104,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 3200420011,
+      "value": -0.3799489438533783,
+      "action": 104,
+      "PV": [
+        104,
+        171
+      ],
+      "completed_depth": 2,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 4.484e-05,
+      "setup_Search_drop_s": 0.019528333,
+      "nodes": 120,
+      "evals": 117,
+      "terminal": 0,
+      "PVS": 2,
+      "TT_probes": 1,
+      "TT_hits": 0,
+      "TT_cutoffs": 0,
+      "child_depth": 1,
+      "nonroot_ply": 1,
+      "restricted_root_TT": false,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot005-ply012:N:H3:forced-100",
+      "parent": 2,
+      "evaluator": "N",
+      "H": 3,
+      "forced": 100,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 1059871239,
+      "value": 0.6732487082481384,
+      "action": 100,
+      "PV": [
+        100,
+        208,
+        160
+      ],
+      "completed_depth": 3,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 0.001376848,
+      "setup_Search_drop_s": 0.022795828,
+      "nodes": 1346,
+      "evals": 1225,
+      "terminal": 0,
+      "PVS": 12,
+      "TT_probes": 118,
+      "TT_hits": 6,
+      "TT_cutoffs": 0,
+      "child_depth": 2,
+      "nonroot_ply": 1,
+      "restricted_root_TT": false,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot005-ply012:N:H3:forced-104",
+      "parent": 2,
+      "evaluator": "N",
+      "H": 3,
+      "forced": 104,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 1063260152,
+      "value": 0.8752436637878418,
+      "action": 104,
+      "PV": [
+        104,
+        149,
+        87
+      ],
+      "completed_depth": 3,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 0.00125016,
+      "setup_Search_drop_s": 0.021313585,
+      "nodes": 1275,
+      "evals": 1151,
+      "terminal": 0,
+      "PVS": 12,
+      "TT_probes": 121,
+      "TT_hits": 6,
+      "TT_cutoffs": 0,
+      "child_depth": 2,
+      "nonroot_ply": 1,
+      "restricted_root_TT": false,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot005-ply012:D:H3:forced-100",
+      "parent": 2,
+      "evaluator": "D",
+      "H": 3,
+      "forced": 100,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 3184271039,
+      "value": -0.09966801851987839,
+      "action": 100,
+      "PV": [
+        100,
+        114,
+        102
+      ],
+      "completed_depth": 3,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 0.000314752,
+      "setup_Search_drop_s": 0.020284762,
+      "nodes": 466,
+      "evals": 350,
+      "terminal": 0,
+      "PVS": 3,
+      "TT_probes": 113,
+      "TT_hits": 1,
+      "TT_cutoffs": 0,
+      "child_depth": 2,
+      "nonroot_ply": 1,
+      "restricted_root_TT": false,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    },
+    {
+      "id": "distance-slot005-ply012:D:H3:forced-104",
+      "parent": 2,
+      "evaluator": "D",
+      "H": 3,
+      "forced": 104,
+      "status": "COMPLETE",
+      "bound": "Exact",
+      "requested_value_bits": 3192528065,
+      "value": -0.1973753124475479,
+      "action": 104,
+      "PV": [
+        104,
+        171,
+        102
+      ],
+      "completed_depth": 3,
+      "stop": "DepthComplete",
+      "parent_restored": true,
+      "Search_s": 0.00031041,
+      "setup_Search_drop_s": 0.020223832,
+      "nodes": 475,
+      "evals": 356,
+      "terminal": 0,
+      "PVS": 4,
+      "TT_probes": 116,
+      "TT_hits": 1,
+      "TT_cutoffs": 0,
+      "child_depth": 2,
+      "nonroot_ply": 1,
+      "restricted_root_TT": false,
+      "window": [
+        "-infinity",
+        "+infinity"
+      ],
+      "source_value_origin": "searched; static/TT origin UNKNOWN"
+    }
+  ],
+  "census": {
+    "diagnostic_delta_contexts_started": 32,
+    "diagnostic_full_contexts_started": 47634,
+    "diagnostic_head_calls_started": 47698,
+    "nnue_logical_charge_including_unknown_reservations": 84673,
+    "nnue_search_calls_entered": 20,
+    "nnue_search_requests_admitted": 20,
+    "parity_nnue_logical_evaluations": 131,
+    "parity_states": 35,
+    "saved_interventions": 23,
+    "search_calls_entered": 40,
+    "search_nnue_evaluations_observed": 36975,
+    "search_nodes_observed": 74064,
+    "search_nodes_unknown_calls": 0,
+    "search_requests_admitted": 40,
+    "tree_nnue_logical_evaluations": 47567,
+    "tree_visits": 47577
+  },
+  "checks": {
+    "all_saved_backups_and_23_interventions_recomputed": true,
+    "compared_backup_values": 96072,
+    "signed_zero_only_bit_differences": 0,
+    "selected_endpoints_and_parity_paths_exactly_match_fixed_rule": true,
+    "new_model_forward_Search_geometry_solver": 0
+  },
+  "finite_interpretation": {
+    "parent_horizon_cases": 6,
+    "different_N_D_argmax": 5,
+    "intervention_cases_with_singleton_action_flip": 3,
+    "singleton_action_flips": 4,
+    "joint_action_flips": 3,
+    "all_intervention_action_flips": 7,
+    "WDL_or_general_strength_or_original_warm_state_causal_claim": false
+  }
+}

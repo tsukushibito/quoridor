@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="850" viewBox="0 0 1200 850" role="img" aria-labelledby="title desc">
+<title id="title">419 保存有限木：葉一つの置換で固定C内の選択が変わる例</title>
+<desc id="desc">原runはstdout captureでFAILED。slot4 ply11 horizon2の保存共通木で、156と68の候補だけを比較。葉156,91のNNUE値を同葉D値へ置くとC内の選択は156から68に変わる。対局勝敗と全合法rootの介入後選択は未判定。</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#596579"/></marker></defs>
+<style>text{font-family:"Noto Sans CJK JP","Yu Gothic",sans-serif;fill:#192638}.title{font-size:25px;font-weight:700}.body{font-size:20px}.small{font-size:16px}.blue{font-size:23px;fill:#185ca6;font-weight:700}.red{font-size:22px;fill:#ae253b;font-weight:700}.green{font-size:23px;fill:#08704c;font-weight:700}.box{fill:white;stroke:#b9c5d4;stroke-width:2}.line{fill:none;stroke:#596579;stroke-width:2;marker-end:url(#arrow)}</style>
+<rect width="1200" height="850" fill="#f5f7fa"/>
+<text x="38" y="40" class="title" text-anchor="start">原operational outcome: FAILED / 保存された有限木の介入</text>
+<text x="38" y="72" class="body" text-anchor="start">slot4 / ply11 · 親STM=P1 · H2 · C={68 f8, 156 V(d2)} · 値はすべて親視点</text>
+<rect x="350" y="98" width="500" height="75" rx="12" class="box"/>
+<text x="600" y="129" class="body" text-anchor="middle">親が候補値の最大を選ぶ（C内）</text>
+<text x="600" y="156" class="small" text-anchor="middle">各候補では相手の全合法応手を含む</text>
+<path d="M460,173 L275,217" class="line"/><path d="M740,173 L925,217" class="line"/>
+<rect x="55" y="220" width="465" height="135" rx="12" class="box"/>
+<rect x="680" y="220" width="465" height="135" rx="12" class="box"/>
+<text x="80" y="253" class="body" text-anchor="start">68 = f8</text>
+<text x="80" y="289" class="blue" text-anchor="start">N +0.270588</text>
+<text x="80" y="326" class="body" text-anchor="start">D -0.379949</text>
+<text x="705" y="253" class="body" text-anchor="start">156 = V(d2)</text>
+<text x="705" y="289" class="blue" text-anchor="start">N +0.855743  ← 元のC内選択</text>
+<text x="705" y="326" class="body" text-anchor="start">D -0.462117</text>
+<path d="M920,355 L920,393" class="line"/>
+<rect x="590" y="397" width="555" height="175" rx="12" fill="#fff4f4" stroke="#c85b6b" stroke-width="2"/>
+<text x="615" y="430" class="body" text-anchor="start">相手の応手91=H(c2)：path [156,91]</text>
+<text x="615" y="462" class="small" text-anchor="start">N pre-tanh +1.277223 → post +0.855743</text>
+<text x="615" y="496" class="red" text-anchor="start">この葉だけD値 -0.291313 へ置換</text>
+<text x="615" y="531" class="small" text-anchor="start">同じ葉・同じSTM・同じhorizon。その他の値は固定。</text>
+<text x="80" y="410" class="body" text-anchor="start">原対局の実続行は [156,123,…]。</text>
+<text x="80" y="443" class="small" text-anchor="start">[156,91]は診断PV上の葉であり、</text>
+<text x="80" y="471" class="small" text-anchor="start">実戦で踏んだ葉とは主張しない。</text>
+<rect x="55" y="605" width="1090" height="123" rx="12" fill="#eef8f3" stroke="#69a78c" stroke-width="2"/>
+<text x="80" y="639" class="body" text-anchor="start">全応手を再backupした後（PV固定はしない）</text>
+<text x="80" y="679" class="green" text-anchor="start">68 f8: +0.270588  ← 新しいC内選択</text>
+<text x="680" y="679" class="red" text-anchor="start">156 V(d2): -0.291313</text>
+<text x="55" y="770" class="small" text-anchor="start">C外のroot手はこの木に無い。全合法rootの介入後選択、Dの正しさ、真のWDLは未判定。</text>
+<text x="55" y="803" class="small" text-anchor="start">H3では固定4endpointを同時置換しても156が残る：代替葉 [156,193,140] の親値 +0.938093。</text>
+</svg>

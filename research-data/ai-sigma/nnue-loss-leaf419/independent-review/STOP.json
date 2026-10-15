@@ -1,0 +1,876 @@
+{
+  "issue": "quoridor-4lc.419.3",
+  "selected_reader_STOP": "2026-10-15T22:19:22.974547+00:00",
+  "example_reader_STOP": "2026-10-15T22:16:38.996499+00:00",
+  "fresh_resource_STOP": "2026-10-15T22:19:22.976014+00:00",
+  "receipts": [
+    {
+      "stage": "beads-read-v1",
+      "child": {
+        "original": {
+          "pid": 2478641,
+          "start_ticks": "15082889",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "fresh": "absent"
+      },
+      "controller": {
+        "original": {
+          "pid": 2478639,
+          "start_ticks": "15082880",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9",
+          "affinity": [
+            12
+          ],
+          "topology": {
+            "8": {
+              "physical_package_id": "0",
+              "core_id": "4"
+            },
+            "12": {
+              "physical_package_id": "0",
+              "core_id": "6"
+            }
+          },
+          "cpuset": "0-19",
+          "quota": "max 100000"
+        },
+        "fresh": "absent"
+      },
+      "returned": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-loss-leaf419-review-v1/interpretation-v1/beads-read-v1/return.json",
+        "sha256": "9ee4a2715545611253cc5917572ee1d1377d98ca6dee1d2c281df8a6ac9c02dd",
+        "bytes": 1423,
+        "mode": "0644"
+      },
+      "persisted": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-loss-leaf419-review-v1/interpretation-v1/beads-read-v1/command.process.json",
+        "sha256": "26d9ca9a1b4998a108f8c4cc9a58fac13fff512eaa67a02f790605fd4b2bdca9",
+        "bytes": 1421,
+        "mode": "0600"
+      },
+      "directwait_reaped": true,
+      "handles_closed": true,
+      "TMP_absent": true,
+      "no_new_privs": {
+        "no_new_privs_requested": true,
+        "verified_before_exec": 1
+      },
+      "returned_masks": "completed",
+      "persisted_masks": "pending",
+      "returned_persist": "completed",
+      "persisted_persist": "attempted"
+    },
+    {
+      "stage": "intake-v1",
+      "child": {
+        "original": {
+          "pid": 2479967,
+          "start_ticks": "15085079",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "fresh": "absent"
+      },
+      "controller": {
+        "original": {
+          "pid": 2479913,
+          "start_ticks": "15085046",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9",
+          "affinity": [
+            12
+          ],
+          "topology": {
+            "8": {
+              "physical_package_id": "0",
+              "core_id": "4"
+            },
+            "12": {
+              "physical_package_id": "0",
+              "core_id": "6"
+            }
+          },
+          "cpuset": "0-19",
+          "quota": "max 100000"
+        },
+        "fresh": "absent"
+      },
+      "returned": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-loss-leaf419-review-v1/interpretation-v1/intake-v1/return.json",
+        "sha256": "63bb148ffaa8690dc1f211ae47c2a5af4159cc6443380f11abda76939d73230e",
+        "bytes": 1115,
+        "mode": "0644"
+      },
+      "persisted": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-loss-leaf419-review-v1/interpretation-v1/intake-v1/command.process.json",
+        "sha256": "e8bf06de231fd67ce450b07928b2683c39b4c9723f93d61a936ba1ecb64ea833",
+        "bytes": 1113,
+        "mode": "0600"
+      },
+      "directwait_reaped": true,
+      "handles_closed": true,
+      "TMP_absent": true,
+      "no_new_privs": {
+        "no_new_privs_requested": true,
+        "verified_before_exec": 1
+      },
+      "returned_masks": "completed",
+      "persisted_masks": "pending",
+      "returned_persist": "completed",
+      "persisted_persist": "attempted"
+    },
+    {
+      "stage": "assessment-read-v1",
+      "child": {
+        "original": {
+          "pid": 2480591,
+          "start_ticks": "15086018",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "fresh": "absent"
+      },
+      "controller": {
+        "original": {
+          "pid": 2480590,
+          "start_ticks": "15085987",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9",
+          "affinity": [
+            12
+          ],
+          "topology": {
+            "8": {
+              "physical_package_id": "0",
+              "core_id": "4"
+            },
+            "12": {
+              "physical_package_id": "0",
+              "core_id": "6"
+            }
+          },
+          "cpuset": "0-19",
+          "quota": "max 100000"
+        },
+        "fresh": "absent"
+      },
+      "returned": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-loss-leaf419-review-v1/interpretation-v1/assessment-read-v1/return.json",
+        "sha256": "26c774549dad361fc3205db4c3e85b55833f6d386195d54fd0150b8903d64981",
+        "bytes": 1739,
+        "mode": "0644"
+      },
+      "persisted": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-loss-leaf419-review-v1/interpretation-v1/assessment-read-v1/command.process.json",
+        "sha256": "a34b4ef3ef57e0e59d6703bb799644db358cb089d913e7856fd7555474e532c9",
+        "bytes": 1737,
+        "mode": "0600"
+      },
+      "directwait_reaped": true,
+      "handles_closed": true,
+      "TMP_absent": true,
+      "no_new_privs": {
+        "no_new_privs_requested": true,
+        "verified_before_exec": 1
+      },
+      "returned_masks": "completed",
+      "persisted_masks": "pending",
+      "returned_persist": "completed",
+      "persisted_persist": "attempted"
+    },
+    {
+      "stage": "original-ref-read-v1",
+      "child": {
+        "original": {
+          "pid": 2482061,
+          "start_ticks": "15088828",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "fresh": "absent"
+      },
+      "controller": {
+        "original": {
+          "pid": 2482045,
+          "start_ticks": "15088814",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9",
+          "affinity": [
+            12
+          ],
+          "topology": {
+            "8": {
+              "physical_package_id": "0",
+              "core_id": "4"
+            },
+            "12": {
+              "physical_package_id": "0",
+              "core_id": "6"
+            }
+          },
+          "cpuset": "0-19",
+          "quota": "max 100000"
+        },
+        "fresh": "absent"
+      },
+      "returned": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-loss-leaf419-review-v1/interpretation-v1/original-ref-read-v1/return.json",
+        "sha256": "2ca82cb15c73168d9f66e97353e1a3c6e36f3fb0379adbfdc0bd06e49ca82a59",
+        "bytes": 1767,
+        "mode": "0644"
+      },
+      "persisted": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-loss-leaf419-review-v1/interpretation-v1/original-ref-read-v1/command.process.json",
+        "sha256": "0e1f3190b0cdad0db6455576bad91bfa83ab07ca65f54a8492495f82e8a64d45",
+        "bytes": 1765,
+        "mode": "0600"
+      },
+      "directwait_reaped": true,
+      "handles_closed": true,
+      "TMP_absent": true,
+      "no_new_privs": {
+        "no_new_privs_requested": true,
+        "verified_before_exec": 1
+      },
+      "returned_masks": "completed",
+      "persisted_masks": "pending",
+      "returned_persist": "completed",
+      "persisted_persist": "attempted"
+    },
+    {
+      "stage": "saved-shape-read-v1",
+      "child": {
+        "original": {
+          "pid": 2483387,
+          "start_ticks": "15091046",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "fresh": "absent"
+      },
+      "controller": {
+        "original": {
+          "pid": 2483381,
+          "start_ticks": "15091013",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9",
+          "affinity": [
+            12
+          ],
+          "topology": {
+            "8": {
+              "physical_package_id": "0",
+              "core_id": "4"
+            },
+            "12": {
+              "physical_package_id": "0",
+              "core_id": "6"
+            }
+          },
+          "cpuset": "0-19",
+          "quota": "max 100000"
+        },
+        "fresh": "absent"
+      },
+      "returned": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-loss-leaf419-review-v1/interpretation-v1/saved-shape-read-v1/return.json",
+        "sha256": "df03c1525a1daf8f8b369e664a9c90661f2334dcb2060cf9b500e8f81380d18a",
+        "bytes": 2082,
+        "mode": "0644"
+      },
+      "persisted": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-loss-leaf419-review-v1/interpretation-v1/saved-shape-read-v1/command.process.json",
+        "sha256": "dc38615991b19df841acc91f271ab5f84b8722cf9ef47ffca8da51d21f89f8e7",
+        "bytes": 2080,
+        "mode": "0600"
+      },
+      "directwait_reaped": true,
+      "handles_closed": true,
+      "TMP_absent": true,
+      "no_new_privs": {
+        "no_new_privs_requested": true,
+        "verified_before_exec": 1
+      },
+      "returned_masks": "completed",
+      "persisted_masks": "pending",
+      "returned_persist": "completed",
+      "persisted_persist": "attempted"
+    },
+    {
+      "stage": "format-helpers-v1",
+      "child": {
+        "original": {
+          "pid": 2487403,
+          "start_ticks": "15097505",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "fresh": "absent"
+      },
+      "controller": {
+        "original": {
+          "pid": 2487315,
+          "start_ticks": "15097425",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9",
+          "affinity": [
+            12
+          ],
+          "topology": {
+            "8": {
+              "physical_package_id": "0",
+              "core_id": "4"
+            },
+            "12": {
+              "physical_package_id": "0",
+              "core_id": "6"
+            }
+          },
+          "cpuset": "0-19",
+          "quota": "max 100000"
+        },
+        "fresh": "absent"
+      },
+      "returned": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-loss-leaf419-review-v1/interpretation-v1/format-helpers-v1/return.json",
+        "sha256": "9126a7a9b0181f6db5675c03043f73b196b786753bf7a06fd0c1eea2a0891162",
+        "bytes": 1327,
+        "mode": "0644"
+      },
+      "persisted": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-loss-leaf419-review-v1/interpretation-v1/format-helpers-v1/command.process.json",
+        "sha256": "9a3ed24de30535f197d11b85177b293f34800a5b574db09aa8736421cbe01b76",
+        "bytes": 1325,
+        "mode": "0600"
+      },
+      "directwait_reaped": true,
+      "handles_closed": true,
+      "TMP_absent": true,
+      "no_new_privs": {
+        "no_new_privs_requested": true,
+        "verified_before_exec": 1
+      },
+      "returned_masks": "completed",
+      "persisted_masks": "pending",
+      "returned_persist": "completed",
+      "persisted_persist": "attempted"
+    },
+    {
+      "stage": "lint-helpers-v1",
+      "child": {
+        "original": {
+          "pid": 2487738,
+          "start_ticks": "15097957",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "fresh": "absent"
+      },
+      "controller": {
+        "original": {
+          "pid": 2487695,
+          "start_ticks": "15097933",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9",
+          "affinity": [
+            12
+          ],
+          "topology": {
+            "8": {
+              "physical_package_id": "0",
+              "core_id": "4"
+            },
+            "12": {
+              "physical_package_id": "0",
+              "core_id": "6"
+            }
+          },
+          "cpuset": "0-19",
+          "quota": "max 100000"
+        },
+        "fresh": "absent"
+      },
+      "returned": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-loss-leaf419-review-v1/interpretation-v1/lint-helpers-v1/return.json",
+        "sha256": "272cc80aba842e9deecbd90244e37b28d281222d9111d83661ed966b923a474e",
+        "bytes": 1329,
+        "mode": "0644"
+      },
+      "persisted": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-loss-leaf419-review-v1/interpretation-v1/lint-helpers-v1/command.process.json",
+        "sha256": "04eab34fcbbe79aa07fd877a82534a940f8848cfc7b964f2f7baf54c4f99b57d",
+        "bytes": 1327,
+        "mode": "0600"
+      },
+      "directwait_reaped": true,
+      "handles_closed": true,
+      "TMP_absent": true,
+      "no_new_privs": {
+        "no_new_privs_requested": true,
+        "verified_before_exec": 1
+      },
+      "returned_masks": "completed",
+      "persisted_masks": "pending",
+      "returned_persist": "completed",
+      "persisted_persist": "attempted"
+    },
+    {
+      "stage": "example-check-v1",
+      "child": {
+        "original": {
+          "pid": 2488041,
+          "start_ticks": "15098336",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "fresh": "absent"
+      },
+      "controller": {
+        "original": {
+          "pid": 2488040,
+          "start_ticks": "15098328",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9",
+          "affinity": [
+            12
+          ],
+          "topology": {
+            "8": {
+              "physical_package_id": "0",
+              "core_id": "4"
+            },
+            "12": {
+              "physical_package_id": "0",
+              "core_id": "6"
+            }
+          },
+          "cpuset": "0-19",
+          "quota": "max 100000"
+        },
+        "fresh": "absent"
+      },
+      "returned": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-loss-leaf419-review-v1/interpretation-v1/example-check-v1/return.json",
+        "sha256": "94539ee8e7baeb45364b73d91e00535ed87ff4244a9c8421d411dab720528f44",
+        "bytes": 1116,
+        "mode": "0644"
+      },
+      "persisted": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-loss-leaf419-review-v1/interpretation-v1/example-check-v1/command.process.json",
+        "sha256": "af94f63b813c122f950261944f5538496533d7a7a9fb7b02421f0d0330fce8fd",
+        "bytes": 1114,
+        "mode": "0600"
+      },
+      "directwait_reaped": true,
+      "handles_closed": true,
+      "TMP_absent": true,
+      "no_new_privs": {
+        "no_new_privs_requested": true,
+        "verified_before_exec": 1
+      },
+      "returned_masks": "completed",
+      "persisted_masks": "pending",
+      "returned_persist": "completed",
+      "persisted_persist": "attempted"
+    },
+    {
+      "stage": "figure-text-v1",
+      "child": {
+        "original": {
+          "pid": 2492286,
+          "start_ticks": "15105624",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "fresh": "absent"
+      },
+      "controller": {
+        "original": {
+          "pid": 2492195,
+          "start_ticks": "15105558",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9",
+          "affinity": [
+            12
+          ],
+          "topology": {
+            "8": {
+              "physical_package_id": "0",
+              "core_id": "4"
+            },
+            "12": {
+              "physical_package_id": "0",
+              "core_id": "6"
+            }
+          },
+          "cpuset": "0-19",
+          "quota": "max 100000"
+        },
+        "fresh": "absent"
+      },
+      "returned": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-loss-leaf419-review-v1/interpretation-v1/figure-text-v1/return.json",
+        "sha256": "7d7fc0d0cd5cc5873f1e50c19b452587af18e81629818834eaae53c71530428c",
+        "bytes": 1432,
+        "mode": "0644"
+      },
+      "persisted": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-loss-leaf419-review-v1/interpretation-v1/figure-text-v1/command.process.json",
+        "sha256": "60891aed5bb6895de73f2c31bc5c37abef76ce8f0dd2d676763d809ccdaaaeb9",
+        "bytes": 1430,
+        "mode": "0600"
+      },
+      "directwait_reaped": true,
+      "handles_closed": true,
+      "TMP_absent": true,
+      "no_new_privs": {
+        "no_new_privs_requested": true,
+        "verified_before_exec": 1
+      },
+      "returned_masks": "completed",
+      "persisted_masks": "pending",
+      "returned_persist": "completed",
+      "persisted_persist": "attempted"
+    },
+    {
+      "stage": "format-report-v1",
+      "child": {
+        "original": {
+          "pid": 2493297,
+          "start_ticks": "15107293",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "fresh": "absent"
+      },
+      "controller": {
+        "original": {
+          "pid": 2493291,
+          "start_ticks": "15107278",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9",
+          "affinity": [
+            12
+          ],
+          "topology": {
+            "8": {
+              "physical_package_id": "0",
+              "core_id": "4"
+            },
+            "12": {
+              "physical_package_id": "0",
+              "core_id": "6"
+            }
+          },
+          "cpuset": "0-19",
+          "quota": "max 100000"
+        },
+        "fresh": "absent"
+      },
+      "returned": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-loss-leaf419-review-v1/interpretation-v1/format-report-v1/return.json",
+        "sha256": "88b2072c386abfb43b5b68a3ef95cec51ed5d41791fe9174c7ec53e51a5ffa95",
+        "bytes": 1267,
+        "mode": "0644"
+      },
+      "persisted": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-loss-leaf419-review-v1/interpretation-v1/format-report-v1/command.process.json",
+        "sha256": "abf37693856c247076f36a795493b29405e1227a58d89b088bcfb0252e17e064",
+        "bytes": 1265,
+        "mode": "0600"
+      },
+      "directwait_reaped": true,
+      "handles_closed": true,
+      "TMP_absent": true,
+      "no_new_privs": {
+        "no_new_privs_requested": true,
+        "verified_before_exec": 1
+      },
+      "returned_masks": "completed",
+      "persisted_masks": "pending",
+      "returned_persist": "completed",
+      "persisted_persist": "attempted"
+    },
+    {
+      "stage": "beads-note-v1",
+      "child": {
+        "original": {
+          "pid": 2493886,
+          "start_ticks": "15108228",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "fresh": "absent"
+      },
+      "controller": {
+        "original": {
+          "pid": 2493885,
+          "start_ticks": "15108197",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9",
+          "affinity": [
+            12
+          ],
+          "topology": {
+            "8": {
+              "physical_package_id": "0",
+              "core_id": "4"
+            },
+            "12": {
+              "physical_package_id": "0",
+              "core_id": "6"
+            }
+          },
+          "cpuset": "0-19",
+          "quota": "max 100000"
+        },
+        "fresh": "absent"
+      },
+      "returned": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-loss-leaf419-review-v1/interpretation-v1/beads-note-v1/return.json",
+        "sha256": "ef7573c52cf3e6a24eb637873a6f0cd0a9bec724c769e7c4cb6df71bf98e79cc",
+        "bytes": 2061,
+        "mode": "0644"
+      },
+      "persisted": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-loss-leaf419-review-v1/interpretation-v1/beads-note-v1/command.process.json",
+        "sha256": "0bc3b8e3c7934318ad4998ac07023fc9e7766a2f049e5d45e74e850a09cfddb4",
+        "bytes": 2059,
+        "mode": "0600"
+      },
+      "directwait_reaped": true,
+      "handles_closed": true,
+      "TMP_absent": true,
+      "no_new_privs": {
+        "no_new_privs_requested": true,
+        "verified_before_exec": 1
+      },
+      "returned_masks": "completed",
+      "persisted_masks": "pending",
+      "returned_persist": "completed",
+      "persisted_persist": "attempted"
+    },
+    {
+      "stage": "backup-before-close-v1",
+      "child": {
+        "original": {
+          "pid": 2494320,
+          "start_ticks": "15108675",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "fresh": "absent"
+      },
+      "controller": {
+        "original": {
+          "pid": 2494308,
+          "start_ticks": "15108636",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9",
+          "affinity": [
+            12
+          ],
+          "topology": {
+            "8": {
+              "physical_package_id": "0",
+              "core_id": "4"
+            },
+            "12": {
+              "physical_package_id": "0",
+              "core_id": "6"
+            }
+          },
+          "cpuset": "0-19",
+          "quota": "max 100000"
+        },
+        "fresh": "absent"
+      },
+      "returned": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-loss-leaf419-review-v1/interpretation-v1/backup-before-close-v1/return.json",
+        "sha256": "cd1be6f4e819cdc60283e5eea9fe4e9570a3deb4ebacbe38a58290518593975d",
+        "bytes": 954,
+        "mode": "0644"
+      },
+      "persisted": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-loss-leaf419-review-v1/interpretation-v1/backup-before-close-v1/command.process.json",
+        "sha256": "732355d93ecd52aea296f1ee654cfc85886cb475daa69750e07726b4f6da7028",
+        "bytes": 952,
+        "mode": "0600"
+      },
+      "directwait_reaped": true,
+      "handles_closed": true,
+      "TMP_absent": true,
+      "no_new_privs": {
+        "no_new_privs_requested": true,
+        "verified_before_exec": 1
+      },
+      "returned_masks": "completed",
+      "persisted_masks": "pending",
+      "returned_persist": "completed",
+      "persisted_persist": "attempted"
+    },
+    {
+      "stage": "beads-close-v1",
+      "child": {
+        "original": {
+          "pid": 2494808,
+          "start_ticks": "15109311",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "fresh": "absent"
+      },
+      "controller": {
+        "original": {
+          "pid": 2494801,
+          "start_ticks": "15109304",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9",
+          "affinity": [
+            12
+          ],
+          "topology": {
+            "8": {
+              "physical_package_id": "0",
+              "core_id": "4"
+            },
+            "12": {
+              "physical_package_id": "0",
+              "core_id": "6"
+            }
+          },
+          "cpuset": "0-19",
+          "quota": "max 100000"
+        },
+        "fresh": "absent"
+      },
+      "returned": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-loss-leaf419-review-v1/interpretation-v1/beads-close-v1/return.json",
+        "sha256": "bb1a189c7d0a0e6eddf120a1bf9d05e073b40c39d021f83311269f882e82988c",
+        "bytes": 1354,
+        "mode": "0644"
+      },
+      "persisted": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-loss-leaf419-review-v1/interpretation-v1/beads-close-v1/command.process.json",
+        "sha256": "bfd2ccd0d670d6b97160e118da202e2e34bd129a26d2a1e7aab70f8a644d94d3",
+        "bytes": 1352,
+        "mode": "0600"
+      },
+      "directwait_reaped": true,
+      "handles_closed": true,
+      "TMP_absent": true,
+      "no_new_privs": {
+        "no_new_privs_requested": true,
+        "verified_before_exec": 1
+      },
+      "returned_masks": "completed",
+      "persisted_masks": "pending",
+      "returned_persist": "completed",
+      "persisted_persist": "attempted"
+    },
+    {
+      "stage": "beads-show-closed-v1",
+      "child": {
+        "original": {
+          "pid": 2495351,
+          "start_ticks": "15110049",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "fresh": "absent"
+      },
+      "controller": {
+        "original": {
+          "pid": 2495343,
+          "start_ticks": "15110013",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9",
+          "affinity": [
+            12
+          ],
+          "topology": {
+            "8": {
+              "physical_package_id": "0",
+              "core_id": "4"
+            },
+            "12": {
+              "physical_package_id": "0",
+              "core_id": "6"
+            }
+          },
+          "cpuset": "0-19",
+          "quota": "max 100000"
+        },
+        "fresh": "absent"
+      },
+      "returned": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-loss-leaf419-review-v1/interpretation-v1/beads-show-closed-v1/return.json",
+        "sha256": "ca6bac23940dff5da4328ece89575d64b8491d52c417814a7c34c4a0b5d096cd",
+        "bytes": 1377,
+        "mode": "0644"
+      },
+      "persisted": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-loss-leaf419-review-v1/interpretation-v1/beads-show-closed-v1/command.process.json",
+        "sha256": "cf9639dc9f7693e9d4517d6e32f381156f69abc738dd35c47133f9b750d36f8c",
+        "bytes": 1375,
+        "mode": "0600"
+      },
+      "directwait_reaped": true,
+      "handles_closed": true,
+      "TMP_absent": true,
+      "no_new_privs": {
+        "no_new_privs_requested": true,
+        "verified_before_exec": 1
+      },
+      "returned_masks": "completed",
+      "persisted_masks": "pending",
+      "returned_persist": "completed",
+      "persisted_persist": "attempted"
+    },
+    {
+      "stage": "backup-after-close-v1",
+      "child": {
+        "original": {
+          "pid": 2495666,
+          "start_ticks": "15110616",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "fresh": "absent"
+      },
+      "controller": {
+        "original": {
+          "pid": 2495665,
+          "start_ticks": "15110595",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9",
+          "affinity": [
+            12
+          ],
+          "topology": {
+            "8": {
+              "physical_package_id": "0",
+              "core_id": "4"
+            },
+            "12": {
+              "physical_package_id": "0",
+              "core_id": "6"
+            }
+          },
+          "cpuset": "0-19",
+          "quota": "max 100000"
+        },
+        "fresh": "absent"
+      },
+      "returned": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-loss-leaf419-review-v1/interpretation-v1/backup-after-close-v1/return.json",
+        "sha256": "5ab9c1762f1e41e039f7dc0829c977823b32bd602cfb237cd0d9ee0d33bcf255",
+        "bytes": 954,
+        "mode": "0644"
+      },
+      "persisted": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-loss-leaf419-review-v1/interpretation-v1/backup-after-close-v1/command.process.json",
+        "sha256": "04fec038160c78530e323226f8723b57b74f8f28400a2c658ee26bb23680dfc0",
+        "bytes": 952,
+        "mode": "0600"
+      },
+      "directwait_reaped": true,
+      "handles_closed": true,
+      "TMP_absent": true,
+      "no_new_privs": {
+        "no_new_privs_requested": true,
+        "verified_before_exec": 1
+      },
+      "returned_masks": "completed",
+      "persisted_masks": "pending",
+      "returned_persist": "completed",
+      "persisted_persist": "attempted"
+    }
+  ],
+  "owned": [],
+  "readers": [],
+  "writers": [],
+  "children": [],
+  "jobs": [],
+  "handles": [],
+  "TMP": [],
+  "leases": [],
+  "waits": [],
+  "reservation": "NONE",
+  "metadata_publisher": "This final bounded publisher directly reaped and TMP cleaned separately on guardian return",
+  "unrecorded_controller_peak_fast_admin_child_ids": "UNKNOWN",
+  "interpretation_clear": true
+}
