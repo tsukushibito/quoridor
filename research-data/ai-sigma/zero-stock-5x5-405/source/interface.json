@@ -1,0 +1,305 @@
+{
+    "purpose": "Finite fixed-wall5x5 board-WDL run source; not maintained product solver",
+    "publication_owner": "324 exact source/settings/results research-data/ai-sigma/zero-stock-5x5-405/; no active tool/issue-number entry",
+    "source": [
+        {
+            "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/zero_stock.rs",
+            "sha256": "16e4b64fae2cfbd761a9821f74a3dd74dae72813aba6171e3640717c81ab0b1d",
+            "bytes": 36268,
+            "mode": "0644"
+        },
+        {
+            "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/reference.py",
+            "sha256": "34b04d533501813a4f80bc85500060621aeed862839320babdee500a18afd5d5",
+            "bytes": 11533,
+            "mode": "0644"
+        }
+    ],
+    "cli": {
+        "enumerate": [
+            "IMAGE",
+            "enumerate",
+            "--side",
+            "5",
+            "--masks",
+            "FRESH/masks.bin",
+            "--summary",
+            "FRESH/enumeration.json"
+        ],
+        "pilot": [
+            "IMAGE",
+            "solve",
+            "--masks",
+            "masks.bin",
+            "--phase",
+            "pilot",
+            "--workers",
+            "1",
+            "--worker-index",
+            "0",
+            "--records",
+            "FRESH/pilot.bin",
+            "--summary",
+            "FRESH/pilot.json",
+            "--candidate",
+            "FRESH/pilot-first-D.bin"
+        ],
+        "remaining": [
+            "IMAGE",
+            "solve",
+            "--masks",
+            "SAME/masks.bin",
+            "--phase",
+            "remaining",
+            "--workers",
+            "K<=4",
+            "--worker-index",
+            "I<K",
+            "--records",
+            "FRESH/remaining-I.bin",
+            "--summary",
+            "FRESH/remaining-I.json",
+            "--candidate",
+            "FRESH/remaining-I-first-D.bin"
+        ],
+        "fixture_software_only": [
+            "IMAGE",
+            "fixture",
+            "--side",
+            "3 or5",
+            "--mask",
+            "U32 or0xHEX",
+            "--output",
+            "FRESH/graph.bin"
+        ],
+        "reference_software": [
+            "commonPython",
+            "reference.py",
+            "--native",
+            "IMAGE",
+            "--tmp",
+            "FRESH/directory"
+        ],
+        "independent_D_candidate_check": [
+            "commonPython",
+            "reference.py",
+            "--fixture",
+            "first-D.bin"
+        ]
+    },
+    "enumeration": "32 H/V candidates, highest-bit exclude/include collision-pruned independent-set DFS, numeric mask ascending; ordinal implicit file position. No2^32 integer scan. Empty mask and all wall counts included.",
+    "mask_header": {
+        "bytes": 24,
+        "endianness": "little",
+        "fields": [
+            [
+                0,
+                8,
+                "ASCII Q5MASK01"
+            ],
+            [
+                8,
+                4,
+                "u32 side"
+            ],
+            [
+                12,
+                4,
+                "u32 candidates"
+            ],
+            [
+                16,
+                8,
+                "u64 actual layouts"
+            ]
+        ]
+    },
+    "mask_records": {
+        "bytes": 4,
+        "fields": "u32 mask; H bit0..15 row*4+col, V bit16..31 row*4+col; ordinal=index0-based"
+    },
+    "record_header": {
+        "bytes": 32,
+        "fields": [
+            [
+                0,
+                8,
+                "ASCII Q5REC001"
+            ],
+            [
+                8,
+                1,
+                "u8 side5"
+            ],
+            [
+                9,
+                1,
+                "phase1pilot/2remaining"
+            ],
+            [
+                10,
+                1,
+                "workers1..4"
+            ],
+            [
+                11,
+                1,
+                "worker-index"
+            ],
+            [
+                12,
+                8,
+                "u64 input layouts"
+            ],
+            [
+                20,
+                8,
+                "u64 expected selected records"
+            ],
+            [
+                28,
+                4,
+                "u32 width48"
+            ]
+        ]
+    },
+    "layout_record": {
+        "bytes": 48,
+        "fields": [
+            [
+                0,
+                8,
+                "u64 ordinal"
+            ],
+            [
+                8,
+                4,
+                "u32 mask"
+            ],
+            [
+                12,
+                1,
+                "u8 wall count"
+            ],
+            [
+                13,
+                1,
+                "u8 whole-board component count"
+            ],
+            [
+                14,
+                1,
+                "initial shape flags: bit0 P0start goal-reachable, bit1 P1start goal-reachable, bit2 starts same component"
+            ],
+            [
+                15,
+                1,
+                "reserved0"
+            ],
+            [
+                16,
+                2,
+                "u16 active states"
+            ],
+            [
+                18,
+                2,
+                "u16 max proof rank (not minimum win distance)"
+            ],
+            [
+                20,
+                4,
+                "u32 all legal edges INCLUDING immediate goal actions"
+            ],
+            [
+                24,
+                2,
+                "u16 W"
+            ],
+            [
+                26,
+                2,
+                "u16 L"
+            ],
+            [
+                28,
+                2,
+                "u16 D"
+            ],
+            [
+                30,
+                2,
+                "reserved0"
+            ],
+            [
+                32,
+                8,
+                "u64 graph-build/retrograde ns"
+            ],
+            [
+                40,
+                8,
+                "u64 all-edge verification/shape-count ns"
+            ]
+        ]
+    },
+    "fixture_header": {
+        "bytes": 28,
+        "fields": [
+            [
+                0,
+                8,
+                "Q5WDL001"
+            ],
+            [
+                8,
+                1,
+                "side"
+            ],
+            [
+                9,
+                1,
+                "candidates"
+            ],
+            [
+                10,
+                2,
+                "reserved0"
+            ],
+            [
+                12,
+                4,
+                "u32 mask"
+            ],
+            [
+                16,
+                4,
+                "u32 dense raw-state count"
+            ],
+            [
+                20,
+                4,
+                "u32 active count"
+            ],
+            [
+                24,
+                4,
+                "u32 legal edge count"
+            ]
+        ]
+    },
+    "fixture_rows": "Each raw ID0..2*n^4-1: status u8(255inactive/0D/1W/2L), degree u8, proof-rank u16, strategy-child u16 (65535 goal or undefined for inactive/L); then degree*(destination cell u8 + child rawID u16). All little-endian packed; no padding. Full active states, legal actions/edges, ranks and D-safe choice. Maximum37528B. RawID=(p0*n*n+p1)*2+turn.",
+    "state_scope": "All distinct P0 non-own-goal cells with own-goal wall-only path × P1 non-own-goal cells with own-goal path × both turns. No initial-start reachability restriction. Dense5x5 slots1250; mathematical active bound770=2*(20*20-15), native definition UNRUN.",
+    "retrograde": "Immediate goal W/rank1; W if some L child; L if all children W; remainder D. Rank witnesses strictly decrease on W chosen L and all L successors. D has no immediate goal/no L child and a D child; W children (losing deviations) allowed.",
+    "selection": "Pilot ordinal<16 OR ordinal%4096==0; remaining is logical complement. Remaining shard ordinal%K==I. Same graph/solver/verifier in all phases. Successful pilot incorporated once; no successful repetition or automatic failed-job replay.",
+    "summary": "Actual counts/time per wall count, whole-board component count and8 initial-shape flags; first16 subgroup separately. Peak RSS VmHWM when available. Analysis/verification/output plus whole-before-summary; enum traversal includes buffered output. Guardian whole/setup/drop separate; do not add nested wall times.",
+    "partial": "Fresh outputs only. Masks count header sealed after success; solver summary only on complete selected census. Direct48B record writes preserve closed prefix; torn last row/current-entered extent UNKNOWN on failure. Failed/partial not promoted to success; no automatic recovery/retry/skip/checkpoint mechanism.",
+    "D_status": "Save first D layout/state and full bounded graph per successful native process. Not a genuine legal initial-stock/nonterminal prefix counterexample; odd counts included as graph reference,9x9 inference forbidden.",
+    "storage": "No all-layout state tables; logical masks24+4*N, each selected records32+48*selected. N UNKNOWN until genuine enumeration, no2532560 assumption. Actual consumption/decimal50GB checked at stage boundaries; no oldtarget charge/refund.",
+    "future_image": null,
+    "future_build": null,
+    "actual_runtime": null,
+    "native_compile_tests_mathematical_calls": 0,
+    "dedicated_owner": "405.1/thread01a11062-b120-73a1-8aa3-fe2cb922c7c0 for actual enumeration/pilot/full;324 compile/software/image/integration only",
+    "goal_leaf_boundary": "Occupied goal leaves may force own wall-distance1->2 retreat; both goal rows included in new unrun software cases. Solver uses all-edge attractor/rank, not monotonic distance."
+}

@@ -1,0 +1,393 @@
+{
+  "issue": "quoridor-4lc.405.2",
+  "phase": "fixed_source_clear_practical_logic_complete",
+  "logic_ready": true,
+  "solver_source_verdict": "source_clear",
+  "overall_leaf_complete": true,
+  "native_author_and_pilot_full_owner": "405.1 / 01a11062",
+  "software_compile_accept_integration_owner": "324",
+  "source_review_count_planned": 1,
+  "target_may_arrive_directly_from405_1": true,
+  "contract_before": {
+    "path": "/workspaces/quoridor/.artifacts/research-policy/zero-stock-5x5-analysis-20261015.md",
+    "sha256": "55a6cd3d00e9e9e91e6f3869fefa0b3369b73e4c28ec52355677e74d6ede2761",
+    "bytes": 8668,
+    "mode": "0644"
+  },
+  "contract_after": {
+    "path": "/workspaces/quoridor/.artifacts/research-policy/zero-stock-5x5-analysis-20261015.md",
+    "sha256": "55a6cd3d00e9e9e91e6f3869fefa0b3369b73e4c28ec52355677e74d6ede2761",
+    "bytes": 8668,
+    "mode": "0644"
+  },
+  "selected_reader_STOP": "2026-10-15T01:51:53.401776+00:00",
+  "actual_enumeration_count_or_absence_claim": false,
+  "production_science_executions": 0,
+  "retained_writer_error": "fb71df: parent inline Python nested triple-quote SyntaxError; guard/OUT/source child never entered; no target execution",
+  "actual_context_effort": "max",
+  "continuation_effort": "max",
+  "max_private_reader_STOP": "2026-10-15T01:56:05.944413+00:00",
+  "high_report_custody": {
+    "original": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/report-ja.md",
+      "sha256": "8abab3c748729aef27cc34c1fb99960ada7291ab665a04893f5d93822746cb03",
+      "bytes": 5539,
+      "mode": "0644"
+    },
+    "preserved_path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/report-high-draft.md"
+  },
+  "initial_logic_handoff": {
+    "thread": "01a1376a-bfd3-75d2-bd64-61e9416b3b13",
+    "issue": "quoridor-4lc.324",
+    "method": "turn/start",
+    "turn": "01a13d50-b3e3-7522-baf9-823468de4ade",
+    "accepted": true,
+    "count": 1,
+    "directwait_exit": 0,
+    "ACK_wait": false,
+    "Policy_copy": false
+  },
+  "root_question": {
+    "component_separation_sufficient": "PROVED for board-only race; history caveat separate",
+    "one_pair_disjoint": "existence of independent ordinary geodesic play only; candidate refutes shortest-policy race justification, exact root WDL not proved",
+    "all_geodesic_DAGs_disjoint": "unrestricted root WDL sufficiency/counterexample UNKNOWN; candidate does not satisfy it",
+    "candidate_root_WDL": "UNKNOWN",
+    "candidate20wall_prefix_padding": "UNPROVED",
+    "new_solver_numeric_execution": 0,
+    "note_path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/shortest-path-race-ja.md",
+    "reader_STOP": "2026-10-15T02:05:43.777386+00:00"
+  },
+  "state": "finite independent source and logical scope complete; reports delivered; own leaf verified closed with backups; all owned empty",
+  "formatting": {
+    "current_report_and_question": "scoped project Prettier PASS",
+    "receipts": "stdlib JSON indent2 newline; no frozen original data formatting",
+    "Go_Node_controllers_AS": "unlimited; source AS512MiB remains separate"
+  },
+  "Beads": {
+    "status": "closed",
+    "owner_preserved": true,
+    "closed_at": "2026-10-15T02:35:57Z",
+    "backup_before_after_close": true,
+    "receipt": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/final-beads-completion-receipt.json"
+  },
+  "initial_logic_stop": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/initial-phase-completion-STOP.json",
+  "affected_usage_initial_logic": {
+    "phase": "initial_logic",
+    "files": 14,
+    "logical_B": 45698,
+    "allocated_B": 77824,
+    "directed_measurement_count_this_phase": 1,
+    "global_walk": false,
+    "control_usage_field_appended_after_measurement": true
+  },
+  "fixed_source_target": {
+    "ref": {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/source-STOP.json",
+      "sha256": "ff2150ad7be8bd8299d4b2fb9c112b18498198d1e7c067988de322dd9a3f9561",
+      "bytes": 30482,
+      "mode": "0644"
+    },
+    "hash_before_parse": true,
+    "source_verdict": "source_clear",
+    "producer_STOP": "2026-10-15T02:14:58.735343+00:00",
+    "first_reader_worker": {
+      "pid": 1048507,
+      "start_ticks": "7906616",
+      "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+    },
+    "intake_at": "2026-10-15T02:17:13.058897+00:00",
+    "reader_STOP": "2026-10-15T02:23:08.392808+00:00"
+  },
+  "source_clear": true,
+  "blockers": [],
+  "ordinary": [],
+  "fixed_source_reader_STOP": "2026-10-15T02:23:08.392808+00:00",
+  "source_review_report": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/fixed-source-review-ja.md",
+  "fixed_source_findings": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/fixed-source-findings.json",
+  "selected_source_refs": [
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/source-STOP.json",
+      "sha256": "ff2150ad7be8bd8299d4b2fb9c112b18498198d1e7c067988de322dd9a3f9561",
+      "bytes": 30482,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/zero_stock.rs",
+      "sha256": "16e4b64fae2cfbd761a9821f74a3dd74dae72813aba6171e3640717c81ab0b1d",
+      "bytes": 36268,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/reference.py",
+      "sha256": "34b04d533501813a4f80bc85500060621aeed862839320babdee500a18afd5d5",
+      "bytes": 11533,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/interface.json",
+      "sha256": "12993dc2df1712dcfdbc856b25eac20f8ae56abe29fa3c599ec18c580c4648f0",
+      "bytes": 9794,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/verification-plan.json",
+      "sha256": "e564426a21c764a77cd78c329360e7159a26a1a0c4fe9e8729c0c9f2b0d96389",
+      "bytes": 2552,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/report-ja.json",
+      "sha256": "5cfb11d532e5097c714f78158e58cd548fb5405d6b9dacc72afe71ab653ec6ea",
+      "bytes": 3980,
+      "mode": "0644"
+    }
+  ],
+  "actual_context_verified": {
+    "cwd": "/workspaces/quoridor",
+    "model": "gpt-6.1-sol",
+    "effort": "max",
+    "sandbox": "danger-full-access",
+    "approval_policy": "never",
+    "timestamp": "2026-10-15T02:19:07.834Z"
+  },
+  "practical_exact_leaf_logic_complete": true,
+  "approx_mode_comparison_complete": true,
+  "no_future_solver_or_Search_patch_authorized": true,
+  "recommended_approx_design": "root-fixed permission + descendant zero-stock domain; threshold unselected, no implementation",
+  "practical_logic_limits": {
+    "component_race": "exact board W/L conditional real-history qualification",
+    "safe_path": "one-sided sufficient win certificate; failure UNKNOWN",
+    "one_shortest_pair": "UNPROVED for unrestricted exact WDL",
+    "all_shortest_DAGs": "UNPROVED for unrestricted exact WDL",
+    "general_no_D": "UNKNOWN",
+    "numeric_speed_strength": "UNMEASURED"
+  },
+  "initial_shortest_note_preserved": {
+    "historical_ref": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/shortest-path-race-ja.md",
+      "sha256": "5216ee00698541c3e4c40c4806a069d1716ea4bf05994830b41c5cbbbcbc42de",
+      "bytes": 4434,
+      "mode": "0644"
+    },
+    "exact_preserved_path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/shortest-path-race-initial-v1.md",
+    "preserved_ref": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/shortest-path-race-initial-v1.md",
+      "sha256": "5216ee00698541c3e4c40c4806a069d1716ea4bf05994830b41c5cbbbcbc42de",
+      "bytes": 4434,
+      "mode": "0644"
+    }
+  },
+  "fixed_source_deliveries": {
+    "deliveries": [
+      {
+        "thread": "01a11062-b120-73a1-8aa3-fe2cb922c7c0",
+        "issue": "quoridor-4lc.405.1",
+        "exit_code": 0,
+        "stdout": "{\n  \"method\": \"turn/start\",\n  \"thread_id\": \"01a11062-b120-73a1-8aa3-fe2cb922c7c0\",\n  \"turn_id\": \"01a13d64-7e97-7713-8ad9-f25125268578\",\n  \"accepted\": true\n}\n",
+        "stderr": "",
+        "directwait_reap": true,
+        "wall_s": 8.066177599990624
+      },
+      {
+        "thread": "01a1376a-bfd3-75d2-bd64-61e9416b3b13",
+        "issue": "quoridor-4lc.324",
+        "exit_code": 0,
+        "stdout": "{\n  \"method\": \"turn/start\",\n  \"thread_id\": \"01a1376a-bfd3-75d2-bd64-61e9416b3b13\",\n  \"turn_id\": \"01a13d64-a3d6-7772-9f52-9d7c6fe9ee4e\",\n  \"accepted\": true\n}\n",
+        "stderr": "",
+        "directwait_reap": true,
+        "wall_s": 9.007922210003017
+      }
+    ],
+    "count_each": 1,
+    "ACK_wait": false,
+    "Policy_copy": false,
+    "at": "2026-10-15T02:29:28.172713+00:00",
+    "owned_remaining": []
+  },
+  "initial_logic_refs_historical": [
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/report-ja.md",
+      "sha256": "3b72b5c04ced7a9178509443012da2af7844e465b16c0fc214b4656109b8aa0c",
+      "bytes": 7200,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/shortest-path-race-ja.md",
+      "sha256": "5216ee00698541c3e4c40c4806a069d1716ea4bf05994830b41c5cbbbcbc42de",
+      "bytes": 4434,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/report-high-draft.md",
+      "sha256": "8abab3c748729aef27cc34c1fb99960ada7291ab665a04893f5d93822746cb03",
+      "bytes": 5539,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/STOP.json",
+      "sha256": "9f57527fe12b66695f177aafd0ad1ad7fda8db6654f847c7d482e15565887c6f",
+      "bytes": 954,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/max-turn-STOP.json",
+      "sha256": "c5dbe4a2c3f1f6aa26d1a63762c5f643ba69b902af61d29adb5d8d343adccf24",
+      "bytes": 1283,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/question-STOP.json",
+      "sha256": "fb49f40a32eae466ca9932deff965ab5dfbfcc33199dd5ea5f2df0ac196ebe0b",
+      "bytes": 680,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/initial-phase-completion-STOP.json",
+      "sha256": "456b9bf63f9e0a940d3c57c343cd61f0c0ea87116d5254eb54e0032a9bdb1f99",
+      "bytes": 2149,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/high-turn-checkpoint.json",
+      "sha256": "92e1af0d5687345fecf3ca435f048674d37ca9a8b7fc26e207a9f591166ee49e",
+      "bytes": 3195,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/writer-receipt.json",
+      "sha256": "0de7ae70d547ce4fb7609517ca6719ef600ff4239ce10946fab5f63e8db8df0e",
+      "bytes": 1278,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/max-writer-receipt.json",
+      "sha256": "6d8804757a0a64a997a98a16c0e66590e38957ccc2ccc21a638c3f1d79d3d392",
+      "bytes": 1130,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/question-writer-receipt.json",
+      "sha256": "47eb1659e63e9e6ca3438e6193a5bb0222fb9ffe08478027a72e34e6ea956c82",
+      "bytes": 995,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/format-receipt.json",
+      "sha256": "3fa8ff78449252ebbad52ac12f8984f95cdad5c1c5d19dbc8d0ecb92cdbf81f0",
+      "bytes": 1717,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/completion-admin-receipts.json",
+      "sha256": "2aafcf4779083ec428ad488d10b60383b4a976cc15e45325826267c4fe53cf6f",
+      "bytes": 8179,
+      "mode": "0644"
+    }
+  ],
+  "historical_ref_custody_note": "Initial report-ja.md remains byte exact. Historical shortest-path note bytes are preserved at shortest-path-race-initial-v1.md; old descriptor is historical, not a claim current note still has that hash.",
+  "own_refs": [
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/report-ja.md",
+      "sha256": "3b72b5c04ced7a9178509443012da2af7844e465b16c0fc214b4656109b8aa0c",
+      "bytes": 7200,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/shortest-path-race-ja.md",
+      "sha256": "7e4587bcd9ff736e97c99c9608818d89f5f967754e1e9a14187860ed8dc2abac",
+      "bytes": 14300,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/shortest-path-race-initial-v1.md",
+      "sha256": "5216ee00698541c3e4c40c4806a069d1716ea4bf05994830b41c5cbbbcbc42de",
+      "bytes": 4434,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/fixed-source-review-ja.md",
+      "sha256": "79b80f790928900bd9e7ae35b214f464a2377a89c91ee76f53dc22c582eeda30",
+      "bytes": 4601,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/fixed-source-findings.json",
+      "sha256": "db6145f194f35ec88b811a16e25f0b44a631f71aace5c9deb65c3b05b5760f1b",
+      "bytes": 4269,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/fixed-source-STOP.json",
+      "sha256": "1a7e1b1482c5bf80f02ec5e6334b3c5c06be578e979616612dab14bfba0324b3",
+      "bytes": 3266,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/fixed-source-read-receipts.json",
+      "sha256": "aab821a81ab3e697c43e37bbb6d6819a6b6270cffe4447fd4b6515bc4ffb0485",
+      "bytes": 3889,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/fixed-source-delivery-receipt.json",
+      "sha256": "ad3572c46306bbe24fc7d8dac85522dc1d0cc521df35d7d331ac8f81720b7f0d",
+      "bytes": 976,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/practical-logic-STOP.json",
+      "sha256": "6eefd29b5774711788c581622020bd19d038584857a9c6d68c25c2acdde0e9da",
+      "bytes": 431,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/practical-logic-writer-receipt.json",
+      "sha256": "e6a83e3a09fbabb11bd90a807449f5c3a884086ca50bba80bf12dcaa58f9f8bf",
+      "bytes": 662,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/practical-logic-format-receipt.json",
+      "sha256": "b274f3e12d271093ed9dd3a04277d5e9259403da566ad79d6536ddc8c97333cb",
+      "bytes": 2398,
+      "mode": "0644"
+    }
+  ],
+  "final_logic_metadata_STOP": "2026-10-15T02:33:22.155825+00:00",
+  "owned_remaining": [],
+  "TMP": [],
+  "leases": [],
+  "practical_logic_delivery": {
+    "command": [
+      "bash",
+      "scripts/dev/research-session.sh",
+      "send",
+      "--thread",
+      "01a1376a-bfd3-75d2-bd64-61e9416b3b13",
+      "--issue",
+      "quoridor-4lc.324",
+      "--body-file",
+      "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/shortest-path-race-ja.md",
+      "--cwd",
+      "/workspaces/quoridor"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"method\": \"turn/start\",\n  \"thread_id\": \"01a1376a-bfd3-75d2-bd64-61e9416b3b13\",\n  \"turn_id\": \"01a13d69-5e04-7972-8cf0-59fca091f455\",\n  \"accepted\": true\n}\n",
+    "stderr": "",
+    "directwait_reap": true,
+    "pipes_closed": true,
+    "wall_s": 9.493616987994756,
+    "phase": "remaining practical logic completion; fixed-source verdict was separately delivered once",
+    "delivery_count_this_meaningful_phase": 1,
+    "ACK_wait": false,
+    "Policy_copy": false,
+    "at": "2026-10-15T02:34:37.981795+00:00",
+    "owned_remaining": []
+  },
+  "pilot_notifications": {
+    "timing_hold_honored": true,
+    "source_readers_released_before_notice": true,
+    "actual_pilot_STOP_received": "2026-10-15T02:33:45.591196+00:00",
+    "pilot_results_not_recomputed_or_independently_adopted_here": true
+  }
+}

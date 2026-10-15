@@ -1,0 +1,216 @@
+{
+  "at": "2026-10-15T02:18:20.192926+00:00",
+  "status": "SOFTWARE_PASS",
+  "author_STOP": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/source-STOP.json",
+    "sha256": "ff2150ad7be8bd8299d4b2fb9c112b18498198d1e7c067988de322dd9a3f9561",
+    "bytes": 30482,
+    "mode": "0644"
+  },
+  "source": [
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/zero_stock.rs",
+        "sha256": "16e4b64fae2cfbd761a9821f74a3dd74dae72813aba6171e3640717c81ab0b1d",
+        "bytes": 36268,
+        "mode": "0644"
+      },
+      "private": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/source/zero_stock.rs",
+        "sha256": "16e4b64fae2cfbd761a9821f74a3dd74dae72813aba6171e3640717c81ab0b1d",
+        "bytes": 36268,
+        "mode": "0644"
+      }
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/reference.py",
+        "sha256": "34b04d533501813a4f80bc85500060621aeed862839320babdee500a18afd5d5",
+        "bytes": 11533,
+        "mode": "0644"
+      },
+      "private": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/source/reference.py",
+        "sha256": "34b04d533501813a4f80bc85500060621aeed862839320babdee500a18afd5d5",
+        "bytes": 11533,
+        "mode": "0644"
+      }
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/interface.json",
+        "sha256": "12993dc2df1712dcfdbc856b25eac20f8ae56abe29fa3c599ec18c580c4648f0",
+        "bytes": 9794,
+        "mode": "0644"
+      },
+      "private": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/source/interface.json",
+        "sha256": "12993dc2df1712dcfdbc856b25eac20f8ae56abe29fa3c599ec18c580c4648f0",
+        "bytes": 9794,
+        "mode": "0644"
+      }
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/verification-plan.json",
+        "sha256": "e564426a21c764a77cd78c329360e7159a26a1a0c4fe9e8729c0c9f2b0d96389",
+        "bytes": 2552,
+        "mode": "0644"
+      },
+      "private": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/source/verification-plan.json",
+        "sha256": "e564426a21c764a77cd78c329360e7159a26a1a0c4fe9e8729c0c9f2b0d96389",
+        "bytes": 2552,
+        "mode": "0644"
+      }
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/report-ja.json",
+        "sha256": "5cfb11d532e5097c714f78158e58cd548fb5405d6b9dacc72afe71ab653ec6ea",
+        "bytes": 3980,
+        "mode": "0644"
+      },
+      "private": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/source/report-ja.json",
+        "sha256": "5cfb11d532e5097c714f78158e58cd548fb5405d6b9dacc72afe71ab653ec6ea",
+        "bytes": 3980,
+        "mode": "0644"
+      }
+    }
+  ],
+  "compiler_command": "/usr/local/cargo/bin/rustc",
+  "compiler_version_capture": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/compiler-version.full.log",
+    "sha256": "b569b0c98ea3133c7252b4b8ea6b39b7b353813df0dd5f5c412c355691424112",
+    "bytes": 196,
+    "mode": "0644"
+  },
+  "test_flags": [
+    "--edition=2024",
+    "--test",
+    "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/source/zero_stock.rs",
+    "-o",
+    "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/owning-tests"
+  ],
+  "build_flags": [
+    "--edition=2024",
+    "-C",
+    "opt-level=3",
+    "-C",
+    "overflow-checks=yes",
+    "-C",
+    "debuginfo=0",
+    "-D",
+    "warnings",
+    "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/source/zero_stock.rs",
+    "-o",
+    "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/immutable-image"
+  ],
+  "image": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/immutable-image",
+    "sha256": "00b455c36de1382af7d5a2c73aa914749150cd717f8905c363b5a358f0bcd8a3",
+    "bytes": 4670808,
+    "mode": "0555"
+  },
+  "owning_new_tests": 7,
+  "independent_tiny_layouts": 47,
+  "independent_fixture_checks": 52,
+  "independent_reference_result": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/reference-check/check-result.json",
+    "sha256": "7dbaa1216a4819175e03d20f91058358af0f6cdb248ac9c16a8c774ff007a4ef",
+    "bytes": 46841,
+    "mode": "0644"
+  },
+  "checks": [
+    {
+      "name": "compiler-version",
+      "status": "PASS",
+      "full_log": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/compiler-version.full.log",
+        "sha256": "b569b0c98ea3133c7252b4b8ea6b39b7b353813df0dd5f5c412c355691424112",
+        "bytes": 196,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/compiler-version.process.json",
+        "sha256": "e14dd5f74fe460450093b312ceaeb6483b2423aa8f2727852cf205e138440b5f",
+        "bytes": 933,
+        "mode": "0600"
+      }
+    },
+    {
+      "name": "compile-owning-tests",
+      "status": "PASS",
+      "full_log": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/compile-owning-tests.full.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/compile-owning-tests.process.json",
+        "sha256": "6f334aad480ea741906ba1f1765f01052a202fc76b3ca1a6e30263c142b8916b",
+        "bytes": 1200,
+        "mode": "0600"
+      }
+    },
+    {
+      "name": "new-owning-seven",
+      "status": "PASS",
+      "full_log": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/new-owning-seven.full.log",
+        "sha256": "c1147a60b07e95933ba94addd0f68e66304f1bcea41e124bfec00eb593438e4e",
+        "bytes": 573,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/new-owning-seven.process.json",
+        "sha256": "6a88053428910daaddb5a305037fc612144d625b6608e4998ca1ffce92c366df",
+        "bytes": 1046,
+        "mode": "0600"
+      }
+    },
+    {
+      "name": "optimized-build",
+      "status": "PASS",
+      "full_log": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/optimized-build.full.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/optimized-build.process.json",
+        "sha256": "f82251f4956a3be4ed22ea7fdb8129f19206de517942a492c3105167c40a089e",
+        "bytes": 1311,
+        "mode": "0600"
+      }
+    },
+    {
+      "name": "independent-reference",
+      "status": "PASS",
+      "full_log": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/independent-reference.full.log",
+        "sha256": "b695ba6f8ee456b63339cedaefadc54d58e54d982806f1be9b0c1770ee4ba55e",
+        "bytes": 55,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/independent-reference.process.json",
+        "sha256": "af76cd671b23419f3b12b12a9e2d8db639db480a8ae4189fb98d3e0cc4251cd9",
+        "bytes": 1352,
+        "mode": "0600"
+      }
+    }
+  ],
+  "full5x5_enum_pilot_or_remaining_entered_by324": 0,
+  "mathematical_source_review": "Separate405.2 fixed-target verdict, not inferred from software",
+  "analysis_runtime_owner": "quoridor-4lc.405.1 / 01a11062-b120-73a1-8aa3-fe2cb922c7c0",
+  "family_RSS_limit_B": 2147483648,
+  "CPU": 2,
+  "guardian": 4,
+  "GPU": 0,
+  "continuous_peak": "UNKNOWN",
+  "all_training_pauses_defaults_models_seals": "UNCHANGED"
+}

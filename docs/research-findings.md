@@ -1892,3 +1892,15 @@ wholeは6root body・setup/drop・採点・key保存/cache・再探索込みの�
 終了した二つの部分考察でも、合法20壁で双方最善の循環となる具体例は0件で、一般のD不存在も未証明のままである。最短隣接が非goalの相手に塞がれてもjumpにより自己の壁距離を増やさず進めること、等距離jump後に相手が必ず移るため次の自己手で前進できること、goal-leafでは長さ2壁の幾何から一歩退いてjumpする局所方策が考えられることを整理した。ただし「有限でどちらかが終局する方策」と「相手に先に勝たれず自分の勝ちを強制する方策」は量化が異なり、進行手がD-safeであることを示せていない。双方が別の連結成分にいる単純raceの部分結果も一般ケースへ外挿しない。新しい勝敗定理・算法採用とは扱わない。
 
 [二つの原報告・失敗・STOPと保存対応](../research-data/ai-sigma/zero-stock-mutual-draw404/partial-considerations-v1/receipt.json)、[構成側の表示用報告](../research-data/ai-sigma/zero-stock-mutual-draw404/partial-considerations-v1/construction/report-ja.md)を保存した。先の有限63配置とroot exact WDL縮約証明は変更していない。構成側の原MarkdownとPrettierのAS512MiB下V8起動OOM／exit133／NOT_PASS、一般証明側のGo管理client起動拒否と元STOPをexact保存した。表示用コピーだけを通常の実RAM512MiB family guardで整形し、V8／Go controllerの仮想アドレス予約へAS512MiBを課す設定とは区別する。元FAILEDをPASSへ書き換えない。一般証明側の5分枠超過を含む元記録も保持する。今回の作業は保存・整形のみで、追加の配置sweep／graph計算／solver／Search／対局／生成／fitは0、全USERPAUSEは不変である。
+
+### 5×5零在庫解析の源泉とleaf論理準備（405、2026-10-15）
+
+有限5×5の全壁集合用に、衝突maskのinclude/exclude列挙と、各goal可達・非goal・非同居二駒／両手番の逆向きW/L attractor＋残Dを扱う独立native数学sourceを用意した。空集合・奇数枚・active0配置を残し、最終壁で初期pawnが可達というfilterを置かない。新Rust7定義と、独立な3×3全47配置＋固定5×5の5配置（全52fixture）の合法辺／WDL／rank照合はPASS。sourceの限定独立確認はblockers0／ordinary0。これは全量のD不存在や9×9の資格ではなく、製品core／Search／TT／modelを変えない有限run源泉である。[原source・software・論理の保存対応](../research-data/ai-sigma/zero-stock-5x5-405/preparation-receipt.json)を参照。
+
+実用leafの論理では、双方stock0で到達連結成分が異なれば接触・占有・jumpが起きず、各自のgoal最短距離どおりに走れる。A手番ならA勝ち条件はdA<=dB、B手番ならdA<dBで、勝者は各手で距離を1減らす合法手により相手の全応手へ先着する。これはboard-onlyの十分条件で、実historyの既往2回集合Eを消すものではない。goal／threefold等の真の終端を先に判定し、Eが空、または単純な勝利pathの途中でEへ入らない保守的な資格等を別に要する。E非空を無視した盤面勝利は勝者側のWinまたはDrawという非敗boundまでで、exact WDLへ昇格しない。
+
+別の十分条件の論理メモは、勝者候補iの単純open path P=(p0,...,pL)、相手q、相手先手ならδ=1／自分先手なら0、M=L-1+δについて、相手起点の通常距離min(Dq(P))>Mかつ相手goal距離dj>Mを用いる。相手の各手開始時にPから2辺以上離れる帰納法が、相手jump・path占有と先goalを同時に防ぎ、Pの通常歩行での先着を示す。失敗時はUNKNOWNで通常探索へ戻す。一組の最短路disjointから無制限root WDLを決める十分性は未証明、全最短路DAG disjointも別の未証明仮説のまま。提示5壁図で選んだ最短継続のraceがjumpで逆転することは、全応手のroot WDL反例やgenuine20壁prefixの証明とは分ける。[条件・合法方策・history E・操作費の詳細](../research-data/ai-sigma/zero-stock-5x5-405/logic/shortest-path-race-ja.md)を保存した。これは将来採用を検討する論証メモで、solver接続や新しい数学方式の実装採用ではない。
+
+既存goal距離表は成分IDやpawn起点距離Dqと同じではない。必要なflood／BFSとpath検査、occurrencesのH件走査を含めた費用が要る。メモのsource操作数は最大2回のgrid走査と概念上O(H+L)、一時O(V+L)で、現bitparallelの命令数・実layout・RSS・whole利益はUNKNOWN。将来のNNUE／固定D共通入口ならstock0を安く確認し、正しいwall keyの情報だけを再用し、未判定は通常探索を続ける。exact WDL／有限depth heuristic／TT method・history資格を混同せず、同じtree-value/work完全一致を新exact leafの意味保存にしない。効用は実訪問での成立率と判定費込みwholeで確認し、未訪問反実仮想nodeを正確な節約数へ換算しない。
+
+近似打切りは未実装・閾値未選択である。今回の意図には「rootの在庫で近似許可を一度固定（序盤ON・終盤はこの早期近似OFF）」と「許可時に枝内の双方stock0 domainだけで仮評価する」を分ける設計が合う。node残壁<=K案は採用済み設定ではない。通常depth0評価と真のgoal／threefoldを維持し、effective許可が変わるroot間でTT数値を混用しない必要がある。各着手で残りdepthが少なくとも1減り延長がないなら、root残壁S0>最大depthでは零在庫へ到達できず、この近似の発動は0。したがってstock20/depth6の序盤費用対策へ外挿しない。数値優越・棋力・thresholdはUNKNOWNで、新Search／TT変更・campaign・学習再開は発行していない。

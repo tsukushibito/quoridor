@@ -1,0 +1,61 @@
+{
+    "status": "UNBUILT/UNTYPED/UNRUN",
+    "Rust_tests": [
+        {
+            "filter": "tests::collision405_boundaries_overlap_and_cross",
+            "expected": 1
+        },
+        {
+            "filter": "tests::enumeration405_tiny_matches_pairwise_bruteforce",
+            "expected": 1
+        },
+        {
+            "filter": "tests::jumps405_straight_priority_side_and_goal",
+            "expected": 1
+        },
+        {
+            "filter": "tests::wdl405_queue_handles_goal_loss_and_draw_cycle",
+            "expected": 1
+        },
+        {
+            "filter": "tests::active405_has_no_initial_start_reachability_gate",
+            "expected": 1
+        },
+        {
+            "filter": "tests::selection405_pilot_complement_disjoint_and_record_width",
+            "expected": 1
+        },
+        {
+            "filter": "tests::certificate405_fixed_masks_verify_every_edge",
+            "expected": 1
+        }
+    ],
+    "compile_test_command": [
+        "rustc",
+        "--edition=2024",
+        "--test",
+        "zero_stock.rs",
+        "-o",
+        "FRESH/test-binary"
+    ],
+    "optimized_image_command": [
+        "rustc",
+        "--edition=2024",
+        "-C",
+        "opt-level=3",
+        "-C",
+        "overflow-checks=yes",
+        "-C",
+        "debuginfo=0",
+        "-D",
+        "warnings",
+        "zero_stock.rs",
+        "-o",
+        "FRESH/immutable-image"
+    ],
+    "Python_reference": "one software_check performs independent literal3x3 all collision-free masks, synchronous whole-set WDL for every tiny layout, plus five fixed5x5 fixtures, including both occupied-goal-leaf retreat cases; actual tiny census/count UNKNOWN until Root run. Distinct algorithm and coordinate rules, no copied queue/comparator.",
+    "software_new_only": "seven Rust definitions plus independent Python interface; no old404 suite/model/Search replay",
+    "review_question": "Enumeration coverage/collisions/order/all-count/own-goal state scope; goal priority/standard jump; least attractor W/L/rank and residualD meaning; first bounded fullgraph D strategy; pilot/complement/shard exact no duplicates; report partial/buffer/cost semantics. Existing405.2 once, no author new reviewer.",
+    "native_scope": "No author compile yet; actual tests/image acceptance324. Pilot/full only after immutable software image+necessary mathematical boundary evidence.",
+    "goal_leaf": "Both goal rows: occupied leaf forces retreat before goal jump. No monotone own-wall-distance assumption. Seven definitions remain UNRUN."
+}

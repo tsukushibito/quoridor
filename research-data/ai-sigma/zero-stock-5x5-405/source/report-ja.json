@@ -1,0 +1,22 @@
+{
+    "題名": "5x5零在庫：有限列挙/厳密board-WDL源泉と実CLI",
+    "到達": "Standalone Rust/std＋独立Python参照を新規私有源泉に作成。rustfmt edition2024及びscoped Ruff format/check PASS。compile/型/nativeテスト/列挙/解析はUNBUILT/UNTYPED/UNRUN。新画像や数学結果は捏造しない。",
+    "配置": "Rootがresearch-data/ai-sigma/zero-stock-5x5-405/へexact code/settings/resultsを保存。active product/tool entryは作らない。",
+    "壁集合": "衝突mask付き上位bit DFSで全conflict-free集合をmask数値昇順へ。空集合/全壁枚数/奇数含む。初期中心pawnのgoal可達条件を壁集合フィルタにしない。実件数は列挙後のみ。",
+    "局面": "各自goalまでwall-only可達な非goal位置、異なるpawn、両turn。初期pawnが孤立する集合も除外しない。無限playがD。過去二回罠・ply/time/depth capとは別。",
+    "確認": "合法全edgeの照合、W勝ち子/L全応手のstrict rank、Dのgoal無し/勝ち手無し/L子無し/D子有りを全layoutで実施。DからWへの負ける逸脱は合法であり、DにW子無しと誤記しない。",
+    "記録": "mask header24B/各mask4B、record header32B/layout48B、最大37528Bの最初のD全graph。動的全layout状態表・per-node log無し。配列/queue/CSRは一graph固定capacityで再利用。actual layout/RSS/部位費はUNRUNで、Sourceのコード容量を実測利益へしない。",
+    "中断": "解析recordは直接48Bずつ書く。未完結header/長さ/summary欠落はpartialとして保持し、末尾のentered extentはUNKNOWN。失敗救済、自動replay、checkpoint/scheduler/skip機構を作らない。",
+    "独立参照": "Pythonは座標集合のルール、tiny bruteペア衝突、全体同期fixedpointによるWDL。native queue/rank計算法を期待値へコピーせず全legal actions/WDLを照合し、rank/strategyも独立に確認。実行は324、作者は定義のみ。",
+    "今後の本人所有": "最新人間指定で405.1が本画像受領後の列挙→singlecore pilot→真未入場complementの最大4workerを所有。各job issue405.1/thread本人/goal405、runtimeを本人leafへ。Root324はcompile/必要software/immutableimageと最終Git。",
+    "pilot": "ordinal<16 OR mod4096=0、結果前に固定。first16を分離し他pilotの壁数/shape偏りも保存。pilot結果を全量へ一度だけ含め、fullは補集合modK。4倍速度や予測kill期限を仮定しない。",
+    "資源": "sourceCPU8/guardian11/family768MiB/G0/host4GiB。pilot提案CPU2/guardian4/family4GiB以内、full提案CPU2/6/10/18/controller4・全family4GiB以内。入場時fresh topology/quiet/ownershipとimmutable入力が必要。pilotだけheavy helperを実STOPまで止める。",
+    "限界": "D候補でも初期在庫からgenuine非終端prefix未証明なら真のゲーム反例と言わない。5x5全量D0でも9x9一般有無/全履歴定理へ昇格しない。public件数/時刻参考比例を現在見積もりにしない。",
+    "詳細参照": [
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/interface.json",
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/verification-plan.json"
+    ],
+    "保持": "Main/Git/index/Cargo/モデル/RAW変更0、旧404報告/scripts凍結。mixed/learner全prep/pipeline及び323 USERPAUSE/defaults/weights/seals/oldfits96保持。",
+    "source_STOP": "source-STOP.jsonにexact refs/actualreturned-vs-persisted/process/TMP/handles/usageを結び付ける。ordinary storageNone、globalactual/peakUNKNOWN。",
+    "目標葉": "P0(3,0)/P1(4,0)/Vanchor(3,0)及び上端の対称例を新テストへ含める。退却でwall距離が増えてもW/L/Dは全辺・rankで判定し、距離単調性を仮定しない。native/参照とも未実行。"
+}
