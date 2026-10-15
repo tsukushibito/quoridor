@@ -273,7 +273,7 @@ fn sigma_value_actual_cpu_reference_bounded() {
     let mut report = json!({"status":"STARTING","input_sha256":crate::arena::digest(&bytes),"reference_source_sha256":p.reference_source_sha256,"planned":p.rows.len(),"attempted":0,"rows":[],"inference_work":null});
     std::fs::write(&output, serde_json::to_vec_pretty(&report).unwrap()).unwrap();
     let setup = crate::runtime::sigma_value_evaluator(&p.inference);
-    let (evaluator, _) = match setup {
+    let (evaluator, identity) = match setup {
         Ok(value) => value,
         Err(error) => {
             report["status"] = json!("FAILED_SETUP");
@@ -282,6 +282,7 @@ fn sigma_value_actual_cpu_reference_bounded() {
             panic!("actual Sigma adapter setup failed: {error}");
         }
     };
+    report["evaluator_identity"] = json!(format!("sigma-value-onnx-cpu:sha256:{identity}"));
     let mut failure = None;
     for row in &p.rows {
         report["attempted"] = json!(report["attempted"].as_u64().unwrap() + 1);
