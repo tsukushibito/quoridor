@@ -1,0 +1,635 @@
+{
+  "status": "EXPLICIT_PREFIX_AND_SAVED_D_STRATEGY_VERIFIED",
+  "source_census": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/full-collection-v1/result.json",
+    "sha256": "5b83c41c9b5d51d7bd112112b22ac3162a640b29b71725076107cae52e7747fb",
+    "bytes": 31903,
+    "mode": "0644"
+  },
+  "saved_graph": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-2/first-D.bin",
+    "sha256": "4e2e7aa33cc8d510b5cbccc24fb2d87d4aa21a8f2cf7e3d214b7557bcd5eb385",
+    "bytes": 11908,
+    "mode": "0644"
+  },
+  "reference_rules": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/reference.py",
+    "sha256": "34b04d533501813a4f80bc85500060621aeed862839320babdee500a18afd5d5",
+    "bytes": 11533,
+    "mode": "0644"
+  },
+  "wallcount": 6,
+  "symmetric_initial_stock_m": 3,
+  "initial_pawns": [
+    2,
+    22
+  ],
+  "initial_turn": 0,
+  "walls_first_from_standard_starts": "NOT_APPLICABLE: final mask traps P0 c1; final raw144 is inactive",
+  "initial_fixed_wall_raw144_status": 255,
+  "construction": "One explicit four-pawn prelude, six alternating fixed wall placements, then BFS only in saved fullgraph; no newWDL/layout/native campaign",
+  "actions": [
+    {
+      "kind": "pawn",
+      "player": 0,
+      "from": [
+        0,
+        2
+      ],
+      "to": [
+        1,
+        2
+      ],
+      "wall_mask": 0,
+      "stocks_before": [
+        3,
+        3
+      ]
+    },
+    {
+      "kind": "pawn",
+      "player": 1,
+      "from": [
+        4,
+        2
+      ],
+      "to": [
+        3,
+        2
+      ],
+      "wall_mask": 0,
+      "stocks_before": [
+        3,
+        3
+      ]
+    },
+    {
+      "kind": "pawn",
+      "player": 0,
+      "from": [
+        1,
+        2
+      ],
+      "to": [
+        1,
+        3
+      ],
+      "wall_mask": 0,
+      "stocks_before": [
+        3,
+        3
+      ]
+    },
+    {
+      "kind": "pawn",
+      "player": 1,
+      "from": [
+        3,
+        2
+      ],
+      "to": [
+        2,
+        2
+      ],
+      "wall_mask": 0,
+      "stocks_before": [
+        3,
+        3
+      ]
+    },
+    {
+      "kind": "wall",
+      "player": 0,
+      "bit": 1,
+      "mask_before": 0,
+      "mask_after": 2,
+      "stocks_before": [
+        3,
+        3
+      ]
+    },
+    {
+      "kind": "wall",
+      "player": 1,
+      "bit": 3,
+      "mask_before": 2,
+      "mask_after": 10,
+      "stocks_before": [
+        2,
+        3
+      ]
+    },
+    {
+      "kind": "wall",
+      "player": 0,
+      "bit": 5,
+      "mask_before": 10,
+      "mask_after": 42,
+      "stocks_before": [
+        2,
+        2
+      ]
+    },
+    {
+      "kind": "wall",
+      "player": 1,
+      "bit": 8,
+      "mask_before": 42,
+      "mask_after": 298,
+      "stocks_before": [
+        1,
+        2
+      ]
+    },
+    {
+      "kind": "wall",
+      "player": 0,
+      "bit": 11,
+      "mask_before": 298,
+      "mask_after": 2346,
+      "stocks_before": [
+        1,
+        1
+      ]
+    },
+    {
+      "kind": "wall",
+      "player": 1,
+      "bit": 16,
+      "mask_before": 2346,
+      "mask_after": 67882,
+      "stocks_before": [
+        0,
+        1
+      ]
+    },
+    {
+      "kind": "pawn",
+      "player": 0,
+      "from": [
+        1,
+        3
+      ],
+      "to": [
+        1,
+        2
+      ],
+      "wall_mask": 67882,
+      "stocks_before": [
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "pawn",
+      "player": 1,
+      "from": [
+        2,
+        2
+      ],
+      "to": [
+        2,
+        3
+      ],
+      "wall_mask": 67882,
+      "stocks_before": [
+        0,
+        0
+      ]
+    }
+  ],
+  "history_keys": [
+    [
+      0,
+      [
+        [
+          0,
+          2
+        ],
+        [
+          4,
+          2
+        ]
+      ],
+      0,
+      [
+        3,
+        3
+      ]
+    ],
+    [
+      0,
+      [
+        [
+          1,
+          2
+        ],
+        [
+          4,
+          2
+        ]
+      ],
+      1,
+      [
+        3,
+        3
+      ]
+    ],
+    [
+      0,
+      [
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          2
+        ]
+      ],
+      0,
+      [
+        3,
+        3
+      ]
+    ],
+    [
+      0,
+      [
+        [
+          1,
+          3
+        ],
+        [
+          3,
+          2
+        ]
+      ],
+      1,
+      [
+        3,
+        3
+      ]
+    ],
+    [
+      0,
+      [
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      0,
+      [
+        3,
+        3
+      ]
+    ],
+    [
+      2,
+      [
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      1,
+      [
+        2,
+        3
+      ]
+    ],
+    [
+      10,
+      [
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      0,
+      [
+        2,
+        2
+      ]
+    ],
+    [
+      42,
+      [
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      1,
+      [
+        1,
+        2
+      ]
+    ],
+    [
+      298,
+      [
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      0,
+      [
+        1,
+        1
+      ]
+    ],
+    [
+      2346,
+      [
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      1,
+      [
+        0,
+        1
+      ]
+    ],
+    [
+      67882,
+      [
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      0,
+      [
+        0,
+        0
+      ]
+    ],
+    [
+      67882,
+      [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      1,
+      [
+        0,
+        0
+      ]
+    ],
+    [
+      67882,
+      [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      0,
+      [
+        0,
+        0
+      ]
+    ]
+  ],
+  "max_prefix_occurrence": 1,
+  "saved_graph_nonterminal_path": [
+    {
+      "raw_before": 424,
+      "action": 7,
+      "raw_after": 375
+    },
+    {
+      "raw_before": 375,
+      "action": 13,
+      "raw_after": 376
+    }
+  ],
+  "D_raw_state": 376,
+  "D_pawns": [
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      3
+    ]
+  ],
+  "D_turn": 0,
+  "D_strategy_trace": [
+    {
+      "raw_state": 376,
+      "P0_cell": 7,
+      "P1_cell": 13,
+      "turn": 0,
+      "all_legal_edges": [
+        {
+          "action": 6,
+          "child": 327,
+          "child_status": 1
+        },
+        {
+          "action": 8,
+          "child": 427,
+          "child_status": 0
+        }
+      ],
+      "chosen_child": 427
+    },
+    {
+      "raw_state": 427,
+      "P0_cell": 8,
+      "P1_cell": 13,
+      "turn": 1,
+      "all_legal_edges": [
+        {
+          "action": 7,
+          "child": 414,
+          "child_status": 1
+        },
+        {
+          "action": 9,
+          "child": 418,
+          "child_status": 1
+        },
+        {
+          "action": 12,
+          "child": 424,
+          "child_status": 1
+        },
+        {
+          "action": 14,
+          "child": 428,
+          "child_status": 0
+        }
+      ],
+      "chosen_child": 428
+    },
+    {
+      "raw_state": 428,
+      "P0_cell": 8,
+      "P1_cell": 14,
+      "turn": 0,
+      "all_legal_edges": [
+        {
+          "action": 7,
+          "child": 379,
+          "child_status": 0
+        },
+        {
+          "action": 9,
+          "child": 479,
+          "child_status": 0
+        },
+        {
+          "action": 13,
+          "child": 679,
+          "child_status": 1
+        }
+      ],
+      "chosen_child": 379
+    },
+    {
+      "raw_state": 379,
+      "P0_cell": 7,
+      "P1_cell": 14,
+      "turn": 1,
+      "all_legal_edges": [
+        {
+          "action": 9,
+          "child": 368,
+          "child_status": 0
+        },
+        {
+          "action": 13,
+          "child": 376,
+          "child_status": 0
+        }
+      ],
+      "chosen_child": 368
+    },
+    {
+      "raw_state": 368,
+      "P0_cell": 7,
+      "P1_cell": 9,
+      "turn": 0,
+      "all_legal_edges": [
+        {
+          "action": 6,
+          "child": 319,
+          "child_status": 0
+        },
+        {
+          "action": 8,
+          "child": 419,
+          "child_status": 0
+        }
+      ],
+      "chosen_child": 319
+    },
+    {
+      "raw_state": 319,
+      "P0_cell": 6,
+      "P1_cell": 9,
+      "turn": 1,
+      "all_legal_edges": [
+        {
+          "action": 8,
+          "child": 316,
+          "child_status": 0
+        },
+        {
+          "action": 14,
+          "child": 328,
+          "child_status": 0
+        }
+      ],
+      "chosen_child": 316
+    },
+    {
+      "raw_state": 316,
+      "P0_cell": 6,
+      "P1_cell": 8,
+      "turn": 0,
+      "all_legal_edges": [
+        {
+          "action": 7,
+          "child": 367,
+          "child_status": 0
+        }
+      ],
+      "chosen_child": 367
+    },
+    {
+      "raw_state": 367,
+      "P0_cell": 7,
+      "P1_cell": 8,
+      "turn": 1,
+      "all_legal_edges": [
+        {
+          "action": 6,
+          "child": 362,
+          "child_status": 1
+        },
+        {
+          "action": 9,
+          "child": 368,
+          "child_status": 0
+        },
+        {
+          "action": 13,
+          "child": 376,
+          "child_status": 0
+        }
+      ],
+      "chosen_child": 368
+    }
+  ],
+  "D_cycle_start": 4,
+  "D_cycle_repeat_state": 368,
+  "no_new_solver_or_layout_calls": true,
+  "scope": "5x5, initial3walls each, goalpriority/standardjump/nonterminal/no prior twice-key trap. Legal prefix not asserted optimal before D; no9x9/20wall embedding theorem."
+}

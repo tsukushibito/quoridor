@@ -1,0 +1,75 @@
+{
+  "issue": "quoridor-4lc.405.2",
+  "phase": "saved_D_candidate_related",
+  "interpretation_clear": true,
+  "board_D_supported": true,
+  "genuine_m3_prefix_supported": true,
+  "blockers": [],
+  "ordinary": [],
+  "fixed_completion": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/final-report-v1/completion.json",
+    "sha256": "f46610b9351a420ee4508e368df8cac0c8f2a3ca20d1da37d435a790302ae9c7",
+    "bytes": 10317,
+    "mode": "0644"
+  },
+  "saved_graph": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-2/first-D.bin",
+    "sha256": "4e2e7aa33cc8d510b5cbccc24fb2d87d4aa21a8f2cf7e3d214b7557bcd5eb385",
+    "bytes": 11908,
+    "mode": "0644"
+  },
+  "prefix": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/full-collection-v1/candidate-prefix.json",
+    "sha256": "a756a3216c5f25b552d3428a325544523fc8ca4bb86e570ba4580a0f6c953b0e",
+    "bytes": 9779,
+    "mode": "0644"
+  },
+  "first_saved_D_raw": 315,
+  "prefix_D_raw": 376,
+  "fixed_wall_mask": 67882,
+  "symmetric_initial_stock_each": 3,
+  "prefix_plies": 12,
+  "all_board_turn_keys_excluding_stock_unique": true,
+  "history_trap_required": false,
+  "global_initial_optimal_play": "UNKNOWN; saved final prefix labels W->W->D",
+  "other_initial_stock_values": "UNKNOWN",
+  "embedding9x9_20walls": "UNKNOWN",
+  "new_solver_reference_native_layout_calls": 0,
+  "saved_data_only_checks": {
+    "saved_only": true,
+    "no_move_generation_or_WDL_recomputation": true,
+    "global_summary_arithmetic_consistent": true,
+    "global_records_reopened": false,
+    "summary_total": {
+      "layouts": 2532560,
+      "active": 841986100,
+      "edges": 1838022824,
+      "W": 485420844,
+      "L": 356525548,
+      "D": 39708,
+      "analysis_ns": 37179403007,
+      "verification_ns": 21243242802
+    },
+    "saved_graph": {
+      "active": 610,
+      "edges": 1460,
+      "W": 330,
+      "L": 258,
+      "D": 22
+    },
+    "prefix_plies": 12,
+    "prefix_board_turn_keys_excluding_stocks_unique": 13,
+    "stocks_initial": [3, 3],
+    "stocks_final": [0, 0],
+    "nonterminal_saved_path": [424, 375, 376],
+    "path_statuses_STM": ["W", "W", "D"],
+    "D_state": 376,
+    "D_cycle": [368, 319, 316, 367, 368],
+    "independent_original_receipt_exit0_cleanuptrue": true,
+    "returned_complete_vs_disk_pending_attempted": "kept separate; disk fields not promoted",
+    "rule_legality_basis": "prior source review and original independent fullgraph receipt; manual specific prefix review, not rules execution"
+  },
+  "source_re_review": false,
+  "selected_reader_STOP": "2026-10-15T03:04:31.730917+00:00",
+  "owned_remaining": []
+}

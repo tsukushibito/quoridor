@@ -1,0 +1,76 @@
+{
+    "phase": "pilot",
+    "image": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/immutable-image",
+        "sha256": "00b455c36de1382af7d5a2c73aa914749150cd717f8905c363b5a358f0bcd8a3",
+        "bytes": 4670808,
+        "mode": "0555"
+    },
+    "inputs": [
+        {
+            "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/enumeration-v1/masks.bin",
+            "sha256": "3ef3576670501f681beddef9b71530cf9390420ab695bc52012d93c91700136a",
+            "bytes": 10130264,
+            "mode": "0644"
+        }
+    ],
+    "cwd": "/workspaces/quoridor/.worktree/arena-evaluation",
+    "operation": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/pilot-v1/operation",
+    "limits": {
+        "worker_cpu": 2,
+        "guardian_cpu": 4,
+        "family_B": 4294967296,
+        "host_reserve_B": 4294967296
+    },
+    "argv": [
+        "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/immutable-image",
+        "solve",
+        "--masks",
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/enumeration-v1/masks.bin",
+        "--phase",
+        "pilot",
+        "--workers",
+        "1",
+        "--worker-index",
+        "0",
+        "--records",
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/pilot-v1/records.bin",
+        "--summary",
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/pilot-v1/summary.json",
+        "--candidate",
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/pilot-v1/first-D.bin"
+    ],
+    "selection": "ordinal<16 OR ordinal%4096==0; once; same successful original enumerator/masks; first16 separated; remaining excluded",
+    "software_acceptance": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/acceptance.json",
+        "sha256": "0d8940d59830283e7ea61960ca3ce9775fdbc9ac51244606a08c6248bfa6320f",
+        "bytes": 9011,
+        "mode": "0644"
+    },
+    "mathematical_boundary": {
+        "source_clear": true,
+        "blockers": [],
+        "ordinary": [],
+        "source_target": "ff2150ad7be8bd8299d4b2fb9c112b18498198d1e7c067988de322dd9a3f9561",
+        "reviewer_STOP": {
+            "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/fixed-source-STOP.json",
+            "sha256": "1a7e1b1482c5bf80f02ec5e6334b3c5c06be578e979616612dab14bfba0324b3",
+            "bytes": 3266,
+            "mode": "0644"
+        },
+        "scope": "frozen enumeration/legal edges/board WDL only; actual count/D/9x9/prefix not established"
+    },
+    "enumeration_result": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/enumeration-v1/collection-v1/result.json",
+        "sha256": "3d2222450a718dd10d7dfeebfa8ec9f1ce77889878962c8779c26e993e4b387d",
+        "bytes": 8654,
+        "mode": "0644"
+    },
+    "enumeration_summary": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/enumeration-v1/summary.json",
+        "sha256": "ccf1262c23beef5631ac4c26253e3604f3a170e8dba232e5ebf2328eeeb45b6c",
+        "bytes": 395,
+        "mode": "0644"
+    },
+    "pilot_layouts": 634
+}

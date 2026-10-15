@@ -1,0 +1,138 @@
+{
+  "checks": {
+    "saved_only": true,
+    "no_move_generation_or_WDL_recomputation": true,
+    "global_summary_arithmetic_consistent": true,
+    "global_records_reopened": false,
+    "summary_total": {
+      "layouts": 2532560,
+      "active": 841986100,
+      "edges": 1838022824,
+      "W": 485420844,
+      "L": 356525548,
+      "D": 39708,
+      "analysis_ns": 37179403007,
+      "verification_ns": 21243242802
+    },
+    "saved_graph": {
+      "active": 610,
+      "edges": 1460,
+      "W": 330,
+      "L": 258,
+      "D": 22
+    },
+    "prefix_plies": 12,
+    "prefix_board_turn_keys_excluding_stocks_unique": 13,
+    "stocks_initial": [3, 3],
+    "stocks_final": [0, 0],
+    "nonterminal_saved_path": [424, 375, 376],
+    "path_statuses_STM": ["W", "W", "D"],
+    "D_state": 376,
+    "D_cycle": [368, 319, 316, 367, 368],
+    "independent_original_receipt_exit0_cleanuptrue": true,
+    "returned_complete_vs_disk_pending_attempted": "kept separate; disk fields not promoted",
+    "rule_legality_basis": "prior source review and original independent fullgraph receipt; manual specific prefix review, not rules execution"
+  },
+  "selected_refs_before_after_exact": [
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/final-report-v1/completion.json",
+      "sha256": "f46610b9351a420ee4508e368df8cac0c8f2a3ca20d1da37d435a790302ae9c7",
+      "bytes": 10317,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/final-report-v1/report-ja.md",
+      "sha256": "c16da9192d85ea8001b9aa0381478e005ac8059b33d080eca54d554e4370a6e6",
+      "bytes": 8289,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/full-collection-v1/result.json",
+      "sha256": "5b83c41c9b5d51d7bd112112b22ac3162a640b29b71725076107cae52e7747fb",
+      "bytes": 31903,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/full-collection-v1/candidate-prefix.json",
+      "sha256": "a756a3216c5f25b552d3428a325544523fc8ca4bb86e570ba4580a0f6c953b0e",
+      "bytes": 9779,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/full-collection-v1/independent-first-D.full.log",
+      "sha256": "d7c8eff2118c738269ba35ab9ccb9b6357176945f942c7cbbf36675019b8092e",
+      "bytes": 172,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/full-collection-v1/independent-first-D-receipt.json",
+      "sha256": "d86d4d35c3d26b6ce6f5f4c8a83bd8efbedb72754c0dc7b28a2d5f62d00e02d4",
+      "bytes": 1815,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/verify_prefix.py",
+      "sha256": "ad52d5dd02754d27ffcc1e2f28a6718c08519273d247d86bf0bd3cd194808cbe",
+      "bytes": 7813,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-2/first-D.bin",
+      "sha256": "4e2e7aa33cc8d510b5cbccc24fb2d87d4aa21a8f2cf7e3d214b7557bcd5eb385",
+      "bytes": 11908,
+      "mode": "0644"
+    }
+  ],
+  "selected_reader_STOP": "2026-10-15T03:04:31.730917+00:00",
+  "worker": {
+    "pid": 1136788,
+    "start_ticks": "8190268",
+    "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+  },
+  "owned_readers": [],
+  "children": [],
+  "jobs": [],
+  "TMP": [],
+  "leases": [],
+  "waits": [],
+  "remaining": [],
+  "current_reservation": null,
+  "next_reservation": null,
+  "reader_exit_observed_at": "2026-10-15T03:04:31.737856+00:00",
+  "exit_code": 0,
+  "directwait_reap": true,
+  "pipes_closed": true,
+  "fresh_identity_absent": true,
+  "wall_s": 0.033359649998601526,
+  "user_s": 0.023927,
+  "system_s": 0.004356,
+  "max_waited_process_RSS_KiB": 15824,
+  "concurrent_family_peak": "UNKNOWN",
+  "stderr": "",
+  "all_selected_worker_identities_fresh": [
+    {
+      "identity": {
+        "pid": 1134973,
+        "start_ticks": "8176777",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "identity": {
+        "pid": 1135334,
+        "start_ticks": "8181346",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "identity": {
+        "pid": 1136788,
+        "start_ticks": "8190268",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    }
+  ]
+}

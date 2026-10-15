@@ -1,0 +1,118 @@
+{
+  "reader_STOP": "2026-10-15T02:33:45.591196+00:00",
+  "collection_observed_STOP": "2026-10-15T02:34:59.416006+00:00",
+  "job_result": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/pilot-v1/runtime-v1/result.json",
+    "sha256": "773723111fee7029aae95bd17fc02587cac037133d9388c8fbe37ff4c127b634",
+    "bytes": 504,
+    "mode": "0600"
+  },
+  "completion": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/pilot-v1/operation/completion.json",
+    "sha256": "7b738ee2f02b047ca8554b8fb8ceef7c8c4525b092dcf902cfc6e1545969f36a",
+    "bytes": 3899,
+    "mode": "0644"
+  },
+  "native_persisted": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/pilot-v1/operation/native.process.json",
+    "sha256": "3dead1fa9723d63c46295f1a6d99ede6fb5cc17b8c75c63a05a2643656b2c0b0",
+    "bytes": 1675,
+    "mode": "0600"
+  },
+  "state": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/pilot-v1/runtime-v1/state.json",
+    "sha256": "bea5a5d4e7ce958059081d6d37bf6814e16da6d419e64d3cd34aef52b59c6c67",
+    "bytes": 707,
+    "mode": "0600"
+  },
+  "summary": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/pilot-v1/summary.json",
+    "sha256": "32b2fdf7bbfbbaccf3cf1e62d3ca204540bc82dce9a9b286b95336102a2852e4",
+    "bytes": 7214,
+    "mode": "0644"
+  },
+  "original_returned_native": {
+    "command": [
+      "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/immutable-image",
+      "solve",
+      "--masks",
+      "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/enumeration-v1/masks.bin",
+      "--phase",
+      "pilot",
+      "--workers",
+      "1",
+      "--worker-index",
+      "0",
+      "--records",
+      "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/pilot-v1/records.bin",
+      "--summary",
+      "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/pilot-v1/summary.json",
+      "--candidate",
+      "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/pilot-v1/first-D.bin"
+    ],
+    "status": "complete",
+    "child": {
+      "pid": 1072776,
+      "start_ticks": "8005774",
+      "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+    },
+    "launch_policy": {
+      "no_new_privs_requested": false,
+      "verified_before_exec": null
+    },
+    "log_bytes_seen": 7214,
+    "scope": "session group and periodically recorded descendants; no daemon adoption",
+    "exit_code": 0,
+    "remaining": [],
+    "direct_child_reaped": true,
+    "descendant_visibility": "observed",
+    "cleanup_complete": true,
+    "log_bytes_retained": 7214,
+    "wall_seconds": 0.14018428800045513,
+    "handle_closes_attempted": [
+      "selector_close",
+      "pipe_close",
+      "pidfd_close",
+      "log_close"
+    ],
+    "primary_error": null,
+    "process_cleanup_complete": true,
+    "handle_closes_complete": true,
+    "signal_mask_restoration": "completed",
+    "final_record_persist": "completed",
+    "finalization_errors": []
+  },
+  "original_identities_fresh": [
+    {
+      "scope": "native",
+      "identity": {
+        "pid": 1072776,
+        "start_ticks": "8005774",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "scope": "outer-command",
+      "identity": {
+        "pid": 1072749,
+        "start_ticks": "8005673",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "scope": "notification-supervisor",
+      "identity": {
+        "pid": 1072638,
+        "start_ticks": "8005225",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    }
+  ],
+  "TMP_absent": true,
+  "owned_readers_writers_children_jobs_leases": [],
+  "notification_supervisor": "delivery only if stillwaiting; no math/timing/source reader",
+  "scope": "actualpilot native/process/TMP STOP; census/ETA to follow, nofull5x5/Dabsence claim"
+}

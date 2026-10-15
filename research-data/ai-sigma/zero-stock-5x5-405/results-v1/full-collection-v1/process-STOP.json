@@ -1,0 +1,752 @@
+{
+  "at": "2026-10-15T02:41:51.944590+00:00",
+  "entries": [
+    {
+      "worker": 0,
+      "status": "ORIGINAL_RETURNED_SUCCESS_CLEANED",
+      "result": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-0/runtime-v1/result.json",
+        "sha256": "97a7001bd5d0eeae352789647aee26744b415e9e8ddaada9de52f78f0d748099",
+        "bytes": 505,
+        "mode": "0600"
+      },
+      "outer_result": {
+        "job_id": "a90ab1b1-3608-46e7-8a4f-6c594c6790ba",
+        "outcome": "succeeded",
+        "error": null,
+        "exit_code": 0,
+        "finished_at": "2026-10-15T02:39:08.172301+00:00",
+        "wall_seconds": 19.420002339000348,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+        "cleanup_complete": true,
+        "cleanup_errors": [],
+        "log_bytes_seen": 190,
+        "log_bytes_retained": 190
+      },
+      "completion": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-0/operation/completion.json",
+        "sha256": "a2ee473957b99a963c41fee8f013b769f622415317a8ed0bc37e227751e100c6",
+        "bytes": 4540,
+        "mode": "0644"
+      },
+      "summary": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-0/summary.json",
+        "sha256": "1d20b2c5d6c9af86031dc2d185dcae9cc964e26414f1a0307a22db48e62bae52",
+        "bytes": 7933,
+        "mode": "0644"
+      },
+      "summary_native_total": {
+        "layouts": 632518,
+        "active": 228700728,
+        "edges": 501831525,
+        "W": 132130194,
+        "L": 96563632,
+        "D": 6902,
+        "analysis_ns": 9939923594,
+        "verification_ns": 5722488334
+      },
+      "reader_STOP": "2026-10-15T02:39:07.977928+00:00",
+      "identities": [
+        {
+          "role": "native",
+          "original": {
+            "pid": 1080324,
+            "start_ticks": "8036167",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh": "absent"
+        },
+        {
+          "role": "outer-command",
+          "original": {
+            "pid": 1080298,
+            "start_ticks": "8036094",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh": "absent"
+        },
+        {
+          "role": "notification-only-supervisor",
+          "original": {
+            "pid": 1080162,
+            "start_ticks": "8035782",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh": "same"
+        }
+      ],
+      "native_returned": {
+        "command": [
+          "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/immutable-image",
+          "solve",
+          "--masks",
+          "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/enumeration-v1/masks.bin",
+          "--phase",
+          "remaining",
+          "--workers",
+          "4",
+          "--worker-index",
+          "0",
+          "--records",
+          "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-0/records.bin",
+          "--summary",
+          "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-0/summary.json",
+          "--candidate",
+          "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-0/first-D.bin"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 1080324,
+          "start_ticks": "8036167",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "log_bytes_seen": 7933,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 7933,
+        "wall_seconds": 18.35779981299129,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "bound_refs": [
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-0/runtime-v1/result.json",
+          "sha256": "97a7001bd5d0eeae352789647aee26744b415e9e8ddaada9de52f78f0d748099",
+          "bytes": 505,
+          "mode": "0600"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-0/operation/completion.json",
+          "sha256": "a2ee473957b99a963c41fee8f013b769f622415317a8ed0bc37e227751e100c6",
+          "bytes": 4540,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-0/runtime-v1/state.json",
+          "sha256": "37c7b60bba0cb0a5165b436f4f5e89cfac25fe7f9f134e693e1fb7f0f4e36715",
+          "bytes": 707,
+          "mode": "0600"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-0/summary.json",
+          "sha256": "1d20b2c5d6c9af86031dc2d185dcae9cc964e26414f1a0307a22db48e62bae52",
+          "bytes": 7933,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-0/runtime-v1/output.log",
+          "sha256": "d11da34ff2fe35eee4f80239212cdc4a5706fc7f9e9b7a4492984d88f26e77bf",
+          "bytes": 190,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-0/runtime-v1/config.json",
+          "sha256": "987848d86c2c89d8f8aa1382b949f0fe383b21ffa7932362650e0b914757b3b2",
+          "bytes": 914,
+          "mode": "0600"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-0/operation/native.full.log",
+          "sha256": "1d20b2c5d6c9af86031dc2d185dcae9cc964e26414f1a0307a22db48e62bae52",
+          "bytes": 7933,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-0/operation/native.log",
+          "sha256": "1d20b2c5d6c9af86031dc2d185dcae9cc964e26414f1a0307a22db48e62bae52",
+          "bytes": 7933,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-0/operation/native.process.json",
+          "sha256": "124d2ffa770be629ae1944ff9550a1ee91d732e6aaef3f092b7963706710be48",
+          "bytes": 1716,
+          "mode": "0600"
+        }
+      ],
+      "persisted_vs_returned": "original disk mask pending versus returned completed retained separately"
+    },
+    {
+      "worker": 1,
+      "status": "ORIGINAL_RETURNED_SUCCESS_CLEANED",
+      "result": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-1/runtime-v1/result.json",
+        "sha256": "47c8084aab8b3ab84c659ebc3f535942e2dbc98da491d0d53df123b4bea9da1c",
+        "bytes": 505,
+        "mode": "0600"
+      },
+      "outer_result": {
+        "job_id": "25d5753c-94e3-4eac-a9ab-acbb36e37d9f",
+        "outcome": "succeeded",
+        "error": null,
+        "exit_code": 0,
+        "finished_at": "2026-10-15T02:39:14.272553+00:00",
+        "wall_seconds": 16.371834378005587,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+        "cleanup_complete": true,
+        "cleanup_errors": [],
+        "log_bytes_seen": 190,
+        "log_bytes_retained": 190
+      },
+      "completion": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-1/operation/completion.json",
+        "sha256": "590ff7be285a24a6febb8dc5a3fb9e634eb802520c9087f997945c754309c3b2",
+        "bytes": 4541,
+        "mode": "0644"
+      },
+      "summary": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-1/summary.json",
+        "sha256": "9e307f1bae1579e011f399d4974d06e5f51e75a9cfcc3d8a90ba69cf06336af3",
+        "bytes": 7963,
+        "mode": "0644"
+      },
+      "summary_native_total": {
+        "layouts": 633136,
+        "active": 197272184,
+        "edges": 430323164,
+        "W": 113518015,
+        "L": 83742986,
+        "D": 11183,
+        "analysis_ns": 9110688201,
+        "verification_ns": 5171965369
+      },
+      "reader_STOP": "2026-10-15T02:39:14.131363+00:00",
+      "identities": [
+        {
+          "role": "native",
+          "original": {
+            "pid": 1080515,
+            "start_ticks": "8037032",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh": "absent"
+        },
+        {
+          "role": "outer-command",
+          "original": {
+            "pid": 1080502,
+            "start_ticks": "8037009",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh": "absent"
+        },
+        {
+          "role": "notification-only-supervisor",
+          "original": {
+            "pid": 1080379,
+            "start_ticks": "8036468",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh": "same"
+        }
+      ],
+      "native_returned": {
+        "command": [
+          "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/immutable-image",
+          "solve",
+          "--masks",
+          "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/enumeration-v1/masks.bin",
+          "--phase",
+          "remaining",
+          "--workers",
+          "4",
+          "--worker-index",
+          "1",
+          "--records",
+          "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-1/records.bin",
+          "--summary",
+          "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-1/summary.json",
+          "--candidate",
+          "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-1/first-D.bin"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 1080515,
+          "start_ticks": "8037032",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "log_bytes_seen": 7963,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 7963,
+        "wall_seconds": 15.890578042992274,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "bound_refs": [
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-1/runtime-v1/result.json",
+          "sha256": "47c8084aab8b3ab84c659ebc3f535942e2dbc98da491d0d53df123b4bea9da1c",
+          "bytes": 505,
+          "mode": "0600"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-1/operation/completion.json",
+          "sha256": "590ff7be285a24a6febb8dc5a3fb9e634eb802520c9087f997945c754309c3b2",
+          "bytes": 4541,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-1/runtime-v1/state.json",
+          "sha256": "0804e607e3e38b6009b9741a84d4c6c1fa2b65e56c941f6eac15d316e6e984c6",
+          "bytes": 707,
+          "mode": "0600"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-1/summary.json",
+          "sha256": "9e307f1bae1579e011f399d4974d06e5f51e75a9cfcc3d8a90ba69cf06336af3",
+          "bytes": 7963,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-1/runtime-v1/output.log",
+          "sha256": "7e16b8d265063bac35d0dc6f5edb686241b612bcada793fecf1ba66ca9b7ca42",
+          "bytes": 190,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-1/runtime-v1/config.json",
+          "sha256": "358044018bbec116c839a61253a86ee57eaaaa62448d4437a5b9b9074f4d15d0",
+          "bytes": 914,
+          "mode": "0600"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-1/operation/native.full.log",
+          "sha256": "9e307f1bae1579e011f399d4974d06e5f51e75a9cfcc3d8a90ba69cf06336af3",
+          "bytes": 7963,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-1/operation/native.log",
+          "sha256": "9e307f1bae1579e011f399d4974d06e5f51e75a9cfcc3d8a90ba69cf06336af3",
+          "bytes": 7963,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-1/operation/native.process.json",
+          "sha256": "287bce81915f6bfbd9db34d307450ef2603269a6c68d763425c01f599e6637fb",
+          "bytes": 1717,
+          "mode": "0600"
+        }
+      ],
+      "persisted_vs_returned": "original disk mask pending versus returned completed retained separately"
+    },
+    {
+      "worker": 2,
+      "status": "ORIGINAL_RETURNED_SUCCESS_CLEANED",
+      "result": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-2/runtime-v1/result.json",
+        "sha256": "a00b59d9fd7b234bc9031abc9192d9859077adb7d36d3ea7a603a3e0f0f72939",
+        "bytes": 505,
+        "mode": "0600"
+      },
+      "outer_result": {
+        "job_id": "79219b34-00d7-4fc0-9d7d-81f196a61f0a",
+        "outcome": "succeeded",
+        "error": null,
+        "exit_code": 0,
+        "finished_at": "2026-10-15T02:39:27.937050+00:00",
+        "wall_seconds": 18.524495834994013,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+        "cleanup_complete": true,
+        "cleanup_errors": [],
+        "log_bytes_seen": 190,
+        "log_bytes_retained": 190
+      },
+      "completion": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-2/operation/completion.json",
+        "sha256": "f0f0be4a239d08ba41a7bd232785a45b3b9ca88609df59a60480c2d265f465e8",
+        "bytes": 4543,
+        "mode": "0644"
+      },
+      "summary": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-2/summary.json",
+        "sha256": "7dbc3d84f36f49c2fb965042c792dfda6624ca6d495855d6824e5f8228e1d039",
+        "bytes": 7918,
+        "mode": "0644"
+      },
+      "summary_native_total": {
+        "layouts": 633136,
+        "active": 224766702,
+        "edges": 490792068,
+        "W": 129862502,
+        "L": 94895851,
+        "D": 8349,
+        "analysis_ns": 9669461534,
+        "verification_ns": 5565005069
+      },
+      "reader_STOP": "2026-10-15T02:39:27.823862+00:00",
+      "identities": [
+        {
+          "role": "native",
+          "original": {
+            "pid": 1080875,
+            "start_ticks": "8038182",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh": "absent"
+        },
+        {
+          "role": "outer-command",
+          "original": {
+            "pid": 1080861,
+            "start_ticks": "8038160",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh": "absent"
+        },
+        {
+          "role": "notification-only-supervisor",
+          "original": {
+            "pid": 1080674,
+            "start_ticks": "8037493",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh": "absent"
+        }
+      ],
+      "native_returned": {
+        "command": [
+          "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/immutable-image",
+          "solve",
+          "--masks",
+          "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/enumeration-v1/masks.bin",
+          "--phase",
+          "remaining",
+          "--workers",
+          "4",
+          "--worker-index",
+          "2",
+          "--records",
+          "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-2/records.bin",
+          "--summary",
+          "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-2/summary.json",
+          "--candidate",
+          "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-2/first-D.bin"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 1080875,
+          "start_ticks": "8038182",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "log_bytes_seen": 7918,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 7918,
+        "wall_seconds": 17.98796167600085,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "bound_refs": [
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-2/runtime-v1/result.json",
+          "sha256": "a00b59d9fd7b234bc9031abc9192d9859077adb7d36d3ea7a603a3e0f0f72939",
+          "bytes": 505,
+          "mode": "0600"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-2/operation/completion.json",
+          "sha256": "f0f0be4a239d08ba41a7bd232785a45b3b9ca88609df59a60480c2d265f465e8",
+          "bytes": 4543,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-2/runtime-v1/state.json",
+          "sha256": "4b1d357806d3b7a757061904f3094dac89b4948f88d5ccfc24d78cd7aa1aa12d",
+          "bytes": 707,
+          "mode": "0600"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-2/summary.json",
+          "sha256": "7dbc3d84f36f49c2fb965042c792dfda6624ca6d495855d6824e5f8228e1d039",
+          "bytes": 7918,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-2/runtime-v1/output.log",
+          "sha256": "a3f0341d21a096498d97d6e946a1a6e3a207ab5cdd9aea8749f070f02a2e328b",
+          "bytes": 190,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-2/runtime-v1/config.json",
+          "sha256": "bbfe1c45b917b7a1d68176ddcd48dedc22ff48d2ebfb59e218e57df047918aa2",
+          "bytes": 914,
+          "mode": "0600"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-2/operation/native.full.log",
+          "sha256": "7dbc3d84f36f49c2fb965042c792dfda6624ca6d495855d6824e5f8228e1d039",
+          "bytes": 7918,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-2/operation/native.log",
+          "sha256": "7dbc3d84f36f49c2fb965042c792dfda6624ca6d495855d6824e5f8228e1d039",
+          "bytes": 7918,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-2/operation/native.process.json",
+          "sha256": "26996e54f3de74831efe203fdf289946d5c359eda759350c91d0c2da031eead9",
+          "bytes": 1716,
+          "mode": "0600"
+        }
+      ],
+      "persisted_vs_returned": "original disk mask pending versus returned completed retained separately"
+    },
+    {
+      "worker": 3,
+      "status": "ORIGINAL_RETURNED_SUCCESS_CLEANED",
+      "result": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-3/runtime-v1/result.json",
+        "sha256": "485c63813a077cb0389c4f8bf652fa78c5c6783aa72d6ddda9c3b306e093f0dc",
+        "bytes": 504,
+        "mode": "0600"
+      },
+      "outer_result": {
+        "job_id": "d49944e6-a27c-4e82-af66-0cfa397ec0cc",
+        "outcome": "succeeded",
+        "error": null,
+        "exit_code": 0,
+        "finished_at": "2026-10-15T02:39:41.827159+00:00",
+        "wall_seconds": 16.61698324199824,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+        "cleanup_complete": true,
+        "cleanup_errors": [],
+        "log_bytes_seen": 190,
+        "log_bytes_retained": 190
+      },
+      "completion": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-3/operation/completion.json",
+        "sha256": "adf479d60940640ab79dbd61a4cf613f6c656a0b0a187568e0e47728098fef36",
+        "bytes": 4543,
+        "mode": "0644"
+      },
+      "summary": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-3/summary.json",
+        "sha256": "0f58f00b67c8098b7a1910cd7fa93e990ea4762c547de52279ced0973f573bd9",
+        "bytes": 7957,
+        "mode": "0644"
+      },
+      "summary_native_total": {
+        "layouts": 633136,
+        "active": 190997658,
+        "edges": 414508850,
+        "W": 109766281,
+        "L": 81218103,
+        "D": 13274,
+        "analysis_ns": 8448344562,
+        "verification_ns": 4777474142
+      },
+      "reader_STOP": "2026-10-15T02:39:41.650971+00:00",
+      "identities": [
+        {
+          "role": "native",
+          "original": {
+            "pid": 1081421,
+            "start_ticks": "8039762",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh": "absent"
+        },
+        {
+          "role": "outer-command",
+          "original": {
+            "pid": 1081405,
+            "start_ticks": "8039738",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh": "absent"
+        },
+        {
+          "role": "notification-only-supervisor",
+          "original": {
+            "pid": 1081045,
+            "start_ticks": "8038619",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh": "same"
+        }
+      ],
+      "native_returned": {
+        "command": [
+          "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/immutable-image",
+          "solve",
+          "--masks",
+          "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/enumeration-v1/masks.bin",
+          "--phase",
+          "remaining",
+          "--workers",
+          "4",
+          "--worker-index",
+          "3",
+          "--records",
+          "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-3/records.bin",
+          "--summary",
+          "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-3/summary.json",
+          "--candidate",
+          "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-3/first-D.bin"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 1081421,
+          "start_ticks": "8039762",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "log_bytes_seen": 7957,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 7957,
+        "wall_seconds": 16.15892251599871,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "bound_refs": [
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-3/runtime-v1/result.json",
+          "sha256": "485c63813a077cb0389c4f8bf652fa78c5c6783aa72d6ddda9c3b306e093f0dc",
+          "bytes": 504,
+          "mode": "0600"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-3/operation/completion.json",
+          "sha256": "adf479d60940640ab79dbd61a4cf613f6c656a0b0a187568e0e47728098fef36",
+          "bytes": 4543,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-3/runtime-v1/state.json",
+          "sha256": "4d3b689bc814e4548313bc35cd0031cd9bba322b16a0c0ae214f70803c86b28f",
+          "bytes": 707,
+          "mode": "0600"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-3/summary.json",
+          "sha256": "0f58f00b67c8098b7a1910cd7fa93e990ea4762c547de52279ced0973f573bd9",
+          "bytes": 7957,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-3/runtime-v1/output.log",
+          "sha256": "84ee23477bb0f3ad40d874b318d7052f0d7fe6317e56d64815e7390ac4795a39",
+          "bytes": 190,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-3/runtime-v1/config.json",
+          "sha256": "cefa33ccf7c0e4671b3ff6bb23f08a43b4ba65b1c8505c195eabff441386e52b",
+          "bytes": 914,
+          "mode": "0600"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-3/operation/native.full.log",
+          "sha256": "0f58f00b67c8098b7a1910cd7fa93e990ea4762c547de52279ced0973f573bd9",
+          "bytes": 7957,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-3/operation/native.log",
+          "sha256": "0f58f00b67c8098b7a1910cd7fa93e990ea4762c547de52279ced0973f573bd9",
+          "bytes": 7957,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-3/operation/native.process.json",
+          "sha256": "b8e6314cbab68da195d469351c406913ea9001a89c02d00b70fc7e82e2c34878",
+          "bytes": 1716,
+          "mode": "0600"
+        }
+      ],
+      "persisted_vs_returned": "original disk mask pending versus returned completed retained separately"
+    }
+  ],
+  "all_four_originals_saved_cleaned": true,
+  "owned_readers_writers_children_jobs_TMP_leases": [],
+  "scope": "one-shot actual original-result intake at worker2 completion; no status polling/replay; finalrecordcensus stillpending"
+}

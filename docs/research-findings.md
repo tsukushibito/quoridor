@@ -1904,3 +1904,13 @@ wholeは6root body・setup/drop・採点・key保存/cache・再探索込みの�
 既存goal距離表は成分IDやpawn起点距離Dqと同じではない。必要なflood／BFSとpath検査、occurrencesのH件走査を含めた費用が要る。メモのsource操作数は最大2回のgrid走査と概念上O(H+L)、一時O(V+L)で、現bitparallelの命令数・実layout・RSS・whole利益はUNKNOWN。将来のNNUE／固定D共通入口ならstock0を安く確認し、正しいwall keyの情報だけを再用し、未判定は通常探索を続ける。exact WDL／有限depth heuristic／TT method・history資格を混同せず、同じtree-value/work完全一致を新exact leafの意味保存にしない。効用は実訪問での成立率と判定費込みwholeで確認し、未訪問反実仮想nodeを正確な節約数へ換算しない。
 
 近似打切りは未実装・閾値未選択である。今回の意図には「rootの在庫で近似許可を一度固定（序盤ON・終盤はこの早期近似OFF）」と「許可時に枝内の双方stock0 domainだけで仮評価する」を分ける設計が合う。node残壁<=K案は採用済み設定ではない。通常depth0評価と真のgoal／threefoldを維持し、effective許可が変わるroot間でTT数値を混用しない必要がある。各着手で残りdepthが少なくとも1減り延長がないなら、root残壁S0>最大depthでは零在庫へ到達できず、この近似の発動は0。したがってstock20/depth6の序盤費用対策へ外挿しない。数値優越・棋力・thresholdはUNKNOWNで、新Search／TT変更・campaign・学習再開は発行していない。
+
+### 5×5全壁配置のWDLと零在庫Drawの具体例（405、2026-10-15）
+
+衝突しない5×5の全2,532,560壁集合を実際に列挙し、各自goalへ壁だけで到達できる異なる非goal駒位置と両手番841,986,100局面、1,838,022,824合法辺を解析・全辺検証した。W485,420,844／L356,525,548／D39,708で、Dを含む壁集合は3,872件。空集合・奇数枚・全壁数を含め、最終壁で初期pawnが可達というfilterを置いていない。列挙と成功pilot634件、真正未入場の補集合2,531,926件を各一度だけ使い、全recordの重複・欠落なしを照合した。[全censusと原費用](../research-data/ai-sigma/zero-stock-5x5-405/results-v1/full-collection-v1/result.json)、[原物と保存対応](../research-data/ai-sigma/zero-stock-5x5-405/results-v1/preservation.json)を参照。
+
+具体例は5×5、初期在庫3枚ずつ、P0=c1→5段目、P1=c5→1段目、P0手番。空盤でc1→c2、c5→c4、c2→d2、c4→c3と進み、P0から交互にH b1、H d1、H b2、H a3、H d3、V a1を置く。最後にd2→c2、c3→d3と動くと、双方stock0・P0=c2/P1=d3/P0手番の保存D raw376へ達する。途中の壁可達性・合法手・goalなし・13個の盤面＋手番key一意を限定独立確認した。過去二回の罠を合成した例ではない。一方、到達直前の保存手番相対値はW→W→Dであり、この12手prefixは合法な到達可能性の証拠で、初期からの双方最善playではない。[固定prefix](../research-data/ai-sigma/zero-stock-5x5-405/results-v1/full-collection-v1/candidate-prefix.json)と[関連独立確認](../research-data/ai-sigma/zero-stock-5x5-405/results-v1/related-review/report-ja.md)を保存した。
+
+同じ6壁の保存graph全610局面／1,460辺は、既存の独立参照がW330／L258／D22と全辺・rank・D選択を照合済み。関連担当はその保存証拠だけを読み、solverを再実行していない。Dには即goal／L子がなくD子があり、双方が非敗手を選べる。W子へ出る負ける逸脱もあるため全応手がDとは言わない。有限盤面でDを続ければ盤面＋手番が反復し、goal優先threefoldではdrawとなる。最初に保存されたD raw315は、prefix到達先raw376とは区別している。9×9／20壁への埋込み、他の初期在庫、全履歴の一般定理、初期からの最善playはUNKNOWNのままである。
+
+native解析37.179403007sと全辺検証21.243242802s、出力等込みpilot＋4補集合native whole合計68.344707919s、列挙native0.036620924sを保存した。元6outer jobの非重複合計77.074679146sは別scopeで、nested nativeを足さない。software元5command合計4.713499854sも別scopeである。4並列jobは起動時刻がずれ、これらの和をpipeline elapsedや4倍速としない。native VmHWMは約2.2MiB/process、continuous family peakとLLMを含む全費用はUNKNOWN。全原jobのdirectwait/reap・fresh identity absence・TMP/lease解放を確認し、元formatter/helper失敗、capture erratum、returnedとdisk maskの違い、旧RAW／FAILED／費は保持した。製品Search・TT・モデル・既定値へ数学solverを接続していない。mixed／learner全準備・pipelineと323 USERPAUSEは維持する。

@@ -1,0 +1,48 @@
+{
+    "phase": "enumerate",
+    "image": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/immutable-image",
+        "sha256": "00b455c36de1382af7d5a2c73aa914749150cd717f8905c363b5a358f0bcd8a3",
+        "bytes": 4670808,
+        "mode": "0555"
+    },
+    "inputs": [],
+    "cwd": "/workspaces/quoridor/.worktree/arena-evaluation",
+    "operation": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/enumeration-v1/operation",
+    "limits": {
+        "worker_cpu": 2,
+        "guardian_cpu": 4,
+        "family_B": 4294967296,
+        "host_reserve_B": 4294967296
+    },
+    "argv": [
+        "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/immutable-image",
+        "enumerate",
+        "--side",
+        "5",
+        "--masks",
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/enumeration-v1/masks.bin",
+        "--summary",
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/enumeration-v1/summary.json"
+    ],
+    "selection": "all conflict-free32wallcandidate masks once, empty/odd/active0 included; numericascendingID; no initial-pawn filter",
+    "software_acceptance": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/acceptance.json",
+        "sha256": "0d8940d59830283e7ea61960ca3ce9775fdbc9ac51244606a08c6248bfa6320f",
+        "bytes": 9011,
+        "mode": "0644"
+    },
+    "mathematical_boundary": {
+        "source_clear": true,
+        "blockers": [],
+        "ordinary": [],
+        "source_target": "ff2150ad7be8bd8299d4b2fb9c112b18498198d1e7c067988de322dd9a3f9561",
+        "reviewer_STOP": {
+            "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/logic-v1/fixed-source-STOP.json",
+            "sha256": "1a7e1b1482c5bf80f02ec5e6334b3c5c06be578e979616612dab14bfba0324b3",
+            "bytes": 3266,
+            "mode": "0644"
+        },
+        "scope": "frozen enumeration/legal edges/board WDL only; actual count/D/9x9/prefix not established"
+    }
+}

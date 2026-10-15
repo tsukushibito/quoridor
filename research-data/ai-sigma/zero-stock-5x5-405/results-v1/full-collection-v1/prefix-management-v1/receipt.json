@@ -1,0 +1,132 @@
+{
+  "records": [
+    {
+      "name": "prefix-format",
+      "returned": {
+        "command": [
+          "/home/vscode/.cache/inference/envs/quoridor-training/bin/ruff",
+          "format",
+          "--config",
+          "/workspaces/quoridor/pyproject.toml",
+          "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/verify_prefix.py"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 1115662,
+          "start_ticks": "8127387",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "log_bytes_seen": 19,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 19,
+        "wall_seconds": 0.026441598995006643,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      }
+    },
+    {
+      "name": "prefix-check",
+      "returned": {
+        "command": [
+          "/home/vscode/.cache/inference/envs/quoridor-training/bin/ruff",
+          "check",
+          "--config",
+          "/workspaces/quoridor/pyproject.toml",
+          "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/verify_prefix.py"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 1115665,
+          "start_ticks": "8127391",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "log_bytes_seen": 141,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 141,
+        "wall_seconds": 0.022842332007712685,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      }
+    },
+    {
+      "name": "saved-prefix",
+      "returned": {
+        "command": [
+          "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+          "-B",
+          "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/verify_prefix.py",
+          "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 1115671,
+          "start_ticks": "8127393",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "log_bytes_seen": 2041,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 2041,
+        "wall_seconds": 0.07555692100140732,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      }
+    }
+  ]
+}

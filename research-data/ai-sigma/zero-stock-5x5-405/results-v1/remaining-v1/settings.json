@@ -1,0 +1,133 @@
+{
+    "scope": "four fixed independent standard jobs; no custom scheduler/checkpoint/failed retry",
+    "workers": [
+        {
+            "index": 0,
+            "CPU": 2,
+            "expected": 632518,
+            "settings": {
+                "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-0/settings.json",
+                "sha256": "c199b6baa54229369f73117ba9c72c21e47e4f697366a3d7815043c8ef6e562a",
+                "bytes": 4104,
+                "mode": "0644"
+            },
+            "job": {
+                "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-0/job.json",
+                "sha256": "ee5c8ea2d140eba48579a852706b953218336310fc739083960c375375d0cb28",
+                "bytes": 974,
+                "mode": "0644"
+            },
+            "runtime": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-0/runtime-v1"
+        },
+        {
+            "index": 1,
+            "CPU": 6,
+            "expected": 633136,
+            "settings": {
+                "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-1/settings.json",
+                "sha256": "65feaf47a3be0d0891fe51e8283826781bdd2d6de13879d07c16e4805f865e0f",
+                "bytes": 4104,
+                "mode": "0644"
+            },
+            "job": {
+                "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-1/job.json",
+                "sha256": "40a17763d9b784250fc21a06890abf7c7c40c84dfb6dde97aeced9a02e069f7e",
+                "bytes": 974,
+                "mode": "0644"
+            },
+            "runtime": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-1/runtime-v1"
+        },
+        {
+            "index": 2,
+            "CPU": 10,
+            "expected": 633136,
+            "settings": {
+                "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-2/settings.json",
+                "sha256": "d3e068619b0b3d59620f884e2308c4b682e42c0a40a19f77fe922d1caf2a20b9",
+                "bytes": 4105,
+                "mode": "0644"
+            },
+            "job": {
+                "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-2/job.json",
+                "sha256": "6b45e764702e1ffd7e811c0bd812431882ebea090a1119deef4415576a564765",
+                "bytes": 974,
+                "mode": "0644"
+            },
+            "runtime": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-2/runtime-v1"
+        },
+        {
+            "index": 3,
+            "CPU": 18,
+            "expected": 633136,
+            "settings": {
+                "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-3/settings.json",
+                "sha256": "6b44646103ec3f2051f1b3f68bae0b2d5c60f95f702e00ccf564b3b3304b4859",
+                "bytes": 4105,
+                "mode": "0644"
+            },
+            "job": {
+                "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-3/job.json",
+                "sha256": "7bf9543792d0a5a536fbdfe533a23e66134f1dee2226dea5394f034b3031c907",
+                "bytes": 974,
+                "mode": "0644"
+            },
+            "runtime": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-3/runtime-v1"
+        }
+    ],
+    "family_total_B": 4294967296,
+    "each_family_B": 1073741824,
+    "outer_controller_reserve_each_B": 67108864,
+    "each_inner_family_guard_B": 1006632960,
+    "physical_worker_pool": [
+        2,
+        6,
+        10,
+        18
+    ],
+    "management_guardian": 4,
+    "host_reserve_B": 4294967296,
+    "GPU": 0,
+    "immutable_image": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/immutable-image",
+        "sha256": "00b455c36de1382af7d5a2c73aa914749150cd717f8905c363b5a358f0bcd8a3",
+        "bytes": 4670808,
+        "mode": "0555"
+    },
+    "same_native_algorithm": true,
+    "runtime_controller": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/run_operation.py",
+        "sha256": "a0b6d0bb7a321cc89f7b1c2311c8f54c718441ab7b28af537e6b15e85ec08744",
+        "bytes": 7009,
+        "mode": "0644"
+    },
+    "enum_pilot_controller_before": {
+        "sha256": "32781af9c7c99725ea39220f98319e61dedb53b5f1196048232f0988a6c2bd5f",
+        "bytes": 5505,
+        "reconstruction": {
+            "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/full-preparation-v1/prior-enum-pilot-controller.py.gz",
+            "sha256": "387b9ae534507b19ef90d00a3f89831c9629661d5946a64e35f0c9e6395c9b0f",
+            "bytes": 1881,
+            "mode": "0644"
+        }
+    },
+    "pilot": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/pilot-v1/collection-v1/result.json",
+        "sha256": "a06c38df36df5941235ddcdc7588d7cdeacc9a90cdb41cbc97afac91d56b5d53",
+        "bytes": 28375,
+        "mode": "0644"
+    },
+    "ETA": {
+        "basis": "actual fixed634 pilot, aggregate one-core work equivalent; not4x throughput claim or hard kill",
+        "analysis_plus_verification_equivalent_seconds": 69.06888059574763,
+        "output_equivalent_seconds": 33.74316949355836,
+        "native_whole_naive_equivalent_seconds": 151.777570033,
+        "selection_scan_caveat": "pilot already scans all2532560 masks and setup/sync included; naive whole scaling overstates that fixed cost; parallel memory/storage contention UNKNOWN",
+        "unrepresented_wall_count_layouts": 1014,
+        "parallel_actual": "UNKNOWN until genuine remaining completion",
+        "not_a_stop_deadline": true
+    },
+    "ordinary_storage_budget": null,
+    "all_record_streams_exact_payload_B": 121563040,
+    "masks_payload_B": 10130264,
+    "expected_new_remaining_records_B": 121532576
+}

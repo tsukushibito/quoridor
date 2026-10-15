@@ -1,0 +1,54 @@
+{
+  "selection": "lowest ordinal among each originalshard firstD, fixedearliest only; no newlayout/nativefixture",
+  "first": {
+    "ordinal": 4350,
+    "mask": 67882,
+    "raw_state": 315
+  },
+  "fixture": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-2/first-D.bin",
+    "sha256": "4e2e7aa33cc8d510b5cbccc24fb2d87d4aa21a8f2cf7e3d214b7557bcd5eb385",
+    "bytes": 11908,
+    "mode": "0644"
+  },
+  "returned": {
+    "command": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/reference.py",
+      "--fixture",
+      "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-5x5-405-v1/remaining-v1/worker-2/first-D.bin"
+    ],
+    "status": "complete",
+    "child": {
+      "pid": 1092878,
+      "start_ticks": "8069886",
+      "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+    },
+    "launch_policy": {
+      "no_new_privs_requested": false,
+      "verified_before_exec": null
+    },
+    "log_bytes_seen": 172,
+    "scope": "session group and periodically recorded descendants; no daemon adoption",
+    "exit_code": 0,
+    "remaining": [],
+    "direct_child_reaped": true,
+    "descendant_visibility": "observed",
+    "cleanup_complete": true,
+    "log_bytes_retained": 172,
+    "wall_seconds": 0.2224561030016048,
+    "handle_closes_attempted": [
+      "selector_close",
+      "pipe_close",
+      "pidfd_close",
+      "log_close"
+    ],
+    "primary_error": null,
+    "process_cleanup_complete": true,
+    "handle_closes_complete": true,
+    "signal_mask_restoration": "completed",
+    "final_record_persist": "completed",
+    "finalization_errors": []
+  }
+}
