@@ -1,0 +1,178 @@
+{
+  "at": "2026-10-15T12:59:37.376114+00:00",
+  "Build": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/lmr-limited-observation416-v1/compatible-build-v3/operation-v1/manifest.json",
+    "sha256": "7a94ae05e6e8500471f82754caaeb9cf684aa6457edffa557698929d0ddac434",
+    "bytes": 40201,
+    "mode": "0644"
+  },
+  "artifact": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner416-observation-v3",
+    "sha256": "85a7c2b9db0061cc066010cd8458906a3e41a7f53c490da726d4268ca30efa2b",
+    "bytes": 9004392,
+    "mode": "0755"
+  },
+  "original_software_stops": [
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/lmr-limited-observation416-v1/compatible-build-v1/STOP.json",
+      "sha256": "6eefafcd8a5547108d29c073cc7bacd2f84d49c4111b5f43fa1907884b561df7",
+      "bytes": 15457,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/lmr-limited-observation416-v1/compatible-build-v2/STOP.json",
+      "sha256": "ff3d38ac80221c42dec5468d4d8eba4d901df7f364be1c1cd8b9deb4904c96ea",
+      "bytes": 17340,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/lmr-limited-observation416-v1/compatible-build-v3/STOP.json",
+      "sha256": "730823f3b40c5bda159ed01d2ca29124f1b2a1be28a6527eff3b26c722d33074",
+      "bytes": 5559,
+      "mode": "0644"
+    }
+  ],
+  "original_statuses": [
+    "FAILED",
+    "FAILED",
+    "PASS"
+  ],
+  "meaningful_Rust_assertions": 8,
+  "meaningful_Python_assertions": 1,
+  "assertions_scope": "AI6/runner2 PASS inside original v2 FAILED; test-only initializer repair v3 compiled without replay; Python1 original once",
+  "Python_receipt": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/lmr-limited-observation416-v1/python-settings-guard-v1/returned-receipt.json",
+    "sha256": "0b30b148b100ab27e36483cec2fb2122131e4d07be67d753df2494820fb91df9",
+    "bytes": 2520,
+    "mode": "0644"
+  },
+  "Python_log": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/lmr-limited-observation416-v1/python-settings-guard-v1/new416-python-settings.full.log",
+    "sha256": "2d7f6d6bd899d6d2cb405bb75fec374683b078fe2eb6907f4de754625041fea8",
+    "bytes": 98,
+    "mode": "0644"
+  },
+  "research_Clippy": {
+    "name": "research-affected-lint",
+    "role": "lint",
+    "argv": [
+      "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+      "clippy",
+      "--offline",
+      "--locked",
+      "--manifest-path",
+      "/workspaces/quoridor/Cargo.toml",
+      "-j1",
+      "--message-format=json-render-diagnostics",
+      "-p",
+      "quoridor-ai",
+      "--all-targets",
+      "--features",
+      "research",
+      "--no-deps",
+      "--",
+      "-Dwarnings"
+    ],
+    "status": "PASS",
+    "guardian_return": {
+      "command": [
+        "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "clippy",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "/workspaces/quoridor/Cargo.toml",
+        "-j1",
+        "--message-format=json-render-diagnostics",
+        "-p",
+        "quoridor-ai",
+        "--all-targets",
+        "--features",
+        "research",
+        "--no-deps",
+        "--",
+        "-Dwarnings"
+      ],
+      "status": "complete",
+      "child": {
+        "pid": 1896298,
+        "start_ticks": "11718436",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "log_bytes_seen": 67743,
+      "scope": "session group and periodically recorded descendants; no daemon adoption",
+      "exit_code": 0,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "cleanup_complete": true,
+      "log_bytes_retained": 67743,
+      "wall_seconds": 4.3078302039939445,
+      "handle_closes_attempted": [
+        "selector_close",
+        "pipe_close",
+        "pidfd_close",
+        "log_close"
+      ],
+      "primary_error": null,
+      "process_cleanup_complete": true,
+      "handle_closes_complete": true,
+      "signal_mask_restoration": "completed",
+      "final_record_persist": "completed",
+      "finalization_errors": []
+    },
+    "full_log": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/lmr-limited-observation416-v1/compatible-build-v2/operation-v1/research-affected-lint.full.log",
+      "sha256": "06c83fdc87ff42891ef8914045a4d084905bee748eabce3c444ff975d16a7e2a",
+      "bytes": 67743,
+      "mode": "0644"
+    },
+    "persisted_process_receipt": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/lmr-limited-observation416-v1/compatible-build-v2/operation-v1/research-affected-lint.process.json",
+      "sha256": "7c25e86d7ab7876b3a79c51578140bdc558b09eccbfeb0cd4eeedf545ab32839",
+      "bytes": 1271,
+      "mode": "0600"
+    },
+    "capture_complete": true,
+    "secondary": [],
+    "primary": null,
+    "cargo": {
+      "artifacts": [],
+      "warning_count": 0
+    }
+  },
+  "remaining_software_names": [
+    "diagnostics-test-compile",
+    "research-diagnostics-affected-lint",
+    "measurement-affected-lint",
+    "measurement-build"
+  ],
+  "fixture_repair": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/lmr-limited-observation416-v1/fixture-repair-v1/result.json",
+    "sha256": "d2880e69d73592fd4c5df5e93dd9fe191ab44a5f5be4ee75464c8c7bdd2040e7",
+    "bytes": 3472,
+    "mode": "0644"
+  },
+  "initializer_repair": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/lmr-limited-observation416-v1/initializer-repair-v1/result.json",
+    "sha256": "fb9e09dda6666bdf3ac912c365ab9c5d41be6b0be2eaf7e4d901623b5824e82c",
+    "bytes": 2012,
+    "mode": "0644"
+  },
+  "outer_seconds": [
+    6.918606266001007,
+    22.65762648099917,
+    94.33088306900754
+  ],
+  "outer_seconds_sum": 123.90711581600772,
+  "nested_costs_added": false,
+  "source_review": "PENDING independent fixed packet review416.3; not implied by software",
+  "native_input_admission": "PENDING actual canonical replay",
+  "scientific_calls": 0,
+  "whole_fees": "UNKNOWN including source/LLM/admin",
+  "owned_remaining": []
+}

@@ -1,0 +1,58 @@
+{
+  "issue": "quoridor-4lc.416.1",
+  "thread": "01a13f6c-6d72-7461-8653-e02ca53b6126",
+  "actual_turn_context": {
+    "model": "gpt-6-astra",
+    "effort": "high",
+    "cwd": "/workspaces/quoridor",
+    "approval_policy": "never",
+    "sandbox": "danger-full-access"
+  },
+  "refs": [
+    {
+      "path": "crates/quoridor-ai/src/alphabeta.rs",
+      "bytes": 161687,
+      "sha256": "0391bcd26f0f20f873af9c0bfe0567852bdf87cc70f5aa824d78d30b42e4e86e"
+    },
+    {
+      "path": "crates/quoridor-runner/src/measurement.rs",
+      "bytes": 68774,
+      "sha256": "678decabd393d628717e8cc6e5c8460c2d13d591d35e706374aac61e50ce0a21"
+    },
+    {
+      "path": "research-data/ai-sigma/lmr-game-analysis415/report-ja.md",
+      "bytes": 11714,
+      "sha256": "bcf70ad53f59122aeea6eef2c4a83df19be2bcbc76e99f393a699a77ffe3b230"
+    },
+    {
+      "path": "research-data/ai-sigma/lmr-game-analysis415/examples.json",
+      "bytes": 52906,
+      "sha256": "448a3bd262543f19145c2f2c847029ef64527ef5a451d2419bf6cbe727518268"
+    }
+  ],
+  "verified": [
+    "q0 d3/4 rank4..8",
+    "positive strata q1 d3/r63 and q2 d4/r63 exist",
+    "virtual extra1 child>=1",
+    "108 calls/21.6M nodes arithmetic",
+    "internal child and scout/confirmation source read",
+    "project Prettier write/check exit0"
+  ],
+  "not_executed": [
+    "Search",
+    "games",
+    "model_load",
+    "build",
+    "solver",
+    "fit",
+    "bootstrap",
+    "RAW_rescan"
+  ],
+  "limitations": [
+    "cold state differs from historical warm state",
+    "selected12 prefix4 and earliest branch bias",
+    "no general WDL or speed inference"
+  ],
+  "initial_failed_command": "Beads ready mistakenly inherited AS512MiB; Go virtual reservation failed before a successful DB operation; retry under existing RSS guard succeeded",
+  "control_correction": "initial source reads had AS512MiB and CPU-time5s; subsequent source/admin operations pinned CPU core5; no scientific process was run"
+}

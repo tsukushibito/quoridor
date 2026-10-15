@@ -1,0 +1,88 @@
+{
+  "issue": "quoridor-4lc.416.4",
+  "thread": "01a13f6c-6d72-7461-8653-e02ca53b6126",
+  "model": "gpt-6-astra",
+  "effort": "high",
+  "actual_fullnever_cwd_verified": true,
+  "closed_and_backup_synced": true,
+  "closure": {
+    "issue": "quoridor-4lc.416.4",
+    "assignee_preserved": "codex:01a13f6c-6d72-7461-8653-e02ca53b6126",
+    "operations": [
+      {
+        "operation": "notes",
+        "exit_code": 0
+      },
+      {
+        "operation": "close",
+        "exit_code": 0
+      },
+      {
+        "operation": "backup",
+        "exit_code": 0
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/lmr-observation416-analysis-v1/result-analysis-v1/report-ja.md",
+      "sha256": "64c8ade959b96c166027ff5dd0e0b44df349e72f5e3d4d3efe9b777b92d8c90d",
+      "bytes": 6871
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/lmr-observation416-analysis-v1/result-analysis-v1/summary.json",
+      "sha256": "1262692d45fb02cc163209a45c372cb690cf4cdc35cb25e4dcc6e0a7f116e87e",
+      "bytes": 9299
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/lmr-observation416-analysis-v1/result-analysis-v1/branches.csv",
+      "sha256": "be13a4a7a3e510bae2d118be02a0b1feb7be20fd235cf69fce10507f2eaed0b4",
+      "bytes": 16832
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/lmr-observation416-analysis-v1/result-analysis-v1/roots.csv",
+      "sha256": "fec06eaa83678e52d2e011c543fb1042370d3c68223ad3b6d62b887375c39cc4",
+      "bytes": 2175
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/lmr-observation416-analysis-v1/result-analysis-v1/coverage.csv",
+      "sha256": "604dbf76a59a727480043525b46fb382d0495d0d9a47886add4d8e9655a75e8f",
+      "bytes": 17660
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/lmr-observation416-analysis-v1/result-analysis-v1/verification.json",
+      "sha256": "a3257018e0ce7d19364d4817ea527030355640a50adf77c7ff26b4fe36ab99df",
+      "bytes": 4418
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/lmr-observation416-analysis-v1/result-analysis-v1/analyze.py",
+      "sha256": "d11cae5e9cf8ab04757aaff3b16d7cff75d5797cb3037bbe97c5655b438c36c1",
+      "bytes": 20431
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/lmr-observation416-analysis-v1/result-analysis-v1/guard.py",
+      "sha256": "e663baafd3abcbb8ae2fdbe51cf96fd1bb73b796cf5ac51c9b6c493a2735b7b2",
+      "bytes": 1437
+    }
+  ],
+  "format_checks": [
+    "code-check/command.log",
+    "report-check/command.log"
+  ],
+  "controls": "CPU5/guardian9/1GiB/GPU0/reserve4GiB; resource-check.json",
+  "delivery": {
+    "method": "turn/start",
+    "thread_id": "01a1376a-bfd3-75d2-bd64-61e9416b3b13",
+    "turn_id": "01a13fcb-bc99-7fa1-a93d-5f155919f1a2",
+    "accepted": true
+  },
+  "admin_notes": [
+    "close-work ran empty Python stdin and made no Beads mutation; closure/ holds actual successful close/backup",
+    "completion-snapshot mistakenly included its active wrapper in absence check; assertion failed, guard reaped it; logs retained and empty TMP removed; current-recorder exclusion corrected here"
+  ],
+  "completion_v2_cleanup_note": "The second snapshot refused a leftover zero-byte uv lock; only those empty lock files were removed after child absence checks. Original failures retained.",
+  "full_source_LLM_admin_cost": "UNKNOWN",
+  "STOP": "STOP.json",
+  "finalize_return": "finalize/return.json",
+  "owned_background_processes": []
+}

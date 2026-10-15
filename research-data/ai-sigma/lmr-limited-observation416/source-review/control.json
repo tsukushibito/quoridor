@@ -1,0 +1,49 @@
+{
+  "issue": "quoridor-4lc.416.3",
+  "reviewer": "codex:01a118a1-aef1-7252-b21b-42f07dd5b1e6",
+  "scope": "fixed 416 original-search observer / post-root independent cold-child probes / measurement consumer",
+  "source_clear": true,
+  "blockers": [],
+  "ordinary": [],
+  "target_source_STOP": {
+    "sha256": "f79617fbb67138f4a6c129bf71eabd84149f92585b06a8184db638ce2e75ba93",
+    "bytes": 64127,
+    "mode": "0644"
+  },
+  "target_binding": {
+    "sha256": "2f8e450d85c7291faa9f2449265ad90b980d9875cf312645cebc0b4e0fed46e7",
+    "bytes": 6126,
+    "mode": "0644"
+  },
+  "immutable_base": "8c54ec630e253dc5b92604a52057b4978a8fea68",
+  "software_grant": false,
+  "numeric_strength_default_grant": false,
+  "reviewer_target_execution_imports_tests_Search_model_calls": 0,
+  "root_calls_max": 12,
+  "selected_branches_max": 48,
+  "cold_scouts_max": 96,
+  "combined_calls_max": 108,
+  "combined_search_node_cap": 21600000,
+  "scope_limits": [
+    "Root / cold probe accounting and clocks are separate; incomplete probes remain UNKNOWN.",
+    "Cold probes use empty TT / continuation / killers, not historical warm snapshots or globally cold models.",
+    "Normal-depth scout remains selective; bounds are not exact game WDL.",
+    "Cold probe PV contains only the directly requested action, not a recovered full line.",
+    "ON/OFF D2 toy does not exercise eligible branch retention inside an actual search.",
+    "Actual native software completion, physical cost, speed, strength and default adoption are outside this verdict."
+  ],
+  "ordinary_root_software_facts_not_reexecuted": {
+    "adoption": "0de3de58",
+    "BUILD_v1": "FAILED 6.918606266s, existing cfg fixture field; assertions not entered",
+    "fixture_only_repair": "6d2580f8",
+    "BUILD_v2": "FAILED 22.657626481s after AI6 / runner2 / research Clippy PASS; diagnostics Clippy initializer style",
+    "initializer_only_repair": "6fdfa44f37faca3264c4634f10f879a4a855c36b",
+    "remaining_software": "UNKNOWN; not inferred PASS"
+  },
+  "required_related_source_correction": null,
+  "write_namespace": "/workspaces/quoridor/.artifacts/research-team/integration324/lmr-limited-observation416-v1/review-v1",
+  "Main_Git_index_Cargo_producer_writes": 0,
+  "ordinary_storage_budget": null,
+  "continuous_family_RSS_peak_and_all_fees": "UNKNOWN",
+  "recipient": "current quoridor-4lc.324 only; no ACK gate"
+}

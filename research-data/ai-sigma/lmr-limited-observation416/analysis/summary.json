@@ -1,0 +1,404 @@
+{
+  "outcomes": [
+    {
+      "evaluator": "distance",
+      "hypothesis": "H0",
+      "Upper/Upper": 8,
+      "Lower/Upper": 3,
+      "Lower/Lower": 1,
+      "Upper/Lower": 0
+    },
+    {
+      "evaluator": "distance",
+      "hypothesis": "H+",
+      "Upper/Upper": 12,
+      "Lower/Upper": 0,
+      "Lower/Lower": 0,
+      "Upper/Lower": 0
+    },
+    {
+      "evaluator": "nnue",
+      "hypothesis": "H0",
+      "Upper/Upper": 7,
+      "Lower/Upper": 4,
+      "Lower/Lower": 1,
+      "Upper/Lower": 0
+    },
+    {
+      "evaluator": "nnue",
+      "hypothesis": "H+",
+      "Upper/Upper": 12,
+      "Lower/Upper": 0,
+      "Lower/Lower": 0,
+      "Upper/Lower": 0
+    }
+  ],
+  "work_by_evaluator_hypothesis_kind": [
+    {
+      "evaluator": "distance",
+      "hypothesis": "H0",
+      "kind": "reduced",
+      "nodes": 1450,
+      "evaluations": 838,
+      "LMR_attempts": 0,
+      "TT_hits": 0
+    },
+    {
+      "evaluator": "distance",
+      "hypothesis": "H0",
+      "kind": "normal",
+      "nodes": 5443,
+      "evaluations": 4464,
+      "LMR_attempts": 98,
+      "TT_hits": 0
+    },
+    {
+      "evaluator": "distance",
+      "hypothesis": "H+",
+      "kind": "reduced",
+      "nodes": 34,
+      "evaluations": 22,
+      "LMR_attempts": 0,
+      "TT_hits": 0
+    },
+    {
+      "evaluator": "distance",
+      "hypothesis": "H+",
+      "kind": "normal",
+      "nodes": 3127,
+      "evaluations": 2299,
+      "LMR_attempts": 0,
+      "TT_hits": 0
+    },
+    {
+      "evaluator": "nnue",
+      "hypothesis": "H0",
+      "kind": "reduced",
+      "nodes": 1725,
+      "evaluations": 1036,
+      "LMR_attempts": 0,
+      "TT_hits": 0
+    },
+    {
+      "evaluator": "nnue",
+      "hypothesis": "H0",
+      "kind": "normal",
+      "nodes": 7573,
+      "evaluations": 6361,
+      "LMR_attempts": 108,
+      "TT_hits": 0
+    },
+    {
+      "evaluator": "nnue",
+      "hypothesis": "H+",
+      "kind": "reduced",
+      "nodes": 26,
+      "evaluations": 14,
+      "LMR_attempts": 0,
+      "TT_hits": 0
+    },
+    {
+      "evaluator": "nnue",
+      "hypothesis": "H+",
+      "kind": "normal",
+      "nodes": 3067,
+      "evaluations": 2279,
+      "LMR_attempts": 0,
+      "TT_hits": 0
+    }
+  ],
+  "warm_cold_same_depth": [
+    {
+      "evaluator": "distance",
+      "hypothesis": "H0",
+      "cold_kind": "normal",
+      "n": 12,
+      "same_bits": 6,
+      "same_bound": 12
+    },
+    {
+      "evaluator": "distance",
+      "hypothesis": "H+",
+      "cold_kind": "reduced",
+      "n": 12,
+      "same_bits": 4,
+      "same_bound": 12
+    },
+    {
+      "evaluator": "nnue",
+      "hypothesis": "H0",
+      "cold_kind": "normal",
+      "n": 12,
+      "same_bits": 1,
+      "same_bound": 11
+    },
+    {
+      "evaluator": "nnue",
+      "hypothesis": "H+",
+      "cold_kind": "reduced",
+      "n": 12,
+      "same_bits": 1,
+      "same_bound": 12
+    }
+  ],
+  "origin_groups_descriptive_only": [
+    {
+      "evaluator": "distance",
+      "origin_group": "B_favourable",
+      "hypothesis": "H+",
+      "bounds": "Upper/Upper",
+      "n": 6
+    },
+    {
+      "evaluator": "distance",
+      "origin_group": "B_favourable",
+      "hypothesis": "H0",
+      "bounds": "Lower/Upper",
+      "n": 2
+    },
+    {
+      "evaluator": "distance",
+      "origin_group": "B_favourable",
+      "hypothesis": "H0",
+      "bounds": "Upper/Upper",
+      "n": 4
+    },
+    {
+      "evaluator": "distance",
+      "origin_group": "B_unfavourable",
+      "hypothesis": "H+",
+      "bounds": "Upper/Upper",
+      "n": 6
+    },
+    {
+      "evaluator": "distance",
+      "origin_group": "B_unfavourable",
+      "hypothesis": "H0",
+      "bounds": "Lower/Lower",
+      "n": 1
+    },
+    {
+      "evaluator": "distance",
+      "origin_group": "B_unfavourable",
+      "hypothesis": "H0",
+      "bounds": "Lower/Upper",
+      "n": 1
+    },
+    {
+      "evaluator": "distance",
+      "origin_group": "B_unfavourable",
+      "hypothesis": "H0",
+      "bounds": "Upper/Upper",
+      "n": 4
+    },
+    {
+      "evaluator": "nnue",
+      "origin_group": "B_favourable",
+      "hypothesis": "H+",
+      "bounds": "Upper/Upper",
+      "n": 6
+    },
+    {
+      "evaluator": "nnue",
+      "origin_group": "B_favourable",
+      "hypothesis": "H0",
+      "bounds": "Lower/Lower",
+      "n": 1
+    },
+    {
+      "evaluator": "nnue",
+      "origin_group": "B_favourable",
+      "hypothesis": "H0",
+      "bounds": "Lower/Upper",
+      "n": 2
+    },
+    {
+      "evaluator": "nnue",
+      "origin_group": "B_favourable",
+      "hypothesis": "H0",
+      "bounds": "Upper/Upper",
+      "n": 3
+    },
+    {
+      "evaluator": "nnue",
+      "origin_group": "B_unfavourable",
+      "hypothesis": "H+",
+      "bounds": "Upper/Upper",
+      "n": 6
+    },
+    {
+      "evaluator": "nnue",
+      "origin_group": "B_unfavourable",
+      "hypothesis": "H0",
+      "bounds": "Lower/Upper",
+      "n": 2
+    },
+    {
+      "evaluator": "nnue",
+      "origin_group": "B_unfavourable",
+      "hypothesis": "H0",
+      "bounds": "Upper/Upper",
+      "n": 4
+    }
+  ],
+  "coverage_by_depth_quantum": [
+    {
+      "evaluator": "distance",
+      "depth": 3,
+      "q_band": "0",
+      "opportunities": 8947,
+      "first_completed": 8947,
+      "first_fail_low": 8923,
+      "normal_confirmations_started": 0,
+      "full_windows_started": 1
+    },
+    {
+      "evaluator": "distance",
+      "depth": 3,
+      "q_band": "1",
+      "opportunities": 74547,
+      "first_completed": 74547,
+      "first_fail_low": 74547,
+      "normal_confirmations_started": 0,
+      "full_windows_started": 0
+    },
+    {
+      "evaluator": "distance",
+      "depth": 3,
+      "q_band": "2+",
+      "opportunities": 0,
+      "first_completed": 0,
+      "first_fail_low": 0,
+      "normal_confirmations_started": 0,
+      "full_windows_started": 0
+    },
+    {
+      "evaluator": "distance",
+      "depth": 4,
+      "q_band": "0",
+      "opportunities": 71,
+      "first_completed": 71,
+      "first_fail_low": 64,
+      "normal_confirmations_started": 0,
+      "full_windows_started": 2
+    },
+    {
+      "evaluator": "distance",
+      "depth": 4,
+      "q_band": "1",
+      "opportunities": 516,
+      "first_completed": 516,
+      "first_fail_low": 323,
+      "normal_confirmations_started": 193,
+      "full_windows_started": 1
+    },
+    {
+      "evaluator": "distance",
+      "depth": 4,
+      "q_band": "2+",
+      "opportunities": 798,
+      "first_completed": 798,
+      "first_fail_low": 791,
+      "normal_confirmations_started": 7,
+      "full_windows_started": 0
+    },
+    {
+      "evaluator": "nnue",
+      "depth": 3,
+      "q_band": "0",
+      "opportunities": 9674,
+      "first_completed": 9674,
+      "first_fail_low": 9601,
+      "normal_confirmations_started": 0,
+      "full_windows_started": 19
+    },
+    {
+      "evaluator": "nnue",
+      "depth": 3,
+      "q_band": "1",
+      "opportunities": 82874,
+      "first_completed": 82874,
+      "first_fail_low": 82874,
+      "normal_confirmations_started": 0,
+      "full_windows_started": 0
+    },
+    {
+      "evaluator": "nnue",
+      "depth": 3,
+      "q_band": "2+",
+      "opportunities": 0,
+      "first_completed": 0,
+      "first_fail_low": 0,
+      "normal_confirmations_started": 0,
+      "full_windows_started": 0
+    },
+    {
+      "evaluator": "nnue",
+      "depth": 4,
+      "q_band": "0",
+      "opportunities": 86,
+      "first_completed": 86,
+      "first_fail_low": 76,
+      "normal_confirmations_started": 0,
+      "full_windows_started": 3
+    },
+    {
+      "evaluator": "nnue",
+      "depth": 4,
+      "q_band": "1",
+      "opportunities": 645,
+      "first_completed": 645,
+      "first_fail_low": 353,
+      "normal_confirmations_started": 292,
+      "full_windows_started": 3
+    },
+    {
+      "evaluator": "nnue",
+      "depth": 4,
+      "q_band": "2+",
+      "opportunities": 1080,
+      "first_completed": 1080,
+      "first_fail_low": 1077,
+      "normal_confirmations_started": 3,
+      "full_windows_started": 0
+    }
+  ],
+  "selected_ranks": {
+    "('H0', 3, 0, 4)": 12,
+    "('H0', 4, 0, 4)": 11,
+    "('H+', 3, 1, 16)": 12,
+    "('H+', 4, 2, 52)": 12,
+    "('H0', 4, 0, 5)": 1
+  },
+  "selected_parent_plies": {
+    "1": 48
+  },
+  "root_nodes": 4062877,
+  "root_evaluations": 3479326,
+  "probe_nodes": 22445,
+  "probe_evaluations": 17313,
+  "original_outer_seconds": 12.304373927996494,
+  "operation_clocks_not_additive_to_outer": [
+    {
+      "evaluator": "distance",
+      "whole_seconds": 2.046047717,
+      "setup_seconds": 0.00667556,
+      "drop_seconds": 1.1423e-05
+    },
+    {
+      "evaluator": "nnue",
+      "whole_seconds": 3.424729335,
+      "setup_seconds": 0.006361919,
+      "drop_seconds": 0.000108534
+    }
+  ],
+  "probe_internal_seconds_sum_separate_scope": 0.023669895,
+  "probe_whole_seconds_sum_separate_scope": 1.995171665,
+  "artifact_ref_from_saved_settings_only": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner416-observation-v3",
+    "sha256": "85a7c2b9db0061cc066010cd8458906a3e41a7f53c490da726d4268ca30efa2b",
+    "bytes": 9004392,
+    "mode": "0755"
+  },
+  "native_input_admission_reused_not_replayed": "All12 canonical full chronological prefix/validate_normal +opening4 counts separately and divergenceboard checks returned; from_counts not used"
+}

@@ -1,0 +1,36 @@
+{
+  "at": "2026-10-15T13:45:54.265733+00:00",
+  "roots": [
+    "/workspaces/quoridor/.artifacts/research-team/integration324/lmr-limited-observation416-v1",
+    "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-observation416-source-v1",
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/lmr-observation416-analysis-v1",
+    "/workspaces/quoridor/.worktree/assets/perf/lmr-observation416-diagnostic108-v1",
+    "/workspaces/quoridor/research-data/ai-sigma/lmr-limited-observation416",
+    "/workspaces/quoridor/docs/research-findings.md",
+    "/workspaces/quoridor/docs/design/lightweight-move-ordering-v1.md",
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner416-observation-v3"
+  ],
+  "allocated_B": 28172288,
+  "prior_conservative_covered_upper_B": 49247571968,
+  "shared_pool_original_snapshots": [
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/lmr-aggressive413-v1/retirement-build-v1/operation-v1/storage-usage.json",
+      "sha256": "fe9e46d9e1b29df3129f5c128549954b7e5d322cecb2b95a8cdde702dfd4f28d",
+      "bytes": 938,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/lmr-limited-observation416-v1/compatible-build-v3/operation-v1/storage-usage.json",
+      "sha256": "0ba8b400cb68cf85b8e21904dae2cf623d0449cd65062ca53bcfd510e455f429",
+      "bytes": 956,
+      "mode": "0644"
+    }
+  ],
+  "old_operation_current_upper_B": 1273856,
+  "new_image_already_in_directed_union_B": 9007104,
+  "shared_target_increment_conservative_upper_B": 3031040,
+  "conservative_sum_B": 49278775296,
+  "global_actual_B": null,
+  "storage_budget": null,
+  "scope": "Whole416 directed retained union once/inode dedup before this usage/Git/admin tail; all leaf snapshots included, not added again. Shared target full holding not charged: only conservative positive residual from matched pool snapshots, excluding already counted image and never refunding decreases. No model/oldRAW/global walk. Affected existing docs included conservatively."
+}

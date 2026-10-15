@@ -2044,3 +2044,13 @@ source調査では、既存TT hit/旧M成功は追加0、旧M幾何UNKNOWNかつ
 後続の具体案はOFF/旧M/新L、2評価器×LMR OFF/ON-depth_rankを別層、O→M→L→L→M→O、元411の8真正prefix各cold→同session warm、Control/PVS/TT1M/旧近似OFF/D8/各4M nodes/時間上限なし。384calls/192sessions/最大1.536B nodes。setup/reset/history/maps/Search/drop込みwholeと各root/温度/反復、fresh追加幾何/履歴通過/実proof/TTを分け、重い残壁6/4への効果も未測定のまま確認する案である。同policyの非時計一致と異policyの選択木/value/PV/work差、UNKNOWNを分け、同仕事速度・全幅/ゲームroot exactへ昇格しない。入力/上限/候補の結果依存変更、refill/新対局/fitは足さない。
 
 計画と根拠の完了であって、実装/software/速度・棋力・既定採用の認定や384calls入場ではない。将来のimage/Build/runtime/admissionはnullのまま。元source/RAW/失敗/STOPと新predicate外側1.920527222秒（child1.764705522秒は内包）を保持し、全source/LLM/admin費・連続RSS・孤立費はUNKNOWN。[計画・証拠](../research-data/ai-sigma/zero-stock-detour414/report-ja.md)。旧411/412/413/415と人間選択の通常研究LMR標準、製品/generator enable OFF、全mixed/learner prep/pipeline・323 USERPAUSE、models/weights/seals/oldfits96/foreign変更を維持する。
+
+### 可変LMRの限定観測とAstra High分析（416、2026-10-15）
+
+元415の固定12局面を同じ完全prefix/historyで一度だけ観測した。Sol6.1/high実装、別Sol6.1/maxによるprobe隔離/window/depth/history/controlの限定source確認、同じAstra/highによる観測設計・保存分析を分担した。モデル間の優劣比較はしていない。genuine image85a7c2b9/Build7a94ae05、NNUE BEST43/固定D(0,8,tanh)、Control/PVS/TT1M/LMR ON-depth_rank、近似/安全先着/他observer OFF。各clean rootD5/1M終了後、H0 q0/rank4..8のparentd3/d4とH+ completed shallow fail-low q1/q2+の各先頭を最大4枝、独立cold internal childのreduced/normal各100Kで照合した。元sessionに追加確認を書き戻さず、同親STM/postTT alpha/1ULP窓/nonroot ply/完全履歴とroot・depth境界を保つ。
+
+実12root＋48枝×2probe=108呼出し、全COMPLETE、UNKNOWN/欠測/補充0。root4,062,877＋probe22,445=4,085,322 nodes、21.6M上限内。H0のcold reduced/normal boundsは固定D 8UU/3LU/1LL、NNUE7UU/4LU/1LL、H+は両評価器12UU。両仮説のUpper/Lowerは各0/24で、この先頭枝集合では「浅いとalpha以下、通常深さならalpha超え」の例を得ていない。方式変更を支持する新根拠にはならず、q0の確認scout省略による費用価値も未測定。
+
+48枝全てparent ply1、H0のrank4は23/24、H+はrank16/q1とrank52/q2に偏る。H+元shallowとcold reducedはbound24/24一致でもbits一致5/24、H0 normalのNNUE family2では元Upper→coldLowerが1件。coldは元warmの正確な反実仮想/WDL/一手oracleではなく、通常深さにも下位LMRが残る。旧392勝因・一般棋力・whole速度・見落とし率へ外挿しない。probe PVは親action一手だけ。全canonical入力admissionと親復元/停止を保存確認した。
+
+研究標準depth_rankと製品/generator enable OFFを維持し、bounded research-diagnostics observe_lmrは明示opt-in/default false。次案は最終反復d3/ply2等の固定少数観測と、必要ならnormal直接対reduced＋必要時normalの実手順費比較の二つで、提案のみ・新実行なし。新AI6/runner2は元v2FAILED内PASSとして保持し、test-only field/initializer修復後に未実行Clippy/releaseだけ進め、成功suiteの再演0。原software外側123.907115816秒（FAILED込み）と診断12.304373928秒は各一度、nested probe時計を足さず、全source/LLM/admin/physical NN/連続RSS/孤立費はUNKNOWN。[設定・原結果・詳細分析・STOP](../research-data/ai-sigma/lmr-limited-observation416/report-ja.md)。全mixed/learner prep/pipeline・323 USERPAUSE、models/weights/seals/oldfits96/foreign変更、旧RAW/FAILED/費UNKNOWN、414未発行を保持する。
