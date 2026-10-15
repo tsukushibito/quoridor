@@ -237,10 +237,11 @@ fn call(
         eval,
         namespace,
         1_048_576,
-        OrderingProfile::Control,
+        alphabeta::ScoreDomain::LEGACY,
+        OrderingProfile::CheapStaticControl,
+        false,
         false,
     )?;
-    session.set_lmr(false);
     session.set_zero_stock_approx_min_root_walls(None)?;
     session.set_zero_stock_safe_race(false);
     let capacity = session.tt_capacity();
