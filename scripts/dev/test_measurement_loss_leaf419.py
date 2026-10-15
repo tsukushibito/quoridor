@@ -2,6 +2,7 @@
 
 import ast
 from copy import deepcopy
+import json
 from pathlib import Path
 import unittest
 
@@ -29,6 +30,68 @@ def measurement_config():
 
 
 class LossLeaf419Admission(unittest.TestCase):
+    def test_rich_diagnostic_and_missing_counts_remain_unknown_nn0(self):
+        source = Path(__file__).with_name("research-lifecycle.py")
+        tree = ast.parse(source.read_text())
+        selected = next(
+            node
+            for node in tree.body
+            if isinstance(node, ast.FunctionDef) and node.name == "measurement_evidence"
+        )
+
+        def require(condition, message):
+            if not condition:
+                raise ValueError(message)
+
+        namespace = {
+            "json": json,
+            "require": require,
+            "sha": lambda data: str(len(data)),
+            "CONTROL_BYTES": 512,
+        }
+        exec(
+            compile(ast.Module(body=[selected], type_ignores=[]), str(source), "exec"),
+            namespace,
+        )
+        collect = namespace["measurement_evidence"]
+        spec = {
+            "data": [
+                {"name": "result", "path": "/toy/result.json"},
+                {"name": "measurements", "path": "/toy/measurements.jsonl"},
+            ]
+        }
+        files = [{"path": item["path"]} for item in spec["data"]]
+        row = {"status": "COMPLETE", "id": "normal"}
+        journal = json.dumps(row).encode() + b"\n"
+        result = {"measurements": [row], "errors": []}
+        observed = collect(
+            spec, {}, {"result": json.dumps(result).encode(), "measurements": journal}
+        )
+        self.assertNotIn("calls", observed["result"])
+        self.assertTrue(observed["journal_result_rows_agree"])
+        self.assertEqual(observed["observed_complete"], 1)
+        result.update(trees=["bounded-raw-tree" * 100], census={"actual_calls": 1})
+        observed = collect(
+            spec,
+            {},
+            {"result": json.dumps(result).encode(), "measurements": journal},
+            files=files,
+        )
+        self.assertEqual(observed["result_file"], files[0])
+        self.assertFalse(observed["result"]["records_embedded"])
+        self.assertEqual(observed["result"]["census"], {"actual_calls": 1})
+        self.assertNotIn("calls", observed["result"])
+        self.assertNotIn("trees", observed["result"])
+        partial = {"errors": [{"stage": "input"}]}
+        observed = collect(
+            spec, {}, {"result": json.dumps(partial).encode(), "measurements": journal}
+        )
+        self.assertEqual(observed["recorded_prefix"], [row])
+        self.assertFalse(observed["unreturned_tail"])
+        result["calls"] = "unknown"
+        with self.assertRaises(ValueError):
+            collect(spec, {}, {"result": json.dumps(result).encode()})
+
     def test_fixed_scope_and_explicit_boolean_refusals_nn0(self):
         check = measurement_config()
         ids = [

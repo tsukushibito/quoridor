@@ -1224,14 +1224,18 @@ def measurement_evidence(spec, experiment, values, *, files=()):
     )
     if result is not None:
         require(
-            isinstance(result, dict) and isinstance(result.get("measurements"), list),
+            isinstance(result, dict)
+            and (
+                "measurements" not in result or isinstance(result["measurements"], list)
+            ),
             "measurement result shape",
         )
         for key in ("planned", "calls", "complete", "uncompleted", "unperformed"):
-            require(
-                type(result.get(key)) is int and result[key] >= 0,
-                "measurement count type: " + key,
-            )
+            if key in result:
+                require(
+                    type(result[key]) is int and result[key] >= 0,
+                    "measurement count type: " + key,
+                )
         require(isinstance(result.get("errors"), list), "measurement errors array")
     raw_refs = [
         ref
@@ -1240,19 +1244,54 @@ def measurement_evidence(spec, experiment, values, *, files=()):
     ]
     if result is not None and spec.get("perf"):
         result = {**result, "perf_RAW": raw_refs}
+    result_rows = result.get("measurements") if result is not None else None
+    result_inline = result
+    result_file = None
+    if result is not None and len(values["result"]) > CONTROL_BYTES // 4:
+        result_path = next(
+            item["path"] for item in spec["data"] if item["name"] == "result"
+        )
+        result_file = next(ref for ref in files if ref["path"] == result_path)
+        result_inline = {
+            key: result[key]
+            for key in (
+                "schema",
+                "status",
+                "planned",
+                "calls",
+                "complete",
+                "uncompleted",
+                "unperformed",
+                "errors",
+                "census",
+                "runtime_launch_origin",
+            )
+            if key in result
+        }
+        result_inline["records_embedded"] = False
+    recorded_prefix = rows if not isinstance(result_rows, list) else None
+    recorded_prefix_file = None
+    if recorded_prefix is not None and len(journal) > CONTROL_BYTES // 4:
+        journal_path = next(
+            item["path"] for item in spec["data"] if item["name"] == "measurements"
+        )
+        recorded_prefix_file = next(ref for ref in files if ref["path"] == journal_path)
+        recorded_prefix = None
     return {
         "settings": snapshot,
-        "result": result,
+        "result": result_inline,
+        "result_file": result_file,
         "journal_rows": len(rows),
         "journal_partial_tail": bool(tail),
         "journal_tail_bytes": len(tail),
         "journal_tail_sha256": sha(tail) if tail else None,
         "observed_complete": sum(row.get("status") == "COMPLETE" for row in rows),
-        "journal_result_rows_agree": len(rows) == len(result["measurements"])
-        if result
+        "journal_result_rows_agree": len(rows) == len(result_rows)
+        if isinstance(result_rows, list)
         else None,
         "unreturned_tail": result is None,
-        "recorded_prefix": rows if result is None else None,
+        "recorded_prefix": recorded_prefix,
+        "recorded_prefix_file": recorded_prefix_file,
         "runtime_launch_origin": result.get("runtime_launch_origin")
         if result
         else snapshot.get("runtime_launch_origin")
