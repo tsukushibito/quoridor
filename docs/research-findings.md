@@ -2098,3 +2098,5 @@ H3の同親とslot5/ply12では固定4endpointを同時置換しても、別の�
 生成はControl/PVS/TT1M/LMR ON-depth_rank、名目D6、近似/safe OFF。当初の各手2M案から、既存保存D6仕事量を根拠に2/4/8Mの一つを新規結果前に固定できる契約へ更新した。全生成1G nodes、64 requests、200ply、最大8game workersは維持する。別の最大16評価系列を事前分離し、checkpoint選択後の探索は最大24calls/48M nodes、初回棋力確認は4対照×16系列×二色の最大128局/全arena1G nodes。fit・測定・必要な変更重み照合は合計6M logical row-forwards。科学出力はwhole256MiBの部分停止上限で、完了件数の保証ではない。未完了・欠測・負の結果を追加生成やfitで補充しない。
 
 旧1280の途中RAW/STOP/費、323/旧fits96、封印newE、既存モデル、製品/generatorの省略時既定、foreign変更は保持する。421内の候補重みを正式採用・棋力改善とする許可ではない。解決したseed・入力・実資源・設定と結果はこの節と既存設計へ統合し、状態と担当はBeadsに残す。
+
+421の[固定spec](../.worktree/arena-generalization377/.artifacts/research-team/nnue-diverse421-analysis-v1/spec.json)は生成各手4M nodesを選択した。旧408の固定D/Control/depth_rank・cold family34で名目D6完成の累積1,431,825 nodesが同work二反復一致したことを根拠に余裕を取る選択で、新prefixでの完成保証や最適な上限ではない。全生成1G・補充なしを保つ。64 requestsを64 unique familiesと仮定せず、保守的にR<=2048/U<=64、共有INITIALと変更重み照合を含むforward設計上限4,013,502行を6M内に収める。小Rでは端数により各行の露出が4/5回を大きく超す場合があるため、実抽出回数を記録する。これらは新しい数値結果ではなく、実入力・source/software入場前の固定条件である。
