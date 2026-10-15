@@ -407,3 +407,9 @@ wholeは6root body・setup/drop・採点・key保存/cache・再探索込みの�
 必要softwareは新6＋影響4のordering確認、設定／幾何新4Rust、共通準備NN0新1、必要compile/research＋diagnostics Clippy／真正releaseと限定source関連確認を使用。元のfixture InvalidPosition/Result unwrap、proof/guard/helper/collectorの失敗・費・NULL/returnedとpersisted masksは原scopeで保持し、成功suiteを再演していない。非重複数値outerは848.439982407s、元失敗を含む必要software五job outerは231.679882676s。nested native/guardian/sequenceを加算しない。source/LLM/admin/saved解析の全費はUNKNOWN、個別receiptは別に保存。実STOP/directwait/reap/handles/freshidentity/TMP消失と一回のaffected実使用を記録し、共有targetは正の増分だけを扱う。
 
 設定・原結果・source/修復・software/review・失敗・STOPは[保存receipt](../../research-data/ai-sigma/shared-signed-ordering402/receipt.json)、[結果報告](../../research-data/ai-sigma/shared-signed-ordering402/report-ja.md)へ結ぶ。旧393/398不採用・旧400結果・全RAW/FAILED/費UNKNOWN、oldfits96/defaults/weights/seals、foreign devcontainer変更は不変。
+
+## 計画：零在庫近似の方法選択（407）
+
+406の距離＋手番raceを固定した速度比較とは分け、共通Searchで近似方法を選べる設定を後続差分として準備する。最初はraceの±1と既存固定D(0,8,tanh)の二方法のみ。発動可否の設定から方法を独立させ、方法省略時はrace、発動無効時は通常Searchを維持する。既存固定Dの評価正本を再用し、別の評価器やplaceholder solver modeを作らない。有効な方法を既存TT method／resetと各Searchの解決済み設定へ反映する。
+
+406 sourceの自然な凍結境界から私有準備は可能だが、現406の式・image・入力・96 callsを変更せず、その入口gateにしない。Main統合と影響softwareは406の実速度計測STOP後とする。追加の数値範囲は現結果後に定め、今回の計画追加から新しいSearch／arena／fitは発行しない。製品・generator既定、モデル、全明示USERPAUSEは維持する。

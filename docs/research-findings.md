@@ -1914,3 +1914,9 @@ wholeは6root body・setup/drop・採点・key保存/cache・再探索込みの�
 同じ6壁の保存graph全610局面／1,460辺は、既存の独立参照がW330／L258／D22と全辺・rank・D選択を照合済み。関連担当はその保存証拠だけを読み、solverを再実行していない。Dには即goal／L子がなくD子があり、双方が非敗手を選べる。W子へ出る負ける逸脱もあるため全応手がDとは言わない。有限盤面でDを続ければ盤面＋手番が反復し、goal優先threefoldではdrawとなる。最初に保存されたD raw315は、prefix到達先raw376とは区別している。9×9／20壁への埋込み、他の初期在庫、全履歴の一般定理、初期からの最善playはUNKNOWNのままである。
 
 native解析37.179403007sと全辺検証21.243242802s、出力等込みpilot＋4補集合native whole合計68.344707919s、列挙native0.036620924sを保存した。元6outer jobの非重複合計77.074679146sは別scopeで、nested nativeを足さない。software元5command合計4.713499854sも別scopeである。4並列jobは起動時刻がずれ、これらの和をpipeline elapsedや4倍速としない。native VmHWMは約2.2MiB/process、continuous family peakとLLMを含む全費用はUNKNOWN。全原jobのdirectwait/reap・fresh identity absence・TMP/lease解放を確認し、元formatter/helper失敗、capture erratum、returnedとdisk maskの違い、旧RAW／FAILED／費は保持した。製品Search・TT・モデル・既定値へ数学solverを接続していない。mixed／learner全準備・pipelineと323 USERPAUSEは維持する。
+
+### 零在庫近似の方法選択を別差分で計画する（407）
+
+406の速度優先比較は、距離＋手番raceの±1という固定式と同じimage・4prefix・96 callsを維持する。後続407では、発動可否とは独立した近似方法の選択を共通Search設定へ追加する。最初の二方法だけを対象とし、既存raceと既存固定D(0,8,tanh)の評価正本を再用する。方法未指定ならraceを保ち、発動無効なら通常Searchのままである。新しい評価器の複製、未実装solver用のmode、研究profileやframework、製品既定の昇格は作らない。
+
+有効な方法の違いは既存method namespace／resetへ束縛し、Search結果の解決済み設定へ記録する。共通の発動条件・真のgoal／threefold優先・通常depth0評価とは別の責務として扱う。探索作者の406 sourceが凍結・書込解放された自然な境界から私有設計／source準備は進められるが、406を上書きせず開始gateにもせず、Main統合と影響softwareは406の実速度計測STOP後にする。追加の数値比較範囲は406の結果後に定めるため、今回の計画追加ではSearch campaign・対局・fitを発行しない。[人間の追加計画](../.artifacts/research-policy/zero-stock-approx-speed-20261015.md)を根拠とし、状態はBeads407で扱う。
