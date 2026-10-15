@@ -1008,6 +1008,7 @@ def measurement_config(experiment):
                 "diagnostic",
                 "warmup",
                 "observe_completed_depths",
+                "observe_lmr",
             }
             and all(
                 isinstance(request[k], str) and request[k] for k in ("id", "session")
@@ -1032,7 +1033,12 @@ def measurement_config(experiment):
         require(
             all(
                 type(request.get(k, False)) is bool
-                for k in ("diagnostic", "warmup", "observe_completed_depths")
+                for k in (
+                    "diagnostic",
+                    "warmup",
+                    "observe_completed_depths",
+                    "observe_lmr",
+                )
             ),
             "measurement request switches",
         )
@@ -1042,6 +1048,41 @@ def measurement_config(experiment):
             if active is not None:
                 closed.add(active)
             active = request["session"]
+    if any(r.get("observe_lmr", False) for r in requests):
+        require(
+            len(requests) <= 12
+            and len({r["session"] for r in requests}) == len(requests)
+            and len({r["root"] for r in requests}) == len(requests)
+            and config["profile"] == "control"
+            and config["tt_entries"] == 1048576
+            and config["use_tt"]
+            and config["use_pvs"]
+            and config.get("lmr", False)
+            and lmr_method == "depth_rank"
+            and threshold is None
+            and not config.get("zero_stock_safe_race", False)
+            and all(
+                r.get("observe_lmr", False)
+                and r["depth"] == 5
+                and r["node_cap"] == 1000000
+                and r.get("time_limit_ms") is None
+                and not r.get("diagnostic", False)
+                and not r.get("warmup", False)
+                and not r.get("observe_completed_depths", False)
+                for r in requests
+            ),
+            "bounded LMR observation cold Control/depth_rank D5/1M TT1M scope",
+        )
+        require(
+            all(
+                r["field"] == "prefix"
+                and r.get("prefix_len") is None
+                and r.get("jsonl_match") is None
+                and not r.get("check_history", False)
+                for r in config["roots"]
+            ),
+            "LMR observation complete-prefix selectors",
+        )
     return config, requests
 
 

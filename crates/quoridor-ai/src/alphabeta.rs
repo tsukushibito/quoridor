@@ -20,6 +20,14 @@ pub use continuation_history::OrderingStats;
 use continuation_history::{ContinuationHistory, OrderingNodeWork, PlayedMove};
 #[path = "cheap_static_ordering.rs"]
 mod cheap_static_ordering;
+#[cfg(feature = "research-diagnostics")]
+#[path = "lmr_observation416.rs"]
+mod lmr_observation416;
+#[cfg(feature = "research-diagnostics")]
+pub use lmr_observation416::{
+    LmrBranch, LmrBranchFacts, LmrColdProbe, LmrCoverage, LmrObservation, LmrStage, LmrTtFacts,
+};
+
 #[path = "move_ordering.rs"]
 mod move_ordering;
 #[path = "static_geometry.rs"]
@@ -1202,7 +1210,7 @@ impl From<RulesError> for Interrupted {
     }
 }
 type NodeResult<T> = std::result::Result<T, Interrupted>;
-struct Search<'a> {
+struct Search<'a, const OBSERVE: bool = false> {
     eval: &'a dyn StaticEvaluator,
     score_domain: ScoreDomain,
     eval_scratch: EvalScratch,
@@ -1224,8 +1232,10 @@ struct Search<'a> {
     lmr: bool,
     #[cfg(feature = "research-diagnostics")]
     history: [u64; 209],
+    #[cfg(feature = "research-diagnostics")]
+    lmr_observation: Option<&'a mut LmrObservation>,
 }
-impl Search<'_> {
+impl<const OBSERVE: bool> Search<'_, OBSERVE> {
     fn key(&mut self, c: &SigmaContext) -> Key {
         let key = Key::of(c);
         self.stats.tt_key_builds += 1;
@@ -1505,6 +1515,10 @@ impl Search<'_> {
         window: [f32; 2],
         ply: usize,
     ) -> NodeResult<f32> {
+        #[cfg(feature = "research-diagnostics")]
+        if OBSERVE && let Some(o) = self.lmr_observation.as_deref_mut() {
+            o.child_start(ply - 1, action, depth, window);
+        }
         self.control()?;
         let mover = c.position().turn;
         let undo = c.make_move(action)?;
@@ -1601,7 +1615,12 @@ impl Search<'_> {
         }
         self.context = parent_context;
         self.board = parent_board;
-        result.map(|v| -v)
+        let result = result.map(|v| -v);
+        #[cfg(feature = "research-diagnostics")]
+        if OBSERVE && let Some(o) = self.lmr_observation.as_deref_mut() {
+            o.child_return(c, &self.path, ply - 1, action, &result);
+        }
+        result
     }
 
     fn safe_race_value(
@@ -1945,16 +1964,52 @@ impl Search<'_> {
                 }
                 action
             };
-            let reduction = if self.lmr
+            let eligible = self.lmr
                 && moves
                     .as_ref()
-                    .is_some_and(|moves| self.lmr_allowed(action, depth, i, alpha, tt_move, moves))
-            {
+                    .is_some_and(|moves| self.lmr_allowed(action, depth, i, alpha, tt_move, moves));
+            let reduction = if eligible {
                 // i counts distinct hands, including TT-first; re-search never advances it.
                 self.stats.lmr_method.reduction(depth, i + 1)
             } else {
                 0
             };
+            #[cfg(feature = "research-diagnostics")]
+            if OBSERVE
+                && eligible
+                && let Some(o) = self.lmr_observation.as_deref_mut()
+            {
+                let tt = hit.map(|(stored_depth, _, bound, _, context_matches)| LmrTtFacts {
+                    stored_depth,
+                    bound: match bound {
+                        Bound::Exact => "Exact",
+                        Bound::Lower => "Lower",
+                        Bound::Upper => "Upper",
+                        Bound::ApproxLeaf => "ApproxLeaf",
+                        Bound::SafeRaceLeaf => "SafeRaceLeaf",
+                    },
+                    context_matches,
+                    usable_depth: tt_move.is_some() && context_matches && stored_depth == depth,
+                    legal_move: tt_move,
+                });
+                o.begin(
+                    c,
+                    &self.path,
+                    LmrBranchFacts {
+                        hypothesis: "",
+                        iteration_depth: 0,
+                        visit: 0,
+                        parent_depth: depth,
+                        parent_ply: ply,
+                        parent_stm: c.position().turn,
+                        distinct_rank: i + 1,
+                        action,
+                        quantum: reduction,
+                        alpha_beta_bits: [alpha.to_bits(), beta.to_bits()],
+                        tt,
+                    },
+                );
+            }
             let reduced = reduction > 0;
             let mut v = if reduced {
                 self.reduced_child(
@@ -1974,6 +2029,10 @@ impl Search<'_> {
                 self.stats.pvs_researches += 1;
                 self.stats.lmr_full_window_researches += u64::from(reduced);
                 v = self.child(c, a, action, depth - 1, [alpha, beta], ply + 1)?;
+            }
+            #[cfg(feature = "research-diagnostics")]
+            if OBSERVE && let Some(o) = self.lmr_observation.as_deref_mut() {
+                o.frames[ply] = None;
             }
             if let Some(work) = node_work.as_mut() {
                 work.returned(&mut self.stats.ordering);
@@ -2297,13 +2356,13 @@ pub fn search_with_orderer(
 ) -> Result<SearchResult> {
     let mut table = Table::new(if limits.use_tt { limits.tt_entries } else { 0 })?;
     let mut ordering = ContinuationHistory::new()?;
-    search_in_table(
+    search_in_table::<false>(
         root,
         evaluator,
         limits,
         cancel,
         orderer,
-        on_completed,
+        SearchInvocation::root(on_completed),
         (
             &mut table,
             ScoreDomain::LEGACY,
@@ -2762,13 +2821,13 @@ impl SearchSession {
             root_walls,
             limits.max_depth,
         ));
-        search_in_table(
+        search_in_table::<false>(
             root,
             self.evaluator.as_ref(),
             limits,
             cancel,
             None,
-            on_completed,
+            SearchInvocation::root(on_completed),
             (
                 &mut self.table,
                 self.score_domain,
@@ -2795,13 +2854,32 @@ type SearchTableAndDomain<'table, 'history> = (
     (bool, ZeroStockApproxMethod, bool),
 );
 
-fn search_in_table(
+struct SearchInvocation<'a> {
+    on_completed: &'a mut dyn FnMut(&SearchResult),
+    #[cfg(feature = "research-diagnostics")]
+    observation: Option<&'a mut LmrObservation>,
+    #[cfg(feature = "research-diagnostics")]
+    cold: Option<lmr_observation416::ColdScout<'a>>,
+}
+impl<'a> SearchInvocation<'a> {
+    fn root(on_completed: &'a mut dyn FnMut(&SearchResult)) -> Self {
+        Self {
+            on_completed,
+            #[cfg(feature = "research-diagnostics")]
+            observation: None,
+            #[cfg(feature = "research-diagnostics")]
+            cold: None,
+        }
+    }
+}
+
+fn search_in_table<const OBSERVE: bool>(
     root: &SigmaContext,
     evaluator: &dyn StaticEvaluator,
     limits: &SearchLimits,
     cancel: &AtomicBool,
     orderer: Option<&dyn MoveOrderer>,
-    on_completed: &mut dyn FnMut(&SearchResult),
+    invocation: SearchInvocation<'_>,
     table_and_domain: SearchTableAndDomain<'_, '_>,
 ) -> Result<SearchResult> {
     let (
@@ -2866,7 +2944,7 @@ fn search_in_table(
         .into_iter()
         .map(u16::from)
         .sum();
-    let mut state = Search {
+    let mut state = Search::<OBSERVE> {
         eval: evaluator,
         score_domain,
         eval_scratch: evaluator.create_scratch(),
@@ -2913,7 +2991,13 @@ fn search_in_table(
         lmr,
         #[cfg(feature = "research-diagnostics")]
         history: [0; 209],
+        #[cfg(feature = "research-diagnostics")]
+        lmr_observation: invocation.observation,
     };
+    #[cfg(feature = "research-diagnostics")]
+    if let Some(cold) = &invocation.cold {
+        state.path.extend_from_slice(cold.path);
+    }
     let mut result = SearchResult {
         action: None,
         value: None,
@@ -2934,7 +3018,30 @@ fn search_in_table(
         let a = evaluator.prepare_context(&c)?;
         state.control()?;
         state.child_buffers = evaluator.create_child_storage(limits.max_depth as usize + 1);
+        #[cfg(feature = "research-diagnostics")]
+        if let Some(cold) = &invocation.cold {
+            // Exactly one internal child/scout; no parent/root iteration or confirmation.
+            cold.child_called.set(true);
+            let value = state.child(
+                &mut c,
+                a.as_ref(),
+                cold.action,
+                cold.depth,
+                [cold.alpha, next_up(cold.alpha)],
+                cold.parent_ply + 1,
+            )?;
+            state.control()?;
+            result.action = Some(cold.action);
+            result.value = Some(value);
+            result.completed_depth = cold.depth;
+            result.pv = vec![cold.action];
+            return Ok(());
+        }
         for depth in 1..=limits.max_depth {
+            #[cfg(feature = "research-diagnostics")]
+            if OBSERVE && let Some(o) = state.lmr_observation.as_deref_mut() {
+                o.iteration = depth;
+            }
             state.table.next_generation();
             let (action, value) = state.root_depth(&mut c, a.as_ref(), depth, result.action)?;
             let pv = state.pv(&c, action, depth);
@@ -2949,7 +3056,7 @@ fn search_in_table(
             result.stats = state.stats.clone();
             result.elapsed = state.start.elapsed();
             state.table.committed = state.table.generation;
-            on_completed(&result);
+            (invocation.on_completed)(&result);
         }
         Ok(())
     })();
@@ -2961,7 +3068,20 @@ fn search_in_table(
         || c.history_counts() != root.history_counts()
         || state.context != root_context
         || state.board != root_board
-        || !state.path.is_empty()
+        || {
+            #[cfg(feature = "research-diagnostics")]
+            {
+                if let Some(cold) = &invocation.cold {
+                    state.path != cold.path
+                } else {
+                    !state.path.is_empty()
+                }
+            }
+            #[cfg(not(feature = "research-diagnostics"))]
+            {
+                !state.path.is_empty()
+            }
+        }
     {
         state.table.clear();
         if let Some(history) = state.ordering.as_deref_mut() {
@@ -2978,7 +3098,18 @@ fn search_in_table(
     }
     state.stats.tt_retained_bytes = state.table.retained_bytes();
     state.stats.tt_generation = state.table.generation;
-    if result.completed_depth > 0
+    let ordinary_root = {
+        #[cfg(feature = "research-diagnostics")]
+        {
+            invocation.cold.is_none()
+        }
+        #[cfg(not(feature = "research-diagnostics"))]
+        {
+            true
+        }
+    };
+    if ordinary_root
+        && result.completed_depth > 0
         && let Some(history) = state.ordering.as_deref_mut()
     {
         history.finish_valid_root(&mut state.stats.ordering);
@@ -3255,7 +3386,7 @@ mod persistent_tt_tests {
             table.committed = table.generation;
             let l = limits(1, true, 4096);
             let cancel = AtomicBool::new(false);
-            let mut state = Search {
+            let mut state = Search::<false> {
                 eval: e.as_ref(),
                 score_domain: ScoreDomain::LEGACY,
                 eval_scratch: e.create_scratch(),
@@ -3277,6 +3408,8 @@ mod persistent_tt_tests {
                 lmr: false,
                 #[cfg(feature = "research-diagnostics")]
                 history: [0; 209],
+                #[cfg(feature = "research-diagnostics")]
+                lmr_observation: None,
             };
             let mut child = root.clone();
             let value = state
@@ -3338,13 +3471,13 @@ mod persistent_tt_tests {
         let mut cancel_table = Table::persistent(4096).unwrap();
         let cancel = AtomicBool::new(false);
         let before = Key::of(&root);
-        let r = search_in_table(
+        let r = search_in_table::<false>(
             &root,
             e.as_ref(),
             &limits(3, true, 4096),
             &cancel,
             None,
-            &mut |_| cancel.store(true, Ordering::Relaxed),
+            SearchInvocation::root(&mut |_| cancel.store(true, Ordering::Relaxed)),
             (
                 &mut cancel_table,
                 ScoreDomain::LEGACY,
@@ -3940,7 +4073,7 @@ mod child_buffer_tests {
             let position = c.position();
             let history = c.history_counts();
             let parent = e.prepare_context(&c).unwrap();
-            let mut state = Search {
+            let mut state = Search::<false> {
                 eval: &e,
                 score_domain: ScoreDomain::LEGACY,
                 eval_scratch: e.create_scratch(),
@@ -3962,6 +4095,8 @@ mod child_buffer_tests {
                 lmr: false,
                 #[cfg(feature = "research-diagnostics")]
                 history: [0; 209],
+                #[cfg(feature = "research-diagnostics")]
+                lmr_observation: None,
             };
             let result = state.child(
                 &mut c,

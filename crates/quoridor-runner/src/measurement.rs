@@ -100,6 +100,8 @@ struct Request {
     warmup: bool,
     #[serde(default)]
     observe_completed_depths: bool,
+    #[serde(default)]
+    observe_lmr: bool,
 }
 #[derive(Clone, Debug)]
 struct RootSpec {
@@ -137,6 +139,34 @@ fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
         || settings.namespace.selectivity.is_empty()
     {
         return Err("measurement settings range".into());
+    }
+    if requests.iter().any(|r| r.observe_lmr) {
+        let unique_sessions: std::collections::BTreeSet<_> =
+            requests.iter().map(|r| &r.session).collect();
+        let unique_roots: std::collections::BTreeSet<_> = requests.iter().map(|r| r.root).collect();
+        if requests.len() > 12
+            || unique_sessions.len() != requests.len()
+            || unique_roots.len() != requests.len()
+            || settings.profile != Profile::Control
+            || settings.tt_entries != 1_048_576
+            || !settings.use_tt
+            || !settings.use_pvs
+            || !settings.lmr
+            || LmrMethod::from_name(&settings.lmr_method)? != LmrMethod::DepthRank
+            || settings.zero_stock_approx_min_root_walls.is_some()
+            || settings.zero_stock_safe_race
+            || requests.iter().any(|r| {
+                !r.observe_lmr
+                    || r.depth != 5
+                    || r.node_cap != 1_000_000
+                    || r.time_limit_ms.is_some()
+                    || r.warmup
+                    || r.diagnostic
+                    || r.observe_completed_depths
+            })
+        {
+            return Err("bounded LMR observation requires <=12 distinct cold Control/depth_rank D5/1M roots, TT1M/PVS, no other observers/approximation".into());
+        }
     }
     let mut ids = std::collections::BTreeSet::new();
     let mut closed_sessions = std::collections::BTreeSet::new();
@@ -180,9 +210,26 @@ fn root_spec(value: &Value, selector: &RootInput) -> Result<RootSpec> {
         }
         prefix.truncate(length);
     }
-    let expected = selector
-        .check_history
-        .then(|| json!({"root_key":row["root_key"],"history_counts":row["history_counts"]}));
+    let expected = if row.get("opening_bound").is_some()
+        || row.get("expected_divergence_board").is_some()
+    {
+        if selector.field != "prefix"
+            || selector.prefix_len.is_some()
+            || selector.check_history
+            || selector.jsonl_match.is_some()
+        {
+            return Err("observation must replay the full chronological prefix, not opening counts/truncation".into());
+        }
+        Some(
+            json!({"opening_bound":row["opening_bound"],"expected_divergence_board":row["expected_divergence_board"],
+            "id":row["id"],"evaluator":row["evaluator"],"source_example":row["source_example"],
+            "original_A_raw":row["original_A_raw"],"original_B_raw":row["original_B_raw"]}),
+        )
+    } else {
+        selector
+            .check_history
+            .then(|| json!({"root_key":row["root_key"],"history_counts":row["history_counts"]}))
+    };
     Ok(RootSpec { prefix, expected })
 }
 fn prepare_roots(e: &Experiment, selectors: &[RootInput]) -> Result<Vec<RootSpec>> {
@@ -340,6 +387,25 @@ impl Target for SearchTarget {
     }
     fn prepare(&mut self, request: &Request) -> Result<Value> {
         let root = replay(&self.roots[request.root], &self.settings.namespace.rules)?;
+        if request.observe_lmr {
+            let expected = self.roots[request.root]
+                .expected
+                .as_ref()
+                .ok_or("observation missing bound input")?;
+            if expected.get("opening_bound").is_none() {
+                return Err("observation requires bound chronological input".into());
+            }
+            let kind = if self.settings.namespace.evaluator
+                == crate::teacher_pilot_execution::EVALUATOR_ID
+            {
+                "distance"
+            } else {
+                "nnue"
+            };
+            if expected["evaluator"] != kind {
+                return Err("observation input/evaluator mismatch".into());
+            }
+        }
         self.before = identity(&root);
         self.root = Some(root);
         Ok(self.before.clone())
@@ -359,9 +425,14 @@ impl Target for SearchTarget {
             use_pvs: self.settings.use_pvs,
             use_tt: self.settings.use_tt,
         };
+        let mut lmr_observation = request
+            .observe_lmr
+            .then(|| Box::new(alphabeta::LmrObservation::default()));
         let search_started = Instant::now();
         let mut completed_depths = Vec::new();
-        let result = if request.observe_completed_depths {
+        let result = if let Some(observation) = lmr_observation.as_deref_mut() {
+            session.search_with_lmr_observation(root, &limits, cancel, observation)
+        } else if request.observe_completed_depths {
             session.search_with_updates(root, &limits, cancel, &mut |completed| {
                 completed_depths.push(completed_depth_observation(completed));
             })
@@ -370,6 +441,15 @@ impl Target for SearchTarget {
         };
         let search_seconds = search_started.elapsed().as_secs_f64();
         let after = identity(root);
+        let lmr_output = lmr_observation.as_deref().map(|observation| {
+            lmr_observation_output(
+                session,
+                root,
+                observation,
+                cancel,
+                result.is_ok() && after == self.before,
+            )
+        });
         let mut row = match result {
             Ok(result) => {
                 let mut legal = Vec::new();
@@ -420,6 +500,14 @@ impl Target for SearchTarget {
         });
         if request.observe_completed_depths {
             row["completed_depth_observations"] = json!(completed_depths);
+        }
+        if let Some(mut observation) = lmr_output {
+            observation["input"] = self.roots[request.root]
+                .expected
+                .clone()
+                .unwrap_or(Value::Null);
+            observation["root_fullhistory"] = self.before.clone();
+            row["lmr_observation"] = observation;
         }
         row["Search_call_seconds"] = json!(search_seconds);
         row["parent_unchanged"] = json!(after == self.before);
@@ -654,7 +742,9 @@ fn replay(spec: &RootSpec, rules: &str) -> Result<SigmaContext> {
     }
     if let Some(expected) = &spec.expected {
         let actual = identity(&root);
-        if actual["root_key"] != expected["root_key"]
+        if expected.get("opening_bound").is_some() {
+            observation_input_check(&spec.prefix, expected, &root)?;
+        } else if actual["root_key"] != expected["root_key"]
             || actual["history_counts"] != expected["history_counts"]
         {
             return Err("measurement exact counted-history/root mismatch".into());
@@ -1258,6 +1348,7 @@ mod tests {
             diagnostic: false,
             warmup: false,
             observe_completed_depths: false,
+            observe_lmr: false,
         };
         let mut target = SearchTarget {
             settings,
@@ -1358,6 +1449,7 @@ mod tests {
             diagnostic: false,
             warmup: false,
             observe_completed_depths: false,
+            observe_lmr: false,
         }
     }
     fn fake(factor: u64) -> Fake {
@@ -1577,5 +1669,288 @@ mod lmr413_retirement_tests {
                 assert!(validate(&settings, &[]).is_err());
             }
         }
+    }
+}
+
+// Bounded output for the one opt-in diagnostic. Root call accounting remains
+// the driver's existing count; cold invocation/child/node counts are separate.
+fn lmr_observation_output(
+    session: &SearchSession,
+    root: &SigmaContext,
+    observation: &alphabeta::LmrObservation,
+    cancel: &AtomicBool,
+    root_ok: bool,
+) -> Value {
+    let mut branches = Vec::new();
+    let mut invocations = 0u64;
+    let mut child_calls = 0u64;
+    let mut recorded_nodes = 0u64;
+    let mut recorded_evaluations = 0u64;
+    let mut unknown_work_invocations = 0u64;
+    let mut completed_probes = 0u64;
+    let mut halted = !root_ok;
+    for branch in observation.branches() {
+        let f = &branch.facts;
+        let stages: Vec<_> = branch
+            .stages
+            .iter()
+            .map(|s| {
+                s.map(|s| json!({
+            "child_depth":s.child_depth,"window_bits":s.window_bits,"value_bits":s.value_bits,
+            "bound":s.bound,"completed":s.completed,
+            "status":if s.completed {"COMPLETE"} else {"UNKNOWN"},
+            "interrupted":!s.completed,
+        }))
+            })
+            .collect();
+        let mut probes = Vec::new();
+        for normal in [false, true] {
+            let start = Instant::now();
+            let mut row = if halted || cancel.load(Ordering::Relaxed) {
+                json!({"status":"UNKNOWN","common_invocation_started":false,"child_called":false,
+                    "reason":"root error, earlier probe error or cancellation; no replacement"})
+            } else {
+                match session.cold_lmr_scout(root, branch, normal, cancel) {
+                    Err(error) => {
+                        halted = true;
+                        json!({"status":"UNKNOWN","common_invocation_started":false,
+                            "child_called":false,"error":fact(&error)})
+                    }
+                    Ok(probe) => {
+                        invocations += 1;
+                        child_calls += u64::from(probe.child_called);
+                        let mut row = match probe.result {
+                            Err(error) => {
+                                halted = true;
+                                unknown_work_invocations += 1;
+                                json!({"status":"UNKNOWN","returned":"Err","error":fact(&error),
+                                    "nodes":Value::Null,"evaluations":Value::Null})
+                            }
+                            Ok(result) => {
+                                recorded_nodes += result.stats.nodes;
+                                recorded_evaluations += result.stats.evaluations;
+                                let complete = result.stop == StopReason::DepthComplete
+                                    && result.completed_depth == probe.child_depth
+                                    && result.value.is_some();
+                                let mut row = observed(&result);
+                                row.as_object_mut().unwrap().remove("ordering");
+                                row["status"] =
+                                    json!(if complete { "COMPLETE" } else { "UNKNOWN" });
+                                row["bound"] = if complete {
+                                    json!(if result.value.unwrap()
+                                        <= f32::from_bits(probe.window_bits[0])
+                                    {
+                                        "Upper"
+                                    } else if result.value.unwrap()
+                                        >= f32::from_bits(probe.window_bits[1])
+                                    {
+                                        "Lower"
+                                    } else {
+                                        "Exact"
+                                    })
+                                } else {
+                                    Value::Null
+                                };
+                                if result.stop == StopReason::Cancelled {
+                                    halted = true;
+                                }
+                                row
+                            }
+                        };
+                        row["common_invocation_started"] = json!(true);
+                        row["child_called"] = json!(probe.child_called);
+                        row["window_bits"] = json!(probe.window_bits);
+                        row
+                    }
+                }
+            };
+            row["kind"] = json!(if normal { "normal" } else { "reduced" });
+            row["requested_child_depth"] = json!(if normal {
+                branch.normal_child_depth()
+            } else {
+                branch.reduced_child_depth()
+            });
+            row["parent_ply"] = json!(f.parent_ply);
+            row["parent_stm"] = json!(f.parent_stm);
+            row["TT_initial_entries"] = json!(0);
+            row["ordering_initial"] =
+                json!("zero continuation and killers; captured actor/path only");
+            row["node_cap"] = json!(100_000);
+            row["time_limit_ms"] = Value::Null;
+            row["whole_including_local_setup_drop_seconds"] = json!(start.elapsed().as_secs_f64());
+            completed_probes += u64::from(row["status"] == "COMPLETE");
+            probes.push(row);
+        }
+        let both = probes.iter().all(|p| p["status"] == "COMPLETE");
+        let match_status = if both {
+            if probes[0]["value_bits"] == probes[1]["value_bits"] {
+                "MATCH"
+            } else {
+                "DIFFERENT"
+            }
+        } else {
+            "UNKNOWN"
+        };
+        branches.push(json!({"hypothesis":f.hypothesis,"iteration_depth":f.iteration_depth,
+            "eligible_visit_serial":f.visit,"parent_depth":f.parent_depth,"parent_ply":f.parent_ply,
+            "path_action_colour":branch.path(),"parent":identity(branch.parent()),
+            "parent_stm":f.parent_stm,"distinct_rank":f.distinct_rank,"action":f.action,
+            "eligible":true,"protected_by_saved_ranking":false,"quantum":f.quantum,
+            "post_TT_pre_child_alpha_beta_bits":f.alpha_beta_bits,
+            "TT":f.tt.map(|tt|json!({"stored_depth":tt.stored_depth,"bound":tt.bound,
+                "context_matches":tt.context_matches,"usable_depth":tt.usable_depth,"legal_move":tt.legal_move})),
+            "stages":stages,"stage_order":if f.quantum==0 {json!(["normal_scout","full_window",null])}
+                else {json!(["shallow","normal_depth_confirmation","full_window"])},
+            "cold_probes":probes,"cold_value_bits_correspondence":match_status,
+            "normal_probe_semantics":"selective estimate; not historical warm TT or WDL/full-width truth"}));
+    }
+    let coverage: Vec<_> = observation
+        .coverage
+        .iter()
+        .map(|depth| {
+            depth
+                .iter()
+                .map(|rank| {
+                    rank.iter().map(|c|
+        json!({"opportunities":c.opportunities,"first_completed":c.first_completed,
+            "first_fail_low":c.first_fail_low,"normal_confirmations_started":c.normal_confirmations,
+            "full_windows_started":c.full_windows})).collect::<Vec<_>>()
+                })
+                .collect::<Vec<_>>()
+        })
+        .collect();
+    let planned_probes = branches.len() as u64 * 2;
+    json!({"version":"limited-lmr-observation416-v1","finished":observation.finished,
+        "status":if root_ok && completed_probes==planned_probes {"COMPLETE"} else {"PARTIAL"},
+        "selected_branches":branches.len(),"maximum_branches":4,
+        "planned_cold_scouts":planned_probes,"complete_cold_scouts":completed_probes,
+        "unknown_or_unperformed_cold_scouts":planned_probes-completed_probes,
+        "missing_buckets_are_not_refilled":true,
+        "root_stop":observation.root_stop,"branches":branches,"coverage":coverage,
+        "coverage_axes":{"depth":[3,4],"distinct_rank":["4..8","9..15","16..31","32+"],"quantum":["0","1","2+"]},
+        "cold_common_invocations":invocations,"cold_child_calls":child_calls,
+        "cold_recorded_nodes":recorded_nodes,"cold_recorded_evaluations":recorded_evaluations,
+        "cold_unknown_work_invocations":unknown_work_invocations,
+        "root_calls_exclude_cold_scouts":true,"refill":false})
+}
+
+fn observation_input_check(prefix: &[u16], expected: &Value, root: &SigmaContext) -> Result<()> {
+    let opening = expected
+        .get("opening_bound")
+        .ok_or("observation requires bound opening and divergence board")?;
+    let length: usize = serde_json::from_value(opening["prefix_len"].clone())?;
+    if length > prefix.len() {
+        return Err("opening prefix longer than divergence prefix".into());
+    }
+    let before = SigmaContext::from_prefix(&prefix[..length])?;
+    before.validate_normal()?;
+    let actual = identity(&before);
+    if actual["root_key"] != opening["root_key"]
+        || actual["history_counts"] != opening["history_counts"]
+    {
+        return Err("observation original opening fullhistory mismatch".into());
+    }
+    let board = &expected["expected_divergence_board"];
+    let p = root.position();
+    let wall_ids: Vec<u16> = (0..64)
+        .filter(|bit| p.horizontal & (1u64 << bit) != 0)
+        .map(|b| 81 + b)
+        .chain(
+            (0..64)
+                .filter(|bit| p.vertical & (1u64 << bit) != 0)
+                .map(|b| 145 + b),
+        )
+        .collect();
+    if json!(p.pawns) != board["pawns_cell_ids"]
+        || json!(p.walls_remaining) != board["stocks"]
+        || json!(p.turn) != board["side_to_move"]
+        || json!(root.total_ply()) != board["total_ply"]
+        || json!(wall_ids) != board["wall_action_ids"]
+    {
+        return Err("observation divergence board/turn/ply mismatch".into());
+    }
+    // Counts above qualify only the opening. Root's full counts come solely
+    // from replaying the entire SHA-bound chronological prefix in replay().
+    Ok(())
+}
+
+#[cfg(test)]
+mod lmr416_tests {
+    use super::*;
+    #[test]
+    fn measurement416_opt_in_strict_cold_limits_serde_and_no_other_observers() {
+        let base = json!({"roots":[{"input":0,"pointer":"/roots/0","field":"prefix","label":"toy"}],
+            "profile":"control","tt_entries":1048576,"use_tt":true,"use_pvs":true,"lmr":true,"lmr_method":"depth_rank",
+            "namespace":{"evaluator":crate::teacher_pilot_execution::EVALUATOR_ID,"rules":"standard","selectivity":"toy"},
+            "output_bytes":1000000,"record_bytes":100000});
+        let settings: Settings = serde_json::from_value(base).unwrap();
+        let request = json!({"id":"one","session":"one","root":0,"depth":5,"node_cap":1000000,"observe_lmr":true});
+        let r: Request = serde_json::from_value(request.clone()).unwrap();
+        validate(&settings, &[r]).unwrap();
+        for (key, value) in [
+            ("diagnostic", json!(true)),
+            ("observe_completed_depths", json!(true)),
+            ("warmup", json!(true)),
+            ("depth", json!(6)),
+            ("node_cap", json!(100001)),
+            ("time_limit_ms", json!(1)),
+        ] {
+            let mut bad = request.clone();
+            bad[key] = value;
+            let r: Request = serde_json::from_value(bad).unwrap();
+            assert!(validate(&settings, &[r]).is_err());
+        }
+        for value in [json!(null), json!(1), json!("true")] {
+            let mut bad = request.clone();
+            bad["observe_lmr"] = value;
+            assert!(serde_json::from_value::<Request>(bad).is_err());
+        }
+        let r: Request = serde_json::from_value(request.clone()).unwrap();
+        assert!(validate(&settings, &[r.clone(), r]).is_err());
+        let r: Request = serde_json::from_value(
+            json!({"id":"off","session":"off","root":0,"depth":1,"node_cap":1}),
+        )
+        .unwrap();
+        assert!(!r.observe_lmr);
+        validate(&settings, &[r]).unwrap();
+    }
+    #[test]
+    fn measurement416_chronological_divergence_replay_keeps_opening_counts_separate() {
+        let opening = SigmaContext::from_prefix(&[3, 75, 4, 76]).unwrap();
+        let mut bound = identity(&opening);
+        bound["prefix_len"] = json!(4);
+        let expected = json!({"opening_bound":bound,"expected_divergence_board":{
+            "pawns_cell_ids":[13,76],"stocks":[10,10],"wall_action_ids":[],"side_to_move":1,"total_ply":5}});
+        let spec = RootSpec {
+            prefix: vec![3, 75, 4, 76, 13],
+            expected: Some(expected.clone()),
+        };
+        let root = replay(&spec, opening.ruleset().id()).unwrap();
+        assert_ne!(identity(&root)["history_counts"], bound["history_counts"]);
+        assert_eq!(root.total_ply(), 5);
+        let mut bad = expected.clone();
+        bad["expected_divergence_board"]["side_to_move"] = json!(0);
+        assert!(
+            replay(
+                &RootSpec {
+                    prefix: spec.prefix.clone(),
+                    expected: Some(bad)
+                },
+                opening.ruleset().id()
+            )
+            .is_err()
+        );
+        let mut bad = expected;
+        bad["opening_bound"]["history_counts"] = json!([]);
+        assert!(
+            replay(
+                &RootSpec {
+                    prefix: spec.prefix,
+                    expected: Some(bad)
+                },
+                opening.ruleset().id()
+            )
+            .is_err()
+        );
     }
 }
