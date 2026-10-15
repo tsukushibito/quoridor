@@ -357,7 +357,7 @@ fn zero_stock406_float_cache_wall_key_fallback_and_parent_immutability() {
             &AtomicBool::new(false),
             &mut history,
             |s, _| {
-                results.push(s.zero_stock_approx_value(&next, None, parent).unwrap());
+                results.push(s.zero_stock_approx_value(&next, None, parent, 1).unwrap());
                 assert_eq!(format!("{parent:?}"), before);
             },
         );
@@ -384,7 +384,10 @@ fn zero_stock406_float_cache_wall_key_fallback_and_parent_immutability() {
         let c = SigmaContext::synthetic_diagnostic(p, 20, vec![(p.into(), 1)]).unwrap();
         let mut history = ContinuationHistory::new().unwrap();
         with_state(&c, &probe, &AtomicBool::new(false), &mut history, |s, c| {
-            assert_eq!(s.zero_stock_approx_value(c, None, None).unwrap(), expected);
+            assert_eq!(
+                s.zero_stock_approx_value(c, None, None, 1).unwrap(),
+                expected
+            );
         });
     }
 }
