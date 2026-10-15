@@ -455,3 +455,21 @@ whole中央値O/R/DはNNUE15.079874/14.390586/16.038762秒、固定D評価器6.5
 共通の正しさ/所有修復を保持し、Race/FixedDは明示research option、零在庫近似の既定無効を維持する。一般速度優位・棋力・exact WDL・最適閾値は認定せず、追加tuning/再計測/対局/学習は発行しない。旧406との違いはcode/時刻も変わるため修復単独の因果差ではない。別412の人間選択で通常研究LMR ON/depth_rankを採用することと、この凍結LMR OFF比較を区別する。
 
 必要12Rust確認とClippy/release、同担当のsource/有限解釈clear0/0、全root冷温/深さ/clock/work、元FAILED/UNKNOWN・費・STOPは[有限結果](../../research-data/ai-sigma/zero-stock-approx-repair410/report-ja.md)へ。元software outer117.174701675秒（FAILED込み）、数値outer200.926285211秒を一度ずつ数えnestedを足さない。物理NN・連続RSS・全source/LLM/admin費はUNKNOWN。411の数学/履歴/厳密leafは別subjectで、旧RAW/models/seals/defaults/全USERPAUSEを保持する。
+
+### 零在庫の安全先着leaf：十分条件と固定128探索（411、2026-10-15）
+
+双方stock0の合法非終端で、手番側のwall-only goal距離ds、相手do、二駒Manhattan距離Mについて、ds<=doかつM>=2dsなら手番側勝ち、do<dsかつM>=2do+1なら相手勝ち、それ以外UNKNOWNという一つの十分条件を確認した。勝者が普通の最短路を進む間、最初のjump/占有/相手の早いgoalが間に合わないという帰納証明であり、単に選んだ最短路がdisjointという条件とは異なる。
+
+実履歴では現在H/Vとstock0に合う完全HistoryKeyの既往2回集合Eが空であることが追加条件。既存canonical weighted base＋全overlayのcountで確認し、raw各重み1を空集合と誤認しない。from_countsの形/総数検証は到達可能性の証明ではなく、last-wall chronology shortcutは使わない。指定された完全countsに対する将来の勝ち証明と、真正prefixの入力所有者による再生を区別する。
+
+保存52fixtureの5680 W/Lで1393W＋476Lを確定、3811UNKNOWN、false-Proven0。保存39708D/3872配置は全UNKNOWN。WDL/全辺/rank solverや元52suiteは再演していない。標本照合を9x9一般定理の証明へ置き換えず、数学・履歴・TT sourceは同max担当が限定確認した。
+
+共通Searchへ既定OFFのresearch opt-in zero_stock_safe_raceを接続。rootは通常比較、true goal/threefold優先、正depthのstock0子だけを専用best無しSafeRaceLeafとして扱い、root/internal/depth0/ApproxLeafとの混用を拒否。exact board/fullhistory/depth/domain/namespaceを維持してTT再利用し、NNUE advance/headと子列挙を省く。UNKNOWNも同じenter/control/make/undo/error/cancel経路へ戻す。距離は410のbounded invocation ownerと既存wall-key map/BFSを共有する。
+
+同一image18f3ca12/Buildd9af179e、真正8prefix/完全履歴、NNUE BEST43と固定D(0,8,tanh)別stratum、Control/PVS/TT1048576、LMR OFF/fixed_one・旧近似OFF、D8/4M/call/timeなしでOFF→ON→ON→OFFを一度実施した。128calls/64sessions/512Mcap、実93,406,574nodes、112COMPLETE16UNKNOWN。UNKNOWNは全て残壁6 root0で4M NodeLimit/completed6。同方式二反復は全非時計work/valuebits/action/PV/depth/status一致。
+
+whole中央値ON/OFFはNNUE14.610837/14.570318秒=1.002780935、固定D6.685308/6.671404秒=1.002084250で、今回の全体速度利益を支持しない。二反復合計の実訪問差はNNUE73002、固定D74212減った。proof eventsは各一pass10223/10448あり、unique状態/対局勝利/root exact WDLではない。stock0機会・geometry・E・TT subsetの分母を分け、OFF counter0から零在庫不存在を推論しない。値/PV/仕事が異なるため同仕事speedupではない。wholeへsetup/reset/history/distance/Search/journal/dropを含め、孤立predicate/E/TT/BFS費やphysicalNN/連続RSSはUNKNOWN。
+
+一つの厳密判定を明示研究用として保持し、既定OFFを維持する。通常研究・製品・generator自動ON、棋力優位、追加tuning/再計測/対局は発行しない。人間が別412で選んだ今後の通常研究LMR ON/depth_rankをこの凍結LMR OFF試験へ適用しない。原software outer117.691639865秒（FAILED込み）＋数値123.705293094秒を各一度数えnestedを足さず、全source/LLM/admin費はUNKNOWN。
+
+元14Rust確認の範囲、Clippy/release、同担当のsource/有限解釈clear、原FAILED/UNKNOWN・全設定/clock/work・STOP/費は[有限結果](../../research-data/ai-sigma/zero-stock-safe-race411/report-ja.md)とそのexact archiveへ保存した。原408/409/410、全pause/mixed/learner/323、models/weights/seals/defaultsとforeign変更は保持する。
