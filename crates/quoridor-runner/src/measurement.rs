@@ -69,6 +69,8 @@ struct Settings {
     zero_stock_approx_min_root_walls: Option<u8>,
     #[serde(default = "default_zero_stock_approx_method")]
     zero_stock_approx_method: String,
+    #[serde(default)]
+    zero_stock_safe_race: bool,
     namespace: SearchNamespaceSettings,
     output_bytes: usize,
     record_bytes: usize,
@@ -315,6 +317,7 @@ impl Target for SearchTarget {
         )?);
         session
             .set_zero_stock_approx_min_root_walls(self.settings.zero_stock_approx_min_root_walls)?;
+        session.set_zero_stock_safe_race(self.settings.zero_stock_safe_race);
         let method = session.namespace().selectivity.clone();
         let lmr = session.lmr_enabled();
         let retained = session.retained_memory_bytes();
@@ -323,11 +326,13 @@ impl Target for SearchTarget {
         Ok(
             json!({"TT_capacity":capacity,"retained_TT_bytes":retained.0,"retained_session_metadata_history_bytes":retained.1,
                 "actual_selectivity":method,"lmr":lmr,
+                "zero_stock_safe_race":self.settings.zero_stock_safe_race,
+                "zero_stock_safe_race_method":self.settings.zero_stock_safe_race.then_some(alphabeta::ZERO_STOCK_SAFE_RACE_METHOD),
                 "zero_stock_approx_min_root_walls":self.settings.zero_stock_approx_min_root_walls,
                 "zero_stock_approx_method_requested":self.settings.zero_stock_approx_method,
                 "zero_stock_approx_method":Value::Null,
                 "zero_stock_approx_permitted":Value::Null,
-                "completed_depth_semantics":if lmr {"selective-nominal"} else if self.settings.zero_stock_approx_min_root_walls.is_some() {"root-resolution-pending"} else {"full-width"},
+                "completed_depth_semantics":if self.settings.zero_stock_safe_race {"safe-race-leaf-nominal-not-root-game-WDL"} else if lmr {"selective-nominal"} else if self.settings.zero_stock_approx_min_root_walls.is_some() {"root-resolution-pending"} else {"full-width"},
                 "lmr_method_requested":self.settings.lmr_method,
                 "lmr_rule":self.session.as_ref().and_then(SearchSession::lmr_method).map(LmrMethod::id),
                 "lmr_parameters":self.session.as_ref().and_then(SearchSession::lmr_method).map(LmrMethod::reduction_rule)}),
@@ -398,7 +403,15 @@ impl Target for SearchTarget {
                 .zero_stock_approx_method()
                 .map(ZeroStockApproxMethod::id)
         );
-        row["completed_depth_semantics"] = json!(if session.zero_stock_approx_permitted() {
+        row["zero_stock_safe_race"] = json!(session.zero_stock_safe_race_enabled());
+        row["zero_stock_safe_race_method"] = json!(
+            session
+                .zero_stock_safe_race_enabled()
+                .then_some(alphabeta::ZERO_STOCK_SAFE_RACE_METHOD)
+        );
+        row["completed_depth_semantics"] = json!(if session.zero_stock_safe_race_enabled() {
+            "safe-race-leaf-nominal-not-root-game-WDL"
+        } else if session.zero_stock_approx_permitted() {
             "approximate-leaf-nominal-not-game-WDL"
         } else if self.settings.lmr {
             "selective-nominal"
@@ -692,7 +705,7 @@ fn owned_output(intent: &Value) -> Result<PathBuf> {
 // are cumulative actual counters, not predicted branching/cost or a D6 result.
 fn completed_depth_observation(r: &SearchResult) -> Value {
     let s = &r.stats;
-    json!({"lmr_rule":s.lmr_enabled.then(|| s.lmr_method.id()),"lmr_parameters":s.lmr_enabled.then(|| s.lmr_method.reduction_rule()),"completed_depth":r.completed_depth,"action":r.action,
+    let mut result = json!({"lmr_rule":s.lmr_enabled.then(|| s.lmr_method.id()),"lmr_parameters":s.lmr_enabled.then(|| s.lmr_method.reduction_rule()),"completed_depth":r.completed_depth,"action":r.action,
         "root_walls_remaining":s.root_walls_remaining,"zero_stock_approx_permitted":s.zero_stock_approx_permitted,
         "zero_stock_approx_method":s.zero_stock_approx_permitted.then(|| s.zero_stock_approx_method.id()),
         "value_bits":r.value.map(f32::to_bits),"elapsed_seconds":r.elapsed.as_secs_f64(),
@@ -704,7 +717,25 @@ fn completed_depth_observation(r: &SearchResult) -> Value {
             "TT_index_collisions":s.tt_index_collisions,"TT_replacements":s.tt_replacements,
             "PVS_researches":s.pvs_researches,"delta_updates":s.delta_updates,
             "LMR_attempts":s.lmr_attempts,"LMR_full_depth_confirmations":s.lmr_full_depth_confirmations,"LMR_full_window_researches":s.lmr_full_window_researches,
-            "TT_generation":s.tt_generation,"TT_retained_bytes":s.tt_retained_bytes}})
+            "TT_generation":s.tt_generation,"TT_retained_bytes":s.tt_retained_bytes}});
+    result["zero_stock_safe_race"] = json!(s.zero_stock_safe_race_enabled);
+    result["zero_stock_safe_race_method"] = json!(
+        s.zero_stock_safe_race_enabled
+            .then_some(alphabeta::ZERO_STOCK_SAFE_RACE_METHOD)
+    );
+    result["cumulative_work"]["safe_race_stock0_opportunities"] =
+        json!(s.safe_race_stock0_opportunities);
+    result["cumulative_work"]["safe_race_tt_probes"] = json!(s.safe_race_tt_probes);
+    result["cumulative_work"]["safe_race_tt_hits"] = json!(s.safe_race_tt_hits);
+    result["cumulative_work"]["safe_race_geometry_tests"] = json!(s.safe_race_geometry_tests);
+    result["cumulative_work"]["safe_race_geometry_passes"] = json!(s.safe_race_geometry_passes);
+    result["cumulative_work"]["safe_race_history_checks"] = json!(s.safe_race_history_checks);
+    result["cumulative_work"]["safe_race_history_rejects"] = json!(s.safe_race_history_rejects);
+    result["cumulative_work"]["safe_race_proven_leaves"] = json!(s.safe_race_proven_leaves);
+    if s.zero_stock_safe_race_enabled {
+        result["completed_depth_semantics"] = json!("safe-race-leaf-nominal-not-root-game-WDL");
+    }
+    result
 }
 fn observed(r: &SearchResult) -> Value {
     let s = &r.stats;
@@ -726,6 +757,19 @@ fn observed(r: &SearchResult) -> Value {
     result["work"]["wall_distance_map_reads"] = json!(s.wall_distance_map_reads);
     result["work"]["wall_distance_map_builds"] = json!(s.wall_distance_map_builds);
     result["work"]["wall_distance_fallbacks"] = json!(s.wall_distance_fallbacks);
+    result["zero_stock_safe_race"] = json!(s.zero_stock_safe_race_enabled);
+    result["zero_stock_safe_race_method"] = json!(
+        s.zero_stock_safe_race_enabled
+            .then_some(alphabeta::ZERO_STOCK_SAFE_RACE_METHOD)
+    );
+    result["work"]["safe_race_stock0_opportunities"] = json!(s.safe_race_stock0_opportunities);
+    result["work"]["safe_race_tt_probes"] = json!(s.safe_race_tt_probes);
+    result["work"]["safe_race_tt_hits"] = json!(s.safe_race_tt_hits);
+    result["work"]["safe_race_geometry_tests"] = json!(s.safe_race_geometry_tests);
+    result["work"]["safe_race_geometry_passes"] = json!(s.safe_race_geometry_passes);
+    result["work"]["safe_race_history_checks"] = json!(s.safe_race_history_checks);
+    result["work"]["safe_race_history_rejects"] = json!(s.safe_race_history_rejects);
+    result["work"]["safe_race_proven_leaves"] = json!(s.safe_race_proven_leaves);
     result["zero_stock_approx_method"] = json!(if s.zero_stock_approx_permitted {
         Some(s.zero_stock_approx_method.id())
     } else {
@@ -733,6 +777,9 @@ fn observed(r: &SearchResult) -> Value {
     });
     if s.zero_stock_approx_permitted {
         result["completed_depth_semantics"] = json!("approximate-leaf-nominal-not-game-WDL");
+    }
+    if s.zero_stock_safe_race_enabled {
+        result["completed_depth_semantics"] = json!("safe-race-leaf-nominal-not-root-game-WDL");
     }
     if let Some(w) = o.work.as_deref() {
         result["ordering"]["work"] = json!({
@@ -909,6 +956,79 @@ impl Output {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn safe_race411_measurement_boolean_default_and_partial_counters() {
+        let base = json!({"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,
+            "namespace":{"evaluator":"toy","rules":"standard","selectivity":"full"},"output_bytes":10000,"record_bytes":1000});
+        assert!(
+            !serde_json::from_value::<Settings>(base.clone())
+                .unwrap()
+                .zero_stock_safe_race
+        );
+        for (value, accepted) in [
+            (json!(true), true),
+            (json!(false), true),
+            (Value::Null, false),
+            (json!(0), false),
+            (json!(1), false),
+            (json!("true"), false),
+        ] {
+            let mut config = base.clone();
+            config["zero_stock_safe_race"] = value;
+            assert_eq!(
+                serde_json::from_value::<Settings>(config).is_ok_and(|s| validate(&s, &[]).is_ok()),
+                accepted
+            );
+        }
+        let r = SearchResult {
+            action: None,
+            value: None,
+            completed_depth: 0,
+            pv: vec![],
+            stop: StopReason::NodeLimit,
+            elapsed: std::time::Duration::ZERO,
+            stats: alphabeta::SearchStats {
+                zero_stock_safe_race_enabled: true,
+                safe_race_stock0_opportunities: 7,
+                safe_race_tt_probes: 7,
+                safe_race_tt_hits: 2,
+                safe_race_geometry_tests: 5,
+                safe_race_geometry_passes: 3,
+                safe_race_history_checks: 3,
+                safe_race_history_rejects: 1,
+                safe_race_proven_leaves: 4,
+                terminal: 1,
+                ..Default::default()
+            },
+        };
+        let final_row = observed(&r);
+        let callback = completed_depth_observation(&r);
+        for row in [&final_row, &callback] {
+            assert_eq!(
+                row["zero_stock_safe_race_method"],
+                alphabeta::ZERO_STOCK_SAFE_RACE_METHOD
+            );
+            assert_eq!(
+                row["completed_depth_semantics"],
+                "safe-race-leaf-nominal-not-root-game-WDL"
+            );
+        }
+        for key in [
+            "safe_race_stock0_opportunities",
+            "safe_race_tt_probes",
+            "safe_race_tt_hits",
+            "safe_race_geometry_tests",
+            "safe_race_geometry_passes",
+            "safe_race_history_checks",
+            "safe_race_history_rejects",
+            "safe_race_proven_leaves",
+        ] {
+            assert_eq!(final_row["work"][key], callback["cumulative_work"][key]);
+        }
+        assert_eq!(final_row["work"]["safe_race_proven_leaves"], 4);
+        assert_eq!(final_row["work"]["terminal"], 1);
+    }
+
     #[test]
     fn measurement408_lmr_method_default_refusal_namespace_and_result_roundtrip() {
         let base = json!({"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,

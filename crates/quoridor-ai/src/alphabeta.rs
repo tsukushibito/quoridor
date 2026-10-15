@@ -524,7 +524,8 @@ pub enum StopReason {
     TimeLimit,
     Cancelled,
 }
-pub const TT_REPRESENTATION: &str = "compact359-board-zobrist-v1-context128-v1-leaf410-v1";
+pub const TT_REPRESENTATION: &str =
+    "compact359-board-zobrist-v1-context128-v1-leaf410-v1-safe-race411-v1";
 /// One selected LMR rule; OFF retains full-width depth semantics.
 pub const LMR_METHOD: &str = "lmr400-late4-depth3-minus1-pvs-verify-v1";
 
@@ -627,6 +628,48 @@ impl ZeroStockApproxMethod {
     }
 }
 
+/// One sufficient game-W/L condition; neither UNKNOWN nor a cap is Draw.
+pub const ZERO_STOCK_SAFE_RACE_METHOD: &str = "zero-stock411-safe-manhattan-complete-E-v1";
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum RaceWinner {
+    Mover,
+    Other,
+}
+fn safe_race_winner(ds: u8, other: u8, manhattan: u8) -> Option<RaceWinner> {
+    if ds == 0 || other == 0 || ds >= 81 || other >= 81 {
+        return None;
+    }
+    let m = u16::from(manhattan);
+    if ds <= other && m >= 2 * u16::from(ds) {
+        Some(RaceWinner::Mover)
+    } else if other < ds && m > 2 * u16::from(other) {
+        Some(RaceWinner::Other)
+    } else {
+        None
+    }
+}
+// The validated canonical context owns the complete frequency set. Do not
+// infer chronology from validity, stock0 or the from_counts constructor name.
+// Geometry gates this scan. count() includes weighted base AND all arrivals.
+fn safe_race_history_empty(
+    c: &SigmaContext,
+    mut control: impl FnMut() -> NodeResult<()>,
+) -> NodeResult<bool> {
+    let p = c.position();
+    for (index, (key, weight)) in c.occurrences().enumerate() {
+        if index % 64 == 0 {
+            control()?;
+        }
+        if key.horizontal == p.horizontal && key.vertical == p.vertical && key.stocks == [0, 0] {
+            control()?; // Canonical count may scan a large declared history.
+            if weight >= 2 || c.count(key) >= 2 {
+                return Ok(false);
+            }
+        }
+    }
+    Ok(true)
+}
+
 fn permit_zero_stock_approx(threshold: Option<u8>, root_walls: u16, max_depth: u16) -> bool {
     threshold.is_some_and(|threshold| threshold == 0 || root_walls >= u16::from(threshold))
         && max_depth > root_walls.max(1)
@@ -640,6 +683,17 @@ pub struct SearchStats {
     /// Per-Search root snapshot; fixed throughout iterative deepening.
     pub root_walls_remaining: u16,
     pub zero_stock_approx_permitted: bool,
+    /// Explicit research option; OFF does not observe eligible opportunities.
+    pub zero_stock_safe_race_enabled: bool,
+    pub safe_race_stock0_opportunities: u64,
+    pub safe_race_tt_probes: u64,
+    pub safe_race_tt_hits: u64,
+    pub safe_race_geometry_tests: u64,
+    pub safe_race_geometry_passes: u64,
+    pub safe_race_history_checks: u64,
+    pub safe_race_history_rejects: u64,
+    /// Successful nonterminal proof returns, distinct from real terminal visits.
+    pub safe_race_proven_leaves: u64,
     /// Effective only when permitted; OFF leaves this default value unused.
     pub zero_stock_approx_method: ZeroStockApproxMethod,
     /// Successfully returned heuristic leaves, separate from true terminals/head calls.
@@ -906,6 +960,8 @@ enum Bound {
     Upper,
     // Heuristic leaf only: no best move, never an internal/root bound.
     ApproxLeaf,
+    // Proven game W/L only, no best move; not a finite-depth/heuristic bound.
+    SafeRaceLeaf,
 }
 #[repr(C)]
 struct Entry {
@@ -1484,12 +1540,28 @@ impl Search<'_> {
         let mut a = self.child_buffers.get_mut(ply).and_then(Option::take);
         // The restore happens even when evaluation, budget or cancellation fails.
         let result = (|| {
+            let mut entered = false;
             // True goal/threefold leaves bypass FT and head evaluation as well.
             if c.terminal_value().is_none() {
+                if self.stats.zero_stock_safe_race_enabled
+                    && depth > 0
+                    && c.position().walls_remaining == [0, 0]
+                {
+                    self.enter()?;
+                    entered = true;
+                    self.stats.safe_race_stock0_opportunities += 1;
+                    if let Some(value) = self.safe_race_value(c, a.as_ref(), parent, depth)? {
+                        self.control()?;
+                        self.stats.safe_race_proven_leaves += 1;
+                        return Ok(value);
+                    }
+                }
                 if self.zero_stock_approx_leaf(c, depth) {
                     // This branch replaces negamax entry, not its caller's make,
                     // fingerprint, path or canonical undo. Count/control once.
-                    self.enter()?;
+                    if !entered {
+                        self.enter()?;
+                    }
                     let value = self.zero_stock_approx_value(c, a.as_ref(), parent, depth)?;
                     self.control()?;
                     self.stats.zero_stock_approx_terminations += 1;
@@ -1501,7 +1573,11 @@ impl Search<'_> {
                 }
             }
             self.control()?;
-            self.negamax(c, a.as_ref(), depth, -window[1], -window[0], ply)
+            if entered {
+                self.negamax_entered(c, a.as_ref(), depth, -window[1], -window[0], ply)
+            } else {
+                self.negamax(c, a.as_ref(), depth, -window[1], -window[0], ply)
+            }
         })();
         if pooled {
             self.child_buffers[ply] = a;
@@ -1526,6 +1602,81 @@ impl Search<'_> {
         self.context = parent_context;
         self.board = parent_board;
         result.map(|v| -v)
+    }
+
+    fn safe_race_value(
+        &mut self,
+        c: &SigmaContext,
+        pooled: Option<&EvalAccumulator>,
+        parent: Option<&EvalAccumulator>,
+        depth: u16,
+    ) -> NodeResult<Option<f32>> {
+        // Public search validates the complete canonical counts once at root.
+        // Private diagnostic contexts do not gain numeric authority here.
+        if c.is_synthetic() {
+            return Ok(None);
+        }
+        let (key, hit) = if self.limits.use_tt {
+            self.stats.safe_race_tt_probes += 1;
+            let key = self.key(c);
+            let key = self
+                .board
+                .as_ref()
+                .ok_or(RulesError::InvalidUndo)?
+                .capture(key)?;
+            let (key, hit) = self.table.probe_owned(key, self.context, &mut self.stats);
+            (Some(key), hit)
+        } else {
+            (None, None)
+        };
+        if let Some((stored_depth, value, Bound::SafeRaceLeaf, None, true)) = hit
+            && stored_depth == depth
+            && value.abs().to_bits() == self.score_domain.terminal_utility().to_bits()
+        {
+            self.stats.safe_race_tt_hits += 1;
+            return Ok(Some(value));
+        }
+        self.stats.safe_race_geometry_tests += 1;
+        let p = c.position();
+        let cached = cached_distance_maps(p, [pooled, parent]);
+        let own = usize::from(p.turn);
+        let Some(ds) = self.eval_scratch.distances.distance(p, own, cached) else {
+            return Ok(None);
+        };
+        self.control()?;
+        let Some(other) = self.eval_scratch.distances.distance(p, own ^ 1, cached) else {
+            return Ok(None);
+        };
+        let manhattan =
+            (p.pawns[0] / 9).abs_diff(p.pawns[1] / 9) + (p.pawns[0] % 9).abs_diff(p.pawns[1] % 9);
+        let Some(winner) = safe_race_winner(ds, other, manhattan) else {
+            return Ok(None);
+        };
+        self.stats.safe_race_geometry_passes += 1;
+        self.control()?;
+        self.stats.safe_race_history_checks += 1;
+        if !safe_race_history_empty(c, || self.control())? {
+            self.stats.safe_race_history_rejects += 1;
+            return Ok(None);
+        }
+        let value = match winner {
+            RaceWinner::Mover => self.score_domain.terminal_utility(),
+            RaceWinner::Other => -self.score_domain.terminal_utility(),
+        };
+        self.control()?;
+        if let Some(key) = key {
+            self.table.insert_probed(
+                key,
+                NodeValue {
+                    depth,
+                    value,
+                    bound: Bound::SafeRaceLeaf,
+                    best: None,
+                },
+                &mut self.stats,
+            );
+        }
+        Ok(Some(value))
     }
 
     fn zero_stock_approx_leaf(&self, c: &SigmaContext, depth: u16) -> bool {
@@ -1625,7 +1776,21 @@ impl Search<'_> {
         self.stats.wall_distance_fallbacks = self.eval_scratch.distances.fallbacks;
     }
 
+    #[inline]
     fn negamax(
+        &mut self,
+        c: &mut SigmaContext,
+        a: Option<&EvalAccumulator>,
+        depth: u16,
+        alpha: f32,
+        beta: f32,
+        ply: usize,
+    ) -> NodeResult<f32> {
+        self.enter()?;
+        self.negamax_entered(c, a, depth, alpha, beta, ply)
+    }
+
+    fn negamax_entered(
         &mut self,
         c: &mut SigmaContext,
         a: Option<&EvalAccumulator>,
@@ -1634,7 +1799,6 @@ impl Search<'_> {
         mut beta: f32,
         ply: usize,
     ) -> NodeResult<f32> {
-        self.enter()?;
         if let Some(v) = c.terminal_value() {
             self.stats.terminal += 1;
             self.control()?;
@@ -1670,7 +1834,7 @@ impl Search<'_> {
         let mut tt_move = None;
         let mut legal = None;
         if let Some((stored_depth, value, bound, best, context_matches)) =
-            hit.filter(|hit| !matches!(hit.2, Bound::ApproxLeaf))
+            hit.filter(|hit| !matches!(hit.2, Bound::ApproxLeaf | Bound::SafeRaceLeaf))
         {
             if best
                 .is_some_and(|action| legal.get_or_insert_with(|| c.legal_ids()).contains(&action))
@@ -1686,7 +1850,9 @@ impl Search<'_> {
                         }
                         Bound::Lower => alpha = alpha.max(value),
                         Bound::Upper => beta = beta.min(value),
-                        Bound::ApproxLeaf => unreachable!("leaf filtered before internal probe"),
+                        Bound::ApproxLeaf | Bound::SafeRaceLeaf => {
+                            unreachable!("leaf filtered before internal probe")
+                        }
                     }
                     if alpha >= beta {
                         self.stats.tt_cutoffs += 1;
@@ -1961,7 +2127,7 @@ impl Search<'_> {
             if let Some((stored_depth, value, bound, best, context_matches)) = self
                 .table
                 .probe(&key, self.context, &mut self.stats)
-                .filter(|hit| !matches!(hit.2, Bound::ApproxLeaf))
+                .filter(|hit| !matches!(hit.2, Bound::ApproxLeaf | Bound::SafeRaceLeaf))
             {
                 if best.is_some_and(|action| {
                     legal.get_or_insert_with(|| c.legal_ids()).contains(&action)
@@ -2145,7 +2311,7 @@ pub fn search_with_orderer(
             false,
             StaticMode::Coverage,
             (false, LmrMethod::FixedOne),
-            (false, ZeroStockApproxMethod::Race),
+            (false, ZeroStockApproxMethod::Race, false),
         ),
     )
 }
@@ -2232,8 +2398,42 @@ pub struct SearchSession {
     zero_stock_approx_min_root_walls: Option<u8>,
     zero_stock_approx_method: ZeroStockApproxMethod,
     zero_stock_approx_effective: bool,
+    zero_stock_safe_race: bool,
 }
 impl SearchSession {
+    fn detach_safe_race_namespace(&mut self) {
+        if self.zero_stock_safe_race {
+            self.namespace
+                .selectivity
+                .truncate(self.namespace.selectivity.len() - ZERO_STOCK_SAFE_RACE_METHOD.len() - 1);
+        }
+    }
+    fn attach_safe_race_namespace(&mut self) {
+        if self.zero_stock_safe_race {
+            self.namespace.selectivity.push(':');
+            self.namespace
+                .selectivity
+                .push_str(ZERO_STOCK_SAFE_RACE_METHOD);
+        }
+    }
+    /// Research opt-in only. Complete-history qualification is per leaf; this
+    /// does not certify input chronology or enable the approximate selector.
+    pub fn set_zero_stock_safe_race(&mut self, enabled: bool) {
+        if enabled == self.zero_stock_safe_race {
+            return;
+        }
+        self.detach_safe_race_namespace();
+        self.zero_stock_safe_race = enabled;
+        self.attach_safe_race_namespace();
+        self.table.clear();
+        if let Some(history) = self.ordering.as_mut() {
+            history.reset();
+        }
+    }
+    pub fn zero_stock_safe_race_enabled(&self) -> bool {
+        self.zero_stock_safe_race
+    }
+
     /// Selecting a method alone never activates approximation. Only an effective
     /// ON method switch changes numeric TT/history authority.
     pub fn set_zero_stock_approx_method(&mut self, method: ZeroStockApproxMethod) {
@@ -2241,10 +2441,12 @@ impl SearchSession {
             return;
         }
         if self.zero_stock_approx_effective {
+            self.detach_safe_race_namespace();
             self.namespace.selectivity.truncate(
                 self.namespace.selectivity.len() - self.zero_stock_approx_method.id().len() - 1,
             );
             append_zero_stock_approx_method(&mut self.namespace, method);
+            self.attach_safe_race_namespace();
             self.table.clear();
             if let Some(history) = self.ordering.as_mut() {
                 history.reset();
@@ -2277,6 +2479,7 @@ impl SearchSession {
         if enabled == self.zero_stock_approx_effective {
             return;
         }
+        self.detach_safe_race_namespace();
         if self.zero_stock_approx_effective {
             self.namespace.selectivity.truncate(
                 self.namespace.selectivity.len() - self.zero_stock_approx_method.id().len() - 1,
@@ -2285,6 +2488,7 @@ impl SearchSession {
             append_zero_stock_approx_method(&mut self.namespace, self.zero_stock_approx_method);
         }
         self.zero_stock_approx_effective = enabled;
+        self.attach_safe_race_namespace();
         self.table.clear();
         if let Some(history) = self.ordering.as_mut() {
             history.reset();
@@ -2323,7 +2527,8 @@ impl SearchSession {
             self.lmr_method = method;
             return;
         }
-        // Approximation remains the final independent method component.
+        // Preserve the existing LMR/approx order before the safe-race suffix.
+        self.detach_safe_race_namespace();
         if self.zero_stock_approx_effective {
             self.namespace.selectivity.truncate(
                 self.namespace.selectivity.len() - self.zero_stock_approx_method.id().len() - 1,
@@ -2342,6 +2547,7 @@ impl SearchSession {
         }
         self.lmr = enabled;
         self.lmr_method = method;
+        self.attach_safe_race_namespace();
         self.table.clear();
         if let Some(history) = self.ordering.as_mut() {
             history.reset();
@@ -2468,6 +2674,7 @@ impl SearchSession {
             zero_stock_approx_min_root_walls: None,
             zero_stock_approx_method: ZeroStockApproxMethod::Race,
             zero_stock_approx_effective: false,
+            zero_stock_safe_race: false,
         })
     }
     /// Table accounting includes its header and fixed slot storage; no history payload.
@@ -2521,6 +2728,7 @@ impl SearchSession {
         // A reset has no root yet; preserve requested configuration but do not
         // claim resolved authority until the next real Search supplies its root.
         self.zero_stock_approx_effective = false;
+        self.attach_safe_race_namespace();
         self.score_domain = score_domain;
         self.table.clear();
         if let Some(history) = self.ordering.as_mut() {
@@ -2571,6 +2779,7 @@ impl SearchSession {
                 (
                     self.zero_stock_approx_effective,
                     self.zero_stock_approx_method,
+                    self.zero_stock_safe_race,
                 ),
             ),
         )
@@ -2583,7 +2792,7 @@ type SearchTableAndDomain<'table, 'history> = (
     bool,
     StaticMode,
     (bool, LmrMethod),
-    (bool, ZeroStockApproxMethod),
+    (bool, ZeroStockApproxMethod, bool),
 );
 
 fn search_in_table(
@@ -2602,7 +2811,7 @@ fn search_in_table(
         ordering_diagnostics,
         static_enabled,
         (lmr, lmr_method),
-        (zero_stock_approx_permitted, zero_stock_approx_method),
+        (zero_stock_approx_permitted, zero_stock_approx_method, zero_stock_safe_race_enabled),
     ) = table_and_domain;
     let start = Instant::now();
     if limits.max_depth == 0 || limits.max_nodes == 0 || limits.max_depth > 200 {
@@ -2674,6 +2883,7 @@ fn search_in_table(
             root_walls_remaining,
             zero_stock_approx_permitted,
             zero_stock_approx_method,
+            zero_stock_safe_race_enabled,
             tt_hashes: u64::from(limits.use_tt), // one full board initialization
             tt_context_initial_items: if limits.use_tt {
                 root.occurrences().count() as u64
@@ -3142,7 +3352,7 @@ mod persistent_tt_tests {
                 false,
                 StaticMode::Off,
                 (false, LmrMethod::FixedOne),
-                (false, ZeroStockApproxMethod::Race),
+                (false, ZeroStockApproxMethod::Race, false),
             ),
         )
         .unwrap();
@@ -4107,6 +4317,10 @@ mod lmr408_tests;
 #[cfg(test)]
 #[path = "lmr400_tests.rs"]
 mod lmr400_tests;
+
+#[cfg(test)]
+#[path = "zero_stock411_tests.rs"]
+mod zero_stock411_tests;
 
 #[cfg(test)]
 #[path = "zero_stock410_tests.rs"]
