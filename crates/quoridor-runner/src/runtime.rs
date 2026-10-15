@@ -2531,27 +2531,22 @@ impl EvaluationWorkers {
                     });
                     if let (Ok(Some(before)), Some(value)) =
                         (&sigma_before, evaluator.sigma_value.as_ref())
+                        && let Ok(after) = value.work()
                     {
-                        if let Ok(after) = value.work() {
-                            requests = after["backend"]["logical_rows"]
+                        requests = after["backend"]["logical_rows"]
+                            .as_u64()
+                            .unwrap()
+                            .saturating_sub(before["backend"]["logical_rows"].as_u64().unwrap());
+                        callbacks = requests;
+                        outputs = requests.saturating_sub(
+                            after["adapter_failed_rows"]
                                 .as_u64()
                                 .unwrap()
-                                .saturating_sub(
-                                    before["backend"]["logical_rows"].as_u64().unwrap(),
-                                );
-                            callbacks = requests;
-                            outputs = requests.saturating_sub(
-                                after["adapter_failed_rows"]
-                                    .as_u64()
-                                    .unwrap()
-                                    .saturating_sub(
-                                        before["adapter_failed_rows"].as_u64().unwrap(),
-                                    ),
-                            );
-                            inference_seconds =
-                                after["synchronous_inference_seconds"].as_f64().unwrap()
-                                    - before["synchronous_inference_seconds"].as_f64().unwrap();
-                        }
+                                .saturating_sub(before["adapter_failed_rows"].as_u64().unwrap()),
+                        );
+                        inference_seconds =
+                            after["synchronous_inference_seconds"].as_f64().unwrap()
+                                - before["synchronous_inference_seconds"].as_f64().unwrap();
                     }
                     if tx
                         .send(EvaluationEvent::Terminal {
