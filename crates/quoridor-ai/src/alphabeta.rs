@@ -2183,6 +2183,32 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
             Ok(shallow)
         }
     }
+    fn forced_root_depth(
+        &mut self,
+        c: &mut SigmaContext,
+        a: Option<&EvalAccumulator>,
+        depth: u16,
+        action: u16,
+    ) -> NodeResult<(u16, f32)> {
+        self.enter()?;
+        if !c.legal_ids().contains(&action) {
+            return Err(Interrupted::Error(SearchError::Root(
+                "illegal forced root action".into(),
+            )));
+        }
+        // Restricted parent values never enter the all-legal root TT owner.
+        let value = self.child(
+            c,
+            a,
+            action,
+            depth - 1,
+            [f32::NEG_INFINITY, f32::INFINITY],
+            1,
+        )?;
+        self.control()?;
+        Ok((action, value))
+    }
+
     fn root_depth(
         &mut self,
         c: &mut SigmaContext,
@@ -2814,6 +2840,53 @@ impl SearchSession {
     ) -> Result<SearchResult> {
         self.search_with_updates(root, limits, cancel, &mut |_| {})
     }
+    /// Restrict only the parent action. H includes this move; all 1..=H iterations
+    /// share the invocation's cumulative cap, table, ordering and scratch. No
+    /// restricted parent numeric entry is read or stored as an all-legal root.
+    pub fn search_forced(
+        &mut self,
+        root: &SigmaContext,
+        action: u16,
+        limits: &SearchLimits,
+        cancel: &AtomicBool,
+    ) -> Result<SearchResult> {
+        let root_walls = root
+            .position()
+            .walls_remaining
+            .into_iter()
+            .map(u16::from)
+            .sum();
+        self.set_zero_stock_approx_effective(permit_zero_stock_approx(
+            self.zero_stock_approx_min_root_walls,
+            root_walls,
+            limits.max_depth,
+        ));
+        let mut on_completed = |_: &SearchResult| {};
+        let mut invocation = SearchInvocation::root(&mut on_completed);
+        invocation.forced_root = Some(action);
+        search_in_table::<false, false>(
+            root,
+            self.evaluator.as_ref(),
+            limits,
+            cancel,
+            None,
+            invocation,
+            (
+                &mut self.table,
+                self.score_domain,
+                self.ordering.as_mut(),
+                self.ordering_diagnostics,
+                self.static_enabled,
+                (self.lmr, self.lmr_method),
+                (
+                    self.zero_stock_approx_effective,
+                    self.zero_stock_approx_method,
+                    self.zero_stock_safe_race,
+                ),
+            ),
+        )
+    }
+
     /// Same persistent table and search; callback publishes complete depths only.
     pub fn search_with_updates(
         &mut self,
@@ -2867,6 +2940,7 @@ type SearchTableAndDomain<'table, 'history> = (
 );
 
 struct SearchInvocation<'a> {
+    forced_root: Option<u16>,
     on_completed: &'a mut dyn FnMut(&SearchResult),
     #[cfg(feature = "research-diagnostics")]
     observation: Option<&'a mut LmrObservation>,
@@ -2879,6 +2953,7 @@ impl<'a> SearchInvocation<'a> {
     fn root(on_completed: &'a mut dyn FnMut(&SearchResult)) -> Self {
         Self {
             on_completed,
+            forced_root: None,
             #[cfg(feature = "research-diagnostics")]
             observation: None,
             #[cfg(feature = "research-diagnostics")]
@@ -3096,7 +3171,11 @@ fn search_in_table<const OBSERVE: bool, const TRACE: bool>(
                 o.iteration = depth;
             }
             state.table.next_generation();
-            let (action, value) = state.root_depth(&mut c, a.as_ref(), depth, result.action)?;
+            let (action, value) = if let Some(action) = invocation.forced_root {
+                state.forced_root_depth(&mut c, a.as_ref(), depth, action)?
+            } else {
+                state.root_depth(&mut c, a.as_ref(), depth, result.action)?
+            };
             let pv = state.pv(&c, action, depth);
             state.control()?;
             result.action = Some(action);
@@ -3176,6 +3255,7 @@ fn search_in_table<const OBSERVE: bool, const TRACE: bool>(
         }
     };
     if ordinary_root
+        && invocation.forced_root.is_none()
         && result.completed_depth > 0
         && let Some(history) = state.ordering.as_deref_mut()
     {
@@ -4627,3 +4707,7 @@ mod ordering_work394_tests;
 #[cfg(test)]
 #[path = "search_settings403_tests.rs"]
 mod search_settings403_tests;
+
+#[cfg(test)]
+#[path = "forced_root419_tests.rs"]
+mod forced_root419_tests;

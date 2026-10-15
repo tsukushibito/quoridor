@@ -22,6 +22,9 @@ use std::{
     time::Instant,
 };
 
+#[path = "measurement_loss_leaf.rs"]
+mod loss_leaf;
+
 #[derive(Clone, Copy, Debug, Deserialize, Serialize, PartialEq, Eq)]
 #[serde(rename_all = "snake_case")]
 enum Profile {
@@ -56,6 +59,8 @@ struct RootInput {
 #[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 struct Settings {
+    #[serde(default)]
+    loss_leaf_419: bool,
     roots: Vec<RootInput>,
     profile: Profile,
     tt_entries: usize,
@@ -118,6 +123,9 @@ fn default_zero_stock_approx_method() -> String {
 }
 
 fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
+    if settings.loss_leaf_419 {
+        loss_leaf::validate(settings, requests)?;
+    }
     LmrMethod::from_name(&settings.lmr_method)?;
     ZeroStockApproxMethod::from_name(&settings.zero_stock_approx_method)?;
     if settings
@@ -195,7 +203,7 @@ fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
     Ok(())
 }
 
-fn root_spec(value: &Value, selector: &RootInput) -> Result<RootSpec> {
+fn root_spec(value: &Value, selector: &RootInput, loss_leaf: bool) -> Result<RootSpec> {
     let row = value
         .pointer(&selector.pointer)
         .ok_or("measurement input pointer")?;
@@ -210,9 +218,21 @@ fn root_spec(value: &Value, selector: &RootInput) -> Result<RootSpec> {
         }
         prefix.truncate(length);
     }
-    let expected = if row.get("opening_bound").is_some()
-        || row.get("expected_divergence_board").is_some()
-    {
+    let expected = if loss_leaf {
+        if row.get("expected_ordered_history_keys").is_none() {
+            return Err("loss-leaf bound ordered history is missing".into());
+        }
+        if selector.field != "from_prefix_actions"
+            || selector.prefix_len.is_some()
+            || selector.jsonl_match.is_some()
+            || selector.check_history
+        {
+            return Err(
+                "loss-leaf requires the complete canonical prefix, not supplied counts".into(),
+            );
+        }
+        Some(row.clone())
+    } else if row.get("opening_bound").is_some() || row.get("expected_divergence_board").is_some() {
         if selector.field != "prefix"
             || selector.prefix_len.is_some()
             || selector.check_history
@@ -232,7 +252,11 @@ fn root_spec(value: &Value, selector: &RootInput) -> Result<RootSpec> {
     };
     Ok(RootSpec { prefix, expected })
 }
-fn prepare_roots(e: &Experiment, selectors: &[RootInput]) -> Result<Vec<RootSpec>> {
+fn prepare_roots(
+    e: &Experiment,
+    selectors: &[RootInput],
+    loss_leaf: bool,
+) -> Result<Vec<RootSpec>> {
     // Read each selected input once, as the existing book/chronological replay
     // preparation does. This temporary grouping never persists into Search.
     let mut inputs = std::collections::BTreeMap::<usize, Vec<(usize, &RootInput)>>::new();
@@ -251,7 +275,7 @@ fn prepare_roots(e: &Experiment, selectors: &[RootInput]) -> Result<Vec<RootSpec
         {
             let value: Value = input.read()?;
             for (index, selector) in selected {
-                roots[index] = Some(root_spec(&value, selector)?);
+                roots[index] = Some(root_spec(&value, selector, loss_leaf)?);
             }
             continue;
         }
@@ -301,7 +325,7 @@ fn prepare_roots(e: &Experiment, selectors: &[RootInput]) -> Result<Vec<RootSpec
                     if roots[*index].is_some() {
                         return Err("ambiguous measurement input selector".into());
                     }
-                    roots[*index] = Some(root_spec(&row, selector)?);
+                    roots[*index] = Some(root_spec(&row, selector, loss_leaf)?);
                 }
             }
         }
@@ -567,6 +591,12 @@ fn load_evaluator(e: &Experiment, settings: &Settings) -> Result<Arc<dyn StaticE
     if e.models.is_empty() {
         return Ok(Arc::new(alphabeta::DistanceEvaluator::new(0., 8.)));
     }
+    Ok(Arc::new(alphabeta::ResidualEvaluator::new(
+        load_residual_model(e)?,
+    )))
+}
+
+fn load_residual_model(e: &Experiment) -> Result<Arc<quoridor_nnue::residual::ResidualModel>> {
     let selected = e.models.first().ok_or("measurement model")?;
     let model = Arc::new(quoridor_nnue::residual::ResidualModel::load(
         &selected.descriptor.path,
@@ -574,7 +604,7 @@ fn load_evaluator(e: &Experiment, settings: &Settings) -> Result<Arc<dyn StaticE
     if quoridor_data::hex_digest(&model.fingerprint()) != selected.evaluator_sha256 {
         return Err("actual loaded evaluator identity mismatch".into());
     }
-    Ok(Arc::new(alphabeta::ResidualEvaluator::new(model)))
+    Ok(model)
 }
 fn drive(
     requests: &[Request],
@@ -694,33 +724,40 @@ pub fn run(bound: &BoundControl) -> Result<Value> {
     let cancel = Arc::new(AtomicBool::new(false));
     // The existing guardian owns signal forwarding, directwait and partial capture.
     // Cooperative cancellation remains the target/driver AtomicBool boundary.
-    let (prepared, preparation_seconds) = timed(|| -> Result<SearchTarget> {
-        let roots = prepare_roots(&e, &settings.roots)?;
-        let evaluator = load_evaluator(&e, &settings)?;
-        Ok(SearchTarget {
-            settings,
-            roots,
-            evaluator,
-            session: None,
-            root: None,
-            before: Value::Null,
-        })
-    });
-    let mut result = match prepared {
-        Ok(mut target) => {
-            let mut result = drive(&requests, e.planned_slots, &mut target, &cancel, |row| {
-                output.row(row)
-            });
-            let start = Instant::now();
-            drop(target);
-            result["target_drop_seconds"] = json!(start.elapsed().as_secs_f64());
-            result
-        }
-        Err(error) => {
-            json!({"planned":e.planned_slots,"scheduled":requests.len(),"calls":0,"complete":0,"uncompleted":e.planned_slots,"unperformed":e.planned_slots,"remaining_requests":requests,"measurements":[],"errors":[{"stage":"setup","error":fact(&*error)}],"status":"PARTIAL"})
-        }
+    let mut result = if settings.loss_leaf_419 {
+        loss_leaf::run(&e, &settings, &requests, &cancel, &mut |row| {
+            output.row(row)
+        })?
+    } else {
+        let (prepared, preparation_seconds) = timed(|| -> Result<SearchTarget> {
+            let roots = prepare_roots(&e, &settings.roots, false)?;
+            let evaluator = load_evaluator(&e, &settings)?;
+            Ok(SearchTarget {
+                settings,
+                roots,
+                evaluator,
+                session: None,
+                root: None,
+                before: Value::Null,
+            })
+        });
+        let mut result = match prepared {
+            Ok(mut target) => {
+                let mut result = drive(&requests, e.planned_slots, &mut target, &cancel, |row| {
+                    output.row(row)
+                });
+                let start = Instant::now();
+                drop(target);
+                result["target_drop_seconds"] = json!(start.elapsed().as_secs_f64());
+                result
+            }
+            Err(error) => {
+                json!({"planned":e.planned_slots,"scheduled":requests.len(),"calls":0,"complete":0,"uncompleted":e.planned_slots,"unperformed":e.planned_slots,"remaining_requests":requests,"measurements":[],"errors":[{"stage":"setup","error":fact(&*error)}],"status":"PARTIAL"})
+            }
+        };
+        result["setup_seconds"] = json!(preparation_seconds);
+        result
     };
-    result["setup_seconds"] = json!(preparation_seconds);
     result["runtime_launch_origin"] = runtime["runtime_launch_origin"].clone();
     // Reverify the actual consumed assets, not an old qualification/source graph.
     for reference in [&e.config, &e.schedule]
@@ -757,7 +794,9 @@ fn replay(spec: &RootSpec, rules: &str) -> Result<SigmaContext> {
     }
     if let Some(expected) = &spec.expected {
         let actual = identity(&root);
-        if expected.get("opening_bound").is_some() {
+        if expected.get("expected_ordered_history_keys").is_some() {
+            loss_leaf::input_check(&spec.prefix, expected, &root)?;
+        } else if expected.get("opening_bound").is_some() {
             observation_input_check(&spec.prefix, expected, &root)?;
         } else if actual["root_key"] != expected["root_key"]
             || actual["history_counts"] != expected["history_counts"]

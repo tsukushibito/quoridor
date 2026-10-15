@@ -360,6 +360,13 @@ struct Tree {
     leaves: u64,
     moves: Vec<Value>,
 }
+pub(crate) fn tree_terminal(root: &SigmaContext) -> Option<f32> {
+    root.terminal_value().map(|v| v * alphabeta::TERMINAL_SCORE)
+}
+pub(crate) fn tree_parent_value(child: f32) -> f32 {
+    -child
+}
+
 fn tree(
     root: &SigmaContext,
     eval: &[Arc<dyn StaticEvaluator>; 3],
@@ -374,9 +381,9 @@ fn tree(
     }
     *local += 1;
     count.tree_nodes += 1;
-    if let Some(v) = root.terminal_value() {
+    if let Some(v) = tree_terminal(root) {
         return Ok(Tree {
-            values: [v * alphabeta::TERMINAL_SCORE; 3],
+            values: [v; 3],
             nodes: 1,
             leaves: 1,
             moves: vec![],
@@ -427,7 +434,7 @@ fn tree(
             count,
             cancel,
         )?;
-        let v = t.values.map(|v| -v);
+        let v = t.values.map(tree_parent_value);
         for i in 0..3 {
             values[i] = values[i].max(v[i]);
         }

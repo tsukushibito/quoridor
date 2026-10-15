@@ -101,10 +101,29 @@ impl HeadRange {
     }
 }
 
+/// Two views of one canonical residual-head computation, in STM perspective.
+/// `pre_tanh` is the finite combined distance-plus-residual logit; `post_tanh`
+/// is the existing f64-tanh-to-f32 output, including saturation.
+#[derive(Debug, Clone, Copy)]
+pub struct ResidualValueView {
+    pub baseline_logit: f32,
+    pub linear_residual: f32,
+    pub pre_tanh: f32,
+    pub post_tanh: f32,
+}
+
 /// Worker-owned input storage. Models and accumulators remain borrowed.
 #[derive(Debug)]
 pub struct ResidualScratch {
     input: Vec<f32>,
+}
+#[cfg(feature = "research")]
+impl ResidualScratch {
+    /// Borrow the canonical already-prepared head input for bounded diagnostics.
+    /// No preparation, allocation, formula or inference is performed here.
+    pub fn input_view(&self) -> &[f32] {
+        &self.input
+    }
 }
 impl ResidualModel {
     pub fn parameter_count(t: Topology) -> Result<usize> {
@@ -283,6 +302,27 @@ impl ResidualModel {
         scratch: &mut ResidualScratch,
         observe: impl FnOnce(bool, bool),
     ) -> Result<f32> {
+        Ok(self
+            .value_with_scratch_observed(a, scratch, observe)?
+            .post_tanh)
+    }
+
+    /// Research view of the same head, without another head evaluation or tanh inversion.
+    #[cfg(feature = "research")]
+    pub fn evaluate_view_with_scratch(
+        &self,
+        a: &Accumulator,
+        scratch: &mut ResidualScratch,
+    ) -> Result<ResidualValueView> {
+        self.value_with_scratch_observed(a, scratch, |_, _| {})
+    }
+
+    fn value_with_scratch_observed(
+        &self,
+        a: &Accumulator,
+        scratch: &mut ResidualScratch,
+        observe: impl FnOnce(bool, bool),
+    ) -> Result<ResidualValueView> {
         let r = self.linear_head_with_scratch_observed(a, scratch, observe)?;
         let d = self.base.distance_fit;
         let u = d.a + d.b * (a.features.distance[1] - a.features.distance[0]);
@@ -290,7 +330,12 @@ impl ResidualModel {
         if !value.is_finite() {
             return Err(Error::Numeric("residual logit".into()));
         }
-        Ok(f64::from(value).tanh() as f32)
+        Ok(ResidualValueView {
+            baseline_logit: u,
+            linear_residual: r,
+            pre_tanh: value,
+            post_tanh: f64::from(value).tanh() as f32,
+        })
     }
     /// Shared packed-input/guarded head kernel. Only the explicit step format
     /// consumes its linear result; legacy evaluation retains its old logit math.
@@ -913,5 +958,146 @@ mod head_route_observer_test {
         );
         assert!(route.is_none());
         println!("OBSERVED_ROUTE_SYNTHETIC_HEAD_ATTEMPTS=2;FT_SETUPS=1;SHAPE_REJECTS=1");
+    }
+}
+
+#[cfg(all(test, feature = "research"))]
+mod residual_value419_tests {
+    use super::*;
+    use std::cell::Cell;
+
+    fn toy(weights: Vec<f32>, distance_fit: DistanceFit) -> ResidualModel {
+        ResidualModel::from_parts(
+            Topology {
+                ft_width: 1,
+                hidden_width: 1,
+            },
+            weights,
+            [0.25, 0.5],
+            [0.125, 0.25],
+            distance_fit,
+            RouteMode::Zero4,
+            [0.; 4],
+            [1.; 4],
+        )
+        .unwrap()
+    }
+
+    fn weights() -> (Vec<f32>, usize, usize) {
+        let t = Topology {
+            ft_width: 1,
+            hidden_width: 1,
+        };
+        let head = FEATURE_COUNT + 1;
+        let output = head + t.input_width() + 4 + 1;
+        (
+            vec![0.; ResidualModel::parameter_count(t).unwrap()],
+            head,
+            output,
+        )
+    }
+
+    #[test]
+    fn residual419_view_normalized_distance_one_head_and_parent_unchanged() {
+        let (mut w, head, output) = weights();
+        w[head] = 0.25;
+        w[head + 1] = 0.5;
+        w[head + 2] = 2.;
+        w[head + 3] = -1.;
+        w[output] = 0.25;
+        w[output + 1] = -0.25;
+        let model = toy(w, DistanceFit { a: 0.125, b: 2. });
+        let mut a = model.full(Position::default()).unwrap();
+        a.values = [vec![2.], vec![-3.]];
+        a.features.distance = [0.5, 0.75];
+        a.features.side = 0;
+        let parent_values = a.values.clone();
+        let parent_distances = a.features.distance;
+        let mut scratch = model.evaluation_scratch();
+        let pointer = scratch.input.as_ptr();
+        let capacity = scratch.input.capacity();
+        let calls = Cell::new(0);
+        let view = model
+            .value_with_scratch_observed(&a, &mut scratch, |_, _| calls.set(calls.get() + 1))
+            .unwrap();
+        // Inputs [ReLU(2), ReLU(-3), (.5-.25)/.125, (.75-.5)/.25]
+        // give hidden 3.5, residual .625, distance logit .625, total 1.25.
+        assert_eq!(view.baseline_logit.to_bits(), 0.625_f32.to_bits());
+        assert_eq!(view.linear_residual.to_bits(), 0.625_f32.to_bits());
+        assert_eq!(view.pre_tanh.to_bits(), 1.25_f32.to_bits());
+        assert_eq!(view.post_tanh.to_bits(), (1.25_f64.tanh() as f32).to_bits());
+        assert_eq!(calls.get(), 1);
+        assert_eq!(scratch.input[2..4], [2., 1.]);
+        assert!(scratch.input[4..].iter().all(|v| v.to_bits() == 0));
+        assert_eq!(pointer, scratch.input.as_ptr());
+        assert_eq!(capacity, scratch.input.capacity());
+        assert_eq!(a.values, parent_values);
+        assert_eq!(a.features.distance, parent_distances);
+        assert_eq!(a.features.side, 0);
+        assert_eq!(
+            model
+                .evaluate_with_scratch(&a, &mut scratch)
+                .unwrap()
+                .to_bits(),
+            view.post_tanh.to_bits()
+        );
+        let public_view = model.evaluate_view_with_scratch(&a, &mut scratch).unwrap();
+        assert_eq!(public_view.pre_tanh.to_bits(), view.pre_tanh.to_bits());
+        assert_eq!(public_view.post_tanh.to_bits(), view.post_tanh.to_bits());
+    }
+
+    #[test]
+    fn residual419_view_retains_finite_saturated_logit_and_output_bits() {
+        for (logit, expected_post) in [(-100., -1.), (0., 0.), (100., 1.)] {
+            let (mut w, _, output) = weights();
+            w[output + 1] = logit;
+            let model = toy(w, DistanceFit { a: 0., b: 0. });
+            let a = model.full(Position::default()).unwrap();
+            let mut scratch = model.evaluation_scratch();
+            let view = model.evaluate_view_with_scratch(&a, &mut scratch).unwrap();
+            assert_eq!(view.pre_tanh.to_bits(), logit.to_bits());
+            assert_eq!(view.post_tanh.to_bits(), (expected_post as f32).to_bits());
+            assert_eq!(
+                model.evaluate(&a).unwrap().to_bits(),
+                view.post_tanh.to_bits()
+            );
+        }
+    }
+
+    #[test]
+    fn residual419_view_preserves_validation_and_nonfinite_logit_refusal() {
+        let (w, _, _) = weights();
+        let model = toy(w, DistanceFit { a: 0., b: 0. });
+        let a = model.full(Position::default()).unwrap();
+        let mut scratch = model.evaluation_scratch();
+        let calls = Cell::new(0);
+        let mut bad = ResidualScratch { input: vec![] };
+        assert!(matches!(
+            model.value_with_scratch_observed(&a, &mut bad, |_, _| calls.set(calls.get() + 1)),
+            Err(Error::Input(_))
+        ));
+        let mut invalid = a.clone();
+        invalid.features.distance[0] = f32::NAN;
+        assert!(
+            model
+                .value_with_scratch_observed(&invalid, &mut scratch, |_, _| calls
+                    .set(calls.get() + 1))
+                .is_err()
+        );
+        assert_eq!(calls.get(), 0);
+        let (mut w, _, output) = weights();
+        w[output + 1] = f32::MAX;
+        let overflowing = toy(w, DistanceFit { a: f32::MAX, b: 0. });
+        let a = overflowing.full(Position::default()).unwrap();
+        let mut scratch = overflowing.evaluation_scratch();
+        assert!(matches!(
+            overflowing.value_with_scratch_observed(&a, &mut scratch, |_, _| calls.set(calls.get() + 1)),
+            Err(Error::Numeric(message)) if message == "residual logit"
+        ));
+        assert_eq!(calls.get(), 1);
+        assert!(matches!(
+            overflowing.evaluate_with_scratch(&a, &mut scratch),
+            Err(Error::Numeric(message)) if message == "residual logit"
+        ));
     }
 }

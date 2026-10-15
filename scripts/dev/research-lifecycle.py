@@ -872,6 +872,7 @@ def measurement_config(experiment):
         isinstance(config, dict)
         and set(config)
         <= {
+            "loss_leaf_419",
             "roots",
             "profile",
             "tt_entries",
@@ -916,6 +917,7 @@ def measurement_config(experiment):
         all(type(config[key]) is bool for key in ("use_tt", "use_pvs")),
         "measurement Boolean switches",
     )
+    require(type(config.get("loss_leaf_419", False)) is bool, "loss-leaf switch")
     require(type(config.get("lmr", False)) is bool, "measurement LMR switch")
     require(
         type(config.get("zero_stock_safe_race", False)) is bool,
@@ -1083,6 +1085,58 @@ def measurement_config(experiment):
             ),
             "LMR observation complete-prefix selectors",
         )
+    if config.get("loss_leaf_419", False):
+        parent_ids = (
+            "distance-slot004-ply011",
+            "distance-slot004-ply039",
+            "distance-slot005-ply012",
+        )
+        require(
+            config["profile"] == "control"
+            and config["tt_entries"] == 1048576
+            and config["use_tt"]
+            and config["use_pvs"]
+            and not config.get("lmr", False)
+            and threshold is None
+            and not config.get("zero_stock_safe_race", False)
+            and len(config["roots"]) == 3
+            and len(requests) == 12
+            and len({r["session"] for r in requests}) == 12
+            and len(experiment["inputs"]) == 1
+            and experiment["inputs"][0]["sha256"]
+            == "b26fb4d5f21bac5b9614610504aac7022850223a6af67b4680530c08e8429304",
+            "loss-leaf fixed cold Control/OFF input protocol",
+        )
+        for i, root in enumerate(config["roots"]):
+            require(
+                root["input"] == 0
+                and root["pointer"] == f"/parents/{i}"
+                and root["field"] == "from_prefix_actions"
+                and root["label"] == parent_ids[i]
+                and root.get("prefix_len") is None
+                and root.get("jsonl_match") is None
+                and not root.get("check_history", False),
+                "loss-leaf complete-prefix selectors",
+            )
+        for i, request in enumerate(requests):
+            parent, depth, engine = i // 4, 2 + (i % 4) // 2, ("N", "D")[i % 2]
+            require(
+                request["id"] == f"{parent_ids[parent]}:{engine}:H{depth}:normal"
+                and request["root"] == parent
+                and request["depth"] == depth
+                and request["node_cap"] == 1000000
+                and request.get("time_limit_ms") is None
+                and not any(
+                    request.get(k, False)
+                    for k in (
+                        "diagnostic",
+                        "warmup",
+                        "observe_lmr",
+                        "observe_completed_depths",
+                    )
+                ),
+                "loss-leaf fixed normal schedule; forced union derived once natively",
+            )
     return config, requests
 
 

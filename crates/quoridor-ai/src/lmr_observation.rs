@@ -471,6 +471,7 @@ impl SearchSession {
             cancel,
             None,
             SearchInvocation {
+                forced_root: None,
                 on_completed: &mut callback,
                 observation: Some(&mut *observation),
                 trial: None,
@@ -558,6 +559,7 @@ impl SearchSession {
             cancel,
             None,
             SearchInvocation {
+                forced_root: None,
                 on_completed: &mut callback,
                 observation: None,
                 trial_trace: Some(&mut trace),
@@ -740,6 +742,7 @@ mod trial_tests {
             &AtomicBool::new(false),
             None,
             SearchInvocation {
+                forced_root: None,
                 on_completed: &mut callback,
                 observation: None,
                 trial_trace: Some(&mut trace),
