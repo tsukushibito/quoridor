@@ -1,0 +1,72 @@
+[
+  {
+    "id": "quoridor-4lc.404.2",
+    "title": "零在庫固定壁でdraw領域が存在しない一般証明を考察する",
+    "description": "# 零在庫の相互draw不存在を示せるか：並行した部分考察\n\n人間は9×9の全壁配置後、双方最善で千日手になる具体例または有無の数学的証明を求め、今回「並行した部分考察ができるならサブエージェントを使ってよい」と明示しました。親はRoot所有quoridor-4lc.404。あなたの既存source session01a11062-b120-73a1-8aa3-fe2cb922c7c0を同managed cwd /workspaces/quoridor/.worktree/arena-evaluation・gpt-6.1-sol/high・danger-full-access/approval neverで再用します。新leaf404.2を本人が所有し、通常のRoot数学結果を同親ownerに返してください。Main/Git/Cargo writerは324のみ。\n\n担当する問いは「合法な固定20壁・双方stock0・9×9標準ジャンプ・一手必須の盤面ゲームで、どちらもgoal勝ちを強制できない領域Dが存在しない、と一般に証明できるか」です。反例構成は別担当が並行します。結論へ合わせず、証明が崩れる一歩を見つけた場合もそれを明記して返してください。無理に不存在を断定せず、UNKNOWNのままでよいです。\n\nルール：P0の初期駒4=e1、goalは72..80（9段目）、P1初期76=e9、goalは0..8（1段目）。0..80のcellはrow*9+col。二pawnは異なる。H壁81..144、V壁145..208、anchor=row*8+col。長さ2、重複／交差不可、両駒にwallだけを考えたgoal経路が残る。moveは空き隣接への1歩。隣接に相手がいれば、その背後が開く時は直進jump、背後が壁／盤端なら相手の左右へのside jump。全配置後はwall手もpassもなく、goalは即終局。infinite playをdrawとする盤面グラフのDを扱い、既往2回によって勝ちをdrawへ落とす別の履歴例とは区別します。\n\n現在の事実：Rootは合法20壁63配置、618330の全有効非終端駒位置・手番を解析しD0。別の壁無し移動対照1配置10242状態もD0。これは全壁配置の網羅ではありません。原335のroot60drawはBが前に即goalを逃した履歴例で、相互最善の循環例として不十分でした。数学／履歴担当はfinite分類の構成とscopeを独立確認してclear、全配置の不存在はUNKNOWNです。\n\n同担当が別に確認した理論：固定壁のroot exact WDLだけなら、過去2回のHistoryKey集合Eを非goal drawへの入口にし、rootもEなら初期専用コピー（入辺無し）から出る有限reachability graphに縮約できます。既往0/1の違いはroot exact WDLを変えません。W/Lの勝ち方策はrank厳減、Dの非敗方策はDに留まり、DからWへ逸脱したらW/L経路とそれまでのD-prefixは非交差。このlemmaは通常の有限深度heuristic/TT bound/最短手数/任意途中table再利用を証明しません。今回は過去2回の罠を使わない盤面Dの一般有無を検討します。\n\n必要時の読取はMainのcore position.rsのis_edge_open/pawn_destinations/checked、Root reportとrelated-two-count-v1/report-ja.mdだけ。全source／data監査・モデル読取なし。恒常ソルバー実装・graph再計算・新配置sweep・Search／arena／生成／fit／依存download／build／testsは禁止です。テキストの数学考察と私有小reportだけを所有し、思いついた具体例は座標・壁・証明条件を候補として返してください。新しい補助agentの再帰spawnも不要です。\n\nSource読取／私有writerはCPU8一つ・AS512MiB・GPU0、標準taskset/ulimit又は現役の小source guardを使い、最大5分の考察で有効な結果または未解決の障害を一度返してください。LLM thinkingそのもののhost CPU/RAMは計測対象ではなくUNKNOWN。通常コードの実行はBeads ready/showと名前付きread・対応formatter・小report writeだけで、フルアクセス適用を最初の通常command前に確認します。Main/Git/index/Cargoを操作せず、現在のshared target／model／RAWを保護します。\n\n成果は命題／仮定／論証、未証明ステップや反例があればその具体条件、実STOP・owned[]、対象普通usage一度。手書きreportは既存formatterで整形します。本人leafを検証・backup・closeし、親ownerへの一度の結果で終えます。一般的な研究成功を採用せず、Main保存・重要結論の独立確認はRoot／324が必要範囲だけ調整します。ordinaryに保存事前枠は設けずdecimal50GB維持。mixed／learner全prep/pipelineと323USERPAUSE、defaults／models／weights／seals・旧RAW／FAILED／費は不変です。\n",
+    "notes": "Bounded source-only partial mathematics verified. General fixed20-wall zero-stock board D existence remains UNKNOWN; individual2d finite-termination strategy does not prove a non-losing/winning strategy. Original report6879fb21/6089 and completiona0f9146c/2711, sourceSTOP00:47:43.257018 and original fees/refusals/time-overrun note preserved. No further mathematics/source/native/graph/Search/model/tests or science. Normal admin AS correction authorized by Root: existing512MiB RSS family guard, source AS unchanged, originalGo/V8/AppServer refusals retained. Verification/admin receipts in own zero-stock-draw404-theory-v1/admin-repair-v1. Parent owns general claim; bounded author scope complete, no new ACK gate.",
+    "status": "closed",
+    "priority": 2,
+    "issue_type": "task",
+    "assignee": "codex:01a11062-b120-73a1-8aa3-fe2cb922c7c0",
+    "owner": "tsukushibito@gmail.com",
+    "created_at": "2026-10-15T00:40:13Z",
+    "created_by": "codex:01a12fdc-f6ec-7e93-9cfc-4bedb3ea1e94",
+    "updated_at": "2026-10-15T00:51:29Z",
+    "closed_at": "2026-10-15T00:51:29Z",
+    "close_reason": "Verified bounded partial consideration complete; generalD UNKNOWN and no counterexample claimed. Original report/STOP immutable, authorized normal controller admin repaired; evidence /workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-draw404-theory-v1/admin-repair-v1/verification.json",
+    "metadata": {
+      "dashboard": {
+        "stage": "Bounded partial mathematical consideration verified; administrative repair completed",
+        "wait_kind": "none",
+        "next_action": "Parent owns any general mathematical conclusion; no further author calculation",
+        "wait_reason": "General D existence remains UNKNOWN, not a source-ready proof of absence",
+        "runtime_dirs": [],
+        "evidence_paths": [
+          "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-draw404-theory-v1/report-ja.json",
+          "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-draw404-theory-v1/completion.json",
+          "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-draw404-theory-v1/admin-repair-v1/closure-receipt.json"
+        ]
+      }
+    },
+    "labels": [
+      "continuation-active",
+      "current-priorities",
+      "dashboard",
+      "frame22",
+      "frame23",
+      "frame24",
+      "frame25"
+    ],
+    "dependencies": [
+      {
+        "id": "quoridor-4lc.404",
+        "title": "双方最善で千日手になる零在庫局面を有限グラフで確認する",
+        "description": "# 双方最善で千日手になる零在庫局面の数学的確認\n\n人間は、全壁配置後に双方が最善に指して千日手となる具体例と、その有無の数学的証明を求めた。Rootの質問分析として、固定壁配置・合法な駒移動／ジャンプ・手番を頂点にした有限reachability gameを限定計算する。NNUE／固定DのSearch、対局、生成、学習、モデル読み込みは行わない。\n\nRootがこのartifact配下の独立した小さな数学検算と報告だけを所有する。Main／Git／Cargo／製品設定はcurrent324のみ。通常の限定計算に事前保存枠なし。計算はCPU5一つ、AS512MiB、command CPU30秒／wall60秒以内を一回の小計算の上限とし、process directwait・終了後affected使用を一度確認する。外部データ取得は必要な本文だけ、小さな結果以外のコピーはしない。合計で最大64の明示固定壁配置を検査し、全壁配置の不存在証明と読み替えない。ヒューリスティックの乱数で局面を見つける場合もseed・実件数・不成立を保存する。\n\n最初は壁無しの基準と元335の20壁配置で逆向き解析を行う。盤面グラフでのdrawなら、各手番で相手のWinへ入らずdraw領域内に留まれる戦略を示し、有限盤面で同一状態が3回出現することで本研究のthreefold drawへ結ぶ。既往2回の罠によるhistory依存drawと、盤面自体の相互非敗戦略を区別する。Win／Lossのrankは既存履歴へ触れる前のboard-only強制勝ち証明で、過去に2回出た局面を通る時の厳密threefold価値へそのまま変換しない。\n\n具体例の採用には壁交差／重複／各駒のgoal可達、genuine初期prefix、全合法手、draw領域の閉包と選んだ戦略を既存core契約へ確認する。新しい恒常solver／registry／certifier／監視は作らない。重要な有無の結論は関連する数学境界だけ既存の独立確認担当に渡し、全再計算を必須にしない。見つからない場合は今回の有限確認範囲と未解決を報告し、存在しないと断定しない。\n\n最終の必要な数学的結果は既存docs/research-findings.mdへcurrent324が統合し、状態はBeadsで所有する。Mixed／learner全準備・pipeline、323 USERPAUSE、製品／generator defaults／models／weights／seals、旧RAW／FAILED／費は不変。\n",
+        "notes": "有限計算64壁配置／628572全非終端盤面状態：W336960 L291612 D0。過去履歴込みのDraw0・全配置不存在は未証明。数学境界の独立確認404.1進行中。Root math artifact: .artifacts/research-policy/zero-stock-mutual-draw-20261015/report.md。Main/Git/Cargo/通常Search/対局/生成/fit0、全USERPAUSE維持。\n独立source確認の重要な区別を反映：合法20壁は63配置618330状態 W331200 L287130 D0。壁無し1配置10242状態は移動グラフの対照で、標準合法零在庫ではない。原64計算値・結果は不変、report解釈のみ訂正。一般定理はUNKNOWN。\n人間の追加並行許可に基づき、旧sessionを再用して一般不存在証明404.2と具体draw反例構成404.3をsource-only思考で並行配分。native/graph追加計算/Search/game/生成fit無し。proof sourceCPU8/AS512M、counterexample CPU3/AS512M、G0、同gpt6.1high/fullnever/managedcwd。Root exact WDLの初期2回集合＋root例外の縮約は404.1独立math_clear、D-prefixとW/L経路非交差も確定。全配置DなしはUNKNOWN維持、既存324へ小結果と証明の通常Git保存だけを依頼済み。",
+        "status": "in_progress",
+        "priority": 2,
+        "issue_type": "task",
+        "assignee": "codex:01a12fdc-f6ec-7e93-9cfc-4bedb3ea1e94",
+        "owner": "tsukushibito@gmail.com",
+        "created_at": "2026-10-15T00:20:55Z",
+        "created_by": "codex:01a12fdc-f6ec-7e93-9cfc-4bedb3ea1e94",
+        "updated_at": "2026-10-15T00:41:29Z",
+        "labels": [
+          "continuation-active",
+          "current-priorities",
+          "dashboard",
+          "frame22",
+          "frame23",
+          "frame24",
+          "frame25"
+        ],
+        "dependency_type": "parent-child"
+      }
+    ],
+    "parent": "quoridor-4lc.404",
+    "dependent_count": 0,
+    "dependency_count": 1,
+    "comment_count": 0,
+    "revision": "-7991148411074102429"
+  }
+]

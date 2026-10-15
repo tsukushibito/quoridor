@@ -1,0 +1,51 @@
+{
+  "issue": "quoridor-4lc.404.3",
+  "status": "STOPPED_FINITE_PARTIAL_CONSIDERATION_NO_COUNTEREXAMPLE_FORMAT_BLOCKED",
+  "at": "2026-10-15T00:45:33.925836082Z",
+  "context": {
+    "cwd": "/workspaces/quoridor/.worktree/arena-generalization377",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "sandbox": "danger-full-access",
+    "approvalPolicy": "never",
+    "actual_turn_context_verified": true,
+    "turn": "01a13d02-0572-72c0-b30d-f7eb63e2b280"
+  },
+  "report": {
+    "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-mutual-draw404-part3-v1/report-ja.md",
+    "sha256": "9bef6176c502b9990c0b90f15121d3e8b88425c9d95c895e25890c3dea82edbd",
+    "bytes": 5216,
+    "mode": "0644"
+  },
+  "consideration_window": "00:41:46 context through report written before00:45:08; less than5min; subsequent admin only",
+  "result": "No legal20wall concrete mutual-best draw or general nonexistence proof; local nonincreasing-distance jump lemma only; D-safe status of greedy moves UNKNOWN",
+  "formatter": {
+    "tool": "installed project Prettier",
+    "cpu": 3,
+    "address_space_B": 536870912,
+    "max_old_space_MiB": 128,
+    "exit_code": 133,
+    "error": "V8 SegmentedTable startup allocation OOM",
+    "capture": "format.log",
+    "directwait": "exec returned terminal133; no yielded session",
+    "project_format_status": "NOT_PASS; no relaxed-limit retry"
+  },
+  "source_reads": "Root report and position checked/is_edge_open/pawn_destinations only; ordinary read commands exit0",
+  "exact_formatter_PID_start_boot": "UNKNOWN; no invented identity census",
+  "owned_readers": [],
+  "owned_writers": [],
+  "owned_children": [],
+  "owned_jobs": [],
+  "owned_handles": [],
+  "owned_TMP": [],
+  "owned_leases": [],
+  "TMP": "No task TMP created",
+  "postusage": "16384\t.artifacts/research-team/zero-stock-mutual-draw404-part3-v1\ncwd/core absent\n",
+  "storage_budget": null,
+  "global_actual": "UNKNOWN",
+  "global_cap_B": 50000000000,
+  "native_Search_solver_sweep_graph_tests_model_Perf_games_fit": 0,
+  "Main_Git_index_Cargo_writes": 0,
+  "LLM_host_CPU_RAM_peak": "UNKNOWN",
+  "mixed_learner_323_USERPAUSE": "unchanged"
+}

@@ -1886,3 +1886,9 @@ wholeは6root body・setup/drop・採点・key保存/cache・再探索込みの�
 有限scopeと縮約の関連独立確認はblockers0／ordinary0、math_claim_clear=true。元finite readerSTOP00:29:20.507217Z、関連論理文書STOP00:35:57.281074Zを区別し、成功計算の再実行は0。元数学commandはCPU5／AS512MiB／CPU30s・2process直接exit0。保存analyze scalar合計0.7385032909660367秒は全job/source/LLM費ではなく、全費・連続peakはUNKNOWN。初回closed leafへのsend拒否とRoot JSONDecodeError、旧RAW/FAILED/費も保持する。これは将来の安いexact solver候補の論拠であり、新実装・科学実行・TT変更の許可ではない。
 
 [元報告と証明](../research-data/ai-sigma/zero-stock-mutual-draw404/report.md)、[exact保存receipt](../research-data/ai-sigma/zero-stock-mutual-draw404/receipt.json)に小さい原JSON入力／結果、数学用Python2fileと二段階のreview/STOPを保存した。これらは凍結run証拠で、現役計算入口や恒常source mirrorにしない。mixed／learner全prep/pipelineと323 USERPAUSE、製品／generator既定、models/weights/sealsは不変。
+
+### 零在庫drawの並行部分考察（404.2／404.3、2026-10-15）
+
+終了した二つの部分考察でも、合法20壁で双方最善の循環となる具体例は0件で、一般のD不存在も未証明のままである。最短隣接が非goalの相手に塞がれてもjumpにより自己の壁距離を増やさず進めること、等距離jump後に相手が必ず移るため次の自己手で前進できること、goal-leafでは長さ2壁の幾何から一歩退いてjumpする局所方策が考えられることを整理した。ただし「有限でどちらかが終局する方策」と「相手に先に勝たれず自分の勝ちを強制する方策」は量化が異なり、進行手がD-safeであることを示せていない。双方が別の連結成分にいる単純raceの部分結果も一般ケースへ外挿しない。新しい勝敗定理・算法採用とは扱わない。
+
+[二つの原報告・失敗・STOPと保存対応](../research-data/ai-sigma/zero-stock-mutual-draw404/partial-considerations-v1/receipt.json)、[構成側の表示用報告](../research-data/ai-sigma/zero-stock-mutual-draw404/partial-considerations-v1/construction/report-ja.md)を保存した。先の有限63配置とroot exact WDL縮約証明は変更していない。構成側の原MarkdownとPrettierのAS512MiB下V8起動OOM／exit133／NOT_PASS、一般証明側のGo管理client起動拒否と元STOPをexact保存した。表示用コピーだけを通常の実RAM512MiB family guardで整形し、V8／Go controllerの仮想アドレス予約へAS512MiBを課す設定とは区別する。元FAILEDをPASSへ書き換えない。一般証明側の5分枠超過を含む元記録も保持する。今回の作業は保存・整形のみで、追加の配置sweep／graph計算／solver／Search／対局／生成／fitは0、全USERPAUSEは不変である。

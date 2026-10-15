@@ -1,0 +1,19 @@
+
+
+#
+# Fatal process out of memory: SegmentedTable::InitializeTable (subspace allocation)
+#
+----- Native stack trace -----
+
+ 1: 0x9dde61  [node]
+ 2: 0x27ab085 v8::base::FatalOOM(v8::base::OOMType, char const*) [node]
+ 3: 0xc70ec6  [node]
+ 4: 0x18df0f0  [node]
+ 5: 0x103cece  [node]
+ 6: 0xc89bae v8::V8::Initialize(int) [node]
+ 7: 0x8d0cb0  [node]
+ 8: 0x8d0fec node::Start(int, char**) [node]
+ 9: 0x7a74cdca224a  [/usr/lib/x86_64-linux-gnu/libc.so.6]
+10: 0x7a74cdca2305 __libc_start_main [/usr/lib/x86_64-linux-gnu/libc.so.6]
+11: 0x7ef4fe _start [node]
+timeout: the monitored command dumped core

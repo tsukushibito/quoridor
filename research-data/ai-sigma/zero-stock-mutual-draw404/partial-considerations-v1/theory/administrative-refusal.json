@@ -1,0 +1,17 @@
+{
+  "scope": "normal wrapper admin only",
+  "commands": [
+    {
+      "argv": "taskset8/ulimitAS512MiB bash scripts/dev/beads.sh ready --json",
+      "exit_code": 1
+    },
+    {
+      "argv": "taskset8/ulimitAS512MiB bash scripts/dev/beads.sh show quoridor-4lc.404.2 --json",
+      "exit_code": 2
+    }
+  ],
+  "error": "fatal error: failed to reserve page summary memory; Go1.26.7 runtime.pageAlloc.sysInit during startup",
+  "ready_stdout_parser": "JSONDecodeError after empty refused output",
+  "claim_backup_close": "NOT_EXECUTED",
+  "constraints_not_waived": true
+}

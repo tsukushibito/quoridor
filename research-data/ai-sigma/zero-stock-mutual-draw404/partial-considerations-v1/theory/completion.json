@@ -1,0 +1,58 @@
+{
+  "issue": "quoridor-4lc.404.2",
+  "status": "BOUNDED_PARTIAL_MATH_COMPLETE_GENERAL_NO_DRAW_UNKNOWN_ADMIN_BLOCKED",
+  "report": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-draw404-theory-v1/report-ja.json",
+    "sha256": "6879fb21990d5c092e5790dc8081c5898bc14c03ee3d75851be6dbb626219783",
+    "bytes": 6089,
+    "mode": "0644"
+  },
+  "formatter": "existing stdlib python -m json.tool --no-ensure-ascii exit0; parsed original/formatted report exact",
+  "source": {
+    "path": "/workspaces/quoridor/crates/quoridor-core/src/position.rs",
+    "sha256": "faeae19ecd6427724e7c5e0a7880025c06ed5cd9e1cf6ab2bea41c2756730300",
+    "bytes": 21758,
+    "mode": "0644",
+    "read_scope": "checked/is_edge_open/pawn_destinations; no execution"
+  },
+  "reader_writer_STOP": "2026-10-15T00:47:43.257018+00:00",
+  "owned_readers_writers_children_jobs_TMP_leases_remaining": [],
+  "TMP": "none created in own scope",
+  "canonical_lease": false,
+  "normal_commands": "completed exec-tool returns only; no submitted job/background child",
+  "fast_child_PID_start_boot_UTC": "UNKNOWN; not captured, no fabricated fresh-identity absence assertion",
+  "stdio_handles": "tool-owned; own persistent handles none",
+  "resource": {
+    "worker_cpu": 8,
+    "AS_B": 536870912,
+    "GPU": 0,
+    "taskset_and_ulimit_applied": true
+  },
+  "turn_context": {
+    "turn_id": "01a13d01-3805-71a2-afcd-d6fee481e396",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "cwd": "/workspaces/quoridor/.worktree/arena-evaluation",
+    "sandbox": "danger-full-access",
+    "approvalPolicy": "never"
+  },
+  "general_theorem": "UNKNOWN; individual finite-termination strategy does not prove non-loss or a winner under mutual optimal strategies",
+  "new_counterexample": "NONE",
+  "new_native_graph_search_tests_models_calls": 0,
+  "Beads_admin": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-draw404-theory-v1/administrative-refusal.json",
+    "sha256": "9973e9293fc91be186575d8c8f5f485837cf63e3eed53c0d026c1ed171d6bf59",
+    "bytes": 570,
+    "mode": "0644"
+  },
+  "usage": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-draw404-theory-v1/usage.json",
+    "sha256": "2efa5b6153c94ac4b36aca33061dc285b6c902dc56415813afc976179bbf4695",
+    "bytes": 422,
+    "mode": "0644"
+  },
+  "author_claim_verified_backup_close": false,
+  "next_admin": "Root normal wrapper administration under its applicable controls; do not silently relax author AS",
+  "LLM_thinking_host_CPU_RAM_time": "UNKNOWN; no claim of measured computation/finite mathematical success",
+  "mixed_learner_323": "USERPAUSE"
+}
