@@ -1,0 +1,68 @@
+{
+  "checks": [
+    {
+      "name": "measurement-config407-NN0",
+      "role": "source",
+      "argv": [
+        "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+        "-B",
+        "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/measurement_config407_tests.py"
+      ],
+      "status": "PASS",
+      "guardian_return": {
+        "command": [
+          "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+          "-B",
+          "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/measurement_config407_tests.py"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 1211487,
+          "start_ticks": "8556750",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": true,
+          "verified_before_exec": 1
+        },
+        "log_bytes_seen": 98,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 98,
+        "wall_seconds": 0.1307223859912483,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx-method407-v1/Python-NN0-v1/measurement-config407-NN0.full.log",
+        "sha256": "439b00f50e409b8ea6ff578f1c945904d9aa00f5e4759fcb4e71d9f1615c4084",
+        "bytes": 98,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx-method407-v1/Python-NN0-v1/measurement-config407-NN0.process.json",
+        "sha256": "c9170c688fb80b8dbe77608588df11816eab38f47dc87ae85b88393375a8b69d",
+        "bytes": 1115,
+        "mode": "0600"
+      },
+      "capture_complete": true,
+      "secondary": [],
+      "primary": null
+    }
+  ],
+  "primary": null
+}

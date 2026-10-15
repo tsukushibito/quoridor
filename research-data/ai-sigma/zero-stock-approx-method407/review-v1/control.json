@@ -1,0 +1,279 @@
+{
+  "issue": "quoridor-4lc.407.2",
+  "status": "FINITE_FIXED_SOURCE_REVIEW_COMPLETE",
+  "source_clear": true,
+  "blockers": [],
+  "ordinary": [],
+  "fixed_target": {
+    "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/source-STOP.json",
+    "sha256": "df653e8a13425ea983a94d0a543cde47495f7e2bb7be1ab3740859471227ddb9",
+    "bytes": 18579,
+    "mode": "0644"
+  },
+  "base_git": "7bf4e3a4a3497158e9458a22b8814e1069e52e5b",
+  "before": [
+    {
+      "git_object": "7bf4e3a4a3497158e9458a22b8814e1069e52e5b:crates/quoridor-ai/src/alphabeta.rs",
+      "relative": "crates/quoridor-ai/src/alphabeta.rs",
+      "sha256": "8cf67e49726a2fa1f5111edd47e47bfe159a0f938de4358734cf7acc568ed79c",
+      "bytes": 141279,
+      "mode": "0644"
+    },
+    {
+      "git_object": "7bf4e3a4a3497158e9458a22b8814e1069e52e5b:crates/quoridor-runner/src/measurement.rs",
+      "relative": "crates/quoridor-runner/src/measurement.rs",
+      "sha256": "10fa50416ce1ea72327cdf8481d26391b5a75d300d82240e0782aee71364b29a",
+      "bytes": 51422,
+      "mode": "0644"
+    },
+    {
+      "git_object": "7bf4e3a4a3497158e9458a22b8814e1069e52e5b:scripts/dev/research-lifecycle.py",
+      "relative": "scripts/dev/research-lifecycle.py",
+      "sha256": "ec13745424d996d0771cbc756db8c9b816b13d8fe19cdb666cbc4ef2f3bf38d8",
+      "bytes": 222082,
+      "mode": "0644"
+    }
+  ],
+  "after": [
+    {
+      "relative": "crates/quoridor-ai/src/alphabeta.rs",
+      "sha256": "1d7329f5c9bc20cfc15cd2571cf18715522a0b28e2ef40364c5f609063526a01",
+      "bytes": 144418,
+      "mode": "0644",
+      "reconstruction": "base Git object plus method407.patch"
+    },
+    {
+      "relative": "crates/quoridor-runner/src/measurement.rs",
+      "sha256": "f7a8c4a3bad188538bae40d5e1b31126270062e8fdf6debe51e2a685a94a36d4",
+      "bytes": 54438,
+      "mode": "0644",
+      "reconstruction": "base Git object plus method407.patch"
+    },
+    {
+      "relative": "crates/quoridor-ai/src/zero_stock407_tests.rs",
+      "sha256": "6d40a499fdbe7ed95d4765e54bfe750a34cb4f7c45c8837c78c57b1c835bee33",
+      "bytes": 8555,
+      "mode": "0644",
+      "reconstruction": "base Git object plus method407.patch"
+    },
+    {
+      "relative": "scripts/dev/research-lifecycle.py",
+      "sha256": "df98c681cfaf04ed58b4b7602390105dcc700ade8672786605c79c12d9c39b3b",
+      "bytes": 222319,
+      "mode": "0644",
+      "reconstruction": "base Git object plus method407.patch"
+    }
+  ],
+  "selected_before": [
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/source-STOP.json",
+      "sha256": "df653e8a13425ea983a94d0a543cde47495f7e2bb7be1ab3740859471227ddb9",
+      "bytes": 18579,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/source-binding.json",
+      "sha256": "85c57a8c09f123385593b5c066629b7a4cddee4d5f5a7abb2b48d3ef84a851ad",
+      "bytes": 5797,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/method407.patch",
+      "sha256": "6cb93acf7068a2202699a26d0335807f37f5de00748e252aa67afb21d0b911aa",
+      "bytes": 25842,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/method407.inverse.patch",
+      "sha256": "0828a11127eb3acfd59d7aa1fe5b1cb89274681448741ad0e68eb2bced20218b",
+      "bytes": 25842,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/zero_stock407_tests.rs",
+      "sha256": "6d40a499fdbe7ed95d4765e54bfe750a34cb4f7c45c8837c78c57b1c835bee33",
+      "bytes": 8555,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/measurement407_test.rs",
+      "sha256": "d3cc0f9d4f8fdbbec9d26c5b00ca0f781dadb4f1d613783956d2f33b4548f224",
+      "bytes": 1856,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/measurement_config.before.py",
+      "sha256": "befb5c39f4c57b8d1c5fa2df2d63889ae78dfa7fa5b3c6f2acfc5c0426824d60",
+      "bytes": 5590,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/measurement_config.after.py",
+      "sha256": "7b864ada89a1a255fd8833332958a37ecde3613c770eab44ffd58accb3181aa3",
+      "bytes": 5827,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/measurement_config407_tests.py",
+      "sha256": "277e025442e5020fa2b5f42888bb01de39aa8c92fe4f64b5aa89b663211f09da",
+      "bytes": 2339,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/verification-plan.json",
+      "sha256": "0f608440bb482fe09e38698a6caa9f4a260a0039e3a0a9f1a3c35c16db09aca7",
+      "bytes": 1538,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/report-ja.md",
+      "sha256": "5bd2c6c8cab3a939118cf8b9f08b081279f6479c4512f4f440be014821664e34",
+      "bytes": 6678,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/proof-v1/result.json",
+      "sha256": "b3610d73bdb497d9a1f9a5b7948f6870dc94b98a941d6797f4ef2508685970db",
+      "bytes": 3098,
+      "mode": "0644"
+    }
+  ],
+  "selected_after": [
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/source-STOP.json",
+      "sha256": "df653e8a13425ea983a94d0a543cde47495f7e2bb7be1ab3740859471227ddb9",
+      "bytes": 18579,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/source-binding.json",
+      "sha256": "85c57a8c09f123385593b5c066629b7a4cddee4d5f5a7abb2b48d3ef84a851ad",
+      "bytes": 5797,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/method407.patch",
+      "sha256": "6cb93acf7068a2202699a26d0335807f37f5de00748e252aa67afb21d0b911aa",
+      "bytes": 25842,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/method407.inverse.patch",
+      "sha256": "0828a11127eb3acfd59d7aa1fe5b1cb89274681448741ad0e68eb2bced20218b",
+      "bytes": 25842,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/zero_stock407_tests.rs",
+      "sha256": "6d40a499fdbe7ed95d4765e54bfe750a34cb4f7c45c8837c78c57b1c835bee33",
+      "bytes": 8555,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/measurement407_test.rs",
+      "sha256": "d3cc0f9d4f8fdbbec9d26c5b00ca0f781dadb4f1d613783956d2f33b4548f224",
+      "bytes": 1856,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/measurement_config.before.py",
+      "sha256": "befb5c39f4c57b8d1c5fa2df2d63889ae78dfa7fa5b3c6f2acfc5c0426824d60",
+      "bytes": 5590,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/measurement_config.after.py",
+      "sha256": "7b864ada89a1a255fd8833332958a37ecde3613c770eab44ffd58accb3181aa3",
+      "bytes": 5827,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/measurement_config407_tests.py",
+      "sha256": "277e025442e5020fa2b5f42888bb01de39aa8c92fe4f64b5aa89b663211f09da",
+      "bytes": 2339,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/verification-plan.json",
+      "sha256": "0f608440bb482fe09e38698a6caa9f4a260a0039e3a0a9f1a3c35c16db09aca7",
+      "bytes": 1538,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/report-ja.md",
+      "sha256": "5bd2c6c8cab3a939118cf8b9f08b081279f6479c4512f4f440be014821664e34",
+      "bytes": 6678,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/proof-v1/result.json",
+      "sha256": "b3610d73bdb497d9a1f9a5b7948f6870dc94b98a941d6797f4ef2508685970db",
+      "bytes": 3098,
+      "mode": "0644"
+    }
+  ],
+  "before_after_exact": true,
+  "source_proof": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx-method407-v1/review-v1/source-proof.json",
+    "sha256": "d68633642fb6a1b5d8516772ad5897790882e3b357a11c9364f2a75e8fd0624c",
+    "bytes": 15121,
+    "mode": "0644"
+  },
+  "actual_selected_reader_STOP": "2026-10-15T03:56:48.453020+00:00",
+  "reader_identity": {
+    "pid": 1198964,
+    "start_ticks": "8503604",
+    "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+  },
+  "reader_guard": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx-method407-v1/review-v1/source-reader-final-v3-receipt.json",
+    "sha256": "1864ef533bc411229bc055390336836bffe33ab8be0a35ccf31fa27dda23e0c4",
+    "bytes": 589,
+    "mode": "0644"
+  },
+  "directwait_reaped": true,
+  "fresh_identity": "absent",
+  "applied_turn_context": {
+    "cwd": "/workspaces/quoridor",
+    "model": "gpt-6.1-sol",
+    "effort": "max",
+    "sandbox": "danger-full-access",
+    "approval_policy": "never",
+    "verified_turn_context_timestamp": "2026-10-15T03:49:50.078Z",
+    "verified_before_first_ordinary_command": true
+  },
+  "verdict_limits": [
+    "4 new AI, 1 runner, 1 Python NN0 definitions remain UNBUILT/UNTYPED/UNRUN in this review; no execution by reviewer",
+    "No407 numerical campaign, speed/strength/default or current image authority is established",
+    "Cache hit frequency, actual layout/RSS/copy cost and all-work fees UNKNOWN"
+  ],
+  "resources": {
+    "worker_affinity": [14],
+    "guardian_affinity": [0],
+    "physical_core_ids": {
+      "0": ["0", "0"],
+      "14": ["0", "7"]
+    },
+    "worker_AS_B": 536870912,
+    "guardian_AS_soft_B": 134217728,
+    "guardian_AS_hard_B": 805306368,
+    "continuous_family_RSS_peak": "UNKNOWN",
+    "GPU_calls": 0
+  },
+  "owned_readers_remaining": [],
+  "owned_children_remaining": [],
+  "owned_jobs_remaining": [],
+  "owned_handles_remaining": [],
+  "owned_TMP_remaining": [],
+  "leases": [],
+  "Main_Git_index_Cargo_Beads_writes": 0,
+  "target_import_test_native_model_Search_Perf_solver_game_calls": 0,
+  "Beads_backup_close_owner": "Root324",
+  "routine_recipient": {
+    "thread": "01a1376a-bfd3-75d2-bd64-61e9416b3b13",
+    "issue": "quoridor-4lc.324"
+  },
+  "no_ack_gate": true,
+  "storage_budget": null,
+  "global_usage": "UNKNOWN; no global scan"
+}

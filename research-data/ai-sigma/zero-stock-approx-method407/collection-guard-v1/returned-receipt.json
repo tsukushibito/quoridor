@@ -1,0 +1,39 @@
+{
+  "checks": [
+    {
+      "name": "collect-original407-software",
+      "role": "source",
+      "argv": [
+        "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+        "-B",
+        "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx-method407-v1/collect-software.py"
+      ],
+      "status": "FAILED",
+      "guardian_return": null,
+      "full_log": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx-method407-v1/collection-guard-v1/collect-original407-software.full.log",
+        "sha256": "860bb3a822511e4a44e97fab479c2923d3fd4cf90c05ab92e797c9974e4f565a",
+        "bytes": 916,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx-method407-v1/collection-guard-v1/collect-original407-software.process.json",
+        "sha256": "fe6b2ffcab788ced9b66c387cfbce5f2815dc1607136648cfb9a718b9d4db4f0",
+        "bytes": 1597,
+        "mode": "0600"
+      },
+      "capture_complete": false,
+      "secondary": [],
+      "primary": {
+        "type": "CycleStopped",
+        "message": "cycle child failed: ['/home/vscode/.cache/inference/envs/quoridor-training/bin/python', '-B', '/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx-method407-v1/collect-software.py']: 1",
+        "notes": []
+      }
+    }
+  ],
+  "primary": {
+    "type": "CycleStopped",
+    "message": "cycle child failed: ['/home/vscode/.cache/inference/envs/quoridor-training/bin/python', '-B', '/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx-method407-v1/collect-software.py']: 1",
+    "notes": []
+  }
+}

@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx-method407-v1/collect-software.py", line 110, in <module>
+    main()
+    ~~~~^^
+  File "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx-method407-v1/collect-software.py", line 74, in main
+    result = lc.finalize(OUT / "operation-v1", outer_ref)
+  File "/workspaces/quoridor/scripts/dev/research-lifecycle.py", line 5209, in finalize
+    guard(spec)
+    ~~~~~^^^^^^
+  File "/workspaces/quoridor/scripts/dev/research-lifecycle.py", line 514, in physical_and_quiet
+    require(set(cores) <= os.sched_getaffinity(0), "CPU affinity admission")
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/quoridor/scripts/dev/research-lifecycle.py", line 47, in require
+    raise Refused(message)
+lc.Refused: CPU affinity admission

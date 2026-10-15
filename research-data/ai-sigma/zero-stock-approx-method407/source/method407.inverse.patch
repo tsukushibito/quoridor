@@ -1,0 +1,646 @@
+--- b/crates/quoridor-ai/src/alphabeta.rs
++++ a/crates/quoridor-ai/src/alphabeta.rs
+@@ -177,20 +177,14 @@
+     fn evaluate(&self, c: &SigmaContext, _a: Option<&EvalAccumulator>) -> Result<f32> {
+         let p = c.position();
+         let side = p.turn as usize;
+-        let d0 = p
+-            .wall_distance(side)
+-            .ok_or_else(|| SearchError::Evaluation("unreachable pawn".into()))?;
+-        let d1 = p
+-            .wall_distance(side ^ 1)
+-            .ok_or_else(|| SearchError::Evaluation("unreachable pawn".into()))?;
+-        self.evaluate_distances(d0, d1)
+-    }
+-}
+-impl DistanceEvaluator {
+-    // One math owner for ordinary fixed D and the optional approximate leaf.
+-    fn evaluate_distances(&self, own: u8, other: u8) -> Result<f32> {
+-        let d0 = (f64::from(own) / 80.) as f32;
+-        let d1 = (f64::from(other) / 80.) as f32;
++        let d0 = (f64::from(
++            p.wall_distance(side)
++                .ok_or_else(|| SearchError::Evaluation("unreachable pawn".into()))?,
++        ) / 80.) as f32;
++        let d1 = (f64::from(
++            p.wall_distance(side ^ 1)
++                .ok_or_else(|| SearchError::Evaluation("unreachable pawn".into()))?,
++        ) / 80.) as f32;
+         let raw = self.a + self.b * (d1 - d0);
+         if !raw.is_finite() {
+             return Err(SearchError::Evaluation(
+@@ -442,37 +436,6 @@
+ /// Heuristic leaves, not exact WDL or full-width minimax values.
+ pub const ZERO_STOCK_APPROX_METHOD: &str = "zero-stock406-wall-distance-stm-tie-win-v1";
+ 
+-/// Evaluation at an already permitted approximate leaf; activation is separate.
+-#[derive(Debug, Default, Clone, Copy, PartialEq, Eq)]
+-pub enum ZeroStockApproxMethod {
+-    #[default]
+-    Race,
+-    FixedD,
+-}
+-impl ZeroStockApproxMethod {
+-    pub fn from_name(name: &str) -> Result<Self> {
+-        match name {
+-            "race" => Ok(Self::Race),
+-            "fixed_d" => Ok(Self::FixedD),
+-            _ => Err(SearchError::Limits(
+-                "unsupported zero-stock approximation method".into(),
+-            )),
+-        }
+-    }
+-    pub fn name(self) -> &'static str {
+-        match self {
+-            Self::Race => "race",
+-            Self::FixedD => "fixed_d",
+-        }
+-    }
+-    pub fn id(self) -> &'static str {
+-        match self {
+-            Self::Race => ZERO_STOCK_APPROX_METHOD,
+-            Self::FixedD => "zero-stock407-fixed-D-a0-b8-tanh-v1",
+-        }
+-    }
+-}
+-
+ fn permit_zero_stock_approx(threshold: Option<u8>, root_walls: u16, max_depth: u16) -> bool {
+     threshold.is_some_and(|threshold| threshold == 0 || root_walls >= u16::from(threshold))
+         && max_depth > root_walls.max(1)
+@@ -483,8 +446,6 @@
+     /// Per-Search root snapshot; fixed throughout iterative deepening.
+     pub root_walls_remaining: u16,
+     pub zero_stock_approx_permitted: bool,
+-    /// Effective only when permitted; OFF leaves this default value unused.
+-    pub zero_stock_approx_method: ZeroStockApproxMethod,
+     /// Successfully returned heuristic leaves, separate from true terminals/head calls.
+     pub zero_stock_approx_terminations: u64,
+     pub nodes: u64,
+@@ -1400,18 +1361,7 @@
+                 "approximate leaf unreachable opponent".into(),
+             ))
+         })?;
+-        let value = match self.stats.zero_stock_approx_method {
+-            ZeroStockApproxMethod::Race => {
+-                if ds <= other {
+-                    1.0
+-                } else {
+-                    -1.0
+-                }
+-            }
+-            ZeroStockApproxMethod::FixedD => DistanceEvaluator::new(0.0, 8.0)
+-                .evaluate_distances(ds, other)
+-                .map_err(Interrupted::Error)?,
+-        };
++        let value = if ds <= other { 1.0 } else { -1.0 };
+         if !self.score_domain.admits(value) {
+             return Err(Interrupted::Error(SearchError::Evaluation(
+                 "approximate leaf outside declared nonterminal score domain".into(),
+@@ -1919,7 +1869,7 @@
+             false,
+             StaticMode::Coverage,
+             false,
+-            (false, ZeroStockApproxMethod::Race),
++            false,
+         ),
+     )
+ }
+@@ -1965,9 +1915,9 @@
+     namespace.selectivity.push(':');
+     namespace.selectivity.push_str(LMR_METHOD);
+ }
+-fn append_zero_stock_approx_method(namespace: &mut SearchNamespace, method: ZeroStockApproxMethod) {
++fn append_zero_stock_approx_method(namespace: &mut SearchNamespace) {
+     namespace.selectivity.push(':');
+-    namespace.selectivity.push_str(method.id());
++    namespace.selectivity.push_str(ZERO_STOCK_APPROX_METHOD);
+ }
+ impl SessionMethod {
+     fn namespace(self, mut namespace: SearchNamespace, lmr: bool) -> SearchNamespace {
+@@ -2003,34 +1953,9 @@
+     lmr: bool,
+     method: SessionMethod,
+     zero_stock_approx_min_root_walls: Option<u8>,
+-    zero_stock_approx_method: ZeroStockApproxMethod,
+     zero_stock_approx_effective: bool,
+ }
+ impl SearchSession {
+-    /// Selecting a method alone never activates approximation. Only an effective
+-    /// ON method switch changes numeric TT/history authority.
+-    pub fn set_zero_stock_approx_method(&mut self, method: ZeroStockApproxMethod) {
+-        if method == self.zero_stock_approx_method {
+-            return;
+-        }
+-        if self.zero_stock_approx_effective {
+-            self.namespace.selectivity.truncate(
+-                self.namespace.selectivity.len() - self.zero_stock_approx_method.id().len() - 1,
+-            );
+-            append_zero_stock_approx_method(&mut self.namespace, method);
+-            self.table.clear();
+-            if let Some(history) = self.ordering.as_mut() {
+-                history.reset();
+-            }
+-        }
+-        self.zero_stock_approx_method = method;
+-    }
+-
+-    pub fn zero_stock_approx_method(&self) -> Option<ZeroStockApproxMethod> {
+-        self.zero_stock_approx_effective
+-            .then_some(self.zero_stock_approx_method)
+-    }
+-
+     /// A requested threshold is configuration, not numeric TT authority. The
+     /// effective method is resolved once by each Search, not at each depth/node.
+     pub fn set_zero_stock_approx_min_root_walls(&mut self, threshold: Option<u8>) -> Result<()> {
+@@ -2051,11 +1976,11 @@
+             return;
+         }
+         if self.zero_stock_approx_effective {
+-            self.namespace.selectivity.truncate(
+-                self.namespace.selectivity.len() - self.zero_stock_approx_method.id().len() - 1,
+-            );
++            self.namespace
++                .selectivity
++                .truncate(self.namespace.selectivity.len() - ZERO_STOCK_APPROX_METHOD.len() - 1);
+         } else {
+-            append_zero_stock_approx_method(&mut self.namespace, self.zero_stock_approx_method);
++            append_zero_stock_approx_method(&mut self.namespace);
+         }
+         self.zero_stock_approx_effective = enabled;
+         self.table.clear();
+@@ -2087,7 +2012,7 @@
+             // Approximation, when resolved ON, is the last method component.
+             if self.zero_stock_approx_effective {
+                 self.namespace.selectivity.truncate(
+-                    self.namespace.selectivity.len() - self.zero_stock_approx_method.id().len() - 1,
++                    self.namespace.selectivity.len() - ZERO_STOCK_APPROX_METHOD.len() - 1,
+                 );
+             }
+             if self.lmr {
+@@ -2098,7 +2023,7 @@
+                 append_lmr_method(&mut self.namespace);
+             }
+             if self.zero_stock_approx_effective {
+-                append_zero_stock_approx_method(&mut self.namespace, self.zero_stock_approx_method);
++                append_zero_stock_approx_method(&mut self.namespace);
+             }
+             self.lmr = enabled;
+             self.table.clear();
+@@ -2223,7 +2148,6 @@
+             lmr: false,
+             method: SessionMethod::Plain,
+             zero_stock_approx_min_root_walls: None,
+-            zero_stock_approx_method: ZeroStockApproxMethod::Race,
+             zero_stock_approx_effective: false,
+         })
+     }
+@@ -2323,10 +2247,7 @@
+                 self.ordering_diagnostics,
+                 self.static_enabled,
+                 self.lmr,
+-                (
+-                    self.zero_stock_approx_effective,
+-                    self.zero_stock_approx_method,
+-                ),
++                self.zero_stock_approx_effective,
+             ),
+         )
+     }
+@@ -2345,7 +2266,7 @@
+         bool,
+         StaticMode,
+         bool,
+-        (bool, ZeroStockApproxMethod),
++        bool,
+     ),
+ ) -> Result<SearchResult> {
+     let (
+@@ -2355,7 +2276,7 @@
+         ordering_diagnostics,
+         static_enabled,
+         lmr,
+-        (zero_stock_approx_permitted, zero_stock_approx_method),
++        zero_stock_approx_permitted,
+     ) = table_and_domain;
+     let start = Instant::now();
+     if limits.max_depth == 0 || limits.max_nodes == 0 || limits.max_depth > 200 {
+@@ -2421,7 +2342,6 @@
+         stats: SearchStats {
+             root_walls_remaining,
+             zero_stock_approx_permitted,
+-            zero_stock_approx_method,
+             tt_hashes: u64::from(limits.use_tt), // one full board initialization
+             tt_context_initial_items: if limits.use_tt {
+                 root.occurrences().count() as u64
+@@ -2888,7 +2808,7 @@
+                 false,
+                 StaticMode::Off,
+                 false,
+-                (false, ZeroStockApproxMethod::Race),
++                false,
+             ),
+         )
+         .unwrap();
+@@ -3851,10 +3771,6 @@
+ mod lmr400_tests;
+ 
+ #[cfg(test)]
+-#[path = "zero_stock407_tests.rs"]
+-mod zero_stock407_tests;
+-
+-#[cfg(test)]
+ #[path = "zero_stock406_tests.rs"]
+ mod zero_stock406_tests;
+ 
+--- b/crates/quoridor-runner/src/measurement.rs
++++ a/crates/quoridor-runner/src/measurement.rs
+@@ -5,7 +5,7 @@
+ };
+ use quoridor_ai::alphabeta::{
+     self, OrderingProfile, SearchLimits, SearchNamespace, SearchResult, SearchSession,
+-    StaticEvaluator, StopReason, ZeroStockApproxMethod,
++    StaticEvaluator, StopReason,
+ };
+ use quoridor_core::research::{HistoryKey, SigmaContext};
+ use quoridor_data::Result;
+@@ -65,8 +65,6 @@
+     lmr: bool,
+     #[serde(default)]
+     zero_stock_approx_min_root_walls: Option<u8>,
+-    #[serde(default = "default_zero_stock_approx_method")]
+-    zero_stock_approx_method: String,
+     namespace: SearchNamespaceSettings,
+     output_bytes: usize,
+     record_bytes: usize,
+@@ -103,12 +101,7 @@
+     expected: Option<Value>,
+ }
+ 
+-fn default_zero_stock_approx_method() -> String {
+-    ZeroStockApproxMethod::default().name().into()
+-}
+-
+ fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
+-    ZeroStockApproxMethod::from_name(&settings.zero_stock_approx_method)?;
+     if settings
+         .zero_stock_approx_min_root_walls
+         .is_some_and(|n| n > 20)
+@@ -301,9 +294,6 @@
+                 self.settings.lmr,
+             )?,
+         };
+-        session.set_zero_stock_approx_method(ZeroStockApproxMethod::from_name(
+-            &self.settings.zero_stock_approx_method,
+-        )?);
+         session
+             .set_zero_stock_approx_min_root_walls(self.settings.zero_stock_approx_min_root_walls)?;
+         let method = session.namespace().selectivity.clone();
+@@ -315,8 +305,6 @@
+             json!({"TT_capacity":capacity,"retained_TT_bytes":retained.0,"retained_session_metadata_history_bytes":retained.1,
+                 "actual_selectivity":method,"lmr":lmr,
+                 "zero_stock_approx_min_root_walls":self.settings.zero_stock_approx_min_root_walls,
+-                "zero_stock_approx_method_requested":self.settings.zero_stock_approx_method,
+-                "zero_stock_approx_method":Value::Null,
+                 "zero_stock_approx_permitted":Value::Null,
+                 "completed_depth_semantics":if lmr {"selective-nominal"} else if self.settings.zero_stock_approx_min_root_walls.is_some() {"root-resolution-pending"} else {"full-width"},
+                 "lmr_rule":if lmr {Some(alphabeta::LMR_METHOD)} else {None}}),
+@@ -378,12 +366,6 @@
+         row["actual_selectivity"] = json!(session.namespace().selectivity);
+         row["zero_stock_approx_min_root_walls"] =
+             json!(self.settings.zero_stock_approx_min_root_walls);
+-        row["zero_stock_approx_method_requested"] = json!(self.settings.zero_stock_approx_method);
+-        row["zero_stock_approx_method"] = json!(
+-            session
+-                .zero_stock_approx_method()
+-                .map(ZeroStockApproxMethod::id)
+-        );
+         row["completed_depth_semantics"] = json!(if session.zero_stock_approx_permitted() {
+             "approximate-leaf-nominal-not-game-WDL"
+         } else if self.settings.lmr {
+@@ -680,7 +662,6 @@
+     let s = &r.stats;
+     json!({"completed_depth":r.completed_depth,"action":r.action,
+         "root_walls_remaining":s.root_walls_remaining,"zero_stock_approx_permitted":s.zero_stock_approx_permitted,
+-        "zero_stock_approx_method":s.zero_stock_approx_permitted.then(|| s.zero_stock_approx_method.id()),
+         "value_bits":r.value.map(f32::to_bits),"elapsed_seconds":r.elapsed.as_secs_f64(),
+         "cumulative_work":{"nodes":s.nodes,"evaluations":s.evaluations,
+             "terminal":s.terminal,"zero_stock_approx_terminations":s.zero_stock_approx_terminations,"cutoffs":s.cutoffs,"TT_probes":s.tt_probes,
+@@ -704,7 +685,7 @@
+     result["zero_stock_approx_permitted"] = json!(s.zero_stock_approx_permitted);
+     result["work"]["zero_stock_approx_terminations"] = json!(s.zero_stock_approx_terminations);
+     result["zero_stock_approx_method"] = json!(if s.zero_stock_approx_permitted {
+-        Some(s.zero_stock_approx_method.id())
++        Some(alphabeta::ZERO_STOCK_APPROX_METHOD)
+     } else {
+         None
+     });
+@@ -886,54 +867,6 @@
+ #[cfg(test)]
+ mod tests {
+     use super::*;
+-    #[test]
+-    fn measurement407_method_default_refusal_and_resolved_output() {
+-        let base = json!({"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,
+-            "namespace":{"evaluator":crate::teacher_pilot_execution::EVALUATOR_ID,"rules":"standard","selectivity":"synthetic"},"output_bytes":10000,"record_bytes":1000});
+-        let settings: Settings = serde_json::from_value(base.clone()).unwrap();
+-        assert_eq!(settings.zero_stock_approx_method, "race");
+-        for (value, valid) in [
+-            (json!("race"), true),
+-            (json!("fixed_d"), true),
+-            (Value::Null, false),
+-            (json!(true), false),
+-            (json!(0), false),
+-            (json!("solver"), false),
+-        ] {
+-            let mut config = base.clone();
+-            config["zero_stock_approx_method"] = value;
+-            assert_eq!(
+-                serde_json::from_value::<Settings>(config).is_ok_and(|s| validate(&s, &[]).is_ok()),
+-                valid
+-            );
+-        }
+-        for permitted in [false, true] {
+-            let result = SearchResult {
+-                action: None,
+-                value: None,
+-                completed_depth: 0,
+-                pv: vec![],
+-                stats: alphabeta::SearchStats {
+-                    zero_stock_approx_permitted: permitted,
+-                    zero_stock_approx_method: ZeroStockApproxMethod::FixedD,
+-                    ..Default::default()
+-                },
+-                stop: StopReason::NodeLimit,
+-                elapsed: std::time::Duration::ZERO,
+-            };
+-            let expected = if permitted {
+-                json!(ZeroStockApproxMethod::FixedD.id())
+-            } else {
+-                Value::Null
+-            };
+-            assert_eq!(observed(&result)["zero_stock_approx_method"], expected);
+-            assert_eq!(
+-                completed_depth_observation(&result)["zero_stock_approx_method"],
+-                expected
+-            );
+-        }
+-    }
+-
+     #[test]
+     fn measurement406_optional_threshold_refusals_and_actual_result_metadata() {
+         let base = json!({"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,
+--- b/scripts/dev/research-lifecycle.py
++++ a/scripts/dev/research-lifecycle.py
+@@ -883,7 +883,6 @@
+             "seed",
+             "lmr",
+             "zero_stock_approx_min_root_walls",
+-            "zero_stock_approx_method",
+         }
+         and {
+             "roots",
+@@ -915,11 +914,6 @@
+         "measurement Boolean switches",
+     )
+     require(type(config.get("lmr", False)) is bool, "measurement LMR switch")
+-    method = config.get("zero_stock_approx_method", "race")
+-    require(
+-        type(method) is str and method in {"race", "fixed_d"},
+-        "measurement zero-stock approximation method",
+-    )
+     threshold = config.get("zero_stock_approx_min_root_walls")
+     require(
+         threshold is None or (type(threshold) is int and 0 <= threshold <= 20),
+--- b/crates/quoridor-ai/src/zero_stock407_tests.rs
++++ /dev/null
+@@ -1,230 +0,0 @@
+-//! New method boundaries only; definitions are UNBUILT/UNTYPED/UNRUN here.
+-use super::continuation360_tests::{limits, namespace, small_root, with_state};
+-use super::*;
+-use std::sync::atomic::AtomicU64;
+-
+-#[derive(Default)]
+-struct Probe {
+-    advance: AtomicU64,
+-    heads: AtomicU64,
+-    forbid: bool,
+-}
+-impl StaticEvaluator for Probe {
+-    fn advance_move_context(
+-        &self,
+-        _: Option<&EvalAccumulator>,
+-        _: &SigmaContext,
+-        _: &quoridor_core::research::ContextUndo,
+-        slot: &mut Option<EvalAccumulator>,
+-    ) -> Result<()> {
+-        self.advance.fetch_add(1, Ordering::Relaxed);
+-        if self.forbid {
+-            return Err(SearchError::Evaluation("407 unexpected advance".into()));
+-        }
+-        *slot = None;
+-        Ok(())
+-    }
+-    fn evaluate(&self, _: &SigmaContext, _: Option<&EvalAccumulator>) -> Result<f32> {
+-        self.heads.fetch_add(1, Ordering::Relaxed);
+-        if self.forbid {
+-            return Err(SearchError::Evaluation("407 unexpected head".into()));
+-        }
+-        Ok(0.125)
+-    }
+-}
+-fn session(eval: Arc<dyn StaticEvaluator>) -> SearchSession {
+-    SearchSession::new_with_control_ordering(eval, namespace("407-toy"), 4096, ScoreDomain::LEGACY)
+-        .unwrap()
+-}
+-
+-#[test]
+-fn zero_stock407_names_default_and_disabled_method_keep_ordinary_warm_search() {
+-    assert_eq!(
+-        ZeroStockApproxMethod::default(),
+-        ZeroStockApproxMethod::Race
+-    );
+-    for method in [ZeroStockApproxMethod::Race, ZeroStockApproxMethod::FixedD] {
+-        assert_eq!(
+-            ZeroStockApproxMethod::from_name(method.name()).unwrap(),
+-            method
+-        );
+-    }
+-    for bad in ["", "solver", "FixedD", "fixed-D", "race-v2"] {
+-        assert!(ZeroStockApproxMethod::from_name(bad).is_err());
+-    }
+-    let root = small_root();
+-    let mut s = session(Arc::new(Probe::default()));
+-    let cancel = AtomicBool::new(false);
+-    let l = limits(2, true, true);
+-    let first = s.search(&root, &l, &cancel).unwrap();
+-    let ns = s.namespace().clone();
+-    let generation = s.table.generation;
+-    s.set_zero_stock_approx_method(ZeroStockApproxMethod::FixedD);
+-    assert_eq!(s.namespace(), &ns);
+-    assert_eq!(s.table.generation, generation);
+-    assert_eq!(s.zero_stock_approx_method(), None);
+-    let warm = s.search(&root, &l, &cancel).unwrap();
+-    assert!(!warm.stats.zero_stock_approx_permitted);
+-    assert_eq!(warm.stats.zero_stock_approx_terminations, 0);
+-    assert!(warm.stats.tt_hits > 0);
+-    assert_eq!(first.value.map(f32::to_bits), warm.value.map(f32::to_bits));
+-}
+-
+-#[test]
+-fn zero_stock407_effective_switch_reset_and_threshold_equivalence_clear_only_when_needed() {
+-    let root = small_root();
+-    let mut s = session(Arc::new(Probe::default()));
+-    let cancel = AtomicBool::new(false);
+-    let l = limits(2, true, true);
+-    let base = s.namespace().clone();
+-    s.set_zero_stock_approx_min_root_walls(Some(0)).unwrap();
+-    s.search(&root, &l, &cancel).unwrap();
+-    let action = root.legal_ids()[0];
+-    s.ordering
+-        .as_mut()
+-        .unwrap()
+-        .completed_cutoff(root.position(), 3, action, &[action], &[], None);
+-    assert!(
+-        s.ordering
+-            .as_ref()
+-            .unwrap()
+-            .prepare_scores(root.position(), &[])
+-            .score(action)
+-            .0
+-            > 0
+-    );
+-    s.set_zero_stock_approx_method(ZeroStockApproxMethod::FixedD);
+-    assert!(
+-        s.namespace()
+-            .selectivity
+-            .ends_with(ZeroStockApproxMethod::FixedD.id())
+-    );
+-    assert!(
+-        !s.namespace()
+-            .selectivity
+-            .contains(ZeroStockApproxMethod::Race.id())
+-    );
+-    assert!(s.table.slots.iter().all(Option::is_none));
+-    assert_eq!(
+-        s.ordering
+-            .as_ref()
+-            .unwrap()
+-            .prepare_scores(root.position(), &[])
+-            .score(action)
+-            .0,
+-        0
+-    );
+-    let first = s.search(&root, &l, &cancel).unwrap();
+-    assert_eq!(
+-        first.stats.zero_stock_approx_method,
+-        ZeroStockApproxMethod::FixedD
+-    );
+-    let generation = s.table.generation;
+-    s.set_zero_stock_approx_method(ZeroStockApproxMethod::FixedD);
+-    assert_eq!(s.table.generation, generation);
+-    let warm = s.search(&root, &l, &cancel).unwrap();
+-    assert!(warm.stats.tt_hits > 0);
+-    assert_eq!(first.value.map(f32::to_bits), warm.value.map(f32::to_bits));
+-    s.set_lmr(true).unwrap();
+-    assert!(
+-        s.namespace()
+-            .selectivity
+-            .ends_with(ZeroStockApproxMethod::FixedD.id())
+-    );
+-    assert!(s.namespace().selectivity.contains(LMR_METHOD));
+-    s.set_lmr(false).unwrap();
+-    s.set_zero_stock_approx_min_root_walls(Some(4)).unwrap();
+-    s.search(&root, &l, &cancel).unwrap();
+-    assert_eq!(s.namespace(), &base);
+-    assert_eq!(s.zero_stock_approx_method(), None);
+-    // Different requested thresholds with the same effective OFF method do not clear.
+-    let generation = s.table.generation;
+-    s.set_zero_stock_approx_min_root_walls(Some(20)).unwrap();
+-    assert_eq!(s.table.generation, generation);
+-    s.set_zero_stock_approx_min_root_walls(Some(0)).unwrap();
+-    s.search(&root, &l, &cancel).unwrap();
+-    s.reset(Arc::new(Probe::default()), namespace("407-reset"));
+-    assert_eq!(s.zero_stock_approx_method(), None);
+-    assert_eq!(s.zero_stock_approx_method, ZeroStockApproxMethod::FixedD);
+-    assert!(s.table.slots.iter().all(Option::is_none));
+-}
+-
+-#[test]
+-fn zero_stock407_fixed_d_uses_canonical_math_and_child_bypasses_nnue_with_undo() {
+-    let root = small_root();
+-    let fixed = DistanceEvaluator::new(0.0, 8.0);
+-    let probe = Probe {
+-        forbid: true,
+-        ..Probe::default()
+-    };
+-    let mut history = ContinuationHistory::new().unwrap();
+-    with_state(
+-        &root,
+-        &probe,
+-        &AtomicBool::new(false),
+-        &mut history,
+-        |s, c| {
+-            s.stats.zero_stock_approx_permitted = true;
+-            s.stats.zero_stock_approx_method = ZeroStockApproxMethod::FixedD;
+-            s.context = ContextFingerprint::of(c);
+-            s.board = Some(BoardCursor::of(c));
+-            let before = (Key::of(c), c.history_counts(), s.context, s.board);
+-            for action in c.legal_ids() {
+-                let child = c.play(action).unwrap();
+-                if child.terminal_value().is_some() {
+-                    continue;
+-                }
+-                let expected = -fixed.evaluate(&child, None).unwrap();
+-                let result = s.child(c, None, action, 1, [-2.0, 2.0], 1).unwrap();
+-                assert_eq!(result.to_bits(), expected.to_bits());
+-                assert_eq!((Key::of(c), c.history_counts(), s.context, s.board), before);
+-            }
+-            assert_eq!(s.stats.nodes, s.stats.zero_stock_approx_terminations);
+-            assert!(s.stats.zero_stock_approx_terminations > 0);
+-            assert_eq!((s.stats.delta_updates, s.stats.evaluations), (0, 0));
+-        },
+-    );
+-    assert_eq!(
+-        (
+-            probe.advance.load(Ordering::Relaxed),
+-            probe.heads.load(Ordering::Relaxed)
+-        ),
+-        (0, 0)
+-    );
+-    // Same-distance fixtures distinguish the two chosen methods, without a new formula oracle.
+-    assert_eq!(
+-        fixed.evaluate_distances(7, 7).unwrap().to_bits(),
+-        0.0_f32.to_bits()
+-    );
+-    let positive = fixed.evaluate_distances(0, 80).unwrap();
+-    assert!(positive > 0.0 && positive < 1.0);
+-    assert_eq!(
+-        fixed.evaluate_distances(80, 0).unwrap().to_bits(),
+-        (-positive).to_bits()
+-    );
+-}
+-
+-#[test]
+-fn zero_stock407_fixed_d_depth_zero_cancel_and_error_keep_parent_and_counts() {
+-    let root = small_root();
+-    for case in 0..3 {
+-        let probe = Probe {
+-            forbid: case == 2,
+-            ..Probe::default()
+-        };
+-        let cancel = AtomicBool::new(case == 1);
+-        let mut history = ContinuationHistory::new().unwrap();
+-        with_state(&root, &probe, &cancel, &mut history, |s, c| {
+-            s.stats.zero_stock_approx_permitted = true;
+-            s.stats.zero_stock_approx_method = ZeroStockApproxMethod::FixedD;
+-            s.context = ContextFingerprint::of(c);
+-            s.board = Some(BoardCursor::of(c));
+-            let before = (Key::of(c), c.history_counts(), s.context, s.board);
+-            let result = s.child(c, None, c.legal_ids()[0], 0, [-2.0, 2.0], 1);
+-            assert_eq!(result.is_ok(), case == 0);
+-            assert_eq!(s.stats.zero_stock_approx_terminations, 0);
+-            assert_eq!((Key::of(c), c.history_counts(), s.context, s.board), before);
+-            assert!(s.path.is_empty());
+-        });
+-    }
+-}

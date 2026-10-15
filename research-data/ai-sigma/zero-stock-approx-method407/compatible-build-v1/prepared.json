@@ -1,0 +1,94 @@
+{
+  "intent": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx-method407-v1/compatible-build-v1/intent.json",
+    "sha256": "a5e2f227d9eef589760f82c6b2c2f60850d0544492aba23f506069a2e1e69ae4",
+    "bytes": 13740,
+    "mode": "0644"
+  },
+  "commands": 9,
+  "test_filters": [
+    {
+      "package": "quoridor-ai",
+      "feature": "research-diagnostics",
+      "filter": "zero_stock407_",
+      "expected": 4
+    },
+    {
+      "package": "quoridor-runner",
+      "feature": "measurement",
+      "filter": "measurement407_method_default_refusal_and_resolved_output",
+      "expected": 1
+    },
+    {
+      "package": "quoridor-ai",
+      "feature": "research-diagnostics",
+      "filter": "zero_stock406_float_cache_wall_key_fallback_and_parent_immutability",
+      "expected": 1
+    },
+    {
+      "package": "quoridor-runner",
+      "feature": "measurement",
+      "filter": "measurement406_optional_threshold_refusals_and_actual_result_metadata",
+      "expected": 1
+    }
+  ],
+  "source": {
+    "workspace": "/workspaces/quoridor",
+    "commit": "b7322591f9558bbaed92f2de6a6ebdd880367506",
+    "patch": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx-method407-v1/compatible-build-v1/source.patch",
+      "sha256": "b03d8f2d6225f555b95a436e7d68b4bbd823a39fd849f5d82e9109669bb540fa",
+      "bytes": 577,
+      "mode": "0644"
+    },
+    "untracked_inputs": [],
+    "manifest": {
+      "path": "/workspaces/quoridor/Cargo.toml",
+      "sha256": "6cbcf3b38c98492322761e78db908195789021216be51aa37de2888cacd0ab0b",
+      "bytes": 284,
+      "mode": "0644"
+    },
+    "lock": {
+      "path": "/workspaces/quoridor/Cargo.lock",
+      "sha256": "aa938a8537b68f62f383f3ae1538ee335f294f336173ea1ea06eb57503ebb38a",
+      "bytes": 27359,
+      "mode": "0644"
+    },
+    "cargo_configs": [
+      {
+        "path": "/.cargo/config",
+        "file": null
+      },
+      {
+        "path": "/.cargo/config.toml",
+        "file": null
+      },
+      {
+        "path": "/usr/local/cargo/config",
+        "file": null
+      },
+      {
+        "path": "/usr/local/cargo/config.toml",
+        "file": null
+      },
+      {
+        "path": "/workspaces/.cargo/config",
+        "file": null
+      },
+      {
+        "path": "/workspaces/.cargo/config.toml",
+        "file": null
+      },
+      {
+        "path": "/workspaces/quoridor/.cargo/config",
+        "file": null
+      },
+      {
+        "path": "/workspaces/quoridor/.cargo/config.toml",
+        "file": null
+      }
+    ]
+  },
+  "no_job_launched": true,
+  "storage_budget": null
+}

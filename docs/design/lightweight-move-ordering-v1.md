@@ -421,3 +421,9 @@ wholeは6root body・setup/drop・採点・key保存/cache・再探索込みの�
 実効方式の変化は既存TT method/resetへ束縛し、閾値やS0を重複した資格へしない。同方式warm再利用を保つ。ゲームのfullhistory資格・depth/boundは緩めず、近似入り名目depthと木内TT Exactをゲームexact WDLや通常全幅深さへ読み替えない。結果にS0・解決済み許可・近似終了数と実methodを保存する。今回のRaceは近似であり、既存真終端とは別である。
 
 初回96 callsと保存52fixtureの結果は[研究findings](../research-findings.md)および[固定run報告](../../research-data/ai-sigma/zero-stock-approx406/final-results-v1/report-ja.md)に統合した。実装は研究option/既定OFFを保持し、対局・一般棋力・既定昇格をこの速度試行から認定しない。407の方法選択は別差分であり、元406比較を再実行しない。
+
+### 方法selectorの実装境界（407）
+
+`ZeroStockApproxMethod::{Race, FixedD}` と `zero_stock_approx_method` は発動閾値から独立し、省略race、null/未知名/型違いを拒否する。FixedDは既存 `DistanceEvaluator::evaluate_distances` で通常固定Dと同じ正規化・算術・tanhを共用する。OFFの実効IDはnull、ONでは選択method IDを既存namespace/resetへ束縛する。OFF中の方法変更は通常TTを維持し、ON実効切替だけclear、LMR/resetを通して同一方式warm再利用を保つ。近似leaf・真終端・通常depth0と要求/実効metadataは別責務である。
+
+必要softwareと限定source reviewを受入れたが、407数値比較は発行していない。406固定raceの速度96を変更/再演せず、既定無効を保持する。[保存結果](../../research-data/ai-sigma/zero-stock-approx-method407/result.json)と既存findingsに実版・費・限界を記録した。

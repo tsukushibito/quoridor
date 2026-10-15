@@ -1,0 +1,422 @@
+{
+  "schema": "quoridor.research.lifecycle-intent.v1",
+  "kind": "build",
+  "owner": "/workspaces/quoridor",
+  "writer": "codex:01a1376a-bfd3-75d2-bd64-61e9416b3b13",
+  "cwd": "/workspaces/quoridor",
+  "output": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx-method407-v1/compatible-build-v1/operation-v1",
+  "env": {
+    "PATH": "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin:/usr/bin:/bin",
+    "HOME": "/home/vscode",
+    "CARGO_HOME": "/usr/local/cargo",
+    "RUSTUP_HOME": "/usr/local/rustup",
+    "RUSTUP_AUTO_INSTALL": "0",
+    "CARGO_NET_OFFLINE": "true",
+    "CARGO_TARGET_DIR": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target",
+    "TMPDIR": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx-method407-v1/compatible-build-v1/TMP-v1",
+    "CARGO_BUILD_JOBS": "1",
+    "CARGO_INCREMENTAL": "0",
+    "CARGO_PROFILE_RELEASE_OPT_LEVEL": "3",
+    "CARGO_PROFILE_RELEASE_DEBUG": "0",
+    "CARGO_PROFILE_DEV_DEBUG": "0",
+    "CARGO_PROFILE_TEST_DEBUG": "0",
+    "RUSTFLAGS": "-C debuginfo=0",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "RUSTC": "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc",
+    "RUSTDOC": "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustdoc",
+    "CC": "/usr/bin/x86_64-linux-gnu-gcc-12",
+    "CXX": "/usr/bin/x86_64-linux-gnu-g++-12",
+    "AR": "/usr/bin/x86_64-linux-gnu-ar",
+    "CARGO_PROFILE_DEV_OPT_LEVEL": "0",
+    "CARGO_PROFILE_TEST_OPT_LEVEL": "0",
+    "CUDA_VISIBLE_DEVICES": "",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "ORT_DISABLE_TELEMETRY": "1",
+    "RAYON_NUM_THREADS": "1"
+  },
+  "limits": {
+    "family_B": 4294967296,
+    "controller_B": 67108864,
+    "host_reserve_B": 4294967296,
+    "worker_cpu": 2,
+    "guardian_cpu": 4,
+    "log_B": 2097152
+  },
+  "support": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx-method407-v1/compatible-build-v1/resources.json",
+    "sha256": "a61992cb6babf6529bcdb5b3b6ddd2a91a87b26495a130138993ea0994e3dd41",
+    "bytes": 517,
+    "mode": "0644"
+  },
+  "source_adoption": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx-method407-v1/compatible-build-v1/source-adoption.json",
+    "sha256": "eda1b5fbee83d4805a6483638f65df972693670952f67e1208082891a4b8b01e",
+    "bytes": 2046,
+    "mode": "0644"
+  },
+  "target_handover": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx-method407-v1/compatible-build-v1/target-handover.json",
+    "sha256": "60632a7b49ed14441a0ce76252e91121ddeeabf348739d8f470b4aa67cba18db",
+    "bytes": 607,
+    "mode": "0644"
+  },
+  "source": {
+    "workspace": "/workspaces/quoridor",
+    "commit": "b7322591f9558bbaed92f2de6a6ebdd880367506",
+    "patch": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx-method407-v1/compatible-build-v1/source.patch",
+      "sha256": "b03d8f2d6225f555b95a436e7d68b4bbd823a39fd849f5d82e9109669bb540fa",
+      "bytes": 577,
+      "mode": "0644"
+    },
+    "untracked_inputs": [],
+    "manifest": {
+      "path": "/workspaces/quoridor/Cargo.toml",
+      "sha256": "6cbcf3b38c98492322761e78db908195789021216be51aa37de2888cacd0ab0b",
+      "bytes": 284,
+      "mode": "0644"
+    },
+    "lock": {
+      "path": "/workspaces/quoridor/Cargo.lock",
+      "sha256": "aa938a8537b68f62f383f3ae1538ee335f294f336173ea1ea06eb57503ebb38a",
+      "bytes": 27359,
+      "mode": "0644"
+    },
+    "cargo_configs": [
+      {
+        "path": "/.cargo/config",
+        "file": null
+      },
+      {
+        "path": "/.cargo/config.toml",
+        "file": null
+      },
+      {
+        "path": "/usr/local/cargo/config",
+        "file": null
+      },
+      {
+        "path": "/usr/local/cargo/config.toml",
+        "file": null
+      },
+      {
+        "path": "/workspaces/.cargo/config",
+        "file": null
+      },
+      {
+        "path": "/workspaces/.cargo/config.toml",
+        "file": null
+      },
+      {
+        "path": "/workspaces/quoridor/.cargo/config",
+        "file": null
+      },
+      {
+        "path": "/workspaces/quoridor/.cargo/config.toml",
+        "file": null
+      }
+    ]
+  },
+  "tools": {
+    "CARGO": {
+      "file": {
+        "path": "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "sha256": "e951141cc55a6cd7b9876d187bd30a3720e6086b99413af95e3b8de1cdd72f14",
+        "bytes": 36160240,
+        "mode": "0775"
+      },
+      "version_args": [
+        "--version"
+      ],
+      "version": "cargo 1.99.0 (5f94df478 2026-08-27)"
+    },
+    "RUSTC": {
+      "file": {
+        "path": "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc",
+        "sha256": "f3834d26669b03f6855fa54bd2381443123e860167bc0c7a8dd137e5cf6e5e4f",
+        "bytes": 647376,
+        "mode": "0775"
+      },
+      "version_args": [
+        "--version"
+      ],
+      "version": "rustc 1.99.0 (b940084d7 2026-09-28)"
+    },
+    "RUSTDOC": {
+      "file": {
+        "path": "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustdoc",
+        "sha256": "a1321a60578a6b2e3e0ff428201b8618bbd9a9fbcd475c0d0f151bbf17cb0a9e",
+        "bytes": 12568360,
+        "mode": "0775"
+      },
+      "version_args": [
+        "--version"
+      ],
+      "version": "rustdoc 1.99.0 (b940084d7 2026-09-28)"
+    },
+    "CC": {
+      "file": {
+        "path": "/usr/bin/x86_64-linux-gnu-gcc-12",
+        "sha256": "75e997ec62297a6484f491bae28ab0ccb489daba23e398fd10fe68e9e6f0def8",
+        "bytes": 1301496,
+        "mode": "0755"
+      },
+      "version_args": [
+        "--version"
+      ],
+      "version": "x86_64-linux-gnu-gcc-12 (Debian 12.2.0-14+deb12u1) 12.2.0\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
+    },
+    "CXX": {
+      "file": {
+        "path": "/usr/bin/x86_64-linux-gnu-g++-12",
+        "sha256": "dd91977c184e327710578363ad93ebb175c3a457b6236b874fd3911b7c055c65",
+        "bytes": 1305592,
+        "mode": "0755"
+      },
+      "version_args": [
+        "--version"
+      ],
+      "version": "x86_64-linux-gnu-g++-12 (Debian 12.2.0-14+deb12u1) 12.2.0\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
+    },
+    "AR": {
+      "file": {
+        "path": "/usr/bin/x86_64-linux-gnu-ar",
+        "sha256": "3acbee2794e3668a74bcb90f2eaf7d981211fb95288ab940f0e3ac380e8f6023",
+        "bytes": 52400,
+        "mode": "0755"
+      },
+      "version_args": [
+        "--version"
+      ],
+      "version": "GNU ar (GNU Binutils for Debian) 2.40\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis program is free software; you may redistribute it under the terms of\nthe GNU General Public License version 3 or (at your option) any later version.\nThis program has absolutely no warranty."
+    },
+    "PYTHON": {
+      "file": {
+        "path": "/home/vscode/.cache/inference/python/cpython-3.14.7-linux-x86_64-gnu/bin/python3.14",
+        "sha256": "5a91882290532b2719eaca77c0f3a7448bd73b9214e56df57bc59004560a80c6",
+        "bytes": 32418544,
+        "mode": "0755"
+      },
+      "version_args": [
+        "--version"
+      ],
+      "version": "Python 3.14.7"
+    }
+  },
+  "target": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target",
+  "private": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner407-zero-stock-method-v1",
+  "TMP": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx-method407-v1/compatible-build-v1/TMP-v1",
+  "commands": [
+    {
+      "name": "measurement-test-compile",
+      "role": "test",
+      "argv": [
+        "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "/workspaces/quoridor/Cargo.toml",
+        "-j1",
+        "--message-format=json-render-diagnostics",
+        "-p",
+        "quoridor-runner",
+        "--lib",
+        "--features",
+        "measurement",
+        "--no-run"
+      ]
+    },
+    {
+      "name": "zero-stock407",
+      "role": "test",
+      "argv": [
+        "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "/workspaces/quoridor/Cargo.toml",
+        "-j1",
+        "--message-format=json-render-diagnostics",
+        "-p",
+        "quoridor-ai",
+        "--lib",
+        "--features",
+        "research-diagnostics",
+        "zero_stock407_",
+        "--",
+        "--test-threads=1",
+        "--nocapture"
+      ]
+    },
+    {
+      "name": "measurement407-method-default-refusal-and-resolved-output",
+      "role": "test",
+      "argv": [
+        "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "/workspaces/quoridor/Cargo.toml",
+        "-j1",
+        "--message-format=json-render-diagnostics",
+        "-p",
+        "quoridor-runner",
+        "--lib",
+        "--features",
+        "measurement",
+        "measurement407_method_default_refusal_and_resolved_output",
+        "--",
+        "--test-threads=1",
+        "--nocapture"
+      ]
+    },
+    {
+      "name": "zero-stock406-float-cache-wall-key-fallback-and-parent-immutability",
+      "role": "test",
+      "argv": [
+        "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "/workspaces/quoridor/Cargo.toml",
+        "-j1",
+        "--message-format=json-render-diagnostics",
+        "-p",
+        "quoridor-ai",
+        "--lib",
+        "--features",
+        "research-diagnostics",
+        "zero_stock406_float_cache_wall_key_fallback_and_parent_immutability",
+        "--",
+        "--test-threads=1",
+        "--nocapture"
+      ]
+    },
+    {
+      "name": "measurement406-optional-threshold-refusals-and-actual-result-metadata",
+      "role": "test",
+      "argv": [
+        "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "/workspaces/quoridor/Cargo.toml",
+        "-j1",
+        "--message-format=json-render-diagnostics",
+        "-p",
+        "quoridor-runner",
+        "--lib",
+        "--features",
+        "measurement",
+        "measurement406_optional_threshold_refusals_and_actual_result_metadata",
+        "--",
+        "--test-threads=1",
+        "--nocapture"
+      ]
+    },
+    {
+      "name": "research-affected-lint",
+      "role": "lint",
+      "argv": [
+        "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "clippy",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "/workspaces/quoridor/Cargo.toml",
+        "-j1",
+        "--message-format=json-render-diagnostics",
+        "-p",
+        "quoridor-ai",
+        "--all-targets",
+        "--features",
+        "research",
+        "--no-deps",
+        "--",
+        "-Dwarnings"
+      ]
+    },
+    {
+      "name": "research-diagnostics-affected-lint",
+      "role": "lint",
+      "argv": [
+        "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "clippy",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "/workspaces/quoridor/Cargo.toml",
+        "-j1",
+        "--message-format=json-render-diagnostics",
+        "-p",
+        "quoridor-ai",
+        "--all-targets",
+        "--features",
+        "research-diagnostics",
+        "--no-deps",
+        "--",
+        "-Dwarnings"
+      ]
+    },
+    {
+      "name": "measurement-affected-lint",
+      "role": "lint",
+      "argv": [
+        "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "clippy",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "/workspaces/quoridor/Cargo.toml",
+        "-j1",
+        "--message-format=json-render-diagnostics",
+        "-p",
+        "quoridor-runner",
+        "--all-targets",
+        "--features",
+        "measurement",
+        "--no-deps",
+        "--",
+        "-Dwarnings"
+      ]
+    },
+    {
+      "name": "measurement-build",
+      "role": "build",
+      "argv": [
+        "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "build",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "/workspaces/quoridor/Cargo.toml",
+        "-j1",
+        "--message-format=json-render-diagnostics",
+        "--release",
+        "-p",
+        "quoridor-runner",
+        "--bin",
+        "quoridor-runner",
+        "--features",
+        "measurement"
+      ]
+    }
+  ],
+  "finalizers": [],
+  "artifact_target": "quoridor-runner",
+  "intent_sha256": "9b0f086e0e88eb6092c780518cb6037f33ff2dc37e3092b46026a3868f07f07c",
+  "admission": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx-method407-v1/compatible-build-v1/admission.json",
+    "sha256": "fc2f69725574f9c94a621043c41047d0d2629275cce88d1707fc6b399415b76f",
+    "bytes": 456,
+    "mode": "0644"
+  }
+}

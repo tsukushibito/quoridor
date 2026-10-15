@@ -1,0 +1,70 @@
+{
+  "issue": "quoridor-4lc.407.2",
+  "source_clear": true,
+  "blockers": [],
+  "ordinary": [],
+  "scope": "fixed407 method/config/namespace and sole fixed-D math extraction",
+  "evidence_notes": [
+    {
+      "subject": "standalone runner test fragment",
+      "fact": "one JSON macro continuation has four more leading spaces than the actual module after removing its enclosing indentation; all other body bytes match",
+      "authority": "exact reconstructed measurement.rs postimage, not display-fragment byte identity",
+      "repair_required": false
+    }
+  ],
+  "limitations": [
+    "4 new AI, 1 runner, 1 Python NN0 definitions remain UNBUILT/UNTYPED/UNRUN in this review; no execution by reviewer",
+    "No407 numerical campaign, speed/strength/default or current image authority is established",
+    "Cache hit frequency, actual layout/RSS/copy cost and all-work fees UNKNOWN"
+  ],
+  "local_static_helper_errors": [
+    {
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx-method407-v1/review-v1/source-read-2-receipt.json",
+        "sha256": "453671c3c3590ac8a772ff95e36fa7ffa8952318aa962892ed3165d190cf3ed5",
+        "bytes": 757,
+        "mode": "0644"
+      },
+      "child_identity": {
+        "pid": 1195360,
+        "start_ticks": "8482842",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 69, in <module>\n  File \"<string>\", line 47, in apply\nKeyError: 'b/crates/quoridor-ai/src/alphabeta.rs'\n",
+      "classification": "local independent static-helper representation error; not target test/software failure",
+      "preserved": true
+    },
+    {
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx-method407-v1/review-v1/source-reader-final-receipt.json",
+        "sha256": "55b145efcbbf308cd02383fa478dd4fe551a2d9e8f44913a4a53be4014e0f450",
+        "bytes": 683,
+        "mode": "0644"
+      },
+      "child_identity": {
+        "pid": 1198130,
+        "start_ticks": "8495729",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 118, in <module>\nAssertionError\n",
+      "classification": "local independent static-helper representation error; not target test/software failure",
+      "preserved": true
+    },
+    {
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx-method407-v1/review-v1/source-reader-final-v2-receipt.json",
+        "sha256": "19291194bbebb18d6d35762decc4f1161e7ca7a77c928ec66e4e137a3b6a8b2d",
+        "bytes": 769,
+        "mode": "0644"
+      },
+      "child_identity": {
+        "pid": 1198486,
+        "start_ticks": "8500009",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 119, in <module>\nAssertionError: fragment must match current module after exactly its enclosing four-space indentation\n",
+      "classification": "local independent static-helper representation error; not target test/software failure",
+      "preserved": true
+    }
+  ]
+}

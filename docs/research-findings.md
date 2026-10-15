@@ -1932,3 +1932,13 @@ setup/drop等込み8 calls/passのwhole二反復中央値は、NNUEがなし14.3
 保存52小盤面fixtureの元WDLラベル5,680状態だけを同じ距離式で照合し、Win→Loss324、Loss→Win296、Win→Win3206、Loss→Loss1854。Drawラベル0のためDraw誤判定は未観測であり、式は±1しか返さない。元WDL solver/辺/rankの再実行0。小盤面board-onlyを9×9・実履歴・棋力へ一般化しない。元speed outer186.226594642s、software二outer116.416451455s（原FAILED9.486728284sを含む）は非重複scope別で、nestedを足さず、source/LLM等を含む全費用はUNKNOWN。実timing STOP03:39:18.372901Zと全元identity/TMP/lease解放を確認した。[結果・局面別cold/warm・全counter](../research-data/ai-sigma/zero-stock-approx406/final-results-v1/report-ja.md)と[原物保存対応](../research-data/ai-sigma/zero-stock-approx406/preservation.json)を参照。
 
 今回は速度結果の提示までで、研究optionを既定無効のまま保持する。一律の棋力/既定採用、対局、追加閾値sweep、学習は発行しない。407の別方法選択はこの406を変更せず、実STOP後のsource/softwareだけを別差分として扱い、407追加数値範囲は未発行。mixed/learner全prep/pipelineと323 USERPAUSE、models/defaults/weights/seals/oldfits96/foreign変更、旧RAW/FAILED/費UNKNOWNは維持する。
+
+### 零在庫近似の方法selectorを共通化した（407、2026-10-15）
+
+発動条件とは独立に `race` / `fixed_d` を選ぶ共通設定を実装した。省略時race、明示null・未知名・型違いは拒否する。発動OFFでは通常Searchと実効method=nullを保ち、方法変更だけでTT/ordering履歴を消さない。ONで実効方法が変わった場合だけ既存clear/resetを使い、同方法のwarm再利用を保つ。閾値/root在庫をnamespaceへ重複しない。LMR/resetとの組合せ、真のgoal/threefold、通常depth0、NNUE advance/head省略と復元は既存境界を維持した。
+
+固定D(0,8,tanh)は既存DistanceEvaluatorの距離正規化/評価正本を一か所で共用し、重複評価器・cache・solver modeを追加していない。要求方法と解決済み実効ID/nullを計測結果/callbackへ分けて保存する。近似入りnominal depth/TT Exactをゲームのexact WDLへ読み替えない。
+
+限定source reviewはblockers0/ordinary0、source STOP df653e8a。必要softwareは新AI4・runner1・Python NN0 1・影響2とresearch/diagnostics/runner compile/Clippy/真正release PASS。原job outer102.857040425秒を一度、nested非加算で記録した。真正image883442d1/Build715d8cf4、原source ae70b864と既存Settings literalのdefault追加b732259を区別する。source用CPU12に固定した初回collectorは元buildCPU2/4 admissionを満たさず拒否、通常controllerの既存finalizerで同じ原結果を初めて保存した。build/assertionの再演0、元拒否/費/NULLとdisk masksは保持する。
+
+研究optionとして保持するが発動既定は無効のまま。今回407の数値campaign/arenaは0、速度・棋力や既定昇格を認定しない。原406のimage/式/96calls/結果は変更しない。設定・source・software・review・原失敗とSTOPは[407保存結果](../research-data/ai-sigma/zero-stock-approx-method407/result.json)、[保存参照](../research-data/ai-sigma/zero-stock-approx-method407/preservation.json)へ結ぶ。追加数値範囲は未発行、408比較は全条件で零在庫近似OFFという別subjectである。全mixed/learner prep/pipeline/323 USERPAUSE、defaults/models/weights/seals/oldfits96/旧RAWFAILED費UNKNOWNは維持する。

@@ -1,0 +1,185 @@
+{
+  "status": "PASS",
+  "strict_forward_inverse": true,
+  "minimum_original": "immutable Git objects only; no mutable Main source",
+  "before": [
+    {
+      "git_object": "7bf4e3a4a3497158e9458a22b8814e1069e52e5b:crates/quoridor-ai/src/alphabeta.rs",
+      "relative": "crates/quoridor-ai/src/alphabeta.rs",
+      "sha256": "8cf67e49726a2fa1f5111edd47e47bfe159a0f938de4358734cf7acc568ed79c",
+      "bytes": 141279,
+      "mode": "0644"
+    },
+    {
+      "git_object": "7bf4e3a4a3497158e9458a22b8814e1069e52e5b:crates/quoridor-runner/src/measurement.rs",
+      "relative": "crates/quoridor-runner/src/measurement.rs",
+      "sha256": "10fa50416ce1ea72327cdf8481d26391b5a75d300d82240e0782aee71364b29a",
+      "bytes": 51422,
+      "mode": "0644"
+    },
+    {
+      "git_object": "7bf4e3a4a3497158e9458a22b8814e1069e52e5b:scripts/dev/research-lifecycle.py",
+      "relative": "scripts/dev/research-lifecycle.py",
+      "sha256": "ec13745424d996d0771cbc756db8c9b816b13d8fe19cdb666cbc4ef2f3bf38d8",
+      "bytes": 222082,
+      "mode": "0644"
+    }
+  ],
+  "after": [
+    {
+      "relative": "crates/quoridor-ai/src/alphabeta.rs",
+      "sha256": "1d7329f5c9bc20cfc15cd2571cf18715522a0b28e2ef40364c5f609063526a01",
+      "bytes": 144418,
+      "mode": "0644",
+      "reconstruction": "base Git object plus method407.patch"
+    },
+    {
+      "relative": "crates/quoridor-runner/src/measurement.rs",
+      "sha256": "f7a8c4a3bad188538bae40d5e1b31126270062e8fdf6debe51e2a685a94a36d4",
+      "bytes": 54438,
+      "mode": "0644",
+      "reconstruction": "base Git object plus method407.patch"
+    },
+    {
+      "relative": "crates/quoridor-ai/src/zero_stock407_tests.rs",
+      "sha256": "6d40a499fdbe7ed95d4765e54bfe750a34cb4f7c45c8837c78c57b1c835bee33",
+      "bytes": 8555,
+      "mode": "0644",
+      "reconstruction": "base Git object plus method407.patch"
+    },
+    {
+      "relative": "scripts/dev/research-lifecycle.py",
+      "sha256": "df98c681cfaf04ed58b4b7602390105dcc700ade8672786605c79c12d9c39b3b",
+      "bytes": 222319,
+      "mode": "0644",
+      "reconstruction": "base Git object plus method407.patch"
+    }
+  ],
+  "selected_refs": [
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/source-STOP.json",
+      "sha256": "df653e8a13425ea983a94d0a543cde47495f7e2bb7be1ab3740859471227ddb9",
+      "bytes": 18579,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/source-binding.json",
+      "sha256": "85c57a8c09f123385593b5c066629b7a4cddee4d5f5a7abb2b48d3ef84a851ad",
+      "bytes": 5797,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/method407.patch",
+      "sha256": "6cb93acf7068a2202699a26d0335807f37f5de00748e252aa67afb21d0b911aa",
+      "bytes": 25842,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/method407.inverse.patch",
+      "sha256": "0828a11127eb3acfd59d7aa1fe5b1cb89274681448741ad0e68eb2bced20218b",
+      "bytes": 25842,
+      "mode": "0644"
+    }
+  ],
+  "git_children": [
+    {
+      "argv": [
+        "git",
+        "--no-optional-locks",
+        "-C",
+        "/workspaces/quoridor",
+        "ls-tree",
+        "-z",
+        "7bf4e3a4a3497158e9458a22b8814e1069e52e5b",
+        "--",
+        "crates/quoridor-ai/src/alphabeta.rs",
+        "crates/quoridor-runner/src/measurement.rs",
+        "scripts/dev/research-lifecycle.py",
+        "crates/quoridor-ai/src/zero_stock407_tests.rs"
+      ],
+      "identity": {
+        "pid": 1195623,
+        "start_ticks": "8484184",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "exit_code": 0,
+      "directwait_reaped": true,
+      "fresh_identity": "absent",
+      "handles_closed": true,
+      "stderr": "",
+      "output_sha256": "a4d5eaa7c244e0e212f3cb5f77986eb45152367d07f7179e8b974bb6998037ff",
+      "output_bytes": 271
+    },
+    {
+      "argv": [
+        "git",
+        "--no-optional-locks",
+        "-C",
+        "/workspaces/quoridor",
+        "cat-file",
+        "blob",
+        "7bf4e3a4a3497158e9458a22b8814e1069e52e5b:crates/quoridor-ai/src/alphabeta.rs"
+      ],
+      "identity": {
+        "pid": 1195625,
+        "start_ticks": "8484202",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "exit_code": 0,
+      "directwait_reaped": true,
+      "fresh_identity": "absent",
+      "handles_closed": true,
+      "stderr": "",
+      "output_sha256": "8cf67e49726a2fa1f5111edd47e47bfe159a0f938de4358734cf7acc568ed79c",
+      "output_bytes": 141279
+    },
+    {
+      "argv": [
+        "git",
+        "--no-optional-locks",
+        "-C",
+        "/workspaces/quoridor",
+        "cat-file",
+        "blob",
+        "7bf4e3a4a3497158e9458a22b8814e1069e52e5b:crates/quoridor-runner/src/measurement.rs"
+      ],
+      "identity": {
+        "pid": 1195626,
+        "start_ticks": "8484213",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "exit_code": 0,
+      "directwait_reaped": true,
+      "fresh_identity": "absent",
+      "handles_closed": true,
+      "stderr": "",
+      "output_sha256": "10fa50416ce1ea72327cdf8481d26391b5a75d300d82240e0782aee71364b29a",
+      "output_bytes": 51422
+    },
+    {
+      "argv": [
+        "git",
+        "--no-optional-locks",
+        "-C",
+        "/workspaces/quoridor",
+        "cat-file",
+        "blob",
+        "7bf4e3a4a3497158e9458a22b8814e1069e52e5b:scripts/dev/research-lifecycle.py"
+      ],
+      "identity": {
+        "pid": 1195627,
+        "start_ticks": "8484217",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "exit_code": 0,
+      "directwait_reaped": true,
+      "fresh_identity": "absent",
+      "handles_closed": true,
+      "stderr": "",
+      "output_sha256": "ec13745424d996d0771cbc756db8c9b816b13d8fe19cdb666cbc4ef2f3bf38d8",
+      "output_bytes": 222082
+    }
+  ],
+  "permanent_source_mirrors": false,
+  "reader_STOP": "2026-10-15T03:53:33.956037+00:00"
+}

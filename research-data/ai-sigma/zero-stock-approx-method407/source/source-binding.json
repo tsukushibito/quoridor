@@ -1,0 +1,157 @@
+{
+  "base_commit": "7bf4e3a4a3497158e9458a22b8814e1069e52e5b",
+  "writer": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1",
+  "before": [
+    {
+      "git_object": "7bf4e3a4a3497158e9458a22b8814e1069e52e5b:crates/quoridor-ai/src/alphabeta.rs",
+      "relative": "crates/quoridor-ai/src/alphabeta.rs",
+      "sha256": "8cf67e49726a2fa1f5111edd47e47bfe159a0f938de4358734cf7acc568ed79c",
+      "bytes": 141279,
+      "mode": "0644"
+    },
+    {
+      "git_object": "7bf4e3a4a3497158e9458a22b8814e1069e52e5b:crates/quoridor-runner/src/measurement.rs",
+      "relative": "crates/quoridor-runner/src/measurement.rs",
+      "sha256": "10fa50416ce1ea72327cdf8481d26391b5a75d300d82240e0782aee71364b29a",
+      "bytes": 51422,
+      "mode": "0644"
+    },
+    {
+      "git_object": "7bf4e3a4a3497158e9458a22b8814e1069e52e5b:scripts/dev/research-lifecycle.py",
+      "relative": "scripts/dev/research-lifecycle.py",
+      "sha256": "ec13745424d996d0771cbc756db8c9b816b13d8fe19cdb666cbc4ef2f3bf38d8",
+      "bytes": 222082,
+      "mode": "0644"
+    }
+  ],
+  "new_test": {
+    "relative": "crates/quoridor-ai/src/zero_stock407_tests.rs",
+    "before": "ABSENT at base Git tree"
+  },
+  "directwait_git_commands": [
+    {
+      "argv": [
+        "git",
+        "--no-optional-locks",
+        "-C",
+        "/workspaces/quoridor",
+        "show",
+        "7bf4e3a4a3497158e9458a22b8814e1069e52e5b:crates/quoridor-ai/src/alphabeta.rs"
+      ],
+      "returncode": 0,
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "--no-optional-locks",
+        "-C",
+        "/workspaces/quoridor",
+        "show",
+        "7bf4e3a4a3497158e9458a22b8814e1069e52e5b:crates/quoridor-runner/src/measurement.rs"
+      ],
+      "returncode": 0,
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "--no-optional-locks",
+        "-C",
+        "/workspaces/quoridor",
+        "show",
+        "7bf4e3a4a3497158e9458a22b8814e1069e52e5b:scripts/dev/research-lifecycle.py"
+      ],
+      "returncode": 0,
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "--no-optional-locks",
+        "-C",
+        "/workspaces/quoridor",
+        "ls-tree",
+        "7bf4e3a4a3497158e9458a22b8814e1069e52e5b",
+        "--",
+        "crates/quoridor-ai/src/zero_stock407_tests.rs"
+      ],
+      "returncode": 0,
+      "stderr": ""
+    }
+  ],
+  "native_type_test_status": "UNBUILT/UNTYPED/UNRUN",
+  "after": [
+    {
+      "relative": "crates/quoridor-ai/src/alphabeta.rs",
+      "sha256": "1d7329f5c9bc20cfc15cd2571cf18715522a0b28e2ef40364c5f609063526a01",
+      "bytes": 144418,
+      "mode": "0644",
+      "reconstruction": "base Git object plus method407.patch"
+    },
+    {
+      "relative": "crates/quoridor-runner/src/measurement.rs",
+      "sha256": "f7a8c4a3bad188538bae40d5e1b31126270062e8fdf6debe51e2a685a94a36d4",
+      "bytes": 54438,
+      "mode": "0644",
+      "reconstruction": "base Git object plus method407.patch"
+    },
+    {
+      "relative": "crates/quoridor-ai/src/zero_stock407_tests.rs",
+      "sha256": "6d40a499fdbe7ed95d4765e54bfe750a34cb4f7c45c8837c78c57b1c835bee33",
+      "bytes": 8555,
+      "mode": "0644",
+      "reconstruction": "base Git object plus method407.patch"
+    },
+    {
+      "relative": "scripts/dev/research-lifecycle.py",
+      "sha256": "df98c681cfaf04ed58b4b7602390105dcc700ade8672786605c79c12d9c39b3b",
+      "bytes": 222319,
+      "mode": "0644",
+      "reconstruction": "base Git object plus method407.patch"
+    }
+  ],
+  "protected_AI_function_sha256": {
+    "control": "bbdae50c3123aec32fc1710049600002300856cdd0a9ea1ddfae62b6c2085ab9",
+    "enter": "feb84a014ead727461606d99339264c96b7542658f5180822364350705961855",
+    "child": "d9c988110d8c5b2d642c2c9095f70f0d721476a9ec6649c07c81c5cb9fe8bdbf",
+    "zero_stock_approx_leaf": "4162bd1826de21c831fea70fcdfd0890376d82e1c514a8339dbf0a9b91c670fb",
+    "negamax": "de8447d5ce75938d5b1a6241ad59e773b968cc7845aac527e6aa50067224da4c",
+    "root_depth": "4b5e71e21733ea2fc17c5cfbeea142029e5cb804045ffb32a38f916dfbbbe215",
+    "ordered": "d7cfadd8d8154555bf9f92614d292fcf9602fd18a8b50b1cb8c25bd960fa0f42",
+    "lmr_allowed": "1b86412e3701dc616d820af5612a69b38928a9e8e68de3d4d0cdace7f57b0620",
+    "reduced_child": "d973d338ebc4e4532b71f8136a0f488711a963ed9ce3ce3548682fac311537c1",
+    "pv": "dddb0ffbd050bfbe2d0c3035a329df1e925630ecf7452be3d234d93520c378ae"
+  },
+  "canonical_fixed_D_math_suffix_sha256": "d4de3424ff50b3011ad00462999c88b20bbea901b02f32eedb2c4e884358284e",
+  "publisher_outside_measurement_config": "BYTE EXACT",
+  "standard_patch_directwait": [
+    {
+      "argv": [
+        "patch",
+        "--batch",
+        "--fuzz=0",
+        "-p1",
+        "-i",
+        "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/method407.patch"
+      ],
+      "returncode": 0,
+      "stdout": "patching file crates/quoridor-ai/src/alphabeta.rs\npatching file crates/quoridor-runner/src/measurement.rs\npatching file scripts/dev/research-lifecycle.py\npatching file crates/quoridor-ai/src/zero_stock407_tests.rs\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "patch",
+        "--batch",
+        "--fuzz=0",
+        "-p1",
+        "-i",
+        "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx-method407-v1/method407.inverse.patch"
+      ],
+      "returncode": 0,
+      "stdout": "patching file crates/quoridor-ai/src/alphabeta.rs\npatching file crates/quoridor-runner/src/measurement.rs\npatching file scripts/dev/research-lifecycle.py\npatching file crates/quoridor-ai/src/zero_stock407_tests.rs\n",
+      "stderr": ""
+    }
+  ],
+  "strict_forward_inverse": "PASS: no offsets/fuzz, new absence restored"
+}
