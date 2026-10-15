@@ -112,6 +112,8 @@ fn with_search<T>(
         lmr: false,
         #[cfg(feature = "research-diagnostics")]
         history: [0; 209],
+        #[cfg(feature = "research-diagnostics")]
+        lmr_observation: None,
     };
     let before = (Key::of(root), root.history_counts(), s.context, s.board);
     let mut c = root.clone();

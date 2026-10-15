@@ -185,6 +185,8 @@ pub(super) fn with_state<T>(
         lmr: false,
         #[cfg(feature = "research-diagnostics")]
         history: [0; 209],
+        #[cfg(feature = "research-diagnostics")]
+        lmr_observation: None,
     };
     let mut c = root.clone();
     let before = Key::of(&c);
