@@ -81,10 +81,87 @@ pub enum EvalAccumulator {
 }
 /// Owned by one search invocation, not by shared model weights or parents.
 #[derive(Debug, Default)]
-pub enum EvalScratch {
-    #[default]
-    None,
-    Residual(ResidualScratch),
+pub struct EvalScratch {
+    residual: Option<ResidualScratch>,
+    distances: WallDistanceScratch,
+}
+impl EvalScratch {
+    pub fn residual(scratch: ResidualScratch) -> Self {
+        Self {
+            residual: Some(scratch),
+            ..Self::default()
+        }
+    }
+    pub fn residual_mut(&mut self) -> Option<&mut ResidualScratch> {
+        self.residual.as_mut()
+    }
+}
+
+/// One lazy wall-only table per invocation, shared by ordinary D and the
+/// approximate leaf. The key is geometry, never pawn/turn or a stale child.
+#[derive(Debug)]
+struct WallDistanceMaps {
+    horizontal: u64,
+    vertical: u64,
+    distances: [[u8; 81]; 2],
+}
+#[derive(Debug, Default)]
+struct WallDistanceScratch {
+    maps: Option<WallDistanceMaps>,
+    map_reads: u64,
+    map_builds: u64,
+    fallbacks: u64,
+}
+impl WallDistanceScratch {
+    fn distance(
+        &mut self,
+        p: Position,
+        player: usize,
+        cached: Option<&[[u8; 81]; 2]>,
+    ) -> Option<u8> {
+        if player > 1 || p.pawns[player] >= 81 {
+            return None;
+        }
+        if let Some(maps) = cached {
+            self.map_reads += 1;
+            let d = maps[player][usize::from(p.pawns[player])];
+            return (d < 81).then_some(d);
+        }
+        let matches = self
+            .maps
+            .as_ref()
+            .is_some_and(|maps| maps.horizontal == p.horizontal && maps.vertical == p.vertical);
+        // A fixed zero-stock geometry can be reused across subsequent leaves.
+        // Positive-stock nodes without an available map keep the scalar BFS.
+        if !matches && p.walls_remaining == [0, 0] {
+            self.maps = Some(WallDistanceMaps {
+                horizontal: p.horizontal,
+                vertical: p.vertical,
+                distances: p.wall_distance_maps(),
+            });
+            self.map_builds += 1;
+        }
+        if let Some(maps) = self
+            .maps
+            .as_ref()
+            .filter(|maps| maps.horizontal == p.horizontal && maps.vertical == p.vertical)
+        {
+            self.map_reads += 1;
+            let d = maps.distances[player][usize::from(p.pawns[player])];
+            return (d < 81).then_some(d);
+        }
+        self.fallbacks += 1;
+        p.wall_distance(player)
+    }
+}
+fn cached_distance_maps<'a>(
+    p: Position,
+    accumulators: impl IntoIterator<Item = Option<&'a EvalAccumulator>>,
+) -> Option<&'a [[u8; 81]; 2]> {
+    accumulators.into_iter().flatten().find_map(|a| match a {
+        EvalAccumulator::Float(a) => a.cached_wall_distance_maps(p),
+        _ => None,
+    })
 }
 /// Immutable evaluators share weights; accumulator state belongs to one search.
 /// Hooks support a cached per-child delta and exact rollback by retaining parent.
@@ -104,7 +181,7 @@ pub trait StaticEvaluator: Send + Sync {
         Ok(())
     }
     fn create_scratch(&self) -> EvalScratch {
-        EvalScratch::None
+        EvalScratch::default()
     }
     fn evaluate_with_scratch(
         &self,
@@ -174,14 +251,25 @@ impl DistanceEvaluator {
     }
 }
 impl StaticEvaluator for DistanceEvaluator {
-    fn evaluate(&self, c: &SigmaContext, _a: Option<&EvalAccumulator>) -> Result<f32> {
+    fn evaluate(&self, c: &SigmaContext, a: Option<&EvalAccumulator>) -> Result<f32> {
+        self.evaluate_with_scratch(c, a, &mut EvalScratch::default())
+    }
+    fn evaluate_with_scratch(
+        &self,
+        c: &SigmaContext,
+        a: Option<&EvalAccumulator>,
+        scratch: &mut EvalScratch,
+    ) -> Result<f32> {
         let p = c.position();
-        let side = p.turn as usize;
-        let d0 = p
-            .wall_distance(side)
+        let side = usize::from(p.turn);
+        let cached = cached_distance_maps(p, [a]);
+        let d0 = scratch
+            .distances
+            .distance(p, side, cached)
             .ok_or_else(|| SearchError::Evaluation("unreachable pawn".into()))?;
-        let d1 = p
-            .wall_distance(side ^ 1)
+        let d1 = scratch
+            .distances
+            .distance(p, side ^ 1, cached)
             .ok_or_else(|| SearchError::Evaluation("unreachable pawn".into()))?;
         self.evaluate_distances(d0, d1)
     }
@@ -301,7 +389,7 @@ impl StaticEvaluator for ResidualEvaluator {
         Ok(())
     }
     fn create_scratch(&self) -> EvalScratch {
-        EvalScratch::Residual(self.model.evaluation_scratch())
+        EvalScratch::residual(self.model.evaluation_scratch())
     }
     fn evaluate_with_scratch(
         &self,
@@ -314,7 +402,7 @@ impl StaticEvaluator for ResidualEvaluator {
                 "missing residual accumulator".into(),
             ));
         };
-        let EvalScratch::Residual(scratch) = scratch else {
+        let Some(scratch) = scratch.residual_mut() else {
             return Err(SearchError::Evaluation("missing residual scratch".into()));
         };
         Ok(self.model.evaluate_with_scratch(a, scratch)?)
@@ -436,7 +524,7 @@ pub enum StopReason {
     TimeLimit,
     Cancelled,
 }
-pub const TT_REPRESENTATION: &str = "compact359-board-zobrist-v1-context128-v1";
+pub const TT_REPRESENTATION: &str = "compact359-board-zobrist-v1-context128-v1-leaf410-v1";
 /// One selected LMR rule; OFF retains full-width depth semantics.
 pub const LMR_METHOD: &str = "lmr400-late4-depth3-minus1-pvs-verify-v1";
 
@@ -506,7 +594,7 @@ impl LmrMethod {
     }
 }
 /// Heuristic leaves, not exact WDL or full-width minimax values.
-pub const ZERO_STOCK_APPROX_METHOD: &str = "zero-stock406-wall-distance-stm-tie-win-v1";
+pub const ZERO_STOCK_APPROX_METHOD: &str = "zero-stock410-wall-distance-stm-tie-win-tt-leaf-v2";
 
 /// Evaluation at an already permitted approximate leaf; activation is separate.
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq)]
@@ -534,7 +622,7 @@ impl ZeroStockApproxMethod {
     pub fn id(self) -> &'static str {
         match self {
             Self::Race => ZERO_STOCK_APPROX_METHOD,
-            Self::FixedD => "zero-stock407-fixed-D-a0-b8-tanh-v1",
+            Self::FixedD => "zero-stock410-fixed-D-a0-b8-tanh-tt-leaf-v2",
         }
     }
 }
@@ -556,6 +644,16 @@ pub struct SearchStats {
     pub zero_stock_approx_method: ZeroStockApproxMethod,
     /// Successfully returned heuristic leaves, separate from true terminals/head calls.
     pub zero_stock_approx_terminations: u64,
+    /// Approximate-leaf probes/hits are also included in ordinary TT totals.
+    pub zero_stock_approx_tt_probes: u64,
+    pub zero_stock_approx_tt_hits: u64,
+    /// Started computations, including one that later fails control/domain checks.
+    pub zero_stock_approx_recomputes: u64,
+    /// Distance table cell reads, table-pair builds and scalar BFS fallbacks.
+    /// These count work, not timings or BFS internal vertex visits.
+    pub wall_distance_map_reads: u64,
+    pub wall_distance_map_builds: u64,
+    pub wall_distance_fallbacks: u64,
     pub nodes: u64,
     pub evaluations: u64,
     pub terminal: u64,
@@ -806,6 +904,8 @@ enum Bound {
     Exact,
     Lower,
     Upper,
+    // Heuristic leaf only: no best move, never an internal/root bound.
+    ApproxLeaf,
 }
 #[repr(C)]
 struct Entry {
@@ -1390,7 +1490,7 @@ impl Search<'_> {
                     // This branch replaces negamax entry, not its caller's make,
                     // fingerprint, path or canonical undo. Count/control once.
                     self.enter()?;
-                    let value = self.zero_stock_approx_value(c, a.as_ref(), parent)?;
+                    let value = self.zero_stock_approx_value(c, a.as_ref(), parent, depth)?;
                     self.control()?;
                     self.stats.zero_stock_approx_terminations += 1;
                     return Ok(value);
@@ -1435,40 +1535,57 @@ impl Search<'_> {
     }
 
     fn zero_stock_approx_value(
-        &self,
+        &mut self,
         c: &SigmaContext,
         pooled: Option<&EvalAccumulator>,
         parent: Option<&EvalAccumulator>,
+        depth: u16,
     ) -> NodeResult<f32> {
-        let p = c.position();
-        // Only the actual Float variant exposes this existing wall-key-checked
-        // cache. Pawn/mover changes do not change wall-only goal distances.
-        let maps = [pooled, parent]
-            .into_iter()
-            .flatten()
-            .find_map(|a| match a {
-                EvalAccumulator::Float(a) => a.cached_wall_distance_maps(p),
-                _ => None,
-            });
-        let own = usize::from(p.turn);
-        let distance = |player: usize| match maps {
-            Some(maps) => {
-                let d = maps[player][p.pawns[player] as usize];
-                (d < 81).then_some(d)
-            }
-            None => p.wall_distance(player),
+        // The caller already performed enter/control and true terminal checks.
+        // Same board/history/horizon is insufficient without the leaf kind.
+        let (key, hit) = if self.limits.use_tt {
+            self.stats.zero_stock_approx_tt_probes += 1;
+            let key = self.key(c);
+            let key = self
+                .board
+                .as_ref()
+                .ok_or(RulesError::InvalidUndo)?
+                .capture(key)?;
+            let (key, hit) = self.table.probe_owned(key, self.context, &mut self.stats);
+            (Some(key), hit)
+        } else {
+            (None, None)
         };
-        let ds = distance(own).ok_or_else(|| {
-            Interrupted::Error(SearchError::Evaluation(
-                "approximate leaf unreachable mover".into(),
-            ))
-        })?;
+        if let Some((stored_depth, value, Bound::ApproxLeaf, None, true)) = hit
+            && stored_depth == depth
+            && self.score_domain.admits(value)
+        {
+            self.stats.zero_stock_approx_tt_hits += 1;
+            return Ok(value);
+        }
+        self.stats.zero_stock_approx_recomputes += 1;
+        let p = c.position();
+        let cached = cached_distance_maps(p, [pooled, parent]);
+        let own = usize::from(p.turn);
+        let ds = self
+            .eval_scratch
+            .distances
+            .distance(p, own, cached)
+            .ok_or_else(|| {
+                Interrupted::Error(SearchError::Evaluation(
+                    "approximate leaf unreachable mover".into(),
+                ))
+            })?;
         self.control()?;
-        let other = distance(own ^ 1).ok_or_else(|| {
-            Interrupted::Error(SearchError::Evaluation(
-                "approximate leaf unreachable opponent".into(),
-            ))
-        })?;
+        let other = self
+            .eval_scratch
+            .distances
+            .distance(p, own ^ 1, cached)
+            .ok_or_else(|| {
+                Interrupted::Error(SearchError::Evaluation(
+                    "approximate leaf unreachable opponent".into(),
+                ))
+            })?;
         let value = match self.stats.zero_stock_approx_method {
             ZeroStockApproxMethod::Race => {
                 if ds <= other {
@@ -1486,7 +1603,26 @@ impl Search<'_> {
                 "approximate leaf outside declared nonterminal score domain".into(),
             )));
         }
+        self.control()?;
+        if let Some(key) = key {
+            self.table.insert_probed(
+                key,
+                NodeValue {
+                    depth,
+                    value,
+                    bound: Bound::ApproxLeaf,
+                    best: None,
+                },
+                &mut self.stats,
+            );
+        }
         Ok(value)
+    }
+
+    fn publish_distance_counts(&mut self) {
+        self.stats.wall_distance_map_reads = self.eval_scratch.distances.map_reads;
+        self.stats.wall_distance_map_builds = self.eval_scratch.distances.map_builds;
+        self.stats.wall_distance_fallbacks = self.eval_scratch.distances.fallbacks;
     }
 
     fn negamax(
@@ -1533,7 +1669,9 @@ impl Search<'_> {
         };
         let mut tt_move = None;
         let mut legal = None;
-        if let Some((stored_depth, value, bound, best, context_matches)) = hit {
+        if let Some((stored_depth, value, bound, best, context_matches)) =
+            hit.filter(|hit| !matches!(hit.2, Bound::ApproxLeaf))
+        {
             if best
                 .is_some_and(|action| legal.get_or_insert_with(|| c.legal_ids()).contains(&action))
             {
@@ -1548,6 +1686,7 @@ impl Search<'_> {
                         }
                         Bound::Lower => alpha = alpha.max(value),
                         Bound::Upper => beta = beta.min(value),
+                        Bound::ApproxLeaf => unreachable!("leaf filtered before internal probe"),
                     }
                     if alpha >= beta {
                         self.stats.tt_cutoffs += 1;
@@ -1819,8 +1958,10 @@ impl Search<'_> {
         let mut legal = None;
         if self.limits.use_tt {
             let key = self.key(c);
-            if let Some((stored_depth, value, bound, best, context_matches)) =
-                self.table.probe(&key, self.context, &mut self.stats)
+            if let Some((stored_depth, value, bound, best, context_matches)) = self
+                .table
+                .probe(&key, self.context, &mut self.stats)
+                .filter(|hit| !matches!(hit.2, Bound::ApproxLeaf))
             {
                 if best.is_some_and(|action| {
                     legal.get_or_insert_with(|| c.legal_ids()).contains(&action)
@@ -2594,6 +2735,7 @@ fn search_in_table(
             result.pv = pv;
             state.stats.tt_retained_bytes = state.table.retained_bytes();
             state.stats.tt_generation = state.table.generation;
+            state.publish_distance_counts();
             result.stats = state.stats.clone();
             result.elapsed = state.start.elapsed();
             state.table.committed = state.table.generation;
@@ -2631,6 +2773,7 @@ fn search_in_table(
     {
         history.finish_valid_root(&mut state.stats.ordering);
     }
+    state.publish_distance_counts();
     result.stats = state.stats;
     result.elapsed = state.start.elapsed();
     Ok(result)
@@ -3964,6 +4107,10 @@ mod lmr408_tests;
 #[cfg(test)]
 #[path = "lmr400_tests.rs"]
 mod lmr400_tests;
+
+#[cfg(test)]
+#[path = "zero_stock410_tests.rs"]
+mod zero_stock410_tests;
 
 #[cfg(test)]
 #[path = "zero_stock407_tests.rs"]

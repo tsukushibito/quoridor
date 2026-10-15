@@ -698,6 +698,7 @@ fn completed_depth_observation(r: &SearchResult) -> Value {
         "value_bits":r.value.map(f32::to_bits),"elapsed_seconds":r.elapsed.as_secs_f64(),
         "cumulative_work":{"nodes":s.nodes,"evaluations":s.evaluations,
             "terminal":s.terminal,"zero_stock_approx_terminations":s.zero_stock_approx_terminations,"cutoffs":s.cutoffs,"TT_probes":s.tt_probes,
+"zero_stock_approx_tt_probes":s.zero_stock_approx_tt_probes,"zero_stock_approx_tt_hits":s.zero_stock_approx_tt_hits,"zero_stock_approx_recomputes":s.zero_stock_approx_recomputes,"wall_distance_map_reads":s.wall_distance_map_reads,"wall_distance_map_builds":s.wall_distance_map_builds,"wall_distance_fallbacks":s.wall_distance_fallbacks,
             "TT_hits":s.tt_hits,"TT_usable_depth":s.tt_usable_depth,
             "TT_cutoffs":s.tt_cutoffs,"TT_order_only":s.tt_order_only,
             "TT_index_collisions":s.tt_index_collisions,"TT_replacements":s.tt_replacements,
@@ -719,6 +720,12 @@ fn observed(r: &SearchResult) -> Value {
     result["root_walls_remaining"] = json!(s.root_walls_remaining);
     result["zero_stock_approx_permitted"] = json!(s.zero_stock_approx_permitted);
     result["work"]["zero_stock_approx_terminations"] = json!(s.zero_stock_approx_terminations);
+    result["work"]["zero_stock_approx_tt_probes"] = json!(s.zero_stock_approx_tt_probes);
+    result["work"]["zero_stock_approx_tt_hits"] = json!(s.zero_stock_approx_tt_hits);
+    result["work"]["zero_stock_approx_recomputes"] = json!(s.zero_stock_approx_recomputes);
+    result["work"]["wall_distance_map_reads"] = json!(s.wall_distance_map_reads);
+    result["work"]["wall_distance_map_builds"] = json!(s.wall_distance_map_builds);
+    result["work"]["wall_distance_fallbacks"] = json!(s.wall_distance_fallbacks);
     result["zero_stock_approx_method"] = json!(if s.zero_stock_approx_permitted {
         Some(s.zero_stock_approx_method.id())
     } else {
@@ -1352,3 +1359,50 @@ mod tests {
 #[cfg(test)]
 #[path = "measurement_ordering394_tests.rs"]
 mod measurement_ordering394_tests;
+
+#[cfg(test)]
+mod zero_stock410_metadata_tests {
+    use super::*;
+
+    #[test]
+    fn zero_stock410_partial_result_reports_distance_and_leaf_work_without_completion_claim() {
+        let result = alphabeta::SearchResult {
+            action: Some(13),
+            value: Some(0.25),
+            completed_depth: 1,
+            pv: vec![13],
+            stats: alphabeta::SearchStats {
+                zero_stock_approx_permitted: true,
+                zero_stock_approx_terminations: 5,
+                zero_stock_approx_tt_probes: 5,
+                zero_stock_approx_tt_hits: 2,
+                zero_stock_approx_recomputes: 3,
+                wall_distance_map_reads: 6,
+                wall_distance_map_builds: 1,
+                wall_distance_fallbacks: 0,
+                ..Default::default()
+            },
+            stop: alphabeta::StopReason::NodeLimit,
+            elapsed: std::time::Duration::ZERO,
+        };
+        let row = observed(&result);
+        let callback = completed_depth_observation(&result);
+        for (key, count) in [
+            ("zero_stock_approx_tt_probes", 5),
+            ("zero_stock_approx_tt_hits", 2),
+            ("zero_stock_approx_recomputes", 3),
+            ("wall_distance_map_reads", 6),
+            ("wall_distance_map_builds", 1),
+            ("wall_distance_fallbacks", 0),
+        ] {
+            assert_eq!(row["work"][key], count);
+            assert_eq!(callback["cumulative_work"][key], count);
+        }
+        assert_eq!(row["completed_depth"], 1);
+        assert_eq!(row["stop"], "NodeLimit");
+        assert_eq!(
+            row["zero_stock_approx_method"],
+            ZeroStockApproxMethod::Race.id()
+        );
+    }
+}

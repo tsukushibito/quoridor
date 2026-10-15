@@ -846,7 +846,7 @@ mod borrowed_input_counter_tests {
     impl StaticEvaluator for Mock {
         fn create_scratch(&self) -> EvalScratch {
             self.setups.fetch_add(1, Ordering::Relaxed);
-            EvalScratch::Residual(self.model.evaluation_scratch())
+            EvalScratch::residual(self.model.evaluation_scratch())
         }
         fn evaluate_with_scratch(
             &self,
@@ -854,7 +854,7 @@ mod borrowed_input_counter_tests {
             _: Option<&EvalAccumulator>,
             scratch: &mut EvalScratch,
         ) -> alphabeta::Result<f32> {
-            assert!(matches!(scratch, EvalScratch::Residual(_)));
+            assert!(scratch.residual_mut().is_some());
             self.calls.fetch_add(1, Ordering::Relaxed);
             Ok(0.) // Mock adapter qualification: no model forward.
         }

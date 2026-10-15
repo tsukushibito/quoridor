@@ -94,7 +94,7 @@ impl StaticEvaluator for DistanceStepEvaluator {
             .collect()
     }
     fn create_scratch(&self) -> EvalScratch {
-        EvalScratch::Residual(self.model.evaluation_scratch())
+        EvalScratch::residual(self.model.evaluation_scratch())
     }
     fn prepare_context(&self, context: &SigmaContext) -> Result<Option<EvalAccumulator>> {
         if context.terminal_value().is_some() {
@@ -180,7 +180,7 @@ impl StaticEvaluator for DistanceStepEvaluator {
                 "missing explicit step accumulator".into(),
             ));
         };
-        let EvalScratch::Residual(scratch) = scratch else {
+        let Some(scratch) = scratch.residual_mut() else {
             return Err(SearchError::Evaluation("missing step scratch".into()));
         };
         Ok(self
