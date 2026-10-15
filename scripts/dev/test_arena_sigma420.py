@@ -2,11 +2,99 @@
 
 import ast
 from copy import deepcopy
+import math
 from pathlib import Path
 import unittest
 
 
 class SigmaArenaAdmission(unittest.TestCase):
+    def test_sigma_completed_observation_typed_namespace_nn0(self):
+        source = Path(__file__).with_name("research-lifecycle.py")
+        selected = [
+            node
+            for node in ast.parse(source.read_text()).body
+            if isinstance(node, ast.FunctionDef) and node.name == "arena_observation"
+        ]
+        self.assertEqual(len(selected), 1)
+
+        def require(condition, message):
+            if not condition:
+                raise ValueError(message)
+
+        scope = {"require": require, "math": math}
+        exec(
+            compile(ast.Module(body=selected, type_ignores=[]), str(source), "exec"),
+            scope,
+        )
+        config = {
+            "engines": [
+                {
+                    "kind": "sigma_value",
+                    "ordering_profile": "control",
+                    "simd": False,
+                    "lmr": False,
+                    "lmr_method": "depth_rank",
+                    "depth": 2,
+                }
+            ],
+            "arena": {
+                "comparison": "evaluator_fixed_depth",
+                "evaluator_sha256": ["a" * 64],
+                "book": {"openings": [{"prefix": []}]},
+            },
+        }
+        observation = {
+            "engine_index": 0,
+            "caller_seconds": 0.1,
+            "thinking_seconds": 0.09,
+            "value_stm": 0.25,
+            "accepted": True,
+            "failure": None,
+            "engine_error": None,
+            "action": 13,
+            "accepted_ns": 5,
+            "admission_checked_ns": 4,
+            "returned_ns": 3,
+            "completed_depth": 2,
+            "stop": "depth_cap",
+            "deadline_ns": None,
+            "pv": [13, 67],
+            "counters": {
+                "actual_search_namespace": {
+                    "evaluator": "sigma-value-onnx-cpu:sha256:"
+                    + "a" * 64
+                    + ":simd=false",
+                    "rules": "research-standard-2p-threefold-goal-first-v1",
+                    "selectivity": "fullwidth",
+                },
+                "requested_lmr_method": "depth_rank",
+                "actual_lmr_enabled": False,
+                "actual_lmr_method_id": None,
+                "lmr_reduction_rule": None,
+                "completed_snapshot_validation_failed": False,
+            },
+        }
+        row = {"game": 0, "moves": [13], "observations": [observation]}
+        check = scope["arena_observation"]
+        check(config, row)
+        for case in range(4):
+            changed = deepcopy(row)
+            obs = changed["observations"][0]
+            if case == 0:
+                obs["counters"]["actual_search_namespace"]["evaluator"] = (
+                    "sigma-value-onnx-cpu:sha256:" + "b" * 64 + ":simd=false"
+                )
+            elif case == 1:
+                obs["counters"]["actual_search_namespace"]["evaluator"] = (
+                    "distance-tanh-f32:sha256:" + "a" * 64 + ":simd=false"
+                )
+            elif case == 2:
+                obs["completed_depth"] = 1
+            else:
+                obs["counters"]["actual_lmr_enabled"] = True
+            with self.assertRaises(ValueError):
+                check(config, changed)
+
     def test_closed_model_and_three_core_fixed_depth_nn0(self):
         source = Path(__file__).with_name("research-lifecycle.py")
         selected = [

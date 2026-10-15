@@ -3021,6 +3021,7 @@ def arena_observation(config, row):
                         "distance": ("distance-tanh-f32",),
                         "nnue": ("nnue-f32", "nnue-residual-f32"),
                         "nnue_quantized": ("nnue-i16",),
+                        "sigma_value": ("sigma-value-onnx-cpu",),
                     }.get(engine["kind"], ())
                 }
                 # The native typed factory and report validator own exact namespace/ID
