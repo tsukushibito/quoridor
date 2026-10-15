@@ -455,7 +455,8 @@ def arena_cpu_cores(spec):
     ai = config.get("cpu_cores")
     main = config.get("management_cpu_core")
     require(
-        config.get("arena", {}).get("comparison") == "whole_wall_time"
+        config.get("arena", {}).get("comparison")
+        in {"whole_wall_time", "evaluator_fixed_depth"}
         and all(config.get(k) == 1 for k in ("workers", "active_games", "max_batch"))
         and config.get("inference_cpu_core") is None
         and isinstance(ai, list)
@@ -1993,7 +1994,11 @@ def experiment_check(spec):
         )
     if experiment["phase"] == "arena":
         arena_plan_check(experiment, approved)
-        if document(experiment["config"])["arena"]["comparison"] == "whole_wall_time":
+        arena_config = document(experiment["config"])
+        if arena_config["arena"]["comparison"] == "whole_wall_time" or (
+            arena_config["arena"]["comparison"] == "evaluator_fixed_depth"
+            and arena_config.get("management_cpu_core") is not None
+        ):
             arena_cpu_cores(spec)
         numerical_check(experiment, manifest, refs=refs)
         require(
@@ -2474,7 +2479,10 @@ def arena_model_check(experiment, plan, width):
         sigma = False
         for i, engine in enumerate(m["engines"]):
             kind = engine["kind"]
-            require(kind in {"nnue", "distance", "mcts"}, "supported numerical backend")
+            require(
+                kind in {"nnue", "distance", "mcts", "sigma_value"},
+                "supported numerical backend",
+            )
             if kind == "nnue":
                 model = next(
                     (
@@ -2492,6 +2500,32 @@ def arena_model_check(experiment, plan, width):
                 used.add(model["descriptor"]["path"])
             elif kind == "distance":
                 require(engine.get("model") is None, "pure distance model")
+            elif kind == "sigma_value":
+                inference = m.get("inference")
+                require(
+                    plan["comparison"] == "evaluator_fixed_depth"
+                    and engine.get("model") is None
+                    and isinstance(inference, dict)
+                    and inference["backend"] == "ort"
+                    and inference.get("device", 0) == 0
+                    and inference.get("cuda_graph", False) is False
+                    and type(inference.get("logical_row_limit")) is int
+                    and inference["logical_row_limit"] > 0
+                    and len(m["evaluator_sha256"][i]) == 64
+                    and all(c in "0123456789abcdef" for c in m["evaluator_sha256"][i])
+                    and any(
+                        r["path"] == inference["model"]
+                        and r["sha256"] == inference["model_sha"]
+                        for r in plan["inputs"]
+                    )
+                    and any(
+                        r["file"]["path"] == inference["library"]
+                        for r in experiment["dynamic_libraries"]
+                    ),
+                    "closed Sigma static value model/library/native-owned identity",
+                )
+                # The native owner recomputes the typed identity from actual library SHA.
+                sigma = True
             else:
                 inference = m.get("inference")
                 require(
@@ -2750,7 +2784,7 @@ def arena_plan_check(experiment, plan):
             and (
                 engine.get("ordering_profile") is None
                 or (
-                    engine["kind"] in {"nnue", "distance"}
+                    engine["kind"] in {"nnue", "distance", "sigma_value"}
                     and not a.get("disable_continuation_static_ordering", False)
                 )
             )
