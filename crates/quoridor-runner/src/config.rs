@@ -162,6 +162,9 @@ pub struct Engine {
     /// Explicit runtime mode; input namespace strings never enable it.
     #[serde(default)]
     pub lmr: bool,
+    /// Arena method selection; None uses the AI's fixed-one default.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub lmr_method: Option<String>,
 }
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -278,7 +281,7 @@ impl Config {
             && self
                 .engines
                 .iter()
-                .any(|e| e.ordering_profile.is_some() || e.lmr)
+                .any(|e| e.ordering_profile.is_some() || e.lmr || e.lmr_method.is_some())
         {
             return Err("explicit ordering/LMR settings belong to an arena config".into());
         }
@@ -358,5 +361,52 @@ mod two_ai_374_config_tests {
         }
         c.management_cpu_core = None;
         assert!(c.validate().is_err());
+    }
+}
+
+#[cfg(test)]
+mod lmr408_config_tests {
+    use super::*;
+
+    #[test]
+    fn config408_optional_method_roundtrip_and_nonarena_exclusion() {
+        let plain = serde_json::json!({"kind": "distance"});
+        let engine: Engine = serde_json::from_value(plain.clone()).unwrap();
+        assert!(engine.lmr_method.is_none());
+        assert!(
+            serde_json::to_value(&engine)
+                .unwrap()
+                .get("lmr_method")
+                .is_none()
+        );
+        let mut selected = plain.clone();
+        selected["lmr_method"] = serde_json::json!("fixed_one");
+        let engine: Engine = serde_json::from_value(selected).unwrap();
+        assert_eq!(engine.lmr_method.as_deref(), Some("fixed_one"));
+        assert_eq!(
+            serde_json::to_value(engine).unwrap()["lmr_method"],
+            "fixed_one"
+        );
+        for invalid in [
+            serde_json::json!(false),
+            serde_json::json!(1),
+            serde_json::json!([]),
+        ] {
+            let mut value = plain.clone();
+            value["lmr_method"] = invalid;
+            assert!(serde_json::from_value::<Engine>(value).is_err());
+        }
+        let mut config: Config =
+            serde_json::from_str(include_str!("../tests/fixtures/sigma-clock-config.json"))
+                .unwrap();
+        config.arena = None;
+        config.engines.truncate(1);
+        config.validate().expect("ordinary distance configuration");
+        assert!(!config.engines[0].lmr);
+        config.engines[0].lmr_method = Some("fixed_one".into());
+        assert_eq!(
+            config.validate().unwrap_err(),
+            "explicit ordering/LMR settings belong to an arena config"
+        );
     }
 }
