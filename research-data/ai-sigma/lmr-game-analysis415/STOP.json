@@ -1,0 +1,931 @@
+{
+  "issue": "quoridor-4lc.415.1",
+  "RAW_reader_STOP": "2026-10-15T10:51:23.370580+00:00",
+  "RAW_directwait_reap": "2026-10-15T10:51:23.479383+00:00",
+  "compact_selected_reader_STOP": "2026-10-15T11:21:46.693394+00:00",
+  "compact_directwait_reap": "2026-10-15T11:21:46.698934+00:00",
+  "artifact_formatter_direct_reap": "2026-10-15T11:26:08.156195+00:00",
+  "metadata_STOP_mark": "2026-10-15T11:27:52.381381+00:00",
+  "exact_fresh_original_identities": [
+    {
+      "original": {
+        "pid": 1814728,
+        "start_ticks": "11201341",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1814729,
+        "start_ticks": "11201347",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1814729,
+        "start_ticks": "11201347",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1814733,
+        "start_ticks": "11201349",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1803211,
+        "start_ticks": "11141933",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1803212,
+        "start_ticks": "11141934",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1803212,
+        "start_ticks": "11141934",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1781396,
+        "start_ticks": "10988335",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1781397,
+        "start_ticks": "10988338",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1781397,
+        "start_ticks": "10988338",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1802855,
+        "start_ticks": "11140451",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1802856,
+        "start_ticks": "11140455",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1802856,
+        "start_ticks": "11140455",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1814104,
+        "start_ticks": "11196843",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1814105,
+        "start_ticks": "11196846",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1814105,
+        "start_ticks": "11196846",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1806256,
+        "start_ticks": "11169374",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1806258,
+        "start_ticks": "11169379",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1806258,
+        "start_ticks": "11169379",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1806753,
+        "start_ticks": "11170805",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1806754,
+        "start_ticks": "11170809",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1806754,
+        "start_ticks": "11170809",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1806245,
+        "start_ticks": "11169361",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1806246,
+        "start_ticks": "11169366",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1806246,
+        "start_ticks": "11169366",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1782266,
+        "start_ticks": "10994499",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1782267,
+        "start_ticks": "10994504",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1782267,
+        "start_ticks": "10994504",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1814123,
+        "start_ticks": "11196874",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1814124,
+        "start_ticks": "11196879",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1814124,
+        "start_ticks": "11196879",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1802046,
+        "start_ticks": "11135938",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1802053,
+        "start_ticks": "11135942",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1802053,
+        "start_ticks": "11135942",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1813704,
+        "start_ticks": "11194763",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1813705,
+        "start_ticks": "11194769",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1813705,
+        "start_ticks": "11194769",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1814111,
+        "start_ticks": "11196865",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1814120,
+        "start_ticks": "11196869",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1814120,
+        "start_ticks": "11196869",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1813708,
+        "start_ticks": "11194777",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1813709,
+        "start_ticks": "11194781",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1813709,
+        "start_ticks": "11194781",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1814106,
+        "start_ticks": "11196854",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1814107,
+        "start_ticks": "11196859",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1814107,
+        "start_ticks": "11196859",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1802417,
+        "start_ticks": "11137366",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1802418,
+        "start_ticks": "11137369",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1802418,
+        "start_ticks": "11137369",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1781255,
+        "start_ticks": "10987877",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1781256,
+        "start_ticks": "10987880",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1781256,
+        "start_ticks": "10987880",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1781260,
+        "start_ticks": "10987881",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1781263,
+        "start_ticks": "10987883",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1781266,
+        "start_ticks": "10987885",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1804862,
+        "start_ticks": "11154002",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1804863,
+        "start_ticks": "11154004",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1804863,
+        "start_ticks": "11154004",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1785840,
+        "start_ticks": "11020090",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1785841,
+        "start_ticks": "11020092",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1785841,
+        "start_ticks": "11020092",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1788085,
+        "start_ticks": "11031881",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1788087,
+        "start_ticks": "11031886",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1788087,
+        "start_ticks": "11031886",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1785831,
+        "start_ticks": "11020070",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1785832,
+        "start_ticks": "11020073",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1785832,
+        "start_ticks": "11020073",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1788070,
+        "start_ticks": "11031862",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1788071,
+        "start_ticks": "11031866",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1788071,
+        "start_ticks": "11031866",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1785836,
+        "start_ticks": "11020080",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1785837,
+        "start_ticks": "11020083",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1785837,
+        "start_ticks": "11020083",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1788068,
+        "start_ticks": "11031851",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1788069,
+        "start_ticks": "11031855",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1788069,
+        "start_ticks": "11031855",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1788074,
+        "start_ticks": "11031872",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1788082,
+        "start_ticks": "11031876",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1788082,
+        "start_ticks": "11031876",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1785844,
+        "start_ticks": "11020097",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1785845,
+        "start_ticks": "11020100",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1785845,
+        "start_ticks": "11020100",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1794687,
+        "start_ticks": "11078457",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1794688,
+        "start_ticks": "11078460",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1794688,
+        "start_ticks": "11078460",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1813140,
+        "start_ticks": "11190927",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1813141,
+        "start_ticks": "11190929",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    },
+    {
+      "original": {
+        "pid": 1813141,
+        "start_ticks": "11190929",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": "absent"
+    }
+  ],
+  "guard_receipt_refs": [
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/beads-update-help-receipt.json",
+      "sha256": "39a4b16eb24d023789ce98ec4f47a9849a8bcfa7182cd260696d5075914a9791",
+      "bytes": 1395,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/compact-schema-receipt.json",
+      "sha256": "360274713262ed4ca03fc1c21cd7b0adbabe1668fb979f5359bac549d87a96a3",
+      "bytes": 1209,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/extraction-v1-receipt.json",
+      "sha256": "3c2c8bd79246b41f2dfe841a1670b9a5baafc1862a7ffaea1a930e93df532768",
+      "bytes": 1206,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/final-schema-receipt.json",
+      "sha256": "593db6f75e0f28b50c04fb090b94feb6e4ee06e561020fa191b48b9cf4505a99",
+      "bytes": 1210,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/finalizer-lint-repair-receipt.json",
+      "sha256": "b59357882a61c8a53b023d0e147b87d38a08d19b4c85521da2d121b4afece211",
+      "bytes": 1207,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/finalizer-v1-receipt.json",
+      "sha256": "1ac01a9630f4432d3104709c2030d7b0e77756a162440d70a223bf719aee369a",
+      "bytes": 1820,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/finalizer-v2-receipt.json",
+      "sha256": "bc057430ae42aa5cd55d9b9d2019d431434b66ff9556ca7c4005934f54c3b74c",
+      "bytes": 1207,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/format-finalizer-receipt.json",
+      "sha256": "e5613fca41d7bb87641dacd98302585baf6528238a25fc1a2940a9e51de2b144",
+      "bytes": 1205,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/inspect-extract-v1-receipt.json",
+      "sha256": "489298e45cfc06deddc07586c97a9c4e881df8466b796a34daba29f2e32038da",
+      "bytes": 1210,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/prettier-final-receipt.json",
+      "sha256": "45c234459496eb4bc063f3aaca43ae35e356b0379aad7b00ced64d767d694101",
+      "bytes": 1207,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/ready-final-receipt.json",
+      "sha256": "aa54c8c9d18903ec26b725a3dc32d896160056ea5766c032abd2497e71c63dc4",
+      "bytes": 1211,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/ruff-format-finalizer-receipt.json",
+      "sha256": "2472984c9782613d92d8b978fdf27a6e0a9c7c3317f1e2554c610d9889368ac3",
+      "bytes": 1207,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/ruff-format-own-final-receipt.json",
+      "sha256": "7864e271b9162483b90a6da855677e04ba6be020bfd7980ecb38ad6fd947ea87",
+      "bytes": 1207,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/ruff-own-final-receipt.json",
+      "sha256": "30f797ce670277f80c57fdcee8909c43ffb4580cd5776ea20070e7772f7a071b",
+      "bytes": 1331,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/ruff-own-final-v2-receipt.json",
+      "sha256": "4cf11ce86e4df23c70fda9b8339c2f228939e6d2f74823bb5fe50523e62e2273",
+      "bytes": 1330,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/show-final-receipt.json",
+      "sha256": "603946df4d1292ff26b4bf345963ed0d44ab0d12efd23f184b31f8cd5ae1b25d",
+      "bytes": 1209,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/source-format-v1-receipt.json",
+      "sha256": "5c7ee0d166ac118662abac82f678b8b2fa9e9cc4deeb1772617b14ed566df03a",
+      "bytes": 1774,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/table-fields-receipt.json",
+      "sha256": "0d6d7edb1266d4aeaf9ee2e11a32195ecd207646239c278a2fdf524ebcb589a6",
+      "bytes": 1208,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/tables-fmtcheck-receipt.json",
+      "sha256": "6d411df6f6e9ca589fd591437070211a174d0620ee932085b1bb62670c8140aa",
+      "bytes": 1207,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/tables-fmtcheck-v2-receipt.json",
+      "sha256": "931fb2e745d0d17ec7538535cd86bccc85dad5c114ea02f336e602d14c694a10",
+      "bytes": 1206,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/tables-format-receipt.json",
+      "sha256": "d923df44206719d4b100d1066f4000235b03c178562947800c93752257e664b0",
+      "bytes": 1205,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/tables-format-v2-receipt.json",
+      "sha256": "5dc61c10a675eed1b5767b54fa75ff5be3e5a0f9924a69151ec3c4d502057afe",
+      "bytes": 1206,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/tables-lint-receipt.json",
+      "sha256": "d3e5b0352c164de75fb0461df590cc7b88cae95e02196b56d7360403cfd9df4a",
+      "bytes": 1330,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/tables-lint-repair-receipt.json",
+      "sha256": "35d79754c5f30bcc74f5658912e30cb0324721822d90ead2b470647a57b9bd32",
+      "bytes": 1206,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/tables-lint-v2-receipt.json",
+      "sha256": "75efa8f9bb9c1aab8d9c212a86b16d2501d66d41b884cbe6174ee369723fe1f5",
+      "bytes": 1330,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/tables-v1-receipt.json",
+      "sha256": "9b0da4fdf561af51b04c014cfebcfff691c846e0de77ef55f7f52448d6b58442",
+      "bytes": 1209,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/wip-checkpoint-v2-receipt.json",
+      "sha256": "c0ed23e081374dd9a3abf71122f3f262d1f8c5f5203680535a350ae3b983310a",
+      "bytes": 1207,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/write-final-result-receipt.json",
+      "sha256": "c0213a317eac78c5aed96234247352f7073502a601ef4d7e19e5d0532d33a482",
+      "bytes": 1206,
+      "mode": "0644"
+    }
+  ],
+  "unclassified_older_receipt_names_not_promoted_to_new_facts": [
+    "aggregation-context-receipt.json",
+    "arena-schema-module-receipt.json",
+    "checkpoint-admin-receipt.json",
+    "coordination-receipt.json",
+    "initial-metadata-receipt.json",
+    "instructions-metadata-receipt.json",
+    "light-prose-receipt.json",
+    "overview-receipt.json",
+    "raw-intake-metadata-receipt.json",
+    "raw-schema-receipt.json",
+    "reader-code-context-receipt.json",
+    "schema-owner-context-receipt.json",
+    "summary-intake-receipt.json",
+    "timing-checkpoint-v1-receipt.json",
+    "timing-stop-delivery-receipt.json"
+  ],
+  "all_prior_classified_children_directwait_reaped": true,
+  "all_prior_classified_pipe_handles_closed": true,
+  "original_helper_failures_preserved": [
+    "finalizer-v1-receipt.json",
+    "ruff-own-final-receipt.json",
+    "tables-lint-receipt.json"
+  ],
+  "earlier_actual_resource_checkpoint": "timing-checkpoint-v1.json, originalNOT_ENTERED scope retained",
+  "large_original_RAW_maps_released_before_RAW_STOP": true,
+  "RAW_payload_rereads_after_STOP": 0,
+  "TMP_created_by_this_completion": false,
+  "hardware_canonical_leases_acquired": false,
+  "owned_readers_writers_children_jobs_TMP_leases_remaining": [],
+  "current_short_metadata_writer_excluded_from_prior_exit_claim": true,
+  "current_metadata_writer_reap_evidence": "final-source-STOP-receipt.json",
+  "worker_affinity_readback": [5],
+  "worker_cpu": 5,
+  "guardian_cpu": 9,
+  "physical_topology": {
+    "5": [0, 2],
+    "9": [0, 4]
+  },
+  "family_RSS_limit_B": 1073741824,
+  "GPU": 0,
+  "hostreserve_B": 4294967296,
+  "continuous_family_peak_RSS": "UNKNOWN",
+  "new_native_Search_model_solver_bootstrap_games_fit": 0,
+  "Main_Git_index_Cargo_mutations": 0,
+  "all_pauses_defaults_models_seals_preserved": true
+}

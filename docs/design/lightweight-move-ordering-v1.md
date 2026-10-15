@@ -501,3 +501,17 @@ accepted20285、完成snapshot20284、NNUE A fallback1、error/forfeit/期限以
 B/C/Dには一般利益の支持と具体的な継続用途がないため今回採用せず、余分な現役enum/受理設定/counter/専用テストを通常保守として撤去した（b2ce8658）。A/FixedOne/OFFとdepth_rank既定、410/411の数学・履歴・TT、製品/generator enable OFFを維持する。新拒否Rust2＋影響q0一件=3、Python1、Clippy3/release PASS、撤去後image7dadc2b3/Build ef7abadfは元試験に使っていない。元のsource/image/RAWとFAILED・0件filter/真正初回補足・collector失敗・timestamp erratumは保持し、追加tuning/cap/roots/対局/fitは発行しない。
 
 元software111.815993823秒（FAILED込み）、元探索費750.297630404秒、元対局1989.259172560秒、撤去software100.848559701秒のouterを各一度、nested非加算で保存した。全source/LLM/admin費はUNKNOWN。限定source確認と有限解釈clearをsoftware/速度/一般棋力の認定と混同しない。[結果・exact証拠](../../research-data/ai-sigma/lmr-aggressive413/report-ja.md)。415の保存棋譜詳細分析と414の壁迂回計画は別scopeであり、全mixed/learner prep/pipeline・323 USERPAUSE、models/weights/seals/oldfits96、foreign変更を保持する。
+
+### 可変LMR追加392局のmax保存分析（415、2026-10-15）
+
+人間指定のGPT-6.1 Sol/maxで、完了済み412の392局・196色pair・共有98開始系統について、条件/先後・最初の着手分岐・探索配分を解析した。原試験はA=fixed_one/B=depth_rank、Control/TT1M/100ms receipt/5ms reserve、旧408 image bb63fc17/Build e934c534で、新standard/413 imageとは別。元主要NNUE106勝90敗・score54.08%・95%区間46.94–61.22%、副次固定D99勝97敗・50.51%・45.41–55.61%と下限>50%未達を保ち、CI/選択/元完了の再審査や新bootstrapはしていない。
+
+全98系統のB両色勝ち/片勝ち/両色負けはNNUE31/44/23、固定D14/71/13。B=P0/P1の勝ちはNNUE51/55、固定D51/48（各色98局）。開始prefix4/8/12/16の層と実在庫別も保存したが小さい探索的部分群で、優越・有意層・次の有利条件選別には使わない。同じ98系統の依存を保つ。全196pairで、開始rootと完全保存履歴・共有prefix・手番の一致後に着手が分かれた。初分岐でBが深い/同深さ/浅い/欠測はNNUE1/65/31/1、固定D1/65/32/0。同value bitsはNNUE0/97完成比較、固定D35/98。内部TT/killer/history/先行探索・worker/時計の一致と一手のoracleはUNKNOWNで、LMR単独の因果比較や「深く読んだから勝った」とはしない。
+
+RAW抽出前に結果群ごとの既存ID順先頭3系統を固定した最大12例は全てprefix4で、補充0。全98系統表、全392局、8色別行、196初分岐と12例のgame/family/ply/RAW行-offset-SHA/PV/value/stop/実続行先頭8/勝者を保存した。NNUE family5のA合法fallback一件（完成snapshotなし）も原分母から除かず、原因を誤削減・forward不実行等へ断定しない。
+
+accepted20285/完成snapshot20284を維持。完成深さ中央値はNNUE A/B6/6、固定D11/11だが、深さ4以下はNNUE1580/2008、固定D545/1177件。正のroot在庫では中央値NNUE5/4・固定D6/5、零在庫では21/20・20/20と深い尾部が混ざる。BのLMR trialは少ないが、terminal nodesはNNUE A433.258M/B436.979M、固定D920.830M/966.886Mで、評価数もBが多い。異なる軌跡/実手数/選択木の観測であり、仕事当たり速度や強さの因果ではない。採用snapshot後の仕事とterminal/profile/LMR/PVSを重複加算せず、branch rank/実q/静的候補値、physical NN、連続RSS、孤立部位費はUNKNOWN。
+
+重要な単独原因・一般棋力優越の新主張は0。優先度付き次候補は、同履歴rootでのq/rank/確認/採用後反復の対応、family5一応答の準備/receipt/cancel制御時系列、固定D同値bits異着手の順位/推定値分離の最大3つで、提案のみ・未実行。原392のgzip各一回stream後は小抽出だけを使い、新Search/対局/model/solver/bootstrap/fitは0。137集計view/分割和/12例の自身の整合確認は独立レビューではなく、新しい重要因果主張がない範囲で保存観測として受け入れた。本人415.1は検証close/backup済み。
+
+一度RAW抽出の自己計時2.209739241秒とguard2.268412267秒はnestedで足さず、元412 outer2017.211898980秒を再課金しない。全source/LLM/admin費はUNKNOWN。実RAW readerSTOP10:51:23.370580Z/直接reap.479383、小抽出STOP11:21:46.693394Z/reap.698934と全FAILED/STOP/owned[]を保持した。[詳細報告・全表・固定12例](../../research-data/ai-sigma/lmr-game-analysis415/report-ja.md)。人間選択の研究LMR ON/depth_rank、製品/generator enable OFF、全mixed/learner prep/pipeline・323 USERPAUSE、models/weights/seals/oldfits96/foreign変更を維持する。414の壁迂回は別の計画限定scope。

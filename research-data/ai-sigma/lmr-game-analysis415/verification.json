@@ -1,0 +1,126 @@
+{
+  "issue": "quoridor-4lc.415.1",
+  "saved_analysis_consistency": "PASS",
+  "checks": [
+    "392 game rows, 196 comparisons, 98 shared starts and input strata",
+    "137 aggregate views partition to method totals; depth histograms, per-game terminal work, completed/fallback denominators",
+    "98-family scores, colour/stock/prefix partitions and all196 first-divergence joins",
+    "12 fixed examples, no replacements; exact game/ply/RAW pointers, snapshot bits/PV and actual continuation joins"
+  ],
+  "selected_compact_refs": [
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/extraction-result.json",
+      "sha256": "410a7ed38985e40b42c2ec4734438c171f056fb85d3b3c985c3dfebf06d432e3",
+      "bytes": 3467,
+      "mode": "0644",
+      "before_after": "MATCH"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/analysis-tables.json",
+      "sha256": "db4b84be90e11dde2876b1f313a5dc49be0af2a3bf2f8f6d920d696e2691a659",
+      "bytes": 25373,
+      "mode": "0644",
+      "before_after": "MATCH"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/family-table.csv",
+      "sha256": "20c722b08de62066023b9ef5929b3b865298ea6d4b1b02202c95462ee71d7d61",
+      "bytes": 5827,
+      "mode": "0644",
+      "before_after": "MATCH"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/game-table.csv",
+      "sha256": "e52f7905f8e6602969d58c4891b78a7b82abf133f03c9940f174c4d9424edfbc",
+      "bytes": 88980,
+      "mode": "0644",
+      "before_after": "MATCH"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/first-divergences.json",
+      "sha256": "60203bf50ee44cc5d5bf869f2d040eff5474c9174b084cf6a69e2355848ca3ed",
+      "bytes": 175802,
+      "mode": "0644",
+      "before_after": "MATCH"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/examples.json",
+      "sha256": "448a3bd262543f19145c2f2c847029ef64527ef5a451d2419bf6cbe727518268",
+      "bytes": 52906,
+      "mode": "0644",
+      "before_after": "MATCH"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/group-summaries.json",
+      "sha256": "3e391e57800e1d978bfe4af86abbf7004a6483dd4c0de262e6affebbebc61d7e",
+      "bytes": 591136,
+      "mode": "0644",
+      "before_after": "MATCH"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/example-selection.json",
+      "sha256": "1784fc34403ec0b94b1e6dacef6dbaf3ee6cd84d7ce3ed4902f5b5fc027d64c1",
+      "bytes": 1386,
+      "mode": "0644",
+      "before_after": "MATCH"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/extraction-inputs.json",
+      "sha256": "4ff85c8cb30a350f41068b42bace23e522ef26497301a11ba2f0dc66ea7f38df",
+      "bytes": 514967,
+      "mode": "0644",
+      "before_after": "MATCH"
+    }
+  ],
+  "actual_selected_compact_reader_STOP": "2026-10-15T11:21:46.693394+00:00",
+  "actual_RAW_reader_STOP": "2026-10-15T10:51:23.370580+00:00",
+  "RAW_integrity_reused_without_new_payload_read": [
+    {
+      "archive": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/lmr-standard412-arena392-v1/batch-000/data/completed.jsonl.gz",
+        "sha256": "634a0037fcb84cd6529d6fe91b77b0b5ec5148ea352b3e4403f43dbb6788f70b",
+        "bytes": 6474760,
+        "mode": "0644"
+      },
+      "raw_bytes": 34485205,
+      "raw_sha256": "1216abceca60b7a21158c06ee49614728455513eb38c84591aac70ef10dafac3",
+      "rows": 196,
+      "compressed_before_parse_and_stream_hash": "MATCH",
+      "raw_stream_hash": "MATCH",
+      "full_decompression_passes_this_extraction": 1
+    },
+    {
+      "archive": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/lmr-standard412-arena392-v1/batch-001/data/completed.jsonl.gz",
+        "sha256": "4f05eb76238674d5dad3c685ec17cb89c7788aed791af6f5c108158f5ee48dec",
+        "bytes": 7256458,
+        "mode": "0644"
+      },
+      "raw_bytes": 39308906,
+      "raw_sha256": "e6195d94e839c69857003b7720c7367af5349ccee6d8937bfc6262914fe63263",
+      "rows": 196,
+      "compressed_before_parse_and_stream_hash": "MATCH",
+      "raw_stream_hash": "MATCH",
+      "full_decompression_passes_this_extraction": 1
+    }
+  ],
+  "RAW_payload_reads_this_finalizer": 0,
+  "new_native_Search_model_solver_bootstrap_games": 0,
+  "owned_TMP_leases": [],
+  "pair_classes": {
+    "nnue": {
+      "B_both_win": 31,
+      "split": 44,
+      "B_both_lose": 23
+    },
+    "distance": {
+      "B_both_win": 14,
+      "split": 71,
+      "B_both_lose": 13
+    }
+  },
+  "played_plies_by_evaluator": {
+    "nnue": 9476,
+    "distance": 10809
+  }
+}

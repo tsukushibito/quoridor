@@ -1,0 +1,248 @@
+{
+  "issue": "quoridor-4lc.415.1",
+  "status": "VERIFIED_ANALYSIS_COMPLETE_OWN_LEAF_CLOSED_BACKED_UP",
+  "model": "gpt-6.1-sol",
+  "effort": "max",
+  "sandbox": "danger-full-access",
+  "approvalPolicy": "never",
+  "cwd": "/workspaces/quoridor",
+  "refs": {
+    "report-ja.md": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/report-ja.md",
+      "sha256": "68cc2f9a188943555d739594dcd2c1fc1c1b822010b0b0d1b611a965b579aed6",
+      "bytes": 11298,
+      "mode": "0644"
+    },
+    "examples-ja.md": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/examples-ja.md",
+      "sha256": "aafd3f489292a19acbd3c3c704159bce3e039bf9e32053d6945d79898fe23094",
+      "bytes": 25883,
+      "mode": "0644"
+    },
+    "families-ja.md": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/families-ja.md",
+      "sha256": "b518aaaa557cabbabe28c76d8084ba72b9f4b9ab1361939d2588471098d136a9",
+      "bytes": 10420,
+      "mode": "0644"
+    },
+    "result.json": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/result.json",
+      "sha256": "d853cd6836b1c36eb4d3c457ca0f2bae4637e5d7926ef594f462312f3593fbf6",
+      "bytes": 26012,
+      "mode": "0644"
+    },
+    "control.json": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/control.json",
+      "sha256": "955d0fb208d27a7cba12d8425155eb7aa869b317bde6acc15e2bcbd5a2308f29",
+      "bytes": 1295,
+      "mode": "0644"
+    },
+    "findings.json": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/findings.json",
+      "sha256": "ed016de52471e7f2640b109e4919b4b8d6df97005dc0cb942eb0421e349c0c49",
+      "bytes": 1994,
+      "mode": "0644"
+    },
+    "verification.json": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/verification.json",
+      "sha256": "cf5181e2e5eacbf56005888b7daf5023b54701db2fc9024ee999d15f71236f6b",
+      "bytes": 5110,
+      "mode": "0644"
+    },
+    "analysis-tables.json": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/analysis-tables.json",
+      "sha256": "db4b84be90e11dde2876b1f313a5dc49be0af2a3bf2f8f6d920d696e2691a659",
+      "bytes": 25373,
+      "mode": "0644"
+    },
+    "family-table.csv": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/family-table.csv",
+      "sha256": "20c722b08de62066023b9ef5929b3b865298ea6d4b1b02202c95462ee71d7d61",
+      "bytes": 5827,
+      "mode": "0644"
+    },
+    "game-table.csv": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/game-table.csv",
+      "sha256": "e52f7905f8e6602969d58c4891b78a7b82abf133f03c9940f174c4d9424edfbc",
+      "bytes": 88980,
+      "mode": "0644"
+    },
+    "condition-table.csv": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/condition-table.csv",
+      "sha256": "3e9271f5cb0263bd6ca5cc2462be9f0217ff16799c08c39c8049671cf397af72",
+      "bytes": 1275,
+      "mode": "0644"
+    },
+    "colour-table.csv": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/colour-table.csv",
+      "sha256": "a84661b2ff2c1f610e90f59fac1f7f2d6071f6e897c7d0eef4278192c2fe02ad",
+      "bytes": 799,
+      "mode": "0644"
+    },
+    "work-table.csv": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/work-table.csv",
+      "sha256": "8ab005178bd2eeac3e1258c83e97c9dbd02cf850de7c33329f8a0ca1e41ec091",
+      "bytes": 1449,
+      "mode": "0644"
+    },
+    "depth-table.csv": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/depth-table.csv",
+      "sha256": "39b8b8e8520c2565e7b9798d17502a07009144188229587ff3eaf57cba7c4527",
+      "bytes": 400,
+      "mode": "0644"
+    },
+    "first-divergences.json": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/first-divergences.json",
+      "sha256": "60203bf50ee44cc5d5bf869f2d040eff5474c9174b084cf6a69e2355848ca3ed",
+      "bytes": 175802,
+      "mode": "0644"
+    },
+    "examples.json": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/examples.json",
+      "sha256": "448a3bd262543f19145c2f2c847029ef64527ef5a451d2419bf6cbe727518268",
+      "bytes": 52906,
+      "mode": "0644"
+    },
+    "extraction-result.json": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/extraction-result.json",
+      "sha256": "410a7ed38985e40b42c2ec4734438c171f056fb85d3b3c985c3dfebf06d432e3",
+      "bytes": 3467,
+      "mode": "0644"
+    },
+    "extraction-inputs.json": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/extraction-inputs.json",
+      "sha256": "4ff85c8cb30a350f41068b42bace23e522ef26497301a11ba2f0dc66ea7f38df",
+      "bytes": 514967,
+      "mode": "0644"
+    },
+    "example-selection.json": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/example-selection.json",
+      "sha256": "1784fc34403ec0b94b1e6dacef6dbaf3ee6cd84d7ce3ed4902f5b5fc027d64c1",
+      "bytes": 1386,
+      "mode": "0644"
+    },
+    "extraction-v1-receipt.json": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/extraction-v1-receipt.json",
+      "sha256": "3c2c8bd79246b41f2dfe841a1670b9a5baafc1862a7ffaea1a930e93df532768",
+      "bytes": 1206,
+      "mode": "0644"
+    },
+    "STOP.json": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/STOP.json",
+      "sha256": "e19301042c89d32acd3acf8acc44a28a0730a91fcd30b22ebcd8a51ffdc75c8d",
+      "bytes": 26497,
+      "mode": "0644"
+    },
+    "closure.json": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/closure.json",
+      "sha256": "1a340b7e14859a525c19689fac7fcf1c0b15a9d19f2c61e412a713fd751139ee",
+      "bytes": 385,
+      "mode": "0644"
+    },
+    "beads-finalize-receipt.json": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/beads-finalize-receipt.json",
+      "sha256": "c51a6d52544c41cf40524d1b950bfa4db7a161b657d8d7dbc98a629252159cd4",
+      "bytes": 2909,
+      "mode": "0644"
+    },
+    "prettier-check-final-receipt.json": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/prettier-check-final-receipt.json",
+      "sha256": "21ed8202880c26aebb482be6c1541224849d885efaaeb539d360991a2135949c",
+      "bytes": 1208,
+      "mode": "0644"
+    },
+    "ruff-own-final-v2-receipt.json": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/ruff-own-final-v2-receipt.json",
+      "sha256": "4cf11ce86e4df23c70fda9b8339c2f228939e6d2f74823bb5fe50523e62e2273",
+      "bytes": 1330,
+      "mode": "0644"
+    },
+    "ruff-format-own-final-receipt.json": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/ruff-format-own-final-receipt.json",
+      "sha256": "7864e271b9162483b90a6da855677e04ba6be020bfd7980ecb38ad6fd947ea87",
+      "bytes": 1207,
+      "mode": "0644"
+    },
+    "lint-admin-receipt.json": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/lint-admin-receipt.json",
+      "sha256": "498430f9457610f4c07acda6a4499cbeb2e34c42ced60907b5909da4dc349103",
+      "bytes": 1330,
+      "mode": "0644"
+    },
+    "finalizer-lint-repair.json": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/finalizer-lint-repair.json",
+      "sha256": "ae77f9776342ffc4617b6bfe8d2c0867be647413513b4d550dc52ca8007db4dc",
+      "bytes": 905,
+      "mode": "0644"
+    },
+    "finalizer-v1-receipt.json": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/finalizer-v1-receipt.json",
+      "sha256": "1ac01a9630f4432d3104709c2030d7b0e77756a162440d70a223bf719aee369a",
+      "bytes": 1820,
+      "mode": "0644"
+    },
+    "finalizer-v2-receipt.json": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/finalizer-v2-receipt.json",
+      "sha256": "bc057430ae42aa5cd55d9b9d2019d431434b66ff9556ca7c4005934f54c3b74c",
+      "bytes": 1207,
+      "mode": "0644"
+    },
+    "finalize_tables.py": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/finalize_tables.py",
+      "sha256": "ae5965568031212aeb67571f0abd6428d98161bd34910f3e222c7d99a440dc86",
+      "bytes": 17732,
+      "mode": "0644"
+    },
+    "finish_beads.py": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/finish_beads.py",
+      "sha256": "9ac2fc0e50e4cbf207d33fa68d247cb0d4caa1e6286d843a7560697f91b3ac19",
+      "bytes": 4604,
+      "mode": "0644"
+    },
+    "extract415.py": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-game-analysis415-v1/extract415.py",
+      "sha256": "08868d3ba22c228cf08b0cc23586d94892849bc88a66dd3ffb65631c41167d55",
+      "bytes": 28379,
+      "mode": "0644"
+    }
+  },
+  "census": {
+    "games": 392,
+    "pairs": 196,
+    "shared_families": 98,
+    "accepted": 20285,
+    "completed_snapshots": 20284,
+    "fallback": 1
+  },
+  "fixed_examples": 12,
+  "first_divergences": 196,
+  "RAW_reader_STOP": "2026-10-15T10:51:23.370580+00:00",
+  "RAW_directwait_reap": "2026-10-15T10:51:23.479383+00:00",
+  "compact_reader_STOP": "2026-10-15T11:21:46.693394+00:00",
+  "compact_directwait_reap": "2026-10-15T11:21:46.698934+00:00",
+  "admin_directwait_reap": "2026-10-15T11:29:21.774728+00:00",
+  "metadata_selected_refs_afterhash_mark": "2026-10-15T11:30:35.858329+00:00",
+  "control_result_status_is_immutable_analysis_snapshot_before_admin_close": true,
+  "canonical_current_status": {
+    "issue": "quoridor-4lc.415.1",
+    "status_before": "in_progress",
+    "status_after": "closed",
+    "assignee_unchanged": true,
+    "backup_sync_exit0": true,
+    "report_sha256": "68cc2f9a188943555d739594dcd2c1fc1c1b822010b0b0d1b611a965b579aed6",
+    "parent415_modified": false,
+    "other_review_issues_modified": false,
+    "owned": [],
+    "completed_at": "2026-10-15T11:29:21.770846+00:00"
+  },
+  "new_native_Search_model_solver_games_bootstrap_fit": 0,
+  "independent_review_of_own_analysis": false,
+  "strong_causality_or_general_strength_new_claims": [],
+  "owned": [],
+  "TMP": [],
+  "leases": [],
+  "Main_Git_index_Cargo_findings_parent415_changes": 0,
+  "Root324_integrates_findings_and_parent415": true,
+  "usage": "usage.json, once directed OWN; original shared payloads excluded",
+  "all_pauses_defaults_models_seals_preserved": true
+}
