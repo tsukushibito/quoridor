@@ -89,7 +89,7 @@ fn session(evaluator: Arc<SigmaValueEvaluator>) -> SearchSession {
         },
         37,
         quoridor_ai::score::ScoreDomain::LEGACY,
-        quoridor_ai::alphabeta::OrderingProfile::Control,
+        quoridor_ai::alphabeta::OrderingProfile::CheapStaticControl,
         false,
         false,
     )
@@ -145,14 +145,14 @@ fn sigma_value_terminal_cancel_and_common_search_do_not_infer_nn0() {
     }
     let context = root(&[]);
     let board = context.position();
-    let history = serde_json::to_vec(&context.repetition_table()).unwrap();
+    let history = serde_json::to_vec(&context.history_counts()).unwrap();
     let result = search
         .search(&context, &limits(), &AtomicBool::new(true))
         .unwrap();
     assert_eq!(result.stop, StopReason::Cancelled);
     assert_eq!(context.position(), board);
     assert_eq!(
-        serde_json::to_vec(&context.repetition_table()).unwrap(),
+        serde_json::to_vec(&context.history_counts()).unwrap(),
         history
     );
     assert!(inputs.lock().unwrap().is_empty());
@@ -164,7 +164,7 @@ fn sigma_value_terminal_cancel_and_common_search_do_not_infer_nn0() {
 fn sigma_value_backend_error_range_budget_and_reset_preserve_failure_nn0() {
     let context = root(&[]);
     let board = context.position();
-    let history = serde_json::to_vec(&context.repetition_table()).unwrap();
+    let history = serde_json::to_vec(&context.history_counts()).unwrap();
     for reply in 1..=5 {
         let (evaluator, _) = fixture(reply, 1000);
         let failure =
@@ -181,7 +181,7 @@ fn sigma_value_backend_error_range_budget_and_reset_preserve_failure_nn0() {
         assert_eq!(evaluator.work().unwrap()["adapter_failed_rows"], 1);
         assert_eq!(context.position(), board);
         assert_eq!(
-            serde_json::to_vec(&context.repetition_table()).unwrap(),
+            serde_json::to_vec(&context.history_counts()).unwrap(),
             history
         );
     }
