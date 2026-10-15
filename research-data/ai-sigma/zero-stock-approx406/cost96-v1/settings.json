@@ -1,0 +1,1407 @@
+{
+  "schema": "quoridor.research.sequence.v1",
+  "kind": "sequence",
+  "cwd": "/workspaces/quoridor",
+  "owner": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1",
+  "output": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/execution-v1",
+  "arena": null,
+  "arena_block": 1,
+  "serial_order": [
+    "arena",
+    "measure"
+  ],
+  "measurements": [
+    {
+      "schema": "quoridor.research.lifecycle-intent.v1",
+      "kind": "run",
+      "owner": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1",
+      "cwd": "/workspaces/quoridor",
+      "output": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-000/operation",
+      "data_root": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-000/data",
+      "owned_outputs": [
+        "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-000",
+        "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-000/TMP"
+      ],
+      "TMP": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-000/TMP",
+      "artifact": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner406-zero-stock-v1",
+        "sha256": "43971e3be580a78d57d46d0c081023df170e29a3d3565a95c4d16bb394d18a23",
+        "bytes": 8837392,
+        "mode": "0755"
+      },
+      "experiment": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/experiment-000.json",
+        "sha256": "4d223c7d894c281a5dceea8a05f57fb453909d8613055285e717d59e63d8f073",
+        "bytes": 4103,
+        "mode": "0644"
+      },
+      "caller_sources": [
+        {
+          "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+          "sha256": "ec13745424d996d0771cbc756db8c9b816b13d8fe19cdb666cbc4ef2f3bf38d8",
+          "bytes": 222082,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/scripts/dev/research-job.py",
+          "sha256": "db9ad6ea99bc525e4ccd150fbd5752196934f73fe839592eac5ab039c7ac2914",
+          "bytes": 31002,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/python/quoridor_training/cycle_process.py",
+          "sha256": "d6410c0c31956a31927f87c4e5a51d84064b841197cbfa4aa683ac76ea9c45e3",
+          "bytes": 22589,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/python/quoridor_training/snapshot.py",
+          "sha256": "ed0814965c012d6ad5ad094e653158b42b5d4ebf17463706ce53d029bc704341",
+          "bytes": 1232,
+          "mode": "0644"
+        }
+      ],
+      "finalizers": [],
+      "limits": {
+        "family_B": 4294967296,
+        "controller_B": 67108864,
+        "host_reserve_B": 4294967296,
+        "owned_B": null,
+        "log_B": 2097152,
+        "free_B": null,
+        "worker_cpu": 2,
+        "guardian_cpu": 4
+      },
+      "env": {
+        "PATH": "/home/vscode/.cache/inference/envs/quoridor-training/bin:/home/vscode/.local/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/cargo/bin:/usr/local/share/nvm/current/bin:/home/vscode/.local/bin:/home/vscode/.codex/tmp/arg0/codex-arg0OxqXXI:/home/vscode/.local/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/vscode/.local/bin:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/cargo/bin:/usr/local/share/nvm/current/bin:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/share/nvm/versions/node/v24.21.0/bin:/home/vscode/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "HOME": "/home/vscode",
+        "PYTHONPATH": "/workspaces/quoridor/python",
+        "QUORIDOR_PROJECT_ROOT": "/workspaces/quoridor",
+        "QUORIDOR_PROJECT_ENV": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "UV_PROJECT_ENVIRONMENT": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "VIRTUAL_ENV": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "UV_CACHE_DIR": "/home/vscode/.cache/inference/uv",
+        "UV_PYTHON_INSTALL_DIR": "/home/vscode/.cache/inference/python",
+        "CUDA_VISIBLE_DEVICES": "",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "ORT_DISABLE_TELEMETRY": "1",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "UV_NO_SYNC": "1",
+        "UV_OFFLINE": "1",
+        "TMPDIR": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-000/TMP",
+        "RAYON_NUM_THREADS": "1"
+      },
+      "data": [
+        {
+          "name": "settings",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-000/data/settings.json",
+          "limit_B": 3145728
+        },
+        {
+          "name": "measurements",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-000/data/measurements.jsonl",
+          "limit_B": 3145728
+        },
+        {
+          "name": "result",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-000/data/result.json",
+          "limit_B": 3145728
+        }
+      ],
+      "perf": null,
+      "argv": [
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner406-zero-stock-v1",
+        "measure",
+        "--experiment",
+        "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/experiment-000.json",
+        "--experiment-sha256",
+        "4d223c7d894c281a5dceea8a05f57fb453909d8613055285e717d59e63d8f073"
+      ],
+      "support": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/resources.json",
+        "sha256": "2072af938a4dc2e323c4533d6593f7aab9478363c643d71363da397bf9fafe9b",
+        "bytes": 533,
+        "mode": "0644"
+      }
+    },
+    {
+      "schema": "quoridor.research.lifecycle-intent.v1",
+      "kind": "run",
+      "owner": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1",
+      "cwd": "/workspaces/quoridor",
+      "output": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-001/operation",
+      "data_root": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-001/data",
+      "owned_outputs": [
+        "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-001",
+        "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-001/TMP"
+      ],
+      "TMP": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-001/TMP",
+      "artifact": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner406-zero-stock-v1",
+        "sha256": "43971e3be580a78d57d46d0c081023df170e29a3d3565a95c4d16bb394d18a23",
+        "bytes": 8837392,
+        "mode": "0755"
+      },
+      "experiment": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/experiment-001.json",
+        "sha256": "fb8bc7a724affbac4ad5ccf05863d1599695042fc3f3e7568aacc6c2e5b52205",
+        "bytes": 4109,
+        "mode": "0644"
+      },
+      "caller_sources": [
+        {
+          "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+          "sha256": "ec13745424d996d0771cbc756db8c9b816b13d8fe19cdb666cbc4ef2f3bf38d8",
+          "bytes": 222082,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/scripts/dev/research-job.py",
+          "sha256": "db9ad6ea99bc525e4ccd150fbd5752196934f73fe839592eac5ab039c7ac2914",
+          "bytes": 31002,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/python/quoridor_training/cycle_process.py",
+          "sha256": "d6410c0c31956a31927f87c4e5a51d84064b841197cbfa4aa683ac76ea9c45e3",
+          "bytes": 22589,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/python/quoridor_training/snapshot.py",
+          "sha256": "ed0814965c012d6ad5ad094e653158b42b5d4ebf17463706ce53d029bc704341",
+          "bytes": 1232,
+          "mode": "0644"
+        }
+      ],
+      "finalizers": [],
+      "limits": {
+        "family_B": 4294967296,
+        "controller_B": 67108864,
+        "host_reserve_B": 4294967296,
+        "owned_B": null,
+        "log_B": 2097152,
+        "free_B": null,
+        "worker_cpu": 2,
+        "guardian_cpu": 4
+      },
+      "env": {
+        "PATH": "/home/vscode/.cache/inference/envs/quoridor-training/bin:/home/vscode/.local/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/cargo/bin:/usr/local/share/nvm/current/bin:/home/vscode/.local/bin:/home/vscode/.codex/tmp/arg0/codex-arg0OxqXXI:/home/vscode/.local/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/vscode/.local/bin:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/cargo/bin:/usr/local/share/nvm/current/bin:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/share/nvm/versions/node/v24.21.0/bin:/home/vscode/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "HOME": "/home/vscode",
+        "PYTHONPATH": "/workspaces/quoridor/python",
+        "QUORIDOR_PROJECT_ROOT": "/workspaces/quoridor",
+        "QUORIDOR_PROJECT_ENV": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "UV_PROJECT_ENVIRONMENT": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "VIRTUAL_ENV": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "UV_CACHE_DIR": "/home/vscode/.cache/inference/uv",
+        "UV_PYTHON_INSTALL_DIR": "/home/vscode/.cache/inference/python",
+        "CUDA_VISIBLE_DEVICES": "",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "ORT_DISABLE_TELEMETRY": "1",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "UV_NO_SYNC": "1",
+        "UV_OFFLINE": "1",
+        "TMPDIR": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-001/TMP",
+        "RAYON_NUM_THREADS": "1"
+      },
+      "data": [
+        {
+          "name": "settings",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-001/data/settings.json",
+          "limit_B": 3145728
+        },
+        {
+          "name": "measurements",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-001/data/measurements.jsonl",
+          "limit_B": 3145728
+        },
+        {
+          "name": "result",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-001/data/result.json",
+          "limit_B": 3145728
+        }
+      ],
+      "perf": null,
+      "argv": [
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner406-zero-stock-v1",
+        "measure",
+        "--experiment",
+        "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/experiment-001.json",
+        "--experiment-sha256",
+        "fb8bc7a724affbac4ad5ccf05863d1599695042fc3f3e7568aacc6c2e5b52205"
+      ],
+      "support": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/resources.json",
+        "sha256": "2072af938a4dc2e323c4533d6593f7aab9478363c643d71363da397bf9fafe9b",
+        "bytes": 533,
+        "mode": "0644"
+      }
+    },
+    {
+      "schema": "quoridor.research.lifecycle-intent.v1",
+      "kind": "run",
+      "owner": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1",
+      "cwd": "/workspaces/quoridor",
+      "output": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-002/operation",
+      "data_root": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-002/data",
+      "owned_outputs": [
+        "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-002",
+        "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-002/TMP"
+      ],
+      "TMP": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-002/TMP",
+      "artifact": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner406-zero-stock-v1",
+        "sha256": "43971e3be580a78d57d46d0c081023df170e29a3d3565a95c4d16bb394d18a23",
+        "bytes": 8837392,
+        "mode": "0755"
+      },
+      "experiment": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/experiment-002.json",
+        "sha256": "79d0665821c1facab47c608d5b2958db9e8c412183fdd990659c3ae33655de0c",
+        "bytes": 4109,
+        "mode": "0644"
+      },
+      "caller_sources": [
+        {
+          "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+          "sha256": "ec13745424d996d0771cbc756db8c9b816b13d8fe19cdb666cbc4ef2f3bf38d8",
+          "bytes": 222082,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/scripts/dev/research-job.py",
+          "sha256": "db9ad6ea99bc525e4ccd150fbd5752196934f73fe839592eac5ab039c7ac2914",
+          "bytes": 31002,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/python/quoridor_training/cycle_process.py",
+          "sha256": "d6410c0c31956a31927f87c4e5a51d84064b841197cbfa4aa683ac76ea9c45e3",
+          "bytes": 22589,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/python/quoridor_training/snapshot.py",
+          "sha256": "ed0814965c012d6ad5ad094e653158b42b5d4ebf17463706ce53d029bc704341",
+          "bytes": 1232,
+          "mode": "0644"
+        }
+      ],
+      "finalizers": [],
+      "limits": {
+        "family_B": 4294967296,
+        "controller_B": 67108864,
+        "host_reserve_B": 4294967296,
+        "owned_B": null,
+        "log_B": 2097152,
+        "free_B": null,
+        "worker_cpu": 2,
+        "guardian_cpu": 4
+      },
+      "env": {
+        "PATH": "/home/vscode/.cache/inference/envs/quoridor-training/bin:/home/vscode/.local/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/cargo/bin:/usr/local/share/nvm/current/bin:/home/vscode/.local/bin:/home/vscode/.codex/tmp/arg0/codex-arg0OxqXXI:/home/vscode/.local/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/vscode/.local/bin:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/cargo/bin:/usr/local/share/nvm/current/bin:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/share/nvm/versions/node/v24.21.0/bin:/home/vscode/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "HOME": "/home/vscode",
+        "PYTHONPATH": "/workspaces/quoridor/python",
+        "QUORIDOR_PROJECT_ROOT": "/workspaces/quoridor",
+        "QUORIDOR_PROJECT_ENV": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "UV_PROJECT_ENVIRONMENT": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "VIRTUAL_ENV": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "UV_CACHE_DIR": "/home/vscode/.cache/inference/uv",
+        "UV_PYTHON_INSTALL_DIR": "/home/vscode/.cache/inference/python",
+        "CUDA_VISIBLE_DEVICES": "",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "ORT_DISABLE_TELEMETRY": "1",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "UV_NO_SYNC": "1",
+        "UV_OFFLINE": "1",
+        "TMPDIR": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-002/TMP",
+        "RAYON_NUM_THREADS": "1"
+      },
+      "data": [
+        {
+          "name": "settings",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-002/data/settings.json",
+          "limit_B": 3145728
+        },
+        {
+          "name": "measurements",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-002/data/measurements.jsonl",
+          "limit_B": 3145728
+        },
+        {
+          "name": "result",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-002/data/result.json",
+          "limit_B": 3145728
+        }
+      ],
+      "perf": null,
+      "argv": [
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner406-zero-stock-v1",
+        "measure",
+        "--experiment",
+        "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/experiment-002.json",
+        "--experiment-sha256",
+        "79d0665821c1facab47c608d5b2958db9e8c412183fdd990659c3ae33655de0c"
+      ],
+      "support": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/resources.json",
+        "sha256": "2072af938a4dc2e323c4533d6593f7aab9478363c643d71363da397bf9fafe9b",
+        "bytes": 533,
+        "mode": "0644"
+      }
+    },
+    {
+      "schema": "quoridor.research.lifecycle-intent.v1",
+      "kind": "run",
+      "owner": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1",
+      "cwd": "/workspaces/quoridor",
+      "output": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-003/operation",
+      "data_root": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-003/data",
+      "owned_outputs": [
+        "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-003",
+        "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-003/TMP"
+      ],
+      "TMP": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-003/TMP",
+      "artifact": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner406-zero-stock-v1",
+        "sha256": "43971e3be580a78d57d46d0c081023df170e29a3d3565a95c4d16bb394d18a23",
+        "bytes": 8837392,
+        "mode": "0755"
+      },
+      "experiment": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/experiment-003.json",
+        "sha256": "41caf6b23068f2a268b03c907d579868071fa42bf6ff1fa7e7f9c7bc46cdee86",
+        "bytes": 4109,
+        "mode": "0644"
+      },
+      "caller_sources": [
+        {
+          "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+          "sha256": "ec13745424d996d0771cbc756db8c9b816b13d8fe19cdb666cbc4ef2f3bf38d8",
+          "bytes": 222082,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/scripts/dev/research-job.py",
+          "sha256": "db9ad6ea99bc525e4ccd150fbd5752196934f73fe839592eac5ab039c7ac2914",
+          "bytes": 31002,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/python/quoridor_training/cycle_process.py",
+          "sha256": "d6410c0c31956a31927f87c4e5a51d84064b841197cbfa4aa683ac76ea9c45e3",
+          "bytes": 22589,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/python/quoridor_training/snapshot.py",
+          "sha256": "ed0814965c012d6ad5ad094e653158b42b5d4ebf17463706ce53d029bc704341",
+          "bytes": 1232,
+          "mode": "0644"
+        }
+      ],
+      "finalizers": [],
+      "limits": {
+        "family_B": 4294967296,
+        "controller_B": 67108864,
+        "host_reserve_B": 4294967296,
+        "owned_B": null,
+        "log_B": 2097152,
+        "free_B": null,
+        "worker_cpu": 2,
+        "guardian_cpu": 4
+      },
+      "env": {
+        "PATH": "/home/vscode/.cache/inference/envs/quoridor-training/bin:/home/vscode/.local/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/cargo/bin:/usr/local/share/nvm/current/bin:/home/vscode/.local/bin:/home/vscode/.codex/tmp/arg0/codex-arg0OxqXXI:/home/vscode/.local/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/vscode/.local/bin:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/cargo/bin:/usr/local/share/nvm/current/bin:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/share/nvm/versions/node/v24.21.0/bin:/home/vscode/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "HOME": "/home/vscode",
+        "PYTHONPATH": "/workspaces/quoridor/python",
+        "QUORIDOR_PROJECT_ROOT": "/workspaces/quoridor",
+        "QUORIDOR_PROJECT_ENV": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "UV_PROJECT_ENVIRONMENT": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "VIRTUAL_ENV": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "UV_CACHE_DIR": "/home/vscode/.cache/inference/uv",
+        "UV_PYTHON_INSTALL_DIR": "/home/vscode/.cache/inference/python",
+        "CUDA_VISIBLE_DEVICES": "",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "ORT_DISABLE_TELEMETRY": "1",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "UV_NO_SYNC": "1",
+        "UV_OFFLINE": "1",
+        "TMPDIR": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-003/TMP",
+        "RAYON_NUM_THREADS": "1"
+      },
+      "data": [
+        {
+          "name": "settings",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-003/data/settings.json",
+          "limit_B": 3145728
+        },
+        {
+          "name": "measurements",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-003/data/measurements.jsonl",
+          "limit_B": 3145728
+        },
+        {
+          "name": "result",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-003/data/result.json",
+          "limit_B": 3145728
+        }
+      ],
+      "perf": null,
+      "argv": [
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner406-zero-stock-v1",
+        "measure",
+        "--experiment",
+        "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/experiment-003.json",
+        "--experiment-sha256",
+        "41caf6b23068f2a268b03c907d579868071fa42bf6ff1fa7e7f9c7bc46cdee86"
+      ],
+      "support": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/resources.json",
+        "sha256": "2072af938a4dc2e323c4533d6593f7aab9478363c643d71363da397bf9fafe9b",
+        "bytes": 533,
+        "mode": "0644"
+      }
+    },
+    {
+      "schema": "quoridor.research.lifecycle-intent.v1",
+      "kind": "run",
+      "owner": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1",
+      "cwd": "/workspaces/quoridor",
+      "output": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-004/operation",
+      "data_root": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-004/data",
+      "owned_outputs": [
+        "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-004",
+        "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-004/TMP"
+      ],
+      "TMP": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-004/TMP",
+      "artifact": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner406-zero-stock-v1",
+        "sha256": "43971e3be580a78d57d46d0c081023df170e29a3d3565a95c4d16bb394d18a23",
+        "bytes": 8837392,
+        "mode": "0755"
+      },
+      "experiment": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/experiment-004.json",
+        "sha256": "eddc2b93e688111b57aa3640c4545173373e3d2e5895e99e89519f4fdc9bb335",
+        "bytes": 4109,
+        "mode": "0644"
+      },
+      "caller_sources": [
+        {
+          "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+          "sha256": "ec13745424d996d0771cbc756db8c9b816b13d8fe19cdb666cbc4ef2f3bf38d8",
+          "bytes": 222082,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/scripts/dev/research-job.py",
+          "sha256": "db9ad6ea99bc525e4ccd150fbd5752196934f73fe839592eac5ab039c7ac2914",
+          "bytes": 31002,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/python/quoridor_training/cycle_process.py",
+          "sha256": "d6410c0c31956a31927f87c4e5a51d84064b841197cbfa4aa683ac76ea9c45e3",
+          "bytes": 22589,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/python/quoridor_training/snapshot.py",
+          "sha256": "ed0814965c012d6ad5ad094e653158b42b5d4ebf17463706ce53d029bc704341",
+          "bytes": 1232,
+          "mode": "0644"
+        }
+      ],
+      "finalizers": [],
+      "limits": {
+        "family_B": 4294967296,
+        "controller_B": 67108864,
+        "host_reserve_B": 4294967296,
+        "owned_B": null,
+        "log_B": 2097152,
+        "free_B": null,
+        "worker_cpu": 2,
+        "guardian_cpu": 4
+      },
+      "env": {
+        "PATH": "/home/vscode/.cache/inference/envs/quoridor-training/bin:/home/vscode/.local/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/cargo/bin:/usr/local/share/nvm/current/bin:/home/vscode/.local/bin:/home/vscode/.codex/tmp/arg0/codex-arg0OxqXXI:/home/vscode/.local/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/vscode/.local/bin:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/cargo/bin:/usr/local/share/nvm/current/bin:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/share/nvm/versions/node/v24.21.0/bin:/home/vscode/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "HOME": "/home/vscode",
+        "PYTHONPATH": "/workspaces/quoridor/python",
+        "QUORIDOR_PROJECT_ROOT": "/workspaces/quoridor",
+        "QUORIDOR_PROJECT_ENV": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "UV_PROJECT_ENVIRONMENT": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "VIRTUAL_ENV": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "UV_CACHE_DIR": "/home/vscode/.cache/inference/uv",
+        "UV_PYTHON_INSTALL_DIR": "/home/vscode/.cache/inference/python",
+        "CUDA_VISIBLE_DEVICES": "",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "ORT_DISABLE_TELEMETRY": "1",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "UV_NO_SYNC": "1",
+        "UV_OFFLINE": "1",
+        "TMPDIR": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-004/TMP",
+        "RAYON_NUM_THREADS": "1"
+      },
+      "data": [
+        {
+          "name": "settings",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-004/data/settings.json",
+          "limit_B": 3145728
+        },
+        {
+          "name": "measurements",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-004/data/measurements.jsonl",
+          "limit_B": 3145728
+        },
+        {
+          "name": "result",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-004/data/result.json",
+          "limit_B": 3145728
+        }
+      ],
+      "perf": null,
+      "argv": [
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner406-zero-stock-v1",
+        "measure",
+        "--experiment",
+        "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/experiment-004.json",
+        "--experiment-sha256",
+        "eddc2b93e688111b57aa3640c4545173373e3d2e5895e99e89519f4fdc9bb335"
+      ],
+      "support": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/resources.json",
+        "sha256": "2072af938a4dc2e323c4533d6593f7aab9478363c643d71363da397bf9fafe9b",
+        "bytes": 533,
+        "mode": "0644"
+      }
+    },
+    {
+      "schema": "quoridor.research.lifecycle-intent.v1",
+      "kind": "run",
+      "owner": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1",
+      "cwd": "/workspaces/quoridor",
+      "output": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-005/operation",
+      "data_root": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-005/data",
+      "owned_outputs": [
+        "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-005",
+        "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-005/TMP"
+      ],
+      "TMP": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-005/TMP",
+      "artifact": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner406-zero-stock-v1",
+        "sha256": "43971e3be580a78d57d46d0c081023df170e29a3d3565a95c4d16bb394d18a23",
+        "bytes": 8837392,
+        "mode": "0755"
+      },
+      "experiment": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/experiment-005.json",
+        "sha256": "74229a30b2ba3d6f50c4b03ff1913bf1929b33f5a9722d62ae547cc5a437ab22",
+        "bytes": 4103,
+        "mode": "0644"
+      },
+      "caller_sources": [
+        {
+          "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+          "sha256": "ec13745424d996d0771cbc756db8c9b816b13d8fe19cdb666cbc4ef2f3bf38d8",
+          "bytes": 222082,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/scripts/dev/research-job.py",
+          "sha256": "db9ad6ea99bc525e4ccd150fbd5752196934f73fe839592eac5ab039c7ac2914",
+          "bytes": 31002,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/python/quoridor_training/cycle_process.py",
+          "sha256": "d6410c0c31956a31927f87c4e5a51d84064b841197cbfa4aa683ac76ea9c45e3",
+          "bytes": 22589,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/python/quoridor_training/snapshot.py",
+          "sha256": "ed0814965c012d6ad5ad094e653158b42b5d4ebf17463706ce53d029bc704341",
+          "bytes": 1232,
+          "mode": "0644"
+        }
+      ],
+      "finalizers": [],
+      "limits": {
+        "family_B": 4294967296,
+        "controller_B": 67108864,
+        "host_reserve_B": 4294967296,
+        "owned_B": null,
+        "log_B": 2097152,
+        "free_B": null,
+        "worker_cpu": 2,
+        "guardian_cpu": 4
+      },
+      "env": {
+        "PATH": "/home/vscode/.cache/inference/envs/quoridor-training/bin:/home/vscode/.local/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/cargo/bin:/usr/local/share/nvm/current/bin:/home/vscode/.local/bin:/home/vscode/.codex/tmp/arg0/codex-arg0OxqXXI:/home/vscode/.local/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/vscode/.local/bin:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/cargo/bin:/usr/local/share/nvm/current/bin:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/share/nvm/versions/node/v24.21.0/bin:/home/vscode/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "HOME": "/home/vscode",
+        "PYTHONPATH": "/workspaces/quoridor/python",
+        "QUORIDOR_PROJECT_ROOT": "/workspaces/quoridor",
+        "QUORIDOR_PROJECT_ENV": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "UV_PROJECT_ENVIRONMENT": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "VIRTUAL_ENV": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "UV_CACHE_DIR": "/home/vscode/.cache/inference/uv",
+        "UV_PYTHON_INSTALL_DIR": "/home/vscode/.cache/inference/python",
+        "CUDA_VISIBLE_DEVICES": "",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "ORT_DISABLE_TELEMETRY": "1",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "UV_NO_SYNC": "1",
+        "UV_OFFLINE": "1",
+        "TMPDIR": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-005/TMP",
+        "RAYON_NUM_THREADS": "1"
+      },
+      "data": [
+        {
+          "name": "settings",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-005/data/settings.json",
+          "limit_B": 3145728
+        },
+        {
+          "name": "measurements",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-005/data/measurements.jsonl",
+          "limit_B": 3145728
+        },
+        {
+          "name": "result",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-005/data/result.json",
+          "limit_B": 3145728
+        }
+      ],
+      "perf": null,
+      "argv": [
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner406-zero-stock-v1",
+        "measure",
+        "--experiment",
+        "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/experiment-005.json",
+        "--experiment-sha256",
+        "74229a30b2ba3d6f50c4b03ff1913bf1929b33f5a9722d62ae547cc5a437ab22"
+      ],
+      "support": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/resources.json",
+        "sha256": "2072af938a4dc2e323c4533d6593f7aab9478363c643d71363da397bf9fafe9b",
+        "bytes": 533,
+        "mode": "0644"
+      }
+    },
+    {
+      "schema": "quoridor.research.lifecycle-intent.v1",
+      "kind": "run",
+      "owner": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1",
+      "cwd": "/workspaces/quoridor",
+      "output": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-006/operation",
+      "data_root": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-006/data",
+      "owned_outputs": [
+        "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-006",
+        "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-006/TMP"
+      ],
+      "TMP": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-006/TMP",
+      "artifact": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner406-zero-stock-v1",
+        "sha256": "43971e3be580a78d57d46d0c081023df170e29a3d3565a95c4d16bb394d18a23",
+        "bytes": 8837392,
+        "mode": "0755"
+      },
+      "experiment": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/experiment-006.json",
+        "sha256": "ff99a4a6e3e40ffdc8c0eb189b3b28c34449d55629e9272ef0383c394a1c227f",
+        "bytes": 3410,
+        "mode": "0644"
+      },
+      "caller_sources": [
+        {
+          "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+          "sha256": "ec13745424d996d0771cbc756db8c9b816b13d8fe19cdb666cbc4ef2f3bf38d8",
+          "bytes": 222082,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/scripts/dev/research-job.py",
+          "sha256": "db9ad6ea99bc525e4ccd150fbd5752196934f73fe839592eac5ab039c7ac2914",
+          "bytes": 31002,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/python/quoridor_training/cycle_process.py",
+          "sha256": "d6410c0c31956a31927f87c4e5a51d84064b841197cbfa4aa683ac76ea9c45e3",
+          "bytes": 22589,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/python/quoridor_training/snapshot.py",
+          "sha256": "ed0814965c012d6ad5ad094e653158b42b5d4ebf17463706ce53d029bc704341",
+          "bytes": 1232,
+          "mode": "0644"
+        }
+      ],
+      "finalizers": [],
+      "limits": {
+        "family_B": 4294967296,
+        "controller_B": 67108864,
+        "host_reserve_B": 4294967296,
+        "owned_B": null,
+        "log_B": 2097152,
+        "free_B": null,
+        "worker_cpu": 2,
+        "guardian_cpu": 4
+      },
+      "env": {
+        "PATH": "/home/vscode/.cache/inference/envs/quoridor-training/bin:/home/vscode/.local/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/cargo/bin:/usr/local/share/nvm/current/bin:/home/vscode/.local/bin:/home/vscode/.codex/tmp/arg0/codex-arg0OxqXXI:/home/vscode/.local/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/vscode/.local/bin:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/cargo/bin:/usr/local/share/nvm/current/bin:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/share/nvm/versions/node/v24.21.0/bin:/home/vscode/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "HOME": "/home/vscode",
+        "PYTHONPATH": "/workspaces/quoridor/python",
+        "QUORIDOR_PROJECT_ROOT": "/workspaces/quoridor",
+        "QUORIDOR_PROJECT_ENV": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "UV_PROJECT_ENVIRONMENT": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "VIRTUAL_ENV": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "UV_CACHE_DIR": "/home/vscode/.cache/inference/uv",
+        "UV_PYTHON_INSTALL_DIR": "/home/vscode/.cache/inference/python",
+        "CUDA_VISIBLE_DEVICES": "",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "ORT_DISABLE_TELEMETRY": "1",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "UV_NO_SYNC": "1",
+        "UV_OFFLINE": "1",
+        "TMPDIR": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-006/TMP",
+        "RAYON_NUM_THREADS": "1"
+      },
+      "data": [
+        {
+          "name": "settings",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-006/data/settings.json",
+          "limit_B": 3145728
+        },
+        {
+          "name": "measurements",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-006/data/measurements.jsonl",
+          "limit_B": 3145728
+        },
+        {
+          "name": "result",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-006/data/result.json",
+          "limit_B": 3145728
+        }
+      ],
+      "perf": null,
+      "argv": [
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner406-zero-stock-v1",
+        "measure",
+        "--experiment",
+        "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/experiment-006.json",
+        "--experiment-sha256",
+        "ff99a4a6e3e40ffdc8c0eb189b3b28c34449d55629e9272ef0383c394a1c227f"
+      ],
+      "support": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/resources.json",
+        "sha256": "2072af938a4dc2e323c4533d6593f7aab9478363c643d71363da397bf9fafe9b",
+        "bytes": 533,
+        "mode": "0644"
+      }
+    },
+    {
+      "schema": "quoridor.research.lifecycle-intent.v1",
+      "kind": "run",
+      "owner": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1",
+      "cwd": "/workspaces/quoridor",
+      "output": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-007/operation",
+      "data_root": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-007/data",
+      "owned_outputs": [
+        "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-007",
+        "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-007/TMP"
+      ],
+      "TMP": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-007/TMP",
+      "artifact": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner406-zero-stock-v1",
+        "sha256": "43971e3be580a78d57d46d0c081023df170e29a3d3565a95c4d16bb394d18a23",
+        "bytes": 8837392,
+        "mode": "0755"
+      },
+      "experiment": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/experiment-007.json",
+        "sha256": "4f05ab42bcefa9a48c28c32bf7fa4c8e6a285bb194053386a66d7c5c419f27e5",
+        "bytes": 3416,
+        "mode": "0644"
+      },
+      "caller_sources": [
+        {
+          "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+          "sha256": "ec13745424d996d0771cbc756db8c9b816b13d8fe19cdb666cbc4ef2f3bf38d8",
+          "bytes": 222082,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/scripts/dev/research-job.py",
+          "sha256": "db9ad6ea99bc525e4ccd150fbd5752196934f73fe839592eac5ab039c7ac2914",
+          "bytes": 31002,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/python/quoridor_training/cycle_process.py",
+          "sha256": "d6410c0c31956a31927f87c4e5a51d84064b841197cbfa4aa683ac76ea9c45e3",
+          "bytes": 22589,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/python/quoridor_training/snapshot.py",
+          "sha256": "ed0814965c012d6ad5ad094e653158b42b5d4ebf17463706ce53d029bc704341",
+          "bytes": 1232,
+          "mode": "0644"
+        }
+      ],
+      "finalizers": [],
+      "limits": {
+        "family_B": 4294967296,
+        "controller_B": 67108864,
+        "host_reserve_B": 4294967296,
+        "owned_B": null,
+        "log_B": 2097152,
+        "free_B": null,
+        "worker_cpu": 2,
+        "guardian_cpu": 4
+      },
+      "env": {
+        "PATH": "/home/vscode/.cache/inference/envs/quoridor-training/bin:/home/vscode/.local/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/cargo/bin:/usr/local/share/nvm/current/bin:/home/vscode/.local/bin:/home/vscode/.codex/tmp/arg0/codex-arg0OxqXXI:/home/vscode/.local/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/vscode/.local/bin:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/cargo/bin:/usr/local/share/nvm/current/bin:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/share/nvm/versions/node/v24.21.0/bin:/home/vscode/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "HOME": "/home/vscode",
+        "PYTHONPATH": "/workspaces/quoridor/python",
+        "QUORIDOR_PROJECT_ROOT": "/workspaces/quoridor",
+        "QUORIDOR_PROJECT_ENV": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "UV_PROJECT_ENVIRONMENT": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "VIRTUAL_ENV": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "UV_CACHE_DIR": "/home/vscode/.cache/inference/uv",
+        "UV_PYTHON_INSTALL_DIR": "/home/vscode/.cache/inference/python",
+        "CUDA_VISIBLE_DEVICES": "",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "ORT_DISABLE_TELEMETRY": "1",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "UV_NO_SYNC": "1",
+        "UV_OFFLINE": "1",
+        "TMPDIR": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-007/TMP",
+        "RAYON_NUM_THREADS": "1"
+      },
+      "data": [
+        {
+          "name": "settings",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-007/data/settings.json",
+          "limit_B": 3145728
+        },
+        {
+          "name": "measurements",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-007/data/measurements.jsonl",
+          "limit_B": 3145728
+        },
+        {
+          "name": "result",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-007/data/result.json",
+          "limit_B": 3145728
+        }
+      ],
+      "perf": null,
+      "argv": [
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner406-zero-stock-v1",
+        "measure",
+        "--experiment",
+        "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/experiment-007.json",
+        "--experiment-sha256",
+        "4f05ab42bcefa9a48c28c32bf7fa4c8e6a285bb194053386a66d7c5c419f27e5"
+      ],
+      "support": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/resources.json",
+        "sha256": "2072af938a4dc2e323c4533d6593f7aab9478363c643d71363da397bf9fafe9b",
+        "bytes": 533,
+        "mode": "0644"
+      }
+    },
+    {
+      "schema": "quoridor.research.lifecycle-intent.v1",
+      "kind": "run",
+      "owner": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1",
+      "cwd": "/workspaces/quoridor",
+      "output": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-008/operation",
+      "data_root": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-008/data",
+      "owned_outputs": [
+        "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-008",
+        "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-008/TMP"
+      ],
+      "TMP": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-008/TMP",
+      "artifact": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner406-zero-stock-v1",
+        "sha256": "43971e3be580a78d57d46d0c081023df170e29a3d3565a95c4d16bb394d18a23",
+        "bytes": 8837392,
+        "mode": "0755"
+      },
+      "experiment": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/experiment-008.json",
+        "sha256": "d4f6c26335caa75cd0270e1b6e9d6e55d6dfc1ebbe0cca4b2e38eb04d74813a5",
+        "bytes": 3416,
+        "mode": "0644"
+      },
+      "caller_sources": [
+        {
+          "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+          "sha256": "ec13745424d996d0771cbc756db8c9b816b13d8fe19cdb666cbc4ef2f3bf38d8",
+          "bytes": 222082,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/scripts/dev/research-job.py",
+          "sha256": "db9ad6ea99bc525e4ccd150fbd5752196934f73fe839592eac5ab039c7ac2914",
+          "bytes": 31002,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/python/quoridor_training/cycle_process.py",
+          "sha256": "d6410c0c31956a31927f87c4e5a51d84064b841197cbfa4aa683ac76ea9c45e3",
+          "bytes": 22589,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/python/quoridor_training/snapshot.py",
+          "sha256": "ed0814965c012d6ad5ad094e653158b42b5d4ebf17463706ce53d029bc704341",
+          "bytes": 1232,
+          "mode": "0644"
+        }
+      ],
+      "finalizers": [],
+      "limits": {
+        "family_B": 4294967296,
+        "controller_B": 67108864,
+        "host_reserve_B": 4294967296,
+        "owned_B": null,
+        "log_B": 2097152,
+        "free_B": null,
+        "worker_cpu": 2,
+        "guardian_cpu": 4
+      },
+      "env": {
+        "PATH": "/home/vscode/.cache/inference/envs/quoridor-training/bin:/home/vscode/.local/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/cargo/bin:/usr/local/share/nvm/current/bin:/home/vscode/.local/bin:/home/vscode/.codex/tmp/arg0/codex-arg0OxqXXI:/home/vscode/.local/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/vscode/.local/bin:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/cargo/bin:/usr/local/share/nvm/current/bin:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/share/nvm/versions/node/v24.21.0/bin:/home/vscode/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "HOME": "/home/vscode",
+        "PYTHONPATH": "/workspaces/quoridor/python",
+        "QUORIDOR_PROJECT_ROOT": "/workspaces/quoridor",
+        "QUORIDOR_PROJECT_ENV": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "UV_PROJECT_ENVIRONMENT": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "VIRTUAL_ENV": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "UV_CACHE_DIR": "/home/vscode/.cache/inference/uv",
+        "UV_PYTHON_INSTALL_DIR": "/home/vscode/.cache/inference/python",
+        "CUDA_VISIBLE_DEVICES": "",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "ORT_DISABLE_TELEMETRY": "1",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "UV_NO_SYNC": "1",
+        "UV_OFFLINE": "1",
+        "TMPDIR": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-008/TMP",
+        "RAYON_NUM_THREADS": "1"
+      },
+      "data": [
+        {
+          "name": "settings",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-008/data/settings.json",
+          "limit_B": 3145728
+        },
+        {
+          "name": "measurements",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-008/data/measurements.jsonl",
+          "limit_B": 3145728
+        },
+        {
+          "name": "result",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-008/data/result.json",
+          "limit_B": 3145728
+        }
+      ],
+      "perf": null,
+      "argv": [
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner406-zero-stock-v1",
+        "measure",
+        "--experiment",
+        "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/experiment-008.json",
+        "--experiment-sha256",
+        "d4f6c26335caa75cd0270e1b6e9d6e55d6dfc1ebbe0cca4b2e38eb04d74813a5"
+      ],
+      "support": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/resources.json",
+        "sha256": "2072af938a4dc2e323c4533d6593f7aab9478363c643d71363da397bf9fafe9b",
+        "bytes": 533,
+        "mode": "0644"
+      }
+    },
+    {
+      "schema": "quoridor.research.lifecycle-intent.v1",
+      "kind": "run",
+      "owner": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1",
+      "cwd": "/workspaces/quoridor",
+      "output": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-009/operation",
+      "data_root": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-009/data",
+      "owned_outputs": [
+        "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-009",
+        "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-009/TMP"
+      ],
+      "TMP": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-009/TMP",
+      "artifact": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner406-zero-stock-v1",
+        "sha256": "43971e3be580a78d57d46d0c081023df170e29a3d3565a95c4d16bb394d18a23",
+        "bytes": 8837392,
+        "mode": "0755"
+      },
+      "experiment": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/experiment-009.json",
+        "sha256": "f25357ca8b42cceb324d59dacdf64b65d390dded344bd973fd1ebde649b8261a",
+        "bytes": 3416,
+        "mode": "0644"
+      },
+      "caller_sources": [
+        {
+          "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+          "sha256": "ec13745424d996d0771cbc756db8c9b816b13d8fe19cdb666cbc4ef2f3bf38d8",
+          "bytes": 222082,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/scripts/dev/research-job.py",
+          "sha256": "db9ad6ea99bc525e4ccd150fbd5752196934f73fe839592eac5ab039c7ac2914",
+          "bytes": 31002,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/python/quoridor_training/cycle_process.py",
+          "sha256": "d6410c0c31956a31927f87c4e5a51d84064b841197cbfa4aa683ac76ea9c45e3",
+          "bytes": 22589,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/python/quoridor_training/snapshot.py",
+          "sha256": "ed0814965c012d6ad5ad094e653158b42b5d4ebf17463706ce53d029bc704341",
+          "bytes": 1232,
+          "mode": "0644"
+        }
+      ],
+      "finalizers": [],
+      "limits": {
+        "family_B": 4294967296,
+        "controller_B": 67108864,
+        "host_reserve_B": 4294967296,
+        "owned_B": null,
+        "log_B": 2097152,
+        "free_B": null,
+        "worker_cpu": 2,
+        "guardian_cpu": 4
+      },
+      "env": {
+        "PATH": "/home/vscode/.cache/inference/envs/quoridor-training/bin:/home/vscode/.local/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/cargo/bin:/usr/local/share/nvm/current/bin:/home/vscode/.local/bin:/home/vscode/.codex/tmp/arg0/codex-arg0OxqXXI:/home/vscode/.local/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/vscode/.local/bin:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/cargo/bin:/usr/local/share/nvm/current/bin:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/share/nvm/versions/node/v24.21.0/bin:/home/vscode/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "HOME": "/home/vscode",
+        "PYTHONPATH": "/workspaces/quoridor/python",
+        "QUORIDOR_PROJECT_ROOT": "/workspaces/quoridor",
+        "QUORIDOR_PROJECT_ENV": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "UV_PROJECT_ENVIRONMENT": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "VIRTUAL_ENV": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "UV_CACHE_DIR": "/home/vscode/.cache/inference/uv",
+        "UV_PYTHON_INSTALL_DIR": "/home/vscode/.cache/inference/python",
+        "CUDA_VISIBLE_DEVICES": "",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "ORT_DISABLE_TELEMETRY": "1",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "UV_NO_SYNC": "1",
+        "UV_OFFLINE": "1",
+        "TMPDIR": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-009/TMP",
+        "RAYON_NUM_THREADS": "1"
+      },
+      "data": [
+        {
+          "name": "settings",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-009/data/settings.json",
+          "limit_B": 3145728
+        },
+        {
+          "name": "measurements",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-009/data/measurements.jsonl",
+          "limit_B": 3145728
+        },
+        {
+          "name": "result",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-009/data/result.json",
+          "limit_B": 3145728
+        }
+      ],
+      "perf": null,
+      "argv": [
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner406-zero-stock-v1",
+        "measure",
+        "--experiment",
+        "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/experiment-009.json",
+        "--experiment-sha256",
+        "f25357ca8b42cceb324d59dacdf64b65d390dded344bd973fd1ebde649b8261a"
+      ],
+      "support": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/resources.json",
+        "sha256": "2072af938a4dc2e323c4533d6593f7aab9478363c643d71363da397bf9fafe9b",
+        "bytes": 533,
+        "mode": "0644"
+      }
+    },
+    {
+      "schema": "quoridor.research.lifecycle-intent.v1",
+      "kind": "run",
+      "owner": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1",
+      "cwd": "/workspaces/quoridor",
+      "output": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-010/operation",
+      "data_root": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-010/data",
+      "owned_outputs": [
+        "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-010",
+        "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-010/TMP"
+      ],
+      "TMP": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-010/TMP",
+      "artifact": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner406-zero-stock-v1",
+        "sha256": "43971e3be580a78d57d46d0c081023df170e29a3d3565a95c4d16bb394d18a23",
+        "bytes": 8837392,
+        "mode": "0755"
+      },
+      "experiment": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/experiment-010.json",
+        "sha256": "edc0d5fc67c3fc75bfc0b940c77f1aa14c5cfd7a8e59026bdd1bc8f6c5ca046a",
+        "bytes": 3417,
+        "mode": "0644"
+      },
+      "caller_sources": [
+        {
+          "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+          "sha256": "ec13745424d996d0771cbc756db8c9b816b13d8fe19cdb666cbc4ef2f3bf38d8",
+          "bytes": 222082,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/scripts/dev/research-job.py",
+          "sha256": "db9ad6ea99bc525e4ccd150fbd5752196934f73fe839592eac5ab039c7ac2914",
+          "bytes": 31002,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/python/quoridor_training/cycle_process.py",
+          "sha256": "d6410c0c31956a31927f87c4e5a51d84064b841197cbfa4aa683ac76ea9c45e3",
+          "bytes": 22589,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/python/quoridor_training/snapshot.py",
+          "sha256": "ed0814965c012d6ad5ad094e653158b42b5d4ebf17463706ce53d029bc704341",
+          "bytes": 1232,
+          "mode": "0644"
+        }
+      ],
+      "finalizers": [],
+      "limits": {
+        "family_B": 4294967296,
+        "controller_B": 67108864,
+        "host_reserve_B": 4294967296,
+        "owned_B": null,
+        "log_B": 2097152,
+        "free_B": null,
+        "worker_cpu": 2,
+        "guardian_cpu": 4
+      },
+      "env": {
+        "PATH": "/home/vscode/.cache/inference/envs/quoridor-training/bin:/home/vscode/.local/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/cargo/bin:/usr/local/share/nvm/current/bin:/home/vscode/.local/bin:/home/vscode/.codex/tmp/arg0/codex-arg0OxqXXI:/home/vscode/.local/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/vscode/.local/bin:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/cargo/bin:/usr/local/share/nvm/current/bin:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/share/nvm/versions/node/v24.21.0/bin:/home/vscode/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "HOME": "/home/vscode",
+        "PYTHONPATH": "/workspaces/quoridor/python",
+        "QUORIDOR_PROJECT_ROOT": "/workspaces/quoridor",
+        "QUORIDOR_PROJECT_ENV": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "UV_PROJECT_ENVIRONMENT": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "VIRTUAL_ENV": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "UV_CACHE_DIR": "/home/vscode/.cache/inference/uv",
+        "UV_PYTHON_INSTALL_DIR": "/home/vscode/.cache/inference/python",
+        "CUDA_VISIBLE_DEVICES": "",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "ORT_DISABLE_TELEMETRY": "1",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "UV_NO_SYNC": "1",
+        "UV_OFFLINE": "1",
+        "TMPDIR": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-010/TMP",
+        "RAYON_NUM_THREADS": "1"
+      },
+      "data": [
+        {
+          "name": "settings",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-010/data/settings.json",
+          "limit_B": 3145728
+        },
+        {
+          "name": "measurements",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-010/data/measurements.jsonl",
+          "limit_B": 3145728
+        },
+        {
+          "name": "result",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-010/data/result.json",
+          "limit_B": 3145728
+        }
+      ],
+      "perf": null,
+      "argv": [
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner406-zero-stock-v1",
+        "measure",
+        "--experiment",
+        "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/experiment-010.json",
+        "--experiment-sha256",
+        "edc0d5fc67c3fc75bfc0b940c77f1aa14c5cfd7a8e59026bdd1bc8f6c5ca046a"
+      ],
+      "support": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/resources.json",
+        "sha256": "2072af938a4dc2e323c4533d6593f7aab9478363c643d71363da397bf9fafe9b",
+        "bytes": 533,
+        "mode": "0644"
+      }
+    },
+    {
+      "schema": "quoridor.research.lifecycle-intent.v1",
+      "kind": "run",
+      "owner": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1",
+      "cwd": "/workspaces/quoridor",
+      "output": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-011/operation",
+      "data_root": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-011/data",
+      "owned_outputs": [
+        "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-011",
+        "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-011/TMP"
+      ],
+      "TMP": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-011/TMP",
+      "artifact": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner406-zero-stock-v1",
+        "sha256": "43971e3be580a78d57d46d0c081023df170e29a3d3565a95c4d16bb394d18a23",
+        "bytes": 8837392,
+        "mode": "0755"
+      },
+      "experiment": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/experiment-011.json",
+        "sha256": "2ce53634d61d3d5d30947318853e4e215ea86bf74331785e82a4b0c066ae9245",
+        "bytes": 3411,
+        "mode": "0644"
+      },
+      "caller_sources": [
+        {
+          "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+          "sha256": "ec13745424d996d0771cbc756db8c9b816b13d8fe19cdb666cbc4ef2f3bf38d8",
+          "bytes": 222082,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/scripts/dev/research-job.py",
+          "sha256": "db9ad6ea99bc525e4ccd150fbd5752196934f73fe839592eac5ab039c7ac2914",
+          "bytes": 31002,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/python/quoridor_training/cycle_process.py",
+          "sha256": "d6410c0c31956a31927f87c4e5a51d84064b841197cbfa4aa683ac76ea9c45e3",
+          "bytes": 22589,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/python/quoridor_training/snapshot.py",
+          "sha256": "ed0814965c012d6ad5ad094e653158b42b5d4ebf17463706ce53d029bc704341",
+          "bytes": 1232,
+          "mode": "0644"
+        }
+      ],
+      "finalizers": [],
+      "limits": {
+        "family_B": 4294967296,
+        "controller_B": 67108864,
+        "host_reserve_B": 4294967296,
+        "owned_B": null,
+        "log_B": 2097152,
+        "free_B": null,
+        "worker_cpu": 2,
+        "guardian_cpu": 4
+      },
+      "env": {
+        "PATH": "/home/vscode/.cache/inference/envs/quoridor-training/bin:/home/vscode/.local/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/cargo/bin:/usr/local/share/nvm/current/bin:/home/vscode/.local/bin:/home/vscode/.codex/tmp/arg0/codex-arg0OxqXXI:/home/vscode/.local/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/vscode/.local/bin:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/cargo/bin:/usr/local/share/nvm/current/bin:/home/vscode/.local/bin:/usr/local/cargo/bin:/usr/local/share/nvm/versions/node/v24.21.0/bin:/home/vscode/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "HOME": "/home/vscode",
+        "PYTHONPATH": "/workspaces/quoridor/python",
+        "QUORIDOR_PROJECT_ROOT": "/workspaces/quoridor",
+        "QUORIDOR_PROJECT_ENV": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "UV_PROJECT_ENVIRONMENT": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "VIRTUAL_ENV": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "UV_CACHE_DIR": "/home/vscode/.cache/inference/uv",
+        "UV_PYTHON_INSTALL_DIR": "/home/vscode/.cache/inference/python",
+        "CUDA_VISIBLE_DEVICES": "",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "ORT_DISABLE_TELEMETRY": "1",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "UV_NO_SYNC": "1",
+        "UV_OFFLINE": "1",
+        "TMPDIR": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-011/TMP",
+        "RAYON_NUM_THREADS": "1"
+      },
+      "data": [
+        {
+          "name": "settings",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-011/data/settings.json",
+          "limit_B": 3145728
+        },
+        {
+          "name": "measurements",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-011/data/measurements.jsonl",
+          "limit_B": 3145728
+        },
+        {
+          "name": "result",
+          "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-approx406-cost96-v1/template-011/data/result.json",
+          "limit_B": 3145728
+        }
+      ],
+      "perf": null,
+      "argv": [
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner406-zero-stock-v1",
+        "measure",
+        "--experiment",
+        "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/experiment-011.json",
+        "--experiment-sha256",
+        "2ce53634d61d3d5d30947318853e4e215ea86bf74331785e82a4b0c066ae9245"
+      ],
+      "support": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/cost96-v1/resources.json",
+        "sha256": "2072af938a4dc2e323c4533d6593f7aab9478363c643d71363da397bf9fafe9b",
+        "bytes": 533,
+        "mode": "0644"
+      }
+    }
+  ]
+}

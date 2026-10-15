@@ -1920,3 +1920,15 @@ native解析37.179403007sと全辺検証21.243242802s、出力等込みpilot＋4
 406の速度優先比較は、距離＋手番raceの±1という固定式と同じimage・4prefix・96 callsを維持する。後続407では、発動可否とは独立した近似方法の選択を共通Search設定へ追加する。最初の二方法だけを対象とし、既存raceと既存固定D(0,8,tanh)の評価正本を再用する。方法未指定ならraceを保ち、発動無効なら通常Searchのままである。新しい評価器の複製、未実装solver用のmode、研究profileやframework、製品既定の昇格は作らない。
 
 有効な方法の違いは既存method namespace／resetへ束縛し、Search結果の解決済み設定へ記録する。共通の発動条件・真のgoal／threefold優先・通常depth0評価とは別の責務として扱う。探索作者の406 sourceが凍結・書込解放された自然な境界から私有設計／source準備は進められるが、406を上書きせず開始gateにもせず、Main統合と影響softwareは406の実速度計測STOP後にする。追加の数値比較範囲は406の結果後に定めるため、今回の計画追加ではSearch campaign・対局・fitを発行しない。[人間の追加計画](../.artifacts/research-policy/zero-stock-approx-speed-20261015.md)を根拠とし、状態はBeads407で扱う。
+
+### 零在庫近似の共通実装と初回速度結果（406、2026-10-15）
+
+既定null/OFFの共通Search optionを実装した。開始残壁と要求最大深さから近似許可を一度解決し、反復深化中は固定する。rootは通常の合法手比較を続け、子で真のgoal/threefoldを先に扱い、許可ON・双方stock0・正深さの場合だけ壁距離ds<=doなら+1、他は-1の非終局近似を返す。通常depth0評価を保ち、近似leafではNNUE advance/head/orderingを呼ばない。実効ON/OFFを既存TT methodへ束縛し、変更時にTTと探索順序のhistoryを消し、同方式warm再利用と完全なゲーム履歴・undoを保持する。新AI7/runner1/Python1と影響3、必要compile/Clippy/真正BUILD、限定独立source確認が通過した。元BUILDの既存fixture field不足FAILEDとNoneだけの別修復は保持した。
+
+同一image43971e3b/BUILD272406e0で、NNUE BEST43と固定D(0,8tanh)の各々をControl/LMR OFF/PVS ON/TT1048576/深さ8/4M nodes・時間上限なしとして比較した。指定された残壁6/4/2/0の真正4prefixを完全履歴で再生し、null→4→0→0→4→null、各cold/warmの元96 calls/48sessionsを一度だけ回収した。72 COMPLETE＋24 UNKNOWN、実137,938,286 nodes（384M上限）。UNKNOWNは残壁6rootが4Mに達しcompleted6/target8。全actual設定・返却合法手/PV・parent/fullhistory復元・journal対応を照合し、同条件二反復はstatus/depth/valuebits/action/PV/全保存work一致。閾値4の残壁2/0は実効OFFで、なしと値/PV/workが一致した。
+
+setup/drop等込み8 calls/passのwhole二反復中央値は、NNUEがなし14.351203s／閾値4 14.221805s／閾値0 14.227260s、固定Dが6.211742s／6.905561s／6.923400s。NNUEは約0.9%短いが、固定Dは約11%長く、同仕事speedupや一律高速化とはしない。残壁2/0の全root許可0はnodes/通常評価を減らす一方、値とPVも変え、coldの初回切替費込みでは遅い例もある。NNUE残壁0はcold0.551ms→4.975ms、warm0.467ms→0.039ms。近似終了は未完了反復も含む累積であり、完成深さの費用へ戻さない。部位別時計・物理NNUE forward・continuous RSSはUNKNOWNで、TT本体83,886,128B/sessionをRSSと混同しない。
+
+保存52小盤面fixtureの元WDLラベル5,680状態だけを同じ距離式で照合し、Win→Loss324、Loss→Win296、Win→Win3206、Loss→Loss1854。Drawラベル0のためDraw誤判定は未観測であり、式は±1しか返さない。元WDL solver/辺/rankの再実行0。小盤面board-onlyを9×9・実履歴・棋力へ一般化しない。元speed outer186.226594642s、software二outer116.416451455s（原FAILED9.486728284sを含む）は非重複scope別で、nestedを足さず、source/LLM等を含む全費用はUNKNOWN。実timing STOP03:39:18.372901Zと全元identity/TMP/lease解放を確認した。[結果・局面別cold/warm・全counter](../research-data/ai-sigma/zero-stock-approx406/final-results-v1/report-ja.md)と[原物保存対応](../research-data/ai-sigma/zero-stock-approx406/preservation.json)を参照。
+
+今回は速度結果の提示までで、研究optionを既定無効のまま保持する。一律の棋力/既定採用、対局、追加閾値sweep、学習は発行しない。407の別方法選択はこの406を変更せず、実STOP後のsource/softwareだけを別差分として扱い、407追加数値範囲は未発行。mixed/learner全prep/pipelineと323 USERPAUSE、models/defaults/weights/seals/oldfits96/foreign変更、旧RAW/FAILED/費UNKNOWNは維持する。

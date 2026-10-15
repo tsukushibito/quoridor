@@ -1,0 +1,68 @@
+{
+  "checks": [
+    {
+      "name": "measurement406-new-owning-NN0",
+      "role": "source",
+      "argv": [
+        "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+        "-B",
+        "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/compatible-build-v1/measurement_config406_tests.py"
+      ],
+      "status": "PASS",
+      "guardian_return": {
+        "command": [
+          "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+          "-B",
+          "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/compatible-build-v1/measurement_config406_tests.py"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 1159271,
+          "start_ticks": "8279290",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": true,
+          "verified_before_exec": 1
+        },
+        "log_bytes_seen": 98,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 98,
+        "wall_seconds": 0.3716181210038485,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/Python-NN0-v1/measurement406-new-owning-NN0.full.log",
+        "sha256": "7736d71002a53937d2389943fc06802041d1905f7ac3600e8dddd8242664e150",
+        "bytes": 98,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-approx406-v1/Python-NN0-v1/measurement406-new-owning-NN0.process.json",
+        "sha256": "4c5827c34c7d7b3e8cb6f8695138a6c5281fdc46b7b38f7f7f0b1d6293a96953",
+        "bytes": 1109,
+        "mode": "0600"
+      },
+      "capture_complete": true,
+      "secondary": [],
+      "primary": null
+    }
+  ],
+  "primary": null
+}

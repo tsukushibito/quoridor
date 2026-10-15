@@ -1,0 +1,1158 @@
+{
+  "status": "STOPPED_ZERO_STOCK_APPROX_SOURCE_STATIC_PASS_NATIVE_SCIENCE_PENDING",
+  "issue": "quoridor-4lc.406.1",
+  "claimant": "codex:01a11004-79f3-7c20-872c-432a2c347664",
+  "context": {
+    "turn": "01a13d7f-092d-7c21-b019-95cb49a613a6",
+    "cwd": "/workspaces/quoridor/.worktree/arena-generalization377",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "sandbox": "danger-full-access",
+    "approvalPolicy": "never",
+    "verified_before_first_command": true
+  },
+  "source_reader_STOP": "2026-10-15T03:11:22.931502+00:00",
+  "source_metadata_stamp": "2026-10-15T03:12:26.217018+00:00",
+  "canonical_common_env_release": "normal guard/lease/project-env wrapper return; independent release UTC UNKNOWN",
+  "owned_readers": [],
+  "owned_writers": [],
+  "owned_children": [],
+  "owned_jobs": [],
+  "owned_handles": [],
+  "owned_TMP": [],
+  "owned_leases": [],
+  "metadata_scope": "All guarded source children directwaited; this small private receipt write then exit; only handoff admin follows",
+  "phases": [
+    {
+      "ref": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/intake-v1/result.json",
+        "sha256": "c30c0528b76ed6a74a49f88a3aac56fed3c6fedeba8a0e674bf28df761d959d3",
+        "bytes": 8047,
+        "mode": "0644"
+      },
+      "status": "PASS",
+      "reader_STOP": "2026-10-15T02:58:52.496411+00:00",
+      "primary": null
+    },
+    {
+      "ref": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/companion-v1/result.json",
+        "sha256": "87cc57a1f2908fd82c6da08559bd5a291cc22f7c850cba237b67dac5ba0023d2",
+        "bytes": 10345,
+        "mode": "0644"
+      },
+      "status": "PASS",
+      "reader_STOP": "2026-10-15T03:01:50.052226+00:00",
+      "primary": null
+    },
+    {
+      "ref": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/static-v1/result.json",
+        "sha256": "a51f1615344ee1e966d9c35cc03ad1f3e5b9ecf75e9b2605f2b2d6c14d770386",
+        "bytes": 13278,
+        "mode": "0644"
+      },
+      "status": "PASS",
+      "reader_STOP": "2026-10-15T03:06:23.974061+00:00",
+      "primary": null
+    },
+    {
+      "ref": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/static-v2/result.json",
+        "sha256": "834166564137c65e195e661336780b4632f035d978912fce26c99e1a5a883342",
+        "bytes": 7825,
+        "mode": "0644"
+      },
+      "status": "PASS",
+      "reader_STOP": "2026-10-15T03:07:56.220854+00:00",
+      "primary": null
+    },
+    {
+      "ref": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/final-v1/result.json",
+        "sha256": "6df1f4c4ed956e2d2d9b40b5c029879c3db87ae5e1fd9b222ee0f8ff59bb8c6e",
+        "bytes": 12814,
+        "mode": "0644"
+      },
+      "status": "PASS",
+      "reader_STOP": "2026-10-15T03:09:20.827900+00:00",
+      "primary": null
+    },
+    {
+      "ref": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/final-format-v1/result.json",
+        "sha256": "b6214810f58d1c6157195b9e9cd8f140e66a49b4232606cb0b4bfe9e2d394114",
+        "bytes": 10639,
+        "mode": "0644"
+      },
+      "status": "PASS",
+      "reader_STOP": "2026-10-15T03:11:22.931502+00:00",
+      "primary": null
+    }
+  ],
+  "original_children": [
+    {
+      "phase": "intake-v1",
+      "command": "source-helper-format",
+      "original": {
+        "pid": 1128511,
+        "start_ticks": "8156353",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "status": "absent",
+      "directwait_exit": 0,
+      "direct_reaped": true,
+      "handles_complete": true,
+      "cleanup_complete": true,
+      "fullcapture": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/intake-v1/source-helper-format.full.log",
+        "sha256": "10869b88a75066aa23546ef1f95fcd4678c3fb92a56ed46ef91688052b67976a",
+        "bytes": 42,
+        "mode": "0644"
+      },
+      "persisted_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/intake-v1/source-helper-format.process.json",
+        "sha256": "1b689c5b1cc7c3db71f115a2516165e94e59373db53461a1eec24b061472dce5",
+        "bytes": 1165,
+        "mode": "0600"
+      },
+      "returned_mask": "completed",
+      "original_disk_mask": "pending",
+      "returned_persist": "completed",
+      "original_disk_persist": "attempted",
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "ordinary_seconds": 0.03845287300646305
+    },
+    {
+      "phase": "intake-v1",
+      "command": "source-helper-lint",
+      "original": {
+        "pid": 1128517,
+        "start_ticks": "8156357",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "status": "absent",
+      "directwait_exit": 0,
+      "direct_reaped": true,
+      "handles_complete": true,
+      "cleanup_complete": true,
+      "fullcapture": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/intake-v1/source-helper-lint.full.log",
+        "sha256": "60e43949d9eb2a9c512aed906a47f424940ca71f54a851cb253be8f2819cae08",
+        "bytes": 141,
+        "mode": "0644"
+      },
+      "persisted_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/intake-v1/source-helper-lint.process.json",
+        "sha256": "a4a9121349a48f6f789d9da4140ee84d994c17712afa8a179c07777d30179e01",
+        "bytes": 1167,
+        "mode": "0600"
+      },
+      "returned_mask": "completed",
+      "original_disk_mask": "pending",
+      "returned_persist": "completed",
+      "original_disk_persist": "attempted",
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "ordinary_seconds": 0.044266420998610556
+    },
+    {
+      "phase": "intake-v1",
+      "command": "current-named-intake",
+      "original": {
+        "pid": 1128520,
+        "start_ticks": "8156363",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "status": "absent",
+      "directwait_exit": 0,
+      "direct_reaped": true,
+      "handles_complete": true,
+      "cleanup_complete": true,
+      "fullcapture": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/intake-v1/current-named-intake.full.log",
+        "sha256": "ef72b0999fe834b57ba23c66d550b1985a2504d16a95fee23b3fbbbeec6d19f3",
+        "bytes": 86,
+        "mode": "0644"
+      },
+      "persisted_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/intake-v1/current-named-intake.process.json",
+        "sha256": "91788c448124e7bf808b93f9bae76d5155df45b6747ed93b1711a773471c727c",
+        "bytes": 1037,
+        "mode": "0600"
+      },
+      "returned_mask": "completed",
+      "original_disk_mask": "pending",
+      "returned_persist": "completed",
+      "original_disk_persist": "attempted",
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "ordinary_seconds": 0.11332457300159149
+    },
+    {
+      "phase": "companion-v1",
+      "command": "companion-helper-format",
+      "original": {
+        "pid": 1134399,
+        "start_ticks": "8174093",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "status": "absent",
+      "directwait_exit": 0,
+      "direct_reaped": true,
+      "handles_complete": true,
+      "cleanup_complete": true,
+      "fullcapture": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/companion-v1/companion-helper-format.full.log",
+        "sha256": "413a709001976657cb743636fd34e48fc41d8d302d665460d3f874b3313da127",
+        "bytes": 19,
+        "mode": "0644"
+      },
+      "persisted_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/companion-v1/companion-helper-format.process.json",
+        "sha256": "9a696459f57a6e8596140e99941b3a3a45b81e8af52acc65f08180d0cbe22b0b",
+        "bytes": 1101,
+        "mode": "0600"
+      },
+      "returned_mask": "completed",
+      "original_disk_mask": "pending",
+      "returned_persist": "completed",
+      "original_disk_persist": "attempted",
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "ordinary_seconds": 0.05371770499914419
+    },
+    {
+      "phase": "companion-v1",
+      "command": "companion-helper-lint",
+      "original": {
+        "pid": 1134403,
+        "start_ticks": "8174100",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "status": "absent",
+      "directwait_exit": 0,
+      "direct_reaped": true,
+      "handles_complete": true,
+      "cleanup_complete": true,
+      "fullcapture": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/companion-v1/companion-helper-lint.full.log",
+        "sha256": "60e43949d9eb2a9c512aed906a47f424940ca71f54a851cb253be8f2819cae08",
+        "bytes": 141,
+        "mode": "0644"
+      },
+      "persisted_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/companion-v1/companion-helper-lint.process.json",
+        "sha256": "3aeaa4ec9de9aa8f7189ed6d76327cf7134a82212cfa2db6fd8bafba59b6c941",
+        "bytes": 1102,
+        "mode": "0600"
+      },
+      "returned_mask": "completed",
+      "original_disk_mask": "pending",
+      "returned_persist": "completed",
+      "original_disk_persist": "attempted",
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "ordinary_seconds": 0.07647645400720648
+    },
+    {
+      "phase": "companion-v1",
+      "command": "captured-function-derivative",
+      "original": {
+        "pid": 1134406,
+        "start_ticks": "8174108",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "status": "absent",
+      "directwait_exit": 0,
+      "direct_reaped": true,
+      "handles_complete": true,
+      "cleanup_complete": true,
+      "fullcapture": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/companion-v1/captured-function-derivative.full.log",
+        "sha256": "d16a5b1b2425b870a7bda30fd3cfb2c2c6376a5a835b4d3bc311f3964b46b946",
+        "bytes": 73,
+        "mode": "0644"
+      },
+      "persisted_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/companion-v1/captured-function-derivative.process.json",
+        "sha256": "d9a73f93e7a50eb75bde04cc5cedeb3d1d74123ec03cf16f42bf4930a7d7e437",
+        "bytes": 1047,
+        "mode": "0600"
+      },
+      "returned_mask": "completed",
+      "original_disk_mask": "pending",
+      "returned_persist": "completed",
+      "original_disk_persist": "attempted",
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "ordinary_seconds": 0.03205707299639471
+    },
+    {
+      "phase": "companion-v1",
+      "command": "derivative-format",
+      "original": {
+        "pid": 1134407,
+        "start_ticks": "8174112",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "status": "absent",
+      "directwait_exit": 0,
+      "direct_reaped": true,
+      "handles_complete": true,
+      "cleanup_complete": true,
+      "fullcapture": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/companion-v1/derivative-format.full.log",
+        "sha256": "d807f3580f2470a7fe15ad89e1a6c08e4166ffe1e33d94152d605f0c46d21bfa",
+        "bytes": 22,
+        "mode": "0644"
+      },
+      "persisted_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/companion-v1/derivative-format.process.json",
+        "sha256": "1c907a3f517025850d0470fa1fe7db25be1211bad98c3dcbb3010a03c048f082",
+        "bytes": 1108,
+        "mode": "0600"
+      },
+      "returned_mask": "completed",
+      "original_disk_mask": "pending",
+      "returned_persist": "completed",
+      "original_disk_persist": "attempted",
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "ordinary_seconds": 0.0359129779972136
+    },
+    {
+      "phase": "static-v1",
+      "command": "proof-helper-format",
+      "original": {
+        "pid": 1139946,
+        "start_ticks": "8201454",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "status": "absent",
+      "directwait_exit": 0,
+      "direct_reaped": true,
+      "handles_complete": true,
+      "cleanup_complete": true,
+      "fullcapture": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/static-v1/proof-helper-format.full.log",
+        "sha256": "96a977f329ec3c59092d40e041a019b49dcf03ca04055e177aa0ccb8c27234df",
+        "bytes": 20,
+        "mode": "0644"
+      },
+      "persisted_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/static-v1/proof-helper-format.process.json",
+        "sha256": "e508897b2eff63cce962f3fc47f002a11958b5e77af168c88e0ed4889933f10f",
+        "bytes": 1177,
+        "mode": "0600"
+      },
+      "returned_mask": "completed",
+      "original_disk_mask": "pending",
+      "returned_persist": "completed",
+      "original_disk_persist": "attempted",
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "ordinary_seconds": 0.03710638399934396
+    },
+    {
+      "phase": "static-v1",
+      "command": "proof-helper-lint",
+      "original": {
+        "pid": 1139949,
+        "start_ticks": "8201459",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "status": "absent",
+      "directwait_exit": 0,
+      "direct_reaped": true,
+      "handles_complete": true,
+      "cleanup_complete": true,
+      "fullcapture": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/static-v1/proof-helper-lint.full.log",
+        "sha256": "60e43949d9eb2a9c512aed906a47f424940ca71f54a851cb253be8f2819cae08",
+        "bytes": 141,
+        "mode": "0644"
+      },
+      "persisted_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/static-v1/proof-helper-lint.process.json",
+        "sha256": "e614f50d42b77593d03ff040be4e58c8d791f72537460543346ae4e8f154feda",
+        "bytes": 1179,
+        "mode": "0600"
+      },
+      "returned_mask": "completed",
+      "original_disk_mask": "pending",
+      "returned_persist": "completed",
+      "original_disk_persist": "attempted",
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "ordinary_seconds": 0.035900275004678406
+    },
+    {
+      "phase": "static-v1",
+      "command": "scoped-Rustfmt",
+      "original": {
+        "pid": 1139952,
+        "start_ticks": "8201463",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "status": "absent",
+      "directwait_exit": 0,
+      "direct_reaped": true,
+      "handles_complete": true,
+      "cleanup_complete": true,
+      "fullcapture": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/static-v1/scoped-Rustfmt.full.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0,
+        "mode": "0644"
+      },
+      "persisted_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/static-v1/scoped-Rustfmt.process.json",
+        "sha256": "795e491f077eb715bef20192ff44be47a25b92ce258ed6d1ddcf8d2ca0cdf348",
+        "bytes": 1141,
+        "mode": "0600"
+      },
+      "returned_mask": "completed",
+      "original_disk_mask": "pending",
+      "returned_persist": "completed",
+      "original_disk_persist": "attempted",
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "ordinary_seconds": 0.057590185999288224
+    },
+    {
+      "phase": "static-v1",
+      "command": "exact-patch-protected-proof",
+      "original": {
+        "pid": 1139954,
+        "start_ticks": "8201470",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "status": "absent",
+      "directwait_exit": 0,
+      "direct_reaped": true,
+      "handles_complete": true,
+      "cleanup_complete": true,
+      "fullcapture": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/static-v1/exact-patch-protected-proof.full.log",
+        "sha256": "75e394bfb3d69f698ddf854b04a199d83ffce5dbaf0850b3de9ce445ae5acd50",
+        "bytes": 214,
+        "mode": "0644"
+      },
+      "persisted_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/static-v1/exact-patch-protected-proof.process.json",
+        "sha256": "49c374873366c6aebfc84449caac24a7aaa5ff4b60386af006032b414d24f5cf",
+        "bytes": 1038,
+        "mode": "0600"
+      },
+      "returned_mask": "completed",
+      "original_disk_mask": "pending",
+      "returned_persist": "completed",
+      "original_disk_persist": "attempted",
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "ordinary_seconds": 0.11471488399547525
+    },
+    {
+      "phase": "static-v1",
+      "command": "scoped-Rustfmt-check",
+      "original": {
+        "pid": 1139957,
+        "start_ticks": "8201482",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "status": "absent",
+      "directwait_exit": 0,
+      "direct_reaped": true,
+      "handles_complete": true,
+      "cleanup_complete": true,
+      "fullcapture": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/static-v1/scoped-Rustfmt-check.full.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0,
+        "mode": "0644"
+      },
+      "persisted_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/static-v1/scoped-Rustfmt-check.process.json",
+        "sha256": "ee2719ead2a6a90932f783a31f262a133dc905aaa6d9c61a90d112fadb578e37",
+        "bytes": 1155,
+        "mode": "0600"
+      },
+      "returned_mask": "completed",
+      "original_disk_mask": "pending",
+      "returned_persist": "completed",
+      "original_disk_persist": "attempted",
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "ordinary_seconds": 0.05742503500368912
+    },
+    {
+      "phase": "static-v2",
+      "command": "new-boundary-Rustfmt",
+      "original": {
+        "pid": 1142455,
+        "start_ticks": "8210670",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "status": "absent",
+      "directwait_exit": 0,
+      "direct_reaped": true,
+      "handles_complete": true,
+      "cleanup_complete": true,
+      "fullcapture": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/static-v2/new-boundary-Rustfmt.full.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0,
+        "mode": "0644"
+      },
+      "persisted_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/static-v2/new-boundary-Rustfmt.process.json",
+        "sha256": "e9060e5ac7297cc502f9290d2dc2c1f2baddc80d7b70b05633fb4e5668b72173",
+        "bytes": 1048,
+        "mode": "0600"
+      },
+      "returned_mask": "completed",
+      "original_disk_mask": "pending",
+      "returned_persist": "completed",
+      "original_disk_persist": "attempted",
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "ordinary_seconds": 0.02834640399669297
+    },
+    {
+      "phase": "static-v2",
+      "command": "updated-new-test-patch-proof",
+      "original": {
+        "pid": 1142457,
+        "start_ticks": "8210673",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "status": "absent",
+      "directwait_exit": 0,
+      "direct_reaped": true,
+      "handles_complete": true,
+      "cleanup_complete": true,
+      "fullcapture": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/static-v2/updated-new-test-patch-proof.full.log",
+        "sha256": "75e394bfb3d69f698ddf854b04a199d83ffce5dbaf0850b3de9ce445ae5acd50",
+        "bytes": 214,
+        "mode": "0644"
+      },
+      "persisted_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/static-v2/updated-new-test-patch-proof.process.json",
+        "sha256": "940d8676de2157f0365650922fdd23c3011a05698e0e1b56ec9e14873970a433",
+        "bytes": 1037,
+        "mode": "0600"
+      },
+      "returned_mask": "completed",
+      "original_disk_mask": "pending",
+      "returned_persist": "completed",
+      "original_disk_persist": "attempted",
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "ordinary_seconds": 0.2304829049971886
+    },
+    {
+      "phase": "static-v2",
+      "command": "all-scoped-Rustfmt-check",
+      "original": {
+        "pid": 1142460,
+        "start_ticks": "8210697",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "status": "absent",
+      "directwait_exit": 0,
+      "direct_reaped": true,
+      "handles_complete": true,
+      "cleanup_complete": true,
+      "fullcapture": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/static-v2/all-scoped-Rustfmt-check.full.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0,
+        "mode": "0644"
+      },
+      "persisted_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/static-v2/all-scoped-Rustfmt-check.process.json",
+        "sha256": "eae5b9a13afae5bf36cc90c09147c7ece743490d65fe465fb4710bf022e6efd6",
+        "bytes": 1155,
+        "mode": "0600"
+      },
+      "returned_mask": "completed",
+      "original_disk_mask": "pending",
+      "returned_persist": "completed",
+      "original_disk_persist": "attempted",
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "ordinary_seconds": 0.06685642299999017
+    },
+    {
+      "phase": "final-v1",
+      "command": "control-helper-format",
+      "original": {
+        "pid": 1144309,
+        "start_ticks": "8218927",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "status": "absent",
+      "directwait_exit": 0,
+      "direct_reaped": true,
+      "handles_complete": true,
+      "cleanup_complete": true,
+      "fullcapture": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/final-v1/control-helper-format.full.log",
+        "sha256": "413a709001976657cb743636fd34e48fc41d8d302d665460d3f874b3313da127",
+        "bytes": 19,
+        "mode": "0644"
+      },
+      "persisted_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/final-v1/control-helper-format.process.json",
+        "sha256": "8ea599b686cf840e3f888bf2a6466dc25cc74f36072c988e05e28cfafe395efb",
+        "bytes": 1100,
+        "mode": "0600"
+      },
+      "returned_mask": "completed",
+      "original_disk_mask": "pending",
+      "returned_persist": "completed",
+      "original_disk_persist": "attempted",
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "ordinary_seconds": 0.08516165100445505
+    },
+    {
+      "phase": "final-v1",
+      "command": "control-helper-lint",
+      "original": {
+        "pid": 1144312,
+        "start_ticks": "8218936",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "status": "absent",
+      "directwait_exit": 0,
+      "direct_reaped": true,
+      "handles_complete": true,
+      "cleanup_complete": true,
+      "fullcapture": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/final-v1/control-helper-lint.full.log",
+        "sha256": "60e43949d9eb2a9c512aed906a47f424940ca71f54a851cb253be8f2819cae08",
+        "bytes": 141,
+        "mode": "0644"
+      },
+      "persisted_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/final-v1/control-helper-lint.process.json",
+        "sha256": "6de3954c2eb51dc1b05c0e7c6e543f61755c765f6378fa904114d6dfb032008c",
+        "bytes": 1101,
+        "mode": "0600"
+      },
+      "returned_mask": "completed",
+      "original_disk_mask": "pending",
+      "returned_persist": "completed",
+      "original_disk_persist": "attempted",
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "ordinary_seconds": 0.03426538599887863
+    },
+    {
+      "phase": "final-v1",
+      "command": "all-own-JSON-format",
+      "original": {
+        "pid": 1144315,
+        "start_ticks": "8218941",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "status": "absent",
+      "directwait_exit": 0,
+      "direct_reaped": true,
+      "handles_complete": true,
+      "cleanup_complete": true,
+      "fullcapture": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/final-v1/all-own-JSON-format.full.log",
+        "sha256": "87994474b27ca07873b1c2a2b5de7e0e611e2f5f96d0776fbb4119e0b5c92f24",
+        "bytes": 55,
+        "mode": "0644"
+      },
+      "persisted_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/final-v1/all-own-JSON-format.process.json",
+        "sha256": "21dcbbd9b171c4addba9d96020266e9ace4e9da0319cca97fe07d7c466008408",
+        "bytes": 1044,
+        "mode": "0600"
+      },
+      "returned_mask": "completed",
+      "original_disk_mask": "pending",
+      "returned_persist": "completed",
+      "original_disk_persist": "attempted",
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "ordinary_seconds": 1.732550947999698
+    },
+    {
+      "phase": "final-v1",
+      "command": "report-format",
+      "original": {
+        "pid": 1144416,
+        "start_ticks": "8219115",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "status": "absent",
+      "directwait_exit": 0,
+      "direct_reaped": true,
+      "handles_complete": true,
+      "cleanup_complete": true,
+      "fullcapture": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/final-v1/report-format.full.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0,
+        "mode": "0644"
+      },
+      "persisted_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/final-v1/report-format.process.json",
+        "sha256": "b1fe4258047952f08a38b27b02e5070c31e2b202c9e367864162396ce06aa017",
+        "bytes": 1134,
+        "mode": "0600"
+      },
+      "returned_mask": "completed",
+      "original_disk_mask": "pending",
+      "returned_persist": "completed",
+      "original_disk_persist": "attempted",
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "ordinary_seconds": 0.28285492600116413
+    },
+    {
+      "phase": "final-v1",
+      "command": "report-format-check",
+      "original": {
+        "pid": 1144427,
+        "start_ticks": "8219144",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "status": "absent",
+      "directwait_exit": 0,
+      "direct_reaped": true,
+      "handles_complete": true,
+      "cleanup_complete": true,
+      "fullcapture": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/final-v1/report-format-check.full.log",
+        "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20",
+        "bytes": 66,
+        "mode": "0644"
+      },
+      "persisted_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/final-v1/report-format-check.process.json",
+        "sha256": "286133a043dd79fc7a699d1d5d674b399126f55803095ce9d2604d23ed018188",
+        "bytes": 1136,
+        "mode": "0600"
+      },
+      "returned_mask": "completed",
+      "original_disk_mask": "pending",
+      "returned_persist": "completed",
+      "original_disk_persist": "attempted",
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "ordinary_seconds": 0.13203777199669275
+    },
+    {
+      "phase": "final-format-v1",
+      "command": "finish-helper-format",
+      "original": {
+        "pid": 1147703,
+        "start_ticks": "8231131",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "status": "absent",
+      "directwait_exit": 0,
+      "direct_reaped": true,
+      "handles_complete": true,
+      "cleanup_complete": true,
+      "fullcapture": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/final-format-v1/finish-helper-format.full.log",
+        "sha256": "96a977f329ec3c59092d40e041a019b49dcf03ca04055e177aa0ccb8c27234df",
+        "bytes": 20,
+        "mode": "0644"
+      },
+      "persisted_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/final-format-v1/finish-helper-format.process.json",
+        "sha256": "33cbaaeb66b3ca2f8948e0a460f3f8014bbfe65ab6efe4c0434a63824e7e93e5",
+        "bytes": 1166,
+        "mode": "0600"
+      },
+      "returned_mask": "completed",
+      "original_disk_mask": "pending",
+      "returned_persist": "completed",
+      "original_disk_persist": "attempted",
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "ordinary_seconds": 0.03751438199833501
+    },
+    {
+      "phase": "final-format-v1",
+      "command": "finish-helper-lint",
+      "original": {
+        "pid": 1147706,
+        "start_ticks": "8231136",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "status": "absent",
+      "directwait_exit": 0,
+      "direct_reaped": true,
+      "handles_complete": true,
+      "cleanup_complete": true,
+      "fullcapture": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/final-format-v1/finish-helper-lint.full.log",
+        "sha256": "60e43949d9eb2a9c512aed906a47f424940ca71f54a851cb253be8f2819cae08",
+        "bytes": 141,
+        "mode": "0644"
+      },
+      "persisted_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/final-format-v1/finish-helper-lint.process.json",
+        "sha256": "6e8bacee21b1699eb96d5cb612e5da6d75c4995ff3b43b87c10b7e057ad3552c",
+        "bytes": 1167,
+        "mode": "0600"
+      },
+      "returned_mask": "completed",
+      "original_disk_mask": "pending",
+      "returned_persist": "completed",
+      "original_disk_persist": "attempted",
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "ordinary_seconds": 0.03711890299746301
+    },
+    {
+      "phase": "final-format-v1",
+      "command": "last-own-JSON-format",
+      "original": {
+        "pid": 1147709,
+        "start_ticks": "8231141",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "status": "absent",
+      "directwait_exit": 0,
+      "direct_reaped": true,
+      "handles_complete": true,
+      "cleanup_complete": true,
+      "fullcapture": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/final-format-v1/last-own-JSON-format.full.log",
+        "sha256": "87994474b27ca07873b1c2a2b5de7e0e611e2f5f96d0776fbb4119e0b5c92f24",
+        "bytes": 55,
+        "mode": "0644"
+      },
+      "persisted_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/final-format-v1/last-own-JSON-format.process.json",
+        "sha256": "d778dc2b04050760a20855669925ab51f752e9e9216586a2dd23b6075e637da9",
+        "bytes": 1045,
+        "mode": "0600"
+      },
+      "returned_mask": "completed",
+      "original_disk_mask": "pending",
+      "returned_persist": "completed",
+      "original_disk_persist": "attempted",
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "ordinary_seconds": 1.9194582130003255
+    },
+    {
+      "phase": "final-format-v1",
+      "command": "last-report-format",
+      "original": {
+        "pid": 1147819,
+        "start_ticks": "8231335",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "status": "absent",
+      "directwait_exit": 0,
+      "direct_reaped": true,
+      "handles_complete": true,
+      "cleanup_complete": true,
+      "fullcapture": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/final-format-v1/last-report-format.full.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0,
+        "mode": "0644"
+      },
+      "persisted_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/final-format-v1/last-report-format.process.json",
+        "sha256": "16733aca2b5b15a1a794843cb131dc58a1791b3fd8059b27f5cff8882cb55d2d",
+        "bytes": 1134,
+        "mode": "0600"
+      },
+      "returned_mask": "completed",
+      "original_disk_mask": "pending",
+      "returned_persist": "completed",
+      "original_disk_persist": "attempted",
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "ordinary_seconds": 0.23498434299835935
+    }
+  ],
+  "fast_nested_patch_Node_children": "not separately identified; bounded original guardian session/observed descendants and explicit subprocess waits/TMP cleanup; exact fast PID/start UNKNOWN",
+  "refs": {
+    "zero-stock406.patch": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/zero-stock406.patch",
+      "sha256": "6f6497f90bd6b754f7a9c977a1b062f142505b311e4cf368cb23ede62c8f9016",
+      "bytes": 35246,
+      "mode": "0644"
+    },
+    "zero-stock406.inverse.patch": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/zero-stock406.inverse.patch",
+      "sha256": "b95b543123d434e7e92b5da37274a0c0faba8fda017144c150cc93b9ba2a030a",
+      "bytes": 35246,
+      "mode": "0644"
+    },
+    "static-proof.json": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/static-proof.json",
+      "sha256": "5357f13bba9809ab509ba9517d8c488b78d0aa869b1165b604b4fb14370db9de",
+      "bytes": 5459,
+      "mode": "0644"
+    },
+    "report-ja.md": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/report-ja.md",
+      "sha256": "14d3af68dda24c363a69ddacf6598034e8ee1f280ac2bb69304870731ba20eeb",
+      "bytes": 7021,
+      "mode": "0644"
+    },
+    "verification-plan.json": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/verification-plan.json",
+      "sha256": "6abf8b9af9b3910add3dba25e6cf468b29cf7abb6288e11aad2e0d51f0b26795",
+      "bytes": 2026,
+      "mode": "0644"
+    },
+    "current-intake.json": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/current-intake.json",
+      "sha256": "8cdc910eb95c151baca5395323ab6ec67c90de880c763f8a4db0d050694a285f",
+      "bytes": 1139,
+      "mode": "0644"
+    },
+    "measurement_config.before.py": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/measurement_config.before.py",
+      "sha256": "a8ebba943c2e0c13119a3d659e927f6bcffc6fa4b0c5c9f880e54950164bcdc1",
+      "bytes": 5304,
+      "mode": "0644"
+    },
+    "measurement_config.after.py": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/measurement_config.after.py",
+      "sha256": "befb5c39f4c57b8d1c5fa2df2d63889ae78dfa7fa5b3c6f2acfc5c0426824d60",
+      "bytes": 5590,
+      "mode": "0644"
+    },
+    "measurement_config406_tests.py": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/measurement_config406_tests.py",
+      "sha256": "1d7de213773b2adae788897fcfb4262891e94a4c0a97a64ba172d704f6264619",
+      "bytes": 2574,
+      "mode": "0644"
+    },
+    "authoring-refusal.json": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/authoring-refusal.json",
+      "sha256": "147c57ef717b826274980b19dbd43ebf0b9c999979897aa3b7be27aee1a84a9f",
+      "bytes": 609,
+      "mode": "0644"
+    },
+    "0.Main-before.gz": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/0.Main-before.gz",
+      "sha256": "18bec989b55e460df01cb066ad73b34bbcd8f0cd33e5b184a61a87568d2a1d30",
+      "bytes": 27593,
+      "mode": "0644"
+    },
+    "1.Main-before.gz": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/1.Main-before.gz",
+      "sha256": "edef2861d31190f3df13c4fe355198ccdcc9a68ce7b1ed865357122ac2654874",
+      "bytes": 11462,
+      "mode": "0644"
+    }
+  },
+  "subjects": [
+    {
+      "relative": "crates/quoridor-ai/src/alphabeta.rs",
+      "owner": "OWN managed source",
+      "before": {
+        "sha256": "6f4e0de3ed051453d686c8c89e64ea1a10b39b0d0cae00c8217b4b82458389c7",
+        "bytes": 134772
+      },
+      "after": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/crates/quoridor-ai/src/alphabeta.rs",
+        "sha256": "8cf67e49726a2fa1f5111edd47e47bfe159a0f938de4358734cf7acc568ed79c",
+        "bytes": 141279,
+        "mode": "0644"
+      },
+      "composed_expected_sha256": null
+    },
+    {
+      "relative": "crates/quoridor-runner/src/measurement.rs",
+      "owner": "OWN managed source",
+      "before": {
+        "sha256": "a77d2f488d46a4f0f53086f0509f3519c8433c5ddaa7f27828a14b3007cb614a",
+        "bytes": 47121
+      },
+      "after": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/crates/quoridor-runner/src/measurement.rs",
+        "sha256": "10fa50416ce1ea72327cdf8481d26391b5a75d300d82240e0782aee71364b29a",
+        "bytes": 51422,
+        "mode": "0644"
+      },
+      "composed_expected_sha256": null
+    },
+    {
+      "relative": "crates/quoridor-ai/src/zero_stock406_tests.rs",
+      "owner": "OWN managed source",
+      "before": "ABSENT",
+      "after": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/crates/quoridor-ai/src/zero_stock406_tests.rs",
+        "sha256": "fb619aac864d34e0a0cf27793bbc89848d93dbe0da25c6b09bf6478c821eb50e",
+        "bytes": 14583,
+        "mode": "0644"
+      },
+      "composed_expected_sha256": null
+    },
+    {
+      "relative": "scripts/dev/research-lifecycle.py",
+      "owner": "measurement_config function only",
+      "before": {
+        "sha256": "408b15efaa3af1cfc9b49e2d4f08ee6a41d9ef2a6ad16327ce32cf0737ae5bd3",
+        "bytes": 221796
+      },
+      "after": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/measurement_config.after.py",
+        "sha256": "befb5c39f4c57b8d1c5fa2df2d63889ae78dfa7fa5b3c6f2acfc5c0426824d60",
+        "bytes": 5590,
+        "mode": "0644"
+      },
+      "composed_expected_sha256": "ec13745424d996d0771cbc756db8c9b816b13d8fe19cdb666cbc4ef2f3bf38d8"
+    }
+  ],
+  "protected": {
+    "control": "bbdae50c3123aec32fc1710049600002300856cdd0a9ea1ddfae62b6c2085ab9",
+    "enter": "feb84a014ead727461606d99339264c96b7542658f5180822364350705961855",
+    "ordered": "d7cfadd8d8154555bf9f92614d292fcf9602fd18a8b50b1cb8c25bd960fa0f42",
+    "shared_signed_ordering": "0f0d5438c68ee62818727d20b9ee43cd726dfca9f7b638a9933393d1cf801c8f",
+    "eager_ordered": "0edc9a644a5b9e9f550f72988ff5873b3bb22c30b4ff4472a0c52045c35c1288",
+    "prepared_moves": "4e5e80565ceac35eb1d3bf788ea1327b1f16afb6e596f114451fbd81cada4cda",
+    "ordering_scores": "0e4b4a11fe4f9d9578cdda5e1a5f7fed24a45c992ace287f397bf9d0bba396d8",
+    "negamax": "de8447d5ce75938d5b1a6241ad59e773b968cc7845aac527e6aa50067224da4c",
+    "lmr_allowed": "1b86412e3701dc616d820af5612a69b38928a9e8e68de3d4d0cdace7f57b0620",
+    "reduced_child": "d973d338ebc4e4532b71f8136a0f488711a963ed9ce3ce3548682fac311537c1",
+    "root_depth": "4b5e71e21733ea2fc17c5cfbeea142029e5cb804045ffb32a38f916dfbbbe215",
+    "TT_key_history_fingerprint_depth_bounds_capacity_replacement_generation": true,
+    "evaluator_accumulator_scratch_distance_model_math": true,
+    "child_OFF_make_fingerprint_path_pool_advance_delta_control_negamax_undo": true,
+    "PV_only_stops_at_actual_approx_leaf": true,
+    "measurement_root_spec": "35cd9b65d0ebdb4935b34beab9d20e661a3f2c7e73f739d5d00fb6fe8078e3af",
+    "measurement_prepare_roots": "e1b1c924ee9d7dd9e5ae5c2712661bb24d330ecce0cb94bb6582e7894b0cd926",
+    "measurement_evaluator_binding": "b5f19f55f08d3a60363172009639a59f234153e292c793ae643cef708ffb8477",
+    "measurement_load_evaluator": "35661a6520d3623ae622e799b5aedcf42b900bc415e935c008b85892b1bc57be",
+    "measurement_drive": "93da93837550e380b98774e971bd0a254c45b2dcf574d5f18cf78e68dafde04b",
+    "measurement_validate_return": "858a7bda19785eac89b3456518e68792646583e572f4625bf8ea80694822f8a0",
+    "measurement_bytes": "ec3b4d028957bda50731e1e22b9bca902fc100212e5dc8c39ecd8c5d44f79f49",
+    "measurement_finish": "7b9e74602c434a6c7874309a3bf7f61a323dda06686a15c9a448dfcb9db51212"
+  },
+  "new_AI_tests": [
+    "zero_stock406_threshold_ranges_root_resolution_and_iterative_freeze",
+    "zero_stock406_approx_enters_once_and_bypasses_advance_head_with_exact_undo",
+    "zero_stock406_depth_zero_one_side_zero_and_off_keep_original_evaluation",
+    "zero_stock406_goal_and_threefold_precede_heuristic_without_advance",
+    "zero_stock406_cancel_cap_domain_error_and_off_advance_error_restore_parent",
+    "zero_stock406_effective_namespace_switch_reset_and_same_mode_warm_reuse",
+    "zero_stock406_float_cache_wall_key_fallback_and_parent_immutability"
+  ],
+  "new_runner_tests": [
+    "measurement406_optional_threshold_refusals_and_actual_result_metadata"
+  ],
+  "new_Rust_count": 8,
+  "new_AI_research_count": 6,
+  "new_AI_diagnostics_count": 7,
+  "new_runner_count": 1,
+  "new_Python_count": 1,
+  "software_status": "Rust UNBUILT/UNTYPED/UNRUN; Python NN0 definition UNIMPORTED/UNRUN; formatter/static proof is not software/science PASS",
+  "API": "SearchSession::set_zero_stock_approx_min_root_walls(Option<u8>)->Result; zero_stock_approx_permitted() last resolution",
+  "method": "zero-stock406-wall-distance-stm-tie-win-v1 iff resolved ON; threshold/rootcount absent from namespace; effective changes clearTT/history, same effective warm reuse, reset rootunknown OFF",
+  "result_metadata": "SearchResult.stats root_walls_remaining / zero_stock_approx_permitted / zero_stock_approx_terminations; measurement actual_selectivity/result/callback counts",
+  "eligibility": "Resolve once perSearch: optionalint0..20, 0allowall or rootstocksum>=threshold, maxdepth>max(rootstocksum,1); internal positivechilddepth/bothstocks0/true terminal excluded",
+  "math": "ds<=do =>+1 else-1 in checked nonterminal domain; approximate tree Exact/nominal depth is not game WDL",
+  "cache": "existing actual Float pooled/parent wallkey cache only, else canonical Position::wall_distance; no new cache/model/BFS; immutableparent",
+  "accounting": "approx replaces negamax enter once; make/context/path/undo unchanged; no advance/head/order on approx; OFF advance before enter preserved",
+  "Root_remaining": "necessary compile/research+diagnostics/Clippy/new8+affected3/PythonNN0one/genuineimage; one related reviewer natural boundary; Root fourprefix and saved52confusion; selected speed96 only",
+  "Beads": "read-only author; write/status/backup/close by324; leaf staysin_progress",
+  "Main_Git_index_Cargo_native_tests_Search_model_geometry_Perf_game_fit_writes_calls": 0,
+  "pause": "mixed/learner ALL preparation/pipeline and323 USERPAUSE; oldfits96/defaults/models/weights/seals/foreign/oldRAWFAILEDfeesUNKNOWN preserved",
+  "usage": {
+    "scope": "OWN406 evidence/beforegzips/format captures plus three changed Rust subjects; inode-dedup one directed postwork before finalreceipt/admin",
+    "storage_budget": null,
+    "allocated_B": 860160,
+    "regular_logical_B": 515459,
+    "files": 115,
+    "actual_FS_available_B": 505885679616,
+    "whole_global_actual": "UNKNOWN",
+    "continuous_peak": "UNKNOWN",
+    "global_decimal_cap_B": 50000000000
+  }
+}

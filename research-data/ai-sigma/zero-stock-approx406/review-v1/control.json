@@ -1,0 +1,284 @@
+{
+  "issue": "quoridor-4lc.406.2",
+  "phase": "one_fixed_source_review",
+  "fixed_subject": {
+    "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/source-STOP.json",
+    "sha256": "0c9a80d025b4dd7c5cb588149403e1189f3183d50415822e80879b8c20f5ba9c",
+    "bytes": 47900,
+    "mode": "0644"
+  },
+  "source_clear": true,
+  "blockers": [],
+  "ordinary": [],
+  "actual_context": {
+    "cwd": "/workspaces/quoridor",
+    "model": "gpt-6.1-sol",
+    "effort": "max",
+    "sandbox": "danger-full-access",
+    "approval_policy": "never",
+    "verified_timestamp": "2026-10-15T03:15:24.157Z"
+  },
+  "selected_before": [
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/source-STOP.json",
+      "sha256": "0c9a80d025b4dd7c5cb588149403e1189f3183d50415822e80879b8c20f5ba9c",
+      "bytes": 47900,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-policy/zero-stock-approx-speed-20261015.md",
+      "sha256": "bd0beb285c3c75a9ffdf7092ba7ae484c3deb47c40019a3ea93dcb5e212b1046",
+      "bytes": 13110,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/zero-stock406.patch",
+      "sha256": "6f6497f90bd6b754f7a9c977a1b062f142505b311e4cf368cb23ede62c8f9016",
+      "bytes": 35246,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/static-proof.json",
+      "sha256": "5357f13bba9809ab509ba9517d8c488b78d0aa869b1165b604b4fb14370db9de",
+      "bytes": 5459,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/verification-plan.json",
+      "sha256": "6abf8b9af9b3910add3dba25e6cf468b29cf7abb6288e11aad2e0d51f0b26795",
+      "bytes": 2026,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/crates/quoridor-ai/src/alphabeta.rs",
+      "sha256": "8cf67e49726a2fa1f5111edd47e47bfe159a0f938de4358734cf7acc568ed79c",
+      "bytes": 141279,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/crates/quoridor-runner/src/measurement.rs",
+      "sha256": "10fa50416ce1ea72327cdf8481d26391b5a75d300d82240e0782aee71364b29a",
+      "bytes": 51422,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/zero-stock406.inverse.patch",
+      "sha256": "b95b543123d434e7e92b5da37274a0c0faba8fda017144c150cc93b9ba2a030a",
+      "bytes": 35246,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/0.Main-before.gz",
+      "sha256": "18bec989b55e460df01cb066ad73b34bbcd8f0cd33e5b184a61a87568d2a1d30",
+      "bytes": 27593,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/1.Main-before.gz",
+      "sha256": "edef2861d31190f3df13c4fe355198ccdcc9a68ce7b1ed865357122ac2654874",
+      "bytes": 11462,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/measurement_config.before.py",
+      "sha256": "a8ebba943c2e0c13119a3d659e927f6bcffc6fa4b0c5c9f880e54950164bcdc1",
+      "bytes": 5304,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/measurement_config.after.py",
+      "sha256": "befb5c39f4c57b8d1c5fa2df2d63889ae78dfa7fa5b3c6f2acfc5c0426824d60",
+      "bytes": 5590,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/measurement_config406_tests.py",
+      "sha256": "1d7de213773b2adae788897fcfb4262891e94a4c0a97a64ba172d704f6264619",
+      "bytes": 2574,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/crates/quoridor-ai/src/zero_stock406_tests.rs",
+      "sha256": "fb619aac864d34e0a0cf27793bbc89848d93dbe0da25c6b09bf6478c821eb50e",
+      "bytes": 14583,
+      "mode": "0644"
+    }
+  ],
+  "selected_after": [
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/source-STOP.json",
+      "sha256": "0c9a80d025b4dd7c5cb588149403e1189f3183d50415822e80879b8c20f5ba9c",
+      "bytes": 47900,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-policy/zero-stock-approx-speed-20261015.md",
+      "sha256": "bd0beb285c3c75a9ffdf7092ba7ae484c3deb47c40019a3ea93dcb5e212b1046",
+      "bytes": 13110,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/zero-stock406.patch",
+      "sha256": "6f6497f90bd6b754f7a9c977a1b062f142505b311e4cf368cb23ede62c8f9016",
+      "bytes": 35246,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/static-proof.json",
+      "sha256": "5357f13bba9809ab509ba9517d8c488b78d0aa869b1165b604b4fb14370db9de",
+      "bytes": 5459,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/verification-plan.json",
+      "sha256": "6abf8b9af9b3910add3dba25e6cf468b29cf7abb6288e11aad2e0d51f0b26795",
+      "bytes": 2026,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/crates/quoridor-ai/src/alphabeta.rs",
+      "sha256": "8cf67e49726a2fa1f5111edd47e47bfe159a0f938de4358734cf7acc568ed79c",
+      "bytes": 141279,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/crates/quoridor-runner/src/measurement.rs",
+      "sha256": "10fa50416ce1ea72327cdf8481d26391b5a75d300d82240e0782aee71364b29a",
+      "bytes": 51422,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/zero-stock406.inverse.patch",
+      "sha256": "b95b543123d434e7e92b5da37274a0c0faba8fda017144c150cc93b9ba2a030a",
+      "bytes": 35246,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/0.Main-before.gz",
+      "sha256": "18bec989b55e460df01cb066ad73b34bbcd8f0cd33e5b184a61a87568d2a1d30",
+      "bytes": 27593,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/1.Main-before.gz",
+      "sha256": "edef2861d31190f3df13c4fe355198ccdcc9a68ce7b1ed865357122ac2654874",
+      "bytes": 11462,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/measurement_config.before.py",
+      "sha256": "a8ebba943c2e0c13119a3d659e927f6bcffc6fa4b0c5c9f880e54950164bcdc1",
+      "bytes": 5304,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/measurement_config.after.py",
+      "sha256": "befb5c39f4c57b8d1c5fa2df2d63889ae78dfa7fa5b3c6f2acfc5c0426824d60",
+      "bytes": 5590,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/measurement_config406_tests.py",
+      "sha256": "1d7de213773b2adae788897fcfb4262891e94a4c0a97a64ba172d704f6264619",
+      "bytes": 2574,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/crates/quoridor-ai/src/zero_stock406_tests.rs",
+      "sha256": "fb619aac864d34e0a0cf27793bbc89848d93dbe0da25c6b09bf6478c821eb50e",
+      "bytes": 14583,
+      "mode": "0644"
+    }
+  ],
+  "before_after_exact": true,
+  "selected_reader_STOP": "2026-10-15T03:26:13.395266+00:00",
+  "reader_exit_observed_at": "2026-10-15T03:26:13.400985+00:00",
+  "source_subject_maps": [
+    {
+      "relative": "crates/quoridor-ai/src/alphabeta.rs",
+      "strict_forward_inverse_exact": true,
+      "before": {
+        "sha256": "6f4e0de3ed051453d686c8c89e64ea1a10b39b0d0cae00c8217b4b82458389c7",
+        "bytes": 134772
+      },
+      "after": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/crates/quoridor-ai/src/alphabeta.rs",
+        "sha256": "8cf67e49726a2fa1f5111edd47e47bfe159a0f938de4358734cf7acc568ed79c",
+        "bytes": 141279,
+        "mode": "0644"
+      }
+    },
+    {
+      "relative": "crates/quoridor-runner/src/measurement.rs",
+      "strict_forward_inverse_exact": true,
+      "before": {
+        "sha256": "a77d2f488d46a4f0f53086f0509f3519c8433c5ddaa7f27828a14b3007cb614a",
+        "bytes": 47121
+      },
+      "after": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/crates/quoridor-runner/src/measurement.rs",
+        "sha256": "10fa50416ce1ea72327cdf8481d26391b5a75d300d82240e0782aee71364b29a",
+        "bytes": 51422,
+        "mode": "0644"
+      }
+    },
+    {
+      "relative": "crates/quoridor-ai/src/zero_stock406_tests.rs",
+      "strict_forward_inverse_exact": true,
+      "before": "ABSENT",
+      "after": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/crates/quoridor-ai/src/zero_stock406_tests.rs",
+        "sha256": "fb619aac864d34e0a0cf27793bbc89848d93dbe0da25c6b09bf6478c821eb50e",
+        "bytes": 14583,
+        "mode": "0644"
+      }
+    }
+  ],
+  "Python_function_only_before_after": [
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/measurement_config.before.py",
+      "sha256": "a8ebba943c2e0c13119a3d659e927f6bcffc6fa4b0c5c9f880e54950164bcdc1",
+      "bytes": 5304,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/measurement_config.after.py",
+      "sha256": "befb5c39f4c57b8d1c5fa2df2d63889ae78dfa7fa5b3c6f2acfc5c0426824d60",
+      "bytes": 5590,
+      "mode": "0644"
+    }
+  ],
+  "Root_software_notices": [
+    {
+      "origin": "Root factual message; not reexecuted or separately audited by reviewer",
+      "source_composition": "7bf4e3a4",
+      "Python_new1": "reported PASS",
+      "first_BUILD_v2": "FAILED E0063 existing Settings fixture literal missing optional field",
+      "outer_s": 9.486728283998673,
+      "new_Rust_assertions": 0,
+      "Search_calls": 0,
+      "fixture_only_repair": "7aa63d742c0e68053386aa0899a52df8ebe50c2b",
+      "repair_before": "437981d0/4875",
+      "repair_after": "45b3debd/4931",
+      "complete_failed_manifest_emitted": false,
+      "current_v3_success": "NOT_INFERRED"
+    }
+  ],
+  "Beads_status_backup_close_owner": "324 only; reviewer no Beads operations; leaf remains in_progress until Root acceptance",
+  "resources": {
+    "source_CPU": [14],
+    "guardian_CPU": [0],
+    "family_RSS_B": 805306368,
+    "GPU": 0,
+    "source_AS_B": 536870912,
+    "guardian_AS_soft_B": 134217728,
+    "host_reserve_B": 4294967296,
+    "continuous_family_peak": "UNKNOWN"
+  },
+  "new_source_function_native_model_Search_geometry_calls": 0,
+  "future407_in_scope": false,
+  "current_next_reservation": null,
+  "owned_remaining": [],
+  "original405_artifacts_unchanged": true,
+  "metadata_writer_STOP": "2026-10-15T03:28:32.261859+00:00"
+}

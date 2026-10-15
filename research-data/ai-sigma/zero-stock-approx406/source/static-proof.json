@@ -1,0 +1,107 @@
+{
+  "status": "STATIC_EXACT_SOURCE_PASS",
+  "roundtrip": "EXACT_FORWARD_INVERSE_NEW_ABSENCE",
+  "protected": {
+    "control": "bbdae50c3123aec32fc1710049600002300856cdd0a9ea1ddfae62b6c2085ab9",
+    "enter": "feb84a014ead727461606d99339264c96b7542658f5180822364350705961855",
+    "ordered": "d7cfadd8d8154555bf9f92614d292fcf9602fd18a8b50b1cb8c25bd960fa0f42",
+    "shared_signed_ordering": "0f0d5438c68ee62818727d20b9ee43cd726dfca9f7b638a9933393d1cf801c8f",
+    "eager_ordered": "0edc9a644a5b9e9f550f72988ff5873b3bb22c30b4ff4472a0c52045c35c1288",
+    "prepared_moves": "4e5e80565ceac35eb1d3bf788ea1327b1f16afb6e596f114451fbd81cada4cda",
+    "ordering_scores": "0e4b4a11fe4f9d9578cdda5e1a5f7fed24a45c992ace287f397bf9d0bba396d8",
+    "negamax": "de8447d5ce75938d5b1a6241ad59e773b968cc7845aac527e6aa50067224da4c",
+    "lmr_allowed": "1b86412e3701dc616d820af5612a69b38928a9e8e68de3d4d0cdace7f57b0620",
+    "reduced_child": "d973d338ebc4e4532b71f8136a0f488711a963ed9ce3ce3548682fac311537c1",
+    "root_depth": "4b5e71e21733ea2fc17c5cfbeea142029e5cb804045ffb32a38f916dfbbbe215",
+    "TT_key_history_fingerprint_depth_bounds_capacity_replacement_generation": true,
+    "evaluator_accumulator_scratch_distance_model_math": true,
+    "child_OFF_make_fingerprint_path_pool_advance_delta_control_negamax_undo": true,
+    "PV_only_stops_at_actual_approx_leaf": true,
+    "measurement_root_spec": "35cd9b65d0ebdb4935b34beab9d20e661a3f2c7e73f739d5d00fb6fe8078e3af",
+    "measurement_prepare_roots": "e1b1c924ee9d7dd9e5ae5c2712661bb24d330ecce0cb94bb6582e7894b0cd926",
+    "measurement_evaluator_binding": "b5f19f55f08d3a60363172009639a59f234153e292c793ae643cef708ffb8477",
+    "measurement_load_evaluator": "35661a6520d3623ae622e799b5aedcf42b900bc415e935c008b85892b1bc57be",
+    "measurement_drive": "93da93837550e380b98774e971bd0a254c45b2dcf574d5f18cf78e68dafde04b",
+    "measurement_validate_return": "858a7bda19785eac89b3456518e68792646583e572f4625bf8ea80694822f8a0",
+    "measurement_bytes": "ec3b4d028957bda50731e1e22b9bca902fc100212e5dc8c39ecd8c5d44f79f49",
+    "measurement_finish": "7b9e74602c434a6c7874309a3bf7f61a323dda06686a15c9a448dfcb9db51212"
+  },
+  "subjects": [
+    {
+      "relative": "crates/quoridor-ai/src/alphabeta.rs",
+      "owner": "OWN managed source",
+      "before": {
+        "sha256": "6f4e0de3ed051453d686c8c89e64ea1a10b39b0d0cae00c8217b4b82458389c7",
+        "bytes": 134772
+      },
+      "after": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/crates/quoridor-ai/src/alphabeta.rs",
+        "sha256": "8cf67e49726a2fa1f5111edd47e47bfe159a0f938de4358734cf7acc568ed79c",
+        "bytes": 141279,
+        "mode": "0644"
+      },
+      "composed_expected_sha256": null
+    },
+    {
+      "relative": "crates/quoridor-runner/src/measurement.rs",
+      "owner": "OWN managed source",
+      "before": {
+        "sha256": "a77d2f488d46a4f0f53086f0509f3519c8433c5ddaa7f27828a14b3007cb614a",
+        "bytes": 47121
+      },
+      "after": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/crates/quoridor-runner/src/measurement.rs",
+        "sha256": "10fa50416ce1ea72327cdf8481d26391b5a75d300d82240e0782aee71364b29a",
+        "bytes": 51422,
+        "mode": "0644"
+      },
+      "composed_expected_sha256": null
+    },
+    {
+      "relative": "crates/quoridor-ai/src/zero_stock406_tests.rs",
+      "owner": "OWN managed source",
+      "before": "ABSENT",
+      "after": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/crates/quoridor-ai/src/zero_stock406_tests.rs",
+        "sha256": "fb619aac864d34e0a0cf27793bbc89848d93dbe0da25c6b09bf6478c821eb50e",
+        "bytes": 14583,
+        "mode": "0644"
+      },
+      "composed_expected_sha256": null
+    },
+    {
+      "relative": "scripts/dev/research-lifecycle.py",
+      "owner": "measurement_config function only",
+      "before": {
+        "sha256": "408b15efaa3af1cfc9b49e2d4f08ee6a41d9ef2a6ad16327ce32cf0737ae5bd3",
+        "bytes": 221796
+      },
+      "after": {
+        "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/measurement_config.after.py",
+        "sha256": "befb5c39f4c57b8d1c5fa2df2d63889ae78dfa7fa5b3c6f2acfc5c0426824d60",
+        "bytes": 5590,
+        "mode": "0644"
+      },
+      "composed_expected_sha256": "ec13745424d996d0771cbc756db8c9b816b13d8fe19cdb666cbc4ef2f3bf38d8"
+    }
+  ],
+  "new_AI_tests": [
+    "zero_stock406_threshold_ranges_root_resolution_and_iterative_freeze",
+    "zero_stock406_approx_enters_once_and_bypasses_advance_head_with_exact_undo",
+    "zero_stock406_depth_zero_one_side_zero_and_off_keep_original_evaluation",
+    "zero_stock406_goal_and_threefold_precede_heuristic_without_advance",
+    "zero_stock406_cancel_cap_domain_error_and_off_advance_error_restore_parent",
+    "zero_stock406_effective_namespace_switch_reset_and_same_mode_warm_reuse",
+    "zero_stock406_float_cache_wall_key_fallback_and_parent_immutability"
+  ],
+  "new_runner_tests": [
+    "measurement406_optional_threshold_refusals_and_actual_result_metadata"
+  ],
+  "new_Rust_count": 8,
+  "native": "UNBUILT/UNTYPED/UNRUN",
+  "Python_test_definition": {
+    "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/measurement_config406_tests.py",
+    "sha256": "1d7de213773b2adae788897fcfb4262891e94a4c0a97a64ba172d704f6264619"
+  },
+  "Main_Git_Cargo_native_Search_model_tests": 0
+}

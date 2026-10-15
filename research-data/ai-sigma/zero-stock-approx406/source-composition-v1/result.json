@@ -1,0 +1,46 @@
+{
+  "commit": "7bf4e3a4a3497158e9458a22b8814e1069e52e5b",
+  "source_STOP": {
+    "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-approx406-v1/source-STOP.json",
+    "sha256": "0c9a80d025b4dd7c5cb588149403e1189f3183d50415822e80879b8c20f5ba9c",
+    "bytes": 47900,
+    "mode": "0644"
+  },
+  "subjects": [
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-ai/src/alphabeta.rs",
+      "sha256": "8cf67e49726a2fa1f5111edd47e47bfe159a0f938de4358734cf7acc568ed79c",
+      "bytes": 141279,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/measurement.rs",
+      "sha256": "10fa50416ce1ea72327cdf8481d26391b5a75d300d82240e0782aee71364b29a",
+      "bytes": 51422,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-ai/src/zero_stock406_tests.rs",
+      "sha256": "fb619aac864d34e0a0cf27793bbc89848d93dbe0da25c6b09bf6478c821eb50e",
+      "bytes": 14583,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+      "sha256": "ec13745424d996d0771cbc756db8c9b816b13d8fe19cdb666cbc4ef2f3bf38d8",
+      "bytes": 222082,
+      "mode": "0644"
+    }
+  ],
+  "all_postimages_match": true,
+  "Python": "function-only literal sparse replacement; outside publisher bytes unchanged",
+  "Rust": "exact full beforeimage guard then fixed postimage; no concurrent source changes",
+  "foreign_unchanged": {
+    "path": "/workspaces/quoridor/.devcontainer/update-toolchain.sh",
+    "sha256": "19e82f23d60324251dcfed285cc95c48a9c3a4fec98cb87fa8e5a80d87b34b93",
+    "bytes": 4885,
+    "mode": "0777"
+  },
+  "new_native_or_Search_calls": 0,
+  "source_scope_only": "Necessary software and one related review remain; no performance/adoption claim"
+}

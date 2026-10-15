@@ -413,3 +413,11 @@ wholeは6root body・setup/drop・採点・key保存/cache・再探索込みの�
 406の距離＋手番raceを固定した速度比較とは分け、共通Searchで近似方法を選べる設定を後続差分として準備する。最初はraceの±1と既存固定D(0,8,tanh)の二方法のみ。発動可否の設定から方法を独立させ、方法省略時はrace、発動無効時は通常Searchを維持する。既存固定Dの評価正本を再用し、別の評価器やplaceholder solver modeを作らない。有効な方法を既存TT method／resetと各Searchの解決済み設定へ反映する。
 
 406 sourceの自然な凍結境界から私有準備は可能だが、現406の式・image・入力・96 callsを変更せず、その入口gateにしない。Main統合と影響softwareは406の実速度計測STOP後とする。追加の数値範囲は現結果後に定め、今回の計画追加から新しいSearch／arena／fitは発行しない。製品・generator既定、モデル、全明示USERPAUSEは維持する。
+
+## 零在庫近似leafの共通境界（406）
+
+`zero_stock_approx_min_root_walls` は省略/nullでOFF、厳密整数0..20。root残壁S0について閾値0、またはS0>=閾値という条件を開始時に一度解決し、max_depth<=max(S0,1)なら内部正深さで発動できないためOFFにする。rootは通常比較を続ける。既存childのmake/履歴/path後、真のgoal/threefoldを優先したうえで許可ON・双方stock0・正深さだけ、NNUE advance/head前に既存enterを一度呼んで距離raceの非終局±1へ打切る。通常depth0とOFFの会計・undo/error/cancelを維持する。
+
+実効方式の変化は既存TT method/resetへ束縛し、閾値やS0を重複した資格へしない。同方式warm再利用を保つ。ゲームのfullhistory資格・depth/boundは緩めず、近似入り名目depthと木内TT Exactをゲームexact WDLや通常全幅深さへ読み替えない。結果にS0・解決済み許可・近似終了数と実methodを保存する。今回のRaceは近似であり、既存真終端とは別である。
+
+初回96 callsと保存52fixtureの結果は[研究findings](../research-findings.md)および[固定run報告](../../research-data/ai-sigma/zero-stock-approx406/final-results-v1/report-ja.md)に統合した。実装は研究option/既定OFFを保持し、対局・一般棋力・既定昇格をこの速度試行から認定しない。407の方法選択は別差分であり、元406比較を再実行しない。
