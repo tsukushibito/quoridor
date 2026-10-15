@@ -54,7 +54,10 @@ fn settings403_typed_profile_methods_match_factory_and_reject_unsupported_names(
                 lmr,
             )
             .unwrap();
-            assert_eq!(session.namespace(), &profile.namespace(base, lmr));
+            assert_eq!(
+                session.namespace(),
+                &profile.namespace(base, lmr.then_some(LmrMethod::FixedOne))
+            );
             assert_eq!(
                 session.namespace().selectivity,
                 format!(
