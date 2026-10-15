@@ -317,7 +317,7 @@ fn call(
     drop(session);
     let complete = complete && restored;
     let fatal = fatal || !restored;
-    let row = json!({"id":id,"parent":parent,"evaluator":["N","D"][engine],"parent_horizon":depth,
+    let row = json!({"id":id,"parent":parent,"evaluator":(["N","D"][engine]),"parent_horizon":depth,
         "forced_action":forced,"forced_child_depth":forced.map(|_| depth-1),"child_nonroot_ply":forced.map(|_|1),
         "window":["-infinity","+infinity"],"status":if complete {"COMPLETE"} else {"UNKNOWN"},
         "requested_value_bits":if complete {observation["value_bits"].clone()} else {Value::Null},
