@@ -484,8 +484,10 @@ mod tests {
     #[test]
     fn lmr416_h0_reserves_before_return_and_never_refills_interruption() {
         let (_, c, path) = parent();
-        let mut o = LmrObservation::default();
-        o.iteration = 4;
+        let mut o = LmrObservation {
+            iteration: 4,
+            ..Default::default()
+        };
         let f = facts(&c, 3, 0);
         o.begin(&c, &path, f);
         assert_eq!(o.branches().count(), 1);
