@@ -443,3 +443,15 @@ wholeは6root body・setup/drop・採点・key保存/cache・再探索込みの�
 可変方式は研究用opt-inとして保持し、固定1手を省略時の既存methodとして残す。製品/実generatorのLMR既定OFFとモデル/数学/TT履歴資格は変更しない。係数最適性・正式strength・Cheap昇格を認定せず、追加candidate/履歴補正/tuning/追試を自動発行しない。原arenaの入場前output forecast拒否はFAILEDのまま保持し、出力上限とfreshpathsだけを修復して真正未入場128を一度実施した。
 
 費用・全分布・元FAILEDを含むsoftware/数値outer、source/独立確認/設定/原結果の保存範囲は[有限結果](../../research-data/ai-sigma/lmr-adaptive408/report-ja.md)へ。全費・物理NNforward・孤立部位費・連続RSSはUNKNOWNで、nested時計とTT gaugesを重ねて加算しない。旧400/402/406/407/409は別subjectのまま、全明示USERPAUSEを維持する。
+
+### 零在庫近似の共通TT・距離修復後の有限結果（410、2026-10-15）
+
+近似leafをbest無しの専用TT種別へ分離し、root/internal/depth0と混ぜず、board/fullhistory/depth/domain/namespaceを保って再利用する修復を採用した。ordinary固定Dと近似は同じbounded invocation距離ownerを使い、exact H/V-key Float map借用・零在庫でのlazy canonical pair・既存scalar fallbackを共有する。近似式と許可条件、true goal/threefold優先、NNUE advance/head/ordering省略と復元は維持した。
+
+同一新image b11a8b15/Build ca249a2fでO=近似OFF、R=Race0、D=FixedD近似0を各評価器O/R/D/D/R/Oで一度比較した。同じ4真正prefix/cold-warm、Control/LMR OFF/PVS/TT1048576/depth8/4M/timeなしの96calls/48sessions/384Mcap、実137,872,128nodes、72COMPLETE/24UNKNOWN。UNKNOWNは残壁6のcold/warmで4M NodeLimit/completed6を維持。同条件二反復はstatus/valuebits/action/PV/depth/work一致で、異方式は仕事・値が違う。
+
+whole中央値O/R/DはNNUE15.079874/14.390586/16.038762秒、固定D評価器6.562165/7.117642/5.949861秒。R/Oは0.954291/1.084648、D/Oは1.063587/0.906692で、一律の改善ではない。NNUE OFF片passのjournal0.994899秒（他0.042687秒）をwholeに含むため、NNUE Raceの中央値差を探索本体だけの利益へ読み替えない。固定D Raceはnodesが減ってもfallback呼出が12.562M→14.466Mに増えたが、時計のない部位の因果費を断定しない。TT leaf hitは計測されたが、probe/hit/recompute/terminationとgenericTTの内包分母を足し合わせない。
+
+共通の正しさ/所有修復を保持し、Race/FixedDは明示research option、零在庫近似の既定無効を維持する。一般速度優位・棋力・exact WDL・最適閾値は認定せず、追加tuning/再計測/対局/学習は発行しない。旧406との違いはcode/時刻も変わるため修復単独の因果差ではない。別412の人間選択で通常研究LMR ON/depth_rankを採用することと、この凍結LMR OFF比較を区別する。
+
+必要12Rust確認とClippy/release、同担当のsource/有限解釈clear0/0、全root冷温/深さ/clock/work、元FAILED/UNKNOWN・費・STOPは[有限結果](../../research-data/ai-sigma/zero-stock-approx-repair410/report-ja.md)へ。元software outer117.174701675秒（FAILED込み）、数値outer200.926285211秒を一度ずつ数えnestedを足さない。物理NN・連続RSS・全source/LLM/admin費はUNKNOWN。411の数学/履歴/厳密leafは別subjectで、旧RAW/models/seals/defaults/全USERPAUSEを保持する。
