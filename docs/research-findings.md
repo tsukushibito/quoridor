@@ -1876,3 +1876,13 @@ wholeは6root body・setup/drop・採点・key保存/cache・再探索込みの�
 必要softwareは新6＋影響4のordering確認、設定／幾何新4Rust、共通準備NN0新1、必要compile/research＋diagnostics Clippy／真正releaseと限定source関連確認を使用。元のfixture InvalidPosition/Result unwrap、proof/guard/helper/collectorの失敗・費・NULL/returnedとpersisted masksは原scopeで保持し、成功suiteを再演していない。非重複数値outerは848.439982407s、元失敗を含む必要software五job outerは231.679882676s。nested native/guardian/sequenceを加算しない。source/LLM/admin/saved解析の全費はUNKNOWN、個別receiptは別に保存。実STOP/directwait/reap/handles/freshidentity/TMP消失と一回のaffected実使用を記録し、共有targetは正の増分だけを扱う。
 
 設定・原結果・source/修復・software/review・失敗・STOPは[保存receipt](../research-data/ai-sigma/shared-signed-ordering402/receipt.json)、[結果報告](../research-data/ai-sigma/shared-signed-ordering402/report-ja.md)へ結ぶ。旧393/398不採用・旧400結果・全RAW/FAILED/費UNKNOWN、oldfits96/defaults/weights/seals、foreign devcontainer変更は不変。
+
+### 固定壁・零在庫の相互draw有限確認と履歴縮約（404、2026-10-15）
+
+合法な実20壁63配置の全有効非終端駒位置・手番618,330状態を調べた保存結果は、盤面グラフW331,200／L287,130／D0だった。壁無し移動グラフの対照1配置10,242状態（W5,760／L4,482／D0）は、標準の合法な零在庫20壁局面と分ける。今回、双方の最善が循環となる具体例は見つからなかったが、全壁配置のD不存在、履歴付きdraw不存在、最短距離だけでの勝敗判定は未証明である。原335のhistory依存draw60は変更せず、双方が最善に循環する例とは扱わない。
+
+独立確認した条件付きの理論は、固定壁・零在庫・合法な非終端履歴・goal優先の自動threefold（時間／ply上限等を含まない）における、このrootのexact WDLの縮約である。正しいHistoryKeyの既往2回集合Eへの非goal入場をdraw終端へ送り、current rootがE内なら同じ出辺を持つ入辺0の初期専用コピーから開始する。その他の既往0回と1回は区別しなくてよい。勝利attractorのrank厳減経路は再訪せずEを避ける。Dを維持すれば有限状態でthreefoldとなり、DからWへの逸脱後はD内prefixとW/L勝利経路が非交差なので、新たな2回keyによるdraw短縮も起こらない。これがroot exact WDLに限る根拠であり、最短勝ち手数・有限heuristic値・通常αβ TT bound・任意descendantへの同じtableの再利用は対象外。途中を新rootとするならEとroot例外を更新する。通常TTからの履歴削除、現役solver変更、方式採用は行っていない。
+
+有限scopeと縮約の関連独立確認はblockers0／ordinary0、math_claim_clear=true。元finite readerSTOP00:29:20.507217Z、関連論理文書STOP00:35:57.281074Zを区別し、成功計算の再実行は0。元数学commandはCPU5／AS512MiB／CPU30s・2process直接exit0。保存analyze scalar合計0.7385032909660367秒は全job/source/LLM費ではなく、全費・連続peakはUNKNOWN。初回closed leafへのsend拒否とRoot JSONDecodeError、旧RAW/FAILED/費も保持する。これは将来の安いexact solver候補の論拠であり、新実装・科学実行・TT変更の許可ではない。
+
+[元報告と証明](../research-data/ai-sigma/zero-stock-mutual-draw404/report.md)、[exact保存receipt](../research-data/ai-sigma/zero-stock-mutual-draw404/receipt.json)に小さい原JSON入力／結果、数学用Python2fileと二段階のreview/STOPを保存した。これらは凍結run証拠で、現役計算入口や恒常source mirrorにしない。mixed／learner全prep/pipelineと323 USERPAUSE、製品／generator既定、models/weights/sealsは不変。

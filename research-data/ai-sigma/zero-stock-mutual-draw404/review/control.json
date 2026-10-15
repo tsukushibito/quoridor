@@ -1,0 +1,190 @@
+{
+  "issue": "quoridor-4lc.404.1",
+  "parent": "quoridor-4lc.404",
+  "review_clear": true,
+  "blockers": [],
+  "ordinary": [],
+  "general_theorem": "UNKNOWN; no short valid proof established",
+  "exact_scope": "63 legal20-wall zero-stock layouts plus one zero-wall pawn-only control; not all legal wall layouts; not all historical draw absence",
+  "selected_before": [
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-policy/zero-stock-mutual-draw-20261015/check_graph.py",
+      "sha256": "ad80f33f247b942bc20fecc1620a6c26c9b7a177692545c2a57bb247ac9bee4c",
+      "bytes": 8031,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-policy/zero-stock-mutual-draw-20261015/find_layout.py",
+      "sha256": "836db032f96d30ab38667c3e2b572417189f39f9255b7cb564408d78d5e254fc",
+      "bytes": 1746,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-policy/zero-stock-mutual-draw-20261015/graph-result-v1.json",
+      "sha256": "16c86d64fd9a3b6acf1deb3f7373207cdb63169b2a78e99811b08f8d414196a4",
+      "bytes": 978,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-policy/zero-stock-mutual-draw-20261015/layout-results-v1.json",
+      "sha256": "841da2d070f2a81599ddaf841a06ed257bd00c847850d7143ce83ce1f7f0ce9e",
+      "bytes": 27382,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-core/src/position.rs",
+      "sha256": "faeae19ecd6427724e7c5e0a7880025c06ed5cd9e1cf6ab2bea41c2756730300",
+      "bytes": 21758,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-core/src/research.rs",
+      "sha256": "0b87fb3e269278516d84674c21ad0a351288e1f9c2f4a7e219f14345f0e708fe",
+      "bytes": 34167,
+      "mode": "0644"
+    }
+  ],
+  "selected_after": [
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-policy/zero-stock-mutual-draw-20261015/check_graph.py",
+      "sha256": "ad80f33f247b942bc20fecc1620a6c26c9b7a177692545c2a57bb247ac9bee4c",
+      "bytes": 8031,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-policy/zero-stock-mutual-draw-20261015/find_layout.py",
+      "sha256": "836db032f96d30ab38667c3e2b572417189f39f9255b7cb564408d78d5e254fc",
+      "bytes": 1746,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-policy/zero-stock-mutual-draw-20261015/graph-result-v1.json",
+      "sha256": "16c86d64fd9a3b6acf1deb3f7373207cdb63169b2a78e99811b08f8d414196a4",
+      "bytes": 978,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-policy/zero-stock-mutual-draw-20261015/layout-results-v1.json",
+      "sha256": "841da2d070f2a81599ddaf841a06ed257bd00c847850d7143ce83ce1f7f0ce9e",
+      "bytes": 27382,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-core/src/position.rs",
+      "sha256": "faeae19ecd6427724e7c5e0a7880025c06ed5cd9e1cf6ab2bea41c2756730300",
+      "bytes": 21758,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-core/src/research.rs",
+      "sha256": "0b87fb3e269278516d84674c21ad0a351288e1f9c2f4a7e219f14345f0e708fe",
+      "bytes": 34167,
+      "mode": "0644"
+    }
+  ],
+  "facts": {
+    "layouts": 64,
+    "unique_wall_sets": 64,
+    "zero_wall_control": 1,
+    "20_wall_cases": 63,
+    "active_states_sum": 628572,
+    "W": 336960,
+    "L": 291612,
+    "D": 0,
+    "all_census_match": true,
+    "saved_Bellman_strict_rank_all": true,
+    "inner_analyze_seconds_sum": 0.7385032909660367,
+    "inner_seconds_not_full_job_fees": true,
+    "solver_or_target_execution": 0,
+    "new_graph_or_BFS_calculation": 0,
+    "input_layout_file_read": false
+  },
+  "reader_STOP": "2026-10-15T00:29:20.507217+00:00",
+  "worker": {
+    "pid": 926076,
+    "start_ticks": "7259798",
+    "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+  },
+  "CPU": [
+    7
+  ],
+  "AS_B": 536870912,
+  "GPU": 0,
+  "context_verified": {
+    "cwd": "/workspaces/quoridor",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "sandbox": "danger-full-access",
+    "approval": "never"
+  },
+  "recipient": {
+    "issue": "quoridor-4lc.404",
+    "thread": "01a12fdc-f6ec-7e93-9cfc-4bedb3ea1e94"
+  },
+  "retained_reader_refusals": [
+    "named rg history.rs/rules.rs absent exit2; corrected to existing research.rs, no production execution",
+    "ready/show bounded previews truncated; only relevant assigned leaf and parent used"
+  ],
+  "old335_draw60": "historical facts reused only as background, not reclassified or rerun",
+  "production_science_calls": 0,
+  "own_artifact_refs": [
+    {
+      "path": "/workspaces/quoridor/.artifacts/zero-stock-mutual-draw404-review-v1/report-ja.md",
+      "sha256": "145bd13c89b5380fd332c0a349bd6d97329dbf94396fde0ca9ee9feca25aec67",
+      "bytes": 6461,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/zero-stock-mutual-draw404-review-v1/findings.json",
+      "sha256": "116ac5d5834ddb65faa47ff810968d19384f9fa5d0110ab81f7f9528b4c43936",
+      "bytes": 634,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/zero-stock-mutual-draw404-review-v1/facts.json",
+      "sha256": "1f5b86988d9f03a7483ed59e64bea25acd580a281a4ba2adc45763fbe888fdac",
+      "bytes": 436,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/zero-stock-mutual-draw404-review-v1/STOP.json",
+      "sha256": "d6f05836ed90f38d00aa87bf56eda9c768656e1ef3ff2f26f9716ba4cb3687b7",
+      "bytes": 1042,
+      "mode": "0644"
+    }
+  ],
+  "formatting": {
+    "JSON": "stdlib indent=2, newline",
+    "Markdown": "manual scoped formatting; no production/helper code added"
+  },
+  "state": "completed_verified_closed_backed_up_delivered",
+  "Beads": {
+    "leaf": "quoridor-4lc.404.1",
+    "status_verified": "closed",
+    "assignee_preserved": "codex:01a118a1-aef1-7252-b21b-42f07dd5b1e6",
+    "closed_at": "2026-10-15T00:31:09Z",
+    "backup_before_close": "sync exit0",
+    "backup_after_close": "sync exit0",
+    "parent_closed": false
+  },
+  "delivery": {
+    "issue": "quoridor-4lc.404",
+    "thread": "01a12fdc-f6ec-7e93-9cfc-4bedb3ea1e94",
+    "method": "turn/steer",
+    "turn": "01a13ced-5668-7381-945b-337a5a0fa4e0",
+    "accepted": true,
+    "count": 1,
+    "directwait_exit": 0,
+    "ACK_wait": false,
+    "Policy_copy": false
+  },
+  "affected_usage": {
+    "path": "/workspaces/quoridor/.artifacts/zero-stock-mutual-draw404-review-v1",
+    "files": 5,
+    "logical_B": 14998,
+    "allocated_B": 24576,
+    "directed_measurement_count": 1,
+    "global_walk": false,
+    "control_usage_field_appended_after_measurement": true
+  }
+}

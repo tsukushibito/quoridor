@@ -1,0 +1,60 @@
+{
+  "issue": "quoridor-4lc.404.1",
+  "phase": "related-two-count-v1",
+  "math_claim_clear": true,
+  "blockers": [],
+  "ordinary": [],
+  "exact_root_WDL_projection": "board graph + original count2 HistoryKeys + initial-only root clone if root count2; goal priority",
+  "general_all_layouts_D_absence": "UNKNOWN unchanged",
+  "source_solver_scientific_execution": 0,
+  "reader": "NOT_ENTERED",
+  "logic_STOP": "2026-10-15T00:34:41.209546+00:00",
+  "ownership": "private related proof only; original review artifacts immutable",
+  "limitations": [
+    "finite-depth heuristic/TT bound not established",
+    "shortest winning distance not established",
+    "all intermediate-root table reuse not established",
+    "external time/ply/overflow outcomes excluded"
+  ],
+  "own_refs": [
+    {
+      "path": "/workspaces/quoridor/.artifacts/zero-stock-mutual-draw404-review-v1/related-two-count-v1/report-ja.md",
+      "sha256": "e9f6365f9603ff07327898edbeef5397d4b0959913f2221ad843d2f01af41ae3",
+      "bytes": 5364,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/zero-stock-mutual-draw404-review-v1/related-two-count-v1/STOP.json",
+      "sha256": "aee9253ced24a2e259739af476db8636f3287a8b931de2e483430f7aa9ee7b20",
+      "bytes": 820,
+      "mode": "0644"
+    }
+  ],
+  "logical_refinement": "A winning W/L rank path after an opponent exits the static D-prefix cannot meet the preceding D vertices; that specific prefix-induced draw concern is unnecessary. Main exact-WDL claim remains valid.",
+  "final_logic_STOP": "2026-10-15T00:35:57.281074+00:00",
+  "Beads_comment": {
+    "id": "edea5781-2cb6-51b9-8676-39adc11f27d9",
+    "existing_verified_closed_leaf_preserved": true,
+    "reclose": false
+  },
+  "delivery": {
+    "thread": "01a12fdc-f6ec-7e93-9cfc-4bedb3ea1e94",
+    "issue": "quoridor-4lc.404",
+    "turn": "01a13ced-5668-7381-945b-337a5a0fa4e0",
+    "method": "turn/steer",
+    "accepted": true,
+    "count_this_related_question": 1,
+    "directwait_exit": 0,
+    "ACK_wait": false
+  },
+  "backup_sync": "exit0 after Beads comment; existing closure unchanged",
+  "state": "related_logical_confirmation_verified_delivered",
+  "affected_usage": {
+    "files": 3,
+    "logical_B": 8346,
+    "allocated_B": 16384,
+    "directed_once": true,
+    "global_walk": false,
+    "control_usage_field_added_after_measurement": true
+  }
+}

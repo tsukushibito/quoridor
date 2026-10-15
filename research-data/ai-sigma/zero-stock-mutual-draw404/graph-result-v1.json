@@ -1,0 +1,53 @@
+{
+  "issue": "quoridor-4lc.404",
+  "pid": 919023,
+  "affinity": [
+    5
+  ],
+  "AS_bytes": 536870912,
+  "CPU_seconds": 30,
+  "rule": "Fixed walls; infinite-play draws analyzed, not forged historical counts",
+  "cases": [
+    {
+      "name": "empty-walls-baseline",
+      "walls": [],
+      "active_nonterminal_states": 10242,
+      "W": 5760,
+      "L": 4482,
+      "D": 0,
+      "elapsed_seconds": 0.019897781006875448,
+      "Bellman_and_strict_rank": true
+    },
+    {
+      "name": "accepted335-walls",
+      "walls": [
+        145,
+        146,
+        150,
+        151,
+        152,
+        161,
+        162,
+        166,
+        167,
+        168,
+        177,
+        178,
+        182,
+        183,
+        184,
+        193,
+        194,
+        198,
+        199,
+        200
+      ],
+      "active_nonterminal_states": 10242,
+      "W": 5760,
+      "L": 4482,
+      "D": 0,
+      "elapsed_seconds": 0.01060035199043341,
+      "Bellman_and_strict_rank": true
+    }
+  ]
+}
