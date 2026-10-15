@@ -1,0 +1,147 @@
+{
+  "at": "2026-10-15T23:14:43.713075+00:00",
+  "operational_status": "FAILED_UNCHANGED",
+  "saved_data_status": "ORIGINAL8_CLOSED_AND_VALIDATED",
+  "original_candidate": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/sigma-alpha420-arena8-v1/execution-v1/operation/candidate.json",
+    "sha256": "c2c0c6b5015095612caabc07de248a3798f667c0aa91303154b85adb086b8365",
+    "bytes": 6409,
+    "mode": "0644"
+  },
+  "authoritative_manifest": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/sigma-alpha420-arena8-v1/execution-v1/operation/manifest.json",
+    "sha256": "f6002f9b13b20721977001167d359a79f9d039a988fca7df06395091ebf7a5ff",
+    "bytes": 8257,
+    "mode": "0644"
+  },
+  "original_outer": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/sigma-alpha420-v1/arena8-entry-v2/job/result.json",
+    "sha256": "8e40fbc796a414a6f1d9964d1e2f9de4f16ffbbb84aef8a1049492c2735ad35e",
+    "bytes": 503,
+    "mode": "0600"
+  },
+  "original_log": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/sigma-alpha420-v1/arena8-entry-v2/job/output.log",
+    "sha256": "8fb03bed721eaecf7dced1a2b0e53cf79befffeb711b85fe8e37d6ff832e49e0",
+    "bytes": 5982,
+    "mode": "0644"
+  },
+  "original_job_config": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/sigma-alpha420-v1/arena8-entry-v2/job/config.json",
+    "sha256": "ab758102d4cf6c597d77df4a346ebdb119e0fee26b1dfe574feb3777bb7869c2",
+    "bytes": 875,
+    "mode": "0600"
+  },
+  "source_repair": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/sigma-alpha420-v1/arena-collector-repair-v1/proof.json",
+    "sha256": "2246f370f81f808227201fdfb76f95d986349539b485857f6a6ddc064e9c26ad",
+    "bytes": 1184,
+    "mode": "0644"
+  },
+  "original_outer_seconds_once": 272.2813386610069,
+  "native_seconds_nested": 271.37208637801814,
+  "nested_times_not_added": true,
+  "native_and_original_collection_STOP": "2026-10-15T23:11:50.207890+00:00",
+  "native_direct_reaped": true,
+  "native_handles_closed": true,
+  "original_returned_masks": "completed",
+  "original_persisted_masks": "pending",
+  "original_persisted_finalization": "attempted",
+  "identities": [
+    {
+      "original": {
+        "pid": 2650918,
+        "start_ticks": "15402273",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "current": null
+    },
+    {
+      "original": {
+        "pid": 2650863,
+        "start_ticks": "15402197",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "current": null
+    }
+  ],
+  "validated_saved_data": {
+    "status": "PASS",
+    "files": [
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/sigma-alpha420-arena8-v1/execution-v1/data/completed.jsonl.gz",
+        "sha256": "33b44cf7b4c98c049bea8807aae8dc49c657d25c0f9eb94586870c9b402a148a",
+        "bytes": 177885,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/sigma-alpha420-arena8-v1/execution-v1/data/result.json",
+        "sha256": "c5ff0613a4228093f258221aef6d995183b2b0762222b564496f13f7e54fcc66",
+        "bytes": 3838,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/sigma-alpha420-arena8-v1/execution-v1/data/manifest.json",
+        "sha256": "596da9ba526d198da0a8457a603b009922d96016bb14d26fcbe03a83cf1ffde5",
+        "bytes": 21176,
+        "mode": "0644"
+      }
+    ],
+    "errors": [],
+    "planned_slots": 8,
+    "observed_local_games": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "missing_local_games": [],
+    "batch": 0,
+    "global_campaign_complete": false,
+    "planned_global_slots": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ]
+  },
+  "original_native_summary": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/sigma-alpha420-arena8-v1/execution-v1/data/result.json",
+    "sha256": "c5ff0613a4228093f258221aef6d995183b2b0762222b564496f13f7e54fcc66",
+    "bytes": 3838,
+    "mode": "0644"
+  },
+  "census": {
+    "planned_games": 8,
+    "started_games": 8,
+    "completed_games": 8,
+    "unknown_games": 0,
+    "complete_pairs": 4,
+    "incomplete_pairs": 0,
+    "unknown_reasons": {}
+  },
+  "actual_front_rows": 5145,
+  "actual_arena_rows": 74503,
+  "actual_total_rows": 79648,
+  "inference_work": {
+    "capture_rows": 0,
+    "executed_rows": 74503,
+    "failed_rows": 0,
+    "failed_warm_rows": 0,
+    "logical_rows": 74503,
+    "physical_rows": 74503,
+    "warm_rows": 0
+  },
+  "optional419_auxiliary": 0,
+  "new_native_Search_games_or_inference": 0,
+  "scope": "Eight saved fixed-D2 exploratory games only; original operation remains FAILED; no general strength/Elo/100ms/WDL or same-work speed claim",
+  "owned_readers_children_jobs_handles_TMP_leases": []
+}

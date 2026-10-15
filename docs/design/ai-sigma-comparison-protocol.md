@@ -105,3 +105,11 @@ NNUE/D/Sigmaの審判だけでなく内部αβ/PVS・MCTS・solverにもこの�
 教師zは採用自己対局方策のSTM実勝敗で、raw value/rootmean/最適WDLではない。z0除外後の条件付き目標、同入力の別結果、観測rowとgameの重みを分ける。BESTのtrain欄は固定8192行の診断、historical game_equalは入力group均等、saturationの閾値は当該sourceに束縛する。開封Vはschedule/BEST選定集合で、game/history不明のrow splitと同入力重複の限界を保持する。
 
 418はread-onlyの前提訂正・競合説明の整理で、単独の弱さ原因や改善策の効果を特定していない。[統合分析と原参照](../../research-data/ai-sigma/nnue-premise418/report-ja.md)を参照する。新しい教師/世代weight/モデル/学習やsealed評価をこの分析から自動採用せず、旧mixed/learner全prep/pipeline・323 USERPAUSEを維持する。
+
+### Sigma valueを共通αβへ接続した有限比較（420）
+
+native runnerの明示`engine.kind=sigma_value`は、現在のSigma featuresと`OrtBackend`を用いる同期CPU STM static evaluatorである。measurementとarenaは同じfactoryを使い、portable AI/Wasmへnative依存を入れない。policyを探索順序へ渡さず、policy/value同時graphの費用を含める。単一所有backendの排他と累積logical-row上限を用い、TT/session/gameのresetで上限を取り直さない。kind・model/library SHA・CPU FP32/batch1/ORT設定をtyped identityへ束縛し、pathと消費予算を評価の同一性へ混ぜない。terminal-first、backend error/nonfinite/range/cancel/予算終了、通常の完全履歴・親復元を共通入口に委ね、0値や浅いfallbackへ変換しない。
+
+420の同深さ比較は、固定6親の24探索（D1/D2、各50k nodes）と固定4系統二色8局（双方D2、各手50k、時間上限なし、200ply）に限る。Control/PVS/TT1M、LMR/Cheap/近似/safe leaf OFFを実設定へ保存した。CPU参照5＋親5,140＋対局74,503＝79,648 logical rows、各段の上限100k/200kと全体300kを実receiptから照合した。8局のSigma6勝2敗は探索的な共有系譜の観測であり、同時間棋力、MCTS/policy対照、一般優越、教師・αβの適否を確定しない。
+
+保存後consumerの欠落も原運用失敗として保持する。native8局の原結果はclosedで、外側FAILEDの理由はSigma typed-kindを照合候補へ入れ忘れたことだった。同じ実image・原RAW・原candidateを保ち、収集器の一箇所だけを通常修復して独立した保存再検証を残す。FAILEDをPASSへ書き換えず、完了した科学呼出しを再演しない。[実設定・結果・限定確認・費用と限界](../../research-data/ai-sigma/sigma-alpha420/report-ja.md)に束縛する。新学習、追加対局、LMR方式、製品/generator既定、414の未発行計測はこの比較から変更しない。

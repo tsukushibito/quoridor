@@ -1,0 +1,74 @@
+{
+  "issue": "quoridor-4lc.420",
+  "status": "FINITE_SAVED_ANALYSIS_COMPLETE_ORIGINAL_ARENA_OPERATION_FAILED",
+  "archive": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/sigma-alpha420/saved-sequence.json.gz",
+    "sha256": "529b9003e8cea6c58f33ec7b41d03f2a6ed103a6a3c8ae397cd6f9c1431eb645",
+    "bytes": 5111356,
+    "mode": "0644"
+  },
+  "exact_selected_files": 984,
+  "archive_roundtrip": true,
+  "original_arena_outcome": "FAILED",
+  "native_exit": 0,
+  "separate_saved_validation": "PASS8",
+  "analysis": {
+    "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/analysis-completion.json",
+    "sha256": "1b7d1c10e80fae894501013a459c7db5285275ff11a5e2ccae752c9f3da7fa76",
+    "bytes": 24945,
+    "mode": "0644"
+  },
+  "software": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/sigma-alpha420-v1/software-acceptance.json",
+    "sha256": "d106b97bb65e08aa4cc8acd41185e27e474dc1b2a3e6f5abb739dd7dcc65022c",
+    "bytes": 4008,
+    "mode": "0644"
+  },
+  "source_acceptance": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/sigma-alpha420-v1/collector-source-acceptance.json",
+    "sha256": "ff87c837f2e57e86859a74983dfd82c5332b886b8e8692b0e1bd4e7a6a762315",
+    "bytes": 1433,
+    "mode": "0644"
+  },
+  "original_parent_collection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/sigma-alpha420-v1/parents24-v1/collection.json",
+    "sha256": "68b2bba6cb8e0523ee2500ade2a5857cfd4e6a50b786383224215ce537567933",
+    "bytes": 195516,
+    "mode": "0644"
+  },
+  "original_arena_collection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/sigma-alpha420-v1/arena8-entry-v2/collection.json",
+    "sha256": "bc49bd3404003824b5b321adf7c8b676995d4fb19a9caf756883f8d1f0f7a4e3",
+    "bytes": 4850,
+    "mode": "0644"
+  },
+  "original_CPU_reference": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/sigma-alpha420-v1/reference5-v1/collection.json",
+    "sha256": "10ecf661ab9723de049fa92ce964bbd1edaba6843c45a9118d42be66f955c1b7",
+    "bytes": 4521,
+    "mode": "0644"
+  },
+  "searches": 24,
+  "complete_searches": 24,
+  "UNKNOWN_searches": 0,
+  "parent_nodes": 9628,
+  "games": 8,
+  "complete_pairs": 4,
+  "Sigma_WDL": [6, 0, 2],
+  "accepted_D2": 458,
+  "arena_nodes": 158219,
+  "arena_static_evaluations": 126524,
+  "actual_total_logical_rows": 79648,
+  "ordinary_denominator_note": [
+    {
+      "id": "O1",
+      "scope": "saved counter denominator",
+      "finding": "game.nn_calls fields0 and physical_nn_calls null do not supply Sigma Alpha inference totals; use backend74503/global and static eval counts separately",
+      "blocking": false
+    }
+  ],
+  "new_scientific_calls": 0,
+  "all_LLM_source_admin_total_fees": "UNKNOWN",
+  "important_new_causal_or_general_strength_adoption": false,
+  "pauses_defaults_models_seals_oldRAWFAILED": "preserved; new421 separate"
+}

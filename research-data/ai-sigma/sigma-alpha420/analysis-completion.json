@@ -1,0 +1,763 @@
+{
+  "issue": "quoridor-4lc.420.3",
+  "status": "FINITE_SAVED_ANALYSIS_COMPLETE_VERIFIED_OWNER_CLOSED_BACKED_UP",
+  "operational_arena_status": "FAILED_UNCHANGED",
+  "separate_saved_data_validation": "PASS8",
+  "selected_refs": [
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/report-ja.md",
+      "sha256": "28c3b5b13e423752cf17b0655ece68dd692d795ea7d8f962a8d7fb10b2398989",
+      "bytes": 13058,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/control.json",
+      "sha256": "254d186b9cb4ec3a91290f5f93d9f4d581a9889e6c31a5a40976e5a2164d938c",
+      "bytes": 1091,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/analysis-result.json",
+      "sha256": "76667b8aed839b69e2d474682b1f0bf395ef30ccf8b1e7c18eabb217e587a55a",
+      "bytes": 77296,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/parents24.tsv",
+      "sha256": "14ae11311102ba969037c90069539664386b99c2ba445f3201bb061bccd0fc96",
+      "bytes": 8286,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/findings.json",
+      "sha256": "c1aa3262885b5088406741d037681e91bb1afeb83a0ebdd50d3d0a37741d56b0",
+      "bytes": 483,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/selectedrefs-before-after.json",
+      "sha256": "faf7b6294c79f9c8a31d508765f3c265b7c4ea2b87e300f86461e0dacba8dfe4",
+      "bytes": 8554,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/reader-STOP.json",
+      "sha256": "a0a14f978962097e4810bbe1bc55b1d8956b0368a6849c697947dcfd3b60a7e2",
+      "bytes": 435,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/raw-extract-receipt.json",
+      "sha256": "81c610e0d50ff26592751875b5d7ba70478d0b013cce7de51d24003b7291e310",
+      "bytes": 1210,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/STOP.json",
+      "sha256": "4fe0baf1b7964b58def713889c3b2e8fa5cfaeacdd5a6af5ce6d446f0af0a28b",
+      "bytes": 17085,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/verification.json",
+      "sha256": "9acef978f80c1da1a565d94829caa7819845b9b2405a1cd0f7da3e6bf8c0ff2f",
+      "bytes": 1370,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/final-saved-verification-receipt.json",
+      "sha256": "742d198e355948eb62496e5807cf041f58cd0dc58001f58f129524204c63d8b1",
+      "bytes": 1210,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/usage.json",
+      "sha256": "1a3eed6fbc3d6f331c31a6bf38a457e238a7449d1b36240fb2822e4d06521f25",
+      "bytes": 644,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/beads-close-receipt.json",
+      "sha256": "3dc1950efcd43315a90736691c44ea599d09b16c9480f62da88b50c68c337f38",
+      "bytes": 1400,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/beads-backup-receipt.json",
+      "sha256": "7f121e6c8d1ffefda53155986a4b16c31ddb1fa834a277f419fdec65bdd0911c",
+      "bytes": 1209,
+      "mode": "0644"
+    }
+  ],
+  "source_raw_reader_STOP": "2026-10-15T23:21:19.628270+00:00",
+  "source_raw_reader_directwait_reap": "2026-10-15T23:21:19.631961+00:00",
+  "original_scientific_native_collection_STOP": "2026-10-15T23:11:50.207890+00:00",
+  "original_saved_collection_guard_STOP": "2026-10-15T23:14:43.794360+00:00",
+  "final_saved_verification_reap": "2026-10-15T23:40:48.776066+00:00",
+  "owner_closed_at": "2026-10-15T23:41:25Z",
+  "same_assignee_preserved": true,
+  "backup_receipt": {
+    "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/beads-backup-receipt.json",
+    "sha256": "7f121e6c8d1ffefda53155986a4b16c31ddb1fa834a277f419fdec65bdd0911c",
+    "bytes": 1209,
+    "mode": "0644"
+  },
+  "guard_receipts": [
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/render-report-receipt.json",
+      "sha256": "34424b077dc8be300f59abc7f22f1c3de44ee7260ec87b8afc29f6a1b88adf93",
+      "bytes": 1209,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/final-saved-verification-receipt.json",
+      "sha256": "742d198e355948eb62496e5807cf041f58cd0dc58001f58f129524204c63d8b1",
+      "bytes": 1210,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/ruff-extractor-check-receipt.json",
+      "sha256": "214176a9b7115764652801d85fc4bd811226f5400ec98651c34d97f43e5abcb4",
+      "bytes": 1332,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/raw-extract-receipt.json",
+      "sha256": "81c610e0d50ff26592751875b5d7ba70478d0b013cce7de51d24003b7291e310",
+      "bytes": 1210,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/ruff-final-format-check-receipt.json",
+      "sha256": "3a1294b3d343fc1f5de28493b6b2c937afa890353a776971fe728d5d453a7f17",
+      "bytes": 1209,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/beads-verified-receipt.json",
+      "sha256": "bee80d077c5a37b4d389166590943cd7c525ae4c2c104cf310e72c9c8b8243c6",
+      "bytes": 1209,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/reference-private-check-receipt.json",
+      "sha256": "21f11ceb6143c59ea634f09553c2fa453a78a648c9b31dfd50ca89f2ee2fb2fc",
+      "bytes": 1210,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/beads-ready-receipt.json",
+      "sha256": "a413f4b6e48cf64074435c43c16c731e8603c5f162bc007f83f89b4fa4c31599",
+      "bytes": 1212,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/beads421-addendum-note-receipt.json",
+      "sha256": "459433a0432ce9d47c84b716e2fdf94198af75562208455e4d34a42149318661",
+      "bytes": 1399,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/ruff-analysis-format-receipt.json",
+      "sha256": "eb3a90e77be5c480f80941827be5cfecd7fabad18d267c35e51351bee7024503",
+      "bytes": 1209,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/prettier-report-write-receipt.json",
+      "sha256": "0ea032179567b97d60ef893f0da7a8357683d540ef94b41e47cc232d2ff188ec",
+      "bytes": 1209,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/native-private-view-receipt.json",
+      "sha256": "1c16bc95e158e762c7406742254b899cf9bb392ae2fae078353716220d45a042",
+      "bytes": 1211,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/ruff-final-helpers-check-receipt.json",
+      "sha256": "1219ca2cd4420eabd300dc90ef6d0dc48e3d1fd5997af4151af8c3d0bfbea5bb",
+      "bytes": 1331,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/ruff-analysis-check-receipt.json",
+      "sha256": "d671f958ec48306595b7fe1673ad8b1fc4b65a086d11401ca853f368c6bedc98",
+      "bytes": 1330,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/metadata-intake-receipt.json",
+      "sha256": "c4b3b06f8ff56402a403b934fd932fe230532a96821890a35333be6a451911b0",
+      "bytes": 1211,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/saved-arithmetic-receipt.json",
+      "sha256": "bbf89e7fccd050f0e017ae757c8c4445ce0460a40c8cf0a813b75f6c273abb98",
+      "bytes": 1210,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/ruff-extractor-format-receipt.json",
+      "sha256": "8b36a67f2e7e7a49510f3aef41c76f0383a33b1718d5bce0330529fe0d02cd51",
+      "bytes": 1209,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/ruff-final-helpers-format-receipt.json",
+      "sha256": "16207ebaab26c413d960dbb2259b7ec6932cecd20f43457d6f0a571c2cc8fd6b",
+      "bytes": 1209,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/schema-intake-receipt.json",
+      "sha256": "9445c8cda4aa79c63ea94a2db329b31a2c640aabef97aabfe955d94fdb5fa8f3",
+      "bytes": 1212,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/extracted-view-receipt.json",
+      "sha256": "313b575dd8151b19e48600043ff3c8d65aa0c697a2333a2aa1249880bbaa523c",
+      "bytes": 1211,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/saved-arithmetic-final-receipt.json",
+      "sha256": "85e4b9a3ea5c397758f79effd2a7ff94c6b05894bdf07b4ae3d43083d5e78f4e",
+      "bytes": 1211,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/beads-close-receipt.json",
+      "sha256": "3dc1950efcd43315a90736691c44ea599d09b16c9480f62da88b50c68c337f38",
+      "bytes": 1400,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/beads-show-receipt.json",
+      "sha256": "561cd133338a358ed7fb9f64243c61d8d47b0f37d9c17b623ffacb87ff5090b2",
+      "bytes": 1400,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/beads-start-receipt.json",
+      "sha256": "fcfb6449088bcd9edffafa354c3ab1f011ad53d790d4a4658fad68c00f2117a6",
+      "bytes": 1588,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/schema-private-view-receipt.json",
+      "sha256": "78ee9d861dd02ff6784cc8fe5ed21aff25ea6688b312156a10f8b3c73025ac0d",
+      "bytes": 1211,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/beads-backup-receipt.json",
+      "sha256": "7f121e6c8d1ffefda53155986a4b16c31ddb1fa834a277f419fdec65bdd0911c",
+      "bytes": 1209,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/sigma-alpha420-analysis-v1/prettier-report-check-receipt.json",
+      "sha256": "e25bee4ddcc237b606670cc0b09b85610c8d98f3ab6d5a955c8f53478f2d347b",
+      "bytes": 1208,
+      "mode": "0644"
+    }
+  ],
+  "fresh_exact_identities": [
+    {
+      "original": {
+        "pid": 2705375,
+        "start_ticks": "15595283",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2705376,
+        "start_ticks": "15595286",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2706874,
+        "start_ticks": "15603225",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2706875,
+        "start_ticks": "15603227",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2673506,
+        "start_ticks": "15486315",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2673507,
+        "start_ticks": "15486317",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2673510,
+        "start_ticks": "15486321",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2673511,
+        "start_ticks": "15486324",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2706869,
+        "start_ticks": "15603218",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2706870,
+        "start_ticks": "15603220",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2707853,
+        "start_ticks": "15606367",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2707854,
+        "start_ticks": "15606370",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2705378,
+        "start_ticks": "15595292",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2705379,
+        "start_ticks": "15595294",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2667986,
+        "start_ticks": "15469799",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2667987,
+        "start_ticks": "15469801",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2708156,
+        "start_ticks": "15607050",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2708157,
+        "start_ticks": "15607053",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2708161,
+        "start_ticks": "15607056",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2700402,
+        "start_ticks": "15571950",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2700403,
+        "start_ticks": "15571954",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2706820,
+        "start_ticks": "15603075",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2706821,
+        "start_ticks": "15603078",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2670541,
+        "start_ticks": "15477035",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2670542,
+        "start_ticks": "15477037",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2705369,
+        "start_ticks": "15595264",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2705370,
+        "start_ticks": "15595266",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2700406,
+        "start_ticks": "15571961",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2700407,
+        "start_ticks": "15571965",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2669228,
+        "start_ticks": "15473262",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2669229,
+        "start_ticks": "15473264",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2700410,
+        "start_ticks": "15571970",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2700418,
+        "start_ticks": "15571974",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2673502,
+        "start_ticks": "15486308",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2673503,
+        "start_ticks": "15486311",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2705365,
+        "start_ticks": "15595254",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2705366,
+        "start_ticks": "15595257",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2669948,
+        "start_ticks": "15475626",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2669949,
+        "start_ticks": "15475628",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2694425,
+        "start_ticks": "15546266",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2694426,
+        "start_ticks": "15546268",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2705373,
+        "start_ticks": "15595273",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2705374,
+        "start_ticks": "15595276",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2707979,
+        "start_ticks": "15606673",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2707982,
+        "start_ticks": "15606676",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2707992,
+        "start_ticks": "15606681",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2668074,
+        "start_ticks": "15469951",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2668075,
+        "start_ticks": "15469955",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2668086,
+        "start_ticks": "15469959",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2669132,
+        "start_ticks": "15473007",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2669133,
+        "start_ticks": "15473009",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2669137,
+        "start_ticks": "15473013",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2669138,
+        "start_ticks": "15473017",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2670318,
+        "start_ticks": "15476485",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2670319,
+        "start_ticks": "15476487",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2708210,
+        "start_ticks": "15607270",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2708211,
+        "start_ticks": "15607273",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2706833,
+        "start_ticks": "15603173",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    },
+    {
+      "original": {
+        "pid": 2706840,
+        "start_ticks": "15603176",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh_state": "absent"
+    }
+  ],
+  "sampled_family_RSS_max_B": 264327168,
+  "continuous_family_RSS_peak": "UNKNOWN",
+  "TMP_created": [],
+  "handles": [],
+  "children": [],
+  "jobs": [],
+  "leases": [],
+  "owned": [],
+  "metadata_writer_current": {
+    "pid": 2710037,
+    "start_ticks": "15613747",
+    "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+  },
+  "metadata_directwait_receipt": "completion-and-usage-receipt.json",
+  "new_native_Search_forward_game_test_build_solver_bootstrap": 0,
+  "model_library_image_payload_read": 0,
+  "important_new_causal_strength_default_grant": false,
+  "all_previous_pauses_defaults_models_RAWFAILED_fees_UNKNOWN": "PRESERVED",
+  "421_distinct_dependency": "421.1 fixedspec delivered and accepted; originalfutureinputs/results pending sameclaimant, no420publication gate",
+  "actual_metadata_at": "2026-10-15T23:42:33.981887+00:00"
+}

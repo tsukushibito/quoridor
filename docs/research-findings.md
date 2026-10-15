@@ -2100,3 +2100,19 @@ H3の同親とslot5/ply12では固定4endpointを同時置換しても、別の�
 旧1280の途中RAW/STOP/費、323/旧fits96、封印newE、既存モデル、製品/generatorの省略時既定、foreign変更は保持する。421内の候補重みを正式採用・棋力改善とする許可ではない。解決したseed・入力・実資源・設定と結果はこの節と既存設計へ統合し、状態と担当はBeadsに残す。
 
 421の[固定spec](../.worktree/arena-generalization377/.artifacts/research-team/nnue-diverse421-analysis-v1/spec.json)は生成各手4M nodesを選択した。旧408の固定D/Control/depth_rank・cold family34で名目D6完成の累積1,431,825 nodesが同work二反復一致したことを根拠に余裕を取る選択で、新prefixでの完成保証や最適な上限ではない。全生成1G・補充なしを保つ。64 requestsを64 unique familiesと仮定せず、保守的にR<=2048/U<=64、共有INITIALと変更重み照合を含むforward設計上限4,013,502行を6M内に収める。小Rでは端数により各行の露出が4/5回を大きく超す場合があるため、実抽出回数を記録する。これらは新しい数値結果ではなく、実入力・source/software入場前の固定条件である。
+
+### Sigma valueと共通αβの同深さ有限比較（420、2026-10-15）
+
+保存ONNX `d790dac6`のSTM valueを、現在の共通αβ/PVSへnative専用の同期CPU評価器として接続した。policyはorderingへ使わず、ONNXのpolicy/value同時計算費を含める。保持済みCPU ORT library `c902c70b`、FP32/batch1/intra1/inter1、Control/PVS/TT1M、LMR・Cheap・近似・safe leaf OFFでD(0,8,tanh)と比較した。研究標準depth_rank、製品/generator既定、モデルや学習pauseは変更していない。
+
+真正な完全prefixから固定した6親×D1/D2×2評価器の24探索は全て要求深さを完了した。実仕事は9,628 nodes、Sigma推論5,140 logical/physical rows。事前の真正5状態CPU参照照合は5件ともbit一致だった。これらは有限の入力・同深さ比較であり、全局面parityや評価器の正しさ・棋力の証明ではない。
+
+続く結果盲検canonical4系統×2色の8局は、同じimage/factory、双方D2、各手50k nodes、時間上限なし、最大200plyで一度だけ実施した。全8局がgoal終局、4色pair完了、UNKNOWN0。Sigmaの結果は6勝0分2敗で、系統0/1/2は二色とも勝ち、系統3は二色とも負けた。共有系譜と419の祖先・子孫関係を保ち、8独立標本・同100ms・一般優越・Eloや旧NNUE敗戦原因へ外挿しない。保存済みnativeの4pair区間は[0.25,1.0]で、新しいbootstrapや追加対局は行っていない。
+
+対局の推論は74,503 logical/physical/executed rows、warm/failed0。参照5＋親5,140＋対局74,503＝79,648行で、前段100k・対局200k・総300kの各上限内だった。単独評価器のpolicy/value同時計算や異なる探索仕事を、同仕事速度やvalue-only費へ読み替えない。実費の外側時計と内包時計、論理行数と物理実行、TT保持量とRSSを区別する。
+
+原対局ジョブの外側結果は**FAILED**を保持する。nativeはexit0で終局・archive・直接wait/reap・cleanupを完了したが、Python収集器のtyped evaluator-kind一覧にSigma valueが欠けており、保存後の照合で拒否された。`arena_observation`の1tuple追加と新NN0定義だけを修復し、既存のhash/SIMD/LMR/完成深さ/時計/action照合を維持することを同じSol担当が限定確認した。原candidate/manifest/FAILEDは書き換えず、保存済み8局の再検証を別記録に残した。対局の再実行・補充・追加推論はない。
+
+[日本語報告・同親の候補表・設定/原結果/失敗と停止の対応](../research-data/ai-sigma/sigma-alpha420/report-ja.md)を参照。詳細は同じSol Maxによる保存解析に限り、重要な一般因果や棋力採用を追加しない。mixed/learner全prep/pipeline・323 USERPAUSE、models/weights/seals/oldfits96、foreign、全旧RAW/FAILED/費UNKNOWNを保持する。
+
+同親同深さの12比較では推奨手が全て異なった。具体例はcanonical family0の4手prefix後・H2で、Sigmaは22（pawn e3）、searched値−0.0922067612、PV22→189。Dは85（H anchor e1）、+0、PV85→59だった。色交換した別対局のgame0/1・ply4の実着手とも対応するが、双方が同じ候補を強制評価した値は未測定でUNKNOWNである。458 accepted着手は全てD2完成、fallback/error/取消0。対局の実仕事は158,219 nodes/126,524 static evaluationsで、選択snapshotとterminal workは同じため加算しない。

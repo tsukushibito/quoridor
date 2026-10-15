@@ -1,0 +1,119 @@
+{
+  "at": "2026-10-15T22:32:38.361108+00:00",
+  "status": "PASS_BOUNDED_FIVE_STATE_ADAPTER_REFERENCE",
+  "Build": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/sigma-alpha420-v1/compatible-build-v6/operation-v1/manifest.json",
+    "sha256": "5a7fb94c125ab61a80eeb3f3dfd831aaa5b77f98d80c60aefdb1aedec5b545b7",
+    "bytes": 36879,
+    "mode": "0644"
+  },
+  "artifact": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner420-sigma-value-v1",
+    "sha256": "ca0015e766346c89c9427d795e5c593637f2167e31a4416cf9788423b8817b8a",
+    "bytes": 9297344,
+    "mode": "0755"
+  },
+  "test_artifact": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner420-reference-test-v1",
+    "sha256": "5b33fd5959f79b0dadf17fa466a66c289d9286f2a5d9e4341419e6da93feb5c8",
+    "bytes": 23816168,
+    "mode": "0755"
+  },
+  "test_profile": {
+    "reason": "compiler-artifact",
+    "package_id": "path+file:///workspaces/quoridor/crates/quoridor-runner#0.1.0",
+    "manifest_path": "/workspaces/quoridor/crates/quoridor-runner/Cargo.toml",
+    "target": {
+      "kind": [
+        "lib"
+      ],
+      "crate_types": [
+        "lib"
+      ],
+      "name": "quoridor_runner",
+      "src_path": "/workspaces/quoridor/crates/quoridor-runner/src/lib.rs",
+      "edition": "2024",
+      "doc": true,
+      "doctest": true,
+      "test": true
+    },
+    "profile": {
+      "opt_level": "0",
+      "debuginfo": 0,
+      "debug_assertions": true,
+      "overflow_checks": true,
+      "test": true
+    },
+    "features": [
+      "default",
+      "measurement"
+    ],
+    "filenames": [
+      "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/debug/deps/quoridor_runner-a9c7f0d01df39743"
+    ],
+    "executable": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/debug/deps/quoridor_runner-a9c7f0d01df39743",
+    "fresh": false
+  },
+  "actual_reference": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/sigma-alpha420-v1/reference5-v1/result.json",
+    "sha256": "8375c590e3dddcd9165b1773ca83c434bcd6130b04744c219b47b67597ff6665",
+    "bytes": 1826,
+    "mode": "0644"
+  },
+  "actual_guardian": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/sigma-alpha420-v1/reference5-v1/returned-receipt.json",
+    "sha256": "395e2640257de086ded2286c09664c60fb29ed972058fec70bf5113dccf8fb49",
+    "bytes": 2671,
+    "mode": "0644"
+  },
+  "original_outer": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/sigma-alpha420-v1/reference5-v1/job/result.json",
+    "sha256": "0aa77005b4a79a483e03c33327fef2ffccaec285e53bc0fca2d795e55290bab3",
+    "bytes": 499,
+    "mode": "0600"
+  },
+  "original_job_config": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/sigma-alpha420-v1/reference5-v1/job/config.json",
+    "sha256": "e49d4997a93e0174dcf32939fc38ebc8c4412d7300ae4e7707c800c47e0db4e0",
+    "bytes": 691,
+    "mode": "0600"
+  },
+  "STOP": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/sigma-alpha420-v1/reference5-v1/STOP.json",
+    "sha256": "9ff3f976c267b2f3ef1776f82a6819eaeee20077c7fde8b260a0393fc51b5228",
+    "bytes": 393,
+    "mode": "0644"
+  },
+  "identities": [
+    {
+      "original": {
+        "pid": 2542044,
+        "start_ticks": "15187775",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "current": null
+    },
+    {
+      "original": {
+        "pid": 2542017,
+        "start_ticks": "15187743",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "current": null
+    }
+  ],
+  "attempted": 5,
+  "logical_rows": 5,
+  "physical_rows": 5,
+  "warm_rows": 0,
+  "failed_rows": 0,
+  "maximum_absolute_error": 0.0,
+  "evaluator_identity": "sigma-value-onnx-cpu:sha256:3f1f51f4c8be8e6f3f8986f8282376af82c7744b7e876c94dd36dc0cfee05856",
+  "phase100k_remaining": 99995,
+  "optional419_auxiliary": 0,
+  "original_outer_seconds_once": 1.39515089901397,
+  "nested_times_not_added": true,
+  "loaded_version_string": "UNKNOWN; library bytes pinned, existing metadata1.30.0",
+  "meaning": "Five genuine CPU raw-value/fullprefix states only; no Search/strength/whole-speed/allstate proof",
+  "owned_readers_children_jobs_handles_TMP_leases": []
+}
