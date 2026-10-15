@@ -2004,3 +2004,17 @@ accepted20285、完成snapshot20284、NNUE A fallback1、error/forfeit/期限以
 研究標準は人間が選択済みとして保持する一方、今回の主要区間から一般棋力優越は認定しない。自動refill、係数変更、新対局・持ち時間・対戦相手・学習は発行しない。原数値outer2017.211898980秒と必要standard software outer106.281226074秒を各一度、nested非加算で保存し、source/LLM/adminを含む全費はUNKNOWN。source/条件/保存解釈の限定確認clearは速度や一般棋力の資格と区別する。
 
 全設定・元RAW・失敗・費用・STOP・限定レビューは[保存結果](../research-data/ai-sigma/lmr-standard412/report-ja.md)とexact archiveにある。413追加減深候補と414計画は別scopeで、412を再演・置換しない。mixed/learner全prep/pipeline、323 USERPAUSE、models/weights/seals/oldfits96、製品/generator enable OFF、foreign変更と全旧RAW/FAILED/費UNKNOWNを保持する。
+
+### 可変LMRの追加削減三候補（413、2026-10-15）
+
+人間が選択した研究標準A=depth_rankを維持する。元qに対し、Bはd>=5/m>=16で+1（cap4）、Cはd>=7/m>=16で+2（cap5）、Dはd>=5/m>=8で+1（cap4）、いずれもq>0だけ追加しchild=d-1-extra>=1とした。root/TT/即goal/killer保護、distinct順位、通常深さの確認とfull-window PVSは共通のまま。NNUE BEST43/固定D(0,8,tanh)×Control/Cheap、TT1048576/PVS ON/LMR ON、零在庫近似・安全先着leaf OFF、真正同一image b9d515e7/Build1af3ad9eで一度比較した。
+
+探索費はABCDDCBA×4層×既存6callsの192calls/96sessions、全targetD8、5×2M+1×8Mの元node上限を保持した。実576M nodes、全192 UNKNOWN NodeLimit、完成深さ5..7でD8完了0。同method二反復の非時計root/request/valuebits/action/PV/workは一致。setup/drop込みwholeの対A比B/C/DはNNUE Control=.989094/.978443/.967070、NNUE Cheap=1.015429/1.004659/.993431、固定D Control=1.068525/1.003123/1.032891、固定D Cheap=1.088953/1.010769/1.077291。異なる選択木・値・仕事量の上限到達費であり、D8完成速度や同仕事speedupではない。Cの追加scoutは各層二pass208–210件で、counterは途中中断を含む開始件数、回避nodes/ply/利益ではない。
+
+同時間対局は各候補LEFT対A RIGHT、4層×3対照×旧408の同16family×二色=384 unique/entered/returned、192 complete色pair、383goal+1threefold draw、UNKNOWN0。100ms authority receipt/5ms reserve、1M nodes safety、nominal depth64/200plyを固定した。候補のscore（保存family95%区間）はNNUE Control B=.4375[.3125,.5625]、C=.359375[.21875,.5]、D=.46875[.34375,.59375]、NNUE Cheap B=.5[.375,.625]、C=.4375[.3125,.5625]、D=.5[.375,.625]。固定D Control B=.59375[.5,.6875]、C=.5625[.40625,.71875]、D=.53125[.40625,.65625]、固定D Cheap B=.4375[.3125,.5625]、C=.59375[.46875,.71875]、D=.53125[.4375,.625]。全12区間は.5を含むか接する。共有16family・複数対照の依存を保ち、384独立標本、一般優越、同等/劣位の証明、候補同士の確定順位にしない。旧412の未使用98開始系統の主要試験へ合算しない。
+
+全19804 accepted手に完成snapshot、fallback/error/forfeit/期限以後authority receipt0。terminal return後期限1491とcommit後期限1675は別scope。24方法の深度全分布・平均/中央値・色/family score・TT/LMR/PVS/workと終盤尾部を保存した。深さはselective nominalで全幅保証でも勝因でもない。selected/terminal/profileの内包viewとTT gaugeを二重加算せず、physical NN・連続RSS・孤立部位費はUNKNOWN。
+
+B/C/Dには一般利益の支持と具体的な継続用途がないため今回採用せず、余分な現役enum/受理設定/counter/専用テストを通常保守として撤去した（b2ce8658）。A/FixedOne/OFFとdepth_rank既定、410/411の数学・履歴・TT、製品/generator enable OFFを維持する。新拒否Rust2＋影響q0一件=3、Python1、Clippy3/release PASS、撤去後image7dadc2b3/Build ef7abadfは元試験に使っていない。元のsource/image/RAWとFAILED・0件filter/真正初回補足・collector失敗・timestamp erratumは保持し、追加tuning/cap/roots/対局/fitは発行しない。
+
+元software111.815993823秒（FAILED込み）、元探索費750.297630404秒、元対局1989.259172560秒、撤去software100.848559701秒のouterを各一度、nested非加算で保存した。全source/LLM/admin費はUNKNOWN。限定source確認と有限解釈clearをsoftware/速度/一般棋力の認定と混同しない。[結果・exact証拠](../research-data/ai-sigma/lmr-aggressive413/report-ja.md)。415の保存棋譜詳細分析と414の壁迂回計画は別scopeであり、全mixed/learner prep/pipeline・323 USERPAUSE、models/weights/seals/oldfits96、foreign変更を保持する。
