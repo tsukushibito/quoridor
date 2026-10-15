@@ -441,15 +441,6 @@ impl Target for SearchTarget {
         };
         let search_seconds = search_started.elapsed().as_secs_f64();
         let after = identity(root);
-        let lmr_output = lmr_observation.as_deref().map(|observation| {
-            lmr_observation_output(
-                session,
-                root,
-                observation,
-                cancel,
-                result.is_ok() && after == self.before,
-            )
-        });
         let mut row = match result {
             Ok(result) => {
                 let mut legal = Vec::new();
@@ -471,6 +462,15 @@ impl Target for SearchTarget {
             }
             Err(error) => json!({"status":"UNKNOWN","returned":"Err","error":fact(&error)}),
         };
+        let lmr_output = lmr_observation.as_deref().map(|observation| {
+            lmr_observation_output(
+                session,
+                root,
+                observation,
+                cancel,
+                row["status"] == "COMPLETE" && row["completed_depth"] == 5 && after == self.before,
+            )
+        });
         row["actual_selectivity"] = json!(session.namespace().selectivity);
         row["lmr_method_requested"] = json!(self.settings.lmr_method);
         row["lmr_rule"] = json!(session.lmr_method().map(LmrMethod::id));
@@ -507,6 +507,21 @@ impl Target for SearchTarget {
                 .clone()
                 .unwrap_or(Value::Null);
             observation["root_fullhistory"] = self.before.clone();
+            observation["root_common_invocations"] = json!(1);
+            observation["root_recorded_nodes"] = row["work"]["nodes"].clone();
+            observation["root_work_known"] = json!(!row["work"].is_null());
+            observation["actual_root_plus_arm_invocations"] =
+                json!(1 + observation["arm_function_calls"].as_u64().unwrap());
+            observation["actual_root_plus_explicit_child_calls"] =
+                json!(1 + observation["arm_explicit_child_scouts"].as_u64().unwrap());
+            observation["root_plus_arm_known_nodes"] = json!(
+                row["work"]["nodes"].as_u64().unwrap_or(0)
+                    + observation["arm_recorded_nodes"].as_u64().unwrap()
+            );
+            observation["approved_maxima_not_actual_usage"] = json!({
+                "roots":12,"branches":48,"arm_trials":192,
+                "top_level_entries":204,"root_plus_explicit_child_calls":300,
+                "nodes":31_200_000});
             row["lmr_observation"] = observation;
         }
         row["Search_call_seconds"] = json!(search_seconds);
@@ -827,39 +842,43 @@ fn completed_depth_observation(r: &SearchResult) -> Value {
     }
     result
 }
+fn observed_work(s: &alphabeta::SearchStats) -> Value {
+    let mut work = json!({"nodes":s.nodes,"evaluations":s.evaluations,"terminal":s.terminal,"cutoffs":s.cutoffs,"TT_hits":s.tt_hits,"TT_probes":s.tt_probes,"TT_exact_hits":s.tt_exact_hits,"TT_key_builds":s.tt_key_builds,"tt_context_initial_items":s.tt_context_initial_items,"tt_context_transitions":s.tt_context_transitions,"tt_board_hash_reads":s.tt_board_hash_reads,"tt_board_hash_updates":s.tt_board_hash_updates,"tt_context_matches":s.tt_context_matches,"tt_context_misses":s.tt_context_misses,"tt_order_context_mismatch":s.tt_order_context_mismatch,"tt_hash_collisions":s.tt_hash_collisions,"tt_index_collisions":s.tt_index_collisions,"TT_hashes":s.tt_hashes,"TT_usable_depth":s.tt_usable_depth,"TT_order_only":s.tt_order_only,"TT_collisions":s.tt_collisions,"TT_replacements":s.tt_replacements,"TT_capacity_skips":s.tt_capacity_skips,"TT_illegal_moves":s.tt_illegal_moves,"TT_retained_bytes":s.tt_retained_bytes,"TT_generation":s.tt_generation,"TT_cutoffs":s.tt_cutoffs,"PVS_researches":s.pvs_researches,"delta_updates":s.delta_updates,"policy_calls":s.policy_calls});
+    work["LMR_attempts"] = json!(s.lmr_attempts);
+    work["LMR_full_depth_confirmations"] = json!(s.lmr_full_depth_confirmations);
+    work["LMR_full_window_researches"] = json!(s.lmr_full_window_researches);
+    work["zero_stock_approx_terminations"] = json!(s.zero_stock_approx_terminations);
+    work["zero_stock_approx_tt_probes"] = json!(s.zero_stock_approx_tt_probes);
+    work["zero_stock_approx_tt_hits"] = json!(s.zero_stock_approx_tt_hits);
+    work["zero_stock_approx_recomputes"] = json!(s.zero_stock_approx_recomputes);
+    work["wall_distance_map_reads"] = json!(s.wall_distance_map_reads);
+    work["wall_distance_map_builds"] = json!(s.wall_distance_map_builds);
+    work["wall_distance_fallbacks"] = json!(s.wall_distance_fallbacks);
+    work["safe_race_stock0_opportunities"] = json!(s.safe_race_stock0_opportunities);
+    work["safe_race_tt_probes"] = json!(s.safe_race_tt_probes);
+    work["safe_race_tt_hits"] = json!(s.safe_race_tt_hits);
+    work["safe_race_geometry_tests"] = json!(s.safe_race_geometry_tests);
+    work["safe_race_geometry_passes"] = json!(s.safe_race_geometry_passes);
+    work["safe_race_history_checks"] = json!(s.safe_race_history_checks);
+    work["safe_race_history_rejects"] = json!(s.safe_race_history_rejects);
+    work["safe_race_proven_leaves"] = json!(s.safe_race_proven_leaves);
+    work
+}
 fn observed(r: &SearchResult) -> Value {
     let s = &r.stats;
     let o = &s.ordering;
     let mut result = json!({"returned":"Ok","action":r.action,"value":r.value,"value_bits":r.value.map(f32::to_bits),"completed_depth":r.completed_depth,"PV":r.pv,"stop":format!("{:?}",r.stop),"Search_internal_elapsed_seconds":r.elapsed.as_secs_f64(),
-        "work":{"nodes":s.nodes,"evaluations":s.evaluations,"terminal":s.terminal,"cutoffs":s.cutoffs,"TT_hits":s.tt_hits,"TT_probes":s.tt_probes,"TT_exact_hits":s.tt_exact_hits,"TT_key_builds":s.tt_key_builds,"tt_context_initial_items":s.tt_context_initial_items,"tt_context_transitions":s.tt_context_transitions,"tt_board_hash_reads":s.tt_board_hash_reads,"tt_board_hash_updates":s.tt_board_hash_updates,"tt_context_matches":s.tt_context_matches,"tt_context_misses":s.tt_context_misses,"tt_order_context_mismatch":s.tt_order_context_mismatch,"tt_hash_collisions":s.tt_hash_collisions,"tt_index_collisions":s.tt_index_collisions,"TT_hashes":s.tt_hashes,"TT_usable_depth":s.tt_usable_depth,"TT_order_only":s.tt_order_only,"TT_collisions":s.tt_collisions,"TT_replacements":s.tt_replacements,"TT_capacity_skips":s.tt_capacity_skips,"TT_illegal_moves":s.tt_illegal_moves,"TT_retained_bytes":s.tt_retained_bytes,"TT_generation":s.tt_generation,"TT_cutoffs":s.tt_cutoffs,"PVS_researches":s.pvs_researches,"delta_updates":s.delta_updates,"policy_calls":s.policy_calls},
+        "work":observed_work(s),
         "ordering":{"ordered_nodes":o.ordered_nodes,"scored_actions":o.scored_actions,"nonzero_dynamic_actions":o.nonzero_dynamic_actions,"nonzero_combined_actions":o.nonzero_combined_actions,"nonzero_continuation_actions":o.nonzero_continuation_actions,"history_changed_nodes":o.history_changed_nodes,"first_choice_changed_nodes":o.first_choice_changed_nodes,"first_choice_compared_nodes":o.first_choice_compared_nodes,"history_compared_nodes":o.history_compared_nodes,"completed_cutoff_events":o.completed_cutoff_events,"cutoff_rank_sum":o.cutoff_rank_sum,"first_child_cutoffs":o.first_child_cutoffs,"positive_actions":o.positive_actions,"negative_actions":o.negative_actions,"continuation_updates":o.continuation_updates,"age_passes":o.age_passes,"static_parents":o.static_parents,"borrowed_goal_maps":o.borrowed_goal_maps,"computed_goal_map_pairs":o.computed_goal_map_pairs,"cheap_static_parents":o.cheap_static_parents,"missing_goal_map_pairs":o.missing_goal_map_pairs,"available_goal_map_pairs":o.available_goal_map_pairs,"nonzero_static_actions":o.nonzero_static_actions,"exact_goal_actions":o.exact_goal_actions,"static_changed_nodes":o.static_changed_nodes,"static_compared_nodes":o.static_compared_nodes}});
     result["lmr_rule"] = json!(s.lmr_enabled.then(|| s.lmr_method.id()));
     result["lmr_parameters"] = json!(s.lmr_enabled.then(|| s.lmr_method.reduction_rule()));
-    result["work"]["LMR_attempts"] = json!(s.lmr_attempts);
-    result["work"]["LMR_full_depth_confirmations"] = json!(s.lmr_full_depth_confirmations);
-    result["work"]["LMR_full_window_researches"] = json!(s.lmr_full_window_researches);
     result["root_walls_remaining"] = json!(s.root_walls_remaining);
     result["zero_stock_approx_permitted"] = json!(s.zero_stock_approx_permitted);
-    result["work"]["zero_stock_approx_terminations"] = json!(s.zero_stock_approx_terminations);
-    result["work"]["zero_stock_approx_tt_probes"] = json!(s.zero_stock_approx_tt_probes);
-    result["work"]["zero_stock_approx_tt_hits"] = json!(s.zero_stock_approx_tt_hits);
-    result["work"]["zero_stock_approx_recomputes"] = json!(s.zero_stock_approx_recomputes);
-    result["work"]["wall_distance_map_reads"] = json!(s.wall_distance_map_reads);
-    result["work"]["wall_distance_map_builds"] = json!(s.wall_distance_map_builds);
-    result["work"]["wall_distance_fallbacks"] = json!(s.wall_distance_fallbacks);
     result["zero_stock_safe_race"] = json!(s.zero_stock_safe_race_enabled);
     result["zero_stock_safe_race_method"] = json!(
         s.zero_stock_safe_race_enabled
             .then_some(alphabeta::ZERO_STOCK_SAFE_RACE_METHOD)
     );
-    result["work"]["safe_race_stock0_opportunities"] = json!(s.safe_race_stock0_opportunities);
-    result["work"]["safe_race_tt_probes"] = json!(s.safe_race_tt_probes);
-    result["work"]["safe_race_tt_hits"] = json!(s.safe_race_tt_hits);
-    result["work"]["safe_race_geometry_tests"] = json!(s.safe_race_geometry_tests);
-    result["work"]["safe_race_geometry_passes"] = json!(s.safe_race_geometry_passes);
-    result["work"]["safe_race_history_checks"] = json!(s.safe_race_history_checks);
-    result["work"]["safe_race_history_rejects"] = json!(s.safe_race_history_rejects);
-    result["work"]["safe_race_proven_leaves"] = json!(s.safe_race_proven_leaves);
     result["zero_stock_approx_method"] = json!(if s.zero_stock_approx_permitted {
         Some(s.zero_stock_approx_method.id())
     } else {
@@ -1672,8 +1691,183 @@ mod lmr413_retirement_tests {
     }
 }
 
-// Bounded output for the one opt-in diagnostic. Root call accounting remains
-// the driver's existing count; cold invocation/child/node counts are separate.
+fn trial_stage_output(stage: alphabeta::LmrStage) -> Value {
+    json!({"child_depth":stage.child_depth,"window_bits":stage.window_bits,
+        "value_bits":stage.value_bits,"bound":stage.bound,"completed":stage.completed,
+        "status":if stage.completed {"COMPLETE"} else {"UNKNOWN"},
+        "stop":stage.stop.map(|r|format!("{r:?}")),"error":stage.error,
+        "interrupted_without_result":!stage.completed && stage.stop.is_none() && !stage.error})
+}
+
+fn lmr_trial_output(
+    session: &SearchSession,
+    root: &SigmaContext,
+    branch: &alphabeta::LmrBranch,
+    arm: alphabeta::LmrArm,
+    cancel: &AtomicBool,
+) -> Value {
+    let start = Instant::now();
+    let trial = session.lmr_trial(root, branch, arm, cancel);
+    // Identical finite whole boundary, including reconstruction/allocate/drop,
+    // and excluding JSON rendering in both N and R.
+    let whole = start.elapsed().as_nanos();
+    let mut row = match trial {
+        Err(error) => json!({"status":"UNKNOWN","common_invocation_started":false,
+            "error":fact(&error),"kernel_elapsed_ns":Value::Null,"work":Value::Null,
+            "protocol_complete":false,"value_bits":Value::Null,"bound":Value::Null,
+            "returned_child_depth":Value::Null,"parent_restored":Value::Null,"child_scouts":0,
+            "confirmation_condition":Value::Null,"confirmation_entered":false,
+            "confirmation_completed":Value::Null,"stages":[null,null]}),
+        Ok(trial) => {
+            let trace = trial.trace;
+            let complete = trial.result.as_ref().is_ok_and(|r| {
+                r.stop == StopReason::DepthComplete
+                    && r.value.is_some()
+                    && trace.parent_restored == Some(true)
+            });
+            let mut row = match trial.result {
+                Ok(result) => {
+                    json!({"status":if complete {"COMPLETE"} else {"UNKNOWN"},
+                        "returned":"Ok","stop":format!("{:?}",result.stop),
+                        "value_bits":if complete {result.value.map(f32::to_bits)} else {None},
+                        "returned_child_depth":complete.then_some(result.completed_depth),
+                        "Search_internal_elapsed_seconds":result.elapsed.as_secs_f64()})
+                }
+                Err(error) => json!({"status":"UNKNOWN","returned":"Err","error":fact(&error),
+                    "value_bits":Value::Null,"returned_child_depth":Value::Null}),
+            };
+            let stages: Vec<_> = trace
+                .stages
+                .iter()
+                .map(|s| {
+                    s.map(|s| {
+                        let mut row = trial_stage_output(s.scout);
+                        row["nodes_before"] = json!(s.nodes_before);
+                        row["nodes_after"] = json!(s.nodes_after);
+                        row["evaluations_before"] = json!(s.evaluations_before);
+                        row["evaluations_after"] = json!(s.evaluations_after);
+                        row
+                    })
+                })
+                .collect();
+            // The common invocation may return Err after canonical restoration.
+            // Its bounded trace still retains actual cumulative work if known.
+            row["work"] = trace
+                .final_stats
+                .as_ref()
+                .map_or(Value::Null, observed_work);
+            row["common_invocation_started"] = json!(true);
+            row["state_work_known"] = json!(!row["work"].is_null());
+            row["parent_restored"] = json!(trace.parent_restored);
+            row["kernel_elapsed_ns"] = json!(trace.kernel_elapsed.map(|d| d.as_nanos()));
+            row["child_scouts"] = json!(trace.child_calls);
+            row["confirmation_entered"] =
+                json!(arm == alphabeta::LmrArm::ReducedThenConfirm && trace.child_calls == 2);
+            row["confirmation_completed"] = if arm == alphabeta::LmrArm::ReducedThenConfirm {
+                json!(trace.stages[1].map(|s| s.scout.completed))
+            } else {
+                Value::Null
+            };
+            row["confirmation_condition"] = if arm == alphabeta::LmrArm::ReducedThenConfirm {
+                json!(
+                    trace.stages[0]
+                        .and_then(|s| s.scout.value_bits)
+                        .map(|v| f32::from_bits(v) > f32::from_bits(trial.window_bits[0]))
+                )
+            } else {
+                Value::Null
+            };
+            row["stages"] = json!(stages);
+            row["bound"] = if complete {
+                trace
+                    .stages
+                    .iter()
+                    .rev()
+                    .flatten()
+                    .next()
+                    .map_or(Value::Null, |s| json!(s.scout.bound))
+            } else {
+                Value::Null
+            };
+            row["window_bits"] = json!(trial.window_bits);
+            row["protocol_complete"] = json!(complete);
+            row["final_source"] = if complete {
+                json!(if arm == alphabeta::LmrArm::Normal {
+                    "normal"
+                } else if trace.child_calls == 1 {
+                    "shallow"
+                } else {
+                    "confirmation"
+                })
+            } else {
+                Value::Null
+            };
+            row
+        }
+    };
+    row["arm"] = json!(arm.name());
+    row["arm_function_called"] = json!(true);
+    row["normal_target_child_depth"] = json!(branch.normal_child_depth());
+    row["reduced_target_child_depth"] = json!(branch.reduced_child_depth());
+    row["probe_extra"] = json!(1);
+    row["whole_elapsed_ns"] = json!(whole);
+    row["node_cap_total"] = json!(100_000);
+    row["time_limit_ms"] = Value::Null;
+    row["initial_TT_entries"] = json!(0);
+    row["initial_ordering"] = json!("zero continuation and killers; captured path only");
+    row["initial_TT_capacity"] = json!(1_048_576);
+    row["PV_scope"] = json!("parent action only; no complete child PV claimed");
+    row["normal_semantics"] =
+        json!("finite selective-depth estimate, not WDL/fullwidth truth or historical warm replay");
+    row
+}
+
+fn lmr_unperformed_arm(arm: alphabeta::LmrArm) -> Value {
+    json!({"arm":arm.name(),"status":"UNKNOWN","protocol_complete":false,
+        "common_invocation_started":false,"arm_function_called":false,"execution":"UNPERFORMED",
+        "reason":"root D5 incomplete/invalid, earlier arm error/cancel, or cancellation; no refill",
+        "child_scouts":0,"work":Value::Null,"state_work_known":false,
+        "value_bits":Value::Null,"bound":Value::Null,"returned_child_depth":Value::Null,
+        "kernel_elapsed_ns":Value::Null,"whole_elapsed_ns":Value::Null,
+        "stages":[null,null],"confirmation_condition":Value::Null,
+        "confirmation_entered":false,"confirmation_completed":Value::Null,"parent_restored":Value::Null,
+        "normal_target_child_depth":2,"reduced_target_child_depth":1,"probe_extra":1,
+        "node_cap_total":100000,"time_limit_ms":null})
+}
+fn lmr_repeat_status(a: &Value, b: &Value) -> &'static str {
+    if a["protocol_complete"] != true || b["protocol_complete"] != true {
+        return "UNKNOWN";
+    }
+    let keys = [
+        "status",
+        "returned",
+        "stop",
+        "value_bits",
+        "bound",
+        "returned_child_depth",
+        "protocol_complete",
+        "work",
+        "stages",
+        "child_scouts",
+        "confirmation_condition",
+        "confirmation_entered",
+        "confirmation_completed",
+        "parent_restored",
+        "window_bits",
+        "final_source",
+    ];
+    if keys.iter().all(|k| a[*k] == b[*k]) {
+        "MATCH"
+    } else {
+        "DIFFERENT"
+    }
+}
+fn lmr_bits_comparison(a: &Value, b: &Value) -> Value {
+    json!({"value_bits":if a.is_null()||b.is_null() {"UNKNOWN"} else if a==b {"MATCH"} else {"DIFFERENT"},
+        "left":a,"right":b})
+}
+
+// Root work and arm work are disjoint; stage work is nested inside an arm.
 fn lmr_observation_output(
     session: &SearchSession,
     root: &SigmaContext,
@@ -1683,155 +1877,126 @@ fn lmr_observation_output(
 ) -> Value {
     let mut branches = Vec::new();
     let mut invocations = 0u64;
+    let mut function_calls = 0u64;
     let mut child_calls = 0u64;
-    let mut recorded_nodes = 0u64;
-    let mut recorded_evaluations = 0u64;
-    let mut unknown_work_invocations = 0u64;
-    let mut completed_probes = 0u64;
+    let mut nodes = 0u64;
+    let mut evaluations = 0u64;
+    let mut unknown_work = 0u64;
+    let mut completed = 0u64;
+    let mut reduced_started = 0u64;
+    let mut confirmations_entered = 0u64;
+    let mut confirmations_completed = 0u64;
+    let mut confirmations_condition_true = 0u64;
+    let mut confirmations_unused = 0u64;
     let mut halted = !root_ok;
     for branch in observation.branches() {
         let f = &branch.facts;
         let stages: Vec<_> = branch
             .stages
             .iter()
-            .map(|s| {
-                s.map(|s| json!({
-            "child_depth":s.child_depth,"window_bits":s.window_bits,"value_bits":s.value_bits,
-            "bound":s.bound,"completed":s.completed,
-            "status":if s.completed {"COMPLETE"} else {"UNKNOWN"},
-            "interrupted":!s.completed,
-        }))
-            })
+            .map(|s| s.map(trial_stage_output))
             .collect();
-        let mut probes = Vec::new();
-        for normal in [false, true] {
-            let start = Instant::now();
+        let mut arms = Vec::new();
+        for (index, arm) in alphabeta::LMR_ARM_ORDER.into_iter().enumerate() {
             let mut row = if halted || cancel.load(Ordering::Relaxed) {
-                json!({"status":"UNKNOWN","common_invocation_started":false,"child_called":false,
-                    "reason":"root error, earlier probe error or cancellation; no replacement"})
+                lmr_unperformed_arm(arm)
             } else {
-                match session.cold_lmr_scout(root, branch, normal, cancel) {
-                    Err(error) => {
-                        halted = true;
-                        json!({"status":"UNKNOWN","common_invocation_started":false,
-                            "child_called":false,"error":fact(&error)})
-                    }
-                    Ok(probe) => {
-                        invocations += 1;
-                        child_calls += u64::from(probe.child_called);
-                        let mut row = match probe.result {
-                            Err(error) => {
-                                halted = true;
-                                unknown_work_invocations += 1;
-                                json!({"status":"UNKNOWN","returned":"Err","error":fact(&error),
-                                    "nodes":Value::Null,"evaluations":Value::Null})
-                            }
-                            Ok(result) => {
-                                recorded_nodes += result.stats.nodes;
-                                recorded_evaluations += result.stats.evaluations;
-                                let complete = result.stop == StopReason::DepthComplete
-                                    && result.completed_depth == probe.child_depth
-                                    && result.value.is_some();
-                                let mut row = observed(&result);
-                                row.as_object_mut().unwrap().remove("ordering");
-                                row["status"] =
-                                    json!(if complete { "COMPLETE" } else { "UNKNOWN" });
-                                row["bound"] = if complete {
-                                    json!(if result.value.unwrap()
-                                        <= f32::from_bits(probe.window_bits[0])
-                                    {
-                                        "Upper"
-                                    } else if result.value.unwrap()
-                                        >= f32::from_bits(probe.window_bits[1])
-                                    {
-                                        "Lower"
-                                    } else {
-                                        "Exact"
-                                    })
-                                } else {
-                                    Value::Null
-                                };
-                                if result.stop == StopReason::Cancelled {
-                                    halted = true;
-                                }
-                                row
-                            }
-                        };
-                        row["common_invocation_started"] = json!(true);
-                        row["child_called"] = json!(probe.child_called);
-                        row["window_bits"] = json!(probe.window_bits);
-                        row
-                    }
-                }
+                lmr_trial_output(session, root, branch, arm, cancel)
             };
-            row["kind"] = json!(if normal { "normal" } else { "reduced" });
-            row["requested_child_depth"] = json!(if normal {
-                branch.normal_child_depth()
+            row["arm_index"] = json!(index);
+            row["repeat"] = json!(if index < 2 { 1 } else { 2 });
+            row["label"] = json!(["N1", "R1", "R2", "N2"][index]);
+            let started = row["common_invocation_started"] == true;
+            function_calls += u64::from(row["arm_function_called"] == true);
+            invocations += u64::from(started);
+            child_calls += row["child_scouts"].as_u64().unwrap_or(0);
+            reduced_started += u64::from(started && arm == alphabeta::LmrArm::ReducedThenConfirm);
+            confirmations_entered += u64::from(row["confirmation_entered"] == true);
+            confirmations_completed += u64::from(row["confirmation_completed"] == true);
+            confirmations_condition_true += u64::from(row["confirmation_condition"] == true);
+            confirmations_unused += u64::from(
+                started
+                    && arm == alphabeta::LmrArm::ReducedThenConfirm
+                    && row["protocol_complete"] == true
+                    && row["child_scouts"] == 1,
+            );
+            if let (Some(n), Some(e)) = (
+                row["work"]["nodes"].as_u64(),
+                row["work"]["evaluations"].as_u64(),
+            ) {
+                nodes += n;
+                evaluations += e;
             } else {
-                branch.reduced_child_depth()
-            });
-            row["parent_ply"] = json!(f.parent_ply);
-            row["parent_stm"] = json!(f.parent_stm);
-            row["TT_initial_entries"] = json!(0);
-            row["ordering_initial"] =
-                json!("zero continuation and killers; captured actor/path only");
-            row["node_cap"] = json!(100_000);
-            row["time_limit_ms"] = Value::Null;
-            row["whole_including_local_setup_drop_seconds"] = json!(start.elapsed().as_secs_f64());
-            completed_probes += u64::from(row["status"] == "COMPLETE");
-            probes.push(row);
-        }
-        let both = probes.iter().all(|p| p["status"] == "COMPLETE");
-        let match_status = if both {
-            if probes[0]["value_bits"] == probes[1]["value_bits"] {
-                "MATCH"
-            } else {
-                "DIFFERENT"
+                unknown_work += u64::from(row["arm_function_called"] == true);
             }
-        } else {
-            "UNKNOWN"
-        };
-        branches.push(json!({"hypothesis":f.hypothesis,"iteration_depth":f.iteration_depth,
+            completed += u64::from(row["protocol_complete"] == true);
+            if !row["error"].is_null() || row["stop"] == "Cancelled" {
+                halted = true;
+            }
+            arms.push(row);
+        }
+        let mut comparisons = Vec::new();
+        for (n, r) in [(0, 1), (3, 2)] {
+            comparisons.push(json!({"N_label":arms[n]["label"],"R_label":arms[r]["label"],
+                "N_vs_R_final":lmr_bits_comparison(&arms[n]["value_bits"],&arms[r]["value_bits"]),
+                "N_bound":arms[n]["bound"],"R_final_bound":arms[r]["bound"],
+                "N_returned_depth":arms[n]["returned_child_depth"],"R_returned_depth":arms[r]["returned_child_depth"],
+                "N_vs_R_confirmation":lmr_bits_comparison(&arms[n]["value_bits"],&arms[r]["stages"][1]["value_bits"]),
+                "original_warm_shallow_vs_R_shallow":if f.quantum==1 {
+                    lmr_bits_comparison(&stages[0]["value_bits"],&arms[r]["stages"][0]["value_bits"])
+                } else {Value::Null},
+                "original_normal_vs_N":if f.quantum==0 {
+                    lmr_bits_comparison(&stages[0]["value_bits"],&arms[n]["value_bits"])
+                } else {Value::Null}}));
+        }
+        branches.push(json!({"hypothesis":f.hypothesis,"slot":f.slot,"iteration_depth":f.iteration_depth,
             "eligible_visit_serial":f.visit,"parent_depth":f.parent_depth,"parent_ply":f.parent_ply,
-            "path_action_colour":branch.path(),"parent":identity(branch.parent()),
-            "parent_stm":f.parent_stm,"distinct_rank":f.distinct_rank,"action":f.action,
-            "eligible":true,"protected_by_saved_ranking":false,"quantum":f.quantum,
+            "path_action_colour":branch.path(),"parent":identity(branch.parent()),"parent_stm":f.parent_stm,
+            "distinct_rank":f.distinct_rank,"action":f.action,"eligible":true,
+            "protected_by_saved_ranking":false,"original_q":f.quantum,
             "post_TT_pre_child_alpha_beta_bits":f.alpha_beta_bits,
             "TT":f.tt.map(|tt|json!({"stored_depth":tt.stored_depth,"bound":tt.bound,
                 "context_matches":tt.context_matches,"usable_depth":tt.usable_depth,"legal_move":tt.legal_move})),
-            "stages":stages,"stage_order":if f.quantum==0 {json!(["normal_scout","full_window",null])}
-                else {json!(["shallow","normal_depth_confirmation","full_window"])},
-            "cold_probes":probes,"cold_value_bits_correspondence":match_status,
-            "normal_probe_semantics":"selective estimate; not historical warm TT or WDL/full-width truth"}));
+            "original_stages":stages,"arms":arms,"comparisons":comparisons,
+            "N_repeat_nonclock_work_status":lmr_repeat_status(&arms[0],&arms[3]),
+            "R_repeat_nonclock_work_status":lmr_repeat_status(&arms[1],&arms[2])}));
     }
     let coverage: Vec<_> = observation
         .coverage
         .iter()
-        .map(|depth| {
-            depth
-                .iter()
-                .map(|rank| {
-                    rank.iter().map(|c|
-        json!({"opportunities":c.opportunities,"first_completed":c.first_completed,
+        .map(|rank| {
+            rank.iter()
+                .map(|c| {
+                    json!({"opportunities":c.opportunities,"first_completed":c.first_completed,
             "first_fail_low":c.first_fail_low,"normal_confirmations_started":c.normal_confirmations,
-            "full_windows_started":c.full_windows})).collect::<Vec<_>>()
+            "full_windows_started":c.full_windows,"selection_candidates":c.selection_candidates,
+            "selected":c.selected,"same_parent_skips":c.same_parent_skips,
+            "same_branch_skips":c.same_branch_skips,"full_slots_skips":c.full_slots_skips})
                 })
                 .collect::<Vec<_>>()
         })
         .collect();
-    let planned_probes = branches.len() as u64 * 2;
-    json!({"version":"limited-lmr-observation416-v1","finished":observation.finished,
-        "status":if root_ok && completed_probes==planned_probes {"COMPLETE"} else {"PARTIAL"},
-        "selected_branches":branches.len(),"maximum_branches":4,
-        "planned_cold_scouts":planned_probes,"complete_cold_scouts":completed_probes,
-        "unknown_or_unperformed_cold_scouts":planned_probes-completed_probes,
-        "missing_buckets_are_not_refilled":true,
+    let planned = branches.len() as u64 * 4;
+    json!({"version":alphabeta::LMR_OBSERVATION_PROTOCOL,"finished":observation.finished,
+        "status":if root_ok&&completed==planned&&branches.len()==4 {"COMPLETE"} else {"PARTIAL"},
+        "root_completed_D5_and_restored":root_ok,"selected_branches":branches.len(),"maximum_branches":4,
+        "missing_branch_slots":4-branches.len(),"planned_selected_arm_slots":planned,
+        "complete_arms":completed,"unknown_or_unperformed_selected_arms":planned-completed,
         "root_stop":observation.root_stop,"branches":branches,"coverage":coverage,
-        "coverage_axes":{"depth":[3,4],"distinct_rank":["4..8","9..15","16..31","32+"],"quantum":["0","1","2+"]},
-        "cold_common_invocations":invocations,"cold_child_calls":child_calls,
-        "cold_recorded_nodes":recorded_nodes,"cold_recorded_evaluations":recorded_evaluations,
-        "cold_unknown_work_invocations":unknown_work_invocations,
-        "root_calls_exclude_cold_scouts":true,"refill":false})
+        "coverage_axes":{"iteration_depth":5,"parent_depth":3,"parent_ply":2,
+            "distinct_rank":["4..8","9..15","16..31","32+"],"quantum":[0,1]},
+        "skip_counter_scope":"selection candidates with free hypothesis slot; full slots counted separately",
+        "arm_function_calls":function_calls,"arm_common_invocations":invocations,"arm_explicit_child_scouts":child_calls,
+        "arm_recorded_nodes":nodes,"arm_recorded_evaluations":evaluations,
+        "arm_unknown_work_invocations":unknown_work,"R_started":reduced_started,
+        "R_confirmation_entered":confirmations_entered,"R_confirmation_completed":confirmations_completed,
+        "R_confirmation_condition_true":confirmations_condition_true,
+        "R_confirmation_unused_complete_fail_low":confirmations_unused,
+        "R_unentered_confirmation_unknown":reduced_started-confirmations_entered-confirmations_unused,
+        "R_no_confirmation_entered":reduced_started-confirmations_entered,
+        "root_calls_exclude_arms":true,"stage_work_is_nested":true,"refill":false,
+        "whole_excludes":"JSON encode/output and returned record later drop",
+        "OS_model_allocator_coldness":"UNKNOWN","clock_resolution_ns":Value::Null})
 }
 
 fn observation_input_check(prefix: &[u16], expected: &Value, root: &SigmaContext) -> Result<()> {
@@ -1951,6 +2116,64 @@ mod lmr416_tests {
                 opening.ruleset().id()
             )
             .is_err()
+        );
+    }
+}
+
+#[cfg(test)]
+mod lmr417_tests {
+    use super::*;
+    #[test]
+    fn measurement417_repeat_work_drift_and_unperformed_nulls_are_not_complete() {
+        let mut a = json!({"protocol_complete":true,"status":"COMPLETE","returned":"Ok",
+            "stop":"DepthComplete","returned_child_depth":1,"value_bits":0,"bound":"Upper",
+            "work":{"nodes":17,"evaluations":8},"child_scouts":1,"stages":[{"completed":true},null],
+            "confirmation_entered":false,"confirmation_completed":null,"kernel_elapsed_ns":0,"whole_elapsed_ns":0});
+        let mut b = a.clone();
+        b["kernel_elapsed_ns"] = json!(4);
+        b["whole_elapsed_ns"] = json!(100);
+        assert_eq!(lmr_repeat_status(&a, &b), "MATCH");
+        b["work"]["nodes"] = json!(18);
+        assert_eq!(lmr_repeat_status(&a, &b), "DIFFERENT");
+        a["protocol_complete"] = json!(false);
+        assert_eq!(lmr_repeat_status(&a, &b), "UNKNOWN");
+        for arm in alphabeta::LMR_ARM_ORDER {
+            let row = lmr_unperformed_arm(arm);
+            assert_eq!(row["protocol_complete"], false);
+            assert_eq!(row["execution"], "UNPERFORMED");
+            assert!(row["kernel_elapsed_ns"].is_null() && row["work"].is_null());
+            assert!(row["returned_child_depth"].is_null() && row["value_bits"].is_null());
+            assert_eq!(row["stages"], json!([null, null]));
+        }
+    }
+    #[test]
+    fn measurement417_stage_depth_sign_bound_and_interrupted_value_are_explicit() {
+        let stage = alphabeta::LmrStage {
+            child_depth: 1,
+            window_bits: [0.0f32.to_bits(), 1u32],
+            value_bits: Some((-0.25f32).to_bits()),
+            bound: Some("Upper"),
+            completed: true,
+            stop: None,
+            error: false,
+        };
+        let row = trial_stage_output(stage);
+        assert_eq!(row["child_depth"], 1);
+        assert_eq!(row["value_bits"], (-0.25f32).to_bits());
+        assert_eq!(row["bound"], "Upper");
+        let row = trial_stage_output(alphabeta::LmrStage {
+            value_bits: None,
+            bound: None,
+            completed: false,
+            stop: Some(StopReason::NodeLimit),
+            ..stage
+        });
+        assert_eq!(row["status"], "UNKNOWN");
+        assert_eq!(row["stop"], "NodeLimit");
+        assert!(row["value_bits"].is_null() && row["bound"].is_null());
+        assert_eq!(
+            lmr_bits_comparison(&Value::Null, &json!(0))["value_bits"],
+            "UNKNOWN"
         );
     }
 }
