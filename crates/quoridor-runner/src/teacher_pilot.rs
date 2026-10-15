@@ -29,6 +29,10 @@ pub struct PilotConfig {
     pub max_total_nodes: Option<u64>,
     pub tt_slots: usize,
     pub use_pvs: bool,
+    #[serde(default, skip_serializing_if = "false_flag")]
+    pub lmr: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub lmr_method: Option<String>,
     pub solver_order_contact: bool,
     pub distance_a: f32,
     pub distance_b: f32,
@@ -46,9 +50,21 @@ pub struct PilotConfig {
 }
 
 impl PilotConfig {
+    pub fn configured_lmr_method(&self) -> Result<quoridor_ai::alphabeta::LmrMethod> {
+        self.lmr_method
+            .as_deref()
+            .map(quoridor_ai::alphabeta::LmrMethod::from_name)
+            .transpose()
+            .map(|method| method.unwrap_or_default())
+            .map_err(Into::into)
+    }
     pub fn validate(&self) -> Result<()> {
         depth6::validate(self)
     }
+}
+
+fn false_flag(enabled: &bool) -> bool {
+    !*enabled
 }
 
 /// Current research terminal facts, never derived from a search score.

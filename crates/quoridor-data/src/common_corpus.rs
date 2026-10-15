@@ -9,6 +9,28 @@ pub const STREAM_SCHEMA: &str = "quoridor-fixed-d-common-corpus-v1";
 pub const CACHE_SCHEMA: &str = "quoridor-common-corpus-terminal-geometry-v3";
 pub const EVALUATOR: &str = "original-distance-a0-b8-tanh";
 
+/// Prefixes only: the normal partition owner subsequently replays their full
+/// histories and computes LR/extension/endpoint closure. Both current native
+/// book representations use this reader at preparation and admission.
+pub fn excluded_book_prefixes(book: &Value) -> Result<Vec<Vec<u16>>> {
+    let entries = match (book.get("openings"), book.get("families")) {
+        (Some(openings), None) => openings,
+        (None, Some(families))
+            if book["schema"] == "quoridor.value-search-strength.book.v1"
+                && book["complete"] == true =>
+        {
+            families
+        }
+        _ => return Err("excluded book must have one complete native prefix collection".into()),
+    };
+    entries
+        .as_array()
+        .ok_or("excluded book prefix array")?
+        .iter()
+        .map(|entry| Ok(serde_json::from_value(entry["prefix"].clone())?))
+        .collect()
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum RootValuePolicy {
@@ -102,16 +124,8 @@ impl Config {
         let mut joined = planned.clone();
         for (book_index, reference) in self.excluded_books.iter().enumerate() {
             let book = reference.read()?;
-            for (i, opening) in book["openings"]
-                .as_array()
-                .ok_or("excluded book openings")?
-                .iter()
-                .enumerate()
-            {
-                joined.push((
-                    format!("excluded-book-{book_index}-{i}"),
-                    serde_json::from_value(opening["prefix"].clone())?,
-                ));
+            for (i, prefix) in excluded_book_prefixes(&book)?.into_iter().enumerate() {
+                joined.push((format!("excluded-book-{book_index}-{i}"), prefix));
             }
         }
         if joined.len() != planned.len() {
@@ -200,6 +214,26 @@ pub fn raw_completed_d6(row: &TeacherRow, evidence: &Value) -> Result<f32> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn input421_active_book_formats_share_prefix_reader_and_refuse_ambiguous_or_incomplete() {
+        let openings = serde_json::json!({"openings":[{"prefix":[13,75]}]});
+        let mut families = serde_json::json!({"schema":"quoridor.value-search-strength.book.v1",
+            "complete":true,"families":[{"family_id":0,"prefix":[13,75]}]});
+        assert_eq!(
+            excluded_book_prefixes(&openings).unwrap(),
+            vec![vec![13, 75]]
+        );
+        assert_eq!(
+            excluded_book_prefixes(&families).unwrap(),
+            excluded_book_prefixes(&openings).unwrap()
+        );
+        families["complete"] = serde_json::json!(false);
+        assert!(excluded_book_prefixes(&families).is_err());
+        families["complete"] = serde_json::json!(true);
+        families["openings"] = serde_json::json!([]);
+        assert!(excluded_book_prefixes(&families).is_err());
+        assert!(excluded_book_prefixes(&serde_json::json!({"openings":[{}]})).is_err());
+    }
     fn config() -> Config {
         let reference = BoundJson {
             path: "/synthetic-pre-output.json".into(),

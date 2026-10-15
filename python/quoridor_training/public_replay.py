@@ -29,7 +29,7 @@ def mixed_batch(added, public, added_indices, public_indices, reflection_mask):
         or pi.ndim != 1
         or ai.dtype.kind not in "iu"
         or pi.dtype.kind not in "iu"
-        or not len(ai)
+        or not count
         or mask.dtype != np.dtype(bool)
         or mask.shape != (count,)
         or np.any(ai < 0)
@@ -38,8 +38,13 @@ def mixed_batch(added, public, added_indices, public_indices, reflection_mask):
         raise ValueError("nonempty configured added rows and source reflection masks required")
     if np.any(added.splits[ai] != 0) or not added.eligible[ai].all():
         raise ValueError("added training excludes V and ineligible outcomes")
-    x, d, targets = added.batch(ai, mask[: len(ai)])
-    y = targets[:, 1]
+    if len(ai):
+        x, d, targets = added.batch(ai, mask[: len(ai)])
+        y = targets[:, 1]
+    else:
+        x = np.empty((0, 2, 312), dtype=np.float32)
+        d = np.empty((0, 2), dtype=np.float32)
+        y = np.empty((0,), dtype=np.float32)
     if len(pi):
         px, pd, py = public.batch("train", pi, mask[len(ai) :], training=True)
         x, d, y = (
@@ -83,7 +88,7 @@ def reflection_generators(settings):
     )
 
 
-def planned_work(config, train_rows, validation_rows, public_rows):
+def planned_work(config, train_rows, validation_rows, public_rows, *, reuse_initial=False):
     """Result-blind full-batch exposure and full-selector forward upper bound."""
     m, t, e = config["mixture"], config["training"], config["evaluation"]
     if (
@@ -92,7 +97,11 @@ def planned_work(config, train_rows, validation_rows, public_rows):
         or any(public_rows[s] <= 0 for s in ("train", "validation"))
     ):
         raise ValueError("nonempty added/public T and V required")
-    steps = min(t["steps"], math.ceil(m["added_exposures"] * train_rows / m["added_rows"]))
+    steps = (
+        min(t["steps"], math.ceil(m["added_exposures"] * train_rows / m["added_rows"]))
+        if m["added_rows"]
+        else t["steps"]
+    )
     selectors = set(
         e["checkpoints"] if e["checkpoints"] is not None else range(0, steps + 1, e["interval"])
     )
@@ -127,6 +136,8 @@ def planned_work(config, train_rows, validation_rows, public_rows):
     measurement_rows = {
         point: sum(scope_rows[n] for n in names) for point, names in scopes_by_step.items()
     }
+    if reuse_initial:
+        measurement_rows[0] = 0
     measurements = sum(measurement_rows.values())
     return {
         "updates": steps,
@@ -139,6 +150,7 @@ def planned_work(config, train_rows, validation_rows, public_rows):
         "public_rows": steps * m["public_rows"],
         "training_forwards": steps * t["batch_size"],
         "measurement_forwards": measurements,
+        "reused_initial": reuse_initial,
         "forward_upper": steps * t["batch_size"] + measurements,
         "measurement_rows_by_step": measurement_rows,
     }
@@ -304,6 +316,7 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
     write(output / "scale.json", model_inputs["statistics"])
     visits = public_visits = None
     plan = None
+    initial_observation = None
 
     def facts():
         return {
@@ -369,8 +382,11 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
             "saturated": 0,
             "constant": 0.0,
             "distance": 0.0,
+            "draw_rows": 0,
+            "draw_absolute_value": 0.0,
         }
-        families = {}
+        families, strata = {}, {}
+        calibration = [[0, 0.0, 0.0] for _ in range(10)]
         model.eval()
         with torch.no_grad():
             for first in range(0, len(indices), e["batch_size"]):
@@ -388,7 +404,15 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
                 if not np.isfinite(yf).all() or not np.isin(y, (-1, 0, 1)).all():
                     raise ValueError("finite literal outcome labels")
                 error = (p - yf) ** 2
+                for j in range(10):
+                    bins = np.minimum(9, np.maximum(0, ((p + 1) * 5).astype(np.int64)))
+                    take = bins == j
+                    calibration[j][0] += int(take.sum())
+                    calibration[j][1] += float(((p[take] + 1) / 2).sum())
+                    calibration[j][2] += float(((yf[take] + 1) / 2).sum())
                 decisive = yf != 0
+                totals["draw_rows"] += int((~decisive).sum())
+                totals["draw_absolute_value"] += float(np.abs(p[~decisive]).sum())
                 totals["rows"] += len(y)
                 totals["error"] += float(error.sum())
                 totals["sign_rows"] += int(decisive.sum())
@@ -400,9 +424,29 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
                 if name.startswith("added_"):
                     groups = added.groups[sub]
                     for g in np.unique(groups):
-                        bank = families.setdefault(added.families[int(g)], [0, 0.0])
-                        bank[0] += int((groups == g).sum())
-                        bank[1] += float(error[groups == g].sum())
+                        bank = families.setdefault(added.families[int(g)], [0, 0.0, 0, 0, 0.0, 0.0])
+                        take = groups == g
+                        bank[0] += int(take.sum())
+                        bank[1] += float(error[take].sum())
+                        bank[2] += int((take & decisive).sum())
+                        bank[3] += int((take & decisive & (p * yf > 0)).sum())
+                        bank[4] += float(p[take].sum())
+                        bank[5] += float(yf[take].sum())
+                    stock = (
+                        added.maps[0]["geometry"]["stocks"][sub].sum(axis=1)
+                        if m["train_stock_strata"] is not None
+                        else None
+                    )
+                    for band in m["train_stock_strata"] or []:
+                        take = (stock >= band["min"]) & (stock <= band["max"])
+                        label = f"{band['min']}..{band['max']}"
+                        bank = strata.setdefault(label, [0, 0.0, 0, 0, 0.0, 0.0])
+                        bank[0] += int(take.sum())
+                        bank[1] += float(error[take].sum())
+                        bank[2] += int((take & decisive).sum())
+                        bank[3] += int((take & decisive & (p * yf > 0)).sum())
+                        bank[4] += float(p[take].sum())
+                        bank[5] += float(yf[take].sum())
         n = totals["rows"]
         if not n:
             raise ValueError("empty observation scope")
@@ -410,25 +454,73 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
             "rows": n,
             "mse": totals["error"] / n,
             "sign_rows": totals["sign_rows"],
+            "draw_rows": totals["draw_rows"],
+            "draw_mean_absolute_value": totals["draw_absolute_value"] / totals["draw_rows"]
+            if totals["draw_rows"]
+            else None,
             "sign_accuracy": totals["correct"] / totals["sign_rows"]
             if totals["sign_rows"]
             else None,
             "saturation_fraction": totals["saturated"] / n,
             "constant_mse": totals["constant"] / n,
             "analytic_D_mse": totals["distance"] / n,
-            "families": {k: {"rows": v[0], "mse": v[1] / v[0]} for k, v in families.items()},
+            "families": {
+                k: {
+                    "rows": v[0],
+                    "mse": v[1] / v[0],
+                    "sign_rows": v[2],
+                    "sign_accuracy": v[3] / v[2] if v[2] else None,
+                    "mean_prediction": v[4] / v[0],
+                    "mean_target": v[5] / v[0],
+                }
+                for k, v in families.items()
+            },
+            "family_mse": sum(v[1] / v[0] for v in families.values()) / len(families)
+            if families
+            else None,
+            "stock_strata": {
+                k: {
+                    "rows": v[0],
+                    "mse": v[1] / v[0] if v[0] else None,
+                    "sign_rows": v[2],
+                    "sign_accuracy": v[3] / v[2] if v[2] else None,
+                    "mean_prediction": v[4] / v[0] if v[0] else None,
+                    "mean_target": v[5] / v[0] if v[0] else None,
+                }
+                for k, v in strata.items()
+            },
+            "calibration": [
+                {
+                    "lower": j / 10,
+                    "upper": (j + 1) / 10,
+                    "rows": v[0],
+                    "mean_probability": v[1] / v[0] if v[0] else None,
+                    "mean_outcome_probability": v[2] / v[0] if v[0] else None,
+                }
+                for j, v in enumerate(calibration)
+            ],
         }
 
     def observe():
+        reused = initial_observation if step == 0 else None
         record = {
             "step": step,
-            "scopes": {
+            "scopes": reused["scopes"]
+            if reused is not None
+            else {
                 name: evaluate(name, indices, constants[name.split("_")[0]])
                 for name in plan["scopes_by_step"][step]
                 for indices in (scopes[name],)
             },
             **facts(),
         }
+        if reused is not None:
+            record["reused_initial_observation"] = initial_observation_ref
+        elif step == 0:
+            write(
+                output / "initial-observation.json",
+                {"binding": observation_binding, "scopes": record["scopes"]},
+            )
         append_curve_record(output / "curves.jsonl.gz", record)
         with (output / "curves.csv").open("a", newline="") as stream:
             fields = [
@@ -458,7 +550,7 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
         if step in plan["selector_steps"]:
             improved, stop = selector.observe(
                 step,
-                record["scopes"]["added_validation"]["mse"],
+                record["scopes"]["added_validation"][m["selector"]["added_metric"]],
                 record["scopes"]["public_validation"]["mse"],
             )
         if improved:
@@ -472,10 +564,31 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
             added = TerminalCorpus(cache)
             public = IndexedPublicCorpus(m["public_membership"], acceptance)
             train_rows = family_training_view(
-                added.groups, added.splits, added.eligible, m["train_family_row_cap"]
+                added.groups,
+                added.splits,
+                added.eligible,
+                m["train_family_row_cap"],
+                games=added.row_game_codes if m["train_stock_strata"] is not None else None,
+                stock=added.maps[0]["geometry"]["stocks"].sum(axis=1)
+                if m["train_stock_strata"] is not None
+                else None,
+                strata=m["train_stock_strata"],
             )
             validation_rows = np.flatnonzero(added.eligible & (added.splits == 1))
-            plan = planned_work(cfg, len(train_rows), len(validation_rows), counts)
+            initial_observation_ref = (
+                json.loads(Path(input_binding).read_bytes())
+                .get("files", {})
+                .get("initial_observation")
+                if input_binding is not None
+                else None
+            )
+            plan = planned_work(
+                cfg,
+                len(train_rows),
+                len(validation_rows),
+                counts,
+                reuse_initial=initial_observation_ref is not None,
+            )
             if plan["forward_upper"] > cfg["limits"]["samples"]:
                 raise ValueError("configured complete-work forward upper exceeds samples")
             scopes = {
@@ -509,9 +622,60 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
                 e["min_delta"],
                 e["min_delta_relative"],
             )
-            sampler = FullBatchSampler(train_rows, m["added_rows"], t["seed"])
+            observation_binding = {
+                "warm_start": initial,
+                "statistics": model_inputs["statistics"],
+                "cache_manifest_sha256": added.manifest_sha,
+                "public_membership": m["public_membership"],
+                "evaluation_batch_size": e["batch_size"],
+                "stock_strata": m["train_stock_strata"],
+                "scopes": {
+                    name: {
+                        "rows": len(indices),
+                        "index_sha256": hashlib.sha256(
+                            np.asarray(indices, dtype="<i8").tobytes()
+                        ).hexdigest(),
+                    }
+                    for name, indices in scopes.items()
+                    if name in plan["scopes_by_step"][0]
+                },
+                "constants": constants,
+            }
+            if initial_observation_ref is not None:
+                initial_observation = json.loads(
+                    bound_file_bytes(initial_observation_ref, 16 * 1024**2)
+                )
+                if initial_observation.get("binding") != observation_binding or set(
+                    initial_observation.get("scopes", {})
+                ) != set(observation_binding["scopes"]):
+                    raise ValueError(
+                        "shared INITIAL exact model/scale/cache/public/scope correspondence"
+                    )
+                for name, value in initial_observation["scopes"].items():
+                    if (
+                        value["rows"] != observation_binding["scopes"][name]["rows"]
+                        or not math.isfinite(value["mse"])
+                        or (
+                            name == "added_validation"
+                            and not math.isfinite(value[m["selector"]["added_metric"]])
+                        )
+                    ):
+                        raise ValueError("shared INITIAL finite scope denominator")
+            sampler = FullBatchSampler(
+                train_rows, max(1, m["added_rows"]), m["added_sampling_seed"]
+            )
             public_rng = np.random.default_rng(m["public_sampling_seed"])
             added_rng, public_reflection_rng = reflection_generators(m)
+            write(
+                output / "training-view.json",
+                {
+                    "cache_manifest_sha256": added.manifest_sha,
+                    "indices": train_rows.tolist(),
+                    "train_family_row_cap": m["train_family_row_cap"],
+                    "stock_strata": m["train_stock_strata"],
+                    "validation_rows": len(validation_rows),
+                },
+            )
             visits = np.zeros(added.row_count, dtype=np.uint64)
             public_visits = {}
             reflected = {"added": 0, "public": 0}
@@ -546,7 +710,11 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
             for update in range(1, plan["updates"] + 1):
                 budget.check()
                 attempted_update = update
-                ai = sampler.take(m["added_rows"])
+                ai = (
+                    sampler.take(m["added_rows"])
+                    if m["added_rows"]
+                    else np.asarray([], dtype=np.int64)
+                )
                 pi = public_rng.integers(counts["train"], size=m["public_rows"])
                 am = added_rng.random(len(ai)) < m["added_reflection_probability"]
                 pm = public_reflection_rng.random(len(pi)) < m["public_reflection_probability"]
@@ -587,12 +755,6 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
                 if step in plan["observation_steps"] and observe():
                     result["stop_reason"] = "early_stopping"
                     break
-            np.savez_compressed(
-                output / "exposure.npz",
-                added_visits=visits,
-                public_indices=np.asarray(list(public_visits), dtype=np.int64),
-                public_visits=np.asarray(list(public_visits.values()), dtype=np.uint64),
-            )
             result["status"] = "COMPLETE"
             result["stop_reason"] = result["stop_reason"] or "configured_horizon"
             result.update(
@@ -610,6 +772,7 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
                 public_repeats=seen_public - len(public_visits),
                 selection={
                     "public_non_regression": selector.gate,
+                    "added_metric": m["selector"]["added_metric"],
                     "best_step": selector.best_step,
                 },
                 curves=curves,
@@ -623,6 +786,17 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
     finally:
         # Independent saves/identity/close all attempted; errors remain FAILED.
         actions = []
+        if visits is not None and public_visits is not None:
+
+            def save_exposure():
+                np.savez_compressed(
+                    output / "exposure.npz",
+                    added_visits=visits,
+                    public_indices=np.asarray(list(public_visits), dtype=np.int64),
+                    public_visits=np.asarray(list(public_visits.values()), dtype=np.uint64),
+                )
+
+            actions.append(("completed_update_exposure", save_exposure))
         if (
             model is not None
             and optimizer is not None

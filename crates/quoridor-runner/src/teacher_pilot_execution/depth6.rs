@@ -46,12 +46,16 @@ enum Record {
 fn schema(_: &PilotConfig) -> &'static str {
     SCHEMA
 }
-fn policy(c: &PilotConfig) -> SearchPolicy {
-    SearchPolicy {
+pub(super) fn policy(c: &PilotConfig) -> Result<SearchPolicy> {
+    Ok(SearchPolicy {
         depth: 6,
         nodes: c.max_nodes,
         strict: true,
-    }
+        tt_slots: c.tt_slots,
+        tt_byte_limit: SearchSession::requested_tt_byte_limit(c.tt_slots)?,
+        lmr: c.lmr,
+        lmr_method: c.configured_lmr_method()?,
+    })
 }
 fn requests(config: &PilotConfig, hash: &str) -> Value {
     let requested = config
@@ -80,7 +84,7 @@ fn audit_result(header: &PilotHeader, index: usize, result: &Outcome<GameRecord>
             slot,
             &header.family_partition,
             value,
-            policy(&header.config),
+            policy(&header.config)?,
         ),
         Outcome::Failed { reason, .. } if !reason.is_empty() => Ok(()),
         _ => Err("failed worker lacks retained cause".into()),
@@ -323,7 +327,7 @@ pub(super) fn run(
                     .iter()
                     .find(|a| a.game == slot.request_id)
                     .ok_or("missing prebound input-only family")?;
-                play_with_budget(slot, a, cancel, policy(config), budget.as_ref())
+                play_with_budget(slot, a, cancel, policy(config)?, budget.as_ref())
             },
             |index, result| {
                 audit_result(&header, index, &result)?;
@@ -550,6 +554,8 @@ mod fixed_d392_stream_tests {
             max_total_nodes: None,
             tt_slots: 4096,
             use_pvs: true,
+            lmr: false,
+            lmr_method: None,
             solver_order_contact: false,
             distance_a: 0.,
             distance_b: 8.,

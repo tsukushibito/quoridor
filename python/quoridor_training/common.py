@@ -80,9 +80,11 @@ DEFAULTS = {
 }
 MIXTURE_FIELDS = (
     "train_family_row_cap",
+    "train_stock_strata",
     "added_rows",
     "public_rows",
     "added_exposures",
+    "added_sampling_seed",
     "public_sampling_seed",
     "added_reflection_probability",
     "added_reflection_seed",
@@ -553,6 +555,28 @@ def validate_mixed_config(config, incoming, overrides=()):
         )
 
 
+def validate_stock_strata(strata):
+    """Explicit disjoint total-stock bands; independent of labels and predictions."""
+    if not isinstance(strata, list) or not strata:
+        raise ValueError("nonempty stock strata required")
+    covered = set()
+    for band in strata:
+        if (
+            not isinstance(band, dict)
+            or set(band) != {"min", "max", "rows"}
+            or any(type(band[k]) is not int for k in band)
+            or not 0 <= band["min"] <= band["max"] <= 20
+            or band["rows"] <= 0
+        ):
+            raise ValueError("explicit stock stratum bounds and positive row cap")
+        values = set(range(band["min"], band["max"] + 1))
+        if covered & values:
+            raise ValueError("stock strata must be disjoint")
+        covered |= values
+    if covered != set(range(21)):
+        raise ValueError("stock strata must cover total remaining stock 0..20")
+
+
 def validate_mixture_config(config, incoming):
     """All scientific mixture choices must be explicit, including null row cap."""
     m, t, e = config["mixture"], config["training"], config["evaluation"]
@@ -561,12 +585,18 @@ def validate_mixture_config(config, incoming):
     cap = m["train_family_row_cap"]
     if cap is not None and (type(cap) is not int or cap <= 0):
         raise ValueError("train_family_row_cap must be null or positive integer")
-    for name in ("added_rows", "output_limit_bytes"):
+    if m["train_stock_strata"] is not None:
+        if cap is not None:
+            raise ValueError("choose either family cap or game stock strata")
+        validate_stock_strata(m["train_stock_strata"])
+    for name in ("output_limit_bytes",):
         if type(m[name]) is not int or m[name] <= 0:
             raise ValueError("positive mixture setting: " + name)
     for name in (
+        "added_rows",
         "public_rows",
         "public_sampling_seed",
+        "added_sampling_seed",
         "added_reflection_seed",
         "public_reflection_seed",
         "diagnostic_seed",
@@ -584,8 +614,9 @@ def validate_mixture_config(config, incoming):
             raise ValueError("finite source reflection probability: " + name)
     if (
         not isinstance(m["selector"], dict)
-        or set(m["selector"]) != {"public_non_regression"}
+        or set(m["selector"]) != {"public_non_regression", "added_metric"}
         or type(m["selector"]["public_non_regression"]) is not bool
+        or m["selector"]["added_metric"] not in ("mse", "family_mse")
     ):
         raise ValueError("explicit optional public nonregression selector required")
     for name in ("public_membership", "public_acceptance"):

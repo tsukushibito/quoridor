@@ -24,7 +24,11 @@ class MixtureBoundaries(unittest.TestCase):
         cfg["optimizer"].update(betas=[0.9, 0.999], eps=1e-8)
         cfg["model"].update(architecture="distance_residual", distance_a=0.0, distance_b=0.0)
         cfg["training"].update(
-            target="z", batch_size=7, steps=12, reflection_probability=0.0, warmup_steps=3
+            target="z",
+            batch_size=7,
+            steps=12,
+            reflection_probability=0.0,
+            warmup_steps=3,
         )
         cfg["evaluation"].update(
             monitor="row", diagnostic_rows=3, interval=4, early_stopping_patience=2
@@ -33,7 +37,12 @@ class MixtureBoundaries(unittest.TestCase):
         cfg["limits"].update(seconds=None, samples=1000)
 
         def ref(digest):
-            return {"path": "/synthetic/never-read", "sha256": digest, "bytes": 1, "mode": "0644"}
+            return {
+                "path": "/synthetic/never-read",
+                "sha256": digest,
+                "bytes": 1,
+                "mode": "0644",
+            }
 
         cfg["experiment"].update(
             study="mixed-outcome",
@@ -47,6 +56,8 @@ class MixtureBoundaries(unittest.TestCase):
         )
         cfg["mixture"] = {
             "train_family_row_cap": None,
+            "train_stock_strata": None,
+            "added_sampling_seed": cfg["training"]["seed"],
             "added_rows": 3,
             "public_rows": 4,
             "added_exposures": 2.0,
@@ -58,7 +69,7 @@ class MixtureBoundaries(unittest.TestCase):
             "diagnostic_seed": 41,
             "public_membership": ref("a" * 64),
             "public_acceptance": ref("b" * 64),
-            "selector": {"public_non_regression": False},
+            "selector": {"public_non_regression": False, "added_metric": "mse"},
             "output_limit_bytes": 1024**2,
         }
         return cfg

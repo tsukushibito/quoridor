@@ -1008,7 +1008,10 @@ impl Table {
         Self::with_limit(n, usize::MAX)
     }
     fn persistent(n: usize) -> Result<Self> {
-        Self::with_limit(n, Self::requested_bytes(n)?.max(1024 * 1024))
+        Self::with_limit(n, Self::persistent_byte_limit(n)?)
+    }
+    fn persistent_byte_limit(n: usize) -> Result<usize> {
+        Ok(Self::requested_bytes(n)?.max(1024 * 1024))
     }
     fn requested_bytes(n: usize) -> Result<usize> {
         n.checked_mul(std::mem::size_of::<Option<Entry>>())
@@ -2790,6 +2793,10 @@ impl SearchSession {
     /// Live persistent slot count and byte limit; no table or history mutation.
     pub fn tt_capacity(&self) -> (usize, usize) {
         (self.table.slots.len(), self.table.byte_limit)
+    }
+    /// The persistent table owner's ABI-derived limit, without allocating a table.
+    pub fn requested_tt_byte_limit(capacity: usize) -> Result<usize> {
+        Table::persistent_byte_limit(capacity)
     }
     pub fn namespace(&self) -> &SearchNamespace {
         &self.namespace

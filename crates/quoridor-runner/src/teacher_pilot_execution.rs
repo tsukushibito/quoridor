@@ -5,7 +5,8 @@ use crate::{
     teacher_pilot::{self, ContextRecord, PilotConfig, ScheduledGame, Termination},
 };
 use quoridor_ai::alphabeta::{
-    DistanceEvaluator, SearchLimits, SearchNamespace, SearchResult, SearchSession,
+    DistanceEvaluator, LmrMethod, OrderingProfile, SearchLimits, SearchNamespace, SearchResult,
+    SearchSession,
 };
 use quoridor_core::research::{Ruleset, SigmaContext};
 use quoridor_data::{
@@ -42,6 +43,10 @@ struct SearchPolicy {
     depth: u16,
     nodes: u64,
     strict: bool,
+    tt_slots: usize,
+    tt_byte_limit: usize,
+    lmr: bool,
+    lmr_method: LmrMethod,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -62,6 +67,23 @@ pub struct SearchEvidence {
 
 impl SearchEvidence {
     fn returned(result: &SearchResult, parent: ContextRecord) -> Self {
+        let mut counters = alpha_counters(result);
+        counters["lmr_enabled"] = serde_json::json!(result.stats.lmr_enabled);
+        counters["lmr_method_id"] = serde_json::json!(
+            result
+                .stats
+                .lmr_enabled
+                .then_some(result.stats.lmr_method.id())
+        );
+        counters["lmr_attempts"] = serde_json::json!(result.stats.lmr_attempts);
+        counters["lmr_full_depth_confirmations"] =
+            serde_json::json!(result.stats.lmr_full_depth_confirmations);
+        counters["lmr_full_window_researches"] =
+            serde_json::json!(result.stats.lmr_full_window_researches);
+        counters["zero_stock_approx_permitted"] =
+            serde_json::json!(result.stats.zero_stock_approx_permitted);
+        counters["zero_stock_safe_race_enabled"] =
+            serde_json::json!(result.stats.zero_stock_safe_race_enabled);
         Self {
             action: result.action,
             raw_value: result.value,
@@ -69,7 +91,7 @@ impl SearchEvidence {
             completed_depth: result.completed_depth,
             pv: result.pv.clone(),
             stop: stop_name(result.stop).into(),
-            counters: alpha_counters(result),
+            counters,
             returned_search_wall_ns: result.elapsed.as_nanos().min(u128::from(u64::MAX)) as u64,
             parent,
             accepted: false,
@@ -92,7 +114,13 @@ impl SearchEvidence {
             || self.counters["policy_calls"].as_u64() != Some(0)
             || self.counters["tt_retained_bytes"]
                 .as_u64()
-                .is_none_or(|n| n > 1024 * 1024)
+                .is_none_or(|n| n > policy.tt_byte_limit as u64)
+            || self.counters["session"] != expected_session_settings(policy)?
+            || self.counters["lmr_enabled"].as_bool() != Some(policy.lmr)
+            || self.counters["lmr_method_id"]
+                != serde_json::json!(policy.lmr.then_some(policy.lmr_method.id()))
+            || self.counters["zero_stock_approx_permitted"].as_bool() != Some(false)
+            || self.counters["zero_stock_safe_race_enabled"].as_bool() != Some(false)
             || self.parent != ContextRecord::from_context(context)
         {
             return Err("fixed-D completed-result/work/parent contract refused".into());
@@ -199,7 +227,7 @@ fn play_using_policy(
     assignment: &FamilyAssignment,
     cancel: &AtomicBool,
     policy: SearchPolicy,
-    mut search: impl FnMut(&SigmaContext) -> Result<SearchResult>,
+    mut search: impl FnMut(&SigmaContext) -> Result<(SearchResult, Value)>,
 ) -> Result<GameRecord> {
     let begin = Instant::now();
     let mut prefix = slot.prefix.clone().ok_or("missing accepted prefix")?;
@@ -232,7 +260,7 @@ fn play_using_policy(
         }
         let parent = ContextRecord::from_context(&context);
         attempted_search_calls += 1;
-        let result = match search(&context) {
+        let (result, session_settings) = match search(&context) {
             Ok(result) => result,
             Err(error) => {
                 return finish_game(
@@ -253,6 +281,7 @@ fn play_using_policy(
             }
         };
         let mut evidence = SearchEvidence::returned(&result, parent.clone());
+        evidence.counters["session"] = session_settings;
         let checked = if cancel.load(Ordering::Acquire) {
             Err("cancelled_after_search".into())
         } else {
@@ -309,6 +338,95 @@ fn play_using_policy(
     }
 }
 
+fn search_namespace(policy: SearchPolicy) -> SearchNamespace {
+    SearchNamespace {
+        evaluator: EVALUATOR_ID.into(),
+        rules: Ruleset::Standard2pThreefold.id().into(),
+        selectivity: format!(
+            "{}/d6/n{}/PVS/TT{}/no-time/no-solver-order-contact",
+            quoridor_data::common_corpus::VERSION,
+            policy.nodes,
+            policy.tt_slots,
+        ),
+    }
+}
+
+fn session_settings(
+    capacity: (usize, usize),
+    namespace: &SearchNamespace,
+    lmr: bool,
+    method: Option<LmrMethod>,
+) -> Value {
+    serde_json::json!({
+        "profile":OrderingProfile::CheapStaticControl.name(),
+        "tt_slots":capacity.0,"tt_byte_limit":capacity.1,
+        "namespace":{"evaluator":namespace.evaluator,"rules":namespace.rules,"selectivity":namespace.selectivity},
+        "lmr_enabled":lmr,"lmr_method":method.map(LmrMethod::name),
+        "lmr_method_id":method.map(LmrMethod::id),
+        "lmr_reduction_rule":method.map(LmrMethod::reduction_rule),
+        "completed_depth_semantics":if lmr {"selective_nominal"} else {"fullwidth_nominal"}
+    })
+}
+
+fn expected_session_settings(policy: SearchPolicy) -> Result<Value> {
+    let method = policy.lmr.then_some(policy.lmr_method);
+    Ok(session_settings(
+        (
+            policy.tt_slots,
+            SearchSession::requested_tt_byte_limit(policy.tt_slots)?,
+        ),
+        &OrderingProfile::CheapStaticControl.namespace(search_namespace(policy), method),
+        policy.lmr,
+        method,
+    ))
+}
+
+fn configured_sessions(policy: SearchPolicy) -> Result<([SearchSession; 2], [Value; 2])> {
+    let evaluator = Arc::new(DistanceEvaluator::new(0., 8.));
+    let namespace = search_namespace(policy);
+    // Preserve the original independently retained per-colour sessions inside
+    // every game. Only one search is active at a time; no cross-colour TT sharing.
+    let mut sessions = [
+        SearchSession::new_with_ordering(
+            evaluator.clone(),
+            namespace.clone(),
+            policy.tt_slots,
+            quoridor_ai::score::ScoreDomain::LEGACY,
+            OrderingProfile::CheapStaticControl,
+            false,
+            false,
+        )?,
+        SearchSession::new_with_ordering(
+            evaluator,
+            namespace,
+            policy.tt_slots,
+            quoridor_ai::score::ScoreDomain::LEGACY,
+            OrderingProfile::CheapStaticControl,
+            false,
+            false,
+        )?,
+    ];
+    let mut settings = [Value::Null, Value::Null];
+    for (session, actual) in sessions.iter_mut().zip(&mut settings) {
+        session.set_lmr_method(policy.lmr_method);
+        session.set_lmr(policy.lmr)?;
+        session.set_zero_stock_approx_min_root_walls(None)?;
+        session.set_zero_stock_safe_race(false);
+        *actual = session_settings(
+            session.tt_capacity(),
+            session.namespace(),
+            session.lmr_enabled(),
+            session.lmr_method(),
+        );
+        if *actual != expected_session_settings(policy)?
+            || session.tt_capacity().1 != policy.tt_byte_limit
+        {
+            return Err("fixed pilot actual TT/method/namespace differs".into());
+        }
+    }
+    Ok((sessions, settings))
+}
+
 fn play_with_budget(
     slot: &ScheduledGame,
     assignment: &FamilyAssignment,
@@ -316,43 +434,12 @@ fn play_with_budget(
     policy: SearchPolicy,
     budget: Option<&NodeBudget>,
 ) -> Result<GameRecord> {
-    let evaluator = Arc::new(DistanceEvaluator::new(0., 8.));
-    let namespace = SearchNamespace {
-        evaluator: EVALUATOR_ID.into(),
-        rules: Ruleset::Standard2pThreefold.id().into(),
-        selectivity: format!(
-            "{}/d6/n{}/PVS/TT4096/no-time/no-solver-order-contact",
-            quoridor_data::common_corpus::VERSION,
-            policy.nodes
-        ),
-    };
-    // Preserve the original independently retained per-colour sessions inside
-    // every game. Only one search is active at a time; no cross-colour TT sharing.
-    let mut sessions = [
-        SearchSession::new_with_control_ordering(
-            evaluator.clone(),
-            namespace.clone(),
-            4096,
-            quoridor_ai::score::ScoreDomain::LEGACY,
-        )?,
-        SearchSession::new_with_control_ordering(
-            evaluator,
-            namespace,
-            4096,
-            quoridor_ai::score::ScoreDomain::LEGACY,
-        )?,
-    ];
-    if sessions
-        .iter()
-        .any(|s| s.tt_capacity() != (4096, 1024 * 1024))
-    {
-        return Err("fixed pilot TT allocation differs".into());
-    }
+    let (mut sessions, settings) = configured_sessions(policy)?;
     let mut limits = SearchLimits {
         max_depth: policy.depth,
         max_nodes: policy.nodes,
         time_limit: None,
-        tt_entries: 4096,
+        tt_entries: policy.tt_slots,
         use_pvs: true,
         use_tt: true,
     };
@@ -363,13 +450,15 @@ fn play_with_budget(
             None => policy.nodes,
         };
         limits.max_nodes = reserved;
-        let result =
-            sessions[usize::from(context.position().turn)].search(context, &limits, cancel);
+        let side = usize::from(context.position().turn);
+        let result = sessions[side].search(context, &limits, cancel);
         // An Err has opaque work: retain the whole reservation, never charge zero.
         if let (Some(b), Ok(r)) = (budget, &result) {
             b.settle(reserved, r.stats.nodes)?;
         }
-        result.map_err(Into::into)
+        result
+            .map(|result| (result, settings[side].clone()))
+            .map_err(Into::into)
     })
 }
 
@@ -599,10 +688,19 @@ pub fn run_bound(bound: &crate::research_manifest::BoundControl) -> Result<Value
     )?;
     let content: quoridor_data::lossless_jsonl::Content =
         serde_json::from_slice(&fs::read(config.output.join("stream-content.json"))?)?;
-    Ok(
-        serde_json::json!({"planned":config.planned_games,"generation":report,
-        "source_content":content,"status":"DATA_RETURNED_PENDING_EXTERNAL_FINALIZATION"}),
-    )
+    Ok(serde_json::json!({
+        "planned":config.planned_games,
+        "generation_result":{
+            "path":config.output.join("generation-result.json"),
+            "sha256":quoridor_data::file_sha(&config.output.join("generation-result.json"))?
+        },
+        "generation":{
+            "recorded":report.recorded,"goals":report.goals,"draws":report.draws,
+            "unknown":report.unknown,"rows":report.rows,
+            "search_nodes":report.search_nodes,"search_calls":report.search_calls
+        },
+        "source_content":content,"status":"DATA_RETURNED_PENDING_EXTERNAL_FINALIZATION"
+    }))
 }
 
 pub fn run(
@@ -834,7 +932,8 @@ pub fn run_depth6_with_cancel(
     config_ref: quoridor_data::terminal_stream::BoundJson,
     cancel: &AtomicBool,
 ) -> Result<PilotReport> {
-    if serde_json::to_value(config)? != config_ref.read()? {
+    let bound_config: PilotConfig = serde_json::from_value(config_ref.read()?)?;
+    if serde_json::to_value(config)? != serde_json::to_value(bound_config)? {
         return Err("actual generation config correspondence".into());
     }
     teacher_pilot::depth6::validate(config)?;
@@ -872,6 +971,10 @@ mod configured_generation_tests {
             depth: 6,
             nodes: 100,
             strict: true,
+            tt_slots: 4096,
+            tt_byte_limit: SearchSession::requested_tt_byte_limit(4096).unwrap(),
+            lmr: false,
+            lmr_method: LmrMethod::default(),
         };
         let g = play_using_policy(&slot, &a, &cancel, policy, |_| {
             calls.fetch_add(1, Ordering::Relaxed);
@@ -906,5 +1009,109 @@ mod configured_generation_tests {
             policy,
         )
         .unwrap();
+    }
+}
+
+#[cfg(test)]
+mod generation421_tests {
+    use super::*;
+
+    fn config() -> PilotConfig {
+        let reference = serde_json::json!({"path":"/synthetic-input.json","sha256":"0".repeat(64)});
+        serde_json::from_value(serde_json::json!({
+            "common_study":{"families":64,"prefix_seed":42120261015_u64,"prefix_lengths":[4,8,12,16],
+                "split_seed":42120261023_u64,"root_value_policy":"outcome_only","schedule":reference,
+                "partition":reference,"batch_start":0,"batch_count":64,"excluded_books":[]},
+            "ruleset":"standard_2p_threefold","run_id":"synthetic421","output":"/synthetic-output421",
+            "planned_games":64,"prefix_seed":42120261015_u64,"attempts_per_prefix":32,
+            "depth":6,"max_nodes":4000000,"max_total_nodes":1000000000,"tt_slots":4096,
+            "use_pvs":true,"solver_order_contact":false,"distance_a":0.,"distance_b":8.,
+            "per_move_timeout_ms":null,"max_total_plies":200,"cpu_core":0,"game_workers":1,"worker_cores":[0],
+            "host_ram_reserve":4294967296_u64,"max_memory_bytes":1073741824_u64,"max_output_bytes":33554432
+        })).unwrap()
+    }
+
+    #[test]
+    fn generation421_defaults_off_and_method_name_checked_even_off() {
+        let mut c = config();
+        c.validate().unwrap();
+        assert!(!c.lmr && c.lmr_method.is_none());
+        let old = serde_json::to_value(&c).unwrap();
+        assert!(old.get("lmr").is_none() && old.get("lmr_method").is_none());
+        let mut explicit_off = old.clone();
+        explicit_off["lmr"] = serde_json::json!(false);
+        let decoded: PilotConfig = serde_json::from_value(explicit_off).unwrap();
+        assert_eq!(serde_json::to_value(decoded).unwrap(), old);
+        c.lmr_method = Some("unknown_method".into());
+        assert!(c.validate().is_err());
+        c.lmr_method = Some("depth_rank".into());
+        c.lmr = true;
+        c.tt_slots = 1_048_576;
+        c.validate().unwrap();
+        c.tt_slots = 0;
+        assert!(c.validate().is_err());
+        c.tt_slots = 1_048_577;
+        assert!(c.validate().is_err());
+    }
+
+    #[test]
+    fn generation421_live_typed_sessions_honor_capacity_and_method_without_search() {
+        let mut c = config();
+        c.tt_slots = 1_048_576;
+        c.lmr = true;
+        c.lmr_method = Some("depth_rank".into());
+        let p = depth6::policy(&c).unwrap();
+        let (sessions, settings) = configured_sessions(p).unwrap();
+        for (session, actual) in sessions.iter().zip(&settings) {
+            assert_eq!(session.tt_capacity().0, c.tt_slots);
+            assert_eq!(session.tt_capacity().1, p.tt_byte_limit);
+            assert!(p.tt_byte_limit > 1024 * 1024);
+            assert_eq!(session.lmr_method(), Some(LmrMethod::DepthRank));
+            assert_eq!(*actual, expected_session_settings(p).unwrap());
+        }
+        assert!(SearchSession::requested_tt_byte_limit(usize::MAX).is_err());
+    }
+
+    #[test]
+    fn generation421_return_refuses_wrong_method_capacity_history_and_incomplete_depth() {
+        let mut c = config();
+        c.tt_slots = 1_048_576;
+        c.lmr = true;
+        c.lmr_method = Some("depth_rank".into());
+        let policy = depth6::policy(&c).unwrap();
+        let root = SigmaContext::from_prefix(&[]).unwrap();
+        let r = SearchResult {
+            action: Some(13),
+            value: Some(0.25),
+            completed_depth: 6,
+            pv: vec![13],
+            stop: quoridor_ai::alphabeta::StopReason::DepthComplete,
+            stats: quoridor_ai::alphabeta::SearchStats {
+                nodes: 3,
+                lmr_enabled: true,
+                lmr_method: LmrMethod::DepthRank,
+                ..Default::default()
+            },
+            elapsed: std::time::Duration::ZERO,
+        };
+        let mut evidence = SearchEvidence::returned(&r, ContextRecord::from_context(&root));
+        evidence.counters["session"] = expected_session_settings(policy).unwrap();
+        evidence.counters["tt_retained_bytes"] = serde_json::json!(policy.tt_byte_limit);
+        assert_eq!(evidence.validate_return_policy(&root, policy).unwrap(), 13);
+        let mut bad = evidence.clone();
+        bad.counters["tt_retained_bytes"] = serde_json::json!(policy.tt_byte_limit + 1);
+        assert!(bad.validate_return_policy(&root, policy).is_err());
+        let mut bad = evidence.clone();
+        bad.counters["session"]["namespace"]["selectivity"] = serde_json::json!("wrong");
+        assert!(bad.validate_return_policy(&root, policy).is_err());
+        let mut bad = evidence.clone();
+        bad.counters["lmr_method_id"] = serde_json::json!(LmrMethod::FixedOne.id());
+        assert!(bad.validate_return_policy(&root, policy).is_err());
+        let mut bad = evidence.clone();
+        bad.parent.ply += 1;
+        assert!(bad.validate_return_policy(&root, policy).is_err());
+        evidence.completed_depth = 5;
+        evidence.stop = "node_cap".into();
+        assert!(evidence.validate_return_policy(&root, policy).is_err());
     }
 }

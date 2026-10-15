@@ -199,7 +199,7 @@ class EarlyStopping:
         return improved, bool(self.patience and self.stale >= self.patience)
 
 
-def family_training_view(groups, splits, eligible, cap):
+def family_training_view(groups, splits, eligible, cap, *, games=None, stock=None, strata=None):
     """Chronological T-only indices; never relabel/delete canonical or V rows."""
     if cap is not None and (type(cap) is not int or cap <= 0):
         raise ValueError("train_family_row_cap must be explicit null or positive integer")
@@ -216,6 +216,42 @@ def family_training_view(groups, splits, eligible, cap):
             raise ValueError("whole family leaked across T/V")
         if split == 0 and valid:
             bank[1].append(i)
+    if strata is not None:
+        if cap is not None:
+            raise ValueError("choose either family cap or game stock strata")
+        games, stock = map(np.asarray, (games, stock))
+        if (
+            games.shape != groups.shape
+            or games.dtype.kind not in "iu"
+            or stock.shape != groups.shape
+            or stock.dtype.kind not in "iu"
+            or np.any(stock > 20)
+            or np.any(stock < 0)
+            or np.any(games < 0)
+        ):
+            raise ValueError("parallel integer game codes and total stock 0..20 required")
+        from .common import validate_stock_strata
+
+        validate_stock_strata(strata)
+        banks = {}
+        for i, (game, group, split) in enumerate(zip(games, groups, splits)):
+            bank = banks.setdefault(int(game), (int(group), int(split), []))
+            if bank[:2] != (int(group), int(split)):
+                raise ValueError("game family/split drift")
+            if split == 0 and eligible[i]:
+                bank[2].append(i)
+        selected = []
+        for _, _, indices in banks.values():
+            for band in strata:
+                candidates = [i for i in indices if band["min"] <= stock[i] <= band["max"]]
+                count = min(len(candidates), band["rows"])
+                if count == 1:
+                    selected.append(candidates[0])
+                elif count > 1:
+                    selected.extend(
+                        candidates[j * (len(candidates) - 1) // (count - 1)] for j in range(count)
+                    )
+        return np.asarray(sorted(selected), dtype=np.int64)
     selected = []
     for _, indices in families.values():
         count = len(indices) if cap is None else min(len(indices), cap)
