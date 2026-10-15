@@ -35,7 +35,9 @@ fn session(eval: Arc<dyn StaticEvaluator>) -> SearchSession {
             selectivity: "explicit-fullwidth-PVS".into(),
         },
         4096,
-        OrderingProfile::Control,
+        ScoreDomain::LEGACY,
+        OrderingProfile::CheapStaticControl,
+        false,
         false,
     )
     .unwrap()
