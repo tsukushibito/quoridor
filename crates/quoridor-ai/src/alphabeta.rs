@@ -439,6 +439,72 @@ pub enum StopReason {
 pub const TT_REPRESENTATION: &str = "compact359-board-zobrist-v1-context128-v1";
 /// One selected LMR rule; OFF retains full-width depth semantics.
 pub const LMR_METHOD: &str = "lmr400-late4-depth3-minus1-pvs-verify-v1";
+
+/// Additional reduction from normal child depth, not the ordinary played ply.
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq)]
+pub enum LmrMethod {
+    #[default]
+    FixedOne,
+    DepthRank,
+}
+static LMR_DEPTH_RANK: std::sync::OnceLock<[[u8; 64]; 64]> = std::sync::OnceLock::new();
+impl LmrMethod {
+    pub fn from_name(name: &str) -> Result<Self> {
+        match name {
+            "fixed_one" => Ok(Self::FixedOne),
+            "depth_rank" => Ok(Self::DepthRank),
+            _ => Err(SearchError::Limits("unsupported LMR method".into())),
+        }
+    }
+    pub fn name(self) -> &'static str {
+        match self {
+            Self::FixedOne => "fixed_one",
+            Self::DepthRank => "depth_rank",
+        }
+    }
+    pub fn id(self) -> &'static str {
+        match self {
+            Self::FixedOne => LMR_METHOD,
+            Self::DepthRank => "lmr408-depth-rank-log63-extra0to3-pvs-verify-v1",
+        }
+    }
+    pub fn reduction_rule(self) -> &'static str {
+        match self {
+            Self::FixedOne => "d>=3,m>=4: extra=1; child=d-1-extra; existing protection/PVS",
+            Self::DepthRank => {
+                "d>=3,m>=4: extra=clamp(floor(0.7844+ln(min(d,63))*ln(min(m,63))/2.4696)-1,0,min(3,d-2)); child=d-1-extra; existing protection/PVS"
+            }
+        }
+    }
+    fn prepare(self) {
+        if self == Self::DepthRank {
+            LMR_DEPTH_RANK.get_or_init(|| {
+                let mut table = [[0; 64]; 64];
+                for (depth, row) in table.iter_mut().enumerate().skip(3) {
+                    for (rank, cell) in row.iter_mut().enumerate().skip(4) {
+                        let extra = (0.7844 + (depth as f64).ln() * (rank as f64).ln() / 2.4696)
+                            .floor()
+                            - 1.0;
+                        *cell = extra.clamp(0.0, (depth - 2).min(3) as f64) as u8;
+                    }
+                }
+                table
+            });
+        }
+    }
+    fn reduction(self, depth: u16, rank: usize) -> u16 {
+        if depth < 3 || rank < 4 {
+            return 0;
+        }
+        match self {
+            Self::FixedOne => 1,
+            Self::DepthRank => u16::from(
+                LMR_DEPTH_RANK.get().expect("LMR prepared before Search")
+                    [usize::from(depth.min(63))][rank.min(63)],
+            ),
+        }
+    }
+}
 /// Heuristic leaves, not exact WDL or full-width minimax values.
 pub const ZERO_STOCK_APPROX_METHOD: &str = "zero-stock406-wall-distance-stm-tie-win-v1";
 
@@ -480,6 +546,9 @@ fn permit_zero_stock_approx(threshold: Option<u8>, root_walls: u16, max_depth: u
 
 #[derive(Debug, Default, Clone)]
 pub struct SearchStats {
+    /// One per-Search snapshot; method selection alone does not enable LMR.
+    pub lmr_enabled: bool,
+    pub lmr_method: LmrMethod,
     /// Per-Search root snapshot; fixed throughout iterative deepening.
     pub root_walls_remaining: u16,
     pub zero_stock_approx_permitted: bool,
@@ -1571,12 +1640,26 @@ impl Search<'_> {
                 }
                 action
             };
-            let reduced = self.lmr
+            let reduction = if self.lmr
                 && moves
                     .as_ref()
-                    .is_some_and(|moves| self.lmr_allowed(action, depth, i, alpha, tt_move, moves));
+                    .is_some_and(|moves| self.lmr_allowed(action, depth, i, alpha, tt_move, moves))
+            {
+                // i counts distinct hands, including TT-first; re-search never advances it.
+                self.stats.lmr_method.reduction(depth, i + 1)
+            } else {
+                0
+            };
+            let reduced = reduction > 0;
             let mut v = if reduced {
-                self.reduced_child(c, a, action, depth - 1, alpha, ply + 1)?
+                self.reduced_child(
+                    c,
+                    a,
+                    action,
+                    [depth - 1, depth - 1 - reduction],
+                    alpha,
+                    ply + 1,
+                )?
             } else if self.limits.use_pvs && i > 0 && alpha.is_finite() {
                 self.child(c, a, action, depth - 1, [alpha, next_up(alpha)], ply + 1)?
             } else {
@@ -1700,16 +1783,18 @@ impl Search<'_> {
         c: &mut SigmaContext,
         parent: Option<&EvalAccumulator>,
         action: u16,
-        child_depth: u16,
+        child_depths: [u16; 2],
         alpha: f32,
         ply: usize,
     ) -> NodeResult<f32> {
+        let [child_depth, reduced_depth] = child_depths;
+        debug_assert!(reduced_depth < child_depth);
         self.stats.lmr_attempts += 1;
         let shallow = self.child(
             c,
             parent,
             action,
-            child_depth - 1,
+            reduced_depth,
             [alpha, next_up(alpha)],
             ply,
         )?;
@@ -1918,7 +2003,7 @@ pub fn search_with_orderer(
             Some(&mut ordering),
             false,
             StaticMode::Coverage,
-            false,
+            (false, LmrMethod::FixedOne),
             (false, ZeroStockApproxMethod::Race),
         ),
     )
@@ -1949,7 +2034,7 @@ impl OrderingProfile {
             Self::CombinedSignedCheapStatic => "cheap",
         }
     }
-    pub fn namespace(self, namespace: SearchNamespace, lmr: bool) -> SearchNamespace {
+    pub fn namespace(self, namespace: SearchNamespace, lmr: Option<LmrMethod>) -> SearchNamespace {
         SessionMethod::Profile(self).namespace(namespace, lmr)
     }
 }
@@ -1961,16 +2046,16 @@ enum SessionMethod {
     SignedControl,
     Profile(OrderingProfile),
 }
-fn append_lmr_method(namespace: &mut SearchNamespace) {
+fn append_lmr_method(namespace: &mut SearchNamespace, method: LmrMethod) {
     namespace.selectivity.push(':');
-    namespace.selectivity.push_str(LMR_METHOD);
+    namespace.selectivity.push_str(method.id());
 }
 fn append_zero_stock_approx_method(namespace: &mut SearchNamespace, method: ZeroStockApproxMethod) {
     namespace.selectivity.push(':');
     namespace.selectivity.push_str(method.id());
 }
 impl SessionMethod {
-    fn namespace(self, mut namespace: SearchNamespace, lmr: bool) -> SearchNamespace {
+    fn namespace(self, mut namespace: SearchNamespace, lmr: Option<LmrMethod>) -> SearchNamespace {
         match self {
             Self::Plain => {}
             Self::SignedControl => namespace.selectivity.push_str(":signed-control-goal-first"),
@@ -1983,8 +2068,8 @@ impl SessionMethod {
                 namespace.selectivity.push_str(profile.name());
             }
         }
-        if lmr {
-            append_lmr_method(&mut namespace);
+        if let Some(method) = lmr {
+            append_lmr_method(&mut namespace, method);
         }
         namespace
     }
@@ -2001,6 +2086,7 @@ pub struct SearchSession {
     static_enabled: StaticMode,
     ordering_diagnostics: bool,
     lmr: bool,
+    lmr_method: LmrMethod,
     method: SessionMethod,
     zero_stock_approx_min_root_walls: Option<u8>,
     zero_stock_approx_method: ZeroStockApproxMethod,
@@ -2083,33 +2169,48 @@ impl SearchSession {
                 "LMR requires signed Control/Cheap".into(),
             ));
         }
-        if enabled != self.lmr {
-            // Approximation, when resolved ON, is the last method component.
-            if self.zero_stock_approx_effective {
-                self.namespace.selectivity.truncate(
-                    self.namespace.selectivity.len() - self.zero_stock_approx_method.id().len() - 1,
-                );
-            }
-            if self.lmr {
-                self.namespace
-                    .selectivity
-                    .truncate(self.namespace.selectivity.len() - LMR_METHOD.len() - 1);
-            } else {
-                append_lmr_method(&mut self.namespace);
-            }
-            if self.zero_stock_approx_effective {
-                append_zero_stock_approx_method(&mut self.namespace, self.zero_stock_approx_method);
-            }
-            self.lmr = enabled;
-            self.table.clear();
-            if let Some(history) = self.ordering.as_mut() {
-                history.reset();
-            }
-        }
+        self.change_lmr(enabled, self.lmr_method);
         Ok(())
+    }
+    /// Selects a method without activating it. No numeric namespace change while OFF.
+    pub fn set_lmr_method(&mut self, method: LmrMethod) {
+        self.change_lmr(self.lmr, method);
+    }
+    fn change_lmr(&mut self, enabled: bool, method: LmrMethod) {
+        method.prepare(); // One process table, outside per-node search work.
+        if enabled == self.lmr && (method == self.lmr_method || !enabled) {
+            self.lmr_method = method;
+            return;
+        }
+        // Approximation remains the final independent method component.
+        if self.zero_stock_approx_effective {
+            self.namespace.selectivity.truncate(
+                self.namespace.selectivity.len() - self.zero_stock_approx_method.id().len() - 1,
+            );
+        }
+        if self.lmr {
+            self.namespace
+                .selectivity
+                .truncate(self.namespace.selectivity.len() - self.lmr_method.id().len() - 1);
+        }
+        if enabled {
+            append_lmr_method(&mut self.namespace, method);
+        }
+        if self.zero_stock_approx_effective {
+            append_zero_stock_approx_method(&mut self.namespace, self.zero_stock_approx_method);
+        }
+        self.lmr = enabled;
+        self.lmr_method = method;
+        self.table.clear();
+        if let Some(history) = self.ordering.as_mut() {
+            history.reset();
+        }
     }
     pub fn lmr_enabled(&self) -> bool {
         self.lmr
+    }
+    pub fn lmr_method(&self) -> Option<LmrMethod> {
+        self.lmr.then_some(self.lmr_method)
     }
     /// Observation only; fixed376 enables its two scheduled calls per process.
     /// Does not reset/age tables/history or select a scoring algorithm.
@@ -2166,7 +2267,7 @@ impl SearchSession {
         let mut session = Self::create(evaluator, namespace, capacity, score_domain, true, false)?;
         session.static_enabled = StaticMode::CheapControl;
         session.method = SessionMethod::SignedControl;
-        session.namespace = session.method.namespace(session.namespace, false);
+        session.namespace = session.method.namespace(session.namespace, None);
         Ok(session)
     }
     /// Shared explicit Control/Cheap construction; product defaults are separate.
@@ -2186,7 +2287,7 @@ impl SearchSession {
             OrderingProfile::CombinedSignedCheapStatic => StaticMode::Cheap,
         };
         session.method = SessionMethod::Profile(profile);
-        session.namespace = session.method.namespace(session.namespace, false);
+        session.namespace = session.method.namespace(session.namespace, None);
         session.set_lmr(lmr)?;
         Ok(session)
     }
@@ -2221,6 +2322,7 @@ impl SearchSession {
             },
             ordering_diagnostics: false,
             lmr: false,
+            lmr_method: LmrMethod::FixedOne,
             method: SessionMethod::Plain,
             zero_stock_approx_min_root_walls: None,
             zero_stock_approx_method: ZeroStockApproxMethod::Race,
@@ -2272,7 +2374,9 @@ impl SearchSession {
                 .push_str(&score_domain.namespace_suffix());
         }
         self.evaluator = evaluator;
-        self.namespace = self.method.namespace(namespace, self.lmr);
+        self.namespace = self
+            .method
+            .namespace(namespace, self.lmr.then_some(self.lmr_method));
         // A reset has no root yet; preserve requested configuration but do not
         // claim resolved authority until the next real Search supplies its root.
         self.zero_stock_approx_effective = false;
@@ -2322,7 +2426,7 @@ impl SearchSession {
                 self.ordering.as_mut(),
                 self.ordering_diagnostics,
                 self.static_enabled,
-                self.lmr,
+                (self.lmr, self.lmr_method),
                 (
                     self.zero_stock_approx_effective,
                     self.zero_stock_approx_method,
@@ -2344,7 +2448,7 @@ fn search_in_table(
         Option<&mut ContinuationHistory>,
         bool,
         StaticMode,
-        bool,
+        (bool, LmrMethod),
         (bool, ZeroStockApproxMethod),
     ),
 ) -> Result<SearchResult> {
@@ -2354,7 +2458,7 @@ fn search_in_table(
         ordering,
         ordering_diagnostics,
         static_enabled,
-        lmr,
+        (lmr, lmr_method),
         (zero_stock_approx_permitted, zero_stock_approx_method),
     ) = table_and_domain;
     let start = Instant::now();
@@ -2391,6 +2495,9 @@ fn search_in_table(
                 .ok_or_else(|| SearchError::Limits("deadline overflow".into()))
         })
         .transpose()?;
+    if lmr {
+        lmr_method.prepare();
+    }
     let root_context = if limits.use_tt {
         ContextFingerprint::of(root)
     } else {
@@ -2419,6 +2526,8 @@ fn search_in_table(
         deadline,
         table,
         stats: SearchStats {
+            lmr_enabled: lmr,
+            lmr_method,
             root_walls_remaining,
             zero_stock_approx_permitted,
             zero_stock_approx_method,
@@ -2887,7 +2996,7 @@ mod persistent_tt_tests {
                 None,
                 false,
                 StaticMode::Off,
-                false,
+                (false, LmrMethod::FixedOne),
                 (false, ZeroStockApproxMethod::Race),
             ),
         )
@@ -3845,6 +3954,10 @@ mod tt_first386_tests;
 #[cfg(all(test, feature = "research-diagnostics"))]
 #[path = "deferred_tail399_tests.rs"]
 mod deferred_tail399_tests;
+
+#[cfg(test)]
+#[path = "lmr408_tests.rs"]
+mod lmr408_tests;
 
 #[cfg(test)]
 #[path = "lmr400_tests.rs"]

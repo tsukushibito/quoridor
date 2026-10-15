@@ -4,7 +4,7 @@ use crate::{
     research_manifest::{self, BoundControl, Experiment},
 };
 use quoridor_ai::alphabeta::{
-    self, OrderingProfile, SearchLimits, SearchNamespace, SearchResult, SearchSession,
+    self, LmrMethod, OrderingProfile, SearchLimits, SearchNamespace, SearchResult, SearchSession,
     StaticEvaluator, StopReason, ZeroStockApproxMethod,
 };
 use quoridor_core::research::{HistoryKey, SigmaContext};
@@ -63,6 +63,8 @@ struct Settings {
     use_pvs: bool,
     #[serde(default)]
     lmr: bool,
+    #[serde(default = "default_lmr_method")]
+    lmr_method: String,
     #[serde(default)]
     zero_stock_approx_min_root_walls: Option<u8>,
     #[serde(default = "default_zero_stock_approx_method")]
@@ -103,11 +105,16 @@ struct RootSpec {
     expected: Option<Value>,
 }
 
+fn default_lmr_method() -> String {
+    LmrMethod::default().name().into()
+}
+
 fn default_zero_stock_approx_method() -> String {
     ZeroStockApproxMethod::default().name().into()
 }
 
 fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
+    LmrMethod::from_name(&settings.lmr_method)?;
     ZeroStockApproxMethod::from_name(&settings.zero_stock_approx_method)?;
     if settings
         .zero_stock_approx_min_root_walls
@@ -298,9 +305,11 @@ impl Target for SearchTarget {
                 quoridor_ai::score::ScoreDomain::LEGACY,
                 profile,
                 request.diagnostic,
-                self.settings.lmr,
+                false,
             )?,
         };
+        session.set_lmr_method(LmrMethod::from_name(&self.settings.lmr_method)?);
+        session.set_lmr(self.settings.lmr)?;
         session.set_zero_stock_approx_method(ZeroStockApproxMethod::from_name(
             &self.settings.zero_stock_approx_method,
         )?);
@@ -319,7 +328,9 @@ impl Target for SearchTarget {
                 "zero_stock_approx_method":Value::Null,
                 "zero_stock_approx_permitted":Value::Null,
                 "completed_depth_semantics":if lmr {"selective-nominal"} else if self.settings.zero_stock_approx_min_root_walls.is_some() {"root-resolution-pending"} else {"full-width"},
-                "lmr_rule":if lmr {Some(alphabeta::LMR_METHOD)} else {None}}),
+                "lmr_method_requested":self.settings.lmr_method,
+                "lmr_rule":self.session.as_ref().and_then(SearchSession::lmr_method).map(LmrMethod::id),
+                "lmr_parameters":self.session.as_ref().and_then(SearchSession::lmr_method).map(LmrMethod::reduction_rule)}),
         )
     }
     fn prepare(&mut self, request: &Request) -> Result<Value> {
@@ -376,6 +387,9 @@ impl Target for SearchTarget {
             Err(error) => json!({"status":"UNKNOWN","returned":"Err","error":fact(&error)}),
         };
         row["actual_selectivity"] = json!(session.namespace().selectivity);
+        row["lmr_method_requested"] = json!(self.settings.lmr_method);
+        row["lmr_rule"] = json!(session.lmr_method().map(LmrMethod::id));
+        row["lmr_parameters"] = json!(session.lmr_method().map(LmrMethod::reduction_rule));
         row["zero_stock_approx_min_root_walls"] =
             json!(self.settings.zero_stock_approx_min_root_walls);
         row["zero_stock_approx_method_requested"] = json!(self.settings.zero_stock_approx_method);
@@ -678,7 +692,7 @@ fn owned_output(intent: &Value) -> Result<PathBuf> {
 // are cumulative actual counters, not predicted branching/cost or a D6 result.
 fn completed_depth_observation(r: &SearchResult) -> Value {
     let s = &r.stats;
-    json!({"completed_depth":r.completed_depth,"action":r.action,
+    json!({"lmr_rule":s.lmr_enabled.then(|| s.lmr_method.id()),"lmr_parameters":s.lmr_enabled.then(|| s.lmr_method.reduction_rule()),"completed_depth":r.completed_depth,"action":r.action,
         "root_walls_remaining":s.root_walls_remaining,"zero_stock_approx_permitted":s.zero_stock_approx_permitted,
         "zero_stock_approx_method":s.zero_stock_approx_permitted.then(|| s.zero_stock_approx_method.id()),
         "value_bits":r.value.map(f32::to_bits),"elapsed_seconds":r.elapsed.as_secs_f64(),
@@ -697,6 +711,8 @@ fn observed(r: &SearchResult) -> Value {
     let mut result = json!({"returned":"Ok","action":r.action,"value":r.value,"value_bits":r.value.map(f32::to_bits),"completed_depth":r.completed_depth,"PV":r.pv,"stop":format!("{:?}",r.stop),"Search_internal_elapsed_seconds":r.elapsed.as_secs_f64(),
         "work":{"nodes":s.nodes,"evaluations":s.evaluations,"terminal":s.terminal,"cutoffs":s.cutoffs,"TT_hits":s.tt_hits,"TT_probes":s.tt_probes,"TT_exact_hits":s.tt_exact_hits,"TT_key_builds":s.tt_key_builds,"tt_context_initial_items":s.tt_context_initial_items,"tt_context_transitions":s.tt_context_transitions,"tt_board_hash_reads":s.tt_board_hash_reads,"tt_board_hash_updates":s.tt_board_hash_updates,"tt_context_matches":s.tt_context_matches,"tt_context_misses":s.tt_context_misses,"tt_order_context_mismatch":s.tt_order_context_mismatch,"tt_hash_collisions":s.tt_hash_collisions,"tt_index_collisions":s.tt_index_collisions,"TT_hashes":s.tt_hashes,"TT_usable_depth":s.tt_usable_depth,"TT_order_only":s.tt_order_only,"TT_collisions":s.tt_collisions,"TT_replacements":s.tt_replacements,"TT_capacity_skips":s.tt_capacity_skips,"TT_illegal_moves":s.tt_illegal_moves,"TT_retained_bytes":s.tt_retained_bytes,"TT_generation":s.tt_generation,"TT_cutoffs":s.tt_cutoffs,"PVS_researches":s.pvs_researches,"delta_updates":s.delta_updates,"policy_calls":s.policy_calls},
         "ordering":{"ordered_nodes":o.ordered_nodes,"scored_actions":o.scored_actions,"nonzero_dynamic_actions":o.nonzero_dynamic_actions,"nonzero_combined_actions":o.nonzero_combined_actions,"nonzero_continuation_actions":o.nonzero_continuation_actions,"history_changed_nodes":o.history_changed_nodes,"first_choice_changed_nodes":o.first_choice_changed_nodes,"first_choice_compared_nodes":o.first_choice_compared_nodes,"history_compared_nodes":o.history_compared_nodes,"completed_cutoff_events":o.completed_cutoff_events,"cutoff_rank_sum":o.cutoff_rank_sum,"first_child_cutoffs":o.first_child_cutoffs,"positive_actions":o.positive_actions,"negative_actions":o.negative_actions,"continuation_updates":o.continuation_updates,"age_passes":o.age_passes,"static_parents":o.static_parents,"borrowed_goal_maps":o.borrowed_goal_maps,"computed_goal_map_pairs":o.computed_goal_map_pairs,"cheap_static_parents":o.cheap_static_parents,"missing_goal_map_pairs":o.missing_goal_map_pairs,"available_goal_map_pairs":o.available_goal_map_pairs,"nonzero_static_actions":o.nonzero_static_actions,"exact_goal_actions":o.exact_goal_actions,"static_changed_nodes":o.static_changed_nodes,"static_compared_nodes":o.static_compared_nodes}});
+    result["lmr_rule"] = json!(s.lmr_enabled.then(|| s.lmr_method.id()));
+    result["lmr_parameters"] = json!(s.lmr_enabled.then(|| s.lmr_method.reduction_rule()));
     result["work"]["LMR_attempts"] = json!(s.lmr_attempts);
     result["work"]["LMR_full_depth_confirmations"] = json!(s.lmr_full_depth_confirmations);
     result["work"]["LMR_full_window_researches"] = json!(s.lmr_full_window_researches);
@@ -886,6 +902,59 @@ impl Output {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn measurement408_lmr_method_default_refusal_namespace_and_result_roundtrip() {
+        let base = json!({"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,
+            "namespace":{"evaluator":crate::teacher_pilot_execution::EVALUATOR_ID,"rules":"standard","selectivity":"synthetic"},"output_bytes":10000,"record_bytes":1000});
+        let settings: Settings = serde_json::from_value(base.clone()).unwrap();
+        assert_eq!(settings.lmr_method, "fixed_one");
+        for (value, valid) in [
+            (json!("fixed_one"), true),
+            (json!("depth_rank"), true),
+            (Value::Null, false),
+            (json!(true), false),
+            (json!(1), false),
+            (json!("adaptive"), false),
+        ] {
+            let mut config = base.clone();
+            config["lmr_method"] = value;
+            assert_eq!(
+                serde_json::from_value::<Settings>(config).is_ok_and(|s| validate(&s, &[]).is_ok()),
+                valid
+            );
+        }
+        for method in [LmrMethod::FixedOne, LmrMethod::DepthRank] {
+            for enabled in [false, true] {
+                let result = SearchResult {
+                    action: None,
+                    value: None,
+                    completed_depth: 0,
+                    pv: vec![],
+                    stats: alphabeta::SearchStats {
+                        lmr_enabled: enabled,
+                        lmr_method: method,
+                        ..Default::default()
+                    },
+                    stop: StopReason::NodeLimit,
+                    elapsed: std::time::Duration::ZERO,
+                };
+                let expected = if enabled {
+                    json!(method.id())
+                } else {
+                    Value::Null
+                };
+                assert_eq!(observed(&result)["lmr_rule"], expected);
+                assert_eq!(completed_depth_observation(&result)["lmr_rule"], expected);
+                let mut config = base.clone();
+                config["lmr_method"] = json!(method.name());
+                let settings: Settings = serde_json::from_value(config).unwrap();
+                let decoded: Settings =
+                    serde_json::from_value(serde_json::to_value(settings).unwrap()).unwrap();
+                assert_eq!(LmrMethod::from_name(&decoded.lmr_method).unwrap(), method);
+            }
+        }
+    }
+
     #[test]
     fn measurement407_method_default_refusal_and_resolved_output() {
         let base = json!({"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,

@@ -882,6 +882,7 @@ def measurement_config(experiment):
             "record_bytes",
             "seed",
             "lmr",
+            "lmr_method",
             "zero_stock_approx_min_root_walls",
             "zero_stock_approx_method",
         }
@@ -915,6 +916,11 @@ def measurement_config(experiment):
         "measurement Boolean switches",
     )
     require(type(config.get("lmr", False)) is bool, "measurement LMR switch")
+    lmr_method = config.get("lmr_method", "fixed_one")
+    require(
+        type(lmr_method) is str and lmr_method in {"fixed_one", "depth_rank"},
+        "measurement LMR method",
+    )
     method = config.get("zero_stock_approx_method", "race")
     require(
         type(method) is str and method in {"race", "fixed_d"},

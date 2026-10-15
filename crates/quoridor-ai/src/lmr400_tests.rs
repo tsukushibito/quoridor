@@ -286,7 +286,10 @@ fn shared402_lmr_confirmation_research_keeps_frozen_same_hand_and_tail_cursor() 
                 assert!(s.lmr_allowed(target, 3, 3, 0.0, None, &prepared));
                 warm_child(s, c, target, -0.5);
                 let before = (Key::of(c), s.context, s.board);
-                assert_eq!(s.reduced_child(c, None, target, 2, 0.0, 1).unwrap(), 0.25);
+                assert_eq!(
+                    s.reduced_child(c, None, target, [2, 1], 0.0, 1).unwrap(),
+                    0.25
+                );
                 assert_eq!(
                     (s.stats.lmr_attempts, s.stats.lmr_full_depth_confirmations),
                     (1, 1)
@@ -327,7 +330,10 @@ fn lmr400_reduced_fail_low_stores_actual_child_depth_and_restores_parent() {
             s.limits = &L;
             let child = warm_child(s, c, action, 0.5);
             let before = (Key::of(c), s.context, s.board);
-            assert_eq!(s.reduced_child(c, None, action, 2, 0.0, 1).unwrap(), -0.5);
+            assert_eq!(
+                s.reduced_child(c, None, action, [2, 1], 0.0, 1).unwrap(),
+                -0.5
+            );
             assert_eq!((Key::of(c), s.context, s.board), before);
             assert_eq!(
                 (s.stats.lmr_attempts, s.stats.lmr_full_depth_confirmations),
@@ -366,7 +372,7 @@ fn lmr400_shallow_fail_high_requires_full_child_and_confirmation_error_cancel_re
                 s.table.clear();
             }
             let before = (Key::of(c), s.context, s.board);
-            let result = s.reduced_child(c, None, action, 2, 0.0, 1);
+            let result = s.reduced_child(c, None, action, [2, 1], 0.0, 1);
             match failure {
                 0 => {
                     assert_eq!(result.unwrap(), 0.0);
