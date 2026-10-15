@@ -1,0 +1,36 @@
+{
+  "at": "2026-10-15T15:45:18.897111+00:00",
+  "roots": [
+    "/workspaces/quoridor/.artifacts/research-team/integration324/lmr-internal-sequence417-v1",
+    "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/lmr-internal-sequence417-source-v1",
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/lmr-internal-sequence417-analysis-v1",
+    "/workspaces/quoridor/.worktree/assets/perf/lmr-internal-sequence417-diagnostic204-v1",
+    "/workspaces/quoridor/research-data/ai-sigma/lmr-internal-sequence417",
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner417-sequence-v5"
+  ],
+  "allocated_B": 42278912,
+  "existing_docs_positive_increment_B": 4096,
+  "prior_conservative_covered_upper_B": 49283780608,
+  "covered_scope_conservative_sum_B": 49328115712,
+  "shared_increment_upper_B": 2052096,
+  "shared_increment_original_snapshots": [
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/lmr-limited-observation416-v1/compatible-build-v3/operation-v1/storage-usage.json",
+      "sha256": "0ba8b400cb68cf85b8e21904dae2cf623d0449cd65062ca53bcfd510e455f429",
+      "bytes": 956,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/lmr-internal-sequence417-v1/compatible-build-v5/operation-v1/storage-usage.json",
+      "sha256": "a1d18163b9b3f2b59740a770daffd41c844dd5f2dd21a8f90bf6713b7479f0ff",
+      "bytes": 952,
+      "mode": "0644"
+    }
+  ],
+  "old_operation_retention_upper_B": 782336,
+  "image_allocated_in_directed_union_B": 9080832,
+  "global_actual_B": null,
+  "shared_increment_scope": "Positive conservative residual from original416-v3/417-v5 build snapshots plus old operation retained upper, minus new image already in directed union; not a full sharedtarget holding charge and no shrink refund",
+  "storage_budget": null,
+  "scope": "Whole417 directed union once/inode dedup, includes leaf usage subsets without readding them. Sharedtarget/model/NPZ/oldRAW holding not counted. Current usage file and later tiny Git/closure/delivery admin excluded; no refund or global walk."
+}

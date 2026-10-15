@@ -1,0 +1,166 @@
+{
+  "at": "2026-10-15T15:05:02.071386+00:00",
+  "Build": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/lmr-internal-sequence417-v1/compatible-build-v5/operation-v1/manifest.json",
+    "sha256": "138f31bc9b0331843b1e90719e46028f3e0f2beb0cea27f9a94db343a68ffb8a",
+    "bytes": 40176,
+    "mode": "0644"
+  },
+  "artifact": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner417-sequence-v5",
+    "sha256": "bd18b47bdd12d082e6f0386dd952ff79b1b8c8f20d59dae97464ecca151e4a7e",
+    "bytes": 9078344,
+    "mode": "0755"
+  },
+  "original_software_stops": [
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/lmr-internal-sequence417-v1/compatible-build-v1/STOP.json",
+      "sha256": "4658483ebc098069ca593195908b52da4b7c68ee9545b651218dfa0ac62ac04e",
+      "bytes": 16137,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/lmr-internal-sequence417-v1/compatible-build-v2/STOP.json",
+      "sha256": "2ac87c4746381a7de4320e02c5b08a01c9a1468b3a718526aaa9cb333bb551be",
+      "bytes": 19370,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/lmr-internal-sequence417-v1/compatible-build-v5/STOP.json",
+      "sha256": "3e4825e3cba5afddfddb0695b035c9aa55b973e229295d5b550fc0439e1532ae",
+      "bytes": 5546,
+      "mode": "0644"
+    }
+  ],
+  "original_statuses": [
+    "FAILED",
+    "FAILED",
+    "PASS"
+  ],
+  "meaningful_Rust_assertions": 15,
+  "meaningful_Python_assertions": 0,
+  "assertions_scope": "AI8 PASS inside originalFAILEDv1, runnernew2/affected5 PASS insideFAILEDv2. Test-only initializer repair compiled without rerunning assertions. Python owner unchanged; no old Python suite replay.",
+  "research_Clippy": {
+    "name": "research-affected-lint",
+    "role": "lint",
+    "argv": [
+      "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+      "clippy",
+      "--offline",
+      "--locked",
+      "--manifest-path",
+      "/workspaces/quoridor/Cargo.toml",
+      "-j1",
+      "--message-format=json-render-diagnostics",
+      "-p",
+      "quoridor-ai",
+      "--all-targets",
+      "--features",
+      "research",
+      "--no-deps",
+      "--",
+      "-Dwarnings"
+    ],
+    "status": "PASS",
+    "guardian_return": {
+      "command": [
+        "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "clippy",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "/workspaces/quoridor/Cargo.toml",
+        "-j1",
+        "--message-format=json-render-diagnostics",
+        "-p",
+        "quoridor-ai",
+        "--all-targets",
+        "--features",
+        "research",
+        "--no-deps",
+        "--",
+        "-Dwarnings"
+      ],
+      "status": "complete",
+      "child": {
+        "pid": 2030326,
+        "start_ticks": "12448132",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "log_bytes_seen": 67743,
+      "scope": "session group and periodically recorded descendants; no daemon adoption",
+      "exit_code": 0,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "cleanup_complete": true,
+      "log_bytes_retained": 67743,
+      "wall_seconds": 3.2823859179916326,
+      "handle_closes_attempted": [
+        "selector_close",
+        "pipe_close",
+        "pidfd_close",
+        "log_close"
+      ],
+      "primary_error": null,
+      "process_cleanup_complete": true,
+      "handle_closes_complete": true,
+      "signal_mask_restoration": "completed",
+      "final_record_persist": "completed",
+      "finalization_errors": []
+    },
+    "full_log": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/lmr-internal-sequence417-v1/compatible-build-v2/operation-v1/research-affected-lint.full.log",
+      "sha256": "f608057c827646b8339f172d40c995ee450bfa718905ffaacb6d1a0cac9504d7",
+      "bytes": 67743,
+      "mode": "0644"
+    },
+    "persisted_process_receipt": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/lmr-internal-sequence417-v1/compatible-build-v2/operation-v1/research-affected-lint.process.json",
+      "sha256": "22ed341184505b04ab1c946fecc7dc8d85782c44b5a14d4c78079a80f6bdcc64",
+      "bytes": 1271,
+      "mode": "0600"
+    },
+    "capture_complete": true,
+    "secondary": [],
+    "primary": null,
+    "cargo": {
+      "artifacts": [],
+      "warning_count": 0
+    }
+  },
+  "remaining_software_names": [
+    "changed-test-compile-only",
+    "research-diagnostics-affected-lint",
+    "measurement-affected-lint",
+    "measurement-build"
+  ],
+  "fixture_repair": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/lmr-internal-sequence417-v1/stage-json-repair-v1/result.json",
+    "sha256": "c78ff296e0dab13dd5c794865445f82125d1bc162d1e5d972b2caec8bfdeb97f",
+    "bytes": 1273,
+    "mode": "0644"
+  },
+  "initializer_repair": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/lmr-internal-sequence417-v1/test-initializer-repair-v1/result.json",
+    "sha256": "9a6f93946bf1ef1e8e506daf3550dd3483747a563f89ad58d2e5f638d836b357",
+    "bytes": 1326,
+    "mode": "0644"
+  },
+  "outer_seconds": [
+    13.589924963991507,
+    21.15653461300826,
+    94.99012008600403
+  ],
+  "outer_seconds_sum": 129.7365796630038,
+  "nested_costs_added": false,
+  "source_review": "PENDING independent fixed packet review417.3; not implied by software",
+  "native_input_admission": "PENDING actual canonical replay",
+  "scientific_calls": 0,
+  "whole_fees": "UNKNOWN including source/LLM/admin",
+  "owned_remaining": []
+}

@@ -537,3 +537,15 @@ source調査では、既存TT hit/旧M成功は追加0、旧M幾何UNKNOWNかつ
 48枝全てparent ply1、H0のrank4は23/24、H+はrank16/q1とrank52/q2に偏る。H+元shallowとcold reducedはbound24/24一致でもbits一致5/24、H0 normalのNNUE family2では元Upper→coldLowerが1件。coldは元warmの正確な反実仮想/WDL/一手oracleではなく、通常深さにも下位LMRが残る。旧392勝因・一般棋力・whole速度・見落とし率へ外挿しない。probe PVは親action一手だけ。全canonical入力admissionと親復元/停止を保存確認した。
 
 研究標準depth_rankと製品/generator enable OFFを維持し、bounded research-diagnostics observe_lmrは明示opt-in/default false。次案は最終反復d3/ply2等の固定少数観測と、必要ならnormal直接対reduced＋必要時normalの実手順費比較の二つで、提案のみ・新実行なし。新AI6/runner2は元v2FAILED内PASSとして保持し、test-only field/initializer修復後に未実行Clippy/releaseだけ進め、成功suiteの再演0。原software外側123.907115816秒（FAILED込み）と診断12.304373928秒は各一度、nested probe時計を足さず、全source/LLM/admin/physical NN/連続RSS/孤立費はUNKNOWN。[設定・原結果・詳細分析・STOP](../../research-data/ai-sigma/lmr-limited-observation416/report-ja.md)。全mixed/learner prep/pipeline・323 USERPAUSE、models/weights/seals/oldfits96/foreign変更、旧RAW/FAILED/費UNKNOWN、414未発行を保持する。
+
+### 可変LMRの内側の枝と削減・確認費用（417、2026-10-15）
+
+元12rootを一度、最終反復5・parentd3/ply2に限定して観測し、H0 eligible q0とH+ completed q1浅いfail-lowから別親履歴の各2枝を固定した。NNUE BEST43/固定D、Control/PVS/TT1M/LMR ON-depth_rank、近似・safe leaf OFF、genuine image bd18b47b/Build138f31bc。元root終了後にN1→R1→R2→N2を独立coldで行い、Nはchild2一度、Rは共通reduced_child[2,1]で必要時だけ同state/TT/order/累積100Kを引継ぐ。通常も下位LMRを含み全幅/ゲームWDLのoracleではない。H0のRは仮想一段削減で、whole fixed_one比較ではない。
+
+実12root/48枝/192arm、全完了・不足/UNKNOWN/補充0、非時計2反復は全48枝一致。root4,062,877＋arm16,322=4,079,199 nodes、arm14,276評価、204最上位/204明示root+child呼出し。31.2M/300明示scoutは上限で使用量ではない。NNUE H0の12枝中5（family001 H0-1、012両slot、020両slot）はRUpper/NLower、同層の残る7枝と他3層36枝はU/U。元warm normalも5枝Lowerだがcold N bitsは全5枝で異なり、元warm反実仮想/一手真値/旧勝敗原因/一般見落とし率へ昇格しない。実選択はH0全rank4、H+全rank16、先頭枝と共有rootの偏りを保つ。
+
+R96/96は浅いfail-lowで確認条件/開始/完了0。returned depth1とnormal target2を区別し、確認費・TT/order持越し効果は未観測のまま。別層の全root確認counterを選択枝の費用へ流用しない。枝ごとの2反復平均kernelはRが小さい48/48枝、差が大きい方の反復spanを超えたのは47/48。一方wholeは44/48枝で差がspan以下、N1>N2 whole35/48で一般速度利益は判別不可。kernel/whole/各stageは内包で足さず、whole差をTT費へ帰属させない。
+
+Sol High実装・Sol Max限定source確認・SAME Astra High固定設計/保存分析を分担し、重要な新因果/棋力主張は採用しない。新/関連15 assertionsは元FAILED内PASSを保持、consumer JSON型とtest initializerのみ通常修復、未完了Clippy/releaseを実完了した。旧416独立二scout APIを現共通診断へ置換し、研究標準depth_rank/製品generator enable OFFを維持する。原software outer129.736579663秒、診断14.892771785秒を各一度、nested非加算。全source/LLM/admin費・physical NN・連続RSS・時計分解能・孤立費はUNKNOWN。
+
+[詳細・4 raw ns/反復・原設定/結果/失敗/STOP](../../research-data/ai-sigma/lmr-internal-sequence417/report-ja.md)。次の確認発動層とq0深さ/順位の観測は提案のみで新入場なし。414計画は未発行、全mixed/learner prep/pipeline・323 USERPAUSE、models/weights/seals/oldfits96/foreign変更と旧RAW/FAILED/費UNKNOWNを保持する。
