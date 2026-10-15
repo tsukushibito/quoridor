@@ -1063,8 +1063,10 @@ mod selector_tests {
         let a = SigmaContext::from_prefix(&[81, 83]).unwrap();
         let b = SigmaContext::from_prefix(&[83, 81]).unwrap();
         let ids = a.legal_ids();
-        let mut o = LmrObservation::default();
-        o.iteration = 5;
+        let mut o = LmrObservation {
+            iteration: 5,
+            ..Default::default()
+        };
         o.begin(&a, &path([81, 83]), facts(&a, ids[0], 0));
         let complete = |o: &mut LmrObservation,
                         c: &SigmaContext,
