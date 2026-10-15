@@ -63,6 +63,8 @@ struct Settings {
     use_pvs: bool,
     #[serde(default)]
     lmr: bool,
+    #[serde(default)]
+    zero_stock_approx_min_root_walls: Option<u8>,
     namespace: SearchNamespaceSettings,
     output_bytes: usize,
     record_bytes: usize,
@@ -100,6 +102,12 @@ struct RootSpec {
 }
 
 fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
+    if settings
+        .zero_stock_approx_min_root_walls
+        .is_some_and(|n| n > 20)
+    {
+        return Err("measurement zero-stock threshold must be 0..=20 or null".into());
+    }
     if settings.lmr && (!settings.use_pvs || settings.profile == Profile::Coverage) {
         return Err("measurement LMR requires PVS and Control/Cheap".into());
     }
@@ -272,7 +280,7 @@ impl Target for SearchTarget {
             rules: self.settings.namespace.rules.clone(),
             selectivity: self.settings.namespace.selectivity.clone(),
         };
-        let session = match self.settings.profile.native()? {
+        let mut session = match self.settings.profile.native()? {
             None => {
                 SearchSession::new(self.evaluator.clone(), namespace, self.settings.tt_entries)?
             }
@@ -286,6 +294,8 @@ impl Target for SearchTarget {
                 self.settings.lmr,
             )?,
         };
+        session
+            .set_zero_stock_approx_min_root_walls(self.settings.zero_stock_approx_min_root_walls)?;
         let method = session.namespace().selectivity.clone();
         let lmr = session.lmr_enabled();
         let retained = session.retained_memory_bytes();
@@ -294,7 +304,9 @@ impl Target for SearchTarget {
         Ok(
             json!({"TT_capacity":capacity,"retained_TT_bytes":retained.0,"retained_session_metadata_history_bytes":retained.1,
                 "actual_selectivity":method,"lmr":lmr,
-                "completed_depth_semantics":if lmr {"selective-nominal"} else {"full-width"},
+                "zero_stock_approx_min_root_walls":self.settings.zero_stock_approx_min_root_walls,
+                "zero_stock_approx_permitted":Value::Null,
+                "completed_depth_semantics":if lmr {"selective-nominal"} else if self.settings.zero_stock_approx_min_root_walls.is_some() {"root-resolution-pending"} else {"full-width"},
                 "lmr_rule":if lmr {Some(alphabeta::LMR_METHOD)} else {None}}),
         )
     }
@@ -351,6 +363,16 @@ impl Target for SearchTarget {
             }
             Err(error) => json!({"status":"UNKNOWN","returned":"Err","error":fact(&error)}),
         };
+        row["actual_selectivity"] = json!(session.namespace().selectivity);
+        row["zero_stock_approx_min_root_walls"] =
+            json!(self.settings.zero_stock_approx_min_root_walls);
+        row["completed_depth_semantics"] = json!(if session.zero_stock_approx_permitted() {
+            "approximate-leaf-nominal-not-game-WDL"
+        } else if self.settings.lmr {
+            "selective-nominal"
+        } else {
+            "full-width"
+        });
         if request.observe_completed_depths {
             row["completed_depth_observations"] = json!(completed_depths);
         }
@@ -639,9 +661,10 @@ fn owned_output(intent: &Value) -> Result<PathBuf> {
 fn completed_depth_observation(r: &SearchResult) -> Value {
     let s = &r.stats;
     json!({"completed_depth":r.completed_depth,"action":r.action,
+        "root_walls_remaining":s.root_walls_remaining,"zero_stock_approx_permitted":s.zero_stock_approx_permitted,
         "value_bits":r.value.map(f32::to_bits),"elapsed_seconds":r.elapsed.as_secs_f64(),
         "cumulative_work":{"nodes":s.nodes,"evaluations":s.evaluations,
-            "terminal":s.terminal,"cutoffs":s.cutoffs,"TT_probes":s.tt_probes,
+            "terminal":s.terminal,"zero_stock_approx_terminations":s.zero_stock_approx_terminations,"cutoffs":s.cutoffs,"TT_probes":s.tt_probes,
             "TT_hits":s.tt_hits,"TT_usable_depth":s.tt_usable_depth,
             "TT_cutoffs":s.tt_cutoffs,"TT_order_only":s.tt_order_only,
             "TT_index_collisions":s.tt_index_collisions,"TT_replacements":s.tt_replacements,
@@ -658,6 +681,17 @@ fn observed(r: &SearchResult) -> Value {
     result["work"]["LMR_attempts"] = json!(s.lmr_attempts);
     result["work"]["LMR_full_depth_confirmations"] = json!(s.lmr_full_depth_confirmations);
     result["work"]["LMR_full_window_researches"] = json!(s.lmr_full_window_researches);
+    result["root_walls_remaining"] = json!(s.root_walls_remaining);
+    result["zero_stock_approx_permitted"] = json!(s.zero_stock_approx_permitted);
+    result["work"]["zero_stock_approx_terminations"] = json!(s.zero_stock_approx_terminations);
+    result["zero_stock_approx_method"] = json!(if s.zero_stock_approx_permitted {
+        Some(alphabeta::ZERO_STOCK_APPROX_METHOD)
+    } else {
+        None
+    });
+    if s.zero_stock_approx_permitted {
+        result["completed_depth_semantics"] = json!("approximate-leaf-nominal-not-game-WDL");
+    }
     if let Some(w) = o.work.as_deref() {
         result["ordering"]["work"] = json!({
             "nodes_started": w.nodes_started,
@@ -833,6 +867,64 @@ impl Output {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn measurement406_optional_threshold_refusals_and_actual_result_metadata() {
+        let base = json!({"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,
+            "namespace":{"evaluator":crate::teacher_pilot_execution::EVALUATOR_ID,"rules":"standard","selectivity":"synthetic"},"output_bytes":10000,"record_bytes":1000});
+        let settings: Settings = serde_json::from_value(base.clone()).unwrap();
+        assert_eq!(settings.zero_stock_approx_min_root_walls, None);
+        validate(&settings, &[]).unwrap();
+        for (value, valid) in [
+            (Value::Null, true),
+            (json!(0), true),
+            (json!(4), true),
+            (json!(20), true),
+            (json!(true), false),
+            (json!(false), false),
+            (json!(-1), false),
+            (json!(21), false),
+            (json!(1.5), false),
+            (json!("4"), false),
+        ] {
+            let mut value_config = base.clone();
+            value_config["zero_stock_approx_min_root_walls"] = value;
+            let accepted = serde_json::from_value::<Settings>(value_config)
+                .is_ok_and(|settings| validate(&settings, &[]).is_ok());
+            assert_eq!(accepted, valid);
+        }
+        let result = SearchResult {
+            action: None,
+            value: None,
+            completed_depth: 0,
+            pv: vec![],
+            stats: alphabeta::SearchStats {
+                root_walls_remaining: 6,
+                zero_stock_approx_permitted: true,
+                zero_stock_approx_terminations: 2,
+                ..Default::default()
+            },
+            stop: StopReason::NodeLimit,
+            elapsed: std::time::Duration::ZERO,
+        };
+        let observed = observed(&result);
+        assert_eq!(observed["root_walls_remaining"], 6);
+        assert_eq!(observed["zero_stock_approx_permitted"], true);
+        assert_eq!(observed["work"]["zero_stock_approx_terminations"], 2);
+        assert_eq!(
+            observed["zero_stock_approx_method"],
+            alphabeta::ZERO_STOCK_APPROX_METHOD
+        );
+        assert_eq!(
+            observed["completed_depth_semantics"],
+            "approximate-leaf-nominal-not-game-WDL"
+        );
+        let callback = completed_depth_observation(&result);
+        assert_eq!(
+            callback["cumulative_work"]["zero_stock_approx_terminations"],
+            2
+        );
+    }
+
     #[test]
     fn measurement400_lmr_defaults_refusals_real_method_and_scalar_output() {
         struct NeverEvaluate;

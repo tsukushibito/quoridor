@@ -433,8 +433,21 @@ pub enum StopReason {
 pub const TT_REPRESENTATION: &str = "compact359-board-zobrist-v1-context128-v1";
 /// One selected LMR rule; OFF retains full-width depth semantics.
 pub const LMR_METHOD: &str = "lmr400-late4-depth3-minus1-pvs-verify-v1";
+/// Heuristic leaves, not exact WDL or full-width minimax values.
+pub const ZERO_STOCK_APPROX_METHOD: &str = "zero-stock406-wall-distance-stm-tie-win-v1";
+
+fn permit_zero_stock_approx(threshold: Option<u8>, root_walls: u16, max_depth: u16) -> bool {
+    threshold.is_some_and(|threshold| threshold == 0 || root_walls >= u16::from(threshold))
+        && max_depth > root_walls.max(1)
+}
+
 #[derive(Debug, Default, Clone)]
 pub struct SearchStats {
+    /// Per-Search root snapshot; fixed throughout iterative deepening.
+    pub root_walls_remaining: u16,
+    pub zero_stock_approx_permitted: bool,
+    /// Successfully returned heuristic leaves, separate from true terminals/head calls.
+    pub zero_stock_approx_terminations: u64,
     pub nodes: u64,
     pub evaluations: u64,
     pub terminal: u64,
@@ -479,6 +492,8 @@ pub struct SearchResult {
     pub value: Option<f32>,
     pub completed_depth: u16,
     pub pv: Vec<u16>,
+    /// Includes fixed root_walls_remaining/zero_stock_approx_permitted and the
+    /// actual zero_stock_approx_terminations count; these are not game WDL.
     pub stats: SearchStats,
     pub stop: StopReason,
     pub elapsed: Duration,
@@ -1263,6 +1278,15 @@ impl Search<'_> {
         let result = (|| {
             // True goal/threefold leaves bypass FT and head evaluation as well.
             if c.terminal_value().is_none() {
+                if self.zero_stock_approx_leaf(c, depth) {
+                    // This branch replaces negamax entry, not its caller's make,
+                    // fingerprint, path or canonical undo. Count/control once.
+                    self.enter()?;
+                    let value = self.zero_stock_approx_value(c, a.as_ref(), parent)?;
+                    self.control()?;
+                    self.stats.zero_stock_approx_terminations += 1;
+                    return Ok(value);
+                }
                 self.eval.advance_move_context(parent, c, &undo, &mut a)?;
                 if a.is_some() {
                     self.stats.delta_updates += 1;
@@ -1295,6 +1319,57 @@ impl Search<'_> {
         self.board = parent_board;
         result.map(|v| -v)
     }
+
+    fn zero_stock_approx_leaf(&self, c: &SigmaContext, depth: u16) -> bool {
+        self.stats.zero_stock_approx_permitted
+            && depth > 0
+            && c.position().walls_remaining == [0, 0]
+    }
+
+    fn zero_stock_approx_value(
+        &self,
+        c: &SigmaContext,
+        pooled: Option<&EvalAccumulator>,
+        parent: Option<&EvalAccumulator>,
+    ) -> NodeResult<f32> {
+        let p = c.position();
+        // Only the actual Float variant exposes this existing wall-key-checked
+        // cache. Pawn/mover changes do not change wall-only goal distances.
+        let maps = [pooled, parent]
+            .into_iter()
+            .flatten()
+            .find_map(|a| match a {
+                EvalAccumulator::Float(a) => a.cached_wall_distance_maps(p),
+                _ => None,
+            });
+        let own = usize::from(p.turn);
+        let distance = |player: usize| match maps {
+            Some(maps) => {
+                let d = maps[player][p.pawns[player] as usize];
+                (d < 81).then_some(d)
+            }
+            None => p.wall_distance(player),
+        };
+        let ds = distance(own).ok_or_else(|| {
+            Interrupted::Error(SearchError::Evaluation(
+                "approximate leaf unreachable mover".into(),
+            ))
+        })?;
+        self.control()?;
+        let other = distance(own ^ 1).ok_or_else(|| {
+            Interrupted::Error(SearchError::Evaluation(
+                "approximate leaf unreachable opponent".into(),
+            ))
+        })?;
+        let value = if ds <= other { 1.0 } else { -1.0 };
+        if !self.score_domain.admits(value) {
+            return Err(Interrupted::Error(SearchError::Evaluation(
+                "approximate leaf outside declared nonterminal score domain".into(),
+            )));
+        }
+        Ok(value)
+    }
+
     fn negamax(
         &mut self,
         c: &mut SigmaContext,
@@ -1704,7 +1779,7 @@ impl Search<'_> {
             return Vec::new();
         }
         for remaining in (1..depth).rev() {
-            if c.terminal_value().is_some() {
+            if c.terminal_value().is_some() || self.zero_stock_approx_leaf(&c, remaining) {
                 break;
             }
             let Some(action) = self
@@ -1794,6 +1869,7 @@ pub fn search_with_orderer(
             false,
             StaticMode::Coverage,
             false,
+            false,
         ),
     )
 }
@@ -1839,6 +1915,10 @@ fn append_lmr_method(namespace: &mut SearchNamespace) {
     namespace.selectivity.push(':');
     namespace.selectivity.push_str(LMR_METHOD);
 }
+fn append_zero_stock_approx_method(namespace: &mut SearchNamespace) {
+    namespace.selectivity.push(':');
+    namespace.selectivity.push_str(ZERO_STOCK_APPROX_METHOD);
+}
 impl SessionMethod {
     fn namespace(self, mut namespace: SearchNamespace, lmr: bool) -> SearchNamespace {
         match self {
@@ -1872,8 +1952,48 @@ pub struct SearchSession {
     ordering_diagnostics: bool,
     lmr: bool,
     method: SessionMethod,
+    zero_stock_approx_min_root_walls: Option<u8>,
+    zero_stock_approx_effective: bool,
 }
 impl SearchSession {
+    /// A requested threshold is configuration, not numeric TT authority. The
+    /// effective method is resolved once by each Search, not at each depth/node.
+    pub fn set_zero_stock_approx_min_root_walls(&mut self, threshold: Option<u8>) -> Result<()> {
+        if threshold.is_some_and(|n| n > 20) {
+            return Err(SearchError::Limits(
+                "zero-stock threshold must be 0..=20 or None".into(),
+            ));
+        }
+        self.zero_stock_approx_min_root_walls = threshold;
+        if threshold.is_none() {
+            self.set_zero_stock_approx_effective(false);
+        }
+        Ok(())
+    }
+
+    fn set_zero_stock_approx_effective(&mut self, enabled: bool) {
+        if enabled == self.zero_stock_approx_effective {
+            return;
+        }
+        if self.zero_stock_approx_effective {
+            self.namespace
+                .selectivity
+                .truncate(self.namespace.selectivity.len() - ZERO_STOCK_APPROX_METHOD.len() - 1);
+        } else {
+            append_zero_stock_approx_method(&mut self.namespace);
+        }
+        self.zero_stock_approx_effective = enabled;
+        self.table.clear();
+        if let Some(history) = self.ordering.as_mut() {
+            history.reset();
+        }
+    }
+
+    /// Last per-Search resolution; false immediately after reset/before first root.
+    pub fn zero_stock_approx_permitted(&self) -> bool {
+        self.zero_stock_approx_effective
+    }
+
     /// Explicit opt-in for the two signed research ordering targets. Switching
     /// methods clears all values/history; arbitrary namespace text cannot opt in.
     pub fn set_lmr(&mut self, enabled: bool) -> Result<()> {
@@ -1889,12 +2009,21 @@ impl SearchSession {
             ));
         }
         if enabled != self.lmr {
+            // Approximation, when resolved ON, is the last method component.
+            if self.zero_stock_approx_effective {
+                self.namespace.selectivity.truncate(
+                    self.namespace.selectivity.len() - ZERO_STOCK_APPROX_METHOD.len() - 1,
+                );
+            }
             if self.lmr {
                 self.namespace
                     .selectivity
                     .truncate(self.namespace.selectivity.len() - LMR_METHOD.len() - 1);
             } else {
                 append_lmr_method(&mut self.namespace);
+            }
+            if self.zero_stock_approx_effective {
+                append_zero_stock_approx_method(&mut self.namespace);
             }
             self.lmr = enabled;
             self.table.clear();
@@ -2018,6 +2147,8 @@ impl SearchSession {
             ordering_diagnostics: false,
             lmr: false,
             method: SessionMethod::Plain,
+            zero_stock_approx_min_root_walls: None,
+            zero_stock_approx_effective: false,
         })
     }
     /// Table accounting includes its header and fixed slot storage; no history payload.
@@ -2066,6 +2197,9 @@ impl SearchSession {
         }
         self.evaluator = evaluator;
         self.namespace = self.method.namespace(namespace, self.lmr);
+        // A reset has no root yet; preserve requested configuration but do not
+        // claim resolved authority until the next real Search supplies its root.
+        self.zero_stock_approx_effective = false;
         self.score_domain = score_domain;
         self.table.clear();
         if let Some(history) = self.ordering.as_mut() {
@@ -2088,6 +2222,17 @@ impl SearchSession {
         cancel: &AtomicBool,
         on_completed: &mut dyn FnMut(&SearchResult),
     ) -> Result<SearchResult> {
+        let root_walls = root
+            .position()
+            .walls_remaining
+            .into_iter()
+            .map(u16::from)
+            .sum();
+        self.set_zero_stock_approx_effective(permit_zero_stock_approx(
+            self.zero_stock_approx_min_root_walls,
+            root_walls,
+            limits.max_depth,
+        ));
         search_in_table(
             root,
             self.evaluator.as_ref(),
@@ -2102,6 +2247,7 @@ impl SearchSession {
                 self.ordering_diagnostics,
                 self.static_enabled,
                 self.lmr,
+                self.zero_stock_approx_effective,
             ),
         )
     }
@@ -2120,10 +2266,18 @@ fn search_in_table(
         bool,
         StaticMode,
         bool,
+        bool,
     ),
 ) -> Result<SearchResult> {
-    let (table, score_domain, ordering, ordering_diagnostics, static_enabled, lmr) =
-        table_and_domain;
+    let (
+        table,
+        score_domain,
+        ordering,
+        ordering_diagnostics,
+        static_enabled,
+        lmr,
+        zero_stock_approx_permitted,
+    ) = table_and_domain;
     let start = Instant::now();
     if limits.max_depth == 0 || limits.max_nodes == 0 || limits.max_depth > 200 {
         return Err(SearchError::Limits(
@@ -2168,6 +2322,12 @@ fn search_in_table(
     } else {
         None
     };
+    let root_walls_remaining = root
+        .position()
+        .walls_remaining
+        .into_iter()
+        .map(u16::from)
+        .sum();
     let mut state = Search {
         eval: evaluator,
         score_domain,
@@ -2180,6 +2340,8 @@ fn search_in_table(
         deadline,
         table,
         stats: SearchStats {
+            root_walls_remaining,
+            zero_stock_approx_permitted,
             tt_hashes: u64::from(limits.use_tt), // one full board initialization
             tt_context_initial_items: if limits.use_tt {
                 root.occurrences().count() as u64
@@ -2645,6 +2807,7 @@ mod persistent_tt_tests {
                 None,
                 false,
                 StaticMode::Off,
+                false,
                 false,
             ),
         )
@@ -3193,7 +3356,7 @@ mod child_buffer_tests {
             Ok(())
         }
     }
-    fn evaluator(width: usize) -> ResidualEvaluator {
+    pub(super) fn evaluator(width: usize) -> ResidualEvaluator {
         let t = Topology {
             ft_width: width,
             hidden_width: 1,
@@ -3606,6 +3769,10 @@ mod deferred_tail399_tests;
 #[cfg(test)]
 #[path = "lmr400_tests.rs"]
 mod lmr400_tests;
+
+#[cfg(test)]
+#[path = "zero_stock406_tests.rs"]
+mod zero_stock406_tests;
 
 #[cfg(all(test, feature = "research-diagnostics"))]
 #[path = "shared_signed402_tests.rs"]

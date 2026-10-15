@@ -882,6 +882,7 @@ def measurement_config(experiment):
             "record_bytes",
             "seed",
             "lmr",
+            "zero_stock_approx_min_root_walls",
         }
         and {
             "roots",
@@ -913,6 +914,11 @@ def measurement_config(experiment):
         "measurement Boolean switches",
     )
     require(type(config.get("lmr", False)) is bool, "measurement LMR switch")
+    threshold = config.get("zero_stock_approx_min_root_walls")
+    require(
+        threshold is None or (type(threshold) is int and 0 <= threshold <= 20),
+        "measurement zero-stock threshold must be an integer0..20 or null",
+    )
     require(
         not config.get("lmr", False)
         or (config["use_pvs"] and config["profile"] in {"control", "cheap"}),
