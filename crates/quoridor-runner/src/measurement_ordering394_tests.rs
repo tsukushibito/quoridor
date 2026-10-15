@@ -81,6 +81,7 @@ fn measurement394_completed_callback_preserves_cumulative_and_final_partial_scop
                 profile: Profile::Control,
                 lmr: false,
                 zero_stock_approx_min_root_walls: None,
+                zero_stock_approx_method: default_zero_stock_approx_method(),
                 tt_entries: 4096,
                 use_tt: false,
                 use_pvs: true,
