@@ -1,0 +1,41 @@
+{
+  "issue": "quoridor-4lc.414.2",
+  "frozen_before_outcomes": "2026-10-15T09:15:09.454202+00:00",
+  "mode": "PLAN_ONLY_SAVED_PREDICATE_CHECK",
+  "old": "ds<=do and M>=2ds => W; do<ds and M>=2do+1 => L; else UNKNOWN",
+  "new": "same thresholds with L=max(M,finite abs(D0[a]-D0[b]),finite abs(D1[a]-D1[b]))",
+  "finite": "integer 0<=d<n*n; dictionary missing or sentinel>=n*n ignored per goal-map pair; M always retained",
+  "same_key": "both goal maps same exact (board_size,wall_mask)",
+  "labels": {
+    "fixtures52": 5680,
+    "saved_D": 39708,
+    "D_layouts": 3872
+  },
+  "stop": "any false-Proven/inclusion mismatch/resource refusal; preserve original, no tuning or automatic replay",
+  "source": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-detour414-v1/check_saved.py",
+    "sha256": "f04e50616822f301dc45081278ab2e06bfca6ee547ce68fba214f85935a2513b",
+    "bytes": 13423,
+    "mode": "0644"
+  },
+  "guard": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/zero-stock-detour414-v1/guard.py",
+    "sha256": "00459d2bda713093385097b32e5eda3f6157c710281010cefc89725a52a16ba3",
+    "bytes": 2228,
+    "mode": "0644"
+  },
+  "resources": {
+    "workerCPU": 8,
+    "guardianCPU": 11,
+    "source_family_B": 536870912,
+    "math_family_B": 1073741824,
+    "math_child_B": 1006632960,
+    "controller_B": 67108864,
+    "GPU": 0,
+    "host_reserve_B": 4294967296
+  },
+  "new_WDL_pawnedges_rank_solver_Search_games": 0,
+  "general_proof": "independent414.3 pending; not inferred from finite labels",
+  "future_image_Build_Search_runtime": null,
+  "Main_Git_Cargo_Beads_writes": 0
+}

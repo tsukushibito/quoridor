@@ -515,3 +515,15 @@ accepted20285/完成snapshot20284を維持。完成深さ中央値はNNUE A/B6/6
 重要な単独原因・一般棋力優越の新主張は0。優先度付き次候補は、同履歴rootでのq/rank/確認/採用後反復の対応、family5一応答の準備/receipt/cancel制御時系列、固定D同値bits異着手の順位/推定値分離の最大3つで、提案のみ・未実行。原392のgzip各一回stream後は小抽出だけを使い、新Search/対局/model/solver/bootstrap/fitは0。137集計view/分割和/12例の自身の整合確認は独立レビューではなく、新しい重要因果主張がない範囲で保存観測として受け入れた。本人415.1は検証close/backup済み。
 
 一度RAW抽出の自己計時2.209739241秒とguard2.268412267秒はnestedで足さず、元412 outer2017.211898980秒を再課金しない。全source/LLM/admin費はUNKNOWN。実RAW readerSTOP10:51:23.370580Z/直接reap.479383、小抽出STOP11:21:46.693394Z/reap.698934と全FAILED/STOP/owned[]を保持した。[詳細報告・全表・固定12例](../../research-data/ai-sigma/lmr-game-analysis415/report-ja.md)。人間選択の研究LMR ON/depth_rank、製品/generator enable OFF、全mixed/learner prep/pipeline・323 USERPAUSE、models/weights/seals/oldfits96/foreign変更を維持する。414の壁迂回は別の計画限定scope。
+
+### 壁迂回下界による安全先着の拡張計画（414、2026-10-15）
+
+414は計画限定で完了した。候補L=max(M,有限|D0[a]-D0[b]|,有限|D1[a]-D1[b]|)の一つについて、同寸法/同goal/同wallの正確な表では各距離差とそのmaxが普通壁辺上の1-Lipschitzな駒間距離下界になる、という条件付き定理を独立max担当がclearとした。勝者最短路長n/相手先行δならL>=2n+δで相手起点から路上全頂点まで>=L-n>=n+δとなり、相手のn-1+δ手までの最初の占有・jump/sidejumpを排除できる。相手goal距離条件と合わせ、ds<=doかつL>=2dsは手番側W、do<dsかつL>=2do+1は相手W、他はUNKNOWN。sentinel81/各盤の到達不能値は項別に除きMと他の有限項を保持する。
+
+411の完全count Eempty（weighted base+全overlay）、true goal/threefold優先、root/depth0/fullhistory/typed TT/control/undoを保持する条件であり、盤面だけで履歴Drawを消さずfrom_counts/最後の壁shortcutを新設しない。保存5680W/Lは旧1393W476L3811UNKNOWN→新1469W512L3699UNKNOWN、追加76W36L。全39708保存DはUNKNOWNのまま、45388件で旧条件包含、falseProven/未検査0。追加は3×3で40W16L、固定5×5で36W20L。13新境界確認と保存134層算術を保持し、旧52 WDL/辺/rank/全2.5M solverは再演0。有限照合と一般的な条件付き論証は別根拠で、9×9実訪問/実履歴/頻度/速度は未測定。
+
+source調査では、既存TT hit/旧M成功は追加0、旧M幾何UNKNOWNかつ既にqualifiedなFloat/WallDistanceScratch pairがあれば交差u8二点と有限guard/abs_diff/maxを足せる。pair不在は旧M/UNKNOWNへ戻し、専用BFS/map構築/81走査/clone/heap/API/cacheは不要。ただし二参照は幾何だけの増分形で、新たな成功が完全E scan/TT保存を発動し探索仕事も変える。既存canonical map費用を無料扱いせず、旧map_readsから全memory交通を推定しない。実装そのもの・borrow/型/時間/whole利益はUNKNOWN、production差分0。
+
+後続の具体案はOFF/旧M/新L、2評価器×LMR OFF/ON-depth_rankを別層、O→M→L→L→M→O、元411の8真正prefix各cold→同session warm、Control/PVS/TT1M/旧近似OFF/D8/各4M nodes/時間上限なし。384calls/192sessions/最大1.536B nodes。setup/reset/history/maps/Search/drop込みwholeと各root/温度/反復、fresh追加幾何/履歴通過/実proof/TTを分け、重い残壁6/4への効果も未測定のまま確認する案である。同policyの非時計一致と異policyの選択木/value/PV/work差、UNKNOWNを分け、同仕事速度・全幅/ゲームroot exactへ昇格しない。入力/上限/候補の結果依存変更、refill/新対局/fitは足さない。
+
+計画と根拠の完了であって、実装/software/速度・棋力・既定採用の認定や384calls入場ではない。将来のimage/Build/runtime/admissionはnullのまま。元source/RAW/失敗/STOPと新predicate外側1.920527222秒（child1.764705522秒は内包）を保持し、全source/LLM/admin費・連続RSS・孤立費はUNKNOWN。[計画・証拠](../../research-data/ai-sigma/zero-stock-detour414/report-ja.md)。旧411/412/413/415と人間選択の通常研究LMR標準、製品/generator enable OFF、全mixed/learner prep/pipeline・323 USERPAUSE、models/weights/seals/oldfits96/foreign変更を維持する。

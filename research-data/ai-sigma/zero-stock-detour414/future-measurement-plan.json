@@ -1,0 +1,91 @@
+{
+  "issue": "quoridor-4lc.414",
+  "phase": "PLAN_COMPLETE_NOT_IMPLEMENTED_NOT_ADMITTED",
+  "candidate": "L=max(M, |D0[a]-D0[b]| if both finite samewall, |D1[a]-D1[b]| if both finite samewall)",
+  "hypotheses": {
+    "general_proof": "Conditional theorem clear6f7f3f1f under exact same-wall/board/goal maps, finite termwise handling, legal stock0 position and complete empty E; implementation/performance separate.",
+    "saved_labels": "Fixed414.2: old1393W476L3811UNKNOWN -> new1469W512L3699UNKNOWN, +76W36L; falseProven0/5680WL and39708D allUNKNOWN. Inclusion45388states, general proof separate.",
+    "source_cost": "Fixed414.1 report92c8bb70/proposal9c25906b: existing411 acquisition already supplies samewall zero-stock canonical maps or qualifiedFloat. On oldM-UNKNOWN exactly2guarded crossu8 reads, abs_diff/max, no new API/BFS/copy/heap; dynamic availability/cost UNKNOWN."
+  },
+  "future_comparison": {
+    "conditions": [
+      "OFF",
+      "current Manhattan sufficient exact leaf",
+      "one finite wall-distance-difference extension"
+    ],
+    "evaluators": ["BEST43 NNUE existing unchanged evaluator96a5f41f", "fixedD(0,8tanh)"],
+    "lmr_strata": [
+      {
+        "enabled": false,
+        "explicit_method": "depth_rank",
+        "interpretation": "OFF control, kept separate"
+      },
+      {
+        "enabled": true,
+        "explicit_method": "depth_rank",
+        "interpretation": "human412 research standard; coefficients unchanged"
+      }
+    ],
+    "profile": "control",
+    "PVS": true,
+    "TT_entries": 1048576,
+    "old_zero_stock_approximation": "OFF all",
+    "input": "Existing411eight-prefixes eec77569104f589b2e6b38c9cd388ad5c51e2ec4a549e34fea3d85a6c9588daa/4318B fullchronology replay; no new roots, no postoutcome selection",
+    "root_count": 8,
+    "temperatures": "cold thensameSession warm perroot; setup/reset/history/maps/Search/drop inwhole",
+    "target_depth": 8,
+    "node_cap_each": 4000000,
+    "time_cap": null,
+    "order_each_evaluator_and_LMR": "OFF->M->L->L->M->OFF",
+    "passes": 24,
+    "Search_calls": 384,
+    "sessions": 192,
+    "node_cap_sum": 1536000000,
+    "actual_image": null,
+    "actual_Build": null,
+    "actual_runtime": null,
+    "ready_for_submission": false
+  },
+  "entry_requirements": [
+    "Independent414proof and finitefalseProven0/savedDUNKNOWN verified separately",
+    "Later explicit implementation and software/relatedreview scope authorized and actual one-image config frozen; current414issues no Search admission",
+    "Old411 and412/413 source/image/rules/results stayimmutable; LMROFF andON strata neverpooled",
+    "Retain same semantic root/depth0/terminal/fullhistory/typedleaf qualifications; actual proofpolicy differentiated in existingTTnamespace/reset, samepolicywarm reusable",
+    "Borrow qualified same-wall maps only; no availablecrosspair means keep originalM/UNKNOWN and no additionalmap construction",
+    "Minimum actual counters scope existingopportunity/geopass/historyreject/proven/TT/distanceviews, add only few fresh additionalgeometry/proven counters ifnecessary; TT hits keep separate ifprooforiginnotrecorded, no distance recompute solelyfortelemetry"
+  ],
+  "validation": [
+    "Newfinite/unreachable/samekey crosscell and oldpredicateinclusion tests",
+    "Existingaffected cancellation/error/undo/root/history/TT switch/true terminal/depth0 boundaries only; no oldsolver successfulsuite replay",
+    "Within-policy two repetitions compare allnonclock work/valuebits/action/PV/status/depth/parent/fullhistory; method differences notsame-work speedup",
+    "Rates denominator actualvisited/stock0/opportunity/freshgeometry; TTsubset/gauge notsummed, no unique state or unvisited counterfactualnodes claims"
+  ],
+  "analysis": [
+    "Whole plus root/temp repeated actualvalues, no isolatedpredicate/BFS/E cause unless measured",
+    "Heavy roots residualwalls6/4 specifically reported evenifbenefit0; no root/cap/threshold changes afterresults",
+    "LMRON andOFF costs/depth/value/work/strength interpretation separate, nominal completion notfullwidth/game exactroot",
+    "No games/sampling/tuning/refill/otherbook/fit/model or extra candidate"
+  ],
+  "completion_of_current414": "Proof/cost/savedcorrespondence and this concrete finiteplan integrated into existingdocs. No implementation/384calls admitted now",
+  "scope_limits": "No source defaults/model/product/generator enable or USERPAUSE changes. Actualfuture timings/caps/code/admission remain separate. This is a plan snapshot, no scheduler/state registry/campaign.",
+  "saved_evidence": {
+    "source_STOP": "00a6447cc6f85fd3cb0afcf70a76b4c9b40798a6955caec2230ecd181336cde9",
+    "saved_completion": "f53685776a7f831a36ef96671292373c0068b342816e44ba04a2dd1a465d089b",
+    "saved_result": "973f7bc20aaa2cfa21013eeb9d565c6e103b2e86846526b7c6e3ea8cecf98eaf",
+    "general_proof": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-detour414-v1/review-v1/completion.json",
+      "sha256": "6f7f3f1f3e413c23c111afc336297936f467c7efca06524238374bbef3f4a3e8",
+      "bytes": 5754,
+      "mode": "0644"
+    }
+  },
+  "fixed_original_pre_review_plan": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-detour414-v1/future-measurement-plan.json",
+    "sha256": "6dd6c17fc3d01920bdbf08916cc6b432c25361b3ca469699689827e7525a9d23",
+    "bytes": 4749,
+    "mode": "0644"
+  },
+  "plan_completion_does_not_admit_future_execution": true,
+  "incremental_cost_scope": "Two cross u8 reads are geometry-only when existing qualified maps available; new geometry success may trigger complete E scan/TT leaf work and alter visited Search. No whole-cost/time claim. No map/BFS solely for extension.",
+  "later_scope_to_resolve": "One minimal implementation/TT policy distinction, affected software/source verification and actual immutable image/config/entry within a separately issued execution scope. Current414 finishes planning, not those later phases."
+}

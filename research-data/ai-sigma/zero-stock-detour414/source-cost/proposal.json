@@ -1,0 +1,102 @@
+{
+  "issue": "quoridor-4lc.414.1",
+  "scope": "PLAN/PREPARATION ONLY; source cost/implementability, no production patch, dummy mode, code execution, test or experiment",
+  "base_Main": "ea6f2834d65de92479e5e5ce505d37b8f8b08c97",
+  "context": {
+    "actual_turn_context_UTC": "2026-10-15T09:06:07.429Z",
+    "cwd": "/workspaces/quoridor",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "sandbox": "danger-full-access",
+    "approval": "never"
+  },
+  "candidate": "L=max(M, finite abs(D0[a]-D0[b]), finite abs(D1[a]-D1[b])); 9x9 unreachable sentinel81, discard each nonfinite difference independently",
+  "minimum_integration_owner": {
+    "path": "crates/quoridor-ai/src/alphabeta.rs",
+    "function": "Search::safe_race_value",
+    "line": 1607,
+    "change_region_if_later_authorized": "after qualified ds/other and Manhattan, before safe_race_winner geometry failure returns; no implementation authorized here"
+  },
+  "existing_pair_owner": {
+    "canonical_pair_named_API": false,
+    "private_pair": "WallDistanceScratch.maps: Option<WallDistanceMaps>, key horizontal+vertical, distances[[u8;81];2]",
+    "Float": "cached_distance_maps(p,[pooled,parent]) returns only EvalAccumulator::Float with Accumulator::cached_wall_distance_maps -> WallMaps::distances_for(p) exact H/V equality",
+    "no_new_API": "reuse already qualified cached local, otherwise borrow self.eval_scratch.distances.maps.as_ref() after same H/V check within existing module"
+  },
+  "existing_acquisition_not_incremental": {
+    "Float_hit": "existing ds/other calls read borrowed exact pair; scratch not populated on that branch",
+    "scratch_match": "both existing distance calls reuse the current key",
+    "stock0_scratch_miss": "existing411 first distance call builds one canonical p.wall_distance_maps pair, second reuses; Position uses one WallEdges preparation and canonical distance_map per player; this pre-existing work is not added/hidden by414",
+    "positive_stock_without_pair": "existing distance() scalar wall_distance fallback, but411 eligibility excludes this branch; no strengthening via new maps"
+  },
+  "minimal_increment": {
+    "TT_hit": "0 extra map lookups; current SafeRaceLeaf qualified hit returns before distance work",
+    "M_already_proves": "0 extra lookups if preserving existing M-first fast path",
+    "M_unknown_and_pair_available": {
+      "new_u8_array_reads": 2,
+      "reads": [
+        "D_s[p_other]",
+        "D_other[p_s]"
+      ],
+      "reused": [
+        "ds=D_s[p_s]",
+        "other=D_other[p_other]"
+      ],
+      "new_finite_comparisons": 2,
+      "finite_guard": "each cross value <81; own values were already validated by distance() and safe_race_winner; do not subtract sentinel",
+      "scalar_ops_upper_shape": "up to2 abs_diff +2 max, optional L>M check, same existing threshold predicate; actual optimized instructions unknown",
+      "pair_qualification": "reuse existing Float cached local, no second getter; scratch path Option check +two H/V equality checks; indices already qualified by both distance calls/root context"
+    }
+  },
+  "fallback": "If neither already-qualified pair nor matching scratch pair exists, retain original M result/UNKNOWN. No distance() cross request, fake pawn Position, canonical_pair builder, pawn BFS, new map, array clone/81cell validation/scan, Arc clone, heap/cache/new selector.",
+  "preserve": [
+    "true goal/threefold priority, stock0 and positive child depth; root normal comparison/depth0 unchanged",
+    "411 ds<=other && bound>=2ds or other<ds && bound>=2other+1; no Draw claim",
+    "SafeRaceLeaf/fullhistory/context/depth/domain/bestNone TT qualification before geometry; no depth0/root/internal-entry mixing",
+    "complete empty E after geometry success; no extra history enumeration on geometry failure, no history shortcuts",
+    "enter/control/make/undo/cancel/error accounting and NNUE skip exactly once; no code alteration here"
+  ],
+  "lifetime": "Existing evaluator.create_scratch perSearch ->Search.eval_scratch, one private inline map pair can replace on H/V change and drops with invocation; Float borrow from existing pooled/parent Arc without clone;414 adds only transient references/scalars if authorized, no new retained state",
+  "cost_limits": {
+    "wall_map_information_body_B_existing": 178,
+    "components": "16B H/V key+162B pair arrays; struct/Option padding/stack/register/RSS actual UNKNOWN, not new414 storage",
+    "runtime_time_increment": "UNKNOWN: no implementation/clock/native measurement",
+    "map_availability_or_strengthening_frequency": "UNKNOWN: source branch reachability, not dynamic counts",
+    "counter_semantics": "existing map_reads counts calls inside distance(); two hypothetical direct cross reads would not automatically be counted; cannot infer all map traffic/time from old counter",
+    "performance_or_default_or_success": "NO CLAIM"
+  },
+  "facts": {
+    "source_refs": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-detour414-v1/source-refs.json",
+      "sha256": "ac2cca63758831a501dc7370db6b8cbf566adbb6d00603da486bee8c33797f61",
+      "bytes": 4419,
+      "mode": "0644"
+    },
+    "followup_refs": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-detour414-v1/followup-refs.json",
+      "sha256": "1f14262ea27a177518a375f44e1f5573f1500bb50cca61da025ac17270f08d02",
+      "bytes": 2878,
+      "mode": "0644"
+    },
+    "insertion_refs": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-detour414-v1/insertion-refs.json",
+      "sha256": "8f0312b76eb85a2cd8f269456d3ac2e4426b7e85c8a328648675fde3a83baf4d",
+      "bytes": 1504,
+      "mode": "0644"
+    },
+    "Git_modes": {
+      "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-detour414-v1/source-modes.txt",
+      "sha256": "ca13c6db33a8a3b880b9a10204ae9b5e8c0310fde49c114de1b5f1abdc8f8b05",
+      "bytes": 354,
+      "mode": "0644"
+    }
+  },
+  "author_Main_Git_index_Cargo_Beads_native_test_Search_model_Perf_geometry_solver_game_science_reviewdispatch": 0,
+  "prior_minor_facts": [
+    "initial lightweight resource path scripts/dev/cycle_process.py absent; real existing module python/quoridor_training/cycle_process.py used",
+    "selected name try_safe_race/State absent; actual safe_race_value/Search located and selected, not an API invented",
+    "followup initially imported intake top-level, repeated only same immutable source reads; later main guard prevents repeat. No code/numeric/solver/test execution or frozen target mutation"
+  ],
+  "next_authority": "Root owns any later implementation/math/source review/software/science/default decision; none issued by this plan.412/413 LMR priority; frozen411/412/413 unchanged",
+  "preserved": "mixed/learnerALLprep-pipeline and323 USERPAUSE, product/generator enableOFF/models/weights/seals/oldfits96/foreign/allRAWFAILEDfeesUNKNOWN"
+}
