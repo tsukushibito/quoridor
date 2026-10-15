@@ -95,19 +95,19 @@ fn settings403_method_switch_and_raw_reset_keep_profile_clear_tt_and_defaults() 
     assert!(session.table.slots.iter().all(Option::is_none));
     assert_eq!(
         session.namespace(),
-        &profile.namespace(namespace("base"), true)
+        &profile.namespace(namespace("base"), Some(LmrMethod::FixedOne))
     );
     seed_table(&mut session);
     session.reset(Arc::new(NoEvaluation), namespace("reset"));
     assert!(session.table.slots.iter().all(Option::is_none));
     assert_eq!(
         session.namespace(),
-        &profile.namespace(namespace("reset"), true)
+        &profile.namespace(namespace("reset"), Some(LmrMethod::FixedOne))
     );
     session.set_lmr(false).unwrap();
     assert_eq!(
         session.namespace(),
-        &profile.namespace(namespace("reset"), false)
+        &profile.namespace(namespace("reset"), None)
     );
     let mut product =
         SearchSession::new(Arc::new(NoEvaluation), namespace(LMR_METHOD), 64).unwrap();
