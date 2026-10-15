@@ -2088,3 +2088,13 @@ Sol High実装・Sol Max限定source確認・SAME Astra High固定設計/保存�
 H3の同親とslot5/ply12では固定4endpointを同時置換しても、別の未置換応手へbackupが切り替わり元のNNUE候補が残った。低在庫slot4/ply39 H3の単一置換は60→192で、D推奨184とは異なる。全3木にterminal葉はなく、飽和したheuristicを確定勝敗へ読み替えない。追跡35状態の特徴/親復元はexact、32edgeのpost最大差2.384e−7・alert0だが、全状態・全物理FT/headや旧warm状態の保証ではない。
 
 [日本語報告・候補表・静的SVG・原設定/結果/FAILED/STOP](../research-data/ai-sigma/nnue-loss-leaf419/report-ja.md)。新しい学習、モデル/特徴/係数変更、追加Search/対局/介入は発行しない。別枠420への既存4endpoint参照は補助入力候補だけで、この診断の設定や件数を変えない。全mixed/learner prep/pipeline・323 USERPAUSE、製品/generator既定、models/weights/seals/oldfits96/foreign、旧RAW/FAILED/費UNKNOWNを保持する。
+
+### 多様な展開と低反復の勝敗混合学習への新委任（421、2026-10-15）
+
+人間の「作業を計画して進めて」により、旧342.17・323を再開せず、別の入力・設定・保存先で421の準備、生成、二条件fit、有限探索・初回対局確認、保存分析を実施する。[今回の契約](../.artifacts/research-policy/nnue-diverse-mixture-20261015.md)を正本とし、420の保存分析と私有source準備を並行する。Main/Git/Cargoは324だけが所有し、既存Sol Maxが設計・分析、既存Sol High二担当が学習と生成の差分を分ける。Astra・新しい役割session・全員ACKは用いない。
+
+既実施371の8局・217T/76V・200更新では、混合でも追加V MSE .988319→1.224836、公開V .423871→.443131となり、改善を確認していない。今回の問いは最大64の新展開からTを在庫4層・各層最大8行/対局へ抑え、同じBEST43から公開のみCと公開/新D各半量Mを、同じ少数更新で比べること。勝敗z、特徴・幅・尺度・lossは維持する。batch256/LR1e-4、更新数は実新T行数Rから`ceil(4R/128)`、最大64。新データ・露出・LR等を同時に変える実用手順であり、多様性単独の因果試験ではない。
+
+生成はControl/PVS/TT1M/LMR ON-depth_rank、名目D6、近似/safe OFF。当初の各手2M案から、既存保存D6仕事量を根拠に2/4/8Mの一つを新規結果前に固定できる契約へ更新した。全生成1G nodes、64 requests、200ply、最大8game workersは維持する。別の最大16評価系列を事前分離し、checkpoint選択後の探索は最大24calls/48M nodes、初回棋力確認は4対照×16系列×二色の最大128局/全arena1G nodes。fit・測定・必要な変更重み照合は合計6M logical row-forwards。科学出力はwhole256MiBの部分停止上限で、完了件数の保証ではない。未完了・欠測・負の結果を追加生成やfitで補充しない。
+
+旧1280の途中RAW/STOP/費、323/旧fits96、封印newE、既存モデル、製品/generatorの省略時既定、foreign変更は保持する。421内の候補重みを正式採用・棋力改善とする許可ではない。解決したseed・入力・実資源・設定と結果はこの節と既存設計へ統合し、状態と担当はBeadsに残す。

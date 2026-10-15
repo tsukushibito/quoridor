@@ -614,3 +614,13 @@ O fa1954be/Build76a051c1、N f37325c7/Buildeeb98d27は399差分だけ。NNUE/BES
 新6＋影響394三件の9assertions、必要compile/Clippy/真正buildと限定source review clear0/0を確認した。元v1のnew-test参照寿命E0597 FAILED8.445832476秒と元mask/captureは保持、unit Policyをstatic fixtureへ替えただけでproduction/期待値不変。研究compile成功を再演せず、failed/unrun検証v2は111.717411749秒。数値job89.316316059秒を一度、source/build/保存解析と別記しnested加算しない。全originalnative/inner/outer directwait/reap/handles/freshidentity/TMP不在/owned[]を確認、family4GiB guardで完了したがRSSpeakはUNKNOWN。
 
 診断のpreparedはTT手を除き、線形先頭選択と実tail/full sort、selected/sortedのdistinct read/returnを分ける。selectedには1要素tailも含む。full-order history/static比較分母は実eager listだけ、deferred first-choice比較は別で、未整列tailのfull-order関係はUNKNOWN。OFFに専用snapshot/copy/scan/隠れsortを置かない。このOFF比較でskip回数は観測していない。1672B key本体に加えenum/frame/再帰live copy/cache/stackの孤立費はUNKNOWNでwholeに含める。製品default/モデル/TT容量既定は維持し、混合/learnerのsource準備から全生成/converter/fit/newweights/native/256、323 USERPAUSE、oldfits96/models/defaults/N/seals、旧RAW/FAILED/全費UNKNOWNを維持する。新candidate/追加profile/比較/生成再開は発行しない。
+
+### 別入力・低反復の勝敗混合学習421の新規実施境界
+
+2026-10-15の人間の直接委任は[421の新規契約](../../.artifacts/research-policy/nnue-diverse-mixture-20261015.md)に限定する。旧342.17の1280試行・途中RAWと停止、323・oldfits96、旧teacher比較は変更しない。371の小規模混合は既実施であり再演しない。新たな最大64生成requestsは4/8/12/16手の序盤を均等配置し、既存collision familyをまとめてwhole-family80/20へ分割する。評価用最大16系列を事前分離し、欠測を新しい局面で埋めない。
+
+現在の固定D(0,8,tanh)、Control/PVS/TT1048576/LMR ON-depth_rank、近似/safe OFFを今回の生成設定へ明示する。名目D6の手番上限は、初期2M案から既存保存workに基づいて2/4/8Mの一つを新規結果前に固定する。全生成1G nodesと200plyを維持し、完成不足を上限追加で救済しない。実outcomeのgoal/threefoldだけをzSTM教師とし、UNKNOWNや200ply打切りへ勝敗を付けない。raw探索値は解析用で、旧two-teacherのraw±2共通maskを継承しない。実TT容量・method・namespaceを共通factoryと実容量由来の検査へ結び、上限を外すだけの修復や旧teacher専用loopを増やさない。
+
+Tだけを残壁16..20/8..15/1..7/0の各層からchronological等間隔で最大8行/対局、最大32行/対局へ選び、空層は補充しない。Vは適格全行を保持し、既存compactのgame blocksとgeometryの在庫を用い、学習stepで詳細棋譜を再検査しない。Cは公開256行、Mは公開128＋新D128行。同じ凍結BEST43・scale・FT32/H32/QF1/Zero4/FP32/tanh、fresh Adam、LR1e-4、最大10更新linear warmup、正しいT-only左右反転.5を保ち、実RからU=ceil(4R/128)を共通に固定する。各新T行の実露出を保存し、newV family-MSEで同点早いBESTを選ぶ。INITIAL/BEST/実LAST、最大5測定点、全6M logical row-forwardsの範囲で扱い、既に共有したINITIAL観測を重複実行しない。
+
+候補凍結後の確認は、事前bookから最大6親×4評価器のD4/LMR OFF、24calls/48M nodesと、M/Cそれぞれ対BEST43/Dの128局/64色pair・全1G arena nodesに限る。後者はControl/PVS/TT1M/LMR ON-depth_rank、100ms authority receipt/5ms reserve/各手1M/200ply。共有16系列・選択的深さと異軌跡を保持し、MSE、有限候補差、同時間scoreを分ける。科学出力whole256MiB・decimal50GBを維持し、普通source/buildに別の事前枠を足さない。旧fits・製品/generator既定・モデル/特徴の正式変更や自動昇格、追加seed/fit/対局・414実装へ拡張しない。
