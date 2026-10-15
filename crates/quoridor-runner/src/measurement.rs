@@ -716,7 +716,7 @@ fn completed_depth_observation(r: &SearchResult) -> Value {
             "TT_cutoffs":s.tt_cutoffs,"TT_order_only":s.tt_order_only,
             "TT_index_collisions":s.tt_index_collisions,"TT_replacements":s.tt_replacements,
             "PVS_researches":s.pvs_researches,"delta_updates":s.delta_updates,
-            "LMR_attempts":s.lmr_attempts,"LMR_full_depth_confirmations":s.lmr_full_depth_confirmations,"LMR_full_window_researches":s.lmr_full_window_researches,
+            "LMR_attempts":s.lmr_attempts,"LMR_full_depth_confirmations":s.lmr_full_depth_confirmations,"LMR_full_window_researches":s.lmr_full_window_researches,"LMR_additional_reductions":s.lmr_additional_reductions,
             "TT_generation":s.tt_generation,"TT_retained_bytes":s.tt_retained_bytes}});
     result["zero_stock_safe_race"] = json!(s.zero_stock_safe_race_enabled);
     result["zero_stock_safe_race_method"] = json!(
@@ -748,6 +748,7 @@ fn observed(r: &SearchResult) -> Value {
     result["work"]["LMR_attempts"] = json!(s.lmr_attempts);
     result["work"]["LMR_full_depth_confirmations"] = json!(s.lmr_full_depth_confirmations);
     result["work"]["LMR_full_window_researches"] = json!(s.lmr_full_window_researches);
+    result["work"]["LMR_additional_reductions"] = json!(s.lmr_additional_reductions);
     result["root_walls_remaining"] = json!(s.root_walls_remaining);
     result["zero_stock_approx_permitted"] = json!(s.zero_stock_approx_permitted);
     result["work"]["zero_stock_approx_terminations"] = json!(s.zero_stock_approx_terminations);
@@ -1553,5 +1554,66 @@ mod zero_stock410_metadata_tests {
             row["zero_stock_approx_method"],
             ZeroStockApproxMethod::Race.id()
         );
+    }
+}
+
+#[cfg(test)]
+mod lmr413_metadata_tests {
+    use super::*;
+
+    #[test]
+    fn measurement413_names_roundtrip_and_partial_counter_have_actual_method() {
+        let base = json!({"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,
+            "namespace":{"evaluator":crate::teacher_pilot_execution::EVALUATOR_ID,"rules":"standard","selectivity":"synthetic"},"output_bytes":10000,"record_bytes":1000});
+        for method in [
+            LmrMethod::DepthRankLateOne,
+            LmrMethod::DepthRankDeepTwo,
+            LmrMethod::DepthRankEarlyOne,
+        ] {
+            for enabled in [false, true] {
+                let mut config = base.clone();
+                config["lmr_method"] = json!(method.name());
+                config["lmr"] = json!(enabled);
+                let settings: Settings = serde_json::from_value(config).unwrap();
+                validate(&settings, &[]).unwrap();
+                let decoded: Settings =
+                    serde_json::from_value(serde_json::to_value(settings).unwrap()).unwrap();
+                assert_eq!(LmrMethod::from_name(&decoded.lmr_method).unwrap(), method);
+                let result = SearchResult {
+                    action: None,
+                    value: None,
+                    completed_depth: 0,
+                    pv: vec![],
+                    stats: alphabeta::SearchStats {
+                        lmr_enabled: enabled,
+                        lmr_method: method,
+                        lmr_additional_reductions: u64::from(enabled) * 7,
+                        ..Default::default()
+                    },
+                    stop: StopReason::NodeLimit,
+                    elapsed: std::time::Duration::ZERO,
+                };
+                let row = observed(&result);
+                let callback = completed_depth_observation(&result);
+                assert_eq!(
+                    row["lmr_rule"],
+                    if enabled {
+                        json!(method.id())
+                    } else {
+                        Value::Null
+                    }
+                );
+                assert_eq!(
+                    row["work"]["LMR_additional_reductions"],
+                    u64::from(enabled) * 7
+                );
+                assert_eq!(
+                    callback["cumulative_work"]["LMR_additional_reductions"],
+                    row["work"]["LMR_additional_reductions"]
+                );
+                assert_eq!(row["completed_depth"], 0);
+                assert_eq!(row["stop"], "NodeLimit");
+            }
+        }
     }
 }

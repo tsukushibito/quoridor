@@ -923,7 +923,15 @@ def measurement_config(experiment):
     )
     lmr_method = config.get("lmr_method", "depth_rank")
     require(
-        type(lmr_method) is str and lmr_method in {"fixed_one", "depth_rank"},
+        type(lmr_method) is str
+        and lmr_method
+        in (
+            "fixed_one",
+            "depth_rank",
+            "depth_rank_late_one",
+            "depth_rank_deep_two",
+            "depth_rank_early_one",
+        ),
         "measurement LMR method",
     )
     method = config.get("zero_stock_approx_method", "race")
@@ -2533,7 +2541,14 @@ def arena_plan_check(experiment, plan):
             and type(engine.get("lmr", False)) is bool
             and (
                 "lmr_method" not in engine
-                or engine["lmr_method"] in ("fixed_one", "depth_rank")
+                or engine["lmr_method"]
+                in (
+                    "fixed_one",
+                    "depth_rank",
+                    "depth_rank_late_one",
+                    "depth_rank_deep_two",
+                    "depth_rank_early_one",
+                )
             )
             and engine.get("ordering_profile") in {None, "control", "cheap"}
             and (

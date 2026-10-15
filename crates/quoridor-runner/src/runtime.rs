@@ -521,6 +521,8 @@ pub struct TtProfile {
     pub lmr_full_depth_confirmations: u64,
     #[serde(default)]
     pub lmr_full_window_researches: u64,
+    #[serde(default)]
+    pub lmr_additional_reductions: u64,
 }
 impl TtProfile {
     fn record(&mut self, result: &alphabeta::SearchResult) {
@@ -532,6 +534,7 @@ impl TtProfile {
         self.lmr_attempts += s.lmr_attempts;
         self.lmr_full_depth_confirmations += s.lmr_full_depth_confirmations;
         self.lmr_full_window_researches += s.lmr_full_window_researches;
+        self.lmr_additional_reductions += s.lmr_additional_reductions;
         self.probes += s.tt_probes;
         self.key_hits += s.tt_hits;
         self.exact_hits += s.tt_exact_hits;
@@ -2752,8 +2755,8 @@ fn record_evaluation_alpha(
         "requested_lmr_method":config.engines[engine].lmr_method.as_deref().unwrap_or(alphabeta::LmrMethod::default().name()),
         "actual_lmr_method_id":game.tt_profiles[engine].actual_lmr_method_id,
         "lmr_reduction_rule":game.tt_profiles[engine].lmr_reduction_rule,
-        "lmr_work_completed":selected.map(|r| serde_json::json!({"attempts":r.stats.lmr_attempts,"full_depth_confirmations":r.stats.lmr_full_depth_confirmations,"full_window_researches":r.stats.lmr_full_window_researches})),
-        "lmr_work_terminal":result.as_deref().map(|r| serde_json::json!({"attempts":r.stats.lmr_attempts,"full_depth_confirmations":r.stats.lmr_full_depth_confirmations,"full_window_researches":r.stats.lmr_full_window_researches})),
+        "lmr_work_completed":selected.map(|r| serde_json::json!({"attempts":r.stats.lmr_attempts,"full_depth_confirmations":r.stats.lmr_full_depth_confirmations,"full_window_researches":r.stats.lmr_full_window_researches,"additional_reductions":r.stats.lmr_additional_reductions})),
+        "lmr_work_terminal":result.as_deref().map(|r| serde_json::json!({"attempts":r.stats.lmr_attempts,"full_depth_confirmations":r.stats.lmr_full_depth_confirmations,"full_window_researches":r.stats.lmr_full_window_researches,"additional_reductions":r.stats.lmr_additional_reductions})),
         "last_completed_iteration_ns":completion.at.map(ns),
         "selection_reason":if selected.is_some() {"completed_iteration"} else {"legal_fallback_no_completed_iteration"},
         "whole_search":result.as_deref().map(crate::arena_clock::alpha_counters),

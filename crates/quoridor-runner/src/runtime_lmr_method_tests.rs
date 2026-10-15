@@ -87,3 +87,48 @@ fn runtime412_method_omission_binds_default_but_never_enables_lmr() {
     let session = arena_alpha_session(Arc::new(NoForward), base(), 64, &e, None).unwrap();
     assert_eq!(session.lmr_method(), Some(LmrMethod::FixedOne));
 }
+
+#[test]
+fn runtime413_candidate_methods_bind_factory_and_accumulate_actual_scout_counter() {
+    use alphabeta::LmrMethod;
+    let mut namespaces = std::collections::BTreeSet::new();
+    for profile in ["control", "cheap"] {
+        for method in [
+            LmrMethod::DepthRankLateOne,
+            LmrMethod::DepthRankDeepTwo,
+            LmrMethod::DepthRankEarlyOne,
+        ] {
+            for enabled in [false, true] {
+                let e = engine(profile, enabled, Some(method.name()));
+                let session =
+                    arena_alpha_session(Arc::new(NoForward), base(), 64, &e, None).unwrap();
+                assert_eq!(session.lmr_method(), enabled.then_some(method));
+                assert_eq!(
+                    session.namespace(),
+                    &arena_alpha_namespace(&e, base()).unwrap()
+                );
+                if enabled {
+                    assert!(namespaces.insert(session.namespace().selectivity.clone()));
+                }
+            }
+        }
+    }
+    assert_eq!(namespaces.len(), 6);
+    let mut profile = TtProfile::default();
+    let result = alphabeta::SearchResult {
+        action: None,
+        value: None,
+        completed_depth: 0,
+        pv: vec![],
+        stats: alphabeta::SearchStats {
+            lmr_additional_reductions: 7,
+            ..Default::default()
+        },
+        stop: alphabeta::StopReason::NodeLimit,
+        elapsed: std::time::Duration::ZERO,
+    };
+    profile.record(&result);
+    assert_eq!(profile.lmr_additional_reductions, 7);
+    let saved = serde_json::to_value(profile).unwrap();
+    assert_eq!(saved["lmr_additional_reductions"], 7);
+}
