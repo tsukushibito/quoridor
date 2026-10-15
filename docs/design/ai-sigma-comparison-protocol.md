@@ -97,3 +97,11 @@ NNUE/D/Sigmaの審判だけでなく内部αβ/PVS・MCTS・solverにもこの�
 ## 追加pairing：Sigma対固定D
 
 人間が承認した追加16slotsは[336契約](../../research-data/ai-sigma/arena-evaluation/sigma-distance336/task.md)に従い、331 NNUE対Sigmaの実STOP・回収後、同担当で別pairingとして実施する。新threefold規約・保持book・clock・model・source/versionを結果前に固定し、使用済み331出力と新出力を共に保存予測へ含める。331 matches64MiBの再利用を容量支持とみなさない。旧327 NNUE対DはRuleA-onlyであり、新rulesのNNUE対D追加対局はこの承認に含まれない。
+
+## NNUEと公開データの解釈境界（418、2026-10-15）
+
+実比較のBEST43はfresh353の物理epoch43（046fe/46ec/96a5）であり、公開43NPZやSigma cycle43ではない。公開fix bufferと対戦相手scratch321のlineageは異なる。各公開shardの実生成checkpoint・強さ・game/historyは未特定で、固定READMEや最終ONNXの棋力を全世代へ転写しない。NNUEの全量均等row/epochshuffleと、時期別に異なるupstream rolling/recency samplingを同じ学習利用と扱わない。
+
+教師zは採用自己対局方策のSTM実勝敗で、raw value/rootmean/最適WDLではない。z0除外後の条件付き目標、同入力の別結果、観測rowとgameの重みを分ける。BESTのtrain欄は固定8192行の診断、historical game_equalは入力group均等、saturationの閾値は当該sourceに束縛する。開封Vはschedule/BEST選定集合で、game/history不明のrow splitと同入力重複の限界を保持する。
+
+418はread-onlyの前提訂正・競合説明の整理で、単独の弱さ原因や改善策の効果を特定していない。[統合分析と原参照](../../research-data/ai-sigma/nnue-premise418/report-ja.md)を参照する。新しい教師/世代weight/モデル/学習やsealed評価をこの分析から自動採用せず、旧mixed/learner全prep/pipeline・323 USERPAUSEを維持する。

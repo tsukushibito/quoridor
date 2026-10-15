@@ -2054,3 +2054,13 @@ source調査では、既存TT hit/旧M成功は追加0、旧M幾何UNKNOWNかつ
 48枝全てparent ply1、H0のrank4は23/24、H+はrank16/q1とrank52/q2に偏る。H+元shallowとcold reducedはbound24/24一致でもbits一致5/24、H0 normalのNNUE family2では元Upper→coldLowerが1件。coldは元warmの正確な反実仮想/WDL/一手oracleではなく、通常深さにも下位LMRが残る。旧392勝因・一般棋力・whole速度・見落とし率へ外挿しない。probe PVは親action一手だけ。全canonical入力admissionと親復元/停止を保存確認した。
 
 研究標準depth_rankと製品/generator enable OFFを維持し、bounded research-diagnostics observe_lmrは明示opt-in/default false。次案は最終反復d3/ply2等の固定少数観測と、必要ならnormal直接対reduced＋必要時normalの実手順費比較の二つで、提案のみ・新実行なし。新AI6/runner2は元v2FAILED内PASSとして保持し、test-only field/initializer修復後に未実行Clippy/releaseだけ進め、成功suiteの再演0。原software外側123.907115816秒（FAILED込み）と診断12.304373928秒は各一度、nested probe時計を足さず、全source/LLM/admin/physical NN/連続RSS/孤立費はUNKNOWN。[設定・原結果・詳細分析・STOP](../research-data/ai-sigma/lmr-limited-observation416/report-ja.md)。全mixed/learner prep/pipeline・323 USERPAUSE、models/weights/seals/oldfits96/foreign変更、旧RAW/FAILED/費UNKNOWN、414未発行を保持する。
+
+### NNUEの弱さと公開データ利用の前提確認（418、2026-10-15）
+
+保存資料と固定upstreamを、独立Astra Highの来歴/競合仮説分析と既存Sol Highの実学習事実抽出に分けて照合した。実arenaの046fe/46ec/96a5はfresh353の物理BEST epoch43で、公開43NPZやSigma cycle43ではない。公開fix43は修正後legacyの継続bufferで、後のscratch321 ONNXの全学習史やランダム初期から43世代分の記録ではない。公開時84cfと固定751186で43blob/sizeが一致するが、各shardの生成checkpoint・強さ・game/historyはUNKNOWN。現在のSigmaの強さを各世代の教師品質へ移さない。
+
+実T8,413,949行のうち番号1..20は5,719,421行=67.9755%、BESTまで245,935,103回の露出で、generation quality/recency weightなし。一方upstreamのreplayはwindow/行数×decay^ageで、歴史版30/.92、固定train.py default60/.99、head改修期の50/1.0等を区別する。旧番号の行が多いことは弱い世代が多いという測定ではなく、同じfix bufferでheadsが改善した記録も全buffer不良説の反証材料である。
+
+教師は生成方策のSTM実勝敗zであり、raw value/rootmean/最適WDLではない。同入力別±1は直ちに破損ではなく、z0除外による条件付き目標とrow/game weightの違いを保持する。BEST train MSE0.426580は固定8192診断でfullTではなく、V0.423871と全量generalization gapを作らない。歴史的game_equalは入力group均等、saturation48.5397%はabs(v)>=.9。旧naiveLR半分は訓練対象外、corrected onlineLRであり、既存有限native parityを全局面の保証にも無視できる材料にも変えない。
+
+単独原因の確定0。生成方策/行重み/αβ葉分布、容量/最適化、分割評価、探索条件を競合説明として残す。同深さでの既存負け越しは速度差だけの説明に反するが、searched-rootを静的NN値や一手oracleにはしない。415は同評価器内LMR比較、417は別の限定診断である。新forward/fit/Search/対局/solver/build/test/NPZ再decode/モデル取得/sealed開封は0。原因を特定したという認定やデータ除去/新fit/特徴変更/paused学習再開は発行せず、原失敗/費/STOP/UNKNOWNを保存した。[統合報告と根拠](../research-data/ai-sigma/nnue-premise418/report-ja.md)。全mixed/learner prep/pipeline・323 USERPAUSE、製品/generator defaults、models/weights/seals/oldfits96/foreignを維持する。

@@ -1,0 +1,229 @@
+{
+  "identity": {
+    "name": "fresh353 no-output-bypass BEST43",
+    "meaning_of_43": "physical training epoch selected by strict minimum full opened-V rowMSE; not shard count or Sigma cycle",
+    "training_job": "7169a3ae-7a3c-4314-ad61-709655e7b3a1",
+    "model": {
+      "descriptor": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/public-no-bypass-v1/candidate-v1/output/best-model/manifest.json",
+        "sha256": "46ec2c4708f96dcf9fad579c2fb0d1299c6663df27412f0faac98267467715e1",
+        "bytes": 677,
+        "mode": "0600"
+      },
+      "weights": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/public-no-bypass-v1/candidate-v1/output/best-model/weights.f32",
+        "sha256": "046fe926e56b955b0fb7de8f147a74ec33eace9cbc00a55c307f9b6541ab9841",
+        "bytes": 49284,
+        "mode": "0644"
+      },
+      "evaluator_sha256": "96a5f41f875022d1752b9c999595ad58bfb2d42687a8f06de08d42b1c4215875"
+    },
+    "fresh_initial_ordered_weights_SHA": "2ddacbf88145816b6b0c86e13ebb983d7c1b64e42f8d346623873a18ae7414ad",
+    "fresh_not_finetune": true,
+    "best": {
+      "step": "176687",
+      "training_seen": "361799807",
+      "completed_epochs": "43",
+      "validation_row_mse": "0.42387071217019406",
+      "validation_group_mse": "0.3904730854548551",
+      "validation_sign_accuracy": "0.8431134438745079",
+      "validation_saturation_fraction": "0.48539663604914707",
+      "train_row_mse": "0.42658014263409844",
+      "train_scope": "fixed_diagnostic_subset",
+      "train_rows": "8192"
+    },
+    "LAST_epoch": 46,
+    "current417_scope": "Same saved model tuple in source-preparation input binding; no417 job result/entry inferred"
+  },
+  "inputs": {
+    "public_stored_rows": 18914078,
+    "public_original_rows": 9457039,
+    "native_eligible_decisive": 9255077,
+    "train": 8413949,
+    "opened_selectorV": 419150,
+    "sealed_metadata_rows": 371978,
+    "old_opened_quarantine_rows": 50000,
+    "excluded_reason_counts": {
+      "3": 45642,
+      "7": 156320
+    },
+    "reason3": "native remaining-wall/stock qualification failure",
+    "reason7": "zero with unavailable termination reason",
+    "distinct_T": 1819065,
+    "distinct_V": 185666,
+    "T_rows_per_model_input": 4.625425149733517,
+    "V_rows_per_model_input": 2.2575485010718173,
+    "split": "sourceblob+original index salted deterministic partition, not game grouping; exact old opened IDs isolated, same-input aliases kept",
+    "labels": "Recorded values.npy +/-1 used unchanged as canonical STM outcome; rootmean absent. No independently verified game winner/history or optimal-WDL claim",
+    "originals_only": true,
+    "stored_naiveLR_half_not_trained": true
+  },
+  "training": {
+    "config": {
+      "model": {
+        "architecture": "distance_residual",
+        "transformer_width": 32,
+        "hidden_width": 32,
+        "dropout": 0,
+        "distance_a": 0,
+        "distance_b": 0,
+        "distance_bypass": false
+      },
+      "optimizer": {
+        "name": "adam",
+        "lr": 0.01,
+        "weight_decay": 0
+      },
+      "training": {
+        "steps": null,
+        "batch_size": 2048,
+        "seed": 32320261007,
+        "target": "z",
+        "sampling": "epoch",
+        "loss_weighting": "row",
+        "scheduler": "plateau",
+        "warmup_steps": 257,
+        "lr_decay_factor": 0.5,
+        "lr_decay_patience": 1,
+        "min_lr": 1e-6,
+        "reflection_probability": 0.5,
+        "reflection_seed": 32320261008,
+        "device": "cuda",
+        "threads": 2,
+        "supply_workers": 2
+      },
+      "evaluation": {
+        "batch_size": 2048,
+        "monitor": "row",
+        "early_stopping_patience": 8,
+        "early_stopping_unit": "epoch",
+        "min_delta": 0.0001,
+        "diagnostic_rows": 8192,
+        "diagnostic_interval": 514,
+        "full_train": false,
+        "full_train_every_epochs": 5
+      },
+      "limits": {
+        "seconds": null,
+        "samples": null
+      },
+      "artifacts": {
+        "mode": "native",
+        "save_scheduled": false,
+        "checkpoint_steps": []
+      },
+      "data": {
+        "overlap_policy": "report"
+      }
+    },
+    "actual_epoch_visits_LAST": [46, 46],
+    "successful_rows": 387041654,
+    "reflected_supply_rows": 193525280,
+    "weights": "unit row loss, no per-cycle quality/recency weight, no equal-game weighting",
+    "full_train_observation_epochs": [1, 5, 10, 15, 20, 25, 30, 35, 40, 45],
+    "fullV_observations": 47,
+    "early_stop_last_significant_epoch": 38,
+    "strict_BEST_did_not_reset_patience": true,
+    "actual_forwards": {
+      "train": 387041654,
+      "full_selector": 104142644,
+      "diagnostic": 7356416,
+      "onnx": 0
+    },
+    "same_selector_V_limit": "Opened V selected schedule and BEST; not independent sealed evaluation"
+  },
+  "model_math": {
+    "features": "QF1 two312 views, canonical STM player0/side1; own goal row8, opponent view 180deg",
+    "ft": 32,
+    "hidden": 32,
+    "activation": "ReLU FT, ReLU hidden, FP32 output tanh",
+    "route": "four zero reserved head slots",
+    "head_distance": "own/opponent wall-distance FP32 D/80, T-only standardized",
+    "output_bypass": false,
+    "coefficient": {
+      "a": 0,
+      "b": 0
+    },
+    "scale": {
+      "mu_f32": [0.10472780466079712, 0.09871304780244827],
+      "sigma_f32": [0.05110647529363632, 0.050166402012109756]
+    },
+    "weights_count_f32": 12321,
+    "weights_bytes": 49284
+  },
+  "metric_cautions": {
+    "saturation_threshold_this_run": 0.9,
+    "not_0p99_diagnostic": true,
+    "group_equal_metric": "input-group equal, despite historical *_game_equal field names; not game/history equal",
+    "BEST_train_metric": "8192 fixed diagnostic, not full T; no invalid full-T vs full-V gap inference",
+    "INITIAL_sign_accuracy_zero": "Prediction0 with strict prediction*z>0, not random-classifier accuracy",
+    "sameV_D_guide": "Candidate coefficient0 guide=0 with MSE1; saved incumbent fixedD MSE0.855844157121 is a different frozen guide"
+  },
+  "finite_parity": {
+    "historical_receipt": {
+      "path": "/workspaces/quoridor/.worktree/nnue-public-no-bypass/.artifacts/nnue-public-no-bypass-v1/trained-numerical-entry-v2/qualified-trained-STOP.corrected.json",
+      "sha256": "5dc1d6a12908f8dad6c23ad8b80fe0305e411e2585ef9eb678c6037779dc7dce",
+      "bytes": 54057,
+      "mode": "0644"
+    },
+    "Torch_rows": 16,
+    "models": ["BEST", "LAST"],
+    "Torch_batches": 4,
+    "native_normal_validated": 56,
+    "delta_transitions": 16,
+    "undo": 16,
+    "max_errors": {
+      "BEST/cpu": 7.450580596923828e-8,
+      "BEST/cuda": 2.9802322387695312e-8,
+      "LAST/cpu": 7.450580596923828e-8,
+      "LAST/cuda": 7.450580596923828e-8
+    },
+    "delta_full_max_abs_error": 2.086162567138672e-7,
+    "head_D_Zero4_exact": true,
+    "limit": "Four actual qualification prefixes; not all-data/all-history/current-image universal proof"
+  },
+  "metadata_only_derivations": {
+    "source_cycles_1_to20_T_rows": 5719421,
+    "source_cycles_1_to20_T_fraction": 0.6797546550377237,
+    "meaning": "Exposure mass from saved manifest only, no inference of strength or chronology across lineages"
+  },
+  "upstream_locators": {
+    "revision": "751186344fc52ad0c29bc65922e62c6fa915f006",
+    "all43_manifest": {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/learning-million/source-manifest.json",
+      "sha256": "21d6fbd97c0957ccbeb21fa186febeb70d01aacb8b87bc5b9882edcf0e96e446",
+      "bytes": 14663,
+      "mode": "0644"
+    },
+    "canonical_actual_cache": {
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/public-full-learning/original-full-v1/recovery-r1/corpus/cache.json",
+      "sha256": "07d81abc2230b2fe6b7c5fb7a425e7e3109bf9af2c467f5c72f8d3bdb975279b",
+      "bytes": 11527,
+      "mode": "0644"
+    },
+    "tree_source_archive": "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-import/necessary-stopped-source-results-v1.tar.xz",
+    "mapping_with_embedded_text_source_manifest": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/171-gpu-route-choice/source-graph-mapping.json",
+      "sha256": "c4ead4b1051d358683bc6414d326a9860a1b05070b98831502d0e6752c54187d",
+      "bytes": 18636,
+      "mode": "0644"
+    },
+    "historical_standalone_text_manifest": {
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma/reference-fixtures/SIGMA-PARITY-PLAN/source-manifest.json",
+      "exists": false
+    },
+    "local_checkout": "UNKNOWN; no directory/global archive search",
+    "investigation_owner": "418.1 /root/nnue_data_premises via Root collaboration only; no direct App Server send"
+  },
+  "unknowns": [
+    "Actual public game/history/winner/termination/rules lineage, generating model strength and replay generation exposures; 418.1 upstream scope",
+    "Full T/V exact-input overlap/mixed-label conditional variances not re-censused; group membership not game identity",
+    "Best43 calibration/action ranking at actual alpha-beta leaves and unique causal weakness unresolved",
+    "No independent current full-data/native parity or new sealed E evaluation; no new calls authorized by this extraction"
+  ],
+  "historical_failures_preserved": {
+    "originals": "All original FAILED/raw/costs/masks/UNKNOWN untouched",
+    "this_extraction": "One saved-reader FileNotFound for guessed corpus/manifest.json; maintained actual cache.json found by bounded names and read. Guard released by context; no model/native operation or automatic scientific retry. One rg missing research-paths.sh retained in tool output.",
+    "formatter_prelaunch": "Wrong explicit /usr/bin/node absent: child=null, failed0.005123606999404728s/cleanuptrue. Existing PATH node /home/vscode/.local/bin/node located; unique corrected formatter operation, no install/upgrade/model/scientific retry. Original process receipt/masks preserved."
+  }
+}
