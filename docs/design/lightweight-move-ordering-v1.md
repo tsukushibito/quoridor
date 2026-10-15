@@ -433,3 +433,13 @@ wholeは6root body・setup/drop・採点・key保存/cache・再探索込みの�
 5×5の既存board-D39,708状態を対象に、一組の通常最短路が頂点非交差なもの308、全通常最短DAG unionまで非交差なもの44を確認した。mask152073/raw762には互いに非交差な唯一最短路があるがboard-Dであり、この幾何条件だけを一般の盤面race exact WDLへ使わない。真正初期prefix・9×9・全historyは別資格で、新例のprefixはUNKNOWN。在庫0＋壁graphの到達成分分離の既存十分条件は別に保つ。
 
 これはone-off有限数学確認で、Search/TT/距離kernel/モデル/既定は変更しない。設定・色付きDAGのexact一組存在判定、compact全flags・代表graph、必要softwareと限定独立解釈・原費/失敗/STOPは[409保存報告](../../research-data/ai-sigma/zero-stock-shortest-path409/results-v1/report-ja.md)に保存した。近似leafをgame-exactと呼ぶ根拠にはしない。
+
+### 固定1手と深さ・順位可変LMRの有限比較（408、2026-10-15）
+
+同じimage/sourceで、固定1手Aと追加削減q(d,m)の対数表BをNNUE/固定D×Control/Cheapの4strataで比較した。近似OFF、TT1048576/PVS、既存6roots・ABBAの96calls/48sessions/288Mcapで、実31,210,438nodes、96COMPLETE/0UNKNOWN。B/Aのsetup/drop込みwhole中央値比は0.876448/0.790083/0.850133/0.833392で全4条件Bが短かった。値・action・PV・workは方式で変わり、同仕事の速度差や全幅depth資格ではない。
+
+同じ16familiesを共有する128探索的対局/64色pairsは127goal+1threefold、UNKNOWN0。A側scoreはNNUE Control0.40625、NNUE Cheap0.390625、D Control0.375、D Cheap0.375。保存family-pair区間は順に[.28125,.53125]/[.234375,.546875]/[.25,.46875]/[.25,.5]。固定book・共有family・複数対照の依存を保持し、一般優越/Elo/非劣性やControl/Cheap間の総順位は認定しない。6567acceptedの完成snapshot中央値A/Bは6/5、5/5、10/10、9/9で、両方式とも選択的nominal depth、異なる訪問局面/手数/深い尾部を含む。
+
+可変方式は研究用opt-inとして保持し、固定1手を省略時の既存methodとして残す。製品/実generatorのLMR既定OFFとモデル/数学/TT履歴資格は変更しない。係数最適性・正式strength・Cheap昇格を認定せず、追加candidate/履歴補正/tuning/追試を自動発行しない。原arenaの入場前output forecast拒否はFAILEDのまま保持し、出力上限とfreshpathsだけを修復して真正未入場128を一度実施した。
+
+費用・全分布・元FAILEDを含むsoftware/数値outer、source/独立確認/設定/原結果の保存範囲は[有限結果](../../research-data/ai-sigma/lmr-adaptive408/report-ja.md)へ。全費・物理NNforward・孤立部位費・連続RSSはUNKNOWNで、nested時計とTT gaugesを重ねて加算しない。旧400/402/406/407/409は別subjectのまま、全明示USERPAUSEを維持する。

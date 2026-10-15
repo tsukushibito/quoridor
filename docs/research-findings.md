@@ -1950,3 +1950,13 @@ setup/drop等込み8 calls/passのwhole二反復中央値は、NNUEがなし14.3
 代表mask152073、H a1,d1,b3,a4,c4／V b1、P0=a4/P1=b2/P0手番raw762は保存board-D。両通常最短路は一意で、P0 a4-b4-c4-d4-e4-e5、P1 b2-b3-c3-c2-c1の頂点集合が交わらない。それでも相手の全合法応手を含む盤面ゲームはDであり、全通常最短DAG非重複だけでは距離raceのexact WDLを返せない。6壁=2×3は枚数条件だけで、この新例への真正非終端prefixはUNKNOWN。405の真正m3 prefixは別mask67882/raw376（今回の両flag false）で、到達可能性や初期最善playを移植しない。9×9／全履歴や製品Searchへの結論ではなく、成分分離の既存十分条件とも区別する。
 
 四保存graphを再用し、未保存ラベルの3,868配置だけ原405 Python参照で復元。全2,532,560配置や旧52suiteの再演は0、新predicate4 PASSと限定独立確認0/0を受入れた。原数学job8.803503909sを一回計上し、内包guard8.161304867s／Python復元7.284432596sを足さない。全費・continuous peakはUNKNOWN。設定・compact全flags・単一代表graph・source・原失敗とSTOPは[409保存結果](../research-data/ai-sigma/zero-stock-shortest-path409/results-v1/report-ja.md)、[保存対応](../research-data/ai-sigma/zero-stock-shortest-path409/results-v1/preservation.json)、[独立確認](../research-data/ai-sigma/zero-stock-shortest-path409/results-v1/related-review/report-ja.md)へ結ぶ。新しい現役solver・Search接続・science追加・pause解除はない。
+
+### 固定1手と深さ・順位可変LMRの有限比較（408、2026-10-15）
+
+同じimage/sourceで、固定1手Aと追加削減q(d,m)の対数表BをNNUE/固定D×Control/Cheapの4strataで比較した。近似OFF、TT1048576/PVS、既存6roots・ABBAの96calls/48sessions/288Mcapで、実31,210,438nodes、96COMPLETE/0UNKNOWN。B/Aのsetup/drop込みwhole中央値比は0.876448/0.790083/0.850133/0.833392で全4条件Bが短かった。値・action・PV・workは方式で変わり、同仕事の速度差や全幅depth資格ではない。
+
+同じ16familiesを共有する128探索的対局/64色pairsは127goal+1threefold、UNKNOWN0。A側scoreはNNUE Control0.40625、NNUE Cheap0.390625、D Control0.375、D Cheap0.375。保存family-pair区間は順に[.28125,.53125]/[.234375,.546875]/[.25,.46875]/[.25,.5]。固定book・共有family・複数対照の依存を保持し、一般優越/Elo/非劣性やControl/Cheap間の総順位は認定しない。6567acceptedの完成snapshot中央値A/Bは6/5、5/5、10/10、9/9で、両方式とも選択的nominal depth、異なる訪問局面/手数/深い尾部を含む。
+
+可変方式は研究用opt-inとして保持し、固定1手を省略時の既存methodとして残す。製品/実generatorのLMR既定OFFとモデル/数学/TT履歴資格は変更しない。係数最適性・正式strength・Cheap昇格を認定せず、追加candidate/履歴補正/tuning/追試を自動発行しない。原arenaの入場前output forecast拒否はFAILEDのまま保持し、出力上限とfreshpathsだけを修復して真正未入場128を一度実施した。
+
+費用・全分布・元FAILEDを含むsoftware/数値outer、source/独立確認/設定/原結果の保存範囲は[有限結果](../research-data/ai-sigma/lmr-adaptive408/report-ja.md)へ。全費・物理NNforward・孤立部位費・連続RSSはUNKNOWNで、nested時計とTT gaugesを重ねて加算しない。旧400/402/406/407/409は別subjectのまま、全明示USERPAUSEを維持する。
