@@ -873,6 +873,7 @@ def measurement_config(experiment):
         and set(config)
         <= {
             "loss_leaf_419",
+            "inference",
             "roots",
             "profile",
             "tt_entries",
@@ -961,6 +962,61 @@ def measurement_config(experiment):
         and namespace["rules"] == experiment["rules"],
         "measurement namespace",
     )
+    inference = config.get("inference")
+    if inference is not None:
+        require(
+            isinstance(inference, dict)
+            and {"backend", "model", "model_sha", "library", "logical_row_limit"}
+            <= set(inference)
+            and set(inference)
+            <= {
+                "backend",
+                "model",
+                "model_sha",
+                "library",
+                "logical_row_limit",
+                "device",
+                "cuda_graph",
+            }
+            and inference["backend"] == "ort"
+            and type(inference["logical_row_limit"]) is int
+            and inference["logical_row_limit"] > 0
+            and type(inference.get("device", 0)) is int
+            and inference.get("device", 0) == 0
+            and inference.get("cuda_graph", False) is False
+            and all(
+                type(inference[k]) is str and inference[k].startswith("/")
+                for k in ("model", "library")
+            )
+            and type(inference["model_sha"]) is str
+            and len(inference["model_sha"]) == 64
+            and all(c in "0123456789abcdef" for c in inference["model_sha"]),
+            "measurement native CPU inference shape/budget",
+        )
+        require(
+            config["profile"] == "control"
+            and not config.get("lmr", False)
+            and config.get("zero_stock_approx_min_root_walls") is None
+            and not config.get("zero_stock_safe_race", False)
+            and not config.get("loss_leaf_419", False)
+            and experiment.get("models") == []
+            and any(
+                r["path"] == inference["model"]
+                and r["sha256"] == inference["model_sha"]
+                for r in experiment["inputs"]
+            )
+            and any(
+                r["file"]["path"] == inference["library"]
+                for r in experiment.get("dynamic_libraries", [])
+            )
+            and namespace["evaluator"].startswith("sigma-value-onnx-cpu:sha256:")
+            and len(namespace["evaluator"].rsplit(":", 1)[-1]) == 64
+            and all(
+                c in "0123456789abcdef"
+                for c in namespace["evaluator"].rsplit(":", 1)[-1]
+            ),
+            "measurement closed Sigma inputs and native-owned identity",
+        )
     require(isinstance(config["roots"], list) and config["roots"], "measurement roots")
     for root in config["roots"]:
         require(
@@ -1671,14 +1727,22 @@ def experiment_phase_check(experiment):
     if phase == "compare" and experiment["argv"][1] == "measure":
         config = document(experiment["config"])
         fixed_d = config["namespace"]["evaluator"] == "original-distance-a0-b8-tanh"
+        sigma_value = config.get("inference") is not None
         require(
             (
-                fixed_d
+                sigma_value
+                and experiment["models"] == []
+                and config["profile"] == "control"
+            )
+            or (
+                not sigma_value
+                and fixed_d
                 and experiment["models"] == []
                 and config["profile"] in {"control", "coverage", "cheap"}
             )
             or (
-                not fixed_d
+                not sigma_value
+                and not fixed_d
                 and len(experiment["models"]) == 1
                 and config["profile"] in {"control", "cheap"}
             ),
