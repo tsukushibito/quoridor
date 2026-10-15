@@ -236,7 +236,7 @@ fn lmr413_actual_additional_scout_counter_distinct_rank_and_error_restore() {
                 let before = (Key::of(c), c.history_counts(), s.context, s.board);
                 assert!(matches!(
                     s.negamax(c, None, 8, 0.0, 0.25, 0),
-                    Err(SearchError::Evaluation(_))
+                    Err(Interrupted::Error(SearchError::Evaluation(_)))
                 ));
                 assert_eq!(s.stats.tt_cutoffs, 15);
                 assert_eq!(s.stats.lmr_additional_reductions, expected_additional);
