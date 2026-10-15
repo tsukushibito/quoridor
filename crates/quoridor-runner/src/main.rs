@@ -99,7 +99,14 @@ fn execute() -> Result<()> {
                     sha256: argument(&args, "--experiment-sha256")?,
                 },
             )?;
-            println!("{}", serde_json::to_string(&report)?);
+            println!(
+                "{}",
+                serde_json::to_string(&serde_json::json!({
+                    "records_saved": true,
+                    "status": report.get("status"),
+                    "runtime_launch_origin": report.get("runtime_launch_origin"),
+                }))?
+            );
         }
         "value-search-compare" => {
             strict_pairs(&args, &["--experiment", "--experiment-sha256"], &[])?;
