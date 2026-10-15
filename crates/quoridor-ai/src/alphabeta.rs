@@ -535,9 +535,6 @@ pub enum LmrMethod {
     FixedOne,
     #[default]
     DepthRank,
-    DepthRankLateOne,
-    DepthRankDeepTwo,
-    DepthRankEarlyOne,
 }
 static LMR_DEPTH_RANK: std::sync::OnceLock<[[u8; 64]; 64]> = std::sync::OnceLock::new();
 impl LmrMethod {
@@ -545,9 +542,6 @@ impl LmrMethod {
         match name {
             "fixed_one" => Ok(Self::FixedOne),
             "depth_rank" => Ok(Self::DepthRank),
-            "depth_rank_late_one" => Ok(Self::DepthRankLateOne),
-            "depth_rank_deep_two" => Ok(Self::DepthRankDeepTwo),
-            "depth_rank_early_one" => Ok(Self::DepthRankEarlyOne),
             _ => Err(SearchError::Limits("unsupported LMR method".into())),
         }
     }
@@ -555,18 +549,12 @@ impl LmrMethod {
         match self {
             Self::FixedOne => "fixed_one",
             Self::DepthRank => "depth_rank",
-            Self::DepthRankLateOne => "depth_rank_late_one",
-            Self::DepthRankDeepTwo => "depth_rank_deep_two",
-            Self::DepthRankEarlyOne => "depth_rank_early_one",
         }
     }
     pub fn id(self) -> &'static str {
         match self {
             Self::FixedOne => LMR_METHOD,
             Self::DepthRank => "lmr408-depth-rank-log63-extra0to3-pvs-verify-v1",
-            Self::DepthRankLateOne => "lmr413-depth-rank-d5-m16-plus1-cap4-pvs-verify-v1",
-            Self::DepthRankDeepTwo => "lmr413-depth-rank-d7-m16-plus2-cap5-pvs-verify-v1",
-            Self::DepthRankEarlyOne => "lmr413-depth-rank-d5-m8-plus1-cap4-pvs-verify-v1",
         }
     }
     pub fn reduction_rule(self) -> &'static str {
@@ -575,19 +563,10 @@ impl LmrMethod {
             Self::DepthRank => {
                 "d>=3,m>=4: extra=clamp(floor(0.7844+ln(min(d,63))*ln(min(m,63))/2.4696)-1,0,min(3,d-2)); child=d-1-extra; existing protection/PVS"
             }
-            Self::DepthRankLateOne => {
-                "canonical depth_rank q; d>=5,m>=16,q>0: extra=min(q+1,4,d-2), else q; child=d-1-extra; existing protection/PVS"
-            }
-            Self::DepthRankDeepTwo => {
-                "canonical depth_rank q; d>=7,m>=16,q>0: extra=min(q+2,5,d-2), else q; child=d-1-extra; existing protection/PVS"
-            }
-            Self::DepthRankEarlyOne => {
-                "canonical depth_rank q; d>=5,m>=8,q>0: extra=min(q+1,4,d-2), else q; child=d-1-extra; existing protection/PVS"
-            }
         }
     }
     fn prepare(self) {
-        if self != Self::FixedOne {
+        if self == Self::DepthRank {
             LMR_DEPTH_RANK.get_or_init(|| {
                 let mut table = [[0; 64]; 64];
                 for (depth, row) in table.iter_mut().enumerate().skip(3) {
@@ -606,21 +585,12 @@ impl LmrMethod {
         if depth < 3 || rank < 4 {
             return 0;
         }
-        if self == Self::FixedOne {
-            return 1;
-        }
-        let q = u16::from(
-            LMR_DEPTH_RANK.get().expect("LMR prepared before Search")[usize::from(depth.min(63))]
-                [rank.min(63)],
-        );
-        if q == 0 {
-            return 0;
-        }
         match self {
-            Self::DepthRankLateOne if depth >= 5 && rank >= 16 => (q + 1).min(4).min(depth - 2),
-            Self::DepthRankDeepTwo if depth >= 7 && rank >= 16 => (q + 2).min(5).min(depth - 2),
-            Self::DepthRankEarlyOne if depth >= 5 && rank >= 8 => (q + 1).min(4).min(depth - 2),
-            _ => q,
+            Self::FixedOne => 1,
+            Self::DepthRank => u16::from(
+                LMR_DEPTH_RANK.get().expect("LMR prepared before Search")
+                    [usize::from(depth.min(63))][rank.min(63)],
+            ),
         }
     }
 }
@@ -768,9 +738,6 @@ pub struct SearchStats {
     pub pvs_researches: u64,
     /// Started reduced scout calls, including a call interrupted by control/error.
     pub lmr_attempts: u64,
-    /// Started scouts whose extra reduction exceeds canonical depth_rank q.
-    /// Counts calls (including interrupted calls), not additional plies.
-    pub lmr_additional_reductions: u64,
     /// Started normal child-depth confirmations, not proof of full-width minimax.
     pub lmr_full_depth_confirmations: u64,
     /// Started LMR full-window re-searches; a subset of pvs_researches.
@@ -1990,15 +1957,6 @@ impl Search<'_> {
             };
             let reduced = reduction > 0;
             let mut v = if reduced {
-                if matches!(
-                    self.stats.lmr_method,
-                    LmrMethod::DepthRankLateOne
-                        | LmrMethod::DepthRankDeepTwo
-                        | LmrMethod::DepthRankEarlyOne
-                ) && reduction > LmrMethod::DepthRank.reduction(depth, i + 1)
-                {
-                    self.stats.lmr_additional_reductions += 1;
-                }
                 self.reduced_child(
                     c,
                     a,

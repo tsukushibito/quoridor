@@ -174,17 +174,13 @@ fn lmr408_saved_protection_precedes_depth_rank_quantum() {
 
 #[test]
 fn lmr408_zero_quantum_tt_first_distinct_fourth_uses_full_pvs_without_fake_trial() {
-    zero_quantum_tt_first_fixture(LmrMethod::DepthRank);
-}
-
-fn zero_quantum_tt_first_fixture(method: LmrMethod) {
     let root = SigmaContext::from_prefix(&[]).unwrap();
     let ids = root.legal_ids();
     assert!(ids.len() > 4);
     let mut history = ContinuationHistory::new().unwrap();
     static L: std::sync::LazyLock<SearchLimits> =
         std::sync::LazyLock::new(|| limits(6, true, true));
-    method.prepare();
+    LmrMethod::DepthRank.prepare();
     with_state(
         &root,
         &NoHead,
@@ -194,7 +190,7 @@ fn zero_quantum_tt_first_fixture(method: LmrMethod) {
             s.limits = &L;
             s.lmr = true;
             s.static_scratch = Some(StaticScratch::CheapControl);
-            s.stats.lmr_method = method;
+            s.stats.lmr_method = LmrMethod::DepthRank;
             s.context = ContextFingerprint::of(c);
             s.board = Some(BoardCursor::of(c));
             *s.table = Table::new(4096).unwrap();
@@ -232,7 +228,6 @@ fn zero_quantum_tt_first_fixture(method: LmrMethod) {
             );
             // Matching Exact-bound probes include the wrong-depth parent;
             // only the four full-depth child hits are numerically usable.
-            assert_eq!(s.stats.lmr_additional_reductions, 0);
             assert_eq!(s.stats.tt_exact_hits, 5);
             assert_eq!(s.stats.tt_usable_depth, 4);
             assert_eq!(s.stats.tt_cutoffs, 4);
@@ -306,5 +301,22 @@ fn lmr408_multi_ply_full_depth_confirmation_error_cancel_and_parent_restore() {
     }
 }
 
-#[path = "lmr413_tests.rs"]
-mod lmr413_tests;
+#[test]
+fn lmr413_retired_names_rejected_by_current_method_owner() {
+    for name in [
+        "depth_rank_late_one",
+        "depth_rank_deep_two",
+        "depth_rank_early_one",
+    ] {
+        assert!(LmrMethod::from_name(name).is_err());
+    }
+    assert_eq!(
+        LmrMethod::from_name("depth_rank").unwrap(),
+        LmrMethod::DepthRank
+    );
+    assert_eq!(
+        LmrMethod::from_name("fixed_one").unwrap(),
+        LmrMethod::FixedOne
+    );
+    assert_eq!(LmrMethod::default(), LmrMethod::DepthRank);
+}

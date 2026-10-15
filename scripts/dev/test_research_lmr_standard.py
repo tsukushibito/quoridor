@@ -157,7 +157,7 @@ class ResearchLmrStandardTests(unittest.TestCase):
         # Placeholder metadata here deliberately does not certify native IDs;
         # the typed runtime/session412 definition owns that correspondence.
 
-    def test_lmr413_named_methods_reach_current_measurement_and_prepare_consumers(self):
+    def test_lmr413_retired_names_rejected_by_current_measurement(self):
         raw = dict(
             roots=[dict(input=0, pointer="", field="moves", label="toy")],
             profile="control",
@@ -171,31 +171,19 @@ class ResearchLmrStandardTests(unittest.TestCase):
             record_bytes=100,
         )
         experiment = dict(config={}, schedule={}, inputs=[{}], rules="standard")
-        for method in [
+        for name in [
             "depth_rank_late_one",
             "depth_rank_deep_two",
             "depth_rank_early_one",
         ]:
             for enabled in [False, True]:
-                config = dict(raw, lmr=enabled, lmr_method=method)
-                with patch.object(lc, "document", side_effect=[config, []]):
-                    actual, _ = lc.measurement_config(experiment)
-                self.assertIs(actual["lmr"], enabled)
-                self.assertEqual(actual["lmr_method"], method)
-                selected = dict(
-                    lmr_values=(enabled,),
-                    lmr_method=method,
-                    evaluators=("distance",),
-                    profiles=("control",),
-                )
-                (variant,) = lc.comparison_conditions(selected)
-                self.assertEqual(variant["lmr_method"], method)
-        for bad in [None, True, 1, "depth_rank_aggressive"]:
-            with patch.object(
-                lc, "document", side_effect=[dict(raw, lmr_method=bad), []]
-            ):
-                with self.assertRaises(lc.Refused):
-                    lc.measurement_config(experiment)
+                with patch.object(
+                    lc,
+                    "document",
+                    side_effect=[dict(raw, lmr_method=name, lmr=enabled), []],
+                ):
+                    with self.assertRaisesRegex(lc.Refused, "measurement LMR method"):
+                        lc.measurement_config(experiment)
 
 
 if __name__ == "__main__":

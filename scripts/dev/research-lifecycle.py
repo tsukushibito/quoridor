@@ -928,9 +928,6 @@ def measurement_config(experiment):
         in (
             "fixed_one",
             "depth_rank",
-            "depth_rank_late_one",
-            "depth_rank_deep_two",
-            "depth_rank_early_one",
         ),
         "measurement LMR method",
     )
@@ -2545,9 +2542,6 @@ def arena_plan_check(experiment, plan):
                 in (
                     "fixed_one",
                     "depth_rank",
-                    "depth_rank_late_one",
-                    "depth_rank_deep_two",
-                    "depth_rank_early_one",
                 )
             )
             and engine.get("ordering_profile") in {None, "control", "cheap"}
