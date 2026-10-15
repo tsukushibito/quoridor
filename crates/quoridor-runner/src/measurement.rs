@@ -1894,7 +1894,7 @@ fn lmr_observation_output(
         let stages: Vec<_> = branch
             .stages
             .iter()
-            .map(|s| s.map(trial_stage_output))
+            .map(|s| s.map_or(Value::Null, trial_stage_output))
             .collect();
         let mut arms = Vec::new();
         for (index, arm) in alphabeta::LMR_ARM_ORDER.into_iter().enumerate() {
