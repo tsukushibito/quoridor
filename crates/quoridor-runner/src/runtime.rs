@@ -512,6 +512,10 @@ pub struct TtProfile {
     #[serde(default)]
     pub actual_lmr_enabled: Option<bool>,
     #[serde(default)]
+    pub actual_lmr_method_id: Option<String>,
+    #[serde(default)]
+    pub lmr_reduction_rule: Option<String>,
+    #[serde(default)]
     pub lmr_attempts: u64,
     #[serde(default)]
     pub lmr_full_depth_confirmations: u64,
@@ -556,12 +560,22 @@ impl TtProfile {
 /// Config-driven selection only: existing factory owns ranking and LMR.
 /// Expected namespace is checked against the actual session by the unchanged
 /// invocation/reset boundary. It is never used to enable a mode.
+pub(crate) fn arena_lmr_method(engine: &Engine) -> alphabeta::Result<alphabeta::LmrMethod> {
+    alphabeta::LmrMethod::from_name(
+        engine
+            .lmr_method
+            .as_deref()
+            .unwrap_or(alphabeta::LmrMethod::FixedOne.name()),
+    )
+}
 fn arena_alpha_namespace(
     engine: &Engine,
     base: alphabeta::SearchNamespace,
 ) -> alphabeta::Result<alphabeta::SearchNamespace> {
+    let method = arena_lmr_method(engine)?;
     match engine.ordering_profile.as_deref() {
-        Some(name) => Ok(alphabeta::OrderingProfile::from_name(name)?.namespace(base, engine.lmr)),
+        Some(name) => Ok(alphabeta::OrderingProfile::from_name(name)?
+            .namespace(base, engine.lmr.then_some(method))),
         None if engine.lmr => Err(alphabeta::SearchError::Limits(
             "LMR needs an explicit ordering target".into(),
         )),
@@ -575,7 +589,8 @@ fn arena_alpha_session(
     engine: &Engine,
     arena: Option<&crate::arena::ArenaConfig>,
 ) -> alphabeta::Result<alphabeta::SearchSession> {
-    let session = if let Some(profile) = engine.ordering_profile.as_deref() {
+    let method = arena_lmr_method(engine)?;
+    let mut session = if let Some(profile) = engine.ordering_profile.as_deref() {
         let profile = alphabeta::OrderingProfile::from_name(profile)?;
         alphabeta::SearchSession::new_with_ordering(
             evaluator,
@@ -584,7 +599,7 @@ fn arena_alpha_session(
             quoridor_ai::score::ScoreDomain::LEGACY,
             profile,
             false,
-            engine.lmr,
+            false,
         )?
     } else if arena.is_some_and(|a| a.disable_continuation_static_ordering) {
         alphabeta::SearchSession::new_without_continuation_or_static(evaluator, base, capacity)?
@@ -596,8 +611,10 @@ fn arena_alpha_session(
             "LMR needs an explicit ordering target".into(),
         ));
     }
-    // The setter acts on configuration, not the namespace string; log the getter.
-    if session.lmr_enabled() != engine.lmr {
+    // Configuration selects the typed method; the namespace never enables LMR.
+    session.set_lmr_method(method);
+    session.set_lmr(engine.lmr)?;
+    if session.lmr_enabled() != engine.lmr || session.lmr_method() != engine.lmr.then_some(method) {
         return Err(alphabeta::SearchError::Limits(
             "arena/session LMR mode mismatch".into(),
         ));
@@ -702,6 +719,8 @@ fn invoke_alpha_observed(
             "selectivity":session.namespace().selectivity,
         }));
         profile.actual_lmr_enabled = Some(session.lmr_enabled());
+        profile.actual_lmr_method_id = session.lmr_method().map(|m| m.id().to_owned());
+        profile.lmr_reduction_rule = session.lmr_method().map(|m| m.reduction_rule().to_owned());
         profile.search_invocations += 1;
         let start = Instant::now();
         let mut bounded = limits.clone();
@@ -2730,6 +2749,9 @@ fn record_evaluation_alpha(
         "completed_snapshot_validation_failed":!valid,
         "actual_search_namespace":game.tt_profiles[engine].actual_namespace,
         "actual_lmr_enabled":game.tt_profiles[engine].actual_lmr_enabled,
+        "requested_lmr_method":config.engines[engine].lmr_method.as_deref().unwrap_or(alphabeta::LmrMethod::FixedOne.name()),
+        "actual_lmr_method_id":game.tt_profiles[engine].actual_lmr_method_id,
+        "lmr_reduction_rule":game.tt_profiles[engine].lmr_reduction_rule,
         "lmr_work_completed":selected.map(|r| serde_json::json!({"attempts":r.stats.lmr_attempts,"full_depth_confirmations":r.stats.lmr_full_depth_confirmations,"full_window_researches":r.stats.lmr_full_window_researches})),
         "lmr_work_terminal":result.as_deref().map(|r| serde_json::json!({"attempts":r.stats.lmr_attempts,"full_depth_confirmations":r.stats.lmr_full_depth_confirmations,"full_window_researches":r.stats.lmr_full_window_researches})),
         "last_completed_iteration_ns":completion.at.map(ns),
@@ -6246,3 +6268,7 @@ mod two_ai_374_tests {
 #[cfg(test)]
 #[path = "runtime_lmr400_tests.rs"]
 mod runtime_lmr400_tests;
+
+#[cfg(test)]
+#[path = "runtime_lmr_method_tests.rs"]
+mod runtime_lmr_method_tests;

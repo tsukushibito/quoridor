@@ -2526,6 +2526,7 @@ def arena_plan_check(experiment, plan):
             and engine["max_nodes"] > 0
             and type(engine["simd"]) is bool
             and type(engine.get("lmr", False)) is bool
+            and engine.get("lmr_method") in (None, "fixed_one", "depth_rank")
             and engine.get("ordering_profile") in {None, "control", "cheap"}
             and (
                 not engine.get("lmr", False)
@@ -2773,13 +2774,23 @@ def arena_observation(config, row):
                         "nnue_quantized": ("nnue-i16",),
                     }.get(engine["kind"], ())
                 }
-                and method["selectivity"].endswith(
-                    ":cheap-static376-integer-parent-v1:"
-                    + engine["ordering_profile"]
-                    + (
-                        ":lmr400-late4-depth3-minus1-pvs-verify-v1"
-                        if engine.get("lmr", False)
-                        else ""
+                # The native typed factory and report validator own exact namespace/ID
+                # correspondence. Do not duplicate AI method suffixes in this reader.
+                and counters.get("requested_lmr_method")
+                == (
+                    engine.get("lmr_method")
+                    if engine.get("lmr_method") is not None
+                    else "fixed_one"
+                )
+                and (
+                    all(
+                        isinstance(counters.get(k), str) and counters[k]
+                        for k in ("actual_lmr_method_id", "lmr_reduction_rule")
+                    )
+                    if engine.get("lmr", False)
+                    else all(
+                        k in counters and counters[k] is None
+                        for k in ("actual_lmr_method_id", "lmr_reduction_rule")
                     )
                 )
                 and type(counters.get("actual_lmr_enabled")) is bool

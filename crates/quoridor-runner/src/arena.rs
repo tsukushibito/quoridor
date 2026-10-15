@@ -189,6 +189,7 @@ impl ArenaConfig {
             return Err("arena explicit colour order or retained outcome bound".into());
         }
         for engine in &c.engines {
+            crate::runtime::arena_lmr_method(engine).map_err(|e| e.to_string())?;
             if let Some(profile) = engine.ordering_profile.as_deref() {
                 if quoridor_ai::alphabeta::OrderingProfile::from_name(profile).is_err()
                     || !matches!(engine.kind.as_str(), "nnue" | "distance")
@@ -301,6 +302,9 @@ impl ArenaConfig {
                     || a.depth != b.depth
                     || a.ordering_profile != b.ordering_profile
                     || a.lmr != b.lmr
+                    || (a.lmr
+                        && crate::runtime::arena_lmr_method(a).ok()
+                            != crate::runtime::arena_lmr_method(b).ok())
                     || a.max_nodes != b.max_nodes
                     || a.simd != b.simd
                     || self.search_artifact_sha256[0] != self.search_artifact_sha256[i]
@@ -316,6 +320,9 @@ impl ArenaConfig {
                 a.depth != b.depth
                     || a.ordering_profile != b.ordering_profile
                     || a.lmr != b.lmr
+                    || (a.lmr
+                        && crate::runtime::arena_lmr_method(a).ok()
+                            != crate::runtime::arena_lmr_method(b).ok())
                     || a.max_nodes != b.max_nodes
                     || a.simd != b.simd
                     || b.kind == "mcts"
@@ -767,6 +774,19 @@ fn validate_observations(
                     return Err("arena Sigma receipt/drain/completed simulation".into());
                 }
                 continue;
+            }
+            if engine.ordering_profile.is_some() {
+                let method = crate::runtime::arena_lmr_method(engine)?;
+                let effective = engine.lmr.then_some(method);
+                if obs.counters["requested_lmr_method"] != method.name()
+                    || obs.counters["actual_lmr_enabled"] != engine.lmr
+                    || obs.counters["actual_lmr_method_id"]
+                        != serde_json::json!(effective.map(|m| m.id()))
+                    || obs.counters["lmr_reduction_rule"]
+                        != serde_json::json!(effective.map(|m| m.reduction_rule()))
+                {
+                    return Err("arena requested/effective LMR method mismatch".into());
+                }
             }
             let fallback = a.comparison == Comparison::WholeWallTime
                 && obs.counters["selection_reason"] == "legal_fallback_no_completed_iteration";
@@ -1439,3 +1459,7 @@ mod generic_arena_361_tests {
 #[cfg(test)]
 #[path = "arena_lmr400_tests.rs"]
 mod arena_lmr400_tests;
+
+#[cfg(test)]
+#[path = "arena_lmr_method_tests.rs"]
+mod arena_lmr_method_tests;
