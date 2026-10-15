@@ -1,0 +1,2677 @@
+{
+  "issue": "quoridor-4lc.412",
+  "archive": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/lmr-standard412/saved-evaluation.json.gz",
+    "sha256": "a9d686d90e5057c257e3b75e45d2667a265a744c7e1207591b69dbecd66cd1ec",
+    "bytes": 14613964,
+    "mode": "0644"
+  },
+  "archive_roundtrip": "PASS SHA-size-mode/UTF8-or-binary exact",
+  "exact_files": 349,
+  "original_final_result": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/lmr-standard412-v1/final-interpretation-v1/result.json",
+    "sha256": "cc565085b408422964e706c21ee0ed6d9ac85320b11141ca91ea266a93fbac21",
+    "bytes": 209993,
+    "mode": "0644"
+  },
+  "interpretation_review": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/lmr-standard412-v1/interpretation-review-acceptance.json",
+    "sha256": "7cb9b0d55d3d2e190349da7c78a7f5b49b57ea6502a3806860a8a34966192a83",
+    "bytes": 552,
+    "mode": "0644"
+  },
+  "scientific_image_sha256": "bb63fc177c1a15eebfa888bbd649591650f725789f045ee6d8d5ee725389c497",
+  "scientific_Build": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/lmr-adaptive408-v1/compatible-build-v7/operation-v1/manifest.json",
+    "sha256": "e934c534bedce904189c30ede4489a53a25c6664d876b87d5ca861b9ca7f56c2",
+    "bytes": 42884,
+    "mode": "0644"
+  },
+  "standard_software_Build": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/lmr-standard412-v1/compatible-build-v1/operation-v1/manifest.json",
+    "sha256": "3f9d3cb1c805dc014f0b2ce56086e6ad36ec36e63e11fec90a103335d0f61e01",
+    "bytes": 90019,
+    "mode": "0644"
+  },
+  "standard_software_artifact": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner412-research-standard-v1",
+    "sha256": "58ecdebef482d8434bd083dd222afce9ab8cb7a59e2318f7a33e394a1567fcfa",
+    "bytes": 8884000,
+    "mode": "0755"
+  },
+  "census": {
+    "planned": 392,
+    "unique": 392,
+    "entered": 392,
+    "returned": 392,
+    "complete_pairs": 196,
+    "unknown": 0,
+    "shared_canonical_starts": 98
+  },
+  "contrasts": [
+    {
+      "batch": 0,
+      "evaluator": "nnue",
+      "WDL_A": {
+        "L": 106,
+        "W": 90
+      },
+      "statuses": {
+        "goal": 196
+      },
+      "reasons": {
+        "goal": 196
+      },
+      "family_scores": [
+        {
+          "family_id": 1,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 2,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 3,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 5,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 6,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 7,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 8,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 9,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 10,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 11,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 12,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 15,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 18,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 19,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 20,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 21,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 24,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 25,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 26,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 28,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 30,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 31,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 32,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 33,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 35,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 36,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 40,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 41,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 42,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 43,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 45,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 47,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 48,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 49,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 50,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 51,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 52,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 53,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 54,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 55,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 56,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 57,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 58,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 59,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 60,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 61,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 62,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 63,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 65,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 66,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 67,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 69,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 70,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 71,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 72,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 73,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 75,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 76,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 77,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 78,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 79,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 80,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 81,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 83,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 84,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 85,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 87,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 88,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 89,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 90,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 91,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 92,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 94,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 95,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 96,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 97,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 98,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 99,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 100,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 101,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 104,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 106,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 107,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 111,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 112,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 113,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 114,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 115,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 116,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 117,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 119,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 120,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 121,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 122,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 123,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 125,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 126,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 127,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        }
+      ],
+      "mean_A_score": 0.45918367346938777,
+      "mean_B_score": 0.5408163265306123,
+      "native_A_interval": {
+        "limitations": [
+          "Fixed sample, complete pairs only; missingness may bias the primary score.",
+          "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+          "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+          "Repeated inspection of this interval is not a sequential stopping rule."
+        ],
+        "percentile_95": [0.3877551020408163, 0.5306122448979592],
+        "resamples": 10000,
+        "seed": 41220261015,
+        "unit": "complete family pair"
+      },
+      "native_summary": {
+        "bootstrap": {
+          "limitations": [
+            "Fixed sample, complete pairs only; missingness may bias the primary score.",
+            "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+            "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+            "Repeated inspection of this interval is not a sequential stopping rule."
+          ],
+          "percentile_95": [0.3877551020408163, 0.5306122448979592],
+          "resamples": 10000,
+          "seed": 41220261015,
+          "unit": "complete family pair"
+        },
+        "by_cohort": {
+          "Main": {
+            "complete_pairs": 98,
+            "completed_games": 196,
+            "incomplete_pairs": 0,
+            "planned_games": 196,
+            "started_games": 196,
+            "unknown_games": 0,
+            "unknown_reasons": {}
+          }
+        },
+        "census": {
+          "complete_pairs": 98,
+          "completed_games": 196,
+          "incomplete_pairs": 0,
+          "planned_games": 196,
+          "started_games": 196,
+          "unknown_games": 0,
+          "unknown_reasons": {}
+        },
+        "complete_pair_mean": 0.45918367346938777,
+        "pairs": [
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000000",
+            "lineage": "canonical-19edaacbf9c3fcfb6f1086ed832294df742bdbe256c0a48635dc5e6d065f4bd5",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000001",
+            "lineage": "canonical-f7a1e74761d9ecb502604d680ba7995efe1e40835c57bb926f90af035a33db8c",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000002",
+            "lineage": "canonical-f10403200ac1b5302c8f694d82e6a31d2fb7cf2eb3a5ddffc5d568ef98ad8d08",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000003",
+            "lineage": "canonical-de21e2b93f33ef3683a3aa106549d6b60a26f77c6a783e9228dd71879cbce30e",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000004",
+            "lineage": "canonical-1d7cd86f356b864bb0eb774c8f89b70643f360b4192d6c9e6be1ef0b0d658db4",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000005",
+            "lineage": "canonical-7f5684974ac593211876bd5696d71e166f3c51953c453990b1f01dce3330cd90",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000006",
+            "lineage": "canonical-f75ad2c5fbbd51c4a8599f9db5e609ca3290ddb0f02bbda14ce9c2de55473688",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000007",
+            "lineage": "canonical-8dc08bfd3a97c206f8dc5a75b86c737807da39532810b45fc0a58b83381ae97e",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000008",
+            "lineage": "canonical-09162e50cd52cc6f6ca72cd1f8593fb6c55f0b0a807a4f9615c32e5acc4e3669",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000009",
+            "lineage": "canonical-3b9b75cb66b3e7243d63203f3bedeb220d1178aa6c48f09c03d658a0d45059b4",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000010",
+            "lineage": "canonical-8bc992a9e9fc39730e8e3470b392fc4c8db30cb9bf1cb4c28be3bbf116ecb315",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000011",
+            "lineage": "canonical-929e02b13772ecf1608ead50cf40a4d3f8c8d6b0a4977f84230520782b268f83",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000012",
+            "lineage": "canonical-5d424dfcdcb6183c6b4f8a3f5bdf473a9925898c1acb0733203058d2b078f100",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000013",
+            "lineage": "canonical-03824f69ee3c7c59637d659a67504c194d13258948019f68b13534542ec0554c",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000014",
+            "lineage": "canonical-7e5e13748a2ac06d6a2a52531eb81ca07702f19427ba57b7fe6450860460ee61",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000015",
+            "lineage": "canonical-759543d278fdd50f361f269649e2b709a7ca995021fb8258408daabb4a8c891d",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000016",
+            "lineage": "canonical-34798366a08df48391f045cddaa971251826289209a1fecb3c3eb08ff148f724",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000017",
+            "lineage": "canonical-80218986748956dc6824de27d71a0be9e99873b40f37ea13b6c470c030c2ec69",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000018",
+            "lineage": "canonical-f49bebbe38a6c5142ed4604cee04ffcf7672cbb33786b2808489635269f72dec",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000019",
+            "lineage": "canonical-6f2dece96eede1a7605864c0bf77582315368c112735a0956c94ec3d1f6db967",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000020",
+            "lineage": "canonical-ccee610ac5bdeea5db211c2f5621327f6864ca1f02eb90e83a30729f9724153a",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000021",
+            "lineage": "canonical-1692db9c45caf0027b0aefc53ab9bbc0bf3b8dc1c6618aafd1fb53069d58fe73",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000022",
+            "lineage": "canonical-bcb8ad9742c90b450089416cc9d95411ce7606b5e762983e686a43d0dc117d8b",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000023",
+            "lineage": "canonical-b6b703d6ee0128398ed4848c1ac4fa519eda97a7b1e854a15d276140ba40c389",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000024",
+            "lineage": "canonical-7565c58ab0209923823e26c00546f18dffdbb0910b51c07cd35154f40c5c6c37",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000025",
+            "lineage": "canonical-345ce27d902f061fdad55a1876094add25bc2ae5eb6a37890c4ee9e8e53a2448",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000026",
+            "lineage": "canonical-d6fb6e699ae121c5448c2a7dcede07f20ad809cdcf1483919ffc30a9ed094015",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000027",
+            "lineage": "canonical-c74e98f3b15f246ab95e5f2ff6c293e3dfd7f06adc64c9b230e7838709719b96",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000028",
+            "lineage": "canonical-28d630d8000e96fa272e21b20220e273c2174e4631a73c7cb35e895a200cac29",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000029",
+            "lineage": "canonical-7730dd281705f4d6ea5d97968af3b58887f8feb1ca9591849d83ed70289b54b8",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000030",
+            "lineage": "canonical-01ea5dd9625610e8866f43f4c4472adb6fb62d39cce473fb068f1ea827e72bd7",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000031",
+            "lineage": "canonical-b804acd2b0069e9059e86d4f5b2b3fee1107b163d335e2d8cc9f962226df952e",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000032",
+            "lineage": "canonical-44759245d395e6a8731b5d56ea83b01adc4fbc03802ebddc14052c74fc8483a1",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000033",
+            "lineage": "canonical-a31a570747b69ec0561cd9d039e86b406494e651aa39fbb1d0c58f399f2caf89",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000034",
+            "lineage": "canonical-386879500380cc40a3055802f23a085fcf402ebc61b0c23dd454b0cde70d5dea",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000035",
+            "lineage": "canonical-a55b57fcb01e854474fcd95d829fe0ee01a55c30dce82280698ead4c667414d8",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000036",
+            "lineage": "canonical-6287adfd48d678e86f645b84853753ef143966828844eca3aba14b2010853d9a",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000037",
+            "lineage": "canonical-38f18ec45f8f74d0924ada432f348b67684479227f967f751d7c3c209b419784",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000038",
+            "lineage": "canonical-5341c3a7eaf81f33c59af2249136d03356ea52b8c8f355bc4a357f3adc600bc6",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000039",
+            "lineage": "canonical-5d6915119e8c9c4fade2b80f24ccfe65fa7f88ffc887754fb9898c5311f271a1",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000040",
+            "lineage": "canonical-8c590292028a8b317f50eaebe8436f12138c36d4b5212fee8f0c42b5a9522c65",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000041",
+            "lineage": "canonical-09c0a9df963675f24da1d008216391901fbd3d7f8d8f8b65a9f45867bab882a1",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000042",
+            "lineage": "canonical-237084a51a4f49d7d8642686425353800f2d97a16ad82b8e06e2bc008bf852de",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000043",
+            "lineage": "canonical-9d82089c483f930be312cd8c4cba856369bdaafd08adaf43e1c8554589183ebf",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000044",
+            "lineage": "canonical-5d60c964c3dafaf654b78ce1909f1c84361d81e3c8ef75d7ec360f3be47f0659",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000045",
+            "lineage": "canonical-bd8ffc389f99eecec1735bca2435f8f8885299414cf6e92f87d99894798d4411",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000046",
+            "lineage": "canonical-52a3bbacac0d108f0e9bfa277512415592911d3544c1613a2425e0b25afbb36a",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000047",
+            "lineage": "canonical-4bbe42e42aac4b1e923acf41dbbd2395ef049833e822e3d6e025f941366bef72",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000048",
+            "lineage": "canonical-93a25c08bc7810b9a032ec35b84b71782fb7deeb8b95ae9dc95c5a2b664514f2",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000049",
+            "lineage": "canonical-4da014bf9b2a9efe90fbecdfb765b0e3e5dc7a92b81da066c329ba0815933178",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000050",
+            "lineage": "canonical-f8a64ecb8a76608eb5f231b8f9daf299466c5025e8c6a585b582c91bbdb364a4",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000051",
+            "lineage": "canonical-c31997df0811a4fb54734aefa79974d54373f5ccc66414b47b5707ef578a469c",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000052",
+            "lineage": "canonical-2601e15dceee30d1f964b5b39eada94b6d634aa623e6644981935a6e1b0f48bb",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000053",
+            "lineage": "canonical-a7421dd5a33b0c9111ebe30c71d9bed3b60a5bf17d20bd02365cdba926e1076d",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000054",
+            "lineage": "canonical-7084278b1d8f14f55fcc4cf3495e1dace2ef3e643f284108b16e1d5eb19dc98e",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000055",
+            "lineage": "canonical-8aeea6a6d8e472e063c3135f5202bb54fa5b74e6e2b8bfc0f1c28bca53e29ed8",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000056",
+            "lineage": "canonical-7a1f60bca1ec752d4d5bd0a6371c85581da281ae2bf699ec58116a9791a4d6d8",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000057",
+            "lineage": "canonical-ce8da49dd327ad4a57e87f56582643f47eb61a4650493116959459eedf90cf8d",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000058",
+            "lineage": "canonical-1f653de58d2b2961a459efb221b1ddf4fd63f47be1d9693712a535a33d6008e7",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000059",
+            "lineage": "canonical-f313222119300be21db3631361b956f126c8d7110b640bc7b0a4416b86700e73",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000060",
+            "lineage": "canonical-5cd3adc734b4ae1461d90783e84fd4cc3b73d19575c10810f96ce907a61c7bb3",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000061",
+            "lineage": "canonical-7d33bd02dfb2059dde7020987cf7b6a7afccb4aee96ba3960ec21458850e5e5b",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000062",
+            "lineage": "canonical-d9f50c7e684346c397c605e7155e38436848d2600028d527f7a366621044b401",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000063",
+            "lineage": "canonical-ed8c90e70f8f7068af8f8703e5026c6ee6eb5077e3f44bb25125b2b67d62dfdc",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000064",
+            "lineage": "canonical-b325e2c9ba73524d9d4a1f87da1136d7182764c2c5563f8a1c24632d03c09ae7",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000065",
+            "lineage": "canonical-f00a654e04286e00de514e7a561066759257d57e282ba42e73ee7aec595451e5",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000066",
+            "lineage": "canonical-cf92e05d7979c732d65550698fd43288a9027d9b4819c6b39b450937b06cc81d",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000067",
+            "lineage": "canonical-29806481554a9c2b0f0d354fe4e71ad1df9f2a4601ef405b4781de4e92c5b26a",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000068",
+            "lineage": "canonical-94aa1d015a40a6a59b3743a58729321fefc23630eb5a98a5cf439e59004c33a0",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000069",
+            "lineage": "canonical-c94360ea122c5c8f3f2198a405d8043138519374129e035e4231bb8f5c8d6ba2",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000070",
+            "lineage": "canonical-267f0d333adde41ffe21c4b257862fadf9b410dba8a3bba2eb1e512484370a89",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000071",
+            "lineage": "canonical-a0c3351441bccf61636a0ee200567451710a08210c9566a79ed768b38ad656fd",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000072",
+            "lineage": "canonical-c48e02d43b9497bf3803e7625f5851a015263953a9cfb272127222fd2099f0db",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000073",
+            "lineage": "canonical-307c556ffedd75d2684351c77ebcf840d4c09f06a6f07360da08c82ba839ee07",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000074",
+            "lineage": "canonical-411a012daf234e682223eaabda530f255310c3d6cbc91339db76341a158a6bf3",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000075",
+            "lineage": "canonical-86f1ef7a0f388a752cf1f5b139482cfb34ccec9b099388d2ea1f6137f4132b2c",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000076",
+            "lineage": "canonical-212c14c1c2636834de4cc72ad94008d991e7dcc28ba98c8b823d978b55b9a7af",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000077",
+            "lineage": "canonical-9184f8168f5dea532f884eec074ee7e50788d6974d6cb18f19318e75eac7967d",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000078",
+            "lineage": "canonical-34c18dc9dad09fca6195190120dbd0b0f1a43ca62664f0dce7279e20a2e48ce9",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000079",
+            "lineage": "canonical-bb6aac17079e90eae1cddc55e3a2e031a5b344f5bc2f479ac2be0ece44fdc582",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000080",
+            "lineage": "canonical-e8a0d26bd45b96d5037bb6b662235dd7436d9e96b18b0e91d19f2c631605f340",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000081",
+            "lineage": "canonical-82b6a9e265423c6546a64499c2f66d3ffb7b8999a16f62eb411f29a12fd6086f",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000082",
+            "lineage": "canonical-b8e935d0c57775916cada8d17c8074781f11bc434a99a463ca6551aaa1b6e8b3",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000083",
+            "lineage": "canonical-2f918e2b74039b283b39f693765d54a7aeb94487d105d6d08edfa3dad405102d",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000084",
+            "lineage": "canonical-9d3fa192746471b502ecdf75ab42447fba40a6fc9689803bdfa86e38e41f247f",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000085",
+            "lineage": "canonical-20e5cc3ccfb9dfcf7dde00db1bb8e804ea60ccebb16531b2ae2ebd19fab53382",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000086",
+            "lineage": "canonical-21e13e1b6a9bcb8ee24abf092712d561c38f8fe9bb3c8d35f01bf2c027df3e66",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000087",
+            "lineage": "canonical-f5b8964aa26bfbdab903deffe0bef51fbf9e1671716d371b1208728d2a9ef490",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000088",
+            "lineage": "canonical-e06cfe95707e04fb187cfcaab6d7119d054d861a2514e20ae3064dafcaa2dc7f",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000089",
+            "lineage": "canonical-5ced4fe618470fd99b5ee08f53263037aae9e4a8223ed663cd4cb2db28ee5d29",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000090",
+            "lineage": "canonical-8fe2d8866c1fde0903408fb0300a55e66acac643c8b1d66ca2b5533fd0290a15",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000091",
+            "lineage": "canonical-d21ff6021092aad02efced0ac18f45b9aaf4d955e542169b2b9a75afb08ebd99",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000092",
+            "lineage": "canonical-ec31434297ba9fb3e32bec7c9688676fce83c3f2ae4aea2acaa5136a2f6e7ba2",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000093",
+            "lineage": "canonical-dc1894ed2af0027314e3225197b6fb56fd8684c8a8b022b7dd44e7b1ecfc8e8e",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000094",
+            "lineage": "canonical-81b9ddde0c3bc28a87d43195aa51c3d2d923170cac031b3c77dee64f97d684bc",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000095",
+            "lineage": "canonical-f7a170b09caacf61b0f934f1e05a89ecea41b9e0e4e833036696f479c2c9d8fd",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000096",
+            "lineage": "canonical-61094850eafe08fae199a3a4e1c34c4720e32c3800bbf6167121a0af688a2066",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-nnue-control-fixed_one-vs-depth_rank-block00-family-000097",
+            "lineage": "canonical-a2f4b0efc3c85839b30d0be2adcdcddcc0ad1ca88103396c11f3d32224ccb285",
+            "score": 0.5
+          }
+        ],
+        "planned_score_range": [0.45918367346938777, 0.45918367346938777],
+        "schema": "quoridor-arena-v2",
+        "valid_game_score_secondary": 0.45918367346938777
+      },
+      "manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/lmr-standard412-arena392-v1/execution-v1/arena-000/operation/manifest.json",
+        "sha256": "77de20ef14a60b31320bd24ed491e648131167eade3ab81f6d77dcdb3da8a004",
+        "bytes": 10586,
+        "mode": "0644"
+      },
+      "files": {
+        "completed.jsonl.gz": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/lmr-standard412-arena392-v1/batch-000/data/completed.jsonl.gz",
+          "sha256": "634a0037fcb84cd6529d6fe91b77b0b5ec5148ea352b3e4403f43dbb6788f70b",
+          "bytes": 6474760,
+          "mode": "0644"
+        },
+        "result.json": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/lmr-standard412-arena392-v1/batch-000/data/result.json",
+          "sha256": "989169af3910bb5da4c72814b57ad9b211522f91974d14cb08c445ef0091bdb5",
+          "bytes": 37386,
+          "mode": "0644"
+        },
+        "manifest.json": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/lmr-standard412-arena392-v1/batch-000/data/manifest.json",
+          "sha256": "d9faa2cc8ce23facf769b79c3b93f838db3d79349cdb4d37022335c0a9faa200",
+          "bytes": 370695,
+          "mode": "0644"
+        }
+      },
+      "archive_raw_bytes": 34485205,
+      "archive_raw_sha256": "1216abceca60b7a21158c06ee49614728455513eb38c84591aac70ef10dafac3",
+      "native_report_wall_seconds": 936.464268389,
+      "native_peak_rss": 340557824,
+      "general_nn_calls": 0,
+      "execution": {
+        "AI_cores": [2, 6],
+        "AI_workers": 2,
+        "Sigma_inference": "synchronous on its AI worker, intra1/inter1/sequential/batch1",
+        "inference_pump": false,
+        "initialization_spans": "sum of actual worker spans; overlapping, not added to run wall",
+        "main_pid": 1585553,
+        "main_tid": 1585553,
+        "management_core": 4,
+        "management_core_observed": 4,
+        "parallel_search": false,
+        "per_game_TT_reset": true,
+        "ponder": false,
+        "simultaneous_games": 1
+      },
+      "declared_model_identity": [
+        "96a5f41f875022d1752b9c999595ad58bfb2d42687a8f06de08d42b1c4215875",
+        "96a5f41f875022d1752b9c999595ad58bfb2d42687a8f06de08d42b1c4215875"
+      ],
+      "B_interval_95": [0.4693877551020408, 0.6122448979591837],
+      "WDL_B": {
+        "W": 106,
+        "D": 0,
+        "L": 90,
+        "UNKNOWN": 0
+      },
+      "B_lower_gt_half": false
+    },
+    {
+      "batch": 1,
+      "evaluator": "distance",
+      "WDL_A": {
+        "L": 99,
+        "W": 97
+      },
+      "statuses": {
+        "goal": 196
+      },
+      "reasons": {
+        "goal": 196
+      },
+      "family_scores": [
+        {
+          "family_id": 1,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 2,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 3,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 5,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 6,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 7,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 8,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 9,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 10,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 11,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 12,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 15,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 18,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 19,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 20,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 21,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 24,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 25,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 26,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 28,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 30,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 31,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 32,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 33,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 35,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 36,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 40,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 41,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 42,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 43,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 45,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 47,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 48,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 49,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 50,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 51,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 52,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 53,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 54,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 55,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 56,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 57,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 58,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 59,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 60,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 61,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 62,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 63,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 65,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 66,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 67,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 69,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 70,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 71,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 72,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 73,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 75,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 76,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 77,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 78,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 79,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 80,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 81,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 83,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 84,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 85,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 87,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 88,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 89,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 90,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 91,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 92,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 94,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 95,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 96,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 97,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 98,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 99,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 100,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 101,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 104,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 106,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 107,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 111,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 112,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 113,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 114,
+          "A_scores": [0.0, 0.0],
+          "A_score": 0.0,
+          "B_score": 1.0
+        },
+        {
+          "family_id": 115,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 116,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 117,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 119,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 120,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 121,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 122,
+          "A_scores": [0.0, 1.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 123,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 125,
+          "A_scores": [1.0, 1.0],
+          "A_score": 1.0,
+          "B_score": 0.0
+        },
+        {
+          "family_id": 126,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        },
+        {
+          "family_id": 127,
+          "A_scores": [1.0, 0.0],
+          "A_score": 0.5,
+          "B_score": 0.5
+        }
+      ],
+      "mean_A_score": 0.49489795918367346,
+      "mean_B_score": 0.5051020408163265,
+      "native_A_interval": {
+        "limitations": [
+          "Fixed sample, complete pairs only; missingness may bias the primary score.",
+          "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+          "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+          "Repeated inspection of this interval is not a sequential stopping rule."
+        ],
+        "percentile_95": [0.44387755102040816, 0.5459183673469388],
+        "resamples": 10000,
+        "seed": 41220261015,
+        "unit": "complete family pair"
+      },
+      "native_summary": {
+        "bootstrap": {
+          "limitations": [
+            "Fixed sample, complete pairs only; missingness may bias the primary score.",
+            "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+            "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+            "Repeated inspection of this interval is not a sequential stopping rule."
+          ],
+          "percentile_95": [0.44387755102040816, 0.5459183673469388],
+          "resamples": 10000,
+          "seed": 41220261015,
+          "unit": "complete family pair"
+        },
+        "by_cohort": {
+          "Main": {
+            "complete_pairs": 98,
+            "completed_games": 196,
+            "incomplete_pairs": 0,
+            "planned_games": 196,
+            "started_games": 196,
+            "unknown_games": 0,
+            "unknown_reasons": {}
+          }
+        },
+        "census": {
+          "complete_pairs": 98,
+          "completed_games": 196,
+          "incomplete_pairs": 0,
+          "planned_games": 196,
+          "started_games": 196,
+          "unknown_games": 0,
+          "unknown_reasons": {}
+        },
+        "complete_pair_mean": 0.49489795918367346,
+        "pairs": [
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000000",
+            "lineage": "canonical-19edaacbf9c3fcfb6f1086ed832294df742bdbe256c0a48635dc5e6d065f4bd5",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000001",
+            "lineage": "canonical-f7a1e74761d9ecb502604d680ba7995efe1e40835c57bb926f90af035a33db8c",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000002",
+            "lineage": "canonical-f10403200ac1b5302c8f694d82e6a31d2fb7cf2eb3a5ddffc5d568ef98ad8d08",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000003",
+            "lineage": "canonical-de21e2b93f33ef3683a3aa106549d6b60a26f77c6a783e9228dd71879cbce30e",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000004",
+            "lineage": "canonical-1d7cd86f356b864bb0eb774c8f89b70643f360b4192d6c9e6be1ef0b0d658db4",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000005",
+            "lineage": "canonical-7f5684974ac593211876bd5696d71e166f3c51953c453990b1f01dce3330cd90",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000006",
+            "lineage": "canonical-f75ad2c5fbbd51c4a8599f9db5e609ca3290ddb0f02bbda14ce9c2de55473688",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000007",
+            "lineage": "canonical-8dc08bfd3a97c206f8dc5a75b86c737807da39532810b45fc0a58b83381ae97e",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000008",
+            "lineage": "canonical-09162e50cd52cc6f6ca72cd1f8593fb6c55f0b0a807a4f9615c32e5acc4e3669",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000009",
+            "lineage": "canonical-3b9b75cb66b3e7243d63203f3bedeb220d1178aa6c48f09c03d658a0d45059b4",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000010",
+            "lineage": "canonical-8bc992a9e9fc39730e8e3470b392fc4c8db30cb9bf1cb4c28be3bbf116ecb315",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000011",
+            "lineage": "canonical-929e02b13772ecf1608ead50cf40a4d3f8c8d6b0a4977f84230520782b268f83",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000012",
+            "lineage": "canonical-5d424dfcdcb6183c6b4f8a3f5bdf473a9925898c1acb0733203058d2b078f100",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000013",
+            "lineage": "canonical-03824f69ee3c7c59637d659a67504c194d13258948019f68b13534542ec0554c",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000014",
+            "lineage": "canonical-7e5e13748a2ac06d6a2a52531eb81ca07702f19427ba57b7fe6450860460ee61",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000015",
+            "lineage": "canonical-759543d278fdd50f361f269649e2b709a7ca995021fb8258408daabb4a8c891d",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000016",
+            "lineage": "canonical-34798366a08df48391f045cddaa971251826289209a1fecb3c3eb08ff148f724",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000017",
+            "lineage": "canonical-80218986748956dc6824de27d71a0be9e99873b40f37ea13b6c470c030c2ec69",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000018",
+            "lineage": "canonical-f49bebbe38a6c5142ed4604cee04ffcf7672cbb33786b2808489635269f72dec",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000019",
+            "lineage": "canonical-6f2dece96eede1a7605864c0bf77582315368c112735a0956c94ec3d1f6db967",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000020",
+            "lineage": "canonical-ccee610ac5bdeea5db211c2f5621327f6864ca1f02eb90e83a30729f9724153a",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000021",
+            "lineage": "canonical-1692db9c45caf0027b0aefc53ab9bbc0bf3b8dc1c6618aafd1fb53069d58fe73",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000022",
+            "lineage": "canonical-bcb8ad9742c90b450089416cc9d95411ce7606b5e762983e686a43d0dc117d8b",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000023",
+            "lineage": "canonical-b6b703d6ee0128398ed4848c1ac4fa519eda97a7b1e854a15d276140ba40c389",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000024",
+            "lineage": "canonical-7565c58ab0209923823e26c00546f18dffdbb0910b51c07cd35154f40c5c6c37",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000025",
+            "lineage": "canonical-345ce27d902f061fdad55a1876094add25bc2ae5eb6a37890c4ee9e8e53a2448",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000026",
+            "lineage": "canonical-d6fb6e699ae121c5448c2a7dcede07f20ad809cdcf1483919ffc30a9ed094015",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000027",
+            "lineage": "canonical-c74e98f3b15f246ab95e5f2ff6c293e3dfd7f06adc64c9b230e7838709719b96",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000028",
+            "lineage": "canonical-28d630d8000e96fa272e21b20220e273c2174e4631a73c7cb35e895a200cac29",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000029",
+            "lineage": "canonical-7730dd281705f4d6ea5d97968af3b58887f8feb1ca9591849d83ed70289b54b8",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000030",
+            "lineage": "canonical-01ea5dd9625610e8866f43f4c4472adb6fb62d39cce473fb068f1ea827e72bd7",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000031",
+            "lineage": "canonical-b804acd2b0069e9059e86d4f5b2b3fee1107b163d335e2d8cc9f962226df952e",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000032",
+            "lineage": "canonical-44759245d395e6a8731b5d56ea83b01adc4fbc03802ebddc14052c74fc8483a1",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000033",
+            "lineage": "canonical-a31a570747b69ec0561cd9d039e86b406494e651aa39fbb1d0c58f399f2caf89",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000034",
+            "lineage": "canonical-386879500380cc40a3055802f23a085fcf402ebc61b0c23dd454b0cde70d5dea",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000035",
+            "lineage": "canonical-a55b57fcb01e854474fcd95d829fe0ee01a55c30dce82280698ead4c667414d8",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000036",
+            "lineage": "canonical-6287adfd48d678e86f645b84853753ef143966828844eca3aba14b2010853d9a",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000037",
+            "lineage": "canonical-38f18ec45f8f74d0924ada432f348b67684479227f967f751d7c3c209b419784",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000038",
+            "lineage": "canonical-5341c3a7eaf81f33c59af2249136d03356ea52b8c8f355bc4a357f3adc600bc6",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000039",
+            "lineage": "canonical-5d6915119e8c9c4fade2b80f24ccfe65fa7f88ffc887754fb9898c5311f271a1",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000040",
+            "lineage": "canonical-8c590292028a8b317f50eaebe8436f12138c36d4b5212fee8f0c42b5a9522c65",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000041",
+            "lineage": "canonical-09c0a9df963675f24da1d008216391901fbd3d7f8d8f8b65a9f45867bab882a1",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000042",
+            "lineage": "canonical-237084a51a4f49d7d8642686425353800f2d97a16ad82b8e06e2bc008bf852de",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000043",
+            "lineage": "canonical-9d82089c483f930be312cd8c4cba856369bdaafd08adaf43e1c8554589183ebf",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000044",
+            "lineage": "canonical-5d60c964c3dafaf654b78ce1909f1c84361d81e3c8ef75d7ec360f3be47f0659",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000045",
+            "lineage": "canonical-bd8ffc389f99eecec1735bca2435f8f8885299414cf6e92f87d99894798d4411",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000046",
+            "lineage": "canonical-52a3bbacac0d108f0e9bfa277512415592911d3544c1613a2425e0b25afbb36a",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000047",
+            "lineage": "canonical-4bbe42e42aac4b1e923acf41dbbd2395ef049833e822e3d6e025f941366bef72",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000048",
+            "lineage": "canonical-93a25c08bc7810b9a032ec35b84b71782fb7deeb8b95ae9dc95c5a2b664514f2",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000049",
+            "lineage": "canonical-4da014bf9b2a9efe90fbecdfb765b0e3e5dc7a92b81da066c329ba0815933178",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000050",
+            "lineage": "canonical-f8a64ecb8a76608eb5f231b8f9daf299466c5025e8c6a585b582c91bbdb364a4",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000051",
+            "lineage": "canonical-c31997df0811a4fb54734aefa79974d54373f5ccc66414b47b5707ef578a469c",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000052",
+            "lineage": "canonical-2601e15dceee30d1f964b5b39eada94b6d634aa623e6644981935a6e1b0f48bb",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000053",
+            "lineage": "canonical-a7421dd5a33b0c9111ebe30c71d9bed3b60a5bf17d20bd02365cdba926e1076d",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000054",
+            "lineage": "canonical-7084278b1d8f14f55fcc4cf3495e1dace2ef3e643f284108b16e1d5eb19dc98e",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000055",
+            "lineage": "canonical-8aeea6a6d8e472e063c3135f5202bb54fa5b74e6e2b8bfc0f1c28bca53e29ed8",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000056",
+            "lineage": "canonical-7a1f60bca1ec752d4d5bd0a6371c85581da281ae2bf699ec58116a9791a4d6d8",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000057",
+            "lineage": "canonical-ce8da49dd327ad4a57e87f56582643f47eb61a4650493116959459eedf90cf8d",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000058",
+            "lineage": "canonical-1f653de58d2b2961a459efb221b1ddf4fd63f47be1d9693712a535a33d6008e7",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000059",
+            "lineage": "canonical-f313222119300be21db3631361b956f126c8d7110b640bc7b0a4416b86700e73",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000060",
+            "lineage": "canonical-5cd3adc734b4ae1461d90783e84fd4cc3b73d19575c10810f96ce907a61c7bb3",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000061",
+            "lineage": "canonical-7d33bd02dfb2059dde7020987cf7b6a7afccb4aee96ba3960ec21458850e5e5b",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000062",
+            "lineage": "canonical-d9f50c7e684346c397c605e7155e38436848d2600028d527f7a366621044b401",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000063",
+            "lineage": "canonical-ed8c90e70f8f7068af8f8703e5026c6ee6eb5077e3f44bb25125b2b67d62dfdc",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000064",
+            "lineage": "canonical-b325e2c9ba73524d9d4a1f87da1136d7182764c2c5563f8a1c24632d03c09ae7",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000065",
+            "lineage": "canonical-f00a654e04286e00de514e7a561066759257d57e282ba42e73ee7aec595451e5",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000066",
+            "lineage": "canonical-cf92e05d7979c732d65550698fd43288a9027d9b4819c6b39b450937b06cc81d",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000067",
+            "lineage": "canonical-29806481554a9c2b0f0d354fe4e71ad1df9f2a4601ef405b4781de4e92c5b26a",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000068",
+            "lineage": "canonical-94aa1d015a40a6a59b3743a58729321fefc23630eb5a98a5cf439e59004c33a0",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000069",
+            "lineage": "canonical-c94360ea122c5c8f3f2198a405d8043138519374129e035e4231bb8f5c8d6ba2",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000070",
+            "lineage": "canonical-267f0d333adde41ffe21c4b257862fadf9b410dba8a3bba2eb1e512484370a89",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000071",
+            "lineage": "canonical-a0c3351441bccf61636a0ee200567451710a08210c9566a79ed768b38ad656fd",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000072",
+            "lineage": "canonical-c48e02d43b9497bf3803e7625f5851a015263953a9cfb272127222fd2099f0db",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000073",
+            "lineage": "canonical-307c556ffedd75d2684351c77ebcf840d4c09f06a6f07360da08c82ba839ee07",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000074",
+            "lineage": "canonical-411a012daf234e682223eaabda530f255310c3d6cbc91339db76341a158a6bf3",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000075",
+            "lineage": "canonical-86f1ef7a0f388a752cf1f5b139482cfb34ccec9b099388d2ea1f6137f4132b2c",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000076",
+            "lineage": "canonical-212c14c1c2636834de4cc72ad94008d991e7dcc28ba98c8b823d978b55b9a7af",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000077",
+            "lineage": "canonical-9184f8168f5dea532f884eec074ee7e50788d6974d6cb18f19318e75eac7967d",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000078",
+            "lineage": "canonical-34c18dc9dad09fca6195190120dbd0b0f1a43ca62664f0dce7279e20a2e48ce9",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000079",
+            "lineage": "canonical-bb6aac17079e90eae1cddc55e3a2e031a5b344f5bc2f479ac2be0ece44fdc582",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000080",
+            "lineage": "canonical-e8a0d26bd45b96d5037bb6b662235dd7436d9e96b18b0e91d19f2c631605f340",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000081",
+            "lineage": "canonical-82b6a9e265423c6546a64499c2f66d3ffb7b8999a16f62eb411f29a12fd6086f",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000082",
+            "lineage": "canonical-b8e935d0c57775916cada8d17c8074781f11bc434a99a463ca6551aaa1b6e8b3",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000083",
+            "lineage": "canonical-2f918e2b74039b283b39f693765d54a7aeb94487d105d6d08edfa3dad405102d",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000084",
+            "lineage": "canonical-9d3fa192746471b502ecdf75ab42447fba40a6fc9689803bdfa86e38e41f247f",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000085",
+            "lineage": "canonical-20e5cc3ccfb9dfcf7dde00db1bb8e804ea60ccebb16531b2ae2ebd19fab53382",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000086",
+            "lineage": "canonical-21e13e1b6a9bcb8ee24abf092712d561c38f8fe9bb3c8d35f01bf2c027df3e66",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000087",
+            "lineage": "canonical-f5b8964aa26bfbdab903deffe0bef51fbf9e1671716d371b1208728d2a9ef490",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000088",
+            "lineage": "canonical-e06cfe95707e04fb187cfcaab6d7119d054d861a2514e20ae3064dafcaa2dc7f",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000089",
+            "lineage": "canonical-5ced4fe618470fd99b5ee08f53263037aae9e4a8223ed663cd4cb2db28ee5d29",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000090",
+            "lineage": "canonical-8fe2d8866c1fde0903408fb0300a55e66acac643c8b1d66ca2b5533fd0290a15",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000091",
+            "lineage": "canonical-d21ff6021092aad02efced0ac18f45b9aaf4d955e542169b2b9a75afb08ebd99",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000092",
+            "lineage": "canonical-ec31434297ba9fb3e32bec7c9688676fce83c3f2ae4aea2acaa5136a2f6e7ba2",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000093",
+            "lineage": "canonical-dc1894ed2af0027314e3225197b6fb56fd8684c8a8b022b7dd44e7b1ecfc8e8e",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000094",
+            "lineage": "canonical-81b9ddde0c3bc28a87d43195aa51c3d2d923170cac031b3c77dee64f97d684bc",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000095",
+            "lineage": "canonical-f7a170b09caacf61b0f934f1e05a89ecea41b9e0e4e833036696f479c2c9d8fd",
+            "score": 1.0
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000096",
+            "lineage": "canonical-61094850eafe08fae199a3a4e1c34c4720e32c3800bbf6167121a0af688a2066",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "412-distance-control-fixed_one-vs-depth_rank-block00-family-000097",
+            "lineage": "canonical-a2f4b0efc3c85839b30d0be2adcdcddcc0ad1ca88103396c11f3d32224ccb285",
+            "score": 0.5
+          }
+        ],
+        "planned_score_range": [0.49489795918367346, 0.49489795918367346],
+        "schema": "quoridor-arena-v2",
+        "valid_game_score_secondary": 0.49489795918367346
+      },
+      "manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/lmr-standard412-arena392-v1/execution-v1/arena-001/operation/manifest.json",
+        "sha256": "aca91661703b521f1c6d72863f12ac3eae98101a2045fb85087903ee80b555f6",
+        "bytes": 10696,
+        "mode": "0644"
+      },
+      "files": {
+        "completed.jsonl.gz": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/lmr-standard412-arena392-v1/batch-001/data/completed.jsonl.gz",
+          "sha256": "4f05eb76238674d5dad3c685ec17cb89c7788aed791af6f5c108158f5ee48dec",
+          "bytes": 7256458,
+          "mode": "0644"
+        },
+        "result.json": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/lmr-standard412-arena392-v1/batch-001/data/result.json",
+          "sha256": "c769d186fccdef098081f46c2193114fad8854ca06e0ef9f829b705f31a377ce",
+          "bytes": 37798,
+          "mode": "0644"
+        },
+        "manifest.json": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/lmr-standard412-arena392-v1/batch-001/data/manifest.json",
+          "sha256": "9fb07c57825ea168cd979039f5591e1b75384a91fc8633efa4f1ae7e59443c60",
+          "bytes": 372080,
+          "mode": "0644"
+        }
+      },
+      "archive_raw_bytes": 39308906,
+      "archive_raw_sha256": "e6195d94e839c69857003b7720c7367af5349ccee6d8937bfc6262914fe63263",
+      "native_report_wall_seconds": 1067.536368264,
+      "native_peak_rss": 362274816,
+      "general_nn_calls": 0,
+      "execution": {
+        "AI_cores": [2, 6],
+        "AI_workers": 2,
+        "Sigma_inference": "synchronous on its AI worker, intra1/inter1/sequential/batch1",
+        "inference_pump": false,
+        "initialization_spans": "sum of actual worker spans; overlapping, not added to run wall",
+        "main_pid": 1595237,
+        "main_tid": 1595237,
+        "management_core": 4,
+        "management_core_observed": 4,
+        "parallel_search": false,
+        "per_game_TT_reset": true,
+        "ponder": false,
+        "simultaneous_games": 1
+      },
+      "declared_model_identity": [
+        "c83db10ba1403b7fc3417e73e14cc5f1a1040c65ac4ac23a5f5703abbb5aa887",
+        "c83db10ba1403b7fc3417e73e14cc5f1a1040c65ac4ac23a5f5703abbb5aa887"
+      ],
+      "B_interval_95": [0.45408163265306123, 0.5561224489795918],
+      "WDL_B": {
+        "W": 99,
+        "D": 0,
+        "L": 97,
+        "UNKNOWN": 0
+      },
+      "B_lower_gt_half": false
+    }
+  ],
+  "primary_criterion": {
+    "evaluator": "nnue",
+    "method": "depth_rank",
+    "condition": "B lower 95% bound > .5",
+    "met": false,
+    "scope": "fixed98 canonical starts and original100ms conditions only; not noninferiority/Elo/general superiority"
+  },
+  "decision": {
+    "research_standard": "Human choice: normal future research LMR ON/depth_rank. Explicit OFF/fixed_one controls remain; raw/product/generator enable defaults stayOFF.",
+    "strength": "Primary NNUE B lower95% bound doesnot exceed0.5. No general superiority/Elo/noninferiority established; secondaryD separate and old408 notpooled.",
+    "extra": "No refill/coefficients/threshold/extra games or replay. Keep human-selected standard independently of this finite interval;413 explicit extraquantum candidates remain separate."
+  },
+  "software_outer_seconds": 106.28122607400292,
+  "numerical_outer_seconds": 2017.2118989800074,
+  "full_fees_peaks_physical_forward": "UNKNOWN",
+  "new_Search_games_bootstrap": 0
+}

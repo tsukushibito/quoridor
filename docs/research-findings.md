@@ -1990,3 +1990,17 @@ whole中央値ON/OFFはNNUE14.610837/14.570318秒=1.002780935、固定D6.685308/
 一つの厳密判定を明示研究用として保持し、既定OFFを維持する。通常研究・製品・generator自動ON、棋力優位、追加tuning/再計測/対局は発行しない。人間が別412で選んだ今後の通常研究LMR ON/depth_rankをこの凍結LMR OFF試験へ適用しない。原software outer117.691639865秒（FAILED込み）＋数値123.705293094秒を各一度数えnestedを足さず、全source/LLM/admin費はUNKNOWN。
 
 元14Rust確認の範囲、Clippy/release、同担当のsource/有限解釈clear、原FAILED/UNKNOWN・全設定/clock/work・STOP/費は[有限結果](../research-data/ai-sigma/zero-stock-safe-race411/report-ja.md)とそのexact archiveへ保存した。原408/409/410、全pause/mixed/learner/323、models/weights/seals/defaultsとforeign変更は保持する。
+
+### 可変LMRの研究標準と追加392局（412、2026-10-15）
+
+人間の選択により、今後の通常研究準備はLMR ON/depth_rankを基本とし、method省略もDepthRankへ揃えた。明示OFF/fixed_oneの対照は保持する。method選択とenableは独立で、raw測定・Engine・製品・実generatorのenable省略はOFFのまま。既存入口だけを更新し、412の既定差分ea6f2834に新3＋影響8 Rust=11、Python2、Clippy3/releaseの実PASSを保存した。新standard image58ec/Build3f9dと、以下の凍結408 imageを混同しない。零在庫410/411の明示LMR OFF試験も変更しない。
+
+追加棋力確認はControlのみ、BEST43を主対照、固定D(0,8,tanh)を副次対照として、fixed_one(A)対depth_rank(B)を同一の真正408 image bb63fc17/Build e934c534で一度行った。TT1048576/PVS ON、100ms authority receipt/5ms reserve、1M nodes safety、nominal depth64/200ply、零在庫近似・安全先着leaf OFF。既存canonical family/prefix ownerで128行を122群へ対応し、旧24群とwarm群、alias4/13/22、残存重複3群を除いた98代表を結果を見る前に固定した。両評価器で同じ98開始系統を共有し、392独立標本へ水増ししない。
+
+392 unique/entered/returned、196 complete色pair、全goal、UNKNOWN0。Bの主対照NNUEは106勝0分90敗、score 0.540816、保存family単位95%区間[0.469388,0.612245]。事前基準の下限>0.5は未達。副次固定Dは99勝0分97敗、score 0.505102、区間[0.454082,0.556122]。既存native A区間の反転だけを使いbootstrap再演0。旧408探索的試験を新主要標本へ合算せず、CheapやLMR OFFとの関係、一般優越・Elo・非劣性へ外挿しない。
+
+accepted20285、完成snapshot20284、NNUE A fallback1、error/forfeit/期限以後authority receipt0。terminal return後期限4864とcommit後期限5574は別の分母として保存した。完成snapshot深度中央値はNNUE A/B=6/6、固定D=11/11で、全分布・平均・family二色scoreと実nodes/評価/delta/LMR/PVS/TTを保存した。selective nominal depthは全幅深さでも勝因の証明でもない。TT slots/bytesはgauge、physical NN、連続family RSS、孤立した部位費はUNKNOWN。
+
+研究標準は人間が選択済みとして保持する一方、今回の主要区間から一般棋力優越は認定しない。自動refill、係数変更、新対局・持ち時間・対戦相手・学習は発行しない。原数値outer2017.211898980秒と必要standard software outer106.281226074秒を各一度、nested非加算で保存し、source/LLM/adminを含む全費はUNKNOWN。source/条件/保存解釈の限定確認clearは速度や一般棋力の資格と区別する。
+
+全設定・元RAW・失敗・費用・STOP・限定レビューは[保存結果](../research-data/ai-sigma/lmr-standard412/report-ja.md)とexact archiveにある。413追加減深候補と414計画は別scopeで、412を再演・置換しない。mixed/learner全prep/pipeline、323 USERPAUSE、models/weights/seals/oldfits96、製品/generator enable OFF、foreign変更と全旧RAW/FAILED/費UNKNOWNを保持する。
