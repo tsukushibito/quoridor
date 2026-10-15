@@ -2526,7 +2526,10 @@ def arena_plan_check(experiment, plan):
             and engine["max_nodes"] > 0
             and type(engine["simd"]) is bool
             and type(engine.get("lmr", False)) is bool
-            and engine.get("lmr_method") in (None, "fixed_one", "depth_rank")
+            and (
+                "lmr_method" not in engine
+                or engine["lmr_method"] in ("fixed_one", "depth_rank")
+            )
             and engine.get("ordering_profile") in {None, "control", "cheap"}
             and (
                 not engine.get("lmr", False)

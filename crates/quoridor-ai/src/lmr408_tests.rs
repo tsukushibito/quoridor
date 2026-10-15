@@ -227,7 +227,11 @@ fn lmr408_zero_quantum_tt_first_distinct_fourth_uses_full_pvs_without_fake_trial
                 (s.stats.lmr_attempts, s.stats.lmr_full_depth_confirmations),
                 (0, 0)
             );
-            assert_eq!(s.stats.tt_exact_hits, 4);
+            // Matching Exact-bound probes include the wrong-depth parent;
+            // only the four full-depth child hits are numerically usable.
+            assert_eq!(s.stats.tt_exact_hits, 5);
+            assert_eq!(s.stats.tt_usable_depth, 4);
+            assert_eq!(s.stats.tt_cutoffs, 4);
             assert!(s.stats.tt_order_only > 0);
             assert_eq!((Key::of(c), c.history_counts(), s.context, s.board), before);
             assert!(s.path.is_empty());
