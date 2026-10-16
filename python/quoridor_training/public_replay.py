@@ -233,6 +233,7 @@ def admit(cache, config_path, input_binding, cfg):
     # outcome-only eligibility, or silently alter producer eligibility.
     if manifest["common_corpus"]["config"]["root_value_policy"] != "outcome_only":
         raise ValueError("outcome-only producer eligibility required")
+    extra = {}
     if input_binding is not None:
         extra = json.loads(Path(input_binding).read_bytes())
         for name, ref in extra.get("files", {}).items():
@@ -255,12 +256,30 @@ def admit(cache, config_path, input_binding, cfg):
         counts[split] = parts[0]["rows"]
     model_inputs = warmstart_model_inputs(cfg)
     warm = model_inputs["warm_start"]
-    if manifest["model_scale_authority"] != {
+    expected_authority = {
         "starting_weights_sha256": warm["weights"]["sha256"],
         "descriptor_sha256": warm["descriptor"]["sha256"],
         "evaluator_sha256": warm["evaluator_sha256"],
         "scale_policy": "incumbent_descriptor_T_only",
-    }:
+    }
+    authorities = []
+    if "model_scale_authority" in manifest:
+        authorities.append(manifest["model_scale_authority"])
+    if "model_scale_authority" in extra:
+        files = extra.get("files", {})
+        cache_ref = files.get("cache_manifest", {})
+        if (
+            extra.get("cache_manifest_sha256") != hashlib.sha256(path.read_bytes()).hexdigest()
+            or cache_ref.get("path") != str(path)
+            or cache_ref.get("sha256") != extra["cache_manifest_sha256"]
+            or files.get("descriptor") != warm["descriptor"]
+            or files.get("weights") != warm["weights"]
+        ):
+            raise ValueError(
+                "external initializer/scale authority must bind actual cache/model refs"
+            )
+        authorities.append(extra["model_scale_authority"])
+    if not authorities or any(authority != expected_authority for authority in authorities):
         raise ValueError("actual cache/initializer/frozen-scale correspondence")
     return manifest, acceptance, counts, model_inputs
 

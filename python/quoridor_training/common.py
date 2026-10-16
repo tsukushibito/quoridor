@@ -808,26 +808,28 @@ def common_cache_config(manifest):
             and all(v in "0123456789abcdef" for v in value)
         )
 
-    authority = manifest["model_scale_authority"]
-    if (
-        set(authority)
-        != {
-            "starting_weights_sha256",
-            "descriptor_sha256",
-            "evaluator_sha256",
-            "scale_policy",
-        }
-        or any(
-            not digest(authority[k])
-            for k in (
+    if "model_scale_authority" in manifest:
+        authority = manifest["model_scale_authority"]
+        if (
+            not isinstance(authority, dict)
+            or set(authority)
+            != {
                 "starting_weights_sha256",
                 "descriptor_sha256",
                 "evaluator_sha256",
+                "scale_policy",
+            }
+            or any(
+                not digest(authority[k])
+                for k in (
+                    "starting_weights_sha256",
+                    "descriptor_sha256",
+                    "evaluator_sha256",
+                )
             )
-        )
-        or authority["scale_policy"] != "incumbent_descriptor_T_only"
-    ):
-        raise ValueError("published initializer/frozen scale authority")
+            or authority["scale_policy"] != "incumbent_descriptor_T_only"
+        ):
+            raise ValueError("published initializer/frozen scale authority")
     intake = manifest["stream_intake"]
     sources, bindings = manifest["source_content"], manifest["source_binding"]
     if (
