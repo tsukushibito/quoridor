@@ -106,13 +106,7 @@ fn changed_export_full_delta_and_parent_restore_once() -> Result<()> {
     };
     persist("PENDING_MODEL_ENTRY", &rows)?;
     let model = Arc::new(ResidualModel::load(&input.descriptor.path)?);
-    *fingerprint.borrow_mut() = Some(
-        model
-            .fingerprint()
-            .iter()
-            .map(|b| format!("{b:02x}"))
-            .collect(),
-    );
+    *fingerprint.borrow_mut() = Some(quoridor_data::hex_digest(&model.fingerprint()));
     let evaluator = ResidualEvaluator::new(model.clone());
     let mut scratch = model.evaluation_scratch();
     let mut evaluate = |accumulator: &Accumulator, rows: &Vec<Value>| -> Result<f32> {
@@ -201,5 +195,37 @@ fn changed_export_full_delta_and_parent_restore_once() -> Result<()> {
         file.verify()?;
     }
     eprintln!("changed-weight contexts saved to {}", output_path.display());
+    Ok(())
+}
+
+#[test]
+#[ignore = "actual model identity only; no static evaluation or correspondence replay"]
+fn changed_export_typed_identity_without_head() -> Result<()> {
+    let input_path = PathBuf::from(std::env::var("QUORIDOR_CHANGED_WEIGHTS_INPUT")?);
+    let output_path = PathBuf::from(std::env::var("QUORIDOR_CHANGED_WEIGHTS_OUTPUT")?);
+    let raw = fs::read(&input_path)?;
+    assert_eq!(
+        crate::arena::digest(&raw),
+        std::env::var("QUORIDOR_CHANGED_WEIGHTS_INPUT_SHA256")?
+    );
+    let input: Input = serde_json::from_slice(&raw)?;
+    assert!(!output_path.exists());
+    input.descriptor.verify()?;
+    input.weights.verify()?;
+    let model = ResidualModel::load(&input.descriptor.path)?;
+    let model_fingerprint = model.fingerprint();
+    let typed_identity = quoridor_data::hex_digest(&model_fingerprint);
+    input.descriptor.verify()?;
+    input.weights.verify()?;
+    fs::write(
+        output_path,
+        serde_json::to_vec(&json!({
+            "status":"COMPLETE", "descriptor":input.descriptor,"weights":input.weights,
+            "model_raw_fingerprint_hex":model_fingerprint.iter().map(|b| format!("{b:02x}")).collect::<String>(),
+            "typed_evaluator_sha256":typed_identity,"head_forwards":0,"Search_calls":0,
+            "input_sha256":crate::arena::digest(&raw),"correspondence_replay":false,
+            "identity_owner":"quoridor_data::hex_digest(model.fingerprint()), same as measurement::load_residual_model"
+        }))?,
+    )?;
     Ok(())
 }
