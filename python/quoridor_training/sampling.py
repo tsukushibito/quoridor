@@ -260,3 +260,45 @@ def family_training_view(groups, splits, eligible, cap, *, games=None, stock=Non
         elif count > 1:
             selected.extend(indices[j * (len(indices) - 1) // (count - 1)] for j in range(count))
     return np.asarray(sorted(selected), dtype=np.int64)
+
+
+def indexed_public_sample(corpus, rng, count, total_rows, decay, check, *, acceptance_rng=None):
+    """Uniform T rows, optionally accepted by their declared source-file order.
+
+    Rejection uses only the maintained indexed record reader, never a corpus-wide
+    probability array. A file's zero-based shard s has weight decay**(N-1-s).
+    The returned counters describe input selection, not model forward work.
+    """
+    import math
+
+    if type(count) is not int or count < 0 or type(total_rows) is not int or total_rows <= 0:
+        raise ValueError("finite public indexed sample sizes")
+    if decay is None:
+        return rng.integers(total_rows, size=count), {"candidate_rows": count}
+    if type(decay) not in (int, float) or not math.isfinite(decay) or not 0 < decay <= 1:
+        raise ValueError("finite source-file decay in (0,1]")
+    if decay == 1:
+        return rng.integers(total_rows, size=count), {"candidate_rows": count}
+    if acceptance_rng is None or acceptance_rng is rng:
+        raise ValueError("weighted selection requires an independent acceptance RNG")
+    files = len(corpus.manifest["source_shards"])
+    if not files or decay ** (files - 1) <= 0:
+        raise ValueError("nonzero representable source-file row weights")
+    accepted, candidates = [], 0
+    by_file = [0] * files
+    while len(accepted) < count:
+        check()
+        rows = rng.integers(total_rows, size=count - len(accepted))
+        shards = corpus.records("train", rows, training=True)["shard"]
+        uniforms = acceptance_rng.random(len(rows))
+        candidates += len(rows)
+        if len(shards) != len(rows) or len(uniforms) != len(rows):
+            raise ValueError("public indexed sampling shape")
+        for row, shard, uniform in zip(rows, shards, uniforms):
+            shard = int(shard)
+            if not 0 <= shard < files:
+                raise ValueError("public source-file index")
+            if uniform < decay ** (files - 1 - shard):
+                accepted.append(int(row))
+                by_file[shard] += 1
+    return accepted, {"candidate_rows": candidates, "accepted_by_file": by_file}

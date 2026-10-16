@@ -88,9 +88,36 @@ def reflection_generators(settings):
     )
 
 
+def public_observation_policy(mixture):
+    return mixture.get("public_evaluation") or {
+        "validation": "checkpoints",
+        "train_diagnostic": True,
+    }
+
+
+def initial_observation_scopes(saved, binding):
+    """Reuse only requested scopes from an actual identity-bound INITIAL bank."""
+    if not isinstance(saved, dict) or not isinstance(saved.get("binding"), dict):
+        raise ValueError("bound actual shared INITIAL bank required")
+    observed = saved.get("binding", {})
+    fixed = {k: v for k, v in binding.items() if k not in ("scopes", "constants")}
+    if fixed != {k: v for k, v in observed.items() if k not in ("scopes", "constants")}:
+        raise ValueError("shared INITIAL model/scale/cache/public/scope correspondence")
+    for name, expected in binding["scopes"].items():
+        source = name.split("_")[0]
+        if (
+            observed.get("scopes", {}).get(name) != expected
+            or observed.get("constants", {}).get(source) != binding["constants"][source]
+            or name not in saved.get("scopes", {})
+        ):
+            raise ValueError("shared INITIAL exact requested rows/constants")
+    return {name: saved["scopes"][name] for name in binding["scopes"]}
+
+
 def planned_work(config, train_rows, validation_rows, public_rows, *, reuse_initial=False):
     """Result-blind full-batch exposure and full-selector forward upper bound."""
     m, t, e = config["mixture"], config["training"], config["evaluation"]
+    public_policy = public_observation_policy(m)
     if (
         train_rows <= 0
         or validation_rows <= 0
@@ -102,6 +129,19 @@ def planned_work(config, train_rows, validation_rows, public_rows, *, reuse_init
         if m["added_rows"]
         else t["steps"]
     )
+    training_rows = m.get("training_rows")
+    if training_rows is not None:
+        steps = math.ceil(training_rows / t["batch_size"])
+        if steps != t["steps"] or (
+            training_rows % t["batch_size"] and m["added_rows"] and m["public_rows"]
+        ):
+            raise ValueError("exact training rows/update count and source-specific tail")
+        added_rows = training_rows if not m["public_rows"] else steps * m["added_rows"]
+        if added_rows > m["added_exposures"] * train_rows:
+            raise ValueError("requested actual added-row exposure exceeds configured limit")
+    else:
+        training_rows = steps * t["batch_size"]
+        added_rows = steps * m["added_rows"]
     selectors = set(
         e["checkpoints"] if e["checkpoints"] is not None else range(0, steps + 1, e["interval"])
     )
@@ -127,11 +167,17 @@ def planned_work(config, train_rows, validation_rows, public_rows, *, reuse_init
     for point in sorted(selectors | diagnostics | full_train):
         names = []
         if point in selectors:
-            names.extend(("added_validation", "public_validation"))
+            names.append("added_validation")
+            if public_policy["validation"] == "checkpoints":
+                names.append("public_validation")
         if point in diagnostics:
-            names.extend(("added_train", "public_train"))
+            names.append("added_train")
+            if public_policy["train_diagnostic"]:
+                names.append("public_train")
         if point in full_train:
-            names.extend(("added_full_train", "public_full_train"))
+            names.append("added_full_train")
+            if public_policy["train_diagnostic"]:
+                names.append("public_full_train")
         scopes_by_step[point] = names
     measurement_rows = {
         point: sum(scope_rows[n] for n in names) for point, names in scopes_by_step.items()
@@ -139,6 +185,7 @@ def planned_work(config, train_rows, validation_rows, public_rows, *, reuse_init
     if reuse_initial:
         measurement_rows[0] = 0
     measurements = sum(measurement_rows.values())
+    frozen_best_rows = public_rows["validation"] if public_policy["validation"] == "best" else 0
     return {
         "updates": steps,
         "observation_steps": list(scopes_by_step),
@@ -146,12 +193,13 @@ def planned_work(config, train_rows, validation_rows, public_rows, *, reuse_init
         "diagnostic_steps": sorted(diagnostics),
         "full_train_steps": sorted(full_train),
         "scopes_by_step": scopes_by_step,
-        "added_rows": steps * m["added_rows"],
-        "public_rows": steps * m["public_rows"],
-        "training_forwards": steps * t["batch_size"],
-        "measurement_forwards": measurements,
+        "added_rows": added_rows,
+        "public_rows": training_rows - added_rows,
+        "training_forwards": training_rows,
+        "measurement_forwards": measurements + frozen_best_rows,
+        "frozen_best_public_validation_rows": frozen_best_rows,
         "reused_initial": reuse_initial,
-        "forward_upper": steps * t["batch_size"] + measurements,
+        "forward_upper": training_rows + measurements + frozen_best_rows,
         "measurement_rows_by_step": measurement_rows,
     }
 
@@ -170,9 +218,11 @@ class Selector:
         self.best_step = 0
 
     def observe(self, step, added, public):
-        if not math.isfinite(added) or not math.isfinite(public):
+        if not math.isfinite(added) or (
+            (self.gate or public is not None) and (public is None or not math.isfinite(public))
+        ):
             raise ValueError("finite full validation selector metrics")
-        if self.initial_public is None:
+        if self.initial_added is None:
             if step != 0:
                 raise ValueError("INITIAL selector observation required")
             self.initial_public, self.initial_added, self.best = public, added, added
@@ -233,9 +283,29 @@ def admit(cache, config_path, input_binding, cfg):
     # outcome-only eligibility, or silently alter producer eligibility.
     if manifest["common_corpus"]["config"]["root_value_policy"] != "outcome_only":
         raise ValueError("outcome-only producer eligibility required")
+    model_inputs = warmstart_model_inputs(cfg)
+    warm = model_inputs["warm_start"]
     extra = {}
     if input_binding is not None:
         extra = json.loads(Path(input_binding).read_bytes())
+        if warm["weights"] is None:
+            files = extra.get("files", {})
+            if (
+                not isinstance(files, dict)
+                or set(files) - {"cache_manifest", "descriptor"}
+                or ("descriptor" in files and files["descriptor"] != warm["descriptor"])
+                or (
+                    "cache_manifest" in files
+                    and (
+                        files["cache_manifest"].get("path") != str(path)
+                        or files["cache_manifest"].get("sha256")
+                        != hashlib.sha256(path.read_bytes()).hexdigest()
+                    )
+                )
+            ):
+                raise ValueError(
+                    "fresh initialization binds only actual cache and normalization metadata"
+                )
         for name, ref in extra.get("files", {}).items():
             bound_file_bytes(ref, max(1024**2, ref["bytes"]))
         if (
@@ -254,14 +324,16 @@ def admit(cache, config_path, input_binding, cfg):
         if len(parts) != 1 or type(parts[0]["rows"]) is not int or parts[0]["rows"] <= 0:
             raise ValueError("nonempty opened public T/V membership")
         counts[split] = parts[0]["rows"]
-    model_inputs = warmstart_model_inputs(cfg)
-    warm = model_inputs["warm_start"]
-    expected_authority = {
-        "starting_weights_sha256": warm["weights"]["sha256"],
-        "descriptor_sha256": warm["descriptor"]["sha256"],
-        "evaluator_sha256": warm["evaluator_sha256"],
-        "scale_policy": "incumbent_descriptor_T_only",
-    }
+    expected_authority = (
+        model_inputs["scale_authority"]
+        if warm["weights"] is None
+        else {
+            "starting_weights_sha256": warm["weights"]["sha256"],
+            "descriptor_sha256": warm["descriptor"]["sha256"],
+            "evaluator_sha256": warm["evaluator_sha256"],
+            "scale_policy": "incumbent_descriptor_T_only",
+        }
+    )
     authorities = []
     if "model_scale_authority" in manifest:
         authorities.append(manifest["model_scale_authority"])
@@ -273,7 +345,8 @@ def admit(cache, config_path, input_binding, cfg):
             or cache_ref.get("path") != str(path)
             or cache_ref.get("sha256") != extra["cache_manifest_sha256"]
             or files.get("descriptor") != warm["descriptor"]
-            or files.get("weights") != warm["weights"]
+            or (warm["weights"] is not None and files.get("weights") != warm["weights"])
+            or (warm["weights"] is None and "weights" in files)
         ):
             raise ValueError(
                 "external initializer/scale authority must bind actual cache/model refs"
@@ -281,6 +354,8 @@ def admit(cache, config_path, input_binding, cfg):
         authorities.append(extra["model_scale_authority"])
     if not authorities or any(authority != expected_authority for authority in authorities):
         raise ValueError("actual cache/initializer/frozen-scale correspondence")
+    if warm["weights"] is None and extra.get("files", {}).get("initial_observation") is not None:
+        raise ValueError("fresh initialization requires its own actual INITIAL observation")
     return manifest, acceptance, counts, model_inputs
 
 
@@ -290,7 +365,12 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
     import torch
     from .compact_cache import IndexedPublicCorpus
     from .terminal_cache import TerminalCorpus
-    from .sampling import FullBatchSampler, family_training_view, diagnostic_indices
+    from .sampling import (
+        FullBatchSampler,
+        family_training_view,
+        diagnostic_indices,
+        indexed_public_sample,
+    )
     from .train import (
         build_model,
         configure_framework,
@@ -317,6 +397,7 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
         cfg["mixture"]["output_limit_bytes"],
     )
     m, t, e = cfg["mixture"], cfg["training"], cfg["evaluation"]
+    public_policy = public_observation_policy(m)
     added = public = model = optimizer = None
     step = seen_added = seen_public = attempted_added = attempted_public = 0
     attempted_update = 0
@@ -336,6 +417,9 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
     visits = public_visits = None
     plan = None
     initial_observation = None
+    public_selection_candidates = 0
+    public_selected_by_file = public_completed_by_file = None
+    public_selection_state = "NOT_ENTERED"
 
     def facts():
         return {
@@ -351,6 +435,10 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
             "forward_rows": budget.training + budget.measurement,
             "returned_finite_training_rows": budget.returned_training,
             "returned_finite_measurement_rows": budget.returned_measurement,
+            "public_selection_candidate_rows": public_selection_candidates,
+            "public_selected_by_file": public_selected_by_file,
+            "public_completed_by_file": public_completed_by_file,
+            "public_selection_state": public_selection_state,
             "forward_count_semantics": "forward_rows charges attempted rows before placement/model call; returned_finite rows require completed finite output; failure's intervening actual calls UNKNOWN",
             "wall_seconds": time.monotonic() - budget.start,
         }
@@ -404,8 +492,8 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
             "draw_rows": 0,
             "draw_absolute_value": 0.0,
         }
-        families, strata = {}, {}
-        calibration = [[0, 0.0, 0.0] for _ in range(10)]
+        families, strata, games = {}, {}, {}
+        calibration = [[0, 0.0, 0.0, 0.0, 0.0] for _ in range(10)]
         model.eval()
         with torch.no_grad():
             for first in range(0, len(indices), e["batch_size"]):
@@ -429,6 +517,8 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
                     calibration[j][0] += int(take.sum())
                     calibration[j][1] += float(((p[take] + 1) / 2).sum())
                     calibration[j][2] += float(((yf[take] + 1) / 2).sum())
+                    calibration[j][3] += float(p[take].sum())
+                    calibration[j][4] += float(yf[take].sum())
                 decisive = yf != 0
                 totals["draw_rows"] += int((~decisive).sum())
                 totals["draw_absolute_value"] += float(np.abs(p[~decisive]).sum())
@@ -437,7 +527,8 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
                 totals["sign_rows"] += int(decisive.sum())
                 totals["correct"] += int((p[decisive] * yf[decisive] > 0).sum())
                 totals["saturated"] += int((np.abs(p) >= 0.9).sum())
-                totals["constant"] += float(((constant - yf) ** 2).sum())
+                if constant is not None:
+                    totals["constant"] += float(((constant - yf) ** 2).sum())
                 analytic = np.tanh(np.float32(8) * (d[:, 1] - d[:, 0]))
                 totals["distance"] += float(((analytic.astype(np.float64) - yf) ** 2).sum())
                 if name.startswith("added_"):
@@ -451,6 +542,17 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
                         bank[3] += int((take & decisive & (p * yf > 0)).sum())
                         bank[4] += float(p[take].sum())
                         bank[5] += float(yf[take].sum())
+                    if hasattr(added, "row_game_codes"):
+                        game_codes = added.row_game_codes[sub]
+                        for code in np.unique(game_codes):
+                            take = game_codes == code
+                            bank = games.setdefault(str(int(code)), [0, 0.0, 0, 0, 0.0, 0.0])
+                            bank[0] += int(take.sum())
+                            bank[1] += float(error[take].sum())
+                            bank[2] += int((take & decisive).sum())
+                            bank[3] += int((take & decisive & (p * yf > 0)).sum())
+                            bank[4] += float(p[take].sum())
+                            bank[5] += float(yf[take].sum())
                     stock = (
                         added.maps[0]["geometry"]["stocks"][sub].sum(axis=1)
                         if m["train_stock_strata"] is not None
@@ -481,7 +583,7 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
             if totals["sign_rows"]
             else None,
             "saturation_fraction": totals["saturated"] / n,
-            "constant_mse": totals["constant"] / n,
+            "constant_mse": totals["constant"] / n if constant is not None else None,
             "analytic_D_mse": totals["distance"] / n,
             "families": {
                 k: {
@@ -497,6 +599,19 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
             "family_mse": sum(v[1] / v[0] for v in families.values()) / len(families)
             if families
             else None,
+            "games": {
+                k: {
+                    "rows": v[0],
+                    "sse": v[1],
+                    "mse": v[1] / v[0],
+                    "sign_rows": v[2],
+                    "correct_sign_rows": v[3],
+                    "prediction_sum": v[4],
+                    "target_sum": v[5],
+                }
+                for k, v in games.items()
+            },
+            "game_key_kind": "TerminalCorpus.row_game_codes",
             "stock_strata": {
                 k: {
                     "rows": v[0],
@@ -515,6 +630,10 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
                     "rows": v[0],
                     "mean_probability": v[1] / v[0] if v[0] else None,
                     "mean_outcome_probability": v[2] / v[0] if v[0] else None,
+                    "lower_value": -1 + j / 5,
+                    "upper_value": -1 + (j + 1) / 5,
+                    "mean_value": v[3] / v[0] if v[0] else None,
+                    "mean_z": v[4] / v[0] if v[0] else None,
                 }
                 for j, v in enumerate(calibration)
             ],
@@ -570,7 +689,7 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
             improved, stop = selector.observe(
                 step,
                 record["scopes"]["added_validation"][m["selector"]["added_metric"]],
-                record["scopes"]["public_validation"]["mse"],
+                record["scopes"].get("public_validation", {}).get("mse"),
             )
         if improved:
             result["best_descriptor"] = save_checkpoint("best")
@@ -617,7 +736,9 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
                 "added_validation": validation_rows,
                 "public_train": random.Random(m["diagnostic_seed"]).sample(
                     range(counts["train"]), min(e["diagnostic_rows"], counts["train"])
-                ),
+                )
+                if public_policy["train_diagnostic"]
+                else [],
                 "public_validation": range(counts["validation"]),
                 "added_full_train": train_rows,
                 "public_full_train": range(counts["train"]),
@@ -626,7 +747,7 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
             # not the entire public T or any V labels. Its scope is recorded.
             constants = {
                 "added": float(np.mean(added.labels[train_rows, 1].astype(np.float64))),
-                "public": 0.0,
+                "public": None,
             }
             public_sum = 0.0
             for first in range(0, len(scopes["public_train"]), e["batch_size"]):
@@ -634,7 +755,8 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
                     "train", scopes["public_train"][first : first + e["batch_size"]]
                 )
                 public_sum += float(y.astype(np.float64).sum())
-            constants["public"] = public_sum / len(scopes["public_train"])
+            if scopes["public_train"]:
+                constants["public"] = public_sum / len(scopes["public_train"])
             selector = Selector(
                 m["selector"]["public_non_regression"],
                 e["early_stopping_patience"],
@@ -664,12 +786,9 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
                 initial_observation = json.loads(
                     bound_file_bytes(initial_observation_ref, 16 * 1024**2)
                 )
-                if initial_observation.get("binding") != observation_binding or set(
-                    initial_observation.get("scopes", {})
-                ) != set(observation_binding["scopes"]):
-                    raise ValueError(
-                        "shared INITIAL exact model/scale/cache/public/scope correspondence"
-                    )
+                initial_observation["scopes"] = initial_observation_scopes(
+                    initial_observation, observation_binding
+                )
                 for name, value in initial_observation["scopes"].items():
                     if (
                         value["rows"] != observation_binding["scopes"][name]["rows"]
@@ -684,6 +803,11 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
                 train_rows, max(1, m["added_rows"]), m["added_sampling_seed"]
             )
             public_rng = np.random.default_rng(m["public_sampling_seed"])
+            acceptance_rng = (
+                np.random.default_rng(m["public_acceptance_seed"])
+                if m.get("public_file_decay") is not None
+                else None
+            )
             added_rng, public_reflection_rng = reflection_generators(m)
             write(
                 output / "training-view.json",
@@ -699,8 +823,9 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
             public_visits = {}
             reflected = {"added": 0, "public": 0}
             model = build_model(cfg["model"], model_inputs["statistics"]).to(device)
-            restore_warmstart_parameters(model, initial["weights"])
-            verify_native_parameters(initial["weights"]["path"], model.state_dict())
+            if initial["weights"] is not None:
+                restore_warmstart_parameters(model, initial["weights"])
+                verify_native_parameters(initial["weights"]["path"], model.state_dict())
             optimizer = torch.optim.Adam(
                 model.parameters(),
                 lr=cfg["optimizer"]["lr"],
@@ -711,7 +836,9 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
             current_update_state = "VERIFIED_COMPLETED_UPDATE"
             result.update(
                 initial_reference=initial,
-                best_descriptor=initial["descriptor"],
+                best_descriptor=initial["descriptor"]
+                if initial["weights"] is not None
+                else save_checkpoint("initial"),
                 best_step=0,
                 plan={
                     **plan,
@@ -729,12 +856,36 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
             for update in range(1, plan["updates"] + 1):
                 budget.check()
                 attempted_update = update
-                ai = (
-                    sampler.take(m["added_rows"])
-                    if m["added_rows"]
-                    else np.asarray([], dtype=np.int64)
+                batch_rows = min(
+                    t["batch_size"], plan["training_forwards"] - step * t["batch_size"]
                 )
-                pi = public_rng.integers(counts["train"], size=m["public_rows"])
+                added_count = (
+                    m["added_rows"]
+                    if batch_rows == t["batch_size"]
+                    else (batch_rows if not m["public_rows"] else 0)
+                )
+                public_count = batch_rows - added_count
+                ai = sampler.take(added_count) if added_count else np.asarray([], dtype=np.int64)
+                public_selection_state = "IN_PROGRESS_UNKNOWN"
+                pi, selection = indexed_public_sample(
+                    public,
+                    public_rng,
+                    public_count,
+                    counts["train"],
+                    m.get("public_file_decay"),
+                    budget.check,
+                    acceptance_rng=acceptance_rng,
+                )
+                public_selection_state = "RETURNED_INDEXED_SELECTION"
+                public_selection_candidates += selection["candidate_rows"]
+                if "accepted_by_file" in selection:
+                    if public_selected_by_file is None:
+                        public_selected_by_file = [0] * len(selection["accepted_by_file"])
+                        public_completed_by_file = [0] * len(selection["accepted_by_file"])
+                    public_selected_by_file = [
+                        a + b
+                        for a, b in zip(public_selected_by_file, selection["accepted_by_file"])
+                    ]
                 am = added_rng.random(len(ai)) < m["added_reflection_probability"]
                 pm = public_reflection_rng.random(len(pi)) < m["public_reflection_probability"]
                 attempted_added += len(ai)
@@ -766,6 +917,11 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
                 rates.append(rate)
                 seen_added += len(ai)
                 seen_public += len(pi)
+                if "accepted_by_file" in selection:
+                    public_completed_by_file = [
+                        a + b
+                        for a, b in zip(public_completed_by_file, selection["accepted_by_file"])
+                    ]
                 np.add.at(visits, ai, 1)
                 for i in pi:
                     public_visits[int(i)] = public_visits.get(int(i), 0) + 1
@@ -774,6 +930,33 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
                 if step in plan["observation_steps"] and observe():
                     result["stop_reason"] = "early_stopping"
                     break
+            if public_policy["validation"] == "best":
+                # Observe the frozen BEST without mutating the live LAST model or
+                # optimizer. Reuse the same maintained model builder and loader.
+                best_model = build_model(cfg["model"], model_inputs["statistics"]).to(device)
+                if result["best_step"] == 0 and initial["weights"] is not None:
+                    best_weights = initial["weights"]
+                else:
+                    descriptor_path = Path(result["best_descriptor"])
+                    descriptor = json.loads(descriptor_path.read_bytes())
+                    weights_path = descriptor_path.parent / descriptor["weights"]
+                    best_weights = {
+                        "path": str(weights_path),
+                        "sha256": descriptor["weights_SHA"],
+                        "bytes": descriptor["weights_B"],
+                        "mode": f"{weights_path.stat().st_mode & 0o7777:04o}",
+                    }
+                restore_warmstart_parameters(best_model, best_weights)
+                live_model = model
+                try:
+                    model = best_model
+                    result["frozen_best_public_validation"] = {
+                        "checkpoint_step": result["best_step"],
+                        "descriptor": result["best_descriptor"],
+                        "metrics": evaluate("public_validation", scopes["public_validation"], None),
+                    }
+                finally:
+                    model = live_model
             result["status"] = "COMPLETE"
             result["stop_reason"] = result["stop_reason"] or "configured_horizon"
             result.update(
@@ -789,6 +972,8 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
                 public_distinct=len(public_visits),
                 added_repeats=seen_added - int(np.count_nonzero(visits)),
                 public_repeats=seen_public - len(public_visits),
+                public_file_decay=m.get("public_file_decay"),
+                public_selection_candidate_rows=public_selection_candidates,
                 selection={
                     "public_non_regression": selector.gate,
                     "added_metric": m["selector"]["added_metric"],

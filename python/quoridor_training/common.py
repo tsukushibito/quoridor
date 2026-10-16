@@ -97,6 +97,20 @@ MIXTURE_FIELDS = (
     "output_limit_bytes",
 )
 DEFAULTS["mixture"] = dict.fromkeys(MIXTURE_FIELDS)
+# These leave the currently planned mixture's existing behaviour intact when absent.
+# A recipe using either new option must supply its explicit value.
+MIXTURE_OPTIONS = {
+    "public_file_decay",
+    "public_evaluation",
+    "public_acceptance_seed",
+    "training_rows",
+}
+DEFAULTS["mixture"].update(
+    public_file_decay=None,
+    public_evaluation=None,
+    public_acceptance_seed=None,
+    training_rows=None,
+)
 
 
 STEP_MODEL_DEFAULTS = {
@@ -543,15 +557,22 @@ def validate_mixed_config(config, incoming, overrides=()):
         "scale",
     }:
         raise ValueError("explicit immutable warm-start descriptor/weights/evaluator/scale/reset")
+    fresh = warm["weights"] is None
     if (
         warm["descriptor"]["sha256"] != BEST43_DESCRIPTOR
-        or warm["weights"]["sha256"] != BEST43_WEIGHTS
-        or warm["evaluator_sha256"] != BEST43_EVALUATOR
+        or (fresh and warm["evaluator_sha256"] is not None)
+        or (
+            not fresh
+            and (
+                warm["weights"]["sha256"] != BEST43_WEIGHTS
+                or warm["evaluator_sha256"] != BEST43_EVALUATOR
+            )
+        )
         or warm["optimizer"] != "fresh"
         or warm["scale"] != "incumbent"
     ):
         raise ValueError(
-            "both fits start from exact BEST43 with fresh optimizer and incumbent scale"
+            "explicit BEST43 weights or fresh initialization, fresh optimizer and incumbent scale"
         )
 
 
@@ -580,8 +601,45 @@ def validate_stock_strata(strata):
 def validate_mixture_config(config, incoming):
     """All scientific mixture choices must be explicit, including null row cap."""
     m, t, e = config["mixture"], config["training"], config["evaluation"]
-    if set(incoming.get("mixture", {})) != set(MIXTURE_FIELDS):
+    keys = set(incoming.get("mixture", {}))
+    if not set(MIXTURE_FIELDS) <= keys or keys - set(MIXTURE_FIELDS) - MIXTURE_OPTIONS:
         raise ValueError("complete explicit mixture settings required; no selected defaults")
+    decay = m["public_file_decay"]
+    if decay is not None and (
+        type(decay) not in (int, float) or not math.isfinite(decay) or not 0 < decay <= 1
+    ):
+        raise ValueError("public file-order decay must be null or finite in (0,1]")
+    if decay is not None and (type(m["public_rows"]) is not int or m["public_rows"] <= 0):
+        raise ValueError("file-weighted sampling requires a public training portion")
+    if decay is not None and (
+        type(m["public_acceptance_seed"]) is not int or m["public_acceptance_seed"] < 0
+    ):
+        raise ValueError("explicit independent public acceptance seed required")
+    rows = m["training_rows"]
+    if rows is not None and (
+        type(rows) is not int
+        or rows <= 0
+        or math.ceil(rows / t["batch_size"]) != t["steps"]
+        or (rows % t["batch_size"] and m["added_rows"] and m["public_rows"])
+    ):
+        raise ValueError(
+            "exact training rows/update count; partial mixed-source ratio is not configured"
+        )
+    public_evaluation = m["public_evaluation"]
+    if public_evaluation is not None and (
+        not isinstance(public_evaluation, dict)
+        or set(public_evaluation) != {"validation", "train_diagnostic"}
+        or public_evaluation["validation"] not in ("checkpoints", "best")
+        or type(public_evaluation["train_diagnostic"]) is not bool
+        or (
+            public_evaluation["validation"] == "best"
+            and (
+                not isinstance(m["selector"], dict)
+                or m["selector"].get("public_non_regression") is not False
+            )
+        )
+    ):
+        raise ValueError("explicit public scopes; frozen BEST monitoring cannot select checkpoints")
     cap = m["train_family_row_cap"]
     if cap is not None and (type(cap) is not int or cap <= 0):
         raise ValueError("train_family_row_cap must be null or positive integer")
@@ -686,10 +744,11 @@ def bound_file_bytes(ref, limit):
 
 
 def warmstart_model_inputs(config):
-    """Reuse the immutable BEST43 descriptor/weight/scale owning boundary."""
+    """Frozen normalization, with explicitly restored or newly initialized parameters."""
     from .scaled_model import validate_statistics
 
     warm = config["experiment"]["warm_start"]
+    fresh = warm["weights"] is None
     descriptor = json.loads(bound_file_bytes(warm["descriptor"], 16384))
     if (
         descriptor["weights_SHA"] != BEST43_WEIGHTS
@@ -705,13 +764,27 @@ def warmstart_model_inputs(config):
         or descriptor["route_sigma_f32"] != [1.0] * 4
         or descriptor["value_perspective"] != "side-to-move"
         or descriptor["value_parameterization"] != "fixed-distance-logit-plus-linear-residual-tanh"
-        or (Path(warm["descriptor"]["path"]).parent / descriptor["weights"]).resolve()
-        != Path(warm["weights"]["path"]).resolve()
+        or (
+            not fresh
+            and (Path(warm["descriptor"]["path"]).parent / descriptor["weights"]).resolve()
+            != Path(warm["weights"]["path"]).resolve()
+        )
     ):
         raise ValueError("BEST43 architecture/head-scale/output/source convention")
-    bound_file_bytes(warm["weights"], 49284)
+    if fresh:
+        if warm["evaluator_sha256"] is not None:
+            raise ValueError("fresh initialization has no trained evaluator or weights")
+    else:
+        bound_file_bytes(warm["weights"], 49284)
     return {
         "warm_start": warm,
+        "fresh_initialization": fresh,
+        "scale_authority": {
+            "starting_weights_sha256": descriptor["weights_SHA"],
+            "descriptor_sha256": warm["descriptor"]["sha256"],
+            "evaluator_sha256": BEST43_EVALUATOR,
+            "scale_policy": "incumbent_descriptor_T_only",
+        },
         "descriptor": descriptor,
         "statistics": validate_statistics(descriptor),
     }
@@ -735,6 +808,10 @@ def ordered_parameter_values(raw):
 
 def common_cache_config(manifest):
     """Typed published outcome-cache lineage; no study/plan or raw-range selector."""
+    mcts_fields = {"mcts_source", "mcts_datasets", "mcts_native_configs"}
+    mcts = bool(mcts_fields.intersection(manifest))
+    if mcts and not mcts_fields.issubset(manifest):
+        raise ValueError("complete MCTS source metadata required")
     c = manifest["common_corpus"]
     cfg = c["config"]
     fields = {
@@ -786,7 +863,7 @@ def common_cache_config(manifest):
         or c["common_mask_file"] != "common-eligible.u8"
         or c["sampling_file"] != "sampling.bin"
         or c["teacher_A"] != "actual_final_z"
-        or c["rootmean_is_raw"] is not False
+        or c["rootmean_is_raw"] is not mcts
         or type(manifest["rows"]) is not int
         or manifest["rows"] < 0
         or type(c["common_eligible_rows"]) is not int
@@ -846,31 +923,89 @@ def common_cache_config(manifest):
         or len(intake["batches"]) != len(sources)
     ):
         raise ValueError("published complete ordered source/global schedule/partition lineage")
+    if mcts:
+        model, datasets, configs = (
+            manifest["mcts_source"],
+            manifest["mcts_datasets"],
+            manifest["mcts_native_configs"],
+        )
+        if (
+            not isinstance(model, dict)
+            or set(model) != {"model_sha256", "completed_simulations"}
+            or not digest(model["model_sha256"])
+            or type(model["completed_simulations"]) is not int
+            or not 0 < model["completed_simulations"] < 2**32
+            or not bound_json_ref(configs)
+            or not Path(configs["path"]).is_absolute()
+            or configs["sha256"] != manifest["dataset_sha"]
+            or not isinstance(datasets, list)
+            or len(datasets) != len(sources)
+        ):
+            raise ValueError("published MCTS model/simulations/ordered native config lineage")
+        if (
+            any(
+                not isinstance(dataset, dict)
+                or set(dataset) != {"dataset", "manifest_sha256", "rows"}
+                or not isinstance(dataset["dataset"], str)
+                or not Path(dataset["dataset"]).is_absolute()
+                or not digest(dataset["manifest_sha256"])
+                or type(dataset["rows"]) is not int
+                or dataset["rows"] < 0
+                for dataset in datasets
+            )
+            or sum(dataset["rows"] for dataset in datasets) != manifest["rows"]
+        ):
+            raise ValueError("published MCTS dataset manifest/row census")
     seen, cursor = set(), cfg["batch_start"]
     for source, binding, batch in zip(sources, bindings, intake["batches"]):
-        compressed = source["compressed"]
-        if (
-            set(source) != {"encoding", "compressed", "raw_sha256", "raw_bytes"}
-            or source["encoding"] != "gzip-single-member-v1"
-            or set(compressed) != {"path", "sha256", "bytes", "mode"}
-            or not bound_json_ref(binding)
-            or not Path(binding["path"]).is_absolute()
-            or binding != {"path": compressed["path"], "sha256": compressed["sha256"]}
-            or binding["path"] in seen
-            or type(compressed["bytes"]) is not int
-            or compressed["bytes"] <= 0
-            or compressed["mode"] not in ("0600", "0644")
-            or not digest(source["raw_sha256"])
-            or type(source["raw_bytes"]) is not int
-            or source["raw_bytes"] <= 0
-            or set(batch) != {"batch_start", "batch_count", "config"}
-            or type(batch["batch_start"]) is not int
-            or batch["batch_start"] != cursor
-            or type(batch["batch_count"]) is not int
-            or batch["batch_count"] <= 0
-            or not bound_json_ref(batch["config"])
-        ):
-            raise ValueError("ordered disjoint source Content/configured batch interval")
+        if mcts:
+            dataset = datasets[len(seen)]
+            if (
+                not isinstance(source, dict)
+                or set(source) != {"encoding", "manifest"}
+                or source["encoding"] != "native-teacher-dataset-shards-v1"
+                or not bound_json_ref(binding)
+                or not Path(binding["path"]).is_absolute()
+                or source["manifest"] != binding
+                or binding
+                != {
+                    "path": str(Path(dataset["dataset"]) / "manifest.json"),
+                    "sha256": dataset["manifest_sha256"],
+                }
+                or binding["path"] in seen
+                or set(batch) != {"batch_start", "batch_count", "config"}
+                or type(batch["batch_start"]) is not int
+                or batch["batch_start"] != cursor
+                or type(batch["batch_count"]) is not int
+                or batch["batch_count"] <= 0
+                or not bound_json_ref(batch["config"])
+                or not Path(batch["config"]["path"]).is_absolute()
+            ):
+                raise ValueError("ordered MCTS source manifest/configured batch interval")
+        else:
+            compressed = source["compressed"]
+            if (
+                set(source) != {"encoding", "compressed", "raw_sha256", "raw_bytes"}
+                or source["encoding"] != "gzip-single-member-v1"
+                or set(compressed) != {"path", "sha256", "bytes", "mode"}
+                or not bound_json_ref(binding)
+                or not Path(binding["path"]).is_absolute()
+                or binding != {"path": compressed["path"], "sha256": compressed["sha256"]}
+                or binding["path"] in seen
+                or type(compressed["bytes"]) is not int
+                or compressed["bytes"] <= 0
+                or compressed["mode"] not in ("0600", "0644")
+                or not digest(source["raw_sha256"])
+                or type(source["raw_bytes"]) is not int
+                or source["raw_bytes"] <= 0
+                or set(batch) != {"batch_start", "batch_count", "config"}
+                or type(batch["batch_start"]) is not int
+                or batch["batch_start"] != cursor
+                or type(batch["batch_count"]) is not int
+                or batch["batch_count"] <= 0
+                or not bound_json_ref(batch["config"])
+            ):
+                raise ValueError("ordered disjoint source Content/configured batch interval")
         seen.add(binding["path"])
         cursor += batch["batch_count"]
     if cursor != cfg["batch_start"] + cfg["batch_count"]:
