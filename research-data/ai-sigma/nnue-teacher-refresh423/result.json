@@ -1,0 +1,1708 @@
+{
+  "issue": "quoridor-4lc.423.1",
+  "status": "ORIGINAL_FINITE_SAVED_ANALYSIS_COMPLETE_OPERATIONAL_FAILURES_AND_UNKNOWNS_RETAINED",
+  "at": "2026-10-16T19:17:16.976208+00:00",
+  "arena": {
+    "W/BEST43": {
+      "planned_slots": 128,
+      "started_games": 128,
+      "goal": 128,
+      "W": 72,
+      "D": 0,
+      "L": 56,
+      "UNKNOWN": 0,
+      "complete_families": 64,
+      "incomplete_families": 0,
+      "complete_pair_mean": 0.5625,
+      "valid_game_score": 0.5625,
+      "planned_score_bounds": [0.5625, 0.5625],
+      "complete_family_score_histogram": {
+        "0.5": 32,
+        "1.0": 20,
+        "0.0": 12
+      },
+      "by_candidate_colour": {
+        "0": {
+          "planned": 64,
+          "started": 64,
+          "W": 35,
+          "L": 29,
+          "UNKNOWN": 0
+        },
+        "1": {
+          "planned": 64,
+          "started": 64,
+          "W": 37,
+          "L": 27,
+          "UNKNOWN": 0
+        }
+      },
+      "global64_analysis_percentile_95": [0.4765625, 0.6484375],
+      "global64_interval_method": "Installed NumPy PCG64/choice+linear quantile; separately labelled saved-analysis interval, not native per-chunk CI",
+      "primary_lower_above_half": false
+    },
+    "W/D": {
+      "planned_slots": 32,
+      "started_games": 28,
+      "goal": 27,
+      "W": 17,
+      "D": 0,
+      "L": 10,
+      "UNKNOWN": 5,
+      "complete_families": 13,
+      "incomplete_families": 3,
+      "complete_pair_mean": 0.6538461538461539,
+      "valid_game_score": 0.6296296296296297,
+      "planned_score_bounds": [0.53125, 0.6875],
+      "complete_family_score_histogram": {
+        "1.0": 5,
+        "0.5": 7,
+        "0.0": 1
+      },
+      "by_candidate_colour": {
+        "0": {
+          "planned": 16,
+          "started": 14,
+          "W": 6,
+          "L": 7,
+          "UNKNOWN": 3
+        },
+        "1": {
+          "planned": 16,
+          "started": 14,
+          "W": 11,
+          "L": 3,
+          "UNKNOWN": 2
+        }
+      },
+      "native13_complete_pair_percentile_95": [0.5, 0.8076923076923077]
+    }
+  },
+  "arena_operational_outcome": {
+    "original_job": {
+      "job_id": "b495b1c5-c3d3-4a27-9332-9860ffa458b9",
+      "outcome": "failed",
+      "error": null,
+      "exit_code": 1,
+      "finished_at": "2026-10-16T18:56:37.404795+00:00",
+      "wall_seconds": 716.6767713270092,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+      "cleanup_complete": true,
+      "cleanup_errors": [],
+      "log_bytes_seen": 757,
+      "log_bytes_retained": 757
+    },
+    "last_data_and_operation_FAILED": true,
+    "last_operation_cleanup_complete": false,
+    "native_process_cleanup_complete": true,
+    "global_stop": "common_total_node_cap; remaining decisions UNKNOWN",
+    "individual_UNKNOWN_causes": "Original Unclassified5, not reassigned",
+    "incomplete_secondary_families": [13, 14, 15],
+    "original_native_STOP": "2026-10-16T18:56:37.373932+00:00",
+    "original_collection_STOP": "2026-10-16T19:00:20.742855+00:00"
+  },
+  "family_identity": {
+    "primary_true_global_families": 64,
+    "native_display_names": 16,
+    "key": "global schedule family_id+fullprefix+lineage",
+    "shared_secondary_starts": 16,
+    "primary_native_chunk_intervals_not_combined": [
+      [0.34375, 0.65625],
+      [0.34375, 0.59375],
+      [0.40625, 0.78125],
+      [0.5, 0.875]
+    ]
+  },
+  "charged_node_budget": {
+    "operations": [143722604, 130772603, 130111633, 148055898, 200000000],
+    "total": 752662738,
+    "primary_unused_not_lent": 247337262,
+    "secondary_cap_exhausted": 200000000,
+    "scope": "charged nodes include opaque reservations; not an exact visited-node/NNUE-call count; terminal work nested"
+  },
+  "native_work_clocks": [
+    {
+      "operation": 0,
+      "report_wall_seconds_nested_not_added": 144.841550965,
+      "native_report_peak_RSS_B": 206241792,
+      "outcome_count_including_placeholders": 32,
+      "journal_count": 32
+    },
+    {
+      "operation": 1,
+      "report_wall_seconds_nested_not_added": 129.158274865,
+      "native_report_peak_RSS_B": 203665408,
+      "outcome_count_including_placeholders": 32,
+      "journal_count": 32
+    },
+    {
+      "operation": 2,
+      "report_wall_seconds_nested_not_added": 131.344919825,
+      "native_report_peak_RSS_B": 203821056,
+      "outcome_count_including_placeholders": 32,
+      "journal_count": 32
+    },
+    {
+      "operation": 3,
+      "report_wall_seconds_nested_not_added": 146.623659621,
+      "native_report_peak_RSS_B": 206802944,
+      "outcome_count_including_placeholders": 32,
+      "journal_count": 32
+    },
+    {
+      "operation": 4,
+      "report_wall_seconds_nested_not_added": 134.602830557,
+      "native_report_peak_RSS_B": 204242944,
+      "outcome_count_including_placeholders": 32,
+      "journal_count": 28
+    }
+  ],
+  "fits_and_old_q": {
+    "issue": "quoridor-4lc.423.1",
+    "phase": "original saved-fit/q analysis preparation; arena genuinely unentered",
+    "status": "SAVED_FIT_Q_PREPARATION_COMPLETE_FINAL_ARENA_DEPENDENCY_OPEN",
+    "at": "2026-10-16T18:34:29.157804+00:00",
+    "fits": {
+      "U": {
+        "native_fit_status": "COMPLETE",
+        "operation_status": "saved complete; original manifest retained",
+        "BEST_step": 79,
+        "LAST_step": 118,
+        "initial_newV": {
+          "rows": 2498,
+          "mse": 0.9831882170787121,
+          "family_mse": 0.9458764451110301,
+          "sign_rows": 2498,
+          "sign_accuracy": 0.6361088871096877,
+          "saturation_fraction": 0.39351481184947956,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "BEST_newV": {
+          "rows": 2498,
+          "mse": 0.9816440178879436,
+          "family_mse": 0.9443358975467356,
+          "sign_rows": 2498,
+          "sign_accuracy": 0.6365092073658927,
+          "saturation_fraction": 0.3923138510808647,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "LAST_newV": {
+          "rows": 2498,
+          "mse": 0.9823143089346776,
+          "family_mse": 0.9454821636783717,
+          "sign_rows": 2498,
+          "sign_accuracy": 0.6365092073658927,
+          "saturation_fraction": 0.3931144915932746,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "newV_family_relative_change_initial_to_BEST": -0.0016286985179270186,
+        "initial_newT": {
+          "rows": 3763,
+          "mse": 0.8710067741633327,
+          "family_mse": 0.8543633180201182,
+          "sign_rows": 3763,
+          "sign_accuracy": 0.6808397555142174,
+          "saturation_fraction": 0.3975551421737975,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "BEST_newT": {
+          "rows": 3763,
+          "mse": 0.8710533283336023,
+          "family_mse": 0.8541797747284336,
+          "sign_rows": 3763,
+          "sign_accuracy": 0.6808397555142174,
+          "saturation_fraction": 0.3964921605102312,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "LAST_newT": {
+          "rows": 3763,
+          "mse": 0.8708145519565593,
+          "family_mse": 0.8539272493732091,
+          "sign_rows": 3763,
+          "sign_accuracy": 0.6792452830188679,
+          "saturation_fraction": 0.3972893967579059,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "BEST_publicT_panel": {
+          "rows": 8192,
+          "mse": 0.42866612730547404,
+          "family_mse": null,
+          "sign_rows": 8192,
+          "sign_accuracy": 0.8424072265625,
+          "saturation_fraction": 0.481689453125,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "BEST_full_publicV": {
+          "rows": 419150,
+          "mse": 0.42388597264436945,
+          "family_mse": null,
+          "sign_rows": 419150,
+          "sign_accuracy": 0.8429392818799952,
+          "saturation_fraction": 0.48477633305499224,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "BEST_newV_stock": {
+          "16..20": {
+            "rows": 76,
+            "mse": 1.2277757053614988,
+            "sign_rows": 76,
+            "sign_accuracy": 0.35526315789473684,
+            "mean_prediction": 0.035440748778024785,
+            "mean_target": -0.02631578947368421
+          },
+          "8..15": {
+            "rows": 558,
+            "mse": 1.10457785515249,
+            "sign_rows": 558,
+            "sign_accuracy": 0.5752688172043011,
+            "mean_prediction": -0.0027004457711021826,
+            "mean_target": -0.0035842293906810036
+          },
+          "1..7": {
+            "rows": 1709,
+            "mse": 1.000753675212984,
+            "sign_rows": 1709,
+            "sign_accuracy": 0.6407255705090696,
+            "mean_prediction": -0.00865209497804094,
+            "mean_target": 0.011117612638970159
+          },
+          "0..0": {
+            "rows": 155,
+            "mse": 0.20769889653245374,
+            "sign_rows": 155,
+            "sign_accuracy": 0.9483870967741935,
+            "mean_prediction": 0.05617347763430688,
+            "mean_target": 0.05806451612903226
+          }
+        },
+        "initial_newV_stock": {
+          "16..20": {
+            "rows": 76,
+            "mse": 1.2277844097543504,
+            "sign_rows": 76,
+            "sign_accuracy": 0.35526315789473684,
+            "mean_prediction": 0.03691176817703404,
+            "mean_target": -0.02631578947368421
+          },
+          "8..15": {
+            "rows": 558,
+            "mse": 1.1057409597150203,
+            "sign_rows": 558,
+            "sign_accuracy": 0.5716845878136201,
+            "mean_prediction": -0.0013701345877534974,
+            "mean_target": -0.0035842293906810036
+          },
+          "1..7": {
+            "rows": 1709,
+            "mse": 1.002635299646967,
+            "sign_rows": 1709,
+            "sign_accuracy": 0.6413107080163839,
+            "mean_prediction": -0.009080992247724705,
+            "mean_target": 0.011117612638970159
+          },
+          "0..0": {
+            "rows": 155,
+            "mse": 0.2076475387331904,
+            "sign_rows": 155,
+            "sign_accuracy": 0.9483870967741935,
+            "mean_prediction": 0.05584791052726007,
+            "mean_target": 0.05806451612903226
+          }
+        },
+        "BEST_newV_calibration": [
+          {
+            "lower": 0.0,
+            "upper": 0.1,
+            "rows": 598,
+            "mean_probability": 0.021239117485623696,
+            "mean_outcome_probability": 0.20735785953177258,
+            "lower_value": -1.0,
+            "upper_value": -0.8,
+            "mean_value": -0.9575217650287526,
+            "mean_z": -0.5852842809364549
+          },
+          {
+            "lower": 0.1,
+            "upper": 0.2,
+            "rows": 178,
+            "mean_probability": 0.14498453712865209,
+            "mean_outcome_probability": 0.4157303370786517,
+            "lower_value": -0.8,
+            "upper_value": -0.6,
+            "mean_value": -0.7100309257426959,
+            "mean_z": -0.16853932584269662
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.3,
+            "rows": 170,
+            "mean_probability": 0.24893618138397441,
+            "mean_outcome_probability": 0.5117647058823529,
+            "lower_value": -0.6,
+            "upper_value": -0.4,
+            "mean_value": -0.5021276372320512,
+            "mean_z": 0.023529411764705882
+          },
+          {
+            "lower": 0.3,
+            "upper": 0.4,
+            "rows": 142,
+            "mean_probability": 0.3490746870217189,
+            "mean_outcome_probability": 0.5492957746478874,
+            "lower_value": -0.4,
+            "upper_value": -0.19999999999999996,
+            "mean_value": -0.3018506259565622,
+            "mean_z": 0.09859154929577464
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.5,
+            "rows": 171,
+            "mean_probability": 0.4558290989023813,
+            "mean_outcome_probability": 0.5964912280701754,
+            "lower_value": -0.19999999999999996,
+            "upper_value": 0.0,
+            "mean_value": -0.08834180219523739,
+            "mean_z": 0.19298245614035087
+          },
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "rows": 152,
+            "mean_probability": 0.5474434283390254,
+            "mean_outcome_probability": 0.4473684210526316,
+            "lower_value": 0.0,
+            "upper_value": 0.19999999999999996,
+            "mean_value": 0.09488685667805073,
+            "mean_z": -0.10526315789473684
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.7,
+            "rows": 168,
+            "mean_probability": 0.6501675706268066,
+            "mean_outcome_probability": 0.4583333333333333,
+            "lower_value": 0.19999999999999996,
+            "upper_value": 0.3999999999999999,
+            "mean_value": 0.30033514125361327,
+            "mean_z": -0.08333333333333333
+          },
+          {
+            "lower": 0.7,
+            "upper": 0.8,
+            "rows": 146,
+            "mean_probability": 0.7554344386882978,
+            "mean_outcome_probability": 0.4794520547945205,
+            "lower_value": 0.3999999999999999,
+            "upper_value": 0.6000000000000001,
+            "mean_value": 0.5108688773765956,
+            "mean_z": -0.0410958904109589
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "rows": 161,
+            "mean_probability": 0.8483969896846677,
+            "mean_outcome_probability": 0.5652173913043478,
+            "lower_value": 0.6000000000000001,
+            "upper_value": 0.8,
+            "mean_value": 0.6967939793693353,
+            "mean_z": 0.13043478260869565
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "rows": 612,
+            "mean_probability": 0.978571707370624,
+            "mean_outcome_probability": 0.8006535947712419,
+            "lower_value": 0.8,
+            "upper_value": 1.0,
+            "mean_value": 0.9571434147412481,
+            "mean_z": 0.6013071895424836
+          }
+        ],
+        "family_MSE_decreased_increased_equal": [29, 23, 0],
+        "actual_training_forwards": 30104,
+        "actual_measurement_forwards": 476962,
+        "actual_total_forwards": 507066,
+        "added_seen": 0,
+        "public_seen": 30104,
+        "added_distinct": 0,
+        "public_distinct": 30051,
+        "added_repeated_draws": 0,
+        "public_repeated_draws": 53,
+        "public_candidate_rows_metadata_not_extra_forwards": 30104,
+        "public_completed_by_file": null,
+        "public_file_decay": null,
+        "selected_BEST_descriptor_metadata_ref_only": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/nnue-teacher-refresh423-v1/U-v2/best-model/manifest.json",
+          "sha256": "f72e640e9f505921a87ed3ddb0494ba79b6b67d10bfdde10157d0c2db71f9f2a",
+          "bytes": 681,
+          "mode": "0600"
+        },
+        "per_row_exposure_vector": "not read; totals/distinct are observed, exact individual visit vector not independently decoded"
+      },
+      "R": {
+        "native_fit_status": "COMPLETE",
+        "operation_status": "FAILED",
+        "BEST_step": 118,
+        "LAST_step": 118,
+        "initial_newV": {
+          "rows": 2498,
+          "mse": 0.9831882170787121,
+          "family_mse": 0.9458764451110301,
+          "sign_rows": 2498,
+          "sign_accuracy": 0.6361088871096877,
+          "saturation_fraction": 0.39351481184947956,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "BEST_newV": {
+          "rows": 2498,
+          "mse": 0.9800865759719517,
+          "family_mse": 0.9415044711007547,
+          "sign_rows": 2498,
+          "sign_accuracy": 0.6385108086469176,
+          "saturation_fraction": 0.3947157726180945,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "LAST_newV": {
+          "rows": 2498,
+          "mse": 0.9800865759719517,
+          "family_mse": 0.9415044711007547,
+          "sign_rows": 2498,
+          "sign_accuracy": 0.6385108086469176,
+          "saturation_fraction": 0.3947157726180945,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "newV_family_relative_change_initial_to_BEST": -0.004622140695936361,
+        "initial_newT": {
+          "rows": 3763,
+          "mse": 0.8710067741633327,
+          "family_mse": 0.8543633180201182,
+          "sign_rows": 3763,
+          "sign_accuracy": 0.6808397555142174,
+          "saturation_fraction": 0.3975551421737975,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "BEST_newT": {
+          "rows": 3763,
+          "mse": 0.8671209555951359,
+          "family_mse": 0.850473496189639,
+          "sign_rows": 3763,
+          "sign_accuracy": 0.6832314642572416,
+          "saturation_fraction": 0.39835237842147225,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "LAST_newT": {
+          "rows": 3763,
+          "mse": 0.8671209555951359,
+          "family_mse": 0.850473496189639,
+          "sign_rows": 3763,
+          "sign_accuracy": 0.6832314642572416,
+          "saturation_fraction": 0.39835237842147225,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "BEST_publicT_panel": {
+          "rows": 8192,
+          "mse": 0.42865120454212874,
+          "family_mse": null,
+          "sign_rows": 8192,
+          "sign_accuracy": 0.8431396484375,
+          "saturation_fraction": 0.4803466796875,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "BEST_full_publicV": {
+          "rows": 419150,
+          "mse": 0.4239649996266919,
+          "family_mse": null,
+          "sign_rows": 419150,
+          "sign_accuracy": 0.8432255755696052,
+          "saturation_fraction": 0.48368364547298104,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "BEST_newV_stock": {
+          "16..20": {
+            "rows": 76,
+            "mse": 1.2185110964951578,
+            "sign_rows": 76,
+            "sign_accuracy": 0.35526315789473684,
+            "mean_prediction": 0.030578538922494965,
+            "mean_target": -0.02631578947368421
+          },
+          "8..15": {
+            "rows": 558,
+            "mse": 1.101922761649025,
+            "sign_rows": 558,
+            "sign_accuracy": 0.5752688172043011,
+            "mean_prediction": -0.00666331683993206,
+            "mean_target": -0.0035842293906810036
+          },
+          "1..7": {
+            "rows": 1709,
+            "mse": 0.9997707908308239,
+            "sign_rows": 1709,
+            "sign_accuracy": 0.6436512580456407,
+            "mean_prediction": -0.012301622148665325,
+            "mean_target": 0.011117612638970159
+          },
+          "0..0": {
+            "rows": 155,
+            "mse": 0.20753703815657817,
+            "sign_rows": 155,
+            "sign_accuracy": 0.9483870967741935,
+            "mean_prediction": 0.05615944785456504,
+            "mean_target": 0.05806451612903226
+          }
+        },
+        "initial_newV_stock": {
+          "16..20": {
+            "rows": 76,
+            "mse": 1.2277844097543504,
+            "sign_rows": 76,
+            "sign_accuracy": 0.35526315789473684,
+            "mean_prediction": 0.03691176817703404,
+            "mean_target": -0.02631578947368421
+          },
+          "8..15": {
+            "rows": 558,
+            "mse": 1.1057409597150203,
+            "sign_rows": 558,
+            "sign_accuracy": 0.5716845878136201,
+            "mean_prediction": -0.0013701345877534974,
+            "mean_target": -0.0035842293906810036
+          },
+          "1..7": {
+            "rows": 1709,
+            "mse": 1.002635299646967,
+            "sign_rows": 1709,
+            "sign_accuracy": 0.6413107080163839,
+            "mean_prediction": -0.009080992247724705,
+            "mean_target": 0.011117612638970159
+          },
+          "0..0": {
+            "rows": 155,
+            "mse": 0.2076475387331904,
+            "sign_rows": 155,
+            "sign_accuracy": 0.9483870967741935,
+            "mean_prediction": 0.05584791052726007,
+            "mean_target": 0.05806451612903226
+          }
+        },
+        "BEST_newV_calibration": [
+          {
+            "lower": 0.0,
+            "upper": 0.1,
+            "rows": 604,
+            "mean_probability": 0.021368572402079372,
+            "mean_outcome_probability": 0.20695364238410596,
+            "lower_value": -1.0,
+            "upper_value": -0.8,
+            "mean_value": -0.9572628551958412,
+            "mean_z": -0.5860927152317881
+          },
+          {
+            "lower": 0.1,
+            "upper": 0.2,
+            "rows": 176,
+            "mean_probability": 0.1456980568102815,
+            "mean_outcome_probability": 0.42613636363636365,
+            "lower_value": -0.8,
+            "upper_value": -0.6,
+            "mean_value": -0.708603886379437,
+            "mean_z": -0.14772727272727273
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.3,
+            "rows": 170,
+            "mean_probability": 0.2495077840545598,
+            "mean_outcome_probability": 0.5117647058823529,
+            "lower_value": -0.6,
+            "upper_value": -0.4,
+            "mean_value": -0.5009844318908804,
+            "mean_z": 0.023529411764705882
+          },
+          {
+            "lower": 0.3,
+            "upper": 0.4,
+            "rows": 140,
+            "mean_probability": 0.3474495411451374,
+            "mean_outcome_probability": 0.5571428571428572,
+            "lower_value": -0.4,
+            "upper_value": -0.19999999999999996,
+            "mean_value": -0.30510091770972525,
+            "mean_z": 0.11428571428571428
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.5,
+            "rows": 174,
+            "mean_probability": 0.4558250684700585,
+            "mean_outcome_probability": 0.5747126436781609,
+            "lower_value": -0.19999999999999996,
+            "upper_value": 0.0,
+            "mean_value": -0.08834986305988297,
+            "mean_z": 0.14942528735632185
+          },
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "rows": 153,
+            "mean_probability": 0.5483221602085917,
+            "mean_outcome_probability": 0.46405228758169936,
+            "lower_value": 0.0,
+            "upper_value": 0.19999999999999996,
+            "mean_value": 0.09664432041718339,
+            "mean_z": -0.0718954248366013
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.7,
+            "rows": 169,
+            "mean_probability": 0.6494110368148109,
+            "mean_outcome_probability": 0.4556213017751479,
+            "lower_value": 0.19999999999999996,
+            "upper_value": 0.3999999999999999,
+            "mean_value": 0.29882207362962193,
+            "mean_z": -0.08875739644970414
+          },
+          {
+            "lower": 0.7,
+            "upper": 0.8,
+            "rows": 146,
+            "mean_probability": 0.7565936929967305,
+            "mean_outcome_probability": 0.4794520547945205,
+            "lower_value": 0.3999999999999999,
+            "upper_value": 0.6000000000000001,
+            "mean_value": 0.513187385993461,
+            "mean_z": -0.0410958904109589
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "rows": 160,
+            "mean_probability": 0.8495324930176139,
+            "mean_outcome_probability": 0.575,
+            "lower_value": 0.6000000000000001,
+            "upper_value": 0.8,
+            "mean_value": 0.6990649860352278,
+            "mean_z": 0.15
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "rows": 606,
+            "mean_probability": 0.9788607420405933,
+            "mean_outcome_probability": 0.801980198019802,
+            "lower_value": 0.8,
+            "upper_value": 1.0,
+            "mean_value": 0.9577214840811865,
+            "mean_z": 0.6039603960396039
+          }
+        ],
+        "family_MSE_decreased_increased_equal": [31, 21, 0],
+        "actual_training_forwards": 30104,
+        "actual_measurement_forwards": 462509,
+        "actual_total_forwards": 492613,
+        "added_seen": 0,
+        "public_seen": 30104,
+        "added_distinct": 0,
+        "public_distinct": 29993,
+        "added_repeated_draws": 0,
+        "public_repeated_draws": 111,
+        "public_candidate_rows_metadata_not_extra_forwards": 150394,
+        "public_completed_by_file": [
+          112, 142, 172, 219, 219, 226, 252, 277, 301, 312, 373, 378, 477, 477,
+          487, 551, 559, 648, 618, 829, 335, 427, 357, 356, 486, 441, 543, 663,
+          523, 677, 848, 867, 850, 1017, 1366, 1119, 1186, 1406, 1586, 1515,
+          1961, 2061, 1885
+        ],
+        "public_file_decay": 0.92,
+        "selected_BEST_descriptor_metadata_ref_only": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/nnue-teacher-refresh423-v1/R-v1/best-model/manifest.json",
+          "sha256": "40d5aed874a8891a7ce1f92fab36f7d5fb74b0c2c658bb465a52ce9c7edb33c5",
+          "bytes": 681,
+          "mode": "0600"
+        },
+        "per_row_exposure_vector": "not read; totals/distinct are observed, exact individual visit vector not independently decoded"
+      },
+      "W": {
+        "native_fit_status": "COMPLETE",
+        "operation_status": "saved complete; original manifest retained",
+        "BEST_step": 118,
+        "LAST_step": 118,
+        "initial_newV": {
+          "rows": 2498,
+          "mse": 0.9831882170787121,
+          "family_mse": 0.9458764451110301,
+          "sign_rows": 2498,
+          "sign_accuracy": 0.6361088871096877,
+          "saturation_fraction": 0.39351481184947956,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "BEST_newV": {
+          "rows": 2498,
+          "mse": 0.9559888044702815,
+          "family_mse": 0.915511249969753,
+          "sign_rows": 2498,
+          "sign_accuracy": 0.6409127301841473,
+          "saturation_fraction": 0.3654923939151321,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "LAST_newV": {
+          "rows": 2498,
+          "mse": 0.9559888044702815,
+          "family_mse": 0.915511249969753,
+          "sign_rows": 2498,
+          "sign_accuracy": 0.6409127301841473,
+          "saturation_fraction": 0.3654923939151321,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "newV_family_relative_change_initial_to_BEST": -0.03210270780948854,
+        "initial_newT": {
+          "rows": 3763,
+          "mse": 0.8710067741633327,
+          "family_mse": 0.8543633180201182,
+          "sign_rows": 3763,
+          "sign_accuracy": 0.6808397555142174,
+          "saturation_fraction": 0.3975551421737975,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "BEST_newT": {
+          "rows": 3763,
+          "mse": 0.8242781785805638,
+          "family_mse": 0.8099253558625213,
+          "sign_rows": 3763,
+          "sign_accuracy": 0.6856231730002658,
+          "saturation_fraction": 0.37523252723890516,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "LAST_newT": {
+          "rows": 3763,
+          "mse": 0.8242781785805638,
+          "family_mse": 0.8099253558625213,
+          "sign_rows": 3763,
+          "sign_accuracy": 0.6856231730002658,
+          "saturation_fraction": 0.37523252723890516,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "BEST_publicT_panel": {
+          "rows": 8192,
+          "mse": 0.4302133809484547,
+          "family_mse": null,
+          "sign_rows": 8192,
+          "sign_accuracy": 0.8408203125,
+          "saturation_fraction": 0.4578857421875,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "BEST_full_publicV": {
+          "rows": 419150,
+          "mse": 0.42568080138075637,
+          "family_mse": null,
+          "sign_rows": 419150,
+          "sign_accuracy": 0.8426768459978528,
+          "saturation_fraction": 0.46000715734224024,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "BEST_newV_stock": {
+          "16..20": {
+            "rows": 76,
+            "mse": 1.1593711370150972,
+            "sign_rows": 76,
+            "sign_accuracy": 0.35526315789473684,
+            "mean_prediction": 0.03820554393774058,
+            "mean_target": -0.02631578947368421
+          },
+          "8..15": {
+            "rows": 558,
+            "mse": 1.0785053649146177,
+            "sign_rows": 558,
+            "sign_accuracy": 0.578853046594982,
+            "mean_prediction": 0.005801407509319832,
+            "mean_target": -0.0035842293906810036
+          },
+          "1..7": {
+            "rows": 1709,
+            "mse": 0.9748143309981098,
+            "sign_rows": 1709,
+            "sign_accuracy": 0.6459918080748976,
+            "mean_prediction": -0.0014646064718687147,
+            "mean_target": 0.011117612638970159
+          },
+          "0..0": {
+            "rows": 155,
+            "mse": 0.2076396248741262,
+            "sign_rows": 155,
+            "sign_accuracy": 0.9483870967741935,
+            "mean_prediction": 0.057624411582946775,
+            "mean_target": 0.05806451612903226
+          }
+        },
+        "initial_newV_stock": {
+          "16..20": {
+            "rows": 76,
+            "mse": 1.2277844097543504,
+            "sign_rows": 76,
+            "sign_accuracy": 0.35526315789473684,
+            "mean_prediction": 0.03691176817703404,
+            "mean_target": -0.02631578947368421
+          },
+          "8..15": {
+            "rows": 558,
+            "mse": 1.1057409597150203,
+            "sign_rows": 558,
+            "sign_accuracy": 0.5716845878136201,
+            "mean_prediction": -0.0013701345877534974,
+            "mean_target": -0.0035842293906810036
+          },
+          "1..7": {
+            "rows": 1709,
+            "mse": 1.002635299646967,
+            "sign_rows": 1709,
+            "sign_accuracy": 0.6413107080163839,
+            "mean_prediction": -0.009080992247724705,
+            "mean_target": 0.011117612638970159
+          },
+          "0..0": {
+            "rows": 155,
+            "mse": 0.2076475387331904,
+            "sign_rows": 155,
+            "sign_accuracy": 0.9483870967741935,
+            "mean_prediction": 0.05584791052726007,
+            "mean_target": 0.05806451612903226
+          }
+        },
+        "BEST_newV_calibration": [
+          {
+            "lower": 0.0,
+            "upper": 0.1,
+            "rows": 569,
+            "mean_probability": 0.02356904184671613,
+            "mean_outcome_probability": 0.20738137082601055,
+            "lower_value": -1.0,
+            "upper_value": -0.8,
+            "mean_value": -0.9528619163065677,
+            "mean_z": -0.5852372583479789
+          },
+          {
+            "lower": 0.1,
+            "upper": 0.2,
+            "rows": 172,
+            "mean_probability": 0.1503944182118704,
+            "mean_outcome_probability": 0.36627906976744184,
+            "lower_value": -0.8,
+            "upper_value": -0.6,
+            "mean_value": -0.6992111635762591,
+            "mean_z": -0.26744186046511625
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.3,
+            "rows": 157,
+            "mean_probability": 0.2526118229528901,
+            "mean_outcome_probability": 0.4968152866242038,
+            "lower_value": -0.6,
+            "upper_value": -0.4,
+            "mean_value": -0.49477635409421983,
+            "mean_z": -0.006369426751592357
+          },
+          {
+            "lower": 0.3,
+            "upper": 0.4,
+            "rows": 159,
+            "mean_probability": 0.34737700111461134,
+            "mean_outcome_probability": 0.5094339622641509,
+            "lower_value": -0.4,
+            "upper_value": -0.19999999999999996,
+            "mean_value": -0.30524599777077727,
+            "mean_z": 0.018867924528301886
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.5,
+            "rows": 189,
+            "mean_probability": 0.45608056908747163,
+            "mean_outcome_probability": 0.5978835978835979,
+            "lower_value": -0.19999999999999996,
+            "upper_value": 0.0,
+            "mean_value": -0.08783886182505672,
+            "mean_z": 0.19576719576719576
+          },
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "rows": 183,
+            "mean_probability": 0.5517903719742431,
+            "mean_outcome_probability": 0.4918032786885246,
+            "lower_value": 0.0,
+            "upper_value": 0.19999999999999996,
+            "mean_value": 0.10358074394848625,
+            "mean_z": -0.01639344262295082
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.7,
+            "rows": 169,
+            "mean_probability": 0.6491274145051572,
+            "mean_outcome_probability": 0.4260355029585799,
+            "lower_value": 0.19999999999999996,
+            "upper_value": 0.3999999999999999,
+            "mean_value": 0.29825482901031447,
+            "mean_z": -0.14792899408284024
+          },
+          {
+            "lower": 0.7,
+            "upper": 0.8,
+            "rows": 162,
+            "mean_probability": 0.7533141317558877,
+            "mean_outcome_probability": 0.5,
+            "lower_value": 0.3999999999999999,
+            "upper_value": 0.6000000000000001,
+            "mean_value": 0.5066282635117755,
+            "mean_z": 0.0
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "rows": 161,
+            "mean_probability": 0.8522510811779069,
+            "mean_outcome_probability": 0.6024844720496895,
+            "lower_value": 0.6000000000000001,
+            "upper_value": 0.8,
+            "mean_value": 0.7045021623558139,
+            "mean_z": 0.20496894409937888
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "rows": 577,
+            "mean_probability": 0.9791758281002838,
+            "mean_outcome_probability": 0.8110918544194108,
+            "lower_value": 0.8,
+            "upper_value": 1.0,
+            "mean_value": 0.9583516562005676,
+            "mean_z": 0.6221837088388215
+          }
+        ],
+        "family_MSE_decreased_increased_equal": [29, 23, 0],
+        "actual_training_forwards": 30104,
+        "actual_measurement_forwards": 462509,
+        "actual_total_forwards": 492613,
+        "added_seen": 30104,
+        "public_seen": 0,
+        "added_distinct": 3763,
+        "public_distinct": 0,
+        "added_repeated_draws": 26341,
+        "public_repeated_draws": 0,
+        "public_candidate_rows_metadata_not_extra_forwards": 0,
+        "public_completed_by_file": null,
+        "public_file_decay": null,
+        "selected_BEST_descriptor_metadata_ref_only": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/nnue-teacher-refresh423-v1/W-v1/best-model/manifest.json",
+          "sha256": "fbf0beb86fdf7f42f5bdd88893df215423ca86873da04308ed5029128edaf70a",
+          "bytes": 681,
+          "mode": "0600"
+        },
+        "per_row_exposure_vector": "not read; totals/distinct are observed, exact individual visit vector not independently decoded"
+      },
+      "F": {
+        "native_fit_status": "COMPLETE",
+        "operation_status": "saved complete; original manifest retained",
+        "BEST_step": 0,
+        "LAST_step": 941,
+        "initial_newV": {
+          "rows": 2498,
+          "mse": 1.0,
+          "family_mse": 1.0,
+          "sign_rows": 2498,
+          "sign_accuracy": 0.0,
+          "saturation_fraction": 0.0,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "BEST_newV": {
+          "rows": 2498,
+          "mse": 1.0,
+          "family_mse": 1.0,
+          "sign_rows": 2498,
+          "sign_accuracy": 0.0,
+          "saturation_fraction": 0.0,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "LAST_newV": {
+          "rows": 2498,
+          "mse": 1.463405844924263,
+          "family_mse": 1.4889762317005077,
+          "sign_rows": 2498,
+          "sign_accuracy": 0.5460368294635709,
+          "saturation_fraction": 0.45876701361088873,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "newV_family_relative_change_initial_to_BEST": 0.0,
+        "initial_newT": {
+          "rows": 3763,
+          "mse": 1.0,
+          "family_mse": 1.0,
+          "sign_rows": 3763,
+          "sign_accuracy": 0.0,
+          "saturation_fraction": 0.0,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "BEST_newT": {
+          "rows": 3763,
+          "mse": 1.0,
+          "family_mse": 1.0,
+          "sign_rows": 3763,
+          "sign_accuracy": 0.0,
+          "saturation_fraction": 0.0,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "LAST_newT": {
+          "rows": 3763,
+          "mse": 0.000690240118077907,
+          "family_mse": 0.0006626878167974298,
+          "sign_rows": 3763,
+          "sign_accuracy": 1.0,
+          "saturation_fraction": 0.9944193462662769,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "BEST_publicT_panel": {
+          "rows": 8192,
+          "mse": 1.0,
+          "family_mse": null,
+          "sign_rows": 8192,
+          "sign_accuracy": 0.0,
+          "saturation_fraction": 0.0,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "BEST_full_publicV": {
+          "rows": 419150,
+          "mse": 1.0,
+          "family_mse": null,
+          "sign_rows": 419150,
+          "sign_accuracy": 0.0,
+          "saturation_fraction": 0.0,
+          "draw_rows": 0,
+          "draw_mean_absolute_value": null
+        },
+        "BEST_newV_stock": {
+          "16..20": {
+            "rows": 76,
+            "mse": 1.0,
+            "sign_rows": 76,
+            "sign_accuracy": 0.0,
+            "mean_prediction": 0.0,
+            "mean_target": -0.02631578947368421
+          },
+          "8..15": {
+            "rows": 558,
+            "mse": 1.0,
+            "sign_rows": 558,
+            "sign_accuracy": 0.0,
+            "mean_prediction": 0.0,
+            "mean_target": -0.0035842293906810036
+          },
+          "1..7": {
+            "rows": 1709,
+            "mse": 1.0,
+            "sign_rows": 1709,
+            "sign_accuracy": 0.0,
+            "mean_prediction": 0.0,
+            "mean_target": 0.011117612638970159
+          },
+          "0..0": {
+            "rows": 155,
+            "mse": 1.0,
+            "sign_rows": 155,
+            "sign_accuracy": 0.0,
+            "mean_prediction": 0.0,
+            "mean_target": 0.05806451612903226
+          }
+        },
+        "initial_newV_stock": {
+          "16..20": {
+            "rows": 76,
+            "mse": 1.0,
+            "sign_rows": 76,
+            "sign_accuracy": 0.0,
+            "mean_prediction": 0.0,
+            "mean_target": -0.02631578947368421
+          },
+          "8..15": {
+            "rows": 558,
+            "mse": 1.0,
+            "sign_rows": 558,
+            "sign_accuracy": 0.0,
+            "mean_prediction": 0.0,
+            "mean_target": -0.0035842293906810036
+          },
+          "1..7": {
+            "rows": 1709,
+            "mse": 1.0,
+            "sign_rows": 1709,
+            "sign_accuracy": 0.0,
+            "mean_prediction": 0.0,
+            "mean_target": 0.011117612638970159
+          },
+          "0..0": {
+            "rows": 155,
+            "mse": 1.0,
+            "sign_rows": 155,
+            "sign_accuracy": 0.0,
+            "mean_prediction": 0.0,
+            "mean_target": 0.05806451612903226
+          }
+        },
+        "BEST_newV_calibration": [
+          {
+            "lower": 0.0,
+            "upper": 0.1,
+            "rows": 0,
+            "mean_probability": null,
+            "mean_outcome_probability": null,
+            "lower_value": -1.0,
+            "upper_value": -0.8,
+            "mean_value": null,
+            "mean_z": null
+          },
+          {
+            "lower": 0.1,
+            "upper": 0.2,
+            "rows": 0,
+            "mean_probability": null,
+            "mean_outcome_probability": null,
+            "lower_value": -0.8,
+            "upper_value": -0.6,
+            "mean_value": null,
+            "mean_z": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.3,
+            "rows": 0,
+            "mean_probability": null,
+            "mean_outcome_probability": null,
+            "lower_value": -0.6,
+            "upper_value": -0.4,
+            "mean_value": null,
+            "mean_z": null
+          },
+          {
+            "lower": 0.3,
+            "upper": 0.4,
+            "rows": 0,
+            "mean_probability": null,
+            "mean_outcome_probability": null,
+            "lower_value": -0.4,
+            "upper_value": -0.19999999999999996,
+            "mean_value": null,
+            "mean_z": null
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.5,
+            "rows": 0,
+            "mean_probability": null,
+            "mean_outcome_probability": null,
+            "lower_value": -0.19999999999999996,
+            "upper_value": 0.0,
+            "mean_value": null,
+            "mean_z": null
+          },
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "rows": 2498,
+            "mean_probability": 0.5,
+            "mean_outcome_probability": 0.5048038430744596,
+            "lower_value": 0.0,
+            "upper_value": 0.19999999999999996,
+            "mean_value": 0.0,
+            "mean_z": 0.009607686148919135
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.7,
+            "rows": 0,
+            "mean_probability": null,
+            "mean_outcome_probability": null,
+            "lower_value": 0.19999999999999996,
+            "upper_value": 0.3999999999999999,
+            "mean_value": null,
+            "mean_z": null
+          },
+          {
+            "lower": 0.7,
+            "upper": 0.8,
+            "rows": 0,
+            "mean_probability": null,
+            "mean_outcome_probability": null,
+            "lower_value": 0.3999999999999999,
+            "upper_value": 0.6000000000000001,
+            "mean_value": null,
+            "mean_z": null
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "rows": 0,
+            "mean_probability": null,
+            "mean_outcome_probability": null,
+            "lower_value": 0.6000000000000001,
+            "upper_value": 0.8,
+            "mean_value": null,
+            "mean_z": null
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "rows": 0,
+            "mean_probability": null,
+            "mean_outcome_probability": null,
+            "lower_value": 0.8,
+            "upper_value": 1.0,
+            "mean_value": null,
+            "mean_z": null
+          }
+        ],
+        "family_MSE_decreased_increased_equal": [0, 0, 52],
+        "actual_training_forwards": 240832,
+        "actual_measurement_forwards": 476962,
+        "actual_total_forwards": 717794,
+        "added_seen": 240832,
+        "public_seen": 0,
+        "added_distinct": 3763,
+        "public_distinct": 0,
+        "added_repeated_draws": 237069,
+        "public_repeated_draws": 0,
+        "public_candidate_rows_metadata_not_extra_forwards": 0,
+        "public_completed_by_file": null,
+        "public_file_decay": null,
+        "selected_BEST_descriptor_metadata_ref_only": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/nnue-teacher-refresh423-v1/F-v1/initial-model/manifest.json",
+          "sha256": "5ccf7929fc29ad5c8690794449790cac6607e5254c6e9534277b9d7dce49d300",
+          "bytes": 681,
+          "mode": "0600"
+        },
+        "per_row_exposure_vector": "not read; totals/distinct are observed, exact individual visit vector not independently decoded"
+      }
+    },
+    "stock_rows": {
+      "eligible_T": {
+        "16..20": 320,
+        "8..15": 2217,
+        "1..7": 6685,
+        "0": 1083
+      },
+      "selected_T": {
+        "16..20": 314,
+        "8..15": 1183,
+        "1..7": 1632,
+        "0": 634
+      },
+      "validation": {
+        "16..20": 76,
+        "8..15": 558,
+        "1..7": 1709,
+        "0": 155
+      }
+    },
+    "raw_eligible_T_distinct": 10303,
+    "actual_selected_R": 3763,
+    "selection_4096_guide_shortfall": 333,
+    "shared_INITIAL_observed": {
+      "scope_rows": 14453,
+      "physical_new_observations_reused_for_R_W": 0,
+      "duplicated_rows_not_executed": 28906,
+      "same_actual_FileRef_and_step0_metrics": true
+    },
+    "forward_accounting": {
+      "training_rows": 331144,
+      "measurement_rows": 1878942,
+      "fits_total": 2210086,
+      "changed_weights_native_heads": 480,
+      "NNUE_completed_total": 2210566,
+      "NNUE_cap": 4000000,
+      "Sigma_generation": 716901,
+      "Sigma_oldq": 1294,
+      "Sigma_total": 718195,
+      "Sigma_cap": 2000000,
+      "physical_FT_hardware": "UNKNOWN; logical rows/heads do not establish physical FT counts"
+    },
+    "old_q": {
+      "states": 28,
+      "original_games": 12,
+      "states_are_not_independent_or_population_sample": true,
+      "selection": "原journal path/game/case順、各game/残壁層の最初の保存局面、chronological、最大32。欠測補充なし。",
+      "stock_strata_counts": {
+        "0": 4,
+        "1..7": 12,
+        "16..20": 1,
+        "8..15": 11
+      },
+      "simulations_per_state": 64,
+      "logical_physical_executed_rows": 1294,
+      "terminal_no_nn_counter_sum": 498,
+      "MCTS_q_min_mean_max": [
+        -0.9999476671218872, -0.7837645959641252, 0.732344388961792
+      ],
+      "static_root_min_mean_max": [
+        -0.9998698830604553, -0.7984254944936505, 0.9689695239067078
+      ],
+      "q_static_opposite_nonzero_signs": 3,
+      "fixed_first_example": {
+        "state_id": "383-case08-ply011",
+        "source_position": {
+          "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/nnue-loss-cases383-v1/analysis-v2/positions/case-08-p1.json",
+          "sha256": "4b356e77592930238e68c54369e277abaefda3f564173e1f046daecf1effe9ed",
+          "bytes": 16061,
+          "mode": "0644"
+        },
+        "prefix_sha256": "71d535e9880ecb07aeae3864da71a62edb3223651dbe03bf1c2e6dcca97757c1",
+        "full_prefix_actions": [186, 77, 13, 68, 85, 59, 87, 202, 22, 125, 198],
+        "state": {
+          "schemaVersion": 1,
+          "rulesetId": "standard-2p-v1",
+          "pawns": [22, 59],
+          "wallsRemaining": [6, 8],
+          "horizontalWalls": [4, 6, 44],
+          "verticalWalls": [41, 53, 57],
+          "turn": 1,
+          "winner": null,
+          "ply": 11,
+          "legalMask": [
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1,
+            0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1,
+            1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0,
+            1, 1
+          ],
+          "positionKey": "163b06081200001000000000500220020000000000",
+          "researchHistoryKey": "4,2|5,6|1|4,0;4,5;6,0|1,5;1,7;5,6|6,8",
+          "currentRepetitionCount": 1
+        },
+        "old_actual_NNUE_action": {
+          "id": 156,
+          "coordinate": "V(d2)",
+          "origin_pawn_coordinate": "f7"
+        },
+        "old_actual_NNUE_searched_value_STM": 0.95947003,
+        "old_actual_NNUE_completed_depth": 3,
+        "old_actual_NNUE_PV": [156, 193, 207],
+        "old_actual_NNUE_stop": "internal_time_limit",
+        "current_Sigma_MCTS64_q_STM": 0.09711781144142151,
+        "current_Sigma_static_root_nn_STM": -0.005028305575251579,
+        "current_Sigma_action": 68,
+        "stock_sum": 14,
+        "comparison_limit": "Same full prefix, different evaluator/search/budget. Historical NNUE root-searched value, current MCTS q, and current static head are different quantities. No teacher-truth, forced-WDL, same-leaf, causal old-loss or good/bad-move conclusion."
+      },
+      "labels": "q is descriptive only; all four fits used z, no q fit or new forward"
+    },
+    "original_known_outer_seconds_once": {
+      "U_original_preinitialization_FAILED_1": 8.276654534012778,
+      "U_original_preinitialization_FAILED_2": 7.641188381006941,
+      "U_completed_fit_original_outer": 8.027321236004354,
+      "R_completed_fit_OPERATION_FAILED_original_outer": 11.86394309301977,
+      "WF_shared_outer_once_not_twice": 18.122861409006873,
+      "changed_weights_original_outer": 2.2364066139853094,
+      "oldq_original_outer": 5.31880116899265
+    },
+    "known_outer_subtotal_seconds": 61.487176436028676,
+    "cost_limit": "WF counted once; no nested native or overlapping fit wall addition. Generation/conversion/other failed jobs/source/LLM/admin total and continuous family peak not all covered here; UNKNOWN remains.",
+    "frozen_conditions": "No new scale, generation, fifth fit, q teacher, model/feature/default change, bootstrap or scientific dispatch. Future original arena160/1G keeps its fixed family/method/model scope.",
+    "disposition": "Descriptive preparation only. W newV loss improvement and publicV trade-off do not establish strength; F BEST0 is fresh initialization, not incumbent. R original operational FAILED stays FAILED. Await original arena on this same claimant/in_progress leaf."
+  },
+  "new_arena_example": {
+    "selection": "First two original archive records of primary operation0, fixed before decode; no outcome-based replacement",
+    "global_family_id": 0,
+    "lineage": "423-evaluation:fixed-d-family-000000",
+    "full_prefix": [161, 178, 195, 125],
+    "rules": "standard_2p_threefold",
+    "original_archive": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-teacher-refresh423-v1/arena160-v1/bounded-0-0/data/completed.jsonl.gz",
+      "sha256": "541b3571c59113d21818e5af637bce577b0fd4c145287365f40f3d5928e41f16",
+      "bytes": 1023898,
+      "mode": "0644"
+    },
+    "records": [
+      {
+        "model": "W",
+        "game": 0,
+        "candidate_color": 0,
+        "archive_line": 1,
+        "raw_line_sha256": "2bfce21f2d281a7fb7f1985ee185e5a995dad8ae773fccd80dd4654459f86dc4",
+        "raw_line_bytes": 171984,
+        "ply": 4,
+        "side_to_move": 0,
+        "action": 138,
+        "value_STM": -0.27509895,
+        "completed_depth": 4,
+        "PV": [138, 196],
+        "stop": "internal_time_limit",
+        "authority_receipt_ns": 89295201,
+        "deadline_ns": 100027551,
+        "returned_ns": 98625045,
+        "commit_ns": 98658727,
+        "caller_seconds": 0.098631176,
+        "thinking_seconds": 0.08926765,
+        "completed_snapshot_work": {
+          "TT_representation": "compact359-board-zobrist-v1-context128-v1-leaf410-v1-safe-race411-v1",
+          "cutoffs": 14121,
+          "delta_updates": 53451,
+          "leaf_count": null,
+          "nodes": 53455,
+          "physical_nn_calls": null,
+          "policy_calls": 0,
+          "pvs_researches": 43,
+          "static_evaluations": 38039,
+          "terminal": 0,
+          "tt_board_hash_reads": 15412,
+          "tt_board_hash_updates": 53451,
+          "tt_bound_cutoffs": 958,
+          "tt_capacity_skips": 0,
+          "tt_collisions": 64,
+          "tt_context_initial_items": 5,
+          "tt_context_matches": 1446,
+          "tt_context_misses": 4322,
+          "tt_context_transitions": 53451,
+          "tt_exact_hits": 16,
+          "tt_generation": 4,
+          "tt_hash_collisions": 0,
+          "tt_hashes": 9,
+          "tt_illegal_moves": 0,
+          "tt_index_collisions": 64,
+          "tt_key_builds": 15420,
+          "tt_key_hits": 5768,
+          "tt_order_context_mismatch": 4322,
+          "tt_order_only": 4718,
+          "tt_probes": 15416,
+          "tt_replacements": 4860,
+          "tt_retained_bytes": 83886128,
+          "tt_usable_depth": 1050
+        },
+        "whole_search_work_alternative_view": {
+          "TT_representation": "compact359-board-zobrist-v1-context128-v1-leaf410-v1-safe-race411-v1",
+          "cutoffs": 15440,
+          "delta_updates": 63214,
+          "leaf_count": null,
+          "nodes": 63219,
+          "physical_nn_calls": null,
+          "policy_calls": 0,
+          "pvs_researches": 59,
+          "static_evaluations": 45955,
+          "terminal": 0,
+          "tt_board_hash_reads": 17259,
+          "tt_board_hash_updates": 63214,
+          "tt_bound_cutoffs": 1411,
+          "tt_capacity_skips": 0,
+          "tt_collisions": 80,
+          "tt_context_initial_items": 5,
+          "tt_context_matches": 2067,
+          "tt_context_misses": 4346,
+          "tt_context_transitions": 63214,
+          "tt_exact_hits": 21,
+          "tt_generation": 5,
+          "tt_hash_collisions": 0,
+          "tt_hashes": 10,
+          "tt_illegal_moves": 0,
+          "tt_index_collisions": 80,
+          "tt_key_builds": 17268,
+          "tt_key_hits": 6413,
+          "tt_order_context_mismatch": 4346,
+          "tt_order_only": 4805,
+          "tt_probes": 17264,
+          "tt_replacements": 5063,
+          "tt_retained_bytes": 83886128,
+          "tt_usable_depth": 1608
+        },
+        "AI_worker_core": 2,
+        "actual_namespace": {
+          "evaluator": "nnue-residual-f32:sha256:8a8eb7fb87035f03c4cfa6b45ca1aa5d2f1b144c6fa1298dd11b82975307953d:simd=false",
+          "rules": "research-standard-2p-threefold-goal-first-v1",
+          "selectivity": "fullwidth-PVS-MPC-OFF-v1:cheap-static376-integer-parent-v1:control:lmr408-depth-rank-log63-extra0to3-pvs-verify-v1"
+        },
+        "actual_following_actions": [138, 75, 13, 204, 151, 207, 22, 188],
+        "actual_goal_winner": 1
+      },
+      {
+        "model": "BEST43",
+        "game": 1,
+        "candidate_color": 1,
+        "archive_line": 2,
+        "raw_line_sha256": "7c3e0e1f3fe4890feeb23eaf016f3e30d94db8ecd1ca82c39e965a792d222463",
+        "raw_line_bytes": 255963,
+        "ply": 4,
+        "side_to_move": 0,
+        "action": 146,
+        "value_STM": -0.31973183,
+        "completed_depth": 4,
+        "PV": [146, 191, 138, 208],
+        "stop": "internal_time_limit",
+        "authority_receipt_ns": 83960273,
+        "deadline_ns": 100034305,
+        "returned_ns": 98344114,
+        "commit_ns": 98387371,
+        "caller_seconds": 0.098353066,
+        "thinking_seconds": 0.083925968,
+        "completed_snapshot_work": {
+          "TT_representation": "compact359-board-zobrist-v1-context128-v1-leaf410-v1-safe-race411-v1",
+          "cutoffs": 13930,
+          "delta_updates": 51044,
+          "leaf_count": null,
+          "nodes": 51048,
+          "physical_nn_calls": null,
+          "policy_calls": 0,
+          "pvs_researches": 47,
+          "static_evaluations": 35882,
+          "terminal": 0,
+          "tt_board_hash_reads": 15162,
+          "tt_board_hash_updates": 51044,
+          "tt_bound_cutoffs": 917,
+          "tt_capacity_skips": 0,
+          "tt_collisions": 70,
+          "tt_context_initial_items": 5,
+          "tt_context_matches": 1376,
+          "tt_context_misses": 4134,
+          "tt_context_transitions": 51044,
+          "tt_exact_hits": 16,
+          "tt_generation": 4,
+          "tt_hash_collisions": 0,
+          "tt_hashes": 9,
+          "tt_illegal_moves": 0,
+          "tt_index_collisions": 70,
+          "tt_key_builds": 15170,
+          "tt_key_hits": 5510,
+          "tt_order_context_mismatch": 4134,
+          "tt_order_only": 4505,
+          "tt_probes": 15166,
+          "tt_replacements": 4662,
+          "tt_retained_bytes": 83886128,
+          "tt_usable_depth": 1005
+        },
+        "whole_search_work_alternative_view": {
+          "TT_representation": "compact359-board-zobrist-v1-context128-v1-leaf410-v1-safe-race411-v1",
+          "cutoffs": 15025,
+          "delta_updates": 62327,
+          "leaf_count": null,
+          "nodes": 62331,
+          "physical_nn_calls": null,
+          "policy_calls": 0,
+          "pvs_researches": 68,
+          "static_evaluations": 45459,
+          "terminal": 0,
+          "tt_board_hash_reads": 16867,
+          "tt_board_hash_updates": 62327,
+          "tt_bound_cutoffs": 1433,
+          "tt_capacity_skips": 0,
+          "tt_collisions": 80,
+          "tt_context_initial_items": 5,
+          "tt_context_matches": 2017,
+          "tt_context_misses": 4241,
+          "tt_context_transitions": 62327,
+          "tt_exact_hits": 23,
+          "tt_generation": 5,
+          "tt_hash_collisions": 0,
+          "tt_hashes": 10,
+          "tt_illegal_moves": 0,
+          "tt_index_collisions": 80,
+          "tt_key_builds": 16876,
+          "tt_key_hits": 6258,
+          "tt_order_context_mismatch": 4241,
+          "tt_order_only": 4667,
+          "tt_probes": 16872,
+          "tt_replacements": 4895,
+          "tt_retained_bytes": 83886128,
+          "tt_usable_depth": 1591
+        },
+        "AI_worker_core": 6,
+        "actual_namespace": {
+          "evaluator": "nnue-residual-f32:sha256:96a5f41f875022d1752b9c999595ad58bfb2d42687a8f06de08d42b1c4215875:simd=false",
+          "rules": "research-standard-2p-threefold-goal-first-v1",
+          "selectivity": "fullwidth-PVS-MPC-OFF-v1:cheap-static376-integer-parent-v1:control:lmr408-depth-rank-log63-extra0to3-pvs-verify-v1"
+        },
+        "actual_following_actions": [146, 191, 5, 75, 138, 204, 147, 158],
+        "actual_goal_winner": 1
+      }
+    ],
+    "meaning": "Same saved starting history/rules/STM, independently clocked games and sessions. Not isolated weights/LMR causality, static values, same tree/work, or a move/WDL oracle. Completed depth4 is selective nominal.",
+    "known_local_result": "Both games end with colour1 goal; family0 candidate pair score0.5. Example fixed before decode, not selected for a W win."
+  },
+  "known_original_outer_seconds_once": {
+    "U_original_preinitialization_FAILED_1": 8.276654534012778,
+    "U_original_preinitialization_FAILED_2": 7.641188381006941,
+    "U_completed_fit_original_outer": 8.027321236004354,
+    "R_completed_fit_OPERATION_FAILED_original_outer": 11.86394309301977,
+    "WF_shared_outer_once_not_twice": 18.122861409006873,
+    "changed_weights_original_outer": 2.2364066139853094,
+    "oldq_original_outer": 5.31880116899265,
+    "pilot32_generation_once": 422.15621964397724,
+    "suffix224_generation_once": 2836.09914667299,
+    "pilot_conversion_once": 4.450889509986155,
+    "final_conversion_once": 8.044397427001968,
+    "changed_weight_original_preentry_FAILURE_once": 2.1778132210019976,
+    "arena_original_parse_FAILURE_once": 10.757869629014749,
+    "arena_original_forecast_FAILURE_once": 13.502011776989093,
+    "arena_original_partial_FAILED_outer_once": 716.6767713270092
+  },
+  "known_original_outer_subtotal_seconds": 4075.3522956439992,
+  "cost_scope": "Known selected original science/failure outers only. WF shared once, pilot once, no nested native addition. Full software/source/LLM/admin/continuous family RSS/physical NN and isolated costs UNKNOWN.",
+  "disposition": {
+    "W": "Keep frozen research candidate/evidence; newV loss gain and observed primary56.25% are promising finite observations, primary CI includes50%; no general superiority/noninferiority/Elo/default/model promotion",
+    "R": "Small saved loss change under file-order weighting; no old-generation strength conclusion, no arena R/U contrast",
+    "F": "Fresh BEST0 with strong train/held-out divergence under this one data/LR/exposure schedule; not proof of impossible scratch learning or invalid teacher",
+    "finite_trial_complete": true,
+    "UNKNOWN_refill_or_new_science": false,
+    "existing_pauses_defaults_models_seals_RAW_FAILED_fees": "UNCHANGED"
+  },
+  "next_proposal_only": {
+    "priority": 1,
+    "proposal": "If a new research comparison is authorized, freeze W and use a separately fixed independent-start book before further fitting or q+z teacher changes. About192 family pairs would target roughly5-point normal-planning halfwidth if the current family variance persists;384games is outside this160-game/1G authorization and is not launched or guaranteed sufficient. Existing family owner must count true available families; repeating initial states does not create independence.",
+    "q_plus_z_or_NNUE_selfplay": "Separate teacher/design decision only; old28 q is not an oracle and no new fit/teacher/selfplay is issued."
+  },
+  "limits": [
+    "NewV checkpoint selection uses the same52 held-out families, so selected-loss improvements are not independent confirmation",
+    "Teacher/data/initialization/LR/updates change together across relevant conditions; no single-cause claim",
+    "High-wall selectedT314, only293 atstock16 and21 at17, none18..20; high-wall V76; do not generalize to the entire opening",
+    "Current128-game primary and32-slot partial secondary share starts and have clock/selective-search variability",
+    "Only two new game records decoded for fixed example, not all155 per-move histories; aggregate fallback/error/receipt-tail totals beyond owning summaries remain UNKNOWN",
+    "No hidden model/corpus payload, Torch/ORT/forward/Search/game/solver/native build execution by analyst"
+  ]
+}
