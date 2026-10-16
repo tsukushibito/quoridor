@@ -833,6 +833,9 @@ pub struct RunReport {
 /// Inclusive spans; queue/CPU/backend phases overlap and are not summed as exclusive wall.
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct PumpProfile {
+    /// Reservation charge includes opaque/unreturned work; not a second node sum.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub arena_node_budget: Option<serde_json::Value>,
     pub evaluator_initialization_seconds: f64,
     pub backend_initialization_seconds: f64,
     pub backend_cleanup_seconds: f64,
@@ -2199,6 +2202,7 @@ fn worker(
 // threads retain their evaluator/backend/session; no inference pump is involved.
 struct EvaluationTurn {
     id: RequestId,
+    node_limit: Option<u64>,
     root: SigmaContext,
     started: Instant,
     rng: Rng,
@@ -2267,6 +2271,7 @@ impl std::error::Error for EvaluationInitializationFailure {
     }
 }
 struct EvaluationWorkers {
+    node_budget: Option<crate::resources::NodeBudget>,
     workers: Vec<EvaluationWorker>,
     events: mpsc::Receiver<EvaluationEvent>,
     cancel: Arc<AtomicBool>,
@@ -2283,6 +2288,11 @@ impl EvaluationWorkers {
         let (events, rx) = mpsc::channel();
         let cancel = Arc::new(AtomicBool::new(false));
         let mut owned = Self {
+            node_budget: config
+                .arena
+                .as_ref()
+                .and_then(|a| a.max_total_nodes)
+                .map(crate::resources::NodeBudget::new),
             workers: Vec::new(),
             events: rx,
             cancel,
@@ -2456,7 +2466,7 @@ impl EvaluationWorkers {
                         } else {
                             let limits = SearchLimits {
                                 max_depth: e.depth,
-                                max_nodes: e.max_nodes,
+                                max_nodes: turn.node_limit.unwrap_or(e.max_nodes),
                                 time_limit: e.time_ms.map(|ms| {
                                     Duration::from_millis(ms.saturating_sub(
                                         c.arena.as_ref().unwrap().return_reserve_ms,
@@ -2889,6 +2899,14 @@ fn evaluation_turn(
     pump: &mut PumpProfile,
     memory_limit: u64,
 ) -> std::result::Result<(), String> {
+    // Reserve before the thinking clock/dispatch. No next turn starts before
+    // this turn's matching terminal is drained; errors keep their reservation.
+    let node_limit = owners
+        .node_budget
+        .as_ref()
+        .map(|budget| budget.reserve(config.engines[engine].max_nodes))
+        .transpose()
+        .map_err(|error| error.to_string())?;
     // Cache the legal no-work fallback outside the receipt critical path. The
     // immutable choice is frozen by main before a later terminal is processed.
     let fallback = game.context.legal_ids().into_iter().next();
@@ -2909,6 +2927,7 @@ fn evaluation_turn(
         .commands
         .send(EvaluationCommand::Turn(Box::new(EvaluationTurn {
             id,
+            node_limit,
             root: game.context.clone(),
             started,
             rng: game.rng.clone(),
@@ -3059,6 +3078,19 @@ fn evaluation_turn(
         }
     };
     // No next turn or write occurs before this exact terminal is collected.
+    // Completed snapshots are nested: settle from the actual terminal only.
+    if let (
+        Some(budget),
+        Some(reserved),
+        EvaluationResult::Alpha {
+            result: Ok(result), ..
+        },
+    ) = (&owners.node_budget, node_limit, &terminal.0)
+    {
+        budget
+            .settle(reserved, result.stats.nodes)
+            .map_err(|error| error.to_string())?;
+    }
     received.freeze(game, sigma);
     let drained = Instant::now();
     let incomplete_counters = !matches!(
@@ -3124,6 +3156,11 @@ fn evaluation_turn(
         )
     };
     if let Some(observation) = game.observations.last_mut() {
+        if let Some(reserved) = node_limit {
+            observation.counters["operation_node_reservation"] = reserved.into();
+            observation.counters["operation_node_remaining_after_drain"] =
+                owners.node_budget.as_ref().unwrap().remaining().into();
+        }
         observation.counters["matching_terminal_collected"] = terminal.5.is_some().into();
         if terminal.5.is_none() {
             observation.counters["terminal_collected"] = false.into();
@@ -3358,6 +3395,12 @@ fn evaluate_serial_games(
         .record(outcome, rows);
     }
     let joined = owners.close();
+    pump.arena_node_budget = owners.node_budget.as_ref().map(|budget| {
+        let cap = config.arena.as_ref().unwrap().max_total_nodes.unwrap();
+        serde_json::json!({"cap":cap,"remaining":budget.remaining(),
+            "charged_nodes_including_opaque_reservations":cap-budget.remaining(),
+            "scope":"one operation; terminal node work is nested, not added again"})
+    });
     if !joined {
         stopped.get_or_insert_with(|| "worker_panicked".into());
     }
@@ -5458,6 +5501,53 @@ mod live_caller_clock_tests {
 mod research_threefold_runtime_tests {
     use super::*;
     include!("../../quoridor-core/tests/fixtures/research_threefold.rs");
+    #[test]
+    fn arena421_exhausted_operation_budget_enters_no_worker_and_preserves_unknown_parent() {
+        let c = config();
+        let mut g = game(vec![]);
+        let parent = crate::teacher_pilot::ContextRecord::from_context(&g.context);
+        let prefix = g.prefix.clone();
+        let budget = crate::resources::NodeBudget::new(1);
+        assert_eq!(budget.reserve(1).unwrap(), 1); // opaque prior work stays charged
+        let (_, events) = mpsc::channel();
+        let owners = EvaluationWorkers {
+            node_budget: Some(budget),
+            workers: vec![], // dispatch would fail: there is deliberately no AI/model
+            events,
+            cancel: Arc::new(AtomicBool::new(false)),
+        };
+        let identity = EvaluatorIdentity {
+            kind: "distance".into(),
+            content_sha256: "unused".into(),
+            row_identity: "unused".into(),
+        };
+        let mut nn = 0;
+        let mut inference_seconds = 0.;
+        let mut pump = PumpProfile::default();
+        let error = evaluation_turn(
+            &mut g,
+            0,
+            &c,
+            &owners,
+            &identity,
+            Instant::now(),
+            &mut nn,
+            &mut inference_seconds,
+            &mut pump,
+            1 << 30,
+        )
+        .unwrap_err();
+        assert!(error.contains("common_total_node_cap"));
+        assert_eq!(
+            crate::teacher_pilot::ContextRecord::from_context(&g.context),
+            parent
+        );
+        assert_eq!(g.prefix, prefix);
+        assert!(g.observations.is_empty() && g.forfeit_winner.is_none());
+        assert_eq!(nn, 0);
+        assert_eq!(owners.node_budget.as_ref().unwrap().remaining(), 0);
+        assert!(pump.arena_node_budget.is_none());
+    }
     fn config() -> Config {
         serde_json::from_value(serde_json::json!({"ruleset":"standard_2p_threefold","run_id":"threefold-fixture","output":"unused","games":1,"workers":1,"engines":[{"kind":"distance","depth":1}]})).unwrap()
     }
@@ -6230,6 +6320,7 @@ mod two_ai_374_tests {
         );
         let (_, rx) = mpsc::channel();
         let owners = EvaluationWorkers {
+            node_budget: None,
             workers: vec![],
             events: rx,
             cancel: Arc::new(AtomicBool::new(false)),
@@ -6336,6 +6427,7 @@ mod two_ai_374_tests {
         assert!(started.elapsed() >= Duration::from_millis(110));
         let (_, events) = mpsc::channel();
         let owners = EvaluationWorkers {
+            node_budget: None,
             workers: vec![],
             events,
             cancel: Arc::new(AtomicBool::new(false)),
@@ -6466,6 +6558,7 @@ mod sigma_value_runtime_tests {
         let board = game.context.position();
         let (_, receiver) = mpsc::channel();
         let owners = EvaluationWorkers {
+            node_budget: None,
             workers: vec![],
             events: receiver,
             cancel: Arc::new(AtomicBool::new(false)),

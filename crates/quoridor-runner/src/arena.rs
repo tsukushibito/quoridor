@@ -133,6 +133,9 @@ pub struct ArenaConfig {
     /// Reserve from each configured per-move caller budget for return/admission overhead.
     pub return_reserve_ms: u64,
     pub tt_entries: usize,
+    /// Whole-operation alpha node ceiling; absent keeps the existing caller.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub max_total_nodes: Option<u64>,
     pub bootstrap_seed: u64,
     pub bootstrap_resamples: usize,
     /// Expected loaded evaluator identities, in candidate/reference order. Required for research.
@@ -158,6 +161,17 @@ pub fn sha_valid(s: &str) -> bool {
 }
 impl ArenaConfig {
     pub fn validate(&self, c: &Config) -> std::result::Result<(), String> {
+        if self.max_total_nodes.is_some_and(|n| n == 0)
+            || (self.max_total_nodes.is_some()
+                && (!c.evaluation_workers()
+                    || c.engines
+                        .iter()
+                        .any(|e| !matches!(e.kind.as_str(), "nnue" | "distance"))))
+        {
+            return Err(
+                "arena total-node cap requires positive alpha evaluation-worker budget".into(),
+            );
+        }
         let width = if self.decision_only { 1 } else { 2 };
         if c.engines.len() != width
             || (self.decision_only

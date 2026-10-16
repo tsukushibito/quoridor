@@ -455,3 +455,63 @@ mod explicit_tests {
         assert!(explicit_cpu_selection(2, &[0, 1], 2, &[0, 1, 2], &no_reserve, None).is_err());
     }
 }
+
+use std::sync::atomic::{AtomicU64, Ordering};
+
+/// Shared finite work ceiling. Unreturned/error work retains its reservation.
+pub(crate) struct NodeBudget {
+    remaining: AtomicU64,
+}
+impl NodeBudget {
+    pub(crate) fn remaining(&self) -> u64 {
+        self.remaining.load(Ordering::Acquire)
+    }
+    pub(crate) fn new(nodes: u64) -> Self {
+        Self {
+            remaining: AtomicU64::new(nodes),
+        }
+    }
+    pub(crate) fn reserve(&self, per_move: u64) -> Result<u64> {
+        let mut old = self.remaining.load(Ordering::Acquire);
+        loop {
+            let take = old.min(per_move);
+            if take == 0 {
+                return Err("common_total_node_cap; remaining decisions UNKNOWN".into());
+            }
+            match self.remaining.compare_exchange_weak(
+                old,
+                old - take,
+                Ordering::AcqRel,
+                Ordering::Acquire,
+            ) {
+                Ok(_) => return Ok(take),
+                Err(now) => old = now,
+            }
+        }
+    }
+    pub(crate) fn settle(&self, reserved: u64, returned: u64) -> Result<()> {
+        if returned > reserved {
+            return Err("returned nodes exceed reserved common ceiling".into());
+        }
+        self.remaining
+            .fetch_add(reserved - returned, Ordering::AcqRel);
+        Ok(())
+    }
+}
+#[cfg(test)]
+mod common_node_budget_tests {
+    use super::*;
+    #[test]
+    fn parallel_reservations_returned_work_and_opaque_error_cannot_exceed_total() {
+        let b = NodeBudget::new(11);
+        let a = b.reserve(7).unwrap();
+        let c = b.reserve(7).unwrap();
+        assert_eq!((a, c), (7, 4));
+        assert!(b.reserve(1).is_err());
+        b.settle(a, 5).unwrap();
+        assert_eq!(b.reserve(7).unwrap(), 2);
+        // The second reservation represents an unreturned Err; no refund.
+        assert!(b.reserve(1).is_err());
+        assert!(b.settle(c, 5).is_err());
+    }
+}

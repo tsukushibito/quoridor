@@ -1,7 +1,7 @@
 //! One authoritative pilot stream; canonical data code owns both terminal labels.
 use crate::{
     arena_clock::{alpha_counters, stop_name},
-    resources,
+    resources::{self, NodeBudget},
     teacher_pilot::{self, ContextRecord, PilotConfig, ScheduledGame, Termination},
 };
 use quoridor_ai::alphabeta::{
@@ -26,7 +26,7 @@ use std::{
     path::Path,
     sync::{
         Arc,
-        atomic::{AtomicBool, AtomicU64, Ordering},
+        atomic::{AtomicBool, Ordering},
     },
     time::Instant,
 };
@@ -462,61 +462,6 @@ fn play_with_budget(
     })
 }
 
-/// Shared finite work ceiling. Unreturned/error work retains its reservation.
-struct NodeBudget {
-    remaining: AtomicU64,
-}
-impl NodeBudget {
-    fn new(nodes: u64) -> Self {
-        Self {
-            remaining: AtomicU64::new(nodes),
-        }
-    }
-    fn reserve(&self, per_move: u64) -> Result<u64> {
-        let mut old = self.remaining.load(Ordering::Acquire);
-        loop {
-            let take = old.min(per_move);
-            if take == 0 {
-                return Err("common_total_node_cap; remaining decisions UNKNOWN".into());
-            }
-            match self.remaining.compare_exchange_weak(
-                old,
-                old - take,
-                Ordering::AcqRel,
-                Ordering::Acquire,
-            ) {
-                Ok(_) => return Ok(take),
-                Err(now) => old = now,
-            }
-        }
-    }
-    fn settle(&self, reserved: u64, returned: u64) -> Result<()> {
-        if returned > reserved {
-            return Err("returned nodes exceed reserved common ceiling".into());
-        }
-        self.remaining
-            .fetch_add(reserved - returned, Ordering::AcqRel);
-        Ok(())
-    }
-}
-#[cfg(test)]
-mod common_node_budget_tests {
-    use super::*;
-    #[test]
-    fn parallel_reservations_returned_work_and_opaque_error_cannot_exceed_total() {
-        let b = NodeBudget::new(11);
-        let a = b.reserve(7).unwrap();
-        let c = b.reserve(7).unwrap();
-        assert_eq!((a, c), (7, 4));
-        assert!(b.reserve(1).is_err());
-        b.settle(a, 5).unwrap();
-        assert_eq!(b.reserve(7).unwrap(), 2);
-        // The second reservation represents an unreturned Err; no refund.
-        assert!(b.reserve(1).is_err());
-        assert!(b.settle(c, 5).is_err());
-    }
-}
-
 fn scheduled_failure(slot: &ScheduledGame, reason: String) -> GameRecord {
     GameRecord {
         game: slot.game,
@@ -945,6 +890,7 @@ pub fn run_depth6_with_cancel(
 mod configured_generation_tests {
     use super::*;
     use quoridor_data::Split;
+    use std::sync::atomic::AtomicU64;
     #[test]
     fn configured_fixed_d_cancel_and_first_error_create_no_fabricated_label_or_reply() {
         let prefix = vec![13, 75];
