@@ -107,6 +107,121 @@ class LifecycleDataAndPaths(unittest.TestCase):
                 lc.prepare_selected_operation(lc.artifact_ref(outside), "run", 0)
             self.assertFalse(Path(escaped["output"]).exists())
 
+    def test_fresh_fit_numerical_identity_binds_descriptor_config_and_seed(self):
+        """Metadata-only; no model loader, payload or numerical execution."""
+        lc = load_lifecycle()
+        descriptor = {"path": "/descriptor", "sha256": "d" * 64, "bytes": 1, "mode": "0644"}
+        warm = dict(
+            descriptor=descriptor,
+            weights=None,
+            evaluator_sha256=None,
+            optimizer="fresh",
+            scale="incumbent",
+        )
+        config = dict(
+            experiment=dict(study="mixed-outcome", warm_start=warm), training=dict(seed=42320261021)
+        )
+        model = dict(descriptor=descriptor, weights=None, evaluator_sha256=None)
+        experiment = dict(
+            phase="fit",
+            config=dict(sha256="c" * 64),
+            schedule=dict(sha256="s" * 64),
+            inputs=[],
+            models=[model],
+            rules="rules",
+            distance_units="unit",
+            value_perspective="side-to-move",
+            canonical_plan_sha256="p" * 64,
+        )
+        build = dict(artifact=dict(sha256="a" * 64))
+        with patch.object(lc, "document", return_value=config):
+            value = lc.numerical_fields(experiment, build)
+            self.assertEqual(value["weights_sha256"], [None])
+            self.assertEqual(value["evaluator_sha256"], [None])
+            self.assertEqual(value["descriptor_sha256"], ["d" * 64])
+            self.assertEqual(value["config_sha256"], "c" * 64)
+            for field, invalid in (
+                ("optimizer", "resume"),
+                ("scale", "new"),
+                ("weights", dict(sha256="w" * 64)),
+                ("evaluator_sha256", "e" * 64),
+            ):
+                with self.subTest(field=field):
+                    original = warm[field]
+                    warm[field] = invalid
+                    with self.assertRaises(lc.Refused):
+                        lc.numerical_fields(experiment, build)
+                    warm[field] = original
+            for invalid in (True, None, "21"):
+                config["training"]["seed"] = invalid
+                with self.assertRaises(lc.Refused):
+                    lc.numerical_fields(experiment, build)
+            config["training"]["seed"] = 42320261021
+            config["experiment"]["study"] = "other"
+            with self.assertRaises(lc.Refused):
+                lc.numerical_fields(experiment, build)
+            config["experiment"]["study"] = "mixed-outcome"
+            experiment["phase"] = "arena"
+            with self.assertRaises(lc.Refused):
+                lc.numerical_fields(experiment, build)
+            experiment["phase"] = "fit"
+            model["evaluator_sha256"] = "e" * 64
+            with self.assertRaises(lc.Refused):
+                lc.numerical_fields(experiment, build)
+            model["weights"] = dict(sha256="w" * 64)
+            value = lc.numerical_fields(experiment, build)
+            self.assertEqual(value["weights_sha256"], ["w" * 64])
+            self.assertEqual(value["evaluator_sha256"], ["e" * 64])
+
+    def test_fresh_fit_ref_census_omits_absent_weights_after_normal_admission(self):
+        """Isolate ref collection after synthetic prior admission; no actual run."""
+        lc = load_lifecycle()
+        descriptor = dict(path="/descriptor", sha256="d" * 64, bytes=1, mode="0644")
+        config_ref = dict(path="/config", sha256="c" * 64, bytes=1, mode="0644")
+        schedule = dict(path="/schedule", sha256="s" * 64, bytes=1, mode="0644")
+        experiment = dict(
+            schema=lc.EXPERIMENT_SCHEMA,
+            phase="fit",
+            build_manifest=dict(path="/build"),
+            config=config_ref,
+            schedule=schedule,
+            inputs=[],
+            models=[dict(descriptor=descriptor, weights=None, evaluator_sha256=None)],
+            dynamic_libraries=[],
+            planned_slots=0,
+            argv=["python", "train"],
+            numerical_qualification=None,
+        )
+        spec = dict(
+            experiment=dict(path="/experiment"),
+            artifact=dict(path="/image"),
+            argv=["unused"] * 6 + ["/cache"],
+        )
+        config = dict(experiment=dict(study="mixed-outcome"))
+        reads = []
+
+        def document(ref):
+            return experiment if ref is spec["experiment"] else config
+
+        class RefsCollected(Exception):
+            pass
+
+        with (
+            patch.object(lc, "charged_roots"),
+            patch.object(lc, "document", side_effect=document),
+            patch.object(lc, "experiment_phase_check"),
+            patch.object(lc, "accepted_build", return_value=dict(artifact=spec["artifact"])),
+            patch.object(lc, "caller_source_refs", return_value=[]),
+            patch.object(lc, "common_study_check") as admission,
+            patch.object(lc, "approved_plan", side_effect=[None, RefsCollected()]),
+            patch.object(lc, "read_ref", side_effect=lambda ref, *_: reads.append(ref)),
+        ):
+            with self.assertRaises(RefsCollected):
+                lc.experiment_check(spec)
+        admission.assert_called_once()
+        self.assertEqual(reads, [config_ref, schedule, descriptor])
+        self.assertNotIn(None, reads)
+
 
 if __name__ == "__main__":
     unittest.main()

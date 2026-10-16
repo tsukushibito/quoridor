@@ -846,6 +846,31 @@ FIT_IMPORTS = (
 
 
 def numerical_fields(experiment, manifest):
+    weights = []
+    for model in experiment["models"]:
+        if model["weights"] is None:
+            require(experiment["phase"] == "fit", "fresh weights are fit-only")
+            config = document(experiment["config"])
+            warm = config["experiment"]["warm_start"]
+            require(
+                config["experiment"]["study"] == "mixed-outcome"
+                and experiment["models"] == [model]
+                and model
+                == {
+                    "descriptor": warm["descriptor"],
+                    "weights": None,
+                    "evaluator_sha256": None,
+                }
+                and warm["weights"] is None
+                and warm["evaluator_sha256"] is None
+                and warm["optimizer"] == "fresh"
+                and warm["scale"] == "incumbent"
+                and type(config["training"]["seed"]) is int,
+                "explicit fresh initializer, descriptor normalization and bound seed",
+            )
+            weights.append(None)
+        else:
+            weights.append(model["weights"]["sha256"])
     return {
         "schema": "quoridor.research.numerical-qualification.v1",
         "status": "PASS",
@@ -855,7 +880,7 @@ def numerical_fields(experiment, manifest):
         "schedule_sha256": experiment["schedule"]["sha256"],
         "input_sha256": [r["sha256"] for r in experiment["inputs"]],
         "descriptor_sha256": [r["descriptor"]["sha256"] for r in experiment["models"]],
-        "weights_sha256": [r["weights"]["sha256"] for r in experiment["models"]],
+        "weights_sha256": weights,
         "evaluator_sha256": [r["evaluator_sha256"] for r in experiment["models"]],
         "rules": experiment["rules"],
         "distance_units": experiment["distance_units"],
@@ -1934,7 +1959,15 @@ def experiment_check(spec):
         "declared library array required",
     )
     for model in experiment["models"]:
-        refs.extend([model["descriptor"], model["weights"]])
+        refs.append(model["descriptor"])
+        if model["weights"] is None:
+            # common_study_check already checked the fresh config/seed correspondence.
+            require(
+                mixed_outcome and model["evaluator_sha256"] is None,
+                "only an admitted fresh fit omits trained weights",
+            )
+        else:
+            refs.append(model["weights"])
     for library in experiment["dynamic_libraries"]:
         require(
             isinstance(library["version"], str) and bool(library["version"].strip()),
@@ -1943,10 +1976,7 @@ def experiment_check(spec):
         refs.append(library["file"])
     refs.extend(caller_source_refs(spec, experiment))
     streamed_inputs = set()
-    if (
-        experiment["phase"] == "materialize"
-        and manifest.get("artifact_target") == "terminal-cache"
-    ):
+    if experiment["phase"] == "materialize" and manifest.get("artifact_target") == "terminal-cache":
         streamed_inputs = {r["path"] for r in document(experiment["config"])["streams"]}
     elif mixed_outcome:
         cache_root = Path(spec["argv"][6])
@@ -1972,23 +2002,17 @@ def experiment_check(spec):
     if experiment["phase"] == "generation":
         generation_check(spec, experiment)
     require(
-        type(experiment["planned_slots"]) is int
-        and 0 <= experiment["planned_slots"] <= 4096,
+        type(experiment["planned_slots"]) is int and 0 <= experiment["planned_slots"] <= 4096,
         "bounded planned denominator",
     )
-    measurement = (
-        experiment["phase"] == "compare" and experiment["argv"][1] == "measure"
-    )
+    measurement = experiment["phase"] == "compare" and experiment["argv"][1] == "measure"
     if measurement:
         measurement_config(experiment)
         approved = None
     else:
         approved = approved_plan(spec, experiment)
         refs.append(spec["approved_plan"])
-    if (
-        experiment["phase"] in {"corpus", "fit", "software-qualification"}
-        and not mixed_outcome
-    ):
+    if experiment["phase"] in {"corpus", "fit", "software-qualification"} and not mixed_outcome:
         common_study_check(spec, experiment, manifest, approved)
     if experiment["phase"] == "compare" and experiment["argv"][1] == "decisions":
         arena_decision_plan_check(experiment, approved)
