@@ -1877,7 +1877,7 @@ def cache_materialize_check(spec, experiment, manifest):
     request = document(experiment["config"])
     require(
         {"schema", "streams", "output"} <= set(request)
-        and set(request) <= {"schema", "streams", "output", "input_binding"}
+        and set(request) <= {"schema", "streams", "output", "input_binding", "mcts_configs"}
         and request["schema"] == "quoridor.common-corpus-cache-materialization.v1"
         and request["output"] == spec["data_root"],
         "saved converter config/output",
@@ -1895,23 +1895,43 @@ def cache_materialize_check(spec, experiment, manifest):
     streams = request["streams"]
     require(isinstance(streams, list) and streams, "nonempty ordered stream inputs")
     require(len({r["path"] for r in streams}) == len(streams), "distinct stream inputs")
-    require(
-        all(r in experiment["inputs"] for r in streams), "actual converter stream refs"
-    )
+    require(all(r in experiment["inputs"] for r in streams), "actual converter stream refs")
+    mcts = request.get("mcts_configs")
+    if mcts is not None:
+        require(mcts in experiment["inputs"] and mcts not in streams, "bound MCTS config-list file")
+        configs = document(mcts)
+        require(
+            isinstance(configs, list)
+            and len(configs) == len(streams)
+            and all(isinstance(r, dict) and set(r) == {"path", "sha256"} for r in configs)
+            and len({r["path"] for r in configs}) == len(configs)
+            and all(
+                any(
+                    {k: ref[k] for k in ("path", "sha256")} == r
+                    for ref in experiment["inputs"]
+                    if ref not in streams and ref != mcts
+                )
+                for r in configs
+            ),
+            "actual ordered native config references",
+        )
     argv = [manifest["artifact"]["path"]]
     for ref in streams:
-        require(Path(ref["path"]).is_absolute(), "absolute stream input")
-        argv.extend(["--input", ref["path"]])
+        path = Path(ref["path"])
+        require(path.is_absolute(), "absolute stream input")
+        if mcts is not None:
+            require(path.name == "manifest.json", "MCTS input is the actual dataset manifest")
+        argv.extend(["--input", str(path.parent) if mcts is not None else ref["path"]])
     argv.extend(["--output", spec["data_root"]])
+    if mcts is not None:
+        argv.extend(["--mcts-configs", mcts["path"], "--mcts-configs-sha256", mcts["sha256"]])
     binding = request.get("input_binding")
     if binding is not None:
         require(
             binding in experiment["inputs"] and binding not in streams,
             "distinct optional lineage input",
         )
-        argv.extend(
-            ["--input-binding", binding["path"], "--binding-sha256", binding["sha256"]]
-        )
+        argv.extend(["--input-binding", binding["path"], "--binding-sha256", binding["sha256"]])
     require(experiment["argv"] == argv, "maintained converter ordered argv")
     require(
         len(spec["data"]) == 8
@@ -4093,14 +4113,11 @@ def collect_data(spec, experiment):
     for item in spec["data"]:
         try:
             owned(item["path"], spec["owner"])
-            if (
-                experiment["phase"] == "materialize"
-                and item["name"] in COMPACT_CACHE_WIDTHS
-            ) or (experiment["phase"] == "corpus" and item["name"] == "pilot_stream"):
+            if (experiment["phase"] == "materialize" and item["name"] in COMPACT_CACHE_WIDTHS) or (
+                experiment["phase"] == "corpus" and item["name"] == "pilot_stream"
+            ):
                 ref = artifact_ref(item["path"])
-                require(
-                    ref["bytes"] <= item["limit_B"], "declared streamed output size"
-                )
+                require(ref["bytes"] <= item["limit_B"], "declared streamed output size")
                 data["files"].append(ref)
             else:
                 ref, raw = bound(item["path"], item["limit_B"])
@@ -4125,8 +4142,7 @@ def collect_data(spec, experiment):
                 data["files"].append(ref)
                 metadata = json.loads(raw)
                 require(
-                    metadata["schema"] == ARENA_PUBLICATION
-                    and metadata["closed_archive"] is False,
+                    metadata["schema"] == ARENA_PUBLICATION and metadata["closed_archive"] is False,
                     "typed retained publication failure",
                 )
                 data["publication_failure"] = metadata
@@ -4135,9 +4151,7 @@ def collect_data(spec, experiment):
                         "stage": "native_archive_publication",
                         "type": "NativePublicationFailure",
                         "message": metadata["report"]["stopped"],
-                        "secondary": metadata["report"]["pump"].get(
-                            "publication_failures", []
-                        ),
+                        "secondary": metadata["report"]["pump"].get("publication_failures", []),
                     }
                 )
             except BaseException as error:
@@ -4148,10 +4162,7 @@ def collect_data(spec, experiment):
         if live.exists():
             try:
                 c = document(experiment["config"])
-                cap = (
-                    c["arena"].get("retained_outcome_bytes")
-                    or c["max_plies"] * 16384 + 16384
-                )
+                cap = c["arena"].get("retained_outcome_bytes") or c["max_plies"] * 16384 + 16384
                 ref, _ = bound(live, c["games"] * (cap + 1))
                 data["files"].append(ref)
                 data["errors"].append(
@@ -4162,9 +4173,7 @@ def collect_data(spec, experiment):
                     }
                 )
             except BaseException as error:
-                data["errors"].append(
-                    {"stage": "live_journal_failure", **error_fact(error)}
-                )
+                data["errors"].append({"stage": "live_journal_failure", **error_fact(error)})
     if (
         experiment["phase"] == "analysis"
         and len(experiment["argv"]) > 3
@@ -4227,9 +4236,7 @@ def collect_data(spec, experiment):
             data["planned_global_slots"] = [x["slot"] for x in planned]
             config = document(experiment["config"])
             files = {
-                item["name"]: next(
-                    ref for ref in data["files"] if ref["path"] == item["path"]
-                )
+                item["name"]: next(ref for ref in data["files"] if ref["path"] == item["path"])
                 for item in spec["data"]
                 if item["name"] in {"journal", "result", "native_manifest"}
             }
@@ -4257,8 +4264,7 @@ def collect_data(spec, experiment):
                     "journal family/colour drift",
                 )
                 require(
-                    isinstance(row["observations"], list)
-                    and isinstance(row["moves"], list),
+                    isinstance(row["observations"], list) and isinstance(row["moves"], list),
                     "full scientific per-game observations required",
                 )
                 require(
@@ -4294,14 +4300,10 @@ def collect_data(spec, experiment):
             data["errors"].append({"stage": "scientific_journal", **error_fact(error)})
     if experiment["phase"] == "compare" and experiment["argv"][1] == "decisions":
         try:
-            planned, config = arena_decision_plan_check(
-                experiment, approved_plan(spec, experiment)
-            )
+            planned, config = arena_decision_plan_check(experiment, approved_plan(spec, experiment))
             data["missing_local_games"] = list(range(len(planned)))
             files = {
-                item["name"]: next(
-                    ref for ref in data["files"] if ref["path"] == item["path"]
-                )
+                item["name"]: next(ref for ref in data["files"] if ref["path"] == item["path"])
                 for item in spec["data"]
                 if item["name"] in {"journal", "result", "native_manifest"}
             }
@@ -4331,8 +4333,7 @@ def collect_data(spec, experiment):
                 require(
                     row["family"] == f"{config['run_id']}-family-{game:06}"
                     and row["winner"] is None
-                    and row["moves"]
-                    == config["arena"]["book"]["openings"][game]["prefix"]
+                    and row["moves"] == config["arena"]["book"]["openings"][game]["prefix"]
                     and row["status"] in {"decision", "unknown"}
                     and len(row["observations"]) <= 1
                     and (
@@ -4370,9 +4371,7 @@ def collect_data(spec, experiment):
                 data["scope"] = "software-only; no corpus or numerical PASS"
             elif experiment["phase"] == "fit":
                 state = json.loads(
-                    values["run_status"]
-                    if "run_status" in values
-                    else values["training"]
+                    values["run_status"] if "run_status" in values else values["training"]
                 )
                 require(
                     state["status"] in {"COMPLETE", "COMPLETED", "EARLY_STOPPED"}
@@ -4453,8 +4452,7 @@ def collect_data(spec, experiment):
 
     if (
         experiment["phase"] == "materialize"
-        and document(experiment["build_manifest"]).get("artifact_target")
-        == "terminal-cache"
+        and document(experiment["build_manifest"]).get("artifact_target") == "terminal-cache"
     ):
         try:
             cache = json.loads(values["cache_manifest"])
@@ -4470,19 +4468,43 @@ def collect_data(spec, experiment):
                 and isinstance(cache["source_content"], list)
                 and len(cache["source_content"]) == len(streams)
                 and all(
-                    content["compressed"] == ref
-                    and content["encoding"] == "gzip-single-member-v1"
-                    for content, ref in zip(cache["source_content"], streams)
+                    (
+                        content.get("encoding") == "native-teacher-dataset-shards-v1"
+                        and content.get("manifest") == {k: ref[k] for k in ("path", "sha256")}
+                    )
+                    if request.get("mcts_configs") is not None
+                    else (
+                        content["compressed"] == ref
+                        and content["encoding"] == "gzip-single-member-v1"
+                    )
+                    for content, ref in zip(cache["source_content"], streams, strict=True)
                 )
                 and type(cache["rows"]) is int
                 and cache["rows"] >= 0,
                 "complete saved cache with actual ordered stream lineage",
             )
+            mcts = request.get("mcts_configs")
+            if mcts is not None:
+                datasets = cache["mcts_datasets"]
+                require(
+                    cache["mcts_native_configs"] == {k: mcts[k] for k in ("path", "sha256")}
+                    and cache["dataset_sha"] == mcts["sha256"]
+                    and cache["common_corpus"]["rootmean_is_raw"] is True
+                    and isinstance(datasets, list)
+                    and len(datasets) == len(streams)
+                    and all(
+                        d["dataset"] == str(Path(ref["path"]).parent)
+                        and d["manifest_sha256"] == ref["sha256"]
+                        and type(d["rows"]) is int
+                        and d["rows"] >= 0
+                        for d, ref in zip(datasets, streams, strict=True)
+                    )
+                    and sum(d["rows"] for d in datasets) == cache["rows"],
+                    "honest native MCTS list-file and dataset manifest lineage",
+                )
             require(
                 cache["files"] == {n: n for n in COMPACT_CACHE_WIDTHS}
-                and set(cache["sha256"])
-                == set(cache["file_bytes"])
-                == set(COMPACT_CACHE_WIDTHS),
+                and set(cache["sha256"]) == set(cache["file_bytes"]) == set(COMPACT_CACHE_WIDTHS),
                 "closed compact physical files",
             )
             refs = {Path(ref["path"]).name: ref for ref in data["files"]}
@@ -4493,18 +4515,12 @@ def collect_data(spec, experiment):
                     and ref["sha256"] == cache["sha256"][name],
                     "actual compact byte/hash/count",
                 )
-            data["scope"] = (
-                "saved-only cache conversion; no games/Search/model/numerical PASS"
-            )
+            data["scope"] = "saved-only cache conversion; no games/Search/model/numerical PASS"
             data["cache_manifest"] = next(
-                r
-                for r in data["files"]
-                if r["path"] == str(Path(spec["data_root"]) / "cache.json")
+                r for r in data["files"] if r["path"] == str(Path(spec["data_root"]) / "cache.json")
             )
         except BaseException as error:
-            data["errors"].append(
-                {"stage": "cache_materialization", **error_fact(error)}
-            )
+            data["errors"].append({"stage": "cache_materialization", **error_fact(error)})
     if data["errors"]:
         data["status"] = "FAILED"
     return data
