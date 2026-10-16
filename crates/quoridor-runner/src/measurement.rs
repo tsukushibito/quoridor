@@ -4,8 +4,8 @@ use crate::{
     research_manifest::{self, BoundControl, Experiment},
 };
 use quoridor_ai::alphabeta::{
-    self, LmrMethod, OrderingProfile, SearchLimits, SearchNamespace, SearchResult, SearchSession,
-    StaticEvaluator, StopReason, ZeroStockApproxMethod,
+    self, LmrMethod, OrderingProfile, SafeRacePolicy, SearchLimits, SearchNamespace, SearchResult,
+    SearchSession, StaticEvaluator, StopReason, ZeroStockApproxMethod,
 };
 use quoridor_core::research::{HistoryKey, SigmaContext};
 use quoridor_data::Result;
@@ -79,6 +79,8 @@ struct Settings {
     zero_stock_approx_method: String,
     #[serde(default)]
     zero_stock_safe_race: bool,
+    #[serde(default = "default_safe_race_policy")]
+    zero_stock_safe_race_policy: String,
     namespace: SearchNamespaceSettings,
     output_bytes: usize,
     record_bytes: usize,
@@ -125,11 +127,16 @@ fn default_zero_stock_approx_method() -> String {
     ZeroStockApproxMethod::default().name().into()
 }
 
+fn default_safe_race_policy() -> String {
+    SafeRacePolicy::default().name().into()
+}
+
 fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
     if settings.loss_leaf_419 {
         loss_leaf::validate(settings, requests)?;
     }
     LmrMethod::from_name(&settings.lmr_method)?;
+    SafeRacePolicy::from_name(&settings.zero_stock_safe_race_policy)?;
     ZeroStockApproxMethod::from_name(&settings.zero_stock_approx_method)?;
     if settings
         .zero_stock_approx_min_root_walls
@@ -392,6 +399,9 @@ impl Target for SearchTarget {
         )?);
         session
             .set_zero_stock_approx_min_root_walls(self.settings.zero_stock_approx_min_root_walls)?;
+        session.set_zero_stock_safe_race_policy(SafeRacePolicy::from_name(
+            &self.settings.zero_stock_safe_race_policy,
+        )?);
         session.set_zero_stock_safe_race(self.settings.zero_stock_safe_race);
         let method = session.namespace().selectivity.clone();
         let lmr = session.lmr_enabled();
@@ -402,7 +412,7 @@ impl Target for SearchTarget {
             json!({"TT_capacity":capacity,"retained_TT_bytes":retained.0,"retained_session_metadata_history_bytes":retained.1,
                 "actual_selectivity":method,"lmr":lmr,
                 "zero_stock_safe_race":self.settings.zero_stock_safe_race,
-                "zero_stock_safe_race_method":self.settings.zero_stock_safe_race.then_some(alphabeta::ZERO_STOCK_SAFE_RACE_METHOD),
+                "zero_stock_safe_race_method":self.settings.zero_stock_safe_race.then_some(SafeRacePolicy::from_name(&self.settings.zero_stock_safe_race_policy)?.id()),
                 "zero_stock_approx_min_root_walls":self.settings.zero_stock_approx_min_root_walls,
                 "zero_stock_approx_method_requested":self.settings.zero_stock_approx_method,
                 "zero_stock_approx_method":Value::Null,
@@ -526,7 +536,7 @@ impl Target for SearchTarget {
         row["zero_stock_safe_race_method"] = json!(
             session
                 .zero_stock_safe_race_enabled()
-                .then_some(alphabeta::ZERO_STOCK_SAFE_RACE_METHOD)
+                .then_some(session.zero_stock_safe_race_policy().id())
         );
         row["completed_depth_semantics"] = json!(if session.zero_stock_safe_race_enabled() {
             "safe-race-leaf-nominal-not-root-game-WDL"
@@ -1005,7 +1015,7 @@ fn completed_depth_observation(r: &SearchResult) -> Value {
     result["zero_stock_safe_race"] = json!(s.zero_stock_safe_race_enabled);
     result["zero_stock_safe_race_method"] = json!(
         s.zero_stock_safe_race_enabled
-            .then_some(alphabeta::ZERO_STOCK_SAFE_RACE_METHOD)
+            .then_some(s.zero_stock_safe_race_policy.id())
     );
     result["cumulative_work"]["safe_race_stock0_opportunities"] =
         json!(s.safe_race_stock0_opportunities);
@@ -1016,6 +1026,10 @@ fn completed_depth_observation(r: &SearchResult) -> Value {
     result["cumulative_work"]["safe_race_history_checks"] = json!(s.safe_race_history_checks);
     result["cumulative_work"]["safe_race_history_rejects"] = json!(s.safe_race_history_rejects);
     result["cumulative_work"]["safe_race_proven_leaves"] = json!(s.safe_race_proven_leaves);
+    result["cumulative_work"]["safe_race_detour_tests"] = json!(s.safe_race_detour_tests);
+    result["cumulative_work"]["safe_race_detour_map_pairs"] = json!(s.safe_race_detour_map_pairs);
+    result["cumulative_work"]["safe_race_detour_geometry_passes"] =
+        json!(s.safe_race_detour_geometry_passes);
     if s.zero_stock_safe_race_enabled {
         result["completed_depth_semantics"] = json!("safe-race-leaf-nominal-not-root-game-WDL");
     }
@@ -1041,6 +1055,9 @@ fn observed_work(s: &alphabeta::SearchStats) -> Value {
     work["safe_race_history_checks"] = json!(s.safe_race_history_checks);
     work["safe_race_history_rejects"] = json!(s.safe_race_history_rejects);
     work["safe_race_proven_leaves"] = json!(s.safe_race_proven_leaves);
+    work["safe_race_detour_tests"] = json!(s.safe_race_detour_tests);
+    work["safe_race_detour_map_pairs"] = json!(s.safe_race_detour_map_pairs);
+    work["safe_race_detour_geometry_passes"] = json!(s.safe_race_detour_geometry_passes);
     work
 }
 fn observed(r: &SearchResult) -> Value {
@@ -1056,7 +1073,7 @@ fn observed(r: &SearchResult) -> Value {
     result["zero_stock_safe_race"] = json!(s.zero_stock_safe_race_enabled);
     result["zero_stock_safe_race_method"] = json!(
         s.zero_stock_safe_race_enabled
-            .then_some(alphabeta::ZERO_STOCK_SAFE_RACE_METHOD)
+            .then_some(s.zero_stock_safe_race_policy.id())
     );
     result["zero_stock_approx_method"] = json!(if s.zero_stock_approx_permitted {
         Some(s.zero_stock_approx_method.id())
@@ -2355,5 +2372,70 @@ mod lmr417_tests {
             lmr_bits_comparison(&Value::Null, &json!(0))["value_bits"],
             "UNKNOWN"
         );
+    }
+}
+#[cfg(test)]
+mod wall_detour424_tests {
+    use super::*;
+    #[test]
+    fn safe_race424_measurement_policy_validation_and_partial_metadata() {
+        let base = json!({"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,
+            "namespace":{"evaluator":"toy","rules":"standard","selectivity":"full"},"output_bytes":10000,"record_bytes":1000});
+        assert_eq!(
+            serde_json::from_value::<Settings>(base.clone())
+                .unwrap()
+                .zero_stock_safe_race_policy,
+            "manhattan"
+        );
+        for (name, accepted) in [
+            (json!("manhattan"), true),
+            (json!("wall_detour"), true),
+            (Value::Null, false),
+            (json!(true), false),
+            (json!("unknown"), false),
+        ] {
+            let mut v = base.clone();
+            v["zero_stock_safe_race_policy"] = name;
+            assert_eq!(
+                serde_json::from_value::<Settings>(v).is_ok_and(|s| validate(&s, &[]).is_ok()),
+                accepted
+            );
+        }
+        let r = SearchResult {
+            action: None,
+            value: None,
+            completed_depth: 0,
+            pv: vec![],
+            stop: StopReason::NodeLimit,
+            elapsed: std::time::Duration::ZERO,
+            stats: alphabeta::SearchStats {
+                zero_stock_safe_race_enabled: true,
+                zero_stock_safe_race_policy: SafeRacePolicy::WallDetour,
+                safe_race_detour_tests: 7,
+                safe_race_detour_map_pairs: 6,
+                safe_race_detour_geometry_passes: 2,
+                safe_race_tt_hits: 1,
+                ..Default::default()
+            },
+        };
+        let row = observed(&r);
+        let callback = completed_depth_observation(&r);
+        for v in [&row, &callback] {
+            assert_eq!(
+                v["zero_stock_safe_race_method"],
+                SafeRacePolicy::WallDetour.id()
+            );
+            assert_eq!(v["completed_depth"], 0);
+        }
+        for key in [
+            "safe_race_detour_tests",
+            "safe_race_detour_map_pairs",
+            "safe_race_detour_geometry_passes",
+        ] {
+            assert_eq!(row["work"][key], callback["cumulative_work"][key]);
+        }
+        assert_eq!(row["work"]["safe_race_detour_geometry_passes"], 2);
+        assert_eq!(row["work"]["safe_race_proven_leaves"], 0);
+        assert!(row["value"].is_null());
     }
 }

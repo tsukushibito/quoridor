@@ -889,6 +889,7 @@ def measurement_config(experiment):
             "zero_stock_approx_min_root_walls",
             "zero_stock_approx_method",
             "zero_stock_safe_race",
+            "zero_stock_safe_race_policy",
         }
         and {
             "roots",
@@ -924,6 +925,12 @@ def measurement_config(experiment):
     require(
         type(config.get("zero_stock_safe_race", False)) is bool,
         "measurement safe-race switch",
+    )
+    require(
+        type(config.get("zero_stock_safe_race_policy", "manhattan")) is str
+        and config.get("zero_stock_safe_race_policy", "manhattan")
+        in {"manhattan", "wall_detour"},
+        "measurement safe-race policy",
     )
     lmr_method = config.get("lmr_method", "depth_rank")
     require(
