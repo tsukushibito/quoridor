@@ -1,0 +1,40 @@
+{
+  "selection_before_rho_classification": true,
+  "nine": {
+    "source": "original411eight exactprefixes + source408batch000 games0,1,2,3 only",
+    "original_roots": "in original index order, eligible bothstock0/nonterminal only",
+    "continuations": "game0..3 savedorder; first<=32 different board+walls+STM after firstbothstock0; source outcomes/predicate/rho not used to select",
+    "dedup": "merge exact board+walls+STM retaining all origin/root/game references; first occurrence pergame and initialroot order",
+    "global_unique_limit": 128,
+    "global_cap_behavior": "if full, stop adding new distinct states, retain existing provenance; no substitution"
+  },
+  "small": {
+    "source": "same52fixture metadata/binaries as414",
+    "order": "original fixture index then raw stateID ascending",
+    "filter": "saved activeW/L and existing L<T",
+    "limit": 128,
+    "no_reselection_after_rho": true
+  },
+  "BFS": {
+    "traversal_max": 1024,
+    "max_board": 9,
+    "counts_include": "all goal maps, point-to-point and independent boundary/distance verifications; visited cells/scanned edges recorded",
+    "verification": "small independent explicitgraph fixtures, reverse pair checks subset; no oldsolver/oldsuccess suite"
+  },
+  "RAW_stream_once": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/lmr-adaptive408-arena128-unentered-v1/batch-000/data/completed.jsonl.gz",
+    "sha256": "1f459b5fe0b3f58b25d015d6a20ea5aeb9f029300e70362465bd12e8e66eb222",
+    "bytes": 1052734,
+    "mode": "0644",
+    "only_parsed_lines": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "remaining": "drain for CRC/hash only; no otherarchives or payloadcopy"
+  },
+  "new_solver_Search_NN_games_fit_Perf": 0,
+  "numerical_saved_label_changes": 0,
+  "history": "aggregate complete savedaction histories where available, keep canonical admission unknown unless bound evidence; geometry classes not actualproofleaf counts"
+}

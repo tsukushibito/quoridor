@@ -194,3 +194,8 @@ D6のKey hitは21882→367054だがcontext/depthのnumeric資格は別で、cuto
 ## 壁迂回下界候補424の有限撤去（2026-10-16）
 
 414の条件付き証明を用いたL=max(M,有限|D0[a]−D0[b]|,有限|D1[a]−D1[b]|)は424で一度実装・384calls比較した。追加証明機会は増えたが、主要whole利益を保持に足る形で支持できず、候補/temporary policy/counter/専用fixtureを撤去した。411の現役Manhattan bool/default OFFと完全履歴/typedTT/terminal/control/undoを維持する。これは一般定理の否定や一般速度・棋力の認定ではなく、固定8prefix/二反復/元費用での有限採否である。[原比較・例外・撤去software](../../research-data/ai-sigma/zero-stock-wall-detour424/report-ja.md)。新測定や別閾値の採用は発行しない。
+
+
+## 零在庫の距離条件の保存切り分け427（2026-10-16）
+
+限定保存標本では、Lを真の駒間通路距離rhoへ強めても同じ閾値を通らない例が多かった。標本は終盤4ゲーム・共有familyと小さい3×3へ偏るため、内部Searchの分布や追加BFSの費用対効果は未確定とする。424候補・observer・cache・新閾値を復活させず、411/default OFFを保つ。選択、二分類、別成分、履歴UNKNOWNと次の観測案は[427保存結果](../../research-data/ai-sigma/zero-stock-distance427/report-ja.md)を参照する。新しい計測・実装は本結果から自動発行しない。

@@ -1,0 +1,104 @@
+{
+  "schema": "quoridor.research.saved-geometry427.v1",
+  "status": "ACCEPTED_BOUNDED_DESCRIPTIVE_RESULT",
+  "source_completion": {
+    "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-distance427-analysis-v1/completion.json",
+    "sha256": "1fd59b415f4c94b088420c702d69a661e485f08f58fa641b32c625d9496fafea",
+    "bytes": 1639,
+    "mode": "0644"
+  },
+  "source_binding": {
+    "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-distance427-analysis-v1/binding.json",
+    "sha256": "b0c37ad591971e4c8897ea8d2aac63107439ed6bf7c8a47821bb916bbec61dd2",
+    "bytes": 7228,
+    "mode": "0644"
+  },
+  "source_STOP": {
+    "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-distance427-analysis-v1/STOP.json",
+    "sha256": "b70354a2c642ea779832e5f83f046f0b566c1f3ee8e2c5022b0e574d4492544d",
+    "bytes": 85636,
+    "mode": "0644"
+  },
+  "source_usage": {
+    "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-distance427-analysis-v1/usage.json",
+    "sha256": "e49197a194e1375fd247fcf49b2d928097aeb4a12935e28e09638954a7ad716c",
+    "bytes": 557,
+    "mode": "0644"
+  },
+  "artifacts": [
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/zero-stock-distance427/report-ja.md",
+      "sha256": "ad29e9c34c847818911a42810e303fa697f88397cfa0a077fc1bb6214f7fa78e",
+      "bytes": 7847,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/zero-stock-distance427/selection-plan.json",
+      "sha256": "38b444dc21783f23ab5da66180fcea84864e6e5dcb066967bda1c5c02fa05fca",
+      "bytes": 1927,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/zero-stock-distance427/selected-states.json",
+      "sha256": "8598282c0a8b8c662f1b68bfb90ae8a345f8b95d5f5aff81348e6ff18e443023",
+      "bytes": 95709,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/zero-stock-distance427/result.json",
+      "sha256": "b96f937169757d336b7cff068736b69503b8d952151cd6ea7247126ea6d85d8e",
+      "bytes": 171125,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/zero-stock-distance427/presentation.json",
+      "sha256": "4edd597af61cb46a89b3d686c7de739b9726f9d8a624bcaf1c160ee8bf530373",
+      "bytes": 26132,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/zero-stock-distance427/BFS-ledger.json",
+      "sha256": "7a56a89af51374629c137ccadd83faae02c11b02fdbcd6187f8e6ead0f6777ab",
+      "bytes": 9358,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/zero-stock-distance427/actual-input-refs.json",
+      "sha256": "b954d8b21844e002aba5b1f8480313dd2cc50cc51d2a2dff08c00582381c1058",
+      "bytes": 2380,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/zero-stock-distance427/geometry-owner-refs.json",
+      "sha256": "42468bb95bbff9608612b2a05242a7d71240aa5652bf3b6a6b4b9b6e92a988ae",
+      "bytes": 770,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/zero-stock-distance427/analyze.py",
+      "sha256": "093c061f35ab833be916c287d945f84ea9bf9a28681ff9cfcebb9135df5dbd18",
+      "bytes": 23812,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/zero-stock-distance427/present.py",
+      "sha256": "1dd49043cdc7896676327bf625f575b724dcfbb04d179e2f65fd16132c811621",
+      "bytes": 11273,
+      "mode": "0644"
+    }
+  ],
+  "accepted_counts": {
+    "nine:DISCONNECTED": 1,
+    "nine:THRESHOLD_STILL_FAILS": 12,
+    "nine:LOWER_BOUND_PASSES": 20,
+    "small:THRESHOLD_STILL_FAILS": 126,
+    "small:BOUND_TOO_WEAK": 2
+  },
+  "new_BFS_by_integration": 0,
+  "new_Search_NN_games_solver_fit": 0,
+  "canonical_E_or_proof_leaf": "UNKNOWN",
+  "selection_bias": "9x9 late positions from four games sharing two families plus one earlier root; small selection first128 L-fail W/L from first three nearly empty3x3 fixtures",
+  "message_correspondence": "One notification said nine of12 finite failures had L=rho; immutable result/report and direct saved-row arithmetic establish all12. Original notification unchanged; canonical data/report used.",
+  "cost_scope": "Original child.02453931697527878s nested; total cost/continuousRSS UNKNOWN",
+  "decision": "This sample mostly cannot satisfy the same separation threshold even with rho; no generalcause/internal-node distribution, speed/WDL/strength/default claim or candidate revival. No new observer/cache/search or threshold adopted."
+}

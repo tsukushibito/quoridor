@@ -1,0 +1,1169 @@
+{
+  "result": {
+    "path": "/workspaces/quoridor/.worktree/arena-generalization377/.artifacts/research-team/zero-stock-distance427-analysis-v1/result.json",
+    "sha256": "b96f937169757d336b7cff068736b69503b8d952151cd6ea7247126ea6d85d8e",
+    "bytes": 171125,
+    "mode": "0644"
+  },
+  "datasets": {
+    "nine": {
+      "total": 33,
+      "classes": {
+        "DISCONNECTED": 1,
+        "THRESHOLD_STILL_FAILS": 12,
+        "LOWER_BOUND_PASSES": 20
+      },
+      "finite_Lfail": 12,
+      "L_passes": 20,
+      "M_passes": 13,
+      "L_greater_M": 22,
+      "margins": {
+        "DISCONNECTED": {
+          "T_minus_L": {
+            "4": 1
+          },
+          "rho_minus_L": {},
+          "saved_labels": {
+            "UNKNOWN": 1
+          }
+        },
+        "THRESHOLD_STILL_FAILS": {
+          "T_minus_L": {
+            "1": 3,
+            "3": 4,
+            "5": 3,
+            "7": 1,
+            "9": 1
+          },
+          "rho_minus_L": {
+            "0": 12
+          },
+          "saved_labels": {
+            "UNKNOWN": 12
+          }
+        },
+        "LOWER_BOUND_PASSES": {
+          "T_minus_L": {
+            "-13": 2,
+            "-11": 1,
+            "-9": 1,
+            "-7": 3,
+            "-6": 1,
+            "-5": 3,
+            "-3": 3,
+            "-1": 6
+          },
+          "rho_minus_L": {
+            "0": 16,
+            "1": 1,
+            "2": 3
+          },
+          "saved_labels": {
+            "UNKNOWN": 20
+          }
+        }
+      },
+      "canonical_E_unknown": 33
+    },
+    "small": {
+      "total": 128,
+      "classes": {
+        "THRESHOLD_STILL_FAILS": 126,
+        "BOUND_TOO_WEAK": 2
+      },
+      "finite_Lfail": 128,
+      "L_passes": 0,
+      "M_passes": 0,
+      "L_greater_M": 32,
+      "margins": {
+        "THRESHOLD_STILL_FAILS": {
+          "T_minus_L": {
+            "1": 60,
+            "2": 44,
+            "3": 16,
+            "4": 6
+          },
+          "rho_minus_L": {
+            "0": 96,
+            "1": 22,
+            "2": 8
+          },
+          "saved_labels": {
+            "W": 74,
+            "L": 52
+          }
+        },
+        "BOUND_TOO_WEAK": {
+          "T_minus_L": {
+            "1": 2
+          },
+          "rho_minus_L": {
+            "1": 2
+          },
+          "saved_labels": {
+            "W": 2
+          }
+        }
+      },
+      "canonical_E_unknown": 128
+    }
+  },
+  "groups": [
+    {
+      "dataset": "nine",
+      "dimension": "dataset",
+      "group": "nine",
+      "total": 33,
+      "classes": {
+        "DISCONNECTED": 1,
+        "THRESHOLD_STILL_FAILS": 12,
+        "LOWER_BOUND_PASSES": 20
+      },
+      "saved_labels": {
+        "UNKNOWN": 33
+      },
+      "E_derived": {
+        "True": 33
+      }
+    },
+    {
+      "dataset": "nine",
+      "dimension": "size",
+      "group": "9",
+      "total": 33,
+      "classes": {
+        "DISCONNECTED": 1,
+        "THRESHOLD_STILL_FAILS": 12,
+        "LOWER_BOUND_PASSES": 20
+      },
+      "saved_labels": {
+        "UNKNOWN": 33
+      },
+      "E_derived": {
+        "True": 33
+      }
+    },
+    {
+      "dataset": "nine",
+      "dimension": "geometry",
+      "group": "9:182104885252078369730362648502003040256",
+      "total": 1,
+      "classes": {
+        "DISCONNECTED": 1
+      },
+      "saved_labels": {
+        "UNKNOWN": 1
+      },
+      "E_derived": {
+        "True": 1
+      }
+    },
+    {
+      "dataset": "nine",
+      "dimension": "root3",
+      "group": "411:3",
+      "total": 1,
+      "classes": {
+        "DISCONNECTED": 1
+      },
+      "saved_labels": {
+        "UNKNOWN": 1
+      },
+      "E_derived": {
+        "True": 1
+      }
+    },
+    {
+      "dataset": "nine",
+      "dimension": "geometry",
+      "group": "9:111821305482290152405129853863390937088",
+      "total": 11,
+      "classes": {
+        "THRESHOLD_STILL_FAILS": 5,
+        "LOWER_BOUND_PASSES": 6
+      },
+      "saved_labels": {
+        "UNKNOWN": 11
+      },
+      "E_derived": {
+        "True": 11
+      }
+    },
+    {
+      "dataset": "nine",
+      "dimension": "root4",
+      "group": "411:4",
+      "total": 1,
+      "classes": {
+        "THRESHOLD_STILL_FAILS": 1
+      },
+      "saved_labels": {
+        "UNKNOWN": 1
+      },
+      "E_derived": {
+        "True": 1
+      }
+    },
+    {
+      "dataset": "nine",
+      "dimension": "game0",
+      "group": "408:0",
+      "total": 11,
+      "classes": {
+        "THRESHOLD_STILL_FAILS": 5,
+        "LOWER_BOUND_PASSES": 6
+      },
+      "saved_labels": {
+        "UNKNOWN": 11
+      },
+      "E_derived": {
+        "True": 11
+      }
+    },
+    {
+      "dataset": "nine",
+      "dimension": "geometry",
+      "group": "9:110325923967081221811104924910678485504",
+      "total": 1,
+      "classes": {
+        "LOWER_BOUND_PASSES": 1
+      },
+      "saved_labels": {
+        "UNKNOWN": 1
+      },
+      "E_derived": {
+        "True": 1
+      }
+    },
+    {
+      "dataset": "nine",
+      "dimension": "root5",
+      "group": "411:5",
+      "total": 1,
+      "classes": {
+        "LOWER_BOUND_PASSES": 1
+      },
+      "saved_labels": {
+        "UNKNOWN": 1
+      },
+      "E_derived": {
+        "True": 1
+      }
+    },
+    {
+      "dataset": "nine",
+      "dimension": "game1",
+      "group": "408:1",
+      "total": 1,
+      "classes": {
+        "LOWER_BOUND_PASSES": 1
+      },
+      "saved_labels": {
+        "UNKNOWN": 1
+      },
+      "E_derived": {
+        "True": 1
+      }
+    },
+    {
+      "dataset": "nine",
+      "dimension": "geometry",
+      "group": "9:675000176176102446203793997029179434",
+      "total": 9,
+      "classes": {
+        "THRESHOLD_STILL_FAILS": 4,
+        "LOWER_BOUND_PASSES": 5
+      },
+      "saved_labels": {
+        "UNKNOWN": 9
+      },
+      "E_derived": {
+        "True": 9
+      }
+    },
+    {
+      "dataset": "nine",
+      "dimension": "root6",
+      "group": "411:6",
+      "total": 1,
+      "classes": {
+        "THRESHOLD_STILL_FAILS": 1
+      },
+      "saved_labels": {
+        "UNKNOWN": 1
+      },
+      "E_derived": {
+        "True": 1
+      }
+    },
+    {
+      "dataset": "nine",
+      "dimension": "game2",
+      "group": "408:2",
+      "total": 9,
+      "classes": {
+        "THRESHOLD_STILL_FAILS": 4,
+        "LOWER_BOUND_PASSES": 5
+      },
+      "saved_labels": {
+        "UNKNOWN": 9
+      },
+      "E_derived": {
+        "True": 9
+      }
+    },
+    {
+      "dataset": "nine",
+      "dimension": "geometry",
+      "group": "9:32254549352907635083212817123594735626",
+      "total": 11,
+      "classes": {
+        "THRESHOLD_STILL_FAILS": 3,
+        "LOWER_BOUND_PASSES": 8
+      },
+      "saved_labels": {
+        "UNKNOWN": 11
+      },
+      "E_derived": {
+        "True": 11
+      }
+    },
+    {
+      "dataset": "nine",
+      "dimension": "root7",
+      "group": "411:7",
+      "total": 1,
+      "classes": {
+        "THRESHOLD_STILL_FAILS": 1
+      },
+      "saved_labels": {
+        "UNKNOWN": 1
+      },
+      "E_derived": {
+        "True": 1
+      }
+    },
+    {
+      "dataset": "nine",
+      "dimension": "game3",
+      "group": "408:3",
+      "total": 11,
+      "classes": {
+        "THRESHOLD_STILL_FAILS": 3,
+        "LOWER_BOUND_PASSES": 8
+      },
+      "saved_labels": {
+        "UNKNOWN": 11
+      },
+      "E_derived": {
+        "True": 11
+      }
+    },
+    {
+      "dataset": "small",
+      "dimension": "dataset",
+      "group": "small",
+      "total": 128,
+      "classes": {
+        "THRESHOLD_STILL_FAILS": 126,
+        "BOUND_TOO_WEAK": 2
+      },
+      "saved_labels": {
+        "W": 76,
+        "L": 52
+      },
+      "E_derived": {
+        "UNKNOWN": 128
+      }
+    },
+    {
+      "dataset": "small",
+      "dimension": "size",
+      "group": "3",
+      "total": 128,
+      "classes": {
+        "THRESHOLD_STILL_FAILS": 126,
+        "BOUND_TOO_WEAK": 2
+      },
+      "saved_labels": {
+        "W": 76,
+        "L": 52
+      },
+      "E_derived": {
+        "UNKNOWN": 128
+      }
+    },
+    {
+      "dataset": "small",
+      "dimension": "geometry",
+      "group": "3:0",
+      "total": 42,
+      "classes": {
+        "THRESHOLD_STILL_FAILS": 42
+      },
+      "saved_labels": {
+        "W": 28,
+        "L": 14
+      },
+      "E_derived": {
+        "UNKNOWN": 42
+      }
+    },
+    {
+      "dataset": "small",
+      "dimension": "geometry",
+      "group": "3:1",
+      "total": 50,
+      "classes": {
+        "THRESHOLD_STILL_FAILS": 49,
+        "BOUND_TOO_WEAK": 1
+      },
+      "saved_labels": {
+        "W": 27,
+        "L": 23
+      },
+      "E_derived": {
+        "UNKNOWN": 50
+      }
+    },
+    {
+      "dataset": "small",
+      "dimension": "geometry",
+      "group": "3:2",
+      "total": 36,
+      "classes": {
+        "THRESHOLD_STILL_FAILS": 35,
+        "BOUND_TOO_WEAK": 1
+      },
+      "saved_labels": {
+        "W": 21,
+        "L": 15
+      },
+      "E_derived": {
+        "UNKNOWN": 36
+      }
+    }
+  ],
+  "representatives": {
+    "nine:DISCONNECTED": [
+      {
+        "n": 9,
+        "mask": 182104885252078369730362648502003040256,
+        "walls": [
+          106,
+          108,
+          122,
+          125,
+          133,
+          135,
+          138,
+          145,
+          147,
+          148,
+          149,
+          151,
+          161,
+          168,
+          178,
+          180,
+          190,
+          201,
+          204,
+          208
+        ],
+        "pawns": [
+          60,
+          56
+        ],
+        "turn": 0,
+        "stocks": [
+          0,
+          0
+        ],
+        "prefix_length": 48,
+        "history": {
+          "complete_saved_action_prefix": true,
+          "specified_occurrences": 49,
+          "weighted_counts_source": "unit arrivals from complete moves including initial state; no weighted base discarded",
+          "E_geometric_domain_derived_empty": true,
+          "E_repeated_keys_derived": 0,
+          "canonical_history_qualification": "UNKNOWN: offline action accounting; no new core replay; geometry is not actualproofleaf census"
+        },
+        "dataset": "nine",
+        "origins": [
+          {
+            "kind": "original411root",
+            "root": 3,
+            "source_game": 11,
+            "family": "402-nnue-control-off_vs_control-on-family-000005",
+            "prefix_length": 48
+          }
+        ],
+        "saved_label": "UNKNOWN",
+        "ds": 4,
+        "do": 8,
+        "M": 4,
+        "finite_goal_diffs": [
+          1,
+          2
+        ],
+        "goal_cross_values": [
+          [
+            4,
+            3
+          ],
+          [
+            6,
+            8
+          ]
+        ],
+        "L": 4,
+        "rho": null,
+        "rho_unreachable": true,
+        "candidate_winner": 0,
+        "T": 8,
+        "T_minus_L": 4,
+        "rho_minus_L": null,
+        "M_passes": false,
+        "L_passes": false,
+        "classification": "DISCONNECTED",
+        "actual_new_proof_leaf": "UNKNOWN/not measured"
+      }
+    ],
+    "nine:THRESHOLD_STILL_FAILS": [
+      {
+        "n": 9,
+        "mask": 111821305482290152405129853863390937088,
+        "walls": [
+          97,
+          99,
+          101,
+          103,
+          106,
+          108,
+          117,
+          124,
+          128,
+          129,
+          131,
+          133,
+          164,
+          168,
+          175,
+          179,
+          198,
+          203,
+          205,
+          207
+        ],
+        "pawns": [
+          58,
+          47
+        ],
+        "turn": 0,
+        "stocks": [
+          0,
+          0
+        ],
+        "prefix_length": 54,
+        "history": {
+          "complete_saved_action_prefix": true,
+          "specified_occurrences": 55,
+          "weighted_counts_source": "unit arrivals from complete moves including initial state; no weighted base discarded",
+          "E_geometric_domain_derived_empty": true,
+          "E_repeated_keys_derived": 0,
+          "canonical_history_qualification": "UNKNOWN: offline action accounting; no new core replay; geometry is not actualproofleaf census"
+        },
+        "dataset": "nine",
+        "origins": [
+          {
+            "kind": "original411root",
+            "root": 4,
+            "source_game": 0,
+            "family": "411-from408-batch000-game000",
+            "prefix_length": 54
+          },
+          {
+            "kind": "408game",
+            "batch": 0,
+            "game": 0,
+            "family": "408-nnue-control-fixed_one-vs-depth_rank-family-000000",
+            "family_id": 14,
+            "journal_line": 1,
+            "prefix_length": 54
+          }
+        ],
+        "saved_label": "UNKNOWN",
+        "ds": 6,
+        "do": 13,
+        "M": 3,
+        "finite_goal_diffs": [
+          3,
+          3
+        ],
+        "goal_cross_values": [
+          [
+            6,
+            9
+          ],
+          [
+            10,
+            13
+          ]
+        ],
+        "L": 3,
+        "rho": 3,
+        "rho_unreachable": false,
+        "candidate_winner": 0,
+        "T": 12,
+        "T_minus_L": 9,
+        "rho_minus_L": 0,
+        "M_passes": false,
+        "L_passes": false,
+        "classification": "THRESHOLD_STILL_FAILS",
+        "actual_new_proof_leaf": "UNKNOWN/not measured"
+      },
+      {
+        "n": 9,
+        "mask": 675000176176102446203793997029179434,
+        "walls": [
+          82,
+          84,
+          86,
+          103,
+          107,
+          124,
+          126,
+          128,
+          129,
+          131,
+          138,
+          143,
+          145,
+          159,
+          160,
+          162,
+          179,
+          181,
+          194,
+          200
+        ],
+        "pawns": [
+          32,
+          11
+        ],
+        "turn": 1,
+        "stocks": [
+          0,
+          0
+        ],
+        "prefix_length": 43,
+        "history": {
+          "complete_saved_action_prefix": true,
+          "specified_occurrences": 44,
+          "weighted_counts_source": "unit arrivals from complete moves including initial state; no weighted base discarded",
+          "E_geometric_domain_derived_empty": true,
+          "E_repeated_keys_derived": 0,
+          "canonical_history_qualification": "UNKNOWN: offline action accounting; no new core replay; geometry is not actualproofleaf census"
+        },
+        "dataset": "nine",
+        "origins": [
+          {
+            "kind": "original411root",
+            "root": 6,
+            "source_game": 2,
+            "family": "411-from408-batch000-game002",
+            "prefix_length": 43
+          },
+          {
+            "kind": "408game",
+            "batch": 0,
+            "game": 2,
+            "family": "408-nnue-control-fixed_one-vs-depth_rank-family-000001",
+            "family_id": 16,
+            "journal_line": 3,
+            "prefix_length": 43
+          }
+        ],
+        "saved_label": "UNKNOWN",
+        "ds": 5,
+        "do": 16,
+        "M": 5,
+        "finite_goal_diffs": [
+          5,
+          1
+        ],
+        "goal_cross_values": [
+          [
+            16,
+            11
+          ],
+          [
+            6,
+            5
+          ]
+        ],
+        "L": 5,
+        "rho": 5,
+        "rho_unreachable": false,
+        "candidate_winner": 1,
+        "T": 10,
+        "T_minus_L": 5,
+        "rho_minus_L": 0,
+        "M_passes": false,
+        "L_passes": false,
+        "classification": "THRESHOLD_STILL_FAILS",
+        "actual_new_proof_leaf": "UNKNOWN/not measured"
+      }
+    ],
+    "nine:LOWER_BOUND_PASSES": [
+      {
+        "n": 9,
+        "mask": 110325923967081221811104924910678485504,
+        "walls": [
+          90,
+          92,
+          94,
+          96,
+          114,
+          121,
+          124,
+          128,
+          130,
+          145,
+          146,
+          148,
+          152,
+          161,
+          165,
+          179,
+          201,
+          202,
+          205,
+          207
+        ],
+        "pawns": [
+          63,
+          38
+        ],
+        "turn": 0,
+        "stocks": [
+          0,
+          0
+        ],
+        "prefix_length": 50,
+        "history": {
+          "complete_saved_action_prefix": true,
+          "specified_occurrences": 51,
+          "weighted_counts_source": "unit arrivals from complete moves including initial state; no weighted base discarded",
+          "E_geometric_domain_derived_empty": true,
+          "E_repeated_keys_derived": 0,
+          "canonical_history_qualification": "UNKNOWN: offline action accounting; no new core replay; geometry is not actualproofleaf census"
+        },
+        "dataset": "nine",
+        "origins": [
+          {
+            "kind": "original411root",
+            "root": 5,
+            "source_game": 1,
+            "family": "411-from408-batch000-game001",
+            "prefix_length": 50
+          },
+          {
+            "kind": "408game",
+            "batch": 0,
+            "game": 1,
+            "family": "408-nnue-control-fixed_one-vs-depth_rank-family-000000",
+            "family_id": 14,
+            "journal_line": 2,
+            "prefix_length": 50
+          }
+        ],
+        "saved_label": "UNKNOWN",
+        "ds": 1,
+        "do": 6,
+        "M": 5,
+        "finite_goal_diffs": [
+          8,
+          5
+        ],
+        "goal_cross_values": [
+          [
+            1,
+            9
+          ],
+          [
+            11,
+            6
+          ]
+        ],
+        "L": 8,
+        "rho": 9,
+        "rho_unreachable": false,
+        "candidate_winner": 0,
+        "T": 2,
+        "T_minus_L": -6,
+        "rho_minus_L": 1,
+        "M_passes": true,
+        "L_passes": true,
+        "classification": "LOWER_BOUND_PASSES",
+        "actual_new_proof_leaf": "UNKNOWN/not measured"
+      },
+      {
+        "n": 9,
+        "mask": 111821305482290152405129853863390937088,
+        "walls": [
+          97,
+          99,
+          101,
+          103,
+          106,
+          108,
+          117,
+          124,
+          128,
+          129,
+          131,
+          133,
+          164,
+          168,
+          175,
+          179,
+          198,
+          203,
+          205,
+          207
+        ],
+        "pawns": [
+          51,
+          37
+        ],
+        "turn": 1,
+        "stocks": [
+          0,
+          0
+        ],
+        "prefix_length": 59,
+        "history": {
+          "complete_saved_action_prefix": true,
+          "specified_occurrences": 60,
+          "weighted_counts_source": "unit arrivals from complete moves including initial state; no weighted base discarded",
+          "E_geometric_domain_derived_empty": true,
+          "E_repeated_keys_derived": 0,
+          "canonical_history_qualification": "UNKNOWN: offline action accounting; no new core replay; geometry is not actualproofleaf census"
+        },
+        "dataset": "nine",
+        "origins": [
+          {
+            "kind": "408game",
+            "batch": 0,
+            "game": 0,
+            "family": "408-nnue-control-fixed_one-vs-depth_rank-family-000000",
+            "family_id": 14,
+            "journal_line": 1,
+            "prefix_length": 59
+          }
+        ],
+        "saved_label": "UNKNOWN",
+        "ds": 15,
+        "do": 3,
+        "M": 6,
+        "finite_goal_diffs": [
+          8,
+          8
+        ],
+        "goal_cross_values": [
+          [
+            3,
+            11
+          ],
+          [
+            7,
+            15
+          ]
+        ],
+        "L": 8,
+        "rho": 8,
+        "rho_unreachable": false,
+        "candidate_winner": 0,
+        "T": 7,
+        "T_minus_L": -1,
+        "rho_minus_L": 0,
+        "M_passes": false,
+        "L_passes": true,
+        "classification": "LOWER_BOUND_PASSES",
+        "actual_new_proof_leaf": "UNKNOWN/not measured"
+      }
+    ],
+    "small:THRESHOLD_STILL_FAILS": [
+      {
+        "dataset": "small",
+        "n": 3,
+        "mask": 0,
+        "walls": [],
+        "pawns": [
+          0,
+          3
+        ],
+        "turn": 0,
+        "stocks": [
+          0,
+          0
+        ],
+        "saved_label": "W",
+        "origins": [
+          {
+            "kind": "414saved52",
+            "fixture": 0,
+            "raw_id": 6,
+            "file": {
+              "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/reference-check/fixture-000.bin",
+              "sha256": "f2aadda85956dfe149a1b486ad278e306dffcfb3ed94cdd0f2a50ca42c93b102",
+              "bytes": 1570,
+              "mode": "0644"
+            }
+          }
+        ],
+        "history": {
+          "canonical_history_qualification": "UNKNOWN: saved history-free W/L, no real fullhistory"
+        },
+        "ds": 2,
+        "do": 1,
+        "M": 1,
+        "finite_goal_diffs": [
+          1,
+          1
+        ],
+        "goal_cross_values": [
+          [
+            2,
+            1
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "L": 1,
+        "rho": 1,
+        "rho_unreachable": false,
+        "candidate_winner": 1,
+        "T": 3,
+        "T_minus_L": 2,
+        "rho_minus_L": 0,
+        "M_passes": false,
+        "L_passes": false,
+        "classification": "THRESHOLD_STILL_FAILS",
+        "actual_new_proof_leaf": "UNKNOWN/not measured"
+      },
+      {
+        "dataset": "small",
+        "n": 3,
+        "mask": 0,
+        "walls": [],
+        "pawns": [
+          0,
+          3
+        ],
+        "turn": 1,
+        "stocks": [
+          0,
+          0
+        ],
+        "saved_label": "W",
+        "origins": [
+          {
+            "kind": "414saved52",
+            "fixture": 0,
+            "raw_id": 7,
+            "file": {
+              "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/reference-check/fixture-000.bin",
+              "sha256": "f2aadda85956dfe149a1b486ad278e306dffcfb3ed94cdd0f2a50ca42c93b102",
+              "bytes": 1570,
+              "mode": "0644"
+            }
+          }
+        ],
+        "history": {
+          "canonical_history_qualification": "UNKNOWN: saved history-free W/L, no real fullhistory"
+        },
+        "ds": 1,
+        "do": 2,
+        "M": 1,
+        "finite_goal_diffs": [
+          1,
+          1
+        ],
+        "goal_cross_values": [
+          [
+            2,
+            1
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "L": 1,
+        "rho": 1,
+        "rho_unreachable": false,
+        "candidate_winner": 1,
+        "T": 2,
+        "T_minus_L": 1,
+        "rho_minus_L": 0,
+        "M_passes": false,
+        "L_passes": false,
+        "classification": "THRESHOLD_STILL_FAILS",
+        "actual_new_proof_leaf": "UNKNOWN/not measured"
+      }
+    ],
+    "small:BOUND_TOO_WEAK": [
+      {
+        "dataset": "small",
+        "n": 3,
+        "mask": 1,
+        "walls": [
+          0
+        ],
+        "pawns": [
+          0,
+          4
+        ],
+        "turn": 1,
+        "stocks": [
+          0,
+          0
+        ],
+        "saved_label": "W",
+        "origins": [
+          {
+            "kind": "414saved52",
+            "fixture": 1,
+            "raw_id": 9,
+            "file": {
+              "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/reference-check/fixture-001.bin",
+              "sha256": "637c6771f27437ddb6ff7007bdfd14ac6e8f28daa0e50508508cf3ac8cd7d764",
+              "bytes": 1468,
+              "mode": "0644"
+            }
+          }
+        ],
+        "history": {
+          "canonical_history_qualification": "UNKNOWN: saved history-free W/L, no real fullhistory"
+        },
+        "ds": 2,
+        "do": 4,
+        "M": 2,
+        "finite_goal_diffs": [
+          3,
+          2
+        ],
+        "goal_cross_values": [
+          [
+            4,
+            1
+          ],
+          [
+            0,
+            2
+          ]
+        ],
+        "L": 3,
+        "rho": 4,
+        "rho_unreachable": false,
+        "candidate_winner": 1,
+        "T": 4,
+        "T_minus_L": 1,
+        "rho_minus_L": 1,
+        "M_passes": false,
+        "L_passes": false,
+        "classification": "BOUND_TOO_WEAK",
+        "actual_new_proof_leaf": "UNKNOWN/not measured"
+      },
+      {
+        "dataset": "small",
+        "n": 3,
+        "mask": 2,
+        "walls": [
+          1
+        ],
+        "pawns": [
+          2,
+          4
+        ],
+        "turn": 1,
+        "stocks": [
+          0,
+          0
+        ],
+        "saved_label": "W",
+        "origins": [
+          {
+            "kind": "414saved52",
+            "fixture": 2,
+            "raw_id": 45,
+            "file": {
+              "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/reference-check/fixture-002.bin",
+              "sha256": "36abff992369f1ef803bd418836925796f69b310bc8c397d14fd3e02a958bc30",
+              "bytes": 1468,
+              "mode": "0644"
+            }
+          }
+        ],
+        "history": {
+          "canonical_history_qualification": "UNKNOWN: saved history-free W/L, no real fullhistory"
+        },
+        "ds": 2,
+        "do": 4,
+        "M": 2,
+        "finite_goal_diffs": [
+          3,
+          2
+        ],
+        "goal_cross_values": [
+          [
+            4,
+            1
+          ],
+          [
+            0,
+            2
+          ]
+        ],
+        "L": 3,
+        "rho": 4,
+        "rho_unreachable": false,
+        "candidate_winner": 1,
+        "T": 4,
+        "T_minus_L": 1,
+        "rho_minus_L": 1,
+        "M_passes": false,
+        "L_passes": false,
+        "classification": "BOUND_TOO_WEAK",
+        "actual_new_proof_leaf": "UNKNOWN/not measured"
+      }
+    ]
+  },
+  "BFS": {
+    "traversals": 56,
+    "purposes": {
+      "goal": 18,
+      "rho": 33,
+      "boundary": 1,
+      "reversecheck": 4
+    },
+    "visited_vertices": 2209,
+    "scanned_directed_edges": 5708
+  },
+  "checks": {
+    "selected161": true,
+    "exclusive_classes_sum": true,
+    "max_each128": true,
+    "no_finite_bound_contradiction": true,
+    "boundary_definitions": 4,
+    "reverse_pairs": 4,
+    "RAW_stream_reads": 1,
+    "RAW_other_rows_parsed": 0
+  },
+  "no_recompute": "read saved result only; zero BFS/RAW/solver/Search/model calls in presentation"
+}
