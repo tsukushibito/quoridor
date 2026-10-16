@@ -213,6 +213,11 @@ fn execute() -> Result<()> {
                     "{}",
                     quoridor_runner::value_search_strength::result_receipt(&c, &report)?
                 );
+            } else if config.common_study.is_some() {
+                println!(
+                    "{}",
+                    serde_json::json!({"result":config.output.join("result.json"),"planned":report.planned,"returned":report.outcomes.len(),"rows":report.rows,"eligible_rows":report.eligible_rows,"stopped":report.stopped,"payload_saved":true})
+                );
             } else {
                 println!("{}", serde_json::to_string(&report)?);
             }
@@ -224,7 +229,17 @@ fn execute() -> Result<()> {
             strict_pairs(&args, &["--config"], &[])?;
             let config: Config =
                 serde_json::from_reader(File::open(argument(&args, "--config")?)?)?;
-            println!("{}", serde_json::to_string(&runtime::benchmark(&config)?)?);
+            let report = runtime::benchmark(&config)?;
+            if config.benchmark_repetitions.is_some() {
+                println!(
+                    "{}",
+                    serde_json::json!({"result":config.output.join("result.json"),
+                    "completed":report["records"].as_array().map(Vec::len),
+                    "stopped":report["stopped"],"payload_saved":true})
+                );
+            } else {
+                println!("{}", serde_json::to_string(&report)?);
+            }
         }
         "dataset" => {
             let action = args

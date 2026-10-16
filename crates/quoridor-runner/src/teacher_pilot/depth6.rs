@@ -14,13 +14,7 @@ fn seed(seed: u64, id: &str) -> u64 {
         Sha256::digest(format!("{}:{seed}:{id}", quoridor_data::common_corpus::VERSION).as_bytes());
     u64::from_le_bytes(bytes[..8].try_into().expect("SHA256 first8"))
 }
-/// Called once by normal global preparation, before any batch/outcome.
-/// This owns no model/search and cannot retry an entered game.
-pub fn global_schedule(
-    families: usize,
-    prefix_seed: u64,
-    lengths: &[u16],
-) -> Result<Vec<ScheduledGame>> {
+fn validate_schedule_shape(families: usize, lengths: &[u16]) -> Result<()> {
     if families == 0
         || lengths.is_empty()
         || lengths.iter().any(|n| *n == 0 || *n >= PLY_CAP)
@@ -28,6 +22,17 @@ pub fn global_schedule(
     {
         return Err("positive configured global quantity/unique prefix length order".into());
     }
+    Ok(())
+}
+
+/// Called once by normal global preparation, before any batch/outcome.
+/// This owns no model/search and cannot retry an entered game.
+pub fn global_schedule(
+    families: usize,
+    prefix_seed: u64,
+    lengths: &[u16],
+) -> Result<Vec<ScheduledGame>> {
+    validate_schedule_shape(families, lengths)?;
     let requests = (0..families)
         .map(|i| (format!("fixed-d-family-{i:06}"), lengths[i % lengths.len()]))
         .collect();
@@ -108,6 +113,9 @@ pub struct InputConfig {
     pub prefix_seed: u64,
     pub prefix_lengths: Vec<u16>,
     pub split_seed: u64,
+    /// Reuse the exact prefixes/attempts of a SHA-bound prospective input schedule.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub reuse_schedule: Option<quoridor_data::terminal_stream::BoundJson>,
     pub excluded_books: Vec<quoridor_data::terminal_stream::BoundJson>,
     /// Keep only the first scheduled member of each evaluation collision family.
     /// A refused slot stays missing; no new candidate or request is drawn.
@@ -175,7 +183,43 @@ pub fn prepare_inputs(c: &InputConfig) -> Result<serde_json::Value> {
     if !c.output.is_absolute() {
         return Err("fresh absolute global input output required".into());
     }
-    let slots = global_schedule(c.families, c.prefix_seed, &c.prefix_lengths)?;
+    let slots = if let Some(reference) = &c.reuse_schedule {
+        validate_schedule_shape(c.families, &c.prefix_lengths)?;
+        let source = reference.read()?;
+        if source["generator_version"] != quoridor_data::common_corpus::VERSION
+            || source["prefix_seed"].as_u64() != Some(c.prefix_seed)
+            || source["prefix_lengths"] != serde_json::to_value(&c.prefix_lengths)?
+        {
+            return Err("reused input schedule generator/seed/lengths differ".into());
+        }
+        let all: Vec<ScheduledGame> = serde_json::from_value(source["scheduled"].clone())?;
+        if all.len() < c.families {
+            return Err("reused schedule shorter than configured cohort".into());
+        }
+        let selected = all.into_iter().take(c.families).collect::<Vec<_>>();
+        for (id, slot) in selected.iter().enumerate() {
+            if slot.game != id
+                || slot.request_id != format!("fixed-d-family-{id:06}")
+                || slot.requested_prefix_length != c.prefix_lengths[id % c.prefix_lengths.len()]
+            {
+                return Err("reused input request/order differs".into());
+            }
+            if let Some(prefix) = &slot.prefix {
+                slot.root
+                    .as_ref()
+                    .ok_or("reused input full history absent")?
+                    .audit(prefix)?;
+                if prefix.len() != usize::from(slot.requested_prefix_length) {
+                    return Err("reused input prefix length differs".into());
+                }
+            } else if slot.scheduled_failure.is_none() {
+                return Err("missing reused slot without original failure".into());
+            }
+        }
+        selected
+    } else {
+        global_schedule(c.families, c.prefix_seed, &c.prefix_lengths)?
+    };
     let mut excluded = Vec::new();
     for (book, reference) in c.excluded_books.iter().enumerate() {
         for (i, prefix) in quoridor_data::common_corpus::excluded_book_prefixes(&reference.read()?)?
@@ -212,7 +256,8 @@ pub fn prepare_inputs(c: &InputConfig) -> Result<serde_json::Value> {
     };
     let schedule = write(
         "schedule.json",
-        &serde_json::json!({"generator_version":quoridor_data::common_corpus::VERSION,"scheduled":slots}),
+        &serde_json::json!({"generator_version":quoridor_data::common_corpus::VERSION,"prefix_seed":c.prefix_seed,
+            "prefix_lengths":c.prefix_lengths,"reused_schedule":c.reuse_schedule,"scheduled":slots}),
     )?;
     let partition = write("partition.json", &serde_json::to_value(partition)?)?;
     let prefix_book = write(
@@ -339,5 +384,69 @@ mod tests {
                 .get("unique_families")
                 .is_none()
         );
+    }
+    #[test]
+    fn input_schedule_reuse_keeps_original_attempts_missing_slots_and_repartitions_only() {
+        let root =
+            std::env::temp_dir().join(format!("input-schedule-reuse-{}", std::process::id()));
+        std::fs::create_dir(&root).unwrap();
+        let mut slots = vec![input_slot(0, &[13]), input_slot(1, &[5])];
+        for (id, slot) in slots.iter_mut().enumerate() {
+            slot.request_id = format!("fixed-d-family-{id:06}");
+        }
+        slots[1].prefix = None;
+        slots[1].root = None;
+        slots[1].canonical_prefix = None;
+        slots[1].scheduled_failure = Some("original_missing".into());
+        slots[1].attempts[0].rejection = Some("original_missing".into());
+        let master = root.join("master.json");
+        std::fs::write(
+            &master,
+            serde_json::to_vec(
+                &serde_json::json!({"generator_version":quoridor_data::common_corpus::VERSION,
+            "prefix_seed":7,"prefix_lengths":[1],"scheduled":slots}),
+            )
+            .unwrap(),
+        )
+        .unwrap();
+        let c = InputConfig {
+            families: 1,
+            prefix_seed: 7,
+            prefix_lengths: vec![1],
+            split_seed: 23,
+            excluded_books: vec![],
+            unique_families: false,
+            output: root.join("pilot"),
+            reuse_schedule: Some(BoundJson {
+                sha256: quoridor_data::file_sha(&master).unwrap(),
+                path: master,
+            }),
+        };
+        let report = prepare_inputs(&c).unwrap();
+        let schedule: BoundJson = serde_json::from_value(report["schedule"].clone()).unwrap();
+        assert_eq!(
+            schedule.read().unwrap()["scheduled"],
+            serde_json::to_value(&slots[..1]).unwrap()
+        );
+        let mut all = c.clone();
+        all.families = 2;
+        all.output = root.join("all");
+        let report = prepare_inputs(&all).unwrap();
+        let schedule: BoundJson = serde_json::from_value(report["schedule"].clone()).unwrap();
+        assert_eq!(
+            schedule.read().unwrap()["scheduled"],
+            serde_json::to_value(&slots).unwrap()
+        );
+        assert_eq!(report["missing_slots"], 1);
+        let mut wrong = c.clone();
+        wrong.prefix_seed = 8;
+        wrong.output = root.join("wrong");
+        assert!(prepare_inputs(&wrong).is_err());
+        assert!(!wrong.output.exists());
+        wrong = c.clone();
+        wrong.prefix_lengths = vec![2];
+        wrong.output = root.join("wrong-length");
+        assert!(prepare_inputs(&wrong).is_err());
+        std::fs::remove_dir_all(root).unwrap();
     }
 }

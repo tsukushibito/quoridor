@@ -833,6 +833,9 @@ pub struct RunReport {
 /// Inclusive spans; queue/CPU/backend phases overlap and are not summed as exclusive wall.
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct PumpProfile {
+    /// Requests refused before backend entry; excluded from actual backend row work.
+    #[serde(default, skip_serializing_if = "is_zero_u64")]
+    pub sigma_row_budget_refused_rows: u64,
     /// Reservation charge includes opaque/unreturned work; not a second node sum.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub arena_node_budget: Option<serde_json::Value>,
@@ -1159,6 +1162,36 @@ fn evaluator(e: &Engine, config: &Config) -> Result<InitializedEvaluator> {
     })
 }
 fn planned(config: &Config) -> Result<Vec<Planned>> {
+    if let Some(common) = &config.common_study {
+        common.validate_inputs()?;
+        let schedule = common.schedule.read()?;
+        let slots = schedule["scheduled"].as_array().ok_or("scheduled inputs")?;
+        let partition: quoridor_data::terminal::FamilyPartition =
+            serde_json::from_value(common.partition.read()?)?;
+        let requests = common.global_requests()?;
+        let mut out = Vec::new();
+        for id in common.batch_range()? {
+            if slots[id]["prefix"].is_null() {
+                continue; // Bound missing slot remains missing: no new attempt/refill.
+            }
+            let assignment = partition
+                .assignments
+                .iter()
+                .find(|a| a.game == requests[id].0)
+                .ok_or("missing family assignment")?;
+            out.push(Planned {
+                id,
+                candidate_color: 0,
+                opening: assignment.prefix.clone(),
+                family: assignment.family.clone(),
+                split: assignment.split.clone(),
+            });
+        }
+        if out.len() != config.games {
+            return Err("games must equal actual bound nonmissing slice slots".into());
+        }
+        return Ok(out);
+    }
     let (train, validation) = config.split_counts().map_err(|e| format!("config: {e}"))?;
     let mut rng = Rng::new(config.seed);
     let mut out: Vec<Planned> = Vec::new();
@@ -1408,6 +1441,9 @@ fn play_completed(
     cancel: &AtomicBool,
     run_start: Instant,
 ) -> Result<()> {
+    if config.common_study.is_some() {
+        require_completed_mcts(&teacher, config.simulations)?;
+    }
     let row = if game.record_teacher {
         Some(TeacherRow::from_context(
             format!("game-{}-ply-{}", game.planned.id, game.context.total_ply()),
@@ -1424,6 +1460,14 @@ fn play_completed(
         None
     };
     commit_action(game, action, row, config, cancel, run_start)
+}
+fn require_completed_mcts(teacher: &Teacher, simulations: u32) -> Result<()> {
+    if !matches!(teacher, Teacher::Mcts { root_visits, .. } if *root_visits == simulations) {
+        return Err(
+            "common MCTS requires every configured simulation completed before commit".into(),
+        );
+    }
+    Ok(())
 }
 fn commit_action(
     game: &mut Game,
@@ -3447,6 +3491,12 @@ fn run_inner(
     output_owned: &mut bool,
 ) -> Result<RunReport> {
     config.validate().map_err(|e| format!("config: {e}"))?;
+    if config.benchmark_repetitions.is_some() {
+        return Err("benchmark repetitions belong to benchmark".into());
+    }
+    if config.common_study.is_some() && mode != "selfplay" {
+        return Err("common MCTS inputs belong to selfplay".into());
+    }
     if (config.games as u64)
         .saturating_mul(2048)
         .saturating_add(16384)
@@ -3483,7 +3533,19 @@ fn run_inner(
     let _affinity = crate::resources::AffinityGuard::capture()?;
     let start = Instant::now();
     let evaluation = config.evaluation_workers();
-    let admission = if evaluation {
+    let admission = if config.bounded_mcts() {
+        // Existing worker and inference pump alternate on one admitted CPU.
+        // Independent processes own their own backend, queue and row quota.
+        let mut admission = crate::resources::admit(
+            1,
+            &config.cpu_cores,
+            false,
+            config.host_ram_reserve,
+            config.max_memory_bytes,
+        )?;
+        admission.inference_core = Some(admission.worker_cores[0]);
+        admission
+    } else if evaluation {
         crate::resources::admit_evaluation(
             &config.cpu_cores,
             config.management_cpu_core,
@@ -3772,8 +3834,41 @@ fn run_inner(
                     Some(Instant::now())
                 };
                 let input: Vec<_> = requests.iter().map(|r| *r.input).collect();
+                if config.bounded_mcts()
+                    && let Err(error) = admit_mcts_rows(
+                        b.counters(),
+                        config
+                            .inference
+                            .as_ref()
+                            .unwrap()
+                            .logical_row_limit
+                            .unwrap(),
+                        n as u64,
+                    )
+                {
+                    pump.sigma_row_budget_refused_rows += n as u64;
+                    deliver_inference(requests, Err(error), &mut stopped, &cancel);
+                    continue;
+                }
                 let t = Instant::now();
                 let result = b.infer(&input);
+                // CPU ORT has no hidden warm/capture/retry Run. Check actual counters too;
+                // preserve an original backend error if the call itself failed.
+                let result = if config.bounded_mcts() && result.is_ok() {
+                    admit_mcts_rows(
+                        b.counters(),
+                        config
+                            .inference
+                            .as_ref()
+                            .unwrap()
+                            .logical_row_limit
+                            .unwrap(),
+                        0,
+                    )
+                    .and(result)
+                } else {
+                    result
+                };
                 inference_seconds += t.elapsed().as_secs_f64();
                 nn_calls += n as u64;
                 pump.backend_warmup_nn = b.counters().warm_rows;
@@ -3797,11 +3892,7 @@ fn run_inner(
             }
         }
         outcomes.sort_by_key(|o| o.game);
-        if let Some(reason) = &stopped {
-            for o in &mut outcomes {
-                attach_primary_failure(o, reason);
-            }
-        }
+        attach_final_primary_failures(config, &pump, &mut outcomes, stopped.as_deref());
         if let Some(b) = backend.as_ref() {
             pump.backend_warmup_nn = b.counters().warm_rows;
             pump.backend_work = Some(inference_work(b.counters()));
@@ -3903,6 +3994,28 @@ fn run_inner(
     }
     Ok(report)
 }
+fn is_zero_u64(value: &u64) -> bool {
+    *value == 0
+}
+fn admit_mcts_rows(
+    c: InferenceCounters,
+    limit: u64,
+    next: u64,
+) -> std::result::Result<(), quoridor_inference::InferenceError> {
+    // Failed rows are already subsets, not extra work to add a second time.
+    let logical = c
+        .logical_rows
+        .checked_add(c.warm_rows)
+        .and_then(|n| n.checked_add(next));
+    let physical = c.physical_rows().and_then(|n| n.checked_add(next));
+    if logical.is_none_or(|n| n > limit) || physical.is_none_or(|n| n > limit) {
+        Err(quoridor_inference::InferenceError(
+            "Sigma MCTS row quota exhausted or counter unknown/overflow".into(),
+        ))
+    } else {
+        Ok(())
+    }
+}
 fn deliver_inference(
     requests: Vec<Request>,
     result: std::result::Result<Vec<NetworkOutput>, quoridor_inference::InferenceError>,
@@ -3977,6 +4090,34 @@ mod sigma_terminal_delivery_tests {
         assert_eq!(stopped.as_deref(), Some("inference:original-native-error"));
     }
 }
+fn attach_common_mcts_outcome(o: &Outcome, rows: &mut [TeacherRow]) -> Result<()> {
+    use quoridor_data::terminal::{TerminalProvenance, Termination, attach_terminal_targets};
+    let context = SigmaContext::from_prefix(&o.moves).map_err(|e| format!("{e:?}"))?;
+    let reason = if o.status == "unknown" {
+        Termination::Unknown
+    } else if context.position().winner.is_some() {
+        Termination::Goal
+    } else if context.is_repetition_draw() {
+        Termination::Threefold
+    } else {
+        return Err("completed MCTS game without true terminal outcome".into());
+    };
+    let provenance = TerminalProvenance::from_context(
+        &context,
+        o.moves.clone(),
+        reason,
+        o.reason.clone().unwrap_or_else(|| o.status.clone()),
+    )?;
+    if provenance.winner.map(|w| w - 1) != o.winner {
+        return Err("MCTS terminal winner differs from canonical replay".into());
+    }
+    // finish's legacy z is replaced by the same canonical provenance owner used
+    // by the compact converter. Raw root_mean/root_nn/visits stay untouched.
+    for row in rows.iter_mut() {
+        row.z = None;
+    }
+    attach_terminal_targets(rows, &provenance)
+}
 struct CompletionPublication<'a> {
     config: &'a Config,
     mode: &'a str,
@@ -3989,11 +4130,37 @@ struct CompletionPublication<'a> {
     start: Instant,
 }
 impl CompletionPublication<'_> {
-    fn record(&mut self, mut o: Outcome, r: Vec<TeacherRow>) {
+    fn record(&mut self, mut o: Outcome, mut r: Vec<TeacherRow>) {
         let record_start = Instant::now();
+        let mut preserve_outcome_cause = false;
+        if self.config.common_study.is_some()
+            && !r.is_empty()
+            && let Err(error) = attach_common_mcts_outcome(&o, &mut r)
+        {
+            let reason = format!("terminal_targets:{error}");
+            preserve_outcome_cause = o.reason.is_some() || o.failure.is_some();
+            o.status = "unknown".into();
+            o.winner = None;
+            // Keep a known originating per-game cause ahead of this secondary
+            // publication error, including the later cancellation attribution pass.
+            if self.stopped.is_none()
+                && let Some(prior) = &o.reason
+            {
+                *self.stopped = Some(prior.clone());
+            }
+            o.failure
+                .get_or_insert_with(|| crate::arena_clock::failure_from_reason(&reason));
+            o.reason.get_or_insert_with(|| reason.clone());
+            for row in &mut r {
+                row.z = None;
+                row.eligible = false;
+            }
+            record_publication_failure(self.pump, self.stopped, Some(o.game), reason);
+            self.cancel.store(true, Ordering::Relaxed);
+        }
         // A known originating cause accompanies both the durable journal and final census.
         // Keep the original per-move error/reason/cancel facts untouched.
-        if let Some(reason) = self.stopped.as_deref() {
+        if !preserve_outcome_cause && let Some(reason) = self.stopped.as_deref() {
             attach_primary_failure(&mut o, reason);
         }
         if matches!(self.mode, "arena" | "decisions")
@@ -4047,6 +4214,30 @@ impl CompletionPublication<'_> {
         }
         self.pump.recording_seconds += record_start.elapsed().as_secs_f64();
         self.outcomes.push(o);
+    }
+}
+
+// The ordinary final census owns the same per-game/publication separation as
+// the journal path. No public API or outcome schema is added.
+fn attach_final_primary_failures(
+    config: &Config,
+    pump: &PumpProfile,
+    outcomes: &mut [Outcome],
+    stopped: Option<&str>,
+) {
+    let Some(reason) = stopped else {
+        return;
+    };
+    for outcome in outcomes {
+        let preserve = config.common_study.is_some()
+            && (outcome.reason.is_some() || outcome.failure.is_some())
+            && pump.publication_failures.iter().any(|failure| {
+                failure.game == Some(outcome.game)
+                    && failure.reason.starts_with("terminal_targets:")
+            });
+        if !preserve {
+            attach_primary_failure(outcome, reason);
+        }
     }
 }
 
@@ -4114,6 +4305,9 @@ pub fn run_with_backend(
     mode: &str,
     backend: Box<dyn InferenceBackend>,
 ) -> Result<RunReport> {
+    if config.common_study.is_some() || config.bounded_mcts() {
+        return Err("bounded MCTS requires the maintained CPU ORT factory; supplied backend refused before admission".into());
+    }
     run_owned(config, mode, Some(backend))
 }
 /// One ordinary arena error funnel, distinct from successful archive publication.
@@ -4303,7 +4497,13 @@ fn benchmark_impl(
     config: &Config,
     provided: Option<Box<dyn InferenceBackend>>,
 ) -> Result<serde_json::Value> {
+    if config.bounded_mcts() && provided.is_some() {
+        return Err("bounded MCTS requires the maintained CPU ORT factory; supplied backend refused before admission".into());
+    }
     config.validate().map_err(|e| format!("config: {e}"))?;
+    if config.common_study.is_some() {
+        return Err("common training inputs belong to selfplay".into());
+    }
     let _affinity = crate::resources::AffinityGuard::capture()?;
     let admission = crate::resources::admit(
         1,
@@ -4365,7 +4565,7 @@ fn benchmark_impl(
             let plans = planned(config)?;
             for (fixture, p) in plans.iter().enumerate() {
                 for (engine, e) in config.engines.iter().enumerate() {
-                    for repeat in 0..4 {
+                    for repeat in 0..u64::from(config.benchmark_repetitions.unwrap_or(4)) {
                         if let Some(reason) = guard(config, start, admission.memory_limit) {
                             return Err(format!("benchmark:{reason}").into());
                         }
@@ -4376,12 +4576,17 @@ fn benchmark_impl(
                             return Err("terminal benchmark fixture".into());
                         }
                         let clock = Instant::now();
+                        let mut mcts_work = None;
                         let (action, value, nodes, nn_calls, depth, search_stop) = if e.kind
                             == "mcts"
                         {
                             let mut search = Search::with_limits(
                                 context.clone(),
-                                repeat,
+                                if config.benchmark_repetitions.is_some() {
+                                    config.seed.wrapping_add(fixture as u64)
+                                } else {
+                                    repeat
+                                },
                                 config.simulations,
                                 Limits {
                                     max_nodes: config.mcts_max_nodes,
@@ -4389,6 +4594,7 @@ fn benchmark_impl(
                                     max_bytes: config.mcts_max_bytes,
                                 },
                             )?;
+                            let mut root_nn = None;
                             loop {
                                 if let Some(reason) = guard(config, start, admission.memory_limit) {
                                     return Err(format!("benchmark:{reason}").into());
@@ -4398,7 +4604,34 @@ fn benchmark_impl(
                                     Progress::Complete => break,
                                     Progress::NeedInference { token, features } => {
                                         let b = backend.as_mut().ok_or("benchmark backend")?;
-                                        let output = b.infer(&[*features])?;
+                                        if config.bounded_mcts() {
+                                            admit_mcts_rows(
+                                                b.counters(),
+                                                config
+                                                    .inference
+                                                    .as_ref()
+                                                    .unwrap()
+                                                    .logical_row_limit
+                                                    .unwrap(),
+                                                1,
+                                            )?;
+                                        }
+                                        let output = b.infer(&[*features]);
+                                        let output = if config.bounded_mcts() && output.is_ok() {
+                                            admit_mcts_rows(
+                                                b.counters(),
+                                                config
+                                                    .inference
+                                                    .as_ref()
+                                                    .unwrap()
+                                                    .logical_row_limit
+                                                    .unwrap(),
+                                                0,
+                                            )
+                                            .and(output)?
+                                        } else {
+                                            output?
+                                        };
                                         if let Some(reason) =
                                             guard(config, start, admission.memory_limit)
                                         {
@@ -4407,11 +4640,26 @@ fn benchmark_impl(
                                         if output.len() != 1 {
                                             return Err("benchmark backend shape".into());
                                         }
+                                        if root_nn.is_none() {
+                                            root_nn = Some(output[0].value);
+                                        }
                                         search.supply(token, &output[0].logits, output[0].value)?;
                                     }
                                 }
                             }
                             let s = search.snapshot();
+                            if config.benchmark_repetitions.is_some()
+                                && s.root_visits != config.simulations
+                            {
+                                return Err("MCTS input observation incomplete simulations".into());
+                            }
+                            mcts_work = Some(
+                                serde_json::json!({"search_seed":if config.benchmark_repetitions.is_some() { config.seed.wrapping_add(fixture as u64) } else { repeat },"root_visits":s.root_visits,"root_mean":s.root_mean as f32,
+                                "root_mean_bits":(s.root_mean as f32).to_bits(),"root_nn":root_nn,"nn_calls":s.nn_calls,
+                                "terminal_no_nn":s.terminal_no_nn,"allocated_nodes":s.nodes,
+                                "prefix":p.opening,"ruleset":config.ruleset.id(),"total_ply":context.total_ply(),
+                                "side":context.position().turn,"stocks":context.position().walls_remaining}),
+                            );
                             (
                                 s.action,
                                 Some(s.root_mean as f32),
@@ -4450,7 +4698,7 @@ fn benchmark_impl(
                         if action.is_none() || !context.legal_ids().contains(&action.unwrap()) {
                             return Err("benchmark no complete/legal action".into());
                         }
-                        records.push(serde_json::json!({"fixture":fixture,"engine":e.kind,"repeat":repeat,"warm":repeat==0,"seconds":clock.elapsed().as_secs_f64(),"action":action,"value":value,"nodes":nodes,"nn_calls":nn_calls,"depth":depth,"simulations":if e.kind=="mcts"{Some(config.simulations)}else{None},"search_stop":search_stop,"limits":if e.kind=="mcts" {serde_json::json!({"depth":200,"nodes":config.mcts_max_nodes,"memory_bytes":config.mcts_max_bytes,"simulations":config.simulations,"time_ms":null,"budget_kind":"simulations"})} else {serde_json::json!({"depth":e.depth,"nodes":e.max_nodes,"time_ms":e.time_ms,"budget_kind":if e.time_ms.is_some(){"time_node_depth"}else{"node_depth"}})}}));
+                        records.push(serde_json::json!({"fixture":fixture,"engine":e.kind,"repeat":repeat,"warm":repeat==0 && config.benchmark_repetitions.is_none(),"mcts_work":mcts_work,"seconds":clock.elapsed().as_secs_f64(),"action":action,"value":value,"nodes":nodes,"nn_calls":nn_calls,"depth":depth,"simulations":if e.kind=="mcts"{Some(config.simulations)}else{None},"search_stop":search_stop,"limits":if e.kind=="mcts" {serde_json::json!({"depth":200,"nodes":config.mcts_max_nodes,"memory_bytes":config.mcts_max_bytes,"simulations":config.simulations,"time_ms":null,"budget_kind":"simulations"})} else {serde_json::json!({"depth":e.depth,"nodes":e.max_nodes,"time_ms":e.time_ms,"budget_kind":if e.time_ms.is_some(){"time_node_depth"}else{"node_depth"}})}}));
                         if serde_json::to_vec(&records)?.len() as u64
                             > config.max_output_bytes.saturating_sub(4096) / 2
                         {
@@ -4473,7 +4721,7 @@ fn benchmark_impl(
     });
     let mut stopped = monitored_stop.or_else(|| result.as_ref().err().map(|e| e.to_string()));
 
-    let mut report = serde_json::json!({"schema":"quoridor-search-benchmark-v1","run_id":config.run_id,"fixed_work":!config.engines.iter().any(|e| e.kind != "mcts" && e.time_ms.is_some()),"warm_separate":true,"stopped":stopped,"backend_work":backend.as_ref().map(|b| inference_work(b.counters())),"records":records,"total_seconds":start.elapsed().as_secs_f64(),"admission":admission,"model_sha":config.inference.as_ref().map(|i|i.model_sha.clone())});
+    let mut report = serde_json::json!({"schema":"quoridor-search-benchmark-v1","run_id":config.run_id,"fixed_work":!config.engines.iter().any(|e| e.kind != "mcts" && e.time_ms.is_some()),"warm_separate":config.benchmark_repetitions.is_none(),"benchmark_repetitions":config.benchmark_repetitions,"stopped":stopped,"backend_work":backend.as_ref().map(|b| inference_work(b.counters())),"records":records,"total_seconds":start.elapsed().as_secs_f64(),"admission":admission,"model_sha":config.inference.as_ref().map(|i|i.model_sha.clone())});
     let mut encoded = serde_json::to_vec(&report)?;
     let remaining = config
         .max_output_bytes
@@ -6590,5 +6838,288 @@ mod sigma_value_runtime_tests {
         assert_eq!(observation.deadline_ns, None);
         assert!(!observation.accepted);
         assert_eq!(game.context.position(), board);
+    }
+}
+
+#[cfg(test)]
+mod common_mcts_tests {
+    use super::*;
+
+    fn teacher(visits: u32) -> Teacher {
+        Teacher::Mcts {
+            root_mean: -0.0,
+            root_nn: Some(0.25),
+            root_visits: visits,
+            nn_calls: 1,
+            edges: Vec::new(),
+        }
+    }
+
+    #[test]
+    fn common_mcts_row_quota_accounts_warm_failed_physical_unknown_and_overflow() {
+        let mut c = InferenceCounters {
+            logical_rows: 63,
+            executed_rows: 63,
+            failed_rows: 63, // Already included in logical/executed.
+            capture_rows: Some(0),
+            ..Default::default()
+        };
+        assert!(admit_mcts_rows(c, 64, 1).is_ok());
+        assert!(admit_mcts_rows(c, 63, 1).is_err());
+        c.warm_rows = 1;
+        c.failed_warm_rows = 1;
+        assert!(admit_mcts_rows(c, 64, 1).is_err());
+        assert!(admit_mcts_rows(c, 64, 0).is_ok());
+        c.capture_rows = None;
+        assert!(admit_mcts_rows(c, u64::MAX, 0).is_err());
+        c.capture_rows = Some(0);
+        c.logical_rows = u64::MAX;
+        assert!(admit_mcts_rows(c, u64::MAX, 1).is_err());
+        c.logical_rows = 0;
+        c.executed_rows = u64::MAX;
+        assert!(admit_mcts_rows(c, u64::MAX, 1).is_err());
+    }
+
+    #[test]
+    fn common_mcts_requires_completed_visits_without_rewriting_raw_values() {
+        let t = teacher(64);
+        assert!(require_completed_mcts(&t, 64).is_ok());
+        assert!(require_completed_mcts(&t, 63).is_err());
+        assert!(require_completed_mcts(&teacher(63), 64).is_err());
+        assert!(require_completed_mcts(&Teacher::InputOnly, 64).is_err());
+        let Teacher::Mcts {
+            root_mean, root_nn, ..
+        } = t
+        else {
+            unreachable!()
+        };
+        assert_eq!(root_mean.to_bits(), (-0.0f32).to_bits());
+        assert_eq!(root_nn, Some(0.25));
+    }
+
+    #[test]
+    fn common_mcts_terminal_attachment_uses_goal_threefold_and_unknown_not_q() {
+        let plan = Planned {
+            id: 17,
+            candidate_color: 0,
+            opening: vec![],
+            family: "family".into(),
+            split: Split::Train,
+        };
+        let context = SigmaContext::from_prefix(&[]).unwrap();
+        let row = TeacherRow::from_context(
+            "row".into(),
+            "game-17".into(),
+            plan.family.clone(),
+            Split::Train,
+            vec![],
+            &context,
+            Some(13),
+            teacher(64),
+            "a".repeat(64),
+        )
+        .unwrap();
+        let goal = vec![13, 75, 22, 66, 31, 57, 40, 48, 49, 39, 58, 30, 67, 21, 76];
+        let repetition = vec![13, 67, 4, 76, 13, 67, 4, 76];
+        for (moves, status, winner, z) in [
+            (goal, "goal", Some(0), Some(1.0)),
+            (repetition, "draw", None, Some(0.0)),
+            (vec![13], "unknown", None, None),
+        ] {
+            let mut o = unknown(&plan, "ply_cap".into());
+            o.moves = moves;
+            o.status = status.into();
+            o.winner = winner;
+            let mut rows = vec![row.clone()];
+            rows[0].z = Some(-1.0); // Old finish label must not supply provenance.
+            attach_common_mcts_outcome(&o, &mut rows).unwrap();
+            assert_eq!(rows[0].z, z);
+            assert_eq!(rows[0].eligible, z.is_some());
+            let Teacher::Mcts {
+                root_mean, root_nn, ..
+            } = rows[0].teacher
+            else {
+                unreachable!()
+            };
+            assert_eq!(root_mean.to_bits(), (-0.0f32).to_bits());
+            assert_eq!(root_nn, Some(0.25));
+        }
+        let mut false_complete = unknown(&plan, "synthetic_completion".into());
+        false_complete.status = "goal".into();
+        false_complete.moves = vec![13];
+        assert!(attach_common_mcts_outcome(&false_complete, &mut [row]).is_err());
+    }
+
+    #[test]
+    fn common_mcts_frozen_slice_keeps_global_ids_missing_slots_and_family_split() {
+        use quoridor_data::{common_corpus, terminal, terminal_stream::BoundJson};
+        let root = std::env::temp_dir().join(format!("common-mcts-plan-{}", std::process::id()));
+        std::fs::create_dir(&root).unwrap();
+        let write = |name: &str, value: serde_json::Value| {
+            let path = root.join(name);
+            std::fs::write(&path, serde_json::to_vec(&value).unwrap()).unwrap();
+            BoundJson {
+                sha256: quoridor_data::file_sha(&path).unwrap(),
+                path,
+            }
+        };
+        let mut c: Config =
+            serde_json::from_str(include_str!("../tests/fixtures/sigma-clock-config.json"))
+                .unwrap();
+        let roots = vec![
+            ("fixed-d-family-000000".into(), vec![13, 67, 22, 58]),
+            ("fixed-d-family-000002".into(), vec![5, 75, 6, 74]),
+        ];
+        let partition = terminal::partition_families(&roots, 31).unwrap();
+        let common: common_corpus::Config = serde_json::from_value(serde_json::json!({
+            "families":3,"prefix_seed":29,"prefix_lengths":[4],"split_seed":31,
+            "root_value_policy":"outcome_only","batch_start":1,"batch_count":2,
+            "excluded_books":[],
+            "schedule":write("schedule.json",serde_json::json!({"scheduled":[
+                {"game":0,"request_id":roots[0].0,"requested_prefix_length":4,"prefix":roots[0].1,"scheduled_failure":null},
+                {"game":1,"request_id":"fixed-d-family-000001","requested_prefix_length":4,"prefix":null,"scheduled_failure":"missing"},
+                {"game":2,"request_id":roots[1].0,"requested_prefix_length":4,"prefix":roots[1].1,"scheduled_failure":null}
+            ]})),
+            "partition":write("partition.json",serde_json::to_value(&partition).unwrap())
+        })).unwrap();
+        c.common_study = Some(common);
+        c.games = 1;
+        let plans = planned(&c).unwrap();
+        assert_eq!(plans.len(), 1);
+        assert_eq!(plans[0].id, 2);
+        assert_eq!(plans[0].opening, roots[1].1);
+        assert_eq!(plans[0].family, partition.assignments[1].family);
+        assert_eq!(plans[0].split, partition.assignments[1].split);
+        c.games = 2; // Missing slot is never silently regenerated.
+        assert!(planned(&c).is_err());
+        std::fs::remove_dir_all(root).unwrap();
+    }
+}
+#[cfg(test)]
+mod common_mcts_admission_cause_tests {
+    use super::*;
+
+    fn config() -> Config {
+        let mut c: Config =
+            serde_json::from_str(include_str!("../tests/fixtures/sigma-clock-config.json"))
+                .unwrap();
+        c.common_study = Some(
+            serde_json::from_value(serde_json::json!({"families":1,
+            "prefix_seed":1,"prefix_lengths":[4],"split_seed":2,"root_value_policy":"outcome_only",
+            "batch_start":0,"batch_count":1,"excluded_books":[],
+            "schedule":{"path":"/unread/schedule","sha256":"a".repeat(64)},
+            "partition":{"path":"/unread/partition","sha256":"b".repeat(64)}}))
+            .unwrap(),
+        );
+        c
+    }
+
+    #[test]
+    fn common_mcts_supplied_backend_refused_before_metadata_inputs_or_admission() {
+        struct MustNotEnter;
+        impl InferenceBackend for MustNotEnter {
+            fn infer(
+                &mut self,
+                _: &[[f32; 648]],
+            ) -> std::result::Result<Vec<NetworkOutput>, quoridor_inference::InferenceError>
+            {
+                panic!("supplied inference must not be entered");
+            }
+            fn counters(&self) -> InferenceCounters {
+                panic!("supplied counters must not be entered");
+            }
+            fn metadata(&self) -> &quoridor_inference::BackendMetadata {
+                panic!("supplied metadata must not be accepted as owner authority");
+            }
+        }
+        let mut c = config();
+        c.output =
+            std::env::temp_dir().join(format!("common-supplied-refusal-{}", std::process::id()));
+        assert!(!c.output.exists());
+        let error = run_with_backend(&c, "selfplay", Box::new(MustNotEnter)).unwrap_err();
+        assert!(
+            error
+                .to_string()
+                .contains("supplied backend refused before admission")
+        );
+        assert!(!c.output.exists());
+        c.common_study = None;
+        c.engines = vec![serde_json::from_value(serde_json::json!({"kind":"mcts"})).unwrap()];
+        c.inference = Some(serde_json::from_value(serde_json::json!({"backend":"ort","model":"/unread/model","model_sha":"a".repeat(64),"logical_row_limit":64})).unwrap());
+        c.benchmark_repetitions = Some(1);
+        let error = benchmark_impl(&c, Some(Box::new(MustNotEnter))).unwrap_err();
+        assert!(
+            error
+                .to_string()
+                .contains("supplied backend refused before admission")
+        );
+        assert!(!c.output.exists());
+    }
+
+    #[test]
+    fn common_mcts_secondary_terminal_failure_keeps_cancelled_outcome_and_publication_detail() {
+        let c = config();
+        let plan = Planned {
+            id: 0,
+            candidate_color: 0,
+            opening: vec![],
+            family: "family".into(),
+            split: Split::Train,
+        };
+        let mut o = unknown(&plan, "cancelled".into());
+        o.moves = vec![13, 75, 22, 66, 31, 57, 40, 48, 49, 39, 58, 30, 67, 21, 76];
+        o.failure = Some(crate::arena_clock::Failure::Cancelled);
+        let context = SigmaContext::from_prefix(&[]).unwrap();
+        let row = TeacherRow::from_context(
+            "row".into(),
+            "game-0".into(),
+            "family".into(),
+            Split::Train,
+            vec![],
+            &context,
+            Some(13),
+            Teacher::Mcts {
+                root_mean: 0.0,
+                root_nn: Some(0.0),
+                root_visits: 64,
+                nn_calls: 1,
+                edges: vec![],
+            },
+            "a".repeat(64),
+        )
+        .unwrap();
+        let mut pump = PumpProfile::default();
+        let mut stopped = Some("earlier_backend_failure".to_owned());
+        let cancel = AtomicBool::new(false);
+        let mut dataset_writer = None;
+        let mut row_count = 0;
+        let mut outcomes = Vec::new();
+        CompletionPublication {
+            config: &c,
+            mode: "selfplay",
+            pump: &mut pump,
+            stopped: &mut stopped,
+            cancel: &cancel,
+            dataset_writer: &mut dataset_writer,
+            row_count: &mut row_count,
+            outcomes: &mut outcomes,
+            start: Instant::now(),
+        }
+        .record(o, vec![row]);
+        attach_final_primary_failures(&c, &pump, &mut outcomes, stopped.as_deref());
+        assert_eq!(outcomes[0].reason.as_deref(), Some("cancelled"));
+        assert_eq!(
+            outcomes[0].failure,
+            Some(crate::arena_clock::Failure::Cancelled)
+        );
+        assert_eq!(stopped.as_deref(), Some("earlier_backend_failure"));
+        assert_eq!(pump.publication_failures.len(), 1);
+        assert!(
+            pump.publication_failures[0]
+                .reason
+                .starts_with("terminal_targets:")
+        );
+        assert_eq!(row_count, 0);
+        assert!(cancel.load(Ordering::Relaxed));
     }
 }

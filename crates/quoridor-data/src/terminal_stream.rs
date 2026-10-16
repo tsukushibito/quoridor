@@ -1086,7 +1086,71 @@ fn open_input(input: &Path) -> Result<StreamInput> {
     })
 }
 
+pub(crate) fn model_scale_authority(input_binding: Option<&Value>) -> Result<Option<Value>> {
+    input_binding
+        .map(|v| -> Result<Value> {
+            let scale = v["model_scale_authority"].clone();
+            if scale.as_object().is_none_or(|o| o.len() != 4)
+                || scale["scale_policy"] != "incumbent_descriptor_T_only"
+            {
+                return Err("actual distinct initializer scale lineage".into());
+            }
+            for key in [
+                "starting_weights_sha256",
+                "descriptor_sha256",
+                "evaluator_sha256",
+            ] {
+                valid_sha(scale[key].as_str().ok_or("model scale SHA")?)?;
+            }
+            Ok(scale)
+        })
+        .transpose()
+}
+
 /// Materialize actual complete streams in their original global slice order.
+/// Shared existing incomplete-marker-last publication for two source codecs.
+/// Each source retains its own actual metadata and validation, not a fake stream.
+pub(crate) fn publish_common_cache(
+    output: &Path,
+    common: crate::common_corpus::Config,
+    inputs: &[PathBuf],
+    materialize: impl FnOnce(&mut Writer) -> Result<(String, serde_json::Map<String, Value>)>,
+) -> Result<TensorCache> {
+    fs::create_dir(output)?;
+    let stage = output.join(".intake.partial");
+    let mut writer = None;
+    let mut io = FilesystemPublication;
+    let result = (|| -> Result<TensorCache> {
+        io.begin(output)?;
+        writer = Some(Writer::new_common(&stage, common.clone())?);
+        let (dataset_sha, extra) = materialize(writer.as_mut().ok_or("cache writer")?)?;
+        let manifest =
+            writer
+                .take()
+                .ok_or("writer finalization")?
+                .finish(dataset_sha, false, extra)?;
+        let mut names = manifest.files.values().cloned().collect::<Vec<_>>();
+        names.push("cache.json".into());
+        complete_publication(&stage, output, &names, &mut io)?;
+        Ok(manifest)
+    })();
+    match result {
+        Ok(manifest) => Ok(manifest),
+        Err(primary) => {
+            let finalization = writer.take().map(Writer::abort).unwrap_or_default();
+            let record = json!({"status":"FAILED","primary":primary.to_string(),"finalization":finalization,
+                "streams":inputs,"owned_partial":stage,"partial_rows_not_admitted":true});
+            Err(failed_intake(
+                primary,
+                finalization,
+                &record,
+                output,
+                &mut io,
+            ))
+        }
+    }
+}
+
 pub fn write_cache(
     inputs: &[PathBuf],
     output: &Path,
@@ -1126,39 +1190,11 @@ pub fn write_cache(
     let common = common.ok_or("common config")?;
     common.validate_shape()?;
     let input_binding = binding.map(BoundJson::read).transpose()?;
-    let scale = input_binding
-        .as_ref()
-        .map(|v| -> Result<Value> {
-            let scale = v["model_scale_authority"].clone();
-            if scale.as_object().is_none_or(|o| o.len() != 4)
-                || scale["scale_policy"] != "incumbent_descriptor_T_only"
-            {
-                return Err("actual distinct initializer scale lineage".into());
-            }
-            for key in [
-                "starting_weights_sha256",
-                "descriptor_sha256",
-                "evaluator_sha256",
-            ] {
-                valid_sha(scale[key].as_str().ok_or("model scale SHA")?)?;
-            }
-            Ok(scale)
-        })
-        .transpose()?;
-    fs::create_dir(output)?;
-    let stage = output.join(".intake.partial");
-    let mut writer = None;
-    let mut io = FilesystemPublication;
-    let result = (|| -> Result<TensorCache> {
-        io.begin(output)?;
-        writer = Some(Writer::new_common(&stage, common.clone())?);
+    let scale = model_scale_authority(input_binding.as_ref())?;
+    publish_common_cache(output, common.clone(), inputs, |writer| {
         let mut batches = Vec::new();
         for source in &sources {
-            batches.push(scan(
-                &source.stream.path,
-                source,
-                writer.as_mut().ok_or("cache writer")?,
-            )?);
+            batches.push(scan(&source.stream.path, source, writer)?);
         }
         let bindings = sources.iter().map(|s| &s.stream).collect::<Vec<_>>();
         let dataset_sha = hex_digest(&serde_json::to_vec(&bindings)?);
@@ -1182,31 +1218,8 @@ pub fn write_cache(
         extra.insert("stream_intake".into(), json!({"status":"complete","scope":"common-corpus",
             "publication_protocol":"incomplete-marker-last-v1","batches":batches.iter().map(|b|
                 json!({"batch_start":b["batch_start"],"batch_count":b["batch_count"],"config":b["config"]})).collect::<Vec<_>>()}));
-        let manifest =
-            writer
-                .take()
-                .ok_or("writer finalization")?
-                .finish(dataset_sha, false, extra)?;
-        let mut names = manifest.files.values().cloned().collect::<Vec<_>>();
-        names.push("cache.json".into());
-        complete_publication(&stage, output, &names, &mut io)?;
-        Ok(manifest)
-    })();
-    match result {
-        Ok(manifest) => Ok(manifest),
-        Err(primary) => {
-            let finalization = writer.take().map(Writer::abort).unwrap_or_default();
-            let record = json!({"status":"FAILED","primary":primary.to_string(),"finalization":finalization,
-                "streams":inputs,"owned_partial":stage,"partial_rows_not_admitted":true});
-            Err(failed_intake(
-                primary,
-                finalization,
-                &record,
-                output,
-                &mut io,
-            ))
-        }
-    }
+        Ok((dataset_sha, extra))
+    })
 }
 
 #[cfg(test)]

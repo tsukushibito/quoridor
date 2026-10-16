@@ -97,6 +97,12 @@ pub struct Config {
     pub opening_plies: u16,
     #[serde(default)]
     pub openings: Vec<Vec<u16>>,
+    /// Input-only canonical family partition, shared across bounded MCTS slices.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub common_study: Option<quoridor_data::common_corpus::Config>,
+    /// A one-pass bounded MCTS input observation; absent keeps the live four-repeat benchmark.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub benchmark_repetitions: Option<u8>,
     #[serde(default)]
     pub cpu_cores: Vec<usize>,
     /// Opt-in inference owner core; workers must then be explicit too.
@@ -198,6 +204,14 @@ pub struct Cycle {
     pub adoption_margin: f64,
 }
 impl Config {
+    pub(crate) fn bounded_mcts(&self) -> bool {
+        self.engines.len() == 1
+            && self.engines[0].kind == "mcts"
+            && self
+                .inference
+                .as_ref()
+                .is_some_and(|i| i.logical_row_limit.is_some())
+    }
     pub(crate) fn evaluation_workers(&self) -> bool {
         self.arena.as_ref().is_some_and(|a| {
             a.comparison == crate::arena::Comparison::WholeWallTime
@@ -340,12 +354,15 @@ impl Config {
                     .ok_or("Sigma value inference required")?,
             )
             .map_err(|e| e.to_string())?;
-        } else if self
-            .inference
-            .as_ref()
-            .is_some_and(|i| i.logical_row_limit.is_some())
+        } else if !self.bounded_mcts()
+            && self
+                .inference
+                .as_ref()
+                .is_some_and(|i| i.logical_row_limit.is_some())
         {
-            return Err("logical_row_limit belongs to Sigma static-value inference".into());
+            return Err(
+                "logical_row_limit requires Sigma static-value or common MCTS inference".into(),
+            );
         }
         if self.engines.iter().any(|e| e.kind == "mcts") && self.inference.is_none() {
             return Err("MCTS needs an explicit inference backend".into());
@@ -357,6 +374,82 @@ impl Config {
             && self.arena.is_none()
         {
             return Err("timed MCTS requires the arena caller contract".into());
+        }
+        if self.bounded_mcts() {
+            if self.common_study.is_none() && self.benchmark_repetitions.is_none() {
+                return Err(
+                    "bounded MCTS needs explicit common selfplay or one-pass benchmark inputs"
+                        .into(),
+                );
+            }
+            let i = self.inference.as_ref().unwrap();
+            if self.ruleset != Ruleset::Standard2pThreefold
+                || self.workers != 1
+                || self.active_games != 1
+                || self.max_batch != 1
+                || self.cpu_cores.len() != 1
+                || self.inference_cpu_core.is_some()
+                || self.arena.is_some()
+                || self.cycle.is_some()
+                || self.engines[0].time_ms.is_some()
+                || i.backend != "ort"
+                || i.cuda_graph
+                || i.device != 0
+                || i.library.is_none()
+                || i.logical_row_limit.is_none_or(|n| n == 0)
+            {
+                return Err(
+                    "bounded MCTS requires one CPU ORT batch1 owner and positive explicit quota"
+                        .into(),
+                );
+            }
+        }
+        if let Some(repetitions) = self.benchmark_repetitions {
+            if repetitions != 1
+                || self.temperature != 0.0
+                || !self.bounded_mcts()
+                || self.common_study.is_some()
+                || self.games != self.openings.len()
+                || self.openings.is_empty()
+            {
+                return Err("one-pass MCTS benchmark requires exact full-prefix inputs and bounded inference".into());
+            }
+        }
+        if let Some(common) = &self.common_study {
+            if !matches!(
+                &common.root_value_policy,
+                quoridor_data::common_corpus::RootValuePolicy::OutcomeOnly
+            ) {
+                return Err("common MCTS requires outcome-only eligibility".into());
+            }
+            common.validate_shape().map_err(|e| e.to_string())?;
+            let inference = self
+                .inference
+                .as_ref()
+                .ok_or("common MCTS inference required")?;
+            if self.ruleset != Ruleset::Standard2pThreefold
+                || self.arena.is_some()
+                || self.cycle.is_some()
+                || self.engines.len() != 1
+                || self.engines[0].kind != "mcts"
+                || self.engines[0].time_ms.is_some()
+                || self.workers != 1
+                || self.active_games != 1
+                || self.max_batch != 1
+                || self.cpu_cores.len() != 1
+                || self.inference_cpu_core.is_some()
+                || self.temperature != 0.0
+                || !self.openings.is_empty()
+                || self.train_games.is_some()
+                || self.validation_games.is_some()
+                || inference.backend != "ort"
+                || inference.cuda_graph
+                || inference.device != 0
+                || inference.library.is_none()
+                || inference.logical_row_limit.is_none_or(|n| n == 0)
+            {
+                return Err("common MCTS requires frozen inputs, one serial game/CPU ORT batch1 owner, greedy completed simulations and explicit row quota".into());
+            }
         }
         self.split_counts()?;
         if let Some(arena) = &self.arena {
@@ -454,6 +547,116 @@ mod lmr408_config_tests {
         assert_eq!(
             config.validate().unwrap_err(),
             "explicit ordering/LMR settings belong to an arena config"
+        );
+    }
+}
+
+#[cfg(test)]
+mod common_mcts_config_tests {
+    use super::*;
+    #[test]
+    fn common_mcts_config_requires_one_greedy_bounded_cpu_ort_owner() {
+        let mut c: Config =
+            serde_json::from_str(include_str!("../tests/fixtures/sigma-clock-config.json"))
+                .unwrap();
+        c.ruleset = Ruleset::Standard2pThreefold;
+        c.arena = None;
+        c.cycle = None;
+        c.engines = vec![serde_json::from_value(serde_json::json!({"kind":"mcts"})).unwrap()];
+        c.workers = 1;
+        c.active_games = 1;
+        c.max_batch = 1;
+        c.cpu_cores = vec![8];
+        c.management_cpu_core = None;
+        c.inference_cpu_core = None;
+        c.temperature = 0.0;
+        c.openings.clear();
+        c.train_games = None;
+        c.validation_games = None;
+        c.inference = Some(
+            serde_json::from_value(serde_json::json!({"backend":"ort",
+            "model":"/fixture/model.onnx","model_sha":"a".repeat(64),"library":"/fixture/lib.so",
+            "device":0,"cuda_graph":false,"logical_row_limit":60}))
+            .unwrap(),
+        );
+        c.common_study = Some(
+            serde_json::from_value(serde_json::json!({
+            "families":3,"prefix_seed":29,"prefix_lengths":[4],"split_seed":31,
+            "root_value_policy":"outcome_only","batch_start":1,"batch_count":2,"excluded_books":[],
+            "schedule":{"path":"/fixture/schedule","sha256":"a".repeat(64)},
+            "partition":{"path":"/fixture/partition","sha256":"b".repeat(64)}}))
+            .unwrap(),
+        );
+        c.validate().unwrap(); // Shape only; this test never loads a backend or input file.
+        for case in 0..9 {
+            let mut bad = c.clone();
+            match case {
+                0 => bad.workers = 2,
+                1 => bad.max_batch = 2,
+                2 => bad.temperature = 0.5,
+                3 => bad.cpu_cores.push(9),
+                4 => bad.inference.as_mut().unwrap().logical_row_limit = None,
+                5 => bad.inference.as_mut().unwrap().logical_row_limit = Some(0),
+                6 => bad.inference.as_mut().unwrap().cuda_graph = true,
+                7 => bad.train_games = Some(1),
+                _ => bad.inference.as_mut().unwrap().backend = "aoti".into(),
+            }
+            assert!(bad.validate().is_err(), "case {case}");
+        }
+        c.common_study = None;
+        assert!(c.validate().is_err()); // No accidental unbounded/general MCTS quota mode.
+    }
+}
+
+#[cfg(test)]
+mod bounded_mcts_benchmark_config_tests {
+    use super::*;
+    #[test]
+    fn bounded_mcts_one_pass_requires_exact_inputs_quota_and_preserves_default() {
+        let mut c: Config =
+            serde_json::from_str(include_str!("../tests/fixtures/sigma-clock-config.json"))
+                .unwrap();
+        c.ruleset = Ruleset::Standard2pThreefold;
+        c.arena = None;
+        c.cycle = None;
+        c.engines = vec![serde_json::from_value(serde_json::json!({"kind":"mcts"})).unwrap()];
+        c.workers = 1;
+        c.active_games = 1;
+        c.max_batch = 1;
+        c.management_cpu_core = None;
+        c.inference_cpu_core = None;
+        c.cpu_cores = vec![8];
+        c.common_study = None;
+        c.openings = vec![vec![13]];
+        c.games = 1;
+        c.benchmark_repetitions = Some(1);
+        c.temperature = 0.0;
+        c.inference = Some(
+            serde_json::from_value(serde_json::json!({"backend":"ort",
+            "model":"/fixture/model.onnx","model_sha":"a".repeat(64),"library":"/fixture/lib.so",
+            "device":0,"cuda_graph":false,"logical_row_limit":64}))
+            .unwrap(),
+        );
+        c.validate().unwrap(); // Shape only: no backend or numerical invocation.
+        for case in 0..5 {
+            let mut bad = c.clone();
+            match case {
+                0 => bad.benchmark_repetitions = Some(0),
+                1 => bad.benchmark_repetitions = Some(2),
+                2 => bad.games = 2, // Existing openings modulo must not duplicate a fixed request.
+                3 => bad.inference.as_mut().unwrap().logical_row_limit = None,
+                _ => bad.engines[0].kind = "distance".into(),
+            }
+            assert!(bad.validate().is_err(), "case {case}");
+        }
+        c.benchmark_repetitions = None;
+        c.inference.as_mut().unwrap().logical_row_limit = None;
+        c.validate().unwrap();
+        assert!(
+            serde_json::to_value(c)
+                .unwrap()
+                .get("benchmark_repetitions")
+                .is_none()
         );
     }
 }
