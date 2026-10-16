@@ -466,6 +466,16 @@ pub fn validate_loaded_bindings(
     Ok(())
 }
 
+/// Arena admission consumes this common immutable book view, not a producer's RNG recipe.
+/// Extra producer provenance remains bound by the input FileRef. Each Family
+/// retains its strict field types and full-prefix/history correspondence.
+#[derive(Debug, Deserialize)]
+pub struct ArenaInputBook {
+    pub complete: bool,
+    pub rules: String,
+    pub families: Vec<crate::value_search_strength::Family>,
+}
+
 /// Scientific declarations are approved JSON, not experiment/count-specific Rust branches.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -676,7 +686,7 @@ impl ArenaPlan {
         e: &crate::research_manifest::Experiment,
         c: &Config,
         slots: &[ArenaSlot],
-        book: &crate::value_search_strength::GeneratedBook,
+        book: &ArenaInputBook,
     ) -> Result<()> {
         self.validate_schedule(slots)?;
         c.validate().map_err(|x| format!("arena config: {x}"))?;
@@ -1031,7 +1041,7 @@ pub fn run_bound(bound: &crate::research_manifest::BoundControl) -> Result<serde
     let plan: ArenaPlan = approved.read()?;
     let c: Config = e.config.read()?;
     let slots: Vec<ArenaSlot> = e.schedule.read()?;
-    let book: crate::value_search_strength::GeneratedBook = plan.book.read()?;
+    let book: ArenaInputBook = plan.book.read()?;
     plan.validate_config(&e, &c, &slots, &book)?;
     let report = crate::runtime::run(&c, "arena")?;
     validate_report(&c, &report)?;
@@ -1060,7 +1070,7 @@ mod generic_arena_361_tests {
         Experiment,
         Config,
         Vec<ArenaSlot>,
-        crate::value_search_strength::GeneratedBook,
+        ArenaInputBook,
     ) {
         let book_ref = reference("book");
         let model = ModelRef {
@@ -1133,6 +1143,70 @@ mod generic_arena_361_tests {
         let book = serde_json::from_value(json!({"schema":"quoridor.value-search-strength.book.v1","plan_sha256":"0".repeat(64),"old_open8_sha256":"0".repeat(64),"old_open8_prefixes":[],"rules":plan.rules,"action_encoding":"fake","compiled_sources":{},"complete":true,"attempted":n,"transitions":0,"attempts":[],"families":families})).unwrap();
         (plan, e, c, slots, book)
     }
+    #[test]
+    fn arena421_input_book_projection_batch_seed_and_strict_history() {
+        // Admission metadata only: no model, geometry, RNG regeneration or Search.
+        let (plan, experiment, mut config, slots, _) = fixture(1, 4);
+        let batch_seed = 42120261016_u64;
+        let family = json!({
+            "family_id":100, "id":"fake-0", "attempt_id":0, "seed":batch_seed,
+            "prefix":[13], "root_key":"FAKE_HISTORY",
+            "history_counts":[["FAKE_HISTORY",1]]
+        });
+        let minimal = json!({
+            "complete":true, "rules":plan.rules, "families":[family]
+        });
+        let book: ArenaInputBook = serde_json::from_value(minimal.clone()).unwrap();
+        assert_eq!(book.families[0].seed, batch_seed);
+        assert_eq!(book.families[0].attempt_id, 0);
+        assert_eq!(book.families[0].prefix, vec![13]);
+        assert_eq!(
+            book.families[0].history_counts,
+            vec![("FAKE_HISTORY".into(), 1)]
+        );
+        config.arena.as_mut().unwrap().book.openings[0].original_seed = Some(batch_seed);
+        plan.validate_config(&experiment, &config, &slots, &book)
+            .unwrap();
+
+        // Historical producer-specific envelope fields are not355 qualifications.
+        let mut producer = minimal.clone();
+        producer["source_native_schedule"] = json!({"seed_scope":"shared_batch"});
+        let projected: ArenaInputBook = serde_json::from_value(producer).unwrap();
+        assert_eq!(
+            projected.families[0].history_counts,
+            book.families[0].history_counts
+        );
+
+        let mut null_seed = minimal.clone();
+        null_seed["families"][0]["seed"] = serde_json::Value::Null;
+        assert!(serde_json::from_value::<ArenaInputBook>(null_seed).is_err());
+        let mut missing_attempt = minimal.clone();
+        missing_attempt["families"][0]
+            .as_object_mut()
+            .unwrap()
+            .remove("attempt_id");
+        assert!(serde_json::from_value::<ArenaInputBook>(missing_attempt).is_err());
+        let mut extra_family_field = minimal;
+        extra_family_field["families"][0]["invented_rng_state"] = json!(0);
+        assert!(serde_json::from_value::<ArenaInputBook>(extra_family_field).is_err());
+
+        let mut wrong_seed = config.clone();
+        wrong_seed.arena.as_mut().unwrap().book.openings[0].original_seed = Some(batch_seed + 1);
+        assert!(
+            plan.validate_config(&experiment, &wrong_seed, &slots, &book)
+                .is_err()
+        );
+        config.arena.as_mut().unwrap().book.openings[0]
+            .reference
+            .as_mut()
+            .unwrap()
+            .settings["history_counts"] = json!([["FAKE_HISTORY", 2]]);
+        assert!(
+            plan.validate_config(&experiment, &config, &slots, &book)
+                .is_err()
+        );
+    }
+
     #[test]
     fn generic_arena377_decision_modes_counts_ordering_and_unsupported_sigma() {
         // Admission metadata only:97 parents/four arbitrary engine IDs; NN0.
