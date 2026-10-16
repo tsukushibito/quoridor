@@ -626,3 +626,15 @@ Tだけを残壁16..20/8..15/1..7/0の各層からchronological等間隔で最�
 候補凍結後の確認は、事前bookから最大6親×4評価器のD4/LMR OFF、24calls/48M nodesと、M/Cそれぞれ対BEST43/Dの128局/64色pair・全1G arena nodesに限る。後者はControl/PVS/TT1M/LMR ON-depth_rank、100ms authority receipt/5ms reserve/各手1M/200ply。共有16系列・選択的深さと異軌跡を保持し、MSE、有限候補差、同時間scoreを分ける。科学出力whole256MiB・decimal50GBを維持し、普通source/buildに別の事前枠を足さない。旧fits・製品/generator既定・モデル/特徴の正式変更や自動昇格、追加seed/fit/対局・414実装へ拡張しない。
 
 [固定spec](../../.worktree/arena-generalization377/.artifacts/research-team/nnue-diverse421-analysis-v1/spec.json)は生成手番4Mを事前選択した。seedは生成42120261015、評価42120261016、両fit42120261017、左右反転18、公開stream19、新T cycling20、arena/bootstrap21、公開T8192 panel22（後六つも421202610を先頭に持つspec整数）。既存family partitionの未指定seedは324が別途42120261023へ解決し、[入力解決の追記](../../.artifacts/research-team/integration324/nnue-diverse421-v1/input-resolution-addendum.json)に束縛した。spec原物は変更せず、新規prefix・結果の前に固定する。64 unique時の51T/13V・U<=51と、衝突を含む保守的R<=2048/U<=64を区別する。小Rの端数による多数露出も実行結果に残す。共有INITIALと両重み計128状態/1024 logical以内の必要照合を含むforward設計上限は4,013,502で、6Mの余りを追加科学へ転用しない。入力の衝突資格は既存native prefix/partition ownerに保持し、独自Python判定や結果依存補充へ置換しない。
+
+### 421実cacheの設定と直接静的評価422（2026-10-16）
+
+実生成は64 unique/64goal/2,822行、cacheは51T/13V family・T2,216/V606となった。T-only stock層抽出は927行で、両条件29更新、観測0/8/15/22/29へ固定した。C/Mと変更重み予備1,024のforward上界は3,875,747であり、fit成績を意味しない。data-only cacheにauthorityがない場合は、実cache manifestと凍結BEST43 descriptor/weights/evaluator/T-only尺度を通常input-bindingから厳密に束縛する。両方にauthorityがあれば両方一致を要求し、Mは実C initial-observationのFileRefとbinding自体を通常ordered inputsへ含める。cacheの書換えや成功INITIALの再実行は行わない。
+
+[422の同一7状態の直接評価表](../../research-data/ai-sigma/static-evaluators422/report-ja.md)では、4葉の正本NNUE pre/postとDが419保存値とbits一致した。slot4/ply39親は実STM1でNNUE +0.999744、Sigma −0.989549、D −0.833655。これは別木のsearched root値ではない。入力・符号・尺度の対応に明確な不一致は見つからなかったが、選択済み7状態から教師不適合・飽和の単独原因・最適WDLを採用しない。Sigma raw/adapterは同forwardの無変換returnというsource対応で、独立二観測のparityではない。追加Search/fit/対局は0、NNUE7head/Sigma7rows/D7で終了した。
+
+### 現在Sigma新データとfile順減衰の別試行423（2026-10-16）
+
+[423契約](../../.artifacts/research-policy/nnue-teacher-refresh-20261016.md)と[規模訂正](../../.artifacts/research-policy/nnue-teacher-refresh-20261016-size-correction.md)では、U公開均等、R同Tのfile順0.92減衰、W新Sigma/MCTS TでBEST43追加、F同じ新Tでfresh初期化を比較する。Fも既存descriptorの凍結正規化を使い、学習済みweightsは読まない。zのみを教師にし、old-q小表から追加fitしない。固定specの32はpilotであり必要データ量ではない。実pilotの費用・family/row/distinct/stock分布からsuffixと最終fit-viewを一度固定し、pilot RAW/splitを黙って変更しない。
+
+全256生成requests/2M Sigma、四fit/4M NNUE、160対局/1G nodes、whole128MiB/decimal50GBは上限である。主要W対BEST43を最大64 family×2色、W対Dを同じ先頭16 family×2色とし、未完成は補充しない。U/R/Wのrow更新量はmin(8R,32768)、Fはmin(64R,524288)という一条件で、必要量の保証ではない。新V family-MSEで選ぶ最大4点と、凍結BESTの公開V一度を区別する。公開file番号から生成checkpointの強さを推定せず、旧371の過学習やFの不改善だけで教師無効を結論しない。旧342.17/323の停止、特徴/モデル設計・weights/seals・製品既定は変更しない。

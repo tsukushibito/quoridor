@@ -25,10 +25,6 @@ use std::{
 #[path = "measurement_loss_leaf.rs"]
 mod loss_leaf;
 
-#[cfg(test)]
-#[path = "measurement_static422_tests.rs"]
-mod static_evaluators422_tests;
-
 #[derive(Clone, Copy, Debug, Deserialize, Serialize, PartialEq, Eq)]
 #[serde(rename_all = "snake_case")]
 enum Profile {

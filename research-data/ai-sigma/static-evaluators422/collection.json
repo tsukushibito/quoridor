@@ -1,0 +1,410 @@
+{
+  "at": "2026-10-16T01:41:52.114729+00:00",
+  "status": "SAVED_SEVEN_DIRECT_STATIC_COMPLETE",
+  "refs": {
+    "prepared.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/static-evaluators422-v1/direct7-v2/prepared.json",
+      "sha256": "c3f3eb4fb54481f7808884a2f4acd3dab2e7157d73ba1677f3556bd04526de82",
+      "bytes": 5981,
+      "mode": "0644"
+    },
+    "result.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/static-evaluators422-v1/direct7-v2/result.json",
+      "sha256": "282c5eea0995d5e0c59e71888a7cca378971667f42f0c6e08214ff0c472c4a78",
+      "bytes": 56324,
+      "mode": "0644"
+    },
+    "returned-receipt.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/static-evaluators422-v1/direct7-v2/returned-receipt.json",
+      "sha256": "09a7a17011d58aedaa07a9815e4866ff2558a2830e339d0601234b35cfd87d4c",
+      "bytes": 2702,
+      "mode": "0644"
+    },
+    "STOP.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/static-evaluators422-v1/direct7-v2/STOP.json",
+      "sha256": "9576b54d65b12a4fe031f21ef38dcd15916dd1e92ca8b6fe8a84ef15fa7f4431",
+      "bytes": 393,
+      "mode": "0644"
+    },
+    "job/config.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/static-evaluators422-v1/direct7-v2/job/config.json",
+      "sha256": "907359be9c8f3860efd65d781c5f622f578882ea124d5e77d90fc0bf3f445a09",
+      "bytes": 700,
+      "mode": "0600"
+    },
+    "job/result.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/static-evaluators422-v1/direct7-v2/job/result.json",
+      "sha256": "73616f0449cf6a10aa985b9b2197e4898c9c175a74edff1ba878a1831b073f46",
+      "bytes": 499,
+      "mode": "0600"
+    },
+    "actual-seven-state-direct-static.process.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/static-evaluators422-v1/direct7-v2/actual-seven-state-direct-static.process.json",
+      "sha256": "27d020a29101999f3746cead9825d05283b89a868bbac084a878319be954cbed",
+      "bytes": 1193,
+      "mode": "0600"
+    },
+    "actual-seven-state-direct-static.full.log": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/static-evaluators422-v1/direct7-v2/actual-seven-state-direct-static.full.log",
+      "sha256": "8d0a7c3c245a8624da26d51fb46f610838d32340dc6e14d114d1ba81778da7a0",
+      "bytes": 397,
+      "mode": "0644"
+    }
+  },
+  "actual_test_artifact": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner422-static-test-v2",
+    "sha256": "7a485aa7df44a2cb4f18ca01c51bf330893952ada55f7faf799bb19b44595234",
+    "bytes": 24637552,
+    "mode": "0755"
+  },
+  "actual_release": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner422-static-v2",
+    "sha256": "b47014a31499838bd30b91e6cf8ad0f0654c859f528d3088036d250619cd23db",
+    "bytes": 9380048,
+    "mode": "0755"
+  },
+  "actual_evaluator_identities": {
+    "D": {
+      "a": 0,
+      "b": 8,
+      "kind": "distance-tanh-f32",
+      "mode": "tanh"
+    },
+    "NNUE": "96a5f41f875022d1752b9c999595ad58bfb2d42687a8f06de08d42b1c4215875",
+    "Sigma": "sigma-value-onnx-cpu:sha256:3f1f51f4c8be8e6f3f8986f8282376af82c7744b7e876c94dd36dc0cfee05856"
+  },
+  "counts": {
+    "D_returned": 7,
+    "D_started": 7,
+    "NNUE_full_context_returned": 7,
+    "NNUE_full_context_started": 7,
+    "NNUE_head_returned": 7,
+    "NNUE_head_started": 7,
+    "NNUE_new_delta_calls": 0
+  },
+  "Sigma_backend": {
+    "capture_rows": 0,
+    "executed_rows": 7,
+    "failed_rows": 0,
+    "failed_warm_rows": 0,
+    "logical_rows": 7,
+    "physical_rows": 7,
+    "warm_rows": 0
+  },
+  "rows": [
+    {
+      "id": "distance-slot004-ply011",
+      "STM": 1,
+      "stocks": [
+        6,
+        8
+      ],
+      "NNUE_pre": 1.5793906450271606,
+      "NNUE_post": 0.9185066819190979,
+      "Sigma_raw_adapter": -0.005028305575251579,
+      "D": -0.09966801851987839,
+      "old_direct_N_D_bits_equal": null,
+      "prefix": [
+        186,
+        77,
+        13,
+        68,
+        85,
+        59,
+        87,
+        202,
+        22,
+        125,
+        198
+      ],
+      "raw_pointer": "/rows/0"
+    },
+    {
+      "id": "distance-slot004-ply039",
+      "STM": 1,
+      "stocks": [
+        0,
+        2
+      ],
+      "NNUE_pre": 4.482470512390137,
+      "NNUE_post": 0.9997444152832031,
+      "Sigma_raw_adapter": -0.9895493984222412,
+      "D": -0.8336546421051025,
+      "old_direct_N_D_bits_equal": null,
+      "prefix": [
+        186,
+        77,
+        13,
+        68,
+        85,
+        59,
+        87,
+        202,
+        22,
+        125,
+        198,
+        156,
+        123,
+        203,
+        133,
+        58,
+        96,
+        114,
+        127,
+        108,
+        83,
+        165,
+        13,
+        57,
+        14,
+        121,
+        23,
+        66,
+        94,
+        67,
+        24,
+        76,
+        33,
+        77,
+        42,
+        78,
+        51,
+        69,
+        52
+      ],
+      "raw_pointer": "/rows/1"
+    },
+    {
+      "id": "distance-slot005-ply012",
+      "STM": 0,
+      "stocks": [
+        8,
+        8
+      ],
+      "NNUE_pre": 1.574981927871704,
+      "NNUE_post": 0.9178146123886108,
+      "Sigma_raw_adapter": -0.511227548122406,
+      "D": -0.09966801851987839,
+      "old_direct_N_D_bits_equal": null,
+      "prefix": [
+        186,
+        77,
+        13,
+        68,
+        22,
+        59,
+        31,
+        50,
+        97,
+        116,
+        40,
+        173
+      ],
+      "raw_pointer": "/rows/2"
+    },
+    {
+      "id": "distance-slot004-ply011/H2/156-91",
+      "STM": 1,
+      "stocks": [
+        5,
+        7
+      ],
+      "NNUE_pre": 1.2772226333618164,
+      "NNUE_post": 0.8557431697845459,
+      "Sigma_raw_adapter": 0.10674294084310532,
+      "D": -0.29131263494491577,
+      "old_direct_N_D_bits_equal": true,
+      "prefix": [
+        186,
+        77,
+        13,
+        68,
+        85,
+        59,
+        87,
+        202,
+        22,
+        125,
+        198,
+        156,
+        91
+      ],
+      "raw_pointer": "/rows/3"
+    },
+    {
+      "id": "distance-slot004-ply011/H2/156-196",
+      "STM": 1,
+      "stocks": [
+        5,
+        7
+      ],
+      "NNUE_pre": 1.4273059368133545,
+      "NNUE_post": 0.8911131620407104,
+      "Sigma_raw_adapter": -0.5794402360916138,
+      "D": -0.46211719512939453,
+      "old_direct_N_D_bits_equal": true,
+      "prefix": [
+        186,
+        77,
+        13,
+        68,
+        85,
+        59,
+        87,
+        202,
+        22,
+        125,
+        198,
+        156,
+        196
+      ],
+      "raw_pointer": "/rows/4"
+    },
+    {
+      "id": "distance-slot004-ply039/H2/192-43",
+      "STM": 1,
+      "stocks": [
+        0,
+        1
+      ],
+      "NNUE_pre": 5.273468494415283,
+      "NNUE_post": 0.9999474287033081,
+      "Sigma_raw_adapter": -0.9865204691886902,
+      "D": -0.8004990220069885,
+      "old_direct_N_D_bits_equal": true,
+      "prefix": [
+        186,
+        77,
+        13,
+        68,
+        85,
+        59,
+        87,
+        202,
+        22,
+        125,
+        198,
+        156,
+        123,
+        203,
+        133,
+        58,
+        96,
+        114,
+        127,
+        108,
+        83,
+        165,
+        13,
+        57,
+        14,
+        121,
+        23,
+        66,
+        94,
+        67,
+        24,
+        76,
+        33,
+        77,
+        42,
+        78,
+        51,
+        69,
+        52,
+        192,
+        43
+      ],
+      "raw_pointer": "/rows/5"
+    },
+    {
+      "id": "distance-slot004-ply039/H3/60-53-61",
+      "STM": 0,
+      "stocks": [
+        0,
+        2
+      ],
+      "NNUE_pre": -4.075870037078857,
+      "NNUE_post": -0.9994236826896667,
+      "Sigma_raw_adapter": 0.9978681802749634,
+      "D": 0.8004989624023438,
+      "old_direct_N_D_bits_equal": true,
+      "prefix": [
+        186,
+        77,
+        13,
+        68,
+        85,
+        59,
+        87,
+        202,
+        22,
+        125,
+        198,
+        156,
+        123,
+        203,
+        133,
+        58,
+        96,
+        114,
+        127,
+        108,
+        83,
+        165,
+        13,
+        57,
+        14,
+        121,
+        23,
+        66,
+        94,
+        67,
+        24,
+        76,
+        33,
+        77,
+        42,
+        78,
+        51,
+        69,
+        52,
+        60,
+        53,
+        61
+      ],
+      "raw_pointer": "/rows/6"
+    }
+  ],
+  "original_seconds_once": 599.582022646995,
+  "native_seconds_nested_not_added": 598.5160473510041,
+  "native_STOP": "2026-10-16T01:38:03.048509+00:00",
+  "actual_collection_identities": [
+    {
+      "original": {
+        "pid": 2965690,
+        "start_ticks": "16246607",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "current": null
+    },
+    {
+      "original": {
+        "pid": 2965690,
+        "start_ticks": "16246607",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "current": null
+    }
+  ],
+  "pending_original_v1_failure_preserved": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/static-evaluators422-v1/direct7-v1/collection.json",
+    "sha256": "1a646f2cc7b608eb20cac17c4af1b541eb287d458cc8435e5caf96ef89fce764",
+    "bytes": 2170,
+    "mode": "0644"
+  },
+  "whole_is_not_speed_evidence": true,
+  "no_new_Search_fit_arena_solver_bootstrap": true,
+  "no_parity_reference_suite_replay": true,
+  "owned_readers_children_jobs_handles_TMP_leases": []
+}

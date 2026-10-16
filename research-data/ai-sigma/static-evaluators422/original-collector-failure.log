@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspaces/quoridor/.artifacts/research-team/integration324/static-evaluators422-v1/collect-direct-v2.py", line 155, in <module>
+    main()
+    ~~~~^^
+  File "/workspaces/quoridor/.artifacts/research-team/integration324/static-evaluators422-v1/collect-direct-v2.py", line 76, in main
+    assert [r["id"] for r in rows] == [r["id"] for r in inputs["states"]]
+                                                        ~~~~~~^^^^^^^^^^
+KeyError: 'states'

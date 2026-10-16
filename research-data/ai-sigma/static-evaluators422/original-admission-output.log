@@ -1,0 +1,34 @@
+Traceback (most recent call last):
+  File "/workspaces/quoridor/.artifacts/research-team/integration324/static-evaluators422-v1/run-direct.py", line 120, in <module>
+    main()
+    ~~~~^^
+  File "/workspaces/quoridor/.artifacts/research-team/integration324/static-evaluators422-v1/run-direct.py", line 69, in main
+    lc.command(
+    ~~~~~~~~~~^
+        spec,
+        ^^^^^
+    ...<17 lines>...
+        ledger=checks,
+        ^^^^^^^^^^^^^^
+    )
+    ^
+  File "/workspaces/quoridor/scripts/dev/research-lifecycle.py", line 725, in command
+    raise primary
+  File "/workspaces/quoridor/scripts/dev/research-lifecycle.py", line 668, in command
+    record = executor(
+        row["argv"],
+    ...<6 lines>...
+        **cpu_args,
+    )
+  File "/workspaces/quoridor/.artifacts/research-team/integration324/static-evaluators422-v1/run-direct.py", line 85, in <lambda>
+    executor=lambda *a, **kw: lc.process.execute(
+                              ~~~~~~~~~~~~~~~~~~^
+        *a, **kw, no_new_privs=True
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ),
+    ^
+  File "/workspaces/quoridor/python/quoridor_training/cycle_process.py", line 560, in execute
+    raise failure
+  File "/workspaces/quoridor/python/quoridor_training/cycle_process.py", line 378, in execute
+    raise CycleStopped(f"cycle child failed: {command}: {child.returncode}")
+quoridor_training.cycle_process.CycleStopped: cycle child failed: ['/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner422-static-test-v1', '--ignored', '--exact', 'measurement::static_evaluators422_tests::seven_saved_states_direct_static_once', '--nocapture', '--test-threads=1']: 101

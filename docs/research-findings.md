@@ -2116,3 +2116,29 @@ H3の同親とslot5/ply12では固定4endpointを同時置換しても、別の�
 [日本語報告・同親の候補表・設定/原結果/失敗と停止の対応](../research-data/ai-sigma/sigma-alpha420/report-ja.md)を参照。詳細は同じSol Maxによる保存解析に限り、重要な一般因果や棋力採用を追加しない。mixed/learner全prep/pipeline・323 USERPAUSE、models/weights/seals/oldfits96、foreign、全旧RAW/FAILED/費UNKNOWNを保持する。
 
 同親同深さの12比較では推奨手が全て異なった。具体例はcanonical family0の4手prefix後・H2で、Sigmaは22（pawn e3）、searched値−0.0922067612、PV22→189。Dは85（H anchor e1）、+0、PV85→59だった。色交換した別対局のgame0/1・ply4の実着手とも対応するが、双方が同じ候補を強制評価した値は未測定でUNKNOWNである。458 accepted着手は全てD2完成、fallback/error/取消0。対局の実仕事は158,219 nodes/126,524 static evaluationsで、選択snapshotとterminal workは同じため加算しない。
+
+### 同一7状態の直接静的評価（422、2026-10-16）
+
+419の3親と、保存された単一葉置換の4 endpointを結果前に固定し、同じ完全prefix・HistoryKey・壁・在庫・実手番からNNUE BEST43、Sigma d790、D(0,8,tanh)を直接評価した。Search・MCTS・対局・fitは0で、旧420のD2 root値とは異なる。同じ2対局の親子と選択に影響した葉なので、7独立標本や一般相関には使わない。
+
+slot4/ply39の親は同じP1視点でNNUE pre-tanh +4.482471／post +0.999744、Sigma −0.989549、D −0.833655だった。葉[60,53,61]では実手番P0でNNUE −0.999424、Sigma +0.997868、D +0.800499となった。一方、葉[156,91]はNNUE +0.855743／Sigma +0.106743／D −0.291313である。[7状態の日本語表と原結果](../research-data/ai-sigma/static-evaluators422/report-ja.md)に全値・pre/post・STM・旧値との差を残した。4葉のNNUE pre/postとDは419保存値とbit単位で一致し、親3状態の旧直接値はUNKNOWNとする。
+
+入力・STM・尺度・保存値の対応では明確な座標/符号の不一致は見つからず、同一状態で実モデルの出力が異なることを確認した。Sigma raw/adapterは無変換の同一forwardに対するsource対応であり、独立した二出力観測ではない。Sigma/Dの多数決や飽和値をWDL、旧敗因、NNUEの弱さの単独原因へ格上げしない。公開fix43と現Sigma scratch321の全学習史の同一性もUNKNOWNのままである。次は既許可421/423のfamily別V・残壁層・実対局で実用差を判断し、この表から追加Search/forward/fitを発行しない。
+
+実仕事はNNUE正本head7/full-context7/追加delta0、Sigma logical=physical=executed7/warm failed0、D7。元のdescriptorキー誤記による入場前FAILEDと保存collectorのKeyErrorは保持し、未入場の同じ7状態だけを評価した。native STOP01:38:03.048509Z、直接wait/reap・handles・TMP/owned[]を確認。outer599.582秒と内包native/whole/同期推論時間を加算せず、速度根拠にはしない。
+
+### 421の実入力と二条件設定の解決（2026-10-16）
+
+別入力64requestsは64 unique family、全64goal、UNKNOWN0、2,822適格行、434,615,074 nodesとなった。元の未入場caller失敗とconverterのbook/TT容量拒否を保持し、生成を再演せず正本receiverを修復した新出力cacheはT2,216/V606、51T/13V familyである。T-onlyの層抽出で927行となり、C/M共通29更新、観測点0/8/15/22/29へ確定した。C上界2,151,799＋共有INITIAL後のM上界1,722,924＋変更重み予備1,024＝3,875,747 logical forwardsで6M内に収まる。これはfit成績や改善の証拠ではない。cacheにmodel-scale authorityがない場合もfitは省略できず、実cache/BEST43を束縛した外部input-bindingを要求する。Mは実C INITIALのFileRefを通常inputsに含め、成功観測を再計測しない。
+
+### Sigma新教師と公開file順重みの試行規模（423、2026-10-16）
+
+[新規契約](../.artifacts/research-policy/nnue-teacher-refresh-20261016.md)と[規模訂正](../.artifacts/research-policy/nnue-teacher-refresh-20261016-size-correction.md)は、公開均等U、同じTへfile順0.92減衰だけを加えるR、現在Sigma/MCTSの新TでBEST43追加W、同じ新Tと凍結正規化でfresh初期化Fを比較する。教師は実outcome zだけで、qは小表用に限る。file番号は真の生成世代や強さの順位ではない。
+
+最初の32は費用・独立family・行/stock分布のpilotで、効果量から算出した必要量ではない。32だけで四fit/160局を自動消費せず、実pilotから未入場suffix規模を一度だけ解決する。全256requests/2M Sigma rowsは上限であり必要量ではない。四fit/NNUE4M/160局・1G arena nodes/whole128MiB/decimal50GBは維持する。[固定spec](../.worktree/arena-evaluation/.artifacts/research-team/nnue-teacher-refresh423-analysis-v1/spec.json)の主要対照はW対BEST43を最大64 family×2色、W対Dは同じ先頭16 family×2色とし、計160局を結果前に配分した。64 familyでも小さい差の判別保証はない。suffixでcanonical family rankingが変わる場合、pilot RAW/split/cacheを変更せず最終fit-view assignmentとの対応を明示する。旧342.17/323を再開する委任ではない。
+
+### 壁迂回下界の実装・有限性能比較への別委任（424、2026-10-16）
+
+414の完了はPLAN_ONLYのまま保持し、[新しい424契約](../.artifacts/research-policy/zero-stock-wall-detour-execution-20261016.md)でL=max(M,有限な|D0[a]−D0[b]|,有限な|D1[a]−D1[b]|)の一候補を実装・必要software・限定確認・一度の性能比較へ接続する。正当に借用できる既存同wall/goals/寸法の表だけを使い、新BFS/表構築/81走査を加えない。旧M成功と資格あるTT hitへ交差参照を足さず、true terminal/履歴E/typed TT/復元を維持する。
+
+同一imageのOFF→M→L→L→M→OFF、BEST43/D×LMR OFF/ON-depth_rank×旧411の8prefix×cold/warmで最大384calls/192sessions、D8/各4M/全1.536B nodesとする。速度枠だけを既存科学jobの実安全停止境界へ直列化し、NNUE作業を優先する。wholeと実work、反復変動、UNKNOWNを分け、固定対象で利益が支持されなければ候補を現役から撤去する。まだ性能・棋力の新結果ではなく、製品/generator既定変更や追加sweepを許可するものでもない。
