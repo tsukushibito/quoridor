@@ -6851,7 +6851,11 @@ mod common_mcts_tests {
             root_nn: Some(0.25),
             root_visits: visits,
             nn_calls: 1,
-            edges: Vec::new(),
+            edges: vec![Visit {
+                action: 13,
+                visits: visits - 1,
+                prior: 1.0,
+            }],
         }
     }
 
@@ -7083,7 +7087,11 @@ mod common_mcts_admission_cause_tests {
                 root_nn: Some(0.0),
                 root_visits: 64,
                 nn_calls: 1,
-                edges: vec![],
+                edges: vec![Visit {
+                    action: 13,
+                    visits: 63,
+                    prior: 1.0,
+                }],
             },
             "a".repeat(64),
         )
