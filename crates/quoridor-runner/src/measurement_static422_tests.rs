@@ -218,7 +218,7 @@ fn seven_saved_states_direct_static_once() {
         let setup = Instant::now();
         p.nnue.descriptor.verify()?;
         let descriptor: Value = serde_json::from_slice(&fs::read(&p.nnue.descriptor.path)?)?;
-        if descriptor["weights_sha"] != p.nnue.weights.sha256
+        if descriptor["weights_SHA"] != p.nnue.weights.sha256
             || p.nnue
                 .descriptor
                 .path
