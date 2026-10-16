@@ -524,6 +524,7 @@ pub(super) fn audit(path: &Path) -> Result<PilotReport> {
 #[cfg(test)]
 mod fixed_d392_stream_tests {
     use super::*;
+    use quoridor_core::research::Ruleset;
     #[test]
     fn fixed_d392_stream_report_preserves_completion_indices_and_refuses_duplicate_missing() {
         let reference = quoridor_data::terminal_stream::BoundJson {
