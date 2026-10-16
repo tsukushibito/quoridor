@@ -6,7 +6,12 @@ use quoridor_data::Result;
 use quoridor_nnue::{Accumulator, EvaluationMode, residual::ResidualModel};
 use serde::Deserialize;
 use serde_json::{Value, json};
-use std::{cell::Cell, fs, path::PathBuf, sync::Arc};
+use std::{
+    cell::{Cell, RefCell},
+    fs,
+    path::PathBuf,
+    sync::Arc,
+};
 
 #[derive(Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -82,6 +87,7 @@ fn changed_export_full_delta_and_parent_restore_once() -> Result<()> {
     assert_eq!(input.prefixes, expected);
     let heads = Cell::new(0_u64);
     let states = Cell::new(0_u64);
+    let fingerprint = RefCell::new(None::<String>);
     let mut rows = Vec::new();
     let persist = |status: &str, rows: &Vec<Value>| -> Result<()> {
         fs::write(
@@ -91,13 +97,21 @@ fn changed_export_full_delta_and_parent_restore_once() -> Result<()> {
                 "rows":rows,"Search_calls":0,"new_Torch_calls":0,
                 "physical_FT_and_head_hardware_counts":"UNKNOWN",
                 "descriptor":input.descriptor,"weights":input.weights,
-                "book":input.book,"input_sha256":crate::arena::digest(&raw)
+                "book":input.book,"input_sha256":crate::arena::digest(&raw),
+                "native_evaluator_fingerprint":fingerprint.borrow().as_deref()
             }))?,
         )?;
         Ok(())
     };
     persist("PENDING_MODEL_ENTRY", &rows)?;
     let model = Arc::new(ResidualModel::load(&input.descriptor.path)?);
+    *fingerprint.borrow_mut() = Some(
+        model
+            .fingerprint()
+            .iter()
+            .map(|b| format!("{b:02x}"))
+            .collect(),
+    );
     let evaluator = ResidualEvaluator::new(model.clone());
     let mut scratch = model.evaluation_scratch();
     let mut evaluate = |accumulator: &Accumulator| -> Result<f32> {
