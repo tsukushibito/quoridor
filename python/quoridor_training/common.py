@@ -1010,4 +1010,275 @@ def common_cache_config(manifest):
         cursor += batch["batch_count"]
     if cursor != cfg["batch_start"] + cfg["batch_count"]:
         raise ValueError("actual batch union does not cover published interval")
+    if "input_binding" in manifest or "final_fit_view" in manifest:
+        # Only small SHA-bound metadata is opened here, never datasets/rows.
+        metadata, metadata_bytes = {}, 0
+
+        def metadata_identity(info):
+            return (
+                info.st_dev,
+                info.st_ino,
+                info.st_mode,
+                info.st_size,
+                info.st_mtime_ns,
+                info.st_ctime_ns,
+            )
+
+        def read_metadata_bytes(path, info, capacity, sha):
+            import os
+
+            if not stat.S_ISREG(info.st_mode) or not 0 < info.st_size <= capacity:
+                raise ValueError("bounded regular fit-view metadata required")
+            descriptor = os.open(path, os.O_RDONLY | os.O_CLOEXEC | os.O_NOFOLLOW | os.O_NONBLOCK)
+            try:
+                opened = os.fstat(descriptor)
+                if (
+                    not stat.S_ISREG(opened.st_mode)
+                    or metadata_identity(opened) != metadata_identity(info)
+                    or metadata_identity(path.lstat()) != metadata_identity(info)
+                ):
+                    raise ValueError("fit-view opened metadata identity differs from path")
+                chunks, remaining = [], info.st_size
+                while remaining:
+                    block = os.read(descriptor, min(remaining, 65536))
+                    if not block:
+                        break
+                    chunks.append(block)
+                    remaining -= len(block)
+                raw = b"".join(chunks)
+                if (
+                    len(raw) != info.st_size
+                    or hashlib.sha256(raw).hexdigest() != sha
+                    or metadata_identity(os.fstat(descriptor)) != metadata_identity(info)
+                    or metadata_identity(path.lstat()) != metadata_identity(info)
+                ):
+                    raise ValueError("fit-view metadata SHA/identity drift")
+                return raw
+            finally:
+                os.close(descriptor)
+
+        def read_metadata(reference, limit=1048576):
+            nonlocal metadata_bytes
+            if not bound_json_ref(reference) or not Path(reference["path"]).is_absolute():
+                raise ValueError("absolute SHA-bound fit-view metadata required")
+            key = (reference["path"], reference["sha256"])
+            if key not in metadata:
+                path = Path(reference["path"])
+                info = path.lstat()
+                if (
+                    not stat.S_ISREG(info.st_mode)
+                    or not 0 < info.st_size <= limit
+                    or metadata_bytes + info.st_size > 16777216
+                ):
+                    raise ValueError("bounded regular fit-view metadata required")
+                raw = read_metadata_bytes(
+                    path, info, min(limit, 16777216 - metadata_bytes), reference["sha256"]
+                )
+                metadata_bytes += len(raw)
+                metadata[key] = (json.loads(raw), info, limit)
+            else:
+                value, info, previous_limit = metadata[key]
+                if not 0 < info.st_size <= limit:
+                    raise ValueError("cached fit-view metadata exceeds current role bound")
+                metadata[key] = (value, info, min(previous_limit, limit))
+            return metadata[key][0]
+
+        def exact(left, right):
+            return json.dumps(left, sort_keys=True) == json.dumps(right, sort_keys=True)
+
+        def prefix(value):
+            return isinstance(value, list) and all(
+                type(action) is int and 0 <= action < 65536 for action in value
+            )
+
+        def input_assignments(config):
+            schedule = read_metadata(config["schedule"], 4194304)
+            partition = read_metadata(config["partition"], 4194304)
+            slots = schedule["scheduled"]
+            assigned = partition["assignments"]
+            if (
+                not isinstance(slots, list)
+                or len(slots) != config["families"]
+                or not isinstance(assigned, list)
+                or len(assigned) != config["families"]
+                or partition["schema"] != "quoridor-terminal-family-partition-v1"
+                or type(partition["seed"]) is not int
+                or partition["seed"] != config["split_seed"]
+                or not isinstance(partition["rounding"], str)
+                or not partition["rounding"]
+            ):
+                raise ValueError("fit-view bound schedule/partition denominator or seed")
+            family_splits = {}
+            for index, (slot, assignment) in enumerate(zip(slots, assigned)):
+                request = f"fixed-d-family-{index:06}"
+                length = config["prefix_lengths"][index % len(config["prefix_lengths"])]
+                if (
+                    type(slot["game"]) is not int
+                    or slot["game"] != index
+                    or slot["request_id"] != request
+                    or type(slot["requested_prefix_length"]) is not int
+                    or slot["requested_prefix_length"] != length
+                    or not prefix(slot["prefix"])
+                    or len(slot["prefix"]) != length
+                    or slot.get("scheduled_failure") is not None
+                    or set(assignment) != {"game", "family", "prefix", "split"}
+                    or assignment["game"] != request
+                    or not digest(assignment["family"])
+                    or not prefix(assignment["prefix"])
+                    or assignment["prefix"] != slot["prefix"]
+                    or assignment["split"] not in ("train", "validation")
+                    or family_splits.setdefault(assignment["family"], assignment["split"])
+                    != assignment["split"]
+                ):
+                    raise ValueError("fit-view canonical request/prefix/family/split metadata")
+            return assigned, partition["rounding"]
+
+        inlet = read_metadata(manifest["input_binding"]) if "input_binding" in manifest else {}
+        if not isinstance(inlet, dict):
+            raise ValueError("fit-view input binding object required")
+        has_view = "final_fit_view" in manifest
+        if has_view != ("final_fit_view" in inlet):
+            raise ValueError("manifest/input binding fit-view omission or conflict")
+        if has_view:
+            view = manifest["final_fit_view"]
+            if (
+                not mcts
+                or not isinstance(view, dict)
+                or set(view)
+                != {"config", "scope", "realized_games", "changed_global_ids", "assignments"}
+                or view["scope"] != "sampling-only-original-source-validated"
+                or view["config"] != inlet["final_fit_view"]
+                or "model_scale_authority" not in manifest
+                or not exact(inlet.get("model_scale_authority"), manifest["model_scale_authority"])
+                or not exact(read_metadata(view["config"]), cfg)
+                or cfg["batch_start"] != 0
+                or cfg["batch_count"] != cfg["families"]
+                or type(view["realized_games"]) is not int
+                or view["realized_games"] != cfg["families"]
+                or not isinstance(view["assignments"], list)
+                or len(view["assignments"]) != cfg["families"]
+            ):
+                raise ValueError("complete bound MCTS final sampling view/scale required")
+            references = read_metadata(configs)
+            if not exact(references, [batch["config"] for batch in intake["batches"]]):
+                raise ValueError("ordered original native configs differ from source batches")
+            final, rounding = input_assignments(cfg)
+            expected, changed = [], []
+            varying = {"families", "schedule", "partition", "batch_start", "batch_count"}
+            for source_index, (reference, batch, dataset) in enumerate(
+                zip(references, intake["batches"], datasets)
+            ):
+                native = read_metadata(reference)
+                original = native["common_study"]
+                if (
+                    not isinstance(original, dict)
+                    or set(original) != fields
+                    or not exact(
+                        {k: v for k, v in original.items() if k not in varying},
+                        {k: v for k, v in cfg.items() if k not in varying},
+                    )
+                    or type(original["families"]) is not int
+                    or not 0 < original["families"] <= cfg["families"]
+                    or type(original["batch_start"]) is not int
+                    or type(original["batch_count"]) is not int
+                    or original["batch_start"] != batch["batch_start"]
+                    or original["batch_count"] != batch["batch_count"]
+                    or original["batch_start"] + original["batch_count"] > original["families"]
+                    or type(native["simulations"]) is not int
+                    or native["simulations"] != model["completed_simulations"]
+                    or native["inference"]["model_sha"] != model["model_sha256"]
+                    or not isinstance(native["output"], str)
+                    or not Path(native["output"]).is_absolute()
+                    or str(Path(native["output"]) / "dataset") != dataset["dataset"]
+                ):
+                    raise ValueError(
+                        "original source config/slice/model/output differs from fit view"
+                    )
+                original_assignments, original_rounding = input_assignments(original)
+                if original_rounding != rounding:
+                    raise ValueError("source/final partition convention differs")
+                for index in range(
+                    original["batch_start"], original["batch_start"] + original["batch_count"]
+                ):
+                    old, new = original_assignments[index], final[index]
+                    if (
+                        old["game"] != new["game"]
+                        or old["family"] != new["family"]
+                        or old["prefix"] != new["prefix"]
+                    ):
+                        raise ValueError("source/final request/prefix/family differs")
+                    expected.append(
+                        {
+                            "global_id": index,
+                            "game": f"game-{index}",
+                            "request_id": old["game"],
+                            "source_index": source_index,
+                            "family": old["family"],
+                            "prefix": old["prefix"],
+                            "source_split": old["split"],
+                            "view_split": new["split"],
+                        }
+                    )
+                    if old["split"] != new["split"]:
+                        changed.append(index)
+            if not exact(view["assignments"], expected) or not exact(
+                view["changed_global_ids"], changed
+            ):
+                raise ValueError("exact ordered realized fit-view assignment/change correspondence")
+            sampling = manifest["sampling"]
+            families, codes = [], {}
+            for assignment in expected:
+                family = assignment["family"]
+                if family not in codes:
+                    codes[family] = len(families)
+                    families.append(
+                        {
+                            "family": family,
+                            "game": assignment["game"],
+                            "split": assignment["view_split"],
+                        }
+                    )
+            if not exact(sampling["families"], families) or len(sampling["games"]) != len(expected):
+                raise ValueError("final sampling family/realized game census differs")
+            rows, split_rows = [0] * len(families), {"train": 0, "validation": 0}
+            source_rows = [0] * len(datasets)
+            cursor = 0
+            for assignment, game in zip(expected, sampling["games"]):
+                code = codes[assignment["family"]]
+                if (
+                    type(game["rows"]) is not int
+                    or not 0 < game["rows"] <= 200
+                    or not exact(
+                        game,
+                        {
+                            "game": assignment["game"],
+                            "family_code": code,
+                            "start": cursor,
+                            "rows": game["rows"],
+                        },
+                    )
+                ):
+                    raise ValueError("final sampling game identity/code/chronological range")
+                rows[code] += game["rows"]
+                source_rows[assignment["source_index"]] += game["rows"]
+                cursor += game["rows"]
+            eligible = sampling["common_eligible_by_family"]
+            if (
+                cursor != manifest["rows"]
+                or not exact(source_rows, [d["rows"] for d in datasets])
+                or not exact(sampling["rows_by_family"], rows)
+                or not isinstance(eligible, list)
+                or len(eligible) != len(rows)
+            ):
+                raise ValueError("final sampling row/family census differs")
+            for family, count, total in zip(families, eligible, rows):
+                if type(count) is not int or not 0 <= count <= total:
+                    raise ValueError("final sampling eligible family count")
+                split_rows[family["split"]] += count
+            if split_rows != counts:
+                raise ValueError("final sampling eligible split census differs")
+        # Normal caller inputs protect these metadata identities for its lifetime;
+        # check every opened body again before returning this admission result.
+        for (path, sha), (_, info, limit) in metadata.items():
+            read_metadata_bytes(Path(path), info, min(info.st_size, limit), sha)
     return cfg
