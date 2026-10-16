@@ -640,3 +640,7 @@ Tだけを残壁16..20/8..15/1..7/0の各層からchronological等間隔で最�
 [423契約](../../.artifacts/research-policy/nnue-teacher-refresh-20261016.md)と[規模訂正](../../.artifacts/research-policy/nnue-teacher-refresh-20261016-size-correction.md)では、U公開均等、R同Tのfile順0.92減衰、W新Sigma/MCTS TでBEST43追加、F同じ新Tでfresh初期化を比較する。Fも既存descriptorの凍結正規化を使い、学習済みweightsは読まない。zのみを教師にし、old-q小表から追加fitしない。固定specの32はpilotであり必要データ量ではない。実pilotの費用・family/row/distinct/stock分布からsuffixと最終fit-viewを一度固定し、pilot RAW/splitを黙って変更しない。
 
 全256生成requests/2M Sigma、四fit/4M NNUE、160対局/1G nodes、whole128MiB/decimal50GBは上限である。主要W対BEST43を最大64 family×2色、W対Dを同じ先頭16 family×2色とし、未完成は補充しない。U/R/Wのrow更新量はmin(8R,32768)、Fはmin(64R,524288)という一条件で、必要量の保証ではない。新V family-MSEで選ぶ最大4点と、凍結BESTの公開V一度を区別する。公開file番号から生成checkpointの強さを推定せず、旧371の過学習やFの不改善だけで教師無効を結論しない。旧342.17/323の停止、特徴/モデル設計・weights/seals・製品既定は変更しない。
+
+### 多様化421の有限結果（2026-10-16）
+
+64GOAL/2822eligible、Tview927・V606でC/M各29更新を完了し、C BEST0=BEST43 alias、M BEST29を選んだ。Mの新V family-MSEは0.2975679592→0.2940229613、公開Vは0.4238707127→0.4239124679。128 unique対局はM/BEST43 18/0/14、C/BEST43 14/0/18、M/D21/0/11、C/D17/1/14で、全対照が同16開始familyを共有する。一般棋力/因果/Elo/正式昇格を認定せず、Mを研究候補として保持する。高壁16..20のT21行/V15行というcoverageを次の優先提案とするが、追加実行は発行しない。[原fit/D4/全対局・分母・失敗・費](../../research-data/ai-sigma/nnue-diverse421/report-ja.md)。423は別の既許可count-cost契約で継続し、421のparentcloseを入口条件にしない。

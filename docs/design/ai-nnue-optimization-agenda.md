@@ -190,3 +190,7 @@ controller6.492365031968802sに含むのはin-controller checks/journal validati
 固定D Control・同history/TT policy・同diagnosticONで20D4 COMPLETE/4D6 NodeLimit completedD5、同完成深さ/valuebits/root着手/合法/root/parentは整合。PV3rootとworkは異なる。whole中央値4.029465713→3.671291713秒、B/A0.911111292、両B悪化1.10超root0で研究容量候補として支持する。通常OFFの速度/棋力/既定やpaused大量生成へ自動転用しない。容量をhonorする現役softwareを保持し、旧clamp/比較互換shimは残さない。現役研究容量指定機能が不要になればその入口と案内を一緒に撤去する。
 
 D6のKey hitは21882→367054だがcontext/depthのnumeric資格は別で、cutoff217→30。現在のTT-firstによるfinished no-sort cutoff20688→332689、finished非自明sort835244→541503も別分母で記録し、唯一の時刻原因とはしない。共有callbackから現在AのD6途中6,179,454nodesを分離できたが、原392のdepth UNKNOWNは維持する。D6は未解決、history projection/cap増量/別容量sweepを追加していない。
+
+## 壁迂回下界候補424の有限撤去（2026-10-16）
+
+414の条件付き証明を用いたL=max(M,有限|D0[a]−D0[b]|,有限|D1[a]−D1[b]|)は424で一度実装・384calls比較した。追加証明機会は増えたが、主要whole利益を保持に足る形で支持できず、候補/temporary policy/counter/専用fixtureを撤去した。411の現役Manhattan bool/default OFFと完全履歴/typedTT/terminal/control/undoを維持する。これは一般定理の否定や一般速度・棋力の認定ではなく、固定8prefix/二反復/元費用での有限採否である。[原比較・例外・撤去software](../../research-data/ai-sigma/zero-stock-wall-detour424/report-ja.md)。新測定や別閾値の採用は発行しない。

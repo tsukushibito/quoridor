@@ -2145,8 +2145,22 @@ slot4/ply39の親は同じP1視点でNNUE pre-tanh +4.482471／post +0.999744、
 
 保存支持は[Rootの将来枠取消判断](../.artifacts/research-policy/storage-forward-reallocation-20261016.md)を一度だけ適用した。旧342.17の未使用将来8GiBから512MiBだけを取り消し、旧scopeの7.5GiB保全カバーと全原RAW/費用/停止を残す。使用減少のrefundや削除ではない。421 whole256MiBと423 whole128MiBを含む49,600,815,104Bへ、今回の限定ordinary/Build正増分25,034,752Bを一度加え、保守的支持は49,625,849,856B、decimal50GBまで374,150,144Bとなった。[限定確認](../.artifacts/research-team/integration324/nnue-teacher-refresh423-v1/post-build-entry-capacity.json)。実global使用と未観測費はUNKNOWNで、同じ取消の再利用や全target保持の再課金は行わない。
 
-### 壁迂回下界の実装・有限性能比較への別委任（424、2026-10-16）
+### 壁迂回下界の一度の有限比較・撤去（424、2026-10-16）
 
-414の完了はPLAN_ONLYのまま保持し、[新しい424契約](../.artifacts/research-policy/zero-stock-wall-detour-execution-20261016.md)でL=max(M,有限な|D0[a]−D0[b]|,有限な|D1[a]−D1[b]|)の一候補を実装・必要software・限定確認・一度の性能比較へ接続する。正当に借用できる既存同wall/goals/寸法の表だけを使い、新BFS/表構築/81走査を加えない。旧M成功と資格あるTT hitへ交差参照を足さず、true terminal/履歴E/typed TT/復元を維持する。
+414のPLAN_ONLY完了はそのままに、別契約424で一候補Lを実装し、同image OFF/M/L/L/M/OFF×BEST43/D×LMR OFF/ON×旧8prefix×cold/warmの384callsを一度実行した。348 COMPLETE、36 NodeLimit UNKNOWN、243,656,252 nodes。同policy192対応は非時計work/valuebits/action/PV/status/depthが一致し、UNKNOWN補充・追加測定は0。
 
-同一imageのOFF→M→L→L→M→OFF、BEST43/D×LMR OFF/ON-depth_rank×旧411の8prefix×cold/warmで最大384calls/192sessions、D8/各4M/全1.536B nodesとする。速度枠だけを既存科学jobの実安全停止境界へ直列化し、NNUE作業を優先する。wholeと実work、反復変動、UNKNOWNを分け、固定対象で利益が支持されなければ候補を現役から撤去する。まだ性能・棋力の新結果ではなく、製品/generator既定変更や追加sweepを許可するものでもない。
+Lは2,599,132回の追加検査で11,378回の追加幾何通過を得たが、M比のnodes減は24,874（約0.0307%）。主要whole_driver時計のL/MはNNUE OFF/ONで1.006527/1.013539、D OFF/ONで0.981790/0.998456、L/OFFは4層とも1.012113〜1.021866。D/LMR OFFの別whole時計ではL/OFF0.991554という例外も保持する。異workを同仕事speedupとせず、固定8局面・二反復から一般速度/棋力を認定しない。
+
+保持に足るwhole利益が支持されず、候補L/一時selector/3counter/7候補定義を03a319749で撤去した。411のManhattan bool/default OFFと履歴/typedTT等は維持。撤去後の影響411テスト1定義、関連AI/runner Clippy/compile、真正releaseはPASSし、旧9/384は再演していない。[有限結果・原証拠・撤去software](../research-data/ai-sigma/zero-stock-wall-detour424/report-ja.md)。原FAILED/EIO/RAW/費UNKNOWN、保存支持の具体不足、全pause/models/defaults/seals/foreign変更を保持し、追加sweepは発行しない。
+
+### 多様化混合421の有限128局と保存解釈（2026-10-16）
+
+原64GOAL/2822eligible/51T13VからTview927（高壁16..20は21）、V606（同15）を使用した。C/M各29更新、C BEST0はBEST43 alias、M BEST29。M追加3712 draws=923行4回＋4行5回。新V family-MSE0.2975679592→0.2940229613と公開V0.4238707127→0.4239124679を分け、一般棋力改善や正式昇格は認定しない。C原operationのFAILEDと保存fit受入れは併記した。
+
+原最初32局を再用し、元の未入場96だけを一度実行して128 unique/64色pair、127GOAL＋1draw、UNKNOWN0、726,360,091nodes。M/BEST43は18/0/14、C/BEST43は14/0/18、M/Dは21/0/11、C/Dは17/1/14。同じ16開始familyを四対照で共有し、表示名でなくbook/lineage/prefix/historyを照合した。C/BEST43は同じtyped96a5なので、その14/18を関数劣化の証拠にはしない。四つの250M枠は独立のまま、融通・追加対局・成功再演0。
+
+D4は原12＋真正未入場M6の18 uniqueが全完成し、Maction差1/6・PV差2/6。chosen-hand root値の差であり、forced候補値や真値・旧敗因の修正ではない。Mは研究候補として保持し、次は高壁数coverageを明示する案を優先提案するだけで追加scienceを発行しない。[全表・限界・費・原FAILED・保存受入れ](../research-data/ai-sigma/nnue-diverse421/report-ja.md)。旧pause、製品/default weights/models/sealsは変わらない。
+
+### 共有targetの重複RESOURCE COVER限定訂正（2026-10-16）
+
+424 cleanup後の共有領域正増分552,148,992Bを確認した。Rootは、397が既に先行coverに含む同一canonical targetを再加算したと明記する原receiptに基づき、小さい先行floor1,511,395,328Bだけを重複coverから一度除いた。397の非負growth32,727,040Bと全原snapshot/used証拠/費/ファイル、他の過大計上、全private image・Main保持を残す。50,000,000,000−1,511,395,328＋552,148,992＝49,040,753,664B、小admin tails前の残余959,246,336B。旧未使用future97,346,560Bは変えず、512MiB/migration forward再適用・削除/使用減少/費用refundは0、actualglobalはUNKNOWN。[固定判断と一度の適用](../.artifacts/research-team/integration324/zero-stock-wall-detour424-v1/retirement-build-v1/storage-support-application.json)。421whole256MiB/423whole128MiBと全USERPAUSE/default/model/weights/sealsを維持し、既許可の真正未完了工程だけを通常guardで継続する。
