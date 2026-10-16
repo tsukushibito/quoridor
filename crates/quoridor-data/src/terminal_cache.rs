@@ -134,7 +134,7 @@ impl Writer {
         })
     }
 
-    fn sampling_code(&mut self, r: &TeacherRow) -> Result<u32> {
+    fn sampling_code(&mut self, r: &TeacherRow, split: &crate::Split) -> Result<u32> {
         let common = self.common.as_ref().ok_or("common sampling required")?;
         let max_rows = common
             .batch_count
@@ -151,6 +151,7 @@ impl Writer {
                 .bytes()
                 .all(|b| b.is_ascii_digit() || (b'a'..=b'f').contains(&b))
             || !matches!(r.split, crate::Split::Train | crate::Split::Validation)
+            || !matches!(split, crate::Split::Train | crate::Split::Validation)
             || !self.identities.insert(r.id.clone())
         {
             return Err(
@@ -159,7 +160,7 @@ impl Writer {
         }
         if let Some(&code) = self.family_codes.get(&r.family) {
             let f = &self.families[code as usize];
-            if f.split != r.split {
+            if &f.split != split {
                 return Err("whole family game/split drift".into());
             }
             return Ok(code);
@@ -172,7 +173,7 @@ impl Writer {
         self.families.push(SamplingFamily {
             family: r.family.clone(),
             game: r.game.clone(),
-            split: r.split.clone(),
+            split: split.clone(),
         });
         self.rows_by_family.push(0);
         self.common_eligible_by_family.push(0);
@@ -184,6 +185,17 @@ impl Writer {
         r: &TeacherRow,
         evidence: Option<serde_json::Value>,
     ) -> Result<()> {
+        self.push_with_sampling_split(r, evidence, None)
+    }
+
+    // Original TeacherRow remains immutable; only compact sampling metadata may use a view.
+    fn push_with_sampling_split(
+        &mut self,
+        r: &TeacherRow,
+        evidence: Option<serde_json::Value>,
+        sampling_split: Option<&crate::Split>,
+    ) -> Result<()> {
+        let split = sampling_split.unwrap_or(&r.split);
         // Pure raw/provenance checks precede geometry or any row publication.
         let common_labels = self
             .common
@@ -210,7 +222,7 @@ impl Writer {
             })
             .transpose()?;
         let sampling = if self.common.is_some() {
-            Some(self.sampling_code(r)?)
+            Some(self.sampling_code(r, split)?)
         } else {
             None
         };
@@ -291,12 +303,12 @@ impl Writer {
             self.streams[6].write_all(&[u8::from(eligible)])?;
             self.streams[4].write_all(&code.to_le_bytes())?;
             self.streams[4].write_all(&[
-                u8::from(r.split == crate::Split::Validation),
+                u8::from(*split == crate::Split::Validation),
                 u8::from(r.eligible),
             ])?;
             self.common_eligible += usize::from(eligible);
             if eligible {
-                let key = if r.split == crate::Split::Train {
+                let key = if *split == crate::Split::Train {
                     "train"
                 } else {
                     "validation"
@@ -481,6 +493,152 @@ fn mcts_game_id(game: &str) -> Result<usize> {
     Ok(id)
 }
 
+// Explicit optional final sampling view, bound through the existing input-binding inlet.
+// This does not revise any producer config, row, source split or source publication.
+struct MctsFitView {
+    reference: crate::terminal_stream::BoundJson,
+    common: crate::common_corpus::Config,
+    partition: crate::terminal::FamilyPartition,
+}
+
+#[derive(serde::Serialize)]
+struct MctsFitAssignment {
+    global_id: usize,
+    game: String,
+    request_id: String,
+    source_index: usize,
+    family: String,
+    prefix: Vec<u16>,
+    source_split: crate::Split,
+    view_split: crate::Split,
+}
+
+fn fit_assignment<'a>(
+    partition: &'a crate::terminal::FamilyPartition,
+    request: &str,
+) -> Result<&'a crate::terminal::FamilyAssignment> {
+    let mut matches = partition.assignments.iter().filter(|a| a.game == request);
+    let value = matches
+        .next()
+        .ok_or("fit-view missing canonical assignment")?;
+    if matches.next().is_some() {
+        return Err("fit-view duplicate canonical assignment".into());
+    }
+    Ok(value)
+}
+
+fn fit_view_game(cursor: &mut usize, id: usize, end: usize) -> Result<()> {
+    if id != *cursor || id >= end {
+        return Err(
+            "fit-view realized game block reordered, repeated, missing or outside slice".into(),
+        );
+    }
+    *cursor = cursor
+        .checked_add(1)
+        .ok_or("fit-view realized game overflow")?;
+    Ok(())
+}
+
+impl MctsFitView {
+    fn read(binding: Option<&serde_json::Value>) -> Result<Option<Self>> {
+        let Some(value) = binding.and_then(|b| b.get("final_fit_view")) else {
+            return Ok(None);
+        };
+        let reference: crate::terminal_stream::BoundJson = serde_json::from_value(value.clone())?;
+        if !reference.path.is_absolute() {
+            return Err("fit-view absolute bound config required".into());
+        }
+        let common: crate::common_corpus::Config = serde_json::from_value(reference.read()?)?;
+        common.validate_inputs()?;
+        if common.batch_start != 0
+            || common.batch_count != common.families
+            || !matches!(
+                common.root_value_policy,
+                crate::common_corpus::RootValuePolicy::OutcomeOnly
+            )
+        {
+            return Err("fit-view must bind one complete canonical outcome-only input set".into());
+        }
+        let partition = serde_json::from_value(common.partition.read()?)?;
+        Ok(Some(Self {
+            reference,
+            common,
+            partition,
+        }))
+    }
+
+    fn append_source(
+        &self,
+        source: &crate::common_corpus::Config,
+        partition: &crate::terminal::FamilyPartition,
+        source_index: usize,
+        assignments: &mut Vec<MctsFitAssignment>,
+    ) -> Result<()> {
+        // Only these explicit input-set/view fields may differ. All other actual settings match.
+        let mut expected = self.common.clone();
+        expected.families = source.families;
+        expected.schedule = source.schedule.clone();
+        expected.partition = source.partition.clone();
+        expected.batch_start = source.batch_start;
+        expected.batch_count = source.batch_count;
+        let range = source.batch_range()?;
+        if serde_json::to_value(&expected)? != serde_json::to_value(source)?
+            || source.families > self.common.families
+            || range.start != assignments.len()
+            || u64::try_from(range.end)? > self.common.families
+        {
+            return Err(
+                "fit-view source settings or contiguous ordered global slots differ".into(),
+            );
+        }
+        let requests = source.global_requests()?;
+        let final_requests = self.common.global_requests()?;
+        for id in range {
+            if requests[id] != final_requests[id] {
+                return Err("fit-view global request identity/length differs".into());
+            }
+            let original = fit_assignment(partition, &requests[id].0)?;
+            let target = fit_assignment(&self.partition, &final_requests[id].0)?;
+            if original.family != target.family
+                || original.prefix != target.prefix
+                || !matches!(
+                    original.split,
+                    crate::Split::Train | crate::Split::Validation
+                )
+                || !matches!(target.split, crate::Split::Train | crate::Split::Validation)
+            {
+                return Err(
+                    "fit-view source/final prefix or family differs or split is not T/V".into(),
+                );
+            }
+            assignments.push(MctsFitAssignment {
+                global_id: id,
+                game: format!("game-{id}"),
+                request_id: requests[id].0.clone(),
+                source_index,
+                family: original.family.clone(),
+                prefix: original.prefix.clone(),
+                source_split: original.split.clone(),
+                view_split: target.split.clone(),
+            });
+        }
+        Ok(())
+    }
+}
+
+impl MctsFitAssignment {
+    fn check_source_row(&self, row: &TeacherRow) -> Result<()> {
+        if row.game != self.game
+            || row.family != self.family
+            || row.split != self.source_split
+            || !row.prefix.starts_with(&self.prefix)
+        {
+            return Err("fit-view row differs from validated original source assignment".into());
+        }
+        Ok(())
+    }
+}
+
 /// Normal selfplay datasets only. Each actual native config is SHA-bound and
 /// corresponds to one input dataset in the same global slice order.
 pub fn write_common_mcts(
@@ -494,6 +652,9 @@ pub fn write_common_mcts(
     if inputs.is_empty() || references.len() != inputs.len() || !output.is_absolute() {
         return Err("ordered native datasets/configs and fresh absolute output required".into());
     }
+    let input_binding = binding.map(terminal_stream::BoundJson::read).transpose()?;
+    let fit_view = MctsFitView::read(input_binding.as_ref())?;
+    let mut view_assignments = Vec::new();
     let mut unique = BTreeSet::new();
     let mut runs = Vec::new();
     let mut combined: Option<common_corpus::Config> = None;
@@ -548,38 +709,51 @@ pub fn write_common_mcts(
         } else {
             model = Some(source.clone());
         }
-        if let Some(total) = &mut combined {
-            let mut expected = total.clone();
-            expected.batch_start = common.batch_start;
-            expected.batch_count = common.batch_count;
-            if serde_json::to_value(expected)? != serde_json::to_value(&common)?
-                || common.batch_start
-                    != total
-                        .batch_start
-                        .checked_add(total.batch_count)
-                        .ok_or("batch sum")?
-            {
-                return Err("MCTS global input settings differ or slices overlap/gap/order".into());
-            }
-            total.batch_count = total
-                .batch_count
-                .checked_add(common.batch_count)
-                .ok_or("batch sum")?;
-        } else {
-            combined = Some(common.clone());
-        }
         let partition: terminal::FamilyPartition =
             serde_json::from_value(common.partition.read()?)?;
+        if let Some(view) = &fit_view {
+            view.append_source(&common, &partition, runs.len(), &mut view_assignments)?;
+        } else {
+            if let Some(total) = &mut combined {
+                let mut expected = total.clone();
+                expected.batch_start = common.batch_start;
+                expected.batch_count = common.batch_count;
+                if serde_json::to_value(expected)? != serde_json::to_value(&common)?
+                    || common.batch_start
+                        != total
+                            .batch_start
+                            .checked_add(total.batch_count)
+                            .ok_or("batch sum")?
+                {
+                    return Err(
+                        "MCTS global input settings differ or slices overlap/gap/order".into(),
+                    );
+                }
+                total.batch_count = total
+                    .batch_count
+                    .checked_add(common.batch_count)
+                    .ok_or("batch sum")?;
+            } else {
+                combined = Some(common.clone());
+            }
+        }
         runs.push((input, common, partition));
     }
-    let common = combined.ok_or("MCTS common config")?;
+    let common = if let Some(view) = &fit_view {
+        if u64::try_from(view_assignments.len())? != view.common.families {
+            return Err("fit-view source slot census incomplete".into());
+        }
+        view.common.clone()
+    } else {
+        combined.ok_or("MCTS common config")?
+    };
     common.validate_shape()?;
     let model = model.ok_or("MCTS source")?;
-    let input_binding = binding.map(terminal_stream::BoundJson::read).transpose()?;
     let scale = terminal_stream::model_scale_authority(input_binding.as_ref())?;
     terminal_stream::publish_common_cache(output, common.clone(), inputs, |writer| {
         writer.mcts_source = Some(model.clone());
         let mut datasets = Vec::new();
+        let mut realized = 0usize;
         for (input, common, partition) in &runs {
             let manifest_path = input.join("manifest.json");
             let manifest_sha = file_sha(&manifest_path)?;
@@ -620,6 +794,9 @@ pub fn write_common_mcts(
                     if row.prefix != assignment.prefix {
                         return Err("MCTS first row differs from scheduled full prefix".into());
                     }
+                    if fit_view.is_some() {
+                        fit_view_game(&mut realized, id, common.batch_range()?.end)?;
+                    }
                     game = Some(row.game.clone());
                     previous = None;
                     final_prefix = Some(provenance.final_prefix.clone());
@@ -630,13 +807,22 @@ pub fn write_common_mcts(
                     return Err("MCTS rows not one complete chronological game".into());
                 }
                 previous = Some(row.ply);
-                writer.push(row, None)?;
+                if fit_view.is_some() {
+                    let assignment = view_assignments.get(id).ok_or("fit-view row slot")?;
+                    assignment.check_source_row(row)?;
+                    writer.push_with_sampling_split(row, None, Some(&assignment.view_split))?;
+                } else {
+                    writer.push(row, None)?;
+                }
                 actual_rows += 1;
                 Ok(())
             })?;
             if previous.is_some_and(|p| usize::from(p) + 1 != final_prefix.as_ref().unwrap().len())
             {
                 return Err("MCTS final game block incomplete".into());
+            }
+            if fit_view.is_some() && realized != common.batch_range()?.end {
+                return Err("fit-view source has missing realized game slots".into());
             }
             let manifest: crate::DatasetManifest =
                 serde_json::from_reader(std::fs::File::open(input.join("manifest.json"))?)?;
@@ -645,11 +831,40 @@ pub fn write_common_mcts(
             }
             datasets.push(serde_json::json!({"dataset":input,"manifest_sha256":manifest_sha,"rows":actual_rows}));
         }
+        if let Some(view) = &fit_view {
+            if u64::try_from(realized)? != view.common.families {
+                return Err("fit-view realized slot census incomplete".into());
+            }
+            view.reference.read()?;
+            view.common.schedule.read()?;
+            view.common.partition.read()?;
+            for (_, original, _) in &runs {
+                original.schedule.read()?;
+                original.partition.read()?;
+            }
+        }
+        if let Some(binding) = binding {
+            binding.read()?;
+        }
         configs.read()?;
         for reference in &references {
             reference.read()?;
         }
         let mut extra = serde_json::Map::new();
+        if let Some(view) = &fit_view {
+            extra.insert(
+                "final_fit_view".into(),
+                serde_json::json!({
+                    "config": view.reference,
+                    "scope": "sampling-only-original-source-validated",
+                    "realized_games": realized,
+                    "changed_global_ids": view_assignments.iter()
+                        .filter(|a| a.source_split != a.view_split)
+                        .map(|a| a.global_id).collect::<Vec<_>>(),
+                    "assignments": view_assignments,
+                }),
+            );
+        }
         extra.insert("mcts_datasets".into(), serde_json::to_value(&datasets)?);
         extra.insert("mcts_source".into(), serde_json::to_value(model)?);
         extra.insert("mcts_native_configs".into(), serde_json::to_value(configs)?);
@@ -958,6 +1173,238 @@ mod common_mcts_codec_tests {
         );
         assert!(!failed.join("cache.json").exists());
         assert!(failed.join(".intake.partial").is_dir());
+        fs::remove_dir_all(root).unwrap();
+    }
+
+    fn fit_config(families: u64, start: u64, count: u64) -> crate::common_corpus::Config {
+        let reference = BoundJson {
+            path: PathBuf::from("/unexecuted-fixture.json"),
+            sha256: "0".repeat(64),
+        };
+        crate::common_corpus::Config {
+            families,
+            prefix_seed: 1,
+            prefix_lengths: vec![4],
+            split_seed: 2,
+            root_value_policy: crate::common_corpus::RootValuePolicy::OutcomeOnly,
+            schedule: reference.clone(),
+            partition: reference,
+            batch_start: start,
+            batch_count: count,
+            excluded_books: vec![],
+        }
+    }
+
+    fn fit_partition(count: usize) -> crate::terminal::FamilyPartition {
+        crate::terminal::FamilyPartition {
+            schema: "fixture-pure-mapping".into(),
+            seed: 2,
+            rounding: "fixture".into(),
+            assignments: (0..count)
+                .map(|id| crate::terminal::FamilyAssignment {
+                    game: format!("fixed-d-family-{id:06}"),
+                    prefix: vec![13],
+                    family: format!("{id:064x}"),
+                    split: if id % 5 == 3 {
+                        Split::Validation
+                    } else {
+                        Split::Train
+                    },
+                })
+                .collect(),
+        }
+    }
+
+    #[test]
+    fn final_fit_view_32_plus_suffix256_only_explicit_split_and_ordered_slots() {
+        let mut source = fit_partition(32);
+        let mut final_partition = fit_partition(256);
+        source.assignments[18].split = Split::Validation;
+        final_partition.assignments[18].split = Split::Train;
+        let view = MctsFitView {
+            reference: fit_config(256, 0, 256).schedule.clone(),
+            common: fit_config(256, 0, 256),
+            partition: final_partition,
+        };
+        let mut mappings = Vec::new();
+        view.append_source(&fit_config(32, 0, 32), &source, 0, &mut mappings)
+            .unwrap();
+        view.append_source(&fit_config(256, 32, 224), &view.partition, 1, &mut mappings)
+            .unwrap();
+        assert_eq!(mappings.len(), 256);
+        assert_eq!(
+            mappings
+                .iter()
+                .filter(|a| a.source_split != a.view_split)
+                .map(|a| a.global_id)
+                .collect::<Vec<_>>(),
+            vec![18]
+        );
+        assert_eq!(mappings[18].game, "game-18");
+        assert_eq!(mappings[32].source_index, 1);
+        let mut cursor = 0;
+        for id in 0..256 {
+            fit_view_game(&mut cursor, id, 256).unwrap();
+        }
+        assert_eq!(cursor, 256);
+        for id in [255, 257] {
+            assert!(fit_view_game(&mut cursor, id, 256).is_err());
+        }
+        let mut cursor = 0;
+        assert!(fit_view_game(&mut cursor, 1, 32).is_err());
+        assert!(MctsFitView::read(None).unwrap().is_none());
+        assert!(
+            MctsFitView::read(Some(&serde_json::json!({})))
+                .unwrap()
+                .is_none()
+        );
+    }
+
+    #[test]
+    fn final_fit_view_refuses_source_identity_split_settings_gaps_and_aliases() {
+        let view = MctsFitView {
+            reference: fit_config(256, 0, 256).schedule.clone(),
+            common: fit_config(256, 0, 256),
+            partition: fit_partition(256),
+        };
+        for mut bad in [fit_config(32, 1, 31), fit_config(32, 0, 32)] {
+            if bad.batch_start == 0 {
+                bad.split_seed += 1;
+            }
+            assert!(
+                view.append_source(&bad, &fit_partition(32), 0, &mut Vec::new())
+                    .is_err()
+            );
+        }
+        for mode in 0..5 {
+            let mut bad = fit_partition(32);
+            match mode {
+                0 => bad.assignments[0].prefix = vec![3],
+                1 => bad.assignments[0].family = "f".repeat(64),
+                2 => bad.assignments[0].game = "fixed-d-family-0000000".into(),
+                3 => bad.assignments.push(bad.assignments[0].clone()),
+                _ => bad.assignments[0].split = Split::Test,
+            }
+            assert!(
+                view.append_source(&fit_config(32, 0, 32), &bad, 0, &mut Vec::new())
+                    .is_err()
+            );
+        }
+        let assignment = MctsFitAssignment {
+            global_id: 18,
+            game: "game-18".into(),
+            request_id: "fixed-d-family-000018".into(),
+            source_index: 0,
+            family: "a".repeat(64),
+            prefix: vec![],
+            source_split: Split::Validation,
+            view_split: Split::Train,
+        };
+        let mut original = row(18, -0.0);
+        assert!(assignment.check_source_row(&original).is_err());
+        original.split = Split::Validation;
+        assignment.check_source_row(&original).unwrap();
+        original.game = "game-018".into();
+        assert!(assignment.check_source_row(&original).is_err());
+    }
+
+    #[test]
+    fn final_fit_view_bound_target_partition_uses_canonical_owner() {
+        let root = std::env::temp_dir().join(format!("fit-target-{}", std::process::id()));
+        fs::create_dir(&root).unwrap();
+        let bind = |name: &str, value: &serde_json::Value| {
+            let path = root.join(name);
+            fs::write(&path, serde_json::to_vec(value).unwrap()).unwrap();
+            BoundJson {
+                sha256: file_sha(&path).unwrap(),
+                path,
+            }
+        };
+        let mut common = fit_config(1, 0, 1);
+        common.prefix_lengths = vec![1];
+        common.schedule = bind(
+            "schedule.json",
+            &serde_json::json!({
+                "scheduled":[{"game":0,"request_id":"fixed-d-family-000000",
+                    "requested_prefix_length":1,"prefix":[13]}]
+            }),
+        );
+        let partition = crate::terminal::partition_families(
+            &[("fixed-d-family-000000".into(), vec![13])],
+            common.split_seed,
+        )
+        .unwrap();
+        common.partition = bind("partition.json", &serde_json::to_value(&partition).unwrap());
+        let reference = bind("view.json", &serde_json::to_value(&common).unwrap());
+        let input = serde_json::json!({"final_fit_view": reference});
+        assert!(MctsFitView::read(Some(&input)).unwrap().is_some());
+        let mut wrong = partition;
+        wrong.assignments[0].split = Split::Train; // One family has floor(4/5)=0 training families.
+        common.partition = bind(
+            "wrong-partition.json",
+            &serde_json::to_value(wrong).unwrap(),
+        );
+        let reference = bind("wrong-view.json", &serde_json::to_value(common).unwrap());
+        assert!(MctsFitView::read(Some(&serde_json::json!({"final_fit_view":reference}))).is_err());
+        assert!(MctsFitView::read(Some(&serde_json::json!({"final_fit_view":null}))).is_err());
+        fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn final_fit_view_sampling_override_preserves_original_row_and_payload() {
+        let root = std::env::temp_dir().join(format!("fit-sampling-{}", std::process::id()));
+        fs::create_dir(&root).unwrap();
+        let moves = vec![13, 75, 22, 66, 31, 57, 40, 48, 49, 39, 58, 30, 67, 21, 76];
+        let context = SigmaContext::from_prefix(&moves).unwrap();
+        let terminal =
+            TerminalProvenance::from_context(&context, moves, Termination::Goal, "goal".into())
+                .unwrap();
+        let mut original = row(18, -0.0);
+        original.split = Split::Validation;
+        attach_terminal_targets(std::slice::from_mut(&mut original), &terminal).unwrap();
+        let original_json = serde_json::to_value(&original).unwrap();
+        for (name, split) in [("original", None), ("view", Some(Split::Train))] {
+            let mut writer = Writer::new_common(&root.join(name), fit_config(1, 0, 1)).unwrap();
+            writer.mcts_source = Some(MctsSource {
+                model_sha256: "b".repeat(64),
+                completed_simulations: 64,
+            });
+            if let Some(split) = &split {
+                writer
+                    .push_with_sampling_split(&original, None, Some(split))
+                    .unwrap();
+            } else {
+                writer.push(&original, None).unwrap();
+            }
+            writer
+                .finish("c".repeat(64), false, serde_json::Map::new())
+                .unwrap();
+        }
+        assert_eq!(serde_json::to_value(&original).unwrap(), original_json);
+        for entry in fs::read_dir(root.join("original")).unwrap() {
+            let name = entry.unwrap().file_name();
+            if name == "cache.json" || name == "sampling.bin" {
+                continue;
+            }
+            assert_eq!(
+                fs::read(root.join("original").join(&name)).unwrap(),
+                fs::read(root.join("view").join(&name)).unwrap(),
+                "{name:?}"
+            );
+        }
+        let original_sampling = fs::read(root.join("original/sampling.bin")).unwrap();
+        let view_sampling = fs::read(root.join("view/sampling.bin")).unwrap();
+        assert_eq!(&original_sampling[..4], &view_sampling[..4]);
+        assert_eq!(original_sampling[4], 1);
+        assert_eq!(view_sampling[4], 0);
+        assert_eq!(original_sampling[5], view_sampling[5]);
+        let value: serde_json::Value =
+            serde_json::from_slice(&fs::read(root.join("view/cache.json")).unwrap()).unwrap();
+        assert_eq!(
+            value["common_corpus"]["common_eligible_by_split"]["train"],
+            1
+        );
+        assert_eq!(value["sampling"]["families"][0]["split"], "train");
         fs::remove_dir_all(root).unwrap();
     }
 }
