@@ -86,6 +86,7 @@ fn changed_export_full_delta_and_parent_restore_once() -> Result<()> {
         .collect::<std::result::Result<_, _>>()?;
     assert_eq!(input.prefixes, expected);
     let heads = Cell::new(0_u64);
+    let returned = Cell::new(0_u64);
     let states = Cell::new(0_u64);
     let fingerprint = RefCell::new(None::<String>);
     let mut rows = Vec::new();
@@ -93,7 +94,7 @@ fn changed_export_full_delta_and_parent_restore_once() -> Result<()> {
         fs::write(
             &output_path,
             serde_json::to_vec(&json!({
-                "status":status,"heads_started":heads.get(),"distinct_states":states.get(),
+                "status":status,"heads_started":heads.get(),"heads_returned":returned.get(),"distinct_states":states.get(),
                 "rows":rows,"Search_calls":0,"new_Torch_calls":0,
                 "physical_FT_and_head_hardware_counts":"UNKNOWN",
                 "descriptor":input.descriptor,"weights":input.weights,
@@ -114,10 +115,24 @@ fn changed_export_full_delta_and_parent_restore_once() -> Result<()> {
     );
     let evaluator = ResidualEvaluator::new(model.clone());
     let mut scratch = model.evaluation_scratch();
-    let mut evaluate = |accumulator: &Accumulator| -> Result<f32> {
+    let mut evaluate = |accumulator: &Accumulator, rows: &Vec<Value>| -> Result<f32> {
         assert!(heads.get() < input.head_cap);
         heads.set(heads.get() + 1);
-        Ok(model.evaluate_with_scratch(accumulator, &mut scratch)?)
+        persist("PENDING_HEAD_RETURN", rows)?;
+        let value = model.evaluate_with_scratch(accumulator, &mut scratch)?;
+        returned.set(returned.get() + 1);
+        persist("HEAD_RETURNED", rows)?;
+        Ok(value)
+    };
+    let evaluate_factory = |context: &SigmaContext, rows: &Vec<Value>| -> Result<f32> {
+        let accumulator = evaluator.prepare_context(context)?;
+        assert!(heads.get() < input.head_cap);
+        heads.set(heads.get() + 1);
+        persist("PENDING_FACTORY_HEAD_RETURN", rows)?;
+        let value = evaluator.evaluate(context, accumulator.as_ref())?;
+        returned.set(returned.get() + 1);
+        persist("FACTORY_HEAD_RETURNED", rows)?;
+        Ok(value)
     };
     for prefix in &input.prefixes {
         let mut context = SigmaContext::from_prefix(prefix)?;
@@ -131,10 +146,8 @@ fn changed_export_full_delta_and_parent_restore_once() -> Result<()> {
             context.total_ply(),
         );
         let parent = model.full_context(&context, EvaluationMode::Scalar)?;
-        let parent_value = evaluate(&parent)?;
-        assert!(heads.get() < input.head_cap);
-        heads.set(heads.get() + 1);
-        close(parent_value, evaluator.evaluate(&context, None)?);
+        let parent_value = evaluate(&parent, &rows)?;
+        close(parent_value, evaluate_factory(&context, &rows)?);
         let legal = context.legal_ids();
         let actions: Vec<_> = [0..81, 81..145, 145..209]
             .into_iter()
@@ -151,26 +164,27 @@ fn changed_export_full_delta_and_parent_restore_once() -> Result<()> {
             let delta = model.delta_context(&parent, &context)?;
             assert_eq!(full.features.ids, delta.features.ids);
             assert_eq!(full.features.side, delta.features.side);
-            let value = evaluate(&full)?;
-            close(value, evaluate(&delta)?);
+            let value = evaluate(&full, &rows)?;
+            close(value, evaluate(&delta, &rows)?);
             let simd = model.full_context(&context, EvaluationMode::Simd)?;
             let simd_parent =
                 model.full_context(&SigmaContext::from_prefix(prefix)?, EvaluationMode::Simd)?;
-            close(value, evaluate(&simd)?);
+            close(value, evaluate(&simd, &rows)?);
             close(
                 value,
-                evaluate(&model.delta_context(&simd_parent, &context)?)?,
+                evaluate(&model.delta_context(&simd_parent, &context)?, &rows)?,
             );
-            assert!(heads.get() < input.head_cap);
-            heads.set(heads.get() + 1);
-            close(value, evaluator.evaluate(&context, None)?);
+            close(value, evaluate_factory(&context, &rows)?);
             context.unmake_move(undo)?;
             assert_eq!(context.position(), before.0);
             assert_eq!(context.history_counts(), before.1);
             assert_eq!(context.total_ply(), before.2);
             close(
                 parent_value,
-                evaluate(&model.full_context(&context, EvaluationMode::Scalar)?)?,
+                evaluate(
+                    &model.full_context(&context, EvaluationMode::Scalar)?,
+                    &rows,
+                )?,
             );
             rows.push(json!({"prefix":prefix,"child_action":action,
                 "parent_value":parent_value,"child_value":value,"parent_restored":true}));
