@@ -633,6 +633,8 @@ Tだけを残壁16..20/8..15/1..7/0の各層からchronological等間隔で最�
 
 [422の同一7状態の直接評価表](../../research-data/ai-sigma/static-evaluators422/report-ja.md)では、4葉の正本NNUE pre/postとDが419保存値とbits一致した。slot4/ply39親は実STM1でNNUE +0.999744、Sigma −0.989549、D −0.833655。これは別木のsearched root値ではない。入力・符号・尺度の対応に明確な不一致は見つからなかったが、選択済み7状態から教師不適合・飽和の単独原因・最適WDLを採用しない。Sigma raw/adapterは同forwardの無変換returnというsource対応で、独立二観測のparityではない。追加Search/fit/対局は0、NNUE7head/Sigma7rows/D7で終了した。
 
+実fitはCがBEST0、MがBEST29を選んだ。MのnewV family-MSEは0.2975679592→0.2940229613、公開fullV MSEは0.4238707127→0.4239124679であり、別々に解釈する。C/M合計3,874,723 forwards、Mの共有INITIAL追加0。変更Mの限定120 head対応確認後、同じ6親のD4はBEST43/M/Dの18 unique callsが全完成し893,657 nodesだった。Cは選択重みがBEST43と同じため6件を参照し、成功を再演しない。原Mの未入場はraw fingerprintと正本typed digestのRoot設定誤りで、正しいnative識別子を追加head0で取得して元6件だけ継続した。原FAILED/UNKNOWN・費を保持し、[保存集約結果](../../.artifacts/research-team/integration324/nnue-diverse421-v1/science-v1/depth4-M-entry-v2/collection.json)から棋力や一般的因果を認定しない。
+
 ### 現在Sigma新データとfile順減衰の別試行423（2026-10-16）
 
 [423契約](../../.artifacts/research-policy/nnue-teacher-refresh-20261016.md)と[規模訂正](../../.artifacts/research-policy/nnue-teacher-refresh-20261016-size-correction.md)では、U公開均等、R同Tのfile順0.92減衰、W新Sigma/MCTS TでBEST43追加、F同じ新Tでfresh初期化を比較する。Fも既存descriptorの凍結正規化を使い、学習済みweightsは読まない。zのみを教師にし、old-q小表から追加fitしない。固定specの32はpilotであり必要データ量ではない。実pilotの費用・family/row/distinct/stock分布からsuffixと最終fit-viewを一度固定し、pilot RAW/splitを黙って変更しない。

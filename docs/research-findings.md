@@ -2131,11 +2131,19 @@ slot4/ply39の親は同じP1視点でNNUE pre-tanh +4.482471／post +0.999744、
 
 別入力64requestsは64 unique family、全64goal、UNKNOWN0、2,822適格行、434,615,074 nodesとなった。元の未入場caller失敗とconverterのbook/TT容量拒否を保持し、生成を再演せず正本receiverを修復した新出力cacheはT2,216/V606、51T/13V familyである。T-onlyの層抽出で927行となり、C/M共通29更新、観測点0/8/15/22/29へ確定した。C上界2,151,799＋共有INITIAL後のM上界1,722,924＋変更重み予備1,024＝3,875,747 logical forwardsで6M内に収まる。これはfit成績や改善の証拠ではない。cacheにmodel-scale authorityがない場合もfitは省略できず、実cache/BEST43を束縛した外部input-bindingを要求する。Mは実C INITIALのFileRefを通常inputsに含め、成功観測を再計測しない。
 
+二条件は各29更新を完了した。公開のみCはnewV family-MSEでINITIAL/BEST0を選び、BEST43と同じ重みである。混合MはBEST29を選び、newV family-MSEは0.2975679592→0.2940229613、row-MSEは0.3114169741→0.3073456137、公開fullV MSEは0.4238707127→0.4239124679となった。新Vの小さい低下と公開Vの小さい増加を分け、棋力改善とはしない。C原operationの出力宣言誤りによるFAILEDは保持し、保存された完了fitを受け入れた。C/M実forwards計3,874,723で、MのINITIALは実C観測を共有して追加0だった。[C保存受入れ](../.artifacts/research-team/integration324/nnue-diverse421-v1/science-v1/fit-C-v1/saved-completion.json)、[M原結果](../.artifacts/research-team/integration324/nnue-diverse421-v1/science-v1/fit-M-v1/collection.json)を正本とする。
+
+変更M重みの24状態・18遷移についてfull/delta/復元等120 headの限定対応確認を完了した。最初のfixtureはaccumulator未供給で失敗し、原失敗と未保存進捗を保持して最大2 head分を保守的に残した。D4は同じ事前6親でBEST43/M/Dの18 unique callsが全完成、計893,657 nodes。Cは同一BEST43の6件を参照するため、24比較のために成功探索を重ねない。原M6件はRootがraw fingerprint hexをtyped evaluator SHAと誤記した設定段階で未入場だった。正本native digestの識別子だけを修正して元6件を継続し、成功12件・fit・INITIAL・120 head確認は再演しなかった。[原PARTIAL](../.artifacts/research-team/integration324/nnue-diverse421-v1/science-v1/depth4-v1/collection.json)と[継続・集約結果](../.artifacts/research-team/integration324/nnue-diverse421-v1/science-v1/depth4-M-entry-v2/collection.json)を区別する。同深さの値・候補・仕事の比較であり、真のWDLや同仕事速度の資格ではない。
+
 ### Sigma新教師と公開file順重みの試行規模（423、2026-10-16）
 
 [新規契約](../.artifacts/research-policy/nnue-teacher-refresh-20261016.md)と[規模訂正](../.artifacts/research-policy/nnue-teacher-refresh-20261016-size-correction.md)は、公開均等U、同じTへfile順0.92減衰だけを加えるR、現在Sigma/MCTSの新TでBEST43追加W、同じ新Tと凍結正規化でfresh初期化Fを比較する。教師は実outcome zだけで、qは小表用に限る。file番号は真の生成世代や強さの順位ではない。
 
 最初の32は費用・独立family・行/stock分布のpilotで、効果量から算出した必要量ではない。32だけで四fit/160局を自動消費せず、実pilotから未入場suffix規模を一度だけ解決する。全256requests/2M Sigma rowsは上限であり必要量ではない。四fit/NNUE4M/160局・1G arena nodes/whole128MiB/decimal50GBは維持する。[固定spec](../.worktree/arena-evaluation/.artifacts/research-team/nnue-teacher-refresh423-analysis-v1/spec.json)の主要対照はW対BEST43を最大64 family×2色、W対Dは同じ先頭16 family×2色とし、計160局を結果前に配分した。64 familyでも小さい差の判別保証はない。suffixでcanonical family rankingが変わる場合、pilot RAW/split/cacheを変更せず最終fit-view assignmentとの対応を明示する。旧342.17/323を再開する委任ではない。
+
+必要なnative接続は現役selfplay/MCTSとcanonical入力・終端outcome・既存v3 codecを再用する。限定softwareでは新423の12定義と421の未実行arena集約上限1定義、計13定義が成功した。原5 PASS/2 fixture FAIL、残る8定義の成功、data Clippy成功、runner Clippyの同値な条件式整理、未完了compile/Clippy/releaseを別記録で保持し、成功定義を再演しなかった。[原softwareと真正image](../.artifacts/research-team/integration324/nnue-teacher-refresh423-v1/compatible-build-v4/STOP.json)。これは新データの数値・標本量・学習効果の証拠ではない。
+
+保存支持は[Rootの将来枠取消判断](../.artifacts/research-policy/storage-forward-reallocation-20261016.md)を一度だけ適用した。旧342.17の未使用将来8GiBから512MiBだけを取り消し、旧scopeの7.5GiB保全カバーと全原RAW/費用/停止を残す。使用減少のrefundや削除ではない。421 whole256MiBと423 whole128MiBを含む49,600,815,104Bへ、今回の限定ordinary/Build正増分25,034,752Bを一度加え、保守的支持は49,625,849,856B、decimal50GBまで374,150,144Bとなった。[限定確認](../.artifacts/research-team/integration324/nnue-teacher-refresh423-v1/post-build-entry-capacity.json)。実global使用と未観測費はUNKNOWNで、同じ取消の再利用や全target保持の再課金は行わない。
 
 ### 壁迂回下界の実装・有限性能比較への別委任（424、2026-10-16）
 
