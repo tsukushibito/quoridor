@@ -404,16 +404,18 @@ impl Config {
                 );
             }
         }
-        if let Some(repetitions) = self.benchmark_repetitions {
-            if repetitions != 1
+        if let Some(repetitions) = self.benchmark_repetitions
+            && (repetitions != 1
                 || self.temperature != 0.0
                 || !self.bounded_mcts()
                 || self.common_study.is_some()
                 || self.games != self.openings.len()
-                || self.openings.is_empty()
-            {
-                return Err("one-pass MCTS benchmark requires exact full-prefix inputs and bounded inference".into());
-            }
+                || self.openings.is_empty())
+        {
+            return Err(
+                "one-pass MCTS benchmark requires exact full-prefix inputs and bounded inference"
+                    .into(),
+            );
         }
         if let Some(common) = &self.common_study {
             if !matches!(
