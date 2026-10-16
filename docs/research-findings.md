@@ -2181,3 +2181,13 @@ D4は原12＋真正未入場M6の18 uniqueが全完成し、Maction差1/6・PV�
 固定保存標本では、安い下界Lが弱いための取り逃しより、真の壁通路距離rhoでも同じ十分閾値Tを満たさない状態が多かった。9×9は33状態中、既存L通過20、有限rho<T12、別成分1、L<T<=rho0だった。有限失敗12件は全てL=rho。補助の先頭L不成立W/L128状態は、rho<T126、取り逃し2で、保存W76/L52を変更していない。追加計算は検証を含む56 BFS、161状態で有限終了した。
 
 9×9は固定4ゲーム・共有2familyの終盤と別1root、小盤面は先頭のほぼ無壁3×3だけに偏る。実在9×9の上限128との差95を補充せず、旧424の内部約260万検査へ頻度や速度を外挿しない。履歴から導いたEemptyとcanonical threefold資格を分け、実proof leaf・真の勝敗・内部subtree費はUNKNOWNのまま。既存411/default OFFを保持し、424候補、追加BFS/cache、別閾値、observerや新計測を採用しない。[保存表・代表例・選択と限界](../research-data/ai-sigma/zero-stock-distance427/report-ja.md)、[受入れと原参照](../research-data/ai-sigma/zero-stock-distance427/receipt.json)。426のNNUE検証は独立に継続する。
+
+### 新Sigma追加学習Wの独立開始条件と同じ七局面（426、2026-10-16）
+
+凍結W BEST118とBEST43を、事前固定した独立192 canonical開始family・両色384局で比較した。全384局GOAL、UNKNOWN 0、W183勝201敗、score47.65625%。一度だけ実行した192-family bootstrap（10000、PCG64、seed42620261016、95% percentile/linear）の区間は42.96875–52.34375%で、事前の下限>50%基準は未達だった。旧423の対局やchunk区間は合算していない。この固定book・時計で改善支持を得なかった結果であり、一般的な劣位・等価・改善不可能の証明でもない。
+
+同じ保存三親＋四endpointへの新W評価は7 logical headsで完了し、全七局面の符号と強い飽和（abs(post)>=.99）の三件が残った。logitの絶対値は下がったが、保存D/Sigmaを真値や旧敗因のoracleにはしない。異なる深さ・STMの候補を同horizonのargmaxへ混ぜない。一回用Main callerは実停止と保存後に撤去し、実行ソースとtyped descriptor修復・元のsetup FAILEDを保持した。
+
+charged nodesは1,640,581,337／3G、12操作の未使用quotaを貸与・補充しなかった。把握したA＋B元失敗＋B成功のouter小計1695.948371786秒は各一度で、nested時間を足していない。physical NN、continuous family RSS、全費用はUNKNOWN。モデル・製品・generator既定と旧pause/sealは変更しない。[結果・七状態表・制約](../research-data/ai-sigma/nnue-independent426/report-ja.md)、[実行body・入力・出力と受入れ](../research-data/ai-sigma/nnue-independent426/receipt.json)。
+
+次の設計案は高残壁coverageの一軸に限定する。旧Tのstock18..20は0で、抽出capを増やすだけでは欠けた域を作れない。2ply開始、同じSigma64sim/outcome z、game/在庫層ごとの抽出上限と補充なしを維持し、十分な実Tが得られ、既存samplerで表現できる場合だけ、旧Wのdistinct行数と露出/updateへ合わせる案を保存した。最大256 requestsは案の上限で十分性の保証ではなく、global matchの入口対応も未確認。新生成・fit・forward・対局・q+z・NNUE自己対局・architecture変更は発行していない。

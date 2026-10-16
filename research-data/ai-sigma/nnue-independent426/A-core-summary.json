@@ -1,0 +1,323 @@
+{
+  "status": "ORIGINAL_A_COMPLETE_ALL384_GOAL",
+  "planned": 384,
+  "started": 384,
+  "GOAL": 384,
+  "UNKNOWN": 0,
+  "complete_families": 192,
+  "W": 183,
+  "D": 0,
+  "L": 201,
+  "score": 0.4765625,
+  "family_score_hist": {
+    "0.0": 48,
+    "0.5": 105,
+    "1.0": 39
+  },
+  "colour": [
+    {
+      "candidate_colour": 0,
+      "W": 92,
+      "L": 100,
+      "games": 192
+    },
+    {
+      "candidate_colour": 1,
+      "W": 91,
+      "L": 101,
+      "games": 192
+    }
+  ],
+  "prefix_len_strata_exploratory": {
+    "4": {
+      "W": 43,
+      "L": 53
+    },
+    "8": {
+      "L": 54,
+      "W": 42
+    },
+    "12": {
+      "L": 51,
+      "W": 45
+    },
+    "16": {
+      "L": 43,
+      "W": 53
+    }
+  },
+  "charged_nodes": 1640581337,
+  "disjoint_quotas": [
+    137516236,
+    136599248,
+    143103701,
+    123989244,
+    144457325,
+    140937639,
+    139322596,
+    135838406,
+    148830322,
+    137269638,
+    125199187,
+    127517795
+  ],
+  "unused_quota_not_lent": 1359418663,
+  "native_chunk_CIs_preserved_not_combined": [
+    {
+      "batch": 0,
+      "native_bootstrap": {
+        "seed": 42620261016,
+        "resamples": 10000,
+        "unit": "complete family pair",
+        "percentile_95": [
+          0.34375,
+          0.75
+        ],
+        "limitations": [
+          "Fixed sample, complete pairs only; missingness may bias the primary score.",
+          "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+          "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+          "Repeated inspection of this interval is not a sequential stopping rule."
+        ]
+      },
+      "native_complete_pair_mean": 0.5625,
+      "native_peak_RSS_B": 205533184,
+      "native_wall_seconds_nested_not_added": 139.762401022
+    },
+    {
+      "batch": 1,
+      "native_bootstrap": {
+        "seed": 42620261016,
+        "resamples": 10000,
+        "unit": "complete family pair",
+        "percentile_95": [
+          0.375,
+          0.6875
+        ],
+        "limitations": [
+          "Fixed sample, complete pairs only; missingness may bias the primary score.",
+          "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+          "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+          "Repeated inspection of this interval is not a sequential stopping rule."
+        ]
+      },
+      "native_complete_pair_mean": 0.53125,
+      "native_peak_RSS_B": 205119488,
+      "native_wall_seconds_nested_not_added": 138.276864745
+    },
+    {
+      "batch": 2,
+      "native_bootstrap": {
+        "seed": 42620261016,
+        "resamples": 10000,
+        "unit": "complete family pair",
+        "percentile_95": [
+          0.3125,
+          0.65625
+        ],
+        "limitations": [
+          "Fixed sample, complete pairs only; missingness may bias the primary score.",
+          "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+          "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+          "Repeated inspection of this interval is not a sequential stopping rule."
+        ]
+      },
+      "native_complete_pair_mean": 0.5,
+      "native_peak_RSS_B": 205586432,
+      "native_wall_seconds_nested_not_added": 141.424814048
+    },
+    {
+      "batch": 3,
+      "native_bootstrap": {
+        "seed": 42620261016,
+        "resamples": 10000,
+        "unit": "complete family pair",
+        "percentile_95": [
+          0.1875,
+          0.5
+        ],
+        "limitations": [
+          "Fixed sample, complete pairs only; missingness may bias the primary score.",
+          "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+          "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+          "Repeated inspection of this interval is not a sequential stopping rule."
+        ]
+      },
+      "native_complete_pair_mean": 0.34375,
+      "native_peak_RSS_B": 203726848,
+      "native_wall_seconds_nested_not_added": 126.277668319
+    },
+    {
+      "batch": 4,
+      "native_bootstrap": {
+        "seed": 42620261016,
+        "resamples": 10000,
+        "unit": "complete family pair",
+        "percentile_95": [
+          0.375,
+          0.625
+        ],
+        "limitations": [
+          "Fixed sample, complete pairs only; missingness may bias the primary score.",
+          "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+          "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+          "Repeated inspection of this interval is not a sequential stopping rule."
+        ]
+      },
+      "native_complete_pair_mean": 0.5,
+      "native_peak_RSS_B": 206303232,
+      "native_wall_seconds_nested_not_added": 143.385330761
+    },
+    {
+      "batch": 5,
+      "native_bootstrap": {
+        "seed": 42620261016,
+        "resamples": 10000,
+        "unit": "complete family pair",
+        "percentile_95": [
+          0.3125,
+          0.625
+        ],
+        "limitations": [
+          "Fixed sample, complete pairs only; missingness may bias the primary score.",
+          "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+          "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+          "Repeated inspection of this interval is not a sequential stopping rule."
+        ]
+      },
+      "native_complete_pair_mean": 0.46875,
+      "native_peak_RSS_B": 205676544,
+      "native_wall_seconds_nested_not_added": 139.390634547
+    },
+    {
+      "batch": 6,
+      "native_bootstrap": {
+        "seed": 42620261016,
+        "resamples": 10000,
+        "unit": "complete family pair",
+        "percentile_95": [
+          0.34375,
+          0.65625
+        ],
+        "limitations": [
+          "Fixed sample, complete pairs only; missingness may bias the primary score.",
+          "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+          "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+          "Repeated inspection of this interval is not a sequential stopping rule."
+        ]
+      },
+      "native_complete_pair_mean": 0.5,
+      "native_peak_RSS_B": 205193216,
+      "native_wall_seconds_nested_not_added": 139.62508977
+    },
+    {
+      "batch": 7,
+      "native_bootstrap": {
+        "seed": 42620261016,
+        "resamples": 10000,
+        "unit": "complete family pair",
+        "percentile_95": [
+          0.28125,
+          0.53125
+        ],
+        "limitations": [
+          "Fixed sample, complete pairs only; missingness may bias the primary score.",
+          "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+          "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+          "Repeated inspection of this interval is not a sequential stopping rule."
+        ]
+      },
+      "native_complete_pair_mean": 0.40625,
+      "native_peak_RSS_B": 204918784,
+      "native_wall_seconds_nested_not_added": 135.639014932
+    },
+    {
+      "batch": 8,
+      "native_bootstrap": {
+        "seed": 42620261016,
+        "resamples": 10000,
+        "unit": "complete family pair",
+        "percentile_95": [
+          0.3125,
+          0.625
+        ],
+        "limitations": [
+          "Fixed sample, complete pairs only; missingness may bias the primary score.",
+          "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+          "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+          "Repeated inspection of this interval is not a sequential stopping rule."
+        ]
+      },
+      "native_complete_pair_mean": 0.46875,
+      "native_peak_RSS_B": 206094336,
+      "native_wall_seconds_nested_not_added": 146.563260876
+    },
+    {
+      "batch": 9,
+      "native_bootstrap": {
+        "seed": 42620261016,
+        "resamples": 10000,
+        "unit": "complete family pair",
+        "percentile_95": [
+          0.3125,
+          0.625
+        ],
+        "limitations": [
+          "Fixed sample, complete pairs only; missingness may bias the primary score.",
+          "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+          "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+          "Repeated inspection of this interval is not a sequential stopping rule."
+        ]
+      },
+      "native_complete_pair_mean": 0.46875,
+      "native_peak_RSS_B": 204832768,
+      "native_wall_seconds_nested_not_added": 136.781438981
+    },
+    {
+      "batch": 10,
+      "native_bootstrap": {
+        "seed": 42620261016,
+        "resamples": 10000,
+        "unit": "complete family pair",
+        "percentile_95": [
+          0.34375,
+          0.59375
+        ],
+        "limitations": [
+          "Fixed sample, complete pairs only; missingness may bias the primary score.",
+          "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+          "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+          "Repeated inspection of this interval is not a sequential stopping rule."
+        ]
+      },
+      "native_complete_pair_mean": 0.46875,
+      "native_peak_RSS_B": 204677120,
+      "native_wall_seconds_nested_not_added": 132.018469234
+    },
+    {
+      "batch": 11,
+      "native_bootstrap": {
+        "seed": 42620261016,
+        "resamples": 10000,
+        "unit": "complete family pair",
+        "percentile_95": [
+          0.3125,
+          0.6875
+        ],
+        "limitations": [
+          "Fixed sample, complete pairs only; missingness may bias the primary score.",
+          "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+          "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+          "Repeated inspection of this interval is not a sequential stopping rule."
+        ]
+      },
+      "native_complete_pair_mean": 0.5,
+      "native_peak_RSS_B": 203382784,
+      "native_wall_seconds_nested_not_added": 130.232868938
+    }
+  ],
+  "global_ID_interpretation": "analysis ordinal0..191, each one-to-one with retained original native request ID and canonical family; native request IDs are never relabelled or display-name joined",
+  "native_request_ids_consecutive0to191": true,
+  "full_prefix_rootkey_history_config_correspondence": true,
+  "census_CSV_result_schedule_exact": true
+}

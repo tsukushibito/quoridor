@@ -1,0 +1,32 @@
+{
+  "complete_family_count": 192,
+  "family_mean": 0.4765625,
+  "percentile_95": [
+    0.4296875,
+    0.5234375
+  ],
+  "criterion_fixed_book_time_only": "NOT_MET",
+  "partial_scope": "complete-pair conditional; planned bounds are separate",
+  "seed": 42620261016,
+  "requested_resamples": 10000,
+  "executed_resamples": 10000,
+  "rng": "NumPy Generator(PCG64)",
+  "quantile_method": "linear",
+  "input": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-independent426-analysis-v1/final-analysis-v1/A-v1/bootstrap-input.json",
+    "sha256": "fd16d1d2cfa6e51617155b6021448589206fb9ce4c3d9dc2ab9c93d2bd20e860",
+    "bytes": 22170,
+    "mode": "0644"
+  },
+  "executed_statistical_source": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-independent426-analysis-v1/final-analysis-v1/A-v1/family_bootstrap426_bounded.py",
+    "sha256": "0cbb5093abbf221e11132e267d8a9c64e68cfec7ec9dce8bd0a38dcf37eae6b2",
+    "bytes": 4275,
+    "mode": "0644"
+  },
+  "executed_function": "interval_from_complete_family_scores",
+  "interpreter": "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+  "python_version": "3.14.7",
+  "numpy_version": "2.5.3",
+  "old423_interval_recomputed": false
+}

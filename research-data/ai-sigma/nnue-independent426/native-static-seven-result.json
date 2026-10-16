@@ -1,0 +1,2378 @@
+{
+  "FT_context_mode": "Scalar",
+  "Search_calls": 0,
+  "actual_evaluator_identities": {
+    "NNUE": "8a8eb7fb87035f03c4cfa6b45ca1aa5d2f1b144c6fa1298dd11b82975307953d"
+  },
+  "constructor_head_scope": "source-covered ResidualModel::load/from_parts and Model::from_parts allocate/validate only, no head; bound source lifetime required",
+  "counter_scope": {
+    "NNUE_full_context_returned": "Ok-only; no refill from incomplete counters",
+    "NNUE_full_context_started": "pre-persist reservations/maybe-entered; invocation UNKNOWN on error",
+    "NNUE_head_returned": "Ok-only; Err returns not counted; pending is not zero work",
+    "NNUE_head_started": "pre-persist reservations/maybe-entered; Err/cancel invocation UNKNOWN"
+  },
+  "counts": {
+    "NNUE_full_context_returned": 7,
+    "NNUE_full_context_started": 7,
+    "NNUE_head_returned": 7,
+    "NNUE_head_started": 7,
+    "constructor_heads": 0,
+    "constructor_returned": 1,
+    "constructor_started": 1
+  },
+  "drop_seconds": 0.000015961,
+  "entry_phase": "HEAD_RETURNED",
+  "executable_path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner426-static-seven-typed-test-v1",
+  "final_persistence": {
+    "returned_status_location": "bounded terminal receipt if any channel succeeds",
+    "status": "ATTEMPTED_RETURN_UNKNOWN_IN_REPORT"
+  },
+  "head_route": "unchanged canonical magnitude-guarded head; hardware route not measured",
+  "input_sha256": "b00bbcf23a6a19ed89084728edbfd81d8c4abfc15a03acec9b1dfcfec3c7c528",
+  "limits": {
+    "logical_canonical_heads_including_constructor": 28,
+    "states": 7
+  },
+  "models": {
+    "NNUE": {
+      "descriptor": {
+        "bytes": 681,
+        "mode": "0600",
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/nnue-teacher-refresh423-v1/W-v1/best-model/manifest.json",
+        "sha256": "fbf0beb86fdf7f42f5bdd88893df215423ca86873da04308ed5029128edaf70a"
+      },
+      "evaluator_sha256": "8a8eb7fb87035f03c4cfa6b45ca1aa5d2f1b144c6fa1298dd11b82975307953d",
+      "weights": {
+        "bytes": 49284,
+        "mode": "0644",
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/nnue-teacher-refresh423-v1/W-v1/best-model/weights.f32",
+        "sha256": "ab073fb138b84710c0d244c1459aebc016a74743ecabee5e949321a00ec81b99"
+      }
+    }
+  },
+  "new_D_calls": 0,
+  "new_Sigma_rows": 0,
+  "new_delta_calls": 0,
+  "new_oldNNUE_heads": 0,
+  "original_input": {
+    "bytes": 31791,
+    "mode": "0644",
+    "path": "/workspaces/quoridor/research-data/ai-sigma/static-evaluators422/input.json",
+    "sha256": "35cbef99ab6fc11212f6eba61f88196e4ff0df94461d672d0204836508fa0602"
+  },
+  "physical_FT_head_hardware_counts": "UNKNOWN; contexts and logical canonical heads are separate",
+  "primary_error": null,
+  "purpose": "new W BEST118 only",
+  "rows": [
+    {
+      "NNUE": {
+        "baseline_logit_bits": 0,
+        "features": {
+          "ids": [
+            [
+              22,
+              140,
+              166,
+              168,
+              206,
+              267,
+              279,
+              283,
+              296,
+              309
+            ],
+            [
+              21,
+              139,
+              181,
+              219,
+              221,
+              232,
+              236,
+              248,
+              298,
+              307
+            ]
+          ],
+          "scaled_distance_bits": [
+            1036831949,
+            1035154227
+          ],
+          "side": 1
+        },
+        "linear_residual_bits": 1068314199,
+        "old_D": {
+          "W_abs_ge_099": false,
+          "W_minus_saved": 0.9744220897555351,
+          "W_sign": 1,
+          "saved": -0.09966801851987839,
+          "saved_abs_ge_099": false,
+          "saved_bits": 3184271039,
+          "saved_sign": -1
+        },
+        "old_NNUE": {
+          "W_abs_ge_099": false,
+          "W_minus_saved": -0.04375261068344116,
+          "W_sign": 1,
+          "saved": 0.9185066819190979,
+          "saved_abs_ge_099": false,
+          "saved_bits": 1063985985,
+          "saved_sign": 1
+        },
+        "old_Sigma": {
+          "W_abs_ge_099": false,
+          "W_minus_saved": 0.8797823768109083,
+          "W_sign": 1,
+          "saved": -0.005028305575251579,
+          "saved_abs_ge_099": false,
+          "saved_bits": 3148137596,
+          "saved_sign": -1
+        },
+        "old_pre_tanh_delta": -0.22641396522521973,
+        "one_canonical_head_calculation": true,
+        "post_tanh": 0.8747540712356567,
+        "post_tanh_bits": 1063251938,
+        "pre_tanh": 1.352976679801941,
+        "pre_tanh_bits": 1068314199
+      },
+      "id": "distance-slot004-ply011",
+      "local_value_perspective": "actual current STM; no root-backup sign",
+      "old_observation_reused_not_reexecuted": true,
+      "parent_unchanged": true,
+      "prefix": [
+        186,
+        77,
+        13,
+        68,
+        85,
+        59,
+        87,
+        202,
+        22,
+        125,
+        198
+      ],
+      "row_index": 0,
+      "saved422": {
+        "D": {
+          "bits": 3184271039,
+          "kind": "direct DistanceEvaluator(0,8,tanh)",
+          "not_a_WDL_oracle": true,
+          "old_saved_direct_correspondence": null,
+          "value": -0.09966801851987839
+        },
+        "NNUE": {
+          "baseline_logit_bits": 0,
+          "features": {
+            "ids": [
+              [
+                22,
+                140,
+                166,
+                168,
+                206,
+                267,
+                279,
+                283,
+                296,
+                309
+              ],
+              [
+                21,
+                139,
+                181,
+                219,
+                221,
+                232,
+                236,
+                248,
+                298,
+                307
+              ]
+            ],
+            "scaled_distance_bits": [
+              1036831949,
+              1035154227
+            ],
+            "side": 1
+          },
+          "linear_residual_bits": 1070213497,
+          "new_delta_or_extra_parity_calls": 0,
+          "old_pre_tanh_correspondence": null,
+          "old_saved_direct_correspondence": null,
+          "one_canonical_head_calculation": true,
+          "post_tanh": 0.9185066819190979,
+          "post_tanh_bits": 1063985985,
+          "pre_tanh": 1.5793906450271606,
+          "pre_tanh_bits": 1070213497
+        },
+        "Sigma": {
+          "MCTS_rootmean": false,
+          "adapter_bits": 3148137596,
+          "adapter_value": -0.005028305575251579,
+          "raw_evidence": "same-forward source correspondence: SigmaValueEvaluator::evaluate returns NetworkOutput.value unmodified; no independent second read/forward",
+          "raw_value": -0.005028305575251579,
+          "raw_value_bits": 3148137596,
+          "value_perspective": "local STM"
+        }
+      },
+      "source": {
+        "bytes": 24449,
+        "mode": "0644",
+        "path": "/workspaces/quoridor/research-data/ai-sigma/nnue-loss-leaf419/fixed-inputs.json",
+        "sha256": "b26fb4d5f21bac5b9614610504aac7022850223a6af67b4680530c08e8429304"
+      },
+      "source_pointer": "/parents/0",
+      "state": {
+        "horizontal_bits": "0000100000000050",
+        "identity": {
+          "history_counts": [
+            [
+              "4,0|4,8|0|||10,10",
+              1
+            ],
+            [
+              "4,0|4,8|1||1,5|9,10",
+              1
+            ],
+            [
+              "4,0|5,8|0||1,5|9,10",
+              1
+            ],
+            [
+              "4,1|5,6|0|4,0;6,0|1,5;1,7|7,9",
+              1
+            ],
+            [
+              "4,1|5,6|0|4,0|1,5|8,10",
+              1
+            ],
+            [
+              "4,1|5,6|1|4,0;6,0|1,5|7,10",
+              1
+            ],
+            [
+              "4,1|5,7|0||1,5|9,10",
+              1
+            ],
+            [
+              "4,1|5,7|1|4,0|1,5|8,10",
+              1
+            ],
+            [
+              "4,1|5,8|1||1,5|9,10",
+              1
+            ],
+            [
+              "4,2|5,6|0|4,0;4,5;6,0|1,5;1,7|7,8",
+              1
+            ],
+            [
+              "4,2|5,6|1|4,0;4,5;6,0|1,5;1,7;5,6|6,8",
+              1
+            ],
+            [
+              "4,2|5,6|1|4,0;6,0|1,5;1,7|7,9",
+              1
+            ]
+          ],
+          "ply": 11,
+          "root_key": "4,2|5,6|1|4,0;4,5;6,0|1,5;1,7;5,6|6,8",
+          "rules": "research-standard-2p-threefold-goal-first-v1",
+          "synthetic": false
+        },
+        "pawns": [
+          22,
+          59
+        ],
+        "side": 1,
+        "stocks": [
+          6,
+          8
+        ],
+        "terminal": null,
+        "vertical_bits": "0220020000000000",
+        "winner": null
+      },
+      "status": "COMPLETE"
+    },
+    {
+      "NNUE": {
+        "baseline_logit_bits": 0,
+        "features": {
+          "ids": [
+            [
+              52,
+              150,
+              164,
+              166,
+              168,
+              175,
+              177,
+              189,
+              195,
+              202,
+              204,
+              206,
+              208,
+              214,
+              237,
+              246,
+              267,
+              279,
+              283,
+              284,
+              290,
+              303
+            ],
+            [
+              11,
+              109,
+              173,
+              179,
+              181,
+              183,
+              185,
+              192,
+              198,
+              210,
+              212,
+              219,
+              221,
+              223,
+              231,
+              232,
+              236,
+              248,
+              269,
+              278,
+              292,
+              301
+            ]
+          ],
+          "scaled_distance_bits": [
+            1045220557,
+            1028443341
+          ],
+          "side": 1
+        },
+        "linear_residual_bits": 1082493205,
+        "old_D": {
+          "W_abs_ge_099": true,
+          "W_minus_saved": 1.8331800699234009,
+          "W_sign": 1,
+          "saved": -0.8336546421051025,
+          "saved_abs_ge_099": false,
+          "saved_bits": 3210046052,
+          "saved_sign": -1
+        },
+        "old_NNUE": {
+          "W_abs_ge_099": true,
+          "W_minus_saved": -0.00021898746490478516,
+          "W_sign": 1,
+          "saved": 0.9997444152832031,
+          "saved_abs_ge_099": true,
+          "saved_bits": 1065348928,
+          "saved_sign": 1
+        },
+        "old_Sigma": {
+          "W_abs_ge_099": true,
+          "W_minus_saved": 1.9890748262405396,
+          "W_sign": 1,
+          "saved": -0.9895493984222412,
+          "saved_abs_ge_099": false,
+          "saved_bits": 3212661532,
+          "saved_sign": -1
+        },
+        "old_pre_tanh_delta": -0.30948686599731445,
+        "one_canonical_head_calculation": true,
+        "post_tanh": 0.9995254278182983,
+        "post_tanh_bits": 1065345254,
+        "pre_tanh": 4.172983646392822,
+        "pre_tanh_bits": 1082493205
+      },
+      "id": "distance-slot004-ply039",
+      "local_value_perspective": "actual current STM; no root-backup sign",
+      "old_observation_reused_not_reexecuted": true,
+      "parent_unchanged": true,
+      "prefix": [
+        186,
+        77,
+        13,
+        68,
+        85,
+        59,
+        87,
+        202,
+        22,
+        125,
+        198,
+        156,
+        123,
+        203,
+        133,
+        58,
+        96,
+        114,
+        127,
+        108,
+        83,
+        165,
+        13,
+        57,
+        14,
+        121,
+        23,
+        66,
+        94,
+        67,
+        24,
+        76,
+        33,
+        77,
+        42,
+        78,
+        51,
+        69,
+        52
+      ],
+      "row_index": 1,
+      "saved422": {
+        "D": {
+          "bits": 3210046052,
+          "kind": "direct DistanceEvaluator(0,8,tanh)",
+          "not_a_WDL_oracle": true,
+          "old_saved_direct_correspondence": null,
+          "value": -0.8336546421051025
+        },
+        "NNUE": {
+          "baseline_logit_bits": 0,
+          "features": {
+            "ids": [
+              [
+                52,
+                150,
+                164,
+                166,
+                168,
+                175,
+                177,
+                189,
+                195,
+                202,
+                204,
+                206,
+                208,
+                214,
+                237,
+                246,
+                267,
+                279,
+                283,
+                284,
+                290,
+                303
+              ],
+              [
+                11,
+                109,
+                173,
+                179,
+                181,
+                183,
+                185,
+                192,
+                198,
+                210,
+                212,
+                219,
+                221,
+                223,
+                231,
+                232,
+                236,
+                248,
+                269,
+                278,
+                292,
+                301
+              ]
+            ],
+            "scaled_distance_bits": [
+              1045220557,
+              1028443341
+            ],
+            "side": 1
+          },
+          "linear_residual_bits": 1083142246,
+          "new_delta_or_extra_parity_calls": 0,
+          "old_pre_tanh_correspondence": null,
+          "old_saved_direct_correspondence": null,
+          "one_canonical_head_calculation": true,
+          "post_tanh": 0.9997444152832031,
+          "post_tanh_bits": 1065348928,
+          "pre_tanh": 4.482470512390137,
+          "pre_tanh_bits": 1083142246
+        },
+        "Sigma": {
+          "MCTS_rootmean": false,
+          "adapter_bits": 3212661532,
+          "adapter_value": -0.9895493984222412,
+          "raw_evidence": "same-forward source correspondence: SigmaValueEvaluator::evaluate returns NetworkOutput.value unmodified; no independent second read/forward",
+          "raw_value": -0.9895493984222412,
+          "raw_value_bits": 3212661532,
+          "value_perspective": "local STM"
+        }
+      },
+      "source": {
+        "bytes": 24449,
+        "mode": "0644",
+        "path": "/workspaces/quoridor/research-data/ai-sigma/nnue-loss-leaf419/fixed-inputs.json",
+        "sha256": "b26fb4d5f21bac5b9614610504aac7022850223a6af67b4680530c08e8429304"
+      },
+      "source_pointer": "/parents/1",
+      "state": {
+        "horizontal_bits": "001055020800a054",
+        "identity": {
+          "history_counts": [
+            [
+              "4,0|4,8|0|||10,10",
+              1
+            ],
+            [
+              "4,0|4,8|1||1,5|9,10",
+              1
+            ],
+            [
+              "4,0|5,8|0||1,5|9,10",
+              1
+            ],
+            [
+              "4,1|3,6|0|1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,3",
+              1
+            ],
+            [
+              "4,1|4,6|1|1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,3",
+              1
+            ],
+            [
+              "4,1|5,6|0|4,0;6,0|1,5;1,7|7,9",
+              1
+            ],
+            [
+              "4,1|5,6|0|4,0|1,5|8,10",
+              1
+            ],
+            [
+              "4,1|5,6|1|4,0;6,0|1,5|7,10",
+              1
+            ],
+            [
+              "4,1|5,7|0||1,5|9,10",
+              1
+            ],
+            [
+              "4,1|5,7|1|4,0|1,5|8,10",
+              1
+            ],
+            [
+              "4,1|5,8|1||1,5|9,10",
+              1
+            ],
+            [
+              "4,2|4,6|0|1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,3",
+              1
+            ],
+            [
+              "4,2|4,6|0|1,4;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;5,6|2,4",
+              1
+            ],
+            [
+              "4,2|4,6|0|1,4;2,5;4,0;4,5;4,6;6,0;7,1|1,5;1,7;2,7;3,1;5,6|3,5",
+              1
+            ],
+            [
+              "4,2|4,6|0|2,5;4,0;4,5;4,6;6,0|1,5;1,7;2,7;3,1;5,6|4,6",
+              1
+            ],
+            [
+              "4,2|4,6|1|1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;5,6|1,4",
+              1
+            ],
+            [
+              "4,2|4,6|1|1,4;2,5;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;5,6|2,5",
+              1
+            ],
+            [
+              "4,2|4,6|1|2,5;4,0;4,5;4,6;6,0;7,1|1,5;1,7;2,7;3,1;5,6|3,6",
+              1
+            ],
+            [
+              "4,2|5,6|0|2,5;4,0;4,5;6,0|1,5;1,7;2,7;3,1;5,6|5,6",
+              1
+            ],
+            [
+              "4,2|5,6|0|4,0;4,5;6,0|1,5;1,7;3,1;5,6|6,7",
+              1
+            ],
+            [
+              "4,2|5,6|0|4,0;4,5;6,0|1,5;1,7|7,8",
+              1
+            ],
+            [
+              "4,2|5,6|1|2,5;4,0;4,5;4,6;6,0|1,5;1,7;2,7;3,1;5,6|4,6",
+              1
+            ],
+            [
+              "4,2|5,6|1|2,5;4,0;4,5;6,0|1,5;1,7;3,1;5,6|5,7",
+              1
+            ],
+            [
+              "4,2|5,6|1|4,0;4,5;6,0|1,5;1,7;5,6|6,8",
+              1
+            ],
+            [
+              "4,2|5,6|1|4,0;6,0|1,5;1,7|7,9",
+              1
+            ],
+            [
+              "5,1|3,6|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,2",
+              1
+            ],
+            [
+              "5,1|3,6|1|1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,3",
+              1
+            ],
+            [
+              "5,2|3,6|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,2",
+              1
+            ],
+            [
+              "5,2|3,7|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,2",
+              1
+            ],
+            [
+              "5,2|3,7|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "5,2|4,7|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "6,2|4,7|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "6,2|4,8|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "6,3|4,8|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "6,3|5,8|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "6,4|5,8|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "6,4|6,8|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "6,5|6,7|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "6,5|6,8|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "7,5|6,7|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ]
+          ],
+          "ply": 39,
+          "root_key": "7,5|6,7|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+          "rules": "research-standard-2p-threefold-goal-first-v1",
+          "synthetic": false
+        },
+        "pawns": [
+          52,
+          69
+        ],
+        "side": 1,
+        "stocks": [
+          0,
+          2
+        ],
+        "terminal": null,
+        "vertical_bits": "0620020000100800",
+        "winner": null
+      },
+      "status": "COMPLETE"
+    },
+    {
+      "NNUE": {
+        "baseline_logit_bits": 0,
+        "features": {
+          "ids": [
+            [
+              40,
+              131,
+              178,
+              197,
+              254,
+              267,
+              298,
+              309
+            ],
+            [
+              30,
+              121,
+              190,
+              209,
+              248,
+              261,
+              298,
+              309
+            ]
+          ],
+          "scaled_distance_bits": [
+            1033476506,
+            1031798784
+          ],
+          "side": 0
+        },
+        "linear_residual_bits": 1069509055,
+        "old_D": {
+          "W_abs_ge_099": false,
+          "W_minus_saved": 1.0039842054247856,
+          "W_sign": 1,
+          "saved": -0.09966801851987839,
+          "saved_abs_ge_099": false,
+          "saved_bits": 3184271039,
+          "saved_sign": -1
+        },
+        "old_NNUE": {
+          "W_abs_ge_099": false,
+          "W_minus_saved": -0.013498425483703613,
+          "W_sign": 1,
+          "saved": 0.9178146123886108,
+          "saved_abs_ge_099": false,
+          "saved_bits": 1063974374,
+          "saved_sign": 1
+        },
+        "old_Sigma": {
+          "W_abs_ge_099": false,
+          "W_minus_saved": 1.4155437350273132,
+          "W_sign": 1,
+          "saved": -0.511227548122406,
+          "saved_abs_ge_099": false,
+          "saved_bits": 3204636623,
+          "saved_sign": -1
+        },
+        "old_pre_tanh_delta": -0.0795673131942749,
+        "one_canonical_head_calculation": true,
+        "post_tanh": 0.9043161869049072,
+        "post_tanh_bits": 1063747908,
+        "pre_tanh": 1.4954146146774292,
+        "pre_tanh_bits": 1069509055
+      },
+      "id": "distance-slot005-ply012",
+      "local_value_perspective": "actual current STM; no root-backup sign",
+      "old_observation_reused_not_reexecuted": true,
+      "parent_unchanged": true,
+      "prefix": [
+        186,
+        77,
+        13,
+        68,
+        22,
+        59,
+        31,
+        50,
+        97,
+        116,
+        40,
+        173
+      ],
+      "row_index": 2,
+      "saved422": {
+        "D": {
+          "bits": 3184271039,
+          "kind": "direct DistanceEvaluator(0,8,tanh)",
+          "not_a_WDL_oracle": true,
+          "old_saved_direct_correspondence": null,
+          "value": -0.09966801851987839
+        },
+        "NNUE": {
+          "baseline_logit_bits": 0,
+          "features": {
+            "ids": [
+              [
+                40,
+                131,
+                178,
+                197,
+                254,
+                267,
+                298,
+                309
+              ],
+              [
+                30,
+                121,
+                190,
+                209,
+                248,
+                261,
+                298,
+                309
+              ]
+            ],
+            "scaled_distance_bits": [
+              1033476506,
+              1031798784
+            ],
+            "side": 0
+          },
+          "linear_residual_bits": 1070176514,
+          "new_delta_or_extra_parity_calls": 0,
+          "old_pre_tanh_correspondence": null,
+          "old_saved_direct_correspondence": null,
+          "one_canonical_head_calculation": true,
+          "post_tanh": 0.9178146123886108,
+          "post_tanh_bits": 1063974374,
+          "pre_tanh": 1.574981927871704,
+          "pre_tanh_bits": 1070176514
+        },
+        "Sigma": {
+          "MCTS_rootmean": false,
+          "adapter_bits": 3204636623,
+          "adapter_value": -0.511227548122406,
+          "raw_evidence": "same-forward source correspondence: SigmaValueEvaluator::evaluate returns NetworkOutput.value unmodified; no independent second read/forward",
+          "raw_value": -0.511227548122406,
+          "raw_value_bits": 3204636623,
+          "value_perspective": "local STM"
+        }
+      },
+      "source": {
+        "bytes": 24449,
+        "mode": "0644",
+        "path": "/workspaces/quoridor/research-data/ai-sigma/nnue-loss-leaf419/fixed-inputs.json",
+        "sha256": "b26fb4d5f21bac5b9614610504aac7022850223a6af67b4680530c08e8429304"
+      },
+      "source_pointer": "/parents/2",
+      "state": {
+        "horizontal_bits": "0000000800010000",
+        "identity": {
+          "history_counts": [
+            [
+              "4,0|4,8|0|||10,10",
+              1
+            ],
+            [
+              "4,0|4,8|1||1,5|9,10",
+              1
+            ],
+            [
+              "4,0|5,8|0||1,5|9,10",
+              1
+            ],
+            [
+              "4,1|5,7|0||1,5|9,10",
+              1
+            ],
+            [
+              "4,1|5,8|1||1,5|9,10",
+              1
+            ],
+            [
+              "4,2|5,6|0||1,5|9,10",
+              1
+            ],
+            [
+              "4,2|5,7|1||1,5|9,10",
+              1
+            ],
+            [
+              "4,3|5,5|0|0,2;3,4|1,5|8,9",
+              1
+            ],
+            [
+              "4,3|5,5|0||1,5|9,10",
+              1
+            ],
+            [
+              "4,3|5,5|1|0,2|1,5|8,10",
+              1
+            ],
+            [
+              "4,3|5,6|1||1,5|9,10",
+              1
+            ],
+            [
+              "4,4|5,5|0|0,2;3,4|1,5;4,3|8,8",
+              1
+            ],
+            [
+              "4,4|5,5|1|0,2;3,4|1,5|8,9",
+              1
+            ]
+          ],
+          "ply": 12,
+          "root_key": "4,4|5,5|0|0,2;3,4|1,5;4,3|8,8",
+          "rules": "research-standard-2p-threefold-goal-first-v1",
+          "synthetic": false
+        },
+        "pawns": [
+          40,
+          50
+        ],
+        "side": 0,
+        "stocks": [
+          8,
+          8
+        ],
+        "terminal": null,
+        "vertical_bits": "0000020010000000",
+        "winner": null
+      },
+      "status": "COMPLETE"
+    },
+    {
+      "NNUE": {
+        "baseline_logit_bits": 0,
+        "features": {
+          "ids": [
+            [
+              22,
+              140,
+              166,
+              168,
+              172,
+              206,
+              237,
+              267,
+              279,
+              283,
+              295,
+              308
+            ],
+            [
+              21,
+              139,
+              181,
+              215,
+              219,
+              221,
+              232,
+              236,
+              248,
+              278,
+              297,
+              306
+            ]
+          ],
+          "scaled_distance_bits": [
+            1040187392,
+            1035154227
+          ],
+          "side": 1
+        },
+        "linear_residual_bits": 1066279160,
+        "old_D": {
+          "W_abs_ge_099": false,
+          "W_minus_saved": 1.0955097079277039,
+          "W_sign": 1,
+          "saved": -0.29131263494491577,
+          "saved_abs_ge_099": false,
+          "saved_bits": 3197445870,
+          "saved_sign": -1
+        },
+        "old_NNUE": {
+          "W_abs_ge_099": false,
+          "W_minus_saved": -0.05154609680175781,
+          "W_sign": 1,
+          "saved": 0.8557431697845459,
+          "saved_abs_ge_099": false,
+          "saved_bits": 1062932988,
+          "saved_sign": 1
+        },
+        "old_Sigma": {
+          "W_abs_ge_099": false,
+          "W_minus_saved": 0.6974541321396828,
+          "W_sign": 1,
+          "saved": 0.10674294084310532,
+          "saved_abs_ge_099": false,
+          "saved_bits": 1037736971,
+          "saved_sign": 1
+        },
+        "old_pre_tanh_delta": -0.1668415069580078,
+        "one_canonical_head_calculation": true,
+        "post_tanh": 0.8041970729827881,
+        "post_tanh_bits": 1062068188,
+        "pre_tanh": 1.1103811264038086,
+        "pre_tanh_bits": 1066279160
+      },
+      "id": "distance-slot004-ply011/H2/156-91",
+      "local_value_perspective": "actual current STM; no root-backup sign",
+      "old_observation_reused_not_reexecuted": true,
+      "parent_unchanged": true,
+      "prefix": [
+        186,
+        77,
+        13,
+        68,
+        85,
+        59,
+        87,
+        202,
+        22,
+        125,
+        198,
+        156,
+        91
+      ],
+      "row_index": 3,
+      "saved422": {
+        "D": {
+          "bits": 3197445870,
+          "kind": "direct DistanceEvaluator(0,8,tanh)",
+          "not_a_WDL_oracle": true,
+          "old_saved_direct_correspondence": {
+            "current_minus_old": 0.0,
+            "old_bits": 3197445870,
+            "old_value": -0.29131263494491577
+          },
+          "value": -0.29131263494491577
+        },
+        "NNUE": {
+          "baseline_logit_bits": 0,
+          "features": {
+            "ids": [
+              [
+                22,
+                140,
+                166,
+                168,
+                172,
+                206,
+                237,
+                267,
+                279,
+                283,
+                295,
+                308
+              ],
+              [
+                21,
+                139,
+                181,
+                215,
+                219,
+                221,
+                232,
+                236,
+                248,
+                278,
+                297,
+                306
+              ]
+            ],
+            "scaled_distance_bits": [
+              1040187392,
+              1035154227
+            ],
+            "side": 1
+          },
+          "linear_residual_bits": 1067678728,
+          "new_delta_or_extra_parity_calls": 0,
+          "old_pre_tanh_correspondence": {
+            "current_minus_old": 0.0,
+            "old_bits": 1067678728,
+            "old_value": 1.2772226333618164
+          },
+          "old_saved_direct_correspondence": {
+            "current_minus_old": 0.0,
+            "old_bits": 1062932988,
+            "old_value": 0.8557431697845459
+          },
+          "one_canonical_head_calculation": true,
+          "post_tanh": 0.8557431697845459,
+          "post_tanh_bits": 1062932988,
+          "pre_tanh": 1.2772226333618164,
+          "pre_tanh_bits": 1067678728
+        },
+        "Sigma": {
+          "MCTS_rootmean": false,
+          "adapter_bits": 1037736971,
+          "adapter_value": 0.10674294084310532,
+          "raw_evidence": "same-forward source correspondence: SigmaValueEvaluator::evaluate returns NetworkOutput.value unmodified; no independent second read/forward",
+          "raw_value": 0.10674294084310532,
+          "raw_value_bits": 1037736971,
+          "value_perspective": "local STM"
+        }
+      },
+      "source": {
+        "bytes": 14485,
+        "mode": "0644",
+        "path": "/workspaces/quoridor/research-data/ai-sigma/nnue-loss-leaf419/existing-endpoint-input-support.json",
+        "sha256": "5953bd818ef0251d8dd42819786370589291746cb829a5ac424014a07af6aeb6"
+      },
+      "source_pointer": "/states/0",
+      "state": {
+        "horizontal_bits": "0000100000000450",
+        "identity": {
+          "history_counts": [
+            [
+              "4,0|4,8|0|||10,10",
+              1
+            ],
+            [
+              "4,0|4,8|1||1,5|9,10",
+              1
+            ],
+            [
+              "4,0|5,8|0||1,5|9,10",
+              1
+            ],
+            [
+              "4,1|5,6|0|4,0;6,0|1,5;1,7|7,9",
+              1
+            ],
+            [
+              "4,1|5,6|0|4,0|1,5|8,10",
+              1
+            ],
+            [
+              "4,1|5,6|1|4,0;6,0|1,5|7,10",
+              1
+            ],
+            [
+              "4,1|5,7|0||1,5|9,10",
+              1
+            ],
+            [
+              "4,1|5,7|1|4,0|1,5|8,10",
+              1
+            ],
+            [
+              "4,1|5,8|1||1,5|9,10",
+              1
+            ],
+            [
+              "4,2|5,6|0|4,0;4,5;6,0|1,5;1,7;3,1;5,6|6,7",
+              1
+            ],
+            [
+              "4,2|5,6|0|4,0;4,5;6,0|1,5;1,7|7,8",
+              1
+            ],
+            [
+              "4,2|5,6|1|2,1;4,0;4,5;6,0|1,5;1,7;3,1;5,6|5,7",
+              1
+            ],
+            [
+              "4,2|5,6|1|4,0;4,5;6,0|1,5;1,7;5,6|6,8",
+              1
+            ],
+            [
+              "4,2|5,6|1|4,0;6,0|1,5;1,7|7,9",
+              1
+            ]
+          ],
+          "ply": 13,
+          "root_key": "4,2|5,6|1|2,1;4,0;4,5;6,0|1,5;1,7;3,1;5,6|5,7",
+          "rules": "research-standard-2p-threefold-goal-first-v1",
+          "synthetic": false
+        },
+        "pawns": [
+          22,
+          59
+        ],
+        "side": 1,
+        "stocks": [
+          5,
+          7
+        ],
+        "terminal": null,
+        "vertical_bits": "0220020000000800",
+        "winner": null
+      },
+      "status": "COMPLETE"
+    },
+    {
+      "NNUE": {
+        "baseline_logit_bits": 0,
+        "features": {
+          "ids": [
+            [
+              22,
+              140,
+              166,
+              168,
+              206,
+              237,
+              267,
+              277,
+              279,
+              283,
+              295,
+              308
+            ],
+            [
+              21,
+              139,
+              181,
+              219,
+              221,
+              232,
+              236,
+              238,
+              248,
+              278,
+              297,
+              306
+            ]
+          ],
+          "scaled_distance_bits": [
+            1041865114,
+            1035154227
+          ],
+          "side": 1
+        },
+        "linear_residual_bits": 1067849726,
+        "old_D": {
+          "W_abs_ge_099": false,
+          "W_minus_saved": 1.3232231140136719,
+          "W_sign": 1,
+          "saved": -0.46211719512939453,
+          "saved_abs_ge_099": false,
+          "saved_bits": 3203177120,
+          "saved_sign": -1
+        },
+        "old_NNUE": {
+          "W_abs_ge_099": false,
+          "W_minus_saved": -0.030007243156433105,
+          "W_sign": 1,
+          "saved": 0.8911131620407104,
+          "saved_abs_ge_099": false,
+          "saved_bits": 1063526398,
+          "saved_sign": 1
+        },
+        "old_Sigma": {
+          "W_abs_ge_099": false,
+          "W_minus_saved": 1.4405461549758911,
+          "W_sign": 1,
+          "saved": -0.5794402360916138,
+          "saved_abs_ge_099": false,
+          "saved_bits": 3205781042,
+          "saved_sign": -1
+        },
+        "old_pre_tanh_delta": -0.1296987533569336,
+        "one_canonical_head_calculation": true,
+        "post_tanh": 0.8611059188842773,
+        "post_tanh_bits": 1063022960,
+        "pre_tanh": 1.297607183456421,
+        "pre_tanh_bits": 1067849726
+      },
+      "id": "distance-slot004-ply011/H2/156-196",
+      "local_value_perspective": "actual current STM; no root-backup sign",
+      "old_observation_reused_not_reexecuted": true,
+      "parent_unchanged": true,
+      "prefix": [
+        186,
+        77,
+        13,
+        68,
+        85,
+        59,
+        87,
+        202,
+        22,
+        125,
+        198,
+        156,
+        196
+      ],
+      "row_index": 4,
+      "saved422": {
+        "D": {
+          "bits": 3203177120,
+          "kind": "direct DistanceEvaluator(0,8,tanh)",
+          "not_a_WDL_oracle": true,
+          "old_saved_direct_correspondence": {
+            "current_minus_old": 0.0,
+            "old_bits": 3203177120,
+            "old_value": -0.46211719512939453
+          },
+          "value": -0.46211719512939453
+        },
+        "NNUE": {
+          "baseline_logit_bits": 0,
+          "features": {
+            "ids": [
+              [
+                22,
+                140,
+                166,
+                168,
+                206,
+                237,
+                267,
+                277,
+                279,
+                283,
+                295,
+                308
+              ],
+              [
+                21,
+                139,
+                181,
+                219,
+                221,
+                232,
+                236,
+                238,
+                248,
+                278,
+                297,
+                306
+              ]
+            ],
+            "scaled_distance_bits": [
+              1041865114,
+              1035154227
+            ],
+            "side": 1
+          },
+          "linear_residual_bits": 1068937718,
+          "new_delta_or_extra_parity_calls": 0,
+          "old_pre_tanh_correspondence": {
+            "current_minus_old": 0.0,
+            "old_bits": 1068937718,
+            "old_value": 1.4273059368133545
+          },
+          "old_saved_direct_correspondence": {
+            "current_minus_old": 0.0,
+            "old_bits": 1063526398,
+            "old_value": 0.8911131620407104
+          },
+          "one_canonical_head_calculation": true,
+          "post_tanh": 0.8911131620407104,
+          "post_tanh_bits": 1063526398,
+          "pre_tanh": 1.4273059368133545,
+          "pre_tanh_bits": 1068937718
+        },
+        "Sigma": {
+          "MCTS_rootmean": false,
+          "adapter_bits": 3205781042,
+          "adapter_value": -0.5794402360916138,
+          "raw_evidence": "same-forward source correspondence: SigmaValueEvaluator::evaluate returns NetworkOutput.value unmodified; no independent second read/forward",
+          "raw_value": -0.5794402360916138,
+          "raw_value_bits": 3205781042,
+          "value_perspective": "local STM"
+        }
+      },
+      "source": {
+        "bytes": 14485,
+        "mode": "0644",
+        "path": "/workspaces/quoridor/research-data/ai-sigma/nnue-loss-leaf419/existing-endpoint-input-support.json",
+        "sha256": "5953bd818ef0251d8dd42819786370589291746cb829a5ac424014a07af6aeb6"
+      },
+      "source_pointer": "/states/1",
+      "state": {
+        "horizontal_bits": "0000100000000050",
+        "identity": {
+          "history_counts": [
+            [
+              "4,0|4,8|0|||10,10",
+              1
+            ],
+            [
+              "4,0|4,8|1||1,5|9,10",
+              1
+            ],
+            [
+              "4,0|5,8|0||1,5|9,10",
+              1
+            ],
+            [
+              "4,1|5,6|0|4,0;6,0|1,5;1,7|7,9",
+              1
+            ],
+            [
+              "4,1|5,6|0|4,0|1,5|8,10",
+              1
+            ],
+            [
+              "4,1|5,6|1|4,0;6,0|1,5|7,10",
+              1
+            ],
+            [
+              "4,1|5,7|0||1,5|9,10",
+              1
+            ],
+            [
+              "4,1|5,7|1|4,0|1,5|8,10",
+              1
+            ],
+            [
+              "4,1|5,8|1||1,5|9,10",
+              1
+            ],
+            [
+              "4,2|5,6|0|4,0;4,5;6,0|1,5;1,7;3,1;5,6|6,7",
+              1
+            ],
+            [
+              "4,2|5,6|0|4,0;4,5;6,0|1,5;1,7|7,8",
+              1
+            ],
+            [
+              "4,2|5,6|1|4,0;4,5;6,0|1,5;1,7;3,1;3,6;5,6|5,7",
+              1
+            ],
+            [
+              "4,2|5,6|1|4,0;4,5;6,0|1,5;1,7;5,6|6,8",
+              1
+            ],
+            [
+              "4,2|5,6|1|4,0;6,0|1,5;1,7|7,9",
+              1
+            ]
+          ],
+          "ply": 13,
+          "root_key": "4,2|5,6|1|4,0;4,5;6,0|1,5;1,7;3,1;3,6;5,6|5,7",
+          "rules": "research-standard-2p-threefold-goal-first-v1",
+          "synthetic": false
+        },
+        "pawns": [
+          22,
+          59
+        ],
+        "side": 1,
+        "stocks": [
+          5,
+          7
+        ],
+        "terminal": null,
+        "vertical_bits": "0228020000000800",
+        "winner": null
+      },
+      "status": "COMPLETE"
+    },
+    {
+      "NNUE": {
+        "baseline_logit_bits": 0,
+        "features": {
+          "ids": [
+            [
+              43,
+              150,
+              164,
+              166,
+              168,
+              175,
+              177,
+              189,
+              195,
+              202,
+              204,
+              206,
+              208,
+              214,
+              237,
+              246,
+              267,
+              273,
+              279,
+              283,
+              284,
+              290,
+              302
+            ],
+            [
+              11,
+              118,
+              173,
+              179,
+              181,
+              183,
+              185,
+              192,
+              198,
+              210,
+              212,
+              219,
+              221,
+              223,
+              231,
+              232,
+              236,
+              242,
+              248,
+              269,
+              278,
+              291,
+              301
+            ]
+          ],
+          "scaled_distance_bits": [
+            1045220557,
+            1031798784
+          ],
+          "side": 1
+        },
+        "linear_residual_bits": 1083995319,
+        "old_D": {
+          "W_abs_ge_099": true,
+          "W_minus_saved": 1.8003857135772705,
+          "W_sign": 1,
+          "saved": -0.8004990220069885,
+          "saved_abs_ge_099": false,
+          "saved_bits": 3209489793,
+          "saved_sign": -1
+        },
+        "old_NNUE": {
+          "W_abs_ge_099": true,
+          "W_minus_saved": -0.00006073713302612305,
+          "W_sign": 1,
+          "saved": 0.9999474287033081,
+          "saved_abs_ge_099": true,
+          "saved_bits": 1065352334,
+          "saved_sign": 1
+        },
+        "old_Sigma": {
+          "W_abs_ge_099": true,
+          "W_minus_saved": 1.9864071607589722,
+          "W_sign": 1,
+          "saved": -0.9865204691886902,
+          "saved_abs_ge_099": false,
+          "saved_bits": 3212610715,
+          "saved_sign": -1
+        },
+        "old_pre_tanh_delta": -0.38422107696533203,
+        "one_canonical_head_calculation": true,
+        "post_tanh": 0.999886691570282,
+        "post_tanh_bits": 1065351315,
+        "pre_tanh": 4.889247417449951,
+        "pre_tanh_bits": 1083995319
+      },
+      "id": "distance-slot004-ply039/H2/192-43",
+      "local_value_perspective": "actual current STM; no root-backup sign",
+      "old_observation_reused_not_reexecuted": true,
+      "parent_unchanged": true,
+      "prefix": [
+        186,
+        77,
+        13,
+        68,
+        85,
+        59,
+        87,
+        202,
+        22,
+        125,
+        198,
+        156,
+        123,
+        203,
+        133,
+        58,
+        96,
+        114,
+        127,
+        108,
+        83,
+        165,
+        13,
+        57,
+        14,
+        121,
+        23,
+        66,
+        94,
+        67,
+        24,
+        76,
+        33,
+        77,
+        42,
+        78,
+        51,
+        69,
+        52,
+        192,
+        43
+      ],
+      "row_index": 5,
+      "saved422": {
+        "D": {
+          "bits": 3209489793,
+          "kind": "direct DistanceEvaluator(0,8,tanh)",
+          "not_a_WDL_oracle": true,
+          "old_saved_direct_correspondence": {
+            "current_minus_old": 0.0,
+            "old_bits": 3209489793,
+            "old_value": -0.8004990220069885
+          },
+          "value": -0.8004990220069885
+        },
+        "NNUE": {
+          "baseline_logit_bits": 0,
+          "features": {
+            "ids": [
+              [
+                43,
+                150,
+                164,
+                166,
+                168,
+                175,
+                177,
+                189,
+                195,
+                202,
+                204,
+                206,
+                208,
+                214,
+                237,
+                246,
+                267,
+                273,
+                279,
+                283,
+                284,
+                290,
+                302
+              ],
+              [
+                11,
+                118,
+                173,
+                179,
+                181,
+                183,
+                185,
+                192,
+                198,
+                210,
+                212,
+                219,
+                221,
+                223,
+                231,
+                232,
+                236,
+                242,
+                248,
+                269,
+                278,
+                291,
+                301
+              ]
+            ],
+            "scaled_distance_bits": [
+              1045220557,
+              1031798784
+            ],
+            "side": 1
+          },
+          "linear_residual_bits": 1084801089,
+          "new_delta_or_extra_parity_calls": 0,
+          "old_pre_tanh_correspondence": {
+            "current_minus_old": 0.0,
+            "old_bits": 1084801089,
+            "old_value": 5.273468494415283
+          },
+          "old_saved_direct_correspondence": {
+            "current_minus_old": 0.0,
+            "old_bits": 1065352334,
+            "old_value": 0.9999474287033081
+          },
+          "one_canonical_head_calculation": true,
+          "post_tanh": 0.9999474287033081,
+          "post_tanh_bits": 1065352334,
+          "pre_tanh": 5.273468494415283,
+          "pre_tanh_bits": 1084801089
+        },
+        "Sigma": {
+          "MCTS_rootmean": false,
+          "adapter_bits": 3212610715,
+          "adapter_value": -0.9865204691886902,
+          "raw_evidence": "same-forward source correspondence: SigmaValueEvaluator::evaluate returns NetworkOutput.value unmodified; no independent second read/forward",
+          "raw_value": -0.9865204691886902,
+          "raw_value_bits": 3212610715,
+          "value_perspective": "local STM"
+        }
+      },
+      "source": {
+        "bytes": 14485,
+        "mode": "0644",
+        "path": "/workspaces/quoridor/research-data/ai-sigma/nnue-loss-leaf419/existing-endpoint-input-support.json",
+        "sha256": "5953bd818ef0251d8dd42819786370589291746cb829a5ac424014a07af6aeb6"
+      },
+      "source_pointer": "/states/2",
+      "state": {
+        "horizontal_bits": "001055020800a054",
+        "identity": {
+          "history_counts": [
+            [
+              "4,0|4,8|0|||10,10",
+              1
+            ],
+            [
+              "4,0|4,8|1||1,5|9,10",
+              1
+            ],
+            [
+              "4,0|5,8|0||1,5|9,10",
+              1
+            ],
+            [
+              "4,1|3,6|0|1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,3",
+              1
+            ],
+            [
+              "4,1|4,6|1|1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,3",
+              1
+            ],
+            [
+              "4,1|5,6|0|4,0;6,0|1,5;1,7|7,9",
+              1
+            ],
+            [
+              "4,1|5,6|0|4,0|1,5|8,10",
+              1
+            ],
+            [
+              "4,1|5,6|1|4,0;6,0|1,5|7,10",
+              1
+            ],
+            [
+              "4,1|5,7|0||1,5|9,10",
+              1
+            ],
+            [
+              "4,1|5,7|1|4,0|1,5|8,10",
+              1
+            ],
+            [
+              "4,1|5,8|1||1,5|9,10",
+              1
+            ],
+            [
+              "4,2|4,6|0|1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,3",
+              1
+            ],
+            [
+              "4,2|4,6|0|1,4;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;5,6|2,4",
+              1
+            ],
+            [
+              "4,2|4,6|0|1,4;2,5;4,0;4,5;4,6;6,0;7,1|1,5;1,7;2,7;3,1;5,6|3,5",
+              1
+            ],
+            [
+              "4,2|4,6|0|2,5;4,0;4,5;4,6;6,0|1,5;1,7;2,7;3,1;5,6|4,6",
+              1
+            ],
+            [
+              "4,2|4,6|1|1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;5,6|1,4",
+              1
+            ],
+            [
+              "4,2|4,6|1|1,4;2,5;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;5,6|2,5",
+              1
+            ],
+            [
+              "4,2|4,6|1|2,5;4,0;4,5;4,6;6,0;7,1|1,5;1,7;2,7;3,1;5,6|3,6",
+              1
+            ],
+            [
+              "4,2|5,6|0|2,5;4,0;4,5;6,0|1,5;1,7;2,7;3,1;5,6|5,6",
+              1
+            ],
+            [
+              "4,2|5,6|0|4,0;4,5;6,0|1,5;1,7;3,1;5,6|6,7",
+              1
+            ],
+            [
+              "4,2|5,6|0|4,0;4,5;6,0|1,5;1,7|7,8",
+              1
+            ],
+            [
+              "4,2|5,6|1|2,5;4,0;4,5;4,6;6,0|1,5;1,7;2,7;3,1;5,6|4,6",
+              1
+            ],
+            [
+              "4,2|5,6|1|2,5;4,0;4,5;6,0|1,5;1,7;3,1;5,6|5,7",
+              1
+            ],
+            [
+              "4,2|5,6|1|4,0;4,5;6,0|1,5;1,7;5,6|6,8",
+              1
+            ],
+            [
+              "4,2|5,6|1|4,0;6,0|1,5;1,7|7,9",
+              1
+            ],
+            [
+              "5,1|3,6|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,2",
+              1
+            ],
+            [
+              "5,1|3,6|1|1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,3",
+              1
+            ],
+            [
+              "5,2|3,6|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,2",
+              1
+            ],
+            [
+              "5,2|3,7|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,2",
+              1
+            ],
+            [
+              "5,2|3,7|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "5,2|4,7|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "6,2|4,7|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "6,2|4,8|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "6,3|4,8|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "6,3|5,8|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "6,4|5,8|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "6,4|6,8|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "6,5|6,7|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "6,5|6,8|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "7,4|6,7|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6;7,5|0,1",
+              1
+            ],
+            [
+              "7,5|6,7|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6;7,5|0,1",
+              1
+            ],
+            [
+              "7,5|6,7|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ]
+          ],
+          "ply": 41,
+          "root_key": "7,4|6,7|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6;7,5|0,1",
+          "rules": "research-standard-2p-threefold-goal-first-v1",
+          "synthetic": false
+        },
+        "pawns": [
+          43,
+          69
+        ],
+        "side": 1,
+        "stocks": [
+          0,
+          1
+        ],
+        "terminal": null,
+        "vertical_bits": "0620820000100800",
+        "winner": null
+      },
+      "status": "COMPLETE"
+    },
+    {
+      "NNUE": {
+        "baseline_logit_bits": 0,
+        "features": {
+          "ids": [
+            [
+              53,
+              142,
+              164,
+              166,
+              168,
+              175,
+              177,
+              189,
+              195,
+              202,
+              204,
+              206,
+              208,
+              214,
+              237,
+              246,
+              267,
+              279,
+              283,
+              284,
+              290,
+              303
+            ],
+            [
+              19,
+              108,
+              173,
+              179,
+              181,
+              183,
+              185,
+              192,
+              198,
+              210,
+              212,
+              219,
+              221,
+              223,
+              231,
+              232,
+              236,
+              248,
+              269,
+              278,
+              292,
+              301
+            ]
+          ],
+          "scaled_distance_bits": [
+            1025087898,
+            1043542835
+          ],
+          "side": 0
+        },
+        "linear_residual_bits": 3228071781,
+        "old_D": {
+          "W_abs_ge_099": true,
+          "W_minus_saved": -1.7991001605987549,
+          "W_sign": -1,
+          "saved": 0.8004989624023438,
+          "saved_abs_ge_099": false,
+          "saved_bits": 1062006144,
+          "saved_sign": 1
+        },
+        "old_NNUE": {
+          "W_abs_ge_099": true,
+          "W_minus_saved": 0.0008224844932556152,
+          "W_sign": -1,
+          "saved": -0.9994236826896667,
+          "saved_abs_ge_099": true,
+          "saved_bits": 3212827195,
+          "saved_sign": -1
+        },
+        "old_Sigma": {
+          "W_abs_ge_099": true,
+          "W_minus_saved": -1.9964693784713745,
+          "W_sign": -1,
+          "saved": 0.9978681802749634,
+          "saved_abs_ge_099": true,
+          "saved_bits": 1065317450,
+          "saved_sign": 1
+        },
+        "old_pre_tanh_delta": 0.44358277320861816,
+        "one_canonical_head_calculation": true,
+        "post_tanh": -0.9986011981964111,
+        "post_tanh_bits": 3212813396,
+        "pre_tanh": -3.6322872638702393,
+        "pre_tanh_bits": 3228071781
+      },
+      "id": "distance-slot004-ply039/H3/60-53-61",
+      "local_value_perspective": "actual current STM; no root-backup sign",
+      "old_observation_reused_not_reexecuted": true,
+      "parent_unchanged": true,
+      "prefix": [
+        186,
+        77,
+        13,
+        68,
+        85,
+        59,
+        87,
+        202,
+        22,
+        125,
+        198,
+        156,
+        123,
+        203,
+        133,
+        58,
+        96,
+        114,
+        127,
+        108,
+        83,
+        165,
+        13,
+        57,
+        14,
+        121,
+        23,
+        66,
+        94,
+        67,
+        24,
+        76,
+        33,
+        77,
+        42,
+        78,
+        51,
+        69,
+        52,
+        60,
+        53,
+        61
+      ],
+      "row_index": 6,
+      "saved422": {
+        "D": {
+          "bits": 1062006144,
+          "kind": "direct DistanceEvaluator(0,8,tanh)",
+          "not_a_WDL_oracle": true,
+          "old_saved_direct_correspondence": {
+            "current_minus_old": 0.0,
+            "old_bits": 1062006144,
+            "old_value": 0.8004989624023438
+          },
+          "value": 0.8004989624023438
+        },
+        "NNUE": {
+          "baseline_logit_bits": 0,
+          "features": {
+            "ids": [
+              [
+                53,
+                142,
+                164,
+                166,
+                168,
+                175,
+                177,
+                189,
+                195,
+                202,
+                204,
+                206,
+                208,
+                214,
+                237,
+                246,
+                267,
+                279,
+                283,
+                284,
+                290,
+                303
+              ],
+              [
+                19,
+                108,
+                173,
+                179,
+                181,
+                183,
+                185,
+                192,
+                198,
+                210,
+                212,
+                219,
+                221,
+                223,
+                231,
+                232,
+                236,
+                248,
+                269,
+                278,
+                292,
+                301
+              ]
+            ],
+            "scaled_distance_bits": [
+              1025087898,
+              1043542835
+            ],
+            "side": 0
+          },
+          "linear_residual_bits": 3229773191,
+          "new_delta_or_extra_parity_calls": 0,
+          "old_pre_tanh_correspondence": {
+            "current_minus_old": 0.0,
+            "old_bits": 3229773191,
+            "old_value": -4.075870037078857
+          },
+          "old_saved_direct_correspondence": {
+            "current_minus_old": 0.0,
+            "old_bits": 3212827195,
+            "old_value": -0.9994236826896667
+          },
+          "one_canonical_head_calculation": true,
+          "post_tanh": -0.9994236826896667,
+          "post_tanh_bits": 3212827195,
+          "pre_tanh": -4.075870037078857,
+          "pre_tanh_bits": 3229773191
+        },
+        "Sigma": {
+          "MCTS_rootmean": false,
+          "adapter_bits": 1065317450,
+          "adapter_value": 0.9978681802749634,
+          "raw_evidence": "same-forward source correspondence: SigmaValueEvaluator::evaluate returns NetworkOutput.value unmodified; no independent second read/forward",
+          "raw_value": 0.9978681802749634,
+          "raw_value_bits": 1065317450,
+          "value_perspective": "local STM"
+        }
+      },
+      "source": {
+        "bytes": 14485,
+        "mode": "0644",
+        "path": "/workspaces/quoridor/research-data/ai-sigma/nnue-loss-leaf419/existing-endpoint-input-support.json",
+        "sha256": "5953bd818ef0251d8dd42819786370589291746cb829a5ac424014a07af6aeb6"
+      },
+      "source_pointer": "/states/3",
+      "state": {
+        "horizontal_bits": "001055020800a054",
+        "identity": {
+          "history_counts": [
+            [
+              "4,0|4,8|0|||10,10",
+              1
+            ],
+            [
+              "4,0|4,8|1||1,5|9,10",
+              1
+            ],
+            [
+              "4,0|5,8|0||1,5|9,10",
+              1
+            ],
+            [
+              "4,1|3,6|0|1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,3",
+              1
+            ],
+            [
+              "4,1|4,6|1|1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,3",
+              1
+            ],
+            [
+              "4,1|5,6|0|4,0;6,0|1,5;1,7|7,9",
+              1
+            ],
+            [
+              "4,1|5,6|0|4,0|1,5|8,10",
+              1
+            ],
+            [
+              "4,1|5,6|1|4,0;6,0|1,5|7,10",
+              1
+            ],
+            [
+              "4,1|5,7|0||1,5|9,10",
+              1
+            ],
+            [
+              "4,1|5,7|1|4,0|1,5|8,10",
+              1
+            ],
+            [
+              "4,1|5,8|1||1,5|9,10",
+              1
+            ],
+            [
+              "4,2|4,6|0|1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,3",
+              1
+            ],
+            [
+              "4,2|4,6|0|1,4;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;5,6|2,4",
+              1
+            ],
+            [
+              "4,2|4,6|0|1,4;2,5;4,0;4,5;4,6;6,0;7,1|1,5;1,7;2,7;3,1;5,6|3,5",
+              1
+            ],
+            [
+              "4,2|4,6|0|2,5;4,0;4,5;4,6;6,0|1,5;1,7;2,7;3,1;5,6|4,6",
+              1
+            ],
+            [
+              "4,2|4,6|1|1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;5,6|1,4",
+              1
+            ],
+            [
+              "4,2|4,6|1|1,4;2,5;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;5,6|2,5",
+              1
+            ],
+            [
+              "4,2|4,6|1|2,5;4,0;4,5;4,6;6,0;7,1|1,5;1,7;2,7;3,1;5,6|3,6",
+              1
+            ],
+            [
+              "4,2|5,6|0|2,5;4,0;4,5;6,0|1,5;1,7;2,7;3,1;5,6|5,6",
+              1
+            ],
+            [
+              "4,2|5,6|0|4,0;4,5;6,0|1,5;1,7;3,1;5,6|6,7",
+              1
+            ],
+            [
+              "4,2|5,6|0|4,0;4,5;6,0|1,5;1,7|7,8",
+              1
+            ],
+            [
+              "4,2|5,6|1|2,5;4,0;4,5;4,6;6,0|1,5;1,7;2,7;3,1;5,6|4,6",
+              1
+            ],
+            [
+              "4,2|5,6|1|2,5;4,0;4,5;6,0|1,5;1,7;3,1;5,6|5,7",
+              1
+            ],
+            [
+              "4,2|5,6|1|4,0;4,5;6,0|1,5;1,7;5,6|6,8",
+              1
+            ],
+            [
+              "4,2|5,6|1|4,0;6,0|1,5;1,7|7,9",
+              1
+            ],
+            [
+              "5,1|3,6|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,2",
+              1
+            ],
+            [
+              "5,1|3,6|1|1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,3",
+              1
+            ],
+            [
+              "5,2|3,6|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,2",
+              1
+            ],
+            [
+              "5,2|3,7|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|1,2",
+              1
+            ],
+            [
+              "5,2|3,7|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "5,2|4,7|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "6,2|4,7|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "6,2|4,8|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "6,3|4,8|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "6,3|5,8|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "6,4|5,8|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "6,4|6,8|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "6,5|6,7|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "6,5|6,8|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "7,5|6,6|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "7,5|6,7|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "8,5|6,6|1|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ],
+            [
+              "8,5|7,6|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+              1
+            ]
+          ],
+          "ply": 42,
+          "root_key": "8,5|7,6|0|0,5;1,4;2,0;2,5;3,3;4,0;4,5;4,6;5,1;6,0;6,5;7,1|1,5;1,7;2,7;3,1;4,2;5,6|0,2",
+          "rules": "research-standard-2p-threefold-goal-first-v1",
+          "synthetic": false
+        },
+        "pawns": [
+          53,
+          61
+        ],
+        "side": 0,
+        "stocks": [
+          0,
+          2
+        ],
+        "terminal": null,
+        "vertical_bits": "0620020000100800",
+        "winner": null
+      },
+      "status": "COMPLETE"
+    }
+  ],
+  "saved_result": {
+    "bytes": 56324,
+    "mode": "0644",
+    "path": "/workspaces/quoridor/research-data/ai-sigma/static-evaluators422/result.json",
+    "sha256": "282c5eea0995d5e0c59e71888a7cca378971667f42f0c6e08214ff0c472c4a78"
+  },
+  "secondary_errors": [],
+  "setup_seconds": 0.019745477,
+  "status": "COMPLETE",
+  "terminal_output": "NOT_YET_ATTEMPTED_UNKNOWN_IN_REPORT",
+  "timing_scope": "setup/drop/whole nested; no speed claim",
+  "whole_seconds": 0.221511736
+}

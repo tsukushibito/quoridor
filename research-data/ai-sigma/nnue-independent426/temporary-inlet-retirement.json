@@ -1,0 +1,54 @@
+{
+  "at": "2026-10-16T23:04:20.787504+00:00",
+  "actual_B_collection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/nnue-independent426-v1/science-v1/static-seven-typed-v1/collection.json",
+    "sha256": "f956cadc107169a8c0f51fb325ead9ebddb2af94554b0ac2fe9cf05041dccf10",
+    "bytes": 4766,
+    "mode": "0644"
+  },
+  "Main_module_before": {
+    "path": "/workspaces/quoridor/crates/quoridor-runner/src/measurement.rs",
+    "sha256": "ab74c1fa0666ed7a9e517c1d9422bc14ec26efcc021eff316ba85372e3e2c687",
+    "bytes": 104541,
+    "mode": "0644"
+  },
+  "Main_module_after": {
+    "path": "/workspaces/quoridor/crates/quoridor-runner/src/measurement.rs",
+    "sha256": "c364731610e7583b7d6699f86cc8348d9b0ac9668f45ed10c19625ae5c3bf838",
+    "bytes": 104463,
+    "mode": "0644"
+  },
+  "before_module_gzip": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/nnue-independent426-v1/science-v1/static-seven-typed-v1/measurement-module-before.rs.gz",
+    "sha256": "b2359254a30445fa11445e2fbb6c561efb28b8d89e90afb471dc2a809c329b7d",
+    "bytes": 22725,
+    "mode": "0644"
+  },
+  "caller_before": {
+    "path": "/workspaces/quoridor/crates/quoridor-runner/src/measurement_static426_tests.rs",
+    "sha256": "6540e5261594fb900bf4ef87b098832e4330e35004af3633ead7a14c61104b54",
+    "bytes": 20589,
+    "mode": "0644"
+  },
+  "caller_exact_immutable_reconstruction": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/research-team/nnue-independent426-static-v1/typed-distance-fit-v1/measurement_static426_tests.rs",
+    "sha256": "6540e5261594fb900bf4ef87b098832e4330e35004af3633ead7a14c61104b54",
+    "bytes": 20589,
+    "mode": "0644"
+  },
+  "author_binding": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/research-team/nnue-independent426-static-v1/typed-distance-fit-v1/source-binding.json",
+    "sha256": "146bb858158b898b4b4b87ea21f9c910303e288c184b42f20152888d039d03a5",
+    "bytes": 5285,
+    "mode": "0644"
+  },
+  "caller_absent": true,
+  "Main_module_equals_current_HEAD_bytes": true,
+  "removed_lines": 4,
+  "production_mathematics_changed": false,
+  "native_or_head_or_old_suite_replayed": 0,
+  "formatter": "Scoped project Rustfmt write/check PASS; final bytes equal already maintained HEAD",
+  "software_replay": "No further build/test: only cfg(test) module hookup removed and untracked temporary caller retired, complete module byte-equal to maintained HEAD. Actual used caller bytes retained by immutable source packet.",
+  "storage_refund": 0,
+  "global_actual": "UNKNOWN"
+}

@@ -1,0 +1,27 @@
+{
+  "original_source": {
+    "path": "design-v1/family_bootstrap426.py",
+    "sha256": "87ec6094b26f9e79c5c80f7d4c9129c753c872ce375dba029af359d888b1eb8c",
+    "bytes": 4093
+  },
+  "derivative_before_execution": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-independent426-analysis-v1/final-analysis-v1/A-v1/family_bootstrap426_bounded.py",
+    "sha256": "0cbb5093abbf221e11132e267d8a9c64e68cfec7ec9dce8bd0a38dcf37eae6b2",
+    "bytes": 4275,
+    "mode": "0644"
+  },
+  "statistical_function_AST_exact": true,
+  "repairs": [
+    "input first+recheck read bounded131073B",
+    "output x mode exclusive creation"
+  ],
+  "initial_private_repair_refusal": "Ruff-wrapped stability-if exact literal differed; original refusal kept, derivative/science not entered then; core join outputs reused",
+  "input": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-independent426-analysis-v1/final-analysis-v1/A-v1/bootstrap-input.json",
+    "sha256": "fd16d1d2cfa6e51617155b6021448589206fb9ce4c3d9dc2ab9c93d2bd20e860",
+    "bytes": 22170,
+    "mode": "0644"
+  },
+  "Ruff_AST": "PASS",
+  "bootstrap_executed": false
+}

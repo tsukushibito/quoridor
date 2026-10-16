@@ -1,0 +1,17 @@
+原426 A/Bの重要結論は、固定された保存証拠の範囲でclear。blocker 0 / ordinary 0。対象はcompletion e98476cc、report f4a6a5b7、result 95039f77であり、旧source評価や次の実験を再開する判断ではない。
+
+Aは192の異なるcanonical familyに二色ずつ、384/384 GOALを結んでいる。表示名をキーにせず、元bookのglobal request ID・完全prefix・root key・counted historyの保存hash、carrierのcanonical family、schedule slot、各configのopening/reference/lineage、原native CSV、集計family/game表を照合した。既存nativeのfamily分類・除外を再実装せず、保存された対応を検査した。39両勝ち＋105片勝ち＋48両負け＝192、W183/L201、色別92＋91＝183で、family非加重平均は183/384＝.4765625となる。旧423のfamilyや12個のchunk CIを統合していない。
+
+sole192-family bootstrapは実行された0cbb5093のchoice/mean/quantile本体を直接読み、元87ec6094の統計関数ASTと一致させた。main以外のASTも同一で、CLIの変更は有限131073B read/recheckと排他的x出力である。実入力fd16d1d2の192 score/IDを上のfamily表へ対応させ、output9f8240c5・binding43a312b3・実receipt ee1781da・stdout SHA/bytesを結んだ。保存実行はPython3.14.7/NumPy2.5.3、PCG64、seed42620261016、10000、percentile/linear、directwait/reap/handles closeを記録する。レビューではimport・bootstrap・再標本化を一切実行していない。実行結果[.4296875,.5234375]は保存出力として確認し、独立に再計算した区間とは呼ばない。interpreter/NumPyのbinary payloadや全OS lifecycleを再資格したものでもない。
+
+下限>.5という事前基準はNOT_METで、改善支持なしという結論は正しい。50%を含む区間から劣位・等価・改善不可能を証明できない。固定book/条件とfamily交換可能性の仮定に条件づけられ、異なるcanonical familyが母集団全体で統計的独立だと証明されたわけではない。結果を見た追加局、補充、seed/depth sweep、default/model昇格の根拠にならない。
+
+BはRoot実resultの同じ3親＋4endpointを元422の保存resultに結び、全prefix・state（STM/stock/壁/countsを含む）・feature ID・scaled distance bits・保存旧NNUE/Sigma/Dを完全一致で確認した。new Wの全7 pre絶対値は小さくなったが、7/7符号は不変でabs(post)>=.99は旧3→新3。local STMの直接static値であり、searched rootやoutcome教師zとは別である。H3の親視点は逆符号、H2/H3は異horizon。同じ156に対する二つの保存応手の局所順序だけが維持され、全応手argmax/WDL/敗因やD/Sigmaの真値性を示さない。Aのstock18..20開始0、B最大16から、高在庫域改善はUNKNOWNである。
+
+Bのconstructor heads0、context7、head7、inclusive7<=28、oldNNUE/Sigma/D/delta/Searchの新規実行0は保存actual receiptと整合する。元setup FAILED/head0は成功へ変えず、new COMPLETE7は別job。saved report自身の最終保存return UNKNOWNと別receiptの実OKも区別される。temporary Main callerの撤去は保存retirement mappingで説明され、実caller6540のimmutable参照が残る。歴史的Main pathの現在存在やbyte一致は要求・主張しない。
+
+work/costは別々の保存domainである。12 disjoint250Mのcharged合計1,640,581,337は3G以内、未使用を貸与していない。保存RAW summaryの16733 accepted completed、receipt遅延0、whole nodesとchargedの一致を照合したが、archive再decodeや全観測再検証は行っていない。LMRのaccepted selective depthはfullwidthでなく、selected snapshotとwhole work、TT raw counter/gaugeとrequested capacity/RSS、重なる時計を混ぜない。reserve cancellation48はUSERPAUSE/48UNKNOWNではなく、deadline後terminal return/commitと期限内authority receiptを区別する。既知outer小計1695.948371785984秒はA＋元FAILED setup＋new Bの3件のみで、nested native等を加算しない。physical NN、連続RSS、全費用はUNKNOWN、旧423 FAILED/R operation FAILED/5UNKNOWN/O1も変更しない。
+
+次案は高在庫coverageを狙う未実行の設計案として妥当な候補である。旧cap増では欠けた18..20を作れないという保存coverageに沿うが、2ply開始は全軌跡分布も変えるため、在庫不足だけの因果効果や修復成功を保証しない。256 requestsは十分性の保証でない。3763 distinct×8＝30104 draws＝117 full batch256＋tail152（118updates）の算術は整合する一方、実Tの不足・whole-family分離・表現可能なglobal match・新V/publicV trade-off・独立の将来bookは未解決の実条件である。現在のpacketはそれらのconfig/seed/Experiment/runtimeを作らず、生成/fit/forward/gameを許可していない。
+
+50 selected refs、1,747,751BをSHA/size/mode前後照合。実reader STOP 2026-10-16T23:34:59.204675+00:00。最後のstdlib helperはCPU16、AS512MiB、foreground exit0、PID448339/start24205837/boot6c2e177d-29e9-4a05-ad60-026060b53fb9がfresh absent。physical core16/18は8/9、終了時MemAvailable19283936KiB、自己ru_maxrss21160KiB、elapsed .014390708秒。これは継続family peakや将来quietの証明ではない。canonical/hardware lease取得なし、owned readers/children/jobs/handles/TMP/leases/remainingは空。tool内部waitpid詳細はUNKNOWN。自作checker初回はmatchupとopening indexの混同でexit1となり、修正前sourceと原captureを保持した。対象や科学計算の失敗ではなく、元PID/peak/費はUNKNOWN。修正後にこの有限metadata照合を再実行した。対象の成功suite/native/statisticsは再演していない。

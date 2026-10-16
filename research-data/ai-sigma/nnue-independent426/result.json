@@ -1,0 +1,2152 @@
+{
+  "status": "ORIGINAL_FINITE426_A_B_SAVED_ANALYSIS_COMPLETE",
+  "A": {
+    "status": "ORIGINAL_A_COMPLETE_ALL384_GOAL",
+    "planned": 384,
+    "started": 384,
+    "GOAL": 384,
+    "UNKNOWN": 0,
+    "complete_families": 192,
+    "W": 183,
+    "D": 0,
+    "L": 201,
+    "score": 0.4765625,
+    "family_score_hist": {
+      "0.0": 48,
+      "0.5": 105,
+      "1.0": 39
+    },
+    "colour": [
+      {
+        "candidate_colour": 0,
+        "W": 92,
+        "L": 100,
+        "games": 192
+      },
+      {
+        "candidate_colour": 1,
+        "W": 91,
+        "L": 101,
+        "games": 192
+      }
+    ],
+    "prefix_len_strata_exploratory": {
+      "4": {
+        "W": 43,
+        "L": 53
+      },
+      "8": {
+        "L": 54,
+        "W": 42
+      },
+      "12": {
+        "L": 51,
+        "W": 45
+      },
+      "16": {
+        "L": 43,
+        "W": 53
+      }
+    },
+    "charged_nodes": 1640581337,
+    "disjoint_quotas": [
+      137516236,
+      136599248,
+      143103701,
+      123989244,
+      144457325,
+      140937639,
+      139322596,
+      135838406,
+      148830322,
+      137269638,
+      125199187,
+      127517795
+    ],
+    "unused_quota_not_lent": 1359418663,
+    "native_chunk_CIs_preserved_not_combined": [
+      {
+        "batch": 0,
+        "native_bootstrap": {
+          "seed": 42620261016,
+          "resamples": 10000,
+          "unit": "complete family pair",
+          "percentile_95": [
+            0.34375,
+            0.75
+          ],
+          "limitations": [
+            "Fixed sample, complete pairs only; missingness may bias the primary score.",
+            "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+            "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+            "Repeated inspection of this interval is not a sequential stopping rule."
+          ]
+        },
+        "native_complete_pair_mean": 0.5625,
+        "native_peak_RSS_B": 205533184,
+        "native_wall_seconds_nested_not_added": 139.762401022
+      },
+      {
+        "batch": 1,
+        "native_bootstrap": {
+          "seed": 42620261016,
+          "resamples": 10000,
+          "unit": "complete family pair",
+          "percentile_95": [
+            0.375,
+            0.6875
+          ],
+          "limitations": [
+            "Fixed sample, complete pairs only; missingness may bias the primary score.",
+            "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+            "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+            "Repeated inspection of this interval is not a sequential stopping rule."
+          ]
+        },
+        "native_complete_pair_mean": 0.53125,
+        "native_peak_RSS_B": 205119488,
+        "native_wall_seconds_nested_not_added": 138.276864745
+      },
+      {
+        "batch": 2,
+        "native_bootstrap": {
+          "seed": 42620261016,
+          "resamples": 10000,
+          "unit": "complete family pair",
+          "percentile_95": [
+            0.3125,
+            0.65625
+          ],
+          "limitations": [
+            "Fixed sample, complete pairs only; missingness may bias the primary score.",
+            "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+            "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+            "Repeated inspection of this interval is not a sequential stopping rule."
+          ]
+        },
+        "native_complete_pair_mean": 0.5,
+        "native_peak_RSS_B": 205586432,
+        "native_wall_seconds_nested_not_added": 141.424814048
+      },
+      {
+        "batch": 3,
+        "native_bootstrap": {
+          "seed": 42620261016,
+          "resamples": 10000,
+          "unit": "complete family pair",
+          "percentile_95": [
+            0.1875,
+            0.5
+          ],
+          "limitations": [
+            "Fixed sample, complete pairs only; missingness may bias the primary score.",
+            "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+            "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+            "Repeated inspection of this interval is not a sequential stopping rule."
+          ]
+        },
+        "native_complete_pair_mean": 0.34375,
+        "native_peak_RSS_B": 203726848,
+        "native_wall_seconds_nested_not_added": 126.277668319
+      },
+      {
+        "batch": 4,
+        "native_bootstrap": {
+          "seed": 42620261016,
+          "resamples": 10000,
+          "unit": "complete family pair",
+          "percentile_95": [
+            0.375,
+            0.625
+          ],
+          "limitations": [
+            "Fixed sample, complete pairs only; missingness may bias the primary score.",
+            "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+            "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+            "Repeated inspection of this interval is not a sequential stopping rule."
+          ]
+        },
+        "native_complete_pair_mean": 0.5,
+        "native_peak_RSS_B": 206303232,
+        "native_wall_seconds_nested_not_added": 143.385330761
+      },
+      {
+        "batch": 5,
+        "native_bootstrap": {
+          "seed": 42620261016,
+          "resamples": 10000,
+          "unit": "complete family pair",
+          "percentile_95": [
+            0.3125,
+            0.625
+          ],
+          "limitations": [
+            "Fixed sample, complete pairs only; missingness may bias the primary score.",
+            "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+            "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+            "Repeated inspection of this interval is not a sequential stopping rule."
+          ]
+        },
+        "native_complete_pair_mean": 0.46875,
+        "native_peak_RSS_B": 205676544,
+        "native_wall_seconds_nested_not_added": 139.390634547
+      },
+      {
+        "batch": 6,
+        "native_bootstrap": {
+          "seed": 42620261016,
+          "resamples": 10000,
+          "unit": "complete family pair",
+          "percentile_95": [
+            0.34375,
+            0.65625
+          ],
+          "limitations": [
+            "Fixed sample, complete pairs only; missingness may bias the primary score.",
+            "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+            "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+            "Repeated inspection of this interval is not a sequential stopping rule."
+          ]
+        },
+        "native_complete_pair_mean": 0.5,
+        "native_peak_RSS_B": 205193216,
+        "native_wall_seconds_nested_not_added": 139.62508977
+      },
+      {
+        "batch": 7,
+        "native_bootstrap": {
+          "seed": 42620261016,
+          "resamples": 10000,
+          "unit": "complete family pair",
+          "percentile_95": [
+            0.28125,
+            0.53125
+          ],
+          "limitations": [
+            "Fixed sample, complete pairs only; missingness may bias the primary score.",
+            "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+            "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+            "Repeated inspection of this interval is not a sequential stopping rule."
+          ]
+        },
+        "native_complete_pair_mean": 0.40625,
+        "native_peak_RSS_B": 204918784,
+        "native_wall_seconds_nested_not_added": 135.639014932
+      },
+      {
+        "batch": 8,
+        "native_bootstrap": {
+          "seed": 42620261016,
+          "resamples": 10000,
+          "unit": "complete family pair",
+          "percentile_95": [
+            0.3125,
+            0.625
+          ],
+          "limitations": [
+            "Fixed sample, complete pairs only; missingness may bias the primary score.",
+            "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+            "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+            "Repeated inspection of this interval is not a sequential stopping rule."
+          ]
+        },
+        "native_complete_pair_mean": 0.46875,
+        "native_peak_RSS_B": 206094336,
+        "native_wall_seconds_nested_not_added": 146.563260876
+      },
+      {
+        "batch": 9,
+        "native_bootstrap": {
+          "seed": 42620261016,
+          "resamples": 10000,
+          "unit": "complete family pair",
+          "percentile_95": [
+            0.3125,
+            0.625
+          ],
+          "limitations": [
+            "Fixed sample, complete pairs only; missingness may bias the primary score.",
+            "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+            "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+            "Repeated inspection of this interval is not a sequential stopping rule."
+          ]
+        },
+        "native_complete_pair_mean": 0.46875,
+        "native_peak_RSS_B": 204832768,
+        "native_wall_seconds_nested_not_added": 136.781438981
+      },
+      {
+        "batch": 10,
+        "native_bootstrap": {
+          "seed": 42620261016,
+          "resamples": 10000,
+          "unit": "complete family pair",
+          "percentile_95": [
+            0.34375,
+            0.59375
+          ],
+          "limitations": [
+            "Fixed sample, complete pairs only; missingness may bias the primary score.",
+            "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+            "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+            "Repeated inspection of this interval is not a sequential stopping rule."
+          ]
+        },
+        "native_complete_pair_mean": 0.46875,
+        "native_peak_RSS_B": 204677120,
+        "native_wall_seconds_nested_not_added": 132.018469234
+      },
+      {
+        "batch": 11,
+        "native_bootstrap": {
+          "seed": 42620261016,
+          "resamples": 10000,
+          "unit": "complete family pair",
+          "percentile_95": [
+            0.3125,
+            0.6875
+          ],
+          "limitations": [
+            "Fixed sample, complete pairs only; missingness may bias the primary score.",
+            "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+            "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+            "Repeated inspection of this interval is not a sequential stopping rule."
+          ]
+        },
+        "native_complete_pair_mean": 0.5,
+        "native_peak_RSS_B": 203382784,
+        "native_wall_seconds_nested_not_added": 130.232868938
+      }
+    ],
+    "global_ID_interpretation": "analysis ordinal0..191, each one-to-one with retained original native request ID and canonical family; native request IDs are never relabelled or display-name joined",
+    "native_request_ids_consecutive0to191": true,
+    "full_prefix_rootkey_history_config_correspondence": true,
+    "census_CSV_result_schedule_exact": true
+  },
+  "sole_actual_192_family_bootstrap": {
+    "complete_family_count": 192,
+    "family_mean": 0.4765625,
+    "percentile_95": [
+      0.4296875,
+      0.5234375
+    ],
+    "criterion_fixed_book_time_only": "NOT_MET",
+    "partial_scope": "complete-pair conditional; planned bounds are separate",
+    "seed": 42620261016,
+    "requested_resamples": 10000,
+    "executed_resamples": 10000,
+    "rng": "NumPy Generator(PCG64)",
+    "quantile_method": "linear",
+    "input": {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-independent426-analysis-v1/final-analysis-v1/A-v1/bootstrap-input.json",
+      "sha256": "fd16d1d2cfa6e51617155b6021448589206fb9ce4c3d9dc2ab9c93d2bd20e860",
+      "bytes": 22170,
+      "mode": "0644"
+    },
+    "executed_statistical_source": {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-independent426-analysis-v1/final-analysis-v1/A-v1/family_bootstrap426_bounded.py",
+      "sha256": "0cbb5093abbf221e11132e267d8a9c64e68cfec7ec9dce8bd0a38dcf37eae6b2",
+      "bytes": 4275,
+      "mode": "0644"
+    },
+    "executed_function": "interval_from_complete_family_scores",
+    "interpreter": "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "python_version": "3.14.7",
+    "numpy_version": "2.5.3",
+    "old423_interval_recomputed": false
+  },
+  "statistical_execution_binding": {
+    "original_source_SHA": "87ec6094b26f9e79c5c80f7d4c9129c753c872ce375dba029af359d888b1eb8c",
+    "exact_statistical_function_AST_unchanged": true,
+    "source": {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-independent426-analysis-v1/final-analysis-v1/A-v1/family_bootstrap426_bounded.py",
+      "sha256": "0cbb5093abbf221e11132e267d8a9c64e68cfec7ec9dce8bd0a38dcf37eae6b2",
+      "bytes": 4275,
+      "mode": "0644"
+    },
+    "input": {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-independent426-analysis-v1/final-analysis-v1/A-v1/bootstrap-input.json",
+      "sha256": "fd16d1d2cfa6e51617155b6021448589206fb9ce4c3d9dc2ab9c93d2bd20e860",
+      "bytes": 22170,
+      "mode": "0644"
+    },
+    "output": {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-independent426-analysis-v1/final-analysis-v1/A-v1/bootstrap-result.json",
+      "sha256": "9f8240c50a7466642ddb48f1a04282fbfd4f1043d352a3f2deb45efb71ea9cb7",
+      "bytes": 1275,
+      "mode": "0644"
+    },
+    "actual_execution_receipt": {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-independent426-analysis-v1/final-analysis-v1/A-v1/original192-family-bootstrap-once-receipt.json",
+      "sha256": "ee1781da3e26c9fa50dd64c14c901ab78df8c0935d84ea9d8c98ef47cb22022f",
+      "bytes": 1204,
+      "mode": "0644"
+    },
+    "result": {
+      "complete_family_count": 192,
+      "family_mean": 0.4765625,
+      "percentile_95": [
+        0.4296875,
+        0.5234375
+      ],
+      "criterion_fixed_book_time_only": "NOT_MET",
+      "partial_scope": "complete-pair conditional; planned bounds are separate",
+      "seed": 42620261016,
+      "requested_resamples": 10000,
+      "executed_resamples": 10000,
+      "rng": "NumPy Generator(PCG64)",
+      "quantile_method": "linear",
+      "input": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-independent426-analysis-v1/final-analysis-v1/A-v1/bootstrap-input.json",
+        "sha256": "fd16d1d2cfa6e51617155b6021448589206fb9ce4c3d9dc2ab9c93d2bd20e860",
+        "bytes": 22170,
+        "mode": "0644"
+      },
+      "executed_statistical_source": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-independent426-analysis-v1/final-analysis-v1/A-v1/family_bootstrap426_bounded.py",
+        "sha256": "0cbb5093abbf221e11132e267d8a9c64e68cfec7ec9dce8bd0a38dcf37eae6b2",
+        "bytes": 4275,
+        "mode": "0644"
+      },
+      "executed_function": "interval_from_complete_family_scores",
+      "interpreter": "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "python_version": "3.14.7",
+      "numpy_version": "2.5.3",
+      "old423_interval_recomputed": false
+    },
+    "executions": 1,
+    "no_old423_recompute": true
+  },
+  "A_observations": {
+    "accepted_completed": 16733,
+    "fallback": 0,
+    "engine_error": 0,
+    "game_failure": 0,
+    "forfeit": 0,
+    "receipt_late": 0,
+    "authority_illegal": 0,
+    "all_matching_terminals_collected": true,
+    "work_and_depth_alternative_views": [
+      {
+        "model": "W",
+        "accepted_completed": 8362,
+        "accepted_depth": {
+          "n": 8362,
+          "mean": 11.686319062425257,
+          "median": 8.0,
+          "min": 3,
+          "max": 64
+        },
+        "depth_hist": {
+          "4": 2451,
+          "5": 857,
+          "8": 329,
+          "7": 275,
+          "9": 336,
+          "17": 233,
+          "20": 285,
+          "3": 27,
+          "6": 333,
+          "13": 265,
+          "21": 224,
+          "19": 335,
+          "23": 125,
+          "22": 165,
+          "25": 87,
+          "18": 307,
+          "10": 324,
+          "12": 344,
+          "24": 92,
+          "26": 54,
+          "28": 32,
+          "30": 12,
+          "32": 11,
+          "11": 248,
+          "16": 107,
+          "64": 183,
+          "15": 64,
+          "27": 36,
+          "14": 139,
+          "29": 24,
+          "31": 7,
+          "39": 4,
+          "33": 7,
+          "35": 6,
+          "34": 5,
+          "49": 5,
+          "44": 2,
+          "60": 2,
+          "36": 4,
+          "41": 6,
+          "55": 1,
+          "56": 1,
+          "38": 2,
+          "42": 1,
+          "37": 1,
+          "43": 2,
+          "52": 1,
+          "46": 1
+        },
+        "depth_by_side": {
+          "0": {
+            "4": 1257,
+            "5": 447,
+            "8": 161,
+            "7": 139,
+            "9": 172,
+            "17": 105,
+            "20": 128,
+            "6": 184,
+            "13": 129,
+            "18": 121,
+            "19": 150,
+            "10": 186,
+            "21": 110,
+            "22": 73,
+            "12": 175,
+            "23": 64,
+            "26": 23,
+            "28": 10,
+            "30": 6,
+            "32": 6,
+            "3": 14,
+            "64": 110,
+            "14": 57,
+            "25": 39,
+            "27": 22,
+            "29": 16,
+            "15": 30,
+            "16": 44,
+            "24": 45,
+            "39": 2,
+            "11": 114,
+            "49": 3,
+            "44": 2,
+            "60": 2,
+            "31": 4,
+            "33": 3,
+            "35": 4,
+            "56": 1,
+            "34": 2,
+            "36": 2,
+            "38": 1,
+            "41": 2,
+            "42": 1,
+            "46": 1
+          },
+          "1": {
+            "4": 1194,
+            "3": 13,
+            "6": 149,
+            "8": 168,
+            "13": 136,
+            "21": 114,
+            "20": 157,
+            "19": 185,
+            "23": 61,
+            "22": 92,
+            "25": 48,
+            "5": 410,
+            "9": 164,
+            "10": 138,
+            "12": 169,
+            "18": 186,
+            "24": 47,
+            "11": 134,
+            "16": 63,
+            "17": 128,
+            "15": 34,
+            "26": 31,
+            "28": 22,
+            "27": 14,
+            "7": 136,
+            "31": 3,
+            "14": 82,
+            "64": 73,
+            "30": 6,
+            "33": 4,
+            "35": 2,
+            "32": 5,
+            "34": 3,
+            "49": 2,
+            "36": 2,
+            "39": 2,
+            "41": 4,
+            "29": 8,
+            "55": 1,
+            "37": 1,
+            "43": 2,
+            "38": 1,
+            "52": 1
+          }
+        },
+        "selected_snapshot_work": {
+          "cutoffs": {
+            "n": 8362,
+            "min": 63,
+            "max": 96202,
+            "sum": 190084888
+          },
+          "delta_updates": {
+            "n": 8362,
+            "min": 64,
+            "max": 136020,
+            "sum": 544339603
+          },
+          "nodes": {
+            "n": 8362,
+            "min": 255,
+            "max": 195769,
+            "sum": 580251127
+          },
+          "policy_calls": {
+            "n": 8362,
+            "min": 0,
+            "max": 0,
+            "sum": 0
+          },
+          "pvs_researches": {
+            "n": 8362,
+            "min": 0,
+            "max": 142,
+            "sum": 138522
+          },
+          "static_evaluations": {
+            "n": 8362,
+            "min": 1,
+            "max": 75680,
+            "sum": 265665870
+          },
+          "terminal": {
+            "n": 8362,
+            "min": 0,
+            "max": 73979,
+            "sum": 35813803
+          },
+          "tt_board_hash_reads": {
+            "n": 8362,
+            "min": 63,
+            "max": 128108,
+            "sum": 278673733
+          },
+          "tt_board_hash_updates": {
+            "n": 8362,
+            "min": 191,
+            "max": 195726,
+            "sum": 580153406
+          },
+          "tt_bound_cutoffs": {
+            "n": 8362,
+            "min": 0,
+            "max": 7878,
+            "sum": 7350479
+          },
+          "tt_capacity_skips": {
+            "n": 8362,
+            "min": 0,
+            "max": 0,
+            "unit_note": "gauge, not additive"
+          },
+          "tt_collisions": {
+            "n": 8362,
+            "min": 0,
+            "max": 1947,
+            "sum": 1632097
+          },
+          "tt_context_initial_items": {
+            "n": 8362,
+            "min": 5,
+            "max": 83,
+            "sum": 274977
+          },
+          "tt_context_matches": {
+            "n": 8362,
+            "min": 119,
+            "max": 48533,
+            "sum": 24007614
+          },
+          "tt_context_misses": {
+            "n": 8362,
+            "min": 0,
+            "max": 125752,
+            "sum": 214750059
+          },
+          "tt_context_transitions": {
+            "n": 8362,
+            "min": 191,
+            "max": 195726,
+            "sum": 580153406
+          },
+          "tt_exact_hits": {
+            "n": 8362,
+            "min": 3,
+            "max": 693,
+            "sum": 373477
+          },
+          "tt_generation": {
+            "n": 8362,
+            "min": 3,
+            "max": 728,
+            "sum": 860214
+          },
+          "tt_hash_collisions": {
+            "n": 8362,
+            "min": 0,
+            "max": 0,
+            "sum": 0
+          },
+          "tt_hashes": {
+            "n": 8362,
+            "min": 7,
+            "max": 129,
+            "sum": 203802
+          },
+          "tt_illegal_moves": {
+            "n": 8362,
+            "min": 0,
+            "max": 0,
+            "sum": 0
+          },
+          "tt_index_collisions": {
+            "n": 8362,
+            "min": 0,
+            "max": 1947,
+            "sum": 1632097
+          },
+          "tt_key_builds": {
+            "n": 8362,
+            "min": 191,
+            "max": 128194,
+            "sum": 278869173
+          },
+          "tt_key_hits": {
+            "n": 8362,
+            "min": 121,
+            "max": 127936,
+            "sum": 238757673
+          },
+          "tt_order_context_mismatch": {
+            "n": 8362,
+            "min": 0,
+            "max": 125752,
+            "sum": 214750059
+          },
+          "tt_order_only": {
+            "n": 8362,
+            "min": 81,
+            "max": 127929,
+            "sum": 231104800
+          },
+          "tt_probes": {
+            "n": 8362,
+            "min": 127,
+            "max": 128151,
+            "sum": 278771454
+          },
+          "tt_replacements": {
+            "n": 8362,
+            "min": 106,
+            "max": 120531,
+            "sum": 195994236
+          },
+          "tt_retained_bytes": {
+            "n": 8362,
+            "min": 83886128,
+            "max": 83886128,
+            "unit_note": "gauge, not additive"
+          },
+          "tt_usable_depth": {
+            "n": 8362,
+            "min": 0,
+            "max": 7920,
+            "sum": 7652873
+          }
+        },
+        "whole_search_work_alternative": {
+          "cutoffs": {
+            "n": 8362,
+            "min": 63,
+            "max": 97711,
+            "sum": 245160360
+          },
+          "delta_updates": {
+            "n": 8362,
+            "min": 64,
+            "max": 140838,
+            "sum": 773845910
+          },
+          "nodes": {
+            "n": 8362,
+            "min": 255,
+            "max": 198811,
+            "sum": 817210511
+          },
+          "policy_calls": {
+            "n": 8362,
+            "min": 0,
+            "max": 0,
+            "sum": 0
+          },
+          "pvs_researches": {
+            "n": 8362,
+            "min": 0,
+            "max": 144,
+            "sum": 198397
+          },
+          "static_evaluations": {
+            "n": 8362,
+            "min": 1,
+            "max": 85109,
+            "sum": 414878363
+          },
+          "terminal": {
+            "n": 8362,
+            "min": 0,
+            "max": 75386,
+            "sum": 43262702
+          },
+          "tt_board_hash_reads": {
+            "n": 8362,
+            "min": 63,
+            "max": 130130,
+            "sum": 358963512
+          },
+          "tt_board_hash_updates": {
+            "n": 8362,
+            "min": 191,
+            "max": 198767,
+            "sum": 817108707
+          },
+          "tt_bound_cutoffs": {
+            "n": 8362,
+            "min": 0,
+            "max": 8029,
+            "sum": 11726599
+          },
+          "tt_capacity_skips": {
+            "n": 8362,
+            "min": 0,
+            "max": 0,
+            "unit_note": "gauge, not additive"
+          },
+          "tt_collisions": {
+            "n": 8362,
+            "min": 0,
+            "max": 2680,
+            "sum": 2509990
+          },
+          "tt_context_initial_items": {
+            "n": 8362,
+            "min": 5,
+            "max": 83,
+            "sum": 274977
+          },
+          "tt_context_matches": {
+            "n": 8362,
+            "min": 125,
+            "max": 48533,
+            "sum": 31781940
+          },
+          "tt_context_misses": {
+            "n": 8362,
+            "min": 0,
+            "max": 127740,
+            "sum": 270297731
+          },
+          "tt_context_transitions": {
+            "n": 8362,
+            "min": 191,
+            "max": 198767,
+            "sum": 817108707
+          },
+          "tt_exact_hits": {
+            "n": 8362,
+            "min": 6,
+            "max": 693,
+            "sum": 428988
+          },
+          "tt_generation": {
+            "n": 8362,
+            "min": 4,
+            "max": 728,
+            "sum": 868430
+          },
+          "tt_hash_collisions": {
+            "n": 8362,
+            "min": 0,
+            "max": 0,
+            "sum": 0
+          },
+          "tt_hashes": {
+            "n": 8362,
+            "min": 8,
+            "max": 129,
+            "sum": 212053
+          },
+          "tt_illegal_moves": {
+            "n": 8362,
+            "min": 0,
+            "max": 0,
+            "sum": 0
+          },
+          "tt_index_collisions": {
+            "n": 8362,
+            "min": 0,
+            "max": 2680,
+            "sum": 2509990
+          },
+          "tt_key_builds": {
+            "n": 8362,
+            "min": 191,
+            "max": 130217,
+            "sum": 359167203
+          },
+          "tt_key_hits": {
+            "n": 8362,
+            "min": 125,
+            "max": 129959,
+            "sum": 302079671
+          },
+          "tt_order_context_mismatch": {
+            "n": 8362,
+            "min": 0,
+            "max": 127740,
+            "sum": 270297731
+          },
+          "tt_order_only": {
+            "n": 8362,
+            "min": 125,
+            "max": 129952,
+            "sum": 289817496
+          },
+          "tt_probes": {
+            "n": 8362,
+            "min": 127,
+            "max": 130174,
+            "sum": 359069446
+          },
+          "tt_replacements": {
+            "n": 8362,
+            "min": 125,
+            "max": 121241,
+            "sum": 244541261
+          },
+          "tt_retained_bytes": {
+            "n": 8362,
+            "min": 83886128,
+            "max": 83886128,
+            "unit_note": "gauge, not additive"
+          },
+          "tt_usable_depth": {
+            "n": 8362,
+            "min": 0,
+            "max": 8073,
+            "sum": 12262175
+          }
+        },
+        "caller_seconds": {
+          "n": 8362,
+          "sum": 822.8233674790002,
+          "median": 0.100065104,
+          "min": 0.000462764,
+          "max": 0.11173108,
+          "scope": "alternative nested clocks, not additive"
+        },
+        "thinking_seconds": {
+          "n": 8362,
+          "sum": 543.020684454002,
+          "median": 0.0682384105,
+          "min": 0.000420183,
+          "max": 0.094995737,
+          "scope": "alternative nested clocks, not additive"
+        },
+        "receipt_late": 0,
+        "return_after_deadline": 4247,
+        "commit_after_deadline": 4740,
+        "stops": {
+          "internal_time_limit": 8159,
+          "cancelled": 20,
+          "depth_cap": 183
+        }
+      },
+      {
+        "model": "BEST43",
+        "accepted_completed": 8371,
+        "accepted_depth": {
+          "n": 8371,
+          "mean": 11.56564329231872,
+          "median": 8,
+          "min": 3,
+          "max": 64
+        },
+        "depth_hist": {
+          "3": 40,
+          "4": 2399,
+          "5": 899,
+          "8": 272,
+          "7": 260,
+          "9": 361,
+          "11": 279,
+          "18": 332,
+          "19": 316,
+          "20": 266,
+          "6": 397,
+          "21": 244,
+          "22": 151,
+          "23": 127,
+          "24": 101,
+          "26": 59,
+          "10": 430,
+          "17": 216,
+          "25": 69,
+          "27": 41,
+          "29": 29,
+          "31": 9,
+          "13": 224,
+          "12": 260,
+          "16": 122,
+          "64": 179,
+          "15": 64,
+          "14": 136,
+          "28": 29,
+          "30": 10,
+          "33": 9,
+          "54": 1,
+          "32": 5,
+          "34": 4,
+          "35": 7,
+          "44": 1,
+          "58": 1,
+          "48": 2,
+          "40": 3,
+          "56": 1,
+          "36": 4,
+          "38": 3,
+          "43": 1,
+          "57": 1,
+          "47": 1,
+          "37": 1,
+          "42": 2,
+          "49": 1,
+          "52": 1,
+          "51": 1
+        },
+        "depth_by_side": {
+          "0": {
+            "4": 1208,
+            "6": 229,
+            "11": 139,
+            "19": 186,
+            "21": 132,
+            "22": 86,
+            "23": 66,
+            "24": 55,
+            "26": 28,
+            "5": 444,
+            "7": 112,
+            "9": 191,
+            "8": 142,
+            "10": 240,
+            "18": 172,
+            "17": 112,
+            "20": 159,
+            "13": 113,
+            "12": 125,
+            "16": 58,
+            "15": 33,
+            "14": 57,
+            "27": 25,
+            "28": 15,
+            "29": 18,
+            "25": 37,
+            "3": 19,
+            "30": 4,
+            "33": 3,
+            "64": 66,
+            "54": 1,
+            "31": 3,
+            "32": 4,
+            "34": 3,
+            "35": 3,
+            "44": 1,
+            "36": 2,
+            "38": 2,
+            "40": 1,
+            "43": 1,
+            "51": 1
+          },
+          "1": {
+            "3": 21,
+            "4": 1191,
+            "5": 455,
+            "8": 130,
+            "7": 148,
+            "9": 170,
+            "11": 140,
+            "18": 160,
+            "19": 130,
+            "20": 107,
+            "6": 168,
+            "10": 190,
+            "17": 104,
+            "21": 112,
+            "23": 61,
+            "25": 32,
+            "27": 16,
+            "29": 11,
+            "31": 6,
+            "64": 113,
+            "12": 135,
+            "22": 65,
+            "24": 46,
+            "26": 31,
+            "28": 14,
+            "15": 31,
+            "30": 6,
+            "14": 79,
+            "16": 64,
+            "13": 111,
+            "33": 6,
+            "58": 1,
+            "48": 2,
+            "40": 2,
+            "56": 1,
+            "57": 1,
+            "34": 1,
+            "38": 1,
+            "36": 2,
+            "35": 4,
+            "47": 1,
+            "37": 1,
+            "42": 2,
+            "49": 1,
+            "32": 1,
+            "52": 1
+          }
+        },
+        "selected_snapshot_work": {
+          "cutoffs": {
+            "n": 8371,
+            "min": 63,
+            "max": 95874,
+            "sum": 192723161
+          },
+          "delta_updates": {
+            "n": 8371,
+            "min": 64,
+            "max": 136413,
+            "sum": 551059945
+          },
+          "nodes": {
+            "n": 8371,
+            "min": 255,
+            "max": 194304,
+            "sum": 586892463
+          },
+          "policy_calls": {
+            "n": 8371,
+            "min": 0,
+            "max": 0,
+            "sum": 0
+          },
+          "pvs_researches": {
+            "n": 8371,
+            "min": 0,
+            "max": 126,
+            "sum": 133099
+          },
+          "static_evaluations": {
+            "n": 8371,
+            "min": 1,
+            "max": 84449,
+            "sum": 268997204
+          },
+          "terminal": {
+            "n": 8371,
+            "min": 0,
+            "max": 80607,
+            "sum": 35735702
+          },
+          "tt_board_hash_reads": {
+            "n": 8371,
+            "min": 63,
+            "max": 130103,
+            "sum": 282062741
+          },
+          "tt_board_hash_updates": {
+            "n": 8371,
+            "min": 191,
+            "max": 194240,
+            "sum": 586795647
+          },
+          "tt_bound_cutoffs": {
+            "n": 8371,
+            "min": 0,
+            "max": 7390,
+            "sum": 7162193
+          },
+          "tt_capacity_skips": {
+            "n": 8371,
+            "min": 0,
+            "max": 0,
+            "unit_note": "gauge, not additive"
+          },
+          "tt_collisions": {
+            "n": 8371,
+            "min": 0,
+            "max": 2370,
+            "sum": 1685557
+          },
+          "tt_context_initial_items": {
+            "n": 8371,
+            "min": 5,
+            "max": 82,
+            "sum": 275426
+          },
+          "tt_context_matches": {
+            "n": 8371,
+            "min": 88,
+            "max": 31774,
+            "sum": 24085034
+          },
+          "tt_context_misses": {
+            "n": 8371,
+            "min": 0,
+            "max": 127230,
+            "sum": 217660319
+          },
+          "tt_context_transitions": {
+            "n": 8371,
+            "min": 191,
+            "max": 194240,
+            "sum": 586795647
+          },
+          "tt_exact_hits": {
+            "n": 8371,
+            "min": 3,
+            "max": 643,
+            "sum": 371995
+          },
+          "tt_generation": {
+            "n": 8371,
+            "min": 3,
+            "max": 730,
+            "sum": 856897
+          },
+          "tt_hash_collisions": {
+            "n": 8371,
+            "min": 0,
+            "max": 0,
+            "sum": 0
+          },
+          "tt_hashes": {
+            "n": 8371,
+            "min": 7,
+            "max": 129,
+            "sum": 202000
+          },
+          "tt_illegal_moves": {
+            "n": 8371,
+            "min": 0,
+            "max": 0,
+            "sum": 0
+          },
+          "tt_index_collisions": {
+            "n": 8371,
+            "min": 0,
+            "max": 2370,
+            "sum": 1685557
+          },
+          "tt_key_builds": {
+            "n": 8371,
+            "min": 191,
+            "max": 130215,
+            "sum": 282256370
+          },
+          "tt_key_hits": {
+            "n": 8371,
+            "min": 90,
+            "max": 130013,
+            "sum": 241745353
+          },
+          "tt_order_context_mismatch": {
+            "n": 8371,
+            "min": 0,
+            "max": 127230,
+            "sum": 217660319
+          },
+          "tt_order_only": {
+            "n": 8371,
+            "min": 88,
+            "max": 130012,
+            "sum": 234301006
+          },
+          "tt_probes": {
+            "n": 8371,
+            "min": 127,
+            "max": 130159,
+            "sum": 282159557
+          },
+          "tt_replacements": {
+            "n": 8371,
+            "min": 103,
+            "max": 127669,
+            "sum": 200129926
+          },
+          "tt_retained_bytes": {
+            "n": 8371,
+            "min": 83886128,
+            "max": 83886128,
+            "unit_note": "gauge, not additive"
+          },
+          "tt_usable_depth": {
+            "n": 8371,
+            "min": 0,
+            "max": 7507,
+            "sum": 7444347
+          }
+        },
+        "whole_search_work_alternative": {
+          "cutoffs": {
+            "n": 8371,
+            "min": 63,
+            "max": 95874,
+            "sum": 247506539
+          },
+          "delta_updates": {
+            "n": 8371,
+            "min": 64,
+            "max": 141587,
+            "sum": 780252947
+          },
+          "nodes": {
+            "n": 8371,
+            "min": 255,
+            "max": 194304,
+            "sum": 823370826
+          },
+          "policy_calls": {
+            "n": 8371,
+            "min": 0,
+            "max": 0,
+            "sum": 0
+          },
+          "pvs_researches": {
+            "n": 8371,
+            "min": 0,
+            "max": 169,
+            "sum": 193885
+          },
+          "static_evaluations": {
+            "n": 8371,
+            "min": 1,
+            "max": 86159,
+            "sum": 418520519
+          },
+          "terminal": {
+            "n": 8371,
+            "min": 0,
+            "max": 80655,
+            "sum": 43016765
+          },
+          "tt_board_hash_reads": {
+            "n": 8371,
+            "min": 63,
+            "max": 132381,
+            "sum": 361728508
+          },
+          "tt_board_hash_updates": {
+            "n": 8371,
+            "min": 191,
+            "max": 194240,
+            "sum": 823269811
+          },
+          "tt_bound_cutoffs": {
+            "n": 8371,
+            "min": 0,
+            "max": 7818,
+            "sum": 11508911
+          },
+          "tt_capacity_skips": {
+            "n": 8371,
+            "min": 0,
+            "max": 0,
+            "unit_note": "gauge, not additive"
+          },
+          "tt_collisions": {
+            "n": 8371,
+            "min": 0,
+            "max": 2696,
+            "sum": 2548326
+          },
+          "tt_context_initial_items": {
+            "n": 8371,
+            "min": 5,
+            "max": 82,
+            "sum": 275426
+          },
+          "tt_context_matches": {
+            "n": 8371,
+            "min": 125,
+            "max": 31774,
+            "sum": 31768013
+          },
+          "tt_context_misses": {
+            "n": 8371,
+            "min": 0,
+            "max": 129480,
+            "sum": 272800395
+          },
+          "tt_context_transitions": {
+            "n": 8371,
+            "min": 191,
+            "max": 194240,
+            "sum": 823269811
+          },
+          "tt_exact_hits": {
+            "n": 8371,
+            "min": 4,
+            "max": 654,
+            "sum": 427200
+          },
+          "tt_generation": {
+            "n": 8371,
+            "min": 4,
+            "max": 730,
+            "sum": 865120
+          },
+          "tt_hash_collisions": {
+            "n": 8371,
+            "min": 0,
+            "max": 0,
+            "sum": 0
+          },
+          "tt_hashes": {
+            "n": 8371,
+            "min": 8,
+            "max": 129,
+            "sum": 210249
+          },
+          "tt_illegal_moves": {
+            "n": 8371,
+            "min": 0,
+            "max": 0,
+            "sum": 0
+          },
+          "tt_index_collisions": {
+            "n": 8371,
+            "min": 0,
+            "max": 2696,
+            "sum": 2548326
+          },
+          "tt_key_builds": {
+            "n": 8371,
+            "min": 191,
+            "max": 132494,
+            "sum": 361930386
+          },
+          "tt_key_hits": {
+            "n": 8371,
+            "min": 125,
+            "max": 132292,
+            "sum": 304568408
+          },
+          "tt_order_context_mismatch": {
+            "n": 8371,
+            "min": 0,
+            "max": 129480,
+            "sum": 272800395
+          },
+          "tt_order_only": {
+            "n": 8371,
+            "min": 125,
+            "max": 132291,
+            "sum": 292542577
+          },
+          "tt_probes": {
+            "n": 8371,
+            "min": 127,
+            "max": 132438,
+            "sum": 361833542
+          },
+          "tt_replacements": {
+            "n": 8371,
+            "min": 125,
+            "max": 128572,
+            "sum": 248666047
+          },
+          "tt_retained_bytes": {
+            "n": 8371,
+            "min": 83886128,
+            "max": 83886128,
+            "unit_note": "gauge, not additive"
+          },
+          "tt_usable_depth": {
+            "n": 8371,
+            "min": 0,
+            "max": 7946,
+            "sum": 12025831
+          }
+        },
+        "caller_seconds": {
+          "n": 8371,
+          "sum": 820.2714138779991,
+          "median": 0.099563183,
+          "min": 0.000439237,
+          "max": 0.108397406,
+          "scope": "alternative nested clocks, not additive"
+        },
+        "thinking_seconds": {
+          "n": 8371,
+          "sum": 545.5273550940007,
+          "median": 0.068566544,
+          "min": 0.000391852,
+          "max": 0.094996615,
+          "scope": "alternative nested clocks, not additive"
+        },
+        "receipt_late": 0,
+        "return_after_deadline": 2025,
+        "commit_after_deadline": 2261,
+        "stops": {
+          "internal_time_limit": 8164,
+          "cancelled": 28,
+          "depth_cap": 179
+        }
+      }
+    ],
+    "raw12_once_CRC_SHA_MATCH": true,
+    "original_RAW_preserved_no_copies": true,
+    "per_call_unaggregated_integer_fields_or_long_namespace_strings": "remain in originalRAW; not redecoded or fabricated"
+  },
+  "B": {
+    "comparisons": {
+      "rows": [
+        {
+          "id": "distance-slot004-ply011",
+          "ply": 11,
+          "STM": 1,
+          "stocks": [
+            6,
+            8
+          ],
+          "old_pre": 1.5793906450271606,
+          "W_pre": 1.352976679801941,
+          "old_post": 0.9185066819190979,
+          "W_post": 0.8747540712356567,
+          "old_bits": 1063985985,
+          "W_bits": 1063251938,
+          "delta_post": -0.04375261068344116,
+          "delta_pre": -0.22641396522521973,
+          "old_sign": 1,
+          "W_sign": 1,
+          "old_sat": false,
+          "W_sat": false,
+          "D": -0.09966801851987839,
+          "Sigma": -0.005028305575251579,
+          "prefix": [
+            186,
+            77,
+            13,
+            68,
+            85,
+            59,
+            87,
+            202,
+            22,
+            125,
+            198
+          ],
+          "source": {
+            "bytes": 24449,
+            "mode": "0644",
+            "path": "/workspaces/quoridor/research-data/ai-sigma/nnue-loss-leaf419/fixed-inputs.json",
+            "sha256": "b26fb4d5f21bac5b9614610504aac7022850223a6af67b4680530c08e8429304"
+          },
+          "source_pointer": "/parents/0",
+          "full_history_state_matches": true,
+          "canonical_input_feature_bits_match": true,
+          "old_pre_bits": 1070213497,
+          "W_pre_bits": 1068314199,
+          "original_parent_view_sign": 1,
+          "old_parent_view_post": 0.9185066819190979,
+          "W_parent_view_post": 0.8747540712356567
+        },
+        {
+          "id": "distance-slot004-ply039",
+          "ply": 39,
+          "STM": 1,
+          "stocks": [
+            0,
+            2
+          ],
+          "old_pre": 4.482470512390137,
+          "W_pre": 4.172983646392822,
+          "old_post": 0.9997444152832031,
+          "W_post": 0.9995254278182983,
+          "old_bits": 1065348928,
+          "W_bits": 1065345254,
+          "delta_post": -0.00021898746490478516,
+          "delta_pre": -0.30948686599731445,
+          "old_sign": 1,
+          "W_sign": 1,
+          "old_sat": true,
+          "W_sat": true,
+          "D": -0.8336546421051025,
+          "Sigma": -0.9895493984222412,
+          "prefix": [
+            186,
+            77,
+            13,
+            68,
+            85,
+            59,
+            87,
+            202,
+            22,
+            125,
+            198,
+            156,
+            123,
+            203,
+            133,
+            58,
+            96,
+            114,
+            127,
+            108,
+            83,
+            165,
+            13,
+            57,
+            14,
+            121,
+            23,
+            66,
+            94,
+            67,
+            24,
+            76,
+            33,
+            77,
+            42,
+            78,
+            51,
+            69,
+            52
+          ],
+          "source": {
+            "bytes": 24449,
+            "mode": "0644",
+            "path": "/workspaces/quoridor/research-data/ai-sigma/nnue-loss-leaf419/fixed-inputs.json",
+            "sha256": "b26fb4d5f21bac5b9614610504aac7022850223a6af67b4680530c08e8429304"
+          },
+          "source_pointer": "/parents/1",
+          "full_history_state_matches": true,
+          "canonical_input_feature_bits_match": true,
+          "old_pre_bits": 1083142246,
+          "W_pre_bits": 1082493205,
+          "original_parent_view_sign": 1,
+          "old_parent_view_post": 0.9997444152832031,
+          "W_parent_view_post": 0.9995254278182983
+        },
+        {
+          "id": "distance-slot005-ply012",
+          "ply": 12,
+          "STM": 0,
+          "stocks": [
+            8,
+            8
+          ],
+          "old_pre": 1.574981927871704,
+          "W_pre": 1.4954146146774292,
+          "old_post": 0.9178146123886108,
+          "W_post": 0.9043161869049072,
+          "old_bits": 1063974374,
+          "W_bits": 1063747908,
+          "delta_post": -0.013498425483703613,
+          "delta_pre": -0.0795673131942749,
+          "old_sign": 1,
+          "W_sign": 1,
+          "old_sat": false,
+          "W_sat": false,
+          "D": -0.09966801851987839,
+          "Sigma": -0.511227548122406,
+          "prefix": [
+            186,
+            77,
+            13,
+            68,
+            22,
+            59,
+            31,
+            50,
+            97,
+            116,
+            40,
+            173
+          ],
+          "source": {
+            "bytes": 24449,
+            "mode": "0644",
+            "path": "/workspaces/quoridor/research-data/ai-sigma/nnue-loss-leaf419/fixed-inputs.json",
+            "sha256": "b26fb4d5f21bac5b9614610504aac7022850223a6af67b4680530c08e8429304"
+          },
+          "source_pointer": "/parents/2",
+          "full_history_state_matches": true,
+          "canonical_input_feature_bits_match": true,
+          "old_pre_bits": 1070176514,
+          "W_pre_bits": 1069509055,
+          "original_parent_view_sign": 1,
+          "old_parent_view_post": 0.9178146123886108,
+          "W_parent_view_post": 0.9043161869049072
+        },
+        {
+          "id": "distance-slot004-ply011/H2/156-91",
+          "ply": 13,
+          "STM": 1,
+          "stocks": [
+            5,
+            7
+          ],
+          "old_pre": 1.2772226333618164,
+          "W_pre": 1.1103811264038086,
+          "old_post": 0.8557431697845459,
+          "W_post": 0.8041970729827881,
+          "old_bits": 1062932988,
+          "W_bits": 1062068188,
+          "delta_post": -0.05154609680175781,
+          "delta_pre": -0.1668415069580078,
+          "old_sign": 1,
+          "W_sign": 1,
+          "old_sat": false,
+          "W_sat": false,
+          "D": -0.29131263494491577,
+          "Sigma": 0.10674294084310532,
+          "prefix": [
+            186,
+            77,
+            13,
+            68,
+            85,
+            59,
+            87,
+            202,
+            22,
+            125,
+            198,
+            156,
+            91
+          ],
+          "source": {
+            "bytes": 14485,
+            "mode": "0644",
+            "path": "/workspaces/quoridor/research-data/ai-sigma/nnue-loss-leaf419/existing-endpoint-input-support.json",
+            "sha256": "5953bd818ef0251d8dd42819786370589291746cb829a5ac424014a07af6aeb6"
+          },
+          "source_pointer": "/states/0",
+          "full_history_state_matches": true,
+          "canonical_input_feature_bits_match": true,
+          "old_pre_bits": 1067678728,
+          "W_pre_bits": 1066279160,
+          "original_parent_view_sign": 1,
+          "old_parent_view_post": 0.8557431697845459,
+          "W_parent_view_post": 0.8041970729827881
+        },
+        {
+          "id": "distance-slot004-ply011/H2/156-196",
+          "ply": 13,
+          "STM": 1,
+          "stocks": [
+            5,
+            7
+          ],
+          "old_pre": 1.4273059368133545,
+          "W_pre": 1.297607183456421,
+          "old_post": 0.8911131620407104,
+          "W_post": 0.8611059188842773,
+          "old_bits": 1063526398,
+          "W_bits": 1063022960,
+          "delta_post": -0.030007243156433105,
+          "delta_pre": -0.1296987533569336,
+          "old_sign": 1,
+          "W_sign": 1,
+          "old_sat": false,
+          "W_sat": false,
+          "D": -0.46211719512939453,
+          "Sigma": -0.5794402360916138,
+          "prefix": [
+            186,
+            77,
+            13,
+            68,
+            85,
+            59,
+            87,
+            202,
+            22,
+            125,
+            198,
+            156,
+            196
+          ],
+          "source": {
+            "bytes": 14485,
+            "mode": "0644",
+            "path": "/workspaces/quoridor/research-data/ai-sigma/nnue-loss-leaf419/existing-endpoint-input-support.json",
+            "sha256": "5953bd818ef0251d8dd42819786370589291746cb829a5ac424014a07af6aeb6"
+          },
+          "source_pointer": "/states/1",
+          "full_history_state_matches": true,
+          "canonical_input_feature_bits_match": true,
+          "old_pre_bits": 1068937718,
+          "W_pre_bits": 1067849726,
+          "original_parent_view_sign": 1,
+          "old_parent_view_post": 0.8911131620407104,
+          "W_parent_view_post": 0.8611059188842773
+        },
+        {
+          "id": "distance-slot004-ply039/H2/192-43",
+          "ply": 41,
+          "STM": 1,
+          "stocks": [
+            0,
+            1
+          ],
+          "old_pre": 5.273468494415283,
+          "W_pre": 4.889247417449951,
+          "old_post": 0.9999474287033081,
+          "W_post": 0.999886691570282,
+          "old_bits": 1065352334,
+          "W_bits": 1065351315,
+          "delta_post": -6.073713302612305e-05,
+          "delta_pre": -0.38422107696533203,
+          "old_sign": 1,
+          "W_sign": 1,
+          "old_sat": true,
+          "W_sat": true,
+          "D": -0.8004990220069885,
+          "Sigma": -0.9865204691886902,
+          "prefix": [
+            186,
+            77,
+            13,
+            68,
+            85,
+            59,
+            87,
+            202,
+            22,
+            125,
+            198,
+            156,
+            123,
+            203,
+            133,
+            58,
+            96,
+            114,
+            127,
+            108,
+            83,
+            165,
+            13,
+            57,
+            14,
+            121,
+            23,
+            66,
+            94,
+            67,
+            24,
+            76,
+            33,
+            77,
+            42,
+            78,
+            51,
+            69,
+            52,
+            192,
+            43
+          ],
+          "source": {
+            "bytes": 14485,
+            "mode": "0644",
+            "path": "/workspaces/quoridor/research-data/ai-sigma/nnue-loss-leaf419/existing-endpoint-input-support.json",
+            "sha256": "5953bd818ef0251d8dd42819786370589291746cb829a5ac424014a07af6aeb6"
+          },
+          "source_pointer": "/states/2",
+          "full_history_state_matches": true,
+          "canonical_input_feature_bits_match": true,
+          "old_pre_bits": 1084801089,
+          "W_pre_bits": 1083995319,
+          "original_parent_view_sign": 1,
+          "old_parent_view_post": 0.9999474287033081,
+          "W_parent_view_post": 0.999886691570282
+        },
+        {
+          "id": "distance-slot004-ply039/H3/60-53-61",
+          "ply": 42,
+          "STM": 0,
+          "stocks": [
+            0,
+            2
+          ],
+          "old_pre": -4.075870037078857,
+          "W_pre": -3.6322872638702393,
+          "old_post": -0.9994236826896667,
+          "W_post": -0.9986011981964111,
+          "old_bits": 3212827195,
+          "W_bits": 3212813396,
+          "delta_post": 0.0008224844932556152,
+          "delta_pre": 0.44358277320861816,
+          "old_sign": -1,
+          "W_sign": -1,
+          "old_sat": true,
+          "W_sat": true,
+          "D": 0.8004989624023438,
+          "Sigma": 0.9978681802749634,
+          "prefix": [
+            186,
+            77,
+            13,
+            68,
+            85,
+            59,
+            87,
+            202,
+            22,
+            125,
+            198,
+            156,
+            123,
+            203,
+            133,
+            58,
+            96,
+            114,
+            127,
+            108,
+            83,
+            165,
+            13,
+            57,
+            14,
+            121,
+            23,
+            66,
+            94,
+            67,
+            24,
+            76,
+            33,
+            77,
+            42,
+            78,
+            51,
+            69,
+            52,
+            60,
+            53,
+            61
+          ],
+          "source": {
+            "bytes": 14485,
+            "mode": "0644",
+            "path": "/workspaces/quoridor/research-data/ai-sigma/nnue-loss-leaf419/existing-endpoint-input-support.json",
+            "sha256": "5953bd818ef0251d8dd42819786370589291746cb829a5ac424014a07af6aeb6"
+          },
+          "source_pointer": "/states/3",
+          "full_history_state_matches": true,
+          "canonical_input_feature_bits_match": true,
+          "old_pre_bits": 3229773191,
+          "W_pre_bits": 3228071781,
+          "original_parent_view_sign": -1,
+          "old_parent_view_post": 0.9994236826896667,
+          "W_parent_view_post": 0.9986011981964111
+        }
+      ],
+      "sign_changes": 0,
+      "old_sat_count": 3,
+      "W_sat_count": 3,
+      "no_WDL_argmax_or_cause": true,
+      "original28_head_cap_inclusive_actual7": true
+    },
+    "counts": {
+      "NNUE_full_context_returned": 7,
+      "NNUE_full_context_started": 7,
+      "NNUE_head_returned": 7,
+      "NNUE_head_started": 7,
+      "constructor_heads": 0,
+      "constructor_returned": 1,
+      "constructor_started": 1
+    },
+    "inclusive_actual_heads": 7,
+    "cap": 28,
+    "actual_typed_identity": "8a8eb7fb87035f03c4cfa6b45ca1aa5d2f1b144c6fa1298dd11b82975307953d",
+    "old_values_replayed": false,
+    "saved_own_final_return": "UNKNOWN by design; actual separate terminal receipt above",
+    "separate_actual_final_persistence_return": "OK",
+    "temporary_inlet_retirement": {
+      "at": "2026-10-16T23:04:20.787504+00:00",
+      "actual_B_collection": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/nnue-independent426-v1/science-v1/static-seven-typed-v1/collection.json",
+        "sha256": "f956cadc107169a8c0f51fb325ead9ebddb2af94554b0ac2fe9cf05041dccf10",
+        "bytes": 4766,
+        "mode": "0644"
+      },
+      "Main_module_before": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/measurement.rs",
+        "sha256": "ab74c1fa0666ed7a9e517c1d9422bc14ec26efcc021eff316ba85372e3e2c687",
+        "bytes": 104541,
+        "mode": "0644"
+      },
+      "Main_module_after": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/measurement.rs",
+        "sha256": "c364731610e7583b7d6699f86cc8348d9b0ac9668f45ed10c19625ae5c3bf838",
+        "bytes": 104463,
+        "mode": "0644"
+      },
+      "before_module_gzip": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/nnue-independent426-v1/science-v1/static-seven-typed-v1/measurement-module-before.rs.gz",
+        "sha256": "b2359254a30445fa11445e2fbb6c561efb28b8d89e90afb471dc2a809c329b7d",
+        "bytes": 22725,
+        "mode": "0644"
+      },
+      "caller_before": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/measurement_static426_tests.rs",
+        "sha256": "6540e5261594fb900bf4ef87b098832e4330e35004af3633ead7a14c61104b54",
+        "bytes": 20589,
+        "mode": "0644"
+      },
+      "caller_exact_immutable_reconstruction": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/research-team/nnue-independent426-static-v1/typed-distance-fit-v1/measurement_static426_tests.rs",
+        "sha256": "6540e5261594fb900bf4ef87b098832e4330e35004af3633ead7a14c61104b54",
+        "bytes": 20589,
+        "mode": "0644"
+      },
+      "author_binding": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/research-team/nnue-independent426-static-v1/typed-distance-fit-v1/source-binding.json",
+        "sha256": "146bb858158b898b4b4b87ea21f9c910303e288c184b42f20152888d039d03a5",
+        "bytes": 5285,
+        "mode": "0644"
+      },
+      "caller_absent": true,
+      "Main_module_equals_current_HEAD_bytes": true,
+      "removed_lines": 4,
+      "production_mathematics_changed": false,
+      "native_or_head_or_old_suite_replayed": 0,
+      "formatter": "Scoped project Rustfmt write/check PASS; final bytes equal already maintained HEAD",
+      "software_replay": "No further build/test: only cfg(test) module hookup removed and untracked temporary caller retired, complete module byte-equal to maintained HEAD. Actual used caller bytes retained by immutable source packet.",
+      "storage_refund": 0,
+      "global_actual": "UNKNOWN"
+    },
+    "same_subset_H2_response_order": "156-91 lower than156-196 under both old andW static localSTM; not fullroot argmax; lowwallH2/H3 horizons differ"
+  },
+  "coverage": {
+    "A_root_stocksum_hist": {
+      "16": 43,
+      "12": 42,
+      "8": 36,
+      "4": 27,
+      "9": 7,
+      "5": 14,
+      "13": 6,
+      "10": 5,
+      "6": 6,
+      "17": 5,
+      "7": 1
+    },
+    "A_prefix_length_strata": {
+      "4": {
+        "W": 43,
+        "L": 53
+      },
+      "8": {
+        "L": 54,
+        "W": 42
+      },
+      "12": {
+        "L": 51,
+        "W": 45
+      },
+      "16": {
+        "L": 43,
+        "W": 53
+      }
+    },
+    "A_stock18to20_starts": 0,
+    "B_max_stock": 16,
+    "old423_highstockT_eligible_selected": [
+      320,
+      314
+    ],
+    "old423_selected_stock18to20": 0,
+    "highstock_improvement_status": "UNKNOWN; this finiteA/B does not cover stock18..20"
+  },
+  "input_provenance": {
+    "rules_saved_candidates": {
+      "accepted_slots": 2048,
+      "families": 2048,
+      "missing_slots": 0,
+      "outcomes_selected": false,
+      "partition": {
+        "path": "/workspaces/quoridor/.worktree/assets/data/nnue-independent426-v1/inputs/candidates-v1/partition.json",
+        "sha256": "51c80a29bda6dea33ce502fffee80896273c109f97ec14e171ba16ef6922a8ad"
+      },
+      "prefix_book": {
+        "path": "/workspaces/quoridor/.worktree/assets/data/nnue-independent426-v1/inputs/candidates-v1/prefix-book.json",
+        "sha256": "e35a5f6d3267427cb2e8b1740a31a0e6a9d04620038a0ee264925af5edd7ca81"
+      },
+      "requested_slots": 2048,
+      "schedule": {
+        "path": "/workspaces/quoridor/.worktree/assets/data/nnue-independent426-v1/inputs/candidates-v1/schedule.json",
+        "sha256": "100ac4df3fb6b4939464bbf0f1b7758ff6d397b097603fa399956182c9740d12"
+      },
+      "search_calls": 0,
+      "unique_family_count": 2048
+    },
+    "original_unsaved_failed_rules_work": "may have run; preserved without census",
+    "original_failed_input_seconds_separate": 0.17982568900333717,
+    "same_config_input_recovery_seconds_separate": 0.22304607401019894,
+    "no_classifier_or_rules_replay_by_analyst": true
+  },
+  "known_original_outer_seconds_once": {
+    "original_A_outer_PASS": 1692.7638091499975,
+    "original_B_setup_outer_FAILED_zero_heads": 1.7768354490108322,
+    "original_B_typed_outer_PASS_7heads": 1.407727186975535
+  },
+  "known_original_outer_subtotal_seconds": 1695.948371785984,
+  "cost_scope": "selected3originalouters only; nested native/operation clocks notadded; rules-only standalone recordedwalls separate; software/source/LLM/admin/fullfees/continuousRSS/physicalNN UNKNOWN",
+  "disposition": {
+    "improvement_support_fixedbook": "NOT_MET",
+    "inferiority_or_equivalence_proved": false,
+    "strength_Elo_noninferiority_or_default_model_promotion": false,
+    "frozen_W": "research artifact/evidence retained, no promotion",
+    "existing_BEST43_and_product_generator_defaults_models_seals": "UNCHANGED",
+    "extra_science_refill_tuning": "NONE"
+  },
+  "next_proposal_only": {
+    "status": "PROPOSAL_ONLY_NO_NEW_SCIENCE_GRANTED_OR_LAUNCHED",
+    "priority": 1,
+    "one_axis": "data coverage policy: replace opening length4/8/12/16 by constant2ply; keep outcomez teacher/model/input normalization/loss/optimizer/quality fixed",
+    "why_not_raise_existing_cap": "Old423 highstockT eligible320/selected314; only6 more rows available and stock18..20 absent. Cap-only or replay cannot create missing states. A roots stock4..17 and B stockmax16 do not test18..20.",
+    "why_not_empty_prefix": "Using0ply with the unchanged canonical extension owner collapses independent families through empty universal prefix. Two-ply starts avoid this universal ancestor as a declared starting record.",
+    "prospective_request_ceiling_not_issued": 256,
+    "teacher": "same frozen Sigma, completed64 simulations/move, actualgoal/threefoldz only; no quality lowering/q+z/NNUEselfplay",
+    "input_owner": "existing rules-only/native partition owner; exclude known five books and current426 evaluation book, freeze new input/split before outcomes; genuine shortage/no refill; actual uniqueF and whole-family floor4F/5 T/V",
+    "T_view": "same bins16..20/8..15/1..7/0, <=8/game/stratum, no fill and no outcome/error selection",
+    "matching_training_work_proposal": "If maintained T view has at least3763 distinct eligible rows, outcome-blind deterministic family-round-robin/chronological matching of3763, then same8 exposures/30104 row draws/118updates/tail152 as originalW; otherwise no invented fill/automatic fit. Existing view/sampler support for this exact match remains an unverified ordinary future inlet requirement, no new implementation now.",
+    "V": "all eligible V; actual family/stock/distinct and T/V input collisions reported, not independent rows or power guarantee",
+    "initial_weights": "same frozen BEST43 warmstart/freshAdam as originalW, no F/reinitialization arm",
+    "fit_settings": "same originalW LR1e-4/batch256/tanh/FP32/FT32H32/QF1/Zero4/T-only normalization/bypassOFF/augmentation and sampler seed recipe; no LR/teacher/features/architecture sweep",
+    "selection": "same newV family-MSE/earlier step tie; opened publicV monitored independently, no result-driven reselection",
+    "comparison_plan_only": "One new candidate versus frozenW/BEST43 on separately fixed new canonical evaluation book; current426 outcomes are known and are not a fresh confirmation sample. Future seeds/actualdata/forward/node/storage settings require real count-cost resolution inside any later authorization.",
+    "causal_limit": "A practical changed data procedure, not proof highstock shortage caused present loss or that highstock alone repairs lowstock saturation",
+    "new_inputs_weights_config_Experiment_runtime": null,
+    "new_fit_generation_games_heads": 0
+  },
+  "old423_CI_and_operational_FAILED_R_failed_and5UNKNOWN": "UNCHANGED; not pooled",
+  "private_analysis_failure_preserved": "firstCLI exact literal repair refused on Ruff-wrapped if; coreCSVjoin saved and reused; no bootstrap/RAW entered then",
+  "physical_NN_continuous_familyRSS_totalfees": "UNKNOWN"
+}

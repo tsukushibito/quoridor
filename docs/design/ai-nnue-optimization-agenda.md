@@ -199,3 +199,9 @@ D6のKey hitは21882→367054だがcontext/depthのnumeric資格は別で、cuto
 ## 零在庫の距離条件の保存切り分け427（2026-10-16）
 
 限定保存標本では、Lを真の駒間通路距離rhoへ強めても同じ閾値を通らない例が多かった。標本は終盤4ゲーム・共有familyと小さい3×3へ偏るため、内部Searchの分布や追加BFSの費用対効果は未確定とする。424候補・observer・cache・新閾値を復活させず、411/default OFFを保つ。選択、二分類、別成分、履歴UNKNOWNと次の観測案は[427保存結果](../../research-data/ai-sigma/zero-stock-distance427/report-ja.md)を参照する。新しい計測・実装は本結果から自動発行しない。
+
+## 独立bookと固定七状態でのW検証426（2026-10-16）
+
+事前固定192開始familyの両色384局ではW183勝201敗、family score47.65625%、一度の95%区間42.96875–52.34375%で、事前の改善支持基準は未達だった。同じ保存七状態でも符号と強い飽和三件が残った。新分布の選択V改善を独立棋力や誤評価解消へ読み替えず、一般的な劣位・等価・学習不可能も主張しない。[426の結果と実行証拠](../../research-data/ai-sigma/nnue-independent426/report-ja.md)を参照する。
+
+次の許可済み設計作業では、高残壁coverage/抽出という一軸を優先候補にする。短い2ply開始と同じSigma64sim/outcome zを使い、実在庫層の不足、公開Vとのtrade-off、元Wと揃えられるdistinct行数・露出・updateを確認する案である。実T不足や既存samplerのglobal match未対応は通常入口の未解決として保持し、低残壁の飽和までこの一軸で直るとは仮定しない。具体案は[保存提案](../../research-data/ai-sigma/nnue-independent426/next-learning-proposal.json)であり、新生成・fit・対局やmodel/defaultの変更を自動開始しない。
