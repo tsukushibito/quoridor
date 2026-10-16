@@ -641,6 +641,8 @@ Tだけを残壁16..20/8..15/1..7/0の各層からchronological等間隔で最�
 
 全256生成requests/2M Sigma、四fit/4M NNUE、160対局/1G nodes、whole128MiB/decimal50GBは上限である。主要W対BEST43を最大64 family×2色、W対Dを同じ先頭16 family×2色とし、未完成は補充しない。U/R/Wのrow更新量はmin(8R,32768)、Fはmin(64R,524288)という一条件で、必要量の保証ではない。新V family-MSEで選ぶ最大4点と、凍結BESTの公開V一度を区別する。公開file番号から生成checkpointの強さを推定せず、旧371の過学習やFの不改善だけで教師無効を結論しない。旧342.17/323の停止、特徴/モデル設計・weights/seals・製品既定は変更しない。
 
+一度の実count-cost解決後、256生成と最終fit-viewのnative変換を完了し、選択T3763/distinct3763、204T/52Vを得た。実用coverage目安は満たしたがT4096目安は未達で、必要標本量や効果の保証にはしない。U/R/W各118更新・F941更新を保存し、BESTはU79/R118/W118/F0。F0はfresh初期モデルである。Rのlocal INITIAL出力宣言誤りによる原operation FAILEDを保存fit完了と区別する。四fit2210086 logical行と四export native対応480 headでNNUE計2210566<4M。旧28状態はMCTS各64 simulationで完成、1294行、生成とSigma計718195<2Mだった。原160対局は未入場で、結果前に固定した64開始family/元対照配分を再用する。[現counts/fit/native/旧qの保存根拠](../research-findings.md#sigma新教師と公開file順重みの試行規模4232026-10-16)。追加fit/生成/補充や旧pause解除は行わない。
+
 ### 多様化421の有限結果（2026-10-16）
 
 64GOAL/2822eligible、Tview927・V606でC/M各29更新を完了し、C BEST0=BEST43 alias、M BEST29を選んだ。Mの新V family-MSEは0.2975679592→0.2940229613、公開Vは0.4238707127→0.4239124679。128 unique対局はM/BEST43 18/0/14、C/BEST43 14/0/18、M/D21/0/11、C/D17/1/14で、全対照が同16開始familyを共有する。一般棋力/因果/Elo/正式昇格を認定せず、Mを研究候補として保持する。高壁16..20のT21行/V15行というcoverageを次の優先提案とするが、追加実行は発行しない。[原fit/D4/全対局・分母・失敗・費](../../research-data/ai-sigma/nnue-diverse421/report-ja.md)。423は別の既許可count-cost契約で継続し、421のparentcloseを入口条件にしない。

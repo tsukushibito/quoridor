@@ -223,5 +223,90 @@ class LifecycleDataAndPaths(unittest.TestCase):
         self.assertNotIn(None, reads)
 
 
+class ConfiguredArenaPlanSelection(unittest.TestCase):
+    def test_two_configured_arena_plans_keep_exact_authority_and_refuse_cross_selection(self):
+        """Metadata only: distinct finite plans use existing RUN custody in both owners."""
+        import copy
+
+        lc = load_lifecycle()
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory).resolve()
+            support = root / "support.json"
+            support.write_text(json.dumps(dict(resources=dict(family_RAM_B=1024**3))))
+            runs = []
+            for i, count in enumerate((128, 32)):
+                plan = root / f"plan-{i}.json"
+                plan.write_text(json.dumps(dict(planned_slots=count, phase="arena")))
+                plan_ref = lc.artifact_ref(plan)
+                experiment = root / f"experiment-{i}.json"
+                experiment.write_text(
+                    json.dumps(
+                        dict(
+                            phase="arena",
+                            argv=["native", "arena"],
+                            batch=0,
+                            canonical_plan_sha256=plan_ref["sha256"],
+                            planned_slots=count,
+                        )
+                    )
+                )
+                runs.append(
+                    dict(
+                        kind="run",
+                        owner=str(root),
+                        writer="same-owner",
+                        cwd=str(root),
+                        output=str(root / f"operation-{i}"),
+                        data_root=str(root / f"data-{i}"),
+                        data=[],
+                        finalizers=[],
+                        env={},
+                        caller_sources=[],
+                        artifact=dict(path="/native"),
+                        experiment=lc.artifact_ref(experiment),
+                        approved_plan=plan_ref,
+                        support=lc.artifact_ref(support),
+                        limits=dict(
+                            family_B=1024**3,
+                            controller_B=64 * 1024**2,
+                            host_reserve_B=4 * 1024**3,
+                            log_B=1024,
+                            owned_B=None,
+                            free_B=None,
+                        ),
+                    )
+                )
+            settings = root / "settings.json"
+            settings.write_text(json.dumps(dict(kind="sequence", arena=None, runs=runs)))
+            settings_ref = lc.artifact_ref(settings)
+            for i in range(2):
+                spec = dict(runs[i], settings=settings_ref, selection_index=i)
+                experiment = lc.document(spec["experiment"])
+                expected = lc.document(spec["approved_plan"])
+                self.assertEqual(lc.approved_plan(spec, experiment), expected)
+                self.assertIsInstance(lc.Limits(spec), lc.Limits)
+                cross = dict(spec, selection_index=1 - i)
+                for action in (
+                    lambda: lc.approved_plan(cross, experiment),
+                    lambda: lc.Limits(cross),
+                ):
+                    with self.assertRaises(lc.Refused):
+                        action()
+                drift = copy.deepcopy(spec)
+                drift["limits"]["log_B"] += 1
+                with self.assertRaises(lc.Refused):
+                    lc.Limits(drift)
+                wrong_plan = dict(experiment, canonical_plan_sha256="0" * 64)
+                with self.assertRaises(lc.Refused):
+                    lc.approved_plan(spec, wrong_plan)
+                legacy = root / f"legacy-{i}.json"
+                legacy.write_text(
+                    json.dumps(dict(kind="sequence", arena=dict(range=[0, 0], template=runs[i])))
+                )
+                legacy_spec = dict(runs[i], settings=lc.artifact_ref(legacy))
+                self.assertEqual(lc.approved_plan(legacy_spec, experiment), expected)
+                self.assertIsInstance(lc.Limits(legacy_spec), lc.Limits)
+
+
 if __name__ == "__main__":
     unittest.main()

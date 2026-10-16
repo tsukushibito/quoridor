@@ -325,14 +325,9 @@ class Limits(process.CycleResources):
                 type(cfg[name]) is int and cfg[name] > 0,
                 "positive priced limit: " + name,
             )
-        measurement = (
-            spec["kind"] == "run"
-            and document(spec["experiment"])["argv"][1] == "measure"
-        )
+        measurement = spec["kind"] == "run" and document(spec["experiment"])["argv"][1] == "measure"
         support = document(spec["support"]) if spec.get("support") is not None else {}
-        require(
-            measurement or bool(support), "owning support for non-measurement operation"
-        )
+        require(measurement or bool(support), "owning support for non-measurement operation")
         require(
             cfg["family_B"] <= issued_family_upper(spec, support)
             and cfg["host_reserve_B"] >= 4 * 1024**3,
@@ -349,7 +344,9 @@ class Limits(process.CycleResources):
             cfg.get("owned_B") is None or cfg["owned_B"] <= 50000000000,
             "global storage cap",
         )
-        if spec["kind"] == "run" and (
+        if spec.get("selection_index") is not None:
+            selected_run(spec, document(spec["experiment"]))
+        elif spec["kind"] == "run" and (
             document(spec["experiment"])["phase"] == "arena"
             or (
                 document(spec["experiment"])["phase"] == "compare"
@@ -357,8 +354,6 @@ class Limits(process.CycleResources):
             )
         ):
             selected_arena(spec)
-        elif spec.get("selection_index") is not None:
-            selected_run(spec, document(spec["experiment"]))
         elif not measurement:
             admission = document(spec["admission"])
             require(
@@ -373,18 +368,14 @@ class Limits(process.CycleResources):
                 admission["spec_sha256"] == spec["intent_sha256"],
                 "actual intent admission",
             )
-            require(
-                admission["support_sha256"] == spec["support"]["sha256"], "same support"
-            )
+            require(admission["support_sha256"] == spec["support"]["sha256"], "same support")
             require(admission["ready"] is True, "phase not admitted")
             if spec["kind"] == "run":
                 require(
                     admission["approved_plan"] == spec["approved_plan"],
                     "issued approved plan",
                 )
-        require(
-            cfg["controller_B"] == 64 * 1024 * 1024, "whole family includes controller"
-        )
+        require(cfg["controller_B"] == 64 * 1024 * 1024, "whole family includes controller")
         self.charged_paths = charged_roots(spec)
         super().__init__(
             {
@@ -404,8 +395,7 @@ class Limits(process.CycleResources):
         if budget is not None:
             seen = set()
             require(
-                sum(allocated(p, seen=seen) for p in self.charged_paths) + extra_B
-                <= budget,
+                sum(allocated(p, seen=seen) for p in self.charged_paths) + extra_B <= budget,
                 "owned allocation limit",
             )
         reserve = self.spec["limits"].get("free_B")
@@ -2477,6 +2467,13 @@ def generation_evidence(experiment, values):
 
 def approved_plan(spec, experiment):
     """Use selected settings for arena; preserve other owning phase admissions."""
+    if spec.get("selection_index") is not None:
+        expected = selected_run(spec, experiment)
+        require(
+            experiment["canonical_plan_sha256"] == expected["sha256"],
+            "selected RUN plan identity",
+        )
+        return document(expected)
     if experiment["phase"] == "arena" or (
         experiment["phase"] == "compare" and experiment["argv"][1] == "decisions"
     ):
@@ -2484,13 +2481,6 @@ def approved_plan(spec, experiment):
         require(
             experiment["canonical_plan_sha256"] == expected["sha256"],
             "experiment substituted selected plan",
-        )
-        return document(expected)
-    if spec.get("selection_index") is not None:
-        expected = selected_run(spec, experiment)
-        require(
-            experiment["canonical_plan_sha256"] == expected["sha256"],
-            "selected RUN plan identity",
         )
         return document(expected)
     admission = document(spec["admission"])
