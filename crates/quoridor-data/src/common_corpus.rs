@@ -1,5 +1,7 @@
 //! Configured global fixed-D schedule and lossless outcome labels.
 use crate::{Result, Teacher, TeacherRow, terminal_stream::BoundJson};
+use quoridor_ai::alphabeta::{LmrMethod, OrderingProfile, SearchNamespace, SearchSession};
+use quoridor_core::research::Ruleset;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::{collections::BTreeSet, ops::Range};
@@ -8,6 +10,56 @@ pub const VERSION: &str = "fixed-d-common-outcome-v1";
 pub const STREAM_SCHEMA: &str = "quoridor-fixed-d-common-corpus-v1";
 pub const CACHE_SCHEMA: &str = "quoridor-common-corpus-terminal-geometry-v3";
 pub const EVALUATOR: &str = "original-distance-a0-b8-tanh";
+
+// One pure metadata owner for both generation and authoritative stream intake.
+// Capacity arithmetic and method/namespace identity remain AI-owned; no session,
+// TT allocation, evaluator construction or model/head work is performed here.
+pub fn fixed_d_search_namespace(max_nodes: u64, tt_slots: usize) -> SearchNamespace {
+    SearchNamespace {
+        evaluator: EVALUATOR.into(),
+        rules: Ruleset::Standard2pThreefold.id().into(),
+        selectivity: format!(
+            "{}/d6/n{}/PVS/TT{}/no-time/no-solver-order-contact",
+            VERSION, max_nodes, tt_slots,
+        ),
+    }
+}
+
+pub fn fixed_d_session_settings(
+    capacity: (usize, usize),
+    namespace: &SearchNamespace,
+    lmr: bool,
+    method: Option<LmrMethod>,
+) -> Value {
+    serde_json::json!({
+        "profile":OrderingProfile::CheapStaticControl.name(),
+        "tt_slots":capacity.0,"tt_byte_limit":capacity.1,
+        "namespace":{"evaluator":namespace.evaluator,"rules":namespace.rules,"selectivity":namespace.selectivity},
+        "lmr_enabled":lmr,"lmr_method":method.map(LmrMethod::name),
+        "lmr_method_id":method.map(LmrMethod::id),
+        "lmr_reduction_rule":method.map(LmrMethod::reduction_rule),
+        "completed_depth_semantics":if lmr {"selective_nominal"} else {"fullwidth_nominal"}
+    })
+}
+
+pub fn expected_fixed_d_session_settings(
+    max_nodes: u64,
+    tt_slots: usize,
+    lmr: bool,
+    lmr_method: LmrMethod,
+) -> Result<Value> {
+    if max_nodes == 0 || !(1..=1_048_576).contains(&tt_slots) {
+        return Err("configured fixed-D TT/node bounds".into());
+    }
+    let method = lmr.then_some(lmr_method);
+    Ok(fixed_d_session_settings(
+        (tt_slots, SearchSession::requested_tt_byte_limit(tt_slots)?),
+        &OrderingProfile::CheapStaticControl
+            .namespace(fixed_d_search_namespace(max_nodes, tt_slots), method),
+        lmr,
+        method,
+    ))
+}
 
 /// Prefixes only: the normal partition owner subsequently replays their full
 /// histories and computes LR/extension/endpoint closure. Both current native

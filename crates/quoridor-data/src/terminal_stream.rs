@@ -231,7 +231,6 @@ fn validate_header(
         || number(requests, "planned")? != h.scheduled.len() as u64
         || number(&h.config, "planned_games")? != h.scheduled.len() as u64
         || h.config["ruleset"] != Ruleset::Standard2pThreefold.config_name()
-        || number(&h.config, "tt_slots")? != 4096
         || h.config["use_pvs"] != true
         || h.config["solver_order_contact"] != false
         || h.config["distance_a"] != 0.0
@@ -491,6 +490,10 @@ struct SearchPolicy {
     depth: u16,
     max_nodes: Option<u64>,
     strict_completed_depth: bool,
+    session: Value,
+    tt_byte_limit: u64,
+    lmr: bool,
+    lmr_method: quoridor_ai::alphabeta::LmrMethod,
 }
 impl SearchPolicy {
     fn from_config(config: &Value) -> Result<Self> {
@@ -509,10 +512,35 @@ impl SearchPolicy {
         {
             return Err("common corpus cannot weaken completed6/node policy".into());
         }
+        let tt_slots = usize::try_from(number(config, "tt_slots")?)?;
+        let lmr = config
+            .get("lmr")
+            .map(|value| value.as_bool().ok_or("boolean LMR setting"))
+            .transpose()?
+            .unwrap_or(false);
+        let lmr_method = match config.get("lmr_method") {
+            None | Some(Value::Null) => quoridor_ai::alphabeta::LmrMethod::default(),
+            Some(Value::String(name)) => quoridor_ai::alphabeta::LmrMethod::from_name(name)?,
+            _ => return Err("typed LMR method name".into()),
+        };
+        if config["use_pvs"] != true {
+            return Err("fixed-D PVS setting".into());
+        }
+        let session = crate::common_corpus::expected_fixed_d_session_settings(
+            max_nodes.ok_or("positive node limit")?,
+            tt_slots,
+            lmr,
+            lmr_method,
+        )?;
+        let tt_byte_limit = number(&session, "tt_byte_limit")?;
         Ok(Self {
             depth,
             max_nodes,
             strict_completed_depth,
+            session,
+            tt_byte_limit,
+            lmr,
+            lmr_method,
         })
     }
 }
@@ -534,7 +562,12 @@ fn validate_search(s: &Search, c: &SigmaContext, policy: &SearchPolicy) -> Resul
             .max_nodes
             .is_some_and(|limit| s.counters["nodes"].as_u64().is_none_or(|n| n > limit))
         || number(&s.counters, "policy_calls")? != 0
-        || number(&s.counters, "tt_retained_bytes")? > 1024 * 1024
+        || number(&s.counters, "tt_retained_bytes")? > policy.tt_byte_limit
+        || s.counters["session"] != policy.session
+        || s.counters["lmr_enabled"].as_bool() != Some(policy.lmr)
+        || s.counters["lmr_method_id"] != json!(policy.lmr.then_some(policy.lmr_method.id()))
+        || s.counters["zero_stock_approx_permitted"].as_bool() != Some(false)
+        || s.counters["zero_stock_safe_race_enabled"].as_bool() != Some(false)
         || s.parent != Context::of(c)
     {
         return Err("accepted search provenance/work/parent mismatch".into());
@@ -1177,6 +1210,151 @@ pub fn write_cache(
 }
 
 #[cfg(test)]
+mod receiver421_tests {
+    use super::*;
+    use quoridor_ai::alphabeta::{LmrMethod, SearchSession};
+
+    fn configured() -> Value {
+        json!({"depth":6,"max_nodes":4000000,"tt_slots":1048576,"use_pvs":true,
+            "lmr":true,"lmr_method":"depth_rank"})
+    }
+
+    fn recorded_session() -> Value {
+        // Literal namespace/method identity from the already-recorded first
+        // 421 row. Only the ABI-dependent byte limit comes from its real owner;
+        // no TT/session/evaluator is constructed by this fixture.
+        json!({
+            "profile":"control","tt_slots":1048576,
+            "tt_byte_limit":SearchSession::requested_tt_byte_limit(1048576).unwrap(),
+            "namespace":{
+                "evaluator":"original-distance-a0-b8-tanh",
+                "rules":"research-standard-2p-threefold-goal-first-v1",
+                "selectivity":"fixed-d-common-outcome-v1/d6/n4000000/PVS/TT1048576/no-time/no-solver-order-contact:cheap-static376-integer-parent-v1:control:lmr408-depth-rank-log63-extra0to3-pvs-verify-v1"
+            },
+            "lmr_enabled":true,"lmr_method":"depth_rank",
+            "lmr_method_id":"lmr408-depth-rank-log63-extra0to3-pvs-verify-v1",
+            "lmr_reduction_rule":LmrMethod::DepthRank.reduction_rule(),
+            "completed_depth_semantics":"selective_nominal"
+        })
+    }
+
+    fn row(context: &SigmaContext, session: Value, retained: u64) -> Search {
+        Search {
+            action: Some(14),
+            raw_value: Some(2.0),
+            raw_value_bits: Some(2f32.to_bits()),
+            completed_depth: 6,
+            pv: vec![14],
+            stop: "depth_cap".into(),
+            counters: json!({"nodes":123,"policy_calls":0,"tt_retained_bytes":retained,
+                "lmr_enabled":session["lmr_enabled"],"lmr_method_id":session["lmr_method_id"],
+                "session":session,"zero_stock_approx_permitted":false,"zero_stock_safe_race_enabled":false}),
+            returned_search_wall_ns: 0,
+            parent: Context::of(context),
+            accepted: true,
+            failure: None,
+        }
+    }
+
+    #[test]
+    fn receiver421_actual_one_m_depth_rank_metadata_and_raw_extremes_accept() {
+        let policy = SearchPolicy::from_config(&configured()).unwrap();
+        let context = SigmaContext::from_prefix(&[13, 75]).unwrap();
+        let mut search = row(&context, recorded_session(), policy.tt_byte_limit);
+        assert!(policy.tt_byte_limit > 1024 * 1024);
+        for value in [2f32, -2f32, -0f32] {
+            search.raw_value = Some(value);
+            search.raw_value_bits = Some(value.to_bits());
+            assert_eq!(validate_search(&search, &context, &policy).unwrap(), 14);
+        }
+        // A nominal selective incomplete D6 return is still refused.
+        search.completed_depth = 5;
+        search.stop = "node_cap".into();
+        assert!(validate_search(&search, &context, &policy).is_err());
+    }
+
+    #[test]
+    fn receiver421_capacity_method_namespace_retention_history_mismatches_refused() {
+        let policy = SearchPolicy::from_config(&configured()).unwrap();
+        let context = SigmaContext::from_prefix(&[13, 75]).unwrap();
+        let search = row(&context, recorded_session(), policy.tt_byte_limit);
+        let mut bad = search.clone();
+        bad.counters["session"]["tt_slots"] = json!(4096);
+        assert!(validate_search(&bad, &context, &policy).is_err());
+        let mut bad = search.clone();
+        // A self-declared giant ceiling cannot license retained work/storage.
+        bad.counters["session"]["tt_byte_limit"] = json!(u64::MAX);
+        bad.counters["tt_retained_bytes"] = json!(u64::MAX);
+        assert!(validate_search(&bad, &context, &policy).is_err());
+        let mut bad = search.clone();
+        bad.counters["tt_retained_bytes"] = json!(policy.tt_byte_limit + 1);
+        assert!(validate_search(&bad, &context, &policy).is_err());
+        let mut bad = search.clone();
+        bad.counters["session"]["lmr_method"] = json!("fixed_one");
+        bad.counters["session"]["lmr_method_id"] = json!(LmrMethod::FixedOne.id());
+        assert!(validate_search(&bad, &context, &policy).is_err());
+        let mut bad = search.clone();
+        bad.counters["lmr_method_id"] = json!(LmrMethod::FixedOne.id());
+        assert!(validate_search(&bad, &context, &policy).is_err());
+        let mut bad = search.clone();
+        bad.counters["session"]["namespace"]["selectivity"] = json!("unrelated");
+        assert!(validate_search(&bad, &context, &policy).is_err());
+        let mut bad = search.clone();
+        bad.counters["zero_stock_safe_race_enabled"] = json!(true);
+        assert!(validate_search(&bad, &context, &policy).is_err());
+        let mut bad = search.clone();
+        bad.parent.history.clear();
+        assert!(validate_search(&bad, &context, &policy).is_err());
+        let mut different = configured();
+        different["max_nodes"] = json!(4000001);
+        assert!(
+            validate_search(
+                &search,
+                &context,
+                &SearchPolicy::from_config(&different).unwrap()
+            )
+            .is_err()
+        );
+    }
+
+    #[test]
+    fn receiver421_current_default_off_and_even_off_invalid_config_are_explicit() {
+        let config = json!({"depth":6,"max_nodes":600000,"tt_slots":4096,"use_pvs":true});
+        let policy = SearchPolicy::from_config(&config).unwrap();
+        assert!(!policy.lmr);
+        assert!(policy.session["lmr_method_id"].is_null());
+        let context = SigmaContext::from_prefix(&[13, 75]).unwrap();
+        let search = row(&context, policy.session.clone(), 0);
+        assert_eq!(validate_search(&search, &context, &policy).unwrap(), 14);
+        let mut missing_metadata = search.clone();
+        missing_metadata
+            .counters
+            .as_object_mut()
+            .unwrap()
+            .remove("session");
+        assert!(validate_search(&missing_metadata, &context, &policy).is_err());
+        let mut off = config.clone();
+        off["lmr"] = json!(false);
+        assert_eq!(
+            SearchPolicy::from_config(&off).unwrap().session,
+            policy.session
+        );
+        for (key, value) in [
+            ("tt_slots", json!(0)),
+            ("tt_slots", json!(1048577)),
+            ("use_pvs", json!(false)),
+            ("lmr", json!("false")),
+            ("lmr_method", json!("invalid_even_off")),
+            ("lmr_method", json!(17)),
+        ] {
+            let mut bad = config.clone();
+            bad[key] = value;
+            assert!(SearchPolicy::from_config(&bad).is_err(), "{key}");
+        }
+    }
+}
+
+#[cfg(test)]
 mod stream_repair_tests {
     use super::*;
     use std::io;
@@ -1301,7 +1479,7 @@ mod stream_repair_tests {
     #[test]
     fn stream_repair_depth_policy_bound_not_rebranded() {
         let strict = SearchPolicy::from_config(
-            &json!({"depth":6,"max_nodes":600000,"strict_completed_depth":true}),
+            &json!({"depth":6,"max_nodes":600000,"strict_completed_depth":true,"tt_slots":4096,"use_pvs":true}),
         )
         .unwrap();
         let context = SigmaContext::from_prefix(&[13, 75]).unwrap();
@@ -1312,7 +1490,9 @@ mod stream_repair_tests {
             completed_depth: 6,
             pv: vec![14],
             stop: "depth_cap".into(),
-            counters: json!({"nodes":500000,"policy_calls":0,"tt_retained_bytes":0}),
+            counters: json!({"nodes":500000,"policy_calls":0,"tt_retained_bytes":0,
+                "session":strict.session,"lmr_enabled":false,"lmr_method_id":null,
+                "zero_stock_approx_permitted":false,"zero_stock_safe_race_enabled":false}),
             returned_search_wall_ns: 0,
             parent: Context::of(&context),
             accepted: true,
@@ -1334,7 +1514,7 @@ mod configured_intake_tests {
     use super::*;
     #[test]
     fn configured_intake_requires_completed_d6_without_closed_phase_or_quantity() {
-        let c = json!({"depth":6,"max_nodes":123});
+        let c = json!({"depth":6,"max_nodes":123,"tt_slots":4096,"use_pvs":true});
         let p = SearchPolicy::from_config(&c).unwrap();
         assert!(p.strict_completed_depth);
         for bad in [

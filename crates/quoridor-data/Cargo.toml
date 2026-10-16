@@ -3,6 +3,7 @@ name = "quoridor-data"
 version = "0.1.0"
 edition = "2024"
 [dependencies]
+quoridor-ai = { path = "../quoridor-ai", features = ["research"] }
 quoridor-core = { path = "../quoridor-core", features = ["research"] }
 quoridor-nnue = { path = "../quoridor-nnue" }
 serde = { version = "1", features = ["derive"] }
