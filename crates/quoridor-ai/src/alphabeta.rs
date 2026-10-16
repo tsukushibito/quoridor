@@ -639,50 +639,6 @@ impl ZeroStockApproxMethod {
 
 /// One sufficient game-W/L condition; neither UNKNOWN nor a cap is Draw.
 pub const ZERO_STOCK_SAFE_RACE_METHOD: &str = "zero-stock411-safe-manhattan-complete-E-v1";
-/// The Manhattan policy is retained only for the fixed 424 OFF/M/L comparison.
-/// Retire the unused comparison path after its recorded adoption decision.
-#[derive(Debug, Default, Clone, Copy, PartialEq, Eq)]
-pub enum SafeRacePolicy {
-    #[default]
-    Manhattan,
-    WallDetour,
-}
-impl SafeRacePolicy {
-    pub fn from_name(name: &str) -> Result<Self> {
-        match name {
-            "manhattan" => Ok(Self::Manhattan),
-            "wall_detour" => Ok(Self::WallDetour),
-            _ => Err(SearchError::Limits("unsupported safe-race policy".into())),
-        }
-    }
-    pub fn name(self) -> &'static str {
-        match self {
-            Self::Manhattan => "manhattan",
-            Self::WallDetour => "wall_detour",
-        }
-    }
-    pub fn id(self) -> &'static str {
-        match self {
-            Self::Manhattan => ZERO_STOCK_SAFE_RACE_METHOD,
-            Self::WallDetour => "zero-stock424-safe-wall-detour-complete-E-v1",
-        }
-    }
-}
-
-// Same canonical 9x9 goals as ds/other. Ignore each unreachable term separately.
-fn wall_detour_bound(m: u8, ds: u8, other: u8, own_cross: u8, other_cross: u8) -> u8 {
-    let own = if ds < 81 && own_cross < 81 {
-        ds.abs_diff(own_cross)
-    } else {
-        0
-    };
-    let opponent = if other < 81 && other_cross < 81 {
-        other.abs_diff(other_cross)
-    } else {
-        0
-    };
-    m.max(own).max(opponent)
-}
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 enum RaceWinner {
     Mover,
@@ -738,14 +694,6 @@ pub struct SearchStats {
     pub zero_stock_approx_permitted: bool,
     /// Explicit research option; OFF does not observe eligible opportunities.
     pub zero_stock_safe_race_enabled: bool,
-    /// Requested policy; numeric authority is effective only while enabled.
-    pub zero_stock_safe_race_policy: SafeRacePolicy,
-    /// Fresh old-M UNKNOWN nodes considered for L, not TT-return origins.
-    pub safe_race_detour_tests: u64,
-    /// Qualified existing pairs read; exactly two cross-cell reads per pair.
-    pub safe_race_detour_map_pairs: u64,
-    /// Fresh old-M UNKNOWN -> L geometry success, before complete-E qualification.
-    pub safe_race_detour_geometry_passes: u64,
     pub safe_race_stock0_opportunities: u64,
     pub safe_race_tt_probes: u64,
     pub safe_race_tt_hits: u64,
@@ -1734,40 +1682,7 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
         };
         let manhattan =
             (p.pawns[0] / 9).abs_diff(p.pawns[1] / 9) + (p.pawns[0] % 9).abs_diff(p.pawns[1] % 9);
-        let winner = safe_race_winner(ds, other, manhattan);
-        // TT hits returned above, and an old-M proof never reads cross cells.
-        let winner = if winner.is_none()
-            && self.stats.zero_stock_safe_race_policy == SafeRacePolicy::WallDetour
-        {
-            self.stats.safe_race_detour_tests += 1;
-            let pair = cached.or_else(|| {
-                self.eval_scratch
-                    .distances
-                    .maps
-                    .as_ref()
-                    .filter(|maps| maps.horizontal == p.horizontal && maps.vertical == p.vertical)
-                    .map(|maps| &maps.distances)
-            });
-            if let Some(pair) = pair {
-                // Borrow only; never call distance() again or build missing maps.
-                let bound = wall_detour_bound(
-                    manhattan,
-                    ds,
-                    other,
-                    pair[own][usize::from(p.pawns[own ^ 1])],
-                    pair[own ^ 1][usize::from(p.pawns[own])],
-                );
-                self.stats.safe_race_detour_map_pairs += 1;
-                let extended = safe_race_winner(ds, other, bound);
-                self.stats.safe_race_detour_geometry_passes += u64::from(extended.is_some());
-                extended
-            } else {
-                None
-            }
-        } else {
-            winner
-        };
-        let Some(winner) = winner else {
+        let Some(winner) = safe_race_winner(ds, other, manhattan) else {
             return Ok(None);
         };
         self.stats.safe_race_geometry_passes += 1;
@@ -2584,14 +2499,13 @@ pub struct SearchSession {
     zero_stock_approx_method: ZeroStockApproxMethod,
     zero_stock_approx_effective: bool,
     zero_stock_safe_race: bool,
-    zero_stock_safe_race_policy: SafeRacePolicy,
 }
 impl SearchSession {
     fn detach_safe_race_namespace(&mut self) {
         if self.zero_stock_safe_race {
-            self.namespace.selectivity.truncate(
-                self.namespace.selectivity.len() - self.zero_stock_safe_race_policy.id().len() - 1,
-            );
+            self.namespace
+                .selectivity
+                .truncate(self.namespace.selectivity.len() - ZERO_STOCK_SAFE_RACE_METHOD.len() - 1);
         }
     }
     fn attach_safe_race_namespace(&mut self) {
@@ -2599,7 +2513,7 @@ impl SearchSession {
             self.namespace.selectivity.push(':');
             self.namespace
                 .selectivity
-                .push_str(self.zero_stock_safe_race_policy.id());
+                .push_str(ZERO_STOCK_SAFE_RACE_METHOD);
         }
     }
     /// Research opt-in only. Complete-history qualification is per leaf; this
@@ -2615,26 +2529,6 @@ impl SearchSession {
         if let Some(history) = self.ordering.as_mut() {
             history.reset();
         }
-    }
-    /// Selection alone does not enable proofs; OFF keeps ordinary TT/history.
-    pub fn set_zero_stock_safe_race_policy(&mut self, policy: SafeRacePolicy) {
-        if policy == self.zero_stock_safe_race_policy {
-            return;
-        }
-        if self.zero_stock_safe_race {
-            self.detach_safe_race_namespace();
-            self.zero_stock_safe_race_policy = policy;
-            self.attach_safe_race_namespace();
-            self.table.clear();
-            if let Some(history) = self.ordering.as_mut() {
-                history.reset();
-            }
-        } else {
-            self.zero_stock_safe_race_policy = policy;
-        }
-    }
-    pub fn zero_stock_safe_race_policy(&self) -> SafeRacePolicy {
-        self.zero_stock_safe_race_policy
     }
     pub fn zero_stock_safe_race_enabled(&self) -> bool {
         self.zero_stock_safe_race
@@ -2881,7 +2775,6 @@ impl SearchSession {
             zero_stock_approx_method: ZeroStockApproxMethod::Race,
             zero_stock_approx_effective: false,
             zero_stock_safe_race: false,
-            zero_stock_safe_race_policy: SafeRacePolicy::default(),
         })
     }
     /// Table accounting includes its header and fixed slot storage; no history payload.
@@ -2978,7 +2871,6 @@ impl SearchSession {
         let mut on_completed = |_: &SearchResult| {};
         let mut invocation = SearchInvocation::root(&mut on_completed);
         invocation.forced_root = Some(action);
-        invocation.safe_race_policy = self.zero_stock_safe_race_policy;
         search_in_table::<false, false>(
             root,
             self.evaluator.as_ref(),
@@ -3021,15 +2913,13 @@ impl SearchSession {
             root_walls,
             limits.max_depth,
         ));
-        let mut invocation = SearchInvocation::root(on_completed);
-        invocation.safe_race_policy = self.zero_stock_safe_race_policy;
         search_in_table::<false, false>(
             root,
             self.evaluator.as_ref(),
             limits,
             cancel,
             None,
-            invocation,
+            SearchInvocation::root(on_completed),
             (
                 &mut self.table,
                 self.score_domain,
@@ -3057,7 +2947,6 @@ type SearchTableAndDomain<'table, 'history> = (
 );
 
 struct SearchInvocation<'a> {
-    safe_race_policy: SafeRacePolicy,
     forced_root: Option<u16>,
     on_completed: &'a mut dyn FnMut(&SearchResult),
     #[cfg(feature = "research-diagnostics")]
@@ -3071,7 +2960,6 @@ impl<'a> SearchInvocation<'a> {
     fn root(on_completed: &'a mut dyn FnMut(&SearchResult)) -> Self {
         Self {
             on_completed,
-            safe_race_policy: SafeRacePolicy::default(),
             forced_root: None,
             #[cfg(feature = "research-diagnostics")]
             observation: None,
@@ -3183,7 +3071,6 @@ fn search_in_table<const OBSERVE: bool, const TRACE: bool>(
             zero_stock_approx_permitted,
             zero_stock_approx_method,
             zero_stock_safe_race_enabled,
-            zero_stock_safe_race_policy: invocation.safe_race_policy,
             tt_hashes: u64::from(limits.use_tt), // one full board initialization
             tt_context_initial_items: if limits.use_tt {
                 root.occurrences().count() as u64
