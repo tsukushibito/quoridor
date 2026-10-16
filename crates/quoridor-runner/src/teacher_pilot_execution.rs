@@ -7,7 +7,7 @@ use crate::{
 use quoridor_ai::alphabeta::{
     DistanceEvaluator, LmrMethod, OrderingProfile, SearchLimits, SearchResult, SearchSession,
 };
-use quoridor_core::research::{Ruleset, SigmaContext};
+use quoridor_core::research::SigmaContext;
 use quoridor_data::{
     Result, Teacher, TeacherRow,
     common_corpus::{
