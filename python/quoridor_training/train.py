@@ -415,6 +415,7 @@ def train(
     scale_path=None,
     input_binding=None,
     supply_workers=None,
+    progress_callback=None,
 ):
     start = time.monotonic()
     cfg = resolve_config(config_path, () if steps is None else (f"training.steps={steps}",))
@@ -1104,8 +1105,11 @@ def train(
         checkpoint_positions[name] = position()
         phase_seconds["export"] += time.monotonic() - tick
 
+    first_static_progress_sent = False
+
     def evaluate(step, selector, diagnostic, full_train=False):
         nonlocal best_step, best_loss, best_state, best_exposure, last_completed_point
+        nonlocal first_static_progress_sent
         tick = time.monotonic()
         model.eval()
         reused = {}
@@ -1236,6 +1240,33 @@ def train(
         if step in checkpoint_steps:
             save_checkpoint(step)
         persist_curves()
+        if (
+            static_teacher
+            and selector
+            and step > 0
+            and progress_callback is not None
+            and not first_static_progress_sent
+        ):
+            first_static_progress_sent = True
+            progress_callback(
+                dict(
+                    status="FIRST_NORMAL_VALIDATION_RETAINED",
+                    position=position(),
+                    selector=curve[-1],
+                    phase_seconds_inclusive=dict(phase_seconds),
+                    logical_rows_attempted=dict(forward_rows),
+                    logical_rows_completed=dict(completed_forward_rows),
+                    device=device,
+                    batch_size=batch_size,
+                    maximum_updates=cfg["training"]["steps"],
+                    minimum_training_draws=8 * len(ix_train),
+                    maximum_training_draws=32 * len(ix_train),
+                    initial_weights_sha=expected["initial_weights_sha"],
+                    input_classes=corpus.input_ref,
+                    persisted_curves=str(output / "curves.jsonl.gz"),
+                    nested_clocks_not_summed=True,
+                )
+            )
         return stop
 
     persisted_curve_counts = {"curves": 0, "diagnostic-curves": 0}
