@@ -1,0 +1,49 @@
+{
+  "started_at": "2026-10-17T12:18:56.765665+00:00",
+  "finished_at": "2026-10-17T12:18:56.776606+00:00",
+  "affected_usage_check_number_this_leaf": 1,
+  "method": "One lstat/scandir enumeration of OWN plus actual producer and input roots; allocated st_blocks*512, unique dev/inode; symlinks not followed.",
+  "roots": [
+    {
+      "root": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1",
+      "unique_inodes": 468,
+      "allocated_B": 7901184,
+      "logical_B_including_directory_entries": 6762776,
+      "files": 464,
+      "directories": 4,
+      "symlinks_not_followed": 0
+    },
+    {
+      "root": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-v1",
+      "unique_inodes": 461,
+      "allocated_B": 27242496,
+      "logical_B_including_directory_entries": 26347460,
+      "files": 380,
+      "directories": 81,
+      "symlinks_not_followed": 0
+    },
+    {
+      "root": "/workspaces/quoridor/.worktree/assets/inputs/zero-stock-continuous433-v1",
+      "unique_inodes": 15,
+      "allocated_B": 1486848,
+      "logical_B_including_directory_entries": 1451880,
+      "files": 13,
+      "directories": 2,
+      "symlinks_not_followed": 0
+    }
+  ],
+  "affected_union_allocated_B": 36630528,
+  "same_original_433_supported_roots": [
+    "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-v1",
+    "/workspaces/quoridor/.worktree/assets/inputs/zero-stock-continuous433-v1",
+    "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1"
+  ],
+  "same_original_433_supported_union_allocated_B": 30216192,
+  "original_cap_B": 67108864,
+  "within_original_cap_at_observation": true,
+  "ordinary_OWN_includes_analysis_support_subdirectory": true,
+  "new_support_recharge_refund_or_deletion": false,
+  "global_actual_and_later_metadata_tails": "UNKNOWN",
+  "global_cap_decimal_B_unchanged": 50000000000,
+  "this_is_a_bounded_observation_not_a_future_or_atomic_tree_snapshot": true
+}

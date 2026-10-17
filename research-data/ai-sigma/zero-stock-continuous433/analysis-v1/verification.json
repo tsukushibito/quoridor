@@ -1,0 +1,1152 @@
+{
+  "at": "2026-10-17T12:18:56.776839+00:00",
+  "issue": "quoridor-4lc.433.2",
+  "owner": "codex:01a14740-4f03-7652-b060-529179d3d18a",
+  "status": "ORIGINAL_FINITE_SAVED_INTERPRETATION_VERIFIED_READY_FOR_NORMAL_OWNER_CLOSE",
+  "arithmetic": {
+    "rows": 576,
+    "passes": 18,
+    "sessions": 72,
+    "ON_balances": 192,
+    "actual_nodes": 10331031,
+    "all_clock_balances": true,
+    "both_evaluators_predeclared_primary_indication": true
+  },
+  "original_nonclock_checks_referenced_not_replayed": [
+    {
+      "kind": "OFF_repeat",
+      "evaluator": "nnue",
+      "method": "O",
+      "left_operation": 0,
+      "right_operation": 5,
+      "rows": 32,
+      "all_legacy_nonclock_exact": true,
+      "session_lifetime_facts_exact": true,
+      "omitted_measurement_fields_only": [
+        "Search_call_seconds",
+        "Search_internal_elapsed_seconds",
+        "zero_stock_observation"
+      ]
+    },
+    {
+      "kind": "ON_OFF",
+      "evaluator": "nnue",
+      "method": "O",
+      "left_operation": 0,
+      "right_operation": 12,
+      "rows": 32,
+      "all_legacy_nonclock_exact": true,
+      "session_lifetime_facts_exact": true,
+      "omitted_measurement_fields_only": [
+        "Search_call_seconds",
+        "Search_internal_elapsed_seconds",
+        "zero_stock_observation"
+      ]
+    },
+    {
+      "kind": "OFF_repeat",
+      "evaluator": "nnue",
+      "method": "M",
+      "left_operation": 1,
+      "right_operation": 4,
+      "rows": 32,
+      "all_legacy_nonclock_exact": true,
+      "session_lifetime_facts_exact": true,
+      "omitted_measurement_fields_only": [
+        "Search_call_seconds",
+        "Search_internal_elapsed_seconds",
+        "zero_stock_observation"
+      ]
+    },
+    {
+      "kind": "ON_OFF",
+      "evaluator": "nnue",
+      "method": "M",
+      "left_operation": 1,
+      "right_operation": 13,
+      "rows": 32,
+      "all_legacy_nonclock_exact": true,
+      "session_lifetime_facts_exact": true,
+      "omitted_measurement_fields_only": [
+        "Search_call_seconds",
+        "Search_internal_elapsed_seconds",
+        "zero_stock_observation"
+      ]
+    },
+    {
+      "kind": "OFF_repeat",
+      "evaluator": "nnue",
+      "method": "P",
+      "left_operation": 2,
+      "right_operation": 3,
+      "rows": 32,
+      "all_legacy_nonclock_exact": true,
+      "session_lifetime_facts_exact": true,
+      "omitted_measurement_fields_only": [
+        "Search_call_seconds",
+        "Search_internal_elapsed_seconds",
+        "zero_stock_observation"
+      ]
+    },
+    {
+      "kind": "ON_OFF",
+      "evaluator": "nnue",
+      "method": "P",
+      "left_operation": 2,
+      "right_operation": 14,
+      "rows": 32,
+      "all_legacy_nonclock_exact": true,
+      "session_lifetime_facts_exact": true,
+      "omitted_measurement_fields_only": [
+        "Search_call_seconds",
+        "Search_internal_elapsed_seconds",
+        "zero_stock_observation"
+      ]
+    },
+    {
+      "kind": "OFF_repeat",
+      "evaluator": "distance",
+      "method": "O",
+      "left_operation": 6,
+      "right_operation": 11,
+      "rows": 32,
+      "all_legacy_nonclock_exact": true,
+      "session_lifetime_facts_exact": true,
+      "omitted_measurement_fields_only": [
+        "Search_call_seconds",
+        "Search_internal_elapsed_seconds",
+        "zero_stock_observation"
+      ]
+    },
+    {
+      "kind": "ON_OFF",
+      "evaluator": "distance",
+      "method": "O",
+      "left_operation": 6,
+      "right_operation": 15,
+      "rows": 32,
+      "all_legacy_nonclock_exact": true,
+      "session_lifetime_facts_exact": true,
+      "omitted_measurement_fields_only": [
+        "Search_call_seconds",
+        "Search_internal_elapsed_seconds",
+        "zero_stock_observation"
+      ]
+    },
+    {
+      "kind": "OFF_repeat",
+      "evaluator": "distance",
+      "method": "M",
+      "left_operation": 7,
+      "right_operation": 10,
+      "rows": 32,
+      "all_legacy_nonclock_exact": true,
+      "session_lifetime_facts_exact": true,
+      "omitted_measurement_fields_only": [
+        "Search_call_seconds",
+        "Search_internal_elapsed_seconds",
+        "zero_stock_observation"
+      ]
+    },
+    {
+      "kind": "ON_OFF",
+      "evaluator": "distance",
+      "method": "M",
+      "left_operation": 7,
+      "right_operation": 16,
+      "rows": 32,
+      "all_legacy_nonclock_exact": true,
+      "session_lifetime_facts_exact": true,
+      "omitted_measurement_fields_only": [
+        "Search_call_seconds",
+        "Search_internal_elapsed_seconds",
+        "zero_stock_observation"
+      ]
+    },
+    {
+      "kind": "OFF_repeat",
+      "evaluator": "distance",
+      "method": "P",
+      "left_operation": 8,
+      "right_operation": 9,
+      "rows": 32,
+      "all_legacy_nonclock_exact": true,
+      "session_lifetime_facts_exact": true,
+      "omitted_measurement_fields_only": [
+        "Search_call_seconds",
+        "Search_internal_elapsed_seconds",
+        "zero_stock_observation"
+      ]
+    },
+    {
+      "kind": "ON_OFF",
+      "evaluator": "distance",
+      "method": "P",
+      "left_operation": 8,
+      "right_operation": 17,
+      "rows": 32,
+      "all_legacy_nonclock_exact": true,
+      "session_lifetime_facts_exact": true,
+      "omitted_measurement_fields_only": [
+        "Search_call_seconds",
+        "Search_internal_elapsed_seconds",
+        "zero_stock_observation"
+      ]
+    }
+  ],
+  "figures_visually_inspected": [
+    "off_costs.png",
+    "root_cost_ratios.png",
+    "on_time_nodes.png"
+  ],
+  "results_and_selected_prior_STOP_refs_before_after_equal": [
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/analysis-failed-v1.py",
+      "sha256": "c071f7ca417388b7754b8fa1a9bc7ab3e314a1809c78042906e20e1787bca168",
+      "bytes": 51941,
+      "mode": "0444"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/analysis-source-before-v2.json",
+      "sha256": "e1c799d29697d82db6a6bb7b3f392ff867338460a0ac032454c75caa008e640b",
+      "bytes": 463,
+      "mode": "0444"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/analysis-source-before.json",
+      "sha256": "ef4f12f36741a6188192f1a657f60cedc5b85723bbea96cbfee42cd336690458",
+      "bytes": 615,
+      "mode": "0444"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/analysis.json",
+      "sha256": "2c6f6f29380c36e84bc7456f0dcaa6830a725761e8908926b41908f355c22cf2",
+      "bytes": 50907,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/analyze_saved576.py",
+      "sha256": "4ba23473615c6be668cbfc15df6bd165b8f8db9c085be819a0c654ebaf57960b",
+      "bytes": 52774,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/cross_method.csv",
+      "sha256": "de13abda81bdf353ad6f4c69772aa3bdcd68297fcdc255a466f3bcf502b2fc2b",
+      "bytes": 23152,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/diagnostic_series.csv",
+      "sha256": "95a473633cb0790ea1cf7d15d27dbb81f7e19f9cf0139e0b65cef86fe288beb0",
+      "bytes": 1940,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/early-boundary.json",
+      "sha256": "32b986c5393f100259704c077e1558b8c3ef234aea753c49508e1375e56bf7d8",
+      "bytes": 7716,
+      "mode": "0444"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/finalization-source-before.json",
+      "sha256": "befae6bdda5056ea6d7d90b46a6dbc9352d33aa6679e96e57ad2a77f4fd0772b",
+      "bytes": 438,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/finalize_saved576.py",
+      "sha256": "8fe5cd5298f02c9e4d484db017c1e7d7c90c9fd308fa3e8b5957af4c1c16fc06",
+      "bytes": 12587,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/input-refs.json",
+      "sha256": "3dfd19fb7129eb997ab44d857d0e32b8484e098fed06585e1a61e6bbd9857d5b",
+      "bytes": 46369,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/last_wall_roots.csv",
+      "sha256": "f70cdc5a63eb6b84153c3ec460d2716a46a44c733a79d3f7cc19c9af87d901fa",
+      "bytes": 2003,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/observer.csv",
+      "sha256": "bb9e723cee5ce0899799732526fc5795b4d393d633b2ec057395aba24794beb4",
+      "bytes": 2254,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/observer_histogram_summary.csv",
+      "sha256": "eb18a3df9f6cb0483d1d7442ec1bbcacb87d89016d27562839bcb32ff5b43b28",
+      "bytes": 845,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/observer_histograms.csv",
+      "sha256": "f1f3cc708b790b6b5a94ce12b9716f8119bbb7e7338e452861e42e28937fe10f",
+      "bytes": 17565,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/off_costs.png",
+      "sha256": "0975899f7f8410885791500ffa8e6596ac2e21be5698287098b9e220104d1316",
+      "bytes": 110191,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/off_costs.svg",
+      "sha256": "c8f27b719e2d07ad6b5ce64962a577f350c30bc870079cd91a65e2fc94a7c2e5",
+      "bytes": 36430,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/on_time_nodes.png",
+      "sha256": "979aae294bfac610e3d1b17cb37eb37019bc7c81ed70d6792ebeb3d3edb770d7",
+      "bytes": 159386,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/on_time_nodes.svg",
+      "sha256": "90cd47cc3472f91de5a13f50a825b3760feed1dc96acd58b8c3884f7b984d367",
+      "bytes": 44286,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/passes.csv",
+      "sha256": "1a3429e15d6c6b0d03f2d926ce94f84c09c402d14009ce4d71220b6e8f535799",
+      "bytes": 4974,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/present_saved576.py",
+      "sha256": "d677f6e3958f346dc5d116091d7d2fb81d66c1de0af2580829bfa4acf61d115b",
+      "bytes": 19577,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/presentation-source-before.json",
+      "sha256": "dc5f284bcda927e8f619c4c696a01723549fab96201f909764a1ea2dbbf6a5f5",
+      "bytes": 447,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/presentation.json",
+      "sha256": "b6ae431b7da3d89997bfb90209f468d50cd5f6264b87074a7ef7a121aade2a68",
+      "bytes": 24687,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/primary_comparison.csv",
+      "sha256": "2f8528d4f6deaf116af93ddaab2ff5955debc1e26145151a30df89527dc7b6a3",
+      "bytes": 2864,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/proof_and_work.csv",
+      "sha256": "93e59cf2712b1a944718cf9354b09e4d997abda37393be567063b23140154603",
+      "bytes": 3773,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/report-ja.md",
+      "sha256": "9e00b1d079041b31e2529fcfdab31ce3e063d90a34176bba1f3d3e235b3cd14a",
+      "bytes": 12431,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/root_comparison.csv",
+      "sha256": "3f013accf702a0e182ae4cf1e69d51a781f958b2369d8338d2612eb60acbb531",
+      "bytes": 14222,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/root_cost_ratios.png",
+      "sha256": "c08524646f9711e3050062867643cdd3502b387a67e53c11aa94a86a8a87f69d",
+      "bytes": 279308,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/root_cost_ratios.svg",
+      "sha256": "79827c82b73fea08335c3cf2433415543bb6bcd4f97c38744e5ff6099fada0a6",
+      "bytes": 67399,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/root_worst.csv",
+      "sha256": "bdfcb6cc915ae5f69f187b69ce20adf6b98cff414a21dbc8164e035d60be17b7",
+      "bytes": 2471,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/roots.csv",
+      "sha256": "e2437fa3e0da175e6266a430c8f1e3425db0d3532cc799d02ab060291abedcb2",
+      "bytes": 308396,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/series.csv",
+      "sha256": "88bcf0e4102003bd49a1eed7911439553abca307879fa874b55dc84125a94dc4",
+      "bytes": 15964,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/session_progress.csv",
+      "sha256": "504a89f028c2d3e8352c33e4e9166179fee86f0ad2efce78fed46220dfe13fe9",
+      "bytes": 7872,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/sessions.csv",
+      "sha256": "44976305ea4602365158be2899ab43a7072e4ec064586e0b376d88c059bee284",
+      "bytes": 8521,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/startup_series_comparison.csv",
+      "sha256": "b918f5804133392a12dc8c271e9adc245b13da63f3e51bd381c7e18e11207b7d",
+      "bytes": 1029,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/startup_whole_comparison.csv",
+      "sha256": "befbdd5b3923d77590b278d16ebf3fb305403abc68c89b4cf51a1977cfeca53f",
+      "bytes": 348,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/work_by_pass.csv",
+      "sha256": "3649979ddf63cd2ebac0cfbfa620d1fcd7dd2f6ddc98d89d94b563aa6058e6e8",
+      "bytes": 7060,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/initial-Main-reader-STOP.json",
+      "sha256": "afc67d8e029fd52132407493cc548851aa1ac895da4a67dcd0607908c135a815",
+      "bytes": 2627,
+      "mode": "0444"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/source-v3-reader-STOP.json",
+      "sha256": "5e3c30e38a0e3d2c3c98340c287883fddf69efea8e7adba36f0127de6384c880",
+      "bytes": 17578,
+      "mode": "0444"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/r1-source-reader-STOP.json",
+      "sha256": "a8a0d689e9180d13925be7aed440c6d7a38136ffff939776f7edae394cc0f713",
+      "bytes": 9854,
+      "mode": "0444"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/qualification-reuse-reader-STOP.json",
+      "sha256": "11e8dbd4a6a4dff64a001a5086d07de6a21363efc48619165c675f78c4383e91",
+      "bytes": 10110,
+      "mode": "0444"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/native-prior-reader-STOP.json",
+      "sha256": "e4dc08ad19099d9d78ef0affe94be9fb2ab8a514f2f08ee459f215b6f6b56973",
+      "bytes": 11780,
+      "mode": "0444"
+    }
+  ],
+  "usage": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/usage.json",
+    "sha256": "fc755d86e8398ed6710f54c10fb4e963129808fde4d5ac37834d90ef4bd2c3dd",
+    "bytes": 2006,
+    "mode": "0644"
+  },
+  "actual_prior_helpers_stopped": [
+    {
+      "STOP": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/result576-accounting-source-STOP.json",
+        "sha256": "e943b622964aa2f1e5834898719a58900674d7c6c9e85bd9b1d50eb507f2a1b3",
+        "bytes": 2787,
+        "mode": "0644"
+      },
+      "actual_exit_code_preserved": 0,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 836843,
+            "start_ticks": "28612953",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        },
+        {
+          "original": {
+            "pid": 836842,
+            "start_ticks": "28612949",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        }
+      ]
+    },
+    {
+      "STOP": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/result576-analysis-format-STOP.json",
+        "sha256": "b810bbf3810dec124b1ad165e1da319b7bd7195f7930fb349f1e583e17f87610",
+        "bytes": 2028,
+        "mode": "0644"
+      },
+      "actual_exit_code_preserved": 0,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 842131,
+            "start_ticks": "28661727",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        },
+        {
+          "original": {
+            "pid": 842130,
+            "start_ticks": "28661723",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        }
+      ]
+    },
+    {
+      "STOP": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/result576-analysis-v2-format-STOP.json",
+        "sha256": "61f7d98d03f875b812b4b02ccac5d71d4cc3a3878c6db530df2b2e0a6aec9dbf",
+        "bytes": 2022,
+        "mode": "0644"
+      },
+      "actual_exit_code_preserved": 0,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 842742,
+            "start_ticks": "28672904",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        },
+        {
+          "original": {
+            "pid": 842741,
+            "start_ticks": "28672899",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        }
+      ]
+    },
+    {
+      "STOP": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/result576-compact-schema-STOP.json",
+        "sha256": "75feae1e53bb64acbba4136c410d078f9ddc73dd3157274c4cc5d7be5f3dafed",
+        "bytes": 3593,
+        "mode": "0644"
+      },
+      "actual_exit_code_preserved": 0,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 836063,
+            "start_ticks": "28604513",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        },
+        {
+          "original": {
+            "pid": 836062,
+            "start_ticks": "28604507",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        }
+      ]
+    },
+    {
+      "STOP": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/result576-early-boundary-STOP.json",
+        "sha256": "44f4dc883fe053663a68b2eb76db8e52baf41fd610b3723934e21551f0e1b3e8",
+        "bytes": 3650,
+        "mode": "0644"
+      },
+      "actual_exit_code_preserved": 0,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 844145,
+            "start_ticks": "28699307",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        },
+        {
+          "original": {
+            "pid": 844144,
+            "start_ticks": "28699304",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        }
+      ]
+    },
+    {
+      "STOP": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/result576-final-code-format-check-STOP.json",
+        "sha256": "f3a9b59e2906f754a98b3e730ea3248968719413761f3b198577584cc3a4dbc3",
+        "bytes": 1732,
+        "mode": "0644"
+      },
+      "actual_exit_code_preserved": 0,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 851322,
+            "start_ticks": "28788652",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        },
+        {
+          "original": {
+            "pid": 851321,
+            "start_ticks": "28788648",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        }
+      ]
+    },
+    {
+      "STOP": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/result576-finalization-pin-STOP.json",
+        "sha256": "546a44ce233c2eb93cb8297224233ccdb0a973304f54f0778bb58f04d3356dd6",
+        "bytes": 2033,
+        "mode": "0644"
+      },
+      "actual_exit_code_preserved": 0,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 851341,
+            "start_ticks": "28788683",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        },
+        {
+          "original": {
+            "pid": 851337,
+            "start_ticks": "28788680",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        }
+      ]
+    },
+    {
+      "STOP": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/result576-finalizer-format-STOP.json",
+        "sha256": "355a9268c538423e5c187a2e884933058dbfd1015e808a787d33e8aa6d4cf73b",
+        "bytes": 1608,
+        "mode": "0644"
+      },
+      "actual_exit_code_preserved": 0,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 850891,
+            "start_ticks": "28786080",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        },
+        {
+          "original": {
+            "pid": 850890,
+            "start_ticks": "28786076",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        }
+      ]
+    },
+    {
+      "STOP": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/result576-finalizer-lint-STOP.json",
+        "sha256": "68aab5e1636d8b5d3caf50e0c403251f55b50beeded2949b3c3e91231784953b",
+        "bytes": 1714,
+        "mode": "0644"
+      },
+      "actual_exit_code_preserved": 0,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 850896,
+            "start_ticks": "28786093",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        },
+        {
+          "original": {
+            "pid": 850895,
+            "start_ticks": "28786087",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        }
+      ]
+    },
+    {
+      "STOP": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/result576-original-saved-analysis-STOP.json",
+        "sha256": "063c0f1420e9dd975d5a6ddfb1feade9dc7536dccab5df052a4a343259d8d2a8",
+        "bytes": 2313,
+        "mode": "0644"
+      },
+      "actual_exit_code_preserved": 1,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 842430,
+            "start_ticks": "28665654",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        },
+        {
+          "original": {
+            "pid": 842429,
+            "start_ticks": "28665650",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        }
+      ]
+    },
+    {
+      "STOP": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/result576-packet-shape-STOP.json",
+        "sha256": "d90e9e3bcae17752f93b289e6455f84737174f0a390e9dd1ae7009012f5fa0fe",
+        "bytes": 2616,
+        "mode": "0644"
+      },
+      "actual_exit_code_preserved": 0,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 834431,
+            "start_ticks": "28585406",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        },
+        {
+          "original": {
+            "pid": 834430,
+            "start_ticks": "28585403",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        }
+      ]
+    },
+    {
+      "STOP": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/result576-parser-failure-intake-STOP.json",
+        "sha256": "aab8957a58d5781c920c97078328517a732c2c56992cd2f323f09bf7407d2e75",
+        "bytes": 2547,
+        "mode": "0644"
+      },
+      "actual_exit_code_preserved": 0,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 842596,
+            "start_ticks": "28669246",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        },
+        {
+          "original": {
+            "pid": 842595,
+            "start_ticks": "28669240",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        }
+      ]
+    },
+    {
+      "STOP": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/result576-presentation-STOP.json",
+        "sha256": "9a68e19a4fbd2b0d6637f735d6b13f6078c9b6e15cea7570870be7942c0c8e1f",
+        "bytes": 1579,
+        "mode": "0644"
+      },
+      "actual_exit_code_preserved": 0,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 848890,
+            "start_ticks": "28758417",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        },
+        {
+          "original": {
+            "pid": 848889,
+            "start_ticks": "28758412",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        }
+      ]
+    },
+    {
+      "STOP": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/result576-presentation-format-STOP.json",
+        "sha256": "e8f1d9d334c996a8d7837ab50e9778b27fc556ef897e551795c56cf277c57ad0",
+        "bytes": 2029,
+        "mode": "0644"
+      },
+      "actual_exit_code_preserved": 0,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 846739,
+            "start_ticks": "28740203",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        },
+        {
+          "original": {
+            "pid": 846735,
+            "start_ticks": "28740198",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        }
+      ]
+    },
+    {
+      "STOP": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/result576-presentation-pin-STOP.json",
+        "sha256": "1efe9787251ed6975bf8d558dbde0089771a138cbc8bbe8271874d7f5b67d97d",
+        "bytes": 2057,
+        "mode": "0644"
+      },
+      "actual_exit_code_preserved": 0,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 848770,
+            "start_ticks": "28758086",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        },
+        {
+          "original": {
+            "pid": 848769,
+            "start_ticks": "28758082",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        }
+      ]
+    },
+    {
+      "STOP": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/result576-raw-shape-STOP.json",
+        "sha256": "6abba2113024a0c9e84d7f5b92be31160424b1249ffd43ea32fd2a38bda321a9",
+        "bytes": 3315,
+        "mode": "0644"
+      },
+      "actual_exit_code_preserved": 0,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 835040,
+            "start_ticks": "28590548",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        },
+        {
+          "original": {
+            "pid": 835039,
+            "start_ticks": "28590544",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        }
+      ]
+    },
+    {
+      "STOP": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/result576-ready-STOP.json",
+        "sha256": "32b15c214f828452faa57c4589e59df6c873f124e298f69a40ba7078dd79f289",
+        "bytes": 1441,
+        "mode": "0644"
+      },
+      "actual_exit_code_preserved": 0,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 834389,
+            "start_ticks": "28585187",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        },
+        {
+          "original": {
+            "pid": 834388,
+            "start_ticks": "28585182",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        }
+      ]
+    },
+    {
+      "STOP": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/result576-report-format-STOP.json",
+        "sha256": "8db5081a8c46940e5e0e73bcbbe408d823a6e1e856de9d00adf55f95ab0bd897",
+        "bytes": 1659,
+        "mode": "0644"
+      },
+      "actual_exit_code_preserved": 0,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 850900,
+            "start_ticks": "28786103",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        },
+        {
+          "original": {
+            "pid": 850899,
+            "start_ticks": "28786098",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        }
+      ]
+    },
+    {
+      "STOP": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/result576-report-format-check-STOP.json",
+        "sha256": "7c74d5c295bc5d223c4a46298dbafa639debbb7474976f96fdb76f8e54d69174",
+        "bytes": 1659,
+        "mode": "0644"
+      },
+      "actual_exit_code_preserved": 0,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 851326,
+            "start_ticks": "28788663",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        },
+        {
+          "original": {
+            "pid": 851325,
+            "start_ticks": "28788657",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        }
+      ]
+    },
+    {
+      "STOP": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/result576-saved-parser-repaired-STOP.json",
+        "sha256": "490ebbe44774a90ee15f02439dee46abf9bad18f153386d14336dbc7a5916216",
+        "bytes": 1572,
+        "mode": "0644"
+      },
+      "actual_exit_code_preserved": 0,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 843080,
+            "start_ticks": "28677402",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        },
+        {
+          "original": {
+            "pid": 843079,
+            "start_ticks": "28677398",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        }
+      ]
+    },
+    {
+      "STOP": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/result576-show-STOP.json",
+        "sha256": "506beb7990624ecc7eb83b2a85602948f3da229beea24f420345d5b8fce38e6f",
+        "bytes": 1466,
+        "mode": "0644"
+      },
+      "actual_exit_code_preserved": 0,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 834413,
+            "start_ticks": "28585265",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        },
+        {
+          "original": {
+            "pid": 834412,
+            "start_ticks": "28585261",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        }
+      ]
+    },
+    {
+      "STOP": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/result576-source-before-STOP.json",
+        "sha256": "77d720c981e1cacf97d485476ffeb1e116195ae79b5cd57c2869fe20ec279ddd",
+        "bytes": 2204,
+        "mode": "0644"
+      },
+      "actual_exit_code_preserved": 0,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 842427,
+            "start_ticks": "28665643",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        },
+        {
+          "original": {
+            "pid": 842426,
+            "start_ticks": "28665640",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        }
+      ]
+    },
+    {
+      "STOP": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/result576-source-before-v2-STOP.json",
+        "sha256": "48ebcaa13b7bc544f311e38d2c08def5e81be56de3b906bfce5b4435b1b805eb",
+        "bytes": 2068,
+        "mode": "0644"
+      },
+      "actual_exit_code_preserved": 0,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 843078,
+            "start_ticks": "28677392",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        },
+        {
+          "original": {
+            "pid": 843077,
+            "start_ticks": "28677387",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "fresh_current": null,
+          "absent_or_different": true
+        }
+      ]
+    }
+  ],
+  "external_RAW_and_source_reader_STOP": "2026-10-17T12:00:23.663683+00:00",
+  "later_external_RAW_Main_Rust_Git_or_payload_reads": 0,
+  "new_Search_model_Cargo_native_solver_geometry_tests_bootstrap_calibration": 0,
+  "owned_scientific_children_handles_TMP_leases": [],
+  "metadata_emitter_current_identity_not_claimed_stopped": {
+    "pid": 851347,
+    "start_ticks": "28788693",
+    "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+  },
+  "emitter_actual_returned_STOP_follows": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/result576-final-saved-verification-STOP.json",
+  "ordinary_parser_failure_preserved": {
+    "scope": "First parser stopped on omitted jsonl_match versus typed native null; explicit serde default normalized only in the saved reader. No native/test/scientific execution or data rewrite.",
+    "preserved_source": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/analysis-failed-v1.py",
+    "source_SHA256": "c071f7ca417388b7754b8fa1a9bc7ab3e314a1809c78042906e20e1787bca168",
+    "original_source_before": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/analysis-source-before.json",
+    "log": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/result576-original-saved-analysis.log",
+    "STOP": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/result576-original-saved-analysis-STOP.json"
+  },
+  "Root_decision_publication_and_default_authority_unchanged": true,
+  "physical_NNUE_continuous_peak_billing_population_speed_strength": "UNKNOWN",
+  "later_metadata_tails_are_not_in_the_prior_usage_point": true
+}

@@ -2240,3 +2240,13 @@ LMR ONの新Path returnはNNUE12956/D6068、P/M nodesも各41958/33304少なか�
 native適格なB/C/Dの固定LAST・共通V family z-MSE最小という事前規則でC LAST467を選択した。Vは選択にも使うため独立な汎化証拠ではない。既知bookを除いた固定192開始familyの両色384局はC185勝2分197敗、score48.4375%、一度の192-family bootstrap（PCG64/seed43220261017/10000/linear95）の95%区間[44.0104167%,52.8645833%]で、下限>50%基準は未達。UNKNOWN0、382GOAL/2draw、他三条件の対局はなく四条件の棋力順位や一般優越・劣位・等価・原因を認定しない。
 
 実fit＋native2337787 logical rows<4M、arena charged1670199748<3Gを保存した。共通loopと設定由来view/endpointを維持し、層別family・Draw0・.99等は同じpredictionから集計する最小共通処理を追加した。初回Aのcustody preentry FAILED0forward、NULL-vs-disk/masks、family77の原順序フラグ、PNG preview未成立、全費/物理head/連続peak UNKNOWNを残す。元12archives/統計は各一度、追加fit/game/再選択・default/model昇格なし。[結果・曲線・層・費用・原参照](../research-data/ai-sigma/nnue-learning-scale432/report-ja.md)。約1.5万行や末尾までのloss低下を十分な学習規模・収束とせず、追加規模・更新・公開分布との両立は次の判断として残す。
+
+### 連続Searchと壁ゼロ到達部分木の有限比較433（2026-10-17）
+
+431後の人間指示で、二つの真正な元着手系列各16根を固定し、系列・色別の四sessionでTT/ordering/model Arcを継続した。各Searchのroot clone・scratch・NNUE準備は残る。BEST43 NNUEと固定Dを別に、LMR ON/Control/PVS/TT1M、OFF OMPPMOと診断ON OMP、D8/各4Mで元576呼出しを一度実行。576 nominal D8 COMPLETE、18PASS、10,331,031nodes、72構築/破棄。完全prefix/historyと親復元を保持し、12組各32行の旧非時計値が一致した。
+
+事前主時計であるobserver OFFの連続Search合計中央値はNNUE O/M/P=.685270030/.6474174995/.5292998405秒、固定D=.3517759175/.326609140/.2975475355秒。P/O・P/Mは各.772396/.817556と.845844/.911020で、両評価器の有限支持目安を満たした。利益はseries 1に偏り、固定D series 0はMより6.76%悪化、ply39はP/M2.20148（+19.9656ms）、ply46は1.17061。系列全体の両P>1.10警告0や合計whole改善から一律利益を作らない。残差等配した起動込みseries 0費用にも悪化があり、配賦を孤立因果費用としない。
+
+ONでは正stock rootから初めて双方stock0へ入る最大部分木を、最後の壁のcanonical make後からundo/親復元まで非重複で計時した。到達後時間はNNUE O/M/P=.285082/.276421/.159587秒、D=.231045/.186353/.160718秒で、実訪問nodesも別記した。初めからstock0のroot全Searchと残壁あり周辺費を分離し、ON/OFF比.955983〜1.122748や負差を厳密な観測費補正にしない。実P Path returns26534/27516、typed TT9107/11282に対しtail tests/returns0で、tail固有効果は未観測。異なる選択木の仕事量差であり、同仕事speedup・未訪問節約nodes・一般速度/棋力へ換算しない。
+
+独立した有限主張/時計会計確認はblockers0/ordinary0。固定二系列・二反復の連続Search用途でPを研究候補として保持し、既定OFFを維持する。431の旧whole不支持は書き換えず、主時計・入力・session寿命が異なる結果として扱う。元計測Build7af06bad/image8c7a6d45・RAW・FAILEDを保全し、終了した比較用観測経路の整理後sourceを元imageと同一・実測済みとはしない。全量教師比較へ混入、追加sweep/対局/fitはしない。[全結果・二反復・局所悪化・ON内訳・費用・独立確認](../research-data/ai-sigma/zero-stock-continuous433/report-ja.md)。USERPAUSE/models/seals/製品・generator既定、全費/physical NNUE/連続peak UNKNOWNを維持する。

@@ -1,0 +1,1317 @@
+{
+  "issue": "quoridor-4lc.433.2",
+  "at": "2026-10-17T12:00:23.605066+00:00",
+  "status": "ORIGINAL_576_SAVED_INPUT_INTERPRETATION_COMPLETE",
+  "census": {
+    "operations": 18,
+    "calls": 576,
+    "OFF": 384,
+    "ON": 192,
+    "complete_depth8": 576,
+    "UNKNOWN": 0,
+    "NodeLimit": 0,
+    "Cancelled": 0,
+    "nodes": 10331031,
+    "node_cap": 2304000000,
+    "session_constructed": 72,
+    "session_dropped": 72
+  },
+  "primary_comparisons": [
+    {
+      "evaluator": "nnue",
+      "scope": "all",
+      "O_rep1_seconds": 0.704570573,
+      "O_rep2_seconds": 0.665969487,
+      "M_rep1_seconds": 0.663940982,
+      "M_rep2_seconds": 0.630894017,
+      "P_rep1_seconds": 0.515574138,
+      "P_rep2_seconds": 0.543025543,
+      "O_median_seconds": 0.6852700300000001,
+      "M_median_seconds": 0.6474174994999999,
+      "P_median_seconds": 0.5292998405,
+      "P_over_O": 0.7723960151883483,
+      "P_over_M": 0.8175556590743653,
+      "P_median_le_both": true,
+      "both_P_over_1p10_O_median": false,
+      "both_P_over_1p10_M_median": false,
+      "criterion_scope": "predeclared primary finite indication"
+    },
+    {
+      "evaluator": "nnue",
+      "scope": "series0",
+      "O_rep1_seconds": 0.511327661,
+      "O_rep2_seconds": 0.47309438400000003,
+      "M_rep1_seconds": 0.470806639,
+      "M_rep2_seconds": 0.443533276,
+      "P_rep1_seconds": 0.432036282,
+      "P_rep2_seconds": 0.462122921,
+      "O_median_seconds": 0.49221102250000004,
+      "M_median_seconds": 0.4571699575,
+      "P_median_seconds": 0.44707960150000003,
+      "P_over_O": 0.9083087965588986,
+      "P_over_M": 0.9779286546841828,
+      "P_median_le_both": true,
+      "both_P_over_1p10_O_median": false,
+      "both_P_over_1p10_M_median": false,
+      "criterion_scope": "descriptive scope; series warning is predeclared, no new hard gate"
+    },
+    {
+      "evaluator": "nnue",
+      "scope": "series1",
+      "O_rep1_seconds": 0.193242912,
+      "O_rep2_seconds": 0.192875103,
+      "M_rep1_seconds": 0.19313434299999999,
+      "M_rep2_seconds": 0.187360741,
+      "P_rep1_seconds": 0.083537856,
+      "P_rep2_seconds": 0.08090262200000001,
+      "O_median_seconds": 0.1930590075,
+      "M_median_seconds": 0.190247542,
+      "P_median_seconds": 0.082220239,
+      "P_over_O": 0.42588139276536996,
+      "P_over_M": 0.43217503961233833,
+      "P_median_le_both": true,
+      "both_P_over_1p10_O_median": false,
+      "both_P_over_1p10_M_median": false,
+      "criterion_scope": "descriptive scope; series warning is predeclared, no new hard gate"
+    },
+    {
+      "evaluator": "nnue",
+      "scope": "positive_roots",
+      "O_rep1_seconds": 0.703678941,
+      "O_rep2_seconds": 0.665021668,
+      "M_rep1_seconds": 0.662043997,
+      "M_rep2_seconds": 0.630201926,
+      "P_rep1_seconds": 0.515476831,
+      "P_rep2_seconds": 0.542904447,
+      "O_median_seconds": 0.6843503044999999,
+      "M_median_seconds": 0.6461229615,
+      "P_median_seconds": 0.529190639,
+      "P_over_O": 0.7732744992151896,
+      "P_over_M": 0.8190246602155462,
+      "P_median_le_both": true,
+      "both_P_over_1p10_O_median": false,
+      "both_P_over_1p10_M_median": false,
+      "criterion_scope": "descriptive scope; series warning is predeclared, no new hard gate"
+    },
+    {
+      "evaluator": "nnue",
+      "scope": "initial_stock0_roots",
+      "O_rep1_seconds": 0.0008916320000000001,
+      "O_rep2_seconds": 0.000947819,
+      "M_rep1_seconds": 0.001896985,
+      "M_rep2_seconds": 0.0006920909999999999,
+      "P_rep1_seconds": 9.730700000000001e-05,
+      "P_rep2_seconds": 0.000121096,
+      "O_median_seconds": 0.0009197255000000001,
+      "M_median_seconds": 0.001294538,
+      "P_median_seconds": 0.0001092015,
+      "P_over_O": 0.11873270883540794,
+      "P_over_M": 0.08435557704756445,
+      "P_median_le_both": true,
+      "both_P_over_1p10_O_median": false,
+      "both_P_over_1p10_M_median": false,
+      "criterion_scope": "descriptive scope; series warning is predeclared, no new hard gate"
+    },
+    {
+      "evaluator": "distance",
+      "scope": "all",
+      "O_rep1_seconds": 0.352316656,
+      "O_rep2_seconds": 0.351235179,
+      "M_rep1_seconds": 0.323968016,
+      "M_rep2_seconds": 0.329250264,
+      "P_rep1_seconds": 0.298898011,
+      "P_rep2_seconds": 0.29619706,
+      "O_median_seconds": 0.35177591750000003,
+      "M_median_seconds": 0.32660914,
+      "P_median_seconds": 0.2975475355,
+      "P_over_O": 0.8458439611631459,
+      "P_over_M": 0.9110202350736418,
+      "P_median_le_both": true,
+      "both_P_over_1p10_O_median": false,
+      "both_P_over_1p10_M_median": false,
+      "criterion_scope": "predeclared primary finite indication"
+    },
+    {
+      "evaluator": "distance",
+      "scope": "series0",
+      "O_rep1_seconds": 0.257369254,
+      "O_rep2_seconds": 0.25967082,
+      "M_rep1_seconds": 0.241681005,
+      "M_rep2_seconds": 0.241074162,
+      "P_rep1_seconds": 0.25857665,
+      "P_rep2_seconds": 0.25681461099999997,
+      "O_median_seconds": 0.25852003700000004,
+      "M_median_seconds": 0.2413775835,
+      "P_median_seconds": 0.2576956305,
+      "P_over_O": 0.9968110537598289,
+      "P_over_M": 1.0676038212139944,
+      "P_median_le_both": false,
+      "both_P_over_1p10_O_median": false,
+      "both_P_over_1p10_M_median": false,
+      "criterion_scope": "descriptive scope; series warning is predeclared, no new hard gate"
+    },
+    {
+      "evaluator": "distance",
+      "scope": "series1",
+      "O_rep1_seconds": 0.094947402,
+      "O_rep2_seconds": 0.091564359,
+      "M_rep1_seconds": 0.08228701100000001,
+      "M_rep2_seconds": 0.08817610199999999,
+      "P_rep1_seconds": 0.040321361,
+      "P_rep2_seconds": 0.039382449,
+      "O_median_seconds": 0.0932558805,
+      "M_median_seconds": 0.0852315565,
+      "P_median_seconds": 0.039851905,
+      "P_over_O": 0.42733932473030484,
+      "P_over_M": 0.4675721837838313,
+      "P_median_le_both": true,
+      "both_P_over_1p10_O_median": false,
+      "both_P_over_1p10_M_median": false,
+      "criterion_scope": "descriptive scope; series warning is predeclared, no new hard gate"
+    },
+    {
+      "evaluator": "distance",
+      "scope": "positive_roots",
+      "O_rep1_seconds": 0.35176928,
+      "O_rep2_seconds": 0.350677497,
+      "M_rep1_seconds": 0.323517594,
+      "M_rep2_seconds": 0.328801075,
+      "P_rep1_seconds": 0.298821872,
+      "P_rep2_seconds": 0.296124768,
+      "O_median_seconds": 0.3512233885,
+      "M_median_seconds": 0.3261593345,
+      "P_median_seconds": 0.29747332,
+      "P_over_O": 0.8469632995411978,
+      "P_over_M": 0.9120490770439684,
+      "P_median_le_both": true,
+      "both_P_over_1p10_O_median": false,
+      "both_P_over_1p10_M_median": false,
+      "criterion_scope": "descriptive scope; series warning is predeclared, no new hard gate"
+    },
+    {
+      "evaluator": "distance",
+      "scope": "initial_stock0_roots",
+      "O_rep1_seconds": 0.000547376,
+      "O_rep2_seconds": 0.000557682,
+      "M_rep1_seconds": 0.000450422,
+      "M_rep2_seconds": 0.000449189,
+      "P_rep1_seconds": 7.6139e-05,
+      "P_rep2_seconds": 7.2292e-05,
+      "O_median_seconds": 0.000552529,
+      "M_median_seconds": 0.0004498055,
+      "P_median_seconds": 7.42155e-05,
+      "P_over_O": 0.13431964657058726,
+      "P_over_M": 0.1649946476866112,
+      "P_median_le_both": true,
+      "both_P_over_1p10_O_median": false,
+      "both_P_over_1p10_M_median": false,
+      "criterion_scope": "descriptive scope; series warning is predeclared, no new hard gate"
+    }
+  ],
+  "startup_whole": [
+    {
+      "evaluator": "nnue",
+      "method": "O",
+      "native_whole_rep_seconds": [
+        1.0069074669736437,
+        0.9794917129911482
+      ],
+      "native_whole_median_seconds": 0.993199589982396
+    },
+    {
+      "evaluator": "nnue",
+      "method": "M",
+      "native_whole_rep_seconds": [
+        1.1257089699502103,
+        0.9673020510235801
+      ],
+      "native_whole_median_seconds": 1.0465055104868952
+    },
+    {
+      "evaluator": "nnue",
+      "method": "P",
+      "native_whole_rep_seconds": [
+        0.8511963549535722,
+        0.951989212015178
+      ],
+      "native_whole_median_seconds": 0.9015927834843751
+    },
+    {
+      "evaluator": "distance",
+      "method": "O",
+      "native_whole_rep_seconds": [
+        0.6574035929515958,
+        0.657320463040378
+      ],
+      "native_whole_median_seconds": 0.6573620279959869
+    },
+    {
+      "evaluator": "distance",
+      "method": "M",
+      "native_whole_rep_seconds": [
+        0.6452474039979279,
+        0.666872117028106
+      ],
+      "native_whole_median_seconds": 0.656059760513017
+    },
+    {
+      "evaluator": "distance",
+      "method": "P",
+      "native_whole_rep_seconds": [
+        0.6394975139992312,
+        0.6161018909770064
+      ],
+      "native_whole_median_seconds": 0.6277997024881188
+    }
+  ],
+  "correspondence": [
+    {
+      "kind": "OFF_repeat",
+      "evaluator": "nnue",
+      "method": "O",
+      "left_operation": 0,
+      "right_operation": 5,
+      "rows": 32,
+      "all_legacy_nonclock_exact": true,
+      "session_lifetime_facts_exact": true,
+      "omitted_measurement_fields_only": [
+        "Search_call_seconds",
+        "Search_internal_elapsed_seconds",
+        "zero_stock_observation"
+      ]
+    },
+    {
+      "kind": "ON_OFF",
+      "evaluator": "nnue",
+      "method": "O",
+      "left_operation": 0,
+      "right_operation": 12,
+      "rows": 32,
+      "all_legacy_nonclock_exact": true,
+      "session_lifetime_facts_exact": true,
+      "omitted_measurement_fields_only": [
+        "Search_call_seconds",
+        "Search_internal_elapsed_seconds",
+        "zero_stock_observation"
+      ]
+    },
+    {
+      "kind": "OFF_repeat",
+      "evaluator": "nnue",
+      "method": "M",
+      "left_operation": 1,
+      "right_operation": 4,
+      "rows": 32,
+      "all_legacy_nonclock_exact": true,
+      "session_lifetime_facts_exact": true,
+      "omitted_measurement_fields_only": [
+        "Search_call_seconds",
+        "Search_internal_elapsed_seconds",
+        "zero_stock_observation"
+      ]
+    },
+    {
+      "kind": "ON_OFF",
+      "evaluator": "nnue",
+      "method": "M",
+      "left_operation": 1,
+      "right_operation": 13,
+      "rows": 32,
+      "all_legacy_nonclock_exact": true,
+      "session_lifetime_facts_exact": true,
+      "omitted_measurement_fields_only": [
+        "Search_call_seconds",
+        "Search_internal_elapsed_seconds",
+        "zero_stock_observation"
+      ]
+    },
+    {
+      "kind": "OFF_repeat",
+      "evaluator": "nnue",
+      "method": "P",
+      "left_operation": 2,
+      "right_operation": 3,
+      "rows": 32,
+      "all_legacy_nonclock_exact": true,
+      "session_lifetime_facts_exact": true,
+      "omitted_measurement_fields_only": [
+        "Search_call_seconds",
+        "Search_internal_elapsed_seconds",
+        "zero_stock_observation"
+      ]
+    },
+    {
+      "kind": "ON_OFF",
+      "evaluator": "nnue",
+      "method": "P",
+      "left_operation": 2,
+      "right_operation": 14,
+      "rows": 32,
+      "all_legacy_nonclock_exact": true,
+      "session_lifetime_facts_exact": true,
+      "omitted_measurement_fields_only": [
+        "Search_call_seconds",
+        "Search_internal_elapsed_seconds",
+        "zero_stock_observation"
+      ]
+    },
+    {
+      "kind": "OFF_repeat",
+      "evaluator": "distance",
+      "method": "O",
+      "left_operation": 6,
+      "right_operation": 11,
+      "rows": 32,
+      "all_legacy_nonclock_exact": true,
+      "session_lifetime_facts_exact": true,
+      "omitted_measurement_fields_only": [
+        "Search_call_seconds",
+        "Search_internal_elapsed_seconds",
+        "zero_stock_observation"
+      ]
+    },
+    {
+      "kind": "ON_OFF",
+      "evaluator": "distance",
+      "method": "O",
+      "left_operation": 6,
+      "right_operation": 15,
+      "rows": 32,
+      "all_legacy_nonclock_exact": true,
+      "session_lifetime_facts_exact": true,
+      "omitted_measurement_fields_only": [
+        "Search_call_seconds",
+        "Search_internal_elapsed_seconds",
+        "zero_stock_observation"
+      ]
+    },
+    {
+      "kind": "OFF_repeat",
+      "evaluator": "distance",
+      "method": "M",
+      "left_operation": 7,
+      "right_operation": 10,
+      "rows": 32,
+      "all_legacy_nonclock_exact": true,
+      "session_lifetime_facts_exact": true,
+      "omitted_measurement_fields_only": [
+        "Search_call_seconds",
+        "Search_internal_elapsed_seconds",
+        "zero_stock_observation"
+      ]
+    },
+    {
+      "kind": "ON_OFF",
+      "evaluator": "distance",
+      "method": "M",
+      "left_operation": 7,
+      "right_operation": 16,
+      "rows": 32,
+      "all_legacy_nonclock_exact": true,
+      "session_lifetime_facts_exact": true,
+      "omitted_measurement_fields_only": [
+        "Search_call_seconds",
+        "Search_internal_elapsed_seconds",
+        "zero_stock_observation"
+      ]
+    },
+    {
+      "kind": "OFF_repeat",
+      "evaluator": "distance",
+      "method": "P",
+      "left_operation": 8,
+      "right_operation": 9,
+      "rows": 32,
+      "all_legacy_nonclock_exact": true,
+      "session_lifetime_facts_exact": true,
+      "omitted_measurement_fields_only": [
+        "Search_call_seconds",
+        "Search_internal_elapsed_seconds",
+        "zero_stock_observation"
+      ]
+    },
+    {
+      "kind": "ON_OFF",
+      "evaluator": "distance",
+      "method": "P",
+      "left_operation": 8,
+      "right_operation": 17,
+      "rows": 32,
+      "all_legacy_nonclock_exact": true,
+      "session_lifetime_facts_exact": true,
+      "omitted_measurement_fields_only": [
+        "Search_call_seconds",
+        "Search_internal_elapsed_seconds",
+        "zero_stock_observation"
+      ]
+    }
+  ],
+  "all_legacy_nonclock_exact": true,
+  "observer": [
+    {
+      "evaluator": "nnue",
+      "method": "O",
+      "operation": 12,
+      "calls": 32,
+      "positive_roots": 30,
+      "initial_stock0_roots": 2,
+      "ON_Search_seconds": 0.655106329,
+      "OFF_rep1_Search_seconds": 0.704570573,
+      "OFF_rep2_Search_seconds": 0.665969487,
+      "OFF_median_Search_seconds": 0.6852700300000001,
+      "ON_over_OFF_median": 0.9559827517920197,
+      "ON_minus_OFF_median_seconds": -0.030163701000000098,
+      "positive_root_Search_seconds": 0.65417569,
+      "reached_stock0_seconds": 0.285082099,
+      "positive_and_surrounding_seconds": 0.369093591,
+      "initial_stock0_Search_seconds": 0.000930639,
+      "positive_stock_nodes": 243644,
+      "reached_stock0_nodes": 387069,
+      "initial_stock0_nodes": 1203,
+      "nodes": 631916,
+      "entries": 122904,
+      "exits": 122904,
+      "zero_evaluations": 189144,
+      "zero_terminal": 8726,
+      "zero_safe_race_proven_leaves": 0,
+      "zero_safe_race_history_checks": 0,
+      "zero_safe_race_history_rejects": 0,
+      "zero_tt_probes": 190402,
+      "zero_tt_hits": 147720,
+      "zero_tt_cutoffs": 16295,
+      "zero_wall_distance_map_reads": 0,
+      "zero_wall_distance_map_builds": 0,
+      "zero_wall_distance_fallbacks": 0,
+      "zero_delta_updates": 379530
+    },
+    {
+      "evaluator": "nnue",
+      "method": "M",
+      "operation": 13,
+      "calls": 32,
+      "positive_roots": 30,
+      "initial_stock0_roots": 2,
+      "ON_Search_seconds": 0.654550399,
+      "OFF_rep1_Search_seconds": 0.663940982,
+      "OFF_rep2_Search_seconds": 0.630894017,
+      "OFF_median_Search_seconds": 0.6474174994999999,
+      "ON_over_OFF_median": 1.011017464782013,
+      "ON_minus_OFF_median_seconds": 0.007132899500000067,
+      "positive_root_Search_seconds": 0.653505956,
+      "reached_stock0_seconds": 0.276420897,
+      "positive_and_surrounding_seconds": 0.377085059,
+      "initial_stock0_Search_seconds": 0.001044443,
+      "positive_stock_nodes": 243947,
+      "reached_stock0_nodes": 345522,
+      "initial_stock0_nodes": 897,
+      "nodes": 590366,
+      "entries": 122763,
+      "exits": 122763,
+      "zero_evaluations": 170473,
+      "zero_terminal": 7,
+      "zero_safe_race_proven_leaves": 18349,
+      "zero_safe_race_history_checks": 15577,
+      "zero_safe_race_history_rejects": 408,
+      "zero_tt_probes": 333513,
+      "zero_tt_hits": 254954,
+      "zero_tt_cutoffs": 13506,
+      "zero_wall_distance_map_reads": 345486,
+      "zero_wall_distance_map_builds": 69349,
+      "zero_wall_distance_fallbacks": 0,
+      "zero_delta_updates": 328047
+    },
+    {
+      "evaluator": "nnue",
+      "method": "P",
+      "operation": 14,
+      "calls": 32,
+      "positive_roots": 30,
+      "initial_stock0_roots": 2,
+      "ON_Search_seconds": 0.53230577,
+      "OFF_rep1_Search_seconds": 0.515574138,
+      "OFF_rep2_Search_seconds": 0.543025543,
+      "OFF_median_Search_seconds": 0.5292998405,
+      "ON_over_OFF_median": 1.0056790674585514,
+      "ON_minus_OFF_median_seconds": 0.003005929500000004,
+      "positive_root_Search_seconds": 0.531778276,
+      "reached_stock0_seconds": 0.159586981,
+      "positive_and_surrounding_seconds": 0.372191295,
+      "initial_stock0_Search_seconds": 0.000527494,
+      "positive_stock_nodes": 241311,
+      "reached_stock0_nodes": 196880,
+      "initial_stock0_nodes": 59,
+      "nodes": 438250,
+      "entries": 110981,
+      "exits": 110981,
+      "zero_evaluations": 87376,
+      "zero_terminal": 0,
+      "zero_safe_race_proven_leaves": 49742,
+      "zero_safe_race_history_checks": 40737,
+      "zero_safe_race_history_rejects": 102,
+      "zero_tt_probes": 169368,
+      "zero_tt_hits": 125902,
+      "zero_tt_cutoffs": 6755,
+      "zero_wall_distance_map_reads": 200880,
+      "zero_wall_distance_map_builds": 59020,
+      "zero_wall_distance_fallbacks": 0,
+      "zero_delta_updates": 147181
+    },
+    {
+      "evaluator": "distance",
+      "method": "O",
+      "operation": 15,
+      "calls": 32,
+      "positive_roots": 30,
+      "initial_stock0_roots": 2,
+      "ON_Search_seconds": 0.394955831,
+      "OFF_rep1_Search_seconds": 0.352316656,
+      "OFF_rep2_Search_seconds": 0.351235179,
+      "OFF_median_Search_seconds": 0.35177591750000003,
+      "ON_over_OFF_median": 1.1227483501624296,
+      "ON_minus_OFF_median_seconds": 0.043179913499999945,
+      "positive_root_Search_seconds": 0.394402213,
+      "reached_stock0_seconds": 0.231044761,
+      "positive_and_surrounding_seconds": 0.163357452,
+      "initial_stock0_Search_seconds": 0.000553618,
+      "positive_stock_nodes": 91451,
+      "reached_stock0_nodes": 599166,
+      "initial_stock0_nodes": 1245,
+      "nodes": 691862,
+      "entries": 200117,
+      "exits": 200117,
+      "zero_evaluations": 320984,
+      "zero_terminal": 4637,
+      "zero_safe_race_proven_leaves": 0,
+      "zero_safe_race_history_checks": 0,
+      "zero_safe_race_history_rejects": 0,
+      "zero_tt_probes": 274790,
+      "zero_tt_hits": 210717,
+      "zero_tt_cutoffs": 15526,
+      "zero_wall_distance_map_reads": 641968,
+      "zero_wall_distance_map_builds": 174114,
+      "zero_wall_distance_fallbacks": 0,
+      "zero_delta_updates": 0
+    },
+    {
+      "evaluator": "distance",
+      "method": "M",
+      "operation": 16,
+      "calls": 32,
+      "positive_roots": 30,
+      "initial_stock0_roots": 2,
+      "ON_Search_seconds": 0.332396427,
+      "OFF_rep1_Search_seconds": 0.323968016,
+      "OFF_rep2_Search_seconds": 0.329250264,
+      "OFF_median_Search_seconds": 0.32660914,
+      "ON_over_OFF_median": 1.0177193050996673,
+      "ON_minus_OFF_median_seconds": 0.005787286999999974,
+      "positive_root_Search_seconds": 0.331940403,
+      "reached_stock0_seconds": 0.186353235,
+      "positive_and_surrounding_seconds": 0.14558716800000002,
+      "initial_stock0_Search_seconds": 0.00045602399999999997,
+      "positive_stock_nodes": 92902,
+      "reached_stock0_nodes": 503026,
+      "initial_stock0_nodes": 939,
+      "nodes": 596867,
+      "entries": 192997,
+      "exits": 192997,
+      "zero_evaluations": 264575,
+      "zero_terminal": 115,
+      "zero_safe_race_proven_leaves": 27823,
+      "zero_safe_race_history_checks": 24799,
+      "zero_safe_race_history_rejects": 119,
+      "zero_tt_probes": 450711,
+      "zero_tt_hits": 339210,
+      "zero_tt_cutoffs": 12825,
+      "zero_wall_distance_map_reads": 1001382,
+      "zero_wall_distance_map_builds": 180809,
+      "zero_wall_distance_fallbacks": 0,
+      "zero_delta_updates": 0
+    },
+    {
+      "evaluator": "distance",
+      "method": "P",
+      "operation": 17,
+      "calls": 32,
+      "positive_roots": 30,
+      "initial_stock0_roots": 2,
+      "ON_Search_seconds": 0.308645337,
+      "OFF_rep1_Search_seconds": 0.298898011,
+      "OFF_rep2_Search_seconds": 0.29619706,
+      "OFF_median_Search_seconds": 0.2975475355,
+      "ON_over_OFF_median": 1.037297574928158,
+      "ON_minus_OFF_median_seconds": 0.011097801500000004,
+      "positive_root_Search_seconds": 0.308568638,
+      "reached_stock0_seconds": 0.160718196,
+      "positive_and_surrounding_seconds": 0.147850442,
+      "initial_stock0_Search_seconds": 7.6699e-05,
+      "positive_stock_nodes": 94880,
+      "reached_stock0_nodes": 399481,
+      "initial_stock0_nodes": 55,
+      "nodes": 494416,
+      "entries": 191569,
+      "exits": 191569,
+      "zero_evaluations": 205008,
+      "zero_terminal": 2,
+      "zero_safe_race_proven_leaves": 54576,
+      "zero_safe_race_history_checks": 43302,
+      "zero_safe_race_history_rejects": 8,
+      "zero_tt_probes": 334460,
+      "zero_tt_hits": 234167,
+      "zero_tt_cutoffs": 7511,
+      "zero_wall_distance_map_reads": 776472,
+      "zero_wall_distance_map_builds": 171386,
+      "zero_wall_distance_fallbacks": 0,
+      "zero_delta_updates": 0
+    }
+  ],
+  "clock_issues": [],
+  "whole_residual_range_seconds": [
+    0.03642926995357218,
+    0.06339807502429468
+  ],
+  "native_whole_sum_seconds_all18": 14.769068103807513,
+  "outer_job_wall_seconds_nested_not_added": 180.3436002949602,
+  "build_command_wall_seconds_separate": 62.46844216599129,
+  "cross_method_difference_summary": [
+    {
+      "evaluator": "nnue",
+      "left": "O",
+      "right": "M",
+      "rows": 32,
+      "value_bits_different": 2,
+      "action_different": 1,
+      "PV_different": 6
+    },
+    {
+      "evaluator": "nnue",
+      "left": "O",
+      "right": "P",
+      "rows": 32,
+      "value_bits_different": 10,
+      "action_different": 6,
+      "PV_different": 19
+    },
+    {
+      "evaluator": "nnue",
+      "left": "M",
+      "right": "P",
+      "rows": 32,
+      "value_bits_different": 8,
+      "action_different": 5,
+      "PV_different": 18
+    },
+    {
+      "evaluator": "distance",
+      "left": "O",
+      "right": "M",
+      "rows": 32,
+      "value_bits_different": 5,
+      "action_different": 4,
+      "PV_different": 9
+    },
+    {
+      "evaluator": "distance",
+      "left": "O",
+      "right": "P",
+      "rows": 32,
+      "value_bits_different": 15,
+      "action_different": 9,
+      "PV_different": 19
+    },
+    {
+      "evaluator": "distance",
+      "left": "M",
+      "right": "P",
+      "rows": 32,
+      "value_bits_different": 12,
+      "action_different": 5,
+      "PV_different": 17
+    }
+  ],
+  "Root_collection_crosschecks": "Own raw recomputation matched Root per-pass Search/work/residual and allocated series totals; no derived median was copied.",
+  "genuine_Build": {
+    "manifest": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-continuous433-v1/release-build-v3/operation-v1/manifest.json",
+      "sha256": "7af06badb25994aa41e29cc62591b17d0e7bc11ba5c82552ec95e12ecdceb8ee",
+      "bytes": 29604,
+      "mode": "0644"
+    },
+    "source_commit": "a1e02390802b7bc4d9290e53f37753198dde01f1",
+    "foreign_patch": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-continuous433-v1/release-build-v3/source.patch",
+      "sha256": "23b917927cccb7b74ac9dcc9e770c94db4be466476f717939af358ef712cd663",
+      "bytes": 2701,
+      "mode": "0644"
+    },
+    "artifact_reference_only": {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner-continuous-stock-zero-v3",
+      "sha256": "8c7a6d454e288f9194c238dfede562e28bf428bd5e7b361fa8d2b989d35211f4",
+      "bytes": 9356408,
+      "mode": "0755"
+    },
+    "Cargo_opt3_testfalse_and_build_finished": true,
+    "tools_recorded": {
+      "CARGO": "cargo 1.99.1 (5f94df478 2026-08-27)",
+      "RUSTC": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "RUSTDOC": "rustdoc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "CC": "x86_64-linux-gnu-gcc-12 (Debian 12.2.0-14+deb12u1) 12.2.0\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+      "CXX": "x86_64-linux-gnu-g++-12 (Debian 12.2.0-14+deb12u1) 12.2.0\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+      "AR": "GNU ar (GNU Binutils for Debian) 2.40\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis program is free software; you may redistribute it under the terms of\nthe GNU General Public License version 3 or (at your option) any later version.\nThis program has absolutely no warranty.",
+      "PYTHON": "Python 3.14.7"
+    },
+    "prior_original_receipt_selections": [
+      {
+        "file": {
+          "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-continuous433-v1/new-AI-software-v2/returned-receipt.json",
+          "sha256": "485264eb7b2ed3c91d4e1e70b48263c42fd7b15eef95f6cb278be04fb5a2d0b8",
+          "bytes": 2825,
+          "mode": "0644"
+        },
+        "name": "new-five-stock-continuous-ai-tests-only"
+      },
+      {
+        "file": {
+          "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-continuous433-v1/new-runner-software-v1/returned-receipt.json",
+          "sha256": "b5a1127774434d3451ef463dd56ca853bb080c8f5d6b630977b9d2c64ba96f27",
+          "bytes": 10989,
+          "mode": "0644"
+        },
+        "name": "new-continuous-four-session-runner-test-only"
+      },
+      {
+        "file": {
+          "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-continuous433-v1/new-runner-software-v1/returned-receipt.json",
+          "sha256": "b5a1127774434d3451ef463dd56ca853bb080c8f5d6b630977b9d2c64ba96f27",
+          "bytes": 10989,
+          "mode": "0644"
+        },
+        "name": "new-continuous-optin-runner-test-only"
+      },
+      {
+        "file": {
+          "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-continuous433-v1/new-runner-software-v1/returned-receipt.json",
+          "sha256": "b5a1127774434d3451ef463dd56ca853bb080c8f5d6b630977b9d2c64ba96f27",
+          "bytes": 10989,
+          "mode": "0644"
+        },
+        "name": "affected-ai-runner-clippy"
+      },
+      {
+        "file": {
+          "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-continuous433-v1/native-prior-software-v1/returned-receipt.json",
+          "sha256": "71c84162dbe718894670d3f966d499af1e6fae91c3342724b483f5de3dd15fa8",
+          "bytes": 5548,
+          "mode": "0644"
+        },
+        "name": "new-native-prior-two-tests-only"
+      },
+      {
+        "file": {
+          "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-continuous433-v1/native-prior-software-v1/returned-receipt.json",
+          "sha256": "71c84162dbe718894670d3f966d499af1e6fae91c3342724b483f5de3dd15fa8",
+          "bytes": 5548,
+          "mode": "0644"
+        },
+        "name": "affected-native-runner-clippy"
+      }
+    ],
+    "no_model_or_image_payload_read_by_reviewer": true
+  },
+  "actual_native_limits": [
+    [
+      2,
+      4
+    ]
+  ],
+  "namespace_method_ids": [
+    {
+      "evaluator": "nnue",
+      "method": "O",
+      "ids": [
+        [
+          "fullwidth-PVS:cheap-static376-integer-parent-v1:control:lmr408-depth-rank-log63-extra0to3-pvs-verify-v1",
+          null
+        ]
+      ]
+    },
+    {
+      "evaluator": "nnue",
+      "method": "M",
+      "ids": [
+        [
+          "fullwidth-PVS:cheap-static376-integer-parent-v1:control:lmr408-depth-rank-log63-extra0to3-pvs-verify-v1:zero-stock411-safe-manhattan-complete-E-v1",
+          "zero-stock411-safe-manhattan-complete-E-v1"
+        ]
+      ]
+    },
+    {
+      "evaluator": "nnue",
+      "method": "P",
+      "ids": [
+        [
+          "fullwidth-PVS:cheap-static376-integer-parent-v1:control:lmr408-depth-rank-log63-extra0to3-pvs-verify-v1:zero-stock431-one-path-tail-E-two-keys-v1",
+          "zero-stock431-one-path-tail-E-two-keys-v1"
+        ]
+      ]
+    },
+    {
+      "evaluator": "distance",
+      "method": "O",
+      "ids": [
+        [
+          "fullwidth-PVS:cheap-static376-integer-parent-v1:control:lmr408-depth-rank-log63-extra0to3-pvs-verify-v1",
+          null
+        ]
+      ]
+    },
+    {
+      "evaluator": "distance",
+      "method": "M",
+      "ids": [
+        [
+          "fullwidth-PVS:cheap-static376-integer-parent-v1:control:lmr408-depth-rank-log63-extra0to3-pvs-verify-v1:zero-stock411-safe-manhattan-complete-E-v1",
+          "zero-stock411-safe-manhattan-complete-E-v1"
+        ]
+      ]
+    },
+    {
+      "evaluator": "distance",
+      "method": "P",
+      "ids": [
+        [
+          "fullwidth-PVS:cheap-static376-integer-parent-v1:control:lmr408-depth-rank-log63-extra0to3-pvs-verify-v1:zero-stock431-one-path-tail-E-two-keys-v1",
+          "zero-stock431-one-path-tail-E-two-keys-v1"
+        ]
+      ]
+    }
+  ],
+  "original_preentry_FAILED": {
+    "ref": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-implementation-v1/preentry-refusal-collection-v1/result.json",
+      "sha256": "348d4e1408e0814b7b4d95472d26f93888482da30a6feb1555af2959a20959cc",
+      "bytes": 5164,
+      "mode": "0644"
+    },
+    "manifest": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-v1/execution-v1/measure-000/operation/manifest.json",
+      "sha256": "43751503a593f984b6d9d80e88aaa529995d1ac62bbd11cb15c0881e43b40a63",
+      "bytes": 10052,
+      "mode": "0644"
+    },
+    "Search_and_model_calls": 0,
+    "unentered_requests": 576,
+    "native_wall_seconds": 0.009810969000682235,
+    "outer_wall_seconds": 10.954375470988452,
+    "nested_not_summed": true
+  },
+  "producer_STOP_at": "2026-10-17T11:34:04.805688+00:00",
+  "outer_STOP_at": "2026-10-17T11:34:05.057644+00:00",
+  "collector_STOP_at": "2026-10-17T11:39:06.934249+00:00",
+  "actual_earlier_identities_fresh_absent": [
+    {
+      "original": {
+        "pid": 826948,
+        "start_ticks": "28501321",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 827029,
+        "start_ticks": "28501580",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 827140,
+        "start_ticks": "28502363",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 827163,
+        "start_ticks": "28502373",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 827249,
+        "start_ticks": "28503197",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 827275,
+        "start_ticks": "28503209",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 827430,
+        "start_ticks": "28504209",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 827445,
+        "start_ticks": "28504219",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 827626,
+        "start_ticks": "28505540",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 827648,
+        "start_ticks": "28505554",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 827740,
+        "start_ticks": "28506369",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 827763,
+        "start_ticks": "28506381",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 827871,
+        "start_ticks": "28507193",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 827901,
+        "start_ticks": "28507202",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 828070,
+        "start_ticks": "28508231",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 828086,
+        "start_ticks": "28508240",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 828329,
+        "start_ticks": "28509844",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 828352,
+        "start_ticks": "28509856",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 828447,
+        "start_ticks": "28510637",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 828472,
+        "start_ticks": "28510650",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 828563,
+        "start_ticks": "28511494",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 828586,
+        "start_ticks": "28511507",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 828709,
+        "start_ticks": "28512611",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 828733,
+        "start_ticks": "28512623",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 828827,
+        "start_ticks": "28513425",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 828849,
+        "start_ticks": "28513435",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 828948,
+        "start_ticks": "28514280",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 828971,
+        "start_ticks": "28514290",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 829067,
+        "start_ticks": "28515120",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 829090,
+        "start_ticks": "28515134",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 829224,
+        "start_ticks": "28516317",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 829251,
+        "start_ticks": "28516326",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 829342,
+        "start_ticks": "28517189",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 829366,
+        "start_ticks": "28517199",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 829468,
+        "start_ticks": "28518232",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 829490,
+        "start_ticks": "28518245",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 829622,
+        "start_ticks": "28519299",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 829645,
+        "start_ticks": "28519312",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 831307,
+        "start_ticks": "28549763",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 831308,
+        "start_ticks": "28549770",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 831311,
+        "start_ticks": "28549773",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    },
+    {
+      "original": {
+        "pid": 831314,
+        "start_ticks": "28549776",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "fresh": null,
+      "absent_or_different": true
+    }
+  ],
+  "clock_source_excerpts": [
+    {
+      "first_line": 446,
+      "text": "    fn call(&mut self, request: &Request, cancel: &AtomicBool) -> Result<Value> {\n        let root = self.root.as_ref().ok_or(\"measurement root not prepared\")?;\n        let session = self\n            .session\n            .as_mut()\n            .ok_or(\"measurement session not prepared\")?;\n        session.set_ordering_observation(request.diagnostic);\n        let limits = SearchLimits {\n            max_depth: request.depth,\n            max_nodes: request.node_cap,\n            time_limit: request.time_limit_ms.map(std::time::Duration::from_millis),\n            tt_entries: self.settings.tt_entries,\n            use_pvs: self.settings.use_pvs,\n            use_tt: self.settings.use_tt,\n        };\n        let mut lmr_observation = request\n            .observe_lmr\n            .then(|| Box::new(alphabeta::LmrObservation::default()));\n        let inference_before = self.sigma_value.as_ref().map(|e| e.work()).transpose()?;\n        let table_generation_before = session.table_generation();\n        let mut stock_observation = self\n            .settings\n            .zero_stock_observation\n            .then(alphabeta::ZeroStockObservation::default);\n        let search_started = Instant::now();\n        let mut completed_depths = Vec::new();\n        let result = if let Some(observation) = stock_observation.as_mut() {\n            session.search_with_zero_stock_observation(root, &limits, cancel, observation)\n        } else if let Some(observation) = lmr_observation.as_deref_mut() {\n            session.search_with_lmr_observation(root, &limits, cancel, observation)\n        } else if request.observe_completed_depths {\n            session.search_with_updates(root, &limits, cancel, &mut |completed| {\n                completed_depths.push(completed_depth_observation(completed));\n            })\n        } else {\n            session.search(root, &limits, cancel)\n        };\n        let search_seconds = search_started.elapsed().as_secs_f64();\n        let after = identity(root);"
+    },
+    {
+      "first_line": 791,
+      "text": "fn drive(\n    requests: &[Request],\n    planned: usize,\n    target: &mut impl Target,\n    cancel: &AtomicBool,\n    mut publish: impl FnMut(&Value) -> Result<()>,\n) -> Value {\n    let whole = Instant::now();\n    let mut rows = Vec::new();\n    let mut sessions = Vec::new();\n    let mut active: Option<&str> = None;\n    let mut errors = Vec::new();\n    let mut calls = 0;\n    for request in requests {\n        if cancel.load(Ordering::Relaxed) {\n            errors.push(json!({\"stage\":\"cancel\",\"request\":request.id}));\n            break;\n        }\n        if active != Some(request.session.as_str()) {\n            if let Some(previous) = active.take() {\n                let (result, seconds) = timed(|| target.teardown());\n                sessions.push(\n                    json!({\"session\":previous,\"domain\":\"teardown\",\"seconds\":seconds,\"facts\":result.as_ref().ok()}),\n                );\n                if let Err(error) = result {\n                    errors.push(json!({\"stage\":\"teardown\",\"error\":fact(&*error)}));\n                    break;\n                }\n            }\n            let (result, seconds) = timed(|| target.reset(request));\n            sessions.push(json!({\"session\":request.session,\"domain\":\"reset\",\"seconds\":seconds,\"facts\":result.as_ref().ok()}));\n            // Reset can acquire partial resources even when it returns an error.\n            active = Some(&request.session);\n            if let Err(error) = result {\n                errors.push(json!({\"stage\":\"reset\",\"request\":request.id,\"error\":fact(&*error)}));\n                break;\n            }\n        }\n        let root_whole = Instant::now();\n        let (prepared, prepare_seconds) = timed(|| target.prepare(request));\n        let mut row = json!({\"request\":request,\"preparation_seconds\":prepare_seconds});\n        if let Err(error) = prepared {\n            row[\"status\"] = json!(\"UNKNOWN\");\n            row[\"error\"] = fact(&*error);\n            errors.push(json!({\"stage\":\"prepare\",\"request\":request.id,\"error\":fact(&*error)}));\n        } else {\n            row[\"root\"] = prepared.unwrap();\n            calls += 1;\n            let (measured, seconds) = timed(|| target.call(request, cancel));\n            row[\"measured_seconds\"] = json!(seconds);\n            match measured {\n                Ok(value) => row[\"measurement\"] = value,\n                Err(error) => {\n                    row[\"error\"] = fact(&*error);\n                    errors.push(json!({\"stage\":\"call\",\"request\":request.id,\"error\":fact(&*error)}));\n                }\n            }\n        }\n        let (finished, seconds) = timed(|| target.finish_call());\n        row[\"call_teardown_seconds\"] = json!(seconds);\n        if let Err(error) = finished {\n            errors.push(json!({\"stage\":\"finish_call\",\"request\":request.id,\"error\":fact(&*error)}));\n        }\n        if row[\"measurement\"][\"status\"] != \"COMPLETE\" || !errors.is_empty() {\n            row[\"status\"] = json!(\"UNKNOWN\");\n        } else {\n            row[\"status\"] = json!(\"COMPLETE\");\n        }\n        if row[\"measurement\"][\"returned\"] == \"Err\"\n            || !row[\"measurement\"][\"parent_error\"].is_null()\n            || !row[\"measurement\"][\"validation_error\"].is_null()\n        {\n            errors.push(json!({\"stage\":\"target\",\"request\":request.id,\"facts\":row[\"measurement\"]}));\n        }\n        row[\"root_body_before_journal_seconds\"] = json!(root_whole.elapsed().as_secs_f64());\n        let (publication, seconds) = timed(|| publish(&row));\n        row[\"journal_seconds\"] = json!(seconds);\n        row[\"root_body_including_journal_seconds\"] = json!(root_whole.elapsed().as_secs_f64());\n        rows.push(row);\n        if let Err(error) = publication {\n            errors.push(json!({\"stage\":\"journal\",\"error\":fact(&*error)}));\n        }\n        if !errors.is_empty() {\n            break;\n        }\n    }\n    if let Some(session) = active {\n        let (result, seconds) = timed(|| target.teardown());\n        sessions.push(json!({\"session\":session,\"domain\":\"teardown\",\"seconds\":seconds,\"facts\":result.as_ref().ok()}));\n        if let Err(error) = result {\n            errors.push(json!({\"stage\":\"teardown\",\"error\":fact(&*error)}));\n        }\n    }\n    let complete = rows.iter().filter(|r| r[\"status\"] == \"COMPLETE\").count();\n    json!({\"planned\":planned,\"scheduled\":requests.len(),\"calls\":calls,\"attempted\":rows.len(),\"complete\":complete,\n        \"uncompleted\":planned.saturating_sub(complete),\"unperformed\":planned.saturating_sub(calls),\"unscheduled\":planned.saturating_sub(requests.len()),\"extra_calls\":calls.saturating_sub(planned),\n        \"remaining_requests\":requests[rows.len()..],\"measurements\":rows,\"session_domains\":sessions,\"errors\":errors,\n        \"whole_driver_seconds\":whole.elapsed().as_secs_f64(),\"status\":if complete==planned && complete==requests.len() && errors.is_empty(){\"COMPLETE\"}else{\"PARTIAL\"}})\n}"
+    },
+    {
+      "first_line": 909,
+      "text": "    let mut result = {\n        let (prepared, preparation_seconds) = timed(|| -> Result<SearchTarget> {\n            let roots = prepare_roots(&e, &settings.roots)?;\n            let (evaluator, sigma_value) = load_evaluator(&e, &settings)?;\n            Ok(SearchTarget {\n                settings,\n                roots,\n                evaluator,\n                sigma_value,\n                session: None,\n                root: None,\n                before: Value::Null,\n            })\n        });\n        let mut result = match prepared {\n            Ok(mut target) => {\n                let mut result = drive(&requests, e.planned_slots, &mut target, &cancel, |row| {\n                    output.row(row)\n                });\n                if let Some(value) = &target.sigma_value {\n                    result[\"inference_work\"] = match value.work() {\n                        Ok(work) => work,\n                        Err(error) => {\n                            result[\"status\"] = json!(\"PARTIAL\");\n                            json!({\"error\":fact(&*error),\"counts\":\"UNKNOWN\"})\n                        }\n                    };\n                }\n                let start = Instant::now();\n                drop(target);\n                result[\"target_drop_seconds\"] = json!(start.elapsed().as_secs_f64());\n                result\n            }\n            Err(error) => {\n                json!({\"planned\":e.planned_slots,\"scheduled\":requests.len(),\"calls\":0,\"complete\":0,\"uncompleted\":e.planned_slots,\"unperformed\":e.planned_slots,\"remaining_requests\":requests,\"measurements\":[],\"errors\":[{\"stage\":\"setup\",\"error\":fact(&*error)}],\"status\":\"PARTIAL\"})\n            }\n        };\n        result[\"setup_seconds\"] = json!(preparation_seconds);\n        result\n    };\n    result[\"runtime_launch_origin\"] = runtime[\"runtime_launch_origin\"].clone();\n    // Reverify the actual consumed assets, not an old qualification/source graph.\n    for reference in [&e.config, &e.schedule]\n        .into_iter()\n        .chain(e.inputs.iter())\n        .chain(e.models.iter().flat_map(|m| [&m.descriptor, &m.weights]))\n        .chain(e.dynamic_libraries.iter().map(|l| &l.file))\n    {\n        if let Err(error) = reference.verify() {\n            result[\"status\"] = json!(\"PARTIAL\");\n            result[\"errors\"]\n                .as_array_mut()\n                .unwrap()\n                .push(json!({\"stage\":\"input_after\",\"error\":fact(&*error)}));\n        }\n    }\n    result[\"whole_before_result_publication_seconds\"] = json!(whole.elapsed().as_secs_f64());\n    output.finish(&result)?;\n    Ok(result)\n}\n\nfn identity(c: &SigmaContext) -> Value {"
+    }
+  ],
+  "all_selected_refs_before_after_equal": true,
+  "reviewer_new_Search_model_native_Cargo_solver_geometry_tests_bootstrap_calibration": 0,
+  "physical_NNUE_continuous_peak_billing_population_speed_or_strength": "UNKNOWN",
+  "saved_parser_first_failure": {
+    "scope": "First parser stopped on omitted jsonl_match versus typed native null; explicit serde default normalized only in the saved reader. No native/test/scientific execution or data rewrite.",
+    "preserved_source": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/analysis-failed-v1.py",
+    "source_SHA256": "c071f7ca417388b7754b8fa1a9bc7ab3e314a1809c78042906e20e1787bca168",
+    "original_source_before": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/results-v1/analysis-source-before.json",
+    "log": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/result576-original-saved-analysis.log",
+    "STOP": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-continuous433-review-analysis-v1/result576-original-saved-analysis-STOP.json"
+  },
+  "Root_retention_and_publication_authority": true
+}

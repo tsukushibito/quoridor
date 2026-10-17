@@ -557,3 +557,11 @@ Sol High実装・Sol Max限定source確認・SAME Astra High固定設計/保存�
 元8prefix/fullhistory・2評価器×LMR OFF/ON・OMPPMO・cold/warmの384呼出しでは、348 depth8 COMPLETE/36 NodeLimit UNKNOWN、243362776 nodes、同方式二反復192対応の非時計一致を保存した。主要LMR ONのP/M whole中央値比はNNUE .998252288、D1.005814093、P/Oは1.001878663/1.000024392。事前の両対照以下という条件と局面別1.10倍条件を満たさず、有限の保持利益は未支持だった。新しいPath returnとnode減少をwhole速度や一般棋力へ変換しない。
 
 f86fd2b4でP本体・一時typed selector・追加event counter・専用検査を撤去し、411のM/default OFFへ戻した。共有の合法手・距離owner・履歴・TT・探索器は維持し、419の実験別ID/SHA/件数分岐は復活させない。設定で表すrun順序・入力・上限を共通lifecycleへ渡し、終了した比較入口は残さない。変更範囲の整形・Ruff・AI/runner Clippy型検査PASS、元171/十一成功定義/384呼出し/solver再演0。元source/image/RAW、失敗、来歴制限、孤立費・全費UNKNOWNと全pause/default/model/sealは[報告と結合証拠](../../research-data/ai-sigma/zero-stock-path431/report-ja.md)へ保存する。
+
+### 連続Searchの有限比較とP研究候補の保持（433、2026-10-17）
+
+431の毎root起動込み基準を変更せず、別途人間が指示した連続用途でPを再評価した。真正な二系列各16根の完全prefix/historyを四つの系列・色別sessionへまとめ、TT/ordering/model Arcを継続する。root clone・scratch・NNUE準備は各Search内のまま。observer OFFのSearch呼出し合計が事前主時計で、起動込みguardian wholeと残差配賦は副時計である。
+
+BEST43と固定DのOFF OMPPMO二反復では、P/O・P/M中央値比がNNUE.772396/.817556、D.845844/.911020で有限合計基準を満たした。利益はseries 1に偏り、D series 0はMより6.76%悪化し、ply39はP/M2.20148。合計利益から一般的な一律速度・同じ木の高速処理・棋力同等を認定しない。PのPathとtyped TTの実returnは得られたがtail tests/returnsは0で、今回の速度結果はtail固有の採用根拠ではない。
+
+RootはPを明示選択する連続Search研究候補として保持する。専用safe leafの有効化既定OFF、製品/generator既定と元Mの条件・完全履歴/TT資格を維持する。観測OFFとONの旧非時計値、node/時間の非重複、親復元は有限576呼出しで整合した。完了した比較専用observer等は現役用途の必要性に従って整理し、整理後source/imageを元計測Build7af06bad/image8c7a6d45と同一・計測済みとは扱わない。新しい事後閾値や系列選択を適用条件にせず、全量教師比較へPを混入しない。[固定条件・全表・途中stock0内訳・独立会計確認](../../research-data/ai-sigma/zero-stock-continuous433/report-ja.md)。追加の科学runや旧成功suite再演はこの保持判断から発行しない。
