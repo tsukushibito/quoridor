@@ -219,6 +219,7 @@ def resolve_config(path=None, overrides=()):
             "outcome_steps",
             "terminal_margin",
             "completed_root_raw",
+            "static_teacher",
         ],
         ("training", "sampling"): ["row", "game", "epoch"],
         ("training", "supply_workers"): [0, 2],
@@ -265,7 +266,10 @@ def resolve_config(path=None, overrides=()):
     ):
         raise ValueError("invalid LR decay/floor or reflection probability")
     if result["training"]["reflection_probability"] and (
-        result["training"]["sampling"] != "epoch"
+        (
+            result["training"]["sampling"] != "epoch"
+            and result["training"]["target"] != "static_teacher"
+        )
         or result["training"]["reflection_seed"] == result["training"]["seed"]
     ):
         raise ValueError("online reflection requires epoch sampling and separate fixed seed")
@@ -322,7 +326,9 @@ def resolve_config(path=None, overrides=()):
         validate_mixed_config(result, incoming, overrides)
     elif result["training"]["target"] == "completed_root_raw":
         raise ValueError("raw completed D6 target requires explicit common warm-start study")
-    elif any(k in result["optimizer"] for k in ("betas", "eps")):
+    elif result["training"]["target"] != "static_teacher" and any(
+        k in result["optimizer"] for k in ("betas", "eps")
+    ):
         raise ValueError("explicit Adam settings currently belong to the warm-start study")
     return result
 

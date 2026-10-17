@@ -452,6 +452,13 @@ def train(
         cfg["optimizer"]["lr"] = 0.0001
     device = configure_framework(cfg)
     corpus = load(cache)
+    static_teacher = getattr(corpus, "static_teacher", False)
+    if static_teacher:
+        from .static_learning import validate_recipe
+
+        validate_recipe(cfg, corpus.counts["train"], corpus.counts["validation"])
+        if input_binding is None:
+            raise ValueError("static teacher requires bound common fresh initialization/normalizer")
     binding, rows, labels = (corpus.binding, corpus.rows, corpus.labels)
     target = cfg["training"]["target"]
 
@@ -461,6 +468,7 @@ def train(
         "outcome_steps": 1,
         "terminal_margin": 2,
         "completed_root_raw": 3,
+        "static_teacher": 0,
     }[target]
     step_score = cfg["model"]["architecture"] == "distance_steps"
     if step_score != getattr(corpus, "terminal", False):
@@ -468,18 +476,26 @@ def train(
     target_scale = 80 if target == "outcome_steps" else (1)
     compact = getattr(corpus, "compact", False)
     public_compact = compact and not step_score and True
-    if public_compact and (
-        target != "z"
-        or cfg["training"]["sampling"] != "epoch"
-        or cfg["training"]["loss_weighting"] != "row"
-        or (cfg["evaluation"]["monitor"] != "row")
+    if (
+        public_compact
+        and not static_teacher
+        and (
+            target != "z"
+            or cfg["training"]["sampling"] != "epoch"
+            or cfg["training"]["loss_weighting"] != "row"
+            or (cfg["evaluation"]["monitor"] != "row")
+        )
     ):
         raise ValueError(
             "public compact corpus requires decisive z / row epoch objective and row monitor"
         )
-    if public_compact and (
-        corpus.manifest.get("original_only") is not True
-        or corpus.manifest.get("dataset_revision") != "original-full-v1"
+    if (
+        public_compact
+        and not static_teacher
+        and (
+            corpus.manifest.get("original_only") is not True
+            or corpus.manifest.get("dataset_revision") != "original-full-v1"
+        )
     ):
         raise ValueError("public fit requires adopted original-full-v1 observations")
     if public_compact and (
@@ -494,9 +510,13 @@ def train(
     ):
         raise ValueError("public full fit requires fixed QF1+D FT32/H32/dropout0/a0b8 Adam/wd0")
     teacher_types = (
-        {"terminal_pair"}
-        if step_score
-        else ({"external_outcome"} if compact else selected_teacher_types(rows, target))
+        {"bounded_static_teacher"}
+        if static_teacher
+        else (
+            {"terminal_pair"}
+            if step_score
+            else ({"external_outcome"} if compact else selected_teacher_types(rows, target))
+        )
     )
     if not compact:
         validate_target_tensor(rows, labels[:, column], target)
@@ -574,6 +594,17 @@ def train(
     if step_score:
         distance_fit = {"a": 0, "b": 1, "units": "integer-wall-distance-steps"}
     model = build_model(cfg["model"], statistics).to(device)
+    if static_teacher:
+        common_initial = json.loads(bound_file_bytes(expected["common_initial"], 65536))
+        if (
+            common_initial["input_classes"] != corpus.input_ref
+            or common_initial["initial_weights_sha"] != expected["initial_weights_sha"]
+            or common_initial["initializer_seed"] != 32442026101701
+            or common_initial["scale"]["sha256"] != expected["scale_artifact_sha"]
+            or common_initial["initial_weights"] != expected["initial_weights"]
+        ):
+            raise ValueError("actual common fresh source/weights/scale binding differs")
+        restore_warmstart_parameters(model, expected["initial_weights"])
 
     initial_state = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
     if volume_admission is not None:
@@ -586,12 +617,16 @@ def train(
         free, total = torch.cuda.mem_get_info()
         if free <= 2 * 1024**3:
             raise RuntimeError("CUDA host/display reserve leaves no training window")
-    generator = torch.Generator().manual_seed(cfg["training"]["seed"] + 1)
+    generator = torch.Generator().manual_seed(
+        cfg["training"]["seed"] if static_teacher else cfg["training"]["seed"] + 1
+    )
     optimizers = {"adam": torch.optim.Adam, "adamw": torch.optim.AdamW, "sgd": torch.optim.SGD}
     opt_kwargs = {"lr": cfg["optimizer"]["lr"], "weight_decay": cfg["optimizer"]["weight_decay"]}
     if cfg["optimizer"]["name"] == "sgd":
         opt_kwargs["momentum"] = cfg["optimizer"]["momentum"]
 
+    if static_teacher:
+        opt_kwargs.update(betas=tuple(cfg["optimizer"]["betas"]), eps=cfg["optimizer"]["eps"])
     optimizer = optimizers[cfg["optimizer"]["name"]](model.parameters(), **opt_kwargs)
     scheduler = None
     if cfg["training"]["scheduler"] == "cosine":
@@ -628,7 +663,11 @@ def train(
             "constant": constant,
             "distance_fit": distance_fit,
             "teacher_types": sorted(teacher_types),
-            "target_alias": "rootmean is bounded search value only for alpha_beta datasets",
+            "target_alias": (
+                "one bounded board-only static scalar; not rootmean or outcome z"
+                if static_teacher
+                else "rootmean is bounded search value only for alpha_beta datasets"
+            ),
             "test_opened": False,
         },
     )
@@ -695,7 +734,9 @@ def train(
     evaluation_validation = ix_validation_raw if scheduled else ix_validation
     primary_in_raw = np.searchsorted(ix_validation_raw, ix_validation)
     if compact:
-        rng = np.random.default_rng(cfg["training"]["seed"] + 2)
+        rng = np.random.default_rng(
+            32442026101705 if static_teacher else cfg["training"]["seed"] + 2
+        )
         diag_train = np.sort(
             rng.choice(
                 ix_train, min(len(ix_train), cfg["evaluation"]["diagnostic_rows"]), replace=False
@@ -759,6 +800,11 @@ def train(
     forward_rows = {"train": 0, "full_selector": 0, "diagnostic": 0, "onnx": 0}
     completed_forward_rows = dict(forward_rows)
     status, fault, model_state_status = ("RUNNING", None, "LAST_COMPLETED_UPDATE")
+    static_progress = {
+        "initial_Tpanel_mse": None,
+        "minimum_observed_Tpanel_mse": None,
+        "parameters_changed": False,
+    }
     last_completed_point = None
     measurement_sets, reference_metrics = ({}, {})
 
@@ -819,6 +865,36 @@ def train(
         return result
 
     def predict(indices, kind):
+        if static_teacher:
+            from .static_learning import StaticMeasurements
+
+            measured = StaticMeasurements(corpus.pairs)
+            actual_rows = 0
+            for pair, orientation, weight, feature, distance in corpus.evaluation_chunks(
+                indices, cfg["evaluation"]["batch_size"]
+            ):
+                charge(len(pair), kind)
+                inputs = (
+                    torch.from_numpy(feature).to(device),
+                    torch.from_numpy(distance).to(device),
+                    torch.ones(len(pair), dtype=torch.long, device=device),
+                )
+                tick = time.monotonic()
+                result = model(*inputs)
+                sync()
+                phase_seconds["inference"] += time.monotonic() - tick
+                values = result.cpu().numpy()
+                completed_forward_rows[kind] += len(pair)
+                actual_rows += len(pair)
+                from .public_features import input_records
+
+                stock = input_records(corpus.pairs["key"][pair])["geometry"]["stocks"].sum(axis=1)
+                measured.add(pair, values, corpus.values[pair, orientation], weight, stock)
+            return {
+                **measured.result(),
+                "actual_logical_rows": actual_rows,
+                "expanded_orientation_observations": 2 * len(indices),
+            }
         values = mapped_values(len(indices))
         for first in range(0, len(indices), cfg["evaluation"]["batch_size"]):
             sub = indices[first : first + cfg["evaluation"]["batch_size"]]
@@ -835,6 +911,8 @@ def train(
         return values
 
     def summarize(indices, values):
+        if static_teacher:
+            return values
         if step_score:
             from .step_measurements import measurements as step_measurements
 
@@ -961,7 +1039,12 @@ def train(
                 "probability": cfg["training"]["reflection_probability"],
                 "seed": cfg["training"]["reflection_seed"],
                 "train_only": True,
-                "validation_original": True,
+                "validation_original": not static_teacher,
+                "static_teacher_validation": (
+                    "full original multiplicity with equal actual trueLR orientations"
+                    if static_teacher
+                    else None
+                ),
             },
             "fixed_diagnostic_steps": None if unbounded else sorted(diagnostic_steps),
             "checkpoint_steps": sorted(checkpoint_steps),
@@ -1000,6 +1083,17 @@ def train(
                 "dataset_sha": binding["dataset_sha"],
                 "position": position(),
                 "optimizer": optimizer.state_dict(),
+                **(
+                    {
+                        "static_RNG": {
+                            "index_torch_state": generator.get_state(),
+                            "reflection_numpy_state": supply.generator.bit_generator.state,
+                            "ordered_index_mask_sha256": corpus.training_stream.hexdigest(),
+                        }
+                    }
+                    if static_teacher
+                    else {}
+                ),
             },
             output / (name + ".pt"),
         )
@@ -1046,7 +1140,22 @@ def train(
                     if cfg["evaluation"]["monitor"] == "row"
                     else "target_game_equal_mse"
                 ]
-                if cfg["evaluation"]["early_stopping_unit"] == "epoch":
+                if static_teacher:
+                    _, stop = stopper.observe(loss)
+                    stop = stop and training_seen >= 8 * len(ix_train)
+                    improved = loss < best_loss
+                    panel = record["train"]["target_mse"]
+                    if static_progress["initial_Tpanel_mse"] is None:
+                        static_progress["initial_Tpanel_mse"] = panel
+                    previous = static_progress["minimum_observed_Tpanel_mse"]
+                    static_progress["minimum_observed_Tpanel_mse"] = (
+                        panel if previous is None else min(previous, panel)
+                    )
+                    static_progress["parameters_changed"] |= any(
+                        not torch.equal(value.detach().cpu(), initial_state[name])
+                        for name, value in model.state_dict().items()
+                    )
+                elif cfg["evaluation"]["early_stopping_unit"] == "epoch":
                     boundary = training_seen > 0 and training_seen % len(ix_train) == 0
                     if step == 0 or boundary:
                         _, stop = stopper.observe(loss)
@@ -1072,14 +1181,15 @@ def train(
                 curve.append(curve_summary(record, "full_selector"))
                 last_completed_point = {"kind": "full_selector", **position()}
                 append_record(observation_log, {"kind": "full_selector", **record})
-                for indices, values, diagnostic_indices in (
-                    (current_train_eval, ptrain, diag_train),
-                    (ix_validation, pval, diag_val),
-                ):
-                    positions = np.searchsorted(indices, diagnostic_indices)
-                    for i, at in zip(diagnostic_indices, positions):
-                        if at < len(indices) and indices[at] == i:
-                            reused[int(i)] = float(values[at])
+                if not static_teacher:
+                    for indices, values, diagnostic_indices in (
+                        (current_train_eval, ptrain, diag_train),
+                        (ix_validation, pval, diag_val),
+                    ):
+                        positions = np.searchsorted(indices, diagnostic_indices)
+                        for i, at in zip(diagnostic_indices, positions):
+                            if at < len(indices) and indices[at] == i:
+                                reused[int(i)] = float(values[at])
                 if scheduled:
                     write_values(
                         ptrain, output / f"train-step{step}.f32", cfg["evaluation"]["batch_size"]
@@ -1134,6 +1244,32 @@ def train(
 
         phase_seconds["logging"] += time.monotonic() - tick
 
+    def static_learning_summary():
+        if not static_teacher:
+            return None
+        from .static_learning import adequate_learning
+
+        initial = static_progress["initial_Tpanel_mse"]
+        minimum = static_progress["minimum_observed_Tpanel_mse"]
+        adequate = initial is not None and adequate_learning(
+            initial, minimum, static_progress["parameters_changed"]
+        )
+        return {
+            **static_progress,
+            "adequate_learning": adequate,
+            "horizon": "NOT_CONVERGED/NEEDED_WORK" if status == "COMPLETED" else status,
+            "minimum_completed_draws": 8 * len(ix_train),
+            "maximum_draws": 32 * len(ix_train),
+            "completed_draws": training_seen,
+            "stopping_significant_reference": stopper.best,
+            "significant_stale_checkpoints": stopper.stale,
+            "endpoint_actual_minimum_full_precision_V_MSE": best_loss,
+            "sufficiency": bool(
+                adequate and training_seen >= 8 * len(ix_train) and status == "EARLY_STOPPED"
+            ),
+            "claim": "operational finite curve criterion, never global objective optimum",
+        }
+
     def persist():
         tick = time.monotonic()
         failures = []
@@ -1156,7 +1292,16 @@ def train(
             failures,
         )
         count_encoding = None
-        if compact:
+        if static_teacher:
+            _attempt_finalization(
+                "static executed orientations",
+                lambda: write(
+                    output / "static-exposure.json",
+                    corpus.save_exposure(output / "executed-orientations.u32"),
+                ),
+                failures,
+            )
+        elif compact:
             count_encoding = _attempt_finalization(
                 "sampling-counts.npz",
                 lambda: write_sampling_counts(
@@ -1181,8 +1326,12 @@ def train(
                     "attempted_row_counts": None if compact else attempted_rows,
                     "training_row_min_visits": int(sampled_rows[ix_train].min()),
                     "training_row_max_visits": int(sampled_rows[ix_train].max()),
-                    "compact_counts_file": "sampling-counts.npz" if compact else None,
-                    "compact_counts_schema": "quoridor-visit-counts-v2" if compact else None,
+                    "compact_counts_file": "executed-orientations.u32"
+                    if static_teacher
+                    else ("sampling-counts.npz" if compact else None),
+                    "compact_counts_schema": "quoridor-static-executed-orientations-u32-v1"
+                    if static_teacher
+                    else ("quoridor-visit-counts-v2" if compact else None),
                     "compact_training_index_encoding": count_encoding if compact else None,
                     "family_counts": {
                         family: int(sampled_rows[group].sum())
@@ -1218,6 +1367,7 @@ def train(
                 output / "run-status.json",
                 {
                     "status": status,
+                    "static_learning": static_learning_summary(),
                     "fault": fault,
                     **position(),
                     "attempted_step": attempted_step,
@@ -1286,7 +1436,11 @@ def train(
             else:
                 for step in update_steps(cfg["training"]["steps"]):
                     attempted_step = step
-                    n = epoch_sampler.next_batch_size if epoch_sampler else batch_size
+                    n = (
+                        min(batch_size, 32 * len(ix_train) - training_seen)
+                        if static_teacher
+                        else (epoch_sampler.next_batch_size if epoch_sampler else batch_size)
+                    )
                     if (
                         cfg["limits"]["samples"] is not None
                         and samples + n > cfg["limits"]["samples"]
@@ -1309,7 +1463,7 @@ def train(
                         ]
                     else:
                         index = ix_train[
-                            torch.randint(len(ix_train), (batch_size,), generator=generator).numpy()
+                            torch.randint(len(ix_train), (n,), generator=generator).numpy()
                         ]
                     np.add.at(attempted_rows, index, 1)
                     planned_seen = training_seen + len(index)
@@ -1343,6 +1497,8 @@ def train(
                     sync()
                     phase_seconds["inference"] += time.monotonic() - tick
                     completed_forward_rows["train"] += len(index)
+                    if static_teacher:
+                        corpus.completed_training_forward()
                     per_row_loss = torch.nn.functional.mse_loss(
                         prediction,
                         training_payload[0]
@@ -1481,6 +1637,8 @@ def train(
             if model_state_status == "LAST_COMPLETED_UPDATE":
                 actions.append(("last_checkpoint", lambda: save_named_checkpoint("last")))
             actions.append(("persist", persist))
+            if static_teacher and primary_error is not None:
+                actions.append(("static_corpus_close", corpus.close))
             _finalize_training(
                 output,
                 actions,
@@ -1567,6 +1725,8 @@ def train(
         }
     write(output / "freeze.json", freeze)
     persist()
+    if static_teacher:
+        corpus.close()
     return freeze
 
 
@@ -1852,6 +2012,9 @@ def write_values(values, path, size):
 def training_statistics(corpus, indices, column, size=4096):
     import numpy as np
 
+    if getattr(corpus, "static_teacher", False):
+        return corpus.statistics(), {"a": 0.0, "b": 8.0}
+
     def metadata_chunks():
         for first in range(0, len(indices), size):
             sub = indices[first : first + size]
@@ -1916,9 +2079,7 @@ def verify_native_parameters(path, state):
         values = state[key].detach().cpu().numpy().reshape(-1)
         for first in range(0, len(values), 4096):
             part = values[first : first + 4096]
-            if not np.array_equal(
-                part, native[offset + first : offset + first + len(part)]
-            ):
+            if not np.array_equal(part, native[offset + first : offset + first + len(part)]):
                 raise ValueError("frozen checkpoint/native parameters differ")
         offset += len(values)
     if offset != len(native):

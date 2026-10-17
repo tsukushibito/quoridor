@@ -474,6 +474,13 @@ def load(path, allow_test=False):
         from .compact_cache import CompactCorpus
 
         return CompactCorpus(path, allow_test)
+    if (
+        manifest.is_file()
+        and json.loads(manifest.read_text()).get("schema") == "quoridor-public-static-teacher-v1"
+    ):
+        from .static_public_corpus import StaticTeacherCorpus
+
+        return StaticTeacherCorpus(path, allow_test)
     # Exact uniqueness uses a bounded-cache temporary index rather than a corpus-size ID set.
     with tempfile.TemporaryDirectory(prefix="quoridor-corpus-index-") as temporary:
         connection = sqlite3.connect(str(Path(temporary) / "identities.sqlite"))

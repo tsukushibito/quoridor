@@ -159,7 +159,7 @@ class PackedSupply:
         tick = time.perf_counter()
         n = len(index)
         features, distances, target, weights = payload_views(slot["numpy"], n)
-        self.corpus.batch_into(
+        actual_targets = self.corpus.batch_into(
             index,
             mask,
             features,
@@ -167,7 +167,18 @@ class PackedSupply:
             records_out=slot["records"][:n],
             workspace=slot["workspace"],
         )
-        target[:] = self.corpus.labels[index, self.column] * self.target_scale
+        if not getattr(self.corpus, "static_teacher", False):
+            target[:] = self.corpus.labels[index, self.column] * self.target_scale
+        else:
+            if (
+                actual_targets is None
+                or actual_targets.shape != (n, 1)
+                or self.column != 0
+                or actual_targets.dtype != np.float32
+                or not np.isfinite(actual_targets).all()
+            ):
+                raise ValueError("actual supplied orientation target shape/dtype/finite")
+            target[:] = actual_targets[:, 0] * self.target_scale
         if slot["integer_host"] is not None:
             slot["integer_host"][:n].numpy()[:] = self.corpus.integer_distances[index]
         weights[:] = self.weights[index]

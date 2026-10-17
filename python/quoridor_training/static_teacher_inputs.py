@@ -27,7 +27,9 @@ class StaticInputs:
             ]
             function.restype = ctypes.c_int
 
-    def encode(self, keys):
+    def encode(self, keys, *, include_c20=True):
+        if type(include_c20) is not bool:
+            raise ValueError("explicit C20 encoder selection")
         keys = np.asarray(keys)
         if keys.ndim != 1 or keys.dtype != np.dtype("V28") or not 0 < len(keys) <= self.batch_rows:
             raise ValueError("bounded exact native input keys")
@@ -43,6 +45,8 @@ class StaticInputs:
         )
         if code != 0 or np.any(status != 0) or not np.isfinite(sigma).all():
             raise ValueError("core board/distance input qualification failed before C20")
+        if not include_c20:
+            return sigma, None
         c20 = np.empty((len(keys), 20, 9, 9), dtype=np.float32)
         status.fill(255)
         # pointer still names the SAME owned contiguous key bytes; no alternate
