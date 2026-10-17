@@ -5,6 +5,7 @@ Model/optimizer definitions live in this package.
 """
 
 import argparse
+import copy
 import gzip
 import csv
 import hashlib
@@ -454,12 +455,15 @@ def train(
     device = configure_framework(cfg)
     corpus = load(cache)
     static_teacher = getattr(corpus, "static_teacher", False)
+    continuation_input = None
     if static_teacher:
         from .static_learning import validate_recipe
 
-        validate_recipe(cfg, corpus.counts["train"], corpus.counts["validation"])
         if input_binding is None:
             raise ValueError("static teacher requires bound common fresh initialization/normalizer")
+        continuation_input = json.loads(Path(input_binding).read_text()).get("static_continuation")
+        if continuation_input is None:
+            validate_recipe(cfg, corpus.counts["train"], corpus.counts["validation"])
     binding, rows, labels = (corpus.binding, corpus.rows, corpus.labels)
     target = cfg["training"]["target"]
 
@@ -598,7 +602,7 @@ def train(
     if step_score:
         distance_fit = {"a": 0, "b": 1, "units": "integer-wall-distance-steps"}
     model = build_model(cfg["model"], statistics).to(device)
-    if static_teacher:
+    if static_teacher and continuation_input is None:
         common_initial = json.loads(bound_file_bytes(expected["common_initial"], 65536))
         if (
             common_initial["input_classes"] != corpus.input_ref
@@ -635,7 +639,7 @@ def train(
     scheduler = None
     if cfg["training"]["scheduler"] == "cosine":
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, cfg["training"]["steps"])
-    elif cfg["training"]["scheduler"] == "plateau":
+    elif cfg["training"]["scheduler"] == "plateau" and continuation_input is None:
         scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
             optimizer,
             mode="min",
@@ -812,6 +816,67 @@ def train(
     last_completed_point = None
     measurement_sets, reference_metrics = ({}, {})
 
+    continuation = None
+    continuation_start = None
+    continuation_observation = None
+    best_continuation_ref = None
+    if continuation_input is not None:
+        from .static_learning import (
+            read_static_continuation,
+            StaticContinuation,
+            static_checkpoint_ref,
+        )
+
+        if (
+            expected.get("reused_initial_observation") is not None
+            or expected.get("common_initial") is not None
+        ):
+            raise ValueError(
+                "continuation is not common fresh INITIAL or INITIAL measurement reuse"
+            )
+        if continuation_input != expected.get("static_continuation"):
+            raise ValueError("continuation binding changed during entry")
+        continuation_start = read_static_continuation(
+            continuation_input, cfg, corpus, statistics, train_eval, evaluation_validation
+        )
+        checkpoint = continuation_start["checkpoint"]
+        model.load_state_dict(checkpoint["model"])
+        initial_state = {
+            key: value.detach().cpu().clone() for key, value in model.state_dict().items()
+        }
+        if (
+            continuation_start["optimizer_mode"] == "matching"
+            or continuation_start["previous_steps"]
+        ):
+            optimizer.load_state_dict(checkpoint["optimizer"])
+            generator.set_state(checkpoint["static_RNG"]["index_torch_state"])
+            supply.generator.bit_generator.state = checkpoint["static_RNG"][
+                "reflection_numpy_state"
+            ]
+        continuation = StaticContinuation(
+            len(ix_train),
+            continuation_start["baseline"],
+            state=continuation_start["policy_state"],
+        )
+        for group in optimizer.param_groups:
+            group["lr"] = continuation.state["lr"]
+        selected = continuation_start["selected_best"]
+        best_state = {
+            key: value.clone()
+            for key, value in continuation_start["selected_best_checkpoint"]["model"].items()
+        }
+        best_loss, best_step, best_exposure = selected["loss"], 0, selected["position"]
+        best_continuation_ref = selected
+        continuation_observation = copy.deepcopy(continuation_start["baseline"])
+        continuation_observation["historical_observation_position"] = {
+            key: continuation_observation[key] for key in ("step", "training_seen")
+        }
+        continuation_observation.update(
+            step=0, training_seen=0, kind="continuation_baseline", new_forward_rows=0
+        )
+        static_progress["initial_Tpanel_mse"] = continuation_observation["train"]["target_mse"]
+        static_progress["minimum_observed_Tpanel_mse"] = static_progress["initial_Tpanel_mse"]
+
     reused_initial = None
     if static_teacher and expected.get("reused_initial_observation") is not None:
         from .static_learning import read_initial_observation
@@ -827,8 +892,38 @@ def train(
         # Current forward counters below continue to count new executions only.
         samples += reused_initial["prior_logical_rows"]
 
+    continuation_exposure = None
+    if continuation_start and continuation_start["checkpoint"].get("static_continuation"):
+        from .static_learning import restore_static_exposure
+
+        continuation_exposure = restore_static_exposure(
+            corpus, continuation_start["checkpoint"]["static_continuation"]["exposure"]
+        )
+        if Path(
+            continuation_input.get("exposure_counter_path", output / "executed-orientations.u32")
+        ).resolve() != Path(continuation_exposure["ref"]["path"]):
+            raise ValueError(
+                "reuse the same canonical rolling counter path; no duplicate counter payload"
+            )
+
     def position():
-        return {"step": completed_step, **exposure(training_seen, len(ix_train), mode)}
+        result = {"step": completed_step, **exposure(training_seen, len(ix_train), mode)}
+        if continuation is not None:
+            phase_steps = continuation_start["previous_steps"] + completed_step
+            phase_draws = continuation_start["previous_draws"] + training_seen
+            result["continuation"] = dict(
+                phase_steps=phase_steps,
+                phase_draws=phase_draws,
+                branch_step=continuation_start["origin_position"]["step"] + phase_steps,
+                branch_draws=continuation_start["origin_position"]["training_seen"] + phase_draws,
+                old_executed=continuation_start["old_executed"],
+                prior_continuation_logical_rows=continuation_start["previous_rows"],
+                new_block_logical_rows=samples,
+                cumulative_actual_logical_rows=continuation_start["old_executed"]["logical_rows"]
+                + continuation_start["previous_rows"]
+                + samples,
+            )
+        return result
 
     def sync():
         if device == "cuda":
@@ -1093,42 +1188,89 @@ def train(
         export(model, cfg, statistics, distance_fit, output / f"step{step}-model")
         phase_seconds["export"] += time.monotonic() - tick
 
-    def save_named_checkpoint(name):
+    def save_named_checkpoint(name, *, export_model=True):
         """Overwrite the three maintained names; never save a checkpoint per curve point."""
         tick = time.monotonic()
         state = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
-        torch.save(
-            {
-                "model": state,
-                "model_config": cfg["model"],
-                "scale": statistics,
-                "target": target,
-                "dataset_sha": binding["dataset_sha"],
-                "position": position(),
-                "optimizer": optimizer.state_dict(),
-                **(
-                    {
-                        "static_RNG": {
-                            "index_torch_state": generator.get_state(),
-                            "reflection_numpy_state": supply.generator.bit_generator.state,
-                            "ordered_index_mask_sha256": corpus.training_stream.hexdigest(),
-                        }
+        payload = {
+            "model": state,
+            "model_config": cfg["model"],
+            "scale": statistics,
+            "target": target,
+            "dataset_sha": binding["dataset_sha"],
+            "position": position(),
+            "optimizer": optimizer.state_dict(),
+            **(
+                {
+                    "static_RNG": {
+                        "index_torch_state": generator.get_state(),
+                        "reflection_numpy_state": supply.generator.bit_generator.state,
+                        "ordered_index_mask_sha256": corpus.training_stream.hexdigest(),
                     }
-                    if static_teacher
-                    else {}
+                }
+                if static_teacher
+                else {}
+            ),
+        }
+        if continuation is not None:
+            payload["static_continuation"] = dict(
+                identity=continuation_start["identity"],
+                optimizer_mode=continuation_start["optimizer_mode"],
+                policy=copy.deepcopy(continuation.state),
+                old_executed=continuation_start["old_executed"],
+                origin_position=continuation_start["origin_position"],
+                phase_draws=continuation_start["previous_draws"] + training_seen,
+                phase_steps=continuation_start["previous_steps"] + completed_step,
+                phase_logical_rows=continuation_start["previous_rows"] + samples,
+                last_observation=continuation_observation,
+                evaluation_complete_for_position=continuation_observation is not None
+                and continuation_observation["step"] == completed_step,
+                selected_best=None if name == "best" else best_continuation_ref,
+                previous_stream_sha256=checkpoint.get("static_RNG", {}).get(
+                    "ordered_index_mask_sha256"
                 ),
-            },
-            output / (name + ".pt"),
-        )
-        export(model, cfg, statistics, distance_fit, output / (name + "-model"))
+                current_block_stream_sha256=corpus.training_stream.hexdigest(),
+                exposure=continuation_exposure,
+                stream_scope="previous checkpoint prefix digest + current block digest; not a restored hashlib object",
+            )
+            serialized = io.BytesIO()
+            torch.save(payload, serialized)
+            data = serialized.getvalue()
+            if len(data) > 512 * 1024:
+                raise ValueError(
+                    "continuation state frame exceeds fixed512KiB; no counter embedding"
+                )
+            temporary = output / (name + ".pt.partial")
+            with temporary.open("wb") as stream:
+                stream.write(data)
+                stream.flush()
+                os.fsync(stream.fileno())
+            os.replace(temporary, output / (name + ".pt"))
+        else:
+            torch.save(payload, output / (name + ".pt"))
+        if export_model:
+            export(model, cfg, statistics, distance_fit, output / (name + "-model"))
         checkpoint_positions[name] = position()
         phase_seconds["export"] += time.monotonic() - tick
 
-    first_static_progress_sent = False
+    first_static_progress_sent = bool(continuation_start and continuation_start["previous_draws"])
+
+    def save_static_exposure():
+        nonlocal continuation_exposure
+        if continuation_exposure is None or continuation_exposure["rows"] != corpus.executed_rows:
+            counter_path = Path(
+                continuation_input.get(
+                    "exposure_counter_path", output / "executed-orientations.u32"
+                )
+            )
+            continuation_exposure = corpus.save_exposure(counter_path)
+            continuation_exposure["ref"] = static_checkpoint_ref(counter_path)
+        return continuation_exposure
 
     def evaluate(step, selector, diagnostic, full_train=False):
         nonlocal best_step, best_loss, best_state, best_exposure, last_completed_point
         nonlocal first_static_progress_sent
+        nonlocal continuation_observation, best_continuation_ref
         tick = time.monotonic()
         model.eval()
         reused = {}
@@ -1171,8 +1313,23 @@ def train(
                     else "target_game_equal_mse"
                 ]
                 if static_teacher:
-                    _, stop = stopper.observe(loss)
-                    stop = stop and training_seen >= 8 * len(ix_train)
+                    if continuation is not None:
+                        update_lr = [group["lr"] for group in optimizer.param_groups]
+                        decision = continuation.observe(
+                            loss,
+                            record["train"]["target_mse"],
+                            continuation_start["previous_draws"] + training_seen,
+                        )
+                        for group in optimizer.param_groups:
+                            group["lr"] = decision["next_lr"]
+                        record["update_lr_used"] = update_lr
+                        record["post_V_next_lr"] = [group["lr"] for group in optimizer.param_groups]
+                        record["continuation_policy"] = decision
+                        record["lr"] = update_lr
+                        stop = decision["stop"]
+                    else:
+                        _, stop = stopper.observe(loss)
+                        stop = stop and training_seen >= 8 * len(ix_train)
                     improved = loss < best_loss
                     panel = record["train"]["target_mse"]
                     if static_progress["initial_Tpanel_mse"] is None:
@@ -1205,12 +1362,34 @@ def train(
                         k: v.detach().cpu().clone() for k, v in model.state_dict().items()
                     }
                     best_exposure = position()
+                    if continuation is not None:
+                        continuation_observation = curve_summary(record, "full_selector")
                     save_named_checkpoint("best")
+                    if continuation is not None:
+                        best_continuation_ref = dict(
+                            checkpoint=static_checkpoint_ref(output / "best.pt"),
+                            weights=static_checkpoint_ref(output / "best-model/weights.f32"),
+                            loss=best_loss,
+                            position=best_exposure,
+                        )
+                if continuation is not None:
+                    continuation_observation = curve_summary(record, "full_selector")
+                    phase_step = continuation_start["previous_steps"] + completed_step
+                    if phase_step in {
+                        math.ceil(k * 16 * len(ix_train) / batch_size) for k in range(1, 17)
+                    }:
+                        save_static_exposure()
                 save_named_checkpoint("last")
-                record["lr"] = [group["lr"] for group in optimizer.param_groups]
+                if continuation is None:
+                    record["lr"] = [group["lr"] for group in optimizer.param_groups]
                 curve.append(curve_summary(record, "full_selector"))
                 last_completed_point = {"kind": "full_selector", **position()}
                 append_record(observation_log, {"kind": "full_selector", **record})
+                if continuation is not None:
+                    phase_step = continuation_start["previous_steps"] + completed_step
+                    for block in range(1, 17):
+                        if phase_step == math.ceil(block * 16 * len(ix_train) / batch_size):
+                            save_named_checkpoint(f"block{block:02d}", export_model=False)
                 if not static_teacher:
                     for indices, values, diagnostic_indices in (
                         (current_train_eval, ptrain, diag_train),
@@ -1278,9 +1457,26 @@ def train(
                     device=device,
                     batch_size=batch_size,
                     maximum_updates=cfg["training"]["steps"],
-                    minimum_training_draws=8 * len(ix_train),
-                    maximum_training_draws=32 * len(ix_train),
-                    initial_weights_sha=expected["initial_weights_sha"],
+                    **(
+                        dict(
+                            continuation_recovery={
+                                name: continuation_input[name] for name in ("checkpoint", "weights")
+                            },
+                            continuation_ledger=position()["continuation"],
+                            maximum_phase_updates=math.ceil(256 * len(ix_train) / batch_size),
+                            maximum_training_draws=256 * len(ix_train),
+                            minimum_floor_training_draws=8 * len(ix_train),
+                            required_floor_nonsignificant_observations=8,
+                            floor_stop_requires_both=True,
+                            continuation_policy=copy.deepcopy(continuation.state),
+                        )
+                        if continuation is not None
+                        else dict(
+                            minimum_training_draws=8 * len(ix_train),
+                            maximum_training_draws=32 * len(ix_train),
+                            initial_weights_sha=expected["initial_weights_sha"],
+                        )
+                    ),
                     input_classes=corpus.input_ref,
                     persisted_curves=str(output / "curves.jsonl.gz"),
                     nested_clocks_not_summed=True,
@@ -1304,6 +1500,17 @@ def train(
     def static_learning_summary():
         if not static_teacher:
             return None
+        if continuation is not None:
+            return dict(
+                kind="static_teacher_low_lr_continuation",
+                **copy.deepcopy(continuation.state),
+                block_completed_draws=training_seen,
+                block_maximum_draws=256 * len(ix_train),
+                selected_minimum_fullV_MSE=best_loss,
+                practical_plateau=continuation.state["verdict"] == "PRACTICAL_V_PLATEAU",
+                global_optimum_guarantee=False,
+                whole_historical_actual_ledger=position()["continuation"],
+            )
         from .static_learning import adequate_learning
 
         initial = static_progress["initial_Tpanel_mse"]
@@ -1341,9 +1548,13 @@ def train(
                     "record_status": "COMPLETED",
                     "field": "gradient_norm",
                     "completed_records": batch_records_logged,
-                    "logging": "observed diagnostics/epoch boundaries only"
-                    if unbounded
-                    else "every update",
+                    "logging": "normal full-V boundary updates only; every update counted in state/ledgers"
+                    if continuation is not None
+                    else (
+                        "observed diagnostics/epoch boundaries only"
+                        if unbounded
+                        else "every update"
+                    ),
                 },
             ),
             failures,
@@ -1354,7 +1565,9 @@ def train(
                 "static executed orientations",
                 lambda: write(
                     output / "static-exposure.json",
-                    corpus.save_exposure(output / "executed-orientations.u32"),
+                    save_static_exposure()
+                    if continuation is not None
+                    else corpus.save_exposure(output / "executed-orientations.u32"),
                 ),
                 failures,
             )
@@ -1489,21 +1702,50 @@ def train(
                     target_scale=target_scale,
                 )
             phase_seconds["initialization"] += time.monotonic() - supply_started
-            save_named_checkpoint("initial")
-            if compact and input_binding is not None:
+            if continuation is None:
+                save_named_checkpoint("initial")
+            if compact and input_binding is not None and continuation is None:
                 verify_initial_binding(expected, output / "initial-model" / "weights.f32")
+            if continuation is not None:
+                # Until a new strict BEST, keep the actual old artifact references shared.
+                checkpoint_positions["best"] = best_exposure
             save_named_checkpoint("last")
             if unbounded:
                 evaluation_steps.add(0)
                 if cfg["evaluation"]["diagnostic_rows"]:
                     diagnostic_steps.add(0)
-            if evaluate(0, True, 0 in diagnostic_steps):
+            if continuation is not None:
+                baseline_record = copy.deepcopy(continuation_observation)
+                baseline_record["historical_source_samples"] = baseline_record.get("samples")
+                baseline_record.update(
+                    **position(),
+                    kind="continuation_baseline",
+                    used_for_selection=False,
+                    new_forward_rows=0,
+                    samples=samples,
+                    validation_forward_rows=0,
+                )
+                for scope in ("train", "validation"):
+                    measured = baseline_record[scope]
+                    measured["reused_successful_logical_rows"] = measured["actual_logical_rows"]
+                    measured["actual_logical_rows"] = 0
+                append_record(observation_log, baseline_record)
+                curve.append(baseline_record)
+                last_completed_point = {"kind": "continuation_baseline", **position()}
+            if continuation is None and evaluate(0, True, 0 in diagnostic_steps):
                 status = "EARLY_STOPPED"
             else:
                 for step in update_steps(cfg["training"]["steps"]):
                     attempted_step = step
                     n = (
-                        min(batch_size, 32 * len(ix_train) - training_seen)
+                        min(
+                            batch_size,
+                            256 * len(ix_train)
+                            - continuation_start["previous_draws"]
+                            - training_seen,
+                        )
+                        if continuation is not None
+                        else min(batch_size, 32 * len(ix_train) - training_seen)
                         if static_teacher
                         else (epoch_sampler.next_batch_size if epoch_sampler else batch_size)
                     )
@@ -1541,7 +1783,11 @@ def train(
                     diagnostic_point = diagnostic_point and bool(
                         cfg["evaluation"]["diagnostic_rows"]
                     )
-                    record_update = not unbounded or selector_point or diagnostic_point
+                    record_update = (
+                        (selector_point or diagnostic_point)
+                        if continuation is not None
+                        else (not unbounded or selector_point or diagnostic_point)
+                    )
                     if record_update:
                         append_record(
                             batch_log,
@@ -1601,7 +1847,7 @@ def train(
                         if record_update
                         else None
                     )
-                    if step <= cfg["training"]["warmup_steps"]:
+                    if continuation is None and step <= cfg["training"]["warmup_steps"]:
                         for group in optimizer.param_groups:
                             group["lr"] = (
                                 cfg["optimizer"]["lr"] * step / cfg["training"]["warmup_steps"]
@@ -1616,6 +1862,14 @@ def train(
                     training_seen += len(index)
                     np.add.at(sampled_rows, index, 1)
                     model_state_status = "LAST_COMPLETED_UPDATE"
+                    if (
+                        continuation is not None
+                        and lr[0] == 0.000001
+                        and continuation.state["floor_first_update"] is None
+                    ):
+                        continuation.state["floor_first_update"] = (
+                            continuation_start["previous_steps"] + completed_step
+                        )
                     if scheduler is not None and cfg["training"]["scheduler"] == "cosine":
                         scheduler.step()
                     phase_seconds["update"] += time.monotonic() - tick
@@ -1648,7 +1902,11 @@ def train(
                         if diagnostic_point:
                             diagnostic_steps.add(step)
                         if evaluate(step, selector_point, diagnostic_point, full_train_point):
-                            status = "EARLY_STOPPED"
+                            status = (
+                                continuation.state["verdict"]
+                                if continuation is not None
+                                else "EARLY_STOPPED"
+                            )
                             break
                     if not (selector_point or diagnostic_point) and step in checkpoint_steps:
                         save_checkpoint(step)
@@ -1700,6 +1958,8 @@ def train(
             actions = []
             if packed_supply is not None:
                 actions.append(("supply_cleanup", packed_supply.close))
+            if continuation is not None:
+                actions.append(("rolling_static_exposure", save_static_exposure))
             if model_state_status == "LAST_COMPLETED_UPDATE":
                 actions.append(("last_checkpoint", lambda: save_named_checkpoint("last")))
             actions.append(("persist", persist))
@@ -1761,9 +2021,31 @@ def train(
             after.remove()
             phase_seconds["export"] += time.monotonic() - tick
             persist()
+    frozen_names = (
+        FROZEN_ARTIFACTS
+        if continuation is None
+        else tuple(
+            name
+            for name in FROZEN_ARTIFACTS
+            if not name.startswith("initial") and (output / name).exists()
+        )
+        + (
+            "last.pt",
+            "last-model/manifest.json",
+            "last-model/weights.f32",
+            "last-model/training-target.json",
+        )
+    )
+    selected_model_path = (
+        output / "best-model"
+        if continuation is None
+        else Path(best_continuation_ref["weights"]["path"]).parent
+    )
     freeze = {
-        "schema": "quoridor-candidate-freeze-v2",
-        "artifacts_sha256": {name: sha(output / name) for name in FROZEN_ARTIFACTS + (())},
+        "schema": "quoridor-candidate-freeze-v2"
+        if continuation is None
+        else "quoridor-static-continuation-freeze-v1",
+        "artifacts_sha256": {name: sha(output / name) for name in frozen_names},
         "best_step": best_step,
         "best_validation_mse": best_loss,
         "selected_exposure": best_exposure,
@@ -1773,14 +2055,29 @@ def train(
         "loss_weighting": cfg["training"]["loss_weighting"],
         "artifact_mode": cfg["artifacts"]["mode"],
         "samples": samples,
-        "model_sha": sha(output / "best-model" / "manifest.json"),
-        "weights_sha": sha(output / "best-model" / "weights.f32"),
-        "initial_weights_sha": sha(output / "initial-model" / "weights.f32"),
+        "model_sha": sha(selected_model_path / "manifest.json"),
+        "weights_sha": sha(selected_model_path / "weights.f32"),
+        "initial_weights_sha": sha(output / "initial-model" / "weights.f32")
+        if continuation is None
+        else continuation_input["weights"]["sha256"],
         "dataset_sha": binding["dataset_sha"],
         "cache_schema": binding.get("schema"),
         "test_opened": False,
         "wall_seconds": time.monotonic() - start,
     }
+    if continuation is not None:
+        freeze["starting_selected_weights_sha"] = freeze.pop("initial_weights_sha")
+        freeze["initial_semantics"] = (
+            "This block's selected continuation checkpoint; never original common fresh INITIAL"
+        )
+        freeze["continuation"] = dict(
+            input=continuation_input,
+            selected_best=best_continuation_ref,
+            last_checkpoint=static_checkpoint_ref(output / "last.pt"),
+            last_weights=static_checkpoint_ref(output / "last-model/weights.f32"),
+            policy=copy.deepcopy(continuation.state),
+            ledger=position()["continuation"],
+        )
     corpus.verify_binding()
     if volume_admission is not None:
         freeze["main_volume_admission"] = {

@@ -202,6 +202,405 @@ def adequate_learning(initial_panel, observed_panel, parameter_changed):
     )
 
 
+def continuation_recipe(
+    train_rows, validation_rows, *, device, threads, optimizer_mode, phase_steps=0, phase_rows=0
+):
+    """One live phase with sixteen finite checkpoint blocks and one final tail."""
+    cfg = recipe(train_rows, validation_rows, device=device, threads=threads)
+    if optimizer_mode != "matching":
+        raise ValueError("actual selected BEST has matching Adam/RNG; a reset is not admitted")
+    maximum_steps = math.ceil(256 * train_rows / 4096)
+    if not (
+        type(phase_steps) is int
+        and 0 <= phase_steps < maximum_steps
+        and type(phase_rows) is int
+        and 0 <= phase_rows < 850000000
+    ):
+        raise ValueError("remaining phase step/logical quota required")
+    cfg["optimizer"]["lr"] = 0.0001
+    cfg["training"].update(
+        steps=maximum_steps - phase_steps,
+        scheduler="plateau",
+        warmup_steps=0,
+        lr_decay_factor=0.5,
+        lr_decay_patience=2,
+        min_lr=0.000001,
+    )
+    cfg["evaluation"].update(
+        checkpoints=sorted(
+            {
+                0,
+                *[
+                    math.ceil(k * train_rows / 4096) - phase_steps
+                    for k in range(1, 257)
+                    if math.ceil(k * train_rows / 4096) > phase_steps
+                ],
+            }
+        ),
+        early_stopping_patience=8,
+        min_delta=0.00001,
+        min_delta_relative=0.0001,
+    )
+    cfg["limits"]["samples"] = 850000000 - phase_rows
+    return cfg
+
+
+def static_checkpoint_ref(path):
+    """Bind a completed small continuation checkpoint/export for its next block."""
+    from pathlib import Path
+    import stat
+
+    path = Path(path).resolve()
+    data = path.read_bytes()
+    return dict(
+        path=str(path),
+        sha256=hashlib.sha256(data).hexdigest(),
+        bytes=len(data),
+        mode=format(stat.S_IMODE(path.stat().st_mode), "04o"),
+    )
+
+
+def restore_static_exposure(corpus, entry):
+    """Restore only the bound latest rolling new-phase counter, not the historical BEST array."""
+    from .common import bound_file_bytes
+
+    count = corpus.executed_orientations
+    data = bound_file_bytes(entry["ref"], count.nbytes)
+    values = np.frombuffer(data, dtype="<u4")
+    if (
+        len(data) != count.nbytes
+        or entry["shape"] != list(count.shape)
+        or int(values.sum(dtype=np.uint64)) != entry["rows"]
+    ):
+        raise ValueError("matching latest rolling orientation counter required")
+    if corpus.pending_training is not None or corpus.executed_rows:
+        raise ValueError("restore exposure before any new training supply")
+    count[:] = values.reshape(count.shape)
+    corpus.executed_rows = entry["rows"]
+    return copy.deepcopy(entry)
+
+
+class StaticContinuation:
+    """The concrete lowered-LR state at completed teacher-own full-V boundaries."""
+
+    def __init__(self, train_rows, baseline, *, state=None):
+        if type(train_rows) is not int or train_rows <= 0:
+            raise ValueError("positive original-observation R")
+        self.r = train_rows
+        self.state = (
+            copy.deepcopy(state)
+            if state is not None
+            else dict(
+                lr=0.0001,
+                significant_best=float(baseline["validation"]["target_mse"]),
+                strict_best=float(baseline["validation"]["target_mse"]),
+                strict_best_panel=float(baseline["train"]["target_mse"]),
+                stale_at_lr=0,
+                floor_entry_draws=None,
+                floor_first_update=None,
+                floor_draws=0,
+                floor_stale=0,
+                phase_draws=0,
+                observations=0,
+                overfit_stale=0,
+                previous_panel=float(baseline["train"]["target_mse"]),
+                verdict="NOT_CONVERGED/NEEDED_WORK",
+            )
+        )
+        if not 0.000001 <= self.state["lr"] <= 0.0001:
+            raise ValueError("continuation LR state outside fixed range")
+
+    def observe(self, loss, panel, draws):
+        """Called once after a genuinely new full-V evaluation, never for a reused baseline."""
+        s = self.state
+        if not all(math.isfinite(value) for value in (loss, panel)) or min(loss, panel) < 0:
+            raise ValueError("nonfinite/negative continuation full-V or Tpanel")
+        if draws <= s["phase_draws"]:
+            raise ValueError("one new completed full-V observation, never repeat prior draws")
+        used_lr = s["lr"]
+        if used_lr == 0.000001:
+            if s["floor_entry_draws"] is None:
+                s["floor_entry_draws"] = s["phase_draws"]
+            s["floor_draws"] += draws - s["phase_draws"]
+        delta = max(0.00001, 0.0001 * s["significant_best"])
+        significant = loss < s["significant_best"] - delta
+        strict = loss < s["strict_best"]
+        if strict:
+            s["strict_best"] = loss
+            s["strict_best_panel"] = panel
+        if significant:
+            s["significant_best"] = loss
+            s["stale_at_lr"] = s["floor_stale"] = 0
+        else:
+            s["stale_at_lr"] += 1
+            if used_lr == 0.000001:
+                s["floor_stale"] += 1
+        if used_lr > 0.000001 and s["stale_at_lr"] > 2:
+            s["lr"] = max(0.000001, used_lr * 0.5)
+            s["stale_at_lr"] = 0
+        divergence = (
+            used_lr == 0.000001
+            and loss >= s["strict_best"] + max(0.002, 0.01 * s["strict_best"])
+            and panel <= s["strict_best_panel"] - max(0.00001, 0.0001 * s["strict_best_panel"])
+        )
+        s["overfit_stale"] = s["overfit_stale"] + 1 if divergence else 0
+        if s["floor_draws"] >= 8 * self.r and s["overfit_stale"] >= 3:
+            s["verdict"] = "OVERFIT_STOP/NEEDED_WORK"
+        if (
+            s["verdict"] == "NOT_CONVERGED/NEEDED_WORK"
+            and s["floor_draws"] >= 8 * self.r
+            and s["floor_stale"] >= 8
+        ):
+            s["verdict"] = "PRACTICAL_V_PLATEAU"
+        s["phase_draws"] = draws
+        s["previous_panel"] = panel
+        s["observations"] += 1
+        return dict(
+            strict_improved=strict,
+            significant_improved=significant,
+            significant_delta=delta,
+            update_lr_used=used_lr,
+            next_lr=s["lr"],
+            stop=s["verdict"] != "NOT_CONVERGED/NEEDED_WORK",
+            **copy.deepcopy(s),
+        )
+
+
+def read_static_continuation(control, cfg, corpus, statistics, train_panel, validation):
+    """Load a bound selected checkpoint on CPU, never construct or evaluate a model."""
+    from .common import bound_file_bytes, PARAMETER_SHAPES
+
+    import torch
+
+    if control.get("schema") != "quoridor-static-continuation-input-v1":
+        raise ValueError("explicit static continuation input schema")
+    mode = control["optimizer_mode"]
+    if cfg != continuation_recipe(
+        corpus.counts["train"],
+        corpus.counts["validation"],
+        device=cfg["training"]["device"],
+        threads=cfg["training"]["threads"],
+        optimizer_mode=mode,
+        phase_steps=control.get("phase_steps", 0),
+        phase_rows=control.get("phase_rows", 0),
+    ):
+        raise ValueError("fixed lowered-LR continuation recipe differs")
+    identity = dict(
+        input_classes=corpus.input_ref,
+        teacher_values=corpus.binding["teacher_values"],
+        teacher=corpus.binding["teacher"],
+        dataset_sha=corpus.binding["dataset_sha"],
+        train_panel_sha256=observation_index_sha(train_panel),
+        validation_index_sha256=observation_index_sha(validation),
+    )
+    if (
+        len(train_panel) != min(65536, corpus.counts["train"])
+        or len(validation) != corpus.counts["validation"]
+    ):
+        raise ValueError("fixed Tpanel and whole weighted V are required")
+    if any(control.get(key) != value for key, value in identity.items()):
+        raise ValueError("continuation teacher/input/fullV/panel identity differs")
+    data = bound_file_bytes(control["checkpoint"], 1048576)
+    checkpoint = torch.load(io.BytesIO(data), map_location="cpu", weights_only=True)
+    if (
+        checkpoint["model_config"] != cfg["model"]
+        or checkpoint["scale"] != statistics
+        or checkpoint["target"] != "static_teacher"
+        or checkpoint["dataset_sha"] != corpus.binding["dataset_sha"]
+        or set(checkpoint["model"]) != set(PARAMETER_SHAPES)
+    ):
+        raise ValueError("selected checkpoint model/scale/teacher differs")
+    digest = hashlib.sha256()
+    for name, shape in PARAMETER_SHAPES.items():
+        value = checkpoint["model"][name]
+        if (
+            tuple(value.shape) != shape
+            or value.dtype != torch.float32
+            or not torch.isfinite(value).all()
+        ):
+            raise ValueError("selected continuation tensor shape/dtype/finite")
+        digest.update(value.numpy().astype("<f4").tobytes())
+    weights = bound_file_bytes(control["weights"], 49284)
+    if digest.hexdigest() != hashlib.sha256(weights).hexdigest():
+        raise ValueError("selected checkpoint differs from its exact native export")
+    prior = checkpoint.get("static_continuation")
+    if prior is not None:
+        if prior["identity"] != identity or not prior["evaluation_complete_for_position"]:
+            raise ValueError("next block requires a same-identity completed fullV checkpoint")
+        baseline = prior["last_observation"]
+        if (
+            baseline["step"] != checkpoint["position"]["step"]
+            or baseline["training_seen"] != checkpoint["position"]["training_seen"]
+            or prior["policy"]["phase_draws"] != prior["phase_draws"]
+            or prior["policy"]["verdict"] != "NOT_CONVERGED/NEEDED_WORK"
+        ):
+            raise ValueError("next block must not repeat an evaluation or resume a terminal policy")
+        old_executed = prior["old_executed"]
+        previous_draws, previous_steps, previous_rows = (
+            prior[key] for key in ("phase_draws", "phase_steps", "phase_logical_rows")
+        )
+        origin = prior["origin_position"]
+        policy_state = prior["policy"]
+        selected_best = prior["selected_best"] or dict(
+            checkpoint=control["checkpoint"],
+            weights=control["weights"],
+            loss=baseline["validation"]["target_mse"],
+            position=checkpoint["position"],
+        )
+        if prior["optimizer_mode"] != mode:
+            raise ValueError("optimizer mode changed across blocks")
+        if prior.get("exposure") is None or prior["exposure"]["rows"] != prior["phase_draws"]:
+            raise ValueError("matching rolling orientation counter required for next block")
+    else:
+        source = control["baseline"]
+        producer = json.loads(bound_file_bytes(source["producer_result"], 1048576))
+        arm = producer["arms"][corpus.binding["teacher"]]
+        frozen = json.loads(bound_file_bytes(source["freeze"], 65536))
+        with gzip.GzipFile(
+            fileobj=io.BytesIO(bound_file_bytes(source["cache_binding"], 65536))
+        ) as archive:
+            original_binding_bytes = archive.read(131073)
+        if len(original_binding_bytes) > 131072:
+            raise ValueError("bounded original teacher/cache binding")
+        original_binding = json.loads(original_binding_bytes)
+        if (
+            producer["status"] != "TWO_ORIGINAL_FITS_COMPLETE_FIXED_HORIZON_NOT_CONVERGED"
+            or arm["curves"] != source["curves"]
+            or arm["status"] != source["run_status"]
+            or arm["freeze"] != source["freeze"]
+            or arm["models"]["best"]["weights"] != control["weights"]
+            or frozen["artifacts_sha256"]["best.pt"] != control["checkpoint"]["sha256"]
+            or frozen["artifacts_sha256"]["cache-binding.json.gz"]
+            != source["cache_binding"]["sha256"]
+            or frozen["weights_sha"] != control["weights"]["sha256"]
+            or frozen["dataset_sha"] != checkpoint["dataset_sha"]
+            or frozen["best_step"] != checkpoint["position"]["step"]
+            or frozen["selected_exposure"]["training_seen"]
+            != checkpoint["position"]["training_seen"]
+            or original_binding != corpus.binding
+        ):
+            raise ValueError(
+                "selected BEST/producer/teacher-bank/dataset/metric custody tuple differs"
+            )
+        old_status = json.loads(bound_file_bytes(source["run_status"], 65536))
+        panel = json.loads(bound_file_bytes(source["diagnostic_subsets"], 2097152))
+        if (
+            observation_index_sha(panel["train"]) != identity["train_panel_sha256"]
+            or panel["dataset_sha"] != corpus.binding["dataset_sha"]
+        ):
+            raise ValueError("selected old diagnostic panel differs")
+        with gzip.GzipFile(
+            fileobj=io.BytesIO(bound_file_bytes(source["curves"], 262144))
+        ) as archive:
+            raw = archive.read(4194305)
+        if len(raw) > 4194304:
+            raise ValueError("bounded old selected curve metadata")
+        matches = [json.loads(line) for line in raw.splitlines() if line]
+        matches = [row for row in matches if row["step"] == checkpoint["position"]["step"]]
+        if len(matches) != 1:
+            raise ValueError("one exact selected checkpoint fullV observation required")
+        baseline = matches[0]
+        if (
+            baseline["training_seen"] != checkpoint["position"]["training_seen"]
+            or baseline["validation"]["rows"] != corpus.counts["validation"]
+            or baseline["train"]["rows"] != len(train_panel)
+            or baseline["validation"].get("group_kind") != "exact trueLR input class"
+            or baseline["validation"].get("actual_logical_rows", 0) <= 0
+            or baseline["validation"]["target_mse"] != frozen["best_validation_mse"]
+            or old_status["status"] != "COMPLETED"
+            or old_status["model_state_status"] != "LAST_COMPLETED_UPDATE"
+        ):
+            raise ValueError("actual selected fullV/panel scope and historical status required")
+        old_executed = dict(
+            logical_rows=old_status["samples"],
+            draws=old_status["training_seen"],
+            steps=old_status["step"],
+        )
+        previous_draws = previous_steps = previous_rows = 0
+        origin = checkpoint["position"]
+        policy_state = None
+        selected_best = dict(
+            checkpoint=control["checkpoint"],
+            weights=control["weights"],
+            loss=baseline["validation"]["target_mse"],
+            position=origin,
+        )
+    if (previous_steps, previous_rows) != (
+        control.get("phase_steps", 0),
+        control.get("phase_rows", 0),
+    ):
+        raise ValueError("declared remaining phase/quota differs from actual saved state")
+    matching = "optimizer" in checkpoint and "static_RNG" in checkpoint
+    if mode == "matching":
+        if not matching:
+            raise ValueError(
+                "matching Adam/index/reflection RNG missing; no implicit fresh fallback"
+            )
+        states = checkpoint["optimizer"]["state"]
+        branch_steps = origin["step"] + previous_steps
+        groups = checkpoint["optimizer"]["param_groups"]
+        if (
+            len(states) != 6
+            or len(groups) != 1
+            or groups[0]["params"] != list(range(6))
+            or set(states) != set(range(6))
+            or any(float(state["step"]) != branch_steps for state in states.values())
+            or tuple(groups[0]["betas"]) != (0.9, 0.999)
+            or groups[0]["eps"] != 1e-8
+            or groups[0]["weight_decay"] != 0
+            or set(checkpoint["static_RNG"])
+            != {"index_torch_state", "reflection_numpy_state", "ordered_index_mask_sha256"}
+        ):
+            raise ValueError("matching Adam/RNG/selected branch position required")
+        for state, shape in zip(
+            (states[index] for index in range(6)), PARAMETER_SHAPES.values(), strict=True
+        ):
+            for name in ("exp_avg", "exp_avg_sq"):
+                value = state[name]
+                if (
+                    tuple(value.shape) != shape
+                    or value.dtype != torch.float32
+                    or not torch.isfinite(value).all()
+                ):
+                    raise ValueError("matching finite FP32 Adam moments required")
+    best_data = (
+        checkpoint
+        if selected_best["checkpoint"] == control["checkpoint"]
+        else torch.load(
+            io.BytesIO(bound_file_bytes(selected_best["checkpoint"], 1048576)),
+            map_location="cpu",
+            weights_only=True,
+        )
+    )
+    best_digest = hashlib.sha256(
+        b"".join(
+            best_data["model"][name].numpy().astype("<f4").tobytes() for name in PARAMETER_SHAPES
+        )
+    ).hexdigest()
+    if (
+        best_data["dataset_sha"] != corpus.binding["dataset_sha"]
+        or best_data["model_config"] != cfg["model"]
+        or best_data["scale"] != statistics
+        or best_digest
+        != hashlib.sha256(bound_file_bytes(selected_best["weights"], 49284)).hexdigest()
+    ):
+        raise ValueError("selected BEST checkpoint/export differs from its owning state")
+    return dict(
+        checkpoint=checkpoint,
+        baseline=baseline,
+        identity=identity,
+        optimizer_mode=mode,
+        old_executed=old_executed,
+        origin_position=origin,
+        previous_draws=previous_draws,
+        previous_steps=previous_steps,
+        previous_rows=previous_rows,
+        selected_best=selected_best,
+        selected_best_checkpoint=best_data,
+        policy_state=policy_state,
+    )
+
+
 class StaticMeasurements:
     """Same predictions produce row/class/stock/sign/zero/saturation statistics."""
 
