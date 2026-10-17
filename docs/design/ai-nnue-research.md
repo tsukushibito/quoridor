@@ -88,6 +88,8 @@ GPU学習は明示タスクの期限・資源上限に従って具体化する�
 
 ### 429：量・露出・開始coverageを分けた比較条件
 
+この節は429完了時の設計・費用提案を記録する。後の明示委任432で四fitと一候補の評価を実行した結果は末尾の432節に分ける。ここに残す「将来」「提案」は429時点の範囲である。
+
 保存423のWはBEST43から新Sigma outcome zだけで追加学習した条件で、公開データとの混合ではない。末尾118更新まで新T/V lossが下がったが、必要更新数・原因・棋力改善は未確定である。Fは初期化だけでなくLR、warmup、更新量も異なるため、その訓練適合とV悪化から一要因の効果を取り出さない。[保存設定と曲線の分析](../../research-data/ai-sigma/nnue-data-expansion429/saved-learning-analysis/report-ja.md)を比較設計の出発点とする。
 
 | 分けたい問い       | 条件の対応                                                          | 計算量と限界                                                                            |
@@ -111,3 +113,13 @@ GPU学習は明示タスクの期限・資源上限に従って具体化する�
 同じ選択T3763/common V2498、BEST43/fresh Adam、30104 draws/118 updates/tail152、reflection15038、実stream76f6467bで新Z/S/Cを学習し、LAST118だけを対局へ出した。S/Cは実際の反転盤面と完全historyから付けた別ラベルであり、旧z・splitを上書きしない。共通mixed_batch/train_mixtureがmanifest/configの教師名・column・row対応を消費し、三つの学習loopを複製しない。モデルごとに異なるSigma8/C20の正本encoderはコードに残し、NNUE特徴・数学は変えていない。終了済み419の専用実行field/branch/専用testはGit復元元を保全して撤去した。
 
 固定64共有family・各両色128局ではCvsZ67/61、score.5234375、95%[.4609375,.5859375]で下限>.5はNOT_MET。SvsZ63/65、.4921875、[.421875,.5625]は記述的。全256GOAL/UNKNOWN0だが一般優越・劣位・等価・原因やモデル昇格の結論ではない。各教師への誤差低下と対局を区別し、元RAW/FAILED/費UNKNOWNを残す。[有限結果と原参照](../../research-data/ai-sigma/static-teacher-distillation430/report-ja.md)を正本とする。429の四fitは引き続き未実行提案である。
+
+### 432：同じ実勝敗zでのデータ量・学習量・序盤分布の有限実行
+
+[432保存結果](../../research-data/ai-sigma/nnue-learning-scale432/report-ja.md)では429の固定viewを用い、四独立fitを実行した。A/B/Dは29880 draws/117更新/tail184、Cは119520 draws/467更新/tail224。量small3735行/796familyとlarge14940行/811family、early3735行/149familyを区別し、同draw数のsupport差・同viewの学習量・分布差の三比較を混同しない。Cの途中117更新を独立Bへ代用しない。
+
+既存common trainer/training_view/evaluateを維持し、追加のstock-family n/macro z-MSE、decisive/zero、Draw0 mean-abs、.9/.99飽和を同じpredictionから集計する。空層はnull、層family数は加算しない。固有view/seed/観測点/endpoint/表示・候補規則はconfig/manifestに置く。必要な新三定義だけを一度確認し、旧fitや成功suiteを再演しなかった。全newV12275/236familyは各観測点、TはA/D全3735・B/C8192panel、公開T8192固定、opened publicV419150はLASTのみである。
+
+固定LASTのnewV family z-MSEはA.835774397/B.833926958/C.766460997/D.831157305。事前のnative適格B/C/D最小規則でC LAST467を選んだ。CのnewVはINITIAL.859740646から下がる一方、公開T panelは.428704088から.457743676へ増えた。公開V LASTもC.453408904と他三条件の.425695/.425904/.426614を併記し、未測定のpublicV INITIAL差や汎化の因果を作らない。
+
+選択C対BEST43の独立固定192family/両色384局は185勝2分197敗、score48.4375%、95%[44.0104167%,52.8645833%]で事前改善基準未達だった。一度のfamily bootstrapだけを使い、A/B/Dの棋力順位・一般劣位・等価や原因を認定しない。実fit＋native2337787 logical rows、arena1670199748 charged nodes、内包時計の非加算と全費UNKNOWNを保存した。追加学習・対局・モデル/default昇格は自動発行しない。

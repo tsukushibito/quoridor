@@ -1,0 +1,735 @@
+{
+  "status": "ORIGINAL432_SAVED_ANALYSIS_COMPLETE_PENDING_OWNER_ACCEPTANCE",
+  "issue": "quoridor-4lc.432.2",
+  "owner": "codex:01a118a1-aef1-7252-b21b-42f07dd5b1e6",
+  "fixed_selected_model": "C LAST467, chosen before arena by finite-native-eligible B/C/D LAST minimum full commonV family z-MSE; no reselection",
+  "selection_ref": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-analysis-v1/results-v1/selection-v1/selected-model.json",
+    "sha256": "68813475c2b773d007a51e10c673ceecbbd366d0e9d9a3c6916bcc6072495634",
+    "bytes": 9343,
+    "mode": "0644"
+  },
+  "selected_identity_packet": {
+    "issue": "quoridor-4lc.432.2",
+    "status": "FROZEN_RULE_APPLIED_TO_ACTUAL_LAST_AND_NATIVE_ELIGIBILITY",
+    "frozen_design": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-analysis-v1/design-v1/resolved-settings.json",
+      "sha256": "4ffd33f37a0b04a4cc6c3c2d5d5d6b500d3ff5d069af9b84a7c2d627a9ef689a",
+      "bytes": 15785,
+      "mode": "0644"
+    },
+    "actual_four_fit_completion": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-implementation-v1/four-fit-completion-v1/completion.json",
+      "sha256": "79dc5dde2f0722ac99176e5395b560768d811c31c04461b4dd2064950bc5fc82",
+      "bytes": 9515,
+      "mode": "0644"
+    },
+    "actual_native_completion": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-implementation-v1/native-completion-v1/completion.json",
+      "sha256": "d88af1136ed3a9993233fb100e833d21b88d6f0448213ce3e02bc0842c726004",
+      "bytes": 8473,
+      "mode": "0644"
+    },
+    "rule": "B/C/D eligible fixed LAST; minimum same ALL12275/236-family z-MSE; exact ties B,C,D",
+    "eligible_ranking": [
+      {
+        "condition": "C",
+        "fixed_LAST_step": 467,
+        "rows": 12275,
+        "canonical_families": 236,
+        "family_z_mse": 0.7664609971214529,
+        "eligible": true,
+        "ineligible_reason": null,
+        "LAST": {
+          "descriptor": {
+            "path": "/workspaces/quoridor/.worktree/assets/checkpoints/nnue-learning-scale432-v1/C-v1/last-model/manifest.json",
+            "sha256": "bca0fd926841d303e3e092b2d29d8508a7d64e2970abd85cfe5c7e84d36b694e",
+            "bytes": 681,
+            "mode": "0600"
+          },
+          "weights": {
+            "path": "/workspaces/quoridor/.worktree/assets/checkpoints/nnue-learning-scale432-v1/C-v1/last-model/weights.f32",
+            "sha256": "85c296fe3ee0075628a610918c89aff21195acd3ecb806e3458c71a7f41e7ce2",
+            "bytes": 49284,
+            "mode": "0644"
+          },
+          "step": 467
+        },
+        "typed_evaluator_sha256": "4a1c7c14e7dab160c91f457d6c1b6c3d06672c71ac08049d2d37b703fe8d5c14",
+        "fit_completion": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-implementation-v1/actual-fit-C-completion-v1/completion.json",
+          "sha256": "50449a2d4ed9f8651851916c4ae933da9f08156318ed0fbbe28dc213bd7af8f3",
+          "bytes": 125810,
+          "mode": "0644"
+        },
+        "native_input": {
+          "path": "/workspaces/quoridor/.worktree/assets/inputs/nnue-learning-scale432-v1/native-correspondence-v1/input-C.json",
+          "sha256": "bd45ab9441b6ee241857bebffa5ffaff52328def40ee3c116055d1be6a642599",
+          "bytes": 1758,
+          "mode": "0644"
+        },
+        "native_output": {
+          "path": "/workspaces/quoridor/.worktree/assets/inputs/nnue-learning-scale432-v1/native-correspondence-v1/result-C.json",
+          "sha256": "1866b790341bbd7ed916f96e8b052e5ad52727d0a2a01c328090cea1e5d9b955",
+          "bytes": 3851,
+          "mode": "0644"
+        }
+      },
+      {
+        "condition": "D",
+        "fixed_LAST_step": 117,
+        "rows": 12275,
+        "canonical_families": 236,
+        "family_z_mse": 0.8311573047447428,
+        "eligible": true,
+        "ineligible_reason": null,
+        "LAST": {
+          "descriptor": {
+            "path": "/workspaces/quoridor/.worktree/assets/checkpoints/nnue-learning-scale432-v1/D-v1/last-model/manifest.json",
+            "sha256": "2b6ba9181ff61088128c3e77a523d542dffd7c7cc17584e801bf4a88cd70d5ea",
+            "bytes": 681,
+            "mode": "0600"
+          },
+          "weights": {
+            "path": "/workspaces/quoridor/.worktree/assets/checkpoints/nnue-learning-scale432-v1/D-v1/last-model/weights.f32",
+            "sha256": "e3421e84fbea02aeb2176ac35498e377d29a464e4252449a3c8636da52019e60",
+            "bytes": 49284,
+            "mode": "0644"
+          },
+          "step": 117
+        },
+        "typed_evaluator_sha256": "c9a4f63a0876d1d493a33d3169125fd2a551901f2bc8eedeb23a98ea257a17e2",
+        "fit_completion": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-implementation-v1/actual-fit-D-completion-v1/completion.json",
+          "sha256": "ec3133bc54fc1a8dcfb2d9bb238e1b01c4616b725daa6b7693e880a1eefe6f20",
+          "bytes": 102393,
+          "mode": "0644"
+        },
+        "native_input": {
+          "path": "/workspaces/quoridor/.worktree/assets/inputs/nnue-learning-scale432-v1/native-correspondence-v1/input-D.json",
+          "sha256": "5b5d469af338202938f863292f26228adf9890013850ce14d5550cea5bb6cece",
+          "bytes": 1758,
+          "mode": "0644"
+        },
+        "native_output": {
+          "path": "/workspaces/quoridor/.worktree/assets/inputs/nnue-learning-scale432-v1/native-correspondence-v1/result-D.json",
+          "sha256": "4502eec72f5fa38d01294132f644936747502952b4f602bfa3bc19f78191f69b",
+          "bytes": 3834,
+          "mode": "0644"
+        }
+      },
+      {
+        "condition": "B",
+        "fixed_LAST_step": 117,
+        "rows": 12275,
+        "canonical_families": 236,
+        "family_z_mse": 0.833926958014095,
+        "eligible": true,
+        "ineligible_reason": null,
+        "LAST": {
+          "descriptor": {
+            "path": "/workspaces/quoridor/.worktree/assets/checkpoints/nnue-learning-scale432-v1/B-v1/last-model/manifest.json",
+            "sha256": "dd7bfad3f85afc36d73b5665f43184a681e23dbb595ea82c6fad3e913c040b72",
+            "bytes": 681,
+            "mode": "0600"
+          },
+          "weights": {
+            "path": "/workspaces/quoridor/.worktree/assets/checkpoints/nnue-learning-scale432-v1/B-v1/last-model/weights.f32",
+            "sha256": "f28507086f78b57ccd76662344a5002209e0a0e9c493136fde28af3ef9a39daf",
+            "bytes": 49284,
+            "mode": "0644"
+          },
+          "step": 117
+        },
+        "typed_evaluator_sha256": "e161cb730bd6d226630c01ae022e9649c3f6a29b408e493af9e9a701b1fb080b",
+        "fit_completion": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-implementation-v1/actual-fit-B-completion-v1/completion.json",
+          "sha256": "bf34df9a92ffb6721ce0c5767ce0a047ce6d00db8437a7a911ff21689638314d",
+          "bytes": 101730,
+          "mode": "0644"
+        },
+        "native_input": {
+          "path": "/workspaces/quoridor/.worktree/assets/inputs/nnue-learning-scale432-v1/native-correspondence-v1/input-B.json",
+          "sha256": "3bbeb8e4a1f29c976bf3ad35eead26ea7364835eee68444828e513aacb4554de",
+          "bytes": 1758,
+          "mode": "0644"
+        },
+        "native_output": {
+          "path": "/workspaces/quoridor/.worktree/assets/inputs/nnue-learning-scale432-v1/native-correspondence-v1/result-B.json",
+          "sha256": "d18e367f67ed5e94bc4df492f96ce4bd7d925c1fd079f057b03a35db6eb3b179",
+          "bytes": 3834,
+          "mode": "0644"
+        }
+      }
+    ],
+    "selected": {
+      "condition": "C",
+      "fixed_LAST_step": 467,
+      "rows": 12275,
+      "canonical_families": 236,
+      "family_z_mse": 0.7664609971214529,
+      "eligible": true,
+      "ineligible_reason": null,
+      "LAST": {
+        "descriptor": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/nnue-learning-scale432-v1/C-v1/last-model/manifest.json",
+          "sha256": "bca0fd926841d303e3e092b2d29d8508a7d64e2970abd85cfe5c7e84d36b694e",
+          "bytes": 681,
+          "mode": "0600"
+        },
+        "weights": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/nnue-learning-scale432-v1/C-v1/last-model/weights.f32",
+          "sha256": "85c296fe3ee0075628a610918c89aff21195acd3ecb806e3458c71a7f41e7ce2",
+          "bytes": 49284,
+          "mode": "0644"
+        },
+        "step": 467
+      },
+      "typed_evaluator_sha256": "4a1c7c14e7dab160c91f457d6c1b6c3d06672c71ac08049d2d37b703fe8d5c14",
+      "fit_completion": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-implementation-v1/actual-fit-C-completion-v1/completion.json",
+        "sha256": "50449a2d4ed9f8651851916c4ae933da9f08156318ed0fbbe28dc213bd7af8f3",
+        "bytes": 125810,
+        "mode": "0644"
+      },
+      "native_input": {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/nnue-learning-scale432-v1/native-correspondence-v1/input-C.json",
+        "sha256": "bd45ab9441b6ee241857bebffa5ffaff52328def40ee3c116055d1be6a642599",
+        "bytes": 1758,
+        "mode": "0644"
+      },
+      "native_output": {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/nnue-learning-scale432-v1/native-correspondence-v1/result-C.json",
+        "sha256": "1866b790341bbd7ed916f96e8b052e5ad52727d0a2a01c328090cea1e5d9b955",
+        "bytes": 3851,
+        "mode": "0644"
+      }
+    },
+    "A": "descriptive baseline excluded by prospective rule",
+    "INITIAL_improvement_gate": false,
+    "within_fit_BEST_replacement_or_new_fit": false,
+    "actual_fit_logical_rows": 2337307,
+    "actual_native_logical_heads": 480,
+    "actual_total_new_NNUE_rows": 2337787,
+    "cap": 4000000,
+    "old_failed_A_rows": 0,
+    "limits": "Selection uses reused newV, not independent generalization. Native evidence is finite full/delta/factory/parent restoration, not all-input parity or strength. No defaults/model promotion or numerical dispatch by analyst.",
+    "original_arena": "One selected LAST vs BEST43, actual dad229e5 book192 families/384 slots/12x32 disjoint250M=3G; actual entry guards remain with324, no parent/ACK gate.",
+    "future_arena_Experiment_runtime": null,
+    "actual_model_archive_NPZ_payload_reads": 0,
+    "new_forward_fit_Search_game_solver_bootstrap_generation": 0
+  },
+  "four_fit_endpoints": [
+    {
+      "condition": "A",
+      "step": 117,
+      "public_V_row_z_mse": 0.42569456154608104,
+      "public_V_sign_rate": 0.8425623285220089,
+      "public_V_sat90_rate": 0.45465107956578793,
+      "public_V_sat99_rate": 0.2946463080042944,
+      "added_train_rows": 3735,
+      "added_train_families": 796,
+      "added_train_row_z_mse": 0.8031661084795266,
+      "added_train_family_z_mse": 0.7848347646761379,
+      "added_train_sign_rate": 0.697680690399137,
+      "added_train_sat90_rate": 0.3740294511378849,
+      "added_train_sat99_rate": 0.2693440428380187,
+      "added_validation_rows": 12275,
+      "added_validation_families": 236,
+      "added_validation_row_z_mse": 0.8415299750222935,
+      "added_validation_family_z_mse": 0.835774396872542,
+      "added_validation_sign_rate": 0.697967245494198,
+      "added_validation_sat90_rate": 0.3919348268839104,
+      "added_validation_sat99_rate": 0.25384928716904276,
+      "public_train_rows": 8192,
+      "public_train_families": null,
+      "public_train_row_z_mse": 0.43024065946092344,
+      "public_train_family_z_mse": null,
+      "public_train_sign_rate": 0.8424072265625,
+      "public_train_sat90_rate": 0.453125,
+      "public_train_sat99_rate": 0.299072265625
+    },
+    {
+      "condition": "B",
+      "step": 117,
+      "public_V_row_z_mse": 0.4259037063011191,
+      "public_V_sign_rate": 0.8422235476559704,
+      "public_V_sat90_rate": 0.4558344268161756,
+      "public_V_sat99_rate": 0.29515447930335204,
+      "added_train_rows": 8192,
+      "added_train_families": 811,
+      "added_train_row_z_mse": 0.8033285000923034,
+      "added_train_family_z_mse": 0.7753708090049711,
+      "added_train_sign_rate": 0.6986856651517013,
+      "added_train_sat90_rate": 0.3680419921875,
+      "added_train_sat99_rate": 0.2623291015625,
+      "added_validation_rows": 12275,
+      "added_validation_families": 236,
+      "added_validation_row_z_mse": 0.8399557567899504,
+      "added_validation_family_z_mse": 0.833926958014095,
+      "added_validation_sign_rate": 0.698461032013826,
+      "added_validation_sat90_rate": 0.39242362525458246,
+      "added_validation_sat99_rate": 0.2524643584521385,
+      "public_train_rows": 8192,
+      "public_train_families": null,
+      "public_train_row_z_mse": 0.43070129257309375,
+      "public_train_family_z_mse": null,
+      "public_train_sign_rate": 0.841796875,
+      "public_train_sat90_rate": 0.4534912109375,
+      "public_train_sat99_rate": 0.299072265625
+    },
+    {
+      "condition": "C",
+      "step": 467,
+      "public_V_row_z_mse": 0.4534089038362871,
+      "public_V_sign_rate": 0.8366503638315639,
+      "public_V_sat90_rate": 0.3630848145055469,
+      "public_V_sat99_rate": 0.23344148872718598,
+      "added_train_rows": 8192,
+      "added_train_families": 811,
+      "added_train_row_z_mse": 0.7394819121565865,
+      "added_train_family_z_mse": 0.7160257774056626,
+      "added_train_sign_rate": 0.7064242722024321,
+      "added_train_sat90_rate": 0.310302734375,
+      "added_train_sat99_rate": 0.2364501953125,
+      "added_validation_rows": 12275,
+      "added_validation_families": 236,
+      "added_validation_row_z_mse": 0.7738354590800623,
+      "added_validation_family_z_mse": 0.7664609971214529,
+      "added_validation_sign_rate": 0.7012591556250515,
+      "added_validation_sat90_rate": 0.3132382892057026,
+      "added_validation_sat99_rate": 0.21026476578411404,
+      "public_train_rows": 8192,
+      "public_train_families": null,
+      "public_train_row_z_mse": 0.4577436760344166,
+      "public_train_family_z_mse": null,
+      "public_train_sign_rate": 0.83447265625,
+      "public_train_sat90_rate": 0.364990234375,
+      "public_train_sat99_rate": 0.2318115234375
+    },
+    {
+      "condition": "D",
+      "step": 117,
+      "public_V_row_z_mse": 0.4266139110456969,
+      "public_V_sign_rate": 0.8420804008111654,
+      "public_V_sat90_rate": 0.4589263986639628,
+      "public_V_sat99_rate": 0.29934868185613744,
+      "added_train_rows": 3735,
+      "added_train_families": 149,
+      "added_train_row_z_mse": 0.8795805291919931,
+      "added_train_family_z_mse": 0.8747110478177583,
+      "added_train_sign_rate": 0.6424340333871836,
+      "added_train_sat90_rate": 0.25140562248995985,
+      "added_train_sat99_rate": 0.1670682730923695,
+      "added_validation_rows": 12275,
+      "added_validation_families": 236,
+      "added_validation_row_z_mse": 0.8377953385575966,
+      "added_validation_family_z_mse": 0.8311573047447428,
+      "added_validation_sign_rate": 0.6999423915727101,
+      "added_validation_sat90_rate": 0.39706720977596743,
+      "added_validation_sat99_rate": 0.25515274949083505,
+      "public_train_rows": 8192,
+      "public_train_families": null,
+      "public_train_row_z_mse": 0.4312228251897179,
+      "public_train_family_z_mse": null,
+      "public_train_sign_rate": 0.8409423828125,
+      "public_train_sat90_rate": 0.4569091796875,
+      "public_train_sat99_rate": 0.3021240234375
+    }
+  ],
+  "four_fit_exposure_and_streams": [
+    {
+      "condition": "A",
+      "draws": 29880,
+      "updates": 117,
+      "tail": 184,
+      "actual_forward_rows": 545838,
+      "exposure": {
+        "keys": [
+          "added_visits",
+          "public_indices",
+          "public_visits"
+        ],
+        "added_draws": 29880,
+        "added_distinct": 3735,
+        "min_positive_visits": 8,
+        "max_visits": 8
+      },
+      "stream": {
+        "attempted_sha256": "07ed5ee00c6b61929a5773aee046112a1ea500bb87c3370e59c5dc98009fd841",
+        "completed_sha256": "07ed5ee00c6b61929a5773aee046112a1ea500bb87c3370e59c5dc98009fd841",
+        "completed_rows": 29880,
+        "completed_updates": 117,
+        "encoding": "per-update LE-i64 [update,nAdded,nPublic], added IDs, public IDs, uint8 added/public LR masks",
+        "numpy_version": "2.5.3",
+        "torch_version": "2.14.0+cu130",
+        "added_rng": "numpy.default_rng/PCG64"
+      },
+      "reflected_rows": {
+        "added": 15081,
+        "public": 0
+      }
+    },
+    {
+      "condition": "B",
+      "draws": 29880,
+      "updates": 117,
+      "tail": 184,
+      "actual_forward_rows": 563666,
+      "exposure": {
+        "keys": [
+          "added_visits",
+          "public_indices",
+          "public_visits"
+        ],
+        "added_draws": 29880,
+        "added_distinct": 14940,
+        "min_positive_visits": 2,
+        "max_visits": 2
+      },
+      "stream": {
+        "attempted_sha256": "052450e1a4d83818a642af221f42269c268b7a4f4b05c0b26aed435b13b0f5d3",
+        "completed_sha256": "052450e1a4d83818a642af221f42269c268b7a4f4b05c0b26aed435b13b0f5d3",
+        "completed_rows": 29880,
+        "completed_updates": 117,
+        "encoding": "per-update LE-i64 [update,nAdded,nPublic], added IDs, public IDs, uint8 added/public LR masks",
+        "numpy_version": "2.5.3",
+        "torch_version": "2.14.0+cu130",
+        "added_rng": "numpy.default_rng/PCG64"
+      },
+      "reflected_rows": {
+        "added": 15081,
+        "public": 0
+      }
+    },
+    {
+      "condition": "C",
+      "draws": 119520,
+      "updates": 467,
+      "tail": 224,
+      "actual_forward_rows": 681965,
+      "exposure": {
+        "keys": [
+          "added_visits",
+          "public_indices",
+          "public_visits"
+        ],
+        "added_draws": 119520,
+        "added_distinct": 14940,
+        "min_positive_visits": 8,
+        "max_visits": 8
+      },
+      "stream": {
+        "attempted_sha256": "d35e4d76586c9129cc21cc35cc1826c3a4cc0ed4e2667ca4ab11c4207d1ef92b",
+        "completed_sha256": "d35e4d76586c9129cc21cc35cc1826c3a4cc0ed4e2667ca4ab11c4207d1ef92b",
+        "completed_rows": 119520,
+        "completed_updates": 467,
+        "encoding": "per-update LE-i64 [update,nAdded,nPublic], added IDs, public IDs, uint8 added/public LR masks",
+        "numpy_version": "2.5.3",
+        "torch_version": "2.14.0+cu130",
+        "added_rng": "numpy.default_rng/PCG64"
+      },
+      "reflected_rows": {
+        "added": 59822,
+        "public": 0
+      }
+    },
+    {
+      "condition": "D",
+      "draws": 29880,
+      "updates": 117,
+      "tail": 184,
+      "actual_forward_rows": 545838,
+      "exposure": {
+        "keys": [
+          "added_visits",
+          "public_indices",
+          "public_visits"
+        ],
+        "added_draws": 29880,
+        "added_distinct": 3735,
+        "min_positive_visits": 8,
+        "max_visits": 8
+      },
+      "stream": {
+        "attempted_sha256": "7dafcdd41d22d97ef8cabfdcc6338dca20099ace1269ba45c000777d89be0a72",
+        "completed_sha256": "7dafcdd41d22d97ef8cabfdcc6338dca20099ace1269ba45c000777d89be0a72",
+        "completed_rows": 29880,
+        "completed_updates": 117,
+        "encoding": "per-update LE-i64 [update,nAdded,nPublic], added IDs, public IDs, uint8 added/public LR masks",
+        "numpy_version": "2.5.3",
+        "torch_version": "2.14.0+cu130",
+        "added_rng": "numpy.default_rng/PCG64"
+      },
+      "reflected_rows": {
+        "added": 15081,
+        "public": 0
+      }
+    }
+  ],
+  "panels": {
+    "all_newV": {
+      "rows": 12275,
+      "families": 236,
+      "points_per_condition": [
+        4,
+        4,
+        5,
+        4
+      ]
+    },
+    "Tdiag": {
+      "A": 3735,
+      "B": 8192,
+      "C": 8192,
+      "D": 3735
+    },
+    "public_Tdiag": 8192,
+    "opened_public_V_LAST_only_each": 419150,
+    "public_V_INITIAL_this432": "UNKNOWN; not measured"
+  },
+  "primary": {
+    "contrast": "CvsBEST43",
+    "contrast_definition": {
+      "role": "primary",
+      "definition": "fixed V-selected C LAST467 versus frozen BEST43; true global192 canonical family mean, fixed book/time",
+      "criterion": "all384 games/192 two-colour pairs complete and lower95 strictly above0.5"
+    },
+    "planned_family_count": 192,
+    "planned_game_count": 384,
+    "valid_game_count": 384,
+    "unresolved_game_count": 0,
+    "complete_family_count": 192,
+    "family_mean": 0.484375,
+    "percentile_95": [
+      0.4401041666666667,
+      0.5286458333333334
+    ],
+    "criterion_fixed_book_time_only": "NOT_MET",
+    "partial_scope": "complete-pair conditional; valid-game mean and planned bounds are separate",
+    "seed": 43220261017,
+    "requested_resamples": 10000,
+    "executed_resamples": 10000,
+    "rng": "NumPy Generator(PCG64)",
+    "quantile_method": "linear",
+    "settings": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-analysis-v1/results-v1/final-analysis-v1/bootstrap-settings.json",
+      "sha256": "11ffbbcaa22ff6830c0e31e284d5d7d4f3674e394a53ca43140880a9bb982e21",
+      "bytes": 471,
+      "mode": "0644"
+    },
+    "input": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-analysis-v1/results-v1/final-analysis-v1/bootstrap-input.json",
+      "sha256": "c57b71663b90ad27ae31cc94106fde2d6ff5f995ec2cc30528cae6351b9abc55",
+      "bytes": 14093,
+      "mode": "0644"
+    },
+    "executed_statistical_source": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-analysis-v1/results-v1/final-analysis-v1/family_bootstrap432.py",
+      "sha256": "db0ba27a1c4399813d9c62df0167d5be108a1e49d6f51ec31151dd2fa4b18d7a",
+      "bytes": 7335,
+      "mode": "0644"
+    },
+    "executed_function": "interval_from_complete_family_scores",
+    "executed_function_AST_sha256": "426f96eacf3377f1b40bdd40a85f483a53334cf3fcb19159b003b4cfef22e266",
+    "executed_function_text_sha256": "9b1d60a9d4831e76c3dd8567119285599355e24918731984938dac59bf2f493f",
+    "interpreter": "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "resolved_interpreter": "/home/vscode/.cache/inference/python/cpython-3.14.7-linux-x86_64-gnu/bin/python3.14",
+    "python_version": "3.14.7",
+    "numpy_version": "2.5.3",
+    "old_intervals_recomputed": false
+  },
+  "arena_census": {
+    "planned_games": 384,
+    "started_completed_valid_games": 384,
+    "unknown_games": 0,
+    "terminal": {
+      "goal": 382,
+      "draw": 2
+    },
+    "C_WDL": {
+      "W": 185,
+      "D": 2,
+      "L": 197
+    },
+    "complete_family_count": 192,
+    "family_mean": 0.484375,
+    "pair_score_histogram": {
+      "1.0": 35,
+      "0.5": 114,
+      "0.0": 41,
+      "0.75": 1,
+      "0.25": 1
+    },
+    "colour": [
+      {
+        "C_colour": 0,
+        "games": 192,
+        "wins": 83,
+        "draws": 2,
+        "losses": 107,
+        "score": 0.4375
+      },
+      {
+        "C_colour": 1,
+        "games": 192,
+        "wins": 102,
+        "draws": 0,
+        "losses": 90,
+        "score": 0.53125
+      }
+    ],
+    "opening_length_exploratory": [
+      {
+        "prefix_plies": 4,
+        "families": 49,
+        "games": 98,
+        "family_mean": 0.45408163265306123
+      },
+      {
+        "prefix_plies": 8,
+        "families": 50,
+        "games": 100,
+        "family_mean": 0.51
+      },
+      {
+        "prefix_plies": 12,
+        "families": 47,
+        "games": 94,
+        "family_mean": 0.526595744680851
+      },
+      {
+        "prefix_plies": 16,
+        "families": 46,
+        "games": 92,
+        "family_mean": 0.44565217391304346
+      }
+    ],
+    "charged_nodes_including_opaque_reservations": 1670199748,
+    "disjoint_caps": 3000000000
+  },
+  "turns": {
+    "accepted": 16990,
+    "completed_snapshots": 16990,
+    "accepted_authority_receipt_late": 0,
+    "error_forfeit_fallback": 0,
+    "whole_search_nodes": 1670199748,
+    "selected_nodes_overlapping": 1183692408,
+    "whole_static_eval_counter": 851769344
+  },
+  "inclusive_fit_and_native_logical_rows": {
+    "fit": 2337307,
+    "new_native": 480,
+    "total": 2337787,
+    "cap": 4000000,
+    "arena_Search_work_is_separate_node_cap": true
+  },
+  "known_outer_seconds_each_once": {
+    "four_successful_fits": 16.63055231893668,
+    "new_four_model_native": 3.0458592519862577,
+    "original_arena_sequence": 1738.3295555030345
+  },
+  "known_successful_numeric_outer_sum_not_total_cost": 1758.0059670739574,
+  "nested_clocks_added": false,
+  "unknown_costs": [
+    "original failed A outer cost not supplied in selected packet",
+    "all source/LLM/admin/full fees",
+    "continuous family RSS peak",
+    "physical NNUE FT/head executions",
+    "isolated model/TT/LMR clocks"
+  ],
+  "observations": [
+    "C commonnewV family z-MSE fell monotonically to .7664609971214529",
+    "C publicT fixed8192 panel z-MSE rose to .4577436760344166; publicV LAST .4534089038362871 exceeded A/B/D LAST values",
+    "fixed chosen model scored .484375, CI includes .5, predeclared lower>.5 criterion NOT_MET",
+    "no inferiority/equivalence/general strength or four-way arena ranking",
+    "sign and saturation denominators retained; MSE improvement not uniform sign improvement"
+  ],
+  "decision": "finite gain not supported; retain BEST43/defaults, no model promotion, no extra fit/seed/game/refill",
+  "limits": [
+    "V reused selection, not independent validation",
+    "shared family colours are one unit; native chunk CIs not averaged",
+    "known-book canonical exclusions do not establish all-public/interior/sealed nonexposure",
+    "timed searches have different trajectories/TT/ordering/clocks; no same-work speed/causal action oracle",
+    "whole/selected/outer work overlap; TT gauges not RSS",
+    "original corpus/model/NPZ/library bodies not read by analyst; no source or scientific rerun"
+  ],
+  "original_failures_and_ordinary_corrections": {
+    "original_A_preentry": {
+      "forward_rows": 0,
+      "status": "FAILED retained",
+      "outer_cost": "Retained original failure; not supplied in selected compact packet, UNKNOWN here, not zero"
+    },
+    "original_operational_masks": "persisted pending/attempted vs actual returned completed preserved in producer packet",
+    "own_context_probe": "python executable absent; /usr/bin/python3 actual context check succeeded before ordinary work",
+    "own_initial_lint": "unused sys import; original failed log/process retained, corrected source lint passed",
+    "own_plot_lint": "E402 for required owned font-cache setup before matplotlib import; original failed log/process retained; one noqa comment, exact AST unchanged, no render replay",
+    "optional_PNG_preview": "FAILED: missing rsvg-convert delegate; no PNG exists; original SVG creation/XML checks passed; unrendered SVG preview limit retained",
+    "history_order_flags": {
+      "initial_order_sensitive_flags": [
+        {
+          "slot": 154,
+          "scope": "weighted_root_history"
+        },
+        {
+          "slot": 155,
+          "scope": "weighted_root_history"
+        }
+      ],
+      "same_weighted_key_counts_after_order_normalization": true,
+      "scope": "family77 arrays have a different preserved serialization order; complete key/count content exact, native metadata unchanged",
+      "unresolved_data_discrepancies": []
+    },
+    "incidental_bytecode": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-analysis-v1/results-v1/final-analysis-v1/generated-bytecode-cleanup.json",
+      "sha256": "223c0a459a9d1dcb884120ce8a029a218d666d5496aa9555da72175843521d9f",
+      "bytes": 569,
+      "mode": "0644"
+    }
+  },
+  "verification": {
+    "CSV_game_family_means_and_saved_result": "PASS",
+    "actual384_192_census": "PASS",
+    "all16990_accepted_completed_legal_on_time": "PASS",
+    "quota_charged_vs_whole_search": "PASS",
+    "fit_plus_native_row_budget": "PASS",
+    "selected_candidate_matches_fixed_rule": "PASS",
+    "statistical_function_text_BYTE_EXACT_frozen430": "PASS",
+    "actual_executed_source_input_settings_stable": "PASS",
+    "statistical_AST_version_note": {
+      "prospective_Python3_11_AST": "9b00e04506b71116fc8c978f1c82e9e068895a0bcdc72ff57c37798dc76c7430",
+      "actual_Python3_14_AST": "426f96eacf3377f1b40bdd40a85f483a53334cf3fcb19159b003b4cfef22e266",
+      "same_actual_interpreter_old_and_new_AST_equal": true,
+      "cause": "versioned ast.dump representation; exact function text unchanged"
+    },
+    "static_SVG_XML": "PASS",
+    "bootstrap_executions_in_this_check": 0,
+    "RAW_decodes_in_this_check": 0,
+    "new_forwards_Search_games_fit": 0
+  },
+  "source_and_statistical_execution": {
+    "RAW_streams": 12,
+    "decodes_per_original_archive": 1,
+    "bootstrap_executions": 1,
+    "resamples": 10000,
+    "function_and_input_output_binding": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-analysis-v1/results-v1/final-analysis-v1/bootstrap-result.json",
+      "sha256": "93a09c74bc76fd81e9bbfa3b4c60035e3a8b6480f3e0652f667b87a59ec4a772",
+      "bytes": 2279,
+      "mode": "0644"
+    },
+    "RAW_reader_STOP": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-analysis-v1/results-v1/final-analysis-v1/raw-stream-STOP.json",
+      "sha256": "c89a16a32cdc7b3ff89f72e08820c88998e0f4a2fb614f513da828fe1d064310",
+      "bytes": 2484,
+      "mode": "0644"
+    },
+    "bootstrap_STOP": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-analysis-v1/results-v1/final-analysis-v1/bootstrap-once-STOP.json",
+      "sha256": "74b9ba751bcd97858865c87f692c444dcf6bb6a5547eaaf734ee7db8d9840727",
+      "bytes": 3426,
+      "mode": "0644"
+    },
+    "new_model_forward_Search_fit_game_solver": 0
+  }
+}

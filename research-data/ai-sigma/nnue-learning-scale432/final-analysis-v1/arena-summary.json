@@ -1,0 +1,4134 @@
+{
+  "planned_games": 384,
+  "started_completed_valid_games": 384,
+  "unknown_games": 0,
+  "terminal": {
+    "goal": 382,
+    "draw": 2
+  },
+  "C_WDL": {
+    "W": 185,
+    "D": 2,
+    "L": 197
+  },
+  "complete_family_count": 192,
+  "family_mean": 0.484375,
+  "pair_score_histogram": {
+    "1.0": 35,
+    "0.5": 114,
+    "0.0": 41,
+    "0.75": 1,
+    "0.25": 1
+  },
+  "colour": [
+    {
+      "C_colour": 0,
+      "games": 192,
+      "wins": 83,
+      "draws": 2,
+      "losses": 107,
+      "score": 0.4375
+    },
+    {
+      "C_colour": 1,
+      "games": 192,
+      "wins": 102,
+      "draws": 0,
+      "losses": 90,
+      "score": 0.53125
+    }
+  ],
+  "opening_length_exploratory": [
+    {
+      "prefix_plies": 4,
+      "families": 49,
+      "games": 98,
+      "family_mean": 0.45408163265306123
+    },
+    {
+      "prefix_plies": 8,
+      "families": 50,
+      "games": 100,
+      "family_mean": 0.51
+    },
+    {
+      "prefix_plies": 12,
+      "families": 47,
+      "games": 94,
+      "family_mean": 0.526595744680851
+    },
+    {
+      "prefix_plies": 16,
+      "families": 46,
+      "games": 92,
+      "family_mean": 0.44565217391304346
+    }
+  ],
+  "models": [
+    {
+      "model": "C-LAST467",
+      "observations": 8492,
+      "accepted": 8492,
+      "accepted_completed": 8492,
+      "receipt_checked": 8492,
+      "receipt_late": 0,
+      "accepted_receipt_checked": 8492,
+      "accepted_receipt_late": 0,
+      "return_checked": 8492,
+      "return_after_deadline": 2228,
+      "commit_checked": 8492,
+      "commit_after_deadline": 2528,
+      "accepted_authority_legal_false": 0,
+      "accepted_authority_legal_unknown": 0,
+      "stops": {
+        "internal_time_limit": 8335,
+        "depth_cap": 141,
+        "cancelled": 16
+      },
+      "stock_root_exposure": {
+        "16..20": 97,
+        "8..15": 1277,
+        "1..7": 5149,
+        "0": 1969
+      },
+      "accepted_depth": {
+        "n": 8492,
+        "histogram": {
+          "3": 48,
+          "4": 2359,
+          "5": 792,
+          "11": 264,
+          "10": 420,
+          "9": 433,
+          "16": 145,
+          "17": 215,
+          "18": 348,
+          "19": 304,
+          "12": 347,
+          "28": 29,
+          "27": 38,
+          "26": 67,
+          "24": 90,
+          "13": 290,
+          "15": 85,
+          "20": 305,
+          "22": 175,
+          "23": 114,
+          "25": 61,
+          "30": 16,
+          "32": 7,
+          "34": 7,
+          "36": 2,
+          "7": 292,
+          "6": 387,
+          "14": 136,
+          "21": 186,
+          "8": 331,
+          "64": 141,
+          "40": 2,
+          "29": 22,
+          "33": 7,
+          "38": 1,
+          "44": 1,
+          "31": 13,
+          "47": 1,
+          "61": 1,
+          "35": 4,
+          "41": 1,
+          "37": 1,
+          "39": 1,
+          "60": 1,
+          "2": 1,
+          "45": 1
+        },
+        "median": 9.0,
+        "mean": 11.348327837965144,
+        "min": 2,
+        "max": 64
+      },
+      "depth_by_side": {
+        "0": {
+          "n": 4305,
+          "histogram": {
+            "3": 27,
+            "4": 1208,
+            "5": 384,
+            "11": 116,
+            "10": 198,
+            "9": 225,
+            "16": 66,
+            "17": 90,
+            "18": 167,
+            "19": 160,
+            "13": 139,
+            "12": 151,
+            "15": 35,
+            "20": 153,
+            "22": 100,
+            "23": 72,
+            "25": 38,
+            "7": 174,
+            "6": 197,
+            "14": 63,
+            "21": 119,
+            "8": 197,
+            "24": 45,
+            "26": 32,
+            "64": 73,
+            "30": 8,
+            "34": 4,
+            "40": 1,
+            "28": 12,
+            "29": 12,
+            "31": 7,
+            "27": 17,
+            "61": 1,
+            "33": 4,
+            "35": 3,
+            "41": 1,
+            "32": 2,
+            "36": 1,
+            "37": 1,
+            "39": 1,
+            "45": 1
+          },
+          "median": 8,
+          "mean": 11.389779326364692,
+          "min": 3,
+          "max": 64
+        },
+        "1": {
+          "n": 4187,
+          "histogram": {
+            "4": 1151,
+            "12": 196,
+            "10": 222,
+            "28": 17,
+            "27": 21,
+            "26": 35,
+            "24": 45,
+            "5": 408,
+            "30": 8,
+            "32": 5,
+            "34": 3,
+            "36": 1,
+            "8": 134,
+            "17": 125,
+            "18": 181,
+            "19": 144,
+            "20": 152,
+            "21": 67,
+            "6": 190,
+            "11": 148,
+            "9": 208,
+            "22": 75,
+            "23": 42,
+            "14": 73,
+            "15": 50,
+            "7": 118,
+            "64": 68,
+            "13": 151,
+            "16": 79,
+            "29": 10,
+            "33": 3,
+            "38": 1,
+            "44": 1,
+            "3": 21,
+            "25": 23,
+            "47": 1,
+            "31": 6,
+            "35": 1,
+            "40": 1,
+            "60": 1,
+            "2": 1
+          },
+          "median": 9,
+          "mean": 11.30570814425603,
+          "min": 2,
+          "max": 64
+        }
+      },
+      "depth_by_stock": {
+        "8..15": {
+          "n": 1277,
+          "histogram": {
+            "4": 1263,
+            "3": 12,
+            "5": 1,
+            "2": 1
+          },
+          "median": 4,
+          "mean": 3.98981989036805,
+          "min": 2,
+          "max": 5
+        },
+        "0": {
+          "n": 1969,
+          "histogram": {
+            "16": 97,
+            "17": 176,
+            "18": 285,
+            "19": 261,
+            "28": 25,
+            "27": 36,
+            "26": 59,
+            "24": 82,
+            "15": 15,
+            "20": 273,
+            "22": 157,
+            "23": 102,
+            "25": 52,
+            "30": 15,
+            "32": 6,
+            "34": 7,
+            "36": 2,
+            "21": 161,
+            "64": 112,
+            "29": 20,
+            "33": 7,
+            "38": 1,
+            "44": 1,
+            "31": 10,
+            "35": 4,
+            "41": 1,
+            "37": 1,
+            "39": 1
+          },
+          "median": 20,
+          "mean": 23.135093956323008,
+          "min": 15,
+          "max": 64
+        },
+        "16..20": {
+          "n": 97,
+          "histogram": {
+            "3": 34,
+            "4": 63
+          },
+          "median": 4,
+          "mean": 3.649484536082474,
+          "min": 3,
+          "max": 4
+        },
+        "1..7": {
+          "n": 5149,
+          "histogram": {
+            "4": 1033,
+            "5": 791,
+            "11": 264,
+            "10": 420,
+            "9": 433,
+            "12": 347,
+            "13": 290,
+            "7": 292,
+            "6": 387,
+            "14": 136,
+            "8": 331,
+            "17": 39,
+            "19": 43,
+            "15": 70,
+            "64": 29,
+            "18": 63,
+            "16": 48,
+            "40": 2,
+            "21": 25,
+            "23": 12,
+            "20": 32,
+            "24": 8,
+            "22": 18,
+            "25": 9,
+            "27": 2,
+            "47": 1,
+            "26": 8,
+            "28": 4,
+            "31": 3,
+            "61": 1,
+            "3": 2,
+            "29": 2,
+            "30": 1,
+            "32": 1,
+            "60": 1,
+            "45": 1
+          },
+          "median": 8,
+          "mean": 8.811031268207419,
+          "min": 3,
+          "max": 64
+        }
+      },
+      "scalar_fields": {
+        "observation.accepted": {
+          "True": 8492
+        },
+        "observation.failure": {
+          "None": 8492
+        },
+        "observation.engine_error": {
+          "None": 8492
+        },
+        "observation.stop": {
+          "internal_time_limit": 8335,
+          "depth_cap": 141,
+          "cancelled": 16
+        },
+        "counters.actual_lmr_enabled": {
+          "True": 8492
+        },
+        "counters.actual_lmr_method_id": {
+          "lmr408-depth-rank-log63-extra0to3-pvs-verify-v1": 8492
+        },
+        "counters.authority_legal": {
+          "True": 8492
+        },
+        "counters.clock_contract": {
+          "authority-action-receipt-v1": 8492
+        },
+        "counters.clock_contract_sha256": {
+          "04062382f70648cdfd722e59c35be1100719169097a04749b0046ea5a19a280d": 8492
+        },
+        "counters.completed_snapshot_validation_failed": {
+          "False": 8492
+        },
+        "counters.first_receipt_or_control_error": {
+          "None": 8492
+        },
+        "counters.fixed_depth_completed": {
+          "False": 8351,
+          "True": 141
+        },
+        "counters.fixed_depth_required": {
+          "False": 8492
+        },
+        "counters.lmr_reduction_rule": {
+          "d>=3,m>=4: extra=clamp(floor(0.7844+ln(min(d,63))*ln(min(m,63))/2.4696)-1,0,min(3,d-2)); child=d-1-extra; existing protection/PVS": 8492
+        },
+        "counters.matching_terminal_collected": {
+          "True": 8492
+        },
+        "counters.requested_lmr_method": {
+          "depth_rank": 8492
+        },
+        "counters.reserve_stop_is_not_user_cancel": {
+          "True": 8492
+        },
+        "counters.selection_reason": {
+          "completed_iteration": 8492
+        },
+        "counters.terminal_collected": {
+          "True": 8492
+        }
+      },
+      "whole_search_work_alternative": {
+        "cutoffs": {
+          "n": 8492,
+          "min": 63,
+          "max": 96664,
+          "sum": 250062323
+        },
+        "delta_updates": {
+          "n": 8492,
+          "min": 64,
+          "max": 143351,
+          "sum": 790627496
+        },
+        "nodes": {
+          "n": 8492,
+          "min": 255,
+          "max": 197515,
+          "sum": 832596472
+        },
+        "policy_calls": {
+          "n": 8492,
+          "min": 0,
+          "max": 0,
+          "sum": 0
+        },
+        "pvs_researches": {
+          "n": 8492,
+          "min": 0,
+          "max": 134,
+          "sum": 206295
+        },
+        "static_evaluations": {
+          "n": 8492,
+          "min": 1,
+          "max": 84628,
+          "sum": 424728568
+        },
+        "terminal": {
+          "n": 8492,
+          "min": 0,
+          "max": 67397,
+          "sum": 41868309
+        },
+        "tt_board_hash_reads": {
+          "n": 8492,
+          "min": 63,
+          "max": 129872,
+          "sum": 365894851
+        },
+        "tt_board_hash_updates": {
+          "n": 8492,
+          "min": 191,
+          "max": 197473,
+          "sum": 832495909
+        },
+        "tt_bound_cutoffs": {
+          "n": 8492,
+          "min": 0,
+          "max": 7694,
+          "sum": 11804843
+        },
+        "tt_capacity_skips": {
+          "n": 8492,
+          "min": 0,
+          "max": 0,
+          "scope": "gauge, not additive work or RSS"
+        },
+        "tt_collisions": {
+          "n": 8492,
+          "min": 0,
+          "max": 2264,
+          "sum": 2487529
+        },
+        "tt_context_initial_items": {
+          "n": 8492,
+          "min": 5,
+          "max": 83,
+          "sum": 280313
+        },
+        "tt_context_matches": {
+          "n": 8492,
+          "min": 125,
+          "max": 34712,
+          "sum": 33093394
+        },
+        "tt_context_misses": {
+          "n": 8492,
+          "min": 0,
+          "max": 126816,
+          "sum": 275613002
+        },
+        "tt_context_transitions": {
+          "n": 8492,
+          "min": 191,
+          "max": 197473,
+          "sum": 832495909
+        },
+        "tt_exact_hits": {
+          "n": 8492,
+          "min": 6,
+          "max": 585,
+          "sum": 417471
+        },
+        "tt_generation": {
+          "n": 8492,
+          "min": 3,
+          "max": 555,
+          "scope": "gauge, not additive work or RSS"
+        },
+        "tt_hash_collisions": {
+          "n": 8492,
+          "min": 0,
+          "max": 0,
+          "sum": 0
+        },
+        "tt_hashes": {
+          "n": 8492,
+          "min": 6,
+          "max": 129,
+          "sum": 209629
+        },
+        "tt_illegal_moves": {
+          "n": 8492,
+          "min": 0,
+          "max": 0,
+          "sum": 0
+        },
+        "tt_index_collisions": {
+          "n": 8492,
+          "min": 0,
+          "max": 2264,
+          "sum": 2487529
+        },
+        "tt_key_builds": {
+          "n": 8492,
+          "min": 191,
+          "max": 129955,
+          "sum": 366095988
+        },
+        "tt_key_hits": {
+          "n": 8492,
+          "min": 125,
+          "max": 129698,
+          "sum": 308706396
+        },
+        "tt_order_context_mismatch": {
+          "n": 8492,
+          "min": 0,
+          "max": 126816,
+          "sum": 275613002
+        },
+        "tt_order_only": {
+          "n": 8492,
+          "min": 85,
+          "max": 129576,
+          "sum": 296331487
+        },
+        "tt_probes": {
+          "n": 8492,
+          "min": 127,
+          "max": 129914,
+          "sum": 365999595
+        },
+        "tt_replacements": {
+          "n": 8492,
+          "min": 97,
+          "max": 108318,
+          "sum": 250593309
+        },
+        "tt_retained_bytes": {
+          "n": 8492,
+          "min": 83886128,
+          "max": 83886128,
+          "scope": "gauge, not additive work or RSS"
+        },
+        "tt_usable_depth": {
+          "n": 8492,
+          "min": 0,
+          "max": 7864,
+          "sum": 12374909
+        }
+      },
+      "selected_snapshot_work": {
+        "cutoffs": {
+          "n": 8492,
+          "min": 63,
+          "max": 94419,
+          "sum": 193424405
+        },
+        "delta_updates": {
+          "n": 8492,
+          "min": 64,
+          "max": 138717,
+          "sum": 557887203
+        },
+        "nodes": {
+          "n": 8492,
+          "min": 255,
+          "max": 192990,
+          "sum": 592185146
+        },
+        "policy_calls": {
+          "n": 8492,
+          "min": 0,
+          "max": 0,
+          "sum": 0
+        },
+        "pvs_researches": {
+          "n": 8492,
+          "min": 0,
+          "max": 98,
+          "sum": 143557
+        },
+        "static_evaluations": {
+          "n": 8492,
+          "min": 1,
+          "max": 80875,
+          "sum": 274858804
+        },
+        "terminal": {
+          "n": 8492,
+          "min": 0,
+          "max": 66320,
+          "sum": 34201573
+        },
+        "tt_board_hash_reads": {
+          "n": 8492,
+          "min": 63,
+          "max": 126867,
+          "sum": 283028399
+        },
+        "tt_board_hash_updates": {
+          "n": 8492,
+          "min": 191,
+          "max": 192949,
+          "sum": 592088776
+        },
+        "tt_bound_cutoffs": {
+          "n": 8492,
+          "min": 0,
+          "max": 7091,
+          "sum": 7397508
+        },
+        "tt_capacity_skips": {
+          "n": 8492,
+          "min": 0,
+          "max": 0,
+          "scope": "gauge, not additive work or RSS"
+        },
+        "tt_collisions": {
+          "n": 8492,
+          "min": 0,
+          "max": 1776,
+          "sum": 1648151
+        },
+        "tt_context_initial_items": {
+          "n": 8492,
+          "min": 5,
+          "max": 83,
+          "sum": 280313
+        },
+        "tt_context_matches": {
+          "n": 8492,
+          "min": 4,
+          "max": 34672,
+          "sum": 25200186
+        },
+        "tt_context_misses": {
+          "n": 8492,
+          "min": 0,
+          "max": 123865,
+          "sum": 217168612
+        },
+        "tt_context_transitions": {
+          "n": 8492,
+          "min": 191,
+          "max": 192949,
+          "sum": 592088776
+        },
+        "tt_exact_hits": {
+          "n": 8492,
+          "min": 1,
+          "max": 585,
+          "sum": 360804
+        },
+        "tt_generation": {
+          "n": 8492,
+          "min": 2,
+          "max": 555,
+          "scope": "gauge, not additive work or RSS"
+        },
+        "tt_hash_collisions": {
+          "n": 8492,
+          "min": 0,
+          "max": 0,
+          "sum": 0
+        },
+        "tt_hashes": {
+          "n": 8492,
+          "min": 5,
+          "max": 129,
+          "sum": 201229
+        },
+        "tt_illegal_moves": {
+          "n": 8492,
+          "min": 0,
+          "max": 0,
+          "sum": 0
+        },
+        "tt_index_collisions": {
+          "n": 8492,
+          "min": 0,
+          "max": 1776,
+          "sum": 1648151
+        },
+        "tt_key_builds": {
+          "n": 8492,
+          "min": 120,
+          "max": 126949,
+          "sum": 283221136
+        },
+        "tt_key_hits": {
+          "n": 8492,
+          "min": 4,
+          "max": 126692,
+          "sum": 242368798
+        },
+        "tt_order_context_mismatch": {
+          "n": 8492,
+          "min": 0,
+          "max": 123865,
+          "sum": 217168612
+        },
+        "tt_order_only": {
+          "n": 8492,
+          "min": 1,
+          "max": 126573,
+          "sum": 234646655
+        },
+        "tt_probes": {
+          "n": 8492,
+          "min": 118,
+          "max": 126908,
+          "sum": 283124769
+        },
+        "tt_replacements": {
+          "n": 8492,
+          "min": 4,
+          "max": 103479,
+          "sum": 199869288
+        },
+        "tt_retained_bytes": {
+          "n": 8492,
+          "min": 83886128,
+          "max": 83886128,
+          "scope": "gauge, not additive work or RSS"
+        },
+        "tt_usable_depth": {
+          "n": 8492,
+          "min": 0,
+          "max": 7156,
+          "sum": 7722143
+        }
+      },
+      "outer_counters_alternative": {
+        "AI_terminal_finished_ns": {
+          "n": 8492,
+          "min": 98627384,
+          "max": 7297680222,
+          "sum": 19867757946431
+        },
+        "AI_worker_core": {
+          "n": 8492,
+          "min": 2,
+          "max": 2,
+          "sum": 16984
+        },
+        "AI_worker_tid": {
+          "n": 8492,
+          "min": 730393,
+          "max": 740162,
+          "sum": 6245571824
+        },
+        "authority_core": {
+          "n": 8492,
+          "min": 4,
+          "max": 4,
+          "sum": 33968
+        },
+        "authority_receipt_ns": {
+          "n": 8492,
+          "min": 39383716,
+          "max": 7275982680,
+          "sum": 19590141065488
+        },
+        "authority_tid": {
+          "n": 8492,
+          "min": 730392,
+          "max": 740161,
+          "sum": 6245562609
+        },
+        "drain_finished_ns": {
+          "n": 8492,
+          "min": 98646411,
+          "max": 7301400150,
+          "sum": 19869422759961
+        },
+        "full_caller_ns": {
+          "n": 8492,
+          "min": 438867,
+          "max": 110667046,
+          "sum": 836670557054
+        },
+        "inflight_after_drain": {
+          "n": 8492,
+          "min": 0,
+          "max": 0,
+          "sum": 0
+        },
+        "last_completed_iteration_ns": {
+          "n": 8492,
+          "min": 39383716,
+          "max": 7275982680,
+          "sum": 19590141065488
+        },
+        "lmr_work_completed.attempts": {
+          "n": 8492,
+          "min": 0,
+          "max": 54586,
+          "sum": 22143982
+        },
+        "lmr_work_completed.full_depth_confirmations": {
+          "n": 8492,
+          "min": 0,
+          "max": 4897,
+          "sum": 109359
+        },
+        "lmr_work_completed.full_window_researches": {
+          "n": 8492,
+          "min": 0,
+          "max": 7,
+          "sum": 1050
+        },
+        "lmr_work_terminal.attempts": {
+          "n": 8492,
+          "min": 0,
+          "max": 56377,
+          "sum": 32620655
+        },
+        "lmr_work_terminal.full_depth_confirmations": {
+          "n": 8492,
+          "min": 0,
+          "max": 4929,
+          "sum": 191778
+        },
+        "lmr_work_terminal.full_window_researches": {
+          "n": 8492,
+          "min": 0,
+          "max": 8,
+          "sum": 2280
+        },
+        "operation_node_remaining_after_drain": {
+          "n": 8492,
+          "min": 105816624,
+          "max": 249953708,
+          "sum": 1536089752288
+        },
+        "operation_node_reservation": {
+          "n": 8492,
+          "min": 1000000,
+          "max": 1000000,
+          "sum": 8492000000
+        },
+        "requested_depth": {
+          "n": 8492,
+          "min": 64,
+          "max": 64,
+          "sum": 543488
+        },
+        "state_commit_ns": {
+          "n": 8492,
+          "min": 98689879,
+          "max": 7301459289,
+          "sum": 19869897279778
+        },
+        "terminal_collected_ns": {
+          "n": 8492,
+          "min": 98646119,
+          "max": 7301399652,
+          "sum": 19869418368379
+        },
+        "whole_search.cutoffs": {
+          "n": 8492,
+          "min": 63,
+          "max": 96664,
+          "sum": 250062323
+        },
+        "whole_search.delta_updates": {
+          "n": 8492,
+          "min": 64,
+          "max": 143351,
+          "sum": 790627496
+        },
+        "whole_search.nodes": {
+          "n": 8492,
+          "min": 255,
+          "max": 197515,
+          "sum": 832596472
+        },
+        "whole_search.policy_calls": {
+          "n": 8492,
+          "min": 0,
+          "max": 0,
+          "sum": 0
+        },
+        "whole_search.pvs_researches": {
+          "n": 8492,
+          "min": 0,
+          "max": 134,
+          "sum": 206295
+        },
+        "whole_search.static_evaluations": {
+          "n": 8492,
+          "min": 1,
+          "max": 84628,
+          "sum": 424728568
+        },
+        "whole_search.terminal": {
+          "n": 8492,
+          "min": 0,
+          "max": 67397,
+          "sum": 41868309
+        },
+        "whole_search.tt_board_hash_reads": {
+          "n": 8492,
+          "min": 63,
+          "max": 129872,
+          "sum": 365894851
+        },
+        "whole_search.tt_board_hash_updates": {
+          "n": 8492,
+          "min": 191,
+          "max": 197473,
+          "sum": 832495909
+        },
+        "whole_search.tt_bound_cutoffs": {
+          "n": 8492,
+          "min": 0,
+          "max": 7694,
+          "sum": 11804843
+        },
+        "whole_search.tt_capacity_skips": {
+          "n": 8492,
+          "min": 0,
+          "max": 0,
+          "scope": "gauge, not additive work or RSS"
+        },
+        "whole_search.tt_collisions": {
+          "n": 8492,
+          "min": 0,
+          "max": 2264,
+          "sum": 2487529
+        },
+        "whole_search.tt_context_initial_items": {
+          "n": 8492,
+          "min": 5,
+          "max": 83,
+          "sum": 280313
+        },
+        "whole_search.tt_context_matches": {
+          "n": 8492,
+          "min": 125,
+          "max": 34712,
+          "sum": 33093394
+        },
+        "whole_search.tt_context_misses": {
+          "n": 8492,
+          "min": 0,
+          "max": 126816,
+          "sum": 275613002
+        },
+        "whole_search.tt_context_transitions": {
+          "n": 8492,
+          "min": 191,
+          "max": 197473,
+          "sum": 832495909
+        },
+        "whole_search.tt_exact_hits": {
+          "n": 8492,
+          "min": 6,
+          "max": 585,
+          "sum": 417471
+        },
+        "whole_search.tt_generation": {
+          "n": 8492,
+          "min": 3,
+          "max": 555,
+          "sum": 880724
+        },
+        "whole_search.tt_hash_collisions": {
+          "n": 8492,
+          "min": 0,
+          "max": 0,
+          "sum": 0
+        },
+        "whole_search.tt_hashes": {
+          "n": 8492,
+          "min": 6,
+          "max": 129,
+          "sum": 209629
+        },
+        "whole_search.tt_illegal_moves": {
+          "n": 8492,
+          "min": 0,
+          "max": 0,
+          "sum": 0
+        },
+        "whole_search.tt_index_collisions": {
+          "n": 8492,
+          "min": 0,
+          "max": 2264,
+          "sum": 2487529
+        },
+        "whole_search.tt_key_builds": {
+          "n": 8492,
+          "min": 191,
+          "max": 129955,
+          "sum": 366095988
+        },
+        "whole_search.tt_key_hits": {
+          "n": 8492,
+          "min": 125,
+          "max": 129698,
+          "sum": 308706396
+        },
+        "whole_search.tt_order_context_mismatch": {
+          "n": 8492,
+          "min": 0,
+          "max": 126816,
+          "sum": 275613002
+        },
+        "whole_search.tt_order_only": {
+          "n": 8492,
+          "min": 85,
+          "max": 129576,
+          "sum": 296331487
+        },
+        "whole_search.tt_probes": {
+          "n": 8492,
+          "min": 127,
+          "max": 129914,
+          "sum": 365999595
+        },
+        "whole_search.tt_replacements": {
+          "n": 8492,
+          "min": 97,
+          "max": 108318,
+          "sum": 250593309
+        },
+        "whole_search.tt_retained_bytes": {
+          "n": 8492,
+          "min": 83886128,
+          "max": 83886128,
+          "scope": "gauge, not additive work or RSS"
+        },
+        "whole_search.tt_usable_depth": {
+          "n": 8492,
+          "min": 0,
+          "max": 7864,
+          "sum": 12374909
+        }
+      },
+      "caller_seconds": {
+        "n": 8492,
+        "sum": 836.670557054,
+        "mean": 0.09852455923857749,
+        "min": 0.000438867,
+        "max": 0.110667046,
+        "global_median": null,
+        "global_median_status": "not retained; chunk medians are not pooled",
+        "chunk_medians": [
+          0.099880085,
+          0.099537681,
+          0.099820626,
+          0.099932648,
+          0.099972911,
+          0.0993583425,
+          0.09928854349999999,
+          0.099722024,
+          0.099928442,
+          0.099853733,
+          0.099497305,
+          0.0998379655
+        ]
+      },
+      "thinking_seconds": {
+        "n": 8492,
+        "sum": 556.9143427640001,
+        "mean": 0.06558105779133304,
+        "min": 0.000391779,
+        "max": 0.094999315,
+        "global_median": null,
+        "global_median_status": "not retained; chunk medians are not pooled",
+        "chunk_medians": [
+          0.066633418,
+          0.069100768,
+          0.06921184,
+          0.069317334,
+          0.06824952249999999,
+          0.0676194765,
+          0.06679720950000001,
+          0.067303196,
+          0.071157198,
+          0.068683511,
+          0.06879806,
+          0.06849021799999999
+        ]
+      }
+    },
+    {
+      "model": "BEST43",
+      "observations": 8498,
+      "accepted": 8498,
+      "accepted_completed": 8498,
+      "receipt_checked": 8498,
+      "receipt_late": 0,
+      "accepted_receipt_checked": 8498,
+      "accepted_receipt_late": 0,
+      "return_checked": 8498,
+      "return_after_deadline": 1135,
+      "commit_checked": 8498,
+      "commit_after_deadline": 1228,
+      "accepted_authority_legal_false": 0,
+      "accepted_authority_legal_unknown": 0,
+      "stops": {
+        "internal_time_limit": 8340,
+        "depth_cap": 140,
+        "cancelled": 18
+      },
+      "stock_root_exposure": {
+        "16..20": 105,
+        "8..15": 1260,
+        "1..7": 5158,
+        "0": 1975
+      },
+      "accepted_depth": {
+        "n": 8498,
+        "histogram": {
+          "3": 37,
+          "4": 2476,
+          "6": 387,
+          "8": 276,
+          "13": 234,
+          "12": 337,
+          "16": 139,
+          "18": 327,
+          "19": 306,
+          "20": 283,
+          "5": 870,
+          "11": 308,
+          "29": 19,
+          "28": 37,
+          "27": 37,
+          "25": 80,
+          "7": 178,
+          "10": 439,
+          "14": 107,
+          "17": 248,
+          "23": 117,
+          "26": 55,
+          "9": 444,
+          "31": 19,
+          "33": 10,
+          "36": 4,
+          "15": 88,
+          "24": 86,
+          "21": 213,
+          "22": 158,
+          "64": 140,
+          "30": 13,
+          "32": 8,
+          "39": 1,
+          "49": 1,
+          "37": 1,
+          "43": 1,
+          "34": 3,
+          "35": 4,
+          "56": 1,
+          "45": 1,
+          "57": 1,
+          "44": 1,
+          "38": 1,
+          "63": 1,
+          "48": 1
+        },
+        "median": 9.0,
+        "mean": 11.269592845375383,
+        "min": 3,
+        "max": 64
+      },
+      "depth_by_side": {
+        "0": {
+          "n": 4277,
+          "histogram": {
+            "3": 22,
+            "4": 1266,
+            "5": 426,
+            "12": 187,
+            "13": 121,
+            "11": 186,
+            "29": 12,
+            "28": 20,
+            "27": 15,
+            "25": 34,
+            "9": 215,
+            "10": 238,
+            "23": 62,
+            "26": 27,
+            "31": 9,
+            "33": 6,
+            "36": 3,
+            "6": 172,
+            "19": 150,
+            "21": 104,
+            "22": 67,
+            "7": 100,
+            "8": 116,
+            "15": 47,
+            "14": 63,
+            "18": 159,
+            "16": 63,
+            "64": 77,
+            "17": 119,
+            "20": 136,
+            "30": 5,
+            "37": 1,
+            "43": 1,
+            "24": 38,
+            "35": 2,
+            "32": 3,
+            "34": 2,
+            "56": 1,
+            "45": 1,
+            "63": 1
+          },
+          "median": 9,
+          "mean": 11.257891045125088,
+          "min": 3,
+          "max": 64
+        },
+        "1": {
+          "n": 4221,
+          "histogram": {
+            "3": 15,
+            "4": 1210,
+            "6": 215,
+            "8": 160,
+            "13": 113,
+            "12": 150,
+            "16": 76,
+            "18": 168,
+            "19": 156,
+            "20": 147,
+            "5": 444,
+            "7": 78,
+            "10": 201,
+            "14": 44,
+            "17": 129,
+            "23": 55,
+            "25": 46,
+            "26": 28,
+            "27": 22,
+            "15": 41,
+            "24": 48,
+            "11": 122,
+            "22": 91,
+            "64": 63,
+            "9": 229,
+            "21": 109,
+            "28": 17,
+            "30": 8,
+            "31": 10,
+            "32": 5,
+            "39": 1,
+            "49": 1,
+            "29": 7,
+            "34": 1,
+            "35": 2,
+            "33": 4,
+            "57": 1,
+            "44": 1,
+            "36": 1,
+            "38": 1,
+            "48": 1
+          },
+          "median": 8,
+          "mean": 11.281449893390192,
+          "min": 3,
+          "max": 64
+        }
+      },
+      "depth_by_stock": {
+        "8..15": {
+          "n": 1260,
+          "histogram": {
+            "4": 1244,
+            "3": 12,
+            "6": 2,
+            "5": 2
+          },
+          "median": 4.0,
+          "mean": 3.9952380952380953,
+          "min": 3,
+          "max": 6
+        },
+        "0": {
+          "n": 1975,
+          "histogram": {
+            "16": 81,
+            "18": 288,
+            "19": 259,
+            "20": 249,
+            "29": 17,
+            "28": 33,
+            "27": 34,
+            "25": 71,
+            "17": 202,
+            "23": 105,
+            "26": 53,
+            "31": 16,
+            "33": 9,
+            "36": 3,
+            "24": 77,
+            "21": 188,
+            "22": 137,
+            "64": 113,
+            "30": 12,
+            "32": 7,
+            "37": 1,
+            "43": 1,
+            "15": 12,
+            "34": 2,
+            "35": 3,
+            "44": 1,
+            "38": 1
+          },
+          "median": 20,
+          "mean": 23.169620253164556,
+          "min": 15,
+          "max": 64
+        },
+        "16..20": {
+          "n": 105,
+          "histogram": {
+            "3": 23,
+            "4": 82
+          },
+          "median": 4,
+          "mean": 3.780952380952381,
+          "min": 3,
+          "max": 4
+        },
+        "1..7": {
+          "n": 5158,
+          "histogram": {
+            "4": 1150,
+            "6": 385,
+            "8": 276,
+            "13": 234,
+            "12": 337,
+            "5": 868,
+            "11": 308,
+            "7": 178,
+            "10": 439,
+            "14": 107,
+            "9": 444,
+            "15": 76,
+            "16": 58,
+            "19": 47,
+            "64": 27,
+            "17": 46,
+            "18": 39,
+            "21": 25,
+            "39": 1,
+            "20": 34,
+            "22": 21,
+            "49": 1,
+            "25": 9,
+            "23": 12,
+            "3": 2,
+            "27": 3,
+            "29": 2,
+            "32": 1,
+            "34": 1,
+            "56": 1,
+            "24": 9,
+            "45": 1,
+            "57": 1,
+            "35": 1,
+            "28": 4,
+            "26": 2,
+            "31": 3,
+            "33": 1,
+            "36": 1,
+            "63": 1,
+            "30": 1,
+            "48": 1
+          },
+          "median": 7.0,
+          "mean": 8.642497091896084,
+          "min": 3,
+          "max": 64
+        }
+      },
+      "scalar_fields": {
+        "observation.accepted": {
+          "True": 8498
+        },
+        "observation.failure": {
+          "None": 8498
+        },
+        "observation.engine_error": {
+          "None": 8498
+        },
+        "observation.stop": {
+          "internal_time_limit": 8340,
+          "depth_cap": 140,
+          "cancelled": 18
+        },
+        "counters.actual_lmr_enabled": {
+          "True": 8498
+        },
+        "counters.actual_lmr_method_id": {
+          "lmr408-depth-rank-log63-extra0to3-pvs-verify-v1": 8498
+        },
+        "counters.authority_legal": {
+          "True": 8498
+        },
+        "counters.clock_contract": {
+          "authority-action-receipt-v1": 8498
+        },
+        "counters.clock_contract_sha256": {
+          "04062382f70648cdfd722e59c35be1100719169097a04749b0046ea5a19a280d": 8498
+        },
+        "counters.completed_snapshot_validation_failed": {
+          "False": 8498
+        },
+        "counters.first_receipt_or_control_error": {
+          "None": 8498
+        },
+        "counters.fixed_depth_completed": {
+          "False": 8358,
+          "True": 140
+        },
+        "counters.fixed_depth_required": {
+          "False": 8498
+        },
+        "counters.lmr_reduction_rule": {
+          "d>=3,m>=4: extra=clamp(floor(0.7844+ln(min(d,63))*ln(min(m,63))/2.4696)-1,0,min(3,d-2)); child=d-1-extra; existing protection/PVS": 8498
+        },
+        "counters.matching_terminal_collected": {
+          "True": 8498
+        },
+        "counters.requested_lmr_method": {
+          "depth_rank": 8498
+        },
+        "counters.reserve_stop_is_not_user_cancel": {
+          "True": 8498
+        },
+        "counters.selection_reason": {
+          "completed_iteration": 8498
+        },
+        "counters.terminal_collected": {
+          "True": 8498
+        }
+      },
+      "whole_search_work_alternative": {
+        "cutoffs": {
+          "n": 8498,
+          "min": 63,
+          "max": 97986,
+          "sum": 252451380
+        },
+        "delta_updates": {
+          "n": 8498,
+          "min": 64,
+          "max": 142196,
+          "sum": 795269263
+        },
+        "nodes": {
+          "n": 8498,
+          "min": 255,
+          "max": 198783,
+          "sum": 837603276
+        },
+        "policy_calls": {
+          "n": 8498,
+          "min": 0,
+          "max": 0,
+          "sum": 0
+        },
+        "pvs_researches": {
+          "n": 8498,
+          "min": 0,
+          "max": 144,
+          "sum": 191411
+        },
+        "static_evaluations": {
+          "n": 8498,
+          "min": 1,
+          "max": 87482,
+          "sum": 427040776
+        },
+        "terminal": {
+          "n": 8498,
+          "min": 0,
+          "max": 79704,
+          "sum": 42234023
+        },
+        "tt_board_hash_reads": {
+          "n": 8498,
+          "min": 63,
+          "max": 124885,
+          "sum": 368224330
+        },
+        "tt_board_hash_updates": {
+          "n": 8498,
+          "min": 191,
+          "max": 198738,
+          "sum": 837503385
+        },
+        "tt_bound_cutoffs": {
+          "n": 8498,
+          "min": 0,
+          "max": 7866,
+          "sum": 11434628
+        },
+        "tt_capacity_skips": {
+          "n": 8498,
+          "min": 0,
+          "max": 0,
+          "scope": "gauge, not additive work or RSS"
+        },
+        "tt_collisions": {
+          "n": 8498,
+          "min": 0,
+          "max": 2136,
+          "sum": 2516151
+        },
+        "tt_context_initial_items": {
+          "n": 8498,
+          "min": 5,
+          "max": 82,
+          "sum": 280641
+        },
+        "tt_context_matches": {
+          "n": 8498,
+          "min": 125,
+          "max": 28989,
+          "sum": 32651346
+        },
+        "tt_context_misses": {
+          "n": 8498,
+          "min": 0,
+          "max": 122891,
+          "sum": 277731816
+        },
+        "tt_context_transitions": {
+          "n": 8498,
+          "min": 191,
+          "max": 198738,
+          "sum": 837503385
+        },
+        "tt_exact_hits": {
+          "n": 8498,
+          "min": 4,
+          "max": 691,
+          "sum": 409643
+        },
+        "tt_generation": {
+          "n": 8498,
+          "min": 4,
+          "max": 578,
+          "scope": "gauge, not additive work or RSS"
+        },
+        "tt_hash_collisions": {
+          "n": 8498,
+          "min": 0,
+          "max": 0,
+          "sum": 0
+        },
+        "tt_hashes": {
+          "n": 8498,
+          "min": 8,
+          "max": 129,
+          "sum": 208434
+        },
+        "tt_illegal_moves": {
+          "n": 8498,
+          "min": 0,
+          "max": 0,
+          "sum": 0
+        },
+        "tt_index_collisions": {
+          "n": 8498,
+          "min": 0,
+          "max": 2136,
+          "sum": 2516151
+        },
+        "tt_key_builds": {
+          "n": 8498,
+          "min": 191,
+          "max": 124974,
+          "sum": 368424266
+        },
+        "tt_key_hits": {
+          "n": 8498,
+          "min": 125,
+          "max": 124757,
+          "sum": 310383162
+        },
+        "tt_order_context_mismatch": {
+          "n": 8498,
+          "min": 0,
+          "max": 122891,
+          "sum": 277731816
+        },
+        "tt_order_only": {
+          "n": 8498,
+          "min": 125,
+          "max": 124756,
+          "sum": 298441319
+        },
+        "tt_probes": {
+          "n": 8498,
+          "min": 127,
+          "max": 124930,
+          "sum": 368328477
+        },
+        "tt_replacements": {
+          "n": 8498,
+          "min": 125,
+          "max": 124746,
+          "sum": 253136263
+        },
+        "tt_retained_bytes": {
+          "n": 8498,
+          "min": 83886128,
+          "max": 83886128,
+          "scope": "gauge, not additive work or RSS"
+        },
+        "tt_usable_depth": {
+          "n": 8498,
+          "min": 0,
+          "max": 8001,
+          "sum": 11941843
+        }
+      },
+      "selected_snapshot_work": {
+        "cutoffs": {
+          "n": 8498,
+          "min": 63,
+          "max": 96848,
+          "sum": 194644357
+        },
+        "delta_updates": {
+          "n": 8498,
+          "min": 64,
+          "max": 138991,
+          "sum": 556841759
+        },
+        "nodes": {
+          "n": 8498,
+          "min": 255,
+          "max": 196492,
+          "sum": 591507262
+        },
+        "policy_calls": {
+          "n": 8498,
+          "min": 0,
+          "max": 0,
+          "sum": 0
+        },
+        "pvs_researches": {
+          "n": 8498,
+          "min": 0,
+          "max": 122,
+          "sum": 131674
+        },
+        "static_evaluations": {
+          "n": 8498,
+          "min": 1,
+          "max": 82946,
+          "sum": 272606446
+        },
+        "terminal": {
+          "n": 8498,
+          "min": 0,
+          "max": 77039,
+          "sum": 34569734
+        },
+        "tt_board_hash_reads": {
+          "n": 8498,
+          "min": 63,
+          "max": 123530,
+          "sum": 284235313
+        },
+        "tt_board_hash_updates": {
+          "n": 8498,
+          "min": 191,
+          "max": 196447,
+          "sum": 591411493
+        },
+        "tt_bound_cutoffs": {
+          "n": 8498,
+          "min": 0,
+          "max": 6778,
+          "sum": 7141410
+        },
+        "tt_capacity_skips": {
+          "n": 8498,
+          "min": 0,
+          "max": 0,
+          "scope": "gauge, not additive work or RSS"
+        },
+        "tt_collisions": {
+          "n": 8498,
+          "min": 0,
+          "max": 1921,
+          "sum": 1660697
+        },
+        "tt_context_initial_items": {
+          "n": 8498,
+          "min": 5,
+          "max": 82,
+          "sum": 280641
+        },
+        "tt_context_matches": {
+          "n": 8498,
+          "min": 91,
+          "max": 28730,
+          "sum": 24867009
+        },
+        "tt_context_misses": {
+          "n": 8498,
+          "min": 0,
+          "max": 121556,
+          "sum": 218563795
+        },
+        "tt_context_transitions": {
+          "n": 8498,
+          "min": 191,
+          "max": 196447,
+          "sum": 591411493
+        },
+        "tt_exact_hits": {
+          "n": 8498,
+          "min": 3,
+          "max": 691,
+          "sum": 354229
+        },
+        "tt_generation": {
+          "n": 8498,
+          "min": 3,
+          "max": 578,
+          "scope": "gauge, not additive work or RSS"
+        },
+        "tt_hash_collisions": {
+          "n": 8498,
+          "min": 0,
+          "max": 0,
+          "sum": 0
+        },
+        "tt_hashes": {
+          "n": 8498,
+          "min": 7,
+          "max": 129,
+          "sum": 200034
+        },
+        "tt_illegal_moves": {
+          "n": 8498,
+          "min": 0,
+          "max": 0,
+          "sum": 0
+        },
+        "tt_index_collisions": {
+          "n": 8498,
+          "min": 0,
+          "max": 1921,
+          "sum": 1660697
+        },
+        "tt_key_builds": {
+          "n": 8498,
+          "min": 191,
+          "max": 123618,
+          "sum": 284426849
+        },
+        "tt_key_hits": {
+          "n": 8498,
+          "min": 91,
+          "max": 123401,
+          "sum": 243430804
+        },
+        "tt_order_context_mismatch": {
+          "n": 8498,
+          "min": 0,
+          "max": 121556,
+          "sum": 218563795
+        },
+        "tt_order_only": {
+          "n": 8498,
+          "min": 90,
+          "max": 123400,
+          "sum": 236014892
+        },
+        "tt_probes": {
+          "n": 8498,
+          "min": 127,
+          "max": 123574,
+          "sum": 284331082
+        },
+        "tt_replacements": {
+          "n": 8498,
+          "min": 91,
+          "max": 123400,
+          "sum": 201486306
+        },
+        "tt_retained_bytes": {
+          "n": 8498,
+          "min": 83886128,
+          "max": 83886128,
+          "scope": "gauge, not additive work or RSS"
+        },
+        "tt_usable_depth": {
+          "n": 8498,
+          "min": 0,
+          "max": 6786,
+          "sum": 7415912
+        }
+      },
+      "outer_counters_alternative": {
+        "AI_terminal_finished_ns": {
+          "n": 8498,
+          "min": 98410881,
+          "max": 7197545268,
+          "sum": 19891217382949
+        },
+        "AI_worker_core": {
+          "n": 8498,
+          "min": 6,
+          "max": 6,
+          "sum": 50988
+        },
+        "AI_worker_tid": {
+          "n": 8498,
+          "min": 730394,
+          "max": 740163,
+          "sum": 6249999021
+        },
+        "authority_core": {
+          "n": 8498,
+          "min": 4,
+          "max": 4,
+          "sum": 33992
+        },
+        "authority_receipt_ns": {
+          "n": 8498,
+          "min": 38102351,
+          "max": 7177806913,
+          "sum": 19612244141498
+        },
+        "authority_tid": {
+          "n": 8498,
+          "min": 730392,
+          "max": 740161,
+          "sum": 6249981302
+        },
+        "drain_finished_ns": {
+          "n": 8498,
+          "min": 98430464,
+          "max": 7197548294,
+          "sum": 19892782143373
+        },
+        "full_caller_ns": {
+          "n": 8498,
+          "min": 418953,
+          "max": 108551312,
+          "sum": 833396362342
+        },
+        "inflight_after_drain": {
+          "n": 8498,
+          "min": 0,
+          "max": 0,
+          "sum": 0
+        },
+        "last_completed_iteration_ns": {
+          "n": 8498,
+          "min": 38102351,
+          "max": 7177806913,
+          "sum": 19612244141498
+        },
+        "lmr_work_completed.attempts": {
+          "n": 8498,
+          "min": 0,
+          "max": 64329,
+          "sum": 22396688
+        },
+        "lmr_work_completed.full_depth_confirmations": {
+          "n": 8498,
+          "min": 0,
+          "max": 3226,
+          "sum": 91638
+        },
+        "lmr_work_completed.full_window_researches": {
+          "n": 8498,
+          "min": 0,
+          "max": 7,
+          "sum": 867
+        },
+        "lmr_work_terminal.attempts": {
+          "n": 8498,
+          "min": 0,
+          "max": 68727,
+          "sum": 32927510
+        },
+        "lmr_work_terminal.full_depth_confirmations": {
+          "n": 8498,
+          "min": 0,
+          "max": 4085,
+          "sum": 170178
+        },
+        "lmr_work_terminal.full_window_researches": {
+          "n": 8498,
+          "min": 0,
+          "max": 9,
+          "sum": 1989
+        },
+        "operation_node_remaining_after_drain": {
+          "n": 8498,
+          "min": 105949277,
+          "max": 249896639,
+          "sum": 1536612473169
+        },
+        "operation_node_reservation": {
+          "n": 8498,
+          "min": 1000000,
+          "max": 1000000,
+          "sum": 8498000000
+        },
+        "requested_depth": {
+          "n": 8498,
+          "min": 64,
+          "max": 64,
+          "sum": 543872
+        },
+        "state_commit_ns": {
+          "n": 8498,
+          "min": 98478744,
+          "max": 7197596052,
+          "sum": 19893256223695
+        },
+        "terminal_collected_ns": {
+          "n": 8498,
+          "min": 98430087,
+          "max": 7197547846,
+          "sum": 19892777691528
+        },
+        "whole_search.cutoffs": {
+          "n": 8498,
+          "min": 63,
+          "max": 97986,
+          "sum": 252451380
+        },
+        "whole_search.delta_updates": {
+          "n": 8498,
+          "min": 64,
+          "max": 142196,
+          "sum": 795269263
+        },
+        "whole_search.nodes": {
+          "n": 8498,
+          "min": 255,
+          "max": 198783,
+          "sum": 837603276
+        },
+        "whole_search.policy_calls": {
+          "n": 8498,
+          "min": 0,
+          "max": 0,
+          "sum": 0
+        },
+        "whole_search.pvs_researches": {
+          "n": 8498,
+          "min": 0,
+          "max": 144,
+          "sum": 191411
+        },
+        "whole_search.static_evaluations": {
+          "n": 8498,
+          "min": 1,
+          "max": 87482,
+          "sum": 427040776
+        },
+        "whole_search.terminal": {
+          "n": 8498,
+          "min": 0,
+          "max": 79704,
+          "sum": 42234023
+        },
+        "whole_search.tt_board_hash_reads": {
+          "n": 8498,
+          "min": 63,
+          "max": 124885,
+          "sum": 368224330
+        },
+        "whole_search.tt_board_hash_updates": {
+          "n": 8498,
+          "min": 191,
+          "max": 198738,
+          "sum": 837503385
+        },
+        "whole_search.tt_bound_cutoffs": {
+          "n": 8498,
+          "min": 0,
+          "max": 7866,
+          "sum": 11434628
+        },
+        "whole_search.tt_capacity_skips": {
+          "n": 8498,
+          "min": 0,
+          "max": 0,
+          "scope": "gauge, not additive work or RSS"
+        },
+        "whole_search.tt_collisions": {
+          "n": 8498,
+          "min": 0,
+          "max": 2136,
+          "sum": 2516151
+        },
+        "whole_search.tt_context_initial_items": {
+          "n": 8498,
+          "min": 5,
+          "max": 82,
+          "sum": 280641
+        },
+        "whole_search.tt_context_matches": {
+          "n": 8498,
+          "min": 125,
+          "max": 28989,
+          "sum": 32651346
+        },
+        "whole_search.tt_context_misses": {
+          "n": 8498,
+          "min": 0,
+          "max": 122891,
+          "sum": 277731816
+        },
+        "whole_search.tt_context_transitions": {
+          "n": 8498,
+          "min": 191,
+          "max": 198738,
+          "sum": 837503385
+        },
+        "whole_search.tt_exact_hits": {
+          "n": 8498,
+          "min": 4,
+          "max": 691,
+          "sum": 409643
+        },
+        "whole_search.tt_generation": {
+          "n": 8498,
+          "min": 4,
+          "max": 578,
+          "sum": 873338
+        },
+        "whole_search.tt_hash_collisions": {
+          "n": 8498,
+          "min": 0,
+          "max": 0,
+          "sum": 0
+        },
+        "whole_search.tt_hashes": {
+          "n": 8498,
+          "min": 8,
+          "max": 129,
+          "sum": 208434
+        },
+        "whole_search.tt_illegal_moves": {
+          "n": 8498,
+          "min": 0,
+          "max": 0,
+          "sum": 0
+        },
+        "whole_search.tt_index_collisions": {
+          "n": 8498,
+          "min": 0,
+          "max": 2136,
+          "sum": 2516151
+        },
+        "whole_search.tt_key_builds": {
+          "n": 8498,
+          "min": 191,
+          "max": 124974,
+          "sum": 368424266
+        },
+        "whole_search.tt_key_hits": {
+          "n": 8498,
+          "min": 125,
+          "max": 124757,
+          "sum": 310383162
+        },
+        "whole_search.tt_order_context_mismatch": {
+          "n": 8498,
+          "min": 0,
+          "max": 122891,
+          "sum": 277731816
+        },
+        "whole_search.tt_order_only": {
+          "n": 8498,
+          "min": 125,
+          "max": 124756,
+          "sum": 298441319
+        },
+        "whole_search.tt_probes": {
+          "n": 8498,
+          "min": 127,
+          "max": 124930,
+          "sum": 368328477
+        },
+        "whole_search.tt_replacements": {
+          "n": 8498,
+          "min": 125,
+          "max": 124746,
+          "sum": 253136263
+        },
+        "whole_search.tt_retained_bytes": {
+          "n": 8498,
+          "min": 83886128,
+          "max": 83886128,
+          "scope": "gauge, not additive work or RSS"
+        },
+        "whole_search.tt_usable_depth": {
+          "n": 8498,
+          "min": 0,
+          "max": 8001,
+          "sum": 11941843
+        }
+      },
+      "caller_seconds": {
+        "n": 8498,
+        "sum": 833.3963623420001,
+        "mean": 0.09806970608872677,
+        "min": 0.000418953,
+        "max": 0.108551312,
+        "global_median": null,
+        "global_median_status": "not retained; chunk medians are not pooled",
+        "chunk_medians": [
+          0.099431866,
+          0.09959134650000001,
+          0.09969191,
+          0.0999002875,
+          0.0991933615,
+          0.098978071,
+          0.099030961,
+          0.099189206,
+          0.098976182,
+          0.0990087105,
+          0.099068188,
+          0.099188091
+        ]
+      },
+      "thinking_seconds": {
+        "n": 8498,
+        "sum": 552.3842801449999,
+        "mean": 0.06500168041244998,
+        "min": 0.000379801,
+        "max": 0.094999754,
+        "global_median": null,
+        "global_median_status": "not retained; chunk medians are not pooled",
+        "chunk_medians": [
+          0.06634721,
+          0.06700419599999999,
+          0.068461733,
+          0.068736481,
+          0.0696925125,
+          0.0669674435,
+          0.0676762855,
+          0.066812633,
+          0.069623616,
+          0.068839694,
+          0.068627347,
+          0.068673489
+        ]
+      }
+    }
+  ],
+  "charged_nodes_including_opaque_reservations": 1670199748,
+  "disjoint_caps": 3000000000,
+  "raw_streams": [
+    {
+      "archive": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-v1/arena384-v1/batch-000/data/completed.jsonl.gz",
+        "sha256": "709d0e60b1f0f3749ab77a765ac719a0b8c949f46fe62cd1a8ac74d379543688",
+        "bytes": 953416,
+        "mode": "0644"
+      },
+      "decode_count": 1,
+      "CRC_EOF": "PASS",
+      "raw_sha256": "51b95819746e7e61b077b019272b5c37daeea003fc92eae8f49eff8c8ccbc183",
+      "raw_bytes": 5396156,
+      "raw_lines": 32,
+      "compressed_before_after_MATCH": true
+    },
+    {
+      "archive": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-v1/arena384-v1/batch-001/data/completed.jsonl.gz",
+        "sha256": "d2064e4ea662a29555868d4f305ffd9d20ae957b99a67608629b5749f920bafa",
+        "bytes": 997902,
+        "mode": "0644"
+      },
+      "decode_count": 1,
+      "CRC_EOF": "PASS",
+      "raw_sha256": "ac44c04153d0e35d25134217a7fcbec03fe7ac254ec9ab66ca8adf598f8c1a5a",
+      "raw_bytes": 5601448,
+      "raw_lines": 32,
+      "compressed_before_after_MATCH": true
+    },
+    {
+      "archive": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-v1/arena384-v1/batch-002/data/completed.jsonl.gz",
+        "sha256": "7b4b59b7df8e06c4de8cdce4e94caed5866cb8ac6f42414e24f21e9f306e4cac",
+        "bytes": 1002897,
+        "mode": "0644"
+      },
+      "decode_count": 1,
+      "CRC_EOF": "PASS",
+      "raw_sha256": "361246dcb1d9a80f473037719c61ae162c982ee6bf8059365943c25b3f461a41",
+      "raw_bytes": 5650970,
+      "raw_lines": 32,
+      "compressed_before_after_MATCH": true
+    },
+    {
+      "archive": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-v1/arena384-v1/batch-003/data/completed.jsonl.gz",
+        "sha256": "e778c7f63f09c2ba220ef22b20f10a539180fc9463371db03a6ce41405bcc86d",
+        "bytes": 1007786,
+        "mode": "0644"
+      },
+      "decode_count": 1,
+      "CRC_EOF": "PASS",
+      "raw_sha256": "2340f05cc3d6dfa437f47d6b8c78a60a22eaf9c053017316b32795647602381f",
+      "raw_bytes": 5669731,
+      "raw_lines": 32,
+      "compressed_before_after_MATCH": true
+    },
+    {
+      "archive": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-v1/arena384-v1/batch-004/data/completed.jsonl.gz",
+        "sha256": "48c17824f8cb5ec3e91c87523650b29714debf30bd8f1c6a1230dc4d33d22ed7",
+        "bytes": 999276,
+        "mode": "0644"
+      },
+      "decode_count": 1,
+      "CRC_EOF": "PASS",
+      "raw_sha256": "4a5ae040f1951e6fdc7e77cba3f1ab7c90cbc474c492d921136d17fdaeaf4ac4",
+      "raw_bytes": 5621244,
+      "raw_lines": 32,
+      "compressed_before_after_MATCH": true
+    },
+    {
+      "archive": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-v1/arena384-v1/batch-005/data/completed.jsonl.gz",
+        "sha256": "21476a94418853804bb05fd2e859110e33f3b837089b8abcb10c7205fc281da5",
+        "bytes": 951829,
+        "mode": "0644"
+      },
+      "decode_count": 1,
+      "CRC_EOF": "PASS",
+      "raw_sha256": "550ff42d19ef4497d700da454d312c05ca45e6e5018d112908fd0ebb56db889d",
+      "raw_bytes": 5381722,
+      "raw_lines": 32,
+      "compressed_before_after_MATCH": true
+    },
+    {
+      "archive": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-v1/arena384-v1/batch-006/data/completed.jsonl.gz",
+        "sha256": "bc93c77514e74a93a910cef6ba4ee12e9505907d23fb2d9af91795e0178ee55f",
+        "bytes": 920153,
+        "mode": "0644"
+      },
+      "decode_count": 1,
+      "CRC_EOF": "PASS",
+      "raw_sha256": "e0460cb8bb2b1284e0d09716a9915af7bad5ed8723f02a0aa13644eb0b9d9f85",
+      "raw_bytes": 5159896,
+      "raw_lines": 32,
+      "compressed_before_after_MATCH": true
+    },
+    {
+      "archive": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-v1/arena384-v1/batch-007/data/completed.jsonl.gz",
+        "sha256": "7534a04fdf69bdc472cde8964ec4b108964a5312e0a8d42859ccdc393c05da04",
+        "bytes": 1005977,
+        "mode": "0644"
+      },
+      "decode_count": 1,
+      "CRC_EOF": "PASS",
+      "raw_sha256": "b0502075c02ea90549cf38a7dd9a78c3b1eb121143cf726b9ede7d95873f957d",
+      "raw_bytes": 5651021,
+      "raw_lines": 32,
+      "compressed_before_after_MATCH": true
+    },
+    {
+      "archive": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-v1/arena384-v1/batch-008/data/completed.jsonl.gz",
+        "sha256": "107bbec93f8414f80000d760b1d64008f7d2e728185bea16b888804c2c281e7d",
+        "bytes": 1007999,
+        "mode": "0644"
+      },
+      "decode_count": 1,
+      "CRC_EOF": "PASS",
+      "raw_sha256": "0933438c434d5a1b7bbe6b2c9c302902aca6d2e894ad048a531c94e576b6776c",
+      "raw_bytes": 5680709,
+      "raw_lines": 32,
+      "compressed_before_after_MATCH": true
+    },
+    {
+      "archive": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-v1/arena384-v1/batch-009/data/completed.jsonl.gz",
+        "sha256": "800869b70a093e1f531548983ce3f0f11f86d2f6f5c849038034479ca3ee5fb1",
+        "bytes": 982363,
+        "mode": "0644"
+      },
+      "decode_count": 1,
+      "CRC_EOF": "PASS",
+      "raw_sha256": "3f9647ad99692cc330b3f86d17a9c91c85069ecf5659245ef5fefaae66f345b4",
+      "raw_bytes": 5539091,
+      "raw_lines": 32,
+      "compressed_before_after_MATCH": true
+    },
+    {
+      "archive": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-v1/arena384-v1/batch-010/data/completed.jsonl.gz",
+        "sha256": "11da8f32d6861155d44bbb9c919ee0f6a26329b0bf3a708074a5d2c02ce12e1e",
+        "bytes": 997216,
+        "mode": "0644"
+      },
+      "decode_count": 1,
+      "CRC_EOF": "PASS",
+      "raw_sha256": "7a40d74e09cdcc3a895cc1f341ee2e6e8c7a11d1088efc8824fe8cfa10df9f2e",
+      "raw_bytes": 5633032,
+      "raw_lines": 32,
+      "compressed_before_after_MATCH": true
+    },
+    {
+      "archive": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-v1/arena384-v1/batch-011/data/completed.jsonl.gz",
+        "sha256": "f7c0d3547eb91bfe6f3a2b4e0847c1f5f945eb2a114466a181084b8f329d3eda",
+        "bytes": 961704,
+        "mode": "0644"
+      },
+      "decode_count": 1,
+      "CRC_EOF": "PASS",
+      "raw_sha256": "3f4d558a10588060f0d43a6c7418b8231268e3b95c26381dcf837d3694749ac0",
+      "raw_bytes": 5429990,
+      "raw_lines": 32,
+      "compressed_before_after_MATCH": true
+    }
+  ],
+  "history_checker_resolution": {
+    "initial_order_sensitive_flags": [
+      {
+        "slot": 154,
+        "scope": "weighted_root_history"
+      },
+      {
+        "slot": 155,
+        "scope": "weighted_root_history"
+      }
+    ],
+    "same_weighted_key_counts_after_order_normalization": true,
+    "scope": "family77 arrays have a different preserved serialization order; complete key/count content exact, native metadata unchanged",
+    "unresolved_data_discrepancies": []
+  },
+  "all_other_join_check_counts": {
+    "seven_family_fields": 384,
+    "canonical_lineage": 384,
+    "colour_schedule": 384,
+    "winner_CSV": 384,
+    "full_prefix_and_plies": 384,
+    "root_key": 384,
+    "weighted_root_history": 384,
+    "native_root_board_ply": 384,
+    "no_prior_goal_or_threefold": 384,
+    "terminal_goal_first_or_threefold": 384,
+    "actor_colour": 16990,
+    "accepted_action_path": 16990,
+    "STM_path": 16990,
+    "accepted_move_census": 384,
+    "two_colour_pair": 192,
+    "root_pair_score": 192
+  },
+  "ply_offset_histogram": {
+    "0": 16990
+  },
+  "native_chunk_intervals_not_pooled": [
+    {
+      "schema": "quoridor-arena-v2",
+      "census": {
+        "planned_games": 32,
+        "started_games": 32,
+        "completed_games": 32,
+        "unknown_games": 0,
+        "complete_pairs": 16,
+        "incomplete_pairs": 0,
+        "unknown_reasons": {}
+      },
+      "by_cohort": {
+        "Main": {
+          "planned_games": 32,
+          "started_games": 32,
+          "completed_games": 32,
+          "unknown_games": 0,
+          "complete_pairs": 16,
+          "incomplete_pairs": 0,
+          "unknown_reasons": {}
+        }
+      },
+      "pairs": [
+        {
+          "family": "432-C-LAST467-vs-BEST43-000-family-000000",
+          "cohort": "Main",
+          "lineage": "432:71438ccb11426054bad61b37a197d610f4ce950c729ffa69ac978c9117bac266",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-000-family-000001",
+          "cohort": "Main",
+          "lineage": "432:5a261249ac741b6c80323bdf9caa4b62b70de120434103a2d9756f7c6180d3a5",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-000-family-000002",
+          "cohort": "Main",
+          "lineage": "432:32f02497237e1c7837b56191456f9f0125dfeb55a036b54eccf3cfd401218dfd",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-000-family-000003",
+          "cohort": "Main",
+          "lineage": "432:5c19ef29282376f4ca6641898ff665c34223860c7ac82530be1d3804054130af",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-000-family-000004",
+          "cohort": "Main",
+          "lineage": "432:63e357c90ea85210050ac0c2833bacd2af485fb91caf6f40eb7b141e84ca0cfe",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-000-family-000005",
+          "cohort": "Main",
+          "lineage": "432:8569880462063c3fdea36fd9dc479c627bea915b218f736a7f1e732ff023023e",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-000-family-000006",
+          "cohort": "Main",
+          "lineage": "432:261b77fb6db8912e8667ae317e14716458fa572e151a1ef019211fd6fae2bfb2",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-000-family-000007",
+          "cohort": "Main",
+          "lineage": "432:1d65aee15401994cfdbe40021e6546ba01a3a862020d78dd759c28345a3aa2dc",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-000-family-000008",
+          "cohort": "Main",
+          "lineage": "432:5b7b6c2ebc426e8d0a322b0c840b3d22c6acfdbf68514057481b648a3d009cd6",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-000-family-000009",
+          "cohort": "Main",
+          "lineage": "432:3b7c93935cce483d8cd583182c2bc958d37128adffdb97e3c75a5459bcc93560",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-000-family-000010",
+          "cohort": "Main",
+          "lineage": "432:cff3d0ad718473c37a5f5c9c1676eee61eae1d9c797e63b954d2430fc795b46d",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-000-family-000011",
+          "cohort": "Main",
+          "lineage": "432:8ad4595c50de6911388e2b063a40760ea1432b56ebb44c4a3934ff3da58bb22c",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-000-family-000012",
+          "cohort": "Main",
+          "lineage": "432:34a9dd6978086e7cb5ea35814ea8ca2b129797b52c812537d0f9284308f8ab50",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-000-family-000013",
+          "cohort": "Main",
+          "lineage": "432:223573df38ea79e325185311678bba6deda4af68abfdadb0d719392f9df40fb2",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-000-family-000014",
+          "cohort": "Main",
+          "lineage": "432:7b2f2ddbfb411664a0b033a1f921a1c4f0b426540f501df4485d75a811fecf94",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-000-family-000015",
+          "cohort": "Main",
+          "lineage": "432:0630c1b94201c57dec33bd6de7c649eb448653af80fda066ddd1b3824b37000c",
+          "score": 0.5
+        }
+      ],
+      "complete_pair_mean": 0.5625,
+      "valid_game_score_secondary": 0.5625,
+      "planned_score_range": [
+        0.5625,
+        0.5625
+      ],
+      "bootstrap": {
+        "seed": 43220261017,
+        "resamples": 10000,
+        "unit": "complete family pair",
+        "percentile_95": [
+          0.4375,
+          0.6875
+        ],
+        "limitations": [
+          "Fixed sample, complete pairs only; missingness may bias the primary score.",
+          "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+          "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+          "Repeated inspection of this interval is not a sequential stopping rule."
+        ]
+      }
+    },
+    {
+      "schema": "quoridor-arena-v2",
+      "census": {
+        "planned_games": 32,
+        "started_games": 32,
+        "completed_games": 32,
+        "unknown_games": 0,
+        "complete_pairs": 16,
+        "incomplete_pairs": 0,
+        "unknown_reasons": {}
+      },
+      "by_cohort": {
+        "Main": {
+          "planned_games": 32,
+          "started_games": 32,
+          "completed_games": 32,
+          "unknown_games": 0,
+          "complete_pairs": 16,
+          "incomplete_pairs": 0,
+          "unknown_reasons": {}
+        }
+      },
+      "pairs": [
+        {
+          "family": "432-C-LAST467-vs-BEST43-001-family-000000",
+          "cohort": "Main",
+          "lineage": "432:d438fa11acad3fe45bc7d93b239edb6d197244c241a189489dfad702f5ff9e14",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-001-family-000001",
+          "cohort": "Main",
+          "lineage": "432:03db9de1c6cc00f5d53631cf1bb82399a8f0388620a769ea3da872972d4fb9cb",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-001-family-000002",
+          "cohort": "Main",
+          "lineage": "432:17079b0623770e58b66000865f51dcee7af25b5b8bf06759bd1107b37227e41c",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-001-family-000003",
+          "cohort": "Main",
+          "lineage": "432:e897a6f6407876ff8410529444e1929ad9316c90e1f8078d7219955c6b31d0d7",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-001-family-000004",
+          "cohort": "Main",
+          "lineage": "432:241023528c83578b03fcbd53c0aa0553f05e43b3a6fed325f603bf5f86961faf",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-001-family-000005",
+          "cohort": "Main",
+          "lineage": "432:d2484ee8012726ba1dac5bb61e4dd22f9012f299562c253977c8638b13ba5b0d",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-001-family-000006",
+          "cohort": "Main",
+          "lineage": "432:50c0a65cd65a1106379eaa856c3c2e5952dadfc0297e2d36466cc304f8fe8a72",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-001-family-000007",
+          "cohort": "Main",
+          "lineage": "432:5b847e445c715b92fee48908f9ac31cebfe28b190d6375fbeac981876e5983dc",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-001-family-000008",
+          "cohort": "Main",
+          "lineage": "432:b2333512515adcca969fc5439c60cfba0ff4d318a6d6859b1d29eb53024f77a7",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-001-family-000009",
+          "cohort": "Main",
+          "lineage": "432:2ea45ba6d43dfe5fa6689cf91bd2da59eea9cea2915012583971d7446d9db57b",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-001-family-000010",
+          "cohort": "Main",
+          "lineage": "432:2765017768c49ae75855cfde4013e96c86658ce08131dd1398d8de3e3194b1ad",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-001-family-000011",
+          "cohort": "Main",
+          "lineage": "432:a812c0f16c211b5a218224a3e2a3e2fdbf5ea40140a2a5d6682c28eb9a68106b",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-001-family-000012",
+          "cohort": "Main",
+          "lineage": "432:b755ec493fbe4f440afc8d6f0ea62f3d839f599ff9cdfb266b51d796f834861c",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-001-family-000013",
+          "cohort": "Main",
+          "lineage": "432:de2147384da3eb32ce03068b723ab64625c0eeee043b7713b07ac348a1944b08",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-001-family-000014",
+          "cohort": "Main",
+          "lineage": "432:9e827316cdf8de2f6df3de476c2f2c7b9ce0e3047cdc5094e5f709d54ba35dad",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-001-family-000015",
+          "cohort": "Main",
+          "lineage": "432:efddf982d67f0e1064d1db6fc51e61443b7ad1a476197a302c447777cd5017c1",
+          "score": 0.5
+        }
+      ],
+      "complete_pair_mean": 0.40625,
+      "valid_game_score_secondary": 0.40625,
+      "planned_score_range": [
+        0.40625,
+        0.40625
+      ],
+      "bootstrap": {
+        "seed": 43220261017,
+        "resamples": 10000,
+        "unit": "complete family pair",
+        "percentile_95": [
+          0.28125,
+          0.53125
+        ],
+        "limitations": [
+          "Fixed sample, complete pairs only; missingness may bias the primary score.",
+          "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+          "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+          "Repeated inspection of this interval is not a sequential stopping rule."
+        ]
+      }
+    },
+    {
+      "schema": "quoridor-arena-v2",
+      "census": {
+        "planned_games": 32,
+        "started_games": 32,
+        "completed_games": 32,
+        "unknown_games": 0,
+        "complete_pairs": 16,
+        "incomplete_pairs": 0,
+        "unknown_reasons": {}
+      },
+      "by_cohort": {
+        "Main": {
+          "planned_games": 32,
+          "started_games": 32,
+          "completed_games": 32,
+          "unknown_games": 0,
+          "complete_pairs": 16,
+          "incomplete_pairs": 0,
+          "unknown_reasons": {}
+        }
+      },
+      "pairs": [
+        {
+          "family": "432-C-LAST467-vs-BEST43-002-family-000000",
+          "cohort": "Main",
+          "lineage": "432:2161e1b6055b109dcdae60bb1e8b492aa19c36412861dc09d30c98d13bd068dc",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-002-family-000001",
+          "cohort": "Main",
+          "lineage": "432:5ff0912a9f1cbcdacb4c6a8f485da407c3008b296bfc56f78c0274d9d0f2c182",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-002-family-000002",
+          "cohort": "Main",
+          "lineage": "432:b9d1a42c12b694eea0894d264989f8d2edecd6d295ce6878cd3609662197a27f",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-002-family-000003",
+          "cohort": "Main",
+          "lineage": "432:224f40aa985962fd4e1013939b13ae5e7fe3484304046740218c2002a6dd0322",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-002-family-000004",
+          "cohort": "Main",
+          "lineage": "432:d63a4499e50c97dd9e617f5cdd52f570a4d9271bf7f5e11096cad562923b33cb",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-002-family-000005",
+          "cohort": "Main",
+          "lineage": "432:137aa90efbdb4f5599db0a01cf1a75d720b443908a4fe3ead059672da4e0afa3",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-002-family-000006",
+          "cohort": "Main",
+          "lineage": "432:d911202166a8d2f532f8e651342d111b6c4ab05316773f4d2d574e2d91e6cb04",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-002-family-000007",
+          "cohort": "Main",
+          "lineage": "432:d3b8e9cd2be9d1046ed99df68519478ac5d63d9b0484ea366ec403db46147cae",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-002-family-000008",
+          "cohort": "Main",
+          "lineage": "432:90dd1708017826c5fdd0c00263be68e62b9a68ae8bf5b05e58a830aaace4b4a6",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-002-family-000009",
+          "cohort": "Main",
+          "lineage": "432:990361f6dc8c451bb2f9e573a653505242e0c320e57722c28df9a4d6ffd30b94",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-002-family-000010",
+          "cohort": "Main",
+          "lineage": "432:2ab9bddd37663c2347d238864a7f9faf84b1087075ab78e21de5b6012ec30587",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-002-family-000011",
+          "cohort": "Main",
+          "lineage": "432:1c4cbd57c4b06e22dfd337f0d46753875180694140ecf96a62850d8459ff43b5",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-002-family-000012",
+          "cohort": "Main",
+          "lineage": "432:512367efee24b5530619da673886511c36223a830e08ab6de90406a29b0341aa",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-002-family-000013",
+          "cohort": "Main",
+          "lineage": "432:abf8860859bf1f8708f43a32338d06ac81808f9b234ed6bb8302fe1ead911072",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-002-family-000014",
+          "cohort": "Main",
+          "lineage": "432:6f5c9605fe92ab781845f3dcd8b4f07641458ab47a8bac5846c5a9a6a5a04067",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-002-family-000015",
+          "cohort": "Main",
+          "lineage": "432:97ca7e16f30cf4575545623599511ffb16e772446ec68680a0e9d25ed6b7b6fe",
+          "score": 0.5
+        }
+      ],
+      "complete_pair_mean": 0.5,
+      "valid_game_score_secondary": 0.5,
+      "planned_score_range": [
+        0.5,
+        0.5
+      ],
+      "bootstrap": {
+        "seed": 43220261017,
+        "resamples": 10000,
+        "unit": "complete family pair",
+        "percentile_95": [
+          0.34375,
+          0.65625
+        ],
+        "limitations": [
+          "Fixed sample, complete pairs only; missingness may bias the primary score.",
+          "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+          "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+          "Repeated inspection of this interval is not a sequential stopping rule."
+        ]
+      }
+    },
+    {
+      "schema": "quoridor-arena-v2",
+      "census": {
+        "planned_games": 32,
+        "started_games": 32,
+        "completed_games": 32,
+        "unknown_games": 0,
+        "complete_pairs": 16,
+        "incomplete_pairs": 0,
+        "unknown_reasons": {}
+      },
+      "by_cohort": {
+        "Main": {
+          "planned_games": 32,
+          "started_games": 32,
+          "completed_games": 32,
+          "unknown_games": 0,
+          "complete_pairs": 16,
+          "incomplete_pairs": 0,
+          "unknown_reasons": {}
+        }
+      },
+      "pairs": [
+        {
+          "family": "432-C-LAST467-vs-BEST43-003-family-000000",
+          "cohort": "Main",
+          "lineage": "432:3f365b2e253a6ff4c5dada9e5797568ab2900eaa03d0c0a0f8d08296539eb7ba",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-003-family-000001",
+          "cohort": "Main",
+          "lineage": "432:f9f94a9f4a1f2c8da70ad6c2911b55ea852ef120ffc389adbcd09bcbe64dea32",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-003-family-000002",
+          "cohort": "Main",
+          "lineage": "432:15c6e9224d75fee4b96834fc357fc2e105b5fdf16a4bd93b9cebbb2978ea178c",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-003-family-000003",
+          "cohort": "Main",
+          "lineage": "432:ed235307848cc927ed2f72fd0789689b454c94abc5f3aba31735814ed281cf95",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-003-family-000004",
+          "cohort": "Main",
+          "lineage": "432:82c924c5dde69c3f0b06af3b4beb4dd008590d25632f908ed450f52e14ba1c83",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-003-family-000005",
+          "cohort": "Main",
+          "lineage": "432:c08f3b92d5e745bac46ae860a3618b2d9ae356d41b95d9670a292d8457da0bb4",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-003-family-000006",
+          "cohort": "Main",
+          "lineage": "432:73f14225eaf5659b2fab9673a38e0339f4ce6d346c1ef812bbfff8ff5235a775",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-003-family-000007",
+          "cohort": "Main",
+          "lineage": "432:886d4f1ae7170120fefac7edd8d9ad65648ee0bd60526eeb16ffe407d7cfb843",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-003-family-000008",
+          "cohort": "Main",
+          "lineage": "432:2058f9fa68ab36dc0ca210e326ef68f2eac52050133b5beff668fc59f542036f",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-003-family-000009",
+          "cohort": "Main",
+          "lineage": "432:187e164e73f7a80937a99ba0a18f1815539183017874fbea7ecdc274f017c3cb",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-003-family-000010",
+          "cohort": "Main",
+          "lineage": "432:769a9bdbc4c89123c73cd4e511d9f6912ad9804b983eac96c681098491355385",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-003-family-000011",
+          "cohort": "Main",
+          "lineage": "432:a6a018d9b549bb9724ae664290b23b5e0d6517857342887f98c901059709e941",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-003-family-000012",
+          "cohort": "Main",
+          "lineage": "432:829d5fcf2e6d34bed3354ead94c304dfb6bfca296121283a7b0abf4b11756957",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-003-family-000013",
+          "cohort": "Main",
+          "lineage": "432:596efc383ba0236d56a42a0751e011bba692622067aabe3a679881cff86ee34c",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-003-family-000014",
+          "cohort": "Main",
+          "lineage": "432:4c73ec4d65d4f35bda57590ce4f4552236423cee4ae49889cbd33539057450b0",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-003-family-000015",
+          "cohort": "Main",
+          "lineage": "432:42e7602d8fbf835092477e556fc9155e5133f2c808b60f9072e772695e8d035e",
+          "score": 1.0
+        }
+      ],
+      "complete_pair_mean": 0.59375,
+      "valid_game_score_secondary": 0.59375,
+      "planned_score_range": [
+        0.59375,
+        0.59375
+      ],
+      "bootstrap": {
+        "seed": 43220261017,
+        "resamples": 10000,
+        "unit": "complete family pair",
+        "percentile_95": [
+          0.40625,
+          0.78125
+        ],
+        "limitations": [
+          "Fixed sample, complete pairs only; missingness may bias the primary score.",
+          "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+          "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+          "Repeated inspection of this interval is not a sequential stopping rule."
+        ]
+      }
+    },
+    {
+      "schema": "quoridor-arena-v2",
+      "census": {
+        "planned_games": 32,
+        "started_games": 32,
+        "completed_games": 32,
+        "unknown_games": 0,
+        "complete_pairs": 16,
+        "incomplete_pairs": 0,
+        "unknown_reasons": {}
+      },
+      "by_cohort": {
+        "Main": {
+          "planned_games": 32,
+          "started_games": 32,
+          "completed_games": 32,
+          "unknown_games": 0,
+          "complete_pairs": 16,
+          "incomplete_pairs": 0,
+          "unknown_reasons": {}
+        }
+      },
+      "pairs": [
+        {
+          "family": "432-C-LAST467-vs-BEST43-004-family-000000",
+          "cohort": "Main",
+          "lineage": "432:695c743a838844f8e0be797f518b6a314297521d46da32bb2f521df468564d08",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-004-family-000001",
+          "cohort": "Main",
+          "lineage": "432:2eabff65cb233cf46d80449404a0b27cc0c923298c5ee5056f463f2ca6c53036",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-004-family-000002",
+          "cohort": "Main",
+          "lineage": "432:5dafc16c91946b800dbf2f6bde390fac206173c9fb217632dadfc1f794e02280",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-004-family-000003",
+          "cohort": "Main",
+          "lineage": "432:08a59ec2fc1f8090ac96a94c2887942647878333a2ea8d2375cd5524c3a9ea44",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-004-family-000004",
+          "cohort": "Main",
+          "lineage": "432:c7266074322c8b341a9ead60fc120634dda11b82cf11469f42d3e57264775673",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-004-family-000005",
+          "cohort": "Main",
+          "lineage": "432:ccbb62b12812da6388ab06259fd885f73888b67b505f7e8af4fb0f22b41275a8",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-004-family-000006",
+          "cohort": "Main",
+          "lineage": "432:e138f167a1330c06df6effca90251fe0e7613db9dd1614f4e3bafe0c584fe685",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-004-family-000007",
+          "cohort": "Main",
+          "lineage": "432:6cb3b74a6d70f931eea3b66cf0a3b63dd5bcc4f305c5d24be5528db267641b60",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-004-family-000008",
+          "cohort": "Main",
+          "lineage": "432:b75973a46acf8e9671fa90714aacd8549d5713e8d668f75477f565cb2f7e3920",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-004-family-000009",
+          "cohort": "Main",
+          "lineage": "432:1effecf0bd8e021239f6a069034f09e4edad5803bbef9edac9d9d48f909f1007",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-004-family-000010",
+          "cohort": "Main",
+          "lineage": "432:dcf3d3a8f1e24d2f0c987319614f16d3b6434f17552b6f6b6cee76e0b66f363f",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-004-family-000011",
+          "cohort": "Main",
+          "lineage": "432:efaa41d10048907e9a092b2fdb724af16064f1c67bc6504db0db564f847df8af",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-004-family-000012",
+          "cohort": "Main",
+          "lineage": "432:de86b10fb1017149d860523f345dda695e103103e95550c1d9be8e7d6e06c764",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-004-family-000013",
+          "cohort": "Main",
+          "lineage": "432:cb623f1fd2c45a8390f47861e16fda079babd4234c5de4a6a7513aaf7223140c",
+          "score": 0.75
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-004-family-000014",
+          "cohort": "Main",
+          "lineage": "432:726312c50a919d43ec69e770d1c415d93b84babe7ac75dd47edf49d6c9abf8a3",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-004-family-000015",
+          "cohort": "Main",
+          "lineage": "432:2069bc5f7af316392876a9648ec69195fd142c83cd1ca6026276b6d330b85856",
+          "score": 0.5
+        }
+      ],
+      "complete_pair_mean": 0.421875,
+      "valid_game_score_secondary": 0.421875,
+      "planned_score_range": [
+        0.421875,
+        0.421875
+      ],
+      "bootstrap": {
+        "seed": 43220261017,
+        "resamples": 10000,
+        "unit": "complete family pair",
+        "percentile_95": [
+          0.28125,
+          0.546875
+        ],
+        "limitations": [
+          "Fixed sample, complete pairs only; missingness may bias the primary score.",
+          "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+          "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+          "Repeated inspection of this interval is not a sequential stopping rule."
+        ]
+      }
+    },
+    {
+      "schema": "quoridor-arena-v2",
+      "census": {
+        "planned_games": 32,
+        "started_games": 32,
+        "completed_games": 32,
+        "unknown_games": 0,
+        "complete_pairs": 16,
+        "incomplete_pairs": 0,
+        "unknown_reasons": {}
+      },
+      "by_cohort": {
+        "Main": {
+          "planned_games": 32,
+          "started_games": 32,
+          "completed_games": 32,
+          "unknown_games": 0,
+          "complete_pairs": 16,
+          "incomplete_pairs": 0,
+          "unknown_reasons": {}
+        }
+      },
+      "pairs": [
+        {
+          "family": "432-C-LAST467-vs-BEST43-005-family-000000",
+          "cohort": "Main",
+          "lineage": "432:1d816f13eb2c3e5c1dae0781133e52538786cbbf22222ad8520aca158ca8db3a",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-005-family-000001",
+          "cohort": "Main",
+          "lineage": "432:f9f4421b32abf83e9ef4fa51113f09413e8e45d30b5f3a145cda0416cc1d82ae",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-005-family-000002",
+          "cohort": "Main",
+          "lineage": "432:8c39c7649877caf3bc087a2d3783644b041e75870b042f489780ff43799dcdfd",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-005-family-000003",
+          "cohort": "Main",
+          "lineage": "432:a160b30a35f94fa18a59b2a31074f77464b390a3a6f4adee5ef63ff9b7b2bc90",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-005-family-000004",
+          "cohort": "Main",
+          "lineage": "432:0ae29cc8eede389a62d143d629c962b1b524c91bde357d8a78c789c05bfb0853",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-005-family-000005",
+          "cohort": "Main",
+          "lineage": "432:13bc935996418376233fada7ce8c23a6c717b117398a799ab857cc90155a964f",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-005-family-000006",
+          "cohort": "Main",
+          "lineage": "432:fcb6f9d5f7985fee918b72a243bc01ddc3607e18e4cd0bdcc8aa297f4d8a3705",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-005-family-000007",
+          "cohort": "Main",
+          "lineage": "432:f0942f4886b700d396c3ec51dcfd79cd5c988bc40c5dc0a424e80ced56dff7a9",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-005-family-000008",
+          "cohort": "Main",
+          "lineage": "432:1d6f90bd4e236f835f851223060cefccb8c4be47aa1e20e081b7ad45feadd46a",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-005-family-000009",
+          "cohort": "Main",
+          "lineage": "432:1bcac10aeb8cd3a8eceb823fa6089a013e4d8f8e5f9a8af13fdbc576679cad73",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-005-family-000010",
+          "cohort": "Main",
+          "lineage": "432:170c652bff8d69562d114146c2df179ee5ae1e4b4abcdbf7038e8b99ea4e1bc1",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-005-family-000011",
+          "cohort": "Main",
+          "lineage": "432:def66d7a0accd47791be853650fd3a9e326de2dc4dbc827044d3d902c0708c70",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-005-family-000012",
+          "cohort": "Main",
+          "lineage": "432:96f9657df84f88b7625b975eb2a4b7d15d217d1d2c754042acb59bcc399a282f",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-005-family-000013",
+          "cohort": "Main",
+          "lineage": "432:6f2972fcfcb2fe0a1ec792711459e8c389c0bd132c93819435c96359b01dd669",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-005-family-000014",
+          "cohort": "Main",
+          "lineage": "432:e9273b39099ad754324a5c4fdc9f8c756971a1ac43d3b0ee703a0c6015a5bad1",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-005-family-000015",
+          "cohort": "Main",
+          "lineage": "432:ad1940885f4011d475d6ff284dab399311287aa9f62e2a19aa72fab65cb1a254",
+          "score": 0.5
+        }
+      ],
+      "complete_pair_mean": 0.5,
+      "valid_game_score_secondary": 0.5,
+      "planned_score_range": [
+        0.5,
+        0.5
+      ],
+      "bootstrap": {
+        "seed": 43220261017,
+        "resamples": 10000,
+        "unit": "complete family pair",
+        "percentile_95": [
+          0.375,
+          0.625
+        ],
+        "limitations": [
+          "Fixed sample, complete pairs only; missingness may bias the primary score.",
+          "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+          "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+          "Repeated inspection of this interval is not a sequential stopping rule."
+        ]
+      }
+    },
+    {
+      "schema": "quoridor-arena-v2",
+      "census": {
+        "planned_games": 32,
+        "started_games": 32,
+        "completed_games": 32,
+        "unknown_games": 0,
+        "complete_pairs": 16,
+        "incomplete_pairs": 0,
+        "unknown_reasons": {}
+      },
+      "by_cohort": {
+        "Main": {
+          "planned_games": 32,
+          "started_games": 32,
+          "completed_games": 32,
+          "unknown_games": 0,
+          "complete_pairs": 16,
+          "incomplete_pairs": 0,
+          "unknown_reasons": {}
+        }
+      },
+      "pairs": [
+        {
+          "family": "432-C-LAST467-vs-BEST43-006-family-000000",
+          "cohort": "Main",
+          "lineage": "432:d01573b3eeefcc900578b838434c76a49891fb7ef6d1b312d868a170e5231541",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-006-family-000001",
+          "cohort": "Main",
+          "lineage": "432:2c6335b9356e0e60a47aebcc6fcedf3f5f2faabed8cc1324b151265232d556fa",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-006-family-000002",
+          "cohort": "Main",
+          "lineage": "432:560108a22d2104a507db509af006a60f2225c80c090f6025e6d278a29119cc2c",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-006-family-000003",
+          "cohort": "Main",
+          "lineage": "432:75c4fef166ad7bf9f64a972c9da53bd637fbe86fade8481aaca05a8eae476b86",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-006-family-000004",
+          "cohort": "Main",
+          "lineage": "432:f4fd91b20293dbe56ddd5be6fdf0cf4a4365898dca65ca5f89eb5df08b74c487",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-006-family-000005",
+          "cohort": "Main",
+          "lineage": "432:7b4e1b78276dd31ef61d48a3f211ae07034ffdaca6bdb909cd9e8b642dd5678e",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-006-family-000006",
+          "cohort": "Main",
+          "lineage": "432:5dabf692ec3a728e22b8a4473b401bb8718ca199a5192664faf6abd0181d665c",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-006-family-000007",
+          "cohort": "Main",
+          "lineage": "432:991cd56bc51dc2896fc1f9a5c555e199f151a6ee60822355d89556be0b5eab0c",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-006-family-000008",
+          "cohort": "Main",
+          "lineage": "432:73c9eea9224edb9d006b3fa9dd758f81617a2a2bbeebc327e053bb78b393ba97",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-006-family-000009",
+          "cohort": "Main",
+          "lineage": "432:3bfb9f0eafdc57b338ba7e904a70af07ff383e8017d8087fd58b4090fd9f6999",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-006-family-000010",
+          "cohort": "Main",
+          "lineage": "432:c778e2e04e9cee7aeab00ebc8ab63c48bb7a8dc205cc27a2dac3c98fe488a70d",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-006-family-000011",
+          "cohort": "Main",
+          "lineage": "432:39b13ff2db3a39231268991510f5c0073c2cdd31fc340c174e30d5300fbab247",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-006-family-000012",
+          "cohort": "Main",
+          "lineage": "432:9074cf20418e990e8c04db6f980b8b379e88fd0b97818ee2bac651bac74f9908",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-006-family-000013",
+          "cohort": "Main",
+          "lineage": "432:709118acef090e2b6faf1a64d48e98a97f4cf11690f55347653d0de98a595fbe",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-006-family-000014",
+          "cohort": "Main",
+          "lineage": "432:ba3c703195a7ca22fcccb4b702d4f18a6fcafd4905550c1be142765fee2f36a6",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-006-family-000015",
+          "cohort": "Main",
+          "lineage": "432:e3e636c103af0207dec9410ffc046e9538e02fc92b1f086c66966a77812c3280",
+          "score": 0.0
+        }
+      ],
+      "complete_pair_mean": 0.4375,
+      "valid_game_score_secondary": 0.4375,
+      "planned_score_range": [
+        0.4375,
+        0.4375
+      ],
+      "bootstrap": {
+        "seed": 43220261017,
+        "resamples": 10000,
+        "unit": "complete family pair",
+        "percentile_95": [
+          0.28125,
+          0.59375
+        ],
+        "limitations": [
+          "Fixed sample, complete pairs only; missingness may bias the primary score.",
+          "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+          "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+          "Repeated inspection of this interval is not a sequential stopping rule."
+        ]
+      }
+    },
+    {
+      "schema": "quoridor-arena-v2",
+      "census": {
+        "planned_games": 32,
+        "started_games": 32,
+        "completed_games": 32,
+        "unknown_games": 0,
+        "complete_pairs": 16,
+        "incomplete_pairs": 0,
+        "unknown_reasons": {}
+      },
+      "by_cohort": {
+        "Main": {
+          "planned_games": 32,
+          "started_games": 32,
+          "completed_games": 32,
+          "unknown_games": 0,
+          "complete_pairs": 16,
+          "incomplete_pairs": 0,
+          "unknown_reasons": {}
+        }
+      },
+      "pairs": [
+        {
+          "family": "432-C-LAST467-vs-BEST43-007-family-000000",
+          "cohort": "Main",
+          "lineage": "432:358faf77570cbc23e162fab5df1931ef588fbe5fb858a72fef69426862844de7",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-007-family-000001",
+          "cohort": "Main",
+          "lineage": "432:e48289b48879fff9b90e508aebae0b517254afa37aa98888354aca29a3a61b0e",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-007-family-000002",
+          "cohort": "Main",
+          "lineage": "432:1ca674ade4395d1831fc0ff27164913d1f63d6260c0ec6d51f03d67ae0690243",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-007-family-000003",
+          "cohort": "Main",
+          "lineage": "432:6aaebc7f81510168e39f39dd87221f4d75f84965093deb5611f1b14528a6d660",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-007-family-000004",
+          "cohort": "Main",
+          "lineage": "432:7128fb0babcf4e98d463cdaaf6e696ef660f1423f0233f584ae6977be18653cb",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-007-family-000005",
+          "cohort": "Main",
+          "lineage": "432:5da3185dc171d430822c934a3eb085701e730c48ef15d6ce0f1a53d860382201",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-007-family-000006",
+          "cohort": "Main",
+          "lineage": "432:94013971418e6d273acd154e5e7e671740ce326198fd7c6195c93796d3d0939d",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-007-family-000007",
+          "cohort": "Main",
+          "lineage": "432:7c87527f6ed04c4814c6c7b711afca6245aab48be1cdb4d429d2284be23a8fc4",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-007-family-000008",
+          "cohort": "Main",
+          "lineage": "432:560b54564cdcb0372a59dc180cfe11fe6a921931d1ac2b00909480e4230bc55a",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-007-family-000009",
+          "cohort": "Main",
+          "lineage": "432:e042d698f8220498085ca143196a817b6ca826871228eb502886e8a0cc73cc6c",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-007-family-000010",
+          "cohort": "Main",
+          "lineage": "432:22fa700c687100b62a036439a9b96eb9cb19091df876ea57da7be6b5f5b2c029",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-007-family-000011",
+          "cohort": "Main",
+          "lineage": "432:ce61a0545411953efd6657a58da66f7cf9830e9edac6fa81746a91d73813a016",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-007-family-000012",
+          "cohort": "Main",
+          "lineage": "432:83ba1d84bb499a7506f085e494d937b2a38f550f9253fb66ae04117ebc9a681f",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-007-family-000013",
+          "cohort": "Main",
+          "lineage": "432:301cdcea2d99a5bcacc7048480ab6d122666552671232cca1e318411f36d638a",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-007-family-000014",
+          "cohort": "Main",
+          "lineage": "432:1ec8dc9e01060324c2a5b38c955de6bd42dce45d03b132d0a9cc443c8120666e",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-007-family-000015",
+          "cohort": "Main",
+          "lineage": "432:df8508d7f13a725430800fd1430f52be76496750a022844ed226ed32d6a3e336",
+          "score": 0.5
+        }
+      ],
+      "complete_pair_mean": 0.5,
+      "valid_game_score_secondary": 0.5,
+      "planned_score_range": [
+        0.5,
+        0.5
+      ],
+      "bootstrap": {
+        "seed": 43220261017,
+        "resamples": 10000,
+        "unit": "complete family pair",
+        "percentile_95": [
+          0.34375,
+          0.65625
+        ],
+        "limitations": [
+          "Fixed sample, complete pairs only; missingness may bias the primary score.",
+          "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+          "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+          "Repeated inspection of this interval is not a sequential stopping rule."
+        ]
+      }
+    },
+    {
+      "schema": "quoridor-arena-v2",
+      "census": {
+        "planned_games": 32,
+        "started_games": 32,
+        "completed_games": 32,
+        "unknown_games": 0,
+        "complete_pairs": 16,
+        "incomplete_pairs": 0,
+        "unknown_reasons": {}
+      },
+      "by_cohort": {
+        "Main": {
+          "planned_games": 32,
+          "started_games": 32,
+          "completed_games": 32,
+          "unknown_games": 0,
+          "complete_pairs": 16,
+          "incomplete_pairs": 0,
+          "unknown_reasons": {}
+        }
+      },
+      "pairs": [
+        {
+          "family": "432-C-LAST467-vs-BEST43-008-family-000000",
+          "cohort": "Main",
+          "lineage": "432:1673949a7790c4e400d02929ce60bef19aa0ff8eb9848c605e4122af3a76a42f",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-008-family-000001",
+          "cohort": "Main",
+          "lineage": "432:f97ab264d53b89f3912a72b219084222ae049d084d8374abdc3d9a6211205acf",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-008-family-000002",
+          "cohort": "Main",
+          "lineage": "432:24cdef2af23267ca2d2daecbd692d454305fe33c028215a544775b8e9af09fe9",
+          "score": 0.25
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-008-family-000003",
+          "cohort": "Main",
+          "lineage": "432:e002c1601a1127f465b5e39be592fde4e239c95de9231925a551754a2d9fba66",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-008-family-000004",
+          "cohort": "Main",
+          "lineage": "432:52d1de5d328d1f9b0ada1b75e327dfe91828a63902e3b78f96ecc41de5c41074",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-008-family-000005",
+          "cohort": "Main",
+          "lineage": "432:e5ea6c2322b81ae858237a23077910d0e4879acf0a76f1f85978d884889f6244",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-008-family-000006",
+          "cohort": "Main",
+          "lineage": "432:a912855ffdab40a959e955e6bdfbeb04b2796b55750adfa4188e327f7399c8f2",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-008-family-000007",
+          "cohort": "Main",
+          "lineage": "432:239d8fadf00f88798dc7d5afe804b5235ca94b9b13a1183d1e252ccd4ba06657",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-008-family-000008",
+          "cohort": "Main",
+          "lineage": "432:3ae9380cf9437bf41271be12acda26c702431ced31e07ba4282d2eb31746f2b3",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-008-family-000009",
+          "cohort": "Main",
+          "lineage": "432:8d5c88e44cd042297d9db51b9e2123c40353368fbfe69fa93e09475da8620924",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-008-family-000010",
+          "cohort": "Main",
+          "lineage": "432:2326299f52ead4735b6a7cf49d3242184854951f21090350c6d87088b4e447b5",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-008-family-000011",
+          "cohort": "Main",
+          "lineage": "432:afb0ccda211b51adb190d759f645b1cdc3bd9b997b72ed094bf71acc62f0e05b",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-008-family-000012",
+          "cohort": "Main",
+          "lineage": "432:9a4626351bda9cf54806b23b0f56060c92c6a06ef4633d19bcf676e83f563f4f",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-008-family-000013",
+          "cohort": "Main",
+          "lineage": "432:419bd3d5ffd974fdfb0161647229ce7bd5c7558e501a4625932b731670ec671c",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-008-family-000014",
+          "cohort": "Main",
+          "lineage": "432:c9de6b4fc4d4172ed359af6bb3dcccca36b778e954e26bd23f181a7b2b4416bf",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-008-family-000015",
+          "cohort": "Main",
+          "lineage": "432:2cd8e213f6939cc1d52b77ef6e112cfd123dd88c7dde5be8fa33024734a9ecfc",
+          "score": 0.5
+        }
+      ],
+      "complete_pair_mean": 0.390625,
+      "valid_game_score_secondary": 0.390625,
+      "planned_score_range": [
+        0.390625,
+        0.390625
+      ],
+      "bootstrap": {
+        "seed": 43220261017,
+        "resamples": 10000,
+        "unit": "complete family pair",
+        "percentile_95": [
+          0.265625,
+          0.53125
+        ],
+        "limitations": [
+          "Fixed sample, complete pairs only; missingness may bias the primary score.",
+          "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+          "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+          "Repeated inspection of this interval is not a sequential stopping rule."
+        ]
+      }
+    },
+    {
+      "schema": "quoridor-arena-v2",
+      "census": {
+        "planned_games": 32,
+        "started_games": 32,
+        "completed_games": 32,
+        "unknown_games": 0,
+        "complete_pairs": 16,
+        "incomplete_pairs": 0,
+        "unknown_reasons": {}
+      },
+      "by_cohort": {
+        "Main": {
+          "planned_games": 32,
+          "started_games": 32,
+          "completed_games": 32,
+          "unknown_games": 0,
+          "complete_pairs": 16,
+          "incomplete_pairs": 0,
+          "unknown_reasons": {}
+        }
+      },
+      "pairs": [
+        {
+          "family": "432-C-LAST467-vs-BEST43-009-family-000000",
+          "cohort": "Main",
+          "lineage": "432:0ee79b06530512ecd1f281502a746d0e173bdaec2a182d859d57d66dbab68cab",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-009-family-000001",
+          "cohort": "Main",
+          "lineage": "432:d52bc091d47de7839e97c9465b155bfc8592b39f7a37bcd1b1b6ae73bb9f6217",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-009-family-000002",
+          "cohort": "Main",
+          "lineage": "432:b270ca506695ea346602ed5d9acc68cfa0bc6a0b9caa26226e071fbb200b5f99",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-009-family-000003",
+          "cohort": "Main",
+          "lineage": "432:856c1eba9ad34f8503fafc0582508cd08f3dfebb158b38de0a5699133264f5e3",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-009-family-000004",
+          "cohort": "Main",
+          "lineage": "432:e7cfe1305fdedac56c1a987a0bfadb913efc7a8ac54debe025dd71571cc7901d",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-009-family-000005",
+          "cohort": "Main",
+          "lineage": "432:2bdaca7ffb3ac2519531c0f3eba248cd7b5df15a48a8c4967b88eac28d2349b7",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-009-family-000006",
+          "cohort": "Main",
+          "lineage": "432:1031843ca00776b2a57b76bd0ea7237e87710fdfac6a0e2686e86c213115e2da",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-009-family-000007",
+          "cohort": "Main",
+          "lineage": "432:07f9cd2dbb6d4bfa4f74e74f99b31548f022d3312e74fae976a8b7f349e33dc6",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-009-family-000008",
+          "cohort": "Main",
+          "lineage": "432:feb6915e172ce88c3fe9e9f6d00b9c7d885d0366db30116908187f0d4481a367",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-009-family-000009",
+          "cohort": "Main",
+          "lineage": "432:90ed760790c6c2f9a196e2bc214e081ed1bcadf60e4dfb09784a6475d7f61d7e",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-009-family-000010",
+          "cohort": "Main",
+          "lineage": "432:bc1b0dd8af1275fdf4fc46e3b3461d0c86cf0ef02c9804fdd11755ba63228a50",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-009-family-000011",
+          "cohort": "Main",
+          "lineage": "432:10b3eb65c858cdf11422faba100a7877436feb4489e225229e5be32241a63a82",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-009-family-000012",
+          "cohort": "Main",
+          "lineage": "432:147d5c85078e40357078f6169531232113495cc7157006210fe4207eb795fe3a",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-009-family-000013",
+          "cohort": "Main",
+          "lineage": "432:d4c97357b13dcb08f28515013ba7f9d88dda7f70e3fd9571ce5ccd913c3289b1",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-009-family-000014",
+          "cohort": "Main",
+          "lineage": "432:1af0a2609ea777a5f24255086c6696e411144c707f5d39d74b71f42b2cf3f870",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-009-family-000015",
+          "cohort": "Main",
+          "lineage": "432:60f8643c1f99219fb6882f0be98ee73f65145cd5acc186284e06c72aa5cb60a4",
+          "score": 0.0
+        }
+      ],
+      "complete_pair_mean": 0.40625,
+      "valid_game_score_secondary": 0.40625,
+      "planned_score_range": [
+        0.40625,
+        0.40625
+      ],
+      "bootstrap": {
+        "seed": 43220261017,
+        "resamples": 10000,
+        "unit": "complete family pair",
+        "percentile_95": [
+          0.25,
+          0.5625
+        ],
+        "limitations": [
+          "Fixed sample, complete pairs only; missingness may bias the primary score.",
+          "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+          "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+          "Repeated inspection of this interval is not a sequential stopping rule."
+        ]
+      }
+    },
+    {
+      "schema": "quoridor-arena-v2",
+      "census": {
+        "planned_games": 32,
+        "started_games": 32,
+        "completed_games": 32,
+        "unknown_games": 0,
+        "complete_pairs": 16,
+        "incomplete_pairs": 0,
+        "unknown_reasons": {}
+      },
+      "by_cohort": {
+        "Main": {
+          "planned_games": 32,
+          "started_games": 32,
+          "completed_games": 32,
+          "unknown_games": 0,
+          "complete_pairs": 16,
+          "incomplete_pairs": 0,
+          "unknown_reasons": {}
+        }
+      },
+      "pairs": [
+        {
+          "family": "432-C-LAST467-vs-BEST43-010-family-000000",
+          "cohort": "Main",
+          "lineage": "432:d6c720f211600c0cc674d9132ffdbd75514ce11afa98f99de5d1c59e4071d852",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-010-family-000001",
+          "cohort": "Main",
+          "lineage": "432:3faf14bba7fe1f2ba4dcc1900e3d090047709c0a208948a9d1e76cdcb1517fa7",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-010-family-000002",
+          "cohort": "Main",
+          "lineage": "432:97c0b9f2667bde1da741c1a7270c1b6da221a6945339513172d7f7ee549bc29a",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-010-family-000003",
+          "cohort": "Main",
+          "lineage": "432:6c219ff170dbea00a22a03a1fca6f02714747fba55395428992d83d04f84354a",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-010-family-000004",
+          "cohort": "Main",
+          "lineage": "432:36b79c76e4414995285438881c0d4ce35b8bd6b3c9da74e46351e1de799ff8bc",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-010-family-000005",
+          "cohort": "Main",
+          "lineage": "432:7479bb1d483ce6f9b9a65eb06cdf09e9d492e6a05aafcbc51c8fd35f6b767561",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-010-family-000006",
+          "cohort": "Main",
+          "lineage": "432:cc420ac97817220f2ac51e2b43fb718fc82adf78a24f9c040b3eee56ba70d265",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-010-family-000007",
+          "cohort": "Main",
+          "lineage": "432:732fab4fe59a47b0e0c5520e57d04509b6e1e373389ba7ea47c542e2b84ffe76",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-010-family-000008",
+          "cohort": "Main",
+          "lineage": "432:e5fb03d2cbd9585fc6c455a427c3e237ec96639d537e86e1a259a2a4a5dbb5c8",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-010-family-000009",
+          "cohort": "Main",
+          "lineage": "432:3d76a5a4530d941f478bef7096ead23809881dc124afc78f5e7ca565a4ecafc5",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-010-family-000010",
+          "cohort": "Main",
+          "lineage": "432:42cb3f6ce057c66642fd7c3e16d3ad2a5bc51c5343803ad649d623bec1b2c70c",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-010-family-000011",
+          "cohort": "Main",
+          "lineage": "432:1b3c11ed6f679c426b6b2d3dc9a076930ee481599422c6eafaf617a0086faaff",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-010-family-000012",
+          "cohort": "Main",
+          "lineage": "432:e7e2a8878c4ecd98a742c40f5c17012e96281a423e0877eff547635dd326d4be",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-010-family-000013",
+          "cohort": "Main",
+          "lineage": "432:3bcc5d3d914f55e94efc1501234625359672c5e166ee67c41bef3e822732d5ac",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-010-family-000014",
+          "cohort": "Main",
+          "lineage": "432:9489b82b74cb5da157dc25b5cf2a9de8756e5e9dda330e48bc1f01183b6775d2",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-010-family-000015",
+          "cohort": "Main",
+          "lineage": "432:24db2a79e6e497653184f3a2891beaf5f1e4f466852200f14304b2a5deac6912",
+          "score": 0.5
+        }
+      ],
+      "complete_pair_mean": 0.5,
+      "valid_game_score_secondary": 0.5,
+      "planned_score_range": [
+        0.5,
+        0.5
+      ],
+      "bootstrap": {
+        "seed": 43220261017,
+        "resamples": 10000,
+        "unit": "complete family pair",
+        "percentile_95": [
+          0.34375,
+          0.6875
+        ],
+        "limitations": [
+          "Fixed sample, complete pairs only; missingness may bias the primary score.",
+          "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+          "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+          "Repeated inspection of this interval is not a sequential stopping rule."
+        ]
+      }
+    },
+    {
+      "schema": "quoridor-arena-v2",
+      "census": {
+        "planned_games": 32,
+        "started_games": 32,
+        "completed_games": 32,
+        "unknown_games": 0,
+        "complete_pairs": 16,
+        "incomplete_pairs": 0,
+        "unknown_reasons": {}
+      },
+      "by_cohort": {
+        "Main": {
+          "planned_games": 32,
+          "started_games": 32,
+          "completed_games": 32,
+          "unknown_games": 0,
+          "complete_pairs": 16,
+          "incomplete_pairs": 0,
+          "unknown_reasons": {}
+        }
+      },
+      "pairs": [
+        {
+          "family": "432-C-LAST467-vs-BEST43-011-family-000000",
+          "cohort": "Main",
+          "lineage": "432:7dc19d6a1a2cc02eb54643a763103ff850c50e5cf4fa7ffccad1b73d606c1fe0",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-011-family-000001",
+          "cohort": "Main",
+          "lineage": "432:e2fb7f8b5f25f35d014f734696a287eac45c14c13ad407ee63f759c35cecfe92",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-011-family-000002",
+          "cohort": "Main",
+          "lineage": "432:0e00e57525f6e9efb2ad6d88cb39b999609e87ceb34c49ff36c11321a4f1d339",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-011-family-000003",
+          "cohort": "Main",
+          "lineage": "432:a1e97e28ba091adb4f9c0e334228af745dc724f37519adabce0cd16a7f0fdcd6",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-011-family-000004",
+          "cohort": "Main",
+          "lineage": "432:e9ca64dc4d95c46df8d092f2ae553595358ffff1e973705c0753858964a7bce5",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-011-family-000005",
+          "cohort": "Main",
+          "lineage": "432:e5eec45a74a513bee06ebf15cce3429506c64b4064076bf33e61f78976239711",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-011-family-000006",
+          "cohort": "Main",
+          "lineage": "432:7df9720d09b0c86611de2bede76837988da3c34bdd97d39f91c29a42f1b78619",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-011-family-000007",
+          "cohort": "Main",
+          "lineage": "432:903e0d569de68f997c9f437219d7edbaea620e237a2a3b809f7834968b6faa15",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-011-family-000008",
+          "cohort": "Main",
+          "lineage": "432:9597a4c342463da1655c6b3ad7dffbac5092b0ff2754db40580efc79f38582ee",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-011-family-000009",
+          "cohort": "Main",
+          "lineage": "432:cc1a4a2877a6e0f25c308153fafe8cbcdd5af62d50ed43bae8e724d820937222",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-011-family-000010",
+          "cohort": "Main",
+          "lineage": "432:c92d16c2f08da1116c8becfada932e06082a9f8c8a9478b730affceb3e454d60",
+          "score": 1.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-011-family-000011",
+          "cohort": "Main",
+          "lineage": "432:6dc2b8b7de6ea6a8ace60fed733fdc539456d7936994776707fa2346cc79672b",
+          "score": 0.0
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-011-family-000012",
+          "cohort": "Main",
+          "lineage": "432:1fb3815159bcb2b64bdb7a0024b6dddd11a6cb64fd3ffeb1c9ef8695b8a70159",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-011-family-000013",
+          "cohort": "Main",
+          "lineage": "432:e8b547fdf10a8f0caeeb06d4eb7705ea9b23f4edbdef6ca41113d8d10110e0fd",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-011-family-000014",
+          "cohort": "Main",
+          "lineage": "432:a281e6cde6b0f0eba9baabefc4cdc67d6ef1b968dd054895a4bf37902c25d489",
+          "score": 0.5
+        },
+        {
+          "family": "432-C-LAST467-vs-BEST43-011-family-000015",
+          "cohort": "Main",
+          "lineage": "432:2049aeef78e6ced7eee3a8382fd2be32f806adb23f3d62fd286095979341824f",
+          "score": 0.5
+        }
+      ],
+      "complete_pair_mean": 0.59375,
+      "valid_game_score_secondary": 0.59375,
+      "planned_score_range": [
+        0.59375,
+        0.59375
+      ],
+      "bootstrap": {
+        "seed": 43220261017,
+        "resamples": 10000,
+        "unit": "complete family pair",
+        "percentile_95": [
+          0.46875,
+          0.71875
+        ],
+        "limitations": [
+          "Fixed sample, complete pairs only; missingness may bias the primary score.",
+          "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+          "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+          "Repeated inspection of this interval is not a sequential stopping rule."
+        ]
+      }
+    }
+  ],
+  "work_scope": "whole-search, selected-snapshot and outer counters overlap; never added; TT gauges not work or RSS",
+  "physical_heads_and_continuous_RSS": "UNKNOWN",
+  "new_engine_calls": 0
+}

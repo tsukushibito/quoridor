@@ -2219,7 +2219,7 @@ Z/S/Cの新paired3fitは同じBEST43/fresh Adam・T3763/V2498・30104 draws/118 
 
 固定64共有開始familyの両色比較はCvsZ67W61L/128、52.34375%、95%[46.09375%,58.59375%]で事前の下限>50%は未達。SvsZ63W65L、49.21875%、[42.1875%,56.25%]は記述的。256局全GOAL/UNKNOWN0、charged1072837747≤2G。分析者は元8archivesを各一度streamし、PCG64/seed43020261017/10000/linear95%を各対照一度だけ実行した。16-family区間の平均・旧423/426合算・CvsS直接対照はない。一般優越、劣位、等価、因果や自動昇格を認定しない。
 
-旧S19 batch-axis拒否、schema pre-runtime FAILED、NULL-vs-diskと費UNKNOWNを保全した。bank/fit/native/arenaとFAILED等の選択済み既知outer小計1335.556018654秒は全費用ではなく、内包head-call spanを加算しない。深さはselective nominal、TT容量はRSSではなく、arena nn_calls0はphysical NNUE head0を意味しない。元models/defaults/sealsを維持する。[保存report・表・図・費用・参照](../research-data/ai-sigma/static-teacher-distillation430/report-ja.md)。429の量・序盤viewは別の未実行四fit提案で、この結果から新fit/gameを自動開始しない。
+旧S19 batch-axis拒否、schema pre-runtime FAILED、NULL-vs-diskと費UNKNOWNを保全した。bank/fit/native/arenaとFAILED等の選択済み既知outer小計1335.556018654秒は全費用ではなく、内包head-call spanを加算しない。深さはselective nominal、TT容量はRSSではなく、arena nn_calls0はphysical NNUE head0を意味しない。元models/defaults/sealsを維持する。[保存report・表・図・費用・参照](../research-data/ai-sigma/static-teacher-distillation430/report-ja.md)。430時点の429量・序盤viewは未実行四fit提案だった。後の明示委任432の実行結果は下記に分け、430から自動発行したものとはしない。
 
 ### 一本経路・距離1 tailの有限費用比較431（2026-10-17）
 
@@ -2230,3 +2230,13 @@ LMR ONの元native子guardian whole中央値はNNUE O/M/P=10.906672949/10.946293
 LMR ONの新Path returnはNNUE12956/D6068、P/M nodesも各41958/33304少なかったが、異なる選択木の仕事量であり同仕事speedupではない。tailの実test/return0とmap/history拒否0を、この対象を超えた機会・資格の主張にしない。限定数学/source/十一成功検査と来歴制限は保存し、事前whole保持基準を満たさなかったPの実装・比較selector・counter・専用検査をf86fd2b4で撤去した。411/default OFF、419専用入口の撤去、共通prefix/history経路を維持し、変更範囲の整形・Ruff・Clippy型検査PASS。元384/成功suite/solverを再演せず、新対局/fit/tuningを発行しない。[全層・局面別費用・原結果・失敗とSTOP](../research-data/ai-sigma/zero-stock-path431/report-ja.md)。原models/seals/USERPAUSE・foreign変更・全費UNKNOWNを保持する。
 
 人間の追加質問に応じた保存CSV集計では、LMR ONの全8root・Search秒/pass中央値はNNUE O/M/P=10.524977902/10.509971691/10.462422386、固定D=6.008698088/5.931480701/5.970738160だった。開始時から壁ゼロのr3..r7だけではNNUE4.6124105/3.6199710/.5196515ms、固定D2.6714020/2.3295955/.3684330msで、P/Oは各88.73%/86.21%、P/Mは85.64%/84.18%短縮していた。各pass5局面×cold/warm、二反復計20callsは独立20局面ではない。Search時計は外側reset/teardown・prepare・返却後validation/journalを除くが、Search内部準備は含む。この軽い5開始局面にはSearch改善が見られ、全体whole保持基準の不成立と区別する。正の在庫から途中で壁ゼロへ到達した部分木専用時計や、連続対局で初期化を償却した利益はUNKNOWN。事後の小標本内訳を主要時計へ置き換えず、P撤去・411/default OFFを維持する。[Search内訳・仕事量・二反復と限界](../research-data/ai-sigma/zero-stock-path431/report-ja.md)、[元CSVからの集計](../research-data/ai-sigma/zero-stock-path431/search-clock-supplement.json)。新規計測・source変更・closed担当の起床は0で、進行中432を止めない。
+
+### データ量・学習量・序盤分布の四fitと固定C評価432（2026-10-17）
+
+429の保存viewを再抽出せず、同じBEST43/fresh Adam/zから四fitを実行した。A/B/Dは29880 draws/117更新/tail184、Cは119520/467/tail224。A/B/C/Dのliteral Tは3735/14940/14940/3735、familyは796/811/811/149であり、行4倍を独立family4倍としない。A/Bは同draw数のsupport差、B/Cは同viewの学習量差、A/Dは序盤以外の分布・系列数も変わる。C117のfull256をB117のtail184へ代用していない。
+
+全newV12275行/236familyを各観測点で測定し、固定LAST family z-MSEはA.835774397/B.833926958/C.766460997/D.831157305。CはINITIAL.859740646から下がり続けたが、公開T固定8192行は.428704088→.457743676へ増え、公開V LASTもC.453408904に対しA/B/D.425695/.425904/.426614だった。公開V INITIALは今回UNKNOWN。stock0ではDのfamily MSEが最小で、MSE・符号・飽和の変化を同じ改善とはしない。Draw0の124行に正負符号を強制しない。
+
+native適格なB/C/Dの固定LAST・共通V family z-MSE最小という事前規則でC LAST467を選択した。Vは選択にも使うため独立な汎化証拠ではない。既知bookを除いた固定192開始familyの両色384局はC185勝2分197敗、score48.4375%、一度の192-family bootstrap（PCG64/seed43220261017/10000/linear95）の95%区間[44.0104167%,52.8645833%]で、下限>50%基準は未達。UNKNOWN0、382GOAL/2draw、他三条件の対局はなく四条件の棋力順位や一般優越・劣位・等価・原因を認定しない。
+
+実fit＋native2337787 logical rows<4M、arena charged1670199748<3Gを保存した。共通loopと設定由来view/endpointを維持し、層別family・Draw0・.99等は同じpredictionから集計する最小共通処理を追加した。初回Aのcustody preentry FAILED0forward、NULL-vs-disk/masks、family77の原順序フラグ、PNG preview未成立、全費/物理head/連続peak UNKNOWNを残す。元12archives/統計は各一度、追加fit/game/再選択・default/model昇格なし。[結果・曲線・層・費用・原参照](../research-data/ai-sigma/nnue-learning-scale432/report-ja.md)。約1.5万行や末尾までのloss低下を十分な学習規模・収束とせず、追加規模・更新・公開分布との両立は次の判断として残す。

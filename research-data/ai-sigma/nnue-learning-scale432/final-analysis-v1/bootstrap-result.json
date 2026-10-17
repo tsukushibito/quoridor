@@ -1,0 +1,51 @@
+{
+  "contrast": "CvsBEST43",
+  "contrast_definition": {
+    "role": "primary",
+    "definition": "fixed V-selected C LAST467 versus frozen BEST43; true global192 canonical family mean, fixed book/time",
+    "criterion": "all384 games/192 two-colour pairs complete and lower95 strictly above0.5"
+  },
+  "planned_family_count": 192,
+  "planned_game_count": 384,
+  "valid_game_count": 384,
+  "unresolved_game_count": 0,
+  "complete_family_count": 192,
+  "family_mean": 0.484375,
+  "percentile_95": [
+    0.4401041666666667,
+    0.5286458333333334
+  ],
+  "criterion_fixed_book_time_only": "NOT_MET",
+  "partial_scope": "complete-pair conditional; valid-game mean and planned bounds are separate",
+  "seed": 43220261017,
+  "requested_resamples": 10000,
+  "executed_resamples": 10000,
+  "rng": "NumPy Generator(PCG64)",
+  "quantile_method": "linear",
+  "settings": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-analysis-v1/results-v1/final-analysis-v1/bootstrap-settings.json",
+    "sha256": "11ffbbcaa22ff6830c0e31e284d5d7d4f3674e394a53ca43140880a9bb982e21",
+    "bytes": 471,
+    "mode": "0644"
+  },
+  "input": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-analysis-v1/results-v1/final-analysis-v1/bootstrap-input.json",
+    "sha256": "c57b71663b90ad27ae31cc94106fde2d6ff5f995ec2cc30528cae6351b9abc55",
+    "bytes": 14093,
+    "mode": "0644"
+  },
+  "executed_statistical_source": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-analysis-v1/results-v1/final-analysis-v1/family_bootstrap432.py",
+    "sha256": "db0ba27a1c4399813d9c62df0167d5be108a1e49d6f51ec31151dd2fa4b18d7a",
+    "bytes": 7335,
+    "mode": "0644"
+  },
+  "executed_function": "interval_from_complete_family_scores",
+  "executed_function_AST_sha256": "426f96eacf3377f1b40bdd40a85f483a53334cf3fcb19159b003b4cfef22e266",
+  "executed_function_text_sha256": "9b1d60a9d4831e76c3dd8567119285599355e24918731984938dac59bf2f493f",
+  "interpreter": "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+  "resolved_interpreter": "/home/vscode/.cache/inference/python/cpython-3.14.7-linux-x86_64-gnu/bin/python3.14",
+  "python_version": "3.14.7",
+  "numpy_version": "2.5.3",
+  "old_intervals_recomputed": false
+}

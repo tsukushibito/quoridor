@@ -1,0 +1,210 @@
+{
+  "issue": "quoridor-4lc.432.2",
+  "status": "FROZEN_RULE_APPLIED_TO_ACTUAL_LAST_AND_NATIVE_ELIGIBILITY",
+  "frozen_design": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-analysis-v1/design-v1/resolved-settings.json",
+    "sha256": "4ffd33f37a0b04a4cc6c3c2d5d5d6b500d3ff5d069af9b84a7c2d627a9ef689a",
+    "bytes": 15785,
+    "mode": "0644"
+  },
+  "actual_four_fit_completion": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-implementation-v1/four-fit-completion-v1/completion.json",
+    "sha256": "79dc5dde2f0722ac99176e5395b560768d811c31c04461b4dd2064950bc5fc82",
+    "bytes": 9515,
+    "mode": "0644"
+  },
+  "actual_native_completion": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-implementation-v1/native-completion-v1/completion.json",
+    "sha256": "d88af1136ed3a9993233fb100e833d21b88d6f0448213ce3e02bc0842c726004",
+    "bytes": 8473,
+    "mode": "0644"
+  },
+  "rule": "B/C/D eligible fixed LAST; minimum same ALL12275/236-family z-MSE; exact ties B,C,D",
+  "eligible_ranking": [
+    {
+      "condition": "C",
+      "fixed_LAST_step": 467,
+      "rows": 12275,
+      "canonical_families": 236,
+      "family_z_mse": 0.7664609971214529,
+      "eligible": true,
+      "ineligible_reason": null,
+      "LAST": {
+        "descriptor": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/nnue-learning-scale432-v1/C-v1/last-model/manifest.json",
+          "sha256": "bca0fd926841d303e3e092b2d29d8508a7d64e2970abd85cfe5c7e84d36b694e",
+          "bytes": 681,
+          "mode": "0600"
+        },
+        "weights": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/nnue-learning-scale432-v1/C-v1/last-model/weights.f32",
+          "sha256": "85c296fe3ee0075628a610918c89aff21195acd3ecb806e3458c71a7f41e7ce2",
+          "bytes": 49284,
+          "mode": "0644"
+        },
+        "step": 467
+      },
+      "typed_evaluator_sha256": "4a1c7c14e7dab160c91f457d6c1b6c3d06672c71ac08049d2d37b703fe8d5c14",
+      "fit_completion": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-implementation-v1/actual-fit-C-completion-v1/completion.json",
+        "sha256": "50449a2d4ed9f8651851916c4ae933da9f08156318ed0fbbe28dc213bd7af8f3",
+        "bytes": 125810,
+        "mode": "0644"
+      },
+      "native_input": {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/nnue-learning-scale432-v1/native-correspondence-v1/input-C.json",
+        "sha256": "bd45ab9441b6ee241857bebffa5ffaff52328def40ee3c116055d1be6a642599",
+        "bytes": 1758,
+        "mode": "0644"
+      },
+      "native_output": {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/nnue-learning-scale432-v1/native-correspondence-v1/result-C.json",
+        "sha256": "1866b790341bbd7ed916f96e8b052e5ad52727d0a2a01c328090cea1e5d9b955",
+        "bytes": 3851,
+        "mode": "0644"
+      }
+    },
+    {
+      "condition": "D",
+      "fixed_LAST_step": 117,
+      "rows": 12275,
+      "canonical_families": 236,
+      "family_z_mse": 0.8311573047447428,
+      "eligible": true,
+      "ineligible_reason": null,
+      "LAST": {
+        "descriptor": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/nnue-learning-scale432-v1/D-v1/last-model/manifest.json",
+          "sha256": "2b6ba9181ff61088128c3e77a523d542dffd7c7cc17584e801bf4a88cd70d5ea",
+          "bytes": 681,
+          "mode": "0600"
+        },
+        "weights": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/nnue-learning-scale432-v1/D-v1/last-model/weights.f32",
+          "sha256": "e3421e84fbea02aeb2176ac35498e377d29a464e4252449a3c8636da52019e60",
+          "bytes": 49284,
+          "mode": "0644"
+        },
+        "step": 117
+      },
+      "typed_evaluator_sha256": "c9a4f63a0876d1d493a33d3169125fd2a551901f2bc8eedeb23a98ea257a17e2",
+      "fit_completion": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-implementation-v1/actual-fit-D-completion-v1/completion.json",
+        "sha256": "ec3133bc54fc1a8dcfb2d9bb238e1b01c4616b725daa6b7693e880a1eefe6f20",
+        "bytes": 102393,
+        "mode": "0644"
+      },
+      "native_input": {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/nnue-learning-scale432-v1/native-correspondence-v1/input-D.json",
+        "sha256": "5b5d469af338202938f863292f26228adf9890013850ce14d5550cea5bb6cece",
+        "bytes": 1758,
+        "mode": "0644"
+      },
+      "native_output": {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/nnue-learning-scale432-v1/native-correspondence-v1/result-D.json",
+        "sha256": "4502eec72f5fa38d01294132f644936747502952b4f602bfa3bc19f78191f69b",
+        "bytes": 3834,
+        "mode": "0644"
+      }
+    },
+    {
+      "condition": "B",
+      "fixed_LAST_step": 117,
+      "rows": 12275,
+      "canonical_families": 236,
+      "family_z_mse": 0.833926958014095,
+      "eligible": true,
+      "ineligible_reason": null,
+      "LAST": {
+        "descriptor": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/nnue-learning-scale432-v1/B-v1/last-model/manifest.json",
+          "sha256": "dd7bfad3f85afc36d73b5665f43184a681e23dbb595ea82c6fad3e913c040b72",
+          "bytes": 681,
+          "mode": "0600"
+        },
+        "weights": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/nnue-learning-scale432-v1/B-v1/last-model/weights.f32",
+          "sha256": "f28507086f78b57ccd76662344a5002209e0a0e9c493136fde28af3ef9a39daf",
+          "bytes": 49284,
+          "mode": "0644"
+        },
+        "step": 117
+      },
+      "typed_evaluator_sha256": "e161cb730bd6d226630c01ae022e9649c3f6a29b408e493af9e9a701b1fb080b",
+      "fit_completion": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-implementation-v1/actual-fit-B-completion-v1/completion.json",
+        "sha256": "bf34df9a92ffb6721ce0c5767ce0a047ce6d00db8437a7a911ff21689638314d",
+        "bytes": 101730,
+        "mode": "0644"
+      },
+      "native_input": {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/nnue-learning-scale432-v1/native-correspondence-v1/input-B.json",
+        "sha256": "3bbeb8e4a1f29c976bf3ad35eead26ea7364835eee68444828e513aacb4554de",
+        "bytes": 1758,
+        "mode": "0644"
+      },
+      "native_output": {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/nnue-learning-scale432-v1/native-correspondence-v1/result-B.json",
+        "sha256": "d18e367f67ed5e94bc4df492f96ce4bd7d925c1fd079f057b03a35db6eb3b179",
+        "bytes": 3834,
+        "mode": "0644"
+      }
+    }
+  ],
+  "selected": {
+    "condition": "C",
+    "fixed_LAST_step": 467,
+    "rows": 12275,
+    "canonical_families": 236,
+    "family_z_mse": 0.7664609971214529,
+    "eligible": true,
+    "ineligible_reason": null,
+    "LAST": {
+      "descriptor": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/nnue-learning-scale432-v1/C-v1/last-model/manifest.json",
+        "sha256": "bca0fd926841d303e3e092b2d29d8508a7d64e2970abd85cfe5c7e84d36b694e",
+        "bytes": 681,
+        "mode": "0600"
+      },
+      "weights": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/nnue-learning-scale432-v1/C-v1/last-model/weights.f32",
+        "sha256": "85c296fe3ee0075628a610918c89aff21195acd3ecb806e3458c71a7f41e7ce2",
+        "bytes": 49284,
+        "mode": "0644"
+      },
+      "step": 467
+    },
+    "typed_evaluator_sha256": "4a1c7c14e7dab160c91f457d6c1b6c3d06672c71ac08049d2d37b703fe8d5c14",
+    "fit_completion": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/nnue-learning-scale432-implementation-v1/actual-fit-C-completion-v1/completion.json",
+      "sha256": "50449a2d4ed9f8651851916c4ae933da9f08156318ed0fbbe28dc213bd7af8f3",
+      "bytes": 125810,
+      "mode": "0644"
+    },
+    "native_input": {
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/nnue-learning-scale432-v1/native-correspondence-v1/input-C.json",
+      "sha256": "bd45ab9441b6ee241857bebffa5ffaff52328def40ee3c116055d1be6a642599",
+      "bytes": 1758,
+      "mode": "0644"
+    },
+    "native_output": {
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/nnue-learning-scale432-v1/native-correspondence-v1/result-C.json",
+      "sha256": "1866b790341bbd7ed916f96e8b052e5ad52727d0a2a01c328090cea1e5d9b955",
+      "bytes": 3851,
+      "mode": "0644"
+    }
+  },
+  "A": "descriptive baseline excluded by prospective rule",
+  "INITIAL_improvement_gate": false,
+  "within_fit_BEST_replacement_or_new_fit": false,
+  "actual_fit_logical_rows": 2337307,
+  "actual_native_logical_heads": 480,
+  "actual_total_new_NNUE_rows": 2337787,
+  "cap": 4000000,
+  "old_failed_A_rows": 0,
+  "limits": "Selection uses reused newV, not independent generalization. Native evidence is finite full/delta/factory/parent restoration, not all-input parity or strength. No defaults/model promotion or numerical dispatch by analyst.",
+  "original_arena": "One selected LAST vs BEST43, actual dad229e5 book192 families/384 slots/12x32 disjoint250M=3G; actual entry guards remain with324, no parent/ACK gate.",
+  "future_arena_Experiment_runtime": null,
+  "actual_model_archive_NPZ_payload_reads": 0,
+  "new_forward_fit_Search_game_solver_bootstrap_generation": 0
+}
