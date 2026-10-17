@@ -4,10 +4,131 @@ This module does not contain another optimizer/fit loop or source classifier.
 """
 
 import copy
+import gzip
+import hashlib
+import io
+import json
 import math
 import sys
 
 import numpy as np
+
+
+def observation_index_sha(indices):
+    return hashlib.sha256(np.asarray(indices, dtype="<i8").tobytes()).hexdigest()
+
+
+def read_initial_observation(ref, corpus, expected, train_indices, validation_indices):
+    """Reuse only an actually completed, same-identity zero-update observation."""
+    from .common import bound_file_bytes
+
+    saved = json.loads(bound_file_bytes(ref, 131072))
+    same = {
+        "input_classes": corpus.input_ref,
+        "teacher_values": corpus.binding["teacher_values"],
+        "teacher": corpus.binding["teacher"],
+        "common_initial": expected["common_initial"],
+        "initial_weights_sha": expected["initial_weights_sha"],
+        "scale_artifact_sha": expected["scale_artifact_sha"],
+        "fit_config_sha": expected["fit_config_sha"],
+        "train_index_sha": observation_index_sha(train_indices),
+        "validation_index_sha": observation_index_sha(validation_indices),
+    }
+    if saved.get("schema") != "quoridor-static-initial-observation-v1" or any(
+        saved.get(key) != value for key, value in same.items()
+    ):
+        raise ValueError("same INITIAL weights/scale/config/teacher/input/ordered-panel binding")
+    status = json.loads(bound_file_bytes(saved["original_run_status"], 65536))
+    common = json.loads(bound_file_bytes(saved["common_initial"], 65536))
+    original_config = json.loads(bound_file_bytes(saved["original_fit_config"], 65536))
+    source = json.loads(bound_file_bytes(saved["original_source"], 131072))
+    bank = json.loads(bound_file_bytes(saved["teacher_values"], 131072))
+    panel = json.loads(bound_file_bytes(saved["original_diagnostic_subsets"], 2097152))
+    if (
+        common["input_classes"] != corpus.input_ref
+        or common["initial_weights_sha"] != expected["initial_weights_sha"]
+        or common["scale"]["sha256"] != expected["scale_artifact_sha"]
+        or common["initializer_seed"] != 32442026101701
+        or saved["original_fit_config"]["sha256"] != expected["fit_config_sha"]
+        or original_config["training"]["device"] != "cuda"
+        or original_config["training"]["target"] != "static_teacher"
+        or original_config["model"]["distance_a"] != 0
+        or original_config["model"]["distance_b"] != 0
+        or not source.get("files")
+        or bank["status"] != "COMPLETE"
+        or bank["teachers"][saved["teacher"]]["model"] != saved["teacher_model"]
+        or panel["dataset_sha"] != corpus.binding["dataset_sha"]
+        or observation_index_sha(panel["train"]) != same["train_index_sha"]
+    ):
+        raise ValueError("original successful INITIAL source/model/FP32 recipe binding")
+    weights = bound_file_bytes(saved["original_initial_weights"], 49284)
+    if hashlib.sha256(weights).hexdigest() != expected["initial_weights_sha"]:
+        raise ValueError("original measured weights differ from common fresh INITIAL")
+    with gzip.GzipFile(
+        fileobj=io.BytesIO(bound_file_bytes(saved["original_curves"], 131072))
+    ) as archive:
+        raw = archive.read(1048577)
+    if len(raw) > 1048576:
+        raise ValueError("bounded original INITIAL control rows")
+    records = [json.loads(line) for line in raw.splitlines()]
+    point = saved["observation"]
+    if not records or any(record != point for record in records):
+        raise ValueError("one original INITIAL observation; duplicate publications only")
+    if (
+        any(status.get(field) != 0 for field in ("step", "training_seen", "attempted_step"))
+        or status.get("model_state_status") != "LAST_COMPLETED_UPDATE"
+    ):
+        raise ValueError("reuse is INITIAL only, never resume a completed/partial optimizer")
+    if (
+        point.get("step") != 0
+        or point.get("training_seen") != 0
+        or point.get("kind") != "full_selector"
+    ):
+        raise ValueError("original full-selector INITIAL only")
+    metrics = {scope: copy.deepcopy(point[scope]) for scope in ("train", "validation")}
+    for scope, indices in (("train", train_indices), ("validation", validation_indices)):
+        result = metrics[scope]
+        if (
+            result.get("group_kind") != "exact trueLR input class"
+            or result.get("rows") != len(indices)
+            or not isinstance(result.get("actual_logical_rows"), int)
+            or result["actual_logical_rows"] <= 0
+            or not math.isfinite(result["target_mse"])
+            or result["target_mse"] < 0
+        ):
+            raise ValueError("actual original weighted row/class scope and completed rows")
+    prior = sum(result["actual_logical_rows"] for result in metrics.values())
+    counters = dict(train=0, full_selector=prior, diagnostic=0, onnx=0)
+    if (
+        status["samples"] != prior
+        or status["forward_rows_completed"] != counters
+        or status["forward_rows_conservative"] != counters
+        or point["samples"] != prior
+        or point["validation_forward_rows"] != metrics["validation"]["actual_logical_rows"]
+    ):
+        raise ValueError("original INITIAL actual successful row ledger differs")
+    return dict(
+        metrics=metrics,
+        index_sha={scope: same[scope + "_index_sha"] for scope in metrics},
+        prior_logical_rows=prior,
+        used_scopes=set(),
+        receipt=ref,
+    )
+
+
+def reused_initial_measurement(saved, indices, kind):
+    """Return the retained aggregate; no new forward or old-work re-charge."""
+    digest = observation_index_sha(indices)
+    matches = [scope for scope, value in saved["index_sha"].items() if value == digest]
+    if kind != "full_selector" or len(matches) != 1 or matches[0] in saved["used_scopes"]:
+        raise ValueError("retained INITIAL scope must match once before any new update")
+    scope = matches[0]
+    saved["used_scopes"].add(scope)
+    result = copy.deepcopy(saved["metrics"][scope])
+    result["reused_successful_logical_rows"] = result["actual_logical_rows"]
+    result["actual_logical_rows"] = 0
+    result["retained_INITIAL_receipt"] = saved["receipt"]
+    return result
 
 
 def recipe(train_rows, validation_rows, *, device, threads):

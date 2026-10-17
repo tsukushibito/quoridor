@@ -812,6 +812,21 @@ def train(
     last_completed_point = None
     measurement_sets, reference_metrics = ({}, {})
 
+    reused_initial = None
+    if static_teacher and expected.get("reused_initial_observation") is not None:
+        from .static_learning import read_initial_observation
+
+        reused_initial = read_initial_observation(
+            expected["reused_initial_observation"],
+            corpus,
+            expected,
+            train_eval,
+            evaluation_validation,
+        )
+        # Historical successful INITIAL rows remain charged exactly once.
+        # Current forward counters below continue to count new executions only.
+        samples += reused_initial["prior_logical_rows"]
+
     def position():
         return {"step": completed_step, **exposure(training_seen, len(ix_train), mode)}
 
@@ -869,6 +884,10 @@ def train(
         return result
 
     def predict(indices, kind):
+        if static_teacher and completed_step == 0 and reused_initial is not None:
+            from .static_learning import reused_initial_measurement
+
+            return reused_initial_measurement(reused_initial, indices, kind)
         if static_teacher:
             from .static_learning import StaticMeasurements
 
@@ -1416,6 +1435,15 @@ def train(
                     "samples": samples,
                     "forward_rows_conservative": forward_rows,
                     "forward_rows_completed": completed_forward_rows,
+                    "reused_prior_INITIAL": None
+                    if reused_initial is None
+                    else {
+                        "receipt": expected["reused_initial_observation"],
+                        "logical_rows_already_charged": reused_initial["prior_logical_rows"],
+                        "new_initial_forward_rows": 0,
+                        "scopes_reused": sorted(reused_initial["used_scopes"]),
+                        "original_failed_run_unchanged": True,
+                    },
                     "phase_seconds_inclusive": phase_seconds,
                     "wall_seconds": time.monotonic() - start,
                     "timing_overlap": "inclusive/nested; do not add phases to infer whole wall",
@@ -1853,6 +1881,59 @@ def compact_measurements(
 
 
 def _curve_csv(curves, path, *, append=False):
+    if curves and curves[0]["train"].get("group_kind") == "exact trueLR input class":
+        # Static classes are not games. Keep legacy CSV fields and its owning
+        # path untouched; serialize the actual static metrics under true names.
+        position_fields = (
+            "step",
+            "training_seen",
+            "row_epoch",
+            "wall_seconds",
+            "kind",
+            "used_for_selection",
+        )
+        metrics = (
+            "rows",
+            "input_classes",
+            "target_mse",
+            "class_macro_mse",
+            "target_mae",
+            "decisive_sign_accuracy",
+            "predicted_saturated90_fraction",
+            "predicted_saturated99_fraction",
+            "actual_logical_rows",
+            "reused_successful_logical_rows",
+        )
+        with Path(path).open("a" if append else "w", newline="") as stream:
+            writer = csv.writer(stream)
+            if not append:
+                writer.writerow(
+                    [
+                        *position_fields,
+                        *[
+                            scope + "_" + field
+                            for scope in ("train", "validation")
+                            for field in metrics
+                        ],
+                    ]
+                )
+            for point in curves:
+                if any(
+                    point[scope].get("group_kind") != "exact trueLR input class"
+                    for scope in ("train", "validation")
+                ):
+                    raise ValueError("static CSV cannot mix game and exact-input class metrics")
+                writer.writerow(
+                    [
+                        *[point.get(field) for field in position_fields],
+                        *[
+                            point[scope].get(field)
+                            for scope in ("train", "validation")
+                            for field in metrics
+                        ],
+                    ]
+                )
+        return
     with Path(path).open("a" if append else "w", newline="") as stream:
         writer = csv.writer(stream)
         if not append:
