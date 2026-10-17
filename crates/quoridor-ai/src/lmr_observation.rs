@@ -464,7 +464,7 @@ impl SearchSession {
         }
         observation.used = true;
         let mut callback = |_: &SearchResult| {};
-        let result = search_in_table::<true, false>(
+        let result = search_in_table::<true, false, false>(
             root,
             self.evaluator.as_ref(),
             limits,
@@ -472,8 +472,10 @@ impl SearchSession {
             None,
             SearchInvocation {
                 forced_root: None,
+                zero_stock_observation: None,
                 on_completed: &mut callback,
                 observation: Some(&mut *observation),
+                safe_race_method: self.zero_stock_safe_race_method,
                 trial: None,
                 trial_trace: None,
             },
@@ -552,7 +554,7 @@ impl SearchSession {
             .collect();
         let mut callback = |_: &SearchResult| {};
         let mut trace = LmrTrialTrace::new(branch.facts.parent_ply, branch.facts.action);
-        let result = search_in_table::<false, true>(
+        let result = search_in_table::<false, true, false>(
             &parent,
             self.evaluator.as_ref(),
             &limits,
@@ -560,9 +562,11 @@ impl SearchSession {
             None,
             SearchInvocation {
                 forced_root: None,
+                zero_stock_observation: None,
                 on_completed: &mut callback,
                 observation: None,
                 trial_trace: Some(&mut trace),
+                safe_race_method: self.zero_stock_safe_race_method,
                 trial: Some(TrialInvocation {
                     action: branch.facts.action,
                     normal_depth,
@@ -735,7 +739,7 @@ mod trial_tests {
         ];
         let mut trace = LmrTrialTrace::new(2, b.facts.action);
         let mut callback = |_: &SearchResult| {};
-        let result = search_in_table::<false, true>(
+        let result = search_in_table::<false, true, false>(
             &parent,
             &Constant,
             &limits,
@@ -743,9 +747,11 @@ mod trial_tests {
             None,
             SearchInvocation {
                 forced_root: None,
+                zero_stock_observation: None,
                 on_completed: &mut callback,
                 observation: None,
                 trial_trace: Some(&mut trace),
+                safe_race_method: ZeroStockSafeRaceMethod::Manhattan,
                 trial: Some(TrialInvocation {
                     action: b.facts.action,
                     normal_depth: 2,

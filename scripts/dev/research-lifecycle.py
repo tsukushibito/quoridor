@@ -903,6 +903,8 @@ def measurement_config(experiment):
             "zero_stock_approx_min_root_walls",
             "zero_stock_approx_method",
             "zero_stock_safe_race",
+            "zero_stock_safe_race_method",
+            "zero_stock_observation",
         }
         and {
             "roots",
@@ -935,6 +937,24 @@ def measurement_config(experiment):
     require(
         type(config.get("zero_stock_safe_race", False)) is bool,
         "measurement safe-race switch",
+    )
+    safe_method = config.get("zero_stock_safe_race_method")
+    require(
+        safe_method is None
+        or (type(safe_method) is str and safe_method in {"manhattan", "path_tail"}),
+        "measurement safe-race method",
+    )
+    require(
+        type(config.get("zero_stock_observation", False)) is bool,
+        "measurement stock observer switch",
+    )
+    require(
+        not config.get("zero_stock_observation", False)
+        or not any(
+            r.get("observe_lmr", False) or r.get("observe_completed_depths", False)
+            for r in requests
+        ),
+        "stock observer requires an independent ordinary invocation",
     )
     lmr_method = config.get("lmr_method", "depth_rank")
     require(

@@ -78,6 +78,10 @@ struct Settings {
     zero_stock_approx_method: String,
     #[serde(default)]
     zero_stock_safe_race: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    zero_stock_safe_race_method: Option<String>,
+    #[serde(default)]
+    zero_stock_observation: bool,
     namespace: SearchNamespaceSettings,
     output_bytes: usize,
     record_bytes: usize,
@@ -126,6 +130,21 @@ fn default_zero_stock_approx_method() -> String {
 
 fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
     LmrMethod::from_name(&settings.lmr_method)?;
+    alphabeta::ZeroStockSafeRaceMethod::from_name(
+        settings
+            .zero_stock_safe_race_method
+            .as_deref()
+            .unwrap_or("manhattan"),
+    )?;
+    if settings.zero_stock_observation
+        && requests
+            .iter()
+            .any(|r| r.observe_lmr || r.observe_completed_depths)
+    {
+        return Err(
+            "stock observer requires its own ordinary invocation, without other observers".into(),
+        );
+    }
     ZeroStockApproxMethod::from_name(&settings.zero_stock_approx_method)?;
     if settings
         .zero_stock_approx_min_root_walls
@@ -372,6 +391,12 @@ impl Target for SearchTarget {
         )?);
         session
             .set_zero_stock_approx_min_root_walls(self.settings.zero_stock_approx_min_root_walls)?;
+        session.set_zero_stock_safe_race_method(alphabeta::ZeroStockSafeRaceMethod::from_name(
+            self.settings
+                .zero_stock_safe_race_method
+                .as_deref()
+                .unwrap_or("manhattan"),
+        )?);
         session.set_zero_stock_safe_race(self.settings.zero_stock_safe_race);
         let method = session.namespace().selectivity.clone();
         let lmr = session.lmr_enabled();
@@ -379,10 +404,10 @@ impl Target for SearchTarget {
         let capacity = session.tt_capacity();
         self.session = Some(session);
         Ok(
-            json!({"TT_capacity":capacity,"retained_TT_bytes":retained.0,"retained_session_metadata_history_bytes":retained.1,
+            json!({"session_constructed":true,"scratch_lifetime":"ordinary invocation-owned scratch; no persistent pool is claimed","TT_capacity":capacity,"retained_TT_bytes":retained.0,"retained_session_metadata_history_bytes":retained.1,
                 "actual_selectivity":method,"lmr":lmr,
                 "zero_stock_safe_race":self.settings.zero_stock_safe_race,
-                "zero_stock_safe_race_method":self.settings.zero_stock_safe_race.then_some(alphabeta::ZERO_STOCK_SAFE_RACE_METHOD),
+                "zero_stock_safe_race_method":self.session.as_ref().and_then(|session| session.zero_stock_safe_race_enabled().then(|| session.zero_stock_safe_race_method().id())),
                 "zero_stock_approx_min_root_walls":self.settings.zero_stock_approx_min_root_walls,
                 "zero_stock_approx_method_requested":self.settings.zero_stock_approx_method,
                 "zero_stock_approx_method":Value::Null,
@@ -437,9 +462,16 @@ impl Target for SearchTarget {
             .observe_lmr
             .then(|| Box::new(alphabeta::LmrObservation::default()));
         let inference_before = self.sigma_value.as_ref().map(|e| e.work()).transpose()?;
+        let table_generation_before = session.table_generation();
+        let mut stock_observation = self
+            .settings
+            .zero_stock_observation
+            .then(alphabeta::ZeroStockObservation::default);
         let search_started = Instant::now();
         let mut completed_depths = Vec::new();
-        let result = if let Some(observation) = lmr_observation.as_deref_mut() {
+        let result = if let Some(observation) = stock_observation.as_mut() {
+            session.search_with_zero_stock_observation(root, &limits, cancel, observation)
+        } else if let Some(observation) = lmr_observation.as_deref_mut() {
             session.search_with_lmr_observation(root, &limits, cancel, observation)
         } else if request.observe_completed_depths {
             session.search_with_updates(root, &limits, cancel, &mut |completed| {
@@ -506,7 +538,7 @@ impl Target for SearchTarget {
         row["zero_stock_safe_race_method"] = json!(
             session
                 .zero_stock_safe_race_enabled()
-                .then_some(alphabeta::ZERO_STOCK_SAFE_RACE_METHOD)
+                .then(|| session.zero_stock_safe_race_method().id())
         );
         row["completed_depth_semantics"] = json!(if session.zero_stock_safe_race_enabled() {
             "safe-race-leaf-nominal-not-root-game-WDL"
@@ -543,6 +575,19 @@ impl Target for SearchTarget {
                 "nodes":31_200_000});
             row["lmr_observation"] = observation;
         }
+        row["TT_generation_before"] = json!(table_generation_before);
+        row["TT_generation_after"] = json!(session.table_generation());
+        if let Some(o) = stock_observation {
+            if row["returned"] == "Err"
+                && let Some(partial) = &o.partial_stats
+            {
+                row["work"] = observed_work(partial);
+                row["work_scope"] =
+                    json!("partial actual error-path counters; no completed value/depth implied");
+            }
+            row["zero_stock_observation"] =
+                zero_stock_observation_output(&o, search_seconds, row["status"] != "COMPLETE");
+        }
         row["Search_call_seconds"] = json!(search_seconds);
         row["parent_unchanged"] = json!(after == self.before);
         if after != self.before {
@@ -558,8 +603,37 @@ impl Target for SearchTarget {
     fn teardown(&mut self) -> Result<Value> {
         self.root.take();
         self.session.take();
-        Ok(Value::Null)
+        Ok(json!({"session_dropped":true}))
     }
+}
+
+fn zero_stock_observation_output(
+    o: &alphabeta::ZeroStockObservation,
+    search_seconds: f64,
+    partial: bool,
+) -> Value {
+    // Search can refuse before constructing state or publishing any observation.
+    // Default fields then carry no measured classification, counters or clock partition.
+    if o.partial_stats.is_none() {
+        return Value::Null;
+    }
+    json!({
+        "root_stock0":o.root_stock0,
+        "zero_stock_nodes":o.zero_stock_nodes,
+        "positive_stock_nodes":o.positive_stock_nodes,
+        "total_nodes":o.total_nodes,
+        "entries":o.entries,"exits":o.exits,
+        "entry_depth_0_to_8_then_9plus":o.entry_depth,
+        "entry_ply_0_to_8_then_9plus":o.entry_ply,
+        "subtree_nanoseconds":o.subtree_nanoseconds,
+        "zero_stock_work":o.zero_stock_work,
+        "zero_stock_work_fields":["evaluations","terminal","safe_race_proven_leaves","safe_race_history_checks","safe_race_history_rejects","tt_probes","tt_hits","tt_cutoffs","wall_distance_map_reads","wall_distance_map_builds","wall_distance_fallbacks","delta_updates"],
+        "parent_restored":o.parent_restored,
+        "root_stock0_whole_search_seconds":if o.root_stock0 {Some(search_seconds)} else {None},
+        "positive_root_search_seconds":if o.root_stock0 {None} else {Some(search_seconds)},
+        "boundary":"final-wall canonical make excluded; post-make fingerprints, subtree, canonical undo and restoration included; no nested stock-zero clocks",
+        "partial":partial,
+    })
 }
 
 fn timed<T>(run: impl FnOnce() -> Result<T>) -> (Result<T>, f64) {
@@ -977,7 +1051,7 @@ fn completed_depth_observation(r: &SearchResult) -> Value {
     result["zero_stock_safe_race"] = json!(s.zero_stock_safe_race_enabled);
     result["zero_stock_safe_race_method"] = json!(
         s.zero_stock_safe_race_enabled
-            .then_some(alphabeta::ZERO_STOCK_SAFE_RACE_METHOD)
+            .then_some(s.zero_stock_safe_race_method.id())
     );
     result["cumulative_work"]["safe_race_stock0_opportunities"] =
         json!(s.safe_race_stock0_opportunities);
@@ -991,7 +1065,63 @@ fn completed_depth_observation(r: &SearchResult) -> Value {
     if s.zero_stock_safe_race_enabled {
         result["completed_depth_semantics"] = json!("safe-race-leaf-nominal-not-root-game-WDL");
     }
+    safe_path_work(&mut result["cumulative_work"], s);
     result
+}
+/// Event counters only: committed proof returns and raw test/probe domains are
+/// separate. Legacy geometry test/pass fields denote M, including in P mode.
+fn safe_path_work(work: &mut Value, s: &alphabeta::SearchStats) {
+    for (name, count) in [
+        ("safe_race_m_tests", s.safe_race_geometry_tests),
+        ("safe_race_m_passes", s.safe_race_geometry_passes),
+        ("safe_race_tt_returns", s.safe_race_tt_returns),
+        ("safe_race_m_returns", s.safe_race_m_returns),
+        ("safe_race_tail_goal_returns", s.safe_race_tail_goal_returns),
+        (
+            "safe_race_tail_sealed_returns",
+            s.safe_race_tail_sealed_returns,
+        ),
+        ("safe_race_path_returns", s.safe_race_path_returns),
+        ("safe_race_tail_tests", s.safe_race_tail_tests),
+        ("safe_race_tail_goal_passes", s.safe_race_tail_goal_passes),
+        ("safe_race_tail_sealed_tests", s.safe_race_tail_sealed_tests),
+        (
+            "safe_race_tail_sealed_passes",
+            s.safe_race_tail_sealed_passes,
+        ),
+        (
+            "safe_race_tail_count_queries",
+            s.safe_race_tail_count_queries,
+        ),
+        (
+            "safe_race_tail_history_rejects",
+            s.safe_race_tail_history_rejects,
+        ),
+        ("safe_race_path_tests", s.safe_race_path_tests),
+        ("safe_race_path_passes", s.safe_race_path_passes),
+        ("safe_race_path_map_missing", s.safe_race_path_map_missing),
+        ("safe_race_path_invalid_map", s.safe_race_path_invalid_map),
+        (
+            "safe_race_path_opponent_first_rejects",
+            s.safe_race_path_opponent_first_rejects,
+        ),
+        (
+            "safe_race_path_intermediate_rejects",
+            s.safe_race_path_intermediate_rejects,
+        ),
+        (
+            "safe_race_path_endpoint_rejects",
+            s.safe_race_path_endpoint_rejects,
+        ),
+        (
+            "safe_race_path_history_rejects",
+            s.safe_race_path_history_rejects,
+        ),
+        ("safe_race_path_length_sum", s.safe_race_path_length_sum),
+        ("safe_race_path_length_max", s.safe_race_path_length_max),
+    ] {
+        work[name] = json!(count);
+    }
 }
 fn observed_work(s: &alphabeta::SearchStats) -> Value {
     let mut work = json!({"nodes":s.nodes,"evaluations":s.evaluations,"terminal":s.terminal,"cutoffs":s.cutoffs,"TT_hits":s.tt_hits,"TT_probes":s.tt_probes,"TT_exact_hits":s.tt_exact_hits,"TT_key_builds":s.tt_key_builds,"tt_context_initial_items":s.tt_context_initial_items,"tt_context_transitions":s.tt_context_transitions,"tt_board_hash_reads":s.tt_board_hash_reads,"tt_board_hash_updates":s.tt_board_hash_updates,"tt_context_matches":s.tt_context_matches,"tt_context_misses":s.tt_context_misses,"tt_order_context_mismatch":s.tt_order_context_mismatch,"tt_hash_collisions":s.tt_hash_collisions,"tt_index_collisions":s.tt_index_collisions,"TT_hashes":s.tt_hashes,"TT_usable_depth":s.tt_usable_depth,"TT_order_only":s.tt_order_only,"TT_collisions":s.tt_collisions,"TT_replacements":s.tt_replacements,"TT_capacity_skips":s.tt_capacity_skips,"TT_illegal_moves":s.tt_illegal_moves,"TT_retained_bytes":s.tt_retained_bytes,"TT_generation":s.tt_generation,"TT_cutoffs":s.tt_cutoffs,"PVS_researches":s.pvs_researches,"delta_updates":s.delta_updates,"policy_calls":s.policy_calls});
@@ -1013,6 +1143,7 @@ fn observed_work(s: &alphabeta::SearchStats) -> Value {
     work["safe_race_history_checks"] = json!(s.safe_race_history_checks);
     work["safe_race_history_rejects"] = json!(s.safe_race_history_rejects);
     work["safe_race_proven_leaves"] = json!(s.safe_race_proven_leaves);
+    safe_path_work(&mut work, s);
     work
 }
 fn observed(r: &SearchResult) -> Value {
@@ -1028,7 +1159,7 @@ fn observed(r: &SearchResult) -> Value {
     result["zero_stock_safe_race"] = json!(s.zero_stock_safe_race_enabled);
     result["zero_stock_safe_race_method"] = json!(
         s.zero_stock_safe_race_enabled
-            .then_some(alphabeta::ZERO_STOCK_SAFE_RACE_METHOD)
+            .then_some(s.zero_stock_safe_race_method.id())
     );
     result["zero_stock_approx_method"] = json!(if s.zero_stock_approx_permitted {
         Some(s.zero_stock_approx_method.id())
@@ -1665,6 +1796,70 @@ mod tests {
             calls: 0,
             cancel_after: false,
         }
+    }
+    #[test]
+    fn continuous_session_four_groups_construct_drop_once_without_root_reset() {
+        let rows = vec![
+            request("a0", "a0"),
+            request("a2", "a0"),
+            request("a1", "a1"),
+            request("a3", "a1"),
+            request("b0", "b0"),
+            request("b2", "b0"),
+            request("b1", "b1"),
+            request("b3", "b1"),
+        ];
+        let mut target = fake(1);
+        let result = drive(
+            &rows,
+            rows.len(),
+            &mut target,
+            &AtomicBool::new(false),
+            |_| Ok(()),
+        );
+        assert_eq!(result["status"], "COMPLETE");
+        assert_eq!(
+            target
+                .trace
+                .iter()
+                .filter(|s| s.starts_with("reset:"))
+                .count(),
+            4
+        );
+        assert_eq!(target.trace.iter().filter(|s| *s == "teardown").count(), 4);
+        assert_eq!(target.calls, 8);
+        let ids: Vec<_> = result["measurements"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .map(|r| r["request"]["id"].as_str().unwrap())
+            .collect();
+        assert_eq!(ids, vec!["a0", "a2", "a1", "a3", "b0", "b2", "b1", "b3"]);
+    }
+    #[test]
+    fn continuous_observer_and_method_are_independent_opt_in_settings() {
+        assert!(
+            zero_stock_observation_output(&alphabeta::ZeroStockObservation::default(), 1.0, true)
+                .is_null()
+        );
+        let base = json!({"roots":[{"input":0,"pointer":"","field":"prefix","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,
+            "namespace":{"evaluator":"toy","rules":"standard","selectivity":"full"},"output_bytes":10000,"record_bytes":1000});
+        let settings: Settings = serde_json::from_value(base.clone()).unwrap();
+        assert!(!settings.zero_stock_safe_race && !settings.zero_stock_observation);
+        let mut selected = base.clone();
+        selected["zero_stock_safe_race_method"] = json!("path_tail");
+        selected["zero_stock_observation"] = json!(true);
+        let settings: Settings = serde_json::from_value(selected.clone()).unwrap();
+        validate(&settings, &[]).unwrap();
+        assert!(!settings.zero_stock_safe_race);
+        for bad in [Value::Null, json!(0), json!("true")] {
+            selected["zero_stock_observation"] = bad;
+            assert!(serde_json::from_value::<Settings>(selected.clone()).is_err());
+        }
+        selected["zero_stock_observation"] = json!(true);
+        let mut request = request("x", "x");
+        request.observe_completed_depths = true;
+        assert!(validate(&serde_json::from_value(selected).unwrap(), &[request]).is_err());
     }
     #[test]
     fn measurement_variable_counts_orders_targets_and_domains() {
