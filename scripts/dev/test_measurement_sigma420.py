@@ -53,9 +53,7 @@ class SigmaMeasurementAdmission(unittest.TestCase):
             "argv": ["/FAKE/runner", "measure"],
             "rules": "rules",
             "config": config,
-            "schedule": [
-                {"id": "one", "session": "cold", "root": 0, "depth": 1, "node_cap": 17}
-            ],
+            "schedule": [{"id": "one", "session": "cold", "root": 0, "depth": 1, "node_cap": 17}],
             "inputs": [
                 {"path": "/FAKE/roots.json", "sha256": "d" * 64},
                 {"path": "/FAKE/model.onnx", "sha256": "a" * 64},
@@ -77,7 +75,7 @@ class SigmaMeasurementAdmission(unittest.TestCase):
             changed["config"]["inference"]["logical_row_limit"] = bad
             with self.assertRaises(ValueError):
                 check(changed)
-        for case in range(6):
+        for case in range(5):
             changed = deepcopy(experiment)
             if case == 0:
                 changed["inputs"].pop()
@@ -87,8 +85,6 @@ class SigmaMeasurementAdmission(unittest.TestCase):
                 changed["models"] = [{}]
             elif case == 3:
                 changed["config"]["namespace"]["evaluator"] = "nnue"
-            elif case == 4:
-                changed["config"]["loss_leaf_419"] = True
             else:
                 changed["config"]["lmr"] = True
             with self.assertRaises(ValueError):

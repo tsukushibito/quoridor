@@ -22,9 +22,6 @@ use std::{
     time::Instant,
 };
 
-#[path = "measurement_loss_leaf.rs"]
-mod loss_leaf;
-
 #[cfg(test)]
 #[path = "measurement_weight_correspondence_tests.rs"]
 mod weight_correspondence_tests;
@@ -63,8 +60,6 @@ struct RootInput {
 #[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 struct Settings {
-    #[serde(default)]
-    loss_leaf_419: bool,
     roots: Vec<RootInput>,
     /// Native Sigma static value; ONNX/library live in Experiment inputs, not NNUE descriptors.
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -83,6 +78,8 @@ struct Settings {
     zero_stock_approx_method: String,
     #[serde(default)]
     zero_stock_safe_race: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    zero_stock_safe_race_method: Option<String>,
     namespace: SearchNamespaceSettings,
     output_bytes: usize,
     record_bytes: usize,
@@ -130,9 +127,6 @@ fn default_zero_stock_approx_method() -> String {
 }
 
 fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
-    if settings.loss_leaf_419 {
-        loss_leaf::validate(settings, requests)?;
-    }
     LmrMethod::from_name(&settings.lmr_method)?;
     ZeroStockApproxMethod::from_name(&settings.zero_stock_approx_method)?;
     if settings
@@ -210,7 +204,7 @@ fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
     Ok(())
 }
 
-fn root_spec(value: &Value, selector: &RootInput, loss_leaf: bool) -> Result<RootSpec> {
+fn root_spec(value: &Value, selector: &RootInput) -> Result<RootSpec> {
     let row = value
         .pointer(&selector.pointer)
         .ok_or("measurement input pointer")?;
@@ -225,21 +219,9 @@ fn root_spec(value: &Value, selector: &RootInput, loss_leaf: bool) -> Result<Roo
         }
         prefix.truncate(length);
     }
-    let expected = if loss_leaf {
-        if row.get("expected_ordered_history_keys").is_none() {
-            return Err("loss-leaf bound ordered history is missing".into());
-        }
-        if selector.field != "from_prefix_actions"
-            || selector.prefix_len.is_some()
-            || selector.jsonl_match.is_some()
-            || selector.check_history
-        {
-            return Err(
-                "loss-leaf requires the complete canonical prefix, not supplied counts".into(),
-            );
-        }
-        Some(row.clone())
-    } else if row.get("opening_bound").is_some() || row.get("expected_divergence_board").is_some() {
+    let expected = if row.get("opening_bound").is_some()
+        || row.get("expected_divergence_board").is_some()
+    {
         if selector.field != "prefix"
             || selector.prefix_len.is_some()
             || selector.check_history
@@ -259,11 +241,7 @@ fn root_spec(value: &Value, selector: &RootInput, loss_leaf: bool) -> Result<Roo
     };
     Ok(RootSpec { prefix, expected })
 }
-fn prepare_roots(
-    e: &Experiment,
-    selectors: &[RootInput],
-    loss_leaf: bool,
-) -> Result<Vec<RootSpec>> {
+fn prepare_roots(e: &Experiment, selectors: &[RootInput]) -> Result<Vec<RootSpec>> {
     // Read each selected input once, as the existing book/chronological replay
     // preparation does. This temporary grouping never persists into Search.
     let mut inputs = std::collections::BTreeMap::<usize, Vec<(usize, &RootInput)>>::new();
@@ -282,7 +260,7 @@ fn prepare_roots(
         {
             let value: Value = input.read()?;
             for (index, selector) in selected {
-                roots[index] = Some(root_spec(&value, selector, loss_leaf)?);
+                roots[index] = Some(root_spec(&value, selector)?);
             }
             continue;
         }
@@ -332,7 +310,7 @@ fn prepare_roots(
                     if roots[*index].is_some() {
                         return Err("ambiguous measurement input selector".into());
                     }
-                    roots[*index] = Some(root_spec(&row, selector, loss_leaf)?);
+                    roots[*index] = Some(root_spec(&row, selector)?);
                 }
             }
         }
@@ -396,6 +374,13 @@ impl Target for SearchTarget {
         )?);
         session
             .set_zero_stock_approx_min_root_walls(self.settings.zero_stock_approx_min_root_walls)?;
+        let safe_method = alphabeta::ZeroStockSafeRaceMethod::from_name(
+            self.settings
+                .zero_stock_safe_race_method
+                .as_deref()
+                .unwrap_or("manhattan"),
+        )?;
+        session.set_zero_stock_safe_race_method(safe_method);
         session.set_zero_stock_safe_race(self.settings.zero_stock_safe_race);
         let method = session.namespace().selectivity.clone();
         let lmr = session.lmr_enabled();
@@ -406,7 +391,7 @@ impl Target for SearchTarget {
             json!({"TT_capacity":capacity,"retained_TT_bytes":retained.0,"retained_session_metadata_history_bytes":retained.1,
                 "actual_selectivity":method,"lmr":lmr,
                 "zero_stock_safe_race":self.settings.zero_stock_safe_race,
-                "zero_stock_safe_race_method":self.settings.zero_stock_safe_race.then_some(alphabeta::ZERO_STOCK_SAFE_RACE_METHOD),
+                "zero_stock_safe_race_method":self.settings.zero_stock_safe_race.then_some(safe_method.id()),
                 "zero_stock_approx_min_root_walls":self.settings.zero_stock_approx_min_root_walls,
                 "zero_stock_approx_method_requested":self.settings.zero_stock_approx_method,
                 "zero_stock_approx_method":Value::Null,
@@ -530,7 +515,7 @@ impl Target for SearchTarget {
         row["zero_stock_safe_race_method"] = json!(
             session
                 .zero_stock_safe_race_enabled()
-                .then_some(alphabeta::ZERO_STOCK_SAFE_RACE_METHOD)
+                .then(|| session.zero_stock_safe_race_method().id())
         );
         row["completed_depth_semantics"] = json!(if session.zero_stock_safe_race_enabled() {
             "safe-race-leaf-nominal-not-root-game-WDL"
@@ -595,7 +580,6 @@ fn evaluator_binding(settings: &Settings, model_count: usize) -> Result<()> {
     if let Some(i) = &settings.inference {
         crate::sigma_evaluator::validate_config(i)?;
         if model_count != 0
-            || settings.loss_leaf_419
             || settings.profile != Profile::Control
             || settings.lmr
             || settings.zero_stock_approx_min_root_walls.is_some()
@@ -727,14 +711,13 @@ mod sigma_value_binding_tests {
         let mut wrong = settings.clone();
         wrong.namespace.evaluator = "distance".into();
         assert!(sigma_value_binding(&e, &wrong).is_err());
-        for case in 0..5 {
+        for case in 0..4 {
             let mut wrong = settings.clone();
             match case {
                 0 => wrong.profile = Profile::Cheap,
                 1 => wrong.lmr = true,
                 2 => wrong.zero_stock_approx_min_root_walls = Some(0),
-                3 => wrong.zero_stock_safe_race = true,
-                _ => wrong.loss_leaf_419 = true,
+                _ => wrong.zero_stock_safe_race = true,
             }
             assert!(evaluator_binding(&wrong, 0).is_err());
         }
@@ -858,13 +841,9 @@ pub fn run(bound: &BoundControl) -> Result<Value> {
     let cancel = Arc::new(AtomicBool::new(false));
     // The existing guardian owns signal forwarding, directwait and partial capture.
     // Cooperative cancellation remains the target/driver AtomicBool boundary.
-    let mut result = if settings.loss_leaf_419 {
-        loss_leaf::run(&e, &settings, &requests, &cancel, &mut |row| {
-            output.row(row)
-        })?
-    } else {
+    let mut result = {
         let (prepared, preparation_seconds) = timed(|| -> Result<SearchTarget> {
-            let roots = prepare_roots(&e, &settings.roots, false)?;
+            let roots = prepare_roots(&e, &settings.roots)?;
             let (evaluator, sigma_value) = load_evaluator(&e, &settings)?;
             Ok(SearchTarget {
                 settings,
@@ -938,9 +917,7 @@ fn replay(spec: &RootSpec, rules: &str) -> Result<SigmaContext> {
     }
     if let Some(expected) = &spec.expected {
         let actual = identity(&root);
-        if expected.get("expected_ordered_history_keys").is_some() {
-            loss_leaf::input_check(&spec.prefix, expected, &root)?;
-        } else if expected.get("opening_bound").is_some() {
+        if expected.get("opening_bound").is_some() {
             observation_input_check(&spec.prefix, expected, &root)?;
         } else if actual["root_key"] != expected["root_key"]
             || actual["history_counts"] != expected["history_counts"]
@@ -1009,7 +986,7 @@ fn completed_depth_observation(r: &SearchResult) -> Value {
     result["zero_stock_safe_race"] = json!(s.zero_stock_safe_race_enabled);
     result["zero_stock_safe_race_method"] = json!(
         s.zero_stock_safe_race_enabled
-            .then_some(alphabeta::ZERO_STOCK_SAFE_RACE_METHOD)
+            .then_some(s.zero_stock_safe_race_method.id())
     );
     result["cumulative_work"]["safe_race_stock0_opportunities"] =
         json!(s.safe_race_stock0_opportunities);
@@ -1020,10 +997,66 @@ fn completed_depth_observation(r: &SearchResult) -> Value {
     result["cumulative_work"]["safe_race_history_checks"] = json!(s.safe_race_history_checks);
     result["cumulative_work"]["safe_race_history_rejects"] = json!(s.safe_race_history_rejects);
     result["cumulative_work"]["safe_race_proven_leaves"] = json!(s.safe_race_proven_leaves);
+    safe_path_work(&mut result["cumulative_work"], s);
     if s.zero_stock_safe_race_enabled {
         result["completed_depth_semantics"] = json!("safe-race-leaf-nominal-not-root-game-WDL");
     }
     result
+}
+/// Event counters only: committed proof returns and raw test/probe domains are
+/// separate. Legacy geometry test/pass fields denote M, including in P mode.
+fn safe_path_work(work: &mut Value, s: &alphabeta::SearchStats) {
+    for (name, count) in [
+        ("safe_race_m_tests", s.safe_race_geometry_tests),
+        ("safe_race_m_passes", s.safe_race_geometry_passes),
+        ("safe_race_tt_returns", s.safe_race_tt_returns),
+        ("safe_race_m_returns", s.safe_race_m_returns),
+        ("safe_race_tail_goal_returns", s.safe_race_tail_goal_returns),
+        (
+            "safe_race_tail_sealed_returns",
+            s.safe_race_tail_sealed_returns,
+        ),
+        ("safe_race_path_returns", s.safe_race_path_returns),
+        ("safe_race_tail_tests", s.safe_race_tail_tests),
+        ("safe_race_tail_goal_passes", s.safe_race_tail_goal_passes),
+        ("safe_race_tail_sealed_tests", s.safe_race_tail_sealed_tests),
+        (
+            "safe_race_tail_sealed_passes",
+            s.safe_race_tail_sealed_passes,
+        ),
+        (
+            "safe_race_tail_count_queries",
+            s.safe_race_tail_count_queries,
+        ),
+        (
+            "safe_race_tail_history_rejects",
+            s.safe_race_tail_history_rejects,
+        ),
+        ("safe_race_path_tests", s.safe_race_path_tests),
+        ("safe_race_path_passes", s.safe_race_path_passes),
+        ("safe_race_path_map_missing", s.safe_race_path_map_missing),
+        ("safe_race_path_invalid_map", s.safe_race_path_invalid_map),
+        (
+            "safe_race_path_opponent_first_rejects",
+            s.safe_race_path_opponent_first_rejects,
+        ),
+        (
+            "safe_race_path_intermediate_rejects",
+            s.safe_race_path_intermediate_rejects,
+        ),
+        (
+            "safe_race_path_endpoint_rejects",
+            s.safe_race_path_endpoint_rejects,
+        ),
+        (
+            "safe_race_path_history_rejects",
+            s.safe_race_path_history_rejects,
+        ),
+        ("safe_race_path_length_sum", s.safe_race_path_length_sum),
+        ("safe_race_path_length_max", s.safe_race_path_length_max),
+    ] {
+        work[name] = json!(count);
+    }
 }
 fn observed_work(s: &alphabeta::SearchStats) -> Value {
     let mut work = json!({"nodes":s.nodes,"evaluations":s.evaluations,"terminal":s.terminal,"cutoffs":s.cutoffs,"TT_hits":s.tt_hits,"TT_probes":s.tt_probes,"TT_exact_hits":s.tt_exact_hits,"TT_key_builds":s.tt_key_builds,"tt_context_initial_items":s.tt_context_initial_items,"tt_context_transitions":s.tt_context_transitions,"tt_board_hash_reads":s.tt_board_hash_reads,"tt_board_hash_updates":s.tt_board_hash_updates,"tt_context_matches":s.tt_context_matches,"tt_context_misses":s.tt_context_misses,"tt_order_context_mismatch":s.tt_order_context_mismatch,"tt_hash_collisions":s.tt_hash_collisions,"tt_index_collisions":s.tt_index_collisions,"TT_hashes":s.tt_hashes,"TT_usable_depth":s.tt_usable_depth,"TT_order_only":s.tt_order_only,"TT_collisions":s.tt_collisions,"TT_replacements":s.tt_replacements,"TT_capacity_skips":s.tt_capacity_skips,"TT_illegal_moves":s.tt_illegal_moves,"TT_retained_bytes":s.tt_retained_bytes,"TT_generation":s.tt_generation,"TT_cutoffs":s.tt_cutoffs,"PVS_researches":s.pvs_researches,"delta_updates":s.delta_updates,"policy_calls":s.policy_calls});
@@ -1045,6 +1078,7 @@ fn observed_work(s: &alphabeta::SearchStats) -> Value {
     work["safe_race_history_checks"] = json!(s.safe_race_history_checks);
     work["safe_race_history_rejects"] = json!(s.safe_race_history_rejects);
     work["safe_race_proven_leaves"] = json!(s.safe_race_proven_leaves);
+    safe_path_work(&mut work, s);
     work
 }
 fn observed(r: &SearchResult) -> Value {
@@ -1060,7 +1094,7 @@ fn observed(r: &SearchResult) -> Value {
     result["zero_stock_safe_race"] = json!(s.zero_stock_safe_race_enabled);
     result["zero_stock_safe_race_method"] = json!(
         s.zero_stock_safe_race_enabled
-            .then_some(alphabeta::ZERO_STOCK_SAFE_RACE_METHOD)
+            .then_some(s.zero_stock_safe_race_method.id())
     );
     result["zero_stock_approx_method"] = json!(if s.zero_stock_approx_permitted {
         Some(s.zero_stock_approx_method.id())

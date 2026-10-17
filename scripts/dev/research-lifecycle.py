@@ -888,7 +888,7 @@ def measurement_config(experiment):
         isinstance(config, dict)
         and set(config)
         <= {
-            "loss_leaf_419",
+            "zero_stock_safe_race_method",
             "inference",
             "roots",
             "profile",
@@ -923,9 +923,7 @@ def measurement_config(experiment):
         "configured ordering target",
     )
     for key in ("tt_entries", "output_bytes", "record_bytes"):
-        require(
-            type(config[key]) is int and config[key] > 0, "measurement positive " + key
-        )
+        require(type(config[key]) is int and config[key] > 0, "measurement positive " + key)
     require(
         config["record_bytes"] <= config["output_bytes"],
         "measurement record/output limit",
@@ -934,11 +932,16 @@ def measurement_config(experiment):
         all(type(config[key]) is bool for key in ("use_tt", "use_pvs")),
         "measurement Boolean switches",
     )
-    require(type(config.get("loss_leaf_419", False)) is bool, "loss-leaf switch")
     require(type(config.get("lmr", False)) is bool, "measurement LMR switch")
     require(
         type(config.get("zero_stock_safe_race", False)) is bool,
         "measurement safe-race switch",
+    )
+    safe_method = config.get("zero_stock_safe_race_method")
+    require(
+        safe_method is None
+        or (type(safe_method) is str and safe_method in {"manhattan", "path_tail"}),
+        "measurement safe-race method",
     )
     lmr_method = config.get("lmr_method", "depth_rank")
     require(
@@ -966,8 +969,7 @@ def measurement_config(experiment):
         "measurement LMR requires PVS and Control/Cheap",
     )
     require(
-        config.get("seed") is None
-        or (type(config["seed"]) is int and 0 <= config["seed"] < 2**64),
+        config.get("seed") is None or (type(config["seed"]) is int and 0 <= config["seed"] < 2**64),
         "measurement seed metadata",
     )
     namespace = config["namespace"]
@@ -982,8 +984,7 @@ def measurement_config(experiment):
     if inference is not None:
         require(
             isinstance(inference, dict)
-            and {"backend", "model", "model_sha", "library", "logical_row_limit"}
-            <= set(inference)
+            and {"backend", "model", "model_sha", "library", "logical_row_limit"} <= set(inference)
             and set(inference)
             <= {
                 "backend",
@@ -1014,11 +1015,9 @@ def measurement_config(experiment):
             and not config.get("lmr", False)
             and config.get("zero_stock_approx_min_root_walls") is None
             and not config.get("zero_stock_safe_race", False)
-            and not config.get("loss_leaf_419", False)
             and experiment.get("models") == []
             and any(
-                r["path"] == inference["model"]
-                and r["sha256"] == inference["model_sha"]
+                r["path"] == inference["model"] and r["sha256"] == inference["model_sha"]
                 for r in experiment["inputs"]
             )
             and any(
@@ -1027,10 +1026,7 @@ def measurement_config(experiment):
             )
             and namespace["evaluator"].startswith("sigma-value-onnx-cpu:sha256:")
             and len(namespace["evaluator"].rsplit(":", 1)[-1]) == 64
-            and all(
-                c in "0123456789abcdef"
-                for c in namespace["evaluator"].rsplit(":", 1)[-1]
-            ),
+            and all(c in "0123456789abcdef" for c in namespace["evaluator"].rsplit(":", 1)[-1]),
             "measurement closed Sigma inputs and native-owned identity",
         )
     require(isinstance(config["roots"], list) and config["roots"], "measurement roots")
@@ -1084,9 +1080,7 @@ def measurement_config(experiment):
                 "observe_completed_depths",
                 "observe_lmr",
             }
-            and all(
-                isinstance(request[k], str) and request[k] for k in ("id", "session")
-            )
+            and all(isinstance(request[k], str) and request[k] for k in ("id", "session"))
             and request["id"] not in ids
             and type(request["root"]) is int
             and 0 <= request["root"] < len(config["roots"])
@@ -1098,10 +1092,7 @@ def measurement_config(experiment):
         )
         require(
             request.get("time_limit_ms") is None
-            or (
-                type(request["time_limit_ms"]) is int
-                and 0 < request["time_limit_ms"] < 2**64
-            ),
+            or (type(request["time_limit_ms"]) is int and 0 < request["time_limit_ms"] < 2**64),
             "measurement optional deadline",
         )
         require(
@@ -1157,58 +1148,6 @@ def measurement_config(experiment):
             ),
             "LMR observation complete-prefix selectors",
         )
-    if config.get("loss_leaf_419", False):
-        parent_ids = (
-            "distance-slot004-ply011",
-            "distance-slot004-ply039",
-            "distance-slot005-ply012",
-        )
-        require(
-            config["profile"] == "control"
-            and config["tt_entries"] == 1048576
-            and config["use_tt"]
-            and config["use_pvs"]
-            and not config.get("lmr", False)
-            and threshold is None
-            and not config.get("zero_stock_safe_race", False)
-            and len(config["roots"]) == 3
-            and len(requests) == 12
-            and len({r["session"] for r in requests}) == 12
-            and len(experiment["inputs"]) == 1
-            and experiment["inputs"][0]["sha256"]
-            == "b26fb4d5f21bac5b9614610504aac7022850223a6af67b4680530c08e8429304",
-            "loss-leaf fixed cold Control/OFF input protocol",
-        )
-        for i, root in enumerate(config["roots"]):
-            require(
-                root["input"] == 0
-                and root["pointer"] == f"/parents/{i}"
-                and root["field"] == "from_prefix_actions"
-                and root["label"] == parent_ids[i]
-                and root.get("prefix_len") is None
-                and root.get("jsonl_match") is None
-                and not root.get("check_history", False),
-                "loss-leaf complete-prefix selectors",
-            )
-        for i, request in enumerate(requests):
-            parent, depth, engine = i // 4, 2 + (i % 4) // 2, ("N", "D")[i % 2]
-            require(
-                request["id"] == f"{parent_ids[parent]}:{engine}:H{depth}:normal"
-                and request["root"] == parent
-                and request["depth"] == depth
-                and request["node_cap"] == 1000000
-                and request.get("time_limit_ms") is None
-                and not any(
-                    request.get(k, False)
-                    for k in (
-                        "diagnostic",
-                        "warmup",
-                        "observe_lmr",
-                        "observe_completed_depths",
-                    )
-                ),
-                "loss-leaf fixed normal schedule; forced union derived once natively",
-            )
     return config, requests
 
 

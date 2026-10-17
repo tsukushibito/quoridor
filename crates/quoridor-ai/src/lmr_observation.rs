@@ -474,6 +474,7 @@ impl SearchSession {
                 forced_root: None,
                 on_completed: &mut callback,
                 observation: Some(&mut *observation),
+                safe_race_method: self.zero_stock_safe_race_method,
                 trial: None,
                 trial_trace: None,
             },
@@ -563,6 +564,7 @@ impl SearchSession {
                 on_completed: &mut callback,
                 observation: None,
                 trial_trace: Some(&mut trace),
+                safe_race_method: self.zero_stock_safe_race_method,
                 trial: Some(TrialInvocation {
                     action: branch.facts.action,
                     normal_depth,
@@ -746,6 +748,7 @@ mod trial_tests {
                 on_completed: &mut callback,
                 observation: None,
                 trial_trace: Some(&mut trace),
+                safe_race_method: ZeroStockSafeRaceMethod::Manhattan,
                 trial: Some(TrialInvocation {
                     action: b.facts.action,
                     normal_depth: 2,

@@ -77,7 +77,6 @@ fn measurement394_completed_callback_preserves_cumulative_and_final_partial_scop
         .unwrap();
         let mut target = SearchTarget {
             settings: Settings {
-                loss_leaf_419: false,
                 inference: None,
                 roots: vec![],
                 profile: Profile::Control,
@@ -86,6 +85,7 @@ fn measurement394_completed_callback_preserves_cumulative_and_final_partial_scop
                 zero_stock_approx_min_root_walls: None,
                 zero_stock_approx_method: default_zero_stock_approx_method(),
                 zero_stock_safe_race: false,
+                zero_stock_safe_race_method: None,
                 tt_entries: 4096,
                 use_tt: false,
                 use_pvs: true,
