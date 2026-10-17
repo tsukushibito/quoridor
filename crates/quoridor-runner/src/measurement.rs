@@ -76,12 +76,10 @@ struct Settings {
     zero_stock_approx_min_root_walls: Option<u8>,
     #[serde(default = "default_zero_stock_approx_method")]
     zero_stock_approx_method: String,
-    #[serde(default)]
+    #[serde(default = "default_safe_race_enabled")]
     zero_stock_safe_race: bool,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     zero_stock_safe_race_method: Option<String>,
-    #[serde(default)]
-    zero_stock_observation: bool,
     namespace: SearchNamespaceSettings,
     output_bytes: usize,
     record_bytes: usize,
@@ -120,6 +118,10 @@ struct RootSpec {
     expected: Option<Value>,
 }
 
+fn default_safe_race_enabled() -> bool {
+    alphabeta::RESEARCH_SAFE_RACE_ENABLED
+}
+
 fn default_lmr_method() -> String {
     LmrMethod::default().name().into()
 }
@@ -134,17 +136,8 @@ fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
         settings
             .zero_stock_safe_race_method
             .as_deref()
-            .unwrap_or("manhattan"),
+            .unwrap_or(alphabeta::RESEARCH_SAFE_RACE_METHOD.name()),
     )?;
-    if settings.zero_stock_observation
-        && requests
-            .iter()
-            .any(|r| r.observe_lmr || r.observe_completed_depths)
-    {
-        return Err(
-            "stock observer requires its own ordinary invocation, without other observers".into(),
-        );
-    }
     ZeroStockApproxMethod::from_name(&settings.zero_stock_approx_method)?;
     if settings
         .zero_stock_approx_min_root_walls
@@ -395,7 +388,7 @@ impl Target for SearchTarget {
             self.settings
                 .zero_stock_safe_race_method
                 .as_deref()
-                .unwrap_or("manhattan"),
+                .unwrap_or(alphabeta::RESEARCH_SAFE_RACE_METHOD.name()),
         )?);
         session.set_zero_stock_safe_race(self.settings.zero_stock_safe_race);
         let method = session.namespace().selectivity.clone();
@@ -463,15 +456,9 @@ impl Target for SearchTarget {
             .then(|| Box::new(alphabeta::LmrObservation::default()));
         let inference_before = self.sigma_value.as_ref().map(|e| e.work()).transpose()?;
         let table_generation_before = session.table_generation();
-        let mut stock_observation = self
-            .settings
-            .zero_stock_observation
-            .then(alphabeta::ZeroStockObservation::default);
         let search_started = Instant::now();
         let mut completed_depths = Vec::new();
-        let result = if let Some(observation) = stock_observation.as_mut() {
-            session.search_with_zero_stock_observation(root, &limits, cancel, observation)
-        } else if let Some(observation) = lmr_observation.as_deref_mut() {
+        let result = if let Some(observation) = lmr_observation.as_deref_mut() {
             session.search_with_lmr_observation(root, &limits, cancel, observation)
         } else if request.observe_completed_depths {
             session.search_with_updates(root, &limits, cancel, &mut |completed| {
@@ -577,17 +564,6 @@ impl Target for SearchTarget {
         }
         row["TT_generation_before"] = json!(table_generation_before);
         row["TT_generation_after"] = json!(session.table_generation());
-        if let Some(o) = stock_observation {
-            if row["returned"] == "Err"
-                && let Some(partial) = &o.partial_stats
-            {
-                row["work"] = observed_work(partial);
-                row["work_scope"] =
-                    json!("partial actual error-path counters; no completed value/depth implied");
-            }
-            row["zero_stock_observation"] =
-                zero_stock_observation_output(&o, search_seconds, row["status"] != "COMPLETE");
-        }
         row["Search_call_seconds"] = json!(search_seconds);
         row["parent_unchanged"] = json!(after == self.before);
         if after != self.before {
@@ -605,35 +581,6 @@ impl Target for SearchTarget {
         self.session.take();
         Ok(json!({"session_dropped":true}))
     }
-}
-
-fn zero_stock_observation_output(
-    o: &alphabeta::ZeroStockObservation,
-    search_seconds: f64,
-    partial: bool,
-) -> Value {
-    // Search can refuse before constructing state or publishing any observation.
-    // Default fields then carry no measured classification, counters or clock partition.
-    if o.partial_stats.is_none() {
-        return Value::Null;
-    }
-    json!({
-        "root_stock0":o.root_stock0,
-        "zero_stock_nodes":o.zero_stock_nodes,
-        "positive_stock_nodes":o.positive_stock_nodes,
-        "total_nodes":o.total_nodes,
-        "entries":o.entries,"exits":o.exits,
-        "entry_depth_0_to_8_then_9plus":o.entry_depth,
-        "entry_ply_0_to_8_then_9plus":o.entry_ply,
-        "subtree_nanoseconds":o.subtree_nanoseconds,
-        "zero_stock_work":o.zero_stock_work,
-        "zero_stock_work_fields":["evaluations","terminal","safe_race_proven_leaves","safe_race_history_checks","safe_race_history_rejects","tt_probes","tt_hits","tt_cutoffs","wall_distance_map_reads","wall_distance_map_builds","wall_distance_fallbacks","delta_updates"],
-        "parent_restored":o.parent_restored,
-        "root_stock0_whole_search_seconds":if o.root_stock0 {Some(search_seconds)} else {None},
-        "positive_root_search_seconds":if o.root_stock0 {None} else {Some(search_seconds)},
-        "boundary":"final-wall canonical make excluded; post-make fingerprints, subtree, canonical undo and restoration included; no nested stock-zero clocks",
-        "partial":partial,
-    })
 }
 
 fn timed<T>(run: impl FnOnce() -> Result<T>) -> (Result<T>, f64) {
@@ -737,7 +684,7 @@ mod sigma_value_binding_tests {
         };
         let i: crate::config::Inference = serde_json::from_value(json!({"backend":"ort","model":"/FAKE/model.onnx","model_sha":"a".repeat(64),"library":"/FAKE/libort.so","logical_row_limit":7})).unwrap();
         let id = crate::sigma_evaluator::identity(&i, &"b".repeat(64)).unwrap();
-        let settings: Settings = serde_json::from_value(json!({"roots":[],"inference":i,"profile":"control","tt_entries":37,"use_tt":true,"use_pvs":true,"lmr":false,"zero_stock_approx_min_root_walls":null,"zero_stock_safe_race":false,"namespace":{"evaluator":format!("sigma-value-onnx-cpu:sha256:{id}"),"rules":"research-standard-2p-threefold-goal-first-v1","selectivity":"fullwidth-PVS"},"output_bytes":4096,"record_bytes":1024})).unwrap();
+        let settings: Settings = serde_json::from_value(json!({"zero_stock_safe_race":false,"roots":[],"inference":i,"profile":"control","tt_entries":37,"use_tt":true,"use_pvs":true,"lmr":false,"zero_stock_approx_min_root_walls":null,"zero_stock_safe_race":false,"namespace":{"evaluator":format!("sigma-value-onnx-cpu:sha256:{id}"),"rules":"research-standard-2p-threefold-goal-first-v1","selectivity":"fullwidth-PVS"},"output_bytes":4096,"record_bytes":1024})).unwrap();
         let control = fake("/FAKE/control", "c".repeat(64));
         let e = Experiment {
             schema: "FAKE-not-an-admission".into(),
@@ -1383,7 +1330,7 @@ mod tests {
 
     #[test]
     fn measurement412_method_omission_keeps_enable_off_and_explicit_controls() {
-        let base = json!({"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,"namespace":{"evaluator":"toy","rules":"standard","selectivity":"full"},"output_bytes":1000,"record_bytes":100});
+        let base = json!({"zero_stock_safe_race":false,"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,"namespace":{"evaluator":"toy","rules":"standard","selectivity":"full"},"output_bytes":1000,"record_bytes":100});
         let omitted: Settings = serde_json::from_value(base.clone()).unwrap();
         assert!(!omitted.lmr);
         assert_eq!(omitted.lmr_method, "depth_rank");
@@ -1414,7 +1361,7 @@ mod tests {
 
     #[test]
     fn safe_race411_measurement_boolean_default_and_partial_counters() {
-        let base = json!({"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,
+        let base = json!({"zero_stock_safe_race":false,"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,
             "namespace":{"evaluator":"toy","rules":"standard","selectivity":"full"},"output_bytes":10000,"record_bytes":1000});
         assert!(
             !serde_json::from_value::<Settings>(base.clone())
@@ -1487,7 +1434,7 @@ mod tests {
 
     #[test]
     fn measurement408_lmr_method_default_refusal_namespace_and_result_roundtrip() {
-        let base = json!({"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,
+        let base = json!({"zero_stock_safe_race":false,"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,
             "namespace":{"evaluator":crate::teacher_pilot_execution::EVALUATOR_ID,"rules":"standard","selectivity":"synthetic"},"output_bytes":10000,"record_bytes":1000});
         for (value, valid) in [
             (json!("fixed_one"), true),
@@ -1538,7 +1485,7 @@ mod tests {
 
     #[test]
     fn measurement407_method_default_refusal_and_resolved_output() {
-        let base = json!({"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,
+        let base = json!({"zero_stock_safe_race":false,"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,
             "namespace":{"evaluator":crate::teacher_pilot_execution::EVALUATOR_ID,"rules":"standard","selectivity":"synthetic"},"output_bytes":10000,"record_bytes":1000});
         let settings: Settings = serde_json::from_value(base.clone()).unwrap();
         assert_eq!(settings.zero_stock_approx_method, "race");
@@ -1586,7 +1533,7 @@ mod tests {
 
     #[test]
     fn measurement406_optional_threshold_refusals_and_actual_result_metadata() {
-        let base = json!({"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,
+        let base = json!({"zero_stock_safe_race":false,"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,
             "namespace":{"evaluator":crate::teacher_pilot_execution::EVALUATOR_ID,"rules":"standard","selectivity":"synthetic"},"output_bytes":10000,"record_bytes":1000});
         let settings: Settings = serde_json::from_value(base.clone()).unwrap();
         assert_eq!(settings.zero_stock_approx_min_root_walls, None);
@@ -1656,7 +1603,7 @@ mod tests {
                 ))
             }
         }
-        let base = json!({"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"cheap","tt_entries":4096,"use_tt":true,"use_pvs":true,
+        let base = json!({"zero_stock_safe_race":false,"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"cheap","tt_entries":4096,"use_tt":true,"use_pvs":true,
             "namespace":{"evaluator":crate::teacher_pilot_execution::EVALUATOR_ID,"rules":"standard","selectivity":"synthetic"},"output_bytes":10000,"record_bytes":1000});
         let mut settings: Settings = serde_json::from_value(base.clone()).unwrap();
         assert!(!settings.lmr);
@@ -1724,7 +1671,7 @@ mod tests {
     }
     #[test]
     fn fixed_d392_binding_allows_only_exact_empty_model_d_and_preserves_nnue_binding() {
-        let mut settings: Settings = serde_json::from_value(json!({"roots":[],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,
+        let mut settings: Settings = serde_json::from_value(json!({"zero_stock_safe_race":false,"roots":[],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,
             "namespace":{"evaluator":crate::teacher_pilot_execution::EVALUATOR_ID,"rules":"standard","selectivity":"fixed-D"},"output_bytes":100,"record_bytes":10})).unwrap();
         assert!(evaluator_binding(&settings, 0).is_ok());
         assert!(evaluator_binding(&settings, 1).is_err());
@@ -1837,29 +1784,42 @@ mod tests {
         assert_eq!(ids, vec!["a0", "a2", "a1", "a3", "b0", "b2", "b1", "b3"]);
     }
     #[test]
-    fn continuous_observer_and_method_are_independent_opt_in_settings() {
-        assert!(
-            zero_stock_observation_output(&alphabeta::ZeroStockObservation::default(), 1.0, true)
-                .is_null()
+    fn research_safe_race_default_and_explicit_controls() {
+        let base = json!({"roots":[{"input":0,"pointer":"","field":"prefix","label":"default"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,
+            "namespace":{"evaluator":"synthetic","rules":"standard","selectivity":"full"},"output_bytes":10000,"record_bytes":1000});
+        let settings: Settings = serde_json::from_value(base.clone()).unwrap();
+        validate(&settings, &[]).unwrap();
+        assert!(settings.zero_stock_safe_race);
+        assert_eq!(
+            alphabeta::RESEARCH_SAFE_RACE_METHOD,
+            alphabeta::ZeroStockSafeRaceMethod::PathTail
         );
-        let base = json!({"roots":[{"input":0,"pointer":"","field":"prefix","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,
+        for (enabled, name) in [(false, "path_tail"), (true, "manhattan")] {
+            let mut value = base.clone();
+            value["zero_stock_safe_race"] = json!(enabled);
+            value["zero_stock_safe_race_method"] = json!(name);
+            let settings: Settings = serde_json::from_value(value).unwrap();
+            validate(&settings, &[]).unwrap();
+            assert_eq!(settings.zero_stock_safe_race, enabled);
+            assert_eq!(settings.zero_stock_safe_race_method.as_deref(), Some(name));
+        }
+        let mut invalid = base;
+        invalid["zero_stock_safe_race"] = json!(false);
+        invalid["zero_stock_safe_race_method"] = json!("unsupported");
+        assert!(validate(&serde_json::from_value(invalid).unwrap(), &[]).is_err());
+    }
+
+    #[test]
+    fn measurement_safe_path_method_is_an_independent_opt_in() {
+        let base = json!({"zero_stock_safe_race":false,"roots":[{"input":0,"pointer":"","field":"prefix","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,
             "namespace":{"evaluator":"toy","rules":"standard","selectivity":"full"},"output_bytes":10000,"record_bytes":1000});
         let settings: Settings = serde_json::from_value(base.clone()).unwrap();
-        assert!(!settings.zero_stock_safe_race && !settings.zero_stock_observation);
-        let mut selected = base.clone();
+        assert!(!settings.zero_stock_safe_race);
+        let mut selected = base;
         selected["zero_stock_safe_race_method"] = json!("path_tail");
-        selected["zero_stock_observation"] = json!(true);
-        let settings: Settings = serde_json::from_value(selected.clone()).unwrap();
+        let settings: Settings = serde_json::from_value(selected).unwrap();
         validate(&settings, &[]).unwrap();
         assert!(!settings.zero_stock_safe_race);
-        for bad in [Value::Null, json!(0), json!("true")] {
-            selected["zero_stock_observation"] = bad;
-            assert!(serde_json::from_value::<Settings>(selected.clone()).is_err());
-        }
-        selected["zero_stock_observation"] = json!(true);
-        let mut request = request("x", "x");
-        request.observe_completed_depths = true;
-        assert!(validate(&serde_json::from_value(selected).unwrap(), &[request]).is_err());
     }
     #[test]
     fn measurement_variable_counts_orders_targets_and_domains() {
@@ -2054,7 +2014,7 @@ mod lmr413_retirement_tests {
 
     #[test]
     fn measurement413_retired_names_refused_even_when_lmr_off() {
-        let base = json!({"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,
+        let base = json!({"zero_stock_safe_race":false,"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,
             "namespace":{"evaluator":crate::teacher_pilot_execution::EVALUATOR_ID,"rules":"standard","selectivity":"synthetic"},"output_bytes":10000,"record_bytes":1000});
         for name in [
             "depth_rank_late_one",
@@ -2425,7 +2385,7 @@ mod lmr416_tests {
     use super::*;
     #[test]
     fn measurement416_opt_in_strict_cold_limits_serde_and_no_other_observers() {
-        let base = json!({"roots":[{"input":0,"pointer":"/roots/0","field":"prefix","label":"toy"}],
+        let base = json!({"zero_stock_safe_race":false,"roots":[{"input":0,"pointer":"/roots/0","field":"prefix","label":"toy"}],
             "profile":"control","tt_entries":1048576,"use_tt":true,"use_pvs":true,"lmr":true,"lmr_method":"depth_rank",
             "namespace":{"evaluator":crate::teacher_pilot_execution::EVALUATOR_ID,"rules":"standard","selectivity":"toy"},
             "output_bytes":1000000,"record_bytes":100000});

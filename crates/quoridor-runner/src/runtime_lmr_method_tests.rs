@@ -35,7 +35,7 @@ fn runtime408_methods_bind_actual_namespace_and_off_selection() {
                     arena_alpha_session(Arc::new(NoForward), base(), 64, &e, None).unwrap();
                 assert_eq!(
                     session.namespace(),
-                    &arena_alpha_namespace(&e, base()).unwrap()
+                    &arena_alpha_namespace(&e, base(), None).unwrap()
                 );
                 assert_eq!(session.lmr_enabled(), enabled);
                 assert_eq!(session.lmr_method(), enabled.then_some(method));
@@ -58,7 +58,7 @@ fn runtime408_invalid_method_refused_even_when_off() {
     for enabled in [false, true] {
         for bad in ["", "depth-rank", "unknown"] {
             let e = engine("control", enabled, Some(bad));
-            assert!(arena_alpha_namespace(&e, base()).is_err());
+            assert!(arena_alpha_namespace(&e, base(), None).is_err());
             assert!(arena_alpha_session(Arc::new(NoForward), base(), 64, &e, None).is_err());
         }
     }
@@ -79,7 +79,7 @@ fn runtime412_method_omission_binds_default_but_never_enables_lmr() {
             );
             assert_eq!(
                 session.namespace(),
-                &arena_alpha_namespace(&e, base()).unwrap()
+                &arena_alpha_namespace(&e, base(), None).unwrap()
             );
         }
     }

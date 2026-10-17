@@ -204,6 +204,7 @@ impl ArenaConfig {
         }
         for engine in &c.engines {
             crate::runtime::arena_lmr_method(engine).map_err(|e| e.to_string())?;
+            crate::runtime::arena_safe_race(engine, Some(self)).map_err(|e| e.to_string())?;
             if let Some(profile) = engine.ordering_profile.as_deref() {
                 if quoridor_ai::alphabeta::OrderingProfile::from_name(profile).is_err()
                     || !matches!(engine.kind.as_str(), "nnue" | "distance" | "sigma_value")
@@ -315,6 +316,12 @@ impl ArenaConfig {
                     || b.depth == 0
                     || a.depth != b.depth
                     || a.ordering_profile != b.ordering_profile
+                    || crate::runtime::arena_safe_race(a, Some(self))
+                        .ok()
+                        .map(|(enabled, method)| (enabled, enabled.then_some(method)))
+                        != crate::runtime::arena_safe_race(b, Some(self))
+                            .ok()
+                            .map(|(enabled, method)| (enabled, enabled.then_some(method)))
                     || a.lmr != b.lmr
                     || (a.lmr
                         && crate::runtime::arena_lmr_method(a).ok()
@@ -333,6 +340,12 @@ impl ArenaConfig {
             if c.engines.iter().enumerate().any(|(i, b)| {
                 a.depth != b.depth
                     || a.ordering_profile != b.ordering_profile
+                    || crate::runtime::arena_safe_race(a, Some(self))
+                        .ok()
+                        .map(|(enabled, method)| (enabled, enabled.then_some(method)))
+                        != crate::runtime::arena_safe_race(b, Some(self))
+                            .ok()
+                            .map(|(enabled, method)| (enabled, enabled.then_some(method)))
                     || a.lmr != b.lmr
                     || (a.lmr
                         && crate::runtime::arena_lmr_method(a).ok()
@@ -820,6 +833,14 @@ fn validate_observations(
                     return Err("arena Sigma receipt/drain/completed simulation".into());
                 }
                 continue;
+            }
+            let (enabled, method) = crate::runtime::arena_safe_race(engine, Some(a))?;
+            if obs.counters["actual_zero_stock_safe_race_enabled"] != enabled
+                || obs.counters["requested_zero_stock_safe_race_method"] != method.name()
+                || obs.counters["actual_zero_stock_safe_race_method_id"]
+                    != serde_json::json!(enabled.then(|| method.id()))
+            {
+                return Err("arena requested/effective safe-race method mismatch".into());
             }
             if engine.ordering_profile.is_some() {
                 let method = crate::runtime::arena_lmr_method(engine)?;

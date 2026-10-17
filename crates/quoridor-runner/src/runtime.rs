@@ -512,6 +512,10 @@ pub struct TtProfile {
     #[serde(default)]
     pub actual_lmr_enabled: Option<bool>,
     #[serde(default)]
+    pub actual_zero_stock_safe_race_enabled: Option<bool>,
+    #[serde(default)]
+    pub actual_zero_stock_safe_race_method_id: Option<String>,
+    #[serde(default)]
     pub actual_lmr_method_id: Option<String>,
     #[serde(default)]
     pub lmr_reduction_rule: Option<String>,
@@ -568,19 +572,59 @@ pub(crate) fn arena_lmr_method(engine: &Engine) -> alphabeta::Result<alphabeta::
             .unwrap_or(alphabeta::LmrMethod::default().name()),
     )
 }
+/// Resolve only the normal research alpha policy. Neither generator/functional
+/// callers nor MCTS inherit the research enable default.
+pub(crate) fn arena_safe_race(
+    engine: &Engine,
+    arena: Option<&crate::arena::ArenaConfig>,
+) -> alphabeta::Result<(bool, alphabeta::ZeroStockSafeRaceMethod)> {
+    let research_alpha = engine.kind != "mcts"
+        && arena.is_some_and(|a| a.comparison != crate::arena::Comparison::Functional);
+    let default_method = if research_alpha {
+        alphabeta::RESEARCH_SAFE_RACE_METHOD
+    } else {
+        alphabeta::ZeroStockSafeRaceMethod::default()
+    };
+    let method = alphabeta::ZeroStockSafeRaceMethod::from_name(
+        engine
+            .zero_stock_safe_race_method
+            .as_deref()
+            .unwrap_or(default_method.name()),
+    )?;
+    if !research_alpha && engine.zero_stock_safe_race == Some(true) {
+        return Err(alphabeta::SearchError::Limits(
+            "safe-race enable belongs to a research alpha arena".into(),
+        ));
+    }
+    Ok((
+        research_alpha
+            && engine
+                .zero_stock_safe_race
+                .unwrap_or(alphabeta::RESEARCH_SAFE_RACE_ENABLED),
+        method,
+    ))
+}
 fn arena_alpha_namespace(
     engine: &Engine,
     base: alphabeta::SearchNamespace,
+    arena: Option<&crate::arena::ArenaConfig>,
 ) -> alphabeta::Result<alphabeta::SearchNamespace> {
     let method = arena_lmr_method(engine)?;
-    match engine.ordering_profile.as_deref() {
-        Some(name) => Ok(alphabeta::OrderingProfile::from_name(name)?
-            .namespace(base, engine.lmr.then_some(method))),
-        None if engine.lmr => Err(alphabeta::SearchError::Limits(
-            "LMR needs an explicit ordering target".into(),
-        )),
-        None => Ok(base),
+    let mut namespace = match engine.ordering_profile.as_deref() {
+        Some(name) => alphabeta::OrderingProfile::from_name(name)?
+            .namespace(base, engine.lmr.then_some(method)),
+        None if engine.lmr => {
+            return Err(alphabeta::SearchError::Limits(
+                "LMR needs an explicit ordering target".into(),
+            ));
+        }
+        None => base,
+    };
+    let (enabled, method) = arena_safe_race(engine, arena)?;
+    if enabled {
+        method.qualify_namespace(&mut namespace);
     }
+    Ok(namespace)
 }
 fn arena_alpha_session(
     evaluator: Arc<dyn StaticEvaluator>,
@@ -614,6 +658,9 @@ fn arena_alpha_session(
     // Configuration selects the typed method; the namespace never enables LMR.
     session.set_lmr_method(method);
     session.set_lmr(engine.lmr)?;
+    let (safe_enabled, safe_method) = arena_safe_race(engine, arena)?;
+    session.set_zero_stock_safe_race_method(safe_method);
+    session.set_zero_stock_safe_race(safe_enabled);
     if session.lmr_enabled() != engine.lmr || session.lmr_method() != engine.lmr.then_some(method) {
         return Err(alphabeta::SearchError::Limits(
             "arena/session LMR mode mismatch".into(),
@@ -719,6 +766,10 @@ fn invoke_alpha_observed(
             "selectivity":session.namespace().selectivity,
         }));
         profile.actual_lmr_enabled = Some(session.lmr_enabled());
+        profile.actual_zero_stock_safe_race_enabled = Some(session.zero_stock_safe_race_enabled());
+        profile.actual_zero_stock_safe_race_method_id = session
+            .zero_stock_safe_race_enabled()
+            .then(|| session.zero_stock_safe_race_method().id().to_owned());
         profile.actual_lmr_method_id = session.lmr_method().map(|m| m.id().to_owned());
         profile.lmr_reduction_rule = session.lmr_method().map(|m| m.reduction_rule().to_owned());
         profile.search_invocations += 1;
@@ -2031,7 +2082,8 @@ fn worker(
                     selectivity: "fullwidth-PVS-MPC-OFF-v1".into(),
                 };
                 let base_namespace = namespace;
-                let namespace = arena_alpha_namespace(e, base_namespace.clone());
+                let namespace =
+                    arena_alpha_namespace(e, base_namespace.clone(), config.arena.as_ref());
                 let mut completion = crate::arena_clock::Completion::default();
                 let observed = !g.record_teacher;
                 let search_result = namespace.and_then(|namespace| {
@@ -2529,7 +2581,8 @@ impl EvaluationWorkers {
                                 selectivity: "fullwidth-PVS-MPC-OFF-v1".into(),
                             };
                             let base_namespace = namespace;
-                            let namespace = arena_alpha_namespace(e, base_namespace.clone());
+                            let namespace =
+                                arena_alpha_namespace(e, base_namespace.clone(), c.arena.as_ref());
                             let mut completion = crate::arena_clock::Completion::default();
                             let mut publish = |result: &alphabeta::SearchResult| {
                                 let _ = tx.send(EvaluationEvent::Update(
@@ -2877,6 +2930,9 @@ fn record_evaluation_alpha(
         "completed_snapshot_validation_failed":!valid,
         "actual_search_namespace":game.tt_profiles[engine].actual_namespace,
         "actual_lmr_enabled":game.tt_profiles[engine].actual_lmr_enabled,
+        "actual_zero_stock_safe_race_enabled":game.tt_profiles[engine].actual_zero_stock_safe_race_enabled,
+        "requested_zero_stock_safe_race_method":arena_safe_race(&config.engines[engine], config.arena.as_ref()).ok().map(|(_, method)| method.name()),
+        "actual_zero_stock_safe_race_method_id":game.tt_profiles[engine].actual_zero_stock_safe_race_method_id,
         "requested_lmr_method":config.engines[engine].lmr_method.as_deref().unwrap_or(alphabeta::LmrMethod::default().name()),
         "actual_lmr_method_id":game.tt_profiles[engine].actual_lmr_method_id,
         "lmr_reduction_rule":game.tt_profiles[engine].lmr_reduction_rule,
@@ -7129,5 +7185,80 @@ mod common_mcts_admission_cause_tests {
         );
         assert_eq!(row_count, 0);
         assert!(cancel.load(Ordering::Relaxed));
+    }
+}
+
+#[cfg(test)]
+mod research_safe_race_default_tests {
+    use super::*;
+    struct NoHead;
+    impl StaticEvaluator for NoHead {
+        fn evaluate(
+            &self,
+            _: &SigmaContext,
+            _: Option<&alphabeta::EvalAccumulator>,
+        ) -> alphabeta::Result<f32> {
+            panic!("constructor-only policy check must not evaluate");
+        }
+    }
+    #[test]
+    fn research_safe_race_defaults_controls_and_nonresearch_factories() {
+        let config: Config =
+            serde_json::from_str(include_str!("../tests/fixtures/sigma-clock-config.json"))
+                .unwrap();
+        let mut arena = config.arena.unwrap();
+        arena.comparison = crate::arena::Comparison::EvaluatorFixedDepth;
+        let mut engine: Engine =
+            serde_json::from_value(serde_json::json!({"kind":"distance"})).unwrap();
+        let base = alphabeta::SearchNamespace {
+            evaluator: "no-head-policy".into(),
+            rules: "standard".into(),
+            selectivity: "fullwidth".into(),
+        };
+        for (enabled, method) in [
+            (None, None),
+            (Some(false), Some("path_tail")),
+            (Some(true), Some("manhattan")),
+        ] {
+            engine.zero_stock_safe_race = enabled;
+            engine.zero_stock_safe_race_method = method.map(str::to_owned);
+            let session =
+                arena_alpha_session(Arc::new(NoHead), base.clone(), 17, &engine, Some(&arena))
+                    .unwrap();
+            assert_eq!(
+                session.zero_stock_safe_race_enabled(),
+                enabled.unwrap_or(true)
+            );
+            assert_eq!(
+                session.zero_stock_safe_race_method().name(),
+                method.unwrap_or("path_tail")
+            );
+            assert_eq!(
+                session.namespace(),
+                &arena_alpha_namespace(&engine, base.clone(), Some(&arena)).unwrap()
+            );
+        }
+        engine.zero_stock_safe_race = None;
+        engine.zero_stock_safe_race_method = None;
+        assert!(
+            !arena_alpha_session(Arc::new(NoHead), base.clone(), 17, &engine, None)
+                .unwrap()
+                .zero_stock_safe_race_enabled()
+        );
+        arena.comparison = crate::arena::Comparison::Functional;
+        assert!(
+            !arena_alpha_session(Arc::new(NoHead), base.clone(), 17, &engine, Some(&arena))
+                .unwrap()
+                .zero_stock_safe_race_enabled()
+        );
+        let product = alphabeta::SearchSession::new(Arc::new(NoHead), base.clone(), 17).unwrap();
+        assert!(!product.zero_stock_safe_race_enabled());
+        engine.zero_stock_safe_race = Some(false);
+        engine.zero_stock_safe_race_method = Some("unsupported".into());
+        assert!(arena_alpha_session(Arc::new(NoHead), base, 17, &engine, Some(&arena)).is_err());
+        arena.comparison = crate::arena::Comparison::EvaluatorFixedDepth;
+        engine.kind = "mcts".into();
+        engine.zero_stock_safe_race_method = None;
+        assert!(!arena_safe_race(&engine, Some(&arena)).unwrap().0);
     }
 }

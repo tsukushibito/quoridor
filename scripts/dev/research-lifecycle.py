@@ -904,7 +904,6 @@ def measurement_config(experiment):
             "zero_stock_approx_method",
             "zero_stock_safe_race",
             "zero_stock_safe_race_method",
-            "zero_stock_observation",
         }
         and {
             "roots",
@@ -935,7 +934,7 @@ def measurement_config(experiment):
     )
     require(type(config.get("lmr", False)) is bool, "measurement LMR switch")
     require(
-        type(config.get("zero_stock_safe_race", False)) is bool,
+        type(config.get("zero_stock_safe_race", True)) is bool,
         "measurement safe-race switch",
     )
     safe_method = config.get("zero_stock_safe_race_method")
@@ -943,18 +942,6 @@ def measurement_config(experiment):
         safe_method is None
         or (type(safe_method) is str and safe_method in {"manhattan", "path_tail"}),
         "measurement safe-race method",
-    )
-    require(
-        type(config.get("zero_stock_observation", False)) is bool,
-        "measurement stock observer switch",
-    )
-    require(
-        not config.get("zero_stock_observation", False)
-        or not any(
-            r.get("observe_lmr", False) or r.get("observe_completed_depths", False)
-            for r in requests
-        ),
-        "stock observer requires an independent ordinary invocation",
     )
     lmr_method = config.get("lmr_method", "depth_rank")
     require(
@@ -1027,7 +1014,7 @@ def measurement_config(experiment):
             config["profile"] == "control"
             and not config.get("lmr", False)
             and config.get("zero_stock_approx_min_root_walls") is None
-            and not config.get("zero_stock_safe_race", False)
+            and not config.get("zero_stock_safe_race", True)
             and experiment.get("models") == []
             and any(
                 r["path"] == inference["model"] and r["sha256"] == inference["model_sha"]
@@ -1138,7 +1125,7 @@ def measurement_config(experiment):
             and config.get("lmr", False)
             and lmr_method == "depth_rank"
             and threshold is None
-            and not config.get("zero_stock_safe_race", False)
+            and not config.get("zero_stock_safe_race", True)
             and all(
                 r.get("observe_lmr", False)
                 and r["depth"] == 5
@@ -2754,13 +2741,9 @@ def arena_plan_check(experiment, plan):
         ]
         and plan["comparison"]
         in {"evaluator_fixed_depth", "evaluator_wall_time", "whole_wall_time"}
-        and plan["rules"]
-        == experiment["rules"]
-        == "research-standard-2p-threefold-goal-first-v1"
+        and plan["rules"] == experiment["rules"] == "research-standard-2p-threefold-goal-first-v1"
         and plan["distance_units"] == experiment["distance_units"] == "wall-distance/80"
-        and plan["value_perspective"]
-        == experiment["value_perspective"]
-        == "side-to-move"
+        and plan["value_perspective"] == experiment["value_perspective"] == "side-to-move"
         and plan["inputs"] == experiment["inputs"]
         and plan["book"] in plan["inputs"]
         and plan["models"] == experiment["models"]
@@ -2784,10 +2767,7 @@ def arena_plan_check(experiment, plan):
         )
         and not a.get("decision_only", False)
         and config.get("inference") == matchup.get("inference")
-        and (
-            config.get("inference") is not None
-            or config.get("inference_cpu_core") is None
-        )
+        and (config.get("inference") is not None or config.get("inference_cpu_core") is None)
         and config.get("cycle") is None
         and config.get("train_games") is None
         and config.get("validation_games") is None
@@ -2816,6 +2796,11 @@ def arena_plan_check(experiment, plan):
             and type(engine["simd"]) is bool
             and type(engine.get("lmr", False)) is bool
             and (
+                engine.get("zero_stock_safe_race") is None
+                or type(engine["zero_stock_safe_race"]) is bool
+            )
+            and engine.get("zero_stock_safe_race_method") in {None, "manhattan", "path_tail"}
+            and (
                 "lmr_method" not in engine
                 or engine["lmr_method"]
                 in (
@@ -2824,10 +2809,7 @@ def arena_plan_check(experiment, plan):
                 )
             )
             and engine.get("ordering_profile") in {None, "control", "cheap"}
-            and (
-                not engine.get("lmr", False)
-                or engine.get("ordering_profile") is not None
-            )
+            and (not engine.get("lmr", False) or engine.get("ordering_profile") is not None)
             and (
                 engine.get("ordering_profile") is None
                 or (
@@ -2872,8 +2854,7 @@ def arena_plan_check(experiment, plan):
     )
     families = {f["family_id"]: f for f in book["families"]}
     require(
-        len(families) == len(book["families"])
-        and set(plan["family_ids"]) <= families.keys(),
+        len(families) == len(book["families"]) and set(plan["family_ids"]) <= families.keys(),
         "book family coverage",
     )
     require(
@@ -2890,10 +2871,7 @@ def arena_plan_check(experiment, plan):
             and opening["prefix"] == f["prefix"]
             and opening["original_seed"] == f["seed"]
             and ref["source_sha256"] == plan["book"]["sha256"]
-            and all(
-                ref["settings"][k] == f[k]
-                for k in ("family_id", "root_key", "history_counts")
-            )
+            and all(ref["settings"][k] == f[k] for k in ("family_id", "root_key", "history_counts"))
             and a["first_candidate_colors"][i] == slot["candidate_color"],
             "immutable book/history/colour",
         )
@@ -3094,10 +3072,28 @@ def arena_observation(config, row):
                 and counters["actual_lmr_enabled"] == engine.get("lmr", False),
                 "configured/actual arena ordering-LMR method correspondence",
             )
+        if engine["kind"] != "mcts":
+            enabled = (a["comparison"] != "functional") and engine.get(
+                "zero_stock_safe_race"
+            ) is not False
+            require(
+                counters.get("actual_zero_stock_safe_race_enabled") is enabled
+                and counters.get("requested_zero_stock_safe_race_method")
+                == (
+                    engine.get("zero_stock_safe_race_method")
+                    or ("manhattan" if a["comparison"] == "functional" else "path_tail")
+                )
+                and (
+                    isinstance(counters.get("actual_zero_stock_safe_race_method_id"), str)
+                    and bool(counters["actual_zero_stock_safe_race_method_id"])
+                    if enabled
+                    else counters.get("actual_zero_stock_safe_race_method_id") is None
+                ),
+                "configured/actual safe-race method correspondence",
+            )
         fallback = (
             a["comparison"] == "whole_wall_time"
-            and counters.get("selection_reason")
-            == "legal_fallback_no_completed_iteration"
+            and counters.get("selection_reason") == "legal_fallback_no_completed_iteration"
         )
         require(
             counters["completed_snapshot_validation_failed"] is False
@@ -3137,10 +3133,7 @@ def arena_observation(config, row):
                 and receipt < obs["deadline_ns"]
                 and counters["drain_finished_ns"] == obs["returned_ns"]
                 and (
-                    (
-                        obs["returned_ns"] >= receipt
-                        and counters["inflight_after_drain"] == 0
-                    )
+                    (obs["returned_ns"] >= receipt and counters["inflight_after_drain"] == 0)
                     if a["comparison"] == "whole_wall_time"
                     else obs["returned_ns"] == receipt
                 ),
@@ -3150,8 +3143,7 @@ def arena_observation(config, row):
     if not config["arena"].get("decision_only", False):
         opening = config["arena"]["book"]["openings"][row["game"] // 2]["prefix"]
         require(
-            row["moves"][: len(opening)] == opening
-            and accepted == row["moves"][len(opening) :],
+            row["moves"][: len(opening)] == opening and accepted == row["moves"][len(opening) :],
             "full opening/accepted actions/durable moves",
         )
 
@@ -5611,6 +5603,8 @@ def comparison_conditions(common):
             profile=profile,
             lmr=lmr,
             lmr_method=common.get("lmr_method", "depth_rank"),
+            zero_stock_safe_race=common.get("zero_stock_safe_race", True),
+            zero_stock_safe_race_method=common.get("zero_stock_safe_race_method", "path_tail"),
         )
         for evaluator in common["evaluators"]
         for profile in common["profiles"]
@@ -5626,6 +5620,9 @@ def apply_comparison_cost(config, common, variant):
     config["profile"] = variant["profile"]
     config["lmr"] = variant["lmr"]
     config["lmr_method"] = variant["lmr_method"]
+
+    config["zero_stock_safe_race"] = variant["zero_stock_safe_race"]
+    config["zero_stock_safe_race_method"] = variant["zero_stock_safe_race_method"]
 
 
 def apply_comparison_arena(config, common, pair):
@@ -5645,6 +5642,8 @@ def apply_comparison_arena(config, common, pair):
         engine["ordering_profile"] = variant["profile"]
         engine["lmr"] = variant["lmr"]
         engine["lmr_method"] = variant["lmr_method"]
+        engine["zero_stock_safe_race"] = variant["zero_stock_safe_race"]
+        engine["zero_stock_safe_race_method"] = variant["zero_stock_safe_race_method"]
         for key in ("depth", "max_nodes", "time_ms"):
             engine[key] = arena[key]
 

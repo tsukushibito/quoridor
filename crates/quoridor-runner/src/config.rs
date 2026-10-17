@@ -171,6 +171,13 @@ pub struct Engine {
     /// Arena method selection; None uses the AI's fixed-one default.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub lmr_method: Option<String>,
+    /// Normal research arena omission enables the retained proof. Generation and
+    /// functional/product callers resolve omission to OFF instead.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub zero_stock_safe_race: Option<bool>,
+    /// Independent method selection, validated even with explicit OFF.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub zero_stock_safe_race_method: Option<String>,
 }
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -314,6 +321,23 @@ impl Config {
                 .any(|e| e.ordering_profile.is_some() || e.lmr || e.lmr_method.is_some())
         {
             return Err("explicit ordering/LMR settings belong to an arena config".into());
+        }
+        if self.arena.is_none()
+            && self
+                .engines
+                .iter()
+                .any(|e| e.zero_stock_safe_race == Some(true))
+        {
+            return Err("safe-race enable belongs to a research alpha arena".into());
+        }
+        for engine in &self.engines {
+            quoridor_ai::alphabeta::ZeroStockSafeRaceMethod::from_name(
+                engine
+                    .zero_stock_safe_race_method
+                    .as_deref()
+                    .unwrap_or(quoridor_ai::alphabeta::RESEARCH_SAFE_RACE_METHOD.name()),
+            )
+            .map_err(|error| error.to_string())?;
         }
         if self.engines.is_empty() || self.engines.len() > 2 {
             return Err("supply one selfplay engine or two arena engines".into());

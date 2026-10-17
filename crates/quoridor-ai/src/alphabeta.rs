@@ -35,13 +35,8 @@ mod move_ordering;
 mod static_geometry;
 #[path = "static_ordering.rs"]
 mod static_ordering;
-#[cfg(feature = "research-diagnostics")]
-#[path = "zero_stock_observation.rs"]
-mod zero_stock_observation;
 #[path = "zero_stock_safe_path.rs"]
 mod zero_stock_safe_path;
-#[cfg(feature = "research-diagnostics")]
-pub use zero_stock_observation::ZeroStockObservation;
 
 #[derive(Clone, Copy, PartialEq, Eq)]
 enum StaticMode {
@@ -653,14 +648,23 @@ impl ZeroStockApproxMethod {
 
 /// One sufficient game-W/L condition; neither UNKNOWN nor a cap is Draw.
 pub const ZERO_STOCK_SAFE_RACE_METHOD: &str = "zero-stock411-safe-manhattan-complete-E-v1";
-/// A finite research comparison selector; selecting P alone never enables it.
+/// Explicit research proof method; selecting PathTail alone never enables it.
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq)]
 pub enum ZeroStockSafeRaceMethod {
     #[default]
     Manhattan,
     PathTail,
 }
+/// Normal research configuration policy. Low-level/product constructors remain OFF.
+pub const RESEARCH_SAFE_RACE_ENABLED: bool = true;
+pub const RESEARCH_SAFE_RACE_METHOD: ZeroStockSafeRaceMethod = ZeroStockSafeRaceMethod::PathTail;
 impl ZeroStockSafeRaceMethod {
+    /// Append the effective proof qualification after the common ordering namespace.
+    /// Both session attachment and the research caller's expected namespace use this owner.
+    pub fn qualify_namespace(self, namespace: &mut SearchNamespace) {
+        namespace.selectivity.push(':');
+        namespace.selectivity.push_str(self.id());
+    }
     pub fn from_name(name: &str) -> Result<Self> {
         match name {
             "manhattan" => Ok(Self::Manhattan),
@@ -1293,12 +1297,7 @@ impl From<RulesError> for Interrupted {
     }
 }
 type NodeResult<T> = std::result::Result<T, Interrupted>;
-struct Search<
-    'a,
-    const OBSERVE: bool = false,
-    const TRACE: bool = false,
-    const STOCK_OBSERVE: bool = false,
-> {
+struct Search<'a, const OBSERVE: bool = false, const TRACE: bool = false> {
     eval: &'a dyn StaticEvaluator,
     score_domain: ScoreDomain,
     eval_scratch: EvalScratch,
@@ -1324,12 +1323,8 @@ struct Search<
     lmr_observation: Option<&'a mut LmrObservation>,
     #[cfg(feature = "research-diagnostics")]
     trial_trace: Option<&'a mut LmrTrialTrace>,
-    #[cfg(feature = "research-diagnostics")]
-    zero_stock_observation: Option<&'a mut ZeroStockObservation>,
 }
-impl<const OBSERVE: bool, const TRACE: bool, const STOCK_OBSERVE: bool>
-    Search<'_, OBSERVE, TRACE, STOCK_OBSERVE>
-{
+impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
     fn key(&mut self, c: &SigmaContext) -> Key {
         let key = Key::of(c);
         self.stats.tt_key_builds += 1;
@@ -1345,22 +1340,12 @@ impl<const OBSERVE: bool, const TRACE: bool, const STOCK_OBSERVE: bool>
         }
         Ok(())
     }
-    fn enter(&mut self, c: &SigmaContext) -> NodeResult<()> {
+    fn enter(&mut self) -> NodeResult<()> {
         self.control()?;
         if self.stats.nodes >= self.limits.max_nodes {
             return Err(Interrupted::Stop(StopReason::NodeLimit));
         }
         self.stats.nodes += 1;
-        #[cfg(feature = "research-diagnostics")]
-        if STOCK_OBSERVE && let Some(o) = self.zero_stock_observation.as_deref_mut() {
-            if c.position().walls_remaining == [0, 0] {
-                o.zero_stock_nodes += 1;
-            } else {
-                o.positive_stock_nodes += 1;
-            }
-        }
-        #[cfg(not(feature = "research-diagnostics"))]
-        let _ = c;
         Ok(())
     }
     fn ordered(
@@ -1629,140 +1614,120 @@ impl<const OBSERVE: bool, const TRACE: bool, const STOCK_OBSERVE: bool>
         }
         self.control()?;
         let mover = c.position().turn;
-        let parent_positive_stock = STOCK_OBSERVE && c.position().walls_remaining != [0, 0];
         let undo = c.make_move(action)?;
-        #[cfg(feature = "research-diagnostics")]
-        let stock_span = if STOCK_OBSERVE
-            && self.stats.root_walls_remaining > 0
-            && parent_positive_stock
-            && c.position().walls_remaining == [0, 0]
-        {
-            self.stock_span_begin(depth, ply)
-        } else {
-            None
-        };
-        let result = (|| {
-            let parent_context = self.context;
-            let parent_board = self.board;
-            if let Some(ref mut board) = self.board {
-                if let Err(error) = board.advance(&undo, c) {
-                    c.unmake_move(undo)?;
-                    return Err(error.into());
-                }
-                self.stats.tt_board_hash_updates += 1;
-            }
-            if let Some(ref mut context) = self.context {
-                if let Err(error) = context.advance(&undo, c) {
-                    c.unmake_move(undo)?;
-                    self.context = parent_context;
-                    self.board = parent_board;
-                    return Err(error.into());
-                }
-                self.stats.tt_context_transitions += 1;
-            }
-            // Only signed history consumes speculative actor/lag contexts.
-            let track_path = self.ordering.is_some();
-            if track_path {
-                self.path.push(PlayedMove {
-                    colour: mover,
-                    action,
-                });
-            }
-            // Taking the slot keeps payloads on the heap and the parent borrow local;
-            // deeper recursion can never alias this active child.
-            let pooled = ply < self.child_buffers.len();
-            let mut a = self.child_buffers.get_mut(ply).and_then(Option::take);
-            // The restore happens even when evaluation, budget or cancellation fails.
-            let result = (|| {
-                let mut entered = false;
-                // True goal/threefold leaves bypass FT and head evaluation as well.
-                if c.terminal_value().is_none() {
-                    if self.stats.zero_stock_safe_race_enabled
-                        && depth > 0
-                        && c.position().walls_remaining == [0, 0]
-                    {
-                        self.enter(c)?;
-                        entered = true;
-                        self.stats.safe_race_stock0_opportunities += 1;
-                        if let Some(proof) = self.safe_race_value(c, a.as_ref(), parent, depth)? {
-                            self.control()?;
-                            self.stats.safe_race_proven_leaves += 1;
-                            match proof.origin {
-                                SafeRaceOrigin::Tt => self.stats.safe_race_tt_returns += 1,
-                                SafeRaceOrigin::Manhattan => self.stats.safe_race_m_returns += 1,
-                                SafeRaceOrigin::ImmediateGoal => {
-                                    self.stats.safe_race_tail_goal_returns += 1
-                                }
-                                SafeRaceOrigin::SealedTail => {
-                                    self.stats.safe_race_tail_sealed_returns += 1
-                                }
-                                SafeRaceOrigin::Path => self.stats.safe_race_path_returns += 1,
-                            }
-                            return Ok(proof.value);
-                        }
-                    }
-                    if self.zero_stock_approx_leaf(c, depth) {
-                        // This branch replaces negamax entry, not its caller's make,
-                        // fingerprint, path or canonical undo. Count/control once.
-                        if !entered {
-                            self.enter(c)?;
-                        }
-                        let value = self.zero_stock_approx_value(c, a.as_ref(), parent, depth)?;
-                        self.control()?;
-                        self.stats.zero_stock_approx_terminations += 1;
-                        return Ok(value);
-                    }
-                    self.eval.advance_move_context(parent, c, &undo, &mut a)?;
-                    if a.is_some() {
-                        self.stats.delta_updates += 1;
-                    }
-                }
-                self.control()?;
-                if entered {
-                    self.negamax_entered(c, a.as_ref(), depth, -window[1], -window[0], ply)
-                } else {
-                    self.negamax(c, a.as_ref(), depth, -window[1], -window[0], ply)
-                }
-            })();
-            if pooled {
-                self.child_buffers[ply] = a;
-            }
-            if track_path {
-                let popped = self.path.pop();
-                debug_assert_eq!(
-                    popped,
-                    Some(PlayedMove {
-                        colour: mover,
-                        action
-                    })
-                );
-            }
-            // If canonical undo fails, clear numeric authority and propagate failure.
-            // Do not report the context restored on a failed canonical undo.
-            if let Err(error) = c.unmake_move(undo) {
-                self.context = None;
-                self.board = None;
+        let parent_context = self.context;
+        let parent_board = self.board;
+        if let Some(ref mut board) = self.board {
+            if let Err(error) = board.advance(&undo, c) {
+                c.unmake_move(undo)?;
                 return Err(error.into());
             }
-            self.context = parent_context;
-            self.board = parent_board;
-            let result = result.map(|v| -v);
-            #[cfg(feature = "research-diagnostics")]
-            if OBSERVE && let Some(o) = self.lmr_observation.as_deref_mut() {
-                o.child_return(c, &self.path, ply - 1, action, &result);
-            }
-            #[cfg(feature = "research-diagnostics")]
-            if TRACE && let Some(trace) = self.trial_trace.as_deref_mut() {
-                trace.child_return(ply, action, &result, &self.stats);
-            }
-            result
-        })();
-        #[cfg(feature = "research-diagnostics")]
-        if let Some(span) = stock_span {
-            self.stock_span_end(span);
+            self.stats.tt_board_hash_updates += 1;
         }
-        #[cfg(not(feature = "research-diagnostics"))]
-        let _ = parent_positive_stock;
+        if let Some(ref mut context) = self.context {
+            if let Err(error) = context.advance(&undo, c) {
+                c.unmake_move(undo)?;
+                self.context = parent_context;
+                self.board = parent_board;
+                return Err(error.into());
+            }
+            self.stats.tt_context_transitions += 1;
+        }
+        // Only signed history consumes speculative actor/lag contexts.
+        let track_path = self.ordering.is_some();
+        if track_path {
+            self.path.push(PlayedMove {
+                colour: mover,
+                action,
+            });
+        }
+        // Taking the slot keeps payloads on the heap and the parent borrow local;
+        // deeper recursion can never alias this active child.
+        let pooled = ply < self.child_buffers.len();
+        let mut a = self.child_buffers.get_mut(ply).and_then(Option::take);
+        // The restore happens even when evaluation, budget or cancellation fails.
+        let result = (|| {
+            let mut entered = false;
+            // True goal/threefold leaves bypass FT and head evaluation as well.
+            if c.terminal_value().is_none() {
+                if self.stats.zero_stock_safe_race_enabled
+                    && depth > 0
+                    && c.position().walls_remaining == [0, 0]
+                {
+                    self.enter()?;
+                    entered = true;
+                    self.stats.safe_race_stock0_opportunities += 1;
+                    if let Some(proof) = self.safe_race_value(c, a.as_ref(), parent, depth)? {
+                        self.control()?;
+                        self.stats.safe_race_proven_leaves += 1;
+                        match proof.origin {
+                            SafeRaceOrigin::Tt => self.stats.safe_race_tt_returns += 1,
+                            SafeRaceOrigin::Manhattan => self.stats.safe_race_m_returns += 1,
+                            SafeRaceOrigin::ImmediateGoal => {
+                                self.stats.safe_race_tail_goal_returns += 1
+                            }
+                            SafeRaceOrigin::SealedTail => {
+                                self.stats.safe_race_tail_sealed_returns += 1
+                            }
+                            SafeRaceOrigin::Path => self.stats.safe_race_path_returns += 1,
+                        }
+                        return Ok(proof.value);
+                    }
+                }
+                if self.zero_stock_approx_leaf(c, depth) {
+                    // This branch replaces negamax entry, not its caller's make,
+                    // fingerprint, path or canonical undo. Count/control once.
+                    if !entered {
+                        self.enter()?;
+                    }
+                    let value = self.zero_stock_approx_value(c, a.as_ref(), parent, depth)?;
+                    self.control()?;
+                    self.stats.zero_stock_approx_terminations += 1;
+                    return Ok(value);
+                }
+                self.eval.advance_move_context(parent, c, &undo, &mut a)?;
+                if a.is_some() {
+                    self.stats.delta_updates += 1;
+                }
+            }
+            self.control()?;
+            if entered {
+                self.negamax_entered(c, a.as_ref(), depth, -window[1], -window[0], ply)
+            } else {
+                self.negamax(c, a.as_ref(), depth, -window[1], -window[0], ply)
+            }
+        })();
+        if pooled {
+            self.child_buffers[ply] = a;
+        }
+        if track_path {
+            let popped = self.path.pop();
+            debug_assert_eq!(
+                popped,
+                Some(PlayedMove {
+                    colour: mover,
+                    action
+                })
+            );
+        }
+        // If canonical undo fails, clear numeric authority and propagate failure.
+        // Do not report the context restored on a failed canonical undo.
+        if let Err(error) = c.unmake_move(undo) {
+            self.context = None;
+            self.board = None;
+            return Err(error.into());
+        }
+        self.context = parent_context;
+        self.board = parent_board;
+        let result = result.map(|v| -v);
+        #[cfg(feature = "research-diagnostics")]
+        if OBSERVE && let Some(o) = self.lmr_observation.as_deref_mut() {
+            o.child_return(c, &self.path, ply - 1, action, &result);
+        }
+        #[cfg(feature = "research-diagnostics")]
+        if TRACE && let Some(trace) = self.trial_trace.as_deref_mut() {
+            trace.child_return(ply, action, &result, &self.stats);
+        }
         result
     }
 
@@ -2053,7 +2018,7 @@ impl<const OBSERVE: bool, const TRACE: bool, const STOCK_OBSERVE: bool>
         beta: f32,
         ply: usize,
     ) -> NodeResult<f32> {
-        self.enter(c)?;
+        self.enter()?;
         self.negamax_entered(c, a, depth, alpha, beta, ply)
     }
 
@@ -2427,7 +2392,7 @@ impl<const OBSERVE: bool, const TRACE: bool, const STOCK_OBSERVE: bool>
         depth: u16,
         action: u16,
     ) -> NodeResult<(u16, f32)> {
-        self.enter(c)?;
+        self.enter()?;
         if !c.legal_ids().contains(&action) {
             return Err(Interrupted::Error(SearchError::Root(
                 "illegal forced root action".into(),
@@ -2453,7 +2418,7 @@ impl<const OBSERVE: bool, const TRACE: bool, const STOCK_OBSERVE: bool>
         depth: u16,
         previous: Option<u16>,
     ) -> NodeResult<(u16, f32)> {
-        self.enter(c)?;
+        self.enter()?;
         let mut previous = previous;
         let mut legal = None;
         if self.limits.use_tt {
@@ -2631,7 +2596,7 @@ pub fn search_with_orderer(
 ) -> Result<SearchResult> {
     let mut table = Table::new(if limits.use_tt { limits.tt_entries } else { 0 })?;
     let mut ordering = ContinuationHistory::new()?;
-    search_in_table::<false, false, false>(
+    search_in_table::<false, false>(
         root,
         evaluator,
         limits,
@@ -2745,10 +2710,8 @@ impl SearchSession {
     }
     fn attach_safe_race_namespace(&mut self) {
         if self.zero_stock_safe_race {
-            self.namespace.selectivity.push(':');
-            self.namespace
-                .selectivity
-                .push_str(self.zero_stock_safe_race_method.id());
+            self.zero_stock_safe_race_method
+                .qualify_namespace(&mut self.namespace);
         }
     }
     /// Research opt-in only. Complete-history qualification is per leaf; this
@@ -3128,7 +3091,7 @@ impl SearchSession {
         let mut invocation = SearchInvocation::root(&mut on_completed);
         invocation.forced_root = Some(action);
         invocation.safe_race_method = self.zero_stock_safe_race_method;
-        search_in_table::<false, false, false>(
+        search_in_table::<false, false>(
             root,
             self.evaluator.as_ref(),
             limits,
@@ -3159,20 +3122,7 @@ impl SearchSession {
         cancel: &AtomicBool,
         on_completed: &mut dyn FnMut(&SearchResult),
     ) -> Result<SearchResult> {
-        self.search_with_invocation::<false>(
-            root,
-            limits,
-            cancel,
-            SearchInvocation::root(on_completed),
-        )
-    }
-    fn search_with_invocation<const STOCK_OBSERVE: bool>(
-        &mut self,
-        root: &SigmaContext,
-        limits: &SearchLimits,
-        cancel: &AtomicBool,
-        mut invocation: SearchInvocation<'_>,
-    ) -> Result<SearchResult> {
+        let mut invocation = SearchInvocation::root(on_completed);
         let root_walls = root
             .position()
             .walls_remaining
@@ -3185,7 +3135,7 @@ impl SearchSession {
             limits.max_depth,
         ));
         invocation.safe_race_method = self.zero_stock_safe_race_method;
-        search_in_table::<false, false, STOCK_OBSERVE>(
+        search_in_table::<false, false>(
             root,
             self.evaluator.as_ref(),
             limits,
@@ -3228,8 +3178,6 @@ struct SearchInvocation<'a> {
     trial: Option<lmr_observation::TrialInvocation<'a>>,
     #[cfg(feature = "research-diagnostics")]
     trial_trace: Option<&'a mut LmrTrialTrace>,
-    #[cfg(feature = "research-diagnostics")]
-    zero_stock_observation: Option<&'a mut ZeroStockObservation>,
 }
 impl<'a> SearchInvocation<'a> {
     fn root(on_completed: &'a mut dyn FnMut(&SearchResult)) -> Self {
@@ -3243,13 +3191,11 @@ impl<'a> SearchInvocation<'a> {
             trial: None,
             #[cfg(feature = "research-diagnostics")]
             trial_trace: None,
-            #[cfg(feature = "research-diagnostics")]
-            zero_stock_observation: None,
         }
     }
 }
 
-fn search_in_table<const OBSERVE: bool, const TRACE: bool, const STOCK_OBSERVE: bool>(
+fn search_in_table<const OBSERVE: bool, const TRACE: bool>(
     root: &SigmaContext,
     evaluator: &dyn StaticEvaluator,
     limits: &SearchLimits,
@@ -3331,7 +3277,7 @@ fn search_in_table<const OBSERVE: bool, const TRACE: bool, const STOCK_OBSERVE: 
         .into_iter()
         .map(u16::from)
         .sum();
-    let mut state = Search::<OBSERVE, TRACE, STOCK_OBSERVE> {
+    let mut state = Search::<OBSERVE, TRACE> {
         eval: evaluator,
         score_domain,
         eval_scratch: evaluator.create_scratch(),
@@ -3383,8 +3329,6 @@ fn search_in_table<const OBSERVE: bool, const TRACE: bool, const STOCK_OBSERVE: 
         lmr_observation: invocation.observation,
         #[cfg(feature = "research-diagnostics")]
         trial_trace: invocation.trial_trace,
-        #[cfg(feature = "research-diagnostics")]
-        zero_stock_observation: invocation.zero_stock_observation,
     };
     #[cfg(feature = "research-diagnostics")]
     if let Some(cold) = &invocation.trial {
@@ -3502,10 +3446,6 @@ fn search_in_table<const OBSERVE: bool, const TRACE: bool, const STOCK_OBSERVE: 
                 !state.path.is_empty()
             }
         };
-    #[cfg(feature = "research-diagnostics")]
-    if STOCK_OBSERVE {
-        state.publish_stock_observation(!parent_not_restored);
-    }
     if parent_not_restored {
         #[cfg(feature = "research-diagnostics")]
         if TRACE && let Some(trace) = state.trial_trace.as_deref_mut() {
@@ -3851,8 +3791,6 @@ mod persistent_tt_tests {
                 lmr_observation: None,
                 #[cfg(feature = "research-diagnostics")]
                 trial_trace: None,
-                #[cfg(feature = "research-diagnostics")]
-                zero_stock_observation: None,
             };
             let mut child = root.clone();
             let value = state
@@ -3914,7 +3852,7 @@ mod persistent_tt_tests {
         let mut cancel_table = Table::persistent(4096).unwrap();
         let cancel = AtomicBool::new(false);
         let before = Key::of(&root);
-        let r = search_in_table::<false, false, false>(
+        let r = search_in_table::<false, false>(
             &root,
             e.as_ref(),
             &limits(3, true, 4096),
@@ -4542,8 +4480,6 @@ mod child_buffer_tests {
                 lmr_observation: None,
                 #[cfg(feature = "research-diagnostics")]
                 trial_trace: None,
-                #[cfg(feature = "research-diagnostics")]
-                zero_stock_observation: None,
             };
             let result = state.child(
                 &mut c,

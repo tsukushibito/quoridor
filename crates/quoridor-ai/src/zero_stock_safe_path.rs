@@ -1,4 +1,4 @@
-// Comparison-only P witness for the fixed continuous-session comparison; remove if no concrete retained use after its finite decision.
+//! Retained for normal continuous-session research use; product/generator defaults stay OFF.
 //! Bounded geometry for the opt-in single-path/tail research candidate.
 //! History authority and typed TT ownership stay in alphabeta.
 

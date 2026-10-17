@@ -31,7 +31,7 @@ fn runtime400_factory_modes_match_actual_namespace_and_separate_four_domains() {
             let s = arena_alpha_session(Arc::new(MetadataOnly), namespace(), 64, &e, None).unwrap();
             assert_eq!(
                 s.namespace(),
-                &arena_alpha_namespace(&e, namespace()).unwrap()
+                &arena_alpha_namespace(&e, namespace(), None).unwrap()
             );
             assert_eq!(s.lmr_enabled(), lmr);
             assert!(domains.insert(s.namespace().selectivity.clone()));
@@ -143,7 +143,7 @@ fn runtime400_raw_reset_and_qualified_compare_x_x_y_y_reset_once() {
             for (label, resets) in [("X", 0), ("X", 0), ("Y", 1), ("Y", 1)] {
                 let mut base = namespace();
                 base.evaluator.push_str(label);
-                let expected = arena_alpha_namespace(&e, base.clone()).unwrap();
+                let expected = arena_alpha_namespace(&e, base.clone(), None).unwrap();
                 invoke_alpha_observed(
                     &mut session,
                     &mut profile,

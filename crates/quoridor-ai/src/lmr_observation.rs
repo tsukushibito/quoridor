@@ -464,7 +464,7 @@ impl SearchSession {
         }
         observation.used = true;
         let mut callback = |_: &SearchResult| {};
-        let result = search_in_table::<true, false, false>(
+        let result = search_in_table::<true, false>(
             root,
             self.evaluator.as_ref(),
             limits,
@@ -472,7 +472,6 @@ impl SearchSession {
             None,
             SearchInvocation {
                 forced_root: None,
-                zero_stock_observation: None,
                 on_completed: &mut callback,
                 observation: Some(&mut *observation),
                 safe_race_method: self.zero_stock_safe_race_method,
@@ -554,7 +553,7 @@ impl SearchSession {
             .collect();
         let mut callback = |_: &SearchResult| {};
         let mut trace = LmrTrialTrace::new(branch.facts.parent_ply, branch.facts.action);
-        let result = search_in_table::<false, true, false>(
+        let result = search_in_table::<false, true>(
             &parent,
             self.evaluator.as_ref(),
             &limits,
@@ -562,7 +561,6 @@ impl SearchSession {
             None,
             SearchInvocation {
                 forced_root: None,
-                zero_stock_observation: None,
                 on_completed: &mut callback,
                 observation: None,
                 trial_trace: Some(&mut trace),
@@ -739,7 +737,7 @@ mod trial_tests {
         ];
         let mut trace = LmrTrialTrace::new(2, b.facts.action);
         let mut callback = |_: &SearchResult| {};
-        let result = search_in_table::<false, true, false>(
+        let result = search_in_table::<false, true>(
             &parent,
             &Constant,
             &limits,
@@ -747,7 +745,6 @@ mod trial_tests {
             None,
             SearchInvocation {
                 forced_root: None,
-                zero_stock_observation: None,
                 on_completed: &mut callback,
                 observation: None,
                 trial_trace: Some(&mut trace),
