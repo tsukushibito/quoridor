@@ -4,6 +4,8 @@
 
 A normal trusted offline Cargo build runs under frozen authored source, the adopted commit and necessary patch, Cargo.lock, absolute tool identities/versions, features/flags and relevant environment. Generated outputs are protected by the isolated owned target and one writer. Cargo JSON `build-finished.success=true`, actual exit 0, returned guardian cleanup and structured runner executable artifacts are required. Multiple primary warning spans are ordinary Cargo output, preserved in the full bounded log. Clippy uses the ordinary affected scope with `-Dwarnings`; code must be repaired or an explicitly justified temporary code exception must name its retirement. There are no comparison-only diagnostic exceptions.
 
+Affected tests and Clippy may finish before the release BUILD. The accepted source adoption can bind `prior_software: {subjects: [FileRef], receipts: [{file: FileRef, name}]}` for those original checks. Admission verifies the declared source bytes; admission, finalization and later BUILD consumption verify the original receipt, complete log and successful returned cleanup. Roles derive from the actual Cargo test/clippy argv. These checks remain separate from the BUILD's own attempted-command ledger and are not replayed. The adoption records their scope and any source provenance limits; this does not certify unlisted sources or numerical qualification.
+
 ## Public commands and ownership
 
 Submit one frozen build/run intent through existing `research-job.sh`; its `argv` is:

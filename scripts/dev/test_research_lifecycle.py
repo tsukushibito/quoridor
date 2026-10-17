@@ -17,6 +17,80 @@ def load_lifecycle():
 
 
 class LifecycleDataAndPaths(unittest.TestCase):
+    def test_prior_software_uses_original_receipts_and_rejects_partial_checks(self):
+        lc = load_lifecycle()
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory).resolve()
+            source = root / "source.rs"
+            source.write_text("// qualified source\n")
+            log = root / "test.log"
+            log.write_text("one bounded test passed\n")
+            argv = ["cargo", "test", "--offline", "--locked", "-j1"]
+            check = dict(
+                name="new-boundary",
+                role="run",
+                argv=argv,
+                status="PASS",
+                capture_complete=True,
+                primary=None,
+                secondary=[],
+                full_log=lc.artifact_ref(log),
+                guardian_return=dict(
+                    command=argv,
+                    exit_code=0,
+                    direct_child_reaped=True,
+                    cleanup_complete=True,
+                    handle_closes_complete=True,
+                    remaining=[],
+                ),
+            )
+            receipt = root / "receipt.json"
+            adoption = root / "adoption.json"
+
+            def bind():
+                receipt.write_text(json.dumps(dict(checks=[check], primary=None)))
+                adoption.write_text(
+                    json.dumps(
+                        dict(
+                            schema="quoridor.research.source-adoption.v1",
+                            status="ACCEPTED",
+                            prior_software=dict(
+                                subjects=[lc.artifact_ref(source)],
+                                receipts=[dict(file=lc.artifact_ref(receipt), name=check["name"])],
+                            ),
+                        )
+                    )
+                )
+                return lc.artifact_ref(adoption)
+
+            ref = bind()
+            self.assertEqual(lc.prior_software_roles(ref, current_sources=True), {"test"})
+            for key, value in (
+                ("capture_complete", False),
+                ("status", "FAILED"),
+                ("secondary", [{"stage": "publication"}]),
+            ):
+                previous = check[key]
+                check[key] = value
+                with self.assertRaises(lc.Refused):
+                    lc.prior_software_roles(bind())
+                check[key] = previous
+            for key in ("direct_child_reaped", "cleanup_complete", "handle_closes_complete"):
+                check["guardian_return"][key] = False
+                with self.assertRaises(lc.Refused):
+                    lc.prior_software_roles(bind())
+                check["guardian_return"][key] = True
+            ref = bind()
+            source.write_text("// changed source\n")
+            with self.assertRaises(lc.Refused):
+                lc.prior_software_roles(ref, current_sources=True)
+            # Historical BUILD consumption uses the frozen source adoption;
+            # it does not require current Main to retain those old source bytes.
+            self.assertEqual(lc.prior_software_roles(ref), {"test"})
+            log.write_text("changed log\n")
+            with self.assertRaises(lc.Refused):
+                lc.prior_software_roles(ref)
+
     def test_corpus_stream_is_hashed_without_control_buffer(self):
         lc = load_lifecycle()
         with tempfile.TemporaryDirectory() as directory:

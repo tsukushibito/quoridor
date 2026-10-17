@@ -1631,11 +1631,65 @@ def caller_source_refs(spec, experiment):
     return refs
 
 
+def prior_software_roles(adoption_ref, *, current_sources=False):
+    """Consume accepted, completed checks without replaying them during BUILD."""
+    adoption = document(adoption_ref)
+    require(
+        adoption["schema"] == "quoridor.research.source-adoption.v1"
+        and adoption["status"] == "ACCEPTED",
+        "accepted source adoption required",
+    )
+    qualification = adoption.get("prior_software")
+    if qualification is None:
+        return set()
+    require(bool(qualification["subjects"]), "prior software source scope required")
+    if current_sources:
+        for ref in qualification["subjects"]:
+            require(artifact_ref(ref["path"]) == ref, "prior software source drift")
+    roles = set()
+    for selected in qualification["receipts"]:
+        receipt = document(selected["file"])
+        require(receipt.get("primary") is None, "failed prior software receipt")
+        checks = [c for c in receipt["checks"] if c["name"] == selected["name"]]
+        require(len(checks) == 1, "one original prior software check")
+        check = checks[0]
+        guardian = check["guardian_return"]
+        require(
+            check["status"] == "PASS"
+            and check["capture_complete"] is True
+            and not check.get("primary")
+            and not check.get("secondary")
+            and guardian["command"] == check["argv"]
+            and guardian["exit_code"] == 0
+            and guardian["direct_child_reaped"] is True
+            and guardian["cleanup_complete"] is True
+            and guardian["handle_closes_complete"] is True
+            and guardian["remaining"] == [],
+            "completed prior software check required",
+        )
+        argv = check["argv"]
+        require(
+            len(argv) > 1 and Path(argv[0]).name == "cargo" and argv[1] in {"test", "clippy"},
+            "prior Cargo test/lint only",
+        )
+        require(
+            {"--offline", "--locked", "-j1"} <= set(argv)
+            and not any(x.startswith("-A") or x.startswith("--allow") for x in argv),
+            "bounded prior Cargo qualification",
+        )
+        if argv[1] == "clippy":
+            require(
+                {"-Dwarnings", "--no-deps"} <= set(argv),
+                "prior scoped Clippy warnings denied",
+            )
+        read_ref(check["full_log"])
+        roles.add({"test": "test", "clippy": "lint"}[argv[1]])
+    return roles
+
+
 def accepted_build(ref):
     manifest = document(ref)
-    require(
-        not Path(ref["path"]).with_name("INCOMPLETE").exists(), "provisional manifest"
-    )
+    require(not Path(ref["path"]).with_name("INCOMPLETE").exists(), "provisional manifest")
     require(
         manifest["schema"] == BUILD_SCHEMA and manifest["status"] == "PASS",
         "accepted build required",
@@ -1645,7 +1699,12 @@ def accepted_build(ref):
         "build completion required",
     )
     require(
-        {r["role"] for r in manifest["checks"]} >= {"test", "lint", "build"},
+        document(manifest["source_adoption"])["source"] == manifest["source"],
+        "build source adoption correspondence",
+    )
+    require(
+        {r["role"] for r in manifest["checks"]} | prior_software_roles(manifest["source_adoption"])
+        >= {"test", "lint", "build"},
         "affected test/lint/build required",
     )
     require(
@@ -2180,7 +2239,9 @@ def build_check(spec):
             env[key] == spec["tools"][key]["file"]["path"], "pinned relevant tool env"
         )
     require(
-        {c["role"] for c in spec["commands"]} >= {"test", "lint", "build"},
+        {c["role"] for c in spec["commands"]}
+        | prior_software_roles(spec["source_adoption"], current_sources=True)
+        >= {"test", "lint", "build"},
         "one affected qualification",
     )
     names = [c["name"] for c in spec["commands"]]
@@ -5394,7 +5455,8 @@ def _prepare_completion(directory, job_ref, *, failure=None, resources=None):
             )
             require(
                 {"test", "lint", "build"}
-                <= {
+                <= prior_software_roles(candidate["source_adoption"])
+                | {
                     c["role"]
                     for c in candidate["checks"]
                     if c["status"] == "PASS"
