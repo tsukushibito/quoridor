@@ -91,6 +91,7 @@ class DiverseBoundaries(unittest.TestCase):
             np.array([], np.int64),
             np.array([1, 1, 2, 0]),
             np.array([True, False, True, False]),
+            target_column=1,
         )
         self.assertEqual((x.shape, d.shape, y.tolist()), ((4, 2, 312), (4, 2), [1] * 4))
         self.assertEqual(calls, [("train", [1, 1, 2, 0], [True, False, True, False], True)])
@@ -101,6 +102,7 @@ class DiverseBoundaries(unittest.TestCase):
                 np.array([], np.int64),
                 np.array([], np.int64),
                 np.array([], bool),
+                target_column=1,
             )
 
     def test_configured_C_M_same_updates_scopes_and_complete_work_bound(self):

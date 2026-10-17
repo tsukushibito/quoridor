@@ -105,6 +105,7 @@ MIXTURE_OPTIONS = {
     "public_acceptance_seed",
     "training_rows",
     "training_view",
+    "teacher_values",
 }
 DEFAULTS["mixture"].update(
     public_file_decay=None,
@@ -112,6 +113,7 @@ DEFAULTS["mixture"].update(
     public_acceptance_seed=None,
     training_rows=None,
     training_view=None,
+    teacher_values=None,
 )
 
 
@@ -631,10 +633,10 @@ def validate_mixture_config(config, incoming):
     if public_evaluation is not None and (
         not isinstance(public_evaluation, dict)
         or set(public_evaluation) != {"validation", "train_diagnostic"}
-        or public_evaluation["validation"] not in ("checkpoints", "best")
+        or public_evaluation["validation"] not in ("checkpoints", "best", "last")
         or type(public_evaluation["train_diagnostic"]) is not bool
         or (
-            public_evaluation["validation"] == "best"
+            public_evaluation["validation"] in ("best", "last")
             and (
                 not isinstance(m["selector"], dict)
                 or m["selector"].get("public_non_regression") is not False
@@ -679,10 +681,24 @@ def validate_mixture_config(config, incoming):
         or m["selector"]["added_metric"] not in ("mse", "family_mse")
     ):
         raise ValueError("explicit optional public nonregression selector required")
-    for name in ("public_membership", "public_acceptance", "training_view"):
-        ref = m.get(name) if name == "training_view" else m[name]
-        if name == "training_view" and ref is None:
+    for name in (
+        "public_membership",
+        "public_acceptance",
+        "training_view",
+        "teacher_values",
+    ):
+        ref = m.get(name) if name in ("training_view", "teacher_values") else m[name]
+        if name in ("training_view", "teacher_values") and ref is None:
             continue
+        if name == "teacher_values":
+            if (
+                not isinstance(ref, dict)
+                or set(ref) != {"manifest", "objective"}
+                or not isinstance(ref["objective"], str)
+                or not ref["objective"]
+            ):
+                raise ValueError("bound scalar label manifest and explicit objective key required")
+            ref = ref["manifest"]
         if (
             not isinstance(ref, dict)
             or set(ref) != {"path", "sha256", "bytes", "mode"}
@@ -711,6 +727,8 @@ def validate_mixture_config(config, incoming):
         raise ValueError(
             "finite full-batch outcome mixture, all-work limit, observation selector and synchronous GPU supply required"
         )
+    if m.get("teacher_values") is not None and (m["public_rows"] != 0 or m["added_rows"] <= 0):
+        raise ValueError("teacher sidecar belongs only to the existing added-only row stream")
     if t["reflection_probability"] != 0:
         raise ValueError(
             "source reflection configured only in mixture; no duplicate global augmentation"

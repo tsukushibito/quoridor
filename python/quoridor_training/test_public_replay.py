@@ -170,7 +170,12 @@ class MixtureBoundaries(unittest.TestCase):
         am = ar.random(3) < 0.5
         pm = pr.random(4) < 0.25
         x, d, y = mixed_batch(
-            a, p, np.array([0, 1, 2]), np.array([2, 1, 0, 1]), np.concatenate((am, pm))
+            a,
+            p,
+            np.array([0, 1, 2]),
+            np.array([2, 1, 0, 1]),
+            np.concatenate((am, pm)),
+            target_column=1,
         )
         self.assertEqual(x.shape, (7, 2, 312))
         self.assertEqual(y.tolist(), [-1, 0, 1, 1, 1, 1, 1])
@@ -179,7 +184,14 @@ class MixtureBoundaries(unittest.TestCase):
         # Raw=+2 deliberately does not mask an admitted outcome row.
         for bad in (np.array([3]), np.array([4])):
             with self.assertRaises(ValueError):
-                mixed_batch(a, p, bad, np.array([], dtype=np.int64), np.zeros(1, dtype=bool))
+                mixed_batch(
+                    a,
+                    p,
+                    bad,
+                    np.array([], dtype=np.int64),
+                    np.zeros(1, dtype=bool),
+                    target_column=1,
+                )
         # Real NumPy objective arithmetic, explicit fake framework port, zero forwards.
         fake = SimpleNamespace(float32=np.dtype("float32"), mean=np.mean)
         with patch.dict(sys.modules, {"torch": fake}):

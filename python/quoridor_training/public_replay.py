@@ -41,7 +41,16 @@ def training_view_indices(ref, cache_manifest_sha256, candidates):
     return indices
 
 
-def mixed_batch(added, public, added_indices, public_indices, reflection_mask):
+def mixed_batch(
+    added,
+    public,
+    added_indices,
+    public_indices,
+    reflection_mask,
+    *,
+    target_column,
+    teacher_values=None,
+):
     """One FP32 STM stream; validate source/split isolation before model input."""
     import numpy as np
 
@@ -63,7 +72,11 @@ def mixed_batch(added, public, added_indices, public_indices, reflection_mask):
         raise ValueError("added training excludes V and ineligible outcomes")
     if len(ai):
         x, d, targets = added.batch(ai, mask[: len(ai)])
-        y = targets[:, 1]
+        y = (
+            targets[:, target_column]
+            if teacher_values is None
+            else teacher_values.take(ai, mask[: len(ai)])
+        )
     else:
         x = np.empty((0, 2, 312), dtype=np.float32)
         d = np.empty((0, 2), dtype=np.float32)
@@ -80,7 +93,7 @@ def mixed_batch(added, public, added_indices, public_indices, reflection_mask):
         or d.shape != (count, 2)
         or y.shape != (count,)
         or any(v.dtype != np.float32 or not np.isfinite(v).all() for v in (x, d, y))
-        or not np.isin(y, (-1, 0, 1)).all()
+        or (not np.isin(y, (-1, 0, 1)).all() if teacher_values is None else np.any(np.abs(y) > 1))
     ):
         raise ValueError("finite configured QF1/STM/outcome batch required")
     return x, d, y
@@ -209,6 +222,7 @@ def planned_work(config, train_rows, validation_rows, public_rows, *, reuse_init
         measurement_rows[0] = 0
     measurements = sum(measurement_rows.values())
     frozen_best_rows = public_rows["validation"] if public_policy["validation"] == "best" else 0
+    last_rows = public_rows["validation"] if public_policy["validation"] == "last" else 0
     return {
         "updates": steps,
         "observation_steps": list(scopes_by_step),
@@ -219,10 +233,11 @@ def planned_work(config, train_rows, validation_rows, public_rows, *, reuse_init
         "added_rows": added_rows,
         "public_rows": training_rows - added_rows,
         "training_forwards": training_rows,
-        "measurement_forwards": measurements + frozen_best_rows,
+        "measurement_forwards": measurements + frozen_best_rows + last_rows,
         "frozen_best_public_validation_rows": frozen_best_rows,
+        "last_public_validation_rows": last_rows,
         "reused_initial": reuse_initial,
-        "forward_upper": training_rows + measurements + frozen_best_rows,
+        "forward_upper": training_rows + measurements + frozen_best_rows + last_rows,
         "measurement_rows_by_step": measurement_rows,
     }
 
@@ -421,7 +436,11 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
     )
     m, t, e = cfg["mixture"], cfg["training"], cfg["evaluation"]
     public_policy = public_observation_policy(m)
-    added = public = model = optimizer = None
+    added = public = model = optimizer = teacher_values = None
+    outcome_column = None
+    attempted_stream = hashlib.sha256()
+    completed_stream = hashlib.sha256()
+    stream_rows = stream_updates = 0
     step = seen_added = seen_public = attempted_added = attempted_public = 0
     attempted_update = 0
     current_update_state = "NOT_INITIALIZED"
@@ -446,6 +465,17 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
 
     def facts():
         return {
+            "teacher_values": teacher_values.binding if teacher_values is not None else None,
+            "stream_identity": {
+                "attempted_sha256": attempted_stream.hexdigest(),
+                "completed_sha256": completed_stream.hexdigest(),
+                "completed_rows": stream_rows,
+                "completed_updates": stream_updates,
+                "encoding": "per-update LE-i64 [update,nAdded,nPublic], added IDs, public IDs, uint8 added/public LR masks",
+                "numpy_version": np.__version__,
+                "torch_version": torch.__version__,
+                "added_rng": "numpy.default_rng/PCG64",
+            },
             "step": step,
             "attempted_update": attempted_update,
             "current_update_state": current_update_state,
@@ -507,6 +537,9 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
         totals = {
             "rows": 0,
             "error": 0.0,
+            "z_error": 0.0,
+            "z_sign_rows": 0,
+            "z_correct": 0,
             "sign_rows": 0,
             "correct": 0,
             "saturated": 0,
@@ -517,22 +550,78 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
         }
         families, strata, games = {}, {}, {}
         calibration = [[0, 0.0, 0.0, 0.0, 0.0] for _ in range(10)]
+        reference_totals = {}
         model.eval()
         with torch.no_grad():
             for first in range(0, len(indices), e["batch_size"]):
                 sub = indices[first : first + e["batch_size"]]
                 if name.startswith("added_"):
                     x, d, targets = added.batch(sub)
-                    y = targets[:, 1]
+                    z = targets[:, outcome_column]
+                    y = z if teacher_values is None else teacher_values.take(sub)
                 else:
                     x, d, y = public.batch(
                         "train" if name in ("public_train", "public_full_train") else "validation",
                         sub,
                     )
+                    z = y
                 p = forward(x, d).detach().cpu().numpy().astype(np.float64)
                 yf = y.astype(np.float64)
-                if not np.isfinite(yf).all() or not np.isin(y, (-1, 0, 1)).all():
-                    raise ValueError("finite literal outcome labels")
+                continuous_target = (
+                    name.startswith("added_")
+                    and teacher_values is not None
+                    and teacher_values.metadata[teacher_values.objective]["source"] == "sidecar"
+                )
+                if (
+                    not np.isfinite(yf).all()
+                    or np.any(np.abs(yf) > 1)
+                    or (not continuous_target and not np.isin(y, (-1, 0, 1)).all())
+                ):
+                    raise ValueError("finite local STM target in [-1,1]")
+                zd = z.astype(np.float64)
+                z_decisive = zd != 0
+                totals["z_error"] += float(((p - zd) ** 2).sum())
+                totals["z_sign_rows"] += int(z_decisive.sum())
+                totals["z_correct"] += int((p[z_decisive] * zd[z_decisive] > 0).sum())
+                outcome_name = (
+                    teacher_values.outcome_name
+                    if name.startswith("added_") and teacher_values is not None
+                    else t["target"]
+                )
+                references = {outcome_name: zd}
+                if name.startswith("added_") and teacher_values is not None:
+                    references.update(
+                        {
+                            target: teacher_values.take(sub, target=target).astype(np.float64)
+                            for target in teacher_values.values
+                        }
+                    )
+                bins = np.minimum(9, np.maximum(0, ((p + 1) * 5).astype(np.int64)))
+                for target, reference in references.items():
+                    bank = reference_totals.setdefault(
+                        target,
+                        {
+                            "rows": 0,
+                            "sse": 0.0,
+                            "sign_rows": 0,
+                            "sign_agree": 0,
+                            "target_sum": 0.0,
+                            "bins": [[0, 0.0, 0.0] for _ in range(10)],
+                        },
+                    )
+                    decisive_reference = reference != 0
+                    bank["rows"] += len(reference)
+                    bank["sse"] += float(((p - reference) ** 2).sum())
+                    bank["sign_rows"] += int(decisive_reference.sum())
+                    bank["sign_agree"] += int(
+                        (p[decisive_reference] * reference[decisive_reference] > 0).sum()
+                    )
+                    bank["target_sum"] += float(reference.sum())
+                    for j in range(10):
+                        take = bins == j
+                        bank["bins"][j][0] += int(take.sum())
+                        bank["bins"][j][1] += float(p[take].sum())
+                        bank["bins"][j][2] += float(reference[take].sum())
                 error = (p - yf) ** 2
                 for j in range(10):
                     bins = np.minimum(9, np.maximum(0, ((p + 1) * 5).astype(np.int64)))
@@ -596,7 +685,42 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
             raise ValueError("empty observation scope")
         return {
             "rows": n,
+            "reference_targets": {
+                target: {
+                    "rows": bank["rows"],
+                    "mse": bank["sse"] / bank["rows"],
+                    "sign_agreement": bank["sign_agree"] / bank["sign_rows"]
+                    if bank["sign_rows"]
+                    else None,
+                    "sign_rows": bank["sign_rows"],
+                    "mean_target": bank["target_sum"] / bank["rows"],
+                    "numeric_calibration_bins": bank["bins"],
+                    "display_name": teacher_values.metadata[target]["display_name"]
+                    if name.startswith("added_") and teacher_values is not None
+                    else target,
+                    "semantics": teacher_values.metadata[target]["value_semantics"]
+                    if name.startswith("added_") and teacher_values is not None
+                    else "literal-stm-outcome",
+                }
+                for target, bank in reference_totals.items()
+            },
+            "reference_teacher_availability": "fixed common T/V only; external public scopes have original z only",
             "mse": totals["error"] / n,
+            "target_semantics": "raw teacher value/sign agreement; zero is not certified draw"
+            if name.startswith("added_")
+            and teacher_values is not None
+            and teacher_values.metadata[teacher_values.objective]["source"] != "cache"
+            else "literal terminal z",
+            "calibration_semantics": "numeric target-bin means; teacher values are not calibrated WDL"
+            if name.startswith("added_")
+            and teacher_values is not None
+            and teacher_values.metadata[teacher_values.objective]["source"] != "cache"
+            else "literal z outcome-bin means",
+            "z_mse": totals["z_error"] / n,
+            "z_sign_rows": totals["z_sign_rows"],
+            "z_sign_accuracy": totals["z_correct"] / totals["z_sign_rows"]
+            if totals["z_sign_rows"]
+            else None,
             "sign_rows": totals["sign_rows"],
             "draw_rows": totals["draw_rows"],
             "draw_mean_absolute_value": totals["draw_absolute_value"] / totals["draw_rows"]
@@ -723,6 +847,7 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
     try:
         with cancellation_signals():
             added = TerminalCorpus(cache)
+            outcome_column = added.manifest["label_columns"].index(t["target"])
             public = IndexedPublicCorpus(m["public_membership"], acceptance)
             train_rows = family_training_view(
                 added.groups,
@@ -740,6 +865,16 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
                 dtype=np.int64,
             )
             validation_rows = np.flatnonzero(added.eligible & (added.splits == 1))
+            if m.get("teacher_values") is not None:
+                from .teacher_values import TeacherValues
+
+                teacher_values = TeacherValues(
+                    m["teacher_values"], added, train_rows, validation_rows
+                )
+                if teacher_values.outcome_column != outcome_column:
+                    raise ValueError(
+                        "configured original outcome provenance differs from label manifest"
+                    )
             initial_observation_ref = (
                 json.loads(Path(input_binding).read_bytes())
                 .get("files", {})
@@ -773,7 +908,15 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
             # Public constant is derived only from the configured T diagnostic,
             # not the entire public T or any V labels. Its scope is recorded.
             constants = {
-                "added": float(np.mean(added.labels[train_rows, 1].astype(np.float64))),
+                "added": float(
+                    np.mean(
+                        (
+                            added.labels[train_rows, outcome_column]
+                            if teacher_values is None
+                            else teacher_values.take(train_rows)
+                        ).astype(np.float64)
+                    )
+                ),
                 "public": None,
             }
             public_sum = 0.0
@@ -791,6 +934,9 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
                 e["min_delta_relative"],
             )
             observation_binding = {
+                **(
+                    {"teacher_values": teacher_values.binding} if teacher_values is not None else {}
+                ),
                 "warm_start": initial,
                 "statistics": model_inputs["statistics"],
                 "cache_manifest_sha256": added.manifest_sha,
@@ -922,7 +1068,24 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
                 pm = public_reflection_rng.random(len(pi)) < m["public_reflection_probability"]
                 attempted_added += len(ai)
                 attempted_public += len(pi)
-                x, d, y = mixed_batch(added, public, ai, pi, np.concatenate((am, pm)))
+                stream_parts = (
+                    np.asarray([update, len(ai), len(pi)], dtype="<i8").tobytes(),
+                    np.asarray(ai, dtype="<i8").tobytes(),
+                    np.asarray(pi, dtype="<i8").tobytes(),
+                    am.astype("u1").tobytes(),
+                    pm.astype("u1").tobytes(),
+                )
+                for part in stream_parts:
+                    attempted_stream.update(part)
+                x, d, y = mixed_batch(
+                    added,
+                    public,
+                    ai,
+                    pi,
+                    np.concatenate((am, pm)),
+                    target_column=outcome_column,
+                    teacher_values=teacher_values,
+                )
                 model.train()
                 current_update_state = "UPDATE_IN_PROGRESS_UNKNOWN"
                 optimizer.zero_grad(set_to_none=True)
@@ -944,6 +1107,10 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
                 optimizer.step()
                 if any(not torch.isfinite(p).all() for p in model.parameters()):
                     raise ValueError("nonfinite updated parameters")
+                for part in stream_parts:
+                    completed_stream.update(part)
+                stream_rows += len(ai) + len(pi)
+                stream_updates += 1
                 step = update
                 current_update_state = "VERIFIED_COMPLETED_UPDATE"
                 rates.append(rate)
@@ -962,6 +1129,12 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
                 if step in plan["observation_steps"] and observe():
                     result["stop_reason"] = "early_stopping"
                     break
+            if public_policy["validation"] == "last":
+                result["frozen_last_public_validation"] = {
+                    "checkpoint_step": step,
+                    "endpoint": "LAST",
+                    "metrics": evaluate("public_validation", scopes["public_validation"], None),
+                }
             if public_policy["validation"] == "best":
                 # Observe the frozen BEST without mutating the live LAST model or
                 # optimizer. Reuse the same maintained model builder and loader.
