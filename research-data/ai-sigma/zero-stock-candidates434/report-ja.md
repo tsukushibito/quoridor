@@ -34,6 +34,10 @@ optional入力は結果前にUNSELECTED_MISSING_QUALIFICATION、selected/calls0�
 
 Dを明示研究optionとして残し、完了比較専用のA/B/C/Eおよび用途を終えた434観測API/counter/fixtureを整理対象とする。P/M/Dの現役の正しさ、完全weighted history、typed TT、true terminal/root/control/undoは維持する。通常研究Pの既定、明示OFF/M、全量教師のsafe OFF、USERPAUSE、封印、モデルは変更しない。整理後sourceのsoftware検証は元実測とは別証拠であり、元imageと同じ速度を測定済みとはしない。
 
+この保持方針の整理sourceを、Mainの実16対象のbefore SHA/bytes/modeと照合して採用した。8変更・8削除で、A/B/C/Eのmethod/ID・専用moduleと比較fixture、434 timer/flag/専用API/counter/serializerを撤去し、互換alias・常時0 fieldは残していない。Dの成功は既存の汎用path return counterへ記録する。D helper・既存D4定義・連続sessionのcorrectness fixtureは全bytes一致で保持し、P/Dは同じ一回の経路walkと成功時だけのwitness記録を使う。LCの変更は既存2関数のみである。
+
+必要なplain AI tests compile、撤去名拒否とM/P/D名・IDを確認する新しい純粋metadata定義1件、AI/runnerのaffected Clippy（tests＋diagnostics/measurement、-D warnings）が実PASSした。新1件以外の旧成功assertion・D4・連続session suite・model/head/Search/performance/releaseは再実行していない。Rustfmt、LC lintと変更2関数のproject Ruff整形チェックも通過した。Rootの整形用抜粋が関数間の空行を一つ欠いた失敗は保存し、抜粋生成だけを修正した。採用source自体の変更や旧検査の再演にはしていない。[厳密採用・必要software・全失敗domain・STOPの受入れ証拠](../../../.artifacts/research-team/integration324/zero-stock-candidates434-v1/retention-adoption-v1/completion.json)。整理後sourceの速度・棋力はUNMEASUREDのままである。
+
 元測定はsource commit `2b4f22e68801854985e4a7702978eda9dc88227c`、accepted BUILD `0527f2d31e569604471f55f429eea09d16b1af16cb8dbcac82e2fecb0410340f`、image `defbadf91c086d01c47b7d3e318eea3ca83e756a5d342e08973c70022c4edcc0`、原job `fba39669-0994-4915-9cce-d4bffa7bca8d`へ束縛する。元RAW/manifests/capture/FAILEDとmetadata回復・NULL-vs-diskの区別を保持し、archive/restore/削除は行っていない。
 
 - [実collector・1,920 calls・STOP](../../../.worktree/assets/perf/zero-stock-candidates434-implementation-v1/A/recipe-settings-v1/collection-v1/completion.json) — SHA256 `5d9e8ba5fbc8e414f1b71abfdc6b9c077c92377f8d5b48de3ad8c503fd04db8b`。

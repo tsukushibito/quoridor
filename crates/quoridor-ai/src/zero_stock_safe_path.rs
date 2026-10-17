@@ -53,48 +53,6 @@ pub(super) fn timed_path_record(
     edge_open: impl Fn(u8, u8) -> bool,
     witness: Option<&mut [u8; 81]>,
 ) -> PathCheck {
-    timed_path_inner::<false>(
-        side,
-        pawns,
-        winner_phase,
-        opponent_goal,
-        goal_row,
-        edge_open,
-        (witness, |_, _, _| false),
-    )
-}
-
-/// B only: same first witness and thresholds, consult the bound only when M fails.
-pub(super) fn timed_path_bound(
-    side: u8,
-    pawns: [u8; 2],
-    winner_phase: (usize, u8),
-    opponent_goal: u8,
-    goal_row: &[u8],
-    edge_open: impl Fn(u8, u8) -> bool,
-    point_clears: impl FnMut(u8, u8, u16) -> bool,
-) -> PathCheck {
-    timed_path_inner::<true>(
-        side,
-        pawns,
-        winner_phase,
-        opponent_goal,
-        goal_row,
-        edge_open,
-        (None, point_clears),
-    )
-}
-
-fn timed_path_inner<const BOUND: bool>(
-    side: u8,
-    pawns: [u8; 2],
-    winner_phase: (usize, u8),
-    opponent_goal: u8,
-    goal_row: &[u8],
-    edge_open: impl Fn(u8, u8) -> bool,
-    selection: (Option<&mut [u8; 81]>, impl FnMut(u8, u8, u16) -> bool),
-) -> PathCheck {
-    let (witness, mut point_clears) = selection;
     let (winner, delta) = winner_phase;
     let mut result = PathCheck {
         reject: Some(PathReject::InvalidMap),
@@ -132,9 +90,7 @@ fn timed_path_inner<const BOUND: bool>(
         let cell = path[usize::from(j)];
         let separation = manhattan(cell);
         let threshold = u16::from(j) + u16::from(delta);
-        if u16::from(separation) <= threshold
-            && !(BOUND && point_clears(cell, separation, threshold))
-        {
+        if u16::from(separation) <= threshold {
             result.reject = Some(PathReject::Intermediate);
             return result;
         }
@@ -163,7 +119,7 @@ fn timed_path_inner<const BOUND: bool>(
         return result;
     }
     let separation = manhattan(endpoint);
-    if u16::from(separation) <= r && !(BOUND && point_clears(endpoint, separation, r)) {
+    if u16::from(separation) <= r {
         result.reject = Some(PathReject::Endpoint);
         return result;
     }

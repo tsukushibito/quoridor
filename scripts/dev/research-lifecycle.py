@@ -946,11 +946,7 @@ def measurement_config(experiment):
             in {
                 "manhattan",
                 "path_tail",
-                "path_tail_dag",
-                "path_tail_bound",
-                "path_tail_cross",
                 "path_tail_future",
-                "manhattan_detour",
             }
         ),
         "measurement safe-race method",
@@ -1091,7 +1087,6 @@ def measurement_config(experiment):
                 "warmup",
                 "observe_completed_depths",
                 "observe_lmr",
-                "observe_safe_race",
             }
             and all(isinstance(request[k], str) and request[k] for k in ("id", "session"))
             and request["id"] not in ids
@@ -1116,7 +1111,6 @@ def measurement_config(experiment):
                     "warmup",
                     "observe_completed_depths",
                     "observe_lmr",
-                    "observe_safe_race",
                 )
             ),
             "measurement request switches",
@@ -1127,16 +1121,6 @@ def measurement_config(experiment):
             if active is not None:
                 closed.add(active)
             active = request["session"]
-    require(
-        not any(
-            r.get("observe_safe_race", False)
-            and any(
-                r.get(k, False) for k in ("diagnostic", "observe_completed_depths", "observe_lmr")
-            )
-            for r in requests
-        ),
-        "safe-race attribution cannot overlap other observers",
-    )
     if any(r.get("observe_lmr", False) for r in requests):
         require(
             len(requests) <= 12
@@ -2845,11 +2829,7 @@ def arena_plan_check(experiment, plan):
                 None,
                 "manhattan",
                 "path_tail",
-                "path_tail_dag",
-                "path_tail_bound",
-                "path_tail_cross",
                 "path_tail_future",
-                "manhattan_detour",
             }
             and (
                 "lmr_method" not in engine

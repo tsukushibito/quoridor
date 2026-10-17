@@ -31,23 +31,12 @@ pub use lmr_observation::{
 
 #[path = "move_ordering.rs"]
 mod move_ordering;
-#[cfg(feature = "research-diagnostics")]
-#[path = "safe_race_timing.rs"]
-mod safe_race_timing;
 #[path = "static_geometry.rs"]
 mod static_geometry;
 #[path = "static_ordering.rs"]
 mod static_ordering;
-#[path = "zero_stock_alternate_path.rs"]
-mod zero_stock_alternate_path;
-#[path = "zero_stock_component.rs"]
-mod zero_stock_component;
 #[path = "zero_stock_future.rs"]
 mod zero_stock_future;
-#[path = "zero_stock_goal_bound.rs"]
-mod zero_stock_goal_bound;
-#[cfg(feature = "research-diagnostics")]
-pub use safe_race_timing::SafeRaceTiming;
 #[path = "zero_stock_safe_path.rs"]
 mod zero_stock_safe_path;
 
@@ -667,11 +656,7 @@ pub enum ZeroStockSafeRaceMethod {
     #[default]
     Manhattan,
     PathTail,
-    PathTailDag,
-    PathTailBound,
-    PathTailCross,
     PathTailFuture,
-    ManhattanDetour,
 }
 /// Normal research configuration policy. Low-level/product constructors remain OFF.
 pub const RESEARCH_SAFE_RACE_ENABLED: bool = true;
@@ -687,11 +672,7 @@ impl ZeroStockSafeRaceMethod {
         match name {
             "manhattan" => Ok(Self::Manhattan),
             "path_tail" => Ok(Self::PathTail),
-            "path_tail_dag" => Ok(Self::PathTailDag),
-            "path_tail_bound" => Ok(Self::PathTailBound),
-            "path_tail_cross" => Ok(Self::PathTailCross),
             "path_tail_future" => Ok(Self::PathTailFuture),
-            "manhattan_detour" => Ok(Self::ManhattanDetour),
             _ => Err(SearchError::Limits("unsupported safe-race method".into())),
         }
     }
@@ -699,22 +680,14 @@ impl ZeroStockSafeRaceMethod {
         match self {
             Self::Manhattan => "manhattan",
             Self::PathTail => "path_tail",
-            Self::PathTailDag => "path_tail_dag",
-            Self::PathTailBound => "path_tail_bound",
-            Self::PathTailCross => "path_tail_cross",
             Self::PathTailFuture => "path_tail_future",
-            Self::ManhattanDetour => "manhattan_detour",
         }
     }
     pub fn id(self) -> &'static str {
         match self {
             Self::Manhattan => ZERO_STOCK_SAFE_RACE_METHOD,
             Self::PathTail => "zero-stock431-one-path-tail-E-two-keys-v1",
-            Self::PathTailDag => "zero-stock-P-alternate-shortest-dag-complete-E-v1",
-            Self::PathTailBound => "zero-stock-P-point-goal-bound-complete-E-v1",
-            Self::PathTailCross => "zero-stock-P-cross-unreachable-complete-E-v1",
             Self::PathTailFuture => "zero-stock-P-fixed-witness-future-Q-v1",
-            Self::ManhattanDetour => "zero-stock-M-wall-detour-complete-E-v1",
         }
     }
 }
@@ -725,11 +698,7 @@ enum SafeRaceOrigin {
     ImmediateGoal,
     SealedTail,
     Path,
-    AlternatePath,
-    BoundPath,
-    SeparateComponent,
     FuturePath,
-    WallDetour,
 }
 struct SafeRaceProof {
     value: f32,
@@ -807,29 +776,6 @@ pub struct SearchStats {
     pub safe_race_tail_goal_returns: u64,
     pub safe_race_tail_sealed_returns: u64,
     pub safe_race_path_returns: u64,
-    pub safe_race_dag_tests: u64,
-    pub safe_race_dag_vertices: u64,
-    pub safe_race_dag_edge_checks: u64,
-    pub safe_race_dag_passes: u64,
-    pub safe_race_dag_returns: u64,
-    pub safe_race_point_bound_tests: u64,
-    pub safe_race_point_bound_reads: u64,
-    pub safe_race_point_bound_finite_terms: u64,
-    pub safe_race_point_bound_passes: u64,
-    pub safe_race_point_bound_returns: u64,
-    pub safe_race_component_tests: u64,
-    pub safe_race_component_map_missing: u64,
-    pub safe_race_component_passes: u64,
-    pub safe_race_component_returns: u64,
-    pub safe_race_future_history_scans: u64,
-    pub safe_race_future_history_items: u64,
-    pub safe_race_future_history_rejects: u64,
-    pub safe_race_future_returns: u64,
-    pub safe_race_detour_tests: u64,
-    pub safe_race_detour_reads: u64,
-    pub safe_race_detour_finite_terms: u64,
-    pub safe_race_detour_passes: u64,
-    pub safe_race_detour_returns: u64,
     pub safe_race_tail_tests: u64,
     pub safe_race_tail_goal_passes: u64,
     pub safe_race_tail_sealed_tests: u64,
@@ -1358,12 +1304,7 @@ impl From<RulesError> for Interrupted {
     }
 }
 type NodeResult<T> = std::result::Result<T, Interrupted>;
-struct Search<
-    'a,
-    const OBSERVE: bool = false,
-    const TRACE: bool = false,
-    const RACE_TIMING: bool = false,
-> {
+struct Search<'a, const OBSERVE: bool = false, const TRACE: bool = false> {
     eval: &'a dyn StaticEvaluator,
     score_domain: ScoreDomain,
     eval_scratch: EvalScratch,
@@ -1389,12 +1330,8 @@ struct Search<
     lmr_observation: Option<&'a mut LmrObservation>,
     #[cfg(feature = "research-diagnostics")]
     trial_trace: Option<&'a mut LmrTrialTrace>,
-    #[cfg(feature = "research-diagnostics")]
-    safe_race_timing: Option<&'a mut SafeRaceTiming>,
 }
-impl<const OBSERVE: bool, const TRACE: bool, const RACE_TIMING: bool>
-    Search<'_, OBSERVE, TRACE, RACE_TIMING>
-{
+impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
     fn key(&mut self, c: &SigmaContext) -> Key {
         let key = Key::of(c);
         self.stats.tt_key_builds += 1;
@@ -1410,22 +1347,12 @@ impl<const OBSERVE: bool, const TRACE: bool, const RACE_TIMING: bool>
         }
         Ok(())
     }
-    fn enter(&mut self, c: &SigmaContext) -> NodeResult<()> {
+    fn enter(&mut self) -> NodeResult<()> {
         self.control()?;
         if self.stats.nodes >= self.limits.max_nodes {
             return Err(Interrupted::Stop(StopReason::NodeLimit));
         }
         self.stats.nodes += 1;
-        #[cfg(feature = "research-diagnostics")]
-        if RACE_TIMING && let Some(timing) = self.safe_race_timing.as_deref_mut() {
-            if c.position().walls_remaining == [0, 0] {
-                timing.stock0_nodes += 1;
-            } else {
-                timing.positive_stock_nodes += 1;
-            }
-        }
-        #[cfg(not(feature = "research-diagnostics"))]
-        let _ = c;
         Ok(())
     }
     fn ordered(
@@ -1695,152 +1622,121 @@ impl<const OBSERVE: bool, const TRACE: bool, const RACE_TIMING: bool>
         self.control()?;
         let mover = c.position().turn;
         let undo = c.make_move(action)?;
-        // Boundary: final-wall make is outside; all following cursor/path/
-        // accumulator restoration and canonical undo are inside the span.
-        #[cfg(feature = "research-diagnostics")]
-        let race_span = if RACE_TIMING {
-            self.safe_race_timing
-                .as_deref_mut()
-                .and_then(|timing| timing.begin(c.position().walls_remaining == [0, 0]))
-        } else {
-            None
-        };
-        let returned = (|| {
-            let parent_context = self.context;
-            let parent_board = self.board;
-            if let Some(ref mut board) = self.board {
-                if let Err(error) = board.advance(&undo, c) {
-                    c.unmake_move(undo)?;
-                    return Err(error.into());
-                }
-                self.stats.tt_board_hash_updates += 1;
-            }
-            if let Some(ref mut context) = self.context {
-                if let Err(error) = context.advance(&undo, c) {
-                    c.unmake_move(undo)?;
-                    self.context = parent_context;
-                    self.board = parent_board;
-                    return Err(error.into());
-                }
-                self.stats.tt_context_transitions += 1;
-            }
-            // Only signed history consumes speculative actor/lag contexts.
-            let track_path = self.ordering.is_some();
-            if track_path {
-                self.path.push(PlayedMove {
-                    colour: mover,
-                    action,
-                });
-            }
-            // Taking the slot keeps payloads on the heap and the parent borrow local;
-            // deeper recursion can never alias this active child.
-            let pooled = ply < self.child_buffers.len();
-            let mut a = self.child_buffers.get_mut(ply).and_then(Option::take);
-            // The restore happens even when evaluation, budget or cancellation fails.
-            let result = (|| {
-                let mut entered = false;
-                // True goal/threefold leaves bypass FT and head evaluation as well.
-                if c.terminal_value().is_none() {
-                    if self.stats.zero_stock_safe_race_enabled
-                        && depth > 0
-                        && c.position().walls_remaining == [0, 0]
-                    {
-                        self.enter(c)?;
-                        entered = true;
-                        self.stats.safe_race_stock0_opportunities += 1;
-                        if let Some(proof) = self.safe_race_value(c, a.as_ref(), parent, depth)? {
-                            self.control()?;
-                            self.stats.safe_race_proven_leaves += 1;
-                            match proof.origin {
-                                SafeRaceOrigin::Tt => self.stats.safe_race_tt_returns += 1,
-                                SafeRaceOrigin::Manhattan => self.stats.safe_race_m_returns += 1,
-                                SafeRaceOrigin::ImmediateGoal => {
-                                    self.stats.safe_race_tail_goal_returns += 1
-                                }
-                                SafeRaceOrigin::SealedTail => {
-                                    self.stats.safe_race_tail_sealed_returns += 1
-                                }
-                                SafeRaceOrigin::Path => self.stats.safe_race_path_returns += 1,
-                                SafeRaceOrigin::AlternatePath => {
-                                    self.stats.safe_race_dag_returns += 1
-                                }
-                                SafeRaceOrigin::BoundPath => {
-                                    self.stats.safe_race_point_bound_returns += 1
-                                }
-                                SafeRaceOrigin::SeparateComponent => {
-                                    self.stats.safe_race_component_returns += 1
-                                }
-                                SafeRaceOrigin::FuturePath => {
-                                    self.stats.safe_race_future_returns += 1
-                                }
-                                SafeRaceOrigin::WallDetour => {
-                                    self.stats.safe_race_detour_returns += 1
-                                }
-                            }
-                            return Ok(proof.value);
-                        }
-                    }
-                    if self.zero_stock_approx_leaf(c, depth) {
-                        // This branch replaces negamax entry, not its caller's make,
-                        // fingerprint, path or canonical undo. Count/control once.
-                        if !entered {
-                            self.enter(c)?;
-                        }
-                        let value = self.zero_stock_approx_value(c, a.as_ref(), parent, depth)?;
-                        self.control()?;
-                        self.stats.zero_stock_approx_terminations += 1;
-                        return Ok(value);
-                    }
-                    self.eval.advance_move_context(parent, c, &undo, &mut a)?;
-                    if a.is_some() {
-                        self.stats.delta_updates += 1;
-                    }
-                }
-                self.control()?;
-                if entered {
-                    self.negamax_entered(c, a.as_ref(), depth, -window[1], -window[0], ply)
-                } else {
-                    self.negamax(c, a.as_ref(), depth, -window[1], -window[0], ply)
-                }
-            })();
-            if pooled {
-                self.child_buffers[ply] = a;
-            }
-            if track_path {
-                let popped = self.path.pop();
-                debug_assert_eq!(
-                    popped,
-                    Some(PlayedMove {
-                        colour: mover,
-                        action
-                    })
-                );
-            }
-            // If canonical undo fails, clear numeric authority and propagate failure.
-            // Do not report the context restored on a failed canonical undo.
-            if let Err(error) = c.unmake_move(undo) {
-                self.context = None;
-                self.board = None;
+        let parent_context = self.context;
+        let parent_board = self.board;
+        if let Some(ref mut board) = self.board {
+            if let Err(error) = board.advance(&undo, c) {
+                c.unmake_move(undo)?;
                 return Err(error.into());
             }
-            self.context = parent_context;
-            self.board = parent_board;
-            let result = result.map(|v| -v);
-            #[cfg(feature = "research-diagnostics")]
-            if OBSERVE && let Some(o) = self.lmr_observation.as_deref_mut() {
-                o.child_return(c, &self.path, ply - 1, action, &result);
-            }
-            #[cfg(feature = "research-diagnostics")]
-            if TRACE && let Some(trace) = self.trial_trace.as_deref_mut() {
-                trace.child_return(ply, action, &result, &self.stats);
-            }
-            result
-        })();
-        #[cfg(feature = "research-diagnostics")]
-        if RACE_TIMING && let Some(timing) = self.safe_race_timing.as_deref_mut() {
-            timing.end(race_span);
+            self.stats.tt_board_hash_updates += 1;
         }
-        returned
+        if let Some(ref mut context) = self.context {
+            if let Err(error) = context.advance(&undo, c) {
+                c.unmake_move(undo)?;
+                self.context = parent_context;
+                self.board = parent_board;
+                return Err(error.into());
+            }
+            self.stats.tt_context_transitions += 1;
+        }
+        // Only signed history consumes speculative actor/lag contexts.
+        let track_path = self.ordering.is_some();
+        if track_path {
+            self.path.push(PlayedMove {
+                colour: mover,
+                action,
+            });
+        }
+        // Taking the slot keeps payloads on the heap and the parent borrow local;
+        // deeper recursion can never alias this active child.
+        let pooled = ply < self.child_buffers.len();
+        let mut a = self.child_buffers.get_mut(ply).and_then(Option::take);
+        // The restore happens even when evaluation, budget or cancellation fails.
+        let result = (|| {
+            let mut entered = false;
+            // True goal/threefold leaves bypass FT and head evaluation as well.
+            if c.terminal_value().is_none() {
+                if self.stats.zero_stock_safe_race_enabled
+                    && depth > 0
+                    && c.position().walls_remaining == [0, 0]
+                {
+                    self.enter()?;
+                    entered = true;
+                    self.stats.safe_race_stock0_opportunities += 1;
+                    if let Some(proof) = self.safe_race_value(c, a.as_ref(), parent, depth)? {
+                        self.control()?;
+                        self.stats.safe_race_proven_leaves += 1;
+                        match proof.origin {
+                            SafeRaceOrigin::Tt => self.stats.safe_race_tt_returns += 1,
+                            SafeRaceOrigin::Manhattan => self.stats.safe_race_m_returns += 1,
+                            SafeRaceOrigin::ImmediateGoal => {
+                                self.stats.safe_race_tail_goal_returns += 1
+                            }
+                            SafeRaceOrigin::SealedTail => {
+                                self.stats.safe_race_tail_sealed_returns += 1
+                            }
+                            SafeRaceOrigin::Path => self.stats.safe_race_path_returns += 1,
+                            SafeRaceOrigin::FuturePath => self.stats.safe_race_path_returns += 1,
+                        }
+                        return Ok(proof.value);
+                    }
+                }
+                if self.zero_stock_approx_leaf(c, depth) {
+                    // This branch replaces negamax entry, not its caller's make,
+                    // fingerprint, path or canonical undo. Count/control once.
+                    if !entered {
+                        self.enter()?;
+                    }
+                    let value = self.zero_stock_approx_value(c, a.as_ref(), parent, depth)?;
+                    self.control()?;
+                    self.stats.zero_stock_approx_terminations += 1;
+                    return Ok(value);
+                }
+                self.eval.advance_move_context(parent, c, &undo, &mut a)?;
+                if a.is_some() {
+                    self.stats.delta_updates += 1;
+                }
+            }
+            self.control()?;
+            if entered {
+                self.negamax_entered(c, a.as_ref(), depth, -window[1], -window[0], ply)
+            } else {
+                self.negamax(c, a.as_ref(), depth, -window[1], -window[0], ply)
+            }
+        })();
+        if pooled {
+            self.child_buffers[ply] = a;
+        }
+        if track_path {
+            let popped = self.path.pop();
+            debug_assert_eq!(
+                popped,
+                Some(PlayedMove {
+                    colour: mover,
+                    action
+                })
+            );
+        }
+        // If canonical undo fails, clear numeric authority and propagate failure.
+        // Do not report the context restored on a failed canonical undo.
+        if let Err(error) = c.unmake_move(undo) {
+            self.context = None;
+            self.board = None;
+            return Err(error.into());
+        }
+        self.context = parent_context;
+        self.board = parent_board;
+        let result = result.map(|v| -v);
+        #[cfg(feature = "research-diagnostics")]
+        if OBSERVE && let Some(o) = self.lmr_observation.as_deref_mut() {
+            o.child_return(c, &self.path, ply - 1, action, &result);
+        }
+        #[cfg(feature = "research-diagnostics")]
+        if TRACE && let Some(trace) = self.trial_trace.as_deref_mut() {
+            trace.child_return(ply, action, &result, &self.stats);
+        }
+        result
     }
 
     fn safe_race_value(
@@ -1901,20 +1797,7 @@ impl<const OBSERVE: bool, const TRACE: bool, const RACE_TIMING: bool>
         if m_winner.is_some() {
             self.stats.safe_race_geometry_passes += 1;
         }
-        let mut geometry = m_winner.map(|winner| (SafeRaceOrigin::Manhattan, winner));
-        // E only: restore old global L for this issued comparison. Remove its
-        // selector/ingress if no concrete use remains after this comparison.
-        if geometry.is_none() && method == ZeroStockSafeRaceMethod::ManhattanDetour {
-            self.stats.safe_race_detour_tests += 1;
-            let maps = cached.or_else(|| self.eval_scratch.distances.prepared_maps(p));
-            let bound = zero_stock_goal_bound::goal_bound(manhattan, p.pawns[0], p.pawns[1], maps);
-            self.stats.safe_race_detour_reads += u64::from(bound.scalar_reads);
-            self.stats.safe_race_detour_finite_terms += u64::from(bound.finite_terms);
-            if let Some(winner) = safe_race_winner(ds, other, bound.value) {
-                self.stats.safe_race_detour_passes += 1;
-                geometry = Some((SafeRaceOrigin::WallDetour, winner));
-            }
-        }
+        let geometry = m_winner.map(|winner| (SafeRaceOrigin::Manhattan, winner));
         if let Some((origin, winner)) = geometry {
             self.control()?;
             // D must first select its actual witness. It never scans full E
@@ -1933,11 +1816,7 @@ impl<const OBSERVE: bool, const TRACE: bool, const RACE_TIMING: bool>
         if proof.is_none()
             && matches!(
                 self.stats.zero_stock_safe_race_method,
-                ZeroStockSafeRaceMethod::PathTail
-                    | ZeroStockSafeRaceMethod::PathTailDag
-                    | ZeroStockSafeRaceMethod::PathTailBound
-                    | ZeroStockSafeRaceMethod::PathTailCross
-                    | ZeroStockSafeRaceMethod::PathTailFuture
+                ZeroStockSafeRaceMethod::PathTail | ZeroStockSafeRaceMethod::PathTailFuture
             )
         {
             if ds == 1 {
@@ -1981,8 +1860,6 @@ impl<const OBSERVE: bool, const TRACE: bool, const RACE_TIMING: bool>
                 } else {
                     None
                 };
-                let mut bound_used = false;
-                let stats = &mut self.stats;
                 let checked = maps.map(|maps| {
                     if method == ZeroStockSafeRaceMethod::PathTailFuture {
                         zero_stock_safe_path::timed_path_record(
@@ -1993,33 +1870,6 @@ impl<const OBSERVE: bool, const TRACE: bool, const RACE_TIMING: bool>
                             &maps[player],
                             |a, b| p.is_edge_open(a, b),
                             future_witness.as_mut(),
-                        )
-                    } else if method == ZeroStockSafeRaceMethod::PathTailBound {
-                        zero_stock_safe_path::timed_path_bound(
-                            9,
-                            p.pawns,
-                            (player, delta),
-                            opponent_goal,
-                            &maps[player],
-                            |a, b| p.is_edge_open(a, b),
-                            |cell, m, threshold| {
-                                stats.safe_race_point_bound_tests += 1;
-                                let bound = zero_stock_goal_bound::goal_bound(
-                                    m,
-                                    cell,
-                                    p.pawns[player ^ 1],
-                                    Some(maps),
-                                );
-                                stats.safe_race_point_bound_reads += u64::from(bound.scalar_reads);
-                                stats.safe_race_point_bound_finite_terms +=
-                                    u64::from(bound.finite_terms);
-                                let pass = u16::from(bound.value) > threshold;
-                                if pass {
-                                    stats.safe_race_point_bound_passes += 1;
-                                }
-                                bound_used |= pass;
-                                pass
-                            },
                         )
                     } else {
                         zero_stock_safe_path::timed_path(
@@ -2053,60 +1903,28 @@ impl<const OBSERVE: bool, const TRACE: bool, const RACE_TIMING: bool>
                         }
                         None => {}
                     }
-                    let mut origin = checked.reject.is_none().then_some(
+                    let origin = checked.reject.is_none().then_some(
                         if method == ZeroStockSafeRaceMethod::PathTailFuture {
                             SafeRaceOrigin::FuturePath
-                        } else if bound_used {
-                            SafeRaceOrigin::BoundPath
                         } else {
                             SafeRaceOrigin::Path
                         },
                     );
-                    if self.stats.zero_stock_safe_race_method
-                        == ZeroStockSafeRaceMethod::PathTailDag
-                        && matches!(
-                            checked.reject,
-                            Some(PathReject::Intermediate | PathReject::Endpoint)
-                        )
-                    {
-                        // Candidate A only. Existing P's first attempt and its
-                        // rejection/work counters remain visible separately.
-                        self.stats.safe_race_dag_tests += 1;
-                        let dag = zero_stock_alternate_path::alternate_path(
-                            9,
-                            p.pawns,
-                            player,
-                            delta,
-                            opponent_goal,
-                            &maps.ok_or(RulesError::InvalidUndo)?[player],
-                            |a, b| p.is_edge_open(a, b),
-                        );
-                        self.stats.safe_race_dag_vertices += u64::from(dag.vertices);
-                        self.stats.safe_race_dag_edge_checks += u64::from(dag.edge_checks);
-                        if dag.accepted {
-                            self.stats.safe_race_dag_passes += 1;
-                            origin = Some(SafeRaceOrigin::AlternatePath);
-                        }
-                    }
                     if let Some(origin) = origin {
                         self.stats.safe_race_path_passes += 1;
                         self.control()?;
                         let accepted = if method == ZeroStockSafeRaceMethod::PathTailFuture {
                             self.stats.safe_race_history_checks += 1;
-                            self.stats.safe_race_future_history_scans += 1;
-                            let mut items = 0;
                             let checked_history = zero_stock_future::future_history_clear(
                                 p,
                                 player,
                                 &future_witness.as_ref().ok_or(RulesError::InvalidUndo)?
                                     [..=usize::from(checked.walked)],
-                                c.occurrences().inspect(|_| items += 1),
+                                c.occurrences(),
                                 || self.control(),
                             );
-                            self.stats.safe_race_future_history_items += items;
                             let accepted = checked_history?;
                             if !accepted {
-                                self.stats.safe_race_future_history_rejects += 1;
                                 self.stats.safe_race_history_rejects += 1;
                             }
                             accepted
@@ -2115,7 +1933,6 @@ impl<const OBSERVE: bool, const TRACE: bool, const RACE_TIMING: bool>
                         } else {
                             self.stats.safe_race_history_checks += 1;
                             let accepted = safe_race_history_empty(c, || self.control())?;
-                            empty = Some(accepted);
                             if !accepted {
                                 self.stats.safe_race_history_rejects += 1;
                             }
@@ -2129,37 +1946,6 @@ impl<const OBSERVE: bool, const TRACE: bool, const RACE_TIMING: bool>
                     }
                 } else {
                     self.stats.safe_race_path_map_missing += 1;
-                }
-            }
-        }
-        // C only, after maintained P. Missing/invalid map is not unreachable.
-        if proof.is_none() && method == ZeroStockSafeRaceMethod::PathTailCross {
-            self.control()?;
-            self.stats.safe_race_component_tests += 1;
-            let maps = cached.or_else(|| self.eval_scratch.distances.prepared_maps(p));
-            if maps.is_none() {
-                self.stats.safe_race_component_map_missing += 1;
-            }
-            if let Some(player) = zero_stock_component::separate_component_winner(p, maps) {
-                self.stats.safe_race_component_passes += 1;
-                self.control()?;
-                let accepted = if let Some(accepted) = empty {
-                    accepted
-                } else {
-                    self.stats.safe_race_history_checks += 1;
-                    let accepted = safe_race_history_empty(c, || self.control())?;
-                    if !accepted {
-                        self.stats.safe_race_history_rejects += 1;
-                    }
-                    accepted
-                };
-                if accepted {
-                    let winner = if player == own {
-                        RaceWinner::Mover
-                    } else {
-                        RaceWinner::Other
-                    };
-                    proof = Some((SafeRaceOrigin::SeparateComponent, winner));
                 }
             }
         }
@@ -2293,7 +2079,7 @@ impl<const OBSERVE: bool, const TRACE: bool, const RACE_TIMING: bool>
         beta: f32,
         ply: usize,
     ) -> NodeResult<f32> {
-        self.enter(c)?;
+        self.enter()?;
         self.negamax_entered(c, a, depth, alpha, beta, ply)
     }
 
@@ -2667,7 +2453,7 @@ impl<const OBSERVE: bool, const TRACE: bool, const RACE_TIMING: bool>
         depth: u16,
         action: u16,
     ) -> NodeResult<(u16, f32)> {
-        self.enter(c)?;
+        self.enter()?;
         if !c.legal_ids().contains(&action) {
             return Err(Interrupted::Error(SearchError::Root(
                 "illegal forced root action".into(),
@@ -2693,7 +2479,7 @@ impl<const OBSERVE: bool, const TRACE: bool, const RACE_TIMING: bool>
         depth: u16,
         previous: Option<u16>,
     ) -> NodeResult<(u16, f32)> {
-        self.enter(c)?;
+        self.enter()?;
         let mut previous = previous;
         let mut legal = None;
         if self.limits.use_tt {
@@ -3432,52 +3218,6 @@ impl SearchSession {
             ),
         )
     }
-    #[cfg(feature = "research-diagnostics")]
-    pub fn search_with_safe_race_timing(
-        &mut self,
-        root: &SigmaContext,
-        limits: &SearchLimits,
-        cancel: &AtomicBool,
-        timing: &mut SafeRaceTiming,
-    ) -> Result<SearchResult> {
-        *timing = SafeRaceTiming::default();
-        let mut on_completed = |_: &SearchResult| {};
-        let mut invocation = SearchInvocation::root(&mut on_completed);
-        invocation.safe_race_timing = Some(timing);
-        let root_walls = root
-            .position()
-            .walls_remaining
-            .into_iter()
-            .map(u16::from)
-            .sum();
-        self.set_zero_stock_approx_effective(permit_zero_stock_approx(
-            self.zero_stock_approx_min_root_walls,
-            root_walls,
-            limits.max_depth,
-        ));
-        invocation.safe_race_method = self.zero_stock_safe_race_method;
-        search_in_table::<false, false>(
-            root,
-            self.evaluator.as_ref(),
-            limits,
-            cancel,
-            None,
-            invocation,
-            (
-                &mut self.table,
-                self.score_domain,
-                self.ordering.as_mut(),
-                self.ordering_diagnostics,
-                self.static_enabled,
-                (self.lmr, self.lmr_method),
-                (
-                    self.zero_stock_approx_effective,
-                    self.zero_stock_approx_method,
-                    self.zero_stock_safe_race,
-                ),
-            ),
-        )
-    }
 }
 type SearchTableAndDomain<'table, 'history> = (
     &'table mut Table,
@@ -3499,8 +3239,6 @@ struct SearchInvocation<'a> {
     trial: Option<lmr_observation::TrialInvocation<'a>>,
     #[cfg(feature = "research-diagnostics")]
     trial_trace: Option<&'a mut LmrTrialTrace>,
-    #[cfg(feature = "research-diagnostics")]
-    safe_race_timing: Option<&'a mut SafeRaceTiming>,
 }
 impl<'a> SearchInvocation<'a> {
     fn root(on_completed: &'a mut dyn FnMut(&SearchResult)) -> Self {
@@ -3514,45 +3252,11 @@ impl<'a> SearchInvocation<'a> {
             trial: None,
             #[cfg(feature = "research-diagnostics")]
             trial_trace: None,
-            #[cfg(feature = "research-diagnostics")]
-            safe_race_timing: None,
         }
     }
 }
 
 fn search_in_table<const OBSERVE: bool, const TRACE: bool>(
-    root: &SigmaContext,
-    evaluator: &dyn StaticEvaluator,
-    limits: &SearchLimits,
-    cancel: &AtomicBool,
-    orderer: Option<&dyn MoveOrderer>,
-    invocation: SearchInvocation<'_>,
-    table_and_domain: SearchTableAndDomain<'_, '_>,
-) -> Result<SearchResult> {
-    #[cfg(feature = "research-diagnostics")]
-    if invocation.safe_race_timing.is_some() {
-        return search_in_table_timed::<OBSERVE, TRACE, true>(
-            root,
-            evaluator,
-            limits,
-            cancel,
-            orderer,
-            invocation,
-            table_and_domain,
-        );
-    }
-    search_in_table_timed::<OBSERVE, TRACE, false>(
-        root,
-        evaluator,
-        limits,
-        cancel,
-        orderer,
-        invocation,
-        table_and_domain,
-    )
-}
-
-fn search_in_table_timed<const OBSERVE: bool, const TRACE: bool, const RACE_TIMING: bool>(
     root: &SigmaContext,
     evaluator: &dyn StaticEvaluator,
     limits: &SearchLimits,
@@ -3634,7 +3338,7 @@ fn search_in_table_timed<const OBSERVE: bool, const TRACE: bool, const RACE_TIMI
         .into_iter()
         .map(u16::from)
         .sum();
-    let mut state = Search::<OBSERVE, TRACE, RACE_TIMING> {
+    let mut state = Search::<OBSERVE, TRACE> {
         eval: evaluator,
         score_domain,
         eval_scratch: evaluator.create_scratch(),
@@ -3686,8 +3390,6 @@ fn search_in_table_timed<const OBSERVE: bool, const TRACE: bool, const RACE_TIMI
         lmr_observation: invocation.observation,
         #[cfg(feature = "research-diagnostics")]
         trial_trace: invocation.trial_trace,
-        #[cfg(feature = "research-diagnostics")]
-        safe_race_timing: invocation.safe_race_timing,
     };
     #[cfg(feature = "research-diagnostics")]
     if let Some(cold) = &invocation.trial {
@@ -3703,10 +3405,6 @@ fn search_in_table_timed<const OBSERVE: bool, const TRACE: bool, const RACE_TIMI
         elapsed: Duration::ZERO,
     };
     let mut c = root.clone();
-    #[cfg(feature = "research-diagnostics")]
-    if RACE_TIMING && let Some(timing) = state.safe_race_timing.as_deref_mut() {
-        timing.root_stock0 = Some(root.position().walls_remaining == [0, 0]);
-    }
     let run = (|| -> NodeResult<()> {
         state.control()?;
         if let Some(v) = c.terminal_value() {
@@ -3809,10 +3507,6 @@ fn search_in_table_timed<const OBSERVE: bool, const TRACE: bool, const RACE_TIMI
                 !state.path.is_empty()
             }
         };
-    #[cfg(feature = "research-diagnostics")]
-    if RACE_TIMING && let Some(timing) = state.safe_race_timing.as_deref_mut() {
-        timing.parent_restored = Some(!parent_not_restored);
-    }
     if parent_not_restored {
         #[cfg(feature = "research-diagnostics")]
         if TRACE && let Some(trace) = state.trial_trace.as_deref_mut() {
@@ -4158,8 +3852,6 @@ mod persistent_tt_tests {
                 lmr_observation: None,
                 #[cfg(feature = "research-diagnostics")]
                 trial_trace: None,
-                #[cfg(feature = "research-diagnostics")]
-                safe_race_timing: None,
             };
             let mut child = root.clone();
             let value = state
@@ -4849,8 +4541,6 @@ mod child_buffer_tests {
                 lmr_observation: None,
                 #[cfg(feature = "research-diagnostics")]
                 trial_trace: None,
-                #[cfg(feature = "research-diagnostics")]
-                safe_race_timing: None,
             };
             let result = state.child(
                 &mut c,
@@ -5320,33 +5010,32 @@ mod forced_root419_tests;
 mod zero_stock_continuous_tests;
 
 #[cfg(test)]
-#[path = "zero_stock_alternate_path_tests.rs"]
-mod zero_stock_alternate_path_tests;
-
-#[cfg(all(test, feature = "research-diagnostics"))]
-#[path = "safe_race_timing_tests.rs"]
-mod safe_race_timing_tests;
-
-#[cfg(test)]
-#[path = "zero_stock_goal_bound_tests.rs"]
-mod zero_stock_goal_bound_tests;
-
-#[cfg(test)]
-#[path = "zero_stock_component_tests.rs"]
-mod zero_stock_component_tests;
-
-#[cfg(test)]
 #[path = "zero_stock_future_tests.rs"]
 mod zero_stock_future_tests;
 
 #[cfg(test)]
 #[test]
-fn candidate_e_global_method_control_is_separate_from_point_policy() {
-    let e = ZeroStockSafeRaceMethod::from_name("manhattan_detour").unwrap();
-    let b = ZeroStockSafeRaceMethod::from_name("path_tail_bound").unwrap();
-    assert_eq!(e, ZeroStockSafeRaceMethod::ManhattanDetour);
-    assert_ne!(e.id(), b.id());
-    assert_ne!(e.id(), ZeroStockSafeRaceMethod::Manhattan.id());
-    assert_eq!(RESEARCH_SAFE_RACE_METHOD, ZeroStockSafeRaceMethod::PathTail);
-    const { assert!(RESEARCH_SAFE_RACE_ENABLED) };
+fn retained_safe_race_methods_reject_completed_comparison_names() {
+    for name in [
+        "path_tail_dag",
+        "path_tail_bound",
+        "path_tail_cross",
+        "manhattan_detour",
+    ] {
+        assert!(ZeroStockSafeRaceMethod::from_name(name).is_err());
+    }
+    for method in [
+        ZeroStockSafeRaceMethod::Manhattan,
+        ZeroStockSafeRaceMethod::PathTail,
+        ZeroStockSafeRaceMethod::PathTailFuture,
+    ] {
+        assert_eq!(
+            ZeroStockSafeRaceMethod::from_name(method.name()).unwrap(),
+            method
+        );
+    }
+    assert_ne!(
+        ZeroStockSafeRaceMethod::PathTailFuture.id(),
+        ZeroStockSafeRaceMethod::PathTail.id()
+    );
 }

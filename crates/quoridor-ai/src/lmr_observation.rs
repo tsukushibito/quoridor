@@ -477,8 +477,6 @@ impl SearchSession {
                 safe_race_method: self.zero_stock_safe_race_method,
                 trial: None,
                 trial_trace: None,
-                #[cfg(feature = "research-diagnostics")]
-                safe_race_timing: None,
             },
             (
                 &mut self.table,
@@ -566,8 +564,6 @@ impl SearchSession {
                 on_completed: &mut callback,
                 observation: None,
                 trial_trace: Some(&mut trace),
-                #[cfg(feature = "research-diagnostics")]
-                safe_race_timing: None,
                 safe_race_method: self.zero_stock_safe_race_method,
                 trial: Some(TrialInvocation {
                     action: branch.facts.action,
@@ -752,8 +748,6 @@ mod trial_tests {
                 on_completed: &mut callback,
                 observation: None,
                 trial_trace: Some(&mut trace),
-                #[cfg(feature = "research-diagnostics")]
-                safe_race_timing: None,
                 safe_race_method: ZeroStockSafeRaceMethod::Manhattan,
                 trial: Some(TrialInvocation {
                     action: b.facts.action,
