@@ -1,0 +1,434 @@
+{
+  "at": "2026-10-17T09:43:15.305461+00:00",
+  "purpose": "Human431 saved Search-clock/stock0-start explanation only; current432 continues",
+  "input_csv": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/zero-stock-path431/cost-analysis-v1/calls.csv",
+    "sha256": "c7fe18b212b5a04917b74c265d37b29689baa6e4ceb83df6f4f6a6840d26c906",
+    "bytes": 147233,
+    "mode": "0644"
+  },
+  "original_publication": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/zero-stock-path431/receipt.json",
+    "sha256": "9ab27e8504fd69295c9abbb93a4f8a7b0148478427eb05a0488fdbc403bb09a5",
+    "bytes": 15759,
+    "mode": "0644"
+  },
+  "input_binding": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/zero-stock-path431/cost-analysis-v1/input-binding.json",
+    "sha256": "f8eb4c72f1e7e7fb12851b98bafeb3182723a8f92d5e5016593f8f3ce40b8093",
+    "bytes": 93382,
+    "mode": "0644"
+  },
+  "aggregation": "Sum search_seconds within evaluator/LMR/method/pass and requested roots, then median of two pass sums",
+  "clock_source": {
+    "commit": "eb30b2ea08059d7ae8cd535d3cf0a6fa5be4ca57",
+    "path": "crates/quoridor-runner/src/measurement.rs",
+    "sha256": "f3ba22666ee58d2b8b01d1ec1dcc03d8eead3e2c729e391b6d273cb72e3aa614",
+    "bytes": 107393
+  },
+  "clock_lines_430_through_470": [
+    "    fn call(&mut self, request: &Request, cancel: &AtomicBool) -> Result<Value> {",
+    "        let root = self.root.as_ref().ok_or(\"measurement root not prepared\")?;",
+    "        let session = self",
+    "            .session",
+    "            .as_mut()",
+    "            .ok_or(\"measurement session not prepared\")?;",
+    "        session.set_ordering_observation(request.diagnostic);",
+    "        let limits = SearchLimits {",
+    "            max_depth: request.depth,",
+    "            max_nodes: request.node_cap,",
+    "            time_limit: request.time_limit_ms.map(std::time::Duration::from_millis),",
+    "            tt_entries: self.settings.tt_entries,",
+    "            use_pvs: self.settings.use_pvs,",
+    "            use_tt: self.settings.use_tt,",
+    "        };",
+    "        let mut lmr_observation = request",
+    "            .observe_lmr",
+    "            .then(|| Box::new(alphabeta::LmrObservation::default()));",
+    "        let inference_before = self.sigma_value.as_ref().map(|e| e.work()).transpose()?;",
+    "        let search_started = Instant::now();",
+    "        let mut completed_depths = Vec::new();",
+    "        let result = if let Some(observation) = lmr_observation.as_deref_mut() {",
+    "            session.search_with_lmr_observation(root, &limits, cancel, observation)",
+    "        } else if request.observe_completed_depths {",
+    "            session.search_with_updates(root, &limits, cancel, &mut |completed| {",
+    "                completed_depths.push(completed_depth_observation(completed));",
+    "            })",
+    "        } else {",
+    "            session.search(root, &limits, cancel)",
+    "        };",
+    "        let search_seconds = search_started.elapsed().as_secs_f64();",
+    "        let after = identity(root);",
+    "        let mut row = match result {",
+    "            Ok(result) => {",
+    "                let mut legal = Vec::new();",
+    "                let mut row = observed(&result);",
+    "                let complete = match validate_return(root, &result, request, Some(&mut legal)) {",
+    "                    Ok(complete) => complete,",
+    "                    Err(error) => {",
+    "                        row[\"validation_error\"] = fact(&*error);",
+    "                        false"
+  ],
+  "summaries": [
+    {
+      "scope": "all8",
+      "evaluator": "nnue",
+      "lmr": true,
+      "methods": {
+        "O": {
+          "pass_seconds": [
+            "10.507060360",
+            "10.542895443"
+          ],
+          "median_seconds": "10.5249779015",
+          "two_pass_calls": 32,
+          "visited_nodes": 16888294,
+          "evaluation_events": 12268212,
+          "fresh_path_returns": 0
+        },
+        "M": {
+          "pass_seconds": [
+            "10.525870298",
+            "10.494073083"
+          ],
+          "median_seconds": "10.5099716905",
+          "two_pass_calls": 32,
+          "visited_nodes": 16825636,
+          "evaluation_events": 12255116,
+          "fresh_path_returns": 0
+        },
+        "P": {
+          "pass_seconds": [
+            "10.521550664",
+            "10.403294108"
+          ],
+          "median_seconds": "10.462422386",
+          "two_pass_calls": 32,
+          "visited_nodes": 16783678,
+          "evaluation_events": 12235124,
+          "fresh_path_returns": 12956
+        }
+      },
+      "P_vs_O_percent": "-0.5943529391266912390675863700",
+      "P_vs_M_percent": "-0.4524208618276296773817651600"
+    },
+    {
+      "scope": "all8",
+      "evaluator": "nnue",
+      "lmr": false,
+      "methods": {
+        "O": {
+          "pass_seconds": [
+            "14.579723199",
+            "14.459963154"
+          ],
+          "median_seconds": "14.5198431765",
+          "two_pass_calls": 32,
+          "visited_nodes": 23859428,
+          "evaluation_events": 16924554,
+          "fresh_path_returns": 0
+        },
+        "M": {
+          "pass_seconds": [
+            "14.412051233",
+            "14.583949526"
+          ],
+          "median_seconds": "14.4980003795",
+          "two_pass_calls": 32,
+          "visited_nodes": 23786426,
+          "evaluation_events": 16902544,
+          "fresh_path_returns": 0
+        },
+        "P": {
+          "pass_seconds": [
+            "14.3041072119999995",
+            "14.263088729"
+          ],
+          "median_seconds": "14.28359797049999975",
+          "two_pass_calls": 32,
+          "visited_nodes": 23568610,
+          "evaluation_events": 16720710,
+          "fresh_path_returns": 63250
+        }
+      },
+      "P_vs_O_percent": "-1.627050672161233517713813030",
+      "P_vs_M_percent": "-1.478841242845894146777705290"
+    },
+    {
+      "scope": "all8",
+      "evaluator": "distance",
+      "lmr": true,
+      "methods": {
+        "O": {
+          "pass_seconds": [
+            "6.044767977",
+            "5.972628198"
+          ],
+          "median_seconds": "6.0086980875",
+          "two_pass_calls": 32,
+          "visited_nodes": 17739462,
+          "evaluation_events": 12589346,
+          "fresh_path_returns": 0
+        },
+        "M": {
+          "pass_seconds": [
+            "5.998994162",
+            "5.863967239"
+          ],
+          "median_seconds": "5.9314807005",
+          "two_pass_calls": 32,
+          "visited_nodes": 17682922,
+          "evaluation_events": 12575272,
+          "fresh_path_returns": 0
+        },
+        "P": {
+          "pass_seconds": [
+            "5.979706287",
+            "5.961770033"
+          ],
+          "median_seconds": "5.970738160",
+          "two_pass_calls": 32,
+          "visited_nodes": 17649618,
+          "evaluation_events": 12560968,
+          "fresh_path_returns": 6068
+        }
+      },
+      "P_vs_O_percent": "-0.6317496227505373059734381300",
+      "P_vs_M_percent": "0.661849232632431120223283300"
+    },
+    {
+      "scope": "all8",
+      "evaluator": "distance",
+      "lmr": false,
+      "methods": {
+        "O": {
+          "pass_seconds": [
+            "6.102719504",
+            "6.193985834"
+          ],
+          "median_seconds": "6.148352669",
+          "two_pass_calls": 32,
+          "visited_nodes": 22917466,
+          "evaluation_events": 16741968,
+          "fresh_path_returns": 0
+        },
+        "M": {
+          "pass_seconds": [
+            "6.059889097",
+            "6.125309552"
+          ],
+          "median_seconds": "6.0925993245",
+          "two_pass_calls": 32,
+          "visited_nodes": 22843254,
+          "evaluation_events": 16719640,
+          "fresh_path_returns": 0
+        },
+        "P": {
+          "pass_seconds": [
+            "6.268996536",
+            "6.210544249"
+          ],
+          "median_seconds": "6.2397703925",
+          "two_pass_calls": 32,
+          "visited_nodes": 22817982,
+          "evaluation_events": 16712244,
+          "fresh_path_returns": 8590
+        }
+      },
+      "P_vs_O_percent": "1.486865318590591733019536100",
+      "P_vs_M_percent": "2.415571091441793695455411700"
+    },
+    {
+      "scope": "stock0_start5",
+      "evaluator": "nnue",
+      "lmr": true,
+      "methods": {
+        "O": {
+          "pass_seconds": [
+            "0.004749797",
+            "0.004475024"
+          ],
+          "median_seconds": "0.0046124105",
+          "two_pass_calls": 20,
+          "visited_nodes": 11026,
+          "evaluation_events": 4490,
+          "fresh_path_returns": 0
+        },
+        "M": {
+          "pass_seconds": [
+            "0.003693340",
+            "0.003546602"
+          ],
+          "median_seconds": "0.003619971",
+          "two_pass_calls": 20,
+          "visited_nodes": 8210,
+          "evaluation_events": 3082,
+          "fresh_path_returns": 0
+        },
+        "P": {
+          "pass_seconds": [
+            "0.000521767",
+            "0.000517536"
+          ],
+          "median_seconds": "0.0005196515",
+          "two_pass_calls": 20,
+          "visited_nodes": 548,
+          "evaluation_events": 50,
+          "fresh_path_returns": 276
+        }
+      },
+      "P_vs_O_percent": "-88.73362420799276213598074152",
+      "P_vs_M_percent": "-85.64487118819460155896276517"
+    },
+    {
+      "scope": "stock0_start5",
+      "evaluator": "nnue",
+      "lmr": false,
+      "methods": {
+        "O": {
+          "pass_seconds": [
+            "0.005184464",
+            "0.004474026"
+          ],
+          "median_seconds": "0.004829245",
+          "two_pass_calls": 20,
+          "visited_nodes": 11026,
+          "evaluation_events": 4490,
+          "fresh_path_returns": 0
+        },
+        "M": {
+          "pass_seconds": [
+            "0.003549088",
+            "0.003590065"
+          ],
+          "median_seconds": "0.0035695765",
+          "two_pass_calls": 20,
+          "visited_nodes": 8210,
+          "evaluation_events": 3082,
+          "fresh_path_returns": 0
+        },
+        "P": {
+          "pass_seconds": [
+            "0.000614666",
+            "0.000724823"
+          ],
+          "median_seconds": "0.0006697445",
+          "two_pass_calls": 20,
+          "visited_nodes": 548,
+          "evaluation_events": 50,
+          "fresh_path_returns": 276
+        }
+      },
+      "P_vs_O_percent": "-86.13148639176517240272547779",
+      "P_vs_M_percent": "-81.23742410339153678314500334"
+    },
+    {
+      "scope": "stock0_start5",
+      "evaluator": "distance",
+      "lmr": true,
+      "methods": {
+        "O": {
+          "pass_seconds": [
+            "0.002441921",
+            "0.002900883"
+          ],
+          "median_seconds": "0.002671402",
+          "two_pass_calls": 20,
+          "visited_nodes": 11176,
+          "evaluation_events": 4598,
+          "fresh_path_returns": 0
+        },
+        "M": {
+          "pass_seconds": [
+            "0.002713363",
+            "0.001945828"
+          ],
+          "median_seconds": "0.0023295955",
+          "two_pass_calls": 20,
+          "visited_nodes": 7922,
+          "evaluation_events": 2968,
+          "fresh_path_returns": 0
+        },
+        "P": {
+          "pass_seconds": [
+            "0.000375538",
+            "0.000361328"
+          ],
+          "median_seconds": "0.000368433",
+          "two_pass_calls": 20,
+          "visited_nodes": 544,
+          "evaluation_events": 48,
+          "fresh_path_returns": 276
+        }
+      },
+      "P_vs_O_percent": "-86.20825319439006184767399291",
+      "P_vs_M_percent": "-84.18467927157311215616616704"
+    },
+    {
+      "scope": "stock0_start5",
+      "evaluator": "distance",
+      "lmr": false,
+      "methods": {
+        "O": {
+          "pass_seconds": [
+            "0.003713766",
+            "0.002474029"
+          ],
+          "median_seconds": "0.0030938975",
+          "two_pass_calls": 20,
+          "visited_nodes": 11176,
+          "evaluation_events": 4598,
+          "fresh_path_returns": 0
+        },
+        "M": {
+          "pass_seconds": [
+            "0.002450519",
+            "0.001923515"
+          ],
+          "median_seconds": "0.002187017",
+          "two_pass_calls": 20,
+          "visited_nodes": 7922,
+          "evaluation_events": 2968,
+          "fresh_path_returns": 0
+        },
+        "P": {
+          "pass_seconds": [
+            "0.000444186",
+            "0.000384040"
+          ],
+          "median_seconds": "0.000414113",
+          "two_pass_calls": 20,
+          "visited_nodes": 544,
+          "evaluation_events": 48,
+          "fresh_path_returns": 276
+        }
+      },
+      "P_vs_O_percent": "-86.61516743848172087148976332",
+      "P_vs_M_percent": "-81.06493913856179444421328229"
+    }
+  ],
+  "documents_before": [
+    {
+      "ref": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/zero-stock-path431/report-ja.md",
+        "sha256": "67346e573532d8fe5596e06906adc5724852b97e1994a9ca71902f818fe6692d",
+        "bytes": 6635,
+        "mode": "0644"
+      },
+      "allocated_B": 8192
+    },
+    {
+      "ref": {
+        "path": "/workspaces/quoridor/docs/research-findings.md",
+        "sha256": "63d3422961f97351e05aeae3c5cf0648e767166c8c937ba9fc2200f7179ab5db",
+        "bytes": 695472,
+        "mode": "0644"
+      },
+      "allocated_B": 696320
+    }
+  ],
+  "new_RAW_decode_native_Search_model_forward_BFS_solver_fit_game_bootstrap": 0,
+  "limits": "Post-hoc fixed5 light start states/two repetitions; no timing inside positive-stock search after the last wall, no equal-work or general-speed/strength inference; original whole criterion/withdrawal retained",
+  "reader_body_STOP": "2026-10-17T09:43:15.305473+00:00",
+  "owned_readers_handles_leases": []
+}

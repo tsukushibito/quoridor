@@ -2,6 +2,8 @@
 
 一本の時刻付き経路と手番側距離1 tailを加えた候補Pは、事前の有限保持基準を満たさず撤去した。追加の経路証明は実際に返ったが、この8開始局面・二反復で保持に足るwhole時間の利益は支持されなかった。411のManhattan条件Mと既定OFFを維持する。
 
+保存Search時計の内訳では、壁ゼロ開始の5局面に大きな時間・仕事量の減少があった。以下にその範囲を補足し、全体wholeの保持判断と分けて記録する。
+
 同じ真正image30c1746aで、BEST43 NNUE／固定DとLMR OFF／ON-depth_rankを別々に比較した。各層O→M→P→P→M→O、元411の8真正prefixと完全履歴、cold→同session warm、Control/PVS/TT1048576、旧近似OFF、D8／各4M nodes／時間上限なし。384呼出し・192sessionsのうち348件が深さ8を完了し、36件はNodeLimit UNKNOWNだった。実243362776 nodes≤1536000000、追加・補充は0。同方式・同温度の192対応はvaluebits/action/PV/work/history/親復元などの非時計値が一致した。
 
 | 評価器 / LMR | O whole中央値(s) | M whole中央値(s) | P whole中央値(s) |         P/M |         P/O |
@@ -16,6 +18,30 @@
 LMR ONのPでは、NNUEで37210回の経路検査から12956回、Dで341638回から6068回の新しいPath returnがあった。M/TT由来を含むcommitted origin合計は全384呼出しでprovenと一致した。LMR ONのP/M nodesはNNUE16783678/16825636、D17649618/17682922で減ったが、異なる選択木・値・仕事の結果であり、同仕事speedupや未探索の回避node数ではない。距離1 tailの実test/returnはこの保存結果では0で、機会の一般不存在やtail単体費用を示さない。map不足とhistory拒否も保存対象では0であり、全入力の資格ではない。
 
 UNKNOWNはr0に集中し、NNUE OFF／D OFFは完成深さ6、D ONは7で各12呼出し。NNUE ONは96/96が深さ8を完了した。補助のLMR OFFと主対象ONを合算して原因を認定せず、選択的な名目深さを全幅WDLや棋力へ置き換えない。
+
+## 保存Search時計と壁ゼロ開始5局面の説明補足
+
+元の[calls.csv](cost-analysis-v1/calls.csv)の`search_seconds`を同じ評価器・LMR・方式・passで合計し、二passの中央値を取った。実Build commit `eb30b2ea08059d7ae8cd535d3cf0a6fa5be4ca57`の`measurement.rs:430..470`では、時計は`session.search(...)`前後に置かれる。外側reset/teardown、prefix再構成prepare、返却後validation/journalは含まない。Search内部の通常準備まで分解した孤立時計ではない。
+
+LMR ON、全8開始局面のSearch秒/passは次のとおり。各pass16callsで、元のUNKNOWNも含む範囲を保持する。
+
+| 評価器 |      O秒/pass |      M秒/pass |      P秒/pass |     P/O差 |     P/M差 |
+| ------ | ------------: | ------------: | ------------: | --------: | --------: |
+| NNUE   | 10.5249779015 | 10.5099716905 | 10.4624223860 | -0.59435% | -0.45242% |
+| 固定D  |  6.0086980875 |  5.9314807005 |  5.9707381600 | -0.63175% | +0.66185% |
+
+元の`root_walls=0`であるr3..r7の5開始局面に絞ると、LMR ONのSearch時間は次の値になる。単位はms/pass。各passは5局面×cold/warmの10calls、二反復計20callsであり、独立20局面ではない。
+
+| 評価器 | O ms/pass | M ms/pass | P ms/pass |      P/O差 |      P/M差 |
+| ------ | --------: | --------: | --------: | ---------: | ---------: |
+| NNUE   | 4.6124105 | 3.6199710 | 0.5196515 | -88.73362% | -85.64487% |
+| 固定D  | 2.6714020 | 2.3295955 | 0.3684330 | -86.20825% | -84.18468% |
+
+同じ20callsのvisited nodesはO/M/P順にNNUE11026/8210/548、固定D11176/7922/544、通常evaluation eventsはNNUE4490/3082/50、固定D4598/2968/48。Pのfresh Path returnsは両評価器とも276だった。実際に訪問した異なる木の記述値で、未訪問の回避nodesやphysical NNUE回数・同仕事speedup・棋力へ換算しない。二passそれぞれの秒数と補助LMR OFFの別集計も[保存値集計](search-clock-supplement.json)に残した。
+
+開始時から壁ゼロのこの5局面ではSearchの改善が見られたが、軽い選択済み5局面・二反復の事後集計であり、数秒を占める他rootへ倍率を外挿しない。正の在庫から始まった探索内部の「最後の壁が置かれた後の部分木」専用時計・深さ別仕事量は保存されておらず、途中到達後や連続対局で初期化を償却する利益はUNKNOWNである。stock0 opportunity/proof eventをその時間へ変換しない。元whole基準の不成立とP撤去を維持し、主要時計を結果後に差し替えて採用を遡及認定しない。この補足による新規実行・P再導入・担当再起床はない。
+
+## 元の確認・撤去と保存
 
 新predicateの固定171盤面対応、phase・等号・endpoint・map形、標準9×9 tailの二key/count、typedTT・取消・復元を限定確認した。最後の追加検査はM失敗／Path成功の二phaseを実child入口で通し、Eempty受入れと関連prior count2でUNKNOWNへ戻る境界を確認した。宣言count fixtureを真正prefix履歴の証拠とはしない。最初の十定義の一部は実行前source FileRefがなく、現在sourceと保存結果の対応という来歴限界を保持する。十一成功定義や旧solver/411 suite/元384呼出しは再演していない。
 
