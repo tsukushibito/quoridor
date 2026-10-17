@@ -105,3 +105,9 @@ GPU学習は明示タスクの期限・資源上限に従って具体化する�
 429の元160sliceと一度の変換では、1280要求／1204返却（1190GOAL・14true-threefold）／入力欠測76、適格T49911/V12275を保存した。量／2plyのstock18..20はT6/V0対T907/V223で、二cohortのcanonical familyは26共有する。実viewはquantity3735/14940、early3735で、目標3763/15052の不足を補充しなかった。四在庫帯のquotaだけを正確に4倍にし、各familyや個別stockを等重みとする比較ではない。
 
 実shortは116×256+184=29880 draws/117更新、longは466×256+224=119520 draws/467更新。四条件の訓練＋測定上界2308648は保存した提案値で、実fit/INITIAL/native重み対応/対局の費用や結果ではない。small LR orbit3735は元partialに保存済み、large/earlyと旧423との直接model-input overlapはUNKNOWNのまま。詳細は[実データ・viewと費用提案](../../research-data/ai-sigma/nnue-data-expansion429/report-ja.md)を正本とし、新たなfit/eval/arenaを自動開始しない。
+
+### 430：同一入力・更新列でのstatic教師比較
+
+同じ選択T3763/common V2498、BEST43/fresh Adam、30104 draws/118 updates/tail152、reflection15038、実stream76f6467bで新Z/S/Cを学習し、LAST118だけを対局へ出した。S/Cは実際の反転盤面と完全historyから付けた別ラベルであり、旧z・splitを上書きしない。共通mixed_batch/train_mixtureがmanifest/configの教師名・column・row対応を消費し、三つの学習loopを複製しない。モデルごとに異なるSigma8/C20の正本encoderはコードに残し、NNUE特徴・数学は変えていない。終了済み419の専用実行field/branch/専用testはGit復元元を保全して撤去した。
+
+固定64共有family・各両色128局ではCvsZ67/61、score.5234375、95%[.4609375,.5859375]で下限>.5はNOT_MET。SvsZ63/65、.4921875、[.421875,.5625]は記述的。全256GOAL/UNKNOWN0だが一般優越・劣位・等価・原因やモデル昇格の結論ではない。各教師への誤差低下と対局を区別し、元RAW/FAILED/費UNKNOWNを残す。[有限結果と原参照](../../research-data/ai-sigma/static-teacher-distillation430/report-ja.md)を正本とする。429の四fitは引き続き未実行提案である。

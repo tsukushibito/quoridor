@@ -1,0 +1,65 @@
+{
+  "contrast": "SvsZ",
+  "actual_command": [
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "/workspaces/quoridor/.worktree/assets/perf/static-teacher-distillation430-analysis-v1/statistical-cli-v1/family_bootstrap430.py",
+    "/workspaces/quoridor/.worktree/assets/perf/static-teacher-distillation430-analysis-v1/statistical-cli-v1/settings.json",
+    "/workspaces/quoridor/.worktree/assets/perf/static-teacher-distillation430-analysis-v1/final-analysis-v1/bootstrap-input-SvsZ.json",
+    "/workspaces/quoridor/.worktree/assets/perf/static-teacher-distillation430-analysis-v1/final-analysis-v1/bootstrap-result-SvsZ.json"
+  ],
+  "actual_source": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/static-teacher-distillation430-analysis-v1/statistical-cli-v1/family_bootstrap430.py",
+    "sha256": "00de376911150d1a51fe0236f913342ef4dcaf13eb1b33de0f679c23775057ff",
+    "bytes": 7354,
+    "mode": "0644"
+  },
+  "actual_settings": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/static-teacher-distillation430-analysis-v1/statistical-cli-v1/settings.json",
+    "sha256": "5d3b134489454399fc192ff2cffd91e160e1db56e9d82cf11b54b768cdba2efb",
+    "bytes": 337,
+    "mode": "0644"
+  },
+  "actual_input": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/static-teacher-distillation430-analysis-v1/final-analysis-v1/bootstrap-input-SvsZ.json",
+    "sha256": "d241f545673b143e598b9dd64f3df011375f183bce85bf711a84c12df42e340e",
+    "bytes": 6497,
+    "mode": "0644"
+  },
+  "actual_function": "interval_from_complete_family_scores",
+  "function_text_sha256": "9b1d60a9d4831e76c3dd8567119285599355e24918731984938dac59bf2f493f",
+  "426_function_text_AST_unchanged": true,
+  "original_child": {
+    "pid": 647800,
+    "start_ticks": "26519284",
+    "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+  },
+  "current_exact_identity": null,
+  "started_at": "2026-10-17T06:00:37.759403+00:00",
+  "directreap_at": "2026-10-17T06:00:37.826919+00:00",
+  "wall_seconds": 0.06744140200316906,
+  "exit_code": 0,
+  "direct_child_reaped": true,
+  "handles_closed": true,
+  "stdout": "{\"output\": \"/workspaces/quoridor/.worktree/assets/perf/static-teacher-distillation430-analysis-v1/final-analysis-v1/bootstrap-result-SvsZ.json\", \"contrast\": \"SvsZ\", \"complete_families\": 64}\n",
+  "stderr": "",
+  "parent_identity": {
+    "pid": 647798,
+    "start_ticks": "26519275",
+    "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+  },
+  "body_tests_or_old_interval_replays": 0,
+  "output": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/static-teacher-distillation430-analysis-v1/final-analysis-v1/bootstrap-result-SvsZ.json",
+    "sha256": "ad2a8da316ef3be134c74e59cfe842eb42c983c166372a9ca3c03ef72385e4a5",
+    "bytes": 2085,
+    "mode": "0644"
+  },
+  "actual_interpreter": {
+    "interpreter": "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "resolved_interpreter": "/home/vscode/.cache/inference/python/cpython-3.14.7-linux-x86_64-gnu/bin/python3.14",
+    "python_version": "3.14.7",
+    "numpy_version": "2.5.3"
+  },
+  "executed_function_AST_sha256": "426f96eacf3377f1b40bdd40a85f483a53334cf3fcb19159b003b4cfef22e266",
+  "function_invocations": 1
+}

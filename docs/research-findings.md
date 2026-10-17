@@ -2212,3 +2212,11 @@ WはBEST43から新Sigmaのoutcome zだけで追加学習し、公開データ�
 Bの固定9×9では旧M13/33・L20/33に対して時刻付きM-only一本が33/33幾何通過し、複合下界/rho/DAG/parityの追加は0だった。Aはこのcensusを再演していない。保存small W/L128+指定Draw2に不一致0でも、9×9のcanonical E/実proof leaf/独立WDLはUNKNOWN。終盤・二共有family・先頭ほぼ無壁3×3の標本を旧約260万内部判定の分布や速度利益へ広げない。Bだけが追加したM-only parity同値論証や現count APIの最悪O(H²)費用形も、共同の動的検証とは区別する。
 
 A13checks/BFS0、B2052checks/BFS190（別Tarjan13）は各累積上限内、元161+Draw2+事前boundary8だけで有限終了した。一般corridor、新component metadata、安い閉non-loss集合は保留。411/default OFFと424撤去を維持し、新source/observer/Search/model/game/fit/Perfを発行しない。[四候補・前提・費用・合意と留保](../research-data/ai-sigma/zero-stock-candidates428/report-ja.md)、[固定原参照と受入れ](../research-data/ai-sigma/zero-stock-candidates428/receipt.json)。429のSigma生成とview準備は独立に継続する。
+
+### 同じNNUE・更新列での単体教師比較430（2026-10-17）
+
+Z/S/Cの新paired3fitは同じBEST43/fresh Adam・T3763/V2498・30104 draws/118 updates/tail152・実stream76f6467bを共有し、LAST118を固定した。各教師へのT/V MSEは末尾まで下がったが、同じVのz-MSEはZ.955988804/S.948383079/C.950207989、z符号一致は1601/1598/1605で順位が異なる。異なる教師へのMSEを棋力順位にはしない。
+
+固定64共有開始familyの両色比較はCvsZ67W61L/128、52.34375%、95%[46.09375%,58.59375%]で事前の下限>50%は未達。SvsZ63W65L、49.21875%、[42.1875%,56.25%]は記述的。256局全GOAL/UNKNOWN0、charged1072837747≤2G。分析者は元8archivesを各一度streamし、PCG64/seed43020261017/10000/linear95%を各対照一度だけ実行した。16-family区間の平均・旧423/426合算・CvsS直接対照はない。一般優越、劣位、等価、因果や自動昇格を認定しない。
+
+旧S19 batch-axis拒否、schema pre-runtime FAILED、NULL-vs-diskと費UNKNOWNを保全した。bank/fit/native/arenaとFAILED等の選択済み既知outer小計1335.556018654秒は全費用ではなく、内包head-call spanを加算しない。深さはselective nominal、TT容量はRSSではなく、arena nn_calls0はphysical NNUE head0を意味しない。元models/defaults/sealsを維持する。[保存report・表・図・費用・参照](../research-data/ai-sigma/static-teacher-distillation430/report-ja.md)。429の量・序盤viewは別の未実行四fit提案で、この結果から新fit/gameを自動開始しない。

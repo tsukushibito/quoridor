@@ -1,0 +1,586 @@
+{
+  "at": "2026-10-17T04:07:50.919617+00:00",
+  "issue": "quoridor-4lc.430.2",
+  "status": "SAVED_FIT_TEACHER_ANALYSIS_COMPLETE_ARENA_AND_NATIVE_DEPENDENCY_OPEN",
+  "summaries": {
+    "Z": {
+      "BEST_step_descriptive_only": 118,
+      "game_endpoint": "LAST118",
+      "forward_rows": 507066,
+      "training_rows": 30104,
+      "measurement_rows": 476962,
+      "reflected_rows": {
+        "added": 15038,
+        "public": 0
+      },
+      "training_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/static-teacher-distillation430-v1/Z-v1/training.json",
+        "sha256": "f025f70fbc78c38eb16ba6ca2d21122a262174972143e5c58af65df14dc4e385",
+        "bytes": 455035,
+        "mode": "0600"
+      },
+      "config_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/static-teacher-distillation430-v1/Z-v1/config.json",
+        "sha256": "ab205dffe7a2f0537c16c7f820c688e17fd5171d16c0a450478378dc05ae3063",
+        "bytes": 3677,
+        "mode": "0600"
+      },
+      "LAST_model_refs": {
+        "condition": "Z",
+        "endpoint": "LAST",
+        "step": 118,
+        "last_descriptor": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/static-teacher-distillation430-v1/Z-v1/last-model/manifest.json",
+          "sha256": "fbf0beb86fdf7f42f5bdd88893df215423ca86873da04308ed5029128edaf70a",
+          "bytes": 681,
+          "mode": "0600"
+        },
+        "last_weights": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/static-teacher-distillation430-v1/Z-v1/last-model/weights.f32",
+          "sha256": "ab073fb138b84710c0d244c1459aebc016a74743ecabee5e949321a00ec81b99",
+          "bytes": 49284,
+          "mode": "0644"
+        },
+        "last_checkpoint": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/static-teacher-distillation430-v1/Z-v1/last.pt",
+          "sha256": "8a484fdfd49bbfb110303af6823ad96e4e93ce308b4177bea7772a515419e31e",
+          "bytes": 159169,
+          "mode": "0644"
+        }
+      },
+      "public_LAST_z_MSE": 0.42568080138075637,
+      "public_INITIAL_z_MSE_in_430": null,
+      "source_config_input_stream_match": true,
+      "added_train": {
+        "rows": 3763,
+        "families": 204,
+        "objective_MSE_INITIAL": 0.8710067741633327,
+        "objective_MSE_LAST": 0.8242781785805638,
+        "objective_delta": -0.04672859558276887,
+        "objective_relative_delta": -0.05364894621819123,
+        "objective_family_MSE_INITIAL": 0.8543633180201182,
+        "objective_family_MSE_LAST": 0.8099253558625213,
+        "z_MSE_INITIAL": 0.8710067741633327,
+        "z_MSE_LAST": 0.8242781785805638,
+        "z_delta": -0.04672859558276887,
+        "cross_target_MSE_LAST": {
+          "Z": 0.8242781785805638,
+          "S": 0.4193309402535305,
+          "C": 0.34107834227934325
+        },
+        "z_sign_correct_INITIAL": 2562,
+        "z_sign_correct_LAST": 2580,
+        "sign_denominator": 3763,
+        "prediction_saturation_INITIAL": 0.3975551421737975,
+        "prediction_saturation_LAST": 0.37523252723890516,
+        "family_objective_improved": 136,
+        "family_objective_worsened": 68,
+        "family_objective_unchanged": 0,
+        "family_objective_delta_median": -0.024790322368156037,
+        "nonobjective_family_MSE": "UNKNOWN: not stored per family"
+      },
+      "added_validation": {
+        "rows": 2498,
+        "families": 52,
+        "objective_MSE_INITIAL": 0.9831882170787121,
+        "objective_MSE_LAST": 0.9559888044702815,
+        "objective_delta": -0.027199412608430618,
+        "objective_relative_delta": -0.027664502214282627,
+        "objective_family_MSE_INITIAL": 0.9458764451110301,
+        "objective_family_MSE_LAST": 0.915511249969753,
+        "z_MSE_INITIAL": 0.9831882170787121,
+        "z_MSE_LAST": 0.9559888044702815,
+        "z_delta": -0.027199412608430618,
+        "cross_target_MSE_LAST": {
+          "Z": 0.9559888044702815,
+          "S": 0.5378606661525476,
+          "C": 0.4811322815591105
+        },
+        "z_sign_correct_INITIAL": 1589,
+        "z_sign_correct_LAST": 1601,
+        "sign_denominator": 2498,
+        "prediction_saturation_INITIAL": 0.39351481184947956,
+        "prediction_saturation_LAST": 0.3654923939151321,
+        "family_objective_improved": 29,
+        "family_objective_worsened": 23,
+        "family_objective_unchanged": 0,
+        "family_objective_delta_median": -0.023555026010707913,
+        "nonobjective_family_MSE": "UNKNOWN: not stored per family"
+      }
+    },
+    "S": {
+      "BEST_step_descriptive_only": 118,
+      "game_endpoint": "LAST118",
+      "forward_rows": 507066,
+      "training_rows": 30104,
+      "measurement_rows": 476962,
+      "reflected_rows": {
+        "added": 15038,
+        "public": 0
+      },
+      "training_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/static-teacher-distillation430-v1/S-v1/training.json",
+        "sha256": "ddb40a35a0b15e43c5d06c1e96b71d72eb3210f537e72e0460a97a52cc81c1ee",
+        "bytes": 479790,
+        "mode": "0600"
+      },
+      "config_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/static-teacher-distillation430-v1/S-v1/config.json",
+        "sha256": "b4239ee099cb9c7c9aa836876d53536d636c28f9ffc3c223bb46829e0494f3b6",
+        "bytes": 3677,
+        "mode": "0600"
+      },
+      "LAST_model_refs": {
+        "condition": "S",
+        "endpoint": "LAST",
+        "step": 118,
+        "last_descriptor": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/static-teacher-distillation430-v1/S-v1/last-model/manifest.json",
+          "sha256": "af657f4a78934de40937995614a877891b1ca02f7ea7e3a12a7dc458492ac036",
+          "bytes": 681,
+          "mode": "0600"
+        },
+        "last_weights": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/static-teacher-distillation430-v1/S-v1/last-model/weights.f32",
+          "sha256": "fd9e9c441c9a69599abf4f763db5e49b87bee60a64fb90fc72f29efb6d40b8f1",
+          "bytes": 49284,
+          "mode": "0644"
+        },
+        "last_checkpoint": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/static-teacher-distillation430-v1/S-v1/last.pt",
+          "sha256": "b70b429e8aa7ebfe5e5fb2094267894ece6cdbd4e272e403c2be572b1d059765",
+          "bytes": 159169,
+          "mode": "0644"
+        }
+      },
+      "public_LAST_z_MSE": 0.42583671035259024,
+      "public_INITIAL_z_MSE_in_430": null,
+      "source_config_input_stream_match": true,
+      "added_train": {
+        "rows": 3763,
+        "families": 204,
+        "objective_MSE_INITIAL": 0.445571741489512,
+        "objective_MSE_LAST": 0.4124767102998567,
+        "objective_delta": -0.03309503118965529,
+        "objective_relative_delta": -0.07427542662158321,
+        "objective_family_MSE_INITIAL": 0.45639175834801937,
+        "objective_family_MSE_LAST": 0.42424890572804363,
+        "z_MSE_INITIAL": 0.8710067741633327,
+        "z_MSE_LAST": 0.8312894939039223,
+        "z_delta": -0.03971728025941046,
+        "cross_target_MSE_LAST": {
+          "Z": 0.8312894939039223,
+          "S": 0.4124767102998567,
+          "C": 0.335351154217542
+        },
+        "z_sign_correct_INITIAL": 2562,
+        "z_sign_correct_LAST": 2575,
+        "sign_denominator": 3763,
+        "prediction_saturation_INITIAL": 0.3975551421737975,
+        "prediction_saturation_LAST": 0.37177783683231463,
+        "family_objective_improved": 168,
+        "family_objective_worsened": 36,
+        "family_objective_unchanged": 0,
+        "family_objective_delta_median": -0.0224049918952407,
+        "nonobjective_family_MSE": "UNKNOWN: not stored per family"
+      },
+      "added_validation": {
+        "rows": 2498,
+        "families": 52,
+        "objective_MSE_INITIAL": 0.557674231869708,
+        "objective_MSE_LAST": 0.5291078737957683,
+        "objective_delta": -0.0285663580739397,
+        "objective_relative_delta": -0.05122409543321663,
+        "objective_family_MSE_INITIAL": 0.5499714863213875,
+        "objective_family_MSE_LAST": 0.5187673407859806,
+        "z_MSE_INITIAL": 0.9831882170787121,
+        "z_MSE_LAST": 0.9483830786411942,
+        "z_delta": -0.03480513843751787,
+        "cross_target_MSE_LAST": {
+          "Z": 0.9483830786411942,
+          "S": 0.5291078737957683,
+          "C": 0.4727579521938172
+        },
+        "z_sign_correct_INITIAL": 1589,
+        "z_sign_correct_LAST": 1598,
+        "sign_denominator": 2498,
+        "prediction_saturation_INITIAL": 0.39351481184947956,
+        "prediction_saturation_LAST": 0.3634907926341073,
+        "family_objective_improved": 45,
+        "family_objective_worsened": 7,
+        "family_objective_unchanged": 0,
+        "family_objective_delta_median": -0.026983780195607265,
+        "nonobjective_family_MSE": "UNKNOWN: not stored per family"
+      }
+    },
+    "C": {
+      "BEST_step_descriptive_only": 118,
+      "game_endpoint": "LAST118",
+      "forward_rows": 507066,
+      "training_rows": 30104,
+      "measurement_rows": 476962,
+      "reflected_rows": {
+        "added": 15038,
+        "public": 0
+      },
+      "training_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/static-teacher-distillation430-v1/C-v1/training.json",
+        "sha256": "06cafacee57533b896abfd8fd5e9ddaaad0739cb591306a293f7bfb4856ca7c0",
+        "bytes": 480732,
+        "mode": "0600"
+      },
+      "config_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/static-teacher-distillation430-v1/C-v1/config.json",
+        "sha256": "092edde2660615d2a30630193ba6baa2ccd527f38de84c0ec702100db3fa887b",
+        "bytes": 3677,
+        "mode": "0600"
+      },
+      "LAST_model_refs": {
+        "condition": "C",
+        "endpoint": "LAST",
+        "step": 118,
+        "last_descriptor": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/static-teacher-distillation430-v1/C-v1/last-model/manifest.json",
+          "sha256": "e7dd349332c1320b5d6adf77ddcb80179ea16c961b8c13cd34bc5be654c56d64",
+          "bytes": 681,
+          "mode": "0600"
+        },
+        "last_weights": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/static-teacher-distillation430-v1/C-v1/last-model/weights.f32",
+          "sha256": "9583209bc6c69da7fb6606ce0de774f60a334f26b55cb852ac72df4f05317305",
+          "bytes": 49284,
+          "mode": "0644"
+        },
+        "last_checkpoint": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/static-teacher-distillation430-v1/C-v1/last.pt",
+          "sha256": "ea295041237d2bb34de2d88449bd4329a3c0a220b39c1f416eccedabf844362a",
+          "bytes": 159169,
+          "mode": "0644"
+        }
+      },
+      "public_LAST_z_MSE": 0.4269061078019355,
+      "public_INITIAL_z_MSE_in_430": null,
+      "source_config_input_stream_match": true,
+      "added_train": {
+        "rows": 3763,
+        "families": 204,
+        "objective_MSE_INITIAL": 0.3675893745830465,
+        "objective_MSE_LAST": 0.3310332130902848,
+        "objective_delta": -0.03655616149276175,
+        "objective_relative_delta": -0.09944836282122434,
+        "objective_family_MSE_INITIAL": 0.3750245600312165,
+        "objective_family_MSE_LAST": 0.3393601088299422,
+        "z_MSE_INITIAL": 0.8710067741633327,
+        "z_MSE_LAST": 0.8303940284137529,
+        "z_delta": -0.04061274574957985,
+        "cross_target_MSE_LAST": {
+          "Z": 0.8303940284137529,
+          "S": 0.41382954455429855,
+          "C": 0.3310332130902848
+        },
+        "z_sign_correct_INITIAL": 2562,
+        "z_sign_correct_LAST": 2575,
+        "sign_denominator": 3763,
+        "prediction_saturation_INITIAL": 0.3975551421737975,
+        "prediction_saturation_LAST": 0.3725750730799894,
+        "family_objective_improved": 171,
+        "family_objective_worsened": 33,
+        "family_objective_unchanged": 0,
+        "family_objective_delta_median": -0.025470885280286848,
+        "nonobjective_family_MSE": "UNKNOWN: not stored per family"
+      },
+      "added_validation": {
+        "rows": 2498,
+        "families": 52,
+        "objective_MSE_INITIAL": 0.497072000128189,
+        "objective_MSE_LAST": 0.47148488195630683,
+        "objective_delta": -0.02558711817188214,
+        "objective_relative_delta": -0.051475677900351506,
+        "objective_family_MSE_INITIAL": 0.4828984921627528,
+        "objective_family_MSE_LAST": 0.45506353782895687,
+        "z_MSE_INITIAL": 0.9831882170787121,
+        "z_MSE_LAST": 0.9502079893442805,
+        "z_delta": -0.032980227734431544,
+        "cross_target_MSE_LAST": {
+          "Z": 0.9502079893442805,
+          "S": 0.5282462135352567,
+          "C": 0.47148488195630683
+        },
+        "z_sign_correct_INITIAL": 1589,
+        "z_sign_correct_LAST": 1605,
+        "sign_denominator": 2498,
+        "prediction_saturation_INITIAL": 0.39351481184947956,
+        "prediction_saturation_LAST": 0.36989591673338673,
+        "family_objective_improved": 43,
+        "family_objective_worsened": 9,
+        "family_objective_unchanged": 0,
+        "family_objective_delta_median": -0.02643388590740768,
+        "nonobjective_family_MSE": "UNKNOWN: not stored per family"
+      }
+    }
+  },
+  "common_stream": {
+    "attempted_sha256": "76f6467be9fd107dcfea8212e2aa512c8a26c578cad9b397f2465baaf74ddbcd",
+    "completed_sha256": "76f6467be9fd107dcfea8212e2aa512c8a26c578cad9b397f2465baaf74ddbcd",
+    "completed_rows": 30104,
+    "completed_updates": 118,
+    "encoding": "per-update LE-i64 [update,nAdded,nPublic], added IDs, public IDs, uint8 added/public LR masks",
+    "numpy_version": "2.5.3",
+    "torch_version": "2.14.0+cu130",
+    "added_rng": "numpy.default_rng/PCG64"
+  },
+  "same_initial": {
+    "descriptor": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/public-no-bypass-v1/candidate-v1/output/best-model/manifest.json",
+      "sha256": "46ec2c4708f96dcf9fad579c2fb0d1299c6663df27412f0faac98267467715e1",
+      "bytes": 677,
+      "mode": "0600"
+    },
+    "weights": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/public-no-bypass-v1/candidate-v1/output/best-model/weights.f32",
+      "sha256": "046fe926e56b955b0fb7de8f147a74ec33eace9cbc00a55c307f9b6541ab9841",
+      "bytes": 49284,
+      "mode": "0644"
+    },
+    "evaluator_sha256": "96a5f41f875022d1752b9c999595ad58bfb2d42687a8f06de08d42b1c4215875",
+    "optimizer": "fresh",
+    "scale": "incumbent"
+  },
+  "config_difference_only": "mixture.teacher_values.objective",
+  "actual_teacher_ledger": {
+    "S": {
+      "prior_attempts": 57,
+      "new_attempts": 10024,
+      "new_finite": 10024,
+      "inclusive_attempts": 10081,
+      "native_attempts": 10024,
+      "native_finite": 10024
+    },
+    "C": {
+      "prior_attempts": 38,
+      "new_attempts": 10024,
+      "new_finite": 10024,
+      "inclusive_attempts": 10062,
+      "native_attempts": 10024,
+      "native_finite": 10024
+    }
+  },
+  "label_heads_saved": {
+    "S": {
+      "kind": "sigma",
+      "attempted_rows": 10024,
+      "returned_finite_rows": 10024,
+      "failed_attempt_rows": 0,
+      "calls": 314,
+      "native_forward_calls_attempted": 10024,
+      "native_input_rows_attempted": 10024,
+      "native_finite_rows_returned": 10024,
+      "failed_attempt_kernel_execution": "UNKNOWN without profiling",
+      "constructor_forward_rows": 0,
+      "explicit_warmup_rows": 0,
+      "hard_row_limit": 20000,
+      "synchronous_forward_seconds": 37.970209929015255,
+      "joint_policy_value_compute": true,
+      "label_semantics": "raw-local-stm-single-network-post-tanh",
+      "extra_tanh_sign_discount_rescaling": false,
+      "runtime": {
+        "onnxruntime": "1.30.0",
+        "providers": [
+          "CPUExecutionProvider"
+        ],
+        "inputs": [
+          "input"
+        ],
+        "input_shapes": [
+          [
+            1,
+            8,
+            9,
+            9
+          ]
+        ],
+        "output_shapes": [
+          [
+            1,
+            136
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "logical_group_native_execution": "serial native batch1",
+        "outputs": [
+          "policy_logits",
+          "value"
+        ]
+      }
+    },
+    "C": {
+      "kind": "claustrophobia",
+      "attempted_rows": 10024,
+      "returned_finite_rows": 10024,
+      "failed_attempt_rows": 0,
+      "calls": 314,
+      "native_forward_calls_attempted": 314,
+      "native_input_rows_attempted": 10024,
+      "native_finite_rows_returned": 10024,
+      "failed_attempt_kernel_execution": "UNKNOWN without profiling",
+      "constructor_forward_rows": 0,
+      "explicit_warmup_rows": 0,
+      "hard_row_limit": 20000,
+      "synchronous_forward_seconds": 105.70155341323698,
+      "joint_policy_value_compute": true,
+      "label_semantics": "raw-local-stm-single-network-post-tanh",
+      "extra_tanh_sign_discount_rescaling": false,
+      "runtime": {
+        "torch": "2.14.0+cu130",
+        "device": "cpu",
+        "autocast": false,
+        "original_parameter_dtypes": [
+          "torch.float32"
+        ],
+        "inference_dtype": "float32"
+      }
+    }
+  },
+  "inclusive_teacher_attempts": 20143,
+  "new_bank_finite_rows": 20048,
+  "NNUE_total_rows": 1521198,
+  "NNUE_native_correspondence_actual_in_packet": 0,
+  "NNUE_native_reserved_upper": 3072,
+  "costs": {
+    "new_label_outer_once_seconds": 207.74605779899866,
+    "fit_outer_once_seconds": {
+      "Z": 4.504441355995368,
+      "S": 3.355982496024808,
+      "C": 3.5673322410148103
+    },
+    "known_these_four_outers_subtotal_seconds": 219.17381389203365,
+    "nested_fit_training_seconds_not_added": {
+      "Z": 1.801071811991278,
+      "S": 1.324802250979701,
+      "C": 1.3885796350077726
+    },
+    "head_call_wall_is_not_exclusive_kernel": true,
+    "prior_boundary_and_FAILED_source_helpers_full_fees": "UNKNOWN; original records retained",
+    "continuous_family_peak_physical_kernel_time_allfees": "UNKNOWN"
+  },
+  "LAST_minus_Z_same_z_V_MSE": {
+    "S": -0.007605725829087251,
+    "C": -0.005780815126000927
+  },
+  "LAST_minus_Z_same_public_V_z_MSE": {
+    "S": 0.00015590897183387353,
+    "C": 0.0012253064211791287
+  },
+  "stored_metric_limits": {
+    "T_V_total_cross_MSE": "Z/S/C genuinely stored in reference_targets",
+    "cross_MSE_per_stock_or_nonobjective_family": "UNKNOWN; only each fit objective is stored there",
+    "public_S_C_teacher_metrics": "UNKNOWN; public scopes have z only",
+    "publicV_INITIAL_in_430": "NOT_MEASURED; no forward to fill",
+    "teacher_scalar_sign_against_z_saturation_or_LR_difference": "UNKNOWN as aggregate; not inferred from NNUE-target agreement",
+    "per_row_prediction_candidate_or_leaf_trace": "NOT_STORED; no state/action oracle constructed",
+    "paired_row_error_overlap_gradient_optimizer_diagnosis": "UNKNOWN"
+  },
+  "illustration": {
+    "selection": "Highest [0.8,1] canonical-V prediction bin at common INITIAL, no outcome-based root selection",
+    "scope": "aggregate bin, NOT one position or candidate",
+    "rows": 609,
+    "mean_prediction": 0.9577591176494981,
+    "mean_targets": {
+      "Z": 0.6026272577996716,
+      "S": 0.606746584929798,
+      "C": 0.6066492869478937
+    }
+  },
+  "original_failures_retained": [
+    "initial source70bd R1",
+    "run_oracle R2 and original case16",
+    "preentry guardian v1/v2",
+    "S fixed-batch19 failed/finite0/kernelUNKNOWN",
+    "wrong result.json metadata assumption",
+    "Z metadata exposure row_counts assumption"
+  ],
+  "independent_source_label_assessment_reused": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/static-teacher-distillation430-review-v1/actual-label-v1/control.json",
+    "sha256": "ceaa824ee535547756c036c7fcdc55cee44119992acab54f2c2aadfd14253e7d"
+  },
+  "historical_W_note": "NewZ native descriptor/weights match savedW endpoint as FileRefs, not historical exact stochastic-trajectory certification. Do not pool old outcomes.",
+  "native_arena_strength_default_qualification": "PENDING real original native+256game evidence; fit is not strength or calibrated WDL",
+  "own_source_adapter_review_model_binary_forward_Search_fit_game_bootstrap": 0,
+  "readrefs": [
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/static-teacher-distillation430-implementation-v1/paired-run-completion-v1/completion.json",
+      "sha256": "36701dfb5ed8aee07678b4991a47576f81e06dc27aa16254ee80b54340917888",
+      "bytes": 7456,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/static-teacher-distillation430-implementation-v1/actual-label-completion-v1/completion.json",
+      "sha256": "81d39b84d5821384828c0d9200d28731ece69e9d5f3cb952b8413507bb01ba31",
+      "bytes": 5347,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/static-teacher-distillation430-v1/teacher-values-v1/teacher-values.json",
+      "sha256": "8d43b10f9c146e0e4ecec2377f440ceb95bf86c817720c8051aba6309f0d306e",
+      "bytes": 4483,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/static-teacher-distillation430-implementation-v1/actual-fit-Z-completion-v2/completion.json",
+      "sha256": "fad7fa4f2368014a65a68bb091a59b4ea6d9fb23adaa3b46cd244631b67eb9a5",
+      "bytes": 8429,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/static-teacher-distillation430-v1/Z-v1/training.json",
+      "sha256": "f025f70fbc78c38eb16ba6ca2d21122a262174972143e5c58af65df14dc4e385",
+      "bytes": 455035,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/static-teacher-distillation430-v1/Z-v1/config.json",
+      "sha256": "ab205dffe7a2f0537c16c7f820c688e17fd5171d16c0a450478378dc05ae3063",
+      "bytes": 3677,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/static-teacher-distillation430-implementation-v1/actual-fit-S-completion-v2/completion.json",
+      "sha256": "9d58556b65600adb3eed911a53ec930e6a81acc85a3f783b007410b5f94daf45",
+      "bytes": 8722,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/static-teacher-distillation430-v1/S-v1/training.json",
+      "sha256": "ddb40a35a0b15e43c5d06c1e96b71d72eb3210f537e72e0460a97a52cc81c1ee",
+      "bytes": 479790,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/static-teacher-distillation430-v1/S-v1/config.json",
+      "sha256": "b4239ee099cb9c7c9aa836876d53536d636c28f9ffc3c223bb46829e0494f3b6",
+      "bytes": 3677,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/static-teacher-distillation430-implementation-v1/actual-fit-C-completion-v2/completion.json",
+      "sha256": "ad1af49d1faf6386d837d9a0ea4bb6e8c356a4e80a2cbebcc0229e09c46c84f3",
+      "bytes": 9015,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/static-teacher-distillation430-v1/C-v1/training.json",
+      "sha256": "06cafacee57533b896abfd8fd5e9ddaaad0739cb591306a293f7bfb4856ca7c0",
+      "bytes": 480732,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/static-teacher-distillation430-v1/C-v1/config.json",
+      "sha256": "092edde2660615d2a30630193ba6baa2ccd527f38de84c0ec702100db3fa887b",
+      "bytes": 3677,
+      "mode": "0600"
+    }
+  ]
+}

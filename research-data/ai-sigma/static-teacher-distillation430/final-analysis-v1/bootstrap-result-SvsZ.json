@@ -1,0 +1,51 @@
+{
+  "contrast": "SvsZ",
+  "contrast_definition": {
+    "role": "secondary",
+    "candidate": "S",
+    "baseline": "Z"
+  },
+  "planned_family_count": 64,
+  "planned_game_count": 128,
+  "valid_game_count": 128,
+  "unresolved_game_count": 0,
+  "complete_family_count": 64,
+  "family_mean": 0.4921875,
+  "percentile_95": [
+    0.421875,
+    0.5625
+  ],
+  "criterion_fixed_book_time_only": "SECONDARY_DESCRIPTIVE_ONLY",
+  "partial_scope": "complete-pair conditional; valid-game mean and planned bounds are separate",
+  "seed": 43020261017,
+  "requested_resamples": 10000,
+  "executed_resamples": 10000,
+  "rng": "NumPy Generator(PCG64)",
+  "quantile_method": "linear",
+  "settings": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/static-teacher-distillation430-analysis-v1/statistical-cli-v1/settings.json",
+    "sha256": "5d3b134489454399fc192ff2cffd91e160e1db56e9d82cf11b54b768cdba2efb",
+    "bytes": 337,
+    "mode": "0644"
+  },
+  "input": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/static-teacher-distillation430-analysis-v1/final-analysis-v1/bootstrap-input-SvsZ.json",
+    "sha256": "d241f545673b143e598b9dd64f3df011375f183bce85bf711a84c12df42e340e",
+    "bytes": 6497,
+    "mode": "0644"
+  },
+  "executed_statistical_source": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/static-teacher-distillation430-analysis-v1/statistical-cli-v1/family_bootstrap430.py",
+    "sha256": "00de376911150d1a51fe0236f913342ef4dcaf13eb1b33de0f679c23775057ff",
+    "bytes": 7354,
+    "mode": "0644"
+  },
+  "executed_function": "interval_from_complete_family_scores",
+  "executed_function_AST_sha256": "426f96eacf3377f1b40bdd40a85f483a53334cf3fcb19159b003b4cfef22e266",
+  "executed_function_text_sha256": "9b1d60a9d4831e76c3dd8567119285599355e24918731984938dac59bf2f493f",
+  "interpreter": "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+  "resolved_interpreter": "/home/vscode/.cache/inference/python/cpython-3.14.7-linux-x86_64-gnu/bin/python3.14",
+  "python_version": "3.14.7",
+  "numpy_version": "2.5.3",
+  "old_intervals_recomputed": false
+}
