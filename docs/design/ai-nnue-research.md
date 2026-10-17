@@ -90,14 +90,18 @@ GPU学習は明示タスクの期限・資源上限に従って具体化する�
 
 保存423のWはBEST43から新Sigma outcome zだけで追加学習した条件で、公開データとの混合ではない。末尾118更新まで新T/V lossが下がったが、必要更新数・原因・棋力改善は未確定である。Fは初期化だけでなくLR、warmup、更新量も異なるため、その訓練適合とV悪化から一要因の効果を取り出さない。[保存設定と曲線の分析](../../research-data/ai-sigma/nnue-data-expansion429/saved-learning-analysis/report-ja.md)を比較設計の出発点とする。
 
-| 分けたい問い       | 条件の対応                                                          | 計算量と限界                                                                                              |
-| ------------------ | ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| データ多様性       | 共通の隔離Vと同BEST43、nestedな実Tを同draws/更新で比較              | 目安3763/15052 distinctを30104 draws/118更新なら平均露出8/2。診断forwardや総wallまで同一とはしない        |
-| 同じ大viewの更新量 | 同じ実Tを118更新時点と固定露出の末尾で比較                          | 15052 distinct×8なら120416 draws/471更新、tail96。小viewの8露出より訓練drawsは4倍であり同計算比較ではない |
-| 開始coverage       | 従来4/8/12/16ply recipeと2ply開始を同じ実distinct N・8N drawsで比較 | 量と序盤を一度に変えた一対だけで原因を認定しない。stock・game・family・同入力対応と不足を保存する         |
+| 分けたい問い       | 条件の対応                                                          | 計算量と限界                                                                            |
+| ------------------ | ------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| データ多様性       | 共通V12275と同BEST43、nested T3735/14940を29880 draws/117更新で比較 | 平均露出8/2。測定panelのsupport・全forwardや総wallまで同じとはしない                    |
+| 同じ大viewの更新量 | 同じT14940の独立したshortと8露出runを比較                           | long119520 draws/467更新、tail224。訓練drawsも4倍であり同計算比較ではない               |
+| 開始coverage       | 従来4/8/12/16ply recipeと2plyを同distinct3735・29880 drawsで比較    | 量と序盤を同時変更した一対で原因を認定せず、stock・game・family・同入力の対応を保存する |
 
 現行callerではpartial batchが最終更新だけで、短い118更新は117×256+152=30104 draws、長いrunのstep118は118×256=30208 drawsとなり104多い。INITIAL/BEST/LASTのみの現行保存では非BESTの途中weightsも保証されない。従って現行経路で正確な三比較を満たす案は、小view8N、大view同じ8N draws、同じ大view8×4N draws、early matched-Nの8N drawsという将来の四fitとして費用を示す。117 full updates/29952 drawsや256整除の実Nを選ぶ場合も、元条件と同じとして黙って代替しない。途中partial batchやcheckpoint経路の新設は発行しない。
 
 実数に応じて目安を解決し、重複や反復露出をdistinctへ数えない。元423のsplit/RAWとID18の明示的fit-view対応を残し、新viewの共通VをTから隔離する。初期化、正規化、z loss、reflection、fresh Adam、更新座標のLRを揃える。具体的なfit・評価条件と実費はデータ実数に基づく次の提案とし、429の生成・変換許可を学習や対局へ拡張しない。
 
 現行の`mixture.training_view`は、省略可能な4MiB以下のFileRefで、本文の`cache_manifest_sha256`と昇順・重複なしの整数`indices`を実cacheへ結び付ける。選択可能なのは既存の適格T・game/stock cap後の候補の部分集合だけで、同cacheの適格Vは全件を保持する。未指定時の抽出は変えない。実viewは通常のordered Experiment.inputsとRUN全体の入力保護へ含める。これはnested/matched viewを表現するsource上の能力であり、実distinct数・cache census・新fitの成立を認定するものではない。
+
+429の元160sliceと一度の変換では、1280要求／1204返却（1190GOAL・14true-threefold）／入力欠測76、適格T49911/V12275を保存した。量／2plyのstock18..20はT6/V0対T907/V223で、二cohortのcanonical familyは26共有する。実viewはquantity3735/14940、early3735で、目標3763/15052の不足を補充しなかった。四在庫帯のquotaだけを正確に4倍にし、各familyや個別stockを等重みとする比較ではない。
+
+実shortは116×256+184=29880 draws/117更新、longは466×256+224=119520 draws/467更新。四条件の訓練＋測定上界2308648は保存した提案値で、実fit/INITIAL/native重み対応/対局の費用や結果ではない。small LR orbit3735は元partialに保存済み、large/earlyと旧423との直接model-input overlapはUNKNOWNのまま。詳細は[実データ・viewと費用提案](../../research-data/ai-sigma/nnue-data-expansion429/report-ja.md)を正本とし、新たなfit/eval/arenaを自動開始しない。

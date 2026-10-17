@@ -2175,7 +2175,6 @@ D4は原12＋真正未入場M6の18 uniqueが全完成し、Maction差1/6・PV�
 
 424 cleanup後の共有領域正増分552,148,992Bを確認した。Rootは、397が既に先行coverに含む同一canonical targetを再加算したと明記する原receiptに基づき、小さい先行floor1,511,395,328Bだけを重複coverから一度除いた。397の非負growth32,727,040Bと全原snapshot/used証拠/費/ファイル、他の過大計上、全private image・Main保持を残す。50,000,000,000−1,511,395,328＋552,148,992＝49,040,753,664B、小admin tails前の残余959,246,336B。旧未使用future97,346,560Bは変えず、512MiB/migration forward再適用・削除/使用減少/費用refundは0、actualglobalはUNKNOWN。[固定判断と一度の適用](../.artifacts/research-team/integration324/zero-stock-wall-detour424-v1/retirement-build-v1/storage-support-application.json)。421whole256MiB/423whole128MiBと全USERPAUSE/default/model/weights/sealsを維持し、既許可の真正未完了工程だけを通常guardで継続する。
 
-
 ### 零在庫の距離下界と十分条件の保存切り分け（427、2026-10-16）
 
 固定保存標本では、安い下界Lが弱いための取り逃しより、真の壁通路距離rhoでも同じ十分閾値Tを満たさない状態が多かった。9×9は33状態中、既存L通過20、有限rho<T12、別成分1、L<T<=rho0だった。有限失敗12件は全てL=rho。補助の先頭L不成立W/L128状態は、rho<T126、取り逃し2で、保存W76/L52を変更していない。追加計算は検証を含む56 BFS、161状態で有限終了した。
@@ -2201,6 +2200,10 @@ WはBEST43から新Sigmaのoutcome zだけで追加学習し、公開データ�
 量の比較は、nestedな実distinctを固定draws/更新で比べる条件と、同じ大viewを固定露出まで長く学ぶ条件を分ける。目安3763対15052 distinctで30104 draws/118更新なら平均露出8対2、15052を8露出なら120416 draws/471更新で訓練drawsは4倍となる。後者を同計算量比較とは呼ばない。現行callerのpartial batchは最終更新だけなので、長いrunのstep118は30208 drawsであり、短いrunの30104 drawsより104多い。INITIAL/BEST/LAST以外の途中weightsも保証されず、長いrunから短い条件を同一再用できるとはしない。序盤coverageは総distinctとdrawsを合わせた別比較とし、共通VをTから隔離する。目安不足は実数のまま報告し、repeatでdistinctを水増ししない。
 
 旧Tのstock18..20は0、高在庫の適格320対選択314なので抽出cap緩和だけで増やせるのは最大6行だった。量の増加と2ply開始によるcoverageを別cohortで扱う理由になるが、低在庫の飽和も残るため高在庫だけを全問題の原因としない。新V loss改善と独立426の改善支持未達は両方保持し、旧区間の再計算・合算、新しい原因・一般棋力の認定は行わない。[保存分析・設定と競合仮説](../research-data/ai-sigma/nnue-data-expansion429/saved-learning-analysis/report-ja.md)、[受入れと原参照](../research-data/ai-sigma/nnue-data-expansion429/saved-learning-analysis/receipt.json)。429の実行許可は保存分析と固定した追加Sigma生成・変換までであり、この比較設計から新fit・評価forward・対局を自動発行しない。
+
+元160sliceと一度の変換を終え、1280要求中1204返却（1190GOAL・14true-threefold）、入力欠測76を補充せず、適格62186行（T49911/V12275）を保存した。量cohortのstock18..20はT6/V0、2ply cohortはT907/V223で、今回の序盤coverage増加を確認した。canonical family1176のうち二cohortで26を共有し、literal model-inputは62043 distinct／重複超過143行だった。入力keyは完全履歴や独立sample数ではない。旧423の直接model-input overlap、公開／封印由来の完全な非露出はUNKNOWNである。
+
+結果非選別のnested量viewは3735/14940、別の同distinct序盤viewは3735、共通Vは全12275行。目標への不足28/112を水増しせず、四在庫帯のquotaを正確に4倍にした。small/largeのfamily数は796/811で、row数4倍をfamily数4倍としない。short29880 draws/117更新/tail184、同largeの8露出long119520/467/tail224を含む四将来fitの訓練＋測定上界は2308648。INITIAL共有の仮creditや長いrunの途中weight再用はない。これらは準備・提案で、fit/eval/対局の実行や強さの結果ではない。[実生成・view・費用・失敗と制約](../research-data/ai-sigma/nnue-data-expansion429/report-ja.md)、[固定原参照](../research-data/ai-sigma/nnue-data-expansion429/receipt.json)を参照する。
 
 ### 零在庫確定条件の二者議論428（2026-10-17）
 
