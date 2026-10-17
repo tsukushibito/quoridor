@@ -1283,6 +1283,40 @@ impl Output {
 mod tests {
     use super::*;
     #[test]
+    fn common_prefix_selector_preserves_full_history_after_branch_retirement() {
+        let prefix = [13, 67];
+        let context = SigmaContext::from_prefix(&prefix).unwrap();
+        let bound = identity(&context);
+        let mut row = json!({"moves":prefix,"root_key":bound["root_key"],"history_counts":bound["history_counts"]});
+        let mut selector: RootInput = serde_json::from_value(json!({
+            "input":0,"pointer":"","field":"moves","label":"declared-test-prefix",
+            "check_history":true
+        }))
+        .unwrap();
+        let selected = root_spec(&row, &selector).unwrap();
+        assert_eq!(
+            identity(&replay(&selected, context.ruleset().id()).unwrap()),
+            bound
+        );
+        row["root_key"] = json!("stale root identity");
+        let selected = root_spec(&row, &selector).unwrap();
+        assert!(replay(&selected, context.ruleset().id()).is_err());
+        row["root_key"] = bound["root_key"].clone();
+        selector.prefix_len = Some(1);
+        let selected = root_spec(&row, &selector).unwrap();
+        assert!(replay(&selected, context.ruleset().id()).is_err());
+        selector.check_history = false;
+        let selected = root_spec(&row, &selector).unwrap();
+        assert_eq!(selected.prefix, [13]);
+        assert_eq!(
+            replay(&selected, context.ruleset().id())
+                .unwrap()
+                .total_ply(),
+            1
+        );
+    }
+
+    #[test]
     fn measurement412_method_omission_keeps_enable_off_and_explicit_controls() {
         let base = json!({"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,"namespace":{"evaluator":"toy","rules":"standard","selectivity":"full"},"output_bytes":1000,"record_bytes":100});
         let omitted: Settings = serde_json::from_value(base.clone()).unwrap();
