@@ -28,6 +28,8 @@ Rustの共通crateから過去frameのコードや管理scriptを呼ばない。
 
 Rustのbuild依存管理はCargo/rustcを正本とする。同じbuildを認定する独立したsource一覧、alias、埋込みsourceコピー、第二の依存graphは維持しない。必要なfile依存記録は所有するBUILDの標準tool出力から得る。既存build記録には実Git revisionと関連する未commit差分、Cargo.lock・features・profile・target・実command、必要なtool版、artifact identityと実check結果を残し、Cargo.tomlだけを完全なfile一覧とみなさない。外部model/dataと実際に読み込むcaller/libraryは、それぞれの所有境界で束縛する。compiler/test/lintの成功は棋力結果ではなく、記録処理の失敗はmodel失敗ではない。変更していない成功checkは元の適用範囲で再用し、必要な変更checkや通常のdebug確認を行政的な再実行禁止と混同しない。
 
+学習の実験条件もrun設定へ一元化する。既存方式で変更できるLR/optimizer・減衰倍率/patience/floor・有意改善delta・最低露出/停止・最大draws/updates/実行枠・観測/保存点・seed等は、既存resolve/validateで一度解決し、共通train loop・継続policy・入力検査・進捗通知・結果summary/保存が同じ値を読む。単一の過去recipeとの全辞書一致や、32R/256R等を各所で再実装することを通常の条件変更の入口にしない。型/範囲/相互制約、実frozen config/FileRef、fresh/resumeとAdam/RNG/fullV・数学/会計・非有限防止は保ち、新数式/新機能まで設定だけで表すDSLや別trainer/framework・互換shimは作らない。整理は実job・回収・対象readerの自然STOP後に行い、immutable runを差し替えたり保守のために成功学習を再演しない。
+
 ## 共通計測入口と実行記録
 
 人間は、Search/evaluator/sessionと既存caller/job・標準perfを再用する一つの計測入口を選択した。差し替えるのは計測operationと必要な準備/reset/後始末だけで、plugin/registry/frameworkは追加しない。入力・対象・探索設定・件数/順序/seed・cold/warm寿命・warmup・perf設定はconfig/scheduleへ置く。実験番号、固定SHA、20/80/36/6やsampling値を共通sourceの拒否条件にしない。直接比較中の376A/Bはconfigで対象を選び、比較終了後に不要な専用入口/schema/CLI/shim/testを撤去する。現役入口は`quoridor-runner measure`（Cargo feature `measurement`）へ統合した。旧360/376/349専用入口・schema・生成/資格判定は撤去した。対象A/B・入力順・件数・session・perfは設定から渡す。Pythonの既存限定検証を元scopeで受け入れ、統合時に見つけたteardown session名と途切れたjournal末尾の記録を修正した。新しいRust3定義は実PASSした。続くClippyのtest-module配置指摘はmoduleを末尾へ移すだけで修正し、成功した3定義のbodyを変えず再実行していない。必要なClippy/release・真正artifactとraw-profiler所有境界を通常修復で確認し、349の全36 callsは実COMPLETEになった。元のsampled CPU entry／引数／permission拒否、RAWとUNKNOWN・mixed-image制約は保持する。終了済み36を再実行せず、結果の解釈は既存findingsを参照する。
