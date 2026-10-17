@@ -1,0 +1,262 @@
+{
+  "issue": "quoridor-4lc.324.5.2",
+  "status": "RESULT_BLIND_PROSPECTIVE_FIXED",
+  "scope": "new low-LR continuation from each saved BEST; no teacher/native/arena/architecture/default change",
+  "recovery": {
+    "S": {
+      "chosen": "BEST21265",
+      "checkpoint": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/full-public-teachers-v1/fit-S-entry-v2/best.pt",
+        "sha256": "a3a32569d6b6eeac32b48c5b1d1ee8f360cdd73896fda53b4a8e67a62d36013d",
+        "bytes": 160635
+      },
+      "native_export_ref_metadata_only": {
+        "descriptor": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/full-public-teachers-v1/fit-S-entry-v2/best-model/manifest.json",
+          "sha256": "4158e4ea779eb144487b281e9d7fdbbe1898939999bf25e623abe23a28d8dd67",
+          "bytes": 680,
+          "mode": "0600"
+        },
+        "weights": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/full-public-teachers-v1/fit-S-entry-v2/best-model/weights.f32",
+          "sha256": "9f31fa41bd3041db2f90e9f736ca0b1eeeb5c28656fc5957cb60df83dac66f0a",
+          "bytes": 49284,
+          "mode": "0644"
+        },
+        "training_target": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/full-public-teachers-v1/fit-S-entry-v2/best-model/training-target.json",
+          "sha256": "a9a1038d4fca4288f5b961ff8e658210bd15c68380f33f5514226b681a83b12e",
+          "bytes": 37,
+          "mode": "0600"
+        },
+        "native_typed_id": null,
+        "native_correspondence": null
+      },
+      "baseline": {
+        "kind": "saved selected-checkpoint continuation baseline, not common INITIAL",
+        "point": 21265,
+        "V": 0.2164902889481301,
+        "Tpanel": 0.2028382516257609,
+        "weighted_V_observations": 312247,
+        "actual_full_V_forward_rows_if_executed": 354331,
+        "actual_Tpanel_forward_rows_if_executed": 124435,
+        "reuse_requires": "exact checkpoint/teacher bank/dataset/Tpanel/V/scale/metric identity join; no head replay merely to create a new baseline filename"
+      },
+      "restore": [
+        "six matching FP32 parameters",
+        "six matching Adam states/steps",
+        "saved index Torch RNG5056bytes",
+        "saved PCG64 reflection state",
+        "dataset/model/scale/position"
+      ],
+      "override_only_optimizer_hyperparameter": {
+        "lr": 0.0001
+      },
+      "fresh_Adam": false,
+      "warmup_updates": 0,
+      "selected_checkpoint_step": 21265,
+      "selected_checkpoint_draws": 87101440,
+      "historical_executed_step": 21950,
+      "historical_executed_draws": 89907040,
+      "historical_executed_NNUE_rows_per_teacher": 105706318,
+      "historical_tail_refund": 0,
+      "old_digest_prefix": "a3ccdf2fcfd9240f75160f91955194c68bebcb1333ff6c3f4e3c03331e36dc0b",
+      "new_digest": "new-phase/block digest plus explicit old-prefix binding; no fabricated concatenated SHA256 state",
+      "new_phase_scheduler": {
+        "significant_best": 0.2164902889481301,
+        "nonsignificant_observations": 0,
+        "floor_observations": 0,
+        "floor_training_draws": 0,
+        "overfit_streak": 0
+      },
+      "new_exposure_counters": "start at zero; original BEST per-row exposure is unavailable, historical LAST array is not spliced in"
+    },
+    "C": {
+      "chosen": "BEST21265",
+      "checkpoint": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/full-public-teachers-v1/fit-C-v1/best.pt",
+        "sha256": "282bbd90f4d32944ed08315a20d4ea5a4f1683488425c3a4ecf6bd8ecfe19e13",
+        "bytes": 160635
+      },
+      "native_export_ref_metadata_only": {
+        "descriptor": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/full-public-teachers-v1/fit-C-v1/best-model/manifest.json",
+          "sha256": "3040a009c33dee09ee4a8de2c926d562f97a7749ea136b5838997c71172d6cc7",
+          "bytes": 680,
+          "mode": "0600"
+        },
+        "weights": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/full-public-teachers-v1/fit-C-v1/best-model/weights.f32",
+          "sha256": "f7f0cd117e2e11a3a32f0f53db6ee699c7c374359b9e26214bb6b2fa551a49aa",
+          "bytes": 49284,
+          "mode": "0644"
+        },
+        "training_target": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/full-public-teachers-v1/fit-C-v1/best-model/training-target.json",
+          "sha256": "a9a1038d4fca4288f5b961ff8e658210bd15c68380f33f5514226b681a83b12e",
+          "bytes": 37,
+          "mode": "0600"
+        },
+        "native_typed_id": null,
+        "native_correspondence": null
+      },
+      "baseline": {
+        "kind": "saved selected-checkpoint continuation baseline, not common INITIAL",
+        "point": 21265,
+        "V": 0.14290233048332288,
+        "Tpanel": 0.1353333171688042,
+        "weighted_V_observations": 312247,
+        "actual_full_V_forward_rows_if_executed": 354331,
+        "actual_Tpanel_forward_rows_if_executed": 124435,
+        "reuse_requires": "exact checkpoint/teacher bank/dataset/Tpanel/V/scale/metric identity join; no head replay merely to create a new baseline filename"
+      },
+      "restore": [
+        "six matching FP32 parameters",
+        "six matching Adam states/steps",
+        "saved index Torch RNG5056bytes",
+        "saved PCG64 reflection state",
+        "dataset/model/scale/position"
+      ],
+      "override_only_optimizer_hyperparameter": {
+        "lr": 0.0001
+      },
+      "fresh_Adam": false,
+      "warmup_updates": 0,
+      "selected_checkpoint_step": 21265,
+      "selected_checkpoint_draws": 87101440,
+      "historical_executed_step": 21950,
+      "historical_executed_draws": 89907040,
+      "historical_executed_NNUE_rows_per_teacher": 105706318,
+      "historical_tail_refund": 0,
+      "old_digest_prefix": "a3ccdf2fcfd9240f75160f91955194c68bebcb1333ff6c3f4e3c03331e36dc0b",
+      "new_digest": "new-phase/block digest plus explicit old-prefix binding; no fabricated concatenated SHA256 state",
+      "new_phase_scheduler": {
+        "significant_best": 0.14290233048332288,
+        "nonsignificant_observations": 0,
+        "floor_observations": 0,
+        "floor_training_draws": 0,
+        "overfit_streak": 0
+      },
+      "new_exposure_counters": "start at zero; original BEST per-row exposure is unavailable, historical LAST array is not spliced in"
+    }
+  },
+  "shared": {
+    "R": 2809595,
+    "V_weighted_observations": 312247,
+    "batch": 4096,
+    "Adam": {
+      "betas": [0.9, 0.999],
+      "eps": 1e-8,
+      "weight_decay": 0
+    },
+    "FP32": true,
+    "reflection_probability": 0.5,
+    "architecture_scale_multiplicity_teacher_banks": "unchanged exact original identities",
+    "bypass": "OFF",
+    "public_z_gate": false,
+    "new_seed_or_RNG_draw_now": false
+  },
+  "observation": {
+    "every_target_draws": 2809595,
+    "new_step_k": "ceil(k*R/4096); full batches until the sole final total-tail batch",
+    "block_boundary": "checkpoint/return only; no sampler/optimizer/RNG/scheduler reset or truncated batch at ordinary block ends",
+    "full_weighted_V_each_point": true,
+    "V_actual_forward_rows": 354331,
+    "Tpanel_requested_rows": 65536,
+    "Tpanel_actual_forward_rows": 124435,
+    "Tpanel_role": "diagnostic, never selector or ordinary plateau gate",
+    "same_V_predictions_for_metrics": true,
+    "baseline_reused_vs_newly_forwarded_rows": "record separately; maximum budget counts baseline conservatively"
+  },
+  "schedule": {
+    "initial_lr": 0.0001,
+    "factor": 0.5,
+    "floor": 1e-6,
+    "ladder": [0.0001, 5e-5, 2.5e-5, 1.25e-5, 6.25e-6, 3.125e-6, 1.5625e-6, 1e-6],
+    "significant_delta": "max(1e-5,1e-4*significant_best_V)",
+    "significant_improvement": "V < significant_best_V - delta; equality is nonsignificant",
+    "strict_BEST": "minimum finite own full weighted-V MSE including recovery baseline; exact tie keeps earliest",
+    "strict_BEST_does_not_reset_significant_patience": true,
+    "decay_after_consecutive_nonsignificant_observations": 3,
+    "nonfloor_minimum": "three 1R-target full-V observations before a no-improvement decay; no extra 8R nonfloor dwell",
+    "on_decay": "keep global significant_best; reset bad counter; change next update LR only; carry current LAST model/Adam/RNG, never splice BEST weights with LAST Adam",
+    "used_update_lr_vs_post_V_next_lr": "separate actual fields; no repeated step or LR increase",
+    "floor_entry": "first update actually using1e-6; observation that scheduled floor does not count floor training",
+    "floor_plateau": "actual training draws at floor >=8*R AND8 consecutive full-V observations at floor without significant improvement",
+    "floor_boundary_rounding": "actual draw inequality is authoritative; eight rounded intervals may require a ninth observation to reach8R",
+    "floor_best_tiny_minimum": "may update strict BEST but cannot reset significant patience",
+    "old_stop4": "not used; old static recipe/results unchanged"
+  },
+  "overfit_STOP": {
+    "eligible_only": "after >=8*R actual draws at floor1e-6",
+    "anchor": "current strict V-best point and its matching same Tpanel MSE; recovery baseline may be anchor",
+    "per_observation": "V >= anchor_V + max(.002,.01*anchor_V) AND Tpanel <= anchor_T - max(1e-5,1e-4*anchor_T)",
+    "sustained": "three consecutive ordinary full-V points, all with updates at floor; otherwise streak resets",
+    "nonfloor": "record diagnostic divergence; normal three-stale LR decay continues, no premature old stop4",
+    "verdict": "OVERFIT_STOP/NEEDED_WORK, preserve strict BEST; operational divergence, not population overfit proof",
+    "priority_at_same_point": "nonfinite/error/cancel/resource > OVERFIT_STOP > floor plateau > finite draw/quota cap"
+  },
+  "blocks": {
+    "target_added_R_each": 16,
+    "max_blocks_each_teacher": 16,
+    "max_added_R_each_teacher": 256,
+    "autonomous_next": "unless terminal criterion/failure/cancel, continue next finite block with exact live state while within NEW quotas and genuine support/resources; no per-block LLM/ACK",
+    "improvement_persists_at_cap": "NOT_CONVERGED/NEEDED_WORK; report attained work, floor exposure, bad counter and remaining criterion, no horizon/seed/teacher refill",
+    "resume_after_process_error": "no silent retry; retain original failure/current state and require truthful matching-state/resource boundary within same issued scope"
+  },
+  "new_logical_quota": {
+    "per_teacher": 850000000,
+    "whole": 1700000000,
+    "planned_per_teacher_upper": 842299182,
+    "planned_whole_upper": 1684598364,
+    "includes": "training/normal V/Tpanel/baseline if newly evaluated/failed attempts",
+    "native_heads_teacher_rows_games_bootstrap": 0,
+    "disjoint_teacher_caps_no_lending": true,
+    "old_unused_credit_or_old_work_refund": 0
+  },
+  "records": [
+    "historical executed work",
+    "selected branch position",
+    "new local steps/draws/epoch-equivalents",
+    "actual Adam step",
+    "actual update LR and post-V next LR",
+    "strict/significant best and bad counters",
+    "weighted V observations vs actual forward rows",
+    "new/old-reused baseline rows",
+    "new block digest/exposure counters",
+    "BEST/LAST actual artifacts",
+    "plateau/overfit/resource verdict",
+    "outer wall once; nested spans not added; physical NN/continuous peaks/full fees UNKNOWN"
+  ],
+  "future_actual_refs": {
+    "job": null,
+    "runtime": null,
+    "new_checkpoint": null,
+    "bulk_support": null
+  },
+  "integration_resolution": {
+    "source_settings": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/static-teachers-low-lr-analysis-v1/design-v1/settings.json",
+      "sha256": "e2cbe14372f70ea18261815f58cfc4af44b95e59a0c8d568cea3155af71fece2",
+      "bytes": 11567,
+      "mode": "0644"
+    },
+    "overfit_streak": "Track the three-consecutive divergence streak across ordinary floor-LR full-V observations; only STOP eligibility requires floor_draws>=8R. Do not require all three observations to occur after the8R threshold. At a point meeting both, OVERFIT_STOP precedes practicalplateau as fixed.",
+    "actual_new_support": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/static-teachers-low-lr-v1/phase-support-v1.json",
+      "sha256": "2393eca13b51c34cc84d18e0c7a7651960a862e55f573a2b6eb29dc9a1882bf8",
+      "bytes": 2459,
+      "mode": "0644"
+    },
+    "support_application": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/static-teachers-low-lr-v1/storage-support-application-v1.json",
+      "sha256": "077fc8fd3af98fa0273b096fb4462ac7410bc03eb001287c2cfeebc53796a494",
+      "bytes": 5878,
+      "mode": "0644"
+    },
+    "new_whole_B": 100663296,
+    "new_native_or_games": 0,
+    "first_new_fit_result": null,
+    "future_source_software_GPU_and_state_readiness": "Not granted by this result-blind protocol"
+  }
+}
