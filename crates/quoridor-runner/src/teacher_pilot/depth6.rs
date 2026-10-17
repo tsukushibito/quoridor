@@ -117,6 +117,9 @@ pub struct InputConfig {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reuse_schedule: Option<quoridor_data::terminal_stream::BoundJson>,
     pub excluded_books: Vec<quoridor_data::terminal_stream::BoundJson>,
+    /// Completed unprotected public input classes, opaque exact/LR endpoint exclusion.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub excluded_static_inputs: Option<quoridor_data::terminal_stream::BoundJson>,
     /// Keep only the first scheduled member of each evaluation collision family.
     /// A refused slot stays missing; no new candidate or request is drawn.
     #[serde(default, skip_serializing_if = "super::false_flag")]
@@ -129,6 +132,7 @@ fn filter_input_slots(
     excluded: &[(String, Vec<u16>)],
     split_seed: u64,
     unique_families: bool,
+    static_endpoint_indices: &BTreeSet<usize>,
 ) -> Result<Vec<ScheduledGame>> {
     let indices = slots
         .iter()
@@ -151,10 +155,18 @@ fn filter_input_slots(
         .iter()
         .map(|a| a.family.clone())
         .collect::<BTreeSet<_>>();
+    let static_blocked = indices
+        .iter()
+        .zip(&partition.assignments[..generated])
+        .filter(|(index, _)| static_endpoint_indices.contains(*index))
+        .map(|(_, assignment)| assignment.family.clone())
+        .collect::<BTreeSet<_>>();
     let mut seen = BTreeSet::new();
     for (&index, assignment) in indices.iter().zip(&partition.assignments[..generated]) {
         let reason = if blocked.contains(&assignment.family) {
             Some("excluded_book_collision_family")
+        } else if static_blocked.contains(&assignment.family) {
+            Some("excluded_static_endpoint_collision_family")
         } else if unique_families && !seen.insert(assignment.family.clone()) {
             Some("duplicate_scheduled_collision_family")
         } else {
@@ -183,6 +195,11 @@ pub fn prepare_inputs(c: &InputConfig) -> Result<serde_json::Value> {
     if !c.output.is_absolute() {
         return Err("fresh absolute global input output required".into());
     }
+    let static_inputs = c
+        .excluded_static_inputs
+        .as_ref()
+        .map(quoridor_data::StaticInputExclusions::from_manifest)
+        .transpose()?;
     let slots = if let Some(reference) = &c.reuse_schedule {
         validate_schedule_shape(c.families, &c.prefix_lengths)?;
         let source = reference.read()?;
@@ -229,7 +246,23 @@ pub fn prepare_inputs(c: &InputConfig) -> Result<serde_json::Value> {
             excluded.push((format!("excluded-book-{book}-{i}"), prefix));
         }
     }
-    let slots = filter_input_slots(slots, &excluded, c.split_seed, c.unique_families)?;
+    let mut static_endpoint_indices = BTreeSet::new();
+    if let Some(inputs) = &static_inputs {
+        for (index, slot) in slots.iter().enumerate() {
+            if let Some(prefix) = &slot.prefix
+                && inputs.contains_prefix(prefix)?
+            {
+                static_endpoint_indices.insert(index);
+            }
+        }
+    }
+    let slots = filter_input_slots(
+        slots,
+        &excluded,
+        c.split_seed,
+        c.unique_families,
+        &static_endpoint_indices,
+    )?;
     let partition = global_partition(&slots, c.split_seed)?;
     let unique_family_count = partition
         .assignments
@@ -254,11 +287,22 @@ pub fn prepare_inputs(c: &InputConfig) -> Result<serde_json::Value> {
             path,
         })
     };
-    let schedule = write(
-        "schedule.json",
-        &serde_json::json!({"generator_version":quoridor_data::common_corpus::VERSION,"prefix_seed":c.prefix_seed,
-            "prefix_lengths":c.prefix_lengths,"reused_schedule":c.reuse_schedule,"scheduled":slots}),
-    )?;
+    let mut schedule_value = serde_json::json!({
+        "generator_version":quoridor_data::common_corpus::VERSION,"prefix_seed":c.prefix_seed,
+        "prefix_lengths":c.prefix_lengths,"reused_schedule":c.reuse_schedule,"scheduled":slots});
+    if let Some(reference) = &c.excluded_static_inputs {
+        schedule_value["excluded_static_inputs"] = serde_json::to_value(reference)?;
+        schedule_value["static_endpoint_match_slots"] =
+            serde_json::to_value(&static_endpoint_indices)?;
+        schedule_value["static_endpoint_family_refusals"] = serde_json::json!(
+            slots
+                .iter()
+                .filter(|slot| slot.scheduled_failure.as_deref()
+                    == Some("excluded_static_endpoint_collision_family"))
+                .count()
+        );
+    }
+    let schedule = write("schedule.json", &schedule_value)?;
     let partition = write("partition.json", &serde_json::to_value(partition)?)?;
     let prefix_book = write(
         "prefix-book.json",
@@ -338,8 +382,14 @@ mod tests {
             input_slot(1, &[13, 67]),
             input_slot(2, &[3]),
         ];
-        let filtered =
-            filter_input_slots(slots, &[("existing".into(), vec![13])], 23, false).unwrap();
+        let filtered = filter_input_slots(
+            slots,
+            &[("existing".into(), vec![13])],
+            23,
+            false,
+            &BTreeSet::new(),
+        )
+        .unwrap();
         assert_eq!(filtered.len(), 3);
         for (i, expected) in [vec![13], vec![13, 67]].iter().enumerate() {
             assert!(filtered[i].prefix.is_none() && filtered[i].root.is_none());
@@ -362,9 +412,10 @@ mod tests {
             input_slot(1, &[13, 67]),
             input_slot(2, &[3]),
         ];
-        let generation = filter_input_slots(slots.clone(), &[], 23, false).unwrap();
+        let generation =
+            filter_input_slots(slots.clone(), &[], 23, false, &BTreeSet::new()).unwrap();
         assert!(generation.iter().all(|slot| slot.prefix.is_some()));
-        let evaluation = filter_input_slots(slots, &[], 23, true).unwrap();
+        let evaluation = filter_input_slots(slots, &[], 23, true, &BTreeSet::new()).unwrap();
         assert_eq!(evaluation[0].prefix, Some(vec![13]));
         assert_eq!(
             evaluation[1].scheduled_failure.as_deref(),
@@ -416,6 +467,7 @@ mod tests {
             split_seed: 23,
             excluded_books: vec![],
             unique_families: false,
+            excluded_static_inputs: None,
             output: root.join("pilot"),
             reuse_schedule: Some(BoundJson {
                 sha256: quoridor_data::file_sha(&master).unwrap(),
@@ -448,5 +500,40 @@ mod tests {
         wrong.output = root.join("wrong-length");
         assert!(prepare_inputs(&wrong).is_err());
         std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn input_static_endpoint_refusal_preserves_original_collision_family_attempts() {
+        let slots = vec![
+            input_slot(0, &[3]),
+            input_slot(1, &[3, 67]),
+            input_slot(2, &[13]),
+        ];
+        let filtered = filter_input_slots(slots, &[], 23, true, &BTreeSet::from([0])).unwrap();
+        assert_eq!(filtered.len(), 3);
+        for (i, expected) in [vec![3], vec![3, 67]].iter().enumerate() {
+            assert!(filtered[i].prefix.is_none() && filtered[i].root.is_none());
+            assert_eq!(filtered[i].attempts.len(), 1);
+            assert_eq!(&filtered[i].attempts[0].prefix, expected);
+            assert_eq!(filtered[i].attempts[0].attempt, 0);
+            assert_eq!(
+                filtered[i].scheduled_failure.as_deref(),
+                Some("excluded_static_endpoint_collision_family")
+            );
+        }
+        assert_eq!(filtered[2].prefix, Some(vec![13]));
+        assert!(filtered[2].attempts[0].rejection.is_none());
+        let old: InputConfig = serde_json::from_value(serde_json::json!({
+            "families":3,"prefix_seed":15,"prefix_lengths":[4,8,12,16],
+            "split_seed":23,"excluded_books":[],"output":"/synthetic-static-endpoint-input"
+        }))
+        .unwrap();
+        assert!(old.excluded_static_inputs.is_none());
+        assert!(
+            serde_json::to_value(old)
+                .unwrap()
+                .get("excluded_static_inputs")
+                .is_none()
+        );
     }
 }

@@ -57,6 +57,130 @@ pub unsafe extern "C" fn quoridor_public_sigma_inputs(
     0
 }
 
+fn model_key(board: Position) -> crate::Result<[u8; 28]> {
+    let input = quoridor_nnue::encode_qf1(board)?;
+    let mut key = [0; 28];
+    key[..2].copy_from_slice(&board.pawns);
+    key[2..4].copy_from_slice(&board.walls_remaining);
+    key[4..12].copy_from_slice(&board.horizontal.to_le_bytes());
+    key[12..20].copy_from_slice(&board.vertical.to_le_bytes());
+    for (i, distance) in input.distance.iter().enumerate() {
+        key[20 + i * 4..24 + i * 4].copy_from_slice(&distance.to_le_bytes());
+    }
+    Ok(key)
+}
+
+/// Opaque, SHA-bound unprotected public T/V input classes. No labels/history.
+/// PAIR37 belongs to the completed static-public input owner, not a book codec.
+pub struct StaticInputExclusions {
+    keys: Vec<[u8; 28]>,
+}
+impl StaticInputExclusions {
+    pub fn from_manifest(reference: &crate::terminal_stream::BoundJson) -> crate::Result<Self> {
+        use sha2::{Digest, Sha256};
+        use std::{
+            fs::File,
+            io::{BufReader, Read},
+            path::Path,
+        };
+
+        let manifest = reference.read()?;
+        if manifest["schema"] != "quoridor-public-static-input-classes-v1"
+            || manifest["status"] != "COMPLETE"
+            || manifest["original_only"] != true
+            || manifest["pair_record_bytes"] != 37
+            || reference
+                .path
+                .parent()
+                .ok_or("input manifest parent")?
+                .join("INCOMPLETE")
+                .exists()
+        {
+            return Err("complete original unprotected PAIR37 input manifest required".into());
+        }
+        let entry = &manifest["class_pairs"];
+        let path = Path::new(entry["path"].as_str().ok_or("PAIR37 path")?);
+        let expected_bytes = entry["bytes"].as_u64().ok_or("PAIR37 bytes")?;
+        let expected_rows = manifest["counts"]["pair_rows"]
+            .as_u64()
+            .ok_or("PAIR37 count")?;
+        let expected_sha = entry["sha256"].as_str().ok_or("PAIR37 SHA")?;
+        if !path.is_absolute()
+            || !std::fs::symlink_metadata(path)?.file_type().is_file()
+            || expected_bytes == 0
+            || expected_bytes % 37 != 0
+            || expected_bytes / 37 != expected_rows
+            || expected_sha.len() != 64
+            || !expected_sha
+                .bytes()
+                .all(|c| c.is_ascii_digit() || (b'a'..=b'f').contains(&c))
+        {
+            return Err("exact finite PAIR37 framing/custody required".into());
+        }
+        let file = File::open(path)?;
+        if file.metadata()?.len() != expected_bytes {
+            return Err("PAIR37 payload length differs".into());
+        }
+        let mut reader = BufReader::new(file);
+        let mut digest = Sha256::new();
+        let mut keys = Vec::new();
+        keys.try_reserve_exact(usize::try_from(expected_rows)?)?;
+        let mut observations = [0_u64; 2];
+        for _ in 0..expected_rows {
+            let mut row = [0; 37];
+            reader.read_exact(&mut row)?;
+            digest.update(row);
+            let key: [u8; 28] = row[..28].try_into()?;
+            let n = u64::from(u32::from_le_bytes(row[28..32].try_into()?))
+                + u64::from(u32::from_le_bytes(row[32..36].try_into()?));
+            if n == 0 || row[36] > 1 || keys.last().is_some_and(|previous| previous >= &key) {
+                return Err(
+                    "PAIR37 sorted unique unprotected class/multiplicity/split differs".into(),
+                );
+            }
+            let split = usize::from(row[36]);
+            observations[split] = observations[split]
+                .checked_add(n)
+                .ok_or("PAIR37 count overflow")?;
+            keys.push(key);
+        }
+        let mut extra = [0];
+        if reader.read(&mut extra)? != 0
+            || format!("{:x}", digest.finalize()) != expected_sha
+            || reader.get_ref().metadata()?.len() != expected_bytes
+            || observations[0] != manifest["counts"]["train"].as_u64().ok_or("T count")?
+            || observations[1] != manifest["counts"]["validation"].as_u64().ok_or("V count")?
+        {
+            return Err("PAIR37 complete SHA/multiplicity census differs".into());
+        }
+        Ok(Self { keys })
+    }
+
+    pub fn contains_prefix(&self, prefix: &[u16]) -> crate::Result<bool> {
+        use quoridor_core::research::SigmaContext;
+
+        // Reuse the sole full-prefix replay/LR action owner. No board-only
+        // public input is assigned a fabricated history.
+        let reflected = prefix
+            .iter()
+            .map(|&action| crate::terminal::reflect_action(action))
+            .collect::<crate::Result<Vec<_>>>()?;
+        for actions in [prefix, reflected.as_slice()] {
+            let context = SigmaContext::from_prefix(actions)?;
+            // The existing Sigma STM plane owner handles player exchange and
+            // goal direction; its existing decoder supplies canonical player0.
+            let canonical = crate::sigma_plane_position(&quoridor_core::research::features(
+                context.position(),
+            ))?;
+            let key = model_key(canonical)?;
+            if self.keys.binary_search(&key).is_ok() {
+                return Ok(true);
+            }
+        }
+        Ok(false)
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -146,5 +270,112 @@ mod tests {
                 1
             );
         }
+    }
+
+    fn endpoint_manifest(
+        root: &std::path::Path,
+        entries: &[([u8; 28], u32, u8)],
+    ) -> crate::terminal_stream::BoundJson {
+        std::fs::create_dir(root).unwrap();
+        let mut raw = Vec::new();
+        let mut counts = [0_u64; 2];
+        for (key, n, split) in entries {
+            raw.extend(key);
+            raw.extend(n.to_le_bytes());
+            raw.extend(0_u32.to_le_bytes());
+            raw.push(*split);
+            counts[usize::from(*split == 1)] += u64::from(*n);
+        }
+        let pairs = root.join("pairs.bin");
+        std::fs::write(&pairs, &raw).unwrap();
+        let path = root.join("cache.json");
+        std::fs::write(
+            &path,
+            serde_json::to_vec(&serde_json::json!({
+                "schema":"quoridor-public-static-input-classes-v1","status":"COMPLETE",
+                "original_only":true,"pair_record_bytes":37,
+                "class_pairs":{"path":pairs,"bytes":raw.len(),"sha256":crate::hex_digest(&raw)},
+                "counts":{"pair_rows":entries.len(),"train":counts[0],"validation":counts[1]}
+            }))
+            .unwrap(),
+        )
+        .unwrap();
+        crate::terminal_stream::BoundJson {
+            sha256: crate::file_sha(&path).unwrap(),
+            path,
+        }
+    }
+
+    fn endpoint_key(prefix: &[u16]) -> [u8; 28] {
+        use quoridor_core::research::SigmaContext;
+        let reflected = prefix
+            .iter()
+            .map(|&a| crate::terminal::reflect_action(a).unwrap())
+            .collect::<Vec<_>>();
+        [prefix, reflected.as_slice()]
+            .iter()
+            .map(|actions| {
+                let p = SigmaContext::from_prefix(actions).unwrap().position();
+                let canonical =
+                    crate::sigma_plane_position(&quoridor_core::research::features(p)).unwrap();
+                let k = model_key(canonical).unwrap();
+                assert_eq!(k, key(canonical)); // independent pre-existing packing reference
+                k
+            })
+            .min()
+            .unwrap()
+    }
+
+    #[test]
+    fn public_static_endpoint_pair37_binding_and_canonical_turn_lr() {
+        let root = std::env::temp_dir().join(format!(
+            "public-static-endpoint-positive-{}",
+            std::process::id()
+        ));
+        let mut entries = vec![(endpoint_key(&[3]), 2, 0), (endpoint_key(&[13, 67]), 3, 1)];
+        entries.sort_by_key(|entry| entry.0);
+        let reference = endpoint_manifest(&root, &entries);
+        let bank = StaticInputExclusions::from_manifest(&reference).unwrap();
+        assert!(bank.contains_prefix(&[3]).unwrap()); // P1 STM becomes public canonical P0
+        assert!(bank.contains_prefix(&[5]).unwrap()); // native true LR
+        assert!(bank.contains_prefix(&[13, 67]).unwrap()); // P0 STM / V class also excluded
+        assert!(!bank.contains_prefix(&[]).unwrap());
+        assert!(bank.contains_prefix(&[0]).is_err()); // illegal prefix is not "not found"
+        std::fs::write(root.join("INCOMPLETE"), b"original failed publication").unwrap();
+        assert!(StaticInputExclusions::from_manifest(&reference).is_err());
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn public_static_endpoint_refuses_hash_order_split_and_multiplicity_mismatch() {
+        let base = std::env::temp_dir().join(format!(
+            "public-static-endpoint-negative-{}",
+            std::process::id()
+        ));
+        std::fs::create_dir(&base).unwrap();
+        let k = endpoint_key(&[3]);
+        for (name, entries) in [
+            ("duplicate", vec![(k, 1, 0), (k, 1, 1)]),
+            ("zero", vec![(k, 0, 0)]),
+            ("split", vec![(k, 1, 2)]),
+        ] {
+            let reference = endpoint_manifest(&base.join(name), &entries);
+            assert!(StaticInputExclusions::from_manifest(&reference).is_err());
+        }
+        let reference = endpoint_manifest(&base.join("hash"), &[(k, 1, 0)]);
+        let mut raw = std::fs::read(base.join("hash/pairs.bin")).unwrap();
+        raw[0] ^= 1;
+        std::fs::write(base.join("hash/pairs.bin"), raw).unwrap();
+        assert!(StaticInputExclusions::from_manifest(&reference).is_err());
+        let reference = endpoint_manifest(&base.join("counts"), &[(k, 1, 0)]);
+        let mut metadata = reference.read().unwrap();
+        metadata["counts"]["train"] = serde_json::json!(2);
+        std::fs::write(&reference.path, serde_json::to_vec(&metadata).unwrap()).unwrap();
+        let changed = crate::terminal_stream::BoundJson {
+            sha256: crate::file_sha(&reference.path).unwrap(),
+            path: reference.path,
+        };
+        assert!(StaticInputExclusions::from_manifest(&changed).is_err());
+        std::fs::remove_dir_all(base).unwrap();
     }
 }
