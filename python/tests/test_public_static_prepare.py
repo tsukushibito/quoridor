@@ -164,6 +164,35 @@ class PreparationPublication(unittest.TestCase):
             "original source refusal",
         )
 
+    def test_work_publication_and_close_failures_all_survive(self):
+        work = ValueError("work W")
+        publication = OSError("publication P")
+        close = RuntimeError("close C")
+
+        def refuse(*args, **kwargs):
+            raise work
+
+        def fail_publication(*args, **kwargs):
+            raise publication
+
+        connection = types.SimpleNamespace(close=lambda: (_ for _ in ()).throw(close))
+        with (
+            patch.object(self.worker, "create_class_accumulator", return_value=connection),
+            patch.object(self.worker, "download", self.download),
+            patch.object(self.worker, "accumulate_original_shard", refuse),
+            patch.object(self.worker, "write_json", fail_publication),
+        ):
+            with self.assertRaises(BaseExceptionGroup) as caught:
+                self.worker.prepare(self.config)
+
+        def leaves(error):
+            if isinstance(error, BaseExceptionGroup):
+                return [leaf for child in error.exceptions for leaf in leaves(child)]
+            return [error]
+
+        self.assertEqual(leaves(caught.exception), [work, publication, close])
+        self.assertTrue((Path(self.config["output"]) / "INCOMPLETE").exists())
+
 
 if __name__ == "__main__":
     unittest.main()

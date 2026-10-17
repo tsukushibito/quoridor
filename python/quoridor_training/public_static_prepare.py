@@ -203,9 +203,10 @@ def prepare(config):
                 },
             )
         except BaseException as publication:
-            raise BaseExceptionGroup(
+            primary = BaseExceptionGroup(
                 "original preparation and failure publication", [error, publication]
             )
+            raise primary
         raise
     finally:
         if connection is not None:
