@@ -50,6 +50,8 @@ class StaticHead:
         self.runtime = {
             "torch": torch.__version__,
             "original_parameter_dtypes": original_dtypes,
+            "actual_parameter_devices": sorted({str(p.device) for p in self.model.parameters()}),
+            "actual_parameter_dtypes": sorted({str(p.dtype) for p in self.model.parameters()}),
             "device": device,
             "fp32": True,
             "autocast": False,
@@ -80,7 +82,12 @@ class StaticHead:
         started = time.monotonic()
         try:
             with torch.inference_mode():
-                policy, value, *_ = self.model(torch.from_numpy(x).to(self.device))
+                tensor = torch.from_numpy(x).to(self.device)
+                policy, value, *_ = self.model(tensor)
+                self.runtime["actual_input_device"] = str(tensor.device)
+                self.runtime["actual_input_dtype"] = str(tensor.dtype)
+                self.runtime["actual_value_device"] = str(value.device)
+                self.runtime["actual_value_dtype"] = str(value.dtype)
                 policy_width = 136 if self.kind == "sigma" else 209
                 if (
                     policy.dtype != torch.float32

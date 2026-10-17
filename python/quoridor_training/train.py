@@ -504,11 +504,14 @@ def train(
         or cfg["model"]["hidden_width"] != 32
         or (cfg["model"]["dropout"] != 0)
         or (cfg["model"]["distance_a"] != 0)
-        or (cfg["model"]["distance_b"] != 8)
+        or (cfg["model"]["distance_b"] != (0 if static_teacher else 8))
         or (cfg["optimizer"]["name"] != "adam")
         or (cfg["optimizer"]["weight_decay"] != 0)
     ):
-        raise ValueError("public full fit requires fixed QF1+D FT32/H32/dropout0/a0b8 Adam/wd0")
+        raise ValueError(
+            "public fit requires fixed QF1+D FT32/H32/dropout0 Adam/wd0; "
+            "static a0b0 output-bypassOFF, outcome a0b8"
+        )
     teacher_types = (
         {"bounded_static_teacher"}
         if static_teacher
@@ -1131,7 +1134,11 @@ def train(
                     or cfg["evaluation"]["full_train"]
                     or step in cfg["evaluation"]["full_train_checkpoints"]
                     else "fixed_diagnostic_subset",
-                    "validation_forward_rows": len(evaluation_validation),
+                    "validation_forward_rows": (
+                        praw["actual_logical_rows"]
+                        if static_teacher
+                        else len(evaluation_validation)
+                    ),
                     "train": summarize(current_train_eval, ptrain),
                     "validation": summarize(ix_validation, pval),
                 }

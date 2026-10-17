@@ -5,6 +5,7 @@ No Search/MCTS, sampler, scheduler, teacher selection, replay or restart system.
 """
 
 import argparse
+from datetime import datetime, timezone, timedelta
 from contextlib import contextmanager
 import json
 import os
@@ -112,7 +113,15 @@ def runtime_devices(config):
     }
 
 
-def label_values(config):
+def error_details(error):
+    """Preserve the original error tree and independent secondary facts."""
+    result = dict(type=type(error).__name__, message=str(error))
+    if isinstance(error, BaseExceptionGroup):
+        result["errors"] = [error_details(item) for item in error.exceptions]
+    return result
+
+
+def label_values(config, *, progress_callback=None):
     """One fresh original stream; failure retains partials, never automatically resumes."""
     # Real boundary success, same actual inputs/models/libraries and runtime
     # must already be bound. A submitted job or source clear is not that result.
@@ -196,6 +205,13 @@ def label_values(config):
                 target[:] = np.nan
                 head = None
                 tick = time.monotonic()
+                teacher_start = datetime.now(timezone.utc)
+                encoder_seconds = assignment_flush_seconds = 0.0
+                retained = np.empty(
+                    min(16384, missing) + len(found),
+                    dtype=[("pair", "<u8"), ("orientation", "u1"), ("reused", "u1")],
+                )
+                retained_count = 0
                 newly_returned = 0
                 portion_rows = min(16384, missing)
                 first_portion = None
@@ -215,6 +231,21 @@ def label_values(config):
                         )
                         for i in np.flatnonzero(present):
                             values[i] = reuse[kind][bytes(chunk[i])]
+                        reused_positions = np.flatnonzero(present)
+                        if len(reused_positions):
+                            save_tick = time.monotonic()
+                            target[pair[reused_positions], orientation[reused_positions]] = values[
+                                reused_positions
+                            ]
+                            assignment_flush_seconds += time.monotonic() - save_tick
+                            if first_portion is None:
+                                stop = retained_count + len(reused_positions)
+                                retained["pair"][retained_count:stop] = pair[reused_positions]
+                                retained["orientation"][retained_count:stop] = orientation[
+                                    reused_positions
+                                ]
+                                retained["reused"][retained_count:stop] = 1
+                                retained_count = stop
                         locations = np.flatnonzero(~present)
                         at = 0
                         while at < len(locations):
@@ -222,19 +253,111 @@ def label_values(config):
                             if first_portion is None:
                                 take = min(take, portion_rows - newly_returned)
                             positions = locations[at : at + take]
+                            encode_tick = time.monotonic()
                             sigma, c20 = encoder.encode(chunk[positions], include_c20=kind == "C")
+                            encoder_seconds += time.monotonic() - encode_tick
                             if attempted_total + len(positions) > config["inclusive_row_limit"]:
                                 raise ValueError("inclusive label row budget before dispatch")
                             attempted_total += len(positions)
                             values[positions] = head(sigma if kind == "S" else c20)
                             newly_returned += len(positions)
+                            save_tick = time.monotonic()
+                            target[pair[positions], orientation[positions]] = values[positions]
+                            symmetric = reflected_keys(chunk[positions]) == chunk[positions]
+                            target[pair[positions][symmetric], 1] = values[positions][symmetric]
+                            if first_portion is None:
+                                stop = retained_count + len(positions)
+                                retained["pair"][retained_count:stop] = pair[positions]
+                                retained["orientation"][retained_count:stop] = orientation[
+                                    positions
+                                ]
+                                retained["reused"][retained_count:stop] = 0
+                                retained_count = stop
+                            assignment_flush_seconds += time.monotonic() - save_tick
                             at += len(positions)
                             if first_portion is None and newly_returned == portion_rows:
+                                save_tick = time.monotonic()
+                                target.flush()
+                                assignment_flush_seconds += time.monotonic() - save_tick
+                                measured = datetime.now(timezone.utc)
+                                wall = time.monotonic() - tick
+                                retained_path = output / ("first-" + kind + "-indices.bin")
+                                retained[:retained_count].tofile(retained_path)
                                 first_portion = dict(
+                                    status="PARTIAL_RETAINED_NOT_COMPLETE",
+                                    teacher=kind,
+                                    actual_orientation_rows=m,
                                     new_logical_rows=newly_returned,
-                                    wall_seconds=time.monotonic() - tick,
+                                    retained_new_unique_orientation_inputs=newly_returned,
+                                    retained_reused_unique_orientation_inputs=retained_count
+                                    - newly_returned,
+                                    failed_attempted_rows=0,
+                                    remaining_new_rows=missing - newly_returned,
+                                    planned_new_rows=missing,
+                                    reused_boundary_rows=len(found),
+                                    wall_seconds=wall,
+                                    new_inputs_per_second=newly_returned / wall,
+                                    estimated_remaining_new_seconds=(missing - newly_returned)
+                                    * wall
+                                    / newly_returned,
+                                    started_UTC=teacher_start.isoformat(),
+                                    measured_UTC=measured.isoformat(),
+                                    started_JST=teacher_start.astimezone(
+                                        timezone(timedelta(hours=9))
+                                    ).isoformat(),
+                                    measured_JST=measured.astimezone(
+                                        timezone(timedelta(hours=9))
+                                    ).isoformat(),
+                                    encoder_seconds=encoder_seconds,
+                                    assignment_flush_seconds=assignment_flush_seconds,
+                                    head=head.facts(),
+                                    head_span_scope="synchronized return span includes H2D/model/D2H/checks; isolated transfer/kernel UNKNOWN",
+                                    wall_scope="teacher constructor through assigned bank prefix flush; nested spans not summed",
+                                    retained_indices=file_ref(retained_path),
+                                    retained_index_dtype=retained.dtype.descr,
+                                    retained_index_count=retained_count,
+                                    partial_bank=dict(
+                                        path=str(target_path),
+                                        identity=file_identity(target_path),
+                                        shape=[n, 2],
+                                        dtype="<f4",
+                                        mutable_partial=True,
+                                        final_sha256=None,
+                                    ),
+                                    input_classes=config["input_classes"],
+                                    model=entry,
+                                    runtime_boundary=config["runtime_boundary"],
+                                    execution_binding=config.get("execution_binding"),
+                                    device=config["device"],
+                                    batch_rows=config["batch_rows"],
                                     outputs_retained=True,
+                                    C_measured=(kind == "C"),
+                                    fit_ETA="UNMEASURED until original fit and first normal V",
                                 )
+                                first_path = output / ("first-" + kind + "-progress.json")
+                                write_json(first_path, first_portion)
+                                write_json(
+                                    output / "progress.json",
+                                    dict(
+                                        status="PARTIAL",
+                                        teachers=facts,
+                                        first_retained=first_portion,
+                                        inclusive_attempted_rows=attempted_total,
+                                    ),
+                                )
+                                if progress_callback is not None:
+                                    try:
+                                        progress_callback(file_ref(first_path))
+                                    except BaseException as notification_error:
+                                        write_json(
+                                            output
+                                            / ("first-" + kind + "-notification-failure.json"),
+                                            dict(
+                                                error=error_details(notification_error),
+                                                labels_retained=True,
+                                                no_replay=True,
+                                            ),
+                                        )
                         target[pair, orientation] = values
                         # Exact same encoded self-LR input shares its one scalar.
                         canonical = pairs["key"][pair]
@@ -258,16 +381,24 @@ def label_values(config):
                         output / "progress.json",
                         dict(teachers=facts, inclusive_attempted_rows=attempted_total),
                     )
-                except BaseException:
-                    facts[kind] = dict(
+                except BaseException as primary:
+                    partial = dict(
                         status="FAILED_PARTIAL",
                         model=entry,
-                        head=None if head is None else head.facts(),
+                        head="UNKNOWN",
                         new_finite_rows=newly_returned,
                         intended_new_rows=missing,
                         already_charged_global_attempted_rows=attempted_total,
                         scalar_file_complete=False,
                     )
+                    facts[kind] = partial
+                    try:
+                        partial["head"] = None if head is None else head.facts()
+                    except BaseException as secondary:
+                        partial["facts_error"] = error_details(secondary)
+                        raise BaseExceptionGroup(
+                            "label original and head facts", [primary, secondary]
+                        )
                     raise
                 finally:
                     propagating = sys.exception()
@@ -306,20 +437,21 @@ def label_values(config):
                 logical_rows_are_not_physical_heads=True,
                 wall_seconds=time.monotonic() - started,
             )
-            write_json(output / "teacher-values.json", bank)
-            marker.unlink()
-            return dict(
-                manifest=file_ref(output / "teacher-values.json"),
-                inclusive_attempted_rows=attempted_total,
-                teachers=facts,
-            )
+        # Final input identity and both reader finalizers have now succeeded.
+        write_json(output / "teacher-values.json", bank)
+        result = dict(
+            manifest=file_ref(output / "teacher-values.json"),
+            inclusive_attempted_rows=attempted_total,
+            teachers=facts,
+        )
+        marker.unlink()  # Last necessary operation before returning success.
+        return result
     except BaseException as primary:
         try:
             write_json(
                 output / "failure.json",
                 dict(
-                    type=type(primary).__name__,
-                    message=str(primary),
+                    **error_details(primary),
                     inclusive_attempted_rows=attempted_total,
                     teachers=facts,
                     partial_model_failed_kernel_rows="UNKNOWN; attempted batch already charged once",
@@ -467,8 +599,18 @@ def qualify_values(config):
             )
             save_route("S-oldORT-single", reference)
         finally:
-            head_facts["S-oldORT"] = old_head.facts()
-            del old_head
+            propagating = sys.exception()
+            try:
+                head_facts["S-oldORT"] = old_head.facts()
+            except BaseException as secondary:
+                head_facts["S-oldORT"] = dict(facts_error=error_details(secondary))
+                if propagating is not None:
+                    raise BaseExceptionGroup(
+                        "old ORT original and head facts", [propagating, secondary]
+                    )
+                raise
+            finally:
+                del old_head
         for kind, adapter, x in [("S", "sigma", sigma), ("C", "claustrophobia", c20)]:
             head = StaticHead(
                 adapter,
@@ -498,10 +640,24 @@ def qualify_values(config):
                         "new Sigma runtime differs from fixed oldORT; no automatic repeat"
                     )
             finally:
-                head_facts[kind] = head.facts()
+                propagating = sys.exception()
+                secondary = []
+                try:
+                    head_facts[kind] = head.facts()
+                except BaseException as error:
+                    head_facts[kind] = dict(facts_error=error_details(error))
+                    secondary.append(error)
                 del head
                 if config["device"] == "cuda:0":
-                    torch.cuda.empty_cache()
+                    try:
+                        torch.cuda.empty_cache()
+                    except BaseException as error:
+                        secondary.append(error)
+                if secondary:
+                    raise BaseExceptionGroup(
+                        "runtime original and head cleanup",
+                        ([propagating] if propagating else []) + secondary,
+                    )
         if route_counts != plan["routes"] or attempted != plan["total"]:
             raise ValueError("actual complete five-route census differs from pre-entry plan")
         for kind, ref in config["models"].items():
@@ -532,15 +688,15 @@ def qualify_values(config):
             wall_seconds=time.monotonic() - started,
         )
         write_json(output / "result.json", result)
+        returned = dict(result=file_ref(output / "result.json"), actual_logical_rows=attempted)
         marker.unlink()
-        return dict(result=file_ref(output / "result.json"), actual_logical_rows=attempted)
+        return returned
     except BaseException as primary:
         try:
             write_json(
                 output / "failure.json",
                 dict(
-                    type=type(primary).__name__,
-                    message=str(primary),
+                    **error_details(primary),
                     pre_model_plan=plan,
                     logical_rows_attempted=attempted,
                     route_rows_attempted=route_counts,

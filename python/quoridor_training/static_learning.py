@@ -23,7 +23,7 @@ def recipe(train_rows, validation_rows, *, device, threads):
     cfg["model"].update(
         architecture="distance_residual",
         distance_a=0.0,
-        distance_b=8.0,
+        distance_b=0.0,
         transformer_width=32,
         hidden_width=32,
         dropout=0.0,
@@ -233,7 +233,7 @@ def prepare_common(cache, output, config_path):
         model = build_model(init["model"], statistics)
         output = Path(output)
         output.mkdir(exist_ok=False)
-        export(model, init, statistics, {"a": 0.0, "b": 8.0}, output / "initial-model")
+        export(model, init, statistics, {"a": 0.0, "b": 0.0}, output / "initial-model")
         write(output / "scale.json", statistics)
         corpus.verify_binding()
         from .public_static_prepare import file_ref
