@@ -27,6 +27,7 @@ RECORD = np.dtype(
 )
 SCHEMA = "quoridor-public-geometry-v1"
 REVISION_NAME = "original-full-v1"
+MODEL_INPUT = np.dtype(RECORD.descr[:2])
 
 
 def wall_bits(values):
@@ -142,8 +143,37 @@ def model_keys(records):
     Original input SHA is separate because qualified float planes need not have
     identical original bytes for an identical native model input.
     """
-    raw = records.view("u1").reshape(-1, RECORD.itemsize)
-    return np.ascontiguousarray(raw[:, :28]).view("V28").reshape(-1)
+    records = np.asarray(records)
+    if records.ndim != 1 or records.dtype not in (RECORD, MODEL_INPUT):
+        raise ValueError("native model input record dtype/shape")
+    raw = records.view("u1").reshape(-1, records.dtype.itemsize)
+    return np.ascontiguousarray(raw[:, : MODEL_INPUT.itemsize]).view("V28").reshape(-1)
+
+
+def input_records(keys):
+    """Decode exact native input keys, without synthesizing outcome or history."""
+    keys = np.asarray(keys)
+    if keys.ndim != 1 or keys.dtype != np.dtype("V28"):
+        raise ValueError("native model input key dtype/shape")
+    rows = np.ascontiguousarray(keys).view(MODEL_INPUT)
+    validate_geometry(rows["geometry"])
+    distance = rows["distance"]
+    if not np.isfinite(distance).all() or np.any(distance < 0) or np.any(distance > 1):
+        raise ValueError("native FP32 distance input finite/range")
+    return rows
+
+
+def reflected_keys(keys):
+    """The existing true LR geometry route; distance FP32 bits stay unchanged."""
+    rows = input_records(keys).copy()
+    rows["geometry"] = reflect(rows["geometry"])
+    return model_keys(rows)
+
+
+def lr_group_keys(keys):
+    """Exact unordered input/LR pair identity, with no neural invariance claim."""
+    keys = np.asarray(keys)
+    return np.sort(np.column_stack((keys, reflected_keys(keys))), axis=1)[:, 0]
 
 
 def phase_proxy(geometry):

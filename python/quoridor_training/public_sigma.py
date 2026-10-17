@@ -20,8 +20,6 @@ import numpy as np
 from .cache import sha
 from .snapshot import write_json as write
 
-REVISION = "751186344fc52ad0c29bc65922e62c6fa915f006"
-SEED = 31920261006
 from .public_features import (
     RECORD,
     SCHEMA,
@@ -30,6 +28,9 @@ from .public_features import (
     model_keys,
     phase_proxy,
 )
+
+REVISION = "751186344fc52ad0c29bc65922e62c6fa915f006"
+SEED = 31920261006
 
 EXCLUSION = np.dtype([("shard", "u1"), ("row", "<u4"), ("z", "<f4"), ("reason", "u1")])
 PARTITIONS = ("train", "validation", "test-sealed", "evaluation-opened")
@@ -74,7 +75,11 @@ class NativeCompact:
         distances = np.zeros((n, 2), dtype="<f4")
         codes = np.zeros(n, dtype=np.uint8)
         if self.function(
-            planes.ctypes.data, n, bits.ctypes.data, distances.ctypes.data, codes.ctypes.data
+            planes.ctypes.data,
+            n,
+            bits.ctypes.data,
+            distances.ctypes.data,
+            codes.ctypes.data,
         ):
             raise ValueError("native compact ABI framing")
         return bits, distances, codes
@@ -145,7 +150,10 @@ def download(item, scratch, attempts, remaining_bytes, reuse=None):
             f"https://raw.githubusercontent.com/bartolomeo3000/SigmaQuoridor/{REVISION}/{item['path']}",
             headers={"User-Agent": "quoridor-pinned-research"},
         )
-        with urllib.request.urlopen(request, timeout=30) as response, path.open("xb") as output:
+        with (
+            urllib.request.urlopen(request, timeout=30) as response,
+            path.open("xb") as output,
+        ):
             while block := response.read(1024 * 1024):
                 total += len(block)
                 receipt["bytes"] = total
@@ -229,9 +237,40 @@ def opened_observations(descriptors, source):
                 raise ValueError("opened original row outside source front half")
             opened[by_blob[header["blob"]]].append(rows)
         refs.append(
-            {"receipt": str(receipt_path), "sha256": descriptor["receipt_sha256"], "rows": len(ids)}
+            {
+                "receipt": str(receipt_path),
+                "sha256": descriptor["receipt_sha256"],
+                "rows": len(ids),
+            }
         )
     return [np.unique(np.concatenate(v)) if v else np.zeros(0, dtype="<u4") for v in opened], refs
+
+
+def original_plane_chunks(path, item, *, with_values):
+    """Only the original front half; board-only use never opens old labels."""
+    from contextlib import ExitStack
+
+    n = item["rows"]
+    if type(n) is not int or n <= 0 or n % 2 or type(with_values) is not bool:
+        raise ValueError("positive source halves and explicit old-label policy required")
+    with zipfile.ZipFile(path) as archive, ExitStack() as stack:
+        states = stack.enter_context(archive.open("states.npy"))
+        if header(states) != (n, 8, 9, 9):
+            raise ValueError("source states shape")
+        values = stack.enter_context(archive.open("values.npy")) if with_values else None
+        if values is not None and header(values) != (n,):
+            raise ValueError("source values shape")
+        for first in range(0, n // 2, 4096):
+            count = min(4096, n // 2 - first)
+            planes = np.frombuffer(read_exact(states, count * 648 * 4), dtype="<f4").reshape(
+                count, 8, 9, 9
+            )
+            z = (
+                np.frombuffer(read_exact(values, count * 4), dtype="<f4")
+                if values is not None
+                else None
+            )
+            yield np.arange(first, first + count, dtype="<u4"), planes, z
 
 
 def process_shard(path, item, shard, native, reject_stream, partition_streams, opened):
@@ -244,51 +283,41 @@ def process_shard(path, item, shard, native, reject_stream, partition_streams, o
     accepted = np.zeros(4, dtype=np.int64)
     label_counts = dict(positive=0, negative=0, zero_unknown_termination=0, invalid_label=0)
     decoded = 0
-    with zipfile.ZipFile(path) as archive:
-        with archive.open("states.npy") as states, archive.open("values.npy") as values:
-            if header(states) != (n, 8, 9, 9) or header(values) != (n,):
-                raise ValueError("source states/values shape")
-            for first in range(0, half, 4096):
-                count = min(4096, half - first)
-                planes = np.frombuffer(read_exact(states, count * 648 * 4), dtype="<f4").reshape(
-                    count, 8, 9, 9
+    for indices, planes, z in original_plane_chunks(path, item, with_values=True):
+        count = len(indices)
+        assignment = splits[indices].copy()
+        assignment[np.isin(indices, opened)] = 3
+        bits, distances, codes = native.convert(planes)
+        if codes.shape != (count,) or np.any(codes > 6):
+            raise ValueError("native status ABI")
+        reasons += np.bincount(codes, minlength=7)
+        label_counts["positive"] += int(np.count_nonzero(z == 1))
+        label_counts["negative"] += int(np.count_nonzero(z == -1))
+        label_counts["zero_unknown_termination"] += int(np.count_nonzero(z == 0))
+        label_counts["invalid_label"] += int(np.count_nonzero(~np.isin(z, (-1, 0, 1))))
+        valid = (codes == 0) & np.isin(z, (-1, 1))
+        reject = np.zeros(np.count_nonzero(~valid), dtype=EXCLUSION)
+        reject["shard"], reject["row"], reject["z"] = shard, indices[~valid], z[~valid]
+        reject["reason"] = np.where(
+            codes[~valid] != 0, codes[~valid], np.where(z[~valid] == 0, 7, 8)
+        )
+        reject_stream.write(reject.tobytes())
+        if valid.any():
+            rows = np.zeros(np.count_nonzero(valid), dtype=RECORD)
+            rows["geometry"] = geometry_from_native(bits[valid])
+            rows["distance"] = distances[valid]
+            if not np.isfinite(rows["distance"]).all():
+                raise ValueError("native distance finite")
+            rows["z"], rows["shard"], rows["row"] = z[valid], shard, indices[valid]
+            for j, plane in enumerate(planes[valid]):
+                rows["input_sha"][j] = np.frombuffer(
+                    hashlib.sha256(plane.tobytes()).digest(), dtype="u1"
                 )
-                z = np.frombuffer(read_exact(values, count * 4), dtype="<f4")
-                indices = np.arange(first, first + count, dtype="<u4")
-                # IDs, alias split and known exposure are bound before target use.
-                assignment = splits[indices].copy()
-                assignment[np.isin(indices, opened)] = 3
-                bits, distances, codes = native.convert(planes)
-                if codes.shape != (count,) or np.any(codes > 6):
-                    raise ValueError("native status ABI")
-                reasons += np.bincount(codes, minlength=7)
-                label_counts["positive"] += int(np.count_nonzero(z == 1))
-                label_counts["negative"] += int(np.count_nonzero(z == -1))
-                label_counts["zero_unknown_termination"] += int(np.count_nonzero(z == 0))
-                label_counts["invalid_label"] += int(np.count_nonzero(~np.isin(z, (-1, 0, 1))))
-                valid = (codes == 0) & np.isin(z, (-1, 1))
-                reject = np.zeros(np.count_nonzero(~valid), dtype=EXCLUSION)
-                reject["shard"], reject["row"], reject["z"] = shard, indices[~valid], z[~valid]
-                reject["reason"] = np.where(
-                    codes[~valid] != 0, codes[~valid], np.where(z[~valid] == 0, 7, 8)
-                )
-                reject_stream.write(reject.tobytes())
-                if valid.any():
-                    rows = np.zeros(np.count_nonzero(valid), dtype=RECORD)
-                    rows["geometry"] = geometry_from_native(bits[valid])
-                    rows["distance"] = distances[valid]
-                    if not np.isfinite(rows["distance"]).all():
-                        raise ValueError("native distance finite")
-                    rows["z"], rows["shard"], rows["row"] = z[valid], shard, indices[valid]
-                    for j, plane in enumerate(planes[valid]):
-                        rows["input_sha"][j] = np.frombuffer(
-                            hashlib.sha256(plane.tobytes()).digest(), dtype="u1"
-                        )
-                    for partition, stream in enumerate(partition_streams):
-                        selected = rows[assignment[valid] == partition]
-                        stream.write(selected.tobytes())
-                        accepted[partition] += len(selected)
-                decoded += count
+            for partition, stream in enumerate(partition_streams):
+                selected = rows[assignment[valid] == partition]
+                stream.write(selected.tobytes())
+                accepted[partition] += len(selected)
+        decoded += count
     return {
         "stored_rows": n,
         "decoded_original_rows": decoded,
@@ -395,13 +424,21 @@ def prepare(config):
                     output,
                     streams,
                     rejected,
-                    {"receipts": receipts, "attempts": attempts, "counts": counts.tolist()},
+                    {
+                        "receipts": receipts,
+                        "attempts": attempts,
+                        "counts": counts.tolist(),
+                    },
                 )
                 if path.parent == scratch:
                     path.unlink()  # Only qualified owned scratch; preserve all source/hash/attempt facts.
                 print(
                     json.dumps(
-                        {"shard": shard, "counts": counts.tolist(), "seconds": receipt["seconds"]}
+                        {
+                            "shard": shard,
+                            "counts": counts.tolist(),
+                            "seconds": receipt["seconds"],
+                        }
                     ),
                     flush=True,
                 )
