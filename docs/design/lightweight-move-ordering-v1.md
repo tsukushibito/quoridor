@@ -565,3 +565,13 @@ f86fd2b4でP本体・一時typed selector・追加event counter・専用検査�
 BEST43と固定DのOFF OMPPMO二反復では、P/O・P/M中央値比がNNUE.772396/.817556、D.845844/.911020で有限合計基準を満たした。利益はseries 1に偏り、D series 0はMより6.76%悪化し、ply39はP/M2.20148。合計利益から一般的な一律速度・同じ木の高速処理・棋力同等を認定しない。PのPathとtyped TTの実returnは得られたがtail tests/returnsは0で、今回の速度結果はtail固有の採用根拠ではない。
 
 元計測後にPを連続Searchの研究候補として保持した。後続の人間直接指示を受け、commit `c1c3139c9720bcd95f95b1dab7622a99dff6b3e9`で対応する通常研究αβの既定をenable=true / method=path_tailへ変更し、終了したstock observer/API/counter/fixtureを撤去した。共通comparison準備、measurement/sequence、非functional研究αβ arenaが実際の変更入口で、明示OFF/Mは維持する。新しい3件の設定・constructor検査とaffected compile/Clippyが成立し、元成功suiteや576比較は再演していない。共有create/newはOFF/Mで、製品/generator/functional/MCTSへの無条件継承はない。発行済み全量教師対Dは現役準備設定で両評価器を明示OFF/manhattanとし、旧image/configを変更しない。元M/Pの条件・完全履歴/typed TT資格は変更しない。観測OFFとONの旧非時計値、node/時間の非重複、親復元は有限576呼出しで整合した。整理後sourceはUNMEASUREDで、元計測Build7af06bad/image8c7a6d45と同一・計測済みとは扱わない。新しい事後閾値や系列選択を適用条件にせず、全量教師比較へPを混入しない。[実入口の解決表・新software証拠・固定条件・全表と独立会計確認](../../research-data/ai-sigma/zero-stock-continuous433/report-ja.md)。追加の科学runや旧成功suite再演はこの保持判断から発行しない。
+
+### 追加学習後の両NNUEによる終盤打ち切り4条件の次工程（324.6、2026-10-18 JST）
+
+人間の直接指示で、低LR継続324.5の後続に新しい有限比較324.6を登録した。**打ち切りなし（OFF）・駒間距離による確定判定（manhattan）・最短経路による確定判定（path_tail、通常研究既定）・最短経路＋履歴条件の緩和（path_tail_future）**を、追加学習後に実際に選択・凍結したSigma静的教師NNUEとClaustrophobia静的教師NNUEの双方で測る。旧BEST43/旧32R BEST/固定Dを代用せず、学習のplateau/overfit/未収束・資源STOPの限界を結果へ残す。閉じた324.4/433/434を再openせず、旧結果と費用も変更しない。
+
+元の真正32root/fullhistory・系列/色別四persistent sessionを再用し、Control/PVS/TT1M/LMR ON depth_rank/旧近似OFF、D8/各4M nodes/時間上限なしを出発点とする。各評価器でOFF主時計の方式順1→2→3→4→4→3→2→1と、別fresh sessionの診断ON各一pass、計768calls/新規3,072,000,000nodes以内の案を結果前に固定する。省略時defaultに依存せずenable/methodを明示し、軌跡生成・結果後refill・追加反復・条件混合・係数探索はしない。
+
+主時計はOFF Search合計、副時計はsetup/drop込みwhole。最終壁parent make後から親復元までの最大stock0 span、残壁あり処理、初めからstock0のrootを別にする。内包時計を重複加算せず、ON差でOFFを補正しない。fresh/typedTT戻り・資格不成立と必要な非時計対応/合法PV/fullhistory/undo/復元/UNKNOWN/局所悪化を最小共通計測で保持し、追加履歴資格や未訪問node節約を推測しない。終了observer全体を恒久復活せず、関連new software/必要な境界確認後に実測source/imageを凍結し、比較終了後に用途を終えた計測API/counter/fixtureを整理する。現役4方式のcorrectnessと研究既定Pは保護する。
+
+低LR学習が先であり、fair timingは両fit・回収と他substantial作業の実STOP後に直列化する。必要なのは実二endpoint/選択/STOPと新genuine image対応・入力/recipe・fresh CPU/RAM/VRAM/peer/hostreserve4GiB・新しい具体wholeで、324.5のadmincloseやRoot/人間/相談のACKではない。普通の軽い準備は同じ既存担当で独立に進め、旧quota/whole/usedを貸与・再適用・返金しない。新性能job・新固定資源予約・bulk支持はまだ発行していない。[324.6の所有・実artifact依存・固定案・受入れ/整理契約](../../.artifacts/research-team/integration324/post-low-lr-endgame4-v1/task.md)、[直接指示](../../.artifacts/research-policy/post-low-lr-cutoff-comparison-20261018/integration-directive.md)。全USERPAUSE/seals/newE/oldfits96/models/defaults/原RAW/FAILED/費UNKNOWNを維持する。
