@@ -1,0 +1,3273 @@
+{
+  "at": "2026-10-17T07:03:33.722766+00:00",
+  "issue": "quoridor-4lc.431.2",
+  "actor": "codex:01a14740-4f03-7652-b060-529179d3d18a",
+  "actual_resumed_turn_context": {
+    "timestamp": "2026-10-17T06:45:52.054Z",
+    "model": "gpt-6.1-sol",
+    "effort": "max",
+    "cwd": "/workspaces/quoridor",
+    "sandbox": "danger-full-access",
+    "approval": "never"
+  },
+  "status": "COMPLETE_ORIGINAL_SOURCE_AND_FINITE_SAVED_COST_QUESTION",
+  "owner_before_close": {
+    "id": "quoridor-4lc.431.2",
+    "status": "in_progress",
+    "assignee": "codex:01a14740-4f03-7652-b060-529179d3d18a"
+  },
+  "owner_after_close": {
+    "id": "quoridor-4lc.431.2",
+    "status": "closed",
+    "assignee": "codex:01a14740-4f03-7652-b060-529179d3d18a",
+    "closed_at": "2026-10-17T07:02:23Z",
+    "close_reason": "Original independent source/history/TT question and finite384 saved-cost interpretation verified; frozen cost-analysis-v1/report-ja.md/result.json/input-binding.json/verification.json and CSVs bind original Build/image/RAW. P unsupported by preset LMR-ON whole/root rules for both evaluators;192 repeat pairs agree,36 NodeLimit UNKNOWN preserved. Main source-reader STOP and exact process cleanup recorded, affected storage checked once within existing64MiB. Actual original owner verified; verdict accepted by324 and no further work or ACK dependency remains. All original failures/provenance limits/USERPAUSE/default/model/seal/fee UNKNOWN retained."
+  },
+  "Beads_close_and_show_refs": [
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-final-owner-close.log",
+      "sha256": "ba4e38f79f2ee2eacf09fc696bf4cd69fe58058b25077bad1cccfc1ba54413fb",
+      "bytes": 753,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-final-closed-show.log",
+      "sha256": "fb789a4a144cfc30d7cd155dd3c5063364be528f18304be5c9f8cfa6cc75199d",
+      "bytes": 18651,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-final-backup.log",
+      "sha256": "7ed31abe238bf88ef7f67d06d4c0efe8a032eca6980a976ef51ebf1cab8fb039",
+      "bytes": 24,
+      "mode": "0644"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-analysis-v1/Main-source-reader-STOP.json",
+      "sha256": "43ba19a23b103b67b7bb6b1f9c1d6a430efb13ea7dfa5a410996caffd8c3cf30",
+      "bytes": 2062,
+      "mode": "0444"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-analysis-v1/analyze_saved-settings-schema-failed.py",
+      "sha256": "8546eda13f8885f54f6e6b03e3f3578d56a70bbf35f0db4d38ef006dfb405b49",
+      "bytes": 26029,
+      "mode": "0444"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-analysis-v1/analyze_saved.py",
+      "sha256": "f76ccc98bd1491a216a9eeb0e324326ee3a1111b7bcbaee78227a70ca509d38e",
+      "bytes": 26926,
+      "mode": "0444"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-analysis-v1/calls.csv",
+      "sha256": "c7fe18b212b5a04917b74c265d37b29689baa6e4ceb83df6f4f6a6840d26c906",
+      "bytes": 147233,
+      "mode": "0444"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-analysis-v1/counters.csv",
+      "sha256": "201763d00612280657a9c1a93da8219d93910f0ac347a2cd2a41bf3d36a222b1",
+      "bytes": 2950,
+      "mode": "0444"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-analysis-v1/cross-method-output.csv",
+      "sha256": "025f9c7748dfa59df18531eb1ffff213ad86f26d325bae4f4099ec61cb73da3e",
+      "bytes": 3385,
+      "mode": "0444"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-analysis-v1/early-boundary-ja.md",
+      "sha256": "66d8f9aff5657163230b6e3eff18bd25cbd80b689dfee45fa023958186763f17",
+      "bytes": 2655,
+      "mode": "0444"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-analysis-v1/final-process-verification.json",
+      "sha256": "c7e59df9b2223075ab694a96663ef3486170a3c5a60de0b23b603cb76ab2c15d",
+      "bytes": 12974,
+      "mode": "0444"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-analysis-v1/input-binding.json",
+      "sha256": "f8eb4c72f1e7e7fb12851b98bafeb3182723a8f92d5e5016593f8f3ce40b8093",
+      "bytes": 93382,
+      "mode": "0444"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-analysis-v1/passes.csv",
+      "sha256": "8d7b3fe25c83ceb167e78c0675f99564ef9f940f3123fe5e0402e12128011f19",
+      "bytes": 7594,
+      "mode": "0444"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-analysis-v1/repeat-verification.json",
+      "sha256": "216c424d0e2f19c2fa785452c2c02e99713d1433a1af63768baa76288fa75dd9",
+      "bytes": 34307,
+      "mode": "0444"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-analysis-v1/report-ja.md",
+      "sha256": "777ddc2fd2e0c5656aaafcf8332a501c4792f300a7a625fff9642160e1b105f0",
+      "bytes": 9949,
+      "mode": "0444"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-analysis-v1/result.json",
+      "sha256": "c6e0fa598c1eb6d216f279e5912a8f8309eb7a9d51f82846733804f7dadc4901",
+      "bytes": 4607,
+      "mode": "0444"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-analysis-v1/root-allocations.csv",
+      "sha256": "aabac6c066864a8e4a9473a9a401957b48b5e28301acf835289c014ecd3441c5",
+      "bytes": 14496,
+      "mode": "0444"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-analysis-v1/root-checks.csv",
+      "sha256": "2035e3f268ac4891da124dc258c7314876e03acdca67d8f8be66c8d98d7411aa",
+      "bytes": 9416,
+      "mode": "0444"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-analysis-v1/summarize_tables.py",
+      "sha256": "8a621b482d88885b7cfe3f59f8d81912c477ef2708586a464503c3eb7a16d782",
+      "bytes": 8497,
+      "mode": "0444"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-analysis-v1/table-refs.json",
+      "sha256": "f3ee24a759a75daac8b4b308367b339d9088f50267e25977f96efe313434ea92",
+      "bytes": 4353,
+      "mode": "0444"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-analysis-v1/temperature.csv",
+      "sha256": "1675960821f5975ac4c92953aec75589ad2a75bb5c4292b942307fb046991075",
+      "bytes": 2695,
+      "mode": "0444"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-analysis-v1/unfinished.csv",
+      "sha256": "cec1d0244bf5b921f12a840aaed4e6417d1f95ece8305654afc82c5f5b0b7709",
+      "bytes": 17365,
+      "mode": "0444"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-analysis-v1/verification.json",
+      "sha256": "97f402051bcfb5edefe5eeb5afa27cd744164625bf932976210e4d0fbb1e4f18",
+      "bytes": 1372,
+      "mode": "0444"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-analysis-v1/work-comparison.csv",
+      "sha256": "6df425b61984278ac83605b1ca61df78a76b6cee98551f8090f1b523810a8b66",
+      "bytes": 722,
+      "mode": "0444"
+    }
+  ],
+  "actual_resource_observations": [
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-Main-reader-STOP-resources.json",
+      "sha256": "1494139ee9b4093d5ea339ec6f5e5f23ca11a4572eef724fac37a19035e4ff84",
+      "bytes": 2916,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-clock-source-intake-resources.json",
+      "sha256": "e84f66d7ee6e5972d306e7e17203c7e6789142f67a21f5c153aed8d8815ddc82",
+      "bytes": 2787,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-completion-packet-resources.json",
+      "sha256": "d4dd36a73f4dcfbad464cf918f49593ccd8cadeb86147825ab86b2c4694309d5",
+      "bytes": 6129,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-core-freeze-resources.json",
+      "sha256": "eb7389e8f28dfd0ff91728031b901b010e24c7fb93b977296549d9d7aaa0b470",
+      "bytes": 1334,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-data-shape-resources.json",
+      "sha256": "7ebb5e356b0a147bd44dce35b83fcee8863adc360ff389e094e03e6ed50509ec",
+      "bytes": 2561,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-derived-inspection-resources.json",
+      "sha256": "a486a5431eae2234eb178bb272fd61a1e5bdddf77d8b0d886a651a5112aa562b",
+      "bytes": 3231,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-early-check-resources.json",
+      "sha256": "39ad5296c1c779935147bd337118ee5217c23082fedf90fd85c67ca3cc7b0932",
+      "bytes": 1254,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-early-format-resources.json",
+      "sha256": "25bace62cff5bd0c59cc418d86bd65a37ff674d72f13312750db5b983150ab75",
+      "bytes": 1254,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-early-freeze-resources.json",
+      "sha256": "b0c3edb3d88989ccea0a99be15276c394bc88f748f5f2f05c284b32920e5e675",
+      "bytes": 1090,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-early-send-resources.json",
+      "sha256": "88787234a0a889fdb796cdf9880ccc10c2a56ac52c94f02cee30db1b9e53e596",
+      "bytes": 1308,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-final-backup-resources.json",
+      "sha256": "f28ffd7287f4ffee991385273f4a0f14b32e6199f413d1e48ab9eff36e3e2acc",
+      "bytes": 1026,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-final-beads-note-resources.json",
+      "sha256": "b46b9c13b18e7688147b40201e72317ca51a645e8a6ee2f153d31af3606a5653",
+      "bytes": 2915,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-final-closed-show-resources.json",
+      "sha256": "f3c67fa9f5f80118dfdf6cecb4e95374b5ff17b281e3381b4923ccba78b891f3",
+      "bytes": 1052,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-final-facts-resources.json",
+      "sha256": "d2e6a28dd9632e496571939da75f51bcac0381415c6a5dfd49d2003ac1787baa",
+      "bytes": 2254,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-final-owner-close-resources.json",
+      "sha256": "2ba203c4fccb89b629d489a6a812f2bac039d5b474a923cde06593b1c17d6cb0",
+      "bytes": 1714,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-final-owner-show-resources.json",
+      "sha256": "f0febdcd54257a4a9c793ce633adbfd0fe54db21c9c69d0a3163502132998074",
+      "bytes": 1052,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-final-owner-verify-resources.json",
+      "sha256": "9d0ae74c5ea25a4721e7dd198c4d17a2fc614af50dede69ad07067e3e1d0dca1",
+      "bytes": 1471,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-final-process-verification-resources.json",
+      "sha256": "67c7f29fa21f5b8e27768c114156cf04af4bea1d2209a46f84160685599c864d",
+      "bytes": 3883,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-final-storage-once-resources.json",
+      "sha256": "9c036115cd5e424f96eb81aee8344af24d7c2756e5d8514cfc1e6bf9b370d07e",
+      "bytes": 3804,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-freeze-analysis-source-resources.json",
+      "sha256": "d6a451c6f1188e7ace1afd7479c40700cfe76a9bb5b74f45c10685ff15de7881",
+      "bytes": 1210,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-preserve-failed-parser-resources.json",
+      "sha256": "b9fec9e837fe351c33c0b3ca55e21dd6051806d0d744979197319b36df0a27c9",
+      "bytes": 1215,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-ready-resources.json",
+      "sha256": "c15cc69dc962d6e8ce578cbed2461b69f62dbe5e28f6c5d98b076b69e59efabd",
+      "bytes": 1027,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-report-format-check-resources.json",
+      "sha256": "08463cb587c29de001e287442597d0b433cf67959b3dd5ba6041069681cf541a",
+      "bytes": 1246,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-report-format-resources.json",
+      "sha256": "e2becd7902807969791d17170af89f0ebd10e4421e214163b63544d139cc4fef",
+      "bytes": 1246,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-saved-analysis-once-resources.json",
+      "sha256": "191eb54e32bed4e565bab220211641424a4c49b40a2115a78f2bb95da668e3c5",
+      "bytes": 1137,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-saved-analysis-repaired-resources.json",
+      "sha256": "cf2cc68e7d61aa9a9dcb842c7d501e399df38fadbcfabd642fc1c5452537a66b",
+      "bytes": 1137,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-schema-intake-resources.json",
+      "sha256": "7878f42c8d87ba58e09de05f5616dde7e779b1327f30fc8ecb7969985e430903",
+      "bytes": 2353,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-settings-keys-resources.json",
+      "sha256": "6a9452376c3fafb51eef125637f38049673c34de78cff41b206cf4988ee29c71",
+      "bytes": 1657,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-settings-schema-resources.json",
+      "sha256": "0376c5b3e41ded1595b8fa5afb87b0b567179cd6a8f64b3ef0760fb36b0db95d",
+      "bytes": 1826,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-show-resources.json",
+      "sha256": "219253dbe39fbf3548a4bbf7002e84fda25105807d4e78e92dfabd3047b347f1",
+      "bytes": 1052,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-source-check-format-resources.json",
+      "sha256": "914979ea7611a7803b5eaac2df9e241b85f436a0f77e829337a83bc46c238557",
+      "bytes": 1210,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-source-format-repair-resources.json",
+      "sha256": "58618240d0d6947d17ccce6f28543f9ce374b4e05c135ea3c568b5ee27e68e0d",
+      "bytes": 1195,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-source-format-resources.json",
+      "sha256": "e3cd7f678ff08816c18eb99c844658f329f7cbeaf95e432bf41b7c9b8312c863",
+      "bytes": 1195,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-source-lint-repair-resources.json",
+      "sha256": "8e6047956c67cd2c2fdb37f88b1deb4e12fa27bbb3a88f0c5e0f59837ec68738",
+      "bytes": 1212,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-source-lint-resources.json",
+      "sha256": "e50692cbeaf72c96d20a87621cf143dfa25a23da870b7cba5731529bd1dfdea1",
+      "bytes": 1212,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-table-source-check-resources.json",
+      "sha256": "959506e82c0e2e2094bbfb6065424150d975f893d726a03d0b2532d616ba2032",
+      "bytes": 1213,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-table-source-format-resources.json",
+      "sha256": "608672c92c0e8de4b730a79a1cda370695cb67b4a2eb6ad69050df89ac308fba",
+      "bytes": 1198,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-table-source-freeze-resources.json",
+      "sha256": "c98745067902eb78b2ba16894ed3624868ba3c05c40fc451a0984510a7f4c6d7",
+      "bytes": 1089,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-table-source-lint-resources.json",
+      "sha256": "8dfc0d621970858e0e04c6829dd427c9be719b28587ccad25a32a56070cc9dfe",
+      "bytes": 1215,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-table-verification-once-resources.json",
+      "sha256": "ffb6d87c38d923bf179c2580a8c76e8064ddb793e93cee64aaba900b2b782693",
+      "bytes": 1140,
+      "mode": "0644"
+    }
+  ],
+  "all_previous_owned_guarded_helpers_STOP": [
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/boundary-review-backup-STOP.json",
+        "sha256": "85089070ff1dac532cf85b53dcc19a3e14b79e49fdd17343e99468cd9872b754",
+        "bytes": 1432,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 557048,
+            "start_ticks": "25228479",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 557049,
+            "start_ticks": "25228483",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.7489510079903994
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/boundary-review-beads-note-STOP.json",
+        "sha256": "2a6a7bc9846db2e7bc3b2d2716d1c5169e5ecb89e99ec7d7451f492261be604d",
+        "bytes": 3114,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 556994,
+            "start_ticks": "25227696",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 556995,
+            "start_ticks": "25227699",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 1.176946372987004
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/boundary-review-send-STOP.json",
+        "sha256": "02dc5ee587e507b511ddf456b79bc76f24f8c23c62a79e306c57ff0154ca95ff",
+        "bytes": 1748,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 556818,
+            "start_ticks": "25225518",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 556819,
+            "start_ticks": "25225522",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 5.3735368640045635
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/check-boundary-metadata-STOP.json",
+        "sha256": "3a43c8ce646574618412cee26bca903001c15941204871530b16f2138671e6b0",
+        "bytes": 1535,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 556246,
+            "start_ticks": "25216666",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 556247,
+            "start_ticks": "25216670",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.02473420900059864
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/check-boundary-review-STOP.json",
+        "sha256": "0c9d1d3fcdd7878d3f8d6a998a526b8f480fdde91b10713651b18b5bbfbe1174",
+        "bytes": 1651,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 556637,
+            "start_ticks": "25223647",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 556638,
+            "start_ticks": "25223651",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.10932065799715929
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/check-initial-review-STOP.json",
+        "sha256": "13444b1a0e0f8f276a504720c9a362d3e3fb85a8e80d732f26f0e95757468786",
+        "bytes": 1653,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 537650,
+            "start_ticks": "25055180",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 537651,
+            "start_ticks": "25055184",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.11511100400821306
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/check-intake-format-STOP.json",
+        "sha256": "b508117d41e4f81a2131e2be008d8bff2922c444ee41e4edbff032b6a69721f4",
+        "bytes": 1686,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 538007,
+            "start_ticks": "25059718",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 538008,
+            "start_ticks": "25059722",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.008740498014958575
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/check-intake431-format-STOP.json",
+        "sha256": "6ef3816c52599438b67ff61ae120be84a744d1f192cf6a49cf5b28a1a916ab09",
+        "bytes": 1600,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 546305,
+            "start_ticks": "25139054",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 546306,
+            "start_ticks": "25139057",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.04188917399733327
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/check-positive-intake-format-STOP.json",
+        "sha256": "a52015b9fd42d6ed04ae1a0f56c1c395a4572d1ca2a38fd466b36dde540fa224",
+        "bytes": 1610,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 560846,
+            "start_ticks": "25276397",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 560847,
+            "start_ticks": "25276401",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.018529697990743443
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/check-positive-review-STOP.json",
+        "sha256": "1476c8ab463f5c2fa579cee8e54447d1782a07c3cfeaaa8f0032e7603029ac65",
+        "bytes": 1656,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 560922,
+            "start_ticks": "25277252",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 560923,
+            "start_ticks": "25277255",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.09972233697772026
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/check-source-review-STOP.json",
+        "sha256": "a90bfbdd924bc4c9d92d6008e7087f048360def391c2d7797acad7252c76f83e",
+        "bytes": 1649,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 546091,
+            "start_ticks": "25136754",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 546092,
+            "start_ticks": "25136757",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.12545744099770673
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-Main-reader-STOP-STOP.json",
+        "sha256": "4c84382aae04fd3339f6ced3adfff97849742186ce93813dcc09a9cf17c745b5",
+        "bytes": 3327,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 686670,
+            "start_ticks": "26841894",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 686671,
+            "start_ticks": "26841898",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.03329040895914659
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-clock-source-intake-STOP.json",
+        "sha256": "08ab9769b0b6a59c04b684a6c4e77e4ace1eb769310ca7614d9a631a4047e9fa",
+        "bytes": 3201,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 684068,
+            "start_ticks": "26799475",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 684069,
+            "start_ticks": "26799480",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.027614358987193555
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-core-freeze-STOP.json",
+        "sha256": "7932a5ac1da0ead53f48ed1053a459b5586c0461a51d5a2ffe821ff08a22822e",
+        "bytes": 1741,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 690200,
+            "start_ticks": "26882554",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 690201,
+            "start_ticks": "26882562",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.01871005300199613
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-data-shape-STOP.json",
+        "sha256": "595d499850fca3417dc0d65da2a9a6b26a8f70431a7b9c9865d57c7dfd225306",
+        "bytes": 2974,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 683964,
+            "start_ticks": "26797370",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 683968,
+            "start_ticks": "26797375",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.02101915399543941
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-derived-inspection-STOP.json",
+        "sha256": "2a9e045a2160dc264f14369f3f4ee8ebd14ff589163f32b6c6889736c6547f40",
+        "bytes": 3645,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 685596,
+            "start_ticks": "26829996",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 685597,
+            "start_ticks": "26830003",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.024790810013655573
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-early-check-STOP.json",
+        "sha256": "1b54cd30c7e58c019fc84b2e5d100c7883f1d3f881bc9150078b98414f385c0e",
+        "bytes": 1667,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 687271,
+            "start_ticks": "26846034",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 687272,
+            "start_ticks": "26846038",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.10013916902244091
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-early-format-STOP.json",
+        "sha256": "5bc31e1b80ab9e48713c81c4ada804470dcf3d82aea946c229d197b08d03c3b1",
+        "bytes": 1669,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 687242,
+            "start_ticks": "26845646",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 687243,
+            "start_ticks": "26845652",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.10101201699580997
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-early-freeze-STOP.json",
+        "sha256": "7567b73f7175b7499f6fdbb006882eab15fe830d94741e911aa1b0635ad7214f",
+        "bytes": 1494,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 687300,
+            "start_ticks": "26846471",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 687301,
+            "start_ticks": "26846476",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.017752085987012833
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-early-send-STOP.json",
+        "sha256": "ff7d6160a2138ef85fa2b9afc3661220be2b2f7ab95870ba484a81ea50cb9e33",
+        "bytes": 1763,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 687332,
+            "start_ticks": "26846845",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 687333,
+            "start_ticks": "26846850",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 4.593870784039609
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-final-backup-STOP.json",
+        "sha256": "b9a35b1bbc0a91f557cd8067057f55578cec1847cdf79f5281f9874a276b7751",
+        "bytes": 1432,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 691035,
+            "start_ticks": "26891240",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 691036,
+            "start_ticks": "26891244",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.7380741349770688
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-final-beads-note-STOP.json",
+        "sha256": "f0ef49b48856ba862d696c0508db0c06d28668687b4c80fd679144d54a6b9ddc",
+        "bytes": 2832,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 690789,
+            "start_ticks": "26888560",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 690790,
+            "start_ticks": "26888564",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 2.219297413015738
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-final-closed-show-STOP.json",
+        "sha256": "0c956ba24dbd3cb2cc6b9bb5d9b4993fc44a23b80b3733851b5131f4958d1aa8",
+        "bytes": 1466,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 690981,
+            "start_ticks": "26890356",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 690982,
+            "start_ticks": "26890361",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 1.4348032780108042
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-final-facts-STOP.json",
+        "sha256": "21e3d4583d43dae00d427f8009e431293162ac3d89938ff43e40c939642c44d9",
+        "bytes": 2668,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 688312,
+            "start_ticks": "26851029",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 688313,
+            "start_ticks": "26851034",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.023396928037982434
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-final-owner-close-STOP.json",
+        "sha256": "c96423eb8269588873bb5b1a74fffcb0797a9c36d058f4a1551835eb25ab750c",
+        "bytes": 2125,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 690934,
+            "start_ticks": "26889675",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 690938,
+            "start_ticks": "26889679",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 2.044817946967669
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-final-owner-show-STOP.json",
+        "sha256": "ea7f213e8eef5bf9de3c6327def00a5a7b8137d47908e3b1b4c526d7460c02e1",
+        "bytes": 1466,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 690653,
+            "start_ticks": "26886768",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 690654,
+            "start_ticks": "26886772",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 1.9974816339672543
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-final-owner-verify-STOP.json",
+        "sha256": "5d849acaaaf221f9fa2bab36b22ccebb3ef257f08e3eba4a7c623abfca069909",
+        "bytes": 1881,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 690708,
+            "start_ticks": "26887616",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 690714,
+            "start_ticks": "26887621",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.019075024989433587
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-final-process-verification-STOP.json",
+        "sha256": "5ae57786cc924388a0f26ac915fb67769c6bcde82b5d0bdf6250052e758858ff",
+        "bytes": 4295,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 690001,
+            "start_ticks": "26877698",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 690003,
+            "start_ticks": "26877703",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.032672856003046036
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-final-storage-once-STOP.json",
+        "sha256": "cfb0d0d0d2daf3aa41869ff4b09fc45737c0824bc6202b5c0cffb5ae3ed1414d",
+        "bytes": 4215,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 690529,
+            "start_ticks": "26883861",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 690530,
+            "start_ticks": "26883864",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.06081990897655487
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-freeze-analysis-source-STOP.json",
+        "sha256": "013dc482748db0f4cfce1a599ef1a205678ee444c0f6a414f603859c69f12b9b",
+        "bytes": 1615,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 685426,
+            "start_ticks": "26826268",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 685427,
+            "start_ticks": "26826272",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.01985675300238654
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-preserve-failed-parser-STOP.json",
+        "sha256": "c0afb7887001a06d22923a176471080a0cba916b0ee1dc4e7a6e6a1572f369a1",
+        "bytes": 1621,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 685210,
+            "start_ticks": "26822147",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 685211,
+            "start_ticks": "26822151",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.007815967022906989
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-ready-STOP.json",
+        "sha256": "cd5443ec839d7550fa14ed5dfb62c9ca3e25dcd0e261fb8c61891febd9b008b2",
+        "bytes": 1441,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 683782,
+            "start_ticks": "26794294",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 683783,
+            "start_ticks": "26794298",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 1.2833992559462786
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-report-format-STOP.json",
+        "sha256": "4acd1e532e0458cd2fd3dc4ce5c734347e75e46e19b353ef9837548e10ae7bd6",
+        "bytes": 1659,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 689775,
+            "start_ticks": "26873037",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 689779,
+            "start_ticks": "26873041",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.12418258696561679
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-report-format-check-STOP.json",
+        "sha256": "a05cdc0d8b8db23955a21d6903c0cd7dab4eeeade11286eae06cfd9bc4d416fe",
+        "bytes": 1658,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 689808,
+            "start_ticks": "26873510",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 689809,
+            "start_ticks": "26873514",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.1272933569853194
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-saved-analysis-once-STOP.json",
+        "sha256": "8ac86505f38830827a0964b5f3a46b66a81ee9797aa077a34a767143d05247f2",
+        "bytes": 2217,
+        "mode": "0644"
+      },
+      "status": "failed",
+      "error": "cycle child failed: ['/home/vscode/.cache/inference/envs/quoridor-training/bin/python', '-B', '.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-analysis-v1/analyze_saved.py']: 1",
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 684958,
+            "start_ticks": "26817192",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 684959,
+            "start_ticks": "26817196",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "attempted",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "pending",
+      "wall_seconds_once": 0.04494086600607261
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-saved-analysis-repaired-STOP.json",
+        "sha256": "325e3bfdcce0e072fb8834a40dc02d22042345a29cf7f217a03df93a65778447",
+        "bytes": 1544,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 685445,
+            "start_ticks": "26826711",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 685446,
+            "start_ticks": "26826715",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.141875181987416
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-schema-intake-STOP.json",
+        "sha256": "1c577ba5091d040b7a3ab7c2ad1b8f30c8d09707f18ef4f3921666eef3c86239",
+        "bytes": 2766,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 683880,
+            "start_ticks": "26795804",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 683881,
+            "start_ticks": "26795809",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.02130655397195369
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-settings-keys-STOP.json",
+        "sha256": "46c1c91555d21655c00cf4b9eab214bd41fe67a162c3b32a44ae59ca3b68d262",
+        "bytes": 2068,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 685099,
+            "start_ticks": "26819541",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 685100,
+            "start_ticks": "26819546",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.05561757000396028
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-settings-schema-STOP.json",
+        "sha256": "875c042cdbcd7add1b0e5cff89c6c2599d3af62136a0781f71639bcb7c80181a",
+        "bytes": 2240,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 685006,
+            "start_ticks": "26818267",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 685007,
+            "start_ticks": "26818271",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.019096894015092403
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-show-STOP.json",
+        "sha256": "518ebafd64ce56b6443369947fe118f0a4c94294ae1e819eeff4ff4801fdd1c6",
+        "bytes": 1466,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 683819,
+            "start_ticks": "26794828",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 683821,
+            "start_ticks": "26794832",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 1.4615105600096285
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-source-check-format-STOP.json",
+        "sha256": "4ffe6560f539aca36ead197e1fcbf2e150f418945cdb0ff7b13523b87f6d87d3",
+        "bytes": 1622,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 685412,
+            "start_ticks": "26825965",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 685413,
+            "start_ticks": "26825971",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.007035217015072703
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-source-format-STOP.json",
+        "sha256": "57183d52a06a0fc3d7400abd483c41ef896a18a6b93a2cf1712ba49afc61084a",
+        "bytes": 1604,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 684921,
+            "start_ticks": "26816541",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 684925,
+            "start_ticks": "26816546",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.01791032199980691
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-source-format-repair-STOP.json",
+        "sha256": "82ae3dd8a2b8b725a74b31e609f5c25245ae6e320e611aa4e33bc03020a9c340",
+        "bytes": 1605,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 685356,
+            "start_ticks": "26825286",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 685357,
+            "start_ticks": "26825289",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.009057569957803935
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-source-lint-STOP.json",
+        "sha256": "0a1e9a5561094f8a79c4ba99dedcbe965db4182a36d4d3fdd61015780525b256",
+        "bytes": 1624,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 684938,
+            "start_ticks": "26816855",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 684939,
+            "start_ticks": "26816861",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.017983177036512643
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-source-lint-repair-STOP.json",
+        "sha256": "fe6b5b184ba6c08a7f5cab3c0a7ccadeb8fc6ea6c9b56d44d913108d6d7a8671",
+        "bytes": 1624,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 685376,
+            "start_ticks": "26825610",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 685377,
+            "start_ticks": "26825615",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.007864429033361375
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-table-source-check-STOP.json",
+        "sha256": "04181bf6849e699687dfbef4a201e4dc30421d009e2b2b493004956919323d19",
+        "bytes": 1625,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 687504,
+            "start_ticks": "26848740",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 687505,
+            "start_ticks": "26848747",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.008248594007454813
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-table-source-format-STOP.json",
+        "sha256": "5c58fc1fe52a710e00ff063a0df16eb72cf88ed49fda78cff42a71e231c85dbb",
+        "bytes": 1608,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 687466,
+            "start_ticks": "26848058",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 687467,
+            "start_ticks": "26848061",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.007629486965015531
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-table-source-freeze-STOP.json",
+        "sha256": "6030eda7a0dbf6a9a19ee5434097d698fadfab435dcdb44af71d667bb4376c66",
+        "bytes": 1493,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 687526,
+            "start_ticks": "26849041",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 687527,
+            "start_ticks": "26849050",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.009147414995823056
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-table-source-lint-STOP.json",
+        "sha256": "5a5faedeedb0058ff7810ee5a3a9fe175f876eb1a8a9ddacb4d15ebe9781cd8e",
+        "bytes": 1627,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 687487,
+            "start_ticks": "26848430",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 687488,
+            "start_ticks": "26848436",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.008000955975148827
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-table-verification-once-STOP.json",
+        "sha256": "a064b871794c55920632607bbd15649ae37d41c05ee33115895c747e7778bc67",
+        "bytes": 1551,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 687546,
+            "start_ticks": "26849577",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 687547,
+            "start_ticks": "26849582",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.03004579897969961
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/finish-positive-review-phase-STOP.json",
+        "sha256": "57a9382b25ba54f77abecbf316ae3f9809e711dda752fc6b0a6e508756cf439e",
+        "bytes": 5246,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 561528,
+            "start_ticks": "25285061",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 561529,
+            "start_ticks": "25285064",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.03554693202022463
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/format-boundary-intake-STOP.json",
+        "sha256": "e146732dcb51448914d5e29a54591c817836dc84959a06738083b483ba87724a",
+        "bytes": 1593,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 554817,
+            "start_ticks": "25195551",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 554818,
+            "start_ticks": "25195555",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.009606192004866898
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/format-boundary-intake-blankfix-STOP.json",
+        "sha256": "3a869f3cf72861fd4f61e6677aee58f4c0508e19281928bbaf314bf4c67ba308",
+        "bytes": 1593,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 554960,
+            "start_ticks": "25198545",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 554961,
+            "start_ticks": "25198549",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.021472999011166394
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/format-boundary-metadata-STOP.json",
+        "sha256": "ba3538fdcff42b9db3ddb2f8ab21118325c5702bd196aca9e2d376834611448d",
+        "bytes": 1596,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 556241,
+            "start_ticks": "25216658",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 556243,
+            "start_ticks": "25216662",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.0097670899995137
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/format-boundary-review-STOP.json",
+        "sha256": "73c2327d2651892cb9e425115e30da8b38adda38cfd8f45c43425a1cd6699659",
+        "bytes": 1651,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 556624,
+            "start_ticks": "25223629",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 556625,
+            "start_ticks": "25223633",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.12802408399875276
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/format-check-boundary-review-code-STOP.json",
+        "sha256": "d3643a9821d63674b2fc6539d71179b1ab65d28aeded6d0491043580fd3a00b9",
+        "bytes": 1705,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 556813,
+            "start_ticks": "25225507",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 556814,
+            "start_ticks": "25225510",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.00835539199761115
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/format-initial-review-STOP.json",
+        "sha256": "dba8c2616271f4150d2947125bbacdace5969107b60927effa5bf9fc449eb12d",
+        "bytes": 1655,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 537634,
+            "start_ticks": "25055163",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 537639,
+            "start_ticks": "25055167",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.11393044199212454
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/format-intake-STOP.json",
+        "sha256": "f065277418c03ef4e9397047086cd85bdac0f49f0cb40612614f9eff9d4bb5ce",
+        "bytes": 1669,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 536806,
+            "start_ticks": "25045705",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 536807,
+            "start_ticks": "25045709",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.008759015006944537
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/format-intake431-STOP.json",
+        "sha256": "8853b8a8e8324aa1a9cde71e8cacaf041d86af75f93d7da224b9e24fec1cc3ed",
+        "bytes": 1584,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 545202,
+            "start_ticks": "25125044",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 545203,
+            "start_ticks": "25125048",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.007510872994316742
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/format-positive-intake-STOP.json",
+        "sha256": "52438f646e59974e94af488e63c016a740518f706396a04a6f6bf0f4f25cd7d1",
+        "bytes": 1592,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 558847,
+            "start_ticks": "25250521",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 558848,
+            "start_ticks": "25250524",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.01000972799374722
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/format-positive-review-STOP.json",
+        "sha256": "be1118a623ba72df4e5a6c7d2421c6c2ea9a9b5d253883660fa34612963c9bbf",
+        "bytes": 1656,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 560876,
+            "start_ticks": "25276901",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 560877,
+            "start_ticks": "25276904",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.09959284399519674
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/format-source-review-STOP.json",
+        "sha256": "a207eb233f30e5cb9d661fafd68671ab6a7dfa1e0bb5dfe9e9e9e5acfdd08c09",
+        "bytes": 1649,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 546079,
+            "start_ticks": "25136735",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 546080,
+            "start_ticks": "25136739",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.13328061500214972
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/freeze-positive-review-STOP.json",
+        "sha256": "f8557c9609d93d158307e05df040011f6c51889011852838a9958dbadb052f98",
+        "bytes": 1586,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 560968,
+            "start_ticks": "25277797",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 560969,
+            "start_ticks": "25277801",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.009357255999930203
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/initial-backup-STOP.json",
+        "sha256": "f0e1cf9aae4488c3c6db962d17fbeb47170c1767c2c6238220c3ab33a3420a2e",
+        "bytes": 1432,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 538012,
+            "start_ticks": "25059727",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 538013,
+            "start_ticks": "25059730",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.7319267510029022
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/initial-beads-note-STOP.json",
+        "sha256": "07932b0fcf3f98278888aa127daca39bc0cb6c28cba231b1ae9535a0059fec46",
+        "bytes": 2517,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 537840,
+            "start_ticks": "25057356",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 537841,
+            "start_ticks": "25057361",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 1.1665012470039073
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/initial-report-send-STOP.json",
+        "sha256": "da306ff8212f42afea92fca777fa067ff8aac6467c4a7815c84761be851190da",
+        "bytes": 1749,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 537705,
+            "start_ticks": "25055991",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 537706,
+            "start_ticks": "25055994",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 4.432336242025485
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/inspect-positive-details-fixed-STOP.json",
+        "sha256": "9732c0ed17bdb72608fe07cb1d8a359137ebb7ade3174c75a4d7cf6b7f01cc30",
+        "bytes": 2058,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 560234,
+            "start_ticks": "25267546",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 560235,
+            "start_ticks": "25267550",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.03778356499969959
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/inspect-positive-details-v1-STOP.json",
+        "sha256": "1f5b40b89e4110a4f0bf199b413805b53261cc0bb4ce3134cb69650fa2296b06",
+        "bytes": 6239,
+        "mode": "0644"
+      },
+      "status": "failed",
+      "error": "cycle child failed: ['/home/vscode/.cache/inference/envs/quoridor-training/bin/python', '-B', '-c', 'import json; from pathlib import Path; own=Path(\".worktree/assets/perf/zero-stock-path431-review-analysis-v1\"); p=json.loads((own/\"positive-path431-evidence-v1.json\").read_text()); print(\"STOP\",json.dumps(p[\"original_STOP\"],indent=2)); print(\"RECEIPT_KEYS\",list(p[\"receipt\"])); print(\"CHECKS\",json.dumps([{k:c.get(k) for k in (\"name\",\"status\",\"argv\",\"text\",\"ref\")} for c in p[\"checks\"] if c[\"name\"] in (\"new-positive-path-child-integration-only\",\"affected-clippy\")],indent=2)); print(\"SELECTED_REFS\",json.dumps(p[\"selected_refs\"],indent=2)); old=json.loads((own/\"boundary431-evidence-v1.json\").read_text()); print(\"OLD_KEYS\",list(old)); source=old[\"tests_source\"]; print(\"OLD_SOURCE_TYPE\",type(source).__name__); print(\"OLD_SOURCE\",source[:8500] if isinstance(source,str) else source); print(\"PREVIOUS_REPORT\",(own/\"boundary-review-v1.md\").read_text()); print(\"WORKFLOW\",Path(\"docs/development/beads-workflow.md\").read_text()); print(\"WRAPPER_LOCATOR\"); print(\"\\\\n\".join(str(x) for x in Path(\"scripts/dev\").glob(\"*research*\")))']: 1",
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 559956,
+            "start_ticks": "25264790",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 559963,
+            "start_ticks": "25264794",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "attempted",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "pending",
+      "wall_seconds_once": 0.04882801201893017
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/inspect-positive-evidence-v1-STOP.json",
+        "sha256": "788c4269d7972dbc3831c990f12fe901e8d0243586d2c7e73b6252c07ed997fc",
+        "bytes": 1447,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 559529,
+            "start_ticks": "25261505",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 559533,
+            "start_ticks": "25261509",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.0362155869952403
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/inspect-positive-evidence-v2-STOP.json",
+        "sha256": "3df57ebf8f57d2120bd0e63658e890c79e10e5512709c0e119b529f80fa0e99c",
+        "bytes": 2126,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 559611,
+            "start_ticks": "25263016",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 559612,
+            "start_ticks": "25263020",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.018479721009498462
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/inspect-positive-final-facts-STOP.json",
+        "sha256": "75375b78a7e9aa9fd03b674e58bfbe55a7f4bc9edda83a463276917cf63fe704",
+        "bytes": 2377,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 560414,
+            "start_ticks": "25269284",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 560416,
+            "start_ticks": "25269287",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.022937172005185857
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/intake-boundary-once-STOP.json",
+        "sha256": "7b90f013c52ee701d45f685b6df597f478b026038535353d482d9c4236438316",
+        "bytes": 2170,
+        "mode": "0644"
+      },
+      "status": "failed",
+      "error": "cycle child failed: ['/home/vscode/.cache/inference/envs/quoridor-training/bin/python', '-B', '.worktree/assets/perf/zero-stock-path431-review-analysis-v1/intake_boundary431.py']: 1",
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 554821,
+            "start_ticks": "25195560",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 554822,
+            "start_ticks": "25195563",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "attempted",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "pending",
+      "wall_seconds_once": 0.035253928013844416
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/intake-boundary-repaired-STOP.json",
+        "sha256": "406d683089fbf487906d42277c53960b779613166e0b1c0f732beda2903940e4",
+        "bytes": 1532,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 554964,
+            "start_ticks": "25198556",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 554965,
+            "start_ticks": "25198559",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.04046553498483263
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/intake-positive-once-STOP.json",
+        "sha256": "24357578c7f6b23c992780440567e55a096b51b6a3139bb4a80f0031ea71e0d5",
+        "bytes": 1534,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 558851,
+            "start_ticks": "25250529",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 558852,
+            "start_ticks": "25250533",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.02597049399628304
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/intake411-once-STOP.json",
+        "sha256": "58af9c55379ae42e99cae6a859ce4126d6f22fbcab720a911a761c915ddc93a9",
+        "bytes": 1525,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 536811,
+            "start_ticks": "25045713",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 536812,
+            "start_ticks": "25045717",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.02185777699924074
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/intake431-once-STOP.json",
+        "sha256": "1adfe7480f6b8bd43b56ba50becb6b8fa4e69ae1110aa9e4b112a5509481ed4a",
+        "bytes": 1525,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 545206,
+            "start_ticks": "25125052",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 545207,
+            "start_ticks": "25125056",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.02365342600387521
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/lint-boundary-review-code-STOP.json",
+        "sha256": "d1890e02a6df28f15bd5ab7fe9e898b47cc7a1e54e707359e228e7c6d590ac7d",
+        "bytes": 1708,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 556809,
+            "start_ticks": "25225498",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 556810,
+            "start_ticks": "25225502",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.009278098004870117
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/lint-intake-STOP.json",
+        "sha256": "c06fbe928832c252d78e154ef9d6fd9866a17f502d012da57a29c087bfb1e506",
+        "bytes": 1687,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 537662,
+            "start_ticks": "25055197",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 537663,
+            "start_ticks": "25055200",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.00842048498452641
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/lint-intake431-STOP.json",
+        "sha256": "b2713cc92093ff76a895b11bc7a8c4733d287faa9c65676cecedb1bb2a408f53",
+        "bytes": 1602,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 546220,
+            "start_ticks": "25138105",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 546233,
+            "start_ticks": "25138109",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.01129236101405695
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/lint-positive-intake-STOP.json",
+        "sha256": "52683387f3bcdff94f711831944ff0fb0715e354cf065a0d29e0ccd6ae36f4ce",
+        "bytes": 1612,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 560803,
+            "start_ticks": "25276080",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 560804,
+            "start_ticks": "25276083",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.018430586002068594
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/positive-review-backup-STOP.json",
+        "sha256": "f089ede5c3eef47ff1db0ae8ed50d01f992475c68b0d8d1a1c09ea1cf53bb2a5",
+        "bytes": 1432,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 561279,
+            "start_ticks": "25281395",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 561280,
+            "start_ticks": "25281399",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.8547399119997863
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/positive-review-beads-note-STOP.json",
+        "sha256": "aa84719dce6e63ff11aaf2f6dfe0304352cd2324bfe974c069036fe41d7e3267",
+        "bytes": 2389,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 561237,
+            "start_ticks": "25280836",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 561238,
+            "start_ticks": "25280840",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 1.1670965400116984
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/positive-review-ready-v2-STOP.json",
+        "sha256": "30563a94505996bbc370ea2f3a431ad1d400fcf1f83e4f4877607b08033c1916",
+        "bytes": 1441,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 560109,
+            "start_ticks": "25266369",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 560110,
+            "start_ticks": "25266372",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.7638501519977581
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/positive-review-send-STOP.json",
+        "sha256": "2e462b4b80cd686b66a951eea1758fe56ffb50ac35640eff6a4509d435590a3f",
+        "bytes": 1752,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 560994,
+            "start_ticks": "25278267",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 560995,
+            "start_ticks": "25278270",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 7.680973615992116
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/positive-review-show-STOP.json",
+        "sha256": "261dbfbb9935074a10afa21efbb4f33d211efd16cbda058632e3900d87edd86f",
+        "bytes": 1466,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 560177,
+            "start_ticks": "25266723",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 560178,
+            "start_ticks": "25266727",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 1.4356086830084678
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/source-review-backup-STOP.json",
+        "sha256": "5a70d2fc559db12399a4a4f040cd8d2d3cc27c195abddce1ddaf982b4312f004",
+        "bytes": 1432,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 546684,
+            "start_ticks": "25141055",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 546685,
+            "start_ticks": "25141058",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 0.7354265479953028
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/source-review-beads-note-STOP.json",
+        "sha256": "f4de91d6ec1c2a1e5201fae85d2c3eb9aeb94ffcd1adc54d96deac7a2c0ad76d",
+        "bytes": 2721,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 546434,
+            "start_ticks": "25139981",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 546435,
+            "start_ticks": "25139985",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 1.16222630100674
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/source-review-send-STOP.json",
+        "sha256": "304e2318243fdd65561fa18cbd6f4c79336136404373088b449ceb0814aa4329",
+        "bytes": 1745,
+        "mode": "0644"
+      },
+      "status": "complete",
+      "error": null,
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 546310,
+            "start_ticks": "25139068",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 546311,
+            "start_ticks": "25139072",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ],
+      "returned_final_record_persist": "completed",
+      "disk_final_record_persist": "attempted",
+      "signal_mask_restoration_recorded": "completed",
+      "wall_seconds_once": 4.478294440981699
+    }
+  ],
+  "current_emitter_identity": {
+    "pid": 691291,
+    "start_ticks": "26896850",
+    "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+  },
+  "current_emitter_STOP_published_after_exit": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-completion-packet-STOP.json",
+  "Main_source_reader_STOP": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-analysis-v1/Main-source-reader-STOP.json",
+    "sha256": "43ba19a23b103b67b7bb6b1f9c1d6a430efb13ea7dfa5a410996caffd8c3cf30",
+    "bytes": 2062,
+    "mode": "0444"
+  },
+  "scientific_verdict": "P unsupported by prespecified evaluatorwise primary whole median and root rules; no general speed or strength claim",
+  "native_or_numerical_or_old_software_calls_added": 0,
+  "original_384_unknowns": 36,
+  "same_mode_nonclock_repeat_pairs_equal": 192,
+  "original_cleanup_scope": "49 actual native/lifecycle identities separately freshly checked, no allhost/futurequiet/continuouspeak claim",
+  "one_final_storage_snapshot": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-final-storage.json",
+    "sha256": "91e80bd824cbee42243f8a1597038c55b2df73e3dd3d074f167532ebb763fd3c",
+    "bytes": 2082,
+    "mode": "0444"
+  },
+  "new_storage_budget_support": 0,
+  "all_prior_failures_provenance_limits_pauses_defaults_models_seals_and_fee_UNKNOWN": "preserved",
+  "integration_acceptance": {
+    "early_boundary_delivery": {
+      "method": "turn/steer",
+      "thread_id": "01a1376a-bfd3-75d2-bd64-61e9416b3b13",
+      "turn_id": "01a14897-de61-7731-9ed6-bd42e92d713a",
+      "accepted": true
+    },
+    "parent_confirmed_original_verdict_accepted": true,
+    "Root_reported_withdrawal_commit": "f86fd2b4a8db80a6d22260484bcbb4a542e087d9",
+    "withdrawal_review_by_this_owner": false
+  },
+  "fees": "UNKNOWN",
+  "remaining_required_question_work": [],
+  "final_packet_delivery_record_will_be": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-final-report-send.log"
+}

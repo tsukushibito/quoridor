@@ -549,3 +549,11 @@ R96/96は浅いfail-lowで確認条件/開始/完了0。returned depth1とnormal
 Sol High実装・Sol Max限定source確認・SAME Astra High固定設計/保存分析を分担し、重要な新因果/棋力主張は採用しない。新/関連15 assertionsは元FAILED内PASSを保持、consumer JSON型とtest initializerのみ通常修復、未完了Clippy/releaseを実完了した。旧416独立二scout APIを現共通診断へ置換し、研究標準depth_rank/製品generator enable OFFを維持する。原software outer129.736579663秒、診断14.892771785秒を各一度、nested非加算。全source/LLM/admin費・physical NN・連続RSS・時計分解能・孤立費はUNKNOWN。
 
 [詳細・4 raw ns/反復・原設定/結果/失敗/STOP](../../research-data/ai-sigma/lmr-internal-sequence417/report-ja.md)。次の確認発動層とq0深さ/順位の観測は提案のみで新入場なし。414計画は未発行、全mixed/learner prep/pipeline・323 USERPAUSE、models/weights/seals/oldfits96/foreign変更と旧RAW/FAILED/費UNKNOWNを保持する。
+
+### 一本経路・距離1 tailの一度の費用比較と撤去（431、2026-10-17）
+
+候補Pは411の安いM成功を再用し、既存qualified goal rowの一本の下降経路へManhattanの手番別strict境界を適用した。一般経路は元の完全canonical Eemptyを維持する。標準壁・手番側ds1 tailはtrue legal goal優先と二つの実中間keyのprior count<2だけでWinを返し、Draw/non-lossや一般future Q/Eへ拡張しなかった。正しさの限定確認と利益の保持判断は別である。
+
+元8prefix/fullhistory・2評価器×LMR OFF/ON・OMPPMO・cold/warmの384呼出しでは、348 depth8 COMPLETE/36 NodeLimit UNKNOWN、243362776 nodes、同方式二反復192対応の非時計一致を保存した。主要LMR ONのP/M whole中央値比はNNUE .998252288、D1.005814093、P/Oは1.001878663/1.000024392。事前の両対照以下という条件と局面別1.10倍条件を満たさず、有限の保持利益は未支持だった。新しいPath returnとnode減少をwhole速度や一般棋力へ変換しない。
+
+f86fd2b4でP本体・一時typed selector・追加event counter・専用検査を撤去し、411のM/default OFFへ戻した。共有の合法手・距離owner・履歴・TT・探索器は維持し、419の実験別ID/SHA/件数分岐は復活させない。設定で表すrun順序・入力・上限を共通lifecycleへ渡し、終了した比較入口は残さない。変更範囲の整形・Ruff・AI/runner Clippy型検査PASS、元171/十一成功定義/384呼出し/solver再演0。元source/image/RAW、失敗、来歴制限、孤立費・全費UNKNOWNと全pause/default/model/sealは[報告と結合証拠](../../research-data/ai-sigma/zero-stock-path431/report-ja.md)へ保存する。

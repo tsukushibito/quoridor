@@ -1,0 +1,190 @@
+{
+  "schema": "431.original384.saved-analysis.v1",
+  "at": "2026-10-17T06:51:52.357864+00:00",
+  "issue": "quoridor-4lc.431.2",
+  "original_calls": 384,
+  "original_sessions": 192,
+  "complete_depth8": 348,
+  "unknown": 36,
+  "actual_nodes": 243362776,
+  "aggregate_node_ceiling": 1536000000,
+  "outer_seconds_once": 351.4671437400393,
+  "sum_native_whole_seconds_nested_not_added_to_outer": 231.58307037083432,
+  "strata": [
+    {
+      "evaluator": "nnue",
+      "lmr": false,
+      "primary": false,
+      "O_median_seconds": 14.821315129520372,
+      "M_median_seconds": 14.87906743696658,
+      "P_median_seconds": 14.676179835980292,
+      "P_over_M": 0.9863642259942839,
+      "P_over_O": 0.9902076642813561,
+      "root_failures": [
+        {
+          "root": 3,
+          "control": "O",
+          "ratios": [
+            1.2811630156429004,
+            1.1447216879931836
+          ]
+        },
+        {
+          "root": 4,
+          "control": "O",
+          "ratios": [
+            1.3993267286561308,
+            1.428030947719945
+          ]
+        },
+        {
+          "root": 4,
+          "control": "M",
+          "ratios": [
+            1.113949816422594,
+            1.136800133580044
+          ]
+        },
+        {
+          "root": 7,
+          "control": "O",
+          "ratios": [
+            1.1864525874949168,
+            1.1218311486484216
+          ]
+        }
+      ],
+      "timing_rule_pass": false,
+      "unknown_calls": 12,
+      "limited_retention_supported": false
+    },
+    {
+      "evaluator": "nnue",
+      "lmr": true,
+      "primary": true,
+      "O_median_seconds": 10.906672949000495,
+      "M_median_seconds": 10.946293882996542,
+      "P_median_seconds": 10.927162913489155,
+      "P_over_M": 0.9982522879696201,
+      "P_over_O": 1.0018786631436067,
+      "root_failures": [
+        {
+          "root": 3,
+          "control": "O",
+          "ratios": [
+            1.281906724094171,
+            1.220535203856633
+          ]
+        },
+        {
+          "root": 4,
+          "control": "O",
+          "ratios": [
+            1.4102564310935282,
+            1.261783957001806
+          ]
+        },
+        {
+          "root": 5,
+          "control": "O",
+          "ratios": [
+            1.194405251281319,
+            1.242505620445416
+          ]
+        },
+        {
+          "root": 7,
+          "control": "O",
+          "ratios": [
+            1.1541221264287613,
+            1.2443763995457608
+          ]
+        }
+      ],
+      "timing_rule_pass": false,
+      "unknown_calls": 0,
+      "limited_retention_supported": false
+    },
+    {
+      "evaluator": "distance",
+      "lmr": false,
+      "primary": false,
+      "O_median_seconds": 6.429706940980395,
+      "M_median_seconds": 6.504987215012079,
+      "P_median_seconds": 6.604298197984463,
+      "P_over_M": 1.0152668990252887,
+      "P_over_O": 1.0271538436520788,
+      "root_failures": [
+        {
+          "root": 3,
+          "control": "O",
+          "ratios": [
+            1.1153367205236326,
+            1.238452919712284
+          ]
+        },
+        {
+          "root": 4,
+          "control": "O",
+          "ratios": [
+            1.2004363718532618,
+            1.113056882850126
+          ]
+        },
+        {
+          "root": 5,
+          "control": "O",
+          "ratios": [
+            1.1726632726243156,
+            1.1691933202174563
+          ]
+        },
+        {
+          "root": 6,
+          "control": "O",
+          "ratios": [
+            1.35949605052586,
+            1.2931917687831096
+          ]
+        }
+      ],
+      "timing_rule_pass": false,
+      "unknown_calls": 12,
+      "limited_retention_supported": false
+    },
+    {
+      "evaluator": "distance",
+      "lmr": true,
+      "primary": true,
+      "O_median_seconds": 6.377468440507073,
+      "M_median_seconds": 6.340758243983146,
+      "P_median_seconds": 6.377623998996569,
+      "P_over_M": 1.005814092509899,
+      "P_over_O": 1.000024391886992,
+      "root_failures": [
+        {
+          "root": 3,
+          "control": "O",
+          "ratios": [
+            1.1925524850758313,
+            1.15977093802772
+          ]
+        }
+      ],
+      "timing_rule_pass": false,
+      "unknown_calls": 12,
+      "limited_retention_supported": false
+    }
+  ],
+  "repeat_pairs": 192,
+  "equal_repeat_pairs": 192,
+  "repeat_mismatches": [],
+  "counter_invariant_errors": [],
+  "whole_accounting_errors": [],
+  "residual_range_seconds": [
+    0.03556247795968481,
+    0.0789737689463248
+  ],
+  "new_Search_native_model_forward_test_game_fit_solver_BFS": 0,
+  "fees": "UNKNOWN"
+}

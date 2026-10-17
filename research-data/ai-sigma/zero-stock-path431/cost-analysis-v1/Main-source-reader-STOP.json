@@ -1,0 +1,65 @@
+{
+  "at": "2026-10-17T06:54:24.125575+00:00",
+  "issue": "quoridor-4lc.431.2",
+  "scope": "All candidate Main Rust/Git-object source readers stopped. Future work private saved tables/report only; no source edit or numerical replay.",
+  "clock_source": {
+    "commit": "eb30b2ea08059d7ae8cd535d3cf0a6fa5be4ca57",
+    "path": "crates/quoridor-runner/src/measurement.rs",
+    "sha256": "f3ba22666ee58d2b8b01d1ec1dcc03d8eead3e2c729e391b6d273cb72e3aa614",
+    "bytes": 107393
+  },
+  "readers": [
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-clock-source-intake-STOP.json",
+        "sha256": "08ab9769b0b6a59c04b684a6c4e77e4ace1eb769310ca7614d9a631a4047e9fa",
+        "bytes": 3201
+      },
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 684068,
+            "start_ticks": "26799475",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 684069,
+            "start_ticks": "26799480",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ]
+    },
+    {
+      "STOP_ref": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-path431-review-analysis-v1/cost-saved-analysis-repaired-STOP.json",
+        "sha256": "325e3bfdcce0e072fb8834a40dc02d22042345a29cf7f217a03df93a65778447",
+        "bytes": 1544
+      },
+      "fresh_identities": [
+        {
+          "original": {
+            "pid": 685445,
+            "start_ticks": "26826711",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        },
+        {
+          "original": {
+            "pid": 685446,
+            "start_ticks": "26826715",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "current": null
+        }
+      ]
+    }
+  ],
+  "owned_readers_children_jobs_handles_leases": [],
+  "TMP_absent": true
+}

@@ -2220,3 +2220,11 @@ Z/S/Cの新paired3fitは同じBEST43/fresh Adam・T3763/V2498・30104 draws/118 
 固定64共有開始familyの両色比較はCvsZ67W61L/128、52.34375%、95%[46.09375%,58.59375%]で事前の下限>50%は未達。SvsZ63W65L、49.21875%、[42.1875%,56.25%]は記述的。256局全GOAL/UNKNOWN0、charged1072837747≤2G。分析者は元8archivesを各一度streamし、PCG64/seed43020261017/10000/linear95%を各対照一度だけ実行した。16-family区間の平均・旧423/426合算・CvsS直接対照はない。一般優越、劣位、等価、因果や自動昇格を認定しない。
 
 旧S19 batch-axis拒否、schema pre-runtime FAILED、NULL-vs-diskと費UNKNOWNを保全した。bank/fit/native/arenaとFAILED等の選択済み既知outer小計1335.556018654秒は全費用ではなく、内包head-call spanを加算しない。深さはselective nominal、TT容量はRSSではなく、arena nn_calls0はphysical NNUE head0を意味しない。元models/defaults/sealsを維持する。[保存report・表・図・費用・参照](../research-data/ai-sigma/static-teacher-distillation430/report-ja.md)。429の量・序盤viewは別の未実行四fit提案で、この結果から新fit/gameを自動開始しない。
+
+### 一本経路・距離1 tailの有限費用比較431（2026-10-17）
+
+428の一本経路と標準壁の手番側ds1 tailを、現役411のManhattan条件Mへ加えた候補Pとして一度比較した。元8真正prefix/fullhistory、2評価器×LMR OFF/ON、OMPPMO、cold→同session warm、D8/各4M nodesで384呼出し・192sessions。348件が深さ8 COMPLETE、36件がNodeLimit UNKNOWNで、実243362776 nodes。追加・補充0、同方式二反復192対応の非時計値は一致した。
+
+LMR ONの元native子guardian whole中央値はNNUE O/M/P=10.906672949/10.946293883/10.927162913秒、固定D=6.377468441/6.340758244/6.377623999秒。P/Mは.998252288/1.005814093、P/Oは1.001878663/1.000024392で、評価器別の事前P≤MかつP≤Oを満たさない。両Pのroot配賦費がO中央値の1.10倍を超えたのはNNUE r3/r4/r5/r7、D r3だった。配賦は同pass残差を等分する会計規則で、孤立predicateの因果費用や一般速度ではない。
+
+LMR ONの新Path returnはNNUE12956/D6068、P/M nodesも各41958/33304少なかったが、異なる選択木の仕事量であり同仕事speedupではない。tailの実test/return0とmap/history拒否0を、この対象を超えた機会・資格の主張にしない。限定数学/source/十一成功検査と来歴制限は保存し、利益が支持されないPの実装・比較selector・counter・専用検査をf86fd2b4で撤去した。411/default OFF、419専用入口の撤去、共通prefix/history経路を維持し、変更範囲の整形・Ruff・Clippy型検査PASS。元384/成功suite/solverを再演せず、新対局/fit/tuningを発行しない。[全層・局面別費用・原結果・失敗とSTOP](../research-data/ai-sigma/zero-stock-path431/report-ja.md)。原models/seals/USERPAUSE・foreign変更・全費UNKNOWNを保持する。

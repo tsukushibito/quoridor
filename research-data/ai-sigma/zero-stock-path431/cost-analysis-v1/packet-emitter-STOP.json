@@ -1,0 +1,55 @@
+{
+  "at": "2026-10-17T07:03:33.736006+00:00",
+  "receipt": {
+    "command": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "-c",
+      "\nfrom datetime import datetime,timezone\nimport hashlib,json,os\nfrom pathlib import Path\nimport sys\nroot=Path(\"/workspaces/quoridor\")\nown=root/\".worktree/assets/perf/zero-stock-path431-review-analysis-v1\"\ncost=own/\"cost-analysis-v1\"\nsys.path.insert(0,str(root/\"python\"))\nfrom quoridor_training import cycle_process as process\ndef ref(path):\n    data=path.read_bytes()\n    return {\"path\":str(path),\"sha256\":hashlib.sha256(data).hexdigest(),\"bytes\":len(data),\"mode\":f\"{path.stat().st_mode&511:04o}\"}\ndef issue(name):\n    value=json.loads((own/name).read_text())\n    return value[0] if isinstance(value,list) else value\nbefore=issue(\"cost-final-owner-show.log\")\nafter=issue(\"cost-final-closed-show.log\")\nassert before[\"status\"]==\"in_progress\" and after[\"status\"]==\"closed\"\nassert before[\"assignee\"]==after[\"assignee\"]==\"codex:01a14740-4f03-7652-b060-529179d3d18a\"\nchecks=[]\nfor path in sorted(own.glob(\"*-STOP.json\")):\n    stop=json.loads(path.read_text())\n    receipt=stop[\"receipt\"]\n    assert receipt and receipt[\"cleanup_complete\"] and receipt[\"direct_child_reaped\"] and receipt[\"handle_closes_complete\"],path\n    assert stop[\"owned\"]==[] and stop[\"leases\"]==[] and stop[\"TMP_absent\"],path\n    identities=[]\n    for original in (stop.get(\"controller\"),receipt.get(\"child\")):\n        if original is None:\n            continue\n        current=process.identity(process.process_info(original[\"pid\"]))\n        assert current!=original,(path,current)\n        identities.append({\"original\":original,\"current\":current})\n    checks.append({\"STOP_ref\":ref(path),\"status\":receipt[\"status\"],\"error\":stop[\"error\"],\"fresh_identities\":identities,\"returned_final_record_persist\":receipt.get(\"final_record_persist\"),\"disk_final_record_persist\":stop.get(\"disk_final_record_persist\"),\"signal_mask_restoration_recorded\":receipt.get(\"signal_mask_restoration\"),\"wall_seconds_once\":receipt[\"wall_seconds\"]})\nresult=json.loads((cost/\"result.json\").read_text())\nassert not any(s[\"limited_retention_supported\"] for s in result[\"strata\"])\nassert result[\"equal_repeat_pairs\"]==192 and not result[\"counter_invariant_errors\"] and not result[\"whole_accounting_errors\"]\nartifacts=[ref(path) for path in sorted(cost.iterdir()) if path.is_file()]\nresources=[ref(path) for path in sorted(own.glob(\"cost-*-resources.json\"))]\npacket={\"at\":datetime.now(timezone.utc).isoformat(),\"issue\":\"quoridor-4lc.431.2\",\"actor\":\"codex:01a14740-4f03-7652-b060-529179d3d18a\",\"actual_resumed_turn_context\":{\"timestamp\":\"2026-10-17T06:45:52.054Z\",\"model\":\"gpt-6.1-sol\",\"effort\":\"max\",\"cwd\":\"/workspaces/quoridor\",\"sandbox\":\"danger-full-access\",\"approval\":\"never\"},\"status\":\"COMPLETE_ORIGINAL_SOURCE_AND_FINITE_SAVED_COST_QUESTION\",\"owner_before_close\":{k:before.get(k) for k in (\"id\",\"status\",\"assignee\")},\"owner_after_close\":{k:after.get(k) for k in (\"id\",\"status\",\"assignee\",\"closed_at\",\"close_reason\")},\"Beads_close_and_show_refs\":[ref(own/name) for name in (\"cost-final-owner-close.log\",\"cost-final-closed-show.log\",\"cost-final-backup.log\")],\"artifacts\":artifacts,\"actual_resource_observations\":resources,\"all_previous_owned_guarded_helpers_STOP\":checks,\"current_emitter_identity\":process.identity(process.process_info(os.getpid())),\"current_emitter_STOP_published_after_exit\":str(own/\"cost-completion-packet-STOP.json\"),\"Main_source_reader_STOP\":ref(cost/\"Main-source-reader-STOP.json\"),\"scientific_verdict\":\"P unsupported by prespecified evaluatorwise primary whole median and root rules; no general speed or strength claim\",\"native_or_numerical_or_old_software_calls_added\":0,\"original_384_unknowns\":36,\"same_mode_nonclock_repeat_pairs_equal\":192,\"original_cleanup_scope\":\"49 actual native/lifecycle identities separately freshly checked, no allhost/futurequiet/continuouspeak claim\",\"one_final_storage_snapshot\":ref(own/\"cost-final-storage.json\"),\"new_storage_budget_support\":0,\"all_prior_failures_provenance_limits_pauses_defaults_models_seals_and_fee_UNKNOWN\":\"preserved\",\"integration_acceptance\":{\"early_boundary_delivery\":json.loads((own/\"cost-early-send.log\").read_text()),\"parent_confirmed_original_verdict_accepted\":True,\"Root_reported_withdrawal_commit\":\"f86fd2b4a8db80a6d22260484bcbb4a542e087d9\",\"withdrawal_review_by_this_owner\":False},\"fees\":\"UNKNOWN\",\"remaining_required_question_work\":[],\"final_packet_delivery_record_will_be\":str(own/\"cost-final-report-send.log\")}\npath=cost/\"completion.json\"\nwith path.open(\"x\") as stream:\n    json.dump(packet,stream,ensure_ascii=False,indent=2)\n    stream.write(\"\\n\")\npath.chmod(292)\nprint(json.dumps({\"status\":packet[\"status\"],\"owner_after\":packet[\"owner_after_close\"],\"scientific_verdict\":packet[\"scientific_verdict\"],\"fixed_artifacts\":len(artifacts),\"guarded_helpers_before_current_emitter\":len(checks),\"completion_ref\":ref(path)},ensure_ascii=False,indent=2))\n"
+    ],
+    "status": "complete",
+    "child": {
+      "pid": 691291,
+      "start_ticks": "26896850",
+      "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+    },
+    "launch_policy": {
+      "no_new_privs_requested": false,
+      "verified_before_exec": null
+    },
+    "log_bytes_seen": 1425,
+    "scope": "session group and periodically recorded descendants; no daemon adoption",
+    "exit_code": 0,
+    "remaining": [],
+    "direct_child_reaped": true,
+    "descendant_visibility": "observed",
+    "cleanup_complete": true,
+    "log_bytes_retained": 1425,
+    "wall_seconds": 0.03986046998761594,
+    "handle_closes_attempted": [
+      "selector_close",
+      "pipe_close",
+      "pidfd_close",
+      "log_close"
+    ],
+    "primary_error": null,
+    "process_cleanup_complete": true,
+    "handle_closes_complete": true,
+    "signal_mask_restoration": "completed",
+    "final_record_persist": "completed",
+    "finalization_errors": []
+  },
+  "disk_final_record_persist": "attempted",
+  "controller": {
+    "pid": 691289,
+    "start_ticks": "26896846",
+    "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+  },
+  "fresh_child": null,
+  "owned": [],
+  "leases": [],
+  "TMP_entries_before_cleanup": [],
+  "TMP_absent": true,
+  "error": null,
+  "future_absence_claim": false
+}

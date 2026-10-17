@@ -1,0 +1,43 @@
+{
+  "status": "PASS_SAVED_ARITHMETIC_AND_TABLE_CONSISTENCY",
+  "unique_actual_calls": 384,
+  "pass_and_root_allocation_roundtrip_max_error_bound_seconds": "<1e-12",
+  "same_mode_repeat_pairs_equal": 192,
+  "original_input_refs_before_after_equal": true,
+  "consumed_ref_count": 182,
+  "all_parent_unchanged": true,
+  "all_committed_origin_sums_match": true,
+  "whole_accounting_errors": [],
+  "unknown_census": [
+    {
+      "evaluator": "nnue",
+      "lmr": "False",
+      "root": "0",
+      "root_walls": "6",
+      "completed_depth": "6",
+      "stop": "NodeLimit",
+      "calls": 12
+    },
+    {
+      "evaluator": "distance",
+      "lmr": "False",
+      "root": "0",
+      "root_walls": "6",
+      "completed_depth": "6",
+      "stop": "NodeLimit",
+      "calls": 12
+    },
+    {
+      "evaluator": "distance",
+      "lmr": "True",
+      "root": "0",
+      "root_walls": "6",
+      "completed_depth": "7",
+      "stop": "NodeLimit",
+      "calls": 12
+    }
+  ],
+  "aggregation": "all event sums within evaluator/LMR/method only; path_length_max is a maximum; no TT retention/generation gauge is summed",
+  "analysis_metadata_failure": "original cost-saved-analysis-once assumed settings.json was raw config; failed before result output; preserved source/log/receipt; explicit wrapper and null/false native defaults then checked, no native replay",
+  "new_calls": 0
+}
