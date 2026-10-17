@@ -111,6 +111,8 @@ struct Request {
     observe_completed_depths: bool,
     #[serde(default)]
     observe_lmr: bool,
+    #[serde(default)]
+    observe_safe_race: bool,
 }
 #[derive(Clone, Debug)]
 struct RootSpec {
@@ -158,6 +160,11 @@ fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
         || settings.namespace.selectivity.is_empty()
     {
         return Err("measurement settings range".into());
+    }
+    if requests.iter().any(|r| {
+        r.observe_safe_race && (r.observe_lmr || r.observe_completed_depths || r.diagnostic)
+    }) {
+        return Err("safe-race attribution cannot overlap other observers".into());
     }
     if requests.iter().any(|r| r.observe_lmr) {
         let unique_sessions: std::collections::BTreeSet<_> =
@@ -454,11 +461,16 @@ impl Target for SearchTarget {
         let mut lmr_observation = request
             .observe_lmr
             .then(|| Box::new(alphabeta::LmrObservation::default()));
+        let mut safe_race_timing = request
+            .observe_safe_race
+            .then(alphabeta::SafeRaceTiming::default);
         let inference_before = self.sigma_value.as_ref().map(|e| e.work()).transpose()?;
         let table_generation_before = session.table_generation();
         let search_started = Instant::now();
         let mut completed_depths = Vec::new();
-        let result = if let Some(observation) = lmr_observation.as_deref_mut() {
+        let result = if let Some(timing) = safe_race_timing.as_mut() {
+            session.search_with_safe_race_timing(root, &limits, cancel, timing)
+        } else if let Some(observation) = lmr_observation.as_deref_mut() {
             session.search_with_lmr_observation(root, &limits, cancel, observation)
         } else if request.observe_completed_depths {
             session.search_with_updates(root, &limits, cancel, &mut |completed| {
@@ -565,6 +577,9 @@ impl Target for SearchTarget {
         row["TT_generation_before"] = json!(table_generation_before);
         row["TT_generation_after"] = json!(session.table_generation());
         row["Search_call_seconds"] = json!(search_seconds);
+        if let Some(timing) = &safe_race_timing {
+            row["safe_race_timing"] = safe_race_timing_output(timing, search_seconds);
+        }
         row["parent_unchanged"] = json!(after == self.before);
         if after != self.before {
             row["status"] = json!("UNKNOWN");
@@ -1029,6 +1044,53 @@ fn safe_path_work(work: &mut Value, s: &alphabeta::SearchStats) {
             s.safe_race_tail_sealed_returns,
         ),
         ("safe_race_path_returns", s.safe_race_path_returns),
+        ("safe_race_dag_tests", s.safe_race_dag_tests),
+        ("safe_race_dag_vertices", s.safe_race_dag_vertices),
+        ("safe_race_dag_edge_checks", s.safe_race_dag_edge_checks),
+        ("safe_race_dag_passes", s.safe_race_dag_passes),
+        ("safe_race_dag_returns", s.safe_race_dag_returns),
+        ("safe_race_point_bound_tests", s.safe_race_point_bound_tests),
+        ("safe_race_point_bound_reads", s.safe_race_point_bound_reads),
+        (
+            "safe_race_point_bound_finite_terms",
+            s.safe_race_point_bound_finite_terms,
+        ),
+        (
+            "safe_race_point_bound_passes",
+            s.safe_race_point_bound_passes,
+        ),
+        (
+            "safe_race_point_bound_returns",
+            s.safe_race_point_bound_returns,
+        ),
+        ("safe_race_component_tests", s.safe_race_component_tests),
+        (
+            "safe_race_component_map_missing",
+            s.safe_race_component_map_missing,
+        ),
+        ("safe_race_component_passes", s.safe_race_component_passes),
+        ("safe_race_component_returns", s.safe_race_component_returns),
+        (
+            "safe_race_future_history_scans",
+            s.safe_race_future_history_scans,
+        ),
+        (
+            "safe_race_future_history_items",
+            s.safe_race_future_history_items,
+        ),
+        (
+            "safe_race_future_history_rejects",
+            s.safe_race_future_history_rejects,
+        ),
+        ("safe_race_future_returns", s.safe_race_future_returns),
+        ("safe_race_detour_tests", s.safe_race_detour_tests),
+        ("safe_race_detour_reads", s.safe_race_detour_reads),
+        (
+            "safe_race_detour_finite_terms",
+            s.safe_race_detour_finite_terms,
+        ),
+        ("safe_race_detour_passes", s.safe_race_detour_passes),
+        ("safe_race_detour_returns", s.safe_race_detour_returns),
         ("safe_race_tail_tests", s.safe_race_tail_tests),
         ("safe_race_tail_goal_passes", s.safe_race_tail_goal_passes),
         ("safe_race_tail_sealed_tests", s.safe_race_tail_sealed_tests),
@@ -1631,6 +1693,7 @@ mod tests {
             warmup: false,
             observe_completed_depths: false,
             observe_lmr: false,
+            observe_safe_race: false,
         };
         let mut target = SearchTarget {
             settings,
@@ -1733,6 +1796,7 @@ mod tests {
             warmup: false,
             observe_completed_depths: false,
             observe_lmr: false,
+            observe_safe_race: false,
         }
     }
     fn fake(factor: u64) -> Fake {
@@ -2516,5 +2580,57 @@ mod lmr417_tests {
             lmr_bits_comparison(&Value::Null, &json!(0))["value_bits"],
             "UNKNOWN"
         );
+    }
+}
+
+// Unknown publication is not a zero-work or positive-root observation. Existing
+// normal result work/proof/TT counters are reused, never snapshotted again here.
+fn safe_race_timing_output(t: &alphabeta::SafeRaceTiming, search_seconds: f64) -> Value {
+    json!({"published":t.root_stock0.is_some(),"root_stock0":t.root_stock0,
+        "stock0_nodes":t.root_stock0.map(|_| t.stock0_nodes),
+        "positive_stock_nodes":t.root_stock0.map(|_| t.positive_stock_nodes),
+        "subtree_entries":t.root_stock0.map(|_| t.subtree_entries),
+        "subtree_exits":t.root_stock0.map(|_| t.subtree_exits),
+        "subtree_nanoseconds":t.root_stock0.map(|_| t.subtree_nanoseconds),
+        "root_stock0_search_seconds":t.root_stock0.and_then(|zero| zero.then_some(search_seconds)),
+        "spans_closed":t.spans_closed(),"parent_restored":t.parent_restored,
+        "span_boundary":"after-final-wall-make through all context/path/NNUE restoration and canonical undo; no nested spans",
+        "error_old_work":"UNKNOWN when ordinary Search returns Err; no fabricated zero or duplicate SearchStats snapshot"})
+}
+
+#[cfg(test)]
+#[test]
+fn candidate_timing_unpublished_output_is_unknown_and_other_observers_refuse() {
+    let row = safe_race_timing_output(&alphabeta::SafeRaceTiming::default(), 0.5);
+    assert_eq!(row["published"], false);
+    for field in [
+        "root_stock0",
+        "stock0_nodes",
+        "positive_stock_nodes",
+        "subtree_entries",
+        "subtree_exits",
+        "subtree_nanoseconds",
+        "root_stock0_search_seconds",
+        "spans_closed",
+        "parent_restored",
+    ] {
+        assert!(row[field].is_null(), "{field}");
+    }
+    let settings: Settings = serde_json::from_value(json!({"zero_stock_safe_race":false,
+        "roots":[{"input":0,"pointer":"","field":"prefix","label":"pure metadata"}],
+        "profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,
+        "namespace":{"evaluator":"pure","rules":"standard","selectivity":"full"},
+        "output_bytes":10000,"record_bytes":1000}))
+    .unwrap();
+    let base = json!({"id":"one","session":"one","root":0,"depth":1,"node_cap":1});
+    let omitted: Request = serde_json::from_value(base.clone()).unwrap();
+    assert!(!omitted.observe_safe_race);
+    let mut on = base;
+    on["observe_safe_race"] = json!(true);
+    validate(&settings, &[serde_json::from_value(on.clone()).unwrap()]).unwrap();
+    for other in ["diagnostic", "observe_completed_depths", "observe_lmr"] {
+        let mut mixed = on.clone();
+        mixed[other] = json!(true);
+        assert!(validate(&settings, &[serde_json::from_value(mixed).unwrap()]).is_err());
     }
 }

@@ -189,6 +189,8 @@ pub(super) fn with_state<T>(
         lmr_observation: None,
         #[cfg(feature = "research-diagnostics")]
         trial_trace: None,
+        #[cfg(feature = "research-diagnostics")]
+        safe_race_timing: None,
     };
     let mut c = root.clone();
     let before = Key::of(&c);

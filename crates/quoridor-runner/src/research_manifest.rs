@@ -165,19 +165,42 @@ fn prior_software_roles(build: &Value) -> Result<[bool; 2]> {
         return Err("research prior software source scope required".into());
     }
     let mut roles = [false; 2];
+    let mut selected_names = std::collections::BTreeSet::new();
     for selected in prior["receipts"]
         .as_array()
         .ok_or("prior software receipts")?
     {
+        let name = selected["name"]
+            .as_str()
+            .ok_or("prior software check name")?;
+        if !selected_names.insert(name) {
+            return Err("duplicate prior software selection".into());
+        }
         let reference: FileRef = serde_json::from_value(selected["file"].clone())?;
         let receipt: Value = reference.read()?;
-        let matches: Vec<_> = receipt["checks"]
+        let recorded = receipt["checks"]
             .as_array()
-            .ok_or("prior software checks")?
+            .ok_or("prior software checks")?;
+        let failed: Vec<_> = recorded
+            .iter()
+            .filter(|c| c["status"] == "FAILED")
+            .collect();
+        if failed.len() > 1
+            || (!receipt["primary"].is_null()
+                && !(failed.len() == 1
+                    && std::ptr::eq(failed[0], recorded.last().unwrap())
+                    && failed[0]["primary"] == receipt["primary"]
+                    && failed[0]["name"] != selected["name"]))
+        {
+            return Err(
+                "prior parent failure must belong to one different final failed check".into(),
+            );
+        }
+        let matches: Vec<_> = recorded
             .iter()
             .filter(|c| c["name"] == selected["name"])
             .collect();
-        if !receipt["primary"].is_null() || matches.len() != 1 {
+        if matches.len() != 1 {
             return Err("research one successful original software check required".into());
         }
         let check = matches[0];
@@ -208,7 +231,13 @@ fn prior_software_roles(build: &Value) -> Result<[bool; 2]> {
         }
         let role = match argv[1].as_str() {
             "test" => 0,
-            "clippy" if has("-Dwarnings") && has("--no-deps") => 1,
+            "clippy"
+                if has("--no-deps")
+                    && (has("-Dwarnings")
+                        || argv.windows(2).any(|args| args == ["-D", "warnings"])) =>
+            {
+                1
+            }
             _ => return Err("research prior Cargo test/scoped Clippy only".into()),
         };
         let log: FileRef = serde_json::from_value(check["full_log"].clone())?;
@@ -1863,5 +1892,134 @@ mod prior_software_native_tests {
         let build = f.build(vec![test, lint], &artifact);
         fs::write(f.0.join("new-test.log"), b"changed log\n").unwrap();
         assert!(!build_status(&build));
+    }
+
+    /// Local JSON/file fixtures only; never runs Cargo, a model, or an executable.
+    #[test]
+    fn prior_software_selected_pass_final_failure_and_split_clippy() {
+        let f = Fixture::new();
+        let mut lint = f.check("selected-lint", "clippy");
+        let mut argv: Vec<String> = serde_json::from_value(lint["argv"].clone()).unwrap();
+        argv.pop();
+        argv.extend(["-D".into(), "warnings".into()]);
+        lint["argv"] = json!(argv);
+        lint["guardian_return"]["command"] = lint["argv"].clone();
+        let error = json!({"type":"Refused", "message":"different final check", "notes":[]});
+        let failed = json!({"name":"later-test", "status":"FAILED", "primary":error});
+        let receipt = json!({"checks":[lint,failed], "primary":error});
+        let evaluate = |value: &Value, names: &[&str]| {
+            let reference = f.json("fake-aggregate.json", value);
+            let source = json!({"fixture_only":"not a real qualification"});
+            let selections = names
+                .iter()
+                .map(|name| json!({"name":name,"file":reference}))
+                .collect::<Vec<_>>();
+            let adoption = f.json("parent-adoption.json", &json!({
+                "schema":"quoridor.research.source-adoption.v1", "status":"ACCEPTED",
+                "source":source, "prior_software":{"subjects":[f.file("source.rs", b"// fake\n")],"receipts":selections}
+            }));
+            prior_software_roles(&json!({"source":source, "source_adoption":adoption}))
+        };
+        assert_eq!(
+            evaluate(&receipt, &["selected-lint"]).unwrap(),
+            [false, true]
+        );
+        assert_eq!(
+            evaluate(
+                &json!({"checks":[lint], "primary":null}),
+                &["selected-lint"]
+            )
+            .unwrap(),
+            [false, true]
+        );
+        let mut joined = receipt.clone();
+        joined["checks"][0]["argv"] = json!([
+            "cargo",
+            "clippy",
+            "--offline",
+            "--locked",
+            "-j1",
+            "--no-deps",
+            "--",
+            "-Dwarnings"
+        ]);
+        joined["checks"][0]["guardian_return"]["command"] = joined["checks"][0]["argv"].clone();
+        assert_eq!(
+            evaluate(&joined, &["selected-lint"]).unwrap(),
+            [false, true]
+        );
+        let mut negatives = Vec::new();
+        let mut missing = receipt.clone();
+        missing["checks"].as_array_mut().unwrap().pop();
+        negatives.push(missing);
+        let mut not_final = receipt.clone();
+        not_final["checks"].as_array_mut().unwrap().reverse();
+        negatives.push(not_final);
+        let mut mismatch = receipt.clone();
+        mismatch["primary"] = json!({"message":"unaccounted parent error"});
+        negatives.push(mismatch);
+        let mut multiple = receipt.clone();
+        multiple["checks"]
+            .as_array_mut()
+            .unwrap()
+            .push(failed.clone());
+        negatives.push(multiple.clone());
+        multiple["primary"] = Value::Null;
+        negatives.push(multiple);
+        let mut duplicate = receipt.clone();
+        duplicate["checks"]
+            .as_array_mut()
+            .unwrap()
+            .insert(0, lint.clone());
+        negatives.push(duplicate);
+        for (field, value) in [
+            ("status", json!("PARTIAL")),
+            ("capture_complete", json!(false)),
+            ("primary", error.clone()),
+            ("secondary", json!([error])),
+        ] {
+            let mut bad = receipt.clone();
+            bad["checks"][0][field] = value;
+            negatives.push(bad);
+        }
+        for (field, value) in [
+            ("command", json!(["substituted"])),
+            ("exit_code", json!(1)),
+            ("direct_child_reaped", json!(false)),
+            ("cleanup_complete", json!(false)),
+            ("handle_closes_complete", json!(false)),
+            ("remaining", json!([{"pid":1}])),
+        ] {
+            let mut bad = receipt.clone();
+            bad["checks"][0]["guardian_return"][field] = value;
+            negatives.push(bad);
+        }
+        for removed in ["--offline", "--locked", "-j1", "--no-deps", "warnings"] {
+            let mut bad = receipt.clone();
+            bad["checks"][0]["argv"]
+                .as_array_mut()
+                .unwrap()
+                .retain(|v| v != removed);
+            bad["checks"][0]["guardian_return"]["command"] = bad["checks"][0]["argv"].clone();
+            negatives.push(bad);
+        }
+        for added in ["-Aunused", "--allow=unused"] {
+            let mut bad = receipt.clone();
+            bad["checks"][0]["argv"]
+                .as_array_mut()
+                .unwrap()
+                .push(json!(added));
+            bad["checks"][0]["guardian_return"]["command"] = bad["checks"][0]["argv"].clone();
+            negatives.push(bad);
+        }
+        let mut build = receipt.clone();
+        build["checks"][0]["argv"][1] = json!("build");
+        build["checks"][0]["guardian_return"]["command"] = build["checks"][0]["argv"].clone();
+        negatives.push(build);
+        for bad in negatives {
+            assert!(evaluate(&bad, &["selected-lint"]).is_err());
+        }
+        assert!(evaluate(&receipt, &["later-test"]).is_err());
+        assert!(evaluate(&receipt, &["selected-lint", "selected-lint"]).is_err());
     }
 }

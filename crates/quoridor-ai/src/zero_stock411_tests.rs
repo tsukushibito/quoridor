@@ -116,6 +116,8 @@ fn with_search<T>(
         lmr_observation: None,
         #[cfg(feature = "research-diagnostics")]
         trial_trace: None,
+        #[cfg(feature = "research-diagnostics")]
+        safe_race_timing: None,
     };
     let before = (Key::of(root), root.history_counts(), s.context, s.board);
     let mut c = root.clone();

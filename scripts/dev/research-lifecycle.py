@@ -940,7 +940,19 @@ def measurement_config(experiment):
     safe_method = config.get("zero_stock_safe_race_method")
     require(
         safe_method is None
-        or (type(safe_method) is str and safe_method in {"manhattan", "path_tail"}),
+        or (
+            type(safe_method) is str
+            and safe_method
+            in {
+                "manhattan",
+                "path_tail",
+                "path_tail_dag",
+                "path_tail_bound",
+                "path_tail_cross",
+                "path_tail_future",
+                "manhattan_detour",
+            }
+        ),
         "measurement safe-race method",
     )
     lmr_method = config.get("lmr_method", "depth_rank")
@@ -1079,6 +1091,7 @@ def measurement_config(experiment):
                 "warmup",
                 "observe_completed_depths",
                 "observe_lmr",
+                "observe_safe_race",
             }
             and all(isinstance(request[k], str) and request[k] for k in ("id", "session"))
             and request["id"] not in ids
@@ -1103,6 +1116,7 @@ def measurement_config(experiment):
                     "warmup",
                     "observe_completed_depths",
                     "observe_lmr",
+                    "observe_safe_race",
                 )
             ),
             "measurement request switches",
@@ -1113,6 +1127,16 @@ def measurement_config(experiment):
             if active is not None:
                 closed.add(active)
             active = request["session"]
+    require(
+        not any(
+            r.get("observe_safe_race", False)
+            and any(
+                r.get(k, False) for k in ("diagnostic", "observe_completed_depths", "observe_lmr")
+            )
+            for r in requests
+        ),
+        "safe-race attribution cannot overlap other observers",
+    )
     if any(r.get("observe_lmr", False) for r in requests):
         require(
             len(requests) <= 12
@@ -1634,10 +1658,23 @@ def prior_software_roles(adoption_ref, *, current_sources=False):
         for ref in qualification["subjects"]:
             require(artifact_ref(ref["path"]) == ref, "prior software source drift")
     roles = set()
+    selected_names = set()
     for selected in qualification["receipts"]:
+        require(selected["name"] not in selected_names, "duplicate prior software selection")
+        selected_names.add(selected["name"])
         receipt = document(selected["file"])
-        require(receipt.get("primary") is None, "failed prior software receipt")
-        checks = [c for c in receipt["checks"] if c["name"] == selected["name"]]
+        recorded = receipt["checks"]
+        failed = [c for c in recorded if c["status"] == "FAILED"]
+        require(len(failed) <= 1, "multiple failed prior software checks")
+        if receipt.get("primary") is not None:
+            require(
+                len(failed) == 1
+                and failed[0] is recorded[-1]
+                and failed[0].get("primary") == receipt["primary"]
+                and failed[0]["name"] != selected["name"],
+                "prior parent failure must belong to one different final failed check",
+            )
+        checks = [c for c in recorded if c["name"] == selected["name"]]
         require(len(checks) == 1, "one original prior software check")
         check = checks[0]
         guardian = check["guardian_return"]
@@ -1666,7 +1703,11 @@ def prior_software_roles(adoption_ref, *, current_sources=False):
         )
         if argv[1] == "clippy":
             require(
-                {"-Dwarnings", "--no-deps"} <= set(argv),
+                "--no-deps" in argv
+                and (
+                    "-Dwarnings" in argv
+                    or any(a == "-D" and b == "warnings" for a, b in zip(argv, argv[1:]))
+                ),
                 "prior scoped Clippy warnings denied",
             )
         read_ref(check["full_log"])
@@ -2799,7 +2840,17 @@ def arena_plan_check(experiment, plan):
                 engine.get("zero_stock_safe_race") is None
                 or type(engine["zero_stock_safe_race"]) is bool
             )
-            and engine.get("zero_stock_safe_race_method") in {None, "manhattan", "path_tail"}
+            and engine.get("zero_stock_safe_race_method")
+            in {
+                None,
+                "manhattan",
+                "path_tail",
+                "path_tail_dag",
+                "path_tail_bound",
+                "path_tail_cross",
+                "path_tail_future",
+                "manhattan_detour",
+            }
             and (
                 "lmr_method" not in engine
                 or engine["lmr_method"]
