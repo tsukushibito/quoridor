@@ -149,19 +149,97 @@ pub struct Experiment {
     pub batch: Option<usize>,
     pub argv: Vec<String>,
 }
+/// Frozen prior checks belong to source adoption, not the new BUILD command ledger.
+fn prior_software_roles(build: &Value) -> Result<[bool; 2]> {
+    let reference: FileRef = serde_json::from_value(build["source_adoption"].clone())?;
+    let adoption: Value = reference.read()?;
+    if adoption["schema"] != "quoridor.research.source-adoption.v1"
+        || adoption["status"] != "ACCEPTED"
+        || !build["source"].is_object()
+        || adoption["source"] != build["source"]
+    {
+        return Err("research accepted source adoption correspondence".into());
+    }
+    let prior = &adoption["prior_software"];
+    if !prior["subjects"].as_array().is_some_and(|s| !s.is_empty()) {
+        return Err("research prior software source scope required".into());
+    }
+    let mut roles = [false; 2];
+    for selected in prior["receipts"]
+        .as_array()
+        .ok_or("prior software receipts")?
+    {
+        let reference: FileRef = serde_json::from_value(selected["file"].clone())?;
+        let receipt: Value = reference.read()?;
+        let matches: Vec<_> = receipt["checks"]
+            .as_array()
+            .ok_or("prior software checks")?
+            .iter()
+            .filter(|c| c["name"] == selected["name"])
+            .collect();
+        if !receipt["primary"].is_null() || matches.len() != 1 {
+            return Err("research one successful original software check required".into());
+        }
+        let check = matches[0];
+        let guardian = &check["guardian_return"];
+        if check["status"] != "PASS"
+            || check["capture_complete"] != true
+            || !check["primary"].is_null()
+            || !(check["secondary"].is_null() || check["secondary"] == json!([]))
+            || guardian["command"] != check["argv"]
+            || guardian["exit_code"] != 0
+            || guardian["direct_child_reaped"] != true
+            || guardian["cleanup_complete"] != true
+            || guardian["handle_closes_complete"] != true
+            || guardian["remaining"] != json!([])
+        {
+            return Err("research completed prior software check required".into());
+        }
+        let argv: Vec<String> = serde_json::from_value(check["argv"].clone())?;
+        let has = |arg: &str| argv.iter().any(|a| a == arg);
+        if argv.len() < 2
+            || Path::new(&argv[0]).file_name().and_then(|n| n.to_str()) != Some("cargo")
+            || !["--offline", "--locked", "-j1"].iter().all(|a| has(a))
+            || argv
+                .iter()
+                .any(|a| a.starts_with("-A") || a.starts_with("--allow"))
+        {
+            return Err("research bounded prior Cargo qualification".into());
+        }
+        let role = match argv[1].as_str() {
+            "test" => 0,
+            "clippy" if has("-Dwarnings") && has("--no-deps") => 1,
+            _ => return Err("research prior Cargo test/scoped Clippy only".into()),
+        };
+        let log: FileRef = serde_json::from_value(check["full_log"].clone())?;
+        if log.bytes > 1024 * 1024 {
+            return Err("research prior software log control limit".into());
+        }
+        log.verify()?;
+        roles[role] = true;
+    }
+    Ok(roles)
+}
 fn build_status(build: &Value) -> bool {
     build["schema"] == "quoridor.research.build-manifest.v1"
         && build["status"] == "PASS"
         && build["cleanup_complete"] == true
         && build["remaining"] == json!([])
         && build["checks"].as_array().is_some_and(|checks| {
-            ["test", "lint", "build"].iter().all(|role| {
+            let completed = |role: &str| {
                 checks.iter().any(|c| {
-                    c["role"] == *role
+                    c["role"] == role
                         && c["guardian_return"]["exit_code"] == 0
                         && c["guardian_return"]["cleanup_complete"] == true
                 })
-            })
+            };
+            if completed("test") && completed("lint") {
+                return completed("build");
+            }
+            completed("build")
+                && prior_software_roles(build).is_ok_and(|prior| {
+                    (completed("test") || prior[0]) && (completed("lint") || prior[1])
+                })
         })
 }
 /// Generation is a model-free bootstrap, never a numerical qualification.
@@ -1601,5 +1679,189 @@ mod configured_run_launch_tests {
         assert!(configured_run_plan(&intent, &bound, &different).is_err());
         fs::write(&original.path, b"{}").unwrap();
         assert!(configured_run_plan(&intent, &bound, &e).is_err());
+    }
+}
+
+#[cfg(test)]
+mod prior_software_native_tests {
+    use super::*;
+
+    struct Fixture(PathBuf);
+    impl Fixture {
+        fn new() -> Self {
+            let stamp = std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_nanos();
+            let path = std::env::temp_dir().join(format!(
+                "prior-software-native-{}-{stamp}",
+                std::process::id()
+            ));
+            fs::create_dir(&path).unwrap();
+            Self(path)
+        }
+        fn file(&self, name: &str, bytes: &[u8]) -> FileRef {
+            let path = self.0.join(name);
+            fs::write(&path, bytes).unwrap();
+            #[cfg(unix)]
+            {
+                use std::os::unix::fs::PermissionsExt;
+                fs::set_permissions(&path, fs::Permissions::from_mode(0o644)).unwrap();
+            }
+            FileRef {
+                path,
+                sha256: arena::digest(bytes),
+                bytes: bytes.len() as u64,
+                mode: "0644".into(),
+            }
+        }
+        fn json(&self, name: &str, value: &Value) -> FileRef {
+            self.file(name, &serde_json::to_vec(value).unwrap())
+        }
+        fn check(&self, name: &str, subcommand: &str) -> Value {
+            let mut argv = vec!["cargo", subcommand, "--offline", "--locked", "-j1"];
+            if subcommand == "clippy" {
+                argv.extend(["--no-deps", "--", "-Dwarnings"]);
+            }
+            json!({"name":name,"role":"run","argv":argv,"status":"PASS",
+                "capture_complete":true,"primary":null,"secondary":[],
+                "full_log":self.file(&format!("{name}.log"), b"saved fake software output\n"),
+                "guardian_return":{"command":argv,"exit_code":0,"direct_child_reaped":true,
+                    "cleanup_complete":true,"handle_closes_complete":true,"remaining":[]}})
+        }
+        fn build(&self, checks: Vec<Value>, artifact: &FileRef) -> Value {
+            let selections = checks
+                .iter()
+                .map(|check| {
+                    json!({"name":check["name"],"file":self.json(
+                    &format!("{}.json",check["name"].as_str().unwrap()),
+                    &json!({"checks":[check],"primary":null}))})
+                })
+                .collect::<Vec<_>>();
+            let source = json!({"fixture_only":"not a real source qualification"});
+            let adoption = self.json(
+                "adoption.json",
+                &json!({
+                "schema":"quoridor.research.source-adoption.v1","status":"ACCEPTED",
+                "source":source,"prior_software":{
+                    "subjects":[self.file("historical-source.rs",b"// frozen fake source\n")],
+                    "receipts":selections}}),
+            );
+            json!({"schema":"quoridor.research.build-manifest.v1","status":"PASS",
+                "cleanup_complete":true,"remaining":[],"artifact":artifact,"source":source,
+                "source_adoption":adoption,"checks":[{"role":"build",
+                    "guardian_return":{"exit_code":0,"cleanup_complete":true}}]})
+        }
+    }
+    impl Drop for Fixture {
+        fn drop(&mut self) {
+            let _ = fs::remove_dir_all(&self.0);
+        }
+    }
+
+    #[test]
+    fn prior_software_native_measure_load_crosses_actual_preflight_without_a_factory() {
+        let f = Fixture::new();
+        let artifact = f.file("FAKE_NOT_EXECUTABLE", b"not an executable");
+        let build = f.build(
+            vec![f.check("new-test", "test"), f.check("lint", "clippy")],
+            &artifact,
+        );
+        assert_eq!(build["checks"].as_array().unwrap().len(), 1);
+        assert!(build_status(&build));
+        let weights = f.file("weights.f32", b"not model weights");
+        let descriptor = f.json("descriptor.json", &json!({"weights_SHA":weights.sha256}));
+        let reference = f.json("config.json", &json!({"fixture_only":true}));
+        let e = Experiment {
+            schema: "quoridor.research.experiment.v1".into(),
+            phase: "compare".into(),
+            build_manifest: f.json("build.json", &build),
+            config: reference.clone(),
+            inputs: vec![reference.clone()],
+            models: vec![ModelRef {
+                descriptor,
+                weights,
+                evaluator_sha256: "1".repeat(64),
+            }],
+            dynamic_libraries: vec![],
+            schedule: reference,
+            numerical_qualification: None,
+            canonical_plan_sha256: String::new(),
+            rules: "research-standard-2p-threefold-goal-first-v1".into(),
+            distance_units: "wall-distance/80".into(),
+            value_perspective: "side-to-move".into(),
+            planned_slots: 1,
+            batch: None,
+            argv: vec![
+                artifact.path.to_string_lossy().into(),
+                "measure".into(),
+                "--experiment".into(),
+                "@EXPERIMENT@".into(),
+                "--experiment-sha256".into(),
+                "@EXPERIMENT_SHA256@".into(),
+            ],
+        };
+        let er = f.json("experiment.json", &serde_json::to_value(&e).unwrap());
+        let bound = BoundControl {
+            path: er.path,
+            sha256: er.sha256,
+        };
+        let argv = e
+            .argv
+            .iter()
+            .map(|arg| {
+                arg.replace("@EXPERIMENT@", &bound.path.to_string_lossy())
+                    .replace("@EXPERIMENT_SHA256@", &bound.sha256)
+            })
+            .collect::<Vec<_>>();
+        let (_, qualification) =
+            load_checked(e.clone(), &bound, "compare", None, &argv, &artifact.path).unwrap();
+        assert!(qualification.is_null());
+        // Frozen historical subjects need not remain at their former Main paths.
+        fs::remove_file(f.0.join("historical-source.rs")).unwrap();
+        assert!(load_checked(e, &bound, "compare", None, &argv, &artifact.path).is_ok());
+    }
+
+    #[test]
+    fn prior_software_native_refuses_partial_substitution_and_log_drift() {
+        let f = Fixture::new();
+        let artifact = f.file("FAKE_NOT_EXECUTABLE", b"not an executable");
+        let test = f.check("new-test", "test");
+        let lint = f.check("lint", "clippy");
+        for (field, value) in [
+            ("capture_complete", json!(false)),
+            ("status", json!("FAILED")),
+            ("secondary", json!([{"stage":"publication"}])),
+            ("primary", json!({"stage":"work"})),
+        ] {
+            let mut bad = test.clone();
+            bad[field] = value;
+            assert!(!build_status(&f.build(vec![bad, lint.clone()], &artifact)));
+        }
+        for field in [
+            "direct_child_reaped",
+            "cleanup_complete",
+            "handle_closes_complete",
+        ] {
+            let mut bad = test.clone();
+            bad["guardian_return"][field] = json!(false);
+            assert!(!build_status(&f.build(vec![bad, lint.clone()], &artifact)));
+        }
+        let mut bad = test.clone();
+        bad["argv"][1] = json!("build");
+        bad["guardian_return"]["command"] = bad["argv"].clone();
+        assert!(!build_status(&f.build(vec![bad, lint.clone()], &artifact)));
+        let mut build = f.build(vec![test.clone(), lint.clone()], &artifact);
+        build["source"]["fixture_only"] = json!("different source");
+        assert!(!build_status(&build));
+        let mut build = f.build(vec![test.clone(), lint.clone()], &artifact);
+        build["status"] = json!("PENDING_FINALIZATION");
+        assert!(!build_status(&build));
+        let mut build = f.build(vec![test.clone(), lint.clone()], &artifact);
+        build["checks"][0]["guardian_return"]["cleanup_complete"] = json!(false);
+        assert!(!build_status(&build));
+        let build = f.build(vec![test, lint], &artifact);
+        fs::write(f.0.join("new-test.log"), b"changed log\n").unwrap();
+        assert!(!build_status(&build));
     }
 }

@@ -6,6 +6,8 @@ A normal trusted offline Cargo build runs under frozen authored source, the adop
 
 Affected tests and Clippy may finish before the release BUILD. The accepted source adoption can bind `prior_software: {subjects: [FileRef], receipts: [{file: FileRef, name}]}` for those original checks. Admission verifies the declared source bytes; admission, finalization and later BUILD consumption verify the original receipt, complete log and successful returned cleanup. Roles derive from the actual Cargo test/clippy argv. These checks remain separate from the BUILD's own attempted-command ledger and are not replayed. The adoption records their scope and any source provenance limits; this does not certify unlisted sources or numerical qualification.
 
+The native experiment preflight also consumes these bound prior checks when test/lint roles are absent from the BUILD ledger. It requires the accepted adoption to match the BUILD source and verifies original receipt/log identity, command and completed cleanup. It does not require historical source paths to retain their old Main bytes. The new executable must still come from the BUILD's own successful release command; prior checks cannot supply that role.
+
 ## Public commands and ownership
 
 Submit one frozen build/run intent through existing `research-job.sh`; its `argv` is:
