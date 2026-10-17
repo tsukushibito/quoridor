@@ -121,14 +121,47 @@ def error_details(error):
     return result
 
 
+def retained_repair_limit(config, saved, boundary, *, planned_total, pair_rows):
+    """Consume the explicit failed-row repair without changing any original cap."""
+    envelope = json.loads(bound_file_bytes(config["failed_row_repair"], 131072))
+    repair = envelope["logical_repair"]
+    if repair["authority"] != envelope["authority"]:
+        raise ValueError("same explicit human failed-row authority required")
+    bound_file_bytes(repair["authority"], 32768)
+    failed = saved["failed_attempted_rows"]
+    if (
+        type(failed) is not int
+        or failed <= 0
+        or repair["old_qualification_attempts"] != boundary["logical_rows_attempted"]
+        or repair["prior_total_attempted"] != saved["already_charged_global"]
+        or repair["prior_production_returned_finite"] != saved["new_finite"]
+        or repair["prior_production_attempted"] != saved["new_finite"] + failed
+        or repair["prior_failed_attempts"] != failed
+        or repair["additional_failed_row_repair_max"] != failed
+        or repair["old_actual_config_ceiling"] != 4 * pair_rows + 256
+        or repair["original_plan"] + failed != planned_total
+        or repair["conditional_cumulative_attempted_upper"] != planned_total
+        or repair["difference_from_old_config"] != planned_total - (4 * pair_rows + 256)
+        or repair["qualification_extra_rows"] != 0
+        or repair["other_fit_or_arena_quota_change"] != 0
+        or config["inclusive_row_limit"] != planned_total
+    ):
+        raise ValueError("exact past-charge/retained-custody failed-row repair only")
+    return planned_total
+
+
 def label_values(config, *, progress_callback=None):
     """One fresh original stream; failure retains partials, never automatically resumes."""
     # Real boundary success, same actual inputs/models/libraries and runtime
     # must already be bound. A submitted job or source clear is not that result.
     intended_devices = runtime_devices(config)
     boundary = json.loads(bound_file_bytes(config["runtime_boundary"], 131072))
+    scoped = boundary["status"] == "PASS_PER_TEACHER_BOUNDARIES"
+    teachers = boundary.get("qualified_teachers", ["S", "C"])
+    if teachers not in (["S"], ["S", "C"]):
+        raise ValueError("original S then C order; no unqualified teacher")
     if (
-        boundary["status"] != "PASS"
+        boundary["status"] not in ("PASS", "PASS_PER_TEACHER_BOUNDARIES")
         or boundary["input_classes"] != config["input_classes"]
         or boundary["models"] != config["models"]
         or boundary["core_library"] != config["core_library"]
@@ -140,24 +173,62 @@ def label_values(config, *, progress_callback=None):
         or not 0 < boundary["logical_rows_attempted"] <= 256
     ):
         raise ValueError("actual complete same-input/model/runtime boundary required")
-    keys = np.frombuffer(bound_file_bytes(boundary["keys"], 48 * 28), dtype="V28")
-    if not 0 < len(keys) <= 48 or len(np.unique(keys)) != len(keys):
-        raise ValueError("bounded actual unique runtime orientation keys")
     reuse = {}
-    for kind in ("S", "C"):
+    for kind in teachers:
+        key_ref = boundary["teacher_keys"][kind] if scoped else boundary["keys"]
+        keys = np.frombuffer(bound_file_bytes(key_ref, 48 * 28), dtype="V28")
+        if not 0 < len(keys) <= 48 or len(np.unique(keys)) != len(keys):
+            raise ValueError("bounded actual unique teacher-specific orientation keys")
         values = np.frombuffer(
             bound_file_bytes(boundary["batch_values"][kind], 48 * 4), dtype="<f4"
         )
         if values.shape != keys.shape or not np.isfinite(values).all() or np.any(abs(values) > 1):
-            raise ValueError("finite actual boundary batch outputs for reuse")
+            raise ValueError("finite qualified actual teacher batch outputs for reuse")
         reuse[kind] = {bytes(k): v for k, v in zip(keys, values)}
+    runtime_coverage = {kind: len(reuse[kind]) for kind in teachers}
     output = Path(config["output"])
-    output.mkdir(exist_ok=False)
     marker = output / "INCOMPLETE"
-    marker.write_text("original finite labels not completely published\n")
+    saved = None
+    saved_new = 0
+    saved_first = None
+    if config.get("retained_S_prefix") is not None:
+        saved = json.loads(bound_file_bytes(config["retained_S_prefix"], 131072))
+        old_failure = json.loads(bound_file_bytes(saved["original_failure"], 131072))
+        old = old_failure["teachers"]["S"]
+        old_head = old["head"]
+        if (
+            saved["status"] != "SAVED_RETURNED_PREFIX_FROZEN_NOT_RESTARTED"
+            or saved["input_classes"] != config["input_classes"]
+            or saved["actual_model"] != config["models"]["S"]
+            or saved["original_runtime_boundary"] != config["runtime_boundary"]
+            or Path(saved["original_bank"]["path"]) != output / "S.f32"
+            or not marker.is_file()
+            or (output / "C.f32").exists()
+            or (output / "teacher-values.json").exists()
+            or (output / "remaining-labels-failure.json").exists()
+            or saved["already_charged_boundary"] != boundary["logical_rows_attempted"]
+            or saved["already_charged_global"] != old_failure["inclusive_attempted_rows"]
+            or saved["new_finite"] != old["new_finite_rows"]
+            or saved["new_finite"] != old_head["finite_rows_returned"]
+            or saved["failed_attempted_rows"] != old_head["failed_attempted_rows"]
+            or saved["already_charged_global"]
+            != boundary["logical_rows_attempted"] + old_head["logical_rows_attempted"]
+            or list(file_identity(output / "S.f32")) != saved["original_bank"]["identity"]
+        ):
+            raise ValueError("exact original retained S custody/work required; no automatic resume")
+        saved_new = saved["new_finite"]
+        # The original first event is immutable and must never be repeated.
+        if Path(config["retained_S_first_progress"]["path"]) != output / "first-S-progress.json":
+            raise ValueError("original first S progress path")
+        saved_first = json.loads(bound_file_bytes(config["retained_S_first_progress"], 131072))
+    else:
+        output.mkdir(exist_ok=False)
+        marker.write_text("original finite labels not completely published\n")
     facts = {}
     started = time.monotonic()
-    attempted_total = boundary["logical_rows_attempted"]
+    attempted_total = (
+        saved["already_charged_global"] if saved is not None else boundary["logical_rows_attempted"]
+    )
     try:
         with input_pairs(config["input_classes"]) as (inputs, pairs):
             n = len(pairs)
@@ -165,20 +236,53 @@ def label_values(config, *, progress_callback=None):
             # Actual source/count plan precedes all new model entry.
             if (
                 config["actual_orientation_rows"] != m
-                or config["inclusive_row_limit"] != 4 * n + 256
+                or (saved is None and config["inclusive_row_limit"] != 4 * n + 256)
                 or not 1 <= m <= 2 * n
             ):
                 raise ValueError("actual teacher-row plan differs before model load")
-            reuse_keys = set(reuse["S"])
-            if reuse_keys != set(reuse["C"]):
-                raise ValueError("same actual five-route input set required")
-            found = set()
+            if saved is not None:
+                count = saved["original_oriented_prefix_rows"]
+                if (
+                    type(count) is not int
+                    or not 0 < count <= m
+                    or count != saved_new + runtime_coverage["S"]
+                ):
+                    raise ValueError("actual retained S row count")
+                retained_keys = np.frombuffer(bound_file_bytes(saved["keys"], m * 28), dtype="V28")
+                retained_values = np.frombuffer(
+                    bound_file_bytes(saved["values"], m * 4), dtype="<f4"
+                )
+                if (
+                    len(retained_keys) != count
+                    or len(np.unique(retained_keys)) != count
+                    or retained_values.shape != retained_keys.shape
+                    or not np.isfinite(retained_values).all()
+                    or np.any(abs(retained_values) > 1)
+                ):
+                    raise ValueError("finite same-input retained production prefix")
+                previous = {bytes(k): v for k, v in zip(retained_keys, retained_values)}
+                if any(
+                    k not in previous or previous[k].tobytes() != v.tobytes()
+                    for k, v in reuse["S"].items()
+                ):
+                    raise ValueError("retained prefix changed qualified S values")
+                reuse["S"] = previous
+            found_by_teacher = {kind: set() for kind in teachers}
             for _, _, chunk in oriented_keys(pairs, config["batch_rows"]):
-                found.update(bytes(k) for k in chunk if bytes(k) in reuse_keys)
-            if found != reuse_keys:
-                raise ValueError("runtime key not in exact current unsealed label classes")
-            missing = m - len(found)
-            if attempted_total + 2 * missing > config["inclusive_row_limit"]:
+                for kind in teachers:
+                    found_by_teacher[kind].update(
+                        bytes(k) for k in chunk if bytes(k) in reuse[kind]
+                    )
+            if any(found_by_teacher[kind] != set(reuse[kind]) for kind in teachers):
+                raise ValueError("teacher runtime key not in exact current unsealed label classes")
+            planned_total = attempted_total + sum(
+                m - len(found_by_teacher[kind]) for kind in teachers
+            )
+            if saved is not None:
+                retained_repair_limit(
+                    config, saved, boundary, planned_total=planned_total, pair_rows=n
+                )
+            if planned_total > config["inclusive_row_limit"]:
                 raise ValueError("inclusive labels plus prior actual boundary exceed plan")
             # Immutable library payload check once before its actual load.
             bound_file_bytes(config["core_library"], 16 * 1024**2)
@@ -193,7 +297,17 @@ def label_values(config, *, progress_callback=None):
             torch.set_num_threads(config["cpu_threads"])
             if torch.get_num_interop_threads() != 1:
                 torch.set_num_interop_threads(1)
-            for kind, adapter in (("S", "sigma"), ("C", "claustrophobia")):
+            for kind in teachers:
+                adapter = "sigma" if kind == "S" else "claustrophobia"
+                found = found_by_teacher[kind]
+                missing = m - len(found)
+                capacity = config.get("teacher_batch_rows", {}).get(kind, config["batch_rows"])
+                if type(capacity) is not int or not 2 <= capacity <= config["batch_rows"]:
+                    raise ValueError("actual bounded teacher batch capacity")
+                if scoped and kind == "C" and capacity != boundary["C_batch_rows"]:
+                    raise ValueError(
+                        "corrected C production must use qualified batch8/endbatch inlet"
+                    )
                 entry = config["models"][kind]
                 expected_identity = boundary["model_identities"][kind]
                 if list(IndexedPublicCorpus.identity(Path(entry["path"]).lstat())) != list(
@@ -201,8 +315,12 @@ def label_values(config, *, progress_callback=None):
                 ):
                     raise ValueError("model changed since actual boundary hash/reader")
                 target_path = output / (kind + ".f32")
-                target = np.memmap(target_path, dtype="<f4", mode="w+", shape=(n, 2))
-                target[:] = np.nan
+                keeping_S = saved is not None and kind == "S"
+                target = np.memmap(
+                    target_path, dtype="<f4", mode="r+" if keeping_S else "w+", shape=(n, 2)
+                )
+                if not keeping_S:
+                    target[:] = np.nan
                 head = None
                 tick = time.monotonic()
                 teacher_start = datetime.now(timezone.utc)
@@ -214,17 +332,17 @@ def label_values(config, *, progress_callback=None):
                 retained_count = 0
                 newly_returned = 0
                 portion_rows = min(16384, missing)
-                first_portion = None
+                first_portion = saved_first if keeping_S else None
                 try:
                     if missing:
                         head = StaticHead(
                             adapter,
                             entry["path"],
                             device=config["device"],
-                            batch_rows=config["batch_rows"],
+                            batch_rows=capacity,
                             max_attempted_rows=missing,
                         )
-                    for pair, orientation, chunk in oriented_keys(pairs, config["batch_rows"]):
+                    for pair, orientation, chunk in oriented_keys(pairs, capacity):
                         values = np.empty(len(chunk), dtype="<f4")
                         present = np.fromiter(
                             (bytes(k) in reuse[kind] for k in chunk), dtype=bool, count=len(chunk)
@@ -233,6 +351,13 @@ def label_values(config, *, progress_callback=None):
                             values[i] = reuse[kind][bytes(chunk[i])]
                         reused_positions = np.flatnonzero(present)
                         if len(reused_positions):
+                            if keeping_S and not np.array_equal(
+                                target[pair[reused_positions], orientation[reused_positions]],
+                                values[reused_positions],
+                            ):
+                                raise ValueError(
+                                    "existing retained S scalar changed; no overwrite/replay"
+                                )
                             save_tick = time.monotonic()
                             target[pair[reused_positions], orientation[reused_positions]] = values[
                                 reused_positions
@@ -249,7 +374,7 @@ def label_values(config, *, progress_callback=None):
                         locations = np.flatnonzero(~present)
                         at = 0
                         while at < len(locations):
-                            take = min(config["batch_rows"], len(locations) - at)
+                            take = min(capacity, len(locations) - at)
                             if first_portion is None:
                                 take = min(take, portion_rows - newly_returned)
                             positions = locations[at : at + take]
@@ -294,7 +419,8 @@ def label_values(config, *, progress_callback=None):
                                     failed_attempted_rows=0,
                                     remaining_new_rows=missing - newly_returned,
                                     planned_new_rows=missing,
-                                    reused_boundary_rows=len(found),
+                                    reused_boundary_rows=runtime_coverage[kind],
+                                    reused_saved_production_rows=saved_new if keeping_S else 0,
                                     wall_seconds=wall,
                                     new_inputs_per_second=newly_returned / wall,
                                     estimated_remaining_new_seconds=(missing - newly_returned)
@@ -329,7 +455,7 @@ def label_values(config, *, progress_callback=None):
                                     runtime_boundary=config["runtime_boundary"],
                                     execution_binding=config.get("execution_binding"),
                                     device=config["device"],
-                                    batch_rows=config["batch_rows"],
+                                    batch_rows=capacity,
                                     outputs_retained=True,
                                     C_measured=(kind == "C"),
                                     fit_ETA="UNMEASURED until original fit and first normal V",
@@ -372,7 +498,8 @@ def label_values(config, *, progress_callback=None):
                         values_identity=file_identity(target_path),
                         model=entry,
                         head=None if head is None else head.facts(),
-                        reused_boundary_rows=len(found),
+                        reused_boundary_rows=runtime_coverage[kind],
+                        reused_saved_production_rows=saved_new if keeping_S else 0,
                         new_rows=newly_returned,
                         first_unentered_portion=first_portion,
                         seconds=time.monotonic() - tick,
@@ -425,7 +552,7 @@ def label_values(config, *, progress_callback=None):
                     raise ValueError("model changed during full label reader")
             bank = dict(
                 schema="quoridor-public-static-teacher-values-v1",
-                status="COMPLETE",
+                status="COMPLETE" if teachers == ["S", "C"] else "PARTIAL_S_COMPLETE_C_UNENTERED",
                 input_classes=config["input_classes"],
                 teachers=facts,
                 runtime_boundary=config["runtime_boundary"],
@@ -435,21 +562,26 @@ def label_values(config, *, progress_callback=None):
                 old_outcome_or_rawsearch_teacher=False,
                 history_semantics="board-only static STM",
                 logical_rows_are_not_physical_heads=True,
+                retained_S_prefix=config.get("retained_S_prefix"),
                 wall_seconds=time.monotonic() - started,
             )
         # Final input identity and both reader finalizers have now succeeded.
-        write_json(output / "teacher-values.json", bank)
+        manifest_path = output / (
+            "teacher-values.json" if teachers == ["S", "C"] else "teacher-values.partial.json"
+        )
+        write_json(manifest_path, bank)
         result = dict(
-            manifest=file_ref(output / "teacher-values.json"),
+            manifest=file_ref(manifest_path),
             inclusive_attempted_rows=attempted_total,
             teachers=facts,
         )
-        marker.unlink()  # Last necessary operation before returning success.
+        if teachers == ["S", "C"]:
+            marker.unlink()  # Full-bank success only; S-only retains INCOMPLETE.
         return result
     except BaseException as primary:
         try:
             write_json(
-                output / "failure.json",
+                output / ("remaining-labels-failure.json" if saved is not None else "failure.json"),
                 dict(
                     **error_details(primary),
                     inclusive_attempted_rows=attempted_total,
