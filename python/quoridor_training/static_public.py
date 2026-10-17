@@ -1,96 +1,77 @@
-"""Board-only public input classes, preserving original observation multiplicity.
+"""Board-only public input classes with original observation multiplicity.
 
-The owning stream qualifies geometry and protects sealed/LR groups before this
-reader. Class rows are exact native inputs, not games or full-history states.
-No inference, model loading, new feature formula or outcome teacher lives here.
+Each stored row is one exact native input/true-LR pair. The two counts retain
+original orientations; independently evaluated orientation scalars are separate.
+The owning stream protects old sealed/opened groups before any teacher call.
 """
+
+import hashlib
+from pathlib import Path
+import sqlite3
 
 import numpy as np
 
-from .public_features import features, input_records, reflected_keys
+from .public_features import (
+    features,
+    input_records,
+    lr_group_keys,
+    reflected_keys,
+    reflect,
+)
 
-CLASS = np.dtype([("key", "V28"), ("observations", "<u4"), ("split", "u1")])
-
-
-def exact_lookup(sorted_keys, requested):
-    """Reject absent classes, including a missing independently labeled LR view."""
-    requested = np.asarray(requested)
-    if requested.ndim != 1 or requested.dtype != np.dtype("V28"):
-        raise ValueError("exact native input keys required")
-    offsets = np.searchsorted(sorted_keys, requested)
-    if np.any(offsets >= len(sorted_keys)):
-        raise ValueError("input outside bound class table")
-    if not np.array_equal(sorted_keys[offsets], requested):
-        raise ValueError("input outside bound class table")
-    return offsets
+PAIR = np.dtype([("key", "V28"), ("observations", "<u4", (2,)), ("split", "u1")])
 
 
 class ClassObservations:
-    """Virtual observations with the same multiplicity as the original corpus.
+    """Virtual observation ordinals, weighted by the exact original counts.
 
-    A class with n original observations occupies n ordinals. Sampling those
-    ordinals uniformly is therefore exactly observation-weighted sampling; it
-    does not train uniformly over unique inputs. Zero-count reflected T entries
-    provide actual orientation targets, never extra observations.
+    Within each sorted pair, canonical observations precede reflected ones.
+    Uniform ordinal sampling and complete epochs preserve original multiplicity,
+    rather than sampling unique inputs uniformly. No game/history is invented.
     """
 
-    def __init__(self, classes, *, chunk_rows=65536):
+    def __init__(self, pairs, *, chunk_rows=65536):
         if (
-            classes.dtype != CLASS
-            or classes.ndim != 1
-            or not len(classes)
+            pairs.dtype != PAIR
+            or pairs.ndim != 1
+            or not len(pairs)
             or type(chunk_rows) is not int
             or not 0 < chunk_rows <= 65536
         ):
-            raise ValueError("nonempty bounded exact input class table required")
-        self.classes = classes
-        self.keys = classes["key"]
+            raise ValueError("nonempty bounded native LR-pair table required")
+        self.pairs, self.keys = pairs, pairs["key"]
         previous = None
-        for start in range(0, len(classes), chunk_rows):
-            rows = classes[start : start + chunk_rows]
-            keys = rows["key"]
-            ordered = np.sort(keys)
+        for first in range(0, len(pairs), chunk_rows):
+            batch = pairs[first : first + chunk_rows]
+            keys = batch["key"]
             if (
-                not np.array_equal(ordered, keys)
+                not np.array_equal(np.sort(keys), keys)
                 or np.any(keys[1:] == keys[:-1])
                 or (previous is not None and bytes(keys[0]) <= previous)
-                or np.any(rows["split"] > 1)
+                or not np.array_equal(lr_group_keys(keys), keys)
+                or np.any(batch["split"] > 1)
+                or np.any(batch["observations"].sum(axis=1, dtype=np.uint64) == 0)
             ):
-                raise ValueError("unique sorted unsealed T/V input classes required")
-            input_records(keys)
+                raise ValueError("unique canonical sorted unsealed T/V LR pairs required")
+            # A self-reflected exact input has one original orientation.
+            symmetric = reflected_keys(keys) == keys
+            if np.any(batch["observations"][symmetric, 1] != 0):
+                raise ValueError(
+                    "symmetric exact inputs cannot invent a second original orientation"
+                )
             previous = bytes(keys[-1])
-        # Closure is checked in bounded chunks. V need not have an unused LR
-        # label, but every present mate shares its split and every T mate exists.
-        for start in range(0, len(classes), chunk_rows):
-            rows = classes[start : start + chunk_rows]
-            mate = reflected_keys(rows["key"])
-            offset = np.searchsorted(self.keys, mate)
-            present = offset < len(classes)
-            safe = np.minimum(offset, len(classes) - 1)
-            present &= self.keys[safe] == mate
-            if np.any((rows["split"] == 0) & ~present) or np.any(
-                self.classes["split"][safe[present]] != rows["split"][present]
-            ):
-                raise ValueError("true LR T label closure and shared T/V split required")
-            if np.any((rows["observations"] == 0) & (rows["split"] != 0)):
-                raise ValueError("zero-count views are T augmentation only")
-        self.cumulative = {}
-        self.counts = {}
+        self.cumulative, self.counts = {}, {}
+        totals = pairs["observations"].sum(axis=1, dtype=np.uint64)
         for split, code in (("train", 0), ("validation", 1)):
-            weights = np.where(classes["split"] == code, classes["observations"], 0)
-            cumulative = np.cumsum(weights, dtype=np.uint64)
-            count = int(cumulative[-1])
-            if not count:
-                raise ValueError("nonempty original observation T/V required")
-            # uint32 counts and an addressable table bound the sum below u64.
-            if np.any(cumulative[1:] < cumulative[:-1]):
-                raise ValueError("observation multiplicity overflow")
+            cumulative = np.cumsum(np.where(pairs["split"] == code, totals, 0), dtype=np.uint64)
+            if np.any(cumulative[1:] < cumulative[:-1]) or not int(cumulative[-1]):
+                raise ValueError("nonempty observation partition without count overflow required")
             self.cumulative[split] = cumulative
-            self.counts[split] = count
+            self.counts[split] = int(cumulative[-1])
 
     def offsets(self, split, ordinals, reflection_mask=None, *, training=False):
         if split not in self.cumulative or (training and split != "train"):
-            raise ValueError("training uses T; only opened T/V can be indexed")
+            raise ValueError("training uses T; only unsealed T/V can be indexed")
         index = np.asarray(ordinals)
         if (
             index.ndim != 1
@@ -98,44 +79,61 @@ class ClassObservations:
             or np.any(index < 0)
             or np.any(index >= self.counts[split])
         ):
-            raise ValueError("original observation ordinals outside partition")
-        offsets = np.searchsorted(self.cumulative[split], index, side="right")
+            raise ValueError("original observation ordinal outside partition")
+        cumulative = self.cumulative[split]
+        pairs = np.searchsorted(cumulative, index, side="right")
+        before = np.zeros(len(index), dtype=np.uint64)
+        nonfirst = pairs != 0
+        before[nonfirst] = cumulative[pairs[nonfirst] - 1]
+        orientation = index - before >= self.pairs["observations"][pairs, 0]
         if reflection_mask is not None:
             mask = np.asarray(reflection_mask)
             if not training or mask.dtype != np.dtype(bool) or mask.shape != index.shape:
                 raise ValueError("actual T-only source reflection mask required")
-            offsets[mask] = exact_lookup(self.keys, reflected_keys(self.keys[offsets[mask]]))
-        if np.any(self.classes["split"][offsets] != (0 if split == "train" else 1)):
+            orientation ^= mask
+        if np.any(self.pairs["split"][pairs] != (0 if split == "train" else 1)):
             raise ValueError("lookup crossed bound split")
-        return offsets
+        return pairs, orientation.astype(np.uint8)
 
     def records(self, split, ordinals, reflection_mask=None, *, training=False):
-        offsets = self.offsets(split, ordinals, reflection_mask, training=training)
-        return input_records(self.keys[offsets])
+        pairs, orientation = self.offsets(split, ordinals, reflection_mask, training=training)
+        rows = input_records(self.keys[pairs]).copy()
+        selected = orientation.astype(bool)
+        rows["geometry"][selected] = reflect(rows["geometry"][selected])
+        return rows
+
+    def validate_values(self, values, *, chunk_rows=65536):
+        if values.dtype != np.dtype("<f4") or values.shape != (len(self.pairs), 2):
+            raise ValueError("one bound FP32 scalar per exact pair orientation")
+        for first in range(0, len(self.pairs), chunk_rows):
+            batch = self.pairs[first : first + chunk_rows]
+            required = np.ones((len(batch), 2), dtype=bool)
+            target = values[first : first + len(batch)][required]
+            if not np.isfinite(target).all() or np.any(np.abs(target) > 1):
+                raise ValueError("finite actual canonical/reflected teacher values required")
 
     def batch(self, split, ordinals, values, reflection_mask=None, *, training=False):
-        """Use the SAME LR mask for both native QF1 geometry and scalar target."""
-        if values.dtype != np.dtype("<f4") or values.ndim != 1 or len(values) != len(self.classes):
-            raise ValueError("one bound FP32 scalar per exact input orientation")
-        offsets = self.offsets(split, ordinals, reflection_mask, training=training)
-        rows = input_records(self.keys[offsets])
-        target = np.asarray(values[offsets])
+        if values.dtype != np.dtype("<f4") or values.shape != (len(self.pairs), 2):
+            raise ValueError("one bound FP32 scalar per exact pair orientation")
+        pairs, orientation = self.offsets(split, ordinals, reflection_mask, training=training)
+        rows = input_records(self.keys[pairs])
+        target = values[pairs, orientation]
         if not np.isfinite(target).all() or np.any(np.abs(target) > 1):
-            raise ValueError("finite local STM post-tanh scalar required")
-        return features(rows["geometry"]), rows["distance"].copy(), target
+            raise ValueError("finite actual orientation scalar required")
+        return (
+            features(rows["geometry"], orientation.astype(bool)),
+            rows["distance"].copy(),
+            target,
+        )
 
 
 def accumulate_inputs(connection, keys, protection):
-    """One bounded native-qualified batch, including opaque protected inputs.
+    """One bounded qualified batch; z/termination/teacher values are not inputs.
 
-    protection bits: 1 existing sealed row, 2 documented opened-evaluation row.
-    Neither old z nor teacher values are an argument to class membership.
-    Both orientations inherit protection before any labels can be requested.
+    Protection bits1=old sealed and2=known opened are ORed per exact trueLR pair.
+    Late protected aliases therefore remove earlier apparent training inputs.
     """
-    from .public_features import lr_group_keys
-
-    keys = np.asarray(keys)
-    protection = np.asarray(protection)
+    keys, protection = np.asarray(keys), np.asarray(protection)
     if (
         keys.ndim != 1
         or keys.dtype != np.dtype("V28")
@@ -144,82 +142,74 @@ def accumulate_inputs(connection, keys, protection):
         or protection.shape != keys.shape
         or np.any(protection > 3)
     ):
-        raise ValueError("bounded qualified input batch and explicit protection bits")
-    # Decode through the same owner used by the reader, not another board codec.
-    input_records(keys)
-    mates = reflected_keys(keys)
-    groups = lr_group_keys(keys)
-    sql = (
-        "INSERT INTO inputs VALUES (?,?,?) ON CONFLICT(key) DO UPDATE SET "
-        "observations=observations+excluded.observations,"
-        "protection=protection|excluded.protection"
+        raise ValueError("bounded qualified native keys and explicit protection bits")
+    groups = lr_group_keys(keys)  # also validates native input-key shape/range
+    orientation = keys != groups
+    connection.executemany(
+        "INSERT INTO inputs VALUES (?,?,?,?) ON CONFLICT(key) DO UPDATE SET "
+        "canonical_n=canonical_n+excluded.canonical_n,"
+        "reflected_n=reflected_n+excluded.reflected_n,"
+        "protection=protection|excluded.protection",
+        (
+            (bytes(key), int(not side), int(side), int(protected))
+            for key, side, protected in zip(groups, orientation, protection)
+        ),
     )
-    connection.executemany(sql, ((bytes(k), 1, int(p)) for k, p in zip(keys, protection)))
-    connection.executemany(sql, ((bytes(k), 0, int(p)) for k, p in zip(mates, protection)))
-    # This streaming digest binds each original qualified observation's actual
-    # orientation and LR group in caller source-row order; it is not a set hash.
     mapping = np.empty(len(keys), dtype=[("key", "V28"), ("lr_group", "V28")])
     mapping["key"], mapping["lr_group"] = keys, groups
     return mapping.tobytes()
 
 
-def write_class_table(connection, stream, *, split_seed, validation_parts, split_parts):
-    """Finish one full-source accumulation; split only unprotected LR groups.
+def class_split(key, split_seed):
+    """Frozen shared90/10 SHA rule; no numerical labels enter the split."""
+    if type(split_seed) is not int or not 0 <= split_seed < 2**64 or len(key) != 28:
+        raise ValueError("unsigned64 seed and owning exact native key28 required")
+    digest = hashlib.sha256(
+        b"full-public-teachers-v1|split|" + split_seed.to_bytes(8, "little") + key
+    ).digest()
+    return int(10 * int.from_bytes(digest[:8], "big") >= 9 * 2**64)
 
-    The finite recipe owns seed/fraction. SQL iteration is sorted and bounded;
-    this never constructs a corpus-size Python input/row/history list.
-    The caller publishes only after its complete source census and output sync.
-    """
-    import hashlib
 
-    if (
-        type(split_seed) is not int
-        or not 0 <= split_seed < 2**64
-        or type(validation_parts) is not int
-        or type(split_parts) is not int
-        or not 0 < validation_parts < split_parts <= 2**32
-    ):
-        raise ValueError("explicit finite result-blind class split recipe required")
-    from .public_features import lr_group_keys
-
+def write_class_table(connection, stream, *, split_seed):
+    """Publish sorted complete-source LR pairs using the frozen shared hash."""
+    # Validate even for an empty table.
+    class_split(bytes(28), split_seed)
     counts = {
         "qualified_original_observations": 0,
         "protected_original_observations": 0,
         "protected_by_bits": {"1": 0, "2": 0, "3": 0},
         "train": 0,
         "validation": 0,
-        "class_rows": 0,
+        "pair_rows": 0,
     }
-    seed = split_seed.to_bytes(8, "little")
-    cursor = connection.execute("SELECT key,observations,protection FROM inputs ORDER BY key")
+    cursor = connection.execute(
+        "SELECT key,canonical_n,reflected_n,protection FROM inputs ORDER BY key"
+    )
     try:
         while batch := cursor.fetchmany(8192):
-            # Python objects exist for at most one bounded batch.
-            keys = np.asarray([row[0] for row in batch], dtype="V28")
-            groups = lr_group_keys(keys)
-            rows = np.zeros(len(batch), dtype=CLASS)
+            rows = np.zeros(len(batch), dtype=PAIR)
             keep = np.ones(len(batch), dtype=bool)
-            for index, ((key, observations, protected), group) in enumerate(zip(batch, groups)):
-                if not 0 <= observations <= np.iinfo(np.uint32).max or not 0 <= protected <= 3:
-                    raise ValueError("class count/protection overflow or corrupt accumulator")
-                counts["qualified_original_observations"] += observations
+            for i, (key, canonical, reflected, protected) in enumerate(batch):
+                if (
+                    not 0 <= canonical <= np.iinfo(np.uint32).max
+                    or not 0 <= reflected <= np.iinfo(np.uint32).max
+                    or canonical + reflected == 0
+                    or not 0 <= protected <= 3
+                ):
+                    raise ValueError("class multiplicity overflow or corrupt accumulator")
+                n = canonical + reflected
+                counts["qualified_original_observations"] += n
                 if protected:
-                    counts["protected_original_observations"] += observations
-                    counts["protected_by_bits"][str(protected)] += observations
-                    keep[index] = False
+                    counts["protected_original_observations"] += n
+                    counts["protected_by_bits"][str(protected)] += n
+                    keep[i] = False
                     continue
-                digest = hashlib.sha256(seed + bytes(group)).digest()
-                # Integer threshold avoids floating partition drift. Finite
-                # modulo mapping is deterministic, not an IID/game claim.
-                split = int(int.from_bytes(digest[:8], "little") % split_parts < validation_parts)
-                if observations == 0 and split == 1:
-                    keep[index] = False
-                    continue
-                rows[index] = key, observations, split
-                counts["validation" if split else "train"] += observations
+                split = class_split(key, split_seed)
+                rows[i] = key, (canonical, reflected), split
+                counts["validation" if split else "train"] += n
             rows = rows[keep]
             stream.write(rows.tobytes())
-            counts["class_rows"] += len(rows)
+            counts["pair_rows"] += len(rows)
     finally:
         cursor.close()
     if (
@@ -230,24 +220,23 @@ def write_class_table(connection, stream, *, split_seed, validation_parts, split
     return counts
 
 
-def create_class_accumulator(path):
-    """Use the existing bounded SQLite indexing approach; caller owns its TMP."""
-    import sqlite3
-    from pathlib import Path
-
+def create_class_accumulator(path, *, max_bytes):
+    """The existing bounded SQLite approach, one key per trueLR pair, no row list."""
+    if type(max_bytes) is not int or max_bytes < 16384 or max_bytes % 4096:
+        raise ValueError("concrete whole-admitted SQLite page holding bound required")
     path = Path(path)
-    # SQLite's normal connect would silently reopen a previous partial index.
-    # Atomic fresh creation preserves failed prefixes rather than retrying them.
     with path.open("xb"):
-        pass
+        pass  # refuse reopening any prior failed/partial index
     connection = sqlite3.connect(path)
     try:
+        connection.execute("PRAGMA page_size=4096")
+        connection.execute(f"PRAGMA max_page_count={max_bytes // 4096}")
         connection.execute("PRAGMA cache_size=-2048")
         connection.execute("PRAGMA temp_store=FILE")
         connection.execute("PRAGMA journal_mode=OFF")
         connection.execute(
-            "CREATE TABLE inputs (key BLOB PRIMARY KEY, observations INTEGER NOT NULL,"
-            "protection INTEGER NOT NULL) WITHOUT ROWID"
+            "CREATE TABLE inputs (key BLOB PRIMARY KEY, canonical_n INTEGER NOT NULL,"
+            "reflected_n INTEGER NOT NULL,protection INTEGER NOT NULL) WITHOUT ROWID"
         )
     except BaseException:
         connection.close()
