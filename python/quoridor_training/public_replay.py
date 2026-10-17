@@ -397,6 +397,109 @@ def admit(cache, config_path, input_binding, cfg):
     return manifest, acceptance, counts, model_inputs
 
 
+def _add_outcome_slice(bank, predictions, outcomes, groups=None):
+    """Accumulate observation-only z/saturation/family counts from existing outputs."""
+    import numpy as np
+
+    p, z = (
+        np.asarray(predictions, dtype=np.float64),
+        np.asarray(outcomes, dtype=np.float64),
+    )
+    if (
+        p.ndim != 1
+        or z.shape != p.shape
+        or not np.isfinite(p).all()
+        or not np.isin(z, (-1, 0, 1)).all()
+        or (groups is not None and np.asarray(groups).shape != p.shape)
+    ):
+        raise ValueError(
+            "finite observation predictions and corresponding literal z/groups required"
+        )
+    if not bank:
+        bank.update(
+            rows=0,
+            z_sse=0.0,
+            family_bound=groups is not None,
+            families={},
+            by_z={
+                str(k): dict(
+                    rows=0,
+                    z_sse=0.0,
+                    absolute_post_sum=0.0,
+                    prediction_negative_rows=0,
+                    prediction_zero_rows=0,
+                    prediction_positive_rows=0,
+                    saturated_90_rows=0,
+                    saturated_99_rows=0,
+                )
+                for k in (-1, 0, 1)
+            },
+        )
+    if bank["family_bound"] != (groups is not None):
+        raise ValueError("observation family qualification changed between batches")
+    error = (p - z) ** 2
+    bank["rows"] += len(p)
+    bank["z_sse"] += float(error.sum())
+    for outcome in (-1, 0, 1):
+        take = z == outcome
+        values = p[take]
+        counts = bank["by_z"][str(outcome)]
+        counts["rows"] += int(take.sum())
+        counts["z_sse"] += float(error[take].sum())
+        counts["absolute_post_sum"] += float(np.abs(values).sum())
+        counts["prediction_negative_rows"] += int((values < 0).sum())
+        counts["prediction_zero_rows"] += int((values == 0).sum())
+        counts["prediction_positive_rows"] += int((values > 0).sum())
+        counts["saturated_90_rows"] += int((np.abs(values) >= 0.9).sum())
+        counts["saturated_99_rows"] += int((np.abs(values) >= 0.99).sum())
+    if groups is not None:
+        groups = np.asarray(groups)
+        for group in np.unique(groups):
+            take = groups == group
+            family = bank["families"].setdefault(int(group), [0, 0.0])
+            family[0] += int(take.sum())
+            family[1] += float(error[take].sum())
+
+
+def _outcome_slice_result(bank):
+    """Publish explicit row/family denominators; zero-z remains its own category."""
+    n = bank["rows"]
+    families = bank["families"]
+    saturated = {
+        threshold: sum(c["saturated_" + threshold + "_rows"] for c in bank["by_z"].values())
+        for threshold in ("90", "99")
+    }
+    return {
+        "rows": n,
+        "z_sse": bank["z_sse"],
+        "row_z_mse": bank["z_sse"] / n if n else None,
+        "canonical_family_count": len(families) if bank["family_bound"] else None,
+        "canonical_family_z_mse": sum(v[1] / v[0] for v in families.values()) / len(families)
+        if families
+        else None,
+        "z_sign": {
+            key: {
+                **counts,
+                "mean_abs_post": counts["absolute_post_sum"] / counts["rows"]
+                if counts["rows"]
+                else None,
+            }
+            for key, counts in bank["by_z"].items()
+        },
+        "decisive_rows": bank["by_z"]["-1"]["rows"] + bank["by_z"]["1"]["rows"],
+        "decisive_correct_sign_rows": bank["by_z"]["-1"]["prediction_negative_rows"]
+        + bank["by_z"]["1"]["prediction_positive_rows"],
+        "decisive_prediction_zero_rows": bank["by_z"]["-1"]["prediction_zero_rows"]
+        + bank["by_z"]["1"]["prediction_zero_rows"],
+        "draw_rows": bank["by_z"]["0"]["rows"],
+        "draw_mean_abs_post": bank["by_z"]["0"]["absolute_post_sum"] / bank["by_z"]["0"]["rows"]
+        if bank["by_z"]["0"]["rows"]
+        else None,
+        **{"saturated_" + k + "_rows": v for k, v in saturated.items()},
+        **{"saturation_" + k + "_fraction": v / n if n else None for k, v in saturated.items()},
+    }
+
+
 def train_mixture(cache, output, config_path, input_binding, cfg):
     manifest, acceptance, counts, model_inputs = admit(cache, config_path, input_binding, cfg)
     import numpy as np
@@ -549,6 +652,7 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
             "draw_absolute_value": 0.0,
         }
         families, strata, games = {}, {}, {}
+        outcome_slices = {}
         calibration = [[0, 0.0, 0.0, 0.0, 0.0] for _ in range(10)]
         reference_totals = {}
         model.eval()
@@ -579,6 +683,12 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
                 ):
                     raise ValueError("finite local STM target in [-1,1]")
                 zd = z.astype(np.float64)
+                _add_outcome_slice(
+                    outcome_slices.setdefault("all", {}),
+                    p,
+                    zd,
+                    added.groups[sub] if name.startswith("added_") else None,
+                )
                 z_decisive = zd != 0
                 totals["z_error"] += float(((p - zd) ** 2).sum())
                 totals["z_sign_rows"] += int(z_decisive.sum())
@@ -673,6 +783,9 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
                     for band in m["train_stock_strata"] or []:
                         take = (stock >= band["min"]) & (stock <= band["max"])
                         label = f"{band['min']}..{band['max']}"
+                        _add_outcome_slice(
+                            outcome_slices.setdefault(label, {}), p[take], zd[take], groups[take]
+                        )
                         bank = strata.setdefault(label, [0, 0.0, 0, 0, 0.0, 0.0])
                         bank[0] += int(take.sum())
                         bank[1] += float(error[take].sum())
@@ -685,6 +798,9 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
             raise ValueError("empty observation scope")
         return {
             "rows": n,
+            "outcome_slices": {
+                label: _outcome_slice_result(bank) for label, bank in outcome_slices.items()
+            },
             "reference_targets": {
                 target: {
                     "rows": bank["rows"],
