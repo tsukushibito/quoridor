@@ -888,7 +888,6 @@ def measurement_config(experiment):
         isinstance(config, dict)
         and set(config)
         <= {
-            "zero_stock_safe_race_method",
             "inference",
             "roots",
             "profile",
@@ -936,12 +935,6 @@ def measurement_config(experiment):
     require(
         type(config.get("zero_stock_safe_race", False)) is bool,
         "measurement safe-race switch",
-    )
-    safe_method = config.get("zero_stock_safe_race_method")
-    require(
-        safe_method is None
-        or (type(safe_method) is str and safe_method in {"manhattan", "path_tail"}),
-        "measurement safe-race method",
     )
     lmr_method = config.get("lmr_method", "depth_rank")
     require(

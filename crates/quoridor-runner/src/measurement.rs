@@ -78,8 +78,6 @@ struct Settings {
     zero_stock_approx_method: String,
     #[serde(default)]
     zero_stock_safe_race: bool,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    zero_stock_safe_race_method: Option<String>,
     namespace: SearchNamespaceSettings,
     output_bytes: usize,
     record_bytes: usize,
@@ -374,13 +372,6 @@ impl Target for SearchTarget {
         )?);
         session
             .set_zero_stock_approx_min_root_walls(self.settings.zero_stock_approx_min_root_walls)?;
-        let safe_method = alphabeta::ZeroStockSafeRaceMethod::from_name(
-            self.settings
-                .zero_stock_safe_race_method
-                .as_deref()
-                .unwrap_or("manhattan"),
-        )?;
-        session.set_zero_stock_safe_race_method(safe_method);
         session.set_zero_stock_safe_race(self.settings.zero_stock_safe_race);
         let method = session.namespace().selectivity.clone();
         let lmr = session.lmr_enabled();
@@ -391,7 +382,7 @@ impl Target for SearchTarget {
             json!({"TT_capacity":capacity,"retained_TT_bytes":retained.0,"retained_session_metadata_history_bytes":retained.1,
                 "actual_selectivity":method,"lmr":lmr,
                 "zero_stock_safe_race":self.settings.zero_stock_safe_race,
-                "zero_stock_safe_race_method":self.settings.zero_stock_safe_race.then_some(safe_method.id()),
+                "zero_stock_safe_race_method":self.settings.zero_stock_safe_race.then_some(alphabeta::ZERO_STOCK_SAFE_RACE_METHOD),
                 "zero_stock_approx_min_root_walls":self.settings.zero_stock_approx_min_root_walls,
                 "zero_stock_approx_method_requested":self.settings.zero_stock_approx_method,
                 "zero_stock_approx_method":Value::Null,
@@ -515,7 +506,7 @@ impl Target for SearchTarget {
         row["zero_stock_safe_race_method"] = json!(
             session
                 .zero_stock_safe_race_enabled()
-                .then(|| session.zero_stock_safe_race_method().id())
+                .then_some(alphabeta::ZERO_STOCK_SAFE_RACE_METHOD)
         );
         row["completed_depth_semantics"] = json!(if session.zero_stock_safe_race_enabled() {
             "safe-race-leaf-nominal-not-root-game-WDL"
@@ -986,7 +977,7 @@ fn completed_depth_observation(r: &SearchResult) -> Value {
     result["zero_stock_safe_race"] = json!(s.zero_stock_safe_race_enabled);
     result["zero_stock_safe_race_method"] = json!(
         s.zero_stock_safe_race_enabled
-            .then_some(s.zero_stock_safe_race_method.id())
+            .then_some(alphabeta::ZERO_STOCK_SAFE_RACE_METHOD)
     );
     result["cumulative_work"]["safe_race_stock0_opportunities"] =
         json!(s.safe_race_stock0_opportunities);
@@ -997,66 +988,10 @@ fn completed_depth_observation(r: &SearchResult) -> Value {
     result["cumulative_work"]["safe_race_history_checks"] = json!(s.safe_race_history_checks);
     result["cumulative_work"]["safe_race_history_rejects"] = json!(s.safe_race_history_rejects);
     result["cumulative_work"]["safe_race_proven_leaves"] = json!(s.safe_race_proven_leaves);
-    safe_path_work(&mut result["cumulative_work"], s);
     if s.zero_stock_safe_race_enabled {
         result["completed_depth_semantics"] = json!("safe-race-leaf-nominal-not-root-game-WDL");
     }
     result
-}
-/// Event counters only: committed proof returns and raw test/probe domains are
-/// separate. Legacy geometry test/pass fields denote M, including in P mode.
-fn safe_path_work(work: &mut Value, s: &alphabeta::SearchStats) {
-    for (name, count) in [
-        ("safe_race_m_tests", s.safe_race_geometry_tests),
-        ("safe_race_m_passes", s.safe_race_geometry_passes),
-        ("safe_race_tt_returns", s.safe_race_tt_returns),
-        ("safe_race_m_returns", s.safe_race_m_returns),
-        ("safe_race_tail_goal_returns", s.safe_race_tail_goal_returns),
-        (
-            "safe_race_tail_sealed_returns",
-            s.safe_race_tail_sealed_returns,
-        ),
-        ("safe_race_path_returns", s.safe_race_path_returns),
-        ("safe_race_tail_tests", s.safe_race_tail_tests),
-        ("safe_race_tail_goal_passes", s.safe_race_tail_goal_passes),
-        ("safe_race_tail_sealed_tests", s.safe_race_tail_sealed_tests),
-        (
-            "safe_race_tail_sealed_passes",
-            s.safe_race_tail_sealed_passes,
-        ),
-        (
-            "safe_race_tail_count_queries",
-            s.safe_race_tail_count_queries,
-        ),
-        (
-            "safe_race_tail_history_rejects",
-            s.safe_race_tail_history_rejects,
-        ),
-        ("safe_race_path_tests", s.safe_race_path_tests),
-        ("safe_race_path_passes", s.safe_race_path_passes),
-        ("safe_race_path_map_missing", s.safe_race_path_map_missing),
-        ("safe_race_path_invalid_map", s.safe_race_path_invalid_map),
-        (
-            "safe_race_path_opponent_first_rejects",
-            s.safe_race_path_opponent_first_rejects,
-        ),
-        (
-            "safe_race_path_intermediate_rejects",
-            s.safe_race_path_intermediate_rejects,
-        ),
-        (
-            "safe_race_path_endpoint_rejects",
-            s.safe_race_path_endpoint_rejects,
-        ),
-        (
-            "safe_race_path_history_rejects",
-            s.safe_race_path_history_rejects,
-        ),
-        ("safe_race_path_length_sum", s.safe_race_path_length_sum),
-        ("safe_race_path_length_max", s.safe_race_path_length_max),
-    ] {
-        work[name] = json!(count);
-    }
 }
 fn observed_work(s: &alphabeta::SearchStats) -> Value {
     let mut work = json!({"nodes":s.nodes,"evaluations":s.evaluations,"terminal":s.terminal,"cutoffs":s.cutoffs,"TT_hits":s.tt_hits,"TT_probes":s.tt_probes,"TT_exact_hits":s.tt_exact_hits,"TT_key_builds":s.tt_key_builds,"tt_context_initial_items":s.tt_context_initial_items,"tt_context_transitions":s.tt_context_transitions,"tt_board_hash_reads":s.tt_board_hash_reads,"tt_board_hash_updates":s.tt_board_hash_updates,"tt_context_matches":s.tt_context_matches,"tt_context_misses":s.tt_context_misses,"tt_order_context_mismatch":s.tt_order_context_mismatch,"tt_hash_collisions":s.tt_hash_collisions,"tt_index_collisions":s.tt_index_collisions,"TT_hashes":s.tt_hashes,"TT_usable_depth":s.tt_usable_depth,"TT_order_only":s.tt_order_only,"TT_collisions":s.tt_collisions,"TT_replacements":s.tt_replacements,"TT_capacity_skips":s.tt_capacity_skips,"TT_illegal_moves":s.tt_illegal_moves,"TT_retained_bytes":s.tt_retained_bytes,"TT_generation":s.tt_generation,"TT_cutoffs":s.tt_cutoffs,"PVS_researches":s.pvs_researches,"delta_updates":s.delta_updates,"policy_calls":s.policy_calls});
@@ -1078,7 +1013,6 @@ fn observed_work(s: &alphabeta::SearchStats) -> Value {
     work["safe_race_history_checks"] = json!(s.safe_race_history_checks);
     work["safe_race_history_rejects"] = json!(s.safe_race_history_rejects);
     work["safe_race_proven_leaves"] = json!(s.safe_race_proven_leaves);
-    safe_path_work(&mut work, s);
     work
 }
 fn observed(r: &SearchResult) -> Value {
@@ -1094,7 +1028,7 @@ fn observed(r: &SearchResult) -> Value {
     result["zero_stock_safe_race"] = json!(s.zero_stock_safe_race_enabled);
     result["zero_stock_safe_race_method"] = json!(
         s.zero_stock_safe_race_enabled
-            .then_some(s.zero_stock_safe_race_method.id())
+            .then_some(alphabeta::ZERO_STOCK_SAFE_RACE_METHOD)
     );
     result["zero_stock_approx_method"] = json!(if s.zero_stock_approx_permitted {
         Some(s.zero_stock_approx_method.id())

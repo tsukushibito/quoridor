@@ -35,8 +35,6 @@ mod move_ordering;
 mod static_geometry;
 #[path = "static_ordering.rs"]
 mod static_ordering;
-#[path = "zero_stock_safe_path.rs"]
-mod zero_stock_safe_path;
 
 #[derive(Clone, Copy, PartialEq, Eq)]
 enum StaticMode {
@@ -124,13 +122,6 @@ struct WallDistanceScratch {
     fallbacks: u64,
 }
 impl WallDistanceScratch {
-    /// Borrow only the existing same-geometry owner; never prepare a new row.
-    fn prepared_maps(&self, p: Position) -> Option<&[[u8; 81]; 2]> {
-        self.maps
-            .as_ref()
-            .filter(|maps| maps.horizontal == p.horizontal && maps.vertical == p.vertical)
-            .map(|maps| &maps.distances)
-    }
     fn distance(
         &mut self,
         p: Position,
@@ -648,46 +639,6 @@ impl ZeroStockApproxMethod {
 
 /// One sufficient game-W/L condition; neither UNKNOWN nor a cap is Draw.
 pub const ZERO_STOCK_SAFE_RACE_METHOD: &str = "zero-stock411-safe-manhattan-complete-E-v1";
-/// A finite research comparison selector; selecting P alone never enables it.
-#[derive(Debug, Default, Clone, Copy, PartialEq, Eq)]
-pub enum ZeroStockSafeRaceMethod {
-    #[default]
-    Manhattan,
-    PathTail,
-}
-impl ZeroStockSafeRaceMethod {
-    pub fn from_name(name: &str) -> Result<Self> {
-        match name {
-            "manhattan" => Ok(Self::Manhattan),
-            "path_tail" => Ok(Self::PathTail),
-            _ => Err(SearchError::Limits("unsupported safe-race method".into())),
-        }
-    }
-    pub fn name(self) -> &'static str {
-        match self {
-            Self::Manhattan => "manhattan",
-            Self::PathTail => "path_tail",
-        }
-    }
-    pub fn id(self) -> &'static str {
-        match self {
-            Self::Manhattan => ZERO_STOCK_SAFE_RACE_METHOD,
-            Self::PathTail => "zero-stock431-one-path-tail-E-two-keys-v1",
-        }
-    }
-}
-#[derive(Clone, Copy)]
-enum SafeRaceOrigin {
-    Tt,
-    Manhattan,
-    ImmediateGoal,
-    SealedTail,
-    Path,
-}
-struct SafeRaceProof {
-    value: f32,
-    origin: SafeRaceOrigin,
-}
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 enum RaceWinner {
     Mover,
@@ -743,7 +694,6 @@ pub struct SearchStats {
     pub zero_stock_approx_permitted: bool,
     /// Explicit research option; OFF does not observe eligible opportunities.
     pub zero_stock_safe_race_enabled: bool,
-    pub zero_stock_safe_race_method: ZeroStockSafeRaceMethod,
     pub safe_race_stock0_opportunities: u64,
     pub safe_race_tt_probes: u64,
     pub safe_race_tt_hits: u64,
@@ -753,30 +703,6 @@ pub struct SearchStats {
     pub safe_race_history_rejects: u64,
     /// Successful nonterminal proof returns, distinct from real terminal visits.
     pub safe_race_proven_leaves: u64,
-    /// These committed-return domains sum exactly to proven_leaves, even if a
-    /// later control check rejects a raw TT match or a constructed proof.
-    pub safe_race_tt_returns: u64,
-    pub safe_race_m_returns: u64,
-    pub safe_race_tail_goal_returns: u64,
-    pub safe_race_tail_sealed_returns: u64,
-    pub safe_race_path_returns: u64,
-    pub safe_race_tail_tests: u64,
-    pub safe_race_tail_goal_passes: u64,
-    pub safe_race_tail_sealed_tests: u64,
-    pub safe_race_tail_sealed_passes: u64,
-    pub safe_race_tail_count_queries: u64,
-    pub safe_race_tail_history_rejects: u64,
-    pub safe_race_path_tests: u64,
-    pub safe_race_path_passes: u64,
-    pub safe_race_path_map_missing: u64,
-    pub safe_race_path_invalid_map: u64,
-    pub safe_race_path_opponent_first_rejects: u64,
-    pub safe_race_path_intermediate_rejects: u64,
-    pub safe_race_path_endpoint_rejects: u64,
-    pub safe_race_path_history_rejects: u64,
-    /// Descent edges actually walked, including rejected path prefixes.
-    pub safe_race_path_length_sum: u64,
-    pub safe_race_path_length_max: u64,
     /// Effective only when permitted; OFF leaves this default value unused.
     pub zero_stock_approx_method: ZeroStockApproxMethod,
     /// Successfully returned heuristic leaves, separate from true terminals/head calls.
@@ -1648,21 +1574,10 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
                     self.enter()?;
                     entered = true;
                     self.stats.safe_race_stock0_opportunities += 1;
-                    if let Some(proof) = self.safe_race_value(c, a.as_ref(), parent, depth)? {
+                    if let Some(value) = self.safe_race_value(c, a.as_ref(), parent, depth)? {
                         self.control()?;
                         self.stats.safe_race_proven_leaves += 1;
-                        match proof.origin {
-                            SafeRaceOrigin::Tt => self.stats.safe_race_tt_returns += 1,
-                            SafeRaceOrigin::Manhattan => self.stats.safe_race_m_returns += 1,
-                            SafeRaceOrigin::ImmediateGoal => {
-                                self.stats.safe_race_tail_goal_returns += 1
-                            }
-                            SafeRaceOrigin::SealedTail => {
-                                self.stats.safe_race_tail_sealed_returns += 1
-                            }
-                            SafeRaceOrigin::Path => self.stats.safe_race_path_returns += 1,
-                        }
-                        return Ok(proof.value);
+                        return Ok(value);
                     }
                 }
                 if self.zero_stock_approx_leaf(c, depth) {
@@ -1728,7 +1643,7 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
         pooled: Option<&EvalAccumulator>,
         parent: Option<&EvalAccumulator>,
         depth: u16,
-    ) -> NodeResult<Option<SafeRaceProof>> {
+    ) -> NodeResult<Option<f32>> {
         // Public search validates the complete canonical counts once at root.
         // Private diagnostic contexts do not gain numeric authority here.
         if c.is_synthetic() {
@@ -1752,10 +1667,7 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
             && value.abs().to_bits() == self.score_domain.terminal_utility().to_bits()
         {
             self.stats.safe_race_tt_hits += 1;
-            return Ok(Some(SafeRaceProof {
-                value,
-                origin: SafeRaceOrigin::Tt,
-            }));
+            return Ok(Some(value));
         }
         self.stats.safe_race_geometry_tests += 1;
         let p = c.position();
@@ -1770,118 +1682,16 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
         };
         let manhattan =
             (p.pawns[0] / 9).abs_diff(p.pawns[1] / 9) + (p.pawns[0] % 9).abs_diff(p.pawns[1] % 9);
-        // The legacy geometry counters are M tests/passes in both modes.
-        // Geometry-qualified E is scanned at most once here, even if P later
-        // considers a different witness. Tail's two prior-key queries differ.
-        let mut empty = None;
-        let mut proof = None;
-        if let Some(winner) = safe_race_winner(ds, other, manhattan) {
-            self.stats.safe_race_geometry_passes += 1;
-            self.control()?;
-            self.stats.safe_race_history_checks += 1;
-            let accepted = safe_race_history_empty(c, || self.control())?;
-            empty = Some(accepted);
-            if accepted {
-                proof = Some((SafeRaceOrigin::Manhattan, winner));
-            } else {
-                self.stats.safe_race_history_rejects += 1;
-            }
-        }
-        if proof.is_none()
-            && self.stats.zero_stock_safe_race_method == ZeroStockSafeRaceMethod::PathTail
-        {
-            if ds == 1 {
-                self.control()?;
-                match zero_stock_safe_path::distance_one_tail(p, &mut self.stats)? {
-                    Some(zero_stock_safe_path::Tail::ImmediateGoal) => {
-                        proof = Some((SafeRaceOrigin::ImmediateGoal, RaceWinner::Mover));
-                    }
-                    Some(zero_stock_safe_path::Tail::Sealed(keys)) => {
-                        let mut accepted = true;
-                        for key in keys {
-                            self.control()?;
-                            self.stats.safe_race_tail_count_queries += 1;
-                            if c.count(key) >= 2 {
-                                self.stats.safe_race_tail_history_rejects += 1;
-                                accepted = false;
-                                break;
-                            }
-                        }
-                        if accepted {
-                            proof = Some((SafeRaceOrigin::SealedTail, RaceWinner::Mover));
-                        }
-                    }
-                    None => {}
-                }
-                self.control()?;
-            }
-            if proof.is_none() {
-                self.control()?;
-                self.stats.safe_race_path_tests += 1;
-                let (winner, player, delta, opponent_goal) = if ds <= other {
-                    (RaceWinner::Mover, own, 0, other)
-                } else {
-                    (RaceWinner::Other, own ^ 1, 1, ds)
-                };
-                let checked = cached
-                    .or_else(|| self.eval_scratch.distances.prepared_maps(p))
-                    .map(|maps| {
-                        zero_stock_safe_path::timed_path(
-                            9,
-                            p.pawns,
-                            player,
-                            delta,
-                            opponent_goal,
-                            &maps[player],
-                            |a, b| p.is_edge_open(a, b),
-                        )
-                    });
-                if let Some(checked) = checked {
-                    use zero_stock_safe_path::PathReject;
-                    self.stats.safe_race_path_length_sum += u64::from(checked.walked);
-                    self.stats.safe_race_path_length_max = self
-                        .stats
-                        .safe_race_path_length_max
-                        .max(u64::from(checked.walked));
-                    match checked.reject {
-                        Some(PathReject::InvalidMap) => self.stats.safe_race_path_invalid_map += 1,
-                        Some(PathReject::OpponentFirst) => {
-                            self.stats.safe_race_path_opponent_first_rejects += 1
-                        }
-                        Some(PathReject::Intermediate) => {
-                            self.stats.safe_race_path_intermediate_rejects += 1
-                        }
-                        Some(PathReject::Endpoint) => {
-                            self.stats.safe_race_path_endpoint_rejects += 1
-                        }
-                        None => {
-                            self.stats.safe_race_path_passes += 1;
-                            self.control()?;
-                            let accepted = if let Some(accepted) = empty {
-                                accepted
-                            } else {
-                                self.stats.safe_race_history_checks += 1;
-                                let accepted = safe_race_history_empty(c, || self.control())?;
-                                if !accepted {
-                                    self.stats.safe_race_history_rejects += 1;
-                                }
-                                accepted
-                            };
-                            if accepted {
-                                proof = Some((SafeRaceOrigin::Path, winner));
-                            } else {
-                                self.stats.safe_race_path_history_rejects += 1;
-                            }
-                        }
-                    }
-                } else {
-                    self.stats.safe_race_path_map_missing += 1;
-                }
-            }
-        }
-        let Some((origin, winner)) = proof else {
+        let Some(winner) = safe_race_winner(ds, other, manhattan) else {
             return Ok(None);
         };
+        self.stats.safe_race_geometry_passes += 1;
+        self.control()?;
+        self.stats.safe_race_history_checks += 1;
+        if !safe_race_history_empty(c, || self.control())? {
+            self.stats.safe_race_history_rejects += 1;
+            return Ok(None);
+        }
         let value = match winner {
             RaceWinner::Mover => self.score_domain.terminal_utility(),
             RaceWinner::Other => -self.score_domain.terminal_utility(),
@@ -1899,7 +1709,7 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
                 &mut self.stats,
             );
         }
-        Ok(Some(SafeRaceProof { value, origin }))
+        Ok(Some(value))
     }
 
     fn zero_stock_approx_leaf(&self, c: &SigmaContext, depth: u16) -> bool {
@@ -2689,14 +2499,13 @@ pub struct SearchSession {
     zero_stock_approx_method: ZeroStockApproxMethod,
     zero_stock_approx_effective: bool,
     zero_stock_safe_race: bool,
-    zero_stock_safe_race_method: ZeroStockSafeRaceMethod,
 }
 impl SearchSession {
     fn detach_safe_race_namespace(&mut self) {
         if self.zero_stock_safe_race {
-            self.namespace.selectivity.truncate(
-                self.namespace.selectivity.len() - self.zero_stock_safe_race_method.id().len() - 1,
-            );
+            self.namespace
+                .selectivity
+                .truncate(self.namespace.selectivity.len() - ZERO_STOCK_SAFE_RACE_METHOD.len() - 1);
         }
     }
     fn attach_safe_race_namespace(&mut self) {
@@ -2704,7 +2513,7 @@ impl SearchSession {
             self.namespace.selectivity.push(':');
             self.namespace
                 .selectivity
-                .push_str(self.zero_stock_safe_race_method.id());
+                .push_str(ZERO_STOCK_SAFE_RACE_METHOD);
         }
     }
     /// Research opt-in only. Complete-history qualification is per leaf; this
@@ -2723,23 +2532,6 @@ impl SearchSession {
     }
     pub fn zero_stock_safe_race_enabled(&self) -> bool {
         self.zero_stock_safe_race
-    }
-    pub fn zero_stock_safe_race_method(&self) -> ZeroStockSafeRaceMethod {
-        self.zero_stock_safe_race_method
-    }
-    pub fn set_zero_stock_safe_race_method(&mut self, method: ZeroStockSafeRaceMethod) {
-        if method == self.zero_stock_safe_race_method {
-            return;
-        }
-        self.detach_safe_race_namespace();
-        self.zero_stock_safe_race_method = method;
-        self.attach_safe_race_namespace();
-        if self.zero_stock_safe_race {
-            self.table.clear();
-            if let Some(history) = self.ordering.as_mut() {
-                history.reset();
-            }
-        }
     }
 
     /// Selecting a method alone never activates approximation. Only an effective
@@ -2983,7 +2775,6 @@ impl SearchSession {
             zero_stock_approx_method: ZeroStockApproxMethod::Race,
             zero_stock_approx_effective: false,
             zero_stock_safe_race: false,
-            zero_stock_safe_race_method: ZeroStockSafeRaceMethod::Manhattan,
         })
     }
     /// Table accounting includes its header and fixed slot storage; no history payload.
@@ -3080,7 +2871,6 @@ impl SearchSession {
         let mut on_completed = |_: &SearchResult| {};
         let mut invocation = SearchInvocation::root(&mut on_completed);
         invocation.forced_root = Some(action);
-        invocation.safe_race_method = self.zero_stock_safe_race_method;
         search_in_table::<false, false>(
             root,
             self.evaluator.as_ref(),
@@ -3123,15 +2913,13 @@ impl SearchSession {
             root_walls,
             limits.max_depth,
         ));
-        let mut invocation = SearchInvocation::root(on_completed);
-        invocation.safe_race_method = self.zero_stock_safe_race_method;
         search_in_table::<false, false>(
             root,
             self.evaluator.as_ref(),
             limits,
             cancel,
             None,
-            invocation,
+            SearchInvocation::root(on_completed),
             (
                 &mut self.table,
                 self.score_domain,
@@ -3160,7 +2948,6 @@ type SearchTableAndDomain<'table, 'history> = (
 
 struct SearchInvocation<'a> {
     forced_root: Option<u16>,
-    safe_race_method: ZeroStockSafeRaceMethod,
     on_completed: &'a mut dyn FnMut(&SearchResult),
     #[cfg(feature = "research-diagnostics")]
     observation: Option<&'a mut LmrObservation>,
@@ -3174,7 +2961,6 @@ impl<'a> SearchInvocation<'a> {
         Self {
             on_completed,
             forced_root: None,
-            safe_race_method: ZeroStockSafeRaceMethod::Manhattan,
             #[cfg(feature = "research-diagnostics")]
             observation: None,
             #[cfg(feature = "research-diagnostics")]
@@ -3285,7 +3071,6 @@ fn search_in_table<const OBSERVE: bool, const TRACE: bool>(
             zero_stock_approx_permitted,
             zero_stock_approx_method,
             zero_stock_safe_race_enabled,
-            zero_stock_safe_race_method: invocation.safe_race_method,
             tt_hashes: u64::from(limits.use_tt), // one full board initialization
             tt_context_initial_items: if limits.use_tt {
                 root.occurrences().count() as u64
@@ -4833,10 +4618,6 @@ mod lmr412_tests;
 #[cfg(test)]
 #[path = "zero_stock411_tests.rs"]
 mod zero_stock411_tests;
-
-#[cfg(test)]
-#[path = "zero_stock431_tests.rs"]
-mod zero_stock431_tests;
 
 #[cfg(test)]
 #[path = "zero_stock410_tests.rs"]
