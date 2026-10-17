@@ -654,16 +654,41 @@ class BoundaryTests(unittest.TestCase):
         row = {
             "id": health.POLICY_ISSUE,
             "status": "open",
-            "assignee": f"codex:{health.POLICY_THREAD}",
+            "assignee": "codex:01a14947-3833-7aa2-a221-4dd909785e35",
             "labels": [],
         }
         with mock.patch.object(dashboard, "command_json", return_value=[row]) as port:
-            self.assertTrue(health.policy_allowed(Path("/workspaces/quoridor"), dashboard))
+            self.assertEqual(
+                health.policy_target(Path("/workspaces/quoridor"), dashboard),
+                "01a14947-3833-7aa2-a221-4dd909785e35",
+            )
             argv = port.call_args.args[0]
             self.assertIn("--brief", argv)
             self.assertIn("--max-rows", argv)
             self.assertIn("1", argv)
             self.assertNotIn("show", argv)
+
+    def test_current_epic_owner_routes_state_without_a_fixed_thread(self):
+        target = "01a14947-3833-7aa2-a221-4dd909785e35"
+        row = {"id": health.POLICY_ISSUE, "status": "open", "assignee": "codex:" + target}
+        with (
+            mock.patch.object(dashboard, "command_json", return_value=[row]),
+            mock.patch.object(
+                dashboard.Ports,
+                "thread",
+                return_value={"thread": {"id": target, "status": {"type": "idle"}}},
+            ) as read_thread,
+        ):
+            self.assertEqual(health.policy_state(Path("/workspaces/quoridor"), dashboard), "idle")
+            read_thread.assert_called_once_with(target)
+        for change in (
+            {"assignee": None},
+            {"assignee": "codex:invalid"},
+            {"labels": ["paused-by-user"]},
+            {"status": "closed"},
+        ):
+            with mock.patch.object(dashboard, "command_json", return_value=[row | change]):
+                self.assertIsNone(health.policy_target(Path("/workspaces/quoridor"), dashboard))
 
     def test_directed_proof_symlink_and_aggregate_refusal(self):
         with tempfile.TemporaryDirectory() as temporary:

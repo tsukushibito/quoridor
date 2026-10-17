@@ -18,6 +18,7 @@ import subprocess
 import sys
 import time
 from zoneinfo import ZoneInfo
+from uuid import UUID
 
 
 INTERVAL = 900
@@ -29,11 +30,10 @@ PROOF_TOTAL_BYTES = 524288
 PROOF_FILE_BYTES = 65536
 MODE_LABELS = {
     "CONSULTATION": "相談モード：検出と保留のみ。定期通知はしません。",
-    "AUTONOMOUS": "自律確認モード：現況再確認後、方針相談担当が idle の時だけ通知します。",
+    "AUTONOMOUS": "自律確認モード：現況再確認後、現在の研究進行判断担当が idle の時だけ通知します。",
     "STOPPED": "チェック停止：外部状態を読みません。再開には明示的なモード選択と start が必要です。",
 }
 POLICY_ISSUE = "quoridor-4lc"
-POLICY_THREAD = "01a12fdc-f6ec-7e93-9cfc-4bedb3ea1e94"
 TOKYO = ZoneInfo("Asia/Tokyo")
 SCRIPT = Path(__file__).resolve()
 OWNED_CHILDREN = {}
@@ -712,7 +712,7 @@ def reserve_digest(section, key):
         raise HealthError("Digest history full; no automatic duplicate-risk dispatch")
 
 
-def policy_allowed(root, dashboard):
+def policy_target(root, dashboard):
     rows = dashboard.command_json(
         [
             "bash",
@@ -734,17 +734,25 @@ def policy_allowed(root, dashboard):
     )
     row = rows[0] if isinstance(rows, list) and len(rows) == 1 else None
     if not isinstance(row, dict):
-        return False
-    return (
+        return None
+    allowed = (
         row.get("id") == POLICY_ISSUE
         and row.get("status") in ("open", "in_progress")
-        and row.get("assignee") == f"codex:{POLICY_THREAD}"
         and "paused-by-user" not in (row.get("labels") or [])
     )
+    owner = row.get("assignee")
+    if not allowed or not isinstance(owner, str) or not owner.startswith("codex:"):
+        return None
+    thread = owner.removeprefix("codex:")
+    try:
+        return thread if str(UUID(thread)) == thread else None
+    except ValueError:
+        return None
 
 
 def dispatch(root, state_dir, items, dashboard):
-    if not policy_allowed(root, dashboard):
+    target = policy_target(root, dashboard)
+    if target is None:
         raise HealthError("Policy target ownership or pause boundary uncertain")
     lines = [
         f"[research-progress-health] {datetime.now(TOKYO).isoformat()} "
@@ -774,7 +782,7 @@ def dispatch(root, state_dir, items, dashboard):
                 str(root / "scripts/dev/research-session.sh"),
                 "send",
                 "--thread",
-                POLICY_THREAD,
+                target,
                 "--issue",
                 POLICY_ISSUE,
                 "--cwd",
@@ -792,7 +800,7 @@ def dispatch(root, state_dir, items, dashboard):
 
 def comment(root, item, dashboard):
     """One bounded Beads reference, never a turn or progress-only notification."""
-    if not policy_allowed(root, dashboard):
+    if policy_target(root, dashboard) is None:
         raise HealthError("Policy target ownership or pause boundary uncertain")
     body = (
         f"[research-progress-health:{item['fingerprint'][:16]}] "
@@ -819,11 +827,12 @@ def comment(root, item, dashboard):
 
 
 def policy_state(root, dashboard):
-    if not policy_allowed(root, dashboard):
+    target = policy_target(root, dashboard)
+    if target is None:
         raise HealthError("Policy target ownership or pause boundary uncertain")
-    response = dashboard.Ports(root).thread(POLICY_THREAD)
+    response = dashboard.Ports(root).thread(target)
     thread = response.get("thread") if isinstance(response, dict) else None
-    if not isinstance(thread, dict) or thread.get("id") != POLICY_THREAD:
+    if not isinstance(thread, dict) or thread.get("id") != target:
         raise HealthError("Policy thread identity unavailable")
     status = thread.get("status")
     if not isinstance(status, dict) or status.get("type") not in (
