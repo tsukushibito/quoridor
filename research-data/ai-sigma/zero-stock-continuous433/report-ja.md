@@ -1,6 +1,16 @@
 # 連続Searchと途中到達の壁ゼロ部分木：433
 
-固定した二つの真正な元着手系列で、Pを連続Searchの研究候補として保持する有限支持が得られた。元計測と初回の保持判断は既定OFFで行った。後続の人間直接指示により、今後の通常研究αβ探索の既定をenable=true / method=path_tailへ採用する。実caller・設定解決と必要な通常software確認は同じ433.4の整理差分で記録し、採用指示と実装済みの検証結果を区別する。explicit OFF/M、製品・generatorおよび発行済み全量教師対D比較のsafe OFFは維持する。一般速度・棋力・同じ探索木の処理高速化を認定せず、全量教師比較の凍結条件へPを混入しない。
+固定した二つの真正な元着手系列で、Pを連続Searchの研究候補として保持する有限支持が得られた。元計測と初回の保持判断は既定OFFで行った。後続の人間直接指示を受け、通常研究αβ探索の既定enable=true / method=path_tailと、終了したstock observerの撤去をcommit `c1c3139c9720bcd95f95b1dab7622a99dff6b3e9`へ統合した。新しい3件の設定・constructor検査とaffected compile/Clippyで確認し、科学比較は再実行していない。explicit OFF/M、製品・generatorおよび発行済み全量教師対D比較のsafe OFFは維持する。一般速度・棋力・同じ探索木の処理高速化を認定せず、全量教師比較の凍結条件へPを混入しない。
+
+| 現役入口                                                                             | 省略時の解決と保護                                                                                         |
+| ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
+| 共通研究準備のcomparison_conditions / apply_comparison_cost / apply_comparison_arena | ON/Pを明示解決し、古いtemplateのOFFより実条件を優先する。明示OFF/Mは保持。                                 |
+| measurement Settingsと通常sequence                                                   | 同じtyped研究設定としてON/P。                                                                              |
+| 非functional・非MCTSの研究αβ arena                                                   | 実AI ownerの設定・session namespaceでON/Pを解決する。                                                      |
+| 共有AI create/new、製品・generator・functional・MCTS                                 | 共有constructorは従来のOFF/M。研究側の省略値を無条件に継承させない。                                       |
+| 発行済み全量教師対固定D                                                              | 現役の準備設定arena-settings-v2で、NNUE/Dの両方を明示OFF/manhattanに固定。旧発行image/configは変更しない。 |
+
+[実source採用と選択した新software証拠](../../../.artifacts/research-team/integration324/zero-stock-continuous433-v1/research-default-P-software-completion-v1/completion.json)は元の失敗した親receiptと、成功した個別checkを区別して保持する。Clippyの通常修復やRootのmetadata呼出し不足による元FAILEDを成功へ改稿していない。新しいsourceはUNMEASUREDで、新optimized imageや速度の再認定はない。凍結した元解析・図表・入力・計測imageは変更しない。
 
 ## 固定比較と主時計
 
