@@ -85,3 +85,17 @@ GPU学習は明示タスクの期限・資源上限に従って具体化する�
 [419保存報告](../../research-data/ai-sigma/nnue-loss-leaf419/report-ja.md)は、固定3親・H2/H3の共通候補木において、同じ葉のNNUE/D値を用いる完全backupと事前固定endpoint介入を対応させた。slot4/ply11 H2の同一葉[156,91]をD値へ置くと固定C内の156→68が変わる一方、H3には代替応手の未置換葉が元候補を維持する例がある。これは保存木内の数値的依存であり、Dの正しさ、C外を含む介入後root argmax、旧敗戦の因果、真のWDLや一般棋力を認定しない。旧warm95ms/TT4Kと今回cold/timeNone/TT1Mも区別する。
 
 原nativeはOutput.finish後の全stdout再出力でcapture上限に達しFAILED、保存40COMPLETEとouter/later cleanupは別scopeとして保全した。今後のmeasure CLIは保存結果の小receiptだけを返す通常consumer修復を採用し、元40を再演していない。単一PV葉への説明を全代替応手へ拡張せず、未確定部分の新Search/介入/fitは自動発行しない。
+
+### 429：量・露出・開始coverageを分けた比較条件
+
+保存423のWはBEST43から新Sigma outcome zだけで追加学習した条件で、公開データとの混合ではない。末尾118更新まで新T/V lossが下がったが、必要更新数・原因・棋力改善は未確定である。Fは初期化だけでなくLR、warmup、更新量も異なるため、その訓練適合とV悪化から一要因の効果を取り出さない。[保存設定と曲線の分析](../../research-data/ai-sigma/nnue-data-expansion429/saved-learning-analysis/report-ja.md)を比較設計の出発点とする。
+
+| 分けたい問い       | 条件の対応                                                          | 計算量と限界                                                                                              |
+| ------------------ | ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| データ多様性       | 共通の隔離Vと同BEST43、nestedな実Tを同draws/更新で比較              | 目安3763/15052 distinctを30104 draws/118更新なら平均露出8/2。診断forwardや総wallまで同一とはしない        |
+| 同じ大viewの更新量 | 同じ実Tを118更新時点と固定露出の末尾で比較                          | 15052 distinct×8なら120416 draws/471更新、tail96。小viewの8露出より訓練drawsは4倍であり同計算比較ではない |
+| 開始coverage       | 従来4/8/12/16ply recipeと2ply開始を同じ実distinct N・8N drawsで比較 | 量と序盤を一度に変えた一対だけで原因を認定しない。stock・game・family・同入力対応と不足を保存する         |
+
+現行callerではpartial batchが最終更新だけで、短い118更新は117×256+152=30104 draws、長いrunのstep118は118×256=30208 drawsとなり104多い。INITIAL/BEST/LASTのみの現行保存では非BESTの途中weightsも保証されない。従って現行経路で正確な三比較を満たす案は、小view8N、大view同じ8N draws、同じ大view8×4N draws、early matched-Nの8N drawsという将来の四fitとして費用を示す。117 full updates/29952 drawsや256整除の実Nを選ぶ場合も、元条件と同じとして黙って代替しない。途中partial batchやcheckpoint経路の新設は発行しない。
+
+実数に応じて目安を解決し、重複や反復露出をdistinctへ数えない。元423のsplit/RAWとID18の明示的fit-view対応を残し、新viewの共通VをTから隔離する。初期化、正規化、z loss、reflection、fresh Adam、更新座標のLRを揃える。具体的なfit・評価条件と実費はデータ実数に基づく次の提案とし、429の生成・変換許可を学習や対局へ拡張しない。

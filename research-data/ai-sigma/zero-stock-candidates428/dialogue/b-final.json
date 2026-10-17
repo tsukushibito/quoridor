@@ -1,0 +1,145 @@
+{
+  "stage": "one_final_revision_after_A_critique",
+  "issue": "quoridor-4lc.428.2",
+  "thread": "01a1472b-d0ef-7920-9948-fb15086c2baf",
+  "model": "gpt-6.1-sol",
+  "effort": "max",
+  "peer_critique": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/a/peer-b-critique.md",
+  "responses": [
+    {
+      "id": "B1",
+      "decision": "maintain; add standard-wall mover-distance1 terminal lemma",
+      "history": "immediate goal independent; forced retreat requires empty E or exact two intermediate arrival counts",
+      "scope": "n>=3, standard length-two walls, legal both own-goal reachability; not arbitrary synthetic graph; no symmetric nonmover-distance1 claim"
+    },
+    {
+      "id": "B2",
+      "decision": "maintain, separate signature from complete IDs",
+      "nine33_signature": 0,
+      "nine33_ID": 1,
+      "new_ID_metadata": "defer"
+    },
+    {
+      "id": "B3",
+      "decision": "maintain phase proof; rename; prefer minimal Manhattan route",
+      "name": "exclude opponent first jump and chosen target occupancy",
+      "condition": "d_q>n-1+delta; ell(vj)>j+delta for 0<=j<n; ell(vn)>n-1+delta",
+      "adjacency_can_occur": true,
+      "Manhattan_only_coverage_matches_composite_in_fixed_sample": true
+    },
+    {
+      "id": "B4",
+      "decision": "maintain conditional math; merge structural route compression; defer new metadata",
+      "extra_qualifications": [
+        "restricted graph G-g",
+        "gate identity",
+        "wall key",
+        "dimension/goal direction",
+        "same witness",
+        "borrow lifetime",
+        "all entrances"
+      ]
+    },
+    {
+      "id": "B5",
+      "decision": "general macro UNPROVED; finite tail merged into B1",
+      "accepted_A_local_lemma": "true global degree2 supports straight or corner-side jump; local subgraph degree insufficient"
+    },
+    {
+      "id": "B6",
+      "decision": "maintain conditional Q proof; correct native complexity",
+      "projection": "O(1) from public HistoryKey pawns/turn",
+      "occurrences": "unaggregated base + overlay",
+      "count": "linear base find + overlay filter",
+      "scan": "O(H+R_Q*H), worst O(H^2)",
+      "canonical_runtime_clear": false
+    }
+  ],
+  "parity_refinement": {
+    "logical_phase_fact": "first opponent jump iff color difference can match delta; target occupancy requires opposite parity",
+    "Manhattan_predicate": "provably equivalent to original strict formula, not a new branch/method",
+    "composite_bound_global_equivalence": "not claimed",
+    "fixed_increment": 0,
+    "decision": "drop independent M-only parity branch"
+  },
+  "priorities": [
+    "one Manhattan timed shortest path using already-owned exact goal map",
+    "mover ordinary-distance1 standard-wall terminal lemma / already-available legal goal",
+    "cheap cross-unreachable signature only",
+    "same-witness future-phase E qualification after native cost check"
+  ],
+  "deferred": [
+    "new gate/component metadata owners",
+    "general corridor macro",
+    "landmark/pawn-BFS/all-pairs separation strengthening",
+    "small paired non-loss/Draw policies without complete cheap exit certificate"
+  ],
+  "verification": {
+    "fixed427": 161,
+    "named_saved_Draw": 2,
+    "preselected_boundary": 8,
+    "total_states": 171,
+    "stage1_checks": 1368,
+    "new_checks": 684,
+    "cumulative_checks": 2052,
+    "check_limit": 4096,
+    "stage1_BFS": 164,
+    "new_BFS": 26,
+    "cumulative_BFS": 190,
+    "BFS_limit": 512,
+    "additional_Tarjan_DFS": 13,
+    "old_successful_predicates_replayed": false,
+    "saved_label_mismatches": 0,
+    "canonical_E_actual_proof_leaf_nine_WDL": "UNKNOWN"
+  },
+  "counts": {
+    "nine33": {
+      "oldM": 13,
+      "composite_path": 33,
+      "Manhattan_path": 33,
+      "parity_M": 33,
+      "parity_reuse": 33,
+      "mover_ds1": 4,
+      "signature": 0,
+      "component_ID": 1
+    },
+    "small128": {
+      "Manhattan_path": 20,
+      "parity_M": 20,
+      "parity_reuse": 20,
+      "mover_ds1": 26,
+      "B1_union_path": 62
+    },
+    "Draw2_all_candidates": "UNKNOWN/rejected",
+    "boundary8": {
+      "Manhattan_path": 2,
+      "mover_ds1": 3,
+      "new_terminal_tail_over_B1_boundary_index": 169
+    }
+  },
+  "costs": {
+    "initial_child_nested_seconds": 0.009625955019146204,
+    "new_refinement_child_nested_seconds": 0.0037306130107026547,
+    "Rust_predicate_whole_speed_strength_LLM_admin_continuous_peak": "UNKNOWN"
+  },
+  "authority": {
+    "main_Git_index_Cargo_parent428_writer": "integration324",
+    "new_Search": 0,
+    "new_game_state_solver": 0,
+    "NN_model_fit_game_Perf_production": 0,
+    "user_pauses_defaults_models_seals_old_RAW_FAILED_UNKNOWN": "preserved",
+    "global_cap_decimal_B": 50000000000,
+    "last_known_covered_B": 49768264704,
+    "global_actual_storage": "UNKNOWN"
+  },
+  "artifacts": {
+    "report": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/final.md",
+    "new_checks": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/refinement-checks.json",
+    "new_refs": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/refinement-refs.json",
+    "comparison": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/dialogue-comparison.md",
+    "final_STOP": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/STOP-final.json"
+  },
+  "nonloss_history_clarification": "Qualified board W/D can transfer as a p-non-loss bound because early history Draw cannot hurt it; exact Win and unqualified saved labels cannot transfer automatically. Do not require empty E for A6.",
+  "formatting_repair": "Earlier Prettier calls ignored .worktree and were not successful formatting. Current finals use --ignore-path /dev/null; frozen initial/critique/input originals stay byte-identical and get generated formatted presentations under formatted/. Repair and limitation recorded separately.",
+  "future_actions": "proposals only; no automatic new implementation, experiment, reviewer or round"
+}

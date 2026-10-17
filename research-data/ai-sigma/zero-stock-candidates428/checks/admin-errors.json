@@ -1,0 +1,45 @@
+{
+  "recorded_UTC": "2026-10-17T00:38:00.688181+00:00",
+  "science_candidate_failure": false,
+  "science_replay": 0,
+  "original_error_absolute_times": "UNKNOWN except linked records; original tool outputs remain in the task transcript",
+  "facts": [
+    {
+      "kind": "initial_STOP_assertion",
+      "cause": "owned Node compile-cache directories remained in prep/packet TMP after successful child wait/reap",
+      "resolution": "only named owned caches removed; detailed immutable cleanup record initial-TMP-cleanup.json; later Node compile cache disabled; no global refund claimed",
+      "removed_cache_bytes": "UNKNOWN: not measured before deletion"
+    },
+    {
+      "kind": "beads_read_flag",
+      "message": "Error: unknown flag: --brief",
+      "resolution": "normal wrapper show --json used afterward; no ownership or science mutation"
+    },
+    {
+      "kind": "premature_wait_metadata_read",
+      "message": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+      "cause": "redirected wait output was still empty while the wait client was running",
+      "resolution": "read only after client completion; no resend or new peer turn"
+    },
+    {
+      "kind": "patch_context_mismatch",
+      "message": "apply_patch verification failed: Failed to find expected lines in final.json",
+      "resolution": "read exact text and applied the intended final revision once before author freeze; old scientific snapshots unchanged"
+    },
+    {
+      "kind": "Prettier_ignored_private_artifacts",
+      "cause": ".worktree was ignored, causing no-file exit0; prior calls do not establish formatting",
+      "diagnosis": "format-ignore-diagnosis.json",
+      "repair": "formatting-repair.json: current final report/JSON actually formatted/check, six generated formatted views of frozen Stage1/2/input originals, original refs still match",
+      "limitation": "frozen originals were not successfully formatted before their historical peer intake; kept byte-identical as research evidence"
+    },
+    {
+      "kind": "A_final_intake_schema",
+      "message": "AssertionError: reader expected owned; A combined STOP actually uses owned_completed_scope",
+      "failed_record": "A_final_intake.process.json",
+      "failed_log": "A_final_intake.log",
+      "resolution": "correct field used in A_final_intake_fixed; referenced A files matched both times; no science replay; failed reader child reaped and handles closed"
+    }
+  ],
+  "last_updated_UTC": "2026-10-17T00:46:13.487045+00:00"
+}

@@ -205,3 +205,13 @@ D6のKey hitは21882→367054だがcontext/depthのnumeric資格は別で、cuto
 事前固定192開始familyの両色384局ではW183勝201敗、family score47.65625%、一度の95%区間42.96875–52.34375%で、事前の改善支持基準は未達だった。同じ保存七状態でも符号と強い飽和三件が残った。新分布の選択V改善を独立棋力や誤評価解消へ読み替えず、一般的な劣位・等価・学習不可能も主張しない。[426の結果と実行証拠](../../research-data/ai-sigma/nnue-independent426/report-ja.md)を参照する。
 
 次の許可済み設計作業では、高残壁coverage/抽出という一軸を優先候補にする。短い2ply開始と同じSigma64sim/outcome zを使い、実在庫層の不足、公開Vとのtrade-off、元Wと揃えられるdistinct行数・露出・updateを確認する案である。実T不足や既存samplerのglobal match未対応は通常入口の未解決として保持し、低残壁の飽和までこの一軸で直るとは仮定しない。具体案は[保存提案](../../research-data/ai-sigma/nnue-independent426/next-learning-proposal.json)であり、新生成・fit・対局やmodel/defaultの変更を自動開始しない。
+
+## 壁ゼロの安い十分条件の候補整理428（2026-10-17）
+
+二者の有限相互検討では、既存mapを使う一本の時刻付きManhattan経路、true legal goalと標準壁/手番側ds=1の局所tail、qualified cross-unreachable成分race、同じ方策のfuture Q/E資格を優先候補とした。いずれも条件付きの数学と限定保存照合であり、実装採用・whole利益・棋力や既定変更の資格ではない。[最終整理と両者原文](../../research-data/ai-sigma/zero-stock-candidates428/report-ja.md)に正確な式と独立確認範囲を置く。
+
+一本のordinary shortest path P=v0..vn、候補勝者の手番差δ=0/1、r=n−1+δについて、相手own-goal距離d_q>r、中間ell(vj)>j+δ、終点ell(vn)>rで、相手の最初のjump・指定着地点占有・相手先着を排除する。相手の普通手後の隣接自体は禁じない。既存qualified goal mapを借りてO(n)のgradient/edge/下界検査を行い、新BFSを必要としない最小版から費用を考える。path失敗を全DAG失敗とせず、gateのglobal geodesicとrestricted chamberのgraph/閾値/owner資格を混ぜない。
+
+ds=1 tailは標準長さ2壁・N>=3・双方stock0/own-goal reachableの手番側だけに限る。sealed caseの退避、相手の唯一手、goal jumpと二つの中間keyの完全countが必要で、非手番側ds1や任意graphへ拡張しない。futureQ/Eは同じwinning witnessに結び、current/goalを除いてもweighted base+overlayとcanonical履歴を省略しない。現在の素直なcount走査は最悪二乗になり得るというBのstatic確認があり、追加履歴mapや二重全scanを無料の対策としない。
+
+固定9×9の幾何通過33/33を実proof leafや内部頻度へ移さない。Manhattan版への追加parity branch、DAG/rho/新component IDは追加coverage・償却の根拠が無いので先に増やさない。root/depth0/positive childdepth、true terminal/threefold、typedTT/domain/score、control/cancel/error/undoと借用寿命を保つsource/境界確認案までを次の設計とし、別契約なしにproduction候補、counter/cache、observerや新測定を開始しない。411/default OFF、424撤去、models/seals/USERPAUSEは保持する。

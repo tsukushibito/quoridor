@@ -1,0 +1,33 @@
+{
+  "UTC": "2026-10-17T00:32:17.804268+00:00",
+  "FileRef": {
+    "path": "/workspaces/quoridor/crates/quoridor-core/src/research.rs",
+    "sha256": "0b87fb3e269278516d84674c21ad0a351288e1f9c2f4a7e219f14345f0e708fe",
+    "bytes": 34167,
+    "mode": "0644"
+  },
+  "fragments": [
+    {
+      "start": 32,
+      "end": 43,
+      "sha256": "146ac0b725863e7c813d37b449eaf6ed5d02b322aae69e4edfee8e54f0a54aa9"
+    },
+    {
+      "start": 294,
+      "end": 304,
+      "sha256": "a34fa041268a01c574fa8baadc733ec29408a7b66ed53c31e954a10625f107f9"
+    },
+    {
+      "start": 429,
+      "end": 436,
+      "sha256": "651d4263d67dacb3ae4fe81f5f1262bf1d5b390bed6f063eed93000190a6d392"
+    }
+  ],
+  "interpretation": {
+    "projection": "constant-time public pawns/turn",
+    "occurrences": "unaggregated base entries chained with unit overlay arrivals",
+    "count": "linear base find plus overlay filter/count",
+    "full_scan_cost": "O(H + R*H), worst O(H^2); no dynamic timing claim"
+  },
+  "initial_and_refinement_input_refs_freshly_match": true
+}

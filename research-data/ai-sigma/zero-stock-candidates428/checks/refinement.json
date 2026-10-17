@@ -1,0 +1,8397 @@
+{
+  "status": "COMPLETE_NEW_REFINEMENT_CHECKS",
+  "fixed_states": 171,
+  "no_new_states": true,
+  "old_successful_predicates_replayed": false,
+  "new_candidate_checks": 684,
+  "new_BFS": 26,
+  "cumulative_candidate_checks": 2052,
+  "cumulative_BFS": 190,
+  "summaries": {
+    "nine": {
+      "ordinary_timed_Manhattan": {
+        "W": 19,
+        "L": 14
+      },
+      "parity_timed_Manhattan": {
+        "W": 19,
+        "L": 14
+      },
+      "parity_timed_reuse": {
+        "W": 19,
+        "L": 14
+      },
+      "mover_distance1": {
+        "UNKNOWN": 29,
+        "W": 4
+      }
+    },
+    "small": {
+      "ordinary_timed_Manhattan": {
+        "UNKNOWN": 108,
+        "W": 18,
+        "L": 2
+      },
+      "parity_timed_Manhattan": {
+        "UNKNOWN": 108,
+        "W": 18,
+        "L": 2
+      },
+      "parity_timed_reuse": {
+        "UNKNOWN": 108,
+        "W": 18,
+        "L": 2
+      },
+      "mover_distance1": {
+        "UNKNOWN": 102,
+        "W": 26
+      }
+    },
+    "saved_draw": {
+      "ordinary_timed_Manhattan": {
+        "UNKNOWN": 2
+      },
+      "parity_timed_Manhattan": {
+        "UNKNOWN": 2
+      },
+      "parity_timed_reuse": {
+        "UNKNOWN": 2
+      },
+      "mover_distance1": {
+        "UNKNOWN": 2
+      }
+    },
+    "boundary": {
+      "ordinary_timed_Manhattan": {
+        "UNKNOWN": 6,
+        "W": 2
+      },
+      "parity_timed_Manhattan": {
+        "UNKNOWN": 6,
+        "W": 2
+      },
+      "parity_timed_reuse": {
+        "UNKNOWN": 6,
+        "W": 2
+      },
+      "mover_distance1": {
+        "UNKNOWN": 5,
+        "W": 3
+      }
+    }
+  },
+  "mismatches": [],
+  "rows": [
+    {
+      "index": 0,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "182104885252078369730362648502003040256",
+      "pawns": [
+        60,
+        56
+      ],
+      "turn": 0,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          8
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": "W",
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": "W",
+        "chamber_exact_gate": "W"
+      }
+    },
+    {
+      "index": 1,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "111821305482290152405129853863390937088",
+      "pawns": [
+        58,
+        47
+      ],
+      "turn": 0,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          6,
+          4
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          8,
+          6
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 2,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "110325923967081221811104924910678485504",
+      "pawns": [
+        63,
+        38
+      ],
+      "turn": 0,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          7,
+          0
+        ],
+        [
+          8,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          8,
+          0
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 3,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "675000176176102446203793997029179434",
+      "pawns": [
+        32,
+        11
+      ],
+      "turn": 1,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 4,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "32254549352907635083212817123594735626",
+      "pawns": [
+        36,
+        23
+      ],
+      "turn": 1,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          0,
+          5
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": "W",
+        "chamber_exact_gate": "W"
+      }
+    },
+    {
+      "index": 5,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "111821305482290152405129853863390937088",
+      "pawns": [
+        59,
+        47
+      ],
+      "turn": 1,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          6,
+          5
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          8,
+          6
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "L",
+        "parity_timed_Manhattan": "L",
+        "parity_timed_reuse": "L",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "L",
+        "timed_reuse_dag": "L",
+        "timed_rho_onepath": "L",
+        "timed_rho_dag": "L",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 6,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "111821305482290152405129853863390937088",
+      "pawns": [
+        59,
+        38
+      ],
+      "turn": 0,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          6,
+          5
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          8,
+          6
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 7,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "111821305482290152405129853863390937088",
+      "pawns": [
+        50,
+        38
+      ],
+      "turn": 1,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          5,
+          5
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          8,
+          6
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "L",
+        "parity_timed_Manhattan": "L",
+        "parity_timed_reuse": "L",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "L",
+        "timed_reuse_dag": "L",
+        "timed_rho_onepath": "L",
+        "timed_rho_dag": "L",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 8,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "111821305482290152405129853863390937088",
+      "pawns": [
+        50,
+        37
+      ],
+      "turn": 0,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          5,
+          5
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          8,
+          6
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 9,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "111821305482290152405129853863390937088",
+      "pawns": [
+        51,
+        37
+      ],
+      "turn": 1,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          8,
+          6
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "L",
+        "parity_timed_Manhattan": "L",
+        "parity_timed_reuse": "L",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "L",
+        "timed_reuse_dag": "L",
+        "timed_rho_onepath": "L",
+        "timed_rho_dag": "L",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 10,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "111821305482290152405129853863390937088",
+      "pawns": [
+        51,
+        38
+      ],
+      "turn": 0,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          8,
+          6
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 11,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "111821305482290152405129853863390937088",
+      "pawns": [
+        60,
+        38
+      ],
+      "turn": 1,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          6,
+          6
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          8,
+          6
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "L",
+        "parity_timed_Manhattan": "L",
+        "parity_timed_reuse": "L",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "L",
+        "timed_reuse_dag": "L",
+        "timed_rho_onepath": "L",
+        "timed_rho_dag": "L",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 12,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "111821305482290152405129853863390937088",
+      "pawns": [
+        60,
+        37
+      ],
+      "turn": 0,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          6,
+          6
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          8,
+          6
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 13,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "111821305482290152405129853863390937088",
+      "pawns": [
+        69,
+        37
+      ],
+      "turn": 1,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          7,
+          6
+        ],
+        [
+          8,
+          6
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "L",
+        "parity_timed_Manhattan": "L",
+        "parity_timed_reuse": "L",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "L",
+        "components": null,
+        "timed_reuse_onepath": "L",
+        "timed_reuse_dag": "L",
+        "timed_rho_onepath": "L",
+        "timed_rho_dag": "L",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 14,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "111821305482290152405129853863390937088",
+      "pawns": [
+        69,
+        38
+      ],
+      "turn": 0,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          7,
+          6
+        ],
+        [
+          8,
+          6
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          8,
+          6
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 15,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "675000176176102446203793997029179434",
+      "pawns": [
+        32,
+        10
+      ],
+      "turn": 0,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "L",
+        "parity_timed_Manhattan": "L",
+        "parity_timed_reuse": "L",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "L",
+        "timed_reuse_dag": "L",
+        "timed_rho_onepath": "L",
+        "timed_rho_dag": "L",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 16,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "675000176176102446203793997029179434",
+      "pawns": [
+        23,
+        10
+      ],
+      "turn": 1,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 17,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "675000176176102446203793997029179434",
+      "pawns": [
+        23,
+        19
+      ],
+      "turn": 0,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "L",
+        "parity_timed_Manhattan": "L",
+        "parity_timed_reuse": "L",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "L",
+        "timed_reuse_dag": "L",
+        "timed_rho_onepath": "L",
+        "timed_rho_dag": "L",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 18,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "675000176176102446203793997029179434",
+      "pawns": [
+        32,
+        19
+      ],
+      "turn": 1,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 19,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "675000176176102446203793997029179434",
+      "pawns": [
+        32,
+        18
+      ],
+      "turn": 0,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          2,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "L",
+        "parity_timed_Manhattan": "L",
+        "parity_timed_reuse": "L",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "L",
+        "timed_reuse_dag": "L",
+        "timed_rho_onepath": "L",
+        "timed_rho_dag": "L",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 20,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "675000176176102446203793997029179434",
+      "pawns": [
+        23,
+        18
+      ],
+      "turn": 1,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          2,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 21,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "675000176176102446203793997029179434",
+      "pawns": [
+        23,
+        9
+      ],
+      "turn": 0,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "L",
+        "parity_timed_Manhattan": "L",
+        "parity_timed_reuse": "L",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "L",
+        "components": null,
+        "timed_reuse_onepath": "L",
+        "timed_reuse_dag": "L",
+        "timed_rho_onepath": "L",
+        "timed_rho_dag": "L",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 22,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "675000176176102446203793997029179434",
+      "pawns": [
+        22,
+        9
+      ],
+      "turn": 1,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          0,
+          0
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 23,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "32254549352907635083212817123594735626",
+      "pawns": [
+        36,
+        22
+      ],
+      "turn": 0,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          0,
+          5
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "L",
+        "parity_timed_Manhattan": "L",
+        "parity_timed_reuse": "L",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "L",
+        "timed_reuse_dag": "L",
+        "timed_rho_onepath": "L",
+        "timed_rho_dag": "L",
+        "chamber_reuse_gate": "L",
+        "chamber_exact_gate": "L"
+      }
+    },
+    {
+      "index": 24,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "32254549352907635083212817123594735626",
+      "pawns": [
+        45,
+        22
+      ],
+      "turn": 1,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          0,
+          5
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": "W",
+        "chamber_exact_gate": "W"
+      }
+    },
+    {
+      "index": 25,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "32254549352907635083212817123594735626",
+      "pawns": [
+        45,
+        21
+      ],
+      "turn": 0,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          2,
+          3
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          0,
+          5
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "L",
+        "parity_timed_Manhattan": "L",
+        "parity_timed_reuse": "L",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "L",
+        "timed_reuse_dag": "L",
+        "timed_rho_onepath": "L",
+        "timed_rho_dag": "L",
+        "chamber_reuse_gate": "L",
+        "chamber_exact_gate": "L"
+      }
+    },
+    {
+      "index": 26,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "32254549352907635083212817123594735626",
+      "pawns": [
+        46,
+        21
+      ],
+      "turn": 1,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          2,
+          3
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          0,
+          5
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": "W",
+        "chamber_exact_gate": "W"
+      }
+    },
+    {
+      "index": 27,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "32254549352907635083212817123594735626",
+      "pawns": [
+        46,
+        12
+      ],
+      "turn": 0,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          0,
+          5
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "L",
+        "parity_timed_Manhattan": "L",
+        "parity_timed_reuse": "L",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "L",
+        "timed_reuse_dag": "L",
+        "timed_rho_onepath": "L",
+        "timed_rho_dag": "L",
+        "chamber_reuse_gate": "L",
+        "chamber_exact_gate": "L"
+      }
+    },
+    {
+      "index": 28,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "32254549352907635083212817123594735626",
+      "pawns": [
+        47,
+        12
+      ],
+      "turn": 1,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          0,
+          5
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": "W",
+        "chamber_exact_gate": "W"
+      }
+    },
+    {
+      "index": 29,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "32254549352907635083212817123594735626",
+      "pawns": [
+        47,
+        13
+      ],
+      "turn": 0,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          0,
+          5
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "L",
+        "parity_timed_Manhattan": "L",
+        "parity_timed_reuse": "L",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "L",
+        "timed_reuse_dag": "L",
+        "timed_rho_onepath": "L",
+        "timed_rho_dag": "L",
+        "chamber_reuse_gate": "L",
+        "chamber_exact_gate": "L"
+      }
+    },
+    {
+      "index": 30,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "32254549352907635083212817123594735626",
+      "pawns": [
+        56,
+        13
+      ],
+      "turn": 1,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          0,
+          5
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": "W",
+        "chamber_exact_gate": "W"
+      }
+    },
+    {
+      "index": 31,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "32254549352907635083212817123594735626",
+      "pawns": [
+        56,
+        14
+      ],
+      "turn": 0,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          5
+        ],
+        [
+          0,
+          5
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "L",
+        "parity_timed_Manhattan": "L",
+        "parity_timed_reuse": "L",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "L",
+        "components": null,
+        "timed_reuse_onepath": "L",
+        "timed_reuse_dag": "L",
+        "timed_rho_onepath": "L",
+        "timed_rho_dag": "L",
+        "chamber_reuse_gate": "L",
+        "chamber_exact_gate": "L"
+      }
+    },
+    {
+      "index": 32,
+      "dataset": "nine",
+      "name": null,
+      "n": 9,
+      "mask": "32254549352907635083212817123594735626",
+      "pawns": [
+        47,
+        14
+      ],
+      "turn": 1,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          5
+        ],
+        [
+          0,
+          5
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          0,
+          5
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": "W",
+        "chamber_exact_gate": "W"
+      }
+    },
+    {
+      "index": 33,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        0,
+        3
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 34,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        0,
+        3
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          0,
+          1
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 35,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        0,
+        4
+      ],
+      "turn": 0,
+      "saved_label": "L",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "L",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 36,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        0,
+        6
+      ],
+      "turn": 0,
+      "saved_label": "L",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 37,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        0,
+        6
+      ],
+      "turn": 1,
+      "saved_label": "L",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          2,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 38,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        0,
+        7
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 39,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        0,
+        7
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 40,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        1,
+        3
+      ],
+      "turn": 0,
+      "saved_label": "L",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "L",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 41,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        1,
+        4
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 42,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        1,
+        4
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          0,
+          0
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 43,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        1,
+        5
+      ],
+      "turn": 0,
+      "saved_label": "L",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "L",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 44,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        1,
+        6
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 45,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        1,
+        6
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          2,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 46,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        1,
+        7
+      ],
+      "turn": 0,
+      "saved_label": "L",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 47,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        1,
+        7
+      ],
+      "turn": 1,
+      "saved_label": "L",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 48,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        1,
+        8
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 49,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        1,
+        8
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          2,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 50,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        2,
+        4
+      ],
+      "turn": 0,
+      "saved_label": "L",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "L",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 51,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        2,
+        5
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 52,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        2,
+        5
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          0,
+          1
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 53,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        2,
+        7
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 54,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        2,
+        7
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 55,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        2,
+        8
+      ],
+      "turn": 0,
+      "saved_label": "L",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 56,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        2,
+        8
+      ],
+      "turn": 1,
+      "saved_label": "L",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          2,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 57,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        3,
+        4
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          2,
+          0
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 58,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        3,
+        4
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          0,
+          0
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 59,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        3,
+        6
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          2,
+          1
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 60,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        3,
+        6
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 61,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        3,
+        7
+      ],
+      "turn": 1,
+      "saved_label": "L",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "L",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 62,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        4,
+        3
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          2,
+          0
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 63,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        4,
+        3
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          0,
+          0
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 64,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        4,
+        5
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          2,
+          1
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 65,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        4,
+        5
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          0,
+          2
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 66,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        4,
+        6
+      ],
+      "turn": 1,
+      "saved_label": "L",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "L",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 67,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        4,
+        7
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          2,
+          0
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 68,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        4,
+        7
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 69,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        4,
+        8
+      ],
+      "turn": 1,
+      "saved_label": "L",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "L",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 70,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        5,
+        4
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          2,
+          2
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 71,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        5,
+        4
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          0,
+          1
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 72,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        5,
+        7
+      ],
+      "turn": 1,
+      "saved_label": "L",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "L",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 73,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        5,
+        8
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          2,
+          1
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 74,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        5,
+        8
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 75,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        0,
+        3
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 76,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        0,
+        3
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 77,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        0,
+        4
+      ],
+      "turn": 0,
+      "saved_label": "L",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 78,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        0,
+        4
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": "W",
+        "chamber_exact_gate": "W"
+      }
+    },
+    {
+      "index": 79,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        0,
+        6
+      ],
+      "turn": 0,
+      "saved_label": "L",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 80,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        0,
+        6
+      ],
+      "turn": 1,
+      "saved_label": "L",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          2,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 81,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        0,
+        7
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 82,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        0,
+        7
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 83,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        0,
+        8
+      ],
+      "turn": 0,
+      "saved_label": "L",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          2,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 84,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        1,
+        3
+      ],
+      "turn": 0,
+      "saved_label": "L",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 85,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        1,
+        3
+      ],
+      "turn": 1,
+      "saved_label": "L",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 86,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        1,
+        4
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 87,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        1,
+        4
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 88,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        1,
+        5
+      ],
+      "turn": 0,
+      "saved_label": "L",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "L",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 89,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        1,
+        6
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 90,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        1,
+        6
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 91,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        1,
+        7
+      ],
+      "turn": 0,
+      "saved_label": "L",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 92,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        1,
+        7
+      ],
+      "turn": 1,
+      "saved_label": "L",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 93,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        1,
+        8
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          2,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 94,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        1,
+        8
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          2,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 95,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        2,
+        3
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 96,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        2,
+        3
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 97,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        2,
+        4
+      ],
+      "turn": 0,
+      "saved_label": "L",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 98,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        2,
+        4
+      ],
+      "turn": 1,
+      "saved_label": "L",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 99,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        2,
+        5
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 100,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        2,
+        5
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          0,
+          1
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 101,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        2,
+        6
+      ],
+      "turn": 1,
+      "saved_label": "L",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 102,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        2,
+        7
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 103,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        2,
+        7
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 104,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        2,
+        8
+      ],
+      "turn": 0,
+      "saved_label": "L",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 105,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        2,
+        8
+      ],
+      "turn": 1,
+      "saved_label": "L",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          2,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 106,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        3,
+        4
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          2,
+          0
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 107,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        3,
+        4
+      ],
+      "turn": 1,
+      "saved_label": "L",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "L",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 108,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        3,
+        6
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          2,
+          1
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 109,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        3,
+        6
+      ],
+      "turn": 1,
+      "saved_label": "L",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "L",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 110,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        3,
+        7
+      ],
+      "turn": 1,
+      "saved_label": "L",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "L",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 111,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        4,
+        3
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          2,
+          0
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 112,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        4,
+        3
+      ],
+      "turn": 1,
+      "saved_label": "L",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "L",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 113,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        4,
+        5
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          2,
+          1
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 114,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        4,
+        5
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          0,
+          2
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 115,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        4,
+        6
+      ],
+      "turn": 1,
+      "saved_label": "L",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "L",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 116,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        4,
+        7
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          2,
+          0
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 117,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        4,
+        7
+      ],
+      "turn": 1,
+      "saved_label": "L",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "L",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 118,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        4,
+        8
+      ],
+      "turn": 1,
+      "saved_label": "L",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "L",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 119,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        5,
+        3
+      ],
+      "turn": 1,
+      "saved_label": "L",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "L",
+        "parity_timed_Manhattan": "L",
+        "parity_timed_reuse": "L",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "L",
+        "components": null,
+        "timed_reuse_onepath": "L",
+        "timed_reuse_dag": "L",
+        "timed_rho_onepath": "L",
+        "timed_rho_dag": "L",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 120,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        5,
+        4
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          2,
+          2
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 121,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        5,
+        4
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 122,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        5,
+        7
+      ],
+      "turn": 1,
+      "saved_label": "L",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "L",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 123,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        5,
+        8
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          2,
+          1
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 124,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "1",
+      "pawns": [
+        5,
+        8
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 125,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        0,
+        3
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 126,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        0,
+        3
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          0,
+          1
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 127,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        0,
+        4
+      ],
+      "turn": 0,
+      "saved_label": "L",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 128,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        0,
+        4
+      ],
+      "turn": 1,
+      "saved_label": "L",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 129,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        0,
+        5
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 130,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        0,
+        5
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 131,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        0,
+        6
+      ],
+      "turn": 0,
+      "saved_label": "L",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 132,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        0,
+        6
+      ],
+      "turn": 1,
+      "saved_label": "L",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          2,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 133,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        0,
+        7
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 134,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        0,
+        7
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 135,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        0,
+        8
+      ],
+      "turn": 1,
+      "saved_label": "L",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 136,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        1,
+        3
+      ],
+      "turn": 0,
+      "saved_label": "L",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "L",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 137,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        1,
+        4
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 138,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        1,
+        4
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 139,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        1,
+        5
+      ],
+      "turn": 0,
+      "saved_label": "L",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 140,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        1,
+        5
+      ],
+      "turn": 1,
+      "saved_label": "L",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 141,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        1,
+        6
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          2,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 142,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        1,
+        6
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          2,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 143,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        1,
+        7
+      ],
+      "turn": 0,
+      "saved_label": "L",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 144,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        1,
+        7
+      ],
+      "turn": 1,
+      "saved_label": "L",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 145,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        1,
+        8
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 146,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        1,
+        8
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 147,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        2,
+        4
+      ],
+      "turn": 0,
+      "saved_label": "L",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 148,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        2,
+        4
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": "W",
+        "chamber_exact_gate": "W"
+      }
+    },
+    {
+      "index": 149,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        2,
+        5
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 150,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        2,
+        5
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 151,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        2,
+        6
+      ],
+      "turn": 0,
+      "saved_label": "L",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          2,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 152,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        2,
+        7
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 153,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        2,
+        7
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 154,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        2,
+        8
+      ],
+      "turn": 0,
+      "saved_label": "L",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 155,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        2,
+        8
+      ],
+      "turn": 1,
+      "saved_label": "L",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          2,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 156,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        3,
+        4
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          2,
+          0
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 157,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        3,
+        4
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 158,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        3,
+        5
+      ],
+      "turn": 1,
+      "saved_label": "L",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "L",
+        "parity_timed_Manhattan": "L",
+        "parity_timed_reuse": "L",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "L",
+        "components": null,
+        "timed_reuse_onepath": "L",
+        "timed_reuse_dag": "L",
+        "timed_rho_onepath": "L",
+        "timed_rho_dag": "L",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 159,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        3,
+        6
+      ],
+      "turn": 0,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          2,
+          1
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 160,
+      "dataset": "small",
+      "name": null,
+      "n": 3,
+      "mask": "2",
+      "pawns": [
+        3,
+        6
+      ],
+      "turn": 1,
+      "saved_label": "W",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 161,
+      "dataset": "saved_draw",
+      "name": "409-all-shortest-DAG-disjoint-draw",
+      "n": 5,
+      "mask": "152073",
+      "pawns": [
+        15,
+        6
+      ],
+      "turn": 0,
+      "saved_label": "D",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 162,
+      "dataset": "saved_draw",
+      "name": "405-genuine-prefix-draw",
+      "n": 5,
+      "mask": "67882",
+      "pawns": [
+        7,
+        13
+      ],
+      "turn": 0,
+      "saved_label": "D",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          4,
+          2
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 163,
+      "dataset": "boundary",
+      "name": "first-straight-goal-jump",
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        0,
+        3
+      ],
+      "turn": 0,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 164,
+      "dataset": "boundary",
+      "name": "border-side-goal-jump",
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        3,
+        6
+      ],
+      "turn": 0,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          2,
+          1
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 165,
+      "dataset": "boundary",
+      "name": "opponent-first-terminal",
+      "n": 3,
+      "mask": "0",
+      "pawns": [
+        0,
+        3
+      ],
+      "turn": 1,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "immediate_goal",
+        "destination": [
+          0,
+          1
+        ],
+        "history": "goal priority"
+      },
+      "old_outcomes": {
+        "terminal_kernel": "W",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 166,
+      "dataset": "boundary",
+      "name": "equal-distance-first0",
+      "n": 5,
+      "mask": "0",
+      "pawns": [
+        10,
+        14
+      ],
+      "turn": 0,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          2,
+          0
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          4,
+          0
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 167,
+      "dataset": "boundary",
+      "name": "equal-distance-first1",
+      "n": 5,
+      "mask": "0",
+      "pawns": [
+        10,
+        14
+      ],
+      "turn": 1,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 1,
+      "delta": 0,
+      "path": [
+        [
+          2,
+          4
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          0,
+          4
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": "W",
+        "parity_timed_Manhattan": "W",
+        "parity_timed_reuse": "W",
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": "W",
+        "timed_reuse_dag": "W",
+        "timed_rho_onepath": "W",
+        "timed_rho_dag": "W",
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 168,
+      "dataset": "boundary",
+      "name": "wall-side-jump",
+      "n": 5,
+      "mask": "512",
+      "pawns": [
+        6,
+        11
+      ],
+      "turn": 0,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 1,
+      "delta": 1,
+      "path": [
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 169,
+      "dataset": "boundary",
+      "name": "occupied-sealed-end-goal-first",
+      "n": 5,
+      "mask": "805306368",
+      "pawns": [
+        16,
+        21
+      ],
+      "turn": 0,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 0,
+      "delta": 0,
+      "path": [
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          1
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": "W"
+      },
+      "mover_distance1_witness": {
+        "kind": "forced_retreat_then_goal_jump",
+        "path": [
+          [
+            3,
+            1
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            4,
+            1
+          ]
+        ],
+        "opponent_forced": [
+          [
+            4,
+            1
+          ],
+          [
+            3,
+            1
+          ]
+        ],
+        "history": "needs empty canonical E or two exact nonterminal arrival checks"
+      },
+      "old_outcomes": {
+        "terminal_kernel": null,
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    },
+    {
+      "index": 170,
+      "dataset": "boundary",
+      "name": "occupied-sealed-end-goal-second",
+      "n": 5,
+      "mask": "805306368",
+      "pawns": [
+        16,
+        21
+      ],
+      "turn": 1,
+      "saved_label": "UNKNOWN",
+      "distance_winner": 0,
+      "delta": 1,
+      "path": [
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          1
+        ]
+      ],
+      "outcomes": {
+        "ordinary_timed_Manhattan": null,
+        "parity_timed_Manhattan": null,
+        "parity_timed_reuse": null,
+        "mover_distance1": null
+      },
+      "mover_distance1_witness": null,
+      "old_outcomes": {
+        "terminal_kernel": "L",
+        "components": null,
+        "timed_reuse_onepath": null,
+        "timed_reuse_dag": null,
+        "timed_rho_onepath": null,
+        "timed_rho_dag": null,
+        "chamber_reuse_gate": null,
+        "chamber_exact_gate": null
+      }
+    }
+  ],
+  "BFS_ledger": [
+    {
+      "purpose": "new-refinement-goal:(9, 182104885252078369730362648502003040256):p0",
+      "vertices": 81,
+      "visited": 81,
+      "directed_edges_scanned": 208
+    },
+    {
+      "purpose": "new-refinement-goal:(9, 182104885252078369730362648502003040256):p1",
+      "vertices": 81,
+      "visited": 73,
+      "directed_edges_scanned": 188
+    },
+    {
+      "purpose": "new-refinement-goal:(9, 111821305482290152405129853863390937088):p0",
+      "vertices": 81,
+      "visited": 81,
+      "directed_edges_scanned": 208
+    },
+    {
+      "purpose": "new-refinement-goal:(9, 111821305482290152405129853863390937088):p1",
+      "vertices": 81,
+      "visited": 71,
+      "directed_edges_scanned": 186
+    },
+    {
+      "purpose": "new-refinement-goal:(9, 110325923967081221811104924910678485504):p0",
+      "vertices": 81,
+      "visited": 65,
+      "directed_edges_scanned": 176
+    },
+    {
+      "purpose": "new-refinement-goal:(9, 110325923967081221811104924910678485504):p1",
+      "vertices": 81,
+      "visited": 79,
+      "directed_edges_scanned": 206
+    },
+    {
+      "purpose": "new-refinement-goal:(9, 675000176176102446203793997029179434):p0",
+      "vertices": 81,
+      "visited": 81,
+      "directed_edges_scanned": 208
+    },
+    {
+      "purpose": "new-refinement-goal:(9, 675000176176102446203793997029179434):p1",
+      "vertices": 81,
+      "visited": 81,
+      "directed_edges_scanned": 208
+    },
+    {
+      "purpose": "new-refinement-goal:(9, 32254549352907635083212817123594735626):p0",
+      "vertices": 81,
+      "visited": 81,
+      "directed_edges_scanned": 208
+    },
+    {
+      "purpose": "new-refinement-goal:(9, 32254549352907635083212817123594735626):p1",
+      "vertices": 81,
+      "visited": 66,
+      "directed_edges_scanned": 174
+    },
+    {
+      "purpose": "new-refinement-goal:(3, 0):p0",
+      "vertices": 9,
+      "visited": 9,
+      "directed_edges_scanned": 24
+    },
+    {
+      "purpose": "new-refinement-goal:(3, 0):p1",
+      "vertices": 9,
+      "visited": 9,
+      "directed_edges_scanned": 24
+    },
+    {
+      "purpose": "new-refinement-goal:(3, 1):p0",
+      "vertices": 9,
+      "visited": 9,
+      "directed_edges_scanned": 20
+    },
+    {
+      "purpose": "new-refinement-goal:(3, 1):p1",
+      "vertices": 9,
+      "visited": 9,
+      "directed_edges_scanned": 20
+    },
+    {
+      "purpose": "new-refinement-goal:(3, 2):p0",
+      "vertices": 9,
+      "visited": 9,
+      "directed_edges_scanned": 20
+    },
+    {
+      "purpose": "new-refinement-goal:(3, 2):p1",
+      "vertices": 9,
+      "visited": 9,
+      "directed_edges_scanned": 20
+    },
+    {
+      "purpose": "new-refinement-goal:(5, 152073):p0",
+      "vertices": 25,
+      "visited": 23,
+      "directed_edges_scanned": 54
+    },
+    {
+      "purpose": "new-refinement-goal:(5, 152073):p1",
+      "vertices": 25,
+      "visited": 25,
+      "directed_edges_scanned": 56
+    },
+    {
+      "purpose": "new-refinement-goal:(5, 67882):p0",
+      "vertices": 25,
+      "visited": 21,
+      "directed_edges_scanned": 50
+    },
+    {
+      "purpose": "new-refinement-goal:(5, 67882):p1",
+      "vertices": 25,
+      "visited": 25,
+      "directed_edges_scanned": 56
+    },
+    {
+      "purpose": "new-refinement-goal:(5, 0):p0",
+      "vertices": 25,
+      "visited": 25,
+      "directed_edges_scanned": 80
+    },
+    {
+      "purpose": "new-refinement-goal:(5, 0):p1",
+      "vertices": 25,
+      "visited": 25,
+      "directed_edges_scanned": 80
+    },
+    {
+      "purpose": "new-refinement-goal:(5, 512):p0",
+      "vertices": 25,
+      "visited": 25,
+      "directed_edges_scanned": 76
+    },
+    {
+      "purpose": "new-refinement-goal:(5, 512):p1",
+      "vertices": 25,
+      "visited": 25,
+      "directed_edges_scanned": 76
+    },
+    {
+      "purpose": "new-refinement-goal:(5, 805306368):p0",
+      "vertices": 25,
+      "visited": 25,
+      "directed_edges_scanned": 72
+    },
+    {
+      "purpose": "new-refinement-goal:(5, 805306368):p1",
+      "vertices": 25,
+      "visited": 25,
+      "directed_edges_scanned": 72
+    }
+  ],
+  "wall_seconds_nested": 0.0037306130107026547,
+  "reader_STOP_UTC": "2026-10-17T00:26:11.005530+00:00",
+  "history": "Geometry/board-only conditional certificates; canonical E and 9x9 actual WDL/proof leaf remain UNKNOWN",
+  "forbidden_runs": {
+    "Search": 0,
+    "game_state_solver": 0,
+    "NN": 0,
+    "model_load": 0,
+    "games": 0,
+    "fit": 0,
+    "Perf": 0
+  }
+}

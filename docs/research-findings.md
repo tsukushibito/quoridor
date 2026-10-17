@@ -2191,3 +2191,21 @@ D4は原12＋真正未入場M6の18 uniqueが全完成し、Maction差1/6・PV�
 charged nodesは1,640,581,337／3G、12操作の未使用quotaを貸与・補充しなかった。把握したA＋B元失敗＋B成功のouter小計1695.948371786秒は各一度で、nested時間を足していない。physical NN、continuous family RSS、全費用はUNKNOWN。モデル・製品・generator既定と旧pause/sealは変更しない。[結果・七状態表・制約](../research-data/ai-sigma/nnue-independent426/report-ja.md)、[実行body・入力・出力と受入れ](../research-data/ai-sigma/nnue-independent426/receipt.json)。
 
 次の設計案は高残壁coverageの一軸に限定する。旧Tのstock18..20は0で、抽出capを増やすだけでは欠けた域を作れない。2ply開始、同じSigma64sim/outcome z、game/在庫層ごとの抽出上限と補充なしを維持し、十分な実Tが得られ、既存samplerで表現できる場合だけ、旧Wのdistinct行数と露出/updateへ合わせる案を保存した。最大256 requestsは案の上限で十分性の保証ではなく、global matchの入口対応も未確認。新生成・fit・forward・対局・q+z・NNUE自己対局・architecture変更は発行していない。
+
+### 新Sigma学習の保存曲線と量・coverageの切り分け（429、2026-10-17）
+
+423の保存曲線4点では、Wの最後の79→118更新でも新T MSEが0.0152943255、新V family-MSEが0.0093967873改善した。最後のfamily-MSE傾きは約−0.0002409433/更新で、最初の区間と近い。BEST118は予算末尾の選択であり、保存点上の平坦化・新V loss反転は観測していない。ただし、118以後の改善、更新不足の原因や最適更新数を確定する結果ではない。公開T panelは0.4287040882→0.4302133809へ悪化しており、新V52familyの選択再利用と公開fullVの分母も分ける。
+
+WはBEST43から新Sigmaのoutcome zだけで追加学習し、公開データとの混合ではない。U/R/Wはfresh Adam、10更新で1e-5→1e-4のwarmup、30104 draws/118更新。一方Fはfresh weights、20更新で5e-5→1e-3、240832 draws/941更新で、初期化・LR・更新量を同時に変えている。F LASTのT MSE0.00069024とV family-MSE1.488976の乖離を、教師を表現できない証明や初期化単独の因果へ変換しない。平均露出8/64も独立標本数や各入力への均等訪問を意味しない。
+
+量の比較は、nestedな実distinctを固定draws/更新で比べる条件と、同じ大viewを固定露出まで長く学ぶ条件を分ける。目安3763対15052 distinctで30104 draws/118更新なら平均露出8対2、15052を8露出なら120416 draws/471更新で訓練drawsは4倍となる。後者を同計算量比較とは呼ばない。現行callerのpartial batchは最終更新だけなので、長いrunのstep118は30208 drawsであり、短いrunの30104 drawsより104多い。INITIAL/BEST/LAST以外の途中weightsも保証されず、長いrunから短い条件を同一再用できるとはしない。序盤coverageは総distinctとdrawsを合わせた別比較とし、共通VをTから隔離する。目安不足は実数のまま報告し、repeatでdistinctを水増ししない。
+
+旧Tのstock18..20は0、高在庫の適格320対選択314なので抽出cap緩和だけで増やせるのは最大6行だった。量の増加と2ply開始によるcoverageを別cohortで扱う理由になるが、低在庫の飽和も残るため高在庫だけを全問題の原因としない。新V loss改善と独立426の改善支持未達は両方保持し、旧区間の再計算・合算、新しい原因・一般棋力の認定は行わない。[保存分析・設定と競合仮説](../research-data/ai-sigma/nnue-data-expansion429/saved-learning-analysis/report-ja.md)、[受入れと原参照](../research-data/ai-sigma/nnue-data-expansion429/saved-learning-analysis/receipt.json)。429の実行許可は保存分析と固定した追加Sigma生成・変換までであり、この比較設計から新fit・評価forward・対局を自動発行しない。
+
+### 零在庫確定条件の二者議論428（2026-10-17）
+
+二つのSol6.1/maxが独立初稿、相互批判、一度の最終改訂を行い、優先を四案にまとめた。既存正確goal mapから作る一本の時刻付き経路、true legal goalと標準壁/N>=3/手番側ds=1の最大3ply tail、正確cross sentinelによる別成分race、同じwinning witnessのfuture Qと完全weighted Eの非交差資格である。基本phase証明・局所tail・cross条件・futureQは条件付きで相互確認した。sealed tailの二中間keyへのprior count2で真正Drawが強制されるというAの帰結も、Bが最終比較で確認した。現在の±型へDraw/non-lossを入れる採用ではない。
+
+Bの固定9×9では旧M13/33・L20/33に対して時刻付きM-only一本が33/33幾何通過し、複合下界/rho/DAG/parityの追加は0だった。Aはこのcensusを再演していない。保存small W/L128+指定Draw2に不一致0でも、9×9のcanonical E/実proof leaf/独立WDLはUNKNOWN。終盤・二共有family・先頭ほぼ無壁3×3の標本を旧約260万内部判定の分布や速度利益へ広げない。Bだけが追加したM-only parity同値論証や現count APIの最悪O(H²)費用形も、共同の動的検証とは区別する。
+
+A13checks/BFS0、B2052checks/BFS190（別Tarjan13）は各累積上限内、元161+Draw2+事前boundary8だけで有限終了した。一般corridor、新component metadata、安い閉non-loss集合は保留。411/default OFFと424撤去を維持し、新source/observer/Search/model/game/fit/Perfを発行しない。[四候補・前提・費用・合意と留保](../research-data/ai-sigma/zero-stock-candidates428/report-ja.md)、[固定原参照と受入れ](../research-data/ai-sigma/zero-stock-candidates428/receipt.json)。429のSigma生成とview準備は独立に継続する。

@@ -1,0 +1,213 @@
+"""One new fixed-input check of parity/path and standard-wall goal-near refinements."""
+
+from collections import Counter
+from datetime import datetime, timezone
+import json
+from pathlib import Path
+import time
+
+import check_initial as frozen
+
+HERE = Path(__file__).resolve().parent
+BASE_CHECKS = 1368
+BASE_BFS = 164
+NEW_CHECKS = 0
+LAYOUTS = {}
+
+
+def layout(state):
+    key = state["n"], state["mask"]
+    if key not in LAYOUTS:
+        graph = frozen.BOARD(*key)
+        maps = [
+            frozen.bfs(
+                graph,
+                [(row, c) for c in range(state["n"])],
+                f"new-refinement-goal:{key}:p{p}",
+            )
+            for p, row in enumerate((state["n"] - 1, 0))
+        ]
+        LAYOUTS[key] = graph, maps
+    return LAYOUTS[key]
+
+
+def charge(value):
+    global NEW_CHECKS
+    NEW_CHECKS += 1
+    assert BASE_CHECKS + NEW_CHECKS <= 4096
+    return value
+
+
+def canonical_path(graph, distance, start):
+    path = [start]
+    while distance[path[-1]]:
+        children = sorted(v for v in graph[path[-1]] if distance.get(v) == distance[path[-1]] - 1)
+        assert children
+        path.append(children[0])
+    assert len(set(path)) == len(path)
+    return path
+
+
+def path_prediction(state, maps, pawns, path, winner, parity, reuse):
+    delta = int(winner != state["turn"])
+    n = len(path) - 1
+    b = pawns[winner ^ 1]
+    assert maps[winner ^ 1][b] > n - 1 + delta
+    colour_difference = (sum(pawns[winner]) ^ sum(b)) & 1
+    first_jump_possible = colour_difference == delta
+    for j, vertex in enumerate(path):
+        if reuse:
+            bound = frozen.lower_bound(b, vertex, maps)
+        else:
+            bound = abs(b[0] - vertex[0]) + abs(b[1] - vertex[1])
+        if not parity:
+            threshold = j + delta if j < n else n - 1 + delta
+        elif first_jump_possible:
+            if j == n:
+                continue  # Target occupancy is impossible before the excluded first jump.
+            threshold = j + delta
+        else:
+            if j == 0:
+                continue  # No opponent first jump is possible; only future target occupancy matters.
+            threshold = j - 1 + delta
+        if bound <= threshold:
+            return None
+    return "W" if winner == state["turn"] else "L"
+
+
+def near_goal(state, graph, maps, pawns):
+    turn, n = state["turn"], state["n"]
+    a, b = pawns[turn], pawns[turn ^ 1]
+    if maps[turn][a] != 1:
+        return None, None
+    assert n >= 3
+    goal_row = n - 1 if turn == 0 else 0
+    legal = frozen.ACTIONS(graph, a, b)
+    terminal = sorted(v for v in legal if v[0] == goal_row)
+    if terminal:
+        return "W", dict(kind="immediate_goal", destination=terminal[0], history="goal priority")
+    # The mathematical lemma depends on standard length-two walls, not an arbitrary subgraph.
+    assert b == (goal_row, a[1])
+    assert graph[b] == {a}
+    retreat = (a[0] - 1 if turn == 0 else a[0] + 1, a[1])
+    assert graph[a] == {b, retreat}
+    assert retreat in legal
+    replies = frozen.ACTIONS(graph, b, retreat)
+    assert replies == {a}
+    assert a[0] != (0 if turn == 0 else n - 1)
+    assert b in frozen.ACTIONS(graph, retreat, a)
+    return "W", dict(
+        kind="forced_retreat_then_goal_jump",
+        path=[a, retreat, b],
+        opponent_forced=[b, a],
+        history="needs empty canonical E or two exact nonterminal arrival checks",
+    )
+
+
+def main():
+    started = time.monotonic()
+    selection = json.loads(frozen.read(HERE / "selection.json"))
+    base = json.loads(frozen.read(selection["base"]))
+    states = [*base["nine"], *base["small"]]
+    states += [dict(s, dataset="saved_draw") for s in selection["saved_draw_controls"]]
+    states += [dict(s, dataset="boundary", saved_label="UNKNOWN") for s in selection["boundaries"]]
+    assert len(states) == 171
+    old = json.loads(frozen.read(HERE / "initial-checks.json"))["rows"]
+    rows, summaries, mismatches = [], {}, []
+    for index, state in enumerate(states):
+        graph, maps = layout(state)
+        pawns = [divmod(v, state["n"]) for v in state["pawns"]]
+        assert all(pawns[p] in maps[p] for p in range(2))
+        turn = state["turn"]
+        ds, do = maps[turn][pawns[turn]], maps[turn ^ 1][pawns[turn ^ 1]]
+        winner = turn if ds <= do else turn ^ 1
+        path = canonical_path(graph, maps[winner], pawns[winner])
+        outcomes = {}
+        for name, parity, reuse in [
+            ("ordinary_timed_Manhattan", False, False),
+            ("parity_timed_Manhattan", True, False),
+            ("parity_timed_reuse", True, True),
+        ]:
+            outcomes[name] = charge(
+                path_prediction(state, maps, pawns, path, winner, parity, reuse)
+            )
+        outcome, witness = near_goal(state, graph, maps, pawns)
+        outcomes["mover_distance1"] = charge(outcome)
+        assert not old[index]["outcomes"]["timed_reuse_onepath"] or (
+            outcomes["parity_timed_reuse"] == old[index]["outcomes"]["timed_reuse_onepath"]
+        )
+        for name, outcome in outcomes.items():
+            summaries.setdefault(state["dataset"], {}).setdefault(name, Counter())[
+                outcome or "UNKNOWN"
+            ] += 1
+            if (
+                outcome
+                and state["saved_label"] in {"W", "L", "D"}
+                and outcome != state["saved_label"]
+            ):
+                mismatches.append(
+                    dict(index=index, method=name, predicted=outcome, saved=state["saved_label"])
+                )
+        rows.append(
+            dict(
+                index=index,
+                dataset=state["dataset"],
+                name=state.get("name"),
+                n=state["n"],
+                mask=str(state["mask"]),
+                pawns=state["pawns"],
+                turn=turn,
+                saved_label=state["saved_label"],
+                distance_winner=winner,
+                delta=int(winner != turn),
+                path=path,
+                outcomes=outcomes,
+                mover_distance1_witness=witness,
+                old_outcomes=old[index]["outcomes"],
+            )
+        )
+    assert BASE_BFS + len(frozen.BFS) <= 512
+    result = dict(
+        status="COMPLETE_NEW_REFINEMENT_CHECKS" if not mismatches else "COUNTEREXAMPLE_FOUND",
+        fixed_states=171,
+        no_new_states=True,
+        old_successful_predicates_replayed=False,
+        new_candidate_checks=NEW_CHECKS,
+        new_BFS=len(frozen.BFS),
+        cumulative_candidate_checks=BASE_CHECKS + NEW_CHECKS,
+        cumulative_BFS=BASE_BFS + len(frozen.BFS),
+        summaries=summaries,
+        mismatches=mismatches,
+        rows=rows,
+        BFS_ledger=frozen.BFS,
+        wall_seconds_nested=time.monotonic() - started,
+        reader_STOP_UTC=datetime.now(timezone.utc).isoformat(),
+        history="Geometry/board-only conditional certificates; canonical E and 9x9 actual WDL/proof leaf remain UNKNOWN",
+        forbidden_runs=dict(
+            Search=0, game_state_solver=0, NN=0, model_load=0, games=0, fit=0, Perf=0
+        ),
+    )
+    frozen.save("refinement-checks.json", result)
+    frozen.save("refinement-refs.json", frozen.REFS)
+    assert not mismatches, mismatches
+    print(
+        json.dumps(
+            {
+                k: result[k]
+                for k in [
+                    "status",
+                    "new_candidate_checks",
+                    "new_BFS",
+                    "cumulative_candidate_checks",
+                    "cumulative_BFS",
+                    "summaries",
+                    "mismatches",
+                ]
+            },
+            ensure_ascii=False,
+        )
+    )
+
+
+if __name__ == "__main__":
+    main()

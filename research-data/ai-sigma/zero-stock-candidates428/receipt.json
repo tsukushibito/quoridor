@@ -1,0 +1,580 @@
+{
+  "at": "2026-10-17T00:55:56.036060+00:00",
+  "issue": "quoridor-4lc.428",
+  "status": "ACCEPTED_FINITE_DIALOGUE_AND_CONDITIONAL_SOURCE_REASONING_ONLY",
+  "author_verified_closed": [
+    {
+      "id": "quoridor-4lc.428.1",
+      "status": "closed",
+      "assignee": "codex:01a118a1-aef1-7252-b21b-42f07dd5b1e6",
+      "closed_at": "2026-10-17T00:38:55Z"
+    },
+    {
+      "id": "quoridor-4lc.428.2",
+      "status": "closed",
+      "assignee": "codex:01a1472b-d0ef-7920-9948-fb15086c2baf",
+      "closed_at": "2026-10-17T00:46:14Z"
+    }
+  ],
+  "report": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/zero-stock-candidates428/report-ja.md",
+    "sha256": "08f7f69bfa97c52bb3db08c8eb148d817651f65828aa89a19ee0b593f51ce95e",
+    "bytes": 10151,
+    "mode": "0644"
+  },
+  "selected_author_refs": [
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/a/final.md",
+      "sha256": "16610429d46e9af858a13c384e22e4f0a46136030a5109eb7be81f5a3e3ae461",
+      "bytes": 16903,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/a/final.json",
+      "sha256": "7254cd52187ca3fac247ed1baa9d663399c713e03e227390a1ef29723e560f8f",
+      "bytes": 17820,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/a/stage3-v1/completion.json",
+      "sha256": "155e528ed1c778245f49f39606e5f19c42cdc123f7436177b35612a74c740897",
+      "bytes": 4210,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/a/stage3-v1/STOP.json",
+      "sha256": "0455e0761266311510966a339c2e1ebe243105e5219c45fb7516a9c8f06e54a4",
+      "bytes": 11203,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/final.md",
+      "sha256": "aa26e8f1bece5a92d97c96164e50a1e1035d4c328f52d79f2f819684a123c3cd",
+      "bytes": 17068,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/final.json",
+      "sha256": "c64de0a493d98d1a6315bf56e8e48c60fee64dab2e1d90c8f2d921822c2f42d0",
+      "bytes": 6102,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/dialogue-comparison.md",
+      "sha256": "0dae431304531dca5f7bc86926ab504fc2ad05b9e48496d5a0e9dce56bf2d98f",
+      "bytes": 8341,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/dialogue-comparison.json",
+      "sha256": "ef0478fb1829500fde0e5947e87525771b6f35feb79b2e7479525539b40ef8f3",
+      "bytes": 2717,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/final-packet-refs.json",
+      "sha256": "38c817fcaa1eb2bd7d93ffb34451fdc140bbe621b3cf639d91cb7fd2d22c245a",
+      "bytes": 7022,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/final-to-integration.md",
+      "sha256": "e0fe7991d7338b4ad805c4bd1abc5ee1deb9324b0c64daaf7d281386f7e7f22f",
+      "bytes": 2976,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/initial-checks.json",
+      "sha256": "5a0c860a04bf2128cb4c2a9ad1e93e0f2c3b9600d05d0a14dfa3b91730caea42",
+      "bytes": 277011,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/refinement-checks.json",
+      "sha256": "c4ded3aa16905b01ccbb05e9d4fa869550db34081e844bc7ccac89cfaea4e3a1",
+      "bytes": 171024,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/initial-refs.json",
+      "sha256": "2d1c755e79eae52292a5c13c7b6f572a3b40bb7c82c6e206f49b0726fa925a7c",
+      "bytes": 1249,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/refinement-refs.json",
+      "sha256": "435af9918f109d6b15bff4554b110de56627c77bdd9fc7758a724d8e033052c7",
+      "bytes": 1499,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/final-author-refs.json",
+      "sha256": "3835ba96d75cbd2385fd83c5bc4fd4c66c4fbf17b1d960f4b0d95ccd220c2560",
+      "bytes": 3992,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/STOP-author-final.json",
+      "sha256": "0b0addc2e4b18226272fc4e105bd0d125d2a635a7ce41e27fc3fa5d4941c991b",
+      "bytes": 16385,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/source-cost-followup-refs.json",
+      "sha256": "11026ad8194cd0459587fbcc3d835c317e857ff75973a96a7ea55f8e92eab284",
+      "bytes": 1038,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/formatting-repair.json",
+      "sha256": "4e1d906ee7f64bbcb621b1849240df8b33c29b590d9c9bf5cc1f37449b00f2f9",
+      "bytes": 11093,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/admin-errors.json",
+      "sha256": "76880479ab3d006b594dbdb1e21b8769b312a14fa31671ad38ace46ff14fb275",
+      "bytes": 2509,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/A-final-intake.json",
+      "sha256": "b0b6d290b7cedc5c532785b820ae35a6aa8a1dd561208c637ce6ae81e2c84d5d",
+      "bytes": 2534,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/A-leaf-closed-check.json",
+      "sha256": "985789f5bc4b7a952044858e0635071d0ee6a45eda9d7f6d6170a86833544096",
+      "bytes": 146,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/closed-result.json",
+      "sha256": "6133f18f9f4905a1d7f0c80c40c47d0fd4ba1959a6e727dec98d04b4820e9397",
+      "bytes": 902,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/issue_close.guard.json",
+      "sha256": "f4357b06f316fbe03b71eff6eca1b931d4b40da6f09f8264035309ea117eb9c6",
+      "bytes": 4007,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/closed_verify.guard.json",
+      "sha256": "988c05addce8e7816c44f2be6cefdd936808c8f6af44112bc4a9c961a11b4468",
+      "bytes": 4262,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/backup_final.guard.json",
+      "sha256": "004d465441b698ae4cb5c53786c2bd5495552a15c0981fe5501333386f736c71",
+      "bytes": 3377,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/a-stage2-delivery.json",
+      "sha256": "6d6479dc46205a9d72cb00c67edbd80394045df77dccbe6c9b37a1b3da0b0057",
+      "bytes": 157,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/a-stage3-delivery.json",
+      "sha256": "f4e9681f46ad5f1bc8d57b7dca2cd89c25ea716de015551360ffcdc7d6c78520",
+      "bytes": 157,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/integration_delivery.guard.json",
+      "sha256": "f58f4ed14deda5c011f5fa86c94c627f65c744cbdcc3b8fb0c4bb7c98177f8c8",
+      "bytes": 3822,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/integration_delivery.log",
+      "sha256": "1a8e913d2463142b766530f42736f8c79d3a7344df0afdbbd85c5f4d6449ea8e",
+      "bytes": 157,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/STOP-before-delivery.json",
+      "sha256": "e604b71685d281386ddda9514b237fb2035ce4652e84d38d5d5946c07e6163e7",
+      "bytes": 25441,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/A_final_intake.process.json",
+      "sha256": "7c7486a15950ff2328a04dd7b2ec54619b2511bd3eda0cf7a85762fb5858b2ef",
+      "bytes": 6363,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/A_final_intake.log",
+      "sha256": "71aac4f2258cb14699a7686da7d0704900768a495448444d7f337254cf2e9c76",
+      "bytes": 286,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/postdelivery-TMP-cleanup.json",
+      "sha256": "e1f0243f76708b5746eb3da976f8cf346d83f9e014b16d4921dd1dcd3ab53ca2",
+      "bytes": 853,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/a/stage1-completion.json",
+      "sha256": "211d72693cc8e7ff183dbbe950a78717a63762caa8428b63d7200cd6f917c791",
+      "bytes": 3494,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/a/peer-b-critique.md",
+      "sha256": "4c86b6ecfe2d5c6384f04b1ef5e5dc2d86ce5820ae23a84910644f767c5890b5",
+      "bytes": 13809,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/a/peer-b-critique.json",
+      "sha256": "73e274a4fc4be42389798b07517e0a5fd6a8c46555a6d3d65c63693a95a60b7f",
+      "bytes": 14155,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/a/stage3-v1/closed-result.json",
+      "sha256": "23e6cedb49405457eff751d0ff631199ef648854cb263cb23e2346a76bdbad1d",
+      "bytes": 3515,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/initial-packet-refs.json",
+      "sha256": "d441e938326af7eb380a0ea90dd7fad5f10c7c28eb571eb9876a9bc693459b93",
+      "bytes": 2956,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/peer-a-critique.md",
+      "sha256": "ae802915dc8ceb6e6e9bc476178eb1761354496fffb95003a655061827bb66f1",
+      "bytes": 11999,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/peer-a-critique.json",
+      "sha256": "4d86132156268adaeb5b4de9e24d7a0f4df27458b300a49d96b41a1d9b290344",
+      "bytes": 2716,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/check_initial.py",
+      "sha256": "7509cb10a11186485929b928850c0be0b637c1f6fbcbd9d9463d0ddedf2eccbb",
+      "bytes": 13471,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/check_refinements.py",
+      "sha256": "76dec48bc9a7898163e90eae0a5be15e1bb6cc81d394458592be4e143c079b25",
+      "bytes": 7663,
+      "mode": "0644"
+    }
+  ],
+  "byte_exact_frozen_copies": [
+    {
+      "source": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/a/final.md",
+        "sha256": "16610429d46e9af858a13c384e22e4f0a46136030a5109eb7be81f5a3e3ae461",
+        "bytes": 16903,
+        "mode": "0644"
+      },
+      "public": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/zero-stock-candidates428/dialogue/a-final.md",
+        "sha256": "16610429d46e9af858a13c384e22e4f0a46136030a5109eb7be81f5a3e3ae461",
+        "bytes": 16903,
+        "mode": "0644"
+      },
+      "frozen_evidence_not_live_code": true
+    },
+    {
+      "source": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/a/final.json",
+        "sha256": "7254cd52187ca3fac247ed1baa9d663399c713e03e227390a1ef29723e560f8f",
+        "bytes": 17820,
+        "mode": "0644"
+      },
+      "public": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/zero-stock-candidates428/dialogue/a-final.json",
+        "sha256": "7254cd52187ca3fac247ed1baa9d663399c713e03e227390a1ef29723e560f8f",
+        "bytes": 17820,
+        "mode": "0644"
+      },
+      "frozen_evidence_not_live_code": true
+    },
+    {
+      "source": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/a/peer-b-critique.md",
+        "sha256": "4c86b6ecfe2d5c6384f04b1ef5e5dc2d86ce5820ae23a84910644f767c5890b5",
+        "bytes": 13809,
+        "mode": "0644"
+      },
+      "public": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/zero-stock-candidates428/dialogue/a-on-b.md",
+        "sha256": "4c86b6ecfe2d5c6384f04b1ef5e5dc2d86ce5820ae23a84910644f767c5890b5",
+        "bytes": 13809,
+        "mode": "0644"
+      },
+      "frozen_evidence_not_live_code": true
+    },
+    {
+      "source": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/final.md",
+        "sha256": "aa26e8f1bece5a92d97c96164e50a1e1035d4c328f52d79f2f819684a123c3cd",
+        "bytes": 17068,
+        "mode": "0644"
+      },
+      "public": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/zero-stock-candidates428/dialogue/b-final.md",
+        "sha256": "aa26e8f1bece5a92d97c96164e50a1e1035d4c328f52d79f2f819684a123c3cd",
+        "bytes": 17068,
+        "mode": "0644"
+      },
+      "frozen_evidence_not_live_code": true
+    },
+    {
+      "source": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/final.json",
+        "sha256": "c64de0a493d98d1a6315bf56e8e48c60fee64dab2e1d90c8f2d921822c2f42d0",
+        "bytes": 6102,
+        "mode": "0644"
+      },
+      "public": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/zero-stock-candidates428/dialogue/b-final.json",
+        "sha256": "c64de0a493d98d1a6315bf56e8e48c60fee64dab2e1d90c8f2d921822c2f42d0",
+        "bytes": 6102,
+        "mode": "0644"
+      },
+      "frozen_evidence_not_live_code": true
+    },
+    {
+      "source": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/peer-a-critique.md",
+        "sha256": "ae802915dc8ceb6e6e9bc476178eb1761354496fffb95003a655061827bb66f1",
+        "bytes": 11999,
+        "mode": "0644"
+      },
+      "public": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/zero-stock-candidates428/dialogue/b-on-a.md",
+        "sha256": "ae802915dc8ceb6e6e9bc476178eb1761354496fffb95003a655061827bb66f1",
+        "bytes": 11999,
+        "mode": "0644"
+      },
+      "frozen_evidence_not_live_code": true
+    },
+    {
+      "source": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/dialogue-comparison.md",
+        "sha256": "0dae431304531dca5f7bc86926ab504fc2ad05b9e48496d5a0e9dce56bf2d98f",
+        "bytes": 8341,
+        "mode": "0644"
+      },
+      "public": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/zero-stock-candidates428/dialogue/comparison.md",
+        "sha256": "0dae431304531dca5f7bc86926ab504fc2ad05b9e48496d5a0e9dce56bf2d98f",
+        "bytes": 8341,
+        "mode": "0644"
+      },
+      "frozen_evidence_not_live_code": true
+    },
+    {
+      "source": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/dialogue-comparison.json",
+        "sha256": "ef0478fb1829500fde0e5947e87525771b6f35feb79b2e7479525539b40ef8f3",
+        "bytes": 2717,
+        "mode": "0644"
+      },
+      "public": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/zero-stock-candidates428/dialogue/comparison.json",
+        "sha256": "ef0478fb1829500fde0e5947e87525771b6f35feb79b2e7479525539b40ef8f3",
+        "bytes": 2717,
+        "mode": "0644"
+      },
+      "frozen_evidence_not_live_code": true
+    },
+    {
+      "source": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/initial-checks.json",
+        "sha256": "5a0c860a04bf2128cb4c2a9ad1e93e0f2c3b9600d05d0a14dfa3b91730caea42",
+        "bytes": 277011,
+        "mode": "0644"
+      },
+      "public": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/zero-stock-candidates428/checks/initial.json",
+        "sha256": "5a0c860a04bf2128cb4c2a9ad1e93e0f2c3b9600d05d0a14dfa3b91730caea42",
+        "bytes": 277011,
+        "mode": "0644"
+      },
+      "frozen_evidence_not_live_code": true
+    },
+    {
+      "source": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/refinement-checks.json",
+        "sha256": "c4ded3aa16905b01ccbb05e9d4fa869550db34081e844bc7ccac89cfaea4e3a1",
+        "bytes": 171024,
+        "mode": "0644"
+      },
+      "public": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/zero-stock-candidates428/checks/refinement.json",
+        "sha256": "c4ded3aa16905b01ccbb05e9d4fa869550db34081e844bc7ccac89cfaea4e3a1",
+        "bytes": 171024,
+        "mode": "0644"
+      },
+      "frozen_evidence_not_live_code": true
+    },
+    {
+      "source": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/check_initial.py",
+        "sha256": "7509cb10a11186485929b928850c0be0b637c1f6fbcbd9d9463d0ddedf2eccbb",
+        "bytes": 13471,
+        "mode": "0644"
+      },
+      "public": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/zero-stock-candidates428/checks/initial-source.py.txt",
+        "sha256": "7509cb10a11186485929b928850c0be0b637c1f6fbcbd9d9463d0ddedf2eccbb",
+        "bytes": 13471,
+        "mode": "0644"
+      },
+      "frozen_evidence_not_live_code": true
+    },
+    {
+      "source": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/check_refinements.py",
+        "sha256": "76dec48bc9a7898163e90eae0a5be15e1bb6cc81d394458592be4e143c079b25",
+        "bytes": 7663,
+        "mode": "0644"
+      },
+      "public": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/zero-stock-candidates428/checks/refinement-source.py.txt",
+        "sha256": "76dec48bc9a7898163e90eae0a5be15e1bb6cc81d394458592be4e143c079b25",
+        "bytes": 7663,
+        "mode": "0644"
+      },
+      "frozen_evidence_not_live_code": true
+    },
+    {
+      "source": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/source-cost-followup-refs.json",
+        "sha256": "11026ad8194cd0459587fbcc3d835c317e857ff75973a96a7ea55f8e92eab284",
+        "bytes": 1038,
+        "mode": "0644"
+      },
+      "public": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/zero-stock-candidates428/checks/source-cost-followup-refs.json",
+        "sha256": "11026ad8194cd0459587fbcc3d835c317e857ff75973a96a7ea55f8e92eab284",
+        "bytes": 1038,
+        "mode": "0644"
+      },
+      "frozen_evidence_not_live_code": true
+    },
+    {
+      "source": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/formatting-repair.json",
+        "sha256": "4e1d906ee7f64bbcb621b1849240df8b33c29b590d9c9bf5cc1f37449b00f2f9",
+        "bytes": 11093,
+        "mode": "0644"
+      },
+      "public": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/zero-stock-candidates428/checks/formatting-repair.json",
+        "sha256": "4e1d906ee7f64bbcb621b1849240df8b33c29b590d9c9bf5cc1f37449b00f2f9",
+        "bytes": 11093,
+        "mode": "0644"
+      },
+      "frozen_evidence_not_live_code": true
+    },
+    {
+      "source": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/zero-stock-candidate-dialogue-20261017/b/admin-errors.json",
+        "sha256": "76880479ab3d006b594dbdb1e21b8769b312a14fa31671ad38ace46ff14fb275",
+        "bytes": 2509,
+        "mode": "0644"
+      },
+      "public": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/zero-stock-candidates428/checks/admin-errors.json",
+        "sha256": "76880479ab3d006b594dbdb1e21b8769b312a14fa31671ad38ace46ff14fb275",
+        "bytes": 2509,
+        "mode": "0644"
+      },
+      "frozen_evidence_not_live_code": true
+    }
+  ],
+  "document_append_proofs": [
+    {
+      "before": {
+        "path": "/workspaces/quoridor/docs/research-findings.md",
+        "sha256": "716c1fba596549bf6b434f53a6c0c069fe00c47e0261fb1aea3994a4c1675458",
+        "bytes": 688768,
+        "mode": "0644"
+      },
+      "after": {
+        "path": "/workspaces/quoridor/docs/research-findings.md",
+        "sha256": "208deee2c3b0d763e2cf7e4ca0cff2541cd1373d55379b35ce7b5ef1bce44566",
+        "bytes": 690648,
+        "mode": "0644"
+      },
+      "fragment": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-candidate-dialogue428-v1/final-acceptance-v1/findings-addition.md",
+        "sha256": "8bb3e43b4c60c515b0fca6d54fb96b5be1a9520b76c7e5ed4faa6b77ae3aa859",
+        "bytes": 1879,
+        "mode": "0644"
+      },
+      "prefix_byte_exact": true,
+      "literal_append_inverse_exact": true,
+      "positive_B": 0
+    },
+    {
+      "before": {
+        "path": "/workspaces/quoridor/docs/design/ai-nnue-optimization-agenda.md",
+        "sha256": "8859097c960085077e50b8fabf466ca1c3c13306406cd188104aada4ad8907ac",
+        "bytes": 50718,
+        "mode": "0644"
+      },
+      "after": {
+        "path": "/workspaces/quoridor/docs/design/ai-nnue-optimization-agenda.md",
+        "sha256": "570a0d76b8a1d6f50e92c69adc84484d728c696ea54044343b96d0f74023b5e1",
+        "bytes": 53009,
+        "mode": "0644"
+      },
+      "fragment": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-candidate-dialogue428-v1/final-acceptance-v1/design-addition.md",
+        "sha256": "6f03890850ab40b42f3f4232371d91382923834fcbca119b9d20a85b772d42a2",
+        "bytes": 2290,
+        "mode": "0644"
+      },
+      "prefix_byte_exact": true,
+      "literal_append_inverse_exact": true,
+      "positive_B": 0
+    }
+  ],
+  "peer_checked_conditional_scope": [
+    "Basic ordinary-path phase proof with initial delta1, endpoint and opponent own-goal race",
+    "Parity hazard split, not B-only later Manhattan-equivalence proof",
+    "Standard length-two-wall N>=3 STM distance1 tail under stock0/legal reachability",
+    "Sealed-tail forced third-arrival Draw corollary confirmed by B after A final; no SafeRaceLeaf Draw admission",
+    "Qualified cross-sentinel component race and same-policy future-phase weighted E/Q",
+    "Different global-geodesic versus restricted-chamber gate premises; qualified board nonloss remains nonloss under earlier history Draw"
+  ],
+  "B_only_not_independent_repeat": [
+    "Finite2052checks/190BFS/13Tarjan census",
+    "M-only parity equivalence refinement",
+    "Current HistoryKey/count source-cost observation"
+  ],
+  "not_qualified": [
+    "Actual9x9 canonicalE/proofleaf/WDL",
+    "Whole speed, strength or general internal-node frequency",
+    "Native TT/score/control/undo/depth/map integration",
+    "Production or default adoption, new observer/experiment"
+  ],
+  "Root_candidate_checks_BFS_solver_tests_model_native_Search_game_fit_Perf": 0,
+  "one_final_revision_and_original_two_couriers_only": true,
+  "canonical_411_default_OFF_and_424_withdrawal_unchanged": true,
+  "original_failures_and_formatting_limits": "B initial ignored Prettier withdrawn; frozen originals remain evidence, generated presentations/current final repair separately qualified. All original failures/unknown fees/masks preserved.",
+  "final_B_delivery_metadata": "Initial received STOP-final00:46:55 explicitly pending final delivery/usage; source/owner STOP accepted separately. Later admin absence/usage is not invented here.",
+  "legacy_pauses_defaults_models_weights_seals_foreign_changes": "Preserved",
+  "global_actual_total_cost_and_continuous_peak": "UNKNOWN"
+}

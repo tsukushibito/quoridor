@@ -1,0 +1,389 @@
+"""Fixed small geometry/terminal checks only; no game-state solver or Search."""
+
+import ast
+from collections import Counter, deque
+from datetime import datetime, timezone
+import hashlib
+import itertools
+import json
+import os
+from pathlib import Path
+import time
+
+HERE = Path(__file__).resolve().parent
+ROOT = Path("/workspaces/quoridor")
+REFS = []
+BFS = []
+CHECKS = 0
+LAYOUTS = {}
+PAWN_MAPS = {}
+
+
+def read(path):
+    path = Path(path)
+    before = path.stat()
+    data = path.read_bytes()
+    after = path.stat()
+    assert (before.st_ino, before.st_size, before.st_mtime_ns) == (
+        after.st_ino,
+        after.st_size,
+        after.st_mtime_ns,
+    )
+    REFS.append(
+        dict(
+            path=str(path),
+            sha256=hashlib.sha256(data).hexdigest(),
+            bytes=len(data),
+            mode=f"{after.st_mode & 0o777:04o}",
+        )
+    )
+    return data
+
+
+def function(path, name, namespace):
+    source = ast.parse(read(path).decode())
+    selected = next(
+        item for item in source.body if isinstance(item, ast.FunctionDef) and item.name == name
+    )
+    exec(
+        compile(ast.Module(body=[selected], type_ignores=[]), str(path) + "::" + name, "exec"),
+        namespace,
+    )
+    return namespace[name]
+
+
+BOARD_SOURCE = (
+    ROOT
+    / ".artifacts/research-team/integration324/zero-stock-5x5-405-v1/software-v1/source/reference.py"
+)
+BOARD = function(BOARD_SOURCE, "board", {"itertools": itertools})
+ACTIONS = function(BOARD_SOURCE, "actions", {})
+DISTANCES = function(
+    ROOT / "research-data/ai-sigma/zero-stock-shortest-path409/results-v1/run-source/shortest.py",
+    "distances",
+    {"deque": deque},
+)
+
+
+def save(name, value):
+    (HERE / name).write_text(
+        json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n"
+    )
+
+
+def bfs(graph, seeds, purpose):
+    assert len(BFS) < 512
+    result = DISTANCES(graph, list(seeds))
+    BFS.append(
+        dict(
+            purpose=purpose,
+            vertices=len(graph),
+            visited=len(result),
+            directed_edges_scanned=sum(len(graph[v]) for v in result),
+        )
+    )
+    return result
+
+
+def components(graph, purpose):
+    # Count the whole component forest as one bounded graph traversal.
+    assert len(BFS) < 512
+    labels = {}
+    for seed in sorted(graph):
+        if seed in labels:
+            continue
+        number = len(set(labels.values()))
+        queue = deque([seed])
+        labels[seed] = number
+        while queue:
+            vertex = queue.popleft()
+            for child in graph[vertex]:
+                if child not in labels:
+                    labels[child] = number
+                    queue.append(child)
+    BFS.append(
+        dict(
+            purpose=purpose,
+            vertices=len(graph),
+            visited=len(labels),
+            directed_edges_scanned=sum(map(len, graph.values())),
+        )
+    )
+    return labels
+
+
+def articulation(graph):
+    entered, low, parents, cuts = {}, {}, {}, set()
+
+    def visit(vertex):
+        entered[vertex] = low[vertex] = len(entered)
+        children = 0
+        for child in sorted(graph[vertex]):
+            if child not in entered:
+                parents[child] = vertex
+                children += 1
+                visit(child)
+                low[vertex] = min(low[vertex], low[child])
+                if vertex in parents and low[child] >= entered[vertex]:
+                    cuts.add(vertex)
+            elif parents.get(vertex) != child:
+                low[vertex] = min(low[vertex], entered[child])
+        if vertex not in parents and children > 1:
+            cuts.add(vertex)
+
+    for vertex in sorted(graph):
+        if vertex not in entered:
+            visit(vertex)
+    return sorted(cuts)
+
+
+def layout(state):
+    n, mask = state["n"], state["mask"]
+    key = n, mask
+    if key not in LAYOUTS:
+        graph = BOARD(n, mask)
+        maps = [
+            bfs(graph, [(row, c) for c in range(n)], f"goal:{key}:p{p}")
+            for p, row in enumerate((n - 1, 0))
+        ]
+        labels = components(graph, f"components:{key}")
+        gates = []
+        for gate in articulation(graph)[:2]:
+            cut_graph = {v: ns - {gate} for v, ns in graph.items() if v != gate}
+            cut_labels = components(cut_graph, f"cut-components:{key}:{gate}")
+            gate_maps = [
+                bfs(
+                    cut_graph,
+                    [(row, c) for c in range(n) if (row, c) in cut_graph],
+                    f"restricted-goal:{key}:{gate}:p{p}",
+                )
+                for p, row in enumerate((n - 1, 0))
+            ]
+            gate_distance = bfs(graph, [gate], f"gate-distance:{key}:{gate}")
+            gates.append((gate, cut_labels, gate_maps, gate_distance))
+        LAYOUTS[key] = graph, maps, labels, gates
+    return LAYOUTS[key]
+
+
+def lower_bound(b, vertex, maps):
+    values = [abs(b[0] - vertex[0]) + abs(b[1] - vertex[1])]
+    for table in maps:
+        if b in table and vertex in table:
+            values.append(abs(table[b] - table[vertex]))
+    return max(values)
+
+
+def predict(value):
+    global CHECKS
+    CHECKS += 1
+    assert CHECKS <= 4096
+    return value
+
+
+def terminal_kernel(state, graph, pawns):
+    turn, n = state["turn"], state["n"]
+    own, other = pawns[turn], pawns[turn ^ 1]
+    goals = (n - 1, 0)
+    children = sorted(ACTIONS(graph, own, other))
+    winning = [v for v in children if v[0] == goals[turn]]
+    if winning:
+        return "W", dict(terminal_move=winning[0], history="true goal priority")
+    # The two-ply statement is a board-only control, not fullhistory authority.
+    if children and all(
+        any(v[0] == goals[turn ^ 1] for v in ACTIONS(graph, other, child)) for child in children
+    ):
+        return "L", dict(
+            all_first_moves=children,
+            history="requires every nonterminal child not already a threefold draw",
+        )
+    return None, None
+
+
+def timed_path(state, graph, maps, pawn_distance, exact, dag):
+    turn = state["turn"]
+    pawns = [divmod(v, state["n"]) for v in state["pawns"]]
+    ds = maps[turn][pawns[turn]]
+    do = maps[turn ^ 1][pawns[turn ^ 1]]
+    winner = turn if ds <= do else turn ^ 1
+    a, b = pawns[winner], pawns[winner ^ 1]
+    n = maps[winner][a]
+    delta = int(winner != turn)
+    assert maps[winner ^ 1][b] > n - 1 + delta
+
+    def safe(vertex):
+        j = n - maps[winner][vertex]
+        threshold = j + delta if j < n else n - 1 + delta
+        bound = pawn_distance.get(vertex, float("inf")) if exact else lower_bound(b, vertex, maps)
+        return bound > threshold
+
+    memo = {}
+
+    def walk(vertex):
+        if vertex in memo:
+            return memo[vertex]
+        if not safe(vertex):
+            memo[vertex] = None
+        elif maps[winner][vertex] == 0:
+            memo[vertex] = [vertex]
+        else:
+            children = sorted(
+                v for v in graph[vertex] if maps[winner].get(v) == maps[winner][vertex] - 1
+            )
+            if not dag:
+                children = children[:1]
+            memo[vertex] = None
+            for child in children:
+                suffix = walk(child)
+                if suffix:
+                    memo[vertex] = [vertex, *suffix]
+                    break
+        return memo[vertex]
+
+    path = walk(a)
+    return ("W" if winner == turn else "L") if path else None, path
+
+
+def chamber(state, maps, gates, pawns, use_exact):
+    turn = state["turn"]
+    for gate, labels, restricted, gate_distance in gates:
+        for winner in (turn, turn ^ 1):
+            a, b = pawns[winner], pawns[winner ^ 1]
+            if a == gate or b == gate or labels[a] == labels[b]:
+                continue
+            n = restricted[winner].get(a)
+            if n is None or n == 0:
+                continue
+            delta = int(winner != turn)
+            if maps[winner ^ 1][b] <= n - 1 + delta:
+                continue
+            # Restricted goals and paths stay in a's G-g component.
+            bound = gate_distance.get(b, float("inf")) if use_exact else lower_bound(b, gate, maps)
+            if bound >= n - 1 + delta:
+                return "W" if winner == turn else "L", dict(
+                    gate=gate,
+                    winner=winner,
+                    protected_length=n,
+                    opponent_gate_lower_bound=bound,
+                    delta=delta,
+                )
+    return None, None
+
+
+def main():
+    started = time.monotonic()
+    selection = json.loads(read(HERE / "selection.json"))
+    base = json.loads(read(selection["base"]))
+    states = [*base["nine"], *base["small"]]
+    assert len(states) == 161
+    for state in selection["saved_draw_controls"]:
+        states.append(dict(state, dataset="saved_draw", history="history-free saved D"))
+    for state in selection["boundaries"]:
+        states.append(dict(state, dataset="boundary", saved_label="UNKNOWN"))
+    assert len(states) == 171
+    rows = []
+    summaries = {}
+    mismatches = []
+    for index, state in enumerate(states):
+        graph, maps, labels, gates = layout(state)
+        pawns = [divmod(v, state["n"]) for v in state["pawns"]]
+        assert pawns[0] != pawns[1] and pawns[0][0] != state["n"] - 1 and pawns[1][0] != 0
+        assert all(pawns[p] in maps[p] for p in range(2))
+        turn = state["turn"]
+        ds, do = maps[turn][pawns[turn]], maps[turn ^ 1][pawns[turn ^ 1]]
+        winner = turn if ds <= do else turn ^ 1
+        metrics = dict(ds=ds, do=do, delta=int(winner != turn), distance_winner=winner)
+        outcomes, witnesses = {}, {}
+        outcomes["terminal_kernel"], witnesses["terminal_kernel"] = terminal_kernel(
+            state, graph, pawns
+        )
+        outcomes["terminal_kernel"] = predict(outcomes["terminal_kernel"])
+        outcomes["components"] = predict(
+            ("W" if winner == turn else "L") if labels[pawns[0]] != labels[pawns[1]] else None
+        )
+        pair_key = state["n"], state["mask"], pawns[winner ^ 1]
+        if pair_key not in PAWN_MAPS:
+            PAWN_MAPS[pair_key] = bfs(graph, [pawns[winner ^ 1]], f"opponent-to-cell:{pair_key}")
+        pawn_distance = PAWN_MAPS[pair_key]
+        for exact in (False, True):
+            for dag in (False, True):
+                name = f"timed_{'rho' if exact else 'reuse'}_{'dag' if dag else 'onepath'}"
+                result, witness = timed_path(state, graph, maps, pawn_distance, exact, dag)
+                outcomes[name], witnesses[name] = predict(result), witness
+        for exact in (False, True):
+            name = "chamber_" + ("exact_gate" if exact else "reuse_gate")
+            result, witness = chamber(state, maps, gates, pawns, exact)
+            outcomes[name], witnesses[name] = predict(result), witness
+        for name, outcome in outcomes.items():
+            summaries.setdefault(state["dataset"], {}).setdefault(name, Counter())[
+                outcome or "UNKNOWN"
+            ] += 1
+            if (
+                outcome
+                and state["saved_label"] in {"W", "L", "D"}
+                and outcome != state["saved_label"]
+            ):
+                mismatches.append(
+                    dict(index=index, method=name, prediction=outcome, saved=state["saved_label"])
+                )
+        rows.append(
+            dict(
+                index=index,
+                dataset=state["dataset"],
+                n=state["n"],
+                mask=str(state["mask"]),
+                pawns=state["pawns"],
+                turn=turn,
+                saved_label=state["saved_label"],
+                origins=state.get("origins", []),
+                name=state.get("name"),
+                metrics=metrics,
+                outcomes=outcomes,
+                witnesses={k: v for k, v in witnesses.items() if v is not None},
+            )
+        )
+    result = dict(
+        status="COMPLETE_BOUNDED_CHECKS" if not mismatches else "COUNTEREXAMPLE_FOUND",
+        fixed_selection=str(HERE / "selection.json"),
+        states=len(states),
+        candidate_checks=CHECKS,
+        BFS_traversals=len(BFS),
+        graph_traversal_note="BFS includes component forests; Tarjan DFS is additional O(V+E) once per wall layout",
+        distinct_wall_layouts=len(LAYOUTS),
+        methods_are_variants_of_six_families=True,
+        summaries=summaries,
+        mismatches=mismatches,
+        rows=rows,
+        BFS_ledger=BFS,
+        history="Only immediate terminal W is history-independent here. Other outputs are geometry/board-only candidates; canonical E/actual proof leaf UNKNOWN.",
+        costs=dict(
+            child_wall_seconds=time.monotonic() - started, LLM_admin_continuous_peak="UNKNOWN"
+        ),
+        reader_STOP_UTC=datetime.now(timezone.utc).isoformat(),
+        forbidden_runs=dict(
+            Search=0, game_state_solver=0, NN=0, model_load=0, games=0, fit=0, Perf=0
+        ),
+        helper_identity=dict(pid=os.getpid(), affinity=sorted(os.sched_getaffinity(0))),
+    )
+    save("initial-checks.json", result)
+    save("initial-refs.json", REFS)
+    assert not mismatches, mismatches
+    print(
+        json.dumps(
+            {
+                k: result[k]
+                for k in (
+                    "status",
+                    "states",
+                    "candidate_checks",
+                    "BFS_traversals",
+                    "summaries",
+                    "mismatches",
+                )
+            },
+            ensure_ascii=False,
+        )
+    )
+
+
+if __name__ == "__main__":
+    main()
