@@ -99,3 +99,5 @@ GPU学習は明示タスクの期限・資源上限に従って具体化する�
 現行callerではpartial batchが最終更新だけで、短い118更新は117×256+152=30104 draws、長いrunのstep118は118×256=30208 drawsとなり104多い。INITIAL/BEST/LASTのみの現行保存では非BESTの途中weightsも保証されない。従って現行経路で正確な三比較を満たす案は、小view8N、大view同じ8N draws、同じ大view8×4N draws、early matched-Nの8N drawsという将来の四fitとして費用を示す。117 full updates/29952 drawsや256整除の実Nを選ぶ場合も、元条件と同じとして黙って代替しない。途中partial batchやcheckpoint経路の新設は発行しない。
 
 実数に応じて目安を解決し、重複や反復露出をdistinctへ数えない。元423のsplit/RAWとID18の明示的fit-view対応を残し、新viewの共通VをTから隔離する。初期化、正規化、z loss、reflection、fresh Adam、更新座標のLRを揃える。具体的なfit・評価条件と実費はデータ実数に基づく次の提案とし、429の生成・変換許可を学習や対局へ拡張しない。
+
+現行の`mixture.training_view`は、省略可能な4MiB以下のFileRefで、本文の`cache_manifest_sha256`と昇順・重複なしの整数`indices`を実cacheへ結び付ける。選択可能なのは既存の適格T・game/stock cap後の候補の部分集合だけで、同cacheの適格Vは全件を保持する。未指定時の抽出は変えない。実viewは通常のordered Experiment.inputsとRUN全体の入力保護へ含める。これはnested/matched viewを表現するsource上の能力であり、実distinct数・cache census・新fitの成立を認定するものではない。

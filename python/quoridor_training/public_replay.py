@@ -18,6 +18,29 @@ from .common import bound_file_bytes, common_cache_config, warmstart_model_input
 STUDY = "mixed-outcome"
 
 
+def training_view_indices(ref, cache_manifest_sha256, candidates):
+    """A bound subset of the existing T-only capped view, never a new split."""
+    if ref is None:
+        return candidates
+    view = json.loads(bound_file_bytes(ref, 4 * 1024**2))
+    if (
+        not isinstance(view, dict)
+        or set(view) != {"cache_manifest_sha256", "indices"}
+        or view["cache_manifest_sha256"] != cache_manifest_sha256
+    ):
+        raise ValueError("training view must bind the actual compact cache")
+    indices = view["indices"]
+    if (
+        not isinstance(indices, list)
+        or not indices
+        or any(type(i) is not int for i in indices)
+        or indices != sorted(set(indices))
+        or not set(indices) <= set(map(int, candidates))
+    ):
+        raise ValueError("nonempty unique chronological subset of configured eligible T required")
+    return indices
+
+
 def mixed_batch(added, public, added_indices, public_indices, reflection_mask):
     """One FP32 STM stream; validate source/split isolation before model input."""
     import numpy as np
@@ -712,6 +735,10 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
                 else None,
                 strata=m["train_stock_strata"],
             )
+            train_rows = np.asarray(
+                training_view_indices(m.get("training_view"), added.manifest_sha, train_rows),
+                dtype=np.int64,
+            )
             validation_rows = np.flatnonzero(added.eligible & (added.splits == 1))
             initial_observation_ref = (
                 json.loads(Path(input_binding).read_bytes())
@@ -814,6 +841,11 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
                 {
                     "cache_manifest_sha256": added.manifest_sha,
                     "indices": train_rows.tolist(),
+                    **(
+                        {"training_view": m["training_view"]}
+                        if m.get("training_view") is not None
+                        else {}
+                    ),
                     "train_family_row_cap": m["train_family_row_cap"],
                     "stock_strata": m["train_stock_strata"],
                     "validation_rows": len(validation_rows),

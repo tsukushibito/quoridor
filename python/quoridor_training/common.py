@@ -104,12 +104,14 @@ MIXTURE_OPTIONS = {
     "public_evaluation",
     "public_acceptance_seed",
     "training_rows",
+    "training_view",
 }
 DEFAULTS["mixture"].update(
     public_file_decay=None,
     public_evaluation=None,
     public_acceptance_seed=None,
     training_rows=None,
+    training_view=None,
 )
 
 
@@ -677,15 +679,17 @@ def validate_mixture_config(config, incoming):
         or m["selector"]["added_metric"] not in ("mse", "family_mse")
     ):
         raise ValueError("explicit optional public nonregression selector required")
-    for name in ("public_membership", "public_acceptance"):
-        ref = m[name]
+    for name in ("public_membership", "public_acceptance", "training_view"):
+        ref = m.get(name) if name == "training_view" else m[name]
+        if name == "training_view" and ref is None:
+            continue
         if (
             not isinstance(ref, dict)
             or set(ref) != {"path", "sha256", "bytes", "mode"}
             or not isinstance(ref["path"], str)
             or not ref["path"]
             or type(ref["bytes"]) is not int
-            or not 0 < ref["bytes"] <= 1024**2
+            or not 0 < ref["bytes"] <= (4 * 1024**2 if name == "training_view" else 1024**2)
             or not isinstance(ref["sha256"], str)
             or len(ref["sha256"]) != 64
             or any(v not in "0123456789abcdef" for v in ref["sha256"])
