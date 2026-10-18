@@ -2349,6 +2349,12 @@ Beadsの324.5との関係はnonblocking relatedとし、親のadmincloseを待�
 
 ### 追加学習後新二BESTの直接対局と固定D（quoridor-4lc.324.7、2026-10-18 JST）
 
+結果前protocol `2a00eac5` は、主要C対Sを95%区間、副次S対D／C対Dを97.5%区間で扱う報告階層として採用した。primaryが未確定でも三対照を全て実行・表示し、副次の確認的判定だけを事前階層へ限定する。最終512両色familyの推論は一度のjoint PCG64表による。native batch内のxorshift CIは各batchの原診断として別に保持し、最終区間へ足す・平均する・判定に混用することはしない。全1024局／512complete pairが揃わない対照では予定全体のCIを補わず、valid-game・complete-pair条件付き記述と予定全体のUNKNOWN boundsを区別する。新bookの11除外とT/Vの正確入力・LR除外は既存nativeの境界で扱い、prefix内部や公開history独立性はUNKNOWNのままとする。[固定protocol・原保持案・保存根拠](../.worktree/assets/perf/post-low-lr-strength3-analysis-v1/design-v1/completion.json)。
+
+原448MiB joint保持案は、名指しの新positiveだけでも既知会計上の余裕を超えるため未採択・未発行である。現行serializerの詳細outcomeは一つのlossless archiveに入り、resultのoutcomesは空、stdoutは参照だけである。この実構造に沿って、retained archiveとactive RAW／archive／TMP・FAILED・collector／reader・通常preflightのconfig／slots余地を残した全工程forecastを解決する。過去圧縮率を完了保証へ変えず、実在しないfull payloadの重複も見積りへ残さない。実TT1Mは解決済み設定・現在のfactory生成経路・RAMに対応させ、旧source-policyのlabelだけを直して資格としない。比較規模・条件は保存帳尻で変更せず、実不足が残れば名指しの再構築可能cache等から代案を決める。旧used返金・quota貸与・UNKNOWNゼロ化・全域inventoryを入口にはしない。
+
+同じHighの独立確認 `c1b023e4` は、この結果前のfamily・比較・統計・UNKNOWNの前提だけをpremises clear／blockers0とした。予定位置0..511はnative familyIDの連続性を保証しないため、生成後の実canonical ID・fullprefix／history／lineage・LEFT色対応を通常入力束縛で確認する。実book／source／image／typedID／保持／resampling実行はこの確認の資格範囲ではない。[限定確認](../.worktree/assets/perf/post-low-lr-strength3-review-v1/protocol-v1/control.json)。
+
 人間の新しい直接指示で、主要C教師NNUE対S教師NNUE（左Cの勝分負・score）、副次S対固定D／C対固定Dの三対照を新しい有限scopeへ登録した。subjectは324.6と同じ凍結b141e973の新S BEST34297／C BEST58305だけで、LAST・旧32R・将来LR候補へ差し替えない。MSE大小を棋力の根拠にせず、共通Dへの成績差からC/S直接勝率を作らない。固定Dはnative-owned a0b8tanhの真正64hex IDへ結び、記述ラベルを使わない。
 
 共通512canonical fullprefix/history family×両色、1024局／対照・計3072局、各16G／計48Gの非融通上限を出発案として、同じMax／324がbook・seed・固定時間・停止・family単位統計と主要／副次の採否・多重比較・UNKNOWN範囲を結果前に解決する。新rules-only poolからの結果非依存選択を優先し、旧bench再用ならその限界を明記する。旧結果／CIと合算せず、欠測補充・勝つまで追加・chunkCI平均・resampling再演をしない。Control/PVS/TT1M/LMR ON depth_rank、100ms authority／5ms reserve・depth64／1M nodes safety／200plyと、全engineのexplicit safeOFF/manhattanを共通の出発条件とする。通常研究既定Pは変更しない。
