@@ -81,9 +81,17 @@ def validate(config, base):
         "log_max_bytes",
         "resource_contract",
     }
-    if not isinstance(config, dict) or set(config) != required:
+    if not isinstance(config, dict) or set(config) not in (
+        required,
+        required | {"authority_parent"},
+    ):
         raise JobError("Missing or unknown config fields")
     config = dict(config)
+    if "authority_parent" in config and (
+        not isinstance(config["authority_parent"], dict)
+        or set(config["authority_parent"]) != {"cohort", "lane"}
+    ):
+        raise JobError("Exact configured cohort parent/member required")
     for field in ("issue", "goal_issue", "thread_id", "resource_contract"):
         if not isinstance(config[field], str) or not config[field].strip():
             raise JobError(f"{field} must be nonempty")
@@ -129,8 +137,23 @@ def validate(config, base):
 CONTROL_READ_SECONDS = 65.0
 
 
-def authority(config, root, backend, *, horizon, timeout=CONTROL_READ_SECONDS):
+def authority(
+    config, root, backend, *, horizon, timeout=CONTROL_READ_SECONDS, check=None, delegated=None
+):
     """Bound one DB check by its caller horizon; preserve pause and ownership."""
+    if config.get("authority_parent") is not None:
+        lifecycle = lifecycle_module(root)
+        if delegated is None:
+            lifecycle.cohort_job_authority(config)
+        else:
+            if (
+                delegated["cohort"] != config["authority_parent"]["cohort"]
+                or delegated["delegated_lane"] != config["authority_parent"]["lane"]
+                or delegated["delegated_config_sha256"] != lifecycle.canonical_sha(config)
+            ):
+                raise JobError("Same-entry delegated authority binding differs")
+            lifecycle.cohort_parent_check(delegated)
+        return {"thread_id": config["thread_id"]}
     if horizon is not None:
         timeout = min(timeout, (runtime.timestamp(horizon) - now()).total_seconds())
     if timeout <= 0:
@@ -138,7 +161,8 @@ def authority(config, root, backend, *, horizon, timeout=CONTROL_READ_SECONDS):
     end = time.monotonic() + timeout
     entry = {"thread_id": config["thread_id"]}
     issue_ids = list(dict.fromkeys((config["goal_issue"], config["issue"])))
-    items = backend.issues(issue_ids, timeout=timeout)
+    control = {} if check is None else {"check": check}
+    items = backend.issues(issue_ids, timeout=timeout, **control)
     if time.monotonic() >= end or deadline_reached(horizon):
         raise JobError("Authority read budget exhausted")
     for issue_id, item in zip(issue_ids, items, strict=True):
@@ -233,6 +257,36 @@ class TailLog:
             self.stream.close()
 
 
+_lifecycle_modules = {}
+
+
+def lifecycle_module(root):
+    source = root / "scripts/dev/research-lifecycle.py"
+    if root not in _lifecycle_modules:
+        spec = importlib.util.spec_from_file_location("configured_arena_lifecycle", source)
+        module = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = module
+        spec.loader.exec_module(module)
+        _lifecycle_modules[root] = module
+    return _lifecycle_modules[root]
+
+
+def cohort_parent_command(config, root):
+    argv = config["argv"]
+    return (
+        len(argv) == 8
+        and argv[:5]
+        == [
+            sys.executable,
+            "-B",
+            str(root / "scripts/dev/research-lifecycle.py"),
+            "cohort",
+            "--intent",
+        ]
+        and argv[6] == "--sha256"
+    )
+
+
 @contextmanager
 def configured_arena_resources(directory, config, root, resources):
     """The existing job supervisor owns configured cohort RAM from before spawn."""
@@ -240,7 +294,10 @@ def configured_arena_resources(directory, config, root, resources):
     if resources is not None or not (
         len(argv) == 8
         and argv[1:5]
-        == ["-B", str(root / "scripts/dev/research-lifecycle.py"), "sequence", "--intent"]
+        in (
+            ["-B", str(root / "scripts/dev/research-lifecycle.py"), "sequence", "--intent"],
+            ["-B", str(root / "scripts/dev/research-lifecycle.py"), "cohort", "--intent"],
+        )
         and argv[6] == "--sha256"
     ):
         yield resources
@@ -259,13 +316,14 @@ def configured_arena_resources(directory, config, root, resources):
         raise JobError("Cohort sequence resource contract must be its actual settings")
     if hashlib.sha256(raw).hexdigest() != argv[7]:
         raise JobError("Bound cohort sequence resource settings differ")
-    source = root / "scripts/dev/research-lifecycle.py"
-    spec = importlib.util.spec_from_file_location("configured_arena_lifecycle", source)
-    lifecycle = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = lifecycle
-    spec.loader.exec_module(lifecycle)
+    lifecycle = lifecycle_module(root)
     with lifecycle.lease(shared=True):
         settings_ref = lifecycle.bound(settings_path)[0]
+        if settings["kind"] == "cohort":
+            cohort = lifecycle.document(settings["arena_cohort"])
+            if cohort["authority_parent"]["runtime"] != str(directory):
+                raise JobError("Actual original parent resource runtime differs")
+            settings_ref = lifecycle.bound(cohort["members"][0]["settings_path"])[0]
         projected = lifecycle.arena_cohort_spec(settings_ref)
         yield lifecycle.ArenaCohortResources(projected, outer_runtime=str(directory))
 
@@ -281,6 +339,36 @@ def execute(directory, config, root, backend, *, resources=None):
     )
     write(directory, "state.json", state)
     controls = ExitStack()
+    parent_command = cohort_parent_command(config, root)
+    delegated = None
+    command, child, known, next_scan, started = None, None, [], 0, None
+
+    def local_control():
+        nonlocal known, next_scan
+        if delegated is not None:
+            lifecycle_module(root).cohort_parent_check(delegated)
+        if (directory / "cancel.json").exists():
+            raise JobError("Local cancellation during authority wait")
+        if deadline_reached(config["end_at"]) or (
+            started is not None
+            and config["max_runtime_seconds"] is not None
+            and time.monotonic() - started >= config["max_runtime_seconds"]
+        ):
+            raise JobError("Local deadline during authority wait")
+        if resources is not None:
+            resources.check()
+        if child is not None and time.monotonic() >= next_scan:
+            known = track_descendants(child, known)
+            next_scan = time.monotonic() + 1
+
+    def publish_authority_deadline():
+        if parent_command:
+            state["authority_valid_until_monotonic"] = (
+                time.monotonic() + config["control_interval_seconds"] + CONTROL_READ_SECONDS
+            )
+            state["updated_at"] = stamp()
+            write(directory, "state.json", state)
+
     try:
         try:
             resources = controls.enter_context(
@@ -288,7 +376,17 @@ def execute(directory, config, root, backend, *, resources=None):
             )
             if resources is not None:
                 resources.check()
-            entry = authority(config, root, backend, horizon=config["end_at"])
+            if config.get("authority_parent") is not None:
+                delegated = lifecycle_module(root).cohort_job_authority(config, directory)
+            entry = authority(
+                config,
+                root,
+                backend,
+                horizon=config["end_at"],
+                delegated=delegated,
+                **({"check": local_control} if parent_command else {}),
+            )
+            publish_authority_deadline()
             next_control = time.monotonic() + config["control_interval_seconds"]
             if entry["thread_id"] != state["thread_id"]:
                 raise JobError("Recipient identity changed after submission")
@@ -346,6 +444,8 @@ def execute(directory, config, root, backend, *, resources=None):
                 tail.thread.start()
                 next_scan = 0
                 while command.poll() is None:
+                    if delegated is not None:
+                        lifecycle_module(root).cohort_parent_check(delegated)
                     if resources is not None:
                         resources.check()
                     if time.monotonic() >= next_scan:
@@ -376,16 +476,25 @@ def execute(directory, config, root, backend, *, resources=None):
                             outcome = "timed_out"
                             break
                         current = authority(
-                            config, root, backend, horizon=config["end_at"], timeout=read_budget
+                            config,
+                            root,
+                            backend,
+                            horizon=config["end_at"],
+                            timeout=read_budget,
+                            delegated=delegated,
+                            **({"check": local_control} if parent_command else {}),
                         )
                         if current["thread_id"] != state["thread_id"]:
                             raise JobError("Recipient identity changed during execution")
+                        publish_authority_deadline()
                         next_control = time.monotonic() + config["control_interval_seconds"]
                     time.sleep(0.2)
                 else:
                     outcome = "succeeded" if command.returncode == 0 else "failed"
             except Exception as caught:
                 error, outcome = str(caught), "control_error"
+                if (directory / "cancel.json").exists():
+                    outcome = "cancelled"
                 if isinstance(caught, subprocess.TimeoutExpired):
                     if (directory / "cancel.json").exists():
                         outcome = "cancelled"
@@ -397,6 +506,24 @@ def execute(directory, config, root, backend, *, resources=None):
             finally:
                 members = list(known)
                 if command:
+                    if parent_command and outcome != "succeeded":
+                        attempt(
+                            "cohort_cancel_publication",
+                            lambda: write(
+                                directory,
+                                "cancel.json",
+                                {"requested_at": stamp(), "reason": error or outcome},
+                            ),
+                        )
+                    if parent_command or delegated is not None:
+                        # Allow maintained child guardians to cancel/drain/reap before
+                        # forcing descendants. Parent SIGKILL is watched independently.
+                        if command.poll() is None:
+                            try:
+                                command.terminate()
+                                command.wait(timeout=45 if parent_command else 22)
+                            except (ProcessLookupError, subprocess.TimeoutExpired):
+                                pass
                     # Keep each cleanup obligation independent, including exact Popen ownership.
                     members = attempt(
                         "descendant_discovery", lambda: track_descendants(child, known), members
@@ -698,6 +825,14 @@ async def notify_once(directory, config, root, backend):
 
 
 def watch_notification(directory, config, root, backend):
+    if config.get("authority_parent") is not None:
+        notification = {
+            "status": "delegated_to_parent",
+            "updated_at": stamp(),
+            "authority_parent": config["authority_parent"],
+        }
+        write(directory, "notification.json", notification)
+        return notification
     while True:
         notification = asyncio.run(notify_once(directory, config, root, backend))
         if notification["status"] in ("delivered", "expired", "cancelled", "uncertain"):
@@ -728,9 +863,16 @@ def run(directory, root, backend):
                 signal.signal(sig, handler)
 
 
-def submit(path, directory, root, backend):
+def submit(path, directory, root, backend, *, supervisor_handles=None):
     config = validate(runtime.read_json(path), path.resolve().parent)
-    entry = authority(config, root, backend, horizon=config["end_at"])
+    delegated = None
+    if config.get("authority_parent") is not None:
+        delegated = lifecycle_module(root).cohort_job_authority(config, directory)
+    entry = (
+        {"thread_id": config["thread_id"]}
+        if cohort_parent_command(config, root)
+        else authority(config, root, backend, horizon=config["end_at"], delegated=delegated)
+    )
     if deadline_reached(config["end_at"]):
         raise JobError("Cannot submit an expired job")
     directory.mkdir(parents=True, exist_ok=False)
@@ -769,6 +911,8 @@ def submit(path, directory, root, backend):
             start_new_session=True,
             close_fds=True,
         )
+    if supervisor_handles is not None:
+        supervisor_handles.append(supervisor)
     # A quick handshake returns without waiting for generation or a Codex turn.
     until = time.monotonic() + 5
     while time.monotonic() < until:

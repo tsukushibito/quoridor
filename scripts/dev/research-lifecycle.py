@@ -422,6 +422,22 @@ def arena_cohort(spec):
         )
         roots.extend(m["roots"])
     roots.extend(cohort["shared_roots"])
+    if cohort.get("authority_parent") is not None:
+        parent = cohort["authority_parent"]
+        require(
+            set(parent) == {"runtime", "output", "intent_path", "config_path"},
+            "exact authority parent fields",
+        )
+        require(
+            all(
+                any(
+                    owned(value, spec["owner"]).is_relative_to(Path(root))
+                    for root in cohort["shared_roots"]
+                )
+                for value in parent.values()
+            ),
+            "all parent/DB/controller metadata inside shared lifetime",
+        )
     paths = [owned(p, spec["owner"]) for p in roots]
     require(
         all(
@@ -457,11 +473,557 @@ def arena_cohort(spec):
             )
     return cohort, member
 
+def cohort_parent_binding(cohort_ref):
+    """Bind one real normal parent job; never accept a bare environment exemption."""
+    cohort = document(cohort_ref)
+    parent = cohort["authority_parent"]
+    require(
+        set(parent) == {"runtime", "output", "intent_path", "config_path"},
+        "exact cohort parent declaration",
+    )
+    for value in parent.values():
+        path = owned(value, cohort["owner"])
+        require(
+            any(path.is_relative_to(Path(r)) for r in cohort["shared_roots"]),
+            "parent metadata/runtime inside shared lifetime",
+        )
+    launch = document(bound(Path(cohort["control_root"]) / "launch.json")[0])
+    require(
+        launch["cohort"] == cohort_ref and len(launch["job_configs"]) == len(cohort["members"]),
+        "same frozen parent launch and roster",
+    )
+    parent_config_ref = bound(parent["config_path"])[0]
+    require(
+        launch["parent_config"] == parent_config_ref, "declared exact parent originating config"
+    )
+    cfg = document(parent_config_ref)
+    intent_ref = bound(parent["intent_path"])[0]
+    intent = document(intent_ref)
+    expected_sources = {
+        str(ROOT / "scripts/dev" / name)
+        for name in (
+            "research-lifecycle.py",
+            "research-job.py",
+            "research-runtime.py",
+            "research-session.py",
+        )
+    } | {
+        str(ROOT / "python/quoridor_training" / name)
+        for name in ("cycle_process.py", "snapshot.py")
+    }
+    sources = intent.get("caller_sources", [])
+    require(
+        len(sources) == len(expected_sources)
+        and {ref.get("path") for ref in sources} == expected_sources,
+        "exact current parent/child controller source closure",
+    )
+    for ref in sources:
+        read_ref(ref)
+    require(
+        intent["kind"] == "cohort"
+        and intent["arena_cohort"] == cohort_ref
+        and intent["output"] == parent["output"]
+        and cfg["argv"]
+        == [
+            sys.executable,
+            "-B",
+            str(ROOT / "scripts/dev/research-lifecycle.py"),
+            "cohort",
+            "--intent",
+            intent_ref["path"],
+            "--sha256",
+            intent_ref["sha256"],
+        ]
+        and cfg["resource_contract"] == parent["intent_path"]
+        and cfg["issue"] == cohort["issue"]
+        and cfg["thread_id"] == cohort["thread_id"]
+        and cfg.get("authority_parent") is None,
+        "one ordinary authority-owning parent caller and cohort",
+    )
+    runtime = Path(parent["runtime"])
+    actual_ref = bound(runtime / "config.json")[0]
+    state = document(bound(runtime / "state.json")[0])
+    origin_ref = bound(Path(parent["output"]) / "parent-origin.json")[0]
+    origin = document(origin_ref)
+    expected = dict(
+        runtime=str(runtime),
+        job_id=state["job_id"],
+        config=actual_ref,
+        config_sha256=state["config_sha256"],
+        supervisor=state["supervisor"],
+        child=state["child"],
+    )
+    require(
+        actual_ref["sha256"] == parent_config_ref["sha256"]
+        and document(actual_ref) == cfg
+        and state["config_sha256"] == sha(json.dumps(cfg, sort_keys=True).encode())
+        and origin == dict(cohort=cohort_ref, originating_job=expected),
+        "actual parent job_id/config/PID-start-boot origin",
+    )
+    binding = dict(
+        cohort=cohort_ref,
+        parent=parent,
+        origin=expected,
+        origin_ref=origin_ref,
+        management_cpu_pool=list(cohort["management_cpu_pool"]),
+    )
+    cohort_parent_check(binding)
+    return binding
+
+
+def cohort_parent_check(binding):
+    """Cheap local watch; the parent owns DB authority, children own exact cleanup."""
+    parent, origin = binding["parent"], binding["origin"]
+    state = document(bound(Path(parent["runtime"]) / "state.json")[0])
+    require(
+        state["job_id"] == origin["job_id"]
+        and state["config_sha256"] == origin["config_sha256"]
+        and state.get("supervisor") == origin["supervisor"]
+        and state.get("child") == origin["child"]
+        and state["phase"] == "running",
+        "same running parent, not another submission",
+    )
+    require(
+        process.alive(origin["supervisor"]) and process.alive(origin["child"]),
+        "cohort parent exact identity lost",
+    )
+    require(
+        process.process_info(origin["child"]["pid"])["parent"] == origin["supervisor"]["pid"],
+        "actual parent controller ancestry",
+    )
+    require(
+        Path(f"/proc/{origin['child']['pid']}/cmdline").read_bytes().rstrip(b"\0").split(b"\0")
+        == [v.encode() for v in document(origin["config"])["argv"]],
+        "actual parent argv",
+    )
+    allowed = set(binding["management_cpu_pool"])
+    require(bool(allowed), "declared parent management CPU role")
+    for actual in (origin["supervisor"], origin["child"]):
+        threads = list(Path(f"/proc/{actual['pid']}/task").iterdir())
+        require(bool(threads), "observable exact parent/controller threads")
+        for thread in threads:
+            affinity = os.sched_getaffinity(int(thread.name))
+            require(
+                bool(affinity) and affinity <= allowed,
+                "actual parent/controller thread escaped management CPU role",
+            )
+        require(process.alive(actual), "parent exact identity changed during CPU role check")
+    require(not (Path(parent["runtime"]) / "cancel.json").exists(), "cohort parent cancelled")
+    until = state.get("authority_valid_until_monotonic")
+    require(
+        type(until) in (int, float) and math.isfinite(until) and time.monotonic() < until,
+        "parent authority check deadline lost",
+    )
+    return binding
+
+
+def cohort_job_authority(config, directory=None):
+    """A declared lane/inner may delegate only through its live exact parent chain."""
+    delegated = config["authority_parent"]
+    require(set(delegated) == {"cohort", "lane"}, "exact delegated cohort/member declaration")
+    cohort_ref, lane = delegated["cohort"], delegated["lane"]
+    binding = cohort_parent_binding(cohort_ref)
+    cohort = document(cohort_ref)
+    require(type(lane) is int and 0 <= lane < len(cohort["members"]), "declared lane index")
+    member = cohort["members"][lane]
+    launch = document(bound(Path(cohort["control_root"]) / "launch.json")[0])
+    declared = document(launch["job_configs"][lane])
+    parent_cfg = document(binding["origin"]["config"])
+    require(
+        declared.get("authority_parent") == delegated
+        and all(
+            config[k] == declared[k] == parent_cfg[k] for k in ("issue", "goal_issue", "thread_id")
+        ),
+        "complete issue/thread roster owned by one checked parent",
+    )
+    own = process.identity(process.process_info(os.getpid()))
+    if own == binding["origin"]["child"]:
+        require(
+            directory is None or str(directory) == member["job_runtime"],
+            "actual parent-submitted lane runtime",
+        )
+        require(config == declared, "parent submits only the exact declared lane config")
+    else:
+        state = document(bound(Path(member["job_runtime"]) / "state.json")[0])
+        actual_cfg = document(bound(Path(member["job_runtime"]) / "config.json")[0])
+        require(
+            actual_cfg == declared
+            and state["config_sha256"] == sha(json.dumps(declared, sort_keys=True).encode())
+            and state["issue"] == cohort["issue"]
+            and state["thread_id"] == cohort["thread_id"],
+            "actual declared lane job/config",
+        )
+        supervisor = state["supervisor"]
+        require(
+            process.alive(supervisor)
+            and process.process_info(supervisor["pid"])["parent"]
+            == binding["origin"]["child"]["pid"],
+            "lane supervisor belongs to actual parent controller",
+        )
+        if own == supervisor:
+            require(
+                directory is None or str(directory) == member["job_runtime"],
+                "actual declared lane execute runtime",
+            )
+            require(config == declared, "lane supervisor executes only its own declared config")
+        else:
+            require(
+                own == state.get("child")
+                and process.process_info(own["pid"])["parent"] == supervisor["pid"],
+                "inner authority caller is exact owned lane sequence",
+            )
+            if config != declared:
+                argv = config["argv"]
+                require(
+                    len(argv) == 8
+                    and argv[:5]
+                    == [
+                        sys.executable,
+                        "-B",
+                        str(ROOT / "scripts/dev/research-lifecycle.py"),
+                        "run",
+                        "--intent",
+                    ]
+                    and argv[6] == "--sha256",
+                    "only maintained inner RUN can inherit parent control",
+                )
+                intent_ref = bound(argv[5])[0]
+                intent = document(intent_ref)
+                require(
+                    intent_ref["sha256"] == argv[7]
+                    and intent["arena_cohort"] == cohort_ref
+                    and intent["settings"]["path"] == member["settings_path"],
+                    "same inner intent/cohort/member",
+                )
+                arena_cohort(intent)
+                phase = Path(member["output"]) / f"run-{intent['selection_index']:03d}"
+                require(
+                    Path(argv[5]) == phase / "intent.json"
+                    and document(bound(phase / "runtime/config.json")[0]) == config,
+                    "actual inner runtime/config",
+                )
+                require(
+                    directory is None or Path(directory) == phase / "runtime",
+                    "actual inner execute runtime",
+                )
+                inner = document(bound(phase / "runtime/state.json")[0])
+                require(
+                    inner["supervisor"] == own
+                    and inner["config_sha256"] == sha(json.dumps(config, sort_keys=True).encode()),
+                    "inner normal job origin belongs to lane sequence",
+                )
+    binding["delegated_config_sha256"] = canonical_sha(config)
+    binding["delegated_lane"] = lane
+    return binding
+
+
+def cohort_sequence(settings_ref, *, job_module=None, backend=None):
+    """One finite normal parent, eight maintained sequences; no second scheduler."""
+    settings = document(settings_ref)
+    cohort_ref = settings["arena_cohort"]
+    cohort = document(cohort_ref)
+    parent = cohort["authority_parent"]
+    require(
+        settings["kind"] == "cohort"
+        and settings["output"] == parent["output"]
+        and settings_ref["path"] == parent["intent_path"],
+        "actual configured parent entry",
+    )
+    origin = originating_job(settings_ref, settings)
+    require(origin["runtime"] == parent["runtime"], "original parent runtime")
+    output = owned(parent["output"], cohort["owner"])
+    output.mkdir(exist_ok=False)
+    new_json(output / "parent-origin.json", dict(cohort=cohort_ref, originating_job=origin))
+    if job_module is None:
+        loader = importlib.util.spec_from_file_location(
+            "cohort_job", ROOT / "scripts/dev/research-job.py"
+        )
+        job_module = importlib.util.module_from_spec(loader)
+        loader.loader.exec_module(job_module)
+    if backend is None:
+        backend = job_module.runtime.AppBackend(ROOT)
+    launch = document(bound(Path(cohort["control_root"]) / "launch.json")[0])
+    stopped = False
+    cancel_started = None
+    supervisor_handles = []
+    records, submissions = {}, []
+    primary = None
+    secondary = []
+    cleanup_facts = []
+
+    def failed(stage, error):
+        error.add_note("cohort controller obligation: " + stage)
+        secondary.append(error)
+        cleanup_facts.append(dict(stage=stage, error=error_fact(error)))
+
+    def attempt(stage, action, default=None):
+        try:
+            return action()
+        except BaseException as error:
+            failed(stage, error)
+            return default
+
+    def cancel(signum, frame):
+        nonlocal stopped, cancel_started
+        stopped = True
+        if cancel_started is None:
+            cancel_started = time.monotonic()
+        attempt(
+            "parent cancel publication",
+            lambda: job_module.write(
+                Path(parent["runtime"]),
+                "cancel.json",
+                dict(requested_at=stamp(), reason="cohort controller stopped", signal=signum),
+            ),
+        )
+        for member in cohort["members"]:
+            path = Path(member["job_runtime"])
+            if attempt(f"lane-{member['lane']} cancel path", path.is_dir, True):
+                attempt(
+                    f"lane-{member['lane']} cancel publication",
+                    lambda path=path: job_module.write(
+                        path, "cancel.json", dict(requested_at=stamp(), signal=signum)
+                    ),
+                )
+
+    previous = {}
+    futures = []
+    try:
+        for sig in (signal.SIGTERM, signal.SIGINT):
+            previous[sig] = signal.signal(sig, cancel)
+        binding = cohort_parent_binding(cohort_ref)
+        # submit only creates ordinary normal-job supervisors. All payload authority
+        # and resources stay in maintained execute; no per-batch LLM/barrier exists.
+        from concurrent.futures import ThreadPoolExecutor
+
+        with ThreadPoolExecutor(max_workers=len(cohort["members"])) as pool:
+            for member, cfg_ref in zip(cohort["members"], launch["job_configs"], strict=True):
+                require(not stopped, "cohort cancelled before lane submission")
+                cohort_parent_check(binding)
+                futures.append(
+                    (
+                        member,
+                        pool.submit(
+                            job_module.submit,
+                            Path(cfg_ref["path"]),
+                            Path(member["job_runtime"]),
+                            ROOT,
+                            backend,
+                            supervisor_handles=supervisor_handles,
+                        ),
+                    )
+                )
+            for member, future in futures:
+                try:
+                    submissions.append(dict(lane=member["lane"], state=future.result(timeout=8)))
+                except BaseException as error:
+                    submissions.append(dict(lane=member["lane"], error=error_fact(error)))
+                    if primary is None:
+                        primary = error
+                    cancel(signal.SIGTERM, None)
+        new_json(output / "submission.json", dict(cohort=cohort_ref, submissions=submissions))
+        while len(records) < len(submissions):
+            if cancel_started is not None and time.monotonic() - cancel_started >= 30:
+                break
+            try:
+                cohort_parent_check(binding)
+            except BaseException as error:
+                if primary is None:
+                    primary = error
+                cancel(signal.SIGTERM, None)
+            for row in submissions:
+                lane = row["lane"]
+                if lane in records:
+                    continue
+                runtime = Path(cohort["members"][lane]["job_runtime"])
+                result_path = runtime / "result.json"
+                if result_path.exists():
+                    records[lane] = dict(
+                        result=bound(result_path)[0], state=bound(runtime / "state.json")[0]
+                    )
+                    terminal = document(records[lane]["result"])
+                    if terminal["outcome"] != "succeeded" or not terminal["cleanup_complete"]:
+                        if primary is None:
+                            primary = Refused(
+                                "finite cohort stopped: declared lane failed; "
+                                + json.dumps(records[lane])
+                            )
+                        cancel(signal.SIGTERM, None)
+                elif "error" in row and not (runtime / "state.json").exists():
+                    records[lane] = dict(submission_error=row["error"], native_entry="UNENTERED")
+            if len(records) < len(submissions):
+                time.sleep(0.2)
+    except BaseException as error:
+        if primary is None:
+            primary = error
+        else:
+            error.add_note("cohort body failed after primary")
+            secondary.append(error)
+    finally:
+        if stopped or primary is not None:
+            cancel(signal.SIGTERM, None)
+        # One cohort-wide budget, anchored at the FIRST cancellation (or normal
+        # terminal cleanup). Delegated job grace22 + TERM2 + wait3 + remaining1
+        # + log1 + scan allowance1 =30. Shared TERM2/wait3 then end by35, leaving
+        # ten seconds for independent final obligations inside parent grace45.
+        cleanup_base = cancel_started if cancel_started is not None else time.monotonic()
+        cleanup_budget = dict(
+            base_monotonic=cleanup_base,
+            delegated_grace_seconds=22,
+            normal_delegated_finalization_seconds=8,
+            child_grace_until=cleanup_base + 30,
+            term_until=cleanup_base + 32,
+            directwait_until=cleanup_base + 35,
+            parent_grace_until=cleanup_base + 45,
+            final_obligations_reserved_seconds=10,
+            phases=[],
+        )
+        joins = [dict(child=child, code=None, reaped=False) for child in supervisor_handles]
+
+        def drain(until, phase):
+            cleanup_budget["phases"].append(dict(phase=phase, at_monotonic=time.monotonic()))
+            wait_errors = set()
+            while True:
+                for index, item in enumerate(joins):
+                    if item["reaped"] or index in wait_errors:
+                        continue
+                    child = item["child"]
+                    try:
+                        item["code"] = child.wait(timeout=0)
+                        item["reaped"] = True
+                    except subprocess.TimeoutExpired:
+                        pass
+                    except BaseException as error:
+                        failed(f"supervisor-{child.pid} {phase} directwait", error)
+                        wait_errors.add(index)
+                if all(item["reaped"] for item in joins) or time.monotonic() >= until:
+                    break
+                time.sleep(min(0.05, max(0, until - time.monotonic())))
+
+        drain(cleanup_budget["child_grace_until"], "child-grace")
+        if any(not item["reaped"] for item in joins):
+            if primary is None:
+                primary = Refused(
+                    "finite cohort stopped: owned supervisor exceeded normal drain grace"
+                )
+            cleanup_budget["phases"].append(dict(phase="TERM-all", at_monotonic=time.monotonic()))
+            for item in joins:
+                if not item["reaped"]:
+                    child = item["child"]
+                    attempt(f"supervisor-{child.pid} terminate", child.terminate)
+            drain(cleanup_budget["term_until"], "after-TERM")
+        if any(not item["reaped"] for item in joins):
+            cleanup_budget["phases"].append(dict(phase="KILL-all", at_monotonic=time.monotonic()))
+            for item in joins:
+                if not item["reaped"]:
+                    child = item["child"]
+                    attempt(f"supervisor-{child.pid} kill", child.kill)
+            drain(cleanup_budget["directwait_until"], "after-KILL")
+        supervisor_returns = []
+        for item in joins:
+            child, code, reaped = item["child"], item["code"], item["reaped"]
+            handles = []
+            for name in ("stdin", "stdout", "stderr"):
+                stream = getattr(child, name, None)
+                if stream is not None:
+                    attempt(f"supervisor-{child.pid} {name} close", stream.close)
+                    handles.append(dict(name=name, closed=bool(getattr(stream, "closed", False))))
+            running = attempt(
+                f"supervisor-{child.pid} final poll", lambda: child.poll() is None, None
+            )
+            supervisor_returns.append(
+                dict(
+                    pid=child.pid,
+                    exit_code=code,
+                    directwait_reaped=reaped,
+                    remaining=(
+                        [dict(pid=child.pid, identity="owned Popen; live or unresolved")]
+                        if running is not False
+                        else []
+                    ),
+                    remaining_observation="UNKNOWN"
+                    if running is None
+                    else "LIVE"
+                    if running
+                    else "ABSENT",
+                    handles=handles,
+                    handles_closed=all(h["closed"] for h in handles),
+                )
+            )
+        for sig, handler in previous.items():
+            attempt(
+                f"restore signal-{sig}",
+                lambda sig=sig, handler=handler: signal.signal(sig, handler),
+            )
+        cleanup_budget["finished_obligations_monotonic"] = time.monotonic()
+        cleanup_budget["within_parent_envelope"] = (
+            time.monotonic() < cleanup_budget["parent_grace_until"]
+        )
+        passed = attempt(
+            "terminal status assessment",
+            lambda: (
+                primary is None
+                and not secondary
+                and not stopped
+                and cleanup_budget["within_parent_envelope"]
+                and len(records) == len(cohort["members"])
+                and all(
+                    "result" in r
+                    and document(r["result"])["outcome"] == "succeeded"
+                    and document(r["result"])["cleanup_complete"]
+                    for r in records.values()
+                )
+                and all(
+                    r["directwait_reaped"] and not r["remaining"] and r["handles_closed"]
+                    for r in supervisor_returns
+                )
+            ),
+            False,
+        )
+        attempt(
+            "terminal result publication",
+            lambda: new_json(
+                output / "result.json",
+                dict(
+                    at=stamp(),
+                    cohort=cohort_ref,
+                    originating_job=origin,
+                    submissions=submissions,
+                    results=records,
+                    supervisor_returns=supervisor_returns,
+                    stopped=stopped,
+                    primary=error_fact(primary) if primary is not None else None,
+                    secondary=[error_fact(e) for e in secondary],
+                    cleanup_obligations=cleanup_facts,
+                    cleanup_budget=cleanup_budget,
+                    status="PASS" if passed else "FAILED",
+                    reader_STOP=stamp(),
+                ),
+            ),
+        )
+    if secondary:
+        raise BaseExceptionGroup(
+            "cohort primary/cleanup failures",
+            [*([primary] if primary is not None else []), *secondary],
+        )
+    if primary is not None:
+        raise primary
+    require(
+        not stopped and document(bound(output / "result.json")[0])["status"] == "PASS",
+        "finite cohort stopped or failed; original results retained",
+    )
+
+
 def arena_cohort_lifetime(spec, *, outer_runtime=None):
     """Join only declared normal submissions and their actual live trees."""
     cohort, member = arena_cohort(spec)
+    parent = cohort.get("authority_parent")
+    parent_runtime = parent["runtime"] if parent is not None else None
     if outer_runtime is not None:
-        require(outer_runtime == member["job_runtime"], "actual configured outer runtime")
+        require(
+            outer_runtime in {member["job_runtime"], parent_runtime},
+            "actual configured lane or authority-parent runtime",
+        )
     control = Path(cohort["control_root"])
     launch_ref = bound(control / "launch.json")[0]
     launch = document(launch_ref)
@@ -599,6 +1161,50 @@ def arena_cohort_lifetime(spec, *, outer_runtime=None):
         inner_members[m["lane"]] = lane_inner
         all_members.update(tree)
         common_members.update({k: v for k, v in tree.items() if k not in lane_inner})
+    if parent is not None:
+        parent_cfg_ref = bound(parent["config_path"])[0]
+        require(launch.get("parent_config") == parent_cfg_ref, "declared parent launch config")
+        parent_cfg = document(parent_cfg_ref)
+        intent_ref = bound(parent["intent_path"])[0]
+        parent_intent = document(intent_ref)
+        require(
+            parent_intent["kind"] == "cohort"
+            and parent_intent["arena_cohort"] == spec["arena_cohort"]
+            and parent_cfg["argv"]
+            == [
+                sys.executable,
+                "-B",
+                str(ROOT / "scripts/dev/research-lifecycle.py"),
+                "cohort",
+                "--intent",
+                intent_ref["path"],
+                "--sha256",
+                intent_ref["sha256"],
+            ]
+            and parent_cfg["resource_contract"] == parent["intent_path"],
+            "actual parent immutable caller/input",
+        )
+        for declared in launch["job_configs"]:
+            cfg = document(declared)
+            require(
+                all(cfg[k] == parent_cfg[k] for k in ("issue", "goal_issue", "thread_id")),
+                "single parent checks complete issue/thread roster",
+            )
+        runtime = Path(parent_runtime)
+        if (runtime / "state.json").exists():
+            cfg = document(bound(runtime / "config.json")[0])
+            state = document(bound(runtime / "state.json")[0])
+            require(
+                cfg == parent_cfg
+                and state["config_sha256"] == sha(json.dumps(cfg, sort_keys=True).encode()),
+                "actual parent runtime/config ownership",
+            )
+            tree = discover(state["supervisor"])
+            all_members.update(tree)
+            native_keys = (
+                set().union(*(set(m) for m in inner_members.values())) if inner_members else set()
+            )
+            common_members.update({k: v for k, v in tree.items() if k not in native_keys})
     if outer_runtime is None:
         require(member["lane"] in origins, "own actual original outer submission required")
     else:
@@ -1295,6 +1901,13 @@ class Limits(process.CycleResources):
         )
 
     def check(self, children=(), *, extra_B=0):
+        if (
+            self.arena_cohort is not None
+            and self.arena_cohort[0].get("authority_parent") is not None
+        ):
+            if not hasattr(self, "parent_control"):
+                self.parent_control = cohort_parent_binding(self.spec["arena_cohort"])
+            cohort_parent_check(self.parent_control)
         super().check(children)
         if self.arena_cohort is not None:
             self.cohort_resources.check()
@@ -6959,6 +7572,9 @@ def main():
     p = commands.add_parser("arena-analysis")
     p.add_argument("--experiment", type=Path, required=True)
     p.add_argument("--experiment-sha256", required=True)
+    p = commands.add_parser("cohort")
+    p.add_argument("--intent", type=Path, required=True)
+    p.add_argument("--sha256", required=True)
     p = commands.add_parser("sequence")
     p.add_argument(
         "--intent",
@@ -6994,6 +7610,9 @@ def main():
     ref, _ = bound(args.intent)
     require(ref["sha256"] == args.sha256, "intent SHA")
     require(document(ref)["kind"] == args.command, "operation kind")
+    if args.command == "cohort":
+        cohort_sequence(ref)
+        return 0
     if args.command == "sequence":
         sequence(ref)
         return 0

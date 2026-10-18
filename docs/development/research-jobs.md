@@ -25,13 +25,14 @@
 
 設定は次の項目だけを持つ。`thread_id`は現在のBeads担当に対応する保存thread IDであり、旧`role`/`registry`は受け付けない。
 
-| 項目                                                                             | 内容                                                         |
-| -------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| `issue`, `goal_issue`, `thread_id`                                               | タスク、許可の親目標、完了通知の担当                         |
-| `cwd`, `argv`, `resource_contract`                                               | 実行場所、絶対実行ファイルから始まる引数配列、現契約ファイル |
-| `end_at`, `notify_until`, `max_runtime_seconds`                                  | UTC絶対終了、通知期限、monotonic実行上限                     |
-| `control_interval_seconds`, `notify_interval_seconds`, `request_timeout_seconds` | 所有・pauseの点検、通知待ち、RPCの各上限                     |
-| `log_max_bytes`                                                                  | 保存するstdout/stderr末尾のbyte上限                          |
+| 項目                                                                             | 内容                                                                                                                |
+| -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `issue`, `goal_issue`, `thread_id`                                               | タスク、許可の親目標、完了通知の担当                                                                                |
+| `cwd`, `argv`, `resource_contract`                                               | 実行場所、絶対実行ファイルから始まる引数配列、現契約ファイル                                                        |
+| `end_at`, `notify_until`, `max_runtime_seconds`                                  | UTC絶対終了、通知期限、monotonic実行上限                                                                            |
+| `control_interval_seconds`, `notify_interval_seconds`, `request_timeout_seconds` | 所有・pauseの点検、通知待ち、RPCの各上限                                                                            |
+| `log_max_bytes`                                                                  | 保存するstdout/stderr末尾のbyte上限                                                                                 |
+| `authority_parent`（委譲された子だけ）                                           | 実在するcohort親とlaneの束縛。固定宣言・job/起動系統・source・identityを照合し、自己申告やenvだけでは有効にならない |
 
 `end_at`は明示された実commandの終了期限、`notify_until`は通知期限、`max_runtime_seconds`は明示した安全用のmonotonic実行上限。予想所要時間は計画・報告の情報であり、停止条件や未開始の許可の有効期限にしない。固定された件数・node・メモリ・保存量・取消・所有者の制御で有限な処理を拘束できる場合、実行時間上限は`null`にできる。安全上限が必要なら目的と根拠、終了・回収の余裕を明記し、見積りをそのままhard killに使わない。有限の実際の上限は再起動で取り直さない。`resource_contract`は個別契約への参照であり、CPU/RAM/NNの機械的強制を代行しない。
 
@@ -51,13 +52,21 @@ bash scripts/dev/research-job.sh notify --state-dir /absolute/path/new-job-runti
 
 `submit`ごとに新しい状態ディレクトリを使う。同じディレクトリへ再submitせず、handshake不明時はstatusを読む。`run`はsubmitが開始するcontroller用の内部コマンドで、終了済みcommandを再実行しない。既存の実行中プロセスを取り込む機能はない。現在の生成は移管せず、次のjobの入口から採用する。
 
+## 比較cohort全体の親一か所への権限確認集約
+
+設定された複数laneの比較は、通常jobとして起動する一つの `research-lifecycle.py cohort --intent PARENT_SETTINGS --sha256 SHA` が所有する。最高位の親が開始前と既存の `control_interval_seconds` ごとにBeadsの担当・pause・closeを読み、固定rosterの子lane/operationはその実親のjob、PID/start/boot、argv/起動系統、宣言されたCPU roleとsourceに束縛する。子は既存controller/guardianによるlocal cancel・期限・資源・親identity/権限有効期限の監視を保ち、開始ごと・実行中・完了通知待ちにBeadsを重複照会しない。単独jobは通常の自分自身による権限確認を維持する。
+
+親のbounded DB読取り中もlocal cancel・signal・resource監視を行い、両pipe EOF後にDB childが生存する場合もcallbackと期限のpollを続ける。pause/close/owner変更/読取失敗では新operationを阻止し、既存cancel/シグナルで子へ停止を伝える。親喪失は既存子guardianがexact identityで検出する。DB待ち・poll・停止/回収処理には有限上限を持つが、OS schedulingやfilesystem待ちを含むゼロ遅延・hard real-time・全host回収を保証しない。cleanup一件の失敗でも他の子join、signal handler復元、handle close、結果保存を試み、primary/secondaryと未回収・UNKNOWNを分けて残す。最初のcancel（通常時はcleanup開始）から共通30秒を子grace・record待ちに使い、全対象へTERM、共通32秒でKILL、35秒まで非blocking waitで排出する。子ごとに待ち枠を積み上げず、親45秒の設定に後処理用10秒を残す相対envelopeである。
+
+権限・DB結果のcache/serviceや別の監視daemonは設けない。DB childのRAMは親common管理費へ含み、子ごとの小controller枠へ隠さない。完了した子は `delegated_to_parent` を保存し、正常完了又は制御停止の通知を親へまとめる。Beadsの書込みとbackupは担当開始・意味あるstage・終了/異常/pauseへまとめ、細進捗は既存state/log/resultへ置く。受入済み科学結果を再実行せず、明示された新継続は元失敗・追加試行・上限を区別した固定設定で入場する。
+
 ## 保存・停止・配送の境界
 
 - `state.json`: job/担当thread/commandとcontrollerのPID・boot・start ticks、実行状態。
 - `config.json`: submit時のcommand、期限、契約参照の固定値。
 - `result.json`: exit/失敗理由/時間/子回収結果。科学データ本体は既存の実験保存先に残す。
 - `output.log`: stdout+stderrの上限付き末尾。総byte数と保持byte数を区別し、全文ログが必要な実験は生成側で保存する。
-- `notification.json`: pending/delivered/uncertain/expired/cancelledと配送turn。submit時の宛先を変えず、現在のissue assigneeと明示thread IDを照合する。role名や定義hashへ依存しない。
+- `notification.json`: pending/delivered/uncertain/expired/cancelled（委譲子はdelegated_to_parent）と配送turn。submit時の宛先を変えず、現在のissue assigneeと明示thread IDを照合する。role名や定義hashへ依存しない。
 
 期限なしでもpause・終了・所有変更・明示cancelの点検とexact cleanupは維持する。停止/所有変更で完了通知を送れないことが確定した場合は通知待ちも終了し、期限なしの待機processを残さない。
 

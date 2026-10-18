@@ -8,6 +8,18 @@ Affected tests and Clippy may finish before the release BUILD. The accepted sour
 
 The native experiment preflight also consumes these bound prior checks when test/lint roles are absent from the BUILD ledger. It requires the accepted adoption to match the BUILD source and verifies original receipt/log identity, command and completed cleanup. It does not require historical source paths to retain their old Main bytes. The new executable must still come from the BUILD's own successful release command; prior checks cannot supply that role.
 
+## One authority parent for a configured comparison cohort
+
+The normal parent job runs:
+
+```text
+ABS_PYTHON -B ABS/scripts/dev/research-lifecycle.py cohort --intent ABS_PARENT_SETTINGS --sha256 SHA
+```
+
+Its frozen settings and roster compose the maintained lane `sequence` jobs. Only that top parent reads Beads at actual entry and during execution. Delegated lane and operation jobs require the live original parent job/runtime/config, exact PID/start/boot, argv/ancestry, declared management CPU roles, member declaration and current caller sources. An environment flag cannot delegate authority. Standalone jobs retain their ordinary self-parent checks. Parent, bounded DB child and outer control trees belong to common RAM accounting; native/controller lane families remain separate within the aggregate.
+
+The bounded parent reader continues local control callbacks after pipe EOF until child exit or its deadline. Parent authority failure, pause, close, ownership change or local cancellation blocks further entry and propagates existing cancellation. Child/native guardians independently watch exact parent loss and retain local resource/deadline checks. Cleanup attempts each remaining join/termination/close, signal restoration and result publication even when another obligation fails; primary and secondary failures, unreaped identities and UNKNOWN remain distinct. A shared anchor at first cancel (normal cleanup entry otherwise) covers the 30-second child grace/record wait, all-child TERM, KILL at 32 and nonblocking drain through 35 seconds; child-specific blocking waits are not summed. The configured outer grace is 45 seconds, reserving 10 for final obligations. Poll/read/cleanup bounds are finite code-level controls, not hard real-time or all-host cleanup claims. Delegated child notifications are recorded as `delegated_to_parent`; ordinary parent completion owns the aggregate event. No authority cache/service, new daemon or second scheduler is introduced.
+
 ## Public commands and ownership
 
 Submit one frozen build/run intent through existing `research-job.sh`; its `argv` is:

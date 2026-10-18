@@ -25,8 +25,10 @@ class SessionError(RuntimeError):
 
 
 def command_json(
-    args: list[str], *, timeout: float = 30, max_bytes: int | None = None
+    args: list[str], *, timeout: float = 30, max_bytes: int | None = None, check=None
 ) -> dict | list:
+    if check is not None and max_bytes is None:
+        raise SessionError("Local control requires the bounded command reader")
     if max_bytes is None:
         result = subprocess.run(args, capture_output=True, text=True, check=True, timeout=timeout)
         return json.loads(result.stdout)
@@ -44,16 +46,26 @@ def command_json(
     error_bytes = 0
     error_tail = bytearray()
     deadline = time.monotonic() + timeout
+    primary = None
+    value = None
     try:
         streams.register(child.stdout, selectors.EVENT_READ, "out")
         streams.register(child.stderr, selectors.EVENT_READ, "err")
-        while streams.get_map():
+        while streams.get_map() or child.poll() is None:
+            if check is not None:
+                check()
             remaining = deadline - time.monotonic()
             if remaining <= 0:
                 raise SessionError(
-                    "Bounded issue authority read timed out: " + error_tail.decode(errors="replace")
+                    "Bounded issue authority read timed out: stderr="
+                    + error_tail.decode(errors="replace")
+                    + "; stdout_tail="
+                    + output[-4096:].decode(errors="replace")
                 )
-            for key, _ in streams.select(remaining):
+            if not streams.get_map():
+                time.sleep(min(remaining, 0.2))
+                continue
+            for key, _ in streams.select(min(remaining, 0.2)):
                 chunk = os.read(key.fileobj.fileno(), 8192)
                 if not chunk:
                     streams.unregister(key.fileobj)
@@ -67,24 +79,54 @@ def command_json(
                     del error_tail[:-4096]
                     if error_bytes > 65536:
                         raise SessionError("Bounded issue authority error exceeds 64KiB")
-        code = child.wait(timeout=max(0.001, deadline - time.monotonic()))
+        if check is not None:
+            check()
+        code = child.wait(timeout=min(0.2, max(0.001, deadline - time.monotonic())))
         if code != 0:
             raise SessionError(
                 f"Bounded issue authority read failed (exit {code}): "
                 + error_tail.decode(errors="replace")
+                + "; stdout_tail="
+                + output[-4096:].decode(errors="replace")
             )
-        return json.loads(output)
+        value = json.loads(output)
+    except BaseException as error:
+        primary = error
     finally:
-        if child.poll() is None or streams.get_map():
+        secondary = []
+
+        def attempt(stage, action, default=None):
             try:
-                os.killpg(child.pid, signal.SIGKILL)
-            except ProcessLookupError:
-                pass
-        child.wait()
-        streams.close()
-        for stream in (child.stdout, child.stderr):
+                return action()
+            except BaseException as error:
+                error.add_note("bounded authority cleanup: " + stage)
+                secondary.append(error)
+                return default
+
+        running = attempt("child poll", lambda: child.poll() is None, True)
+        open_streams = attempt("selector state", lambda: bool(streams.get_map()), True)
+        if running or open_streams:
+
+            def kill_group():
+                try:
+                    os.killpg(child.pid, signal.SIGKILL)
+                except ProcessLookupError:
+                    pass
+
+            attempt("kill owned read group", kill_group)
+        attempt("finite direct wait", lambda: child.wait(timeout=3))
+        attempt("selector close", streams.close)
+        for name, stream in (("stdout", child.stdout), ("stderr", child.stderr)):
             if stream is not None:
-                stream.close()
+                attempt(name + " close", stream.close)
+        if secondary:
+            raise BaseExceptionGroup(
+                "bounded authority read/cleanup failures",
+                [*([primary] if primary is not None else []), *secondary],
+            )
+    if primary is not None:
+        raise primary
+    return value
 
 
 def project_root(checkout: Path = CHECKOUT) -> Path:

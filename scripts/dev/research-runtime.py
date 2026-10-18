@@ -91,7 +91,7 @@ class AppBackend:
     def __init__(self, root):
         self.root = root
 
-    def issues(self, issues, *, timeout=30):
+    def issues(self, issues, *, timeout=30, check=None):
         """Read the requested authority records in one bounded store invocation."""
         issues = list(dict.fromkeys(issues))
         if not issues:
@@ -101,6 +101,7 @@ class AppBackend:
             for issue in issues
         ):
             raise RuntimeError("Authority issue IDs must be exact nonempty IDs")
+        control = {} if check is None else {"check": check}
         result = client.command_json(
             [
                 "bash",
@@ -119,6 +120,7 @@ class AppBackend:
             ],
             timeout=timeout,
             max_bytes=65536,
+            **control,
         )
         if not isinstance(result, list):
             raise RuntimeError("Authority list response must be a complete row list")
