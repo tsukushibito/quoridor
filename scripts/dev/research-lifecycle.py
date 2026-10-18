@@ -254,9 +254,9 @@ def arena_cohort(spec):
     )
     require(
         settings["kind"] == "sequence"
-        and len(settings["runs"]) == 32
+        and 0 < len(settings["runs"]) <= 32
         and settings["output"] == member["output"],
-        "finite 32-operation lane",
+        "finite lane of at most 32 operations",
     )
     selected_run(spec, document(spec["experiment"]))
     phase = Path(member["output"]) / f"run-{spec['selection_index']:03d}"
@@ -268,7 +268,7 @@ def arena_cohort(spec):
     config = document(experiment["config"])
     require(
         experiment["phase"] == "arena"
-        and config["arena"]["comparison"] == "whole_wall_time"
+        and config["arena"]["comparison"] in {"whole_wall_time", "search_wall_time"}
         and config["cpu_cores"] == member["AI_workers"]
         and config["management_cpu_core"] == member["main_cpu"]
         and spec["limits"]["family_B"] == member["family_B"]
@@ -1254,7 +1254,8 @@ def arena_cpu_cores(spec):
     ai = config.get("cpu_cores")
     main = config.get("management_cpu_core")
     require(
-        config.get("arena", {}).get("comparison") in {"whole_wall_time", "evaluator_fixed_depth"}
+        config.get("arena", {}).get("comparison")
+        in {"whole_wall_time", "evaluator_fixed_depth", "search_wall_time"}
         and all(config.get(k) == 1 for k in ("workers", "active_games", "max_batch"))
         and config.get("inference_cpu_core") is None
         and isinstance(ai, list)
@@ -2886,7 +2887,7 @@ def experiment_check(spec):
         arena_plan_check(experiment, approved)
         arena_config = document(experiment["config"])
         if arena_config["arena"]["comparison"] == "whole_wall_time" or (
-            arena_config["arena"]["comparison"] == "evaluator_fixed_depth"
+            arena_config["arena"]["comparison"] in {"evaluator_fixed_depth", "search_wall_time"}
             and arena_config.get("management_cpu_core") is not None
         ):
             arena_cpu_cores(spec)

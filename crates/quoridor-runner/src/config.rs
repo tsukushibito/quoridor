@@ -257,10 +257,12 @@ impl Config {
         Ok((train, validation))
     }
     pub fn validate(&self) -> Result<(), String> {
-        let wall_time = self
-            .arena
-            .as_ref()
-            .is_some_and(|a| a.comparison == crate::arena::Comparison::WholeWallTime);
+        let wall_time = self.arena.as_ref().is_some_and(|a| {
+            matches!(
+                a.comparison,
+                crate::arena::Comparison::WholeWallTime | crate::arena::Comparison::SearchWallTime
+            )
+        });
         let evaluation = self.evaluation_workers();
         if evaluation {
             if self.workers != 1
@@ -286,7 +288,8 @@ impl Config {
             }
         } else if self.management_cpu_core.is_some() {
             return Err(
-                "management_cpu_core belongs only to whole-wall or fixed-depth evaluation".into(),
+                "management_cpu_core belongs only to managed timed or fixed-depth evaluation"
+                    .into(),
             );
         }
 
@@ -687,5 +690,49 @@ mod bounded_mcts_benchmark_config_tests {
                 .get("benchmark_repetitions")
                 .is_none()
         );
+    }
+}
+
+#[cfg(test)]
+mod managed_search_clock_config_tests {
+    use super::*;
+
+    #[test]
+    fn full_config_managed_search_clock_and_execution_guards() {
+        // Metadata only: no model, prefix replay, clock measurement or Search.
+        let mut c: Config =
+            serde_json::from_str(include_str!("../tests/fixtures/sigma-clock-config.json"))
+                .unwrap();
+        let arena = c.arena.as_mut().unwrap();
+        arena.comparison = crate::arena::Comparison::SearchWallTime;
+        arena.evaluator_sha256 = vec!["a".repeat(64); 2];
+        arena.search_artifact_sha256 = vec!["b".repeat(64); 2];
+        arena.max_total_nodes = Some(500_000_000);
+        c.engines[0].zero_stock_safe_race = Some(true);
+        c.engines[0].zero_stock_safe_race_method = Some("path_tail".into());
+        c.engines[1].zero_stock_safe_race = Some(false);
+        c.engines[1].zero_stock_safe_race_method = Some("manhattan".into());
+        c.cpu_cores = vec![2, 4];
+        c.management_cpu_core = Some(6);
+        c.max_batch = 1;
+        c.validate()
+            .expect("full managed timed SearchWallTime config");
+        for case in 0..8 {
+            let mut bad = c.clone();
+            match case {
+                0 => bad.engines[0].time_ms = None,
+                1 => bad.engines[0].time_ms = Some(0),
+                2 => bad.management_cpu_core = None,
+                3 => bad.workers = 2,
+                4 => bad.active_games = 2,
+                5 => bad.max_batch = 2,
+                6 => bad.inference_cpu_core = Some(4),
+                _ => {
+                    bad.arena.as_mut().unwrap().comparison =
+                        crate::arena::Comparison::EvaluatorFixedDepth;
+                }
+            }
+            assert!(bad.validate().is_err(), "case {case}");
+        }
     }
 }
