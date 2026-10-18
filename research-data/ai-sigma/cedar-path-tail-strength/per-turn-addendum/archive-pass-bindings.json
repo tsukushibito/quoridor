@@ -1,0 +1,1479 @@
+{
+  "at": "2026-10-18T09:23:58.665186+00:00",
+  "original_scope": {
+    "games": 1024,
+    "families": 512,
+    "operations": 32,
+    "old96_separate_data_acceptance": "d1c81a3ee17a51db124752cd8ce71a0b6c584ae753f2c136a9bff153e1e24e59",
+    "no_physical_old96_retry": true
+  },
+  "projection_source": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/project_original_turns.py",
+    "sha256": "5dfe045f4de9a29be62be7954eca97b11af2a74f059cc6a646206a21a602d6a5",
+    "bytes": 16967,
+    "mode": "0644"
+  },
+  "immutable_original_inputs": {
+    "completion.json": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/completion.json",
+      "sha256": "771b63f6bb9e72d71d52180188388e94c9cc43631bef1e2f19e5de3309433c22",
+      "bytes": 9940,
+      "mode": "0644"
+    },
+    "result.json": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/result.json",
+      "sha256": "6483bfca30864762343a80e4415f2652042041217ddc2b4c8844bd0b6782fde4",
+      "bytes": 24450,
+      "mode": "0644"
+    },
+    "report-ja.md": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/report-ja.md",
+      "sha256": "5f37a793499be3746229da3077f792b83dd0583efc08097825e2ed3b9e5f7e01",
+      "bytes": 6448,
+      "mode": "0644"
+    },
+    "bootstrap-receipt.json": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/bootstrap-receipt.json",
+      "sha256": "801441123a6c4259ad59a4f8f08a916b736ba67a60292f94e91e19273894c6e8",
+      "bytes": 2492,
+      "mode": "0644"
+    },
+    "bootstrap-output.json": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/bootstrap-output.json",
+      "sha256": "8e705968b0e00b7ad514ae529f4a767d63d12090b6eee5fb061516ef228e087a",
+      "bytes": 664,
+      "mode": "0644"
+    },
+    "games.csv": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/games.csv",
+      "sha256": "98dce294be36121402ef8509937dc29c7a33116e3505f3ef0b767ce8862cb4d5",
+      "bytes": 287842,
+      "mode": "0644"
+    },
+    "families.csv": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/families.csv",
+      "sha256": "005fffda3c2be9e1b684991fdf1ff2710aa2e171a8795c1ac523a8de6fdc0b1d",
+      "bytes": 146094,
+      "mode": "0644"
+    },
+    "tuple-bindings.json": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/tuple-bindings.json",
+      "sha256": "5a678a9672c986acdf677144a0d9ba40c87cc1e99aa26807ec0597dffb8491c9",
+      "bytes": 73699,
+      "mode": "0644"
+    }
+  },
+  "archives": [
+    {
+      "operation": 0,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/batch-00/data/completed.jsonl.gz",
+          "sha256": "8104e23937b9cb78c88d1749e1ea6ecaa4b430c72798573337ba80b56f67bce6",
+          "bytes": 1034472,
+          "mode": "0644"
+        },
+        "raw_sha256": "7e455cda3d2360a97cdb592819c88672e652a2cdc48a222502f2a74833c7294c",
+        "raw_bytes": 5984949
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/batch-00/data/completed.jsonl.gz",
+          "sha256": "8104e23937b9cb78c88d1749e1ea6ecaa4b430c72798573337ba80b56f67bce6",
+          "bytes": 1034472,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/batch-00/data/manifest.json",
+          "sha256": "73dbd80b23b1e0573b776e633013711c4adedde859429406a46877c524b8a651",
+          "bytes": 76708,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/batch-00/data/result.json",
+          "bytes": 7485,
+          "mode": "0644",
+          "sha256": "5b8622d0a3ce992f9a2abff52cc61b992361f9399f5380caaa8ac2792d00d637"
+        }
+      },
+      "source_tuple": "saved96_image75f_BUILD637_source6d2_caller524f_reader4f",
+      "executed_image_sha256": "75f00c6afa3122ab5d4e432c388b3c00afaf3af4a3fee7111b125c24faa98622",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/execution-v1/run-000/operation/manifest.json",
+        "sha256": "184841ee806b632f20e40233aea4159d99a2413499bd744b3560efe012563238",
+        "bytes": 9325,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 1,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/batch-01/data/completed.jsonl.gz",
+          "sha256": "3aaeb3e2697f93985b5b34c00b0b1d8358f07cff6632264b85b2a8d0e9fcc630",
+          "bytes": 1120832,
+          "mode": "0644"
+        },
+        "raw_sha256": "4a5abffc1aea318ab59c539fc0e073ed23656cadb4e3f9d20ab4d8529440e7be",
+        "raw_bytes": 6473986
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/batch-01/data/completed.jsonl.gz",
+          "sha256": "3aaeb3e2697f93985b5b34c00b0b1d8358f07cff6632264b85b2a8d0e9fcc630",
+          "bytes": 1120832,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/batch-01/data/manifest.json",
+          "sha256": "4ed6d8ba20deb761fd1e7184d05485601f21e7f4819dfafec2d8329537c2de33",
+          "bytes": 76647,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/batch-01/data/result.json",
+          "bytes": 7448,
+          "mode": "0644",
+          "sha256": "f81f71480e15ac10470a9cf5e334f8b5baea04289de9ff498d450854eba5a2c6"
+        }
+      },
+      "source_tuple": "saved96_image75f_BUILD637_source6d2_caller524f_reader4f",
+      "executed_image_sha256": "75f00c6afa3122ab5d4e432c388b3c00afaf3af4a3fee7111b125c24faa98622",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/execution-v1/run-000/operation/manifest.json",
+        "sha256": "48f4ce14e055874474989be614ef18d4e51e068ef9e37a1db31d1b53e705bd2d",
+        "bytes": 9335,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 2,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/batch-02/data/completed.jsonl.gz",
+          "sha256": "2da4b4416afdd857209f7bf1438c0a8e016de25a90e70ae0d65a3478766bb689",
+          "bytes": 1086771,
+          "mode": "0644"
+        },
+        "raw_sha256": "cd3418b62c49ca618db147b0bd201e77d451135c29fac9b6c9f01e45c8a6b496",
+        "raw_bytes": 6302717
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/batch-02/data/completed.jsonl.gz",
+          "sha256": "2da4b4416afdd857209f7bf1438c0a8e016de25a90e70ae0d65a3478766bb689",
+          "bytes": 1086771,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/batch-02/data/manifest.json",
+          "sha256": "49c42177988875a1e2bdf1d7588c1e3cb5bb1f3d5da77cf289b8483dc5298143",
+          "bytes": 76722,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/batch-02/data/result.json",
+          "bytes": 7478,
+          "mode": "0644",
+          "sha256": "379953677f2004db45491ff351b480c5615c6719563858908fb131ab15499ace"
+        }
+      },
+      "source_tuple": "saved96_image75f_BUILD637_source6d2_caller524f_reader4f",
+      "executed_image_sha256": "75f00c6afa3122ab5d4e432c388b3c00afaf3af4a3fee7111b125c24faa98622",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/execution-v1/run-000/operation/manifest.json",
+        "sha256": "d145885b71a128f724d3d0ea8cf9e89dfe48f3124f9b3f45ed55d3134807eef1",
+        "bytes": 9335,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 3,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-03/data/completed.jsonl.gz",
+          "sha256": "5fcefb64cbfdf61054e15b755b53f2c5aeb0fef835660ccfc915b6016aec80d0",
+          "bytes": 1046132,
+          "mode": "0644"
+        },
+        "raw_sha256": "62b47f3343b36a236a2f19fd57b3b0cb42350a99bc96a12acaccf3a8ada13206",
+        "raw_bytes": 6078163
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-03/data/completed.jsonl.gz",
+          "sha256": "5fcefb64cbfdf61054e15b755b53f2c5aeb0fef835660ccfc915b6016aec80d0",
+          "bytes": 1046132,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-03/data/manifest.json",
+          "sha256": "3de147af17203ee1c6afffd5e07086eb10655c383b90f6158b67da42fce14b80",
+          "bytes": 76754,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-03/data/result.json",
+          "bytes": 7465,
+          "mode": "0644",
+          "sha256": "d69b9f35be22cd76f89d57378098760d9997026df4b3f8e6fbbffc615419ef71"
+        }
+      },
+      "source_tuple": "new928_image2be3_BUILD9ea_source9a_caller4f",
+      "executed_image_sha256": "2be3db78749a494701d8fb50e815da6b16d9628e060a2bd89fc3c16fbe61c209",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/execution-v1/run-000/operation/manifest.json",
+        "sha256": "b1aedf3afa92a01bbc6341dada910c655b1237b049ff96469c24a63eebcc582a",
+        "bytes": 7930,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 4,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-04/data/completed.jsonl.gz",
+          "sha256": "e75fe5d369ed8a9d5a7b34bdcfb84daf64efee6eb4a4fbc121e9b4c649c6c0a3",
+          "bytes": 1101176,
+          "mode": "0644"
+        },
+        "raw_sha256": "9cd69360db3e4506583e327cb9b7f4a8b93d9c0476711404ac15b83355f20f0b",
+        "raw_bytes": 6375446
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-04/data/completed.jsonl.gz",
+          "sha256": "e75fe5d369ed8a9d5a7b34bdcfb84daf64efee6eb4a4fbc121e9b4c649c6c0a3",
+          "bytes": 1101176,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-04/data/manifest.json",
+          "sha256": "c8b69e63fbf803f4726e6e3f992a64f721ec529310639a50271fab41e3c67374",
+          "bytes": 76856,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-04/data/result.json",
+          "bytes": 7476,
+          "mode": "0644",
+          "sha256": "835ed6df77b907fc77d9d217e58c64330e641b0e6e65168036b25ebc5dd528ff"
+        }
+      },
+      "source_tuple": "new928_image2be3_BUILD9ea_source9a_caller4f",
+      "executed_image_sha256": "2be3db78749a494701d8fb50e815da6b16d9628e060a2bd89fc3c16fbe61c209",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/execution-v1/run-000/operation/manifest.json",
+        "sha256": "0129bfe70722ed830edfc0610826a0cb1e6e86adeba17bf26a425e66bb3b929e",
+        "bytes": 7933,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 5,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-05/data/completed.jsonl.gz",
+          "sha256": "8b2d43a86b70613e28a36a6f4fad648e1e7d0eedb2a1b4c27512935c1acf3446",
+          "bytes": 1137866,
+          "mode": "0644"
+        },
+        "raw_sha256": "c6341f2a2ea395d8e8bc2c9f0592c654e03adb76b7113b6e9a250e2e30562ed6",
+        "raw_bytes": 6601354
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-05/data/completed.jsonl.gz",
+          "sha256": "8b2d43a86b70613e28a36a6f4fad648e1e7d0eedb2a1b4c27512935c1acf3446",
+          "bytes": 1137866,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-05/data/manifest.json",
+          "sha256": "2521f11c72471a85b2e272bf9ccdfea1a8f648762fb0ab90abafddeb183107ee",
+          "bytes": 76150,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-05/data/result.json",
+          "bytes": 7466,
+          "mode": "0644",
+          "sha256": "6c51b45da6d350a55539aa81f744ca5e352505a4fc05eb226bf848aea1177f7c"
+        }
+      },
+      "source_tuple": "new928_image2be3_BUILD9ea_source9a_caller4f",
+      "executed_image_sha256": "2be3db78749a494701d8fb50e815da6b16d9628e060a2bd89fc3c16fbe61c209",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/execution-v1/run-000/operation/manifest.json",
+        "sha256": "6f50785106b6d9e673b434cfcec8d6eefc595420983ca6372550c0cd89bcd28d",
+        "bytes": 7933,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 6,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-06/data/completed.jsonl.gz",
+          "sha256": "491b94509e6aacac4d0611a21bccb007788b1d6f657b10edbce6cc7c8a53b95a",
+          "bytes": 1084282,
+          "mode": "0644"
+        },
+        "raw_sha256": "fc2b27bbad72dadac0212281b79bfe629634fd1fe338f9640704ee9285713f26",
+        "raw_bytes": 6250388
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-06/data/completed.jsonl.gz",
+          "sha256": "491b94509e6aacac4d0611a21bccb007788b1d6f657b10edbce6cc7c8a53b95a",
+          "bytes": 1084282,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-06/data/manifest.json",
+          "sha256": "abfa94c6cd40a75f0249c08d67315e5f333535b2dd7175346d83571a88dd9827",
+          "bytes": 76103,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-06/data/result.json",
+          "bytes": 7469,
+          "mode": "0644",
+          "sha256": "f1ff889a535a579583d89bfe96d3264492e046e745f0e6d7283236bea4f54350"
+        }
+      },
+      "source_tuple": "new928_image2be3_BUILD9ea_source9a_caller4f",
+      "executed_image_sha256": "2be3db78749a494701d8fb50e815da6b16d9628e060a2bd89fc3c16fbe61c209",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/execution-v1/run-001/operation/manifest.json",
+        "sha256": "413dc5827511b55f686767802fa68128518bc5736de4bdac9d5b4f1ba1914cfd",
+        "bytes": 7933,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 7,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-07/data/completed.jsonl.gz",
+          "sha256": "5264896898522c892789890e7d3747bb5dcbbd9915f20e77679b56f98bc86287",
+          "bytes": 1026611,
+          "mode": "0644"
+        },
+        "raw_sha256": "b463c306cb10174ce10b0dce7d3f410c28ab8c067b52ed64749518ac50d80eb3",
+        "raw_bytes": 5952329
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-07/data/completed.jsonl.gz",
+          "sha256": "5264896898522c892789890e7d3747bb5dcbbd9915f20e77679b56f98bc86287",
+          "bytes": 1026611,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-07/data/manifest.json",
+          "sha256": "16db3aace1b3309ef8397716e7fc9636320ac779a68e25a19686851e168f3c77",
+          "bytes": 76660,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-07/data/result.json",
+          "bytes": 7492,
+          "mode": "0644",
+          "sha256": "3cdb9d909fabeca721af6d0d85e1c5e563507514dec291bc031ae35e5f217395"
+        }
+      },
+      "source_tuple": "new928_image2be3_BUILD9ea_source9a_caller4f",
+      "executed_image_sha256": "2be3db78749a494701d8fb50e815da6b16d9628e060a2bd89fc3c16fbe61c209",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/execution-v1/run-001/operation/manifest.json",
+        "sha256": "73b2039f117f92a9d8497e4b540966285876e70021f3562fb438c1da62212f83",
+        "bytes": 7934,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 8,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-08/data/completed.jsonl.gz",
+          "sha256": "30c00781978c9731347e20ab39bae36d36c35f8d797770779d2e9950a3aa8081",
+          "bytes": 1087900,
+          "mode": "0644"
+        },
+        "raw_sha256": "8522d1df8f4e966066f9f753d8bae674ee845d5eb1dd0a800b48b4e5278ecd83",
+        "raw_bytes": 6343568
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-08/data/completed.jsonl.gz",
+          "sha256": "30c00781978c9731347e20ab39bae36d36c35f8d797770779d2e9950a3aa8081",
+          "bytes": 1087900,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-08/data/manifest.json",
+          "sha256": "38254f968d6377ed6c18a8c4bc1eb3480754a9c7e45f08df0b82a15027975a2a",
+          "bytes": 75322,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-08/data/result.json",
+          "bytes": 7480,
+          "mode": "0644",
+          "sha256": "17c467bbc487a7200fdc9e6b3ce227155dcf559b6759613b331ab389e5f74296"
+        }
+      },
+      "source_tuple": "new928_image2be3_BUILD9ea_source9a_caller4f",
+      "executed_image_sha256": "2be3db78749a494701d8fb50e815da6b16d9628e060a2bd89fc3c16fbe61c209",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/execution-v1/run-001/operation/manifest.json",
+        "sha256": "c53ae9c2905cc4ccb4852e6de57a50511b62b7dd19cf5e2b3c600f7eb3b34cac",
+        "bytes": 7933,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 9,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-09/data/completed.jsonl.gz",
+          "sha256": "af7b964f649ca311abd6d047782fefc8b5de6ec352055110f8f67ecfd58118e7",
+          "bytes": 1110085,
+          "mode": "0644"
+        },
+        "raw_sha256": "7a6f7ecb2aa659bdab215543146191534e8b8d3789950c9b46728ec717fbb5a2",
+        "raw_bytes": 6485108
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-09/data/completed.jsonl.gz",
+          "sha256": "af7b964f649ca311abd6d047782fefc8b5de6ec352055110f8f67ecfd58118e7",
+          "bytes": 1110085,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-09/data/manifest.json",
+          "sha256": "10f409841cbcd727112a9a82247bc749276f18d1c59226aa41e6c9f4ae657577",
+          "bytes": 76553,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-09/data/result.json",
+          "bytes": 7477,
+          "mode": "0644",
+          "sha256": "353bd3ddef605115a9cd82762113647f51481c46959e40dad7a89fd2ed197f37"
+        }
+      },
+      "source_tuple": "new928_image2be3_BUILD9ea_source9a_caller4f",
+      "executed_image_sha256": "2be3db78749a494701d8fb50e815da6b16d9628e060a2bd89fc3c16fbe61c209",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/execution-v1/run-002/operation/manifest.json",
+        "sha256": "5f5a463a2bfb7f268357b732ea276bfed3917f7e93aaf34fc8576e369bec9bed",
+        "bytes": 7934,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 10,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-10/data/completed.jsonl.gz",
+          "sha256": "a7844dac044bda726e885d03ab9a5238dcdbaa190dabd0feac4d930f3fa7f232",
+          "bytes": 1151250,
+          "mode": "0644"
+        },
+        "raw_sha256": "a6660772efb8e68808e9d036818d9c696b4dbb1319e4f08462b6746ec02307b0",
+        "raw_bytes": 6653419
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-10/data/completed.jsonl.gz",
+          "sha256": "a7844dac044bda726e885d03ab9a5238dcdbaa190dabd0feac4d930f3fa7f232",
+          "bytes": 1151250,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-10/data/manifest.json",
+          "sha256": "edc24a8777748620ccdce545ab41ca0599def31f219c99ccf1c740c6ec6abbb1",
+          "bytes": 76711,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-10/data/result.json",
+          "bytes": 7485,
+          "mode": "0644",
+          "sha256": "ca6d18112240bc100f26bdfe8437b6801383565a274b140ae8fbf2037ebdf91b"
+        }
+      },
+      "source_tuple": "new928_image2be3_BUILD9ea_source9a_caller4f",
+      "executed_image_sha256": "2be3db78749a494701d8fb50e815da6b16d9628e060a2bd89fc3c16fbe61c209",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/execution-v1/run-002/operation/manifest.json",
+        "sha256": "124a2830a97e577c0c9d13b20ec3c07baf8bbc6687e57d23573df8d9fb57ce02",
+        "bytes": 7934,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 11,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-11/data/completed.jsonl.gz",
+          "sha256": "ad0b9dfa5162573573686de88ba8871431de2616946bc33451ec0ab4d84be19c",
+          "bytes": 1051672,
+          "mode": "0644"
+        },
+        "raw_sha256": "18a57b166a7b7561760345386d4b4f3fb062aef7184ce8dafc510748218107fe",
+        "raw_bytes": 6117715
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-11/data/completed.jsonl.gz",
+          "sha256": "ad0b9dfa5162573573686de88ba8871431de2616946bc33451ec0ab4d84be19c",
+          "bytes": 1051672,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-11/data/manifest.json",
+          "sha256": "e67dc8e93264bc90408ec040520d45b5e24e9a0b8bdd08f2efe7ebad63849bf3",
+          "bytes": 76365,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-11/data/result.json",
+          "bytes": 7474,
+          "mode": "0644",
+          "sha256": "d1f4da2b89ad698092c965d48089384906db3c2a0380a56bcc5854b79d2e9a97"
+        }
+      },
+      "source_tuple": "new928_image2be3_BUILD9ea_source9a_caller4f",
+      "executed_image_sha256": "2be3db78749a494701d8fb50e815da6b16d9628e060a2bd89fc3c16fbe61c209",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/execution-v1/run-002/operation/manifest.json",
+        "sha256": "2011404047268e3545aecd3c7fd93fa8a17219d11fab43d90b31249a09647cb3",
+        "bytes": 7935,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 12,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-12/data/completed.jsonl.gz",
+          "sha256": "557105e1187810dc2e14798567f1aa7cdb542b1b7e8eb53a045a843f136a1418",
+          "bytes": 1124014,
+          "mode": "0644"
+        },
+        "raw_sha256": "58842d0b00401fedb5b438e03df5a55c77ea597b5f542e7c617cc8793b2a6e5b",
+        "raw_bytes": 6500640
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-12/data/completed.jsonl.gz",
+          "sha256": "557105e1187810dc2e14798567f1aa7cdb542b1b7e8eb53a045a843f136a1418",
+          "bytes": 1124014,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-12/data/manifest.json",
+          "sha256": "14a68c75448b6fe70890fef0653bc06d6ce1cccf77f02feb65b2082e1b643191",
+          "bytes": 76958,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-12/data/result.json",
+          "bytes": 7491,
+          "mode": "0644",
+          "sha256": "9d93352fdb655640f0b333aac959f2e0fb6b60e7140ac7883d7dae008c5d24c7"
+        }
+      },
+      "source_tuple": "new928_image2be3_BUILD9ea_source9a_caller4f",
+      "executed_image_sha256": "2be3db78749a494701d8fb50e815da6b16d9628e060a2bd89fc3c16fbe61c209",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/execution-v1/run-003/operation/manifest.json",
+        "sha256": "96f70697039a44b405fa8f1d3619eb1a19f985b3ae1e24498c0ad887af272fd0",
+        "bytes": 7934,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 13,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-13/data/completed.jsonl.gz",
+          "sha256": "dc948b144e96bc9aceb1465a67a9841ac422c33468ba865ee8b1a7e15e984d90",
+          "bytes": 1068973,
+          "mode": "0644"
+        },
+        "raw_sha256": "dec815ff77608b440a90c49110e563941767d5131ada364a765b4b5acd21dabc",
+        "raw_bytes": 6224603
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-13/data/completed.jsonl.gz",
+          "sha256": "dc948b144e96bc9aceb1465a67a9841ac422c33468ba865ee8b1a7e15e984d90",
+          "bytes": 1068973,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-13/data/manifest.json",
+          "sha256": "edbf4ba11efd9f9896e3e740e82e8d223cdd16f9aad87a096824ba98984d6cde",
+          "bytes": 76664,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-13/data/result.json",
+          "bytes": 7480,
+          "mode": "0644",
+          "sha256": "aaeb6455e171aacb1107d36320122dcf80328ef735290f1afacafc3c736f7e6c"
+        }
+      },
+      "source_tuple": "new928_image2be3_BUILD9ea_source9a_caller4f",
+      "executed_image_sha256": "2be3db78749a494701d8fb50e815da6b16d9628e060a2bd89fc3c16fbe61c209",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/execution-v1/run-003/operation/manifest.json",
+        "sha256": "294f3e3ec611296dc7e34256917544aae5530a249198e132958435f10c663fde",
+        "bytes": 7935,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 14,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-14/data/completed.jsonl.gz",
+          "sha256": "ced94402461e98e19b668d1e462c707b9c22a2556a76d2b2e6bff71debffcb4a",
+          "bytes": 1080846,
+          "mode": "0644"
+        },
+        "raw_sha256": "a7a4f4d0aedc5be3d4edd4e091e3792cdace35f9c774b02db30a29e15bff50c4",
+        "raw_bytes": 6271182
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-14/data/completed.jsonl.gz",
+          "sha256": "ced94402461e98e19b668d1e462c707b9c22a2556a76d2b2e6bff71debffcb4a",
+          "bytes": 1080846,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-14/data/manifest.json",
+          "sha256": "a44ea3f2dd72bd8323a0bef288ff0120fa29efec8a76188b971eec9ea6bbf2d1",
+          "bytes": 76777,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-14/data/result.json",
+          "bytes": 7481,
+          "mode": "0644",
+          "sha256": "3ef6c06aa2e18a84fb9be16c6f2e2567eb3f9d2dc6316360ddf5fc6de461f9a0"
+        }
+      },
+      "source_tuple": "new928_image2be3_BUILD9ea_source9a_caller4f",
+      "executed_image_sha256": "2be3db78749a494701d8fb50e815da6b16d9628e060a2bd89fc3c16fbe61c209",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/execution-v1/run-003/operation/manifest.json",
+        "sha256": "42b0c72d1502c55d9d4dfecebd03181985f4c656fe9b2a664edbfcfb9fcb427c",
+        "bytes": 7935,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 15,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-15/data/completed.jsonl.gz",
+          "sha256": "b5b6b6e6207a76af3e2484cef55c8736e973a64bc91477c8bd548bfcf1e9f145",
+          "bytes": 1216736,
+          "mode": "0644"
+        },
+        "raw_sha256": "6fcaa1e9a9e7bfbbca908ed165be49168a80fe571ef95b5aae0ff0fe69ee5fb5",
+        "raw_bytes": 7065085
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-15/data/completed.jsonl.gz",
+          "sha256": "b5b6b6e6207a76af3e2484cef55c8736e973a64bc91477c8bd548bfcf1e9f145",
+          "bytes": 1216736,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-15/data/manifest.json",
+          "sha256": "c1e0b15ddd072dc70711e4314d8f8e5e1ef41cb269ce0d3d2f19d03ceac7470b",
+          "bytes": 79279,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-15/data/result.json",
+          "bytes": 7494,
+          "mode": "0644",
+          "sha256": "79e0a7f925a57903a518c92436ffefa912ed41d5901c1882505be9b6656fd9a7"
+        }
+      },
+      "source_tuple": "new928_image2be3_BUILD9ea_source9a_caller4f",
+      "executed_image_sha256": "2be3db78749a494701d8fb50e815da6b16d9628e060a2bd89fc3c16fbe61c209",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/execution-v1/run-004/operation/manifest.json",
+        "sha256": "c4d9dabd389105b600d7872afe026fb460b2a3232ac5ef73dd7964faf7bac8a4",
+        "bytes": 7935,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 16,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-16/data/completed.jsonl.gz",
+          "sha256": "00a1c8206d65c237ecc2460e219582a3dfbfdd591d88cf53f0fdeab83d30a853",
+          "bytes": 1085170,
+          "mode": "0644"
+        },
+        "raw_sha256": "7163b6a307fff8e391bff3a6195e640173008931f03721d903da198f4cefa4b4",
+        "raw_bytes": 6309172
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-16/data/completed.jsonl.gz",
+          "sha256": "00a1c8206d65c237ecc2460e219582a3dfbfdd591d88cf53f0fdeab83d30a853",
+          "bytes": 1085170,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-16/data/manifest.json",
+          "sha256": "d249a3205431c86702536140450ece0f90ecfcdbd2a41d5240b79a6ad4c1e3ca",
+          "bytes": 76978,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-16/data/result.json",
+          "bytes": 7478,
+          "mode": "0644",
+          "sha256": "b8e1e8976853e87450c38ce39a4ca849bc0c4bf8ba0680112cbe9ebff3fd9b3a"
+        }
+      },
+      "source_tuple": "new928_image2be3_BUILD9ea_source9a_caller4f",
+      "executed_image_sha256": "2be3db78749a494701d8fb50e815da6b16d9628e060a2bd89fc3c16fbe61c209",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/execution-v1/run-004/operation/manifest.json",
+        "sha256": "87a59d9007b1ac3ed3f922da097af5d61567f052147c9a87e04305fbbccedf4d",
+        "bytes": 7933,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 17,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-17/data/completed.jsonl.gz",
+          "sha256": "41dc8fa71fc18104396c126369922f8e7ee4450a6ae4940432aa56364c331af2",
+          "bytes": 1163673,
+          "mode": "0644"
+        },
+        "raw_sha256": "03b2821819bcd6c3fbc2d1395fdad175078ab7137766de54230efc7485ffd611",
+        "raw_bytes": 6750547
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-17/data/completed.jsonl.gz",
+          "sha256": "41dc8fa71fc18104396c126369922f8e7ee4450a6ae4940432aa56364c331af2",
+          "bytes": 1163673,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-17/data/manifest.json",
+          "sha256": "7bdebd327f3b66bf32c9897a942cc4c964b0605dc14702e9859fd1858df6f623",
+          "bytes": 73638,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-17/data/result.json",
+          "bytes": 7489,
+          "mode": "0644",
+          "sha256": "c571d61c7f611f5c32c31be44d4e8a04f350a29ae1bc2905721c83436f7eb280"
+        }
+      },
+      "source_tuple": "new928_image2be3_BUILD9ea_source9a_caller4f",
+      "executed_image_sha256": "2be3db78749a494701d8fb50e815da6b16d9628e060a2bd89fc3c16fbe61c209",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/execution-v1/run-004/operation/manifest.json",
+        "sha256": "4fa9be867ab49cbcff044e198742ec87da4634b7a00ab9417b09b2f9200aa0b8",
+        "bytes": 7935,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 18,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-18/data/completed.jsonl.gz",
+          "sha256": "d0076506c680944d370157e40775fd7eb71b8db3f55a8423353bd368bc8e1da9",
+          "bytes": 1152171,
+          "mode": "0644"
+        },
+        "raw_sha256": "324d0daa2d55f5b4f8d39639fc1b4233f25ab90e5001d74780ff7738a2631475",
+        "raw_bytes": 6655022
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-18/data/completed.jsonl.gz",
+          "sha256": "d0076506c680944d370157e40775fd7eb71b8db3f55a8423353bd368bc8e1da9",
+          "bytes": 1152171,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-18/data/manifest.json",
+          "sha256": "f8b21c8263852cd37d6dbac5acaa164be084cc30bace38478d416c1360576812",
+          "bytes": 77075,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-18/data/result.json",
+          "bytes": 7485,
+          "mode": "0644",
+          "sha256": "d704756a1cdb525d2a1fef096c8fcc963f91d733563d31d53069182f8e5806cb"
+        }
+      },
+      "source_tuple": "new928_image2be3_BUILD9ea_source9a_caller4f",
+      "executed_image_sha256": "2be3db78749a494701d8fb50e815da6b16d9628e060a2bd89fc3c16fbe61c209",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/execution-v1/run-005/operation/manifest.json",
+        "sha256": "72b34fb7ebf76005fa033a39d29abad21cd16763720acc375e383f841fec5369",
+        "bytes": 7935,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 19,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-19/data/completed.jsonl.gz",
+          "sha256": "6b44b7a1f830313d25730f932688e5987a2a12fede27dafc04c6ff3aa09e2fb9",
+          "bytes": 1032513,
+          "mode": "0644"
+        },
+        "raw_sha256": "6d120831e2a5feef28d678c607d072a6f8dd205693cf14e7dbc86ab67c45fdde",
+        "raw_bytes": 5974301
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-19/data/completed.jsonl.gz",
+          "sha256": "6b44b7a1f830313d25730f932688e5987a2a12fede27dafc04c6ff3aa09e2fb9",
+          "bytes": 1032513,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-19/data/manifest.json",
+          "sha256": "1ba05dd43a3f35e060795ca7259fde695871ed07d4b251185f7a82647f72aaf0",
+          "bytes": 76931,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-19/data/result.json",
+          "bytes": 7500,
+          "mode": "0644",
+          "sha256": "b7870eff3f069cae73b9e0b4420575890d531e8cd47ad1b14d944ce45543993b"
+        }
+      },
+      "source_tuple": "new928_image2be3_BUILD9ea_source9a_caller4f",
+      "executed_image_sha256": "2be3db78749a494701d8fb50e815da6b16d9628e060a2bd89fc3c16fbe61c209",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/execution-v1/run-005/operation/manifest.json",
+        "sha256": "d5b5855ba7ffc074dfbe960bf6b181f9bf2b1ca714dda176320fce56dd957334",
+        "bytes": 7935,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 20,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-20/data/completed.jsonl.gz",
+          "sha256": "3536e603a59b0fa4040dcd30de7c27feb90f9336cccc36f84bd64d2f7ae072d1",
+          "bytes": 1080738,
+          "mode": "0644"
+        },
+        "raw_sha256": "af4fe9181c270e8d278d9d87048b82a9bf5402f1bfe167ac042bc65cc214f14d",
+        "raw_bytes": 6271431
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-20/data/completed.jsonl.gz",
+          "sha256": "3536e603a59b0fa4040dcd30de7c27feb90f9336cccc36f84bd64d2f7ae072d1",
+          "bytes": 1080738,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-20/data/manifest.json",
+          "sha256": "3cb11bcf48eb02e2daed8163adc0dbd17e372cfda161f8b69e11c7ad08310162",
+          "bytes": 77165,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-20/data/result.json",
+          "bytes": 7499,
+          "mode": "0644",
+          "sha256": "9a0e9beda489c568e67a0beedf6b6be30f03ea8de42f19cda88bb48eb4b5baf8"
+        }
+      },
+      "source_tuple": "new928_image2be3_BUILD9ea_source9a_caller4f",
+      "executed_image_sha256": "2be3db78749a494701d8fb50e815da6b16d9628e060a2bd89fc3c16fbe61c209",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/execution-v1/run-005/operation/manifest.json",
+        "sha256": "4b1a61678904a8f1f698930116d4a70b6d45b50e5cd6eb13f5fcff58f98c45a1",
+        "bytes": 7935,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 21,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-21/data/completed.jsonl.gz",
+          "sha256": "1455a08b36470d5ee344cc39309b6548b781a9165af8aa3c69d378672157ff7a",
+          "bytes": 1074897,
+          "mode": "0644"
+        },
+        "raw_sha256": "d71662a8face4d3d16c7bb16f7402914a552831484e10762a17544aca5c018e4",
+        "raw_bytes": 6228463
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-21/data/completed.jsonl.gz",
+          "sha256": "1455a08b36470d5ee344cc39309b6548b781a9165af8aa3c69d378672157ff7a",
+          "bytes": 1074897,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-21/data/manifest.json",
+          "sha256": "0b487cdb410ac4195c7a00665589b1004ee8a16da1a6f8b2e3067b1f873cb2ff",
+          "bytes": 76859,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-21/data/result.json",
+          "bytes": 7486,
+          "mode": "0644",
+          "sha256": "a45f89caefda1daae49f34178781cbeff5b6ea52e946a0599724b143e493a1a6"
+        }
+      },
+      "source_tuple": "new928_image2be3_BUILD9ea_source9a_caller4f",
+      "executed_image_sha256": "2be3db78749a494701d8fb50e815da6b16d9628e060a2bd89fc3c16fbe61c209",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/execution-v1/run-006/operation/manifest.json",
+        "sha256": "6d835e26713969bfc2c03d78596e8a1b8e8e4d1b640bc3bec2cd00f9b3285676",
+        "bytes": 7935,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 22,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-22/data/completed.jsonl.gz",
+          "sha256": "05e3e7959466b1b5884c14c29f32c54353b3d4ae63f482bb29fe379ee76a0864",
+          "bytes": 1019241,
+          "mode": "0644"
+        },
+        "raw_sha256": "8fc69cd0c783d1876d5e1db9f058fe9edd977bbf3747f8e3da4691f2ce61a9c8",
+        "raw_bytes": 5898699
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-22/data/completed.jsonl.gz",
+          "sha256": "05e3e7959466b1b5884c14c29f32c54353b3d4ae63f482bb29fe379ee76a0864",
+          "bytes": 1019241,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-22/data/manifest.json",
+          "sha256": "9801f5934222de54cddbebc19e237a102d83d380adda2f596fbd641f772a0012",
+          "bytes": 79332,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-22/data/result.json",
+          "bytes": 7473,
+          "mode": "0644",
+          "sha256": "2032035fe05ae88bb0ca84e224fd827efed1d2808de3faa3222e4004def7dae3"
+        }
+      },
+      "source_tuple": "new928_image2be3_BUILD9ea_source9a_caller4f",
+      "executed_image_sha256": "2be3db78749a494701d8fb50e815da6b16d9628e060a2bd89fc3c16fbe61c209",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/execution-v1/run-006/operation/manifest.json",
+        "sha256": "fb051efb304346576222c8e1aef17d76fa5cca6c8fe6227eab6fd45fa3e5c99c",
+        "bytes": 7935,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 23,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-23/data/completed.jsonl.gz",
+          "sha256": "755e93cb2c19d431f5636bddede363bc732837561532fb0567e660ba1692c94a",
+          "bytes": 1122800,
+          "mode": "0644"
+        },
+        "raw_sha256": "8f253afba279f1ee1fc16f8ce790bf26989c7fdf3962b6ed1af7c4ed26b6dd28",
+        "raw_bytes": 6506442
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-23/data/completed.jsonl.gz",
+          "sha256": "755e93cb2c19d431f5636bddede363bc732837561532fb0567e660ba1692c94a",
+          "bytes": 1122800,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-23/data/manifest.json",
+          "sha256": "a13269483751aac918d6c2ffa7cce34ce54e24dbb6ebeb798bd40b132f6c82ff",
+          "bytes": 76865,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-23/data/result.json",
+          "bytes": 7478,
+          "mode": "0644",
+          "sha256": "9e54d3a78c6b313a87de1b97d608b1c6d026eab7eeef98dd2f7065335c9486da"
+        }
+      },
+      "source_tuple": "new928_image2be3_BUILD9ea_source9a_caller4f",
+      "executed_image_sha256": "2be3db78749a494701d8fb50e815da6b16d9628e060a2bd89fc3c16fbe61c209",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/execution-v1/run-006/operation/manifest.json",
+        "sha256": "27c1c080d6213ddb0e8d812ddbc7a4204b5ec323ea1ce19677558b1be9a15963",
+        "bytes": 7935,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 24,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-24/data/completed.jsonl.gz",
+          "sha256": "7ccc266afa9b0d36c67532de4c245059d2080b242b4e54eeff1d6c83854f0add",
+          "bytes": 992595,
+          "mode": "0644"
+        },
+        "raw_sha256": "1c89ac43015976a8abebb2bc5b6ebec96edb9349611c15aff8cad93d53e1a38b",
+        "raw_bytes": 5769020
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-24/data/completed.jsonl.gz",
+          "sha256": "7ccc266afa9b0d36c67532de4c245059d2080b242b4e54eeff1d6c83854f0add",
+          "bytes": 992595,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-24/data/manifest.json",
+          "sha256": "5cc8608c6bf325358dd8fbb7663143be3021e524765213e55bb1e43519d6d01a",
+          "bytes": 76713,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-24/data/result.json",
+          "bytes": 7495,
+          "mode": "0644",
+          "sha256": "64fe5eead8aa4ca49e7af13a79def89bd8db406f96d71c3dd2184c7eca2b9b6a"
+        }
+      },
+      "source_tuple": "new928_image2be3_BUILD9ea_source9a_caller4f",
+      "executed_image_sha256": "2be3db78749a494701d8fb50e815da6b16d9628e060a2bd89fc3c16fbe61c209",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/execution-v1/run-007/operation/manifest.json",
+        "sha256": "191260f53fd70a38eb489ee0f53605af1482d37e7e6b3a5ebb7bc5669bc54501",
+        "bytes": 7934,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 25,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-25/data/completed.jsonl.gz",
+          "sha256": "d0249806acd3ba655e0ed69e031762eca8e0f44f1d201e637ba3f7e0af65d497",
+          "bytes": 1111093,
+          "mode": "0644"
+        },
+        "raw_sha256": "f8a8c625a1e4726e2417ba3388240493666e498e284794d44fd70c8d642231dd",
+        "raw_bytes": 6440369
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-25/data/completed.jsonl.gz",
+          "sha256": "d0249806acd3ba655e0ed69e031762eca8e0f44f1d201e637ba3f7e0af65d497",
+          "bytes": 1111093,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-25/data/manifest.json",
+          "sha256": "cfdbb3a8d61c191a6b68a4c41249d20e921b991469a786af1ede2f3e064ebea2",
+          "bytes": 76779,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-25/data/result.json",
+          "bytes": 7482,
+          "mode": "0644",
+          "sha256": "91ae4ddde19abe39a8599ea970f89579a5d2c757ac89fff14d7350eb04b220a5"
+        }
+      },
+      "source_tuple": "new928_image2be3_BUILD9ea_source9a_caller4f",
+      "executed_image_sha256": "2be3db78749a494701d8fb50e815da6b16d9628e060a2bd89fc3c16fbe61c209",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/execution-v1/run-007/operation/manifest.json",
+        "sha256": "d14d007a79fd387b5eca03b856129ecb6f217a20919587b9d2b8088b2939bdd2",
+        "bytes": 7935,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 26,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-26/data/completed.jsonl.gz",
+          "sha256": "819aad26413ea7f7e54989705db90dd79a0b71cc7ddbd1de2da5f88c7ec0f50d",
+          "bytes": 1026367,
+          "mode": "0644"
+        },
+        "raw_sha256": "2dd6355023b1d4ac9f02b31174ee3516f3c56b1aeafb1894df47afeeb17207de",
+        "raw_bytes": 5957962
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-26/data/completed.jsonl.gz",
+          "sha256": "819aad26413ea7f7e54989705db90dd79a0b71cc7ddbd1de2da5f88c7ec0f50d",
+          "bytes": 1026367,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-26/data/manifest.json",
+          "sha256": "af22f8ede7d6aaa8932294c5d0fb2fb5828c5a2ee893b1936f12bef900fe9922",
+          "bytes": 78311,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-26/data/result.json",
+          "bytes": 7491,
+          "mode": "0644",
+          "sha256": "7b9969ffdd9e390e4e86601f93f96a35a3253fd8db8977d47f00df693101c112"
+        }
+      },
+      "source_tuple": "new928_image2be3_BUILD9ea_source9a_caller4f",
+      "executed_image_sha256": "2be3db78749a494701d8fb50e815da6b16d9628e060a2bd89fc3c16fbe61c209",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/execution-v1/run-007/operation/manifest.json",
+        "sha256": "a0419389d90e2a486eade4f1b3a20503295b17c686c6cbe3e7b62ae4b2458ea7",
+        "bytes": 7934,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 27,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-27/data/completed.jsonl.gz",
+          "sha256": "1d3c9da95aa7fac707d4996938c8b46a5d211befc4e59ebe72bcbe4f430f26ca",
+          "bytes": 1159341,
+          "mode": "0644"
+        },
+        "raw_sha256": "cb82e7b043197fe65e4a84035449ec445d9cfdb559818d46981748053a7e842c",
+        "raw_bytes": 6693411
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-27/data/completed.jsonl.gz",
+          "sha256": "1d3c9da95aa7fac707d4996938c8b46a5d211befc4e59ebe72bcbe4f430f26ca",
+          "bytes": 1159341,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-27/data/manifest.json",
+          "sha256": "8fb1e7ee8fc36fa43e40bef0d9c38d28a1dc5474567df8a7e4fd1018b3512636",
+          "bytes": 76934,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-27/data/result.json",
+          "bytes": 7482,
+          "mode": "0644",
+          "sha256": "c9a924a75d8cc18b1294f6bbf10997eb17ea7d81520fc4775469c22d62e9f742"
+        }
+      },
+      "source_tuple": "new928_image2be3_BUILD9ea_source9a_caller4f",
+      "executed_image_sha256": "2be3db78749a494701d8fb50e815da6b16d9628e060a2bd89fc3c16fbe61c209",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/execution-v1/run-008/operation/manifest.json",
+        "sha256": "eeb08e352580b7852dda2f7c9aa4d274f28f74b281c0195b530dff91866bbe4e",
+        "bytes": 7934,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 28,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-28/data/completed.jsonl.gz",
+          "sha256": "128dc6af354318567b71136ca1d2120d4bb912b589055bb54a1f510e784e9880",
+          "bytes": 1089833,
+          "mode": "0644"
+        },
+        "raw_sha256": "7cb5fee87a7127e329e0cd09f524875cf62413f4b3d21b08b617bc4d37b51fe5",
+        "raw_bytes": 6336565
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-28/data/completed.jsonl.gz",
+          "sha256": "128dc6af354318567b71136ca1d2120d4bb912b589055bb54a1f510e784e9880",
+          "bytes": 1089833,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-28/data/manifest.json",
+          "sha256": "0c3d8c927e94956dd4739cb66b80db412da8f6da3d59a3c7ca7e3a2bef7d34e7",
+          "bytes": 76864,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-28/data/result.json",
+          "bytes": 7476,
+          "mode": "0644",
+          "sha256": "19d65be5331500b04cbae331229ccaf344516dfc34ea3591584a5ebff5233beb"
+        }
+      },
+      "source_tuple": "new928_image2be3_BUILD9ea_source9a_caller4f",
+      "executed_image_sha256": "2be3db78749a494701d8fb50e815da6b16d9628e060a2bd89fc3c16fbe61c209",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/execution-v1/run-008/operation/manifest.json",
+        "sha256": "5d983ad1c44bac0dfbf67435e47615035cb6484ccef9e5b119c555390d95701c",
+        "bytes": 7935,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 29,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-29/data/completed.jsonl.gz",
+          "sha256": "1f2080bd5b07b16063eb3d05d337e9973958136937ecb4d05d01a710221f4e02",
+          "bytes": 1124077,
+          "mode": "0644"
+        },
+        "raw_sha256": "a355be06845e08fbd9f0718b1075016d9b27681a363c9b5ab82da55b75aa023d",
+        "raw_bytes": 6478682
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-29/data/completed.jsonl.gz",
+          "sha256": "1f2080bd5b07b16063eb3d05d337e9973958136937ecb4d05d01a710221f4e02",
+          "bytes": 1124077,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-29/data/manifest.json",
+          "sha256": "5b79ce5ad5fc5fab69dca17e92b576b6c69338d1d79039cfc7cf28d35c2ed14c",
+          "bytes": 76889,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-29/data/result.json",
+          "bytes": 7480,
+          "mode": "0644",
+          "sha256": "dee6e2f2aa070cae0e4de1ad17e5753c547c243bb4fe908e588503d63db14ea4"
+        }
+      },
+      "source_tuple": "new928_image2be3_BUILD9ea_source9a_caller4f",
+      "executed_image_sha256": "2be3db78749a494701d8fb50e815da6b16d9628e060a2bd89fc3c16fbe61c209",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/execution-v1/run-008/operation/manifest.json",
+        "sha256": "21f1fc5e2e3915f5db2efb7792cb35d449d5f9174b7f6b2adfd3c520e146d7ea",
+        "bytes": 7935,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 30,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-30/data/completed.jsonl.gz",
+          "sha256": "119080374773f59e4a950f5f178b7229fb1b68e61baad27381deba1eeffbf486",
+          "bytes": 1050951,
+          "mode": "0644"
+        },
+        "raw_sha256": "3be9f52d6bd0d7df934a4b48d5d55a96d63728d4276f0df827d062987c15b31d",
+        "raw_bytes": 6129605
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-30/data/completed.jsonl.gz",
+          "sha256": "119080374773f59e4a950f5f178b7229fb1b68e61baad27381deba1eeffbf486",
+          "bytes": 1050951,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-30/data/manifest.json",
+          "sha256": "eae9cb64887d609a8f24ad27d982419a1304b89b26fb6ca277f6beac2d478142",
+          "bytes": 77700,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-30/data/result.json",
+          "bytes": 7501,
+          "mode": "0644",
+          "sha256": "250fa2fea744fd1197e1e9ea555de26213ad80359ebff51e947082170611fdca"
+        }
+      },
+      "source_tuple": "new928_image2be3_BUILD9ea_source9a_caller4f",
+      "executed_image_sha256": "2be3db78749a494701d8fb50e815da6b16d9628e060a2bd89fc3c16fbe61c209",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/execution-v1/run-009/operation/manifest.json",
+        "sha256": "294dd1cd691890d1b4442a3e9989252ad4ab77fea586e28a8333747d0c672d21",
+        "bytes": 7934,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 31,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-31/data/completed.jsonl.gz",
+          "sha256": "e2a7e8618495e1b2bbf394cd09ce949d29e9a1dbd441963abc3afba9c3cb98fd",
+          "bytes": 1083342,
+          "mode": "0644"
+        },
+        "raw_sha256": "a1d5a656a2737d64434dfe0ef631fd6974b96af4cd16720d2c0e506fc5fb850c",
+        "raw_bytes": 6294337
+      },
+      "files": {
+        "journal": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-31/data/completed.jsonl.gz",
+          "sha256": "e2a7e8618495e1b2bbf394cd09ce949d29e9a1dbd441963abc3afba9c3cb98fd",
+          "bytes": 1083342,
+          "mode": "0644"
+        },
+        "native_manifest": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-31/data/manifest.json",
+          "sha256": "832ddb7d22b362e02d2be9c204883300ea6b9e99c1aa6483b2ef663076dc5097",
+          "bytes": 77147,
+          "mode": "0644"
+        },
+        "result": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-31/data/result.json",
+          "bytes": 7480,
+          "mode": "0644",
+          "sha256": "8f8871441602f3fa56846489c447b10ed1a88891880d27f95e5257bc320f421a"
+        }
+      },
+      "source_tuple": "new928_image2be3_BUILD9ea_source9a_caller4f",
+      "executed_image_sha256": "2be3db78749a494701d8fb50e815da6b16d9628e060a2bd89fc3c16fbe61c209",
+      "original_operation_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/execution-v1/run-009/operation/manifest.json",
+        "sha256": "061bd935610b41399410b23780f3f4ba7ffa10e1505aa505fa28c0490c2336f4",
+        "bytes": 7958,
+        "mode": "0644"
+      }
+    }
+  ],
+  "archive_bodies_opened_before_this_binding": 0,
+  "retained_columns": {
+    "observation": [
+      "ply",
+      "side",
+      "engine_index",
+      "action",
+      "accepted",
+      "failure",
+      "engine_error",
+      "stop",
+      "completed_depth",
+      "value_stm",
+      "caller_started_ns",
+      "deadline_ns",
+      "returned_ns",
+      "admission_checked_ns",
+      "accepted_ns",
+      "caller_seconds",
+      "thinking_seconds",
+      "last_completed_iteration_ns"
+    ],
+    "counter_scopes_separate": [
+      "nodes",
+      "static_evaluations",
+      "terminal",
+      "cutoffs",
+      "tt_probes",
+      "tt_key_hits",
+      "tt_exact_hits",
+      "tt_bound_cutoffs",
+      "tt_order_only",
+      "pvs_researches",
+      "delta_updates",
+      "policy_calls",
+      "physical_nn_calls",
+      "tt_retained_bytes",
+      "tt_generation"
+    ],
+    "outer_flags": [
+      "selection_reason",
+      "authority_receipt_ns",
+      "drain_finished_ns",
+      "authority_legal",
+      "inflight_after_drain",
+      "completed_snapshot_validation_failed",
+      "requested_depth",
+      "fixed_depth_required",
+      "fixed_depth_completed",
+      "terminal_collected",
+      "matching_terminal_collected",
+      "reserve_stop_is_not_user_cancel",
+      "first_receipt_or_control_error",
+      "AI_terminal_finished_ns",
+      "terminal_collected_ns",
+      "actual_zero_stock_safe_race_enabled",
+      "requested_zero_stock_safe_race_method",
+      "actual_zero_stock_safe_race_method_id",
+      "actual_lmr_enabled",
+      "requested_lmr_method",
+      "actual_lmr_method_id",
+      "lmr_reduction_rule",
+      "lmr_work_completed",
+      "lmr_work_terminal"
+    ]
+  },
+  "missing_fields_remain_unknown": true
+}

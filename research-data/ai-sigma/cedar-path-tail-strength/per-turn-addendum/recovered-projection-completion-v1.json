@@ -1,0 +1,817 @@
+{
+  "status": "ALL_ORIGINAL1024_PROJECTED_AFTER_ONE_NECESSARY_OP31_RECOVERY",
+  "completed_UTC": "2026-10-18T09:31:21.407740+00:00",
+  "process": {
+    "pid": 1518832,
+    "start_ticks": "36422210",
+    "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+  },
+  "Python": "3.11.2",
+  "source": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/recover_interrupted_op31.py",
+    "sha256": "07b85b518258a68765a787642b90211f016daa73155841fb604c641de99b24c6",
+    "bytes": 9218,
+    "mode": "0644"
+  },
+  "shared_projection_source": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/project_original_turns.py",
+    "sha256": "5dfe045f4de9a29be62be7954eca97b11af2a74f059cc6a646206a21a602d6a5",
+    "bytes": 16967,
+    "mode": "0644"
+  },
+  "source_import_STOP": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/op31-recovery-reader-import-STOP.json",
+    "sha256": "b44d8b2bdeef19e5bee7d860f38d2d24c9d91f728031fda86261abc541539dd7",
+    "bytes": 842,
+    "mode": "0644"
+  },
+  "post_game_guard": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/post-game-guard-binding-v1.json",
+    "sha256": "42abeed248856e493cd949e2cc072eaa2aa0928e158de50e23bee89b61d793e7",
+    "bytes": 2570,
+    "mode": "0644"
+  },
+  "original_failed_process": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/sole-authorized32-archive-pass-v1.process.json",
+    "sha256": "a7ff4f82b24148d91082e2d2649b126c87650ffcf2961290bbf2839ed978bc26",
+    "bytes": 1215,
+    "mode": "0600"
+  },
+  "original_op31_decode_completion": "UNKNOWN; interrupted -15, not called unentered",
+  "original_successful_op0_to_30_archive_rereads": 0,
+  "op31_explicit_necessary_completion_attempts": 1,
+  "successful_detailed_projections": [
+    {
+      "operation": 0,
+      "completed_UTC": "2026-10-18T09:23:58.849236+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/batch-00/data/completed.jsonl.gz",
+          "sha256": "8104e23937b9cb78c88d1749e1ea6ecaa4b430c72798573337ba80b56f67bce6",
+          "bytes": 1034472,
+          "mode": "0644"
+        },
+        "raw_sha256": "7e455cda3d2360a97cdb592819c88672e652a2cdc48a222502f2a74833c7294c",
+        "raw_bytes": 5984949
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-00.jsonl.gz",
+        "sha256": "523e6680b4242d6f3c67fd8c85c99d85bd3f3a7676103af0db161aa6d5f0d1fb",
+        "bytes": 392550,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 1,
+      "completed_UTC": "2026-10-18T09:23:58.968672+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/batch-01/data/completed.jsonl.gz",
+          "sha256": "3aaeb3e2697f93985b5b34c00b0b1d8358f07cff6632264b85b2a8d0e9fcc630",
+          "bytes": 1120832,
+          "mode": "0644"
+        },
+        "raw_sha256": "4a5abffc1aea318ab59c539fc0e073ed23656cadb4e3f9d20ab4d8529440e7be",
+        "raw_bytes": 6473986
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-01.jsonl.gz",
+        "sha256": "08301af252ce99b26333efe78015b50c196661c7e0b90351ae7546954dcba5aa",
+        "bytes": 423798,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 2,
+      "completed_UTC": "2026-10-18T09:23:59.081435+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/batch-02/data/completed.jsonl.gz",
+          "sha256": "2da4b4416afdd857209f7bf1438c0a8e016de25a90e70ae0d65a3478766bb689",
+          "bytes": 1086771,
+          "mode": "0644"
+        },
+        "raw_sha256": "cd3418b62c49ca618db147b0bd201e77d451135c29fac9b6c9f01e45c8a6b496",
+        "raw_bytes": 6302717
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-02.jsonl.gz",
+        "sha256": "1ed1d5c39e037bfd2b5c9b924ac1bf7b0d8365e91ef797c4fb0d1d41b39d2e81",
+        "bytes": 411808,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 3,
+      "completed_UTC": "2026-10-18T09:23:59.209071+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-03/data/completed.jsonl.gz",
+          "sha256": "5fcefb64cbfdf61054e15b755b53f2c5aeb0fef835660ccfc915b6016aec80d0",
+          "bytes": 1046132,
+          "mode": "0644"
+        },
+        "raw_sha256": "62b47f3343b36a236a2f19fd57b3b0cb42350a99bc96a12acaccf3a8ada13206",
+        "raw_bytes": 6078163
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-03.jsonl.gz",
+        "sha256": "9cfe27f353cf22429b0fe351b7767ec3f31339f1f40551f84154571f24b0799f",
+        "bytes": 397101,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 4,
+      "completed_UTC": "2026-10-18T09:23:59.343410+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-04/data/completed.jsonl.gz",
+          "sha256": "e75fe5d369ed8a9d5a7b34bdcfb84daf64efee6eb4a4fbc121e9b4c649c6c0a3",
+          "bytes": 1101176,
+          "mode": "0644"
+        },
+        "raw_sha256": "9cd69360db3e4506583e327cb9b7f4a8b93d9c0476711404ac15b83355f20f0b",
+        "raw_bytes": 6375446
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-04.jsonl.gz",
+        "sha256": "7e97ade75e02486de66957c2781dc9601fa6e07dd65433a1092e8e4e7306c811",
+        "bytes": 416646,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 5,
+      "completed_UTC": "2026-10-18T09:23:59.461452+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-05/data/completed.jsonl.gz",
+          "sha256": "8b2d43a86b70613e28a36a6f4fad648e1e7d0eedb2a1b4c27512935c1acf3446",
+          "bytes": 1137866,
+          "mode": "0644"
+        },
+        "raw_sha256": "c6341f2a2ea395d8e8bc2c9f0592c654e03adb76b7113b6e9a250e2e30562ed6",
+        "raw_bytes": 6601354
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-05.jsonl.gz",
+        "sha256": "b5a8431ccdbfcf3dada1d5c0396d48c5859a8994a97f89eb6f9101b69f8bd8a2",
+        "bytes": 430733,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 6,
+      "completed_UTC": "2026-10-18T09:23:59.572991+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-06/data/completed.jsonl.gz",
+          "sha256": "491b94509e6aacac4d0611a21bccb007788b1d6f657b10edbce6cc7c8a53b95a",
+          "bytes": 1084282,
+          "mode": "0644"
+        },
+        "raw_sha256": "fc2b27bbad72dadac0212281b79bfe629634fd1fe338f9640704ee9285713f26",
+        "raw_bytes": 6250388
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-06.jsonl.gz",
+        "sha256": "4ed2c37987d50d2df99bcae0fe2291564e91835d62d0f9d28f8af63c1aec6640",
+        "bytes": 410691,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 7,
+      "completed_UTC": "2026-10-18T09:23:59.680424+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-07/data/completed.jsonl.gz",
+          "sha256": "5264896898522c892789890e7d3747bb5dcbbd9915f20e77679b56f98bc86287",
+          "bytes": 1026611,
+          "mode": "0644"
+        },
+        "raw_sha256": "b463c306cb10174ce10b0dce7d3f410c28ab8c067b52ed64749518ac50d80eb3",
+        "raw_bytes": 5952329
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-07.jsonl.gz",
+        "sha256": "fe6a91627f33c03e7ac1440dd05b7adae9a8934f1eea3fb2e8e2dfdeeac0b646",
+        "bytes": 389406,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 8,
+      "completed_UTC": "2026-10-18T09:23:59.801793+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-08/data/completed.jsonl.gz",
+          "sha256": "30c00781978c9731347e20ab39bae36d36c35f8d797770779d2e9950a3aa8081",
+          "bytes": 1087900,
+          "mode": "0644"
+        },
+        "raw_sha256": "8522d1df8f4e966066f9f753d8bae674ee845d5eb1dd0a800b48b4e5278ecd83",
+        "raw_bytes": 6343568
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-08.jsonl.gz",
+        "sha256": "84812f83826b571c337aaf4377fa5fcfec900511555f0a54092bbb66d0dd8ca4",
+        "bytes": 412713,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 9,
+      "completed_UTC": "2026-10-18T09:23:59.917331+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-09/data/completed.jsonl.gz",
+          "sha256": "af7b964f649ca311abd6d047782fefc8b5de6ec352055110f8f67ecfd58118e7",
+          "bytes": 1110085,
+          "mode": "0644"
+        },
+        "raw_sha256": "7a6f7ecb2aa659bdab215543146191534e8b8d3789950c9b46728ec717fbb5a2",
+        "raw_bytes": 6485108
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-09.jsonl.gz",
+        "sha256": "6fcad4fc54813998444282dcef9395ac174cb8fe8fce1447185fc566546eb0e7",
+        "bytes": 421706,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 10,
+      "completed_UTC": "2026-10-18T09:24:00.063508+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-10/data/completed.jsonl.gz",
+          "sha256": "a7844dac044bda726e885d03ab9a5238dcdbaa190dabd0feac4d930f3fa7f232",
+          "bytes": 1151250,
+          "mode": "0644"
+        },
+        "raw_sha256": "a6660772efb8e68808e9d036818d9c696b4dbb1319e4f08462b6746ec02307b0",
+        "raw_bytes": 6653419
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-10.jsonl.gz",
+        "sha256": "132046ccfe193658b60654d57a524bb9f8e7f3ea7d378fa74bb7eae35720ab0d",
+        "bytes": 433531,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 11,
+      "completed_UTC": "2026-10-18T09:24:00.173071+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-11/data/completed.jsonl.gz",
+          "sha256": "ad0b9dfa5162573573686de88ba8871431de2616946bc33451ec0ab4d84be19c",
+          "bytes": 1051672,
+          "mode": "0644"
+        },
+        "raw_sha256": "18a57b166a7b7561760345386d4b4f3fb062aef7184ce8dafc510748218107fe",
+        "raw_bytes": 6117715
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-11.jsonl.gz",
+        "sha256": "be442bbc5b0f3a60045c21da5941f98e4bd2baa2d9b8c11aaf458ba5f68a9a81",
+        "bytes": 399570,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 12,
+      "completed_UTC": "2026-10-18T09:24:00.290825+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-12/data/completed.jsonl.gz",
+          "sha256": "557105e1187810dc2e14798567f1aa7cdb542b1b7e8eb53a045a843f136a1418",
+          "bytes": 1124014,
+          "mode": "0644"
+        },
+        "raw_sha256": "58842d0b00401fedb5b438e03df5a55c77ea597b5f542e7c617cc8793b2a6e5b",
+        "raw_bytes": 6500640
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-12.jsonl.gz",
+        "sha256": "32585862b3c9da1810a9060e5eef43519fa8452e022446797005a92bc8156c3f",
+        "bytes": 424628,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 13,
+      "completed_UTC": "2026-10-18T09:24:00.404126+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-13/data/completed.jsonl.gz",
+          "sha256": "dc948b144e96bc9aceb1465a67a9841ac422c33468ba865ee8b1a7e15e984d90",
+          "bytes": 1068973,
+          "mode": "0644"
+        },
+        "raw_sha256": "dec815ff77608b440a90c49110e563941767d5131ada364a765b4b5acd21dabc",
+        "raw_bytes": 6224603
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-13.jsonl.gz",
+        "sha256": "d3a67ce4ffc36fa52c0477eece061048e5268f08b9cac91c473feeb64c3936de",
+        "bytes": 405555,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 14,
+      "completed_UTC": "2026-10-18T09:24:00.518420+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-14/data/completed.jsonl.gz",
+          "sha256": "ced94402461e98e19b668d1e462c707b9c22a2556a76d2b2e6bff71debffcb4a",
+          "bytes": 1080846,
+          "mode": "0644"
+        },
+        "raw_sha256": "a7a4f4d0aedc5be3d4edd4e091e3792cdace35f9c774b02db30a29e15bff50c4",
+        "raw_bytes": 6271182
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-14.jsonl.gz",
+        "sha256": "61ce0059e64fae7b49c61e0455a3164c8311fe3d7ae9706bb15e33d45975c6f0",
+        "bytes": 408498,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 15,
+      "completed_UTC": "2026-10-18T09:24:00.648461+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-15/data/completed.jsonl.gz",
+          "sha256": "b5b6b6e6207a76af3e2484cef55c8736e973a64bc91477c8bd548bfcf1e9f145",
+          "bytes": 1216736,
+          "mode": "0644"
+        },
+        "raw_sha256": "6fcaa1e9a9e7bfbbca908ed165be49168a80fe571ef95b5aae0ff0fe69ee5fb5",
+        "raw_bytes": 7065085
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-15.jsonl.gz",
+        "sha256": "4961e2dd50cf6e4d63805698f54f15905557f0ee291acc472cfdfbcb6b17c795",
+        "bytes": 459064,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 16,
+      "completed_UTC": "2026-10-18T09:24:00.761433+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-16/data/completed.jsonl.gz",
+          "sha256": "00a1c8206d65c237ecc2460e219582a3dfbfdd591d88cf53f0fdeab83d30a853",
+          "bytes": 1085170,
+          "mode": "0644"
+        },
+        "raw_sha256": "7163b6a307fff8e391bff3a6195e640173008931f03721d903da198f4cefa4b4",
+        "raw_bytes": 6309172
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-16.jsonl.gz",
+        "sha256": "1b48c43dec9b9ab3895f7fb4e7ba7c1e5fd9708fe2fc047eb151932436af5a87",
+        "bytes": 412970,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 17,
+      "completed_UTC": "2026-10-18T09:24:00.894181+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-17/data/completed.jsonl.gz",
+          "sha256": "41dc8fa71fc18104396c126369922f8e7ee4450a6ae4940432aa56364c331af2",
+          "bytes": 1163673,
+          "mode": "0644"
+        },
+        "raw_sha256": "03b2821819bcd6c3fbc2d1395fdad175078ab7137766de54230efc7485ffd611",
+        "raw_bytes": 6750547
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-17.jsonl.gz",
+        "sha256": "2a9a3670892f7679dd5feac1cc8beae3b73b39948efd22bbdebacccb187d4aec",
+        "bytes": 438872,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 18,
+      "completed_UTC": "2026-10-18T09:24:01.018151+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-18/data/completed.jsonl.gz",
+          "sha256": "d0076506c680944d370157e40775fd7eb71b8db3f55a8423353bd368bc8e1da9",
+          "bytes": 1152171,
+          "mode": "0644"
+        },
+        "raw_sha256": "324d0daa2d55f5b4f8d39639fc1b4233f25ab90e5001d74780ff7738a2631475",
+        "raw_bytes": 6655022
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-18.jsonl.gz",
+        "sha256": "52b5225816aca35177550453c41516123863665adcb76c4aa071c8a6bfe8b930",
+        "bytes": 434238,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 19,
+      "completed_UTC": "2026-10-18T09:24:01.125481+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-19/data/completed.jsonl.gz",
+          "sha256": "6b44b7a1f830313d25730f932688e5987a2a12fede27dafc04c6ff3aa09e2fb9",
+          "bytes": 1032513,
+          "mode": "0644"
+        },
+        "raw_sha256": "6d120831e2a5feef28d678c607d072a6f8dd205693cf14e7dbc86ab67c45fdde",
+        "raw_bytes": 5974301
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-19.jsonl.gz",
+        "sha256": "e646ad7ce266e7cf74a8ce8f89c5db754fb7804b0ec7bd89a7990b8cc76da903",
+        "bytes": 391794,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 20,
+      "completed_UTC": "2026-10-18T09:24:01.245903+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-20/data/completed.jsonl.gz",
+          "sha256": "3536e603a59b0fa4040dcd30de7c27feb90f9336cccc36f84bd64d2f7ae072d1",
+          "bytes": 1080738,
+          "mode": "0644"
+        },
+        "raw_sha256": "af4fe9181c270e8d278d9d87048b82a9bf5402f1bfe167ac042bc65cc214f14d",
+        "raw_bytes": 6271431
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-20.jsonl.gz",
+        "sha256": "a6a4c738e250dbe134fb5f5ec406649d0abd5a66cf39b640f9b2832bfa4a36f4",
+        "bytes": 408352,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 21,
+      "completed_UTC": "2026-10-18T09:24:01.358150+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-21/data/completed.jsonl.gz",
+          "sha256": "1455a08b36470d5ee344cc39309b6548b781a9165af8aa3c69d378672157ff7a",
+          "bytes": 1074897,
+          "mode": "0644"
+        },
+        "raw_sha256": "d71662a8face4d3d16c7bb16f7402914a552831484e10762a17544aca5c018e4",
+        "raw_bytes": 6228463
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-21.jsonl.gz",
+        "sha256": "477d4655b807d0d5966b532bf7447262fecaeb8816bb8e756fee08eec165d166",
+        "bytes": 407711,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 22,
+      "completed_UTC": "2026-10-18T09:24:01.465703+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-22/data/completed.jsonl.gz",
+          "sha256": "05e3e7959466b1b5884c14c29f32c54353b3d4ae63f482bb29fe379ee76a0864",
+          "bytes": 1019241,
+          "mode": "0644"
+        },
+        "raw_sha256": "8fc69cd0c783d1876d5e1db9f058fe9edd977bbf3747f8e3da4691f2ce61a9c8",
+        "raw_bytes": 5898699
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-22.jsonl.gz",
+        "sha256": "a61567dae4d597b4340498e414edf9d09a94811a0de54f506ad3c4966531a673",
+        "bytes": 387746,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 23,
+      "completed_UTC": "2026-10-18T09:24:01.596868+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-23/data/completed.jsonl.gz",
+          "sha256": "755e93cb2c19d431f5636bddede363bc732837561532fb0567e660ba1692c94a",
+          "bytes": 1122800,
+          "mode": "0644"
+        },
+        "raw_sha256": "8f253afba279f1ee1fc16f8ce790bf26989c7fdf3962b6ed1af7c4ed26b6dd28",
+        "raw_bytes": 6506442
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-23.jsonl.gz",
+        "sha256": "8b51f76c0abd3b79cf31427154aaa93d2cdcc80f67065cba9fbf45f72e47dc79",
+        "bytes": 424652,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 24,
+      "completed_UTC": "2026-10-18T09:24:01.701726+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-24/data/completed.jsonl.gz",
+          "sha256": "7ccc266afa9b0d36c67532de4c245059d2080b242b4e54eeff1d6c83854f0add",
+          "bytes": 992595,
+          "mode": "0644"
+        },
+        "raw_sha256": "1c89ac43015976a8abebb2bc5b6ebec96edb9349611c15aff8cad93d53e1a38b",
+        "raw_bytes": 5769020
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-24.jsonl.gz",
+        "sha256": "17533dff4914761ceb405a20ab72c1c259034beeb8732a258c0d29cbe13cc661",
+        "bytes": 377418,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 25,
+      "completed_UTC": "2026-10-18T09:24:01.819836+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-25/data/completed.jsonl.gz",
+          "sha256": "d0249806acd3ba655e0ed69e031762eca8e0f44f1d201e637ba3f7e0af65d497",
+          "bytes": 1111093,
+          "mode": "0644"
+        },
+        "raw_sha256": "f8a8c625a1e4726e2417ba3388240493666e498e284794d44fd70c8d642231dd",
+        "raw_bytes": 6440369
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-25.jsonl.gz",
+        "sha256": "f8297943f87443d44db7cbe4d8948673c852419dffb2bdeba45cb6d81ecb6a09",
+        "bytes": 420390,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 26,
+      "completed_UTC": "2026-10-18T09:24:01.938193+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-26/data/completed.jsonl.gz",
+          "sha256": "819aad26413ea7f7e54989705db90dd79a0b71cc7ddbd1de2da5f88c7ec0f50d",
+          "bytes": 1026367,
+          "mode": "0644"
+        },
+        "raw_sha256": "2dd6355023b1d4ac9f02b31174ee3516f3c56b1aeafb1894df47afeeb17207de",
+        "raw_bytes": 5957962
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-26.jsonl.gz",
+        "sha256": "121f104ff56a92f7291a2fe97f921b956a92578f873a5db9596f32e20c1e8162",
+        "bytes": 390310,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 27,
+      "completed_UTC": "2026-10-18T09:24:02.058694+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-27/data/completed.jsonl.gz",
+          "sha256": "1d3c9da95aa7fac707d4996938c8b46a5d211befc4e59ebe72bcbe4f430f26ca",
+          "bytes": 1159341,
+          "mode": "0644"
+        },
+        "raw_sha256": "cb82e7b043197fe65e4a84035449ec445d9cfdb559818d46981748053a7e842c",
+        "raw_bytes": 6693411
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-27.jsonl.gz",
+        "sha256": "e902f3996e2c3661b0c60181bcfccc21af6e226d7337c89bf8e3e5b1c740a78d",
+        "bytes": 437540,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 28,
+      "completed_UTC": "2026-10-18T09:24:02.177426+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-28/data/completed.jsonl.gz",
+          "sha256": "128dc6af354318567b71136ca1d2120d4bb912b589055bb54a1f510e784e9880",
+          "bytes": 1089833,
+          "mode": "0644"
+        },
+        "raw_sha256": "7cb5fee87a7127e329e0cd09f524875cf62413f4b3d21b08b617bc4d37b51fe5",
+        "raw_bytes": 6336565
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-28.jsonl.gz",
+        "sha256": "ebb9e75b1ea50958cc9aeda5d45fdbed6d5afaec3f013ee5ba303b8d75256b9c",
+        "bytes": 415497,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 29,
+      "completed_UTC": "2026-10-18T09:24:02.295091+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/unentered29-v1/batch-29/data/completed.jsonl.gz",
+          "sha256": "1f2080bd5b07b16063eb3d05d337e9973958136937ecb4d05d01a710221f4e02",
+          "bytes": 1124077,
+          "mode": "0644"
+        },
+        "raw_sha256": "a355be06845e08fbd9f0718b1075016d9b27681a363c9b5ab82da55b75aa023d",
+        "raw_bytes": 6478682
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-29.jsonl.gz",
+        "sha256": "263c3285fb71204a509da3ca048f50e9cc912fccfba0ecdfc04965fd19bd59ed",
+        "bytes": 425664,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 30,
+      "completed_UTC": "2026-10-18T09:24:02.422665+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/unentered29-v1/batch-30/data/completed.jsonl.gz",
+          "sha256": "119080374773f59e4a950f5f178b7229fb1b68e61baad27381deba1eeffbf486",
+          "bytes": 1050951,
+          "mode": "0644"
+        },
+        "raw_sha256": "3be9f52d6bd0d7df934a4b48d5d55a96d63728d4276f0df827d062987c15b31d",
+        "raw_bytes": 6129605
+      },
+      "existing_reader_decode_calls": 1,
+      "games": 32,
+      "archive_crc_rawSHA_line_count_size_custody": "Existing arena_reference_report in same pass",
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-30.jsonl.gz",
+        "sha256": "271ad21bd4f8004db6b9333f66f740db5c21563a23f2347ddd11bdc0db6576c4",
+        "bytes": 398688,
+        "mode": "0644"
+      }
+    },
+    {
+      "operation": 31,
+      "completed_UTC": "2026-10-18T09:31:21.407223+00:00",
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/unentered29-v1/batch-31/data/completed.jsonl.gz",
+          "sha256": "e2a7e8618495e1b2bbf394cd09ce949d29e9a1dbd441963abc3afba9c3cb98fd",
+          "bytes": 1083342,
+          "mode": "0644"
+        },
+        "raw_sha256": "a1d5a656a2737d64434dfe0ef631fd6974b96af4cd16720d2c0e506fc5fb850c",
+        "raw_bytes": 6294337
+      },
+      "necessary_recovery_reader_decode_calls": 1,
+      "old_interrupted_attempt_decode_completion": "UNKNOWN",
+      "games": 32,
+      "projection": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/necessary-projections-v1/op-31-recovery-v1.jsonl.gz",
+        "sha256": "3ff7fcdee15016a8ce59881eadde6413cbadd91ec2a0ce058582b7d83f900ade",
+        "bytes": 410161,
+        "mode": "0644"
+      }
+    }
+  ],
+  "projected_games": 1024,
+  "recovery_observations": 1541,
+  "original_CI_or_new_science_execution": 0,
+  "original_archives_and_FAILED_unchanged": true
+}

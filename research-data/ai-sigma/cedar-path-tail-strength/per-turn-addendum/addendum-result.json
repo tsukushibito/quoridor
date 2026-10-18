@@ -1,0 +1,105 @@
+{
+  "status": "FINAL_HUMAN_SAVED_EXPLANATORY_ADDENDUM",
+  "issue": "quoridor-4lc.324.8.1",
+  "descriptive_result": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/descriptive-result.json",
+    "sha256": "8e5e1a3049462ea8683452051c444cfbc5034cbc78ff78782c73350dc9b5818f",
+    "bytes": 236677,
+    "mode": "0644"
+  },
+  "report_before_scoped_handwritten_format": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/report-ja.md",
+    "sha256": "79ef62153200de9190f71cb77112f0616aa683315b6bf40665b975af70ec7b3c",
+    "bytes": 13626,
+    "mode": "0644"
+  },
+  "figures": [
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/depth-by-stock.png",
+      "sha256": "805292aac6d46ed55622a7ef8885b9b8f66c257842f9430baf87553d34685138",
+      "bytes": 79254,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/depth-by-stock.svg",
+      "sha256": "f3dc5e8ec1c01f241401766cb40d90489295a8a1d43aead031f3521e5577fcc8",
+      "bytes": 56232,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/nodes-by-stock.png",
+      "sha256": "0ab6f16e5d3b5bdc309fedfffbfb5b892556cb520f09aff8b2f7cfb9f7dc83e6",
+      "bytes": 74588,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/nodes-by-stock.svg",
+      "sha256": "de513a2356574f56db9a447df06041a80ff457c7ec38e8df5fcb030262c01530",
+      "bytes": 53565,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/depth-histograms.png",
+      "sha256": "f4181cd0e32278edf7107dbd772e5f63ea57e07547a5c5cf4f164ce0fafc20e7",
+      "bytes": 118363,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/depth-histograms.svg",
+      "sha256": "2a1671db41482cfbd192ed59a30009bede0ad046b612a76c547efbc7e6d8d7aa",
+      "bytes": 82717,
+      "mode": "0644"
+    }
+  ],
+  "render_source": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/per-turn-addendum-v1/render_turn_addendum.py",
+    "sha256": "432dbc10920ff86d97a2fe862e80dcb68768af1f1d9b1a6b3d8fbaf38a3f8f87",
+    "bytes": 23551,
+    "mode": "0644"
+  },
+  "render_environment": {
+    "Python": "3.14.7",
+    "Matplotlib": "3.11.2"
+  },
+  "entered_UTC": "2026-10-18T09:43:59.527852+00:00",
+  "completed_UTC": "2026-10-18T09:44:00.620921+00:00",
+  "original_statistics_report_verdict_unchanged": {
+    "result": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/result.json",
+      "sha256": "6483bfca30864762343a80e4415f2652042041217ddc2b4c8844bd0b6782fde4",
+      "bytes": 24450,
+      "mode": "0644"
+    },
+    "report": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/report-ja.md",
+      "sha256": "5f37a793499be3746229da3077f792b83dd0583efc08097825e2ed3b9e5f7e01",
+      "bytes": 6448,
+      "mode": "0644"
+    },
+    "bootstrap_output": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/bootstrap-output.json",
+      "sha256": "8e705968b0e00b7ad514ae529f4a767d63d12090b6eee5fb061516ef228e087a",
+      "bytes": 664,
+      "mode": "0644"
+    },
+    "bootstrap_receipt": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/bootstrap-receipt.json",
+      "sha256": "801441123a6c4259ad59a4f8f08a916b736ba67a60292f94e91e19273894c6e8",
+      "bytes": 2492,
+      "mode": "0644"
+    },
+    "point": 0.50244140625,
+    "interval": [
+      0.4853515625,
+      0.51953125
+    ],
+    "decision": "UNRESOLVED_FIXED_BOOK_TIME_ONLY",
+    "stage9_cutoff": "path_tail",
+    "statistical_reexecution": 0
+  },
+  "core_explanation": "Nominal depth gains concentrate at low stock/saturated values; high-stock roots mostly similar; many deeper common-root snapshots choose the same action. Causes of finite small WDL difference remain unresolved.",
+  "missing_activation_region_time_rank_physicalNN": "UNKNOWN",
+  "additional_game_RNG_CI_or_source_observer_issued": 0,
+  "temporary_plot_cache_removed": true,
+  "leaf_status": "in_progress_pending_owner_acceptance"
+}
