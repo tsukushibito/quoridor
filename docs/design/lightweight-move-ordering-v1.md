@@ -570,6 +570,8 @@ BEST43と固定DのOFF OMPPMO二反復では、P/O・P/M中央値比がNNUE.7723
 
 人間の直接指示で、低LR継続324.5の後続に新しい有限比較324.6を登録した。**打ち切りなし（OFF）・駒間距離による確定判定（manhattan）・最短経路による確定判定（path_tail、通常研究既定）・最短経路＋履歴条件の緩和（path_tail_future）**を、追加学習後に実際に選択・凍結したSigma静的教師NNUEとClaustrophobia静的教師NNUEの双方で測る。旧BEST43/旧32R BEST/固定Dを代用せず、学習のplateau/overfit/未収束・資源STOPの限界を結果へ残す。閉じた324.4/433/434を再openせず、旧結果と費用も変更しない。
 
+両fitの実回収後、subjectを固定own-V最小選択の新Sigma BEST（追加step34297、weights845e2bd0…）と新Claustrophobia BEST（58305、35cbb976…）へ凍結した。両方PRACTICAL_V_PLATEAUだが、一般的十分学習・棋力の認定や保護モデル／既定の昇格ではない。LAST／旧BEST／将来LR比較候補へ置換せず、条件付き追加LR比較を待つgateを作らない。現source/imageへの必要なnative対応等は未供給の実依存として残す。[実FileRefと元freezeへの結合](../../.artifacts/research-team/integration324/post-low-lr-endgame4-v1/endpoint-subjects-v1.json)。
+
 元の真正32root/fullhistory・系列/色別四persistent sessionを再用し、Control/PVS/TT1M/LMR ON depth_rank/旧近似OFF、D8/各4M nodes/時間上限なしを出発点とする。各評価器でOFF主時計の方式順1→2→3→4→4→3→2→1と、別fresh sessionの診断ON各一pass、計768calls/新規3,072,000,000nodes以内の案を結果前に固定する。省略時defaultに依存せずenable/methodを明示し、軌跡生成・結果後refill・追加反復・条件混合・係数探索はしない。
 
 主時計はOFF Search合計、副時計はsetup/drop込みwhole。最終壁parent make後から親復元までの最大stock0 span、残壁あり処理、初めからstock0のrootを別にする。内包時計を重複加算せず、ON差でOFFを補正しない。fresh/typedTT戻り・資格不成立と必要な非時計対応/合法PV/fullhistory/undo/復元/UNKNOWN/局所悪化を最小共通計測で保持し、追加履歴資格や未訪問node節約を推測しない。終了observer全体を恒久復活せず、関連new software/必要な境界確認後に実測source/imageを凍結し、比較終了後に用途を終えた計測API/counter/fixtureを整理する。現役4方式のcorrectnessと研究既定Pは保護する。
