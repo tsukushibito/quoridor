@@ -24,6 +24,12 @@ Linuxネイティブを主経路とし、評価・探索・対局・推論queue�
 
 NodeはWeb/Vite/TypeScript、Wasm製品ビルド・検証、品質とソース書き出しに必要。研究の対局・探索・推論・生成をNodeへ委譲しない。旧Node実装、互換shim、実験別コピー、旧Python学習recipe、旧実装との比較テストは削除済み。移行前コードはGit `54a294a`、[撤去manifest](../../research-data/ai-sigma/retired-code-cleanup/removed-source.json.gz)と[検証](../../research-data/ai-sigma/retired-code-cleanup/verification.json)で追跡する。[AGENTS.md](../../AGENTS.md)の方針に従い、保守コストを優先し、互換性維持を目的とした旧経路は保持しない。実施中・具体的に予定した直接比較に必要な旧版だけは比較専用に保持し、対象・用途・撤去条件を明示する。比較時にGitから復元する手順は挟まず、終了後に不要分を削除する。
 
+2026-10-18の保守では、現役入口・import・manifest・設定の利用先から主要領域を確認した。`apps/web`はUI/session/render/input/audio/persistence、[engine-bridge](../../packages/engine-bridge/README.md)はRust/Wasmとworkerの接続を所有する。Webの重複したstrict/worker設定と未使用の初期局面投影APIを撤去し、既存bridgeのstrict設定・worker設定と`RulesClient.createGame`へ寄せた。rootのtypecheckはbridgeのDOM/workerとWebのDOMを各ownerで確認する。ルール/履歴の保証が異なるvalidatorやRust/Wasmの生成DTOは共通化・移動しない。
+
+Pythonの学習/解析、モデル変換、scriptsの運用CLI、toolsの品質/通信は既存ownerを保つ。`check-research.py`は共通project環境を一度解決して各品質工程へ渡し、途中で別interpreterへ切り替えない。モデルexportの案内も同じ`project-env.sh`/`QUORIDOR_PROJECT_ENV`を使う。rootのCargo/Node/Python manifestと既存依存の配置を維持し、core/AI/NNUE/data/inference/runnerは数学・SDK・寿命・serializerが異なるため統合しない。arenaのrun固有条件は既存typed設定/manifestに残し、見た目の似た時計・履歴・資源契約をmergeするDSLは加えない。
+
+README・開発案内・`.devcontainer`の保存説明は現役入口へ合わせるが、過去runのsource/RAW/FAILEDや当時の条件は改稿しない。環境のrebuild/update・mount変更と他ownerの未保存変更はこの整理に含めない。NNUE hotpathと並列実装の変更はそれぞれの担当境界で扱い、配置整理から新しい実験やUSERPAUSE解除を行わない。この確認は全repoの重複不存在や過去source全監査の認定ではない。
+
 Rustの共通crateから過去frameのコードや管理scriptを呼ばない。PythonはRustが生成・検証したtensor又は66B canonical geometryを読み、学習loop内では限定batchのQF1特徴を展開する。ルール・距離・盤面の合法性を学習loopで再計算しない。モデル定義・設定・尺度は同packageに置き、`sys.path`で旧ツールを取り込まない。学習済み重みと凍結データはコード移行で書き換えない。
 
 各保証には一つの検証境界を定める。詳細なsource・履歴・teacherの対応はcache変換・公開で検証し、学習は固定binaryと必要な小さいconfig・identity・件数・family/split情報を消費する。下流でsource全体を再検証する追加処理には、既存境界では防げない具体的な失敗条件を示す。受渡しの精度・schema・単位は正本を一つにし、同じteacherをJSON数値とFP32で繰り返し解釈・比較しない。変更されたteacher bitsの拒否は維持し、数値許容差で代用しない。新しい接続処理はsource/mock検査だけで完了とせず、影響する実際の生成・変換・binary読込の小さいend-to-end経路を一度確認する。検証の追加が実行中の凍結入力・codeを変更したり、成功した科学runの再実行を要求したりしないようにする。

@@ -127,7 +127,7 @@ C++はclang-formatが導入済みなら担当native sourceへ限定して適用�
 
 - 運用文書と導入・更新・操作用スクリプトをGit管理する。
 - 実行DB、ロック、ログ、バックアップを通常のGit管理から除外する。`issues.jsonl`をDBの正本や完全なバックアップとして扱わない。
-- 完全なDBバックアップを、別の保存領域である主checkoutの`.artifacts/beads-backup/`へ保存する。これはホスト側checkoutに残るが、同じホストの損失まで保護するものではない。
+- 完全なDBバックアップを、DBとは別の保存先である主checkoutの`.artifacts/beads-backup/`へ保存する。現在の主checkoutは`quoridor-main` named volumeにあり、ホストcheckoutへの退避や別ホストのバックアップではない。同じホストの損失まで保護するものではない。[保存方針](../../.devcontainer/storage-policy.md)を参照する。
 - 作業セッション終了時、マイルストーン受入れ後、CLI／スキーマ更新前にバックアップする。初回導入時に隔離した復元先でissue・依存関係・履歴の復元を確認する。
 - 初期運用はローカルとする。Git remoteや外部サービスへの同期、タスク情報の公開は自動設定しない。
 
