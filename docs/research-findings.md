@@ -2392,3 +2392,5 @@ CはClaustrophobia静的教師NNUE、SはSigma静的教師NNUEの追加学習後
 原outer cohortの6496.344065秒は一度だけ計上し、lane／native／Search等のnested wallを加算しない。charged16,683,556,413nodesは各16G／計48G内で非移転、96lossless archive105,257,726Bは元検証を再用した。425MiB支持の再適用・旧used返金は0、global actual／continuouspeak／fullfeesと後続tailはUNKNOWN。source/core guardの原拒否・FAILEDも保持する。終盤計測の一時診断は両consumerの実native＋collection STOP後にcommit2e7e065で撤去し、compile/Clippyを確認した。元の測定image／RAWと整理後UNMEASURED sourceを付け替えていない。
 
 [正式報告・原図](../research-data/ai-sigma/post-low-lr-strength3/report-ja.md)、[独立確認・全参照・保存表](../research-data/ai-sigma/post-low-lr-strength3/receipt.json)。通常研究のpath_tail既定、製品generator/model/default、USERPAUSE323/342.17、seals/newE/oldfits96を維持し、この結果から追加fit・対局・閾値/規模変更を発行しない。
+
+次判断：今回の有限scopeは終了とし、直接C/S比較を根拠に、新C BEST58305（weights35cbb976）を今後の研究上の優先候補とする。新Sと原C/S両weights・曲線・対局は対照と証拠として保持する。有力な公開AI本体（Sigma／Claustrophobia）との同資源・同時計での到達は未測定であり、最高棋力というepic目標は未完である。追加LR最適化よりこの到達差の確認を次の優先論点とするが、ここから新campaign・準備job・対局・学習・支持は発行しない。通常path_tail併用や他clockの成績も今回の認定範囲に含めず、モデル登録・weights・製品generator/defaultと通常path_tail既定は変更しない。
