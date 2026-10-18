@@ -195,7 +195,6 @@ D6のKey hitは21882→367054だがcontext/depthのnumeric資格は別で、cuto
 
 414の条件付き証明を用いたL=max(M,有限|D0[a]−D0[b]|,有限|D1[a]−D1[b]|)は424で一度実装・384calls比較した。追加証明機会は増えたが、主要whole利益を保持に足る形で支持できず、候補/temporary policy/counter/専用fixtureを撤去した。411の現役Manhattan bool/default OFFと完全履歴/typedTT/terminal/control/undoを維持する。これは一般定理の否定や一般速度・棋力の認定ではなく、固定8prefix/二反復/元費用での有限採否である。[原比較・例外・撤去software](../../research-data/ai-sigma/zero-stock-wall-detour424/report-ja.md)。新測定や別閾値の採用は発行しない。
 
-
 ## 零在庫の距離条件の保存切り分け427（2026-10-16）
 
 限定保存標本では、Lを真の駒間通路距離rhoへ強めても同じ閾値を通らない例が多かった。標本は終盤4ゲーム・共有familyと小さい3×3へ偏るため、内部Searchの分布や追加BFSの費用対効果は未確定とする。424候補・observer・cache・新閾値を復活させず、411/default OFFを保つ。選択、二分類、別成分、履歴UNKNOWNと次の観測案は[427保存結果](../../research-data/ai-sigma/zero-stock-distance427/report-ja.md)を参照する。新しい計測・実装は本結果から自動発行しない。
@@ -215,3 +214,9 @@ D6のKey hitは21882→367054だがcontext/depthのnumeric資格は別で、cuto
 ds=1 tailは標準長さ2壁・N>=3・双方stock0/own-goal reachableの手番側だけに限る。sealed caseの退避、相手の唯一手、goal jumpと二つの中間keyの完全countが必要で、非手番側ds1や任意graphへ拡張しない。futureQ/Eは同じwinning witnessに結び、current/goalを除いてもweighted base+overlayとcanonical履歴を省略しない。現在の素直なcount走査は最悪二乗になり得るというBのstatic確認があり、追加履歴mapや二重全scanを無料の対策としない。
 
 固定9×9の幾何通過33/33を実proof leafや内部頻度へ移さない。Manhattan版への追加parity branch、DAG/rho/新component IDは追加coverage・償却の根拠が無いので先に増やさない。root/depth0/positive childdepth、true terminal/threefold、typedTT/domain/score、control/cancel/error/undoと借用寿命を保つsource/境界確認案までを次の設計とし、別契約なしにproduction候補、counter/cache、observerや新測定を開始しない。411/default OFF、424撤去、models/seals/USERPAUSEは保持する。
+
+## Cedar評価準備の既存計測と現行経路（324.11、2026-10-18）
+
+旧388/390のprofileと現行Cedar経路を[静的対応表](../../.worktree/assets/perf/cedar-evaluation-preparation-v1/report-ja.md)で照合した。親・pooled子の壁map共有、二視点ID buffer、FT二行64f32（256B）のcopyと列更新、呼出内head scratch再利用は既に現役である。copyを追加allocation、駒移動を毎回BFSとは数えない。distance_fit=(0,0)でも学習済みの正規化距離入力は残る。旧profileの重複するinclusive比率を足したり、現在のCedar CPU割合へ転用したりしない。393/398の不採用候補は復活させない。
+
+次の判断材料は、新observerやSearchではなく既存turn projectionのTT返却・delta counterの集計を先にする。通常内部の数値TT返却は現在child delta後だが、root TT、proof/terminal、深さ0、ordering-only、閉じないboundは更新省略機会に含めない。保存counterにはroot TTも混じるため、同一scopeのmin(tt_bound_cutoffs, delta_updates)は上限であり時間利益ではない。最初の保存1turnだけのwhole上限216/52017（約0.415%）を全件率とせず、全件集計は未実行として残す。採用snapshotとwholeを加算しない。公開可変Features・shape/nonfinite・異モデル・history/cancel/undoの検査は維持し、privateな検査重複の整理も現費用と所有保証を確かめるまで採用しない。今回の静的照合によるsource/数学/model変更・追加計測はない。
