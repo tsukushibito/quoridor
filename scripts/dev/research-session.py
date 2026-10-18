@@ -42,6 +42,7 @@ def command_json(
     streams = selectors.DefaultSelector()
     output = bytearray()
     error_bytes = 0
+    error_tail = bytearray()
     deadline = time.monotonic() + timeout
     try:
         streams.register(child.stdout, selectors.EVENT_READ, "out")
@@ -49,7 +50,9 @@ def command_json(
         while streams.get_map():
             remaining = deadline - time.monotonic()
             if remaining <= 0:
-                raise SessionError("Bounded issue authority read timed out")
+                raise SessionError(
+                    "Bounded issue authority read timed out: " + error_tail.decode(errors="replace")
+                )
             for key, _ in streams.select(remaining):
                 chunk = os.read(key.fileobj.fileno(), 8192)
                 if not chunk:
@@ -60,11 +63,16 @@ def command_json(
                         raise SessionError("Bounded issue authority response exceeds 64KiB")
                 else:
                     error_bytes += len(chunk)
+                    error_tail.extend(chunk)
+                    del error_tail[:-4096]
                     if error_bytes > 65536:
                         raise SessionError("Bounded issue authority error exceeds 64KiB")
         code = child.wait(timeout=max(0.001, deadline - time.monotonic()))
         if code != 0:
-            raise SessionError("Bounded issue authority read failed")
+            raise SessionError(
+                f"Bounded issue authority read failed (exit {code}): "
+                + error_tail.decode(errors="replace")
+            )
         return json.loads(output)
     finally:
         if child.poll() is None or streams.get_map():

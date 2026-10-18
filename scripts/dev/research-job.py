@@ -606,11 +606,8 @@ async def notify_once(directory, config, root, backend):
             write(directory, "notification.json", notification)
             return notification
         try:
-            entry = await asyncio.to_thread(
-                authority, config, root, backend, horizon=config["notify_until"]
-            )
             state = read(directory, "state.json")
-            if entry["thread_id"] != state["thread_id"]:
+            if state["thread_id"] != config["thread_id"]:
                 raise JobError("Recipient identity changed")
             connection = await backend.connect(config["request_timeout_seconds"])
             async with connection as server:
@@ -618,6 +615,22 @@ async def notify_once(directory, config, root, backend):
                     if notification["status"] in ("dispatching", "uncertain"):
                         return await reconcile(server, directory, notification, state["thread_id"])
                     thread = await server.read_thread(state["thread_id"])
+                    if thread["status"]["type"] not in ("idle", "notLoaded"):
+                        notification.update(
+                            status="pending", reason="recipient_not_idle", updated_at=stamp()
+                        )
+                        write(directory, "notification.json", notification)
+                        return notification
+                    entry = await asyncio.to_thread(
+                        authority, config, root, backend, horizon=config["notify_until"]
+                    )
+                    if entry["thread_id"] != state["thread_id"]:
+                        raise JobError("Recipient identity changed")
+                    if (
+                        deadline_reached(config["notify_until"])
+                        or (directory / "cancel.json").exists()
+                    ):
+                        return notification
                     if thread["status"]["type"] == "notLoaded":
                         await server.request(
                             "thread/resume", client.resume_params(state["thread_id"])

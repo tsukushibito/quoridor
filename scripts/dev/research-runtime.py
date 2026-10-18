@@ -96,18 +96,33 @@ class AppBackend:
         issues = list(dict.fromkeys(issues))
         if not issues:
             return []
+        if any(
+            not isinstance(issue, str) or not issue or issue.strip() != issue or "," in issue
+            for issue in issues
+        ):
+            raise RuntimeError("Authority issue IDs must be exact nonempty IDs")
         result = client.command_json(
             [
                 "bash",
                 str(self.root / "scripts/dev/beads.sh"),
-                "show",
-                *issues,
-                "--brief-deps",
+                "list",
+                "--all",
+                "--brief",
+                "--flat",
+                "--id",
+                ",".join(issues),
+                "--limit",
+                "0",
+                "--max-rows",
+                str(len(issues)),
                 "--json",
             ],
             timeout=timeout,
+            max_bytes=65536,
         )
-        items = result if isinstance(result, list) else [result]
+        if not isinstance(result, list):
+            raise RuntimeError("Authority list response must be a complete row list")
+        items = result
         if (
             any(not isinstance(item, dict) or item.get("id") not in issues for item in items)
             or len(items) != len(issues)

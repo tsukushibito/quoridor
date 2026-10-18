@@ -114,20 +114,30 @@ class AuthorityBatchTests(unittest.TestCase):
 
     def test_one_store_invocation_binds_all_requested_records(self):
         backend = j.runtime.AppBackend(Path("/workspaces/quoridor"))
-        rows = [{"id": "work", "status": "in_progress"}, {"id": "goal", "status": "open"}]
+        rows = [
+            {"id": "work", "status": "in_progress"},
+            {"id": "goal", "status": "open"},
+        ]
         with patch.object(j.runtime.client, "command_json", return_value=rows) as call:
             self.assertEqual(backend.issues(["goal", "work", "goal"], timeout=0.25), rows[::-1])
         call.assert_called_once_with(
             [
                 "bash",
                 "/workspaces/quoridor/scripts/dev/beads.sh",
-                "show",
-                "goal",
-                "work",
-                "--brief-deps",
+                "list",
+                "--all",
+                "--brief",
+                "--flat",
+                "--id",
+                "goal,work",
+                "--limit",
+                "0",
+                "--max-rows",
+                "2",
                 "--json",
             ],
             timeout=0.25,
+            max_bytes=65536,
         )
 
     def test_missing_duplicate_or_unrequested_records_refuse(self):
