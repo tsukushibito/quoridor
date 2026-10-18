@@ -833,7 +833,7 @@ def arena_cohort_peer(spec, pid):
                     actual == peer_spec["argv"]
                     and os.sched_getaffinity(child["pid"]) == {peer["main_cpu"]}
                     and os.sched_getaffinity(origin["supervisor"]["pid"])
-                    == {cohort["global_controller_cpu"]}
+                    == set(cohort.get("management_cpu_pool", [cohort["global_controller_cpu"]]))
                     and all(
                         os.sched_getaffinity(int(t.name)) <= peer_cores
                         for t in (Path("/proc") / str(pid) / "task").iterdir()
