@@ -48,7 +48,7 @@ def read_initial_observation(ref, corpus, expected, train_indices, validation_in
         common["input_classes"] != corpus.input_ref
         or common["initial_weights_sha"] != expected["initial_weights_sha"]
         or common["scale"]["sha256"] != expected["scale_artifact_sha"]
-        or common["initializer_seed"] != 32442026101701
+        or common["initializer_seed"] != common["initializer"]["training"]["seed"]
         or saved["original_fit_config"]["sha256"] != expected["fit_config_sha"]
         or original_config["training"]["device"] != "cuda"
         or original_config["training"]["target"] != "static_teacher"
@@ -131,118 +131,133 @@ def reused_initial_measurement(saved, indices, kind):
     return result
 
 
-def recipe(train_rows, validation_rows, *, device, threads):
-    """Materialize once from actual retained multiplicities, before fit outcomes."""
-    from .common import DEFAULTS
-
-    if any(type(n) is not int or n <= 0 for n in (train_rows, validation_rows)):
-        raise ValueError("actual nonempty retained original T/V multiplicities required")
-    cfg = copy.deepcopy(DEFAULTS)
-    r, v = train_rows, validation_rows
-    steps = math.ceil(32 * r / 4096)
-    points = sorted({0, *[math.ceil(k * r / 4096) for k in range(1, 33)]})
-    cfg["model"].update(
-        architecture="distance_residual",
-        distance_a=0.0,
-        distance_b=0.0,
-        transformer_width=32,
-        hidden_width=32,
-        dropout=0.0,
+def static_settings(cfg, train_rows=None, validation_rows=None):
+    """Resolve the implemented static fit conditions from one normal run config."""
+    static = cfg["static_teacher"]
+    training, evaluation = cfg["training"], cfg["evaluation"]
+    positive = ("maximum_training_draws",)
+    nonnegative = (
+        "minimum_training_draws",
+        "minimum_floor_training_draws",
+        "overfit_observations",
+        "initializer_seed",
+        "panel_seed",
     )
-    cfg["optimizer"].update(
-        name="adam", lr=0.0003, weight_decay=0.0, momentum=0.0, betas=[0.9, 0.999], eps=1e-8
-    )
-    cfg["training"].update(
-        steps=steps,
-        batch_size=4096,
-        seed=32442026101703,
-        target="static_teacher",
-        sampling="row",
-        loss_weighting="row",
-        scheduler="none",
-        warmup_steps=min(1000, max(1, math.ceil(0.02 * steps))),
-        reflection_probability=0.5,
-        reflection_seed=32442026101704,
-        supply_workers=0,
-        device=device,
-        threads=threads,
-    )
-    cfg["evaluation"].update(
-        checkpoints=points,
-        batch_size=4096,
-        monitor="row",
-        early_stopping_patience=4,
-        early_stopping_unit="observation",
-        min_delta=0.0001,
-        min_delta_relative=0.001,
-        diagnostic_rows=min(65536, r),
-        diagnostic_checkpoints=[],
-        full_train=False,
-        full_train_checkpoints=[],
-    )
-    cfg["limits"].update(seconds=None, samples=32 * r + 33 * (2 * v + 2 * min(65536, r)))
-    cfg["artifacts"].update(mode="native", save_scheduled=False, checkpoint_steps=[])
-    return cfg
-
-
-def validate_recipe(cfg, train_rows, validation_rows):
-    expected = recipe(
-        train_rows,
-        validation_rows,
-        device=cfg["training"]["device"],
-        threads=cfg["training"]["threads"],
-    )
-    if cfg != expected:
-        raise ValueError("static-teacher recipe differs from fixed real-R/V recipe")
-
-
-def adequate_learning(initial_panel, observed_panel, parameter_changed):
-    return bool(
-        parameter_changed and initial_panel - observed_panel >= max(0.0001, 0.01 * initial_panel)
-    )
-
-
-def continuation_recipe(
-    train_rows, validation_rows, *, device, threads, optimizer_mode, phase_steps=0, phase_rows=0
-):
-    """One live phase with sixteen finite checkpoint blocks and one final tail."""
-    cfg = recipe(train_rows, validation_rows, device=device, threads=threads)
-    if optimizer_mode != "matching":
-        raise ValueError("actual selected BEST has matching Adam/RNG; a reset is not admitted")
-    maximum_steps = math.ceil(256 * train_rows / 4096)
-    if not (
-        type(phase_steps) is int
-        and 0 <= phase_steps < maximum_steps
-        and type(phase_rows) is int
-        and 0 <= phase_rows < 850000000
+    for name in positive + nonnegative:
+        value = static[name]
+        if type(value) is not int or value < (1 if name in positive else 0):
+            raise ValueError("invalid static integer: " + name)
+    for name in (
+        "overfit_validation_absolute",
+        "overfit_validation_relative",
+        "overfit_training_absolute",
+        "overfit_training_relative",
+        "progress_absolute",
+        "progress_relative",
     ):
-        raise ValueError("remaining phase step/logical quota required")
-    cfg["optimizer"]["lr"] = 0.0001
-    cfg["training"].update(
-        steps=maximum_steps - phase_steps,
-        scheduler="plateau",
-        warmup_steps=0,
-        lr_decay_factor=0.5,
-        lr_decay_patience=2,
-        min_lr=0.000001,
+        value = static[name]
+        if type(value) not in (int, float) or not math.isfinite(value) or value < 0:
+            raise ValueError("invalid static finite threshold: " + name)
+    if any(type(n) is not int or n <= 0 for n in (train_rows, validation_rows) if n is not None):
+        raise ValueError("nonempty actual retained T/V required")
+    maximum_steps = math.ceil(static["maximum_training_draws"] / training["batch_size"])
+    if training["steps"] != maximum_steps:
+        raise ValueError("static steps must match the configured sole final draw tail")
+    if (
+        static["minimum_training_draws"] > static["maximum_training_draws"]
+        or static["minimum_floor_training_draws"] > static["maximum_training_draws"]
+    ):
+        raise ValueError("static minimum exposure exceeds maximum draws")
+    points = evaluation["checkpoints"]
+    state_points = static["state_checkpoint_steps"]
+    if (
+        not isinstance(points, list)
+        or not points
+        or points != sorted(set(points))
+        or points[0] != 0
+        or points[-1] != maximum_steps
+        or any(type(p) is not int or not 0 <= p <= maximum_steps for p in points)
+        or not isinstance(state_points, list)
+        or state_points != sorted(set(state_points))
+        or any(type(p) is not int or p <= 0 or p not in points for p in state_points)
+    ):
+        raise ValueError("static observation/state checkpoints must be explicit matching steps")
+    optimizer = cfg["optimizer"]
+    betas = optimizer.get("betas")
+    if (
+        optimizer["name"] != "adam"
+        or not isinstance(betas, (list, tuple))
+        or len(betas) != 2
+        or any(type(v) not in (int, float) or not math.isfinite(v) or not 0 <= v < 1 for v in betas)
+        or type(optimizer.get("eps")) not in (int, float)
+        or not math.isfinite(optimizer["eps"])
+        or optimizer["eps"] <= 0
+        or training["sampling"] != "row"
+        or training["loss_weighting"] != "row"
+        or training["target"] != "static_teacher"
+        or training["supply_workers"] != 0
+        or training["scheduler"] not in ("none", "plateau")
+        or evaluation["monitor"] != "row"
+        or evaluation["early_stopping_unit"] != "observation"
+        or evaluation["early_stopping_patience"] <= 0
+        or evaluation["full_train"]
+        or evaluation["diagnostic_rows"] <= 0
+        or cfg["artifacts"]["save_scheduled"]
+        or cfg["artifacts"]["mode"] != "native"
+        or type(cfg["limits"]["samples"]) is not int
+        or cfg["limits"]["samples"] <= 0
+    ):
+        raise ValueError("implemented static Adam/row/full-V/native conditions required")
+    # This changes training conditions, not the selected native model/feature math.
+    model = cfg["model"]
+    if (
+        model["architecture"] != "distance_residual"
+        or model["distance_a"] != 0
+        or model["distance_b"] != 0
+        or model["transformer_width"] != 32
+        or model["hidden_width"] != 32
+        or model["dropout"] != 0
+    ):
+        raise ValueError("static FT32/H32/FP32 output-bypassOFF model is unchanged")
+    result = dict(
+        maximum_updates=maximum_steps,
+        maximum_training_draws=static["maximum_training_draws"],
+        minimum_training_draws=static["minimum_training_draws"],
+        minimum_floor_training_draws=static["minimum_floor_training_draws"],
+        floor_stale_observations=evaluation["early_stopping_patience"],
+        initial_lr=optimizer["lr"],
+        decay_factor=training["lr_decay_factor"],
+        decay_patience=training["lr_decay_patience"],
+        floor=training["min_lr"],
+        delta_absolute=evaluation["min_delta"],
+        delta_relative=evaluation["min_delta_relative"],
+        overfit_observations=static["overfit_observations"],
+        overfit_validation_absolute=static["overfit_validation_absolute"],
+        overfit_validation_relative=static["overfit_validation_relative"],
+        overfit_training_absolute=static["overfit_training_absolute"],
+        overfit_training_relative=static["overfit_training_relative"],
+        progress_absolute=static["progress_absolute"],
+        progress_relative=static["progress_relative"],
+        state_checkpoints={step: index for index, step in enumerate(state_points, 1)},
+        panel_rows=min(evaluation["diagnostic_rows"], train_rows)
+        if train_rows is not None
+        else evaluation["diagnostic_rows"],
+        panel_seed=static["panel_seed"],
+        initializer_seed=static["initializer_seed"],
+        logical_quota=cfg["limits"]["samples"],
     )
-    cfg["evaluation"].update(
-        checkpoints=sorted(
-            {
-                0,
-                *[
-                    math.ceil(k * train_rows / 4096) - phase_steps
-                    for k in range(1, 257)
-                    if math.ceil(k * train_rows / 4096) > phase_steps
-                ],
-            }
-        ),
-        early_stopping_patience=8,
-        min_delta=0.00001,
-        min_delta_relative=0.0001,
+    result["config_sha256"] = hashlib.sha256(
+        json.dumps(cfg, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()
+    ).hexdigest()
+    return result
+
+
+def adequate_learning(initial_panel, observed_panel, parameter_changed, settings):
+    return bool(
+        parameter_changed
+        and initial_panel - observed_panel
+        >= max(settings["progress_absolute"], settings["progress_relative"] * initial_panel)
     )
-    cfg["limits"]["samples"] = 850000000 - phase_rows
-    return cfg
 
 
 def static_checkpoint_ref(path):
@@ -283,15 +298,20 @@ def restore_static_exposure(corpus, entry):
 class StaticContinuation:
     """The concrete lowered-LR state at completed teacher-own full-V boundaries."""
 
-    def __init__(self, train_rows, baseline, *, state=None):
-        if type(train_rows) is not int or train_rows <= 0:
-            raise ValueError("positive original-observation R")
-        self.r = train_rows
+    def __init__(self, settings, baseline, *, state=None):
+        self.settings = copy.deepcopy(settings)
+        if any(
+            not math.isfinite(float(baseline[scope]["target_mse"]))
+            or baseline[scope]["target_mse"] < 0
+            for scope in ("train", "validation")
+        ):
+            raise ValueError("finite nonnegative selected full-V/Tpanel baseline required")
         self.state = (
             copy.deepcopy(state)
             if state is not None
             else dict(
-                lr=0.0001,
+                lr=settings["initial_lr"],
+                settings_sha256=settings["config_sha256"],
                 significant_best=float(baseline["validation"]["target_mse"]),
                 strict_best=float(baseline["validation"]["target_mse"]),
                 strict_best_panel=float(baseline["train"]["target_mse"]),
@@ -303,11 +323,13 @@ class StaticContinuation:
                 phase_draws=0,
                 observations=0,
                 overfit_stale=0,
-                previous_panel=float(baseline["train"]["target_mse"]),
                 verdict="NOT_CONVERGED/NEEDED_WORK",
             )
         )
-        if not 0.000001 <= self.state["lr"] <= 0.0001:
+        if (
+            self.state.get("settings_sha256") != settings["config_sha256"]
+            or not settings["floor"] <= self.state["lr"] <= settings["initial_lr"]
+        ):
             raise ValueError("continuation LR state outside fixed range")
 
     def observe(self, loss, panel, draws):
@@ -318,11 +340,13 @@ class StaticContinuation:
         if draws <= s["phase_draws"]:
             raise ValueError("one new completed full-V observation, never repeat prior draws")
         used_lr = s["lr"]
-        if used_lr == 0.000001:
+        if used_lr == self.settings["floor"]:
             if s["floor_entry_draws"] is None:
                 s["floor_entry_draws"] = s["phase_draws"]
             s["floor_draws"] += draws - s["phase_draws"]
-        delta = max(0.00001, 0.0001 * s["significant_best"])
+        delta = max(
+            self.settings["delta_absolute"], self.settings["delta_relative"] * s["significant_best"]
+        )
         significant = loss < s["significant_best"] - delta
         strict = loss < s["strict_best"]
         if strict:
@@ -333,27 +357,40 @@ class StaticContinuation:
             s["stale_at_lr"] = s["floor_stale"] = 0
         else:
             s["stale_at_lr"] += 1
-            if used_lr == 0.000001:
+            if used_lr == self.settings["floor"]:
                 s["floor_stale"] += 1
-        if used_lr > 0.000001 and s["stale_at_lr"] > 2:
-            s["lr"] = max(0.000001, used_lr * 0.5)
+        if used_lr > self.settings["floor"] and s["stale_at_lr"] > self.settings["decay_patience"]:
+            s["lr"] = max(self.settings["floor"], used_lr * self.settings["decay_factor"])
             s["stale_at_lr"] = 0
         divergence = (
-            used_lr == 0.000001
-            and loss >= s["strict_best"] + max(0.002, 0.01 * s["strict_best"])
-            and panel <= s["strict_best_panel"] - max(0.00001, 0.0001 * s["strict_best_panel"])
+            used_lr == self.settings["floor"]
+            and loss
+            >= s["strict_best"]
+            + max(
+                self.settings["overfit_validation_absolute"],
+                self.settings["overfit_validation_relative"] * s["strict_best"],
+            )
+            and panel
+            <= s["strict_best_panel"]
+            - max(
+                self.settings["overfit_training_absolute"],
+                self.settings["overfit_training_relative"] * s["strict_best_panel"],
+            )
         )
         s["overfit_stale"] = s["overfit_stale"] + 1 if divergence else 0
-        if s["floor_draws"] >= 8 * self.r and s["overfit_stale"] >= 3:
+        if (
+            s["floor_draws"] >= self.settings["minimum_floor_training_draws"]
+            and self.settings["overfit_observations"] > 0
+            and s["overfit_stale"] >= self.settings["overfit_observations"]
+        ):
             s["verdict"] = "OVERFIT_STOP/NEEDED_WORK"
         if (
             s["verdict"] == "NOT_CONVERGED/NEEDED_WORK"
-            and s["floor_draws"] >= 8 * self.r
-            and s["floor_stale"] >= 8
+            and s["floor_draws"] >= self.settings["minimum_floor_training_draws"]
+            and s["floor_stale"] >= self.settings["floor_stale_observations"]
         ):
             s["verdict"] = "PRACTICAL_V_PLATEAU"
         s["phase_draws"] = draws
-        s["previous_panel"] = panel
         s["observations"] += 1
         return dict(
             strict_improved=strict,
@@ -375,16 +412,13 @@ def read_static_continuation(control, cfg, corpus, statistics, train_panel, vali
     if control.get("schema") != "quoridor-static-continuation-input-v1":
         raise ValueError("explicit static continuation input schema")
     mode = control["optimizer_mode"]
-    if cfg != continuation_recipe(
-        corpus.counts["train"],
-        corpus.counts["validation"],
-        device=cfg["training"]["device"],
-        threads=cfg["training"]["threads"],
-        optimizer_mode=mode,
-        phase_steps=control.get("phase_steps", 0),
-        phase_rows=control.get("phase_rows", 0),
+    settings = static_settings(cfg, corpus.counts["train"], corpus.counts["validation"])
+    if (
+        mode != "matching"
+        or cfg["training"]["scheduler"] != "plateau"
+        or cfg["training"]["warmup_steps"]
     ):
-        raise ValueError("fixed lowered-LR continuation recipe differs")
+        raise ValueError("matching continuation requires plateau and no reset/warmup")
     identity = dict(
         input_classes=corpus.input_ref,
         teacher_values=corpus.binding["teacher_values"],
@@ -393,10 +427,7 @@ def read_static_continuation(control, cfg, corpus, statistics, train_panel, vali
         train_panel_sha256=observation_index_sha(train_panel),
         validation_index_sha256=observation_index_sha(validation),
     )
-    if (
-        len(train_panel) != min(65536, corpus.counts["train"])
-        or len(validation) != corpus.counts["validation"]
-    ):
+    if len(train_panel) != settings["panel_rows"] or len(validation) != corpus.counts["validation"]:
         raise ValueError("fixed Tpanel and whole weighted V are required")
     if any(control.get(key) != value for key, value in identity.items()):
         raise ValueError("continuation teacher/input/fullV/panel identity differs")
@@ -425,7 +456,11 @@ def read_static_continuation(control, cfg, corpus, statistics, train_panel, vali
         raise ValueError("selected checkpoint differs from its exact native export")
     prior = checkpoint.get("static_continuation")
     if prior is not None:
-        if prior["identity"] != identity or not prior["evaluation_complete_for_position"]:
+        if (
+            prior["identity"] != identity
+            or not prior["evaluation_complete_for_position"]
+            or prior["resolved_config_sha256"] != settings["config_sha256"]
+        ):
             raise ValueError("next block requires a same-identity completed fullV checkpoint")
         baseline = prior["last_observation"]
         if (
@@ -525,6 +560,12 @@ def read_static_continuation(control, cfg, corpus, statistics, train_panel, vali
             loss=baseline["validation"]["target_mse"],
             position=origin,
         )
+    if (
+        previous_steps >= settings["maximum_updates"]
+        or previous_draws >= settings["maximum_training_draws"]
+        or previous_rows >= settings["logical_quota"]
+    ):
+        raise ValueError("completed or exhausted continuation phase must not be resumed")
     if (previous_steps, previous_rows) != (
         control.get("phase_steps", 0),
         control.get("phase_rows", 0),
@@ -545,9 +586,9 @@ def read_static_continuation(control, cfg, corpus, statistics, train_panel, vali
             or groups[0]["params"] != list(range(6))
             or set(states) != set(range(6))
             or any(float(state["step"]) != branch_steps for state in states.values())
-            or tuple(groups[0]["betas"]) != (0.9, 0.999)
-            or groups[0]["eps"] != 1e-8
-            or groups[0]["weight_decay"] != 0
+            or tuple(groups[0]["betas"]) != tuple(cfg["optimizer"]["betas"])
+            or groups[0]["eps"] != cfg["optimizer"]["eps"]
+            or groups[0]["weight_decay"] != cfg["optimizer"]["weight_decay"]
             or set(checkpoint["static_RNG"])
             != {"index_torch_state", "reflection_numpy_state", "ordered_index_mask_sha256"}
         ):
@@ -598,6 +639,7 @@ def read_static_continuation(control, cfg, corpus, statistics, train_panel, vali
         selected_best=selected_best,
         selected_best_checkpoint=best_data,
         policy_state=policy_state,
+        settings=settings,
     )
 
 
@@ -745,10 +787,10 @@ def prepare_common(cache, output, config_path):
     cfg = resolve_config(config_path)
     corpus = load(cache)
     try:
-        validate_recipe(cfg, corpus.counts["train"], corpus.counts["validation"])
+        settings = static_settings(cfg, corpus.counts["train"], corpus.counts["validation"])
         statistics = corpus.statistics()
         init = copy.deepcopy(cfg)
-        init["training"].update(seed=32442026101701, device="cpu")
+        init["training"].update(seed=settings["initializer_seed"], device="cpu")
         configure_framework(init)
         model = build_model(init["model"], statistics)
         output = Path(output)
@@ -763,7 +805,7 @@ def prepare_common(cache, output, config_path):
             initial_weights=file_ref(output / "initial-model/weights.f32"),
             input_classes=corpus.input_ref,
             initial_weights_sha=sha(output / "initial-model/weights.f32"),
-            initializer_seed=32442026101701,
+            initializer_seed=settings["initializer_seed"],
             model_forwards=0,
             scale=dict(
                 path=str((output / "scale.json").resolve()), sha256=sha(output / "scale.json")
@@ -799,7 +841,10 @@ def prepare_fits(config):
     output.mkdir(exist_ok=False)
     marker = output / "INCOMPLETE"
     marker.write_text("fit preparation owns partial controls; no implicit retry\n")
-    cfg = recipe(r, v, device=config["device"], threads=config["threads"])
+    from .common import resolve_config
+
+    cfg = resolve_config(json.loads(bound_file_bytes(config["fit_config"], 65536)))
+    static_settings(cfg, r, v)
     fit_config = output / "fit-config.json"
     write_json(fit_config, cfg)
     caches = {}

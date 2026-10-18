@@ -94,7 +94,9 @@ class FiniteStaticControls(unittest.TestCase):
                     schema="quoridor-static-common-initial-v1",
                     initial_weights=weights,
                     initial_weights_sha=weights["sha256"],
-                    initializer_seed=32442026101701,
+                    initializer_seed=json.loads(Path(config_path).read_bytes())["static_teacher"][
+                        "initializer_seed"
+                    ],
                     input_classes=bank["input_classes"],
                     scale=dict(
                         path=str(output / "scale.json"),
@@ -106,6 +108,7 @@ class FiniteStaticControls(unittest.TestCase):
                 (output / "result.json").write_text(json.dumps(result))
                 return result
 
+            (root / "provided-config.json").write_text(json.dumps(fixtures.config_for(4, 2)))
             with (
                 patch.object(
                     learning, "prepare_common", side_effect=fake_initializer
@@ -116,8 +119,7 @@ class FiniteStaticControls(unittest.TestCase):
                     dict(
                         teacher_values=file_ref(root / "bank.json"),
                         output=str(root / "prepared"),
-                        device="cpu",
-                        threads=1,
+                        fit_config=file_ref(root / "provided-config.json"),
                     )
                 )
             initialize.assert_called_once()
@@ -132,8 +134,8 @@ class FiniteStaticControls(unittest.TestCase):
                 bindings[0]["constant_artifact_sha"], bindings[1]["constant_artifact_sha"]
             )
             cfg = json.loads(Path(result["arms"]["S"]["config"]["path"]).read_bytes())
-            self.assertEqual(cfg["limits"]["samples"], 128 + 33 * 12)
-            self.assertEqual(cfg["training"]["seed"], 32442026101703)
+            self.assertEqual(cfg["limits"]["samples"], 850000000)
+            self.assertEqual(cfg["training"]["seed"], fixtures.config_for(4, 2)["training"]["seed"])
             self.assertFalse((root / "prepared/INCOMPLETE").exists())
             self.assertFalse(actual["fit_entered"])
         finally:
@@ -163,7 +165,7 @@ class FiniteStaticControls(unittest.TestCase):
             patch.object(cache, "load", return_value=corpus, create=True),
             patch(
                 "quoridor_training.common.resolve_config",
-                return_value=learning.recipe(4, 2, device="cpu", threads=1),
+                return_value=fixtures.config_for(4, 2, device="cpu", threads=1),
             ),
         ):
             with self.assertRaises(BaseExceptionGroup) as caught:

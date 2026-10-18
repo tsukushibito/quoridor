@@ -457,13 +457,12 @@ def train(
     static_teacher = getattr(corpus, "static_teacher", False)
     continuation_input = None
     if static_teacher:
-        from .static_learning import validate_recipe
+        from .static_learning import static_settings
 
         if input_binding is None:
             raise ValueError("static teacher requires bound common fresh initialization/normalizer")
         continuation_input = json.loads(Path(input_binding).read_text()).get("static_continuation")
-        if continuation_input is None:
-            validate_recipe(cfg, corpus.counts["train"], corpus.counts["validation"])
+        static_controls = static_settings(cfg, corpus.counts["train"], corpus.counts["validation"])
     binding, rows, labels = (corpus.binding, corpus.rows, corpus.labels)
     target = cfg["training"]["target"]
 
@@ -511,7 +510,7 @@ def train(
         or (cfg["model"]["distance_a"] != 0)
         or (cfg["model"]["distance_b"] != (0 if static_teacher else 8))
         or (cfg["optimizer"]["name"] != "adam")
-        or (cfg["optimizer"]["weight_decay"] != 0)
+        or (not static_teacher and cfg["optimizer"]["weight_decay"] != 0)
     ):
         raise ValueError(
             "public fit requires fixed QF1+D FT32/H32/dropout0 Adam/wd0; "
@@ -607,7 +606,7 @@ def train(
         if (
             common_initial["input_classes"] != corpus.input_ref
             or common_initial["initial_weights_sha"] != expected["initial_weights_sha"]
-            or common_initial["initializer_seed"] != 32442026101701
+            or common_initial["initializer_seed"] != static_controls["initializer_seed"]
             or common_initial["scale"]["sha256"] != expected["scale_artifact_sha"]
             or common_initial["initial_weights"] != expected["initial_weights"]
         ):
@@ -653,6 +652,18 @@ def train(
         from .distance_steps import significant_improvement
 
         scheduler.is_better = significant_improvement
+    if static_teacher and scheduler is not None:
+        # The fresh static caller owns the standard scheduler; continuation
+        # owns the saved floor/overfit policy and never constructs this path.
+        scheduler.is_better = lambda current, best: math.isfinite(current) and (
+            not math.isfinite(best)
+            or current
+            < best
+            - max(
+                static_controls["delta_absolute"],
+                static_controls["delta_relative"] * best,
+            )
+        )
     output = Path(output)
     output.mkdir(parents=True)
     if volume_admission is not None:
@@ -743,7 +754,7 @@ def train(
     primary_in_raw = np.searchsorted(ix_validation_raw, ix_validation)
     if compact:
         rng = np.random.default_rng(
-            32442026101705 if static_teacher else cfg["training"]["seed"] + 2
+            static_controls["panel_seed"] if static_teacher else cfg["training"]["seed"] + 2
         )
         diag_train = np.sort(
             rng.choice(
@@ -854,12 +865,15 @@ def train(
                 "reflection_numpy_state"
             ]
         continuation = StaticContinuation(
-            len(ix_train),
+            static_controls,
             continuation_start["baseline"],
             state=continuation_start["policy_state"],
         )
         for group in optimizer.param_groups:
             group["lr"] = continuation.state["lr"]
+        offset = continuation_start["previous_steps"]
+        evaluation_steps = {point - offset for point in evaluation_steps if point > offset}
+        diagnostic_steps = {point - offset for point in diagnostic_steps if point > offset}
         selected = continuation_start["selected_best"]
         best_state = {
             key: value.clone()
@@ -941,7 +955,8 @@ def train(
         nonlocal samples
         if (
             cfg["limits"]["samples"] is not None
-            and samples + n > cfg["limits"]["samples"]
+            and samples + n + (continuation_start["previous_rows"] if continuation_start else 0)
+            > cfg["limits"]["samples"]
             or (
                 cfg["limits"]["seconds"] is not None
                 and time.monotonic() - start > cfg["limits"]["seconds"]
@@ -1215,6 +1230,7 @@ def train(
         if continuation is not None:
             payload["static_continuation"] = dict(
                 identity=continuation_start["identity"],
+                resolved_config_sha256=static_controls["config_sha256"],
                 optimizer_mode=continuation_start["optimizer_mode"],
                 policy=copy.deepcopy(continuation.state),
                 old_executed=continuation_start["old_executed"],
@@ -1329,7 +1345,9 @@ def train(
                         stop = decision["stop"]
                     else:
                         _, stop = stopper.observe(loss)
-                        stop = stop and training_seen >= 8 * len(ix_train)
+                        stop = stop and training_seen >= static_controls["minimum_training_draws"]
+                        if scheduler is not None:
+                            scheduler.step(loss)
                     improved = loss < best_loss
                     panel = record["train"]["target_mse"]
                     if static_progress["initial_Tpanel_mse"] is None:
@@ -1356,6 +1374,11 @@ def train(
                     improved = loss < best_loss
                 else:
                     improved, stop = stopper.observe(loss)
+                state_block = None
+                if continuation is not None:
+                    state_block = static_controls["state_checkpoints"].get(
+                        continuation_start["previous_steps"] + completed_step
+                    )
                 if improved:
                     best_step, best_loss = (step, loss)
                     best_state = {
@@ -1374,10 +1397,7 @@ def train(
                         )
                 if continuation is not None:
                     continuation_observation = curve_summary(record, "full_selector")
-                    phase_step = continuation_start["previous_steps"] + completed_step
-                    if phase_step in {
-                        math.ceil(k * 16 * len(ix_train) / batch_size) for k in range(1, 17)
-                    }:
+                    if state_block is not None:
                         save_static_exposure()
                 save_named_checkpoint("last")
                 if continuation is None:
@@ -1385,11 +1405,8 @@ def train(
                 curve.append(curve_summary(record, "full_selector"))
                 last_completed_point = {"kind": "full_selector", **position()}
                 append_record(observation_log, {"kind": "full_selector", **record})
-                if continuation is not None:
-                    phase_step = continuation_start["previous_steps"] + completed_step
-                    for block in range(1, 17):
-                        if phase_step == math.ceil(block * 16 * len(ix_train) / batch_size):
-                            save_named_checkpoint(f"block{block:02d}", export_model=False)
+                if state_block is not None:
+                    save_named_checkpoint(f"block{state_block:02d}", export_model=False)
                 if not static_teacher:
                     for indices, values, diagnostic_indices in (
                         (current_train_eval, ptrain, diag_train),
@@ -1463,17 +1480,21 @@ def train(
                                 name: continuation_input[name] for name in ("checkpoint", "weights")
                             },
                             continuation_ledger=position()["continuation"],
-                            maximum_phase_updates=math.ceil(256 * len(ix_train) / batch_size),
-                            maximum_training_draws=256 * len(ix_train),
-                            minimum_floor_training_draws=8 * len(ix_train),
-                            required_floor_nonsignificant_observations=8,
+                            maximum_phase_updates=static_controls["maximum_updates"],
+                            maximum_training_draws=static_controls["maximum_training_draws"],
+                            minimum_floor_training_draws=static_controls[
+                                "minimum_floor_training_draws"
+                            ],
+                            required_floor_nonsignificant_observations=static_controls[
+                                "floor_stale_observations"
+                            ],
                             floor_stop_requires_both=True,
                             continuation_policy=copy.deepcopy(continuation.state),
                         )
                         if continuation is not None
                         else dict(
-                            minimum_training_draws=8 * len(ix_train),
-                            maximum_training_draws=32 * len(ix_train),
+                            minimum_training_draws=static_controls["minimum_training_draws"],
+                            maximum_training_draws=static_controls["maximum_training_draws"],
                             initial_weights_sha=expected["initial_weights_sha"],
                         )
                     ),
@@ -1505,7 +1526,7 @@ def train(
                 kind="static_teacher_low_lr_continuation",
                 **copy.deepcopy(continuation.state),
                 block_completed_draws=training_seen,
-                block_maximum_draws=256 * len(ix_train),
+                block_maximum_draws=static_controls["maximum_training_draws"],
                 selected_minimum_fullV_MSE=best_loss,
                 practical_plateau=continuation.state["verdict"] == "PRACTICAL_V_PLATEAU",
                 global_optimum_guarantee=False,
@@ -1516,20 +1537,22 @@ def train(
         initial = static_progress["initial_Tpanel_mse"]
         minimum = static_progress["minimum_observed_Tpanel_mse"]
         adequate = initial is not None and adequate_learning(
-            initial, minimum, static_progress["parameters_changed"]
+            initial, minimum, static_progress["parameters_changed"], static_controls
         )
         return {
             **static_progress,
             "adequate_learning": adequate,
             "horizon": "NOT_CONVERGED/NEEDED_WORK" if status == "COMPLETED" else status,
-            "minimum_completed_draws": 8 * len(ix_train),
-            "maximum_draws": 32 * len(ix_train),
+            "minimum_completed_draws": static_controls["minimum_training_draws"],
+            "maximum_draws": static_controls["maximum_training_draws"],
             "completed_draws": training_seen,
             "stopping_significant_reference": stopper.best,
             "significant_stale_checkpoints": stopper.stale,
             "endpoint_actual_minimum_full_precision_V_MSE": best_loss,
             "sufficiency": bool(
-                adequate and training_seen >= 8 * len(ix_train) and status == "EARLY_STOPPED"
+                adequate
+                and training_seen >= static_controls["minimum_training_draws"]
+                and status == "EARLY_STOPPED"
             ),
             "claim": "operational finite curve criterion, never global objective optimum",
         }
@@ -1735,23 +1758,31 @@ def train(
             if continuation is None and evaluate(0, True, 0 in diagnostic_steps):
                 status = "EARLY_STOPPED"
             else:
-                for step in update_steps(cfg["training"]["steps"]):
+                for step in update_steps(
+                    cfg["training"]["steps"]
+                    - (continuation_start["previous_steps"] if continuation_start else 0)
+                ):
                     attempted_step = step
                     n = (
                         min(
                             batch_size,
-                            256 * len(ix_train)
+                            static_controls["maximum_training_draws"]
                             - continuation_start["previous_draws"]
                             - training_seen,
                         )
                         if continuation is not None
-                        else min(batch_size, 32 * len(ix_train) - training_seen)
+                        else min(
+                            batch_size, static_controls["maximum_training_draws"] - training_seen
+                        )
                         if static_teacher
                         else (epoch_sampler.next_batch_size if epoch_sampler else batch_size)
                     )
                     if (
                         cfg["limits"]["samples"] is not None
-                        and samples + n > cfg["limits"]["samples"]
+                        and samples
+                        + n
+                        + (continuation_start["previous_rows"] if continuation_start else 0)
+                        > cfg["limits"]["samples"]
                         or (
                             cfg["limits"]["seconds"] is not None
                             and time.monotonic() - start > cfg["limits"]["seconds"]
@@ -1864,7 +1895,7 @@ def train(
                     model_state_status = "LAST_COMPLETED_UPDATE"
                     if (
                         continuation is not None
-                        and lr[0] == 0.000001
+                        and lr[0] == static_controls["floor"]
                         and continuation.state["floor_first_update"] is None
                     ):
                         continuation.state["floor_first_update"] = (

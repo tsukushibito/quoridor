@@ -77,6 +77,21 @@ DEFAULTS = {
         "main_volume_manifest": None,
         "main_volume_manifest_sha256": None,
     },
+    "static_teacher": {
+        "maximum_training_draws": None,
+        "minimum_training_draws": None,
+        "minimum_floor_training_draws": None,
+        "overfit_observations": None,
+        "overfit_validation_absolute": None,
+        "overfit_validation_relative": None,
+        "overfit_training_absolute": None,
+        "overfit_training_relative": None,
+        "progress_absolute": None,
+        "progress_relative": None,
+        "initializer_seed": None,
+        "panel_seed": None,
+        "state_checkpoint_steps": [],
+    },
 }
 MIXTURE_FIELDS = (
     "train_family_row_cap",
@@ -330,6 +345,10 @@ def resolve_config(path=None, overrides=()):
         k in result["optimizer"] for k in ("betas", "eps")
     ):
         raise ValueError("explicit Adam settings currently belong to the warm-start study")
+    if result["training"]["target"] == "static_teacher":
+        from .static_learning import static_settings
+
+        static_settings(result)
     return result
 
 

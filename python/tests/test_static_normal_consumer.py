@@ -8,6 +8,8 @@ import unittest
 
 import numpy as np
 
+from test_static_config_settings import config_for
+
 from quoridor_training.common import resolve_config
 from quoridor_training.compact_cache import IndexedPublicCorpus
 from quoridor_training.public_features import (
@@ -22,8 +24,7 @@ from quoridor_training.static_public_corpus import StaticTeacherCorpus
 from quoridor_training.static_learning import (
     StaticMeasurements,
     adequate_learning,
-    recipe,
-    validate_recipe,
+    static_settings,
 )
 from quoridor_training.supply import FLOATS_PER_ROW, PackedSupply, payload_views
 
@@ -154,20 +155,20 @@ class NormalStaticConsumer(unittest.TestCase):
             self.corpus.verify_binding()
 
     def test_real_multiplicity_recipe_and_finite_tail(self):
-        cfg = recipe(1003, 117, device="cpu", threads=1)
+        cfg = config_for(1003, 117)
         resolved = resolve_config(cfg)
-        validate_recipe(resolved, 1003, 117)
-        self.assertEqual(resolved["training"]["steps"], 8)
-        self.assertEqual(32 * 1003 - 4096 * 7, 3424)
-        self.assertEqual(resolved["training"]["warmup_steps"], 1)
-        self.assertEqual(resolved["evaluation"]["early_stopping_patience"], 4)
-        self.assertEqual(resolved["limits"]["samples"], 32 * 1003 + 33 * (2 * 117 + 2 * 1003))
+        settings = static_settings(resolved, 1003, 117)
+        self.assertEqual(resolved["training"]["steps"], 63)
+        self.assertEqual(256 * 1003 - 4096 * 62, 2816)
+        self.assertEqual(resolved["training"]["warmup_steps"], 0)
+        self.assertEqual(resolved["evaluation"]["early_stopping_patience"], 8)
+        self.assertEqual(resolved["limits"]["samples"], 850000000)
         cfg["training"]["steps"] += 1
-        with self.assertRaisesRegex(ValueError, "fixed"):
-            validate_recipe(cfg, 1003, 117)
-        self.assertFalse(adequate_learning(0.5, 0.5, True))
-        self.assertFalse(adequate_learning(0.5, 0.1, False))
-        self.assertTrue(adequate_learning(0.5, 0.49, True))
+        with self.assertRaisesRegex(ValueError, "steps"):
+            static_settings(cfg, 1003, 117)
+        self.assertFalse(adequate_learning(0.5, 0.5, True, settings))
+        self.assertFalse(adequate_learning(0.5, 0.1, False, settings))
+        self.assertTrue(adequate_learning(0.5, 0.49, True, settings))
 
 
 if __name__ == "__main__":

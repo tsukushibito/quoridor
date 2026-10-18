@@ -11,10 +11,12 @@ import unittest
 
 import numpy as np
 
+from test_static_config_settings import config_for, policy_settings
+
 from quoridor_training.common import PARAMETER_SHAPES
 from quoridor_training.static_learning import (
     StaticContinuation,
-    continuation_recipe,
+    static_settings,
     observation_index_sha,
     read_static_continuation,
     restore_static_exposure,
@@ -28,13 +30,13 @@ BASELINE = dict(train=dict(target_mse=0.15), validation=dict(target_mse=0.2))
 class StaticContinuationTests(unittest.TestCase):
     def test_fixed256R_ceil_boundaries_preserve_full_batches_and_only_final_tail(self):
         r = 2809595
-        cfg = continuation_recipe(r, 312247, device="cpu", threads=1, optimizer_mode="matching")
+        cfg = config_for(r, 312247, device="cpu", threads=1, optimizer_mode="matching")
         self.assertEqual(cfg["training"]["steps"], 175600)
         self.assertEqual(cfg["training"]["warmup_steps"], 0)
         self.assertEqual(cfg["evaluation"]["checkpoints"][16], 10975)
         self.assertEqual(10975 * 4096, 16 * r + 80)
         self.assertEqual(256 * r - (175600 - 1) * 4096, 2816)
-        next_cfg = continuation_recipe(
+        next_cfg = config_for(
             r,
             312247,
             device="cpu",
@@ -43,18 +45,19 @@ class StaticContinuationTests(unittest.TestCase):
             phase_steps=10975,
             phase_rows=52000000,
         )
-        self.assertEqual(next_cfg["training"]["steps"], 175600 - 10975)
-        self.assertEqual(next_cfg["limits"]["samples"], 850000000 - 52000000)
+        self.assertEqual(next_cfg["training"]["steps"], 175600)
+        self.assertEqual(next_cfg["limits"]["samples"], 850000000)
         self.assertEqual(
-            next_cfg["evaluation"]["checkpoints"][1], cfg["evaluation"]["checkpoints"][17] - 10975
+            [v - 10975 for v in next_cfg["evaluation"]["checkpoints"] if v > 10975][0],
+            cfg["evaluation"]["checkpoints"][17] - 10975,
         )
         with self.assertRaisesRegex(ValueError, "reset is not admitted"):
-            continuation_recipe(r, 312247, device="cpu", threads=1, optimizer_mode="fresh")
+            config_for(r, 312247, device="cpu", threads=1, optimizer_mode="fresh")
 
     def test_rounded_floor_actual_draws_and_divergence_priority(self):
         r = 4097
-        plateau = StaticContinuation(r, BASELINE)
-        overfit = StaticContinuation(r, BASELINE)
+        plateau = StaticContinuation(policy_settings(r), BASELINE)
+        overfit = StaticContinuation(policy_settings(r), BASELINE)
         for k in range(1, 31):
             draws = ((k * r + 4095) // 4096) * 4096
             a = plateau.observe(0.2, 0.15, draws)
@@ -102,7 +105,7 @@ class StaticContinuationTests(unittest.TestCase):
             r = 4097
             panel = np.arange(r)
             validation = np.arange(r, r + 2)
-            cfg = continuation_recipe(
+            cfg = config_for(
                 r,
                 2,
                 device="cpu",
@@ -126,7 +129,7 @@ class StaticContinuationTests(unittest.TestCase):
                 train_panel_sha256=observation_index_sha(panel),
                 validation_index_sha256=observation_index_sha(validation),
             )
-            policy = StaticContinuation(r, BASELINE)
+            policy = StaticContinuation(policy_settings(r), BASELINE)
             policy.observe(0.19, 0.14, 8192)
             point = dict(
                 step=2,
@@ -170,6 +173,7 @@ class StaticContinuationTests(unittest.TestCase):
                 ),
                 static_continuation=dict(
                     identity=identity,
+                    resolved_config_sha256=static_settings(cfg, r, 2)["config_sha256"],
                     evaluation_complete_for_position=True,
                     last_observation=point,
                     old_executed=dict(logical_rows=80, draws=32, steps=8),
@@ -225,7 +229,7 @@ class StaticContinuationTests(unittest.TestCase):
                 )
 
     def test_third_nonsignificant_decays_despite_tiny_strict_bests(self):
-        policy = StaticContinuation(10, BASELINE)
+        policy = StaticContinuation(policy_settings(10), BASELINE)
         for index in range(1, 4):
             result = policy.observe(0.2 - index * 0.000001, 0.15, 10 * index)
             self.assertTrue(result["strict_improved"])
@@ -236,7 +240,7 @@ class StaticContinuationTests(unittest.TestCase):
         self.assertEqual(result["stale_at_lr"], 0)
 
     def test_floor_requires_both_eight_R_and_eight_consecutive_observations(self):
-        policy = StaticContinuation(10, BASELINE)
+        policy = StaticContinuation(policy_settings(10), BASELINE)
         for index in range(1, 29):
             result = policy.observe(0.2, 0.15, 10 * index)
             self.assertFalse(result["stop"])
@@ -246,11 +250,11 @@ class StaticContinuationTests(unittest.TestCase):
         self.assertEqual(result["floor_stale"], 8)
 
     def test_policy_round_trip_crosses_block_without_reset_or_duplicate_observation(self):
-        first = StaticContinuation(10, BASELINE)
+        first = StaticContinuation(policy_settings(10), BASELINE)
         for index in range(1, 17):
             first.observe(0.2, 0.15, index * 10)
         saved = json.loads(json.dumps(first.state))
-        second = StaticContinuation(10, BASELINE, state=saved)
+        second = StaticContinuation(policy_settings(10), BASELINE, state=saved)
         expected = first.observe(0.2, 0.15, 170)
         self.assertEqual(second.observe(0.2, 0.15, 170), expected)
         with self.assertRaisesRegex(ValueError, "never repeat prior draws"):
@@ -261,7 +265,7 @@ class StaticContinuationTests(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as directory:
             folder = Path(directory)
-            cfg = continuation_recipe(4, 2, device="cpu", threads=1, optimizer_mode="matching")
+            cfg = config_for(4, 2, device="cpu", threads=1, optimizer_mode="matching")
             model = {
                 name: torch.zeros(shape, dtype=torch.float32)
                 for name, shape in PARAMETER_SHAPES.items()
