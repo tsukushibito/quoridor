@@ -1,0 +1,71 @@
+{
+  "status": "COMPLETE",
+  "entered_UTC": "2026-10-18T09:08:44.308532+00:00",
+  "identity": {
+    "pid": 1507198,
+    "start_ticks": "36286533",
+    "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+  },
+  "executed_source": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/family_bootstrap_cedar.py",
+    "sha256": "36411f90275a4ba46bfb9d1bb4dd2dc47cd337e49b12e65cf2be269b48ffb439",
+    "bytes": 7604,
+    "mode": "0644"
+  },
+  "executed_function_ast_sha256": "4cba1226422a4a1108ef2ea23ec5677ed5764a91f77a28869553aab4cb3de70d",
+  "input": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/score-input.json",
+    "sha256": "b05bf9eb8756672f4fb9e22e8ab35d20976a49ace392edd82c11c93ab61c129a",
+    "bytes": 16485,
+    "mode": "0644"
+  },
+  "settings": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/bootstrap-settings-v2.json",
+    "sha256": "3d85c485959e1a9b666e9731c6c46147f065fb24e864c831dec58160acf4f578",
+    "bytes": 2355,
+    "mode": "0644"
+  },
+  "interpreter": "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+  "real_interpreter": "/home/vscode/.cache/inference/python/cpython-3.14.7-linux-x86_64-gnu/bin/python3.14",
+  "Python": "3.14.7 (main, Sep 24 2026, 17:58:18) [Clang 22.1.3 ]",
+  "NumPy": "2.5.3",
+  "NumPy_module": "/home/vscode/.cache/inference/envs/quoridor-training/lib/python3.14/site-packages/numpy/__init__.py",
+  "worker_affinity": [
+    10
+  ],
+  "NoNewPrivs": "1",
+  "thread_environment": {
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1"
+  },
+  "bit_generator": "PCG64",
+  "seed": 32482026101802,
+  "resamples": 10000,
+  "quantiles": [
+    [
+      0.025,
+      0.975
+    ]
+  ],
+  "new_model_head_Search_game_fit_archive_work": 0,
+  "draw_call_entered": true,
+  "completed_UTC": "2026-10-18T09:08:44.549358+00:00",
+  "joint_table": {
+    "sha256": "06c8ca73ddad3853955342e4c9cd6db9b058f67e8bbbeda90cc532a00f0e54e5",
+    "shape": [
+      10000,
+      512
+    ],
+    "dtype": "int64",
+    "byteorder": "little",
+    "choice_calls": 1,
+    "persisted_table_bytes": 0
+  },
+  "output": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/bootstrap-output.json",
+    "sha256": "8e705968b0e00b7ad514ae529f4a767d63d12090b6eee5fb061516ef228e087a",
+    "bytes": 664,
+    "mode": "0644"
+  }
+}

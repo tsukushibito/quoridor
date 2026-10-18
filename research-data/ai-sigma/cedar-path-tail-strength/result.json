@@ -1,0 +1,672 @@
+{
+  "issue": "quoridor-4lc.324.8.1",
+  "status": "ORIGINAL_FINITE_SAVED_ANALYSIS_COMPLETE",
+  "scope": "Original fixed-book/time/Cedar/three-lane mixed-tuple engine results",
+  "LEFT": {
+    "label": "Cedar path_tail ON",
+    "zero_stock_safe_race": true,
+    "zero_stock_safe_race_method": "path_tail",
+    "lmr": true,
+    "lmr_method": "depth_rank",
+    "ordering_profile": "control"
+  },
+  "RIGHT": {
+    "label": "Cedar cutoff OFF",
+    "zero_stock_safe_race": false,
+    "zero_stock_safe_race_method": "manhattan",
+    "lmr": true,
+    "lmr_method": "depth_rank",
+    "ordering_profile": "control"
+  },
+  "tally": {
+    "games": 1024,
+    "known": 1024,
+    "W": 514,
+    "D": 1,
+    "L": 509,
+    "UNKNOWN": 0,
+    "left_points": 514.5,
+    "left_score": 0.50244140625,
+    "planned_low": 0.50244140625,
+    "planned_high": 0.50244140625,
+    "goal": 1023,
+    "draw_status": 1,
+    "csv_nonempty_failure": 0
+  },
+  "complete_pairs": 512,
+  "family_score_histogram": {
+    "0.0": 39,
+    "0.5": 431,
+    "0.75": 1,
+    "1.0": 41
+  },
+  "primary": {
+    "contrast": "CEDAR_PATH_TAIL_ON_VS_OFF",
+    "point": 0.50244140625,
+    "interval": [
+      0.4853515625,
+      0.51953125
+    ],
+    "confidence": 0.95,
+    "quantiles": [
+      0.025,
+      0.975
+    ]
+  },
+  "decision": "UNRESOLVED_FIXED_BOOK_TIME_ONLY",
+  "stage9_predetermined_cutoff": "path_tail",
+  "stage9_entry_issued": false,
+  "planned_bounds": [
+    0.50244140625,
+    0.50244140625
+  ],
+  "sole_joint_table": {
+    "sha256": "06c8ca73ddad3853955342e4c9cd6db9b058f67e8bbbeda90cc532a00f0e54e5",
+    "shape": [
+      10000,
+      512
+    ],
+    "dtype": "int64",
+    "byteorder": "little",
+    "choice_calls": 1,
+    "persisted_table_bytes": 0
+  },
+  "native_batch_CI": "32 original xorshift/2000 diagnostics; not averaged or input to final CI",
+  "bootstrap": {
+    "source": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/family_bootstrap_cedar.py",
+      "sha256": "36411f90275a4ba46bfb9d1bb4dd2dc47cd337e49b12e65cf2be269b48ffb439",
+      "bytes": 7604,
+      "mode": "0644"
+    },
+    "input": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/score-input.json",
+      "sha256": "b05bf9eb8756672f4fb9e22e8ab35d20976a49ace392edd82c11c93ab61c129a",
+      "bytes": 16485,
+      "mode": "0644"
+    },
+    "settings": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/bootstrap-settings-v2.json",
+      "sha256": "3d85c485959e1a9b666e9731c6c46147f065fb24e864c831dec58160acf4f578",
+      "bytes": 2355,
+      "mode": "0644"
+    },
+    "environment": {
+      "interpreter": "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "real_interpreter": "/home/vscode/.cache/inference/python/cpython-3.14.7-linux-x86_64-gnu/bin/python3.14",
+      "Python": "3.14.7 (main, Sep 24 2026, 17:58:18) [Clang 22.1.3 ]",
+      "NumPy": "2.5.3"
+    },
+    "output": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/bootstrap-output.json",
+      "sha256": "8e705968b0e00b7ad514ae529f4a767d63d12090b6eee5fb061516ef228e087a",
+      "bytes": 664,
+      "mode": "0644"
+    },
+    "receipt": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/bootstrap-receipt.json",
+      "sha256": "801441123a6c4259ad59a4f8f08a916b736ba67a60292f94e91e19273894c6e8",
+      "bytes": 2492,
+      "mode": "0644"
+    },
+    "returned_lifetime": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/bootstrap-returned-lifetime.json",
+      "sha256": "64fd5906ec697eca22482217a5d66a0d9210d12e009d871593b83fae8bfd4879",
+      "bytes": 1011,
+      "mode": "0644"
+    },
+    "actual_mathematical_identity": {
+      "pid": 1507198,
+      "start_ticks": "36286533",
+      "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+    },
+    "prior_AST_refusal_before_draw": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/bootstrap-pre-draw-refusal-v1.json",
+      "sha256": "21661b6ea39857bcbf225b7da268de8218d00dc54efac37f612e26b9a5dcfdaf",
+      "bytes": 1272,
+      "mode": "0644"
+    },
+    "no_resampling_in_render": true
+  },
+  "local_descriptives": {
+    "source_tuple": [
+      {
+        "group": "source_tuple",
+        "value": "new928_image2be3_BUILD9ea_source9a_caller4f",
+        "families": "464",
+        "games": "928",
+        "known": "928",
+        "W": "462",
+        "D": "1",
+        "L": "465",
+        "UNKNOWN": "0",
+        "left_points": "462.5",
+        "left_score": "0.4983836206896552",
+        "planned_low": "0.4983836206896552",
+        "planned_high": "0.4983836206896552",
+        "goal": "927",
+        "draw_status": "1",
+        "csv_nonempty_failure": "0",
+        "interpretation": "Descriptive, no extra CI or local selection"
+      },
+      {
+        "group": "source_tuple",
+        "value": "saved96_image75f_BUILD637_source6d2_caller524f_reader4f",
+        "families": "48",
+        "games": "96",
+        "known": "96",
+        "W": "52",
+        "D": "0",
+        "L": "44",
+        "UNKNOWN": "0",
+        "left_points": "52.0",
+        "left_score": "0.5416666666666666",
+        "planned_low": "0.5416666666666666",
+        "planned_high": "0.5416666666666666",
+        "goal": "96",
+        "draw_status": "0",
+        "csv_nonempty_failure": "0",
+        "interpretation": "Descriptive, no extra CI or local selection"
+      }
+    ],
+    "lane": [
+      {
+        "group": "lane",
+        "value": "0",
+        "families": "176",
+        "games": "352",
+        "known": "352",
+        "W": "177",
+        "D": "1",
+        "L": "174",
+        "UNKNOWN": "0",
+        "left_points": "177.5",
+        "left_score": "0.5042613636363636",
+        "planned_low": "0.5042613636363636",
+        "planned_high": "0.5042613636363636",
+        "goal": "351",
+        "draw_status": "1",
+        "csv_nonempty_failure": "0",
+        "interpretation": "Descriptive, no extra CI or local selection"
+      },
+      {
+        "group": "lane",
+        "value": "1",
+        "families": "176",
+        "games": "352",
+        "known": "352",
+        "W": "179",
+        "D": "0",
+        "L": "173",
+        "UNKNOWN": "0",
+        "left_points": "179.0",
+        "left_score": "0.5085227272727273",
+        "planned_low": "0.5085227272727273",
+        "planned_high": "0.5085227272727273",
+        "goal": "352",
+        "draw_status": "0",
+        "csv_nonempty_failure": "0",
+        "interpretation": "Descriptive, no extra CI or local selection"
+      },
+      {
+        "group": "lane",
+        "value": "2",
+        "families": "160",
+        "games": "320",
+        "known": "320",
+        "W": "158",
+        "D": "0",
+        "L": "162",
+        "UNKNOWN": "0",
+        "left_points": "158.0",
+        "left_score": "0.49375",
+        "planned_low": "0.49375",
+        "planned_high": "0.49375",
+        "goal": "320",
+        "draw_status": "0",
+        "csv_nonempty_failure": "0",
+        "interpretation": "Descriptive, no extra CI or local selection"
+      }
+    ],
+    "LEFT_seat": [
+      {
+        "group": "LEFT_seat",
+        "value": "0",
+        "families": "512",
+        "games": "512",
+        "known": "512",
+        "W": "254",
+        "D": "1",
+        "L": "257",
+        "UNKNOWN": "0",
+        "left_points": "254.5",
+        "left_score": "0.4970703125",
+        "planned_low": "0.4970703125",
+        "planned_high": "0.4970703125",
+        "goal": "511",
+        "draw_status": "1",
+        "csv_nonempty_failure": "0",
+        "interpretation": "Descriptive, no extra CI or local selection"
+      },
+      {
+        "group": "LEFT_seat",
+        "value": "1",
+        "families": "512",
+        "games": "512",
+        "known": "512",
+        "W": "260",
+        "D": "0",
+        "L": "252",
+        "UNKNOWN": "0",
+        "left_points": "260.0",
+        "left_score": "0.5078125",
+        "planned_low": "0.5078125",
+        "planned_high": "0.5078125",
+        "goal": "512",
+        "draw_status": "0",
+        "csv_nonempty_failure": "0",
+        "interpretation": "Descriptive, no extra CI or local selection"
+      }
+    ],
+    "prefix_length": [
+      {
+        "group": "prefix_length",
+        "value": "12",
+        "families": "126",
+        "games": "252",
+        "known": "252",
+        "W": "123",
+        "D": "0",
+        "L": "129",
+        "UNKNOWN": "0",
+        "left_points": "123.0",
+        "left_score": "0.4880952380952381",
+        "planned_low": "0.4880952380952381",
+        "planned_high": "0.4880952380952381",
+        "goal": "252",
+        "draw_status": "0",
+        "csv_nonempty_failure": "0",
+        "interpretation": "Descriptive, no extra CI or local selection"
+      },
+      {
+        "group": "prefix_length",
+        "value": "16",
+        "families": "129",
+        "games": "258",
+        "known": "258",
+        "W": "131",
+        "D": "1",
+        "L": "126",
+        "UNKNOWN": "0",
+        "left_points": "131.5",
+        "left_score": "0.5096899224806202",
+        "planned_low": "0.5096899224806202",
+        "planned_high": "0.5096899224806202",
+        "goal": "257",
+        "draw_status": "1",
+        "csv_nonempty_failure": "0",
+        "interpretation": "Descriptive, no extra CI or local selection"
+      },
+      {
+        "group": "prefix_length",
+        "value": "4",
+        "families": "127",
+        "games": "254",
+        "known": "254",
+        "W": "130",
+        "D": "0",
+        "L": "124",
+        "UNKNOWN": "0",
+        "left_points": "130.0",
+        "left_score": "0.5118110236220472",
+        "planned_low": "0.5118110236220472",
+        "planned_high": "0.5118110236220472",
+        "goal": "254",
+        "draw_status": "0",
+        "csv_nonempty_failure": "0",
+        "interpretation": "Descriptive, no extra CI or local selection"
+      },
+      {
+        "group": "prefix_length",
+        "value": "8",
+        "families": "130",
+        "games": "260",
+        "known": "260",
+        "W": "130",
+        "D": "0",
+        "L": "130",
+        "UNKNOWN": "0",
+        "left_points": "130.0",
+        "left_score": "0.5",
+        "planned_low": "0.5",
+        "planned_high": "0.5",
+        "goal": "260",
+        "draw_status": "0",
+        "csv_nonempty_failure": "0",
+        "interpretation": "Descriptive, no extra CI or local selection"
+      }
+    ],
+    "source_partition": [
+      {
+        "group": "source_partition",
+        "value": "train",
+        "families": "401",
+        "games": "802",
+        "known": "802",
+        "W": "399",
+        "D": "1",
+        "L": "402",
+        "UNKNOWN": "0",
+        "left_points": "399.5",
+        "left_score": "0.4981296758104738",
+        "planned_low": "0.4981296758104738",
+        "planned_high": "0.4981296758104738",
+        "goal": "801",
+        "draw_status": "1",
+        "csv_nonempty_failure": "0",
+        "interpretation": "Descriptive, no extra CI or local selection"
+      },
+      {
+        "group": "source_partition",
+        "value": "validation",
+        "families": "111",
+        "games": "222",
+        "known": "222",
+        "W": "115",
+        "D": "0",
+        "L": "107",
+        "UNKNOWN": "0",
+        "left_points": "115.0",
+        "left_score": "0.5180180180180181",
+        "planned_low": "0.5180180180180181",
+        "planned_high": "0.5180180180180181",
+        "goal": "222",
+        "draw_status": "0",
+        "csv_nonempty_failure": "0",
+        "interpretation": "Descriptive, no extra CI or local selection"
+      }
+    ]
+  },
+  "accounting": {
+    "original_nodes_counted_once": 358239974,
+    "new_nodes_counted_once": 3492176875,
+    "cumulative_nodes": 3850416849,
+    "original_whole_cap": 16000000000,
+    "new_nonlending_attempt_cap": 14500000000,
+    "failed_op_balances_held_not_lent": [
+      387171225,
+      374707804,
+      379880997
+    ],
+    "new_operation_unused_balances_not_lent": 11007823125,
+    "old_historical_remaining": 15641760026,
+    "refund_or_allowance_transfer": 0
+  },
+  "clocks": {
+    "new_lane_outer_seconds_once": [
+      1809.323352345964,
+      1825.6912492440315,
+      1663.2618941760156
+    ],
+    "parallel_walls_not_summed": true,
+    "submission_created_to_last_outer_finish_seconds": 1842.891763,
+    "submission_created_to_last_outer_finish_scope": "UTC control window including pre-native admission; not native-only timing or added to nested walls",
+    "first_submit_created_at": "2026-10-18T08:13:14.950382+00:00",
+    "last_outer_finished_at": "2026-10-18T08:43:57.842145+00:00"
+  },
+  "old_failed_cohort_wall_s_historical_once": 206.627018,
+  "mixed_tuples": {
+    "old96": "image75f/BUILD637/source6d2/caller524f; separate repaired reader4f",
+    "new928": "image2be3/BUILD9ea029/source9a/caller4f",
+    "no_same_binary_performance_equivalence_claim": true
+  },
+  "original_failed_old96_unchanged": [
+    {
+      "operation": 0,
+      "original_completion": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-0/execution-v1/run-000/operation/manifest.json",
+        "sha256": "184841ee806b632f20e40233aea4159d99a2413499bd744b3560efe012563238",
+        "bytes": 9325,
+        "mode": "0644"
+      },
+      "separate_acceptance": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/cedar-path-tail-strength-v1/saved-original96-acceptance-v1/acceptance.json",
+        "sha256": "d1c81a3ee17a51db124752cd8ce71a0b6c584ae753f2c136a9bff153e1e24e59",
+        "bytes": 4334,
+        "mode": "0644"
+      },
+      "replayed": false
+    },
+    {
+      "operation": 1,
+      "original_completion": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-1/execution-v1/run-000/operation/manifest.json",
+        "sha256": "48f4ce14e055874474989be614ef18d4e51e068ef9e37a1db31d1b53e705bd2d",
+        "bytes": 9335,
+        "mode": "0644"
+      },
+      "separate_acceptance": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/cedar-path-tail-strength-v1/saved-original96-acceptance-v1/acceptance.json",
+        "sha256": "d1c81a3ee17a51db124752cd8ce71a0b6c584ae753f2c136a9bff153e1e24e59",
+        "bytes": 4334,
+        "mode": "0644"
+      },
+      "replayed": false
+    },
+    {
+      "operation": 2,
+      "original_completion": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-implementation-v1/numeric-v1/arena-parallel-v1/lane-2/execution-v1/run-000/operation/manifest.json",
+        "sha256": "d145885b71a128f724d3d0ea8cf9e89dfe48f3124f9b3f45ed55d3134807eef1",
+        "bytes": 9335,
+        "mode": "0644"
+      },
+      "separate_acceptance": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/cedar-path-tail-strength-v1/saved-original96-acceptance-v1/acceptance.json",
+        "sha256": "d1c81a3ee17a51db124752cd8ce71a0b6c584ae753f2c136a9bff153e1e24e59",
+        "bytes": 4334,
+        "mode": "0644"
+      },
+      "replayed": false
+    }
+  ],
+  "missing_compact_projections": [
+    "accepted-depth/work/physicalNNUE",
+    "turn-clock fallback/reserve/late-return/forfeit counters",
+    "native exact UTC/fullfees/continuous family peak"
+  ],
+  "native_nn_calls_zero_scope": "Inference-pump counter, not measured zero NNUE head calls",
+  "separate_later_human_addendum": "Per-turn explanatory work is separate; no change to this original inference",
+  "limits": [
+    "Reused fixed512 bench, not fresh held-out openings; unknown prior/public interior history exposure",
+    "Mixed old96 and new928 executed source/image tuples, with separate data acceptance of original failures",
+    "Three concurrent lanes; no serial-equivalence or isolated clock claim",
+    "Interval includes .5; no equivalence, noninferiority, absence of effect, general strength or causal conclusion",
+    "No model/default promotion; no conversion of prior32-prefix speed ratio into game effect",
+    "Full fees, continuous memory peak, physical NNUE calls and unprojected turn facts UNKNOWN"
+  ],
+  "scientific_replay": {
+    "new_game_native_model_forward_fit_pool_solver": 0,
+    "RAW_archive_decodes_in_original_analysis": 0,
+    "final_PCG64_choice_calls": 1,
+    "extra_CI_or_local_intervals": 0
+  },
+  "render_environment": {
+    "Python": "3.14.7",
+    "Matplotlib": "3.11.2",
+    "entered_UTC": "2026-10-18T09:15:10.296409+00:00",
+    "render_source": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/render_final.py",
+      "sha256": "8bf7bb12eb9825e0ab46204675bcfb00711f263ec64ef9c257e451b24eb61a66",
+      "bytes": 16975,
+      "mode": "0644"
+    },
+    "temporary_plot_cache_removed": true
+  },
+  "artifacts": [
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/input-bindings.json",
+      "sha256": "7887ff7df91806af499d370bcb285009e7d54ed60de6ec5555c5e83219cf7200",
+      "bytes": 1555,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/analysis-read-refs.json",
+      "sha256": "5a8c68be96495e51d2a866d23b2d1994211e12a29d782ffbe2ef627476699816",
+      "bytes": 41727,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/metadata-checks.json",
+      "sha256": "a400c73b3dd1e80741e420576389edffe5070f425930a69344d0d54ea7f455b9",
+      "bytes": 1796,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/games.csv",
+      "sha256": "98dce294be36121402ef8509937dc29c7a33116e3505f3ef0b767ce8862cb4d5",
+      "bytes": 287842,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/families.csv",
+      "sha256": "005fffda3c2be9e1b684991fdf1ff2710aa2e171a8795c1ac523a8de6fdc0b1d",
+      "bytes": 146094,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/operation-summary.csv",
+      "sha256": "3418c4158002a1725ac1ece2bd4c99265fdd7e123be8a8d8051f80cbd88f25dc",
+      "bytes": 5734,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/local-summary.csv",
+      "sha256": "50bc5a4826822eda295ea9f8bffd0766e7dc6550b117aa9ccf463eedbf026d59",
+      "bytes": 2153,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/native-batch-diagnostics.csv",
+      "sha256": "d204df3120bfad2a645c1685a49edb862c17cccdcbbce31253ca5ac8e2fe886e",
+      "bytes": 2769,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/archive-references-only.json",
+      "sha256": "03ad468db500ed6a5cbc1d445078cded0d519899ae942197bfe3ca5897ef6fe4",
+      "bytes": 19019,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/tuple-bindings.json",
+      "sha256": "5a678a9672c986acdf677144a0d9ba40c87cc1e99aa26807ec0597dffb8491c9",
+      "bytes": 73699,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/prepare_saved_analysis.py",
+      "sha256": "52265c65a5766a49e5054b620d82dc680a7f9cce0e14c163f7b811c56be81f3a",
+      "bytes": 22336,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/family_bootstrap_cedar.py",
+      "sha256": "36411f90275a4ba46bfb9d1bb4dd2dc47cd337e49b12e65cf2be269b48ffb439",
+      "bytes": 7604,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/score-input.json",
+      "sha256": "b05bf9eb8756672f4fb9e22e8ab35d20976a49ace392edd82c11c93ab61c129a",
+      "bytes": 16485,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/bootstrap-settings-v2.json",
+      "sha256": "3d85c485959e1a9b666e9731c6c46147f065fb24e864c831dec58160acf4f578",
+      "bytes": 2355,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/bootstrap-output.json",
+      "sha256": "8e705968b0e00b7ad514ae529f4a767d63d12090b6eee5fb061516ef228e087a",
+      "bytes": 664,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/bootstrap-receipt.json",
+      "sha256": "801441123a6c4259ad59a4f8f08a916b736ba67a60292f94e91e19273894c6e8",
+      "bytes": 2492,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/bootstrap-returned-lifetime.json",
+      "sha256": "64fd5906ec697eca22482217a5d66a0d9210d12e009d871593b83fae8bfd4879",
+      "bytes": 1011,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/bootstrap-pre-draw-refusal-v1.json",
+      "sha256": "21661b6ea39857bcbf225b7da268de8218d00dc54efac37f612e26b9a5dcfdaf",
+      "bytes": 1272,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/runtime-statistical-source-proof.json",
+      "sha256": "1af480bc17078e4c33d0ff330d2530a928630a72f4352134ea0eee37025490f5",
+      "bytes": 1077,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/prepare-FAILED.json",
+      "sha256": "97e6bc0ec41d323d3c60894c42daca197c96fa436151720b383d8faef9d068fc",
+      "bytes": 1154,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/prepare-receiver-repair-v2.json",
+      "sha256": "c56715c633359c2964ec58e63ba26de9dc377f911727ddd16069245f556e7f35",
+      "bytes": 2395,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/storage-preentry-refusal-v1.json",
+      "sha256": "75953198b3df3bc4f96991fe724fc0e638e129886f06b9fd54348e6a7650c8ed",
+      "bytes": 586,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/storage-guard-resolution.json",
+      "sha256": "97f4f65a694688fdb03a0aee478070590e6aa8b6196895678a0d140204b6813a",
+      "bytes": 380,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/primary-family-result.png",
+      "sha256": "8ebf1c0403966ffc091d8de06735fdfea89d90173db3d0ef630b434fc18cd439",
+      "bytes": 52456,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/primary-family-result.svg",
+      "sha256": "5c33cc78b239d99f5f6eeacc189fe0bfda67750fddb230b67962d476568891d4",
+      "bytes": 45092,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/operation-results.png",
+      "sha256": "5d599494f51602fb78014d156eb51f23aa1e286a906e464055e3252a357b88b5",
+      "bytes": 94422,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-path-tail-strength-analysis-v1/results-v1/operation-results.svg",
+      "sha256": "d60901a44632a808c0ccab9b5582ef4a90c33ac1d494a0f111e36db74b08d81c",
+      "bytes": 49419,
+      "mode": "0644"
+    }
+  ],
+  "leaf_status": "in_progress_pending_owner_acceptance",
+  "support_reapplication_or_refund": 0
+}

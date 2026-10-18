@@ -127,3 +127,7 @@ GPU学習は明示タスクの期限・資源上限に従って具体化する�
 ## Cedar v1（シダー）：研究呼称と探索調整（2026-10-18）
 
 Cedar v1は原324.7で研究優先候補になったClaustrophobia静的教師NNUE、新C BEST58305、weights `35cbb976be12e24ac6ff8204bf1937fd79673484ddc792065b6aabb6cbb36f0e` の名称対応である。原Cラベル・model identity/path・重み・製品登録をrenameせず、固定の特徴・出力数学を維持する。人間の直接決定により、まず両側LMR ON/depth_rankを固定したCedarのpath_tail ON/OFF棋力比較（quoridor-4lc.324.8、元512両色1024局/16G）を行い、並行設計するLMR調整（quoridor-4lc.324.9）では現depth_rank対OFFから少数・一要因候補を検証する。既存共通search/arenaと解決済run configを使い、候補選択データと最終確認を区別する。最適は試した条件内の選択だけとし、本家Claustrophobia/Sigma比較は探索調整後の判断へ送る。新教師・学習・モデル/default昇格は含めない。原結果と最新判断は[研究知見](../research-findings.md#cedar-v1シダーの探索調整へ方針更新2026-10-18人間直接決定)、具体scopeは[第一段階契約](../../.artifacts/research-team/integration324/cedar-path-tail-strength-v1/task.md)と[有限LMR計画](../../.artifacts/research-team/integration324/cedar-lmr-tuning-v1/task.md)に置く。
+
+### Cedar第一段階の有限結果とLMR条件
+
+原324.8の再利用512family両色ではpath_tail ONが514勝1分509敗、得点率50.244140625%、事前family95%区間48.53515625〜51.953125%で未決着だった。同等性/効果不存在とはせず、既定やモデルを変更しない。次のLMR有限選択・確認は事前未決着分岐の両側path_tailを使い、depth_rank/OFF/fixed_oneの試した範囲だけを扱う。旧96保存修復と新928の異なる実tuple・原FAILED・費用と、別の深度/探索量addendumを分けて保持する。[原結果](../../research-data/ai-sigma/cedar-path-tail-strength/report-ja.md)、[研究知見と次判断](../research-findings.md#cedar-path_tail-onoffの原1024局32482026-10-18)を参照する。
