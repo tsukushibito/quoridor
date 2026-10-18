@@ -108,7 +108,7 @@ pub struct Config {
     /// Opt-in inference owner core; workers must then be explicit too.
     #[serde(default)]
     pub inference_cpu_core: Option<usize>,
-    /// Whole-wall evaluation only: cpu_cores are A/B, this core owns game/receipt clocks.
+    /// Managed evaluation-worker arenas: cpu_cores are A/B; this core owns game clocks.
     /// workers/active_games still count games, never engine threads.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub management_cpu_core: Option<usize>,
@@ -222,8 +222,11 @@ impl Config {
     pub(crate) fn evaluation_workers(&self) -> bool {
         self.arena.as_ref().is_some_and(|a| {
             a.comparison == crate::arena::Comparison::WholeWallTime
-                || (a.comparison == crate::arena::Comparison::EvaluatorFixedDepth
-                    && self.management_cpu_core.is_some())
+                || (matches!(
+                    a.comparison,
+                    crate::arena::Comparison::EvaluatorFixedDepth
+                        | crate::arena::Comparison::SearchWallTime
+                ) && self.management_cpu_core.is_some())
         })
     }
     /// Split the independent opening families; paired colors stay together.

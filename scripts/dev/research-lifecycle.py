@@ -3598,7 +3598,7 @@ def arena_plan_check(experiment, plan):
             "@EXPERIMENT_SHA256@",
         ]
         and plan["comparison"]
-        in {"evaluator_fixed_depth", "evaluator_wall_time", "whole_wall_time"}
+        in {"evaluator_fixed_depth", "evaluator_wall_time", "whole_wall_time", "search_wall_time"}
         and plan["rules"] == experiment["rules"] == "research-standard-2p-threefold-goal-first-v1"
         and plan["distance_units"] == experiment["distance_units"] == "wall-distance/80"
         and plan["value_perspective"] == experiment["value_perspective"] == "side-to-move"
@@ -3644,6 +3644,13 @@ def arena_plan_check(experiment, plan):
         ),
         "arena equal runtime/backend/retention conditions",
     )
+    if plan["comparison"] == "search_wall_time":
+        require(
+            a["evaluator_sha256"][0] == a["evaluator_sha256"][1]
+            and engines[0]["kind"] == engines[1]["kind"]
+            and engines[0]["simd"] == engines[1]["simd"],
+            "search comparison requires the same frozen evaluator/implementation mode",
+        )
     arena_model_check(experiment, plan, 2)
     for engine in engines:
         require(

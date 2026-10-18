@@ -628,6 +628,7 @@ impl ArenaPlan {
                 Comparison::EvaluatorFixedDepth
                     | Comparison::EvaluatorWallTime
                     | Comparison::WholeWallTime
+                    | Comparison::SearchWallTime
             )
             || self.rules != "research-standard-2p-threefold-goal-first-v1"
             || self.distance_units != "wall-distance/80"
@@ -1164,6 +1165,55 @@ mod generic_arena_361_tests {
         let book = serde_json::from_value(json!({"schema":"quoridor.value-search-strength.book.v1","plan_sha256":"0".repeat(64),"old_open8_sha256":"0".repeat(64),"old_open8_prefixes":[],"rules":plan.rules,"action_encoding":"fake","compiled_sources":{},"complete":true,"attempted":n,"transitions":0,"attempts":[],"families":families})).unwrap();
         (plan, e, c, slots, book)
     }
+
+    #[test]
+    fn managed_search_wall_time_plan_preserves_evaluator_guards() {
+        // New admission metadata only: no model load, board replay or Search.
+        let (mut plan, mut experiment, mut config, slots, book) = fixture(1, 4);
+        let mut left = config.engines[0].clone();
+        left.time_ms = Some(100);
+        left.ordering_profile = Some("control".into());
+        left.lmr = true;
+        left.lmr_method = Some("depth_rank".into());
+        left.zero_stock_safe_race = Some(true);
+        left.zero_stock_safe_race_method = Some("path_tail".into());
+        config.engines = vec![left.clone(), left];
+        config.engines[1].zero_stock_safe_race = Some(false);
+        config.engines[1].zero_stock_safe_race_method = Some("manhattan".into());
+        config.management_cpu_core = Some(6);
+        config.cpu_cores = vec![2, 4];
+        let arena = config.arena.as_mut().unwrap();
+        arena.comparison = Comparison::SearchWallTime;
+        arena.return_reserve_ms = 5;
+        arena.max_total_nodes = Some(500_000_000);
+        arena.evaluator_sha256[1] = arena.evaluator_sha256[0].clone();
+        plan.comparison = Comparison::SearchWallTime;
+        plan.matchups[0].engines = config.engines.clone();
+        plan.matchups[0].evaluator_sha256 = config.arena.as_ref().unwrap().evaluator_sha256.clone();
+        experiment.models = plan.models.clone();
+        assert!(config.evaluation_workers());
+        config.arena.as_ref().unwrap().validate(&config).unwrap();
+        plan.validate_config(&experiment, &config, &slots, &book)
+            .unwrap();
+
+        let mut changed = config.clone();
+        changed.arena.as_mut().unwrap().evaluator_sha256[1] = "d".repeat(64);
+        assert!(changed.arena.as_ref().unwrap().validate(&changed).is_err());
+        changed = config.clone();
+        changed.engines[1].kind = "distance".into();
+        assert!(changed.arena.as_ref().unwrap().validate(&changed).is_err());
+        changed = config.clone();
+        changed.arena.as_mut().unwrap().search_artifact_sha256[1] = "d".repeat(64);
+        assert!(changed.arena.as_ref().unwrap().validate(&changed).is_err());
+        changed = config.clone();
+        changed.arena.as_mut().unwrap().comparison = Comparison::EvaluatorWallTime;
+        assert!(changed.arena.as_ref().unwrap().validate(&changed).is_err());
+        changed = config;
+        changed.management_cpu_core = None;
+        assert!(!changed.evaluation_workers());
+        assert!(changed.arena.as_ref().unwrap().validate(&changed).is_err());
+    }
+
     #[test]
     fn arena421_input_book_projection_batch_seed_and_strict_history() {
         // Admission metadata only: no model, geometry, RNG regeneration or Search.
