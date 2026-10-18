@@ -2445,6 +2445,10 @@ Stage9の打ち切り条件は、受入れ済みの事前「未決着ならpath_
 
 人間の直接指示により、原profileを保持したまま、探索所有の不変情報への重複検査と評価準備を精査し、一つの最小候補を連続探索で比較する。任意の公開Features/Accumulatorの拒否・nonfinite/model/shape/履歴/undo/FP32演算は保つ。採否はモデル/TT/scratchを各版一度初期化し、同じ真正fullprefix series・均衡順・同じ非時計仕事で測る探索合計時間による。cold setup一回の比から利益を認定しない。必要追加診断とcall/node/RAW上限だけを事前固定し、LMRの実nativeとcollectionの停止境界に重いtest/build/perf/A-Bを置く。私有の軽い精査は並行し、LMRの入口を待たせない。[限定契約](../.artifacts/research-team/integration324/cedar-validation-preparation-v1/task.md)。
 
+私有候補は既存のfinite-value走査とleafのReLU packingを一回の走査へまとめる。両比較版に共通する変更として、直接のResidualEvaluatorだけがSearchSession所有のhead入力bufferを排他的に借りる。任意StaticEvaluatorの既存hookと呼出ごとのEvalScratch/WallDistanceScratch・geometry/counterは維持し、全scratchをsession一回生成とは呼ばない。公開拒否の固定Error期待値、Err後再利用・不正side・reset/model変更・namespace・取消を対象にした[限定静的確認](../.worktree/assets/perf/cedar-evaluation-preparation-review-v1/validation-candidate-v1/common-owner-v2/completion.json)はessential0/ordinary0で完了した。新5定義は未build・未型検査・未実行であり、Main採用・速度利益を認定しない。
+
+元433の二family・各最後8rootを使うABBA4pass、計64calls/64M nodes/16sessions、perf RAW0を事前上限とした。モデル/TT/ordering/head bufferを各sessionで一度初期化し、各4回の連続探索時間の合計を主要量、setup/root準備/dropを別scopeで記録する。全対応rootの非時計仕事・値・手・PV・履歴一致を必須とし、候補2passの遅い方もbaseline2passの速い方より短く、対応series中央値も悪化しない場合だけ、この有限比較で候補保持を支持する。それ以外は不支持として追加反復で救済しない。一般速度・統計的有意性・棋力の判断にはしない。[結果前に固定した受入れ範囲と未実行事項](../.artifacts/research-team/integration324/cedar-validation-preparation-v1/common-static-intake-v2/acceptance.json)。
+
 ### LMR cohort全体でのauthority責任集約（324.9.3、2026-10-18）
 
 起動直後の重複read修復f850aac後の本継続でも、bounded authorityのexit1・空stderr・timeoutが再発した。新112局が正常受入れとなり、元240局・別保存資格32局と合わせL1は384局/192pairsである。残128はop5のentered partial32（実課金・個別完了・残額UNKNOWN）とops7/13/15のnative未入場96。全512資格前の選択、L2、最終RNGは実行しない。Go1の有限8client NN0成功をproductionの安定性や原因解決へ昇格せず、lock/RAM/棋力を原因認定しない。
@@ -2452,3 +2456,5 @@ Stage9の打ち切り条件は、受入れ済みの事前「未決着ならpath_
 人間は次に、比較cohort全体の最上位親一か所へBeads確認を集約する構成変更を明示指示した。8laneの各親一か所ではなく全体一か所であり、束縛された子lane/operationは実在する親identityと起動系統から制御を受ける。子のcancel/resource/deadline/native guardianを保ち、親DB待ち中のlocal cancel・資源監視と、親異常終了/identity喪失時の停止・回収を実装・限定NN0で検証する。旧「現originだけでは集約保証がない」は過去版の不足として保存し、今度はその不足を埋める。新DB/cache/service/監視daemonは導入しない。有限の検出・伝播保証を示し、起動前試験だけで本比較安定完走としない。[最新構成契約](../.artifacts/research-team/integration324/cedar-lmr-tuning-v1/control-continuation-v1/cohort-parent-authority-v2/task.md)。
 
 未入場96はその元非融通枠・正常資源から先に継続でき、op5の未確定残額だけを全96の停止条件にしない。op5の500Mをresetせず、既知・未知と新継続12.25Gを保持する。Beads書込み/backupは意味ある段階・異常・終了等にまとめ、細進捗は既存job記録へ置く。原FAILED/RAW/TMP/NULL/masks/cleanup未知を改稿せず、全正常局を再対局しない。
+
+op5については、partial journalの一度の限定読取とgenuine sourceの直列game・同期journal順序から、最後の保存drain残額490985632に対して未保存game丸一局の最大200Mを保留した。保証できる今後の残額下限は290985632であり、実terminal課金はUNKNOWNのまま、500Mへのresetや他operationからの融通はしない。読めた4行は資源境界の根拠だけで正常局資格ではない。[保守的な資源受入れ](../.artifacts/research-team/integration324/cedar-lmr-tuning-v1/control-continuation-v1/op5-root-budget-v1/resource-acceptance.json)。
