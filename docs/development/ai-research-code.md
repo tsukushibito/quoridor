@@ -4,6 +4,8 @@ Linuxネイティブを主経路とし、評価・探索・対局・推論queue�
 
 主要ディレクトリの責務と検索の切替点は[crates](../../crates/README.md)、[tools](../../tools/README.md)、[scripts](../../scripts/README.md)、[docs](../README.md)、[保存データ](../../research-data/README.md)から選ぶ。主要構成・公開入口を移す変更では、担当ownerが対応READMEとこの案内も更新する。全階層への案内配置や新しい全資料必読・定期全体監査を義務にしない。
 
+対局の同時数は通常cohortの`parallel`設定で解決する。`parallel_games`、物理CPU候補列、元operation順、lane/commonのRAMとholdingを一度解決し、1/3/8とも同じnormal sequence・job・取消・回収へ渡す。二AI ownerは保持し、同一局の`cpu_cores`を同じ論理CPUへ明示的に重ねる場合だけ交互探索を時分割する。異局とSMT siblingの探索core共有は禁止し、管理core共有はcohortの明示poolに限る。未測定の速度・deadline・棋力同等性を仮定せず、新構成の実運用は固有の有限recipe・真正image・全RAM/全保持・通常entryに結合する。
+
 ## 配置と依存
 
 | 配置                                    | 責任                                                               |

@@ -221,8 +221,116 @@ def issued_family_upper(spec, support):
 
 
 
+def resolve_arena_parallel(config):
+    """Resolve configuration only; normal jobs still own entry, clocks and cleanup."""
+    count = config["parallel_games"]
+    pool = config["physical_cpu_pool"]
+    operations = config["operation_ids"]
+    require(type(count) is int and 1 <= count <= 8, "finite configured parallel games")
+    require(
+        isinstance(pool, list)
+        and len(pool) >= count + 2
+        and all(type(c) is int and c >= 0 for c in pool)
+        and len(set(pool)) == len(pool),
+        "explicit search CPUs and two management CPUs; physical SMT checked at entry",
+    )
+    require(
+        isinstance(operations, list)
+        and count <= len(operations) <= 32
+        and all(type(n) is int and n >= 0 for n in operations)
+        and len(set(operations)) == len(operations),
+        "finite unique original operation order, not native family IDs",
+    )
+    for key in ("lane_family_B", "lane_storage_B", "common_family_B", "shared_storage_B"):
+        require(
+            type(config[key]) is int and config[key] > 0, "explicit positive runtime/holding bounds"
+        )
+    require(
+        config["lane_family_B"] > 64 * 1024**2 and config["common_family_B"] >= 64 * 1024**2,
+        "controllers included in actual family bounds",
+    )
+    managers = pool[:2]
+    return dict(
+        parallel_games=count,
+        management_cpu_pool=managers,
+        global_controller_cpu=managers[0],
+        global_controller_B=config["common_family_B"],
+        shared_storage_B=config["shared_storage_B"],
+        family_RAM_B=count * config["lane_family_B"] + config["common_family_B"],
+        whole_B=count * config["lane_storage_B"] + config["shared_storage_B"],
+        CPU=count + 2,
+        members=[
+            dict(
+                lane=lane,
+                AI_workers=[pool[2 + lane]] * 2,
+                main_cpu=managers[lane % 2],
+                family_B=config["lane_family_B"],
+                controller_B=64 * 1024**2,
+                worker_B=config["lane_family_B"] - 64 * 1024**2,
+                storage_B=config["lane_storage_B"],
+                operation_ids=operations[lane::count],
+            )
+            for lane in range(count)
+        ],
+    )
+
+
+def arena_cohort_cpus(cohort):
+    """Only explicit management sharing and identical same-game AI bindings overlap."""
+    members = cohort["members"]
+    require(
+        isinstance(members, list)
+        and 1 <= len(members) <= 8
+        and [m["lane"] for m in members] == list(range(len(members))),
+        "finite ordered configured cohort lanes",
+    )
+    pool = cohort.get("management_cpu_pool")
+    if pool is None:
+        # Distinct owner/main assignments remain a live normal execution mode.
+        pool = [cohort["global_controller_cpu"], *[m["main_cpu"] for m in members]]
+        require(len(set(pool)) == len(pool), "shared main CPUs need an explicit management pool")
+    require(
+        isinstance(pool, list)
+        and pool
+        and all(type(c) is int and c >= 0 for c in pool)
+        and len(set(pool)) == len(pool)
+        and cohort["global_controller_cpu"] in pool,
+        "explicit unique management pool",
+    )
+    occupied = set(pool)
+    for member in members:
+        ai = member["AI_workers"]
+        require(
+            isinstance(ai, list)
+            and len(ai) == 2
+            and all(type(c) is int and c >= 0 for c in ai)
+            and member["main_cpu"] in pool,
+            "two actual AI owners and a declared manager",
+        )
+        require(
+            not occupied.intersection(ai),
+            "different games/search and management CPUs cannot overlap",
+        )
+        occupied.update(ai)
+    resolved = resolve_arena_parallel(cohort["parallel"]) if "parallel" in cohort else None
+    if resolved is not None:
+        require(
+            pool == resolved["management_cpu_pool"]
+            and cohort["global_controller_cpu"] == resolved["global_controller_cpu"]
+            and cohort["global_controller_B"] == resolved["global_controller_B"]
+            and cohort["shared_storage_B"] == resolved["shared_storage_B"]
+            and len(members) == resolved["parallel_games"]
+            and all(
+                all(member.get(k) == v for k, v in expected.items() if k != "operation_ids")
+                for member, expected in zip(members, resolved["members"], strict=True)
+            ),
+            "bound normal cohort consumes the one resolved parallel config",
+        )
+    return sorted(occupied)
+
+
 def arena_cohort(spec):
-    """Three fixed normal sequences share only their issued immutable arena cohort."""
+    """Configured normal sequences share only their issued immutable arena cohort."""
     if spec.get("arena_cohort") is None:
         return None
     require(
@@ -240,11 +348,11 @@ def arena_cohort(spec):
     )
     members = cohort["members"]
     require(
-        len(members) == 3 and [m["lane"] for m in members] == [0, 1, 2],
-        "three distinct ordered cohort lanes",
+        1 <= len(members) <= 8 and [m["lane"] for m in members] == list(range(len(members))),
+        "configured distinct ordered cohort lanes",
     )
     lane = settings["arena_lane"]
-    require(type(lane) is int and 0 <= lane < 3, "configured arena lane")
+    require(type(lane) is int and 0 <= lane < len(members), "configured arena lane")
     member = members[lane]
     require(
         spec["settings"]["path"] == member["settings_path"]
@@ -280,10 +388,17 @@ def arena_cohort(spec):
         and spec["artifact"] == cohort["artifact"],
         "actual lane engine/resource binding",
     )
+    if "parallel" in cohort:
+        expected = resolve_arena_parallel(cohort["parallel"])["members"][lane]
+        require(
+            len(settings["runs"]) == len(expected["operation_ids"])
+            and experiment["batch"] == expected["operation_ids"][spec["selection_index"]],
+            "same resolved operation order and actual original batch binding",
+        )
     support = document(cohort["support"])
     resources = support["resources"]
     require(
-        resources["CPU"] == 10
+        resources["CPU"] == len(arena_cohort_cpus(cohort))
         and resources["GPU"] == 0
         and resources["threads"] == 1
         and resources["controller_included"] is True
@@ -292,7 +407,7 @@ def arena_cohort(spec):
         and type(cohort["global_controller_B"]) is int
         and cohort["global_controller_B"] >= 64 * 1024**2
         and resources["host_reserve_B"] >= 4 * 1024**3,
-        "issued aggregate three-lane RAM and global controller envelope",
+        "issued aggregate configured-lane RAM and global controller envelope",
     )
     roots = []
     for m in members:
@@ -323,7 +438,7 @@ def arena_cohort(spec):
             any(p.is_relative_to(Path(r)) for r in support["storage_budget"]["roots"])
             for p in paths
         ),
-        "all three simultaneous holdings inside one issued whole",
+        "all simultaneous lane holdings inside one issued whole",
     )
     require(
         all(any(p.is_relative_to(Path(r)) for r in member["roots"]) for p in charged_roots(spec)),
@@ -343,7 +458,7 @@ def arena_cohort(spec):
     return cohort, member
 
 def arena_cohort_lifetime(spec, *, outer_runtime=None):
-    """Join only the three declared normal submissions and their actual live trees."""
+    """Join only declared normal submissions and their actual live trees."""
     cohort, member = arena_cohort(spec)
     if outer_runtime is not None:
         require(outer_runtime == member["job_runtime"], "actual configured outer runtime")
@@ -352,7 +467,7 @@ def arena_cohort_lifetime(spec, *, outer_runtime=None):
     launch = document(launch_ref)
     require(
         launch["cohort"] == spec["arena_cohort"]
-        and len(launch["job_configs"]) == 3
+        and len(launch["job_configs"]) == len(cohort["members"])
         and launch["job_runtimes"] == [m["job_runtime"] for m in cohort["members"]]
         and type(launch["monotonic"]) in (int, float)
         and math.isfinite(launch["monotonic"])
@@ -390,7 +505,7 @@ def arena_cohort_lifetime(spec, *, outer_runtime=None):
             and expected["resource_contract"] == m["settings_path"]
             and expected["issue"] == cohort["issue"]
             and expected["thread_id"] == cohort["thread_id"],
-            "all three actual immutable settings and declared normal originating configs",
+            "all actual immutable settings and declared normal originating configs",
         )
         runtime = Path(m["job_runtime"])
         require(
@@ -945,7 +1060,7 @@ def arena_cohort_progress(spec):
         new_json(packet_path, packet)
     body = control / "first-progress.txt"
     body.write_text(
-        "First natural three-lane snapshot: " + json.dumps(bound(packet_path)[0]) + "\n"
+        "First natural configured-lane snapshot: " + json.dumps(bound(packet_path)[0]) + "\n"
     )
     capture = Capture(control / "first-progress-notification.full.log", 65536)
     returned = primary = None
@@ -1263,10 +1378,10 @@ def arena_cpu_cores(spec):
         and all(type(cpu) is int and cpu >= 0 for cpu in ai)
         and type(main) is int
         and main >= 0
-        and len(set([*ai, main])) == 3,
+        and main not in ai,
         "one game, fixed A/B worker cores and distinct main core",
     )
-    cores = sorted([*ai, main])
+    cores = sorted(set([*ai, main]))
     require(
         spec.get("child_cpu_cores") == cores
         and spec["limits"]["worker_cpu"] == ai[0]
@@ -1276,7 +1391,7 @@ def arena_cpu_cores(spec):
     support = document(spec["support"])
     resources = support.get("resources", {})
     require(
-        (arena_cohort(spec) is not None or resources.get("CPU") == 3)
+        (arena_cohort(spec) is not None or resources.get("CPU") == len(cores))
         and resources.get("threads") == 1
         and resources.get("GPU") == 0
         and resources.get("controller_included") is True
@@ -1319,12 +1434,9 @@ def physical_and_quiet(spec):
         require(set(cores) <= os.sched_getaffinity(0), "CPU affinity admission")
     else:
         declaration, member = cohort
-        all_cores = [declaration["global_controller_cpu"]]
-        for lane in declaration["members"]:
-            all_cores.extend([*lane["AI_workers"], lane["main_cpu"]])
+        all_cores = arena_cohort_cpus(declaration)
         require(
-            len(all_cores) == len(set(all_cores)) == 10
-            and set(cores) == set([*member["AI_workers"], member["main_cpu"]])
+            set(cores) == set([*member["AI_workers"], member["main_cpu"]])
             and os.sched_getaffinity(0) <= set(all_cores),
             "actual configured cohort CPU roles",
         )

@@ -2,6 +2,8 @@
 
 Linuxネイティブを主経路として、評価・探索・対局進行・推論queueはRust、学習・解析・モデル変換はPython/PyTorchが担当する。Wasmは同じCPU評価・探索を使う製品向け経路の一つ。[crate設計](../design/ai-rust-migration.md)と[実装検証の知見](../research-findings.md#実行費と探索の検証)に、互換性と測定の範囲を示す。製品の既定B0 AIはこの移行だけで学習済みNNUEへ置換しない。
 
+normal arena cohortの`parallel`は`parallel_games`、`physical_cpu_pool`、`operation_ids`、`lane_family_B`、`common_family_B`、`lane_storage_B`、`shared_storage_B`を受ける。`resolve_arena_parallel`が先頭2物理coreを管理pool、後続Nを局別探索へ割り当て、operation順をNで配り、RAM/保持の総量を計算する。元の明示A/B別coreも現役入口として保持する。同一局を時分割するときは二AIの`cpu_cores`を同じCPUにし、`active_games=workers=max_batch=1`、mainの受領・matching terminal drain・取消・親復元を維持する。lane RAMはTT/モデル/serializer/子processを含む実需要で明示し、2.5GiB×Nや旧wholeを暗黙流用しない。実8laneの速度利益・十分性は未測定で、入力/上限/保持を固定した有限確認前に資格を主張しない。
+
 ## ビルドと入口
 
 ```bash

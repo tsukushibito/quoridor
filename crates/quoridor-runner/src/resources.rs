@@ -131,7 +131,7 @@ pub fn admit_explicit(
 ) -> Result<Admission> {
     admit_explicit_policy(workers, requested, inference_core, reserve, maximum)
 }
-/// One serial evaluation game, with equally fixed A/B cores and a distinct main core.
+/// One serial game retains two AI owners; identical A/B CPUs explicitly time-share that game.
 /// The existing explicit allocator retains actual affinity/cpuset/SMT/quota/host guards.
 pub fn admit_evaluation(
     requested: &[usize],
@@ -140,7 +140,11 @@ pub fn admit_evaluation(
     maximum: Option<u64>,
 ) -> Result<Admission> {
     let mut admission = if let Some(main) = management {
-        admit_explicit(2, requested, main, reserve, maximum)?
+        let search = evaluation_search_cores(requested)?;
+        let mut owned = admit_explicit(search.len(), search, main, reserve, maximum)?;
+        // Both owners remain pinned; only one move may run before its matching drain.
+        owned.worker_cores = requested.to_vec();
+        owned
     } else {
         if !requested.is_empty() {
             return Err("evaluation needs both engine cores and its management core".into());
@@ -173,6 +177,16 @@ pub fn admit_evaluation(
     };
     admission.management_core = admission.inference_core.take();
     Ok(admission)
+}
+fn evaluation_search_cores(requested: &[usize]) -> Result<&[usize]> {
+    if requested.len() != 2 {
+        return Err("evaluation requires exactly two AI owner CPU bindings".into());
+    }
+    Ok(if requested[0] == requested[1] {
+        &requested[..1]
+    } else {
+        requested
+    })
 }
 fn admit_explicit_policy(
     workers: usize,
@@ -513,5 +527,35 @@ mod common_node_budget_tests {
         // The second reservation represents an unreturned Err; no refund.
         assert!(b.reserve(1).is_err());
         assert!(b.settle(c, 5).is_err());
+    }
+}
+
+#[cfg(test)]
+mod alternating_evaluation_core_tests {
+    use super::*;
+
+    #[test]
+    fn two_owners_share_only_an_identical_same_game_cpu() {
+        let topology: BTreeMap<_, _> = [
+            (0, (0, 0)),
+            (2, (0, 1)),
+            (3, (0, 1)),
+            (4, (0, 2)),
+            (6, (0, 3)),
+            (8, (0, 4)),
+        ]
+        .into_iter()
+        .collect();
+        let declared = [4, 4];
+        let search = evaluation_search_cores(&declared).unwrap();
+        assert_eq!(search, &[4]);
+        explicit_cpu_selection(search.len(), search, 2, &[2, 4], &topology, None).unwrap();
+        // General duplicate/sibling and manager isolation policies are unchanged.
+        assert!(explicit_cpu_selection(2, &declared, 2, &[2, 4], &topology, None).is_err());
+        let siblings = evaluation_search_cores(&[2, 3]).unwrap();
+        assert!(explicit_cpu_selection(2, siblings, 4, &[2, 3, 4], &topology, None).is_err());
+        assert!(explicit_cpu_selection(1, search, 4, &[2, 4], &topology, None).is_err());
+        assert!(explicit_cpu_selection(1, search, 2, &[2, 4], &topology, Some(3.9)).is_err());
+        assert!(evaluation_search_cores(&[4]).is_err());
     }
 }
