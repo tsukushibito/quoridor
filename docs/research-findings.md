@@ -2394,3 +2394,13 @@ CはClaustrophobia静的教師NNUE、SはSigma静的教師NNUEの追加学習後
 [正式報告・原図](../research-data/ai-sigma/post-low-lr-strength3/report-ja.md)、[独立確認・全参照・保存表](../research-data/ai-sigma/post-low-lr-strength3/receipt.json)。通常研究のpath_tail既定、製品generator/model/default、USERPAUSE323/342.17、seals/newE/oldfits96を維持し、この結果から追加fit・対局・閾値/規模変更を発行しない。
 
 次判断：今回の有限scopeは終了とし、直接C/S比較を根拠に、新C BEST58305（weights35cbb976）を今後の研究上の優先候補とする。新Sと原C/S両weights・曲線・対局は対照と証拠として保持する。有力な公開AI本体（Sigma／Claustrophobia）との同資源・同時計での到達は未測定であり、最高棋力というepic目標は未完である。追加LR最適化よりこの到達差の確認を次の優先論点とするが、ここから新campaign・準備job・対局・学習・支持は発行しない。通常path_tail併用や他clockの成績も今回の認定範囲に含めず、モデル登録・weights・製品generator/defaultと通常path_tail既定は変更しない。
+
+### Cedar v1（シダー）の探索調整へ方針更新（2026-10-18、人間直接決定）
+
+Cedar v1は原324.7のC、Claustrophobia静的教師NNUEの新BEST58305（weights35cbb976be12e24ac6ff8204bf1937fd79673484ddc792065b6aabb6cbb36f0e）を指す研究呼称とする。原reportのCラベル・model identity/path・重み・製品登録は変更しない。直前の公開AI本体比較を先にする提案を人間が更新し、固定Cedar重み・特徴・出力数学のまま棋力を主指標に探索を調整する。
+
+第一段階はCedar同士、両側LMR ON/depth_rankを固定して最短経路による壁ゼロ確定判定path_tail ON対OFFを独立比較する（quoridor-4lc.324.8）。元512canonical family・両色1024局／最大16G、32局500M非融通、100ms authority／5ms reserve、Control/PVS/TT1M・各search1M/depth64/200ply・oldapprox OFFを出発条件とする。元book再用は固定bench再評価であり未使用heldoutではない。旧safeOFFの324.7結果へ混入せず、新しい実recipe/image/保持と通常3laneから進める。
+
+第二段階（quoridor-4lc.324.9）は同Cedar・明示した同じ打ち切り条件で現depth_rank対LMR OFFを最初に置き、開始depth/順位・減深量・保護条件の候補を少数・一要因へ限定する。探索/候補選択と最終確認の開始集合、局数・上限・固定統計・停止/採否・全費を結果前の一つの有限計画へ解決する。設計と最小source準備は第一段階結果待ちにせず、試した条件内の選択だけを最適と呼ぶ。旧416/417の旧NNUE傾向をCedarの原因や見落とし率へ転用しない。
+
+本家Claustrophobia／Sigmaとの同資源・同時計棋力は引き続き未測定で、比較は探索調整後の実結果から進行判断が扱う後続論点とする。今は本家入口整備・新本家対局・q教師・追加学習を発行しない。新比較の必要な保持は実source/serializerとdecimal50GBへ別に結合し、原425MiB/48G・旧futureを転用しない。通常path_tail・製品/generator/model/default、全pause/seals/原証拠・FAILED/費UNKNOWNは維持する。[Cedar名称と第一段階契約](../.artifacts/research-team/integration324/cedar-path-tail-strength-v1/task.md)、[有限LMR計画](../.artifacts/research-team/integration324/cedar-lmr-tuning-v1/task.md)。

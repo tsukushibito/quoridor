@@ -123,3 +123,7 @@ GPU学習は明示タスクの期限・資源上限に従って具体化する�
 固定LASTのnewV family z-MSEはA.835774397/B.833926958/C.766460997/D.831157305。事前のnative適格B/C/D最小規則でC LAST467を選んだ。CのnewVはINITIAL.859740646から下がる一方、公開T panelは.428704088から.457743676へ増えた。公開V LASTもC.453408904と他三条件の.425695/.425904/.426614を併記し、未測定のpublicV INITIAL差や汎化の因果を作らない。
 
 選択C対BEST43の独立固定192family/両色384局は185勝2分197敗、score48.4375%、95%[44.0104167%,52.8645833%]で事前改善基準未達だった。一度のfamily bootstrapだけを使い、A/B/Dの棋力順位・一般劣位・等価や原因を認定しない。実fit＋native2337787 logical rows、arena1670199748 charged nodes、内包時計の非加算と全費UNKNOWNを保存した。追加学習・対局・モデル/default昇格は自動発行しない。
+
+## Cedar v1（シダー）：研究呼称と探索調整（2026-10-18）
+
+Cedar v1は原324.7で研究優先候補になったClaustrophobia静的教師NNUE、新C BEST58305、weights `35cbb976be12e24ac6ff8204bf1937fd79673484ddc792065b6aabb6cbb36f0e` の名称対応である。原Cラベル・model identity/path・重み・製品登録をrenameせず、固定の特徴・出力数学を維持する。人間の直接決定により、まず両側LMR ON/depth_rankを固定したCedarのpath_tail ON/OFF棋力比較（quoridor-4lc.324.8、元512両色1024局/16G）を行い、並行設計するLMR調整（quoridor-4lc.324.9）では現depth_rank対OFFから少数・一要因候補を検証する。既存共通search/arenaと解決済run configを使い、候補選択データと最終確認を区別する。最適は試した条件内の選択だけとし、本家Claustrophobia/Sigma比較は探索調整後の判断へ送る。新教師・学習・モデル/default昇格は含めない。原結果と最新判断は[研究知見](../research-findings.md#cedar-v1シダーの探索調整へ方針更新2026-10-18人間直接決定)、具体scopeは[第一段階契約](../../.artifacts/research-team/integration324/cedar-path-tail-strength-v1/task.md)と[有限LMR計画](../../.artifacts/research-team/integration324/cedar-lmr-tuning-v1/task.md)に置く。
