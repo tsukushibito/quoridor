@@ -4006,7 +4006,13 @@ def arena_observation(config, row):
                 and counters["drain_finished_ns"] == obs["returned_ns"]
                 and (
                     (obs["returned_ns"] >= receipt and counters["inflight_after_drain"] == 0)
-                    if a["comparison"] == "whole_wall_time"
+                    if (
+                        a["comparison"] == "whole_wall_time"
+                        or (
+                            a["comparison"] == "search_wall_time"
+                            and config.get("management_cpu_core") is not None
+                        )
+                    )
                     else obs["returned_ns"] == receipt
                 ),
                 "main receipt/terminal drain",

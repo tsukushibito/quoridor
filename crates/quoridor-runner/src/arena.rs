@@ -887,7 +887,7 @@ fn validate_observations(
                     .ok_or("alpha receipt missing")?;
                 if obs.deadline_ns.is_none_or(|deadline| receipt >= deadline)
                     || obs.counters["drain_finished_ns"] != obs.returned_ns
-                    || if a.comparison == Comparison::WholeWallTime {
+                    || if c.evaluation_workers() {
                         obs.returned_ns < receipt || obs.counters["inflight_after_drain"] != 0
                     } else {
                         obs.returned_ns != receipt
@@ -1610,6 +1610,58 @@ mod generic_arena_361_tests {
         report.outcomes[0].observations.push(repeated);
         assert!(validate_decision_report(&c, &report).is_err());
     }
+    #[test]
+    fn managed_search_receipt_drain_uses_actual_worker_contract() {
+        // Synthetic metadata only: no model, clock, Search, geometry or old test body.
+        let (_, _, mut config, _, _) = fixture(1, 4);
+        config.arena.as_mut().unwrap().comparison = Comparison::SearchWallTime;
+        config.management_cpu_core = Some(6);
+        config.engines[0].ordering_profile = None;
+        config.engines[0].zero_stock_safe_race = Some(false);
+        config.engines[0].zero_stock_safe_race_method = Some("manhattan".into());
+        let observation: crate::arena_clock::MoveObservation = serde_json::from_value(json!({
+            "ply":0,"side":0,"engine_index":0,"action":13,"accepted":true,"failure":null,
+            "caller_started_ns":0,"deadline_ns":100,"returned_ns":95,
+            "admission_checked_ns":96,"accepted_ns":96,"caller_seconds":0.000000096,
+            "thinking_seconds":0.000000090,"last_completed_iteration_ns":90,
+            "engine_error":null,"stop":"internal_time_limit","completed_depth":4,
+            "value_stm":0.2,"pv":[13],
+            "counters":{"authority_receipt_ns":90,"drain_finished_ns":95,
+                "inflight_after_drain":0,"completed_snapshot_validation_failed":false,
+                "actual_zero_stock_safe_race_enabled":false,
+                "requested_zero_stock_safe_race_method":"manhattan",
+                "actual_zero_stock_safe_race_method_id":null}
+        }))
+        .unwrap();
+        validate_observations(&config, std::slice::from_ref(&observation)).unwrap();
+        for case in 0..4 {
+            let mut bad = observation.clone();
+            match case {
+                0 => bad.counters["authority_receipt_ns"] = 100.into(),
+                1 => bad.counters["drain_finished_ns"] = 94.into(),
+                2 => bad.counters["inflight_after_drain"] = 1.into(),
+                _ => {
+                    bad.returned_ns = 89;
+                    bad.counters["drain_finished_ns"] = 89.into();
+                }
+            }
+            assert!(
+                validate_observations(&config, &[bad]).is_err(),
+                "case {case}"
+            );
+        }
+        // Unmanaged timed modes retain the original direct-return equality.
+        config.management_cpu_core = None;
+        for mode in [Comparison::SearchWallTime, Comparison::EvaluatorWallTime] {
+            config.arena.as_mut().unwrap().comparison = mode;
+            assert!(validate_observations(&config, std::slice::from_ref(&observation)).is_err());
+            let mut direct = observation.clone();
+            direct.returned_ns = 90;
+            direct.counters["drain_finished_ns"] = 90.into();
+            validate_observations(&config, &[direct]).unwrap();
+        }
+    }
+
     #[test]
     fn no_cost_prediction_fallback_publication_rejects_invented_completed_work() {
         // Existing synthetic FileRef fixture only; no model/geometry/Search.
