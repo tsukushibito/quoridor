@@ -2438,3 +2438,9 @@ Stage9の打ち切り条件は、受入れ済みの事前「未決着ならpath_
 旧L1のINCOMPLETE_SELECTION_STOPと元owner closureを保存した後、人間がDB/control修復と比較完遂を新たに直接許可した。元L0正常512局とL1正常240局は再対局せず、未受入れ272予定slotを原family/色/book/seed/model/時計/方法で固定し、回収可能な保存局は維持された通常validatorによる別資格としてだけ再用する。新attemptと旧FAILED/UNKNOWN・再訪prefix・追加費を区別し、旧24Gや未知の残額を新権利にしない。
 
 新たな対局上限はL1不足272＋L2確認512＝784局、追加node上限はL1 4.25G＋L2 8G＝独立12.25G（32局500M、16局250M、非融通）。L1完全512局/256pairs後に元の点選択則を一度適用し、元確認側の一つのL2比較を入場前固定、元最終bootstrapを一度だけ行う。起動直後の重複authority readとouter/innerの責任を既存controllerの範囲で必要最小に整理し、pause/取消/owner変更・資源・読取失敗時の停止・子回収を維持する。新DB基盤/cache/service/無制限timeoutや一律監査は追加しない。これは旧不完全記録の改稿・retroPASS・無変更retryではなく、新指示に基づく有限継続である。[継続契約](../.artifacts/research-team/integration324/cedar-lmr-tuning-v1/control-continuation-v1/task.md)。
+
+起動前の成功したauthority確認から既存interval後に最初の定期確認を置く最小修復をf850aacで採用した。取消・resource/子scanは即時、pause/owner/読取失敗のfail-closedと独立outer/inner責任は維持する。新5定義PASSと有限8client NN0は限定software/待ちの観測であり、原空stderrの原因確定や本比較の安定完走ではない。固定不足slot表の後、旧op8保存32局だけが現LCの通常validatorで全件PASSとなり別データ受入れした。原native exit1/FAILED/NULL/費用は不変で、旧240局と合わせ272局を再用し、新L1物理不足は240局/3.75Gとなる。省かれた新op8の500Mは保持し他へ貸さない。[別保存データ資格](../.worktree/assets/perf/cedar-lmr-tuning-implementation-v1/control-continuation-v1/saved-op8-v1/result.json)。
+
+### Cedar重複検査・評価準備の後続（324.13、2026-10-18）
+
+人間の直接指示により、原profileを保持したまま、探索所有の不変情報への重複検査と評価準備を精査し、一つの最小候補を連続探索で比較する。任意の公開Features/Accumulatorの拒否・nonfinite/model/shape/履歴/undo/FP32演算は保つ。採否はモデル/TT/scratchを各版一度初期化し、同じ真正fullprefix series・均衡順・同じ非時計仕事で測る探索合計時間による。cold setup一回の比から利益を認定しない。必要追加診断とcall/node/RAW上限だけを事前固定し、LMRの実nativeとcollectionの停止境界に重いtest/build/perf/A-Bを置く。私有の軽い精査は並行し、LMRの入口を待たせない。[限定契約](../.artifacts/research-team/integration324/cedar-validation-preparation-v1/task.md)。
