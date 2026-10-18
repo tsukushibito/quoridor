@@ -4077,8 +4077,11 @@ def arena_observation(config, row):
             )
         fallback = (
             a["comparison"] == "whole_wall_time"
-            and counters.get("selection_reason") == "legal_fallback_no_completed_iteration"
-        )
+            or (
+                a["comparison"] == "search_wall_time"
+                and config.get("management_cpu_core") is not None
+            )
+        ) and counters.get("selection_reason") == "legal_fallback_no_completed_iteration"
         require(
             counters["completed_snapshot_validation_failed"] is False
             and (

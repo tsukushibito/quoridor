@@ -856,7 +856,8 @@ fn validate_observations(
                     return Err("arena requested/effective LMR method mismatch".into());
                 }
             }
-            let fallback = a.comparison == Comparison::WholeWallTime
+            let fallback = (a.comparison == Comparison::WholeWallTime
+                || (a.comparison == Comparison::SearchWallTime && c.evaluation_workers()))
                 && obs.counters["selection_reason"] == "legal_fallback_no_completed_iteration";
             if obs.counters["completed_snapshot_validation_failed"] != false
                 || if fallback {
@@ -1660,6 +1661,88 @@ mod generic_arena_361_tests {
             direct.counters["drain_finished_ns"] = 90.into();
             validate_observations(&config, &[direct]).unwrap();
         }
+    }
+
+    #[test]
+    fn managed_search_truthful_empty_fallback_keeps_completion_and_clock_refusals() {
+        // New metadata crossing only; the existing fixture creates no model or Search.
+        let (_, _, mut config, _, _) = fixture(1, 4);
+        config.arena.as_mut().unwrap().comparison = Comparison::SearchWallTime;
+        config.management_cpu_core = Some(6);
+        config.engines[0].ordering_profile = None;
+        config.engines[0].zero_stock_safe_race = Some(false);
+        config.engines[0].zero_stock_safe_race_method = Some("manhattan".into());
+        let observation: crate::arena_clock::MoveObservation = serde_json::from_value(json!({
+            "ply":0,"side":0,"engine_index":0,"action":13,"accepted":true,"failure":null,
+            "caller_started_ns":0,"deadline_ns":100,"returned_ns":120,
+            "admission_checked_ns":121,"accepted_ns":122,"caller_seconds":0.000000122,
+            "thinking_seconds":0.000000090,"last_completed_iteration_ns":null,
+            "completed_iteration_counters":null,"engine_error":null,"stop":"cancelled",
+            "completed_depth":null,"value_stm":null,"pv":[],
+            "counters":{"authority_receipt_ns":90,"drain_finished_ns":120,
+                "inflight_after_drain":0,"completed_snapshot_validation_failed":false,
+                "selection_reason":"legal_fallback_no_completed_iteration",
+                "actual_zero_stock_safe_race_enabled":false,
+                "requested_zero_stock_safe_race_method":"manhattan",
+                "actual_zero_stock_safe_race_method_id":null}
+        }))
+        .unwrap();
+        validate_observations(&config, std::slice::from_ref(&observation)).unwrap();
+        for case in 0..6 {
+            let mut bad = observation.clone();
+            match case {
+                0 => bad.completed_depth = Some(1),
+                1 => bad.value_stm = Some(0.2),
+                2 => bad.pv = vec![13],
+                3 => bad.last_completed_iteration_ns = Some(80),
+                4 => bad.completed_iteration_counters = Some(json!({"nodes":1})),
+                _ => bad.counters["completed_snapshot_validation_failed"] = true.into(),
+            }
+            assert_eq!(
+                validate_observations(&config, &[bad]).unwrap_err(),
+                "arena alpha completion/PV or truthful zero-work fallback",
+                "case {case}"
+            );
+        }
+        for case in 0..4 {
+            let mut bad = observation.clone();
+            match case {
+                0 => bad.counters["authority_receipt_ns"] = 100.into(),
+                1 => bad.counters["drain_finished_ns"] = 119.into(),
+                2 => bad.counters["inflight_after_drain"] = 1.into(),
+                _ => {
+                    bad.returned_ns = 89;
+                    bad.counters["drain_finished_ns"] = 89.into();
+                }
+            }
+            assert_eq!(
+                validate_observations(&config, &[bad]).unwrap_err(),
+                "arena main receipt/terminal drain",
+                "clock case {case}"
+            );
+        }
+        let mut completed = observation.clone();
+        completed.completed_depth = Some(1);
+        completed.value_stm = Some(0.2);
+        completed.pv = vec![13];
+        completed.last_completed_iteration_ns = Some(80);
+        completed.counters["selection_reason"] = "completed_iteration".into();
+        validate_observations(&config, std::slice::from_ref(&completed)).unwrap();
+        completed.pv = vec![14];
+        assert!(validate_observations(&config, &[completed]).is_err());
+        for mode in [
+            Comparison::EvaluatorFixedDepth,
+            Comparison::EvaluatorWallTime,
+            Comparison::Functional,
+        ] {
+            config.arena.as_mut().unwrap().comparison = mode;
+            assert!(validate_observations(&config, std::slice::from_ref(&observation)).is_err());
+        }
+        config.arena.as_mut().unwrap().comparison = Comparison::SearchWallTime;
+        config.management_cpu_core = None;
+        assert!(validate_observations(&config, std::slice::from_ref(&observation)).is_err());
+        config.arena.as_mut().unwrap().comparison = Comparison::WholeWallTime;
+        validate_observations(&config, &[observation]).unwrap();
     }
 
     #[test]
