@@ -57,8 +57,8 @@ def lock(directory, name):
             fcntl.flock(handle, fcntl.LOCK_UN)
 
 
-def write(directory, name, value):
-    runtime.atomic_json(directory / name, value)
+def write(directory, name, value, *, replace=True):
+    return runtime.atomic_json(directory / name, value, replace=replace)
 
 
 def read(directory, name):
@@ -328,6 +328,76 @@ def configured_arena_resources(directory, config, root, resources):
         yield lifecycle.ArenaCohortResources(projected, outer_runtime=str(directory))
 
 
+def internal_cohort_failure(directory, config, root):
+    """Recognize only an internally stopped, separately published original cohort failure."""
+    if not cohort_parent_command(config, root) or not (directory / "cancel.json").exists():
+        return None
+    try:
+        cancel, state = read(directory, "cancel.json"), read(directory, "state.json")
+        if (
+            cancel.get("kind") not in {"cohort_failure", "job_failure"}
+            or cancel.get("job_id") != state["job_id"]
+            or cancel.get("controller") != state.get("child")
+        ):
+            return None
+        lifecycle = lifecycle_module(root)
+        intent_ref = lifecycle.bound(Path(config["resource_contract"]))[0]
+        if intent_ref["path"] != config["argv"][5] or intent_ref["sha256"] != config["argv"][7]:
+            return None
+        intent = lifecycle.document(intent_ref)
+        cohort = lifecycle.document(intent["arena_cohort"])
+        parent = cohort["authority_parent"]
+        if parent["runtime"] != str(directory) or parent["output"] != intent["output"]:
+            return None
+        terminal = lifecycle.document(lifecycle.bound(Path(parent["output"]) / "result.json")[0])
+        origin = terminal["originating_job"]
+        if (
+            terminal["status"] != "FAILED"
+            or terminal["cohort"] != intent["arena_cohort"]
+            or origin["runtime"] != str(directory)
+            or origin["job_id"] != state["job_id"]
+            or origin["config_sha256"] != state["config_sha256"]
+            or origin["supervisor"] != state["supervisor"]
+            or origin["child"] != state["child"]
+            or lifecycle.document(origin["config"]) != config
+            or not (terminal.get("primary") or terminal.get("secondary"))
+        ):
+            return None
+        if cancel["kind"] == "cohort_failure" and (
+            cancel.get("cohort") != terminal["cohort"]
+            or cancel.get("primary") != terminal["primary"]
+        ):
+            return None
+        return terminal
+    except (KeyError, ValueError, OSError):
+        return None
+
+
+def notification_stopped(directory, config, root):
+    if not (directory / "cancel.json").exists():
+        return False
+    result = read(directory, "result.json")
+    stop, state = read(directory, "cancel.json"), read(directory, "state.json")
+    if (
+        cohort_parent_command(config, root)
+        and stop.get("kind") == "job_failure"
+        and stop.get("job_id") == state["job_id"] == result["job_id"]
+        and stop.get("controller") == state.get("child")
+        and state["phase"] == "finished"
+        and result["outcome"] in {"failed", "control_error"}
+    ):
+        # A killed controller cannot publish a cohort result. Its normal owning
+        # job's own terminal failure is sufficient; fresh wake authority is still required.
+        return False
+    failure = internal_cohort_failure(directory, config, root)
+    return not (
+        result.get("outcome") == "failed"
+        and failure is not None
+        and result.get("cohort_primary") == failure["primary"]
+        and result.get("cohort_secondary") == failure["secondary"]
+    )
+
+
 def execute(directory, config, root, backend, *, resources=None):
     state = read(directory, "state.json")
     if state["phase"] != "queued":
@@ -506,24 +576,58 @@ def execute(directory, config, root, backend, *, resources=None):
             finally:
                 members = list(known)
                 if command:
-                    if parent_command and outcome != "succeeded":
+                    if (
+                        parent_command
+                        and outcome != "succeeded"
+                        and not (directory / "cancel.json").exists()
+                    ):
                         attempt(
                             "cohort_cancel_publication",
                             lambda: write(
                                 directory,
                                 "cancel.json",
-                                {"requested_at": stamp(), "reason": error or outcome},
+                                {
+                                    "requested_at": stamp(),
+                                    "reason": error or outcome,
+                                    "kind": "job_failure",
+                                    "job_id": state["job_id"],
+                                    "controller": state.get("child"),
+                                },
+                                replace=False,
                             ),
                         )
                     if parent_command or delegated is not None:
                         # Allow maintained child guardians to cancel/drain/reap before
                         # forcing descendants. Parent SIGKILL is watched independently.
                         if command.poll() is None:
-                            try:
-                                command.terminate()
-                                command.wait(timeout=45 if parent_command else 22)
-                            except (ProcessLookupError, subprocess.TimeoutExpired):
-                                pass
+                            # Unreadable or malformed cancellation is never internal
+                            # permission. Each new grace obligation is independent of
+                            # the descendant/directwait/handle/publication obligations.
+                            stop = attempt(
+                                "cohort_cancel_read",
+                                lambda: (
+                                    read(directory, "cancel.json")
+                                    if (directory / "cancel.json").exists()
+                                    else {}
+                                ),
+                            )
+                            internal = attempt(
+                                "cohort_cancel_classification",
+                                lambda: (
+                                    parent_command
+                                    and isinstance(stop, dict)
+                                    and stop.get("kind") in {"cohort_failure", "job_failure"}
+                                    and stop.get("job_id") == state["job_id"]
+                                    and stop.get("controller") == child
+                                ),
+                                False,
+                            )
+                            if not internal:
+                                attempt("cohort_grace_term", command.terminate)
+                            attempt(
+                                "cohort_grace_wait",
+                                lambda: command.wait(timeout=45 if parent_command else 22),
+                            )
                     # Keep each cleanup obligation independent, including exact Popen ownership.
                     members = attempt(
                         "descendant_discovery", lambda: track_descendants(child, known), members
@@ -639,6 +743,14 @@ def execute(directory, config, root, backend, *, resources=None):
                 }
                 if cleanup_errors and outcome == "succeeded":
                     result["outcome"] = "cleanup_required"
+        failure = internal_cohort_failure(directory, config, root)
+        if failure is not None and result["outcome"] in {"cancelled", "control_error", "failed"}:
+            result.update(
+                outcome="failed",
+                cohort_primary=failure["primary"],
+                cohort_secondary=failure["secondary"],
+                error=json.dumps(failure["primary"] or failure["secondary"]),
+            )
         publication_errors = []
         state.update(phase="finished", updated_at=stamp(), outcome=result["outcome"])
         for name, value in (
@@ -725,7 +837,7 @@ async def notify_once(directory, config, root, backend):
         notification = read(directory, "notification.json")
         if notification["status"] in ("delivered", "expired", "cancelled"):
             return notification
-        if (directory / "cancel.json").exists():
+        if notification_stopped(directory, config, root):
             notification.update(status="cancelled", updated_at=stamp())
             write(directory, "notification.json", notification)
             return notification
@@ -754,9 +866,8 @@ async def notify_once(directory, config, root, backend):
                     )
                     if entry["thread_id"] != state["thread_id"]:
                         raise JobError("Recipient identity changed")
-                    if (
-                        deadline_reached(config["notify_until"])
-                        or (directory / "cancel.json").exists()
+                    if deadline_reached(config["notify_until"]) or notification_stopped(
+                        directory, config, root
                     ):
                         return notification
                     if thread["status"]["type"] == "notLoaded":
@@ -778,9 +889,8 @@ async def notify_once(directory, config, root, backend):
                     )
                     if final_entry["thread_id"] != state["thread_id"]:
                         raise JobError("Recipient identity changed before delivery")
-                    if (
-                        deadline_reached(config["notify_until"])
-                        or (directory / "cancel.json").exists()
+                    if deadline_reached(config["notify_until"]) or notification_stopped(
+                        directory, config, root
                     ):
                         return notification
                     notification.update(
@@ -856,6 +966,18 @@ def run(directory, root, backend):
         }
         try:
             config = validate(read(directory, "config.json"), directory)
+            # The ordinary submit client registers its real wrapper-owned Python
+            # supervisor once. The environment reader wrapper stays unchanged.
+            state = read(directory, "state.json")
+            state["supervisor"] = runtime.process_identity(os.getpid())
+            write(directory, "state.json", state)
+            until = time.monotonic() + 5
+            while "launch" not in read(directory, "state.json"):
+                if (directory / "cancel.json").exists():
+                    break
+                if time.monotonic() >= until:
+                    raise JobError("Normal launcher registration not received; no command entry")
+                time.sleep(0.01)
             execute(directory, config, root, backend)
             return watch_notification(directory, config, root, backend)
         finally:
@@ -913,11 +1035,44 @@ def submit(path, directory, root, backend, *, supervisor_handles=None):
         )
     if supervisor_handles is not None:
         supervisor_handles.append(supervisor)
+    launcher = runtime.process_identity(supervisor.pid)
+    if launcher is None:
+        raise JobError("Owned standard launcher exited before its identity receipt")
+    queued = read(directory, "state.json")
+    registered = False
     # A quick handshake returns without waiting for generation or a Codex turn.
     until = time.monotonic() + 5
     while time.monotonic() < until:
+        ready = read(directory, "state.json")
+        if not registered and ready.get("supervisor") is not None:
+            actual = ready["supervisor"]
+            if ready["job_id"] != queued["job_id"] or not runtime.alive(actual):
+                raise JobError("Normal supervisor handshake belongs to another job/identity")
+            # One launch-local ownership check, transparent to standard flock/uv
+            # intermediates; no reconstruction of their argv/source/CPU roles.
+            current = actual
+            for _ in range(8):
+                if current == launcher:
+                    break
+                if not runtime.alive(current):
+                    raise JobError("Supervisor identity lost during launch handshake")
+                fields = Path(f"/proc/{current['pid']}/stat").read_text().rsplit(")", 1)[1].split()
+                current = runtime.process_identity(int(fields[1]))
+                if current is None:
+                    break
+            if current != launcher or not runtime.alive(launcher):
+                raise JobError("Supervisor is outside the actual owned standard launch handle")
+            ready["launch"] = dict(
+                job_id=queued["job_id"],
+                config_sha256=queued["config_sha256"],
+                owner=runtime.process_identity(os.getpid()),
+                launcher=launcher,
+                supervisor=actual,
+            )
+            write(directory, "state.json", ready)
+            registered = True
         state = read(directory, "state.json")
-        if state["phase"] != "queued":
+        if registered and state["phase"] != "queued":
             return state
         if supervisor.poll() is not None:
             raise JobError(f"Supervisor exited before handshake; inspect {directory}")

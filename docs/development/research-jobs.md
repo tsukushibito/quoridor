@@ -54,11 +54,11 @@ bash scripts/dev/research-job.sh notify --state-dir /absolute/path/new-job-runti
 
 ## 比較cohort全体の親一か所への権限確認集約
 
-設定された複数laneの比較は、通常jobとして起動する一つの `research-lifecycle.py cohort --intent PARENT_SETTINGS --sha256 SHA` が所有する。最高位の親が開始前と既存の `control_interval_seconds` ごとにBeadsの担当・pause・closeを読み、固定rosterの子lane/operationはその実親のjob、PID/start/boot、argv/起動系統、宣言されたCPU roleとsourceに束縛する。子は既存controller/guardianによるlocal cancel・期限・資源・親identity/権限有効期限の監視を保ち、開始ごと・実行中・完了通知待ちにBeadsを重複照会しない。単独jobは通常の自分自身による権限確認を維持する。
+設定された複数laneの比較は、通常jobとして起動する一つの `research-lifecycle.py cohort --intent PARENT_SETTINGS --sha256 SHA` が所有する。最高位の親が開始前と既存の `control_interval_seconds` ごとにBeadsの担当・pause・closeを読み、子lane/operationは、その親が実際に起動・所有したPopenと現在job識別・正確なprocess identityに結ぶ。標準project-env/flock/uvの環境reader lockを維持し、queued-state handshakeで実Python supervisorを一度登録する。子は既存controller/guardianによるlocal cancel・期限・資源・親identity/権限有効期限の監視を保ち、開始ごと・実行中・完了通知待ちにBeadsを重複照会しない。単独jobは通常の自分自身による権限確認を維持する。
 
 親のbounded DB読取り中もlocal cancel・signal・resource監視を行い、両pipe EOF後にDB childが生存する場合もcallbackと期限のpollを続ける。pause/close/owner変更/読取失敗では新operationを阻止し、既存cancel/シグナルで子へ停止を伝える。親喪失は既存子guardianがexact identityで検出する。DB待ち・poll・停止/回収処理には有限上限を持つが、OS schedulingやfilesystem待ちを含むゼロ遅延・hard real-time・全host回収を保証しない。cleanup一件の失敗でも他の子join、signal handler復元、handle close、結果保存を試み、primary/secondaryと未回収・UNKNOWNを分けて残す。最初のcancel（通常時はcleanup開始）から共通30秒を子grace・record待ちに使い、全対象へTERM、共通32秒でKILL、35秒まで非blocking waitで排出する。子ごとに待ち枠を積み上げず、親45秒の設定に後処理用10秒を残す相対envelopeである。
 
-権限・DB結果のcache/serviceや別の監視daemonは設けない。DB childのRAMは親common管理費へ含み、子ごとの小controller枠へ隠さない。完了した子は `delegated_to_parent` を保存し、正常完了又は制御停止の通知を親へまとめる。Beadsの書込みとbackupは担当開始・意味あるstage・終了/異常/pauseへまとめ、細進捗は既存state/log/resultへ置く。受入済み科学結果を再実行せず、明示された新継続は元失敗・追加試行・上限を区別した固定設定で入場する。
+設定・実行ファイル・入力・sourceは通常plan/Experimentのadmission、CPU/RAMは既存resource guardianの責任とする。authority層の専用六source rehash、多段config/origin/argvやCPU-role再構成、誤った直接PPID仮定は撤去し、実行中は割り当てた親jobの生存・取消・既存期限を監視する。権限・DB結果のcache/serviceや別の監視daemonは設けない。DB childのRAMは親common管理費へ含み、子ごとの小controller枠へ隠さない。完了した子は `delegated_to_parent` を保存し、正常完了又は制御停止の通知を親へまとめる。Beadsの書込みとbackupは担当開始・意味あるstage・終了/異常/pauseへまとめ、細進捗は既存state/log/resultへ置く。受入済み科学結果を再実行せず、明示された新継続は元失敗・追加試行・上限を区別した固定設定で入場する。
 
 ## 保存・停止・配送の境界
 
@@ -67,6 +67,8 @@ bash scripts/dev/research-job.sh notify --state-dir /absolute/path/new-job-runti
 - `result.json`: exit/失敗理由/時間/子回収結果。科学データ本体は既存の実験保存先に残す。
 - `output.log`: stdout+stderrの上限付き末尾。総byte数と保持byte数を区別し、全文ログが必要な実験は生成側で保存する。
 - `notification.json`: pending/delivered/uncertain/expired/cancelled（委譲子はdelegated_to_parent）と配送turn。submit時の宛先を変えず、現在のissue assigneeと明示thread IDを照合する。role名や定義hashへ依存しない。
+
+内部障害で子を停止した親は、内部理由と現在job/controllerを既存cancel/resultへ保存し、元のprimary/secondaryを保ったFAILEDを通常通知で一度届ける。人間の明示cancelは内部記録に上書きされず、通知を抑制する。wake直前のowner/pause/close確認とuncertain reconciliationは維持し、元cancelled/FAILED履歴を改稿しない。
 
 期限なしでもpause・終了・所有変更・明示cancelの点検とexact cleanupは維持する。停止/所有変更で完了通知を送れないことが確定した場合は通知待ちも終了し、期限なしの待機processを残さない。
 
@@ -140,3 +142,5 @@ bash scripts/dev/project-env.sh python -B scripts/dev/research-progress-health.p
 For the human-authorized362 continuation, implementation/repair/build/software qualification/review/integration/queue waits are preparation. They retain costs and ordinary per-command hang limits, but do not start an unlaunched scientific phase clock or impose a calendar expiry on future scientific entry. Preserve the old expired job configs/results; create fresh configs for genuinely unfinished commands.
 
 Use the existing controller `max_runtime_seconds` and command monotonic clocks at actual launch. The selected generation cap is1800s and each fit cap600s; the5400s cumulative bound covers launched experimental numerical/conversion/generation/fit/render commands. Sum their original command wall receipts once and set the next maximum to the smaller of its phase cap and the remaining experimental allowance. Do not include LLM/source/software repair/build/queue/collection/admin waits. For these fresh jobs `end_at` can be `null`; notification expiry is separate and must not reuse the old preparation deadline. No timer-state service, recurring LLM monitor or per-stage receipt ACK is required. Node/output/storage/error/pause/ownership/cleanup controls remain enforced, and cap failure retains partial/UNKNOWN rather than refilling or silently increasing limits.
+
+受付と実行開始は区別する。App Serverの受付やturn contextだけでcommand開始を認定せず、本人の保存command/resultや該当turnの実ログを確認する。turn一覧に項目が見えない場合も、それだけでagent/toolの未実行を断定しない。

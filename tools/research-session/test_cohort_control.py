@@ -123,18 +123,6 @@ class MetadataFixture:
             output=self.parent["output"],
             arena_cohort=self.cohort_ref,
         )
-        intent["caller_sources"] = [
-            lc.bound(lc.ROOT / "scripts/dev" / name)[0]
-            for name in (
-                "research-lifecycle.py",
-                "research-job.py",
-                "research-runtime.py",
-                "research-session.py",
-            )
-        ] + [
-            lc.bound(lc.ROOT / "python/quoridor_training" / name)[0]
-            for name in ("cycle_process.py", "snapshot.py")
-        ]
         ir = fresh_file(Path(self.parent["intent_path"]), intent)
         self.parent_config = normal_config(
             self.root,
@@ -189,6 +177,9 @@ class MetadataFixture:
         self.controller = dict(pid=101, start_ticks="11", boot_id="boot")
         self.state = dict(
             job_id="actual-parent",
+            issue="work",
+            thread_id="target",
+            launch=dict(launcher=self.supervisor),
             config_sha256=hashlib.sha256(
                 json.dumps(self.parent_config, sort_keys=True).encode()
             ).hexdigest(),
@@ -264,65 +255,6 @@ class ParentOriginTests(MetadataFixture, unittest.TestCase):
     def setUp(self):
         self.setup_metadata()
 
-    def test_exact_eight_member_roster_delegates_without_any_backend_read(self):
-        backend = SimpleNamespace(issues=lambda *a, **k: self.fail("child DB call"))
-        old = j._lifecycle_modules.get(self.root)
-        j._lifecycle_modules[self.root] = lc
-        self.addCleanup(
-            lambda: j._lifecycle_modules.pop(self.root)
-            if old is None
-            else j._lifecycle_modules.update({self.root: old})
-        )
-        for lane, cfg in enumerate(self.children):
-            binding = lc.cohort_job_authority(
-                cfg, Path(self.cohort["members"][lane]["job_runtime"])
-            )
-            self.assertEqual(binding["origin"]["job_id"], "actual-parent")
-            self.assertEqual(
-                j.authority(cfg, self.root, backend, horizon=None), {"thread_id": "target"}
-            )
-
-    def test_changed_job_id_thread_member_runtime_or_anonymous_caller_refused(self):
-        for fault in ("job_id", "thread", "lane", "runtime", "caller"):
-            with self.subTest(fault=fault):
-                cfg = json.loads(json.dumps(self.children[0]))
-                directory = Path(self.cohort["members"][0]["job_runtime"])
-                self.state["job_id"] = "other" if fault == "job_id" else "actual-parent"
-                fresh_file(self.state_path, self.state)
-                if fault == "thread":
-                    cfg["thread_id"] = "unknown"
-                if fault == "lane":
-                    cfg["authority_parent"]["lane"] = 1
-                if fault == "runtime":
-                    directory = self.root / "another-submission"
-                with patch.object(lc.os, "getpid", return_value=999 if fault == "caller" else 101):
-                    with self.assertRaises((lc.Refused, FileNotFoundError, KeyError, TypeError)):
-                        lc.cohort_job_authority(cfg, directory)
-
-    def test_parent_loss_reused_pid_cancel_and_stale_authority_fail_closed(self):
-        binding = lc.cohort_parent_binding(self.cohort_ref)
-        for fault in ("dead", "reused", "cancel", "expired", "finished"):
-            with self.subTest(fault=fault):
-                self.processes[100] = {**self.supervisor, "parent": 99, "state": "S", "rss": 1000}
-                self.state.update(
-                    phase="running", authority_valid_until_monotonic=time.monotonic() + 100
-                )
-                cancel = Path(self.parent["runtime"]) / "cancel.json"
-                cancel.unlink(missing_ok=True)
-                if fault == "dead":
-                    self.processes.pop(100)
-                elif fault == "reused":
-                    self.processes[100]["start_ticks"] = "different"
-                elif fault == "cancel":
-                    fresh_file(cancel, {})
-                elif fault == "expired":
-                    self.state["authority_valid_until_monotonic"] = time.monotonic() - 1
-                else:
-                    self.state["phase"] = "finished"
-                fresh_file(self.state_path, self.state)
-                with self.assertRaises(lc.Refused):
-                    lc.cohort_parent_check(binding)
-
     def test_standalone_keeps_its_own_pause_owner_and_error_authority(self):
         config = {k: v for k, v in self.children[0].items() if k != "authority_parent"}
         rows = [
@@ -349,30 +281,6 @@ class ParentOriginTests(MetadataFixture, unittest.TestCase):
                     backend.issues = lambda *a, **k: (_ for _ in ()).throw(TimeoutError("DB"))
                 with self.assertRaises((j.JobError, TimeoutError)):
                     j.authority(config, self.root, backend, horizon=None)
-
-
-class ParentSourceClosureTests(MetadataFixture, unittest.TestCase):
-    def setUp(self):
-        self.setup_metadata()
-
-    def test_controller_source_closure_is_exact_and_rejects_a_changed_or_missing_pin(self):
-        self.assertEqual(
-            lc.cohort_parent_binding(self.cohort_ref)["origin"]["job_id"], "actual-parent"
-        )
-        path = Path(self.parent["intent_path"])
-        original = json.loads(path.read_text())
-        changed = json.loads(path.read_text())
-        changed["caller_sources"][0]["sha256"] = "0" * 64
-        fresh_file(path, changed)
-        with self.assertRaisesRegex(lc.Refused, "reference drift"):
-            lc.cohort_parent_binding(self.cohort_ref)
-        missing = json.loads(json.dumps(original))
-        missing["caller_sources"].pop()
-        fresh_file(path, missing)
-        with self.assertRaisesRegex(
-            lc.Refused, "exact current parent/child controller source closure"
-        ):
-            lc.cohort_parent_binding(self.cohort_ref)
 
 
 class ParentCommonAccountingTests(MetadataFixture, unittest.TestCase):
@@ -1039,7 +947,7 @@ class ParentRepairMetadataTests(MetadataFixture, unittest.TestCase):
         old_handlers = {sig: signal.getsignal(sig) for sig in (signal.SIGTERM, signal.SIGINT)}
         write_failures = []
 
-        def write(directory, name, data):
+        def write(directory, name, data, *, replace=True):
             if (
                 directory == Path(self.parent["runtime"])
                 and name == "cancel.json"
@@ -1047,7 +955,7 @@ class ParentRepairMetadataTests(MetadataFixture, unittest.TestCase):
             ):
                 write_failures.append(name)
                 raise OSError("injected parent cancel publication failure")
-            j.write(directory, name, data)
+            j.write(directory, name, data, replace=replace)
 
         def submit(config_path, directory, root, backend, *, supervisor_handles):
             directory.mkdir(parents=True)
@@ -1116,48 +1024,6 @@ class ParentRepairMetadataTests(MetadataFixture, unittest.TestCase):
                 if child.poll() is None:
                     child.kill()
                 child.wait(timeout=3)
-
-    def test_same_parent_identity_declared_thread_affinity_passes_and_escape_refuses(self):
-        self.processes[100]["thread_affinities"] = {100: {0}}
-        self.processes[101]["thread_affinities"] = {101: {18}, 105: {0, 18}}
-        binding = lc.cohort_parent_binding(self.cohort_ref)
-        self.assertEqual(binding["management_cpu_pool"], [0, 18])
-        original_identity = dict(self.origin)
-        self.processes[101]["thread_affinities"][105] = {2}
-        with self.assertRaisesRegex(lc.Refused, "escaped management CPU role"):
-            lc.cohort_parent_check(binding)
-        self.assertEqual(self.origin, original_identity)
-
-    def test_submit_reuses_verified_binding_and_distinct_entry_verifies_fresh(self):
-        selected = self.control / "launch.json"
-        launch = lc.document(lc.bound(selected)[0])
-        config_ref = launch["job_configs"][0]
-        cfg = lc.document(config_ref)
-        directory = Path(self.cohort["members"][0]["job_runtime"])
-        forbidden = SimpleNamespace(issues=lambda *a, **kw: self.fail("delegated child DB read"))
-
-        def launched(*args, **kwargs):
-            state = j.read(directory, "state.json")
-            state["phase"] = "starting"
-            j.write(directory, "state.json", state)
-            return SimpleNamespace(pid=999, poll=lambda: None)
-
-        with (
-            patch.object(j, "lifecycle_module", return_value=lc),
-            patch.object(lc, "cohort_job_authority", wraps=lc.cohort_job_authority) as verify,
-        ):
-            with patch.object(j.subprocess, "Popen", side_effect=launched):
-                j.submit(Path(config_ref["path"]), directory, self.root, forbidden)
-            self.assertEqual(verify.call_count, 1)
-            # A separate authority invocation receives no prior binding and checks again.
-            j.authority(cfg, self.root, forbidden, horizon=None)
-            self.assertEqual(verify.call_count, 2)
-            binding = lc.cohort_job_authority(cfg)
-            bad = dict(binding, delegated_config_sha256="0" * 64)
-            with self.assertRaisesRegex(
-                j.JobError, "Same-entry delegated authority binding differs"
-            ):
-                j.authority(cfg, self.root, forbidden, horizon=None, delegated=bad)
 
 
 class ParentRepairCleanupBudgetTests(MetadataFixture, unittest.TestCase):

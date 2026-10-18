@@ -45,7 +45,7 @@ def read_json(path):
     return value
 
 
-def atomic_json(path, value):
+def atomic_json(path, value, *, replace=True):
     path = Path(path)
     fd, name = tempfile.mkstemp(prefix=path.name + ".", suffix=".tmp", dir=path.parent)
     temporary = Path(name)
@@ -55,7 +55,13 @@ def atomic_json(path, value):
             stream.write("\n")
             stream.flush()
             os.fsync(stream.fileno())
-        os.replace(temporary, path)
+        if replace:
+            os.replace(temporary, path)
+        else:
+            try:
+                os.link(temporary, path)
+            except FileExistsError:
+                return False
     finally:
         primary = sys.exception()
         try:
@@ -69,6 +75,7 @@ def atomic_json(path, value):
         os.fsync(fd)
     finally:
         os.close(fd)
+    return True
 
 
 def process_identity(pid):

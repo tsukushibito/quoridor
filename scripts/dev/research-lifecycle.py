@@ -474,141 +474,49 @@ def arena_cohort(spec):
     return cohort, member
 
 def cohort_parent_binding(cohort_ref):
-    """Bind one real normal parent job; never accept a bare environment exemption."""
+    """Assign the actual admitted parent job; admission owns settings/source/resources."""
     cohort = document(cohort_ref)
     parent = cohort["authority_parent"]
-    require(
-        set(parent) == {"runtime", "output", "intent_path", "config_path"},
-        "exact cohort parent declaration",
-    )
-    for value in parent.values():
-        path = owned(value, cohort["owner"])
-        require(
-            any(path.is_relative_to(Path(r)) for r in cohort["shared_roots"]),
-            "parent metadata/runtime inside shared lifetime",
-        )
-    launch = document(bound(Path(cohort["control_root"]) / "launch.json")[0])
-    require(
-        launch["cohort"] == cohort_ref and len(launch["job_configs"]) == len(cohort["members"]),
-        "same frozen parent launch and roster",
-    )
-    parent_config_ref = bound(parent["config_path"])[0]
-    require(
-        launch["parent_config"] == parent_config_ref, "declared exact parent originating config"
-    )
-    cfg = document(parent_config_ref)
-    intent_ref = bound(parent["intent_path"])[0]
-    intent = document(intent_ref)
-    expected_sources = {
-        str(ROOT / "scripts/dev" / name)
-        for name in (
-            "research-lifecycle.py",
-            "research-job.py",
-            "research-runtime.py",
-            "research-session.py",
-        )
-    } | {
-        str(ROOT / "python/quoridor_training" / name)
-        for name in ("cycle_process.py", "snapshot.py")
-    }
-    sources = intent.get("caller_sources", [])
-    require(
-        len(sources) == len(expected_sources)
-        and {ref.get("path") for ref in sources} == expected_sources,
-        "exact current parent/child controller source closure",
-    )
-    for ref in sources:
-        read_ref(ref)
-    require(
-        intent["kind"] == "cohort"
-        and intent["arena_cohort"] == cohort_ref
-        and intent["output"] == parent["output"]
-        and cfg["argv"]
-        == [
-            sys.executable,
-            "-B",
-            str(ROOT / "scripts/dev/research-lifecycle.py"),
-            "cohort",
-            "--intent",
-            intent_ref["path"],
-            "--sha256",
-            intent_ref["sha256"],
-        ]
-        and cfg["resource_contract"] == parent["intent_path"]
-        and cfg["issue"] == cohort["issue"]
-        and cfg["thread_id"] == cohort["thread_id"]
-        and cfg.get("authority_parent") is None,
-        "one ordinary authority-owning parent caller and cohort",
-    )
-    runtime = Path(parent["runtime"])
-    actual_ref = bound(runtime / "config.json")[0]
-    state = document(bound(runtime / "state.json")[0])
-    origin_ref = bound(Path(parent["output"]) / "parent-origin.json")[0]
-    origin = document(origin_ref)
-    expected = dict(
-        runtime=str(runtime),
-        job_id=state["job_id"],
-        config=actual_ref,
-        config_sha256=state["config_sha256"],
-        supervisor=state["supervisor"],
-        child=state["child"],
-    )
-    require(
-        actual_ref["sha256"] == parent_config_ref["sha256"]
-        and document(actual_ref) == cfg
-        and state["config_sha256"] == sha(json.dumps(cfg, sort_keys=True).encode())
-        and origin == dict(cohort=cohort_ref, originating_job=expected),
-        "actual parent job_id/config/PID-start-boot origin",
-    )
+    state = document(bound(Path(parent["runtime"]) / "state.json")[0])
+    origin = document(bound(Path(parent["output"]) / "parent-origin.json")[0])
+    require(origin["cohort"] == cohort_ref, "assigned parent belongs to this cohort")
     binding = dict(
         cohort=cohort_ref,
         parent=parent,
-        origin=expected,
-        origin_ref=origin_ref,
-        management_cpu_pool=list(cohort["management_cpu_pool"]),
+        origin=origin["originating_job"],
+        launchers=[state["launch"]["launcher"]],
+    )
+    require(binding["origin"]["runtime"] == parent["runtime"], "assigned parent job runtime")
+    require(
+        state["issue"] == cohort["issue"] and state["thread_id"] == cohort["thread_id"],
+        "assigned parent job owner",
     )
     cohort_parent_check(binding)
     return binding
 
 
 def cohort_parent_check(binding):
-    """Cheap local watch; the parent owns DB authority, children own exact cleanup."""
-    parent, origin = binding["parent"], binding["origin"]
-    state = document(bound(Path(parent["runtime"]) / "state.json")[0])
+    """Local job watch only; no repeated DB, source, argv or CPU-role admission."""
+    origin = binding["origin"]
+    runtime = Path(binding["parent"]["runtime"])
+    state = document(bound(runtime / "state.json")[0])
     require(
         state["job_id"] == origin["job_id"]
         and state["config_sha256"] == origin["config_sha256"]
         and state.get("supervisor") == origin["supervisor"]
         and state.get("child") == origin["child"]
         and state["phase"] == "running",
-        "same running parent, not another submission",
+        "assigned running parent job changed",
     )
     require(
         process.alive(origin["supervisor"]) and process.alive(origin["child"]),
-        "cohort parent exact identity lost",
+        "assigned parent exact identity lost",
     )
     require(
-        process.process_info(origin["child"]["pid"])["parent"] == origin["supervisor"]["pid"],
-        "actual parent controller ancestry",
+        all(process.alive(item) for item in binding.get("launchers", [])),
+        "assigned normal environment-reader launcher lost",
     )
-    require(
-        Path(f"/proc/{origin['child']['pid']}/cmdline").read_bytes().rstrip(b"\0").split(b"\0")
-        == [v.encode() for v in document(origin["config"])["argv"]],
-        "actual parent argv",
-    )
-    allowed = set(binding["management_cpu_pool"])
-    require(bool(allowed), "declared parent management CPU role")
-    for actual in (origin["supervisor"], origin["child"]):
-        threads = list(Path(f"/proc/{actual['pid']}/task").iterdir())
-        require(bool(threads), "observable exact parent/controller threads")
-        for thread in threads:
-            affinity = os.sched_getaffinity(int(thread.name))
-            require(
-                bool(affinity) and affinity <= allowed,
-                "actual parent/controller thread escaped management CPU role",
-            )
-        require(process.alive(actual), "parent exact identity changed during CPU role check")
-    require(not (Path(parent["runtime"]) / "cancel.json").exists(), "cohort parent cancelled")
+    require(not (runtime / "cancel.json").exists(), "cohort parent cancelled")
     until = state.get("authority_valid_until_monotonic")
     require(
         type(until) in (int, float) and math.isfinite(until) and time.monotonic() < until,
@@ -618,7 +526,7 @@ def cohort_parent_check(binding):
 
 
 def cohort_job_authority(config, directory=None):
-    """A declared lane/inner may delegate only through its live exact parent chain."""
+    """Only registered normal jobs inherit control from their assigned live parent."""
     delegated = config["authority_parent"]
     require(set(delegated) == {"cohort", "lane"}, "exact delegated cohort/member declaration")
     cohort_ref, lane = delegated["cohort"], delegated["lane"]
@@ -628,89 +536,62 @@ def cohort_job_authority(config, directory=None):
     member = cohort["members"][lane]
     launch = document(bound(Path(cohort["control_root"]) / "launch.json")[0])
     declared = document(launch["job_configs"][lane])
-    parent_cfg = document(binding["origin"]["config"])
     require(
-        declared.get("authority_parent") == delegated
-        and all(
-            config[k] == declared[k] == parent_cfg[k] for k in ("issue", "goal_issue", "thread_id")
-        ),
-        "complete issue/thread roster owned by one checked parent",
+        launch["cohort"] == cohort_ref
+        and declared.get("authority_parent") == delegated
+        and config["issue"] == declared["issue"] == cohort["issue"]
+        and config["thread_id"] == declared["thread_id"] == cohort["thread_id"]
+        and config["goal_issue"] == declared["goal_issue"],
+        "assigned member and issue/thread roster",
     )
     own = process.identity(process.process_info(os.getpid()))
     if own == binding["origin"]["child"]:
         require(
-            directory is None or str(directory) == member["job_runtime"],
-            "actual parent-submitted lane runtime",
+            config == declared and (directory is None or str(directory) == member["job_runtime"]),
+            "parent submits only its declared normal lane job",
         )
-        require(config == declared, "parent submits only the exact declared lane config")
     else:
-        state = document(bound(Path(member["job_runtime"]) / "state.json")[0])
-        actual_cfg = document(bound(Path(member["job_runtime"]) / "config.json")[0])
+        runtime = Path(member["job_runtime"])
+        state = document(bound(runtime / "state.json")[0])
+        registered = state["launch"]
         require(
-            actual_cfg == declared
-            and state["config_sha256"] == sha(json.dumps(declared, sort_keys=True).encode())
-            and state["issue"] == cohort["issue"]
-            and state["thread_id"] == cohort["thread_id"],
-            "actual declared lane job/config",
+            registered["owner"] == binding["origin"]["child"]
+            and registered["supervisor"] == state["supervisor"]
+            and registered["job_id"] == state["job_id"]
+            and registered["config_sha256"] == state["config_sha256"],
+            "normal submit registered this actual supervisor/job to its owner",
         )
-        supervisor = state["supervisor"]
+        binding["launchers"].append(registered["launcher"])
         require(
-            process.alive(supervisor)
-            and process.process_info(supervisor["pid"])["parent"]
-            == binding["origin"]["child"]["pid"],
-            "lane supervisor belongs to actual parent controller",
+            process.alive(registered["launcher"]), "assigned lane environment-reader launcher lost"
         )
-        if own == supervisor:
+        if own == state["supervisor"]:
             require(
-                directory is None or str(directory) == member["job_runtime"],
-                "actual declared lane execute runtime",
+                config == declared and (directory is None or Path(directory) == runtime),
+                "registered supervisor executes its own declared lane",
             )
-            require(config == declared, "lane supervisor executes only its own declared config")
         else:
             require(
-                own == state.get("child")
-                and process.process_info(own["pid"])["parent"] == supervisor["pid"],
-                "inner authority caller is exact owned lane sequence",
+                own == state.get("child") and state["phase"] == "running",
+                "inner operation caller is the registered running lane sequence",
             )
             if config != declared:
-                argv = config["argv"]
+                intent_path = Path(config["resource_contract"])
+                intent = document(bound(intent_path)[0])
                 require(
-                    len(argv) == 8
-                    and argv[:5]
-                    == [
-                        sys.executable,
-                        "-B",
-                        str(ROOT / "scripts/dev/research-lifecycle.py"),
-                        "run",
-                        "--intent",
-                    ]
-                    and argv[6] == "--sha256",
-                    "only maintained inner RUN can inherit parent control",
-                )
-                intent_ref = bound(argv[5])[0]
-                intent = document(intent_ref)
-                require(
-                    intent_ref["sha256"] == argv[7]
-                    and intent["arena_cohort"] == cohort_ref
+                    intent["arena_cohort"] == cohort_ref
                     and intent["settings"]["path"] == member["settings_path"],
-                    "same inner intent/cohort/member",
+                    "inner normal admission belongs to assigned member",
                 )
-                arena_cohort(intent)
-                phase = Path(member["output"]) / f"run-{intent['selection_index']:03d}"
-                require(
-                    Path(argv[5]) == phase / "intent.json"
-                    and document(bound(phase / "runtime/config.json")[0]) == config,
-                    "actual inner runtime/config",
+                inner_runtime = (
+                    Path(member["output"]) / f"run-{intent['selection_index']:03d}/runtime"
                 )
+                inner = document(bound(inner_runtime / "state.json")[0])
                 require(
-                    directory is None or Path(directory) == phase / "runtime",
-                    "actual inner execute runtime",
-                )
-                inner = document(bound(phase / "runtime/state.json")[0])
-                require(
-                    inner["supervisor"] == own
+                    (directory is None or Path(directory) == inner_runtime)
+                    and inner["supervisor"] == own
                     and inner["config_sha256"] == sha(json.dumps(config, sort_keys=True).encode()),
-                    "inner normal job origin belongs to lane sequence",
+                    "assigned inner originating job",
                 )
     binding["delegated_config_sha256"] = canonical_sha(config)
     binding["delegated_lane"] = lane
@@ -768,14 +649,23 @@ def cohort_sequence(settings_ref, *, job_module=None, backend=None):
         stopped = True
         if cancel_started is None:
             cancel_started = time.monotonic()
-        attempt(
-            "parent cancel publication",
-            lambda: job_module.write(
-                Path(parent["runtime"]),
-                "cancel.json",
-                dict(requested_at=stamp(), reason="cohort controller stopped", signal=signum),
-            ),
-        )
+
+        def publish_parent_cancel():
+            path = Path(parent["runtime"])
+            if (path / "cancel.json").exists():
+                return  # An explicit user/control stop must never become an internal failure.
+            value = dict(requested_at=stamp(), reason="cohort controller stopped", signal=signum)
+            if signum is None and primary is not None:
+                value.update(
+                    kind="cohort_failure",
+                    job_id=origin["job_id"],
+                    controller=origin["child"],
+                    cohort=cohort_ref,
+                    primary=error_fact(primary),
+                )
+            job_module.write(path, "cancel.json", value, replace=False)
+
+        attempt("parent cancel publication", publish_parent_cancel)
         for member in cohort["members"]:
             path = Path(member["job_runtime"])
             if attempt(f"lane-{member['lane']} cancel path", path.is_dir, True):
@@ -820,7 +710,7 @@ def cohort_sequence(settings_ref, *, job_module=None, backend=None):
                     submissions.append(dict(lane=member["lane"], error=error_fact(error)))
                     if primary is None:
                         primary = error
-                    cancel(signal.SIGTERM, None)
+                    cancel(None, None)
         new_json(output / "submission.json", dict(cohort=cohort_ref, submissions=submissions))
         while len(records) < len(submissions):
             if cancel_started is not None and time.monotonic() - cancel_started >= 30:
@@ -830,7 +720,7 @@ def cohort_sequence(settings_ref, *, job_module=None, backend=None):
             except BaseException as error:
                 if primary is None:
                     primary = error
-                cancel(signal.SIGTERM, None)
+                cancel(None, None)
             for row in submissions:
                 lane = row["lane"]
                 if lane in records:
@@ -848,7 +738,7 @@ def cohort_sequence(settings_ref, *, job_module=None, backend=None):
                                 "finite cohort stopped: declared lane failed; "
                                 + json.dumps(records[lane])
                             )
-                        cancel(signal.SIGTERM, None)
+                        cancel(None, None)
                 elif "error" in row and not (runtime / "state.json").exists():
                     records[lane] = dict(submission_error=row["error"], native_entry="UNENTERED")
             if len(records) < len(submissions):
@@ -861,7 +751,7 @@ def cohort_sequence(settings_ref, *, job_module=None, backend=None):
             secondary.append(error)
     finally:
         if stopped or primary is not None:
-            cancel(signal.SIGTERM, None)
+            cancel(None, None)
         # One cohort-wide budget, anchored at the FIRST cancellation (or normal
         # terminal cleanup). Delegated job grace22 + TERM2 + wait3 + remaining1
         # + log1 + scan allowance1 =30. Shared TERM2/wait3 then end by35, leaving
