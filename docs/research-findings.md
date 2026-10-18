@@ -2417,10 +2417,24 @@ Stage9の打ち切り条件は、受入れ済みの事前「未決着ならpath_
 
 ### Cedarの特徴生成・差分更新の静的照合（324.11、2026-10-18）
 
-既存388/390の保存profileを現在のNNUE/探索経路と照合し、壁map共有・pooled子buffer・head scratch再利用が現役であることを確認した。成功deltaのFT二行copyは64f32/256Bで、copyとallocation、親map hitと壁repair/fullBFSを区別する。固定距離logit係数0でも学習済み正規化距離入力は現役で、旧profile割合を現在のCedar費用や削減可能率にはしない。その後の人間の直接指示により、次工程324.11.2は現Cedar/Control/depth_rank/path_tail ON/TT1Mの実profileと詳細解析へ進める。既存turn projectionのTT数値返却とdelta回数は補助として統合し、別の全件集計をprofileの開始条件にはしない。最初の1turnのwhole上限216/52017（約0.415%）はroot TTを含む有限例であり、全件率・時間利益ではない。公開入力/shape/nonfinite/model/history/cancel/undoを保ち、新stamp/cache/unsafeや旧不採用393/398を追加せず、追加Search/perf・source最適化はまだ実行していない。[対応表・既存改善・残る候補と限界](../.worktree/assets/perf/cedar-evaluation-preparation-v1/report-ja.md)、[設計への反映](design/ai-nnue-optimization-agenda.md#cedar評価準備の既存計測と現行経路324112026-10-18)。
+既存388/390の保存profileを現在のNNUE/探索経路と照合し、壁map共有・pooled子buffer・head scratch再利用が現役であることを確認した。成功deltaのFT二行copyは64f32/256Bで、copyとallocation、親map hitと壁repair/fullBFSを区別する。固定距離logit係数0でも学習済み正規化距離入力は現役で、旧profile割合を現在のCedar費用や削減可能率にはしない。その後の人間の直接指示により、次工程324.11.2は現Cedar/Control/depth_rank/path_tail ON/TT1Mの実profileと詳細解析へ進める。既存turn projectionのTT数値返却とdelta回数は補助として統合し、別の全件集計をprofileの開始条件にはしない。最初の1turnのwhole上限216/52017（約0.415%）はroot TTを含む有限例であり、全件率・時間利益ではない。公開入力/shape/nonfinite/model/history/cancel/undoを保ち、新stamp/cache/unsafeや旧不採用393/398を追加せず、11.1の静的照合時点では追加Search/perf・source最適化を実行していなかった。[対応表・既存改善・残る候補と限界](../.worktree/assets/perf/cedar-evaluation-preparation-v1/report-ja.md)、[設計への反映](design/ai-nnue-optimization-agenda.md#cedar評価準備の既存計測と現行経路324112026-10-18)。
 
 ### Cedar LMR比較のL1不完全停止（324.9、2026-10-18）
 
 原L0は512局・256色交換pairが正常受入れ済みで、depth_rank対OFFの266勝3分243敗、得点率0.5224609375から事前規則に従いdepth_rankをL1の比較相手とした。L1は全原イベントの保全回収を終えたが、正常受入れは240局・120pair、未受入れは272予定slotである。原operation単位の未入場分はなく、部分RAW内の個々のstarted/completedはUNKNOWNのまま残る。L1の完全512局による選択条件を満たさないため、選択値はNULL、L2は未入場、最終区間・RNGは未実行である。受入れsubsetから候補を選ばず、完了/部分実行/UNKNOWNを再演・置換・補充しない。[原L1回収とslotの区分](../.worktree/assets/perf/cedar-lmr-tuning-implementation-v1/numeric-v1/shared/L1-v9-collection-v1/result.json)。
 
 複数laneの原control_errorにはbounded Beads authority readのexit1、timeout、空stderrが保存されている。これは棋力やRAM peakの証拠ではなく、underlying原因を未保存stderrから推測しない。管理CPU poolのpeer比較とmanaged SearchWallTimeのfallback selectorは限定修復したが、旧FAILEDをPASSへ改稿せず、途中nativeのexit/wait/handle cleanupをouter cleanupから補わない。L1の既知課金983468058、L0込み既知2812409489はopaque予約込みの下限で、別の部分失敗費UNKNOWNを含まない。原非融通上限、RAW/TMP/FAILED/NULL/masks、並列・nested時計の非加算を保持し、refund・quota融通・追加attemptは発行しない。[課金の既知/UNKNOWN](../.worktree/assets/perf/cedar-lmr-tuning-implementation-v1/numeric-v1/shared/L1-v9-collection-v1/node-ledger.json)。
+
+### 現行Cedarの有限CPU profile（324.11.2、2026-10-18）
+
+同じ一局・family0の実fullprefixから残壁16/10/4/0の4局面を固定し、現Cedar/Control/PVS/depth_rank/path_tail ON/TT1Mを独立cold sessionのplain→profile→plainで計12calls測った。D8/各1M nodes/timeNone、実9,000,099nodes・7,226,733報告logical evaluations、3DepthComplete（壁0）と9NodeLimit UNKNOWNを保持する。全4入力でvaluebits/action/PV/depth/stop/全work/親履歴が一致し、追加call・refill・新model資格・旧perf再演は0。4局面は同familyの時系列であり独立標本ではない。
+
+99Hzの320samples（入力別92/114/112/2）で、whole nativeの観測periodを分母とするresolved selfはhead17.5%、壁距離15%、合法手生成11.875%、validation10%、delta owner8.4375%だった。inclusiveや内包groupを足して除去可能量にはしない。全chainにunknown ancestorがあり、ID/FT列/copyの孤立費はUNKNOWN。壁0はSearch33nodes・約0.068msに対しcold native全体中央値約88ms、2samplesはsetup側だけでSearch内訳は不明。TT reset約32〜54msと探索時間は別scopeである。plain/profileの壁時計変動からperfの負の負荷や一般速度改善を認定しない。
+
+次候補はhead/validation/FT準備の既存owner内の重複、現map repair/BFS、合法手生成/historyの責務順に絞る。公開不正入力/nonfinite/model/STM/history/undo/取消の保証は削らない。TT-before-deltaの更新省略回数上限は高/中/低残壁で約0.21/1.51/1.10%に留まり、時間利益ではなく後順位とする。proof用距離counter0をfeature側BFS0とは扱わず、旧390比率を今回の改善率へ変換しない。最適化・モデル/特徴/既定変更は採用していない。[全結果・責務別/入力別selfとinclusive・setup/Search・限界](../research-data/ai-sigma/cedar-evaluation-preparation/current-profile-v1/report-ja.md)。
+
+### LMR管理修復と新しい有限継続（324.9、2026-10-18）
+
+旧L1のINCOMPLETE_SELECTION_STOPと元owner closureを保存した後、人間がDB/control修復と比較完遂を新たに直接許可した。元L0正常512局とL1正常240局は再対局せず、未受入れ272予定slotを原family/色/book/seed/model/時計/方法で固定し、回収可能な保存局は維持された通常validatorによる別資格としてだけ再用する。新attemptと旧FAILED/UNKNOWN・再訪prefix・追加費を区別し、旧24Gや未知の残額を新権利にしない。
+
+新たな対局上限はL1不足272＋L2確認512＝784局、追加node上限はL1 4.25G＋L2 8G＝独立12.25G（32局500M、16局250M、非融通）。L1完全512局/256pairs後に元の点選択則を一度適用し、元確認側の一つのL2比較を入場前固定、元最終bootstrapを一度だけ行う。起動直後の重複authority readとouter/innerの責任を既存controllerの範囲で必要最小に整理し、pause/取消/owner変更・資源・読取失敗時の停止・子回収を維持する。新DB基盤/cache/service/無制限timeoutや一律監査は追加しない。これは旧不完全記録の改稿・retroPASS・無変更retryではなく、新指示に基づく有限継続である。[継続契約](../.artifacts/research-team/integration324/cedar-lmr-tuning-v1/control-continuation-v1/task.md)。
