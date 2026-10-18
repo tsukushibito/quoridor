@@ -87,6 +87,45 @@ class QualityEntryPointContracts(unittest.TestCase):
             self.assertEqual(error.exception.code, 2)
             execute.assert_not_called()
 
+    def test_normal_gate_keeps_one_project_interpreter_across_all_test_groups(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            environments = [root / "first", root / "replacement"]
+            for environment in environments:
+                for binary in ("ruff", "python"):
+                    file = environment / "bin" / binary
+                    file.parent.mkdir(parents=True, exist_ok=True)
+                    file.touch()
+            prettier = root / "tools/research-quality/node_modules/.bin/prettier"
+            prettier.parent.mkdir(parents=True)
+            prettier.touch()
+            layout = root / "research-paths.json"
+            layout.write_text(json.dumps({"environments": {"project": str(environments[0])}}))
+
+            def replace_layout_after_first_command(*args, **kwargs):
+                layout.write_text(json.dumps({"environments": {"project": str(environments[1])}}))
+
+            with (
+                patch.object(QUALITY, "ROOT", root),
+                patch.object(QUALITY, "sources", return_value=([], [])),
+                patch.object(
+                    QUALITY.subprocess, "run", side_effect=replace_layout_after_first_command
+                ) as execute,
+                patch.dict(os.environ, {}, clear=True),
+                patch("sys.argv", ["check-research.py"]),
+            ):
+                QUALITY.main()
+            interpreters = {str(environment / "bin/python") for environment in environments}
+            selected = [
+                call.args[0][0]
+                for call in execute.call_args_list
+                if call.args[0][0] in interpreters
+            ]
+            self.assertEqual(selected, [str(environments[0] / "bin/python")] * 2)
+            self.assertEqual(
+                json.loads(layout.read_text())["environments"]["project"], str(environments[1])
+            )
+
 
 if __name__ == "__main__":
     unittest.main()

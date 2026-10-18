@@ -58,10 +58,10 @@ stream before CPU output access.
 
 ```sh
 cargo run -p quoridor-inference --example fixtures > "$QUORIDOR_EXPORT/legal-inputs.json"
-python3 tools/model-export/verify-native.py \
+bash scripts/dev/project-env.sh python -B tools/model-export/verify-native.py \
   --binary .artifacts/rust-migration/target/release/examples/verify \
   --inputs "$QUORIDOR_EXPORT/legal-inputs.json" --model "$QUORIDOR_MODEL" \
-  --ort-library "$QUORIDOR_TRAINING_ROOT/lib/python3.14/site-packages/onnxruntime/capi/libonnxruntime.so.1.30.0" \
+  --ort-library "$QUORIDOR_PROJECT_ENV/lib/python3.14/site-packages/onnxruntime/capi/libonnxruntime.so.1.30.0" \
   --aoti "$QUORIDOR_EXPORT/sigma.pt2" --tensorrt "$QUORIDOR_EXPORT/sigma.engine" \
   --output /home/vscode/.cache/inference/rust-migration/verification-new
 ```

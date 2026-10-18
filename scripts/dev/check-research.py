@@ -166,15 +166,9 @@ def main():
         )
         return
     prettier = ROOT / "tools/research-quality/node_modules/.bin/prettier"
-    ruff = (
-        Path(
-            os.environ.get(
-                "QUORIDOR_PROJECT_ENV",
-                json.loads((ROOT / "research-paths.json").read_text())["environments"]["project"],
-            )
-        )
-        / "bin/ruff"
-    )
+    layout = json.loads((ROOT / "research-paths.json").read_text())
+    project_env = Path(os.environ.get("QUORIDOR_PROJECT_ENV", layout["environments"]["project"]))
+    ruff = project_env / "bin/ruff"
     if not prettier.exists() or not ruff.exists():
         parser.error(
             "Install the locked project quality tools described in docs/development/ai-research-code.md"
@@ -203,9 +197,7 @@ def main():
     run(sys.executable, "-B", "scripts/dev/test_research_storage.py")
     run(sys.executable, "-B", "scripts/dev/test_manage_worktree.py")
     run(sys.executable, "-B", "tools/model-export/test_export.py")
-    layout = json.loads((ROOT / "research-paths.json").read_text())
-    training_env = Path(os.environ.get("QUORIDOR_PROJECT_ENV", layout["environments"]["project"]))
-    training_python = training_env / "bin/python"
+    training_python = project_env / "bin/python"
     if not training_python.exists():
         parser.error("Existing project environment required for tensor-loader contracts")
     env = {
@@ -227,15 +219,12 @@ def main():
         "--test",
         "tools/research-quality/test_verify_production.mjs",
     )
-    layout = json.loads((ROOT / "research-paths.json").read_text())
-    session_env = Path(os.environ.get("QUORIDOR_PROJECT_ENV", layout["environments"]["project"]))
-    session_python = session_env / "bin/python"
-    if not session_python.exists():
+    if not training_python.exists():
         parser.error(
             "Existing project environment required for client/job tests; no automatic install"
         )
     run(
-        session_python,
+        training_python,
         "-B",
         "-m",
         "unittest",
