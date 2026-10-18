@@ -846,60 +846,6 @@ pub struct SearchStats {
     pub ordering: OrderingStats,
 }
 
-/// Temporary aggregate observer for one finite comparison. No per-node journal.
-#[cfg(feature = "research-diagnostics")]
-#[derive(Debug, Default, Clone, Copy)]
-pub struct StockWork {
-    pub nodes: u64,
-    pub evaluations: u64,
-    pub terminal: u64,
-    pub delta_updates: u64,
-    pub tt_probes: u64,
-    pub tt_hits: u64,
-    pub tt_context_transitions: u64,
-    pub tt_board_hash_updates: u64,
-    pub wall_distance_map_reads: u64,
-    pub wall_distance_map_builds: u64,
-    pub wall_distance_fallbacks: u64,
-}
-#[cfg(feature = "research-diagnostics")]
-impl StockWork {
-    fn add_difference(&mut self, before: Self, after: Self) {
-        self.nodes += after.nodes - before.nodes;
-        self.evaluations += after.evaluations - before.evaluations;
-        self.terminal += after.terminal - before.terminal;
-        self.delta_updates += after.delta_updates - before.delta_updates;
-        self.tt_probes += after.tt_probes - before.tt_probes;
-        self.tt_hits += after.tt_hits - before.tt_hits;
-        self.tt_context_transitions += after.tt_context_transitions - before.tt_context_transitions;
-        self.tt_board_hash_updates += after.tt_board_hash_updates - before.tt_board_hash_updates;
-        self.wall_distance_map_reads +=
-            after.wall_distance_map_reads - before.wall_distance_map_reads;
-        self.wall_distance_map_builds +=
-            after.wall_distance_map_builds - before.wall_distance_map_builds;
-        self.wall_distance_fallbacks +=
-            after.wall_distance_fallbacks - before.wall_distance_fallbacks;
-    }
-}
-/// Maximal zero-stock child regions are disjoint; initial-zero calls are separate.
-/// Whole proof/typed-TT/rejection counts remain in the ordinary SearchStats.
-#[cfg(feature = "research-diagnostics")]
-#[derive(Debug, Default)]
-pub struct StockObservation {
-    pub initial_zero: bool,
-    pub search_elapsed: Duration,
-    pub child_elapsed: Duration,
-    pub maximal_children: u64,
-    pub failed_children: u64,
-    pub child_work: StockWork,
-    active: bool,
-}
-#[cfg(feature = "research-diagnostics")]
-struct StockFrame {
-    start: Instant,
-    before: StockWork,
-}
-
 #[derive(Debug, Clone)]
 pub struct SearchResult {
     pub action: Option<u16>,
@@ -1384,56 +1330,9 @@ struct Search<'a, const OBSERVE: bool = false, const TRACE: bool = false> {
     #[cfg(feature = "research-diagnostics")]
     lmr_observation: Option<&'a mut LmrObservation>,
     #[cfg(feature = "research-diagnostics")]
-    stock_observation: Option<&'a mut StockObservation>,
-    #[cfg(feature = "research-diagnostics")]
     trial_trace: Option<&'a mut LmrTrialTrace>,
 }
 impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
-    #[cfg(feature = "research-diagnostics")]
-    fn stock_work(&self) -> StockWork {
-        StockWork {
-            nodes: self.stats.nodes,
-            evaluations: self.stats.evaluations,
-            terminal: self.stats.terminal,
-            delta_updates: self.stats.delta_updates,
-            tt_probes: self.stats.tt_probes,
-            tt_hits: self.stats.tt_hits,
-            tt_context_transitions: self.stats.tt_context_transitions,
-            tt_board_hash_updates: self.stats.tt_board_hash_updates,
-            wall_distance_map_reads: self.eval_scratch.distances.map_reads,
-            wall_distance_map_builds: self.eval_scratch.distances.map_builds,
-            wall_distance_fallbacks: self.eval_scratch.distances.fallbacks,
-        }
-    }
-    #[cfg(feature = "research-diagnostics")]
-    fn stock_begin(&mut self, c: &SigmaContext) -> Option<StockFrame> {
-        if !self
-            .stock_observation
-            .as_ref()
-            .is_some_and(|o| !o.initial_zero && !o.active)
-            || c.position().walls_remaining != [0, 0]
-        {
-            return None;
-        }
-        let start = Instant::now();
-        let before = self.stock_work();
-        self.stock_observation.as_deref_mut().unwrap().active = true;
-        Some(StockFrame { start, before })
-    }
-    #[cfg(feature = "research-diagnostics")]
-    fn stock_finish(&mut self, frame: Option<StockFrame>, failed: bool) {
-        if let Some(frame) = frame {
-            let elapsed = frame.start.elapsed();
-            let after = self.stock_work();
-            let o = self.stock_observation.as_deref_mut().unwrap();
-            o.active = false;
-            o.maximal_children += 1;
-            o.failed_children += u64::from(failed);
-            o.child_elapsed += elapsed;
-            o.child_work.add_difference(frame.before, after);
-        }
-    }
-
     fn key(&mut self, c: &SigmaContext) -> Key {
         let key = Key::of(c);
         self.stats.tt_key_builds += 1;
@@ -1724,131 +1623,120 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
         self.control()?;
         let mover = c.position().turn;
         let undo = c.make_move(action)?;
-        #[cfg(feature = "research-diagnostics")]
-        let stock_frame = self.stock_begin(c);
-        // This is the original post-make body, including every canonical undo
-        // and original Err/cancel exit. Observation never replaces its result.
-        let result = (|| {
-            let parent_context = self.context;
-            let parent_board = self.board;
-            if let Some(ref mut board) = self.board {
-                if let Err(error) = board.advance(&undo, c) {
-                    c.unmake_move(undo)?;
-                    return Err(error.into());
-                }
-                self.stats.tt_board_hash_updates += 1;
-            }
-            if let Some(ref mut context) = self.context {
-                if let Err(error) = context.advance(&undo, c) {
-                    c.unmake_move(undo)?;
-                    self.context = parent_context;
-                    self.board = parent_board;
-                    return Err(error.into());
-                }
-                self.stats.tt_context_transitions += 1;
-            }
-            // Only signed history consumes speculative actor/lag contexts.
-            let track_path = self.ordering.is_some();
-            if track_path {
-                self.path.push(PlayedMove {
-                    colour: mover,
-                    action,
-                });
-            }
-            // Taking the slot keeps payloads on the heap and the parent borrow local;
-            // deeper recursion can never alias this active child.
-            let pooled = ply < self.child_buffers.len();
-            let mut a = self.child_buffers.get_mut(ply).and_then(Option::take);
-            // The restore happens even when evaluation, budget or cancellation fails.
-            let result = (|| {
-                let mut entered = false;
-                // True goal/threefold leaves bypass FT and head evaluation as well.
-                if c.terminal_value().is_none() {
-                    if self.stats.zero_stock_safe_race_enabled
-                        && depth > 0
-                        && c.position().walls_remaining == [0, 0]
-                    {
-                        self.enter()?;
-                        entered = true;
-                        self.stats.safe_race_stock0_opportunities += 1;
-                        if let Some(proof) = self.safe_race_value(c, a.as_ref(), parent, depth)? {
-                            self.control()?;
-                            self.stats.safe_race_proven_leaves += 1;
-                            match proof.origin {
-                                SafeRaceOrigin::Tt => self.stats.safe_race_tt_returns += 1,
-                                SafeRaceOrigin::Manhattan => self.stats.safe_race_m_returns += 1,
-                                SafeRaceOrigin::ImmediateGoal => {
-                                    self.stats.safe_race_tail_goal_returns += 1
-                                }
-                                SafeRaceOrigin::SealedTail => {
-                                    self.stats.safe_race_tail_sealed_returns += 1
-                                }
-                                SafeRaceOrigin::Path => self.stats.safe_race_path_returns += 1,
-                                SafeRaceOrigin::FuturePath => {
-                                    self.stats.safe_race_path_returns += 1
-                                }
-                            }
-                            return Ok(proof.value);
-                        }
-                    }
-                    if self.zero_stock_approx_leaf(c, depth) {
-                        // This branch replaces negamax entry, not its caller's make,
-                        // fingerprint, path or canonical undo. Count/control once.
-                        if !entered {
-                            self.enter()?;
-                        }
-                        let value = self.zero_stock_approx_value(c, a.as_ref(), parent, depth)?;
-                        self.control()?;
-                        self.stats.zero_stock_approx_terminations += 1;
-                        return Ok(value);
-                    }
-                    self.eval.advance_move_context(parent, c, &undo, &mut a)?;
-                    if a.is_some() {
-                        self.stats.delta_updates += 1;
-                    }
-                }
-                self.control()?;
-                if entered {
-                    self.negamax_entered(c, a.as_ref(), depth, -window[1], -window[0], ply)
-                } else {
-                    self.negamax(c, a.as_ref(), depth, -window[1], -window[0], ply)
-                }
-            })();
-            if pooled {
-                self.child_buffers[ply] = a;
-            }
-            if track_path {
-                let popped = self.path.pop();
-                debug_assert_eq!(
-                    popped,
-                    Some(PlayedMove {
-                        colour: mover,
-                        action
-                    })
-                );
-            }
-            // If canonical undo fails, clear numeric authority and propagate failure.
-            // Do not report the context restored on a failed canonical undo.
-            if let Err(error) = c.unmake_move(undo) {
-                self.context = None;
-                self.board = None;
+        let parent_context = self.context;
+        let parent_board = self.board;
+        if let Some(ref mut board) = self.board {
+            if let Err(error) = board.advance(&undo, c) {
+                c.unmake_move(undo)?;
                 return Err(error.into());
             }
-            self.context = parent_context;
-            self.board = parent_board;
-            let result = result.map(|v| -v);
-            #[cfg(feature = "research-diagnostics")]
-            if OBSERVE && let Some(o) = self.lmr_observation.as_deref_mut() {
-                o.child_return(c, &self.path, ply - 1, action, &result);
+            self.stats.tt_board_hash_updates += 1;
+        }
+        if let Some(ref mut context) = self.context {
+            if let Err(error) = context.advance(&undo, c) {
+                c.unmake_move(undo)?;
+                self.context = parent_context;
+                self.board = parent_board;
+                return Err(error.into());
             }
-            #[cfg(feature = "research-diagnostics")]
-            if TRACE && let Some(trace) = self.trial_trace.as_deref_mut() {
-                trace.child_return(ply, action, &result, &self.stats);
+            self.stats.tt_context_transitions += 1;
+        }
+        // Only signed history consumes speculative actor/lag contexts.
+        let track_path = self.ordering.is_some();
+        if track_path {
+            self.path.push(PlayedMove {
+                colour: mover,
+                action,
+            });
+        }
+        // Taking the slot keeps payloads on the heap and the parent borrow local;
+        // deeper recursion can never alias this active child.
+        let pooled = ply < self.child_buffers.len();
+        let mut a = self.child_buffers.get_mut(ply).and_then(Option::take);
+        // The restore happens even when evaluation, budget or cancellation fails.
+        let result = (|| {
+            let mut entered = false;
+            // True goal/threefold leaves bypass FT and head evaluation as well.
+            if c.terminal_value().is_none() {
+                if self.stats.zero_stock_safe_race_enabled
+                    && depth > 0
+                    && c.position().walls_remaining == [0, 0]
+                {
+                    self.enter()?;
+                    entered = true;
+                    self.stats.safe_race_stock0_opportunities += 1;
+                    if let Some(proof) = self.safe_race_value(c, a.as_ref(), parent, depth)? {
+                        self.control()?;
+                        self.stats.safe_race_proven_leaves += 1;
+                        match proof.origin {
+                            SafeRaceOrigin::Tt => self.stats.safe_race_tt_returns += 1,
+                            SafeRaceOrigin::Manhattan => self.stats.safe_race_m_returns += 1,
+                            SafeRaceOrigin::ImmediateGoal => {
+                                self.stats.safe_race_tail_goal_returns += 1
+                            }
+                            SafeRaceOrigin::SealedTail => {
+                                self.stats.safe_race_tail_sealed_returns += 1
+                            }
+                            SafeRaceOrigin::Path => self.stats.safe_race_path_returns += 1,
+                            SafeRaceOrigin::FuturePath => self.stats.safe_race_path_returns += 1,
+                        }
+                        return Ok(proof.value);
+                    }
+                }
+                if self.zero_stock_approx_leaf(c, depth) {
+                    // This branch replaces negamax entry, not its caller's make,
+                    // fingerprint, path or canonical undo. Count/control once.
+                    if !entered {
+                        self.enter()?;
+                    }
+                    let value = self.zero_stock_approx_value(c, a.as_ref(), parent, depth)?;
+                    self.control()?;
+                    self.stats.zero_stock_approx_terminations += 1;
+                    return Ok(value);
+                }
+                self.eval.advance_move_context(parent, c, &undo, &mut a)?;
+                if a.is_some() {
+                    self.stats.delta_updates += 1;
+                }
             }
-            result
+            self.control()?;
+            if entered {
+                self.negamax_entered(c, a.as_ref(), depth, -window[1], -window[0], ply)
+            } else {
+                self.negamax(c, a.as_ref(), depth, -window[1], -window[0], ply)
+            }
         })();
+        if pooled {
+            self.child_buffers[ply] = a;
+        }
+        if track_path {
+            let popped = self.path.pop();
+            debug_assert_eq!(
+                popped,
+                Some(PlayedMove {
+                    colour: mover,
+                    action
+                })
+            );
+        }
+        // If canonical undo fails, clear numeric authority and propagate failure.
+        // Do not report the context restored on a failed canonical undo.
+        if let Err(error) = c.unmake_move(undo) {
+            self.context = None;
+            self.board = None;
+            return Err(error.into());
+        }
+        self.context = parent_context;
+        self.board = parent_board;
+        let result = result.map(|v| -v);
         #[cfg(feature = "research-diagnostics")]
-        self.stock_finish(stock_frame, result.is_err());
+        if OBSERVE && let Some(o) = self.lmr_observation.as_deref_mut() {
+            o.child_return(c, &self.path, ply - 1, action, &result);
+        }
+        #[cfg(feature = "research-diagnostics")]
+        if TRACE && let Some(trace) = self.trial_trace.as_deref_mut() {
+            trace.child_return(ply, action, &result, &self.stats);
+        }
         result
     }
 
@@ -3298,27 +3186,6 @@ impl SearchSession {
     ) -> Result<SearchResult> {
         self.search_invocation(root, limits, cancel, SearchInvocation::root(on_completed))
     }
-    /// Temporary finite observer; the ordinary entry does not allocate it.
-    #[cfg(feature = "research-diagnostics")]
-    pub fn search_with_stock_observation(
-        &mut self,
-        root: &SigmaContext,
-        limits: &SearchLimits,
-        cancel: &AtomicBool,
-        observation: &mut StockObservation,
-    ) -> Result<SearchResult> {
-        *observation = StockObservation {
-            initial_zero: root.position().walls_remaining == [0, 0],
-            ..StockObservation::default()
-        };
-        let start = Instant::now();
-        let mut callback = |_: &SearchResult| {};
-        let mut invocation = SearchInvocation::root(&mut callback);
-        invocation.stock_observation = Some(observation);
-        let result = self.search_invocation(root, limits, cancel, invocation);
-        observation.search_elapsed = start.elapsed();
-        result
-    }
     fn search_invocation(
         &mut self,
         root: &SigmaContext,
@@ -3374,8 +3241,6 @@ type SearchTableAndDomain<'table, 'history> = (
 struct SearchInvocation<'a> {
     forced_root: Option<u16>,
     safe_race_method: ZeroStockSafeRaceMethod,
-    #[cfg(feature = "research-diagnostics")]
-    stock_observation: Option<&'a mut StockObservation>,
     on_completed: &'a mut dyn FnMut(&SearchResult),
     #[cfg(feature = "research-diagnostics")]
     observation: Option<&'a mut LmrObservation>,
@@ -3390,8 +3255,6 @@ impl<'a> SearchInvocation<'a> {
             on_completed,
             forced_root: None,
             safe_race_method: ZeroStockSafeRaceMethod::Manhattan,
-            #[cfg(feature = "research-diagnostics")]
-            stock_observation: None,
             #[cfg(feature = "research-diagnostics")]
             observation: None,
             #[cfg(feature = "research-diagnostics")]
@@ -3534,8 +3397,6 @@ fn search_in_table<const OBSERVE: bool, const TRACE: bool>(
         history: [0; 209],
         #[cfg(feature = "research-diagnostics")]
         lmr_observation: invocation.observation,
-        #[cfg(feature = "research-diagnostics")]
-        stock_observation: invocation.stock_observation,
         #[cfg(feature = "research-diagnostics")]
         trial_trace: invocation.trial_trace,
     };
@@ -3998,8 +3859,6 @@ mod persistent_tt_tests {
                 history: [0; 209],
                 #[cfg(feature = "research-diagnostics")]
                 lmr_observation: None,
-                #[cfg(feature = "research-diagnostics")]
-                stock_observation: None,
                 #[cfg(feature = "research-diagnostics")]
                 trial_trace: None,
             };
@@ -4690,8 +4549,6 @@ mod child_buffer_tests {
                 #[cfg(feature = "research-diagnostics")]
                 lmr_observation: None,
                 #[cfg(feature = "research-diagnostics")]
-                stock_observation: None,
-                #[cfg(feature = "research-diagnostics")]
                 trial_trace: None,
             };
             let result = state.child(
@@ -5190,149 +5047,4 @@ fn retained_safe_race_methods_reject_completed_comparison_names() {
         ZeroStockSafeRaceMethod::PathTailFuture.id(),
         ZeroStockSafeRaceMethod::PathTail.id()
     );
-}
-
-#[cfg(all(test, feature = "research-diagnostics"))]
-mod stock_observation_contract_tests {
-    use super::*;
-    struct MetadataValue {
-        fail_zero: bool,
-        cancel_zero: bool,
-        cancel: Arc<AtomicBool>,
-    }
-    impl StaticEvaluator for MetadataValue {
-        fn evaluate(&self, _: &SigmaContext, _: Option<&EvalAccumulator>) -> Result<f32> {
-            Ok(0.0)
-        }
-        fn advance_context(
-            &self,
-            _: Option<&EvalAccumulator>,
-            c: &SigmaContext,
-        ) -> Result<Option<EvalAccumulator>> {
-            if c.position().walls_remaining == [0, 0] {
-                if self.fail_zero {
-                    return Err(SearchError::Evaluation("new stock boundary fixture".into()));
-                }
-                if self.cancel_zero {
-                    self.cancel.store(true, Ordering::Relaxed);
-                }
-            }
-            Ok(None)
-        }
-    }
-    fn context(walls: usize) -> SigmaContext {
-        let mut c = SigmaContext::from_prefix(&[]).unwrap();
-        for _ in 0..walls {
-            let action = c.legal_ids().into_iter().find(|a| *a >= 81).unwrap();
-            c = c.play(action).unwrap();
-        }
-        c
-    }
-    fn session(
-        e: Arc<dyn StaticEvaluator>,
-        method: ZeroStockSafeRaceMethod,
-        enabled: bool,
-    ) -> SearchSession {
-        let mut s = SearchSession::new_with_ordering(
-            e,
-            SearchNamespace {
-                evaluator: "new-stock-NN0-fixture".into(),
-                rules: "research-standard-2p-threefold-goal-first-v1".into(),
-                selectivity: "control".into(),
-            },
-            4096,
-            ScoreDomain::LEGACY,
-            OrderingProfile::CheapStaticControl,
-            false,
-            false,
-        )
-        .unwrap();
-        s.set_zero_stock_safe_race_method(method);
-        s.set_zero_stock_safe_race(enabled);
-        s
-    }
-    fn limits() -> SearchLimits {
-        SearchLimits {
-            max_depth: 1,
-            max_nodes: 2048,
-            time_limit: None,
-            tt_entries: 4096,
-            use_pvs: true,
-            use_tt: true,
-        }
-    }
-    #[test]
-    fn new_stock_observer_four_methods_preserve_nonclock_and_initial_zero_domain() {
-        let cancel = Arc::new(AtomicBool::new(false));
-        let value = Arc::new(MetadataValue {
-            fail_zero: false,
-            cancel_zero: false,
-            cancel: cancel.clone(),
-        });
-        for (enabled, name) in [
-            (false, "manhattan"),
-            (true, "manhattan"),
-            (true, "path_tail"),
-            (true, "path_tail_future"),
-        ] {
-            let method = ZeroStockSafeRaceMethod::from_name(name).unwrap();
-            for walls in [19, 20] {
-                let c = context(walls);
-                let mut ordinary = session(value.clone(), method, enabled);
-                let mut observed = session(value.clone(), method, enabled);
-                let a = ordinary.search(&c, &limits(), &cancel).unwrap();
-                let mut o = StockObservation::default();
-                let b = observed
-                    .search_with_stock_observation(&c, &limits(), &cancel, &mut o)
-                    .unwrap();
-                assert_eq!(a.action, b.action);
-                assert_eq!(a.value.map(f32::to_bits), b.value.map(f32::to_bits));
-                assert_eq!(a.pv, b.pv);
-                assert_eq!(a.completed_depth, b.completed_depth);
-                assert_eq!(a.stop, b.stop);
-                assert_eq!(a.stats.nodes, b.stats.nodes);
-                assert_eq!(a.stats.evaluations, b.stats.evaluations);
-                assert_eq!(
-                    a.stats.safe_race_proven_leaves,
-                    b.stats.safe_race_proven_leaves
-                );
-                assert_eq!(ordinary.table_generation(), observed.table_generation());
-                assert!(!o.active);
-                assert_eq!(o.initial_zero, walls == 20);
-                if walls == 20 {
-                    assert_eq!(o.maximal_children, 0);
-                    assert_eq!(o.child_elapsed, Duration::ZERO);
-                } else {
-                    assert!(o.maximal_children > 0);
-                    assert!(o.child_work.nodes <= b.stats.nodes);
-                }
-                assert!(o.search_elapsed >= o.child_elapsed);
-            }
-        }
-    }
-    #[test]
-    fn new_stock_observer_closes_regions_on_original_error_and_cancel() {
-        for error in [true, false] {
-            let cancel = Arc::new(AtomicBool::new(false));
-            let value = Arc::new(MetadataValue {
-                fail_zero: error,
-                cancel_zero: !error,
-                cancel: cancel.clone(),
-            });
-            let mut s = session(value, ZeroStockSafeRaceMethod::Manhattan, false);
-            let c = context(19);
-            let before = (Key::of(&c), c.total_ply(), c.history_counts());
-            let mut o = StockObservation::default();
-            let result = s.search_with_stock_observation(&c, &limits(), &cancel, &mut o);
-            if error {
-                assert!(matches!(result, Err(SearchError::Evaluation(_))));
-            } else {
-                assert_eq!(result.unwrap().stop, StopReason::Cancelled);
-            }
-            assert_eq!(before, (Key::of(&c), c.total_ply(), c.history_counts()));
-            assert_eq!(o.maximal_children, 1);
-            assert_eq!(o.failed_children, 1);
-            assert!(!o.active);
-        }
-    }
 }

@@ -111,8 +111,6 @@ struct Request {
     observe_completed_depths: bool,
     #[serde(default)]
     observe_lmr: bool,
-    #[serde(default)]
-    observe_stock: bool,
 }
 #[derive(Clone, Debug)]
 struct RootSpec {
@@ -188,31 +186,6 @@ fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
         {
             return Err("bounded LMR observation requires <=12 distinct cold Control/depth_rank D5/1M roots, TT1M/PVS, no other observers/approximation".into());
         }
-    }
-    if requests.iter().any(|r| r.observe_stock)
-        && (requests.len() > 32
-            || settings.profile != Profile::Control
-            || settings.inference.is_some()
-            || settings.tt_entries != 1_048_576
-            || !settings.use_tt
-            || !settings.use_pvs
-            || !settings.lmr
-            || LmrMethod::from_name(&settings.lmr_method)? != LmrMethod::DepthRank
-            || settings.zero_stock_approx_min_root_walls.is_some()
-            || settings.zero_stock_safe_race_method.is_none()
-            || settings.seed.is_none()
-            || requests.iter().any(|r| {
-                !r.observe_stock
-                    || r.depth > 8
-                    || r.node_cap > 4_000_000
-                    || r.time_limit_ms.is_some()
-                    || r.warmup
-                    || r.diagnostic
-                    || r.observe_lmr
-                    || r.observe_completed_depths
-            }))
-    {
-        return Err("stock observation requires <=32 Control/TT1M/PVS/depth_rank D<=8/4M, explicit method/seed and no other observers".into());
     }
     let mut ids = std::collections::BTreeSet::new();
     let mut closed_sessions = std::collections::BTreeSet::new();
@@ -481,16 +454,11 @@ impl Target for SearchTarget {
         let mut lmr_observation = request
             .observe_lmr
             .then(|| Box::new(alphabeta::LmrObservation::default()));
-        let mut stock_observation = request
-            .observe_stock
-            .then(alphabeta::StockObservation::default);
         let inference_before = self.sigma_value.as_ref().map(|e| e.work()).transpose()?;
         let table_generation_before = session.table_generation();
         let search_started = Instant::now();
         let mut completed_depths = Vec::new();
-        let result = if let Some(observation) = stock_observation.as_mut() {
-            session.search_with_stock_observation(root, &limits, cancel, observation)
-        } else if let Some(observation) = lmr_observation.as_deref_mut() {
+        let result = if let Some(observation) = lmr_observation.as_deref_mut() {
             session.search_with_lmr_observation(root, &limits, cancel, observation)
         } else if request.observe_completed_depths {
             session.search_with_updates(root, &limits, cancel, &mut |completed| {
@@ -596,9 +564,6 @@ impl Target for SearchTarget {
         }
         row["TT_generation_before"] = json!(table_generation_before);
         row["TT_generation_after"] = json!(session.table_generation());
-        if let Some(observation) = stock_observation.as_ref() {
-            row["stock_observation"] = stock_observation_output(observation);
-        }
         row["Search_call_seconds"] = json!(search_seconds);
         row["parent_unchanged"] = json!(after == self.before);
         if after != self.before {
@@ -1016,33 +981,6 @@ fn owned_output(intent: &Value) -> Result<PathBuf> {
 // The existing completed-depth callback is outside per-node hot paths. These
 // are cumulative actual counters, not predicted branching/cost or a D6 result.
 
-fn stock_observation_output(o: &alphabeta::StockObservation) -> Value {
-    let work = &o.child_work;
-    json!({
-        "initial_zero":o.initial_zero,
-        "observed_Search_seconds":o.search_elapsed.as_secs_f64(),
-        "initial_zero_whole_Search_seconds":o.initial_zero.then_some(o.search_elapsed.as_secs_f64()),
-        "maximal_stock0_children":o.maximal_children,
-        "failed_stock0_children":o.failed_children,
-        "stock0_child_seconds":(!o.initial_zero).then_some(o.child_elapsed.as_secs_f64()),
-        "positive_stock_remainder_seconds":(!o.initial_zero).then_some(o.search_elapsed.as_secs_f64()-o.child_elapsed.as_secs_f64()),
-        "child_clock":"after canonical final-wall make through original parent restoration; parent make excluded; maximal disjoint regions; partial/error work included",
-        "child_work":{
-            "nodes":work.nodes,
-            "evaluations":work.evaluations,
-            "terminal":work.terminal,
-            "delta_updates":work.delta_updates,
-            "tt_probes":work.tt_probes,
-            "tt_hits":work.tt_hits,
-            "tt_context_transitions":work.tt_context_transitions,
-            "tt_board_hash_updates":work.tt_board_hash_updates,
-            "wall_distance_map_reads":work.wall_distance_map_reads,
-            "wall_distance_map_builds":work.wall_distance_map_builds,
-            "wall_distance_fallbacks":work.wall_distance_fallbacks
-        },
-        "extra_E_nonempty_qualifications":null
-    })
-}
 fn completed_depth_observation(r: &SearchResult) -> Value {
     let s = &r.stats;
     let mut result = json!({"lmr_rule":s.lmr_enabled.then(|| s.lmr_method.id()),"lmr_parameters":s.lmr_enabled.then(|| s.lmr_method.reduction_rule()),"completed_depth":r.completed_depth,"action":r.action,
@@ -1694,7 +1632,6 @@ mod tests {
             warmup: false,
             observe_completed_depths: false,
             observe_lmr: false,
-            observe_stock: false,
         };
         let mut target = SearchTarget {
             settings,
@@ -1797,7 +1734,6 @@ mod tests {
             warmup: false,
             observe_completed_depths: false,
             observe_lmr: false,
-            observe_stock: false,
         }
     }
     fn fake(factor: u64) -> Fake {
@@ -2585,39 +2521,8 @@ mod lmr417_tests {
 }
 
 #[cfg(test)]
-mod stock_observation_metadata_tests {
+mod output_limit_contract_tests {
     use super::*;
-    #[test]
-    fn new_stock_observation_admission_and_signed_clock_domains() {
-        let base = json!({"roots":[{"input":0,"pointer":"","field":"prefix","label":"new"}],"profile":"control","tt_entries":1048576,"use_tt":true,"use_pvs":true,"lmr":true,"lmr_method":"depth_rank","zero_stock_safe_race":false,"zero_stock_safe_race_method":"manhattan","namespace":{"evaluator":"new","rules":"standard","selectivity":"control"},"seed":32462018u64,"output_bytes":3145728,"record_bytes":24576});
-        let settings: Settings = serde_json::from_value(base).unwrap();
-        let request = json!({"id":"one","session":"series-colour","root":0,"depth":8,"node_cap":4000000,"observe_stock":true});
-        validate(
-            &settings,
-            &[serde_json::from_value(request.clone()).unwrap()],
-        )
-        .unwrap();
-        for (key, value) in [
-            ("observe_lmr", json!(true)),
-            ("warmup", json!(true)),
-            ("time_limit_ms", json!(1)),
-            ("depth", json!(9)),
-        ] {
-            let mut invalid = request.clone();
-            invalid[key] = value;
-            assert!(validate(&settings, &[serde_json::from_value(invalid).unwrap()]).is_err());
-        }
-        let mut o = alphabeta::StockObservation::default();
-        o.search_elapsed = std::time::Duration::from_secs(2);
-        o.child_elapsed = std::time::Duration::from_secs(5);
-        let output = stock_observation_output(&o);
-        assert_eq!(output["positive_stock_remainder_seconds"], -3.0);
-        assert!(output["extra_E_nonempty_qualifications"].is_null());
-        o.initial_zero = true;
-        let output = stock_observation_output(&o);
-        assert_eq!(output["initial_zero_whole_Search_seconds"], 2.0);
-        assert!(output["positive_stock_remainder_seconds"].is_null());
-    }
     #[test]
     fn new_record_and_aggregate_file_limits_keep_full_results_without_truncation() {
         let mut output = Output::new(Path::new("UNWRITTEN"), 4096, 100);
@@ -2652,8 +2557,6 @@ mod stock_observation_metadata_tests {
             *value = json!(u64::MAX);
         }
         measurement["root_legal_action_ids"] = json!((0u16..209).collect::<Vec<_>>());
-        measurement["stock_observation"] =
-            stock_observation_output(&alphabeta::StockObservation::default());
         measurement["actual_selectivity"] = json!("X".repeat(256));
         measurement["lmr_parameters"] = json!("X".repeat(256));
         let row = json!({

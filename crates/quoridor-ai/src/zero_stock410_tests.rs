@@ -62,7 +62,6 @@ fn with_tt<T>(
         #[cfg(feature = "research-diagnostics")]
         lmr_observation: None,
         #[cfg(feature = "research-diagnostics")]
-        stock_observation: None,
         #[cfg(feature = "research-diagnostics")]
         trial_trace: None,
     };

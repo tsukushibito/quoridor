@@ -1920,7 +1920,6 @@ def measurement_config(experiment):
                 "warmup",
                 "observe_completed_depths",
                 "observe_lmr",
-                "observe_stock",
             }
             and all(isinstance(request[k], str) and request[k] for k in ("id", "session"))
             and request["id"] not in ids
@@ -1945,7 +1944,6 @@ def measurement_config(experiment):
                     "warmup",
                     "observe_completed_depths",
                     "observe_lmr",
-                    "observe_stock",
                 )
             ),
             "measurement request switches",
