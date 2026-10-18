@@ -582,10 +582,18 @@ BEST43と固定DのOFF OMPPMO二反復では、P/O・P/M中央値比がNNUE.7723
 
 保存結果は原24pass／768call全COMPLETE、14,887,179nodes、同方式保存非clock対応768一致で、同じHighの有限解釈確認がclear／blockers0となった。正式名称は上記4条件のまま、**最短経路による確定判定（path_tail）の通常研究既定を維持**する。駒間距離による確定判定に対するOFF Search中央値比はS .84857463／C .85472409、打ち切りなし比はS .87988478／C .76421592。局所悪化S8／C6rootと異なるtree／TT／value／PV／workを残し、一般速度・同仕事throughput・predicate因果・棋力へ拡張しない。
 
-最短経路＋履歴条件の緩和のpath_tail比はS1.07974469／C1.01667536、C二反復は逆方向で、通常選択への追加採用はしない。既存の明示optionと正しさを保持し、E-nonempty/Q-only帰属はUNKNOWN。Searchとguardianの方向差・二系列／26board keysの相関・二反復の限界を残す。outer274.683299782秒は一度、native29.122246761秒／Search18.479446756秒はnested、差245.561053021秒は未帰属。旧434を合算せず、7は明示OFF/manhattanのまま、shared-image診断整理は両実consumer STOP後に行う。[正式報告・全表と図](../../research-data/ai-sigma/post-low-lr-endgame4/report-ja.md)、[独立確認と完全参照](../../research-data/ai-sigma/post-low-lr-endgame4/receipt.json)。
+最短経路＋履歴条件の緩和のpath_tail比はS1.07974469／C1.01667536、C二反復は逆方向で、通常選択への追加採用はしない。既存の明示optionと正しさを保持し、E-nonempty/Q-only帰属はUNKNOWN。Searchとguardianの方向差・二系列／26board keysの相関・二反復の限界を残す。outer274.683299782秒は一度、native29.122246761秒／Search18.479446756秒はnested、差245.561053021秒は未帰属。旧434を合算せず、7は明示OFF/manhattanのまま、shared-image診断整理は両実consumer STOP後のcommit2e7e065で完了し、整理後sourceはUNMEASUREDとして保持する。[正式報告・全表と図](../../research-data/ai-sigma/post-low-lr-endgame4/report-ja.md)、[独立確認と完全参照](../../research-data/ai-sigma/post-low-lr-endgame4/receipt.json)。
 
 関連する次工程として、人間は新二BESTの3対照棋力評価（quoridor-4lc.324.7）も直接依頼した。主要C/S直接対局と副次S/D・C/Dを別にし、同じ凍結endpoint・新genuine image／native対応を324.6と共有する。共有native対応は既存32rootの合法代表入力で必要境界を一度確認できればよく、新book待ちを性能比較の依存へ加えない。棋力scopeの全engineは旧32R条件との比較可能性を保つexplicit safeOFF/manhattanを出発点とし、4方式の性能結果やMSEを棋力へ置換しない。新book／512両色family／3072局／48Gは結果前の有限案として別scopeで解決し、新wholeや未使用quotaを流用しない。両方readyなら短い324.6を先行するが、未準備工程・親close・ACKをreadyな実作業のgateにはしない。fair timingと時間対局は実直列とし、同じimageを使う間のsubstantial cleanup/buildも重ねない。[3対照の実行・統計・保存境界](../../.artifacts/research-team/integration324/post-low-lr-strength3-v1/task.md)。
 
 結果前の主C/S95%・副二対照97.5%は報告上の階層で、primary未確定を他対照の実行停止にはしない。最終推論は共通512familyの一度のjoint PCG64解析とし、native batch内の原診断CIとは混ぜない。実TT1M・current image／新endpointの対応と、実serializer／直列TMP寿命に沿う新wholeは通常の実入口で解決する。旧source-policy labelや未発行の448MiB joint案を資格・予約へ読み替えず、実readyな一方の工程を未準備の他方や親closeで待たせない。
 
 その後の人間の明示変更で、324.7の棋力対局は同じ3072局を3laneの並列cohortで扱う。物理core／SMTを共有しない2AI＋main／laneと全体RAMを結果前に解決し、三対照／色pairをlaneへ均衡配置する。lane間の共有hardware変動を受容し、全面hostquiet／直列同等性pilotを相互拒否の条件にはしない。保存forecastも3lane同時RAW／archive／TMPへ改め、旧single-live416MiB案を発行済み枠としない。324.6の純粋速度比較は引き続き単独実測で、並列対局と同時実行しない。[324.7の明示的な並列境界](../../.artifacts/research-team/integration324/post-low-lr-strength3-v1/parallel-scope-v1.md)。
+
+### 新二BESTの直接対局・固定Dの保存結果（324.7、2026-10-18）
+
+元のexplicit safeOFF/manhattan・Control/PVS・LMR depth_rank・要求TT1M・100ms/5msを三対照で維持し、3laneで96operations／3072局を完了した。共通512familyの両色を保ち、C/S直接は595勝8分421敗、C得点率.5849609375、95% family区間[.55712890625,.61279296875]。この固定book/image/time/並列cohortではC側を支持する。副S/Dは.83935546875、97.5%[.81298828125,.86376953125]、C/Dは.8720703125、97.5%[.8486328125,.89453125]で、原主判定に続く階層でいずれも左側を支持した。
+
+統計は一度の共通PCG64 family表で、native batchの診断CIや旧32Rを混ぜない。直接比較と共通D比較を分け、MSE・教師一般優越・Elo・同等性・追加学習だけの因果・既定昇格へ変えない。これは4方式の棋力比較ではなく、path_tailの通常研究既定とpath_tail_futureの明示optionは今回から変更しない。turn clock/fallback/forfeit/depth/PV/work/実TTcapacityは未投影ならUNKNOWN、共有hardware変動の受容を独立性保証へ変えない。
+
+outer6496.344065秒を一度、parallel/nested wall非加算。両6/7 consumerの実STOP後、一時stock observer/API/counterと専用fixtureを撤去してaffected test-target compile/Clippy PASS、整理後sourceはUNMEASURED。元の実測source/image/RAWを保持した。[3対照の正式報告](../../research-data/ai-sigma/post-low-lr-strength3/report-ja.md)、[原参照・確認・保存表](../../research-data/ai-sigma/post-low-lr-strength3/receipt.json)。

@@ -2355,7 +2355,7 @@ Beadsの324.5との関係はnonblocking relatedとし、親のadmincloseを待�
 
 **最短経路＋履歴条件の緩和（path_tail_future）は通常選択へ追加採用しない**。path_tail比はS1.07974469／C1.01667536で、Cのraw反復は1.073757／.960746と逆方向。既存の明示研究optionと正しさは保持し、全用途の無効・同等性・小差有意性は示さない。E-nonempty／Q-only追加資格の帰属はUNKNOWNのまま、追加scan／counter／runや勝つroot条件を作らない。旧434の結果は別cohortとして保持する。
 
-wholeは別の結果で、S path_tail／OFFのguardian比は約1.097、C future／path_tailはSearch1.0167に対しguardian .9620。元outer274.683299782秒を一度だけ計上し、native29.122246761秒／Search18.479446756秒はnested、差245.561053021秒は未帰属のまま残す。Search利益を全工程短縮や対局ETAへ変換せず、別の性能調査を追加しない。実source／image／RAW／FAILEDを保存し、診断整理は6/7両shared-image consumer STOP後に行う。7は元のexplicit safeOFF/manhattanを維持し、6の正式受入れ・closeを入場gateにしない。[正式報告・図](../research-data/ai-sigma/post-low-lr-endgame4/report-ja.md)、[完全参照・独立確認](../research-data/ai-sigma/post-low-lr-endgame4/receipt.json)。
+wholeは別の結果で、S path_tail／OFFのguardian比は約1.097、C future／path_tailはSearch1.0167に対しguardian .9620。元outer274.683299782秒を一度だけ計上し、native29.122246761秒／Search18.479446756秒はnested、差245.561053021秒は未帰属のまま残す。Search利益を全工程短縮や対局ETAへ変換せず、別の性能調査を追加しない。実source／image／RAW／FAILEDを保存した。診断整理は6/7両shared-image consumerの実STOP後、commit2e7e065で完了し、整理後sourceはUNMEASUREDとして区別する。7は元のexplicit safeOFF/manhattanを維持し、6の正式受入れ・closeを入場gateにしない。[正式報告・図](../research-data/ai-sigma/post-low-lr-endgame4/report-ja.md)、[完全参照・独立確認](../research-data/ai-sigma/post-low-lr-endgame4/receipt.json)。
 
 ### 追加学習後新二BESTの直接対局と固定D（quoridor-4lc.324.7、2026-10-18 JST）
 
@@ -2371,4 +2371,24 @@ wholeは別の結果で、S path_tail／OFFのguardian比は約1.097、C future�
 
 共通512canonical fullprefix/history family×両色、1024局／対照・計3072局、各16G／計48Gの非融通上限を出発案として、同じMax／324がbook・seed・固定時間・停止・family単位統計と主要／副次の採否・多重比較・UNKNOWN範囲を結果前に解決する。新rules-only poolからの結果非依存選択を優先し、旧bench再用ならその限界を明記する。旧結果／CIと合算せず、欠測補充・勝つまで追加・chunkCI平均・resampling再演をしない。Control/PVS/TT1M/LMR ON depth_rank、100ms authority／5ms reserve・depth64／1M nodes safety／200plyと、全engineのexplicit safeOFF/manhattanを共通の出発条件とする。通常研究既定Pは変更しない。
 
-324.6の新image／二endpoint native対応を共有して二重資格・二重jobを避ける。共有資格の代表入力は既存の真正32root/fullprefixの合法入力から必要範囲を結果前に固定でき、新rules-only bookの生成を324.6のgateにはしない。既に入場した資格は変更・反復しない。両方readyなら短い4条件性能比較を先行し、未準備の工程でreadyな工程を待たせず、実行中jobは中断・再順序化しない。学習・公平性能・時間対局・substantial source/build/解析/RAWIOは実STOPで直列化する。新wholeはperGAME出力と直列TMP/archiveの実寿命から一度解決し、旧805MiB／96MiB／324.6発行枠や未使用quotaを貸与せず、50GB内の真の不足だけ具体化する。現在は登録・事前解決段階で、対局開始・棋力結果・新支持を認定しない。[目的・所有・資源・実依存・受入れ](../.artifacts/research-team/integration324/post-low-lr-strength3-v1/task.md)。製品/model/default昇格、全USERPAUSE/seals/newE/oldfits96/原RAW/FAILED/費UNKNOWNは維持する。
+324.6の新image／二endpoint native対応を共有して二重資格・二重jobを避ける。共有資格の代表入力は既存の真正32root/fullprefixの合法入力から必要範囲を結果前に固定でき、新rules-only bookの生成を324.6のgateにはしない。既に入場した資格は変更・反復しない。両方readyなら短い4条件性能比較を先行し、未準備の工程でreadyな工程を待たせず、実行中jobは中断・再順序化しない。学習・公平性能・時間対局・substantial source/build/解析/RAWIOは実STOPで直列化する。新wholeはperGAME出力と直列TMP/archiveの実寿命から一度解決し、旧805MiB／96MiB／324.6発行枠や未使用quotaを貸与せず、50GB内の真の不足だけ具体化する。この登録・事前解決時点では対局開始・棋力結果・新支持を認定していなかった。後着の実完了と結果は次節に区別して記録する。[目的・所有・資源・実依存・受入れ](../.artifacts/research-team/integration324/post-low-lr-strength3-v1/task.md)。製品/model/default昇格、全USERPAUSE/seals/newE/oldfits96/原RAW/FAILED/費UNKNOWNは維持する。
+
+### 追加学習後NNUEの3対照・固定並列条件での結果（324.7、2026-10-18）
+
+原96operations／3072局が全完了、UNKNOWN0、3063goal＋9draw。三対照それぞれ1024局／512完全両色pairで、統計単位は共通の512 canonical familyである。原疎global ID・fullprefix／counted history・LEFT色・固定lane割当を保持し、1536対照pairを1536独立開始としない。
+
+CはClaustrophobia静的教師NNUE、SはSigma静的教師NNUEの追加学習後の新BEST、Dはnative-owned a0b8tanhの固定評価器を指す。
+
+| 対照（左側の勝分敗）       | W-D-L     | 左得点率     | 事前固定family区間                 |
+| -------------------------- | --------- | ------------ | ---------------------------------- |
+| C教師NNUE／S教師NNUE（主） | 595-8-421 | .5849609375  | 95% [.55712890625, .61279296875]   |
+| S教師NNUE／固定D（副）     | 859-1-164 | .83935546875 | 97.5% [.81298828125, .86376953125] |
+| C教師NNUE／固定D（副）     | 893-0-131 | .8720703125  | 97.5% [.8486328125, .89453125]     |
+
+この固定newbook・image・100ms authority／5ms reserve・3lane並列cohortでは、**CをSとの直接比較の候補として支持する**。原主判定の95%下端>.5を満たし、副対比の事前階層も開く。SとCはそれぞれ固定Dに対する優勢も支持されるが、共通Dへの得点差から直接C/Sを推定していない。one joint PCG64／seed32472026101804／10000×512表を三対照で共用し、family meanとlinear quantileから一度だけ区間を計算した。native batch xorshift2000は別の原診断であり、区間平均・再bootstrap・旧32Rとの合算はしない。nominal階層coverageは近似bootstrapの条件付きで、blockや共有hardwareの依存を除去した保証ではない。
+
+新rules-only poolのsource train401／validation111は学習T/Vや独立heldoutではなく、public history／prefix内部露出はUNKNOWN。turn別fallback／forfeit／late／accepted depth／PV／work／実TTcapacityもcompact projectionに無ければUNKNOWNで、goal完了やnn_calls0からゼロを推論しない。own-V差、教師一般優越、学習だけの因果、Elo、同等性、モデル/default昇格へ広げない。
+
+原outer cohortの6496.344065秒は一度だけ計上し、lane／native／Search等のnested wallを加算しない。charged16,683,556,413nodesは各16G／計48G内で非移転、96lossless archive105,257,726Bは元検証を再用した。425MiB支持の再適用・旧used返金は0、global actual／continuouspeak／fullfeesと後続tailはUNKNOWN。source/core guardの原拒否・FAILEDも保持する。終盤計測の一時診断は両consumerの実native＋collection STOP後にcommit2e7e065で撤去し、compile/Clippyを確認した。元の測定image／RAWと整理後UNMEASURED sourceを付け替えていない。
+
+[正式報告・原図](../research-data/ai-sigma/post-low-lr-strength3/report-ja.md)、[独立確認・全参照・保存表](../research-data/ai-sigma/post-low-lr-strength3/receipt.json)。通常研究のpath_tail既定、製品generator/model/default、USERPAUSE323/342.17、seals/newE/oldfits96を維持し、この結果から追加fit・対局・閾値/規模変更を発行しない。
