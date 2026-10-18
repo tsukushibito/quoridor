@@ -1,16 +1,16 @@
 # Dev Container storage policy
 
-This project keeps generated state out of the host checkout and separates caches by purpose.
+This project keeps generated state out of Git and separates caches by purpose.
 
-| Data                                               | Location                                                                                                | Persistence                                                  |
-| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| Managed Git worktrees                              | `${containerWorkspaceFolder}/.worktree`                                                                 | `volume` mode                                                |
-| Research models/checkpoints/inputs                 | `${containerWorkspaceFolder}/.worktree/assets`                                                          | same worktrees named volume; independent of checkouts        |
-| Shared Beads database                              | `${containerWorkspaceFolder}/.worktree/.beads-state`                                                    | worktrees named volume; independent of individual worktrees  |
-| Beads full database backup                         | `${containerWorkspaceFolder}/.artifacts/beads-backup`                                                   | host checkout, Git-ignored; not protection against host loss |
-| Inference models and framework downloads           | `/home/vscode/.cache/inference`                                                                         | named volume only in NVIDIA mode                             |
-| Project Python, uv packages and shared environment | `$INFERENCE_CACHE_DIR/python`, `$INFERENCE_CACHE_DIR/uv`, `$INFERENCE_CACHE_DIR/envs/quoridor-training` | same named volume                                            |
-| Rust toolchains / Cargo / wasm-pack cache          | `/usr/local/rustup`, `/usr/local/cargo`                                                                 | container-local; restored by Feature and setup script        |
+| Data                                               | Location                                                                                                | Persistence                                                                                                |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Managed Git worktrees                              | `${containerWorkspaceFolder}/.worktree`                                                                 | `volume` mode                                                                                              |
+| Research models/checkpoints/inputs                 | `${containerWorkspaceFolder}/.worktree/assets`                                                          | same worktrees named volume; independent of checkouts                                                      |
+| Shared Beads database                              | `${containerWorkspaceFolder}/.worktree/.beads-state`                                                    | worktrees named volume; independent of individual worktrees                                                |
+| Beads full database backup                         | `${containerWorkspaceFolder}/.artifacts/beads-backup`                                                   | main checkout filesystem (currently the `quoridor-main` named volume), Git-ignored; not an off-host backup |
+| Inference models and framework downloads           | `/home/vscode/.cache/inference`                                                                         | named volume only in NVIDIA mode                                                                           |
+| Project Python, uv packages and shared environment | `$INFERENCE_CACHE_DIR/python`, `$INFERENCE_CACHE_DIR/uv`, `$INFERENCE_CACHE_DIR/envs/quoridor-training` | same named volume                                                                                          |
+| Rust toolchains / Cargo / wasm-pack cache          | `/usr/local/rustup`, `/usr/local/cargo`                                                                 | container-local; restored by Feature and setup script                                                      |
 
 ## Current research resource policy
 
