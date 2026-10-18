@@ -2444,3 +2444,11 @@ Stage9の打ち切り条件は、受入れ済みの事前「未決着ならpath_
 ### Cedar重複検査・評価準備の後続（324.13、2026-10-18）
 
 人間の直接指示により、原profileを保持したまま、探索所有の不変情報への重複検査と評価準備を精査し、一つの最小候補を連続探索で比較する。任意の公開Features/Accumulatorの拒否・nonfinite/model/shape/履歴/undo/FP32演算は保つ。採否はモデル/TT/scratchを各版一度初期化し、同じ真正fullprefix series・均衡順・同じ非時計仕事で測る探索合計時間による。cold setup一回の比から利益を認定しない。必要追加診断とcall/node/RAW上限だけを事前固定し、LMRの実nativeとcollectionの停止境界に重いtest/build/perf/A-Bを置く。私有の軽い精査は並行し、LMRの入口を待たせない。[限定契約](../.artifacts/research-team/integration324/cedar-validation-preparation-v1/task.md)。
+
+### LMR cohort全体でのauthority責任集約（324.9.3、2026-10-18）
+
+起動直後の重複read修復f850aac後の本継続でも、bounded authorityのexit1・空stderr・timeoutが再発した。新112局が正常受入れとなり、元240局・別保存資格32局と合わせL1は384局/192pairsである。残128はop5のentered partial32（実課金・個別完了・残額UNKNOWN）とops7/13/15のnative未入場96。全512資格前の選択、L2、最終RNGは実行しない。Go1の有限8client NN0成功をproductionの安定性や原因解決へ昇格せず、lock/RAM/棋力を原因認定しない。
+
+人間は次に、比較cohort全体の最上位親一か所へBeads確認を集約する構成変更を明示指示した。8laneの各親一か所ではなく全体一か所であり、束縛された子lane/operationは実在する親identityと起動系統から制御を受ける。子のcancel/resource/deadline/native guardianを保ち、親DB待ち中のlocal cancel・資源監視と、親異常終了/identity喪失時の停止・回収を実装・限定NN0で検証する。旧「現originだけでは集約保証がない」は過去版の不足として保存し、今度はその不足を埋める。新DB/cache/service/監視daemonは導入しない。有限の検出・伝播保証を示し、起動前試験だけで本比較安定完走としない。[最新構成契約](../.artifacts/research-team/integration324/cedar-lmr-tuning-v1/control-continuation-v1/cohort-parent-authority-v2/task.md)。
+
+未入場96はその元非融通枠・正常資源から先に継続でき、op5の未確定残額だけを全96の停止条件にしない。op5の500Mをresetせず、既知・未知と新継続12.25Gを保持する。Beads書込み/backupは意味ある段階・異常・終了等にまとめ、細進捗は既存job記録へ置く。原FAILED/RAW/TMP/NULL/masks/cleanup未知を改稿せず、全正常局を再対局しない。
