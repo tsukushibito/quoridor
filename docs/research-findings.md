@@ -2349,6 +2349,8 @@ Beadsの324.5との関係はnonblocking relatedとし、親のadmincloseを待�
 
 ### 追加学習後新二BESTの直接対局と固定D（quoridor-4lc.324.7、2026-10-18 JST）
 
+人間は3072局の実壁時間短縮を優先し、同実験3lane間のcache／帯域／周波数変動を明示的に受け入れた。全対局未入場の境界から、各gameの2AI／mainを維持した3個のactive-games1通常arenaへ変更する。元subjects・512両色family・全三対照・48G・seed／100ms条件は保ち、対照／色pairのlane分布を結果前に均衡させる。全面hostquietや直列同等性pilotをlane相互の入口にせず、実core／SMT非競合・RAM／4GiB hostreserve・peer ownership・cleanupを解決する。結論はこの並列cohortの固定book/time成績で、旧直列結果と合算・同等性・追加学習単独因果へ変えない。初回の自然な複数batch通知は全laneの保持済みgames／completepairsを一つの包括wallで割り、lane wallを加算しない。324.6の速度比較は別の競合なし実測のまま、並列対局／build／GPU／重IOと重ねない。[人間指示・資源・配置・3lane保持寿命の境界](../.artifacts/research-team/integration324/post-low-lr-strength3-v1/parallel-scope-v1.md)。
+
 結果前protocol `2a00eac5` は、主要C対Sを95%区間、副次S対D／C対Dを97.5%区間で扱う報告階層として採用した。primaryが未確定でも三対照を全て実行・表示し、副次の確認的判定だけを事前階層へ限定する。最終512両色familyの推論は一度のjoint PCG64表による。native batch内のxorshift CIは各batchの原診断として別に保持し、最終区間へ足す・平均する・判定に混用することはしない。全1024局／512complete pairが揃わない対照では予定全体のCIを補わず、valid-game・complete-pair条件付き記述と予定全体のUNKNOWN boundsを区別する。新bookの11除外とT/Vの正確入力・LR除外は既存nativeの境界で扱い、prefix内部や公開history独立性はUNKNOWNのままとする。[固定protocol・原保持案・保存根拠](../.worktree/assets/perf/post-low-lr-strength3-analysis-v1/design-v1/completion.json)。
 
 原448MiB joint保持案は、名指しの新positiveだけでも既知会計上の余裕を超えるため未採択・未発行である。現行serializerの詳細outcomeは一つのlossless archiveに入り、resultのoutcomesは空、stdoutは参照だけである。この実構造に沿って、retained archiveとactive RAW／archive／TMP・FAILED・collector／reader・通常preflightのconfig／slots余地を残した全工程forecastを解決する。過去圧縮率を完了保証へ変えず、実在しないfull payloadの重複も見積りへ残さない。実TT1Mは解決済み設定・現在のfactory生成経路・RAMに対応させ、旧source-policyのlabelだけを直して資格としない。比較規模・条件は保存帳尻で変更せず、実不足が残れば名指しの再構築可能cache等から代案を決める。旧used返金・quota貸与・UNKNOWNゼロ化・全域inventoryを入口にはしない。

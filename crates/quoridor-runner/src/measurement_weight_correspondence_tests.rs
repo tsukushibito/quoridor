@@ -21,8 +21,43 @@ struct Input {
     normalization_descriptor: FileRef,
     book: FileRef,
     prefixes: Vec<Vec<u16>>,
+    #[serde(default)]
+    selected_rows: Option<Vec<usize>>,
     state_cap: u64,
     head_cap: u64,
+}
+
+fn qualification_rows<'a>(
+    book: &'a Value,
+    selected: Option<&[usize]>,
+    count: usize,
+) -> Result<Vec<&'a Value>> {
+    let rows = book
+        .as_array()
+        .or_else(|| book["openings"].as_array())
+        .ok_or("genuine prefix source rows")?;
+    let indices: Vec<usize> = selected.map_or_else(|| (0..count).collect(), |v| v.to_vec());
+    if indices.len() != count
+        || indices.is_empty()
+        || indices.windows(2).any(|v| v[0] >= v[1])
+        || indices.iter().any(|i| *i >= rows.len())
+    {
+        return Err("qualification must bind distinct increasing actual source indices".into());
+    }
+    Ok(indices.into_iter().map(|i| &rows[i]).collect())
+}
+
+#[test]
+fn new_qualification_array_selection_preserves_order_and_refuses_alias_or_missing() {
+    let actual = json!([{"prefix":[1]},{"prefix":[2]},{"prefix":[3]}]);
+    let rows = qualification_rows(&actual, Some(&[0, 2]), 2).unwrap();
+    assert_eq!(rows[0]["prefix"], json!([1]));
+    assert_eq!(rows[1]["prefix"], json!([3]));
+    for indices in [vec![0, 0], vec![2, 0], vec![0, 3]] {
+        assert!(qualification_rows(&actual, Some(&indices), 2).is_err());
+    }
+    assert!(qualification_rows(&actual, Some(&[0]), 2).is_err());
+    assert!(qualification_rows(&json!({"openings":actual}), None, 2).is_ok());
 }
 
 fn close(a: f32, b: f32) {
@@ -77,11 +112,10 @@ fn changed_export_full_delta_and_parent_restore_once() -> Result<()> {
         );
     }
     let book: Value = input.book.read()?;
-    let expected: Vec<Vec<u16>> = book["openings"]
-        .as_array()
-        .ok_or("book openings")?
+    let source_rows =
+        qualification_rows(&book, input.selected_rows.as_deref(), input.prefixes.len())?;
+    let expected: Vec<Vec<u16>> = source_rows
         .iter()
-        .take(input.prefixes.len())
         .map(|row| serde_json::from_value(row["prefix"].clone()))
         .collect::<std::result::Result<_, _>>()?;
     assert_eq!(input.prefixes, expected);
@@ -128,9 +162,17 @@ fn changed_export_full_delta_and_parent_restore_once() -> Result<()> {
         persist("FACTORY_HEAD_RETURNED", rows)?;
         Ok(value)
     };
-    for prefix in &input.prefixes {
+    for (prefix, source) in input.prefixes.iter().zip(source_rows) {
         let mut context = SigmaContext::from_prefix(prefix)?;
         context.validate_normal()?;
+        if book.is_array() {
+            // The genuine saved source already contains its complete counted
+            // history. Reconstruct canonically; never invent a synthetic book.
+            let actual = super::identity(&context);
+            assert_eq!(actual["root_key"], source["root_key"]);
+            assert_eq!(actual["history_counts"], source["history_counts"]);
+            assert_eq!(context.total_ply() as usize, prefix.len());
+        }
         assert!(context.terminal_value().is_none());
         states.set(states.get() + 1);
         assert!(states.get() <= input.state_cap);

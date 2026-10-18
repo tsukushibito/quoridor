@@ -188,6 +188,8 @@ pub(super) fn with_state<T>(
         #[cfg(feature = "research-diagnostics")]
         lmr_observation: None,
         #[cfg(feature = "research-diagnostics")]
+        stock_observation: None,
+        #[cfg(feature = "research-diagnostics")]
         trial_trace: None,
     };
     let mut c = root.clone();

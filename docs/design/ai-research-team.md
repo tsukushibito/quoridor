@@ -18,6 +18,8 @@
 
 速度比較・perf・時間制御対局・明示的なtiming診断は共有hardware上で直列にし、計測中は substantial build、学習/GPU、CPU解析、ブラウザ検証、大きなdisk IOを止める。CPU affinityの分離だけではcache・memory bandwidth・power/thermal・diskの干渉を防げない。軽いsource/metadata準備は継続でき、計測外の通常build/test/reviewは実資源と独立writer/immutable入力が成立すれば並行できる。sole共有Cargo writerとsole main/Git writerは維持する。
 
+2026-10-18 JSTの人間の明示変更により、324.7の3072局だけは共有cache／帯域／周波数変動を受容する並列cohortとし、まず3個のactive-games1通常arenaを物理core・SMT非競合、明示したlane／全体RAMとhostreserve4GiBで運用する。同実験の正規lane peersへ全面hostquietを要求せず、対照／色pairのlane配置を結果前に均衡させる。直列との同等性pilotは不要で、他のbuild/GPU/重IOと324.6の純粋速度計測との分離は保つ。詳細と元直列条件からの境界は[324.7並列scope](../../.artifacts/research-team/integration324/post-low-lr-strength3-v1/parallel-scope-v1.md)に置き、一般の速度比較を並列へ拡張しない。
+
 2026-10-13の明示指示により、通常のsource/docs修正・限定test・既存環境のincremental build・実行ファイルcopy・関連reviewは保存予算なしで進める。事前のsource/control/private/target/TMP/whole枠、preprice、カテゴリ振替やforecast/custodyのサイズ一致を開始・継続条件にしない。完了後に対象変更先・成果物/build/cache/log/TMPの実使用を一度確認し、異常な増加・繰り返すcopy・巨大な残存TMP/log・実空き不足・50GB到達などがある場合だけ限定対応する。大量データ生成・bulk model/依存取得・大規模checkpoint/RAWや実際に大きな新cache増加が見込まれる工程だけ事前保存予算を設定し、その工程全体を覆う。BUILDという名前だけで大容量と扱わず、予算未設定を正常とする。CPU/RAM/VRAM・実source/artifact/reader/physics/quiet・科学許可・取消/cleanupは維持する。旧job/cap/peak/FAILED/RAW/費用は履歴のまま保ち、現在retentionや永久重複予約へ読み替えない。巨大dummy予算・skip/救済flag・新certificate・全域auditを通常入口に足さず、323 USERPAUSE・封印・model/default・研究判断境界は変えない。
 
 不要な再構築可能cache・旧未使用ELF・obsolete worktree・重複working copyは、復元確認・unique未保存内容・実reader STOPを確認して指定範囲だけ除去できる。固有の科学データ・必要model/input・圧縮した原因/来歴/失敗証拠・Git/archive復元元・Beads/locksを保護する。過去peak/予約は記録として保持するが、現在retentionと終了した一時寿命が証明された後も重複して永久加算しない。同inodeは一度、実証済み直列TMPは最大寿命で数える。UNKNOWNを根拠なしにzeroへ変えず、全体auditを次工程のgateにしない。

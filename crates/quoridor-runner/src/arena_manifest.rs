@@ -120,6 +120,8 @@ pub fn journal(c: &Config, outcome: &crate::runtime::Outcome) -> Result<()> {
 pub fn begin(c: &Config, slots: &[Slot], admission: &crate::resources::Admission) -> Result<()> {
     let exe = std::env::current_exe()?;
     let requested_tt = c.arena.as_ref().map_or(65536, |a| a.tt_entries);
+    let requested_tt_byte_cap =
+        quoridor_ai::alphabeta::SearchSession::requested_tt_byte_limit(requested_tt)?;
     let main_owned = c
         .arena
         .as_ref()
@@ -137,9 +139,9 @@ pub fn begin(c: &Config, slots: &[Slot], admission: &crate::resources::Admission
             "rules":c.ruleset.id(),"admission":admission,
             "engine_tt_source_policy":c.engines.iter().enumerate().filter(|(_,e)| e.kind != "mcts").map(|(index,e)| serde_json::json!({
                 "engine_index":index,"kind":e.kind,"requested_slots":requested_tt,
-                "effective_slots_from_source":requested_tt.min(4096),"persistent_byte_cap_from_source":1048576,
+                "effective_slots_from_source":requested_tt,"persistent_byte_cap_from_source":requested_tt_byte_cap,
                 "actual_build_capacity":null,"actual_retained_bytes":null,
-                "measurement":"source policy only; bind actual allocation in the software/runtime receipt"
+                "measurement":"requested slots and canonical Table ABI-derived byte limit; actual allocation/retained bytes require admitted per-game TT profiles and runtime receipt"
             })).collect::<Vec<_>>(),
             "cpu_model":fs::read_to_string("/proc/cpuinfo").ok().and_then(|s| s.lines().find(|l| l.starts_with("model name")).map(str::to_owned)),
             "clock":{"origin":if main_owned {"monotonic, main-owned game"} else {"monotonic, per game worker"},"start":if main_owned {"main before turn dispatch/session/limits setup"} else {"before session/limits setup"},"acceptance":if main_owned {"actual main receipt before100ms; legal replay and terminal collection before state commit"} else {"after legal replay immediately before state publication"},
