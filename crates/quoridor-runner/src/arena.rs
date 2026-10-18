@@ -1699,7 +1699,9 @@ mod generic_arena_361_tests {
                 _ => bad.counters["completed_snapshot_validation_failed"] = true.into(),
             }
             assert_eq!(
-                validate_observations(&config, &[bad]).unwrap_err(),
+                validate_observations(&config, &[bad])
+                    .unwrap_err()
+                    .to_string(),
                 "arena alpha completion/PV or truthful zero-work fallback",
                 "case {case}"
             );
@@ -1716,7 +1718,9 @@ mod generic_arena_361_tests {
                 }
             }
             assert_eq!(
-                validate_observations(&config, &[bad]).unwrap_err(),
+                validate_observations(&config, &[bad])
+                    .unwrap_err()
+                    .to_string(),
                 "arena main receipt/terminal drain",
                 "clock case {case}"
             );
