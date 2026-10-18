@@ -289,6 +289,7 @@ def execute(directory, config, root, backend, *, resources=None):
             if resources is not None:
                 resources.check()
             entry = authority(config, root, backend, horizon=config["end_at"])
+            next_control = time.monotonic() + config["control_interval_seconds"]
             if entry["thread_id"] != state["thread_id"]:
                 raise JobError("Recipient identity changed after submission")
             if (directory / "cancel.json").exists() or deadline_reached(config["end_at"]):
@@ -343,7 +344,7 @@ def execute(directory, config, root, backend, *, resources=None):
                 write(directory, "state.json", state)
                 tail = TailLog(command.stdout, config["log_max_bytes"])
                 tail.thread.start()
-                next_control, next_scan = 0, 0
+                next_scan = 0
                 while command.poll() is None:
                     if resources is not None:
                         resources.check()

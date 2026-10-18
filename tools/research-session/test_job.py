@@ -898,5 +898,120 @@ class NotificationTests(Fixture, unittest.IsolatedAsyncioTestCase):
         self.assertEqual(self.backend.server.calls, [])
 
 
+class EntryControlCadenceTests(Fixture, unittest.TestCase):
+    """New entry-cadence crossing; artificial commands, no model/native jobs."""
+
+    def setUp(self):
+        self.setup()
+        self.config.update(end_at=None, control_interval_seconds=1)
+
+    def assert_reaped(self, result):
+        self.assertTrue(result["direct_child_reaped"])
+        self.assertTrue(result["cleanup_complete"])
+        self.assertEqual(result["remaining"], [])
+        self.assertFalse(j.runtime.alive(j.read(self.directory, "state.json")["child"]))
+
+    def test_successful_entry_is_the_only_read_for_short_command(self):
+        with patch.object(self.backend, "issues", wraps=self.backend.issues) as read:
+            result = j.execute(self.directory, self.config, self.root, self.backend)
+        self.assertEqual(result["outcome"], "succeeded")
+        self.assertEqual(read.call_count, 1)
+        self.assert_reaped(result)
+
+    def test_spawn_delay_counts_from_successful_entry_not_first_loop(self):
+        spawn = j.subprocess.Popen
+
+        def delayed_spawn(*args, **kwargs):
+            time.sleep(1.05)
+            return spawn(*args, **kwargs)
+
+        self.config["argv"] = [sys.executable, "-c", "import time; time.sleep(.1)"]
+        with (
+            patch.object(j.subprocess, "Popen", side_effect=delayed_spawn),
+            patch.object(self.backend, "issues", wraps=self.backend.issues) as read,
+        ):
+            result = j.execute(self.directory, self.config, self.root, self.backend)
+        self.assertEqual(result["outcome"], "succeeded")
+        self.assertEqual(read.call_count, 2)
+        self.assert_reaped(result)
+
+    def test_entry_cadence_preserves_immediate_scan_cancel_and_resource_failure(self):
+        for fault in ("cancel", "resource"):
+            with self.subTest(fault=fault):
+                if fault == "resource":
+                    self.setup()
+                    self.config.update(end_at=None, control_interval_seconds=30)
+                self.config["argv"] = [sys.executable, "-c", "import time; time.sleep(10)"]
+                resources = SimpleNamespace(check=Mock())
+                resources.check.side_effect = (
+                    [None, None, ValueError("live resource refusal")]
+                    if fault == "resource"
+                    else None
+                )
+                track = j.track_descendants
+
+                def scanned(child, known):
+                    members = track(child, known)
+                    if fault == "cancel":
+                        j.write(self.directory, "cancel.json", {})
+                    return members
+
+                with (
+                    patch.object(j, "track_descendants", side_effect=scanned),
+                    patch.object(self.backend, "issues", wraps=self.backend.issues) as read,
+                ):
+                    result = j.execute(
+                        self.directory, self.config, self.root, self.backend, resources=resources
+                    )
+                self.assertEqual(read.call_count, 1)
+                self.assertEqual(
+                    result["outcome"], "cancelled" if fault == "cancel" else "control_error"
+                )
+                self.assertGreaterEqual(resources.check.call_count, 3)
+                self.assert_reaped(result)
+
+    def test_first_periodic_read_waits_then_pause_owner_closed_or_error_fails_closed(self):
+        for fault in ("pause", "owner", "closed", "failure"):
+            with self.subTest(fault=fault):
+                if fault != "pause":
+                    self.setup()
+                    self.config.update(end_at=None, control_interval_seconds=1)
+                self.config["argv"] = [sys.executable, "-c", "import time; time.sleep(10)"]
+                original = self.backend.issues
+                reads = []
+
+                def authority_rows(issues, *, timeout):
+                    reads.append(time.monotonic())
+                    if len(reads) == 2:
+                        # A bounded serialized-store wait must not bypass the returned authority.
+                        time.sleep(0.04)
+                        if fault == "pause":
+                            self.backend.items["goal"]["labels"] = ["paused-by-user"]
+                        elif fault == "owner":
+                            self.backend.items["work"]["assignee"] = "codex:another"
+                        elif fault == "closed":
+                            self.backend.items["work"]["status"] = "closed"
+                        else:
+                            raise TimeoutError("bounded authority read failed")
+                    return original(issues, timeout=timeout)
+
+                with patch.object(self.backend, "issues", side_effect=authority_rows):
+                    result = j.execute(self.directory, self.config, self.root, self.backend)
+                self.assertEqual(len(reads), 2)
+                self.assertGreaterEqual(reads[1] - reads[0], 1)
+                self.assertEqual(result["outcome"], "control_error")
+                self.assert_reaped(result)
+
+    def test_failed_fresh_entry_never_spawns(self):
+        with (
+            patch.object(self.backend, "issues", side_effect=TimeoutError("entry unreadable")),
+            patch.object(j.subprocess, "Popen") as spawn,
+        ):
+            result = j.execute(self.directory, self.config, self.root, self.backend)
+        self.assertEqual(result["outcome"], "not_started")
+        self.assertTrue(result["cleanup_complete"])
+        spawn.assert_not_called()
+
+
 if __name__ == "__main__":
     unittest.main()
