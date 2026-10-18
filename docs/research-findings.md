@@ -2343,9 +2343,19 @@ arena charged nodesはopaque reservations込み14,406,939,048<32G、fit+native21
 
 主時計はOFF Search呼出し合計、副時計はsetup/drop込みwhole。canonical最終壁のparent make後からfingerprint/path/FT/探索/undo親復元までの非重複な最大stock0部分木、残壁あり処理、最初からstock0のrootを分ける。ON−OFFを正確なoverhead補正にせず、異方式の木・値・PV/work差を同仕事throughputや棋力へ変えない。同方式反復/ON-OFFの非時計対応・合法PV・fullhistory・親/session復元・UNKNOWN/STOPと局所悪化を保存する。必要最小限の共通計測だけを新sourceへ接続し、実測source/image/RAWを凍結後、終了した計測API/counter/fixtureを整理する。
 
-Beadsの324.5との関係はnonblocking relatedとし、親のadmincloseを待つ依存にはしていない。実性能入口は両fitの自然な実STOP、正直な最終選択と二endpoint凍結、同一genuine source/imageとの必要な新native対応、固定recipeと新しい具体whole支持・fresh資源である。軽い計画は並行可能だが、fair timingはGPU学習やsubstantial source/build/CPU/GPU/RAWIOと実非重複にする。旧433/434/324.4 wholeや324.5の96MiBは借りず、decimal50GB内で実forecastから一つの新支持を324が解決する。現時点で性能submit・新checkpoint endpoint・新image・新bulk支持はなく、計画の登録を実入場とは扱わない。[後続scopeと実依存・検証・整理の契約](../.artifacts/research-team/integration324/post-low-lr-endgame4-v1/task.md)、[今回の直接指示](../.artifacts/research-policy/post-low-lr-cutoff-comparison-20261018/integration-directive.md)。全pause/default/models/seals/原RAW/FAILED/費UNKNOWNは維持する。
+Beadsの324.5との関係はnonblocking relatedとし、親のadmincloseを待つ依存にはしていない。実性能入口は両fitの自然な実STOP、正直な最終選択と二endpoint凍結、同一genuine source/imageとの必要な新native対応、固定recipeと新しい具体whole支持・fresh資源である。軽い計画は並行可能だが、fair timingはGPU学習やsubstantial source/build/CPU/GPU/RAWIOと実非重複にする。旧433/434/324.4 wholeや324.5の96MiBは借りず、decimal50GB内で実forecastから一つの新支持を324が解決する。事前登録時点では性能submit・新checkpoint endpoint・新image・新bulk支持はなく、計画の登録を実入場とは扱わない。[後続scopeと実依存・検証・整理の契約](../.artifacts/research-team/integration324/post-low-lr-endgame4-v1/task.md)、[今回の直接指示](../.artifacts/research-policy/post-low-lr-cutoff-comparison-20261018/integration-directive.md)。全pause/default/models/seals/原RAW/FAILED/費UNKNOWNは維持する。
 
 研究判断担当はこの有限案を妥当とし、各新NNUEでの主比較を結果前に、駒間距離による確定判定（manhattan）／打ち切りなし（OFF）、最短経路による確定判定（path_tail）／駒間距離による確定判定（manhattan）、最短経路＋履歴条件の緩和（path_tail_future）／最短経路による確定判定（path_tail）とした。全方式の打ち切りなし比、二反復の生Search合計・比と系列/root局所結果も残す。隣接比較はTT/探索木/value/PV/workも変わり得る方式全体の差で、単一predicateの因果費や同仕事throughputではない。二反復から小差の有意性・一般再現性や旧434程度の差の検出を保証せず、無差を同等性としない。両NNUEは別々に解釈し、旧時計の混合・新bootstrap・追加run・既定変更は行わない。追加されたE非空資格は、現行計算で安く識別できなければUNKNOWNとする。その内訳のためだけに、E全scanを避ける同一witness Q方式へ追加history scan・旧方式再実行・恒常map・大きなcounterを入れない。[同じMaxへの結果前比較軸](../.artifacts/research-team/integration324/post-low-lr-endgame4-v1/comparison-axes-to-Max.md)。
+
+### 追加学習後4条件の保存結果と採用判断（324.6、2026-10-18）
+
+原24pass／768callは全COMPLETE、UNKNOWN0、96session、14,887,179nodes。元の二系列32fullprefixは26board keysであり、32独立ゲームではない。同方式OFF二反復とON/OFFの保存非clock対応768組は一致したが、PV各ply／FT／geometryを再生した資格ではない。元Maxの解析を同Highが独立に確認し、conclusion_clear=true／blockers0とした。独立確認前の暫定判断と、この後着clearを区別する。
+
+**最短経路による確定判定（path_tail）の通常研究既定を維持**する。observer OFFの各32 Search合計の二値中央値比で、駒間距離による確定判定（manhattan）に対する比はS .84857463／C .85472409（15.14%／14.53%短い）、両反復同方向。打ち切りなし（OFF）比はS .87988478／C .76421592。局所悪化S8／C6rootを除かず、異なるtree／TT／value／PV／workを持つ方式全体の有限結果とする。同仕事throughput、predicate単独因果、一般速度、棋力や教師優劣は認定しない。
+
+**最短経路＋履歴条件の緩和（path_tail_future）は通常選択へ追加採用しない**。path_tail比はS1.07974469／C1.01667536で、Cのraw反復は1.073757／.960746と逆方向。既存の明示研究optionと正しさは保持し、全用途の無効・同等性・小差有意性は示さない。E-nonempty／Q-only追加資格の帰属はUNKNOWNのまま、追加scan／counter／runや勝つroot条件を作らない。旧434の結果は別cohortとして保持する。
+
+wholeは別の結果で、S path_tail／OFFのguardian比は約1.097、C future／path_tailはSearch1.0167に対しguardian .9620。元outer274.683299782秒を一度だけ計上し、native29.122246761秒／Search18.479446756秒はnested、差245.561053021秒は未帰属のまま残す。Search利益を全工程短縮や対局ETAへ変換せず、別の性能調査を追加しない。実source／image／RAW／FAILEDを保存し、診断整理は6/7両shared-image consumer STOP後に行う。7は元のexplicit safeOFF/manhattanを維持し、6の正式受入れ・closeを入場gateにしない。[正式報告・図](../research-data/ai-sigma/post-low-lr-endgame4/report-ja.md)、[完全参照・独立確認](../research-data/ai-sigma/post-low-lr-endgame4/receipt.json)。
 
 ### 追加学習後新二BESTの直接対局と固定D（quoridor-4lc.324.7、2026-10-18 JST）
 
