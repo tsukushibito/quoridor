@@ -1044,12 +1044,10 @@ mod selected_slot_boundary_tests {
                 failure: Some(crate::arena_clock::Failure::Cancelled),
                 observations: vec![],
             };
-            let pump = crate::runtime::PumpProfile {
-                arena_node_budget: Some(
-                    serde_json::json!({"cap":123,"charged_nodes_including_opaque_reservations":3,"remaining":120}),
-                ),
-                ..Default::default()
-            };
+            let mut pump = crate::runtime::PumpProfile::default();
+            pump.arena_node_budget = Some(
+                serde_json::json!({"cap":123,"charged_nodes_including_opaque_reservations":3,"remaining":120}),
+            );
             let report = RunReport {
                 schema: arena::SCHEMA.into(),
                 run_id: c.run_id.clone(),
