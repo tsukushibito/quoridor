@@ -134,7 +134,7 @@ Cedar v1は原324.7で研究優先候補になったClaustrophobia静的教師NN
 
 ### 現行確認後のLMRパラメータ調整と独立評価（2026-10-19 JST、人間直接指示）
 
-「調整まで計画に含めておいて」という直接指示により、以下を後続計画へ加えた。元324.9の確認と保存解析は完了し、UNRESOLVED_RETAIN_DRとして現行depth_rankを維持する。続く324.14も両比較を完了した。これらの成績・原枠・通知先は変えず、現在の324.9.4ではCedar・現Controlを固定したLMRのtyped設定・整数範囲設計を継続する。追加の人間直接指示により、係数の数値調整前に[324.15の駒・壁近傍優先](lightweight-move-ordering-v1.md#履歴同点群の駒壁近傍優先32415後続計画)を別候補として検証する後続計画を加える。その採用または現状維持でordering構成を固定してから、係数調整と独立確認へ進む。SPSAや調整・独立確認の具体的な数値枠は次の入口で別に有限化し、ここでは追加対局・学習を発行しない。現行枠の残額・UNKNOWNを新しい権利にせず、後続の状態と参照は既存の324/324.9のBeadsへ置く。
+「調整まで計画に含めておいて」という直接指示により、以下を後続計画へ加えた。元324.9の確認と保存解析は完了し、UNRESOLVED_RETAIN_DRとして現行depth_rankを維持する。続く324.14も両比較を完了した。これらの成績・原枠・通知先は変えず、現在の324.9.4ではCedar・現Controlを固定したLMRのtyped設定・整数範囲設計を継続する。追加の人間直接指示により、係数の数値調整前に[324.15の駒・壁近傍優先](lightweight-move-ordering-v1.md#履歴同点群の駒壁近傍優先32415後続計画)を別候補として比較した。全384局の事前規則は候補を支持せず、現Control・履歴同点の追加採点Offを維持する。このorderingとCedar・共通head・path_tailを固定して、係数調整と独立確認へ進む。SPSAや調整・独立確認の具体的な数値枠は次の入口で別に有限化し、ここでは追加対局・学習を発行しない。現行枠の残額・UNKNOWNを新しい権利にせず、後続の状態と参照は既存の324/324.9のBeadsへ置く。
 
 続く人間の「その計画で進めて」により、実行順序を、元L2保存解析の完了→[324.14の履歴同点群への追加採点ON/OFF比較](lightweight-move-ordering-v1.md#cedar履歴同点群だけの安い二次採点324142026-10-19人間直接依頼)と現状維持の判断→追加された324.15の近傍候補検証→採用または現状維持の構成固定→LMR係数調整と独立確認、とする。14は現行depth_rankと評価器を固定し、既存TT/PV/killer/合成動的履歴全体の有無を比較しない。固定済みの連続時間・同時間棋力の両段階を行い、差が曖昧なら現行方式を維持して次段階へ進む。結論を得るために無限定増量しない。typed LMR設定化・係数範囲の設計は並行できるが、係数探索中はordering・評価器を同時変更しない。後続の具体規模・停止・設定範囲は着手時に既承認方針内で解決し、現L2・旧UNKNOWN・未使用quotaを転用しない。実時計とreader/native STOP・資源だけを調整し、parent closeや人間ACKを入口にしない。
 
@@ -153,3 +153,5 @@ Cedar v1は原324.7で研究優先候補になったClaustrophobia静的教師NN
 5. 将来のNNUE更新との交互改善では、NNUE比較中はLMRを固定し、LMR調整中はNNUEを固定する。有望なモデル更新時にはLMRを再確認するが、毎学習で全面SPSAを必須にしない。この計画はUSERPAUSE中の学習・生成を再開する指示ではない。
 
 既存task sessionを自然な境界で再用し、新しい常設役や周期監督を設けない。実施の入口で必要な資源・有限規模を通常解決することと、人間の再承認や現在の確認作業へのACK gateを作ることを区別する。全FAILED/RAW/UNKNOWNと費用、50GB、323/342.17 USERPAUSE、封印、現行model/weights/defaults、foreign変更を保持する。
+
+324.15は全384局・192両色family・UNKNOWN0で完了した。Neighbourは196勝1分187敗、family score51.171875%、唯一のPCG64/10000/seed3241520261020/linear95区間は48.046875〜54.296875%。事前の下端>50%を満たさず、**Control・tie extra Offを維持し、追加反復しない**。TIME128calls/16sessionsも元AND基準未達だが、棋力採否のgateではない。一般優越・同等・効果不存在・Elo・model/default昇格は認定しない。[原結果・来歴・限界](../../.worktree/assets/perf/cedar-history-neighbour-ordering-v1/numeric-v1/final-saved-analysis-v1/report-ja.formatted.md)、[Root有限受入れ](../../.artifacts/research-team/integration324/cedar-history-neighbour-ordering-v1/final192-route-v1/final-acceptance.json)。9.4の設定化と整数範囲は再用し、次の係数数値工程では有限量・停止・別開始集合・保持を具体化する。旧15/L2/14/13/UNKNOWNや未使用枠を転用せず、ordering・評価器を同時変更しない。
