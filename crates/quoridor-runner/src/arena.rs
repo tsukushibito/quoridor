@@ -614,6 +614,25 @@ impl ArenaPlan {
                         }
                         used.insert(model.descriptor.path.clone());
                     }
+                    "claustrophobia" if self.comparison == Comparison::WholeWallTime => {
+                        let settings = engine
+                            .claustrophobia
+                            .as_ref()
+                            .ok_or("Claustrophobia settings")?;
+                        settings.validate()?;
+                        if !self.inputs.iter().any(|r| {
+                            Some(&r.path) == engine.model.as_ref()
+                                && r.sha256 == settings.model_sha256
+                        }) || !e.dynamic_libraries.iter().any(|l| {
+                            l.file.path == settings.library
+                                && l.file.sha256 == settings.library_sha256
+                        }) || settings.identity()? != matchup.evaluator_sha256[i]
+                        {
+                            return Err(
+                                "Claustrophobia declared model/library/evaluator identity".into()
+                            );
+                        }
+                    }
                     "distance" if engine.model.is_none() => {}
                     "sigma_value"
                         if engine.model.is_none()
@@ -861,6 +880,28 @@ fn validate_observations(
                 || obs.admission_checked_ns < obs.returned_ns
             {
                 return Err("arena illegal/incoherent accepted observation".into());
+            }
+            if engine.kind == "claustrophobia" {
+                let settings = engine
+                    .claustrophobia
+                    .as_ref()
+                    .ok_or("Claustrophobia settings")?;
+                if obs.completed_depth.is_some()
+                    || !obs.pv.is_empty()
+                    || obs
+                        .deadline_ns
+                        .is_none_or(|d| obs.admission_checked_ns >= d)
+                    || obs.counters["direct_child_reaped"] != true
+                    || obs.counters["secondary"] != serde_json::json!([])
+                    || obs.counters["completed_simulations"] != settings.simulations
+                    || obs.counters["authority_legal"] != true
+                    || obs.counters["head_calls"]
+                        .as_u64()
+                        .is_none_or(|n| n == 0 || n > settings.max_head_calls)
+                {
+                    return Err("Claustrophobia accepted reply/clock/drain correspondence".into());
+                }
+                continue;
             }
             if engine.kind == "mcts" {
                 let receipt = obs.counters["authority_receipt_ns"]

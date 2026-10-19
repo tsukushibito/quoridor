@@ -185,6 +185,8 @@ pub(crate) fn deserialize_lmr_parameters<'de, D: serde::Deserializer<'de>>(
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct Engine {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub claustrophobia: Option<crate::claustrophobia::Config>,
     pub kind: String,
     #[serde(default)]
     pub model: Option<PathBuf>,
@@ -425,7 +427,7 @@ impl Config {
         if self.engines.iter().any(|e| {
             !matches!(
                 e.kind.as_str(),
-                "distance" | "nnue" | "nnue_quantized" | "mcts" | "sigma_value"
+                "distance" | "nnue" | "nnue_quantized" | "mcts" | "sigma_value" | "claustrophobia"
             ) || e.depth == 0
                 || e.max_nodes == 0
                 || !e.distance_a.is_finite()
@@ -433,6 +435,39 @@ impl Config {
                 || (e.kind == "nnue" || e.kind == "nnue_quantized") && e.model.is_none()
         }) {
             return Err("invalid engine".into());
+        }
+        for engine in &self.engines {
+            if engine.kind == "claustrophobia" {
+                let settings = engine
+                    .claustrophobia
+                    .as_ref()
+                    .ok_or("Claustrophobia settings")?;
+                settings.validate().map_err(|e| e.to_string())?;
+                if !evaluation
+                    || !self.arena.as_ref().is_some_and(|a| {
+                        a.comparison == crate::arena::Comparison::WholeWallTime
+                            && a.max_total_nodes.is_none()
+                    })
+                    || engine.model.is_none()
+                    || engine.time_ms.is_none()
+                    || engine.simd
+                    || engine.lmr
+                    || engine.lmr_method.is_some()
+                    || engine.lmr_parameters.is_some()
+                    || engine.ordering_profile.is_some()
+                    || engine
+                        .history_tie_break
+                        .as_deref()
+                        .is_some_and(|s| s != "off")
+                    || engine.zero_stock_safe_race == Some(true)
+                    || engine.zero_stock_safe_race_method.is_some()
+                    || self.temperature != 0.0
+                {
+                    return Err("Claustrophobia requires whole-wall serial managed arena, argmax, own limits; no alpha controls/node budget".into());
+                }
+            } else if engine.claustrophobia.is_some() {
+                return Err("unused Claustrophobia settings".into());
+            }
         }
         if self.engines.iter().any(|e| e.kind == "sigma_value") {
             if !evaluation

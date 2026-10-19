@@ -619,7 +619,7 @@ pub(crate) fn arena_safe_race(
     engine: &Engine,
     arena: Option<&crate::arena::ArenaConfig>,
 ) -> alphabeta::Result<(bool, alphabeta::ZeroStockSafeRaceMethod)> {
-    let research_alpha = engine.kind != "mcts"
+    let research_alpha = !matches!(engine.kind.as_str(), "mcts" | "claustrophobia")
         && arena.is_some_and(|a| a.comparison != crate::arena::Comparison::Functional);
     let default_method = if research_alpha {
         alphabeta::RESEARCH_SAFE_RACE_METHOD
@@ -1190,6 +1190,26 @@ fn evaluator(e: &Engine, config: &Config) -> Result<InitializedEvaluator> {
                     kind: "sigma-onnx".into(),
                     content_sha256: sha.clone(),
                     row_identity: sha,
+                },
+            )
+        }
+        "claustrophobia" => {
+            let settings = e.claustrophobia.as_ref().ok_or("Claustrophobia settings")?;
+            settings.validate()?;
+            let model = e.model.as_ref().ok_or("Claustrophobia model")?;
+            let model_sha = crate::arena_manifest::file_sha256(model)?;
+            if model_sha != settings.model_sha256
+                || crate::arena_manifest::file_sha256(&settings.library)? != settings.library_sha256
+            {
+                return Err("Claustrophobia model/library changed".into());
+            }
+            let hash = settings.identity()?;
+            (
+                None,
+                EvaluatorIdentity {
+                    kind: "claustrophobia-original-mcts".into(),
+                    content_sha256: hash.clone(),
+                    row_identity: hash,
                 },
             )
         }
@@ -2411,6 +2431,7 @@ enum EvaluationEvent {
     Stopped(usize, Option<InferenceCounters>, f64),
 }
 struct EvaluationWorker {
+    core: usize,
     commands: Sender<EvaluationCommand>,
     handle: Option<thread::JoinHandle<()>>,
 }
@@ -2757,6 +2778,7 @@ impl EvaluationWorkers {
                 ));
             });
             owned.workers.push(EvaluationWorker {
+                core,
                 commands,
                 handle: Some(handle),
             });
@@ -3068,6 +3090,18 @@ fn evaluation_turn(
     pump: &mut PumpProfile,
     memory_limit: u64,
 ) -> std::result::Result<(), String> {
+    if config.engines[engine].kind == "claustrophobia" {
+        return evaluation_claustrophobia_turn(
+            game,
+            engine,
+            config,
+            owners,
+            run_start,
+            nn_calls,
+            inference_seconds,
+            memory_limit,
+        );
+    }
     // Reserve before the thinking clock/dispatch. No next turn starts before
     // this turn's matching terminal is drained; errors keep their reservation.
     let node_limit = owners
@@ -7397,3 +7431,161 @@ mod selected_slot_boundary_tests {
 #[cfg(test)]
 #[path = "runtime_history_tie_tests.rs"]
 mod history_tie_tests;
+
+// Component body for insertion into runtime.rs; no independent arena or authority.
+#[allow(clippy::too_many_arguments)]
+fn evaluation_claustrophobia_turn(
+    game: &mut Game,
+    engine: usize,
+    config: &Config,
+    owners: &EvaluationWorkers,
+    run_start: Instant,
+    nn_calls: &mut u64,
+    inference_seconds: &mut f64,
+    memory_limit: u64,
+) -> std::result::Result<(), String> {
+    if game.context.terminal_value().is_some() {
+        return Err(
+            "Claustrophobia caller cannot enter after common goal/threefold terminal".into(),
+        );
+    }
+    let settings = config.engines[engine]
+        .claustrophobia
+        .as_ref()
+        .ok_or("Claustrophobia settings")?;
+    let model = config.engines[engine]
+        .model
+        .as_ref()
+        .ok_or("Claustrophobia model")?;
+    let arena = config.arena.as_ref().ok_or("Claustrophobia arena")?;
+    // Full ordered opening + committed moves, never unordered history counts.
+    let legal = game.context.legal_ids();
+    let started = Instant::now();
+    let deadline = started
+        + Duration::from_millis(
+            config.engines[engine]
+                .time_ms
+                .ok_or("Claustrophobia clock")?,
+        );
+    let stop_at = deadline
+        .checked_sub(Duration::from_millis(arena.return_reserve_ms))
+        .ok_or("Claustrophobia reserve")?;
+    let mut guard_error = None;
+    let call = crate::claustrophobia::run(
+        settings,
+        model,
+        &game.prefix,
+        &legal,
+        owners.workers[engine].core,
+        stop_at,
+        || {
+            if let Some(reason) = guard(config, run_start, memory_limit) {
+                guard_error.get_or_insert(reason);
+                owners.cancel.store(true, Ordering::Relaxed);
+            }
+            owners.cancel.load(Ordering::Relaxed)
+        },
+    )
+    .map_err(|error| error.to_string())?;
+    let returned = Instant::now(); // Child has been directly reaped before any commit.
+    let action = call.reply.as_ref().map(|reply| reply.action);
+    let authority_legal = action.is_some_and(|action| game.context.play(action).is_ok());
+    let checked = Instant::now();
+    let ns = |t: Instant| {
+        t.duration_since(game.origin)
+            .as_nanos()
+            .min(u64::MAX as u128) as u64
+    };
+    let engine_error = call
+        .primary
+        .clone()
+        .or_else(|| call.secondary.first().cloned());
+    let mut failure = crate::arena_clock::acceptance(
+        arena.clock_policy,
+        Some(ns(deadline)),
+        ns(checked),
+        owners.cancel.load(Ordering::Relaxed),
+        authority_legal,
+        call.reply.is_some(),
+    )
+    .err();
+    if engine_error.is_some() && failure.is_none() {
+        failure = Some(crate::arena_clock::Failure::EngineError);
+    }
+    if let Some(reason) = &guard_error {
+        failure = Some(crate::arena_clock::failure_from_reason(reason));
+    }
+    if let Some(reply) = &call.reply {
+        *nn_calls += reply.head_calls;
+        game.nn += reply.head_calls;
+        *inference_seconds += reply.head["head_seconds"].as_f64().unwrap();
+    }
+    let counters = serde_json::json!({
+        "entry":"original-Claustrophobia-mcts::run_mcts",
+        "upstream":"ae093653e62ad700e201706fa5ed767093d0d68e",
+        "requested_simulations":settings.simulations,"requested_c_puct":settings.c_puct,
+        "requested_max_head_calls":settings.max_head_calls,
+        "completed_simulations":call.reply.as_ref().map(|r| r.simulations),
+        "head_calls":call.reply.as_ref().map(|r| r.head_calls),
+        "head_calls_in_incomplete_child":"UNKNOWN; not fabricated as zero",
+        "head":call.reply.as_ref().map(|r| &r.head),
+        "inner_history":call.reply.as_ref().map(|r| &r.inner_history),
+        "outer_rules":"common full-prefix goal-first/threefold; no invented inner history",
+        "search_value":null,"node_count":null,"child_pid":call.child_pid,
+        "value_stm_definition":"raw root model STM post-tanh; not searched root_mean or selected-child Q",
+        "direct_child_reaped":call.direct_reaped,"exit_code":call.exit_code,
+        "secondary":call.secondary,"stderr":call.stderr,
+        "helper_stdout":call.stdout,
+        "authority_legal":authority_legal,"authority_receipt_ns":ns(returned),
+        "drain_finished_ns":ns(returned),"inflight_after_drain":call.inflight_after_drain(),
+        "initialization_in_clock":true,"fresh_search_and_model_per_turn":true,
+        "parallel_search":false,"ponder":false,
+        "requested_alpha_depth_not_applicable":config.engines[engine].depth,
+        "requested_alpha_nodes_not_applicable":config.engines[engine].max_nodes,
+    });
+    game.observations.push(crate::arena_clock::MoveObservation {
+        ply: game.context.total_ply(),
+        side: game.context.position().turn,
+        engine_index: engine,
+        action,
+        accepted: false,
+        failure,
+        caller_started_ns: ns(started),
+        deadline_ns: Some(ns(deadline)),
+        returned_ns: ns(returned),
+        admission_checked_ns: ns(checked),
+        accepted_ns: None,
+        caller_seconds: checked.duration_since(started).as_secs_f64(),
+        thinking_seconds: Some(returned.duration_since(started).as_secs_f64()),
+        last_completed_iteration_ns: None,
+        completed_iteration_counters: None,
+        engine_error: engine_error.clone(),
+        stop: Some(
+            if failure.is_none() {
+                "completed_upstream_call"
+            } else {
+                "incomplete_or_refused_upstream_call"
+            }
+            .into(),
+        ),
+        completed_depth: None,
+        value_stm: call.reply.as_ref().map(|r| r.root_value_stm),
+        pv: Vec::new(),
+        counters,
+    });
+    if let Some(failure) = failure {
+        game.failure = Some(failure);
+        return Err(guard_error
+            .or(engine_error)
+            .unwrap_or_else(|| format!("move_rejected:{failure:?}")));
+    }
+    commit_action(
+        game,
+        action.ok_or("no_upstream_action")?,
+        None,
+        config,
+        &owners.cancel,
+        run_start,
+    )
+    .map_err(|error| error.to_string())
+}

@@ -1,0 +1,21 @@
+{
+  "kind": "claustrophobia",
+  "model": "/workspaces/quoridor/.worktree/assets/models/claustrophobia-v1.3.1/champion.pt",
+  "distance_a": 0,
+  "distance_b": 8,
+  "depth": 4,
+  "max_nodes": 50000,
+  "time_ms": 10000,
+  "simd": false,
+  "lmr": false,
+  "zero_stock_safe_race": false,
+  "claustrophobia": {
+    "python": "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "library": "/ABSOLUTE/PATH/FROM/NEW_QUALIFIED_BUILD/libquoridor_inference.so",
+    "library_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "model_sha256": "821bd10f2736fc433c82de4dfc090ab95fc81b524f04fa09e68c4a26e30b496c",
+    "simulations": 8,
+    "c_puct": 1.5,
+    "max_head_calls": 9
+  }
+}

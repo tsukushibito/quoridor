@@ -1,9 +1,10 @@
-//! All hot game/search/inference ownership stays inside one native process.
+//! Common arena owns games; native engines and bounded upstream helper children own Search.
 pub mod arena;
 pub mod arena_book;
 pub mod arena_clock;
 mod arena_manifest;
 pub mod arena_statistics;
+pub mod claustrophobia;
 pub mod config;
 pub mod research_manifest;
 pub mod resources;

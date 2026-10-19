@@ -140,14 +140,15 @@ pub fn begin(c: &Config, slots: &[Slot], admission: &crate::resources::Admission
         "executable":exe,"executable_sha256":file_sha256(&exe)?,
         "build":{"os":std::env::consts::OS,"arch":std::env::consts::ARCH,"cuda_aoti":cfg!(feature="cuda-aoti"),"tensorrt":cfg!(feature="tensorrt")},
             "rules":c.ruleset.id(),"admission":admission,
-            "engine_tt_source_policy":c.engines.iter().enumerate().filter(|(_,e)| e.kind != "mcts").map(|(index,e)| serde_json::json!({
+            "engine_tt_source_policy":c.engines.iter().enumerate().filter(|(_,e)| !matches!(e.kind.as_str(), "mcts" | "claustrophobia")).map(|(index,e)| serde_json::json!({
                 "engine_index":index,"kind":e.kind,"requested_slots":requested_tt,
                 "effective_slots_from_source":requested_tt,"persistent_byte_cap_from_source":requested_tt_byte_cap,
                 "actual_build_capacity":null,"actual_retained_bytes":null,
                 "measurement":"requested slots and canonical Table ABI-derived byte limit; actual allocation/retained bytes require admitted per-game TT profiles and runtime receipt"
             })).collect::<Vec<_>>(),
+            "upstream_engine_policy":c.engines.iter().enumerate().filter(|(_, e)| e.kind == "claustrophobia").map(|(index,e)| serde_json::json!({"engine_index":index,"settings":e.claustrophobia,"entry":"original mcts::run_mcts","lifetime":"fresh bounded child and head per turn; init/search/reap inside caller clock","inner_history":"upstream board-only; common arena goal-first/threefold adjudication","TT":null,"native_counter":"only completed returned calls; interrupted head count UNKNOWN","persistent_session_completion_callback":false,"last_completed_iteration_timestamp":null})).collect::<Vec<_>>(),
             "cpu_model":fs::read_to_string("/proc/cpuinfo").ok().and_then(|s| s.lines().find(|l| l.starts_with("model name")).map(str::to_owned)),
-            "clock":{"origin":if main_owned {"monotonic, main-owned game"} else {"monotonic, per game worker"},"start":if main_owned {"main before turn dispatch/session/limits setup"} else {"before session/limits setup"},"acceptance":if main_owned {"actual main receipt before100ms; legal replay and terminal collection before state commit"} else {"after legal replay immediately before state publication"},
+            "clock":{"engine_scope":c.engines.iter().enumerate().filter(|(_,e)| e.kind != "claustrophobia").map(|(index,_)| index).collect::<Vec<_>>(),"origin":if main_owned {"monotonic, main-owned game"} else {"monotonic, per game worker"},"start":if main_owned {"main before turn dispatch/session/limits setup"} else {"before session/limits setup"},"acceptance":if main_owned {"actual main receipt before100ms; legal replay and terminal collection before state commit"} else {"after legal replay immediately before state publication"},
                 "last_completed_iteration_timestamp":if main_owned {"actual main receipt of immutable completed result before decision cutoff"} else {"after completed-depth full-history legal check, before caller deadline"},"persistent_session_completion_callback":true,"hard_realtime_guarantee":false,
                 "internal_spans":"search elapsed nested in whole caller; startup/model load separate; do not sum",
                 "cap_stop":"depth/node/K stop does not imply full clock consumption"},

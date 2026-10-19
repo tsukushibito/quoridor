@@ -129,6 +129,13 @@ class StaticHead:
         }
 
     def __call__(self, inputs):
+        return self._forward(inputs, return_policy=False)
+
+    def policy_value(self, inputs):
+        """Same joint call, retaining raw policy for the upstream search adapter."""
+        return self._forward(inputs, return_policy=True)
+
+    def _forward(self, inputs, *, return_policy):
         import torch
 
         x = np.asarray(inputs)
@@ -173,6 +180,8 @@ class StaticHead:
             if not np.isfinite(values).all() or np.any(np.abs(values) > 1):
                 raise ValueError("finite raw post-tanh scalar in [-1,1] required")
             self.returned += len(x)
+            if return_policy:
+                return policy.detach().cpu().numpy().copy(), values
             return values
         except BaseException:
             self.failed_attempted_rows += len(x)

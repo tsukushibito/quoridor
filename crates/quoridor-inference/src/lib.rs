@@ -417,3 +417,6 @@ mod tests {
         );
     }
 }
+
+#[cfg(feature = "claustrophobia")]
+pub mod claustrophobia;
