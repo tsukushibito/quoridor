@@ -2486,3 +2486,9 @@ L2の初回通常parent b7f295e0は、投入後2.6394428290077485秒でFAILEDと
 親authority以外に残っていた同じ二度読みを、resource lifetime4・peer1・progress1の6箇所で既存bounded bufferのJSON読取りへ修復した。immutable config/source/input検査・各job/process identity/issue/thread/resource/取消/期限とcleanupのownerは変えない。新1定義の保存PASSは健全なatomic置換11と誤issue/thread/config/supervisor・不正JSON・immutable config driftの拒否を確認した限定software証拠であり、旧成功test/モデル/画像資格/実対局pilotの再演はない。同じMaxがこの関連差分だけSOURCE_CLEAR/blockers0とした。最初の通常配送は担当のsystemErrorによりRPC前拒否され、旧解析準備turnは実17command後のserverOverloadedだった事実を保存した。同じモデル/Max/権限を一度明示再開して実commandを確認し、新担当や周期監督は追加していない。
 
 この修復を[通常採用](../.artifacts/research-team/integration324/cedar-lmr-tuning-v1/control-continuation-v1/resource-state-adoption-v5/adoption.json)し、元L1全512資格と一度の点選択・確認側DR対OFF512局/8G・旧UNKNOWN費を維持して、新正常runtimeへ接続する。本記録時点では再投入・L2全数資格・最終global CIは未確認であり、SOURCE_CLEARを本比較完走へ昇格しない。取消済み相談の開始追跡/通知は取消のまま、モデル/既定/封印/pauseを変更しない。
+
+### Cedar LMR調整と独立評価を後続計画へ追加（2026-10-19 JST、人間直接指示）
+
+人間の「調整まで計画に含めておいて」を、[既存NNUE設計の後続計画](design/ai-nnue-research.md#現行確認後のlmrパラメータ調整と独立評価2026-10-19-jst人間直接指示)へ統合した。現在の管理修復・凍結した確認対局と保存解析を優先し、完了後に評価器と基準探索を固定する。共通LMRのtyped設定・実効設定とTT/ordering namespaceの結合、整数丸め後も働く係数摂動、少数係数の粗比較と有限SPSA、別開始局面での独立した同時間棋力評価までを計画に含める。離散条件と係数調整の問いを分け、SPSA各更新や独立確認を一律512局とはしない。実施時に規模・範囲・摂動/更新幅・減衰・仕事/時間/保存枠・停止と候補規則を具体化し、ここでは新しい数値枠・対局・実装・学習を発行しない。
+
+現行L2の調整用転用、確認結果での再選択、NNUEとLMRの同時変更をしない。将来は一方を固定して交互改善し、有望なNNUE更新時にLMRを再確認するが、毎学習の全面SPSAは必須にしない。既存324/324.9のBeadsへ計画の参照を結び、別の計画台帳・常設役・周期監督や現在の作業へのACK gateは追加しない。旧FAILED/RAW/UNKNOWN/全費、現行LMR枠・通知先、50GB、323/342.17 USERPAUSE、封印・model/weights/defaults・foreign変更は不変である。
