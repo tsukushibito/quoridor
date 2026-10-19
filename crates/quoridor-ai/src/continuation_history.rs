@@ -506,10 +506,10 @@ mod history_tie_tests {
     };
 
     #[test]
-    fn complete_signed_history_tie_includes_main_and_continuation() {
+    fn neighbour_complete_signed_main_continuation_precedes_contact_class() {
         let position = Position {
             pawns: [40, 76],
-            walls_remaining: [0, 0],
+            horizontal: 1,
             ..Position::default()
         };
         let path = [PlayedMove {
@@ -517,19 +517,17 @@ mod history_tie_tests {
             action: 67,
         }];
         let mut history = ContinuationHistory::new().unwrap();
-        history.history_tie_break = HistoryTieBreak::LocalGoalEdge;
-        history.main[main_index(position, 31)] = 10;
-        history.continuation[continuation_index(0, 0, 67, 49)] = 20;
-        history.main[main_index(position, 39)] = 11;
-        let ids = [31, 39, 41, 49];
-        let mut combined = [0i32; 209];
+        history.history_tie_break = HistoryTieBreak::NeighbourContact;
+        history.main[main_index(position, 83)] = 10;
+        history.continuation[continuation_index(0, 0, 67, 108)] = 20;
+        history.main[main_index(position, 144)] = 11;
+        let ids = [31, 83, 108, 144];
         let prepared = history.prepare_scores(position, &path);
+        let mut combined = [0i32; 209];
         for &id in &ids {
             combined[id as usize] = prepared.score(id).0;
         }
-        assert_eq!(combined[31], 20);
-        assert_eq!(combined[49], 20);
-        assert_eq!(combined[39], 22);
+        assert_eq!((combined[83], combined[108], combined[144]), (20, 20, 22));
         let mut sorted = ids;
         Ranking::new(
             &ids,
@@ -541,11 +539,11 @@ mod history_tie_tests {
         )
         .with_history_tie_parent(history.history_tie_break.parent(position))
         .sort_signed_keys(&mut sorted);
-        assert_eq!(sorted, [39, 49, 31, 41]);
+        assert_eq!(sorted, [144, 108, 83, 31]);
         sorted.sort_unstable();
         assert_eq!(sorted, ids);
         history.reset();
-        assert_eq!(history.history_tie_break, HistoryTieBreak::LocalGoalEdge);
+        assert_eq!(history.history_tie_break, HistoryTieBreak::NeighbourContact);
         assert!(
             history
                 .main

@@ -2620,7 +2620,7 @@ def measurement_config(experiment):
         tie = "off"
     require(
         type(tie) is str
-        and tie in {"off", "local_goal_edge"}
+        and tie in {"off", "neighbour_contact"}
         and (tie == "off" or config["profile"] == "control"),
         "measurement history tie break",
     )

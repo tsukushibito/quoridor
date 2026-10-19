@@ -1,7 +1,7 @@
 use super::*;
 
 #[test]
-fn arena_history_tie_default_scope_and_actual_namespace_agree() {
+fn arena_neighbour_contact_default_scope_and_actual_namespace_agree() {
     struct Zero;
     impl StaticEvaluator for Zero {
         fn evaluate(
@@ -17,7 +17,11 @@ fn arena_history_tie_default_scope_and_actual_namespace_agree() {
         arena_history_tie_break(&engine, None).unwrap(),
         alphabeta::HistoryTieBreak::Off
     );
-    engine.history_tie_break = Some("local_goal_edge".into());
+    for unknown in ["local_goal_edge", "unknown"] {
+        engine.history_tie_break = Some(unknown.into());
+        assert!(arena_history_tie_break(&engine, None).is_err());
+    }
+    engine.history_tie_break = Some("neighbour_contact".into());
     assert!(arena_history_tie_break(&engine, None).is_err());
     let mut arena: crate::arena::ArenaConfig = serde_json::from_value(serde_json::json!({
         "comparison":"search_wall_time","clock_policy":"strict_unknown","return_reserve_ms":5,
@@ -34,7 +38,7 @@ fn arena_history_tie_default_scope_and_actual_namespace_agree() {
     assert_eq!(session.namespace(), &expected);
     assert_eq!(
         session.history_tie_break(),
-        alphabeta::HistoryTieBreak::LocalGoalEdge
+        alphabeta::HistoryTieBreak::NeighbourContact
     );
     arena.comparison = crate::arena::Comparison::Functional;
     assert!(arena_history_tie_break(&engine, Some(&arena)).is_err());
@@ -44,6 +48,11 @@ fn arena_history_tie_default_scope_and_actual_namespace_agree() {
     engine.kind = "distance".into();
     engine.ordering_profile = Some("cheap".into());
     assert!(arena_history_tie_break(&engine, Some(&arena)).is_err());
+    engine.history_tie_break = Some("off".into());
+    assert_eq!(
+        arena_history_tie_break(&engine, Some(&arena)).unwrap(),
+        alphabeta::HistoryTieBreak::Off
+    );
     engine.history_tie_break = None;
     assert_eq!(
         arena_history_tie_break(&engine, Some(&arena)).unwrap(),

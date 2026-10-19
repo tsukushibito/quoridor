@@ -1,7 +1,7 @@
 use super::*;
 
 #[test]
-fn measurement_history_tie_typed_default_refusal_and_effective_session_metadata() {
+fn measurement_neighbour_contact_typed_default_refusal_and_effective_session_metadata() {
     struct Zero;
     impl StaticEvaluator for Zero {
         fn evaluate(
@@ -31,13 +31,13 @@ fn measurement_history_tie_typed_default_refusal_and_effective_session_metadata(
             .history_tie_break
             .is_none()
     );
-    for bad in [json!(true), json!("unknown")] {
+    for bad in [json!(true), json!("local_goal_edge"), json!("unknown")] {
         value["history_tie_break"] = bad;
         if let Ok(settings) = serde_json::from_value::<Settings>(value.clone()) {
             assert!(validate(&settings, std::slice::from_ref(&request)).is_err());
         }
     }
-    value["history_tie_break"] = json!("local_goal_edge");
+    value["history_tie_break"] = json!("neighbour_contact");
     let settings: Settings = serde_json::from_value(value.clone()).unwrap();
     validate(&settings, std::slice::from_ref(&request)).unwrap();
     let mut target = SearchTarget {
@@ -50,16 +50,16 @@ fn measurement_history_tie_typed_default_refusal_and_effective_session_metadata(
         before: Value::Null,
     };
     let actual = target.reset(&request).unwrap();
-    assert_eq!(actual["history_tie_break"], "local_goal_edge");
+    assert_eq!(actual["history_tie_break"], "neighbour_contact");
     assert_eq!(
         actual["history_tie_break_id"],
-        alphabeta::HistoryTieBreak::LocalGoalEdge.id()
+        alphabeta::HistoryTieBreak::NeighbourContact.id()
     );
     assert!(
         actual["actual_selectivity"]
             .as_str()
             .unwrap()
-            .contains(alphabeta::HistoryTieBreak::LocalGoalEdge.id())
+            .contains(alphabeta::HistoryTieBreak::NeighbourContact.id())
     );
     target.teardown().unwrap();
     value["profile"] = json!("cheap");
