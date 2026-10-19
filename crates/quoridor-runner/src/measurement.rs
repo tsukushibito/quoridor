@@ -80,6 +80,8 @@ struct Settings {
     lmr_parameters: Option<crate::config::LmrParameters>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     neighbour_opportunity: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    root_ordering_quality: Option<bool>,
     #[serde(default)]
     zero_stock_approx_min_root_walls: Option<u8>,
     #[serde(default = "default_zero_stock_approx_method")]
@@ -159,6 +161,29 @@ fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
         {
             return Err("opportunity diagnostic requires isolated signed Control without other observers/approximation".into());
         }
+    }
+    if settings.root_ordering_quality == Some(true)
+        && (settings.neighbour_opportunity.as_deref() != Some("off_shadow")
+            || settings.tt_entries != 1_048_576
+            || requests.is_empty()
+            || requests.len() > 26
+            || requests
+                .iter()
+                .map(|r| r.root)
+                .collect::<std::collections::BTreeSet<_>>()
+                .len()
+                != requests.len()
+            || requests
+                .iter()
+                .map(|r| &r.session)
+                .collect::<std::collections::BTreeSet<_>>()
+                .len()
+                > 6
+            || requests
+                .iter()
+                .any(|r| r.depth != 64 || r.node_cap > 1_000_000 || r.time_limit_ms.is_some()))
+    {
+        return Err("bounded root ordering quality requires OffShadow/TT1M/<=26roots/6sessions/D64/1M/timeNone".into());
     }
     let lmr_method = LmrMethod::from_name(&settings.lmr_method)?;
     if let Some(parameters) = settings.lmr_parameters {
@@ -509,11 +534,12 @@ impl Target for SearchTarget {
         let mut lmr_observation = request
             .observe_lmr
             .then(|| Box::new(alphabeta::LmrObservation::default()));
-        let mut opportunity = self
-            .settings
-            .neighbour_opportunity
-            .as_ref()
-            .map(|_| alphabeta::NeighbourOpportunity::default());
+        let mut opportunity = self.settings.neighbour_opportunity.as_ref().map(|_| {
+            let mut o = alphabeta::NeighbourOpportunity::default();
+            o.root_ordering =
+                (self.settings.root_ordering_quality == Some(true)).then(Default::default);
+            o
+        });
         let inference_before = self.sigma_value.as_ref().map(|e| e.work()).transpose()?;
         let table_generation_before = session.table_generation();
         let search_started = Instant::now();
@@ -2703,6 +2729,30 @@ mod lmr_parameter_settings_tests {
 }
 
 fn neighbour_opportunity_output(o: &alphabeta::NeighbourOpportunity) -> Value {
+    let root_ordering = o.root_ordering.as_ref().map(|quality| {
+        [
+            ("first_completed", quality.first_completed.as_ref()),
+            ("last_completed", quality.last_completed.as_ref()),
+            ("pending", quality.pending.as_ref()),
+        ]
+        .into_iter()
+        .map(|(slot, sample)| {
+            sample.map_or_else(
+                || json!({"slot":slot,"snapshot":null}),
+                |s| {
+                    json!({
+                        "slot":slot,"depth":s.depth,"TT_generation":s.generation,
+                        "previous_completed":s.previous_completed,"promoted":s.promoted,
+                        "killers":s.killers,"context":s.context,"eligible_root_TT":s.tt,
+                        "window_bits":s.window_bits,"entries":s.entries,"children":s.children,
+                        "numeric_tt_return":s.numeric_tt_return,"completed":s.completed,
+                        "selected":s.selected,"value_bits":s.value_bits
+                    })
+                },
+            )
+        })
+        .collect::<Vec<_>>()
+    });
     let counts = o.published.then(|| o.by_stock.iter().enumerate().map(|(stock,c)| json!({
         "stock":stock,"visits":c.visits,"terminal_returns":c.terminal_returns,
         "evaluation_leaves":c.evaluation_leaves,"numeric_tt_returns":c.numeric_tt_returns,
@@ -2718,12 +2768,83 @@ fn neighbour_opportunity_output(o: &alphabeta::NeighbourOpportunity) -> Value {
         "pulled":c.pulled,"changed_pulls":c.changed_pulls,"changed_pull_nodes":c.changed_pull_nodes,
         "changed_first_pulls":c.changed_first_pulls,"changed_prepared_first_pulls":c.changed_prepared_first_pulls
     })).collect::<Vec<_>>());
-    json!({"mode":o.mode.map(|m|m.name()),"method_id":o.mode.map(|m|m.id()),
+    let mut result = json!({"mode":o.mode.map(|m|m.name()),"method_id":o.mode.map(|m|m.id()),
         "published":o.published,"root_stock":o.root_stock,"parent_restored":o.parent_restored,
         "by_internal_stock":counts,"partial_work":o.final_stats.as_ref().map(observed_work),
         "denominator":"visited/scored/pulled decision events; not unique positions; arm-specific tree",
         "unreached_tail":"no forced preparation/sort/expansion; TT-only cutoffs can omit scored entry",
         "pull_shadow":"Off prefix from same frozen prepared IDs/keys, only as far as actual pulls; no counterfactual history training",
         "leading_semantics":"node-leading changes exclude an already-pulled TT first; prepared-first includes that deferred sibling subset; pulled counts prepared IDs only and tt_first_pulls is separate",
-        "clock_use":"observer-inclusive diagnostic only, no speed qualification"})
+        "clock_use":"observer-inclusive diagnostic only, no speed qualification"});
+    if let Some(root_ordering) = root_ordering {
+        result["root_ordering_quality"] = json!(root_ordering);
+    }
+    result
+}
+
+#[cfg(test)]
+mod root_ordering_quality_boundary_tests {
+    use super::*;
+    #[test]
+    fn root_ordering_quality_is_bounded_offshadow_only_and_default_absent() {
+        assert!(
+            neighbour_opportunity_output(&alphabeta::NeighbourOpportunity::default())
+                .get("root_ordering_quality")
+                .is_none()
+        );
+        let base = json!({"roots":[{"input":0,"pointer":"","field":"prefix","label":"toy"}],
+            "profile":"control","tt_entries":1048576,"use_tt":true,"use_pvs":true,"lmr":true,"lmr_method":"depth_rank",
+            "zero_stock_safe_race":true,"zero_stock_safe_race_method":"path_tail",
+            "neighbour_opportunity":"off_shadow","root_ordering_quality":true,
+            "namespace":{"evaluator":"toy","rules":"standard","selectivity":"toy"},
+            "output_bytes":2000000,"record_bytes":1000000});
+        let request = json!({"id":"one","session":"one","root":0,"depth":64,"node_cap":1000000});
+        validate(
+            &serde_json::from_value(base.clone()).unwrap(),
+            &[serde_json::from_value(request.clone()).unwrap()],
+        )
+        .unwrap();
+        for (key, value) in [
+            ("neighbour_opportunity", json!("on")),
+            ("tt_entries", json!(16)),
+        ] {
+            let mut bad = base.clone();
+            bad[key] = value;
+            assert!(
+                validate(
+                    &serde_json::from_value(bad).unwrap(),
+                    &[serde_json::from_value(request.clone()).unwrap()]
+                )
+                .is_err()
+            );
+        }
+        for (key, value) in [
+            ("depth", json!(5)),
+            ("node_cap", json!(1000001)),
+            ("time_limit_ms", json!(1)),
+        ] {
+            let mut bad = request.clone();
+            bad[key] = value;
+            assert!(
+                validate(
+                    &serde_json::from_value(base.clone()).unwrap(),
+                    &[serde_json::from_value(bad).unwrap()]
+                )
+                .is_err()
+            );
+        }
+        let mut ordinary = base;
+        ordinary
+            .as_object_mut()
+            .unwrap()
+            .remove("root_ordering_quality");
+        let settings: Settings = serde_json::from_value(ordinary).unwrap();
+        assert!(settings.root_ordering_quality.is_none());
+        assert!(
+            serde_json::to_value(settings)
+                .unwrap()
+                .get("root_ordering_quality")
+                .is_none()
+        );
+    }
 }

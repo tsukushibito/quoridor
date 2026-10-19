@@ -2662,6 +2662,21 @@ impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool>
         previous: Option<u16>,
     ) -> NodeResult<(u16, f32)> {
         self.enter(c)?;
+        #[cfg(feature = "research-diagnostics")]
+        if OPPORTUNITY
+            && let Some(q) = self
+                .opportunity
+                .as_deref_mut()
+                .and_then(|o| o.root_ordering.as_mut())
+        {
+            q.begin(
+                depth,
+                self.table.generation,
+                previous,
+                self.killers.first().copied().unwrap_or([None; 2]),
+                self.context.map(|c| c.0),
+            );
+        }
         let mut previous = previous;
         let mut legal = None;
         if self.limits.use_tt {
@@ -2671,10 +2686,37 @@ impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool>
                 .probe(&key, self.context, &mut self.stats)
                 .filter(|hit| !matches!(hit.2, Bound::ApproxLeaf | Bound::SafeRaceLeaf))
             {
+                #[cfg(feature = "research-diagnostics")]
+                if OPPORTUNITY
+                    && let Some(s) = self
+                        .opportunity
+                        .as_deref_mut()
+                        .and_then(|o| o.root_ordering.as_mut())
+                        .and_then(|q| q.pending.as_mut())
+                {
+                    let name = match bound {
+                        Bound::Exact => "Exact",
+                        Bound::Lower => "Lower",
+                        Bound::Upper => "Upper",
+                        Bound::ApproxLeaf => "ApproxLeaf",
+                        Bound::SafeRaceLeaf => "SafeRaceLeaf",
+                    };
+                    s.tt = Some((stored_depth, value.to_bits(), best, context_matches, name));
+                }
                 if best.is_some_and(|action| {
                     legal.get_or_insert_with(|| c.legal_ids()).contains(&action)
                 }) {
                     previous = previous.or(best);
+                    #[cfg(feature = "research-diagnostics")]
+                    if OPPORTUNITY
+                        && let Some(s) = self
+                            .opportunity
+                            .as_deref_mut()
+                            .and_then(|o| o.root_ordering.as_mut())
+                            .and_then(|q| q.pending.as_mut())
+                    {
+                        s.promoted = previous;
+                    }
                     if context_matches && stored_depth == depth && matches!(bound, Bound::Exact) {
                         self.stats.tt_usable_depth += 1;
                         self.stats.tt_cutoffs += 1;
@@ -2682,6 +2724,18 @@ impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool>
                         if OPPORTUNITY && let Some(o) = self.opportunity.as_deref_mut() {
                             o.by_stock[NeighbourOpportunity::stock(c.position())]
                                 .numeric_tt_returns += 1;
+                        }
+                        #[cfg(feature = "research-diagnostics")]
+                        if OPPORTUNITY
+                            && let Some(q) = self
+                                .opportunity
+                                .as_deref_mut()
+                                .and_then(|o| o.root_ordering.as_mut())
+                        {
+                            if let Some(s) = q.pending.as_mut() {
+                                s.numeric_tt_return = true;
+                            }
+                            q.returned(best.unwrap(), value);
                         }
                         return Ok((best.unwrap(), value));
                     }
@@ -2710,6 +2764,16 @@ impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool>
                 None
             },
         )?;
+        #[cfg(feature = "research-diagnostics")]
+        if OPPORTUNITY
+            && let Some(root) = opportunity_root.as_ref()
+            && let Some(q) = self
+                .opportunity
+                .as_deref_mut()
+                .and_then(|o| o.root_ordering.as_mut())
+        {
+            q.ranked(&moves, &root.keys, root.node.parent, previous);
+        }
         if let Some(work) = node_work.as_mut() {
             work.sorted_size = Some(moves.len());
         }
@@ -2729,14 +2793,58 @@ impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool>
             if let Some(work) = node_work.as_mut() {
                 work.read(true, &mut self.stats.ordering);
             }
+            #[cfg(feature = "research-diagnostics")]
+            if OPPORTUNITY
+                && let Some(q) = self
+                    .opportunity
+                    .as_deref_mut()
+                    .and_then(|o| o.root_ordering.as_mut())
+            {
+                q.child_started(
+                    action,
+                    if self.limits.use_pvs && i > 0 {
+                        [value, next_up(value)]
+                    } else {
+                        [value, f32::INFINITY]
+                    },
+                    false,
+                );
+            }
             let mut v = if self.limits.use_pvs && i > 0 {
                 self.child(c, a, action, depth - 1, [value, next_up(value)], 1)?
             } else {
                 self.child(c, a, action, depth - 1, [value, f32::INFINITY], 1)?
             };
+            #[cfg(feature = "research-diagnostics")]
+            if OPPORTUNITY
+                && let Some(q) = self
+                    .opportunity
+                    .as_deref_mut()
+                    .and_then(|o| o.root_ordering.as_mut())
+            {
+                q.child_returned(v);
+            }
             if self.limits.use_pvs && i > 0 && v > value {
                 self.stats.pvs_researches += 1;
+                #[cfg(feature = "research-diagnostics")]
+                if OPPORTUNITY
+                    && let Some(q) = self
+                        .opportunity
+                        .as_deref_mut()
+                        .and_then(|o| o.root_ordering.as_mut())
+                {
+                    q.child_started(action, [value, f32::INFINITY], true);
+                }
                 v = self.child(c, a, action, depth - 1, [value, f32::INFINITY], 1)?;
+                #[cfg(feature = "research-diagnostics")]
+                if OPPORTUNITY
+                    && let Some(q) = self
+                        .opportunity
+                        .as_deref_mut()
+                        .and_then(|o| o.root_ordering.as_mut())
+                {
+                    q.child_returned(v);
+                }
             }
             if let Some(work) = node_work.as_mut() {
                 work.returned(&mut self.stats.ordering);
@@ -2769,6 +2877,15 @@ impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool>
         }
         if let Some(work) = node_work {
             work.finish(&mut self.stats.ordering, false);
+        }
+        #[cfg(feature = "research-diagnostics")]
+        if OPPORTUNITY
+            && let Some(q) = self
+                .opportunity
+                .as_deref_mut()
+                .and_then(|o| o.root_ordering.as_mut())
+        {
+            q.returned(best, value);
         }
         Ok((best, value))
     }
@@ -3887,6 +4004,15 @@ fn search_in_table_observed<const OBSERVE: bool, const TRACE: bool, const OPPORT
             result.stats = state.stats.clone();
             result.elapsed = state.start.elapsed();
             state.table.committed = state.table.generation;
+            #[cfg(feature = "research-diagnostics")]
+            if OPPORTUNITY
+                && let Some(q) = state
+                    .opportunity
+                    .as_deref_mut()
+                    .and_then(|o| o.root_ordering.as_mut())
+            {
+                q.commit();
+            }
             (invocation.on_completed)(&result);
         }
         Ok(())

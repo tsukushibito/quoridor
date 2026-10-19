@@ -72,6 +72,7 @@ pub struct NeighbourOpportunity {
     pub root_stock: Option<u8>,
     pub parent_restored: Option<bool>,
     pub final_stats: Option<SearchStats>,
+    pub root_ordering: Option<RootOrderingQuality>,
     pub by_stock: [StockOpportunity; 21],
 }
 impl NeighbourOpportunity {
@@ -173,6 +174,158 @@ impl NeighbourOpportunity {
             changed: false,
             is_node_leading,
         }
+    }
+}
+
+/// Bounded root-only diagnostic: first/latest committed iteration and pending.
+/// No internal-node trace, counterfactual search, or ordinary-mode allocation.
+#[derive(Debug, Default)]
+pub struct RootOrderingQuality {
+    pub first_completed: Option<RootOrderingSample>,
+    pub last_completed: Option<RootOrderingSample>,
+    pub pending: Option<RootOrderingSample>,
+}
+
+#[derive(Debug)]
+pub struct RootOrderingSample {
+    pub depth: u16,
+    pub generation: u64,
+    pub previous_completed: Option<u16>,
+    pub promoted: Option<u16>,
+    pub killers: [Option<u16>; 2],
+    pub context: Option<[u64; 2]>,
+    /// Eligible post-filter root probe: depth/valuebits/best/context/bound.
+    pub tt: Option<(u16, u32, Option<u16>, bool, &'static str)>,
+    pub window_bits: [u32; 2],
+    /// Actual Control root order: ID/full frozen key/cheap class iff distinct tie.
+    pub entries: Vec<(u16, u64, Option<u8>)>,
+    /// Actual root child calls: ID/window bits/PVS-research/returned value bits.
+    /// None means this call did not return; it is never a completed branch label.
+    pub children: Vec<(u16, [u32; 2], bool, Option<u32>)>,
+    pub numeric_tt_return: bool,
+    pub completed: bool,
+    pub selected: Option<u16>,
+    pub value_bits: Option<u32>,
+}
+
+impl RootOrderingQuality {
+    pub(super) fn begin(
+        &mut self,
+        depth: u16,
+        generation: u64,
+        previous: Option<u16>,
+        killers: [Option<u16>; 2],
+        context: Option<[u64; 2]>,
+    ) {
+        self.pending = Some(RootOrderingSample {
+            depth,
+            generation,
+            previous_completed: previous,
+            promoted: previous,
+            killers,
+            context,
+            tt: None,
+            window_bits: [f32::NEG_INFINITY.to_bits(), f32::INFINITY.to_bits()],
+            entries: Vec::new(),
+            children: Vec::new(),
+            numeric_tt_return: false,
+            completed: false,
+            selected: None,
+            value_bits: None,
+        });
+    }
+    pub(super) fn ranked(
+        &mut self,
+        ids: &[u16],
+        keys: &[u64; 209],
+        parent: NeighbourParent,
+        promoted: Option<u16>,
+    ) {
+        let Some(s) = self.pending.as_mut() else {
+            return;
+        };
+        s.promoted = promoted;
+        s.entries = ids
+            .iter()
+            .map(|&id| {
+                let key = keys[id as usize];
+                let tied = ids
+                    .iter()
+                    .any(|&other| other != id && keys[other as usize] >> 8 == key >> 8);
+                (id, key, tied.then(|| parent.class(id)))
+            })
+            .collect();
+    }
+    pub(super) fn child_started(&mut self, action: u16, window: [f32; 2], research: bool) {
+        if let Some(s) = self.pending.as_mut() {
+            s.children
+                .push((action, window.map(f32::to_bits), research, None));
+        }
+    }
+    pub(super) fn child_returned(&mut self, value: f32) {
+        if let Some(last) = self.pending.as_mut().and_then(|s| s.children.last_mut()) {
+            last.3 = Some(value.to_bits());
+        }
+    }
+    pub(super) fn returned(&mut self, action: u16, value: f32) {
+        if let Some(s) = self.pending.as_mut() {
+            s.selected = Some(action);
+            s.value_bits = Some(value.to_bits());
+        }
+    }
+    /// Called only at the existing committed completed-iteration boundary.
+    pub(super) fn commit(&mut self) {
+        if let Some(mut s) = self.pending.take() {
+            s.completed = true;
+            if self.first_completed.is_none() {
+                self.first_completed = Some(s);
+            } else {
+                self.last_completed = Some(s);
+            }
+        }
+    }
+}
+
+#[cfg(test)]
+mod root_ordering_quality_tests {
+    use super::*;
+
+    #[test]
+    fn root_quality_first_latest_pending_and_exact_tie_membership() {
+        let mut q = RootOrderingQuality::default();
+        let parent = NeighbourParent {
+            pawns: [4, 76],
+            horizontal: 0,
+            vertical: 0,
+        };
+        let mut keys = [0u64; 209];
+        keys[3] = (4u64 << 40) | (0x8000_0000u64 << 8) | 3;
+        keys[5] = (4u64 << 40) | (0x8000_0000u64 << 8) | 5;
+        keys[81] = (3u64 << 40) | (0x8000_0000u64 << 8) | 81;
+        q.begin(1, 1, None, [None; 2], None);
+        q.ranked(&[81, 3, 5], &keys, parent, None);
+        assert!(q.pending.as_ref().unwrap().entries[0].2.is_none());
+        assert_eq!(q.pending.as_ref().unwrap().entries[1].2, Some(0));
+        assert_eq!(q.pending.as_ref().unwrap().entries[2].1, keys[5]);
+        q.child_started(81, [f32::NEG_INFINITY, f32::INFINITY], false);
+        assert!(q.pending.as_ref().unwrap().children[0].3.is_none());
+        q.child_returned(0.25);
+        q.returned(81, 0.25);
+        assert!(!q.pending.as_ref().unwrap().completed);
+        q.commit();
+        for depth in [2, 3] {
+            q.begin(depth, u64::from(depth), Some(81), [None; 2], None);
+            q.returned(81, 0.25);
+            q.commit();
+        }
+        q.begin(4, 4, Some(81), [None; 2], None);
+        q.child_started(3, [0.25, f32::INFINITY], false);
+        assert_eq!(q.first_completed.as_ref().unwrap().depth, 1);
+        assert_eq!(q.last_completed.as_ref().unwrap().depth, 3);
+        assert!(!q.pending.as_ref().unwrap().completed);
+        assert!(q.pending.as_ref().unwrap().selected.is_none());
+        assert!(q.pending.as_ref().unwrap().children[0].3.is_none());
+        assert!(q.first_completed.as_ref().unwrap().completed);
     }
 }
 
@@ -415,6 +568,17 @@ impl super::SearchSession {
         {
             return Err(SearchError::Limits(
                 "isolated opportunity Control/DR/P observation required".into(),
+            ));
+        }
+        if observation.root_ordering.is_some()
+            && (mode != NeighbourOpportunityMode::OffShadow
+                || limits.max_depth != 64
+                || limits.max_nodes > 1_000_000
+                || limits.time_limit.is_some()
+                || limits.tt_entries != 1_048_576)
+        {
+            return Err(SearchError::Limits(
+                "root ordering quality requires bounded OffShadow D64/1M TT1M".into(),
             ));
         }
         self.set_zero_stock_approx_effective(false);

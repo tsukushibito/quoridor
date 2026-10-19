@@ -2601,6 +2601,7 @@ def measurement_config(experiment):
             "lmr_method",
             "lmr_parameters",
             "neighbour_opportunity",
+            "root_ordering_quality",
             "zero_stock_approx_min_root_walls",
             "zero_stock_approx_method",
             "zero_stock_safe_race",
@@ -2652,6 +2653,8 @@ def measurement_config(experiment):
         ),
         "measurement safe-race method",
     )
+    root_quality = config.get("root_ordering_quality", False)
+    require(type(root_quality) is bool, "root ordering quality Boolean switch")
     opportunity = config.get("neighbour_opportunity")
     if "neighbour_opportunity" in config:
         require(
@@ -2843,7 +2846,12 @@ def measurement_config(experiment):
             all(
                 not any(
                     r.get(k, False)
-                    for k in ("observe_lmr", "diagnostic", "observe_completed_depths", "warmup")
+                    for k in (
+                        "observe_lmr",
+                        "diagnostic",
+                        "observe_completed_depths",
+                        "warmup",
+                    )
                 )
                 for r in requests
             ),
@@ -2884,6 +2892,19 @@ def measurement_config(experiment):
                 for r in config["roots"]
             ),
             "LMR observation complete-prefix selectors",
+        )
+    if root_quality:
+        require(
+            opportunity == "off_shadow"
+            and config["tt_entries"] == 1048576
+            and 0 < len(requests) <= 26
+            and len({r["root"] for r in requests}) == len(requests)
+            and len({r["session"] for r in requests}) <= 6
+            and all(
+                r["depth"] == 64 and r["node_cap"] <= 1000000 and r.get("time_limit_ms") is None
+                for r in requests
+            ),
+            "bounded root ordering quality OffShadow/TT1M/26roots/6sessions/D64/1M/timeNone",
         )
     return config, requests
 

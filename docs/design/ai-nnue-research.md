@@ -207,3 +207,5 @@ first32中心を固定した8対照は256局/128完全pair、全normal manifest/
 18.2の固定4prefix入口は、既存native SigmaContext・trueLR・model_keyとPAIR37 publisherを再用するconfigured `prefix_fixture` としてMainへ統合した。T0,2/V1,3を固定し、同一/LRのcross-splitを拒否し、self-LRは補充しない。限定source確認はSOURCE_CLEARであり、新Rust2・publisher1・新prefix symbolを含むcdylibはこれから実確認する。旧metadata成功や旧Rust3は再演しない。機能smokeは最大8 orientations/16教師attempts/TOTAL2更新で未入場、本学習・全件教師は未発行のままである。[固定sourceと限定確認](../../.artifacts/research-team/integration324/nnue-policy-value-training-v1/prefix-software-v1/source-adoption.json)。
 
 固定prefix入口の新Rust2・publisher1・affected Clippy・新cdylibが実PASSとなり、prefix_keysを含む4公開symbolと実STOPを確認した。旧成功定義の再演はない。これにより元c27に無かった真正fixture入口のsoftware依存を解決したが、actual class manifest・現model stat・normal Experimentと最大16教師/TOTAL2更新の機能smokeは未完である。[software結果と範囲](../research-findings.md#固定prefixからjoint学習fixtureへの実software接続3241822026-10-19)。
+
+18.2の環境構築は一度の真正機能smokeまで完了した。固定4prefix/4 classes/5向き、C教師5行、実step1中断とLAST/statusからTOTAL2更新へのrestart、native shared/policy fingerprintとexportの対応を保存した。既存Cedar/value-only/製品経路は維持し、機能確認モデルの研究採用や本学習・全件教師を発行しない。[実結果と限界](../research-findings.md#claustrophobia単体教師のjoint学習接続環境を機能確認3241822026-10-19)。
