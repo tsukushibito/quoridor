@@ -1737,40 +1737,10 @@ def selected_run(spec, experiment):
         "selected finite RUN index",
     )
     template = runs[index]
-    expected_experiment = document(template["experiment"])
-    if settings.get("lmr_recipe") is not None:
-        operation, pair = lmr_recipe_run_parameters(settings, index)
-        config = document(expected_experiment["config"])
-        require(
-            config["arena"]["max_total_nodes"] == operation["nodes_nonlending"]
-            and arena_game_ids(config) == operation["selected"],
-            "frozen recipe cap/slots",
-        )
-        for engine, parameters in zip(config["engines"], pair, strict=True):
-            engine["lmr_parameters"] = parameters
-        require(
-            document(experiment["config"]) == config, "only resolved recipe coefficients change"
-        )
-        phase = Path(settings["output"]) / f"run-{index:03d}"
-        require(
-            experiment["config"]["path"] == str(phase / "config.json")
-            and spec["approved_plan"]["path"] == str(phase / "plan.json")
-            and experiment["numerical_qualification"]["path"] == str(phase / "numerical.json"),
-            "ordinary derived RUN namespace",
-        )
-        plan = document(template["approved_plan"])
-        require(len(plan["batches"]) == len(plan["matchups"]) == 1, "one recipe operation plan")
-        plan["batches"][0]["config"] = experiment["config"]
-        plan["matchups"][0]["engines"] = config["engines"]
-        require(
-            document(spec["approved_plan"]) == plan, "only current coefficient/config plan join"
-        )
-        expected_experiment.update(
-            config=experiment["config"],
-            canonical_plan_sha256=spec["approved_plan"]["sha256"],
-            numerical_qualification=experiment["numerical_qualification"],
-        )
-        template = dict(template, approved_plan=spec["approved_plan"])
+    require(
+        all("lmr_recipe" not in value for value in (settings, template, spec)),
+        "lmr_recipe is retired; use static typed LMR parameters",
+    )
     require(
         template.get("finalizers") == [],
         "configured RUN with nonempty finalizers unsupported",
@@ -1788,7 +1758,7 @@ def selected_run(spec, experiment):
         "finalizers",
     ):
         require(spec[key] == template[key], "selected RUN settings drift: " + key)
-    require(experiment == expected_experiment, "selected RUN experiment drift")
+    require(experiment == document(template["experiment"]), "selected RUN experiment drift")
     launch_fields = {
         "TMPDIR",
         "QUORIDOR_LIFECYCLE_INTENT",
@@ -6036,17 +6006,6 @@ def collect_data(spec, experiment):
                 == sorted(report["outcomes"], key=lambda x: x["game"]),
                 "journal/result correspondence",
             )
-            settings = document(spec["settings"]) if spec.get("settings") is not None else {}
-            if settings.get("lmr_recipe") is not None:
-                recipe = document(settings["lmr_recipe"])
-                index = spec["selection_index"]
-                operation = recipe["operations"][index + 4]
-                require(
-                    selected_ids == operation["selected"], "recipe selected slot correspondence"
-                )
-                data["lmr_feedback"] = lmr_recipe_feedback(
-                    settings["lmr_recipe"], operation, experiment["config"], planned, records
-                )
         except BaseException as error:
             data["errors"].append({"stage": "scientific_journal", **error_fact(error)})
     if experiment["phase"] == "compare" and experiment["argv"][1] == "decisions":
@@ -7363,283 +7322,6 @@ def apply_comparison_arena(config, common, pair):
             engine[key] = arena[key]
 
 
-def lmr_recipe_table(parameters):
-    """Finite metadata arithmetic, never a Search hot path or observed frequency."""
-    p = resolved_lmr_parameters({"lmr_parameters": parameters}, "control")
-    return bytes(
-        0
-        if d < p["min_depth"] or m < p["min_rank"]
-        else int(
-            max(
-                0,
-                min(
-                    p["max_extra"],
-                    d - 2,
-                    math.floor(p["intercept"] + math.log(d) * math.log(m) / p["log_divisor"]) - 1,
-                ),
-            )
-        )
-        for d in range(64)
-        for m in range(64)
-    )
-
-
-def lmr_recipe_pair(recipe, stage_id, feedback):
-    """Pure deterministic coefficients from complete normal-manifest feedback.
-
-    No database, job launch, extra qualification, raw read, RNG or mutable state.
-    """
-    require(recipe["schema"] == "quoridor.lmr-two-coefficient-recipe.v1", "typed LMR recipe")
-    baseline = recipe["baseline"]
-    require(baseline == resolved_lmr_parameters({}, "control"), "retained baseline")
-    require(
-        recipe["coordinates"] == ["intercept", "log_divisor"], "two continuous coefficients only"
-    )
-    stages = {stage["id"]: stage for stage in recipe["stages"]}
-    require(stage_id in stages and len(stages) == len(recipe["stages"]), "declared unique stage")
-    stage = stages[stage_id]
-    candidates = {c["id"]: c["x"] for c in recipe["candidates"]}
-    scales = recipe["scale"]
-
-    def parameters(x):
-        require(
-            len(x) == 2
-            and all(type(v) in (int, float) and math.isfinite(v) and -1 <= v <= 1 for v in x),
-            "finite normalized coefficient box",
-        )
-        p = dict(
-            baseline,
-            **{
-                key: baseline[key] + scale * value
-                for key, scale, value in zip(recipe["coordinates"], scales, x, strict=True)
-            },
-        )
-        resolved_lmr_parameters({"lmr_parameters": p}, "control")
-        return p
-
-    def point(sid):
-        expected = {op["index"]: op for op in recipe["operations"] if op["stage"] == sid}
-        found = [f for f in feedback if f["stage"] == sid]
-        require(
-            len(found) == len(expected) and {f["index"] for f in found} == set(expected),
-            "complete stage normal feedback only",
-        )
-        scores = []
-        for f in found:
-            op = expected[f["index"]]
-            pairs = f["pairs"]
-            require(
-                f["games"] == op["games"] == 2 * len(pairs)
-                and f["unknown"] == 0
-                and f["families"] == op["families"]
-                and len({p["family"] for p in pairs}) == len(pairs)
-                and {p["family"] for p in pairs} == set(op["families"]),
-                "feedback declared full opposite-color family census",
-            )
-            for family, games in zip(
-                op["families"],
-                [op["selected"][i : i + 2] for i in range(0, len(op["selected"]), 2)],
-                strict=True,
-            ):
-                pair = next(p for p in pairs if p["family"] == family)
-                require(
-                    pair["original_local_games"] == games
-                    and type(pair["score"]) in (int, float)
-                    and pair["score"] in (0.0, 0.25, 0.5, 0.75, 1.0),
-                    "normal complete pair score/original slots; no invented color outcomes",
-                )
-                scores.append(pair["score"])
-            require(
-                f["point"] == sum(p["score"] for p in pairs) / len(pairs),
-                "pair point correspondence",
-            )
-        require(len(scores) == len(stages[sid]["families"]), "complete fixed stage family count")
-        return sum(scores) / len(scores)
-
-    if stage["kind"] == "coarse":
-        require(stage["candidate"] in candidates, "declared coarse candidate")
-        return [parameters(candidates[stage["candidate"]]), baseline]
-    points = [
-        (point("coarse-" + c["id"]), sum(x * x for x in c["x"]), i, c["x"])
-        for i, c in enumerate(recipe["candidates"])
-    ]
-    best = min(points, key=lambda row: (-row[0], row[1], row[2]))
-    center = list(best[3] if best[0] > 0.5 else [0.0, 0.0])
-    limit = stage.get("iteration", recipe["spsa"]["iterations"])
-    require(
-        type(limit) is int and 0 <= limit <= recipe["spsa"]["iterations"], "finite update count"
-    )
-    for k in range(limit + (stage["kind"] == "spsa")):
-        c = 0.25 / (k + 1) ** 0.101
-        delta = recipe["spsa"]["signs"][k]
-        require(
-            len(delta) == 2 and all(type(d) is int and d in (-1, 1) for d in delta),
-            "fixed signed perturbation",
-        )
-        arms = [
-            parameters([x + sign * c * d for x, d in zip(center, delta, strict=True)])
-            for sign in (1, -1)
-        ]
-        require(
-            lmr_recipe_table(arms[0]) != lmr_recipe_table(arms[1]),
-            "DEGENERATE_PERTURBATION_STOP: no physical identical-table arm",
-        )
-        if stage["kind"] == "spsa" and k == limit:
-            return arms
-        value = point(f"update-{k:02d}")
-        gain = 0.08 * (4 / (k + 4)) ** 0.602
-        center = [
-            max(-0.75, min(0.75, x + max(-0.08, min(0.08, gain * (value - 0.5) / (c * d)))))
-            for x, d in zip(center, delta, strict=True)
-        ]
-    require(stage["kind"] == "confirm", "declared terminal confirmation")
-    return [parameters(center), baseline]
-
-
-def lmr_recipe_feedback(recipe_ref, operation, config_ref, planned, records):
-    """Project already normal-validated rows into actual opposite-color pair points."""
-    require(
-        len(records) == operation["games"]
-        and {r["game"] for r in records} == set(operation["selected"]),
-        "normal feedback full selected census",
-    )
-    pairs = []
-    for family in operation["families"]:
-        slots = [
-            p
-            for p in planned
-            if p["family_id"] == family and p["local_game"] in operation["selected"]
-        ]
-        require(
-            len(slots) == 2 and {p["candidate_color"] for p in slots} == {0, 1},
-            "declared pair colors",
-        )
-        scores = []
-        for slot in slots:
-            row = next(r for r in records if r["game"] == slot["local_game"])
-            require(
-                row["candidate_color"] == slot["candidate_color"], "feedback color correspondence"
-            )
-            score = (
-                0.5
-                if row["status"] == "draw" and row["winner"] is None
-                else float(row["winner"] == row["candidate_color"])
-                if row["status"] in {"goal", "forfeit"} and row["winner"] in (0, 1)
-                else None
-            )
-            require(score is not None, "UNKNOWN feedback stops adaptive progression")
-            scores.append(score)
-        pairs.append(
-            dict(
-                family=family,
-                original_local_games=sorted(p["local_game"] for p in slots),
-                score=sum(scores) / 2,
-            )
-        )
-    return dict(
-        recipe=recipe_ref,
-        index=operation["index"],
-        stage=operation["stage"],
-        config=config_ref,
-        games=len(records),
-        families=operation["families"],
-        unknown=0,
-        pairs=pairs,
-        point=sum(p["score"] for p in pairs) / len(pairs),
-    )
-
-
-def lmr_recipe_history(settings, completed_count):
-    """Use the standalone coarse receipt and only finished normal update manifests."""
-    recipe_ref = settings["lmr_recipe"]
-    recipe = document(recipe_ref)
-    require(
-        settings["kind"] == "sequence"
-        and settings.get("arena_cohort") is None
-        and len(settings["runs"]) == recipe["spsa"]["iterations"] == 8
-        and type(completed_count) is int
-        and 0 <= completed_count <= 8,
-        "eight serial dependent updates in the existing normal sequence",
-    )
-    feedback = document(settings["lmr_coarse_feedback"])
-    require(
-        isinstance(feedback, list)
-        and len(feedback) == 4
-        and [f["index"] for f in feedback] == list(range(4))
-        and all(f["recipe"] == recipe_ref for f in feedback),
-        "actual standalone original coarse feedback; never replay coarse operations",
-    )
-    for previous in range(completed_count):
-        phase = Path(settings["output"]) / f"run-{previous:03d}"
-        completed = document(bound(phase / "operation" / "manifest.json")[0])
-        require(
-            completed["status"] == "PASS"
-            and completed["cleanup_complete"] is True
-            and completed["remaining"] == []
-            and completed["data"]["status"] == "PASS",
-            "qualified completed update only; failure/UNKNOWN stops progression",
-        )
-        entry = completed["data"]["lmr_feedback"]
-        experiment = document(completed["experiment"])
-        require(
-            entry["recipe"] == recipe_ref
-            and entry["index"] == previous + 4
-            and entry["config"] == experiment["config"]
-            and completed["experiment"]["path"] == str(phase / "experiment.json"),
-            "same normal update/config correspondence",
-        )
-        feedback.append(entry)
-    return recipe, feedback
-
-
-def lmr_recipe_run_parameters(settings, index):
-    """Local RUN zero is original recipe operation four, with no new scheduler."""
-    require(type(index) is int and 0 <= index < 8, "selected update index")
-    recipe, feedback = lmr_recipe_history(settings, index)
-    operation = recipe["operations"][index + 4]
-    require(operation["index"] == index + 4 and operation["kind"] == "spsa", "fixed update order")
-    return operation, lmr_recipe_pair(recipe, operation["stage"], feedback)
-
-
-def prepare_lmr_recipe_run(settings, index, phase, spec, experiment):
-    """Prepare an ordinary immutable RUN from prior finished normal manifests."""
-    operation, pair = lmr_recipe_run_parameters(settings, index)
-    config = document(experiment["config"])
-    require(
-        config["games"] == 32
-        and config["arena"]["game_selection"]["selected"] == operation["selected"]
-        and config["arena"]["max_total_nodes"] == operation["nodes_nonlending"],
-        "fixed original slots and own cap",
-    )
-    for engine, parameters in zip(config["engines"], pair, strict=True):
-        require(
-            engine["kind"] == "nnue"
-            and engine["ordering_profile"] == "control"
-            and engine["lmr"] is True
-            and engine["lmr_method"] == "depth_rank"
-            and "history_tie_break" not in engine,
-            "fixed accepted Control/Cedar inlet",
-        )
-        engine["lmr_parameters"] = parameters
-    new_json(phase / "config.json", config)
-    config_ref = bound(phase / "config.json")[0]
-    plan = document(spec["approved_plan"])
-    require(len(plan["batches"]) == len(plan["matchups"]) == 1, "one ordinary batch plan")
-    plan["batches"][0]["config"] = config_ref
-    plan["matchups"][0]["engines"] = config["engines"]
-    new_json(phase / "plan.json", plan)
-    spec["approved_plan"] = bound(phase / "plan.json")[0]
-    experiment.update(config=config_ref, canonical_plan_sha256=spec["approved_plan"]["sha256"])
-    old = document(experiment["numerical_qualification"])
-    numerical = numerical_fields(experiment, accepted_build(experiment["build_manifest"]))
-    for key in ("original_evidence", "correspondence_only", "scope", "new_model_or_head_calls"):
-        if key in old:
-            numerical[key] = old[key]
-    new_json(phase / "numerical.json", numerical)
-    experiment["numerical_qualification"] = bound(phase / "numerical.json")[0]
-    arena_plan_check(experiment, plan)
-
-
 def prepare_selected_operation(settings_ref, kind, index):
     """Derive ordinary lifecycle parameters; never issue a per-operation admission."""
     settings = document(settings_ref)
@@ -7648,6 +7330,10 @@ def prepare_selected_operation(settings_ref, kind, index):
     else:
         require(kind in {"measure", "run"}, "selected finite operation kind")
         template = settings["runs" if kind == "run" else "measurements"][index]
+    require(
+        "lmr_recipe" not in settings and "lmr_recipe" not in template,
+        "lmr_recipe is retired; use static typed LMR parameters",
+    )
     spec = copy.deepcopy(template)
     if settings.get("arena_cohort") is not None:
         require(kind == "run", "cohort selects normal RUN sequences only")
@@ -7711,9 +7397,6 @@ def prepare_selected_operation(settings_ref, kind, index):
         dict.fromkeys([*spec.get("owned_outputs", []), str(phase), spec["TMP"]])
     )
     phase.mkdir(parents=True)
-    if settings.get("lmr_recipe") is not None:
-        require(kind == "run", "LMR recipe uses maintained configured RUNs only")
-        prepare_lmr_recipe_run(settings, index, phase, spec, experiment)
     if kind != "run" and experiment.get("numerical_qualification") is not None:
         prior = document(original_experiment["numerical_qualification"])
         numerical = numerical_fields(experiment, accepted_build(experiment["build_manifest"]))
