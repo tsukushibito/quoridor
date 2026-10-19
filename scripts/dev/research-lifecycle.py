@@ -576,16 +576,28 @@ def cohort_job_authority(config, directory=None):
                 "inner operation caller is the registered running lane sequence",
             )
             if config != declared:
-                intent_path = Path(config["resource_contract"])
-                intent = document(bound(intent_path)[0])
+                # The sequence contract stays settings; the selected RUN spec is
+                # the maintained --intent argument, as in sequence's child_config.
+                settings_ref = bound(Path(member["settings_path"]))[0]
+                intent_ref = bound(Path(config["argv"][5]))[0]
+                intent = document(intent_ref)
+                index = intent["selection_index"]
                 require(
-                    intent["arena_cohort"] == cohort_ref
-                    and intent["settings"]["path"] == member["settings_path"],
-                    "inner normal admission belongs to assigned member",
+                    config["resource_contract"] == settings_ref["path"]
+                    and intent_ref["sha256"] == config["argv"][7]
+                    and intent["kind"] == "run"
+                    and intent["arena_cohort"] == cohort_ref
+                    and intent["settings"] == settings_ref
+                    and type(index) is int
+                    and 0 <= index < len(document(settings_ref)["runs"]),
+                    "inner normal admission belongs to assigned selected RUN",
                 )
-                inner_runtime = (
-                    Path(member["output"]) / f"run-{intent['selection_index']:03d}/runtime"
+                selected = Path(member["output"]) / f"run-{index:03d}"
+                require(
+                    intent_ref["path"] == str(selected / "intent.json"),
+                    "inner intent is the maintained selected operation",
                 )
+                inner_runtime = selected / "runtime"
                 inner = document(bound(inner_runtime / "state.json")[0])
                 require(
                     (directory is None or Path(directory) == inner_runtime)
