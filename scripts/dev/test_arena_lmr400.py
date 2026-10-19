@@ -2,6 +2,8 @@
 
 import copy
 import importlib.util
+import gzip
+import json
 import unittest
 from pathlib import Path
 
@@ -61,6 +63,85 @@ def fixture():
         },
     }
     return config, {"game": 0, "observations": [observation], "moves": [13]}
+
+
+def encode(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+
+
+def saved_arena_fixture(config, actual):
+    raw = (
+        encode(
+            dict(
+                game=0,
+                started=False,
+                status="unknown",
+                failure="not_started",
+                observations=[],
+            )
+        )
+        + b"\n"
+    )
+    journal = gzip.compress(raw, mtime=0)
+
+    def ref(name, data):
+        return dict(
+            path=config["output"] + "/" + name,
+            sha256=lc.sha(data),
+            bytes=len(data),
+            mode="0644",
+        )
+
+    files = dict(journal=ref("completed.jsonl.gz", journal))
+    publication = dict(
+        schema=lc.ARENA_PUBLICATION,
+        report=dict(
+            outcomes=[],
+            run_id="toy",
+            planned=1,
+            stopped=None,
+            all_workers_joined=True,
+        ),
+        archive=dict(
+            encoding="gzip-single-member-v1",
+            compressed=files["journal"],
+            raw_sha256=lc.sha(raw),
+            raw_bytes=len(raw),
+        ),
+        outcome_count=1,
+        journal_count=1,
+        journal_bytes=len(raw),
+        journal_sha256=lc.sha(raw),
+        failure_attribution=None,
+        archive_wall_seconds=0.0,
+        archive_allocated_bytes=4096,
+    )
+    result = encode(publication)
+    files["result"] = ref("result.json", result)
+    manifest = dict(
+        result=publication,
+        binding=dict(
+            config={
+                "deadline_unix_ms": 0,
+                "mcts_max_bytes": 268435456,
+                "mcts_max_nodes": 200000,
+                "pause_file": None,
+                "simulations": 64,
+                "temperature": 1.0,
+                **actual,
+            }
+        ),
+        cleanup=dict(archive_closed_verified=True, all_workers_joined=True),
+        artifacts={
+            "completed.jsonl.gz": {
+                k: files["journal"][k] for k in ("sha256", "bytes", "mode")
+            },
+            "result.json": {k: files["result"][k] for k in ("sha256", "bytes", "mode")},
+        },
+    )
+    native = encode(manifest)
+    files["native_manifest"] = ref("manifest.json", native)
+    return files, dict(journal=journal, result=result, native_manifest=native)
 
 
 class ArenaLmr400Tests(unittest.TestCase):
@@ -155,77 +236,7 @@ class ArenaLmr400Tests(unittest.TestCase):
                     lc.arena_cpu_cores(bad)
 
     def test_arena400_false_serde_defaults_and_exact_publication_boundaries(self):
-        import gzip
-        import json
-
-        def encode(value):
-            return json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
-
-        def saved(config, actual):
-            raw = (
-                encode(
-                    dict(
-                        game=0,
-                        started=False,
-                        status="unknown",
-                        failure="not_started",
-                        observations=[],
-                    )
-                )
-                + b"\n"
-            )
-            journal = gzip.compress(raw, mtime=0)
-
-            def ref(name, data):
-                return dict(
-                    path=config["output"] + "/" + name,
-                    sha256=lc.sha(data),
-                    bytes=len(data),
-                    mode="0644",
-                )
-
-            files = dict(journal=ref("completed.jsonl.gz", journal))
-            publication = dict(
-                schema=lc.ARENA_PUBLICATION,
-                report=dict(
-                    outcomes=[],
-                    run_id="toy",
-                    planned=1,
-                    stopped=None,
-                    all_workers_joined=True,
-                ),
-                archive=dict(
-                    encoding="gzip-single-member-v1",
-                    compressed=files["journal"],
-                    raw_sha256=lc.sha(raw),
-                    raw_bytes=len(raw),
-                ),
-                outcome_count=1,
-                journal_count=1,
-                journal_bytes=len(raw),
-                journal_sha256=lc.sha(raw),
-                failure_attribution=None,
-                archive_wall_seconds=0.0,
-                archive_allocated_bytes=4096,
-            )
-            result = encode(publication)
-            files["result"] = ref("result.json", result)
-            manifest = dict(
-                result=publication,
-                binding=dict(config=actual),
-                cleanup=dict(archive_closed_verified=True, all_workers_joined=True),
-                artifacts={
-                    "completed.jsonl.gz": {
-                        k: files["journal"][k] for k in ("sha256", "bytes", "mode")
-                    },
-                    "result.json": {
-                        k: files["result"][k] for k in ("sha256", "bytes", "mode")
-                    },
-                },
-            )
-            native = encode(manifest)
-            files["native_manifest"] = ref("manifest.json", native)
-            return files, dict(journal=journal, result=result, native_manifest=native)
+        saved = saved_arena_fixture
 
         base = dict(
             output="/synthetic-not-written/arena",
@@ -263,6 +274,99 @@ class ArenaLmr400Tests(unittest.TestCase):
         values["journal"] += b"x"
         with self.assertRaisesRegex(ValueError, "actual closed saved-file bytes"):
             lc.arena_reference_report(base, files, values)
+
+    def test_omitted_config_defaults_preserve_exact_closed_join_and_selected_run(self):
+        import tempfile
+
+        base = dict(
+            output="/synthetic-not-written/arena",
+            games=1,
+            run_id="toy",
+            max_plies=1,
+            arena=dict(retained_outcome_bytes=16384),
+        )
+        defaults = dict(
+            deadline_unix_ms=0,
+            mcts_max_bytes=268435456,
+            mcts_max_nodes=200000,
+            pause_file=None,
+            simulations=64,
+            temperature=1.0,
+        )
+        explicit = {**base, **defaults}
+        files, values = saved_arena_fixture(base, explicit)
+        inputs = copy.deepcopy((base, explicit, files, values))
+        omitted_report = lc.arena_reference_report(base, files, values)
+        explicit_report = lc.arena_reference_report(explicit, files, values)
+        self.assertEqual(omitted_report, explicit_report)
+        self.assertEqual(omitted_report["outcomes"][0]["status"], "unknown")
+        self.assertEqual((base, explicit, files, values), inputs)
+        refusal = "closed native manifest/summary/config/cleanup correspondence"
+        for field, different in (
+            ("deadline_unix_ms", 1),
+            ("mcts_max_bytes", 268435457),
+            ("mcts_max_nodes", 200001),
+            ("pause_file", "/synthetic-pause"),
+            ("simulations", 65),
+            ("temperature", 2.0),
+        ):
+            for bad_value in (
+                [different] if field == "pause_file" else [different, None]
+            ):
+                with self.subTest(field=field, explicit_value=bad_value):
+                    bad = {**base, field: bad_value}
+                    with self.assertRaisesRegex(lc.Refused, refusal):
+                        lc.arena_reference_report(bad, files, values)
+        for declared, actual in (
+            (base, {**explicit, "unrecognized_native_field": 123}),
+            ({**base, "unrecognized_declared_field": 123}, explicit),
+        ):
+            other_files, other_values = saved_arena_fixture(declared, actual)
+            with self.assertRaisesRegex(lc.Refused, refusal):
+                lc.arena_reference_report(declared, other_files, other_values)
+
+        # Real file/ref plumbing for the selected RUN owner, no predicate mocks.
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory).resolve()
+
+            def store(name, value):
+                path = root / name
+                path.write_text(json.dumps(value))
+                return lc.artifact_ref(path)
+
+            plan = dict(phase="arena", planned_slots=1)
+            plan_ref = store("plan.json", plan)
+            experiment = dict(
+                phase="arena",
+                argv=["synthetic-no-exec", "arena"],
+                canonical_plan_sha256=plan_ref["sha256"],
+            )
+            template = dict(
+                owner=str(root),
+                cwd=str(root),
+                limits={},
+                support={},
+                artifact={},
+                caller_sources=[],
+                approved_plan=plan_ref,
+                data_root=str(root / "never-created-data"),
+                data=[],
+                finalizers=[],
+                env={},
+                experiment=store("experiment.json", experiment),
+            )
+            settings_ref = store(
+                "settings.json", dict(kind="sequence", runs=[template])
+            )
+            spec = dict(template, settings=settings_ref, selection_index=0)
+            self.assertEqual(lc.approved_plan(spec, experiment), plan)
+            substituted = dict(spec, approved_plan=store("substituted-plan.json", plan))
+            with self.assertRaisesRegex(
+                lc.Refused, "selected RUN settings drift: approved_plan"
+            ):
+                lc.approved_plan(substituted, experiment)
+            with self.assertRaisesRegex(lc.Refused, "selected RUN experiment drift"):
+                lc.approved_plan(spec, {**experiment, "argv": ["different", "arena"]})
 
     def test_arena400_typed_evaluator_content_binding_and_foreign_refusal(self):
         config, row = fixture()

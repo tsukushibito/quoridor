@@ -5052,6 +5052,17 @@ def arena_reference_report(config, files, values=None, expected_build=None):
     # Match ArenaConfig's two default=false/skip_serializing_if=false_flag fields.
     # All true values and every other declared field remain exact.
     serialized_config = copy.deepcopy(config)
+    # Config serde emits these defaults even when the declared field is omitted.
+    # Explicit values (including null/conflicts) remain subject to full equality.
+    for field, default in {
+        "deadline_unix_ms": 0,
+        "mcts_max_bytes": 268435456,
+        "mcts_max_nodes": 200000,
+        "pause_file": None,
+        "simulations": 64,
+        "temperature": 1.0,
+    }.items():
+        serialized_config.setdefault(field, default)
     for flag in ("disable_continuation_static_ordering", "decision_only"):
         if serialized_config["arena"].get(flag) is False:
             del serialized_config["arena"][flag]
