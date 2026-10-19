@@ -181,3 +181,11 @@ first32は全32 normal operations・512局/256完全pair/UNKNOWN0で完了し、
 人間直接指示により、現Cedarを新artifactの初期値として既存policy209を明示有効化し、既存単一train loop/optimizer/sampler/exportへjoint policy/value targetを接続する。版固定Claustrophobiaの既存`static_teacher_heads.policy_value`一回のforwardから、合法mask後policy分布とSTM valueを取得する。core209・STM/左右反転・jump/H/V・value符号/尺度・splitは既存正本を共用し、stream/chunk/manifestとcheckpoint/restart、Python→Rust policy/value export・fingerprint/新head identityを対応させる。元value教師にpolicy列があるとは仮定しない。既存18.1の4prefix/48sim確認と上限は独立に保持する。
 
 既存作者High18を自然境界で順次再用し、私有source/configから着手する。変更した座標/目標/split/export境界だけ既存Maxが関連確認する。必要な実接続が不足する場合だけ、最大16真正fixture/教師16行/optimizer2stepの機能smokeを一度、実条件を固定して実STOP後の適合windowへ置ける。本学習・全件教師付与・巨大ラベル配列・大量checkpoint・棋力campaignは未発行で、現value-only Cedar/model files/default/数学・全pause/seals/foreignは変えない。20やLMR後続はこの新準備を待たない。[完成条件・担当・資源・限定確認](../../.artifacts/research-team/integration324/nnue-policy-value-training-v1/task.md)。
+
+### 広域比較完了とshort前のordering分析（324.9.6、2026-10-19）
+
+first32中心を固定した8対照は256局/128完全pair、全normal manifest/data PASS・UNKNOWN0で完了した。候補順の得点率は0.5/0.5/0.53125/0.40625/0.53125/0.46875/0.4375/0.40625。固定した最大点・L1距離・tuple規則から、係数0.8289349167255415/2.4815248433137778、深さ8/順位6/上限4を探索用に選んだ。16共有tuning family・既露出開始での粗選別であり、極大値・一般優越・CI・default変更ではない。元256成功局は再対局から除外し、旧6 UNKNOWN/1.536G opaque-heldを保持する。[通常結果・選択・実STOP受入れ](../../.artifacts/research-team/integration324/cedar-lmr-tuning-v1/five-parameter-v1/revised-wide-result-acceptance-v1/acceptance.json)。
+
+人間の順序確認に従い、この実STOP後は既存17の52探索→残壁別tie機会・実順位変更の保存分析とordering変更の具体的根拠の判断→20診断78探索の窓を維持する。この17判断を後続short16更新のnative開始前に返す。元384局比較後のRETAIN_CONTROLを履歴として残し、機会数や順位変化だけで棋力改善・採用を認定しない。具体候補がなければControl/ordering固定でshort係数再調整→元独立512へ進む。候補が具体化した場合は必要な有限検証・未使用確認集合・資源の扱いを具体報告し、この通知から新ordering実装・追加対局・上限増加を自動発行しない。同じ設定の最終確認を先に重複実行せず、親close/人間返信・一律ACKを入口にしない。保存分析は元normal出力の公開counterだけで、欠落はUNKNOWN、新observer/観測再計算/旧RAW再読は行わない。
+
+18の元有限接続は真正captured test artifact f899上で4prefix各12sim・計48 real NNUE heads、constructor/failed0を完了し、元fake9を含む57/64・head48/256、実native＋collection STOPを受け入れた。uniform/ScalarFTの機能接続であり、learned policyやrelease image d0eでの速度・棋力資格とはしない。元preentry FAILED2件・費UNKNOWNは保存した。[元4prefixの結果・実STOP受入れ](../../.artifacts/research-team/integration324/nnue-mcts-foundation-v1/finite-result-acceptance-v1/acceptance.json)。新18.2のjoint教師/学習環境は独立の私有source準備として続き、本学習・全件教師付与は未発行である。
