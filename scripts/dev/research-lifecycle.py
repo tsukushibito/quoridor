@@ -940,10 +940,49 @@ def arena_cohort_lifetime(spec, *, outer_runtime=None):
     )
     all_members, common_members, inner_members, origins = {}, {}, {}, {}
 
+    # The parent owns this whole tree. Observe it once for this accounting call:
+    # a native appearing between independent lane and parent scans must not be
+    # charged to common solely because its earlier lane scan did not see it.
+    # This is no permission cache; local child guards still scan their own live
+    # descendants, and the next cohort check takes a new process observation.
+    parent_processes = None
+    if parent is not None:
+        state = json.loads(bound(Path(parent_runtime) / "state.json")[1])
+        root = state["supervisor"]
+        parent_processes = {}
+        if process.alive(root):
+            for item in process.members(root, []):
+                info = process.process_info(item["pid"])
+                if process.identity(info) == item and info["state"] != "Z":
+                    parent_processes[info["pid"]] = info
+
     def discover(root):
         if not process.alive(root):
             return {}
-        return {(v["pid"], v["start_ticks"], v["boot_id"]): v for v in process.members(root, [])}
+        if parent_processes is None:
+            return {
+                (v["pid"], v["start_ticks"], v["boot_id"]): v for v in process.members(root, [])
+            }
+        info = parent_processes.get(root["pid"])
+        if process.identity(info) != root:
+            return {}
+        selected = {root["pid"]}
+        selected.update(
+            p["pid"] for p in parent_processes.values() if p.get("group") == root["pid"]
+        )
+        changed = True
+        while changed:
+            changed = False
+            for p in parent_processes.values():
+                if p["pid"] not in selected and p["parent"] in selected:
+                    selected.add(p["pid"])
+                    changed = True
+        return {
+            tuple(
+                parent_processes[pid][k] for k in ("pid", "start_ticks", "boot_id")
+            ): process.identity(parent_processes[pid])
+            for pid in selected
+        }
 
     for m, declared in zip(cohort["members"], launch["job_configs"], strict=True):
         settings_ref = bound(m["settings_path"])[0]
@@ -1107,6 +1146,22 @@ def arena_cohort_lifetime(spec, *, outer_runtime=None):
                 set().union(*(set(m) for m in inner_members.values())) if inner_members else set()
             )
             common_members.update({k: v for k, v in tree.items() if k not in native_keys})
+    if parent_processes is not None:
+        # A still-owned process may lose its intermediate ancestor after the
+        # observation. Never drop that observed identity merely because current
+        # PPID/group reachability no longer reconnects it. Residuals conservatively
+        # belong to common until the normal owner/guardian finishes cleanup.
+        all_members.update(
+            {
+                tuple(p[k] for k in ("pid", "start_ticks", "boot_id")): process.identity(p)
+                for p in parent_processes.values()
+            }
+        )
+        inner_keys = (
+            set().union(*(set(m) for m in inner_members.values())) if inner_members else set()
+        )
+        common_members = {k: v for k, v in all_members.items() if k not in inner_keys}
+
     if outer_runtime is None:
         require(member["lane"] in origins, "own actual original outer submission required")
     else:
@@ -1195,9 +1250,9 @@ class ArenaCohortResources(process.CycleResources):
         total = [v for k, v in facts["all_members"].items() if k != key]
         common = [v for k, v in facts["common_members"].items() if k != key]
         process.CycleResources.check(self, total)
-        # CycleResources includes the checking guardian itself. If it is an inner
-        # guardian this is conservative extra common RSS, never an omitted root.
-        self.common.check(common)
+        # The checker is already in total/lane accounting. Charge it to common
+        # only when the same observation actually classifies it as common.
+        self.common.check(common, include_self=key in facts["common_members"])
         # Canonical lifetime roots, including already retained results and all
         # controllers/collectors/FAILED/TMP, are never spent again per operation.
         for member in self.cohort["members"]:

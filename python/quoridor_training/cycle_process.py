@@ -161,7 +161,7 @@ class CycleResources:
         ):
             raise CycleStopped("cycle resource budget must be positive after host reserve")
 
-    def check(self, owned=()):
+    def check(self, owned=(), *, include_self=True):
         if self.deadline is not None and time.monotonic() >= self.deadline:
             raise CycleStopped("cycle deadline")
         if self.pause_file and self.pause_file.exists():
@@ -169,7 +169,7 @@ class CycleResources:
         if available_memory() < self.reserve:
             raise CycleStopped("cycle host RAM reserve")
         infos = [
-            process_info(os.getpid()),
+            *([process_info(os.getpid())] if include_self else []),
             *(process_info(member["pid"]) for member in owned),
         ]
         rss = sum((info["rss"] for info in infos if info))
