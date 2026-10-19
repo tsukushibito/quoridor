@@ -12,7 +12,7 @@ use std::path::{Path, PathBuf};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(tag = "kind", rename_all = "snake_case", deny_unknown_fields)]
 pub enum Prior {
-    Uniform,
+    Uniform {},
     Head {
         manifest: PathBuf,
         evidence: PolicyEvidence,
@@ -65,7 +65,7 @@ impl Provider {
         identity.extend(model.fingerprint());
         identity.push(u8::from(simd));
         let policy = match &config.prior {
-            Prior::Uniform => {
+            Prior::Uniform {} => {
                 identity.extend(b"explicit-uniform");
                 None
             }
@@ -164,7 +164,7 @@ mod tests {
         );
         assert!(
             Config {
-                prior: Prior::Uniform,
+                prior: Prior::Uniform {},
                 logical_row_limit: 0
             }
             .validate()

@@ -61,6 +61,41 @@ pub struct Reply {
     pub root_value_stm: f32,
     pub inner_history: String,
     pub head: serde_json::Value,
+    // Missing facts remain absent in failed/synthetic low-level calls. run()
+    // requires this self-observed record; no older helper is admitted.
+    pub execution: Option<Execution>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+pub struct ExecutionPoint {
+    pub pid: u32,
+    pub ppid: u32,
+    pub tid: u32,
+    pub core: usize,
+    pub affinity: Vec<usize>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+pub struct Execution {
+    pub started: ExecutionPoint,
+    pub returned: ExecutionPoint,
+}
+
+impl Execution {
+    fn matches(&self, child_pid: Option<u32>, core: usize) -> bool {
+        child_pid.is_some_and(|pid| {
+            [&self.started, &self.returned].iter().all(|point| {
+                point.pid == pid
+                    && point.tid == pid
+                    && point.ppid == std::process::id()
+                    && point.core == core
+                    && point.affinity.len() == 1
+                    && point.affinity[0] == core
+            })
+        })
+    }
 }
 
 #[derive(Debug)]
@@ -70,6 +105,11 @@ pub struct Call {
     pub secondary: Vec<String>,
     pub child_pid: Option<u32>,
     pub direct_reaped: bool,
+    pub child_handle_acquired_at: Option<Instant>,
+    pub child_reaped_at: Option<Instant>,
+    pub pipes_drained_at: Option<Instant>,
+    pub stdout_eof: bool,
+    pub stderr_eof: bool,
     pub exit_code: Option<i32>,
     pub stderr: String,
     pub stdout: String,
@@ -90,14 +130,14 @@ fn nonblocking(fd: i32) -> std::io::Result<()> {
     Ok(())
 }
 
-fn read_available<R: Read + ?Sized>(stream: &mut R, bytes: &mut Vec<u8>) -> std::io::Result<()> {
+fn read_available<R: Read + ?Sized>(stream: &mut R, bytes: &mut Vec<u8>) -> std::io::Result<bool> {
     let mut buffer = [0u8; 4096];
     loop {
         match stream.read(&mut buffer) {
-            Ok(0) => return Ok(()),
+            Ok(0) => return Ok(true),
             Ok(n) if bytes.len() + n <= 128 * 1024 => bytes.extend_from_slice(&buffer[..n]),
             Ok(_) => return Err(std::io::Error::other("bounded Claustrophobia output")),
-            Err(error) if error.kind() == std::io::ErrorKind::WouldBlock => return Ok(()),
+            Err(error) if error.kind() == std::io::ErrorKind::WouldBlock => return Ok(false),
             Err(error) => return Err(error),
         }
     }
@@ -116,6 +156,11 @@ fn child_call(
         secondary: Vec::new(),
         child_pid: None,
         direct_reaped: false,
+        child_handle_acquired_at: None,
+        child_reaped_at: None,
+        pipes_drained_at: None,
+        stdout_eof: false,
+        stderr_eof: false,
         exit_code: None,
         stderr: String::new(),
         stdout: String::new(),
@@ -148,6 +193,7 @@ fn child_call(
         }
     };
     call.child_pid = Some(child.id());
+    call.child_handle_acquired_at = Some(Instant::now());
     let mut input = child.stdin.take().unwrap();
     let mut output = child.stdout.take().unwrap();
     let mut errors = child.stderr.take().unwrap();
@@ -196,6 +242,7 @@ fn child_call(
             if let Some(status) = child.try_wait()? {
                 call.exit_code = status.code();
                 call.direct_reaped = true;
+                call.child_reaped_at = Some(Instant::now());
                 if !status.success() {
                     return Err(format!("Claustrophobia child failed:{status}").into());
                 }
@@ -222,19 +269,39 @@ fn child_call(
         match child.wait() {
             Ok(status) => {
                 call.direct_reaped = true;
+                call.child_reaped_at = Some(Instant::now());
                 call.exit_code = status.code();
             }
             Err(error) => call.secondary.push(format!("Claustrophobia wait:{error}")),
         }
     }
-    for (stream, bytes) in [
-        (&mut output as &mut dyn Read, &mut stdout),
-        (&mut errors as &mut dyn Read, &mut stderr),
+    for (stream, bytes, eof) in [
+        (
+            &mut output as &mut dyn Read,
+            &mut stdout,
+            &mut call.stdout_eof,
+        ),
+        (
+            &mut errors as &mut dyn Read,
+            &mut stderr,
+            &mut call.stderr_eof,
+        ),
     ] {
-        if let Err(error) = read_available(stream, bytes) {
-            call.secondary
-                .push(format!("Claustrophobia final drain:{error}"));
+        match read_available(stream, bytes) {
+            Ok(observed) => {
+                *eof = observed;
+                if !observed {
+                    call.secondary
+                        .push("Claustrophobia final pipe has no EOF".into());
+                }
+            }
+            Err(error) => call
+                .secondary
+                .push(format!("Claustrophobia final drain:{error}")),
         }
+    }
+    if call.stdout_eof && call.stderr_eof {
+        call.pipes_drained_at = Some(Instant::now());
     }
     call.stderr = String::from_utf8_lossy(&stderr).into_owned();
     call.stdout = String::from_utf8_lossy(&stdout).into_owned();
@@ -271,6 +338,10 @@ pub fn run(
     if let Some(reply) = &call.reply
         && (reply.upstream != "ae093653e62ad700e201706fa5ed767093d0d68e"
             || reply.entry != "mcts::run_mcts"
+            || reply
+                .execution
+                .as_ref()
+                .is_none_or(|facts| !facts.matches(call.child_pid, core))
             || !legal.contains(&reply.action)
             || reply.simulations != settings.simulations
             || reply.head_calls == 0
@@ -381,5 +452,69 @@ mod tests {
         assert!(call.child_pid.is_none() && call.reply.is_none());
         assert!(!call.direct_reaped);
         assert_eq!(call.inflight_after_drain(), Some(0));
+    }
+
+    #[test]
+    fn claustrophobia16_child_owned_lifecycle_events() {
+        // Actual tiny child/pipe/wait only; payload is explicitly synthetic, NN0.
+        let mut command = Command::new("/bin/sh");
+        command.args([
+            "-c",
+            r#"read -r request; printf '%s' '{"upstream":"synthetic","entry":"synthetic","action":13,"simulations":1,"head_calls":1,"root_value_stm":0.0,"inner_history":"synthetic","head":{}}'"#,
+        ]);
+        let started = Instant::now();
+        let call = child_call(
+            &mut command,
+            b"{}\n",
+            started + Duration::from_secs(2),
+            || false,
+        );
+        let returned = Instant::now();
+        assert!(
+            call.primary.is_none() && call.secondary.is_empty(),
+            "{call:?}"
+        );
+        assert!(call.reply.is_some() && call.direct_reaped);
+        assert_eq!(call.exit_code, Some(0));
+        assert!(call.stdout_eof && call.stderr_eof);
+        let acquired = call.child_handle_acquired_at.unwrap();
+        let reaped = call.child_reaped_at.unwrap();
+        let drained = call.pipes_drained_at.unwrap();
+        assert!(started <= acquired && acquired <= reaped && reaped <= drained);
+        assert!(drained <= returned);
+        assert_eq!(call.inflight_after_drain(), Some(0));
+    }
+
+    #[test]
+    fn claustrophobia16_execution_points_bind_real_handle_metadata() {
+        // Synthetic identity ports; this does not certify any historical process.
+        let point = || ExecutionPoint {
+            pid: 9001,
+            ppid: std::process::id(),
+            tid: 9001,
+            core: 16,
+            affinity: vec![16],
+        };
+        let facts = || Execution {
+            started: point(),
+            returned: point(),
+        };
+        assert!(facts().matches(Some(9001), 16));
+        assert!(!facts().matches(None, 16));
+        assert!(!facts().matches(Some(9002), 16));
+        assert!(!facts().matches(Some(9001), 17));
+        for case in 0..6 {
+            let mut bad = facts();
+            match case {
+                0 => bad.started.pid += 1,
+                1 => bad.returned.ppid += 1,
+                2 => bad.started.tid += 1,
+                3 => bad.returned.core = 17,
+                4 => bad.started.affinity = vec![16, 17],
+                5 => bad.returned.affinity.clear(),
+                _ => unreachable!(),
+            }
+            assert!(!bad.matches(Some(9001), 16));
+        }
     }
 }

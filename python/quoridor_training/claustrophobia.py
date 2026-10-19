@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 import stat
 import sys
+import threading
 
 UPSTREAM = "ae093653e62ad700e201706fa5ed767093d0d68e"
 MAX_REQUEST = 65536
@@ -88,8 +89,27 @@ def checked_result(request, *, action, simulations, calls, value, legal):
     }
 
 
+def execution_point():
+    """Self-observed process/thread/CPU points, not configured or continuous CPU claims."""
+    libc = C.CDLL(None, use_errno=True)
+    libc.sched_getcpu.argtypes = []
+    libc.sched_getcpu.restype = C.c_int
+    core = libc.sched_getcpu()
+    if core < 0:
+        error = C.get_errno()
+        raise OSError(error, os.strerror(error))
+    return {
+        "pid": os.getpid(),
+        "ppid": os.getppid(),
+        "tid": threading.get_native_id(),
+        "core": core,
+        "affinity": sorted(os.sched_getaffinity(0)),
+    }
+
+
 def run(request):
     validate(request)  # Before importing/loading any ML/native asset.
+    execution_started = execution_point()
     import numpy as np
     import torch
 
@@ -191,6 +211,12 @@ def run(request):
         legal=[a for a, enabled in enumerate(output.legal_absolute) if enabled],
     )
     result["head"] = head.facts()
+    try:
+        execution_returned = execution_point()
+    except BaseException as error:
+        error.add_note("available upstream facts, ownership incomplete: " + json.dumps(result))
+        raise
+    result["execution"] = {"started": execution_started, "returned": execution_returned}
     return result
 
 

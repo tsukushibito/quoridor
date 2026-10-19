@@ -7522,6 +7522,8 @@ fn evaluation_claustrophobia_turn(
     // Full ordered opening + committed moves, never unordered history counts.
     let legal = game.context.legal_ids();
     let started = Instant::now();
+    let authority_tid_at_start = unsafe { libc::syscall(libc::SYS_gettid) };
+    let authority_core_at_start = unsafe { libc::sched_getcpu() };
     let deadline = started
         + Duration::from_millis(
             config.engines[engine]
@@ -7594,6 +7596,16 @@ fn evaluation_claustrophobia_turn(
         "outer_rules":"common full-prefix goal-first/threefold; no invented inner history",
         "search_value":null,"node_count":null,"child_pid":call.child_pid,
         "value_stm_definition":"raw root model STM post-tanh; not searched root_mean or selected-child Q",
+        "authority_tid_at_start":authority_tid_at_start,
+        "authority_core_at_start":authority_core_at_start,
+        "authority_tid":unsafe {libc::syscall(libc::SYS_gettid)},
+        "authority_core":unsafe {libc::sched_getcpu()},
+        "child_parent_pid":std::process::id(),
+        "child_execution":call.reply.as_ref().and_then(|r| r.execution.as_ref()),
+        "child_handle_acquired_ns":call.child_handle_acquired_at.map(ns),
+        "child_reaped_ns":call.child_reaped_at.map(ns),
+        "child_pipes_drained_ns":call.pipes_drained_at.map(ns),
+        "child_stdout_eof":call.stdout_eof,"child_stderr_eof":call.stderr_eof,
         "direct_child_reaped":call.direct_reaped,"exit_code":call.exit_code,
         "secondary":call.secondary,"stderr":call.stderr,
         "helper_stdout":call.stdout,

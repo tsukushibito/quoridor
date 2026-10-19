@@ -5177,6 +5177,11 @@ def arena_reference_report(config, files, values=None, expected_build=None):
             row["failure"] = attribution
         rows.append(row)
     manifest = strict(values["native_manifest"])
+    if any(engine["kind"] == "claustrophobia" for engine in config["engines"]):
+        require(
+            type(config.get("management_cpu_core")) is int and config["management_cpu_core"] >= 0,
+            "explicit Claustrophobia main CPU owner required",
+        )
     if config.get("management_cpu_core") is not None:
         execution = manifest["binding"].get("execution", {})
         require(
@@ -5195,6 +5200,77 @@ def arena_reference_report(config, files, values=None, expected_build=None):
                 if not observation["accepted"]:
                     continue
                 counters = observation["counters"]
+                if config["engines"][observation["engine_index"]]["kind"] == "claustrophobia":
+                    child = counters.get("child_pid")
+                    execution = counters.get("child_execution")
+                    require(
+                        type(report["process_id"]) is int
+                        and report["process_id"] > 0
+                        and type(child) is int
+                        and child > 0
+                        and child != report["process_id"]
+                        and type(counters.get("child_parent_pid")) is int
+                        and counters["child_parent_pid"] == report["process_id"]
+                        and type(counters.get("authority_tid_at_start")) is int
+                        and counters["authority_tid_at_start"] == report["process_id"]
+                        and type(counters.get("authority_tid")) is int
+                        and counters["authority_tid"] == report["process_id"]
+                        and type(counters.get("authority_core_at_start")) is int
+                        and counters["authority_core_at_start"] == config["management_cpu_core"]
+                        and type(counters.get("authority_core")) is int
+                        and counters["authority_core"] == config["management_cpu_core"]
+                        and isinstance(execution, dict)
+                        and set(execution) == {"started", "returned"},
+                        "actual Claustrophobia main/direct-child ownership required",
+                    )
+                    core = config["cpu_cores"][observation["engine_index"]]
+                    for point in (execution["started"], execution["returned"]):
+                        require(
+                            isinstance(point, dict)
+                            and set(point) == {"pid", "ppid", "tid", "core", "affinity"}
+                            and all(type(point[k]) is int for k in ("pid", "ppid", "tid", "core"))
+                            and point["pid"] == point["tid"] == child
+                            and point["ppid"] == report["process_id"]
+                            and point["core"] == core
+                            and isinstance(point["affinity"], list)
+                            and len(point["affinity"]) == 1
+                            and type(point["affinity"][0]) is int
+                            and point["affinity"] == [core],
+                            "self-observed Claustrophobia child identity/core points",
+                        )
+                    times = [
+                        observation["caller_started_ns"],
+                        counters.get("child_handle_acquired_ns"),
+                        counters.get("child_reaped_ns"),
+                        counters.get("child_pipes_drained_ns"),
+                        observation["returned_ns"],
+                    ]
+                    require(
+                        all(type(t) is int and t >= 0 for t in times)
+                        and times == sorted(times)
+                        and counters.get("direct_child_reaped") is True
+                        and type(counters.get("exit_code")) is int
+                        and counters["exit_code"] == 0
+                        and counters.get("secondary") == []
+                        and counters.get("child_stdout_eof") is True
+                        and counters.get("child_stderr_eof") is True
+                        and type(counters.get("inflight_after_drain")) is int
+                        and counters["inflight_after_drain"] == 0
+                        and type(counters.get("authority_receipt_ns")) is int
+                        and counters["authority_receipt_ns"] == observation["returned_ns"]
+                        and type(counters.get("drain_finished_ns")) is int
+                        and counters["drain_finished_ns"] == observation["returned_ns"]
+                        and counters.get("initialization_in_clock") is True
+                        and counters.get("fresh_search_and_model_per_turn") is True
+                        and observation["stop"] == "completed_upstream_call"
+                        and observation["completed_depth"] is None
+                        and "last_completed_iteration_ns" in observation
+                        and observation["last_completed_iteration_ns"] is None
+                        and "completed_iteration_counters" in observation
+                        and observation["completed_iteration_counters"] is None,
+                        "Claustrophobia whole-caller completion/reap/drain, not depth callbacks",
+                    )
+                    continue
                 require(
                     counters.get("authority_tid") == report["process_id"]
                     and counters.get("authority_core") == config["management_cpu_core"]
