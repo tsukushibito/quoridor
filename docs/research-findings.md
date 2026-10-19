@@ -2670,3 +2670,9 @@ first32の実行は全32 operations・512局/256完全pair/256 tuning family・U
 元52のtie適用機会・実順位変更だけでは、より良い手を先へ置いたかは分からない。同じHigh17/20の新taskで、保存52/旧384 summary/固定26prefix・6series・stock層を先に照合する。TT・保護手・signed history層、同点群内shadow順位と探索全順位を分け、後の完成探索が選んだ手の上位1/3/5・移動量・駒/壁・残壁層と条件/分母/UNKNOWNを示す。深い選択探索はoracleではなく、異木・warmTT/history・打切り偏り・未探索枝を因果/見落とし率へ変換しない。必要fieldが無ければ欠落を先に明示し、既存入口による最大26calls/26M・追加対局0の最小観測だけを結果前固定する。実新観測はまだ未配分/未入場。[範囲・実資源・完成条件](../.artifacts/research-team/integration324/cedar-ordering-quality-v1/task.md)。
 
 将来の追加LMR広域比較は、順位品質診断→根拠があれば一ordering候補の有限採否→ordering/評価器固定→必要なLMR再調整の具体化、の順とする。確定した元1920/final512/RETAIN_BASELINEは再開しない。具体候補なしならControlと既存LMR結果を利用し、policy学習待ちで全作業を止めない。18.2のjoint学習接続とこのsaved診断は独立に継続し、全親close/人間返信を入口にしない。
+
+### 固定prefixからjoint学習fixtureへの実software接続（324.18.2、2026-10-19）
+
+固定4prefixを既存SigmaContext・trueLR・model_keyでcore座標へ変換するconfigured prefix_fixture入口を統合した。T0,2/V1,3を固定し、同一/LRのcross-splitを拒否、self-LRは補充せずmultiplicityを保持する。限定source確認の後、新Rust2件・NumPy publisher1件が各1PASS、affected data Clippyとrelease cdylib生成もPASS。実compiler-artifactに一致するprivate library 4e2c4081/985712Bはprefix_keysと既存sigma_inputs/policy_masks/nnue_identityの4公開symbolを持つ。元成功済みRust3やmetadata定義は再演していない。[実software manifest](../.artifacts/research-team/integration324/nnue-policy-value-training-v1/prefix-software-v1/collection-v1/software-manifest.json)、[実停止と保持点](../.artifacts/research-team/integration324/nnue-policy-value-training-v1/prefix-software-v1/collection-v1/completion-and-STOP.json)。
+
+これはsoftware接続の確認であり、真正fixture生成・教師・optimizer・checkpoint/restart/exportの機能smokeは未入場。実class manifestと現model statをnormal入口で結び、既に配分した32MiB内の最大8 orientations/16教師attempts/TOTAL2更新だけを一度実施する。本学習・全件policy保存・棋力比較は未発行。今回のsoftware parentは25.71207296801731秒を一度計上し、nested時間を加算しない。affected target/private copyを一度確認した既知cover49,794,343,936B、decimal50GBまで205,656,064Bで、後続tail/global実量/全費用UNKNOWNを保つ。

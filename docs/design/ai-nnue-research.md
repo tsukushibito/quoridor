@@ -205,3 +205,5 @@ first32中心を固定した8対照は256局/128完全pair、全normal manifest/
 2026-10-19の人間直接指示により、今後の追加LMR広域比較は、現行orderingの小規模順位品質診断と具体候補があればその有限採否を先に決めてから具体化する。終了した元1920/final512/249勝263敗/RETAIN_BASELINEは確定保存し再開しない。policy導入後も変更がLMRへ及ぼす影響を見て必要範囲だけ調整し、毎回全campaignを再演しない。18.2の接続環境は並行継続する。[順位品質診断の条件](lightweight-move-ordering-v1.md#現行順位の質を確認する有限診断324212026-10-19人間直接指示)。
 
 18.2の固定4prefix入口は、既存native SigmaContext・trueLR・model_keyとPAIR37 publisherを再用するconfigured `prefix_fixture` としてMainへ統合した。T0,2/V1,3を固定し、同一/LRのcross-splitを拒否し、self-LRは補充しない。限定source確認はSOURCE_CLEARであり、新Rust2・publisher1・新prefix symbolを含むcdylibはこれから実確認する。旧metadata成功や旧Rust3は再演しない。機能smokeは最大8 orientations/16教師attempts/TOTAL2更新で未入場、本学習・全件教師は未発行のままである。[固定sourceと限定確認](../../.artifacts/research-team/integration324/nnue-policy-value-training-v1/prefix-software-v1/source-adoption.json)。
+
+固定prefix入口の新Rust2・publisher1・affected Clippy・新cdylibが実PASSとなり、prefix_keysを含む4公開symbolと実STOPを確認した。旧成功定義の再演はない。これにより元c27に無かった真正fixture入口のsoftware依存を解決したが、actual class manifest・現model stat・normal Experimentと最大16教師/TOTAL2更新の機能smokeは未完である。[software結果と範囲](../research-findings.md#固定prefixからjoint学習fixtureへの実software接続3241822026-10-19)。
