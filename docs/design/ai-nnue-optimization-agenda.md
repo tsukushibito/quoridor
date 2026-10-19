@@ -228,3 +228,11 @@ ds=1 tailは標準長さ2壁・N>=3・双方stock0/own-goal reachableの手番�
 次の私有候補はfinite-value検査と既存ReLU packingの走査融合である。比較の両版で直接ResidualEvaluatorだけにsession所有のhead入力bufferを再用し、generic evaluator hook、呼出ごとのgeometry・距離scratch・counterは維持する。headの正規化以降・FP32演算順・公開入力の拒否とエラー優先順位を変えない。[実在する共通ownerと合成差分の限定静的確認](../../.worktree/assets/perf/cedar-evaluation-preparation-review-v1/validation-candidate-v1/common-owner-v2/completion.json)は指摘なしで完了したが、新5定義のcompile/testと二つの実image、効果確認は未実行である。
 
 固定比較は元433の二familyからの同じ連続root、ABBA計64calls/64M nodes/16sessions/perf RAW0。主要量は一度初期化した各sessionの連続Search合計であり、setup/root準備/dropを加えて利益を作らない。非時計仕事・値・手・PV・履歴の一致と、両候補passが両baseline passより短く対応series中央値も悪化しないことを有限の保持条件とした。不一致・不足・条件未達は追加反復で救済しない。[固定範囲・採否と未実行依存](../../.artifacts/research-team/integration324/cedar-validation-preparation-v1/common-static-intake-v2/acceptance.json)を使い、LMRの実対局を止めて重いsoftware/build/A-Bを割り込ませない。静的確認を速度利益や最適化採用に読み替えない。
+
+### Cedar value-only後段の詳細計測と連続Search（324.20、2026-10-19人間直接指示）
+
+新taskは旧13の再開ではない。現行source・生成コードと既存profileから、検査/呼出準備、二視点ReLU/packing、距離正規化/range、SIMD dispatch/hidden32内積、出力集約/finite/tanhの不足部分だけを有限に切り分ける。旧320samplesのowner10%＋AVX2 dot7.5%は重複しないself内訳で、inline費や完全ancestorは未確定である。既存scratch、借用入力、距離map、差分、FT32の256Bcopyを未実装案にせず、撤去済みfinite/ReLU融合や旧12/64の成功計測を再演しない。
+
+最初の有望な最小候補一つだけを、固定の真正fullprefix時系列・上/中/低残壁層、同Cedar重み/評価数学/CPU条件、arm内のsession・TT・ordering・scratch再用で確かめる。cold初期化/dropはSearch本体と分離する。初期の有限上限案は、26入力のplain/profile/plain診断78callsと、balanced ABBAの104calls、D8/1M nodes/timeNoneで計182calls/182M nodesまで。対応namespace/reset・入力・順序・実行body・集約/層/揺れの採否を結果前の一つのconfig/manifestへ固定し、source適合のための範囲内精緻化は数値前だけに行う。診断overheadをplainへ混ぜず、毎leaf時計・汎用observer・追加校正や結果後の反復を増やさない。評価bits/action/PV/depth/非時計work/完全history/親復元と公開拒否・FP32順序を保ち、kernel差を全探索利益や棋力・既定昇格へ置換しない。改善不支持/未確定でも完了できる。
+
+LMRを優先し、私有source/設定の照合だけを並行する。perf/build/大きなRAW解析/新Searchは各LMR batchの実native＋collection STOPに配分し、全調整や親close/人間ACKは待たない。通常source/test/build/reviewへ先行micro保存枠を要求せず、有限計測RAWだけ実容量・50GBへ結ぶ。実験固有条件は[task契約](../../.artifacts/research-team/integration324/cedar-value-head-detail-v1/task.md)とconfigへ置き、最終観測は[研究知見](../research-findings.md)に統合する。旧13/RAW/FAILED/費UNKNOWN・USERPAUSE323/342.17・封印・model/default/foreignを維持する。
