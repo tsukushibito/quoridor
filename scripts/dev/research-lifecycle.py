@@ -982,7 +982,7 @@ def arena_cohort_lifetime(spec, *, outer_runtime=None):
             continue  # A later independent submit is not a barrier or a reserved process.
         actual_ref = bound(runtime / "config.json")[0]
         actual = document(actual_ref)
-        state = document(bound(state_path)[0])
+        state = json.loads(bound(state_path)[1])
         require(
             actual == expected
             and state["config_sha256"] == sha(json.dumps(actual, sort_keys=True).encode())
@@ -1029,7 +1029,7 @@ def arena_cohort_lifetime(spec, *, outer_runtime=None):
             inner_state_path = phase / "runtime/state.json"
             if not inner_state_path.exists():
                 continue
-            inner_state = document(bound(inner_state_path)[0])
+            inner_state = json.loads(bound(inner_state_path)[1])
             child = inner_state.get("child")
             if child is None or not process.alive(child):
                 continue
@@ -1095,7 +1095,7 @@ def arena_cohort_lifetime(spec, *, outer_runtime=None):
         runtime = Path(parent_runtime)
         if (runtime / "state.json").exists():
             cfg = document(bound(runtime / "config.json")[0])
-            state = document(bound(runtime / "state.json")[0])
+            state = json.loads(bound(runtime / "state.json")[1])
             require(
                 cfg == parent_cfg
                 and state["config_sha256"] == sha(json.dumps(cfg, sort_keys=True).encode()),
@@ -1110,7 +1110,7 @@ def arena_cohort_lifetime(spec, *, outer_runtime=None):
     if outer_runtime is None:
         require(member["lane"] in origins, "own actual original outer submission required")
     else:
-        state = document(bound(Path(outer_runtime) / "state.json")[0])
+        state = json.loads(bound(Path(outer_runtime) / "state.json")[1])
         require(
             state["supervisor"] == process.identity(process.process_info(os.getpid())),
             "resource owner is the exact declared outer supervisor",
@@ -1304,7 +1304,7 @@ def arena_cohort_peer(spec, pid):
                 )
                 cfg = document(origin["config"])
                 runtime = phase / "runtime"
-                state = document(bound(runtime / "state.json")[0])
+                state = json.loads(bound(runtime / "state.json")[1])
                 require(
                     origin["runtime"] == str(runtime)
                     and origin["config"] == bound(runtime / "config.json")[0]
@@ -1391,7 +1391,7 @@ def arena_cohort_progress(spec):
         outer = Path(member["job_runtime"]) / "result.json"
         outer_failure = None
         if outer.exists():
-            original_state = document(bound(Path(member["job_runtime"]) / "state.json")[0])
+            original_state = json.loads(bound(Path(member["job_runtime"]) / "state.json")[1])
             outer_result = document(bound(outer)[0])
             require(
                 original_state["job_id"] == outer_result["job_id"],
