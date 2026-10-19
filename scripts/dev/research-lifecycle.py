@@ -5338,7 +5338,10 @@ def arena_reference_report(config, files, values=None, expected_build=None):
     # Config serde emits these defaults even when the declared field is omitted.
     # Explicit values (including null/conflicts) remain subject to full equality.
     for field, default in {
+        "cycle": None,
         "deadline_unix_ms": 0,
+        "train_games": None,
+        "validation_games": None,
         "mcts_max_bytes": 268435456,
         "mcts_max_nodes": 200000,
         "pause_file": None,

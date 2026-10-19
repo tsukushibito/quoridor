@@ -92,6 +92,9 @@ class ArenaPlanTests(unittest.TestCase):
         config = {
             "ruleset": "standard_2p_threefold",
             "run_id": "fake-generic-entry",
+            "cycle": None,
+            "train_games": None,
+            "validation_games": None,
             "games": len(slots),
             "output": str(self.root / "science"),
             "workers": 1,

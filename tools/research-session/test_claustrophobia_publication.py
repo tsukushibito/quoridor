@@ -44,6 +44,9 @@ class ClaustrophobiaPublicationTests(unittest.TestCase):
         self.config = {
             "output": str(self.root),
             "run_id": "synthetic-C-publication",
+            "cycle": None,
+            "train_games": None,
+            "validation_games": None,
             "games": 2,
             "max_plies": 1,
             "management_cpu_core": 18,
