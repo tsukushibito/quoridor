@@ -600,10 +600,14 @@ outer6496.344065秒を一度、parallel/nested wall非加算。両6/7 consumer�
 
 ## Cedar：履歴同点群だけの安い二次採点（324.14、2026-10-19、人間直接依頼）
 
-「その安いオーダリングも検証して」という直接依頼により、現行Controlを対照に、一候補の実装から連続探索時間・同時間棋力の有限比較と保存解析まで進める。これはSPSAの将来計画への追記や、旧376の全候補への整数項加算の再評価ではない。TT/PV・合法即goal・killer等のtierと、通常履歴＋continuationの完全な合成動的scoreを保ち、その両方が同点の複数手だけへ小さい二次scoreを与える。最後は既存ActionIDとし、履歴全0を含め、非同点や上位tierを追い越させない。具体式は現sourceの費用から一つだけ結果前に固定する。
+「その安いオーダリングも検証して」という直接依頼により、現行Controlを対照に、一候補の実装から連続探索時間・同時間棋力の有限比較と保存解析まで進める。これはSPSAの将来計画への追記や、旧376の全候補への整数項加算の再評価ではない。TT/PV・合法即goal・killer等のtierと、通常履歴＋continuationの完全な合成動的scoreを保ち、その両方が同点の複数手だけへ小さい二次scoreを与える。最後は既存ActionIDとし、履歴全0を含め、非同点や上位tierを追い越させない。結果前の一候補を`local_goal_edge`に固定した。pawnはgoal行へ近づく距離差の4倍、水平壁は相手の直進goal辺を遮る数と自分の辺を遮る数の差の2倍、垂直壁は0とする。実際の比較でtierと完全なsigned履歴が同点の異なる手にだけ適用し、親の3byteを凍結して既存key比較へ渡す。反復される整数式やOptionの費用は未測定である。
 
 採点には正規の既存親情報または局所整数式を使う。新BFS/map、子make、追加NNUE、大きなscratch/cache、採点用の全map/全壁走査を追加しない。親mapが既に安く安全に読める場合だけ参照し、取得を強制しない。TT即cutoffや同点群なしに重い準備を先払いせず、共通key生成・最優先1手/tail一度整列・子後のkey freezeを維持する。typed設定、実効namespace/resetと記録、公開入力拒否、LMR保護、合法集合、停止/Err/親復元は既存ownerへ置き、省略時の現行動作を保つ。
 
 時間評価は真正な時系列rootと現役sessionを使い、両条件で初期化・TT・履歴・scratchの実再用範囲をそろえる。主時計はobserver OFFの連続Search合計で、採点/key費を含め、setup/root準備/drop/journal/wholeは別に示す。並び替えとLMRによりnodes・木・value・PV・深さは変わり得るため、候補対対照の全work一致や同仕事speedupを資格にしない。棋力は同Cedar・固定LMR/係数・path_tail/終盤条件・TT/PVS・同100ms/5ms等のfamily両色とし、時間用集合/式選定と区別する。局数、calls/nodes、seed/統計/停止、保存wholeは期待差・不確実性・全費から結果前に有限化し、512固定、旧枠借用、勝つまで延長や成功補充はしない。
+
+[有限比較の解決設定](../../.artifacts/research-team/integration324/cedar-history-tie-ordering-v1/protocol-resolution-v1/resolution.json)は、433の真正32時系列rootをOFF/ON/ON/OFFで実行する128calls・最大128Mnodes・16sessionsと、432の既存bookの64family両色128局・4operation各250Mnodes/計1Gを別枠にした。両条件は同Cedar・Control・depth_rank/path_tail ON・TT1Mとし、時間側はD8/1M/timeなし、棋力側は100ms/5ms・D64/1M/最大200ply・strict_forfeitで固定する。追加warmup/perf/補充/sweepは0。時間の有限支持は候補2passの最大合計が対照2passの最小合計より小さく、各seriesの候補中央値も対照以下という規則とする。棋力はfamily平均・PCG64/10000/linear95/seed3241420261019を一度だけ用い、下限>.5でも当book/持時間での支持に限る。64familyは小差を確定するには粗い比較であり、未実施局やUNKNOWNを架空の敗北へせずplanned128の範囲も別記する。時間が中立/悪化でも、真正な不成立・資源・取消がなければ棋力側を予定どおり行う。
+
+数値入場は未許可ではなく、具体的なsource/softwareと実資源の成立待ちである。旧432露出と時間集合対棋力集合のcanonical左右反転・prefix延長の対応は実metadataで解決し、直接prefix不一致だけを独立性の根拠にしない。head入力のsession内再用は、既存13のcommon-owner-v2だけを両条件へ同一に取り込む方向とし、実Main反映・新common境界のsoftware確認前に再用済みと呼ばない。13のfusionは混ぜず、EvalScratch/WallDistanceのgeometry・counter等はper-invocationのまま明記する。私有source-v5の新5定義は未compile/未実行である。384MiBのwhole案は未適用で、LMRの実停止後に終了した出力forecastと実保持を整理し、新image・serializer・正常copyの実量と50GB内のcoverを通常解決する。LMRの未使用node/UNKNOWNや旧費用を新比較へ貸与/返金しない。
 
 現在は関連する既存Highを再用した私有source/設定準備であり、数値入場・software PASS・効果は未確認。Main/Git/index/Cargoと正本文書は324だけが書く。LMRの入力/設定/通知先と既存784局/12.25Gを変えず、軽い準備は独立に進め、重いbuild/test/RAW・時間評価は実native+collection STOPと実資源が成立する自然境界へ置く。LMRや本taskのparent close、人間/RootのACKを別条件にしない。必要なordering/LMR/TTの固定差分と重要な結果解釈だけ関連確認し、結果に応じ最小変更を保持/撤去する。状態・所有はBeads324.14/14.1、具体配分は[契約](../../.artifacts/research-team/integration324/cedar-history-tie-ordering-v1/task.md)へ置く。全pause/seals/models/defaults/foreign/RAWFAILED/費UNKNOWN/50GBと取消済み相談actual8追跡・通知を保つ。

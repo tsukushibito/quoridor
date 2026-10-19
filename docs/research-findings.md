@@ -2520,3 +2520,7 @@ R1修復版は、一回の観測で既存identity検査を通った全processを
 orderingで木/TT/LMR/value/PV/workが変わるため、全work一致や同仕事speedupを要求しない。初期化とTT/履歴/scratchの実再用をそろえた連続Search合計を主時計、setup/drop/wholeを別にし、棋力は同Cedar・固定探索条件・同100ms/5ms等のfamily両色で評価する。具体のcall/game/node/seed/統計/停止/保存枠は結果前に有限化する。現在は既存Highへの私有source/設定準備の配分であり、数値START・software/改善/棋力の合格は未確認。[現行の候補境界と評価方法](design/lightweight-move-ordering-v1.md#cedar履歴同点群だけの安い二次採点324142026-10-19人間直接依頼)。
 
 LMRの修復・残り確認を優先し、既存入力/設定/通知先・784局/12.25Gを変更/借用しない。軽準備は独立、重いbuild/test/RAW/実時計は実native+collection STOPと資源の自然境界へ調整し、他parent closeやACKを入口にしない。新しい常設役/監視を作らず、Main/Git/Cargo/正本文書は324のみが所有する。USERPAUSE/seals/models/weights/defaults/foreign/原RAWFAILEDと費UNKNOWN・50GB、取消済み相談のactual8追跡・通知を保持する。
+
+同じHighは`local_goal_edge`一候補の私有source-v5を固定した。完全なsigned履歴とtierが同点の異なる手に限り、pawnのgoal行進捗×4、水平壁の相手直進辺遮断−自分遮断×2、垂直壁0を比較し、最後は旧ActionIDとする。親3byteと既存keyを凍結し、新map/BFS/子make/NNUE/追加group走査・sortはない。反復される整数式/Optionの費用や棋力効果は未測定で、新5定義も未compile/未実行である。[固定sourceと検証案](../.worktree/assets/perf/cedar-history-tie-ordering-v1/completion-v1.json)。
+
+Rootは結果前の有限方法を、真正32rootのOFF/ON/ON/OFF・128calls/128M・16sessionsと、別の64family両色128局・4×250M/計1Gの同100ms/5ms比較に解決した。時間はSearch合計と実行順/series差、棋力はfamily単位の一度のPCG64/10000区間を用い、仕事量変化を同仕事speedupへ変えない。旧book露出とcanonical左右反転/prefix延長の分離、両条件同一の具体head scratch owner、実source/software/image/holdingは数値入場前の未解決な実依存として残す。時間が悪くても結果を理由に棋力側を省かず、追加warmup/補充/sweep・旧LMR/13枠の転用は0。384MiB whole案は未適用、LMR優先で現在の217局用sourceの関連確認・正常ソフト検証を先行する。[解決した比較方法と限界](../.artifacts/research-team/integration324/cedar-history-tie-ordering-v1/protocol-resolution-v1/resolution.json)。
