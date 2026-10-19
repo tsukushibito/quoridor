@@ -238,3 +238,5 @@ ds=1 tailは標準長さ2壁・N>=3・双方stock0/own-goal reachableの手番�
 LMRを優先し、私有source/設定の照合だけを並行する。perf/build/大きなRAW解析/新Searchは各LMR batchの実native＋collection STOPに配分し、全調整や親close/人間ACKは待たない。通常source/test/build/reviewへ先行micro保存枠を要求せず、有限計測RAWだけ実容量・50GBへ結ぶ。実験固有条件は[task契約](../../.artifacts/research-team/integration324/cedar-value-head-detail-v1/task.md)とconfigへ置き、最終観測は[研究知見](../research-findings.md)に統合する。旧13/RAW/FAILED/費UNKNOWN・USERPAUSE323/342.17・封印・model/default/foreignを維持する。
 
 同日の数値開始前に、暫定D8は同じ1M/call・182calls/182M上限のまま既存depth64安全上限へ精緻化した。低い深さで早期終了して旧短測定の弱さを繰り返さないためであり、時間を見た追加反復ではない。元D8案を保持し、新しいconfigへ理由・順序・条件を固定する。容易な局面の低仕事量や不足samplesはそのまま未確定とし、D64完遂を主張せず、補充もしない。[結果前の精緻化](../../.artifacts/research-team/integration324/cedar-value-head-detail-v1/finite-depth-resolution-before-results.md)。
+
+324.20の元78探索による新診断は完了し、全対応入力の非時計仕事・値・手・PV・履歴復元が一致した。新head inclusive24.10%/leaf9.91%/AVX dot8.50%は包含を足し重ねない。完全ancestor等は未確定で、除去可能時間ではない。一候補は現Residual行参照準備のj loop外移動だけとし、関連source確認・新Rust1・真正candidate Build後、元104 ABBAの連続Searchで採否を判定する。短期LMRの入口をこの候補待ちにはせず、重いbuild/effectは実native＋通常回収STOPの別窓で実施する。[保存診断と限界](../research-findings.md#cedar-head詳細診断と行参照準備の未測定候補324202026-10-19)。

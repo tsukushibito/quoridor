@@ -7812,11 +7812,135 @@ def parameter_coordinate_seed(control, recipe):
     return integers
 
 
-def parameter_state(recipe, feedback, coordinate_seed=None):
+def parameter_continuation(control, recipe):
+    """Bind accepted prefix/choice inputs; no old PASS or local feedback is fabricated."""
+    if "continuation" not in control:
+        return None
+    declared = control["continuation"]
+    require(
+        "coordinate_seed" not in control
+        and type(declared) is dict
+        and set(declared)
+        == {
+            "center",
+            "acceptance",
+            "selection",
+            "selection_acceptance",
+            "update_range",
+            "operation_offset",
+        },
+        "typed accepted continuation inputs",
+    )
+    center = document(declared["center"])
+    acceptance = document(declared["acceptance"])
+    evidence = acceptance["evidence"]
+    require(
+        evidence["post_update32_center"] == declared["center"],
+        "accepted exact prefix center",
+    )
+    result = document(evidence["result"])
+    stop = document(evidence["STOP"])
+    prefix = center["normal_operations"]
+    update_range = declared["update_range"]
+    offset = declared["operation_offset"]
+    require(
+        type(prefix) is int
+        and type(update_range) is list
+        and len(update_range) == 2
+        and all(type(v) is int for v in update_range)
+        and 0 < prefix == update_range[0] < update_range[1] <= len(recipe["updates"])
+        and type(offset) is int
+        and offset >= 4 * len(recipe["integer_stages"]) + prefix,
+        "bounded configured update and operation offsets",
+    )
+    require(
+        result["normal_operations"] == prefix
+        and len(result["operations"]) == prefix
+        and all(
+            row["normal_data_status"] == "PASS" and row["UNKNOWN"] == 0
+            for row in result["operations"]
+        )
+        and result["UNKNOWN"] == center["UNKNOWN"] == 0
+        and result["center"] == declared["center"]
+        and result["normal_feedback"] == center["feedback"]
+        and result["normal_feedback_selections"] == center["selections"]
+        and result["qualified_games"] == center["physical_games"] == 16 * prefix
+        and result["qualified_pairs"] == center["complete_pairs"] == 8 * prefix
+        and stop["result"] == evidence["result"]
+        and stop["center"] == declared["center"]
+        and stop["directwait_reaped"] is True
+        and stop["handles_closed"] is True
+        and stop["remaining"] == stop["TMP_remaining"] == stop["standing_source_leases"] == [],
+        "accepted complete normal prefix and actual collection STOP",
+    )
+    prefix_settings = document(center["exact_settings"])
+    require(
+        prefix_settings["kind"] == "sequence"
+        and len(prefix_settings["runs"]) == prefix
+        and prefix_settings["parameter_tuning"]["recipe"] == control["recipe"]
+        and prefix_settings["parameter_tuning"]["prior"] == []
+        and "continuation" not in prefix_settings["parameter_tuning"]
+        and center["base"] == recipe["baseline"]
+        and center["scales"] == recipe["continuous"]["scale"]
+        and center["old64_terminal"] is False
+        and center["best_interim_selection"] is False,
+        "same original normalization and complete original prefix, not a restarted trial",
+    )
+    vector = center["center"]
+    require(
+        type(vector) is list
+        and len(vector) == len(recipe["continuous"]["coordinates"])
+        and all(
+            type(value) in (int, float)
+            and math.isfinite(value)
+            and abs(value) <= recipe["continuous"]["center_box"]
+            for value in vector
+        ),
+        "finite accepted center in original box",
+    )
+    choice = document(declared["selection"])
+    choice_acceptance = document(declared["selection_acceptance"])
+    selected = choice["selected"]
+    require(
+        choice["status"] == "PASS"
+        and choice["UNKNOWN"] == 0
+        and choice["center"] == declared["center"]
+        and choice_acceptance["selection"] == declared["selection"]
+        and choice_acceptance["selected"] == selected
+        and resolved_lmr_parameters(dict(lmr_parameters=selected), "control") == selected
+        and selected["max_extra"] == center["integers"]["max_extra"],
+        "accepted complete wide choice with fixed cap",
+    )
+    for key, scale, value in zip(
+        recipe["continuous"]["coordinates"],
+        recipe["continuous"]["scale"],
+        vector,
+        strict=True,
+    ):
+        expected = recipe["baseline"][key] + scale * value
+        require(
+            selected[key] == center["physical_parameters"][key] == expected,
+            "wide choice keeps exact original prefix coefficients without rebase",
+        )
+    return dict(
+        center=list(vector),
+        integers={key: selected[key] for key in ("min_depth", "min_rank", "max_extra")},
+        update_range=list(update_range),
+        operation_offset=offset,
+    )
+
+
+def parameter_state(recipe, feedback, coordinate_seed=None, continuation=None):
     """Resolve a complete stage prefix; accepted integer seeds never stand in for feedback."""
     operations = parameter_schedule(recipe)
     offset = 0
-    if coordinate_seed is not None:
+    if continuation is not None:
+        require(coordinate_seed is None, "one configured continuation seed")
+        begin, end = continuation["update_range"]
+        start = 4 * len(recipe["integer_stages"])
+        operations = operations[start + begin : start + end]
+        offset = continuation["operation_offset"]
+    elif coordinate_seed is not None:
         keys = [stage["coordinate"] for stage in recipe["integer_stages"]]
         require(
             type(coordinate_seed) is dict
@@ -7844,6 +7968,9 @@ def parameter_state(recipe, feedback, coordinate_seed=None):
         integers.update(coordinate_seed)
     control = recipe["continuous"]
     center = list(control["initial_center"])
+    if continuation is not None:
+        integers.update(continuation["integers"])
+        center = list(continuation["center"])
     trace = []
 
     def physical(vector):
@@ -7928,15 +8055,9 @@ def parameter_state(recipe, feedback, coordinate_seed=None):
                 )
         else:
             update = recipe["updates"][operation["stage"]]
-            gradient = [
-                (entry["point"] - 0.5) / (update["c"] * delta)
-                for delta in update["delta"]
-            ]
+            gradient = [(entry["point"] - 0.5) / (update["c"] * delta) for delta in update["delta"]]
             raw = [update["a"] * g for g in gradient]
-            step = [
-                max(-control["step_clip"], min(control["step_clip"], value))
-                for value in raw
-            ]
+            step = [max(-control["step_clip"], min(control["step_clip"], value)) for value in raw]
             after = [
                 max(-control["center_box"], min(control["center_box"], x + change))
                 for x, change in zip(center, step, strict=True)
@@ -7989,27 +8110,38 @@ def parameter_history(settings, index):
     require(
         type(control) is dict
         and set(control)
-        in ({"recipe", "prior"}, {"recipe", "prior", "coordinate_seed"}),
+        in (
+            {"recipe", "prior"},
+            {"recipe", "prior", "coordinate_seed"},
+            {"recipe", "prior", "continuation"},
+        ),
         "typed parameter control",
     )
     recipe = document(control["recipe"])
     operations = parameter_schedule(recipe)
     seed = parameter_coordinate_seed(control, recipe)
     offset = 4 * len(recipe["integer_stages"]) if seed is not None else 0
+    continuation = parameter_continuation(control, recipe)
+    available = len(operations) - offset
+    if continuation is not None:
+        begin, end = continuation["update_range"]
+        start = 4 * len(recipe["integer_stages"])
+        operations = operations[start + begin : start + end]
+        available = len(operations)
+        offset = continuation["operation_offset"]
     prior = control["prior"]
     require(
         isinstance(prior, list)
         and type(index) is int
         and 0 <= index <= len(settings["runs"])
-        and len(prior) + len(settings["runs"]) <= len(operations) - offset,
+        and len(prior) + len(settings["runs"]) <= available,
         "bounded normal parameter sequence",
     )
     references, selections = [], []
     for position, declared in enumerate(prior):
         require(
             type(declared) is dict
-            and set(declared)
-            == {"operation", "manifest", "settings", "selection_index"}
+            and set(declared) == {"operation", "manifest", "settings", "selection_index"}
             and type(declared["operation"]) is int
             and declared["operation"] == offset + position,
             "declared original feedback operation",
@@ -8018,9 +8150,7 @@ def parameter_history(settings, index):
         selections.append((declared["settings"], declared["selection_index"]))
     for local in range(index):
         references.append(
-            bound(
-                Path(settings["output"]) / f"run-{local:03d}/operation/manifest.json"
-            )[0]
+            bound(Path(settings["output"]) / f"run-{local:03d}/operation/manifest.json")[0]
         )
         selections.append((None, local))
     require(
@@ -8040,7 +8170,7 @@ def parameter_history(settings, index):
             "normal completed parameter feedback",
         )
         data = manifest["data"]
-        operation = operations[offset + position]
+        operation = operations[position if continuation is not None else offset + position]
         require(
             data["status"] == "PASS"
             and data["errors"] == []
@@ -8051,9 +8181,7 @@ def parameter_history(settings, index):
         # A normal PASS is necessary, but it must be the declared original RUN.
         expected_settings_ref, selected_index = selections[position]
         expected_settings = (
-            settings
-            if expected_settings_ref is None
-            else document(expected_settings_ref)
+            settings if expected_settings_ref is None else document(expected_settings_ref)
         )
         require(
             type(selected_index) is int
@@ -8064,10 +8192,7 @@ def parameter_history(settings, index):
         intent = document(manifest["intent"])
         require(
             intent["selection_index"] == selected_index
-            and (
-                expected_settings_ref is None
-                or intent["settings"] == expected_settings_ref
-            )
+            and (expected_settings_ref is None or intent["settings"] == expected_settings_ref)
             and document(intent["settings"]) == expected_settings
             and manifest["experiment"] == intent["experiment"]
             and reference["path"]
@@ -8086,9 +8211,7 @@ def parameter_history(settings, index):
             len(config["engines"]) == len(expected_config["engines"]) == 2,
             "two original feedback engines",
         )
-        for original, actual in zip(
-            expected_config["engines"], config["engines"], strict=True
-        ):
+        for original, actual in zip(expected_config["engines"], config["engines"], strict=True):
             original["lmr_parameters"] = actual["lmr_parameters"]
         require(
             config == expected_config,
@@ -8097,9 +8220,9 @@ def parameter_history(settings, index):
         plan = document(template["approved_plan"])
         batch = plan["batches"][original_experiment["batch"]]
         batch["config"] = experiment["config"]
-        next(m for m in plan["matchups"] if m["id"] == batch["matchup"])["engines"] = (
-            config["engines"]
-        )
+        next(m for m in plan["matchups"] if m["id"] == batch["matchup"])["engines"] = config[
+            "engines"
+        ]
         require(
             document(intent["approved_plan"]) == plan,
             "feedback preserves original Plan and selected batch",
@@ -8109,8 +8232,7 @@ def parameter_history(settings, index):
             expected_experiment[field] = experiment[field]
         require(
             experiment == expected_experiment
-            and experiment["canonical_plan_sha256"]
-            == intent["approved_plan"]["sha256"],
+            and experiment["canonical_plan_sha256"] == intent["approved_plan"]["sha256"],
             "feedback preserves original Experiment outside normal typed derivation",
         )
         if "parameter_tuning" not in expected_settings:
@@ -8123,9 +8245,7 @@ def parameter_history(settings, index):
             "feedback config cannot be replayed",
         )
         configs.add(experiment["config"]["sha256"])
-        files = [
-            ref for ref in data["files"] if Path(ref["path"]).name == "result.json"
-        ]
+        files = [ref for ref in data["files"] if Path(ref["path"]).name == "result.json"]
         require(len(files) == 1, "one compact normal native result")
         native = document(files[0])["report"]
         summary = native["arena_summary"]
@@ -8144,9 +8264,7 @@ def parameter_history(settings, index):
         )
         selected = operation["selected"]
         actual_families = [
-            config["arena"]["book"]["openings"][i // 2]["reference"]["settings"][
-                "family_id"
-            ]
+            config["arena"]["book"]["openings"][i // 2]["reference"]["settings"]["family_id"]
             for i in selected[::2]
         ]
         require(
@@ -8161,8 +8279,7 @@ def parameter_history(settings, index):
         require(
             point == native["score"]
             and len(summary["pairs"]) == len(actual_families)
-            and point
-            == sum(p["score"] for p in summary["pairs"]) / len(actual_families),
+            and point == sum(p["score"] for p in summary["pairs"]) / len(actual_families),
             "normal complete-family point",
         )
         budget = native["pump"]["arena_node_budget"]
@@ -8170,11 +8287,8 @@ def parameter_history(settings, index):
             budget["cap"] == operation["nodes"]
             and type(budget["charged_nodes_including_opaque_reservations"]) is int
             and type(budget["remaining"]) is int
-            and 0
-            <= budget["charged_nodes_including_opaque_reservations"]
-            <= budget["cap"]
-            and budget["charged_nodes_including_opaque_reservations"]
-            + budget["remaining"]
+            and 0 <= budget["charged_nodes_including_opaque_reservations"] <= budget["cap"]
+            and budget["charged_nodes_including_opaque_reservations"] + budget["remaining"]
             == budget["cap"],
             "actual parameter node debit",
         )
@@ -8204,7 +8318,8 @@ def parameter_history(settings, index):
 def parameter_trial(settings, index):
     recipe, feedback = parameter_history(settings, index)
     seed = parameter_coordinate_seed(settings["parameter_tuning"], recipe)
-    state = parameter_state(recipe, feedback, coordinate_seed=seed)
+    continuation = parameter_continuation(settings["parameter_tuning"], recipe)
+    state = parameter_state(recipe, feedback, coordinate_seed=seed, continuation=continuation)
     require(state["kind"] == "trial", "no operation after terminal parameter center")
     return recipe, state
 
