@@ -356,11 +356,7 @@ fn execute() -> Result<()> {
                 .open(argument(&args, "--output")?)?;
             let mut features = Vec::new();
             for p in prefix_json {
-                let context = quoridor_core::research::SigmaContext::from_prefix(&p)
-                    .map_err(|e| format!("{e:?}"))?;
-                let f = quoridor_nnue::encode_qf1(context.position()).map_err(|e| e.to_string())?;
-                features
-                    .push(serde_json::json!({"ids":f.ids,"distance":f.distance,"side":f.side+1}));
+                features.push(qf1_prefix_record(&p)?);
             }
             serde_json::to_writer(&mut output, &features)?;
         }
@@ -488,5 +484,83 @@ mod configured_teacher_input_tests {
             serde_json::from_value(actual["result"]["partition"].clone()).unwrap();
         assert!(partition.read().is_ok());
         assert!(prepare_teacher_inputs(&args).is_err());
+    }
+}
+
+/// Preserve QF1 fields; legal IDs belong to the same full-prefix common owner.
+fn qf1_prefix_record(prefix: &[u16]) -> Result<serde_json::Value> {
+    let context =
+        quoridor_core::research::SigmaContext::from_prefix(prefix).map_err(|e| format!("{e:?}"))?;
+    let f = quoridor_nnue::encode_qf1(context.position()).map_err(|e| e.to_string())?;
+    Ok(serde_json::json!({
+        "ids":f.ids,"distance":f.distance,"side":f.side+1,
+        "prefix":prefix,"legal":context.legal_ids(),
+    }))
+}
+
+#[cfg(test)]
+mod claustrophobia_file_inlet_tests {
+    use super::*;
+
+    #[test]
+    fn claustrophobia16_qf1_legal_publication_preserves_fields_side_and_jump() {
+        for prefix in [
+            vec![],
+            vec![13],
+            vec![81, 163],
+            vec![13, 67, 22, 58, 31, 49, 40, 31],
+        ] {
+            let context = quoridor_core::research::SigmaContext::from_prefix(&prefix).unwrap();
+            let features = quoridor_nnue::encode_qf1(context.position()).unwrap();
+            let row = qf1_prefix_record(&prefix).unwrap();
+            assert_eq!(row["prefix"], serde_json::json!(prefix));
+            assert_eq!(row["ids"], serde_json::json!(features.ids));
+            assert_eq!(row["distance"], serde_json::json!(features.distance));
+            assert_eq!(row["side"], features.side + 1);
+            let legal: Vec<u16> = serde_json::from_value(row["legal"].clone()).unwrap();
+            assert_eq!(legal, context.legal_ids());
+            assert!(legal.iter().all(|&a| a < 209));
+            assert_eq!(
+                legal
+                    .iter()
+                    .collect::<std::collections::BTreeSet<_>>()
+                    .len(),
+                legal.len()
+            );
+        }
+        let initial = qf1_prefix_record(&[]).unwrap();
+        let legal: Vec<u16> = serde_json::from_value(initial["legal"].clone()).unwrap();
+        for action in [3, 5, 13, 81, 145] {
+            assert!(legal.contains(&action));
+        }
+        let side1 = qf1_prefix_record(&[13]).unwrap();
+        assert_eq!(side1["side"], 2);
+        assert!(
+            side1["legal"]
+                .as_array()
+                .unwrap()
+                .contains(&serde_json::json!(67))
+        );
+        let jump = qf1_prefix_record(&[13, 67, 22, 58, 31, 49, 40, 31]).unwrap();
+        let legal: Vec<u16> = serde_json::from_value(jump["legal"].clone()).unwrap();
+        assert!(legal.contains(&22));
+        assert!(!legal.contains(&31));
+    }
+
+    #[test]
+    fn claustrophobia16_qf1_legal_publication_rejects_bad_replay_and_keeps_terminal_history() {
+        assert!(qf1_prefix_record(&[209]).is_err());
+        assert!(qf1_prefix_record(&[80]).is_err());
+        let draw = [3, 75, 4, 76, 3, 75, 4, 76];
+        let context = quoridor_core::research::SigmaContext::from_prefix(&draw).unwrap();
+        assert_eq!(context.terminal_value(), Some(0.0));
+        assert!(!context.position().legal_action_ids().is_empty());
+        let row = qf1_prefix_record(&draw).unwrap();
+        assert_eq!(row["legal"], serde_json::json!([]));
+        assert_eq!(row["prefix"], serde_json::json!(draw));
+        assert_eq!(row["side"], 1);
+        let mut after_terminal = draw.to_vec();
+        after_terminal.push(3);
+        assert!(qf1_prefix_record(&after_terminal).is_err());
     }
 }

@@ -7,9 +7,12 @@ FP32 TorchScript head only. No Sigma encoding/search, game loop or fallback.
 
 import argparse
 import ctypes as C
+import hashlib
 import json
 import math
+import os
 from pathlib import Path
+import stat
 import sys
 
 UPSTREAM = "ae093653e62ad700e201706fa5ed767093d0d68e"
@@ -193,10 +196,41 @@ def run(request):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.parse_args()
+    sources = parser.add_mutually_exclusive_group()
+    sources.add_argument("--request", type=Path, help="absolute bounded request file")
+    sources.add_argument(
+        "--stdin", action="store_true", help="read the arena request from stdin (default)"
+    )
+    parser.add_argument("--request-sha256", help="SHA256 of the exact request file bytes")
+    args = parser.parse_args()
+    if (args.request is None) != (args.request_sha256 is None):
+        parser.error("--request and --request-sha256 are required together")
+    if args.request is not None and (
+        not args.request.is_absolute()
+        or len(args.request_sha256) != 64
+        or any(c not in "0123456789abcdef" for c in args.request_sha256)
+    ):
+        parser.error("absolute request path and lowercase SHA256 required")
     raw = sys.stdin.buffer.read(MAX_REQUEST + 1)
     if len(raw) > MAX_REQUEST:
         raise ValueError("bounded request")
+    if args.request is not None:
+        if raw:
+            raise ValueError("file and stdin requests are mutually exclusive")
+        # Guardian file requests have empty stdin. Nonblocking/no-follow open
+        # refuses special files without waiting for a pipe or loading any asset.
+        with open(
+            args.request,
+            "rb",
+            opener=lambda path, flags: os.open(path, flags | os.O_NONBLOCK | os.O_NOFOLLOW),
+        ) as stream:
+            if not stat.S_ISREG(os.fstat(stream.fileno()).st_mode):
+                raise ValueError("regular request file required")
+            raw = stream.read(MAX_REQUEST + 1)
+        if len(raw) > MAX_REQUEST:
+            raise ValueError("bounded request")
+        if hashlib.sha256(raw).hexdigest() != args.request_sha256:
+            raise ValueError("request SHA256 mismatch")
     result = run(json.loads(raw))
     print(json.dumps(result, allow_nan=False), flush=True)
 
