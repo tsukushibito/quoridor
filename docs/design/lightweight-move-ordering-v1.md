@@ -652,3 +652,9 @@ strengthのnode chargeは112,308,903/132,866,997/124,916,086/126,495,919、合�
 TIMEは128calls/16sessions/2,204,376nodesで完了。Off/On/On/OffのSearch合計は0.729628059/0.743171291/0.717477124/0.712536168秒で、元記述AND条件はFALSE、両series medianも悪化した。TIMEは棋力採否の追加gateではなく、予定した棋力段階も完了した。Off/Onでwork29/32・PV2/32が変わり、action/valuebits/depth/stop差は0。低残壁に偏る32rootsから全ゲーム速度やsamework speedupへ外挿しない。setup/reset/rootprepare/journal/drop/nativewholeは別に保存し、outer1825.2846938970033秒を一度だけ計上、nestedを加算しない。棋力課金1,427,697,474nodesは12本の250M非融通内。保持済み三root実観測39,235,584Bを保存し、旧費・FAILED/NULL/UNKNOWNは返金/reset/貸与しない。physicalNN/FT/head/continuouspeak/fullfees/globalactualはUNKNOWN。
 
 次のLMR係数調整では現Control・追加採点Off/Cedar/commonhead/path_tailを固定する。終了した候補専用経路の実整理は既存324.12で元作者へ一本化し、共通機能と現役correctnessを保持する。保存source・真正image・入力・RAW・失敗証拠は不変。実source/native STOPで競合を調整し、ownerclose/返信/人間ACKや全体整理完了を非競合工程のgateにしない。
+
+### 残壁別の同点機会診断（324.17、別の少数診断）
+
+後続の人間直接指示により、元15の採否を変えず、既存genuine完全prefixから最大30rootsを結果盲検で選び、Off/Neighbour各一回・最大60calls・D5/各250000nodes・全体15Mまでの機会診断を行う。残壁0、1..4、5..10、11..15、16..20を各最大6roots、少なくとも3family/両手番・最大6時系列を目標とし、不足は生成・重複・補充で埋めない。モデル/TT/history/headの実session再用と初回/継続を分け、Cedar/Control/depth_rank標準係数/path_tailを固定する。
+
+内部nodeの残壁0..20別に訪問、複数候補の順位入口、同tierかつ完全signed履歴のdistinct tie node/group、履歴0/非0、class差・ID順の潜在変更、先頭変更と実際pulled順変更を分ける。既存キー・生成済み合法候補だけを用い、未読lazy tailの強制生成/sort/展開、追加BFS/子make/NNUE・巨大traceを作らない。必要な旧分類は診断専用に一箇所へ分離し、通常selector/shimを復活させず、observer無効経路に追加scan/heap/counterを残さない。D5両完了とNodeLimit、Off/Onの異なる木・分母を分け、observer時間を通常速度資格へ使わない。新たな棋力・主因確定・採用を主張せず、LMR調整をこの結果/close/ACKへ待たせない。

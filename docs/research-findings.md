@@ -2566,3 +2566,7 @@ source exportも、旧root Web配置の互換対象5件と未使用importを撤�
 TIME128calls/16sessions/2,204,376nodesも完了し、Off/On/On/Off Search合計0.729628059/0.743171291/0.717477124/0.712536168秒、元AND記述FALSE。TIMEが中立/悪化でも予定した棋力側を実施し、採否gateに加えていない。両群内の非時計反復は一致し、Off/Onのwork29/32・PV2/32差はordering+LMRの異なる木の観測でありsamework speedupではない。低残壁に偏るTIME入力、既知book露出YES、任意training/public/sealed/interior/LMR露出UNKNOWNを保持する。一般棋力・優越・同等・効果不存在・Elo・model/default昇格へ広げない。
 
 strength課金1,427,697,474nodes/各12×250M非融通、outer1825.2846938970033秒を各一度/nested非加算。実三root保持39,235,584Bと原1088MiB支持を区別し、未使用science枠の貸与・費用返金・resetをしない。physicalNN/FT/head/continuouspeak/fullfees/globalactual/後続tailsはUNKNOWN。actualnative/collection/保存解析STOP後に16のsource統合と必要softwareへ進め、少数接続確認は別段階とする。次のLMR係数調整は現Control/追加採点Off/Cedar/commonhead/path_tailを固定し、有限設定・停止・独立開始集合を着手時に解決する。終了した候補専用codeは既存12で整理し、原artifact/model/input/RAW/FAILEDを削除しない。全pause/seals/defaults/foreign/UNKNOWN/50GB/取消consultationを維持する。
+
+後続の研究判断では最初のLMR調整をintercept0.7844とlog_divisor2.4696だけに絞り、開始深さ3/順位4/追加減深上限3・整数丸め・保護/再探索を固定した。既存9.5で粗比較・有限SPSA・別開始集合による一設定確認のrecipe/通常準備を具体化する。表の差を訪問頻度へ読み替えず、保存頻度がなければUNKNOWN、確認結果で再選択しない。旧CI/露出を新しい独立標本へ合算しない。
+
+別の人間依頼324.17は[残壁別の小規模機会診断](design/lightweight-move-ordering-v1.md#残壁別の同点機会診断32417別の少数診断)であり、最大30roots/60calls/D5/各250K/合計15M、追加対局0。元15の384局やbootstrapを再演せず、12.4作者の実source STOP後に同担当で着手し、LMR recipeと並行する。内部nodeの残壁別に順位入口・完全履歴tie・class差・潜在順位と実pulled変更の分母を分け、未読tail/新探索/巨大traceを増やさない。実coverage不足・NodeLimit・小標本限界を保持し、診断の結果を係数調整の科学的依存にしない。
