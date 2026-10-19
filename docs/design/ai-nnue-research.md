@@ -165,3 +165,19 @@ Cedar v1は原324.7で研究優先候補になったClaustrophobia静的教師NN
 別の人間直接依頼324.19は、同じ現行Cedar NNUE＋αβ/PVSと固定Sigma policy/value＋原MCTSを100ms/5ms・先頭8 canonical開始の両色16局で比較した。保存原出力の通常predicateを一度だけ判定した別DATA_VALIDATEDはCedar6勝0分10敗/UNKNOWN0、pairは1勝1敗6組・両敗2組。元normal operationの省略値/null比較FAILEDは変更していない。今回からモデル単独の優劣、一般棋力、NNUE＋MCTSや本家Claustrophobiaの成績を推定せず、新policyの学習・大量比較・追加調整は発行しない。[原条件・保存判定・限界](../research-findings.md#sigma-mcts対cedarの16局小試験324192026-10-19)。
 
 その後の人間直接指示により、324.9.6はインフラ停止からの前向き回復へ進める。元のINCOMPLETE/FAILEDは保存し、保存済み成功90行を再対局せず欠測6枠も補充しない。結果前に固定した両候補共通29完全familyを使い、真正未入場の元op7・32局/512Mの通常資格完了後だけrankを選ぶ。過去RSSは不明のまま、実証したPID再利用時のRSS誤計上だけを最小修正し、既存1laneと管理用RAMを明示して再開する。最大1920局/30.72G、元モデル・時計・family split・後段採否は維持する。[回復規則・診断と限界](../research-findings.md#cedar五設定lmrのrank段階は不完全停止324962026-10-19)。
+
+### 五設定調整のfirst32後を前向き改訂（2026-10-19、人間直接指示）
+
+探索用4/6/4は小標本の暫定点であり、極大値とは認定しない。受付済みfirst32ジョブ`0a8a9255-7e4d-4584-b4e9-de4f12fa3e21`の512局/8.192G・入力・caller・通知先・元の一度の回収を凍結したまま、未発行の後半32更新だけを置き換える。旧64更新recipe・後半template・結果を上書きせず、first32全32 operationsの正規資格・UNKNOWN0・実native＋collection STOP後に、その最後の更新後中心を使う。途中bestを選ばず、旧64更新完了とも呼ばない。
+
+新しい後続は、係数中心とcap4を固定した8対照×32局（各512M、計256局/4.096G）、選んだ一つの開始条件で16更新×16局の短SPSA（各256M、計256局/4.096G）、最後の一設定512局/256確認familyの順とする。広域候補(depth,rank)は(3,6),(6,6),(8,6),(4,4),(4,12),(4,16),(6,12),(8,16)、基準は4/6。正規完了した候補の得点率>50%から最大を選び、同率は基準からのL1距離、次に(depth,rank)昇順で決める。改善候補がなければ4/6を保つ。結果前に同じ整数表を省略・重複排除できるが、余りを他へ貸与しない。予定した実対照が不完全/UNKNOWNなら依存経路はINCOMPLETEで止める。32局は粗選別であり、極大値・一般優越や表差からの訪問頻度を認定しない。
+
+短SPSAはfirst32の中心x32を元の正規化base/scales/box内で継承し、元c/a式のk=32..47、step clip0.08を使う。新しい16の均衡Delta・入力/色/seed/順序・対応と時間/保持寿命を後続結果前のconfigへ固定する。tuning256はfirst32で既に使う計画なので、未入場の後半logical枠と未露出familyを区別し、tuningのみのラベル非参照割付と共有family依存を明示する。確認256familyは選択に使わない。384+512+256+256+512=1920局、6.144+8.192+4.096+4.096+8.192=30.72G、75600秒と50GBを維持し、実費控除・元FAILED/6 UNKNOWN/opaque-heldを保つ。最終一設定・唯一のfamily区間・結果後の再選択禁止は変更しない。[採用済みの版別計画](../../.artifacts/research-team/integration324/cedar-lmr-tuning-v1/five-parameter-v1/post-first32-revision-v3/plan.json)。実行中は軽い私有plan/configだけを準備し、新しい重要な選択・中心継承境界だけを既存Maxが関連確認する。20の独立準備も継続し、重い工程は実native＋collection STOPへ配分する。親closeや人間/相談の返信を入口にしない。
+
+first32は全32 normal operations・512局/256完全pair/UNKNOWN0で完了し、実native＋collection STOPを受けた。更新後中心x32は元base/scales上で`[0.2226745836277075, 0.02981210828444443]`、係数は`0.8289349167255415 / 2.4815248433137778`、整数は4/6/4である。この中心だけを広域比較へ渡し、旧64終端・途中best・次trialと区別する。元512成功局は再対局対象から除外する。[first32と実STOPの受入れ](../../.artifacts/research-team/integration324/cedar-lmr-tuning-v1/five-parameter-v1/first32-result-acceptance-v1/acceptance.json)。
+
+### Claustrophobia単体教師のpolicy/value学習接続環境（324.18.2、2026-10-19）
+
+人間直接指示により、現Cedarを新artifactの初期値として既存policy209を明示有効化し、既存単一train loop/optimizer/sampler/exportへjoint policy/value targetを接続する。版固定Claustrophobiaの既存`static_teacher_heads.policy_value`一回のforwardから、合法mask後policy分布とSTM valueを取得する。core209・STM/左右反転・jump/H/V・value符号/尺度・splitは既存正本を共用し、stream/chunk/manifestとcheckpoint/restart、Python→Rust policy/value export・fingerprint/新head identityを対応させる。元value教師にpolicy列があるとは仮定しない。既存18.1の4prefix/48sim確認と上限は独立に保持する。
+
+既存作者High18を自然境界で順次再用し、私有source/configから着手する。変更した座標/目標/split/export境界だけ既存Maxが関連確認する。必要な実接続が不足する場合だけ、最大16真正fixture/教師16行/optimizer2stepの機能smokeを一度、実条件を固定して実STOP後の適合windowへ置ける。本学習・全件教師付与・巨大ラベル配列・大量checkpoint・棋力campaignは未発行で、現value-only Cedar/model files/default/数学・全pause/seals/foreignは変えない。20やLMR後続はこの新準備を待たない。[完成条件・担当・資源・限定確認](../../.artifacts/research-team/integration324/nnue-policy-value-training-v1/task.md)。
