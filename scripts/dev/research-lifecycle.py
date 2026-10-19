@@ -1778,6 +1778,119 @@ def selected_run(spec, experiment):
     return spec["approved_plan"]
 
 
+class SequenceResources(process.CycleResources):
+    """Bound one explicitly declared serial sequence and its management tree."""
+
+    def __init__(self, settings):
+        require(
+            settings["kind"] == "sequence" and settings.get("arena_cohort") is None,
+            "ordinary serial sequence resources",
+        )
+        cfg = settings["limits"]
+        require(
+            type(cfg["family_B"]) is int
+            and type(cfg["controller_B"]) is int
+            and 64 * 1024**2 <= cfg["controller_B"] < cfg["family_B"]
+            and type(cfg["host_reserve_B"]) is int
+            and cfg["host_reserve_B"] >= 4 * 1024**3,
+            "declared management reservation inside family",
+        )
+        runs = settings["runs"]
+        require(isinstance(runs, list) and bool(runs), "serial sequence operations")
+        self.native_paths = set()
+        for spec in runs:
+            require(
+                spec["kind"] == "run"
+                and all(
+                    spec["limits"][k] == cfg[k]
+                    for k in ("family_B", "controller_B", "host_reserve_B")
+                )
+                and cfg["family_B"] <= issued_family_upper(spec, document(spec["support"]))
+                and spec["argv"][0] == spec["artifact"]["path"],
+                "one issued serial family and actual native command paths",
+            )
+            self.native_paths.add(spec["artifact"]["path"])
+        common = dict(
+            host_ram_reserve=cfg["host_reserve_B"],
+            max_output_bytes=None,
+            pause_file=settings.get("pause_file"),
+        )
+        super().__init__({**common, "max_memory_bytes": cfg["family_B"]}, settings["output"], None)
+        self.management = process.CycleResources(
+            {**common, "max_memory_bytes": cfg["controller_B"]}, settings["output"], None
+        )
+        self.native = process.CycleResources(
+            {**common, "max_memory_bytes": cfg["family_B"] - cfg["controller_B"]},
+            settings["output"],
+            None,
+        )
+        self.root = process.identity(process.process_info(os.getpid()))
+        self.known = []
+        self.check()
+
+    def _owned_info(self, member):
+        info = process.process_info(member["pid"])
+        if info is None:
+            try:
+                Path(f"/proc/{member['pid']}").stat()
+            except FileNotFoundError:
+                return None  # Confirmed exit; an unreadable stat alone is not exit.
+            except OSError as error:
+                raise process.CycleStopped("known owned process existence unknown") from error
+            raise process.CycleStopped("known owned process stat/RSS unknown")
+        if process.identity(info) != process.identity(member):
+            return None  # Confirmed PID reuse: never charge the replacement as this member.
+        if type(info.get("rss")) is not int or info["rss"] < 0:
+            raise process.CycleStopped("known owned process RSS unknown")
+        return info
+
+    def check(self, owned=()):
+        require(
+            process.identity(process.process_info(os.getpid())) == self.root,
+            "same serial sequence resource owner",
+        )
+        candidates = {
+            (member["pid"], member["start_ticks"], member["boot_id"]): member
+            for member in [
+                *self.known,
+                *owned,
+                *process.members(self.root, [*self.known, *owned]),
+            ]
+        }
+        self.known = list(candidates.values())
+        infos = {}
+        native = set()
+        for member in self.known:
+            info = self._owned_info(member)
+            if info is None:
+                continue
+            infos[info["pid"]] = info
+            try:
+                with Path(f"/proc/{info['pid']}/cmdline").open("rb") as stream:
+                    command = os.fsdecode(stream.read(4096).split(b"\0", 1)[0])
+                if command in self.native_paths:
+                    native.add(info["pid"])
+            except OSError:
+                pass  # Unclassified live members remain management, never uncharged.
+        self.known = [process.identity(info) for info in infos.values()]
+        changed = True
+        while changed:
+            children = {pid for pid, info in infos.items() if info["parent"] in native}
+            changed = not children <= native
+            native.update(children)
+        root = self.root["pid"]
+        require(root not in native, "management supervisor is not a native worker")
+        for guard, members in [
+            (self, infos),
+            (self.management, set(infos) - native),
+            (self.native, native),
+        ]:
+            # Reuse host/pause/deadline checks without a second permissive RSS read.
+            process.CycleResources.check(guard, include_self=False)
+            if sum(infos[pid]["rss"] for pid in members) > guard.memory_limit:
+                raise process.CycleStopped("cycle memory_limit")
+
+
 class Limits(process.CycleResources):
     """Reuse guardian RSS/deadline/pause; add owned positive allocation bounds."""
 
@@ -1839,7 +1952,11 @@ class Limits(process.CycleResources):
                     admission["approved_plan"] == spec["approved_plan"],
                     "issued approved plan",
                 )
-        require(cfg["controller_B"] == 64 * 1024 * 1024, "whole family includes controller")
+        require(
+            type(cfg["controller_B"]) is int
+            and 64 * 1024**2 <= cfg["controller_B"] < cfg["family_B"],
+            "whole family includes declared controller reservation",
+        )
         self.charged_paths = charged_roots(spec)
         self.arena_cohort = arena_cohort(spec)
         super().__init__(

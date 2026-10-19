@@ -306,10 +306,14 @@ def configured_arena_resources(directory, config, root, resources):
     try:
         with settings_path.open("rb") as stream:
             raw = stream.read(1024**2 + 1)
-        settings = json.loads(raw) if len(raw) <= 1024**2 else None
-    except (OSError, ValueError):
-        settings = None
-    if not isinstance(settings, dict) or settings.get("arena_cohort") is None:
+        if len(raw) > 1024**2:
+            raise JobError("Declared sequence resource settings exceed size limit")
+        settings = json.loads(raw)
+    except (OSError, ValueError) as error:
+        raise JobError("Declared sequence resource settings unreadable or malformed") from error
+    if not isinstance(settings, dict):
+        raise JobError("Declared sequence resource settings must be an object")
+    if settings.get("arena_cohort") is None and settings.get("limits") is None:
         yield None
         return
     if settings_path != Path(config["resource_contract"]):
@@ -317,6 +321,14 @@ def configured_arena_resources(directory, config, root, resources):
     if hashlib.sha256(raw).hexdigest() != argv[7]:
         raise JobError("Bound cohort sequence resource settings differ")
     lifecycle = lifecycle_module(root)
+    if settings.get("arena_cohort") is None:
+        with lifecycle.lease(shared=True):
+            settings_ref = lifecycle.bound(settings_path)[0]
+            if settings_ref["sha256"] != argv[7]:
+                raise JobError("Actual sequence resource settings differ")
+            resources = lifecycle.SequenceResources(lifecycle.document(settings_ref))
+        yield resources
+        return
     with lifecycle.lease(shared=True):
         settings_ref = lifecycle.bound(settings_path)[0]
         if settings["kind"] == "cohort":
@@ -454,7 +466,7 @@ def execute(directory, config, root, backend, *, resources=None):
                 backend,
                 horizon=config["end_at"],
                 delegated=delegated,
-                **({"check": local_control} if parent_command else {}),
+                **({"check": local_control} if parent_command or resources is not None else {}),
             )
             publish_authority_deadline()
             next_control = time.monotonic() + config["control_interval_seconds"]
@@ -552,7 +564,7 @@ def execute(directory, config, root, backend, *, resources=None):
                             horizon=config["end_at"],
                             timeout=read_budget,
                             delegated=delegated,
-                            **({"check": local_control} if parent_command else {}),
+                            **({"check": local_control} if parent_command or resources is not None else {}),
                         )
                         if current["thread_id"] != state["thread_id"]:
                             raise JobError("Recipient identity changed during execution")
