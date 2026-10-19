@@ -597,3 +597,13 @@ BEST43と固定DのOFF OMPPMO二反復では、P/O・P/M中央値比がNNUE.7723
 統計は一度の共通PCG64 family表で、native batchの診断CIや旧32Rを混ぜない。直接比較と共通D比較を分け、MSE・教師一般優越・Elo・同等性・追加学習だけの因果・既定昇格へ変えない。これは4方式の棋力比較ではなく、path_tailの通常研究既定とpath_tail_futureの明示optionは今回から変更しない。turn clock/fallback/forfeit/depth/PV/work/実TTcapacityは未投影ならUNKNOWN、共有hardware変動の受容を独立性保証へ変えない。
 
 outer6496.344065秒を一度、parallel/nested wall非加算。両6/7 consumerの実STOP後、一時stock observer/API/counterと専用fixtureを撤去してaffected test-target compile/Clippy PASS、整理後sourceはUNMEASURED。元の実測source/image/RAWを保持した。[3対照の正式報告](../../research-data/ai-sigma/post-low-lr-strength3/report-ja.md)、[原参照・確認・保存表](../../research-data/ai-sigma/post-low-lr-strength3/receipt.json)。
+
+## Cedar：履歴同点群だけの安い二次採点（324.14、2026-10-19、人間直接依頼）
+
+「その安いオーダリングも検証して」という直接依頼により、現行Controlを対照に、一候補の実装から連続探索時間・同時間棋力の有限比較と保存解析まで進める。これはSPSAの将来計画への追記や、旧376の全候補への整数項加算の再評価ではない。TT/PV・合法即goal・killer等のtierと、通常履歴＋continuationの完全な合成動的scoreを保ち、その両方が同点の複数手だけへ小さい二次scoreを与える。最後は既存ActionIDとし、履歴全0を含め、非同点や上位tierを追い越させない。具体式は現sourceの費用から一つだけ結果前に固定する。
+
+採点には正規の既存親情報または局所整数式を使う。新BFS/map、子make、追加NNUE、大きなscratch/cache、採点用の全map/全壁走査を追加しない。親mapが既に安く安全に読める場合だけ参照し、取得を強制しない。TT即cutoffや同点群なしに重い準備を先払いせず、共通key生成・最優先1手/tail一度整列・子後のkey freezeを維持する。typed設定、実効namespace/resetと記録、公開入力拒否、LMR保護、合法集合、停止/Err/親復元は既存ownerへ置き、省略時の現行動作を保つ。
+
+時間評価は真正な時系列rootと現役sessionを使い、両条件で初期化・TT・履歴・scratchの実再用範囲をそろえる。主時計はobserver OFFの連続Search合計で、採点/key費を含め、setup/root準備/drop/journal/wholeは別に示す。並び替えとLMRによりnodes・木・value・PV・深さは変わり得るため、候補対対照の全work一致や同仕事speedupを資格にしない。棋力は同Cedar・固定LMR/係数・path_tail/終盤条件・TT/PVS・同100ms/5ms等のfamily両色とし、時間用集合/式選定と区別する。局数、calls/nodes、seed/統計/停止、保存wholeは期待差・不確実性・全費から結果前に有限化し、512固定、旧枠借用、勝つまで延長や成功補充はしない。
+
+現在は関連する既存Highを再用した私有source/設定準備であり、数値入場・software PASS・効果は未確認。Main/Git/index/Cargoと正本文書は324だけが書く。LMRの入力/設定/通知先と既存784局/12.25Gを変えず、軽い準備は独立に進め、重いbuild/test/RAW・時間評価は実native+collection STOPと実資源が成立する自然境界へ置く。LMRや本taskのparent close、人間/RootのACKを別条件にしない。必要なordering/LMR/TTの固定差分と重要な結果解釈だけ関連確認し、結果に応じ最小変更を保持/撤去する。状態・所有はBeads324.14/14.1、具体配分は[契約](../../.artifacts/research-team/integration324/cedar-history-tie-ordering-v1/task.md)へ置く。全pause/seals/models/defaults/foreign/RAWFAILED/費UNKNOWN/50GBと取消済み相談actual8追跡・通知を保つ。

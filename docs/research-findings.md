@@ -2499,8 +2499,20 @@ L2の初回通常parent b7f295e0は、投入後2.6394428290077485秒でFAILEDと
 
 R1修復版は、一回の観測で既存identity検査を通った全processをaggregateに残し、検証済みinner以外の残余を保守的にcommonへ含める。新規1境界テストは祖先消失・reparent後の低RSS計上、高RSSの実common上限拒否、foreign/PID再利用の除外を確認し一度PASSした。同じMaxはこの差分をSOURCE_CLEAR・blockers0と確認した。旧成功testの再演はなく、前のbefore/after比較fixtureは凍結証拠に残し、現役にはcurrent sourceだけで意味を持つ回帰テストを置く。[固定R1修復](../.worktree/assets/perf/cedar-lmr-tuning-implementation-v1/control-continuation-v1/parent-entry-repair-v1/live-state-read-fix-v4/resource-state-fix-v5/L2-attempt-v2-recovery-v1/coherent-accounting-v4/binding.json)、[関連確認](../.worktree/assets/perf/cedar-lmr-tuning-analysis-v1/control-continuation-v1/parent-entry-review-v1/related-coherent-accounting-v4/control.json)。通常のsource lease下でMainへ反映し、既存cap・モデル・Rust image・対局条件は変更しない。これは歴史的原因や本負荷安定完走の認定ではない。
 
+会計修復後の実L2 parent8c921276は、原ops8..15の各32局、計256局/128色pairを正常manifest/data PASSで完了し、実native/collection STOPまで一度回収した。元のarchive/CSV/config/slot/family結合と正常validator結果を再用し、payload再読・再hash/decompression・対局・RNG再演はない。新node課金697221115（opaque込み）とparent outer380.9700330920168秒は各一度、parallel/nested非加算。これは当cohortの実完了であり、過去6489の原因や将来の安定性を確定しない。正常256局は永久に再対局から除外し、L2全512の資格・最終global CIはまだ未完である。[正常256局の結果](../.worktree/assets/perf/cedar-lmr-tuning-implementation-v1/numeric-v1/shared/control-continuation-v1/L2-parent-bound-v3/collection-v1/result.json)。
+
+残る原ops0..7の保存partial39行は一局単位の既存検査を通ったが、当初compactには通常reference-reportの実core/terminal時刻条件が未投影だった。既存Maxがその不足だけを特定し、同じ停止journalの一度の追加passで既存predicateを確認した。8startupと全1903 accepted turnの配置・matching terminal・整数時刻順はPASS、原row/journal SHA/stat一致、旧検査の再演とRAWコピーは0。ただしこのreceipt自体は新資格を発行せず、原FAILED/qualified=false/terminal cost UNKNOWNを残した別枠データ受入れへ結ぶ。[限定追加確認](../.worktree/assets/perf/cedar-lmr-tuning-implementation-v1/control-continuation-v1/parent-entry-repair-v1/live-state-read-fix-v4/resource-state-fix-v5/L2-attempt-v2-recovery-v1/partial-custody-v1/required-predicates-v2/result.json)。全39が資格を満たせば残217局で保守的な追加局数枠に収まるが、予算を合格根拠にせず全39へ同じ基準を使う。片色だけの7familyの相手色を再対局しないため、既存paired入口で足りなければ最小のselected-slot対応を行う。原局数/非融通node上限・8×200M opaque保留は増額/reset/refundしない。
+
 ### Cedar LMR調整と独立評価を後続計画へ追加（2026-10-19 JST、人間直接指示）
 
 人間の「調整まで計画に含めておいて」を、[既存NNUE設計の後続計画](design/ai-nnue-research.md#現行確認後のlmrパラメータ調整と独立評価2026-10-19-jst人間直接指示)へ統合した。現在の管理修復・凍結した確認対局と保存解析を優先し、完了後に評価器と基準探索を固定する。共通LMRのtyped設定・実効設定とTT/ordering namespaceの結合、整数丸め後も働く係数摂動、少数係数の粗比較と有限SPSA、別開始局面での独立した同時間棋力評価までを計画に含める。離散条件と係数調整の問いを分け、SPSA各更新や独立確認を一律512局とはしない。実施時に規模・範囲・摂動/更新幅・減衰・仕事/時間/保存枠・停止と候補規則を具体化し、ここでは新しい数値枠・対局・実装・学習を発行しない。
 
 現行L2の調整用転用、確認結果での再選択、NNUEとLMRの同時変更をしない。将来は一方を固定して交互改善し、有望なNNUE更新時にLMRを再確認するが、毎学習の全面SPSAは必須にしない。既存324/324.9のBeadsへ計画の参照を結び、別の計画台帳・常設役・周期監督や現在の作業へのACK gateは追加しない。旧FAILED/RAW/UNKNOWN/全費、現行LMR枠・通知先、50GB、323/342.17 USERPAUSE、封印・model/weights/defaults・foreign変更は不変である。
+
+### Cedar履歴同点群の安い二次採点を実検証する（324.14、2026-10-19、人間直接依頼）
+
+現行Controlを対照に、priority tierと完全な合成動的履歴scoreが同点の複数手だけを安く採点する一候補を、連続探索時間と同時間の先後pair棋力の両方で有限評価する直接依頼を受けた。新BFS/map・子make・NNUE・全走査を追加せず、正規親情報/局所整数式から具体式を一つだけ結果前固定する。typed設定・namespace/reset・既存key/尾部整列、公開拒否/合法性/LMR保護/停止/親復元を維持する。旧Cheapの全加点、SPSA将来計画、旧比較の成功再演とは分ける。
+
+orderingで木/TT/LMR/value/PV/workが変わるため、全work一致や同仕事speedupを要求しない。初期化とTT/履歴/scratchの実再用をそろえた連続Search合計を主時計、setup/drop/wholeを別にし、棋力は同Cedar・固定探索条件・同100ms/5ms等のfamily両色で評価する。具体のcall/game/node/seed/統計/停止/保存枠は結果前に有限化する。現在は既存Highへの私有source/設定準備の配分であり、数値START・software/改善/棋力の合格は未確認。[現行の候補境界と評価方法](design/lightweight-move-ordering-v1.md#cedar履歴同点群だけの安い二次採点324142026-10-19人間直接依頼)。
+
+LMRの修復・残り確認を優先し、既存入力/設定/通知先・784局/12.25Gを変更/借用しない。軽準備は独立、重いbuild/test/RAW/実時計は実native+collection STOPと資源の自然境界へ調整し、他parent closeやACKを入口にしない。新しい常設役/監視を作らず、Main/Git/Cargo/正本文書は324のみが所有する。USERPAUSE/seals/models/weights/defaults/foreign/原RAWFAILEDと費UNKNOWN・50GB、取消済み相談のactual8追跡・通知を保持する。
