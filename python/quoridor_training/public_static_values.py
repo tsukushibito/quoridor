@@ -843,16 +843,350 @@ def qualify_values(config):
         raise
 
 
+def cpu_policy_teacher_boundary(config):
+    """Admit saved C-only CPU evidence; this does not qualify new policy/masks."""
+    references = config["runtime_boundary"]
+    required = {
+        "result",
+        "execution",
+        "completion",
+        "stage",
+        "teachers",
+        "head_source",
+        "encoder_library",
+        "encoder_build",
+        "encoder_closure",
+    }
+    if not isinstance(references, dict) or set(references) != required:
+        raise ValueError("explicit original C-only CPU result/return/source/encoder refs")
+    if config["device"] != "cpu" or config["cpu_threads"] != 1:
+        raise ValueError("saved C CPU boundary cannot qualify a GPU route")
+    metadata = {
+        name: json.loads(bound_file_bytes(references[name], 1048576))
+        for name in required - {"head_source"}
+    }
+    bound_file_bytes(references["head_source"], 65536)
+    try:
+        result = metadata["result"]
+        execution = metadata["execution"]
+        completed = metadata["completion"]
+        stage = metadata["stage"]
+        record = result["records"]["C"]
+        head = result["heads"]["C"]
+        returned = execution["returned"]
+        teachers = [t for t in metadata["teachers"]["teachers"] if t["key"] == "C"]
+        if len(teachers) != 1:
+            raise ValueError("one explicit C teacher required")
+        teacher = teachers[0]
+        rows = record["input_rows"]
+        counts = (
+            rows,
+            record["finite_rows"],
+            record["attempted_rows"],
+            head["attempted_rows"],
+            head["returned_finite_rows"],
+            head["failed_attempt_rows"],
+            head["constructor_forward_rows"],
+            head["explicit_warmup_rows"],
+        )
+        if (
+            any(type(v) is not int or v < 0 for v in counts)
+            or rows == 0
+            or result["primary"] is not None
+            or result["actual_fixed_encoder_boards"] != rows
+            or result["constructor_implicit_input_rows"] != 0
+            or type(execution["GPU"]) is not int
+            or execution["GPU"] != 0
+            or not any(
+                ref["sha256"] == result["source_input_comparison_sha256"]
+                for ref in stage["fixed_small_refs"]
+            )
+            or set(result["records"]) != {"C"}
+            or set(result["heads"]) != {"C"}
+            or record["constructor_entered"] is not True
+            or record["constructor_returned"] is not True
+            or record["single_batch_pass"] is not True
+            or record["finite_rows"] != rows
+            or record["attempted_rows"] != 2 * rows
+            or head["attempted_rows"] != record["attempted_rows"]
+            or head["returned_finite_rows"] != head["attempted_rows"]
+            or head["failed_attempt_rows"] != 0
+            or head["constructor_forward_rows"] != 0
+            or head["explicit_warmup_rows"] != 0
+            or head["kind"] != "claustrophobia"
+            or head["joint_policy_value_compute"] is not True
+            or head["label_semantics"] != "raw-local-stm-single-network-post-tanh"
+            or head["extra_tanh_sign_discount_rescaling"] is not False
+            or head["runtime"]["device"] != "cpu"
+            or head["runtime"]["autocast"] is not False
+            or head["runtime"]["original_parameter_dtypes"] != ["torch.float32"]
+            or head["runtime"]["inference_dtype"] != "float32"
+            or record["teacher_model"] != config["model"]
+            or teacher["adapter"] != "claustrophobia"
+            or teacher["model"] != config["model"]
+            or config["model"] not in stage["model_custody"]
+            or config["model"] not in execution["runtime"]["model_custody"]
+            or execution["status"] != "RETURNED_COMPLETE"
+            or execution["primary"] is not None
+            or returned["status"] != "complete"
+            or returned["exit_code"] != 0
+            or returned["primary_error"] is not None
+            or returned["remaining"] != []
+            or execution["remaining"] != []
+            or returned["cleanup_complete"] is not True
+            or returned["direct_child_reaped"] is not True
+            or returned["handle_closes_complete"] is not True
+            or returned["signal_mask_restoration"] != "completed"
+            or returned["final_record_persist"] != "completed"
+            or returned["finalization_errors"] != []
+            or returned["command"] != stage["argv"]
+            or stage["finite_plan"]["teachers_selected"] != ["C"]
+            or stage["finite_plan"]["fixed_boards"] != rows
+            or stage["finite_plan"]["batch_plus_singles_per_teacher"] != 2 * rows
+            or references["teachers"] not in stage["fixed_small_refs"]
+            or references["head_source"] not in stage["fixed_small_refs"]
+            or references["result"] not in completed["refs"]
+            or references["execution"] not in completed["refs"]
+            or completed["observed"] != result
+            or metadata["encoder_library"]["artifact"] != config["c20_library"]
+            or metadata["encoder_build"]["closure"] != references["encoder_closure"]
+            or metadata["encoder_closure"]["upstream_commit"]
+            != teacher["identity"]["release_commit"]
+        ):
+            raise ValueError("saved C CPU/model/return/source/encoder correspondence")
+    except (KeyError, TypeError, IndexError) as error:
+        raise ValueError("missing or malformed C-only CPU boundary metadata") from error
+    identity = config["model_identity"]
+    if (
+        not isinstance(identity, list)
+        or len(identity) != 6
+        or any(type(v) is not int for v in identity)
+        or identity[3] != config["model"]["bytes"]
+        or list(file_identity(config["model"]["path"])) != identity
+    ):
+        raise ValueError("actual normal input model custody differs")
+    # Existing ordered Experiment inputs bind the model's declared FileRef;
+    # this exact stat tuple detects lifetime drift, not a new numerical proof.
+    return identity
+
+
+def label_policy_values(config):
+    """Chunk the existing C joint head into its two actual orientation targets.
+
+    Old scalar labels cannot supply missing policy. No replay of old label runs:
+    this is an explicitly selected NEW joint bank over bound unsealed inputs.
+    """
+    import math
+
+    required = {
+        "input_classes",
+        "runtime_boundary",
+        "model",
+        "model_identity",
+        "core_library",
+        "c20_library",
+        "output",
+        "batch_rows",
+        "device",
+        "cpu_threads",
+        "temperature",
+        "prior_actual_rows",
+        "inclusive_row_limit",
+    }
+    if set(config) != required:
+        raise ValueError("explicit bounded joint teacher configuration")
+    temperature = config["temperature"]
+    if (
+        type(temperature) not in (int, float)
+        or not math.isfinite(temperature)
+        or temperature <= 0
+        or config["cpu_threads"] != 1
+        or type(config["batch_rows"]) is not int
+        or not 2 <= config["batch_rows"] <= 4096
+        or config["device"] not in ("cpu", "cuda:0")
+        or type(config["prior_actual_rows"]) is not int
+        or config["prior_actual_rows"] < 0
+        or type(config["inclusive_row_limit"]) is not int
+        or config["inclusive_row_limit"] <= 0
+    ):
+        raise ValueError("joint temperature/thread/actual inclusive row controls")
+    expected_identity = cpu_policy_teacher_boundary(config)
+    for name in ("core_library", "c20_library"):
+        bound_file_bytes(config[name], 16 * 1024**2)
+    output = Path(config["output"])
+    output.mkdir(exist_ok=False)
+    marker = output / "INCOMPLETE"
+    marker.write_text("joint same-forward teacher bank not published\n")
+    maps, head = {}, None
+    started = time.monotonic()
+    try:
+        with input_pairs(config["input_classes"]) as (inputs, pairs):
+            n = len(pairs)
+            expected_rows = actual_orientation_count(pairs)
+            if config["prior_actual_rows"] + expected_rows > config["inclusive_row_limit"]:
+                raise ValueError("joint target plan exceeds remaining actual teacher rows")
+            encoder = StaticInputs(
+                config["core_library"]["path"],
+                config["c20_library"]["path"],
+                batch_rows=config["batch_rows"],
+            )
+            import torch
+
+            torch.set_num_threads(1)
+            if torch.get_num_interop_threads() != 1:
+                torch.set_num_interop_threads(1)
+            for name, dtype, shape in (
+                ("values", "<f4", (n, 2)),
+                ("policy", "<f4", (n, 2, 209)),
+                ("legal_mask", "u1", (n, 2, 209)),
+            ):
+                maps[name] = np.memmap(
+                    output / (name + ".bin"), dtype=dtype, mode="w+", shape=shape
+                )
+                maps[name][:] = 0 if name == "legal_mask" else np.nan
+            head = StaticHead(
+                "claustrophobia",
+                config["model"]["path"],
+                device=config["device"],
+                batch_rows=config["batch_rows"],
+                max_attempted_rows=config["inclusive_row_limit"] - config["prior_actual_rows"],
+            )
+            for pair, orientation, keys in oriented_keys(pairs, config["batch_rows"]):
+                # Canonical public keys use STM=0. The pinned C20 and original
+                # C policy209 use this same action order; no rotation is guessed.
+                mask = encoder.policy_mask(keys)
+                _, c20 = encoder.encode(keys)
+                logits, value = head.policy_value(c20)  # one actual joint call
+                legal = np.where(mask, logits.astype(np.float64), -np.inf)
+                shifted = legal - np.max(legal, axis=1, keepdims=True)
+                with np.errstate(over="ignore", under="ignore"):
+                    probability = np.exp(shifted / temperature)
+                probability /= probability.sum(axis=1, keepdims=True)
+                probability = probability.astype("<f4")
+                if (
+                    not np.isfinite(probability).all()
+                    or np.any(probability < 0)
+                    or np.any(probability[~mask] != 0)
+                    or not np.allclose(probability.sum(axis=1), 1, atol=1e-6, rtol=0)
+                ):
+                    raise ValueError("finite legal normalized full teacher distribution")
+                maps["values"][pair, orientation] = value
+                maps["policy"][pair, orientation] = probability
+                maps["legal_mask"][pair, orientation] = mask
+                symmetric = reflected_keys(keys) == keys
+                # Self-LR SAME input shares the SAME actual output, not an
+                # assumed network equivariance or a reflected argmax target.
+                for name in maps:
+                    maps[name][pair[symmetric], 1] = maps[name][
+                        pair[symmetric], orientation[symmetric]
+                    ]
+            if head.facts()["finite_rows_returned"] != expected_rows:
+                raise ValueError("original joint orientation census incomplete")
+            ClassObservations(pairs).validate_values(maps["values"])
+            for value in maps.values():
+                value.flush()
+            entry = dict(
+                values=file_ref(output / "values.bin"),
+                values_identity=file_identity(output / "values.bin"),
+                model=config["model"],
+                head=head.facts(),
+                policy=dict(
+                    action_order="absolute-core-action-id209",
+                    value_perspective="side-to-move",
+                    input_coordinates="canonical-public-STM0-native-C20",
+                    orientation_targets="independent same-forward actual input orientations",
+                    temperature=temperature,
+                    probabilities=file_ref(output / "policy.bin"),
+                    probabilities_identity=file_identity(output / "policy.bin"),
+                    legal_mask=file_ref(output / "legal_mask.bin"),
+                    legal_mask_identity=file_identity(output / "legal_mask.bin"),
+                ),
+            )
+            bank = dict(
+                schema="quoridor-public-static-teacher-values-v1",
+                status="COMPLETE",
+                input_classes=config["input_classes"],
+                teachers={"C": entry},
+                runtime_boundary=config["runtime_boundary"],
+                core_library=config["core_library"],
+                c20_library=config["c20_library"],
+                actual_orientation_rows=expected_rows,
+                prior_actual_rows=config["prior_actual_rows"],
+                inclusive_attempted_rows=config["prior_actual_rows"] + head.attempted,
+                history_semantics="board-only static STM; histories/WDL UNKNOWN",
+                wall_seconds=time.monotonic() - started,
+            )
+            if list(file_identity(config["model"]["path"])) != list(expected_identity):
+                raise ValueError("teacher model changed during joint reader")
+        # Close every mapped target before publication; marker stays on failure.
+        failures = []
+        for value in maps.values():
+            try:
+                value._mmap.close()
+            except BaseException as error:
+                failures.append(error)
+        maps.clear()
+        if failures:
+            raise BaseExceptionGroup("joint target final close", failures)
+        write_json(output / "teacher-values.json", bank)
+        write_json(
+            output / "cache.json",
+            dict(
+                schema="quoridor-public-static-teacher-v1",
+                input_classes=config["input_classes"],
+                teacher_values=file_ref(output / "teacher-values.json"),
+                teacher="C",
+            ),
+        )
+        marker.unlink()
+        return dict(
+            cache=file_ref(output / "cache.json"),
+            bank=file_ref(output / "teacher-values.json"),
+            head=bank["teachers"]["C"]["head"],
+        )
+    except BaseException as error:
+        try:
+            write_json(
+                output / "failure.json",
+                dict(
+                    primary=error_details(error),
+                    head=None if head is None else head.facts(),
+                    prior_actual_rows=config["prior_actual_rows"],
+                    rows_execution_when_pending="UNKNOWN; no refill/retry",
+                ),
+            )
+        except BaseException as publication:
+            raise BaseExceptionGroup("joint teacher primary/publication", [error, publication])
+        raise
+    finally:
+        failures = []
+        for value in maps.values():
+            try:
+                value._mmap.close()
+            except BaseException as error:
+                failures.append(error)
+        if failures:
+            propagating = sys.exception()
+            raise BaseExceptionGroup(
+                "joint teacher primary/cleanup",
+                ([propagating] if propagating is not None else []) + failures,
+            )
+
+
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("mode", choices=("qualify", "labels"))
+    parser.add_argument("mode", choices=("qualify", "labels", "policy-values"))
     parser.add_argument("--config", required=True)
     args = parser.parse_args()
     from .cycle_process import cancellation_signals
 
     with cancellation_signals():
         config = json.loads(Path(args.config).read_bytes())
-        result = (qualify_values if args.mode == "qualify" else label_values)(config)
+        result = {
+            "qualify": qualify_values,
+            "labels": label_values,
+            "policy-values": label_policy_values,
+        }[args.mode](config)
     print(json.dumps(result, separators=(",", ":")))
 
 

@@ -503,6 +503,28 @@ def train(
     device = configure_framework(cfg)
     corpus = load(cache)
     static_teacher = getattr(corpus, "static_teacher", False)
+    joint_mode = "policy_value" in cfg
+    if joint_mode != bool(getattr(corpus, "policy_value", False)):
+        raise ValueError("joint bank/config must be explicitly selected together")
+    joint = joint_restart = joint_observation = None
+    joint_prior_wall_seconds = 0.0
+    if joint_mode:
+        from .policy_value_training import initialization
+
+        joint_expected = json.loads(Path(input_binding).read_text()) if input_binding else None
+        if joint_expected is None:
+            raise ValueError("bound joint initializer and teacher bank required")
+        joint = initialization(cfg, joint_expected, corpus)
+        # Bound the extra restart state before making checkpoint copies.
+        if (
+            16 * len(corpus.rows) + 16 * len(corpus.pairs) + 2 * 1024**2
+            > joint["settings"]["checkpoint_bytes"]
+        ):
+            raise ValueError("joint restart counters exceed configured checkpoint capacity")
+        if joint_expected.get("static_continuation") is not None:
+            raise ValueError("joint restart uses its same-config normal checkpoint")
+        if joint_expected.get("reused_initial_observation") is not None:
+            raise ValueError("scalar-only INITIAL cannot supply joint policy observation")
     continuation_input = None
     if static_teacher:
         from .static_learning import static_settings
@@ -613,7 +635,11 @@ def train(
         cfg["training"]["warmup_steps"] = min(
             257, math.ceil(len(ix_train) / cfg["training"]["batch_size"])
         )
-    statistics, fitted = training_statistics(corpus, ix_train, column)
+    if joint_mode:
+        # Keep Cedar's incumbent T-only normalizer; no new-data scale scan/fit.
+        statistics, fitted = joint["statistics"], None
+    else:
+        statistics, fitted = training_statistics(corpus, ix_train, column)
     if input_binding is not None:
         expected = (
             volume_admission["expected"]
@@ -649,7 +675,11 @@ def train(
     if step_score:
         distance_fit = {"a": 0, "b": 1, "units": "integer-wall-distance-steps"}
     model = build_model(cfg["model"], statistics).to(device)
-    if static_teacher and continuation_input is None:
+    if joint_mode:
+        from .policy_value_training import attach
+
+        attach(model, joint)
+    elif static_teacher and continuation_input is None:
         common_initial = json.loads(bound_file_bytes(expected["common_initial"], 65536))
         if (
             common_initial["input_classes"] != corpus.input_ref
@@ -662,9 +692,17 @@ def train(
         restore_warmstart_parameters(model, expected["initial_weights"])
 
     initial_state = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
+    initial_policy_evidence = model.policy_evidence if joint_mode else None
     if volume_admission is not None:
         digest = hashlib.sha256()
-        for key in ("ft.weight", "ft.bias", "h.weight", "h.bias", "out.weight", "out.bias"):
+        for key in (
+            "ft.weight",
+            "ft.bias",
+            "h.weight",
+            "h.bias",
+            "out.weight",
+            "out.bias",
+        ):
             digest.update(initial_state[key].numpy().astype("<f4").tobytes())
         if digest.hexdigest() != volume_admission["expected"]["initial_weights_sha"]:
             raise ValueError("actual common initialization differs before optimizer/forward")
@@ -675,8 +713,15 @@ def train(
     generator = torch.Generator().manual_seed(
         cfg["training"]["seed"] if static_teacher else cfg["training"]["seed"] + 1
     )
-    optimizers = {"adam": torch.optim.Adam, "adamw": torch.optim.AdamW, "sgd": torch.optim.SGD}
-    opt_kwargs = {"lr": cfg["optimizer"]["lr"], "weight_decay": cfg["optimizer"]["weight_decay"]}
+    optimizers = {
+        "adam": torch.optim.Adam,
+        "adamw": torch.optim.AdamW,
+        "sgd": torch.optim.SGD,
+    }
+    opt_kwargs = {
+        "lr": cfg["optimizer"]["lr"],
+        "weight_decay": cfg["optimizer"]["weight_decay"],
+    }
     if cfg["optimizer"]["name"] == "sgd":
         opt_kwargs["momentum"] = cfg["optimizer"]["momentum"]
 
@@ -724,14 +769,19 @@ def train(
     write(
         output / "data.json",
         {
-            "binding": {"dataset_sha": binding["dataset_sha"], "file": "cache-binding.json.gz"},
+            "binding": {
+                "dataset_sha": binding["dataset_sha"],
+                "file": "cache-binding.json.gz",
+            },
             "train": len(ix_train),
             "validation": len(ix_validation),
             "constant": constant,
             "distance_fit": distance_fit,
             "teacher_types": sorted(teacher_types),
             "target_alias": (
-                "one bounded board-only static scalar; not rootmean or outcome z"
+                "same-forward C policy distribution and board-only STM value"
+                if joint_mode
+                else "one bounded board-only static scalar; not rootmean or outcome z"
                 if static_teacher
                 else "rootmean is bounded search value only for alpha_beta datasets"
             ),
@@ -768,7 +818,9 @@ def train(
         else None
     )
     supply = ReflectionBatches(
-        corpus, cfg["training"]["reflection_probability"], cfg["training"]["reflection_seed"]
+        corpus,
+        cfg["training"]["reflection_probability"],
+        cfg["training"]["reflection_seed"],
     )
     evaluation_steps = (
         set()
@@ -806,7 +858,9 @@ def train(
         )
         diag_train = np.sort(
             rng.choice(
-                ix_train, min(len(ix_train), cfg["evaluation"]["diagnostic_rows"]), replace=False
+                ix_train,
+                min(len(ix_train), cfg["evaluation"]["diagnostic_rows"]),
+                replace=False,
             )
         )
         diag_val = np.sort(
@@ -818,10 +872,16 @@ def train(
         )
     else:
         diag_train = diagnostic_indices(
-            rows, ix_train, cfg["evaluation"]["diagnostic_rows"], cfg["training"]["seed"]
+            rows,
+            ix_train,
+            cfg["evaluation"]["diagnostic_rows"],
+            cfg["training"]["seed"],
         )
         diag_val = diagnostic_indices(
-            rows, ix_validation, cfg["evaluation"]["diagnostic_rows"], cfg["training"]["seed"]
+            rows,
+            ix_validation,
+            cfg["evaluation"]["diagnostic_rows"],
+            cfg["training"]["seed"],
         )
     train_eval = ix_train if cfg["evaluation"]["full_train"] else diag_train
     if not len(train_eval):
@@ -896,7 +956,12 @@ def train(
         if continuation_input != expected.get("static_continuation"):
             raise ValueError("continuation binding changed during entry")
         continuation_start = read_static_continuation(
-            continuation_input, cfg, corpus, statistics, train_eval, evaluation_validation
+            continuation_input,
+            cfg,
+            corpus,
+            statistics,
+            train_eval,
+            evaluation_validation,
         )
         checkpoint = continuation_start["checkpoint"]
         model.load_state_dict(checkpoint["model"])
@@ -954,6 +1019,72 @@ def train(
         # Current forward counters below continue to count new executions only.
         samples += reused_initial["prior_logical_rows"]
 
+    if joint_mode:
+        from .policy_value_training import read_restart
+
+        joint_restart = read_restart(cfg, corpus, joint)
+        if joint_restart is not None:
+            joint_prior_wall_seconds = joint_restart["_actual_previous_wall_seconds"]
+            saved = joint_restart["policy_value"]
+            model.load_state_dict(joint_restart["model"])
+            model.policy_evidence = saved["policy_evidence"]
+            optimizer.load_state_dict(joint_restart["optimizer"])
+            if scheduler is not None:
+                scheduler.load_state_dict(saved["scheduler"])
+            generator.set_state(joint_restart["static_RNG"]["index_torch_state"])
+            supply.generator.bit_generator.state = joint_restart["static_RNG"][
+                "reflection_numpy_state"
+            ]
+            initial_state = saved["initial_state"]
+            initial_policy_evidence = saved["initial_policy_evidence"]
+            best_state, best_loss, best_step = (
+                saved["best_state"],
+                saved["best_loss"],
+                saved["best_step"],
+            )
+            best_exposure = saved["best_exposure"]
+            completed_step, training_seen = (
+                saved["completed_step"],
+                saved["training_seen"],
+            )
+            samples = saved["samples"]
+            forward_rows, completed_forward_rows = (
+                saved["forward_rows"],
+                saved["completed_forward_rows"],
+            )
+            for name, destination in (
+                ("sampled_rows", sampled_rows),
+                ("attempted_rows", attempted_rows),
+                ("executed_orientations", corpus.executed_orientations),
+            ):
+                value = saved[name].numpy()
+                if (
+                    value.shape != destination.shape
+                    or value.dtype.kind not in "iu"
+                    or (value < 0).any()
+                    or (value > np.iinfo(destination.dtype).max).any()
+                ):
+                    raise ValueError("joint restart row/orientation counter shape/range")
+                destination[:] = value
+            corpus.executed_rows = saved["executed_training_forwards"]
+            corpus.training_stream_prefix = saved["training_stream_segments"]
+            stopper.__dict__.update(saved["stopper"])
+            static_progress.update(saved["static_progress"])
+            joint_observation = saved["observation"]
+            curve[:] = saved["curve"]
+            if not curve or curve[-1]["step"] != completed_step:
+                curve.append(
+                    {
+                        **copy.deepcopy(joint_observation),
+                        "kind": "full_selector",
+                        "historical_reused": True,
+                        "new_forward_rows": 0,
+                    }
+                )
+            diagnostic_curve[:] = saved["diagnostic_curve"]
+            supply.training_seen = saved["supply_training_seen"]
+            supply.reflected_seen = saved["supply_reflected_seen"]
+
     continuation_exposure = None
     if continuation_start and continuation_start["checkpoint"].get("static_continuation"):
         from .static_learning import restore_static_exposure
@@ -969,7 +1100,10 @@ def train(
             )
 
     def position():
-        result = {"step": completed_step, **exposure(training_seen, len(ix_train), mode)}
+        result = {
+            "step": completed_step,
+            **exposure(training_seen, len(ix_train), mode),
+        }
         if continuation is not None:
             phase_steps = continuation_start["previous_steps"] + completed_step
             phase_draws = continuation_start["previous_draws"] + training_seen
@@ -1007,7 +1141,7 @@ def train(
             > cfg["limits"]["samples"]
             or (
                 cfg["limits"]["seconds"] is not None
-                and time.monotonic() - start > cfg["limits"]["seconds"]
+                and time.monotonic() - start + joint_prior_wall_seconds > cfg["limits"]["seconds"]
             )
         ):
             raise RuntimeError("training budget exhausted")
@@ -1024,7 +1158,11 @@ def train(
                 index, training=training, sampler=epoch_sampler if training else None
             )
             if training:
-                training_payload = (targets, weights)
+                training_payload = (
+                    (targets, weights, *corpus.joint_batch_targets)
+                    if joint_mode
+                    else (targets, weights)
+                )
             phase_seconds["transfer"] += time.monotonic() - tick
             return result if step_score else result[:3]
         features, distances, _ = supply.batch(index, training=training)
@@ -1051,9 +1189,14 @@ def train(
 
             measured = StaticMeasurements(corpus.pairs)
             actual_rows = 0
-            for pair, orientation, weight, feature, distance in corpus.evaluation_chunks(
-                indices, cfg["evaluation"]["batch_size"]
-            ):
+            joint_policy_sse = joint_mass = 0.0
+            for (
+                pair,
+                orientation,
+                weight,
+                feature,
+                distance,
+            ) in corpus.evaluation_chunks(indices, cfg["evaluation"]["batch_size"]):
                 charge(len(pair), kind)
                 inputs = (
                     torch.from_numpy(feature).to(device),
@@ -1061,7 +1204,26 @@ def train(
                     torch.ones(len(pair), dtype=torch.long, device=device),
                 )
                 tick = time.monotonic()
-                result = model(*inputs)
+                if joint_mode:
+                    from .residual_model import policy_value_loss
+
+                    result, logits = model.forward_policy_value(*inputs)
+                    probability, legal = corpus.policy_targets(pair, orientation)
+                    _, terms = policy_value_loss(
+                        result,
+                        logits,
+                        torch.from_numpy(corpus.values[pair, orientation].copy()).to(device),
+                        torch.from_numpy(probability).to(device),
+                        torch.from_numpy(legal).to(device),
+                        value_weight=joint["settings"]["value_weight"],
+                        policy_weight=joint["settings"]["policy_weight"],
+                        row_weights=torch.from_numpy(weight).to(device),
+                    )
+                    mass = float(weight.sum())
+                    joint_policy_sse += float(terms["policy_cross_entropy"].cpu()) * mass
+                    joint_mass += mass
+                else:
+                    result = model(*inputs)
                 sync()
                 phase_seconds["inference"] += time.monotonic() - tick
                 values = result.cpu().numpy()
@@ -1071,11 +1233,19 @@ def train(
 
                 stock = input_records(corpus.pairs["key"][pair])["geometry"]["stocks"].sum(axis=1)
                 measured.add(pair, values, corpus.values[pair, orientation], weight, stock)
-            return {
+            report = {
                 **measured.result(),
                 "actual_logical_rows": actual_rows,
                 "expanded_orientation_observations": 2 * len(indices),
             }
+            if joint_mode:
+                report["policy_cross_entropy"] = joint_policy_sse / joint_mass
+                report["joint_objective"] = (
+                    joint["settings"]["value_weight"] * report["target_mse"]
+                    + joint["settings"]["policy_weight"] * report["policy_cross_entropy"]
+                )
+                report["value_target"] = "same-forward C raw STM value; not outcome z"
+            return report
         values = mapped_values(len(indices))
         for first in range(0, len(indices), cfg["evaluation"]["batch_size"]):
             sub = indices[first : first + cfg["evaluation"]["batch_size"]]
@@ -1098,7 +1268,12 @@ def train(
             from .step_measurements import measurements as step_measurements
 
             return step_measurements(
-                corpus, indices, values, target, constant, cfg["model"]["train_transform"]
+                corpus,
+                indices,
+                values,
+                target,
+                constant,
+                cfg["model"]["train_transform"],
             )
         if compact:
             return compact_measurements(
@@ -1126,7 +1301,10 @@ def train(
                 measured.add(row, values[first + j])
                 reference.add(row, baseline[j])
                 for store, error in (
-                    (group_distance, (baseline[j] - local_labels[j, column]) ** np.float32(2)),
+                    (
+                        group_distance,
+                        (baseline[j] - local_labels[j, column]) ** np.float32(2),
+                    ),
                     (
                         group_constant,
                         (np.float32(constant) - local_labels[j, column]) ** np.float32(2),
@@ -1245,7 +1423,11 @@ def train(
     def save_checkpoint(step):
         tick = time.monotonic()
         torch.save(
-            {"model": model.state_dict(), "model_config": cfg["model"], "scale": statistics},
+            {
+                "model": model.state_dict(),
+                "model_config": cfg["model"],
+                "scale": statistics,
+            },
             output / f"step{step}.pt",
         )
         export(model, cfg, statistics, distance_fit, output / f"step{step}-model")
@@ -1255,6 +1437,8 @@ def train(
         """Overwrite the three maintained names; never save a checkpoint per curve point."""
         tick = time.monotonic()
         state = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
+        if joint_mode and name == "initial" and joint_restart is not None:
+            state = initial_state
         payload = {
             "model": state,
             "model_config": cfg["model"],
@@ -1275,6 +1459,50 @@ def train(
                 else {}
             ),
         }
+        if joint_mode:
+            from .policy_value_training import checkpoint_identity
+
+            payload["policy_value"] = {
+                "identity": checkpoint_identity(cfg, corpus, joint),
+                "model_state_status": model_state_status,
+                "completed_step": completed_step,
+                "training_seen": training_seen,
+                "samples": samples,
+                "forward_rows": dict(forward_rows),
+                "completed_forward_rows": dict(completed_forward_rows),
+                "initial_state": initial_state,
+                "best_state": best_state,
+                "best_loss": best_loss,
+                "best_step": best_step,
+                "best_exposure": best_exposure,
+                "policy_evidence": model.policy_evidence,
+                "initial_policy_evidence": initial_policy_evidence,
+                "sampled_rows": torch.from_numpy(sampled_rows.copy()),
+                "attempted_rows": torch.from_numpy(attempted_rows.copy()),
+                "executed_orientations": torch.from_numpy(
+                    corpus.executed_orientations.astype("int64")
+                ),
+                "executed_training_forwards": corpus.executed_rows,
+                "supply_training_seen": supply.training_seen,
+                "supply_reflected_seen": supply.reflected_seen,
+                "training_stream_segments": {
+                    "previous": getattr(corpus, "training_stream_prefix", None),
+                    "current": corpus.training_stream.hexdigest(),
+                },
+                "stopper": copy.deepcopy(stopper.__dict__),
+                "static_progress": dict(static_progress),
+                "scheduler": None if scheduler is None else scheduler.state_dict(),
+                "observation": joint_observation,
+                "curve": list(curve),
+                "diagnostic_curve": list(diagnostic_curve),
+            }
+            if name == "initial" and joint_restart is not None:
+                payload["position"] = {"step": 0, **exposure(0, len(ix_train), mode)}
+                payload["policy_value"]["observation"] = None
+                payload["optimizer"] = None
+                payload["initial_semantics"] = (
+                    "Inherited original initializer; not a restart checkpoint"
+                )
         if continuation is not None:
             payload["static_continuation"] = dict(
                 identity=continuation_start["identity"],
@@ -1310,11 +1538,47 @@ def train(
                 stream.flush()
                 os.fsync(stream.fileno())
             os.replace(temporary, output / (name + ".pt"))
+        elif joint_mode:
+            serialized = io.BytesIO()
+            torch.save(payload, serialized)
+            raw = serialized.getvalue()
+            if len(raw) > joint["settings"]["checkpoint_bytes"]:
+                raise ValueError("joint checkpoint exceeds explicit bounded size")
+            temporary = output / (name + ".pt.partial")
+            with temporary.open("wb") as stream:
+                stream.write(raw)
+                stream.flush()
+                os.fsync(stream.fileno())
+            os.replace(temporary, output / (name + ".pt"))
         else:
             torch.save(payload, output / (name + ".pt"))
         if export_model:
-            export(model, cfg, statistics, distance_fit, output / (name + "-model"))
-        checkpoint_positions[name] = position()
+            if joint_mode:
+                from .policy_value_training import export_joint
+
+                restore = None
+                if name == "initial" and joint_restart is not None:
+                    restore = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
+                    old_evidence = model.policy_evidence
+                    model.load_state_dict(initial_state)
+                    model.policy_evidence = joint_restart["policy_value"]["initial_policy_evidence"]
+                try:
+                    export_joint(
+                        model,
+                        cfg,
+                        statistics,
+                        distance_fit,
+                        output / (name + "-model"),
+                        joint,
+                        initial=name == "initial",
+                    )
+                finally:
+                    if restore is not None:
+                        model.load_state_dict(restore)
+                        model.policy_evidence = old_evidence
+            else:
+                export(model, cfg, statistics, distance_fit, output / (name + "-model"))
+        checkpoint_positions[name] = payload["position"] if joint_mode else position()
         phase_seconds["export"] += time.monotonic() - tick
 
     first_static_progress_sent = bool(continuation_start and continuation_start["previous_draws"])
@@ -1334,7 +1598,7 @@ def train(
     def evaluate(step, selector, diagnostic, full_train=False):
         nonlocal best_step, best_loss, best_state, best_exposure, last_completed_point
         nonlocal first_static_progress_sent
-        nonlocal continuation_observation, best_continuation_ref
+        nonlocal continuation_observation, best_continuation_ref, joint_observation
         tick = time.monotonic()
         model.eval()
         reused = {}
@@ -1371,8 +1635,12 @@ def train(
                     "train": summarize(current_train_eval, ptrain),
                     "validation": summarize(ix_validation, pval),
                 }
+                if joint_mode:
+                    joint_observation = copy.deepcopy(record)
                 loss = record["validation"][
-                    "target_mse"
+                    "joint_objective"
+                    if joint_mode and joint["settings"]["selector"] == "joint_loss"
+                    else "target_mse"
                     if cfg["evaluation"]["monitor"] == "row"
                     else "target_game_equal_mse"
                 ]
@@ -1466,10 +1734,14 @@ def train(
                                 reused[int(i)] = float(values[at])
                 if scheduled:
                     write_values(
-                        ptrain, output / f"train-step{step}.f32", cfg["evaluation"]["batch_size"]
+                        ptrain,
+                        output / f"train-step{step}.f32",
+                        cfg["evaluation"]["batch_size"],
                     )
                     write_values(
-                        praw, output / f"validation-step{step}.f32", cfg["evaluation"]["batch_size"]
+                        praw,
+                        output / f"validation-step{step}.f32",
+                        cfg["evaluation"]["batch_size"],
                     )
                 phase_seconds["full_selector"] += time.monotonic() - tick
             if diagnostic:
@@ -1557,7 +1829,10 @@ def train(
 
     def persist_curves():
         tick = time.monotonic()
-        for name, records in [("curves", curve), ("diagnostic-curves", diagnostic_curve)]:
+        for name, records in [
+            ("curves", curve),
+            ("diagnostic-curves", diagnostic_curve),
+        ]:
             while persisted_curve_counts[name] < len(records):
                 at = persisted_curve_counts[name]
                 append_curve_record(output / (name + ".jsonl.gz"), records[at])
@@ -1646,7 +1921,10 @@ def train(
             count_encoding = _attempt_finalization(
                 "sampling-counts.npz",
                 lambda: write_sampling_counts(
-                    output / "sampling-counts.npz", ix_train, sampled_rows, attempted_rows
+                    output / "sampling-counts.npz",
+                    ix_train,
+                    sampled_rows,
+                    attempted_rows,
                 ),
                 failures,
             )
@@ -1702,6 +1980,7 @@ def train(
             failures,
         )
         phase_seconds["logging"] += time.monotonic() - tick
+        run_status_wall = time.monotonic() - start if joint_mode else None
         _attempt_finalization(
             "run-status.json",
             lambda: write(
@@ -1719,6 +1998,20 @@ def train(
                     "samples": samples,
                     "forward_rows_conservative": forward_rows,
                     "forward_rows_completed": completed_forward_rows,
+                    **(
+                        {
+                            "joint_runtime": {
+                                "restart": joint["binding"]["restart"],
+                                "prior_wall_seconds": joint_prior_wall_seconds,
+                                "current_wall_seconds": run_status_wall,
+                                "cumulative_wall_seconds": joint_prior_wall_seconds
+                                + run_status_wall,
+                                "scope": "normal fit run-status clocks, not nested/native/outer sum",
+                            }
+                        }
+                        if joint_mode
+                        else {}
+                    ),
                     "reused_prior_INITIAL": None
                     if reused_initial is None
                     else {
@@ -1729,7 +2022,7 @@ def train(
                         "original_failed_run_unchanged": True,
                     },
                     "phase_seconds_inclusive": phase_seconds,
-                    "wall_seconds": time.monotonic() - start,
+                    "wall_seconds": run_status_wall if joint_mode else time.monotonic() - start,
                     "timing_overlap": "inclusive/nested; do not add phases to infer whole wall",
                 },
             ),
@@ -1803,13 +2096,25 @@ def train(
                 append_record(observation_log, baseline_record)
                 curve.append(baseline_record)
                 last_completed_point = {"kind": "continuation_baseline", **position()}
-            if continuation is None and evaluate(0, True, 0 in diagnostic_steps):
+            if (
+                continuation is None
+                and joint_restart is None
+                and evaluate(0, True, 0 in diagnostic_steps)
+            ):
                 status = "EARLY_STOPPED"
             else:
                 for step in update_steps(
                     cfg["training"]["steps"]
-                    - (continuation_start["previous_steps"] if continuation_start else 0)
+                    - (
+                        continuation_start["previous_steps"]
+                        if continuation_start
+                        else completed_step
+                        if joint_restart is not None
+                        else 0
+                    )
                 ):
+                    if joint_restart is not None:
+                        step += joint_restart["policy_value"]["completed_step"]
                     attempted_step = step
                     n = (
                         min(
@@ -1820,7 +2125,8 @@ def train(
                         )
                         if continuation is not None
                         else min(
-                            batch_size, static_controls["maximum_training_draws"] - training_seen
+                            batch_size,
+                            static_controls["maximum_training_draws"] - training_seen,
                         )
                         if static_teacher
                         else (epoch_sampler.next_batch_size if epoch_sampler else batch_size)
@@ -1833,7 +2139,8 @@ def train(
                         > cfg["limits"]["samples"]
                         or (
                             cfg["limits"]["seconds"] is not None
-                            and time.monotonic() - start > cfg["limits"]["seconds"]
+                            and time.monotonic() - start + joint_prior_wall_seconds
+                            > cfg["limits"]["seconds"]
                         )
                     ):
                         raise RuntimeError("training budget exhausted")
@@ -1884,7 +2191,10 @@ def train(
                     inputs = batch(index, training=True)
                     charge(len(index), "train")
                     tick = time.monotonic()
-                    prediction = model(*inputs)
+                    if joint_mode:
+                        prediction, policy_logits = model.forward_policy_value(*inputs)
+                    else:
+                        prediction = model(*inputs)
                     sync()
                     phase_seconds["inference"] += time.monotonic() - tick
                     completed_forward_rows["train"] += len(index)
@@ -1905,6 +2215,20 @@ def train(
                         else objective_weights[ix].to(device)
                     )
                     loss = (per_row_loss * weights).mean() / (6400 if step_score else 1)
+                    if joint_mode:
+                        from .residual_model import policy_value_loss
+
+                        probability, legal = training_payload[2:]
+                        loss, joint_terms = policy_value_loss(
+                            prediction,
+                            policy_logits,
+                            training_payload[0],
+                            torch.from_numpy(probability).to(device),
+                            torch.from_numpy(legal).to(device),
+                            value_weight=joint["settings"]["value_weight"],
+                            policy_weight=joint["settings"]["policy_weight"],
+                            row_weights=weights,
+                        )
                     if not torch.isfinite(loss):
                         raise ValueError("nonfinite training loss")
                     tick = time.monotonic()
@@ -1941,6 +2265,8 @@ def train(
                     training_seen += len(index)
                     np.add.at(sampled_rows, index, 1)
                     model_state_status = "LAST_COMPLETED_UPDATE"
+                    if joint_mode:
+                        model.policy_evidence = "learned"
                     if (
                         continuation is not None
                         and lr[0] == static_controls["floor"]
@@ -1961,6 +2287,18 @@ def train(
                             "actual_optimizer_step": completed_step,
                             "objective_loss": float(loss.detach().cpu()),
                             "batch_row_mse": float(per_row_loss.detach().mean().cpu()),
+                            **(
+                                {
+                                    "policy_cross_entropy": float(
+                                        joint_terms["policy_cross_entropy"].detach().cpu()
+                                    ),
+                                    "value_target_mse": float(
+                                        joint_terms["outcome_mse"].detach().cpu()
+                                    ),
+                                }
+                                if joint_mode
+                                else {}
+                            ),
                             "batch_rows": len(index),
                             "lr": lr,
                             "gradient_norm": gradients,
@@ -2018,7 +2356,10 @@ def train(
             )
         except BaseException as error:
             primary_error = error
-            status, fault = ("INTERRUPTED", {"type": type(error).__name__, "message": str(error)})
+            status, fault = (
+                "INTERRUPTED",
+                {"type": type(error).__name__, "message": str(error)},
+            )
             _attempt_finalization(
                 "primary_stop_record",
                 lambda: append_record(
@@ -2165,6 +2506,30 @@ def train(
             "input_binding_sha256": volume_admission["input_binding_sha256"],
             "receipt_sha256": sha(output / "main-volume-admission.json"),
         }
+    if joint_mode:
+        freeze["policy_value"] = {
+            "settings": cfg["policy_value"],
+            "input": joint["binding"],
+            "selected_policy_manifest_sha256": sha(
+                selected_model_path / "policy-head/manifest.json"
+            ),
+            "selected_policy_weights_sha256": sha(selected_model_path / "policy-head/policy.f32"),
+            "native_identity_constructors": joint["native_identity_constructors"],
+            "native_identity_head_rows": 0,
+            "exported_native_identities": joint.get("exported_identities", {}),
+            "teacher_target": "same C forward legal policy distribution + raw STM value",
+            "restart": joint["binding"]["restart"],
+            "prior_logical_rows": 0
+            if joint_restart is None
+            else joint_restart["policy_value"]["samples"],
+            "new_logical_rows": samples
+            - (0 if joint_restart is None else joint_restart["policy_value"]["samples"]),
+            "counter_scope": "same-config original prefix plus new block; no failed-suffix refill",
+        }
+        for name in ("initial", "best", "last"):
+            for file in ("manifest.json", "policy.f32"):
+                relative = name + "-model/policy-head/" + file
+                freeze["artifacts_sha256"][relative] = sha(output / relative)
     write(output / "freeze.json", freeze)
     persist()
     if static_teacher:

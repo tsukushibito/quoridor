@@ -147,6 +147,11 @@ def resolve_config(path=None, overrides=()):
             copy.deepcopy(path) if isinstance(path, dict) else json.loads(Path(path).read_text())
         )
         for section, values in incoming.items():
+            if section == "policy_value" and isinstance(values, dict):
+                # Explicit optional joint mode; old resolved configs keep their
+                # exact key set and old value-only settings/identity.
+                result[section] = copy.deepcopy(values)
+                continue
             if section not in result or not isinstance(values, dict):
                 raise ValueError(f"unknown/invalid section: {section}")
             for key, value in values.items():
@@ -349,6 +354,10 @@ def resolve_config(path=None, overrides=()):
         from .static_learning import static_settings
 
         static_settings(result)
+    if "policy_value" in result:
+        from .policy_value_training import settings
+
+        settings(result)
     return result
 
 

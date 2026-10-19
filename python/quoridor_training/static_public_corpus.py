@@ -68,12 +68,63 @@ class StaticTeacherCorpus:
                 raise ValueError("teacher publication still incomplete")
             n = inputs["counts"]["pair_rows"]
             self.pairs = self._map(
-                "pairs", inputs["class_pairs"], inputs["class_pairs_identity"], PAIR, (n,)
+                "pairs",
+                inputs["class_pairs"],
+                inputs["class_pairs_identity"],
+                PAIR,
+                (n,),
             )
             entry = bank["teachers"][teacher]
             self.values = self._map(
-                "values", entry["values"], entry["values_identity"], np.dtype("<f4"), (n, 2)
+                "values",
+                entry["values"],
+                entry["values_identity"],
+                np.dtype("<f4"),
+                (n, 2),
             )
+            self.policy_value = "policy" in entry
+            self.joint_batch_targets = None
+            if self.policy_value:
+                policy = entry["policy"]
+                if (
+                    teacher != "C"
+                    or set(policy)
+                    != {
+                        "action_order",
+                        "value_perspective",
+                        "input_coordinates",
+                        "orientation_targets",
+                        "temperature",
+                        "probabilities",
+                        "probabilities_identity",
+                        "legal_mask",
+                        "legal_mask_identity",
+                    }
+                    or policy["action_order"] != "absolute-core-action-id209"
+                    or policy["value_perspective"] != "side-to-move"
+                    or policy["input_coordinates"] != "canonical-public-STM0-native-C20"
+                    or policy["orientation_targets"]
+                    != "independent same-forward actual input orientations"
+                    or type(policy["temperature"]) not in (int, float)
+                    or not np.isfinite(policy["temperature"])
+                    or policy["temperature"] <= 0
+                ):
+                    raise ValueError("honest bound C joint policy/value metadata")
+                self.policy_temperature = policy["temperature"]
+                self.policy = self._map(
+                    "policy",
+                    policy["probabilities"],
+                    policy["probabilities_identity"],
+                    np.dtype("<f4"),
+                    (n, 2, 209),
+                )
+                self.policy_legal = self._map(
+                    "policy_legal",
+                    policy["legal_mask"],
+                    policy["legal_mask_identity"],
+                    np.dtype("u1"),
+                    (n, 2, 209),
+                )
             self.observations = ClassObservations(self.pairs)
             self.observations.validate_values(self.values)
             self.counts = self.observations.counts
@@ -181,6 +232,8 @@ class StaticTeacherCorpus:
         features(records["geometry"], orientation.astype(bool), out=out, workspace=workspace)
         distance[:] = records["distance"]
         target = self.values[pair, orientation]
+        if self.policy_value:
+            self.joint_batch_targets = self.policy_targets(pair, orientation)
         if not np.isfinite(target).all():
             raise ValueError("missing actual teacher scalar")
         if mask is not None:
@@ -302,5 +355,36 @@ class StaticTeacherCorpus:
             sha256=hashlib.sha256(path.read_bytes()).hexdigest(),
             rows=self.executed_rows,
             ordered_index_mask_sha256=self.training_stream.hexdigest(),
+            **(
+                {
+                    "stream_segments": {
+                        "previous": self.training_stream_prefix,
+                        "current": self.training_stream.hexdigest(),
+                        "semantics": "prefix digest plus current block; not a resumed hashlib digest",
+                    }
+                }
+                if hasattr(self, "training_stream_prefix")
+                else {}
+            ),
             semantics="successful training forwards, may exceed completed optimizer draws after update failure",
         )
+
+    def policy_targets(self, pair, orientation):
+        """Actual same-input orientation output; not assumed teacher LR equivariance."""
+        if not self.policy_value:
+            raise ValueError("scalar-only bank has no policy targets")
+        probability = np.asarray(self.policy[pair, orientation], dtype=np.float32).copy()
+        legal = np.asarray(self.policy_legal[pair, orientation]).copy()
+        if (
+            probability.ndim != 2
+            or probability.shape[1] != 209
+            or legal.shape != probability.shape
+            or np.any(legal > 1)
+            or not legal.any(axis=1).all()
+            or not np.isfinite(probability).all()
+            or np.any(probability < 0)
+            or np.any(probability[legal == 0] != 0)
+            or not np.allclose(probability.sum(axis=1), 1, atol=1e-6, rtol=0)
+        ):
+            raise ValueError("finite nonnegative legal full-distribution targets")
+        return probability, legal.astype(bool)

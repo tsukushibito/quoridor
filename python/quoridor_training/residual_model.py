@@ -119,12 +119,27 @@ def policy_permutation(side, *, reflected=False):
     return tuple(result)
 
 
-def policy_value_loss(value, logits, z, policy_target, legal_mask):
+def policy_value_loss(
+    value,
+    logits,
+    z,
+    policy_target,
+    legal_mask,
+    *,
+    value_weight=1.0,
+    policy_weight=1.0,
+    row_weights=None,
+):
     """Loss boundary for the existing optimizer: outcome MSE + legal policy CE.
 
     Callers supply one joint forward and reflected targets/mask in absolute core
     coordinates. This is no data loader, teacher selection or new fit permission.
     """
+    weights = (value_weight, policy_weight)
+    if any(type(w) not in (int, float) or not 0 <= w < float("inf") for w in weights) or not any(
+        weights
+    ):
+        raise ValueError("finite nonnegative policy/value weights with positive total")
     if logits.dtype != torch.float32 or logits.ndim != 2 or logits.shape[1] != 209:
         raise ValueError("FP32 policy209 logits")
     if legal_mask.dtype != torch.bool or legal_mask.shape != logits.shape:
@@ -147,9 +162,24 @@ def policy_value_loss(value, logits, z, policy_target, legal_mask):
         raise ValueError("policy target normalisation")
     # Select legal log probabilities first: never evaluate zero * negative infinity.
     logp = torch.log_softmax(logits.masked_fill(~legal_mask, -torch.inf), dim=1)
-    policy = -(policy_target * logp.masked_fill(~legal_mask, 0)).sum(dim=1).mean()
-    outcome = torch.mean((value - z) ** 2)
-    return outcome + policy, {"outcome_mse": outcome, "policy_cross_entropy": policy}
+    policy_rows = -(policy_target * logp.masked_fill(~legal_mask, 0)).sum(dim=1)
+    if row_weights is None:
+        policy = policy_rows.mean()
+        outcome = torch.mean((value - z) ** 2)
+    else:
+        if (
+            row_weights.shape != value.shape
+            or not torch.isfinite(row_weights).all()
+            or (row_weights < 0).any()
+            or row_weights.sum() <= 0
+        ):
+            raise ValueError("finite nonnegative actual row weights with positive total")
+        policy = (policy_rows * row_weights).sum() / row_weights.sum()
+        outcome = ((value - z) ** 2 * row_weights).sum() / row_weights.sum()
+    return value_weight * outcome + policy_weight * policy, {
+        "outcome_mse": outcome,
+        "policy_cross_entropy": policy,
+    }
 
 
 def validate_policy_manifest(m, shared_fingerprint, hidden):

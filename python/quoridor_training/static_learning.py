@@ -928,6 +928,103 @@ def prepare_fits(config):
     return dict(result=file_ref(output / "result.json"), fit_entered=False)
 
 
+def prepare_policy_fit(config):
+    """Materialize normal train inputs only after an actual joint bank exists."""
+    from pathlib import Path
+    from .common import bound_file_bytes, resolve_config
+    from .scaled_model import validate_statistics
+    from .static_public_corpus import StaticTeacherCorpus
+    from .public_static_prepare import file_ref
+    from .snapshot import write_json
+    from .policy_value_training import settings
+
+    if set(config) != {
+        "cache",
+        "fit_config",
+        "initial_model",
+        "initial_policy",
+        "core_library",
+        "restart",
+        "output",
+    }:
+        raise ValueError("actual joint cache/config/initializer and normal output required")
+    manifest = json.loads(bound_file_bytes(config["cache"], 131072))
+    if manifest["schema"] != "quoridor-public-static-teacher-v1":
+        raise ValueError("actual published static joint cache")
+    cfg = resolve_config(json.loads(bound_file_bytes(config["fit_config"], 131072)))
+    settings(cfg)
+    descriptor = json.loads(bound_file_bytes(config["initial_model"]["descriptor"], 65536))
+    statistics = validate_statistics(descriptor)
+    if descriptor["weights_SHA"] != config["initial_model"]["weights"]["sha256"]:
+        raise ValueError("actual initializer descriptor/weights differ")
+    output = Path(config["output"])
+    output.mkdir(exist_ok=False)
+    marker = output / "INCOMPLETE"
+    marker.write_text("actual joint fit inputs not completely prepared\n")
+    corpus = StaticTeacherCorpus(Path(config["cache"]["path"]).parent)
+    primary = None
+    try:
+        if (
+            corpus.binding["dataset_sha"] != config["cache"]["sha256"]
+            or not corpus.policy_value
+            or corpus.policy_temperature != cfg["policy_value"]["temperature"]
+        ):
+            raise ValueError("same actual joint cache/value/policy configuration required")
+        static_settings(cfg, corpus.counts["train"], corpus.counts["validation"])
+        train_indices = np.flatnonzero(corpus.splits == 0)
+        if not len(train_indices) or not corpus.counts["validation"]:
+            raise ValueError("nonempty unsealed original T/V classes required")
+        constant = float(np.mean(corpus.labels[train_indices, 0], dtype=np.float64))
+        write_json(output / "config.json", cfg)
+        write_json(output / "scale.json", statistics)
+        write_json(
+            output / "constant.json",
+            {
+                "row_mean_constant": constant,
+                "binding": {
+                    "dataset_sha": corpus.binding["dataset_sha"],
+                    "partition": "train",
+                    "teacher": "same-forward C STM value, not outcome z",
+                },
+            },
+        )
+        binding = {
+            "cache_manifest_sha": corpus.binding["dataset_sha"],
+            "fit_config_sha": file_ref(output / "config.json")["sha256"],
+            "scale_artifact": str((output / "scale.json").resolve()),
+            "scale_artifact_sha": file_ref(output / "scale.json")["sha256"],
+            "constant_artifact": str((output / "constant.json").resolve()),
+            "constant_artifact_sha": file_ref(output / "constant.json")["sha256"],
+            "initial_weights": config["initial_model"]["weights"],
+            "initial_weights_sha": config["initial_model"]["weights"]["sha256"],
+            "policy_value": {
+                name: config[name]
+                for name in (
+                    "initial_model",
+                    "initial_policy",
+                    "core_library",
+                    "restart",
+                )
+            },
+        }
+        write_json(output / "input-binding.json", binding)
+        corpus.verify_binding()
+    except BaseException as error:
+        primary = error
+        raise
+    finally:
+        corpus.close(primary_error=primary)
+    marker.unlink()
+    return {
+        "cache": config["cache"],
+        "config": file_ref(output / "config.json"),
+        "input_binding": file_ref(output / "input-binding.json"),
+        "scale": file_ref(output / "scale.json"),
+        "constant": file_ref(output / "constant.json"),
+        "scope": "actual source/config preparation only; no fit/forward or runtime permission",
+    }
+
+
 def main():
     import argparse
     import json
@@ -936,9 +1033,11 @@ def main():
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", required=True)
+    parser.add_argument("--mode", choices=("fits", "policy-value"), default="fits")
     args = parser.parse_args()
     with cancellation_signals():
-        result = prepare_fits(json.loads(Path(args.config).read_bytes()))
+        prepare = prepare_policy_fit if args.mode == "policy-value" else prepare_fits
+        result = prepare(json.loads(Path(args.config).read_bytes()))
     print(json.dumps(result, separators=(",", ":")))
 
 

@@ -60,3 +60,33 @@ class StaticInputs:
         if code != 0 or np.any(status != 0) or not np.isfinite(c20).all():
             raise ValueError("pinned canonical C20 input encoding failed")
         return sigma, c20
+
+    def policy_mask(self, keys):
+        """Canonical public keys have native STM=0; C20 policy209 is core order.
+
+        Same canonical C20 closure and core rules own orientation and legality.
+        No Python geometry/range-distance classifier or history is reconstructed.
+        """
+        keys = np.asarray(keys)
+        if keys.ndim != 1 or keys.dtype != np.dtype("V28") or not 0 < len(keys) <= self.batch_rows:
+            raise ValueError("bounded exact policy input keys")
+        packed = np.ascontiguousarray(keys)
+        mask = np.zeros((len(keys), 209), dtype="u1")
+        status = np.full(len(keys), 255, dtype="u1")
+        function = self.core.quoridor_public_policy_masks
+        function.argtypes = [
+            ctypes.POINTER(ctypes.c_uint8),
+            ctypes.c_size_t,
+            ctypes.POINTER(ctypes.c_uint8),
+            ctypes.POINTER(ctypes.c_uint8),
+        ]
+        function.restype = ctypes.c_int
+        code = function(
+            packed.ctypes.data_as(ctypes.POINTER(ctypes.c_uint8)),
+            len(keys),
+            mask.ctypes.data_as(ctypes.POINTER(ctypes.c_uint8)),
+            status.ctypes.data_as(ctypes.POINTER(ctypes.c_uint8)),
+        )
+        if code != 0 or np.any(status != 0) or np.any(mask > 1) or not mask.any(axis=1).all():
+            raise ValueError("canonical core nonterminal policy mask refused")
+        return mask.astype(bool)

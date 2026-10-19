@@ -57,6 +57,96 @@ pub unsafe extern "C" fn quoridor_public_sigma_inputs(
     0
 }
 
+/// Board-only core209 mask for the SAME checked canonical STM public key.
+/// No fabricated history/repetition/WDL or upstream mask classifier.
+///
+/// # Safety
+/// key: rows*28 readable bytes; mask: rows*209 writable bytes; status: rows
+/// writable bytes; all buffers nonoverlapping, each live for the full call.
+#[unsafe(no_mangle)]
+pub unsafe extern "C" fn quoridor_public_policy_masks(
+    key: *const u8,
+    rows: usize,
+    mask: *mut u8,
+    status: *mut u8,
+) -> i32 {
+    if key.is_null() || mask.is_null() || status.is_null() || rows == 0 || rows > 8192 {
+        return 1;
+    }
+    let keys = unsafe { std::slice::from_raw_parts(key, rows * 28) };
+    let masks = unsafe { std::slice::from_raw_parts_mut(mask, rows * 209) };
+    let status = unsafe { std::slice::from_raw_parts_mut(status, rows) };
+    masks.fill(0);
+    status.fill(1);
+    for (i, key) in keys.as_chunks::<28>().0.iter().enumerate() {
+        if let Some(board) = position(key) {
+            // The existing checked public-key owner already refuses goal
+            // geometry without a genuine winner; do not invent that history.
+            let legal = board.legal_action_ids();
+            if !legal.is_empty() {
+                for id in legal {
+                    masks[i * 209 + usize::from(id)] = 1;
+                }
+                status[i] = 0;
+            }
+        }
+    }
+    0
+}
+
+/// Normal native value and optional policy identity. Loads but performs zero heads.
+/// Policy shared-fingerprint/SHA/shape/coordinates are checked by PolicyHead::load.
+///
+/// # Safety
+/// path: path_len UTF-8 bytes; optional policy: policy_len UTF-8 bytes (NULL iff
+/// policy_len=0); output: 64 writable bytes. All buffers live and disjoint.
+#[unsafe(no_mangle)]
+pub unsafe extern "C" fn quoridor_public_nnue_identity(
+    path: *const u8,
+    path_len: usize,
+    policy: *const u8,
+    policy_len: usize,
+    output: *mut u8,
+) -> i32 {
+    if path.is_null()
+        || output.is_null()
+        || path_len == 0
+        || path_len > 4096
+        || policy_len > 4096
+        || (policy.is_null() != (policy_len == 0))
+    {
+        return 1;
+    }
+    let raw = unsafe { std::slice::from_raw_parts(path, path_len) };
+    let Ok(path) = std::str::from_utf8(raw) else {
+        return 1;
+    };
+    let path = std::path::Path::new(path);
+    if !path.is_absolute() {
+        return 1;
+    }
+    let Ok(model) = quoridor_nnue::ResidualModel::load(path) else {
+        return 2;
+    };
+    let mut identity = [0_u8; 64];
+    identity[..32].copy_from_slice(&model.fingerprint());
+    if policy_len != 0 {
+        let raw = unsafe { std::slice::from_raw_parts(policy, policy_len) };
+        let Ok(path) = std::str::from_utf8(raw) else {
+            return 1;
+        };
+        if !std::path::Path::new(path).is_absolute() {
+            return 1;
+        }
+        let Ok(head) = quoridor_nnue::policy::PolicyHead::load(path, &model) else {
+            return 3;
+        };
+        identity[32..].copy_from_slice(&head.fingerprint());
+    }
+    unsafe { std::slice::from_raw_parts_mut(output, 64) }.copy_from_slice(&identity);
+    0
+}
+
 fn model_key(board: Position) -> crate::Result<[u8; 28]> {
     let input = quoridor_nnue::encode_qf1(board)?;
     let mut key = [0; 28];
@@ -200,6 +290,117 @@ mod tests {
             out[20 + i * 4..24 + i * 4].copy_from_slice(&d.to_le_bytes());
         }
         out
+    }
+
+    #[test]
+    fn joint_policy_masks_use_core_jumps_and_all_wall_ids() {
+        let boards = [
+            Position::default(),
+            Position {
+                pawns: [40, 49],
+                ..Position::default()
+            }
+            .checked()
+            .unwrap(),
+        ];
+        let mut masks = [255_u8; 2 * 209];
+        let mut status = [255_u8; 2];
+        let packed = boards.map(key).concat();
+        assert_eq!(
+            unsafe {
+                quoridor_public_policy_masks(
+                    packed.as_ptr(),
+                    2,
+                    masks.as_mut_ptr(),
+                    status.as_mut_ptr(),
+                )
+            },
+            0
+        );
+        assert_eq!(status, [0, 0]);
+        let pawn_ids = |row: &[u8]| {
+            row[..81]
+                .iter()
+                .enumerate()
+                .filter_map(|(i, &legal)| (legal == 1).then_some(i))
+                .collect::<Vec<_>>()
+        };
+        assert_eq!(pawn_ids(&masks[..209]), vec![3, 5, 13]);
+        assert_eq!(pawn_ids(&masks[209..]), vec![31, 39, 41, 58]);
+        for row in masks.chunks_exact(209) {
+            assert!(row[81..].iter().all(|&legal| legal == 1));
+            assert!(row.iter().all(|&legal| legal <= 1));
+        }
+    }
+
+    #[test]
+    fn joint_policy_mask_refuses_goal_or_bad_sibling_without_head() {
+        let ordinary = key(Position::default());
+        let mut goal = ordinary;
+        goal[0] = 76;
+        goal[1] = 67; // a board-only key may not fabricate the missing winner
+        let mut malformed = ordinary;
+        malformed[0] = 81;
+        let packed = [ordinary, goal, malformed, ordinary].concat();
+        let mut masks = [255_u8; 4 * 209];
+        let mut status = [255_u8; 4];
+        assert_eq!(
+            unsafe {
+                quoridor_public_policy_masks(
+                    packed.as_ptr(),
+                    4,
+                    masks.as_mut_ptr(),
+                    status.as_mut_ptr(),
+                )
+            },
+            0
+        );
+        assert_eq!(status, [0, 1, 1, 0]);
+        assert!(masks[209..3 * 209].iter().all(|&x| x == 0));
+        assert_eq!(&masks[..209], &masks[3 * 209..]);
+    }
+
+    #[test]
+    fn joint_input_identity_ffi_bounds_refuse_before_loading() {
+        assert_eq!(
+            unsafe {
+                quoridor_public_policy_masks(
+                    std::ptr::null(),
+                    1,
+                    std::ptr::null_mut(),
+                    std::ptr::null_mut(),
+                )
+            },
+            1
+        );
+        let path = [b'x'];
+        let mut out = [0_u8; 64];
+        for size in [0, 4097, usize::MAX] {
+            assert_eq!(
+                unsafe {
+                    quoridor_public_nnue_identity(
+                        path.as_ptr(),
+                        size,
+                        std::ptr::null(),
+                        0,
+                        out.as_mut_ptr(),
+                    )
+                },
+                1
+            );
+        }
+        assert_eq!(
+            unsafe {
+                quoridor_public_nnue_identity(
+                    path.as_ptr(),
+                    1,
+                    std::ptr::null(),
+                    1,
+                    out.as_mut_ptr(),
+                )
+            },
+            1
+        );
     }
 
     #[test]
