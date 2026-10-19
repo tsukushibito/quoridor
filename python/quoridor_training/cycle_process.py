@@ -168,13 +168,31 @@ class CycleResources:
             raise CycleStopped("cycle paused")
         if available_memory() < self.reserve:
             raise CycleStopped("cycle host RAM reserve")
-        infos = [
-            *([process_info(os.getpid())] if include_self else []),
-            *(process_info(member["pid"]) for member in owned),
-        ]
+        infos = [process_info(os.getpid())] if include_self else []
+        for member in owned:
+            info = process_info(member["pid"])
+            if identity(info) == identity(member):
+                infos.append(info)
         rss = sum((info["rss"] for info in infos if info))
         if rss > self.memory_limit:
-            raise CycleStopped("cycle memory_limit")
+            error = CycleStopped("cycle memory_limit")
+            live = [info for info in infos if info]
+            error.add_note(
+                "actual memory-limit observation: "
+                + json.dumps(
+                    {
+                        "output": str(self.output),
+                        "rss_B": rss,
+                        "limit_B": self.memory_limit,
+                        "include_self": include_self,
+                        "member_count": len(live),
+                        "members": [{**identity(info), "rss_B": info["rss"]} for info in live[:32]],
+                        "members_omitted": max(0, len(live) - 32),
+                    },
+                    sort_keys=True,
+                )
+            )
+            raise error
         if self.output_limit is not None and directory_bytes(self.output) > self.output_limit:
             raise CycleStopped("cycle output_limit")
 
