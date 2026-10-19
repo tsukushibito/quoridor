@@ -170,10 +170,29 @@ def class_split(key, split_seed):
     return int(10 * int.from_bytes(digest[:8], "big") >= 9 * 2**64)
 
 
-def write_class_table(connection, stream, *, split_seed):
+def write_class_table(connection, stream, *, split_seed=None, split_assignments=None):
     """Publish sorted complete-source LR pairs using the frozen shared hash."""
-    # Validate even for an empty table.
-    class_split(bytes(28), split_seed)
+    # Hash splitting remains the full-public default. Explicit fixture splits
+    # must cover exactly the same complete unprotected class set, never alias it.
+    if split_assignments is None:
+        class_split(bytes(28), split_seed)
+    else:
+        if (
+            split_seed is not None
+            or not isinstance(split_assignments, dict)
+            or not split_assignments
+            or any(
+                type(key) is not bytes
+                or len(key) != 28
+                or type(code) is not int
+                or code not in (0, 1)
+                for key, code in split_assignments.items()
+            )
+        ):
+            raise ValueError("exclusive complete explicit class partition required")
+        actual = {row[0] for row in connection.execute("SELECT key FROM inputs")}
+        if actual != set(split_assignments):
+            raise ValueError("explicit partition differs from complete accumulated classes")
     counts = {
         "qualified_original_observations": 0,
         "protected_original_observations": 0,
@@ -200,11 +219,17 @@ def write_class_table(connection, stream, *, split_seed):
                 n = canonical + reflected
                 counts["qualified_original_observations"] += n
                 if protected:
+                    if split_assignments is not None:
+                        raise ValueError("explicit fixture cannot assign a protected class")
                     counts["protected_original_observations"] += n
                     counts["protected_by_bits"][str(protected)] += n
                     keep[i] = False
                     continue
-                split = class_split(key, split_seed)
+                split = (
+                    class_split(key, split_seed)
+                    if split_assignments is None
+                    else split_assignments[key]
+                )
                 rows[i] = key, (canonical, reflected), split
                 counts["validation" if split else "train"] += n
             rows = rows[keep]

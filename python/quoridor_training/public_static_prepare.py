@@ -1,4 +1,4 @@
-"""Full-original board-only public preparation with the maintained native codec.
+"""Publish full-original public classes or configured genuine prefix fixtures.
 
 No teacher/model is loaded here. The normal job guardian owns actual CPU/RAM,
 whole holding, cancellation and exact child cleanup. Source shards are serial;
@@ -53,7 +53,194 @@ def file_identity(path):
     return IndexedPublicCorpus.identity(Path(path).stat())
 
 
+def prefix_fixture_rows(source):
+    """Validate explicit isolated fixture histories without generating new states."""
+    rows = source.get("fixed_prefixes")
+    if not isinstance(rows, list) or not 1 <= len(rows) <= 64:
+        raise ValueError("bounded fixed prefix fixture required")
+    seen = set()
+    for row in rows:
+        if (
+            not isinstance(row, dict)
+            or set(row) != {"fixture", "history", "functional_split"}
+            or type(row["fixture"]) is not int
+            or row["fixture"] < 0
+            or row["fixture"] in seen
+            or not isinstance(row["history"], list)
+            or len(row["history"]) > 200
+            or any(type(a) is not int or not 0 <= a < 209 for a in row["history"])
+            or row["functional_split"] not in ("T", "V")
+        ):
+            raise ValueError("unique fixture IDs, actual core action histories and explicit T/V")
+        seen.add(row["fixture"])
+    if {r["functional_split"] for r in rows} != {"T", "V"}:
+        raise ValueError("both functional partitions are required")
+    return rows
+
+
+def prefix_fixture_partition(rows, pairs):
+    """Join native original/LR keys; no Python board/key/reflection formula."""
+    if len(rows) != len(pairs):
+        raise ValueError("one native pair per fixed prefix")
+    assignments, observations, provenance = {}, [], []
+    for row, keys in zip(rows, pairs):
+        if len(keys) != 2 or any(type(k) is not bytes or len(k) != 28 for k in keys):
+            raise ValueError("two exact native key28 orientations required")
+        original, reflected = keys
+        canonical = min(keys)
+        code = 0 if row["functional_split"] == "T" else 1
+        if canonical in assignments and assignments[canonical] != code:
+            raise ValueError("same or true-LR class crosses explicit fixture T/V")
+        assignments[canonical] = code
+        # A real self-LR input has a single original observation, with no refill.
+        oriented = [original] if original == reflected else [original, reflected]
+        observations.extend(oriented)
+        provenance.append(
+            {
+                **row,
+                "original_key": original.hex(),
+                "reflected_key": reflected.hex(),
+                "canonical_key": canonical.hex(),
+                "self_lr": original == reflected,
+                "orientation_observations": len(oriented),
+            }
+        )
+    return assignments, observations, provenance
+
+
+def native_prefix_keys(rows, library):
+    """Call the sole native legal replay/STM/true-LR/packed-key owner."""
+    import ctypes
+
+    actions = [a for row in rows for a in row["history"]]
+    offsets = [0]
+    for row in rows:
+        offsets.append(offsets[-1] + len(row["history"]))
+    packed = (ctypes.c_uint16 * max(1, len(actions)))(*actions)
+    starts = (ctypes.c_size_t * len(offsets))(*offsets)
+    keys = (ctypes.c_uint8 * (len(rows) * 56))()
+    status = (ctypes.c_uint8 * len(rows))()
+    native = ctypes.CDLL(library)
+    function = native.quoridor_public_prefix_keys
+    function.argtypes = [
+        ctypes.POINTER(ctypes.c_uint16),
+        ctypes.c_size_t,
+        ctypes.POINTER(ctypes.c_size_t),
+        ctypes.c_size_t,
+        ctypes.POINTER(ctypes.c_uint8),
+        ctypes.POINTER(ctypes.c_uint8),
+    ]
+    function.restype = ctypes.c_int
+    code = function(packed, len(actions), starts, len(rows), keys, status)
+    if code != 0 or any(status):
+        raise ValueError(f"native prefix replay rejected: call={code}, rows={list(status)}")
+    return [
+        (bytes(keys[i * 56 : i * 56 + 28]), bytes(keys[i * 56 + 28 : (i + 1) * 56]))
+        for i in range(len(rows))
+    ]
+
+
+def prepare_prefix_fixture(config):
+    """Small configured source ingress into the existing PAIR37 publisher.
+
+    This route has explicit isolated functional T/V, not the public hash split;
+    no public shards, protected observations, labels or model bodies are read.
+    """
+    from .static_public import accumulate_inputs
+
+    if set(config) != {"prefix_fixture", "native_library", "output", "max_sqlite_bytes"}:
+        raise ValueError("prefix fixture and full-public settings cannot be mixed")
+    source_raw = bound_file_bytes(config["prefix_fixture"], 65536)
+    source = json.loads(source_raw)
+    rows = prefix_fixture_rows(source)
+    bound_file_bytes(config["native_library"], 64 * 1024**2)
+    pairs = native_prefix_keys(rows, config["native_library"]["path"])
+    assignments, observations, provenance = prefix_fixture_partition(rows, pairs)
+    output = Path(config["output"])
+    output.mkdir(exist_ok=False)
+    marker = output / "INCOMPLETE"
+    marker.write_text("prefix fixture publication incomplete; original failure retained\n")
+    connection = None
+    primary = None
+    try:
+        database = output / "input-classes.sqlite"
+        connection = create_class_accumulator(database, max_bytes=config["max_sqlite_bytes"])
+        accumulate_inputs(
+            connection,
+            np.asarray(observations, dtype="V28"),
+            np.zeros(len(observations), dtype="u1"),
+        )
+        connection.commit()
+        table = output / "class-pairs.bin"
+        with table.open("xb") as stream:
+            counts = write_class_table(connection, stream, split_assignments=assignments)
+            stream.flush()
+            os.fsync(stream.fileno())
+        if counts["qualified_original_observations"] != len(observations):
+            raise ValueError("fixture orientation multiplicity census differs")
+        mapped = np.memmap(table, dtype=PAIR, mode="r")
+        try:
+            if ClassObservations(mapped).counts != {k: counts[k] for k in ("train", "validation")}:
+                raise ValueError("fixture virtual observations differ")
+        finally:
+            mapped._mmap.close()
+        if bound_file_bytes(config["prefix_fixture"], 65536) != source_raw:
+            raise ValueError("fixture source changed during publication")
+        result = {
+            "schema": "quoridor-public-static-input-classes-v1",
+            "status": "COMPLETE",
+            "source_mode": "prefix-fixture",
+            "source_manifest": config["prefix_fixture"],
+            "native_library": config["native_library"],
+            "class_pairs": file_ref(table),
+            "class_pairs_identity": file_identity(table),
+            "pair_record_bytes": PAIR.itemsize,
+            "counts": counts,
+            "original_observations": len(observations),
+            "source_receipts": provenance,
+            "split": {
+                "algorithm": "explicit configured functional T/V; reject same/trueLR pair across partitions",
+                "independent_validation": False,
+            },
+            "value_semantics": "native canonical local STM; no outcome/teacher labels created",
+            "full_history": "genuine prefix replay; class key remains board-only",
+            "old_label_payload_read": False,
+        }
+        write_json(output / "cache.json", result)
+        connection.close()
+        connection = None
+        database.unlink()
+        marker.unlink()
+        return {"manifest": file_ref(output / "cache.json"), "counts": counts}
+    except BaseException as error:
+        primary = error
+        try:
+            write_json(
+                output / "failure.json",
+                {
+                    "type": type(error).__name__,
+                    "message": str(error),
+                    "prefix_fixture": config["prefix_fixture"],
+                    "native_library": config["native_library"],
+                },
+            )
+        except BaseException as publication:
+            raise BaseExceptionGroup("fixture preparation/publication", [error, publication])
+        raise
+    finally:
+        if connection is not None:
+            try:
+                connection.close()
+            except BaseException as error:
+                raise BaseExceptionGroup(
+                    "fixture preparation/SQLite close",
+                    ([primary] if primary is not None else []) + [error],
+                )
+
+
 def prepare(config):
+    if "prefix_fixture" in config:
+        return prepare_prefix_fixture(config)
     source = json.loads(bound_file_bytes(config["source_manifest"], 65536))
     if (
         source.get("revision") != REVISION

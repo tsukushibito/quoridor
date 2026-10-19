@@ -160,6 +160,78 @@ fn model_key(board: Position) -> crate::Result<[u8; 28]> {
     Ok(key)
 }
 
+/// The existing full-history and STM owners supply the sole packed input key.
+fn context_model_key(context: &quoridor_core::research::SigmaContext) -> crate::Result<[u8; 28]> {
+    let canonical =
+        crate::sigma_plane_position(&quoridor_core::research::features(context.position()))?;
+    model_key(canonical)
+}
+
+/// Legally replay bounded prefixes and their true LR histories, with no model.
+/// Each successful row contains original key28 followed by reflected key28.
+/// Status1 rejects illegal or terminal histories; invalid siblings remain local.
+///
+/// # Safety
+/// actions: actions_len readable u16 (nonnull even if empty); offsets: rows+1
+/// readable usize; output: rows*56 writable bytes; status: rows writable bytes.
+/// All allocations are live and nonoverlapping throughout the call.
+#[unsafe(no_mangle)]
+pub unsafe extern "C" fn quoridor_public_prefix_keys(
+    actions: *const u16,
+    actions_len: usize,
+    offsets: *const usize,
+    rows: usize,
+    output: *mut u8,
+    status: *mut u8,
+) -> i32 {
+    if actions.is_null()
+        || offsets.is_null()
+        || output.is_null()
+        || status.is_null()
+        || rows == 0
+        || rows > 64
+        || actions_len > rows * 200
+    {
+        return 1;
+    }
+    let actions = unsafe { std::slice::from_raw_parts(actions, actions_len) };
+    let offsets = unsafe { std::slice::from_raw_parts(offsets, rows + 1) };
+    if offsets[0] != 0
+        || offsets[rows] != actions_len
+        || offsets.windows(2).any(|v| v[0] > v[1] || v[1] - v[0] > 200)
+    {
+        return 2;
+    }
+    let output = unsafe { std::slice::from_raw_parts_mut(output, rows * 56) };
+    let status = unsafe { std::slice::from_raw_parts_mut(status, rows) };
+    output.fill(0);
+    status.fill(1);
+    for i in 0..rows {
+        let prefix = &actions[offsets[i]..offsets[i + 1]];
+        let result = (|| -> crate::Result<[[u8; 28]; 2]> {
+            let reflected = prefix
+                .iter()
+                .map(|&a| crate::terminal::reflect_action(a))
+                .collect::<crate::Result<Vec<_>>>()?;
+            let mut keys = [[0; 28]; 2];
+            for (j, history) in [prefix, reflected.as_slice()].into_iter().enumerate() {
+                let context = quoridor_core::research::SigmaContext::from_prefix(history)?;
+                if context.terminal_value().is_some() {
+                    return Err("prefix class input must be genuinely nonterminal".into());
+                }
+                keys[j] = context_model_key(&context)?;
+            }
+            Ok(keys)
+        })();
+        if let Ok(keys) = result {
+            output[i * 56..i * 56 + 28].copy_from_slice(&keys[0]);
+            output[i * 56 + 28..(i + 1) * 56].copy_from_slice(&keys[1]);
+            status[i] = 0;
+        }
+    }
+    0
+}
+
 /// Opaque, SHA-bound unprotected public T/V input classes. No labels/history.
 /// PAIR37 belongs to the completed static-public input owner, not a book codec.
 pub struct StaticInputExclusions {
@@ -259,10 +331,7 @@ impl StaticInputExclusions {
             let context = SigmaContext::from_prefix(actions)?;
             // The existing Sigma STM plane owner handles player exchange and
             // goal direction; its existing decoder supplies canonical player0.
-            let canonical = crate::sigma_plane_position(&quoridor_core::research::features(
-                context.position(),
-            ))?;
-            let key = model_key(canonical)?;
+            let key = context_model_key(&context)?;
             if self.keys.binary_search(&key).is_ok() {
                 return Ok(true);
             }
@@ -578,5 +647,96 @@ mod tests {
         };
         assert!(StaticInputExclusions::from_manifest(&changed).is_err());
         std::fs::remove_dir_all(base).unwrap();
+    }
+
+    #[test]
+    fn prefix_key_ffi_preserves_native_stm_lr_and_rejects_terminal_history() {
+        let histories: &[&[u16]] = &[&[], &[3], &[13, 67], &[0], &[13, 67, 4, 76, 13, 67, 4, 76]];
+        let actions: Vec<u16> = histories.iter().flat_map(|p| p.iter().copied()).collect();
+        let mut offsets = vec![0];
+        for p in histories {
+            offsets.push(offsets.last().unwrap() + p.len());
+        }
+        let mut output = vec![255; histories.len() * 56];
+        let mut status = vec![255; histories.len()];
+        assert_eq!(
+            unsafe {
+                quoridor_public_prefix_keys(
+                    actions.as_ptr(),
+                    actions.len(),
+                    offsets.as_ptr(),
+                    histories.len(),
+                    output.as_mut_ptr(),
+                    status.as_mut_ptr(),
+                )
+            },
+            0
+        );
+        assert_eq!(status, [0, 0, 0, 1, 1]);
+        for (i, p) in histories[..3].iter().enumerate() {
+            let lr = p
+                .iter()
+                .map(|&a| crate::terminal::reflect_action(a).unwrap())
+                .collect::<Vec<_>>();
+            for (j, history) in [*p, lr.as_slice()].into_iter().enumerate() {
+                let c = quoridor_core::research::SigmaContext::from_prefix(history).unwrap();
+                let canonical =
+                    crate::sigma_plane_position(&quoridor_core::research::features(c.position()))
+                        .unwrap();
+                let expected = key(canonical); // pre-existing independent packing reference
+                assert_eq!(&output[i * 56 + j * 28..i * 56 + (j + 1) * 28], &expected);
+            }
+        }
+        assert_eq!(&output[..28], &output[28..56]); // self LR is observable
+        assert!(output[3 * 56..].iter().all(|v| *v == 0));
+    }
+
+    #[test]
+    fn prefix_key_ffi_refuses_invalid_framing_before_output() {
+        let actions = [3_u16];
+        let mut output = [255_u8; 56];
+        let mut status = [255_u8];
+        for offsets in [[1_usize, 1], [0, 2], [1, 0]] {
+            assert_eq!(
+                unsafe {
+                    quoridor_public_prefix_keys(
+                        actions.as_ptr(),
+                        1,
+                        offsets.as_ptr(),
+                        1,
+                        output.as_mut_ptr(),
+                        status.as_mut_ptr(),
+                    )
+                },
+                2
+            );
+            assert_eq!(output, [255; 56]);
+        }
+        assert_eq!(
+            unsafe {
+                quoridor_public_prefix_keys(
+                    std::ptr::null(),
+                    0,
+                    std::ptr::null(),
+                    1,
+                    output.as_mut_ptr(),
+                    status.as_mut_ptr(),
+                )
+            },
+            1
+        );
+        assert_eq!(
+            unsafe {
+                quoridor_public_prefix_keys(
+                    actions.as_ptr(),
+                    1,
+                    [0_usize, 1].as_ptr(),
+                    65,
+                    output.as_mut_ptr(),
+                    status.as_mut_ptr(),
+                )
+            },
+            1
+        );
     }
 }
