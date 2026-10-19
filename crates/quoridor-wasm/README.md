@@ -7,3 +7,5 @@
 検証は[wire](tests/wire.rs)、[AI wire](tests/ai_wire.rs)、[NNUE runtime](tests/nnue-runtime.cjs)。native crate test、Wasm buildと実ブラウザ動作は別検証。[Rust運用](../../docs/development/rust-ai.md)で条件を確認し、native結果をブラウザの到達証明にしない。軽いPython構文確認からWasm buildや対局を暗黙起動しない。
 
 研究NNUEのJSON入口は `{ "ruleset": "standard_2p_threefold", "prefix": [...] }` を必須とする。旧prefix配列やruleset無しを新研究規則へ暗黙変換しない。`NnueEngine`は明示した研究規則で同じRust探索を使う。製品UIの`RulesGame`/`AiSearch`は`Game`/`Position`/`SearchSession::b0`のpublisher-standard入口を維持し、研究Config/default contextを経由しない。新研究のWasmソース変更はnativeの資格とは別で、Wasm build/runtime未検証のまま成功扱いしない。
+
+固定28fixture専用の `research-parity` bin / `research_parity_json` とその診断moduleは撤去した。現役のNNUE入口は `nnue` featureの `NnueEngine`、製品の型/fixture生成は上記のbinを使う。過去の固定parity実験はGitと保存済み結果から再構成し、現役Wasm artifactに専用exportや互換featureを残さない。

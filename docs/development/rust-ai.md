@@ -87,8 +87,8 @@ forward前に実行行数を課金し、update完了後だけseen/rowcountsを�
 ## 検証とWasm
 
 ```bash
-cargo test --workspace --features quoridor-wasm/research
-cargo clippy --workspace --features quoridor-wasm/research --all-targets -- -D warnings
+cargo test --workspace --features quoridor-wasm/nnue,quoridor-core/research-diagnostics,quoridor-ai/research-diagnostics
+cargo clippy --workspace --features quoridor-wasm/nnue,quoridor-core/research-diagnostics,quoridor-ai/research-diagnostics --all-targets -- -D warnings
 bash scripts/dev/project-env.sh python -B scripts/dev/check-research.py
 cargo check -p quoridor-wasm --features nnue --target wasm32-unknown-unknown
 wasm-pack build crates/quoridor-wasm --target nodejs --dev \
