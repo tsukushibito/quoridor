@@ -2720,7 +2720,7 @@ fn neighbour_opportunity_output(o: &alphabeta::NeighbourOpportunity) -> Value {
     })).collect::<Vec<_>>());
     json!({"mode":o.mode.map(|m|m.name()),"method_id":o.mode.map(|m|m.id()),
         "published":o.published,"root_stock":o.root_stock,"parent_restored":o.parent_restored,
-        "by_internal_stock":counts,"partial_work":o.final_stats.as_ref().map(|s|observed_work(s)),
+        "by_internal_stock":counts,"partial_work":o.final_stats.as_ref().map(observed_work),
         "denominator":"visited/scored/pulled decision events; not unique positions; arm-specific tree",
         "unreached_tail":"no forced preparation/sort/expansion; TT-only cutoffs can omit scored entry",
         "pull_shadow":"Off prefix from same frozen prepared IDs/keys, only as far as actual pulls; no counterfactual history training",
