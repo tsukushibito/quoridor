@@ -629,4 +629,14 @@ TIMEは128calls/16sessionsすべてDepthComplete、実2,209,346nodes。合計の
 
 strengthのnode chargeは112,308,903/132,866,997/124,916,086/126,495,919、合計496,587,905で各250Mの非融通枠内。費用は元job outerを各一度とし、並列・内側clockを足さない。physical NN/FT/head回数、全費用、連続family peak RSSはUNKNOWNで、native `nn_calls=0`を物理NN0へ読み替えない。全old/new RAW・FAILED・UNKNOWN費を残し、未使用枠を次段階へ貸与/返金しない。実保持と保存解析は既存384MiB whole内で扱い、50GB・pause・seals・weights・foreign・取消済み相談actual8通知を維持した。
 
-[図・記述表・来歴付き最終報告](../../.worktree/assets/perf/cedar-history-tie-ordering-v1/numeric-v1/final-saved-analysis-v1/report-ja.md)、[全128局の資格](../../.worktree/assets/perf/cedar-history-tie-ordering-v1/numeric-v1/final-saved-analysis-v1/full-qualification.json)、[一度の最終区間](../../.worktree/assets/perf/cedar-history-tie-ordering-v1/numeric-v1/final-saved-analysis-v1/final-bootstrap.json)を参照する。ordering・評価器を固定し、[LMRのtyped設定・係数範囲設計と別開始集合の独立確認](ai-nnue-research.md#現行確認後のlmrパラメータ調整と独立評価2026-10-19-jst人間直接指示)へ進む。具体的な調整数値枠は別の入口で有限化し、旧枠を転用しない。用途を終えた候補専用経路は324.12で現役callerと保持用途を確認して撤去し、共通Control・計測・head ownerと必要な検証を保つ。parent closeや人間/Root ACKを次工程に加えない。
+[図・記述表・来歴付き最終報告](../../.worktree/assets/perf/cedar-history-tie-ordering-v1/numeric-v1/final-saved-analysis-v1/report-ja.md)、[全128局の資格](../../.worktree/assets/perf/cedar-history-tie-ordering-v1/numeric-v1/final-saved-analysis-v1/full-qualification.json)、[一度の最終区間](../../.worktree/assets/perf/cedar-history-tie-ordering-v1/numeric-v1/final-saved-analysis-v1/final-bootstrap.json)を参照する。この14の判断は維持する。現在の[LMR typed設定・係数範囲設計](ai-nnue-research.md#現行確認後のlmrパラメータ調整と独立評価2026-10-19-jst人間直接指示)は継続し、係数の数値調整前に、以下の324.15を別候補として検証する後続計画を置く。そこで採用または現状維持としたordering・評価器を固定して、係数調整と別開始集合の独立確認へ進む。具体的な調整数値枠は別の入口で有限化し、旧枠を転用しない。用途を終えた候補専用経路は324.12で現役callerと保持用途を確認して撤去し、共通Control・計測・head ownerと必要な検証を保つ。parent closeや人間/Root ACKを次工程に加えない。
+
+## 履歴同点群の駒・壁近傍優先（324.15、後続計画）
+
+2026-10-19の人間直接指示「その検証作業を計画に含めて」により、現Controlを対照とする一候補を後続計画へ加える。既存TT/PV・goal・killer等のtierと完全な合成動的履歴scoreを先に守り、両方が同点の手だけを**駒移動→両駒周辺の壁→既存壁周辺の壁→その他**の順へ分類し、分類内は既存ActionID昇順とする。両駒を同じ上位近傍群として扱い、前進量の加点や自分・相手の別順位を同時導入せず、近傍外の合法手も残す。14の`local_goal_edge`が見た駒前進量・直進辺とは異なる問いであり、駒移動の一律優先や壁周辺の効果は未検証である。原14の65勝63敗・区間・不採用と閉鎖は変更せず、旧候補の復活や追加seedでの救済としない。
+
+実装に着手する際は、現在のpawn座標とH/V壁ビット列、小さな固定幾何maskを使う一案に近傍を固定する。範囲・向き・塞ぐ辺・盤端・重なりの扱いを結果前に解決し、半径や重みのsweepは行わない。追加BFS/NNUE/child make/全壁scan/heap確保/別cacheを設けず、既存ordering経路とtyped設定・namespace/resetを使う。分類判定やsort時の反復費も含めて評価し、priority/history不変、H/Vと盤端の幾何、合法集合・一意性、親復元・停止を必要範囲で検証する。採点式の短さだけで高速と認定しない。
+
+比較は同Cedar・固定LMR/depth_rank・終盤条件・TT/PVS等で、初期化とmodel/TT/history/scratchの実再用範囲をそろえた真正な時系列の連続Search時間と、同じ持時間のfamily両色棋力を両方計画する。Search合計とsetup/drop/wholeを分け、nodes・完成深度は補助指標とし、木や仕事の変化を同仕事speedupに読み替えない。開始集合・family分割と露出、call/game/node上限、反復順、統計・採否・停止・実資源・必要な大容量保持は着手前に有限化する。14の128局等を十分な規模として自動流用しない。今回の登録は計画の追加であり、即実装・数値STARTや新しい科学quotaを発行しない。
+
+324.9.4のtyped LMR設定化・整数範囲設計は止めない。係数の数値調整はこの候補の検証・採否と構成固定の後に置き、数値比較中はorderingとLMR/NNUEを同時変更しない。実作業の状態・担当と入口は既存Beads324.15/324.9に置き、既存task sessionを自然境界で再用する。旧14の不要候補専用経路の整理は324.12のままとし、新候補のために保持・復活させない。旧L2/14/UNKNOWN/未使用quotaを貸与せず、全pause/seals/models/defaults/foreign/RAWFAILED/費UNKNOWN/50GBを維持する。新role・監視・計画台帳・各段階のACKは作らない。

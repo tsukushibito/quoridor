@@ -2533,10 +2533,16 @@ strength node chargeは各112,308,903/132,866,997/124,916,086/126,495,919、計4
 
 [図・全表・来歴と費用を含む最終報告](../.worktree/assets/perf/cedar-history-tie-ordering-v1/numeric-v1/final-saved-analysis-v1/report-ja.md)、[全128局の資格](../.worktree/assets/perf/cedar-history-tie-ordering-v1/numeric-v1/final-saved-analysis-v1/full-qualification.json)、[唯一の最終区間](../.worktree/assets/perf/cedar-history-tie-ordering-v1/numeric-v1/final-saved-analysis-v1/final-bootstrap.json)、[比較設計と入力の限界](design/lightweight-move-ordering-v1.md#cedar履歴同点群だけの安い二次採点324142026-10-19人間直接依頼)を参照する。
 
-次はCedar・現Control・path_tailを固定し、既存324.9の[LMR typed設定・係数範囲設計から調整と独立確認](design/ai-nnue-research.md#現行確認後のlmrパラメータ調整と独立評価2026-10-19-jst人間直接指示)へ進む。整数丸めで働く摂動、少数係数の有限更新、別開始集合の独立確認を、次の入口で具体化する。ここから新しい数値枠・追加job・学習を発行せず、orderingと評価器を係数探索中に同時変更しない。採用されなかった候補専用経路は具体的な残る用途を確認後に324.12で整理し、比較sourceはGitと原artifactから再構成する。parent close/返信/ACKや取消済みactual8追跡を入口にしない。
+Cedar・現Control・path_tailを固定した既存324.9.4の[LMR typed設定・整数係数範囲設計](design/ai-nnue-research.md#現行確認後のlmrパラメータ調整と独立評価2026-10-19-jst人間直接指示)を継続する。追加された人間直接指示の324.15は係数の数値調整前の別候補検証として計画し、その採否で構成を固定してから調整と独立確認へ進む。整数丸めで働く摂動、少数係数の有限更新、別開始集合の独立確認を、次の入口で具体化する。ここから新しい数値枠・追加job・学習を発行せず、orderingと評価器を係数探索中に同時変更しない。採用されなかった候補専用経路は具体的な残る用途を確認後に324.12で整理し、比較sourceはGitと原artifactから再構成する。parent close/返信/ACKや取消済みactual8追跡を入口にしない。
 
 ### 終了済み実験入口・互換対象の撤去（324.12、2026-10-19）
 
 現行callerと予定比較の用途がない固定28件の`SIGMA-RULE-FEATURE-PARITY`専用module/bin、公開exportと専用`research` featureを撤去した。現在のNNUE入口、rules/ai境界、3つのgenerator bin、現役テストとarena設定は保持し、開発案内は同じ有効feature集合を明示する形へ更新した。過去の再構成元はGitと保存済み結果であり、RAW・モデル・入力・失敗記録は削除していない。この撤去を14の障害原因とは認定せず、14の資源修復は同じ担当の関連成果を再用する。限定compileの結果と実採用記録は既存324.12へ追記し、整理全体やleaf closeを14の入口にしない。
 
 source exportも、旧root Web配置の互換対象5件と未使用importを撤去し、列挙したroot fileは完全一致で選ぶよう修正した。現行`apps/web`・研究source・明示paths入口を保持し、`.saved`/`.old`の別fileを暗黙に書き出さない。新しい限定テスト1件の保存PASSを再用した。`research355`と`guarded_train`は現publisher・案内・入場テストの実callerがあるため保持し、番号だけで旧コードと判定しない。
+
+### 履歴同点群の駒・壁近傍優先を後続計画へ追加（324.15、2026-10-19、人間直接指示）
+
+人間の「その検証作業を計画に含めて」により、tier・完全な合成動的履歴が同点の群だけを「駒移動→両駒周辺の壁→既存壁周辺の壁→その他」、分類内はID順とする一候補を加える。原14の`local_goal_edge`は前進量・直進辺の比較であり、今回の駒移動一律優先・壁近傍は未検証である。14の65勝63敗・区間・不採用・閉鎖と旧候補撤去の324.12は変更しない。
+
+[既存ordering設計の後続計画](design/lightweight-move-ordering-v1.md#履歴同点群の駒壁近傍優先32415後続計画)へ、固定幾何maskと現在のpawn/H/Vを使う一案、追加BFS/NNUE/child make/全壁scan/heap/cacheを増やさない条件、連続Search時間と同持時間family両色棋力の両評価を記録した。近傍定義、実規模、採否・停止、分割/露出、資源・保存は着手前に有限化する。今回の追加から新科学quota・即実装・数値STARTを発行せず、旧L2/14/UNKNOWN/未使用枠を転用しない。9.4の設定化・整数範囲設計は並行継続し、係数の数値調整はこの候補の採否でorderingを固定した後とする。全pause/seals/models/defaults/foreign/原RAWFAILED/費UNKNOWN/50GBと取消済みconsultationを保持し、状態と次工程は既存Beadsへ置く。
