@@ -658,3 +658,9 @@ TIMEは128calls/16sessions/2,204,376nodesで完了。Off/On/On/OffのSearch合�
 後続の人間直接指示により、元15の採否を変えず、既存genuine完全prefixから最大30rootsを結果盲検で選び、Off/Neighbour各一回・最大60calls・D5/各250000nodes・全体15Mまでの機会診断を行う。残壁0、1..4、5..10、11..15、16..20を各最大6roots、少なくとも3family/両手番・最大6時系列を目標とし、不足は生成・重複・補充で埋めない。モデル/TT/history/headの実session再用と初回/継続を分け、Cedar/Control/depth_rank標準係数/path_tailを固定する。
 
 内部nodeの残壁0..20別に訪問、複数候補の順位入口、同tierかつ完全signed履歴のdistinct tie node/group、履歴0/非0、class差・ID順の潜在変更、先頭変更と実際pulled順変更を分ける。既存キー・生成済み合法候補だけを用い、未読lazy tailの強制生成/sort/展開、追加BFS/子make/NNUE・巨大traceを作らない。必要な旧分類は診断専用に一箇所へ分離し、通常selector/shimを復活させず、observer無効経路に追加scan/heap/counterを残さない。D5両完了とNodeLimit、Off/Onの異なる木・分母を分け、observer時間を通常速度資格へ使わない。新たな棋力・主因確定・採用を主張せず、LMR調整をこの結果/close/ACKへ待たせない。
+
+## 現行順位の質を確認する有限診断（324.21、2026-10-19人間直接指示）
+
+元52で確認した適用機会/実順位変更から、より深い完成探索が選ぶ手をどこへ置くかの診断へ進む。保存証拠を優先し、TT/保護/符号付きhistory層と安い採点が実際に決める同点群内順位・探索全順位を分離する。同一合法局面/完全history/手番/評価器/窓/条件を対応させ、先頭/上位3・5、移動量、stock、駒/壁、分母/UNKNOWNを報告する。深い選択探索をoracleと呼ばず、warm状態・打切り・未探索枝を因果的な順位品質へ読み替えない。不足fieldを先に特定し、必要な場合だけ共通bounded入口で最大26calls/26Mの小観測を結果前固定する。元52/旧384/終了LMRの再演・上書き、追加対局、候補sweepは行わない。
+
+この診断→根拠があれば一候補の有限比較/採否→ordering/評価器固定→必要な追加LMR調整、の順とする。具体候補なしならControlと既存LMR基準維持結果を使い、policyだけが残ると断定せず、学習完了を全体gateにしない。[契約と実資源](../../.artifacts/research-team/integration324/cedar-ordering-quality-v1/task.md)、[観測と限界の正本](../research-findings.md#現行orderingの順位品質を保存証拠から確認する324212026-10-19人間直接指示)。

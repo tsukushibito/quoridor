@@ -240,3 +240,5 @@ LMRを優先し、私有source/設定の照合だけを並行する。perf/build
 同日の数値開始前に、暫定D8は同じ1M/call・182calls/182M上限のまま既存depth64安全上限へ精緻化した。低い深さで早期終了して旧短測定の弱さを繰り返さないためであり、時間を見た追加反復ではない。元D8案を保持し、新しいconfigへ理由・順序・条件を固定する。容易な局面の低仕事量や不足samplesはそのまま未確定とし、D64完遂を主張せず、補充もしない。[結果前の精緻化](../../.artifacts/research-team/integration324/cedar-value-head-detail-v1/finite-depth-resolution-before-results.md)。
 
 324.20の元78探索による新診断は完了し、全対応入力の非時計仕事・値・手・PV・履歴復元が一致した。新head inclusive24.10%/leaf9.91%/AVX dot8.50%は包含を足し重ねない。完全ancestor等は未確定で、除去可能時間ではない。一候補は現Residual行参照準備のj loop外移動だけとし、関連source確認・新Rust1・真正candidate Build後、元104 ABBAの連続Searchで採否を判定する。短期LMRの入口をこの候補待ちにはせず、重いbuild/effectは実native＋通常回収STOPの別窓で実施する。[保存診断と限界](../research-findings.md#cedar-head詳細診断と行参照準備の未測定候補324202026-10-19)。
+
+324.20の元104連続Search比較はB/A=0.997456248677で、固定2%条件・反復分離を満たさず候補を保持しない。比較専用行参照差分と新fixtureは元Git/inverseへ戻し、旧13融合や別候補へ置換しない。これは有限条件未達であり同等/無効果の証明ではない。[元結果と撤去](../research-findings.md#行参照準備一候補の連続search比較は保持条件未達324202026-10-19)。

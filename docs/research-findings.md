@@ -2658,3 +2658,15 @@ first32の実行は全32 operations・512局/256完全pair/256 tuning family・U
 現在の単一train loop/teacher stream/restart/export接続をMainへ統合し、実公開module型パスと新テスト内のClippy書式2点だけを修復した。元の新Rust3定義は各1PASS、続くaffected data Clippyとrelease cdylib生成もPASS。成功済み3定義は再実行せず、製品bodyが同じtest-only書式差分の対応で再用した。実compiler-artifactが示したprivate corelib c27d53e1/977336Bにはpublic_sigma_inputs/public_policy_masks/public_nnue_identityの3symbolが存在し、実command・source/Cargo・通常回収STOPを受け入れた。旧ac29/b68のFAILED・101・pending/attempted記録と費用を保存する。[実software manifest](../.artifacts/research-team/integration324/nnue-policy-value-training-v1/current-software-v1/collection-v1/software-manifest.json)、[実停止と一度のaffected保存点](../.artifacts/research-team/integration324/nnue-policy-value-training-v1/current-software-v1/collection-v1/completion-and-STOP.json)。
 
 これはsoftware資格だけで、教師forward/optimizer/実checkpoint-restart/実native model identity/exportの機能smokeは未入場。本学習・全件教師付与は未発行、元value-onlyモデルと製品既定を変えない。既存の固定4prefix・T0,2/V1,3・原形/LR最大8orientation・最大16教師attempt・合計2updateの一度の機能確認だけを、normal bank/Experimentと実資源・実STOP窓へ束縛する。元C-only CPU9refsを直接使い、GPU FAILEDをCPU/PASSへ変換しない。先に元20の104連続Search比較を実施し、Torch/教師/optimizerや重いIOをその時計へ重ねない。
+
+### 行参照準備一候補の連続Search比較は保持条件未達（324.20、2026-10-19）
+
+元104 ABBAは4 normal manifest/data PASS、24 sessions/100,000,772nodesで完了した。全26 quadruplesの非時計work・合法root・action/PV/value bits・完全history・parent復元/session事実は一致し、100 NodeLimit UNKNOWNと4 DepthCompleteを保存した。初期化済みTT/history/head/scratchを各系列で再用したSearch合計はA0=26.229012472、B1=26.171770284、B2=25.761431348、A3=25.836631210秒。B/A=0.997456248677（記述的には0.2544%短い）だが、結果前の2%以上改善と厳密な反復分離はともにFALSE、stock guardはTRUEで、元AND条件を満たさず **NOT_SUPPORTED_IN_FIXED_FINITE_COMPARISON_NO_REFILL** とした。速度同等・無効果・一般速度/棋力の結論へ広げない。[元結果・条件・実STOP](../.worktree/assets/perf/cedar-value-head-detail-v1/effect-numeric-v1/analysis-v1/completion.json)。
+
+診断78+比較104の元182calls/175,001,351nodesは終了し、追加Search/候補sweep/再演は行わない。効果工程outer127.683609638秒は一度/nested非加算。比較専用rowviewsと専用cfg fixtureだけを保存inverse/Git18a1015親から撤去し、元indexed loopと既存correctness testsをexact6075760dへ戻した。既存データ・O/N真正image・Git復元元、joint学習接続・Main caller・モデル/既定を保持する。撤去後sourceは新たに性能計測していない。[固定撤去対応](../.artifacts/research-team/integration324/cedar-value-head-detail-v1/effect-result-acceptance-v1/retirement-binding.json)。
+
+### 現行orderingの順位品質を保存証拠から確認する（324.21、2026-10-19人間直接指示）
+
+元52のtie適用機会・実順位変更だけでは、より良い手を先へ置いたかは分からない。同じHigh17/20の新taskで、保存52/旧384 summary/固定26prefix・6series・stock層を先に照合する。TT・保護手・signed history層、同点群内shadow順位と探索全順位を分け、後の完成探索が選んだ手の上位1/3/5・移動量・駒/壁・残壁層と条件/分母/UNKNOWNを示す。深い選択探索はoracleではなく、異木・warmTT/history・打切り偏り・未探索枝を因果/見落とし率へ変換しない。必要fieldが無ければ欠落を先に明示し、既存入口による最大26calls/26M・追加対局0の最小観測だけを結果前固定する。実新観測はまだ未配分/未入場。[範囲・実資源・完成条件](../.artifacts/research-team/integration324/cedar-ordering-quality-v1/task.md)。
+
+将来の追加LMR広域比較は、順位品質診断→根拠があれば一ordering候補の有限採否→ordering/評価器固定→必要なLMR再調整の具体化、の順とする。確定した元1920/final512/RETAIN_BASELINEは再開しない。具体候補なしならControlと既存LMR結果を利用し、policy学習待ちで全作業を止めない。18.2のjoint学習接続とこのsaved診断は独立に継続し、全親close/人間返信を入口にしない。

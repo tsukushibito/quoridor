@@ -411,12 +411,14 @@ impl ResidualModel {
         let avx2 = false;
         observe(fast, avx2);
         let mut r = self.weights[o + t.hidden_width];
-        let rows = self.weights[h..b].chunks_exact(input);
-        let biases = &self.weights[b..o];
-        let outputs = &self.weights[o..o + t.hidden_width];
-        for (j, ((weights, &bias), &output)) in rows.zip(biases).zip(outputs).enumerate() {
-            let v = crate::simd::dot_fast(weights, x, bias, fast);
-            r += output * v.max(0.);
+        for j in 0..t.hidden_width {
+            let v = crate::simd::dot_fast(
+                &self.weights[h + j * input..h + (j + 1) * input],
+                x,
+                self.weights[b + j],
+                fast,
+            );
+            r += self.weights[o + j] * v.max(0.);
             if let Some(ref mut out) = hidden {
                 out[j] = v.max(0.);
             }
@@ -1131,141 +1133,5 @@ mod residual_value419_tests {
             overflowing.evaluate_with_scratch(&a, &mut scratch),
             Err(Error::Numeric(message)) if message == "residual logit"
         ));
-    }
-}
-
-#[cfg(test)]
-mod row_views_candidate_tests {
-    use super::*;
-
-    // Required comparison reference for this changed row-ingress contract only.
-    fn indexed_linear(model: &ResidualModel, a: &Accumulator, input: &[f32]) -> f32 {
-        let t = model.base.topology;
-        let width = t.input_width() + 4;
-        let h = (FEATURE_COUNT + 1) * t.ft_width;
-        let b = h + width * t.hidden_width;
-        let o = b + t.hidden_width;
-        let fast = model
-            .fast_range
-            .permits(input, a.features.distance, model.base.distance_fit);
-        let mut result = model.weights[o + t.hidden_width];
-        for j in 0..t.hidden_width {
-            let value = crate::simd::dot_fast(
-                &model.weights[h + j * width..h + (j + 1) * width],
-                input,
-                model.weights[b + j],
-                fast,
-            );
-            result += model.weights[o + j] * value.max(0.);
-        }
-        result
-    }
-
-    #[test]
-    fn row_views_preserve_indexed_bits_capture_and_refusals() {
-        for ft_width in [1, 7, 32] {
-            for hidden_width in [1, 5, 32] {
-                for scale in [1_f32, 1e20] {
-                    let t = Topology {
-                        ft_width,
-                        hidden_width,
-                    };
-                    let mut weights = vec![0.125; ResidualModel::parameter_count(t).unwrap()];
-                    let h = (FEATURE_COUNT + 1) * ft_width;
-                    for (i, value) in weights[h..].iter_mut().enumerate() {
-                        *value = if scale == 1. {
-                            ((i * 13 % 17) as f32 - 8.) / 32.
-                        } else {
-                            scale
-                        };
-                    }
-                    let model = ResidualModel::from_parts(
-                        t,
-                        weights,
-                        [0.25, 0.5],
-                        [0.5, 2.],
-                        DistanceFit { a: 0., b: 0. },
-                        RouteMode::Zero4,
-                        [0.; 4],
-                        [1.; 4],
-                    )
-                    .unwrap();
-                    for side in [0, 1] {
-                        let mut a = model
-                            .full_features(
-                                crate::Features {
-                                    ids: [vec![0, 81, 290, 301], vec![2, 83, 291, 302]],
-                                    distance: [0.25, 0.75],
-                                    side,
-                                },
-                                EvaluationMode::Scalar,
-                            )
-                            .unwrap();
-                        a.values[0][0] = -0.;
-                        a.values[1][0] = f32::from_bits(1);
-                        let mut scratch = model.evaluation_scratch();
-                        let mut routing = None;
-                        let linear = model
-                            .linear_head_with_scratch_observed(&a, &mut scratch, |fast, avx2| {
-                                routing = Some((fast, avx2))
-                            })
-                            .unwrap();
-                        let expected = indexed_linear(&model, &a, &scratch.input);
-                        assert_eq!(linear.to_bits(), expected.to_bits());
-                        assert_eq!(routing.unwrap().0, scale == 1.);
-                        let before: Vec<_> = scratch.input.iter().map(|v| v.to_bits()).collect();
-                        let mut hidden = vec![f32::NAN; hidden_width];
-                        let captured =
-                            model.evaluate_hidden_with_scratch(&a, &mut scratch, &mut hidden);
-                        let expected_value = model.value_from_linear(&a, expected);
-                        assert_eq!(
-                            captured.map(|v| v.post_tanh.to_bits()),
-                            expected_value.map(|v| v.post_tanh.to_bits())
-                        );
-                        let width = t.input_width() + 4;
-                        let b = h + width * hidden_width;
-                        for (j, value) in hidden.iter().enumerate() {
-                            let expected_hidden = crate::simd::dot_fast(
-                                &model.weights[h + j * width..h + (j + 1) * width],
-                                &scratch.input,
-                                model.weights[b + j],
-                                routing.unwrap().0,
-                            )
-                            .max(0.);
-                            assert_eq!(value.to_bits(), expected_hidden.to_bits());
-                        }
-                        assert_eq!(
-                            scratch
-                                .input
-                                .iter()
-                                .map(|v| v.to_bits())
-                                .collect::<Vec<_>>(),
-                            before
-                        );
-                        scratch.input.pop();
-                        a.features.side = 2;
-                        a.values[0][0] = f32::NAN;
-                        assert_eq!(
-                            model.evaluate_with_scratch(&a, &mut scratch),
-                            Err(Error::Input(
-                                "accumulator model/shape/finite mismatch".into()
-                            ))
-                        );
-                        a.values[0][0] = 0.;
-                        assert_eq!(
-                            model.evaluate_with_scratch(&a, &mut scratch),
-                            Err(Error::Input(
-                                "QF1 feature bounds/order/side/distance".into()
-                            ))
-                        );
-                        a.features.side = side;
-                        assert_eq!(
-                            model.evaluate_with_scratch(&a, &mut scratch),
-                            Err(Error::Input("residual scratch width".into()))
-                        );
-                    }
-                }
-            }
-        }
     }
 }

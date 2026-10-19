@@ -201,3 +201,5 @@ first32中心を固定した8対照は256局/128完全pair、全normal manifest/
 18.2のjoint教師/単一train loop/restart/export接続はMainへ統合したが、実corelib softwareは初回コンパイルの型module参照を修復中であり、新Rust3・実教師/2update機能smokeは未資格である。完成条件や本学習未発行は変えず、旧metadata成功を再演せず実未完工程だけを進める。20の元104連続Search比較も別の真正software/資源・実STOP窓へ置き、親closeや返信を入口にしない。
 
 18.2の実softwareは新Rust3各1PASS・affected Clippy・現release cdylib生成を完了した。初回型パスと新テスト内Clippy書式の元失敗を保存し、成功済み定義を再演しない。新corelibの3公開symbolと実STOPは確認済みだが、最大16教師/2updateの機能smokeは未入場であり、本学習・全件教師の許可や学習済みpolicy品質は推定しない。20の元104ABBAを次の適合窓へ置き、18.2の軽い設定は並行、Torch等はその実native＋collectionSTOP後に配分する。[実softwareと残る接続](../research-findings.md#joint-policyvalue接続の実corelib-software資格3241822026-10-19)。
+
+2026-10-19の人間直接指示により、今後の追加LMR広域比較は、現行orderingの小規模順位品質診断と具体候補があればその有限採否を先に決めてから具体化する。終了した元1920/final512/249勝263敗/RETAIN_BASELINEは確定保存し再開しない。policy導入後も変更がLMRへ及ぼす影響を見て必要範囲だけ調整し、毎回全campaignを再演しない。18.2の接続環境は並行継続する。[順位品質診断の条件](lightweight-move-ordering-v1.md#現行順位の質を確認する有限診断324212026-10-19人間直接指示)。
