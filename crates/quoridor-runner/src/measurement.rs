@@ -78,8 +78,6 @@ struct Settings {
         skip_serializing_if = "Option::is_none"
     )]
     lmr_parameters: Option<crate::config::LmrParameters>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    history_tie_break: Option<String>,
     #[serde(default)]
     zero_stock_approx_min_root_walls: Option<u8>,
     #[serde(default = "default_zero_stock_approx_method")]
@@ -146,12 +144,6 @@ fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
             return Err("LMR parameters require Control/depth_rank".into());
         }
     }
-    let tie = alphabeta::HistoryTieBreak::from_name(
-        settings.history_tie_break.as_deref().unwrap_or("off"),
-    )?;
-    if tie != alphabeta::HistoryTieBreak::Off && settings.profile != Profile::Control {
-        return Err("history tie break requires Control".into());
-    }
     alphabeta::ZeroStockSafeRaceMethod::from_name(
         settings
             .zero_stock_safe_race_method
@@ -183,8 +175,7 @@ fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
         let unique_sessions: std::collections::BTreeSet<_> =
             requests.iter().map(|r| &r.session).collect();
         let unique_roots: std::collections::BTreeSet<_> = requests.iter().map(|r| r.root).collect();
-        if tie != alphabeta::HistoryTieBreak::Off
-            || requests.len() > 12
+        if requests.len() > 12
             || unique_sessions.len() != requests.len()
             || unique_roots.len() != requests.len()
             || settings.profile != Profile::Control
@@ -401,9 +392,6 @@ impl Target for SearchTarget {
                 false,
             )?,
         };
-        session.set_history_tie_break(alphabeta::HistoryTieBreak::from_name(
-            self.settings.history_tie_break.as_deref().unwrap_or("off"),
-        )?)?;
         session.set_lmr_method(LmrMethod::from_name(&self.settings.lmr_method)?);
         session.set_lmr_parameters(
             self.settings
@@ -431,7 +419,7 @@ impl Target for SearchTarget {
         self.session = Some(session);
         Ok(
             json!({"session_constructed":true,"scratch_lifetime":if !request.observe_lmr && self.evaluator.session_residual_owner().is_some() {"residual head input session-owned; distance/counters and root/child/static scratch invocation-owned"} else {"ordinary invocation-owned scratch; no persistent pool is claimed"},"TT_capacity":capacity,"retained_TT_bytes":retained.0,"retained_session_metadata_history_bytes":retained.1,
-                "actual_selectivity":method,"lmr":lmr,"history_tie_break":self.session.as_ref().map(|s| s.history_tie_break().name()),"history_tie_break_id":self.session.as_ref().map(|s| s.history_tie_break().id()),"requested_seed":self.settings.seed,"effective_session_seed":Value::Null,"seed_semantics":"Control Search and signed ordering have no RNG/seed inlet; explicit requested seed is provenance only; deterministic fixed tie/order, no per-method/session seed invented",
+                "actual_selectivity":method,"lmr":lmr,"requested_seed":self.settings.seed,"effective_session_seed":Value::Null,"seed_semantics":"Control Search and signed ordering have no RNG/seed inlet; explicit requested seed is provenance only; deterministic fixed tie/order, no per-method/session seed invented",
                 "zero_stock_safe_race":self.settings.zero_stock_safe_race,
                 "zero_stock_safe_race_method":self.session.as_ref().and_then(|session| session.zero_stock_safe_race_enabled().then(|| session.zero_stock_safe_race_method().id())),
                 "zero_stock_approx_min_root_walls":self.settings.zero_stock_approx_min_root_walls,
@@ -544,8 +532,6 @@ impl Target for SearchTarget {
                 row["status"] == "COMPLETE" && row["completed_depth"] == 5 && after == self.before,
             )
         });
-        row["history_tie_break"] = json!(session.history_tie_break().name());
-        row["history_tie_break_id"] = json!(session.history_tie_break().id());
         row["actual_selectivity"] = json!(session.namespace().selectivity);
         row["lmr_method_requested"] = json!(self.settings.lmr_method);
         row["lmr_rule"] = json!(session.lmr_method().map(LmrMethod::id));
@@ -2623,10 +2609,6 @@ mod output_limit_contract_tests {
         bounded.bytes(&json!({"measurements":vec![row;32],"remaining_settings_session_and_control_reserve":"X".repeat(65536)}),false).unwrap();
     }
 }
-
-#[cfg(test)]
-#[path = "measurement_history_tie_tests.rs"]
-mod history_tie_tests;
 
 #[cfg(test)]
 mod lmr_parameter_settings_tests {

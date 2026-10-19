@@ -2527,7 +2527,6 @@ def measurement_config(experiment):
             "lmr",
             "lmr_method",
             "lmr_parameters",
-            "history_tie_break",
             "zero_stock_approx_min_root_walls",
             "zero_stock_approx_method",
             "zero_stock_safe_race",
@@ -2578,15 +2577,6 @@ def measurement_config(experiment):
             }
         ),
         "measurement safe-race method",
-    )
-    tie = config.get("history_tie_break")
-    if tie is None:
-        tie = "off"
-    require(
-        type(tie) is str
-        and tie in {"off", "neighbour_contact"}
-        and (tie == "off" or config["profile"] == "control"),
-        "measurement history tie break",
     )
     lmr_method = config.get("lmr_method", "depth_rank")
     require(
@@ -2761,8 +2751,7 @@ def measurement_config(experiment):
             active = request["session"]
     if any(r.get("observe_lmr", False) for r in requests):
         require(
-            tie == "off"
-            and len(requests) <= 12
+            len(requests) <= 12
             and len({r["session"] for r in requests}) == len(requests)
             and len({r["root"] for r in requests}) == len(requests)
             and config["profile"] == "control"
@@ -4470,6 +4459,7 @@ def arena_plan_check(experiment, plan):
         )
     arena_model_check(experiment, plan, 2)
     for engine in engines:
+        require("history_tie_break" not in engine, "retired engine ordering field")
         if engine["kind"] == "claustrophobia":
             require(
                 a["comparison"] == "whole_wall_time"
@@ -4479,7 +4469,6 @@ def arena_plan_check(experiment, plan):
                 and engine.get("lmr_method") is None
                 and engine.get("lmr_parameters") is None
                 and engine.get("ordering_profile") is None
-                and engine.get("history_tie_break") in {None, "off"}
                 and engine.get("zero_stock_safe_race") is not True
                 and engine.get("zero_stock_safe_race_method") is None,
                 "Claustrophobia uses its own search limits, not alpha settings",
@@ -7262,12 +7251,12 @@ def comparison_conditions(common):
     This preparation owner resolves settings, never session namespace IDs.
     Product/generator and direct raw config enable defaults remain OFF.
     """
+    require("history_tie_breaks" not in common, "retired comparison setting")
     variants = [
         dict(
             evaluator=evaluator,
             profile=profile,
             lmr=lmr,
-            history_tie_break=tie,
             lmr_method=common.get("lmr_method", "depth_rank"),
             zero_stock_safe_race=common.get("zero_stock_safe_race", True),
             zero_stock_safe_race_method=common.get("zero_stock_safe_race_method", "path_tail"),
@@ -7275,7 +7264,6 @@ def comparison_conditions(common):
         for evaluator in common["evaluators"]
         for profile in common["profiles"]
         for lmr in common.get("lmr_values", (True,))
-        for tie in common.get("history_tie_breaks", ("off",))
     ]
     for variant in variants:
         if "lmr_parameters" in common:
@@ -7285,6 +7273,7 @@ def comparison_conditions(common):
 
 
 def apply_comparison_cost(config, common, variant):
+    require("history_tie_break" not in variant, "retired comparison variant")
     config["tt_entries"] = common["tt_entries"]
     config["use_tt"] = common["use_tt"]
     config["use_pvs"] = common["use_pvs"]
@@ -7296,7 +7285,6 @@ def apply_comparison_cost(config, common, variant):
         config["lmr_parameters"] = copy.deepcopy(variant["lmr_parameters"])
     else:
         config.pop("lmr_parameters", None)
-    config["history_tie_break"] = variant.get("history_tie_break", "off")
 
     config["zero_stock_safe_race"] = variant["zero_stock_safe_race"]
     config["zero_stock_safe_race_method"] = variant["zero_stock_safe_race_method"]
@@ -7315,6 +7303,7 @@ def apply_comparison_arena(config, common, pair):
     config["max_plies"] = arena["max_plies"]
     config["max_memory_bytes"] = common["family_B"] - common["controller_B"]
     for engine, variant in zip(config["engines"], pair, strict=True):
+        require("history_tie_break" not in variant, "retired comparison variant")
         assert engine["kind"] == variant["evaluator"]
         engine["ordering_profile"] = variant["profile"]
         engine["lmr"] = variant["lmr"]
@@ -7323,7 +7312,6 @@ def apply_comparison_arena(config, common, pair):
             engine["lmr_parameters"] = copy.deepcopy(variant["lmr_parameters"])
         else:
             engine.pop("lmr_parameters", None)
-        engine["history_tie_break"] = variant.get("history_tie_break", "off")
         engine["zero_stock_safe_race"] = variant["zero_stock_safe_race"]
         engine["zero_stock_safe_race_method"] = variant["zero_stock_safe_race_method"]
         for key in ("depth", "max_nodes", "time_ms"):

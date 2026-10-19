@@ -219,9 +219,6 @@ pub struct Engine {
         skip_serializing_if = "Option::is_none"
     )]
     pub lmr_parameters: Option<LmrParameters>,
-    /// Explicit research Control-only secondary order; omitted/Off preserves defaults.
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub history_tie_break: Option<String>,
     /// Normal research arena omission enables the retained proof. Generation and
     /// functional/product callers resolve omission to OFF instead.
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -399,20 +396,6 @@ impl Config {
         for engine in &self.engines {
             crate::runtime::arena_lmr_parameters(engine, self.arena.as_ref())
                 .map_err(|e| e.to_string())?;
-            let tie = quoridor_ai::alphabeta::HistoryTieBreak::from_name(
-                engine.history_tie_break.as_deref().unwrap_or("off"),
-            )
-            .map_err(|e| e.to_string())?;
-            if tie != quoridor_ai::alphabeta::HistoryTieBreak::Off
-                && (engine.kind == "mcts"
-                    || engine.ordering_profile.as_deref() != Some("control")
-                    || !self
-                        .arena
-                        .as_ref()
-                        .is_some_and(|a| a.comparison != crate::arena::Comparison::Functional))
-            {
-                return Err("history tie break belongs to a research Control alpha arena".into());
-            }
             quoridor_ai::alphabeta::ZeroStockSafeRaceMethod::from_name(
                 engine
                     .zero_stock_safe_race_method
@@ -455,10 +438,6 @@ impl Config {
                     || engine.lmr_method.is_some()
                     || engine.lmr_parameters.is_some()
                     || engine.ordering_profile.is_some()
-                    || engine
-                        .history_tie_break
-                        .as_deref()
-                        .is_some_and(|s| s != "off")
                     || engine.zero_stock_safe_race == Some(true)
                     || engine.zero_stock_safe_race_method.is_some()
                     || self.temperature != 0.0

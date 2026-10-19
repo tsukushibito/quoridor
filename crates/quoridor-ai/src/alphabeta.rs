@@ -29,11 +29,8 @@ pub use lmr_observation::{
     LmrObservation, LmrStage, LmrTrialResult, LmrTrialStage, LmrTrialTrace, LmrTtFacts,
 };
 
-#[path = "history_tie_ordering.rs"]
-mod history_tie_ordering;
 #[path = "move_ordering.rs"]
 mod move_ordering;
-pub use history_tie_ordering::HistoryTieBreak;
 #[path = "static_geometry.rs"]
 mod static_geometry;
 #[path = "static_ordering.rs"]
@@ -1436,11 +1433,6 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
             scores.static_scores.as_ref().map(|s| &s.goals),
             self.orderer.map(|_| &scores.policy),
             history,
-        )
-        .with_history_tie_parent(
-            self.ordering
-                .as_ref()
-                .and_then(|h| h.history_tie_break.parent(c.position())),
         );
         if self.ordering_diagnostics {
             self.stats.ordering.observe_sort(ids.len());
@@ -1485,11 +1477,6 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
             scores.static_scores.as_ref().map(|s| &s.goals),
             None,
             move_ordering::HistoryScores::Signed(&scores.combined),
-        )
-        .with_history_tie_parent(
-            self.ordering
-                .as_ref()
-                .and_then(|h| h.history_tie_break.parent(c.position())),
         );
         let baseline = scores
             .observation
@@ -1500,10 +1487,9 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
                 "signed ordering keys unavailable".into(),
             ))
         })?;
-        Ok(
-            move_ordering::PreparedMoves::deferred_signed(ids, keys, baseline)
-                .with_history_tie_parent(ranking.tie_parent()),
-        )
+        Ok(move_ordering::PreparedMoves::deferred_signed(
+            ids, keys, baseline,
+        ))
     }
 
     fn ordering_scores(
@@ -2751,15 +2737,7 @@ impl OrderingProfile {
         }
     }
     pub fn namespace(self, namespace: SearchNamespace, lmr: Option<LmrMethod>) -> SearchNamespace {
-        self.namespace_with_history_tie_break(namespace, lmr, HistoryTieBreak::Off)
-    }
-    pub fn namespace_with_history_tie_break(
-        self,
-        namespace: SearchNamespace,
-        lmr: Option<LmrMethod>,
-        tie: HistoryTieBreak,
-    ) -> SearchNamespace {
-        SessionMethod::Profile(self).namespace(namespace, lmr, tie)
+        SessionMethod::Profile(self).namespace(namespace, lmr)
     }
 }
 // SignedControl is still an actual teacher/fixed-D constructor, not a shim.
@@ -2779,12 +2757,7 @@ fn append_zero_stock_approx_method(namespace: &mut SearchNamespace, method: Zero
     namespace.selectivity.push_str(method.id());
 }
 impl SessionMethod {
-    fn namespace(
-        self,
-        mut namespace: SearchNamespace,
-        lmr: Option<LmrMethod>,
-        tie: HistoryTieBreak,
-    ) -> SearchNamespace {
+    fn namespace(self, mut namespace: SearchNamespace, lmr: Option<LmrMethod>) -> SearchNamespace {
         match self {
             Self::Plain => {}
             Self::SignedControl => namespace.selectivity.push_str(":signed-control-goal-first"),
@@ -2797,7 +2770,6 @@ impl SessionMethod {
                 namespace.selectivity.push_str(profile.name());
             }
         }
-        tie.qualify(&mut namespace);
         if let Some(method) = lmr {
             append_lmr_method(&mut namespace, method);
         }
@@ -2828,58 +2800,6 @@ pub struct SearchSession {
     zero_stock_safe_race_method: ZeroStockSafeRaceMethod,
 }
 impl SearchSession {
-    /// Explicit research Control selection. Changing it invalidates numeric TT
-    /// and dynamic history; selecting the same value preserves the live session.
-    pub fn set_history_tie_break(&mut self, method: HistoryTieBreak) -> Result<()> {
-        if method != HistoryTieBreak::Off
-            && (self.ordering.is_none() || !matches!(self.static_enabled, StaticMode::CheapControl))
-        {
-            return Err(SearchError::Limits(
-                "history tie break requires signed Control".into(),
-            ));
-        }
-        let old = self.history_tie_break();
-        if old == method {
-            return Ok(());
-        }
-        self.detach_safe_race_namespace();
-        if self.zero_stock_approx_effective {
-            self.namespace.selectivity.truncate(
-                self.namespace.selectivity.len() - self.zero_stock_approx_method.id().len() - 1,
-            );
-        }
-        if self.lmr {
-            self.namespace
-                .selectivity
-                .truncate(self.namespace.selectivity.len() - self.lmr_namespace_bytes());
-        }
-        if old != HistoryTieBreak::Off {
-            self.namespace
-                .selectivity
-                .truncate(self.namespace.selectivity.len() - old.id().len() - 1);
-        }
-        if let Some(history) = self.ordering.as_mut() {
-            history.history_tie_break = method;
-            history.reset();
-        }
-        method.qualify(&mut self.namespace);
-        if self.lmr {
-            append_lmr_method(&mut self.namespace, self.lmr_method);
-            self.qualify_lmr_parameters();
-        }
-        if self.zero_stock_approx_effective {
-            append_zero_stock_approx_method(&mut self.namespace, self.zero_stock_approx_method);
-        }
-        self.attach_safe_race_namespace();
-        self.table.clear();
-        Ok(())
-    }
-    pub fn history_tie_break(&self) -> HistoryTieBreak {
-        self.ordering
-            .as_ref()
-            .map_or(HistoryTieBreak::Off, |h| h.history_tie_break)
-    }
-
     fn detach_safe_race_namespace(&mut self) {
         if self.zero_stock_safe_race {
             self.namespace.selectivity.truncate(
@@ -3176,9 +3096,7 @@ impl SearchSession {
         let mut session = Self::create(evaluator, namespace, capacity, score_domain, true, false)?;
         session.static_enabled = StaticMode::CheapControl;
         session.method = SessionMethod::SignedControl;
-        session.namespace = session
-            .method
-            .namespace(session.namespace, None, HistoryTieBreak::Off);
+        session.namespace = session.method.namespace(session.namespace, None);
         Ok(session)
     }
     /// Shared explicit Control/Cheap construction; product defaults are separate.
@@ -3198,9 +3116,7 @@ impl SearchSession {
             OrderingProfile::CombinedSignedCheapStatic => StaticMode::Cheap,
         };
         session.method = SessionMethod::Profile(profile);
-        session.namespace = session
-            .method
-            .namespace(session.namespace, None, HistoryTieBreak::Off);
+        session.namespace = session.method.namespace(session.namespace, None);
         session.set_lmr(lmr)?;
         Ok(session)
     }
@@ -3315,11 +3231,9 @@ impl SearchSession {
             .session_residual_owner()
             .map(|owner| owner.model.evaluation_scratch());
         self.evaluator = evaluator;
-        self.namespace = self.method.namespace(
-            namespace,
-            self.lmr.then_some(self.lmr_method),
-            self.history_tie_break(),
-        );
+        self.namespace = self
+            .method
+            .namespace(namespace, self.lmr.then_some(self.lmr_method));
         if self.lmr {
             self.qualify_lmr_parameters();
         }
@@ -5305,10 +5219,6 @@ fn retained_safe_race_methods_reject_completed_comparison_names() {
         ZeroStockSafeRaceMethod::PathTail.id()
     );
 }
-
-#[cfg(test)]
-#[path = "history_tie_session_tests.rs"]
-mod history_tie_session_tests;
 
 #[cfg(test)]
 mod session_residual_owner_tests {
