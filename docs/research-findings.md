@@ -2507,6 +2507,10 @@ R1修復版は、一回の観測で既存identity検査を通った全processを
 
 295局は144完全色pairと7片色であり、すべて再対局から除外する。残217局のoperation別件数は28/29/25/27/31/25/25/27。旧paired入口では片色だけの残slotを表せないため、同じ担当が共通arena経路の最小selected-slot対応を準備する。元slot・family・色・seed対応、既定の完全pair動作と対局条件を維持し、関連source確認・必要なsoftware検証・実imageと通常資源入場が成立してから実行する。入力受入れだけでこの新softwareの資格や217局の実開始を認定しない。保守的な新試行上界548/784に残217局を加えると765局であり、残余19局は追加実験の許可ではない。各原operationの保証future node枠、8×200M opaque保留と旧op5保留・費用UNKNOWNを維持する。L2全512局の資格・最終global CI・棋力結論は未完である。
 
+残217局は、元logical planを生成してから承認済みoriginal IDだけを実行する共通selected-slot対応で完了した。新規Rust4定義と限定Clippy・releaseはPASSし、新image69f7/BUILD2aeb/source ef527を正常入口へ束縛した。旧295局のimage226c/BUILDfabd/source f5とは別の来歴として保持する。新parent dc0bbaceの正常217局と保存39・正常256を結合し、原L2は全512局/256両色family、UNKNOWN0となった。元295局の再対局、archive payload再読・hash/decompression・旧validator再演はない。[全512局の固定compactと収集結果](../.worktree/assets/perf/cedar-lmr-tuning-implementation-v1/numeric-v1/shared/control-continuation-v1/L2-selected217-bound-v1/collection-v1/result.json)。
+
+当cohortは実native・collection STOPまで回収した。217局のnode課金560117586（opaque込み）とparent outer380.0632889660192秒は各一度、並列・nested時計は非加算。新継続の既知課金1977178754に旧op5・6489 terminalのUNKNOWNが残り、opaque保留・原FAILED/NULL/cancel/masksを変更しない。保守的な新物理試行上界765/784の残19局も追加実験の許可ではない。DRの269勝0分243敗、点推定0.525390625は算術集計だけであり、優位性・Eloの結論ではない。selected batchのCIはNULL、batch RNGは0。指定した最終family PCG64/10000/seed32492026101802/linear95の一度解析を、同じ元担当へ固定入力と実STOP付きで渡した。[収集STOP](../.worktree/assets/perf/cedar-lmr-tuning-implementation-v1/numeric-v1/shared/control-continuation-v1/L2-selected217-bound-v1/collection-v1/returned-STOP.json)、[最終解析への入力受入れ](../.artifacts/research-team/integration324/cedar-lmr-tuning-v1/control-continuation-v1/final512-analysis-route-v1/input-acceptance.json)。
+
 ### Cedar LMR調整と独立評価を後続計画へ追加（2026-10-19 JST、人間直接指示）
 
 人間の「調整まで計画に含めておいて」を、[既存NNUE設計の後続計画](design/ai-nnue-research.md#現行確認後のlmrパラメータ調整と独立評価2026-10-19-jst人間直接指示)へ統合した。現在の管理修復・凍結した確認対局と保存解析を優先し、完了後に評価器と基準探索を固定する。共通LMRのtyped設定・実効設定とTT/ordering namespaceの結合、整数丸め後も働く係数摂動、少数係数の粗比較と有限SPSA、別開始局面での独立した同時間棋力評価までを計画に含める。離散条件と係数調整の問いを分け、SPSA各更新や独立確認を一律512局とはしない。実施時に規模・範囲・摂動/更新幅・減衰・仕事/時間/保存枠・停止と候補規則を具体化し、ここでは新しい数値枠・対局・実装・学習を発行しない。
