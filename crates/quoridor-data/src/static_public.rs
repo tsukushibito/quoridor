@@ -125,7 +125,7 @@ pub unsafe extern "C" fn quoridor_public_nnue_identity(
     if !path.is_absolute() {
         return 1;
     }
-    let Ok(model) = quoridor_nnue::ResidualModel::load(path) else {
+    let Ok(model) = quoridor_nnue::residual::ResidualModel::load(path) else {
         return 2;
     };
     let mut identity = [0_u8; 64];
