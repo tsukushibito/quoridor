@@ -167,6 +167,7 @@ pub(super) fn with_state<T>(
         eval,
         score_domain: ScoreDomain::LEGACY,
         eval_scratch: eval.create_scratch(),
+        residual_head: None,
         child_buffers: Vec::new(),
         orderer: None,
         limits: &l,
