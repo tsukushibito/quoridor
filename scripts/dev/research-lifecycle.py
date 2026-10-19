@@ -2416,6 +2416,7 @@ def measurement_config(experiment):
             "seed",
             "lmr",
             "lmr_method",
+            "history_tie_break",
             "zero_stock_approx_min_root_walls",
             "zero_stock_approx_method",
             "zero_stock_safe_race",
@@ -2466,6 +2467,15 @@ def measurement_config(experiment):
             }
         ),
         "measurement safe-race method",
+    )
+    tie = config.get("history_tie_break")
+    if tie is None:
+        tie = "off"
+    require(
+        type(tie) is str
+        and tie in {"off", "local_goal_edge"}
+        and (tie == "off" or config["profile"] == "control"),
+        "measurement history tie break",
     )
     lmr_method = config.get("lmr_method", "depth_rank")
     require(
@@ -2639,7 +2649,8 @@ def measurement_config(experiment):
             active = request["session"]
     if any(r.get("observe_lmr", False) for r in requests):
         require(
-            len(requests) <= 12
+            tie == "off"
+            and len(requests) <= 12
             and len({r["session"] for r in requests}) == len(requests)
             and len({r["root"] for r in requests}) == len(requests)
             and config["profile"] == "control"
@@ -7180,6 +7191,7 @@ def comparison_conditions(common):
             evaluator=evaluator,
             profile=profile,
             lmr=lmr,
+            history_tie_break=tie,
             lmr_method=common.get("lmr_method", "depth_rank"),
             zero_stock_safe_race=common.get("zero_stock_safe_race", True),
             zero_stock_safe_race_method=common.get("zero_stock_safe_race_method", "path_tail"),
@@ -7187,6 +7199,7 @@ def comparison_conditions(common):
         for evaluator in common["evaluators"]
         for profile in common["profiles"]
         for lmr in common.get("lmr_values", (True,))
+        for tie in common.get("history_tie_breaks", ("off",))
     ]
 
 
@@ -7198,6 +7211,7 @@ def apply_comparison_cost(config, common, variant):
     config["profile"] = variant["profile"]
     config["lmr"] = variant["lmr"]
     config["lmr_method"] = variant["lmr_method"]
+    config["history_tie_break"] = variant.get("history_tie_break", "off")
 
     config["zero_stock_safe_race"] = variant["zero_stock_safe_race"]
     config["zero_stock_safe_race_method"] = variant["zero_stock_safe_race_method"]
@@ -7220,6 +7234,7 @@ def apply_comparison_arena(config, common, pair):
         engine["ordering_profile"] = variant["profile"]
         engine["lmr"] = variant["lmr"]
         engine["lmr_method"] = variant["lmr_method"]
+        engine["history_tie_break"] = variant.get("history_tie_break", "off")
         engine["zero_stock_safe_race"] = variant["zero_stock_safe_race"]
         engine["zero_stock_safe_race_method"] = variant["zero_stock_safe_race_method"]
         for key in ("depth", "max_nodes", "time_ms"):

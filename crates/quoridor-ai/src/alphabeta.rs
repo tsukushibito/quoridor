@@ -29,8 +29,11 @@ pub use lmr_observation::{
     LmrObservation, LmrStage, LmrTrialResult, LmrTrialStage, LmrTrialTrace, LmrTtFacts,
 };
 
+#[path = "history_tie_ordering.rs"]
+mod history_tie_ordering;
 #[path = "move_ordering.rs"]
 mod move_ordering;
+pub use history_tie_ordering::HistoryTieBreak;
 #[path = "static_geometry.rs"]
 mod static_geometry;
 #[path = "static_ordering.rs"]
@@ -186,6 +189,13 @@ fn cached_distance_maps<'a>(
 /// Immutable evaluators share weights; accumulator state belongs to one search.
 /// Hooks support a cached per-child delta and exact rollback by retaining parent.
 pub trait StaticEvaluator: Send + Sync {
+    /// Explicit concrete residual-head ownership for ordinary persistent sessions.
+    /// None preserves the invocation-owned scratch/evaluation hooks exactly.
+    /// Some opts into this ResidualEvaluator's unmodified numerical head; wrappers
+    /// with additional evaluation behavior must retain the default None.
+    fn session_residual_owner(&self) -> Option<&ResidualEvaluator> {
+        None
+    }
     /// Optional setup-owned child storage, separate for every invocation.
     fn create_child_storage(&self, _slots: usize) -> Vec<Option<EvalAccumulator>> {
         Vec::new()
@@ -385,8 +395,28 @@ impl ResidualEvaluator {
         self.mode = mode;
         self
     }
+    // Both ordinary invocation scratch and the explicit session borrow enter
+    // this one concrete owner, retaining missing-accumulator/scratch precedence.
+    fn evaluate_head(
+        &self,
+        a: Option<&EvalAccumulator>,
+        scratch: Option<&mut ResidualScratch>,
+    ) -> Result<f32> {
+        let Some(EvalAccumulator::Float(a)) = a else {
+            return Err(SearchError::Evaluation(
+                "missing residual accumulator".into(),
+            ));
+        };
+        let Some(scratch) = scratch else {
+            return Err(SearchError::Evaluation("missing residual scratch".into()));
+        };
+        Ok(self.model.evaluate_with_scratch(a, scratch)?)
+    }
 }
 impl StaticEvaluator for ResidualEvaluator {
+    fn session_residual_owner(&self) -> Option<&ResidualEvaluator> {
+        Some(self)
+    }
     fn create_child_storage(&self, slots: usize) -> Vec<Option<EvalAccumulator>> {
         (0..slots)
             .map(|_| Some(EvalAccumulator::Float(self.model.child_buffer(self.mode))))
@@ -417,15 +447,7 @@ impl StaticEvaluator for ResidualEvaluator {
         a: Option<&EvalAccumulator>,
         scratch: &mut EvalScratch,
     ) -> Result<f32> {
-        let Some(EvalAccumulator::Float(a)) = a else {
-            return Err(SearchError::Evaluation(
-                "missing residual accumulator".into(),
-            ));
-        };
-        let Some(scratch) = scratch.residual_mut() else {
-            return Err(SearchError::Evaluation("missing residual scratch".into()));
-        };
-        Ok(self.model.evaluate_with_scratch(a, scratch)?)
+        self.evaluate_head(a, scratch.residual_mut())
     }
     fn prepare_context(&self, c: &SigmaContext) -> Result<Option<EvalAccumulator>> {
         Ok(Some(EvalAccumulator::Float(
@@ -1309,6 +1331,7 @@ struct Search<'a, const OBSERVE: bool = false, const TRACE: bool = false> {
     eval: &'a dyn StaticEvaluator,
     score_domain: ScoreDomain,
     eval_scratch: EvalScratch,
+    residual_head: Option<(&'a ResidualEvaluator, &'a mut ResidualScratch)>,
     child_buffers: Vec<Option<EvalAccumulator>>,
     orderer: Option<&'a dyn MoveOrderer>,
     limits: &'a SearchLimits,
@@ -1405,6 +1428,11 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
             scores.static_scores.as_ref().map(|s| &s.goals),
             self.orderer.map(|_| &scores.policy),
             history,
+        )
+        .with_history_tie_parent(
+            self.ordering
+                .as_ref()
+                .and_then(|h| h.history_tie_break.parent(c.position())),
         );
         if self.ordering_diagnostics {
             self.stats.ordering.observe_sort(ids.len());
@@ -1449,6 +1477,11 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
             scores.static_scores.as_ref().map(|s| &s.goals),
             None,
             move_ordering::HistoryScores::Signed(&scores.combined),
+        )
+        .with_history_tie_parent(
+            self.ordering
+                .as_ref()
+                .and_then(|h| h.history_tie_break.parent(c.position())),
         );
         let baseline = scores
             .observation
@@ -1459,9 +1492,10 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
                 "signed ordering keys unavailable".into(),
             ))
         })?;
-        Ok(move_ordering::PreparedMoves::deferred_signed(
-            ids, keys, baseline,
-        ))
+        Ok(
+            move_ordering::PreparedMoves::deferred_signed(ids, keys, baseline)
+                .with_history_tie_parent(ranking.tie_parent()),
+        )
     }
 
     fn ordering_scores(
@@ -2100,9 +2134,12 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
         }
         if depth == 0 {
             self.stats.evaluations += 1;
-            let value = self
-                .eval
-                .evaluate_with_scratch(c, a, &mut self.eval_scratch)?;
+            let value = match self.residual_head.as_mut() {
+                Some((owner, scratch)) => owner.evaluate_head(a, Some(scratch))?,
+                None => self
+                    .eval
+                    .evaluate_with_scratch(c, a, &mut self.eval_scratch)?,
+            };
             self.control()?;
             if !self.score_domain.admits(value) {
                 return Err(Interrupted::Error(SearchError::Evaluation(
@@ -2703,7 +2740,15 @@ impl OrderingProfile {
         }
     }
     pub fn namespace(self, namespace: SearchNamespace, lmr: Option<LmrMethod>) -> SearchNamespace {
-        SessionMethod::Profile(self).namespace(namespace, lmr)
+        self.namespace_with_history_tie_break(namespace, lmr, HistoryTieBreak::Off)
+    }
+    pub fn namespace_with_history_tie_break(
+        self,
+        namespace: SearchNamespace,
+        lmr: Option<LmrMethod>,
+        tie: HistoryTieBreak,
+    ) -> SearchNamespace {
+        SessionMethod::Profile(self).namespace(namespace, lmr, tie)
     }
 }
 // SignedControl is still an actual teacher/fixed-D constructor, not a shim.
@@ -2723,7 +2768,12 @@ fn append_zero_stock_approx_method(namespace: &mut SearchNamespace, method: Zero
     namespace.selectivity.push_str(method.id());
 }
 impl SessionMethod {
-    fn namespace(self, mut namespace: SearchNamespace, lmr: Option<LmrMethod>) -> SearchNamespace {
+    fn namespace(
+        self,
+        mut namespace: SearchNamespace,
+        lmr: Option<LmrMethod>,
+        tie: HistoryTieBreak,
+    ) -> SearchNamespace {
         match self {
             Self::Plain => {}
             Self::SignedControl => namespace.selectivity.push_str(":signed-control-goal-first"),
@@ -2736,6 +2786,7 @@ impl SessionMethod {
                 namespace.selectivity.push_str(profile.name());
             }
         }
+        tie.qualify(&mut namespace);
         if let Some(method) = lmr {
             append_lmr_method(&mut namespace, method);
         }
@@ -2748,6 +2799,7 @@ impl SessionMethod {
 pub struct SearchSession {
     namespace: SearchNamespace,
     evaluator: Arc<dyn StaticEvaluator>,
+    residual_head_scratch: Option<ResidualScratch>,
     table: Table,
     score_domain: ScoreDomain,
     ordering: Option<ContinuationHistory>,
@@ -2763,6 +2815,57 @@ pub struct SearchSession {
     zero_stock_safe_race_method: ZeroStockSafeRaceMethod,
 }
 impl SearchSession {
+    /// Explicit research Control selection. Changing it invalidates numeric TT
+    /// and dynamic history; selecting the same value preserves the live session.
+    pub fn set_history_tie_break(&mut self, method: HistoryTieBreak) -> Result<()> {
+        if method != HistoryTieBreak::Off
+            && (self.ordering.is_none() || !matches!(self.static_enabled, StaticMode::CheapControl))
+        {
+            return Err(SearchError::Limits(
+                "history tie break requires signed Control".into(),
+            ));
+        }
+        let old = self.history_tie_break();
+        if old == method {
+            return Ok(());
+        }
+        self.detach_safe_race_namespace();
+        if self.zero_stock_approx_effective {
+            self.namespace.selectivity.truncate(
+                self.namespace.selectivity.len() - self.zero_stock_approx_method.id().len() - 1,
+            );
+        }
+        if self.lmr {
+            self.namespace
+                .selectivity
+                .truncate(self.namespace.selectivity.len() - self.lmr_method.id().len() - 1);
+        }
+        if old != HistoryTieBreak::Off {
+            self.namespace
+                .selectivity
+                .truncate(self.namespace.selectivity.len() - old.id().len() - 1);
+        }
+        if let Some(history) = self.ordering.as_mut() {
+            history.history_tie_break = method;
+            history.reset();
+        }
+        method.qualify(&mut self.namespace);
+        if self.lmr {
+            append_lmr_method(&mut self.namespace, self.lmr_method);
+        }
+        if self.zero_stock_approx_effective {
+            append_zero_stock_approx_method(&mut self.namespace, self.zero_stock_approx_method);
+        }
+        self.attach_safe_race_namespace();
+        self.table.clear();
+        Ok(())
+    }
+    pub fn history_tie_break(&self) -> HistoryTieBreak {
+        self.ordering
+            .as_ref()
+            .map_or(HistoryTieBreak::Off, |h| h.history_tie_break)
+    }
+
     fn detach_safe_race_namespace(&mut self) {
         if self.zero_stock_safe_race {
             self.namespace.selectivity.truncate(
@@ -2991,7 +3094,9 @@ impl SearchSession {
         let mut session = Self::create(evaluator, namespace, capacity, score_domain, true, false)?;
         session.static_enabled = StaticMode::CheapControl;
         session.method = SessionMethod::SignedControl;
-        session.namespace = session.method.namespace(session.namespace, None);
+        session.namespace = session
+            .method
+            .namespace(session.namespace, None, HistoryTieBreak::Off);
         Ok(session)
     }
     /// Shared explicit Control/Cheap construction; product defaults are separate.
@@ -3011,7 +3116,9 @@ impl SearchSession {
             OrderingProfile::CombinedSignedCheapStatic => StaticMode::Cheap,
         };
         session.method = SessionMethod::Profile(profile);
-        session.namespace = session.method.namespace(session.namespace, None);
+        session.namespace = session
+            .method
+            .namespace(session.namespace, None, HistoryTieBreak::Off);
         session.set_lmr(lmr)?;
         Ok(session)
     }
@@ -3029,10 +3136,15 @@ impl SearchSession {
                 .evaluator
                 .push_str(&score_domain.namespace_suffix());
         }
+        let table = Table::persistent(capacity)?;
+        let residual_head_scratch = evaluator
+            .session_residual_owner()
+            .map(|owner| owner.model.evaluation_scratch());
         Ok(Self {
             namespace,
             evaluator,
-            table: Table::persistent(capacity)?,
+            residual_head_scratch,
+            table,
             score_domain,
             ordering: if signed {
                 Some(ContinuationHistory::new()?)
@@ -3065,7 +3177,11 @@ impl SearchSession {
             + self
                 .ordering
                 .as_ref()
-                .map_or(0, ContinuationHistory::retained_bytes);
+                .map_or(0, ContinuationHistory::retained_bytes)
+            + self
+                .residual_head_scratch
+                .as_ref()
+                .map_or(0, ResidualScratch::retained_bytes);
         (self.table.retained_bytes(), metadata)
     }
     /// Live persistent slot count and byte limit; no table or history mutation.
@@ -3106,10 +3222,15 @@ impl SearchSession {
                 .evaluator
                 .push_str(&score_domain.namespace_suffix());
         }
+        self.residual_head_scratch = evaluator
+            .session_residual_owner()
+            .map(|owner| owner.model.evaluation_scratch());
         self.evaluator = evaluator;
-        self.namespace = self
-            .method
-            .namespace(namespace, self.lmr.then_some(self.lmr_method));
+        self.namespace = self.method.namespace(
+            namespace,
+            self.lmr.then_some(self.lmr_method),
+            self.history_tie_break(),
+        );
         // A reset has no root yet; preserve requested configuration but do not
         // claim resolved authority until the next real Search supplies its root.
         self.zero_stock_approx_effective = false;
@@ -3152,6 +3273,10 @@ impl SearchSession {
         let mut on_completed = |_: &SearchResult| {};
         let mut invocation = SearchInvocation::root(&mut on_completed);
         invocation.forced_root = Some(action);
+        invocation.residual_head = self
+            .evaluator
+            .session_residual_owner()
+            .zip(self.residual_head_scratch.as_mut());
         invocation.safe_race_method = self.zero_stock_safe_race_method;
         search_in_table::<false, false>(
             root,
@@ -3186,12 +3311,12 @@ impl SearchSession {
     ) -> Result<SearchResult> {
         self.search_invocation(root, limits, cancel, SearchInvocation::root(on_completed))
     }
-    fn search_invocation(
-        &mut self,
+    fn search_invocation<'a>(
+        &'a mut self,
         root: &SigmaContext,
         limits: &SearchLimits,
         cancel: &AtomicBool,
-        mut invocation: SearchInvocation<'_>,
+        mut invocation: SearchInvocation<'a>,
     ) -> Result<SearchResult> {
         let root_walls = root
             .position()
@@ -3205,6 +3330,10 @@ impl SearchSession {
             limits.max_depth,
         ));
         invocation.safe_race_method = self.zero_stock_safe_race_method;
+        invocation.residual_head = self
+            .evaluator
+            .session_residual_owner()
+            .zip(self.residual_head_scratch.as_mut());
         search_in_table::<false, false>(
             root,
             self.evaluator.as_ref(),
@@ -3239,6 +3368,7 @@ type SearchTableAndDomain<'table, 'history> = (
 );
 
 struct SearchInvocation<'a> {
+    residual_head: Option<(&'a ResidualEvaluator, &'a mut ResidualScratch)>,
     forced_root: Option<u16>,
     safe_race_method: ZeroStockSafeRaceMethod,
     on_completed: &'a mut dyn FnMut(&SearchResult),
@@ -3253,6 +3383,7 @@ impl<'a> SearchInvocation<'a> {
     fn root(on_completed: &'a mut dyn FnMut(&SearchResult)) -> Self {
         Self {
             on_completed,
+            residual_head: None,
             forced_root: None,
             safe_race_method: ZeroStockSafeRaceMethod::Manhattan,
             #[cfg(feature = "research-diagnostics")]
@@ -3347,10 +3478,18 @@ fn search_in_table<const OBSERVE: bool, const TRACE: bool>(
         .into_iter()
         .map(u16::from)
         .sum();
+    let residual_head = invocation.residual_head;
     let mut state = Search::<OBSERVE, TRACE> {
         eval: evaluator,
         score_domain,
-        eval_scratch: evaluator.create_scratch(),
+        // Only the opt-in head input persists. Geometry/counters remain fresh
+        // invocation-owned EvalScratch; generic and cold paths are unchanged.
+        eval_scratch: if residual_head.is_some() {
+            EvalScratch::default()
+        } else {
+            evaluator.create_scratch()
+        },
+        residual_head,
         child_buffers: Vec::new(),
         orderer,
         limits,
@@ -3839,6 +3978,7 @@ mod persistent_tt_tests {
                 eval: e.as_ref(),
                 score_domain: ScoreDomain::LEGACY,
                 eval_scratch: e.create_scratch(),
+                residual_head: None,
                 child_buffers: Vec::new(),
                 orderer: None,
                 limits: &l,
@@ -4528,6 +4668,7 @@ mod child_buffer_tests {
                 eval: &e,
                 score_domain: ScoreDomain::LEGACY,
                 eval_scratch: e.create_scratch(),
+                residual_head: None,
                 child_buffers: e.create_child_storage(4),
                 orderer: None,
                 limits: &limits,
@@ -5047,4 +5188,180 @@ fn retained_safe_race_methods_reject_completed_comparison_names() {
         ZeroStockSafeRaceMethod::PathTailFuture.id(),
         ZeroStockSafeRaceMethod::PathTail.id()
     );
+}
+
+#[cfg(test)]
+#[path = "history_tie_session_tests.rs"]
+mod history_tie_session_tests;
+
+#[cfg(test)]
+mod session_residual_owner_tests {
+    use super::*;
+    use std::sync::atomic::AtomicUsize;
+
+    fn residual(width: usize) -> Arc<ResidualEvaluator> {
+        let t = quoridor_nnue::Topology {
+            ft_width: width,
+            hidden_width: 2,
+        };
+        Arc::new(ResidualEvaluator::new(Arc::new(
+            ResidualModel::from_parts(
+                t,
+                vec![0.001; ResidualModel::parameter_count(t).unwrap()],
+                [0.; 2],
+                [1.; 2],
+                quoridor_nnue::DistanceFit { a: 0., b: 0. },
+                quoridor_nnue::residual::RouteMode::Zero4,
+                [0.; 4],
+                [1.; 4],
+            )
+            .unwrap(),
+        )))
+    }
+    fn namespace() -> SearchNamespace {
+        SearchNamespace {
+            evaluator: "synthetic-residual-owner".into(),
+            rules: "research-standard-2p-threefold-goal-first-v1".into(),
+            selectivity: "owner-fixture".into(),
+        }
+    }
+    fn limits() -> SearchLimits {
+        SearchLimits {
+            max_depth: 1,
+            max_nodes: 64,
+            time_limit: None,
+            tt_entries: 128,
+            use_pvs: true,
+            use_tt: true,
+        }
+    }
+    fn pointer(s: &SearchSession) -> usize {
+        s.residual_head_scratch
+            .as_ref()
+            .unwrap()
+            .input_view()
+            .as_ptr() as usize
+    }
+    #[test]
+    fn concrete_residual_session_borrow_survives_calls_namespace_error_cancel_and_reset() {
+        let evaluator = residual(3);
+        let mut session = SearchSession::new_with_control_ordering(
+            evaluator,
+            namespace(),
+            128,
+            ScoreDomain::LEGACY,
+        )
+        .unwrap();
+        let root = SigmaContext::from_prefix(&[]).unwrap();
+        let root_key = Key::of(&root);
+        let address = pointer(&session);
+        let first = session
+            .search(&root, &limits(), &AtomicBool::new(false))
+            .unwrap();
+        assert!(first.stats.evaluations > 0);
+        assert_eq!(pointer(&session), address);
+        assert!(
+            session
+                .residual_head_scratch
+                .as_ref()
+                .unwrap()
+                .input_view()
+                .iter()
+                .any(|x| *x != 0.)
+        );
+        let second = session
+            .search(&root, &limits(), &AtomicBool::new(false))
+            .unwrap();
+        assert!(second.stats.evaluations > 0);
+        assert_eq!(pointer(&session), address);
+        assert_eq!(Key::of(&root), root_key);
+        session.set_zero_stock_safe_race(true);
+        assert_eq!(pointer(&session), address);
+        session.set_zero_stock_safe_race(false);
+        let other = residual(5);
+        let other_width = other.model.evaluation_scratch().input_view().len();
+        session.residual_head_scratch = Some(other.model.evaluation_scratch());
+        session.table.clear();
+        let error = session
+            .search(&root, &limits(), &AtomicBool::new(false))
+            .unwrap_err();
+        assert!(error.to_string().contains("residual scratch width"));
+        assert_eq!(Key::of(&root), root_key);
+        assert_eq!(
+            session
+                .residual_head_scratch
+                .as_ref()
+                .unwrap()
+                .input_view()
+                .len(),
+            other_width
+        );
+        session.reset(other, namespace());
+        assert_eq!(
+            session
+                .residual_head_scratch
+                .as_ref()
+                .unwrap()
+                .input_view()
+                .len(),
+            other_width
+        );
+        assert!(
+            session
+                .residual_head_scratch
+                .as_ref()
+                .unwrap()
+                .input_view()
+                .iter()
+                .all(|x| *x == 0.)
+        );
+        let reset_address = pointer(&session);
+        let canceled = session
+            .search(&root, &limits(), &AtomicBool::new(true))
+            .unwrap();
+        assert_eq!(canceled.stop, StopReason::Cancelled);
+        assert_eq!(pointer(&session), reset_address);
+        assert_eq!(Key::of(&root), root_key);
+        let mut invalid = limits();
+        invalid.max_depth = 0;
+        assert!(
+            session
+                .search(&root, &invalid, &AtomicBool::new(false))
+                .is_err()
+        );
+        assert_eq!(pointer(&session), reset_address);
+        assert_eq!(Key::of(&root), root_key);
+    }
+
+    struct InvocationProbe(Arc<AtomicUsize>);
+    impl StaticEvaluator for InvocationProbe {
+        fn create_scratch(&self) -> EvalScratch {
+            let mut scratch = EvalScratch::default();
+            scratch.distances.map_reads = self.0.fetch_add(1, Ordering::Relaxed) as u64 + 1;
+            scratch
+        }
+        fn evaluate(&self, _: &SigmaContext, _: Option<&EvalAccumulator>) -> Result<f32> {
+            Ok(0.)
+        }
+    }
+    #[test]
+    fn generic_evaluator_keeps_invocation_scratch_and_counter_contract() {
+        let setups = Arc::new(AtomicUsize::new(0));
+        let mut session =
+            SearchSession::new(Arc::new(InvocationProbe(setups.clone())), namespace(), 128)
+                .unwrap();
+        assert!(session.residual_head_scratch.is_none());
+        assert_eq!(setups.load(Ordering::Relaxed), 0);
+        let root = SigmaContext::from_prefix(&[]).unwrap();
+        let key = Key::of(&root);
+        for expected in 1..=2 {
+            let result = session
+                .search(&root, &limits(), &AtomicBool::new(true))
+                .unwrap();
+            assert_eq!(result.stop, StopReason::Cancelled);
+            assert_eq!(setups.load(Ordering::Relaxed), expected);
+            assert_eq!(result.stats.wall_distance_map_reads, expected as u64);
+            assert_eq!(Key::of(&root), key);
+        }
+    }
 }

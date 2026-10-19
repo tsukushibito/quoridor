@@ -98,6 +98,7 @@ pub(super) struct ContinuationHistory {
     main: Box<[i16]>,
     continuation: Box<[i16]>,
     valid_roots_since_age: u8,
+    pub(super) history_tie_break: super::HistoryTieBreak,
 }
 
 /// Borrowed only while scoring one unchanged parent; no table or path updates.
@@ -134,6 +135,7 @@ impl ContinuationHistory {
             main: zeroed(MAIN_LEN)?,
             continuation: zeroed(CONT_LEN)?,
             valid_roots_since_age: 0,
+            history_tie_break: super::HistoryTieBreak::Off,
         })
     }
     pub fn retained_bytes(&self) -> usize {
@@ -493,5 +495,63 @@ impl OrderingNodeWork {
             work.selected_cutoff_no_tail_sort_nodes +=
                 u64::from(cutoff && self.selected_returns > 0);
         }
+    }
+}
+#[cfg(test)]
+mod history_tie_tests {
+    use super::*;
+    use crate::alphabeta::{
+        HistoryTieBreak,
+        move_ordering::{HistoryScores, Ranking},
+    };
+
+    #[test]
+    fn complete_signed_history_tie_includes_main_and_continuation() {
+        let position = Position {
+            pawns: [40, 76],
+            walls_remaining: [0, 0],
+            ..Position::default()
+        };
+        let path = [PlayedMove {
+            colour: 1,
+            action: 67,
+        }];
+        let mut history = ContinuationHistory::new().unwrap();
+        history.history_tie_break = HistoryTieBreak::LocalGoalEdge;
+        history.main[main_index(position, 31)] = 10;
+        history.continuation[continuation_index(0, 0, 67, 49)] = 20;
+        history.main[main_index(position, 39)] = 11;
+        let ids = [31, 39, 41, 49];
+        let mut combined = [0i32; 209];
+        let prepared = history.prepare_scores(position, &path);
+        for &id in &ids {
+            combined[id as usize] = prepared.score(id).0;
+        }
+        assert_eq!(combined[31], 20);
+        assert_eq!(combined[49], 20);
+        assert_eq!(combined[39], 22);
+        let mut sorted = ids;
+        Ranking::new(
+            &ids,
+            None,
+            [None; 2],
+            None,
+            None,
+            HistoryScores::Signed(&combined),
+        )
+        .with_history_tie_parent(history.history_tie_break.parent(position))
+        .sort_signed_keys(&mut sorted);
+        assert_eq!(sorted, [39, 49, 31, 41]);
+        sorted.sort_unstable();
+        assert_eq!(sorted, ids);
+        history.reset();
+        assert_eq!(history.history_tie_break, HistoryTieBreak::LocalGoalEdge);
+        assert!(
+            history
+                .main
+                .iter()
+                .chain(history.continuation.iter())
+                .all(|&v| v == 0)
+        );
     }
 }

@@ -517,6 +517,7 @@ pub struct TtProfile {
     pub actual_zero_stock_safe_race_method_id: Option<String>,
     #[serde(default)]
     pub actual_lmr_method_id: Option<String>,
+    pub actual_history_tie_break_id: Option<String>,
     #[serde(default)]
     pub lmr_reduction_rule: Option<String>,
     #[serde(default)]
@@ -564,6 +565,25 @@ impl TtProfile {
 /// Config-driven selection only: existing factory owns ranking and LMR.
 /// Expected namespace is checked against the actual session by the unchanged
 /// invocation/reset boundary. It is never used to enable a mode.
+pub(crate) fn arena_history_tie_break(
+    engine: &Engine,
+    arena: Option<&crate::arena::ArenaConfig>,
+) -> alphabeta::Result<alphabeta::HistoryTieBreak> {
+    let tie = alphabeta::HistoryTieBreak::from_name(
+        engine.history_tie_break.as_deref().unwrap_or("off"),
+    )?;
+    if tie != alphabeta::HistoryTieBreak::Off
+        && (engine.kind == "mcts"
+            || engine.ordering_profile.as_deref() != Some("control")
+            || !arena.is_some_and(|a| a.comparison != crate::arena::Comparison::Functional))
+    {
+        return Err(alphabeta::SearchError::Limits(
+            "history tie break belongs to a research Control alpha arena".into(),
+        ));
+    }
+    Ok(tie)
+}
+
 pub(crate) fn arena_lmr_method(engine: &Engine) -> alphabeta::Result<alphabeta::LmrMethod> {
     alphabeta::LmrMethod::from_name(
         engine
@@ -609,10 +629,11 @@ fn arena_alpha_namespace(
     base: alphabeta::SearchNamespace,
     arena: Option<&crate::arena::ArenaConfig>,
 ) -> alphabeta::Result<alphabeta::SearchNamespace> {
+    let tie = arena_history_tie_break(engine, arena)?;
     let method = arena_lmr_method(engine)?;
     let mut namespace = match engine.ordering_profile.as_deref() {
         Some(name) => alphabeta::OrderingProfile::from_name(name)?
-            .namespace(base, engine.lmr.then_some(method)),
+            .namespace_with_history_tie_break(base, engine.lmr.then_some(method), tie),
         None if engine.lmr => {
             return Err(alphabeta::SearchError::Limits(
                 "LMR needs an explicit ordering target".into(),
@@ -633,6 +654,7 @@ fn arena_alpha_session(
     engine: &Engine,
     arena: Option<&crate::arena::ArenaConfig>,
 ) -> alphabeta::Result<alphabeta::SearchSession> {
+    let tie = arena_history_tie_break(engine, arena)?;
     let method = arena_lmr_method(engine)?;
     let mut session = if let Some(profile) = engine.ordering_profile.as_deref() {
         let profile = alphabeta::OrderingProfile::from_name(profile)?;
@@ -656,6 +678,7 @@ fn arena_alpha_session(
         ));
     }
     // Configuration selects the typed method; the namespace never enables LMR.
+    session.set_history_tie_break(tie)?;
     session.set_lmr_method(method);
     session.set_lmr(engine.lmr)?;
     let (safe_enabled, safe_method) = arena_safe_race(engine, arena)?;
@@ -771,6 +794,7 @@ fn invoke_alpha_observed(
             .zero_stock_safe_race_enabled()
             .then(|| session.zero_stock_safe_race_method().id().to_owned());
         profile.actual_lmr_method_id = session.lmr_method().map(|m| m.id().to_owned());
+        profile.actual_history_tie_break_id = Some(session.history_tie_break().id().to_owned());
         profile.lmr_reduction_rule = session.lmr_method().map(|m| m.reduction_rule().to_owned());
         profile.search_invocations += 1;
         let start = Instant::now();
@@ -2943,6 +2967,8 @@ fn record_evaluation_alpha(
         "actual_zero_stock_safe_race_method_id":game.tt_profiles[engine].actual_zero_stock_safe_race_method_id,
         "requested_lmr_method":config.engines[engine].lmr_method.as_deref().unwrap_or(alphabeta::LmrMethod::default().name()),
         "actual_lmr_method_id":game.tt_profiles[engine].actual_lmr_method_id,
+        "requested_history_tie_break":config.engines[engine].history_tie_break.as_deref().unwrap_or("off"),
+        "actual_history_tie_break_id":game.tt_profiles[engine].actual_history_tie_break_id,
         "lmr_reduction_rule":game.tt_profiles[engine].lmr_reduction_rule,
         "lmr_work_completed":selected.map(|r| serde_json::json!({"attempts":r.stats.lmr_attempts,"full_depth_confirmations":r.stats.lmr_full_depth_confirmations,"full_window_researches":r.stats.lmr_full_window_researches})),
         "lmr_work_terminal":result.as_deref().map(|r| serde_json::json!({"attempts":r.stats.lmr_attempts,"full_depth_confirmations":r.stats.lmr_full_depth_confirmations,"full_window_researches":r.stats.lmr_full_window_researches})),
@@ -7332,3 +7358,7 @@ mod selected_slot_boundary_tests {
         assert_eq!(c.seed, seed);
     }
 }
+
+#[cfg(test)]
+#[path = "runtime_history_tie_tests.rs"]
+mod history_tie_tests;

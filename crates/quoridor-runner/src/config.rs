@@ -171,6 +171,9 @@ pub struct Engine {
     /// Arena method selection; None uses the AI's fixed-one default.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub lmr_method: Option<String>,
+    /// Explicit research Control-only secondary order; omitted/Off preserves defaults.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub history_tie_break: Option<String>,
     /// Normal research arena omission enables the retained proof. Generation and
     /// functional/product callers resolve omission to OFF instead.
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -344,6 +347,20 @@ impl Config {
             return Err("safe-race enable belongs to a research alpha arena".into());
         }
         for engine in &self.engines {
+            let tie = quoridor_ai::alphabeta::HistoryTieBreak::from_name(
+                engine.history_tie_break.as_deref().unwrap_or("off"),
+            )
+            .map_err(|e| e.to_string())?;
+            if tie != quoridor_ai::alphabeta::HistoryTieBreak::Off
+                && (engine.kind == "mcts"
+                    || engine.ordering_profile.as_deref() != Some("control")
+                    || !self
+                        .arena
+                        .as_ref()
+                        .is_some_and(|a| a.comparison != crate::arena::Comparison::Functional))
+            {
+                return Err("history tie break belongs to a research Control alpha arena".into());
+            }
             quoridor_ai::alphabeta::ZeroStockSafeRaceMethod::from_name(
                 engine
                     .zero_stock_safe_race_method

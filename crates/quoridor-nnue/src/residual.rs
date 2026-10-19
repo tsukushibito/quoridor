@@ -124,6 +124,11 @@ impl ResidualScratch {
     pub fn input_view(&self) -> &[f32] {
         &self.input
     }
+    /// Persistent worker input allocation, excluding this struct header.
+    /// O(1) capacity accounting; no model/input scan or allocation.
+    pub fn retained_bytes(&self) -> usize {
+        self.input.capacity() * std::mem::size_of::<f32>()
+    }
 }
 impl ResidualModel {
     pub fn parameter_count(t: Topology) -> Result<usize> {

@@ -1,4 +1,5 @@
 //! One ordering rule for sorting and observation, separate from score production.
+use super::history_tie_ordering::{TieParent, compare_keys};
 use super::{OrderingStats, static_ordering::StaticScores};
 use std::cmp::Ordering;
 
@@ -27,6 +28,7 @@ impl HistoryScores<'_> {
 
 pub(super) struct Ranking<'a> {
     ranks: [Rank; 209],
+    tie_parent: Option<TieParent>,
     policy: Option<&'a [f32; 209]>,
     scores: HistoryScores<'a>,
 }
@@ -71,9 +73,18 @@ impl<'a> Ranking<'a> {
         }
         Self {
             ranks,
+            tie_parent: None,
             policy,
             scores,
         }
+    }
+
+    pub fn with_history_tie_parent(mut self, parent: Option<TieParent>) -> Self {
+        self.tie_parent = parent;
+        self
+    }
+    pub fn tie_parent(&self) -> Option<TieParent> {
+        self.tie_parent
     }
 
     fn priority(&self, id: u16, goal_tier: bool) -> u8 {
@@ -103,6 +114,10 @@ impl<'a> Ranking<'a> {
     ) -> Ordering {
         self.tiers(a, b, goal_tier, policy)
             .then_with(|| scores.compare(a as usize, b as usize))
+            .then_with(|| {
+                self.tie_parent
+                    .map_or(Ordering::Equal, |parent| parent.compare(a, b))
+            })
             .then_with(|| a.cmp(&b))
     }
 
@@ -119,7 +134,7 @@ impl<'a> Ranking<'a> {
         let Some(keys) = self.signed_keys(ids) else {
             return self.sort(ids);
         };
-        ids.sort_unstable_by(|&a, &b| keys[a as usize].cmp(&keys[b as usize]));
+        ids.sort_unstable_by(|&a, &b| compare_keys(&keys, self.tie_parent, a, b));
     }
 
     pub fn signed_keys(&self, ids: &[u16]) -> Option<[u64; 209]> {
@@ -154,6 +169,7 @@ pub(super) enum PreparedMoves {
         keys: [u64; 209],
         next: usize,
         baseline_first: Option<u16>,
+        tie_parent: Option<TieParent>,
     },
 }
 
@@ -174,7 +190,14 @@ impl PreparedMoves {
             keys,
             next: 0,
             baseline_first,
+            tie_parent: None,
         }
+    }
+    pub fn with_history_tie_parent(mut self, parent: Option<TieParent>) -> Self {
+        if let Self::SignedKeys { tie_parent, .. } = &mut self {
+            *tie_parent = parent;
+        }
+        self
     }
     pub fn len(&self) -> usize {
         match self {
@@ -200,12 +223,14 @@ impl PreparedMoves {
                 keys,
                 next,
                 baseline_first,
+                tie_parent,
             } => {
                 if *next == ids.len() {
                     return None;
                 }
                 if *next == 0 {
-                    let first = (0..ids.len()).min_by_key(|&i| keys[ids[i] as usize])?;
+                    let first = (0..ids.len())
+                        .min_by(|&a, &b| compare_keys(keys, *tie_parent, ids[a], ids[b]))?;
                     if let Some(stats) = stats {
                         let work = stats.work_mut();
                         work.first_selection_calls_started += 1;
@@ -220,7 +245,7 @@ impl PreparedMoves {
                     if let Some(stats) = stats {
                         stats.observe_sort(ids.len() - 1);
                     }
-                    ids[1..].sort_unstable_by(|&a, &b| keys[a as usize].cmp(&keys[b as usize]));
+                    ids[1..].sort_unstable_by(|&a, &b| compare_keys(keys, *tie_parent, a, b));
                 }
                 let kind = if *next > 0 && ids.len() > 2 {
                     MoveRead::Sorted
