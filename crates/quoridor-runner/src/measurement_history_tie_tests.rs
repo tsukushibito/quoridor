@@ -33,9 +33,8 @@ fn measurement_history_tie_typed_default_refusal_and_effective_session_metadata(
     );
     for bad in [json!(true), json!("unknown")] {
         value["history_tie_break"] = bad;
-        match serde_json::from_value::<Settings>(value.clone()) {
-            Ok(settings) => assert!(validate(&settings, std::slice::from_ref(&request)).is_err()),
-            Err(_) => {}
+        if let Ok(settings) = serde_json::from_value::<Settings>(value.clone()) {
+            assert!(validate(&settings, std::slice::from_ref(&request)).is_err());
         }
     }
     value["history_tie_break"] = json!("local_goal_edge");
