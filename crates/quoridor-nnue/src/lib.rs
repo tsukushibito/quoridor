@@ -645,29 +645,10 @@ impl Model {
         Ok((f64::from(output).tanh()) as f32)
     }
     fn validate_accumulator(&self, a: &Accumulator) -> Result<()> {
-        self.validate_accumulator_with(a, |_, _, _| {})
-    }
-
-    // One private finite-value walk. The residual owner also packs each checked
-    // value here; public callers retain every model/shape/feature/finite refusal.
-    // A visitor may update worker scratch before a later refusal; such scratch is
-    // not a result and the next successful packing overwrites both views.
-    fn validate_accumulator_with(
-        &self,
-        a: &Accumulator,
-        mut finite_value: impl FnMut(usize, usize, f32),
-    ) -> Result<()> {
         if a.fingerprint != self.fingerprint
-            || a.values.iter().enumerate().any(|(view, values)| {
-                values.len() != self.topology.ft_width
-                    || values.iter().enumerate().any(|(index, &value)| {
-                        if !value.is_finite() {
-                            return true;
-                        }
-                        finite_value(view, index, value);
-                        false
-                    })
-            })
+            || a.values
+                .iter()
+                .any(|v| v.len() != self.topology.ft_width || v.iter().any(|x| !x.is_finite()))
         {
             return Err(Error::Input(
                 "accumulator model/shape/finite mismatch".into(),
