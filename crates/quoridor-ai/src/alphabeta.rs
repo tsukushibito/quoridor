@@ -2938,7 +2938,8 @@ impl SessionMethod {
         match self {
             #[cfg(feature = "research-diagnostics")]
             Self::Opportunity(mode) => {
-                namespace = Self::Profile(OrderingProfile::Control).namespace(namespace, None);
+                namespace =
+                    Self::Profile(OrderingProfile::CheapStaticControl).namespace(namespace, None);
                 mode.qualify(&mut namespace);
             }
             Self::Plain => {}

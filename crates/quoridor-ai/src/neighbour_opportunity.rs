@@ -381,7 +381,7 @@ impl super::SearchSession {
             namespace.clone(),
             capacity,
             super::ScoreDomain::LEGACY,
-            super::OrderingProfile::Control,
+            super::OrderingProfile::CheapStaticControl,
             false,
             false,
         )?;
