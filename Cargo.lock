@@ -569,6 +569,11 @@ dependencies = [
 ]
 
 [[package]]
+name = "quoridor"
+version = "0.1.0"
+source = "git+https://github.com/Plaaasma/Claustrophobia?rev=ae093653e62ad700e201706fa5ed767093d0d68e#ae093653e62ad700e201706fa5ed767093d0d68e"
+
+[[package]]
 name = "quoridor-ai"
 version = "0.1.0"
 dependencies = [
@@ -602,6 +607,7 @@ name = "quoridor-inference"
 version = "0.1.0"
 dependencies = [
  "cc",
+ "quoridor",
  "quoridor-core",
  "serde_json",
  "sha2",
