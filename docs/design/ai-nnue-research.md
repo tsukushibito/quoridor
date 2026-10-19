@@ -199,3 +199,5 @@ first32中心を固定した8対照は256局/128完全pair、全normal manifest/
 原独立確認512局/256完全family pairは全正規資格・UNKNOWN0で終了した。固定した終端候補0.8268918342000571/2.493874970133201・8/6/4は249勝0分263敗、得点率0.486328125。唯一の元family bootstrap区間[0.453125, 0.51953125]は事前条件lower>0.5に達せず、元基準0.7844/2.4696・3/4/3を維持する。一般劣位・同等・無効果や極大値を認定せず、確認結果で選択へ戻らない。原1920slotsの1914資格済み/旧rank6 UNKNOWN、opaque-held/FAILED/費用・歴史的露出/lineage依存を保持し、このcampaignから追加対局や再CIを発行しない。製品・モデル既定は不変。[確認結果・一度の区間・会計と限界](../research-findings.md#五設定lmrの唯一の最終確認は基準維持324962026-10-19)。
 
 18.2のjoint教師/単一train loop/restart/export接続はMainへ統合したが、実corelib softwareは初回コンパイルの型module参照を修復中であり、新Rust3・実教師/2update機能smokeは未資格である。完成条件や本学習未発行は変えず、旧metadata成功を再演せず実未完工程だけを進める。20の元104連続Search比較も別の真正software/資源・実STOP窓へ置き、親closeや返信を入口にしない。
+
+18.2の実softwareは新Rust3各1PASS・affected Clippy・現release cdylib生成を完了した。初回型パスと新テスト内Clippy書式の元失敗を保存し、成功済み定義を再演しない。新corelibの3公開symbolと実STOPは確認済みだが、最大16教師/2updateの機能smokeは未入場であり、本学習・全件教師の許可や学習済みpolicy品質は推定しない。20の元104ABBAを次の適合窓へ置き、18.2の軽い設定は並行、Torch等はその実native＋collectionSTOP後に配分する。[実softwareと残る接続](../research-findings.md#joint-policyvalue接続の実corelib-software資格3241822026-10-19)。
