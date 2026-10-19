@@ -17,6 +17,53 @@ def load_lifecycle():
 
 
 class LifecycleDataAndPaths(unittest.TestCase):
+    def test_measurement_and_callback_arena_caller_membership(self):
+        lc = load_lifecycle()
+        root = lc.ROOT
+        base = [
+            dict(path=str(root / name))
+            for name in (
+                "scripts/dev/research-lifecycle.py",
+                "scripts/dev/research-job.py",
+                "python/quoridor_training/cycle_process.py",
+                "python/quoridor_training/snapshot.py",
+            )
+        ]
+        # Membership fixtures leave production read_ref and byte/hash checks intact.
+        with tempfile.TemporaryDirectory() as tmp:
+            cfg = Path(tmp) / "config.json"
+            cfg.write_text(json.dumps(dict(profile="control", roots=[])))
+            config_ref = lc.bound(cfg)[0]
+            measurement = dict(phase="compare", argv=["/fake/native", "measure"], config=config_ref)
+            self.assertEqual(lc.caller_source_refs(dict(caller_sources=base), measurement), base)
+            callback = base + [
+                dict(path=str(root / "python/quoridor_training/claustrophobia.py")),
+                dict(path=str(root / "python/quoridor_training/static_teacher_heads.py")),
+                dict(path=str(lc.project_python().resolve(strict=True))),
+                dict(path=str(lc.project_python().parent.parent / "pyvenv.cfg")),
+            ]
+            with self.assertRaises(lc.Refused):
+                lc.caller_source_refs(dict(caller_sources=callback), measurement)
+            cfg.write_text(
+                json.dumps(dict(engines=[dict(kind="claustrophobia"), dict(kind="fixed-distance")]))
+            )
+            config_ref = lc.bound(cfg)[0]
+            for phase, command in [("arena", "arena"), ("compare", "decisions")]:
+                experiment = dict(phase=phase, argv=["/fake/native", command], config=config_ref)
+                self.assertEqual(
+                    lc.caller_source_refs(dict(caller_sources=callback), experiment), callback
+                )
+                with self.assertRaises(lc.Refused):
+                    lc.caller_source_refs(dict(caller_sources=base), experiment)
+            cfg.write_text(json.dumps(dict(engines=[dict(kind="fixed-distance")] * 2)))
+            config_ref = lc.bound(cfg)[0]
+            arena = dict(phase="arena", argv=["/fake/native", "arena"], config=config_ref)
+            self.assertEqual(lc.caller_source_refs(dict(caller_sources=base), arena), base)
+            with self.assertRaises(lc.Refused):
+                lc.caller_source_refs(
+                    dict(caller_sources=base + [dict(path="/unexpected/extra.py")]), arena
+                )
+
     def test_prior_software_uses_original_receipts_and_rejects_partial_checks(self):
         lc = load_lifecycle()
         with tempfile.TemporaryDirectory() as directory:

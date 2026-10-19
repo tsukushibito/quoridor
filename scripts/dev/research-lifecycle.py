@@ -3311,7 +3311,9 @@ def caller_source_refs(spec, experiment):
                 == str(ROOT / "python/quoridor_training/research355/stream355.py"),
                 "current maintained analysis entry",
             )
-    if experiment["phase"] in {"arena", "compare"}:
+    if experiment["phase"] == "arena" or (
+        experiment["phase"] == "compare" and experiment["argv"][1] == "decisions"
+    ):
         config = document(experiment["config"])
         if any(e["kind"] == "claustrophobia" for e in config["engines"]):
             paths |= {
