@@ -144,7 +144,7 @@ Cedar v1は原324.7で研究優先候補になったClaustrophobia静的教師NN
 
 324.9.4のtyped入口はsource commit `94825364`、型初期化の限定修正`281a7bd5`として統合した。`lmr_parameters`の完全な型付き設定でintercept、log_divisor、min_depth、min_rank、max_extraを渡し、省略時と明示baselineは元の整数表・namespaceを保つ。customはsessionで一度tableを作り、実効係数bitとthreshold/capをTT・履歴のreset/記録へ束縛する。baselineは0.7844/2.4696/3/4/3、許容範囲はそれぞれ[0,2]/[1,4]/[3,63]/[4,63]/[0,8]。有限表算術ではintercept±0.05で123cell、divisor±0.10で253cellが対向設定間で変わったが、実探索の訪問頻度・費用重み・棋力は未測定である。
 
-新しいRust5定義は各1件PASS、affected Clippyとreleaseを完了し、[通常BUILDと実imageの資格](../../.artifacts/research-team/integration324/cedar-lmr-tuning-v1/typed-parameters-adoption-v1/software-v2/collection-v1/qualification-and-STOP.json)を保存した。最初のrunner型検査は既存の現役fixtureにoptional fieldが欠けて失敗し、`None`の初期化だけを修正して成功済みAI3件を再演せず続けた。これは設定・softwareの資格であり、係数数値調整や新対局の発行ではない。15は後続の人間並行指示で私有source実装まで進み、近傍意味境界の関連確認と必要software・実数値入口を経て採否を決める。係数調整はその構成固定後とする。
+新しいRust5定義は各1件PASS、affected Clippyとreleaseを完了し、[通常BUILDと実imageの資格](../../.artifacts/research-team/integration324/cedar-lmr-tuning-v1/typed-parameters-adoption-v1/software-v2/collection-v1/qualification-and-STOP.json)を保存した。最初のrunner型検査は既存の現役fixtureにoptional fieldが欠けて失敗し、`None`の初期化だけを修正して成功済みAI3件を再演せず続けた。これは設定・softwareの資格であり、係数数値調整や新対局の発行ではない。15は後続の人間並行指示から近傍候補の限定関連確認・Main採用・新7定義各1PASS・affected Clippy/releaseのsoftware資格まで完了した。性能・棋力の提案規模は未発行であり、実入力・採否/停止・資源/保持を有限化した数値入口を経て採否を決める。係数調整はその構成固定後とする。
 
 1. 共通LMR経路に対し、係数・開始深さ/順位・追加減深上限を既存typed設定から与える。省略時の現行`depth_rank`動作と保護条件・再探索・停止を維持する。実効設定全体をTT/ordering再利用のnamespaceと実行記録へ束縛し、条件の変更ごとにコードを書き換える運用にしない。調整専用の複製探索器や汎用制御frameworkは追加しない。typed設定化・範囲設計と、別途有限化する数値調整を区別する。
 2. 整数丸め後の減深表を確認し、実際によく訪れる深さ/順位で摂動が無効にならない係数範囲・摂動幅を選ぶ。実探索は整数深度のままとし、全探索を小数深度へ作り直すことを前提にしない。
