@@ -477,7 +477,7 @@ def cohort_parent_binding(cohort_ref):
     """Assign the actual admitted parent job; admission owns settings/source/resources."""
     cohort = document(cohort_ref)
     parent = cohort["authority_parent"]
-    state = document(bound(Path(parent["runtime"]) / "state.json")[0])
+    state = json.loads(bound(Path(parent["runtime"]) / "state.json")[1])
     origin = document(bound(Path(parent["output"]) / "parent-origin.json")[0])
     require(origin["cohort"] == cohort_ref, "assigned parent belongs to this cohort")
     binding = dict(
@@ -499,7 +499,7 @@ def cohort_parent_check(binding):
     """Local job watch only; no repeated DB, source, argv or CPU-role admission."""
     origin = binding["origin"]
     runtime = Path(binding["parent"]["runtime"])
-    state = document(bound(runtime / "state.json")[0])
+    state = json.loads(bound(runtime / "state.json")[1])
     require(
         state["job_id"] == origin["job_id"]
         and state["config_sha256"] == origin["config_sha256"]
@@ -552,7 +552,7 @@ def cohort_job_authority(config, directory=None):
         )
     else:
         runtime = Path(member["job_runtime"])
-        state = document(bound(runtime / "state.json")[0])
+        state = json.loads(bound(runtime / "state.json")[1])
         registered = state["launch"]
         require(
             registered["owner"] == binding["origin"]["child"]
@@ -598,7 +598,7 @@ def cohort_job_authority(config, directory=None):
                     "inner intent is the maintained selected operation",
                 )
                 inner_runtime = selected / "runtime"
-                inner = document(bound(inner_runtime / "state.json")[0])
+                inner = json.loads(bound(inner_runtime / "state.json")[1])
                 require(
                     (directory is None or Path(directory) == inner_runtime)
                     and inner["supervisor"] == own
