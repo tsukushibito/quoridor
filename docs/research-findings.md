@@ -2487,6 +2487,16 @@ L2の初回通常parent b7f295e0は、投入後2.6394428290077485秒でFAILEDと
 
 この修復を[通常採用](../.artifacts/research-team/integration324/cedar-lmr-tuning-v1/control-continuation-v1/resource-state-adoption-v5/adoption.json)し、元L1全512資格と一度の点選択・確認側DR対OFF512局/8G・旧UNKNOWN費を維持して、新正常runtimeへ接続する。本記録時点では再投入・L2全数資格・最終global CIは未確認であり、SOURCE_CLEARを本比較完走へ昇格しない。取消済み相談の開始追跡/通知は取消のまま、モデル/既定/封印/pauseを変更しない。
 
+### LMR確認側の資源停止と会計境界の修復（324.9.3、2026-10-19）
+
+次の通常L2 parent6489fac3は60.656039169989526秒でFAILEDとなった。今回は全8laneで最初の原operation0..7のnativeが起動しており、前回b7の0科学を転用しない。4laneの保存tracebackは既存common会計の`cycle memory_limit`拒否を示すが、その閾値時の実RSSとmember集合は未記録である。原cap不足や物理OOM、全失敗の原因とは認定しない。別laneのpeer拒否に記録されたnativeは保存identity/argv上は同cohortのlane6と結び付く一方、拒否時の実affinity・最初のpredicateはUNKNOWNで、peer検査を一律に迂回しない。
+
+原結果を一度回収し、既知のscientific process停止、8つの所有Popenのdirectwait/handle解放とsource lease解放を保存した。原FAILED/NULL/capturefalse・部分cleanupfalseとdisk上のreap、mask pending、stale runningを区別して保全する。原ops0..7の個別started/completed・terminal node課金はUNKNOWN_NOT_ZERO、確認側の新資格はこの回収時点では0である。後半ops8..15の256slotは真正未入場であり、必要な修復の採用後、その原4G非融通枠で先に進められる。前半の保存partialの一度の資格・費用確認は別に行い、原500MへのresetやUNKNOWNのゼロ化をしない。[原6489の有限回収](../.worktree/assets/perf/cedar-lmr-tuning-implementation-v1/control-continuation-v1/parent-entry-repair-v1/live-state-read-fix-v4/resource-state-fix-v5/L2-attempt-v2-recovery-v1/original-parent-collection.json)。
+
+私有の会計修復案は、同じcheck内の親所有process観測を一回にそろえ、inner/common集合を分類し、既にlane/totalへ課金したinner checkerをcommonへ重複課金しない。通常の`CycleResources`の自己課金は既定で維持し、lane/common/total/hostのcapは増やさない。保存の新1定義PASSは人工process集合における限定証拠であり、25→1のscan回数はnative性能や歴史的原因の測定ではない。
+
+同じMaxの関連確認では、観測後に中間guardianが消失してnativeがreparentされると、exact identityが有効な観測済みprocessでもPPID/group再構成から抜け、当checkの課金集合が既知RSSを被覆しない反例が残った。必須修復は既存accounting owner内で観測集合をdisjoint課金集合が被覆するか、分類不能ならfail-closedとする範囲であり、追加process scan・cache/service/registryは求めない。この案はMain未採用で、親喪失cleanupの有限伝播を即時会計被覆の代用にしない。[固定会計案](../.worktree/assets/perf/cedar-lmr-tuning-implementation-v1/control-continuation-v1/parent-entry-repair-v1/live-state-read-fix-v4/resource-state-fix-v5/L2-attempt-v2-recovery-v1/coherent-accounting-v3/binding.json)、[関連確認の必須1点](../.worktree/assets/perf/cedar-lmr-tuning-analysis-v1/control-continuation-v1/parent-entry-review-v1/related-coherent-accounting-v3/findings.json)。L1全512資格とDR選択、固定L2条件、独立784局/12.25Gの使用済み・未知、旧opaque保留を維持し、最終global CIは未実施である。
+
 ### Cedar LMR調整と独立評価を後続計画へ追加（2026-10-19 JST、人間直接指示）
 
 人間の「調整まで計画に含めておいて」を、[既存NNUE設計の後続計画](design/ai-nnue-research.md#現行確認後のlmrパラメータ調整と独立評価2026-10-19-jst人間直接指示)へ統合した。現在の管理修復・凍結した確認対局と保存解析を優先し、完了後に評価器と基準探索を固定する。共通LMRのtyped設定・実効設定とTT/ordering namespaceの結合、整数丸め後も働く係数摂動、少数係数の粗比較と有限SPSA、別開始局面での独立した同時間棋力評価までを計画に含める。離散条件と係数調整の問いを分け、SPSA各更新や独立確認を一律512局とはしない。実施時に規模・範囲・摂動/更新幅・減衰・仕事/時間/保存枠・停止と候補規則を具体化し、ここでは新しい数値枠・対局・実装・学習を発行しない。
