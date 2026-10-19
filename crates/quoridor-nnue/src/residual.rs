@@ -350,23 +350,22 @@ impl ResidualModel {
         scratch: &mut ResidualScratch,
         observe: impl FnOnce(bool, bool),
     ) -> Result<f32> {
-        self.base.validate_accumulator(a)?;
         let t = self.base.topology;
         let input = t.input_width() + 4;
-        let side = a.features.side as usize;
         if scratch.input.len() != input {
+            // Preserve accumulator-error precedence even for bad worker scratch.
+            self.base.validate_accumulator(a)?;
             return Err(Error::Input("residual scratch width".into()));
         }
+        let side = a.features.side as usize;
         let x = &mut scratch.input;
-        for (out, value) in x[..t.ft_width].iter_mut().zip(&a.values[side]) {
-            *out = value.max(0.);
-        }
-        for (out, value) in x[t.ft_width..2 * t.ft_width]
-            .iter_mut()
-            .zip(&a.values[side ^ 1])
-        {
-            *out = value.max(0.);
-        }
+        self.base
+            .validate_accumulator_with(a, |view, index, value| {
+                // Comparing (rather than indexing by) side is safe for arbitrary
+                // public side values too; validation refuses them before the head.
+                let offset = if view == side { 0 } else { t.ft_width };
+                x[offset + index] = value.max(0.);
+            })?;
         for i in 0..2 {
             x[2 * t.ft_width + i] = (a.features.distance[i] - self.base.mu[i]) / self.base.sigma[i];
         }
@@ -1104,5 +1103,147 @@ mod residual_value419_tests {
             overflowing.evaluate_with_scratch(&a, &mut scratch),
             Err(Error::Numeric(message)) if message == "residual logit"
         ));
+    }
+}
+
+#[cfg(test)]
+mod validation_packing_tests {
+    use super::*;
+
+    fn fixture(weight: f32) -> ResidualModel {
+        let topology = Topology {
+            ft_width: 3,
+            hidden_width: 2,
+        };
+        ResidualModel::from_parts(
+            topology,
+            vec![weight; ResidualModel::parameter_count(topology).unwrap()],
+            [0.1, 0.2],
+            [0.5, 0.75],
+            DistanceFit { a: 0., b: 0. },
+            RouteMode::Zero4,
+            [0.; 4],
+            [1.; 4],
+        )
+        .unwrap()
+    }
+
+    fn accumulator(model: &ResidualModel) -> Accumulator {
+        model
+            .full_features(
+                crate::Features {
+                    ids: [vec![0, 81], vec![80, 161]],
+                    distance: [0.25, 0.75],
+                    side: 0,
+                },
+                EvaluationMode::Scalar,
+            )
+            .unwrap()
+    }
+
+    #[test]
+    fn fused_validation_preserves_both_stm_packed_input_bits() {
+        let model = fixture(0.001);
+        let mut a = accumulator(&model);
+        a.values = [vec![-0., f32::from_bits(1), -2.], vec![1., -1., f32::MAX]];
+        for side in [0, 1] {
+            a.features.side = side;
+            let mut scratch = model.evaluation_scratch();
+            let value = model.evaluate_with_scratch(&a, &mut scratch).unwrap();
+            assert!(value.is_finite());
+            let mut expected = Vec::new();
+            for view in [usize::from(side), usize::from(side) ^ 1] {
+                expected.extend(a.values[view].iter().map(|v| v.max(0.)));
+            }
+            for i in 0..2 {
+                expected.push((a.features.distance[i] - model.base.mu[i]) / model.base.sigma[i]);
+            }
+            expected.extend([0.; 4]);
+            assert_eq!(
+                scratch
+                    .input
+                    .iter()
+                    .map(|x| x.to_bits())
+                    .collect::<Vec<_>>(),
+                expected.iter().map(|x| x.to_bits()).collect::<Vec<_>>()
+            );
+        }
+    }
+
+    #[test]
+    fn fused_validation_retains_public_refusals_and_error_precedence() {
+        let model = fixture(0.001);
+        let original = accumulator(&model);
+        let accumulator_error = Error::Input("accumulator model/shape/finite mismatch".into());
+        let features_error = Error::Input("QF1 feature bounds/order/side/distance".into());
+        let mut cases = Vec::new();
+        let mut bad = original.clone();
+        bad.values[0][1] = f32::NAN;
+        bad.features.side = 3;
+        cases.push((bad, accumulator_error.clone()));
+        let mut bad = original.clone();
+        bad.values[1].pop();
+        cases.push((bad, accumulator_error.clone()));
+        cases.push((accumulator(&fixture(0.002)), accumulator_error));
+        let mut bad = original.clone();
+        bad.features.ids[0] = vec![1, 0];
+        cases.push((bad, features_error.clone()));
+        let mut bad = original.clone();
+        bad.features.ids[0] = vec![FEATURE_COUNT as u16];
+        cases.push((bad, features_error.clone()));
+        let mut bad = original.clone();
+        bad.features.side = 2;
+        cases.push((bad, features_error.clone()));
+        let mut bad = original.clone();
+        bad.features.distance[0] = f32::INFINITY;
+        cases.push((bad, features_error));
+        for (bad, expected) in cases {
+            assert_eq!(model.base.validate_accumulator(&bad).unwrap_err(), expected);
+            assert_eq!(
+                model
+                    .base
+                    .delta_features(&bad, original.features.clone())
+                    .unwrap_err(),
+                expected
+            );
+            for short_scratch in [false, true] {
+                let mut scratch = model.evaluation_scratch();
+                if short_scratch {
+                    scratch.input.pop();
+                }
+                assert_eq!(
+                    model.evaluate_with_scratch(&bad, &mut scratch).unwrap_err(),
+                    expected
+                );
+            }
+        }
+        let mut scratch = model.evaluation_scratch();
+        scratch.input.pop();
+        assert_eq!(
+            model
+                .evaluate_with_scratch(&original, &mut scratch)
+                .unwrap_err(),
+            Error::Input("residual scratch width".into())
+        );
+    }
+
+    #[test]
+    fn fused_validation_error_scratch_is_reusable_without_parent_mutation() {
+        let model = fixture(0.001);
+        let good = accumulator(&model);
+        let parent_values = good.values.clone();
+        let parent_features = good.features.clone();
+        let mut bad = good.clone();
+        bad.values[1][2] = f32::INFINITY;
+        let mut scratch = model.evaluation_scratch();
+        assert!(model.evaluate_with_scratch(&bad, &mut scratch).is_err());
+        let reused = model.evaluate_with_scratch(&good, &mut scratch).unwrap();
+        let fresh = model
+            .evaluate_with_scratch(&good, &mut model.evaluation_scratch())
+            .unwrap();
+        assert_eq!(reused.to_bits(), fresh.to_bits());
+        assert_eq!(good.values, parent_values);
+        assert_eq!(good.features, parent_features);
+        assert_eq!(&scratch.input[scratch.input.len() - 4..], &[0.; 4]);
     }
 }
