@@ -2521,19 +2521,19 @@ R1修復版は、一回の観測で既存identity検査を通った全processを
 
 ### Cedar履歴同点群の安い二次採点を実検証する（324.14、2026-10-19、人間直接依頼）
 
-現行Controlを対照に、priority tierと完全な合成動的履歴scoreが同点の複数手だけを安く採点する一候補を、連続探索時間と同時間の先後pair棋力の両方で有限評価する直接依頼を受けた。新BFS/map・子make・NNUE・全走査を追加せず、正規親情報/局所整数式から具体式を一つだけ結果前固定する。typed設定・namespace/reset・既存key/尾部整列、公開拒否/合法性/LMR保護/停止/親復元を維持する。旧Cheapの全加点、SPSA将来計画、旧比較の成功再演とは分ける。
+人間の直接依頼で、Cedar＋Control＋depth_rank/path_tailを固定し、TT/PV/killer/完全な合成動的履歴が同点の異なる手だけへの`local_goal_edge`追加採点をOffと比較した。新BFS/map・子make・追加NNUE・cacheは加えず、両群を同じRust5c18/BUILD0caa/image78ddと具体Residual head session ownerで測った。汎用scratch/WallDistance等はper-callのままで、整数式単独の費用や13fusionの効果を切り分けた比較ではない。
 
-orderingで木/TT/LMR/value/PV/workが変わるため、全work一致や同仕事speedupを要求しない。初期化とTT/履歴/scratchの実再用をそろえた連続Search合計を主時計、setup/drop/wholeを別にし、棋力は同Cedar・固定探索条件・同100ms/5ms等のfamily両色で評価する。具体のcall/game/node/seed/統計/停止/保存枠は結果前に有限化する。現在は既存Highへの私有source/設定準備の配分であり、数値START・software/改善/棋力の合格は未確認。[現行の候補境界と評価方法](design/lightweight-move-ordering-v1.md#cedar履歴同点群だけの安い二次採点324142026-10-19人間直接依頼)。
+**全128局/64family/UNKNOWN0、候補65勝0分63敗・得点率50.78125%、事前の唯一のfamily95%区間[46.09375%, 55.46875%]。** PCG64 seed3241420261019/10000/linear95を全資格確認とentry保存後に一度だけ実行し、図表にはその保存値を再用した。下端>50%という結果前の規約を満たさないため、**現Controlを維持し、履歴同点時の追加採点Offを次の研究LMR調整へ固定する**。候補の効果不存在、同等性、優越、Elo、モデル・製品/default昇格は認定しない。結果を理由に局数・候補・条件を増やさない。
 
-LMRの修復・残り確認を優先し、既存入力/設定/通知先・784局/12.25Gを変更/借用しない。軽準備は独立、重いbuild/test/RAW/実時計は実native+collection STOPと資源の自然境界へ調整し、他parent closeやACKを入口にしない。新しい常設役/監視を作らず、Main/Git/Cargo/正本文書は324のみが所有する。USERPAUSE/seals/models/weights/defaults/foreign/原RAWFAILEDと費UNKNOWN・50GB、取消済み相談のactual8追跡・通知を保持する。
+連続時間も元の128calls/16sessionsを完了し、実2,209,346nodes、全DepthComplete。OFF→ON→ON→OFFのSearch合計は0.717610868/0.681480043/0.688651584/0.735323113秒だった。候補2passの最大<対照2passの最小は成立したが、series-1の規約上の中央値がOff 0.0606693985→On 0.0733641375秒となり、事前TIME基準は未達。action差0/PV差5/value bits差1/work差30/32はordering＋LMRによる条件差として保存し、同仕事speedupや一般的な速度優越にはしない。setup/reset/root準備/drop/journal/native wholeは別に報告した。TIMEを棋力の追加採用条件にせず、両段階とも予定どおり完了した。
 
-同じHighは`local_goal_edge`一候補の私有source-v5を固定した。完全なsigned履歴とtierが同点の異なる手に限り、pawnのgoal行進捗×4、水平壁の相手直進辺遮断−自分遮断×2、垂直壁0を比較し、最後は旧ActionIDとする。親3byteと既存keyを凍結し、新map/BFS/子make/NNUE/追加group走査・sortはない。反復される整数式/Optionの費用や棋力効果は未測定で、新5定義も未compile/未実行である。[固定sourceと検証案](../.worktree/assets/perf/cedar-history-tie-ordering-v1/completion-v1.json)。
+元の最初の32局は閉じたnative結果を保存したが、LCの宣言config対serde既定値の対応でFAILEDだった。元selected RUNと全入力参照を保った既存collector修復（41cd05dc/LC1a5191b8）により一度の保存検証で別途DATA_VALIDATEDとし、成功96局の資格を参照で再用して全128局を組んだ。旧jobのFAILED/LC accepted0、失敗view、NULL/cleanup/masksを成功へ書き換えず、32局・TIME・成功96局の再実行はない。native4chunkの各1 resample診断は原値のまま、唯一の最終family区間と分ける。Python保存修復を測定Rust imageの変更へ読み替えない。
 
-Rootは結果前の有限方法を、真正32rootのOFF/ON/ON/OFF・128calls/128M・16sessionsと、別の64family両色128局・4×250M/計1Gの同100ms/5ms比較に解決した。時間はSearch合計と実行順/series差、棋力はfamily単位の一度のPCG64/10000区間を用い、仕事量変化を同仕事speedupへ変えない。旧book露出とcanonical左右反転/prefix延長の分離、両条件同一の具体head scratch owner、実source/software/image/holdingは数値入場前の未解決な実依存として残す。時間が悪くても結果を理由に棋力側を省かず、追加warmup/補充/sweep・旧LMR/13枠の転用は0。384MiB whole案は未適用、LMR優先で現在の217局用sourceの関連確認・正常ソフト検証を先行する。[解決した比較方法と限界](../.artifacts/research-team/integration324/cedar-history-tie-ordering-v1/protocol-resolution-v1/resolution.json)。
+strength node chargeは各112,308,903/132,866,997/124,916,086/126,495,919、計496,587,905で、元4×250M/1Gの非融通枠内。outer wallは元jobごと一度、nestedは足さず、physical NN/FT/head・全費用・連続peak RSSはUNKNOWNのまま。384MiBの履歴上限・50GBと全RAW/FAILED/旧費/UNKNOWNを保持し、未使用quotaの転用・返金・再配分はない。432/433の既使用と、任意のtraining/LMR/public/sealed/interior露出UNKNOWNにより、当book/100ms5の有限比較に限る。
 
-人間の追加直接指示「その計画で進めて」を受け、元L2の最終保存解析後は、現行LMRを固定した同点群追加採点ON/OFFの両比較→採用または現状維持→構成固定後のLMR係数調整・独立確認、の順に進める。差が曖昧なら現行方式を維持し、無限定増量しない。LMR設定化・範囲設計は並行可能だが、係数探索中はordering・評価器を変えない。合成source-v6の関連静的確認はessential0/ordinary0で完了し、旧L2最終解析の実STOPも受領した。次はRoot単独の薄いMain採用、新7定義・限定lint/build・genuine image、その後の既存14有限比較であり、受付を数値開始とは扱わない。旧L2・UNKNOWN・未使用quotaを後続へ転用せず、parent close/ACKや取消済み開始追跡を入口にしない。
+[図・全表・来歴と費用を含む最終報告](../.worktree/assets/perf/cedar-history-tie-ordering-v1/numeric-v1/final-saved-analysis-v1/report-ja.md)、[全128局の資格](../.worktree/assets/perf/cedar-history-tie-ordering-v1/numeric-v1/final-saved-analysis-v1/full-qualification.json)、[唯一の最終区間](../.worktree/assets/perf/cedar-history-tie-ordering-v1/numeric-v1/final-saved-analysis-v1/final-bootstrap.json)、[比較設計と入力の限界](design/lightweight-move-ordering-v1.md#cedar履歴同点群だけの安い二次採点324142026-10-19人間直接依頼)を参照する。
 
-研究判断で結果前の採否を明確にした。固定128局/64familyの正規資格が揃い、事前family95%区間の下端が0.5を上回れば、次のLMR調整用の研究ordering設定として候補を選ぶ。それ以外は現Controlを維持する。TIME改善は追加の採用条件にせず、時間の有限基準とsetup/drop/wholeは別に報告する。時間が中立・悪化でも棋力側を実施し、未確定を効果不存在と呼ばず、追加局・候補・再選択や製品/default/model昇格を発行しない。
+次はCedar・現Control・path_tailを固定し、既存324.9の[LMR typed設定・係数範囲設計から調整と独立確認](design/ai-nnue-research.md#現行確認後のlmrパラメータ調整と独立評価2026-10-19-jst人間直接指示)へ進む。整数丸めで働く摂動、少数係数の有限更新、別開始集合の独立確認を、次の入口で具体化する。ここから新しい数値枠・追加job・学習を発行せず、orderingと評価器を係数探索中に同時変更しない。採用されなかった候補専用経路は具体的な残る用途を確認後に324.12で整理し、比較sourceはGitと原artifactから再構成する。parent close/返信/ACKや取消済みactual8追跡を入口にしない。
 
 ### 終了済み実験入口・互換対象の撤去（324.12、2026-10-19）
 
