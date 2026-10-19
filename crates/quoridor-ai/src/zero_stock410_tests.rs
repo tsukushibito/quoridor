@@ -58,6 +58,7 @@ fn with_tt<T>(
         static_scratch: Some(StaticScratch::CheapControl),
         ordering_diagnostics: false,
         lmr: false,
+        lmr_table: None,
         #[cfg(feature = "research-diagnostics")]
         history: [0; 209],
         #[cfg(feature = "research-diagnostics")]

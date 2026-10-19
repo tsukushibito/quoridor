@@ -134,7 +134,7 @@ pub fn alpha_counters(r: &SearchResult) -> serde_json::Value {
         "tt_collisions":s.tt_collisions,"tt_replacements":s.tt_replacements,"tt_capacity_skips":s.tt_capacity_skips,
         "tt_illegal_moves":s.tt_illegal_moves,"tt_retained_bytes":s.tt_retained_bytes,"tt_generation":s.tt_generation,
         "pvs_researches":s.pvs_researches,"delta_updates":s.delta_updates,"policy_calls":s.policy_calls,
-        "leaf_count":null,"physical_nn_calls":null})
+        "lmr_parameters":s.lmr_parameters.map(crate::config::LmrParameters::from),"leaf_count":null,"physical_nn_calls":null})
 }
 
 /// Single caller-owned snapshot, never a hard real-time asynchronous return promise.

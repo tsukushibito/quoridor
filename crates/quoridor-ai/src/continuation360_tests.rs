@@ -184,6 +184,7 @@ pub(super) fn with_state<T>(
         static_scratch: None,
         ordering_diagnostics: true,
         lmr: false,
+        lmr_table: None,
         #[cfg(feature = "research-diagnostics")]
         history: [0; 209],
         #[cfg(feature = "research-diagnostics")]

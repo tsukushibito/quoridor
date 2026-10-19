@@ -578,6 +578,11 @@ pub enum LmrMethod {
     #[default]
     DepthRank,
 }
+#[path = "lmr_parameters.rs"]
+mod lmr_parameters;
+pub use lmr_parameters::LmrParameters;
+use lmr_parameters::PreparedLmr;
+
 static LMR_DEPTH_RANK: std::sync::OnceLock<[[u8; 64]; 64]> = std::sync::OnceLock::new();
 impl LmrMethod {
     pub fn from_name(name: &str) -> Result<Self> {
@@ -776,6 +781,8 @@ pub struct SearchStats {
     /// One per-Search snapshot; method selection alone does not enable LMR.
     pub lmr_enabled: bool,
     pub lmr_method: LmrMethod,
+    /// None while OFF; baseline is explicit when depth_rank is effective.
+    pub lmr_parameters: Option<LmrParameters>,
     /// Per-Search root snapshot; fixed throughout iterative deepening.
     pub root_walls_remaining: u16,
     pub zero_stock_approx_permitted: bool,
@@ -1348,6 +1355,7 @@ struct Search<'a, const OBSERVE: bool = false, const TRACE: bool = false> {
     static_scratch: Option<StaticScratch>,
     ordering_diagnostics: bool,
     lmr: bool,
+    lmr_table: Option<&'a PreparedLmr>,
     #[cfg(feature = "research-diagnostics")]
     history: [u64; 209],
     #[cfg(feature = "research-diagnostics")]
@@ -2282,7 +2290,10 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
                     .is_some_and(|moves| self.lmr_allowed(action, depth, i, alpha, tt_move, moves));
             let reduction = if eligible {
                 // i counts distinct hands, including TT-first; re-search never advances it.
-                self.stats.lmr_method.reduction(depth, i + 1)
+                self.lmr_table.map_or_else(
+                    || self.stats.lmr_method.reduction(depth, i + 1),
+                    |table| table.reduction(depth, i + 1),
+                )
             } else {
                 0
             };
@@ -2807,6 +2818,8 @@ pub struct SearchSession {
     ordering_diagnostics: bool,
     lmr: bool,
     lmr_method: LmrMethod,
+    lmr_parameters: LmrParameters,
+    lmr_table: Option<Box<PreparedLmr>>,
     method: SessionMethod,
     zero_stock_approx_min_root_walls: Option<u8>,
     zero_stock_approx_method: ZeroStockApproxMethod,
@@ -2838,7 +2851,7 @@ impl SearchSession {
         if self.lmr {
             self.namespace
                 .selectivity
-                .truncate(self.namespace.selectivity.len() - self.lmr_method.id().len() - 1);
+                .truncate(self.namespace.selectivity.len() - self.lmr_namespace_bytes());
         }
         if old != HistoryTieBreak::Off {
             self.namespace
@@ -2852,6 +2865,7 @@ impl SearchSession {
         method.qualify(&mut self.namespace);
         if self.lmr {
             append_lmr_method(&mut self.namespace, self.lmr_method);
+            self.qualify_lmr_parameters();
         }
         if self.zero_stock_approx_effective {
             append_zero_stock_approx_method(&mut self.namespace, self.zero_stock_approx_method);
@@ -2994,12 +3008,77 @@ impl SearchSession {
                 "LMR requires signed Control/Cheap".into(),
             ));
         }
+        if enabled
+            && self.lmr_parameters != LmrParameters::default()
+            && self.lmr_method != LmrMethod::DepthRank
+        {
+            return Err(SearchError::Limits(
+                "custom LMR parameters require depth_rank".into(),
+            ));
+        }
         self.change_lmr(enabled, self.lmr_method);
         Ok(())
     }
     /// Selects a method without activating it. No numeric namespace change while OFF.
     pub fn set_lmr_method(&mut self, method: LmrMethod) {
         self.change_lmr(self.lmr, method);
+    }
+    /// Explicit settings belong only to the signed Control research constructor.
+    pub fn set_lmr_parameters(&mut self, parameters: Option<LmrParameters>) -> Result<()> {
+        if parameters.is_some()
+            && (self.ordering.is_none()
+                || !matches!(self.static_enabled, StaticMode::CheapControl)
+                || self.lmr_method != LmrMethod::DepthRank)
+        {
+            return Err(SearchError::Limits(
+                "LMR parameters require signed Control/depth_rank".into(),
+            ));
+        }
+        let parameters = parameters.unwrap_or_default().validate()?;
+        if parameters == self.lmr_parameters {
+            return Ok(());
+        }
+        let table = if parameters == LmrParameters::default() {
+            None
+        } else {
+            Some(Box::new(PreparedLmr::new(parameters)?))
+        };
+        let enabled = self.lmr;
+        if enabled {
+            self.change_lmr(false, self.lmr_method);
+        }
+        self.lmr_parameters = parameters;
+        self.lmr_table = table;
+        if enabled {
+            self.change_lmr(true, self.lmr_method);
+        }
+        Ok(())
+    }
+    pub fn lmr_parameters(&self) -> Option<LmrParameters> {
+        (self.lmr && self.lmr_method == LmrMethod::DepthRank).then_some(self.lmr_parameters)
+    }
+    pub fn lmr_reduction_rule(&self) -> Option<&'static str> {
+        self.lmr_method().map(|method| {
+            if method == LmrMethod::DepthRank {
+                self.lmr_parameters.reduction_rule()
+            } else {
+                method.reduction_rule()
+            }
+        })
+    }
+    fn lmr_namespace_bytes(&self) -> usize {
+        self.lmr_method.id().len()
+            + 1
+            + if self.lmr_method == LmrMethod::DepthRank {
+                self.lmr_parameters.suffix().len()
+            } else {
+                0
+            }
+    }
+    fn qualify_lmr_parameters(&mut self) {
+        if self.lmr_method == LmrMethod::DepthRank {
+            self.lmr_parameters.qualify_namespace(&mut self.namespace);
+        }
     }
     fn change_lmr(&mut self, enabled: bool, method: LmrMethod) {
         method.prepare(); // One process table, outside per-node search work.
@@ -3017,10 +3096,13 @@ impl SearchSession {
         if self.lmr {
             self.namespace
                 .selectivity
-                .truncate(self.namespace.selectivity.len() - self.lmr_method.id().len() - 1);
+                .truncate(self.namespace.selectivity.len() - self.lmr_namespace_bytes());
         }
         if enabled {
             append_lmr_method(&mut self.namespace, method);
+            if method == LmrMethod::DepthRank {
+                self.lmr_parameters.qualify_namespace(&mut self.namespace);
+            }
         }
         if self.zero_stock_approx_effective {
             append_zero_stock_approx_method(&mut self.namespace, self.zero_stock_approx_method);
@@ -3159,6 +3241,8 @@ impl SearchSession {
             ordering_diagnostics: false,
             lmr: false,
             lmr_method: LmrMethod::default(),
+            lmr_parameters: LmrParameters::default(),
+            lmr_table: None,
             method: SessionMethod::Plain,
             zero_stock_approx_min_root_walls: None,
             zero_stock_approx_method: ZeroStockApproxMethod::Race,
@@ -3182,6 +3266,11 @@ impl SearchSession {
                 .residual_head_scratch
                 .as_ref()
                 .map_or(0, ResidualScratch::retained_bytes);
+        let metadata = metadata
+            + self
+                .lmr_table
+                .as_ref()
+                .map_or(0, |_| std::mem::size_of::<PreparedLmr>());
         (self.table.retained_bytes(), metadata)
     }
     /// Live persistent slot count and byte limit; no table or history mutation.
@@ -3231,6 +3320,9 @@ impl SearchSession {
             self.lmr.then_some(self.lmr_method),
             self.history_tie_break(),
         );
+        if self.lmr {
+            self.qualify_lmr_parameters();
+        }
         // A reset has no root yet; preserve requested configuration but do not
         // claim resolved authority until the next real Search supplies its root.
         self.zero_stock_approx_effective = false;
@@ -3277,6 +3369,7 @@ impl SearchSession {
             .evaluator
             .session_residual_owner()
             .zip(self.residual_head_scratch.as_mut());
+        invocation.lmr_table = self.lmr_table.as_deref();
         invocation.safe_race_method = self.zero_stock_safe_race_method;
         search_in_table::<false, false>(
             root,
@@ -3329,6 +3422,7 @@ impl SearchSession {
             root_walls,
             limits.max_depth,
         ));
+        invocation.lmr_table = self.lmr_table.as_deref();
         invocation.safe_race_method = self.zero_stock_safe_race_method;
         invocation.residual_head = self
             .evaluator
@@ -3370,6 +3464,7 @@ type SearchTableAndDomain<'table, 'history> = (
 struct SearchInvocation<'a> {
     residual_head: Option<(&'a ResidualEvaluator, &'a mut ResidualScratch)>,
     forced_root: Option<u16>,
+    lmr_table: Option<&'a PreparedLmr>,
     safe_race_method: ZeroStockSafeRaceMethod,
     on_completed: &'a mut dyn FnMut(&SearchResult),
     #[cfg(feature = "research-diagnostics")]
@@ -3385,6 +3480,7 @@ impl<'a> SearchInvocation<'a> {
             on_completed,
             residual_head: None,
             forced_root: None,
+            lmr_table: None,
             safe_race_method: ZeroStockSafeRaceMethod::Manhattan,
             #[cfg(feature = "research-diagnostics")]
             observation: None,
@@ -3444,6 +3540,14 @@ fn search_in_table<const OBSERVE: bool, const TRACE: bool>(
             "LMR requires PVS and no-policy signed Control/Cheap".into(),
         ));
     }
+    if invocation.lmr_table.is_some()
+        && (lmr_method != LmrMethod::DepthRank
+            || !matches!(static_enabled, StaticMode::CheapControl))
+    {
+        return Err(SearchError::Limits(
+            "custom LMR table requires Control/depth_rank".into(),
+        ));
+    }
     if root.is_synthetic() {
         return Err(SearchError::Root(
             "synthetic histories are not search inputs".into(),
@@ -3500,6 +3604,11 @@ fn search_in_table<const OBSERVE: bool, const TRACE: bool>(
         stats: SearchStats {
             lmr_enabled: lmr,
             lmr_method,
+            lmr_parameters: (lmr && lmr_method == LmrMethod::DepthRank).then(|| {
+                invocation
+                    .lmr_table
+                    .map_or_else(LmrParameters::default, |table| table.parameters)
+            }),
             root_walls_remaining,
             zero_stock_approx_permitted,
             zero_stock_approx_method,
@@ -3532,6 +3641,7 @@ fn search_in_table<const OBSERVE: bool, const TRACE: bool>(
         },
         ordering_diagnostics,
         lmr,
+        lmr_table: invocation.lmr_table,
         #[cfg(feature = "research-diagnostics")]
         history: [0; 209],
         #[cfg(feature = "research-diagnostics")]
@@ -3995,6 +4105,7 @@ mod persistent_tt_tests {
                 static_scratch: None,
                 ordering_diagnostics: false,
                 lmr: false,
+                lmr_table: None,
                 #[cfg(feature = "research-diagnostics")]
                 history: [0; 209],
                 #[cfg(feature = "research-diagnostics")]
@@ -4685,6 +4796,7 @@ mod child_buffer_tests {
                 static_scratch: None,
                 ordering_diagnostics: false,
                 lmr: false,
+                lmr_table: None,
                 #[cfg(feature = "research-diagnostics")]
                 history: [0; 209],
                 #[cfg(feature = "research-diagnostics")]
@@ -5038,6 +5150,10 @@ mod tt_first386_tests;
 #[cfg(all(test, feature = "research-diagnostics"))]
 #[path = "deferred_tail399_tests.rs"]
 mod deferred_tail399_tests;
+
+#[cfg(test)]
+#[path = "lmr_parameter_settings_tests.rs"]
+mod lmr_parameter_settings_tests;
 
 #[cfg(test)]
 #[path = "lmr408_tests.rs"]

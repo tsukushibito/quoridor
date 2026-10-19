@@ -517,6 +517,8 @@ pub struct TtProfile {
     pub actual_zero_stock_safe_race_method_id: Option<String>,
     #[serde(default)]
     pub actual_lmr_method_id: Option<String>,
+    #[serde(default)]
+    pub actual_lmr_parameters: Option<crate::config::LmrParameters>,
     pub actual_history_tie_break_id: Option<String>,
     #[serde(default)]
     pub lmr_reduction_rule: Option<String>,
@@ -592,6 +594,25 @@ pub(crate) fn arena_lmr_method(engine: &Engine) -> alphabeta::Result<alphabeta::
             .unwrap_or(alphabeta::LmrMethod::default().name()),
     )
 }
+pub(crate) fn arena_lmr_parameters(
+    engine: &Engine,
+    arena: Option<&crate::arena::ArenaConfig>,
+) -> alphabeta::Result<alphabeta::LmrParameters> {
+    let method = arena_lmr_method(engine)?;
+    if engine.lmr_parameters.is_some()
+        && (engine.kind == "mcts"
+            || engine.ordering_profile.as_deref() != Some("control")
+            || method != alphabeta::LmrMethod::DepthRank
+            || !arena.is_some_and(|a| a.comparison != crate::arena::Comparison::Functional))
+    {
+        return Err(alphabeta::SearchError::Limits(
+            "LMR parameters belong to a research Control/depth_rank alpha arena".into(),
+        ));
+    }
+    engine
+        .lmr_parameters
+        .map_or_else(|| Ok(alphabeta::LmrParameters::default()), |p| p.resolve())
+}
 /// Resolve only the normal research alpha policy. Neither generator/functional
 /// callers nor MCTS inherit the research enable default.
 pub(crate) fn arena_safe_race(
@@ -641,6 +662,10 @@ fn arena_alpha_namespace(
         }
         None => base,
     };
+    let parameters = arena_lmr_parameters(engine, arena)?;
+    if engine.lmr && method == alphabeta::LmrMethod::DepthRank {
+        parameters.qualify_namespace(&mut namespace);
+    }
     let (enabled, method) = arena_safe_race(engine, arena)?;
     if enabled {
         method.qualify_namespace(&mut namespace);
@@ -680,6 +705,8 @@ fn arena_alpha_session(
     // Configuration selects the typed method; the namespace never enables LMR.
     session.set_history_tie_break(tie)?;
     session.set_lmr_method(method);
+    arena_lmr_parameters(engine, arena)?;
+    session.set_lmr_parameters(engine.lmr_parameters.map(|p| p.resolve()).transpose()?)?;
     session.set_lmr(engine.lmr)?;
     let (safe_enabled, safe_method) = arena_safe_race(engine, arena)?;
     session.set_zero_stock_safe_race_method(safe_method);
@@ -783,6 +810,11 @@ fn invoke_alpha_observed(
             profile.session_reset_seconds += start.elapsed().as_secs_f64();
             profile.namespace_resets += 1;
         }
+        if session.namespace() != &namespace {
+            return Err(alphabeta::SearchError::Limits(
+                "effective arena session namespace mismatch after reset".into(),
+            ));
+        }
         profile.actual_namespace = Some(serde_json::json!({
             "evaluator":session.namespace().evaluator,
             "rules":session.namespace().rules,
@@ -795,7 +827,8 @@ fn invoke_alpha_observed(
             .then(|| session.zero_stock_safe_race_method().id().to_owned());
         profile.actual_lmr_method_id = session.lmr_method().map(|m| m.id().to_owned());
         profile.actual_history_tie_break_id = Some(session.history_tie_break().id().to_owned());
-        profile.lmr_reduction_rule = session.lmr_method().map(|m| m.reduction_rule().to_owned());
+        profile.lmr_reduction_rule = session.lmr_reduction_rule().map(str::to_owned);
+        profile.actual_lmr_parameters = session.lmr_parameters().map(Into::into);
         profile.search_invocations += 1;
         let start = Instant::now();
         let mut bounded = limits.clone();
@@ -2966,6 +2999,8 @@ fn record_evaluation_alpha(
         "requested_zero_stock_safe_race_method":arena_safe_race(&config.engines[engine], config.arena.as_ref()).ok().map(|(_, method)| method.name()),
         "actual_zero_stock_safe_race_method_id":game.tt_profiles[engine].actual_zero_stock_safe_race_method_id,
         "requested_lmr_method":config.engines[engine].lmr_method.as_deref().unwrap_or(alphabeta::LmrMethod::default().name()),
+        "requested_lmr_parameters":config.engines[engine].lmr_parameters,
+        "actual_lmr_parameters":game.tt_profiles[engine].actual_lmr_parameters,
         "actual_lmr_method_id":game.tt_profiles[engine].actual_lmr_method_id,
         "requested_history_tie_break":config.engines[engine].history_tie_break.as_deref().unwrap_or("off"),
         "actual_history_tie_break_id":game.tt_profiles[engine].actual_history_tie_break_id,

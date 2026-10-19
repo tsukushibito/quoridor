@@ -143,6 +143,45 @@ pub struct Config {
     #[serde(default)]
     pub arena: Option<crate::arena::ArenaConfig>,
 }
+/// Serialization belongs to the typed runner inlet; the search crate stays serde-free.
+#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct LmrParameters {
+    pub intercept: f64,
+    pub log_divisor: f64,
+    pub min_depth: u16,
+    pub min_rank: u16,
+    pub max_extra: u8,
+}
+impl LmrParameters {
+    pub fn resolve(self) -> quoridor_ai::alphabeta::Result<quoridor_ai::alphabeta::LmrParameters> {
+        quoridor_ai::alphabeta::LmrParameters {
+            intercept: self.intercept,
+            log_divisor: self.log_divisor,
+            min_depth: self.min_depth,
+            min_rank: self.min_rank,
+            max_extra: self.max_extra,
+        }
+        .validate()
+    }
+}
+impl From<quoridor_ai::alphabeta::LmrParameters> for LmrParameters {
+    fn from(value: quoridor_ai::alphabeta::LmrParameters) -> Self {
+        Self {
+            intercept: value.intercept,
+            log_divisor: value.log_divisor,
+            min_depth: value.min_depth,
+            min_rank: value.min_rank,
+            max_extra: value.max_extra,
+        }
+    }
+}
+pub(crate) fn deserialize_lmr_parameters<'de, D: serde::Deserializer<'de>>(
+    deserializer: D,
+) -> Result<Option<LmrParameters>, D::Error> {
+    // Absent is default; explicit null/partial/unknown objects are errors.
+    LmrParameters::deserialize(deserializer).map(Some)
+}
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct Engine {
@@ -168,9 +207,16 @@ pub struct Engine {
     /// Explicit runtime mode; input namespace strings never enable it.
     #[serde(default)]
     pub lmr: bool,
-    /// Arena method selection; None uses the AI's fixed-one default.
+    /// Arena method selection; omission resolves to depth_rank.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub lmr_method: Option<String>,
+    /// Explicit research Control parameters; omission resolves to the baseline.
+    #[serde(
+        default,
+        deserialize_with = "deserialize_lmr_parameters",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub lmr_parameters: Option<LmrParameters>,
     /// Explicit research Control-only secondary order; omitted/Off preserves defaults.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub history_tie_break: Option<String>,
@@ -331,10 +377,12 @@ impl Config {
             return Err("invalid execution config".into());
         }
         if self.arena.is_none()
-            && self
-                .engines
-                .iter()
-                .any(|e| e.ordering_profile.is_some() || e.lmr || e.lmr_method.is_some())
+            && self.engines.iter().any(|e| {
+                e.ordering_profile.is_some()
+                    || e.lmr
+                    || e.lmr_method.is_some()
+                    || e.lmr_parameters.is_some()
+            })
         {
             return Err("explicit ordering/LMR settings belong to an arena config".into());
         }
@@ -347,6 +395,8 @@ impl Config {
             return Err("safe-race enable belongs to a research alpha arena".into());
         }
         for engine in &self.engines {
+            crate::runtime::arena_lmr_parameters(engine, self.arena.as_ref())
+                .map_err(|e| e.to_string())?;
             let tie = quoridor_ai::alphabeta::HistoryTieBreak::from_name(
                 engine.history_tie_break.as_deref().unwrap_or("off"),
             )
@@ -758,5 +808,43 @@ mod managed_search_clock_config_tests {
             }
             assert!(bad.validate().is_err(), "case {case}");
         }
+    }
+}
+
+#[cfg(test)]
+mod lmr_parameter_settings_tests {
+    use super::*;
+    #[test]
+    fn parameter_settings_engine_serde_and_effective_record_roundtrip() {
+        let baseline = quoridor_ai::alphabeta::LmrParameters::default();
+        let parameters = LmrParameters::from(baseline);
+        assert_eq!(
+            serde_json::from_value::<LmrParameters>(serde_json::to_value(parameters).unwrap())
+                .unwrap()
+                .resolve()
+                .unwrap(),
+            baseline
+        );
+        let base = serde_json::json!({"kind":"distance","ordering_profile":"control","lmr":false,"depth":6,"max_nodes":100,"distance_a":0.0,"distance_b":8.0});
+        let omitted: Engine = serde_json::from_value(base.clone()).unwrap();
+        assert!(omitted.lmr_parameters.is_none());
+        for bad in [
+            serde_json::Value::Null,
+            serde_json::json!({}),
+            serde_json::json!({"intercept":1.0,"log_divisor":2.0,"min_depth":3.5,"min_rank":4,"max_extra":3}),
+            serde_json::json!({"intercept":1.0,"log_divisor":2.0,"min_depth":3,"min_rank":4,"max_extra":3,"foreign":0}),
+        ] {
+            let mut value = base.clone();
+            value["lmr_parameters"] = bad;
+            assert!(serde_json::from_value::<Engine>(value).is_err());
+        }
+        let mut selected = base;
+        selected["lmr_parameters"] = serde_json::to_value(parameters).unwrap();
+        let engine: Engine = serde_json::from_value(selected).unwrap();
+        assert_eq!(engine.lmr_parameters.unwrap().resolve().unwrap(), baseline);
+        assert!(crate::runtime::arena_lmr_parameters(&engine, None).is_err());
+        let record = serde_json::json!({"requested_lmr_parameters":engine.lmr_parameters,"actual_lmr_parameters":Option::<LmrParameters>::None});
+        assert!(record["requested_lmr_parameters"].is_object());
+        assert!(record["actual_lmr_parameters"].is_null());
     }
 }

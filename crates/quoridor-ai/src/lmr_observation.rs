@@ -439,6 +439,7 @@ impl SearchSession {
         self.static_enabled == StaticMode::CheapControl
             && self.lmr
             && self.lmr_method == LmrMethod::DepthRank
+            && self.lmr_parameters == LmrParameters::default()
             && !self.ordering_diagnostics
             && self.zero_stock_approx_min_root_walls.is_none()
             && !self.zero_stock_approx_effective
@@ -473,6 +474,7 @@ impl SearchSession {
             SearchInvocation {
                 residual_head: None,
                 forced_root: None,
+                lmr_table: None,
                 on_completed: &mut callback,
                 observation: Some(&mut *observation),
                 safe_race_method: self.zero_stock_safe_race_method,
@@ -563,6 +565,7 @@ impl SearchSession {
             SearchInvocation {
                 residual_head: None,
                 forced_root: None,
+                lmr_table: None,
                 on_completed: &mut callback,
                 observation: None,
                 trial_trace: Some(&mut trace),
@@ -748,6 +751,7 @@ mod trial_tests {
             SearchInvocation {
                 residual_head: None,
                 forced_root: None,
+                lmr_table: None,
                 on_completed: &mut callback,
                 observation: None,
                 trial_trace: Some(&mut trace),

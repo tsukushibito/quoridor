@@ -252,6 +252,7 @@ impl ArenaConfig {
         }
         for engine in &c.engines {
             crate::runtime::arena_lmr_method(engine).map_err(|e| e.to_string())?;
+            crate::runtime::arena_lmr_parameters(engine, Some(self)).map_err(|e| e.to_string())?;
             crate::runtime::arena_safe_race(engine, Some(self)).map_err(|e| e.to_string())?;
             if let Some(profile) = engine.ordering_profile.as_deref() {
                 if quoridor_ai::alphabeta::OrderingProfile::from_name(profile).is_err()
@@ -374,6 +375,9 @@ impl ArenaConfig {
                     || (a.lmr
                         && crate::runtime::arena_lmr_method(a).ok()
                             != crate::runtime::arena_lmr_method(b).ok())
+                    || (a.lmr
+                        && crate::runtime::arena_lmr_parameters(a, Some(self)).ok()
+                            != crate::runtime::arena_lmr_parameters(b, Some(self)).ok())
                     || a.max_nodes != b.max_nodes
                     || a.simd != b.simd
                     || self.search_artifact_sha256[0] != self.search_artifact_sha256[i]
@@ -398,6 +402,9 @@ impl ArenaConfig {
                     || (a.lmr
                         && crate::runtime::arena_lmr_method(a).ok()
                             != crate::runtime::arena_lmr_method(b).ok())
+                    || (a.lmr
+                        && crate::runtime::arena_lmr_parameters(a, Some(self)).ok()
+                            != crate::runtime::arena_lmr_parameters(b, Some(self)).ok())
                     || a.max_nodes != b.max_nodes
                     || a.simd != b.simd
                     || b.kind == "mcts"
@@ -903,12 +910,26 @@ fn validate_observations(
             if engine.ordering_profile.is_some() {
                 let method = crate::runtime::arena_lmr_method(engine)?;
                 let effective = engine.lmr.then_some(method);
+                let parameters = crate::runtime::arena_lmr_parameters(engine, Some(a))?;
+                let effective_parameters = (engine.lmr
+                    && method == quoridor_ai::alphabeta::LmrMethod::DepthRank)
+                    .then(|| crate::config::LmrParameters::from(parameters));
                 if obs.counters["requested_lmr_method"] != method.name()
                     || obs.counters["actual_lmr_enabled"] != engine.lmr
                     || obs.counters["actual_lmr_method_id"]
                         != serde_json::json!(effective.map(|m| m.id()))
                     || obs.counters["lmr_reduction_rule"]
-                        != serde_json::json!(effective.map(|m| m.reduction_rule()))
+                        != serde_json::json!(effective.map(|m| {
+                            if m == quoridor_ai::alphabeta::LmrMethod::DepthRank {
+                                parameters.reduction_rule()
+                            } else {
+                                m.reduction_rule()
+                            }
+                        }))
+                    || obs.counters["requested_lmr_parameters"]
+                        != serde_json::json!(engine.lmr_parameters)
+                    || obs.counters["actual_lmr_parameters"]
+                        != serde_json::json!(effective_parameters)
                 {
                     return Err("arena requested/effective LMR method mismatch".into());
                 }

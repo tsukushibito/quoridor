@@ -72,6 +72,12 @@ struct Settings {
     lmr: bool,
     #[serde(default = "default_lmr_method")]
     lmr_method: String,
+    #[serde(
+        default,
+        deserialize_with = "crate::config::deserialize_lmr_parameters",
+        skip_serializing_if = "Option::is_none"
+    )]
+    lmr_parameters: Option<crate::config::LmrParameters>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     history_tie_break: Option<String>,
     #[serde(default)]
@@ -133,7 +139,13 @@ fn default_zero_stock_approx_method() -> String {
 }
 
 fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
-    LmrMethod::from_name(&settings.lmr_method)?;
+    let lmr_method = LmrMethod::from_name(&settings.lmr_method)?;
+    if let Some(parameters) = settings.lmr_parameters {
+        parameters.resolve()?;
+        if settings.profile != Profile::Control || lmr_method != LmrMethod::DepthRank {
+            return Err("LMR parameters require Control/depth_rank".into());
+        }
+    }
     let tie = alphabeta::HistoryTieBreak::from_name(
         settings.history_tie_break.as_deref().unwrap_or("off"),
     )?;
@@ -181,6 +193,9 @@ fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
             || !settings.use_pvs
             || !settings.lmr
             || LmrMethod::from_name(&settings.lmr_method)? != LmrMethod::DepthRank
+            || settings
+                .lmr_parameters
+                .is_some_and(|p| p.resolve().ok() != Some(alphabeta::LmrParameters::default()))
             || settings.zero_stock_approx_min_root_walls.is_some()
             || settings.zero_stock_safe_race
             || requests.iter().any(|r| {
@@ -390,6 +405,12 @@ impl Target for SearchTarget {
             self.settings.history_tie_break.as_deref().unwrap_or("off"),
         )?)?;
         session.set_lmr_method(LmrMethod::from_name(&self.settings.lmr_method)?);
+        session.set_lmr_parameters(
+            self.settings
+                .lmr_parameters
+                .map(|p| p.resolve())
+                .transpose()?,
+        )?;
         session.set_lmr(self.settings.lmr)?;
         session.set_zero_stock_approx_method(ZeroStockApproxMethod::from_name(
             &self.settings.zero_stock_approx_method,
@@ -420,7 +441,9 @@ impl Target for SearchTarget {
                 "completed_depth_semantics":if self.settings.zero_stock_safe_race {"safe-race-leaf-nominal-not-root-game-WDL"} else if lmr {"selective-nominal"} else if self.settings.zero_stock_approx_min_root_walls.is_some() {"root-resolution-pending"} else {"full-width"},
                 "lmr_method_requested":self.settings.lmr_method,
                 "lmr_rule":self.session.as_ref().and_then(SearchSession::lmr_method).map(LmrMethod::id),
-                "lmr_parameters":self.session.as_ref().and_then(SearchSession::lmr_method).map(LmrMethod::reduction_rule)}),
+                "lmr_parameters_requested":self.settings.lmr_parameters,
+                "lmr_parameters":self.session.as_ref().and_then(SearchSession::lmr_parameters).map(crate::config::LmrParameters::from),
+                "lmr_reduction_rule":self.session.as_ref().and_then(SearchSession::lmr_reduction_rule)}),
         )
     }
     fn prepare(&mut self, request: &Request) -> Result<Value> {
@@ -526,7 +549,13 @@ impl Target for SearchTarget {
         row["actual_selectivity"] = json!(session.namespace().selectivity);
         row["lmr_method_requested"] = json!(self.settings.lmr_method);
         row["lmr_rule"] = json!(session.lmr_method().map(LmrMethod::id));
-        row["lmr_parameters"] = json!(session.lmr_method().map(LmrMethod::reduction_rule));
+        row["lmr_parameters_requested"] = json!(self.settings.lmr_parameters);
+        row["lmr_parameters"] = json!(
+            session
+                .lmr_parameters()
+                .map(crate::config::LmrParameters::from)
+        );
+        row["lmr_reduction_rule"] = json!(session.lmr_reduction_rule());
         row["zero_stock_approx_min_root_walls"] =
             json!(self.settings.zero_stock_approx_min_root_walls);
         row["zero_stock_approx_method_requested"] = json!(self.settings.zero_stock_approx_method);
@@ -997,7 +1026,7 @@ fn owned_output(intent: &Value) -> Result<PathBuf> {
 
 fn completed_depth_observation(r: &SearchResult) -> Value {
     let s = &r.stats;
-    let mut result = json!({"lmr_rule":s.lmr_enabled.then(|| s.lmr_method.id()),"lmr_parameters":s.lmr_enabled.then(|| s.lmr_method.reduction_rule()),"completed_depth":r.completed_depth,"action":r.action,
+    let mut result = json!({"lmr_rule":s.lmr_enabled.then(|| s.lmr_method.id()),"lmr_parameters":s.lmr_parameters.map(crate::config::LmrParameters::from),"lmr_reduction_rule":s.lmr_enabled.then(|| s.lmr_parameters.map_or_else(|| s.lmr_method.reduction_rule(), |p| p.reduction_rule())),"completed_depth":r.completed_depth,"action":r.action,
         "root_walls_remaining":s.root_walls_remaining,"zero_stock_approx_permitted":s.zero_stock_approx_permitted,
         "zero_stock_approx_method":s.zero_stock_approx_permitted.then(|| s.zero_stock_approx_method.id()),
         "value_bits":r.value.map(f32::to_bits),"elapsed_seconds":r.elapsed.as_secs_f64(),
@@ -1115,7 +1144,11 @@ fn observed(r: &SearchResult) -> Value {
         "work":observed_work(s),
         "ordering":{"ordered_nodes":o.ordered_nodes,"scored_actions":o.scored_actions,"nonzero_dynamic_actions":o.nonzero_dynamic_actions,"nonzero_combined_actions":o.nonzero_combined_actions,"nonzero_continuation_actions":o.nonzero_continuation_actions,"history_changed_nodes":o.history_changed_nodes,"first_choice_changed_nodes":o.first_choice_changed_nodes,"first_choice_compared_nodes":o.first_choice_compared_nodes,"history_compared_nodes":o.history_compared_nodes,"completed_cutoff_events":o.completed_cutoff_events,"cutoff_rank_sum":o.cutoff_rank_sum,"first_child_cutoffs":o.first_child_cutoffs,"positive_actions":o.positive_actions,"negative_actions":o.negative_actions,"continuation_updates":o.continuation_updates,"age_passes":o.age_passes,"static_parents":o.static_parents,"borrowed_goal_maps":o.borrowed_goal_maps,"computed_goal_map_pairs":o.computed_goal_map_pairs,"cheap_static_parents":o.cheap_static_parents,"missing_goal_map_pairs":o.missing_goal_map_pairs,"available_goal_map_pairs":o.available_goal_map_pairs,"nonzero_static_actions":o.nonzero_static_actions,"exact_goal_actions":o.exact_goal_actions,"static_changed_nodes":o.static_changed_nodes,"static_compared_nodes":o.static_compared_nodes}});
     result["lmr_rule"] = json!(s.lmr_enabled.then(|| s.lmr_method.id()));
-    result["lmr_parameters"] = json!(s.lmr_enabled.then(|| s.lmr_method.reduction_rule()));
+    result["lmr_parameters"] = json!(s.lmr_parameters.map(crate::config::LmrParameters::from));
+    result["lmr_reduction_rule"] = json!(s.lmr_enabled.then(|| {
+        s.lmr_parameters
+            .map_or_else(|| s.lmr_method.reduction_rule(), |p| p.reduction_rule())
+    }));
     result["root_walls_remaining"] = json!(s.root_walls_remaining);
     result["zero_stock_approx_permitted"] = json!(s.zero_stock_approx_permitted);
     result["zero_stock_safe_race"] = json!(s.zero_stock_safe_race_enabled);
@@ -2594,3 +2627,53 @@ mod output_limit_contract_tests {
 #[cfg(test)]
 #[path = "measurement_history_tie_tests.rs"]
 mod history_tie_tests;
+
+#[cfg(test)]
+mod lmr_parameter_settings_tests {
+    use super::*;
+    #[test]
+    fn parameter_settings_measurement_requested_effective_and_invalid_metadata() {
+        let p = crate::config::LmrParameters::from(alphabeta::LmrParameters::default());
+        let base = json!({"roots":[{"input":0,"pointer":"","field":"moves","label":"toy"}],"profile":"control","tt_entries":4096,"use_tt":true,"use_pvs":true,"lmr":false,"namespace":{"evaluator":"toy","rules":"standard","selectivity":"full"},"output_bytes":10000,"record_bytes":1000});
+        let mut selected = base.clone();
+        selected["lmr_parameters"] = json!(p);
+        let settings: Settings = serde_json::from_value(selected.clone()).unwrap();
+        validate(&settings, &[]).unwrap();
+        let decoded: Settings =
+            serde_json::from_value(serde_json::to_value(&settings).unwrap()).unwrap();
+        assert_eq!(decoded.lmr_parameters, Some(p));
+        for bad in [
+            Value::Null,
+            json!({}),
+            json!({"intercept":0.5,"log_divisor":0.0,"min_depth":3,"min_rank":4,"max_extra":3}),
+        ] {
+            let mut candidate = base.clone();
+            candidate["lmr_parameters"] = bad;
+            assert!(
+                !serde_json::from_value::<Settings>(candidate)
+                    .is_ok_and(|s| validate(&s, &[]).is_ok())
+            );
+        }
+        selected["profile"] = json!("cheap");
+        assert!(validate(&serde_json::from_value::<Settings>(selected).unwrap(), &[]).is_err());
+        let result = SearchResult {
+            action: None,
+            value: None,
+            completed_depth: 0,
+            pv: vec![],
+            stats: alphabeta::SearchStats {
+                lmr_enabled: true,
+                lmr_method: LmrMethod::DepthRank,
+                lmr_parameters: Some(alphabeta::LmrParameters::default()),
+                ..Default::default()
+            },
+            stop: StopReason::NodeLimit,
+            elapsed: std::time::Duration::ZERO,
+        };
+        assert_eq!(observed(&result)["lmr_parameters"], json!(p));
+        assert_eq!(
+            completed_depth_observation(&result)["lmr_parameters"],
+            json!(p)
+        );
+    }
+}

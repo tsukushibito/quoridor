@@ -2513,6 +2513,35 @@ def numerical_fields(experiment, manifest):
     }
 
 
+def resolved_lmr_parameters(config, profile, *, supported=True):
+    """Typed coefficient box shared by preparation and normal data correspondence.
+
+    Native owns table construction and namespace identity. Explicit values are
+    validated even while OFF; omission alone resolves the retained baseline.
+    """
+    baseline = dict(intercept=0.7844, log_divisor=2.4696, min_depth=3, min_rank=4, max_extra=3)
+    if "lmr_parameters" not in config:
+        return baseline
+    value = config["lmr_parameters"]
+    require(
+        supported
+        and profile == "control"
+        and config.get("lmr_method", "depth_rank") == "depth_rank",
+        "LMR parameters require a supported research Control/depth_rank caller",
+    )
+    require(type(value) is dict and set(value) == set(baseline), "complete typed LMR parameters")
+    for key, low, high in [("intercept", 0.0, 2.0), ("log_divisor", 1.0, 4.0)]:
+        require(
+            type(value[key]) in (int, float)
+            and math.isfinite(value[key])
+            and low <= value[key] <= high,
+            "finite LMR " + key,
+        )
+    for key, low, high in [("min_depth", 3, 63), ("min_rank", 4, 63), ("max_extra", 0, 8)]:
+        require(type(value[key]) is int and low <= value[key] <= high, "integer LMR " + key)
+    return dict(value, intercept=0.0 if value["intercept"] == 0 else value["intercept"])
+
+
 def measurement_config(experiment):
     """Functional shapes only; settings and input order belong to the run."""
     config = document(experiment["config"])
@@ -2533,6 +2562,7 @@ def measurement_config(experiment):
             "seed",
             "lmr",
             "lmr_method",
+            "lmr_parameters",
             "history_tie_break",
             "zero_stock_approx_min_root_walls",
             "zero_stock_approx_method",
@@ -2604,6 +2634,7 @@ def measurement_config(experiment):
         ),
         "measurement LMR method",
     )
+    parameters = resolved_lmr_parameters(config, config["profile"])
     method = config.get("zero_stock_approx_method", "race")
     require(
         type(method) is str and method in {"race", "fixed_d"},
@@ -2776,6 +2807,7 @@ def measurement_config(experiment):
             and config["use_pvs"]
             and config.get("lmr", False)
             and lmr_method == "depth_rank"
+            and parameters == resolved_lmr_parameters({}, "control")
             and threshold is None
             and not config.get("zero_stock_safe_race", True)
             and all(
@@ -4455,7 +4487,9 @@ def arena_plan_check(experiment, plan):
     matchup = next(m for m in plan["matchups"] if m["id"] == batch["matchup"])
     a = config["arena"]
     selected_ids = arena_game_ids(config)
-    require(a.get("game_selection") == batch.get("game_selection"), "approved selected/excluded mask")
+    require(
+        a.get("game_selection") == batch.get("game_selection"), "approved selected/excluded mask"
+    )
     engines = config["engines"]
     require(
         config["ruleset"] == "standard_2p_threefold"
@@ -4494,6 +4528,11 @@ def arena_plan_check(experiment, plan):
         )
     arena_model_check(experiment, plan, 2)
     for engine in engines:
+        resolved_lmr_parameters(
+            engine,
+            engine.get("ordering_profile"),
+            supported=engine["kind"] != "mcts" and a["comparison"] != "functional",
+        )
         require(
             type(engine["depth"]) is int
             and 0 < engine["depth"] <= 200
@@ -4534,6 +4573,20 @@ def arena_plan_check(experiment, plan):
                 for k in ("distance_a", "distance_b")
             ),
             "finite engine limits",
+        )
+    if plan["comparison"] in {"evaluator_fixed_depth", "evaluator_wall_time"}:
+        require(
+            engines[0].get("lmr", False) == engines[1].get("lmr", False)
+            and (
+                not engines[0].get("lmr", False)
+                or (
+                    engines[0].get("lmr_method", "depth_rank")
+                    == engines[1].get("lmr_method", "depth_rank")
+                    and resolved_lmr_parameters(engines[0], engines[0].get("ordering_profile"))
+                    == resolved_lmr_parameters(engines[1], engines[1].get("ordering_profile"))
+                )
+            ),
+            "evaluator comparison keeps effective LMR settings equal",
         )
     require(
         plan["comparison"] == "whole_wall_time"
@@ -4782,6 +4835,15 @@ def arena_observation(config, row):
                         k in counters and counters[k] is None
                         for k in ("actual_lmr_method_id", "lmr_reduction_rule")
                     )
+                )
+                and counters.get("requested_lmr_parameters") == engine.get("lmr_parameters")
+                and "actual_lmr_parameters" in counters
+                and counters["actual_lmr_parameters"]
+                == (
+                    resolved_lmr_parameters(engine, engine.get("ordering_profile"))
+                    if engine.get("lmr", False)
+                    and engine.get("lmr_method", "depth_rank") == "depth_rank"
+                    else None
                 )
                 and type(counters.get("actual_lmr_enabled")) is bool
                 and counters["actual_lmr_enabled"] == engine.get("lmr", False),
@@ -7314,7 +7376,7 @@ def comparison_conditions(common):
     This preparation owner resolves settings, never session namespace IDs.
     Product/generator and direct raw config enable defaults remain OFF.
     """
-    return [
+    variants = [
         dict(
             evaluator=evaluator,
             profile=profile,
@@ -7329,6 +7391,11 @@ def comparison_conditions(common):
         for lmr in common.get("lmr_values", (True,))
         for tie in common.get("history_tie_breaks", ("off",))
     ]
+    for variant in variants:
+        if "lmr_parameters" in common:
+            variant["lmr_parameters"] = copy.deepcopy(common["lmr_parameters"])
+        resolved_lmr_parameters(variant, variant["profile"])
+    return variants
 
 
 def apply_comparison_cost(config, common, variant):
@@ -7339,6 +7406,10 @@ def apply_comparison_cost(config, common, variant):
     config["profile"] = variant["profile"]
     config["lmr"] = variant["lmr"]
     config["lmr_method"] = variant["lmr_method"]
+    if "lmr_parameters" in variant:
+        config["lmr_parameters"] = copy.deepcopy(variant["lmr_parameters"])
+    else:
+        config.pop("lmr_parameters", None)
     config["history_tie_break"] = variant.get("history_tie_break", "off")
 
     config["zero_stock_safe_race"] = variant["zero_stock_safe_race"]
@@ -7362,6 +7433,10 @@ def apply_comparison_arena(config, common, pair):
         engine["ordering_profile"] = variant["profile"]
         engine["lmr"] = variant["lmr"]
         engine["lmr_method"] = variant["lmr_method"]
+        if "lmr_parameters" in variant:
+            engine["lmr_parameters"] = copy.deepcopy(variant["lmr_parameters"])
+        else:
+            engine.pop("lmr_parameters", None)
         engine["history_tie_break"] = variant.get("history_tie_break", "off")
         engine["zero_stock_safe_race"] = variant["zero_stock_safe_race"]
         engine["zero_stock_safe_race_method"] = variant["zero_stock_safe_race_method"]
