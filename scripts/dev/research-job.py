@@ -479,6 +479,7 @@ def execute(directory, config, root, backend, *, resources=None):
                 "job_id": state["job_id"],
                 "outcome": "not_started",
                 "error": str(error),
+                "error_notes": [str(note)[:8192] for note in getattr(error, "__notes__", ())[:8]],
                 "exit_code": None,
                 "finished_at": stamp(),
                 "cleanup_complete": True,
@@ -487,7 +488,7 @@ def execute(directory, config, root, backend, *, resources=None):
             started = time.monotonic()
             command = None
             tail = None
-            outcome, error, remaining = "failed", None, []
+            outcome, error, error_notes, remaining = "failed", None, [], []
             known = []
             child = None
             direct_fd = None
@@ -498,7 +499,11 @@ def execute(directory, config, root, backend, *, resources=None):
                     return action()
                 except BaseException as caught:
                     cleanup_errors.append(
-                        {"stage": stage, "type": type(caught).__name__, "message": str(caught)}
+                        {
+                            "stage": stage,
+                            "type": type(caught).__name__,
+                            "message": str(caught),
+                        }
                     )
                     return default
 
@@ -564,7 +569,11 @@ def execute(directory, config, root, backend, *, resources=None):
                             horizon=config["end_at"],
                             timeout=read_budget,
                             delegated=delegated,
-                            **({"check": local_control} if parent_command or resources is not None else {}),
+                            **(
+                                {"check": local_control}
+                                if parent_command or resources is not None
+                                else {}
+                            ),
                         )
                         if current["thread_id"] != state["thread_id"]:
                             raise JobError("Recipient identity changed during execution")
@@ -575,6 +584,7 @@ def execute(directory, config, root, backend, *, resources=None):
                     outcome = "succeeded" if command.returncode == 0 else "failed"
             except Exception as caught:
                 error, outcome = str(caught), "control_error"
+                error_notes = [str(note)[:8192] for note in getattr(caught, "__notes__", ())[:8]]
                 if (directory / "cancel.json").exists():
                     outcome = "cancelled"
                 if isinstance(caught, subprocess.TimeoutExpired):
@@ -642,11 +652,15 @@ def execute(directory, config, root, backend, *, resources=None):
                             )
                     # Keep each cleanup obligation independent, including exact Popen ownership.
                     members = attempt(
-                        "descendant_discovery", lambda: track_descendants(child, known), members
+                        "descendant_discovery",
+                        lambda: track_descendants(child, known),
+                        members,
                     )
                     members += (
                         attempt(
-                            "group_discovery", lambda: descendants_in_group(command.pid, child), []
+                            "group_discovery",
+                            lambda: descendants_in_group(command.pid, child),
+                            [],
                         )
                         if child
                         else []
@@ -668,7 +682,8 @@ def execute(directory, config, root, backend, *, resources=None):
                         ):
                             return
                         attempt(
-                            stage + "_popen", lambda: send_owned(lambda: command.send_signal(sig))
+                            stage + "_popen",
+                            lambda: send_owned(lambda: command.send_signal(sig)),
                         )
 
                     def live_members():
@@ -686,7 +701,8 @@ def execute(directory, config, root, backend, *, resources=None):
                             )
                         if running:
                             attempt(
-                                "direct_term", lambda: stop_direct(signal.SIGTERM, "direct_term")
+                                "direct_term",
+                                lambda: stop_direct(signal.SIGTERM, "direct_term"),
                             )
                         until = time.monotonic() + 2
                         while time.monotonic() < until:
@@ -702,7 +718,8 @@ def execute(directory, config, root, backend, *, resources=None):
                             )
                         if running:
                             attempt(
-                                "direct_kill", lambda: stop_direct(signal.SIGKILL, "direct_kill")
+                                "direct_kill",
+                                lambda: stop_direct(signal.SIGKILL, "direct_kill"),
                             )
                     attempt("direct_wait", lambda: command.wait(timeout=3))
                     until = time.monotonic() + 1
@@ -724,7 +741,8 @@ def execute(directory, config, root, backend, *, resources=None):
                             }
                         )
                     attempt(
-                        "log_publish", lambda: (directory / "output.log").write_bytes(tail.data)
+                        "log_publish",
+                        lambda: (directory / "output.log").write_bytes(tail.data),
                     )
                 if command and command.stdout and not pipe_open:
                     attempt("pipe_close", command.stdout.close)
@@ -735,6 +753,7 @@ def execute(directory, config, root, backend, *, resources=None):
                     "job_id": state["job_id"],
                     "outcome": outcome,
                     "error": error,
+                    "error_notes": error_notes,
                     "exit_code": command.returncode if command else None,
                     "finished_at": stamp(),
                     "wall_seconds": time.monotonic() - started,
@@ -756,7 +775,11 @@ def execute(directory, config, root, backend, *, resources=None):
                 if cleanup_errors and outcome == "succeeded":
                     result["outcome"] = "cleanup_required"
         failure = internal_cohort_failure(directory, config, root)
-        if failure is not None and result["outcome"] in {"cancelled", "control_error", "failed"}:
+        if failure is not None and result["outcome"] in {
+            "cancelled",
+            "control_error",
+            "failed",
+        }:
             result.update(
                 outcome="failed",
                 cohort_primary=failure["primary"],

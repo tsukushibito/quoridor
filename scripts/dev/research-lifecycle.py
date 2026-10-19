@@ -1923,15 +1923,37 @@ class SequenceResources(process.CycleResources):
             native.update(children)
         root = self.root["pid"]
         require(root not in native, "management supervisor is not a native worker")
-        for guard, members in [
-            (self, infos),
-            (self.management, set(infos) - native),
-            (self.native, native),
+        for role, guard, members in [
+            ("aggregate", self, infos),
+            ("management", self.management, set(infos) - native),
+            ("native", self.native, native),
         ]:
             # Reuse host/pause/deadline checks without a second permissive RSS read.
             process.CycleResources.check(guard, include_self=False)
-            if sum(infos[pid]["rss"] for pid in members) > guard.memory_limit:
-                raise process.CycleStopped("cycle memory_limit")
+            rss = sum(infos[pid]["rss"] for pid in members)
+            if rss > guard.memory_limit:
+                error = process.CycleStopped("cycle memory_limit")
+                error.add_note(
+                    json.dumps(
+                        {
+                            "snapshot": "same validated sequence check; not a continuous peak",
+                            "role": role,
+                            "rss_B": rss,
+                            "limit_B": guard.memory_limit,
+                            "member_count": len(members),
+                            "members": [
+                                {
+                                    **process.identity(infos[pid]),
+                                    "rss_B": infos[pid]["rss"],
+                                    "role": "native" if pid in native else "management",
+                                }
+                                for pid in sorted(members)[:32]
+                            ],
+                            "members_omitted": max(0, len(members) - 32),
+                        }
+                    )
+                )
+                raise error
 
 
 class Limits(process.CycleResources):
@@ -6670,6 +6692,40 @@ def originating_job(spec_ref, spec):
     }
 
 
+def remove_empty_owned_tmp(path, owner, guardian_return):
+    """Remove only empty owned directories after the actual child and handles closed."""
+    path = owned(path, owner)
+    require(
+        isinstance(guardian_return, dict)
+        and guardian_return.get("direct_child_reaped") is True
+        and guardian_return.get("process_cleanup_complete") is True
+        and guardian_return.get("handle_closes_complete") is True
+        and guardian_return.get("remaining") == [],
+        "owned TMP cleanup requires returned child/handle closure",
+    )
+    flags = os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW
+
+    def drain(directory):
+        for name in os.listdir(directory):
+            child = os.open(name, flags, dir_fd=directory)
+            try:
+                drain(child)
+            finally:
+                os.close(child)
+            os.rmdir(name, dir_fd=directory)
+
+    parent = os.open(path.parent, flags)
+    try:
+        directory = os.open(path.name, flags, dir_fd=parent)
+        try:
+            drain(directory)
+        finally:
+            os.close(directory)
+        os.rmdir(path.name, dir_fd=parent)
+    finally:
+        os.close(parent)
+
+
 def execute(
     spec_ref,
     *,
@@ -6907,7 +6963,13 @@ def execute(
                 if created_TMP:
                     active_error = sys.exception()
                     try:
-                        Path(spec["TMP"]).rmdir()
+                        remove_empty_owned_tmp(
+                            spec["TMP"],
+                            spec["owner"],
+                            result["checks"][-1].get("guardian_return")
+                            if result["checks"]
+                            else None,
+                        )
                     except BaseException as cleanup_error:
                         result["secondary"].append(
                             {"stage": "TMP_cleanup", **error_fact(cleanup_error)}
