@@ -202,7 +202,7 @@ fn complete_pairs_are_primary_partial_games_and_planned_range_remain_visible() {
         outcome(&slots[2], "goal", Some(0)),
         outcome(&slots[3], "unknown", None),
     ];
-    let s = arena_statistics::summarize(&slots, &outcomes, 19, 100).unwrap();
+    let s = arena_statistics::summarize(&slots, &outcomes, 19, 100, None).unwrap();
     assert_eq!(s.complete_pair_mean, Some(0.5));
     assert_eq!(s.valid_game_score_secondary, Some(2. / 3.));
     assert_eq!(s.planned_score_range, Some([0.5, 0.75]));
@@ -214,38 +214,38 @@ fn complete_pairs_are_primary_partial_games_and_planned_range_remain_visible() {
     assert!(s.bootstrap.percentile_95.is_none());
     let mut swapped = outcomes.clone();
     swapped[1].candidate_color = 0;
-    assert!(arena_statistics::summarize(&slots, &swapped, 19, 100).is_err());
+    assert!(arena_statistics::summarize(&slots, &swapped, 19, 100, None).is_err());
     let mut duplicate = outcomes.clone();
     duplicate.push(outcomes[0].clone());
-    assert!(arena_statistics::summarize(&slots, &duplicate, 19, 100).is_err());
-    assert!(arena_statistics::summarize(&slots[..2], &outcomes, 19, 100).is_err());
+    assert!(arena_statistics::summarize(&slots, &duplicate, 19, 100, None).is_err());
+    assert!(arena_statistics::summarize(&slots[..2], &outcomes, 19, 100, None).is_err());
     let mut wrong_history = slots.clone();
     wrong_history[1].opening.push(13);
-    assert!(arena_statistics::summarize(&wrong_history, &outcomes, 19, 100).is_err());
+    assert!(arena_statistics::summarize(&wrong_history, &outcomes, 19, 100, None).is_err());
 }
 #[test]
 fn empty_allunknown_true_draw_and_deterministic_pair_bootstrap() {
-    let empty = arena_statistics::summarize(&[], &[], 7, 100).unwrap();
+    let empty = arena_statistics::summarize(&[], &[], 7, 100, None).unwrap();
     assert!(empty.complete_pair_mean.is_none());
     assert!(empty.planned_score_range.is_none());
     let slots: Vec<_> = (0..4).map(|i| slot(i, "main")).collect();
-    let allunknown = arena_statistics::summarize(&slots, &[], 7, 100).unwrap();
+    let allunknown = arena_statistics::summarize(&slots, &[], 7, 100, None).unwrap();
     assert_eq!(allunknown.planned_score_range, Some([0., 1.]));
     assert_eq!(allunknown.census.started_games, 0);
     assert_eq!(allunknown.census.unknown_games, 4);
     let outcomes: Vec<_> = slots.iter().map(|s| outcome(s, "draw", None)).collect();
-    let draw = arena_statistics::summarize(&slots, &outcomes, 7, 100).unwrap();
+    let draw = arena_statistics::summarize(&slots, &outcomes, 7, 100, None).unwrap();
     assert_eq!(draw.complete_pair_mean, Some(0.5));
     assert_eq!(draw.bootstrap.percentile_95, Some([0.5, 0.5]));
     let mut mixed = outcomes;
     mixed[0] = outcome(&slots[0], "goal", Some(0));
     mixed[1] = outcome(&slots[1], "goal", Some(1));
-    let a = arena_statistics::summarize(&slots, &mixed, 7, 100).unwrap();
-    let b = arena_statistics::summarize(&slots, &mixed, 7, 100).unwrap();
+    let a = arena_statistics::summarize(&slots, &mixed, 7, 100, None).unwrap();
+    let b = arena_statistics::summarize(&slots, &mixed, 7, 100, None).unwrap();
     assert_eq!(a.bootstrap.percentile_95, b.bootstrap.percentile_95);
     let mut invalid = mixed;
     invalid[0].status = "draw".into();
-    assert!(arena_statistics::summarize(&slots, &invalid, 7, 100).is_err());
+    assert!(arena_statistics::summarize(&slots, &invalid, 7, 100, None).is_err());
 }
 #[test]
 fn research_threefold_replay_enters_legal_third_and_refuses_postterminal() {

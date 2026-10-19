@@ -119,9 +119,51 @@ impl Reference {
 fn false_flag(value: &bool) -> bool {
     !*value
 }
+/// Fixed original local IDs. The approved plan owns the exclusion decision.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct GameSelection {
+    pub selected: Vec<usize>,
+    pub excluded: Vec<usize>,
+}
+impl GameSelection {
+    pub fn validate(&self, logical_games: usize) -> std::result::Result<(), String> {
+        let ordered = |ids: &[usize]| ids.windows(2).all(|w| w[0] < w[1]);
+        let union: BTreeSet<_> = self
+            .selected
+            .iter()
+            .chain(&self.excluded)
+            .copied()
+            .collect();
+        if self.selected.is_empty()
+            || !ordered(&self.selected)
+            || !ordered(&self.excluded)
+            || self.selected.len() + self.excluded.len() != logical_games
+            || union.len() != logical_games
+            || union.iter().copied().ne(0..logical_games)
+        {
+            return Err(
+                "selected games must partition the original domain with the excluded mask".into(),
+            );
+        }
+        Ok(())
+    }
+}
+/// Original IDs are never compacted: book, colour and game RNG use these IDs.
+pub fn game_ids(c: &Config) -> Result<Vec<usize>> {
+    if let Some(selection) = c.arena.as_ref().and_then(|a| a.game_selection.as_ref()) {
+        selection.validate(c.games)?;
+        Ok(selection.selected.clone())
+    } else {
+        Ok((0..c.games).collect())
+    }
+}
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct ArenaConfig {
+    /// Optional fixed subset of original paired IDs; absence executes the full batch.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub game_selection: Option<GameSelection>,
     pub comparison: Comparison,
     /// Explicit caller selection; absence retains the current production factory.
     #[serde(default, skip_serializing_if = "false_flag")]
@@ -161,6 +203,12 @@ pub fn sha_valid(s: &str) -> bool {
 }
 impl ArenaConfig {
     pub fn validate(&self, c: &Config) -> std::result::Result<(), String> {
+        if let Some(selection) = &self.game_selection {
+            if self.decision_only {
+                return Err("selected games belong to playing arenas".into());
+            }
+            selection.validate(c.games)?;
+        }
         if self.max_total_nodes.is_some_and(|n| n == 0)
             || (self.max_total_nodes.is_some()
                 && (!c.evaluation_workers()
@@ -520,6 +568,8 @@ pub struct ArenaMatchup {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct ArenaBatch {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub game_selection: Option<GameSelection>,
     pub batch: usize,
     pub matchup: usize,
     pub config: crate::research_manifest::FileRef,
@@ -663,6 +713,12 @@ impl ArenaPlan {
             }
         }
         for (i, b) in self.batches.iter().enumerate() {
+            if let Some(selection) = &b.game_selection {
+                if self.phase != "arena" {
+                    return Err("selected games belong to arena batches".into());
+                }
+                selection.validate(b.slots.len())?;
+            }
             if b.batch != i
                 || !matchups.contains(&b.matchup)
                 || b.slots.is_empty()
@@ -726,6 +782,7 @@ impl ArenaPlan {
             || c.ruleset.config_name() != "standard_2p_threefold"
             || a.comparison != self.comparison
             || c.games != b.slots.len()
+            || a.game_selection != b.game_selection
             || c.workers != 1
             || c.active_games != 1
             || c.max_batch != 1
@@ -903,17 +960,18 @@ fn validate_observations(
 }
 fn validate_report(c: &Config, report: &crate::runtime::RunReport) -> Result<()> {
     if report.run_id != c.run_id
-        || report.planned != c.games
+        || report.planned != c.execution_games()
         || report.stopped.is_some()
         || !report.all_workers_joined
-        || report.outcomes.len() != c.games
+        || report.outcomes.len() != c.execution_games()
     {
         return Err("arena incomplete run; durable partial data retained".into());
     }
     let a = c.arena.as_ref().ok_or("arena report config")?;
+    let selected = game_ids(c)?;
     let mut seen = BTreeSet::new();
     for o in &report.outcomes {
-        if o.game >= c.games
+        if !selected.contains(&o.game)
             || !seen.insert(o.game)
             || o.candidate_color != a.first_candidate_colors[o.game / 2] ^ (o.game % 2) as u8
             || o.family != format!("{}-family-{:06}", c.run_id, o.game / 2)
@@ -975,6 +1033,7 @@ impl ArenaPlan {
             || !a.decision_only
             || a.clock_policy != ClockPolicy::StrictUnknown
             || c.games != b.slots.len()
+            || a.game_selection != b.game_selection
             || c.workers != 1
             || c.active_games != 1
             || c.max_batch != 1
@@ -1128,6 +1187,7 @@ mod generic_arena_361_tests {
                 evaluator_sha256: a.evaluator_sha256.clone(),
             }],
             batches: vec![ArenaBatch {
+                game_selection: None,
                 batch: 0,
                 matchup: 7,
                 config: reference("config"),
@@ -1306,6 +1366,7 @@ mod generic_arena_361_tests {
             .iter()
             .enumerate()
             .map(|(i, m)| ArenaBatch {
+                game_selection: None,
                 batch: i,
                 matchup: m.id,
                 config: reference(&format!("decision-{i}")),
@@ -1450,6 +1511,7 @@ mod generic_arena_361_tests {
         }
         plan.batches = (0..3)
             .map(|batch| ArenaBatch {
+                game_selection: None,
                 batch,
                 matchup: batch,
                 config: reference(&format!("synthetic-config-{batch}")),
@@ -1784,3 +1846,48 @@ mod arena_lmr400_tests;
 #[cfg(test)]
 #[path = "arena_lmr_method_tests.rs"]
 mod arena_lmr_method_tests;
+
+#[cfg(test)]
+mod selected_slot_boundary_tests {
+    use super::*;
+    #[test]
+    fn selected_original_games_require_an_approved_disjoint_mask_and_preserve_full_plan() {
+        let (mut p, e, mut c, slots, book) = super::generic_arena_361_tests::fixture(4, 3);
+        let original = serde_json::to_value(&c).unwrap();
+        assert!(original["arena"].get("game_selection").is_none());
+        p.validate_config(&e, &c, &slots, &book).unwrap();
+        assert_eq!(game_ids(&c).unwrap(), (0..8).collect::<Vec<_>>());
+        let selection = GameSelection {
+            selected: vec![1, 4, 7],
+            excluded: vec![0, 2, 3, 5, 6],
+        };
+        c.arena.as_mut().unwrap().game_selection = Some(selection.clone());
+        assert!(p.validate_config(&e, &c, &slots, &book).is_err());
+        p.batches[0].game_selection = Some(selection.clone());
+        p.validate_config(&e, &c, &slots, &book).unwrap();
+        assert_eq!(p.planned_slots, 8);
+        assert_eq!(c.games, 8);
+        assert_eq!(c.execution_games(), 3);
+        assert_eq!(game_ids(&c).unwrap(), vec![1, 4, 7]);
+        for bad in [
+            GameSelection {
+                selected: vec![1, 1, 7],
+                excluded: vec![0, 2, 3, 5, 6],
+            },
+            GameSelection {
+                selected: vec![1, 4, 8],
+                excluded: vec![0, 2, 3, 5, 6],
+            },
+            GameSelection {
+                selected: vec![0, 4, 7],
+                excluded: vec![0, 2, 3, 5, 6],
+            },
+            GameSelection {
+                selected: vec![7, 4, 1],
+                excluded: vec![0, 2, 3, 5, 6],
+            },
+        ] {
+            assert!(bad.validate(8).is_err());
+        }
+    }
+}

@@ -24,6 +24,9 @@ pub fn file_sha256(path: &Path) -> Result<String> {
     Ok(sha.finalize().iter().map(|b| format!("{b:02x}")).collect())
 }
 pub fn slots(c: &Config, planned: &[(usize, String, Vec<u16>)]) -> Result<Vec<Slot>> {
+    if planned.iter().map(|p| p.0).ne(arena::game_ids(c)?) {
+        return Err("selected original plan ID correspondence".into());
+    }
     planned
         .iter()
         .map(|(game, family, opening)| {
@@ -68,7 +71,7 @@ pub fn slots(c: &Config, planned: &[(usize, String, Vec<u16>)]) -> Result<Vec<Sl
 pub fn preflight(c: &Config, slots: &[Slot]) -> Result<()> {
     let metadata = serde_json::to_vec(c)?.len() as u64 + serde_json::to_vec(slots)?.len() as u64;
     // One retained archive plus the bounded live journal, not three retained reports.
-    let raw = (c.games as u64).saturating_mul(outcome_cap(c).saturating_add(1));
+    let raw = (c.execution_games() as u64).saturating_mul(outcome_cap(c).saturating_add(1));
     let needed = metadata
         .saturating_mul(6)
         .saturating_add(8 * 1024 * 1024)
@@ -208,7 +211,7 @@ fn final_outcome(mut o: crate::runtime::Outcome, stopped: Option<&str>) -> crate
 }
 fn archive(c: &Config, report: &RunReport) -> Result<Publication> {
     let started = std::time::Instant::now();
-    if report.planned != c.games || report.outcomes.len() != c.games {
+    if report.planned != c.execution_games() || report.outcomes.len() != c.execution_games() {
         return Err("full planned outcome denominator required before archive publication".into());
     }
     let expected = report
@@ -216,10 +219,10 @@ fn archive(c: &Config, report: &RunReport) -> Result<Publication> {
         .iter()
         .map(|o| (o.game, o))
         .collect::<BTreeMap<_, _>>();
-    if expected.len() != c.games || expected.keys().copied().ne(0..c.games) {
+    if expected.len() != c.execution_games() || expected.keys().copied().ne(arena::game_ids(c)?) {
         return Err("duplicate/missing/unplanned final outcomes".into());
     }
-    let raw_cap = (c.games as u64)
+    let raw_cap = (c.execution_games() as u64)
         .checked_mul(outcome_cap(c).saturating_add(1))
         .ok_or("archive raw cap overflow")?;
     if crate::resources::directory_bytes(&c.output)?.saturating_add(archive_cap(raw_cap))
@@ -311,12 +314,13 @@ fn archive(c: &Config, report: &RunReport) -> Result<Publication> {
     Ok(publication)
 }
 fn decode(c: &Config, publication: &Publication) -> Result<RunReport> {
-    let raw_cap = (c.games as u64).saturating_mul(outcome_cap(c).saturating_add(1));
+    let selected = arena::game_ids(c)?;
+    let raw_cap = (c.execution_games() as u64).saturating_mul(outcome_cap(c).saturating_add(1));
     if !publication.archive_wall_seconds.is_finite()
         || publication.archive_wall_seconds < 0.0
         || publication.schema != PUBLICATION_SCHEMA
         || !publication.report.outcomes.is_empty()
-        || publication.report.planned != c.games
+        || publication.report.planned != c.execution_games()
         || publication.report.run_id != c.run_id
         || publication.failure_attribution
             != publication
@@ -324,8 +328,8 @@ fn decode(c: &Config, publication: &Publication) -> Result<RunReport> {
                 .stopped
                 .as_deref()
                 .map(crate::arena_clock::failure_from_reason)
-        || publication.outcome_count != c.games
-        || publication.journal_count > c.games
+        || publication.outcome_count != c.execution_games()
+        || publication.journal_count > c.execution_games()
         || publication.archive.compressed.path != c.output.join("completed.jsonl.gz")
         || publication.archive.raw_bytes > raw_cap
         || publication.archive.compressed.bytes > archive_cap(raw_cap)
@@ -344,7 +348,7 @@ fn decode(c: &Config, publication: &Publication) -> Result<RunReport> {
         if bytes.is_empty() {
             break;
         }
-        if raw_count >= c.games {
+        if raw_count >= c.execution_games() {
             return Err("extra archived outcome".into());
         }
         let original: crate::runtime::Outcome = serde_json::from_slice(&bytes)?;
@@ -356,7 +360,7 @@ fn decode(c: &Config, publication: &Publication) -> Result<RunReport> {
             return Err("missing-at-journal publication cannot manufacture a played result".into());
         }
         let final_o = final_outcome(original, publication.report.stopped.as_deref());
-        if final_o.game >= c.games || outcomes.insert(final_o.game, final_o).is_some() {
+        if !selected.contains(&final_o.game) || outcomes.insert(final_o.game, final_o).is_some() {
             return Err("duplicate/unplanned archived outcome".into());
         }
         raw_count += 1;
@@ -392,7 +396,7 @@ fn failure_facts(c: &Config, report: &RunReport) -> Result<serde_json::Value> {
     let mut recoverable = std::collections::BTreeSet::new();
     let mut seen = std::collections::BTreeSet::new();
     let raw = c.output.join("completed.jsonl");
-    let raw_cap = (c.games as u64).saturating_mul(outcome_cap(c).saturating_add(1));
+    let raw_cap = (c.execution_games() as u64).saturating_mul(outcome_cap(c).saturating_add(1));
     let recovery: Result<()> = (|| {
         let info = match fs::symlink_metadata(&raw) {
             Ok(info) => info,
@@ -535,6 +539,9 @@ pub fn audit(output: &Path) -> Result<crate::arena_statistics::Summary> {
     historical.deadline_unix_ms = 0;
     historical.validate()?;
     let slots: Vec<Slot> = serde_json::from_value(binding["planned_slots"].clone())?;
+    if slots.iter().map(|s| s.game).ne(arena::game_ids(&config)?) {
+        return Err("selected archive plan IDs".into());
+    }
     if slots.iter().any(|s| {
         s.game >= config.games
             || s.family != format!("{}-family-{:06}", config.run_id, s.game / 2)
@@ -703,6 +710,7 @@ pub fn audit(output: &Path) -> Result<crate::arena_statistics::Summary> {
         &report.outcomes,
         a.map_or(config.seed, |a| a.bootstrap_seed),
         a.map_or(2000, |a| a.bootstrap_resamples),
+        a.and_then(|a| a.game_selection.as_ref()),
     )?;
     if summary.complete_pair_mean != report.score {
         return Err("primary score mismatch".into());
@@ -733,7 +741,8 @@ pub fn recover(output: &Path) -> Result<serde_json::Value> {
     let mut historical = config.clone();
     historical.deadline_unix_ms = 0;
     historical.validate()?;
-    if slots.len() != config.games
+    if slots.iter().map(|s| s.game).ne(arena::game_ids(&config)?)
+        || slots.len() != config.execution_games()
         || slots.iter().any(|s| {
             s.game >= config.games
                 || s.family != format!("{}-family-{:06}", config.run_id, s.game / 2)
@@ -777,6 +786,7 @@ pub fn recover(output: &Path) -> Result<serde_json::Value> {
         &outcomes,
         a.map_or(config.seed, |a| a.bootstrap_seed),
         a.map_or(2000, |a| a.bootstrap_resamples),
+        a.and_then(|a| a.game_selection.as_ref()),
     )?;
     let observed: std::collections::BTreeSet<_> = outcomes.iter().map(|o| o.game).collect();
     Ok(
@@ -994,5 +1004,109 @@ mod tests {
         .unwrap();
         assert!(recover(&c.output).is_err());
         fs::remove_dir_all(c.output).unwrap();
+    }
+}
+
+#[cfg(test)]
+mod selected_slot_boundary_tests {
+    use super::*;
+    #[test]
+    fn sparse_archive_counts_only_selected_ids_preserves_cancel_cap_and_refuses_excluded() {
+        let mut c = crate::runtime::selected_slot_boundary_fixture();
+        c.arena.as_mut().unwrap().game_selection = Some(arena::GameSelection {
+            selected: vec![1, 4, 7],
+            excluded: vec![0, 2, 3, 5, 6],
+        });
+        c.output = std::env::temp_dir().join(format!(
+            "selected-slot-publication-{}-{}",
+            std::process::id(),
+            crate::config::unix_ms()
+        ));
+        fs::create_dir(&c.output).unwrap();
+        let result: Result<()> = (|| {
+            write(&c, "config.json", &c)?;
+            write(&c, "manifest-start.json", &serde_json::json!({"config":c}))?;
+            let outcome = |game| crate::runtime::Outcome {
+                game,
+                family: format!("{}-family-{:06}", c.run_id, game / 2),
+                candidate_color: crate::value_search_strength::candidate_color(&c, game),
+                status: "unknown".into(),
+                winner: None,
+                plies: 0,
+                reason: Some("cancelled".into()),
+                nn_calls: 0,
+                moves: vec![],
+                persistent_tt: vec![],
+                advance_calls: 0,
+                terminal_no_nn: 0,
+                allocated_nodes_peak: 0,
+                started: false,
+                failure: Some(crate::arena_clock::Failure::Cancelled),
+                observations: vec![],
+            };
+            let pump = crate::runtime::PumpProfile {
+                arena_node_budget: Some(
+                    serde_json::json!({"cap":123,"charged_nodes_including_opaque_reservations":3,"remaining":120}),
+                ),
+                ..Default::default()
+            };
+            let report = RunReport {
+                schema: arena::SCHEMA.into(),
+                run_id: c.run_id.clone(),
+                planned: 3,
+                outcomes: vec![outcome(1), outcome(4), outcome(7)],
+                rows: 0,
+                eligible_rows: 0,
+                nn_calls: 0,
+                actual_batches: BTreeMap::new(),
+                wall_seconds: 0.0,
+                inference_seconds: 0.0,
+                peak_rss: 0,
+                stopped: Some("cancelled".into()),
+                dataset: None,
+                score: None,
+                model_sha: None,
+                process_id: std::process::id(),
+                all_workers_joined: true,
+                pump,
+                arena_summary: None,
+            };
+            let mut foreign: RunReport = serde_json::from_value(serde_json::to_value(&report)?)?;
+            foreign.outcomes[0].game = 0;
+            assert!(archive(&c, &foreign).is_err());
+            assert!(!c.output.join("completed.jsonl.gz").exists());
+            journal(&c, &report.outcomes[0])?;
+            finish(&c, &report)?;
+            let restored = read_report(&c.output)?;
+            assert_eq!(restored.planned, 3);
+            assert_eq!(
+                restored.outcomes.iter().map(|o| o.game).collect::<Vec<_>>(),
+                vec![1, 4, 7]
+            );
+            assert!(
+                restored
+                    .outcomes
+                    .iter()
+                    .all(|o| !o.started && o.status == "unknown")
+            );
+            assert_eq!(
+                restored.pump.arena_node_budget,
+                report.pump.arena_node_budget
+            );
+            assert_eq!(restored.stopped, report.stopped);
+            assert!(!c.output.join("completed.jsonl").exists());
+            let csv = fs::read_to_string(c.output.join("games.csv"))?;
+            assert_eq!(
+                csv.lines()
+                    .skip(1)
+                    .map(|line| line.split(',').next().unwrap())
+                    .collect::<Vec<_>>(),
+                vec!["1", "4", "7"]
+            );
+            Ok(())
+        })();
+        fs::remove_dir_all(&c.output).unwrap();
+        result.unwrap();
+        assert!(!c.output.exists());
     }
 }

@@ -4249,6 +4249,34 @@ def arena_decision_plan_check(experiment, plan):
     return planned, c
 
 
+def arena_game_ids(config):
+    """Original local IDs; selected and excluded are one fixed approved partition."""
+    count = config["games"]
+    selection = config["arena"].get("game_selection")
+    if selection is None:
+        return list(range(count))
+    require(type(count) is int and count > 0, "positive original arena game count")
+    require(
+        isinstance(selection, dict) and set(selection) == {"selected", "excluded"},
+        "typed game selection",
+    )
+    selected, excluded = selection["selected"], selection["excluded"]
+    require(
+        all(
+            isinstance(ids, list)
+            and all(type(i) is int and 0 <= i < count for i in ids)
+            and ids == sorted(set(ids))
+            for ids in (selected, excluded)
+        )
+        and selected
+        and not set(selected) & set(excluded)
+        and sorted(selected + excluded) == list(range(count)),
+        "selected/excluded original game partition",
+    )
+    require(not config["arena"].get("decision_only", False), "selection belongs to playing arena")
+    return selected
+
+
 def arena_plan_check(experiment, plan):
     """One explicit JSON arena plan; config files own engines and search/clock limits."""
     require(
@@ -4298,6 +4326,8 @@ def arena_plan_check(experiment, plan):
     require(experiment["config"] == batch["config"], "approved batch config")
     matchup = next(m for m in plan["matchups"] if m["id"] == batch["matchup"])
     a = config["arena"]
+    selected_ids = arena_game_ids(config)
+    require(a.get("game_selection") == batch.get("game_selection"), "approved selected/excluded mask")
     engines = config["engines"]
     require(
         config["ruleset"] == "standard_2p_threefold"
@@ -4429,7 +4459,7 @@ def arena_plan_check(experiment, plan):
             and a["first_candidate_colors"][i] == slot["candidate_color"],
             "immutable book/history/colour",
         )
-    return planned, config
+    return [slot for slot in planned if slot["local_game"] in selected_ids], config
 
 
 def planned_game_slice(experiment, schedule, plan, width=2):
@@ -4478,7 +4508,7 @@ def planned_game_slice(experiment, schedule, plan, width=2):
     )
     for i, batch in enumerate(plan["batches"]):
         require(
-            set(batch) == {"batch", "matchup", "config", "slots"}
+            set(batch) in ({"batch", "matchup", "config", "slots"}, {"batch", "matchup", "config", "slots", "game_selection"})
             and type(batch["batch"]) is int
             and batch["batch"] == i
             and type(batch["matchup"]) is int
@@ -4488,6 +4518,9 @@ def planned_game_slice(experiment, schedule, plan, width=2):
             and len(batch["slots"]) % width == 0,
             "whole pair batch",
         )
+        if batch.get("game_selection") is not None:
+            require(width == 2, "selected playing batch")
+            arena_game_ids(dict(games=len(batch["slots"]), arena=dict(game_selection=batch["game_selection"])))
         for local, global_slot in enumerate(batch["slots"]):
             require(
                 type(global_slot) is int
@@ -4780,7 +4813,8 @@ def arena_reference_report(config, files, values=None, expected_build=None):
         "actual encoding wall/allocation metadata",
     )
     report = publication["report"]
-    count = config["games"]
+    selected_ids = arena_game_ids(config)
+    count = len(selected_ids)
     cap = (
         config["arena"].get("retained_outcome_bytes")
         or config["max_plies"] * 16384 + 16384
@@ -4840,7 +4874,7 @@ def arena_reference_report(config, files, values=None, expected_build=None):
         row = strict(line)
         game = row["game"]
         require(
-            type(game) is int and 0 <= game < count and game not in seen,
+            type(game) is int and game in selected_ids and game not in seen,
             "duplicate/unplanned/ambiguous outcome correspondence",
         )
         seen.add(game)
@@ -5790,7 +5824,8 @@ def collect_data(spec, experiment):
             plan = approved_plan(spec, experiment)
             planned, config = arena_plan_check(experiment, plan)
             local_count = len(planned)
-            data["missing_local_games"] = list(range(local_count))
+            selected_ids = [x["local_game"] for x in planned]
+            data["missing_local_games"] = selected_ids.copy()
             data["planned_global_slots"] = [x["slot"] for x in planned]
             config = document(experiment["config"])
             files = {
@@ -5806,7 +5841,7 @@ def collect_data(spec, experiment):
                 game = row["game"]
                 require(
                     type(game) is int
-                    and 0 <= game < local_count
+                    and game in selected_ids
                     and game not in data["observed_local_games"],
                     "duplicate/unplanned journal game",
                 )
@@ -5833,10 +5868,10 @@ def collect_data(spec, experiment):
                 records.append(row)
                 data["observed_local_games"].append(game)
                 data["missing_local_games"] = sorted(
-                    set(range(local_count)) - set(data["observed_local_games"])
+                    set(selected_ids) - set(data["observed_local_games"])
                 )
             data["missing_local_games"] = sorted(
-                set(range(local_count)) - set(data["observed_local_games"])
+                set(selected_ids) - set(data["observed_local_games"])
             )
             require(
                 not data["missing_local_games"],

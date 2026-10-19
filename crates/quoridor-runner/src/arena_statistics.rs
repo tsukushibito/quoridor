@@ -74,9 +74,20 @@ pub fn summarize(
     outcomes: &[Outcome],
     seed: u64,
     resamples: usize,
+    selection: Option<&crate::arena::GameSelection>,
 ) -> Result<Summary> {
     if resamples == 0 || resamples > 10_000 {
         return Err("invalid bootstrap resamples".into());
+    }
+    if let Some(selection) = selection {
+        selection.validate(selection.selected.len() + selection.excluded.len())?;
+        if slots
+            .iter()
+            .map(|s| s.game)
+            .ne(selection.selected.iter().copied())
+        {
+            return Err("selected diagnostic slot domain".into());
+        }
     }
     let mut indexed = BTreeMap::new();
     for o in outcomes {
@@ -129,6 +140,11 @@ pub fn summarize(
     }
     let mut pairs = Vec::new();
     for (family, f) in families {
+        if f.len() == 1 && selection.is_some_and(|s| s.excluded.contains(&(f[0].0.game ^ 1))) {
+            census.incomplete_pairs += 1;
+            by_cohort.get_mut(&f[0].0.cohort).unwrap().incomplete_pairs += 1;
+            continue;
+        }
         if f.len() != 2
             || f[0].0.candidate_color == f[1].0.candidate_color
             || f[0].0.opening != f[1].0.opening
@@ -174,7 +190,10 @@ pub fn summarize(
     {
         limitations.push("Shared lineages are present.".into());
     }
-    let percentile_95 = if n < 2 {
+    let percentile_95 = if selection.is_some() {
+        limitations.push("Selected attempt only: omitted accepted colours are not native games; no batch CI/RNG, use final assembled original-family analysis.".into());
+        None
+    } else if n < 2 {
         limitations
             .push("Fewer than two complete pairs: no uncertainty interval is reported.".into());
         None
@@ -226,5 +245,90 @@ fn sample_index(rng: &mut Rng, n: usize) -> usize {
         if x < bound {
             return (x % n) as usize;
         }
+    }
+}
+
+#[cfg(test)]
+mod selected_slot_boundary_tests {
+    use super::*;
+    #[test]
+    fn selected_single_colours_are_incomplete_without_a_batch_interval_or_rng() {
+        let c = crate::runtime::selected_slot_boundary_fixture();
+        let selection = crate::arena::GameSelection {
+            selected: vec![0, 1, 2, 3, 5],
+            excluded: vec![4, 6, 7],
+        };
+        let replay = crate::arena::Replay {
+            pawns: [4, 76],
+            walls_left: [10, 10],
+            horizontal: 0,
+            vertical: 0,
+            turn: 0,
+            winner: None,
+            total_ply: 0,
+            terminal_value_stm: None,
+            history: vec![],
+            prefix_sha256: "synthetic-empty".into(),
+            history_sha256: "synthetic-history".into(),
+            immediate_winning_actions: vec![],
+        };
+        let slots: Vec<_> = selection
+            .selected
+            .iter()
+            .map(|&game| Slot {
+                game,
+                family: format!("{}-family-{:06}", c.run_id, game / 2),
+                candidate_color: crate::value_search_strength::candidate_color(&c, game),
+                cohort: "synthetic".into(),
+                lineage: format!("lineage-{}", game / 2),
+                opening: vec![],
+                replay: Some(replay.clone()),
+                replay_error: None,
+                reference_q_stm: None,
+                reference_q_band: None,
+            })
+            .collect();
+        let outcomes: Vec<_> = slots
+            .iter()
+            .map(|s| Outcome {
+                game: s.game,
+                family: s.family.clone(),
+                candidate_color: s.candidate_color,
+                status: "draw".into(),
+                winner: None,
+                plies: 0,
+                reason: None,
+                nn_calls: 0,
+                moves: vec![],
+                persistent_tt: vec![],
+                advance_calls: 0,
+                terminal_no_nn: 0,
+                allocated_nodes_peak: 0,
+                started: true,
+                failure: None,
+                observations: vec![],
+            })
+            .collect();
+        assert!(summarize(&slots, &outcomes, 7, 100, None).is_err());
+        let summary = summarize(&slots, &outcomes, 7, 100, Some(&selection)).unwrap();
+        assert_eq!(summary.census.planned_games, 5);
+        assert_eq!(summary.census.completed_games, 5);
+        assert_eq!(summary.census.unknown_games, 0);
+        assert_eq!(summary.census.incomplete_pairs, 1);
+        assert_eq!(summary.census.complete_pairs, 2);
+        assert_eq!(summary.pairs.len(), 2);
+        assert!(summary.bootstrap.percentile_95.is_none());
+        assert_eq!(summary.complete_pair_mean, Some(0.5));
+        assert!(
+            summary
+                .bootstrap
+                .limitations
+                .iter()
+                .any(|s| s.starts_with("Selected attempt only:"))
+        );
+        let mut wrong = selection.clone();
+        wrong.selected = vec![0, 1, 2, 3, 4];
+        wrong.excluded = vec![5, 6, 7];
+        assert!(summarize(&slots, &outcomes, 7, 100, Some(&wrong)).is_err());
     }
 }

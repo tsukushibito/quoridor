@@ -229,6 +229,13 @@ impl Config {
                 ) && self.management_cpu_core.is_some())
         })
     }
+    /// Physical attempt size; games continues to describe the original logical batch.
+    pub fn execution_games(&self) -> usize {
+        self.arena
+            .as_ref()
+            .and_then(|a| a.game_selection.as_ref())
+            .map_or(self.games, |s| s.selected.len())
+    }
     /// Split the independent opening families; paired colors stay together.
     pub fn split_counts(&self) -> Result<(usize, usize), String> {
         let family_size = if self.engines.len() == 2 { 2 } else { 1 };

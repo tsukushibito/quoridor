@@ -1301,6 +1301,14 @@ fn planned(config: &Config) -> Result<Vec<Planned>> {
             split,
         });
     }
+    if config
+        .arena
+        .as_ref()
+        .is_some_and(|a| a.game_selection.is_some())
+    {
+        let selected = crate::arena::game_ids(config)?;
+        out.retain(|p| selected.binary_search(&p.id).is_ok());
+    }
     Ok(out)
 }
 fn memory() -> u64 {
@@ -3996,6 +4004,7 @@ fn run_inner(
                 &outcomes,
                 a.map_or(config.seed, |a| a.bootstrap_seed),
                 a.map_or(2000, |a| a.bootstrap_resamples),
+                a.and_then(|a| a.game_selection.as_ref()),
             )
         })
         .transpose()?;
@@ -4010,7 +4019,7 @@ fn run_inner(
         }
         .into(),
         run_id: config.run_id.clone(),
-        planned: config.games,
+        planned: config.execution_games(),
         outcomes,
         rows: row_count,
         eligible_rows,
@@ -4495,6 +4504,10 @@ fn run_owned(
                             .arena
                             .as_ref()
                             .map_or(2000, |a| a.bootstrap_resamples),
+                        config
+                            .arena
+                            .as_ref()
+                            .and_then(|a| a.game_selection.as_ref()),
                     )
                     .ok()
                 })
@@ -4511,7 +4524,7 @@ fn run_owned(
             }
             .into(),
             run_id: config.run_id.clone(),
-            planned: config.games,
+            planned: config.execution_games(),
             outcomes,
             rows: 0,
             eligible_rows: 0,
@@ -7260,5 +7273,62 @@ mod research_safe_race_default_tests {
         engine.kind = "mcts".into();
         engine.zero_stock_safe_race_method = None;
         assert!(!arena_safe_race(&engine, Some(&arena)).unwrap().0);
+    }
+}
+
+#[cfg(test)]
+pub(crate) fn selected_slot_boundary_fixture() -> Config {
+    serde_json::from_value(serde_json::json!({
+        "ruleset":"standard_2p_threefold", "run_id":"selected-slot-synthetic", "output":"unused",
+        "seed":739, "games":8, "workers":1, "active_games":1, "max_batch":1, "opening_plies":0,
+        "max_plies":200, "max_output_bytes":16777216,
+        "engines":[{"kind":"distance","depth":1,"max_nodes":1000000,"time_ms":100},
+                   {"kind":"distance","depth":1,"max_nodes":1000000,"time_ms":100}],
+        "arena":{"comparison":"functional","clock_policy":"strict_unknown","return_reserve_ms":5,
+            "tt_entries":37,"bootstrap_seed":1,"bootstrap_resamples":1,
+            "evaluator_sha256":[],"search_artifact_sha256":[],"first_candidate_colors":[1,0,1,0],
+            "retained_outcome_bytes":32768,
+            "book":{"id":"synthetic","usage":"functional","frozen_before_candidate_results":true,
+                "independence":"metadata only; no model/Search/game", "openings":(0..4).map(|i| serde_json::json!({
+                    "id":format!("family-{i}"),"cohort":"main","lineage":format!("lineage-{i}"),
+                    "siblings":[],"original_seed":i+1,"reference":null,"selection_reason":"fixed synthetic",
+                    "candidate_pool_size":1,"prefix":[]
+                })).collect::<Vec<_>>()}
+        }
+    })).unwrap()
+}
+#[cfg(test)]
+mod selected_slot_boundary_tests {
+    use super::*;
+    #[test]
+    fn sparse_plans_keep_original_game_rng_colour_history_and_unknown_identity() {
+        let mut c = selected_slot_boundary_fixture();
+        let full = planned(&c).unwrap();
+        let seed = c.seed;
+        c.arena.as_mut().unwrap().game_selection = Some(crate::arena::GameSelection {
+            selected: vec![1, 4, 7],
+            excluded: vec![0, 2, 3, 5, 6],
+        });
+        let selected = planned(&c).unwrap();
+        assert_eq!(
+            selected.iter().map(|p| p.id).collect::<Vec<_>>(),
+            vec![1, 4, 7]
+        );
+        for p in selected {
+            let original = &full[p.id];
+            assert_eq!(p.family, original.family);
+            assert_eq!(p.candidate_color, original.candidate_color);
+            assert_eq!(p.opening, original.opening);
+            assert_eq!(p.split, original.split);
+            let context = SigmaContext::from_prefix_with_rules(&p.opening, c.ruleset).unwrap();
+            let mut game = new_game(p.clone(), context, &c, false);
+            let mut expected = Rng::new(seed ^ (p.id as u64 + 1).wrapping_mul(0x9e3779b97f4a7c15));
+            assert_eq!(game.rng.next_u64(), expected.next_u64());
+            let unknown = unknown(&p, "not_started_cancelled".into());
+            assert_eq!(unknown.game, p.id);
+            assert!(!unknown.started);
+            assert_eq!(unknown.status, "unknown");
+        }
+        assert_eq!(c.seed, seed);
     }
 }
