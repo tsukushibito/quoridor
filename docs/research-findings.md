@@ -2546,3 +2546,11 @@ source exportも、旧root Web配置の互換対象5件と未使用importを撤�
 人間の「その検証作業を計画に含めて」により、tier・完全な合成動的履歴が同点の群だけを「駒移動→両駒周辺の壁→既存壁周辺の壁→その他」、分類内はID順とする一候補を加える。原14の`local_goal_edge`は前進量・直進辺の比較であり、今回の駒移動一律優先・壁近傍は未検証である。14の65勝63敗・区間・不採用・閉鎖と旧候補撤去の324.12は変更しない。
 
 [既存ordering設計の後続計画](design/lightweight-move-ordering-v1.md#履歴同点群の駒壁近傍優先32415後続計画)へ、固定幾何maskと現在のpawn/H/Vを使う一案、追加BFS/NNUE/child make/全壁scan/heap/cacheを増やさない条件、連続Search時間と同持時間family両色棋力の両評価を記録した。近傍定義、実規模、採否・停止、分割/露出、資源・保存は着手前に有限化する。今回の追加から新科学quota・即実装・数値STARTを発行せず、旧L2/14/UNKNOWN/未使用枠を転用しない。9.4の設定化・整数範囲設計は並行継続し、係数の数値調整はこの候補の採否でorderingを固定した後とする。全pause/seals/models/defaults/foreign/原RAWFAILED/費UNKNOWN/50GBと取消済みconsultationを保持し、状態と次工程は既存Beadsへ置く。
+
+### 型付きLMR設定のsoftware資格と並行source準備（324.9.4、2026-10-19）
+
+共通Control/depth_rankに`lmr_parameters`を接続し、省略・明示baselineの元整数表と、custom session table・実効bit namespace・TT/履歴reset・要求/実効記録の対応を維持した。新Rust5定義は各1件PASS、affected Clippy・releaseを完了。初回はrunnerの既存現役fixtureのoptional初期化欠落で型検査を停止し、`None`だけを追加して成功済み3件を再実行せず、未完了2件とlint/releaseを続けた。原FAILED、candidate cleanupfalseとdisk/outer cleanuptrueは別の事実として保存する。[資格と実STOP](../.artifacts/research-team/integration324/cedar-lmr-tuning-v1/typed-parameters-adoption-v1/software-v2/collection-v1/qualification-and-STOP.json)、[範囲・有限表算術・後続調整の条件](design/ai-nnue-research.md#現行確認後のlmrパラメータ調整と独立評価2026-10-19-jst人間直接指示)を参照する。新image `e5f7bc36` / BUILD `11f865e3`はsource `281a7bd5`のsoftware資格であり、旧14・L2の測定imageを変更・再認定せず、係数の棋力/速度/訪問頻度を認定しない。
+
+人間の並行実作業指示に従い、15は別担当で固定近傍maskの私有実装まで進み、関連する幾何・同点群・namespace境界の確認中。16は既存Rust/arena担当が本来Claustrophobia探索の共通arena adapter/config sourceへ実着手した。13は既確認のfusion差分と有限64callsの入口をRootで準備し、Main/Cargo/実timingの競合だけを実STOPで直列化する。これらの段階を数値開始・完了と混同せず、係数数値調整は15採否後のordering・評価器固定から進める。旧L2/14/UNKNOWN/未使用quotaを新しい権利にしない。
+
+追加の人間方針として、現役入口・既存typed設定の解決を一本化し、不要旧API/shim/実験コピー/古設定・案内・専用検査はcallerと共に撤去する。具体的な現実施中/予定直接比較に必要な旧版だけ用途・撤去条件を明記して保持し、固有model/入力/RAW/失敗証拠/未保存変更と区別する。Sigma/Claustrophobia固有encoder/policy/本家探索の意味差は必要なadapterに残し、新registry/framework/独自監査を整理目的で足さない。条件変更は共通typed設定へ寄せ、終了時に実削除、比較専用用途/撤去条件、設定だけで変えられる項目と残るsource意味差を報告する。12の全体完了・owner close・返信/ACKを非競合source準備の入口にせず、全pause/seals/defaultmodels/foreign/RAWFAILED/費UNKNOWN/50GBと取消consultationを保護する。
