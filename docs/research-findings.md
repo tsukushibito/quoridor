@@ -2535,6 +2535,8 @@ Rootは結果前の有限方法を、真正32rootのOFF/ON/ON/OFF・128calls/128
 
 研究判断で結果前の採否を明確にした。固定128局/64familyの正規資格が揃い、事前family95%区間の下端が0.5を上回れば、次のLMR調整用の研究ordering設定として候補を選ぶ。それ以外は現Controlを維持する。TIME改善は追加の採用条件にせず、時間の有限基準とsetup/drop/wholeは別に報告する。時間が中立・悪化でも棋力側を実施し、未確定を効果不存在と呼ばず、追加局・候補・再選択や製品/default/model昇格を発行しない。
 
-### 終了済みWasm診断入口の撤去（324.12、2026-10-19）
+### 終了済み実験入口・互換対象の撤去（324.12、2026-10-19）
 
 現行callerと予定比較の用途がない固定28件の`SIGMA-RULE-FEATURE-PARITY`専用module/bin、公開exportと専用`research` featureを撤去した。現在のNNUE入口、rules/ai境界、3つのgenerator bin、現役テストとarena設定は保持し、開発案内は同じ有効feature集合を明示する形へ更新した。過去の再構成元はGitと保存済み結果であり、RAW・モデル・入力・失敗記録は削除していない。この撤去を14の障害原因とは認定せず、14の資源修復は同じ担当の関連成果を再用する。限定compileの結果と実採用記録は既存324.12へ追記し、整理全体やleaf closeを14の入口にしない。
+
+source exportも、旧root Web配置の互換対象5件と未使用importを撤去し、列挙したroot fileは完全一致で選ぶよう修正した。現行`apps/web`・研究source・明示paths入口を保持し、`.saved`/`.old`の別fileを暗黙に書き出さない。新しい限定テスト1件の保存PASSを再用した。`research355`と`guarded_train`は現publisher・案内・入場テストの実callerがあるため保持し、番号だけで旧コードと判定しない。

@@ -10,7 +10,7 @@ import {
   writeFileSync,
 } from "node:fs";
 import { createHash } from "node:crypto";
-import { dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
+import { dirname, isAbsolute, join, resolve, sep } from 'node:path';
 import { fileURLToPath } from "node:url";
 
 const scopes = {
@@ -43,9 +43,6 @@ const scopes = {
     "playwright.audio.config.ts",
     "LICENSE",
     "crates/",
-    "web/",
-    "src/",
-    "public/",
     ".devcontainer/",
     "scripts/",
     "docs/",
@@ -55,8 +52,6 @@ const scopes = {
     "package-lock.json",
     "Cargo.toml",
     "Cargo.lock",
-    "index.html",
-    "vite.config.",
   ],
 };
 const forbidden =
@@ -128,7 +123,9 @@ export function exportSource({
     paths = [...new Set(listed)].filter((name) => {
       if (
         forbidden.test(name) ||
-        !scopes[scope].some((prefix) => name.startsWith(prefix))
+        !scopes[scope].some((entry) =>
+          entry.endsWith('/') ? name.startsWith(entry) : name === entry,
+        )
       )
         return false;
       try {

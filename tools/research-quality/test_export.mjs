@@ -278,3 +278,91 @@ test('source permissions survive exclusive snapshot publication', (t) => {
   exportSource({ ...f, paths: ['code.py'] });
   assert.equal(lstatSync(join(f.destination, 'code.py')).mode & 0o7777, 0o761);
 });
+
+test('current scopes omit retired Web roots and require exact root filenames', async (t) => {
+  const f = fixture(t);
+  const paths = [
+    'apps/web/index.html',
+    'apps/web/src/main.ts',
+    'apps/web/vite.config.ts',
+    'packages/engine-bridge/src/index.ts',
+    'Cargo.toml',
+    'Cargo.toml.saved',
+    'package.json',
+    'package.json.old',
+    'README.md',
+    'README.md.saved',
+    'pyproject.toml',
+    'pyproject.toml.saved',
+    'python/quoridor_training/current.py',
+    'tools/model-export/export.py',
+    'web/retired.js',
+    'src/retired.js',
+    'public/retired.css',
+    'index.html',
+    'vite.config.ts',
+  ];
+  for (const path of paths) {
+    mkdirSync(join(f.root, path, '..'), { recursive: true });
+    writeFileSync(join(f.root, path), 'synthetic source only\n');
+  }
+  // Mock ONLY Git's file-list port. No Git command/index/repository is created;
+  // the actual exporter still applies its normal filesystem/hash/publication checks.
+  const imported =
+    new URL('../../scripts/export-fresh-source.mjs', import.meta.url).href + '?current-scope';
+  const hooks = registerHooks({
+    resolve(specifier, context, next) {
+      if (context.parentURL === imported && specifier === 'node:child_process')
+        return { url: 'fixture:scope-files', shortCircuit: true };
+      return next(specifier, context);
+    },
+    load(url, context, next) {
+      if (url === 'fixture:scope-files')
+        return {
+          source:
+            "export const execFileSync = (command, args) => { if (command !== 'git' || !args.includes('ls-files')) throw Error('Unexpected subprocess'); return Buffer.from(" +
+            JSON.stringify(paths.join('\0')) +
+            '); };',
+          format: 'module',
+          shortCircuit: true,
+        };
+      return next(url, context);
+    },
+  });
+  let exporter;
+  try {
+    exporter = await import(imported);
+  } finally {
+    hooks.deregister();
+  }
+  const product = exporter.exportSource({ ...f, scope: 'product' });
+  assert.deepEqual(
+    product.entries.map((entry) => entry.path),
+    [
+      'Cargo.toml',
+      'README.md',
+      'apps/web/index.html',
+      'apps/web/src/main.ts',
+      'apps/web/vite.config.ts',
+      'package.json',
+      'packages/engine-bridge/src/index.ts',
+    ],
+  );
+  const research = exporter.exportSource({
+    ...f,
+    scope: 'research',
+    destination: join(f.base, 'research'),
+  });
+  assert.deepEqual(
+    research.entries.map((entry) => entry.path),
+    [
+      'Cargo.toml',
+      'README.md',
+      'pyproject.toml',
+      'python/quoridor_training/current.py',
+      'tools/model-export/export.py',
+    ],
+  );
+  for (const path of paths)
+    assert.equal(readFileSync(join(f.root, path), 'utf8'), 'synthetic source only\n');
+});
