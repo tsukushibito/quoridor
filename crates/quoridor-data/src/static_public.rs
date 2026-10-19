@@ -327,7 +327,7 @@ mod tests {
         };
         assert_eq!(pawn_ids(&masks[..209]), vec![3, 5, 13]);
         assert_eq!(pawn_ids(&masks[209..]), vec![31, 39, 41, 58]);
-        for row in masks.chunks_exact(209) {
+        for row in masks.as_chunks::<209>().0 {
             assert!(row[81..].iter().all(|&legal| legal == 1));
             assert!(row.iter().all(|&legal| legal <= 1));
         }
@@ -373,7 +373,7 @@ mod tests {
             },
             1
         );
-        let path = [b'x'];
+        let path = *b"x";
         let mut out = [0_u8; 64];
         for size in [0, 4097, usize::MAX] {
             assert_eq!(
