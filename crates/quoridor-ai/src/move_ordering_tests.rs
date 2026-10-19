@@ -139,7 +139,17 @@ fn control389_key_control_call_keeps_diagnostic_on_off_order_and_parent() {
                 let mut input = legal.clone();
                 input.reverse();
                 let pointer = input.as_ptr();
-                let ordered = s.ordered(c, None, Some(legal[0]), 0, input).unwrap();
+                let ordered = s
+                    .ordered(
+                        c,
+                        None,
+                        Some(legal[0]),
+                        0,
+                        input,
+                        #[cfg(feature = "research-diagnostics")]
+                        None,
+                    )
+                    .unwrap();
                 assert_eq!(ordered, expected);
                 assert_eq!(ordered.as_ptr(), pointer);
                 assert_eq!(s.stats.ordering.ordered_nodes, u64::from(observe));
@@ -177,7 +187,17 @@ fn control385_legal_vector_is_scored_and_sorted_in_place() {
         &mut history,
         |s, c| {
             s.orderer = Some(&Policy);
-            let ordered = s.ordered(c, None, Some(best), 0, legal).unwrap();
+            let ordered = s
+                .ordered(
+                    c,
+                    None,
+                    Some(best),
+                    0,
+                    legal,
+                    #[cfg(feature = "research-diagnostics")]
+                    None,
+                )
+                .unwrap();
             assert_eq!(ordered.as_ptr(), pointer);
             assert_eq!(ordered.capacity(), capacity);
             assert_eq!(ordered[0], best);
@@ -449,7 +469,15 @@ fn ordering382_policy_and_observation_preserve_legal_order_parent_and_interrupts
                     let legal = c.legal_ids();
                     s.killers[0] = [Some(legal[1]), Some(legal[2])];
                     let ordered = s
-                        .ordered(c, None, Some(legal[0]), 0, c.legal_ids())
+                        .ordered(
+                            c,
+                            None,
+                            Some(legal[0]),
+                            0,
+                            c.legal_ids(),
+                            #[cfg(feature = "research-diagnostics")]
+                            None,
+                        )
                         .unwrap();
                     assert_eq!(&ordered[..3], &legal[..3]);
                     let mut unique = ordered.clone();
@@ -471,7 +499,15 @@ fn ordering382_policy_and_observation_preserve_legal_order_parent_and_interrupts
         |s, c| {
             s.orderer = Some(&BadPolicy);
             assert!(matches!(
-                s.ordered(c, None, None, 0, c.legal_ids()),
+                s.ordered(
+                    c,
+                    None,
+                    None,
+                    0,
+                    c.legal_ids(),
+                    #[cfg(feature = "research-diagnostics")]
+                    None,
+                ),
                 Err(Interrupted::Error(SearchError::Evaluation(_)))
             ));
             assert_eq!(s.stats.policy_calls, 0);
@@ -481,7 +517,15 @@ fn ordering382_policy_and_observation_preserve_legal_order_parent_and_interrupts
     with_state(&root, &PawnRows, &cancel, &mut history, |s, c| {
         s.orderer = Some(&Policy);
         assert!(matches!(
-            s.ordered(c, None, None, 0, c.legal_ids()),
+            s.ordered(
+                c,
+                None,
+                None,
+                0,
+                c.legal_ids(),
+                #[cfg(feature = "research-diagnostics")]
+                None,
+            ),
             Err(Interrupted::Stop(StopReason::Cancelled))
         ));
         assert_eq!(s.stats.policy_calls, 0);

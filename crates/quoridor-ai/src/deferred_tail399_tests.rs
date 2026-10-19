@@ -184,7 +184,17 @@ fn control399_prepared_keys_survive_history_killer_changes_without_rescoring() {
         |s, c| {
             warm(s, c, legal[0], 2);
             s.limits = &NO_TT;
-            let expected = s.ordered(c, None, None, 0, legal.clone()).unwrap();
+            let expected = s
+                .ordered(
+                    c,
+                    None,
+                    None,
+                    0,
+                    legal.clone(),
+                    #[cfg(feature = "research-diagnostics")]
+                    None,
+                )
+                .unwrap();
             let mut moves = s.prepared_moves(c, None, None, 0, legal.clone()).unwrap();
             assert_eq!(moves.next(None).unwrap().0, expected[0]);
             let winner = *expected.last().unwrap();
@@ -197,7 +207,19 @@ fn control399_prepared_keys_survive_history_killer_changes_without_rescoring() {
                 None,
             );
             s.killers[0] = [Some(winner), None];
-            assert_eq!(s.ordered(c, None, None, 0, legal).unwrap()[0], winner);
+            assert_eq!(
+                s.ordered(
+                    c,
+                    None,
+                    None,
+                    0,
+                    legal,
+                    #[cfg(feature = "research-diagnostics")]
+                    None,
+                )
+                .unwrap()[0],
+                winner
+            );
             assert_eq!(
                 drain(&mut moves, &mut OrderingStats::default()),
                 expected[1..]

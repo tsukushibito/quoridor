@@ -206,10 +206,28 @@ fn static360_goal_tier_below_pv_above_killers_and_all_legal_once() {
             let legal = c.legal_ids();
             let other = *legal.iter().find(|&&a| a != 76).unwrap();
             state.killers[0] = [Some(other), None];
-            let ids = state.ordered(c, None, None, 0, c.legal_ids()).unwrap();
+            let ids = state
+                .ordered(
+                    c,
+                    None,
+                    None,
+                    0,
+                    c.legal_ids(),
+                    #[cfg(feature = "research-diagnostics")]
+                    None,
+                )
+                .unwrap();
             assert_eq!(ids[0], 76);
             let ids = state
-                .ordered(c, None, Some(other), 0, c.legal_ids())
+                .ordered(
+                    c,
+                    None,
+                    Some(other),
+                    0,
+                    c.legal_ids(),
+                    #[cfg(feature = "research-diagnostics")]
+                    None,
+                )
                 .unwrap();
             assert_eq!(ids[0], other);
             assert_eq!(ids[1], 76);

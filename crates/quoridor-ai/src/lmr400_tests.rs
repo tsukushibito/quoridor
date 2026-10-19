@@ -272,7 +272,16 @@ fn shared402_lmr_confirmation_research_keeps_frozen_same_hand_and_tail_cursor() 
                 } else {
                     StaticScratch::CheapControl
                 });
-                s.ordered(c, None, None, 0, c.legal_ids()).unwrap()[3]
+                s.ordered(
+                    c,
+                    None,
+                    None,
+                    0,
+                    c.legal_ids(),
+                    #[cfg(feature = "research-diagnostics")]
+                    None,
+                )
+                .unwrap()[3]
             },
         );
         let eval = Horizon::new(&root, target, 0.5, 0.25);
@@ -291,7 +300,17 @@ fn shared402_lmr_confirmation_research_keeps_frozen_same_hand_and_tail_cursor() 
                 } else {
                     StaticScratch::CheapControl
                 });
-                let expected = s.ordered(c, None, None, 0, c.legal_ids()).unwrap();
+                let expected = s
+                    .ordered(
+                        c,
+                        None,
+                        None,
+                        0,
+                        c.legal_ids(),
+                        #[cfg(feature = "research-diagnostics")]
+                        None,
+                    )
+                    .unwrap();
                 let mut prepared = s.prepared_moves(c, None, None, 0, c.legal_ids()).unwrap();
                 let mut reads = OrderingStats::default();
                 for &action in &expected[..4] {

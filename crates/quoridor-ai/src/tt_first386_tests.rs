@@ -422,7 +422,17 @@ fn control386_residual_ranks_after_tt_child_history_updates() {
                 .into_iter()
                 .filter(|&id| id != first)
                 .collect();
-            let expected = s.ordered(c, None, None, 0, remaining).unwrap();
+            let expected = s
+                .ordered(
+                    c,
+                    None,
+                    None,
+                    0,
+                    remaining,
+                    #[cfg(feature = "research-diagnostics")]
+                    None,
+                )
+                .unwrap();
             assert_eq!(calls[1], expected[0]);
             assert_eq!(calls[1], promoted);
         },

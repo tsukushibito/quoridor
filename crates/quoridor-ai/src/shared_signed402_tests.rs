@@ -58,7 +58,19 @@ fn shared402_equal_static_fixture_uses_same_keys_first_tail_and_freeze() {
                 assert_eq!(stats.work.as_deref().unwrap().sort_calls_started, 1);
                 assert!(!moves.lmr_protected(117));
                 assert!(moves.lmr_protected(109));
-                assert_eq!(s.ordered(c, None, None, 0, ids.clone()).unwrap()[0], 117);
+                assert_eq!(
+                    s.ordered(
+                        c,
+                        None,
+                        None,
+                        0,
+                        ids.clone(),
+                        #[cfg(feature = "research-diagnostics")]
+                        None,
+                    )
+                    .unwrap()[0],
+                    117
+                );
                 outcomes.push((first, tail));
             },
         );

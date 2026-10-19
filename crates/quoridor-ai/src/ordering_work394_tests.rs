@@ -270,9 +270,30 @@ fn control394_zero_single_ordering_attempts_keep_preparation_not_nontrivial_sort
         &mut history,
         |s, c| {
             warm(s, c, legal[0], 2);
-            assert!(s.ordered(c, None, None, 0, vec![]).unwrap().is_empty());
+            assert!(
+                s.ordered(
+                    c,
+                    None,
+                    None,
+                    0,
+                    vec![],
+                    #[cfg(feature = "research-diagnostics")]
+                    None,
+                )
+                .unwrap()
+                .is_empty()
+            );
             assert_eq!(
-                s.ordered(c, None, None, 0, vec![legal[0]]).unwrap(),
+                s.ordered(
+                    c,
+                    None,
+                    None,
+                    0,
+                    vec![legal[0]],
+                    #[cfg(feature = "research-diagnostics")]
+                    None,
+                )
+                .unwrap(),
                 [legal[0]]
             );
             let w = s.stats.ordering.work.as_deref().unwrap();

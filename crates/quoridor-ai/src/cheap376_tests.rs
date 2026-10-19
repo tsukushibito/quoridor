@@ -86,7 +86,16 @@ fn cheap400_missing_cache_uses_genuine_parent_maps_same_coefficients_and_control
                     StaticScratch::CheapControl
                 });
                 let before = Key::of(c);
-                s.ordered(c, None, None, 0, c.legal_ids()).unwrap();
+                s.ordered(
+                    c,
+                    None,
+                    None,
+                    0,
+                    c.legal_ids(),
+                    #[cfg(feature = "research-diagnostics")]
+                    None,
+                )
+                .unwrap();
                 assert_eq!(Key::of(c), before);
                 assert_eq!(s.stats.ordering.computed_goal_map_pairs, u64::from(cheap));
                 assert_eq!(s.stats.ordering.borrowed_goal_maps, 0);
@@ -347,7 +356,15 @@ fn cheap376_tiers_legal_set_id_ties_parent_reentry_and_returned_child_error() {
                 let counted = c.occurrences().collect::<Vec<_>>();
                 let ply = c.total_ply();
                 let got = s
-                    .ordered(c, None, Some(legal[0]), 0, c.legal_ids())
+                    .ordered(
+                        c,
+                        None,
+                        Some(legal[0]),
+                        0,
+                        c.legal_ids(),
+                        #[cfg(feature = "research-diagnostics")]
+                        None,
+                    )
                     .unwrap();
                 assert_eq!(got[0], legal[0]);
                 let mut set = got.clone();
@@ -356,8 +373,16 @@ fn cheap376_tiers_legal_set_id_ties_parent_reentry_and_returned_child_error() {
                 wanted.sort_unstable();
                 assert_eq!(set, wanted);
                 assert_eq!(
-                    s.ordered(c, None, Some(legal[0]), 0, c.legal_ids())
-                        .unwrap(),
+                    s.ordered(
+                        c,
+                        None,
+                        Some(legal[0]),
+                        0,
+                        c.legal_ids(),
+                        #[cfg(feature = "research-diagnostics")]
+                        None,
+                    )
+                    .unwrap(),
                     got
                 );
                 assert_eq!(Key::of(c), before);
@@ -397,7 +422,19 @@ fn cheap376_tiers_legal_set_id_ties_parent_reentry_and_returned_child_error() {
                     StaticScratch::CheapControl
                 });
                 s.killers[0] = [Some(other), None];
-                assert_eq!(s.ordered(c, None, None, 0, c.legal_ids()).unwrap()[0], goal);
+                assert_eq!(
+                    s.ordered(
+                        c,
+                        None,
+                        None,
+                        0,
+                        c.legal_ids(),
+                        #[cfg(feature = "research-diagnostics")]
+                        None,
+                    )
+                    .unwrap()[0],
+                    goal
+                );
             },
         );
     }

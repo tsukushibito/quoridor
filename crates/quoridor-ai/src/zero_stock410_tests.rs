@@ -35,6 +35,8 @@ fn with_tt<T>(
     table.next_generation();
     let mut history = ContinuationHistory::new().unwrap();
     let mut s = Search {
+        #[cfg(feature = "research-diagnostics")]
+        opportunity: None,
         eval,
         score_domain: ScoreDomain::LEGACY,
         eval_scratch: eval.create_scratch(),

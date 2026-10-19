@@ -164,6 +164,8 @@ pub(super) fn with_state<T>(
     let l = limits(3, false, true);
     let mut table = Table::new(0).unwrap();
     let mut state = Search {
+        #[cfg(feature = "research-diagnostics")]
+        opportunity: None,
         eval,
         score_domain: ScoreDomain::LEGACY,
         eval_scratch: eval.create_scratch(),
@@ -368,13 +370,33 @@ fn continuation360_order_combines_unequal_main_and_preserves_all_tiers() {
         &mut h,
         |state, c| {
             state.path.extend_from_slice(&path); // Explicit typed path for this ordering port only.
-            let ids = state.ordered(c, None, None, 0, c.legal_ids()).unwrap();
+            let ids = state
+                .ordered(
+                    c,
+                    None,
+                    None,
+                    0,
+                    c.legal_ids(),
+                    #[cfg(feature = "research-diagnostics")]
+                    None,
+                )
+                .unwrap();
             assert!(ids.iter().position(|a| *a == 5) < ids.iter().position(|a| *a == 13));
             let mut unique = ids.clone();
             unique.sort_unstable();
             assert_eq!(unique, c.legal_ids());
             state.killers[0] = [Some(13), Some(3)];
-            let ids = state.ordered(c, None, Some(5), 0, c.legal_ids()).unwrap();
+            let ids = state
+                .ordered(
+                    c,
+                    None,
+                    Some(5),
+                    0,
+                    c.legal_ids(),
+                    #[cfg(feature = "research-diagnostics")]
+                    None,
+                )
+                .unwrap();
             assert_eq!(&ids[..3], &[5, 13, 3]);
             assert!(state.stats.ordering.nonzero_continuation_actions > 0);
             assert!(state.stats.ordering.history_changed_nodes > 0);
