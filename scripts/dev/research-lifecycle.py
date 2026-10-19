@@ -1745,6 +1745,51 @@ def selected_run(spec, experiment):
         template.get("finalizers") == [],
         "configured RUN with nonempty finalizers unsupported",
     )
+    expected_experiment = document(template["experiment"])
+    adaptive = "parameter_tuning" in settings
+    if adaptive:
+        require(settings.get("arena_cohort") is None, "serial adaptive parameter owner")
+        _, state = parameter_trial(settings, index)
+        config = document(expected_experiment["config"])
+        operation = state["operation"]
+        require(
+            config["arena"]["max_total_nodes"] == operation["nodes"]
+            and arena_game_ids(config) == operation["selected"],
+            "selected parameter slots and nonlending cap",
+        )
+        for engine, parameters in zip(
+            config["engines"], [state["LEFT"], state["RIGHT"]], strict=True
+        ):
+            engine["lmr_parameters"] = parameters
+        require(document(experiment["config"]) == config, "only declared typed parameters change")
+        phase = Path(settings["output"]) / f"run-{index:03d}"
+        require(
+            experiment["config"]["path"] == str(phase / "config.json")
+            and spec["approved_plan"]["path"] == str(phase / "plan.json")
+            and experiment["numerical_qualification"]["path"] == str(phase / "numerical.json"),
+            "normal derived parameter metadata paths",
+        )
+        plan = document(template["approved_plan"])
+        batch = plan["batches"][expected_experiment["batch"]]
+        batch["config"] = experiment["config"]
+        next(m for m in plan["matchups"] if m["id"] == batch["matchup"])["engines"] = config[
+            "engines"
+        ]
+        require(document(spec["approved_plan"]) == plan, "only resolved parameter plan changes")
+        expected_experiment["config"] = experiment["config"]
+        expected_experiment["canonical_plan_sha256"] = spec["approved_plan"]["sha256"]
+        prior = document(expected_experiment["numerical_qualification"])
+        numerical = numerical_fields(
+            expected_experiment, accepted_build(expected_experiment["build_manifest"])
+        )
+        for key in ["original_evidence", "correspondence_only", "scope", "new_model_or_head_calls"]:
+            if key in prior:
+                numerical[key] = prior[key]
+        require(
+            document(experiment["numerical_qualification"]) == numerical,
+            "inherited numerical correspondence",
+        )
+        expected_experiment["numerical_qualification"] = experiment["numerical_qualification"]
     for key in (
         "owner",
         "cwd",
@@ -1757,8 +1802,10 @@ def selected_run(spec, experiment):
         "data",
         "finalizers",
     ):
+        if adaptive and key == "approved_plan":
+            continue
         require(spec[key] == template[key], "selected RUN settings drift: " + key)
-    require(experiment == document(template["experiment"]), "selected RUN experiment drift")
+    require(experiment == expected_experiment, "selected RUN experiment drift")
     launch_fields = {
         "TMPDIR",
         "QUORIDOR_LIFECYCLE_INTENT",
@@ -7528,6 +7575,496 @@ def apply_comparison_arena(config, common, pair):
             engine[key] = arena[key]
 
 
+def parameter_schedule(recipe):
+    """Compile bounded typed coordinate/SPSA configuration, without experiment IDs."""
+    require(recipe["schema"] == "quoridor.parameter-tuning.v1", "typed parameter recipe")
+    baseline = recipe["baseline"]
+    resolved_lmr_parameters(dict(lmr_parameters=baseline), "control")
+    continuous = recipe["continuous"]
+    keys = continuous["coordinates"]
+    scales = continuous["scale"]
+    require(
+        keys == ["intercept", "log_divisor"]
+        and len(scales) == 2
+        and all(type(v) in (int, float) and math.isfinite(v) and v > 0 for v in scales)
+        and all(
+            type(continuous[k]) in (int, float) and math.isfinite(continuous[k])
+            for k in ("center_box", "trial_box", "step_clip")
+        )
+        and 0 < continuous["step_clip"] <= continuous["center_box"]
+        and continuous["center_box"] < continuous["trial_box"]
+        and continuous["initial_center"] == [0.0, 0.0]
+        and all(type(v) in (int, float) for v in continuous["initial_center"]),
+        "finite normalized coordinate bounds",
+    )
+    for sign in [-1, 1]:
+        edge = dict(baseline)
+        for key, scale in zip(keys, scales, strict=True):
+            edge[key] += sign * continuous["trial_box"] * scale
+        resolved_lmr_parameters(dict(lmr_parameters=edge), "control")
+    split = document(recipe["book_split"])
+    tuning = {r["global_family_id"] for r in split["tuning"]}
+    confirmation = {r["global_family_id"] for r in split["confirmation"]}
+    require(
+        len(tuning) == len(split["tuning"])
+        and len(confirmation) == len(split["confirmation"])
+        and not tuning & confirmation
+        and len({row["canonical_family"] for row in split["tuning"] + split["confirmation"]})
+        == len(tuning) + len(confirmation),
+        "disjoint canonical recipe families",
+    )
+    stages = recipe["integer_stages"]
+    require(
+        [stage["coordinate"] for stage in stages] == ["min_depth", "min_rank", "max_extra"],
+        "declared integer coordinate order",
+    )
+    operations = []
+    for index, stage in enumerate(stages):
+        ids = stage["family_ids"]
+        values = stage["candidates"]
+        require(
+            len(ids) == len(set(ids)) == 32
+            and set(ids) <= tuning
+            and stage["games_per_candidate"] == 2 * len(ids)
+            and isinstance(values, list)
+            and len(values) == len(set(values)) == 2
+            and all(type(v) is int for v in values),
+            "bounded paired integer candidates",
+        )
+        for value in values:
+            trial = dict(baseline, **{stage["coordinate"]: value})
+            resolved_lmr_parameters(dict(lmr_parameters=trial), "control")
+            for chunk in range(2):
+                operations.append(
+                    dict(
+                        kind="coordinate",
+                        stage=index,
+                        candidate=value,
+                        chunk=chunk,
+                        families=ids[chunk * 16 : chunk * 16 + 16],
+                        selected=list(range(32)),
+                        games=32,
+                        nodes=recipe["limits"]["operation32_nodes"],
+                    )
+                )
+    updates = recipe["updates"]
+    require(isinstance(updates, list) and 0 < len(updates) <= 128, "finite SPSA updates")
+    for index, update in enumerate(updates):
+        require(
+            update["index"] == index
+            and len(update["family_ids"]) == len(set(update["family_ids"])) == 8
+            and set(update["family_ids"]) <= tuning
+            and len(update["selected_local_games"])
+            == len(set(update["selected_local_games"]))
+            == 16
+            and sorted(update["selected_local_games"]) in [list(range(16)), list(range(16, 32))]
+            and update["games"] == 16
+            and update["nodes_nonlending"] == recipe["limits"]["operation16_nodes"]
+            and len(update["delta"]) == 2
+            and all(type(v) is int and v in {-1, 1} for v in update["delta"])
+            and all(
+                type(update[k]) in (int, float) and math.isfinite(update[k]) and update[k] > 0
+                for k in ("a", "c")
+            ),
+            "typed complete SPSA trial",
+        )
+        operations.append(
+            dict(
+                kind="spsa",
+                stage=index,
+                families=update["family_ids"],
+                selected=update["selected_local_games"],
+                games=16,
+                nodes=update["nodes_nonlending"],
+            )
+        )
+    limits = recipe["limits"]
+    require(
+        all(
+            type(limits[k]) is int and limits[k] > 0
+            for k in (
+                "games",
+                "nodes",
+                "operation32_nodes",
+                "operation16_nodes",
+                "confirmation_games",
+                "confirmation_nodes",
+            )
+        )
+        and sum(op["games"] for op in operations) + limits["confirmation_games"] == limits["games"]
+        and sum(op["nodes"] for op in operations) + limits["confirmation_nodes"] == limits["nodes"],
+        "nonlending finite parameter campaign",
+    )
+    return operations
+
+
+def parameter_state(recipe, feedback):
+    """Resolve the next trial from a complete ordered prefix, no RNG or best-interim selection."""
+    operations = parameter_schedule(recipe)
+    require(isinstance(feedback, list) and len(feedback) <= len(operations), "feedback prefix")
+    baseline = recipe["baseline"]
+    integers = {k: baseline[k] for k in ["min_depth", "min_rank", "max_extra"]}
+    control = recipe["continuous"]
+    center = list(control["initial_center"])
+    trace = []
+
+    def physical(vector):
+        values = dict(baseline, **integers)
+        for key, scale, coordinate in zip(
+            control["coordinates"], control["scale"], vector, strict=True
+        ):
+            values[key] = baseline[key] + scale * coordinate
+        resolved_lmr_parameters(dict(lmr_parameters=values), "control")
+        return values
+
+    def arms(operation):
+        if operation["kind"] == "coordinate":
+            stage = recipe["integer_stages"][operation["stage"]]
+            current = physical([0.0, 0.0])
+            return [dict(current, **{stage["coordinate"]: operation["candidate"]}), current]
+        update = recipe["updates"][operation["stage"]]
+        return [
+            physical(
+                [
+                    max(
+                        -control["trial_box"],
+                        min(control["trial_box"], x + sign * update["c"] * delta),
+                    )
+                    for x, delta in zip(center, update["delta"], strict=True)
+                ]
+            )
+            for sign in [1, -1]
+        ]
+
+    for index, entry in enumerate(feedback):
+        operation = operations[index]
+        expected = arms(operation)
+        require(
+            entry["operation"] == index
+            and entry["games"] == operation["games"]
+            and entry["families"] == operation["families"]
+            and entry["UNKNOWN"] == 0
+            and type(entry["point"]) in (int, float)
+            and math.isfinite(entry["point"])
+            and 0 <= entry["point"] <= 1
+            and entry["point"] * entry["games"] * 2 % 1 == 0
+            and [entry["LEFT"], entry["RIGHT"]] == expected,
+            "complete frozen feedback/parameter correspondence; UNKNOWN stops dependency",
+        )
+        if operation["kind"] == "coordinate":
+            if index % 4 == 3:
+                stage = recipe["integer_stages"][operation["stage"]]
+                coordinate = stage["coordinate"]
+                scored = [
+                    (
+                        sum(
+                            feedback[j]["point"]
+                            for j in [index - 3 + 2 * candidate, index - 2 + 2 * candidate]
+                        )
+                        / 2,
+                        value,
+                    )
+                    for candidate, value in enumerate(stage["candidates"])
+                ]
+                eligible = [(point, value) for point, value in scored if point > 0.5]
+                before = integers[coordinate]
+                if eligible:
+                    integers[coordinate] = min(
+                        eligible, key=lambda pair: (-pair[0], abs(pair[1] - before), pair[1])
+                    )[1]
+                trace.append(
+                    dict(
+                        kind="coordinate",
+                        coordinate=coordinate,
+                        before=before,
+                        after=integers[coordinate],
+                        exploratory_points=scored,
+                    )
+                )
+        else:
+            update = recipe["updates"][operation["stage"]]
+            gradient = [(entry["point"] - 0.5) / (update["c"] * delta) for delta in update["delta"]]
+            raw = [update["a"] * g for g in gradient]
+            step = [max(-control["step_clip"], min(control["step_clip"], value)) for value in raw]
+            after = [
+                max(-control["center_box"], min(control["center_box"], x + change))
+                for x, change in zip(center, step, strict=True)
+            ]
+            trace.append(
+                dict(
+                    kind="spsa",
+                    update=operation["stage"],
+                    before=center,
+                    gradient=gradient,
+                    raw_step=raw,
+                    clipped_step=step,
+                    after=after,
+                    step_clips=sum(a != b for a, b in zip(raw, step, strict=True)),
+                    center_clips=sum(
+                        x + change != new
+                        for x, change, new in zip(center, step, after, strict=True)
+                    ),
+                )
+            )
+            center = after
+    if len(feedback) == len(operations):
+        return dict(
+            kind="terminal",
+            LEFT=physical(center),
+            RIGHT=baseline,
+            center=center,
+            integers=integers,
+            trace=trace,
+        )
+    operation = operations[len(feedback)]
+    left, right = arms(operation)
+    return dict(
+        kind="trial",
+        operation=operation,
+        LEFT=left,
+        RIGHT=right,
+        center=center,
+        integers=integers,
+        trace=trace,
+    )
+
+
+def parameter_history(settings, index):
+    """Read only bounded normal PASS manifests and their compact result summaries."""
+    control = settings["parameter_tuning"]
+    require(
+        type(control) is dict and set(control) == {"recipe", "prior"}, "typed parameter control"
+    )
+    recipe = document(control["recipe"])
+    operations = parameter_schedule(recipe)
+    prior = control["prior"]
+    require(
+        isinstance(prior, list)
+        and type(index) is int
+        and 0 <= index <= len(settings["runs"])
+        and len(prior) + len(settings["runs"]) <= len(operations),
+        "bounded normal parameter sequence",
+    )
+    references, selections = [], []
+    for position, declared in enumerate(prior):
+        require(
+            type(declared) is dict
+            and set(declared) == {"operation", "manifest", "settings", "selection_index"}
+            and type(declared["operation"]) is int
+            and declared["operation"] == position,
+            "declared original feedback operation",
+        )
+        references.append(declared["manifest"])
+        selections.append((declared["settings"], declared["selection_index"]))
+    for local in range(index):
+        references.append(
+            bound(Path(settings["output"]) / f"run-{local:03d}/operation/manifest.json")[0]
+        )
+        selections.append((None, local))
+    require(
+        len({ref["sha256"] for ref in references}) == len(references),
+        "no reused normal feedback operation",
+    )
+    result = []
+    configs = set()
+    for position, reference in enumerate(references):
+        manifest = document(reference)
+        require(
+            manifest["status"] == "PASS"
+            and manifest["cleanup_complete"] is True
+            and manifest["remaining"] == manifest["owed_finalizers"] == []
+            and manifest["primary"] is None
+            and manifest["secondary"] == [],
+            "normal completed parameter feedback",
+        )
+        data = manifest["data"]
+        operation = operations[position]
+        require(
+            data["status"] == "PASS"
+            and data["errors"] == []
+            and data["missing_local_games"] == []
+            and sorted(data["observed_local_games"]) == operation["selected"],
+            "complete original selected parameter slots",
+        )
+        # A normal PASS is necessary, but it must be the declared original RUN.
+        expected_settings_ref, selected_index = selections[position]
+        expected_settings = (
+            settings if expected_settings_ref is None else document(expected_settings_ref)
+        )
+        require(
+            type(selected_index) is int
+            and expected_settings["kind"] == "sequence"
+            and 0 <= selected_index < len(expected_settings["runs"]),
+            "original feedback selection index",
+        )
+        intent = document(manifest["intent"])
+        require(
+            intent["selection_index"] == selected_index
+            and (expected_settings_ref is None or intent["settings"] == expected_settings_ref)
+            and document(intent["settings"]) == expected_settings
+            and manifest["experiment"] == intent["experiment"]
+            and reference["path"]
+            == str(
+                Path(expected_settings["output"])
+                / f"run-{selected_index:03d}/operation/manifest.json"
+            ),
+            "normal feedback is the original settings/RUN/operation custody",
+        )
+        template = expected_settings["runs"][selected_index]
+        original_experiment = document(template["experiment"])
+        experiment = document(manifest["experiment"])
+        config = document(experiment["config"])
+        expected_config = document(original_experiment["config"])
+        require(
+            len(config["engines"]) == len(expected_config["engines"]) == 2,
+            "two original feedback engines",
+        )
+        for original, actual in zip(expected_config["engines"], config["engines"], strict=True):
+            original["lmr_parameters"] = actual["lmr_parameters"]
+        require(
+            config == expected_config,
+            "feedback preserves original clock/seed/model/book/history/colour; only five parameters may derive",
+        )
+        plan = document(template["approved_plan"])
+        batch = plan["batches"][original_experiment["batch"]]
+        batch["config"] = experiment["config"]
+        next(m for m in plan["matchups"] if m["id"] == batch["matchup"])["engines"] = config[
+            "engines"
+        ]
+        require(
+            document(intent["approved_plan"]) == plan,
+            "feedback preserves original Plan and selected batch",
+        )
+        expected_experiment = dict(original_experiment)
+        for field in ["config", "canonical_plan_sha256", "numerical_qualification"]:
+            expected_experiment[field] = experiment[field]
+        require(
+            experiment == expected_experiment
+            and experiment["canonical_plan_sha256"] == intent["approved_plan"]["sha256"],
+            "feedback preserves original Experiment outside normal typed derivation",
+        )
+        if "parameter_tuning" not in expected_settings:
+            selected_run(intent, experiment)
+        # Adaptive PASS already went through the unchanged normal selected_run
+        # owner. Re-reading its feedback here would recursively qualify prefixes;
+        # bind that immutable selection and its parameter-only science above.
+        require(experiment["config"]["sha256"] not in configs, "feedback config cannot be replayed")
+        configs.add(experiment["config"]["sha256"])
+        files = [ref for ref in data["files"] if Path(ref["path"]).name == "result.json"]
+        require(len(files) == 1, "one compact normal native result")
+        native = document(files[0])["report"]
+        summary = native["arena_summary"]
+        census = summary["census"]
+        require(
+            native["run_id"] == config["run_id"]
+            and native["all_workers_joined"] is True
+            and native["stopped"] is None
+            and census["planned_games"]
+            == census["started_games"]
+            == census["completed_games"]
+            == operation["games"]
+            and census["unknown_games"] == census["incomplete_pairs"] == 0
+            and census["complete_pairs"] * 2 == operation["games"],
+            "qualified feedback census, no refill",
+        )
+        selected = operation["selected"]
+        actual_families = [
+            config["arena"]["book"]["openings"][i // 2]["reference"]["settings"]["family_id"]
+            for i in selected[::2]
+        ]
+        require(
+            actual_families == operation["families"]
+            and config["arena"]["max_total_nodes"] == operation["nodes"]
+            and config["arena"]["game_selection"]["selected"] == selected
+            and config["arena"]["game_selection"]["excluded"]
+            == sorted(set(range(config["games"])) - set(selected)),
+            "recipe family/mask/nonlending budget",
+        )
+        point = summary["complete_pair_mean"]
+        require(
+            point == native["score"]
+            and len(summary["pairs"]) == len(actual_families)
+            and point == sum(p["score"] for p in summary["pairs"]) / len(actual_families),
+            "normal complete-family point",
+        )
+        budget = native["pump"]["arena_node_budget"]
+        require(
+            budget["cap"] == operation["nodes"]
+            and type(budget["charged_nodes_including_opaque_reservations"]) is int
+            and type(budget["remaining"]) is int
+            and 0 <= budget["charged_nodes_including_opaque_reservations"] <= budget["cap"]
+            and budget["charged_nodes_including_opaque_reservations"] + budget["remaining"]
+            == budget["cap"],
+            "actual parameter node debit",
+        )
+        result.append(
+            dict(
+                operation=position,
+                games=operation["games"],
+                families=actual_families,
+                UNKNOWN=0,
+                point=point,
+                LEFT=config["engines"][0]["lmr_parameters"],
+                RIGHT=config["engines"][1]["lmr_parameters"],
+                manifest=reference,
+                original_selection=dict(
+                    settings=intent["settings"],
+                    selection_index=selected_index,
+                    intent=manifest["intent"],
+                    original_RUN_experiment=template["experiment"],
+                    original_Plan=template["approved_plan"],
+                ),
+                charged_nodes=budget["charged_nodes_including_opaque_reservations"],
+            )
+        )
+    return recipe, result
+
+
+def parameter_trial(settings, index):
+    recipe, feedback = parameter_history(settings, index)
+    state = parameter_state(recipe, feedback)
+    require(state["kind"] == "trial", "no operation after terminal parameter center")
+    return recipe, state
+
+
+def prepare_parameter_run(settings, index, phase, spec, experiment):
+    """Materialize coefficients only into the existing ordinary RUN/Plan/numerical owners."""
+    _, state = parameter_trial(settings, index)
+    operation = state["operation"]
+    config = document(experiment["config"])
+    planned = document(experiment["schedule"])
+    selected = operation["selected"]
+    require(
+        config["arena"]["max_total_nodes"] == operation["nodes"]
+        and arena_game_ids(config) == selected
+        and [row["family_id"] for row in planned if row["local_game"] in selected[::2]]
+        == operation["families"],
+        "fixed parameter RUN family/mask/cap",
+    )
+    for engine, parameters in zip(config["engines"], [state["LEFT"], state["RIGHT"]], strict=True):
+        engine["lmr_parameters"] = parameters
+    new_json(phase / "config.json", config)
+    experiment["config"] = bound(phase / "config.json")[0]
+    plan = document(spec["approved_plan"])
+    plan["batches"][experiment["batch"]]["config"] = experiment["config"]
+    matchup = next(
+        m for m in plan["matchups"] if m["id"] == plan["batches"][experiment["batch"]]["matchup"]
+    )
+    matchup["engines"] = config["engines"]
+    new_json(phase / "plan.json", plan)
+    spec["approved_plan"] = bound(phase / "plan.json")[0]
+    experiment["canonical_plan_sha256"] = spec["approved_plan"]["sha256"]
+    prior = document(experiment["numerical_qualification"])
+    numerical = numerical_fields(experiment, accepted_build(experiment["build_manifest"]))
+    for key in ["original_evidence", "correspondence_only", "scope", "new_model_or_head_calls"]:
+        if key in prior:
+            numerical[key] = prior[key]
+    new_json(phase / "numerical.json", numerical)
+    experiment["numerical_qualification"] = bound(phase / "numerical.json")[0]
+    new_json(phase / "parameter-state.json", state)
+    arena_plan_check(experiment, plan)
+
+
 def prepare_selected_operation(settings_ref, kind, index):
     """Derive ordinary lifecycle parameters; never issue a per-operation admission."""
     settings = document(settings_ref)
@@ -7540,6 +8077,12 @@ def prepare_selected_operation(settings_ref, kind, index):
         "lmr_recipe" not in settings and "lmr_recipe" not in template,
         "lmr_recipe is retired; use static typed LMR parameters",
     )
+    if "parameter_tuning" in settings:
+        require(
+            kind == "run" and settings.get("arena_cohort") is None,
+            "adaptive parameters use the existing serial RUN owner",
+        )
+        parameter_trial(settings, index)
     spec = copy.deepcopy(template)
     if settings.get("arena_cohort") is not None:
         require(kind == "run", "cohort selects normal RUN sequences only")
@@ -7603,6 +8146,8 @@ def prepare_selected_operation(settings_ref, kind, index):
         dict.fromkeys([*spec.get("owned_outputs", []), str(phase), spec["TMP"]])
     )
     phase.mkdir(parents=True)
+    if "parameter_tuning" in settings:
+        prepare_parameter_run(settings, index, phase, spec, experiment)
     if kind != "run" and experiment.get("numerical_qualification") is not None:
         prior = document(original_experiment["numerical_qualification"])
         numerical = numerical_fields(experiment, accepted_build(experiment["build_manifest"]))
