@@ -26,6 +26,18 @@ pub enum Progress {
     Advanced,
     Complete,
 }
+/// Provider-independent request: the tree retains the genuine full history.
+#[derive(Debug, Clone, Copy)]
+pub enum ContextProgress {
+    NeedEvaluation { token: u64 },
+    Advanced,
+    Complete,
+}
+#[derive(Clone, Copy)]
+enum PolicyInput<'a> {
+    Sigma(&'a [f32; 136]),
+    Core(&'a [f32; 209]),
+}
 #[derive(Debug, Clone)]
 pub struct Edge {
     pub action: u16,
@@ -204,12 +216,33 @@ impl Search {
         }
     }
     pub fn advance(&mut self) -> Result<Progress, String> {
+        Ok(match self.advance_context()? {
+            ContextProgress::NeedEvaluation { token } => Progress::NeedInference {
+                token,
+                features: Box::new(features(self.pending_context(token)?.position())),
+            },
+            ContextProgress::Advanced => Progress::Advanced,
+            ContextProgress::Complete => Progress::Complete,
+        })
+    }
+    pub fn pending_context(&self, token: u64) -> Result<&SigmaContext, String> {
+        self.check()?;
+        let (i, expected) = self.pending.ok_or("NO_PENDING")?;
+        if token != expected {
+            return Err("STALE_TOKEN".into());
+        }
+        self.nodes[i]
+            .state
+            .as_ref()
+            .ok_or_else(|| "MISSING_STATE".into())
+    }
+    pub fn advance_context(&mut self) -> Result<ContextProgress, String> {
         self.check()?;
         if self.pending.is_some() {
             return Err("PENDING_DUPLICATE_ADVANCE".into());
         }
         if self.nodes[0].visits >= self.target {
-            return Ok(Progress::Complete);
+            return Ok(ContextProgress::Complete);
         }
         let mut i = 0;
         let mut depth = 0;
@@ -219,23 +252,20 @@ impl Search {
             if let Some(value) = term {
                 if i == 0 && self.nodes[0].visits == 0 {
                     self.target = 0;
-                    return Ok(Progress::Complete);
+                    return Ok(ContextProgress::Complete);
                 }
                 self.terminal_no_nn += 1;
                 self.backup(i, f64::from(value));
                 return Ok(if self.nodes[0].visits >= self.target {
-                    Progress::Complete
+                    ContextProgress::Complete
                 } else {
-                    Progress::Advanced
+                    ContextProgress::Advanced
                 });
             }
             if !self.nodes[i].expanded {
                 self.token = self.token.checked_add(1).ok_or("TOKEN_OVERFLOW")?;
                 self.pending = Some((i, self.token));
-                return Ok(Progress::NeedInference {
-                    token: self.token,
-                    features: Box::new(features(self.nodes[i].state.as_ref().unwrap().position())),
-                });
+                return Ok(ContextProgress::NeedEvaluation { token: self.token });
             }
             i = self.select(i)?;
             depth += 1;
@@ -247,19 +277,41 @@ impl Search {
         }
     }
     pub fn supply(&mut self, token: u64, logits: &[f32; 136], value: f32) -> Result<(), String> {
+        self.supply_policy(token, PolicyInput::Sigma(logits), value)
+    }
+    /// Absolute core ActionID209, with the same legal order/softmax/backup.
+    pub fn supply_core(
+        &mut self,
+        token: u64,
+        logits: &[f32; 209],
+        value: f32,
+    ) -> Result<(), String> {
+        self.supply_policy(token, PolicyInput::Core(logits), value)
+    }
+    fn supply_policy(
+        &mut self,
+        token: u64,
+        policy: PolicyInput<'_>,
+        value: f32,
+    ) -> Result<(), String> {
         self.check()?;
         let (i, expected) = self.pending.ok_or("NO_PENDING")?;
         if token != expected {
             return Err("STALE_TOKEN".into());
         }
-        if logits.iter().any(|v| !v.is_finite())
-            || !value.is_finite()
+        if match policy {
+            PolicyInput::Sigma(v) => v.iter().any(|x| !x.is_finite()),
+            PolicyInput::Core(v) => v.iter().any(|x| !x.is_finite()),
+        } || !value.is_finite()
             || !(-1.0..=1.0).contains(&value)
         {
             return Err("NETWORK_OUTPUT_INVALID".into());
         }
         let c = self.nodes[i].state.as_ref().unwrap();
-        let legal = c.sigma_legal_order();
+        let legal = match policy {
+            PolicyInput::Sigma(_) => c.sigma_legal_order(),
+            PolicyInput::Core(_) => c.legal_ids(),
+        };
         if legal.is_empty() {
             return Err("NO_LEGAL_NONTERMINAL".into());
         }
@@ -301,18 +353,24 @@ impl Search {
                 .try_reserve_exact(capacity - self.nodes.len())
                 .map_err(|_| "TREE_ALLOCATION")?;
         }
-        let permutation = p2_permutation();
+        let permutation = match policy {
+            PolicyInput::Sigma(_) => Some(p2_permutation()),
+            PolicyInput::Core(_) => None,
+        };
         let mapped: Vec<f64> = legal
             .iter()
             .map(|&a| {
-                let s = rust_to_sigma(position, a).expect("legal mapping") as usize;
-                f64::from(
-                    logits[if position.turn == 1 {
-                        permutation[s] as usize
-                    } else {
-                        s
-                    }],
-                )
+                f64::from(match policy {
+                    PolicyInput::Core(v) => v[usize::from(a)],
+                    PolicyInput::Sigma(v) => {
+                        let s = rust_to_sigma(position, a).expect("legal mapping") as usize;
+                        v[if position.turn == 1 {
+                            permutation.as_ref().unwrap()[s] as usize
+                        } else {
+                            s
+                        }]
+                    }
+                })
             })
             .collect();
         let max = mapped.iter().copied().fold(f64::NEG_INFINITY, f64::max);
@@ -503,3 +561,7 @@ mod research_threefold_tests {
         }
     }
 }
+
+#[cfg(test)]
+#[path = "sigma_policy_tests.rs"]
+mod sigma_policy_tests;

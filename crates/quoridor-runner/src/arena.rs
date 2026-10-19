@@ -326,7 +326,7 @@ impl ArenaConfig {
         }
         if c.engines
             .iter()
-            .any(|e| e.kind == "mcts" && e.time_ms.is_some())
+            .any(|e| matches!(e.kind.as_str(), "mcts" | "nnue_mcts") && e.time_ms.is_some())
             && (self.comparison != Comparison::WholeWallTime
                 || c.workers != 1
                 || c.active_games != 1
@@ -360,7 +360,7 @@ impl ArenaConfig {
         if self.comparison == Comparison::EvaluatorFixedDepth {
             let a = &c.engines[0];
             if c.engines.iter().enumerate().any(|(i, b)| {
-                b.kind == "mcts"
+                matches!(b.kind.as_str(), "mcts" | "nnue_mcts")
                     || b.time_ms.is_some()
                     || b.depth == 0
                     || a.depth != b.depth
@@ -407,7 +407,7 @@ impl ArenaConfig {
                             != crate::runtime::arena_lmr_parameters(b, Some(self)).ok())
                     || a.max_nodes != b.max_nodes
                     || a.simd != b.simd
-                    || b.kind == "mcts"
+                    || matches!(b.kind.as_str(), "mcts" | "nnue_mcts")
                     || self.search_artifact_sha256[0] != self.search_artifact_sha256[i]
             }) {
                 return Err(
@@ -436,7 +436,7 @@ impl ArenaConfig {
             && (c
                 .engines
                 .iter()
-                .any(|e| e.kind == "mcts" || e.time_ms.is_some())
+                .any(|e| matches!(e.kind.as_str(), "mcts" | "nnue_mcts") || e.time_ms.is_some())
                 || c.engines[0].depth != c.engines[1].depth
                 || c.engines[0].max_nodes != c.engines[1].max_nodes)
         {
@@ -903,7 +903,7 @@ fn validate_observations(
                 }
                 continue;
             }
-            if engine.kind == "mcts" {
+            if matches!(engine.kind.as_str(), "mcts" | "nnue_mcts") {
                 let receipt = obs.counters["authority_receipt_ns"]
                     .as_u64()
                     .ok_or("Sigma receipt missing")?;

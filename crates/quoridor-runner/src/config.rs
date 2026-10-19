@@ -186,6 +186,8 @@ pub(crate) fn deserialize_lmr_parameters<'de, D: serde::Deserializer<'de>>(
 #[serde(deny_unknown_fields)]
 pub struct Engine {
     #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub nnue_mcts: Option<crate::nnue_mcts::Config>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
     pub claustrophobia: Option<crate::claustrophobia::Config>,
     pub kind: String,
     #[serde(default)]
@@ -410,7 +412,13 @@ impl Config {
         if self.engines.iter().any(|e| {
             !matches!(
                 e.kind.as_str(),
-                "distance" | "nnue" | "nnue_quantized" | "mcts" | "sigma_value" | "claustrophobia"
+                "distance"
+                    | "nnue"
+                    | "nnue_quantized"
+                    | "mcts"
+                    | "nnue_mcts"
+                    | "sigma_value"
+                    | "claustrophobia"
             ) || e.depth == 0
                 || e.max_nodes == 0
                 || !e.distance_a.is_finite()
@@ -420,6 +428,36 @@ impl Config {
             return Err("invalid engine".into());
         }
         for engine in &self.engines {
+            if engine.kind == "nnue_mcts" {
+                engine
+                    .nnue_mcts
+                    .as_ref()
+                    .ok_or("explicit NNUE MCTS prior/row limit")?
+                    .validate()?;
+                if !evaluation
+                    || self
+                        .arena
+                        .as_ref()
+                        .is_none_or(|a| a.comparison != crate::arena::Comparison::WholeWallTime)
+                    || engine.model.is_none()
+                    || engine.time_ms.is_none_or(|n| n == 0)
+                    || engine.lmr
+                    || engine.lmr_method.is_some()
+                    || engine.lmr_parameters.is_some()
+                    || engine.ordering_profile.is_some()
+                    || engine.zero_stock_safe_race == Some(true)
+                    || engine.zero_stock_safe_race_method.is_some()
+                    || engine.claustrophobia.is_some()
+                    || engine.depth != depth()
+                    || engine.max_nodes != nodes()
+                    || engine.distance_a != 0.
+                    || engine.distance_b != distance_b()
+                {
+                    return Err("NNUE MCTS requires managed whole-wall arena/model; no unused alpha settings".into());
+                }
+            } else if engine.nnue_mcts.is_some() {
+                return Err("unused NNUE MCTS settings".into());
+            }
             if engine.kind == "claustrophobia" {
                 let settings = engine
                     .claustrophobia
@@ -481,6 +519,15 @@ impl Config {
             return Err(
                 "logical_row_limit requires Sigma static-value or common MCTS inference".into(),
             );
+        }
+        if self.engines.iter().any(|e| e.kind == "nnue_mcts")
+            && self.inference.is_some()
+            && !self
+                .engines
+                .iter()
+                .any(|e| matches!(e.kind.as_str(), "mcts" | "sigma_value"))
+        {
+            return Err("unused inference settings for NNUE MCTS".into());
         }
         if self.engines.iter().any(|e| e.kind == "mcts") && self.inference.is_none() {
             return Err("MCTS needs an explicit inference backend".into());

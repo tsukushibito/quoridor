@@ -29,6 +29,11 @@ pub use lmr_observation::{
     LmrObservation, LmrStage, LmrTrialResult, LmrTrialStage, LmrTrialTrace, LmrTtFacts,
 };
 
+#[cfg(feature = "research-diagnostics")]
+#[path = "neighbour_opportunity.rs"]
+mod neighbour_opportunity;
+#[cfg(feature = "research-diagnostics")]
+pub use neighbour_opportunity::{NeighbourOpportunity, NeighbourOpportunityMode};
 #[path = "move_ordering.rs"]
 mod move_ordering;
 #[path = "static_geometry.rs"]
@@ -1331,7 +1336,12 @@ impl From<RulesError> for Interrupted {
     }
 }
 type NodeResult<T> = std::result::Result<T, Interrupted>;
-struct Search<'a, const OBSERVE: bool = false, const TRACE: bool = false> {
+struct Search<
+    'a,
+    const OBSERVE: bool = false,
+    const TRACE: bool = false,
+    const OPPORTUNITY: bool = false,
+> {
     eval: &'a dyn StaticEvaluator,
     score_domain: ScoreDomain,
     eval_scratch: EvalScratch,
@@ -1359,8 +1369,12 @@ struct Search<'a, const OBSERVE: bool = false, const TRACE: bool = false> {
     lmr_observation: Option<&'a mut LmrObservation>,
     #[cfg(feature = "research-diagnostics")]
     trial_trace: Option<&'a mut LmrTrialTrace>,
+    #[cfg(feature = "research-diagnostics")]
+    opportunity: Option<&'a mut NeighbourOpportunity>,
 }
-impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
+impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool>
+    Search<'_, OBSERVE, TRACE, OPPORTUNITY>
+{
     fn key(&mut self, c: &SigmaContext) -> Key {
         let key = Key::of(c);
         self.stats.tt_key_builds += 1;
@@ -1376,12 +1390,16 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
         }
         Ok(())
     }
-    fn enter(&mut self) -> NodeResult<()> {
+    fn enter(&mut self, _c: &SigmaContext) -> NodeResult<()> {
         self.control()?;
         if self.stats.nodes >= self.limits.max_nodes {
             return Err(Interrupted::Stop(StopReason::NodeLimit));
         }
         self.stats.nodes += 1;
+        #[cfg(feature = "research-diagnostics")]
+        if OPPORTUNITY && let Some(o) = self.opportunity.as_deref_mut() {
+            o.visit(_c.position());
+        }
         Ok(())
     }
     fn ordered(
@@ -1391,8 +1409,19 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
         pv: Option<u16>,
         ply: usize,
         ids: Vec<u16>,
+        #[cfg(feature = "research-diagnostics")] root_observation: Option<
+            &mut Option<neighbour_opportunity::RootOpportunity>,
+        >,
     ) -> NodeResult<Vec<u16>> {
-        self.eager_ordered(c, accumulator, pv, ply, ids)
+        self.eager_ordered(
+            c,
+            accumulator,
+            pv,
+            ply,
+            ids,
+            #[cfg(feature = "research-diagnostics")]
+            root_observation,
+        )
     }
 
     /// Profile differences stop at score production. Both signed/no-policy
@@ -1413,6 +1442,9 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
         pv: Option<u16>,
         ply: usize,
         mut ids: Vec<u16>,
+        #[cfg(feature = "research-diagnostics")] root_observation: Option<
+            &mut Option<neighbour_opportunity::RootOpportunity>,
+        >,
     ) -> NodeResult<Vec<u16>> {
         if self.ordering_diagnostics {
             self.stats.ordering.observe_preparation(ids.len());
@@ -1438,6 +1470,26 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
             self.stats.ordering.observe_sort(ids.len());
         }
         if self.shared_signed_ordering() {
+            #[cfg(feature = "research-diagnostics")]
+            if OPPORTUNITY {
+                let keys = ranking.signed_keys(&ids).expect("Control signed keys");
+                let observer = self.opportunity.as_deref_mut().expect("diagnostic owner");
+                let node = observer.prepare(c.position(), &ids, &keys, true);
+                if observer.mode.expect("diagnostic mode published") == NeighbourOpportunityMode::On
+                {
+                    ids.sort_unstable_by(|&a, &b| {
+                        neighbour_opportunity::compare(&keys, node.parent, a, b)
+                    });
+                } else {
+                    ids.sort_unstable_by_key(|&a| keys[a as usize]);
+                }
+                if let Some(out) = root_observation {
+                    *out = Some(neighbour_opportunity::RootOpportunity { node, keys });
+                }
+            } else {
+                ranking.sort_signed_keys(&mut ids);
+            }
+            #[cfg(not(feature = "research-diagnostics"))]
             ranking.sort_signed_keys(&mut ids);
         } else {
             ranking.sort(&mut ids);
@@ -1462,7 +1514,15 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
         ids: Vec<u16>,
     ) -> NodeResult<move_ordering::PreparedMoves> {
         if !self.shared_signed_ordering() {
-            let ids = self.eager_ordered(c, accumulator, pv, ply, ids)?;
+            let ids = self.eager_ordered(
+                c,
+                accumulator,
+                pv,
+                ply,
+                ids,
+                #[cfg(feature = "research-diagnostics")]
+                None,
+            )?;
             return Ok(move_ordering::PreparedMoves::eager(ids));
         }
         if self.ordering_diagnostics {
@@ -1690,12 +1750,17 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
                     && depth > 0
                     && c.position().walls_remaining == [0, 0]
                 {
-                    self.enter()?;
+                    self.enter(c)?;
                     entered = true;
                     self.stats.safe_race_stock0_opportunities += 1;
                     if let Some(proof) = self.safe_race_value(c, a.as_ref(), parent, depth)? {
                         self.control()?;
                         self.stats.safe_race_proven_leaves += 1;
+                        #[cfg(feature = "research-diagnostics")]
+                        if OPPORTUNITY && let Some(o) = self.opportunity.as_deref_mut() {
+                            o.by_stock[NeighbourOpportunity::stock(c.position())].proof_returns +=
+                                1;
+                        }
                         match proof.origin {
                             SafeRaceOrigin::Tt => self.stats.safe_race_tt_returns += 1,
                             SafeRaceOrigin::Manhattan => self.stats.safe_race_m_returns += 1,
@@ -1715,7 +1780,7 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
                     // This branch replaces negamax entry, not its caller's make,
                     // fingerprint, path or canonical undo. Count/control once.
                     if !entered {
-                        self.enter()?;
+                        self.enter(c)?;
                     }
                     let value = self.zero_stock_approx_value(c, a.as_ref(), parent, depth)?;
                     self.control()?;
@@ -2108,7 +2173,7 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
         beta: f32,
         ply: usize,
     ) -> NodeResult<f32> {
-        self.enter()?;
+        self.enter(c)?;
         self.negamax_entered(c, a, depth, alpha, beta, ply)
     }
 
@@ -2123,11 +2188,19 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
     ) -> NodeResult<f32> {
         if let Some(v) = c.terminal_value() {
             self.stats.terminal += 1;
+            #[cfg(feature = "research-diagnostics")]
+            if OPPORTUNITY && let Some(o) = self.opportunity.as_deref_mut() {
+                o.by_stock[NeighbourOpportunity::stock(c.position())].terminal_returns += 1;
+            }
             self.control()?;
             return Ok(v * self.score_domain.terminal_utility());
         }
         if depth == 0 {
             self.stats.evaluations += 1;
+            #[cfg(feature = "research-diagnostics")]
+            if OPPORTUNITY && let Some(o) = self.opportunity.as_deref_mut() {
+                o.by_stock[NeighbourOpportunity::stock(c.position())].evaluation_leaves += 1;
+            }
             let value = match self.residual_head.as_mut() {
                 Some((owner, scratch)) => owner.evaluate_head(a, Some(scratch))?,
                 None => self
@@ -2171,6 +2244,11 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
                     match bound {
                         Bound::Exact => {
                             self.stats.tt_cutoffs += 1;
+                            #[cfg(feature = "research-diagnostics")]
+                            if OPPORTUNITY && let Some(o) = self.opportunity.as_deref_mut() {
+                                o.by_stock[NeighbourOpportunity::stock(c.position())]
+                                    .numeric_tt_returns += 1;
+                            }
                             return Ok(value);
                         }
                         Bound::Lower => alpha = alpha.max(value),
@@ -2181,6 +2259,11 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
                     }
                     if alpha >= beta {
                         self.stats.tt_cutoffs += 1;
+                        #[cfg(feature = "research-diagnostics")]
+                        if OPPORTUNITY && let Some(o) = self.opportunity.as_deref_mut() {
+                            o.by_stock[NeighbourOpportunity::stock(c.position())]
+                                .numeric_tt_returns += 1;
+                        }
                         return Ok(value);
                     }
                 } else {
@@ -2206,11 +2289,23 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
         // Ordering diagnostics cover only actions actually prepared below.
         // A TT-only cutoff still has one returned child/cutoff event, but no
         // scored node or sibling scores; OFF adds no observation work.
+        #[cfg(feature = "research-diagnostics")]
+        let mut opportunity_node = None;
         let mut moves = if first_tt.is_some() {
             deferred = Some(legal);
             None
         } else {
-            Some(self.prepared_moves(c, a, tt_move, ply, legal)?)
+            let prepared = self.prepared_moves(c, a, tt_move, ply, legal)?;
+            #[cfg(feature = "research-diagnostics")]
+            if OPPORTUNITY && let Some((ids, keys)) = prepared.opportunity_keys() {
+                opportunity_node = Some(
+                    self.opportunity
+                        .as_deref_mut()
+                        .expect("diagnostic owner")
+                        .prepare(c.position(), ids, keys, true),
+                );
+            }
+            Some(prepared)
         };
         if let Some(work) = node_work.as_mut() {
             work.prepared_size = moves.as_ref().map(|moves| moves.len());
@@ -2233,6 +2328,10 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
         let mut i = 0usize;
         loop {
             let action = if let Some(action) = first_tt.take() {
+                #[cfg(feature = "research-diagnostics")]
+                if OPPORTUNITY && let Some(o) = self.opportunity.as_deref_mut() {
+                    o.by_stock[NeighbourOpportunity::stock(c.position())].tt_first_pulls += 1;
+                }
                 if let Some(work) = node_work.as_mut() {
                     work.read(false, &mut self.stats.ordering);
                 }
@@ -2246,6 +2345,17 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
                         break;
                     }
                     moves = Some(self.prepared_moves(c, a, None, ply, remaining)?);
+                    #[cfg(feature = "research-diagnostics")]
+                    if OPPORTUNITY
+                        && let Some((ids, keys)) = moves.as_ref().and_then(|m| m.opportunity_keys())
+                    {
+                        opportunity_node = Some(
+                            self.opportunity
+                                .as_deref_mut()
+                                .expect("diagnostic owner")
+                                .prepare(c.position(), ids, keys, false),
+                        );
+                    }
                     if let Some(work) = node_work.as_mut() {
                         work.prepared_size = moves.as_ref().map(|moves| moves.len());
                         work.sorted_size = moves.as_ref().and_then(|moves| moves.sorted_size());
@@ -2255,13 +2365,41 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
                 let Some(moves) = moves.as_mut() else {
                     break;
                 };
-                let Some((action, kind)) = moves.next(if self.ordering_diagnostics {
+                let stats = if self.ordering_diagnostics {
                     Some(&mut self.stats.ordering)
                 } else {
                     None
-                }) else {
+                };
+                #[cfg(feature = "research-diagnostics")]
+                let pulled = if OPPORTUNITY {
+                    let node = opportunity_node.as_ref().expect("prepared diagnostic node");
+                    let mode = self
+                        .opportunity
+                        .as_ref()
+                        .and_then(|o| o.mode)
+                        .expect("diagnostic mode");
+                    moves.next_opportunity(
+                        stats,
+                        (mode == NeighbourOpportunityMode::On).then_some(node.parent),
+                    )
+                } else {
+                    moves.next(stats)
+                };
+                #[cfg(not(feature = "research-diagnostics"))]
+                let pulled = moves.next(stats);
+                let Some((action, kind)) = pulled else {
                     break;
                 };
+                #[cfg(feature = "research-diagnostics")]
+                if OPPORTUNITY && let Some(node) = opportunity_node.as_mut() {
+                    let (ids, keys) = moves.opportunity_keys().expect("frozen signed keys");
+                    node.pulled(
+                        ids,
+                        keys,
+                        action,
+                        self.opportunity.as_deref_mut().expect("diagnostic owner"),
+                    );
+                }
                 if let Some(work) = node_work.as_mut() {
                     if work.sorted_size.is_none() {
                         work.sorted_size = moves.sorted_size();
@@ -2360,6 +2498,15 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
             alpha = alpha.max(v);
             if alpha >= beta {
                 self.stats.cutoffs += 1;
+                #[cfg(feature = "research-diagnostics")]
+                if OPPORTUNITY
+                    && moves.is_none()
+                    && deferred.is_some()
+                    && let Some(o) = self.opportunity.as_deref_mut()
+                {
+                    o.by_stock[NeighbourOpportunity::stock(c.position())].tt_first_only_cutoffs +=
+                        1;
+                }
                 if let Some(k) = self.killers.get_mut(ply)
                     && k[0] != Some(action)
                 {
@@ -2488,7 +2635,7 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
         depth: u16,
         action: u16,
     ) -> NodeResult<(u16, f32)> {
-        self.enter()?;
+        self.enter(c)?;
         if !c.legal_ids().contains(&action) {
             return Err(Interrupted::Error(SearchError::Root(
                 "illegal forced root action".into(),
@@ -2514,7 +2661,7 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
         depth: u16,
         previous: Option<u16>,
     ) -> NodeResult<(u16, f32)> {
-        self.enter()?;
+        self.enter(c)?;
         let mut previous = previous;
         let mut legal = None;
         if self.limits.use_tt {
@@ -2531,6 +2678,11 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
                     if context_matches && stored_depth == depth && matches!(bound, Bound::Exact) {
                         self.stats.tt_usable_depth += 1;
                         self.stats.tt_cutoffs += 1;
+                        #[cfg(feature = "research-diagnostics")]
+                        if OPPORTUNITY && let Some(o) = self.opportunity.as_deref_mut() {
+                            o.by_stock[NeighbourOpportunity::stock(c.position())]
+                                .numeric_tt_returns += 1;
+                        }
                         return Ok((best.unwrap(), value));
                     }
                     self.stats.tt_order_only += 1;
@@ -2543,14 +2695,37 @@ impl<const OBSERVE: bool, const TRACE: bool> Search<'_, OBSERVE, TRACE> {
         let mut node_work = self
             .ordering_diagnostics
             .then(|| OrderingNodeWork::start(&mut self.stats.ordering, true));
-        let moves = self.ordered(c, a, previous, 0, legal.unwrap_or_else(|| c.legal_ids()))?;
+        #[cfg(feature = "research-diagnostics")]
+        let mut opportunity_root = None;
+        let moves = self.ordered(
+            c,
+            a,
+            previous,
+            0,
+            legal.unwrap_or_else(|| c.legal_ids()),
+            #[cfg(feature = "research-diagnostics")]
+            if OPPORTUNITY {
+                Some(&mut opportunity_root)
+            } else {
+                None
+            },
+        )?;
         if let Some(work) = node_work.as_mut() {
             work.sorted_size = Some(moves.len());
         }
         self.control()?;
         let mut value = f32::NEG_INFINITY;
         let mut best = None;
-        for (i, action) in moves.into_iter().enumerate() {
+        for (i, &action) in moves.iter().enumerate() {
+            #[cfg(feature = "research-diagnostics")]
+            if OPPORTUNITY && let Some(root) = opportunity_root.as_mut() {
+                root.node.pulled(
+                    &moves,
+                    &root.keys,
+                    action,
+                    self.opportunity.as_deref_mut().expect("diagnostic owner"),
+                );
+            }
             if let Some(work) = node_work.as_mut() {
                 work.read(true, &mut self.stats.ordering);
             }
@@ -2747,6 +2922,8 @@ enum SessionMethod {
     Plain,
     SignedControl,
     Profile(OrderingProfile),
+    #[cfg(feature = "research-diagnostics")]
+    Opportunity(NeighbourOpportunityMode),
 }
 fn append_lmr_method(namespace: &mut SearchNamespace, method: LmrMethod) {
     namespace.selectivity.push(':');
@@ -2759,6 +2936,11 @@ fn append_zero_stock_approx_method(namespace: &mut SearchNamespace, method: Zero
 impl SessionMethod {
     fn namespace(self, mut namespace: SearchNamespace, lmr: Option<LmrMethod>) -> SearchNamespace {
         match self {
+            #[cfg(feature = "research-diagnostics")]
+            Self::Opportunity(mode) => {
+                namespace = Self::Profile(OrderingProfile::Control).namespace(namespace, None);
+                mode.qualify(&mut namespace);
+            }
             Self::Plain => {}
             Self::SignedControl => namespace.selectivity.push_str(":signed-control-goal-first"),
             Self::Profile(profile) => {
@@ -3265,6 +3447,12 @@ impl SearchSession {
         limits: &SearchLimits,
         cancel: &AtomicBool,
     ) -> Result<SearchResult> {
+        #[cfg(feature = "research-diagnostics")]
+        if matches!(self.method, SessionMethod::Opportunity(_)) {
+            return Err(SearchError::Limits(
+                "diagnostic session needs explicit observation entry".into(),
+            ));
+        }
         let root_walls = root
             .position()
             .walls_remaining
@@ -3325,6 +3513,12 @@ impl SearchSession {
         cancel: &AtomicBool,
         mut invocation: SearchInvocation<'a>,
     ) -> Result<SearchResult> {
+        #[cfg(feature = "research-diagnostics")]
+        if matches!(self.method, SessionMethod::Opportunity(_)) {
+            return Err(SearchError::Limits(
+                "diagnostic session needs explicit observation entry".into(),
+            ));
+        }
         let root_walls = root
             .position()
             .walls_remaining
@@ -3415,6 +3609,30 @@ fn search_in_table<const OBSERVE: bool, const TRACE: bool>(
     invocation: SearchInvocation<'_>,
     table_and_domain: SearchTableAndDomain<'_, '_>,
 ) -> Result<SearchResult> {
+    search_in_table_observed::<OBSERVE, TRACE, false>(
+        root,
+        evaluator,
+        limits,
+        cancel,
+        orderer,
+        invocation,
+        table_and_domain,
+        #[cfg(feature = "research-diagnostics")]
+        None,
+    )
+}
+
+#[allow(clippy::too_many_arguments)]
+fn search_in_table_observed<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool>(
+    root: &SigmaContext,
+    evaluator: &dyn StaticEvaluator,
+    limits: &SearchLimits,
+    cancel: &AtomicBool,
+    orderer: Option<&dyn MoveOrderer>,
+    invocation: SearchInvocation<'_>,
+    table_and_domain: SearchTableAndDomain<'_, '_>,
+    #[cfg(feature = "research-diagnostics")] mut opportunity: Option<&mut NeighbourOpportunity>,
+) -> Result<SearchResult> {
     let (
         table,
         score_domain,
@@ -3433,6 +3651,14 @@ fn search_in_table<const OBSERVE: bool, const TRACE: bool>(
     {
         return Err(SearchError::Limits(
             "internal trial/trace ownership mismatch".into(),
+        ));
+    }
+    #[cfg(feature = "research-diagnostics")]
+    if OPPORTUNITY
+        && (OBSERVE || TRACE || opportunity.is_none() || invocation.forced_root.is_some())
+    {
+        return Err(SearchError::Limits(
+            "opportunity observation ownership mismatch".into(),
         ));
     }
     let start = Instant::now();
@@ -3497,7 +3723,12 @@ fn search_in_table<const OBSERVE: bool, const TRACE: bool>(
         .map(u16::from)
         .sum();
     let residual_head = invocation.residual_head;
-    let mut state = Search::<OBSERVE, TRACE> {
+    #[cfg(feature = "research-diagnostics")]
+    if OPPORTUNITY && let Some(o) = opportunity.as_deref_mut() {
+        o.published = true;
+        o.root_stock = Some(NeighbourOpportunity::stock(root.position()) as u8);
+    }
+    let mut state = Search::<OBSERVE, TRACE, OPPORTUNITY> {
         eval: evaluator,
         score_domain,
         // Only the opt-in head input persists. Geometry/counters remain fresh
@@ -3562,6 +3793,8 @@ fn search_in_table<const OBSERVE: bool, const TRACE: bool>(
         lmr_observation: invocation.observation,
         #[cfg(feature = "research-diagnostics")]
         trial_trace: invocation.trial_trace,
+        #[cfg(feature = "research-diagnostics")]
+        opportunity,
     };
     #[cfg(feature = "research-diagnostics")]
     if let Some(cold) = &invocation.trial {
@@ -3679,6 +3912,11 @@ fn search_in_table<const OBSERVE: bool, const TRACE: bool>(
                 !state.path.is_empty()
             }
         };
+    #[cfg(feature = "research-diagnostics")]
+    if OPPORTUNITY && let Some(o) = state.opportunity.as_deref_mut() {
+        o.parent_restored = Some(!parent_not_restored);
+        o.final_stats = Some(state.stats.clone());
+    }
     if parent_not_restored {
         #[cfg(feature = "research-diagnostics")]
         if TRACE && let Some(trace) = state.trial_trace.as_deref_mut() {
@@ -4026,6 +4264,8 @@ mod persistent_tt_tests {
                 lmr_observation: None,
                 #[cfg(feature = "research-diagnostics")]
                 trial_trace: None,
+                #[cfg(feature = "research-diagnostics")]
+                opportunity: None,
             };
             let mut child = root.clone();
             let value = state
@@ -4717,6 +4957,8 @@ mod child_buffer_tests {
                 lmr_observation: None,
                 #[cfg(feature = "research-diagnostics")]
                 trial_trace: None,
+                #[cfg(feature = "research-diagnostics")]
+                opportunity: None,
             };
             let result = state.child(
                 &mut c,

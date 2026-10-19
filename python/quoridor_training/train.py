@@ -376,6 +376,54 @@ def export(model, config, statistics, distance_fit, path):
     return path / "manifest.json"
 
 
+def export_policy_head(model, *, shared_fingerprint, path):
+    """Export only an explicitly attached new head beside the unchanged value artifact.
+
+    shared_fingerprint comes from the native loaded value identity. Native intake
+    recomputes that identity and refuses mismatches; a path/old descriptor is not
+    treated as a model fingerprint. No public fit automatically enables a head.
+    """
+    import numpy as np
+
+    if not hasattr(model, "policy") or model.policy_evidence not in (
+        "synthetic_untrained",
+        "learned",
+    ):
+        raise ValueError("explicit policy head/evidence")
+    if (
+        not isinstance(shared_fingerprint, str)
+        or len(shared_fingerprint) != 64
+        or any(c not in "0123456789abcdef" for c in shared_fingerprint)
+    ):
+        raise ValueError("actual native shared fingerprint required")
+    path = Path(path)
+    path.mkdir(exist_ok=False)
+    arrays = [
+        p.detach().cpu().numpy().astype("<f4").reshape(-1)
+        for p in (model.policy.weight, model.policy.bias)
+    ]
+    vector = np.concatenate(arrays)
+    if vector.size != 209 * (model.h.out_features + 1) or not np.isfinite(vector).all():
+        raise ValueError("policy209 layout/finite")
+    weights = path / "policy.f32"
+    vector.tofile(weights)
+    manifest = {
+        "schema": "quoridor-nnue-policy209-v1",
+        "action_order": "absolute-core-action-id209",
+        "head_coordinates": "QF1-STM-rotate180",
+        "reflection": "core-action-id209-left-right-v1",
+        "value_perspective": "side-to-move",
+        "evidence": model.policy_evidence,
+        "shared_fingerprint": shared_fingerprint,
+        "hidden_width": model.h.out_features,
+        "weights": weights.name,
+        "weights_sha256": sha(weights),
+        "weights_bytes": weights.stat().st_size,
+    }
+    write(path / "manifest.json", manifest)
+    return path / "manifest.json"
+
+
 def configure_framework(cfg):
     """The existing FP32 deterministic CPU/CUDA setup, shared by fit consumers."""
     os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")

@@ -599,8 +599,11 @@ pub(crate) fn arena_safe_race(
     engine: &Engine,
     arena: Option<&crate::arena::ArenaConfig>,
 ) -> alphabeta::Result<(bool, alphabeta::ZeroStockSafeRaceMethod)> {
-    let research_alpha = !matches!(engine.kind.as_str(), "mcts" | "claustrophobia")
-        && arena.is_some_and(|a| a.comparison != crate::arena::Comparison::Functional);
+    let research_alpha = !matches!(
+        engine.kind.as_str(),
+        "mcts" | "nnue_mcts" | "claustrophobia"
+    ) && arena
+        .is_some_and(|a| a.comparison != crate::arena::Comparison::Functional);
     let default_method = if research_alpha {
         alphabeta::RESEARCH_SAFE_RACE_METHOD
     } else {
@@ -1114,6 +1117,7 @@ struct InitializedEvaluator {
     evaluator: Option<Arc<dyn StaticEvaluator + Send + Sync>>,
     identity: EvaluatorIdentity,
     sigma_value: Option<Arc<crate::sigma_evaluator::SigmaValueEvaluator>>,
+    nnue_mcts: Option<Arc<std::sync::Mutex<crate::nnue_mcts::Provider>>>,
 }
 pub(crate) fn sigma_value_evaluator(
     i: &crate::config::Inference,
@@ -1149,6 +1153,7 @@ fn float_identity(model: &quoridor_nnue::Model) -> EvaluatorIdentity {
 }
 fn evaluator(e: &Engine, config: &Config) -> Result<InitializedEvaluator> {
     let mut sigma_value = None;
+    let mut nnue_mcts = None;
     let (evaluator, identity): (Option<Arc<dyn StaticEvaluator + Send + Sync>>, _) = match e
         .kind
         .as_str()
@@ -1166,6 +1171,28 @@ fn evaluator(e: &Engine, config: &Config) -> Result<InitializedEvaluator> {
                     kind: "sigma-onnx".into(),
                     content_sha256: sha.clone(),
                     row_identity: sha,
+                },
+            )
+        }
+        "nnue_mcts" => {
+            let provider = crate::nnue_mcts::Provider::load(
+                e.model.as_deref().ok_or("NNUE MCTS model")?,
+                e.nnue_mcts.as_ref().ok_or("NNUE MCTS settings")?,
+                e.simd,
+            )?;
+            let row_identity = provider.identity().to_owned();
+            let content_sha256 = row_identity
+                .rsplit(':')
+                .next()
+                .ok_or("NNUE MCTS identity")?
+                .to_owned();
+            nnue_mcts = Some(Arc::new(std::sync::Mutex::new(provider)));
+            (
+                None,
+                EvaluatorIdentity {
+                    kind: "nnue-mcts-core209".into(),
+                    content_sha256,
+                    row_identity,
                 },
             )
         }
@@ -1263,6 +1290,7 @@ fn evaluator(e: &Engine, config: &Config) -> Result<InitializedEvaluator> {
         evaluator,
         identity,
         sigma_value,
+        nnue_mcts,
     })
 }
 fn planned(config: &Config) -> Result<Vec<Planned>> {
@@ -1722,6 +1750,9 @@ fn record_sigma_turn(
         || config.pause_file.as_ref().is_some_and(|p| p.exists());
     let checked = Instant::now();
     let mut decision = sigma_receipt_decision(started.checked_add(duration), &receipt, cancelled);
+    if config.engines[engine_index].kind == "nnue_mcts" && selected.is_none() {
+        decision = Err(crate::arena_clock::Failure::NoCompletedSimulation);
+    }
     if !cancelled && call.error.is_some() {
         decision = Err(crate::arena_clock::Failure::EngineError);
     }
@@ -2545,7 +2576,7 @@ impl EvaluationWorkers {
                                 "Sigma counters unavailable:{error}"
                             ));
                         }
-                        if e.kind == "mcts" {
+                        if matches!(e.kind.as_str(), "mcts" | "nnue_mcts") {
                             let mut sent_at = None;
                             let publish =
                                 |snapshot: &quoridor_ai::sigma_mcts::Snapshot,
@@ -2571,50 +2602,110 @@ impl EvaluationWorkers {
                                         EvaluationUpdate::Sigma(notification, chosen_rng),
                                     ));
                                 };
-                            let call = crate::sigma_clock::run(
-                                &turn.root,
-                                crate::sigma_clock::Budget {
-                                    started: turn.started,
-                                    duration: Duration::from_millis(e.time_ms.unwrap()),
-                                    reserve: Duration::from_millis(
-                                        c.arena.as_ref().unwrap().return_reserve_ms,
-                                    ),
-                                    generation: turn.id.generation,
-                                    simulations: c.simulations,
-                                    limits: Limits {
-                                        max_nodes: c.mcts_max_nodes,
-                                        max_depth: 200,
-                                        max_bytes: c.mcts_max_bytes,
+                            let nnue = e.kind == "nnue_mcts";
+                            let mut nnue_owner = match &evaluator.nnue_mcts {
+                                Some(p) => match p.lock() {
+                                    Ok(p) => Some(p),
+                                    Err(_) => {
+                                        return EvaluationResult::Error(
+                                            "NNUE provider poisoned".into(),
+                                        );
+                                    }
+                                },
+                                None => None,
+                            };
+                            let call = if nnue {
+                                let provider = nnue_owner.as_mut().unwrap();
+                                let before = provider.work();
+                                let mut call = crate::sigma_clock::run_nnue(
+                                    &turn.root,
+                                    crate::sigma_clock::Budget {
+                                        started: turn.started,
+                                        duration: Duration::from_millis(e.time_ms.unwrap()),
+                                        reserve: Duration::from_millis(
+                                            c.arena.as_ref().unwrap().return_reserve_ms,
+                                        ),
+                                        generation: turn.id.generation,
+                                        simulations: c.simulations,
+                                        limits: Limits {
+                                            max_nodes: c.mcts_max_nodes,
+                                            max_depth: 200,
+                                            max_bytes: c.mcts_max_bytes,
+                                        },
                                     },
-                                },
-                                || cancelled.load(Ordering::Relaxed),
-                                |_, input, prior| {
-                                    if prior.completed_at != sent_at
-                                        && let Some(snapshot) = &prior.completed
-                                    {
-                                        publish(snapshot, &turn.rng, prior.completed_at);
-                                        sent_at = prior.completed_at;
-                                    }
-                                    requests += 1;
-                                    let start = Instant::now();
-                                    // Exactly one synchronous row on this AI
-                                    // thread. ORT uses intra/inter1,sequential.
-                                    let output = backend.as_mut().unwrap().infer(&[*input]);
-                                    inference_seconds += start.elapsed().as_secs_f64();
-                                    callbacks += 1;
-                                    if let Ok(rows) = &output {
-                                        outputs += rows.len() as u64;
-                                    }
-                                    let mut rows = output.map_err(|e| format!("inference:{e}"))?;
-                                    if rows.len() != 1 {
-                                        return Err("backend_output_shape".into());
-                                    }
-                                    Ok(crate::sigma_clock::Reply {
-                                        output: rows.pop().unwrap(),
-                                        decision_notified: turn.stop.load(Ordering::Relaxed),
-                                    })
-                                },
-                            );
+                                    || cancelled.load(Ordering::Relaxed),
+                                    |_, context, prior| {
+                                        if prior.completed_at != sent_at
+                                            && let Some(snapshot) = &prior.completed
+                                        {
+                                            publish(snapshot, &turn.rng, prior.completed_at);
+                                            sent_at = prior.completed_at;
+                                        }
+                                        requests += 1;
+                                        let start = Instant::now();
+                                        let output = provider.evaluate(context);
+                                        inference_seconds += start.elapsed().as_secs_f64();
+                                        callbacks += 1;
+                                        let (logits, value) = output?;
+                                        outputs += 1;
+                                        Ok(crate::sigma_clock::CoreReply {
+                                            logits,
+                                            value,
+                                            decision_notified: turn.stop.load(Ordering::Relaxed),
+                                        })
+                                    },
+                                );
+                                call.provider_work = Some(
+                                    serde_json::json!({"kind":"nnue-mcts-core209","identity":provider.identity(),"before":before,"after":provider.work(),"constructor_head_calls":0,"head_row_unit":"one canonical shared value+optional policy invocation","physical_kernel_calls":null}),
+                                );
+                                call
+                            } else {
+                                crate::sigma_clock::run(
+                                    &turn.root,
+                                    crate::sigma_clock::Budget {
+                                        started: turn.started,
+                                        duration: Duration::from_millis(e.time_ms.unwrap()),
+                                        reserve: Duration::from_millis(
+                                            c.arena.as_ref().unwrap().return_reserve_ms,
+                                        ),
+                                        generation: turn.id.generation,
+                                        simulations: c.simulations,
+                                        limits: Limits {
+                                            max_nodes: c.mcts_max_nodes,
+                                            max_depth: 200,
+                                            max_bytes: c.mcts_max_bytes,
+                                        },
+                                    },
+                                    || cancelled.load(Ordering::Relaxed),
+                                    |_, input, prior| {
+                                        if prior.completed_at != sent_at
+                                            && let Some(snapshot) = &prior.completed
+                                        {
+                                            publish(snapshot, &turn.rng, prior.completed_at);
+                                            sent_at = prior.completed_at;
+                                        }
+                                        requests += 1;
+                                        let start = Instant::now();
+                                        // Exactly one synchronous row on this AI
+                                        // thread. ORT uses intra/inter1,sequential.
+                                        let output = backend.as_mut().unwrap().infer(&[*input]);
+                                        inference_seconds += start.elapsed().as_secs_f64();
+                                        callbacks += 1;
+                                        if let Ok(rows) = &output {
+                                            outputs += rows.len() as u64;
+                                        }
+                                        let mut rows =
+                                            output.map_err(|e| format!("inference:{e}"))?;
+                                        if rows.len() != 1 {
+                                            return Err("backend_output_shape".into());
+                                        }
+                                        Ok(crate::sigma_clock::Reply {
+                                            output: rows.pop().unwrap(),
+                                            decision_notified: turn.stop.load(Ordering::Relaxed),
+                                        })
+                                    },
+                                )
+                            };
                             if call.completed_at != sent_at
                                 && let Some(snapshot) = &call.completed
                             {
@@ -3112,7 +3203,7 @@ fn evaluation_turn(
         })))
         .map_err(|_| "AI turn channel closed")?;
     let mut received = ReceivedEvaluation::new(fallback);
-    let sigma = config.engines[engine].kind == "mcts";
+    let sigma = matches!(config.engines[engine].kind.as_str(), "mcts" | "nnue_mcts");
     let terminal = loop {
         // Existing wall/pause/memory guards remain active while synchronous
         // inference drains; no journal/output walk or model work on this path.

@@ -140,7 +140,7 @@ pub fn begin(c: &Config, slots: &[Slot], admission: &crate::resources::Admission
         "executable":exe,"executable_sha256":file_sha256(&exe)?,
         "build":{"os":std::env::consts::OS,"arch":std::env::consts::ARCH,"cuda_aoti":cfg!(feature="cuda-aoti"),"tensorrt":cfg!(feature="tensorrt")},
             "rules":c.ruleset.id(),"admission":admission,
-            "engine_tt_source_policy":c.engines.iter().enumerate().filter(|(_,e)| !matches!(e.kind.as_str(), "mcts" | "claustrophobia")).map(|(index,e)| serde_json::json!({
+            "engine_tt_source_policy":c.engines.iter().enumerate().filter(|(_,e)| !matches!(e.kind.as_str(), "mcts" | "nnue_mcts" | "claustrophobia")).map(|(index,e)| serde_json::json!({
                 "engine_index":index,"kind":e.kind,"requested_slots":requested_tt,
                 "effective_slots_from_source":requested_tt,"persistent_byte_cap_from_source":requested_tt_byte_cap,
                 "actual_build_capacity":null,"actual_retained_bytes":null,

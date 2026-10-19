@@ -1,6 +1,8 @@
 //! Caller deadline around the maintained MCTS continuation, without changing PUCT.
 //! A synchronous inference is waited for: this is not a hard real-time return API.
-use quoridor_ai::sigma_mcts::{Limits, Progress, Search, Snapshot};
+#[cfg(test)]
+use quoridor_ai::sigma_mcts::Progress;
+use quoridor_ai::sigma_mcts::{ContextProgress, Limits, Search, Snapshot};
 use quoridor_core::research::SigmaContext;
 use quoridor_inference::NetworkOutput;
 use std::time::{Duration, Instant};
@@ -10,7 +12,43 @@ pub(crate) struct Reply {
     pub decision_notified: bool,
 }
 
+pub(crate) struct CoreReply {
+    pub logits: [f32; 209],
+    pub value: f32,
+    pub decision_notified: bool,
+}
+enum Input<'a> {
+    Sigma(Box<[f32; 648]>),
+    Core(&'a SigmaContext),
+}
+#[allow(
+    clippy::large_enum_variant,
+    reason = "retain the original inline Sigma reply without adding a per-row heap allocation"
+)]
+enum Output {
+    Sigma(NetworkOutput),
+    Core(Box<CoreReply>),
+}
+impl Output {
+    fn value(&self) -> f32 {
+        match self {
+            Self::Sigma(v) => v.value,
+            Self::Core(v) => v.value,
+        }
+    }
+    fn invalid(&self) -> bool {
+        match self {
+            Self::Sigma(v) => v.logits.iter().any(|x| !x.is_finite()),
+            Self::Core(v) => v.logits.iter().any(|x| !x.is_finite()),
+        }
+    }
+}
+struct ProviderReply {
+    output: Output,
+    decision_notified: bool,
+}
 pub(crate) struct Call {
+    pub provider_work: Option<serde_json::Value>,
     pub completed: Option<Snapshot>,
     pub completed_at: Option<Instant>,
     pub whole: Option<Snapshot>,
@@ -28,6 +66,7 @@ pub(crate) struct Call {
 impl Call {
     pub(crate) fn new() -> Self {
         Self {
+            provider_work: None,
             completed: None,
             completed_at: None,
             whole: None,
@@ -44,12 +83,16 @@ impl Call {
         }
     }
     pub fn counters(&self) -> serde_json::Value {
-        serde_json::json!({"completion_unit":"mcts_simulation", "nn_requests_attempted":self.attempted,
+        let mut result = serde_json::json!({"completion_unit":"mcts_simulation", "nn_requests_attempted":self.attempted,
             "nn_outputs_returned":self.returned,"nn_valid_replies_returned":self.valid,"inference_callback_results":self.callback_results, "discarded_late_replies":self.discarded_replies,
             "advance_calls":self.advance_calls, "root_nn_stm":self.root_nn,
             "whole_search":self.whole.as_ref().map(snapshot_counters),
             "operation_peak_ns":self.operation_peak.as_nanos(),
-            "physical_kernel_calls":null})
+            "physical_kernel_calls":null});
+        if let Some(work) = &self.provider_work {
+            result["provider_work"] = work.clone();
+        }
+        result
     }
 }
 pub(crate) fn snapshot_counters(s: &Snapshot) -> serde_json::Value {
@@ -78,6 +121,57 @@ fn run_with_clock(
     budget: Budget,
     cancelled: impl Fn() -> bool,
     mut infer: impl FnMut(u64, Box<[f32; 648]>, &Call) -> Result<Reply, String>,
+    now: impl FnMut() -> Instant,
+) -> Call {
+    run_shared_with_clock(
+        root,
+        budget,
+        cancelled,
+        false,
+        |token, input, call| {
+            let Input::Sigma(input) = input else {
+                return Err("provider input".into());
+            };
+            let r = infer(token, input, call)?;
+            Ok(ProviderReply {
+                output: Output::Sigma(r.output),
+                decision_notified: r.decision_notified,
+            })
+        },
+        now,
+    )
+}
+pub(crate) fn run_nnue(
+    root: &SigmaContext,
+    budget: Budget,
+    cancelled: impl Fn() -> bool,
+    mut infer: impl FnMut(u64, &SigmaContext, &Call) -> Result<CoreReply, String>,
+) -> Call {
+    run_shared_with_clock(
+        root,
+        budget,
+        cancelled,
+        true,
+        |token, input, call| {
+            let Input::Core(input) = input else {
+                return Err("provider input".into());
+            };
+            let r = infer(token, input, call)?;
+            let notified = r.decision_notified;
+            Ok(ProviderReply {
+                output: Output::Core(Box::new(r)),
+                decision_notified: notified,
+            })
+        },
+        Instant::now,
+    )
+}
+fn run_shared_with_clock(
+    root: &SigmaContext,
+    budget: Budget,
+    cancelled: impl Fn() -> bool,
+    core: bool,
+    mut infer: impl FnMut(u64, Input<'_>, &Call) -> Result<ProviderReply, String>,
     mut now: impl FnMut() -> Instant,
 ) -> Call {
     let mut call = Call::new();
@@ -122,14 +216,29 @@ fn run_with_clock(
             break;
         }
         call.advance_calls += 1;
-        let complete = match search.advance() {
-            Ok(Progress::NeedInference { token, features }) => {
+        let complete = match search.advance_context() {
+            Ok(ContextProgress::NeedEvaluation { token }) => {
+                let context = match search.pending_context(token) {
+                    Ok(c) => c,
+                    Err(e) => {
+                        call.error = Some(e);
+                        call.stop = "engine_error";
+                        break;
+                    }
+                };
+                let input = if core {
+                    Input::Core(context)
+                } else {
+                    Input::Sigma(Box::new(quoridor_core::research::features(
+                        context.position(),
+                    )))
+                };
                 // Feature packing and traversal may have consumed the remaining clock.
                 if now() >= until {
                     break;
                 }
                 call.attempted += 1;
-                let result = infer(token, features, &call);
+                let result = infer(token, input, &call);
                 call.callback_results += 1;
                 let elapsed = now().saturating_duration_since(operation_started);
                 call.operation_peak = call.operation_peak.max(elapsed);
@@ -148,9 +257,9 @@ fn run_with_clock(
                 let output = reply.output;
                 call.returned += 1;
                 // Validate even a late reply. An old completion never rescues an error.
-                if output.logits.iter().any(|v| !v.is_finite())
-                    || !output.value.is_finite()
-                    || !(-1.0..=1.0).contains(&output.value)
+                if output.invalid()
+                    || !output.value().is_finite()
+                    || !(-1.0..=1.0).contains(&output.value())
                 {
                     call.error = Some("NETWORK_OUTPUT_INVALID".into());
                     call.stop = "engine_error";
@@ -172,17 +281,21 @@ fn run_with_clock(
                     break;
                 }
                 if call.root_nn.is_none() {
-                    call.root_nn = Some(output.value);
+                    call.root_nn = Some(output.value());
                 }
-                if let Err(e) = search.supply(token, &output.logits, output.value) {
+                let supplied = match output {
+                    Output::Sigma(v) => search.supply(token, &v.logits, v.value),
+                    Output::Core(v) => search.supply_core(token, &v.logits, v.value),
+                };
+                if let Err(e) = supplied {
                     call.error = Some(e);
                     call.stop = "engine_error";
                     break;
                 }
                 false
             }
-            Ok(Progress::Advanced) => false,
-            Ok(Progress::Complete) => true,
+            Ok(ContextProgress::Advanced) => false,
+            Ok(ContextProgress::Complete) => true,
             Err(e) => {
                 call.error = Some(e);
                 call.stop = "engine_error";
@@ -490,5 +603,80 @@ mod tests {
         );
         assert_eq!(call.stop, "cancelled");
         assert_eq!(call.attempted, 0);
+    }
+}
+
+#[cfg(test)]
+mod core_provider_tests {
+    use super::*;
+    use std::cell::Cell;
+    #[test]
+    fn core_provider_error_cancel_and_parent_history_nn0() {
+        let root = SigmaContext::from_prefix(&[13]).unwrap();
+        let history = root.history_counts().clone();
+        let start = Instant::now();
+        let cancelled = Cell::new(false);
+        let mut attempts = 0;
+        let call = run_shared_with_clock(
+            &root,
+            Budget {
+                started: start,
+                duration: Duration::from_secs(1),
+                reserve: Duration::ZERO,
+                generation: 1,
+                simulations: 2,
+                limits: Limits::default(),
+            },
+            || false,
+            true,
+            |_, input, _| {
+                assert!(matches!(input, Input::Core(_)));
+                attempts += 1;
+                if attempts == 2 {
+                    return Err("NNUE_ROW_LIMIT".into());
+                }
+                Ok(ProviderReply {
+                    output: Output::Core(Box::new(CoreReply {
+                        logits: [0.; 209],
+                        value: 0.25,
+                        decision_notified: false,
+                    })),
+                    decision_notified: false,
+                })
+            },
+            || start,
+        );
+        assert_eq!(call.error.as_deref(), Some("NNUE_ROW_LIMIT"));
+        assert_eq!((call.attempted, call.returned, call.valid), (2, 1, 1));
+        assert_eq!(call.whole.unwrap().root_visits, 1);
+        let call = run_shared_with_clock(
+            &root,
+            Budget {
+                started: start,
+                duration: Duration::from_secs(1),
+                reserve: Duration::ZERO,
+                generation: 2,
+                simulations: 1,
+                limits: Limits::default(),
+            },
+            || cancelled.get(),
+            true,
+            |_, _, _| {
+                cancelled.set(true);
+                Ok(ProviderReply {
+                    output: Output::Core(Box::new(CoreReply {
+                        logits: [0.; 209],
+                        value: 0.,
+                        decision_notified: false,
+                    })),
+                    decision_notified: false,
+                })
+            },
+            || start,
+        );
+        assert_eq!(call.stop, "cancelled");
+        assert!(call.completed.is_none());
+        assert_eq!(call.whole.unwrap().nn_calls, 0);
+        assert_eq!(root.history_counts(), history);
     }
 }

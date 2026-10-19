@@ -2531,6 +2531,7 @@ def measurement_config(experiment):
             "lmr",
             "lmr_method",
             "lmr_parameters",
+            "neighbour_opportunity",
             "zero_stock_approx_min_root_walls",
             "zero_stock_approx_method",
             "zero_stock_safe_race",
@@ -2582,6 +2583,21 @@ def measurement_config(experiment):
         ),
         "measurement safe-race method",
     )
+    opportunity = config.get("neighbour_opportunity")
+    if "neighbour_opportunity" in config:
+        require(
+            type(opportunity) is str
+            and opportunity in {"off_shadow", "on"}
+            and config["profile"] == "control"
+            and config["use_tt"]
+            and config["use_pvs"]
+            and config.get("lmr", False)
+            and config.get("lmr_method", "depth_rank") == "depth_rank"
+            and config.get("zero_stock_safe_race", True)
+            and config.get("zero_stock_safe_race_method") in {None, "path_tail"}
+            and config.get("zero_stock_approx_min_root_walls") is None,
+            "isolated neighbour opportunity diagnostic",
+        )
     lmr_method = config.get("lmr_method", "depth_rank")
     require(
         type(lmr_method) is str
@@ -2753,6 +2769,17 @@ def measurement_config(experiment):
             if active is not None:
                 closed.add(active)
             active = request["session"]
+    if opportunity is not None:
+        require(
+            all(
+                not any(
+                    r.get(k, False)
+                    for k in ("observe_lmr", "diagnostic", "observe_completed_depths", "warmup")
+                )
+                for r in requests
+            ),
+            "opportunity diagnostic has no mixed observers/warmup",
+        )
     if any(r.get("observe_lmr", False) for r in requests):
         require(
             len(requests) <= 12
@@ -4125,7 +4152,15 @@ def arena_model_check(experiment, plan, width):
         for i, engine in enumerate(m["engines"]):
             kind = engine["kind"]
             require(
-                kind in {"nnue", "distance", "mcts", "sigma_value", "claustrophobia"},
+                kind
+                in {
+                    "nnue",
+                    "nnue_mcts",
+                    "distance",
+                    "mcts",
+                    "sigma_value",
+                    "claustrophobia",
+                },
                 "supported numerical backend",
             )
             if kind == "nnue":
@@ -4138,6 +4173,91 @@ def arena_model_check(experiment, plan, width):
                     "declared model/evaluator",
                 )
                 used.add(model["descriptor"]["path"])
+            elif kind == "nnue_mcts":
+                settings = engine.get("nnue_mcts")
+                require(
+                    plan["comparison"] == "whole_wall_time"
+                    and isinstance(settings, dict)
+                    and set(settings) == {"prior", "logical_row_limit"}
+                    and type(settings["logical_row_limit"]) is int
+                    and 0 < settings["logical_row_limit"] < 2**64
+                    and isinstance(settings["prior"], dict)
+                    and len(m["evaluator_sha256"][i]) == 64
+                    and all(c in "0123456789abcdef" for c in m["evaluator_sha256"][i]),
+                    "explicit NNUE MCTS prior/cumulative rows/native typed identity",
+                )
+                model = next(
+                    (r for r in plan["models"] if r["descriptor"]["path"] == engine.get("model")),
+                    None,
+                )
+                require(model is not None, "NNUE MCTS bound value descriptor")
+                used.add(model["descriptor"]["path"])
+                prior = settings["prior"]
+                if prior.get("kind") == "uniform":
+                    require(set(prior) == {"kind"}, "explicit uniform has no head")
+                else:
+                    require(
+                        set(prior) == {"kind", "manifest", "evidence"}
+                        and prior["kind"] == "head"
+                        and prior["evidence"] in {"synthetic_untrained", "learned"},
+                        "explicit policy head/evidence",
+                    )
+                    head = next(
+                        (r for r in plan["inputs"] if r["path"] == prior["manifest"]),
+                        None,
+                    )
+                    require(head is not None, "bound NNUE policy descriptor input")
+                    policy = document(head)
+                    require(
+                        set(policy)
+                        == {
+                            "schema",
+                            "action_order",
+                            "head_coordinates",
+                            "value_perspective",
+                            "reflection",
+                            "evidence",
+                            "shared_fingerprint",
+                            "hidden_width",
+                            "weights",
+                            "weights_sha256",
+                            "weights_bytes",
+                        }
+                        and policy["schema"] == "quoridor-nnue-policy209-v1"
+                        and policy["action_order"] == "absolute-core-action-id209"
+                        and policy["head_coordinates"] == "QF1-STM-rotate180"
+                        and policy["reflection"] == "core-action-id209-left-right-v1"
+                        and policy["value_perspective"] == "side-to-move"
+                        and policy["evidence"] == prior["evidence"]
+                        and type(policy["hidden_width"]) is int
+                        and 0 < policy["hidden_width"] <= 2048
+                        and type(policy["weights_bytes"]) is int
+                        and policy["weights_bytes"] == 4 * 209 * (policy["hidden_width"] + 1)
+                        and isinstance(policy["weights"], str)
+                        and policy["weights"] not in {"", ".", ".."}
+                        and Path(policy["weights"]).name == policy["weights"]
+                        and chr(92) not in policy["weights"]
+                        and all(
+                            isinstance(policy[k], str)
+                            and len(policy[k]) == 64
+                            and all(c in "0123456789abcdef" for c in policy[k])
+                            for k in ("shared_fingerprint", "weights_sha256")
+                        ),
+                        "policy209 typed layout/evidence/shared-fingerprint shape",
+                    )
+                    weights = str(Path(prior["manifest"]).parent / policy["weights"])
+                    require(
+                        any(
+                            r["path"] == weights
+                            and r["sha256"] == policy["weights_sha256"]
+                            and r["bytes"] == policy["weights_bytes"]
+                            for r in plan["inputs"]
+                        ),
+                        "bound NNUE policy weights",
+                    )
+                # Actual shared fingerprint and provider identity are recomputed
+                # by the native model/provider, then checked by normal arena
+                # initialization; this metadata route is no numeric certificate.
             elif kind == "distance":
                 require(engine.get("model") is None, "pure distance model")
             elif kind == "claustrophobia":
@@ -4404,7 +4524,12 @@ def arena_plan_check(experiment, plan):
             "@EXPERIMENT_SHA256@",
         ]
         and plan["comparison"]
-        in {"evaluator_fixed_depth", "evaluator_wall_time", "whole_wall_time", "search_wall_time"}
+        in {
+            "evaluator_fixed_depth",
+            "evaluator_wall_time",
+            "whole_wall_time",
+            "search_wall_time",
+        }
         and plan["rules"] == experiment["rules"] == "research-standard-2p-threefold-goal-first-v1"
         and plan["distance_units"] == experiment["distance_units"] == "wall-distance/80"
         and plan["value_perspective"] == experiment["value_perspective"] == "side-to-move"
@@ -4423,7 +4548,8 @@ def arena_plan_check(experiment, plan):
     a = config["arena"]
     selected_ids = arena_game_ids(config)
     require(
-        a.get("game_selection") == batch.get("game_selection"), "approved selected/excluded mask"
+        a.get("game_selection") == batch.get("game_selection"),
+        "approved selected/excluded mask",
     )
     engines = config["engines"]
     require(
@@ -4464,6 +4590,10 @@ def arena_plan_check(experiment, plan):
     arena_model_check(experiment, plan, 2)
     for engine in engines:
         require("history_tie_break" not in engine, "retired engine ordering field")
+        require(
+            engine["kind"] == "nnue_mcts" or engine.get("nnue_mcts") is None,
+            "unused NNUE MCTS settings",
+        )
         if engine["kind"] == "claustrophobia":
             require(
                 a["comparison"] == "whole_wall_time"
@@ -4482,7 +4612,7 @@ def arena_plan_check(experiment, plan):
         resolved_lmr_parameters(
             engine,
             engine.get("ordering_profile"),
-            supported=engine["kind"] not in {"mcts", "claustrophobia"}
+            supported=engine["kind"] not in {"mcts", "nnue_mcts", "claustrophobia"}
             and a["comparison"] != "functional",
         )
         require(

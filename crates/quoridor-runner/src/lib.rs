@@ -6,6 +6,7 @@ mod arena_manifest;
 pub mod arena_statistics;
 pub mod claustrophobia;
 pub mod config;
+pub mod nnue_mcts;
 pub mod research_manifest;
 pub mod resources;
 pub mod runtime;

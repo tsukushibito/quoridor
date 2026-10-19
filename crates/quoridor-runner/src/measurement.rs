@@ -78,6 +78,8 @@ struct Settings {
         skip_serializing_if = "Option::is_none"
     )]
     lmr_parameters: Option<crate::config::LmrParameters>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    neighbour_opportunity: Option<String>,
     #[serde(default)]
     zero_stock_approx_min_root_walls: Option<u8>,
     #[serde(default = "default_zero_stock_approx_method")]
@@ -137,6 +139,27 @@ fn default_zero_stock_approx_method() -> String {
 }
 
 fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
+    if let Some(name) = settings.neighbour_opportunity.as_deref() {
+        alphabeta::NeighbourOpportunityMode::from_name(name)?;
+        if settings.profile != Profile::Control
+            || !settings.use_tt
+            || !settings.use_pvs
+            || !settings.lmr
+            || settings.lmr_method != "depth_rank"
+            || !settings.zero_stock_safe_race
+            || settings
+                .zero_stock_safe_race_method
+                .as_deref()
+                .unwrap_or(alphabeta::RESEARCH_SAFE_RACE_METHOD.name())
+                != "path_tail"
+            || settings.zero_stock_approx_min_root_walls.is_some()
+            || requests
+                .iter()
+                .any(|r| r.observe_lmr || r.diagnostic || r.observe_completed_depths || r.warmup)
+        {
+            return Err("opportunity diagnostic requires isolated signed Control without other observers/approximation".into());
+        }
+    }
     let lmr_method = LmrMethod::from_name(&settings.lmr_method)?;
     if let Some(parameters) = settings.lmr_parameters {
         parameters.resolve()?;
@@ -378,19 +401,28 @@ impl Target for SearchTarget {
             rules: self.settings.namespace.rules.clone(),
             selectivity: self.settings.namespace.selectivity.clone(),
         };
-        let mut session = match self.settings.profile.native()? {
-            None => {
-                SearchSession::new(self.evaluator.clone(), namespace, self.settings.tt_entries)?
-            }
-            Some(profile) => SearchSession::new_with_ordering(
+        let mut session = if let Some(name) = self.settings.neighbour_opportunity.as_deref() {
+            SearchSession::new_neighbour_opportunity(
                 self.evaluator.clone(),
                 namespace,
                 self.settings.tt_entries,
-                quoridor_ai::score::ScoreDomain::LEGACY,
-                profile,
-                request.diagnostic,
-                false,
-            )?,
+                alphabeta::NeighbourOpportunityMode::from_name(name)?,
+            )?
+        } else {
+            match self.settings.profile.native()? {
+                None => {
+                    SearchSession::new(self.evaluator.clone(), namespace, self.settings.tt_entries)?
+                }
+                Some(profile) => SearchSession::new_with_ordering(
+                    self.evaluator.clone(),
+                    namespace,
+                    self.settings.tt_entries,
+                    quoridor_ai::score::ScoreDomain::LEGACY,
+                    profile,
+                    request.diagnostic,
+                    false,
+                )?,
+            }
         };
         session.set_lmr_method(LmrMethod::from_name(&self.settings.lmr_method)?);
         session.set_lmr_parameters(
@@ -477,11 +509,18 @@ impl Target for SearchTarget {
         let mut lmr_observation = request
             .observe_lmr
             .then(|| Box::new(alphabeta::LmrObservation::default()));
+        let mut opportunity = self
+            .settings
+            .neighbour_opportunity
+            .as_ref()
+            .map(|_| alphabeta::NeighbourOpportunity::default());
         let inference_before = self.sigma_value.as_ref().map(|e| e.work()).transpose()?;
         let table_generation_before = session.table_generation();
         let search_started = Instant::now();
         let mut completed_depths = Vec::new();
-        let result = if let Some(observation) = lmr_observation.as_deref_mut() {
+        let result = if let Some(observation) = opportunity.as_mut() {
+            session.search_neighbour_opportunity(root, &limits, cancel, observation)
+        } else if let Some(observation) = lmr_observation.as_deref_mut() {
             session.search_with_lmr_observation(root, &limits, cancel, observation)
         } else if request.observe_completed_depths {
             session.search_with_updates(root, &limits, cancel, &mut |completed| {
@@ -590,6 +629,9 @@ impl Target for SearchTarget {
                 "top_level_entries":204,"root_plus_explicit_child_calls":300,
                 "nodes":31_200_000});
             row["lmr_observation"] = observation;
+        }
+        if let Some(observation) = opportunity.as_ref() {
+            row["neighbour_opportunity"] = neighbour_opportunity_output(observation);
         }
         row["TT_generation_before"] = json!(table_generation_before);
         row["TT_generation_after"] = json!(session.table_generation());
@@ -2658,4 +2700,30 @@ mod lmr_parameter_settings_tests {
             json!(p)
         );
     }
+}
+
+fn neighbour_opportunity_output(o: &alphabeta::NeighbourOpportunity) -> Value {
+    let counts = o.published.then(|| o.by_stock.iter().enumerate().map(|(stock,c)| json!({
+        "stock":stock,"visits":c.visits,"terminal_returns":c.terminal_returns,
+        "evaluation_leaves":c.evaluation_leaves,"numeric_tt_returns":c.numeric_tt_returns,
+        "proof_returns":c.proof_returns,"scored_entries":c.scored_entries,
+        "multiple_candidate_entries":c.multiple_candidate_entries,
+        "tie_nodes":c.tie_nodes,"tie_groups":c.tie_groups,
+        "zero_history_groups":c.zero_history_groups,"nonzero_history_groups":c.nonzero_history_groups,
+        "different_class_nodes":c.different_class_nodes,"different_class_groups":c.different_class_groups,
+        "reordered_nodes":c.reordered_nodes,"reordered_groups":c.reordered_groups,
+        "potential_first_changes":c.potential_first_changes,
+        "potential_prepared_first_changes":c.potential_prepared_first_changes,
+        "tt_first_pulls":c.tt_first_pulls,"tt_first_only_cutoffs":c.tt_first_only_cutoffs,
+        "pulled":c.pulled,"changed_pulls":c.changed_pulls,"changed_pull_nodes":c.changed_pull_nodes,
+        "changed_first_pulls":c.changed_first_pulls,"changed_prepared_first_pulls":c.changed_prepared_first_pulls
+    })).collect::<Vec<_>>());
+    json!({"mode":o.mode.map(|m|m.name()),"method_id":o.mode.map(|m|m.id()),
+        "published":o.published,"root_stock":o.root_stock,"parent_restored":o.parent_restored,
+        "by_internal_stock":counts,"partial_work":o.final_stats.as_ref().map(|s|observed_work(s)),
+        "denominator":"visited/scored/pulled decision events; not unique positions; arm-specific tree",
+        "unreached_tail":"no forced preparation/sort/expansion; TT-only cutoffs can omit scored entry",
+        "pull_shadow":"Off prefix from same frozen prepared IDs/keys, only as far as actual pulls; no counterfactual history training",
+        "leading_semantics":"node-leading changes exclude an already-pulled TT first; prepared-first includes that deferred sibling subset; pulled counts prepared IDs only and tt_first_pulls is separate",
+        "clock_use":"observer-inclusive diagnostic only, no speed qualification"})
 }

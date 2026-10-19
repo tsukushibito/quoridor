@@ -329,6 +329,9 @@ impl ResidualModel {
         observe: impl FnOnce(bool, bool),
     ) -> Result<ResidualValueView> {
         let r = self.linear_head_with_scratch_observed(a, scratch, observe)?;
+        self.value_from_linear(a, r)
+    }
+    fn value_from_linear(&self, a: &Accumulator, r: f32) -> Result<ResidualValueView> {
         let d = self.base.distance_fit;
         let u = d.a + d.b * (a.features.distance[1] - a.features.distance[0]);
         let value = u + r;
@@ -349,6 +352,29 @@ impl ResidualModel {
         a: &Accumulator,
         scratch: &mut ResidualScratch,
         observe: impl FnOnce(bool, bool),
+    ) -> Result<f32> {
+        self.linear_head_capture(a, scratch, observe, None)
+    }
+    /// Optional policy consumer observes the exact canonical hidden values.
+    /// Value-only callers allocate no policy storage and compute no policy row.
+    pub fn evaluate_hidden_with_scratch(
+        &self,
+        a: &Accumulator,
+        scratch: &mut ResidualScratch,
+        hidden: &mut [f32],
+    ) -> Result<ResidualValueView> {
+        if hidden.len() != self.base.topology.hidden_width {
+            return Err(Error::Input("policy hidden width".into()));
+        }
+        let r = self.linear_head_capture(a, scratch, |_, _| {}, Some(hidden))?;
+        self.value_from_linear(a, r)
+    }
+    fn linear_head_capture(
+        &self,
+        a: &Accumulator,
+        scratch: &mut ResidualScratch,
+        observe: impl FnOnce(bool, bool),
+        mut hidden: Option<&mut [f32]>,
     ) -> Result<f32> {
         self.base.validate_accumulator(a)?;
         let t = self.base.topology;
@@ -393,6 +419,9 @@ impl ResidualModel {
                 fast,
             );
             r += self.weights[o + j] * v.max(0.);
+            if let Some(ref mut out) = hidden {
+                out[j] = v.max(0.);
+            }
         }
         Ok(r)
     }

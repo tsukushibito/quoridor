@@ -193,6 +193,34 @@ impl PreparedMoves {
         }
     }
     pub fn next(&mut self, stats: Option<&mut OrderingStats>) -> Option<(u16, MoveRead)> {
+        self.next_impl::<false>(
+            stats,
+            #[cfg(feature = "research-diagnostics")]
+            None,
+        )
+    }
+    #[cfg(feature = "research-diagnostics")]
+    pub(super) fn opportunity_keys(&self) -> Option<(&[u16], &[u64; 209])> {
+        match self {
+            Self::SignedKeys { ids, keys, .. } => Some((ids, keys)),
+            Self::Eager(_) => None,
+        }
+    }
+    #[cfg(feature = "research-diagnostics")]
+    pub(super) fn next_opportunity(
+        &mut self,
+        stats: Option<&mut OrderingStats>,
+        parent: Option<super::neighbour_opportunity::NeighbourParent>,
+    ) -> Option<(u16, MoveRead)> {
+        self.next_impl::<true>(stats, parent)
+    }
+    fn next_impl<const OPPORTUNITY: bool>(
+        &mut self,
+        stats: Option<&mut OrderingStats>,
+        #[cfg(feature = "research-diagnostics")] parent: Option<
+            super::neighbour_opportunity::NeighbourParent,
+        >,
+    ) -> Option<(u16, MoveRead)> {
         match self {
             Self::Eager(moves) => moves.next().map(|id| (id, MoveRead::Sorted)),
             Self::SignedKeys {
@@ -205,8 +233,15 @@ impl PreparedMoves {
                     return None;
                 }
                 if *next == 0 {
-                    let first = (0..ids.len())
-                        .min_by(|&a, &b| keys[ids[a] as usize].cmp(&keys[ids[b] as usize]))?;
+                    let first = (0..ids.len()).min_by(|&a, &b| {
+                        #[cfg(feature = "research-diagnostics")]
+                        if OPPORTUNITY && let Some(parent) = parent {
+                            return super::neighbour_opportunity::compare(
+                                keys, parent, ids[a], ids[b],
+                            );
+                        }
+                        keys[ids[a] as usize].cmp(&keys[ids[b] as usize])
+                    })?;
                     if let Some(stats) = stats {
                         let work = stats.work_mut();
                         work.first_selection_calls_started += 1;
@@ -221,7 +256,13 @@ impl PreparedMoves {
                     if let Some(stats) = stats {
                         stats.observe_sort(ids.len() - 1);
                     }
-                    ids[1..].sort_unstable_by(|&a, &b| keys[a as usize].cmp(&keys[b as usize]));
+                    ids[1..].sort_unstable_by(|&a, &b| {
+                        #[cfg(feature = "research-diagnostics")]
+                        if OPPORTUNITY && let Some(parent) = parent {
+                            return super::neighbour_opportunity::compare(keys, parent, a, b);
+                        }
+                        keys[a as usize].cmp(&keys[b as usize])
+                    });
                 }
                 let kind = if *next > 0 && ids.len() > 2 {
                     MoveRead::Sorted

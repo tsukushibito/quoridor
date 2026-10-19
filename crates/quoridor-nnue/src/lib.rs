@@ -2,6 +2,7 @@
 //! scalar float oracle, order-preserving SIMD, and checked integer quantization.
 pub mod distance_step;
 mod features;
+pub mod policy;
 mod quantized;
 pub mod residual;
 mod simd;
