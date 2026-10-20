@@ -472,6 +472,8 @@ impl SearchSession {
             cancel,
             None,
             SearchInvocation {
+                #[cfg(not(target_arch = "wasm32"))]
+                worker_budget: None,
                 residual_head: None,
                 forced_root: None,
                 lmr_table: None,
@@ -563,6 +565,8 @@ impl SearchSession {
             cancel,
             None,
             SearchInvocation {
+                #[cfg(not(target_arch = "wasm32"))]
+                worker_budget: None,
                 residual_head: None,
                 forced_root: None,
                 lmr_table: None,
@@ -749,6 +753,8 @@ mod trial_tests {
             &AtomicBool::new(false),
             None,
             SearchInvocation {
+                #[cfg(not(target_arch = "wasm32"))]
+                worker_budget: None,
                 residual_head: None,
                 forced_root: None,
                 lmr_table: None,

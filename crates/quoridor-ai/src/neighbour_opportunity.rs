@@ -591,7 +591,7 @@ impl super::SearchSession {
             .evaluator
             .session_residual_owner()
             .zip(self.residual_head_scratch.as_mut());
-        super::search_in_table_observed::<false, false, true>(
+        super::search_in_table_observed::<false, false, true, false>(
             root,
             self.evaluator.as_ref(),
             limits,

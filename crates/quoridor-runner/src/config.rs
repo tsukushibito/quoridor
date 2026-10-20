@@ -185,6 +185,17 @@ pub(crate) fn deserialize_lmr_parameters<'de, D: serde::Deserializer<'de>>(
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct Engine {
+    /// Total search workers INCLUDING main; omission preserves the original one.
+    #[serde(
+        default,
+        deserialize_with = "deserialize_search_threads",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub search_threads: Option<usize>,
+    /// Actual per-engine search team, main first; native managed arena only.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub search_cpu_cores: Option<Vec<usize>>,
+
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub nnue_mcts: Option<crate::nnue_mcts::Config>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -321,6 +332,7 @@ impl Config {
             )
         });
         let evaluation = self.evaluation_workers();
+        self.search_team_cores()?;
         if evaluation {
             if self.workers != 1
                 || self.active_games != 1
@@ -907,5 +919,133 @@ mod lmr_parameter_settings_tests {
         let record = serde_json::json!({"requested_lmr_parameters":engine.lmr_parameters,"actual_lmr_parameters":Option::<LmrParameters>::None});
         assert!(record["requested_lmr_parameters"].is_object());
         assert!(record["actual_lmr_parameters"].is_null());
+    }
+}
+
+pub(crate) fn deserialize_search_threads<'de, D>(
+    deserializer: D,
+) -> std::result::Result<Option<usize>, D::Error>
+where
+    D: serde::Deserializer<'de>,
+{
+    let n = usize::deserialize(deserializer)?;
+    if n == 0 {
+        return Err(serde::de::Error::custom(
+            "positive total search_threads required",
+        ));
+    }
+    Ok(Some(n))
+}
+
+impl Config {
+    /// One foreground serial game: maximum per-game team, never engine-sum or
+    /// an oversubscribed eight-games-times-two-threads claim. Nonserial callers
+    /// must retain their existing route; SMP is rejected there before execution.
+    pub(crate) fn search_team_cores(&self) -> Result<Vec<usize>, String> {
+        let mut cores = std::collections::BTreeSet::new();
+        let mut maximum = 1;
+        for (index, engine) in self.engines.iter().enumerate() {
+            let threads = engine.search_threads.unwrap_or(1);
+            if threads == 0 {
+                return Err("search_threads must be positive".into());
+            }
+            if engine.search_threads.is_none() && engine.search_cpu_cores.is_none() {
+                continue;
+            }
+            if !self.evaluation_workers()
+                || self.management_cpu_core.is_none()
+                || self.workers != 1
+                || self.active_games != 1
+                || !matches!(engine.kind.as_str(), "nnue" | "nnue_quantized" | "distance")
+                || engine.ordering_profile.as_deref() != Some("control")
+            {
+                return Err(
+                    "search workers belong to a managed serial research alpha Control arena".into(),
+                );
+            }
+            let main = *self
+                .cpu_cores
+                .get(index)
+                .ok_or("engine CPU binding missing")?;
+            let team = match &engine.search_cpu_cores {
+                None if threads == 1 => vec![main],
+                Some(team) => team.clone(),
+                _ => return Err("explicit complete search team required".into()),
+            };
+            if team.len() != threads
+                || team.first() != Some(&main)
+                || team.iter().collect::<std::collections::BTreeSet<_>>().len() != threads
+                || self.management_cpu_core.is_some_and(|c| team.contains(&c))
+            {
+                return Err("search team count/main/unique CPU allocation".into());
+            }
+            cores.extend(team);
+            maximum = maximum.max(threads);
+        }
+        if cores.is_empty() {
+            return Ok(Vec::new());
+        }
+        cores.extend(self.cpu_cores.iter().copied());
+        let concurrent_games = self
+            .workers
+            .min(self.active_games)
+            .min(self.execution_games());
+        let required = concurrent_games
+            .checked_mul(maximum)
+            .ok_or("search CPU count overflow")?;
+        if cores.len() < required {
+            return Err("game concurrency times search_threads exceeds assigned cores".into());
+        }
+        Ok(cores.into_iter().collect())
+    }
+}
+
+#[cfg(test)]
+mod smp_team_boundary_tests {
+    use super::*;
+    #[test]
+    fn smp_engine_positive_generic_team_and_game_concurrency_are_explicit() {
+        let base = serde_json::json!({"kind":"distance","ordering_profile":"control"});
+        let omitted: Engine = serde_json::from_value(base.clone()).unwrap();
+        assert!(omitted.search_threads.is_none());
+        assert!(
+            serde_json::to_value(omitted)
+                .unwrap()
+                .get("search_threads")
+                .is_none()
+        );
+        for bad in [
+            serde_json::Value::Null,
+            serde_json::json!(0),
+            serde_json::json!(-1),
+            serde_json::json!(1.5),
+            serde_json::json!("2"),
+        ] {
+            let mut value = base.clone();
+            value["search_threads"] = bad;
+            assert!(serde_json::from_value::<Engine>(value).is_err());
+        }
+        let mut c: Config =
+            serde_json::from_str(include_str!("../tests/fixtures/sigma-clock-config.json"))
+                .unwrap();
+        c.cpu_cores = vec![12, 12];
+        c.management_cpu_core = Some(0);
+        c.inference_cpu_core = None;
+        c.workers = 1;
+        c.active_games = 1;
+        c.max_batch = 1;
+        c.engines=(0..2).map(|_|serde_json::from_value(serde_json::json!({"kind":"distance","ordering_profile":"control","search_threads":3,"search_cpu_cores":[12,14,16]})).unwrap()).collect();
+        assert_eq!(c.search_team_cores().unwrap(), vec![12, 14, 16]);
+        for wrong in 0..5 {
+            let mut bad = c.clone();
+            match wrong {
+                0 => bad.engines[0].search_cpu_cores = Some(vec![12, 12, 16]),
+                1 => bad.engines[0].search_cpu_cores = Some(vec![12, 14]),
+                2 => bad.engines[0].search_cpu_cores = Some(vec![12, 14, 0]),
+                3 => bad.workers = 2,
+                _ => bad.engines[0].ordering_profile = Some("cheap".into()),
+            }
+            assert!(bad.search_team_cores().is_err());
+        }
     }
 }

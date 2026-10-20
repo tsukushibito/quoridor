@@ -34,6 +34,11 @@ pub use lmr_observation::{
 mod neighbour_opportunity;
 #[cfg(feature = "research-diagnostics")]
 pub use neighbour_opportunity::{NeighbourOpportunity, NeighbourOpportunityMode};
+#[cfg(not(target_arch = "wasm32"))]
+#[path = "lazy_smp.rs"]
+mod lazy_smp;
+#[cfg(not(target_arch = "wasm32"))]
+pub use lazy_smp::{SmpReport, SmpWorkerReport, WorkerInitializer};
 #[path = "move_ordering.rs"]
 mod move_ordering;
 #[path = "static_geometry.rs"]
@@ -861,6 +866,8 @@ pub struct SearchStats {
     pub tt_collisions: u64,
     pub tt_replacements: u64,
     pub tt_capacity_skips: u64,
+    /// Native shared-TT try-lock misses only; zero on the unchanged local path.
+    pub tt_contention_skips: u64,
     pub tt_illegal_moves: u64,
     pub tt_retained_bytes: usize,
     pub tt_generation: u64,
@@ -875,6 +882,8 @@ pub struct SearchStats {
     pub delta_updates: u64,
     pub policy_calls: u64,
     pub ordering: OrderingStats,
+    #[cfg(not(target_arch = "wasm32"))]
+    pub smp: Option<Box<SmpReport>>,
 }
 
 #[derive(Debug, Clone)]
@@ -1095,6 +1104,7 @@ enum Bound {
     SafeRaceLeaf,
 }
 #[repr(C)]
+#[derive(Clone, Copy)]
 struct Entry {
     key: Key,
     context: [u64; 2],
@@ -1124,6 +1134,9 @@ struct Table {
     generation: u64,
     committed: u64,
     byte_limit: usize,
+    #[cfg(not(target_arch = "wasm32"))]
+    shared: Option<(Arc<lazy_smp::SharedTable>, usize)>,
+    active_generation: bool,
 }
 impl Table {
     fn new(n: usize) -> Result<Self> {
@@ -1155,6 +1168,9 @@ impl Table {
             generation: 0,
             committed: 0,
             byte_limit,
+            #[cfg(not(target_arch = "wasm32"))]
+            shared: None,
+            active_generation: false,
         };
         // Capacity is observed after reserve, not assumed equal to request.
         if table.retained_bytes() > byte_limit {
@@ -1167,19 +1183,88 @@ impl Table {
     fn compatible(e: &Entry, context: Option<ContextFingerprint>) -> bool {
         e.context_valid && context.is_some_and(|c| c.0 == e.context)
     }
-    fn get_hashed(&self, key: &Key, hash: u64) -> Option<&Entry> {
+    fn get_hashed<const SMP: bool>(&self, key: &Key, hash: u64) -> Option<Entry> {
+        #[cfg(not(target_arch = "wasm32"))]
+        if SMP {
+            let mut ignored = 0;
+            let (table, writer) = self.shared.as_ref()?;
+            return table
+                .candidate(
+                    hash,
+                    *writer,
+                    self.active_generation.then_some(self.generation),
+                    &mut ignored,
+                )
+                .filter(|e| e.key == *key);
+        }
         if self.slots.is_empty() {
             None
         } else {
             self.slots[(hash % self.slots.len() as u64) as usize]
                 .as_ref()
+                .copied()
                 .filter(|e| e.key == *key)
         }
     }
-    fn retained_bytes(&self) -> usize {
+    fn candidate<const SMP: bool>(&self, hash: u64, stats: &mut SearchStats) -> Option<Entry> {
+        #[cfg(not(target_arch = "wasm32"))]
+        if SMP {
+            let (shared, writer) = self.shared.as_ref()?;
+            return shared.candidate(
+                hash,
+                *writer,
+                self.active_generation.then_some(self.generation),
+                &mut stats.tt_contention_skips,
+            );
+        }
+        self.slots[(hash % self.slots.len() as u64) as usize]
+            .as_ref()
+            .copied()
+    }
+    fn capacity_for<const SMP: bool>(&self) -> usize {
+        #[cfg(not(target_arch = "wasm32"))]
+        if SMP {
+            return self.shared.as_ref().expect("shared table").0.capacity();
+        }
+        self.slots.len()
+    }
+    fn capacity(&self) -> usize {
+        #[cfg(not(target_arch = "wasm32"))]
+        if let Some((shared, _)) = &self.shared {
+            return shared.capacity();
+        }
+        self.slots.len()
+    }
+    fn commit(&mut self) {
+        self.committed = self.generation;
+        self.active_generation = false;
+        #[cfg(not(target_arch = "wasm32"))]
+        if let Some((shared, writer)) = &self.shared {
+            shared.commit(*writer, self.committed);
+        }
+    }
+
+    fn retained_bytes_for<const SMP: bool>(&self) -> usize {
+        #[cfg(not(target_arch = "wasm32"))]
+        if SMP {
+            return self.shared.as_ref().expect("shared TT").0.retained_bytes();
+        }
         std::mem::size_of::<Self>() + self.slots.capacity() * std::mem::size_of::<Option<Entry>>()
     }
+    fn retained_bytes(&self) -> usize {
+        #[cfg(not(target_arch = "wasm32"))]
+        if let Some((shared, _)) = &self.shared {
+            return shared.retained_bytes();
+        }
+        std::mem::size_of::<Self>() + self.slots.capacity() * std::mem::size_of::<Option<Entry>>()
+    }
+
     fn clear(&mut self) {
+        #[cfg(not(target_arch = "wasm32"))]
+        if let Some((shared, _)) = &self.shared {
+            shared.clear_quiet();
+        }
+        self.active_generation = false;
         self.slots.iter_mut().for_each(|slot| *slot = None);
         self.generation = 0;
         self.committed = 0;
@@ -1189,41 +1274,47 @@ impl Table {
             self.clear();
         }
         self.generation += 1;
+        self.active_generation = true;
     }
     fn discard_uncommitted(&mut self) {
+        self.active_generation = false;
+        #[cfg(not(target_arch = "wasm32"))]
+        if self.shared.is_some() {
+            return;
+        }
         for slot in &mut self.slots {
             if slot.as_ref().is_some_and(|e| e.generation > self.committed) {
                 *slot = None;
             }
         }
     }
-    fn probe(
+    fn probe<const SMP: bool>(
         &self,
         key: &Key,
         context: Option<ContextFingerprint>,
         stats: &mut SearchStats,
     ) -> Option<ProbeHit> {
         stats.tt_probes += 1;
-        if self.slots.is_empty() {
+        if self.capacity_for::<SMP>() == 0 {
             return None;
         }
         stats.tt_hashes += 1;
-        self.probe_hashed(key, context, key.hash(), stats)
+        self.probe_hashed::<SMP>(key, context, key.hash(), stats)
     }
-    fn probe_owned(
+    fn probe_owned<const SMP: bool>(
         &self,
         key: OwnedBoardKey,
         context: Option<ContextFingerprint>,
         stats: &mut SearchStats,
     ) -> (ProbedKey, Option<ProbeHit>) {
         stats.tt_probes += 1;
-        let hash = if self.slots.is_empty() {
+        let hash = if self.capacity_for::<SMP>() == 0 {
             None
         } else {
             stats.tt_board_hash_reads += 1;
             Some(key.hash)
         };
-        let hit = hash.and_then(|h| self.probe_hashed(&key.key, context, h, stats));
+        let hit = hash.and_then(|h| self.probe_hashed::<SMP>(&key.key, context, h, stats));
         (
             ProbedKey {
                 key: key.key,
@@ -1233,17 +1324,28 @@ impl Table {
             hit,
         )
     }
-    fn probe_hashed(
+    fn probe_hashed<const SMP: bool>(
         &self,
         key: &Key,
         context: Option<ContextFingerprint>,
         hash: u64,
         stats: &mut SearchStats,
     ) -> Option<ProbeHit> {
-        if self.slots.is_empty() {
+        if self.capacity_for::<SMP>() == 0 {
             return None;
         }
-        let entry = self.slots[(hash % self.slots.len() as u64) as usize].as_ref()?;
+        // Local hot probes keep the original borrowed entry. Only shared reads
+        // need an owned coherent copy; const SMP removes this branch for N=1.
+        let shared_entry = if SMP {
+            self.candidate::<SMP>(hash, stats)
+        } else {
+            None
+        };
+        let entry = if SMP {
+            shared_entry.as_ref()?
+        } else {
+            self.slots[(hash % self.slots.len() as u64) as usize].as_ref()?
+        };
         if entry.key != *key {
             stats.tt_collisions += 1;
             if entry.hash == hash {
@@ -1269,12 +1371,17 @@ impl Table {
             compatible,
         ))
     }
-    fn insert_probed(&mut self, probe: ProbedKey, node: NodeValue, stats: &mut SearchStats) {
+    fn insert_probed<const SMP: bool>(
+        &mut self,
+        probe: ProbedKey,
+        node: NodeValue,
+        stats: &mut SearchStats,
+    ) {
         let Some(hash) = probe.hash else {
-            debug_assert!(self.slots.is_empty());
+            debug_assert!(self.capacity_for::<SMP>() == 0);
             return;
         };
-        self.insert_hashed(
+        self.insert_hashed::<SMP>(
             Entry {
                 key: probe.key,
                 context: probe.context.map_or([0; 2], |c| c.0),
@@ -1290,19 +1397,28 @@ impl Table {
             stats,
         );
     }
-    fn insert(&mut self, e: Entry, stats: &mut SearchStats) {
-        if self.slots.is_empty() {
+    fn insert<const SMP: bool>(&mut self, e: Entry, stats: &mut SearchStats) {
+        if self.capacity_for::<SMP>() == 0 {
             return;
         }
         stats.tt_hashes += 1;
         let hash = e.key.hash();
-        self.insert_hashed(e, hash, stats);
+        self.insert_hashed::<SMP>(e, hash, stats);
     }
-    fn insert_hashed(&mut self, mut e: Entry, hash: u64, stats: &mut SearchStats) {
-        if self.slots.is_empty() {
+    fn insert_hashed<const SMP: bool>(&mut self, mut e: Entry, hash: u64, stats: &mut SearchStats) {
+        if self.capacity_for::<SMP>() == 0 {
+            return;
+        }
+        #[cfg(not(target_arch = "wasm32"))]
+        if SMP {
+            e.generation = self.generation;
+            e.hash = hash;
+            let (shared, writer) = self.shared.as_ref().expect("shared table backend");
+            shared.insert(*writer, e, stats);
             return;
         }
         let i = (hash % self.slots.len() as u64) as usize;
+
         if self.slots[i]
             .as_ref()
             .is_some_and(|old| old.generation == self.generation && old.depth > e.depth)
@@ -1310,7 +1426,7 @@ impl Table {
             return;
         }
         // Fixed entry storage is entirely charged when the table is allocated.
-        if self.retained_bytes() > self.byte_limit {
+        if self.retained_bytes_for::<SMP>() > self.byte_limit {
             stats.tt_capacity_skips += 1;
             return;
         }
@@ -1341,6 +1457,7 @@ struct Search<
     const OBSERVE: bool = false,
     const TRACE: bool = false,
     const OPPORTUNITY: bool = false,
+    const SMP: bool = false,
 > {
     eval: &'a dyn StaticEvaluator,
     score_domain: ScoreDomain,
@@ -1350,6 +1467,8 @@ struct Search<
     orderer: Option<&'a dyn MoveOrderer>,
     limits: &'a SearchLimits,
     cancel: &'a AtomicBool,
+    #[cfg(not(target_arch = "wasm32"))]
+    worker_budget: Option<&'a mut lazy_smp::WorkerBudget>,
     start: Instant,
     deadline: Option<Instant>,
     table: &'a mut Table,
@@ -1372,8 +1491,8 @@ struct Search<
     #[cfg(feature = "research-diagnostics")]
     opportunity: Option<&'a mut NeighbourOpportunity>,
 }
-impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool>
-    Search<'_, OBSERVE, TRACE, OPPORTUNITY>
+impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool, const SMP: bool>
+    Search<'_, OBSERVE, TRACE, OPPORTUNITY, SMP>
 {
     fn key(&mut self, c: &SigmaContext) -> Key {
         let key = Key::of(c);
@@ -1382,6 +1501,10 @@ impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool>
     }
 
     fn control(&self) -> NodeResult<()> {
+        #[cfg(not(target_arch = "wasm32"))]
+        if SMP && self.worker_budget.as_ref().is_some_and(|b| b.stopped()) {
+            return Err(Interrupted::Stop(StopReason::Cancelled));
+        }
         if self.cancel.load(Ordering::Relaxed) {
             return Err(Interrupted::Stop(StopReason::Cancelled));
         }
@@ -1394,6 +1517,13 @@ impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool>
         self.control()?;
         if self.stats.nodes >= self.limits.max_nodes {
             return Err(Interrupted::Stop(StopReason::NodeLimit));
+        }
+        #[cfg(not(target_arch = "wasm32"))]
+        if SMP {
+            self.worker_budget
+                .as_mut()
+                .expect("worker budget")
+                .enter()?;
         }
         self.stats.nodes += 1;
         #[cfg(feature = "research-diagnostics")]
@@ -1853,7 +1983,9 @@ impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool>
                 .as_ref()
                 .ok_or(RulesError::InvalidUndo)?
                 .capture(key)?;
-            let (key, hit) = self.table.probe_owned(key, self.context, &mut self.stats);
+            let (key, hit) = self
+                .table
+                .probe_owned::<SMP>(key, self.context, &mut self.stats);
             (Some(key), hit)
         } else {
             (None, None)
@@ -2052,7 +2184,7 @@ impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool>
         };
         self.control()?;
         if let Some(key) = key {
-            self.table.insert_probed(
+            self.table.insert_probed::<SMP>(
                 key,
                 NodeValue {
                     depth,
@@ -2089,7 +2221,9 @@ impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool>
                 .as_ref()
                 .ok_or(RulesError::InvalidUndo)?
                 .capture(key)?;
-            let (key, hit) = self.table.probe_owned(key, self.context, &mut self.stats);
+            let (key, hit) = self
+                .table
+                .probe_owned::<SMP>(key, self.context, &mut self.stats);
             (Some(key), hit)
         } else {
             (None, None)
@@ -2143,7 +2277,7 @@ impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool>
         }
         self.control()?;
         if let Some(key) = key {
-            self.table.insert_probed(
+            self.table.insert_probed::<SMP>(
                 key,
                 NodeValue {
                     depth,
@@ -2224,7 +2358,9 @@ impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool>
                 .as_ref()
                 .ok_or(RulesError::InvalidUndo)?
                 .capture(key)?;
-            let (key, hit) = self.table.probe_owned(key, self.context, &mut self.stats);
+            let (key, hit) = self
+                .table
+                .probe_owned::<SMP>(key, self.context, &mut self.stats);
             (Some(key), hit)
         } else {
             (None, None)
@@ -2557,7 +2693,7 @@ impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool>
             self.stats.ordering.positive_actions += 1;
         }
         if let Some(key) = key {
-            self.table.insert_probed(
+            self.table.insert_probed::<SMP>(
                 key,
                 NodeValue {
                     depth,
@@ -2683,7 +2819,7 @@ impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool>
             let key = self.key(c);
             if let Some((stored_depth, value, bound, best, context_matches)) = self
                 .table
-                .probe(&key, self.context, &mut self.stats)
+                .probe::<SMP>(&key, self.context, &mut self.stats)
                 .filter(|hit| !matches!(hit.2, Bound::ApproxLeaf | Bound::SafeRaceLeaf))
             {
                 #[cfg(feature = "research-diagnostics")]
@@ -2860,7 +2996,7 @@ impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool>
         )))?;
         if self.limits.use_tt {
             let key = self.key(c);
-            self.table.insert(
+            self.table.insert::<SMP>(
                 Entry {
                     generation: 0,
                     context: self.context.map_or([0; 2], |c| c.0),
@@ -2913,7 +3049,7 @@ impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool>
             }
             let Some(action) = self
                 .table
-                .get_hashed(&board.key, board.hash)
+                .get_hashed::<SMP>(&board.key, board.hash)
                 .filter(|e| {
                     Table::compatible(e, context)
                         && e.depth == remaining
@@ -3081,6 +3217,8 @@ impl SessionMethod {
 /// New games explicitly reset or create a session; namespace switches clear all entries.
 pub struct SearchSession {
     namespace: SearchNamespace,
+    #[cfg(not(target_arch = "wasm32"))]
+    native_workers: Option<Box<lazy_smp::NativeWorkers>>,
     evaluator: Arc<dyn StaticEvaluator>,
     residual_head_scratch: Option<ResidualScratch>,
     table: Table,
@@ -3119,6 +3257,8 @@ impl SearchSession {
         if enabled == self.zero_stock_safe_race {
             return;
         }
+        #[cfg(not(target_arch = "wasm32"))]
+        self.stop_native_workers();
         self.detach_safe_race_namespace();
         self.zero_stock_safe_race = enabled;
         self.attach_safe_race_namespace();
@@ -3137,6 +3277,8 @@ impl SearchSession {
         if method == self.zero_stock_safe_race_method {
             return;
         }
+        #[cfg(not(target_arch = "wasm32"))]
+        self.stop_native_workers();
         self.detach_safe_race_namespace();
         self.zero_stock_safe_race_method = method;
         self.attach_safe_race_namespace();
@@ -3154,6 +3296,8 @@ impl SearchSession {
         if method == self.zero_stock_approx_method {
             return;
         }
+        #[cfg(not(target_arch = "wasm32"))]
+        self.stop_native_workers();
         if self.zero_stock_approx_effective {
             self.detach_safe_race_namespace();
             self.namespace.selectivity.truncate(
@@ -3182,6 +3326,10 @@ impl SearchSession {
                 "zero-stock threshold must be 0..=20 or None".into(),
             ));
         }
+        #[cfg(not(target_arch = "wasm32"))]
+        if self.zero_stock_approx_min_root_walls != threshold {
+            self.stop_native_workers();
+        }
         self.zero_stock_approx_min_root_walls = threshold;
         if threshold.is_none() {
             self.set_zero_stock_approx_effective(false);
@@ -3193,6 +3341,8 @@ impl SearchSession {
         if enabled == self.zero_stock_approx_effective {
             return;
         }
+        #[cfg(not(target_arch = "wasm32"))]
+        self.stop_native_workers();
         self.detach_safe_race_namespace();
         if self.zero_stock_approx_effective {
             self.namespace.selectivity.truncate(
@@ -3258,6 +3408,8 @@ impl SearchSession {
         if parameters == self.lmr_parameters {
             return Ok(());
         }
+        #[cfg(not(target_arch = "wasm32"))]
+        self.stop_native_workers();
         let table = if parameters == LmrParameters::default() {
             None
         } else {
@@ -3302,11 +3454,17 @@ impl SearchSession {
     }
     fn change_lmr(&mut self, enabled: bool, method: LmrMethod) {
         method.prepare(); // One process table, outside per-node search work.
+        #[cfg(not(target_arch = "wasm32"))]
+        if method != self.lmr_method {
+            self.stop_native_workers();
+        }
         if enabled == self.lmr && (method == self.lmr_method || !enabled) {
             self.lmr_method = method;
             return;
         }
         // Preserve the existing LMR/approx order before the safe-race suffix.
+        #[cfg(not(target_arch = "wasm32"))]
+        self.stop_native_workers();
         self.detach_safe_race_namespace();
         if self.zero_stock_approx_effective {
             self.namespace.selectivity.truncate(
@@ -3344,6 +3502,10 @@ impl SearchSession {
     /// Observation only; fixed376 enables its two scheduled calls per process.
     /// Does not reset/age tables/history or select a scoring algorithm.
     pub fn set_ordering_observation(&mut self, enabled: bool) {
+        #[cfg(not(target_arch = "wasm32"))]
+        if self.ordering_diagnostics != enabled {
+            self.stop_native_workers();
+        }
         self.ordering_diagnostics = enabled;
     }
     /// An immutable evaluator is owned by the session, so unchanged namespace
@@ -3440,6 +3602,8 @@ impl SearchSession {
             .map(|owner| owner.model.evaluation_scratch());
         Ok(Self {
             namespace,
+            #[cfg(not(target_arch = "wasm32"))]
+            native_workers: None,
             evaluator,
             residual_head_scratch,
             table,
@@ -3487,6 +3651,12 @@ impl SearchSession {
                 .lmr_table
                 .as_ref()
                 .map_or(0, |_| std::mem::size_of::<PreparedLmr>());
+        #[cfg(not(target_arch = "wasm32"))]
+        let metadata = metadata
+            + self
+                .native_workers
+                .as_ref()
+                .map_or(0, |w| w.retained_metadata_bytes());
         (self.table.retained_bytes(), metadata)
     }
     /// Live persistent slot count and byte limit; no table or history mutation.
@@ -3494,7 +3664,7 @@ impl SearchSession {
         self.table.generation
     }
     pub fn tt_capacity(&self) -> (usize, usize) {
-        (self.table.slots.len(), self.table.byte_limit)
+        (self.table.capacity(), self.table.byte_limit)
     }
     /// The persistent table owner's ABI-derived limit, without allocating a table.
     pub fn requested_tt_byte_limit(capacity: usize) -> Result<usize> {
@@ -3521,6 +3691,8 @@ impl SearchSession {
         mut namespace: SearchNamespace,
         score_domain: ScoreDomain,
     ) {
+        #[cfg(not(target_arch = "wasm32"))]
+        self.stop_native_workers();
         if score_domain != ScoreDomain::LEGACY {
             namespace.evaluator.push(':');
             namespace
@@ -3565,6 +3737,13 @@ impl SearchSession {
         limits: &SearchLimits,
         cancel: &AtomicBool,
     ) -> Result<SearchResult> {
+        #[cfg(not(target_arch = "wasm32"))]
+        if self.native_workers.is_some() {
+            return Err(SearchError::Limits(
+                "forced root does not admit native SMP".into(),
+            ));
+        }
+
         #[cfg(feature = "research-diagnostics")]
         if matches!(self.method, SessionMethod::Opportunity(_)) {
             return Err(SearchError::Limits(
@@ -3622,6 +3801,12 @@ impl SearchSession {
         cancel: &AtomicBool,
         on_completed: &mut dyn FnMut(&SearchResult),
     ) -> Result<SearchResult> {
+        #[cfg(not(target_arch = "wasm32"))]
+        if let Some(mut workers) = self.native_workers.take() {
+            let result = workers.search(self, root, limits, cancel, on_completed);
+            self.native_workers = Some(workers);
+            return result;
+        }
         self.search_invocation(root, limits, cancel, SearchInvocation::root(on_completed))
     }
     fn search_invocation<'a>(
@@ -3654,6 +3839,32 @@ impl SearchSession {
             .evaluator
             .session_residual_owner()
             .zip(self.residual_head_scratch.as_mut());
+        #[cfg(not(target_arch = "wasm32"))]
+        if invocation.worker_budget.is_some() {
+            return search_in_table_observed::<false, false, false, true>(
+                root,
+                self.evaluator.as_ref(),
+                limits,
+                cancel,
+                None,
+                invocation,
+                (
+                    &mut self.table,
+                    self.score_domain,
+                    self.ordering.as_mut(),
+                    self.ordering_diagnostics,
+                    self.static_enabled,
+                    (self.lmr, self.lmr_method),
+                    (
+                        self.zero_stock_approx_effective,
+                        self.zero_stock_approx_method,
+                        self.zero_stock_safe_race,
+                    ),
+                ),
+                #[cfg(feature = "research-diagnostics")]
+                None,
+            );
+        }
         search_in_table::<false, false>(
             root,
             self.evaluator.as_ref(),
@@ -3688,6 +3899,8 @@ type SearchTableAndDomain<'table, 'history> = (
 );
 
 struct SearchInvocation<'a> {
+    #[cfg(not(target_arch = "wasm32"))]
+    worker_budget: Option<&'a mut lazy_smp::WorkerBudget>,
     residual_head: Option<(&'a ResidualEvaluator, &'a mut ResidualScratch)>,
     forced_root: Option<u16>,
     lmr_table: Option<&'a PreparedLmr>,
@@ -3704,6 +3917,8 @@ impl<'a> SearchInvocation<'a> {
     fn root(on_completed: &'a mut dyn FnMut(&SearchResult)) -> Self {
         Self {
             on_completed,
+            #[cfg(not(target_arch = "wasm32"))]
+            worker_budget: None,
             residual_head: None,
             forced_root: None,
             lmr_table: None,
@@ -3727,7 +3942,7 @@ fn search_in_table<const OBSERVE: bool, const TRACE: bool>(
     invocation: SearchInvocation<'_>,
     table_and_domain: SearchTableAndDomain<'_, '_>,
 ) -> Result<SearchResult> {
-    search_in_table_observed::<OBSERVE, TRACE, false>(
+    search_in_table_observed::<OBSERVE, TRACE, false, false>(
         root,
         evaluator,
         limits,
@@ -3741,7 +3956,12 @@ fn search_in_table<const OBSERVE: bool, const TRACE: bool>(
 }
 
 #[allow(clippy::too_many_arguments)]
-fn search_in_table_observed<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool>(
+fn search_in_table_observed<
+    const OBSERVE: bool,
+    const TRACE: bool,
+    const OPPORTUNITY: bool,
+    const SMP: bool,
+>(
     root: &SigmaContext,
     evaluator: &dyn StaticEvaluator,
     limits: &SearchLimits,
@@ -3760,6 +3980,12 @@ fn search_in_table_observed<const OBSERVE: bool, const TRACE: bool, const OPPORT
         (lmr, lmr_method),
         (zero_stock_approx_permitted, zero_stock_approx_method, zero_stock_safe_race_enabled),
     ) = table_and_domain;
+    #[cfg(not(target_arch = "wasm32"))]
+    if table.shared.is_some() != SMP {
+        return Err(SearchError::Limits(
+            "local/observed entry cannot use shared TT backend".into(),
+        ));
+    }
     #[cfg(feature = "research-diagnostics")]
     if TRACE
         && (invocation.trial.is_none()
@@ -3779,7 +4005,16 @@ fn search_in_table_observed<const OBSERVE: bool, const TRACE: bool, const OPPORT
             "opportunity observation ownership mismatch".into(),
         ));
     }
-    let start = Instant::now();
+    let start = {
+        #[cfg(not(target_arch = "wasm32"))]
+        if let Some(budget) = invocation.worker_budget.as_ref() {
+            budget.started()
+        } else {
+            Instant::now()
+        }
+        #[cfg(target_arch = "wasm32")]
+        Instant::now()
+    };
     if limits.max_depth == 0 || limits.max_nodes == 0 || limits.max_depth > 200 {
         return Err(SearchError::Limits(
             "depth must be 1..=200 and nodes >0".into(),
@@ -3846,7 +4081,32 @@ fn search_in_table_observed<const OBSERVE: bool, const TRACE: bool, const OPPORT
         o.published = true;
         o.root_stock = Some(NeighbourOpportunity::stock(root.position()) as u8);
     }
-    let mut state = Search::<OBSERVE, TRACE, OPPORTUNITY> {
+    let first_depth = {
+        #[cfg(not(target_arch = "wasm32"))]
+        if let Some(budget) = invocation.worker_budget.as_ref() {
+            budget.first_depth(limits.max_depth)
+        } else {
+            1
+        }
+        #[cfg(target_arch = "wasm32")]
+        {
+            1
+        }
+    };
+    let publish_completed = {
+        #[cfg(not(target_arch = "wasm32"))]
+        {
+            !SMP || invocation
+                .worker_budget
+                .as_ref()
+                .is_none_or(|b| b.is_main())
+        }
+        #[cfg(target_arch = "wasm32")]
+        {
+            true
+        }
+    };
+    let mut state = Search::<OBSERVE, TRACE, OPPORTUNITY, SMP> {
         eval: evaluator,
         score_domain,
         // Only the opt-in head input persists. Geometry/counters remain fresh
@@ -3861,6 +4121,8 @@ fn search_in_table_observed<const OBSERVE: bool, const TRACE: bool, const OPPORT
         orderer,
         limits,
         cancel,
+        #[cfg(not(target_arch = "wasm32"))]
+        worker_budget: invocation.worker_budget,
         start,
         deadline,
         table,
@@ -3981,7 +4243,7 @@ fn search_in_table_observed<const OBSERVE: bool, const TRACE: bool, const OPPORT
             result.pv = vec![trial.action];
             return Ok(());
         }
-        for depth in 1..=limits.max_depth {
+        for depth in first_depth..=limits.max_depth {
             #[cfg(feature = "research-diagnostics")]
             if OBSERVE && let Some(o) = state.lmr_observation.as_deref_mut() {
                 o.iteration = depth;
@@ -3992,18 +4254,24 @@ fn search_in_table_observed<const OBSERVE: bool, const TRACE: bool, const OPPORT
             } else {
                 state.root_depth(&mut c, a.as_ref(), depth, result.action)?
             };
-            let pv = state.pv(&c, action, depth);
+            let pv = if publish_completed {
+                state.pv(&c, action, depth)
+            } else {
+                Vec::new()
+            };
             state.control()?;
             result.action = Some(action);
             result.value = Some(value);
             result.completed_depth = depth;
             result.pv = pv;
-            state.stats.tt_retained_bytes = state.table.retained_bytes();
-            state.stats.tt_generation = state.table.generation;
-            state.publish_distance_counts();
-            result.stats = state.stats.clone();
-            result.elapsed = state.start.elapsed();
-            state.table.committed = state.table.generation;
+            if publish_completed {
+                state.stats.tt_retained_bytes = state.table.retained_bytes();
+                state.stats.tt_generation = state.table.generation;
+                state.publish_distance_counts();
+                result.stats = state.stats.clone();
+                result.elapsed = state.start.elapsed();
+            }
+            state.table.commit();
             #[cfg(feature = "research-diagnostics")]
             if OPPORTUNITY
                 && let Some(q) = state
@@ -4013,7 +4281,9 @@ fn search_in_table_observed<const OBSERVE: bool, const TRACE: bool, const OPPORT
             {
                 q.commit();
             }
-            (invocation.on_completed)(&result);
+            if publish_completed {
+                (invocation.on_completed)(&result);
+            }
         }
         Ok(())
     })();
@@ -4049,7 +4319,16 @@ fn search_in_table_observed<const OBSERVE: bool, const TRACE: bool, const OPPORT
         if TRACE && let Some(trace) = state.trial_trace.as_deref_mut() {
             trace.parent_restored = Some(false);
         }
-        state.table.clear();
+        #[cfg(not(target_arch = "wasm32"))]
+        if SMP {
+            if let Some(budget) = state.worker_budget.as_ref() {
+                budget.abort();
+            }
+            state.table.discard_uncommitted();
+        }
+        if !SMP {
+            state.table.clear();
+        }
         if let Some(history) = state.ordering.as_deref_mut() {
             history.reset();
         }
@@ -4250,7 +4529,7 @@ mod persistent_tt_tests {
         let mut t = Table::persistent(1).unwrap();
         t.next_generation();
         let mut stats = SearchStats::default();
-        t.insert(
+        t.insert::<false>(
             Entry {
                 generation: 0,
                 context: ContextFingerprint::of(&a).unwrap().0,
@@ -4265,13 +4544,13 @@ mod persistent_tt_tests {
             &mut stats,
         );
         assert!(
-            !t.probe(&Key::of(&b), ContextFingerprint::of(&b), &mut stats)
+            !t.probe::<false>(&Key::of(&b), ContextFingerprint::of(&b), &mut stats)
                 .unwrap()
                 .4
         );
         assert_eq!(stats.tt_context_misses, 1);
         assert_eq!(stats.tt_collisions, 0);
-        t.insert(
+        t.insert::<false>(
             Entry {
                 generation: 0,
                 context: ContextFingerprint::of(&b).unwrap().0,
@@ -4289,7 +4568,7 @@ mod persistent_tt_tests {
         let mut changed = Key::of(&b);
         changed.ply += 2;
         assert!(
-            t.probe(&changed, ContextFingerprint::of(&b), &mut stats)
+            t.probe::<false>(&changed, ContextFingerprint::of(&b), &mut stats)
                 .is_none()
         );
         // Artificial board encodings demonstrate fixed retention, not replay validity.
@@ -4299,7 +4578,7 @@ mod persistent_tt_tests {
         for i in 0..512u16 {
             let mut key = Key::of(&a);
             key.ply = i;
-            capped.insert(
+            capped.insert::<false>(
                 Entry {
                     generation: 0,
                     context: [0; 2],
@@ -4346,7 +4625,7 @@ mod persistent_tt_tests {
         ] {
             let mut table = Table::persistent(4096).unwrap();
             table.next_generation();
-            table.insert(
+            table.insert::<false>(
                 Entry {
                     generation: 0,
                     context: ContextFingerprint::of(&root).unwrap().0,
@@ -4406,7 +4685,7 @@ mod persistent_tt_tests {
         // Illegal cached moves are neither ordering candidates nor numerical cuts.
         let mut illegal = SearchSession::new(e.clone(), ns("D0,8:tanh"), 4096).unwrap();
         illegal.table.next_generation();
-        illegal.table.insert(
+        illegal.table.insert::<false>(
             Entry {
                 generation: 0,
                 context: ContextFingerprint::of(&root).unwrap().0,

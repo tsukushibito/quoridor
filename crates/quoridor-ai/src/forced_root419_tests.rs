@@ -66,7 +66,7 @@ fn forced419_parent_horizon_and_no_alllegal_root_tt_numeric() {
     let mut s = session(evaluator.clone());
     let action = root.legal_ids()[0];
     let key = Key::of(&root);
-    s.table.insert(
+    s.table.insert::<false>(
         Entry {
             key,
             generation: 0,
@@ -92,7 +92,7 @@ fn forced419_parent_horizon_and_no_alllegal_root_tt_numeric() {
     assert!(evaluator.heads.load(Ordering::Relaxed) > 1);
     assert!(
         s.table
-            .get_hashed(&key, key.hash())
+            .get_hashed::<false>(&key, key.hash())
             .is_none_or(|e| e.value == 0.75)
     );
     same(&root, &before);

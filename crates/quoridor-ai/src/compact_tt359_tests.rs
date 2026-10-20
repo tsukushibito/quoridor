@@ -205,8 +205,8 @@ fn compact359_fixed_layout_admission_allocation_and_paired_hash() {
     assert!(Table::with_limit(usize::MAX, usize::MAX).is_err());
     let mut s = SearchStats::default();
     let owned = BoardCursor::of(&c).capture(Key::of(&c)).unwrap();
-    let (p, _) = t.probe_owned(owned, ContextFingerprint::of(&c), &mut s);
-    t.insert_probed(
+    let (p, _) = t.probe_owned::<false>(owned, ContextFingerprint::of(&c), &mut s);
+    t.insert_probed::<false>(
         p,
         NodeValue {
             depth: 1,
@@ -221,12 +221,12 @@ fn compact359_fixed_layout_admission_allocation_and_paired_hash() {
     for ply in 0..512 {
         let mut e = entry(&c, 1, 0.25, 13);
         e.key.ply = ply; // encoding-only byte test, not an admitted replay
-        t.insert(e, &mut s);
+        t.insert::<false>(e, &mut s);
     }
     assert_eq!(t.retained_bytes(), fixed);
     assert_eq!(s.tt_capacity_skips, 0);
     let empty = Table::new(0).unwrap();
-    let (_, miss) = empty.probe_owned(
+    let (_, miss) = empty.probe_owned::<false>(
         BoardCursor::of(&c).capture(Key::of(&c)).unwrap(),
         None,
         &mut s,
@@ -342,7 +342,13 @@ fn compact359_ghi_future_draw_ordering_only_absence_and_numeric_match() {
     assert_eq!(repeat.value, rb.value);
     assert_eq!(repeat.stats.tt_cutoffs, 1);
     let mut s = SearchStats::default();
-    assert!(!session.table.probe(&Key::of(&b), None, &mut s).unwrap().4);
+    assert!(
+        !session
+            .table
+            .probe::<false>(&Key::of(&b), None, &mut s)
+            .unwrap()
+            .4
+    );
     assert_eq!(s.tt_context_matches, 0);
 }
 
@@ -352,18 +358,18 @@ fn compact359_forced_board_hash_index_and_context_collision_limits() {
     let c = a.play(13).unwrap();
     let mut t = Table::persistent(1).unwrap();
     let mut s = SearchStats::default();
-    t.insert_hashed(entry(&a, 1, 0., 13), 7, &mut s);
+    t.insert_hashed::<false>(entry(&a, 1, 0., 13), 7, &mut s);
     assert!(
-        t.probe_hashed(&Key::of(&c), ContextFingerprint::of(&c), 7, &mut s)
+        t.probe_hashed::<false>(&Key::of(&c), ContextFingerprint::of(&c), 7, &mut s)
             .is_none()
     );
     assert!(
-        t.probe_hashed(&Key::of(&c), ContextFingerprint::of(&c), 8, &mut s)
+        t.probe_hashed::<false>(&Key::of(&c), ContextFingerprint::of(&c), 8, &mut s)
             .is_none()
     );
     assert_eq!((s.tt_hash_collisions, s.tt_index_collisions), (1, 1));
     assert!(
-        !t.probe_hashed(&Key::of(&b), ContextFingerprint::of(&b), 7, &mut s)
+        !t.probe_hashed::<false>(&Key::of(&b), ContextFingerprint::of(&b), 7, &mut s)
             .unwrap()
             .4
     );
@@ -371,7 +377,7 @@ fn compact359_forced_board_hash_index_and_context_collision_limits() {
     // full board equality cannot detect a true128-bit history-token collision.
     t.slots[0].as_mut().unwrap().context = ContextFingerprint::of(&b).unwrap().0;
     assert!(
-        t.probe_hashed(&Key::of(&b), ContextFingerprint::of(&b), 7, &mut s)
+        t.probe_hashed::<false>(&Key::of(&b), ContextFingerprint::of(&b), 7, &mut s)
             .unwrap()
             .4
     );

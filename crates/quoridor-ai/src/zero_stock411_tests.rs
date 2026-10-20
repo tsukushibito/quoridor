@@ -88,6 +88,8 @@ fn with_search<T>(
     table.next_generation();
     let mut history = ContinuationHistory::new().unwrap();
     let mut s = Search {
+        #[cfg(not(target_arch = "wasm32"))]
+        worker_budget: None,
         #[cfg(feature = "research-diagnostics")]
         opportunity: None,
         eval,
@@ -140,7 +142,7 @@ fn seed(
     bound: Bound,
     best: Option<u16>,
 ) {
-    s.table.insert(
+    s.table.insert::<false>(
         Entry {
             key: Key::of(c),
             context: ContextFingerprint::of(c).unwrap().0,

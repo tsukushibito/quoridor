@@ -27,7 +27,7 @@ fn setup(s: &mut Search<'_>, c: &SigmaContext, best: u16, depth: u16) {
     s.board = Some(BoardCursor::of(c));
     *s.table = Table::new(4096).unwrap();
     s.table.next_generation();
-    s.table.insert(
+    s.table.insert::<false>(
         Entry {
             key: Key::of(c),
             context: s.context.unwrap().0,
@@ -151,7 +151,7 @@ fn control386_tt_first_cutoff_skips_remainder_and_trains_once() {
                 );
                 let (_, value, bound, best, _) = s
                     .table
-                    .probe(&Key::of(c), s.context, &mut SearchStats::default())
+                    .probe::<false>(&Key::of(c), s.context, &mut SearchStats::default())
                     .unwrap();
                 assert_eq!(value, -0.5);
                 assert!(matches!(bound, Bound::Lower));
@@ -218,7 +218,7 @@ fn control386_residual_pvs_research_and_complete_tree_value() {
             assert_eq!(s.stats.pvs_researches, 1);
             assert_eq!(
                 s.table
-                    .probe(&Key::of(c), s.context, &mut SearchStats::default())
+                    .probe::<false>(&Key::of(c), s.context, &mut SearchStats::default())
                     .unwrap()
                     .3,
                 Some(winner)
@@ -245,7 +245,7 @@ fn control386_residual_pvs_research_and_complete_tree_value() {
                 );
                 let best = s
                     .table
-                    .probe(&Key::of(c), s.context, &mut SearchStats::default())
+                    .probe::<false>(&Key::of(c), s.context, &mut SearchStats::default())
                     .unwrap()
                     .3
                     .unwrap();

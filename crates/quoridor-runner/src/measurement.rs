@@ -60,6 +60,21 @@ struct RootInput {
 #[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 struct Settings {
+    #[serde(
+        default,
+        deserialize_with = "crate::config::deserialize_search_threads",
+        skip_serializing_if = "Option::is_none"
+    )]
+    search_threads: Option<usize>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    search_cpu_cores: Option<Vec<usize>>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    management_cpu_core: Option<usize>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    native_memory_bytes: Option<u64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    time_reserve_ms: Option<u64>,
+
     roots: Vec<RootInput>,
     /// Native Sigma static value; ONNX/library live in Experiment inputs, not NNUE descriptors.
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -141,6 +156,48 @@ fn default_zero_stock_approx_method() -> String {
 }
 
 fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
+    if let Some(threads) = settings.search_threads {
+        let team = settings
+            .search_cpu_cores
+            .as_ref()
+            .ok_or("measurement search CPU team missing")?;
+        if threads == 0
+            || settings.profile != Profile::Control
+            || team.len() != threads
+            || team.iter().collect::<std::collections::BTreeSet<_>>().len() != threads
+            || settings
+                .management_cpu_core
+                .is_none_or(|m| team.contains(&m))
+            || settings
+                .native_memory_bytes
+                .is_none_or(|n| n < 64 * 1024 * 1024)
+            || !settings.use_tt
+            || settings.tt_entries == 0
+            || settings.zero_stock_approx_min_root_walls.is_some()
+            || settings.neighbour_opportunity.is_some()
+            || settings.root_ordering_quality.is_some()
+            || requests
+                .iter()
+                .any(|r| r.diagnostic || r.observe_lmr || r.observe_completed_depths || r.warmup)
+        {
+            return Err("positive admitted native search team requires TT and ordinary observer-OFF requests".into());
+        }
+    } else if settings.search_cpu_cores.is_some()
+        || settings.management_cpu_core.is_some()
+        || settings.native_memory_bytes.is_some()
+    {
+        return Err("unused native search team resources".into());
+    }
+    if let Some(reserve) = settings.time_reserve_ms {
+        if settings.search_threads.is_none()
+            || requests
+                .iter()
+                .any(|r| r.time_limit_ms.is_none_or(|ms| ms <= reserve))
+        {
+            return Err("reserve belongs to explicit positive clock-budget search requests".into());
+        }
+    }
+
     if let Some(name) = settings.neighbour_opportunity.as_deref() {
         alphabeta::NeighbourOpportunityMode::from_name(name)?;
         if settings.profile != Profile::Control
@@ -469,6 +526,23 @@ impl Target for SearchTarget {
                 .unwrap_or(alphabeta::RESEARCH_SAFE_RACE_METHOD.name()),
         )?);
         session.set_zero_stock_safe_race(self.settings.zero_stock_safe_race);
+        if let Some(threads) = self.settings.search_threads {
+            let cores = self
+                .settings
+                .search_cpu_cores
+                .clone()
+                .ok_or("measurement search cores")?;
+            session.set_search_threads(
+                threads,
+                Arc::new(move |index| {
+                    let core = *cores.get(index).ok_or_else(|| {
+                        alphabeta::SearchError::Limits("helper CPU missing".into())
+                    })?;
+                    crate::resources::pin(core)
+                        .map_err(|e| alphabeta::SearchError::Limits(e.to_string()))
+                }),
+            )?;
+        }
         let method = session.namespace().selectivity.clone();
         let lmr = session.lmr_enabled();
         let retained = session.retained_memory_bytes();
@@ -526,7 +600,11 @@ impl Target for SearchTarget {
         let limits = SearchLimits {
             max_depth: request.depth,
             max_nodes: request.node_cap,
-            time_limit: request.time_limit_ms.map(std::time::Duration::from_millis),
+            time_limit: request.time_limit_ms.map(|ms| {
+                std::time::Duration::from_millis(
+                    ms.saturating_sub(self.settings.time_reserve_ms.unwrap_or(0)),
+                )
+            }),
             tt_entries: self.settings.tt_entries,
             use_pvs: self.settings.use_pvs,
             use_tt: self.settings.use_tt,
@@ -544,9 +622,14 @@ impl Target for SearchTarget {
                     ..Default::default()
                 });
         let inference_before = self.sigma_value.as_ref().map(|e| e.work()).transpose()?;
+        let cpu_before = self
+            .settings
+            .search_threads
+            .and_then(|_| crate::resources::process_cpu_seconds());
         let table_generation_before = session.table_generation();
         let search_started = Instant::now();
         let mut completed_depths = Vec::new();
+        let mut main_completed_receipt = None;
         let result = if let Some(observation) = opportunity.as_mut() {
             session.search_neighbour_opportunity(root, &limits, cancel, observation)
         } else if let Some(observation) = lmr_observation.as_deref_mut() {
@@ -554,6 +637,15 @@ impl Target for SearchTarget {
         } else if request.observe_completed_depths {
             session.search_with_updates(root, &limits, cancel, &mut |completed| {
                 completed_depths.push(completed_depth_observation(completed));
+            })
+        } else if self.settings.search_threads.is_some() {
+            // One existing completed-depth callback, not a node observer. Record
+            // the main snapshot receipt separately from terminal worker drain.
+            session.search_with_updates(root, &limits, cancel, &mut |completed| {
+                main_completed_receipt = Some((
+                    search_started.elapsed().as_secs_f64(),
+                    completed.completed_depth,
+                ));
             })
         } else {
             session.search(root, &limits, cancel)
@@ -664,6 +756,29 @@ impl Target for SearchTarget {
         }
         row["TT_generation_before"] = json!(table_generation_before);
         row["TT_generation_after"] = json!(session.table_generation());
+        if self.settings.search_threads.is_some() {
+            row["search_threads"] = json!(self.settings.search_threads.unwrap());
+            row["main_completed_receipt_seconds"] = json!(main_completed_receipt.map(|r| r.0));
+            row["main_receipted_completed_depth"] = json!(main_completed_receipt.map(|r| r.1));
+            row["receipt_scope"] = json!(
+                "main Search callback; terminal Search_call_seconds includes all-worker quiet/discard; not arena parent receipt"
+            );
+            row["search_cpu_cores"] = json!(self.settings.search_cpu_cores);
+            row["SMP"] = session
+                .last_smp_report()
+                .map_or(Value::Null, crate::runtime::smp_report);
+            row["process_CPU_seconds"] = json!(
+                cpu_before
+                    .zip(crate::resources::process_cpu_seconds())
+                    .and_then(|(a, b)| (b >= a).then_some(b - a))
+            );
+            row["CPU_resolution"] = json!(
+                "OS process CPU ticks; all threads, includes result rendering; not physical NN calls"
+            );
+            row["process_peak_RSS_B"] = json!(crate::resources::process_peak_rss_bytes());
+            row["peak_RSS_scope"] = json!("process cumulative highwater, not per-root reset");
+            row["time_reserve_ms"] = json!(self.settings.time_reserve_ms);
+        }
         row["Search_call_seconds"] = json!(search_seconds);
         row["parent_unchanged"] = json!(after == self.before);
         if after != self.before {
@@ -941,6 +1056,26 @@ pub fn run(bound: &BoundControl) -> Result<Value> {
     let settings: Settings = e.config.read()?;
     let requests: Vec<Request> = e.schedule.read()?;
     validate(&settings, &requests)?;
+    if let Some(threads) = settings.search_threads {
+        let team = settings
+            .search_cpu_cores
+            .as_ref()
+            .ok_or("measurement search team required")?;
+        let main = settings
+            .management_cpu_core
+            .ok_or("measurement management CPU required")?;
+        let admission = crate::resources::admit_explicit(
+            threads,
+            team,
+            main,
+            4 * 1024 * 1024 * 1024,
+            settings.native_memory_bytes,
+        )?;
+        if admission.worker_cores != *team {
+            return Err("measurement search team admission drift".into());
+        }
+        crate::resources::pin(team[0])?;
+    }
     evaluator_binding(&settings, e.models.len())?;
     if settings.namespace.rules != e.rules {
         return Err("measurement loaded model/rules settings".into());
@@ -2849,5 +2984,36 @@ mod root_ordering_quality_boundary_tests {
                 .get("root_ordering_quality")
                 .is_none()
         );
+    }
+}
+
+#[cfg(test)]
+mod smp_measurement_boundary_tests {
+    use super::*;
+    #[test]
+    fn smp_measurement_explicit_team_and_time_reserve_reject_unused_or_observed_routes() {
+        let body = serde_json::json!({"roots":[{"input":0,"pointer":"/families/0","field":"prefix","check_history":true,"label":"new-team-boundary"}],"profile":"control","tt_entries":1048576,"use_tt":true,"use_pvs":true,"namespace":{"evaluator":"software-only","rules":"research-standard-2p-threefold-goal-first-v1","selectivity":"PVS"},"output_bytes":1048576,"record_bytes":32768,"search_threads":2,"search_cpu_cores":[12,14],"management_cpu_core":0,"native_memory_bytes":2684354560_u64,"time_reserve_ms":5});
+        let request:Request=serde_json::from_value(serde_json::json!({"id":"new-team-boundary","session":"one","root":0,"depth":8,"node_cap":1000000,"time_limit_ms":100})).unwrap();
+        let settings: Settings = serde_json::from_value(body.clone()).unwrap();
+        validate(&settings, std::slice::from_ref(&request)).unwrap();
+        for wrong in 0..7 {
+            let mut b = body.clone();
+            let mut r = request.clone();
+            match wrong {
+                0 => b["search_threads"] = serde_json::json!(0),
+                1 => b["search_cpu_cores"] = serde_json::json!([12, 12]),
+                2 => b["management_cpu_core"] = serde_json::json!(12),
+                3 => b["profile"] = serde_json::json!("cheap"),
+                4 => r.diagnostic = true,
+                5 => r.time_limit_ms = None,
+                _ => {
+                    b.as_object_mut().unwrap().remove("search_threads");
+                }
+            }
+            let result = serde_json::from_value::<Settings>(b)
+                .map_err(|e| e.to_string())
+                .and_then(|b| validate(&b, &[r]).map_err(|e| e.to_string()));
+            assert!(result.is_err());
+        }
     }
 }

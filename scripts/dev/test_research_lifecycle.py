@@ -17,6 +17,70 @@ def load_lifecycle():
 
 
 class LifecycleDataAndPaths(unittest.TestCase):
+    def test_native_search_team_cpu_family_is_total_not_per_engine(self):
+        lc = load_lifecycle()
+        config = dict(
+            search_threads=2,
+            search_cpu_cores=[12, 14],
+            management_cpu_core=0,
+            native_memory_bytes=2684354560,
+        )
+        experiment = dict(phase="compare", argv=["/native", "measure"], config=config)
+        resources = dict(
+            CPU=3, threads=1, GPU=0, controller_included=True, family_RAM_B=4294967296
+        )
+        spec = dict(
+            kind="run",
+            experiment=experiment,
+            support=dict(resources=resources),
+            limits=dict(
+                worker_cpu=12,
+                guardian_cpu=0,
+                family_B=4294967296,
+                controller_B=1610612736,
+            ),
+            child_cpu_cores=[0, 12, 14],
+        )
+        with (
+            patch.object(lc, "document", side_effect=lambda ref: ref),
+            patch.object(lc, "measurement_config", return_value=(config, [])),
+            patch.object(lc, "arena_cohort", return_value=None),
+        ):
+            self.assertEqual(lc.native_cpu_cores(spec), [0, 12, 14])
+            for key, value in [("CPU", 2), ("family_RAM_B", 5368709120)]:
+                old = resources[key]
+                resources[key] = value
+                with self.assertRaises(lc.Refused):
+                    lc.native_cpu_cores(spec)
+                resources[key] = old
+            config["search_cpu_cores"] = [12, 12]
+            with self.assertRaises(lc.Refused):
+                lc.native_cpu_cores(spec)
+            config["search_cpu_cores"] = [12, 14]
+            arena = dict(
+                arena=dict(comparison="search_wall_time"),
+                workers=1,
+                active_games=1,
+                max_batch=1,
+                cpu_cores=[12, 12],
+                management_cpu_core=0,
+                engines=[
+                    dict(
+                        kind="distance",
+                        ordering_profile="control",
+                        search_threads=2,
+                        search_cpu_cores=[12, 14],
+                    )
+                ]
+                * 2,
+            )
+            experiment.update(phase="arena", argv=["/native", "arena"], config=arena)
+            self.assertEqual(lc.native_cpu_cores(spec), [0, 12, 14])
+            arena["workers"] = 2
+            with self.assertRaises(lc.Refused):
+                lc.native_cpu_cores(spec)
+
+
     def test_measurement_and_callback_arena_caller_membership(self):
         lc = load_lifecycle()
         root = lc.ROOT

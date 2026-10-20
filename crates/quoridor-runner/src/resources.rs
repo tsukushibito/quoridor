@@ -15,6 +15,8 @@ pub struct Admission {
     pub memory_available: u64,
     /// Evaluation main manages one game; the two worker cores own the engines.
     pub management_core: Option<usize>,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub search_worker_cores: Vec<usize>,
 }
 fn number(path: &str) -> Option<u64> {
     fs::read_to_string(path).ok()?.trim().parse().ok()
@@ -119,6 +121,7 @@ pub fn admit(
         memory_limit: limit,
         memory_available: available,
         management_core: None,
+        search_worker_cores: Vec::new(),
     })
 }
 /// Explicit per-job allocation does not redefine host headroom as process affinity.
@@ -138,15 +141,29 @@ pub fn admit_evaluation(
     management: Option<usize>,
     reserve: u64,
     maximum: Option<u64>,
+    search_team: &[usize],
 ) -> Result<Admission> {
     let mut admission = if let Some(main) = management {
-        let search = evaluation_search_cores(requested)?;
+        let anchors = evaluation_search_cores(requested)?;
+        let search = if search_team.is_empty() {
+            anchors
+        } else {
+            if search_team.iter().collect::<BTreeSet<_>>().len() != search_team.len()
+                || anchors.iter().any(|c| !search_team.contains(c))
+            {
+                return Err(
+                    "complete distinct search team must contain actual engine owners".into(),
+                );
+            }
+            search_team
+        };
         let mut owned = admit_explicit(search.len(), search, main, reserve, maximum)?;
         // Both owners remain pinned; only one move may run before its matching drain.
         owned.worker_cores = requested.to_vec();
+        owned.search_worker_cores = search_team.to_vec();
         owned
     } else {
-        if !requested.is_empty() {
+        if !requested.is_empty() || !search_team.is_empty() {
             return Err("evaluation needs both engine cores and its management core".into());
         }
         // Fixtures select only from their genuine launch affinity. Host
@@ -247,6 +264,7 @@ fn admit_explicit_policy(
         memory_limit: limit,
         memory_available: available,
         management_core: None,
+        search_worker_cores: Vec::new(),
     })
 }
 fn admitted_memory(available: u64, reserve: u64, maximum: Option<u64>) -> Result<u64> {
@@ -558,4 +576,31 @@ mod alternating_evaluation_core_tests {
         assert!(explicit_cpu_selection(1, search, 2, &[2, 4], &topology, Some(3.9)).is_err());
         assert!(evaluation_search_cores(&[4]).is_err());
     }
+}
+
+pub(crate) fn process_cpu_seconds() -> Option<f64> {
+    let raw = fs::read_to_string("/proc/self/stat").ok()?;
+    let end = raw.rfind(')')?;
+    let fields: Vec<_> = raw[end + 2..].split_whitespace().collect();
+    let ticks = fields
+        .get(11)?
+        .parse::<u64>()
+        .ok()?
+        .checked_add(fields.get(12)?.parse::<u64>().ok()?)?;
+    // Existing libc dependency; scalar OS metadata query, no shared memory or race.
+    let hz = unsafe { libc::sysconf(libc::_SC_CLK_TCK) };
+    (hz > 0).then(|| ticks as f64 / hz as f64)
+}
+
+pub(crate) fn process_peak_rss_bytes() -> Option<u64> {
+    let raw = fs::read_to_string("/proc/self/status").ok()?;
+    raw.lines()
+        .find_map(|line| {
+            line.strip_prefix("VmHWM:")?
+                .split_whitespace()
+                .next()?
+                .parse::<u64>()
+                .ok()
+        })?
+        .checked_mul(1024)
 }

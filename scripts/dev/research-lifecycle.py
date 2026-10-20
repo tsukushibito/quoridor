@@ -2108,38 +2108,88 @@ def build_test_cpu_cores(spec):
     return cores
 
 
-def arena_cpu_cores(spec):
-    """Bind this native evaluation's launch affinity to its current AI/main roles."""
-    require(spec["kind"] == "run", "evaluation CPU allocation belongs to RUN")
+def native_cpu_cores(spec):
+    """Bind native measurement or serial arena to its admitted search/main roles."""
+    require(spec["kind"] == "run", "native CPU allocation belongs to RUN")
     experiment = document(spec["experiment"])
-    require(
-        experiment["phase"] == "arena"
-        or (experiment["phase"] == "compare" and experiment["argv"][1] == "decisions"),
-        "three cores belong to serial arena/one-parent decisions",
-    )
     config = document(experiment["config"])
-    ai = config.get("cpu_cores")
-    main = config.get("management_cpu_core")
-    require(
-        config.get("arena", {}).get("comparison")
-        in {"whole_wall_time", "evaluator_fixed_depth", "search_wall_time"}
-        and all(config.get(k) == 1 for k in ("workers", "active_games", "max_batch"))
-        and config.get("inference_cpu_core") is None
-        and isinstance(ai, list)
-        and len(ai) == 2
-        and all(type(cpu) is int and cpu >= 0 for cpu in ai)
-        and type(main) is int
-        and main >= 0
-        and main not in ai,
-        "one game, fixed A/B worker cores and distinct main core",
-    )
-    cores = sorted(set([*ai, main]))
-    require(
-        spec.get("child_cpu_cores") == cores
-        and spec["limits"]["worker_cpu"] == ai[0]
-        and spec["limits"]["guardian_cpu"] == main,
-        "actual native launch affinity equals AI/main allocation",
-    )
+    if experiment["phase"] == "compare" and experiment["argv"][1] == "measure":
+        config, _ = measurement_config(experiment)
+        workers = config.get("search_cpu_cores")
+        threads = config.get("search_threads")
+        main = config.get("management_cpu_core")
+        require(
+            type(threads) is int
+            and threads > 0
+            and isinstance(workers, list)
+            and len(workers) == threads
+            and all(type(c) is int and c >= 0 for c in workers)
+            and len(set(workers)) == threads
+            and type(main) is int
+            and main >= 0
+            and main not in workers
+            and spec["limits"]["worker_cpu"] == workers[0]
+            and spec["limits"]["guardian_cpu"] == main
+            and config["native_memory_bytes"]
+            == spec["limits"]["family_B"] - spec["limits"]["controller_B"]
+            and arena_cohort(spec) is None,
+            "normal measurement team/management/native family equals declared RUN",
+        )
+        cores = sorted([*workers, main])
+    else:
+        require(
+            experiment["phase"] == "arena"
+            or (experiment["phase"] == "compare" and experiment["argv"][1] == "decisions"),
+            "native CPU team belongs to measurement or serial arena/decisions",
+        )
+        ai = config.get("cpu_cores")
+        main = config.get("management_cpu_core")
+        require(
+            config.get("arena", {}).get("comparison")
+            in {"whole_wall_time", "evaluator_fixed_depth", "search_wall_time"}
+            and all(config.get(k) == 1 for k in ("workers", "active_games", "max_batch"))
+            and config.get("inference_cpu_core") is None
+            and isinstance(ai, list)
+            and len(ai) == 2
+            and all(type(cpu) is int and cpu >= 0 for cpu in ai)
+            and type(main) is int
+            and main >= 0
+            and main not in ai,
+            "one game, fixed A/B worker cores and distinct main core",
+        )
+        workers = set(ai)
+        maximum = 1
+        for index, engine in enumerate(config["engines"]):
+            threads = engine.get("search_threads", 1)
+            require(type(threads) is int and threads > 0, "positive total engine search_threads")
+            if "search_cpu_cores" not in engine:
+                require(threads == 1, "complete multiworker engine team required")
+                continue
+            team = engine["search_cpu_cores"]
+            require(
+                engine["kind"] in {"nnue", "nnue_quantized", "distance"}
+                and engine.get("ordering_profile") == "control"
+                and isinstance(team, list)
+                and len(team) == threads
+                and all(type(c) is int and c >= 0 for c in team)
+                and len(set(team)) == threads
+                and team[0] == ai[index]
+                and main not in team
+                and arena_cohort(spec) is None,
+                "declared managed serial alpha team; no cohort/unused selector",
+            )
+            maximum = max(maximum, threads)
+            workers.update(team)
+        require(
+            len(workers) >= config["workers"] * maximum,
+            "game concurrency times total search workers",
+        )
+        cores = sorted([*workers, main])
+        require(
+            spec["limits"]["worker_cpu"] == ai[0] and spec["limits"]["guardian_cpu"] == main,
+            "native AI/main RUN allocation",
+        )
+    require(spec.get("child_cpu_cores") == cores, "exact declared native launch CPU team")
     support = document(spec["support"])
     resources = support.get("resources", {})
     require(
@@ -2153,7 +2203,7 @@ def arena_cpu_cores(spec):
             arena_cohort(spec) is not None
             or resources["family_RAM_B"] == spec["limits"]["family_B"]
         ),
-        "actual issued three-core evaluation family, not corpus/source-only authority",
+        "actual issued native physical-core family, not corpus/source-only authority",
     )
     return cores
 
@@ -2181,7 +2231,7 @@ def physical_and_quiet(spec):
                 "declared corpus workers and distinct physical reserve cores",
             )
         else:
-            cores = arena_cpu_cores(spec)
+            cores = native_cpu_cores(spec)
     if cohort is None:
         require(set(cores) <= os.sched_getaffinity(0), "CPU affinity admission")
     else:
@@ -2330,7 +2380,7 @@ def command(spec, row, directory, resources, executor=process.execute, *, ledger
             if spec["kind"] == "run" and document(spec["experiment"])["phase"] == "corpus":
                 cores = spec["child_cpu_cores"]
             else:
-                cores = arena_cpu_cores(spec)
+                cores = native_cpu_cores(spec)
             cpu_args = {"cpu_core": None, "cpu_cores": cores}
         if spec.get("perf") is not None and row.get("role", "run") == "run":
             require(
@@ -2588,6 +2638,11 @@ def measurement_config(experiment):
         and set(config)
         <= {
             "inference",
+            "search_threads",
+            "search_cpu_cores",
+            "management_cpu_core",
+            "native_memory_bytes",
+            "time_reserve_ms",
             "roots",
             "profile",
             "tt_entries",
@@ -2620,6 +2675,56 @@ def measurement_config(experiment):
         <= set(config),
         "measurement settings shape",
     )
+    if "search_threads" in config:
+        threads = config["search_threads"]
+        team = config.get("search_cpu_cores")
+        main = config.get("management_cpu_core")
+        require(
+            type(threads) is int
+            and threads > 0
+            and isinstance(team, list)
+            and len(team) == threads
+            and all(type(c) is int and c >= 0 for c in team)
+            and len(set(team)) == threads
+            and type(main) is int
+            and main >= 0
+            and main not in team
+            and type(config.get("native_memory_bytes")) is int
+            and config["native_memory_bytes"] >= 64 * 1024**2
+            and config["profile"] == "control"
+            and config["use_tt"]
+            and config.get("zero_stock_approx_min_root_walls") is None
+            and "neighbour_opportunity" not in config
+            and "root_ordering_quality" not in config
+            and all(
+                not any(
+                    r.get(k, False)
+                    for k in ("diagnostic", "observe_lmr", "observe_completed_depths", "warmup")
+                )
+                for r in requests
+            ),
+            "positive admitted ordinary native search team; no observer/approximation",
+        )
+    else:
+        require(
+            not any(
+                k in config
+                for k in ("search_cpu_cores", "management_cpu_core", "native_memory_bytes")
+            ),
+            "unused search-team resources",
+        )
+    if "time_reserve_ms" in config:
+        reserve = config["time_reserve_ms"]
+        require(
+            "search_threads" in config
+            and type(reserve) is int
+            and reserve >= 0
+            and all(
+                type(r.get("time_limit_ms")) is int and r["time_limit_ms"] > reserve
+                for r in requests
+            ),
+            "explicit clock requests retain a positive budget after reserve",
+        )
     require(
         config["profile"] in {"control", "cheap", "coverage"},
         "configured ordering target",
@@ -3752,7 +3857,9 @@ def experiment_check(spec):
     )
     measurement = experiment["phase"] == "compare" and experiment["argv"][1] == "measure"
     if measurement:
-        measurement_config(experiment)
+        config, _ = measurement_config(experiment)
+        if "search_threads" in config:
+            native_cpu_cores(spec)
         approved = None
     else:
         approved = approved_plan(spec, experiment)
@@ -3762,7 +3869,7 @@ def experiment_check(spec):
     if experiment["phase"] == "compare" and experiment["argv"][1] == "decisions":
         arena_decision_plan_check(experiment, approved)
         if document(experiment["config"])["arena"]["comparison"] == "whole_wall_time":
-            arena_cpu_cores(spec)
+            native_cpu_cores(spec)
         numerical_check(experiment, manifest, refs=refs)
         require(
             document(experiment["config"])["output"] == spec["data_root"],
@@ -3775,7 +3882,7 @@ def experiment_check(spec):
             arena_config["arena"]["comparison"] in {"evaluator_fixed_depth", "search_wall_time"}
             and arena_config.get("management_cpu_core") is not None
         ):
-            arena_cpu_cores(spec)
+            native_cpu_cores(spec)
         numerical_check(experiment, manifest, refs=refs)
         require(
             document(experiment["config"])["output"] == spec["data_root"],

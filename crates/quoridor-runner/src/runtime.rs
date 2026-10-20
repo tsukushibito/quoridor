@@ -507,6 +507,8 @@ pub struct TtProfile {
     pub session_metadata_bytes_peak: usize,
     /// Evaluator Arc/model weights are shared; their allocation is not a TT cap.
     pub shared_evaluator_bytes: Option<usize>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub smp_last: Option<serde_json::Value>,
     #[serde(default)]
     pub actual_namespace: Option<serde_json::Value>,
     #[serde(default)]
@@ -696,6 +698,19 @@ fn arena_alpha_session(
             "arena/session LMR mode mismatch".into(),
         ));
     }
+    if let Some(threads) = engine.search_threads {
+        let cores = engine.search_cpu_cores.clone().unwrap_or_default();
+        session.set_search_threads(
+            threads,
+            Arc::new(move |index| {
+                let cpu = *cores.get(index).ok_or_else(|| {
+                    alphabeta::SearchError::Limits("helper CPU binding missing".into())
+                })?;
+                crate::resources::pin(cpu)
+                    .map_err(|e| alphabeta::SearchError::Limits(e.to_string()))
+            }),
+        )?;
+    }
     Ok(session)
 }
 
@@ -854,6 +869,7 @@ fn invoke_alpha_observed(
         let (table, metadata) = session.retained_memory_bytes();
         profile.retained_bytes_peak = profile.retained_bytes_peak.max(table);
         profile.session_metadata_bytes_peak = profile.session_metadata_bytes_peak.max(metadata);
+        profile.smp_last = session.last_smp_report().map(smp_report);
         match &result {
             Ok(result) => profile.record(result),
             Err(_) => {
@@ -3097,6 +3113,7 @@ fn record_evaluation_alpha(
         "last_completed_iteration_ns":completion.at.map(ns),
         "selection_reason":if selected.is_some() {"completed_iteration"} else {"legal_fallback_no_completed_iteration"},
         "whole_search":result.as_deref().map(crate::arena_clock::alpha_counters),
+        "smp_terminal":game.tt_profiles[engine].smp_last,
         "first_receipt_or_control_error":first_error,
         "terminal_collected":true,"reserve_stop_is_not_user_cancel":true,
         "authority_tid":unsafe {libc::syscall(libc::SYS_gettid)},
@@ -3536,7 +3553,7 @@ fn evaluate_serial_games(
     manifest["clock"]["acceptance"] = if config.arena.as_ref().is_some_and(|a| a.comparison == crate::arena::Comparison::EvaluatorFixedDepth) {
         "requested depth COMPLETE; no move clock; post-return legal validation and matching terminal collection before commit"
     } else { "actual main receipt before configured deadline; post-receipt legal validation and matching terminal collection before commit/next turn" }.into();
-    manifest["execution"] = serde_json::json!({"simultaneous_games":1,"AI_workers":config.engines.len(),"AI_cores":admission.worker_cores,"management_core":admission.management_core,"management_core_observed":unsafe {libc::sched_getcpu()},"main_tid":unsafe {libc::syscall(libc::SYS_gettid)},"main_pid":std::process::id(),"Sigma_inference":"synchronous on its AI worker, intra1/inter1/sequential/batch1","parallel_search":false,"ponder":false,"inference_pump":false,"per_game_TT_reset":true,"initialization_spans":"sum of actual worker spans; overlapping, not added to run wall"});
+    manifest["execution"] = serde_json::json!({"simultaneous_games":1,"AI_workers":config.engines.len(),"AI_cores":admission.worker_cores,"management_core":admission.management_core,"management_core_observed":unsafe {libc::sched_getcpu()},"main_tid":unsafe {libc::syscall(libc::SYS_gettid)},"main_pid":std::process::id(),"Sigma_inference":"synchronous on its AI worker, intra1/inter1/sequential/batch1","parallel_search":config.engines.iter().any(|e|e.search_threads.unwrap_or(1)>1),"search_teams":config.engines.iter().map(|e|serde_json::json!({"threads":e.search_threads.unwrap_or(1),"cores":e.search_cpu_cores})).collect::<Vec<_>>(),"admitted_search_cores":admission.search_worker_cores,"ponder":false,"inference_pump":false,"per_game_TT_reset":true,"initialization_spans":"sum of actual worker spans; overlapping, not added to run wall"});
     fs::write(
         config.output.join("manifest-start.json"),
         serde_json::to_vec_pretty(&manifest)?,
@@ -3775,6 +3792,7 @@ fn run_inner(
             config.management_cpu_core,
             config.host_ram_reserve,
             config.max_memory_bytes,
+            &config.search_team_cores()?,
         )?
     } else if let Some(core) = config.inference_cpu_core {
         if config.inference.is_none() {
@@ -7661,4 +7679,29 @@ fn evaluation_claustrophobia_turn(
         run_start,
     )
     .map_err(|error| error.to_string())
+}
+
+/// One shared native serializer. No invented counters for errored workers;
+/// main snapshots and terminal aggregate work remain different clock domains.
+pub(crate) fn smp_report(report: &alphabeta::SmpReport) -> serde_json::Value {
+    serde_json::json!({
+        "method":"lazy-smp-coherent-striped64-committed-epochs-v1",
+        "helper_stagger":"odd-helper-start2-else1-clamped-to-requested-depth",
+        "search_threads":report.search_threads,"TT_total_capacity":report.tt_total_capacity,
+        "shared_TT_bytes":report.shared_tt_bytes,"main_kernel_completed_depth":report.main_kernel_completed_depth,
+        "main_seconds_before_drain":report.main_seconds_before_drain,"all_workers_quiet_seconds":report.all_workers_quiet_seconds,
+        "stop_drain_seconds":report.stop_drain_seconds,"quiet_discard_seconds":report.quiet_discard_seconds,
+        "quiet_discard_performed":report.quiet_discard_performed,
+        "total_nodes":report.total_nodes,"total_evaluations":report.total_evaluations,
+        "TT_contention_scope":"search probes/inserts only; PV reconstruction try-lock misses not counted",
+        "unused_reserved_nodes":report.unused_reserved_nodes,"node_cap":report.node_cap,
+        "completed_authority":"main-only; helper reach never replaces action/PV/value/depth",
+        "workers":report.workers.iter().map(|w|serde_json::json!({"worker":w.worker,"completed_depth":w.completed_depth,
+            "stop":w.stop.map(crate::arena_clock::stop_name),"nodes":w.nodes,"evaluations":w.evaluations,
+            "unused_reserved_nodes":w.unused_reserved_nodes,"TT_generation":w.table_generation,"error":w.error,
+            "TT_probes":w.stats.as_ref().map(|s|s.tt_probes),"TT_hits":w.stats.as_ref().map(|s|s.tt_hits),
+            "TT_context_matches":w.stats.as_ref().map(|s|s.tt_context_matches),"TT_context_misses":w.stats.as_ref().map(|s|s.tt_context_misses),
+            "TT_contention_skips":w.stats.as_ref().map(|s|s.tt_contention_skips),"delta_updates":w.stats.as_ref().map(|s|s.delta_updates),
+            "TT_retained_bytes":"shared total, counted once above"})).collect::<Vec<_>>()
+    })
 }
