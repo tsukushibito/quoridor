@@ -2713,3 +2713,9 @@ first32の実行は全32 operations・512局/256完全pair/256 tuning family・U
 通常source開始は後続bulk/image/入口文書を待たない。hotpath/depthごとの不要反復を避ける要求であり、正しさに必要な新root一回の資格確認・同期/copyは禁止しない。既存HistoryBase::Sharedとworker overlay/pathを再用する。必要software後は同26入力の固定depth104＋100ms/5ms104の1対2thread ABBAを上限208callsで実施し、UNKNOWN・総CPU・停止遅延・setup/dropを含めて判断する。正しさと実利益が成立した場合だけ固定32family/両色64gamesが条件付きで許可され、追加候補/4thread数値/LMR/本学習は未発行。実装・速度結果は現時点で未資格。Beads324.22と[担当契約](../.artifacts/research-team/integration324/cedar-lazy-smp-v1/task.md)に範囲/所有/実資源/STOP/完成条件を記録し、source開始のため他担当を形式確認で起こさない。
 
 2026-10-20の実source着手は、私有の固定総capacity共有TT ownerとalpha Entry/module入口の差分で確認した。総1M shared TTをN>1で共有し、N1は元LOCAL/value経路を維持する方向。Entry全体のtry-lockとwriter世代のcommit公開を実装し、全体node Mutexやdepthごとの全表commit/discard走査を追加していない。Rootは[実source開始証拠](../.worktree/assets/perf/cedar-lazy-smp-v1/source-start-handoff-v1.json)とprivate post/rustfmt/guardの実FileRefsを確認した。worker pool・root同期・aggregate node budget・normal consumerと限定境界定義は続けて実装中で、source clear・型検査/compile・Main採用・software/性能PASSではない。初回unused-import lint失敗を保持し、bulk support/image/入口文書は着手を待たせていない。main完成snapshotのみ返却、両群総TT1M、全worker静止までの費用を分け、2core CPU費増だけを失敗としない条件を同じtaskへ反映した。
+
+### 履歴点の内訳と更新経緯を調べる（324.23、人間直接指示、2026-10-20）
+
+SMP22と別の既存Sol6.1/high9へ新しい保存/source調査を割り当てた。21の固定26 rowsと小さい順位表を用い、root14wall207ほかordinary/順位変化例とTT/PV対照例についてmain/continuation寄与、更新前後差、浅い失敗/確認・窓/returnとの対応を調べる。通常rootのpathは空でcontinuation行None、ageは16有効rootごとという供給済みsource事実を出発点とし、実対局直前手のseedや減衰発生を仮定しない。非線形gravityのbonus総和を現在点へ等置せず、欠落とcase選択biasを残す。[調査境界と受入れ](design/ai-rust-migration.md#bounded-history-score-provenance-diagnostic-32423)。
+
+不足する経緯だけなら同26/6seriesの1thread Controlを最大26calls/26Mで一度観測できる。必要なwarm predecessorも枠内、coldを元warmの反実仮想としない。対象entryを少数に結果前固定し、全node/全209手traceやdefaultOFF追加処理を作らず、SMP fair clockとは実STOPで調整する。変更・教師/fit・対局/LMRは未発行で、具体案が出ても自動実装しない。普通sourceをbulk/image/全文書/親close/人間返信へ待たせず、現在は実担当の最初の保存/source結果を待つ段階。[担当契約](../.artifacts/research-team/integration324/cedar-history-score-v1/task.md)。
