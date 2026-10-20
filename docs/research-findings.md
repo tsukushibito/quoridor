@@ -2917,6 +2917,12 @@ Rootは採用に足る資格が無い候補の比較専用legal_wall差分とwal
 
 まず幅.125/.25/.5、growth2・startdepth3・retry4を固定して少数比較する。修正が必要なら元ONと修正ONを同幅で分け、設定差と実装差を混ぜない。見込みがあれば開始depth3/4/5を一軸で扱い、growthは必要時だけ後段とする。診断callも同520枠へ含め、元26prefix/履歴/6時系列・root4D5・各1Mと連続sessionを保つ。Search全費とwhole、再探索の仕事、局面/残壁層/100ms完成深さ・手を残し、nodeごとのtimerや大traceを増やさない。新しい対局・book・学習・モデル・既定採用や枠を埋める追加反復は含まない。
 
+同作者の限定source調査は、retry外の初期化・同じTT/state再用・O(1)commitを確認し、具体的な実装修正を正当化しなかった。合法手/orderingの再処理、前完成反復PVの優先、旧境界からの拡張は確認した仕様上の選択であり、余計な費用の欠陥と断定しない。元ONのnodes+4.08%・evals+2.38%・Search+2.86%は選択探索の異なる仕事を含み、孤立した実装overheadやretryの因果寄与ではない。反復別center/windowと試行別時間はUNKNOWNのままとし、新observerや新buildを追加せず、既存の真正64844/19c2で設定だけを比較した。
+
+新phase1はOFF/.125/.25/.5と逆順の8ブロック・208calls/48sessionsを一度実行し、通常8manifest/dataと実native/collection STOPが返った。実node消費は29,464,280/208M、outer76.127007284秒を一度だけ計上する。custody PASSを幅の支持とは呼ばず、固定された全pair完了・2%改善・repeat separation・major-root条件を保存解析で適用する。後段は有望幅がある場合だけ開始depth比較156calls（当時対照52を含む）、その後一候補のclock比較104callsで、宣言最大468/468M。人間上限520との差52は未発行であり、診断・反復の自動補充へ使わない。
+
+保存解析では全208要求depthが完了し、幅0.25だけが次段条件を満たした。Search pooled比は0.9782978985（約2.17%短い）、worst ON/best OFFは0.9969634874、major rootは0。whole-driver比0.9891513968は別の量であり、nodes比1.0081984208・evals比1.0032816103と合わせても同仕事の速度や原因を示さない。幅0.125はSearch比1.0427083815・major roots16/23・retry69、幅0.5は比0.9879324958・retry0だった。0.5は2%改善とrepeat separationを満たさず、retry最少を目的へ置き換えない。0.25のretryは各反復29（low12/high17、fallback0）。OFF52を3つの対比で共有した露出済み26root/3family/6系列の選択であり、小さいrepeat差・標本への過適合・選択探索の異仕事を残す。一般速度や棋力、採用の支持とはせず、凍結済みの開始depth比較だけへ進めた。[幅比較の保存結果](../research-data/ai-sigma/execution324-preservation-20261020/aspiration-width-phase1-v1.json)。
+
 ### 16.1の並行source修復は失敗時の契約参照だけを整合する
 
 同じ元作者はimmutable b1e965ffと必要な保存metadataから、通常sequence/cohortがselected RUNのresource_contractにadmitted settingsを使う一方、`abnormal_run_failure`がsupport.pathだけを要求する不整合を確定した。元のmemory_limitの原因・RSS・所属/peakを事後推定してはいない。私有修正9633cdc4はsettingsがあればその正確なFileRef、なければdirect supportをread_refしてcfg参照を照合し、独立する元config/digest/marker/livechild/終了・重複防止とFAILED/CANCELLED-only出力を保持する。新しい合成NN0検査1件が実owning consumerを一度通過し、guardian0.160856249秒・reap/handles/remaining[]を確認した。旧2検査やarchive/parity/native/FINALIZEは再演していない。

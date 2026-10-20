@@ -35,3 +35,5 @@
 `aspiration-original208-review-v1.json`と同名archiveは、この固定結果の限定独立確認CONCLUSION_CLEAR/essential0 ordinary0・Root受入れ・通常own closureを保存する。科学やsourceを再演せず、元gate解釈と有限な主張の境界だけを確認した。後続で明示された実装費・少数幅の新520calls以内の見直しは別issue/設定/費用であり、ここに保存した元208の不支持や128局NO_GAMESを遡及変更しない。
 
 `aspiration-limited-review-source-preparation-v1.json`と同名archiveは、返却された17対象の撤去差分、実疎適用とcompile未開始、その後の明示された新用途だけへの厳密逆patch・研究OFF復元を保存する。復元bytes/modeは測定済み302dca2と一致する。新520calls/520Mは診断を含む全段階上限であり、ここでの新科学使用0は保存時点の事実である。最終廃止の判断だけを有限見直しの後へ移し、Halfや他候補、元128対局を復活させない。実状態・担当・引渡しはBeadsを正本とする。
+
+`aspiration-width-phase1-v1.json`と同名archiveは、その後の限定source調査、凍結済み468calls最大の設定計画、新phase1の208calls/48sessions・通常結果・保存集計・実STOPを保存する。具体的な実装修正は行わず、既存64844/19c2を全条件で再用した。223memberは元bytes/mode/SHAのstream復元を確認した。全208要求depthが完了し、幅0.25だけが次段の開始depth比較へ進む条件を満たした。元208不支持や128局NO_GAMESを遡及変更せず、後段の未完了結果をこのarchiveへ混ぜない。モデル・native・validator・RNGや旧成功suiteの再演はない。
