@@ -2718,6 +2718,8 @@ Lazy SMPの私有実装は[固定source9fdb8e0eと実STOP](../.worktree/assets/p
 
 限定確認はSOURCE_NOT_CLEAR essential1/ordinary1だった。旧fixture内のstd HashSet::insertへ誤って付いたconst genericがlib targetの型検査を妨げ、workerのsafe_race_path_length_maxをsumすると最大値を誤報告する。いずれも静的指摘で、実compiler失敗や数値結果ではない。[固定指摘・実reader STOP](../.worktree/assets/perf/cedar-lazy-smp-review-v1/minimum-result.json)を同じHigh22へ配送し、当該turbofish除去・max集約とその新境界assertionだけを私有修正する。元source/negative review/UNRUNを保持し、software前に関連確認を継続する。default1対explicit1の同一新sourceテストを旧image経験的parityと呼ばず、partial-start/panic/poison/deadlineの全fault資格をテスト名から認定しない。
 
+同じ作者から[R1/O1だけの固定修正d31f6afbと実STOP](../.worktree/assets/perf/cedar-lazy-smp-v1/negative-review-repair-v1/source-binding.json)が返却された。HashSetの当該turbofishを除き、path maximumはmax/空0へ、length sumは加算のまま保持した。既存未実行の新ticket境界定義へmax3/5→5・sum7/11→18と入力worker値の保存assertionを足しただけで、新definitionやtest実行はない。元source9fdb/negative/失敗を残し、同じMaxへ2点だけの関連確認を配送した。23.1の実reader終了から直列で扱い、その事務・closeは入口にしない。通常softwareのRunner feature指定は実在するmeasurement（AI research-diagnosticsを有効化）に対応させ、source/API追加はしない。現時点ではMain未採用・型/compile/性能未資格である。
+
 保持見積りは[訂正22222af1](../.worktree/assets/perf/cedar-lazy-smp-v1/effect-preparation-v1/capacity-refinement-v1.json)で、実source9,879,552B＋future161,480,704B＝171,360,256Bとなり、元160MiB案を超えるため176MiB案へ訂正した。これは未発行。実不足への対応として、終了済Buildの保存metadataとfresh stat/EX lockにより、再生成可能なdebug .rlib/.rmetaの222 files/253,665,280 allocated Bだけを一度整理した。実行可能image/.so・release cache・Git/モデル/RAW/FAILED/唯一証拠は保持し、再build費を無料とは扱わない。[実削減・返却](../.artifacts/research-team/integration324/cedar-lazy-smp-v1/software-v1/debug-cache-retirement-v1/return.json)。既知cover49,663,734,784B、decimal50GBまで336,265,216Bで、以後software実保持・tail/globalactual/全費は未確定。旧削減量の再計上や科学枠返金/貸与はない。
 
 ### 履歴点の内訳と更新経緯を調べる（324.23、人間直接指示、2026-10-20）
