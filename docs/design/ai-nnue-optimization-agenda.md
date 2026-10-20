@@ -266,3 +266,13 @@ valuebits/action/PV/depth/stop/探索tree work/fullhistory/親復元を対応し
 原27第一候補の208は全104固定深さ完了でもSearch合計比1.081304409で長く、速度改善は支持していない。固定した重大退行/100ms安全性条件は通るため、元の前向き64局判定と速度採用を区別する。整数depth/CPU費だけで対局gateを変えず、同仕事speedupや共有returnの因果を認定しない。[保存結果](../research-findings.md#共有tt置換一因子の原208search改善なし条件付き対局判定と区別32427)。他3因子の同時採用や同案refillはしない。
 
 25原試行の4UNKNOWN/100unperformedはcallee入口拒否による不成立として固定する。必要な1条件修復と新実callee境界のsoftware資格を得た後、人間が明示した独立25.3新104/104Mを同じCurrent/Half一因子・100ms5・N1で一回行い、元gateが通る場合だけ前向き新64へ進む。これは旧未実行枠の転用や旧STOPPED64の昇格ではない。通常資格PASSを科学結果へ読み替えず、元FAILED/費/UNKNOWNとdefault Currentを維持する。
+
+26の原104は100完成+4NodeLimit UNKNOWNで全104完成条件に届かず、速度資格を得なかった。Root4は全四回で同じcapとなり、共通warm設定での深さ根拠の不足を残す。追加試行・成功subsetへの変更をせず、候補だけの壁mask共有差分/fixtureを撤去し、元結果/二image/Git/FAILEDを保持する。25.3は別の新104で時計・機械gateを通り、既存SearchWallTimeのcurrent/half対局入口に追加修復は不要だった。順位変化は混在し改善は未認定で、元条件の前向き64局準備だけを続ける。[最新の有限観測](../research-findings.md)。
+
+## root先頭手優先・排他的分担の限定研究（324.28）
+
+人間の新しい選択はrootだけの枝分担であり、27の四仮説を同時実装する依頼ではない。既存SMP作者の自然なSTOPから、保存候補手別仕事と共通child探索を読み、先頭手の直列部分/他枝の仕事/不足をまず示す。見込みが無ければ実装を義務化しない。必要不足診断は同じ26入力/6系列の最大26/26M、見込みがあればrootだけのopt-in2thread私有差分・意味のあるfullwidth/bound/中断検査・関連限定reviewへ進む。既存search_forcedのnative SMP拒否を調べ、共通loop/永続workerを再用し、全探索copy/新scheduler/pernode通信は作らない。
+
+比較は同じ凍結source・Cedar・LMR/PVS/order・総TT1MのN1/現Lazy N2/root分担N2、各二反復×26入力×固定深さと100ms5で最大312/312M、診断込み338/338Mまで。深さ上限8・順序・採否は結果前固定し、初期化と時系列を再用する。元順位をworker内で振り直さず、stale alphaのboundをexactにせず必要確認探索を行い、全候補処理/正当cutoffの時だけ反復完成、mainだけが最終結果を確定する。完全履歴・typedTT・独立scratch・合算cap・cancel/error/reset/dropと直接join/reapを維持する。
+
+Search/whole/reset/終了、完成深度分布、main/total work/CPU、先頭手と他枝の仕事・待ち/再探索を最小の有界観測で分ける。node増や独立候補数を速度/有効情報量にせず、不足/未完はUNKNOWNのまま補充しない。今回は棋力対局・全木並列・4threads/tuning・policy/value/model/教師/fit未発行。効果が乏しければ保持費を示してprototype/専用observerを撤去し、過去復元はGit、科学データ/FAILEDは保存する。25.3/26/27と時計・重いbuild/IOだけをactualSTOPで調整し、親close/ACKを入口にしない。状態はBeads、[依頼境界](../../.artifacts/research-team/integration324/root-split-followup-contract.txt)と本agenda/findings以外の管理系は追加しない。

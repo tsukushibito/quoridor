@@ -2846,3 +2846,25 @@ main clock foreign numeric returnはO116726/N133908だがnestedな資格付きre
 ### 26は両群Currentで独立に比較する
 
 後続の人間補足により、26の「25の採否を解決したpolicy待ち」は解除した。両版を明示的に**Current**へ固定し、壁合法性だけを一因子にする。[固定amendmentと通常準備](../.worktree/assets/perf/cedar-wall-path-work-v1/current-history-preparation-v1/policy-dependency-amendment.json)。原104/104M・26prefix/6系列・depthmap・全104完成/値bits/手/PV/tree work/履歴復元対応とSearch比<=0.98・反復分離・stock guardは変更せず、25の半減候補へ事後に切り替えない。新Rust3と公平な共通source画像のsoftware/実測は別工程であり、局所構造から全Search利益を認定しない。実native時計と重いbuild/IOだけを実STOPで直列化し、独立source/config/限定reviewは実資源内で並行、親close/ACKを入口にしない。
+
+### 独立25.3の新104完了と前向き対局準備（2026-10-20）
+
+新104は全件returnedOk・合法な完成depth>=1・親復元を満たし、error/missing/cancel/NodeLimitは0、6,551,433nodesだった。要求D64は100 TimeLimit UNKNOWNと4 DepthCompleteで、全幅D64完遂とは呼ばない。事前の時計条件はB最大0.106116403秒、p95のB/A比0.9649339787551072でPASSした。[固定結果と実STOP](../.worktree/assets/perf/cedar-shallow-main-history-v1/corrected-entry-trial-v1/analysis-v1/completion.json)。
+
+固定21参照手のlatest順位はB1対A0で改善0/同じ22/悪化4、B2対A3で1/19/6と混在し、同条件反復にも変動がある。TT/PV優先、時刻・warm history・異なるtree、3family/6系列の相関を残し、参照手をoracleや真の最善手にしない。root14の順位8/8/7/7も原23の負historyが有害だった証明にはならない。default Currentを保持し、改善・害・無効果・棋力を認定しない。
+
+元gateに従う前向き新64局の準備は返却済みで、既存SearchWallTime入口が同評価器/同画像のcurrent対halfを扱うため追加source修復・検査は不要だった。[通常準備](../.worktree/assets/perf/cedar-shallow-main-history-v1/corrected-entry-trial-v1/forward64-preparation-v1/prepared.json)。新64/32両色family・最大1.024Gと唯一のnative custom-Rng family CIを維持し、実book seed/current refs/支持/原点/通常入場が必要である。この記録時点でgames/CIは0。原401b/9786の4UNKNOWN/100unperformed/旧64STOPPEDと費用を変更しない。
+
+### 壁合法性一候補の原104は完成条件未達（324.26）
+
+両群Currentの固定ABBA104は全件returnedOk・合法depth>=1・復元、通常4manifest/data PASSだったが、100 DepthCompleteと4 NodeLimit UNKNOWNで全104完成gateを満たさなかった。同じroot4が全四回で要求D6/完成D5/1Mとなり、51,881,168nodesを消化した。[固定minimum](../.worktree/assets/perf/cedar-wall-path-work-v1/analysis-v1/minimum-result.json)、[保存report](../.worktree/assets/perf/cedar-wall-path-work-v1/analysis-v1/report-ja.md)。全26rootの保存action/valuebits/PV/depth/stop/treework/完全履歴は四回で対応したが、内部TT全表やoracleの同等性は主張しない。
+
+capを含む保存時間の比率・反復分離・stock条件が数値上通っても、完了条件失敗を補えない。有限結果は **INCOMPLETE_RETAIN_BASELINE_NO_SPEEDUP_QUALIFICATION** とし、成功subsetやcap時間から完成Search速度を作らない。既存深さ根拠がこの共通warm設定での完成を保証しなかった点は未解決で、原因や新depth試行を推定せず、104は消化済み/追加診断12・refill・再深度・対局は発行しない。関連Max26.2へ解釈だけを限定確認し、その通常管理を他工程のgateにしない。
+
+Rootは採用に足る資格が無い候補の比較専用legal_wall差分とwall_path26 fixtureを撤去し、基準Positionの完全bytesと既定を復元する。[撤去の実記録](../.artifacts/research-team/integration324/cedar-wall-path-work-v1/retirement-v1/baseline-retirement.json)。元Git92fb6faa、私有post/inverse、二つの真正image、全原結果/RAW/FAILEDを保持する。新検査や元成功suiteは再演しない。外側71.502312897秒と受付寿命73.374095秒を区別し、nestedを足さない。
+
+### root先頭手優先の排他的分担を別に調べる（324.28）
+
+人間の新指示により、同じroot全体を重複探索するLazy SMPとは別に、rootの先頭有力手を先に読み、残り候補を排他的に分けるopt-in2thread案を同じSMP作者へ配分した。まず保存候補手別仕事量と共通child経路を限定精査する。先頭手の直列支配、負荷不均衡、枝刈りの変化は未検証で、node比率を時間の比率にせず、見込みが無ければ理由を残して終了できる。[人間指示に基づく境界](../.artifacts/research-team/integration324/root-split-followup-contract.txt)。
+
+必要な不足診断だけ最大26calls/26M、実装する場合は同じ凍結source/Cedar/LMR/PVS/ordering/総TT1MでN1・現Lazy N2・root分担N2の各二反復、固定深さ上限8と100ms/5msを最大312calls/312Mで比較する。計338calls/338Mを上限とし、条件・順序・完成可能な深さは結果前に固定する。元root順位/LMR量、stale-alphaのtyped boundと必要再探索、反復完成、mainだけの最終authority、独立履歴、全worker取消/cap/quietを保つ。現search_forcedのnative SMP拒否を隠さず必要な共通child経路だけを扱い、全木並列・pernode scheduler・新対局/fit/model/teacherやdefault昇格は含まない。実source開始/実計測は予定と区別し、25.3/26/27を変更・中断しない。
