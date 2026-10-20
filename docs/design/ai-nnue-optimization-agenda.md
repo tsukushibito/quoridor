@@ -40,6 +40,12 @@ Rootは偏り・機会損失・早すぎる断念を観測と全工程費から�
 
 LMRと必要な再探索、futility、ProbCut/MPC、重要手の延長、ゴール/接触/jump/強制防御を扱う静止探索・延長、壁なし/少数壁の厳密solverを候補とする。null move等はQuoridorの手番・待ち手の性質を確かめる。浅深の誤差と戦術的取りこぼしを測り、ノード削減だけで採用しない。MPCの校正データと最終評価を分ける。
 
+2026-10-20の人間の直接指示により、324.30では単一深さ組ProbCutの実装・校正・有限比較を進める。対照はCURRENT／aspirationOFF／Current history／既定LMR／path_tail／Control／PVS／TT1M／N1／Cedar C BEST58305を固定する。結果に依存しないfamily分割で校正と確認を分け、例えば浅1／深3の実機会がある一組から、nonPV内部節点の片側高marginだけを扱う。校正pairのdeep Dは適用時の実negamax残深さDへ厳密一致させ、1/3ならdepth==3に限り、depth>=3全般や暗黙のdepth-2可変pairへ広げない。probe内再帰を禁じ、浅い推測cutを深いExact・solver値へ格上げしない。通常木とprobeを同じ累積node／deadline／reserve／取消／errorへ含め、完全履歴・親状態・last-completed authorityとTT namespace／boundの意味を維持する。新managerや多数pair／gridは作らない。
+
+非対局の収集・浅深参照・校正／確認・診断・連続Search／100ms比較は合計2048 top-level／明示child Search calls・各通常1M以内・2.048G上限、初回浅深対応は最大512標本を目安として必要量だけ固定する。誤cut率／大きさ／層／分母とprobe込み総費を読み、機会不足・多数誤cut・大幅退行なら有限結果で止める。凍結候補に機会と費用の見込みがあり未解決の機械的blockerがなければ、別枠最大256局／128真正開始family両色の同100ms／5ms・現役8局parallel inletによる確認を条件付きで行える。実物理資源が足りなければ成立する並列数を明記し、非対局node枠の貸与や成功局refillはしない。family不確実性と選択探索・標本選択の限界を残し、一般棋力・Elo・同等・既定採用は自動認定しない。単一pairの支持時に限り小さいMulti-ProbCut拡張案を具体化する。[許可範囲・実行契約](../../.artifacts/research-team/integration324/cedar-probcut-v1/task-contract.md)。
+
+MPC-OFFの深い参照は同じ選択探索の局所参照で、真のWDLではない。typed boundが実betaのどちら側か決められない場合と未完了はUNKNOWNとし、予測cut全分母と判定可能分母を分ける。少数確認で誤cut未観測でも無誤り保証にはしない。[Jiang／Buro](https://www.cs.ubc.ca/~jiang/papers/mpc_main.pdf)の深さ組・校正・probe内再帰禁止と[原MPC](https://skatgame.net/mburo/ps/improve.pdf)、[Stockfishの現役source](https://github.com/official-stockfish/Stockfish/blob/master/src/search.cpp)を参考にするが、他棋種の条件・定数は移植しない。
+
 ## 評価器の精度と学習
 
 - 独立局数と局面多様性を増やした学習曲線。既存の小さい再用validationだけで十分な容量・特徴・データ量を判定しない。

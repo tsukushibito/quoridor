@@ -2966,3 +2966,11 @@ Rootは採用に足る資格が無い候補の比較専用legal_wall差分とwal
 同じ元作者はimmutable b1e965ffと必要な保存metadataから、通常sequence/cohortがselected RUNのresource_contractにadmitted settingsを使う一方、`abnormal_run_failure`がsupport.pathだけを要求する不整合を確定した。元のmemory_limitの原因・RSS・所属/peakを事後推定してはいない。私有修正9633cdc4はsettingsがあればその正確なFileRef、なければdirect supportをread_refしてcfg参照を照合し、独立する元config/digest/marker/livechild/終了・重複防止とFAILED/CANCELLED-only出力を保持する。新しい合成NN0検査1件が実owning consumerを一度通過し、guardian0.160856249秒・reap/handles/remaining[]を確認した。旧2検査やarchive/parity/native/FINALIZEは再演していない。
 
 Rootは29の失敗softwareの実source STOPで、この1ownerと新fixtureだけを現行aspiration sourceへ合成した。対象関数bodyはPASSした私有版と完全一致、他の現行source bytes/ASTは不変である。[疎適用receipt](../.artifacts/research-team/integration324/claustrophobia-arena-connection-v1/normal-readiness-adoption-v1/actual-adoption.json)。この修復は元control_error/INCOMPLETE/manifestABSENTや歴史的memory cause UNKNOWNを成功へ書き換えない。必要とされた次の実確認案は2色・各最大1ply/合計2ply・最大1 C turn/9 head attemptsだが、今回の並行依頼には新native権限がなく未発行である。旧USED枠の貸与やモデル取得、実対局は行っていない。
+
+### 単一pair ProbCutからの新しい有限検証（324.30）
+
+人間がMPCの実装・校正・有限比較を明示した。過去frame23のOFF計画／schema検査は校正やON実装の成功ではなく、今回はCurrent baseline／aspirationOFF／Cedar C BEST58305／Control／既定LMR／PVS／path_tail／TT1M／N1を対照にする。29.3の幅0.25の時間−2.17%・nodes＋0.82%は小標本内の観測で、採用上の速度改善は未確認、元208／no128／撤去／費用は改稿・復活しない。
+
+校正と確認をfamilyで先に分け、根／PVを避けたnonPV内部節点の一つの浅深pairと高margin片側cutから始める。校正のdeep Dと適用時の実残深さDを一致させ、1/3ならdepth==3だけに限る。MPC-OFFの局所参照は同じ選択探索の値／boundであり、実betaの側を決められないboundと未完はUNKNOWN。予測cut全分母・判定可能分母を分け、少数で誤cut0でも保証へ変えない。probe再帰禁止、TT型／namespace、完全履歴／親／scratch復元、累積node／deadline／cancel／errorとlast-completed authorityが新境界になる。root cold観測を使う場合は実発動分布との差を残す。
+
+非対局は収集／明示probe／参照／診断／連続Search／100msを合わせて2048calls／2.048G以内、各通常1Mまでで、初回浅深対応は最大512標本を目安に必要量だけ凍結する。適用機会・誤cut・probe込み総費に見込みがあり機械的blockerがなければ、別枠の一候補対OFF最大256局／128真正family両色・同100ms／5msで確認できる。既定／製品／モデル採用、追加pair、成功局refillや無制限sweepは発行しない。[許可と最初の実source調査の記録](../research-data/ai-sigma/probcut-single-pair-v1/authorization-and-start.json)。
