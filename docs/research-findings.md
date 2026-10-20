@@ -2705,3 +2705,9 @@ first32の実行は全32 operations・512局/256完全pair/256 tuning family・U
 限定独立確認essential0/ordinary0の後、**RETAIN_CONTROL_NO_CONCRETE_IMPLEMENTABLE_NEW_ORDERING_CANDIDATE** を受け入れた。この有限証拠では実装へ進める新候補がなく、現Controlと確定したLMR基準維持結果を使う。改善不能・一般無効果・history原因・速度/棋力や「policyしか残らない」という結論はない。将来具体候補が生じれば、その有限採否を追加LMR広域比較より先に扱うが、新実装/追加Search/対局/LMR/sweep/refill/CIは発行しない。policy学習完了を全作業の入口にしない。[Root受入れと適用範囲](../.artifacts/research-team/integration324/cedar-ordering-quality-v1/final-result-acceptance-v1/accepted-result.json)。
 
 実native＋normalcollection＋savedanalysis STOPと記録されたexact PID/start/bootの終了、directwait/reap/handles/TMP/leasesを確認した。観測込みouter37.347287979秒を一度計上し、Search32.307573610秒やdriver/setup/drop等のnested時間を加算しない。80MiBの終了coverだけを実fullOWN21,381,120Bへ一度置換し、既知cover49,917,400,064B、decimal50GBまで82,599,936B。新point再walk・payload削除・科学枠返金/貸与はなく、以後tail/globalactual/fullfeesと旧FAILED/NULL/UNKNOWNを保持する。
+
+### Lazy SMPの効率実装と有限確認へ着手（324.22、人間直接指示、2026-10-20）
+
+新しい実装taskを作り、直前21を完了した同じSol6.1/high担当へ私有source所有を割り当てた。元LMR/ordering/20/21は再開しない。目標は同じ時間で有用な探索を増やすことで、正しい実装と速い実装を分けて確認する。default1・主を含む総search_threads、session再用・安全な共有TT・全worker停止/aggregate node cap・主の完成rootだけの返却を保ち、Cedar35cbb/Control/現LMR/PVS/path_tailは固定する。[現役設計と有限受入れ](design/ai-rust-migration.md#native-lazy-smp-implementation-and-finite-acceptance-32422)。
+
+通常source開始は後続bulk/image/入口文書を待たない。hotpath/depthごとの不要反復を避ける要求であり、正しさに必要な新root一回の資格確認・同期/copyは禁止しない。既存HistoryBase::Sharedとworker overlay/pathを再用する。必要software後は同26入力の固定depth104＋100ms/5ms104の1対2thread ABBAを上限208callsで実施し、UNKNOWN・総CPU・停止遅延・setup/dropを含めて判断する。正しさと実利益が成立した場合だけ固定32family/両色64gamesが条件付きで許可され、追加候補/4thread数値/LMR/本学習は未発行。実装・速度結果は現時点で未資格。Beads324.22と[担当契約](../.artifacts/research-team/integration324/cedar-lazy-smp-v1/task.md)に範囲/所有/実資源/STOP/完成条件を記録し、source開始のため他担当を形式確認で起こさない。
