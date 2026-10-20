@@ -2877,7 +2877,11 @@ Rootは採用に足る資格が無い候補の比較専用legal_wall差分とwal
 
 25の中断中反復／未returned試行と要求D64のUNKNOWNは、既に完成したsnapshotと区別する。診断routeのmaincallback receipt／depthは全26でNULL／UNKNOWNであり、元screenにない時計callback一致を加えた解析v1は失敗した。v2はその追加assertだけを除き、NULLと失敗を保持した。観測込みSearch32.255295184秒／whole32.708774781秒は速度資格に使わず、各child時計・将来深さでの完走／cutoff・pruning／savedwork・棋力はUNKNOWNのままである。露出済み26root／3family／6暖機系列とzero-stock2件の不足を保持し、再選択・追加診断・補充はしない。
 
-同作者は私有領域で共通exclusive-root-child入口の2owner差分へ実着手し、元のchild kernelへ順位／窓とtyped boundを運ぶ部分を返した。[実source開始](../.worktree/assets/perf/cedar-root-split-v1/prototype-v1/first-delta-v1/source-start.json)。root分担team・main先頭手・stale窓確認・合算cap／取消／履歴・通常consumerと新境界検査は未完成で、prototypeはNOTFIXED／UNBUILT／UNTYPED／UNRUNである。Mainへの採用、関連source確認、必要softwareと条件付き312呼出しへの実入場は別段階であり、対局・既定変更はない。
+同作者の[最初の2owner差分](../.worktree/assets/perf/cedar-root-split-v1/prototype-v1/first-delta-v1/source-start.json)に続き、9 subjectの私有prototypeが固定され、Rootは現Mainへ疎適用した。mainが先頭childを先に読み、残りを元順位で排他的に分担する。stale boundのmain確認とmainだけの完成結果確定、完全履歴／共有TT／合算cap／取消・返信回収の境界について、既存Max28.3は固定8c078ee2をSOURCE_CLEAR・essential0／ordinary0と確認した。[固定sourceの再構成元](../research-data/ai-sigma/execution324-preservation-20261020/root-split-prototype-fixed-source-v1.json)、[関連確認と結果前controls](../research-data/ai-sigma/execution324-preservation-20261020/root-split-prototype-review-controls-software-partial-v1.json)。source確認はsoftware／性能や新しい312入場の資格ではない。
+
+新規Python1件とAI6件は実PASSした。Runnerは既存Settings literalの追加field漏れで型検査が止まり、Rootが誤ってNoneを指定した修正もbool型との不一致で止まった。既存診断OFFを保つfalseへ訂正後、348MiBの全保持枠でcompileが停止したため、50GBと原結果を保ち、比較用共通releaseだけ最適化3／codegen1のままLTOを無効にした。3モードすべて同じ新imageを使う結果前の共通compiler条件で、Cargo.tomlの製品既定は変更しない。そのcompileは完了し、新Runner検査1件は実行されたが、positive fixtureのmain CPU0とteam[12,14]の不一致を既存validatorが拒否した。同作者へfixtureのmain CPU12設定だけを戻し、validatorやassertionを緩めない。[因果修正・実失敗・費用の保存](../research-data/ai-sigma/execution324-preservation-20261020/root-split-prototype-causal-software-stops-v1.json)。成功済みAI6／Python1のsource NN0範囲と新共通imageの実行資格は区別し、Runner2／影響Clippy／真正imageは未資格、312の科学呼出しは未開始である。
+
+元c87のroot4固定深さは実際にはD6である。今回の未開始312設定は、元26の全四回で要求D6／完成D5／1Mだった既知の事実を根拠に、Rootの後続指示でroot4だけD5に変更し、他25項目と元protocolは保持した。12 RUN・312calls／72sessions・元順序／履歴を固定深さ156件と100ms／5msの156件へ分け、各6 RUNは初期化を再用する連続sessionのままとする。これは保存保持単位の分割であり、間に有意差・promising・close／ACK gateを追加しない。実共通image／current refs／全保持／物理資源／原点と通常入場は別途必要で、対局・既定変更はない。
 
 ### aspirationを優先し、実source着手を区別する（324.29）
 

@@ -49,3 +49,9 @@
 `root-child-branch-work-screen26-v1.json`と同名archiveは、閉じた保存解析v2の全root／反復／child／context／層別表、元clock callback assertによる解析v1失敗とその因果修正を保存する。最新実完成snapshotに対する作者の23/26 hitと要求D64の25 UNKNOWN、maincallback全26 NULLを区別する。構造上の私有prototype検討を許すscreenであり、時間／枝刈り／棋力の資格ではない。保存時点で関連Max28.2へ有限解釈を配送済みで、その確認や管理を作者source作業のgateにしない。追加Search／解析器再実行／RAW再検証は行わず、先に保存した通常出力は重複archiveしない。
 
 `root-child-branch-work-screen-review-v1.json`と同名archiveは、関連Max28.2のCONCLUSION_CLEAR minimum・対応表・実reader STOPとRootの限定受入れを保存する。23/26の構造screenだけを確認し、25中断horizon／pending UNKNOWNと全26 NULL callback、相関・不足・元失敗を保持する。新たなsource／software／312入場や速度・棋力資格を発行するものではなく、私有prototypeの実装・後続確認は別段階である。
+
+`root-split-prototype-fixed-source-v1.json`と同名archiveは、8c078ee2の私有9 subject・疎適用・新Python1件PASSを、関連source review前／Rust未資格の保存時点として保全する。before／post／forward／inverseと元bytes／modeのstream復元を確認するが、source・software・速度をarchiveの存在から認定しない。
+
+`root-split-prototype-review-controls-software-partial-v1.json`と同名archiveは、Max28.3 SOURCE_CLEAR、結果前312 controlsと明示されたroot4D6→D5の1項目修正、二つの156-call lifetimeを保存する。元4cdfc8ceのAI6件PASSとRunner field漏れによる型検査停止も含み、失敗prefixのcleanupfalse／guardianNULLと実persisted processの回収trueを区別する。保存時点のcaller修復待ちは後続結果で改稿しない。
+
+`root-split-prototype-causal-software-stops-v1.json`と同名archiveは、RootのNone指定誤りからbool falseへの訂正、全保持348MiBでのcompile停止と所有cacheだけの撤去、共通opt3／codegen1／LTO=false条件、新Runner positive fixture CPU不一致の実FAILを保存する。全元失敗／費用／mask／UNKNOWNを保持し、source NN0と新image実資格を分ける。Runner2／Clippy／真正imageは未資格、312呼出しは未開始で、画像・モデル・入力payload・DB・lock・compiler cacheは含めない。
