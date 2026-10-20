@@ -7685,13 +7685,12 @@ fn evaluation_claustrophobia_turn(
 /// main snapshots and terminal aggregate work remain different clock domains.
 pub(crate) fn smp_report(report: &alphabeta::SmpReport) -> serde_json::Value {
     serde_json::json!({
-        "method":"lazy-smp-coherent-striped64-committed-epochs-v1",
+        "method":"lazy-smp-coherent-striped64-completed-nodes-v1",
         "helper_stagger":"odd-helper-start2-else1-clamped-to-requested-depth",
         "search_threads":report.search_threads,"TT_total_capacity":report.tt_total_capacity,
         "shared_TT_bytes":report.shared_tt_bytes,"main_kernel_completed_depth":report.main_kernel_completed_depth,
         "main_seconds_before_drain":report.main_seconds_before_drain,"all_workers_quiet_seconds":report.all_workers_quiet_seconds,
-        "stop_drain_seconds":report.stop_drain_seconds,"quiet_discard_seconds":report.quiet_discard_seconds,
-        "quiet_discard_performed":report.quiet_discard_performed,
+        "stop_drain_seconds":report.stop_drain_seconds,
         "total_nodes":report.total_nodes,"total_evaluations":report.total_evaluations,
         "TT_contention_scope":"search probes/inserts only; PV reconstruction try-lock misses not counted",
         "unused_reserved_nodes":report.unused_reserved_nodes,"node_cap":report.node_cap,
@@ -7702,6 +7701,10 @@ pub(crate) fn smp_report(report: &alphabeta::SmpReport) -> serde_json::Value {
             "TT_probes":w.stats.as_ref().map(|s|s.tt_probes),"TT_hits":w.stats.as_ref().map(|s|s.tt_hits),
             "TT_context_matches":w.stats.as_ref().map(|s|s.tt_context_matches),"TT_context_misses":w.stats.as_ref().map(|s|s.tt_context_misses),
             "TT_contention_skips":w.stats.as_ref().map(|s|s.tt_contention_skips),"delta_updates":w.stats.as_ref().map(|s|s.delta_updates),
+            "sharing_provenance":w.stats.as_ref().and_then(|s|s.smp_sharing.as_ref()).map(|p|serde_json::json!({
+                "foreign_key_hits":p.foreign_key_hits,"foreign_context_hits":p.foreign_context_hits,
+                "foreign_order_only_hints":p.foreign_order_only_hints,"foreign_numeric_returns":p.foreign_numeric_returns,
+                "scope":"default-OFF; nested counters at this worker; foreign numeric returns require existing key/context/depth/Bound/legal qualifications; no saved-work/quality claim"})),
             "TT_retained_bytes":"shared total, counted once above"})).collect::<Vec<_>>()
     })
 }

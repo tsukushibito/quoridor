@@ -18,13 +18,12 @@ struct Bucket {
 pub(super) struct SharedTable {
     buckets: Vec<Mutex<Bucket>>,
     capacity: usize,
-    committed: Vec<AtomicU64>,
 }
 impl SharedTable {
-    pub(super) fn new(capacity: usize, workers: usize) -> Result<Self> {
-        if capacity == 0 || workers == 0 {
+    pub(super) fn new(capacity: usize) -> Result<Self> {
+        if capacity == 0 {
             return Err(SearchError::Limits(
-                "positive SMP TT capacity/workers required".into(),
+                "positive SMP TT capacity required".into(),
             ));
         }
         let count = capacity.div_ceil(SLOTS_PER_LOCK);
@@ -37,24 +36,13 @@ impl SharedTable {
                 slots: [None; SLOTS_PER_LOCK],
             })
         });
-        let mut committed = Vec::new();
-        committed
-            .try_reserve_exact(workers)
-            .map_err(|_| SearchError::Limits("shared TT writer allocation".into()))?;
-        committed.resize_with(workers, || AtomicU64::new(0));
-        Ok(Self {
-            buckets,
-            capacity,
-            committed,
-        })
+        Ok(Self { buckets, capacity })
     }
     pub(super) fn capacity(&self) -> usize {
         self.capacity
     }
     pub(super) fn retained_bytes(&self) -> usize {
-        std::mem::size_of::<Self>()
-            + self.buckets.capacity() * std::mem::size_of::<Mutex<Bucket>>()
-            + self.committed.capacity() * std::mem::size_of::<AtomicU64>()
+        std::mem::size_of::<Self>() + self.buckets.capacity() * std::mem::size_of::<Mutex<Bucket>>()
     }
     /// One coherent entry under a 64-slot stripe try-lock. The existing Search
     /// still qualifies full board/history/context/namespace/typed Bound/depth.
@@ -62,23 +50,18 @@ impl SharedTable {
         &self,
         hash: u64,
         reader: usize,
-        active: Option<u64>,
         contention: &mut u64,
-    ) -> Option<Entry> {
+    ) -> Option<(Entry, bool)> {
         let index = (hash % self.capacity as u64) as usize;
         let Ok(bucket) = self.buckets[index / SLOTS_PER_LOCK].try_lock() else {
             *contention += 1;
             return None;
         };
         let written = bucket.slots[index % SLOTS_PER_LOCK].as_ref()?;
-        let published = self.committed[written.writer].load(Ordering::Acquire);
-        if written.entry.generation <= published
-            || (written.writer == reader && active == Some(written.entry.generation))
-        {
-            Some(written.entry)
-        } else {
-            None
-        }
+        // Every insertion is reached only after this node's successful final
+        // control check. An unfinished ancestor/root does not invalidate a
+        // completed child's fully qualified bound. Root snapshots remain main-only.
+        Some((written.entry, written.writer != reader))
     }
     pub(super) fn insert(&self, writer: usize, entry: Entry, stats: &mut SearchStats) {
         let index = (entry.hash % self.capacity as u64) as usize;
@@ -97,32 +80,6 @@ impl SharedTable {
         stats.tt_replacements += u64::from(slot.is_some());
         *slot = Some(WrittenEntry { writer, entry });
     }
-    pub(super) fn commit(&self, writer: usize, generation: u64) {
-        self.committed[writer].store(generation, Ordering::Release);
-    }
-    /// All workers must have acknowledged this root before this once-per-root
-    /// cleanup. Removing aborted epoch entries BEFORE another root can commit
-    /// prevents a later watermark from accidentally making an old hole visible.
-    pub(super) fn discard_uncommitted_quiet(&self) {
-        let published: Vec<_> = self
-            .committed
-            .iter()
-            .map(|g| g.load(Ordering::Acquire))
-            .collect();
-        for bucket in &self.buckets {
-            let mut bucket = bucket
-                .lock()
-                .unwrap_or_else(std::sync::PoisonError::into_inner);
-            for slot in &mut bucket.slots {
-                if slot
-                    .as_ref()
-                    .is_some_and(|w| w.entry.generation > published[w.writer])
-                {
-                    *slot = None;
-                }
-            }
-        }
-    }
     /// Namespace/model/reset/drop boundary only AFTER all owned workers joined.
     pub(super) fn clear_quiet(&self) {
         for bucket in &self.buckets {
@@ -131,9 +88,6 @@ impl SharedTable {
                 .unwrap_or_else(std::sync::PoisonError::into_inner)
                 .slots
                 .fill(None);
-        }
-        for generation in &self.committed {
-            generation.store(0, Ordering::Release);
         }
     }
 }
@@ -151,6 +105,19 @@ use std::{
 /// Native placement only. Called once on each new helper before it signals ready;
 /// the common native resource owner provides its already-admitted CPU placement.
 pub type WorkerInitializer = Arc<dyn Fn(usize) -> Result<()> + Send + Sync>;
+
+/// Per-worker, default-OFF sharing evidence. Counts are nested, not additive:
+/// a foreign key hit may fail context/depth/Bound/legality, while numeric returns
+/// are counted only at existing fully qualified actual-return sites. No causal
+/// saved-work or quality claim follows from either number.
+#[derive(Debug, Clone, Default)]
+pub struct SmpSharingProvenance {
+    pub foreign_key_hits: u64,
+    pub foreign_context_hits: u64,
+    /// Eligible ordering-only hints; not a count of actually pulled moves.
+    pub foreign_order_only_hints: u64,
+    pub foreign_numeric_returns: u64,
+}
 
 #[derive(Debug, Clone)]
 pub struct SmpWorkerReport {
@@ -170,8 +137,6 @@ pub struct SmpReport {
     pub search_threads: usize,
     pub tt_total_capacity: usize,
     pub shared_tt_bytes: usize,
-    pub quiet_discard_seconds: f64,
-    pub quiet_discard_performed: bool,
     pub main_kernel_completed_depth: Option<u16>,
     pub main_seconds_before_drain: f64,
     pub all_workers_quiet_seconds: f64,
@@ -187,6 +152,7 @@ struct JobControl {
     stop: AtomicBool,
     remaining: Option<AtomicU64>,
     started: Instant,
+    observe_sharing: bool,
 }
 
 pub(super) struct WorkerBudget {
@@ -217,6 +183,9 @@ impl WorkerBudget {
     }
     pub(super) fn stopped(&self) -> bool {
         self.shared.stop.load(Ordering::Relaxed)
+    }
+    pub(super) fn sharing_enabled(&self) -> bool {
+        self.shared.observe_sharing
     }
     pub(super) fn first_depth(&self, maximum: u16) -> u16 {
         // One fixed cheap scheme, not a sweep: odd helpers skip depth1 only.
@@ -288,6 +257,7 @@ pub(super) struct NativeWorkers {
     initialize: WorkerInitializer,
     pool: Option<Pool>,
     pub(super) last: Option<SmpReport>,
+    observe_sharing: bool,
 }
 
 impl SearchSession {
@@ -343,12 +313,20 @@ impl SearchSession {
                 initialize,
                 pool: Some(pool),
                 last: None,
+                observe_sharing: false,
             }));
         }
         Ok(())
     }
     pub fn search_threads(&self) -> usize {
         self.native_workers.as_ref().map_or(1, |w| w.threads)
+    }
+    /// Default OFF, bounded per-worker counters only. N1 has no shared backend
+    /// or extra search work. Called outside an active root after team creation.
+    pub fn set_smp_sharing_provenance(&mut self, enabled: bool) {
+        if let Some(workers) = self.native_workers.as_mut() {
+            workers.observe_sharing = enabled;
+        }
     }
     pub fn last_smp_report(&self) -> Option<&SmpReport> {
         self.native_workers.as_ref().and_then(|w| w.last.as_ref())
@@ -374,7 +352,6 @@ impl SearchSession {
                 committed: 0,
                 byte_limit: shared.retained_bytes(),
                 shared: Some((shared, writer)),
-                active_generation: false,
             },
             score_domain: self.score_domain,
             ordering: self
@@ -511,6 +488,22 @@ fn aggregate_stats(main: &SearchStats, workers: &[SmpWorkerReport]) -> SearchSta
         delta_updates,
         policy_calls
     );
+    total.smp_sharing = main
+        .smp_sharing
+        .as_ref()
+        .map(|_| SmpSharingProvenance::default());
+    if let Some(total) = total.smp_sharing.as_mut() {
+        for p in workers
+            .iter()
+            .filter_map(|w| w.stats.as_ref())
+            .filter_map(|s| s.smp_sharing.as_ref())
+        {
+            total.foreign_key_hits += p.foreign_key_hits;
+            total.foreign_context_hits += p.foreign_context_hits;
+            total.foreign_order_only_hints += p.foreign_order_only_hints;
+            total.foreign_numeric_returns += p.foreign_numeric_returns;
+        }
+    }
     total.safe_race_path_length_max = workers
         .iter()
         .filter_map(|w| w.stats.as_ref())
@@ -566,12 +559,11 @@ impl Pool {
         // Replace the one local backing store, never keep N private1M tables.
         main.table.slots = Vec::new();
         main.table.shared = None;
-        let shared = Arc::new(SharedTable::new(capacity, threads)?);
+        let shared = Arc::new(SharedTable::new(capacity)?);
         main.table.shared = Some((shared.clone(), 0));
         main.table.byte_limit = shared.retained_bytes();
         main.table.generation = 0;
         main.table.committed = 0;
-        main.table.active_generation = false;
         let mut pool = Self {
             shared,
             workers: Vec::new(),
@@ -655,6 +647,7 @@ impl Pool {
         limits: &SearchLimits,
         cancel: &AtomicBool,
         callback: &mut dyn FnMut(&SearchResult),
+        observe_sharing: bool,
     ) -> Result<(Result<SearchResult>, SmpReport)> {
         self.serial = self
             .serial
@@ -666,6 +659,7 @@ impl Pool {
             stop: AtomicBool::new(false),
             remaining: node_cap.map(AtomicU64::new),
             started: Instant::now(),
+            observe_sharing,
         });
         self.active = Some(control.clone());
         let root = Arc::new(root.clone()); // Shares existing complete weighted HistoryBase; never reconstructs it.
@@ -697,14 +691,6 @@ impl Pool {
             reports.push(done.report);
         }
         let all_quiet = control.started.elapsed();
-        let discard_start = Instant::now();
-        let discard_required = reports
-            .iter()
-            .any(|r| r.table_generation > self.shared.committed[r.worker].load(Ordering::Acquire));
-        if discard_required {
-            self.shared.discard_uncommitted_quiet();
-        }
-        let quiet_discard = discard_start.elapsed();
         let terminal_return = control.started.elapsed();
         self.active = None;
         self.maximum_generation = reports
@@ -716,8 +702,6 @@ impl Pool {
             search_threads: reports.len(),
             tt_total_capacity: self.shared.capacity(),
             shared_tt_bytes: self.shared.retained_bytes(),
-            quiet_discard_seconds: quiet_discard.as_secs_f64(),
-            quiet_discard_performed: discard_required,
             main_kernel_completed_depth: result.as_ref().ok().map(|r| r.completed_depth),
             main_seconds_before_drain: main_finished.as_secs_f64(),
             all_workers_quiet_seconds: all_quiet.as_secs_f64(),
@@ -817,11 +801,14 @@ impl NativeWorkers {
         if self.pool.is_none() {
             self.pool = Some(Pool::new(main, self.threads, &self.initialize)?);
         }
-        let result = self
-            .pool
-            .as_mut()
-            .unwrap()
-            .search(main, root, limits, cancel, callback);
+        let result = self.pool.as_mut().unwrap().search(
+            main,
+            root,
+            limits,
+            cancel,
+            callback,
+            self.observe_sharing,
+        );
         match result {
             Ok((value, report)) => {
                 self.last = Some(report);
@@ -941,67 +928,51 @@ mod smp_boundary_tests {
     }
 
     #[test]
-    fn smp_shared_entry_history_bound_and_aborted_epochs_remain_coherent() {
+    fn completed_nodes_are_visible_before_root_completion_with_full_typed_qualification() {
         let a = SigmaContext::from_prefix(&[13, 67, 4, 76]).unwrap();
         let b = SigmaContext::from_prefix(&[3, 75, 4, 76]).unwrap();
         assert_eq!(Key::of(&a), Key::of(&b));
         assert_ne!(a.history_counts(), b.history_counts());
-        let table = SharedTable::new(17, 2).unwrap();
+        let table = SharedTable::new(17).unwrap();
         let mut stats = SearchStats::default();
-        let first = entry(&a, 1, 0.25, Bound::Exact);
-        table.insert(0, first, &mut stats);
         let mut misses = 0;
-        assert!(table.candidate(first.hash, 1, None, &mut misses).is_none());
-        assert!(
-            table
-                .candidate(first.hash, 0, Some(1), &mut misses)
-                .is_some()
-        );
-        table.commit(0, 1);
-        let found = table.candidate(first.hash, 1, None, &mut misses).unwrap();
-        assert_eq!(found.value.to_bits(), 0.25_f32.to_bits());
-        assert!(matches!(found.bound, Bound::Exact));
-        assert!(Table::compatible(&found, ContextFingerprint::of(&a)));
-        assert!(!Table::compatible(&found, ContextFingerprint::of(&b)));
-        // An aborted epoch is removed at the quiet root boundary before a
-        // later commit can move this writer's watermark over the hole.
-        let pending = entry(&b, 2, -0.5, Bound::Lower);
-        table.insert(0, pending, &mut stats);
-        table.discard_uncommitted_quiet();
-        table.commit(0, 3);
-        assert!(
-            table
-                .candidate(pending.hash, 1, None, &mut misses)
-                .is_none()
-        );
         for bound in [
+            Bound::Exact,
             Bound::Lower,
             Bound::Upper,
             Bound::ApproxLeaf,
             Bound::SafeRaceLeaf,
         ] {
-            let mut typed = entry(&b, 4, -0.25, bound);
-            typed.best = None;
-            table.insert(1, typed, &mut stats);
-            table.commit(1, 4);
-            let x = table.candidate(typed.hash, 0, None, &mut misses).unwrap();
-            assert_eq!(x.value.to_bits(), typed.value.to_bits());
-            assert_eq!(x.bound as u8, bound as u8);
-            assert_eq!(x.best, None);
-            assert_eq!(x.context, typed.context);
+            let mut completed = entry(&a, 2, 0.25, bound);
+            if matches!(bound, Bound::ApproxLeaf | Bound::SafeRaceLeaf) {
+                completed.best = None;
+            }
+            table.insert(0, completed, &mut stats);
+            // No root/iteration commit exists: a different worker sees this completed node now.
+            let found = table.candidate(completed.hash, 1, &mut misses).unwrap().0;
+            assert_eq!(found.value.to_bits(), completed.value.to_bits());
+            assert_eq!(found.depth, completed.depth);
+            assert_eq!(found.best, completed.best);
+            assert_eq!(found.bound as u8, bound as u8);
+            assert!(Table::compatible(&found, ContextFingerprint::of(&a)));
+            assert!(!Table::compatible(&found, ContextFingerprint::of(&b)));
         }
         table.clear_quiet();
-        assert!(table.candidate(first.hash, 0, None, &mut misses).is_none());
+        assert!(
+            table
+                .candidate(Key::of(&a).hash(), 1, &mut misses)
+                .is_none()
+        );
         assert_eq!(table.capacity(), 17);
     }
 
     #[test]
-    fn smp_shared_bucket_trylock_reads_whole_entries_under_competing_writers() {
+    fn completed_node_publication_copies_whole_entries_under_competing_writers() {
         let a = SigmaContext::from_prefix(&[13, 67, 4, 76]).unwrap();
         let b = SigmaContext::from_prefix(&[3, 75, 4, 76]).unwrap();
         let ea = entry(&a, 1, 0.25, Bound::Exact);
         let eb = entry(&b, 1, -0.5, Bound::Upper);
-        let table = Arc::new(SharedTable::new(1, 2).unwrap());
+        let table = Arc::new(SharedTable::new(1).unwrap());
         let handles: Vec<_> = [ea, eb]
             .into_iter()
             .enumerate()
@@ -1012,9 +983,8 @@ mod smp_boundary_tests {
                     for generation in 1..=64 {
                         e.generation = generation;
                         table.insert(writer, e, &mut stats);
-                        table.commit(writer, generation);
                         let mut ignored = 0;
-                        if let Some(x) = table.candidate(e.hash, writer, None, &mut ignored) {
+                        if let Some((x, _)) = table.candidate(e.hash, writer, &mut ignored) {
                             if x.value.to_bits() == ea.value.to_bits() {
                                 assert_eq!(x.context, ea.context);
                                 assert!(matches!(x.bound, Bound::Exact));
@@ -1033,7 +1003,7 @@ mod smp_boundary_tests {
         }
         let locked = table.buckets[0].lock().unwrap();
         let mut misses = 0;
-        assert!(table.candidate(ea.hash, 0, None, &mut misses).is_none());
+        assert!(table.candidate(ea.hash, 0, &mut misses).is_none());
         assert_eq!(misses, 1);
         drop(locked);
     }
@@ -1075,6 +1045,7 @@ mod smp_boundary_tests {
             stop: AtomicBool::new(false),
             remaining: Some(AtomicU64::new(193)),
             started: Instant::now(),
+            observe_sharing: false,
         });
         let handles: Vec<_> = (0..2)
             .map(|worker| {
@@ -1096,6 +1067,7 @@ mod smp_boundary_tests {
             stop: AtomicBool::new(false),
             remaining: None,
             started: Instant::now(),
+            observe_sharing: false,
         });
         let mut budget = WorkerBudget::new(unlimited.clone(), 0);
         for _ in 0..257 {
@@ -1222,5 +1194,250 @@ mod smp_boundary_tests {
         assert_eq!(Arc::strong_count(&old), 1);
         assert!(s.last_smp_report().is_none());
         assert!(s.search(&root, &limits(), &cancel).is_ok());
+    }
+    struct AfterCompletedChild {
+        left: AtomicUsize,
+        cancel: Arc<AtomicBool>,
+        fail: bool,
+    }
+    impl StaticEvaluator for AfterCompletedChild {
+        fn evaluate(&self, _: &SigmaContext, _: Option<&EvalAccumulator>) -> Result<f32> {
+            let left = self.left.load(Ordering::SeqCst);
+            if left != usize::MAX {
+                if left == 0 {
+                    if self.fail {
+                        return Err(SearchError::Evaluation(
+                            "completed-child boundary error".into(),
+                        ));
+                    }
+                    self.cancel.store(true, Ordering::Relaxed);
+                } else {
+                    self.left.fetch_sub(1, Ordering::SeqCst);
+                }
+            }
+            Ok(0.0)
+        }
+    }
+
+    #[test]
+    fn completed_child_publication_survives_interrupted_parent_but_never_publishes_it() {
+        for fail in [false, true] {
+            let root = SigmaContext::from_prefix(&[]).unwrap();
+            let before = (root.position(), root.total_ply(), root.history_counts());
+            let cancel = Arc::new(AtomicBool::new(false));
+            let eval = Arc::new(AfterCompletedChild {
+                left: AtomicUsize::new(usize::MAX),
+                cancel: cancel.clone(),
+                fail,
+            });
+            let shared = Arc::new(SharedTable::new(1).unwrap());
+            let base = session(eval.clone());
+            let mut worker = base.fork_worker(shared.clone(), 0).unwrap();
+            let control = Arc::new(JobControl {
+                stop: AtomicBool::new(false),
+                remaining: Some(AtomicU64::new(10_000)),
+                started: Instant::now(),
+                observe_sharing: true,
+            });
+            let mut budget = WorkerBudget::new(control, 0);
+            let mut first = None;
+            let mut snapshots = Vec::new();
+            let mut lim = limits();
+            lim.tt_entries = 1;
+            lim.max_nodes = 10_000;
+            let result = worker.worker_search(&root, &lim, &cancel, &mut budget, &mut |r| {
+                snapshots.push(r.completed_depth);
+                assert_eq!(r.completed_depth, 1);
+                let child = root.play(r.action.unwrap()).unwrap();
+                // Root D2 searches its previous best first, full window, with
+                // Flat values/no LMR. Exactly these nonterminal D0 evaluations
+                // finish the first child; inject the next sibling's failure.
+                eval.left.store(child.legal_ids().len(), Ordering::SeqCst);
+                first = Some(child);
+            });
+            if fail {
+                assert!(result.is_err());
+            } else {
+                let result = result.unwrap();
+                assert_eq!(result.stop, StopReason::Cancelled);
+                assert_eq!(result.completed_depth, 1);
+            }
+            assert_eq!(snapshots, [1]);
+            assert!(budget.used() <= 10_000);
+            assert_eq!(
+                before,
+                (root.position(), root.total_ply(), root.history_counts())
+            );
+            let child = first.unwrap();
+            let mut contention = 0;
+            let (completed, foreign) = shared
+                .candidate(Key::of(&child).hash(), 1, &mut contention)
+                .unwrap();
+            assert!(foreign);
+            assert_eq!(completed.key, Key::of(&child));
+            assert_eq!(completed.depth, 1);
+            assert_eq!(completed.generation, 2);
+            assert!(matches!(completed.bound, Bound::Exact));
+            assert!(Table::compatible(
+                &completed,
+                ContextFingerprint::of(&child)
+            ));
+            // Single-slot TT: a wrongly published unfinished D2 root would
+            // replace this completed child and fail the key assertion above.
+            assert_ne!(completed.key, Key::of(&root));
+            cancel.store(false, Ordering::Relaxed);
+            for observe in [false, true] {
+                let mut peer = base.fork_worker(shared.clone(), 1).unwrap();
+                let ctl = Arc::new(JobControl {
+                    stop: AtomicBool::new(false),
+                    remaining: None,
+                    started: Instant::now(),
+                    observe_sharing: observe,
+                });
+                let mut peer_budget = WorkerBudget::new(ctl, 1);
+                let mut one = lim.clone();
+                one.max_depth = 1;
+                one.max_nodes = u64::MAX;
+                let mut callbacks = 0;
+                // The evaluator remains armed to fail: only a fully qualified
+                // actual cross-worker numeric return can finish this call.
+                let r = peer
+                    .worker_search(&child, &one, &cancel, &mut peer_budget, &mut |_| {
+                        callbacks += 1
+                    })
+                    .unwrap();
+                assert_eq!(r.completed_depth, 1);
+                assert_eq!(callbacks, 0); // helper never publishes main snapshots
+                assert_eq!(r.stats.tt_cutoffs, 1);
+                if observe {
+                    let p = r.stats.smp_sharing.as_ref().unwrap();
+                    assert_eq!(p.foreign_key_hits, 1);
+                    assert_eq!(p.foreign_context_hits, 1);
+                    assert_eq!(p.foreign_numeric_returns, 1);
+                } else {
+                    assert!(r.stats.smp_sharing.is_none());
+                }
+                assert_eq!(peer_budget.used(), 1);
+            }
+            let mut repeated_prefix = vec![13, 67, 4, 76];
+            // Both players can return the initial board in four plies; the
+            // same next action then gives this child's board with other counts.
+            let action = root
+                .legal_ids()
+                .into_iter()
+                .find(|&id| Key::of(&root.play(id).unwrap()) == Key::of(&child))
+                .unwrap();
+            repeated_prefix.push(action);
+            let other_history = SigmaContext::from_prefix(&repeated_prefix).unwrap();
+            assert_eq!(Key::of(&child), Key::of(&other_history));
+            assert!(!Table::compatible(
+                &completed,
+                ContextFingerprint::of(&other_history)
+            ));
+            let mut peer = base.fork_worker(shared.clone(), 1).unwrap();
+            let mut stats = SearchStats {
+                smp_sharing: Some(SmpSharingProvenance::default()),
+                ..SearchStats::default()
+            };
+            let hit = peer
+                .table
+                .probe::<true>(
+                    &Key::of(&other_history),
+                    ContextFingerprint::of(&other_history),
+                    &mut stats,
+                )
+                .unwrap();
+            assert!(!hit.4);
+            assert_eq!(stats.smp_sharing.unwrap().foreign_context_hits, 0);
+            let terminal = SigmaContext::from_prefix(&[13, 67, 4, 76, 13, 67, 4, 76]).unwrap();
+            let ctl = Arc::new(JobControl {
+                stop: AtomicBool::new(false),
+                remaining: None,
+                started: Instant::now(),
+                observe_sharing: true,
+            });
+            let mut terminal_budget = WorkerBudget::new(ctl, 1);
+            let r = peer
+                .worker_search(&terminal, &lim, &cancel, &mut terminal_budget, &mut |_| {
+                    panic!("helper callback")
+                })
+                .unwrap();
+            assert_eq!(r.stop, StopReason::Terminal);
+            assert_eq!(r.value, Some(0.0));
+            assert_eq!(r.stats.tt_probes, 0);
+        }
+    }
+
+    #[test]
+    fn completed_node_publication_team_caps_cancel_reset_and_drop_are_quiet() {
+        let eval = Arc::new(Flat);
+        let mut s = session(eval.clone());
+        let initialized = Arc::new(AtomicUsize::new(0));
+        s.set_search_threads(2, initializer(initialized.clone()))
+            .unwrap();
+        s.set_smp_sharing_provenance(true);
+        let shared = s.table.shared.as_ref().unwrap().0.clone();
+        let root = SigmaContext::from_prefix(&[13, 67]).unwrap();
+        let before = (root.position(), root.total_ply(), root.history_counts());
+        for cap in [1, 64, 193] {
+            let mut lim = limits();
+            lim.max_depth = 3;
+            lim.max_nodes = cap;
+            let r = s.search(&root, &lim, &AtomicBool::new(false)).unwrap();
+            let report = r.stats.smp.as_ref().unwrap();
+            assert_eq!(report.node_cap, Some(cap));
+            assert!(report.total_nodes <= cap);
+            assert_eq!(
+                report.total_nodes,
+                report.workers.iter().map(|w| w.nodes).sum::<u64>()
+            );
+            assert_eq!(report.main_kernel_completed_depth, Some(r.completed_depth));
+            assert!(report.workers.iter().all(|w| w.error.is_none()));
+            assert_eq!(
+                before,
+                (root.position(), root.total_ply(), root.history_counts())
+            );
+        }
+        let mut unlimited = limits();
+        unlimited.max_depth = 1;
+        unlimited.max_nodes = u64::MAX;
+        let r = s
+            .search(&root, &unlimited, &AtomicBool::new(false))
+            .unwrap();
+        assert_eq!(r.stats.smp.as_ref().unwrap().node_cap, None);
+        assert_eq!(initialized.load(Ordering::SeqCst), 1);
+        let cancel = AtomicBool::new(false);
+        let mut snapshots = Vec::new();
+        let r = s
+            .search_with_updates(&root, &limits(), &cancel, &mut |r| {
+                snapshots.push((
+                    r.completed_depth,
+                    r.action,
+                    r.value.map(f32::to_bits),
+                    r.pv.clone(),
+                ));
+                cancel.store(true, Ordering::Relaxed);
+            })
+            .unwrap();
+        assert_eq!(
+            (
+                r.completed_depth,
+                r.action,
+                r.value.map(f32::to_bits),
+                r.pv.clone()
+            ),
+            *snapshots.last().unwrap()
+        );
+        let replacement = Arc::new(Flat);
+        s.reset(replacement.clone(), namespace());
+        assert_eq!(Arc::strong_count(&eval), 1);
+        let mut contention = 0;
+        assert!(
+            shared
+                .candidate(Key::of(&root).hash(), 0, &mut contention)
+                .is_none()
+        );
+        drop(s);
+        assert_eq!(Arc::strong_count(&replacement), 1);
     }
 }

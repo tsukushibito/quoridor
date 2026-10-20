@@ -78,6 +78,7 @@ fn measurement394_completed_callback_preserves_cumulative_and_final_partial_scop
         let mut target = SearchTarget {
             settings: Settings {
                 search_threads: None,
+                smp_sharing_provenance: false,
                 search_cpu_cores: None,
                 management_cpu_core: None,
                 native_memory_bytes: None,

@@ -407,6 +407,61 @@ class LifecycleDataAndPaths(unittest.TestCase):
         self.assertEqual(reads, [config_ref, schedule, descriptor])
         self.assertNotIn(None, reads)
 
+    def test_completed_node_sharing_provenance_is_explicit_team_only(self):
+        lifecycle = load_lifecycle()
+        config = {
+            "roots": [
+                {"input": 0, "pointer": "/families/0", "field": "prefix", "label": "software-only"}
+            ],
+            "profile": "control",
+            "tt_entries": 17,
+            "use_tt": True,
+            "use_pvs": True,
+            "namespace": {
+                "evaluator": "software-only",
+                "rules": "research-standard-2p-threefold-goal-first-v1",
+                "selectivity": "PVS",
+            },
+            "output_bytes": 1048576,
+            "record_bytes": 32768,
+        }
+        requests = [
+            {"id": "node-publication", "session": "one", "root": 0, "depth": 1, "node_cap": 64}
+        ]
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+
+            def experiment():
+                cp = root / "config.json"
+                cp.write_text(json.dumps(config))
+                rp = root / "requests.json"
+                rp.write_text(json.dumps(requests))
+                return {
+                    "config": lifecycle.bound(cp)[0],
+                    "schedule": lifecycle.bound(rp)[0],
+                    "inputs": [{}],
+                    "models": [],
+                    "rules": "research-standard-2p-threefold-goal-first-v1",
+                }
+
+            lifecycle.measurement_config(experiment())
+            config["smp_sharing_provenance"] = False
+            lifecycle.measurement_config(experiment())
+            config["smp_sharing_provenance"] = True
+            with self.assertRaises(lifecycle.Refused):
+                lifecycle.measurement_config(experiment())
+            config.update(
+                search_threads=2,
+                search_cpu_cores=[12, 14],
+                management_cpu_core=0,
+                native_memory_bytes=2684354560,
+            )
+            lifecycle.measurement_config(experiment())
+            for wrong in (None, 1, "on"):
+                config["smp_sharing_provenance"] = wrong
+                with self.assertRaises(lifecycle.Refused):
+                    lifecycle.measurement_config(experiment())
+
 
 class ConfiguredArenaPlanSelection(unittest.TestCase):
     def test_two_configured_arena_plans_keep_exact_authority_and_refuse_cross_selection(self):

@@ -2639,6 +2639,7 @@ def measurement_config(experiment):
         <= {
             "inference",
             "search_threads",
+            "smp_sharing_provenance",
             "search_cpu_cores",
             "management_cpu_core",
             "native_memory_bytes",
@@ -2713,6 +2714,12 @@ def measurement_config(experiment):
                 for k in ("search_cpu_cores", "management_cpu_core", "native_memory_bytes")
             ),
             "unused search-team resources",
+        )
+    if "smp_sharing_provenance" in config:
+        require(
+            type(config["smp_sharing_provenance"]) is bool
+            and (not config["smp_sharing_provenance"] or "search_threads" in config),
+            "sharing provenance is an explicit Boolean opt-in for a configured native team",
         )
     if "time_reserve_ms" in config:
         reserve = config["time_reserve_ms"]

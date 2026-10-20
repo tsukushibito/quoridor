@@ -42,7 +42,7 @@ pub use neighbour_opportunity::{NeighbourOpportunity, NeighbourOpportunityMode};
 #[path = "lazy_smp.rs"]
 mod lazy_smp;
 #[cfg(not(target_arch = "wasm32"))]
-pub use lazy_smp::{SmpReport, SmpWorkerReport, WorkerInitializer};
+pub use lazy_smp::{SmpReport, SmpSharingProvenance, SmpWorkerReport, WorkerInitializer};
 #[path = "move_ordering.rs"]
 mod move_ordering;
 #[path = "static_geometry.rs"]
@@ -888,6 +888,8 @@ pub struct SearchStats {
     pub ordering: OrderingStats,
     #[cfg(not(target_arch = "wasm32"))]
     pub smp: Option<Box<SmpReport>>,
+    #[cfg(not(target_arch = "wasm32"))]
+    pub smp_sharing: Option<SmpSharingProvenance>,
 }
 
 #[derive(Debug, Clone)]
@@ -1096,6 +1098,33 @@ impl ContextFingerprint {
         Ok(())
     }
 }
+impl SearchStats {
+    #[inline]
+    fn foreign_probe_count<const SMP: bool>(&self) -> u64 {
+        #[cfg(not(target_arch = "wasm32"))]
+        if SMP {
+            return self.smp_sharing.as_ref().map_or(0, |p| p.foreign_key_hits);
+        }
+        0
+    }
+    #[inline]
+    fn foreign_tt_use<const SMP: bool>(&mut self, foreign: bool, numeric: bool) {
+        #[cfg(not(target_arch = "wasm32"))]
+        if SMP
+            && foreign
+            && let Some(p) = self.smp_sharing.as_mut()
+        {
+            if numeric {
+                p.foreign_numeric_returns += 1;
+            } else {
+                p.foreign_order_only_hints += 1;
+            }
+        }
+        #[cfg(target_arch = "wasm32")]
+        let _ = (foreign, numeric);
+    }
+}
+
 #[repr(u8)]
 #[derive(Debug, Clone, Copy)]
 enum Bound {
@@ -1140,7 +1169,6 @@ struct Table {
     byte_limit: usize,
     #[cfg(not(target_arch = "wasm32"))]
     shared: Option<(Arc<lazy_smp::SharedTable>, usize)>,
-    active_generation: bool,
 }
 impl Table {
     fn new(n: usize) -> Result<Self> {
@@ -1174,7 +1202,6 @@ impl Table {
             byte_limit,
             #[cfg(not(target_arch = "wasm32"))]
             shared: None,
-            active_generation: false,
         };
         // Capacity is observed after reserve, not assumed equal to request.
         if table.retained_bytes() > byte_limit {
@@ -1191,14 +1218,10 @@ impl Table {
         #[cfg(not(target_arch = "wasm32"))]
         if SMP {
             let mut ignored = 0;
-            let (table, writer) = self.shared.as_ref()?;
+            let (table, reader) = self.shared.as_ref()?;
             return table
-                .candidate(
-                    hash,
-                    *writer,
-                    self.active_generation.then_some(self.generation),
-                    &mut ignored,
-                )
+                .candidate(hash, *reader, &mut ignored)
+                .map(|(entry, _)| entry)
                 .filter(|e| e.key == *key);
         }
         if self.slots.is_empty() {
@@ -1210,20 +1233,10 @@ impl Table {
                 .filter(|e| e.key == *key)
         }
     }
-    fn candidate<const SMP: bool>(&self, hash: u64, stats: &mut SearchStats) -> Option<Entry> {
-        #[cfg(not(target_arch = "wasm32"))]
-        if SMP {
-            let (shared, writer) = self.shared.as_ref()?;
-            return shared.candidate(
-                hash,
-                *writer,
-                self.active_generation.then_some(self.generation),
-                &mut stats.tt_contention_skips,
-            );
-        }
-        self.slots[(hash % self.slots.len() as u64) as usize]
-            .as_ref()
-            .copied()
+    #[cfg(not(target_arch = "wasm32"))]
+    fn shared_candidate(&self, hash: u64, stats: &mut SearchStats) -> Option<(Entry, bool)> {
+        let (shared, reader) = self.shared.as_ref()?;
+        shared.candidate(hash, *reader, &mut stats.tt_contention_skips)
     }
     fn capacity_for<const SMP: bool>(&self) -> usize {
         #[cfg(not(target_arch = "wasm32"))]
@@ -1241,11 +1254,6 @@ impl Table {
     }
     fn commit(&mut self) {
         self.committed = self.generation;
-        self.active_generation = false;
-        #[cfg(not(target_arch = "wasm32"))]
-        if let Some((shared, writer)) = &self.shared {
-            shared.commit(*writer, self.committed);
-        }
     }
 
     fn retained_bytes_for<const SMP: bool>(&self) -> usize {
@@ -1268,7 +1276,6 @@ impl Table {
         if let Some((shared, _)) = &self.shared {
             shared.clear_quiet();
         }
-        self.active_generation = false;
         self.slots.iter_mut().for_each(|slot| *slot = None);
         self.generation = 0;
         self.committed = 0;
@@ -1278,14 +1285,8 @@ impl Table {
             self.clear();
         }
         self.generation += 1;
-        self.active_generation = true;
     }
     fn discard_uncommitted(&mut self) {
-        self.active_generation = false;
-        #[cfg(not(target_arch = "wasm32"))]
-        if self.shared.is_some() {
-            return;
-        }
         for slot in &mut self.slots {
             if slot.as_ref().is_some_and(|e| e.generation > self.committed) {
                 *slot = None;
@@ -1340,13 +1341,16 @@ impl Table {
         }
         // Local hot probes keep the original borrowed entry. Only shared reads
         // need an owned coherent copy; const SMP removes this branch for N=1.
+        #[cfg(not(target_arch = "wasm32"))]
         let shared_entry = if SMP {
-            self.candidate::<SMP>(hash, stats)
+            self.shared_candidate(hash, stats)
         } else {
             None
         };
+        #[cfg(target_arch = "wasm32")]
+        let shared_entry: Option<(Entry, bool)> = None;
         let entry = if SMP {
-            shared_entry.as_ref()?
+            &shared_entry.as_ref()?.0
         } else {
             self.slots[(hash % self.slots.len() as u64) as usize].as_ref()?
         };
@@ -1361,6 +1365,14 @@ impl Table {
         }
         stats.tt_hits += 1;
         let compatible = Self::compatible(entry, context);
+        #[cfg(not(target_arch = "wasm32"))]
+        if SMP
+            && shared_entry.as_ref().is_some_and(|(_, foreign)| *foreign)
+            && let Some(p) = stats.smp_sharing.as_mut()
+        {
+            p.foreign_key_hits += 1;
+            p.foreign_context_hits += u64::from(compatible);
+        }
         if compatible {
             stats.tt_context_matches += 1;
             stats.tt_exact_hits += u64::from(matches!(entry.bound, Bound::Exact));
@@ -1995,6 +2007,7 @@ impl<
         if c.is_synthetic() {
             return Ok(None);
         }
+        let foreign_before = self.stats.foreign_probe_count::<SMP>();
         let (key, hit) = if self.limits.use_tt {
             self.stats.safe_race_tt_probes += 1;
             let key = self.key(c);
@@ -2010,11 +2023,13 @@ impl<
         } else {
             (None, None)
         };
+        let foreign = self.stats.foreign_probe_count::<SMP>() != foreign_before;
         if let Some((stored_depth, value, Bound::SafeRaceLeaf, None, true)) = hit
             && stored_depth == depth
             && value.abs().to_bits() == self.score_domain.terminal_utility().to_bits()
         {
             self.stats.safe_race_tt_hits += 1;
+            self.stats.foreign_tt_use::<SMP>(foreign, true);
             return Ok(Some(SafeRaceProof {
                 value,
                 origin: SafeRaceOrigin::Tt,
@@ -2233,6 +2248,7 @@ impl<
     ) -> NodeResult<f32> {
         // The caller already performed enter/control and true terminal checks.
         // Same board/history/horizon is insufficient without the leaf kind.
+        let foreign_before = self.stats.foreign_probe_count::<SMP>();
         let (key, hit) = if self.limits.use_tt {
             self.stats.zero_stock_approx_tt_probes += 1;
             let key = self.key(c);
@@ -2248,11 +2264,13 @@ impl<
         } else {
             (None, None)
         };
+        let foreign = self.stats.foreign_probe_count::<SMP>() != foreign_before;
         if let Some((stored_depth, value, Bound::ApproxLeaf, None, true)) = hit
             && stored_depth == depth
             && self.score_domain.admits(value)
         {
             self.stats.zero_stock_approx_tt_hits += 1;
+            self.stats.foreign_tt_use::<SMP>(foreign, true);
             return Ok(value);
         }
         self.stats.zero_stock_approx_recomputes += 1;
@@ -2371,6 +2389,7 @@ impl<
         }
         let alpha_original = alpha;
         let beta_original = beta;
+        let foreign_before = self.stats.foreign_probe_count::<SMP>();
         let (key, hit) = if self.limits.use_tt {
             let key = self.key(c);
             let key = self
@@ -2385,6 +2404,7 @@ impl<
         } else {
             (None, None)
         };
+        let foreign = self.stats.foreign_probe_count::<SMP>() != foreign_before;
         let mut tt_move = None;
         let mut legal = None;
         if let Some((stored_depth, value, bound, best, context_matches)) =
@@ -2400,6 +2420,7 @@ impl<
                     match bound {
                         Bound::Exact => {
                             self.stats.tt_cutoffs += 1;
+                            self.stats.foreign_tt_use::<SMP>(foreign, true);
                             #[cfg(feature = "research-diagnostics")]
                             if OPPORTUNITY && let Some(o) = self.opportunity.as_deref_mut() {
                                 o.by_stock[NeighbourOpportunity::stock(c.position())]
@@ -2415,6 +2436,7 @@ impl<
                     }
                     if alpha >= beta {
                         self.stats.tt_cutoffs += 1;
+                        self.stats.foreign_tt_use::<SMP>(foreign, true);
                         #[cfg(feature = "research-diagnostics")]
                         if OPPORTUNITY && let Some(o) = self.opportunity.as_deref_mut() {
                             o.by_stock[NeighbourOpportunity::stock(c.position())]
@@ -2424,6 +2446,7 @@ impl<
                     }
                 } else {
                     self.stats.tt_order_only += 1;
+                    self.stats.foreign_tt_use::<SMP>(foreign, false);
                     self.stats.tt_order_context_mismatch += u64::from(!context_matches);
                 }
             } else {
@@ -2911,10 +2934,11 @@ impl<
         let mut legal = None;
         if self.limits.use_tt {
             let key = self.key(c);
-            if let Some((stored_depth, value, bound, best, context_matches)) = self
-                .table
-                .probe::<SMP>(&key, self.context, &mut self.stats)
-                .filter(|hit| !matches!(hit.2, Bound::ApproxLeaf | Bound::SafeRaceLeaf))
+            let foreign_before = self.stats.foreign_probe_count::<SMP>();
+            let hit = self.table.probe::<SMP>(&key, self.context, &mut self.stats);
+            let foreign = self.stats.foreign_probe_count::<SMP>() != foreign_before;
+            if let Some((stored_depth, value, bound, best, context_matches)) =
+                hit.filter(|hit| !matches!(hit.2, Bound::ApproxLeaf | Bound::SafeRaceLeaf))
             {
                 #[cfg(feature = "research-diagnostics")]
                 if OPPORTUNITY
@@ -2936,6 +2960,7 @@ impl<
                 if best.is_some_and(|action| {
                     legal.get_or_insert_with(|| c.legal_ids()).contains(&action)
                 }) {
+                    let tt_promoted = previous.is_none();
                     previous = previous.or(best);
                     #[cfg(feature = "research-diagnostics")]
                     if OPPORTUNITY
@@ -2950,6 +2975,7 @@ impl<
                     if context_matches && stored_depth == depth && matches!(bound, Bound::Exact) {
                         self.stats.tt_usable_depth += 1;
                         self.stats.tt_cutoffs += 1;
+                        self.stats.foreign_tt_use::<SMP>(foreign, true);
                         #[cfg(feature = "research-diagnostics")]
                         if OPPORTUNITY && let Some(o) = self.opportunity.as_deref_mut() {
                             o.by_stock[NeighbourOpportunity::stock(c.position())]
@@ -2970,6 +2996,8 @@ impl<
                         return Ok((best.unwrap(), value));
                     }
                     self.stats.tt_order_only += 1;
+                    self.stats
+                        .foreign_tt_use::<SMP>(foreign && tt_promoted, false);
                     self.stats.tt_order_context_mismatch += u64::from(!context_matches);
                 } else {
                     self.stats.tt_illegal_moves += 1;
@@ -4201,6 +4229,13 @@ fn search_in_table_observed<
             true
         }
     };
+    #[cfg(not(target_arch = "wasm32"))]
+    let smp_sharing = (SMP
+        && invocation
+            .worker_budget
+            .as_ref()
+            .is_some_and(|b| b.sharing_enabled()))
+    .then(SmpSharingProvenance::default);
     let mut state = Search::<OBSERVE, TRACE, OPPORTUNITY, SMP, HISTORY> {
         eval: evaluator,
         score_domain,
@@ -4222,6 +4257,8 @@ fn search_in_table_observed<
         deadline,
         table,
         stats: SearchStats {
+            #[cfg(not(target_arch = "wasm32"))]
+            smp_sharing,
             lmr_enabled: lmr,
             lmr_method,
             lmr_parameters: (lmr && lmr_method == LmrMethod::DepthRank).then(|| {
@@ -4386,7 +4423,9 @@ fn search_in_table_observed<
                 result.stats = state.stats.clone();
                 result.elapsed = state.start.elapsed();
             }
-            state.table.commit();
+            if !SMP {
+                state.table.commit();
+            }
             #[cfg(feature = "research-diagnostics")]
             if OPPORTUNITY
                 && let Some(q) = state
@@ -4402,7 +4441,7 @@ fn search_in_table_observed<
         }
         Ok(())
     })();
-    if run.is_err() {
+    if !SMP && run.is_err() {
         state.table.discard_uncommitted();
     }
     let parent_not_restored = c.position() != root.position()
@@ -4435,11 +4474,8 @@ fn search_in_table_observed<
             trace.parent_restored = Some(false);
         }
         #[cfg(not(target_arch = "wasm32"))]
-        if SMP {
-            if let Some(budget) = state.worker_budget.as_ref() {
-                budget.abort();
-            }
-            state.table.discard_uncommitted();
+        if SMP && let Some(budget) = state.worker_budget.as_ref() {
+            budget.abort();
         }
         if !SMP {
             state.table.clear();

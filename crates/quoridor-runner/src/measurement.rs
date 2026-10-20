@@ -66,6 +66,8 @@ struct Settings {
         skip_serializing_if = "Option::is_none"
     )]
     search_threads: Option<usize>,
+    #[serde(default, skip_serializing_if = "sharing_provenance_disabled")]
+    smp_sharing_provenance: bool,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     search_cpu_cores: Option<Vec<usize>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -153,6 +155,10 @@ fn default_safe_race_enabled() -> bool {
     alphabeta::RESEARCH_SAFE_RACE_ENABLED
 }
 
+fn sharing_provenance_disabled(enabled: &bool) -> bool {
+    !*enabled
+}
+
 fn default_lmr_method() -> String {
     LmrMethod::default().name().into()
 }
@@ -191,6 +197,7 @@ fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
     } else if settings.search_cpu_cores.is_some()
         || settings.management_cpu_core.is_some()
         || settings.native_memory_bytes.is_some()
+        || settings.smp_sharing_provenance
     {
         return Err("unused native search team resources".into());
     }
@@ -556,6 +563,7 @@ impl Target for SearchTarget {
                 }),
             )?;
         }
+        session.set_smp_sharing_provenance(self.settings.smp_sharing_provenance);
         let method = session.namespace().selectivity.clone();
         let lmr = session.lmr_enabled();
         let retained = session.retained_memory_bytes();
@@ -3166,5 +3174,51 @@ mod history_provenance_settings_tests {
                 .get("history_provenance")
                 .is_none()
         );
+    }
+}
+
+#[cfg(test)]
+mod node_publication_settings_tests {
+    use super::*;
+    #[test]
+    fn sharing_provenance_default_off_requires_a_real_search_team() {
+        let body = serde_json::json!({"roots":[{"input":0,"pointer":"/families/0","field":"prefix","label":"software-only"}],"profile":"control","tt_entries":17,"use_tt":true,"use_pvs":true,"namespace":{"evaluator":"software-only","rules":"research-standard-2p-threefold-goal-first-v1","selectivity":"PVS"},"output_bytes":1048576,"record_bytes":32768});
+        let request:Request=serde_json::from_value(serde_json::json!({"id":"node-publication","session":"one","root":0,"depth":1,"node_cap":64})).unwrap();
+        let settings: Settings = serde_json::from_value(body.clone()).unwrap();
+        assert!(!settings.smp_sharing_provenance);
+        assert!(
+            serde_json::to_value(&settings)
+                .unwrap()
+                .get("smp_sharing_provenance")
+                .is_none()
+        );
+        let mut on = body.clone();
+        on["smp_sharing_provenance"] = serde_json::json!(true);
+        assert!(
+            validate(
+                &serde_json::from_value(on.clone()).unwrap(),
+                std::slice::from_ref(&request)
+            )
+            .is_err()
+        );
+        on["search_threads"] = serde_json::json!(2);
+        on["search_cpu_cores"] = serde_json::json!([12, 14]);
+        on["management_cpu_core"] = serde_json::json!(0);
+        on["native_memory_bytes"] = serde_json::json!(2684354560_u64);
+        assert!(
+            validate(
+                &serde_json::from_value(on.clone()).unwrap(),
+                std::slice::from_ref(&request)
+            )
+            .is_ok()
+        );
+        for invalid in [
+            serde_json::Value::Null,
+            serde_json::json!("on"),
+            serde_json::json!(1),
+        ] {
+            on["smp_sharing_provenance"] = invalid;
+            assert!(serde_json::from_value::<Settings>(on.clone()).is_err());
+        }
     }
 }
