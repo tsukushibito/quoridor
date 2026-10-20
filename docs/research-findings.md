@@ -2824,3 +2824,25 @@ Rootは通常descriptive解釈として **NO_CONCRETE_IMPLEMENTABLE_HISTORY_IMPR
 25は元のcurrent/half LMR-ON Control routeについてSOURCE_CLEAR/essential0、ordinary2（新Rust selectorのmodule経路とLMR-OFF時のLC拒否整合）を保存し、同じ作者が限定修正した。Rootは現24を基準に9subjectを疎合成し、EOFに独立追加されたテストmodule二つだけを両方保持してMainへ採用した。[実adoption](../.artifacts/research-team/integration324/cedar-shallow-main-history-v1/source-adoption-v1/actual-adoption.json)。default current100%、half50は研究N1だけであり、現24の数値/画像/公開規則を上書きしていない。新Python1は正規ownerで実1件に入ったがsynthetic Experimentのrules不足で早期FAILED、後続assertionは未実行。productionを緩めず同じ作者へfixture-only修正を戻し、独立な新Rust5/Clippy/真正releaseは通常継続する。まだsoftware/性能/害や改善の資格ではない。
 
 26はPosition::legal_wall内の候補blocked-edge構築一回化について、invalid/goal/shortcircuit/二つの到達predicateとprofiling Distance span2/1/0を維持する限定SOURCE_CLEAR/essential0 ordinary0を得た。新Rust3は未実行であり、compiler CSEや実際の削減回数、全Search利益を推定しない。25の有限判断後の同じresolved history policyによる新104/104M比較が残る。原21/23/22を再開せず、全pause/seals/models/defaults/foreign/RAWFAILED/NULL/UNKNOWN費/decimal50GBを保持する。
+
+### 25の原試行不成立と入口修復後の独立比較（324.25.3、2026-10-20）
+
+原25は新Rust5/Python1・影響Clippy・真正画像41701732まで資格を得たが、数値の成立とは別である。原401bfae3はRUNのchild_cpu_cores不足でnative前に拒否された。因果metadataだけ直した978638b2は4manifest/dataの通常custodyを満たしても、各最初のrootでSEARCH_LIMITSとなった。**4attempted UNKNOWN、完成Search0、100unperformed、TT generation0→0**であり、半減候補の無支持・無効果・有害の証拠にはしない。[原minimumと実STOP](../.worktree/assets/perf/cedar-shallow-main-history-v1/normal104-collection-v1/minimum-result.json)。原の条件付き64はSTOPPED_UNISSUED、原設定・部分結果・cleanup領域差・費用を保持する。
+
+原因はrootqualityの時刻付き設定を既存calleeが一律拒否していた入口の不整合だった。拒否を「history provenance watchあり、かつtime_limitあり」に限定し、plain N1/OffShadow/Controlの有界clockを許す1条件修復をMain8ea599e2へ疎適用した。watchのtimeNone制約、D64/1M/TT1M、deadline/reserve、親復元、履歴更新式、LMR/SMP本体は保持する。関連25.2 SOURCE_ONLY clearの後、新実callee境界は**実行1件PASS、影響Clippy警告0**、真正release650db128を一度normal finalizeした。[新BUILD84fd79dc・画像f68639f7・software実STOP](../.artifacts/research-team/integration324/cedar-shallow-main-history-v1/timed-rootquality-software-v1/release-collection-v1/completion-and-STOP.json)。これは入口とsoftwareの資格で、性能/棋力結果ではない。
+
+人間が別途明示した25.3は、旧100未実行の転用やUNKNOWN補充ではない**独立の新104calls/104M**である。同一新画像のcurrent-half-half-current、元26genuineprefix/6同色時系列・24session、Cedar/Control/baselineLMR/TT1M/N1/100ms5、固定参照手と元gateを保つ。[独立試行の固定境界](../.worktree/assets/perf/cedar-shallow-main-history-v1/corrected-entry-trial-v1/trial.json)。新104の機械条件と重大時計条件を満たす場合だけ、同じ候補の前向き新64局/32family両色・最大1.024Gへ進む。旧STOPPED64の遡及起床、係数変更、refill、一般的なordering正解率や独立oracleの認定はしない。
+
+### 共有TT置換一因子の原208：Search改善なし、条件付き対局判定と区別（324.27）
+
+writer-neutralな現generationの深さ保護だけをMainf2efd18eへ疎適用し、新境界実1件/Clippy警告0と真正candidate BUILD982166c7・画像8ae3ef74を資格化した。controlはBUILD51379b64・画像41701732で、両方N2/Current、共通25互換sourceとの差はこの置換規則だけである。原208は全8通常manifest/data PASS、48session、19,159,225 aggregate nodes、**全104固定深さDepthComplete**。[固定結果と限界](../.worktree/assets/perf/cedar-lazy-smp-followup-v1/numeric-v1/analysis-v1/report-ja.md)。
+
+固定深さSearch合計はcontrol0.328074833/0.316615910秒、candidate0.340400386/0.356706557秒、二反復sum比1.081304409で**約8.1%長く、速度改善を示さない**。保守比max(candidate)/min(control)=1.126622339。whole_driver比1.017708150、公開前whole1.016851270、reset0.979284637を別記し、clock whole0.999272183を一般利益にしない。選択的work/PVや並行scheduleが変わるため同仕事speedupでもない。
+
+一方、事前の重大退行閾値Search比>1.20およびroot比>1.25かつ>10msは該当せず、全104clockのmain完成depth>=1、receipt最大0.088795649秒、terminal p95/max0.0950422829/0.095102033秒は固定条件内だった。main深さ中央値の改善root13/25、悪化root23を分け、整数depth増をgateにしない。保存上の正しさ/完全履歴/親復元/main authority/合算cap/quietと合わせ、**原条件付き新27 64局の機械的gateはPASS**である。これは改善採用ではない。book33..64/32family両色・2非融通250M、sole PCG64 seed3242720261021/10000/linear95は元規約のまま、全64資格/UNKNOWN0と実STOP後だけ評価する。現時点のgames/CIは0で、実supportとfresh normal entryは別に必要である。
+
+main clock foreign numeric returnはO116726/N133908だがnestedな資格付きreturn数であり、saved nodes・独立情報量・速度原因ではない。skipには正確な全lock試行分母がなく、競合率を作らない。3family/6系列・歴史的露出・stock0不足4・schedule差と未観測を残す。outer56.144763131秒は一度だけ、nestedを加算せず、未使用node枠を他factorへ貸与しない。[実native/collection/保存解析STOP](../.worktree/assets/perf/cedar-lazy-smp-followup-v1/numeric-v1/analysis-v1/native-collection-analysis-STOP.json)。default1、原22/24/25結果と全FAILED/NULL/UNKNOWN費を保持する。
+
+### 26は両群Currentで独立に比較する
+
+後続の人間補足により、26の「25の採否を解決したpolicy待ち」は解除した。両版を明示的に**Current**へ固定し、壁合法性だけを一因子にする。[固定amendmentと通常準備](../.worktree/assets/perf/cedar-wall-path-work-v1/current-history-preparation-v1/policy-dependency-amendment.json)。原104/104M・26prefix/6系列・depthmap・全104完成/値bits/手/PV/tree work/履歴復元対応とSearch比<=0.98・反復分離・stock guardは変更せず、25の半減候補へ事後に切り替えない。新Rust3と公平な共通source画像のsoftware/実測は別工程であり、局所構造から全Search利益を認定しない。実native時計と重いbuild/IOだけを実STOPで直列化し、独立source/config/限定reviewは実資源内で並行、親close/ACKを入口にしない。

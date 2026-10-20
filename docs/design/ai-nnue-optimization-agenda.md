@@ -249,7 +249,7 @@ LMRを優先し、私有source/設定の照合だけを並行する。perf/build
 
 保存profileのself/group割合は重複を足さず、現画像の正確なCPU率や削減可能率へ変換しない。壁周辺に小候補がなければ、make/undo、fullhistory/repetition、TTkey/probe、履歴採点/選択、buffer/copyを保存費用とsourceから選び直し、一度に全領域を実装しない。必要small reportと局所sourceだけから開始し、RAW再decode/旧成功suite/solver/model再資格/全repo監査はしない。
 
-軽いsource精査は同じ既存作者の25固定source返却後の空き境界で並行できる。Main/Cargoと公平な数値は実native+normalcollection STOPで直列化し、26の効果比較では25の採否を解決したhistory policyを両版で固定する。source/数値を親close・人間/Root返信待ちにしない。足りない費用内訳が意思決定を妨げる場合だけ最大12calls/12Mの追加診断、最初の局所的で意味を保つ一候補には必要softwareと最大104calls/104M ABBAを今回の新有限枠とする。元26prefix/6時系列・1thread・Cedar/LMR/TT1M/proof条件、session初期化再利用を維持し、深さ/上限/採否を結果前固定する。未完cap時間は完成速度にしない。
+軽いsource精査は同じ既存作者の25固定source返却後の空き境界で並行できる。後続の人間補足により26は両版Currentへ明示固定し、25の採否・全64・親closeを待たず壁合法性だけを比較する。Main/Cargo writerと公平な実native/profile時計に競合する重いbuild/IOだけを実native+normalcollection STOPで直列化し、独立source/fixture/限定review/config準備は実資源内で並行する。source/数値を人間/Root返信待ちにしない。足りない費用内訳が意思決定を妨げる場合だけ最大12calls/12Mの追加診断、最初の局所的で意味を保つ一候補には必要softwareと最大104calls/104M ABBAを今回の新有限枠とする。元26prefix/6時系列・1thread・Cedar/LMR/TT1M/proof条件、session初期化再利用を維持し、深さ/上限/採否を結果前固定する。未完cap時間は完成速度にしない。
 
 valuebits/action/PV/depth/stop/探索tree work/fullhistory/親復元を対応し、意図して減らすBFS/検査/copy内部仕事は別に示す。Searchに加えてsetup/reset/drop/whole/終了tailを保持し、kernelやsample shareから全探索利益を逆算しない。無支持なら既定にせず用途のない候補code/fixture/counter/案内を撤去、Git/元データ/モデル/RAW/FAILED/UNKNOWNを保全する。新対局・fit・teacher・モデル変更や無制限sweepは発行しない。担当/状態はBeads、問/観測/判断は既存findings、通常source/softwareにmicro保存枠を作らず具体bulkだけdecimal50GB内へ実配分する。
 
@@ -262,3 +262,7 @@ valuebits/action/PV/depth/stop/探索tree work/fullhistory/親復元を対応し
 探索内容を変える一候補が正しく動き重大な時計/停止退行がなければ、各最大新64局/32真正両色family（合計最大256局）まで許可範囲内で進める。整数深さ増加だけを必須gateにせず、reset等の数値内容不変候補に不要な対局は強制しない。旧24原64/22DORMANTを転用せず、同案refill/sweep/4thread/新roots/新学習/model/teacherは含まない。支持なら次controlを明示更新、無支持の用途のないcode/option/counter/fixtureは撤去してGit/RAW/FAILED/必要image/dataを保持する。
 
 25履歴/26壁合法性の仕事は維持し、公平な実clockだけactual native+normalcollectionSTOPで直列化する。light source/限定reviewは並行可、Main/Git/Cargo/docsは324のみ。普通source/softwareにmicrostorage枠を作らず、具体bulkと実不足時の停止済rebuildable cache整理をdecimal50GB内で扱う。原24のSearch比0.96495に対してwhole_driver比1.39165という差を保持し、一般速度/棋力/default昇格へ拡張しない。状態/所有はBeads、判断根拠はfindings、親close/人間/Root ACKは工程gateにしない。
+
+原27第一候補の208は全104固定深さ完了でもSearch合計比1.081304409で長く、速度改善は支持していない。固定した重大退行/100ms安全性条件は通るため、元の前向き64局判定と速度採用を区別する。整数depth/CPU費だけで対局gateを変えず、同仕事speedupや共有returnの因果を認定しない。[保存結果](../research-findings.md#共有tt置換一因子の原208search改善なし条件付き対局判定と区別32427)。他3因子の同時採用や同案refillはしない。
+
+25原試行の4UNKNOWN/100unperformedはcallee入口拒否による不成立として固定する。必要な1条件修復と新実callee境界のsoftware資格を得た後、人間が明示した独立25.3新104/104Mを同じCurrent/Half一因子・100ms5・N1で一回行い、元gateが通る場合だけ前向き新64へ進む。これは旧未実行枠の転用や旧STOPPED64の昇格ではない。通常資格PASSを科学結果へ読み替えず、元FAILED/費/UNKNOWNとdefault Currentを維持する。
