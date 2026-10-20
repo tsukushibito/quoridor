@@ -194,14 +194,13 @@ fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
     {
         return Err("unused native search team resources".into());
     }
-    if let Some(reserve) = settings.time_reserve_ms {
-        if settings.search_threads.is_none()
+    if let Some(reserve) = settings.time_reserve_ms
+        && (settings.search_threads.is_none()
             || requests
                 .iter()
-                .any(|r| r.time_limit_ms.is_none_or(|ms| ms <= reserve))
-        {
-            return Err("reserve belongs to explicit positive clock-budget search requests".into());
-        }
+                .any(|r| r.time_limit_ms.is_none_or(|ms| ms <= reserve)))
+    {
+        return Err("reserve belongs to explicit positive clock-budget search requests".into());
     }
 
     if let Some(name) = settings.neighbour_opportunity.as_deref() {
@@ -781,8 +780,8 @@ impl Target for SearchTarget {
         }
         row["TT_generation_before"] = json!(table_generation_before);
         row["TT_generation_after"] = json!(session.table_generation());
-        if self.settings.search_threads.is_some() {
-            row["search_threads"] = json!(self.settings.search_threads.unwrap());
+        if let Some(search_threads) = self.settings.search_threads {
+            row["search_threads"] = json!(search_threads);
             row["main_completed_receipt_seconds"] = json!(main_completed_receipt.map(|r| r.0));
             row["main_receipted_completed_depth"] = json!(main_completed_receipt.map(|r| r.1));
             row["receipt_scope"] = json!(
