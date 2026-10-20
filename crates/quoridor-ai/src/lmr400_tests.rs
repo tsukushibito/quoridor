@@ -328,8 +328,7 @@ fn shared402_lmr_confirmation_research_keeps_frozen_same_hand_and_tail_cursor() 
                         c,
                         None,
                         target,
-                        [2, 1],
-                        0.0,
+                        ([2, 1], 0.0),
                         1,
                         #[cfg(feature = "research-diagnostics")]
                         None,
@@ -382,8 +381,7 @@ fn lmr400_reduced_fail_low_stores_actual_child_depth_and_restores_parent() {
                     c,
                     None,
                     action,
-                    [2, 1],
-                    0.0,
+                    ([2, 1], 0.0),
                     1,
                     #[cfg(feature = "research-diagnostics")]
                     None,
@@ -433,8 +431,7 @@ fn lmr400_shallow_fail_high_requires_full_child_and_confirmation_error_cancel_re
                 c,
                 None,
                 action,
-                [2, 1],
-                0.0,
+                ([2, 1], 0.0),
                 1,
                 #[cfg(feature = "research-diagnostics")]
                 None,

@@ -287,8 +287,7 @@ fn lmr408_multi_ply_full_depth_confirmation_error_cancel_and_parent_restore() {
                 c,
                 None,
                 c.legal_ids()[0],
-                [5, 3],
-                -1.0,
+                ([5, 3], -1.0),
                 1,
                 #[cfg(feature = "research-diagnostics")]
                 None,

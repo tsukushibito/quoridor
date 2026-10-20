@@ -733,12 +733,12 @@ impl Pool {
                 "aggregate worker node cap exceeded".into(),
             ));
         }
-        if result.is_ok() {
-            if let Some(error) = report.workers.iter().skip(1).find_map(|r| r.error.as_ref()) {
-                result = Err(SearchError::Evaluation(format!(
-                    "native helper failure: {error}"
-                )));
-            }
+        if result.is_ok()
+            && let Some(error) = report.workers.iter().skip(1).find_map(|r| r.error.as_ref())
+        {
+            result = Err(SearchError::Evaluation(format!(
+                "native helper failure: {error}"
+            )));
         }
         if let Ok(result) = &mut result {
             // Public action/value/PV/completeddepth remain MAIN's only. Total nodes/

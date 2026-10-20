@@ -184,8 +184,7 @@ fn parameter_settings_custom_table_preserves_error_cancel_and_parent_restore() {
                 c,
                 None,
                 action,
-                [2, 1],
-                0.0,
+                ([2, 1], 0.0),
                 1,
                 #[cfg(feature = "research-diagnostics")]
                 None,

@@ -2643,8 +2643,7 @@ impl<
                     c,
                     a,
                     action,
-                    [depth - 1, depth - 1 - reduction],
-                    alpha,
+                    ([depth - 1, depth - 1 - reduction], alpha),
                     ply + 1,
                     #[cfg(feature = "research-diagnostics")]
                     if HISTORY && history_returns.is_some() {
@@ -2830,11 +2829,11 @@ impl<
         c: &mut SigmaContext,
         parent: Option<&EvalAccumulator>,
         action: u16,
-        child_depths: [u16; 2],
-        alpha: f32,
+        child_search: ([u16; 2], f32),
         ply: usize,
         #[cfg(feature = "research-diagnostics")] history_confirmation: Option<&mut bool>,
     ) -> NodeResult<f32> {
+        let (child_depths, alpha) = child_search;
         let [child_depth, reduced_depth] = child_depths;
         debug_assert!(reduced_depth < child_depth);
         self.stats.lmr_attempts += 1;
@@ -4322,8 +4321,7 @@ fn search_in_table_observed<
                     &mut c,
                     a.as_ref(),
                     trial.action,
-                    [trial.normal_depth, trial.reduced_depth],
-                    trial.alpha,
+                    ([trial.normal_depth, trial.reduced_depth], trial.alpha),
                     trial.parent_ply + 1,
                     #[cfg(feature = "research-diagnostics")]
                     None,
