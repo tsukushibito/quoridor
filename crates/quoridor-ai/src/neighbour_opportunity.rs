@@ -580,7 +580,7 @@ impl super::SearchSession {
             && (mode != NeighbourOpportunityMode::OffShadow
                 || limits.max_depth != 64
                 || limits.max_nodes > 1_000_000
-                || limits.time_limit.is_some()
+                || (observation.history_provenance.is_some() && limits.time_limit.is_some())
                 || limits.tt_entries != 1_048_576)
         {
             return Err(SearchError::Limits(

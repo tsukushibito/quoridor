@@ -202,3 +202,186 @@ fn opportunity_explicit_namespace_reset_and_normal_entry_refusal_nn0() {
     );
     assert!(NeighbourOpportunityMode::from_name("neighbour_contact").is_err());
 }
+
+#[test]
+fn timed_root_quality_real_callee_admission_isolation_and_error_restore_nn0() {
+    use crate::alphabeta::{
+        HistoryEntrySelector, HistoryProvenance, LmrMethod, StopReason, ZeroStockSafeRaceMethod,
+    };
+    use std::sync::atomic::{AtomicUsize, Ordering as AtomicOrdering};
+    use std::time::Duration;
+
+    struct Probe {
+        prepares: Arc<AtomicUsize>,
+        fail: bool,
+    }
+    impl StaticEvaluator for Probe {
+        fn prepare_context(&self, _: &SigmaContext) -> Result<Option<EvalAccumulator>> {
+            self.prepares.fetch_add(1, AtomicOrdering::Relaxed);
+            if self.fail {
+                Err(SearchError::Evaluation("timed-root-quality-fixture".into()))
+            } else {
+                Ok(None)
+            }
+        }
+        fn evaluate(&self, _: &SigmaContext, _: Option<&EvalAccumulator>) -> Result<f32> {
+            Ok(0.)
+        }
+    }
+    fn session(
+        prepares: Arc<AtomicUsize>,
+        fail: bool,
+        mode: NeighbourOpportunityMode,
+    ) -> SearchSession {
+        let mut session = SearchSession::new_neighbour_opportunity(
+            Arc::new(Probe { prepares, fail }),
+            SearchNamespace {
+                evaluator: "timed-root-quality-fixture-no-model".into(),
+                rules: "research-standard-2p-threefold-goal-first-v1".into(),
+                selectivity: "PVS".into(),
+            },
+            1_048_576,
+            mode,
+        )
+        .unwrap();
+        session.set_lmr_method(LmrMethod::DepthRank);
+        session.set_lmr(true).unwrap();
+        session.set_zero_stock_safe_race_method(ZeroStockSafeRaceMethod::PathTail);
+        session.set_zero_stock_safe_race(true);
+        session
+    }
+    fn observation() -> NeighbourOpportunity {
+        NeighbourOpportunity {
+            root_ordering: Some(RootOrderingQuality::default()),
+            ..Default::default()
+        }
+    }
+    fn watch() -> HistoryProvenance {
+        HistoryProvenance::new(vec![HistoryEntrySelector::Main {
+            colour: 0,
+            from_cell: None,
+            action: 81,
+        }])
+        .unwrap()
+    }
+    let root = SigmaContext::from_prefix(&[]).unwrap();
+    let before = (root.position(), root.total_ply(), root.history_counts());
+    // The actual 100ms-minus-5ms route, with a tiny node bound. No assertion
+    // about depth, elapsed time, chosen quality, or which stop wins the race.
+    let limits = SearchLimits {
+        max_depth: 64,
+        max_nodes: 8,
+        time_limit: Some(Duration::from_millis(95)),
+        tt_entries: 1_048_576,
+        use_pvs: true,
+        use_tt: true,
+    };
+    let prepares = Arc::new(AtomicUsize::new(0));
+    {
+        let mut admitted = session(prepares.clone(), false, NeighbourOpportunityMode::OffShadow);
+        let mut observed = observation();
+        let result = admitted
+            .search_neighbour_opportunity(&root, &limits, &AtomicBool::new(false), &mut observed)
+            .unwrap();
+        assert!(result.stats.nodes <= limits.max_nodes);
+        assert!(observed.published && observed.final_stats.is_some());
+        assert_eq!(observed.mode, Some(NeighbourOpportunityMode::OffShadow));
+        assert_eq!(observed.parent_restored, Some(true));
+        assert_eq!(
+            before,
+            (root.position(), root.total_ply(), root.history_counts())
+        );
+    }
+    for invalid in 0..8 {
+        let mut restricted = limits.clone();
+        let mut observed = observation();
+        let mut mode = NeighbourOpportunityMode::OffShadow;
+        match invalid {
+            0 => mode = NeighbourOpportunityMode::On,
+            1 => restricted.max_depth = 63,
+            2 => restricted.max_nodes = 1_000_001,
+            3 => restricted.tt_entries = 16,
+            4 => restricted.use_pvs = false,
+            5 => restricted.use_tt = false,
+            6 => observed.history_provenance = Some(watch()),
+            7 => {
+                observed.history_provenance = Some(watch());
+                observed.root_ordering = None;
+            }
+            _ => unreachable!(),
+        }
+        let mut refused = session(prepares.clone(), false, mode);
+        let generation = refused.table_generation();
+        let count = prepares.load(AtomicOrdering::Relaxed);
+        assert!(matches!(
+            refused.search_neighbour_opportunity(
+                &root,
+                &restricted,
+                &AtomicBool::new(false),
+                &mut observed,
+            ),
+            Err(SearchError::Limits(_))
+        ));
+        assert!(!observed.published && observed.mode.is_none());
+        assert!(observed.final_stats.is_none() && observed.parent_restored.is_none());
+        if let Some(quality) = observed.root_ordering {
+            assert!(quality.first_completed.is_none());
+            assert!(quality.last_completed.is_none() && quality.pending.is_none());
+        }
+        assert_eq!(refused.table_generation(), generation);
+        assert_eq!(prepares.load(AtomicOrdering::Relaxed), count);
+        assert_eq!(
+            before,
+            (root.position(), root.total_ply(), root.history_counts())
+        );
+    }
+    {
+        let mut cancelled = session(prepares.clone(), false, NeighbourOpportunityMode::OffShadow);
+        let mut observed = observation();
+        let count = prepares.load(AtomicOrdering::Relaxed);
+        let result = cancelled
+            .search_neighbour_opportunity(&root, &limits, &AtomicBool::new(true), &mut observed)
+            .unwrap();
+        assert_eq!(result.stop, StopReason::Cancelled);
+        assert!(observed.published && observed.final_stats.is_some());
+        assert_eq!(observed.parent_restored, Some(true));
+        let quality = observed.root_ordering.unwrap();
+        assert!(quality.first_completed.is_none());
+        assert!(quality.last_completed.is_none() && quality.pending.is_none());
+        assert_eq!(prepares.load(AtomicOrdering::Relaxed), count);
+        assert_eq!(
+            before,
+            (root.position(), root.total_ply(), root.history_counts())
+        );
+    }
+    {
+        let mut failing = session(prepares.clone(), true, NeighbourOpportunityMode::OffShadow);
+        let mut observed = observation();
+        let count = prepares.load(AtomicOrdering::Relaxed);
+        // A generous timer keeps the injected prepare error independent of
+        // scheduling variation; the test never waits for this timer.
+        let error_limits = SearchLimits {
+            time_limit: Some(Duration::from_secs(60)),
+            ..limits
+        };
+        assert!(matches!(
+            failing.search_neighbour_opportunity(
+                &root,
+                &error_limits,
+                &AtomicBool::new(false),
+                &mut observed,
+            ),
+            Err(SearchError::Evaluation(message)) if message == "timed-root-quality-fixture"
+        ));
+        assert_eq!(prepares.load(AtomicOrdering::Relaxed), count + 1);
+        assert!(observed.published && observed.final_stats.is_some());
+        assert_eq!(observed.parent_restored, Some(true));
+        let quality = observed.root_ordering.unwrap();
+        assert!(quality.first_completed.is_none());
+        assert!(quality.last_completed.is_none() && quality.pending.is_none());
+        assert_eq!(
+            before,
+            (root.position(), root.total_ply(), root.history_counts())
+        );
+    }
+}
