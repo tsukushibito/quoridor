@@ -2688,3 +2688,20 @@ first32の実行は全32 operations・512局/256完全pair/256 tuning family・U
 2026-10-20、新Rust2定義は各1PASS、affected Clippyとrelease runner生成もPASSとして通常Buildを一度確定した。初回のRunner binary側selectorは実0件で資格とはせず、Clippyのdefault初期化指摘と次回compileの既存fixture optional field欠落をそれぞれ最小修正した。初回AI定義の実1PASSは保持して再演せず、Runner library側の必要な新定義だけを実1件確認した。元2件のFAILED manifest・cleanup領域差・費用は保存する。[実Buildとsource/collection STOP](../.artifacts/research-team/integration324/cedar-ordering-quality-v1/software-v1/collection-v1/completion-and-STOP.json)。
 
 固定26 calls/26M（OffShadow、D64/1M/timeNone、同じ26prefix/6系列）のnormal観測へ80MiBを新配分する。既知cover49,896,018,944Bに加えた49,979,905,024Bはdecimal50GB内で、残20,094,976B。source等の既存保持9,703,424Bを一度含むforecast71,569,408Bに対しmargin12,316,672Bで、旧64MiB案や終了したgrantを貸与しない。入口はworker12/main0/outer18、family4GiB（管理1.5/native2.5）、host reserve4GiB/GPU0/thread1、RUN900秒/parent1200秒/command1140秒とし、実normal入場時のsource・SMT peer・RAM・全OWN保持・空き容量・owner/pause/cancel・origin/deadline確認を必須とする。観測結果・順位品質・新ordering採用はまだ未確認で、終了LMR・18.2・20の成功や数値資格を再演しない。[実入力・新配分](../.artifacts/research-team/integration324/cedar-ordering-quality-v1/normal26-entry-v1/phase-support.json)。
+
+### root順位品質の原26件診断を完了（324.21、2026-10-20）
+
+元26 calls/25,000,193 nodes・6同色時系列sessionsは全件normal manifest/data PASS、parent復元26/26、errors0で完了した。全探索の停止は25 NodeLimit UNKNOWNと1 DepthComplete（D64/193 nodes）。前者の最深実完了iterationは深さ5〜30であり、全件D64完成やoracleではない。3family・両手番・root残壁bins2/6/6/6/6、stock0 shortfall4、既存露出と系列内TT/history依存を保持した。[元保存結果・表・STOP](../.worktree/assets/perf/cedar-ordering-quality-v1/numeric-v1/analysis-v1/completion.json)。
+
+| 比較対象                     | 分母 | Control top1 / top3 / top5 | 同点shadow top1 / top3 / top5 | 選択手がdistinct tie | 順位改善 / 悪化 / 不変 |
+| ---------------------------- | ---: | -------------------------- | ----------------------------- | -------------------: | ---------------------- |
+| 最深実完了snapshotの選択手   |   26 | 18 / 20 / 23               | 18 / 20 / 23                  |                    0 | 0 / 0 / 26             |
+| 最初の実完了snapshotの選択手 |   26 | 8 / 16 / 20                | 8 / 16 / 20                   |                   11 | 0 / 1 / 25             |
+
+同じsnapshotのtier＋完全signed historyが一致する群内だけを既存cheap class→ActionIDで並べ替えた比較である。最深の選択手はpromotion18・ordinary8で、promotion18件の全てが先頭のためtop1=18/26を履歴の独立な予測精度にしない。ordinary8件に限るtop1/3/5は0/2/5。最深の選択手が入るdistinct tieの条件付き精度は分母0で未定義であり、0%ではない。全体105 tie groups/78 reordered groupsは選択手の母数ではない。最初snapshotの選択tie11件は全てhistory0で、1件の6位悪化はtop件数一致だけでは見えない。
+
+最初の順序から後の最深選択手を振り返る別比較は両順top1/3/5=8/17/19、選択手自体の変化12/26。異なるTT/history/generation/depthと実child窓を含む記述として分離し、因果比較にしない。root14の選択wall207はordinary/history−858のsingletonで94/97位に残り、同点内変更ではその観測順位を直せない。ただしhistory更新・cutoff・reductionとの対応がなく、history変更の具体案や原因を特定したとはしない。pending25/null1、途中unvisited1516/unreturned25は完了ラベルから除外、numericTT/no-order0、ROOT視点のchild窓/returnを全手のexact値へ変換しない。
+
+限定独立確認essential0/ordinary0の後、**RETAIN_CONTROL_NO_CONCRETE_IMPLEMENTABLE_NEW_ORDERING_CANDIDATE** を受け入れた。この有限証拠では実装へ進める新候補がなく、現Controlと確定したLMR基準維持結果を使う。改善不能・一般無効果・history原因・速度/棋力や「policyしか残らない」という結論はない。将来具体候補が生じれば、その有限採否を追加LMR広域比較より先に扱うが、新実装/追加Search/対局/LMR/sweep/refill/CIは発行しない。policy学習完了を全作業の入口にしない。[Root受入れと適用範囲](../.artifacts/research-team/integration324/cedar-ordering-quality-v1/final-result-acceptance-v1/accepted-result.json)。
+
+実native＋normalcollection＋savedanalysis STOPと記録されたexact PID/start/bootの終了、directwait/reap/handles/TMP/leasesを確認した。観測込みouter37.347287979秒を一度計上し、Search32.307573610秒やdriver/setup/drop等のnested時間を加算しない。80MiBの終了coverだけを実fullOWN21,381,120Bへ一度置換し、既知cover49,917,400,064B、decimal50GBまで82,599,936B。新point再walk・payload削除・科学枠返金/貸与はなく、以後tail/globalactual/fullfeesと旧FAILED/NULL/UNKNOWNを保持する。
