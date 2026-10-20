@@ -2736,6 +2736,8 @@ Git2f4ea2dの実canonical sourceに対する[19箇所の型/API修正f87c83fa](.
 
 同じSMP作者の固定修正142fb121は、新規の失敗した正例だけでcomparisonをEvaluatorFixedDepthへ明示する1行だった。Rootは現在canonical configのbefore／post対応と実私有reader STOPを確認して疎採用した（Git318be63）。既存のmanaged serial predicate・production設定・全assertionを変えず、継承fixtureのfunctional指定によるevaluation_workers=falseを正例側で解消する。修正後の当該selectorはまだ未実行で、先の失敗をPASSへ書き換えない。[実採用と私有固定版](../.artifacts/research-team/integration324/cedar-lazy-smp-v1/runner-positive-fixture-adoption-v1/actual-adoption.json)。
 
+履歴担当の固定dc3b7f33も実reader STOP後に疎採用した（Git7fff5ee）。private型を引数に取る7メソッドをpub(in crate::alphabeta)へ狭め、signatureの型・引数と全implementation bodyを保持する。変更は可視範囲と宣言の整形だけで、型の公開範囲拡大やlint allowはない。警告8件の実解消と、失敗した正例を含む残5定義・Clippyは次のsoftware途中工程で確認する。既成功SMP6／Python2は再演せず、当該修復を探索性能や履歴原因の証拠にしない。[実source採用](../.artifacts/research-team/integration324/cedar-history-score-v1/visibility-adoption-v1/actual-adoption.json)。
+
 保持見積りは[訂正22222af1](../.worktree/assets/perf/cedar-lazy-smp-v1/effect-preparation-v1/capacity-refinement-v1.json)で、実source9,879,552B＋future161,480,704B＝171,360,256Bとなり、元160MiB案を超えるため176MiB案へ訂正した。これは未発行。実不足への対応として、終了済Buildの保存metadataとfresh stat/EX lockにより、再生成可能なdebug .rlib/.rmetaの222 files/253,665,280 allocated Bだけを一度整理した。実行可能image/.so・release cache・Git/モデル/RAW/FAILED/唯一証拠は保持し、再build費を無料とは扱わない。[実削減・返却](../.artifacts/research-team/integration324/cedar-lazy-smp-v1/software-v1/debug-cache-retirement-v1/return.json)。既知cover49,663,734,784B、decimal50GBまで336,265,216Bで、以後software実保持・tail/globalactual/全費は未確定。旧削減量の再計上や科学枠返金/貸与はない。
 
 ### 履歴点の内訳と更新経緯を調べる（324.23、人間直接指示、2026-10-20）
