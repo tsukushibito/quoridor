@@ -1,0 +1,96 @@
+{
+  "issue": "quoridor-4lc.320",
+  "cwd": "/workspaces/quoridor/.worktree/arena-evaluation",
+  "source_files": [
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/configs/arena/cancel.json",
+      "sha256": "de6e5f584818db29bb7737126e20bf26e6a16ffc9ef76e75853b1cb47edc1ab5",
+      "bytes": 1390
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/configs/arena/distance-control-100ms.json",
+      "sha256": "ca2ccdc4654334272cce40226a6118cf3a213f5d0b68042a6f2aa22b3bc4deb9",
+      "bytes": 1791
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/configs/arena/distance-control-500ms.json",
+      "sha256": "13fbd17f30f1db4d3847be54ab98a7a60b165809e19763a936e3114137ad0700",
+      "bytes": 1791
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/configs/arena/smoke.json",
+      "sha256": "0a43223cc4b37ee99c2ac71d56889f50db94f540d52b14d90f82257219279e19",
+      "bytes": 1496
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/crates/quoridor-runner/README.md",
+      "sha256": "d1e373e4b24447c7a33b599e3b6415d407371ceb9b7a215941411cf5cab0e05b",
+      "bytes": 11585
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/crates/quoridor-runner/src/arena.rs",
+      "sha256": "e7d5632474a250af065d587242c71c6ebdac693cd7bd78a95ae62a14452df4b1",
+      "bytes": 13318
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/crates/quoridor-runner/src/arena_clock.rs",
+      "sha256": "2cb119209277559da601119f2e2658a98ae7920674d0a9c926acfa8d711128e2",
+      "bytes": 4822
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/crates/quoridor-runner/src/arena_manifest.rs",
+      "sha256": "f74c01d040244f1fc3fbe0844e6f0c295e5156f5723efbd898cb882bf5daa827",
+      "bytes": 26345
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/crates/quoridor-runner/src/arena_statistics.rs",
+      "sha256": "7d48611bc32199c751e1d8e53986f3eaac6a8b82c0f90dc59c4f83b4866888f2",
+      "bytes": 7850
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/crates/quoridor-runner/src/config.rs",
+      "sha256": "64e983d6fcbadb846f136940c4ed5ef09ba3e451d8265e9fe4782f18c166c03f",
+      "bytes": 7237
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/crates/quoridor-runner/src/lib.rs",
+      "sha256": "d042d18410b86da98d2f9d24c70b90564f1b16544155c6ef9a4dbd47b263fe43",
+      "bytes": 376
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/crates/quoridor-runner/src/main.rs",
+      "sha256": "4d0ec3b1ab7941023ff91f270191105ca69d0150d86b62f5c12dbb78ff66423b",
+      "bytes": 8803
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/crates/quoridor-runner/src/runtime.rs",
+      "sha256": "437454596ebb7ef5a3fc9aa44d130091e2e05d5a8a05b83a2a2d32af6a7b1747",
+      "bytes": 106369
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/crates/quoridor-runner/tests/arena.rs",
+      "sha256": "d7cec5c53e7e18eead7a23633e767e4617b99dbc101b4f0c81dc7bbda2b9ac01",
+      "bytes": 11267
+    }
+  ],
+  "source_manifest_sha256": "a230db1c9709acf0265c6493f058f1551d6bf5ad0a7afebdafb3fd6b786cf277",
+  "changed_since_tested_source": [
+    "/workspaces/quoridor/.worktree/arena-evaluation/crates/quoridor-runner/src/arena.rs",
+    "/workspaces/quoridor/.worktree/arena-evaluation/crates/quoridor-runner/src/runtime.rs"
+  ],
+  "repair": "Clippy collapsible_if and field_reassign_with_default; no evaluator/search/TT/rules/model/clock policy change",
+  "source_writer_stopped": true,
+  "tested_original_source_manifest_sha256": "e08c7726d234eed336154a429a5b09861e4177b2f1b1eb55cf2769aa59e3d3fb",
+  "current_source_rustfmt_check": "PASS",
+  "current_source_runtime_clippy": "NOT_RUN after static repair; no new job",
+  "past_successes": "Original source: manifest2+arena9+config3 fixtures and release build PASS",
+  "used_source_saved": ".artifacts/software-validation/recovery-r2/product-used/source-sha.json",
+  "compile_support_seconds_used": 249.2412322940072,
+  "compile_support_seconds_remaining": 350.7587677059928,
+  "native_seconds_used": 0,
+  "native_jobs_slots_used": [
+    0,
+    0
+  ],
+  "last_index_metadata_observation": "WT index last modified 08:57:58.092133300Z; current diff-check ended without changing that mtime; no stage/commit/ref commands"
+}

@@ -1,0 +1,5665 @@
+{
+  "schema": "quoridor.research.arena-plan.v1",
+  "phase": "arena",
+  "comparison": "whole_wall_time",
+  "rules": "research-standard-2p-threefold-goal-first-v1",
+  "distance_units": "wall-distance/80",
+  "value_perspective": "side-to-move",
+  "book": {
+    "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/campaign-generation-v1/data/book.json",
+    "sha256": "a6abde1f3182ba0e876c9e7719d3389502a44b3406ca28b7af9a0456952a6878",
+    "bytes": 85083,
+    "mode": "0644"
+  },
+  "inputs": [
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/campaign-generation-v1/data/book.json",
+      "sha256": "a6abde1f3182ba0e876c9e7719d3389502a44b3406ca28b7af9a0456952a6878",
+      "bytes": 85083,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/models/ai-sigma/reference/sigma-pcr250/best.onnx",
+      "sha256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+      "bytes": 11663428,
+      "mode": "0644"
+    }
+  ],
+  "models": [
+    {
+      "descriptor": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/public-no-bypass-v1/candidate-v1/output/best-model/manifest.json",
+        "sha256": "46ec2c4708f96dcf9fad579c2fb0d1299c6663df27412f0faac98267467715e1",
+        "bytes": 677,
+        "mode": "0600"
+      },
+      "weights": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/public-no-bypass-v1/candidate-v1/output/best-model/weights.f32",
+        "sha256": "046fe926e56b955b0fb7de8f147a74ec33eace9cbc00a55c307f9b6541ab9841",
+        "bytes": 49284,
+        "mode": "0644"
+      },
+      "evaluator_sha256": "96a5f41f875022d1752b9c999595ad58bfb2d42687a8f06de08d42b1c4215875"
+    }
+  ],
+  "schedule": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/schedule-v1.json",
+    "sha256": "0eeaf819ae4cb5c4e81107d82e744139e72cadb662180d884157fc2e003a3bea",
+    "bytes": 66596,
+    "mode": "0644"
+  },
+  "family_ids": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127
+  ],
+  "matchups": [
+    {
+      "id": 0,
+      "engines": [
+        {
+          "kind": "mcts",
+          "model": null,
+          "distance_a": 0.0,
+          "distance_b": 8.0,
+          "depth": 64,
+          "max_nodes": 1000000,
+          "time_ms": 100,
+          "simd": false
+        },
+        {
+          "kind": "distance",
+          "model": null,
+          "distance_a": 0.0,
+          "distance_b": 8.0,
+          "depth": 64,
+          "max_nodes": 1000000,
+          "time_ms": 100,
+          "simd": false
+        }
+      ],
+      "evaluator_sha256": [
+        "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+        "c83db10ba1403b7fc3417e73e14cc5f1a1040c65ac4ac23a5f5703abbb5aa887"
+      ],
+      "inference": {
+        "backend": "ort",
+        "model": "/workspaces/quoridor/.worktree/assets/models/ai-sigma/reference/sigma-pcr250/best.onnx",
+        "model_sha": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+        "library": "/home/vscode/.cache/inference/envs/quoridor-training/lib/python3.14/site-packages/onnxruntime/capi/libonnxruntime.so.1.30.0",
+        "device": 0,
+        "cuda_graph": false
+      }
+    },
+    {
+      "id": 1,
+      "engines": [
+        {
+          "kind": "mcts",
+          "model": null,
+          "distance_a": 0.0,
+          "distance_b": 8.0,
+          "depth": 64,
+          "max_nodes": 1000000,
+          "time_ms": 100,
+          "simd": false
+        },
+        {
+          "kind": "nnue",
+          "model": "/workspaces/quoridor/.worktree/assets/checkpoints/public-no-bypass-v1/candidate-v1/output/best-model/manifest.json",
+          "distance_a": 0.0,
+          "distance_b": 8.0,
+          "depth": 64,
+          "max_nodes": 1000000,
+          "time_ms": 100,
+          "simd": false
+        }
+      ],
+      "evaluator_sha256": [
+        "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+        "96a5f41f875022d1752b9c999595ad58bfb2d42687a8f06de08d42b1c4215875"
+      ],
+      "inference": {
+        "backend": "ort",
+        "model": "/workspaces/quoridor/.worktree/assets/models/ai-sigma/reference/sigma-pcr250/best.onnx",
+        "model_sha": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+        "library": "/home/vscode/.cache/inference/envs/quoridor-training/lib/python3.14/site-packages/onnxruntime/capi/libonnxruntime.so.1.30.0",
+        "device": 0,
+        "cuda_graph": false
+      }
+    },
+    {
+      "id": 2,
+      "engines": [
+        {
+          "kind": "distance",
+          "model": null,
+          "distance_a": 0.0,
+          "distance_b": 8.0,
+          "depth": 64,
+          "max_nodes": 1000000,
+          "time_ms": 100,
+          "simd": false
+        },
+        {
+          "kind": "nnue",
+          "model": "/workspaces/quoridor/.worktree/assets/checkpoints/public-no-bypass-v1/candidate-v1/output/best-model/manifest.json",
+          "distance_a": 0.0,
+          "distance_b": 8.0,
+          "depth": 64,
+          "max_nodes": 1000000,
+          "time_ms": 100,
+          "simd": false
+        }
+      ],
+      "evaluator_sha256": [
+        "c83db10ba1403b7fc3417e73e14cc5f1a1040c65ac4ac23a5f5703abbb5aa887",
+        "96a5f41f875022d1752b9c999595ad58bfb2d42687a8f06de08d42b1c4215875"
+      ]
+    }
+  ],
+  "batches": [
+    {
+      "batch": 0,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-cap-repair-v1/primary-configs/batch-000.json",
+        "sha256": "994bd4c12c95422dbd48efc97aa89a2f526f7fb27393a13048f50fb52fa5cb34",
+        "bytes": 2856,
+        "mode": "0644"
+      },
+      "slots": [
+        0,
+        1
+      ]
+    },
+    {
+      "batch": 1,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-001.json",
+        "sha256": "1b273f12821d0973fba5744a871aa913d50292170ad0612bb3ac4aad2fe97fb9",
+        "bytes": 2993,
+        "mode": "0644"
+      },
+      "slots": [
+        2,
+        3
+      ]
+    },
+    {
+      "batch": 2,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-002.json",
+        "sha256": "534475758092f7e0eb136bd40201cff2c79d75ee978fdea3c9bd52cd87389bb0",
+        "bytes": 2642,
+        "mode": "0644"
+      },
+      "slots": [
+        4,
+        5
+      ]
+    },
+    {
+      "batch": 3,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-003.json",
+        "sha256": "f3ae5e4a312a0fe3d726cd3378cbf0a100f9d8e6c28a33c7b94dba708174ab49",
+        "bytes": 2989,
+        "mode": "0644"
+      },
+      "slots": [
+        6,
+        7
+      ]
+    },
+    {
+      "batch": 4,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-004.json",
+        "sha256": "6e4707140e375d59eb932ec9d959cf3740fa31deb6b535623b52300968d58e7e",
+        "bytes": 2638,
+        "mode": "0644"
+      },
+      "slots": [
+        8,
+        9
+      ]
+    },
+    {
+      "batch": 5,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-005.json",
+        "sha256": "610f247e6e0eeec382b94c89579e7201f3a7ab89c1321cfbf02ec371e4c18fa8",
+        "bytes": 2881,
+        "mode": "0644"
+      },
+      "slots": [
+        10,
+        11
+      ]
+    },
+    {
+      "batch": 6,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-006.json",
+        "sha256": "a4f174266b479854fdf63bdc02f52027d0b489cce58e14c490cfc8dfbb3da106",
+        "bytes": 2636,
+        "mode": "0644"
+      },
+      "slots": [
+        12,
+        13
+      ]
+    },
+    {
+      "batch": 7,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-007.json",
+        "sha256": "3ca6ccb45bfb7425b03efe0007947dccb47011bd92c2daeef0a99dffe2e9001e",
+        "bytes": 2879,
+        "mode": "0644"
+      },
+      "slots": [
+        14,
+        15
+      ]
+    },
+    {
+      "batch": 8,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-008.json",
+        "sha256": "0187cef1efcfc1a14b8393fd2b917192bd5d2801145ad39a6d629997962be74e",
+        "bytes": 2987,
+        "mode": "0644"
+      },
+      "slots": [
+        16,
+        17
+      ]
+    },
+    {
+      "batch": 9,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-009.json",
+        "sha256": "a978c7732d066f36ddf82c4b22f45633e26a0005e896fe6c095f1bdb6e445c33",
+        "bytes": 2909,
+        "mode": "0644"
+      },
+      "slots": [
+        18,
+        19
+      ]
+    },
+    {
+      "batch": 10,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-010.json",
+        "sha256": "61b00e3f3eeedb7260d4a8164b99e68ac70003b7b5f05c08a32ea9168a008d26",
+        "bytes": 3017,
+        "mode": "0644"
+      },
+      "slots": [
+        20,
+        21
+      ]
+    },
+    {
+      "batch": 11,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-011.json",
+        "sha256": "3c997ac8e345d3711a00c1e636fc9400334bc75039eb50d5dea54e9f0d040bf6",
+        "bytes": 2666,
+        "mode": "0644"
+      },
+      "slots": [
+        22,
+        23
+      ]
+    },
+    {
+      "batch": 12,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-012.json",
+        "sha256": "acb81efac6b5d4a6593cb4aa15cb3573fa592f37441e76c7e7a4b9c5e56fbdc8",
+        "bytes": 2977,
+        "mode": "0644"
+      },
+      "slots": [
+        24,
+        25
+      ]
+    },
+    {
+      "batch": 13,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-013.json",
+        "sha256": "7a5745737bef5b1cd759c23a1ed069962d22037ac4aec6e5313d47d4416de8fa",
+        "bytes": 2626,
+        "mode": "0644"
+      },
+      "slots": [
+        26,
+        27
+      ]
+    },
+    {
+      "batch": 14,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-014.json",
+        "sha256": "1e71e4b84dd96404f6c6d8ee62d84a709a8a8505741a57f631c29e4e91a078c3",
+        "bytes": 2869,
+        "mode": "0644"
+      },
+      "slots": [
+        28,
+        29
+      ]
+    },
+    {
+      "batch": 15,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-015.json",
+        "sha256": "f0a1dca8f4a3d7e80e707035c68d0194cce8cabceee86bbfd229c089b82c6c25",
+        "bytes": 2650,
+        "mode": "0644"
+      },
+      "slots": [
+        30,
+        31
+      ]
+    },
+    {
+      "batch": 16,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-016.json",
+        "sha256": "27f27690d986353ceeb0ccb973ab5ea378dd733425574d01b36072de3a960ba6",
+        "bytes": 2893,
+        "mode": "0644"
+      },
+      "slots": [
+        32,
+        33
+      ]
+    },
+    {
+      "batch": 17,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-017.json",
+        "sha256": "132c6e03372fee2b17bc8c39836ac2958be74d7eee26edc22cc53b0821b21731",
+        "bytes": 3001,
+        "mode": "0644"
+      },
+      "slots": [
+        34,
+        35
+      ]
+    },
+    {
+      "batch": 18,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-018.json",
+        "sha256": "f3089398abce9892d92ab0525c00edd99d959a92d62f52cb91e4a12b705610c4",
+        "bytes": 2879,
+        "mode": "0644"
+      },
+      "slots": [
+        36,
+        37
+      ]
+    },
+    {
+      "batch": 19,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-019.json",
+        "sha256": "fd493abf34c324afbaf5ce851ecc6dc02ab501675d81f0cc775bda4d1a7578c2",
+        "bytes": 2987,
+        "mode": "0644"
+      },
+      "slots": [
+        38,
+        39
+      ]
+    },
+    {
+      "batch": 20,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-020.json",
+        "sha256": "11ddf592d8480ec78d2972e20386414b274ba590be2710bbd24a756d9b258cd1",
+        "bytes": 2636,
+        "mode": "0644"
+      },
+      "slots": [
+        40,
+        41
+      ]
+    },
+    {
+      "batch": 21,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-021.json",
+        "sha256": "cf3ee93f91a894e57bf3c224dd1cdea48a49f730ed43806d3f372a51ab85b763",
+        "bytes": 3017,
+        "mode": "0644"
+      },
+      "slots": [
+        42,
+        43
+      ]
+    },
+    {
+      "batch": 22,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-022.json",
+        "sha256": "63580bace3b10f7bd382b3f84e663ae7fb8b5aac489847a0574edcfa90977262",
+        "bytes": 2666,
+        "mode": "0644"
+      },
+      "slots": [
+        44,
+        45
+      ]
+    },
+    {
+      "batch": 23,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-023.json",
+        "sha256": "2acbb8d28a72673e9239da8055ae011b7c015308adb181715f2cbe7989804423",
+        "bytes": 2909,
+        "mode": "0644"
+      },
+      "slots": [
+        46,
+        47
+      ]
+    },
+    {
+      "batch": 24,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-024.json",
+        "sha256": "c30da03cb832ed3b5fb804770fb9f7df6e3afbb41fbe47c4931522d68a4dba46",
+        "bytes": 2604,
+        "mode": "0644"
+      },
+      "slots": [
+        48,
+        49
+      ]
+    },
+    {
+      "batch": 25,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-025.json",
+        "sha256": "7d35dfb7caa04aa98fa6e1c6a1309122a663a5f37b2341dae3a681eaffb57ef1",
+        "bytes": 2847,
+        "mode": "0644"
+      },
+      "slots": [
+        50,
+        51
+      ]
+    },
+    {
+      "batch": 26,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-026.json",
+        "sha256": "4daecdb33f29eddba6817a11934b6c7218b19a7bca9735c17eb5d96b79c30289",
+        "bytes": 2955,
+        "mode": "0644"
+      },
+      "slots": [
+        52,
+        53
+      ]
+    },
+    {
+      "batch": 27,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-027.json",
+        "sha256": "56dfdb2a0b181633118cba9bd91335f1979375d91ef44a47d77953d81cfc6698",
+        "bytes": 2894,
+        "mode": "0644"
+      },
+      "slots": [
+        54,
+        55
+      ]
+    },
+    {
+      "batch": 28,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-028.json",
+        "sha256": "319641d4939eeb98d85a6a6d3b57e8a8fe8b64aa334c32c8d08172d74c582638",
+        "bytes": 3002,
+        "mode": "0644"
+      },
+      "slots": [
+        56,
+        57
+      ]
+    },
+    {
+      "batch": 29,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-029.json",
+        "sha256": "3e99ddae64605bdc9992e1341b0a1eac780f52fd5b9cf0c66223d1409a70e0b6",
+        "bytes": 2651,
+        "mode": "0644"
+      },
+      "slots": [
+        58,
+        59
+      ]
+    },
+    {
+      "batch": 30,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-030.json",
+        "sha256": "3ea1e819142d8729729a358c868d5ff5dd5970e50c2b8a8fc7c9374e77a0dc7d",
+        "bytes": 2981,
+        "mode": "0644"
+      },
+      "slots": [
+        60,
+        61
+      ]
+    },
+    {
+      "batch": 31,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-031.json",
+        "sha256": "0ffda2c6cf7018219f7a8fa52eee0358447fe62b8fba8c7e688bbf90aa94b25d",
+        "bytes": 2630,
+        "mode": "0644"
+      },
+      "slots": [
+        62,
+        63
+      ]
+    },
+    {
+      "batch": 32,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-032.json",
+        "sha256": "89dcd99922544598d4ddefcda3c9685318174e9c74afb2a8149e2d0ea1a9d8ce",
+        "bytes": 2873,
+        "mode": "0644"
+      },
+      "slots": [
+        64,
+        65
+      ]
+    },
+    {
+      "batch": 33,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-033.json",
+        "sha256": "5ea054b664a0842692adc7c51c53291162e9151b0ab4d82204a48a32e9ab8cda",
+        "bytes": 2632,
+        "mode": "0644"
+      },
+      "slots": [
+        66,
+        67
+      ]
+    },
+    {
+      "batch": 34,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-034.json",
+        "sha256": "8ab67b1b82f19bcd175a174d869bd2e0ec067d95476b35cc55326214e820ab67",
+        "bytes": 2875,
+        "mode": "0644"
+      },
+      "slots": [
+        68,
+        69
+      ]
+    },
+    {
+      "batch": 35,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-035.json",
+        "sha256": "a82d48bd161f0246e158d2cf52401b9d021db265ccb6cf921e211deeb41b7eeb",
+        "bytes": 2983,
+        "mode": "0644"
+      },
+      "slots": [
+        70,
+        71
+      ]
+    },
+    {
+      "batch": 36,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-036.json",
+        "sha256": "b88333012cb67731d889316bd48a98fee268aa365d63764e6061e875dc2d5c18",
+        "bytes": 2873,
+        "mode": "0644"
+      },
+      "slots": [
+        72,
+        73
+      ]
+    },
+    {
+      "batch": 37,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-037.json",
+        "sha256": "e3e54447ed4fdaa53cbd71682e0ea327a733bf13ced7290e23d9b46a1a07fa4f",
+        "bytes": 2981,
+        "mode": "0644"
+      },
+      "slots": [
+        74,
+        75
+      ]
+    },
+    {
+      "batch": 38,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-038.json",
+        "sha256": "9f983bfc05fb7587f0dc679f3c6a33ec0bd8e7cb7ba714f59d691d2d3b4fb43b",
+        "bytes": 2630,
+        "mode": "0644"
+      },
+      "slots": [
+        76,
+        77
+      ]
+    },
+    {
+      "batch": 39,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-039.json",
+        "sha256": "e2f5da8a5c2167326825df716c77fe88a83f11bde9ce575c67a8ecd4502c7a66",
+        "bytes": 2981,
+        "mode": "0644"
+      },
+      "slots": [
+        78,
+        79
+      ]
+    },
+    {
+      "batch": 40,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-040.json",
+        "sha256": "943cd7429b698b28ae91406a622604c0f9c0fcacaa930ba50b06019606ccfaef",
+        "bytes": 2630,
+        "mode": "0644"
+      },
+      "slots": [
+        80,
+        81
+      ]
+    },
+    {
+      "batch": 41,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-041.json",
+        "sha256": "3c16ac80963fba9a863c2ece696bc28104c5afcca038b7e09dd5ef34d3c30349",
+        "bytes": 2873,
+        "mode": "0644"
+      },
+      "slots": [
+        82,
+        83
+      ]
+    },
+    {
+      "batch": 42,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-042.json",
+        "sha256": "173a456b9d71689b56c8c42049ffb8f7a2a2038f601625bafe85db3cf8e55480",
+        "bytes": 2628,
+        "mode": "0644"
+      },
+      "slots": [
+        84,
+        85
+      ]
+    },
+    {
+      "batch": 43,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-043.json",
+        "sha256": "20e0fe04080f4dc15f2804cc94a9983a4c243c15c3725bceb161c97f3874f825",
+        "bytes": 2871,
+        "mode": "0644"
+      },
+      "slots": [
+        86,
+        87
+      ]
+    },
+    {
+      "batch": 44,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-044.json",
+        "sha256": "c6c3fead687f0f94b508f11e865388d481b297fee92b849e4d63519471a70c07",
+        "bytes": 2979,
+        "mode": "0644"
+      },
+      "slots": [
+        88,
+        89
+      ]
+    },
+    {
+      "batch": 45,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-045.json",
+        "sha256": "b29ee48194d54028fa582eb5a808c9316f6640099db7096502aeee353a6afafe",
+        "bytes": 2889,
+        "mode": "0644"
+      },
+      "slots": [
+        90,
+        91
+      ]
+    },
+    {
+      "batch": 46,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-046.json",
+        "sha256": "fe0faed2eb969303a075fa6cd87fc481c834a747e251301fd2fa2e4be951464e",
+        "bytes": 2997,
+        "mode": "0644"
+      },
+      "slots": [
+        92,
+        93
+      ]
+    },
+    {
+      "batch": 47,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-047.json",
+        "sha256": "1ea03a497ac57b15793f5fcd10fec44b536ffa37f04b454d8affbb4f7a4d0274",
+        "bytes": 2646,
+        "mode": "0644"
+      },
+      "slots": [
+        94,
+        95
+      ]
+    },
+    {
+      "batch": 48,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-048.json",
+        "sha256": "2119552adbaa45d152aa69d7d1cfbdb2b7010a7308b548c93354d7b650edcd69",
+        "bytes": 2997,
+        "mode": "0644"
+      },
+      "slots": [
+        96,
+        97
+      ]
+    },
+    {
+      "batch": 49,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-049.json",
+        "sha256": "9852039c1cd1bd61f2999bd363270ee138e0af761c7b32791bcf9cb5cecd68ab",
+        "bytes": 2646,
+        "mode": "0644"
+      },
+      "slots": [
+        98,
+        99
+      ]
+    },
+    {
+      "batch": 50,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-050.json",
+        "sha256": "da9566e39b4c5420170c0d061aabb7a4c7b252dcdafed4e78587dde0285b9f15",
+        "bytes": 2889,
+        "mode": "0644"
+      },
+      "slots": [
+        100,
+        101
+      ]
+    },
+    {
+      "batch": 51,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-051.json",
+        "sha256": "cf105f31f4227672ead737b693522d9350adf38a548c1bba9b65877cf3da137f",
+        "bytes": 2630,
+        "mode": "0644"
+      },
+      "slots": [
+        102,
+        103
+      ]
+    },
+    {
+      "batch": 52,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-052.json",
+        "sha256": "a59cfbe5c47765c302ba8f658f1975df877769297048502b79f30785c7439a19",
+        "bytes": 2873,
+        "mode": "0644"
+      },
+      "slots": [
+        104,
+        105
+      ]
+    },
+    {
+      "batch": 53,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-053.json",
+        "sha256": "0955174957e0e417a938884a01055f3b87b0450be70784fa8e24a9fc251306c1",
+        "bytes": 2981,
+        "mode": "0644"
+      },
+      "slots": [
+        106,
+        107
+      ]
+    },
+    {
+      "batch": 54,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-054.json",
+        "sha256": "adbd41f578211d22463d6623c9da791ae121c1937a07a89d293b8eab6359a662",
+        "bytes": 2891,
+        "mode": "0644"
+      },
+      "slots": [
+        108,
+        109
+      ]
+    },
+    {
+      "batch": 55,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-055.json",
+        "sha256": "1019865d086604d1eea5b60c71dc17dbe1cf03e08a73400060219e4040db2efd",
+        "bytes": 2999,
+        "mode": "0644"
+      },
+      "slots": [
+        110,
+        111
+      ]
+    },
+    {
+      "batch": 56,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-056.json",
+        "sha256": "10a5c990f96a79354b39e76aeacf16d03fe84759ede642d0262918ed1ed9a33c",
+        "bytes": 2648,
+        "mode": "0644"
+      },
+      "slots": [
+        112,
+        113
+      ]
+    },
+    {
+      "batch": 57,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-057.json",
+        "sha256": "e35b8f6cfbe057c9363d3874fd8c3223c1d96671d716eb3098c8b7769c306038",
+        "bytes": 2983,
+        "mode": "0644"
+      },
+      "slots": [
+        114,
+        115
+      ]
+    },
+    {
+      "batch": 58,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-058.json",
+        "sha256": "4f0edf156838cabc6478bb64030d15fc0d38ef37f93a6607161a76303053e85c",
+        "bytes": 2632,
+        "mode": "0644"
+      },
+      "slots": [
+        116,
+        117
+      ]
+    },
+    {
+      "batch": 59,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-059.json",
+        "sha256": "c3424a50373650cf9696b6784d3bd9d58f81fbed99ed370aea91fa30adfc6b4c",
+        "bytes": 2875,
+        "mode": "0644"
+      },
+      "slots": [
+        118,
+        119
+      ]
+    },
+    {
+      "batch": 60,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-060.json",
+        "sha256": "8f634e3641df68a8ce46e40b8a83a2eb18a3c230375e562c9d4540f115047ab3",
+        "bytes": 2666,
+        "mode": "0644"
+      },
+      "slots": [
+        120,
+        121
+      ]
+    },
+    {
+      "batch": 61,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-061.json",
+        "sha256": "e9a4080e6c205d97970e207ea5c66d21be041ec9a918906e096eba313de5b490",
+        "bytes": 2909,
+        "mode": "0644"
+      },
+      "slots": [
+        122,
+        123
+      ]
+    },
+    {
+      "batch": 62,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-062.json",
+        "sha256": "d8ce53ba1e7468f76332713f0b3c952b0fbb3dd7f5ff80029d670b40d0ba7594",
+        "bytes": 3017,
+        "mode": "0644"
+      },
+      "slots": [
+        124,
+        125
+      ]
+    },
+    {
+      "batch": 63,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-063.json",
+        "sha256": "bbf1126a1a075ee45ef339e147e0b71b6885a3d2bb416ee8a2bd87670f166082",
+        "bytes": 2905,
+        "mode": "0644"
+      },
+      "slots": [
+        126,
+        127
+      ]
+    },
+    {
+      "batch": 64,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-064.json",
+        "sha256": "4bfd35841d1d5781b5c3a1cb4be688367acfa06aaa438d3cb8ae48a254dd40a7",
+        "bytes": 3013,
+        "mode": "0644"
+      },
+      "slots": [
+        128,
+        129
+      ]
+    },
+    {
+      "batch": 65,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-065.json",
+        "sha256": "43117b36f71461ca7a980cc99c0998e10947f912a1ac515e6c273bc9ed01d294",
+        "bytes": 2662,
+        "mode": "0644"
+      },
+      "slots": [
+        130,
+        131
+      ]
+    },
+    {
+      "batch": 66,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-066.json",
+        "sha256": "59b59dce38277f122f3c407a974a2f39be823a6ad6ccccb5fcbd818b58ead3c6",
+        "bytes": 2981,
+        "mode": "0644"
+      },
+      "slots": [
+        132,
+        133
+      ]
+    },
+    {
+      "batch": 67,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-067.json",
+        "sha256": "18f5065cbc7bae428493c06bf37a22cc1d1cea8fc5ee39536ff3b4c340b3abf5",
+        "bytes": 2630,
+        "mode": "0644"
+      },
+      "slots": [
+        134,
+        135
+      ]
+    },
+    {
+      "batch": 68,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-068.json",
+        "sha256": "820c1d8d0974809a4de855905730edc1450ae7fce455f3563cb26b8c31b0eae6",
+        "bytes": 2873,
+        "mode": "0644"
+      },
+      "slots": [
+        136,
+        137
+      ]
+    },
+    {
+      "batch": 69,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-069.json",
+        "sha256": "bf56bae9e904b953c2c6e9d517e44a6b2400863807ff1c84a2899727c57a8645",
+        "bytes": 2658,
+        "mode": "0644"
+      },
+      "slots": [
+        138,
+        139
+      ]
+    },
+    {
+      "batch": 70,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-070.json",
+        "sha256": "6088fd3500822047dfe52cb718371dfcbd80c09784cfd8833f0c6ee0aea9de4d",
+        "bytes": 2901,
+        "mode": "0644"
+      },
+      "slots": [
+        140,
+        141
+      ]
+    },
+    {
+      "batch": 71,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-071.json",
+        "sha256": "1c7d26f9b8010d431945ca927b02d03b3a05aab0c55ffe5410701b7e83ac92ee",
+        "bytes": 3009,
+        "mode": "0644"
+      },
+      "slots": [
+        142,
+        143
+      ]
+    },
+    {
+      "batch": 72,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-072.json",
+        "sha256": "0095d6886dc31c9daca682bd4902fcb02331dbc49d28716c94224e740288e9e5",
+        "bytes": 2903,
+        "mode": "0644"
+      },
+      "slots": [
+        144,
+        145
+      ]
+    },
+    {
+      "batch": 73,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-073.json",
+        "sha256": "c1ba4ccb402e607445dd810bae0753d885da21ad6cee462048f7f13ea39312c0",
+        "bytes": 3011,
+        "mode": "0644"
+      },
+      "slots": [
+        146,
+        147
+      ]
+    },
+    {
+      "batch": 74,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-074.json",
+        "sha256": "4bc017f5b32c449777c9cfcc4aae2a8d6ef5b683b6f300ed398d666e593836e9",
+        "bytes": 2660,
+        "mode": "0644"
+      },
+      "slots": [
+        148,
+        149
+      ]
+    },
+    {
+      "batch": 75,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-075.json",
+        "sha256": "40a8b66a4170346e08d19b763edabbe8793c2ca2a0412e5dd62e1c59ebf27baf",
+        "bytes": 3003,
+        "mode": "0644"
+      },
+      "slots": [
+        150,
+        151
+      ]
+    },
+    {
+      "batch": 76,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-076.json",
+        "sha256": "14f72fe422a04f4236c3e28a4cc35e3f963aac51416b91c597d68efc8dad833c",
+        "bytes": 2652,
+        "mode": "0644"
+      },
+      "slots": [
+        152,
+        153
+      ]
+    },
+    {
+      "batch": 77,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-077.json",
+        "sha256": "6655cc5a9339e03bf39eb1e72379b357195d24853d111a149e3dda635cc4f2d1",
+        "bytes": 2895,
+        "mode": "0644"
+      },
+      "slots": [
+        154,
+        155
+      ]
+    },
+    {
+      "batch": 78,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-078.json",
+        "sha256": "35eb50969e210b973014dc0b4be84c8e09cd4d812b43fb0377232f43c9526976",
+        "bytes": 2658,
+        "mode": "0644"
+      },
+      "slots": [
+        156,
+        157
+      ]
+    },
+    {
+      "batch": 79,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-079.json",
+        "sha256": "e0ae1ed4eb078caac980b4581f78a8d40d133559b43419ee850dcaaba9e39c01",
+        "bytes": 2901,
+        "mode": "0644"
+      },
+      "slots": [
+        158,
+        159
+      ]
+    },
+    {
+      "batch": 80,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-080.json",
+        "sha256": "9acc731c91c832e0ed2d45331f070c0a30dc24c98a4a6622e45413f12fbe9910",
+        "bytes": 3009,
+        "mode": "0644"
+      },
+      "slots": [
+        160,
+        161
+      ]
+    },
+    {
+      "batch": 81,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-081.json",
+        "sha256": "56978837be5b677a4736b10104502f7e7907a03c385598cee9c7d987a85226cc",
+        "bytes": 2898,
+        "mode": "0644"
+      },
+      "slots": [
+        162,
+        163
+      ]
+    },
+    {
+      "batch": 82,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-082.json",
+        "sha256": "3d7f209cba8d35209f64eed3102e16c451a54d193c6a3d77fda43c3d457a7b36",
+        "bytes": 3006,
+        "mode": "0644"
+      },
+      "slots": [
+        164,
+        165
+      ]
+    },
+    {
+      "batch": 83,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-083.json",
+        "sha256": "a228ac31baaee46aaab621f3454c08e844a4cccc893eea5be46cee52d95d7f59",
+        "bytes": 2655,
+        "mode": "0644"
+      },
+      "slots": [
+        166,
+        167
+      ]
+    },
+    {
+      "batch": 84,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-084.json",
+        "sha256": "a639f0c8bcb4e7a9ce4d986a5854797bc97373667e92c1e161965599e1a5697a",
+        "bytes": 2989,
+        "mode": "0644"
+      },
+      "slots": [
+        168,
+        169
+      ]
+    },
+    {
+      "batch": 85,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-085.json",
+        "sha256": "bf0e2417a895ccb8c9d2881b8317846cace9047d32521799bd3cfc9b6fb9fcf3",
+        "bytes": 2638,
+        "mode": "0644"
+      },
+      "slots": [
+        170,
+        171
+      ]
+    },
+    {
+      "batch": 86,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-086.json",
+        "sha256": "5b86b92bc6ba758cfbb6a284f58ce97ab195b5fdce8af32e941187389711a263",
+        "bytes": 2881,
+        "mode": "0644"
+      },
+      "slots": [
+        172,
+        173
+      ]
+    },
+    {
+      "batch": 87,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-087.json",
+        "sha256": "f39a9490bbfd13ed4139821099d50f932cf19e0d504c71e119232dd85196c086",
+        "bytes": 2636,
+        "mode": "0644"
+      },
+      "slots": [
+        174,
+        175
+      ]
+    },
+    {
+      "batch": 88,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-088.json",
+        "sha256": "bf8cd5dee29e24fe4497213e061782e68eb976cc1b4225de59fe5cee66f71f1a",
+        "bytes": 2879,
+        "mode": "0644"
+      },
+      "slots": [
+        176,
+        177
+      ]
+    },
+    {
+      "batch": 89,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-089.json",
+        "sha256": "eeaad240f6ae8a6e3d687f6f3500354f7c8df328cf22f111b9286253a447464e",
+        "bytes": 2987,
+        "mode": "0644"
+      },
+      "slots": [
+        178,
+        179
+      ]
+    },
+    {
+      "batch": 90,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-090.json",
+        "sha256": "2a4d12bfb7389090813b1113fb564272dd3be76a07996cb839da70ad251f4ef7",
+        "bytes": 2893,
+        "mode": "0644"
+      },
+      "slots": [
+        180,
+        181
+      ]
+    },
+    {
+      "batch": 91,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-091.json",
+        "sha256": "a6b29086bc937e7dc14cb38c91680bac2daa2e084588a10ff4f8679a7b445003",
+        "bytes": 3001,
+        "mode": "0644"
+      },
+      "slots": [
+        182,
+        183
+      ]
+    },
+    {
+      "batch": 92,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-092.json",
+        "sha256": "b6e6482225a883fe58f2eed06b697e79db3300576a14bc4c12cf015695317f1b",
+        "bytes": 2650,
+        "mode": "0644"
+      },
+      "slots": [
+        184,
+        185
+      ]
+    },
+    {
+      "batch": 93,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-093.json",
+        "sha256": "925eeeb7f7e9b12728d18be60384ba23e30615a0b7d47c4ca21b57691193e66c",
+        "bytes": 2989,
+        "mode": "0644"
+      },
+      "slots": [
+        186,
+        187
+      ]
+    },
+    {
+      "batch": 94,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-094.json",
+        "sha256": "4ba1f81f4bc4c8da3acb84974179b4873fc0fa5a76292029be72b4ef776ca570",
+        "bytes": 2638,
+        "mode": "0644"
+      },
+      "slots": [
+        188,
+        189
+      ]
+    },
+    {
+      "batch": 95,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-095.json",
+        "sha256": "d1b8b26e8e979fc2b867927d390c868c01af8ba64903efe0840f905ba57d5d40",
+        "bytes": 2881,
+        "mode": "0644"
+      },
+      "slots": [
+        190,
+        191
+      ]
+    },
+    {
+      "batch": 96,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-096.json",
+        "sha256": "d3c87c92967dfa2f9b42bad47e8dd39eedc27625bf208ce6adb57b8b63cc8892",
+        "bytes": 2786,
+        "mode": "0644"
+      },
+      "slots": [
+        192,
+        193
+      ]
+    },
+    {
+      "batch": 97,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-097.json",
+        "sha256": "7118202fee6d7a5208425e1bf4546d49c9a20a3bbaf3718186649b9a117052cd",
+        "bytes": 3029,
+        "mode": "0644"
+      },
+      "slots": [
+        194,
+        195
+      ]
+    },
+    {
+      "batch": 98,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-098.json",
+        "sha256": "55533d258c605f746043a6ecee61ede135aea1d487fc55707f764a24ba7de75a",
+        "bytes": 3137,
+        "mode": "0644"
+      },
+      "slots": [
+        196,
+        197
+      ]
+    },
+    {
+      "batch": 99,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-099.json",
+        "sha256": "f27879568696dd6da3de0a18f80ee81f919a6538a26ab9b277e2b62343024a36",
+        "bytes": 3039,
+        "mode": "0644"
+      },
+      "slots": [
+        198,
+        199
+      ]
+    },
+    {
+      "batch": 100,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-100.json",
+        "sha256": "4b39c05ef966cc0d784a635400f7ed2e84ca5d582b89d2c0e77165ed66a3df21",
+        "bytes": 3147,
+        "mode": "0644"
+      },
+      "slots": [
+        200,
+        201
+      ]
+    },
+    {
+      "batch": 101,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-101.json",
+        "sha256": "523f82d174ef9050b7281b070cf56a04ce4173c3f246f06871fb21806580a015",
+        "bytes": 2796,
+        "mode": "0644"
+      },
+      "slots": [
+        202,
+        203
+      ]
+    },
+    {
+      "batch": 102,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-102.json",
+        "sha256": "830fca023fb15d7a66c121f869860e1bbbf5caf3038e444196811267e561ceb8",
+        "bytes": 3128,
+        "mode": "0644"
+      },
+      "slots": [
+        204,
+        205
+      ]
+    },
+    {
+      "batch": 103,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-103.json",
+        "sha256": "ac4f6b8ab04d5f1886b7ffb502dc5fbfb0e780cba765837ab833293f8669d13f",
+        "bytes": 2777,
+        "mode": "0644"
+      },
+      "slots": [
+        206,
+        207
+      ]
+    },
+    {
+      "batch": 104,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-104.json",
+        "sha256": "3fbad3dbabe1697978326bf50a25982bf5f4fbff260156629d4970a521560052",
+        "bytes": 3020,
+        "mode": "0644"
+      },
+      "slots": [
+        208,
+        209
+      ]
+    },
+    {
+      "batch": 105,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-105.json",
+        "sha256": "0803ea2d4734c1f93f9eec8d0219b4e955fb3eb62a775bfe0e57248281aa6c39",
+        "bytes": 2778,
+        "mode": "0644"
+      },
+      "slots": [
+        210,
+        211
+      ]
+    },
+    {
+      "batch": 106,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-106.json",
+        "sha256": "926137ce274b509bf8a01fe385b3d2938dcec2705f28709993a5e36b8f6973aa",
+        "bytes": 3021,
+        "mode": "0644"
+      },
+      "slots": [
+        212,
+        213
+      ]
+    },
+    {
+      "batch": 107,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-107.json",
+        "sha256": "a273306891611ae024ebd4b99542188522ea6887d16143837e5edef5ec843ca8",
+        "bytes": 3129,
+        "mode": "0644"
+      },
+      "slots": [
+        214,
+        215
+      ]
+    },
+    {
+      "batch": 108,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-108.json",
+        "sha256": "2b24823244137e7b92f733c86352b98bfc625397ee831968a1c777d245a0edea",
+        "bytes": 3036,
+        "mode": "0644"
+      },
+      "slots": [
+        216,
+        217
+      ]
+    },
+    {
+      "batch": 109,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-109.json",
+        "sha256": "239b28144ba5bec133f28a56faba28aaaf2a38f6dfd661443a6b89869d8c53a6",
+        "bytes": 3144,
+        "mode": "0644"
+      },
+      "slots": [
+        218,
+        219
+      ]
+    },
+    {
+      "batch": 110,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-110.json",
+        "sha256": "5a5fa95a07f9a9bff5204a98502a9d97c6ca3d240f72b4527d1659d25ddc5c43",
+        "bytes": 2793,
+        "mode": "0644"
+      },
+      "slots": [
+        220,
+        221
+      ]
+    },
+    {
+      "batch": 111,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-111.json",
+        "sha256": "7c0e076d9a7ba3aaca614d28432e732e49f4a8fe72cfc5b3fddadf4540a41433",
+        "bytes": 3131,
+        "mode": "0644"
+      },
+      "slots": [
+        222,
+        223
+      ]
+    },
+    {
+      "batch": 112,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-112.json",
+        "sha256": "fccde2ee44145beebbf4dafda902d866b7a89a45630c4804f9fbb24c6465acdf",
+        "bytes": 2780,
+        "mode": "0644"
+      },
+      "slots": [
+        224,
+        225
+      ]
+    },
+    {
+      "batch": 113,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-113.json",
+        "sha256": "c2b85c7b5f1f5dae8eb73dcda6706d57ef912e83585489660ac8d0d8193e159a",
+        "bytes": 3023,
+        "mode": "0644"
+      },
+      "slots": [
+        226,
+        227
+      ]
+    },
+    {
+      "batch": 114,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-114.json",
+        "sha256": "1a2ad4f7cbe8d4df724cce21fceceb2c72a427a411f89b1ab7164c8d148beb32",
+        "bytes": 2782,
+        "mode": "0644"
+      },
+      "slots": [
+        228,
+        229
+      ]
+    },
+    {
+      "batch": 115,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-115.json",
+        "sha256": "d43c3f4b4dca16d6b2bf2385149f616ffff7862764e143e2a0a4c8ede06c4d47",
+        "bytes": 3025,
+        "mode": "0644"
+      },
+      "slots": [
+        230,
+        231
+      ]
+    },
+    {
+      "batch": 116,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-116.json",
+        "sha256": "437c5154ecddc8d22c0bac5e5967f2a002926a4b4a70c0ba74288fd3f82623d6",
+        "bytes": 3133,
+        "mode": "0644"
+      },
+      "slots": [
+        232,
+        233
+      ]
+    },
+    {
+      "batch": 117,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-117.json",
+        "sha256": "12559ff233a62009b877616387adacf8dce8d88526c8bedad81698cb15fafbda",
+        "bytes": 3011,
+        "mode": "0644"
+      },
+      "slots": [
+        234,
+        235
+      ]
+    },
+    {
+      "batch": 118,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-118.json",
+        "sha256": "f9973f3f2521f224b22bad082839f90513dc43560b7e36498910ae30e3b61862",
+        "bytes": 3119,
+        "mode": "0644"
+      },
+      "slots": [
+        236,
+        237
+      ]
+    },
+    {
+      "batch": 119,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-119.json",
+        "sha256": "aeca31e06978b607d83443b42d1a353fcc9189bd5d61a0ab430795d7ab2cd342",
+        "bytes": 2768,
+        "mode": "0644"
+      },
+      "slots": [
+        238,
+        239
+      ]
+    },
+    {
+      "batch": 120,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-120.json",
+        "sha256": "9978f38d56af0c0a0bee7500649a2a380c8c3f4a9a495082481350e4c515f2b6",
+        "bytes": 3145,
+        "mode": "0644"
+      },
+      "slots": [
+        240,
+        241
+      ]
+    },
+    {
+      "batch": 121,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-121.json",
+        "sha256": "26801b137d7c30b2966fa6c93513b61cdc701d459d50bee040a9d800c2e0720f",
+        "bytes": 2794,
+        "mode": "0644"
+      },
+      "slots": [
+        242,
+        243
+      ]
+    },
+    {
+      "batch": 122,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-122.json",
+        "sha256": "7d32b01b1a9859a398696969eb686ebfdbf229cc9892c915f6194bd34d841917",
+        "bytes": 3037,
+        "mode": "0644"
+      },
+      "slots": [
+        244,
+        245
+      ]
+    },
+    {
+      "batch": 123,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-123.json",
+        "sha256": "b2c53ad7a5b2b6d298e9fb971edbcf3da2e1c802f48c54303d2bba4ec92045d7",
+        "bytes": 2793,
+        "mode": "0644"
+      },
+      "slots": [
+        246,
+        247
+      ]
+    },
+    {
+      "batch": 124,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-124.json",
+        "sha256": "3f8f29efea2b29277fad6a2c682ba97a02dbcb936d893a2dabac3b93d3aa0b87",
+        "bytes": 3036,
+        "mode": "0644"
+      },
+      "slots": [
+        248,
+        249
+      ]
+    },
+    {
+      "batch": 125,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-125.json",
+        "sha256": "5152ef7a8a6956fdd277501ff877da42b2d3c056779a8243320c6db8905746dc",
+        "bytes": 3144,
+        "mode": "0644"
+      },
+      "slots": [
+        250,
+        251
+      ]
+    },
+    {
+      "batch": 126,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-126.json",
+        "sha256": "372c989589cffc1cd94dee9056018147787ec11e13767925554775ed8b3ad2b9",
+        "bytes": 3047,
+        "mode": "0644"
+      },
+      "slots": [
+        252,
+        253
+      ]
+    },
+    {
+      "batch": 127,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-127.json",
+        "sha256": "de603060a101c9a3d9bef860ddc97cd3636902a8ef0f376c225c98a9b4320a28",
+        "bytes": 3155,
+        "mode": "0644"
+      },
+      "slots": [
+        254,
+        255
+      ]
+    },
+    {
+      "batch": 128,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-128.json",
+        "sha256": "b53360b326b31e85247c6b9da0df1ef93b27e1556f006900770a2ffd6ef2a40d",
+        "bytes": 2804,
+        "mode": "0644"
+      },
+      "slots": [
+        256,
+        257
+      ]
+    },
+    {
+      "batch": 129,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-129.json",
+        "sha256": "834f05c71a036d8a69d7ee5f3d48cca2047ba804968c12b46c60a672a0ed84ec",
+        "bytes": 3183,
+        "mode": "0644"
+      },
+      "slots": [
+        258,
+        259
+      ]
+    },
+    {
+      "batch": 130,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-130.json",
+        "sha256": "3c1b1110a1fe519657266a5a2ff2073d0ed77d11f02c5c5142f67460c16c31d3",
+        "bytes": 2832,
+        "mode": "0644"
+      },
+      "slots": [
+        260,
+        261
+      ]
+    },
+    {
+      "batch": 131,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-131.json",
+        "sha256": "e7bc6632f60669833ec6045a48bf78e19dca4a1901e7c9fb3efa9a6127814f4b",
+        "bytes": 3075,
+        "mode": "0644"
+      },
+      "slots": [
+        262,
+        263
+      ]
+    },
+    {
+      "batch": 132,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-132.json",
+        "sha256": "64e019de495368a83f2a3f038530b85df94d014f8010fc9d4abedbbdd4419520",
+        "bytes": 2758,
+        "mode": "0644"
+      },
+      "slots": [
+        264,
+        265
+      ]
+    },
+    {
+      "batch": 133,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-133.json",
+        "sha256": "e735feebb3d59a965f20686cb7bef4483b5e9e018073ad7543d860f1ff417d08",
+        "bytes": 3001,
+        "mode": "0644"
+      },
+      "slots": [
+        266,
+        267
+      ]
+    },
+    {
+      "batch": 134,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-134.json",
+        "sha256": "286062e9f9578d55bbc0bb812c3df01ca6ee919647270b124983caf69b3b1b01",
+        "bytes": 3109,
+        "mode": "0644"
+      },
+      "slots": [
+        268,
+        269
+      ]
+    },
+    {
+      "batch": 135,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-135.json",
+        "sha256": "e5eedf5c6fee6231722d0279ebfe200bd1966cb538a9c7774f18fc13dd17116f",
+        "bytes": 3039,
+        "mode": "0644"
+      },
+      "slots": [
+        270,
+        271
+      ]
+    },
+    {
+      "batch": 136,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-136.json",
+        "sha256": "26dc545d2bd3ff4e145d21480a3dcfd974610ca0ca2048c5925a0de0b1e8b3e1",
+        "bytes": 3147,
+        "mode": "0644"
+      },
+      "slots": [
+        272,
+        273
+      ]
+    },
+    {
+      "batch": 137,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-137.json",
+        "sha256": "d0cb73cc67bac9afdf1cce549ef245ba331030c1c9f0325eae14a725d01cc98c",
+        "bytes": 2796,
+        "mode": "0644"
+      },
+      "slots": [
+        274,
+        275
+      ]
+    },
+    {
+      "batch": 138,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-138.json",
+        "sha256": "8831d4bc71314739c5dd38ed42ae76264ebcd0c46105b78a7c3320a90076cdda",
+        "bytes": 3099,
+        "mode": "0644"
+      },
+      "slots": [
+        276,
+        277
+      ]
+    },
+    {
+      "batch": 139,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-139.json",
+        "sha256": "fa4bd1796ee9fc27a4eee54b2c8a1fe599ff8833a288da280d0e19cea7e59881",
+        "bytes": 2748,
+        "mode": "0644"
+      },
+      "slots": [
+        278,
+        279
+      ]
+    },
+    {
+      "batch": 140,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-140.json",
+        "sha256": "ab3767d3fcd67d0f1bba42ba0e0c7cbe3ce54b801b516c40c9e582983c8300f5",
+        "bytes": 2991,
+        "mode": "0644"
+      },
+      "slots": [
+        280,
+        281
+      ]
+    },
+    {
+      "batch": 141,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-141.json",
+        "sha256": "55fe3fc7817cae8a716edc1964fb37c6ca633442e40e4b08411b7b2b7304231d",
+        "bytes": 2777,
+        "mode": "0644"
+      },
+      "slots": [
+        282,
+        283
+      ]
+    },
+    {
+      "batch": 142,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-142.json",
+        "sha256": "a02178aea97bda0aa7698214da028be7cf5df67e7d33d219dbab404c54dda674",
+        "bytes": 3020,
+        "mode": "0644"
+      },
+      "slots": [
+        284,
+        285
+      ]
+    },
+    {
+      "batch": 143,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-143.json",
+        "sha256": "dfb4dc6708afb88e826d25592829b9c08646b23bb5d5465c646c33b839a69769",
+        "bytes": 3128,
+        "mode": "0644"
+      },
+      "slots": [
+        286,
+        287
+      ]
+    },
+    {
+      "batch": 144,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-144.json",
+        "sha256": "008efdabc1772786f9a06b7105b87af31049d07a64c45a9aec2fdf9d1c89a018",
+        "bytes": 3058,
+        "mode": "0644"
+      },
+      "slots": [
+        288,
+        289
+      ]
+    },
+    {
+      "batch": 145,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-145.json",
+        "sha256": "cdcdacba59e6be1024dd4f6e9299feb9d3f73362434599886f2312c6384848dc",
+        "bytes": 3166,
+        "mode": "0644"
+      },
+      "slots": [
+        290,
+        291
+      ]
+    },
+    {
+      "batch": 146,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-146.json",
+        "sha256": "22a2e50522f1b681ccceadb72c89aaf963723d6fc93b806c3155e55c41486560",
+        "bytes": 2815,
+        "mode": "0644"
+      },
+      "slots": [
+        292,
+        293
+      ]
+    },
+    {
+      "batch": 147,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-147.json",
+        "sha256": "dde58c7656055358074a7e1512e4fe12ecc2ce43bc6dc6da963424cfe4cd11c6",
+        "bytes": 3154,
+        "mode": "0644"
+      },
+      "slots": [
+        294,
+        295
+      ]
+    },
+    {
+      "batch": 148,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-148.json",
+        "sha256": "d1e003a00cb1c5d503fd3a653da926a7240d770eead586011300a5477bff17d0",
+        "bytes": 2803,
+        "mode": "0644"
+      },
+      "slots": [
+        296,
+        297
+      ]
+    },
+    {
+      "batch": 149,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-149.json",
+        "sha256": "fed73a75e13b0cba75c611f8c8e7e949e979077a469827085161c868e5287236",
+        "bytes": 3046,
+        "mode": "0644"
+      },
+      "slots": [
+        298,
+        299
+      ]
+    },
+    {
+      "batch": 150,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-150.json",
+        "sha256": "1e746b88ec626e436bdbb4762476997d07b6b03da2cac0bae56fa284e9f41de8",
+        "bytes": 2804,
+        "mode": "0644"
+      },
+      "slots": [
+        300,
+        301
+      ]
+    },
+    {
+      "batch": 151,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-151.json",
+        "sha256": "3f22203c0316c7729175478692fa5b10ff57df196461f3b1960d5d1cfa3a0736",
+        "bytes": 3047,
+        "mode": "0644"
+      },
+      "slots": [
+        302,
+        303
+      ]
+    },
+    {
+      "batch": 152,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-152.json",
+        "sha256": "3b0ddad16de72e861989191e6849fb32074d024773961c276a2c1c2d61d3e5d2",
+        "bytes": 3155,
+        "mode": "0644"
+      },
+      "slots": [
+        304,
+        305
+      ]
+    },
+    {
+      "batch": 153,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-153.json",
+        "sha256": "f6765dde5d7d07ae1ec8a061940dbcb820c1b77aa04143c62a621f3938da3a20",
+        "bytes": 2991,
+        "mode": "0644"
+      },
+      "slots": [
+        306,
+        307
+      ]
+    },
+    {
+      "batch": 154,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-154.json",
+        "sha256": "27cdc3756e77b9ee61ffb10e7d67f62bf2c5df5d01fdd928ae3c28dc6af19dce",
+        "bytes": 3099,
+        "mode": "0644"
+      },
+      "slots": [
+        308,
+        309
+      ]
+    },
+    {
+      "batch": 155,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-155.json",
+        "sha256": "527cf0376c7cd32c94c58555ae10370c9d47b8babc6685b1d9edf6274905ef89",
+        "bytes": 2748,
+        "mode": "0644"
+      },
+      "slots": [
+        310,
+        311
+      ]
+    },
+    {
+      "batch": 156,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-156.json",
+        "sha256": "9e885c6eac25c1971ed7a8b640691b383d950d845a6454b0da2ab49148553a53",
+        "bytes": 3135,
+        "mode": "0644"
+      },
+      "slots": [
+        312,
+        313
+      ]
+    },
+    {
+      "batch": 157,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-157.json",
+        "sha256": "b9d1561b1108edbef6b0cae2e2b80c7af5a34898a1eb56bf6192f827874e7aae",
+        "bytes": 2784,
+        "mode": "0644"
+      },
+      "slots": [
+        314,
+        315
+      ]
+    },
+    {
+      "batch": 158,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-158.json",
+        "sha256": "2082861af62e9b34a3203186d34e4b51feed8601512590f7689067fbc590eea8",
+        "bytes": 3027,
+        "mode": "0644"
+      },
+      "slots": [
+        316,
+        317
+      ]
+    },
+    {
+      "batch": 159,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-159.json",
+        "sha256": "cda500c112fba41ce19b980c16c3573ebabfb79c275c7b40f4cdd4a0f976233f",
+        "bytes": 2805,
+        "mode": "0644"
+      },
+      "slots": [
+        318,
+        319
+      ]
+    },
+    {
+      "batch": 160,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-160.json",
+        "sha256": "9bd6393b8d20886696c524d08d49a584f7b5abbc5920dfde42216fbe3ce5d6d5",
+        "bytes": 3048,
+        "mode": "0644"
+      },
+      "slots": [
+        320,
+        321
+      ]
+    },
+    {
+      "batch": 161,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-161.json",
+        "sha256": "e58c5ef3dc7240c6a5092f9586ad729ad9e405acfc4d18dc039518f53e8c9c84",
+        "bytes": 3156,
+        "mode": "0644"
+      },
+      "slots": [
+        322,
+        323
+      ]
+    },
+    {
+      "batch": 162,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-162.json",
+        "sha256": "8678714af4ce32bb4790245bc2040d5d70d7ca3913a209b75efaa44badd5caeb",
+        "bytes": 3033,
+        "mode": "0644"
+      },
+      "slots": [
+        324,
+        325
+      ]
+    },
+    {
+      "batch": 163,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-163.json",
+        "sha256": "576916cd09bb36aa59be60857f2e304f19573e745bfe5ae7cf497745bc0f5733",
+        "bytes": 3141,
+        "mode": "0644"
+      },
+      "slots": [
+        326,
+        327
+      ]
+    },
+    {
+      "batch": 164,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-164.json",
+        "sha256": "6a3d9c57a3ffc3b547f324a7bf8bad389e4ac60204d32eb49db491ea1bb97d78",
+        "bytes": 2790,
+        "mode": "0644"
+      },
+      "slots": [
+        328,
+        329
+      ]
+    },
+    {
+      "batch": 165,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-165.json",
+        "sha256": "30ac1dd501e70bcab8878a6e756c86b9768857fd0c5cc3d67bab9118bb47b321",
+        "bytes": 3127,
+        "mode": "0644"
+      },
+      "slots": [
+        330,
+        331
+      ]
+    },
+    {
+      "batch": 166,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-166.json",
+        "sha256": "7402b89d304a40136de7b173cd75adb8cf8e839e9fcdac1c23daa426244549a2",
+        "bytes": 2776,
+        "mode": "0644"
+      },
+      "slots": [
+        332,
+        333
+      ]
+    },
+    {
+      "batch": 167,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-167.json",
+        "sha256": "1faf33a4f20d571efedaab64ee2995af90f4b6fdbac24c7dcf2e6e24fa1bc7e6",
+        "bytes": 3019,
+        "mode": "0644"
+      },
+      "slots": [
+        334,
+        335
+      ]
+    },
+    {
+      "batch": 168,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-168.json",
+        "sha256": "153b9b381842a6d5499b622cccdb8f5781c91b3fc2bb4c28600bdf7f2aafadff",
+        "bytes": 2794,
+        "mode": "0644"
+      },
+      "slots": [
+        336,
+        337
+      ]
+    },
+    {
+      "batch": 169,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-169.json",
+        "sha256": "566f1309c1f31c900dd4933ce4b0726a39603b4d23fe0bd5ea57b8db52b3538d",
+        "bytes": 3037,
+        "mode": "0644"
+      },
+      "slots": [
+        338,
+        339
+      ]
+    },
+    {
+      "batch": 170,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-170.json",
+        "sha256": "4e85e5cde3a36ef9014e98777a3b4417f542cb8413d8d3ee48636eab4bd6a5d8",
+        "bytes": 3145,
+        "mode": "0644"
+      },
+      "slots": [
+        340,
+        341
+      ]
+    },
+    {
+      "batch": 171,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-171.json",
+        "sha256": "a2e255d4257edc5aa95155c56b49901bd6bded896695dd3eed59c29d7ffd9f43",
+        "bytes": 3014,
+        "mode": "0644"
+      },
+      "slots": [
+        342,
+        343
+      ]
+    },
+    {
+      "batch": 172,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-172.json",
+        "sha256": "0485ceb81899cd17241449abdbe1afd33fa44a89bd65027fa675c04c636cc5f7",
+        "bytes": 3122,
+        "mode": "0644"
+      },
+      "slots": [
+        344,
+        345
+      ]
+    },
+    {
+      "batch": 173,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-173.json",
+        "sha256": "961d5b66e8099c70f491c1dac9d60dd0a5bb1762cb95956af0e72f152f0af0b5",
+        "bytes": 2771,
+        "mode": "0644"
+      },
+      "slots": [
+        346,
+        347
+      ]
+    },
+    {
+      "batch": 174,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-174.json",
+        "sha256": "fa2a447855a4bb3d2d9b4cd770943ab94e15921707fe119d8585e68ea17269d8",
+        "bytes": 3167,
+        "mode": "0644"
+      },
+      "slots": [
+        348,
+        349
+      ]
+    },
+    {
+      "batch": 175,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-175.json",
+        "sha256": "8648e475d29a506b3611209c295a6ac35a4e86631dc881fbc5b4b71b12603397",
+        "bytes": 2816,
+        "mode": "0644"
+      },
+      "slots": [
+        350,
+        351
+      ]
+    },
+    {
+      "batch": 176,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-176.json",
+        "sha256": "08310c59ede5ac69b017706bfeba8dd65220e59b7a585083438b5e871baff6bf",
+        "bytes": 3059,
+        "mode": "0644"
+      },
+      "slots": [
+        352,
+        353
+      ]
+    },
+    {
+      "batch": 177,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-177.json",
+        "sha256": "24e8a766e0581efb12000d00ca65a1f9d9c081c9a24dc5ca818ce52144f33db7",
+        "bytes": 2764,
+        "mode": "0644"
+      },
+      "slots": [
+        354,
+        355
+      ]
+    },
+    {
+      "batch": 178,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-178.json",
+        "sha256": "656b85694f7142313a1132c8a4d0471046753cd8d45c5a6fbbd694ec28ba4738",
+        "bytes": 3007,
+        "mode": "0644"
+      },
+      "slots": [
+        356,
+        357
+      ]
+    },
+    {
+      "batch": 179,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-179.json",
+        "sha256": "e5308dad32f29e6bea8c4a0bba36a6c6c93841248f894464b8927c9f8055cc21",
+        "bytes": 3115,
+        "mode": "0644"
+      },
+      "slots": [
+        358,
+        359
+      ]
+    },
+    {
+      "batch": 180,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-180.json",
+        "sha256": "b4983a0f4293462d158160085613c5ae45a43ab4400d84829d5f515fe4b9c5b4",
+        "bytes": 3016,
+        "mode": "0644"
+      },
+      "slots": [
+        360,
+        361
+      ]
+    },
+    {
+      "batch": 181,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-181.json",
+        "sha256": "7761cecdc77643cbdd65b22fce1f36643209b20e74d1cb413b67abd54bff92a8",
+        "bytes": 3124,
+        "mode": "0644"
+      },
+      "slots": [
+        362,
+        363
+      ]
+    },
+    {
+      "batch": 182,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-182.json",
+        "sha256": "53f8b8ad21e77e8bb0e4d64c5e4d8492dc23bffd8fe118982057dfcdaddae653",
+        "bytes": 2773,
+        "mode": "0644"
+      },
+      "slots": [
+        364,
+        365
+      ]
+    },
+    {
+      "batch": 183,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-183.json",
+        "sha256": "542da1011ade2968cec450c4222a16df3a667ad263d06b78a23579dcc2ac3a6d",
+        "bytes": 3185,
+        "mode": "0644"
+      },
+      "slots": [
+        366,
+        367
+      ]
+    },
+    {
+      "batch": 184,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-184.json",
+        "sha256": "f3a63658ccb3e72e20825d18714f3820b1f59cccfc8be2d267c0789ecbf7891a",
+        "bytes": 2834,
+        "mode": "0644"
+      },
+      "slots": [
+        368,
+        369
+      ]
+    },
+    {
+      "batch": 185,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-185.json",
+        "sha256": "0d32844ee4c0fc9b48a01d1e92ff01bd5ed2f8de9d13a490d9e6771a444359ef",
+        "bytes": 3077,
+        "mode": "0644"
+      },
+      "slots": [
+        370,
+        371
+      ]
+    },
+    {
+      "batch": 186,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-186.json",
+        "sha256": "56586801c1f3a33f190eb1a8f425cecfc030c38c337ec0a5613a32287411162e",
+        "bytes": 2781,
+        "mode": "0644"
+      },
+      "slots": [
+        372,
+        373
+      ]
+    },
+    {
+      "batch": 187,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-187.json",
+        "sha256": "2516546a2768294a7944288727644608110eeab3cbfa46e56d0430eed596ed40",
+        "bytes": 3024,
+        "mode": "0644"
+      },
+      "slots": [
+        374,
+        375
+      ]
+    },
+    {
+      "batch": 188,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-188.json",
+        "sha256": "10635749abccdce60ade659e968929a0d69498fcf120377c35e2a8b61b7d9138",
+        "bytes": 3132,
+        "mode": "0644"
+      },
+      "slots": [
+        376,
+        377
+      ]
+    },
+    {
+      "batch": 189,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-189.json",
+        "sha256": "75d3191357c776f8bdfaf9f686a4e4630266c975dc3c00bc73bab646ead65452",
+        "bytes": 3025,
+        "mode": "0644"
+      },
+      "slots": [
+        378,
+        379
+      ]
+    },
+    {
+      "batch": 190,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-190.json",
+        "sha256": "46d7e4da3c20a72e8d15b32490e9fb98984633bf03f824bb2bcc1a8633d52f23",
+        "bytes": 3133,
+        "mode": "0644"
+      },
+      "slots": [
+        380,
+        381
+      ]
+    },
+    {
+      "batch": 191,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-191.json",
+        "sha256": "dc6eab1b0b5aaf7ba501ef05201e469ca9fbe01204b7eca21fea9d36b8b06e55",
+        "bytes": 2782,
+        "mode": "0644"
+      },
+      "slots": [
+        382,
+        383
+      ]
+    },
+    {
+      "batch": 192,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-192.json",
+        "sha256": "7b536cf241e36930760023d39c6b93b62a456adf3dceacfed100d123d7433e2c",
+        "bytes": 3196,
+        "mode": "0644"
+      },
+      "slots": [
+        384,
+        385
+      ]
+    },
+    {
+      "batch": 193,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-193.json",
+        "sha256": "e94637ef9d357f9a5aab766f892043d82c4674e7369b29e4b3222634e6fd158b",
+        "bytes": 2845,
+        "mode": "0644"
+      },
+      "slots": [
+        386,
+        387
+      ]
+    },
+    {
+      "batch": 194,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-194.json",
+        "sha256": "f82b6eeea817bbddf722deca4775ac73a920c9d84b951d86e0ce6ceac0ea64be",
+        "bytes": 3088,
+        "mode": "0644"
+      },
+      "slots": [
+        388,
+        389
+      ]
+    },
+    {
+      "batch": 195,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-195.json",
+        "sha256": "32ae0af1668f5a40c4662e2579dd9bb19440c61fe450421c1bbba0125b5a3d71",
+        "bytes": 3031,
+        "mode": "0644"
+      },
+      "slots": [
+        390,
+        391
+      ]
+    },
+    {
+      "batch": 196,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-196.json",
+        "sha256": "71a7af965a9102206d4e81303e3605b8dba7daac5afda2b3c0d925db3a700d93",
+        "bytes": 3274,
+        "mode": "0644"
+      },
+      "slots": [
+        392,
+        393
+      ]
+    },
+    {
+      "batch": 197,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-197.json",
+        "sha256": "c74572550cb43165de9a0c122a258cd91c0ca741378a85d730c988df437af9a4",
+        "bytes": 3382,
+        "mode": "0644"
+      },
+      "slots": [
+        394,
+        395
+      ]
+    },
+    {
+      "batch": 198,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-198.json",
+        "sha256": "d0c41cc08809cf5c1b6b2f2d319ad260ca84bd3b4a68358d1d17fba413d4fa60",
+        "bytes": 3257,
+        "mode": "0644"
+      },
+      "slots": [
+        396,
+        397
+      ]
+    },
+    {
+      "batch": 199,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-199.json",
+        "sha256": "d95276e3cae6fc17eab075fb036945142ae52f104219be704b6c7d95dfc1eb9b",
+        "bytes": 3365,
+        "mode": "0644"
+      },
+      "slots": [
+        398,
+        399
+      ]
+    },
+    {
+      "batch": 200,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-200.json",
+        "sha256": "e463a12d4ca32ba9b400c904e8de66621de478a2084d46ee5154638fffeee406",
+        "bytes": 3014,
+        "mode": "0644"
+      },
+      "slots": [
+        400,
+        401
+      ]
+    },
+    {
+      "batch": 201,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-201.json",
+        "sha256": "15fcbec5106d72a740cf929124ecd4bb6dba321e75b5d584e5081d7d9831a44e",
+        "bytes": 3323,
+        "mode": "0644"
+      },
+      "slots": [
+        402,
+        403
+      ]
+    },
+    {
+      "batch": 202,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-202.json",
+        "sha256": "9060d317dcc9973dd98c114186d36ddd60e214aa2d864dfa1088f39bea85bf22",
+        "bytes": 2972,
+        "mode": "0644"
+      },
+      "slots": [
+        404,
+        405
+      ]
+    },
+    {
+      "batch": 203,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-203.json",
+        "sha256": "cf33040fdda713e7305884557b4da65edecf829a91dbc96fa6f471cdf3e4c107",
+        "bytes": 3215,
+        "mode": "0644"
+      },
+      "slots": [
+        406,
+        407
+      ]
+    },
+    {
+      "batch": 204,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-204.json",
+        "sha256": "52d4261276e1012e250e17e65914e85dbe1d2ed6e88f34d4c0811747ab919382",
+        "bytes": 2844,
+        "mode": "0644"
+      },
+      "slots": [
+        408,
+        409
+      ]
+    },
+    {
+      "batch": 205,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-205.json",
+        "sha256": "664da8e8019122e12b275bd60a8d30d3b69fe624cefa44b3939595f9f2bf60de",
+        "bytes": 3087,
+        "mode": "0644"
+      },
+      "slots": [
+        410,
+        411
+      ]
+    },
+    {
+      "batch": 206,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-206.json",
+        "sha256": "164c368dcaa87dfa86d56a4161a89f8c2134141f2f22909da572812293b483c5",
+        "bytes": 3195,
+        "mode": "0644"
+      },
+      "slots": [
+        412,
+        413
+      ]
+    },
+    {
+      "batch": 207,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-207.json",
+        "sha256": "ad637ddce3af7ef0024ff0277fb413aae7345155fdd866cf225c5949f1193dc1",
+        "bytes": 3139,
+        "mode": "0644"
+      },
+      "slots": [
+        414,
+        415
+      ]
+    },
+    {
+      "batch": 208,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-208.json",
+        "sha256": "0d589eaf7c4a6cbd40f3c1dda209a2c405e1f963e4e35da83434436f1fe3fa47",
+        "bytes": 3247,
+        "mode": "0644"
+      },
+      "slots": [
+        416,
+        417
+      ]
+    },
+    {
+      "batch": 209,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-209.json",
+        "sha256": "83199131cba4c956a252e40123ca6cc82503cf946336c3366d88ae079a125c4d",
+        "bytes": 2896,
+        "mode": "0644"
+      },
+      "slots": [
+        418,
+        419
+      ]
+    },
+    {
+      "batch": 210,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-210.json",
+        "sha256": "be47bfd59353e9567f9bce6b76ead3079e0bad5fa66919c0d09b46f225101fe1",
+        "bytes": 3291,
+        "mode": "0644"
+      },
+      "slots": [
+        420,
+        421
+      ]
+    },
+    {
+      "batch": 211,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-211.json",
+        "sha256": "24c1d35491e22cca2c8945654f76d19c0cb61c6038076e8fa07908eec7acd02f",
+        "bytes": 2940,
+        "mode": "0644"
+      },
+      "slots": [
+        422,
+        423
+      ]
+    },
+    {
+      "batch": 212,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-212.json",
+        "sha256": "f5e9c48531a89e28f88020326b6efc615727caac44523f535d119e303ca1d6ed",
+        "bytes": 3183,
+        "mode": "0644"
+      },
+      "slots": [
+        424,
+        425
+      ]
+    },
+    {
+      "batch": 213,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-213.json",
+        "sha256": "fee36f1b58ce2e9fe945e5d3da0712356ad30fe6139e3c0ae1d73cba0c7b3a80",
+        "bytes": 2955,
+        "mode": "0644"
+      },
+      "slots": [
+        426,
+        427
+      ]
+    },
+    {
+      "batch": 214,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-214.json",
+        "sha256": "455747dc6f02e38b3454d4c0a9c04de40ffcf508d19bda07e3b7ee97472c3e36",
+        "bytes": 3198,
+        "mode": "0644"
+      },
+      "slots": [
+        428,
+        429
+      ]
+    },
+    {
+      "batch": 215,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-215.json",
+        "sha256": "cc18057fb65c9de33b9e8a41de1fa4e72deadcedbbb4963310440922ca7e2e28",
+        "bytes": 3306,
+        "mode": "0644"
+      },
+      "slots": [
+        430,
+        431
+      ]
+    },
+    {
+      "batch": 216,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-216.json",
+        "sha256": "c6e5bd546f813df0ced2b17873008e14da6282f978954abac351546109331ece",
+        "bytes": 3291,
+        "mode": "0644"
+      },
+      "slots": [
+        432,
+        433
+      ]
+    },
+    {
+      "batch": 217,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-217.json",
+        "sha256": "183c3369be71f2656a13d6825e9d57e1a50a0b62f91576ff1f54fb3b3ab660ae",
+        "bytes": 3399,
+        "mode": "0644"
+      },
+      "slots": [
+        434,
+        435
+      ]
+    },
+    {
+      "batch": 218,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-218.json",
+        "sha256": "164f380cf2ac50b965e20808339a9c1f9678ce41b7a5276911ea78e870d47165",
+        "bytes": 3048,
+        "mode": "0644"
+      },
+      "slots": [
+        436,
+        437
+      ]
+    },
+    {
+      "batch": 219,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-219.json",
+        "sha256": "b804719374162047e52d14eff3374ec746957aa860ab458f38ab52a73f635339",
+        "bytes": 3391,
+        "mode": "0644"
+      },
+      "slots": [
+        438,
+        439
+      ]
+    },
+    {
+      "batch": 220,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-220.json",
+        "sha256": "40a51ea8e545553a66667ff10a3fb9aa1d5a4c30a8b9c341e135839c6e3ce122",
+        "bytes": 3040,
+        "mode": "0644"
+      },
+      "slots": [
+        440,
+        441
+      ]
+    },
+    {
+      "batch": 221,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-221.json",
+        "sha256": "754cced8f856f938f6040d5b4c21865a3faa83e9d36a76587592878a4d1c7a60",
+        "bytes": 3283,
+        "mode": "0644"
+      },
+      "slots": [
+        442,
+        443
+      ]
+    },
+    {
+      "batch": 222,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-222.json",
+        "sha256": "b1715ea0b065cc208be217f786b222cc071c0b3558d10329b15535caa5b40698",
+        "bytes": 2880,
+        "mode": "0644"
+      },
+      "slots": [
+        444,
+        445
+      ]
+    },
+    {
+      "batch": 223,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-223.json",
+        "sha256": "a635582d51eacca01cc2131896395e7d1a11e3e3f0ee7b8c6cd0fb0398e139a7",
+        "bytes": 3123,
+        "mode": "0644"
+      },
+      "slots": [
+        446,
+        447
+      ]
+    },
+    {
+      "batch": 224,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-224.json",
+        "sha256": "85b7982b2f423d0f06061b7c1a2107a79566f9d452c74a8b6a72f6395f47b973",
+        "bytes": 3231,
+        "mode": "0644"
+      },
+      "slots": [
+        448,
+        449
+      ]
+    },
+    {
+      "batch": 225,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-225.json",
+        "sha256": "7ab6c39a1a7cd3a168bbd431cb56da7a097ea464ac8062973280e830b84d7388",
+        "bytes": 3228,
+        "mode": "0644"
+      },
+      "slots": [
+        450,
+        451
+      ]
+    },
+    {
+      "batch": 226,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-226.json",
+        "sha256": "9821de9381e2e52281eeb5c6b855298f53eb5cd4ca02e8cff22630edff57f302",
+        "bytes": 3336,
+        "mode": "0644"
+      },
+      "slots": [
+        452,
+        453
+      ]
+    },
+    {
+      "batch": 227,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-227.json",
+        "sha256": "dcfbcf4af5a51f6ffc1ab9a2b77dcf20d6258f633ac7d6c0df3bc8ebe281b9bf",
+        "bytes": 2985,
+        "mode": "0644"
+      },
+      "slots": [
+        454,
+        455
+      ]
+    },
+    {
+      "batch": 228,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-228.json",
+        "sha256": "d983b52f97ab8867868217ef0977e1c87128b11dddbb86a251a64335060abb1c",
+        "bytes": 3233,
+        "mode": "0644"
+      },
+      "slots": [
+        456,
+        457
+      ]
+    },
+    {
+      "batch": 229,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-229.json",
+        "sha256": "921e12103fcf6d567eca782c65ee0b0c85e850ebc156597f875704b63edebb81",
+        "bytes": 2882,
+        "mode": "0644"
+      },
+      "slots": [
+        458,
+        459
+      ]
+    },
+    {
+      "batch": 230,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-230.json",
+        "sha256": "7bc07b64fd3f7c6500c6458b160dc6acce1339ef827d11be7281c771ef3358ca",
+        "bytes": 3125,
+        "mode": "0644"
+      },
+      "slots": [
+        460,
+        461
+      ]
+    },
+    {
+      "batch": 231,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-231.json",
+        "sha256": "4ab3473ab80c0b311c44be0153c1a9b89869c08e5835c39d5b80e399590794a2",
+        "bytes": 2938,
+        "mode": "0644"
+      },
+      "slots": [
+        462,
+        463
+      ]
+    },
+    {
+      "batch": 232,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-232.json",
+        "sha256": "48fc1d60531ee148a7fedb089e31611c28a8a129049aba3bdc94a7abc1a32be1",
+        "bytes": 3181,
+        "mode": "0644"
+      },
+      "slots": [
+        464,
+        465
+      ]
+    },
+    {
+      "batch": 233,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-233.json",
+        "sha256": "377d0564940c08895a72df213858a1220eff6e040f84759810886714179b538a",
+        "bytes": 3289,
+        "mode": "0644"
+      },
+      "slots": [
+        466,
+        467
+      ]
+    },
+    {
+      "batch": 234,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-234.json",
+        "sha256": "4040f28c029ee197068527ccb2425b51d52a96c7ab889e3f2490dc91be14966e",
+        "bytes": 3177,
+        "mode": "0644"
+      },
+      "slots": [
+        468,
+        469
+      ]
+    },
+    {
+      "batch": 235,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-235.json",
+        "sha256": "04faecc71e158dcfbc5fd06e644ad2670b7277d93416dcbab6678dcde2e5991f",
+        "bytes": 3285,
+        "mode": "0644"
+      },
+      "slots": [
+        470,
+        471
+      ]
+    },
+    {
+      "batch": 236,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-236.json",
+        "sha256": "85811ad29b28f50025316119fc1cd29f8b4571363b6023a9dee60879853377f1",
+        "bytes": 2934,
+        "mode": "0644"
+      },
+      "slots": [
+        472,
+        473
+      ]
+    },
+    {
+      "batch": 237,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-237.json",
+        "sha256": "5c8a5af6c1a1f4c9fb5d92173c6fc02b49351bb51e9419e6f51753912621c205",
+        "bytes": 3291,
+        "mode": "0644"
+      },
+      "slots": [
+        474,
+        475
+      ]
+    },
+    {
+      "batch": 238,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-238.json",
+        "sha256": "920974e76564e217edbf96075f9b2da7305df93494d0fbb305c07f5b97f0dd48",
+        "bytes": 2940,
+        "mode": "0644"
+      },
+      "slots": [
+        476,
+        477
+      ]
+    },
+    {
+      "batch": 239,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-239.json",
+        "sha256": "c926a513956e683fc360067485d5d11b450a88b010c3fe0ab96168c9132d2254",
+        "bytes": 3183,
+        "mode": "0644"
+      },
+      "slots": [
+        478,
+        479
+      ]
+    },
+    {
+      "batch": 240,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-240.json",
+        "sha256": "086e92e15d432a451bf58edbdeeb66fb6fd82279fc7728e4b4713faf52c634f0",
+        "bytes": 2971,
+        "mode": "0644"
+      },
+      "slots": [
+        480,
+        481
+      ]
+    },
+    {
+      "batch": 241,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-241.json",
+        "sha256": "c76096392c400075c8830218d2d98099d938c80d2ec46a9e25c151d68d45c32c",
+        "bytes": 3214,
+        "mode": "0644"
+      },
+      "slots": [
+        482,
+        483
+      ]
+    },
+    {
+      "batch": 242,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-242.json",
+        "sha256": "524f66d37262c569c780a3b1bb559127bd2a63eca336e9cc84e29471ac28eb2c",
+        "bytes": 3322,
+        "mode": "0644"
+      },
+      "slots": [
+        484,
+        485
+      ]
+    },
+    {
+      "batch": 243,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-243.json",
+        "sha256": "e1a00be47031ad9ab0618c71db68090c8e038581ace66463ab4a5d6c681ccf77",
+        "bytes": 3137,
+        "mode": "0644"
+      },
+      "slots": [
+        486,
+        487
+      ]
+    },
+    {
+      "batch": 244,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-244.json",
+        "sha256": "10566a8095ea37b83a08bda86f1b707245ab028a3d73f95d6dd061cbc29a4423",
+        "bytes": 3245,
+        "mode": "0644"
+      },
+      "slots": [
+        488,
+        489
+      ]
+    },
+    {
+      "batch": 245,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-245.json",
+        "sha256": "d1385314ab73daf3540ef5f5f6d9d1098b4e27500eed9d4f964f18fab8c5fc14",
+        "bytes": 2894,
+        "mode": "0644"
+      },
+      "slots": [
+        490,
+        491
+      ]
+    },
+    {
+      "batch": 246,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-246.json",
+        "sha256": "33e48ef3131cb974de2988d11f1185c8216a9368cd50a69df2a21b6d9b6336ac",
+        "bytes": 3165,
+        "mode": "0644"
+      },
+      "slots": [
+        492,
+        493
+      ]
+    },
+    {
+      "batch": 247,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-247.json",
+        "sha256": "92e069317cdaa9a3ae71331299d72471c22fdf02147c922b67f8623635dac568",
+        "bytes": 2814,
+        "mode": "0644"
+      },
+      "slots": [
+        494,
+        495
+      ]
+    },
+    {
+      "batch": 248,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-248.json",
+        "sha256": "134af936d1f574fd5900a248d8796bdc6ce93e73ff98e1081977c16d8f5c41f5",
+        "bytes": 3057,
+        "mode": "0644"
+      },
+      "slots": [
+        496,
+        497
+      ]
+    },
+    {
+      "batch": 249,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-249.json",
+        "sha256": "ef8e599a9e409217a958f02203f57f2e200eb598c76cd325e4b2322caf891d1b",
+        "bytes": 3002,
+        "mode": "0644"
+      },
+      "slots": [
+        498,
+        499
+      ]
+    },
+    {
+      "batch": 250,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-250.json",
+        "sha256": "49c705b0eb9f403c2f13f2e5e2f5a2c89b176b969a02cd30a89597e1325c175c",
+        "bytes": 3245,
+        "mode": "0644"
+      },
+      "slots": [
+        500,
+        501
+      ]
+    },
+    {
+      "batch": 251,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-251.json",
+        "sha256": "e7e84bce0b3653db12dd1227a92058fddd987146c5303c365764b69b0bb91c89",
+        "bytes": 3353,
+        "mode": "0644"
+      },
+      "slots": [
+        502,
+        503
+      ]
+    },
+    {
+      "batch": 252,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-252.json",
+        "sha256": "a2ea830d48d0e10c9937bb7c645d506fc18a949b311e90c566a6998596ea0b6c",
+        "bytes": 3127,
+        "mode": "0644"
+      },
+      "slots": [
+        504,
+        505
+      ]
+    },
+    {
+      "batch": 253,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-253.json",
+        "sha256": "09182b9b4ba2196ee4c2a78a957613f55677c98f886d33fb7568336a09b19746",
+        "bytes": 3235,
+        "mode": "0644"
+      },
+      "slots": [
+        506,
+        507
+      ]
+    },
+    {
+      "batch": 254,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-254.json",
+        "sha256": "c42501972473461098bc82ca1680df155d672b067c121ea5816fcd94dad7bb01",
+        "bytes": 2884,
+        "mode": "0644"
+      },
+      "slots": [
+        508,
+        509
+      ]
+    },
+    {
+      "batch": 255,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-255.json",
+        "sha256": "bcdf67f11f4356aab5f53fd7b48e553906ae4f748b359f5e53860274e36c23de",
+        "bytes": 3225,
+        "mode": "0644"
+      },
+      "slots": [
+        510,
+        511
+      ]
+    },
+    {
+      "batch": 256,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-256.json",
+        "sha256": "49636ee97651998914f5c7ab03b831f0c0829d7c63704537c4012757428cac10",
+        "bytes": 2874,
+        "mode": "0644"
+      },
+      "slots": [
+        512,
+        513
+      ]
+    },
+    {
+      "batch": 257,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-257.json",
+        "sha256": "e2c89f67f4522e89cbc4b7fd7b42606ba40a933adab51f8f9bf77f04461c5b14",
+        "bytes": 3117,
+        "mode": "0644"
+      },
+      "slots": [
+        514,
+        515
+      ]
+    },
+    {
+      "batch": 258,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-258.json",
+        "sha256": "4b971fbaadca30a76be1aa84d1485f5dbbbd82b04f9e160e80db67e0b7be9e5b",
+        "bytes": 3050,
+        "mode": "0644"
+      },
+      "slots": [
+        516,
+        517
+      ]
+    },
+    {
+      "batch": 259,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-259.json",
+        "sha256": "efc9222c1c78a68cae86d78f96e0038e46638d1efcb9a1bf8655ae7428d5ce4b",
+        "bytes": 3293,
+        "mode": "0644"
+      },
+      "slots": [
+        518,
+        519
+      ]
+    },
+    {
+      "batch": 260,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-260.json",
+        "sha256": "3e901194c0ef56460999ec6de28524fae8e804fee8e14e10b69475a18f2b9516",
+        "bytes": 3401,
+        "mode": "0644"
+      },
+      "slots": [
+        520,
+        521
+      ]
+    },
+    {
+      "batch": 261,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-261.json",
+        "sha256": "d8a9b7dab8adf9552ae97db6ca8e773226160129d383e9c7a88e14dab18122e5",
+        "bytes": 3265,
+        "mode": "0644"
+      },
+      "slots": [
+        522,
+        523
+      ]
+    },
+    {
+      "batch": 262,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-262.json",
+        "sha256": "b3571bdf8b0ba2cfae7458aaf8da90d56594617a19a9ad21917729294aa2ebda",
+        "bytes": 3373,
+        "mode": "0644"
+      },
+      "slots": [
+        524,
+        525
+      ]
+    },
+    {
+      "batch": 263,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-263.json",
+        "sha256": "de55e66ec5b6fc5194961d0e599896255192875655bbf96bacd231e3802b1991",
+        "bytes": 3022,
+        "mode": "0644"
+      },
+      "slots": [
+        526,
+        527
+      ]
+    },
+    {
+      "batch": 264,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-264.json",
+        "sha256": "a49db3a1725010073d5a2fc2634f071a02e1c540fecf850d668415625cf6d080",
+        "bytes": 3364,
+        "mode": "0644"
+      },
+      "slots": [
+        528,
+        529
+      ]
+    },
+    {
+      "batch": 265,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-265.json",
+        "sha256": "c804925729f32dce332dddcabdcca6bd3955a10469ba8c4f779abaed21beb136",
+        "bytes": 3013,
+        "mode": "0644"
+      },
+      "slots": [
+        530,
+        531
+      ]
+    },
+    {
+      "batch": 266,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-266.json",
+        "sha256": "cf98c4392123f604f735ff86e38a59999d7075b53ef58cf06675378d647ff59b",
+        "bytes": 3256,
+        "mode": "0644"
+      },
+      "slots": [
+        532,
+        533
+      ]
+    },
+    {
+      "batch": 267,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-267.json",
+        "sha256": "0506bf46242daa9763263a224bfe4e084ae62cfe23bb2b9bcbca2d159e36ea55",
+        "bytes": 2933,
+        "mode": "0644"
+      },
+      "slots": [
+        534,
+        535
+      ]
+    },
+    {
+      "batch": 268,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-268.json",
+        "sha256": "27496f77389e1328227ec7f47348d4bdcf91373d865b2ff889deb1d8a8a61b45",
+        "bytes": 3176,
+        "mode": "0644"
+      },
+      "slots": [
+        536,
+        537
+      ]
+    },
+    {
+      "batch": 269,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-269.json",
+        "sha256": "2341870e6b538a8d74a728e4f16d7d6a863b81620cf49d5ec1a8ed57b485dd59",
+        "bytes": 3284,
+        "mode": "0644"
+      },
+      "slots": [
+        538,
+        539
+      ]
+    },
+    {
+      "batch": 270,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-270.json",
+        "sha256": "f98bfe2d0b96f2dd54b52594e604942dd0b0ab657015b9b04343d7736523da55",
+        "bytes": 3193,
+        "mode": "0644"
+      },
+      "slots": [
+        540,
+        541
+      ]
+    },
+    {
+      "batch": 271,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-271.json",
+        "sha256": "4cb4144ecc940dee0fb7bb0db36163eaf240d3a40191526130f1e4a5138a4c66",
+        "bytes": 3301,
+        "mode": "0644"
+      },
+      "slots": [
+        542,
+        543
+      ]
+    },
+    {
+      "batch": 272,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-272.json",
+        "sha256": "68f66ce6b706bd0a26ab32735c1046092a15f4ef33d0e84a8c6d868f740a9a2f",
+        "bytes": 2950,
+        "mode": "0644"
+      },
+      "slots": [
+        544,
+        545
+      ]
+    },
+    {
+      "batch": 273,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-273.json",
+        "sha256": "9d7afd7da3502e81c811747f62f8c62f550e81c912945f38425f4b20ad723eba",
+        "bytes": 3243,
+        "mode": "0644"
+      },
+      "slots": [
+        546,
+        547
+      ]
+    },
+    {
+      "batch": 274,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-274.json",
+        "sha256": "507c5a28f198d4a58af405ccc0146a440520be141545c4abdcd0708f4ca60de9",
+        "bytes": 2892,
+        "mode": "0644"
+      },
+      "slots": [
+        548,
+        549
+      ]
+    },
+    {
+      "batch": 275,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-275.json",
+        "sha256": "14f1410cd2fd29f00ba433e0e4889fbc6c4d72ce95392b58bb8d336117fc35eb",
+        "bytes": 3135,
+        "mode": "0644"
+      },
+      "slots": [
+        550,
+        551
+      ]
+    },
+    {
+      "batch": 276,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-276.json",
+        "sha256": "ecc54b5d0d4c24c8a752c9bc8f2f70faf3b2229a00dd43e0bcb0bb1ebc90a790",
+        "bytes": 2930,
+        "mode": "0644"
+      },
+      "slots": [
+        552,
+        553
+      ]
+    },
+    {
+      "batch": 277,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-277.json",
+        "sha256": "e873db1316c0ffb2b474b237fb0fa8a3c89bf18142ae87de272a5899357fc2cb",
+        "bytes": 3173,
+        "mode": "0644"
+      },
+      "slots": [
+        554,
+        555
+      ]
+    },
+    {
+      "batch": 278,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-278.json",
+        "sha256": "5083e40a966ebc49a505655fe238b50ed2d0ea47210dbd65d6220922428f3d9d",
+        "bytes": 3281,
+        "mode": "0644"
+      },
+      "slots": [
+        556,
+        557
+      ]
+    },
+    {
+      "batch": 279,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-279.json",
+        "sha256": "4d30b55f4f762f9838b4701d270601b9b82d1cdab89ac8d69dc99f35fe2ca461",
+        "bytes": 3200,
+        "mode": "0644"
+      },
+      "slots": [
+        558,
+        559
+      ]
+    },
+    {
+      "batch": 280,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-280.json",
+        "sha256": "690f34d9a0f4daa7a25ebac3f45dbff069495bf255010d1d437a26f61da5a44c",
+        "bytes": 3308,
+        "mode": "0644"
+      },
+      "slots": [
+        560,
+        561
+      ]
+    },
+    {
+      "batch": 281,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-281.json",
+        "sha256": "99df462d5920ec1f5c677eb91ba52516aee4b8a47dbf2f3b9666cc83c3a1591d",
+        "bytes": 2957,
+        "mode": "0644"
+      },
+      "slots": [
+        562,
+        563
+      ]
+    },
+    {
+      "batch": 282,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-282.json",
+        "sha256": "3b530246977f25d212642a3575bea3f493eb1acdcb24c8b6ac51cbd63de3ff85",
+        "bytes": 3295,
+        "mode": "0644"
+      },
+      "slots": [
+        564,
+        565
+      ]
+    },
+    {
+      "batch": 283,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-283.json",
+        "sha256": "e914e199d2c611aa17f83ec34cd3b74a6ce0b953f4020243dd7e5cc1ae1b0ad8",
+        "bytes": 2944,
+        "mode": "0644"
+      },
+      "slots": [
+        566,
+        567
+      ]
+    },
+    {
+      "batch": 284,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-284.json",
+        "sha256": "19fe132cab7ce69f478f08d06cf224f5eaad69b6120c2a027eddabbd32c68eec",
+        "bytes": 3187,
+        "mode": "0644"
+      },
+      "slots": [
+        568,
+        569
+      ]
+    },
+    {
+      "batch": 285,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-285.json",
+        "sha256": "52f91cccc7dac5fc04adc63c66b07e38715d1d16f9bd60c18943ce811acee891",
+        "bytes": 3004,
+        "mode": "0644"
+      },
+      "slots": [
+        570,
+        571
+      ]
+    },
+    {
+      "batch": 286,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-286.json",
+        "sha256": "125cbd5438c168ddcc7cc704ec4d495647b56203db56bb894b658184ae665ba9",
+        "bytes": 3247,
+        "mode": "0644"
+      },
+      "slots": [
+        572,
+        573
+      ]
+    },
+    {
+      "batch": 287,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-287.json",
+        "sha256": "5444a48f9afe56dc966aefc57137e5e5e13e804a37d3f7f3be580b6c2bbec472",
+        "bytes": 3355,
+        "mode": "0644"
+      },
+      "slots": [
+        574,
+        575
+      ]
+    },
+    {
+      "batch": 288,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-288.json",
+        "sha256": "0a9a1299fa05e90d64390997aba61340bea240011dd733d8aab26b041059b014",
+        "bytes": 3547,
+        "mode": "0644"
+      },
+      "slots": [
+        576,
+        577
+      ]
+    },
+    {
+      "batch": 289,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-289.json",
+        "sha256": "0d6d4121b6a37ccc337d54d8e41b269e01dfa8e36908ed77a54e8d329a10c721",
+        "bytes": 3655,
+        "mode": "0644"
+      },
+      "slots": [
+        578,
+        579
+      ]
+    },
+    {
+      "batch": 290,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-290.json",
+        "sha256": "d8739da62e2412d010cf0db12a7abd483d2c3745b60ef75b514c4353efcae6d0",
+        "bytes": 3304,
+        "mode": "0644"
+      },
+      "slots": [
+        580,
+        581
+      ]
+    },
+    {
+      "batch": 291,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-291.json",
+        "sha256": "ffbb72a7fd5a00b3a7d60b3609e125ff976c61db7e78289bb51f36e73db85ab0",
+        "bytes": 3758,
+        "mode": "0644"
+      },
+      "slots": [
+        582,
+        583
+      ]
+    },
+    {
+      "batch": 292,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-292.json",
+        "sha256": "72c1b5032956916ff771bf27de8b1caae7bf91663f267b7c853866051380211d",
+        "bytes": 3407,
+        "mode": "0644"
+      },
+      "slots": [
+        584,
+        585
+      ]
+    },
+    {
+      "batch": 293,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-293.json",
+        "sha256": "1b1936f8872eb56e6e178799d88ee5ad4928ccf38cb7f2b1272083fd7d9c4353",
+        "bytes": 3650,
+        "mode": "0644"
+      },
+      "slots": [
+        586,
+        587
+      ]
+    },
+    {
+      "batch": 294,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-294.json",
+        "sha256": "ea93769e8a21419afcf9437e6465107014caf22c296bb0df06b319537ec54034",
+        "bytes": 3044,
+        "mode": "0644"
+      },
+      "slots": [
+        588,
+        589
+      ]
+    },
+    {
+      "batch": 295,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-295.json",
+        "sha256": "3b8550370bd910425a5b0db6cc9da4653a8c9c957e13cab18cb82b81cc51efb3",
+        "bytes": 3287,
+        "mode": "0644"
+      },
+      "slots": [
+        590,
+        591
+      ]
+    },
+    {
+      "batch": 296,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-296.json",
+        "sha256": "e6aac8eeca0bfa16a497375de620511c0d6aefbf82f25714bea5e2e8b92af3d2",
+        "bytes": 3395,
+        "mode": "0644"
+      },
+      "slots": [
+        592,
+        593
+      ]
+    },
+    {
+      "batch": 297,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-297.json",
+        "sha256": "21a0455dfc6922f3539fa87c34c1aaf45aa030ff6447d703b0ce7355be2d0a38",
+        "bytes": 3442,
+        "mode": "0644"
+      },
+      "slots": [
+        594,
+        595
+      ]
+    },
+    {
+      "batch": 298,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-298.json",
+        "sha256": "e98f141cbfe6df1cd64d003dca087f2dcaf1a4639a0e14eaf6face8402e80cb9",
+        "bytes": 3550,
+        "mode": "0644"
+      },
+      "slots": [
+        596,
+        597
+      ]
+    },
+    {
+      "batch": 299,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-299.json",
+        "sha256": "83d388683a1529bb680019669fb9e73432f1aa525f52368f1160116aec9949a4",
+        "bytes": 3199,
+        "mode": "0644"
+      },
+      "slots": [
+        598,
+        599
+      ]
+    },
+    {
+      "batch": 300,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-300.json",
+        "sha256": "8ac6d059266202a46bec3d7b9a39033f41a480d6cc5afd78baefad7efa7f8dc6",
+        "bytes": 3382,
+        "mode": "0644"
+      },
+      "slots": [
+        600,
+        601
+      ]
+    },
+    {
+      "batch": 301,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-301.json",
+        "sha256": "bf27421dc6a957fe46ee0de1147d0deaf08173984ea400cbe17b61885b6a6bf6",
+        "bytes": 3031,
+        "mode": "0644"
+      },
+      "slots": [
+        602,
+        603
+      ]
+    },
+    {
+      "batch": 302,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-302.json",
+        "sha256": "ca58ded44cd66b2f13894085ea27410d5eb915bdb82e9af939661f7ec3647f56",
+        "bytes": 3274,
+        "mode": "0644"
+      },
+      "slots": [
+        604,
+        605
+      ]
+    },
+    {
+      "batch": 303,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-303.json",
+        "sha256": "6c3e208afb770c170ff2880256322a52c96a85d6d52a71b1c6b0d34fa74ad803",
+        "bytes": 3111,
+        "mode": "0644"
+      },
+      "slots": [
+        606,
+        607
+      ]
+    },
+    {
+      "batch": 304,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-304.json",
+        "sha256": "c2ac6f43c77eaf573604bf80389ebae101ed11bf3f0df157719c1886e1da7c27",
+        "bytes": 3354,
+        "mode": "0644"
+      },
+      "slots": [
+        608,
+        609
+      ]
+    },
+    {
+      "batch": 305,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-305.json",
+        "sha256": "68a11069b0e7b8648fe556f18934837adb48eb7a1bd189ab139dcc2f7717a51f",
+        "bytes": 3462,
+        "mode": "0644"
+      },
+      "slots": [
+        610,
+        611
+      ]
+    },
+    {
+      "batch": 306,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-306.json",
+        "sha256": "ac3ff58f2273f824828ecd5cd9acffa7f884834c0f805c8f24a5ab220a844e90",
+        "bytes": 3435,
+        "mode": "0644"
+      },
+      "slots": [
+        612,
+        613
+      ]
+    },
+    {
+      "batch": 307,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-307.json",
+        "sha256": "a0efc1e53e8e0ff3cceb2e7c76ebf4bf3b89e030e08d27488f0f808ec766c0c4",
+        "bytes": 3543,
+        "mode": "0644"
+      },
+      "slots": [
+        614,
+        615
+      ]
+    },
+    {
+      "batch": 308,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-308.json",
+        "sha256": "26e04fef2d080aafc6d9abab5c5f81158524935002ff2329d8652f8433d1558a",
+        "bytes": 3192,
+        "mode": "0644"
+      },
+      "slots": [
+        616,
+        617
+      ]
+    },
+    {
+      "batch": 309,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-309.json",
+        "sha256": "1cba1611c77dc14819e5a509e73ea927979d539d33cd6bf5720da0d6324b0499",
+        "bytes": 3641,
+        "mode": "0644"
+      },
+      "slots": [
+        618,
+        619
+      ]
+    },
+    {
+      "batch": 310,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-310.json",
+        "sha256": "c4298625a9dcb197b167e66db00430ee7131a2be284cbdb28e65a9a56650a501",
+        "bytes": 3290,
+        "mode": "0644"
+      },
+      "slots": [
+        620,
+        621
+      ]
+    },
+    {
+      "batch": 311,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-311.json",
+        "sha256": "fde1e1193288050dd37e55ae826acc07faa1b0ab9d73ca578f8fd22baab29597",
+        "bytes": 3533,
+        "mode": "0644"
+      },
+      "slots": [
+        622,
+        623
+      ]
+    },
+    {
+      "batch": 312,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-312.json",
+        "sha256": "dca8d6f5d81fee4852cffb1c58e19185d19b778feffafa639776330b80666e1f",
+        "bytes": 3135,
+        "mode": "0644"
+      },
+      "slots": [
+        624,
+        625
+      ]
+    },
+    {
+      "batch": 313,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-313.json",
+        "sha256": "7bcbd4c4ba108b750a00a66f687499b042f2180a47439777ca25991868bb4d01",
+        "bytes": 3378,
+        "mode": "0644"
+      },
+      "slots": [
+        626,
+        627
+      ]
+    },
+    {
+      "batch": 314,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-314.json",
+        "sha256": "0af80ff9800497479c65b9ad19ed52e57f7defa3a10d31674ddd5581ffc72a4f",
+        "bytes": 3486,
+        "mode": "0644"
+      },
+      "slots": [
+        628,
+        629
+      ]
+    },
+    {
+      "batch": 315,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-315.json",
+        "sha256": "9e91c427fc30a0d0a86c57239320dadd59a01431cf4eedc2fe0ce2b98fafaa7c",
+        "bytes": 3481,
+        "mode": "0644"
+      },
+      "slots": [
+        630,
+        631
+      ]
+    },
+    {
+      "batch": 316,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-316.json",
+        "sha256": "e9aa91658ddcdfa3727df49067e74738a106c41978822121c19edaca51d66d79",
+        "bytes": 3589,
+        "mode": "0644"
+      },
+      "slots": [
+        632,
+        633
+      ]
+    },
+    {
+      "batch": 317,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-317.json",
+        "sha256": "82a0c0f4b7e0c84ad699369e70bd903218a39c85d47dacfa3795ac49d569e8e9",
+        "bytes": 3238,
+        "mode": "0644"
+      },
+      "slots": [
+        634,
+        635
+      ]
+    },
+    {
+      "batch": 318,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-318.json",
+        "sha256": "eafc6699d7f4b8bcbc58c8d9967fd208968066caf8086bffd9cdf280c0e3a266",
+        "bytes": 3367,
+        "mode": "0644"
+      },
+      "slots": [
+        636,
+        637
+      ]
+    },
+    {
+      "batch": 319,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-319.json",
+        "sha256": "7a1887b66f723d734822ff35ce35714143dabd3e1df1750a0b77d62fabd76188",
+        "bytes": 3016,
+        "mode": "0644"
+      },
+      "slots": [
+        638,
+        639
+      ]
+    },
+    {
+      "batch": 320,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-320.json",
+        "sha256": "6486158bb2039bc0d565c4dd8b2291eb1c7d6d337eb908ab39927082d863581d",
+        "bytes": 3259,
+        "mode": "0644"
+      },
+      "slots": [
+        640,
+        641
+      ]
+    },
+    {
+      "batch": 321,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-321.json",
+        "sha256": "59fba7c9634836f8c5a39a90e7ffcbf75978074423d7c7bc61ce9167648a75d2",
+        "bytes": 3241,
+        "mode": "0644"
+      },
+      "slots": [
+        642,
+        643
+      ]
+    },
+    {
+      "batch": 322,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-322.json",
+        "sha256": "33edcd0bba73148fa66972c20867e3bf853f1eaeb29a2c046e4999be6cd8cdaa",
+        "bytes": 3484,
+        "mode": "0644"
+      },
+      "slots": [
+        644,
+        645
+      ]
+    },
+    {
+      "batch": 323,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-323.json",
+        "sha256": "2ccb46e7b9593853b77bccc27faf29c24cf0e2d8cf644442844d2fc1c1d35caf",
+        "bytes": 3592,
+        "mode": "0644"
+      },
+      "slots": [
+        646,
+        647
+      ]
+    },
+    {
+      "batch": 324,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-324.json",
+        "sha256": "d574e1a6c2b854b252f9b3f83746c1193afc66c88af16efb1d1da5bd91df728e",
+        "bytes": 3316,
+        "mode": "0644"
+      },
+      "slots": [
+        648,
+        649
+      ]
+    },
+    {
+      "batch": 325,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-325.json",
+        "sha256": "4e613b145f95365ca4c44bfdc3c6e9ecb8c59e016e0426398092534a6efff344",
+        "bytes": 3424,
+        "mode": "0644"
+      },
+      "slots": [
+        650,
+        651
+      ]
+    },
+    {
+      "batch": 326,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-326.json",
+        "sha256": "1df653a00018945b6b36f0ee22f05f2b08c63d64b3a265a042f453648a099cb7",
+        "bytes": 3073,
+        "mode": "0644"
+      },
+      "slots": [
+        652,
+        653
+      ]
+    },
+    {
+      "batch": 327,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-327.json",
+        "sha256": "952d945137485a982fbd41f4d738b4cbc4477c9209b20da2cb0c6c68928c4fa2",
+        "bytes": 3585,
+        "mode": "0644"
+      },
+      "slots": [
+        654,
+        655
+      ]
+    },
+    {
+      "batch": 328,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-328.json",
+        "sha256": "12433dd6895c0b0016ad33e0121e916969a5b1b7f579d8dadeb4729a6954bbd8",
+        "bytes": 3234,
+        "mode": "0644"
+      },
+      "slots": [
+        656,
+        657
+      ]
+    },
+    {
+      "batch": 329,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-329.json",
+        "sha256": "232a19865cf241ec74b7908494e2567721afbf4173314eff10a922448fd9a19f",
+        "bytes": 3477,
+        "mode": "0644"
+      },
+      "slots": [
+        658,
+        659
+      ]
+    },
+    {
+      "batch": 330,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-330.json",
+        "sha256": "58bbb3211bd57077492447a6cec3fa268e691127fe24cce9f36cd3c5d7278b37",
+        "bytes": 3158,
+        "mode": "0644"
+      },
+      "slots": [
+        660,
+        661
+      ]
+    },
+    {
+      "batch": 331,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-331.json",
+        "sha256": "b81b7b65bb760e687e1265df17ac98a570c8dc3dcac15ffb4841f9ca2152d8b7",
+        "bytes": 3401,
+        "mode": "0644"
+      },
+      "slots": [
+        662,
+        663
+      ]
+    },
+    {
+      "batch": 332,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-332.json",
+        "sha256": "cbe8170ad5c9344e034dafab1c2e87f9dcfe9cd13368e6447fe8029813b4e4cf",
+        "bytes": 3509,
+        "mode": "0644"
+      },
+      "slots": [
+        664,
+        665
+      ]
+    },
+    {
+      "batch": 333,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-333.json",
+        "sha256": "530fb818c8e1e1de406628344f2fb37408d0521b3c8cc865e42d5f30006fa457",
+        "bytes": 3239,
+        "mode": "0644"
+      },
+      "slots": [
+        666,
+        667
+      ]
+    },
+    {
+      "batch": 334,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-334.json",
+        "sha256": "7c6e2b9f3cc7c44b2fd02cc497b3c0603e84c35dd971af17cb516bc1476a712d",
+        "bytes": 3347,
+        "mode": "0644"
+      },
+      "slots": [
+        668,
+        669
+      ]
+    },
+    {
+      "batch": 335,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-335.json",
+        "sha256": "cf9f89dd1d0f39eb13d08d28b43abd15a921fd82657be6ca7b8d1e9b1dfedfff",
+        "bytes": 2996,
+        "mode": "0644"
+      },
+      "slots": [
+        670,
+        671
+      ]
+    },
+    {
+      "batch": 336,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-336.json",
+        "sha256": "115f7c9c2a2b3808447371802c46fc68e3c3e486a778b486f462e7bb53a8a60f",
+        "bytes": 3533,
+        "mode": "0644"
+      },
+      "slots": [
+        672,
+        673
+      ]
+    },
+    {
+      "batch": 337,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-337.json",
+        "sha256": "3d348157ea9c3a67e2913af47f2d906b0389500d911c4170d3ccfbeeca3b0921",
+        "bytes": 3182,
+        "mode": "0644"
+      },
+      "slots": [
+        674,
+        675
+      ]
+    },
+    {
+      "batch": 338,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-338.json",
+        "sha256": "60b63031ddb99da5fabd61f051eeace571dcb626f633dc6614a70fb24445e402",
+        "bytes": 3425,
+        "mode": "0644"
+      },
+      "slots": [
+        676,
+        677
+      ]
+    },
+    {
+      "batch": 339,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-339.json",
+        "sha256": "c74e8f15c8c4ad88a4658d87e0d6667457eef6158df1de497ea3a4ccddd4d41d",
+        "bytes": 3247,
+        "mode": "0644"
+      },
+      "slots": [
+        678,
+        679
+      ]
+    },
+    {
+      "batch": 340,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-340.json",
+        "sha256": "f3b18b2c06b01b718840d763100a5780a014e0af2235b19e217c2e344603187e",
+        "bytes": 3490,
+        "mode": "0644"
+      },
+      "slots": [
+        680,
+        681
+      ]
+    },
+    {
+      "batch": 341,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-341.json",
+        "sha256": "f152cb07c68fee75dbfd6693b07cd646e4a767fc33fcc88ad6c0cda610036186",
+        "bytes": 3598,
+        "mode": "0644"
+      },
+      "slots": [
+        682,
+        683
+      ]
+    },
+    {
+      "batch": 342,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-342.json",
+        "sha256": "475f532b2fd76c6304ecd6df1e9eb268832aeb2eacc35e6f639d61213a3d217f",
+        "bytes": 3472,
+        "mode": "0644"
+      },
+      "slots": [
+        684,
+        685
+      ]
+    },
+    {
+      "batch": 343,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-343.json",
+        "sha256": "4ec894f291810ce63537f57f1ca02b1bb8c2f3c3571908fb110806cefd5a4a25",
+        "bytes": 3580,
+        "mode": "0644"
+      },
+      "slots": [
+        686,
+        687
+      ]
+    },
+    {
+      "batch": 344,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-344.json",
+        "sha256": "c01af3aeaf1a9398fd356f5076f175818767fc4e24505bf13603c9145d2ed903",
+        "bytes": 3229,
+        "mode": "0644"
+      },
+      "slots": [
+        688,
+        689
+      ]
+    },
+    {
+      "batch": 345,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-345.json",
+        "sha256": "e3d90fc7385f97d262216a8a171ec529a6494e8e0fc93cf574b6ae2a763ecff7",
+        "bytes": 3465,
+        "mode": "0644"
+      },
+      "slots": [
+        690,
+        691
+      ]
+    },
+    {
+      "batch": 346,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-346.json",
+        "sha256": "fdfde849699214b87001efe0781533f531b04a6602ac26c6ae43afeba3f48732",
+        "bytes": 3114,
+        "mode": "0644"
+      },
+      "slots": [
+        692,
+        693
+      ]
+    },
+    {
+      "batch": 347,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-347.json",
+        "sha256": "1c97c630a4664ed9ffc78b9a9d582aadf166e3f82b79a456a81aead254c36350",
+        "bytes": 3357,
+        "mode": "0644"
+      },
+      "slots": [
+        694,
+        695
+      ]
+    },
+    {
+      "batch": 348,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-348.json",
+        "sha256": "7b88e8c223233b630932101848d5a5dd7e5730ef7eca414335b268b230a45607",
+        "bytes": 2998,
+        "mode": "0644"
+      },
+      "slots": [
+        696,
+        697
+      ]
+    },
+    {
+      "batch": 349,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-349.json",
+        "sha256": "665cae111d7c423d3dd80748d8ef4d448f6de9c19549084d02e397ff23b98b2d",
+        "bytes": 3241,
+        "mode": "0644"
+      },
+      "slots": [
+        698,
+        699
+      ]
+    },
+    {
+      "batch": 350,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-350.json",
+        "sha256": "2cd14b2f313c9d326c9fed966f6fb2516a9bb66b4b050be5deddeb7c6753cab5",
+        "bytes": 3349,
+        "mode": "0644"
+      },
+      "slots": [
+        700,
+        701
+      ]
+    },
+    {
+      "batch": 351,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-351.json",
+        "sha256": "78ea1d946de47ccde9b338bb825b76437d701207dae6338f81b0bd1497b09125",
+        "bytes": 3360,
+        "mode": "0644"
+      },
+      "slots": [
+        702,
+        703
+      ]
+    },
+    {
+      "batch": 352,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-352.json",
+        "sha256": "8f18e864af4cfe638c77969eb7daa09463b6d2b5a8af739d308627b708923340",
+        "bytes": 3468,
+        "mode": "0644"
+      },
+      "slots": [
+        704,
+        705
+      ]
+    },
+    {
+      "batch": 353,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-353.json",
+        "sha256": "729f1660738b09a5809d821ad749c54a3b1e34585653c301a2043bb955287d96",
+        "bytes": 3117,
+        "mode": "0644"
+      },
+      "slots": [
+        706,
+        707
+      ]
+    },
+    {
+      "batch": 354,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-354.json",
+        "sha256": "9357f7e77496f4ecf59ccbf1e51afc6bb574677b5d0f797c75d91b221d700cde",
+        "bytes": 3537,
+        "mode": "0644"
+      },
+      "slots": [
+        708,
+        709
+      ]
+    },
+    {
+      "batch": 355,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-355.json",
+        "sha256": "569634a7a00a7e8c6f31d830a087fcceaac0129716fbbc065f865ccf6f3e8a8b",
+        "bytes": 3186,
+        "mode": "0644"
+      },
+      "slots": [
+        710,
+        711
+      ]
+    },
+    {
+      "batch": 356,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-356.json",
+        "sha256": "3d92385db9ad8821f88e4ac32229d06f8ecf7460a218bb211bfdec786cef6152",
+        "bytes": 3429,
+        "mode": "0644"
+      },
+      "slots": [
+        712,
+        713
+      ]
+    },
+    {
+      "batch": 357,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-357.json",
+        "sha256": "425f1c184f19cebe054b2e2956f95c59cc5762e3afc8e4f725aaad861cbb1a8d",
+        "bytes": 3295,
+        "mode": "0644"
+      },
+      "slots": [
+        714,
+        715
+      ]
+    },
+    {
+      "batch": 358,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-358.json",
+        "sha256": "8b028d0d4d59034547a4f340ed0ce6cd845572c9054e4181cf7c4f5f3700462b",
+        "bytes": 3538,
+        "mode": "0644"
+      },
+      "slots": [
+        716,
+        717
+      ]
+    },
+    {
+      "batch": 359,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-359.json",
+        "sha256": "ac669b5f19da691abff88f9f79cc322d408db3f2f60963801ad94c64247978b6",
+        "bytes": 3646,
+        "mode": "0644"
+      },
+      "slots": [
+        718,
+        719
+      ]
+    },
+    {
+      "batch": 360,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-360.json",
+        "sha256": "dca2c247e5d2282ac47d161210650d4c7b8ce52dde60cc9ac47551e33fe779eb",
+        "bytes": 3467,
+        "mode": "0644"
+      },
+      "slots": [
+        720,
+        721
+      ]
+    },
+    {
+      "batch": 361,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-361.json",
+        "sha256": "93f8d4f6d259177f44aa7657b2135e3d9f962e211ecb0aa5136fb2ccbfaea857",
+        "bytes": 3575,
+        "mode": "0644"
+      },
+      "slots": [
+        722,
+        723
+      ]
+    },
+    {
+      "batch": 362,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-362.json",
+        "sha256": "1214d41f4dcc7a6b01c0c720d39299d471074c30ebfbff48d67412fc34f1c0b6",
+        "bytes": 3224,
+        "mode": "0644"
+      },
+      "slots": [
+        724,
+        725
+      ]
+    },
+    {
+      "batch": 363,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-363.json",
+        "sha256": "aa7d8e5644b3df882b6c51562898249fe5f0d6e250be00c8dc94a7026b4741dd",
+        "bytes": 3424,
+        "mode": "0644"
+      },
+      "slots": [
+        726,
+        727
+      ]
+    },
+    {
+      "batch": 364,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-364.json",
+        "sha256": "c915b3bacbe366080c1e4f323242bc5bba12a26ad24aee98ecda2ccab0a2806b",
+        "bytes": 3073,
+        "mode": "0644"
+      },
+      "slots": [
+        728,
+        729
+      ]
+    },
+    {
+      "batch": 365,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-365.json",
+        "sha256": "05d8d98dd93bb1172d9326036082ccbe6b1f8265505230fe1178d5ece2ed8429",
+        "bytes": 3316,
+        "mode": "0644"
+      },
+      "slots": [
+        730,
+        731
+      ]
+    },
+    {
+      "batch": 366,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-366.json",
+        "sha256": "4f091022b2d612b2181e36ec666ee595a650626812833a42beb253ea92763e39",
+        "bytes": 3054,
+        "mode": "0644"
+      },
+      "slots": [
+        732,
+        733
+      ]
+    },
+    {
+      "batch": 367,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-367.json",
+        "sha256": "2022ff5e9c5a792f207347f88dfc8ab61dae294a9ff18025d9b6cc2a8a31475a",
+        "bytes": 3297,
+        "mode": "0644"
+      },
+      "slots": [
+        734,
+        735
+      ]
+    },
+    {
+      "batch": 368,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-368.json",
+        "sha256": "8f4ca23013f770fa517fac137929c51a60ee1868bf966ba001176549df39336d",
+        "bytes": 3405,
+        "mode": "0644"
+      },
+      "slots": [
+        736,
+        737
+      ]
+    },
+    {
+      "batch": 369,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-369.json",
+        "sha256": "be72ceaa6f42567acf6cb4267f4aa008c9fec5f381617f6c9052de8f4b279d28",
+        "bytes": 3333,
+        "mode": "0644"
+      },
+      "slots": [
+        738,
+        739
+      ]
+    },
+    {
+      "batch": 370,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-370.json",
+        "sha256": "d5f728fe5f857f5a17f9a6a33da3683b8f014b754a7eb5a7bcbee20bf95432b1",
+        "bytes": 3441,
+        "mode": "0644"
+      },
+      "slots": [
+        740,
+        741
+      ]
+    },
+    {
+      "batch": 371,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-371.json",
+        "sha256": "deed35d3f3e3cf9899cb7e794775695a97023dce4f571b72f9ebdd0228d0f021",
+        "bytes": 3090,
+        "mode": "0644"
+      },
+      "slots": [
+        742,
+        743
+      ]
+    },
+    {
+      "batch": 372,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-372.json",
+        "sha256": "85acbae6b906d82af423f3602fac75856047c21503622b944bd43bf077a07b27",
+        "bytes": 3359,
+        "mode": "0644"
+      },
+      "slots": [
+        744,
+        745
+      ]
+    },
+    {
+      "batch": 373,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-373.json",
+        "sha256": "06d774593e32248983fd3ff79a03be6ad8f38ed41da496c6ea8140daa61e4870",
+        "bytes": 3008,
+        "mode": "0644"
+      },
+      "slots": [
+        746,
+        747
+      ]
+    },
+    {
+      "batch": 374,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-374.json",
+        "sha256": "a558bfbc74f9434750942659afb388d5e30664c76ab89a3f25a7fe638eb5b5d4",
+        "bytes": 3251,
+        "mode": "0644"
+      },
+      "slots": [
+        748,
+        749
+      ]
+    },
+    {
+      "batch": 375,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-375.json",
+        "sha256": "56db04a5ce5f4846cdbbf0e679218d4042a0820da4d12375acc96d6d283e418c",
+        "bytes": 3063,
+        "mode": "0644"
+      },
+      "slots": [
+        750,
+        751
+      ]
+    },
+    {
+      "batch": 376,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-376.json",
+        "sha256": "8b7bce9e99ef75a8965cdf1df0a228738c89f8c00bdc5d09024377697ab6a40f",
+        "bytes": 3306,
+        "mode": "0644"
+      },
+      "slots": [
+        752,
+        753
+      ]
+    },
+    {
+      "batch": 377,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-377.json",
+        "sha256": "707fa96b57e7062e6aa6d439e001f920c502d78bac956f093fb59586a26fc2e3",
+        "bytes": 3414,
+        "mode": "0644"
+      },
+      "slots": [
+        754,
+        755
+      ]
+    },
+    {
+      "batch": 378,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-378.json",
+        "sha256": "f958be8d3bf3504c270a048ccb0419983e00af77fa2b61cf7ebbca4716be8666",
+        "bytes": 3418,
+        "mode": "0644"
+      },
+      "slots": [
+        756,
+        757
+      ]
+    },
+    {
+      "batch": 379,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-379.json",
+        "sha256": "c1327ce763421a3e9092b21158b8fab7789f094ede17f62c9a3f982badf1bb1f",
+        "bytes": 3526,
+        "mode": "0644"
+      },
+      "slots": [
+        758,
+        759
+      ]
+    },
+    {
+      "batch": 380,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-380.json",
+        "sha256": "5199e5c8244d8902d706f70ce0cc2d420027c67cfa16464509a403c851dd4112",
+        "bytes": 3175,
+        "mode": "0644"
+      },
+      "slots": [
+        760,
+        761
+      ]
+    },
+    {
+      "batch": 381,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-381.json",
+        "sha256": "4b6cd3e537a3a128b20307599ac5fdaa94fcba25751c44e2bc97de1a387c409a",
+        "bytes": 3415,
+        "mode": "0644"
+      },
+      "slots": [
+        762,
+        763
+      ]
+    },
+    {
+      "batch": 382,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-382.json",
+        "sha256": "3aac0b2ef7385b937d76052000a934d0359826f324c6a78da14123ae46bae15d",
+        "bytes": 3064,
+        "mode": "0644"
+      },
+      "slots": [
+        764,
+        765
+      ]
+    },
+    {
+      "batch": 383,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/two-ai-configs-v1/batch-383.json",
+        "sha256": "fd0905e207324bc7dbf860739f7711c9ed53a41c720da5466ad883bb2725b35c",
+        "bytes": 3307,
+        "mode": "0644"
+      },
+      "slots": [
+        766,
+        767
+      ]
+    }
+  ],
+  "planned_slots": 768
+}

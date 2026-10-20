@@ -1,0 +1,67 @@
+{
+  "schema": "quoridor.research.phase-support.v1",
+  "issue": "quoridor-4lc.374",
+  "status": "ISSUED_CURRENT_TWO_AI_RUNTIME",
+  "issued_at": "2026-10-13T09:23:19.289778+00:00",
+  "integration_owner": "codex:01a1153d-7900-7740-837f-c300ca54764f",
+  "previous_issued_support": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/support-two-ai-runtime-v1.json",
+    "sha256": "c74ef29d4e1ba00a2270ddb72b6ba673885d6aceb8378851c1abf1eadebeb7ab",
+    "bytes": 2447,
+    "mode": "0644"
+  },
+  "resources": {
+    "CPU": 3,
+    "threads": 1,
+    "GPU": 0,
+    "family_RAM_B": 3221225472,
+    "controller_B": 67108864,
+    "controller_included": true,
+    "host_reserve_B": 4294967296,
+    "AI_cpu_cores": [
+      1,
+      4
+    ],
+    "management_cpu_core": 6,
+    "simultaneous_games": 1
+  },
+  "global_cap_B": 50000000000,
+  "storage": {
+    "ordinary_work_budget": null,
+    "large_primary_retained_output_and_controls_B": 809500672,
+    "scope": "Existing772MiB accepted primary continuation whole; no independent executable/target/private/TMP subcaps or historical reservation floors. Native per-pair output16MiB/scientific retained630784 remain. Actual directed post-work retention and declared aggregate for substantial output; current FS free required. Historical budget/peak/fees stay records, not actual occupancy."
+  },
+  "approved_scope": {
+    "unentered_batches": [
+      2,
+      383
+    ],
+    "games": 764,
+    "entered_FAILED_no_replay": [
+      0,
+      1,
+      2
+    ],
+    "original_slots": 768,
+    "diagnostic_parents": 78,
+    "diagnostic_proposals": 234,
+    "missing": 18,
+    "partial_pair_no_refill": [
+      3
+    ]
+  },
+  "scientific_method": "Unchanged selected models/math/inputs/rules/100ms authority receipt/5ms reserve/OFF/seed; new CPU/thread timing cohort explicitly recorded. No inference prediction/qualification/calibration requests.",
+  "artifact": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner374-capture349-raw-v1",
+    "sha256": "dd199514dd90488373f54a7e0289c1eaae6fe59afab6508ea6141695e864d4e6",
+    "bytes": 9472400,
+    "mode": "0755"
+  },
+  "build_manifest": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/arena-entry-v1/compatible-build-v2/operation-v1/manifest.json",
+    "sha256": "5d7b6cec8f2d133707615e9066c2867b59bcc51be948d16291cf8d55b9dd57e3",
+    "bytes": 40762,
+    "mode": "0644"
+  },
+  "ready_admission": null
+}

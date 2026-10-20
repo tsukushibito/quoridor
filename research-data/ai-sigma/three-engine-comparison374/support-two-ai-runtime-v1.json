@@ -1,0 +1,63 @@
+{
+  "schema": "quoridor.research.phase-support.v1",
+  "issue": "quoridor-4lc.374",
+  "status": "ISSUED_CURRENT_TWO_AI_RUNTIME",
+  "issued_at": "2026-10-13T07:59:43.814010+00:00",
+  "integration_owner": "codex:01a1153d-7900-7740-837f-c300ca54764f",
+  "previous_issued_support": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/support-v2.json",
+    "sha256": "4a3a5d390eef2a70d280121d98644de98fc31f9547d4b28240245b7f870f1e3c",
+    "bytes": 6513,
+    "mode": "0644"
+  },
+  "resources": {
+    "CPU": 3,
+    "threads": 1,
+    "GPU": 0,
+    "family_RAM_B": 3221225472,
+    "controller_B": 67108864,
+    "controller_included": true,
+    "host_reserve_B": 4294967296,
+    "AI_cpu_cores": [
+      1,
+      4
+    ],
+    "management_cpu_core": 6,
+    "simultaneous_games": 1
+  },
+  "global_cap_B": 50000000000,
+  "storage": {
+    "ordinary_work_budget": null,
+    "large_primary_retained_output_and_controls_B": 809500672,
+    "scope": "Existing772MiB accepted primary continuation whole; no independent executable/target/private/TMP subcaps or historical reservation floors. Native per-pair output16MiB/scientific retained630784 remain. Actual directed post-work retention and declared aggregate for substantial output; current FS free required. Historical budget/peak/fees stay records, not actual occupancy."
+  },
+  "approved_scope": {
+    "unentered_batches": [
+      1,
+      383
+    ],
+    "games": 766,
+    "entered_FAILED_no_replay": [
+      0,
+      1
+    ],
+    "original_slots": 768,
+    "diagnostic_parents": 78,
+    "diagnostic_proposals": 234,
+    "missing": 18
+  },
+  "scientific_method": "Unchanged selected models/math/inputs/rules/100ms authority receipt/5ms reserve/OFF/seed; new CPU/thread timing cohort explicitly recorded. No inference prediction/qualification/calibration requests.",
+  "artifact": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner374-two-ai349-measure-v1",
+    "sha256": "742c817d71aae38ac09350264df7f4fb1a1dc73abba1b68a0bba2b13627dd692",
+    "bytes": 9460736,
+    "mode": "0755"
+  },
+  "build_manifest": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/two-ai-composition-v1/build-v4/operation-v1/manifest.json",
+    "sha256": "85d6019b1b1760b92ca6033630cfb235da004a2e0d0e61ad12713808795846de",
+    "bytes": 44783,
+    "mode": "0644"
+  },
+  "ready_admission": null
+}

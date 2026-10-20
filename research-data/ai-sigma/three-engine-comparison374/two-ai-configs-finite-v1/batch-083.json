@@ -1,0 +1,112 @@
+{
+  "ruleset": "standard_2p_threefold",
+  "run_id": "374-primary-batch-083-v1",
+  "output": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-output-v1/batch-083/data",
+  "games": 2,
+  "workers": 1,
+  "active_games": 1,
+  "max_batch": 1,
+  "simulations": 64,
+  "max_plies": 200,
+  "seed": 32710001,
+  "opening_plies": 0,
+  "openings": [],
+  "cpu_cores": [1, 4],
+  "inference_cpu_core": null,
+  "engines": [
+    {
+      "kind": "distance",
+      "model": null,
+      "distance_a": 0.0,
+      "distance_b": 8.0,
+      "depth": 64,
+      "max_nodes": 1000000,
+      "time_ms": 100,
+      "simd": false
+    },
+    {
+      "kind": "nnue",
+      "model": "/workspaces/quoridor/.worktree/assets/checkpoints/public-no-bypass-v1/candidate-v1/output/best-model/manifest.json",
+      "distance_a": 0.0,
+      "distance_b": 8.0,
+      "depth": 64,
+      "max_nodes": 1000000,
+      "time_ms": 100,
+      "simd": false
+    }
+  ],
+  "inference": null,
+  "wall_seconds": null,
+  "host_ram_reserve": 4294967296,
+  "max_memory_bytes": 3154116608,
+  "max_output_bytes": 16777216,
+  "pause_file": null,
+  "deadline_unix_ms": 0,
+  "train_games": null,
+  "validation_games": null,
+  "temperature": 1.0,
+  "mcts_max_nodes": 200000,
+  "mcts_max_bytes": 268435456,
+  "cycle": null,
+  "arena": {
+    "comparison": "whole_wall_time",
+    "disable_continuation_static_ordering": true,
+    "clock_policy": "strict_unknown",
+    "return_reserve_ms": 5,
+    "tt_entries": 4096,
+    "bootstrap_seed": 37420261012,
+    "bootstrap_resamples": 10000,
+    "evaluator_sha256": [
+      "c83db10ba1403b7fc3417e73e14cc5f1a1040c65ac4ac23a5f5703abbb5aa887",
+      "96a5f41f875022d1752b9c999595ad58bfb2d42687a8f06de08d42b1c4215875"
+    ],
+    "search_artifact_sha256": [
+      "fbd0ab823f65e58a2186064efd68a1345466acaaf879418c5a1a4b0ce8b3a687",
+      "fbd0ab823f65e58a2186064efd68a1345466acaaf879418c5a1a4b0ce8b3a687"
+    ],
+    "first_candidate_colors": [1],
+    "retained_outcome_bytes": 630784,
+    "book": {
+      "id": "374-original355-book-374-primary-batch-083-v1",
+      "usage": "main",
+      "frozen_before_candidate_results": true,
+      "independence": "Original128 shared PRNG/book families; pair/family is unit; correlated descriptive strata",
+      "openings": [
+        {
+          "id": "strength355-family-027",
+          "cohort": "main",
+          "lineage": "immutable355-family-27",
+          "siblings": [],
+          "original_seed": 35520261225,
+          "reference": {
+            "source_sha256": "a6abde1f3182ba0e876c9e7719d3389502a44b3406ca28b7af9a0456952a6878",
+            "model_sha256": null,
+            "settings": {
+              "family_id": 27,
+              "id": "strength355-family-027",
+              "attempt_id": 0,
+              "seed": 35520261225,
+              "prefix": [126, 75, 192, 66],
+              "root_key": "4,0|3,7|0|5,5|7,5|8,10",
+              "history_counts": [
+                ["4,0|3,7|0|5,5|7,5|8,10", 1],
+                ["4,0|3,8|0|5,5||9,10", 1],
+                ["4,0|3,8|1|5,5|7,5|8,10", 1],
+                ["4,0|4,8|0|||10,10", 1],
+                ["4,0|4,8|1|5,5||9,10", 1]
+              ]
+            },
+            "q_definition": null,
+            "q_perspective": null,
+            "q_aggregation": null,
+            "q": null
+          },
+          "selection_reason": "All original128 book families fixed before outputs; no outcome selection",
+          "candidate_pool_size": 1,
+          "prefix": [126, 75, 192, 66]
+        }
+      ]
+    }
+  },
+  "management_cpu_core": 6
+}

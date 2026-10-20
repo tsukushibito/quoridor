@@ -1,0 +1,29 @@
+{
+  "issue": "quoridor-4lc.320",
+  "job_id": "ea112b67-4ab8-4354-b324-0d873168c503",
+  "controller_whole_charge_seconds": 176.19579084496945,
+  "compile_fixture_lint_remaining_seconds": 423.80420915503055,
+  "initial_phase_unused_seconds": 123.80420915503055,
+  "native_remaining_seconds": 180,
+  "native_jobs_slots_used": [
+    0,
+    0
+  ],
+  "failed_source": {
+    "source": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/software-validation/verify.py",
+    "sha256": "b0df80397398e1b050c8bbea4511418ce28723fda5a8d8a7802d650bd9424463",
+    "used_job": "ea112b67-4ab8-4354-b324-0d873168c503",
+    "failure": "linker object vanished between stat calls"
+  },
+  "repaired_guard_path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/software-validation/verify.py",
+  "repaired_guard_sha256": "6a230c987ad532af83a405a6d4fb18c73cd07183bcb0edb2e2cb1d4f932d09df",
+  "product_source_sha_manifest": "e08c7726d234eed336154a429a5b09861e4177b2f1b1eb55cf2769aa59e3d3fb",
+  "product_changed_paths": [],
+  "guard_fix": "single DirEntry stat; three full snapshot attempts; explicit raced-attempt evidence; unknown/failure if exhausted; RSS sampled peak now recorded",
+  "guard_checks": "Ruff format/check PASS; runtime fixture unexecuted",
+  "passed": "release library compile plus two NN0 arena_manifest unit fixtures",
+  "uncompleted": "integration arena/config fixtures, final runner build, Clippy, native smoke/clock, statistical/clock adoption",
+  "rerun_started": false,
+  "shared_target_released": true,
+  "prior_ram_peak": "UNKNOWN preserved; prior 2GiB resource guard was active"
+}

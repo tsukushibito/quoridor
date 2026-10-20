@@ -1,0 +1,3240 @@
+{
+  "schema": "quoridor.research.arena-plan.v1",
+  "phase": "compare",
+  "comparison": "whole_wall_time",
+  "rules": "research-standard-2p-threefold-goal-first-v1",
+  "distance_units": "wall-distance/80",
+  "value_perspective": "side-to-move",
+  "book": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostic-book-v1.json",
+    "sha256": "cbb7e286042085c3db0a97abf9d1ff5594e344a460ed40052da5ea9b3f4d46e9",
+    "bytes": 325663,
+    "mode": "0644"
+  },
+  "inputs": [
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostic-book-v1.json",
+      "sha256": "cbb7e286042085c3db0a97abf9d1ff5594e344a460ed40052da5ea9b3f4d46e9",
+      "bytes": 325663,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/models/ai-sigma/reference/sigma-pcr250/best.onnx",
+      "sha256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+      "bytes": 11663428,
+      "mode": "0644"
+    }
+  ],
+  "models": [
+    {
+      "descriptor": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/public-no-bypass-v1/candidate-v1/output/best-model/manifest.json",
+        "sha256": "46ec2c4708f96dcf9fad579c2fb0d1299c6663df27412f0faac98267467715e1",
+        "bytes": 677,
+        "mode": "0600"
+      },
+      "weights": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/public-no-bypass-v1/candidate-v1/output/best-model/weights.f32",
+        "sha256": "046fe926e56b955b0fb7de8f147a74ec33eace9cbc00a55c307f9b6541ab9841",
+        "bytes": 49284,
+        "mode": "0644"
+      },
+      "evaluator_sha256": "96a5f41f875022d1752b9c999595ad58bfb2d42687a8f06de08d42b1c4215875"
+    }
+  ],
+  "schedule": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostic-schedule-v1.json",
+    "sha256": "9d3ce4f743e26c599411190c29307ef363d3a7a33b78e59050aaa7f5d481122b",
+    "bytes": 29939,
+    "mode": "0644"
+  },
+  "family_ids": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77
+  ],
+  "matchups": [
+    {
+      "id": 0,
+      "engines": [
+        {
+          "kind": "mcts",
+          "model": null,
+          "distance_a": 0.0,
+          "distance_b": 8.0,
+          "depth": 64,
+          "max_nodes": 1000000,
+          "time_ms": 100,
+          "simd": false
+        }
+      ],
+      "evaluator_sha256": [
+        "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d"
+      ],
+      "inference": {
+        "backend": "ort",
+        "model": "/workspaces/quoridor/.worktree/assets/models/ai-sigma/reference/sigma-pcr250/best.onnx",
+        "model_sha": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+        "library": "/home/vscode/.cache/inference/envs/quoridor-training/lib/python3.14/site-packages/onnxruntime/capi/libonnxruntime.so.1.30.0",
+        "device": 0,
+        "cuda_graph": false
+      }
+    },
+    {
+      "id": 1,
+      "engines": [
+        {
+          "kind": "distance",
+          "model": null,
+          "distance_a": 0.0,
+          "distance_b": 8.0,
+          "depth": 64,
+          "max_nodes": 1000000,
+          "time_ms": 100,
+          "simd": false
+        }
+      ],
+      "evaluator_sha256": [
+        "c83db10ba1403b7fc3417e73e14cc5f1a1040c65ac4ac23a5f5703abbb5aa887"
+      ]
+    },
+    {
+      "id": 2,
+      "engines": [
+        {
+          "kind": "nnue",
+          "model": "/workspaces/quoridor/.worktree/assets/checkpoints/public-no-bypass-v1/candidate-v1/output/best-model/manifest.json",
+          "distance_a": 0.0,
+          "distance_b": 8.0,
+          "depth": 64,
+          "max_nodes": 1000000,
+          "time_ms": 100,
+          "simd": false
+        }
+      ],
+      "evaluator_sha256": [
+        "96a5f41f875022d1752b9c999595ad58bfb2d42687a8f06de08d42b1c4215875"
+      ]
+    }
+  ],
+  "batches": [
+    {
+      "batch": 0,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-000.json",
+        "sha256": "f34d700b6dddab5db60ea6349d96814d5b4217ae8f8b61a3043b25852d3b0b08",
+        "bytes": 5379,
+        "mode": "0644"
+      },
+      "slots": [
+        0
+      ]
+    },
+    {
+      "batch": 1,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-001.json",
+        "sha256": "27bfe43966f337996c3dd2e506d06c9102fc3470c525d104f563b7083375a3bc",
+        "bytes": 4989,
+        "mode": "0644"
+      },
+      "slots": [
+        1
+      ]
+    },
+    {
+      "batch": 2,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-002.json",
+        "sha256": "53847dd8a7d880df07bd4200237fe42d98fc5fa5d091111f87cf73e60e0f0c61",
+        "bytes": 5097,
+        "mode": "0644"
+      },
+      "slots": [
+        2
+      ]
+    },
+    {
+      "batch": 3,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-003.json",
+        "sha256": "d8a633e1d95b8307da3ad51abeeb430054af22a7df7e5aa3cc2950686c3c001e",
+        "bytes": 5366,
+        "mode": "0644"
+      },
+      "slots": [
+        3
+      ]
+    },
+    {
+      "batch": 4,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-004.json",
+        "sha256": "4c64ca4df456d9d1844f2b07807f12a485958cd15cdd9cf55478c50be0bfe0b9",
+        "bytes": 4976,
+        "mode": "0644"
+      },
+      "slots": [
+        4
+      ]
+    },
+    {
+      "batch": 5,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-005.json",
+        "sha256": "5567e01120807fb72a71ff444ec01b92fdaec959713d4a527d57ba64ba230ab9",
+        "bytes": 5084,
+        "mode": "0644"
+      },
+      "slots": [
+        5
+      ]
+    },
+    {
+      "batch": 6,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-006.json",
+        "sha256": "27491db7a55bba406a1adfa26924b747f937a93aff6745d26b1729a100abcf54",
+        "bytes": 5263,
+        "mode": "0644"
+      },
+      "slots": [
+        6
+      ]
+    },
+    {
+      "batch": 7,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-007.json",
+        "sha256": "6ca5a23fd2c0421369644f92b6926c8d78142f68da376f676c65d8174bf3074f",
+        "bytes": 4873,
+        "mode": "0644"
+      },
+      "slots": [
+        7
+      ]
+    },
+    {
+      "batch": 8,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-008.json",
+        "sha256": "a7a979b19c41d3241f7dc3a9b8be876ea8fc109f74f97ddbe7650c8a04175031",
+        "bytes": 4981,
+        "mode": "0644"
+      },
+      "slots": [
+        8
+      ]
+    },
+    {
+      "batch": 9,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-009.json",
+        "sha256": "cab390a1879edcdd651ed4caf46fd7404f94dd5c7a0cc95a2731101739bff2e7",
+        "bytes": 5370,
+        "mode": "0644"
+      },
+      "slots": [
+        9
+      ]
+    },
+    {
+      "batch": 10,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-010.json",
+        "sha256": "dc083c62ee72aeae5c7b99ac854c707436b85daa55f0935a76d1cfed8e47439c",
+        "bytes": 4980,
+        "mode": "0644"
+      },
+      "slots": [
+        10
+      ]
+    },
+    {
+      "batch": 11,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-011.json",
+        "sha256": "d6db005c817a3ddb79698944fbad0de0ac14e88ea6619a85fe571e53937ac1df",
+        "bytes": 5088,
+        "mode": "0644"
+      },
+      "slots": [
+        11
+      ]
+    },
+    {
+      "batch": 12,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-012.json",
+        "sha256": "f3a19b5f2cdcb7b93761da32fd43583cd750a69eae073c1aefd2cfc1d1730ea4",
+        "bytes": 5385,
+        "mode": "0644"
+      },
+      "slots": [
+        12
+      ]
+    },
+    {
+      "batch": 13,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-013.json",
+        "sha256": "f9bd1a2bc2fb4a516098354f236569122a66c43bb5808deb50763e38effdd4b2",
+        "bytes": 4995,
+        "mode": "0644"
+      },
+      "slots": [
+        13
+      ]
+    },
+    {
+      "batch": 14,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-014.json",
+        "sha256": "27f3d69a857ad884c1f99df72e5da19a2f2394c754c1ef57c9a9694f82822845",
+        "bytes": 5103,
+        "mode": "0644"
+      },
+      "slots": [
+        14
+      ]
+    },
+    {
+      "batch": 15,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-015.json",
+        "sha256": "a86b16f1959f6daec46241c396cc5939f4410407e4e4ce1f051b996343c2916e",
+        "bytes": 5403,
+        "mode": "0644"
+      },
+      "slots": [
+        15
+      ]
+    },
+    {
+      "batch": 16,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-016.json",
+        "sha256": "50e8745d3216b734a12cea7d3d896a3af1485311018a8547091e4cfdb833ae82",
+        "bytes": 5013,
+        "mode": "0644"
+      },
+      "slots": [
+        16
+      ]
+    },
+    {
+      "batch": 17,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-017.json",
+        "sha256": "cdb7ec228c01ab6cf1e371be0bbf2225d71698c61aa3064e29387f5bbbab1ccf",
+        "bytes": 5121,
+        "mode": "0644"
+      },
+      "slots": [
+        17
+      ]
+    },
+    {
+      "batch": 18,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-018.json",
+        "sha256": "969a62c6a4ca807ad2c30f63008ed2b0860cf5f4e8c7ae16990a97aff932502a",
+        "bytes": 5398,
+        "mode": "0644"
+      },
+      "slots": [
+        18
+      ]
+    },
+    {
+      "batch": 19,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-019.json",
+        "sha256": "7bfe8241db3e7116eed25422b2365f712f712a4be00f2629ee90c0dd2caac081",
+        "bytes": 5008,
+        "mode": "0644"
+      },
+      "slots": [
+        19
+      ]
+    },
+    {
+      "batch": 20,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-020.json",
+        "sha256": "9cada17b4f054c4d573e554b198607986663010ebf20d0fc6484c9b149c18d89",
+        "bytes": 5116,
+        "mode": "0644"
+      },
+      "slots": [
+        20
+      ]
+    },
+    {
+      "batch": 21,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-021.json",
+        "sha256": "af99e58a7119b98915079ce36d97aebaa2216aef6b871f2d32fd3c75bb08c32c",
+        "bytes": 5378,
+        "mode": "0644"
+      },
+      "slots": [
+        21
+      ]
+    },
+    {
+      "batch": 22,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-022.json",
+        "sha256": "a131ae39048067d4148442d643518f07e624eceb089510a2cb4ba567bbe5e228",
+        "bytes": 4988,
+        "mode": "0644"
+      },
+      "slots": [
+        22
+      ]
+    },
+    {
+      "batch": 23,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-023.json",
+        "sha256": "807484936a6b2619377f11868df814cac693d9233391ff822782e73a0fc0dd4f",
+        "bytes": 5096,
+        "mode": "0644"
+      },
+      "slots": [
+        23
+      ]
+    },
+    {
+      "batch": 24,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-024.json",
+        "sha256": "8f5fe0c9fda0a8a85884282480fc7cf434e4cd1bf5619865c5d9adf4c2e40f9f",
+        "bytes": 5883,
+        "mode": "0644"
+      },
+      "slots": [
+        24
+      ]
+    },
+    {
+      "batch": 25,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-025.json",
+        "sha256": "3107ae9f413d2e4f868a1d689bf869c816253d1c46bce060ae49ec8d6b5ceca8",
+        "bytes": 5493,
+        "mode": "0644"
+      },
+      "slots": [
+        25
+      ]
+    },
+    {
+      "batch": 26,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-026.json",
+        "sha256": "dfd97da7a80c2691c1b42bfc1d2945864c8ba39c0460d97c47b71ef47e2af56b",
+        "bytes": 5601,
+        "mode": "0644"
+      },
+      "slots": [
+        26
+      ]
+    },
+    {
+      "batch": 27,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-027.json",
+        "sha256": "4754af2fd55a692b319f1418a0ef20a736b13e8e1ec6282fe576bca4911de45d",
+        "bytes": 5890,
+        "mode": "0644"
+      },
+      "slots": [
+        27
+      ]
+    },
+    {
+      "batch": 28,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-028.json",
+        "sha256": "494f6a3310a793add45e8d88dda82d8fc34571f142f2ce64cd6c403a14cc23b4",
+        "bytes": 5500,
+        "mode": "0644"
+      },
+      "slots": [
+        28
+      ]
+    },
+    {
+      "batch": 29,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-029.json",
+        "sha256": "1b06d38126ca177d069d439dce6a76e5f92ce635e579a26aef8baa2a4e111f13",
+        "bytes": 5608,
+        "mode": "0644"
+      },
+      "slots": [
+        29
+      ]
+    },
+    {
+      "batch": 30,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-030.json",
+        "sha256": "8cb1390c54759359e846321aad4d692b6cdaa835ecbdb44906054e43bf6ac6a9",
+        "bytes": 5892,
+        "mode": "0644"
+      },
+      "slots": [
+        30
+      ]
+    },
+    {
+      "batch": 31,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-031.json",
+        "sha256": "eab1bd124f9a71753b3547fbcf47b9d4eddd3f23b52f314fd48d740e761d77aa",
+        "bytes": 5502,
+        "mode": "0644"
+      },
+      "slots": [
+        31
+      ]
+    },
+    {
+      "batch": 32,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-032.json",
+        "sha256": "2f3f8fdee922af15b2dd60a2c5a604c3895787d52213bc96ae09168d900a4ed2",
+        "bytes": 5610,
+        "mode": "0644"
+      },
+      "slots": [
+        32
+      ]
+    },
+    {
+      "batch": 33,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-033.json",
+        "sha256": "bb1559b8115ac2b010abb6ed25136236961dc9d9545dece52cf082d0f5e43c7c",
+        "bytes": 5861,
+        "mode": "0644"
+      },
+      "slots": [
+        33
+      ]
+    },
+    {
+      "batch": 34,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-034.json",
+        "sha256": "38538090a648b312f32737b409c04b3fcd231378f9b72e1917a3f4a2f091b651",
+        "bytes": 5471,
+        "mode": "0644"
+      },
+      "slots": [
+        34
+      ]
+    },
+    {
+      "batch": 35,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-035.json",
+        "sha256": "6f1bd272252296c2c51a1f6c90d1bfd9a7e0ac870ed68ac80bc3b7ec322e1f2e",
+        "bytes": 5579,
+        "mode": "0644"
+      },
+      "slots": [
+        35
+      ]
+    },
+    {
+      "batch": 36,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-036.json",
+        "sha256": "e70b190ac97723e043cf80d4e45070b18ff0815cd5634994ebba83b3582a6467",
+        "bytes": 5912,
+        "mode": "0644"
+      },
+      "slots": [
+        36
+      ]
+    },
+    {
+      "batch": 37,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-037.json",
+        "sha256": "92a296d3a802242e6c211762d61bf27ac21857345a3cb6df44b6523834084072",
+        "bytes": 5522,
+        "mode": "0644"
+      },
+      "slots": [
+        37
+      ]
+    },
+    {
+      "batch": 38,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-038.json",
+        "sha256": "6b9230646bacc23b115d13abb10750a2b71ae9121e26d17ac4d85875ca4bbdc7",
+        "bytes": 5630,
+        "mode": "0644"
+      },
+      "slots": [
+        38
+      ]
+    },
+    {
+      "batch": 39,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-039.json",
+        "sha256": "4cb4f03fc854674184d02986a54ec6131e9ab642a15d067e0d76de0b67bfdd95",
+        "bytes": 5883,
+        "mode": "0644"
+      },
+      "slots": [
+        39
+      ]
+    },
+    {
+      "batch": 40,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-040.json",
+        "sha256": "a91ba6085fc4f38b2b4ed01e0f9562d81506d8fd7bae933a0e625d792830cf0c",
+        "bytes": 5493,
+        "mode": "0644"
+      },
+      "slots": [
+        40
+      ]
+    },
+    {
+      "batch": 41,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-041.json",
+        "sha256": "95437abb8e7d8b0bafbafe19b7991b4c7ce405274892d8fc63447dd29b06aa3d",
+        "bytes": 5601,
+        "mode": "0644"
+      },
+      "slots": [
+        41
+      ]
+    },
+    {
+      "batch": 42,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-042.json",
+        "sha256": "ca64829a907088f2c4e044a17bf70977fefaeec7f049886f7c3a34ea83ef4cc2",
+        "bytes": 5893,
+        "mode": "0644"
+      },
+      "slots": [
+        42
+      ]
+    },
+    {
+      "batch": 43,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-043.json",
+        "sha256": "3cfee91196b7e5ad4df4fa2fb30463bef50ddeca38b95d9253142a1f6c8700a6",
+        "bytes": 5503,
+        "mode": "0644"
+      },
+      "slots": [
+        43
+      ]
+    },
+    {
+      "batch": 44,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-044.json",
+        "sha256": "60f4df3bba309acab67ed66726f04c5e5fcf053f57f1d64cb4fa92d903eea72f",
+        "bytes": 5611,
+        "mode": "0644"
+      },
+      "slots": [
+        44
+      ]
+    },
+    {
+      "batch": 45,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-045.json",
+        "sha256": "92ae7d81e6e70eaa050ce2495512ec7e46c576daf330d81db5aa4bb9abdff71b",
+        "bytes": 5871,
+        "mode": "0644"
+      },
+      "slots": [
+        45
+      ]
+    },
+    {
+      "batch": 46,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-046.json",
+        "sha256": "92849d5b71611fb82d522f04bb627186a4665732d78dd7a6b0eef008a0c01c08",
+        "bytes": 5481,
+        "mode": "0644"
+      },
+      "slots": [
+        46
+      ]
+    },
+    {
+      "batch": 47,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-047.json",
+        "sha256": "f78e34db1f8db35e46e92c2933937d467fb4dfd8f0aed5b18d825e1d6336de34",
+        "bytes": 5589,
+        "mode": "0644"
+      },
+      "slots": [
+        47
+      ]
+    },
+    {
+      "batch": 48,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-048.json",
+        "sha256": "4daf3a5a80e0e4a88ca06905e4fa13f7cac1dc041a5e24ab27f627fd428a6166",
+        "bytes": 6143,
+        "mode": "0644"
+      },
+      "slots": [
+        48
+      ]
+    },
+    {
+      "batch": 49,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-049.json",
+        "sha256": "5c8a455b7c0efbbcfa5976ed2f664747b86eef087e97c08064a988436170507d",
+        "bytes": 5753,
+        "mode": "0644"
+      },
+      "slots": [
+        49
+      ]
+    },
+    {
+      "batch": 50,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-050.json",
+        "sha256": "74bce84ad4207d02f598db036b81d5fb2ec471368964e246e627182aa1e4965d",
+        "bytes": 5861,
+        "mode": "0644"
+      },
+      "slots": [
+        50
+      ]
+    },
+    {
+      "batch": 51,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-051.json",
+        "sha256": "4b661e3618e5b72208a0cb34fe625dd53b1d007bd6a389b1f1f5dcabb87b163a",
+        "bytes": 6143,
+        "mode": "0644"
+      },
+      "slots": [
+        51
+      ]
+    },
+    {
+      "batch": 52,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-052.json",
+        "sha256": "6835d0c8ce5be57e721f99c667d7d19877d04e495156bc7fb3b7989702fee0cb",
+        "bytes": 5753,
+        "mode": "0644"
+      },
+      "slots": [
+        52
+      ]
+    },
+    {
+      "batch": 53,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-053.json",
+        "sha256": "d5a85107ac098ed918c15cbd4af8086529dd9305114673d9e1a8c0cc2dc6025c",
+        "bytes": 5861,
+        "mode": "0644"
+      },
+      "slots": [
+        53
+      ]
+    },
+    {
+      "batch": 54,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-054.json",
+        "sha256": "a5544ce600243f7ac9fc1a9412211e9db087906d3bf54146843df65c8aa3c859",
+        "bytes": 6503,
+        "mode": "0644"
+      },
+      "slots": [
+        54
+      ]
+    },
+    {
+      "batch": 55,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-055.json",
+        "sha256": "297b69c5c140fee7e0439278f4e36ee58bbf2271977de8fdce63d2307fa52639",
+        "bytes": 6113,
+        "mode": "0644"
+      },
+      "slots": [
+        55
+      ]
+    },
+    {
+      "batch": 56,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-056.json",
+        "sha256": "39cf22952af13a1cf2a0b9051b100368fd81219fbf4af520bb6f10d82e0f2c76",
+        "bytes": 6221,
+        "mode": "0644"
+      },
+      "slots": [
+        56
+      ]
+    },
+    {
+      "batch": 57,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-057.json",
+        "sha256": "5c74ff678b8116457d7050d3dc53b341b05add020a7065ad3ce32d1a36b1efe2",
+        "bytes": 6346,
+        "mode": "0644"
+      },
+      "slots": [
+        57
+      ]
+    },
+    {
+      "batch": 58,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-058.json",
+        "sha256": "c5af18e0f51d1b05e76fef58f104601598968106d35d427d951bb87685f54e24",
+        "bytes": 5956,
+        "mode": "0644"
+      },
+      "slots": [
+        58
+      ]
+    },
+    {
+      "batch": 59,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-059.json",
+        "sha256": "d101e34030eb9e0d34556cba775431e599e22560234559c432e5530217fbd5f8",
+        "bytes": 6064,
+        "mode": "0644"
+      },
+      "slots": [
+        59
+      ]
+    },
+    {
+      "batch": 60,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-060.json",
+        "sha256": "d57b7f1069ed7ca07881df584017e0b83c30f3b848197df39878ee5991240b10",
+        "bytes": 6430,
+        "mode": "0644"
+      },
+      "slots": [
+        60
+      ]
+    },
+    {
+      "batch": 61,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-061.json",
+        "sha256": "67d16ff8674714c87ef3257918c735fe8ddccd1ee9cac4a9cc0b1ac733e81958",
+        "bytes": 6040,
+        "mode": "0644"
+      },
+      "slots": [
+        61
+      ]
+    },
+    {
+      "batch": 62,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-062.json",
+        "sha256": "8e364f4102fc43ad8d5256ce7cb0da987572dbd0cab508f551f93351176e6b81",
+        "bytes": 6148,
+        "mode": "0644"
+      },
+      "slots": [
+        62
+      ]
+    },
+    {
+      "batch": 63,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-063.json",
+        "sha256": "dcbbf5fb457ba8ba37036e481111f4d75641406c572a113fa4042066ba7cce8b",
+        "bytes": 6186,
+        "mode": "0644"
+      },
+      "slots": [
+        63
+      ]
+    },
+    {
+      "batch": 64,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-064.json",
+        "sha256": "447f420c214f806eb740e87af66a24f4c12ea4fbab7ff3a2f472a59fffa91608",
+        "bytes": 5796,
+        "mode": "0644"
+      },
+      "slots": [
+        64
+      ]
+    },
+    {
+      "batch": 65,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-065.json",
+        "sha256": "f4076cc45845712ba19fc3e67fb2413d9aad56afa9c3833d47cd4606dd7988e8",
+        "bytes": 5904,
+        "mode": "0644"
+      },
+      "slots": [
+        65
+      ]
+    },
+    {
+      "batch": 66,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-066.json",
+        "sha256": "0b326143d4611d9996fc8a2b30e304f6571f76411a1f064d2e8327ee87d1d1ac",
+        "bytes": 6473,
+        "mode": "0644"
+      },
+      "slots": [
+        66
+      ]
+    },
+    {
+      "batch": 67,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-067.json",
+        "sha256": "e04416b075ff64ad7fca2ce665bf24869721af002058eb28b09c4b18a00fa53d",
+        "bytes": 6083,
+        "mode": "0644"
+      },
+      "slots": [
+        67
+      ]
+    },
+    {
+      "batch": 68,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-068.json",
+        "sha256": "44d2f2eca1b585d4c1de0ac3e33592c5dc472ef9dc0666db372c7cf835ddcd6d",
+        "bytes": 6191,
+        "mode": "0644"
+      },
+      "slots": [
+        68
+      ]
+    },
+    {
+      "batch": 69,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-069.json",
+        "sha256": "bfb9ec38091aeb2a7e857c9218107e992330b63bc36e58f97f69005760a391d3",
+        "bytes": 6386,
+        "mode": "0644"
+      },
+      "slots": [
+        69
+      ]
+    },
+    {
+      "batch": 70,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-070.json",
+        "sha256": "fa56751c3ef5dc82fcf5525de1f4b80d4bb68e28fd033b61a4a4e8bb7c866180",
+        "bytes": 5996,
+        "mode": "0644"
+      },
+      "slots": [
+        70
+      ]
+    },
+    {
+      "batch": 71,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-071.json",
+        "sha256": "56359adf76ac1e5516010cb763a5a69953a5a8177732d40d991f9cca09499020",
+        "bytes": 6104,
+        "mode": "0644"
+      },
+      "slots": [
+        71
+      ]
+    },
+    {
+      "batch": 72,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-072.json",
+        "sha256": "dcc491fa7f3080217d02e8b722f4a3df681daa600d55e0e975f4e54e471aadfa",
+        "bytes": 7117,
+        "mode": "0644"
+      },
+      "slots": [
+        72
+      ]
+    },
+    {
+      "batch": 73,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-073.json",
+        "sha256": "a842ddf7f732949a9d19c039c491114976fee1c80949ee7e5e41e9662aac7b85",
+        "bytes": 6727,
+        "mode": "0644"
+      },
+      "slots": [
+        73
+      ]
+    },
+    {
+      "batch": 74,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-074.json",
+        "sha256": "3396db70a146ea0c96ca1610180439da726e74397d13c26f28313db5cc86d987",
+        "bytes": 6835,
+        "mode": "0644"
+      },
+      "slots": [
+        74
+      ]
+    },
+    {
+      "batch": 75,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-075.json",
+        "sha256": "c230abd655f7b721851ad879f9fee4b09afc4dbf2474caf5d54319a0a7d1064c",
+        "bytes": 6772,
+        "mode": "0644"
+      },
+      "slots": [
+        75
+      ]
+    },
+    {
+      "batch": 76,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-076.json",
+        "sha256": "f1ec3fceb7179a04f28e86104a35230780a3de7262e9d46fee89f1a02a66a39c",
+        "bytes": 6382,
+        "mode": "0644"
+      },
+      "slots": [
+        76
+      ]
+    },
+    {
+      "batch": 77,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-077.json",
+        "sha256": "1101b48bfa84eab1490bcbe24c96ed1da3093e7b4e0639044f3ec4c9baf4e3b7",
+        "bytes": 6490,
+        "mode": "0644"
+      },
+      "slots": [
+        77
+      ]
+    },
+    {
+      "batch": 78,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-078.json",
+        "sha256": "829d0ea01fa041d476bf94808eaf54272fd81d479d4be6a17039539e6a52e227",
+        "bytes": 6954,
+        "mode": "0644"
+      },
+      "slots": [
+        78
+      ]
+    },
+    {
+      "batch": 79,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-079.json",
+        "sha256": "23ba12d1f7bd57fb8e7e11b43f0733238fa0baa4ea011b9ae736eccef53e3c40",
+        "bytes": 6564,
+        "mode": "0644"
+      },
+      "slots": [
+        79
+      ]
+    },
+    {
+      "batch": 80,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-080.json",
+        "sha256": "ca19c0e4441706fa5ea3c13a33d6438d8e786f5d43d58cc69789fd44d954fb54",
+        "bytes": 6672,
+        "mode": "0644"
+      },
+      "slots": [
+        80
+      ]
+    },
+    {
+      "batch": 81,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-081.json",
+        "sha256": "891b38aa534653744187d62c57d6abaae788131eb7436c05c891591354e18e4f",
+        "bytes": 6894,
+        "mode": "0644"
+      },
+      "slots": [
+        81
+      ]
+    },
+    {
+      "batch": 82,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-082.json",
+        "sha256": "48ae19669e38184ab4cff3d9b423719c44984a6eea03481f8df34a4b8fbf6254",
+        "bytes": 6504,
+        "mode": "0644"
+      },
+      "slots": [
+        82
+      ]
+    },
+    {
+      "batch": 83,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-083.json",
+        "sha256": "ac58b05a1c86bd195f2c38a5b0152e9cfb9a56d2b265bf362bcccf17afe2b05e",
+        "bytes": 6612,
+        "mode": "0644"
+      },
+      "slots": [
+        83
+      ]
+    },
+    {
+      "batch": 84,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-084.json",
+        "sha256": "b1768dcd061cb80e87d205eaad6e614e171784eba2c17d9d2e7aaa5116c1ed97",
+        "bytes": 6840,
+        "mode": "0644"
+      },
+      "slots": [
+        84
+      ]
+    },
+    {
+      "batch": 85,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-085.json",
+        "sha256": "10afcdb3da518084d15b321c8b8a06f0edd04c4adde2c5c6af89d734b7b0e787",
+        "bytes": 6450,
+        "mode": "0644"
+      },
+      "slots": [
+        85
+      ]
+    },
+    {
+      "batch": 86,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-086.json",
+        "sha256": "1d88e0a2af3cfe45e0c6a4cccfbb508294e57199254345c6a6d193ce28ae6887",
+        "bytes": 6558,
+        "mode": "0644"
+      },
+      "slots": [
+        86
+      ]
+    },
+    {
+      "batch": 87,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-087.json",
+        "sha256": "b4e162a05a56d50d0311e0f4df08ab813f45251c402892bf105517a66ffe461a",
+        "bytes": 6661,
+        "mode": "0644"
+      },
+      "slots": [
+        87
+      ]
+    },
+    {
+      "batch": 88,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-088.json",
+        "sha256": "e50d96563ef4a4390b0365c6ab1ee16e083bd89b5138c9bf37ba5900f2bb8467",
+        "bytes": 6271,
+        "mode": "0644"
+      },
+      "slots": [
+        88
+      ]
+    },
+    {
+      "batch": 89,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-089.json",
+        "sha256": "cb49926d7041a6dfe684d333355fa50f6c0705f3776be0df0c3dd1ac9b0b9875",
+        "bytes": 6379,
+        "mode": "0644"
+      },
+      "slots": [
+        89
+      ]
+    },
+    {
+      "batch": 90,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-090.json",
+        "sha256": "a259dd7fe027ed011b3f05405605ce3680390573c24157f8380eb208167f83d4",
+        "bytes": 7045,
+        "mode": "0644"
+      },
+      "slots": [
+        90
+      ]
+    },
+    {
+      "batch": 91,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-091.json",
+        "sha256": "56850d0958a34cbb3ac8e04f30864321b990c336adf8f77299703961d83119b3",
+        "bytes": 6655,
+        "mode": "0644"
+      },
+      "slots": [
+        91
+      ]
+    },
+    {
+      "batch": 92,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-092.json",
+        "sha256": "f53a3f393883492cd370a8b2ed9b79e57150ef8339dec69f9f9847ac95fb86c3",
+        "bytes": 6763,
+        "mode": "0644"
+      },
+      "slots": [
+        92
+      ]
+    },
+    {
+      "batch": 93,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-093.json",
+        "sha256": "886b5970e590614e4e5c4bbde3b63ceb794637470990bc0e472814b7ffb19e1f",
+        "bytes": 6833,
+        "mode": "0644"
+      },
+      "slots": [
+        93
+      ]
+    },
+    {
+      "batch": 94,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-094.json",
+        "sha256": "ce7e63cda326215c6669d67a165ed6894b261d161166314305ed6e82a65e7ccf",
+        "bytes": 6443,
+        "mode": "0644"
+      },
+      "slots": [
+        94
+      ]
+    },
+    {
+      "batch": 95,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-095.json",
+        "sha256": "40c9e0900bcc7d9364a069eaa187aeb254476a7dac64cfa34b505fbcef450c4a",
+        "bytes": 6551,
+        "mode": "0644"
+      },
+      "slots": [
+        95
+      ]
+    },
+    {
+      "batch": 96,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-096.json",
+        "sha256": "e6049947a3b05ef84d0071432772b1d16d7d16443c551c7eac35a6677ee93b55",
+        "bytes": 7042,
+        "mode": "0644"
+      },
+      "slots": [
+        96
+      ]
+    },
+    {
+      "batch": 97,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-097.json",
+        "sha256": "d3c47b6eb379b51eee7ee2d5313ae887e61ae5be8202e1c56a733d3db99423ba",
+        "bytes": 6652,
+        "mode": "0644"
+      },
+      "slots": [
+        97
+      ]
+    },
+    {
+      "batch": 98,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-098.json",
+        "sha256": "36cab272fc8af0529cbae68499298b2729b80b3cecfb51db030bee9f591f61b6",
+        "bytes": 6760,
+        "mode": "0644"
+      },
+      "slots": [
+        98
+      ]
+    },
+    {
+      "batch": 99,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-099.json",
+        "sha256": "d1206c7c6603ce0e61b22eb0818e12def50e8f929b4465f329d14e3509977f75",
+        "bytes": 8564,
+        "mode": "0644"
+      },
+      "slots": [
+        99
+      ]
+    },
+    {
+      "batch": 100,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-100.json",
+        "sha256": "2070331535aa52619fc9afe291512ea7f661aba9f127096d45299cc716ee304b",
+        "bytes": 8174,
+        "mode": "0644"
+      },
+      "slots": [
+        100
+      ]
+    },
+    {
+      "batch": 101,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-101.json",
+        "sha256": "0bb5e4a55721105e69acf11af2f5487d7d291244f8384a9da38a12ddaa3fcfd5",
+        "bytes": 8282,
+        "mode": "0644"
+      },
+      "slots": [
+        101
+      ]
+    },
+    {
+      "batch": 102,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-102.json",
+        "sha256": "b8a9f54b08ffa29cbfcab937ea395082e1147f5b968ff63e49d607929388654e",
+        "bytes": 7043,
+        "mode": "0644"
+      },
+      "slots": [
+        102
+      ]
+    },
+    {
+      "batch": 103,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-103.json",
+        "sha256": "378a24cfef81873842a1f567ec913e0839278ddd46af18a1bf3c57022c124aa3",
+        "bytes": 6653,
+        "mode": "0644"
+      },
+      "slots": [
+        103
+      ]
+    },
+    {
+      "batch": 104,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-104.json",
+        "sha256": "5d1c05f52b7ad8d0c26bbe1120607e09c44b9819fb28aaf0334e7d5c70c5614b",
+        "bytes": 6761,
+        "mode": "0644"
+      },
+      "slots": [
+        104
+      ]
+    },
+    {
+      "batch": 105,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-105.json",
+        "sha256": "0272270b26f627ea1529a06b72abfa2cd330125d09cd3da7d61a42cdbca56188",
+        "bytes": 8573,
+        "mode": "0644"
+      },
+      "slots": [
+        105
+      ]
+    },
+    {
+      "batch": 106,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-106.json",
+        "sha256": "9d89688b30b76910816d09861e96f66cb0febe3b457ccf45b8a0f0f8ed5f472f",
+        "bytes": 8183,
+        "mode": "0644"
+      },
+      "slots": [
+        106
+      ]
+    },
+    {
+      "batch": 107,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-107.json",
+        "sha256": "7127798b625c505df5b27a82a8e91a9564e900f0e70acffbd59bdae6dcd5da8f",
+        "bytes": 8291,
+        "mode": "0644"
+      },
+      "slots": [
+        107
+      ]
+    },
+    {
+      "batch": 108,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-108.json",
+        "sha256": "9763d7f4316ae8684b6edb54eaf643285ec8abd4e91542c07aff33328edd12f2",
+        "bytes": 7047,
+        "mode": "0644"
+      },
+      "slots": [
+        108
+      ]
+    },
+    {
+      "batch": 109,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-109.json",
+        "sha256": "37c93c66373e3a464b2d104a2a75b8d3067bb4418a6e8bb0d3b9ad29d355df56",
+        "bytes": 6657,
+        "mode": "0644"
+      },
+      "slots": [
+        109
+      ]
+    },
+    {
+      "batch": 110,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-110.json",
+        "sha256": "5a2c454af6ec175ae76f63ab6aa8f74b850001bffc4a2b6fbb043693bbd6c083",
+        "bytes": 6765,
+        "mode": "0644"
+      },
+      "slots": [
+        110
+      ]
+    },
+    {
+      "batch": 111,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-111.json",
+        "sha256": "daf7aaba2fabedc20e0cb7a373d84b747d94643fa4ed63c4b3892322c1a92bbf",
+        "bytes": 7059,
+        "mode": "0644"
+      },
+      "slots": [
+        111
+      ]
+    },
+    {
+      "batch": 112,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-112.json",
+        "sha256": "eaa079918b358d9001808fc3ec82099fc171f5172ae2e5d4be42abc2afe8da54",
+        "bytes": 6669,
+        "mode": "0644"
+      },
+      "slots": [
+        112
+      ]
+    },
+    {
+      "batch": 113,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-113.json",
+        "sha256": "fba1885aa847efc03d96f489d84bd70c3b9a8c089b217ca722c0505b5f1b5e5e",
+        "bytes": 6777,
+        "mode": "0644"
+      },
+      "slots": [
+        113
+      ]
+    },
+    {
+      "batch": 114,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-114.json",
+        "sha256": "f3d5eba3a1f203e14d36cf459eafcc88515e29f89fcc5bae5541948c4a2e3c28",
+        "bytes": 8581,
+        "mode": "0644"
+      },
+      "slots": [
+        114
+      ]
+    },
+    {
+      "batch": 115,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-115.json",
+        "sha256": "fcba1bb0cc8a86b163169913dc20494d8225a17f42ccf8ffb9a3c8116f5b3324",
+        "bytes": 8191,
+        "mode": "0644"
+      },
+      "slots": [
+        115
+      ]
+    },
+    {
+      "batch": 116,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-116.json",
+        "sha256": "ddfe98284d96d34edea19d7b2e3018cdc82b54519513b36ca0114a62a864b1e8",
+        "bytes": 8299,
+        "mode": "0644"
+      },
+      "slots": [
+        116
+      ]
+    },
+    {
+      "batch": 117,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-117.json",
+        "sha256": "a5affacb0596685b0df5f6614e58d8311dd1692b1377356ef4dfe78e047b52f4",
+        "bytes": 7048,
+        "mode": "0644"
+      },
+      "slots": [
+        117
+      ]
+    },
+    {
+      "batch": 118,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-118.json",
+        "sha256": "57b00af7a878e5a9285f2f964865481a1a3a9749e2f1fd1ee343c9977ef40136",
+        "bytes": 6658,
+        "mode": "0644"
+      },
+      "slots": [
+        118
+      ]
+    },
+    {
+      "batch": 119,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-119.json",
+        "sha256": "5a9c5a18c618a7aa0ad9277def6e4898e0f75044b2846f5a5a3a256780e2710d",
+        "bytes": 6766,
+        "mode": "0644"
+      },
+      "slots": [
+        119
+      ]
+    },
+    {
+      "batch": 120,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-120.json",
+        "sha256": "768daf43adb596eb999ee86a7a88d6280c3570c7da8083f0e6c88ec7abc9dfbe",
+        "bytes": 7049,
+        "mode": "0644"
+      },
+      "slots": [
+        120
+      ]
+    },
+    {
+      "batch": 121,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-121.json",
+        "sha256": "c649fb37a4c27baf2404bf9eac80e1a3feee063653ad38adda7be3e3565140c6",
+        "bytes": 6659,
+        "mode": "0644"
+      },
+      "slots": [
+        121
+      ]
+    },
+    {
+      "batch": 122,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-122.json",
+        "sha256": "5aaf203ebde21ba6e7d4f9217afa94a1262e614d6875fb88b1193c5e98091b7d",
+        "bytes": 6767,
+        "mode": "0644"
+      },
+      "slots": [
+        122
+      ]
+    },
+    {
+      "batch": 123,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-123.json",
+        "sha256": "6a2459d118f30bc4fae551fb55f7d46cf04e47475c78ec9fb90a9dc21e6047de",
+        "bytes": 7055,
+        "mode": "0644"
+      },
+      "slots": [
+        123
+      ]
+    },
+    {
+      "batch": 124,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-124.json",
+        "sha256": "072806bf419f8264c86f51ddb8bb3bcf0b5227f87ca7dfd2f7233fa0afc8c3f8",
+        "bytes": 6665,
+        "mode": "0644"
+      },
+      "slots": [
+        124
+      ]
+    },
+    {
+      "batch": 125,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-125.json",
+        "sha256": "22871136f80c57e96fd74dddeb46bd3edd0839b5df21f59922174b2da1541d93",
+        "bytes": 6773,
+        "mode": "0644"
+      },
+      "slots": [
+        125
+      ]
+    },
+    {
+      "batch": 126,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-126.json",
+        "sha256": "a995483d3b9c11c910f30c4684dcae879e5d3f7d1f046d403406abc39c801e2b",
+        "bytes": 8571,
+        "mode": "0644"
+      },
+      "slots": [
+        126
+      ]
+    },
+    {
+      "batch": 127,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-127.json",
+        "sha256": "e5ac1caf05ed9ccc3cf8749b42052f6797f739881b8a7bda157f1d6dfc6c0854",
+        "bytes": 8181,
+        "mode": "0644"
+      },
+      "slots": [
+        127
+      ]
+    },
+    {
+      "batch": 128,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-128.json",
+        "sha256": "cd9bcedd8ffb17b198ba6dbe2c9b5616461bdb6ffd57bc13adc48f5540212344",
+        "bytes": 8289,
+        "mode": "0644"
+      },
+      "slots": [
+        128
+      ]
+    },
+    {
+      "batch": 129,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-129.json",
+        "sha256": "023628b4790a9c769586aa2b635352d6570365ad2d3c4dd565fb05b34c168a56",
+        "bytes": 7051,
+        "mode": "0644"
+      },
+      "slots": [
+        129
+      ]
+    },
+    {
+      "batch": 130,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-130.json",
+        "sha256": "355e8f07a1bbc58f9f5c7a7fa7a6e5be1ea047d5285c3ee1f788f1ff13cb1fe8",
+        "bytes": 6661,
+        "mode": "0644"
+      },
+      "slots": [
+        130
+      ]
+    },
+    {
+      "batch": 131,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-131.json",
+        "sha256": "a551aab23045e62aba12798ad4cb175580b2dbae1b6f02bb5bf5f335993d070f",
+        "bytes": 6769,
+        "mode": "0644"
+      },
+      "slots": [
+        131
+      ]
+    },
+    {
+      "batch": 132,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-132.json",
+        "sha256": "c2b0e0583f9d0e5dcad8e81de701941dbdaac1deb9200553d2f2dcf9381bd307",
+        "bytes": 8577,
+        "mode": "0644"
+      },
+      "slots": [
+        132
+      ]
+    },
+    {
+      "batch": 133,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-133.json",
+        "sha256": "29a63196894b84db8424faa706982bf7f60d80fe0ca2f4aadb08fc2196ef5352",
+        "bytes": 8187,
+        "mode": "0644"
+      },
+      "slots": [
+        133
+      ]
+    },
+    {
+      "batch": 134,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-134.json",
+        "sha256": "17fef7475a572c675fce1f389f4851788d566af2d6fe913d4451c739cee360a4",
+        "bytes": 8295,
+        "mode": "0644"
+      },
+      "slots": [
+        134
+      ]
+    },
+    {
+      "batch": 135,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-135.json",
+        "sha256": "ddaf2b10cc0d94e793fe0a685e40b4d53c3f48704d9688b7e4736d9a134787a2",
+        "bytes": 7199,
+        "mode": "0644"
+      },
+      "slots": [
+        135
+      ]
+    },
+    {
+      "batch": 136,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-136.json",
+        "sha256": "f661e7dd26fcc61f5327b938018642ad01fe62e7821c63d8d59a945cb94e8980",
+        "bytes": 6809,
+        "mode": "0644"
+      },
+      "slots": [
+        136
+      ]
+    },
+    {
+      "batch": 137,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-137.json",
+        "sha256": "c080be84246743dcd07510fcd323646f7d102c821ccf4e847f1c2952deda4b48",
+        "bytes": 6917,
+        "mode": "0644"
+      },
+      "slots": [
+        137
+      ]
+    },
+    {
+      "batch": 138,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-138.json",
+        "sha256": "d78da5e3b6973f335be2f60a27657fad814f9a19c9fc45e6d2e5485aa1788558",
+        "bytes": 7200,
+        "mode": "0644"
+      },
+      "slots": [
+        138
+      ]
+    },
+    {
+      "batch": 139,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-139.json",
+        "sha256": "8db02298ea914620c4790614ca72169439f354670ee0d44abeb7242d90d2e4bd",
+        "bytes": 6810,
+        "mode": "0644"
+      },
+      "slots": [
+        139
+      ]
+    },
+    {
+      "batch": 140,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-140.json",
+        "sha256": "b92b3768d9c4918ed4aa599327ebaeffded8139bd48be3def01592238c7a764b",
+        "bytes": 6918,
+        "mode": "0644"
+      },
+      "slots": [
+        140
+      ]
+    },
+    {
+      "batch": 141,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-141.json",
+        "sha256": "4566642565db114880e9c2305b806a99d3ab479dad2564fbf52528ff318fcc58",
+        "bytes": 7203,
+        "mode": "0644"
+      },
+      "slots": [
+        141
+      ]
+    },
+    {
+      "batch": 142,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-142.json",
+        "sha256": "81ff104f3951bbd2029b782d2f783059b07796963cc17bd54c14bb7925e2543a",
+        "bytes": 6813,
+        "mode": "0644"
+      },
+      "slots": [
+        142
+      ]
+    },
+    {
+      "batch": 143,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-143.json",
+        "sha256": "a9afc1536dc9ca80be1f8e615f23bf4f549239b5d88ca3723358d57920fa44fc",
+        "bytes": 6921,
+        "mode": "0644"
+      },
+      "slots": [
+        143
+      ]
+    },
+    {
+      "batch": 144,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-144.json",
+        "sha256": "7c3ab5c271995e506a82015cd37f6f97a2422f7e3eb072278c01989b58eb2f12",
+        "bytes": 8721,
+        "mode": "0644"
+      },
+      "slots": [
+        144
+      ]
+    },
+    {
+      "batch": 145,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-145.json",
+        "sha256": "85b58e02d7f5abc04852cd19060dc576fabce944750e17d64461b1fb97a7a598",
+        "bytes": 8331,
+        "mode": "0644"
+      },
+      "slots": [
+        145
+      ]
+    },
+    {
+      "batch": 146,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-146.json",
+        "sha256": "68d9bb018ee32b8784099e95b4762f192a360f64ead176ad3950b4491ab0548d",
+        "bytes": 8439,
+        "mode": "0644"
+      },
+      "slots": [
+        146
+      ]
+    },
+    {
+      "batch": 147,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-147.json",
+        "sha256": "96f6c88e9008cfb32ee57d68bd3eda8cbdc8c341fbdc464bce7e6723d29d88cd",
+        "bytes": 7198,
+        "mode": "0644"
+      },
+      "slots": [
+        147
+      ]
+    },
+    {
+      "batch": 148,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-148.json",
+        "sha256": "5f3b3b881676bc53e55b1854c35f42d842751a0f6448b03efd918cbe034fdfa0",
+        "bytes": 6808,
+        "mode": "0644"
+      },
+      "slots": [
+        148
+      ]
+    },
+    {
+      "batch": 149,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-149.json",
+        "sha256": "8265c27d0701e4373edf12ce0ff5e3749a2e19b802bb6087fe7c63e0eb4eeb13",
+        "bytes": 6916,
+        "mode": "0644"
+      },
+      "slots": [
+        149
+      ]
+    },
+    {
+      "batch": 150,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-150.json",
+        "sha256": "560b84c4fb768e91e78aa8f2921bc298e854dfdd1b12aa6fda809aefdf9003be",
+        "bytes": 7209,
+        "mode": "0644"
+      },
+      "slots": [
+        150
+      ]
+    },
+    {
+      "batch": 151,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-151.json",
+        "sha256": "34e59dab4e5591c88e8d76a16cd109a078cea22abd0f51872035248bfd605194",
+        "bytes": 6819,
+        "mode": "0644"
+      },
+      "slots": [
+        151
+      ]
+    },
+    {
+      "batch": 152,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-152.json",
+        "sha256": "ca58cf3209d87dec35b5fc34375a9bb6def74fa1ffdf9accd880977f756f0e52",
+        "bytes": 6927,
+        "mode": "0644"
+      },
+      "slots": [
+        152
+      ]
+    },
+    {
+      "batch": 153,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-153.json",
+        "sha256": "03b71ba0d5f89a3643a605b98a9b7b8543898beee9f6429aaf6eea781a2c1278",
+        "bytes": 8727,
+        "mode": "0644"
+      },
+      "slots": [
+        153
+      ]
+    },
+    {
+      "batch": 154,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-154.json",
+        "sha256": "aeb7d75f15f8638f9666bad4e7f47331cc84a6e78d9a28a12431f0c26c02b321",
+        "bytes": 8337,
+        "mode": "0644"
+      },
+      "slots": [
+        154
+      ]
+    },
+    {
+      "batch": 155,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-155.json",
+        "sha256": "72794b49bcd2069d1a4f98e91c4cbaba2c5e48a498d96fae6bbd789b62d3a092",
+        "bytes": 8445,
+        "mode": "0644"
+      },
+      "slots": [
+        155
+      ]
+    },
+    {
+      "batch": 156,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-156.json",
+        "sha256": "baf164e206d6099c9cc71b3c1b45b6e4e6ceccc30ecf4d6c1dc9150b30b60e49",
+        "bytes": 7202,
+        "mode": "0644"
+      },
+      "slots": [
+        156
+      ]
+    },
+    {
+      "batch": 157,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-157.json",
+        "sha256": "d5350642f496808386456b7df5b1f814f5a84401df2d3fdbd3389379b885cdcf",
+        "bytes": 6812,
+        "mode": "0644"
+      },
+      "slots": [
+        157
+      ]
+    },
+    {
+      "batch": 158,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-158.json",
+        "sha256": "027bdd0567a8f0de930155a3e5b8ca299f5a6545628e059f133618f623e18a88",
+        "bytes": 6920,
+        "mode": "0644"
+      },
+      "slots": [
+        158
+      ]
+    },
+    {
+      "batch": 159,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-159.json",
+        "sha256": "c6c42d43b987f06d70c22e842e5d1534c115e8da7825dd19dca0bf44640a43b2",
+        "bytes": 7198,
+        "mode": "0644"
+      },
+      "slots": [
+        159
+      ]
+    },
+    {
+      "batch": 160,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-160.json",
+        "sha256": "3edaa01c966b5adac4b5cdf50edfae76952405f1315f3a98e880b4242009278b",
+        "bytes": 6808,
+        "mode": "0644"
+      },
+      "slots": [
+        160
+      ]
+    },
+    {
+      "batch": 161,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-161.json",
+        "sha256": "aa97baa4953f4cde0d25cdf6c299f527283289be1801a1938762892ad029cb51",
+        "bytes": 6916,
+        "mode": "0644"
+      },
+      "slots": [
+        161
+      ]
+    },
+    {
+      "batch": 162,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-162.json",
+        "sha256": "105538e9735ae587bb9ca7dbf5f651ecea1a48d54687ce25d6a9f0477b30fb99",
+        "bytes": 8712,
+        "mode": "0644"
+      },
+      "slots": [
+        162
+      ]
+    },
+    {
+      "batch": 163,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-163.json",
+        "sha256": "aa159b6395a865cf6b81e0cc2d5982034e4620e62228f82950cfe3757c30daa2",
+        "bytes": 8322,
+        "mode": "0644"
+      },
+      "slots": [
+        163
+      ]
+    },
+    {
+      "batch": 164,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-164.json",
+        "sha256": "15ec677fa754a10a794d9154ba587b3ab939c70ecdbcffe817831917c57fc7e6",
+        "bytes": 8430,
+        "mode": "0644"
+      },
+      "slots": [
+        164
+      ]
+    },
+    {
+      "batch": 165,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-165.json",
+        "sha256": "896008591e482c456b6a65c510314d68cd5c215ccffca0b7177101ba64545904",
+        "bytes": 7205,
+        "mode": "0644"
+      },
+      "slots": [
+        165
+      ]
+    },
+    {
+      "batch": 166,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-166.json",
+        "sha256": "18859aee710959fc7d0cc512758fff59fb3d26cdd91ee9235e2dbc1c4083d551",
+        "bytes": 6815,
+        "mode": "0644"
+      },
+      "slots": [
+        166
+      ]
+    },
+    {
+      "batch": 167,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-167.json",
+        "sha256": "42943a78f6bf1993781d82a9c58b8c6ee280c82efee593c0fb31ba2b3edb303f",
+        "bytes": 6923,
+        "mode": "0644"
+      },
+      "slots": [
+        167
+      ]
+    },
+    {
+      "batch": 168,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-168.json",
+        "sha256": "d74e2ee539d42434642bf609eebfe08a8cb7def19a61f4507e1882e420c7c29d",
+        "bytes": 7352,
+        "mode": "0644"
+      },
+      "slots": [
+        168
+      ]
+    },
+    {
+      "batch": 169,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-169.json",
+        "sha256": "fb3c4b2811763fb2d8cdc407a305a709a1be338be3ba4fce70dccc5181008fc4",
+        "bytes": 6962,
+        "mode": "0644"
+      },
+      "slots": [
+        169
+      ]
+    },
+    {
+      "batch": 170,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-170.json",
+        "sha256": "75b5eedacee1b907ecf1b3262b995032d1679a2704c12710289c86ce7e46a8fd",
+        "bytes": 7070,
+        "mode": "0644"
+      },
+      "slots": [
+        170
+      ]
+    },
+    {
+      "batch": 171,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-171.json",
+        "sha256": "2576d40d542dcf951be457d476010373abd0626c031fb6c82b4ce158bc595c2b",
+        "bytes": 7354,
+        "mode": "0644"
+      },
+      "slots": [
+        171
+      ]
+    },
+    {
+      "batch": 172,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-172.json",
+        "sha256": "e282ac201fee23fdc7b9c39b202623246bffa1b8e5581da7664c82cb1e4fb147",
+        "bytes": 6964,
+        "mode": "0644"
+      },
+      "slots": [
+        172
+      ]
+    },
+    {
+      "batch": 173,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-173.json",
+        "sha256": "e1c01c5164d1511efd802f94480e27efdf1d0bfa81c6d627e25140af6464bebc",
+        "bytes": 7072,
+        "mode": "0644"
+      },
+      "slots": [
+        173
+      ]
+    },
+    {
+      "batch": 174,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-174.json",
+        "sha256": "ff3f056f7e39c75c4366dbe8a20432809228b15583fd3c7eeeda09aad1c34e9b",
+        "bytes": 8878,
+        "mode": "0644"
+      },
+      "slots": [
+        174
+      ]
+    },
+    {
+      "batch": 175,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-175.json",
+        "sha256": "35dfc693723687a7888a40eeacadd064eb18e3cd0eed69076eee45469faab56c",
+        "bytes": 8488,
+        "mode": "0644"
+      },
+      "slots": [
+        175
+      ]
+    },
+    {
+      "batch": 176,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-176.json",
+        "sha256": "effff452ac97c31d2e3895e0af776d1bd828cc1751688fc8e4f5b2ae49fcbf3b",
+        "bytes": 8596,
+        "mode": "0644"
+      },
+      "slots": [
+        176
+      ]
+    },
+    {
+      "batch": 177,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-177.json",
+        "sha256": "f42b01b0b31bf35ed21187ec295943e5bf79fa8729fa4516ed7429ddda58f685",
+        "bytes": 7361,
+        "mode": "0644"
+      },
+      "slots": [
+        177
+      ]
+    },
+    {
+      "batch": 178,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-178.json",
+        "sha256": "e47df2507036dc71b6884da5308773707e50575c42ba72b116761741db770e3e",
+        "bytes": 6971,
+        "mode": "0644"
+      },
+      "slots": [
+        178
+      ]
+    },
+    {
+      "batch": 179,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-179.json",
+        "sha256": "8e37b330cee9932e2cc96e1ba84a7fd58e4bddfa359370326d581a80ee36ea0f",
+        "bytes": 7079,
+        "mode": "0644"
+      },
+      "slots": [
+        179
+      ]
+    },
+    {
+      "batch": 180,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-180.json",
+        "sha256": "8d683d86eca1551385ab59bf424475c78bbdb24006be3b9ce54697b22d24cabe",
+        "bytes": 7352,
+        "mode": "0644"
+      },
+      "slots": [
+        180
+      ]
+    },
+    {
+      "batch": 181,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-181.json",
+        "sha256": "c6e70c27c0049ad45418a946789aabc922f213e142a3527d08f89f20b95965d9",
+        "bytes": 6962,
+        "mode": "0644"
+      },
+      "slots": [
+        181
+      ]
+    },
+    {
+      "batch": 182,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-182.json",
+        "sha256": "ab010dd4b915582f4f05ff4dc1c2556d06c793f699d1c8b655af43c54599be6f",
+        "bytes": 7070,
+        "mode": "0644"
+      },
+      "slots": [
+        182
+      ]
+    },
+    {
+      "batch": 183,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-183.json",
+        "sha256": "1ae51f15b295ad1d682e6877f01fbb9be7464aab58cc874a431ba36625d6bcf9",
+        "bytes": 8870,
+        "mode": "0644"
+      },
+      "slots": [
+        183
+      ]
+    },
+    {
+      "batch": 184,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-184.json",
+        "sha256": "0ed27fd2c08c05b289e6508d76bad5790ddd0a2e5803a6ee236d2456fb24bb60",
+        "bytes": 8480,
+        "mode": "0644"
+      },
+      "slots": [
+        184
+      ]
+    },
+    {
+      "batch": 185,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-185.json",
+        "sha256": "709514ef338050d97d55a6b0ddd47131487e2f1bba05b124b17c2f3318e74bc1",
+        "bytes": 8588,
+        "mode": "0644"
+      },
+      "slots": [
+        185
+      ]
+    },
+    {
+      "batch": 186,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-186.json",
+        "sha256": "41b99f82d7b0e2788d3bd17ece831d35540e0419dda83d621f726071e2aac9f4",
+        "bytes": 7361,
+        "mode": "0644"
+      },
+      "slots": [
+        186
+      ]
+    },
+    {
+      "batch": 187,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-187.json",
+        "sha256": "09467be7d66b36a478149318c157a5878a32ced62e966d85610444e3b18e1684",
+        "bytes": 6971,
+        "mode": "0644"
+      },
+      "slots": [
+        187
+      ]
+    },
+    {
+      "batch": 188,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-188.json",
+        "sha256": "ee55386d1140acfbc1a937fa45672dbb15b202390f2f68378d341eb8fe25e238",
+        "bytes": 7079,
+        "mode": "0644"
+      },
+      "slots": [
+        188
+      ]
+    },
+    {
+      "batch": 189,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-189.json",
+        "sha256": "30a9865f2272a841f2f5e92d0436f6bddf877323c9e863547555543743d6974d",
+        "bytes": 8881,
+        "mode": "0644"
+      },
+      "slots": [
+        189
+      ]
+    },
+    {
+      "batch": 190,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-190.json",
+        "sha256": "10de0b3c35dbde2fb537bddb9042b207f16f6005b364bc28515f16ab083d8c9e",
+        "bytes": 8491,
+        "mode": "0644"
+      },
+      "slots": [
+        190
+      ]
+    },
+    {
+      "batch": 191,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-191.json",
+        "sha256": "4e33e2e97a9c71456992022a9e063122ec12d8ae2762c2c84ca46dc6c3cdbcce",
+        "bytes": 8599,
+        "mode": "0644"
+      },
+      "slots": [
+        191
+      ]
+    },
+    {
+      "batch": 192,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-192.json",
+        "sha256": "719df40b4f001a5ec7ab7cfcca2f62444df93fb002267e48104ec403f93ddfd1",
+        "bytes": 7346,
+        "mode": "0644"
+      },
+      "slots": [
+        192
+      ]
+    },
+    {
+      "batch": 193,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-193.json",
+        "sha256": "5fe92ead7c534e9c41bddaf730659d79dcf31a160a15c1434feeca731b0f17f8",
+        "bytes": 6956,
+        "mode": "0644"
+      },
+      "slots": [
+        193
+      ]
+    },
+    {
+      "batch": 194,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-194.json",
+        "sha256": "5791af66ecf545ca541d2e44eb667b92373f802e00e2f0909f98ee23907158ca",
+        "bytes": 7064,
+        "mode": "0644"
+      },
+      "slots": [
+        194
+      ]
+    },
+    {
+      "batch": 195,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-195.json",
+        "sha256": "7ee8c1717098a19df9718665394ee74748b8b3cde0b9ea2a447e87b125332c9e",
+        "bytes": 8862,
+        "mode": "0644"
+      },
+      "slots": [
+        195
+      ]
+    },
+    {
+      "batch": 196,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-196.json",
+        "sha256": "dd15eaac761a67b553121eb1cab9a834f58fe1ca4ce03b8ab0454d6c6f908bb9",
+        "bytes": 8472,
+        "mode": "0644"
+      },
+      "slots": [
+        196
+      ]
+    },
+    {
+      "batch": 197,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-197.json",
+        "sha256": "b3fa0b95558cf99366184aa8bbf8aa074987fbaf04afef028597fa51af233985",
+        "bytes": 8580,
+        "mode": "0644"
+      },
+      "slots": [
+        197
+      ]
+    },
+    {
+      "batch": 198,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-198.json",
+        "sha256": "bf2108d7bc2e9914ed0c5529d7d5cbe401376b1f3f65053b19a093b44a4c028e",
+        "bytes": 7354,
+        "mode": "0644"
+      },
+      "slots": [
+        198
+      ]
+    },
+    {
+      "batch": 199,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-199.json",
+        "sha256": "7746646db72988389ea0220cfec3f39891820408f661100566db280da0bc8347",
+        "bytes": 6964,
+        "mode": "0644"
+      },
+      "slots": [
+        199
+      ]
+    },
+    {
+      "batch": 200,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-200.json",
+        "sha256": "1b35b2263fd4addcad7dcea645f36a3acb66743f9617f6aa6d9e4d9d762103aa",
+        "bytes": 7072,
+        "mode": "0644"
+      },
+      "slots": [
+        200
+      ]
+    },
+    {
+      "batch": 201,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-201.json",
+        "sha256": "60683a39e71c8b38846b2ff1c6a74280160f279538bf6e113444d93471848ef7",
+        "bytes": 8874,
+        "mode": "0644"
+      },
+      "slots": [
+        201
+      ]
+    },
+    {
+      "batch": 202,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-202.json",
+        "sha256": "5a76c002b3d11796a5cdd2803cb3ddf5b5f6205b440a6f7b46b41625632ead47",
+        "bytes": 8484,
+        "mode": "0644"
+      },
+      "slots": [
+        202
+      ]
+    },
+    {
+      "batch": 203,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-203.json",
+        "sha256": "243cdc5a4152f5556da42a7b42429fe727e9da2a81973cce0c32a501f9689813",
+        "bytes": 8592,
+        "mode": "0644"
+      },
+      "slots": [
+        203
+      ]
+    },
+    {
+      "batch": 204,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-204.json",
+        "sha256": "367459e78ad868fa4fb6dca364243deedc65e9785e1a2af51dfd51384faf7346",
+        "bytes": 7365,
+        "mode": "0644"
+      },
+      "slots": [
+        204
+      ]
+    },
+    {
+      "batch": 205,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-205.json",
+        "sha256": "ee04540e83af33e232d16bb2964b795c2d6663b5edc68548d17f21bdad7204db",
+        "bytes": 6975,
+        "mode": "0644"
+      },
+      "slots": [
+        205
+      ]
+    },
+    {
+      "batch": 206,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-206.json",
+        "sha256": "bae01a40fa1d1a47b56043db4fc4db0b0d8098f2e81d254590fba9768c7acd5e",
+        "bytes": 7083,
+        "mode": "0644"
+      },
+      "slots": [
+        206
+      ]
+    },
+    {
+      "batch": 207,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-207.json",
+        "sha256": "d80144fd64906887a1e1c40cd1799e652f4f007b135de83e54fd8c4cd284892b",
+        "bytes": 7508,
+        "mode": "0644"
+      },
+      "slots": [
+        207
+      ]
+    },
+    {
+      "batch": 208,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-208.json",
+        "sha256": "7224fde2c84035399733329ef6afeb8a4917415ca031a522a1d60f956337c63b",
+        "bytes": 7118,
+        "mode": "0644"
+      },
+      "slots": [
+        208
+      ]
+    },
+    {
+      "batch": 209,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-209.json",
+        "sha256": "fcaee42d5f9c11915a5896e78d488a1b3b3804e0c0b5a008dbdf26e3d7d01396",
+        "bytes": 7226,
+        "mode": "0644"
+      },
+      "slots": [
+        209
+      ]
+    },
+    {
+      "batch": 210,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-210.json",
+        "sha256": "5896895b6f233845970a05baa1c38d6a0d67988d742116a204fdf938ce678bfa",
+        "bytes": 7501,
+        "mode": "0644"
+      },
+      "slots": [
+        210
+      ]
+    },
+    {
+      "batch": 211,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-211.json",
+        "sha256": "2106122436bf44fc614c0ef80c5ecf5d85e04f2638cb0fafb49c379e316707a2",
+        "bytes": 7111,
+        "mode": "0644"
+      },
+      "slots": [
+        211
+      ]
+    },
+    {
+      "batch": 212,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-212.json",
+        "sha256": "195093200db0061006b84ddea01cd4d17d15901795f5774da312f114b31e3d01",
+        "bytes": 7219,
+        "mode": "0644"
+      },
+      "slots": [
+        212
+      ]
+    },
+    {
+      "batch": 213,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-213.json",
+        "sha256": "39178affd61ea1cf2bcec4a22a54aa3d5f18938ddd78c9583425f81b8e788f6e",
+        "bytes": 7502,
+        "mode": "0644"
+      },
+      "slots": [
+        213
+      ]
+    },
+    {
+      "batch": 214,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-214.json",
+        "sha256": "84e6412d8e2604e51d50ce13771449435f4c05ec91f1dc29c22f2cc54ccf4c29",
+        "bytes": 7112,
+        "mode": "0644"
+      },
+      "slots": [
+        214
+      ]
+    },
+    {
+      "batch": 215,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-215.json",
+        "sha256": "74ab171b553e566507f91f4691b0d139241fd68881f16d957ce263aa16d11770",
+        "bytes": 7220,
+        "mode": "0644"
+      },
+      "slots": [
+        215
+      ]
+    },
+    {
+      "batch": 216,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-216.json",
+        "sha256": "4c884034b675b0c4deb3eb484bbbafc2acd7c69916c7036f0daf56c39c468871",
+        "bytes": 7520,
+        "mode": "0644"
+      },
+      "slots": [
+        216
+      ]
+    },
+    {
+      "batch": 217,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-217.json",
+        "sha256": "aa873da86ab9427f51f419692c4bd69e56eea340c7b10134ec6b526517cfa046",
+        "bytes": 7130,
+        "mode": "0644"
+      },
+      "slots": [
+        217
+      ]
+    },
+    {
+      "batch": 218,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-218.json",
+        "sha256": "f237d90ede4238983d0b87a95bb785b05c94c425f0214953e60ffc3e77d2b97c",
+        "bytes": 7238,
+        "mode": "0644"
+      },
+      "slots": [
+        218
+      ]
+    },
+    {
+      "batch": 219,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-219.json",
+        "sha256": "992232c1a31f4eddcd7e48648d882f529f4987b416f6a26c7ea78bdd2fa37e19",
+        "bytes": 7508,
+        "mode": "0644"
+      },
+      "slots": [
+        219
+      ]
+    },
+    {
+      "batch": 220,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-220.json",
+        "sha256": "f0f9042b68012426c22c2de37cb147dcc8b377e016e3ba134e48863625c9fdae",
+        "bytes": 7118,
+        "mode": "0644"
+      },
+      "slots": [
+        220
+      ]
+    },
+    {
+      "batch": 221,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-221.json",
+        "sha256": "63999cc58c2df1e5195b4644a7dcafba73453a2effebf1383ec04d7c61891ecf",
+        "bytes": 7226,
+        "mode": "0644"
+      },
+      "slots": [
+        221
+      ]
+    },
+    {
+      "batch": 222,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-222.json",
+        "sha256": "8c9105e14f13433db6a716d58dcee953936a20e0fabbce1bee8561dfa3aff7d0",
+        "bytes": 9030,
+        "mode": "0644"
+      },
+      "slots": [
+        222
+      ]
+    },
+    {
+      "batch": 223,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-223.json",
+        "sha256": "7811333fbe454d968649e60a6a95a08b9c5826724290de5f5f9803d87ed37177",
+        "bytes": 8640,
+        "mode": "0644"
+      },
+      "slots": [
+        223
+      ]
+    },
+    {
+      "batch": 224,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-224.json",
+        "sha256": "13d2fa989b091da624661d1daf4660df0c1863c7ed61cf89ce5ea76c2a0d1838",
+        "bytes": 8748,
+        "mode": "0644"
+      },
+      "slots": [
+        224
+      ]
+    },
+    {
+      "batch": 225,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-225.json",
+        "sha256": "04f7028a0f325a53f6087bc2b735150ee398630e9fddd1fc61e48f43bdd9bac8",
+        "bytes": 7499,
+        "mode": "0644"
+      },
+      "slots": [
+        225
+      ]
+    },
+    {
+      "batch": 226,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-226.json",
+        "sha256": "1f7e3892ef7d510e927c8e6e2d88e4a1c52d2942cde9e45bc4df56a7a1c82ff0",
+        "bytes": 7109,
+        "mode": "0644"
+      },
+      "slots": [
+        226
+      ]
+    },
+    {
+      "batch": 227,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-227.json",
+        "sha256": "1da7a6d9c5f94b786a6b81a03d7b6e56c4c5b5fcc97aae44dbfd85711e8e5bac",
+        "bytes": 7217,
+        "mode": "0644"
+      },
+      "slots": [
+        227
+      ]
+    },
+    {
+      "batch": 228,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-228.json",
+        "sha256": "de90ceb3567e22240deb6fb66246fc48b5c82d4b67d2f5b10258e8e1e6d8a037",
+        "bytes": 7495,
+        "mode": "0644"
+      },
+      "slots": [
+        228
+      ]
+    },
+    {
+      "batch": 229,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-229.json",
+        "sha256": "8eb3584befed6b2fbbbf26d83ab99c1c2c294bc23f6f78d0ae1aa1bc939c4394",
+        "bytes": 7105,
+        "mode": "0644"
+      },
+      "slots": [
+        229
+      ]
+    },
+    {
+      "batch": 230,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-230.json",
+        "sha256": "c089144d19f20e9d92078b24583b07965fb79c7ba3d02261532d5f24a164c7ee",
+        "bytes": 7213,
+        "mode": "0644"
+      },
+      "slots": [
+        230
+      ]
+    },
+    {
+      "batch": 231,
+      "matchup": 0,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-231.json",
+        "sha256": "0a6b6bc393370eb0cac8a1fbccc218ec86da63ef00ebe0f7e6b5d56ea94ff927",
+        "bytes": 9023,
+        "mode": "0644"
+      },
+      "slots": [
+        231
+      ]
+    },
+    {
+      "batch": 232,
+      "matchup": 1,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-232.json",
+        "sha256": "a42326a0126b3ddb0a62399eb658ba747b9a2c140106b489ff8a7184ca14517e",
+        "bytes": 8633,
+        "mode": "0644"
+      },
+      "slots": [
+        232
+      ]
+    },
+    {
+      "batch": 233,
+      "matchup": 2,
+      "config": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/configs-v2/batch-233.json",
+        "sha256": "22601dc18a3ceb5e4cab4c34a5bde66cf9b4b03b887ad12dbb88abc97165203f",
+        "bytes": 8741,
+        "mode": "0644"
+      },
+      "slots": [
+        233
+      ]
+    }
+  ],
+  "planned_slots": 234
+}

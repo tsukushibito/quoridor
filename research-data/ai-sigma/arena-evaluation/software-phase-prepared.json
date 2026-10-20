@@ -1,0 +1,127 @@
+{
+  "issue": "quoridor-4lc.320",
+  "cwd": "/workspaces/quoridor/.worktree/arena-evaluation",
+  "status": "prepared_not_launched",
+  "permission": {
+    "sandbox": "danger-full-access",
+    "approvalPolicy": "never"
+  },
+  "phase_max_seconds": 300,
+  "old_compile_fixture_lint_remaining_seconds": 600,
+  "CPU": [0, 1],
+  "family_RAM_bytes": 2147483648,
+  "GPU": 0,
+  "build_linker_tmp_increment_cap_bytes": 41943040,
+  "inclusive_cap_bytes": 67108864,
+  "native_remaining_seconds": 180,
+  "native_jobs_used": 0,
+  "native_slots_used": 0,
+  "native_not_allocated_this_phase": true,
+  "commands": [
+    [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--release",
+      "-p",
+      "quoridor-runner",
+      "--lib",
+      "arena_manifest::tests",
+      "--",
+      "--test-threads=1"
+    ],
+    [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--release",
+      "-p",
+      "quoridor-runner",
+      "--test",
+      "arena",
+      "--test",
+      "config",
+      "--",
+      "--test-threads=1"
+    ],
+    [
+      "cargo",
+      "build",
+      "--offline",
+      "--locked",
+      "--release",
+      "-p",
+      "quoridor-runner",
+      "--bin",
+      "quoridor-runner"
+    ],
+    [
+      "cargo",
+      "clippy",
+      "--offline",
+      "--locked",
+      "--release",
+      "-p",
+      "quoridor-runner",
+      "--lib",
+      "--bin",
+      "quoridor-runner",
+      "--test",
+      "arena",
+      "--",
+      "-D",
+      "warnings"
+    ]
+  ],
+  "env": {
+    "CARGO_TARGET_DIR": "/workspaces/quoridor/.artifacts/rust-migration/target",
+    "CARGO_INCREMENTAL": "0",
+    "CARGO_BUILD_JOBS": "2",
+    "CARGO_NET_OFFLINE": "true",
+    "CUDA_VISIBLE_DEVICES": "",
+    "TMPDIR": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/software-validation/tmp",
+    "RUST_TEST_THREADS": "1"
+  },
+  "control_sources": [
+    {
+      "path": "/workspaces/quoridor/scripts/dev/research-job.sh",
+      "sha256": "fd9a141529ea711c8b6eeb691fddf352f8b980fbf40ba8e108d4758a0e6e9c7f"
+    },
+    {
+      "path": "/workspaces/quoridor/scripts/dev/research-job.py",
+      "sha256": "a7ab99ee281924e789c398424cd2543b082ea0ea2f083f352c8ff97554e3ab74"
+    },
+    {
+      "path": "/workspaces/quoridor/scripts/dev/research-session.py",
+      "sha256": "7c43491b0ff444ca2b67ec4e9a4d88756e482f18b9657a3b7548ca545a46793b"
+    },
+    {
+      "path": "/workspaces/quoridor/scripts/dev/research-runtime.py",
+      "sha256": "9d622080d19ec15a3b2fa84506d6bddf53aef5e82e1aeb79312e2729364405e4"
+    },
+    {
+      "path": "/workspaces/quoridor/python/quoridor_training/cycle_process.py",
+      "sha256": "9018ce0baef8ffb3ec1e66642f49eb28912dc7290ff3e2d2ec46332144102e9d"
+    }
+  ],
+  "canonical_job_entry": "/workspaces/quoridor/scripts/dev/research-job.sh",
+  "resource_contract": "/workspaces/quoridor/research-data/ai-sigma/arena-evaluation/task.md",
+  "stopped_source_manifest_sha256": "e08c7726d234eed336154a429a5b09861e4177b2f1b1eb55cf2769aa59e3d3fb",
+  "entry_requirements": [
+    "319 private immutable native caller/library actual path/SHA binding and current consumer validation",
+    "318 next-build exact STOP/direct-child wait/cleanup_complete/remaining[] receipt (old profile STOP insufficient)",
+    "fresh directed storage admission with maintenance94/control2 overlay exactly once, UNKNOWN retained",
+    "fresh CPU/cgroup/RAM/compiler/target-writer physics; no foreign interrupts"
+  ],
+  "observed": {
+    "319_gpu_qualifier_stop_receipt": "/workspaces/quoridor/.worktree/learning-million/.artifacts/learning-million/gpu-qualification-stop-r3.json",
+    "319_old_qualifier_native_path": "/workspaces/quoridor/.artifacts/rust-migration/target/release/nnue-diagnose",
+    "319_private_binding_verified": false,
+    "318_next_build_stop_verified": false,
+    "shared_target_write_this_task": 0,
+    "compile_test_lint_jobs_launched": 0
+  },
+  "measurement_limit": "319 fixed fit may co-run. Record concurrent activity; never read compiler elapsed as engine speed."
+}

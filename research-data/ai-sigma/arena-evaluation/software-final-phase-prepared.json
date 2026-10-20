@@ -1,0 +1,119 @@
+{
+  "issue": "quoridor-4lc.320",
+  "status": "prepared_not_launched",
+  "final_software_allocation_seconds": 120,
+  "support_max_seconds": 10,
+  "outer_max_seconds": 110,
+  "worker_max_seconds": 95,
+  "old600_remaining_before": 350.7587677059928,
+  "product_source_manifest_sha256": "a230db1c9709acf0265c6493f058f1551d6bf5ad0a7afebdafb3fd6b786cf277",
+  "commands": [
+    [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--release",
+      "-p",
+      "quoridor-runner",
+      "--lib",
+      "arena_manifest::tests",
+      "--",
+      "--test-threads=1"
+    ],
+    [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--release",
+      "-p",
+      "quoridor-runner",
+      "--test",
+      "arena",
+      "--test",
+      "config",
+      "--",
+      "--test-threads=1"
+    ],
+    [
+      "cargo",
+      "build",
+      "--offline",
+      "--locked",
+      "--release",
+      "-p",
+      "quoridor-runner",
+      "--bin",
+      "quoridor-runner"
+    ],
+    [
+      "cargo",
+      "clippy",
+      "--offline",
+      "--locked",
+      "--release",
+      "-p",
+      "quoridor-runner",
+      "--lib",
+      "--bin",
+      "quoridor-runner",
+      "--test",
+      "arena",
+      "--",
+      "-D",
+      "warnings"
+    ]
+  ],
+  "CPU": [0, 1],
+  "family_RAM_bytes": 2147483648,
+  "GPU": 0,
+  "NN": 0,
+  "build_linker_tmp_cap_bytes": 41943040,
+  "inclusive_cap_bytes": 67108864,
+  "cumulative_original_target_baseline": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/software-validation/target-before.json",
+  "canonical_job_entry": "/workspaces/quoridor/scripts/dev/research-job.sh",
+  "entry": "318 current alternating comparison exactSTOP/childwait/cleanup/remaining[], then fresh source/physics/storage",
+  "318_comparison_stop_verified": true,
+  "auto_retry_if_failure": false,
+  "native_seconds_remaining": 180,
+  "native_jobs_slots_used": [0, 0],
+  "previous_costs_preserved": {
+    "r1": 176.19579084496945,
+    "r2_support": 8,
+    "r2_job": 65.04544144903775
+  },
+  "scope": "repeat only affected2manifest/9arena/3config fixtures andrelease build/scopedClippy; no full lib suite/scientific clocks/NN/arena",
+  "env": {
+    "CARGO_TARGET_DIR": "/workspaces/quoridor/.artifacts/rust-migration/target",
+    "CARGO_INCREMENTAL": "0",
+    "CARGO_BUILD_JOBS": "2",
+    "CARGO_NET_OFFLINE": "true",
+    "CUDA_VISIBLE_DEVICES": "",
+    "TMPDIR": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/software-validation/final-r3/tmp",
+    "RUST_TEST_THREADS": "1"
+  },
+  "318_comparison_stop_receipt": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/search-optimization/comparison-stop-r1.json",
+  "control_sources": [
+    {
+      "path": "/workspaces/quoridor/scripts/dev/research-job.sh",
+      "sha256": "fd9a141529ea711c8b6eeb691fddf352f8b980fbf40ba8e108d4758a0e6e9c7f"
+    },
+    {
+      "path": "/workspaces/quoridor/scripts/dev/research-job.py",
+      "sha256": "a7ab99ee281924e789c398424cd2543b082ea0ea2f083f352c8ff97554e3ab74"
+    },
+    {
+      "path": "/workspaces/quoridor/scripts/dev/research-session.py",
+      "sha256": "7c43491b0ff444ca2b67ec4e9a4d88756e482f18b9657a3b7548ca545a46793b"
+    },
+    {
+      "path": "/workspaces/quoridor/scripts/dev/research-runtime.py",
+      "sha256": "9d622080d19ec15a3b2fa84506d6bddf53aef5e82e1aeb79312e2729364405e4"
+    },
+    {
+      "path": "/workspaces/quoridor/python/quoridor_training/cycle_process.py",
+      "sha256": "9018ce0baef8ffb3ec1e66642f49eb28912dc7290ff3e2d2ec46332144102e9d"
+    }
+  ]
+}
