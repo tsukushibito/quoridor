@@ -230,7 +230,7 @@ impl WorkerBudget {
         if self.local == 0 {
             let remaining = self.shared.remaining.as_ref().expect("bounded reservation");
             let mut grant = 0;
-            let result = remaining.fetch_update(Ordering::Relaxed, Ordering::Relaxed, |left| {
+            let result = remaining.try_update(Ordering::Relaxed, Ordering::Relaxed, |left| {
                 grant = left.min(64);
                 (grant != 0).then_some(left - grant)
             });
@@ -1189,7 +1189,7 @@ mod smp_boundary_tests {
                     .wait_timeout_while(
                         self.gate.lock().unwrap(),
                         std::time::Duration::from_secs(2),
-                        |ready| !ready,
+                        |ready| !*ready,
                     )
                     .unwrap();
                 if timeout.timed_out() && !*guard {

@@ -4800,6 +4800,8 @@ mod persistent_tt_tests {
             let l = limits(1, true, 4096);
             let cancel = AtomicBool::new(false);
             let mut state = Search::<false> {
+                #[cfg(not(target_arch = "wasm32"))]
+                worker_budget: None,
                 eval: e.as_ref(),
                 score_domain: ScoreDomain::LEGACY,
                 eval_scratch: e.create_scratch(),
@@ -5493,6 +5495,8 @@ mod child_buffer_tests {
             let history = c.history_counts();
             let parent = e.prepare_context(&c).unwrap();
             let mut state = Search::<false> {
+                #[cfg(not(target_arch = "wasm32"))]
+                worker_budget: None,
                 eval: &e,
                 score_domain: ScoreDomain::LEGACY,
                 eval_scratch: e.create_scratch(),

@@ -83,10 +83,10 @@ fn tt_capacity397_larger_table_discard_clear_preserve_allocation() {
     table.next_generation();
     // Controlled distinct indices isolate allocation retention / generations;
     // they are not assertions about a real board hash or numerical TT reuse.
-    table.insert_hashed(make_entry(), 1, &mut stats);
+    table.insert_hashed::<false>(make_entry(), 1, &mut stats);
     table.committed = table.generation;
     table.next_generation();
-    table.insert_hashed(make_entry(), 2, &mut stats);
+    table.insert_hashed::<false>(make_entry(), 2, &mut stats);
     table.discard_uncommitted();
     assert!(table.slots[1].is_some());
     assert!(table.slots[2].is_none());
@@ -147,7 +147,7 @@ fn tt_capacity397_precancel_discards_uncommitted_without_reallocation() {
     let capacity = session.tt_capacity();
     let retained = session.retained_memory_bytes().0;
     session.table.next_generation();
-    session.table.insert(
+    session.table.insert::<false>(
         Entry {
             key: Key::of(&root),
             context: ContextFingerprint::of(&root).unwrap().0,

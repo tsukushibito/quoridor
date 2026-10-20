@@ -250,7 +250,7 @@ fn control385_tt_cutoff_and_order_only_preserve_legality_and_parent() {
                     s.board = Some(BoardCursor::of(c));
                     *s.table = Table::new(4096).unwrap();
                     s.table.next_generation();
-                    s.table.insert(
+                    s.table.insert::<false>(
                         Entry {
                             key: Key::of(c),
                             context: s.context.unwrap().0,

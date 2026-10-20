@@ -17,7 +17,7 @@ fn namespace(label: &str) -> SearchNamespace {
 fn seed_table(session: &mut SearchSession) {
     let root = SigmaContext::from_prefix(&[]).unwrap();
     session.table.next_generation();
-    session.table.insert(
+    session.table.insert::<false>(
         Entry {
             key: Key::of(&root),
             context: ContextFingerprint::of(&root).unwrap().0,

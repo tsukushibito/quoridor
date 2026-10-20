@@ -203,7 +203,7 @@ fn lmr408_zero_quantum_tt_first_distinct_fourth_uses_full_pvs_without_fake_trial
                     (child, 5, if i < 3 { 0.5 } else { -0.5 }, best)
                 }))
             {
-                s.table.insert(
+                s.table.insert::<false>(
                     Entry {
                         key: Key::of(&position),
                         context: ContextFingerprint::of(&position).unwrap().0,
@@ -283,7 +283,16 @@ fn lmr408_multi_ply_full_depth_confirmation_error_cancel_and_parent_restore() {
         with_state(&root, &eval, &cancel, &mut history, |s, c| {
             s.limits = &L;
             let before = (Key::of(c), c.history_counts(), s.context, s.board);
-            let result = s.reduced_child(c, None, c.legal_ids()[0], [5, 3], -1.0, 1);
+            let result = s.reduced_child(
+                c,
+                None,
+                c.legal_ids()[0],
+                [5, 3],
+                -1.0,
+                1,
+                #[cfg(feature = "research-diagnostics")]
+                None,
+            );
             assert_eq!(result.is_ok(), fail_at.is_none() && cancel_at.is_none());
             assert_eq!(s.stats.lmr_attempts, 1);
             assert_eq!(

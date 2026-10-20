@@ -132,7 +132,7 @@ fn continuation360_compact_mismatched_count_context_is_only_ordering_for_product
             s.static_enabled = StaticMode::Off;
         }
         s.ordering_diagnostics = true;
-        s.table.insert(
+        s.table.insert::<false>(
             Entry {
                 key: Key::of(&a),
                 context: ContextFingerprint::of(&a).unwrap().0,

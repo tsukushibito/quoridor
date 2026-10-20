@@ -28,7 +28,7 @@ pub(super) fn warm(s: &mut Search<'_>, c: &SigmaContext, best: u16, depth: u16) 
     s.board = Some(BoardCursor::of(c));
     *s.table = Table::new(4096).unwrap();
     s.table.next_generation();
-    s.table.insert(
+    s.table.insert::<false>(
         Entry {
             key: Key::of(c),
             context: s.context.unwrap().0,

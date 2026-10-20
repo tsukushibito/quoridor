@@ -33,7 +33,7 @@ fn lmr400_method_profile_switch_and_reset_clear_real_tt_and_keep_defaults_off() 
         assert!(!session.lmr_enabled());
         methods.push(session.namespace().selectivity.clone());
         session.table.next_generation();
-        session.table.insert(
+        session.table.insert::<false>(
             Entry {
                 key: Key::of(&root),
                 context: ContextFingerprint::of(&root).unwrap().0,
@@ -232,7 +232,7 @@ fn warm_child(s: &mut Search<'_>, root: &SigmaContext, action: u16, value: f32) 
     *s.table = Table::new(4096).unwrap();
     s.table.next_generation();
     let key = Key::of(&child);
-    s.table.insert(
+    s.table.insert::<false>(
         Entry {
             key,
             context: ContextFingerprint::of(&child).unwrap().0,
@@ -324,7 +324,17 @@ fn shared402_lmr_confirmation_research_keeps_frozen_same_hand_and_tail_cursor() 
                 warm_child(s, c, target, -0.5);
                 let before = (Key::of(c), s.context, s.board);
                 assert_eq!(
-                    s.reduced_child(c, None, target, [2, 1], 0.0, 1).unwrap(),
+                    s.reduced_child(
+                        c,
+                        None,
+                        target,
+                        [2, 1],
+                        0.0,
+                        1,
+                        #[cfg(feature = "research-diagnostics")]
+                        None,
+                    )
+                    .unwrap(),
                     0.25
                 );
                 assert_eq!(
@@ -368,7 +378,17 @@ fn lmr400_reduced_fail_low_stores_actual_child_depth_and_restores_parent() {
             let child = warm_child(s, c, action, 0.5);
             let before = (Key::of(c), s.context, s.board);
             assert_eq!(
-                s.reduced_child(c, None, action, [2, 1], 0.0, 1).unwrap(),
+                s.reduced_child(
+                    c,
+                    None,
+                    action,
+                    [2, 1],
+                    0.0,
+                    1,
+                    #[cfg(feature = "research-diagnostics")]
+                    None,
+                )
+                .unwrap(),
                 -0.5
             );
             assert_eq!((Key::of(c), s.context, s.board), before);
@@ -409,7 +429,16 @@ fn lmr400_shallow_fail_high_requires_full_child_and_confirmation_error_cancel_re
                 s.table.clear();
             }
             let before = (Key::of(c), s.context, s.board);
-            let result = s.reduced_child(c, None, action, [2, 1], 0.0, 1);
+            let result = s.reduced_child(
+                c,
+                None,
+                action,
+                [2, 1],
+                0.0,
+                1,
+                #[cfg(feature = "research-diagnostics")]
+                None,
+            );
             match failure {
                 0 => {
                     assert_eq!(result.unwrap(), 0.0);

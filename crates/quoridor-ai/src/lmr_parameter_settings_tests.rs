@@ -180,7 +180,16 @@ fn parameter_settings_custom_table_preserves_error_cancel_and_parent_restore() {
             s.lmr_table = Some(&TABLE);
             s.lmr = true;
             let before = (Key::of(c), s.context, s.board);
-            let result = s.reduced_child(c, None, action, [2, 1], 0.0, 1);
+            let result = s.reduced_child(
+                c,
+                None,
+                action,
+                [2, 1],
+                0.0,
+                1,
+                #[cfg(feature = "research-diagnostics")]
+                None,
+            );
             if cancelled {
                 assert!(matches!(
                     result,
