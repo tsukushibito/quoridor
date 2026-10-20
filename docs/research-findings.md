@@ -2868,3 +2868,15 @@ Rootは採用に足る資格が無い候補の比較専用legal_wall差分とwal
 人間の新指示により、同じroot全体を重複探索するLazy SMPとは別に、rootの先頭有力手を先に読み、残り候補を排他的に分けるopt-in2thread案を同じSMP作者へ配分した。まず保存候補手別仕事量と共通child経路を限定精査する。先頭手の直列支配、負荷不均衡、枝刈りの変化は未検証で、node比率を時間の比率にせず、見込みが無ければ理由を残して終了できる。[人間指示に基づく境界](../.artifacts/research-team/integration324/root-split-followup-contract.txt)。
 
 必要な不足診断だけ最大26calls/26M、実装する場合は同じ凍結source/Cedar/LMR/PVS/ordering/総TT1MでN1・現Lazy N2・root分担N2の各二反復、固定深さ上限8と100ms/5msを最大312calls/312Mで比較する。計338calls/338Mを上限とし、条件・順序・完成可能な深さは結果前に固定する。元root順位/LMR量、stale-alphaのtyped boundと必要再探索、反復完成、mainだけの最終authority、独立履歴、全worker取消/cap/quietを保つ。現search_forcedのnative SMP拒否を隠さず必要な共通child経路だけを扱い、全木並列・pernode scheduler・新対局/fit/model/teacherやdefault昇格は含まない。実source開始/実計測は予定と区別し、25.3/26/27を変更・中断しない。
+
+### aspirationを優先し、実source着手を区別する（324.29）
+
+人間がroot aspirationの優先導入を明示し、新しい29を既存Sol6.1/high作者へ配送した。後続手のPVS null-windowは既にあり、今回は前の同root完成反復scoreをcenterにするroot窓を追加する別の変更である。28の保存分析・固定診断source/通常要求の準備は保持するが、次の競合root source/Cargo/fair計測は29を先にする。既に入場した25.3/27のjobやsource-readerを取消・再演せず実STOPを用いる。[契約と有限枠](../.artifacts/research-team/integration324/cedar-aspiration-window-v1/task-contract.txt)。
+
+作者はimmutable Main1dce95bから私有Rust差分へ実着手した。[実source-start記録](../.worktree/assets/perf/cedar-aspiration-window-v1/actual-source-start.json)で報告された一候補は半幅0.125、拡大率2、D3開始、D1/D2 full-window seed、最大4retry後に同深さfull windowへ戻る方式である。legacyの評価域とterminal utility、raw域・非有限の資格を区別する。根拠は保存21のfirst/latest scalar26遷移に限られ、隣接depthの変動やretry頻度はUNKNOWNであり、較正済み最適値・大幅利益とは呼ばない。この時点はtyped config/window state/namespace/有界counterのsource着手だけで、共通root/session/typed normal consumerへの接続は実装中、固定source/独立review/software/native/性能は未資格である。未完成postをMainへ適用したり、先行reviewを配送したりしない。
+
+29の新208calls/208MはN1/Current/Cedar/Control/LMR/PVS/TT1MのOFF/ONを、元26prefix/6時系列・暖機再用で固定深さと100ms5の二条件へ分ける。窓失敗を完成値にせず、retryでnode/time/cancel枠をresetせず、最後の完成反復と親/完全履歴の復元を守る。固定depth上限8は26のroot4D6未完を反映して結果前固定する。窓が変える選択的tree/value/PVと再探索費を残し、深さ境界だけで利益を全否定せず、事前条件を通る場合の別枠128局/64family両色・2.048Gまでを許可された有限採否とする。新モデル・LMR調整・全木並列・sweep/refillや自動既定昇格は含まない。
+
+### 独立25.3の新64は通常回収STOP、棋力資格は解析待ち
+
+新64は同じ真正f686/BUILD84fd、N1 Half対Current、固定first32family両色、100ms/5ms・max200ply・perSearch1M・独立1.024Gのまま実entryし、job67fa4810を一度通常回収した。[実native/normal/source STOP](../.worktree/assets/perf/cedar-shallow-main-history-v1/corrected-entry-trial-v1/forward64-collection-v1/native-normal-source-STOP.json)。保存された通常manifest/dataはPASSでslots0..63/missingなしだが、fullqualification/32pairs/UNKNOWN/WDLと唯一の既存native customRng区間の解釈はこの記録時点で解析待ちである。新RNG/区間再計算・validator/native/FINALIZE replayや追加局は行わない。native/通常readerは10:27:27.846777Zに実STOPし、該当source/重IO凍結だけを解除した。外側298.365672738秒と受付寿命300.363615秒は別scopeで、一度だけ数えnestedを加算しない。原25の4UNKNOWN/100未実行/旧64STOPPED、新104消化済み、default Currentと全FAILED/NULL/UNKNOWN費は保持する。

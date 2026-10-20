@@ -276,3 +276,13 @@ valuebits/action/PV/depth/stop/探索tree work/fullhistory/親復元を対応し
 比較は同じ凍結source・Cedar・LMR/PVS/order・総TT1MのN1/現Lazy N2/root分担N2、各二反復×26入力×固定深さと100ms5で最大312/312M、診断込み338/338Mまで。深さ上限8・順序・採否は結果前固定し、初期化と時系列を再用する。元順位をworker内で振り直さず、stale alphaのboundをexactにせず必要確認探索を行い、全候補処理/正当cutoffの時だけ反復完成、mainだけが最終結果を確定する。完全履歴・typedTT・独立scratch・合算cap・cancel/error/reset/dropと直接join/reapを維持する。
 
 Search/whole/reset/終了、完成深度分布、main/total work/CPU、先頭手と他枝の仕事・待ち/再探索を最小の有界観測で分ける。node増や独立候補数を速度/有効情報量にせず、不足/未完はUNKNOWNのまま補充しない。今回は棋力対局・全木並列・4threads/tuning・policy/value/model/教師/fit未発行。効果が乏しければ保持費を示してprototype/専用observerを撤去し、過去復元はGit、科学データ/FAILEDは保存する。25.3/26/27と時計・重いbuild/IOだけをactualSTOPで調整し、親close/ACKを入口にしない。状態はBeads、[依頼境界](../../.artifacts/research-team/integration324/root-split-followup-contract.txt)と本agenda/findings以外の管理系は追加しない。
+
+## root aspirationを次の競合枠で優先する（324.29、2026-10-20）
+
+人間の新しい明示指示により、前の完成反復scoreを中心に狭いroot窓を設けるaspirationを、次の新規root source/Cargo/fair計測で28より優先する。既存の後続手PVS null-windowとは別であり、大幅改善は未確認である。枝刈りの利益とfail-low/highの再探索費を共に測る。28の私有診断source・通常26要求の準備と独立保存分析は保持し、25.3/27の既発行job・通知先・固定条件を変更・取消・再演しない。[新しい具体契約](../../.artifacts/research-team/integration324/cedar-aspiration-window-v1/task-contract.txt)。
+
+同じ共通root/PVS/SearchSessionに研究opt-in/default OFFを最小接続する。seedは広い窓で完成させ、同じroot/callで直前に完成した反復だけをcenterに用いる。width・growth・activation depth・有限retry後のfull-window fallbackは現役typed configに集約する。窓失敗はtyped boundであり完成反復ではなく、retry全体でnode/deadline/reserve/cancel/error枠を累積する。中断中の暫定PVやscoreを最後の完成値へ上書きせず、親Position/完全History/FT/scratch、goal/threefold、TT context/namespace/depth/typed leaf、元root順位/LMR/PVSとrestricted-rootの従来意味を保つ。関連Maxは固定された新境界だけを確認し、小さいLMR OFF/full-width基準と未検査のfail/retry/stop/restore/score-domain検査を行う。旧成功suiteやモデル資格は再演しない。
+
+新有限比較はN1・Current history/Cedar35cbb/Control/baselineLMR/PVS/TT総量1M/path_tail/旧approx OFF、同じ新imageのOFF/ON一因子である。元26genuine prefixes/6同色時系列をsession内で初期化再用し、OFF-ON-ON-OFFの二反復を固定深さと100ms/5msで各104、最大208calls/208Mとする。固定depth上限8は保存された実完成値から結果前に一度決め、26のroot4D6未完を既知の完成根拠に使わない。幅は保存score/domainから一候補だけ選び、pilot/sweep/refill/UNKNOWNのsubset採用はしない。Search本体、setup/reset/drop/whole、CPU、局面別完成深さ・手/PV・nodes/evalsと有界なroot retry仕事を分け、選択的LMR ONの異なるtree/valueを同仕事bitexact speedupとは呼ばない。
+
+事前の正しさ・時計・重大退行条件が成立すれば、同じ100ms/5msのON/OFFを固定64canonical family両色128局、max200ply・1M/search・新独立aggregate上限2.048Gで一回比較できる。book/seed/唯一のfamily区間/採否と配分は結果前に固定し、depth増加だけを必須gateにしない。未完成/障害はUNKNOWN/FAILEDのまま残し、旧枠の移譲や追加反復をしない。性能・棋力の有限根拠と不確実性から採否を決め、実装完了だけで研究/製品既定を上げず、不要な比較code/counterは復元元を保存して撤去する。普通source/softwareは事後の対象保持確認のみ、具体bulkは324が現50GB内で実配分する。実STOP、sole Main/Git/Cargo、全pause/seal/model/default/foreign/元費用を保ち、通常commit/pushは意味ある保存境界で継続する。
