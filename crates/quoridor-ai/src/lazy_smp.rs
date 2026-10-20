@@ -70,10 +70,11 @@ impl SharedTable {
             return;
         };
         let slot = &mut bucket.slots[index % SLOTS_PER_LOCK];
+        // Match the local table's generation/depth retention across writers.
+        // A different generation may replace a collision; probe qualification
+        // still decides whether any retained full entry is usable numerically.
         if slot.as_ref().is_some_and(|old| {
-            old.writer == writer
-                && old.entry.generation == entry.generation
-                && old.entry.depth > entry.depth
+            old.entry.generation == entry.generation && old.entry.depth > entry.depth
         }) {
             return;
         }
@@ -969,6 +970,103 @@ mod smp_boundary_tests {
                 .is_none()
         );
         assert_eq!(table.capacity(), 17);
+    }
+
+    #[test]
+    fn shared_replacement_retains_current_generation_depth_across_writers_and_expires_collisions() {
+        let a = SigmaContext::from_prefix(&[13, 67, 4, 76]).unwrap();
+        let other_history = SigmaContext::from_prefix(&[3, 75, 4, 76]).unwrap();
+        let collision = SigmaContext::from_prefix(&[13, 67]).unwrap();
+        assert_eq!(Key::of(&a), Key::of(&other_history));
+        assert_ne!(a.history_counts(), other_history.history_counts());
+        assert_ne!(Key::of(&a), Key::of(&collision));
+        let table = Arc::new(SharedTable::new(1).unwrap());
+        let mut stats = SearchStats::default();
+        let mut ignored = 0;
+        let mut deep = entry(&a, 7, 0.25, Bound::Exact);
+        deep.depth = 8;
+        table.insert(0, deep, &mut stats);
+
+        // Writer identity never licenses overwriting the same-generation deep
+        // record, including a shallow leaf or a different weighted history.
+        for bound in [
+            Bound::Exact,
+            Bound::Lower,
+            Bound::Upper,
+            Bound::ApproxLeaf,
+            Bound::SafeRaceLeaf,
+        ] {
+            let mut shallow = entry(&other_history, 7, -0.5, bound);
+            shallow.depth = if matches!(bound, Bound::ApproxLeaf | Bound::SafeRaceLeaf) {
+                shallow.best = None;
+                0
+            } else {
+                3
+            };
+            table.insert(1, shallow, &mut stats);
+            let (found, foreign) = table.candidate(deep.hash, 1, &mut ignored).unwrap();
+            assert!(foreign);
+            assert_eq!(found.depth, 8);
+            assert_eq!(found.value.to_bits(), deep.value.to_bits());
+            assert!(matches!(found.bound, Bound::Exact));
+            assert!(Table::compatible(&found, ContextFingerprint::of(&a)));
+            assert!(!Table::compatible(
+                &found,
+                ContextFingerprint::of(&other_history)
+            ));
+        }
+        assert_eq!(stats.tt_replacements, 0);
+
+        // Equal-depth updates keep their existing replacement semantics.
+        let mut equal = entry(&a, 7, -0.25, Bound::Lower);
+        equal.depth = 8;
+        table.insert(1, equal, &mut stats);
+        let (found, foreign) = table.candidate(equal.hash, 1, &mut ignored).unwrap();
+        assert!(!foreign);
+        assert!(matches!(found.bound, Bound::Lower));
+        assert_eq!(found.value.to_bits(), equal.value.to_bits());
+        assert_eq!(stats.tt_replacements, 1);
+
+        // The one-slot collision is protected only for this generation, not
+        // forever. It must not become a numeric hit for a different full key.
+        let mut next = entry(&collision, 7, 0.75, Bound::Upper);
+        next.depth = 1;
+        table.insert(0, next, &mut stats);
+        let mut reader = Table::persistent(1).unwrap();
+        reader.shared = Some((table.clone(), 0));
+        assert!(reader.get_hashed::<true>(&next.key, next.hash).is_none());
+        next.generation = 8;
+        table.insert(0, next, &mut stats);
+        let found = reader.get_hashed::<true>(&next.key, next.hash).unwrap();
+        assert_eq!(found.depth, 1);
+        assert!(matches!(found.bound, Bound::Upper));
+        assert_eq!(found.value.to_bits(), next.value.to_bits());
+        assert_eq!(stats.tt_replacements, 2);
+
+        // Leaf kinds retain their own full entry and existing equal-depth
+        // semantics. Replacement never converts one typed bound to another.
+        for bound in [Bound::ApproxLeaf, Bound::SafeRaceLeaf] {
+            let mut leaf = entry(&a, 8, 1.0, bound);
+            leaf.depth = 0;
+            leaf.best = None;
+            table.insert(1, leaf, &mut stats);
+            assert!(reader.get_hashed::<true>(&leaf.key, leaf.hash).is_none());
+            leaf.generation = 9;
+            table.insert(1, leaf, &mut stats);
+            let found = reader.get_hashed::<true>(&leaf.key, leaf.hash).unwrap();
+            assert_eq!(found.depth, 0);
+            assert!(found.best.is_none());
+            assert_eq!(found.bound as u8, bound as u8);
+            assert!(Table::compatible(&found, ContextFingerprint::of(&a)));
+            table.clear_quiet();
+            assert!(table.candidate(leaf.hash, 0, &mut ignored).is_none());
+            next.generation = 8;
+            table.insert(0, next, &mut stats);
+        }
+        table.clear_quiet();
+        assert!(table.candidate(next.hash, 0, &mut ignored).is_none());
+        assert_eq!(table.capacity(), 1);
+        assert_eq!(ignored, 0);
     }
 
     #[test]
