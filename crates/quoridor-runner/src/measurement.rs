@@ -534,12 +534,15 @@ impl Target for SearchTarget {
         let mut lmr_observation = request
             .observe_lmr
             .then(|| Box::new(alphabeta::LmrObservation::default()));
-        let mut opportunity = self.settings.neighbour_opportunity.as_ref().map(|_| {
-            let mut o = alphabeta::NeighbourOpportunity::default();
-            o.root_ordering =
-                (self.settings.root_ordering_quality == Some(true)).then(Default::default);
-            o
-        });
+        let mut opportunity =
+            self.settings
+                .neighbour_opportunity
+                .as_ref()
+                .map(|_| alphabeta::NeighbourOpportunity {
+                    root_ordering: (self.settings.root_ordering_quality == Some(true))
+                        .then(Default::default),
+                    ..Default::default()
+                });
         let inference_before = self.sigma_value.as_ref().map(|e| e.work()).transpose()?;
         let table_generation_before = session.table_generation();
         let search_started = Instant::now();
