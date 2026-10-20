@@ -2714,6 +2714,10 @@ first32の実行は全32 operations・512局/256完全pair/256 tuning family・U
 
 2026-10-20の実source着手は、私有の固定総capacity共有TT ownerとalpha Entry/module入口の差分で確認した。総1M shared TTをN>1で共有し、N1は元LOCAL/value経路を維持する方向。Entry全体のtry-lockとwriter世代のcommit公開を実装し、全体node Mutexやdepthごとの全表commit/discard走査を追加していない。Rootは[実source開始証拠](../.worktree/assets/perf/cedar-lazy-smp-v1/source-start-handoff-v1.json)とprivate post/rustfmt/guardの実FileRefsを確認した。worker pool・root同期・aggregate node budget・normal consumerと限定境界定義は続けて実装中で、source clear・型検査/compile・Main採用・software/性能PASSではない。初回unused-import lint失敗を保持し、bulk support/image/入口文書は着手を待たせていない。main完成snapshotのみ返却、両群総TT1M、全worker静止までの費用を分け、2core CPU費増だけを失敗としない条件を同じtaskへ反映した。
 
+Lazy SMPの私有実装は[固定source9fdb8e0eと実STOP](../.worktree/assets/perf/cedar-lazy-smp-v1/fixed-source-handoff-v1.json)まで到達した。N1 LOCAL、session寿命のN−1 sleeping helpers、総1Mのwhole-entry共有TT、commit epoch・総node ticket・主の完成snapshotだけの返却、通常consumerを含む。既存Maxへ固定版の限定source確認を実配送し、新AI6＋Runner2＋Python1定義は未build/未型検査/未実行、Main採用・正しさ・速度は未資格。両群new imageの208-call結果前条件を固定し、旧image比の公平な1thread時間は未測定のまま扱う。
+
+保持見積りは[訂正22222af1](../.worktree/assets/perf/cedar-lazy-smp-v1/effect-preparation-v1/capacity-refinement-v1.json)で、実source9,879,552B＋future161,480,704B＝171,360,256Bとなり、元160MiB案を超えるため176MiB案へ訂正した。これは未発行。実不足への対応として、終了済Buildの保存metadataとfresh stat/EX lockにより、再生成可能なdebug .rlib/.rmetaの222 files/253,665,280 allocated Bだけを一度整理した。実行可能image/.so・release cache・Git/モデル/RAW/FAILED/唯一証拠は保持し、再build費を無料とは扱わない。[実削減・返却](../.artifacts/research-team/integration324/cedar-lazy-smp-v1/software-v1/debug-cache-retirement-v1/return.json)。既知cover49,663,734,784B、decimal50GBまで336,265,216Bで、以後software実保持・tail/globalactual/全費は未確定。旧削減量の再計上や科学枠返金/貸与はない。
+
 ### 履歴点の内訳と更新経緯を調べる（324.23、人間直接指示、2026-10-20）
 
 SMP22と別の既存Sol6.1/high9へ新しい保存/source調査を割り当てた。21の固定26 rowsと小さい順位表を用い、root14wall207ほかordinary/順位変化例とTT/PV対照例についてmain/continuation寄与、更新前後差、浅い失敗/確認・窓/returnとの対応を調べる。通常rootのpathは空でcontinuation行None、ageは16有効rootごとという供給済みsource事実を出発点とし、実対局直前手のseedや減衰発生を仮定しない。非線形gravityのbonus総和を現在点へ等置せず、欠落とcase選択biasを残す。[調査境界と受入れ](design/ai-rust-migration.md#bounded-history-score-provenance-diagnostic-32423)。
