@@ -2748,6 +2748,22 @@ Clippy job474ba95bはaffected AI／Runner・全target・no-deps・Dwarningsで�
 
 保持見積りは[訂正22222af1](../.worktree/assets/perf/cedar-lazy-smp-v1/effect-preparation-v1/capacity-refinement-v1.json)で、実source9,879,552B＋future161,480,704B＝171,360,256Bとなり、元160MiB案を超えるため176MiB案へ訂正した。これは未発行。実不足への対応として、終了済Buildの保存metadataとfresh stat/EX lockにより、再生成可能なdebug .rlib/.rmetaの222 files/253,665,280 allocated Bだけを一度整理した。実行可能image/.so・release cache・Git/モデル/RAW/FAILED/唯一証拠は保持し、再build費を無料とは扱わない。[実削減・返却](../.artifacts/research-team/integration324/cedar-lazy-smp-v1/software-v1/debug-cache-retirement-v1/return.json)。既知cover49,663,734,784B、decimal50GBまで336,265,216Bで、以後software実保持・tail/globalactual/全費は未確定。旧削減量の再計上や科学枠返金/貸与はない。
 
+### Lazy SMP原208call完了：有限有用性条件未達（324.22、2026-10-20）
+
+実softwareは新Rust11定義・Python2件・affected AI/Runner all-target Clippy警告0が各一度PASSし、真正release BUILD6716962e/image8c9a2eaeを通常finalizeした。旧成功suiteを再演せず、途中のcompiler/fixture/Clippy失敗・NULL/cleanup/maskの元domainを保持した。[実software・source STOP](../.artifacts/research-team/integration324/cedar-lazy-smp-v1/software-v1/collection-v1/completion-and-STOP.json)。release outer155.214769302秒と受付寿命157.154556秒は同じ寿命の別計測で、nestedを加算しない。
+
+元26prefix/6時系列を再用した固定深さABBA104と100ms/5ms reserve ABBA104は、一つのjob0e4d0a27で全8 normalmanifest/data PASS、208calls/48sessions/40,380,103nodesとなった。両群は同じ新画像・総TT1M、1M node制限は全worker合計で、主の完成snapshotだけを返した。root/完全weighted history/STM/合法手/parent復元・accountingとN1固定深さ26件の反復対応を保存結果で確認した。旧image比のN1実測parity/公平wall overheadはUNMEASUREDであり、同じ新sourceの反復やsource保護対応では代用しない。[全root表・条件・費用](../.worktree/assets/perf/cedar-lazy-smp-v1/numeric-v1/analysis-v1/report-ja.md)。
+
+| 元の判定         | 実結果                                                                                                                                                        | 固定条件との対応                               |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| 正しさ・実用必須 | 全104 clockの主callback receipt≤100ms・完成depth≥1・NodeLimitなし。terminal return p95 .09978876035s / max .105072504s、全native process CPU N2/N1=1.88145315 | PASS。追加core費単独を失敗条件にはしない       |
+| 固定深さの有用性 | 98 DepthComplete＋6 NodeLimit、max N2/min N1時間比 .967178、root median非悪化6/26                                                                             | 全104完了、比≤.95、非悪化≥20/26を満たさずFALSE |
+| 同時間での有用性 | 主nominal median depth改善1/26・悪化0・差合計.5                                                                                                               | 改善≥8/26かつ差合計≥8を満たさずFALSE           |
+
+Rootは22.2の固定[CONCLUSION_CLEAR fa8373b8](../.worktree/assets/perf/cedar-lazy-smp-review-v1/final-result-v1/minimum-result.json)と実reader STOPを受け、**NO_PRACTICAL_USEFULNESS_SUPPORT_IN_FIXED_FINITE_COMPARISON_NO_REFILL**を[受入れた](../.artifacts/research-team/integration324/cedar-lazy-smp-v1/final-result-acceptance-v1/accepted-result.json)。nativeの明示search_threads機能を維持し、既定1のまま、2thread自動利用や条件付き64局は発行しない。root16/21のcensoring、特にroot21の約.506倍を完了同深さspeedupへ変換せず、選択木・warm history・3families/6series・stock0不足と露出/相関を保持する。主callback/terminal Search/arena親receipt、helper到達、全process CPU/RSSとnested費を分け、一般速度・棋力・同等・無効果・default/model昇格は主張しない。
+
+改善の問いを一つに絞るなら、quiet後の中断epoch清掃（測定p95約4.83ms）をcoherent/committed資格を守って減らせるかである。原因の認定でも新candidate/再実測の発行でもない。元208は消化済みで、未使用node/time/条件付き64から追加権を作らない。実normal/source/analysis/admin STOPは返却済み。outer73.696681091秒を一度計上しnested非加算、全費UNKNOWN。累積source/controlを含む一つの192MiB wholeは終了2root保持42,008,576Bへ一度だけsettleし、旧160/176MiB案は未発行のまま保存した。後続tails/globalactual/feesはUNKNOWN、返金・貸与・旧holding再課金はない。
+
 ### 履歴点の内訳と更新経緯を調べる（324.23、人間直接指示、2026-10-20）
 
 SMP22と別の既存Sol6.1/high9へ新しい保存/source調査を割り当てた。21の固定26 rowsと小さい順位表を用い、root14wall207ほかordinary/順位変化例とTT/PV対照例についてmain/continuation寄与、更新前後差、浅い失敗/確認・窓/returnとの対応を調べる。通常rootのpathは空でcontinuation行None、ageは16有効rootごとという供給済みsource事実を出発点とし、実対局直前手のseedや減衰発生を仮定しない。非線形gravityのbonus総和を現在点へ等置せず、欠落とcase選択biasを残す。[調査境界と受入れ](design/ai-rust-migration.md#bounded-history-score-provenance-diagnostic-32423)。
@@ -2761,3 +2777,18 @@ SMP22と別の既存Sol6.1/high9へ新しい保存/source調査を割り当て�
 23の不足field用私有sourceは[v5/c5da0112](../.worktree/assets/perf/cedar-history-score-v1/source-handoff.json)で固定し、実source/finalizer STOPを受領した。main6＋continuation2 entryを結果前指定し、元gravity/cutoff/age/reset本文を維持したまま実before/after差・return分類・128recent ringとeviction/全matching totalsを記録する構成。watch省略時は専用const HISTORY=falseで、旧OffShadowにも追加hotpath処理を載せない設計である。これはparse/formatと保存static対応までで、Rust3/Python1は未build/未型検査/未実行。既存Maxの新leaf23.1へentry identity・実delta/return対応・bounded capture・defaultOFF/control維持だけを配送した。Main未採用、SMP alphaとの疎合成・真正software・26calls以下の実入口は後段であり、更新経緯/原因/改善のUNKNOWNは変わらない。旧26結果やSMP private sourceを上書きしない。
 
 23.1の[固定SOURCE_CLEAR2586f0ca/実reader STOPf026083b](../.worktree/assets/perf/cedar-history-score-review-v1/minimum-result.json)をRootがsource-onlyで受け入れ、SMPとの実疎合成まで進めた。ring/first-latestは全履歴でも教師でもなく、保存caseの結果参照選択から改善/因果/速度/棋力を認定しない。合成後のPython新1定義は実PASSだが、Rust3を含む真正softwareと新26観測は別の未資格工程である。新Buildの普通CPU案はhost cpuset0..19と対象SMTを確認し、存在しない20/22を使った未発行案を保存した上で、worker12・test12/14・guardian16・outer18へ訂正した。源・softwareの事前micro保存枠は作らず、bulk支持は未発行のまま実保持後に解決する。
+
+### 履歴点26観測完了：具体的改善は未確立（324.23、2026-10-20）
+
+上記のRust3/Python1を含むsoftwareは実PASSとなり、SMPの実native＋normalcollection STOP後に、同じ新画像で元の26要求/6同色時系列を一度観測した。通常job1394eff3はnormalmanifest/data PASS、parent復元26/26、25,000,193nodes。25件NodeLimit UNKNOWNと1件DepthCompleteを分け、公開資格を全探索完了へ変換しない。fixed6main＋2continuation、ring128＋eviction/全matching deltaを用い、必要warm predecessorを省かなかった。[結果・条件・小表](../.worktree/assets/perf/cedar-history-score-v1/normal26-saved-analysis-v1/report-ja.md)、[実native/normal/analysis STOP](../.worktree/assets/perf/cedar-history-score-v1/normal26-saved-analysis-v1/native-normal-analysis-STOP.json)。
+
+| 問い                | 保存された観測                                                                                                                     | 解釈の範囲                                                                                                        |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| root14/壁207の負点  | 最後の完成D6でmain−429、score−858/rank94。同session root12は0→−112、root13は−112→−144、root14全体は−144→−279（正5/+326、負7/−461） | 通常rootはmainのみ。完成snapshot・pending・呼出し終了値を混ぜない。浅い通常罰則の実寄与は追えたが、有害性は未証明 |
+| LMRの未確認減深罰則 | selected8 entryの負更新2514件中、actually reduced/unconfirmedは1件、root15で壁207 mainへのdelta−246                                | root14より後であり、その前のrank94の原因にはできない。一般bias/無罰則化/改善効果の根拠ではない                    |
+| continuation/age    | 選択lag1はroot14で2645→3232、lag2はroot19で143→3000。通常root lagはNone、全208 entry呼出しbalance成立、age pass0/有効root最大6     | interiorの異node読取とroot scoreを区別。16回を強制せず、減衰の影響は未観測                                        |
+| 記録の欠落          | recent2461保持/123308evicted、recent負279は未減深（278fail-low/1in-window）                                                        | evicted個別window/plyはUNKNOWN。root14対象のrecent0は0更新ではない。bonusとgravity実deltaは異なる                 |
+
+Rootは通常descriptive解釈として **NO_CONCRETE_IMPLEMENTABLE_HISTORY_IMPROVEMENT_ESTABLISHED** を[受入れた](../.artifacts/research-team/integration324/cedar-history-score-v1/final-result-acceptance-v1/accepted-result.json)。結果参照で選んだ6caseは代表頻度/改善率を推定せず、深い選択探索もoracleではない。負mainでもTT/PV先頭となる対照と正mainへの罰則を保持し、source grammarや単例からhistoryの誤り・原因・棋力を認定しない。次の問いは「実際に減深しfull-depth未確認で返った手の減点を区別するとcutoff有用性を保てるか」一つに留める。今回の1件は実装・重み調整・root history seed・追加観測・対局を発行する根拠ではない。Control/基準LMR/Cedar/defaultsは固定する。
+
+原26は消化済み。outer38.314147076秒と受付寿命40.259938秒を区別し、nested native34.214420584秒を加算しない。元FAILED/部分namespace/解析失敗/NULL/費UNKNOWNを保存した。通常worker12/main0/outer18、family4GiB（管理1.5＋native2.5）/host4/GPU0の実入口、160MiB一括支持・実serializer/cancel/直接wait-reap/handles/TMP/leases STOPを使用した。新ordinary保持7,520,256Bは限定された今回の出力/解析subtreeだけで、旧source/visibilityや全rootを再課金しない。後続tails/globalactual/全費はUNKNOWN。SMPの重要解釈/親close/人間ACKを待たず進めた通常工程であり、新しいreviewや科学権は追加しない。USERPAUSE323/342.17・sealed/newE/oldfits96・models/weights/defaults・foreign・旧RAW/FAILED/UNKNOWN・decimal50GB・取消済み相談8を維持する。
