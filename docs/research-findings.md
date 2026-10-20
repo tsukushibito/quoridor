@@ -2877,6 +2877,18 @@ Rootは採用に足る資格が無い候補の比較専用legal_wall差分とwal
 
 29の新208calls/208MはN1/Current/Cedar/Control/LMR/PVS/TT1MのOFF/ONを、元26prefix/6時系列・暖機再用で固定深さと100ms5の二条件へ分ける。窓失敗を完成値にせず、retryでnode/time/cancel枠をresetせず、最後の完成反復と親/完全履歴の復元を守る。固定depth上限8は26のroot4D6未完を反映して結果前固定する。窓が変える選択的tree/value/PVと再探索費を残し、深さ境界だけで利益を全否定せず、事前条件を通る場合の別枠128局/64family両色・2.048Gまでを許可された有限採否とする。新モデル・LMR調整・全木並列・sweep/refillや自動既定昇格は含まない。
 
-### 独立25.3の新64は通常回収STOP、棋力資格は解析待ち
+### 独立25.3の新64は通常回収STOPから有限結果へ
 
 新64は同じ真正f686/BUILD84fd、N1 Half対Current、固定first32family両色、100ms/5ms・max200ply・perSearch1M・独立1.024Gのまま実entryし、job67fa4810を一度通常回収した。[実native/normal/source STOP](../.worktree/assets/perf/cedar-shallow-main-history-v1/corrected-entry-trial-v1/forward64-collection-v1/native-normal-source-STOP.json)。保存された通常manifest/dataはPASSでslots0..63/missingなしだが、fullqualification/32pairs/UNKNOWN/WDLと唯一の既存native customRng区間の解釈はこの記録時点で解析待ちである。新RNG/区間再計算・validator/native/FINALIZE replayや追加局は行わない。native/通常readerは10:27:27.846777Zに実STOPし、該当source/重IO凍結だけを解除した。外側298.365672738秒と受付寿命300.363615秒は別scopeで、一度だけ数えnestedを加算しない。原25の4UNKNOWN/100未実行/旧64STOPPED、新104消化済み、default Currentと全FAILED/NULL/UNKNOWN費は保持する。
+
+その後の固定保存解析で全64goal・32complete pairs・UNKNOWN0と、固定schedule/色/lineage/row対応を確認した。Halfは34勝0分30敗、point0.53125、唯一の保存native customRng family95%区間は **[0.453125, 0.609375]** だった。seed3242520261020、10000resamples、floor/ceilの既存native規則を読み取り、追加RNG/CI再計算はしていない。事前条件lower>0.5は成立せず、有限採否は **RETAIN_CURRENT**。歴史的露出と旧3familyとの重複があり、未見IIDや一般劣位・同等・無効果・Elo・default/model昇格を認定しない。[固定結果と保存復元元](../research-data/ai-sigma/execution324-preservation-20261020/corrected-history-final-v1.json)。
+
+保存されたpersistent-session cancellationsは各engine3件の計6件である一方、全Search invocationは成功、error/initerror/errorsecondsは0、gamefailureはNoneで全局goalだった。内部原因はUNKNOWNのまま、cancelled gameへ別名化したりcounterを0へ書き換えたりしない。最初の保存解析helperが0を要求して失敗した記録と、metadataだけの因果修復を保持する。各対戦engineの独立sessionはそれぞれTT1Mで、二つを合わせた常駐TTが1Mとは呼ばない。nativeoperationのcharged_nodes_including_opaque_reservationsは251,909,565、上限1.024G内であり、generic nn_calls=0を物理Cedar forward=0へ読み替えない。物理費・全fees・globalactualはUNKNOWN。nestedのnative292.344728552秒とarchive0.447487688秒も外側へ足さない。
+
+関連Maxの新leaf25.3.1は固定新104/64だけをCONCLUSION_CLEAR/essential0 ordinary0とし、Rootは有限解釈を受け入れた。[独立minimum22f41a37](../.worktree/assets/perf/cedar-shallow-main-history-review-v1/corrected-entry-result-v1/minimum-result.json)。元通常資格・固定scalar/row対応を再用し、archive/validator/native/source/test/RNGの再演はない。独立新104/64と原不成立試行を別々の消化済み記録として保持し、未使用上限の貸与・refill・追加局は発行しない。Half専用code/fixtureの私有撤去差分は固定済みだが、現時点ではcanonical適用/softwareは未資格であり、29との実疎合成・限定確認へ進める。generic timed-rootquality入口と元21/23の現役機能は撤去対象にしない。
+
+### aspirationとHalf撤去の実疎合成（324.29、software未実行）
+
+29の私有固定source2a899977と、同じ履歴作者のHalf撤去72f00524が実返却された。Rootは共通immutable/current sourceから標準git merge-fileで13subjectを私有合成し、隣接する削除/追加の競合19箇所を解消した。namespace/reset、Runner設定/記録、LC consumerを薄く合成し、いずれかのwhole old postを上書きする適用はしない。[合成固定bindinga3e8d74f](../.artifacts/research-team/integration324/cedar-aspiration-window-v1/composition-v1/binding.json)。Rust限定整形/check、LCの変更8ownerのみRuff100・parser AST対応・他92functionのbytes保護、新Pythonの限定整形/lintまでを確認した。Mainは未適用、新AI3/RunnerLIB2/Python1は全UNBUILT/UNTYPED/UNRUNである。
+
+同じMaxの新29.1へ、この合成実targetのroot bound/完成authority、累積retry枠、namespace/通常consumerとCurrent-only削除の交点だけを配送した。fatal evaluatorは既存APIどおりErrであり、最後の完成callback/nativecacheを保つことと、fatalErr時の部分Search statsが取得不能でUNKNOWNなことを分ける。fake Okへの変更や欠落埋めの新観測は要求しない。source確認後の実新検査・真正release・normal入場を次に進め、28や25/27のcloseを入口にしない。作者の通常consumer準備では、元8config/8requestがすでに旧shallow_main_history表現を含まないことを確認し、元参照を保持した。Current100%を明示する別metadata追補だけを作り、width/深さ/seed/枠/gateや元protocolを変更していない。真正Build/imageと通常入場の実参照は未結合であり、準備完了を実行資格とは呼ばない。

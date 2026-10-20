@@ -1,0 +1,47 @@
+{
+  "issue": "quoridor-4lc.324.25.3",
+  "status": "ACCEPTED_FINITE_RESULT_RETAIN_CURRENT",
+  "NEW104": {
+    "calls": 104,
+    "nodes": 6551433,
+    "legal_committed_gate": "PASS",
+    "requested_D64": "100TimeLimitUNKNOWN+4DepthComplete"
+  },
+  "NEW64": {
+    "games": 64,
+    "complete_pairs": 32,
+    "UNKNOWN": 0,
+    "W": 34,
+    "D": 0,
+    "L": 30,
+    "point": 0.53125,
+    "sole_native_family95": [0.453125, 0.609375],
+    "bootstrap": {
+      "owner": "Maintained native arena_statistics.rs custom Rng",
+      "seed": 3242520261020,
+      "resamples": 10000,
+      "endpoints": "floor(.025*9999)/ceil(.975*9999), zero-based249/9750",
+      "source": "Already saved native result; no recomputation"
+    },
+    "node_budget_charge": {
+      "cap": 1024000000,
+      "charged_nodes_including_opaque_reservations": 251909565,
+      "remaining": 772090435,
+      "scope": "one operation; terminal node work is nested, not added again"
+    }
+  },
+  "decision": "RETAIN_CURRENT",
+  "comparison": "Half vs Current/N1/sameCedar/Control/baselineLMR/PVS/path_tail/TT1M each opponent session/100ms5; original fixedfirst32 families bothcolours",
+  "interpretation": "Frozen lower>.5 false; exposed finite book only. No general strength/inferiority/equivalence/noeffect/Elo/default/model promotion. All old FAILED/4UNKNOWN/100unperformed/old64STOPPED and distinct exhausted NEW104/64 retained, no refill or quota loan.",
+  "session_counter_scope": "Six persistent cancellations, three per engine, retained with successful invocations/error0/goal/gamefailureNone; exact causeUNKNOWN. Genericnn_calls0 not physicalNN0; physical/fullfees/globalactual UNKNOWN.",
+  "independent_review": "quoridor-4lc.324.25.3.1 CONCLUSION_CLEAR essential0ordinary0, exact minimum22f41a37. No CI/RNG/validator/archive/native/source/test replay",
+  "source_disposition": "Current default retained; Half-only private retirement still INPROGRESS, Root canonical sparse composition/software separate.29 aspiration continues as next competing priority.",
+  "archive": {
+    "path": "corrected-history-final-v1.tar.gz",
+    "sha256": "cb8a228dbc71eb010fb28a831ae596290cde2ede7066ee10b322ccf99daf5608",
+    "bytes": 2801356,
+    "manifest": "corrected-history-final-v1.tar.gz.manifest.json",
+    "members": 359,
+    "full_stream_restore_hash_mode_verified": true
+  }
+}

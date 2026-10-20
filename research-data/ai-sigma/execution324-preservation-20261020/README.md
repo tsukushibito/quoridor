@@ -11,3 +11,9 @@
 各archiveの`.manifest.json`に、元project相対member、元path、mode/size/SHA256とarchive identityを記す。全memberをstreamで読み戻して元bytes/modeと一致したことを確認する。展開する場合は別の空directoryを選び、元pathへ戻す場合は対象reader停止と既存fileの所有/未保存変更を確認する。元入力・model/libraryの外部参照をarchiveの存在だけで再資格化しない。共有する通常opening bookは一度だけ保存し、private weightsは参照のまま保持する。
 
 原26は100DepthComplete+4NodeLimit UNKNOWNで完成gate未達、基準実装を保持する。原25不成立の4UNKNOWN/100unperformed/旧64STOPPED、独立25.3新104のgatePASSと混在順位、原24/27の有限条件と費用・UNKNOWNを変更しない。28のSOURCE_CLEARはsoftware/image/native/performance資格ではない。詳細は既存の[研究知見](../../../docs/research-findings.md)と[最適化agenda](../../../docs/design/ai-nnue-optimization-agenda.md)、担当・状態はBeadsを参照する。
+
+## 独立25.3の新64最終結果の追補
+
+`corrected-history-final-v1.json`と`corrected-history-final-v1.tar.gz`は、後に実完了した元の前向き新64と、新104・固定条件・通常entry/回収・失敗/STOP・関連独立minimumを保存する。Half34勝30敗、唯一の保存native family95%区間[0.453125,0.609375]から有限採否はRETAIN_CURRENTであり、旧不成立試行を成功へ書き換えない。archiveの359memberは元bytes/mode/SHAでstream復元確認した。閉じた原archiveもopaque bytesとして保全しただけで、元RAWのdecode・Search/validator/CI/RNG再演はない。
+
+進行中のHalf撤去私有差分、29の新aspiration合成source、レビュアーの後続管理書込はこのarchiveへ混ぜない。canonical source/software/数値の資格を最終棋力結果の存在から推定せず、固定差分と必要確認が揃う後続の保存区切りで扱う。
