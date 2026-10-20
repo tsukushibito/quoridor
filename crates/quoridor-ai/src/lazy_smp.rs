@@ -280,11 +280,6 @@ impl SearchSession {
                 "native SMP excludes diagnostic sessions".into(),
             ));
         }
-        if threads > 1 && self.shallow_main_history() == super::ShallowMainHistory::Half {
-            return Err(SearchError::Limits(
-                "half shallow main history requires one search thread".into(),
-            ));
-        }
         if threads == 1 && self.native_workers.is_none() {
             return Ok(());
         }
@@ -346,6 +341,7 @@ impl SearchSession {
     fn fork_worker(&self, shared: Arc<SharedTable>, writer: usize) -> Result<Self> {
         Ok(Self {
             namespace: self.namespace.clone(),
+            aspiration: None,
             native_workers: None,
             evaluator: self.evaluator.clone(),
             residual_head_scratch: self

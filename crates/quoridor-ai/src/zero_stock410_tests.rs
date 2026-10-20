@@ -199,7 +199,9 @@ fn zero_stock410_root_and_internal_refuse_leaf_kind_depth_zero_stays_normal() {
         with_tt(&Constant, |s, c| {
             seed(s, c, 1, Bound::ApproxLeaf, None, ContextFingerprint::of(c));
             let value = if root_entry {
-                let (action, value) = s.root_depth(c, None, 1, None).unwrap();
+                let (action, value) = s
+                    .root_depth::<false>(c, None, 1, None, [f32::NEG_INFINITY, f32::INFINITY])
+                    .unwrap();
                 assert!(c.legal_ids().contains(&action));
                 value
             } else {

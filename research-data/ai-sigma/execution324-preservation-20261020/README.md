@@ -17,3 +17,11 @@
 `corrected-history-final-v1.json`と`corrected-history-final-v1.tar.gz`は、後に実完了した元の前向き新64と、新104・固定条件・通常entry/回収・失敗/STOP・関連独立minimumを保存する。Half34勝30敗、唯一の保存native family95%区間[0.453125,0.609375]から有限採否はRETAIN_CURRENTであり、旧不成立試行を成功へ書き換えない。archiveの359memberは元bytes/mode/SHAでstream復元確認した。閉じた原archiveもopaque bytesとして保全しただけで、元RAWのdecode・Search/validator/CI/RNG再演はない。
 
 進行中のHalf撤去私有差分、29の新aspiration合成source、レビュアーの後続管理書込はこのarchiveへ混ぜない。canonical source/software/数値の資格を最終棋力結果の存在から推定せず、固定差分と必要確認が揃う後続の保存区切りで扱う。
+
+## aspirationのsource・新softwareと真正release
+
+`aspiration-prefix-and-normal-contract-v2.json`と同名archiveは、後に固定・疎適用したaspiration/Half撤去、source否定とR1修復、初回compiler失敗と7caller修復、新AI3/RunnerLIB2各running1・影響Clippy warning0・保持したPython1、凍結208/条件付き128設定、16.1の失敗時契約参照修復と新NN0を保存する。798memberは元bytes/mode/SHAでstream復元確認した。旧成功suiteやモデル・native・RNGの再演はない。このprefix保存時点では真正releaseと数値は未資格であり、後続の資格を遡及記入していない。
+
+`aspiration-genuine-release-v1.json`と同名archiveは、元release3e17722bの一度の通常finalize・実source STOP、BUILD64844e88/image19c2ab68の参照、回収CPU affinity拒否の原記録、停止済みCargo cacheだけの撤去・容量訂正、元208の実入力とCPU=2の因果support修復を保存する。ELF/model/library/cache/DB/封印payloadは含まない。実行用imageは永続volumeの元pathに保持し、再構成する場合は保存source/build条件と依存参照を用いる。archiveの存在を元外部参照や性能の再資格化とは扱わない。
+
+同じ新imageのOFF/ON比較5112dd76は実native開始・全208calls/48sessionsの通常回収・実STOPまで完了した。性能・採否は別の保存解析と元protocolで判断する。任意の保存・文書・pushはこの実STOP後に行い、開始gateにしない。

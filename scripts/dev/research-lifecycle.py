@@ -2600,17 +2600,34 @@ def numerical_fields(experiment, manifest):
     }
 
 
-def resolved_shallow_main_history(config, profile, *, supported=True):
-    if "shallow_main_history" not in config:
-        return "current"
-    value = config["shallow_main_history"]
+def resolved_root_aspiration(config, profile, *, supported=True):
+    if "root_aspiration" not in config:
+        return None
+    value = config["root_aspiration"]
     require(
-        supported and profile == "control" and type(value) is str and value in {"current", "half"},
-        "typed shallow main history requires research Control",
+        supported
+        and profile == "control"
+        and type(config.get("search_threads", 1)) is int
+        and config.get("search_threads", 1) == 1,
+        "root aspiration requires research LOCAL1 Current Control",
     )
     require(
-        value != "half" or config.get("search_threads", 1) == 1,
-        "half shallow main history requires one search thread",
+        isinstance(value, dict)
+        and set(value) == {"half_width", "growth", "activation_depth", "max_retries"},
+        "typed root aspiration shape",
+    )
+    require(
+        all(
+            type(value[k]) in (int, float) and math.isfinite(value[k])
+            for k in ("half_width", "growth")
+        )
+        and value["half_width"] > 0
+        and value["growth"] > 1
+        and type(value["activation_depth"]) is int
+        and 2 <= value["activation_depth"] <= 64
+        and type(value["max_retries"]) is int
+        and 0 <= value["max_retries"] <= 8,
+        "finite bounded root aspiration settings",
     )
     return value
 
@@ -2674,7 +2691,7 @@ def measurement_config(experiment):
             "neighbour_opportunity",
             "root_ordering_quality",
             "history_provenance",
-            "shallow_main_history",
+            "root_aspiration",
             "zero_stock_approx_min_root_walls",
             "zero_stock_approx_method",
             "zero_stock_safe_race",
@@ -2723,7 +2740,12 @@ def measurement_config(experiment):
             and all(
                 not any(
                     r.get(k, False)
-                    for k in ("diagnostic", "observe_lmr", "observe_completed_depths", "warmup")
+                    for k in (
+                        "diagnostic",
+                        "observe_lmr",
+                        "observe_completed_depths",
+                        "warmup",
+                    )
                 )
                 for r in requests
             ),
@@ -2733,7 +2755,11 @@ def measurement_config(experiment):
         require(
             not any(
                 k in config
-                for k in ("search_cpu_cores", "management_cpu_core", "native_memory_bytes")
+                for k in (
+                    "search_cpu_cores",
+                    "management_cpu_core",
+                    "native_memory_bytes",
+                )
             ),
             "unused search-team resources",
         )
@@ -2860,7 +2886,33 @@ def measurement_config(experiment):
         "measurement LMR method",
     )
     parameters = resolved_lmr_parameters(config, config["profile"])
-    resolved_shallow_main_history(config, config["profile"])
+    resolved_root_aspiration(config, config["profile"])
+    if "root_aspiration" in config:
+        require(
+            config["use_tt"]
+            and config["use_pvs"]
+            and all(
+                config.get(k) is None
+                for k in (
+                    "neighbour_opportunity",
+                    "root_ordering_quality",
+                    "history_provenance",
+                )
+            )
+            and all(
+                not any(
+                    r.get(k, False)
+                    for k in (
+                        "diagnostic",
+                        "observe_lmr",
+                        "observe_completed_depths",
+                        "warmup",
+                    )
+                )
+                for r in requests
+            ),
+            "ordinary observer-OFF aspiration measurement",
+        )
     method = config.get("zero_stock_approx_method", "race")
     require(
         type(method) is str and method in {"race", "fixed_d"},
@@ -3183,14 +3235,14 @@ def measurement_evidence(spec, experiment, values, *, files=()):
                 )
         require(isinstance(result.get("errors"), list), "measurement errors array")
     config = document(experiment["config"])
-    if "shallow_main_history" in config:
-        policy = resolved_shallow_main_history(config, config["profile"])
+    if "root_aspiration" in config:
+        aspiration = resolved_root_aspiration(config, config["profile"])
         for row in rows:
             measured = row.get("measurement", {})
             require(
-                measured.get("requested_shallow_main_history") == config["shallow_main_history"]
-                and measured.get("actual_shallow_main_history") == policy,
-                "measurement requested/effective shallow main history correspondence",
+                measured.get("requested_root_aspiration") == aspiration
+                and measured.get("actual_root_aspiration") == aspiration,
+                "measurement requested/effective root aspiration correspondence",
             )
     raw_refs = [ref for ref in files if spec.get("perf") and ref["path"] == spec["perf"]["output"]]
     if result is not None and spec.get("perf"):
@@ -4895,12 +4947,12 @@ def arena_plan_check(experiment, plan):
             )
         else:
             require(engine.get("claustrophobia") is None, "unused Claustrophobia settings")
-        resolved_shallow_main_history(
+        resolved_root_aspiration(
             engine,
             engine.get("ordering_profile"),
-            supported=engine["kind"] in {"nnue", "distance", "sigma_value"}
-            and a["comparison"] != "functional",
+            supported=engine["kind"] in {"nnue", "distance"} and a["comparison"] != "functional",
         )
+        require("shallow_main_history" not in engine, "retired arena setting")
         resolved_lmr_parameters(
             engine,
             engine.get("ordering_profile"),
@@ -4959,9 +5011,7 @@ def arena_plan_check(experiment, plan):
                     and resolved_lmr_parameters(engines[0], engines[0].get("ordering_profile"))
                     == resolved_lmr_parameters(engines[1], engines[1].get("ordering_profile"))
                 )
-            )
-            and resolved_shallow_main_history(engines[0], engines[0].get("ordering_profile"))
-            == resolved_shallow_main_history(engines[1], engines[1].get("ordering_profile")),
+            ),
             "evaluator comparison keeps effective LMR settings equal",
         )
     require(
@@ -5195,6 +5245,13 @@ def arena_observation(config, row):
             continue
         counters = obs["counters"]
         engine = config["engines"][index]
+        if "root_aspiration" in engine:
+            require(
+                counters.get("requested_root_aspiration") == engine["root_aspiration"]
+                and counters.get("actual_root_aspiration")
+                == resolved_root_aspiration(engine, engine.get("ordering_profile")),
+                "arena requested/effective root aspiration correspondence",
+            )
         if engine.get("ordering_profile") is not None:
             method = counters.get("actual_search_namespace")
             require(
@@ -5235,10 +5292,6 @@ def arena_observation(config, row):
                         for k in ("actual_lmr_method_id", "lmr_reduction_rule")
                     )
                 )
-                and counters.get("requested_shallow_main_history")
-                == engine.get("shallow_main_history")
-                and counters.get("actual_shallow_main_history")
-                == resolved_shallow_main_history(engine, engine.get("ordering_profile"))
                 and counters.get("requested_lmr_parameters") == engine.get("lmr_parameters")
                 and "actual_lmr_parameters" in counters
                 and counters["actual_lmr_parameters"]
@@ -7287,6 +7340,11 @@ def abnormal_run_failure(directory, job_ref, *, origin_ref=None):
     cfg = json.loads(raw)
     state_ref, raw = bound(runtime / "state.json")
     state = json.loads(raw)
+    # A selected RUN is launched under its admitted sequence settings contract.
+    # Direct RUN jobs keep their original support contract. Read the exact bound
+    # bytes; the independent operation origin still selects the original config.
+    resource_contract = spec.get("settings", spec["support"])
+    read_ref(resource_contract)
     fingerprint = sha(json.dumps(cfg, sort_keys=True).encode())
     expected = [
         sys.executable,
@@ -7301,7 +7359,7 @@ def abnormal_run_failure(directory, job_ref, *, origin_ref=None):
     require(
         cfg["argv"] == expected
         and cfg["cwd"] == spec["cwd"]
-        and cfg["resource_contract"] == spec["support"]["path"]
+        and cfg["resource_contract"] == resource_contract["path"]
         and state["config_sha256"] == fingerprint
         and state["issue"] == cfg["issue"]
         and state["thread_id"] == cfg["thread_id"]
@@ -7802,7 +7860,10 @@ def comparison_conditions(common):
     This preparation owner resolves settings, never session namespace IDs.
     Product/generator and direct raw config enable defaults remain OFF.
     """
-    require("history_tie_breaks" not in common, "retired comparison setting")
+    require(
+        not {"history_tie_breaks", "shallow_main_history"}.intersection(common),
+        "retired comparison setting",
+    )
     variants = [
         dict(
             evaluator=evaluator,
@@ -7819,15 +7880,15 @@ def comparison_conditions(common):
     for variant in variants:
         if "lmr_parameters" in common:
             variant["lmr_parameters"] = copy.deepcopy(common["lmr_parameters"])
-        if "shallow_main_history" in common:
-            variant["shallow_main_history"] = common["shallow_main_history"]
-        resolved_shallow_main_history(variant, variant["profile"])
         resolved_lmr_parameters(variant, variant["profile"])
     return variants
 
 
 def apply_comparison_cost(config, common, variant):
-    require("history_tie_break" not in variant, "retired comparison variant")
+    require(
+        not {"history_tie_break", "shallow_main_history"}.intersection(variant),
+        "retired comparison variant",
+    )
     config["tt_entries"] = common["tt_entries"]
     config["use_tt"] = common["use_tt"]
     config["use_pvs"] = common["use_pvs"]
@@ -7840,11 +7901,6 @@ def apply_comparison_cost(config, common, variant):
     else:
         config.pop("lmr_parameters", None)
 
-    if "shallow_main_history" in variant:
-        config["shallow_main_history"] = variant["shallow_main_history"]
-    else:
-        config.pop("shallow_main_history", None)
-    resolved_shallow_main_history(config, config["profile"])
     config["zero_stock_safe_race"] = variant["zero_stock_safe_race"]
     config["zero_stock_safe_race_method"] = variant["zero_stock_safe_race_method"]
 
@@ -7862,7 +7918,10 @@ def apply_comparison_arena(config, common, pair):
     config["max_plies"] = arena["max_plies"]
     config["max_memory_bytes"] = common["family_B"] - common["controller_B"]
     for engine, variant in zip(config["engines"], pair, strict=True):
-        require("history_tie_break" not in variant, "retired comparison variant")
+        require(
+            not {"history_tie_break", "shallow_main_history"}.intersection(variant),
+            "retired comparison variant",
+        )
         assert engine["kind"] == variant["evaluator"]
         engine["ordering_profile"] = variant["profile"]
         engine["lmr"] = variant["lmr"]
@@ -7871,11 +7930,6 @@ def apply_comparison_arena(config, common, pair):
             engine["lmr_parameters"] = copy.deepcopy(variant["lmr_parameters"])
         else:
             engine.pop("lmr_parameters", None)
-        if "shallow_main_history" in variant:
-            engine["shallow_main_history"] = variant["shallow_main_history"]
-        else:
-            engine.pop("shallow_main_history", None)
-        resolved_shallow_main_history(engine, engine["ordering_profile"])
         engine["zero_stock_safe_race"] = variant["zero_stock_safe_race"]
         engine["zero_stock_safe_race_method"] = variant["zero_stock_safe_race_method"]
         for key in ("depth", "max_nodes", "time_ms"):

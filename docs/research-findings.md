@@ -2887,8 +2887,24 @@ Rootは採用に足る資格が無い候補の比較専用legal_wall差分とwal
 
 関連Maxの新leaf25.3.1は固定新104/64だけをCONCLUSION_CLEAR/essential0 ordinary0とし、Rootは有限解釈を受け入れた。[独立minimum22f41a37](../.worktree/assets/perf/cedar-shallow-main-history-review-v1/corrected-entry-result-v1/minimum-result.json)。元通常資格・固定scalar/row対応を再用し、archive/validator/native/source/test/RNGの再演はない。独立新104/64と原不成立試行を別々の消化済み記録として保持し、未使用上限の貸与・refill・追加局は発行しない。Half専用code/fixtureの私有撤去差分は固定済みだが、現時点ではcanonical適用/softwareは未資格であり、29との実疎合成・限定確認へ進める。generic timed-rootquality入口と元21/23の現役機能は撤去対象にしない。
 
-### aspirationとHalf撤去の実疎合成（324.29、software未実行）
+### aspirationとHalf撤去の実疎合成（324.29、初回softwareは型検査失敗）
 
 29の私有固定source2a899977と、同じ履歴作者のHalf撤去72f00524が実返却された。Rootは共通immutable/current sourceから標準git merge-fileで13subjectを私有合成し、隣接する削除/追加の競合19箇所を解消した。namespace/reset、Runner設定/記録、LC consumerを薄く合成し、いずれかのwhole old postを上書きする適用はしない。[合成固定bindinga3e8d74f](../.artifacts/research-team/integration324/cedar-aspiration-window-v1/composition-v1/binding.json)。Rust限定整形/check、LCの変更8ownerのみRuff100・parser AST対応・他92functionのbytes保護、新Pythonの限定整形/lintまでを確認した。Mainは未適用、新AI3/RunnerLIB2/Python1は全UNBUILT/UNTYPED/UNRUNである。
 
 同じMaxの新29.1へ、この合成実targetのroot bound/完成authority、累積retry枠、namespace/通常consumerとCurrent-only削除の交点だけを配送した。fatal evaluatorは既存APIどおりErrであり、最後の完成callback/nativecacheを保つことと、fatalErr時の部分Search statsが取得不能でUNKNOWNなことを分ける。fake Okへの変更や欠落埋めの新観測は要求しない。source確認後の実新検査・真正release・normal入場を次に進め、28や25/27のcloseを入口にしない。作者の通常consumer準備では、元8config/8requestがすでに旧shallow_main_history表現を含まないことを確認し、元参照を保持した。Current100%を明示する別metadata追補だけを作り、width/深さ/seed/枠/gateや元protocolを変更していない。真正Build/imageと通常入場の実参照は未結合であり、準備完了を実行資格とは呼ばない。
+
+関連確認はnative worker factoryの必須aspirationフィールド初期化漏れを1件指摘した。Rootが`None`の1行だけを追加した固定5bff7fdeを同じMaxがR1限定でSOURCE_CLEAR/essential0 ordinary0とし、元の否定38a359f9を保持した。Rootは13subjectをcanonicalへ疎適用し、新Python境界1件を実行してPASSした。その後の元software job9a6d27bfは、最初の新AI検査を実行する前のlibtest型検査で失敗した。LMR観測/trialのSearchInvocation三箇所と、旧root_depthを呼ぶ既存検査六箇所が新引数へ未接続だった。テスト実行0、残る新AI/Runner/Clippy/releaseも未実行であり、探索性能や候補の採否を示す結果ではない。[原失敗と実source STOP](../.artifacts/research-team/integration324/cedar-aspiration-window-v1/software-v1/original-failure-and-actual-source-STOP.json)。外側21.896705717秒を一度数え、内側21.417850632秒は加算しない。partial cleanup/capture FALSEと、保存process/outer cleanup TRUE、signal pending/persist attemptedの各domainを変更しない。
+
+同じ作者が固定した7caller修正8a73f66dは、観測/trialを明示`None`、六つの旧呼出側を`root_depth::<false>`と全幅窓へ接続するだけで、既存assertion/fixture/kernel/tupleを変えない。Rootはこの7subjectを疎適用した。[実適用](../.artifacts/research-team/integration324/cedar-aspiration-window-v1/caller-adoption-v1/actual-adoption.json)。旧成功suiteを再実行せず、実行前に止まった新AI3/RunnerLIB2と影響Clippy、真正releaseを続ける。元Python1 PASSは対象境界が同じため保持し、凍結208/条件付き128や幅・深さ・seed・上限を変更しない。
+
+その後、新AI3・RunnerLIB2は各exact selectorでrunning1/PASS、影響AI/Runner Clippyはwarning0となった。元Python1のPASSは再演せず保持した。元release3e17722bは11:53:49Zに実終了し、通常finalizeを一度完了してBUILD `64844e88`・新画像 `19c2ab68`を確定した。回収wrapperのCPU affinity拒否はfinalize開始前の管理失敗であり、元失敗を保ったまま正しい宣言CPUで未完了回収だけを進めた。通知のrecipient_not_idleや任意のarchive/commitを数値開始の条件にはしない。
+
+同画像OFF/ONの元208比較はjob `5112dd76-9b03-47b7-b1e5-82e65802ea4f`として12:27:38Zに受付され、最初の実nativeは12:27:44Zに開始した。保存済み8設定/8要求・root4D5・26prefix/6時系列・48session・208Mを保ち、全208calls/23,486,705nodesの通常manifest/data回収と実native/collection/source STOPを確認した。外側67.715936029秒を一度数え、内側を加算しない。入口のreserve:null拒否と、native child CPU二個に対するsupport CPU=3拒否は科学実行前のmetadata失敗として残し、optional key省略とCPU=2の因果修復だけを行った。これは性能・棋力・採用の認定ではなく、固定gateの保存解析が次の判断になる。
+
+容量処理では、初回softwareの見積りが完全debug cacheを含まず、局所coverが一時50,092,876,800Bとなったことを記録した。global actualはUNKNOWNである。実STOPと所有を確認して停止済みCargo cacheだけを撤去し、ログ・source・Git・モデル・RAW/FAILED・qualified private imageを保持した。新release後の局所cover49,608,672,256Bと、新208の一つの352MiB whole・別16MiB保存枠はdecimal50GB内に収めた。旧creditの再適用や科学quotaの返金・貸与はない。保存の遅延を避けるため、任意の文書・archive・pushを実native/collection STOP後へ移した。
+
+### 16.1の並行source修復は失敗時の契約参照だけを整合する
+
+同じ元作者はimmutable b1e965ffと必要な保存metadataから、通常sequence/cohortがselected RUNのresource_contractにadmitted settingsを使う一方、`abnormal_run_failure`がsupport.pathだけを要求する不整合を確定した。元のmemory_limitの原因・RSS・所属/peakを事後推定してはいない。私有修正9633cdc4はsettingsがあればその正確なFileRef、なければdirect supportをread_refしてcfg参照を照合し、独立する元config/digest/marker/livechild/終了・重複防止とFAILED/CANCELLED-only出力を保持する。新しい合成NN0検査1件が実owning consumerを一度通過し、guardian0.160856249秒・reap/handles/remaining[]を確認した。旧2検査やarchive/parity/native/FINALIZEは再演していない。
+
+Rootは29の失敗softwareの実source STOPで、この1ownerと新fixtureだけを現行aspiration sourceへ合成した。対象関数bodyはPASSした私有版と完全一致、他の現行source bytes/ASTは不変である。[疎適用receipt](../.artifacts/research-team/integration324/claustrophobia-arena-connection-v1/normal-readiness-adoption-v1/actual-adoption.json)。この修復は元control_error/INCOMPLETE/manifestABSENTや歴史的memory cause UNKNOWNを成功へ書き換えない。必要とされた次の実確認案は2色・各最大1ply/合計2ply・最大1 C turn/9 head attemptsだが、今回の並行依頼には新native権限がなく未発行である。旧USED枠の貸与やモデル取得、実対局は行っていない。

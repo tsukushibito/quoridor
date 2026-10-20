@@ -94,40 +94,10 @@ pub(super) fn bonus(depth: u16) -> i32 {
     (16 * d * d).min(1024)
 }
 
-/// One research setting; the product/default update is Current.
-#[derive(Debug, Default, Clone, Copy, PartialEq, Eq)]
-pub enum ShallowMainHistory {
-    #[default]
-    Current,
-    Half,
-}
-impl ShallowMainHistory {
-    pub(super) const HALF_PREFIX: &'static str = "shallow-main-negative-half-d1to3-v1:";
-    pub fn name(self) -> &'static str {
-        match self {
-            Self::Current => "current",
-            Self::Half => "half",
-        }
-    }
-    pub fn qualify_namespace(self, namespace: &mut super::SearchNamespace) {
-        if self == Self::Half {
-            namespace.selectivity.insert_str(0, Self::HALF_PREFIX);
-        }
-    }
-    pub(super) fn main_bonus(self, depth: u16, amount: i32) -> i32 {
-        if self == Self::Half && (1..=3).contains(&depth) && amount < 0 {
-            amount / 2
-        } else {
-            amount
-        }
-    }
-}
-
 pub(super) struct ContinuationHistory {
     main: Box<[i16]>,
     continuation: Box<[i16]>,
     valid_roots_since_age: u8,
-    pub(super) shallow_main_history: ShallowMainHistory,
 }
 
 /// Borrowed only while scoring one unchanged parent; no table or path updates.
@@ -164,7 +134,6 @@ impl ContinuationHistory {
             main: zeroed(MAIN_LEN)?,
             continuation: zeroed(CONT_LEN)?,
             valid_roots_since_age: 0,
-            shallow_main_history: ShallowMainHistory::default(),
         })
     }
     pub fn retained_bytes(&self) -> usize {
@@ -207,10 +176,9 @@ impl ContinuationHistory {
         action: u16,
         path: &[PlayedMove],
         amount: i32,
-        main_amount: i32,
         mut stats: Option<&mut OrderingStats>,
     ) {
-        gravity(&mut self.main[main_index(p, action)], main_amount);
+        gravity(&mut self.main[main_index(p, action)], amount);
         for (slot, lag) in LAGS.into_iter().enumerate() {
             if let Some(prev) = previous(path, p.turn, lag) {
                 let i = continuation_index(p.turn, slot, prev, action);
@@ -247,8 +215,6 @@ impl ContinuationHistory {
                 action,
                 path,
                 if action == winner { b } else { -b },
-                self.shallow_main_history
-                    .main_bonus(depth, if action == winner { b } else { -b }),
                 stats.as_deref_mut(),
             );
             if let Some(stats) = stats.as_deref_mut() {
@@ -271,66 +237,6 @@ impl ContinuationHistory {
 #[cfg(test)]
 mod tests {
     use super::*;
-
-    #[test]
-    fn shallow_main_bonus_depth_sign_gravity_continuation_and_age_boundary() {
-        let p = Position::default();
-        let path = [PlayedMove {
-            colour: p.turn ^ 1,
-            action: 81,
-        }];
-        for depth in [0, 1, 2, 3, 4, 8, u16::MAX] {
-            let mut current = ContinuationHistory::new().unwrap();
-            let mut half = ContinuationHistory::new().unwrap();
-            half.shallow_main_history = ShallowMainHistory::Half;
-            for h in [&mut current, &mut half] {
-                h.main[main_index(p, 82)] = 1000;
-            }
-            current.completed_cutoff(p, depth, 13, &[82, 13, 82], &path, None);
-            half.completed_cutoff(p, depth, 13, &[82, 13, 82], &path, None);
-            let mut expected = 1000;
-            gravity(
-                &mut expected,
-                if (1..=3).contains(&depth) {
-                    -bonus(depth) / 2
-                } else {
-                    -bonus(depth)
-                },
-            );
-            assert_eq!(half.main[main_index(p, 82)], expected);
-            assert_eq!(
-                current.main[main_index(p, 13)],
-                half.main[main_index(p, 13)]
-            );
-            assert_eq!(current.continuation, half.continuation);
-            if depth == 2 {
-                assert_eq!(current.main[main_index(p, 82)], 933);
-                assert_eq!(half.main[main_index(p, 82)], 967);
-                assert_ne!(2 * (967 - 1000), 933 - 1000);
-            }
-        }
-        let mut current = ContinuationHistory::new().unwrap();
-        let mut half = ContinuationHistory::new().unwrap();
-        half.shallow_main_history = ShallowMainHistory::Half;
-        current.main[0] = -101;
-        half.main[0] = -101;
-        current.continuation[0] = 103;
-        half.continuation[0] = 103;
-        let mut a = OrderingStats::default();
-        let mut b = OrderingStats::default();
-        for _ in 0..16 {
-            current.finish_valid_root(&mut a);
-            half.finish_valid_root(&mut b);
-        }
-        assert_eq!(current.main, half.main);
-        assert_eq!(current.continuation, half.continuation);
-        assert_eq!(a.age_passes, b.age_passes);
-        assert_eq!(a.age_passes, 1);
-        half.reset();
-        assert!(half.main.iter().all(|v| *v == 0));
-        assert!(half.continuation.iter().all(|v| *v == 0));
-        assert_eq!(half.shallow_main_history, ShallowMainHistory::Half);
-    }
 
     #[test]
     fn control385_prepared_lags_preserve_missing_colour_and_signed_rows() {

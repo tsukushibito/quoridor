@@ -272,7 +272,9 @@ fn control385_tt_cutoff_and_order_only_preserve_legality_and_parent() {
                         && stored_depth == 1
                         && (matches!(bound, Bound::Exact) || !root_call);
                     let actual = if root_call {
-                        s.root_depth(c, None, 1, None).unwrap().1
+                        s.root_depth::<false>(c, None, 1, None, [f32::NEG_INFINITY, f32::INFINITY])
+                            .unwrap()
+                            .1
                     } else {
                         s.negamax(c, None, 1, -1.0, 1.0, 0).unwrap()
                     };

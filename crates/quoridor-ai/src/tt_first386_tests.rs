@@ -372,7 +372,8 @@ fn control386_provider_excluded_modes_ttless_and_root_remain_eager() {
                     _ => {}
                 }
                 if case == 5 {
-                    s.root_depth(c, None, 1, None).unwrap();
+                    s.root_depth::<false>(c, None, 1, None, [f32::NEG_INFINITY, f32::INFINITY])
+                        .unwrap();
                 } else {
                     s.negamax(c, None, 1, -1.0, -0.75, 0).unwrap();
                 }

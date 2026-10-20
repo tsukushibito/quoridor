@@ -475,6 +475,7 @@ impl SearchSession {
                 #[cfg(not(target_arch = "wasm32"))]
                 worker_budget: None,
                 residual_head: None,
+                aspiration: None,
                 forced_root: None,
                 lmr_table: None,
                 on_completed: &mut callback,
@@ -568,6 +569,7 @@ impl SearchSession {
                 #[cfg(not(target_arch = "wasm32"))]
                 worker_budget: None,
                 residual_head: None,
+                aspiration: None,
                 forced_root: None,
                 lmr_table: None,
                 on_completed: &mut callback,
@@ -756,6 +758,7 @@ mod trial_tests {
                 #[cfg(not(target_arch = "wasm32"))]
                 worker_budget: None,
                 residual_head: None,
+                aspiration: None,
                 forced_root: None,
                 lmr_table: None,
                 on_completed: &mut callback,
