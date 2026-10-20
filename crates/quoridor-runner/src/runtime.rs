@@ -711,6 +711,7 @@ fn arena_alpha_session(
             }),
         )?;
     }
+    session.set_root_split(engine.root_split)?;
     Ok(session)
 }
 
@@ -7685,8 +7686,9 @@ fn evaluation_claustrophobia_turn(
 /// main snapshots and terminal aggregate work remain different clock domains.
 pub(crate) fn smp_report(report: &alphabeta::SmpReport) -> serde_json::Value {
     serde_json::json!({
-        "method":"lazy-smp-coherent-striped64-completed-nodes-v1",
-        "helper_stagger":"odd-helper-start2-else1-clamped-to-requested-depth",
+        "method":if report.root_split.is_some() { "root-first-child-exclusive-two-v1" } else { "lazy-smp-coherent-striped64-completed-nodes-v1" },
+        "root_split":report.root_split.as_ref().map(root_split_report),
+        "helper_stagger":if report.root_split.is_some() { "none; original odd root ranks only after leading child" } else { "odd-helper-start2-else1-clamped-to-requested-depth" },
         "search_threads":report.search_threads,"TT_total_capacity":report.tt_total_capacity,
         "shared_TT_bytes":report.shared_tt_bytes,"main_kernel_completed_depth":report.main_kernel_completed_depth,
         "main_seconds_before_drain":report.main_seconds_before_drain,"all_workers_quiet_seconds":report.all_workers_quiet_seconds,
@@ -7706,5 +7708,35 @@ pub(crate) fn smp_report(report: &alphabeta::SmpReport) -> serde_json::Value {
                 "foreign_order_only_hints":p.foreign_order_only_hints,"foreign_numeric_returns":p.foreign_numeric_returns,
                 "scope":"default-OFF; nested counters at this worker; foreign numeric returns require existing key/context/depth/Bound/legal qualifications; no saved-work/quality claim"})),
             "TT_retained_bytes":"shared total, counted once above"})).collect::<Vec<_>>()
+    })
+}
+
+fn root_split_report(r: &alphabeta::RootSplitReport) -> serde_json::Value {
+    serde_json::json!({
+        "split_iterations":r.split_iterations,
+        "completed_branch_sets":r.completed_branch_sets,
+        "interrupted_branch_sets":r.interrupted_branch_sets,
+        "main_first_nodes":r.main_first_nodes,
+        "main_first_evaluations":r.main_first_evaluations,
+        "main_other_nodes":r.main_other_nodes,
+        "main_other_evaluations":r.main_other_evaluations,
+        "main_verifications":r.main_verifications,
+        "main_verification_nodes":r.main_verification_nodes,
+        "main_verification_evaluations":r.main_verification_evaluations,
+        "helper_branch_calls":r.helper_branch_calls,
+        "helper_completed_branches":r.helper_completed_branches,
+        "helper_partial_branches":r.helper_partial_branches,
+        "helper_completed_nodes":r.helper_completed_nodes,
+        "helper_completed_evaluations":r.helper_completed_evaluations,
+        "helper_nodes":r.helper_nodes,
+        "helper_evaluations":r.helper_evaluations,
+        "helper_upper_returns":r.helper_upper_returns,
+        "helper_lower_returns":r.helper_lower_returns,
+        "helper_exact_returns":r.helper_exact_returns,
+        "helper_max_requested_root_depth":r.helper_max_requested_root_depth,
+        "main_wait_seconds":r.main_wait_seconds,
+        "terminal_wait_seconds":r.terminal_wait_seconds,
+        "authority":"main completed root only; helper reach is requested child horizon",
+        "work_scope":"nested node/eval counters; no wall balance or saved work inference"
     })
 }

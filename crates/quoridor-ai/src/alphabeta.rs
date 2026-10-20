@@ -42,7 +42,9 @@ pub use neighbour_opportunity::{NeighbourOpportunity, NeighbourOpportunityMode};
 #[path = "lazy_smp.rs"]
 mod lazy_smp;
 #[cfg(not(target_arch = "wasm32"))]
-pub use lazy_smp::{SmpReport, SmpSharingProvenance, SmpWorkerReport, WorkerInitializer};
+pub use lazy_smp::{
+    RootSplitReport, SmpReport, SmpSharingProvenance, SmpWorkerReport, WorkerInitializer,
+};
 #[path = "move_ordering.rs"]
 mod move_ordering;
 #[path = "static_geometry.rs"]
@@ -2907,6 +2909,45 @@ impl<
         Ok((action, value))
     }
 
+    /// Root-only transport reuses the existing child/PVS/LMR/restore kernel.
+    /// The original root rank travels unchanged; no new root reduction is added.
+    #[cfg(not(target_arch = "wasm32"))]
+    fn exclusive_root_child(
+        &mut self,
+        c: &mut SigmaContext,
+        accumulator: Option<&EvalAccumulator>,
+        task: lazy_smp::RootBranchTask,
+    ) -> NodeResult<lazy_smp::RootBranchReply> {
+        if task.depth == 0
+            || task.window[0].is_nan()
+            || task.window[1].is_nan()
+            || task.window[0] >= task.window[1]
+        {
+            return Err(Interrupted::Error(SearchError::Limits(
+                "invalid root branch depth/window".into(),
+            )));
+        }
+        let before = (self.stats.nodes, self.stats.evaluations);
+        let value = self.child(c, accumulator, task.action, task.depth - 1, task.window, 1)?;
+        self.control()?;
+        let bound = if value <= task.window[0] {
+            Bound::Upper
+        } else if value >= task.window[1] {
+            Bound::Lower
+        } else {
+            Bound::Exact
+        };
+        Ok(lazy_smp::RootBranchReply {
+            rank: task.rank,
+            action: task.action,
+            window: task.window,
+            value,
+            bound,
+            nodes: self.stats.nodes - before.0,
+            evaluations: self.stats.evaluations - before.1,
+        })
+    }
+
     fn root_depth(
         &mut self,
         c: &mut SigmaContext,
@@ -3038,63 +3079,36 @@ impl<
         self.control()?;
         let mut value = f32::NEG_INFINITY;
         let mut best = None;
-        for (i, &action) in moves.iter().enumerate() {
-            #[cfg(feature = "research-diagnostics")]
-            if OPPORTUNITY && let Some(root) = opportunity_root.as_mut() {
-                root.node.pulled(
-                    &moves,
-                    &root.keys,
-                    action,
-                    self.opportunity.as_deref_mut().expect("diagnostic owner"),
-                );
-            }
-            if let Some(work) = node_work.as_mut() {
-                work.read(true, &mut self.stats.ordering);
-            }
-            #[cfg(feature = "research-diagnostics")]
-            if OPPORTUNITY
-                && let Some(q) = self
-                    .opportunity
-                    .as_deref_mut()
-                    .and_then(|o| o.root_ordering.as_mut())
-            {
-                q.child_started(
-                    action,
-                    if self.limits.use_pvs && i > 0 {
-                        [value, next_up(value)]
-                    } else {
-                        [value, f32::INFINITY]
-                    },
-                    false,
-                );
-                q.work_started(self.stats.nodes, self.stats.evaluations);
-            }
-            let child_result = if self.limits.use_pvs && i > 0 {
-                self.child(c, a, action, depth - 1, [value, next_up(value)], 1)
-            } else {
-                self.child(c, a, action, depth - 1, [value, f32::INFINITY], 1)
-            };
-            #[cfg(feature = "research-diagnostics")]
-            if OPPORTUNITY
-                && let Some(q) = self
-                    .opportunity
-                    .as_deref_mut()
-                    .and_then(|o| o.root_ordering.as_mut())
-            {
-                q.work_finished(self.stats.nodes, self.stats.evaluations);
-            }
-            let mut v = child_result?;
-            #[cfg(feature = "research-diagnostics")]
-            if OPPORTUNITY
-                && let Some(q) = self
-                    .opportunity
-                    .as_deref_mut()
-                    .and_then(|o| o.root_ordering.as_mut())
-            {
-                q.child_returned(v);
-            }
-            if self.limits.use_pvs && i > 0 && v > value {
-                self.stats.pvs_researches += 1;
+        #[cfg(not(target_arch = "wasm32"))]
+        let split = if SMP
+            && self
+                .worker_budget
+                .as_ref()
+                .is_some_and(|b| b.is_root_client())
+        {
+            Some(lazy_smp::root_depth_split(self, c, a, depth, &moves)?)
+        } else {
+            None
+        };
+        #[cfg(target_arch = "wasm32")]
+        let split: Option<(u16, f32)> = None;
+        if let Some((action, score)) = split {
+            best = Some(action);
+            value = score;
+        } else {
+            for (i, &action) in moves.iter().enumerate() {
+                #[cfg(feature = "research-diagnostics")]
+                if OPPORTUNITY && let Some(root) = opportunity_root.as_mut() {
+                    root.node.pulled(
+                        &moves,
+                        &root.keys,
+                        action,
+                        self.opportunity.as_deref_mut().expect("diagnostic owner"),
+                    );
+                }
+                if let Some(work) = node_work.as_mut() {
+                    work.read(true, &mut self.stats.ordering);
+                }
                 #[cfg(feature = "research-diagnostics")]
                 if OPPORTUNITY
                     && let Some(q) = self
@@ -3102,10 +3116,22 @@ impl<
                         .as_deref_mut()
                         .and_then(|o| o.root_ordering.as_mut())
                 {
-                    q.child_started(action, [value, f32::INFINITY], true);
+                    q.child_started(
+                        action,
+                        if self.limits.use_pvs && i > 0 {
+                            [value, next_up(value)]
+                        } else {
+                            [value, f32::INFINITY]
+                        },
+                        false,
+                    );
                     q.work_started(self.stats.nodes, self.stats.evaluations);
                 }
-                let child_result = self.child(c, a, action, depth - 1, [value, f32::INFINITY], 1);
+                let child_result = if self.limits.use_pvs && i > 0 {
+                    self.child(c, a, action, depth - 1, [value, next_up(value)], 1)
+                } else {
+                    self.child(c, a, action, depth - 1, [value, f32::INFINITY], 1)
+                };
                 #[cfg(feature = "research-diagnostics")]
                 if OPPORTUNITY
                     && let Some(q) = self
@@ -3115,7 +3141,7 @@ impl<
                 {
                     q.work_finished(self.stats.nodes, self.stats.evaluations);
                 }
-                v = child_result?;
+                let mut v = child_result?;
                 #[cfg(feature = "research-diagnostics")]
                 if OPPORTUNITY
                     && let Some(q) = self
@@ -3125,13 +3151,47 @@ impl<
                 {
                     q.child_returned(v);
                 }
-            }
-            if let Some(work) = node_work.as_mut() {
-                work.returned(&mut self.stats.ordering);
-            }
-            if v > value {
-                value = v;
-                best = Some(action);
+                if self.limits.use_pvs && i > 0 && v > value {
+                    self.stats.pvs_researches += 1;
+                    #[cfg(feature = "research-diagnostics")]
+                    if OPPORTUNITY
+                        && let Some(q) = self
+                            .opportunity
+                            .as_deref_mut()
+                            .and_then(|o| o.root_ordering.as_mut())
+                    {
+                        q.child_started(action, [value, f32::INFINITY], true);
+                        q.work_started(self.stats.nodes, self.stats.evaluations);
+                    }
+                    let child_result =
+                        self.child(c, a, action, depth - 1, [value, f32::INFINITY], 1);
+                    #[cfg(feature = "research-diagnostics")]
+                    if OPPORTUNITY
+                        && let Some(q) = self
+                            .opportunity
+                            .as_deref_mut()
+                            .and_then(|o| o.root_ordering.as_mut())
+                    {
+                        q.work_finished(self.stats.nodes, self.stats.evaluations);
+                    }
+                    v = child_result?;
+                    #[cfg(feature = "research-diagnostics")]
+                    if OPPORTUNITY
+                        && let Some(q) = self
+                            .opportunity
+                            .as_deref_mut()
+                            .and_then(|o| o.root_ordering.as_mut())
+                    {
+                        q.child_returned(v);
+                    }
+                }
+                if let Some(work) = node_work.as_mut() {
+                    work.returned(&mut self.stats.ordering);
+                }
+                if v > value {
+                    value = v;
+                    best = Some(action);
+                }
             }
         }
         self.control()?;
@@ -4355,6 +4415,26 @@ fn search_in_table_observed<
     };
     let mut c = root.clone();
     let run = (|| -> NodeResult<()> {
+        #[cfg(not(target_arch = "wasm32"))]
+        if SMP
+            && state
+                .worker_budget
+                .as_ref()
+                .is_some_and(|b| b.is_root_server())
+        {
+            // The same once-per-root preparation and common child buffers. Serve
+            // even an already-stopped lane so its owner can drain/finish directly.
+            let active = state.control().is_ok() && c.terminal_value().is_none();
+            let a = if active {
+                evaluator.prepare_context(&c)?
+            } else {
+                None
+            };
+            if active {
+                state.child_buffers = evaluator.create_child_storage(limits.max_depth as usize + 1);
+            }
+            return lazy_smp::serve_root_branches(&mut state, &mut c, a.as_ref());
+        }
         state.control()?;
         if let Some(v) = c.terminal_value() {
             result.value = Some(v * score_domain.terminal_utility());
@@ -4545,9 +4625,22 @@ fn search_in_table_observed<
             true
         }
     };
+    let worker_valid_root = {
+        #[cfg(not(target_arch = "wasm32"))]
+        {
+            SMP && state
+                .worker_budget
+                .as_ref()
+                .is_some_and(|b| b.root_worker_valid_root())
+        }
+        #[cfg(target_arch = "wasm32")]
+        {
+            false
+        }
+    };
     if ordinary_root
         && invocation.forced_root.is_none()
-        && result.completed_depth > 0
+        && (result.completed_depth > 0 || worker_valid_root)
         && let Some(history) = state.ordering.as_deref_mut()
     {
         #[cfg(feature = "research-diagnostics")]

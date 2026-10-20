@@ -55,3 +55,5 @@
 `root-split-prototype-review-controls-software-partial-v1.json`と同名archiveは、Max28.3 SOURCE_CLEAR、結果前312 controlsと明示されたroot4D6→D5の1項目修正、二つの156-call lifetimeを保存する。元4cdfc8ceのAI6件PASSとRunner field漏れによる型検査停止も含み、失敗prefixのcleanupfalse／guardianNULLと実persisted processの回収trueを区別する。保存時点のcaller修復待ちは後続結果で改稿しない。
 
 `root-split-prototype-causal-software-stops-v1.json`と同名archiveは、RootのNone指定誤りからbool falseへの訂正、全保持348MiBでのcompile停止と所有cacheだけの撤去、共通opt3／codegen1／LTO=false条件、新Runner positive fixture CPU不一致の実FAILを保存する。全元失敗／費用／mask／UNKNOWNを保持し、source NN0と新image実資格を分ける。Runner2／Clippy／真正imageは未資格、312呼出しは未開始で、画像・モデル・入力payload・DB・lock・compiler cacheは含めない。
+
+`root-split-prototype-qualified-software-v1.json`と同名archiveは、その後のpositive fixtureのmain CPU12だけの修正、Root疎適用、新Runner2件の各1件PASS・影響Clippy2件warnings0、実source STOPを保存する。AI6／Python1は元のsource NN0 PASSを再利用し、新共通imageの実測parityを主張しない。原失敗は前のarchiveに保持し、defaultOFFの比較専用コードは計画済み312が用途である。真正common BUILD／imageと通常native入場は別段階で、この保存時点で312呼出しは未開始。

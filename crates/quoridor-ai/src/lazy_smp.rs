@@ -1,5 +1,9 @@
 //! Native-only Lazy SMP. One exact-capacity TT, never N private tables.
 use super::{Entry, Result, SearchError, SearchStats};
+#[path = "root_split.rs"]
+mod root_split;
+pub use root_split::RootSplitReport;
+pub(super) use root_split::{root_depth_split, serve_root_branches};
 use std::sync::{
     Mutex,
     atomic::{AtomicU64, Ordering},
@@ -147,6 +151,7 @@ pub struct SmpReport {
     pub unused_reserved_nodes: u64,
     pub node_cap: Option<u64>,
     pub workers: Vec<SmpWorkerReport>,
+    pub root_split: Option<RootSplitReport>,
 }
 
 struct JobControl {
@@ -157,6 +162,8 @@ struct JobControl {
 }
 
 pub(super) struct WorkerBudget {
+    root_client: Option<root_split::RootClient>,
+    root_server: Option<root_split::RootServer>,
     shared: Arc<JobControl>,
     worker: usize,
     local: u64,
@@ -167,11 +174,22 @@ impl WorkerBudget {
     fn new(shared: Arc<JobControl>, worker: usize) -> Self {
         let unlimited = shared.remaining.is_none();
         Self {
+            root_client: None,
+            root_server: None,
             shared,
             worker,
             local: if unlimited { u64::MAX } else { 0 },
             granted: if unlimited { u64::MAX } else { 0 },
         }
+    }
+    pub(super) fn is_root_client(&self) -> bool {
+        self.root_client.is_some()
+    }
+    pub(super) fn is_root_server(&self) -> bool {
+        self.root_server.is_some()
+    }
+    pub(super) fn root_worker_valid_root(&self) -> bool {
+        self.root_server.as_ref().is_some_and(|s| s.valid_root)
     }
     pub(super) fn is_main(&self) -> bool {
         self.worker == 0
@@ -225,6 +243,28 @@ impl WorkerBudget {
     }
 }
 
+/// One frozen original root candidate, never a recursive work queue.
+#[derive(Clone, Copy)]
+pub(super) struct RootBranchTask {
+    pub(super) rank: usize,
+    pub(super) action: u16,
+    pub(super) depth: u16,
+    pub(super) window: [f32; 2],
+}
+
+/// A returned branch window result is not completed-root authority.
+/// Upper/Lower are retained as bounds until main verifies where necessary.
+#[derive(Clone, Copy)]
+pub(super) struct RootBranchReply {
+    pub(super) rank: usize,
+    pub(super) action: u16,
+    pub(super) window: [f32; 2],
+    pub(super) value: f32,
+    pub(super) bound: super::Bound,
+    pub(super) nodes: u64,
+    pub(super) evaluations: u64,
+}
+
 struct Work {
     serial: u64,
     root: Arc<SigmaContext>,
@@ -233,6 +273,7 @@ struct Work {
 }
 enum Command {
     Search(Work),
+    RootSearch(Work, root_split::RootServer),
     Shutdown,
 }
 struct Done {
@@ -254,6 +295,7 @@ struct Pool {
 }
 
 pub(super) struct NativeWorkers {
+    root_split: bool,
     threads: usize,
     initialize: WorkerInitializer,
     pool: Option<Pool>,
@@ -310,6 +352,7 @@ impl SearchSession {
                 }
             };
             self.native_workers = Some(Box::new(NativeWorkers {
+                root_split: false,
                 threads,
                 initialize,
                 pool: Some(pool),
@@ -318,6 +361,35 @@ impl SearchSession {
             }));
         }
         Ok(())
+    }
+    /// Comparison-only root branching. Main remains the sole completed-root owner.
+    /// A changed mode is a quiet table/history boundary; identical mode keeps warming.
+    pub fn set_root_split(&mut self, enabled: bool) -> Result<()> {
+        if enabled && self.search_threads() != 2 {
+            return Err(SearchError::Limits(
+                "root_split requires exactly two search threads".into(),
+            ));
+        }
+        let Some(workers) = self.native_workers.as_mut() else {
+            return Ok(());
+        };
+        if workers.root_split != enabled {
+            // A fresh never-searched pool has no prior mode state to discard.
+            // Actual transitions after work always stop/join before clearing.
+            if workers.pool.as_ref().is_some_and(|pool| pool.serial != 0) {
+                workers.pool.take();
+            }
+            workers.root_split = enabled;
+            workers.last = None;
+            self.table.clear();
+            if let Some(history) = self.ordering.as_mut() {
+                history.reset();
+            }
+        }
+        Ok(())
+    }
+    pub fn root_split(&self) -> bool {
+        self.native_workers.as_ref().is_some_and(|w| w.root_split)
     }
     pub fn search_threads(&self) -> usize {
         self.native_workers.as_ref().map_or(1, |w| w.threads)
@@ -592,10 +664,13 @@ impl Pool {
                         return;
                     }
                     while let Ok(command) = receive.recv() {
-                        let Command::Search(work) = command else {
-                            break;
+                        let (work, server) = match command {
+                            Command::Search(work) => (work, None),
+                            Command::RootSearch(work, server) => (work, Some(server)),
+                            Command::Shutdown => break,
                         };
                         let mut budget = WorkerBudget::new(work.control.clone(), worker);
+                        budget.root_server = server;
                         let cancel = AtomicBool::new(false);
                         let outcome = catch_unwind(AssertUnwindSafe(|| {
                             session.worker_search(
@@ -676,7 +751,7 @@ impl Pool {
                 .map_err(|_| SearchError::Evaluation("helper command channel closed".into()))?;
         }
         let mut budget = WorkerBudget::new(control.clone(), 0);
-        let mut result = main.worker_search(&root, limits, cancel, &mut budget, callback);
+        let result = main.worker_search(&root, limits, cancel, &mut budget, callback);
         let main_finished = control.started.elapsed();
         control.stop.store(true, Ordering::Relaxed);
         let mut reports = Vec::with_capacity(self.workers.len() + 1);
@@ -691,8 +766,26 @@ impl Pool {
             }
             reports.push(done.report);
         }
-        let all_quiet = control.started.elapsed();
-        let terminal_return = control.started.elapsed();
+        self.finish_search(
+            result,
+            reports,
+            node_cap,
+            control.started,
+            main_finished,
+            None,
+        )
+    }
+    fn finish_search(
+        &mut self,
+        mut result: Result<SearchResult>,
+        reports: Vec<SmpWorkerReport>,
+        node_cap: Option<u64>,
+        started: Instant,
+        main_finished: std::time::Duration,
+        root_split: Option<RootSplitReport>,
+    ) -> Result<(Result<SearchResult>, SmpReport)> {
+        let all_quiet = started.elapsed();
+        let terminal_return = started.elapsed();
         self.active = None;
         self.maximum_generation = reports
             .iter()
@@ -712,6 +805,7 @@ impl Pool {
             unused_reserved_nodes: reports.iter().map(|r| r.unused_reserved_nodes).sum(),
             node_cap,
             workers: reports,
+            root_split,
         };
         if node_cap.is_some_and(|cap| report.total_nodes > cap) {
             return Err(SearchError::Root(
@@ -802,14 +896,12 @@ impl NativeWorkers {
         if self.pool.is_none() {
             self.pool = Some(Pool::new(main, self.threads, &self.initialize)?);
         }
-        let result = self.pool.as_mut().unwrap().search(
-            main,
-            root,
-            limits,
-            cancel,
-            callback,
-            self.observe_sharing,
-        );
+        let pool = self.pool.as_mut().unwrap();
+        let result = if self.root_split {
+            pool.search_root_split(main, root, limits, cancel, callback, self.observe_sharing)
+        } else {
+            pool.search(main, root, limits, cancel, callback, self.observe_sharing)
+        };
         match result {
             Ok((value, report)) => {
                 self.last = Some(report);

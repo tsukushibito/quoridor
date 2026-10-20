@@ -68,6 +68,8 @@ struct Settings {
     search_threads: Option<usize>,
     #[serde(default, skip_serializing_if = "sharing_provenance_disabled")]
     smp_sharing_provenance: bool,
+    #[serde(default, skip_serializing_if = "sharing_provenance_disabled")]
+    root_split: bool,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     search_cpu_cores: Option<Vec<usize>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -168,6 +170,11 @@ fn default_zero_stock_approx_method() -> String {
 }
 
 fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
+    if settings.root_split && settings.search_threads != Some(2) {
+        return Err(
+            "root_split requires the explicit two-worker ordinary measurement route".into(),
+        );
+    }
     if let Some(threads) = settings.search_threads {
         let team = settings
             .search_cpu_cores
@@ -568,14 +575,16 @@ impl Target for SearchTarget {
                 }),
             )?;
         }
+        session.set_root_split(self.settings.root_split)?;
         session.set_smp_sharing_provenance(self.settings.smp_sharing_provenance);
         let method = session.namespace().selectivity.clone();
         let lmr = session.lmr_enabled();
         let retained = session.retained_memory_bytes();
         let capacity = session.tt_capacity();
+        let session_root_split = session.root_split();
         self.session = Some(session);
         Ok(
-            json!({"session_constructed":true,"scratch_lifetime":if !request.observe_lmr && self.evaluator.session_residual_owner().is_some() {"residual head input session-owned; distance/counters and root/child/static scratch invocation-owned"} else {"ordinary invocation-owned scratch; no persistent pool is claimed"},"TT_capacity":capacity,"retained_TT_bytes":retained.0,"retained_session_metadata_history_bytes":retained.1,
+            json!({"session_constructed":true,"root_split_requested":self.settings.root_split,"root_split_effective":session_root_split,"scratch_lifetime":if !request.observe_lmr && self.evaluator.session_residual_owner().is_some() {"residual head input session-owned; distance/counters and root/child/static scratch invocation-owned"} else {"ordinary invocation-owned scratch; no persistent pool is claimed"},"TT_capacity":capacity,"retained_TT_bytes":retained.0,"retained_session_metadata_history_bytes":retained.1,
                 "actual_selectivity":method,"lmr":lmr,"requested_seed":self.settings.seed,"effective_session_seed":Value::Null,"seed_semantics":"Control Search and signed ordering have no RNG/seed inlet; explicit requested seed is provenance only; deterministic fixed tie/order, no per-method/session seed invented",
                 "zero_stock_safe_race":self.settings.zero_stock_safe_race,
                 "zero_stock_safe_race_method":self.session.as_ref().and_then(|session| session.zero_stock_safe_race_enabled().then(|| session.zero_stock_safe_race_method().id())),
@@ -796,6 +805,8 @@ impl Target for SearchTarget {
         row["TT_generation_after"] = json!(session.table_generation());
         if let Some(search_threads) = self.settings.search_threads {
             row["search_threads"] = json!(search_threads);
+            row["root_split_requested"] = json!(self.settings.root_split);
+            row["root_split_effective"] = json!(session.root_split());
             row["main_completed_receipt_seconds"] = json!(main_completed_receipt.map(|r| r.0));
             row["main_receipted_completed_depth"] = json!(main_completed_receipt.map(|r| r.1));
             row["receipt_scope"] = json!(
@@ -3271,5 +3282,51 @@ mod node_publication_settings_tests {
             on["smp_sharing_provenance"] = invalid;
             assert!(serde_json::from_value::<Settings>(on.clone()).is_err());
         }
+    }
+}
+
+#[cfg(test)]
+mod root_split_measurement_boundary_tests {
+    use super::*;
+    #[test]
+    fn root_split_measurement_explicit_mode_matches_bounded_native_record() {
+        let body = serde_json::json!({"roots":[{"input":0,"pointer":"/families/0","field":"prefix","label":"root-split-software-only"}],"profile":"control","tt_entries":1048576,"use_tt":true,"use_pvs":true,"namespace":{"evaluator":"software-only","rules":"research-standard-2p-threefold-goal-first-v1","selectivity":"PVS"},"output_bytes":1048576,"record_bytes":32768,"search_threads":2,"search_cpu_cores":[12,14],"management_cpu_core":0,"native_memory_bytes":2684354560_u64,"root_split":true});
+        let request: Request = serde_json::from_value(serde_json::json!({"id":"root-split-new-boundary","session":"one","root":0,"depth":2,"node_cap":1000000})).unwrap();
+        let settings: Settings = serde_json::from_value(body.clone()).unwrap();
+        validate(&settings, std::slice::from_ref(&request)).unwrap();
+        assert!(settings.root_split);
+        assert_eq!(serde_json::to_value(&settings).unwrap()["root_split"], true);
+        for wrong in 0..5 {
+            let mut value = body.clone();
+            let mut request = request.clone();
+            match wrong {
+                0 => {
+                    value.as_object_mut().unwrap().remove("search_threads");
+                }
+                1 => {
+                    value["search_threads"] = serde_json::json!(1);
+                    value["search_cpu_cores"] = serde_json::json!([12]);
+                }
+                2 => value["root_split"] = serde_json::Value::Null,
+                3 => request.diagnostic = true,
+                _ => value["profile"] = serde_json::json!("cheap"),
+            }
+            assert!(
+                serde_json::from_value::<Settings>(value)
+                    .map_err(|e| e.to_string())
+                    .and_then(|s| validate(&s, &[request]).map_err(|e| e.to_string()))
+                    .is_err()
+            );
+        }
+        let mut off = body;
+        off.as_object_mut().unwrap().remove("root_split");
+        let settings: Settings = serde_json::from_value(off).unwrap();
+        assert!(!settings.root_split);
+        assert!(
+            serde_json::to_value(&settings)
+                .unwrap()
+                .get("root_split")
+                .is_none()
+        );
     }
 }
