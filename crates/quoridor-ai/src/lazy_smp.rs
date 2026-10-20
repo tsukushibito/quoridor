@@ -1222,7 +1222,10 @@ mod smp_boundary_tests {
     #[test]
     fn completed_child_publication_survives_interrupted_parent_but_never_publishes_it() {
         for fail in [false, true] {
-            let root = SigmaContext::from_prefix(&[]).unwrap();
+            // Return to the initial board at ply4 without reaching threefold.
+            // The alternative below also has four legal plies: full Key must
+            // match after the same child action, including its total ply5.
+            let root = SigmaContext::from_prefix(&[13, 67, 4, 76]).unwrap();
             let before = (root.position(), root.total_ply(), root.history_counts());
             let cancel = Arc::new(AtomicBool::new(false));
             let eval = Arc::new(AfterCompletedChild {
@@ -1319,9 +1322,10 @@ mod smp_boundary_tests {
                 }
                 assert_eq!(peer_budget.used(), 1);
             }
-            let mut repeated_prefix = vec![13, 67, 4, 76];
-            // Both players can return the initial board in four plies; the
-            // same next action then gives this child's board with other counts.
+            let mut repeated_prefix = vec![5, 77, 4, 76];
+            // This distinct four-ply loop moves both pawns right and back,
+            // while the root loop moved them vertically and back. Append the
+            // same action: equal board/turn/ply5, different weighted history.
             let action = root
                 .legal_ids()
                 .into_iter()
