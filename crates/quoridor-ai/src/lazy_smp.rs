@@ -279,6 +279,11 @@ impl SearchSession {
                 "native SMP excludes diagnostic sessions".into(),
             ));
         }
+        if threads > 1 && self.shallow_main_history() == super::ShallowMainHistory::Half {
+            return Err(SearchError::Limits(
+                "half shallow main history requires one search thread".into(),
+            ));
+        }
         if threads == 1 && self.native_workers.is_none() {
             return Ok(());
         }

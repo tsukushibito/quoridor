@@ -382,10 +382,17 @@ impl HistoryProvenance {
                 kind: "cutoff",
                 before: before[i],
                 after: after[i],
-                bonus: if positive {
-                    super::bonus(depth)
-                } else {
-                    -super::bonus(depth)
+                bonus: {
+                    let signed = if positive {
+                        super::bonus(depth)
+                    } else {
+                        -super::bonus(depth)
+                    };
+                    if matches!(self.selectors[i], HistoryEntrySelector::Main { .. }) {
+                        h.shallow_main_history.main_bonus(depth, signed)
+                    } else {
+                        signed
+                    }
                 },
                 stock: Some(p.walls_remaining.into_iter().sum()),
                 colour: Some(p.turn),
@@ -539,5 +546,48 @@ mod history_provenance_boundary_tests {
             i64::from(t.initial.unwrap()) + t.update_delta + t.age_delta,
             i64::from(t.final_value.unwrap())
         );
+    }
+}
+
+#[cfg(test)]
+mod shallow_main_provenance_tests {
+    use super::*;
+    #[test]
+    fn shallow_main_provenance_reports_distinct_main_and_continuation_bonus() {
+        let p = Position::default();
+        let path = [PlayedMove {
+            colour: p.turn ^ 1,
+            action: 81,
+        }];
+        let mut h = ContinuationHistory::new().unwrap();
+        h.shallow_main_history = super::super::ShallowMainHistory::Half;
+        let mut o = HistoryProvenance::new(vec![
+            HistoryEntrySelector::Main {
+                colour: p.turn,
+                from_cell: None,
+                action: 82,
+            },
+            HistoryEntrySelector::Continuation {
+                colour: p.turn,
+                lag: 1,
+                previous: 81,
+                action: 82,
+            },
+        ])
+        .unwrap();
+        o.begin(&h);
+        let mut frame = o.frame(p, &path);
+        frame.returned(
+            82,
+            HistoryReturned::returned(2, 0, false, false, false, [0.0, 1.0], [0.0, 1.0], -1.0),
+        );
+        let before = o.values(&h);
+        h.completed_cutoff(p, 2, 13, &[82, 13], &path, None);
+        o.cutoff(&h, before, p, 2, 0, 13, &frame);
+        o.finish(&h);
+        assert_eq!(o.recent()[0].bonus, -32);
+        assert_eq!(o.recent()[1].bonus, -64);
+        assert_eq!(o.totals()[0].update_delta, -32);
+        assert_eq!(o.totals()[1].update_delta, -64);
     }
 }

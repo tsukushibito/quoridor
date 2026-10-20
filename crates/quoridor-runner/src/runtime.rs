@@ -521,6 +521,7 @@ pub struct TtProfile {
     pub actual_lmr_method_id: Option<String>,
     #[serde(default)]
     pub actual_lmr_parameters: Option<crate::config::LmrParameters>,
+    pub actual_shallow_main_history: Option<String>,
     #[serde(default)]
     pub lmr_reduction_rule: Option<String>,
     #[serde(default)]
@@ -575,6 +576,29 @@ pub(crate) fn arena_lmr_method(engine: &Engine) -> alphabeta::Result<alphabeta::
             .as_deref()
             .unwrap_or(alphabeta::LmrMethod::default().name()),
     )
+}
+pub(crate) fn arena_shallow_main_history(
+    engine: &Engine,
+    arena: Option<&crate::arena::ArenaConfig>,
+) -> alphabeta::Result<alphabeta::ShallowMainHistory> {
+    if engine.shallow_main_history.is_some()
+        && (!matches!(engine.kind.as_str(), "nnue" | "distance" | "sigma_value")
+            || engine.ordering_profile.as_deref() != Some("control")
+            || arena.is_none_or(|a| a.comparison == crate::arena::Comparison::Functional))
+    {
+        return Err(alphabeta::SearchError::Limits(
+            "shallow main history belongs to research Control alpha arena".into(),
+        ));
+    }
+    let value = engine
+        .shallow_main_history
+        .map_or(alphabeta::ShallowMainHistory::Current, |p| p.resolve());
+    if value == alphabeta::ShallowMainHistory::Half && engine.search_threads.unwrap_or(1) != 1 {
+        return Err(alphabeta::SearchError::Limits(
+            "half shallow main history requires one search thread".into(),
+        ));
+    }
+    Ok(value)
 }
 pub(crate) fn arena_lmr_parameters(
     engine: &Engine,
@@ -654,6 +678,7 @@ fn arena_alpha_namespace(
     if enabled {
         method.qualify_namespace(&mut namespace);
     }
+    arena_shallow_main_history(engine, arena)?.qualify_namespace(&mut namespace);
     Ok(namespace)
 }
 fn arena_alpha_session(
@@ -690,6 +715,8 @@ fn arena_alpha_session(
     arena_lmr_parameters(engine, arena)?;
     session.set_lmr_parameters(engine.lmr_parameters.map(|p| p.resolve()).transpose()?)?;
     session.set_lmr(engine.lmr)?;
+    arena_shallow_main_history(engine, arena)?;
+    session.set_shallow_main_history(engine.shallow_main_history.map(|p| p.resolve()))?;
     let (safe_enabled, safe_method) = arena_safe_race(engine, arena)?;
     session.set_zero_stock_safe_race_method(safe_method);
     session.set_zero_stock_safe_race(safe_enabled);
@@ -823,6 +850,7 @@ fn invoke_alpha_observed(
         profile.actual_lmr_method_id = session.lmr_method().map(|m| m.id().to_owned());
         profile.lmr_reduction_rule = session.lmr_reduction_rule().map(str::to_owned);
         profile.actual_lmr_parameters = session.lmr_parameters().map(Into::into);
+        profile.actual_shallow_main_history = Some(session.shallow_main_history().name().into());
         profile.search_invocations += 1;
         let start = Instant::now();
         let mut bounded = limits.clone();
@@ -3105,6 +3133,8 @@ fn record_evaluation_alpha(
         "actual_zero_stock_safe_race_method_id":game.tt_profiles[engine].actual_zero_stock_safe_race_method_id,
         "requested_lmr_method":config.engines[engine].lmr_method.as_deref().unwrap_or(alphabeta::LmrMethod::default().name()),
         "requested_lmr_parameters":config.engines[engine].lmr_parameters,
+        "requested_shallow_main_history":config.engines[engine].shallow_main_history,
+        "actual_shallow_main_history":game.tt_profiles[engine].actual_shallow_main_history,
         "actual_lmr_parameters":game.tt_profiles[engine].actual_lmr_parameters,
         "actual_lmr_method_id":game.tt_profiles[engine].actual_lmr_method_id,
         "lmr_reduction_rule":game.tt_profiles[engine].lmr_reduction_rule,
@@ -7707,4 +7737,68 @@ pub(crate) fn smp_report(report: &alphabeta::SmpReport) -> serde_json::Value {
                 "scope":"default-OFF; nested counters at this worker; foreign numeric returns require existing key/context/depth/Bound/legal qualifications; no saved-work/quality claim"})),
             "TT_retained_bytes":"shared total, counted once above"})).collect::<Vec<_>>()
     })
+}
+
+#[cfg(test)]
+mod shallow_main_arena_boundary_tests {
+    use super::*;
+    struct NoForward;
+    impl StaticEvaluator for NoForward {
+        fn evaluate(
+            &self,
+            _: &SigmaContext,
+            _: Option<&alphabeta::EvalAccumulator>,
+        ) -> alphabeta::Result<f32> {
+            panic!("shallow main arena factory test forbids model/Search/game")
+        }
+    }
+    #[test]
+    fn shallow_main_arena_default_typed_namespace_and_research_refusal() {
+        let arena: crate::arena::ArenaConfig=serde_json::from_value(serde_json::json!({"comparison":"search_wall_time","clock_policy":"strict_unknown","return_reserve_ms":5,"tt_entries":64,"bootstrap_seed":0,"bootstrap_resamples":1,"evaluator_sha256":["x","x"],"search_artifact_sha256":["y","y"],"book":{"id":"synthetic","usage":"tuning","frozen_before_candidate_results":true,"independence":"metadata-only","openings":[]}})).unwrap();
+        let raw = alphabeta::SearchNamespace {
+            evaluator: "no-payload".into(),
+            rules: "standard".into(),
+            selectivity: "PVS".into(),
+        };
+        let omitted: Engine = serde_json::from_value(
+            serde_json::json!({"kind":"distance","ordering_profile":"control","lmr":true}),
+        )
+        .unwrap();
+        assert_eq!(
+            arena_shallow_main_history(&omitted, Some(&arena)).unwrap(),
+            alphabeta::ShallowMainHistory::Current
+        );
+        for mode in ["current", "half"] {
+            let e: Engine=serde_json::from_value(serde_json::json!({"kind":"distance","ordering_profile":"control","lmr":true,"shallow_main_history":mode})).unwrap();
+            let session =
+                arena_alpha_session(Arc::new(NoForward), raw.clone(), 64, &e, Some(&arena))
+                    .unwrap();
+            assert_eq!(
+                session.namespace(),
+                &arena_alpha_namespace(&e, raw.clone(), Some(&arena)).unwrap()
+            );
+            assert_eq!(session.shallow_main_history().name(), mode);
+            assert!(arena_shallow_main_history(&e, None).is_err());
+        }
+        for value in [
+            serde_json::Value::Null,
+            serde_json::json!("unknown"),
+            serde_json::json!(50),
+        ] {
+            assert!(
+                serde_json::from_value::<Engine>(
+                    serde_json::json!({"kind":"distance","shallow_main_history":value})
+                )
+                .is_err()
+            );
+        }
+        for value in [
+            serde_json::json!({"kind":"distance","ordering_profile":"cheap","shallow_main_history":"half"}),
+            serde_json::json!({"kind":"mcts","ordering_profile":"control","shallow_main_history":"current"}),
+            serde_json::json!({"kind":"distance","ordering_profile":"control","shallow_main_history":"half","search_threads":2}),
+        ] {
+            let e: Engine = serde_json::from_value(value).unwrap();
+            assert!(arena_shallow_main_history(&e, Some(&arena)).is_err());
+        }
+    }
 }

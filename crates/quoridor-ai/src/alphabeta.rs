@@ -17,6 +17,7 @@ use std::{
 mod continuation_history;
 pub use continuation_history::OrderingProfile;
 pub use continuation_history::OrderingStats;
+pub use continuation_history::ShallowMainHistory;
 #[cfg(feature = "research-diagnostics")]
 pub use continuation_history::history_provenance::{
     HistoryEntrySelector, HistoryProvenance, HistoryReturned, HistoryScoreSample,
@@ -3548,6 +3549,49 @@ impl SearchSession {
         }
         Ok(())
     }
+    /// Explicit research Control setting; changing it clears TT and all history.
+    pub fn set_shallow_main_history(
+        &mut self,
+        requested: Option<ShallowMainHistory>,
+    ) -> Result<()> {
+        if requested.is_some()
+            && (self.ordering.is_none() || !matches!(self.static_enabled, StaticMode::CheapControl))
+        {
+            return Err(SearchError::Limits(
+                "shallow main history requires signed research Control".into(),
+            ));
+        }
+        let value = requested.unwrap_or_default();
+        #[cfg(not(target_arch = "wasm32"))]
+        if value == ShallowMainHistory::Half && self.search_threads() != 1 {
+            return Err(SearchError::Limits(
+                "half shallow main history requires one search thread".into(),
+            ));
+        }
+        let previous = self.shallow_main_history();
+        if value == previous {
+            return Ok(());
+        }
+        #[cfg(not(target_arch = "wasm32"))]
+        self.stop_native_workers();
+        if previous == ShallowMainHistory::Half {
+            self.namespace
+                .selectivity
+                .drain(..ShallowMainHistory::HALF_PREFIX.len());
+        }
+        value.qualify_namespace(&mut self.namespace);
+        self.table.clear();
+        if let Some(history) = self.ordering.as_mut() {
+            history.reset();
+            history.shallow_main_history = value;
+        }
+        Ok(())
+    }
+    pub fn shallow_main_history(&self) -> ShallowMainHistory {
+        self.ordering
+            .as_ref()
+            .map_or(ShallowMainHistory::Current, |h| h.shallow_main_history)
+    }
     pub fn lmr_parameters(&self) -> Option<LmrParameters> {
         (self.lmr && self.lmr_method == LmrMethod::DepthRank).then_some(self.lmr_parameters)
     }
@@ -3835,6 +3879,8 @@ impl SearchSession {
         // claim resolved authority until the next real Search supplies its root.
         self.zero_stock_approx_effective = false;
         self.attach_safe_race_namespace();
+        self.shallow_main_history()
+            .qualify_namespace(&mut self.namespace);
         self.score_domain = score_domain;
         self.table.clear();
         if let Some(history) = self.ordering.as_mut() {
@@ -6232,5 +6278,133 @@ mod session_residual_owner_tests {
             assert_eq!(result.stats.wall_distance_map_reads, expected as u64);
             assert_eq!(Key::of(&root), key);
         }
+    }
+}
+
+#[cfg(test)]
+mod shallow_main_setting_tests {
+    use super::*;
+    struct NoCalls;
+    impl StaticEvaluator for NoCalls {
+        fn evaluate(&self, _: &SigmaContext, _: Option<&EvalAccumulator>) -> Result<f32> {
+            panic!("settings boundary forbids Search/evaluator calls")
+        }
+    }
+    #[test]
+    fn shallow_main_setting_default_refusal_namespace_reset() {
+        let raw = SearchNamespace {
+            evaluator: "unloaded".into(),
+            rules: "standard".into(),
+            selectivity: "PVS".into(),
+        };
+        let mut public = SearchSession::new(Arc::new(NoCalls), raw.clone(), 64).unwrap();
+        assert_eq!(public.shallow_main_history(), ShallowMainHistory::Current);
+        assert!(
+            public
+                .set_shallow_main_history(Some(ShallowMainHistory::Current))
+                .is_err()
+        );
+        assert!(
+            public
+                .set_shallow_main_history(Some(ShallowMainHistory::Half))
+                .is_err()
+        );
+        let mut session = SearchSession::new_with_ordering(
+            Arc::new(NoCalls),
+            raw.clone(),
+            64,
+            ScoreDomain::LEGACY,
+            OrderingProfile::CheapStaticControl,
+            false,
+            true,
+        )
+        .unwrap();
+        let before = session.namespace().clone();
+        session.set_shallow_main_history(None).unwrap();
+        assert_eq!(session.namespace(), &before);
+        session.ordering.as_mut().unwrap().completed_cutoff(
+            Position::default(),
+            2,
+            13,
+            &[13],
+            &[],
+            None,
+        );
+        assert_ne!(
+            session
+                .ordering
+                .as_ref()
+                .unwrap()
+                .prepare_scores(Position::default(), &[])
+                .score(13)
+                .0,
+            0
+        );
+        session.table.next_generation();
+        assert_ne!(session.table_generation(), 0);
+        session
+            .set_shallow_main_history(Some(ShallowMainHistory::Half))
+            .unwrap();
+        assert_eq!(
+            session
+                .ordering
+                .as_ref()
+                .unwrap()
+                .prepare_scores(Position::default(), &[])
+                .score(13)
+                .0,
+            0
+        );
+        assert_eq!(session.table_generation(), 0);
+        session.ordering.as_mut().unwrap().completed_cutoff(
+            Position::default(),
+            2,
+            13,
+            &[13],
+            &[],
+            None,
+        );
+        session.table.next_generation();
+        let selected = session.namespace().clone();
+        assert_ne!(selected, before);
+        session
+            .set_shallow_main_history(Some(ShallowMainHistory::Half))
+            .unwrap();
+        assert_eq!(session.namespace(), &selected);
+        assert_ne!(session.table_generation(), 0);
+        assert_ne!(
+            session
+                .ordering
+                .as_ref()
+                .unwrap()
+                .prepare_scores(Position::default(), &[])
+                .score(13)
+                .0,
+            0
+        );
+        #[cfg(not(target_arch = "wasm32"))]
+        assert!(
+            session
+                .set_search_threads(2, Arc::new(|_| panic!("no helper may start")))
+                .is_err()
+        );
+        session.reset(Arc::new(NoCalls), raw);
+        assert_eq!(session.namespace(), &selected);
+        assert_eq!(session.table_generation(), 0);
+        assert_eq!(
+            session
+                .ordering
+                .as_ref()
+                .unwrap()
+                .prepare_scores(Position::default(), &[])
+                .score(13)
+                .0,
+            0
+        );
+
+        session
+            .set_shallow_main_history(Some(ShallowMainHistory::Current))
+            .unwrap();
+        assert_eq!(session.namespace(), &before);
     }
 }

@@ -182,6 +182,26 @@ pub(crate) fn deserialize_lmr_parameters<'de, D: serde::Deserializer<'de>>(
     // Absent is default; explicit null/partial/unknown objects are errors.
     LmrParameters::deserialize(deserializer).map(Some)
 }
+/// Typed research setting; absence is current, explicit null/unknown refused.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum ShallowMainHistory {
+    Current,
+    Half,
+}
+impl ShallowMainHistory {
+    pub fn resolve(self) -> quoridor_ai::alphabeta::ShallowMainHistory {
+        match self {
+            Self::Current => quoridor_ai::alphabeta::ShallowMainHistory::Current,
+            Self::Half => quoridor_ai::alphabeta::ShallowMainHistory::Half,
+        }
+    }
+}
+pub(crate) fn deserialize_shallow_main_history<'de, D: serde::Deserializer<'de>>(
+    d: D,
+) -> Result<Option<ShallowMainHistory>, D::Error> {
+    ShallowMainHistory::deserialize(d).map(Some)
+}
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct Engine {
@@ -232,6 +252,12 @@ pub struct Engine {
         skip_serializing_if = "Option::is_none"
     )]
     pub lmr_parameters: Option<LmrParameters>,
+    #[serde(
+        default,
+        deserialize_with = "deserialize_shallow_main_history",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub shallow_main_history: Option<ShallowMainHistory>,
     /// Normal research arena omission enables the retained proof. Generation and
     /// functional/product callers resolve omission to OFF instead.
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -395,6 +421,7 @@ impl Config {
                     || e.lmr
                     || e.lmr_method.is_some()
                     || e.lmr_parameters.is_some()
+                    || e.shallow_main_history.is_some()
             })
         {
             return Err("explicit ordering/LMR settings belong to an arena config".into());
@@ -408,6 +435,8 @@ impl Config {
             return Err("safe-race enable belongs to a research alpha arena".into());
         }
         for engine in &self.engines {
+            crate::runtime::arena_shallow_main_history(engine, self.arena.as_ref())
+                .map_err(|e| e.to_string())?;
             crate::runtime::arena_lmr_parameters(engine, self.arena.as_ref())
                 .map_err(|e| e.to_string())?;
             quoridor_ai::alphabeta::ZeroStockSafeRaceMethod::from_name(
@@ -456,6 +485,7 @@ impl Config {
                     || engine.lmr
                     || engine.lmr_method.is_some()
                     || engine.lmr_parameters.is_some()
+                    || engine.shallow_main_history.is_some()
                     || engine.ordering_profile.is_some()
                     || engine.zero_stock_safe_race == Some(true)
                     || engine.zero_stock_safe_race_method.is_some()
@@ -487,6 +517,7 @@ impl Config {
                     || engine.lmr
                     || engine.lmr_method.is_some()
                     || engine.lmr_parameters.is_some()
+                    || engine.shallow_main_history.is_some()
                     || engine.ordering_profile.is_some()
                     || engine.zero_stock_safe_race == Some(true)
                     || engine.zero_stock_safe_race_method.is_some()

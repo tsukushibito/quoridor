@@ -252,6 +252,8 @@ impl ArenaConfig {
         }
         for engine in &c.engines {
             crate::runtime::arena_lmr_method(engine).map_err(|e| e.to_string())?;
+            crate::runtime::arena_shallow_main_history(engine, Some(self))
+                .map_err(|e| e.to_string())?;
             crate::runtime::arena_lmr_parameters(engine, Some(self)).map_err(|e| e.to_string())?;
             crate::runtime::arena_safe_race(engine, Some(self)).map_err(|e| e.to_string())?;
             if let Some(profile) = engine.ordering_profile.as_deref() {
@@ -365,6 +367,8 @@ impl ArenaConfig {
                     || b.depth == 0
                     || a.depth != b.depth
                     || a.ordering_profile != b.ordering_profile
+                    || crate::runtime::arena_shallow_main_history(a, Some(self)).ok()
+                        != crate::runtime::arena_shallow_main_history(b, Some(self)).ok()
                     || crate::runtime::arena_safe_race(a, Some(self))
                         .ok()
                         .map(|(enabled, method)| (enabled, enabled.then_some(method)))
@@ -392,6 +396,8 @@ impl ArenaConfig {
             if c.engines.iter().enumerate().any(|(i, b)| {
                 a.depth != b.depth
                     || a.ordering_profile != b.ordering_profile
+                    || crate::runtime::arena_shallow_main_history(a, Some(self)).ok()
+                        != crate::runtime::arena_shallow_main_history(b, Some(self)).ok()
                     || crate::runtime::arena_safe_race(a, Some(self))
                         .ok()
                         .map(|(enabled, method)| (enabled, enabled.then_some(method)))
@@ -939,6 +945,13 @@ fn validate_observations(
                     return Err("arena Sigma receipt/drain/completed simulation".into());
                 }
                 continue;
+            }
+            let shallow = crate::runtime::arena_shallow_main_history(engine, Some(a))?;
+            if obs.counters["requested_shallow_main_history"]
+                != serde_json::json!(engine.shallow_main_history)
+                || obs.counters["actual_shallow_main_history"] != shallow.name()
+            {
+                return Err("arena requested/effective shallow main history mismatch".into());
             }
             let (enabled, method) = crate::runtime::arena_safe_race(engine, Some(a))?;
             if obs.counters["actual_zero_stock_safe_race_enabled"] != enabled

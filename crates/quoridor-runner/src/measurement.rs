@@ -95,6 +95,12 @@ struct Settings {
         skip_serializing_if = "Option::is_none"
     )]
     lmr_parameters: Option<crate::config::LmrParameters>,
+    #[serde(
+        default,
+        deserialize_with = "crate::config::deserialize_shallow_main_history",
+        skip_serializing_if = "Option::is_none"
+    )]
+    shallow_main_history: Option<crate::config::ShallowMainHistory>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     neighbour_opportunity: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -186,8 +192,11 @@ fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
             || !settings.use_tt
             || settings.tt_entries == 0
             || settings.zero_stock_approx_min_root_walls.is_some()
-            || settings.neighbour_opportunity.is_some()
-            || settings.root_ordering_quality.is_some()
+            || ((settings.neighbour_opportunity.is_some()
+                || settings.root_ordering_quality.is_some())
+                && !(threads == 1
+                    && settings.root_ordering_quality == Some(true)
+                    && settings.neighbour_opportunity.as_deref() == Some("off_shadow")))
             || requests
                 .iter()
                 .any(|r| r.diagnostic || r.observe_lmr || r.observe_completed_depths || r.warmup)
@@ -202,7 +211,7 @@ fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
         return Err("unused native search team resources".into());
     }
     if let Some(reserve) = settings.time_reserve_ms
-        && (settings.search_threads.is_none()
+        && ((settings.search_threads.is_none() && settings.root_ordering_quality != Some(true))
             || requests
                 .iter()
                 .any(|r| r.time_limit_ms.is_none_or(|ms| ms <= reserve)))
@@ -248,11 +257,13 @@ fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
                 .collect::<std::collections::BTreeSet<_>>()
                 .len()
                 > 6
-            || requests
-                .iter()
-                .any(|r| r.depth != 64 || r.node_cap > 1_000_000 || r.time_limit_ms.is_some()))
+            || requests.iter().any(|r| {
+                r.depth != 64
+                    || r.node_cap > 1_000_000
+                    || (r.time_limit_ms.is_some() && settings.time_reserve_ms.is_none())
+            }))
     {
-        return Err("bounded root ordering quality requires OffShadow/TT1M/<=26roots/6sessions/D64/1M/timeNone".into());
+        return Err("bounded root ordering quality requires OffShadow/TT1M/<=26roots/6sessions/D64/1M/optional-clock-with-reserve".into());
     }
     if let Some(watch) = &settings.history_provenance {
         if settings.root_ordering_quality != Some(true) {
@@ -261,6 +272,14 @@ fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
         alphabeta::HistoryProvenance::new(
             watch.iter().map(HistoryEntrySettings::resolve).collect(),
         )?;
+    }
+    if settings.shallow_main_history.is_some() && settings.profile != Profile::Control {
+        return Err("shallow main history requires research Control".into());
+    }
+    if settings.shallow_main_history == Some(crate::config::ShallowMainHistory::Half)
+        && settings.search_threads.unwrap_or(1) != 1
+    {
+        return Err("half shallow main history requires one search thread".into());
     }
     let lmr_method = LmrMethod::from_name(&settings.lmr_method)?;
     if let Some(parameters) = settings.lmr_parameters {
@@ -534,6 +553,8 @@ impl Target for SearchTarget {
                 .transpose()?,
         )?;
         session.set_lmr(self.settings.lmr)?;
+        session
+            .set_shallow_main_history(self.settings.shallow_main_history.map(|p| p.resolve()))?;
         session.set_zero_stock_approx_method(ZeroStockApproxMethod::from_name(
             &self.settings.zero_stock_approx_method,
         )?);
@@ -725,6 +746,9 @@ impl Target for SearchTarget {
             )
         });
         row["actual_selectivity"] = json!(session.namespace().selectivity);
+        row["requested_shallow_main_history"] = json!(self.settings.shallow_main_history);
+        row["actual_shallow_main_history"] = json!(session.shallow_main_history().name());
+        row["time_reserve_ms"] = json!(self.settings.time_reserve_ms);
         row["lmr_method_requested"] = json!(self.settings.lmr_method);
         row["lmr_rule"] = json!(session.lmr_method().map(LmrMethod::id));
         row["lmr_parameters_requested"] = json!(self.settings.lmr_parameters);
@@ -3219,6 +3243,57 @@ mod node_publication_settings_tests {
         ] {
             on["smp_sharing_provenance"] = invalid;
             assert!(serde_json::from_value::<Settings>(on.clone()).is_err());
+        }
+    }
+}
+
+#[cfg(test)]
+mod shallow_main_measurement_boundary_tests {
+    use super::*;
+    #[test]
+    fn shallow_main_measurement_typed_default_clock_observer_and_refusal() {
+        let base = json!({"roots":[{"input":0,"pointer":"/families/0","field":"prefix","prefix_len":2,"label":"synthetic"}],"profile":"control","tt_entries":1048576,"use_tt":true,"use_pvs":true,"lmr":true,"lmr_method":"depth_rank","zero_stock_safe_race":true,"zero_stock_safe_race_method":"path_tail","neighbour_opportunity":"off_shadow","root_ordering_quality":true,"namespace":{"evaluator":"unloaded","rules":"standard","selectivity":"PVS"},"output_bytes":33554432,"record_bytes":1048576,"search_threads":1,"search_cpu_cores":[12],"management_cpu_core":0,"native_memory_bytes":2684354560_u64,"time_reserve_ms":5});
+        let request: Request = serde_json::from_value(json!({"id":"r0","session":"s0","root":0,"depth":64,"node_cap":1000000,"time_limit_ms":100})).unwrap();
+        let omitted: Settings = serde_json::from_value(base.clone()).unwrap();
+        assert!(omitted.shallow_main_history.is_none());
+        validate(&omitted, std::slice::from_ref(&request)).unwrap();
+        for mode in ["current", "half"] {
+            let mut value = base.clone();
+            value["shallow_main_history"] = json!(mode);
+            let settings: Settings = serde_json::from_value(value).unwrap();
+            validate(&settings, std::slice::from_ref(&request)).unwrap();
+            assert_eq!(
+                serde_json::to_value(&settings).unwrap()["shallow_main_history"],
+                mode
+            );
+            assert_eq!(
+                settings.shallow_main_history.unwrap().resolve().name(),
+                mode
+            );
+        }
+        for bad in [
+            Value::Null,
+            json!(0.5),
+            json!(50),
+            json!("unknown"),
+            json!({}),
+        ] {
+            let mut value = base.clone();
+            value["shallow_main_history"] = bad;
+            assert!(serde_json::from_value::<Settings>(value).is_err());
+        }
+        for change in [
+            json!({"profile":"cheap","shallow_main_history":"current"}),
+            json!({"search_threads":2,"search_cpu_cores":[12,14]}),
+            json!({"time_reserve_ms":100}),
+        ] {
+            let mut value = base.clone();
+            value
+                .as_object_mut()
+                .unwrap()
+                .extend(change.as_object().unwrap().clone());
+            let settings: Settings = serde_json::from_value(value).unwrap();
+            assert!(validate(&settings, std::slice::from_ref(&request)).is_err());
         }
     }
 }

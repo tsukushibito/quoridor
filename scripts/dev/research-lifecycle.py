@@ -2600,6 +2600,21 @@ def numerical_fields(experiment, manifest):
     }
 
 
+def resolved_shallow_main_history(config, profile, *, supported=True):
+    if "shallow_main_history" not in config:
+        return "current"
+    value = config["shallow_main_history"]
+    require(
+        supported and profile == "control" and type(value) is str and value in {"current", "half"},
+        "typed shallow main history requires research Control",
+    )
+    require(
+        value != "half" or config.get("search_threads", 1) == 1,
+        "half shallow main history requires one search thread",
+    )
+    return value
+
+
 def resolved_lmr_parameters(config, profile, *, supported=True):
     """Typed coefficient box shared by preparation and normal data correspondence.
 
@@ -2659,6 +2674,7 @@ def measurement_config(experiment):
             "neighbour_opportunity",
             "root_ordering_quality",
             "history_provenance",
+            "shallow_main_history",
             "zero_stock_approx_min_root_walls",
             "zero_stock_approx_method",
             "zero_stock_safe_race",
@@ -2696,8 +2712,14 @@ def measurement_config(experiment):
             and config["profile"] == "control"
             and config["use_tt"]
             and config.get("zero_stock_approx_min_root_walls") is None
-            and "neighbour_opportunity" not in config
-            and "root_ordering_quality" not in config
+            and (
+                ("neighbour_opportunity" not in config and "root_ordering_quality" not in config)
+                or (
+                    threads == 1
+                    and config.get("root_ordering_quality") is True
+                    and config.get("neighbour_opportunity") == "off_shadow"
+                )
+            )
             and all(
                 not any(
                     r.get(k, False)
@@ -2724,7 +2746,7 @@ def measurement_config(experiment):
     if "time_reserve_ms" in config:
         reserve = config["time_reserve_ms"]
         require(
-            "search_threads" in config
+            ("search_threads" in config or config.get("root_ordering_quality") is True)
             and type(reserve) is int
             and reserve >= 0
             and all(
@@ -2838,6 +2860,7 @@ def measurement_config(experiment):
         "measurement LMR method",
     )
     parameters = resolved_lmr_parameters(config, config["profile"])
+    resolved_shallow_main_history(config, config["profile"])
     method = config.get("zero_stock_approx_method", "race")
     require(
         type(method) is str and method in {"race", "fixed_d"},
@@ -3058,10 +3081,12 @@ def measurement_config(experiment):
             and len({r["root"] for r in requests}) == len(requests)
             and len({r["session"] for r in requests}) <= 6
             and all(
-                r["depth"] == 64 and r["node_cap"] <= 1000000 and r.get("time_limit_ms") is None
+                r["depth"] == 64
+                and r["node_cap"] <= 1000000
+                and (r.get("time_limit_ms") is None or config.get("time_reserve_ms") is not None)
                 for r in requests
             ),
-            "bounded root ordering quality OffShadow/TT1M/26roots/6sessions/D64/1M/timeNone",
+            "bounded root ordering quality OffShadow/TT1M/26roots/6sessions/D64/1M/optional-clock-with-reserve",
         )
     return config, requests
 
@@ -3157,6 +3182,16 @@ def measurement_evidence(spec, experiment, values, *, files=()):
                     "measurement count type: " + key,
                 )
         require(isinstance(result.get("errors"), list), "measurement errors array")
+    config = document(experiment["config"])
+    if "shallow_main_history" in config:
+        policy = resolved_shallow_main_history(config, config["profile"])
+        for row in rows:
+            measured = row.get("measurement", {})
+            require(
+                measured.get("requested_shallow_main_history") == config["shallow_main_history"]
+                and measured.get("actual_shallow_main_history") == policy,
+                "measurement requested/effective shallow main history correspondence",
+            )
     raw_refs = [ref for ref in files if spec.get("perf") and ref["path"] == spec["perf"]["output"]]
     if result is not None and spec.get("perf"):
         result = {**result, "perf_RAW": raw_refs}
@@ -4860,6 +4895,12 @@ def arena_plan_check(experiment, plan):
             )
         else:
             require(engine.get("claustrophobia") is None, "unused Claustrophobia settings")
+        resolved_shallow_main_history(
+            engine,
+            engine.get("ordering_profile"),
+            supported=engine["kind"] in {"nnue", "distance", "sigma_value"}
+            and a["comparison"] != "functional",
+        )
         resolved_lmr_parameters(
             engine,
             engine.get("ordering_profile"),
@@ -4918,7 +4959,9 @@ def arena_plan_check(experiment, plan):
                     and resolved_lmr_parameters(engines[0], engines[0].get("ordering_profile"))
                     == resolved_lmr_parameters(engines[1], engines[1].get("ordering_profile"))
                 )
-            ),
+            )
+            and resolved_shallow_main_history(engines[0], engines[0].get("ordering_profile"))
+            == resolved_shallow_main_history(engines[1], engines[1].get("ordering_profile")),
             "evaluator comparison keeps effective LMR settings equal",
         )
     require(
@@ -5192,6 +5235,10 @@ def arena_observation(config, row):
                         for k in ("actual_lmr_method_id", "lmr_reduction_rule")
                     )
                 )
+                and counters.get("requested_shallow_main_history")
+                == engine.get("shallow_main_history")
+                and counters.get("actual_shallow_main_history")
+                == resolved_shallow_main_history(engine, engine.get("ordering_profile"))
                 and counters.get("requested_lmr_parameters") == engine.get("lmr_parameters")
                 and "actual_lmr_parameters" in counters
                 and counters["actual_lmr_parameters"]
@@ -7772,6 +7819,9 @@ def comparison_conditions(common):
     for variant in variants:
         if "lmr_parameters" in common:
             variant["lmr_parameters"] = copy.deepcopy(common["lmr_parameters"])
+        if "shallow_main_history" in common:
+            variant["shallow_main_history"] = common["shallow_main_history"]
+        resolved_shallow_main_history(variant, variant["profile"])
         resolved_lmr_parameters(variant, variant["profile"])
     return variants
 
@@ -7790,6 +7840,11 @@ def apply_comparison_cost(config, common, variant):
     else:
         config.pop("lmr_parameters", None)
 
+    if "shallow_main_history" in variant:
+        config["shallow_main_history"] = variant["shallow_main_history"]
+    else:
+        config.pop("shallow_main_history", None)
+    resolved_shallow_main_history(config, config["profile"])
     config["zero_stock_safe_race"] = variant["zero_stock_safe_race"]
     config["zero_stock_safe_race_method"] = variant["zero_stock_safe_race_method"]
 
@@ -7816,6 +7871,11 @@ def apply_comparison_arena(config, common, pair):
             engine["lmr_parameters"] = copy.deepcopy(variant["lmr_parameters"])
         else:
             engine.pop("lmr_parameters", None)
+        if "shallow_main_history" in variant:
+            engine["shallow_main_history"] = variant["shallow_main_history"]
+        else:
+            engine.pop("shallow_main_history", None)
+        resolved_shallow_main_history(engine, engine["ordering_profile"])
         engine["zero_stock_safe_race"] = variant["zero_stock_safe_race"]
         engine["zero_stock_safe_race_method"] = variant["zero_stock_safe_race_method"]
         for key in ("depth", "max_nodes", "time_ms"):
