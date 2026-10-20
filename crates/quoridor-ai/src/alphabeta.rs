@@ -17,6 +17,10 @@ use std::{
 mod continuation_history;
 pub use continuation_history::OrderingProfile;
 pub use continuation_history::OrderingStats;
+#[cfg(feature = "research-diagnostics")]
+pub use continuation_history::history_provenance::{
+    HistoryEntrySelector, HistoryProvenance, HistoryReturned, HistoryScoreSample,
+};
 use continuation_history::{ContinuationHistory, OrderingNodeWork, PlayedMove};
 #[path = "cheap_static_ordering.rs"]
 mod cheap_static_ordering;
@@ -1458,6 +1462,7 @@ struct Search<
     const TRACE: bool = false,
     const OPPORTUNITY: bool = false,
     const SMP: bool = false,
+    const HISTORY: bool = false,
 > {
     eval: &'a dyn StaticEvaluator,
     score_domain: ScoreDomain,
@@ -1491,8 +1496,13 @@ struct Search<
     #[cfg(feature = "research-diagnostics")]
     opportunity: Option<&'a mut NeighbourOpportunity>,
 }
-impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool, const SMP: bool>
-    Search<'_, OBSERVE, TRACE, OPPORTUNITY, SMP>
+impl<
+    const OBSERVE: bool,
+    const TRACE: bool,
+    const OPPORTUNITY: bool,
+    const SMP: bool,
+    const HISTORY: bool,
+> Search<'_, OBSERVE, TRACE, OPPORTUNITY, SMP, HISTORY>
 {
     fn key(&mut self, c: &SigmaContext) -> Key {
         let key = Key::of(c);
@@ -1757,6 +1767,16 @@ impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool, const SMP:
                         u64::from(continuation_nonzero);
                 }
             }
+        }
+        #[cfg(feature = "research-diagnostics")]
+        if HISTORY
+            && let Some(history) = self.ordering.as_deref()
+            && let Some(o) = self
+                .opportunity
+                .as_deref_mut()
+                .and_then(|o| o.history_provenance.as_mut())
+        {
+            o.scores(history, c.position(), &self.path, ids, &combined);
         }
         #[cfg(feature = "research-diagnostics")]
         if self.ordering.is_none() && self.ordering_diagnostics {
@@ -2459,6 +2479,15 @@ impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool, const SMP:
         // cutoff ranks. Avoid initializing/writing their unused action records.
         let mut returned = self.ordering.as_ref().map(|_| [0u16; 209]);
         let track_returns = returned.is_some() || self.ordering_diagnostics;
+        #[cfg(feature = "research-diagnostics")]
+        let mut history_returns = if HISTORY {
+            self.opportunity
+                .as_ref()
+                .and_then(|o| o.history_provenance.as_ref())
+                .map(|o| o.frame(c.position(), &self.path))
+        } else {
+            None
+        };
         let mut returned_count = 0;
         let mut cutoff_winner = None;
         let mut i = 0usize;
@@ -2595,6 +2624,20 @@ impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool, const SMP:
                 );
             }
             let reduced = reduction > 0;
+            #[cfg(feature = "research-diagnostics")]
+            let mut history_confirmed = false;
+            #[cfg(feature = "research-diagnostics")]
+            let mut history_pvs = false;
+            #[cfg(feature = "research-diagnostics")]
+            let history_parent_window = if HISTORY { [alpha, beta] } else { [0.0, 0.0] };
+            #[cfg(feature = "research-diagnostics")]
+            let mut history_window = if !HISTORY {
+                [0.0, 0.0]
+            } else if reduced || (self.limits.use_pvs && i > 0 && alpha.is_finite()) {
+                [alpha, next_up(alpha)]
+            } else {
+                [alpha, beta]
+            };
             let mut v = if reduced {
                 self.reduced_child(
                     c,
@@ -2603,6 +2646,12 @@ impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool, const SMP:
                     [depth - 1, depth - 1 - reduction],
                     alpha,
                     ply + 1,
+                    #[cfg(feature = "research-diagnostics")]
+                    if HISTORY && history_returns.is_some() {
+                        Some(&mut history_confirmed)
+                    } else {
+                        None
+                    },
                 )?
             } else if self.limits.use_pvs && i > 0 && alpha.is_finite() {
                 self.child(c, a, action, depth - 1, [alpha, next_up(alpha)], ply + 1)?
@@ -2612,6 +2661,11 @@ impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool, const SMP:
             if self.limits.use_pvs && i > 0 && v > alpha && v < beta {
                 self.stats.pvs_researches += 1;
                 self.stats.lmr_full_window_researches += u64::from(reduced);
+                #[cfg(feature = "research-diagnostics")]
+                if HISTORY {
+                    history_pvs = true;
+                    history_window = [alpha, beta];
+                }
                 v = self.child(c, a, action, depth - 1, [alpha, beta], ply + 1)?;
             }
             #[cfg(feature = "research-diagnostics")]
@@ -2620,6 +2674,22 @@ impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool, const SMP:
             }
             if let Some(work) = node_work.as_mut() {
                 work.returned(&mut self.stats.ordering);
+            }
+            #[cfg(feature = "research-diagnostics")]
+            if HISTORY && let Some(frame) = history_returns.as_mut() {
+                frame.returned(
+                    action,
+                    HistoryReturned::returned(
+                        i + 1,
+                        reduction,
+                        reduced,
+                        history_confirmed,
+                        history_pvs,
+                        history_window,
+                        history_parent_window,
+                        v,
+                    ),
+                );
             }
             if let Some(actions) = returned.as_mut() {
                 actions[returned_count] = action;
@@ -2668,6 +2738,15 @@ impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool, const SMP:
             && let Some(history) = self.ordering.as_deref_mut()
             && let Some(actions) = returned.as_ref()
         {
+            #[cfg(feature = "research-diagnostics")]
+            let history_before = if HISTORY {
+                self.opportunity
+                    .as_ref()
+                    .and_then(|o| o.history_provenance.as_ref())
+                    .map(|o| o.values(history))
+            } else {
+                None
+            };
             history.completed_cutoff(
                 c.position(),
                 depth,
@@ -2680,6 +2759,17 @@ impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool, const SMP:
                     None
                 },
             );
+            #[cfg(feature = "research-diagnostics")]
+            if HISTORY
+                && let Some(before) = history_before
+                && let Some(frame) = history_returns.as_ref()
+                && let Some(o) = self
+                    .opportunity
+                    .as_deref_mut()
+                    .and_then(|o| o.history_provenance.as_mut())
+            {
+                o.cutoff(history, before, c.position(), depth, ply, winner, frame);
+            }
         }
         #[cfg(feature = "research-diagnostics")]
         if cutoff_winner.is_some()
@@ -2743,6 +2833,7 @@ impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool, const SMP:
         child_depths: [u16; 2],
         alpha: f32,
         ply: usize,
+        #[cfg(feature = "research-diagnostics")] history_confirmation: Option<&mut bool>,
     ) -> NodeResult<f32> {
         let [child_depth, reduced_depth] = child_depths;
         debug_assert!(reduced_depth < child_depth);
@@ -2757,6 +2848,10 @@ impl<const OBSERVE: bool, const TRACE: bool, const OPPORTUNITY: bool, const SMP:
         )?;
         if shallow > alpha {
             self.stats.lmr_full_depth_confirmations += 1;
+            #[cfg(feature = "research-diagnostics")]
+            if HISTORY && let Some(confirmed) = history_confirmation {
+                *confirmed = true;
+            }
             self.child(c, parent, action, child_depth, [alpha, next_up(alpha)], ply)
         } else {
             // Selective fail-low; the child stores only its actual reduced
@@ -3841,7 +3936,7 @@ impl SearchSession {
             .zip(self.residual_head_scratch.as_mut());
         #[cfg(not(target_arch = "wasm32"))]
         if invocation.worker_budget.is_some() {
-            return search_in_table_observed::<false, false, false, true>(
+            return search_in_table_observed::<false, false, false, true, false>(
                 root,
                 self.evaluator.as_ref(),
                 limits,
@@ -3942,7 +4037,7 @@ fn search_in_table<const OBSERVE: bool, const TRACE: bool>(
     invocation: SearchInvocation<'_>,
     table_and_domain: SearchTableAndDomain<'_, '_>,
 ) -> Result<SearchResult> {
-    search_in_table_observed::<OBSERVE, TRACE, false, false>(
+    search_in_table_observed::<OBSERVE, TRACE, false, false, false>(
         root,
         evaluator,
         limits,
@@ -3961,6 +4056,7 @@ fn search_in_table_observed<
     const TRACE: bool,
     const OPPORTUNITY: bool,
     const SMP: bool,
+    const HISTORY: bool,
 >(
     root: &SigmaContext,
     evaluator: &dyn StaticEvaluator,
@@ -4106,7 +4202,7 @@ fn search_in_table_observed<
             true
         }
     };
-    let mut state = Search::<OBSERVE, TRACE, OPPORTUNITY, SMP> {
+    let mut state = Search::<OBSERVE, TRACE, OPPORTUNITY, SMP, HISTORY> {
         eval: evaluator,
         score_domain,
         // Only the opt-in head input persists. Geometry/counters remain fresh
@@ -4177,6 +4273,16 @@ fn search_in_table_observed<
         opportunity,
     };
     #[cfg(feature = "research-diagnostics")]
+    if HISTORY
+        && let Some(history) = state.ordering.as_deref()
+        && let Some(o) = state
+            .opportunity
+            .as_deref_mut()
+            .and_then(|o| o.history_provenance.as_mut())
+    {
+        o.begin(history);
+    }
+    #[cfg(feature = "research-diagnostics")]
     if let Some(cold) = &invocation.trial {
         state.path.extend_from_slice(cold.path);
     }
@@ -4219,6 +4325,8 @@ fn search_in_table_observed<
                     [trial.normal_depth, trial.reduced_depth],
                     trial.alpha,
                     trial.parent_ply + 1,
+                    #[cfg(feature = "research-diagnostics")]
+                    None,
                 ),
             };
             let elapsed = kernel_start.elapsed();
@@ -4244,6 +4352,15 @@ fn search_in_table_observed<
             return Ok(());
         }
         for depth in first_depth..=limits.max_depth {
+            #[cfg(feature = "research-diagnostics")]
+            if HISTORY
+                && let Some(o) = state
+                    .opportunity
+                    .as_deref_mut()
+                    .and_then(|o| o.history_provenance.as_mut())
+            {
+                o.iteration(depth);
+            }
             #[cfg(feature = "research-diagnostics")]
             if OBSERVE && let Some(o) = state.lmr_observation.as_deref_mut() {
                 o.iteration = depth;
@@ -4331,6 +4448,15 @@ fn search_in_table_observed<
         }
         if let Some(history) = state.ordering.as_deref_mut() {
             history.reset();
+            #[cfg(feature = "research-diagnostics")]
+            if HISTORY
+                && let Some(o) = state
+                    .opportunity
+                    .as_deref_mut()
+                    .and_then(|o| o.history_provenance.as_mut())
+            {
+                o.reset_observed = true;
+            }
         }
         return Err(SearchError::Root(
             "search did not restore root history".into(),
@@ -4368,7 +4494,38 @@ fn search_in_table_observed<
         && result.completed_depth > 0
         && let Some(history) = state.ordering.as_deref_mut()
     {
+        #[cfg(feature = "research-diagnostics")]
+        let history_before_age = if HISTORY {
+            state
+                .opportunity
+                .as_ref()
+                .and_then(|o| o.history_provenance.as_ref())
+                .map(|o| (o.values(history), state.stats.ordering.age_passes))
+        } else {
+            None
+        };
         history.finish_valid_root(&mut state.stats.ordering);
+        #[cfg(feature = "research-diagnostics")]
+        if HISTORY
+            && let Some((before, age_before)) = history_before_age
+            && state.stats.ordering.age_passes != age_before
+            && let Some(o) = state
+                .opportunity
+                .as_deref_mut()
+                .and_then(|o| o.history_provenance.as_mut())
+        {
+            o.age(history, before);
+        }
+    }
+    #[cfg(feature = "research-diagnostics")]
+    if HISTORY
+        && let Some(history) = state.ordering.as_deref()
+        && let Some(o) = state
+            .opportunity
+            .as_deref_mut()
+            .and_then(|o| o.history_provenance.as_mut())
+    {
+        o.finish(history);
     }
     state.publish_distance_counts();
     result.stats = state.stats;

@@ -73,6 +73,7 @@ pub struct NeighbourOpportunity {
     pub parent_restored: Option<bool>,
     pub final_stats: Option<SearchStats>,
     pub root_ordering: Option<RootOrderingQuality>,
+    pub history_provenance: Option<super::HistoryProvenance>,
     pub by_stock: [StockOpportunity; 21],
 }
 impl NeighbourOpportunity {
@@ -570,6 +571,11 @@ impl super::SearchSession {
                 "isolated opportunity Control/DR/P observation required".into(),
             ));
         }
+        if observation.history_provenance.is_some() && observation.root_ordering.is_none() {
+            return Err(SearchError::Limits(
+                "history provenance requires bounded root observation".into(),
+            ));
+        }
         if observation.root_ordering.is_some()
             && (mode != NeighbourOpportunityMode::OffShadow
                 || limits.max_depth != 64
@@ -591,7 +597,12 @@ impl super::SearchSession {
             .evaluator
             .session_residual_owner()
             .zip(self.residual_head_scratch.as_mut());
-        super::search_in_table_observed::<false, false, true, false>(
+        let search = if observation.history_provenance.is_some() {
+            super::search_in_table_observed::<false, false, true, false, true>
+        } else {
+            super::search_in_table_observed::<false, false, true, false, false>
+        };
+        search(
             root,
             self.evaluator.as_ref(),
             limits,

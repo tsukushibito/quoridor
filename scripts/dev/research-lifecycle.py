@@ -2657,6 +2657,7 @@ def measurement_config(experiment):
             "lmr_parameters",
             "neighbour_opportunity",
             "root_ordering_quality",
+            "history_provenance",
             "zero_stock_approx_min_root_walls",
             "zero_stock_approx_method",
             "zero_stock_safe_race",
@@ -2760,6 +2761,50 @@ def measurement_config(experiment):
     )
     root_quality = config.get("root_ordering_quality", False)
     require(type(root_quality) is bool, "root ordering quality Boolean switch")
+    if "history_provenance" in config:
+        watch = config["history_provenance"]
+        require(
+            root_quality and type(watch) is list and 0 < len(watch) <= 8,
+            "bounded selected history entries require root quality",
+        )
+        seen_watch = set()
+        for entry in watch:
+            require(
+                type(entry) is dict and entry.get("kind") in {"main", "continuation"},
+                "history entry kind",
+            )
+            require(
+                type(entry.get("colour")) is int
+                and entry["colour"] in {0, 1}
+                and type(entry.get("action")) is int
+                and 0 <= entry["action"] < 209,
+                "history entry colour/action",
+            )
+            if entry["kind"] == "main":
+                require(
+                    set(entry) == {"kind", "colour", "from_cell", "action"}
+                    and (
+                        (
+                            entry["action"] < 81
+                            and type(entry["from_cell"]) is int
+                            and 0 <= entry["from_cell"] < 81
+                        )
+                        or (entry["action"] >= 81 and entry["from_cell"] is None)
+                    ),
+                    "history main entry key",
+                )
+            else:
+                require(
+                    set(entry) == {"kind", "colour", "lag", "previous", "action"}
+                    and type(entry["lag"]) is int
+                    and entry["lag"] in {1, 2, 3, 4, 6}
+                    and type(entry["previous"]) is int
+                    and 0 <= entry["previous"] < 209,
+                    "history continuation entry key",
+                )
+            identity = tuple(sorted(entry.items()))
+            require(identity not in seen_watch, "duplicate history entry")
+            seen_watch.add(identity)
     opportunity = config.get("neighbour_opportunity")
     if "neighbour_opportunity" in config:
         require(

@@ -97,6 +97,12 @@ struct Settings {
     neighbour_opportunity: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     root_ordering_quality: Option<bool>,
+    #[serde(
+        default,
+        deserialize_with = "deserialize_history_watch",
+        skip_serializing_if = "Option::is_none"
+    )]
+    history_provenance: Option<Vec<HistoryEntrySettings>>,
     #[serde(default)]
     zero_stock_approx_min_root_walls: Option<u8>,
     #[serde(default = "default_zero_stock_approx_method")]
@@ -241,6 +247,14 @@ fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
                 .any(|r| r.depth != 64 || r.node_cap > 1_000_000 || r.time_limit_ms.is_some()))
     {
         return Err("bounded root ordering quality requires OffShadow/TT1M/<=26roots/6sessions/D64/1M/timeNone".into());
+    }
+    if let Some(watch) = &settings.history_provenance {
+        if settings.root_ordering_quality != Some(true) {
+            return Err("history provenance requires bounded root ordering quality route".into());
+        }
+        alphabeta::HistoryProvenance::new(
+            watch.iter().map(HistoryEntrySettings::resolve).collect(),
+        )?;
     }
     let lmr_method = LmrMethod::from_name(&settings.lmr_method)?;
     if let Some(parameters) = settings.lmr_parameters {
@@ -612,11 +626,22 @@ impl Target for SearchTarget {
         let mut lmr_observation = request
             .observe_lmr
             .then(|| Box::new(alphabeta::LmrObservation::default()));
+        let history_provenance = self
+            .settings
+            .history_provenance
+            .as_ref()
+            .map(|watch| {
+                alphabeta::HistoryProvenance::new(
+                    watch.iter().map(HistoryEntrySettings::resolve).collect(),
+                )
+            })
+            .transpose()?;
         let mut opportunity =
             self.settings
                 .neighbour_opportunity
                 .as_ref()
                 .map(|_| alphabeta::NeighbourOpportunity {
+                    history_provenance,
                     root_ordering: (self.settings.root_ordering_quality == Some(true))
                         .then(Default::default),
                     ..Default::default()
@@ -2917,6 +2942,9 @@ fn neighbour_opportunity_output(o: &alphabeta::NeighbourOpportunity) -> Value {
     if let Some(root_ordering) = root_ordering {
         result["root_ordering_quality"] = json!(root_ordering);
     }
+    if let Some(history) = o.history_provenance.as_ref() {
+        result["history_provenance"] = history_provenance_output(history);
+    }
     result
 }
 
@@ -3015,5 +3043,129 @@ mod smp_measurement_boundary_tests {
                 .and_then(|b| validate(&b, &[r]).map_err(|e| e.to_string()));
             assert!(result.is_err());
         }
+    }
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(tag = "kind", rename_all = "snake_case", deny_unknown_fields)]
+enum HistoryEntrySettings {
+    Main {
+        colour: u8,
+        from_cell: Option<u8>,
+        action: u16,
+    },
+    Continuation {
+        colour: u8,
+        lag: u8,
+        previous: u16,
+        action: u16,
+    },
+}
+impl HistoryEntrySettings {
+    fn resolve(&self) -> alphabeta::HistoryEntrySelector {
+        match *self {
+            Self::Main {
+                colour,
+                from_cell,
+                action,
+            } => alphabeta::HistoryEntrySelector::Main {
+                colour,
+                from_cell,
+                action,
+            },
+            Self::Continuation {
+                colour,
+                lag,
+                previous,
+                action,
+            } => alphabeta::HistoryEntrySelector::Continuation {
+                colour,
+                lag,
+                previous,
+                action,
+            },
+        }
+    }
+}
+
+fn history_provenance_output(o: &alphabeta::HistoryProvenance) -> Value {
+    let sample = |s: &alphabeta::HistoryScoreSample| {
+        json!({
+            "iteration":s.iteration,"ply":s.ply,"stock":s.stock,"action":s.action,"main":s.main,
+            "continuation_lags_1_2_3_4_6":s.continuation,"combined":s.combined
+        })
+    };
+    let returned = |r: &alphabeta::HistoryReturned| {
+        json!({
+            "distinct_rank":r.distinct_rank,"reduction":r.reduction,"parent_window_bits":r.parent_window_bits,
+            "reduced":r.reduced,"full_depth_confirmed":r.confirmed,"PVS_researched":r.pvs_researched,
+            "last_actual_window_bits":r.window_bits,"parent_return_value_bits":r.value_bits,
+            "return_class":r.return_class
+        })
+    };
+    json!({
+        "method":"selected-history-entry-provenance-v1",
+        "selectors":o.selectors().iter().map(|s| match s {
+            alphabeta::HistoryEntrySelector::Main { colour,from_cell,action } =>
+                json!({"kind":"main","colour":colour,"from_cell":from_cell,"action":action}),
+            alphabeta::HistoryEntrySelector::Continuation { colour,lag,previous,action } =>
+                json!({"kind":"continuation","colour":colour,"lag":lag,"previous":previous,"action":action})
+        }).collect::<Vec<_>>(),
+        "totals":o.totals().iter().map(|t| json!({
+            "initial":t.initial,"final":t.final_value,"positive":t.positive,"negative":t.negative,
+            "actual_update_delta":t.update_delta,"reduced_unconfirmed_negative":t.reduced_unconfirmed_negative,
+            "actual_positive_delta":t.positive_delta,"actual_negative_delta":t.negative_delta,
+            "reduced_unconfirmed_negative_delta":t.reduced_unconfirmed_negative_delta,
+            "negative_by_depth_capped8":t.negative_by_depth_capped8,
+            "negative_delta_by_depth_capped8":t.negative_delta_by_depth_capped8,
+            "negative_by_stock":t.negative_by_stock,"negative_delta_by_stock":t.negative_delta_by_stock,
+            "actual_age_delta":t.age_delta,"score_reads":t.score_reads,
+            "entry_balance":t.initial.zip(t.final_value).map(|(a,b)| i64::from(a)+t.update_delta+t.age_delta==i64::from(b)),
+            "first_read":t.first_read.as_ref().map(sample),"last_read":t.last_read.as_ref().map(sample)
+        })).collect::<Vec<_>>(),
+        "recent":o.recent().iter().map(|e| json!({
+            "iteration":e.iteration,"selector":e.selector,"kind":e.kind,"before":e.before,"after":e.after,"bonus":e.bonus,
+            "stock":e.stock,"colour":e.colour,"ply":e.ply,"depth":e.depth,"cutoff_winner":e.cutoff_winner,
+            "returned":e.returned.as_ref().map(returned)
+        })).collect::<Vec<_>>(),
+        "recent_limit":128,"evicted":o.evicted,"valid_roots_before":o.valid_roots_before,
+        "valid_roots_after":o.valid_roots_after,"age_passes":o.age_passes,"reset_observed":o.reset_observed,
+        "scope":"selected entry events/reads, not representative positions; pre-invocation reset source UNKNOWN",
+        "semantics":"actual integer before/after deltas; bonus sums are not entry values; incomplete invocation may have no final value"
+    })
+}
+
+fn deserialize_history_watch<'de, D: serde::Deserializer<'de>>(
+    deserializer: D,
+) -> std::result::Result<Option<Vec<HistoryEntrySettings>>, D::Error> {
+    Vec::<HistoryEntrySettings>::deserialize(deserializer).map(Some)
+}
+
+#[cfg(test)]
+mod history_provenance_settings_tests {
+    use super::*;
+    #[test]
+    fn history_watch_typed_refusal_and_default_output_absence() {
+        let good = json!({"kind":"continuation","colour":0,"lag":1,"previous":207,"action":20});
+        let s: HistoryEntrySettings = serde_json::from_value(good.clone()).unwrap();
+        alphabeta::HistoryProvenance::new(vec![s.resolve()]).unwrap();
+        for (key, value) in [
+            ("colour", json!(2)),
+            ("lag", json!(5)),
+            ("action", json!(209)),
+        ] {
+            let mut bad = good.clone();
+            bad[key] = value;
+            let s: HistoryEntrySettings = serde_json::from_value(bad).unwrap();
+            assert!(alphabeta::HistoryProvenance::new(vec![s.resolve()]).is_err());
+        }
+        let mut unknown = good;
+        unknown["extra"] = json!(0);
+        assert!(serde_json::from_value::<HistoryEntrySettings>(unknown).is_err());
+        assert!(
+            neighbour_opportunity_output(&alphabeta::NeighbourOpportunity::default())
+                .get("history_provenance")
+                .is_none()
+        );
     }
 }

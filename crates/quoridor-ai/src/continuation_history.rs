@@ -495,3 +495,7 @@ impl OrderingNodeWork {
         }
     }
 }
+
+#[cfg(feature = "research-diagnostics")]
+#[path = "history_provenance.rs"]
+pub(super) mod history_provenance;
