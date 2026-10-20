@@ -25,3 +25,9 @@
 `aspiration-genuine-release-v1.json`と同名archiveは、元release3e17722bの一度の通常finalize・実source STOP、BUILD64844e88/image19c2ab68の参照、回収CPU affinity拒否の原記録、停止済みCargo cacheだけの撤去・容量訂正、元208の実入力とCPU=2の因果support修復を保存する。ELF/model/library/cache/DB/封印payloadは含まない。実行用imageは永続volumeの元pathに保持し、再構成する場合は保存source/build条件と依存参照を用いる。archiveの存在を元外部参照や性能の再資格化とは扱わない。
 
 同じ新imageのOFF/ON比較5112dd76は実native開始・全208calls/48sessionsの通常回収・実STOPまで完了した。性能・採否は別の保存解析と元protocolで判断する。任意の保存・文書・pushはこの実STOP後に行い、開始gateにしない。
+
+## 元aspiration208の有限結果
+
+`aspiration-original208-result-v1.json`と同名archiveは、元normal208の設定・操作/データ・保存集計と実STOP、科学実行前の入口metadata失敗を保存する。309memberをstreamで元bytes/mode/SHAと照合した。旧RAWのdecode、native/モデル/validator/CI/RNGや成功検査の再演はしていない。
+
+全104固定depthは完了し、Search本体ON/OFF=1.0286333008（ON約2.86%長い）、whole-driver比=1.0278935794。root18/23が元の重大退行AND条件を満たしたためOFFを保持し、128対局は未発行のまま実施しない。時計安全や3局面の深さ改善を追加の採用条件へ変更しない。これは一つの固定候補の有限結果であり、一般の速度・棋力・有害性・等価・無効果は認定しない。候補sourceはGit302dca2とprefix/release archiveに保存し、具体的な比較用途の終わった専用code/fixtureの撤去は別の正本差分として扱う。

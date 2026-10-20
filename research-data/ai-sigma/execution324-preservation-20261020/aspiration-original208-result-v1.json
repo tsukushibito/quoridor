@@ -1,0 +1,33 @@
+{
+  "issue": "quoridor-4lc.324.29",
+  "status": "RETAIN_ROOT_ASPIRATION_OFF_NO_GAMES_FIXED_MAJOR_ROOT_REGRESSION",
+  "original_job": "5112dd76-9b03-47b7-b1e5-82e65802ea4f",
+  "calls": 208,
+  "sessions": 48,
+  "nodes": 23486705,
+  "requested_fixed_depth_complete": 104,
+  "Search_ON_over_OFF": 1.0286333008226842,
+  "whole_driver_ON_over_OFF": 1.0278935793678337,
+  "major_roots": [
+    18,
+    23
+  ],
+  "root_rule": "repeat-median ON/OFF>1.25 AND extra>.010s; serious aggregate OR any root",
+  "clock_safe": true,
+  "practical_timing_support": false,
+  "games": 0,
+  "CI": 0,
+  "future_width_or_refill_authorized": false,
+  "interpretation": "One finite selective-search configuration; no general harm/noeffect/equivalence/strength/default claim; retry counts and extra work do not establish cause",
+  "elapsed_outer_seconds_once": 67.71593602898065,
+  "nested_added": 0,
+  "archive": {
+    "path": "aspiration-original208-result-v1.tar.gz",
+    "sha256": "d052ca63d59a706dccb137abcf95cfc5847111e2e011ea2a386be703fa105120",
+    "bytes": 828501,
+    "members": 309,
+    "full_stream_SHA_size_mode_verified": true
+  },
+  "model_image_refs": "Genuine64844e88/19c2ab68 botharms, original source302dca2 in Git",
+  "fees_globalactual": "UNKNOWN"
+}

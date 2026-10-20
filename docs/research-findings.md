@@ -2901,6 +2901,10 @@ Rootは採用に足る資格が無い候補の比較専用legal_wall差分とwal
 
 同画像OFF/ONの元208比較はjob `5112dd76-9b03-47b7-b1e5-82e65802ea4f`として12:27:38Zに受付され、最初の実nativeは12:27:44Zに開始した。保存済み8設定/8要求・root4D5・26prefix/6時系列・48session・208Mを保ち、全208calls/23,486,705nodesの通常manifest/data回収と実native/collection/source STOPを確認した。外側67.715936029秒を一度数え、内側を加算しない。入口のreserve:null拒否と、native child CPU二個に対するsupport CPU=3拒否は科学実行前のmetadata失敗として残し、optional key省略とCPU=2の因果修復だけを行った。これは性能・棋力・採用の認定ではなく、固定gateの保存解析が次の判断になる。
 
+保存解析では104固定深さすべてが要求depthを完了し、OFF Searchsumは3.971968464/3.830159149秒、ONは3.988547880/4.036980400秒だった。二反復合計ON/OFF=1.0286333008で、ONのSearch本体は約2.86%長い。whole-driver比1.0278935794とは別の分母である。root18は反復median比1.2916228274・追加16.7402815ms、root23は1.2609372241・12.5612265msとなり、どちらも事前の「比>1.25 **かつ**追加>10ms」に該当した。総和の保守比1.0539980828が1.20以下でも、root側の重大退行条件を打ち消さない。
+
+100ms条件104件のreceipt/depth/terminal安全条件は満たし、完成深さmedianは3局面改善・悪化0だったが、重大root退行gateを上書きしない。固定ONのretryは各反復69回（fail-low30/fail-high39）・full fallback0、nodesは各3,789,912対OFF3,641,311で、これだけで原因を確定しない。実用時間支持も不成立で、今回の有限採否は**OFF保持・128局は未発行のまま実施しない**。一般的な棋力・有害性・等価・無効果の結論、別幅/追加反復の許可には広げない。[保存結果と原記録](../research-data/ai-sigma/execution324-preservation-20261020/aspiration-original208-result-v1.json)。同じMaxへ固定gate解釈だけを渡し、同じ作者は比較用途の終わったaspiration専用code/設定/fixture/counterの最小撤去を準備する。Current100%・Half撤去・generic機能を保持し、候補版はGit302dca2と保存物から再構成する。
+
 容量処理では、初回softwareの見積りが完全debug cacheを含まず、局所coverが一時50,092,876,800Bとなったことを記録した。global actualはUNKNOWNである。実STOPと所有を確認して停止済みCargo cacheだけを撤去し、ログ・source・Git・モデル・RAW/FAILED・qualified private imageを保持した。新release後の局所cover49,608,672,256Bと、新208の一つの352MiB whole・別16MiB保存枠はdecimal50GB内に収めた。旧creditの再適用や科学quotaの返金・貸与はない。保存の遅延を避けるため、任意の文書・archive・pushを実native/collection STOP後へ移した。
 
 ### 16.1の並行source修復は失敗時の契約参照だけを整合する
