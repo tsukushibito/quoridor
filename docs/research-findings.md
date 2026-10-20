@@ -2869,6 +2869,10 @@ Rootは採用に足る資格が無い候補の比較専用legal_wall差分とwal
 
 必要な不足診断だけ最大26calls/26M、実装する場合は同じ凍結source/Cedar/LMR/PVS/ordering/総TT1MでN1・現Lazy N2・root分担N2の各二反復、固定深さ上限8と100ms/5msを最大312calls/312Mで比較する。計338calls/338Mを上限とし、条件・順序・完成可能な深さは結果前に固定する。元root順位/LMR量、stale-alphaのtyped boundと必要再探索、反復完成、mainだけの最終authority、独立履歴、全worker取消/cap/quietを保つ。現search_forcedのnative SMP拒否を隠さず必要な共通child経路だけを扱い、全木並列・pernode scheduler・新対局/fit/model/teacherやdefault昇格は含まない。実source開始/実計測は予定と区別し、25.3/26/27を変更・中断しない。
 
+28の同一診断fragmentをCurrent100%・aspiration撤去後の3ownerへ疎適用し、元の新規AI1／RunnerLIB1を各1件だけ実行してPASS、影響AI／Runner all-target ClippyもPASSした。真正な診断BUILD `98d86e98`／image `96ad7161` を通常finalizeし、子回収・source STOP後に元26呼出しを一度実行した。baseline `9513/943` の資格を診断imageへ読み替えず、旧suite・モデル資格・科学結果を再演していない。[source・software・通常出力の保存](../research-data/ai-sigma/execution324-preservation-20261020/root-child-diagnostic-qualified26-v1.json)。
+
+通常manifest/dataは26件・6sessionすべてPASSだが、要求D64のhorizonは25 NodeLimit UNKNOWNと1 DepthCompleteであり、全件D64完成ではない。25,000,193nodes／26M、外側39.455160015秒を一度だけ数え、受付寿命41.547932秒を加算しない。実native＋通常回収STOPで当該source／fair時計の凍結を解除した。枝別仕事の凍結screenは保存解析待ちであり、通常PASSやnode比率から時間短縮・枝分担の見込み・棋力を推定しない。prototypeと条件付き312呼出しは未発行で、追加診断・補充・対局・既定変更はない。
+
 ### aspirationを優先し、実source着手を区別する（324.29）
 
 人間がroot aspirationの優先導入を明示し、新しい29を既存Sol6.1/high作者へ配送した。後続手のPVS null-windowは既にあり、今回は前の同root完成反復scoreをcenterにするroot窓を追加する別の変更である。28の保存分析・固定診断source/通常要求の準備は保持するが、次の競合root source/Cargo/fair計測は29を先にする。既に入場した25.3/27のjobやsource-readerを取消・再演せず実STOPを用いる。[契約と有限枠](../.artifacts/research-team/integration324/cedar-aspiration-window-v1/task-contract.txt)。

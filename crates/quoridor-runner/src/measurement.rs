@@ -2921,6 +2921,7 @@ fn neighbour_opportunity_output(o: &alphabeta::NeighbourOpportunity) -> Value {
                         "previous_completed":s.previous_completed,"promoted":s.promoted,
                         "killers":s.killers,"context":s.context,"eligible_root_TT":s.tt,
                         "window_bits":s.window_bits,"entries":s.entries,"children":s.children,
+                        "child_work_nodes_evaluations":s.child_work,
                         "numeric_tt_return":s.numeric_tt_return,"completed":s.completed,
                         "selected":s.selected,"value_bits":s.value_bits
                     })
@@ -2954,6 +2955,20 @@ fn neighbour_opportunity_output(o: &alphabeta::NeighbourOpportunity) -> Value {
         "clock_use":"observer-inclusive diagnostic only, no speed qualification"});
     if let Some(root_ordering) = root_ordering {
         result["root_ordering_quality"] = json!(root_ordering);
+    }
+    if let Some(q) = o.root_ordering.as_ref() {
+        result["root_branch_work"] = json!({
+            "unit":"nodes/evaluations per actual root child call, not elapsed time or saved work",
+            "missing":"None/unreturned/pending is not zero or completed work; numeric-TT roots may have no branches",
+            "completed_iterations":q.completed_work.iter().map(|w| json!({
+                "depth":w.depth,"candidate_count":w.candidate_count,"numeric_tt_return":w.numeric_tt_return,
+                "child_calls":w.child_calls,"complete_work":w.complete_work,
+                "leading_nodes":w.leading_nodes,"leading_evaluations":w.leading_evaluations,
+                "other_nodes":w.other_nodes,"other_evaluations":w.other_evaluations,
+                "largest_other_nodes":w.largest_other_nodes,
+                "research_nodes":w.research_nodes,"research_evaluations":w.research_evaluations
+            })).collect::<Vec<_>>()
+        });
     }
     if let Some(history) = o.history_provenance.as_ref() {
         result["history_provenance"] = history_provenance_output(history);
@@ -3025,6 +3040,36 @@ mod root_ordering_quality_boundary_tests {
                 .get("root_ordering_quality")
                 .is_none()
         );
+    }
+}
+
+#[cfg(test)]
+mod root_branch_work_output_boundary_tests {
+    use super::*;
+
+    #[test]
+    fn root_branch_work_is_absent_by_default_and_explicit_empty_is_not_measured_zero() {
+        let mut observation = alphabeta::NeighbourOpportunity::default();
+        assert!(
+            neighbour_opportunity_output(&observation)
+                .get("root_branch_work")
+                .is_none()
+        );
+        observation.root_ordering = Some(Default::default());
+        let output = neighbour_opportunity_output(&observation);
+        assert_eq!(
+            output["root_branch_work"]["completed_iterations"],
+            json!([])
+        );
+        assert!(
+            output["root_branch_work"]["missing"]
+                .as_str()
+                .unwrap()
+                .contains("not zero")
+        );
+        for sample in output["root_ordering_quality"].as_array().unwrap() {
+            assert!(sample["snapshot"].is_null());
+        }
     }
 }
 

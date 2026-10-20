@@ -3067,12 +3067,23 @@ impl<
                     },
                     false,
                 );
+                q.work_started(self.stats.nodes, self.stats.evaluations);
             }
-            let mut v = if self.limits.use_pvs && i > 0 {
-                self.child(c, a, action, depth - 1, [value, next_up(value)], 1)?
+            let child_result = if self.limits.use_pvs && i > 0 {
+                self.child(c, a, action, depth - 1, [value, next_up(value)], 1)
             } else {
-                self.child(c, a, action, depth - 1, [value, f32::INFINITY], 1)?
+                self.child(c, a, action, depth - 1, [value, f32::INFINITY], 1)
             };
+            #[cfg(feature = "research-diagnostics")]
+            if OPPORTUNITY
+                && let Some(q) = self
+                    .opportunity
+                    .as_deref_mut()
+                    .and_then(|o| o.root_ordering.as_mut())
+            {
+                q.work_finished(self.stats.nodes, self.stats.evaluations);
+            }
+            let mut v = child_result?;
             #[cfg(feature = "research-diagnostics")]
             if OPPORTUNITY
                 && let Some(q) = self
@@ -3092,8 +3103,19 @@ impl<
                         .and_then(|o| o.root_ordering.as_mut())
                 {
                     q.child_started(action, [value, f32::INFINITY], true);
+                    q.work_started(self.stats.nodes, self.stats.evaluations);
                 }
-                v = self.child(c, a, action, depth - 1, [value, f32::INFINITY], 1)?;
+                let child_result = self.child(c, a, action, depth - 1, [value, f32::INFINITY], 1);
+                #[cfg(feature = "research-diagnostics")]
+                if OPPORTUNITY
+                    && let Some(q) = self
+                        .opportunity
+                        .as_deref_mut()
+                        .and_then(|o| o.root_ordering.as_mut())
+                {
+                    q.work_finished(self.stats.nodes, self.stats.evaluations);
+                }
+                v = child_result?;
                 #[cfg(feature = "research-diagnostics")]
                 if OPPORTUNITY
                     && let Some(q) = self

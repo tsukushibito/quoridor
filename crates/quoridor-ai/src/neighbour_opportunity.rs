@@ -185,6 +185,60 @@ pub struct RootOrderingQuality {
     pub first_completed: Option<RootOrderingSample>,
     pub last_completed: Option<RootOrderingSample>,
     pub pending: Option<RootOrderingSample>,
+    /// Compact all-completed-iteration work, not a per-node trace.
+    pub completed_work: Vec<RootBranchWork>,
+    work_start: Option<(u64, u64)>,
+}
+
+#[derive(Debug, Default)]
+pub struct RootBranchWork {
+    pub depth: u16,
+    pub candidate_count: usize,
+    pub numeric_tt_return: bool,
+    pub child_calls: usize,
+    pub complete_work: bool,
+    pub leading_nodes: u64,
+    pub leading_evaluations: u64,
+    pub other_nodes: u64,
+    pub other_evaluations: u64,
+    pub largest_other_nodes: u64,
+    pub research_nodes: u64,
+    pub research_evaluations: u64,
+}
+impl RootBranchWork {
+    fn of(sample: &RootOrderingSample) -> Self {
+        let leading = sample.entries.first().map(|entry| entry.0);
+        let mut work = Self {
+            depth: sample.depth,
+            candidate_count: sample.entries.len(),
+            numeric_tt_return: sample.numeric_tt_return,
+            child_calls: sample.children.len(),
+            complete_work: sample.children.len() == sample.child_work.len(),
+            ..Self::default()
+        };
+        let mut other_by_action = [0u64; 209];
+        for (child, measured) in sample.children.iter().zip(&sample.child_work) {
+            let Some((nodes, evaluations)) = measured else {
+                work.complete_work = false;
+                continue;
+            };
+            work.complete_work &= child.3.is_some();
+            if Some(child.0) == leading {
+                work.leading_nodes += nodes;
+                work.leading_evaluations += evaluations;
+            } else {
+                work.other_nodes += nodes;
+                work.other_evaluations += evaluations;
+                other_by_action[usize::from(child.0)] += nodes;
+            }
+            if child.2 {
+                work.research_nodes += nodes;
+                work.research_evaluations += evaluations;
+            }
+        }
+        work.largest_other_nodes = other_by_action.into_iter().max().unwrap_or(0);
+        work
+    }
 }
 
 #[derive(Debug)]
@@ -203,6 +257,9 @@ pub struct RootOrderingSample {
     /// Actual root child calls: ID/window bits/PVS-research/returned value bits.
     /// None means this call did not return; it is never a completed branch label.
     pub children: Vec<(u16, [u32; 2], bool, Option<u32>)>,
+    /// Aligned per child call, including partial work before interruption/error.
+    /// None is unmeasured, never zero work; returned value remains separately typed.
+    pub child_work: Vec<Option<(u64, u64)>>,
     pub numeric_tt_return: bool,
     pub completed: bool,
     pub selected: Option<u16>,
@@ -218,6 +275,7 @@ impl RootOrderingQuality {
         killers: [Option<u16>; 2],
         context: Option<[u64; 2]>,
     ) {
+        self.work_start = None;
         self.pending = Some(RootOrderingSample {
             depth,
             generation,
@@ -229,6 +287,7 @@ impl RootOrderingQuality {
             window_bits: [f32::NEG_INFINITY.to_bits(), f32::INFINITY.to_bits()],
             entries: Vec::new(),
             children: Vec::new(),
+            child_work: Vec::new(),
             numeric_tt_return: false,
             completed: false,
             selected: None,
@@ -261,6 +320,20 @@ impl RootOrderingQuality {
         if let Some(s) = self.pending.as_mut() {
             s.children
                 .push((action, window.map(f32::to_bits), research, None));
+            s.child_work.push(None);
+        }
+        self.work_start = None;
+    }
+    pub(super) fn work_started(&mut self, nodes: u64, evaluations: u64) {
+        self.work_start = Some((nodes, evaluations));
+    }
+    pub(super) fn work_finished(&mut self, nodes: u64, evaluations: u64) {
+        if let Some((before_nodes, before_evaluations)) = self.work_start.take()
+            && let Some(slot) = self.pending.as_mut().and_then(|s| s.child_work.last_mut())
+        {
+            *slot = nodes
+                .checked_sub(before_nodes)
+                .zip(evaluations.checked_sub(before_evaluations));
         }
     }
     pub(super) fn child_returned(&mut self, value: f32) {
@@ -278,6 +351,7 @@ impl RootOrderingQuality {
     pub(super) fn commit(&mut self) {
         if let Some(mut s) = self.pending.take() {
             s.completed = true;
+            self.completed_work.push(RootBranchWork::of(&s));
             if self.first_completed.is_none() {
                 self.first_completed = Some(s);
             } else {
@@ -630,3 +704,50 @@ impl super::SearchSession {
 #[cfg(test)]
 #[path = "neighbour_opportunity_tests.rs"]
 mod tests;
+
+#[cfg(test)]
+mod root_child_work_boundary_tests {
+    use super::*;
+
+    #[test]
+    fn root_work_distinguishes_returned_research_partial_and_missing() {
+        let mut q = RootOrderingQuality::default();
+        q.begin(3, 1, None, [None; 2], None);
+        q.pending.as_mut().unwrap().entries = vec![(3, 0, None), (5, 1, None)];
+        q.child_started(3, [f32::NEG_INFINITY, f32::INFINITY], false);
+        q.work_started(10, 4);
+        q.work_finished(40, 14);
+        q.child_returned(0.25);
+        q.child_started(5, [0.25, 0.5], false);
+        q.work_started(40, 14);
+        q.work_finished(45, 16);
+        q.child_returned(0.5);
+        q.child_started(5, [0.25, f32::INFINITY], true);
+        q.work_started(45, 16);
+        q.work_finished(65, 21);
+        q.child_returned(0.5);
+        q.returned(5, 0.5);
+        q.commit();
+        let w = &q.completed_work[0];
+        assert!(w.complete_work);
+        assert_eq!(
+            (w.leading_nodes, w.other_nodes, w.largest_other_nodes),
+            (30, 25, 25)
+        );
+        assert_eq!(
+            (w.leading_evaluations, w.other_evaluations, w.research_nodes),
+            (10, 7, 20)
+        );
+        q.begin(4, 2, Some(5), [None; 2], None);
+        q.child_started(3, [0.0, 1.0], false);
+        q.work_started(65, 21);
+        q.work_finished(70, 23);
+        let partial = q.pending.as_ref().unwrap();
+        assert_eq!(partial.child_work, vec![Some((5, 2))]);
+        assert!(partial.children[0].3.is_none() && !partial.completed);
+        assert_eq!(q.completed_work.len(), 1);
+        q.child_started(5, [0.0, 1.0], false);
+        assert!(q.pending.as_ref().unwrap().child_work[1].is_none());
+        assert!(!RootBranchWork::of(q.pending.as_ref().unwrap()).complete_work);
+    }
+}
