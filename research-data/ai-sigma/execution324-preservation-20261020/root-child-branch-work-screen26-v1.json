@@ -1,0 +1,170 @@
+{
+  "issue": "quoridor-4lc.324.28",
+  "status": "PRODUCER_FIXED_SAVED_WORK_SCREEN_COMPLETE_RELATED_REVIEW_PENDING",
+  "original_collection": "root-child-diagnostic-qualified26-v1.json",
+  "fixed_protocol": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/finite-protocol-v1.json",
+    "sha256": "c87fbc687e812e2975b6f5c542f3a36023375f5d4068c56d471cad2c9abb73bd",
+    "bytes": 24941,
+    "mode": "0644"
+  },
+  "producer_summary": {
+    "status": "ORIGINAL26_SAVED_BRANCH_WORK_SCREEN",
+    "protocol": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/finite-protocol-v1.json",
+      "sha256": "c87fbc687e812e2975b6f5c542f3a36023375f5d4068c56d471cad2c9abb73bd",
+      "bytes": 24941,
+      "mode": "0644"
+    },
+    "collection": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/numeric-diagnostic-v1/collection-v1/summary.json",
+      "sha256": "07201773113c766e2f3c5acab49d4b17c08b8d1fdc5f1b42ef8c758da1dc075e",
+      "bytes": 1479,
+      "mode": "0644"
+    },
+    "analysis_recipe": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/normal26-control-preparation-v1/analysis-recipe.json",
+      "sha256": "2ec5ff9bf67932caaa0215c55d078c637a4748a53d3549752cc229e35eb66f86",
+      "bytes": 2026,
+      "mode": "0644"
+    },
+    "tables": {
+      "roots": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/numeric-diagnostic-v1/analysis-v2/root-screen.csv",
+        "sha256": "212d3cf68e8070833ccf1efbf6c32301f9dcd83aeeea4e2d176b9fb821f89ec4",
+        "bytes": 6976,
+        "mode": "0644"
+      },
+      "iterations": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/numeric-diagnostic-v1/analysis-v2/all-completed-iteration-work.csv",
+        "sha256": "a5e342b9f476b8a7a6d981a404431d3104bcbdcf0e6fdc1b003be84369e71919",
+        "bytes": 24492,
+        "mode": "0644"
+      },
+      "snapshots": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/numeric-diagnostic-v1/analysis-v2/snapshot-coverage.csv",
+        "sha256": "6540cedb07684f237da2a9e91adc65826254bcfa3b753364034d5b0e188c8518",
+        "bytes": 19282,
+        "mode": "0644"
+      },
+      "children": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/numeric-diagnostic-v1/analysis-v2/child-attempts.csv",
+        "sha256": "3e7d798d9ddd239242432c08daf9ba76fb1d5674dcde6d118a541c5b3425be67",
+        "bytes": 1477282,
+        "mode": "0644"
+      },
+      "strata": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/numeric-diagnostic-v1/analysis-v2/strata.csv",
+        "sha256": "dd1bdea89ae62536dc3dead3d1f6995a3272bc4b19f02cb61c281e048863c439",
+        "bytes": 2056,
+        "mode": "0644"
+      },
+      "fullroots": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/numeric-diagnostic-v1/analysis-v2/full-root-history-custody.json",
+        "sha256": "c215a8c54ef00324078674b9b98f2c34d71ab9ecb8b173678acc47de0e4acacf",
+        "bytes": 69247,
+        "mode": "0644"
+      }
+    },
+    "calls": 26,
+    "actual_nodes": 25000193,
+    "node_upper": 26000000,
+    "all26_original_slots": true,
+    "all6_sessions": true,
+    "latest_completed_eligible": 26,
+    "screen_hits": 23,
+    "screen_hit_roots": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      22,
+      23,
+      24,
+      25
+    ],
+    "screen_sessions": [
+      "series-0-turn-0",
+      "series-1-turn-1",
+      "series-2-turn-0",
+      "series-3-turn-1",
+      "series-4-turn-0",
+      "series-5-turn-1"
+    ],
+    "screen_bands": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "screen_PASS": true,
+    "denominator": 26,
+    "all_saved_contexts_match": true,
+    "main_callback_receipts": "All26 None/UNKNOWN in actualdiagnostic route; no clock/safety/speed qualification or fabricated callback",
+    "all_parent_restored": true,
+    "stock_bands": {
+      "4": 6,
+      "3": 6,
+      "2": 6,
+      "1": 6,
+      "0": 2
+    },
+    "stock_zero_shortfall": "Original genuine2vsdesired6; no refill",
+    "overall_horizons": {
+      "UNKNOWN": 25,
+      "COMPLETE": 1
+    },
+    "actual_stops": {
+      "NodeLimit": 25,
+      "DepthComplete": 1
+    },
+    "pending_iterations": 25,
+    "pending_unreturned_attempts": 25,
+    "completed_work_rows": 245,
+    "unknown_latest_roots": [],
+    "disposition": "STRUCTURAL_WORK_SCREEN_PLAUSIBLE_PRIVATE_ROOT_ONLY_PROTOTYPE_ALLOWED_NOT_PERFORMANCE_QUALIFIED",
+    "costs": {
+      "outer_seconds_once": 39.45516001491342,
+      "nested_added": 0,
+      "observed_Search_seconds": 32.255295184,
+      "whole_driver_seconds": 32.708774781,
+      "setup_seconds": 0.001763473,
+      "target_drop_seconds": 0.000624222,
+      "reset_seconds": 0.188616228,
+      "session_teardown_seconds": 0.016354914
+    },
+    "next_private_prototype": true,
+    "actual_prototype_implementation": false,
+    "future312_science": "UNENTERED separate source/software/support/current normal admission required; combined338upper not quota-consumption target",
+    "games": 0,
+    "RNG_CI": 0,
+    "native_tests_model_RAW_replays": 0,
+    "limits": "Workscreen only, not elapsed balance/CPU speed/pruning/savedwork/strength. NodeLimit pending horizonUNKNOWN despite known priorcompleted snapshot. LatestONLY, no earlier favourableiteration fallback. Original26 exposed3families6samecolourseries/warm TT/history correlation/censoring/rootrank/window effects. ROOT/PARENT childvalues may typedbounds, not exactchild oracle. Fullweightedhistory actualsnapshot + savedroot/STM/PLY/selector/context custody recorded, no inputpayload/solver/history reconstruction. Perchild time/branch completion atfuturedepth/cutoff tree UNKNOWN; CPU includesrender andRSS cumulativeprocess, not family peak."
+  },
+  "review": {
+    "issue": "quoridor-4lc.324.28.2",
+    "status_at_save": "DISPATCHED_TO_EXISTING_MAX_NOT_AN_AUTHOR_SOURCE_GATE"
+  },
+  "scope": "Latest committed root-child work screen permits only the existing bounded private-prototype step. No child-time/parallel finish/pruning/savedwork/speed/strength inference. Scoutreturns typedbounds, all26 callback None/UNKNOWN; pending iterations/capped horizons remainUNKNOWN. Original6 correlated warm series/3families/zero-stock2 shortfall fixed; no refill/newSearch/games/default change.",
+  "archive": {
+    "archive": "root-child-branch-work-screen26-v1.tar.gz",
+    "bytes": 149219,
+    "sha256": "5fd79d697c203266f1050f019aed6fbfeed248e8110624381d597bdb90068936",
+    "full_stream_restore_hash_mode_verified": true
+  }
+}
