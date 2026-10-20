@@ -1028,6 +1028,7 @@ mod smp_team_boundary_tests {
         let mut c: Config =
             serde_json::from_str(include_str!("../tests/fixtures/sigma-clock-config.json"))
                 .unwrap();
+        c.arena.as_mut().unwrap().comparison = crate::arena::Comparison::EvaluatorFixedDepth;
         c.cpu_cores = vec![12, 12];
         c.management_cpu_core = Some(0);
         c.inference_cpu_core = None;
