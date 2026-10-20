@@ -281,7 +281,23 @@ impl Position {
         } else {
             candidate.vertical |= 1u64 << anchor;
         }
-        candidate.reachable(0) && candidate.reachable(1)
+        // Share geometry while preserving the two original short-circuit
+        // Distance spans when opt-in profiling is compiled/enabled.
+        let edges;
+        let first_reachable = {
+            #[cfg(feature = "profiling")]
+            let _span = crate::profiling::span(crate::profiling::Kind::Distance);
+            if candidate.pawns[0] >= 81 {
+                return false;
+            }
+            edges = WallEdges::of(candidate);
+            edges.reaches(candidate.pawns[0], 0x1ffu128 << 72)
+        };
+        first_reachable && {
+            #[cfg(feature = "profiling")]
+            let _span = crate::profiling::span(crate::profiling::Kind::Distance);
+            edges.reaches(candidate.pawns[1], 0x1ff)
+        }
     }
     fn wall_geometry(self, horizontal: bool, anchor: u8) -> bool {
         if self.winner.is_some() || anchor >= 64 || self.walls_remaining[self.turn as usize] == 0 {
