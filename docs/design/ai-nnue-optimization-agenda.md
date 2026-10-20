@@ -242,3 +242,13 @@ LMRを優先し、私有source/設定の照合だけを並行する。perf/build
 324.20の元78探索による新診断は完了し、全対応入力の非時計仕事・値・手・PV・履歴復元が一致した。新head inclusive24.10%/leaf9.91%/AVX dot8.50%は包含を足し重ねない。完全ancestor等は未確定で、除去可能時間ではない。一候補は現Residual行参照準備のj loop外移動だけとし、関連source確認・新Rust1・真正candidate Build後、元104 ABBAの連続Searchで採否を判定する。短期LMRの入口をこの候補待ちにはせず、重いbuild/effectは実native＋通常回収STOPの別窓で実施する。[保存診断と限界](../research-findings.md#cedar-head詳細診断と行参照準備の未測定候補324202026-10-19)。
 
 324.20の元104連続Search比較はB/A=0.997456248677で、固定2%条件・反復分離を満たさず候補を保持しない。比較専用行参照差分と新fixtureは元Git/inverseへ戻し、旧13融合や別候補へ置換しない。これは有限条件未達であり同等/無効果の証明ではない。[元結果と撤去](../research-findings.md#行参照準備一候補の連続search比較は保持条件未達324202026-10-19)。
+
+## 履歴比較後の同意味高速化（324.25→26、2026-10-20）
+
+人間の「履歴調整の改善範囲の確認の後も高速化を調べて」により、25の一因子比較と後続の実作業を分ける。25は浅い負main bonus半減の104callsと条件付き64局、24は完了node共有TTの新比較を維持する。後続26は最初に壁距離map・goal到達性・合法壁生成の局所責務を読み、合法性と子の距離特徴準備で重複する計算/走査、既存391のparent-map/pooled child/repair/reuseの残る回避仕事を具体化する。393/398の撤去cache・旧検査融合・原20の不支持row-viewを根拠なく復活しない。
+
+保存profileのself/group割合は重複を足さず、現画像の正確なCPU率や削減可能率へ変換しない。壁周辺に小候補がなければ、make/undo、fullhistory/repetition、TTkey/probe、履歴採点/選択、buffer/copyを保存費用とsourceから選び直し、一度に全領域を実装しない。必要small reportと局所sourceだけから開始し、RAW再decode/旧成功suite/solver/model再資格/全repo監査はしない。
+
+軽いsource精査は同じ既存作者の25固定source返却後の空き境界で並行できる。Main/Cargoと公平な数値は実native+normalcollection STOPで直列化し、26の効果比較では25の採否を解決したhistory policyを両版で固定する。source/数値を親close・人間/Root返信待ちにしない。足りない費用内訳が意思決定を妨げる場合だけ最大12calls/12Mの追加診断、最初の局所的で意味を保つ一候補には必要softwareと最大104calls/104M ABBAを今回の新有限枠とする。元26prefix/6時系列・1thread・Cedar/LMR/TT1M/proof条件、session初期化再利用を維持し、深さ/上限/採否を結果前固定する。未完cap時間は完成速度にしない。
+
+valuebits/action/PV/depth/stop/探索tree work/fullhistory/親復元を対応し、意図して減らすBFS/検査/copy内部仕事は別に示す。Searchに加えてsetup/reset/drop/whole/終了tailを保持し、kernelやsample shareから全探索利益を逆算しない。無支持なら既定にせず用途のない候補code/fixture/counter/案内を撤去、Git/元データ/モデル/RAW/FAILED/UNKNOWNを保全する。新対局・fit・teacher・モデル変更や無制限sweepは発行しない。担当/状態はBeads、問/観測/判断は既存findings、通常source/softwareにmicro保存枠を作らず具体bulkだけdecimal50GB内へ実配分する。
