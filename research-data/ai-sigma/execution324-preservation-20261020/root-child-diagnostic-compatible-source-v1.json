@@ -1,0 +1,265 @@
+{
+  "issue": "quoridor-4lc.324.28",
+  "status": "PRIVATE_FIXED_UNBUILT_UNTYPED_UNRUN_NOT_RUNNABLE",
+  "current_Main": "Qualified retired baseline9513/943 unchanged",
+  "source_binding": {
+    "issue": "quoridor-4lc.324.28",
+    "status": "PRIVATE_COMPATIBLE_SOURCE_DERIVATIVE_NOT_SOURCE_CLEAR_UNBUILT_UNTYPED_UNRUN",
+    "original_fixed_source": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/diagnostic-source-v1/fixed-binding.json",
+      "sha256": "69752f35d2ec2f18148d216bd7c00a63cb85ec26f0bfff8ef227f6d2c2242ecd",
+      "bytes": 5745,
+      "mode": "0644"
+    },
+    "current_Root_retirement_adoption": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/cedar-aspiration-window-v1/implementation-cost-review-v1/final-retirement-v1/actual-adoption.json",
+      "sha256": "07f310b0320442f3323364e50ef71190699013c717307065069d13755492ffec",
+      "bytes": 8550,
+      "mode": "0644"
+    },
+    "subjects": [
+      {
+        "subject": "crates/quoridor-ai/src/alphabeta.rs",
+        "current_before": {
+          "retired_immutable_post": {
+            "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-aspiration-window-v1/retirement-v1/post-minimal/alphabeta.rs",
+            "sha256": "3a17ccd1cc3b9e0b23f1456aa45979cfa7f9f4b2ffffe0a05aad882416b9d7a3",
+            "bytes": 232559,
+            "mode": "0644"
+          },
+          "actual_Root_adoption": {
+            "path": "/workspaces/quoridor/crates/quoridor-ai/src/alphabeta.rs",
+            "sha256": "3a17ccd1cc3b9e0b23f1456aa45979cfa7f9f4b2ffffe0a05aad882416b9d7a3",
+            "bytes": 232559,
+            "mode": "0644"
+          }
+        },
+        "post": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/compatible-retirement-v1/post/crates/quoridor-ai/src/alphabeta.rs",
+          "sha256": "89b9aa93c615d5a39fa209d2c740f67e994246ede84e5fe89373a3e90ebdb39a",
+          "bytes": 233540,
+          "mode": "0644"
+        },
+        "original_diagnostic_post": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/diagnostic-source-v1/post/crates/quoridor-ai/src/alphabeta.rs",
+          "sha256": "2b8702e161a400587cc3b3ee449be7b2c14091e0c17528bcf547abb50a207bc8",
+          "bytes": 239256,
+          "mode": "0644"
+        },
+        "changed_fragments_exact_original_reviewed_delta": true,
+        "other_current_owner_bytes_preserved": true,
+        "mode": "0644"
+      },
+      {
+        "subject": "crates/quoridor-ai/src/neighbour_opportunity.rs",
+        "current_before": {
+          "immutable_git": "302dca222cab51141f6fcf61960463f35130bab1",
+          "subject": "crates/quoridor-ai/src/neighbour_opportunity.rs",
+          "raw_sha256": "57741e74a53d21b49739bb76a4cb8f908fc64bc65286955fee573fc1e9df22d0",
+          "exact_original_before_gzip": {
+            "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/diagnostic-source-v1/before/neighbour_opportunity.rs.gz",
+            "sha256": "59b7461559bb02e98e511154efb2e7865a2f0ee6fc40e0fe4bacf28eb7378961",
+            "bytes": 5905,
+            "mode": "0644"
+          },
+          "scope": "Outside the exact17 retirement subjects; Root sparse adoption preserves this owner; no live Main reader"
+        },
+        "post": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/diagnostic-source-v1/post/crates/quoridor-ai/src/neighbour_opportunity.rs",
+          "sha256": "e473ebe758e3385712138a10f7cc684d1d33e1f6804b38e0c95d02ddc32c26a4",
+          "bytes": 26339,
+          "mode": "0644"
+        },
+        "original_diagnostic_post": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/diagnostic-source-v1/post/crates/quoridor-ai/src/neighbour_opportunity.rs",
+          "sha256": "e473ebe758e3385712138a10f7cc684d1d33e1f6804b38e0c95d02ddc32c26a4",
+          "bytes": 26339,
+          "mode": "0644"
+        },
+        "changed_fragments_exact_original_reviewed_delta": true,
+        "other_current_owner_bytes_preserved": true,
+        "mode": "0644"
+      },
+      {
+        "subject": "crates/quoridor-runner/src/measurement.rs",
+        "current_before": {
+          "retired_immutable_post": {
+            "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-aspiration-window-v1/retirement-v1/post-final/measurement.rs",
+            "sha256": "305fe9d6bb7ed4c3573d4dbe163e318e256da4bf498fbd578530af77638cbc94",
+            "bytes": 145228,
+            "mode": "0644"
+          },
+          "actual_Root_adoption": {
+            "path": "/workspaces/quoridor/crates/quoridor-runner/src/measurement.rs",
+            "sha256": "305fe9d6bb7ed4c3573d4dbe163e318e256da4bf498fbd578530af77638cbc94",
+            "bytes": 145228,
+            "mode": "0644"
+          }
+        },
+        "post": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/compatible-retirement-v1/post/crates/quoridor-runner/src/measurement.rs",
+          "sha256": "d0a7f24f60e6d5a582d92744ceaf34e5f55c069a7eb3d627e562253782b762ff",
+          "bytes": 147218,
+          "mode": "0644"
+        },
+        "original_diagnostic_post": {
+          "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/diagnostic-source-v1/post/crates/quoridor-runner/src/measurement.rs",
+          "sha256": "475834338d84fcb14f92c7cd6b86428b92977262f953736ff0d1fbe467375704",
+          "bytes": 150787,
+          "mode": "0644"
+        },
+        "changed_fragments_exact_original_reviewed_delta": true,
+        "other_current_owner_bytes_preserved": true,
+        "mode": "0644"
+      }
+    ],
+    "forward": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/compatible-retirement-v1/forward.patch",
+      "sha256": "5061ed04c32dc2f16c25a070bdc34dfe9c2e330bacbf2a9e6a82ec41b0d9d97a",
+      "bytes": 11954,
+      "mode": "0644"
+    },
+    "inverse": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/compatible-retirement-v1/inverse.patch",
+      "sha256": "fe1f5d0c9094e2dcea88ca68ee6d62f5c45ba3d9cfab4f49f94875e14b0e0dc4",
+      "bytes": 11954,
+      "mode": "0644"
+    },
+    "same_original_changed_fragments_all3": true,
+    "new_GNU_or_review_proof_replays": 0,
+    "formatter": {
+      "actual": {
+        "argv": [
+          "rustfmt",
+          "--edition",
+          "2024",
+          "--config",
+          "skip_children=true",
+          "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/compatible-retirement-v1/post/crates/quoridor-ai/src/alphabeta.rs",
+          "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/compatible-retirement-v1/post/crates/quoridor-runner/src/measurement.rs"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "directwait_reaped": true,
+        "handles_closed": true
+      },
+      "check": {
+        "argv": [
+          "rustfmt",
+          "--check",
+          "--edition",
+          "2024",
+          "--config",
+          "skip_children=true",
+          "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/compatible-retirement-v1/post/crates/quoridor-ai/src/alphabeta.rs",
+          "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/compatible-retirement-v1/post/crates/quoridor-runner/src/measurement.rs"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "directwait_reaped": true,
+        "handles_closed": true
+      },
+      "scope": "Only two newly composed private owners; unchanged neighbour post reused byref"
+    },
+    "exact_selectors": [
+      "alphabeta::neighbour_opportunity::root_child_work_boundary_tests::root_work_distinguishes_returned_research_partial_and_missing",
+      "measurement::root_branch_work_output_boundary_tests::root_branch_work_is_absent_by_default_and_explicit_empty_is_not_measured_zero"
+    ],
+    "old_SOURCE_CLEAR_scope": "Root-reported596ded7d applies to unchanged diagnostic boundary only, not new software or author selfclear",
+    "configuration": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/compatible-retirement-v1/diagnostic-config.draft.json",
+      "sha256": "5e3b332e796dc881720b5c5066973213e7ad73030c0403e71a57bf14c0a91cf9",
+      "bytes": 6054,
+      "mode": "0644"
+    },
+    "experiment": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/compatible-retirement-v1/experiment.draft.json",
+      "sha256": "a1724f6ae895c77abde241295cc3dba5bf26087baeb9339b52a86942e1a10253",
+      "bytes": 3573,
+      "mode": "0644"
+    },
+    "run": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/compatible-retirement-v1/run.draft.json",
+      "sha256": "29c1e1c82578e0ef836dae7594da935ce2a85a01ee73dab34fb73a8be09228c4",
+      "bytes": 1913,
+      "mode": "0644"
+    },
+    "sequence": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/compatible-retirement-v1/settings.draft.json",
+      "sha256": "e1e1b70fe63c651d82f5641186ac54be6a32a3b92406435f7b4571fa9b1338fd",
+      "bytes": 2710,
+      "mode": "0644"
+    },
+    "job": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/compatible-retirement-v1/job.draft.json",
+      "sha256": "67f9adee0cd9380d105c399722567ffdadc529a47dba309a5126f4cbb04f4672",
+      "bytes": 625,
+      "mode": "0644"
+    },
+    "representation_amendment": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/compatible-retirement-v1/representation-amendment.json",
+      "sha256": "798557c3def13d4d588831b11190ad15ca2c0d5371fba9bad0377f64cdfad362",
+      "bytes": 1691,
+      "mode": "0644"
+    },
+    "protocol": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/finite-protocol-v1.json",
+      "sha256": "c87fbc687e812e2975b6f5c542f3a36023375f5d4068c56d471cad2c9abb73bd",
+      "bytes": 24941,
+      "mode": "0644"
+    },
+    "requests": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/diagnostic-requests.json",
+      "sha256": "b8a7b684e1f1f36b5ae375f09fefcf5fd8b9eacdae63fd6512f0965049b65dfe",
+      "bytes": 6727,
+      "mode": "0644"
+    },
+    "session_correspondence": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/normal26-control-preparation-v1/session-correspondence.json",
+      "sha256": "1958124ad8ad4e45a27ee51b16bbe749e365ba67eae8103a935c8f90942be170",
+      "bytes": 27714,
+      "mode": "0644"
+    },
+    "analysis_recipe": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/normal26-control-preparation-v1/analysis-recipe.json",
+      "sha256": "2ec5ff9bf67932caaa0215c55d078c637a4748a53d3549752cc229e35eb66f86",
+      "bytes": 2026,
+      "mode": "0644"
+    },
+    "software_recipe": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-root-split-v1/compatible-retirement-v1/software-recipe.json",
+      "sha256": "d7a59f6d9bd0e90b3dd2041cf87195f592bcded760797bca4134485de4e01f63",
+      "bytes": 7910,
+      "mode": "0644"
+    },
+    "tests_compiler_native_model_RAW_RNG": 0,
+    "Main_Git_index_Cargo_docs_otherOWN_writes": 0,
+    "source_reader": "Immutable issued refs and necessary one Git owner only; no MainSH/standingreader",
+    "future": {
+      "canonical_source_adoption": null,
+      "diagnostic_BUILD": null,
+      "diagnostic_image": null,
+      "software_source_STOP": null,
+      "current_callers": null,
+      "normal_factory_numerical_join": null,
+      "support": null,
+      "whole_capacity": null,
+      "fresh_runtime_admission": null,
+      "origin": null,
+      "end_at": null
+    },
+    "source_body_return_at": "2026-10-20T14:04:33.936836+00:00"
+  },
+  "source_clear_scope": "Original596ded7d applies to identical diagnostic fragments; no software or performance qualification from archive",
+  "diagnostic_calls": 0,
+  "prototype_implemented": false,
+  "future": "Root sparse adoption, original AI1/RunnerLIB1 and affected software/genuine diagnostic release, then real normal26 join/holding/admission; no ACK or29 closure gate",
+  "archive": {
+    "archive": "root-child-diagnostic-compatible-source-v1.tar.gz",
+    "bytes": 115349,
+    "sha256": "0c8b6cca6f0edce1692a1a5912a9fe53b380dda930d614f101a33f9028f181bf",
+    "full_stream_restore_hash_mode_verified": true
+  }
+}
