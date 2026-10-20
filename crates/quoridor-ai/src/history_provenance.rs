@@ -258,10 +258,10 @@ impl HistoryProvenance {
     pub(crate) fn iteration(&mut self, depth: u16) {
         self.iteration = depth;
     }
-    pub(crate) fn values(&self, h: &ContinuationHistory) -> [i16; HISTORY_WATCH_MAX] {
+    pub(in crate::alphabeta) fn values(&self, h: &ContinuationHistory) -> [i16; HISTORY_WATCH_MAX] {
         std::array::from_fn(|i| self.selectors.get(i).map_or(0, |s| s.value(h)))
     }
-    pub(crate) fn begin(&mut self, h: &ContinuationHistory) {
+    pub(in crate::alphabeta) fn begin(&mut self, h: &ContinuationHistory) {
         for (i, value) in self
             .values(h)
             .into_iter()
@@ -272,7 +272,7 @@ impl HistoryProvenance {
         }
         self.valid_roots_before = Some(h.valid_roots_since_age);
     }
-    pub(crate) fn finish(&mut self, h: &ContinuationHistory) {
+    pub(in crate::alphabeta) fn finish(&mut self, h: &ContinuationHistory) {
         for (i, value) in self
             .values(h)
             .into_iter()
@@ -283,7 +283,11 @@ impl HistoryProvenance {
         }
         self.valid_roots_after = Some(h.valid_roots_since_age);
     }
-    pub(crate) fn frame(&self, p: Position, path: &[PlayedMove]) -> HistoryReturnFrame {
+    pub(in crate::alphabeta) fn frame(
+        &self,
+        p: Position,
+        path: &[PlayedMove],
+    ) -> HistoryReturnFrame {
         HistoryReturnFrame {
             actions: std::array::from_fn(|i| {
                 self.selectors
@@ -294,7 +298,7 @@ impl HistoryProvenance {
             facts: [None; HISTORY_WATCH_MAX],
         }
     }
-    pub(crate) fn scores(
+    pub(in crate::alphabeta) fn scores(
         &mut self,
         h: &ContinuationHistory,
         p: Position,
@@ -335,7 +339,7 @@ impl HistoryProvenance {
         self.recent.push_back(event);
     }
     #[allow(clippy::too_many_arguments)]
-    pub(crate) fn cutoff(
+    pub(in crate::alphabeta) fn cutoff(
         &mut self,
         h: &ContinuationHistory,
         before: [i16; HISTORY_WATCH_MAX],
@@ -392,7 +396,11 @@ impl HistoryProvenance {
             });
         }
     }
-    pub(crate) fn age(&mut self, h: &ContinuationHistory, before: [i16; HISTORY_WATCH_MAX]) {
+    pub(in crate::alphabeta) fn age(
+        &mut self,
+        h: &ContinuationHistory,
+        before: [i16; HISTORY_WATCH_MAX],
+    ) {
         self.age_passes += 1;
         let after = self.values(h);
         for i in 0..self.selectors.len() {
