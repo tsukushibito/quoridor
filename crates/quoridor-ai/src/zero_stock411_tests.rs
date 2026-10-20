@@ -317,9 +317,7 @@ fn safe_race411_typed_tt_rejects_root_depth_zero_and_approx_values() {
         seed(s, &child, 0, -TERMINAL_SCORE, Bound::SafeRaceLeaf, None);
         assert_eq!(s.child(c, None, 67, 0, [-2., 2.], 1).unwrap(), -0.125);
         seed(s, c, 1, TERMINAL_SCORE, Bound::SafeRaceLeaf, None);
-        let (_, value) = s
-            .root_depth::<false>(c, None, 1, None, [f32::NEG_INFINITY, f32::INFINITY])
-            .unwrap();
+        let (_, value) = s.root_depth(c, None, 1, None).unwrap();
         assert_eq!(value, -0.125);
         assert_eq!(s.stats.tt_illegal_moves, 0);
     });

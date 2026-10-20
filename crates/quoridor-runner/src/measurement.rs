@@ -95,12 +95,6 @@ struct Settings {
         skip_serializing_if = "Option::is_none"
     )]
     lmr_parameters: Option<crate::config::LmrParameters>,
-    #[serde(
-        default,
-        deserialize_with = "crate::config::deserialize_root_aspiration",
-        skip_serializing_if = "Option::is_none"
-    )]
-    root_aspiration: Option<crate::config::RootAspiration>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     neighbour_opportunity: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -272,24 +266,6 @@ fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
         alphabeta::HistoryProvenance::new(
             watch.iter().map(HistoryEntrySettings::resolve).collect(),
         )?;
-    }
-    if let Some(c) = settings.root_aspiration {
-        c.resolve()?;
-        if settings.profile != Profile::Control
-            || settings.search_threads.unwrap_or(1) != 1
-            || !settings.use_tt
-            || !settings.use_pvs
-            || settings.neighbour_opportunity.is_some()
-            || settings.root_ordering_quality.is_some()
-            || settings.history_provenance.is_some()
-            || requests
-                .iter()
-                .any(|r| r.diagnostic || r.observe_lmr || r.observe_completed_depths || r.warmup)
-        {
-            return Err(
-                "root aspiration requires ordinary LOCAL1 Current Control measurement".into(),
-            );
-        }
     }
     let lmr_method = LmrMethod::from_name(&settings.lmr_method)?;
     if let Some(parameters) = settings.lmr_parameters {
@@ -592,12 +568,6 @@ impl Target for SearchTarget {
                 }),
             )?;
         }
-        session.set_root_aspiration(
-            self.settings
-                .root_aspiration
-                .map(|c| c.resolve())
-                .transpose()?,
-        )?;
         session.set_smp_sharing_provenance(self.settings.smp_sharing_provenance);
         let method = session.namespace().selectivity.clone();
         let lmr = session.lmr_enabled();
@@ -759,12 +729,6 @@ impl Target for SearchTarget {
                 row["status"] == "COMPLETE" && row["completed_depth"] == 5 && after == self.before,
             )
         });
-        row["requested_root_aspiration"] = json!(self.settings.root_aspiration);
-        row["actual_root_aspiration"] = json!(
-            session
-                .root_aspiration()
-                .map(crate::config::RootAspiration::from)
-        );
         row["actual_selectivity"] = json!(session.namespace().selectivity);
         row["time_reserve_ms"] = json!(self.settings.time_reserve_ms);
         row["lmr_method_requested"] = json!(self.settings.lmr_method);
@@ -1409,9 +1373,6 @@ fn observed(r: &SearchResult) -> Value {
     let mut result = json!({"returned":"Ok","action":r.action,"value":r.value,"value_bits":r.value.map(f32::to_bits),"completed_depth":r.completed_depth,"PV":r.pv,"stop":format!("{:?}",r.stop),"Search_internal_elapsed_seconds":r.elapsed.as_secs_f64(),
         "work":observed_work(s),
         "ordering":{"ordered_nodes":o.ordered_nodes,"scored_actions":o.scored_actions,"nonzero_dynamic_actions":o.nonzero_dynamic_actions,"nonzero_combined_actions":o.nonzero_combined_actions,"nonzero_continuation_actions":o.nonzero_continuation_actions,"history_changed_nodes":o.history_changed_nodes,"first_choice_changed_nodes":o.first_choice_changed_nodes,"first_choice_compared_nodes":o.first_choice_compared_nodes,"history_compared_nodes":o.history_compared_nodes,"completed_cutoff_events":o.completed_cutoff_events,"cutoff_rank_sum":o.cutoff_rank_sum,"first_child_cutoffs":o.first_child_cutoffs,"positive_actions":o.positive_actions,"negative_actions":o.negative_actions,"continuation_updates":o.continuation_updates,"age_passes":o.age_passes,"static_parents":o.static_parents,"borrowed_goal_maps":o.borrowed_goal_maps,"computed_goal_map_pairs":o.computed_goal_map_pairs,"cheap_static_parents":o.cheap_static_parents,"missing_goal_map_pairs":o.missing_goal_map_pairs,"available_goal_map_pairs":o.available_goal_map_pairs,"nonzero_static_actions":o.nonzero_static_actions,"exact_goal_actions":o.exact_goal_actions,"static_changed_nodes":o.static_changed_nodes,"static_compared_nodes":o.static_compared_nodes}});
-    if let Some(w) = crate::runtime::aspiration_work(s) {
-        result["root_aspiration_work"] = w;
-    }
     result["lmr_rule"] = json!(s.lmr_enabled.then(|| s.lmr_method.id()));
     result["lmr_parameters"] = json!(s.lmr_parameters.map(crate::config::LmrParameters::from));
     result["lmr_reduction_rule"] = json!(s.lmr_enabled.then(|| {
@@ -3265,79 +3226,5 @@ mod node_publication_settings_tests {
             on["smp_sharing_provenance"] = invalid;
             assert!(serde_json::from_value::<Settings>(on.clone()).is_err());
         }
-    }
-}
-
-#[cfg(test)]
-mod aspiration_measurement_boundary_tests {
-    use super::*;
-    #[test]
-    fn aspiration_measurement_default_typed_current_and_record_contract() {
-        let base = json!({"roots":[{"input":0,"pointer":"","field":"prefix","label":"new29-metadata"}],"profile":"control","tt_entries":1048576,"use_tt":true,"use_pvs":true,"lmr":true,"lmr_method":"depth_rank","zero_stock_safe_race":true,"zero_stock_safe_race_method":"path_tail","namespace":{"evaluator":"software-only","rules":"standard","selectivity":"PVS"},"output_bytes":1048576,"record_bytes":32768,"search_threads":1,"search_cpu_cores":[12],"management_cpu_core":0,"native_memory_bytes":2684354560_u64});
-        let request: Request = serde_json::from_value(
-            json!({"id":"new29","session":"s","root":0,"depth":3,"node_cap":1000000}),
-        )
-        .unwrap();
-        let off: Settings = serde_json::from_value(base.clone()).unwrap();
-        assert!(off.root_aspiration.is_none());
-        assert!(
-            serde_json::to_value(off)
-                .unwrap()
-                .get("root_aspiration")
-                .is_none()
-        );
-        let mut on = base.clone();
-        on["root_aspiration"] =
-            json!({"half_width":0.125,"growth":2.0,"activation_depth":3,"max_retries":4});
-        let settings: Settings = serde_json::from_value(on.clone()).unwrap();
-        validate(&settings, std::slice::from_ref(&request)).unwrap();
-        assert_eq!(
-            serde_json::to_value(settings).unwrap()["root_aspiration"],
-            on["root_aspiration"]
-        );
-        for (key, value) in [
-            ("profile", json!("cheap")),
-            ("neighbour_opportunity", json!("off_shadow")),
-            ("search_threads", json!(2)),
-        ] {
-            let mut bad = on.clone();
-            bad[key] = value;
-            let settings: Settings = serde_json::from_value(bad).unwrap();
-            assert!(validate(&settings, std::slice::from_ref(&request)).is_err());
-        }
-        for value in [
-            Value::Null,
-            json!({"half_width":0.,"growth":2.,"activation_depth":3,"max_retries":4}),
-            json!({"half_width":0.125,"growth":1.,"activation_depth":3,"max_retries":4}),
-            json!({"half_width":0.125,"growth":2.,"activation_depth":1,"max_retries":4}),
-            json!({"half_width":0.125,"growth":2.,"activation_depth":3,"max_retries":9}),
-        ] {
-            let mut bad = on.clone();
-            bad["root_aspiration"] = value;
-            assert!(serde_json::from_value::<Settings>(bad).is_err());
-        }
-        let work = alphabeta::SearchStats {
-            root_aspiration: Some(
-                serde_json::from_value::<crate::config::RootAspiration>(
-                    on["root_aspiration"].clone(),
-                )
-                .unwrap()
-                .resolve()
-                .unwrap(),
-            ),
-            aspiration_work: Some(alphabeta::AspirationStats {
-                attempts: 3,
-                fail_high: 1,
-                full_fallbacks: 1,
-                nodes: 37,
-                ..Default::default()
-            }),
-            ..Default::default()
-        };
-        let recorded = crate::runtime::aspiration_work(&work).unwrap();
-        assert_eq!(recorded["attempts"], 3);
-        assert_eq!(recorded["nodes"], 37);
-        assert_eq!(recorded["full_fallbacks"], 1);
-        assert!(crate::runtime::aspiration_work(&alphabeta::SearchStats::default()).is_none());
     }
 }

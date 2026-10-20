@@ -521,7 +521,6 @@ pub struct TtProfile {
     pub actual_lmr_method_id: Option<String>,
     #[serde(default)]
     pub actual_lmr_parameters: Option<crate::config::LmrParameters>,
-    pub actual_root_aspiration: Option<crate::config::RootAspiration>,
     #[serde(default)]
     pub lmr_reduction_rule: Option<String>,
     #[serde(default)]
@@ -576,25 +575,6 @@ pub(crate) fn arena_lmr_method(engine: &Engine) -> alphabeta::Result<alphabeta::
             .as_deref()
             .unwrap_or(alphabeta::LmrMethod::default().name()),
     )
-}
-pub(crate) fn arena_root_aspiration(
-    engine: &Engine,
-    arena: Option<&crate::arena::ArenaConfig>,
-) -> alphabeta::Result<Option<alphabeta::AspirationWindow>> {
-    if engine.root_aspiration.is_some()
-        && (!matches!(engine.kind.as_str(), "nnue" | "distance")
-            || engine.ordering_profile.as_deref() != Some("control")
-            || engine.search_threads.unwrap_or(1) != 1
-            || arena.is_none_or(|a| a.comparison == crate::arena::Comparison::Functional))
-    {
-        return Err(alphabeta::SearchError::Limits(
-            "root aspiration requires research LOCAL1 Current Control alpha arena".into(),
-        ));
-    }
-    engine
-        .root_aspiration
-        .map(crate::config::RootAspiration::resolve)
-        .transpose()
 }
 pub(crate) fn arena_lmr_parameters(
     engine: &Engine,
@@ -674,9 +654,6 @@ fn arena_alpha_namespace(
     if enabled {
         method.qualify_namespace(&mut namespace);
     }
-    if let Some(c) = arena_root_aspiration(engine, arena)? {
-        c.qualify_namespace(&mut namespace);
-    }
     Ok(namespace)
 }
 fn arena_alpha_session(
@@ -734,7 +711,6 @@ fn arena_alpha_session(
             }),
         )?;
     }
-    session.set_root_aspiration(arena_root_aspiration(engine, arena)?)?;
     Ok(session)
 }
 
@@ -847,7 +823,6 @@ fn invoke_alpha_observed(
         profile.actual_lmr_method_id = session.lmr_method().map(|m| m.id().to_owned());
         profile.lmr_reduction_rule = session.lmr_reduction_rule().map(str::to_owned);
         profile.actual_lmr_parameters = session.lmr_parameters().map(Into::into);
-        profile.actual_root_aspiration = session.root_aspiration().map(Into::into);
         profile.search_invocations += 1;
         let start = Instant::now();
         let mut bounded = limits.clone();
@@ -3130,10 +3105,6 @@ fn record_evaluation_alpha(
         "actual_zero_stock_safe_race_method_id":game.tt_profiles[engine].actual_zero_stock_safe_race_method_id,
         "requested_lmr_method":config.engines[engine].lmr_method.as_deref().unwrap_or(alphabeta::LmrMethod::default().name()),
         "requested_lmr_parameters":config.engines[engine].lmr_parameters,
-        "requested_root_aspiration":config.engines[engine].root_aspiration,
-        "actual_root_aspiration":game.tt_profiles[engine].actual_root_aspiration,
-        "aspiration_work_completed":selected.and_then(|r| aspiration_work(&r.stats)),
-        "aspiration_work_terminal":result.as_deref().and_then(|r| aspiration_work(&r.stats)),
         "actual_lmr_parameters":game.tt_profiles[engine].actual_lmr_parameters,
         "actual_lmr_method_id":game.tt_profiles[engine].actual_lmr_method_id,
         "lmr_reduction_rule":game.tt_profiles[engine].lmr_reduction_rule,
@@ -7736,77 +7707,4 @@ pub(crate) fn smp_report(report: &alphabeta::SmpReport) -> serde_json::Value {
                 "scope":"default-OFF; nested counters at this worker; foreign numeric returns require existing key/context/depth/Bound/legal qualifications; no saved-work/quality claim"})),
             "TT_retained_bytes":"shared total, counted once above"})).collect::<Vec<_>>()
     })
-}
-
-pub(crate) fn aspiration_work(stats: &alphabeta::SearchStats) -> Option<serde_json::Value> {
-    stats.aspiration_work.as_ref().map(|w|serde_json::json!({
-        "attempts":w.attempts,"full_seed_searches":w.full_seed_searches,
-        "fail_low":w.fail_low,"fail_high":w.fail_high,"retries":w.retries,
-        "full_fallbacks":w.full_fallbacks,"nodes":w.nodes,"evaluations":w.evaluations,
-        "scope":"root attempts including partial interrupted work; one cumulative Search budget, not added to total nodes/evals"
-    }))
-}
-
-#[cfg(test)]
-mod aspiration_arena_boundary_tests {
-    use super::*;
-    struct NeverForward;
-    impl StaticEvaluator for NeverForward {
-        fn evaluate(
-            &self,
-            _: &SigmaContext,
-            _: Option<&quoridor_ai::alphabeta::EvalAccumulator>,
-        ) -> alphabeta::Result<f32> {
-            Err(alphabeta::SearchError::Evaluation(
-                "metadata boundary must not forward".into(),
-            ))
-        }
-    }
-    #[test]
-    fn aspiration_arena_typed_control_namespace_and_unused_scope_refusal() {
-        let c: crate::config::Config =
-            serde_json::from_str(include_str!("../tests/fixtures/sigma-clock-config.json"))
-                .unwrap();
-        let mut arena = c.arena.unwrap();
-        arena.comparison = crate::arena::Comparison::EvaluatorFixedDepth;
-        let value = serde_json::json!({"kind":"distance","ordering_profile":"control","root_aspiration":{"half_width":0.125,"growth":2.0,"activation_depth":3,"max_retries":4}});
-        let engine: Engine = serde_json::from_value(value.clone()).unwrap();
-        let raw = alphabeta::SearchNamespace {
-            evaluator: "new29-NN0".into(),
-            rules: "research-standard-2p-threefold-goal-first-v1".into(),
-            selectivity: "PVS".into(),
-        };
-        let session = arena_alpha_session(
-            Arc::new(NeverForward),
-            raw.clone(),
-            64,
-            &engine,
-            Some(&arena),
-        )
-        .unwrap();
-        assert_eq!(
-            session.root_aspiration(),
-            engine.root_aspiration.map(|c| c.resolve().unwrap())
-        );
-        assert_eq!(
-            session.namespace(),
-            &arena_alpha_namespace(&engine, raw, Some(&arena)).unwrap()
-        );
-        assert!(arena_root_aspiration(&engine, None).is_err());
-        for (key, replacement) in [
-            ("kind", serde_json::json!("mcts")),
-            ("ordering_profile", serde_json::json!("cheap")),
-            ("search_threads", serde_json::json!(2)),
-        ] {
-            let mut bad = value.clone();
-            bad[key] = replacement;
-            let e: Engine = serde_json::from_value(bad).unwrap();
-            assert!(arena_root_aspiration(&e, Some(&arena)).is_err());
-        }
-        arena.comparison = crate::arena::Comparison::Functional;
-        assert!(arena_root_aspiration(&engine, Some(&arena)).is_err());
-        let mut bad = value;
-        bad["root_aspiration"] = serde_json::Value::Null;
-        assert!(serde_json::from_value::<Engine>(bad).is_err());
-    }
 }

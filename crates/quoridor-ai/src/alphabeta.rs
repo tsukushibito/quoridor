@@ -70,10 +70,6 @@ enum StaticScratch {
 use crate::score::{ScoreDomain, TerminalOutcome};
 use web_time::Instant;
 
-#[path = "aspiration_window.rs"]
-mod aspiration_window;
-pub use aspiration_window::{AspirationStats, AspirationWindow};
-
 pub const TERMINAL_SCORE: f32 = 2.0;
 #[derive(Debug)]
 pub enum SearchError {
@@ -793,9 +789,6 @@ fn permit_zero_stock_approx(threshold: Option<u8>, root_walls: u16, max_depth: u
 
 #[derive(Debug, Default, Clone)]
 pub struct SearchStats {
-    /// Root-only research option; None retains the original OFF route.
-    pub root_aspiration: Option<AspirationWindow>,
-    pub aspiration_work: Option<AspirationStats>,
     /// One per-Search snapshot; method selection alone does not enable LMR.
     pub lmr_enabled: bool,
     pub lmr_method: LmrMethod,
@@ -2914,13 +2907,12 @@ impl<
         Ok((action, value))
     }
 
-    fn root_depth<const WINDOWED: bool>(
+    fn root_depth(
         &mut self,
         c: &mut SigmaContext,
         a: Option<&EvalAccumulator>,
         depth: u16,
         previous: Option<u16>,
-        window: [f32; 2],
     ) -> NodeResult<(u16, f32)> {
         self.enter(c)?;
         #[cfg(feature = "research-diagnostics")]
@@ -3044,13 +3036,6 @@ impl<
             work.sorted_size = Some(moves.len());
         }
         self.control()?;
-        let original_alpha = if WINDOWED {
-            window[0]
-        } else {
-            f32::NEG_INFINITY
-        };
-        let beta = if WINDOWED { window[1] } else { f32::INFINITY };
-        let mut alpha = original_alpha;
         let mut value = f32::NEG_INFINITY;
         let mut best = None;
         for (i, &action) in moves.iter().enumerate() {
@@ -3076,38 +3061,17 @@ impl<
                 q.child_started(
                     action,
                     if self.limits.use_pvs && i > 0 {
-                        [
-                            alpha,
-                            if WINDOWED {
-                                next_up(alpha).min(beta)
-                            } else {
-                                next_up(alpha)
-                            },
-                        ]
+                        [value, next_up(value)]
                     } else {
-                        [alpha, beta]
+                        [value, f32::INFINITY]
                     },
                     false,
                 );
             }
             let mut v = if self.limits.use_pvs && i > 0 {
-                self.child(
-                    c,
-                    a,
-                    action,
-                    depth - 1,
-                    [
-                        alpha,
-                        if WINDOWED {
-                            next_up(alpha).min(beta)
-                        } else {
-                            next_up(alpha)
-                        },
-                    ],
-                    1,
-                )?
+                self.child(c, a, action, depth - 1, [value, next_up(value)], 1)?
             } else {
-                self.child(c, a, action, depth - 1, [alpha, beta], 1)?
+                self.child(c, a, action, depth - 1, [value, f32::INFINITY], 1)?
             };
             #[cfg(feature = "research-diagnostics")]
             if OPPORTUNITY
@@ -3118,7 +3082,7 @@ impl<
             {
                 q.child_returned(v);
             }
-            if self.limits.use_pvs && i > 0 && v > alpha && (!WINDOWED || v < beta) {
+            if self.limits.use_pvs && i > 0 && v > value {
                 self.stats.pvs_researches += 1;
                 #[cfg(feature = "research-diagnostics")]
                 if OPPORTUNITY
@@ -3127,9 +3091,9 @@ impl<
                         .as_deref_mut()
                         .and_then(|o| o.root_ordering.as_mut())
                 {
-                    q.child_started(action, [alpha, beta], true);
+                    q.child_started(action, [value, f32::INFINITY], true);
                 }
-                v = self.child(c, a, action, depth - 1, [alpha, beta], 1)?;
+                v = self.child(c, a, action, depth - 1, [value, f32::INFINITY], 1)?;
                 #[cfg(feature = "research-diagnostics")]
                 if OPPORTUNITY
                     && let Some(q) = self
@@ -3147,14 +3111,6 @@ impl<
                 value = v;
                 best = Some(action);
             }
-            if WINDOWED {
-                alpha = alpha.max(v);
-                if alpha >= beta {
-                    break;
-                }
-            } else {
-                alpha = value;
-            }
         }
         self.control()?;
         let best = best.ok_or(Interrupted::Error(SearchError::Root(
@@ -3171,11 +3127,7 @@ impl<
                     key,
                     depth,
                     value,
-                    bound: if WINDOWED {
-                        aspiration_window::bound(value, [original_alpha, beta])
-                    } else {
-                        Bound::Exact
-                    },
+                    bound: Bound::Exact,
                     best: Some(best),
                 },
                 &mut self.stats,
@@ -3387,7 +3339,6 @@ impl SessionMethod {
 /// New games explicitly reset or create a session; namespace switches clear all entries.
 pub struct SearchSession {
     namespace: SearchNamespace,
-    aspiration: Option<AspirationWindow>,
     #[cfg(not(target_arch = "wasm32"))]
     native_workers: Option<Box<lazy_smp::NativeWorkers>>,
     evaluator: Arc<dyn StaticEvaluator>,
@@ -3409,41 +3360,6 @@ pub struct SearchSession {
     zero_stock_safe_race_method: ZeroStockSafeRaceMethod,
 }
 impl SearchSession {
-    /// Changing the effective window policy clears TT/history. Equal settings warm normally.
-    pub fn set_root_aspiration(&mut self, config: Option<AspirationWindow>) -> Result<()> {
-        let config = config.map(AspirationWindow::validate).transpose()?;
-        #[cfg(not(target_arch = "wasm32"))]
-        if config.is_some() && self.native_workers.is_some() {
-            return Err(SearchError::Limits(
-                "root aspiration requires LOCAL1".into(),
-            ));
-        }
-        #[cfg(feature = "research-diagnostics")]
-        if config.is_some() && matches!(self.method, SessionMethod::Opportunity(_)) {
-            return Err(SearchError::Limits(
-                "root aspiration does not admit diagnostic ordering".into(),
-            ));
-        }
-        if config == self.aspiration {
-            return Ok(());
-        }
-        if let Some(old) = self.aspiration {
-            old.remove_namespace(&mut self.namespace);
-        }
-        self.aspiration = config;
-        if let Some(config) = config {
-            config.qualify_namespace(&mut self.namespace);
-        }
-        self.table.clear();
-        if let Some(history) = self.ordering.as_mut() {
-            history.reset();
-        }
-        Ok(())
-    }
-    pub fn root_aspiration(&self) -> Option<AspirationWindow> {
-        self.aspiration
-    }
-
     fn detach_safe_race_namespace(&mut self) {
         if self.zero_stock_safe_race {
             self.namespace.selectivity.truncate(
@@ -3808,7 +3724,6 @@ impl SearchSession {
             .map(|owner| owner.model.evaluation_scratch());
         Ok(Self {
             namespace,
-            aspiration: None,
             #[cfg(not(target_arch = "wasm32"))]
             native_workers: None,
             evaluator,
@@ -3921,9 +3836,6 @@ impl SearchSession {
         self.zero_stock_approx_effective = false;
         self.attach_safe_race_namespace();
         self.score_domain = score_domain;
-        if let Some(config) = self.aspiration {
-            config.qualify_namespace(&mut self.namespace);
-        }
         self.table.clear();
         if let Some(history) = self.ordering.as_mut() {
             history.reset();
@@ -4012,12 +3924,6 @@ impl SearchSession {
         on_completed: &mut dyn FnMut(&SearchResult),
     ) -> Result<SearchResult> {
         #[cfg(not(target_arch = "wasm32"))]
-        if self.native_workers.is_some() && self.aspiration.is_some() {
-            return Err(SearchError::Limits(
-                "root aspiration requires LOCAL1".into(),
-            ));
-        }
-        #[cfg(not(target_arch = "wasm32"))]
         if let Some(mut workers) = self.native_workers.take() {
             let result = workers.search(self, root, limits, cancel, on_completed);
             self.native_workers = Some(workers);
@@ -4049,7 +3955,6 @@ impl SearchSession {
             root_walls,
             limits.max_depth,
         ));
-        invocation.aspiration = self.aspiration;
         invocation.lmr_table = self.lmr_table.as_deref();
         invocation.safe_race_method = self.zero_stock_safe_race_method;
         invocation.residual_head = self
@@ -4120,7 +4025,6 @@ struct SearchInvocation<'a> {
     worker_budget: Option<&'a mut lazy_smp::WorkerBudget>,
     residual_head: Option<(&'a ResidualEvaluator, &'a mut ResidualScratch)>,
     forced_root: Option<u16>,
-    aspiration: Option<AspirationWindow>,
     lmr_table: Option<&'a PreparedLmr>,
     safe_race_method: ZeroStockSafeRaceMethod,
     on_completed: &'a mut dyn FnMut(&SearchResult),
@@ -4139,7 +4043,6 @@ impl<'a> SearchInvocation<'a> {
             worker_budget: None,
             residual_head: None,
             forced_root: None,
-            aspiration: None,
             lmr_table: None,
             safe_race_method: ZeroStockSafeRaceMethod::Manhattan,
             #[cfg(feature = "research-diagnostics")]
@@ -4356,8 +4259,6 @@ fn search_in_table_observed<
         stats: SearchStats {
             #[cfg(not(target_arch = "wasm32"))]
             smp_sharing,
-            root_aspiration: invocation.aspiration,
-            aspiration_work: invocation.aspiration.map(|_| AspirationStats::default()),
             lmr_enabled: lmr,
             lmr_method,
             lmr_parameters: (lmr && lmr_method == LmrMethod::DepthRank).then(|| {
@@ -4502,66 +4403,8 @@ fn search_in_table_observed<
             state.table.next_generation();
             let (action, value) = if let Some(action) = invocation.forced_root {
                 state.forced_root_depth(&mut c, a.as_ref(), depth, action)?
-            } else if invocation.aspiration.is_none() {
-                state.root_depth::<false>(
-                    &mut c,
-                    a.as_ref(),
-                    depth,
-                    result.action,
-                    [f32::NEG_INFINITY, f32::INFINITY],
-                )?
             } else {
-                let mut narrow = invocation.aspiration.and_then(|config| {
-                    (depth >= config.activation_depth).then_some(())?;
-                    config.start(result.value?, score_domain)
-                });
-                let mut full_fallback = false;
-                loop {
-                    let window = narrow
-                        .as_ref()
-                        .filter(|_| !full_fallback)
-                        .map_or([f32::NEG_INFINITY, f32::INFINITY], |w| w.bounds);
-                    let before = [state.stats.nodes, state.stats.evaluations];
-                    let attempt = if narrow.is_some() {
-                        state.root_depth::<true>(&mut c, a.as_ref(), depth, result.action, window)
-                    } else {
-                        state.root_depth::<false>(&mut c, a.as_ref(), depth, result.action, window)
-                    };
-                    let used = [
-                        state.stats.nodes - before[0],
-                        state.stats.evaluations - before[1],
-                    ];
-                    if let Some(work) = state.stats.aspiration_work.as_mut() {
-                        work.attempts += 1;
-                        work.nodes += used[0];
-                        work.evaluations += used[1];
-                        work.full_seed_searches += u64::from(narrow.is_none());
-                    }
-                    let (action, value) = attempt?;
-                    let bound = aspiration_window::bound(value, window);
-                    if !matches!(bound, Bound::Upper | Bound::Lower) {
-                        break (action, value);
-                    }
-                    // Only a completed bound search reaches this point; no depth/callback commit.
-                    let work = state
-                        .stats
-                        .aspiration_work
-                        .as_mut()
-                        .expect("active root window");
-                    match bound {
-                        Bound::Upper => work.fail_low += 1,
-                        Bound::Lower => work.fail_high += 1,
-                        _ => unreachable!(),
-                    }
-                    work.retries += 1;
-                    if !narrow.as_mut().expect("narrow window").widen(bound) {
-                        full_fallback = true;
-                        work.full_fallbacks += 1;
-                    }
-                    // Completed child/root Bounds remain valid. Same generation, same cumulative
-                    // Search state, nodes/evaluations/deadline/cancel budget for every retry.
-                    state.table.commit();
-                }
+                state.root_depth(&mut c, a.as_ref(), depth, result.action)?
             };
             let pv = if publish_completed {
                 state.pv(&c, action, depth)
@@ -4599,13 +4442,7 @@ fn search_in_table_observed<
         Ok(())
     })();
     if !SMP && run.is_err() {
-        if invocation.aspiration.is_some() && invocation.forced_root.is_none() {
-            // Inserts occur only at completed nodes after their final control check.
-            // Retain valid typed Bounds; an interrupted root never inserts/completes.
-            state.table.commit();
-        } else {
-            state.table.discard_uncommitted();
-        }
+        state.table.discard_uncommitted();
     }
     let parent_not_restored = c.position() != root.position()
         || c.total_ply() != root.total_ply()

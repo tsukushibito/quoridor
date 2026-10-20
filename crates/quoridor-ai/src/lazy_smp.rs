@@ -341,7 +341,6 @@ impl SearchSession {
     fn fork_worker(&self, shared: Arc<SharedTable>, writer: usize) -> Result<Self> {
         Ok(Self {
             namespace: self.namespace.clone(),
-            aspiration: None,
             native_workers: None,
             evaluator: self.evaluator.clone(),
             residual_head_scratch: self

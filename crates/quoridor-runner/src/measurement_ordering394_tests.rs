@@ -87,7 +87,6 @@ fn measurement394_completed_callback_preserves_cumulative_and_final_partial_scop
                 neighbour_opportunity: None,
                 root_ordering_quality: None,
                 history_provenance: None,
-                root_aspiration: None,
                 roots: vec![],
                 profile: Profile::Control,
                 lmr: false,

@@ -210,8 +210,7 @@ fn control394_first_last_sorted_cutoffs_and_root_pvs_count_distinct_moves() {
                 warm(s, c, legal[0], 2);
                 s.limits = &NO_TT;
                 if case == 2 {
-                    s.root_depth::<false>(c, None, 1, None, [f32::NEG_INFINITY, f32::INFINITY])
-                        .unwrap();
+                    s.root_depth(c, None, 1, None).unwrap();
                 } else {
                     s.negamax(c, None, 1, -1.0, if case == 0 { -0.75 } else { 0.75 }, 0)
                         .unwrap();

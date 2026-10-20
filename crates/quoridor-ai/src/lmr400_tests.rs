@@ -570,8 +570,7 @@ fn lmr400_shallow_root_goal_repetition_keep_full_depth_and_terminal_contract() {
                     s.negamax(c, None, 2, -2.0, 2.0, 0).unwrap().to_bits(),
                     truth.to_bits()
                 );
-                s.root_depth::<false>(c, None, 3, None, [f32::NEG_INFINITY, f32::INFINITY])
-                    .unwrap();
+                s.root_depth(c, None, 3, None).unwrap();
                 assert_eq!(s.stats.lmr_attempts, 0);
             },
         );

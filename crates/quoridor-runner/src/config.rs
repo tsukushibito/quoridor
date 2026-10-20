@@ -182,54 +182,9 @@ pub(crate) fn deserialize_lmr_parameters<'de, D: serde::Deserializer<'de>>(
     // Absent is default; explicit null/partial/unknown objects are errors.
     LmrParameters::deserialize(deserializer).map(Some)
 }
-#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]
-#[serde(deny_unknown_fields)]
-pub struct RootAspiration {
-    pub half_width: f32,
-    pub growth: f32,
-    pub activation_depth: u16,
-    pub max_retries: u8,
-}
-impl RootAspiration {
-    pub fn resolve(
-        self,
-    ) -> quoridor_ai::alphabeta::Result<quoridor_ai::alphabeta::AspirationWindow> {
-        quoridor_ai::alphabeta::AspirationWindow {
-            half_width: self.half_width,
-            growth: self.growth,
-            activation_depth: self.activation_depth,
-            max_retries: self.max_retries,
-        }
-        .validate()
-    }
-}
-impl From<quoridor_ai::alphabeta::AspirationWindow> for RootAspiration {
-    fn from(c: quoridor_ai::alphabeta::AspirationWindow) -> Self {
-        Self {
-            half_width: c.half_width,
-            growth: c.growth,
-            activation_depth: c.activation_depth,
-            max_retries: c.max_retries,
-        }
-    }
-}
-pub(crate) fn deserialize_root_aspiration<'de, D: serde::Deserializer<'de>>(
-    d: D,
-) -> Result<Option<RootAspiration>, D::Error> {
-    let config = RootAspiration::deserialize(d)?;
-    config.resolve().map_err(serde::de::Error::custom)?;
-    Ok(Some(config))
-}
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct Engine {
-    /// Research-only LOCAL1 root window; omission alone retains OFF.
-    #[serde(
-        default,
-        deserialize_with = "deserialize_root_aspiration",
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub root_aspiration: Option<RootAspiration>,
     /// Total search workers INCLUDING main; omission preserves the original one.
     #[serde(
         default,
@@ -453,8 +408,6 @@ impl Config {
             return Err("safe-race enable belongs to a research alpha arena".into());
         }
         for engine in &self.engines {
-            crate::runtime::arena_root_aspiration(engine, self.arena.as_ref())
-                .map_err(|e| e.to_string())?;
             crate::runtime::arena_lmr_parameters(engine, self.arena.as_ref())
                 .map_err(|e| e.to_string())?;
             quoridor_ai::alphabeta::ZeroStockSafeRaceMethod::from_name(

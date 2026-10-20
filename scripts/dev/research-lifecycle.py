@@ -2600,38 +2600,6 @@ def numerical_fields(experiment, manifest):
     }
 
 
-def resolved_root_aspiration(config, profile, *, supported=True):
-    if "root_aspiration" not in config:
-        return None
-    value = config["root_aspiration"]
-    require(
-        supported
-        and profile == "control"
-        and type(config.get("search_threads", 1)) is int
-        and config.get("search_threads", 1) == 1,
-        "root aspiration requires research LOCAL1 Current Control",
-    )
-    require(
-        isinstance(value, dict)
-        and set(value) == {"half_width", "growth", "activation_depth", "max_retries"},
-        "typed root aspiration shape",
-    )
-    require(
-        all(
-            type(value[k]) in (int, float) and math.isfinite(value[k])
-            for k in ("half_width", "growth")
-        )
-        and value["half_width"] > 0
-        and value["growth"] > 1
-        and type(value["activation_depth"]) is int
-        and 2 <= value["activation_depth"] <= 64
-        and type(value["max_retries"]) is int
-        and 0 <= value["max_retries"] <= 8,
-        "finite bounded root aspiration settings",
-    )
-    return value
-
-
 def resolved_lmr_parameters(config, profile, *, supported=True):
     """Typed coefficient box shared by preparation and normal data correspondence.
 
@@ -2691,7 +2659,6 @@ def measurement_config(experiment):
             "neighbour_opportunity",
             "root_ordering_quality",
             "history_provenance",
-            "root_aspiration",
             "zero_stock_approx_min_root_walls",
             "zero_stock_approx_method",
             "zero_stock_safe_race",
@@ -2886,33 +2853,6 @@ def measurement_config(experiment):
         "measurement LMR method",
     )
     parameters = resolved_lmr_parameters(config, config["profile"])
-    resolved_root_aspiration(config, config["profile"])
-    if "root_aspiration" in config:
-        require(
-            config["use_tt"]
-            and config["use_pvs"]
-            and all(
-                config.get(k) is None
-                for k in (
-                    "neighbour_opportunity",
-                    "root_ordering_quality",
-                    "history_provenance",
-                )
-            )
-            and all(
-                not any(
-                    r.get(k, False)
-                    for k in (
-                        "diagnostic",
-                        "observe_lmr",
-                        "observe_completed_depths",
-                        "warmup",
-                    )
-                )
-                for r in requests
-            ),
-            "ordinary observer-OFF aspiration measurement",
-        )
     method = config.get("zero_stock_approx_method", "race")
     require(
         type(method) is str and method in {"race", "fixed_d"},
@@ -3234,16 +3174,6 @@ def measurement_evidence(spec, experiment, values, *, files=()):
                     "measurement count type: " + key,
                 )
         require(isinstance(result.get("errors"), list), "measurement errors array")
-    config = document(experiment["config"])
-    if "root_aspiration" in config:
-        aspiration = resolved_root_aspiration(config, config["profile"])
-        for row in rows:
-            measured = row.get("measurement", {})
-            require(
-                measured.get("requested_root_aspiration") == aspiration
-                and measured.get("actual_root_aspiration") == aspiration,
-                "measurement requested/effective root aspiration correspondence",
-            )
     raw_refs = [ref for ref in files if spec.get("perf") and ref["path"] == spec["perf"]["output"]]
     if result is not None and spec.get("perf"):
         result = {**result, "perf_RAW": raw_refs}
@@ -4947,11 +4877,6 @@ def arena_plan_check(experiment, plan):
             )
         else:
             require(engine.get("claustrophobia") is None, "unused Claustrophobia settings")
-        resolved_root_aspiration(
-            engine,
-            engine.get("ordering_profile"),
-            supported=engine["kind"] in {"nnue", "distance"} and a["comparison"] != "functional",
-        )
         require("shallow_main_history" not in engine, "retired arena setting")
         resolved_lmr_parameters(
             engine,
@@ -5245,13 +5170,6 @@ def arena_observation(config, row):
             continue
         counters = obs["counters"]
         engine = config["engines"][index]
-        if "root_aspiration" in engine:
-            require(
-                counters.get("requested_root_aspiration") == engine["root_aspiration"]
-                and counters.get("actual_root_aspiration")
-                == resolved_root_aspiration(engine, engine.get("ordering_profile")),
-                "arena requested/effective root aspiration correspondence",
-            )
         if engine.get("ordering_profile") is not None:
             method = counters.get("actual_search_namespace")
             require(

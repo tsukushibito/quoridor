@@ -1,0 +1,210 @@
+{
+  "disposition": "FINITE_WIDTH025_ACT3_RESEARCH_USEFULNESS_ONLY_NO_GAMES_NO_DEFAULT_ADOPTION",
+  "source_changes": 0,
+  "selected_fixed_phase1": {
+    "condition": "ON025",
+    "half_width": 0.25,
+    "complete_pair_calls": 104,
+    "all104_requested_DepthComplete": true,
+    "OFF_Search_sums": [3.758828753, 3.8995996809999998],
+    "ON_Search_sums": [3.744809421, 3.747415022],
+    "pooled_Search_ratio": 0.9782978985267881,
+    "worst_ON_over_best_OFF": 0.9969634873653421,
+    "major_root_indices": [],
+    "serious_regression": false,
+    "pooled_2percent_gate": true,
+    "repeat_separation": true,
+    "promising": true,
+    "whole_driver_ratio": 0.9891513968264648,
+    "nodes_ratio": 1.008198420843482,
+    "evals_ratio": 1.003281610322427,
+    "attempts_each_repeat": [167, 167],
+    "retries_each_repeat": [29, 29],
+    "fail_low_each_repeat": [12, 12],
+    "fail_high_each_repeat": [17, 17],
+    "fallback_each_repeat": [0, 0]
+  },
+  "phase2_activation_decision": {
+    "condition": "ON025_D3",
+    "half_width": 0.25,
+    "activation_depth": 3,
+    "selected_new_activation": null,
+    "retain_phase1_choice_if_none": true
+  },
+  "clock_gate": {
+    "all104_completed_depth_gte1": true,
+    "all104_main_receipt_lte100ms": true,
+    "terminal104_p95_linear_s": 0.1002124739,
+    "terminal104_max_s": 0.103092521,
+    "main_receipt104_max_s": 0.089134293,
+    "min_completed_depth": 4,
+    "full_observability_all104": true,
+    "fullweighted_root_snapshots_equal": true,
+    "parent_restored_all104": true,
+    "legal_actions_all104": true,
+    "main_receipted_depth_equal_all104": true,
+    "nodes_each_lte1M": true,
+    "normal_cleanup_all4": true,
+    "horizon_statuses": {
+      "UNKNOWN": 100,
+      "COMPLETE": 4
+    },
+    "stops": {
+      "TimeLimit": 100,
+      "DepthComplete": 4
+    },
+    "PASS": true
+  },
+  "arms": [
+    {
+      "condition": "OFF",
+      "calls": 52,
+      "Search_repeat_sums": [2.495949355, 2.501706162],
+      "Search_total_s": 4.997655517,
+      "whole_driver_total_s": 5.628530082,
+      "setup_total_s": 0.003011222,
+      "reset_total_s": 0.36946954,
+      "drop_total_s": 2.3776e-5,
+      "session_teardown_total_s": 0.028994575,
+      "CPU_total_s": 5.01,
+      "peak_process_RSS_B": 95956992,
+      "nodes": 4327420,
+      "evaluations": 3256833,
+      "completed_depth_distribution": {
+        "4": 40,
+        "5": 4,
+        "64": 2,
+        "6": 2,
+        "9": 2,
+        "22": 2
+      },
+      "stops": {
+        "TimeLimit": 50,
+        "DepthComplete": 2
+      },
+      "horizon_statuses": {
+        "UNKNOWN": 50,
+        "COMPLETE": 2
+      },
+      "receipt_max_s": 0.087202566,
+      "terminal_p95_s": 0.1007358379,
+      "terminal_max_s": 0.103092521,
+      "retry_each_repeat": [0, 0],
+      "low_each_repeat": [0, 0],
+      "high_each_repeat": [0, 0],
+      "fallback_each_repeat": [0, 0],
+      "TT_probes": 1198158,
+      "TT_hits": 673444,
+      "TT_cutoffs": 54789
+    },
+    {
+      "condition": "ON025_D3",
+      "calls": 52,
+      "Search_repeat_sums": [2.376522061, 2.375474779],
+      "Search_total_s": 4.75199684,
+      "whole_driver_total_s": 5.557387003,
+      "setup_total_s": 0.004121612,
+      "reset_total_s": 0.49747412700000004,
+      "drop_total_s": 0.000195823,
+      "session_teardown_total_s": 0.043842126999999995,
+      "CPU_total_s": 4.760000000000001,
+      "peak_process_RSS_B": 96174080,
+      "nodes": 4251914,
+      "evaluations": 3105347,
+      "completed_depth_distribution": {
+        "4": 40,
+        "5": 4,
+        "64": 2,
+        "7": 3,
+        "22": 2,
+        "9": 1
+      },
+      "stops": {
+        "TimeLimit": 50,
+        "DepthComplete": 2
+      },
+      "horizon_statuses": {
+        "UNKNOWN": 50,
+        "COMPLETE": 2
+      },
+      "receipt_max_s": 0.089134293,
+      "terminal_p95_s": 0.09502323104999999,
+      "terminal_max_s": 0.096031153,
+      "retry_each_repeat": [34, 34],
+      "low_each_repeat": [12, 12],
+      "high_each_repeat": [22, 22],
+      "fallback_each_repeat": [0, 0],
+      "TT_probes": 1281044,
+      "TT_hits": 740558,
+      "TT_cutoffs": 93825
+    }
+  ],
+  "paired_roots": {
+    "pairs": 52,
+    "unique_roots": 26,
+    "ON_depth_higher": 2,
+    "ON_depth_equal": 49,
+    "ON_depth_lower": 1,
+    "paired_depth_delta_sum": 0,
+    "action_changed_pairs": 0,
+    "PV_changed_pairs": 27,
+    "value_bits_changed_pairs": 5,
+    "scope": "Within-repetition matched roots; exposed same histories and warming, nominal safe-race depth/selective trees/time censoring, not strength/causal speed"
+  },
+  "new_total_calls": 468,
+  "new_total_actual_nodes": 60009014,
+  "unallocated52_UNISSUED": true,
+  "games": 0,
+  "CI_RNG": 0,
+  "default": "OFF unchanged",
+  "costs": [
+    {
+      "phase": 1,
+      "calls": 208,
+      "nodes": 29464280,
+      "nodes_ceiling": 208000000,
+      "outer_s_once": 76.12700728408527,
+      "accepted_inclusive_alternative_s": 78.178957,
+      "nested_added": 0
+    },
+    {
+      "phase": 2,
+      "calls": 156,
+      "nodes": 21965400,
+      "nodes_ceiling": 156000000,
+      "outer_s_once": 62.45130472199526,
+      "accepted_inclusive_alternative_s": 64.550857,
+      "nested_added": 0
+    },
+    {
+      "phase": 3,
+      "calls": 104,
+      "nodes": 8579334,
+      "nodes_ceiling": 104000000,
+      "outer_s_once": 34.39579468709417,
+      "accepted_inclusive_alternative_s": 36.512714,
+      "nested_added": 0
+    }
+  ],
+  "outer_total_s_once": 172.9741066931747,
+  "accepted_inclusive_total_alternative_s": 179.242528,
+  "nested_added": 0,
+  "original29_major18_23_no128": "IMMUTABLE",
+  "missing": {
+    "per_iteration_windows_sides_scores": "UNKNOWN",
+    "per_attempt_timing": "UNKNOWN",
+    "adjacent_depth_score_variation": "UNKNOWN",
+    "implementation_overhead_vs_extra_selected_work_decomposition": "UNKNOWN",
+    "general_strength_speed_equality": "UNESTABLISHED",
+    "fullfees_family_peak_RAM_globalactual": "UNKNOWN"
+  },
+  "limits": "Exposed26roots3families6samecolour chronologicalseries, allpredecessors; sharedcontrols and width/activation selection overfit; no unseenIID/CI/game/default/causal/samework/fullwidth inference. CPU process includes rendering, RSS cumulative highwater not family peak. TimeLimit/NodeLimit horizons UNKNOWN distinct from actual completed snapshot; configured100ms durations not fixed-work speedup.",
+  "issue": "quoridor-4lc.324.29.3",
+  "archive": {
+    "archive": "aspiration-cost-final468-v1.tar.gz",
+    "sha256": "798e24ca00229b486c4daf8024fd5aa81eb6043c25b0b90fdab1325fdc2a3035",
+    "bytes": 1010335,
+    "full_stream_restore_hash_mode_verified": true
+  },
+  "source_disposition": "Comparison purpose ended; exact17 source retirement adopted after SOURCE_CLEAR2bb9a4da. Affected lint/genuine baseline software pending at this snapshot; no general aspiration-uselessness claim."
+}

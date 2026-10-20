@@ -2923,6 +2923,14 @@ Rootは採用に足る資格が無い候補の比較専用legal_wall差分とwal
 
 保存解析では全208要求depthが完了し、幅0.25だけが次段条件を満たした。Search pooled比は0.9782978985（約2.17%短い）、worst ON/best OFFは0.9969634874、major rootは0。whole-driver比0.9891513968は別の量であり、nodes比1.0081984208・evals比1.0032816103と合わせても同仕事の速度や原因を示さない。幅0.125はSearch比1.0427083815・major roots16/23・retry69、幅0.5は比0.9879324958・retry0だった。0.5は2%改善とrepeat separationを満たさず、retry最少を目的へ置き換えない。0.25のretryは各反復29（low12/high17、fallback0）。OFF52を3つの対比で共有した露出済み26root/3family/6系列の選択であり、小さいrepeat差・標本への過適合・選択探索の異仕事を残す。一般速度や棋力、採用の支持とはせず、凍結済みの開始depth比較だけへ進めた。[幅比較の保存結果](../research-data/ai-sigma/execution324-preservation-20261020/aspiration-width-phase1-v1.json)。
 
+開始depthの当時対照3に対し、4はSearch比0.9964301168で2%条件とrepeat separationを満たさず、5は比1.0233497798・root15のratio1.2990822245かつ追加0.0489438095秒で重大退行となった。retryは3/4/5で29/18/7と減ったが、Search総費の改善には対応しなかった。幅0.25・開始3を最後の時計比較だけへ残し、全156要求depthは完了、21,965,400nodesを消化した。
+
+最後の104calls/24sessionsは時計安全条件を満たした。main receipt最大0.089134293秒、完成depth最小4、terminal p95=0.1002124739秒・最大0.103092521秒。要求D64のhorizonは100 TimeLimit UNKNOWNと4 DepthCompleteであり、全D64完了ではない。OFFの返却Search総時間4.997655517秒/whole5.628530082秒に対し、ONは4.751996840秒/whole5.557387003秒だった。これは同時間制限で返った探索の所要時間で、固定仕事の速度・throughputや実装overheadの分解ではない。52対応pairの完成depthはON高い2・同じ49・低い1、差合計0。手の差0、PV差27、value bits差5であり、棋力や独立情報の増加は認定しない。
+
+今回の有限結論は **幅0.25・開始depth3の標本内での限定的な研究用途の見込み**までとする。同じMaxの限定独立確認はSOURCE_CLEAR/CONCLUSION_CLEAR、essential0/ordinary0。具体的な回避可能欠陥を確定できなかったことをoverhead不存在の証明にはせず、試行別時間・隣接反復score・実装費と異なる選択探索仕事の寄与はUNKNOWNに残す。露出済み26root/3family/6同色時系列、共有対照、幅と開始depthを選んだ過適合を保持し、未見標本や一般速度・棋力・同等・無効果・default採用へ広げない。次に採用の根拠を強めるなら、独立入力での固定0.25/D3とOFFの確認が候補になるが、今回は新しい確認・対局・調整を発行しない。[全有限結果と復元元](../research-data/ai-sigma/execution324-preservation-20261020/aspiration-cost-final468-v1.json)。
+
+新規全468calls・実60,009,014nodes/468Mで終了し、人間上限520との差52は未発行・未使用。科学outerは3段の合計172.974106693秒を一度だけ計上し、受付寿命179.242528秒は別scope、nestedは加算しない。元208の重大root18/23・128局NO_GAMES、全失敗・UNKNOWNと元費用は不変である。明示された比較用途の終了に伴い専用17対象を疎撤去し、Current100%の履歴計算・通常全幅root・SMP・generic timed-rootquality/21/23・selected-abnormal NN0を保持した。影響するAI/Runner all-target Clippyを実施し、汎用NN0の元資格は変わっていない2ownerだけで再用、旧suiteは実行しなかった。新しい通常baseline BUILD9513cef2/image943e25fcの真正release・通常finalize・実source STOPがPASSした。撤去後baselineの性能は未計測であり、全aspirationが無用という結論ではない。[撤去・関連確認・software証拠](../research-data/ai-sigma/execution324-preservation-20261020/aspiration-retirement-baseline-v1.json)。
+
 ### 16.1の並行source修復は失敗時の契約参照だけを整合する
 
 同じ元作者はimmutable b1e965ffと必要な保存metadataから、通常sequence/cohortがselected RUNのresource_contractにadmitted settingsを使う一方、`abnormal_run_failure`がsupport.pathだけを要求する不整合を確定した。元のmemory_limitの原因・RSS・所属/peakを事後推定してはいない。私有修正9633cdc4はsettingsがあればその正確なFileRef、なければdirect supportをread_refしてcfg参照を照合し、独立する元config/digest/marker/livechild/終了・重複防止とFAILED/CANCELLED-only出力を保持する。新しい合成NN0検査1件が実owning consumerを一度通過し、guardian0.160856249秒・reap/handles/remaining[]を確認した。旧2検査やarchive/parity/native/FINALIZEは再演していない。
