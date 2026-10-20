@@ -1,0 +1,41 @@
+{
+  "issue": "quoridor-4lc.324.28",
+  "status": "ORIGINAL312_EXHAUSTED_COMPLETED_TIME_QUALIFICATION_UNKNOWN_CLOCK_SAFETY_OBSERVED_PASS",
+  "comparison_source": "34b19c9a90b0a44566a0424e6c891979cab03c26",
+  "build": "d0c804cd20714750eedf799267bfdbc773675007930d1818c00e1ec233e5b3bb",
+  "image": "9251ae6229414dc29450b39981752eda3cc09f539ccef6f67203e76dc2a8b046",
+  "calls": 312,
+  "sessions": 72,
+  "actual_nodes_once": 101961543,
+  "with_original_diagnostic": {
+    "calls": 338,
+    "actual_nodes_once": 126961736
+  },
+  "fixed_depth": {
+    "LOCAL1": "52DepthComplete",
+    "LAZY2": "41DepthComplete+11NodeLimitUNKNOWN",
+    "ROOT_SPLIT2": "52DepthComplete",
+    "frozen_all156_complete": false,
+    "completed_time_practical_qualification": "UNKNOWN; no favourable subset or cap-time speedup"
+  },
+  "clock": {
+    "each_mode": "50TimeLimitUNKNOWN+2DepthComplete",
+    "main_callback_safety": true,
+    "terminal_p95_linear_seconds": 0.09975053175,
+    "terminal_max_seconds": 0.1051407,
+    "split_vs_LOCAL1_depth": "6higher/45equal/1lower of52 pairs",
+    "split_vs_LAZY2_depth": "4higher/45equal/3lower of52 pairs",
+    "qualification": "Finite returned depth/work and safeclock observations, not requestedD64 completion, samework throughput or strength"
+  },
+  "disposition": "Keep default1/rootSplitOFF; no prototype adoption or extra calls/games/CI. Important bounded result review and purpose-end canonical cleanup remain separate at save time.",
+  "limitations": "Exposed26roots/3families/6warm samecolour series/stock0 shortfall; selective work/PV/value/scheduling, not independent unseen IID/causal/equivalence/general speed or strength. Process CPU/RSS scopes do not establish physicalNN/family peak/fullfees/globalactual.",
+  "outer_seconds_once": 177.31060996104497,
+  "nested_added": 0,
+  "prior_failures": "All FAILED/NULL/masks/UNKNOWNfees and originalrefusals retained; no retroPASS/refill/refund/lending",
+  "archive": {
+    "archive": "root-split-original312-result-v1.tar.gz",
+    "bytes": 3701771,
+    "sha256": "26d1a06378531b6cecce2e3248d6133c865c7afd3294753e8f65e4293150f975",
+    "full_stream_restore_hash_mode_verified": true
+  }
+}

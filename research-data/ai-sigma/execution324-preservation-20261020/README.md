@@ -57,3 +57,7 @@
 `root-split-prototype-causal-software-stops-v1.json`と同名archiveは、RootのNone指定誤りからbool falseへの訂正、全保持348MiBでのcompile停止と所有cacheだけの撤去、共通opt3／codegen1／LTO=false条件、新Runner positive fixture CPU不一致の実FAILを保存する。全元失敗／費用／mask／UNKNOWNを保持し、source NN0と新image実資格を分ける。Runner2／Clippy／真正imageは未資格、312呼出しは未開始で、画像・モデル・入力payload・DB・lock・compiler cacheは含めない。
 
 `root-split-prototype-qualified-software-v1.json`と同名archiveは、その後のpositive fixtureのmain CPU12だけの修正、Root疎適用、新Runner2件の各1件PASS・影響Clippy2件warnings0、実source STOPを保存する。AI6／Python1は元のsource NN0 PASSを再利用し、新共通imageの実測parityを主張しない。原失敗は前のarchiveに保持し、defaultOFFの比較専用コードは計画済み312が用途である。真正common BUILD／imageと通常native入場は別段階で、この保存時点で312呼出しは未開始。
+
+`root-split-original312-result-v1.json`と同名archiveは、その後に正常確定した共通BUILD d0c804cd／image9251ae62の参照、元releaseのstorage失敗・実source STOP、N2 library threadsだけの修復と原拒否、二つの156件の通常出力・保存解析・UNKNOWNを保存する。model／image／input payload・DB／lock／cacheは含めず、sourceはGit34b19c9と既存source archiveを復元元にする。全memberのbytes／mode／SHAをstream復元確認しただけで、科学処理は再演しない。
+
+原312は全12通常manifest/data PASSだが、固定深さのLAZY2 11 NodeLimitにより事前の全156完了gateを満たさず、完了時間によるpractical supportはUNKNOWNである。LOCAL1／ROOT_SPLIT2各52件完了や打切り込み時間をsubset採用へ流用しない。clockのmain callback／terminal安全条件は観測PASS、各modeの50 TimeLimit UNKNOWNを保持する。default1／rootSplitOFF・games0／追加calls0を維持し、最終関連確認とpurpose-end source撤去はこの保存時点では別の未完了工程である。元software未資格時点のarchiveは改稿しない。
