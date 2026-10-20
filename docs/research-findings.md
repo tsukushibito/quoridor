@@ -2764,6 +2764,12 @@ Rootは22.2の固定[CONCLUSION_CLEAR fa8373b8](../.worktree/assets/perf/cedar-l
 
 改善の問いを一つに絞るなら、quiet後の中断epoch清掃（測定p95約4.83ms）をcoherent/committed資格を守って減らせるかである。原因の認定でも新candidate/再実測の発行でもない。元208は消化済みで、未使用node/time/条件付き64から追加権を作らない。実normal/source/analysis/admin STOPは返却済み。outer73.696681091秒を一度計上しnested非加算、全費UNKNOWN。累積source/controlを含む一つの192MiB wholeは終了2root保持42,008,576Bへ一度だけsettleし、旧160/176MiB案は未発行のまま保存した。後続tails/globalactual/feesはUNKNOWN、返金・貸与・旧holding再課金はない。
 
+### 完了node共有によるSMP改善へ実source着手（324.24、2026-10-20）
+
+人間の「ちゃんと効果が得られる実装に」という新指示で、旧22の208call・不支持・closeを保存したまま、新子issue24を同じSol6.1/high作者へ配分した。最初の実差分は[02f31019/実source STOP](../.worktree/assets/perf/cedar-lazy-smp-node-publication-v1/initial-formatted-source-binding.json)で、alpha/lazy_smp/runtimeの3ownerを私有変更した。完了nodeの元insertion eligibility/full weighted history/context/namespace/depth/typed Boundを保持し、反復途中のcoherent共有へ変え、SMP publication epoch gateとroot終了時全TT掃除を除去した。strict forward/inverse・Rustfmt/checkと当該helperの実STOPまで確認したが、未build/未型検査/未実行・Main未採用で、最終review対象ではない。defaultOFFの有用共有観測と中断/error/repetition/reset/nodebudget境界を同じ作者が継続する。旧source proof/成功suite/model/native/RAW/RNGの再演はない。
+
+新しい有限比較は最大208calls/208M、同26prefix/6系列の固定深さ104＋100ms/5ms104。Rootは旧N1時計群の保存scalar52行だけから[新depthmap d68daca5](../.artifacts/research-team/integration324/cedar-lazy-smp-node-publication-v1/fixed-depth-selection-v1.json)を結果前固定し、各rootでmax(1,min(旧N1二反復の完成depth)−1)とした。未完だったdepth29は使わず、追加pilotはない。正しさと重大な時間悪化なしを満たす場合の新64局/32真正両色familyも今回枠に含み、整数depth改善だけをgateにしない。旧22のDORMANT64解除や未使用quota移譲ではなく、採否/時計/CPU/棋力の限界・新seed/資源/出力を結果前に固定する別versionである。[現役設計](design/ai-rust-migration.md#completed-node-lazy-smp-sharing-32424)。sourceCPU2/G18/family1GiB incl64/host4/G0と実fullnever/model/effort/cwdを確認し、bulk/image/全文書/人間ACKを初回差分の待ち条件にはしなかった。効果は未測定で、事前に成功を約束しない。
+
 ### 履歴点の内訳と更新経緯を調べる（324.23、人間直接指示、2026-10-20）
 
 SMP22と別の既存Sol6.1/high9へ新しい保存/source調査を割り当てた。21の固定26 rowsと小さい順位表を用い、root14wall207ほかordinary/順位変化例とTT/PV対照例についてmain/continuation寄与、更新前後差、浅い失敗/確認・窓/returnとの対応を調べる。通常rootのpathは空でcontinuation行None、ageは16有効rootごとという供給済みsource事実を出発点とし、実対局直前手のseedや減衰発生を仮定しない。非線形gravityのbonus総和を現在点へ等置せず、欠落とcase選択biasを残す。[調査境界と受入れ](design/ai-rust-migration.md#bounded-history-score-provenance-diagnostic-32423)。
