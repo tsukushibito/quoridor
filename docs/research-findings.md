@@ -2905,7 +2905,17 @@ Rootは採用に足る資格が無い候補の比較専用legal_wall差分とwal
 
 100ms条件104件のreceipt/depth/terminal安全条件は満たし、完成深さmedianは3局面改善・悪化0だったが、重大root退行gateを上書きしない。固定ONのretryは各反復69回（fail-low30/fail-high39）・full fallback0、nodesは各3,789,912対OFF3,641,311で、これだけで原因を確定しない。実用時間支持も不成立で、今回の有限採否は**OFF保持・128局は未発行のまま実施しない**。一般的な棋力・有害性・等価・無効果の結論、別幅/追加反復の許可には広げない。[保存結果と原記録](../research-data/ai-sigma/execution324-preservation-20261020/aspiration-original208-result-v1.json)。同じMaxへ固定gate解釈だけを渡し、同じ作者は比較用途の終わったaspiration専用code/設定/fixture/counterの最小撤去を準備する。Current100%・Half撤去・generic機能を保持し、候補版はGit302dca2と保存物から再構成する。
 
+この有限解釈は同じMax29.2がCONCLUSION_CLEAR/essential0 ordinary0とし、Rootが受け入れた。[限定確認の保存](../research-data/ai-sigma/execution324-preservation-20261020/aspiration-original208-review-v1.json)。全104完成、Search対wholeの分母、総和OR局面ANDの規約、clock/depth改善が重大root条件を上書きしないことだけを確認し、新たなsource/科学/CIの資格を発行していない。
+
 容量処理では、初回softwareの見積りが完全debug cacheを含まず、局所coverが一時50,092,876,800Bとなったことを記録した。global actualはUNKNOWNである。実STOPと所有を確認して停止済みCargo cacheだけを撤去し、ログ・source・Git・モデル・RAW/FAILED・qualified private imageを保持した。新release後の局所cover49,608,672,256Bと、新208の一つの352MiB whole・別16MiB保存枠はdecimal50GB内に収めた。旧creditの再適用や科学quotaの返金・貸与はない。保存の遅延を避けるため、任意の文書・archive・pushを実native/collection STOP後へ移した。
+
+### 追加の有限見直し：aspiration実装費と幅（324.29.3）
+
+その後、人間は実装の余分な費用の調査と小規模な設定比較を明示した。元208の不支持・失敗・費用と128局NO_GAMESは変更せず、**新しい全段階合計520calls/520M以内**で扱う。Rootは返却済みの17対象撤去を一度疎適用したがcompileには入っておらず、新指示後にその17対象だけを厳密逆patchで研究OFFへ戻した。bytes/modeは測定済み302dca2と一致し、Halfや他の削除済み候補は復活させていない。最終撤去の判断を新しい有限見直しの後へ置く。[実復元receipt](../.artifacts/research-team/integration324/cedar-aspiration-window-v1/finite-review-restore-v1/actual-restoration.json)。同じHighへ新しい具体issueを配送し、関連Max・Main/Cargo所有・通常資源入口を維持する。
+
+保存302dca2の限定source読取で示された事実は、root clone/evaluator prepare/child storage生成がretryの外にあること、同state/tableを使うこと、Table::commitがO(1)代入で同一設定のsetterがclearしないことである。「毎retryでTT/NNUEを全初期化する既知欠陥」とは呼ばない。一方、root_depthごとの合法手取得/ordered、retryへ渡すpreviousが前完成反復の手で固定されること、返却bound値を直接用いず旧境界から窓を広げることは、必要性と回避可能性を切り分ける対象になる。元narrow143/low30/high39/retry69/fallback0だけで原因を決めず、fallback上限は最初の調整軸にしない。
+
+まず幅.125/.25/.5、growth2・startdepth3・retry4を固定して少数比較する。修正が必要なら元ONと修正ONを同幅で分け、設定差と実装差を混ぜない。見込みがあれば開始depth3/4/5を一軸で扱い、growthは必要時だけ後段とする。診断callも同520枠へ含め、元26prefix/履歴/6時系列・root4D5・各1Mと連続sessionを保つ。Search全費とwhole、再探索の仕事、局面/残壁層/100ms完成深さ・手を残し、nodeごとのtimerや大traceを増やさない。新しい対局・book・学習・モデル・既定採用や枠を埋める追加反復は含まない。
 
 ### 16.1の並行source修復は失敗時の契約参照だけを整合する
 

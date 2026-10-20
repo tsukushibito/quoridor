@@ -31,3 +31,7 @@
 `aspiration-original208-result-v1.json`と同名archiveは、元normal208の設定・操作/データ・保存集計と実STOP、科学実行前の入口metadata失敗を保存する。309memberをstreamで元bytes/mode/SHAと照合した。旧RAWのdecode、native/モデル/validator/CI/RNGや成功検査の再演はしていない。
 
 全104固定depthは完了し、Search本体ON/OFF=1.0286333008（ON約2.86%長い）、whole-driver比=1.0278935794。root18/23が元の重大退行AND条件を満たしたためOFFを保持し、128対局は未発行のまま実施しない。時計安全や3局面の深さ改善を追加の採用条件へ変更しない。これは一つの固定候補の有限結果であり、一般の速度・棋力・有害性・等価・無効果は認定しない。候補sourceはGit302dca2とprefix/release archiveに保存し、具体的な比較用途の終わった専用code/fixtureの撤去は別の正本差分として扱う。
+
+`aspiration-original208-review-v1.json`と同名archiveは、この固定結果の限定独立確認CONCLUSION_CLEAR/essential0 ordinary0・Root受入れ・通常own closureを保存する。科学やsourceを再演せず、元gate解釈と有限な主張の境界だけを確認した。後続で明示された実装費・少数幅の新520calls以内の見直しは別issue/設定/費用であり、ここに保存した元208の不支持や128局NO_GAMESを遡及変更しない。
+
+`aspiration-limited-review-source-preparation-v1.json`と同名archiveは、返却された17対象の撤去差分、実疎適用とcompile未開始、その後の明示された新用途だけへの厳密逆patch・研究OFF復元を保存する。復元bytes/modeは測定済み302dca2と一致する。新520calls/520Mは診断を含む全段階上限であり、ここでの新科学使用0は保存時点の事実である。最終廃止の判断だけを有限見直しの後へ移し、Halfや他候補、元128対局を復活させない。実状態・担当・引渡しはBeadsを正本とする。
