@@ -2,6 +2,9 @@
 set -euo pipefail
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 source "$script_dir/project-env.sh"
+# Docker OverlayFS can reject renaming toolchain directories from image layers.
+# Let rustup fall back to copying when a rename fails with EXDEV.
+export RUSTUP_PERMIT_COPY_RENAME=1
 update=false
 case "${1:-}" in
   '') ;;

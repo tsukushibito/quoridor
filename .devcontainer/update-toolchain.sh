@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-workspace_root="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 local_bin="$HOME/.local/bin"
 local_opt="$HOME/.local/opt"
 work_dir="$(mktemp -d)"
@@ -122,4 +121,3 @@ mv -f -- "$version_tmp" "$version_file"
 
 echo "Installed toolchain versions:"
 cat "$version_file"
-bash "$workspace_root/scripts/dev/verify_env.sh"

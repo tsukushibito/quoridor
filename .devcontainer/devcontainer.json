@@ -29,7 +29,7 @@
     }
   },
   "remoteUser": "vscode",
-  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "workspaceFolder": "/workspaces/quoridor",
   "init": true,
   "capAdd": ["PERFMON"],
   "hostRequirements": {
@@ -55,7 +55,7 @@
   },
   "mounts": [
     "source=${localWorkspaceFolderBasename}-codex,target=/home/vscode/.codex,type=volume",
-    "source=${localWorkspaceFolderBasename}-worktrees,target=/workspaces/${localWorkspaceFolderBasename}/.worktree,type=volume",
+    "source=${localWorkspaceFolderBasename}-worktrees,target=/workspaces/quoridor/.worktree,type=volume",
     "source=${localWorkspaceFolderBasename}-inference-cache,target=/home/vscode/.cache/inference,type=volume",
     "source=${localWorkspaceFolderBasename}-gh,target=/home/vscode/.config/gh,type=volume",
     "source=${localWorkspaceFolderBasename}-vscode-data,target=/home/vscode/.vscode-data,type=volume",
@@ -70,5 +70,6 @@
     "vscode": {
       "extensions": ["rust-lang.rust-analyzer"]
     }
-  }
+  },
+  "workspaceMount": "source=quoridor-main,target=/workspaces/quoridor,type=volume"
 }

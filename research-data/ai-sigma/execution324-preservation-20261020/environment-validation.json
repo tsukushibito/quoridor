@@ -1,0 +1,45 @@
+{
+  "at": "2026-10-20T09:58:36.609721+00:00",
+  "issue": "quoridor-4lc.324",
+  "scope": "Previously protected existing environment changes, preserved in separate commit under new direct human push instruction",
+  "files": [
+    {
+      "path": ".devcontainer/devcontainer.json",
+      "sha256": "b1e1c861d791af3ad16431bb4ad2a075679f2185051a5794e36fc0712d64284c",
+      "bytes": 3096,
+      "mode": "0644"
+    },
+    {
+      "path": ".devcontainer/update-toolchain.sh",
+      "sha256": "19e82f23d60324251dcfed285cc95c48a9c3a4fec98cb87fa8e5a80d87b34b93",
+      "bytes": 4885,
+      "mode": "0777"
+    },
+    {
+      "path": "scripts/dev/setup-rust.sh",
+      "sha256": "7a539f0db1eb85dad03e88b99bff97276c4731b6b186375227a6b3fc4c7fdb95",
+      "bytes": 5235,
+      "mode": "0755"
+    },
+    {
+      "path": ".dockerignore",
+      "sha256": "9ec5d994e1b90cba46de0bbe23c7de30b770592e8991e1b30248c9c74ef5c78f",
+      "bytes": 151,
+      "mode": "0644"
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "e660913aa85fefd7974d8b2d807698aa96325a6c16067053b6bf1e0a80b1a5de",
+      "bytes": 27581,
+      "mode": "0644"
+    }
+  ],
+  "validation": {
+    "devcontainer": "Scoped Prettier format/check and JSON/mount consistency PASS; existing main quoridor-main volume at /workspaces/quoridor",
+    "shell": "Existing style manually retained, shfmt unavailable; bash -n both modified scripts PASS",
+    "Dockerignore": "Existing Dockerfile has only COPY --from=uv, no local context COPY/ADD; existing ** excludes research/Git/volume data",
+    "Cargo_lock": "tomllib PASS and complete parsed document equal to HEAD after sorting dependency lists; only quoridor-data dependency ordering differs. Actual prior locked software builds consumed these same bytes",
+    "not_run": "No container rebuild/tool update/extra compiler or old success suite replay"
+  },
+  "no_scientific_or_model_default_change": true
+}
