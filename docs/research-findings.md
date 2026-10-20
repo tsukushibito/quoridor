@@ -2873,9 +2873,11 @@ Rootは採用に足る資格が無い候補の比較専用legal_wall差分とwal
 
 通常manifest/dataは26件・6sessionすべてPASSだが、要求D64のhorizonは25 NodeLimit UNKNOWNと1 DepthCompleteであり、全件D64完成ではない。25,000,193nodes／26M、外側39.455160015秒を一度だけ数え、受付寿命41.547932秒を加算しない。実native＋通常回収STOPで当該source／fair時計の凍結を解除した。この通常回収時点では枝別仕事の解析は未了であり、通常PASSやnode比率から時間短縮・枝分担の見込み・棋力を推定しない。
 
-その後の固定保存screenで、作者は最新の実完成・nonnumeric-TT depth>=2の全child仕事／returnedが揃うsnapshotを26/26と記録し、他枝nodes比率>=0.25かつ最大他枝／他枝<=0.75を23/26、全6系列・4stock層で満たした。元の事前条件は8/26以上・3系列以上・2層以上であり、古い有利なdepthを選んでいない。root11／21は他枝が1本、root20は最大他枝比率0.8486268174で非該当だった。これは既承認の私有prototypeを試すための構造上の仕事screenで、時間比率・並列負荷均衡・枝刈り利益ではない。[閉じたscreen結果と限界](../research-data/ai-sigma/execution324-preservation-20261020/root-child-branch-work-screen26-v1.json)。既存Maxへ重要な解釈だけを28.2として配分し、作者の独立source準備をその返答待ちにはしない。
+その後の固定保存screenで、作者は最新の実完成・nonnumeric-TT depth>=2の全child仕事／returnedが揃うsnapshotを26/26と記録し、他枝nodes比率>=0.25かつ最大他枝／他枝<=0.75を23/26、全6系列・4stock層で満たした。元の事前条件は8/26以上・3系列以上・2層以上であり、古い有利なdepthを選んでいない。root11／21は他枝が1本、root20は最大他枝比率0.8486268174で非該当だった。これは既承認の私有prototypeを試すための構造上の仕事screenで、時間比率・並列負荷均衡・枝刈り利益ではない。[閉じたscreen結果と限界](../research-data/ai-sigma/execution324-preservation-20261020/root-child-branch-work-screen26-v1.json)。既存Max28.2はこの有限解釈をCONCLUSION_CLEAR・essential0／ordinary0と確認し、Rootはその範囲だけを受け入れた。[関連確認と受入れ](../research-data/ai-sigma/execution324-preservation-20261020/root-child-branch-work-screen-review-v1.json)。この確認や通常closeは独立source準備のgateにしない。
 
-25の中断中反復／未returned試行と要求D64のUNKNOWNは、既に完成したsnapshotと区別する。診断routeのmaincallback receipt／depthは全26でNULL／UNKNOWNであり、元screenにない時計callback一致を加えた解析v1は失敗した。v2はその追加assertだけを除き、NULLと失敗を保持した。観測込みSearch32.255295184秒／whole32.708774781秒は速度資格に使わず、各child時計・将来深さでの完走／cutoff・pruning／savedwork・棋力はUNKNOWNのままである。露出済み26root／3family／6暖機系列とzero-stock2件の不足を保持し、再選択・追加診断・補充はしない。prototypeと条件付き312呼出しの実source／software／入場は別段階で、対局・既定変更はない。
+25の中断中反復／未returned試行と要求D64のUNKNOWNは、既に完成したsnapshotと区別する。診断routeのmaincallback receipt／depthは全26でNULL／UNKNOWNであり、元screenにない時計callback一致を加えた解析v1は失敗した。v2はその追加assertだけを除き、NULLと失敗を保持した。観測込みSearch32.255295184秒／whole32.708774781秒は速度資格に使わず、各child時計・将来深さでの完走／cutoff・pruning／savedwork・棋力はUNKNOWNのままである。露出済み26root／3family／6暖機系列とzero-stock2件の不足を保持し、再選択・追加診断・補充はしない。
+
+同作者は私有領域で共通exclusive-root-child入口の2owner差分へ実着手し、元のchild kernelへ順位／窓とtyped boundを運ぶ部分を返した。[実source開始](../.worktree/assets/perf/cedar-root-split-v1/prototype-v1/first-delta-v1/source-start.json)。root分担team・main先頭手・stale窓確認・合算cap／取消／履歴・通常consumerと新境界検査は未完成で、prototypeはNOTFIXED／UNBUILT／UNTYPED／UNRUNである。Mainへの採用、関連source確認、必要softwareと条件付き312呼出しへの実入場は別段階であり、対局・既定変更はない。
 
 ### aspirationを優先し、実source着手を区別する（324.29）
 

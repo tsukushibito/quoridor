@@ -47,3 +47,5 @@
 `root-child-diagnostic-qualified26-v1.json`と同名archiveは、その後のMain疎適用、新規AI1／RunnerLIB1各1件PASS、影響Clippy2件PASS、真正診断BUILD98d8／image96adの通常finalize・実STOPと、元26呼出しの閉じた通常出力を保存する。image／model／input payloadは含めず実参照を保持する。26件の通常PASSと要求D64の25 NodeLimit UNKNOWN＋1 DepthCompleteを区別し、保存時点で枝別仕事のscreenは解析待ち、prototype／312呼出しは未発行である。旧未ビルドpacketの履歴を改稿せず、原結果をopaque bytesとして保存・復元照合するだけで科学処理は再演しない。
 
 `root-child-branch-work-screen26-v1.json`と同名archiveは、閉じた保存解析v2の全root／反復／child／context／層別表、元clock callback assertによる解析v1失敗とその因果修正を保存する。最新実完成snapshotに対する作者の23/26 hitと要求D64の25 UNKNOWN、maincallback全26 NULLを区別する。構造上の私有prototype検討を許すscreenであり、時間／枝刈り／棋力の資格ではない。保存時点で関連Max28.2へ有限解釈を配送済みで、その確認や管理を作者source作業のgateにしない。追加Search／解析器再実行／RAW再検証は行わず、先に保存した通常出力は重複archiveしない。
+
+`root-child-branch-work-screen-review-v1.json`と同名archiveは、関連Max28.2のCONCLUSION_CLEAR minimum・対応表・実reader STOPとRootの限定受入れを保存する。23/26の構造screenだけを確認し、25中断horizon／pending UNKNOWNと全26 NULL callback、相関・不足・元失敗を保持する。新たなsource／software／312入場や速度・棋力資格を発行するものではなく、私有prototypeの実装・後続確認は別段階である。
