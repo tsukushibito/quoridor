@@ -2893,7 +2893,11 @@ Rootは採用に足る資格が無い候補の比較専用legal_wall差分とwal
 
 時計条件のsplit／LAZY2 Search総和比1.0017337とwhole_driver比1.0479203は別の分母で、返却時刻付き選択探索の記述値である。setup・session reset・teardown／drop、main／helper／合算nodes・evals・CPU・TT、branch仕事・待ち・main確認探索は別表に保存した。node配分からwall負荷均衡・saved work・因果的な並列利益は推定しない。露出済み26root／3family／6同色暖機系列・stock0不足、scheduleと選択木／履歴の差、process CPU／累積RSSの範囲を保持する。
 
-原比較は312calls／72sessions／101,961,543nodes、先行診断込み338calls／126,961,736nodesで消化済み。二つの親outer合計177.310609961秒だけを数え、受付寿命やnested費用を加算しない。物理NN費・family peak・全fees・global actualはUNKNOWN。default1／rootSplitOFFを保持し、今回からprototype採用・対局・追加調整は発行しない。既存Maxへ固定UNKNOWN解釈だけを配送し、同作者は用途終了の比較専用sourceと専用観測の最小撤去を準備する。関連結論確認／canonical撤去とsoftwareはそれぞれ別の実段階であり、この記録では未完了である。
+原比較は312calls／72sessions／101,961,543nodes、先行診断込み338calls／126,961,736nodesで消化済み。二つの親outer合計177.310609961秒だけを数え、受付寿命やnested費用を加算しない。物理NN費・family peak・全fees・global actualはUNKNOWN。default1を保持し、今回からprototype採用・対局・追加調整は発行しない。
+
+関連Max28.4は、この固定UNKNOWN解釈をCONCLUSION_CLEAR、用途終了の11 subject撤去をSOURCE_CLEAR（いずれもessential0／ordinary0）と確認した。Rootは専用root_splitの2module、mode／transport／consumer／namespace／専用testsと元rootchild／iteration観測を疎差分で撤去した。Current100%・通常LOCAL／Lazy2・共通child／LMR／PVS／typed TT・全履歴／総budget／取消／drain／reset／drop、generic21／23／timed-rootquality／selected-abnormal NN0を保持し、Half／aspirationを復活させていない。復元元はGit34b19c9と保存patch／before／inverseである。[最終関連確認・撤去・新baseline資格](../research-data/ai-sigma/execution324-preservation-20261020/root-split-retirement-qualified-baseline-v1.json)。
+
+撤去後のAI／Runner各all-target Clippyはwarnings0でPASS、既存assertionsを型検査し、旧suiteは再実行していない。最初のbaseline release57e4は所有容量上限で停止しFAILEDのまま保存した。実STOP後、閉じた管理snapshotをraw bytes／mode照合済みのprivate xzへ、科学出力の重複展開を既に保存したGit archiveへ集約し、新しい到達可能Git objectだけを標準packへまとめた。原データ・FAILED／NULL／UNKNOWNと元費用を変えず、models／必要imageは保持した。同sourceの未完release4c4cを通常実行・一度finalizeし、新BUILD `2e6e6dcd`／image `7fe55b62`と実source STOPを得た。Clippy66.562594378秒、失敗release61.322411083秒、新release96.480684159秒は各outerを一度だけ数える。停止済み所有Cargo cacheだけを撤去した。このcleaned baselineはsoftware資格のみで未計測、旧9251のalias・実測parity・速度／棋力資格ではない。50GB内の前向き保存配分と復元ledgerを残し、科学quotaの返金・貸与はない。
 
 ### aspirationを優先し、実source着手を区別する（324.29）
 

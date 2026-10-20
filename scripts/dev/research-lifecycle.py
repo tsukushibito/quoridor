@@ -2161,12 +2161,6 @@ def native_cpu_cores(spec):
         maximum = 1
         for index, engine in enumerate(config["engines"]):
             threads = engine.get("search_threads", 1)
-            if "root_split" in engine:
-                require(
-                    type(engine["root_split"]) is bool
-                    and (not engine["root_split"] or engine.get("search_threads") == 2),
-                    "root_split requires explicit two-worker managed alpha team",
-                )
             require(type(threads) is int and threads > 0, "positive total engine search_threads")
             if "search_cpu_cores" not in engine:
                 require(threads == 1, "complete multiworker engine team required")
@@ -2212,6 +2206,7 @@ def native_cpu_cores(spec):
         "actual issued native physical-core family, not corpus/source-only authority",
     )
     return cores
+
 
 def physical_and_quiet(spec):
     cfg = spec["limits"]
@@ -2645,7 +2640,6 @@ def measurement_config(experiment):
             "inference",
             "search_threads",
             "smp_sharing_provenance",
-            "root_split",
             "search_cpu_cores",
             "management_cpu_core",
             "native_memory_bytes",
@@ -2683,12 +2677,6 @@ def measurement_config(experiment):
         <= set(config),
         "measurement settings shape",
     )
-    if "root_split" in config:
-        require(
-            type(config["root_split"]) is bool
-            and (not config["root_split"] or config.get("search_threads") == 2),
-            "root_split is Boolean opt-in for an explicit managed two-worker team",
-        )
     if "search_threads" in config:
         threads = config["search_threads"]
         team = config.get("search_cpu_cores")
@@ -3093,6 +3081,7 @@ def measurement_config(experiment):
             "bounded root ordering quality OffShadow/TT1M/26roots/6sessions/D64/1M/optional-clock-with-reserve",
         )
     return config, requests
+
 
 def measurement_argv(spec, experiment, native_argv):
     """Standard configured perf wrapper, checked against the actual launch chain."""

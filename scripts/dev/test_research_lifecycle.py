@@ -462,57 +462,6 @@ class LifecycleDataAndPaths(unittest.TestCase):
                 with self.assertRaises(lifecycle.Refused):
                     lifecycle.measurement_config(experiment())
 
-    def test_root_split_measurement_requires_explicit_two_worker_boolean(self):
-        lc = load_lifecycle()
-        with tempfile.TemporaryDirectory() as tmp:
-            tmp = Path(tmp)
-            settings = dict(
-                roots=[dict(input=0, pointer="/families/0", field="prefix", label="software-only")],
-                profile="control",
-                tt_entries=1048576,
-                use_tt=True,
-                use_pvs=True,
-                namespace=dict(
-                    evaluator="software-only",
-                    rules="research-standard-2p-threefold-goal-first-v1",
-                    selectivity="PVS",
-                ),
-                output_bytes=1048576,
-                record_bytes=32768,
-                search_threads=2,
-                search_cpu_cores=[12, 14],
-                management_cpu_core=0,
-                native_memory_bytes=2684354560,
-                root_split=True,
-            )
-            requests = [
-                dict(id="root-split-new-boundary", session="one", root=0, depth=2, node_cap=1000000)
-            ]
-            schedule = tmp / "requests.json"
-            schedule.write_text(json.dumps(requests))
-            config = tmp / "config.json"
-
-            def check(value):
-                config.write_text(json.dumps(value))
-                return lc.measurement_config(
-                    dict(
-                        config=lc.bound(config)[0],
-                        schedule=lc.bound(schedule)[0],
-                        inputs=[{}],
-                        rules=settings["namespace"]["rules"],
-                    )
-                )
-
-            self.assertTrue(check(settings)[0]["root_split"])
-            for value in (None, 0, "true"):
-                with self.assertRaises(lc.Refused):
-                    check(dict(settings, root_split=value))
-            with self.assertRaises(lc.Refused):
-                check(dict(settings, search_threads=1, search_cpu_cores=[12]))
-            off = dict(settings)
-            off.pop("root_split")
-            self.assertNotIn("root_split", check(off)[0])
-
 
 class ConfiguredArenaPlanSelection(unittest.TestCase):
     def test_two_configured_arena_plans_keep_exact_authority_and_refuse_cross_selection(self):

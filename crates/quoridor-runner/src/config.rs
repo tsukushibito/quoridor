@@ -192,9 +192,6 @@ pub struct Engine {
         skip_serializing_if = "Option::is_none"
     )]
     pub search_threads: Option<usize>,
-    /// Research root-only exclusive branching; managed two-worker Control only.
-    #[serde(default, skip_serializing_if = "root_split_disabled")]
-    pub root_split: bool,
     /// Actual per-engine search team, main first; native managed arena only.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub search_cpu_cores: Option<Vec<usize>>,
@@ -925,10 +922,6 @@ mod lmr_parameter_settings_tests {
     }
 }
 
-fn root_split_disabled(value: &bool) -> bool {
-    !*value
-}
-
 pub(crate) fn deserialize_search_threads<'de, D>(
     deserializer: D,
 ) -> std::result::Result<Option<usize>, D::Error>
@@ -953,9 +946,6 @@ impl Config {
         let mut maximum = 1;
         for (index, engine) in self.engines.iter().enumerate() {
             let threads = engine.search_threads.unwrap_or(1);
-            if engine.root_split && engine.search_threads != Some(2) {
-                return Err("root_split requires explicit two-worker managed Control".into());
-            }
             if threads == 0 {
                 return Err("search_threads must be positive".into());
             }
@@ -1055,60 +1045,6 @@ mod smp_team_boundary_tests {
                 2 => bad.engines[0].search_cpu_cores = Some(vec![12, 14, 0]),
                 3 => bad.workers = 2,
                 _ => bad.engines[0].ordering_profile = Some("cheap".into()),
-            }
-            assert!(bad.search_team_cores().is_err());
-        }
-    }
-}
-
-#[cfg(test)]
-mod root_split_consumer_boundary_tests {
-    use super::*;
-    #[test]
-    fn root_split_requires_managed_two_worker_control_and_default_is_absent() {
-        let body = serde_json::json!({"kind":"distance","ordering_profile":"control"});
-        let off: Engine = serde_json::from_value(body.clone()).unwrap();
-        assert!(!off.root_split);
-        assert!(
-            serde_json::to_value(&off)
-                .unwrap()
-                .get("root_split")
-                .is_none()
-        );
-        for bad in [
-            serde_json::Value::Null,
-            serde_json::json!(1),
-            serde_json::json!("true"),
-        ] {
-            let mut value = body.clone();
-            value["root_split"] = bad;
-            assert!(serde_json::from_value::<Engine>(value).is_err());
-        }
-        let mut c: Config =
-            serde_json::from_str(include_str!("../tests/fixtures/sigma-clock-config.json"))
-                .unwrap();
-        c.arena.as_mut().unwrap().comparison = crate::arena::Comparison::EvaluatorFixedDepth;
-        c.cpu_cores = vec![12];
-        c.management_cpu_core = Some(0);
-        c.inference_cpu_core = None;
-        c.workers = 1;
-        c.active_games = 1;
-        c.max_batch = 1;
-        c.engines = vec![serde_json::from_value(serde_json::json!({"kind":"distance","ordering_profile":"control","search_threads":2,"search_cpu_cores":[12,14],"root_split":true})).unwrap()];
-        assert_eq!(c.search_team_cores().unwrap(), vec![12, 14]);
-        assert!(
-            serde_json::to_value(&c.engines[0]).unwrap()["root_split"]
-                .as_bool()
-                .unwrap()
-        );
-        for wrong in 0..5 {
-            let mut bad = c.clone();
-            match wrong {
-                0 => bad.engines[0].search_threads = None,
-                1 => bad.engines[0].search_threads = Some(1),
-                2 => bad.engines[0].ordering_profile = Some("cheap".into()),
-                3 => bad.engines[0].kind = "foreign".into(),
-                _ => bad.active_games = 2,
             }
             assert!(bad.search_team_cores().is_err());
         }

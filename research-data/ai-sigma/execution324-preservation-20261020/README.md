@@ -61,3 +61,7 @@
 `root-split-original312-result-v1.json`と同名archiveは、その後に正常確定した共通BUILD d0c804cd／image9251ae62の参照、元releaseのstorage失敗・実source STOP、N2 library threadsだけの修復と原拒否、二つの156件の通常出力・保存解析・UNKNOWNを保存する。model／image／input payload・DB／lock／cacheは含めず、sourceはGit34b19c9と既存source archiveを復元元にする。全memberのbytes／mode／SHAをstream復元確認しただけで、科学処理は再演しない。
 
 原312は全12通常manifest/data PASSだが、固定深さのLAZY2 11 NodeLimitにより事前の全156完了gateを満たさず、完了時間によるpractical supportはUNKNOWNである。LOCAL1／ROOT_SPLIT2各52件完了や打切り込み時間をsubset採用へ流用しない。clockのmain callback／terminal安全条件は観測PASS、各modeの50 TimeLimit UNKNOWNを保持する。default1／rootSplitOFF・games0／追加calls0を維持し、最終関連確認とpurpose-end source撤去はこの保存時点では別の未完了工程である。元software未資格時点のarchiveは改稿しない。
+
+`root-split-retirement-qualified-baseline-v1.json`と同名archiveは、その後のMax28.4の有限解釈／11 subject撤去の関連確認、Main疎適用、影響Clippy2件PASS、元57e4 releaseのstorage FAILEDと実STOP、新4c4c releaseの通常finalize／実STOPを保存する。新BUILD `2e6e6dcd`／image `7fe55b62`は撤去後baselineのsoftware資格だけで未計測。原338の消化・完了時間UNKNOWN／practical unresolvedを変更せず、専用module／config／観測／testsを用途終了で撤去し、generic active featuresを保持した。
+
+容量整理ledgerには、閉じた管理snapshotのraw SHA／bytes／modeとprivate canonical xzの実参照、既存科学Git archiveへ復元照合済みの重複展開の対応、選択した新Git objectsの標準packを記録した。管理xz本体・DB／lock・model／image／input payload・Cargo cacheはarchiveへ含めない。科学RAWは前の凍結archiveを正本にし、manifestのmember名で元bytes／modeを復元できる。これらの原archive／元失敗・費用を改稿せず、管理cacheの再圧縮や展開重複の撤去を科学quotaの返金・追加権利へ変えない。
