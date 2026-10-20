@@ -65,3 +65,5 @@
 `root-split-retirement-qualified-baseline-v1.json`と同名archiveは、その後のMax28.4の有限解釈／11 subject撤去の関連確認、Main疎適用、影響Clippy2件PASS、元57e4 releaseのstorage FAILEDと実STOP、新4c4c releaseの通常finalize／実STOPを保存する。新BUILD `2e6e6dcd`／image `7fe55b62`は撤去後baselineのsoftware資格だけで未計測。原338の消化・完了時間UNKNOWN／practical unresolvedを変更せず、専用module／config／観測／testsを用途終了で撤去し、generic active featuresを保持した。
 
 容量整理ledgerには、閉じた管理snapshotのraw SHA／bytes／modeとprivate canonical xzの実参照、既存科学Git archiveへ復元照合済みの重複展開の対応、選択した新Git objectsの標準packを記録した。管理xz本体・DB／lock・model／image／input payload・Cargo cacheはarchiveへ含めない。科学RAWは前の凍結archiveを正本にし、manifestのmember名で元bytes／modeを復元できる。これらの原archive／元失敗・費用を改稿せず、管理cacheの再圧縮や展開重複の撤去を科学quotaの返金・追加権利へ変えない。
+
+`root-split-normal-closure-v1.json`と同名archiveは、その後の同作者による28の通常close一回、元assignee／Rootのexact reason、子28.4のBeads-only確認、backup前後と実admin STOPを保存する。17:49:32ZのCLOSEDと17:49:36.878650Zのguard実returnを区別し、原338／UNKNOWN／費用／default1を維持する。科学処理や旧確認の再演、Root324・27／16.1のstatus変更、追加grantはない。
