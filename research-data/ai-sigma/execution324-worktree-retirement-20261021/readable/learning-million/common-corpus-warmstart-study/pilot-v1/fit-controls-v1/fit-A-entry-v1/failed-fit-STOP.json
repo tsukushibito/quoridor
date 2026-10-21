@@ -1,0 +1,91 @@
+{
+  "schema": "research.common-corpus-fit-failed-STOP.v1",
+  "issue": "quoridor-4lc.362.1",
+  "job_id": "ec90de76-846e-43cb-9589-d253ed5355c5",
+  "authoritative_manifest": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v1/fit-A-entry-v1/operation-v1/manifest.json",
+    "sha256": "5fdf448aef8837140d8afefe1c66e8df134bad867d186061e7f72665d8c9caec",
+    "bytes": 28493,
+    "mode": "0644"
+  },
+  "smallest_condition": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v1/fit-A-entry-v1/smallest-condition.json",
+    "sha256": "7c2ec82e8de8f18ed3718020b740a1ff0065a8e2e4b9f647ac1a5fc992b65d48",
+    "bytes": 2793,
+    "mode": "0644"
+  },
+  "outer_result": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v1/fit-A-entry-v1/runtime-v1/result.json",
+    "sha256": "d82019ea1279aee3df981b0eff80728d4e12e267e6694afd133fe33edb03f11d",
+    "bytes": 505,
+    "mode": "0600"
+  },
+  "outer_state": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v1/fit-A-entry-v1/runtime-v1/state.json",
+    "sha256": "991b4beab6ef2e0c1395801b5182672e790df33c44cdbcba0b9bab6cc7819a88",
+    "bytes": 704,
+    "mode": "0600"
+  },
+  "outer_output": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v1/fit-A-entry-v1/runtime-v1/output.log",
+    "sha256": "70306a37ef25b86cd706dd075b43193755945580694e3b62dae5b7fa8f0457a1",
+    "bytes": 25921,
+    "mode": "0644"
+  },
+  "full_log": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v1/fit-A-entry-v1/operation-v1/run.full.log",
+    "sha256": "7182a530b785940db5f8de5ea30c3e2f9978e617c2ada5b8a4d39d886958ba4c",
+    "bytes": 1161,
+    "mode": "0644"
+  },
+  "persisted_process_receipt": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v1/fit-A-entry-v1/operation-v1/run.process.json",
+    "sha256": "154bc13ce789fddb0bb02aa2bde1e44e625eb6aacded1563a4f8aa47b0c20fce",
+    "bytes": 2962,
+    "mode": "0600"
+  },
+  "controller_START": "2026-10-11T12:20:27.005693+00:00",
+  "controller_STOP": "2026-10-11T12:20:30.213648+00:00",
+  "controller_whole_seconds": 3.199303336092271,
+  "experimental_command_wall_seconds": 2.346470271004364,
+  "wall_receipt_domain": "Actual original persisted failed child wall; guardian_return unavailable; no invented returned receipt",
+  "experimental_consumed_seconds": 134.27956140600145,
+  "experimental_remaining_seconds": 5265.720438593999,
+  "controller_software_admin_nested_not_added": true,
+  "authoritative_finished_at": "2026-10-11T12:22:39.802473+00:00",
+  "inner_cleanup_complete": false,
+  "outer_cleanup_complete": true,
+  "returned_guardian": null,
+  "persisted_process_cleanup_complete": true,
+  "persisted_handle_closes_complete": true,
+  "persisted_direct_child_reaped": true,
+  "persisted_signal_mask_restoration": "pending",
+  "persisted_final_record_persist": "attempted",
+  "exact_worker_and_child_UTC_STOP": "UNKNOWN",
+  "actual_A_updates": 0,
+  "A_output": "ABSENT; refusal before output/model/optimizer construction",
+  "B": "NOT_RUN / unchanged prepared controls cannot enter same broken loader",
+  "cache_and_native_bytes": "MATCH unchanged, no rewrite/rebuild/regeneration",
+  "source_current18callers_plan_support_before_after": "SHA-size-mode MATCH",
+  "old_failed_jobs_configs_manifests_RAW_held": true,
+  "source_data_reader_STOP": "2026-10-11T12:24:44.780663+00:00",
+  "owned_readers": [],
+  "owned_children": [],
+  "owned_scientific_jobs": [],
+  "TMP": [],
+  "reservation": "NONE",
+  "original_primary_secondary_data_errors": "Verbatim in direct authoritative manifest, not relabeled",
+  "collector_controls_prewrite": {
+    "retained_named_sample_B": 688128,
+    "new_inclusive_forward_B": 65536,
+    "held_external_bytecode_B": 77824,
+    "control_cap_B": 33554432
+  },
+  "owned_empty_TMP_cleanup": {
+    "observed_directory_allocation_B": 4096,
+    "verified_empty_then_rmdir": true,
+    "positive_floor_held_no_refund": true
+  },
+  "future_quiet": false,
+  "peak_and_continuous_allocation": "UNKNOWN"
+}

@@ -1,0 +1,96 @@
+{
+  "proof": {
+    "common.py": {
+      "before_sha256": "a82ca46b1ab6da98a3f85a770b97612f9a4de1917fe127d008bbe2b9043f3ea5",
+      "after_sha256": "ea37a0dbc6e008c4fa1a80e4490d7a595a599b3873a35388cc6aac986fc1ecfb",
+      "raw_bytes": 37765,
+      "hunks": 7,
+      "changed_functions": [
+        "resolve_config",
+        "validate_warmstart_config",
+        "warmstart_inputs",
+        "dual_teacher_targets"
+      ],
+      "forward_inverse_exact": true
+    },
+    "terminal_cache.py": {
+      "before_sha256": "7ee8155784d49501e03fe14bd4b7fe4894c78583867a6b2062e2bdd591a3ad7e",
+      "after_sha256": "eb7e7765bcb0512cedc3566ab52e3f594f17282d3ea416b00e78b8814a67afd2",
+      "raw_bytes": 15156,
+      "hunks": 8,
+      "changed_functions": ["TerminalCorpus"],
+      "forward_inverse_exact": true
+    },
+    "train.py": {
+      "before_sha256": "b2db203e5913cf72fcd245b3707f2c01e99983c4665cfdbc4effff160ca44aa6",
+      "after_sha256": "1db97097bf976adf7f20b6a4c7a14cfd004afd8da8e723cbc8ccf84ac52d4667",
+      "raw_bytes": 96611,
+      "hunks": 10,
+      "changed_functions": ["train", "compact_measurements", "_curve_csv"],
+      "forward_inverse_exact": true
+    },
+    "cache.py": {
+      "before_sha256": "545854af9d145214db9e472f23ef6ba5ec9ed060e73ca8dd744da061fe6c4add",
+      "after_sha256": "db730aaf31a5cbd115c31c322307d15ba25d5b3410aaa0e24aead9eea4f87e9e",
+      "raw_bytes": 20328,
+      "hunks": 1,
+      "changed_functions": ["load"],
+      "forward_inverse_exact": true
+    }
+  },
+  "entire_update_loop_AST_exact": true,
+  "old_fixture_scopes_replayed": 0,
+  "production_framework_runtime": "UNRUN",
+  "failed_codec_inverse": {
+    "replace": "\"include_threefold\",\n        \"exclude_threefold\",",
+    "with": "\"include\",\n        \"exclude\",",
+    "only_within": "dual_teacher_targets first draw_policy membership"
+  },
+  "formatter_test_definition_B": 12298,
+  "test_category_overage_B": 10,
+  "category_rounding_overage_B": 4096,
+  "contained_reclassification": "Unused derivative allowance covers test rounding; overall new196608 and old larger floor held",
+  "preparation_only": true,
+  "source_reader_writer_STOP": "2026-10-11T04:29:15.258671+00:00",
+  "remaining": {
+    "readers": [],
+    "children": [],
+    "jobs": [],
+    "TMP": []
+  },
+  "owned_child_facts": {
+    "PASS_child_pid": 301271,
+    "prior_failed_child_pid": 301143,
+    "fresh_absent": true,
+    "failed_returned_guardian": "UNKNOWN; persisted reaped/cleanup fields separate"
+  },
+  "original_packet_SHA256": "92a06df731e051d86682e06c6945090728e52a22014a121a448987d97167f5c6",
+  "producer_interface_SHA256": "687851f5bc79109df15ccd8d9ca92be78150073755e832d4441d886078159686",
+  "additional_refs": {
+    "learner-related.patch.gz": {
+      "sha256": "7fab43f2a9454121cdb55ff733293b219634b9acbef7d96ff63dd29c40f00246",
+      "bytes": 7059,
+      "mode": "0644"
+    },
+    "train-post.py.gz": {
+      "sha256": "2f2f80799b29574d7a40e21e0dceef0bab22a326f5387a1cd77b7e32f08a64fc",
+      "bytes": 22022,
+      "mode": "0644"
+    },
+    "test_alignment.py": {
+      "sha256": "f2951f7604dacfb4bb3762d3796c98407ae417382376ff039907606d1b4921ad",
+      "bytes": 12298,
+      "mode": "0644"
+    },
+    "NN0-alignment-receipt.json": {
+      "sha256": "8ed5e03834a925abaa5b995868d0e573e7ab57a9fd4825e5b1f3ff350103e0db",
+      "bytes": 2874,
+      "mode": "0644"
+    },
+    "learner-price-recipe.md": {
+      "sha256": "e717a7c0deb67c93763830ad527aac8d98fd979394e4a303f6c3913c0a64c383",
+      "bytes": 4815,
+      "mode": "0644"
+    }
+  }
+}

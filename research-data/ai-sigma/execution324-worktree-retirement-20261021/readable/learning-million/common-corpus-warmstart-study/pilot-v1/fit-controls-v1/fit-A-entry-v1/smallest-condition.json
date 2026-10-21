@@ -1,0 +1,46 @@
+{
+  "schema": "research.common-corpus-fit-smallest-condition.v1",
+  "original_operation": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v1/fit-A-entry-v1/operation-v1/manifest.json",
+    "sha256": "5fdf448aef8837140d8afefe1c66e8df134bad867d186061e7f72665d8c9caec",
+    "bytes": 28493,
+    "mode": "0644"
+  },
+  "original_full_log": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v1/fit-A-entry-v1/operation-v1/run.full.log",
+    "sha256": "7182a530b785940db5f8de5ea30c3e2f9978e617c2ada5b8a4d39d886958ba4c",
+    "bytes": 1161,
+    "mode": "0644"
+  },
+  "condition": "TerminalCorpus common binary first pass uses signed integer struct field with already validated terminal z serialized as JSON FP32 float",
+  "source": {
+    "path": "/workspaces/quoridor/python/quoridor_training/terminal_cache.py",
+    "sha256": "c662e52aa7c01466d79f1aa7cac6a4698cd9548a112078f713b715187c919b38",
+    "bytes": 21159,
+    "mode": "0644"
+  },
+  "line": 250,
+  "statement": "struct.pack(\"<bBI\", row[\"z\"] or 0, 0, len(self.source_offsets))",
+  "actual_bound_cache": {
+    "path": "/workspaces/quoridor/.worktree/assets/data/common-corpus-warmstart-study/pilot-v1/cache/cache.json",
+    "sha256": "72545bb904e8a561d1bc7ba851405924ea4d461b3c85242283e6b1d4f00775aa",
+    "bytes": 25346,
+    "mode": "0644"
+  },
+  "actual_first_minimal_index": {
+    "z": -1.0,
+    "Python_type": "float",
+    "game": "common-corpus362-family-000000",
+    "source_row_index": 0,
+    "source_record_sha256": "38fba58c749404b54005c8dbe6af641f6fa62be4b056d6ea6c6d88c7983ffc41"
+  },
+  "actual_first_geometry_signed_z": -1,
+  "original_exception": "required argument is not an integer",
+  "source_order": "common validate_terminal_metadata and dual teacher actual outcome correspondence already constrain z to None/-1/0/+1. Binary codec b needs integral type; JSON float1.0 equals actual signed1 but struct refuses type. Exact binary/raw FP32 targets must not change.",
+  "minimum_proposed_repair": "Pack int(row[\"z\"] or 0) only after existing strict final-outcome validation; keep z float label bits, source/index/geometry SHA, all other loader guards and array ordering unchanged. No new helper/parser or data mutation.",
+  "scope": "metadata-only exact first row of bound minimal index plus66B binaryrecord; no full source/game/tree replay/arrays/model/framework test executed",
+  "actual_fit_updates": 0,
+  "actual_model_parameter_restoration": "not reached; corpus load precedes build_model/restore/optimizer",
+  "actual_array_allocation": "not reached; failure in first pass before np.memmap/np.empty",
+  "source_data_reader_STOP": "2026-10-11T12:24:44.780663+00:00"
+}

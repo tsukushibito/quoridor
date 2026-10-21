@@ -1,0 +1,122 @@
+{
+  "schema": "research.source-STOP-binding.v1",
+  "issue": "quoridor-4lc.362.1",
+  "status": "STOPPED_READER_PORT_ONLY_PENDING_PRODUCER_ENCODING_INTERFACE",
+  "scientific_entry": false,
+  "source_reader_writer_STOP": "2026-10-11T04:58:42.806093+00:00",
+  "remaining": {
+    "readers": [],
+    "children": [],
+    "jobs": [],
+    "TMP": []
+  },
+  "original_boundary": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/source-learner-v1/related-v2/static-proof.json",
+    "sha256": "5beef33e96629100216e1a6ad45c98ed5ae60e5a325dd64ea75cadaf27ac4511",
+    "bytes": 3521,
+    "mode": "0644"
+  },
+  "beforeimage_by_reference": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/source-learner-v1/related-v2/common.py",
+    "sha256": "ea37a0dbc6e008c4fa1a80e4490d7a595a599b3873a35388cc6aac986fc1ecfb",
+    "bytes": 37765,
+    "mode": "0644"
+  },
+  "postimage": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/source-learner-v1/encoding-v3/common.py",
+    "sha256": "b134f4c86ef927f0e1682f4475dcb2fa4d2ddfdebadee60f304f62d4ca23c6b8",
+    "bytes": 40597,
+    "mode": "0644"
+  },
+  "selected_refs": [
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/source-learner-v1/encoding-v3/reader.patch.gz",
+      "sha256": "7e3bdb38f8d7fca7317009c4049a1ccfe28acbcd06b887e6884a3799f5363547",
+      "bytes": 1205,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/source-learner-v1/encoding-v3/test_encoding.py",
+      "sha256": "42a24239b66a2198a2527576bab04e618fee9f9ee654216fb642b452dad8554d",
+      "bytes": 6430,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/source-learner-v1/encoding-v3/qualify_encoding.py",
+      "sha256": "aa8b9b98a37093137a38c4366db8c2a4022993af2acdda676cecb0081bd474af",
+      "bytes": 5313,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/source-learner-v1/encoding-v3/NN0-encoding-receipt.json",
+      "sha256": "d99505f313b0174d1dad2fc23bac2e152f2724bd21e8a68d185520bff8f1c526",
+      "bytes": 2253,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/source-learner-v1/encoding-v3/NN0-encoding.process.json",
+      "sha256": "45a3e1c10ddbdb9bdc10b8bfab222f6829d48a84edd3f0671e1ec8c6701fc85e",
+      "bytes": 1052,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/source-learner-v1/encoding-v3/NN0-encoding.log",
+      "sha256": "24cefc2bc38a1c71e18591075993695fc72546b32ff6b5baab3d98032ce96fb5",
+      "bytes": 98,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/source-learner-v1/encoding-v3/prewrite.json",
+      "sha256": "042548508ad7e9bfc30b967631f0681b34673486a1713be167d07078bdff74e4",
+      "bytes": 833,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/source-learner-v1/encoding-v3/encoding-price-notes.md",
+      "sha256": "c98171f64f8de84029c39daea59651c7dec305ceaaf64163592546c69f0019e2",
+      "bytes": 5647,
+      "mode": "0644"
+    }
+  ],
+  "proof": {
+    "strict_forward_inverse_hunks": 2,
+    "all_original_functions_AST_exact": true,
+    "new_function": "iter_compressed_jsonl",
+    "old_passed_scopes_replayed": 0,
+    "new_test_definitions_run": 1,
+    "framework_native_model_game_calls": 0,
+    "cache_manifest_hook": "NOT_READY; compressed names/raw-content fields/index domains and exact seven-file source inventory need stopped producer contract",
+    "atomic_finalization": "producer-owned; UNQUALIFIED here",
+    "old_seven_file_cache_mask_units_partition_semantics": "unchanged; no hypothetical gzip manifest admitted"
+  },
+  "new_receipt": {
+    "START": "2026-10-11T04:53:24.230884+00:00",
+    "STOP": "2026-10-11T04:53:24.323593+00:00",
+    "wall_seconds": 0.04734608100261539,
+    "capture_B": 98,
+    "returned_cleanup": true,
+    "returned_mask": "completed",
+    "persisted_mask": "pending distinct",
+    "fresh_child_absent": {
+      "pid": 319016,
+      "start_ticks": "94767599",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    }
+  },
+  "communications": {
+    "first_dependency_dispatch": "refused pre-dispatch inferred caller cwd; Cannot change active session worktree",
+    "corrected_dependency_dispatch": "accepted turn/steer01a1294a-fa66-7ae0-b489-04740ed0d7a1 with original arena-evaluation cwd",
+    "producer_body_imports": 0
+  },
+  "resources": {
+    "old_allocated_B": 647168,
+    "old_cache_held_B": 8192,
+    "old_failure_admin_forward_held_B": 131072,
+    "new_forward_B": 262144,
+    "owner_cap_B": 1179648,
+    "shared_TMP_failure_B": 131072,
+    "global_held_B": 47907598336,
+    "heavy_whole": "NOT_ISSUED",
+    "continuous_peaks_duration_and_whole_necessary_data": "UNKNOWN"
+  }
+}

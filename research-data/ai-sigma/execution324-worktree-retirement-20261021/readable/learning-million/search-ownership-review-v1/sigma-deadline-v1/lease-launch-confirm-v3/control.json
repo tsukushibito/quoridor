@@ -1,0 +1,376 @@
+{
+  "issue": "quoridor-4lc.331.1",
+  "permissions": [
+    "danger-full-access",
+    "never",
+    "effective developer verified before ordinary commands"
+  ],
+  "cwd": "/workspaces/quoridor/.worktree/learning-million",
+  "model_effort_preserved": true,
+  "CPU": [
+    3
+  ],
+  "RAMfamily_B": 536870912,
+  "cap_B": 32768,
+  "prewrite_forecast_B": 28672,
+  "old_reviews_held": true,
+  "commands": [
+    {
+      "op": [
+        "ready",
+        "--json"
+      ],
+      "wall_s": 0.6522782120155171,
+      "exit": 0,
+      "directwait": true,
+      "RSS_KiB": 255784,
+      "scalar": [
+        {
+          "id": "quoridor-4lc.331.1",
+          "status": "open",
+          "assignee": "codex:01a1103c-fbe0-7412-a406-fbee697a1392"
+        }
+      ],
+      "stderr": ""
+    },
+    {
+      "op": [
+        "show",
+        "quoridor-4lc.331.1",
+        "--json"
+      ],
+      "wall_s": 1.071147188078612,
+      "exit": 0,
+      "directwait": true,
+      "RSS_KiB": 283380,
+      "scalar": [
+        {
+          "id": "quoridor-4lc.331.1",
+          "status": "open",
+          "assignee": "codex:01a1103c-fbe0-7412-a406-fbee697a1392"
+        }
+      ],
+      "stderr": ""
+    },
+    {
+      "op": [
+        "update",
+        "quoridor-4lc.331.1",
+        "--claim",
+        "--json"
+      ],
+      "wall_s": 1.0239623680245131,
+      "exit": 0,
+      "directwait": true,
+      "RSS_KiB": 283380,
+      "scalar": [
+        {
+          "id": "quoridor-4lc.331.1",
+          "status": "in_progress",
+          "assignee": "codex:01a1103c-fbe0-7412-a406-fbee697a1392"
+        }
+      ],
+      "stderr": ""
+    },
+    {
+      "op": [
+        "update",
+        "quoridor-4lc.331.1",
+        "--append-notes",
+        "Lease/launch fixed control review: R1 BLOCKER observed current allocation lost on lease disappearance (probe12288->4096, lost8192). Supplied8 cases PASS/mainAST11 PASS/independent retained-current regression FAIL, no runtime/model/compiler. Source-control aa657...9SHA before/after. /workspaces/quoridor/.worktree/learning-million/.artifacts/search-ownership-review-v1/sigma-deadline-v1/lease-launch-confirm-v3/review.md + control.json; actualreaderSTOP 2026-10-07T21:03:39.556273+00:00 children0/cleanup[]. Parent331 incomplete."
+      ],
+      "wall_s": 1.3966980109689757,
+      "exit": 0,
+      "directwait": true,
+      "stdout": "\u2713 Updated issue: quoridor-4lc.331.1 \u2014 Sigma deadline / completed simulation / caller adapter related source review\n\n",
+      "stderr": ""
+    },
+    {
+      "op": [
+        "close",
+        "quoridor-4lc.331.1",
+        "--reason",
+        "Narrow lease/launch review complete, blocker R1 returned for related accounting repair; /workspaces/quoridor/.worktree/learning-million/.artifacts/search-ownership-review-v1/sigma-deadline-v1/lease-launch-confirm-v3/review.md"
+      ],
+      "wall_s": 1.6800974539946765,
+      "exit": 0,
+      "directwait": true,
+      "stdout": "\u2713 Closed quoridor-4lc.331.1 \u2014 Sigma deadline / completed simulation / caller adapter related source review: Narrow lease/launch review complete, blocker R1 returned for related accounting repair; /workspaces/quoridor/.worktree/learning-million/.artifacts/search-ownership-review-v1/sigma-deadline-v1/lease-launch-confirm-v3/review.md\n",
+      "stderr": ""
+    },
+    {
+      "op": [
+        "backup",
+        "sync"
+      ],
+      "wall_s": 1.200128210010007,
+      "exit": 0,
+      "directwait": true,
+      "stdout": "\nBackup synced in 482ms\n",
+      "stderr": ""
+    }
+  ],
+  "packet_SHA": "aa657bbda6b23fc780c9ba987bac88e921f15b78ac6dcf563ac85ce7ca0f5805",
+  "before": {
+    "paths9_SHA": {
+      "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/software-recovery-v2/test_named_replacement.py": "609707a0c42c4933492187828e8834fbce1f442bb9d44f9d27cf65d9cd85a7d8",
+      "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/software-recovery-v2/launch_control.py": "0f9fa4d2af3f19ec060ff8c6dce088ae1e960ecdf84e04cc3f750db8d4d801fb",
+      "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/software-recovery-v2/launch.py": "e2746728fa3613983879be52cc97053b326f85b5ec39184b4b4c3b7988cd1954",
+      "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/software-recovery-v2/preflight.py": "21fa0dd2eba924b2810de9177275fbe58f6885bb027f45139d6221f1919cd2a2",
+      "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/software-recovery-v2/named_replacement.py": "6cebb7b9c9820bbbfd3786fc791e9e52acca94ae232c5e1bae49b3f0fc6394ce",
+      "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/software-recovery-v2/worker.py": "7f5e92e872e0a9e779e6a637b7ffaeedccab02c0cdf642a49ac743dccd1d098f",
+      "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/software-recovery-v2/test_launch_control.py": "0c8824273c51f0acbca7c8013ce010fe58548983c4f9889b6345df460ac4d729",
+      "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/software-recovery-v2/admission.prepared.json": "35a44cd1fad0d2248b0b1c59a2d84badd0eff1ea4033ee9cce0f296ef609d077",
+      "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/replacement-repair-prewrite-v2.json": "04920028ba82e4821f2489d08f551de8ff42c363e8cce5e2eef7b3ed423beaa3"
+    },
+    "wall_s": 0.00014343298971652985
+  },
+  "fresh_physics": {
+    "named_science_compiler": [],
+    "own_jobs": 0,
+    "foreign_interrupt": false
+  },
+  "NN0": {
+    "provided_source_cases": 8,
+    "provided_source_PASS": true,
+    "provided_case_log": "test_exact_owned_missing_is_charged_during_live_replacement (test_named_replacement.ReplacementTests.test_exact_owned_missing_is_charged_during_live_replacement) ... ok\ntest_only_exact_live_owned_command_activates_lease (test_named_replacement.ReplacementTests.test_only_exact_live_owned_command_activates_lease) ... ok\ntest_other_stat_errors_always_refuse (test_named_replacement.ReplacementTests.test_other_stat_errors_always_refuse) ... ok\ntest_small_restored_output_cannot_release_previous_charge (test_named_replacement.ReplacementTests.test_small_restored_output_cannot_release_previous_charge) ... ok\ntest_terminal_absence_refuses_even_after_known_reconstruction (test_named_replacement.ReplacementTests.test_terminal_absence_refuses_even_after_known_reconstruction) ... ok\ntest_unrelated_or_no_live_owner_missing_refuses (test_named_replacement.ReplacementTests.test_unrelated_or_no_live_owner_missing_refuses) ... ok\ntest_all_checks_precede_only_submit (test_launch_control.LaunchTests.test_all_checks_precede_only_submit) ... ok\ntest_exceptions_and_nontrue_never_submit (test_launch_control.LaunchTests.test_exceptions_and_nontrue_never_submit) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 0.000s\n\nOK\n",
+    "independent_highwater_regression": {
+      "input": "baseline4096/prior8192/live same command current16384 then FileNotFoundError",
+      "first_charge_B": 12288,
+      "expected_missing_charge_B": 12288,
+      "actual_missing_charge_B": 4096,
+      "budget_credit_created_B": 8192,
+      "meets_max_previous_current": false
+    },
+    "actual_launch_function_AST_mock_cases": [
+      {
+        "mode": "success",
+        "submit_calls": 1,
+        "error": null,
+        "calls": [
+          "check0",
+          "check1",
+          "check2",
+          "check3",
+          "parse_job",
+          "preflight",
+          "submit"
+        ]
+      },
+      {
+        "mode": "formatter0",
+        "submit_calls": 0,
+        "error": "CalledProcessError",
+        "calls": [
+          "check0"
+        ]
+      },
+      {
+        "mode": "formatter1",
+        "submit_calls": 0,
+        "error": "CalledProcessError",
+        "calls": [
+          "check0",
+          "check1"
+        ]
+      },
+      {
+        "mode": "formatter2",
+        "submit_calls": 0,
+        "error": "CalledProcessError",
+        "calls": [
+          "check0",
+          "check1",
+          "check2"
+        ]
+      },
+      {
+        "mode": "formatter3",
+        "submit_calls": 0,
+        "error": "CalledProcessError",
+        "calls": [
+          "check0",
+          "check1",
+          "check2",
+          "check3"
+        ]
+      },
+      {
+        "mode": "bad_json",
+        "submit_calls": 0,
+        "error": "JSONDecodeError",
+        "calls": [
+          "check0",
+          "check1",
+          "check2",
+          "check3",
+          "parse_job"
+        ]
+      },
+      {
+        "mode": "bad_argv",
+        "submit_calls": 0,
+        "error": "AssertionError",
+        "calls": [
+          "check0",
+          "check1",
+          "check2",
+          "check3",
+          "parse_job"
+        ]
+      },
+      {
+        "mode": "preflight_assert",
+        "submit_calls": 0,
+        "error": "AssertionError",
+        "calls": [
+          "check0",
+          "check1",
+          "check2",
+          "check3",
+          "parse_job",
+          "preflight"
+        ]
+      },
+      {
+        "mode": "preflight_oserror",
+        "submit_calls": 0,
+        "error": "OSError",
+        "calls": [
+          "check0",
+          "check1",
+          "check2",
+          "check3",
+          "parse_job",
+          "preflight"
+        ]
+      },
+      {
+        "mode": "preflight_false",
+        "submit_calls": 0,
+        "error": "LaunchRefused",
+        "calls": [
+          "check0",
+          "check1",
+          "check2",
+          "check3",
+          "parse_job",
+          "preflight"
+        ]
+      },
+      {
+        "mode": "preflight_none",
+        "submit_calls": 0,
+        "error": "LaunchRefused",
+        "calls": [
+          "check0",
+          "check1",
+          "check2",
+          "check3",
+          "parse_job",
+          "preflight"
+        ]
+      }
+    ],
+    "actual_launcher_preflight_worker_imported": false,
+    "actual_Popen_submit_compiler_model": 0,
+    "wall_s": 0.004416860989294946,
+    "RSS_KiB": 23344,
+    "affinity": [
+      3
+    ],
+    "RLIMIT_AS_B": 536870912,
+    "cleanup_remaining": [],
+    "direct_exec_child": true,
+    "exec_exit": 1,
+    "failure_reason": "independent max-current-retention regression failed; provided8 and actual-main11 mock cases passed"
+  },
+  "inherited_control_SHA": {
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/software-v1/worker.py": "2cade7e9e8c6ae21e2d89ebcfb9ae477fd16a184b4cc73a27fb83af5e3b3a61d",
+    "/workspaces/quoridor/python/quoridor_training/cycle_process.py": "670f648f9c91c1f8430be0f1b62ae4b1e69663d594b53e8bda84379d17638c26"
+  },
+  "metadata_scope": {
+    "failed_receipt_SHA": "f3917795787c97aa2a5cb0d35f0bb7d80fda5e7cadd860a53f9d8c66fe457e30",
+    "baseline_SHA": "86b76641353ecf4c5a0107522f97a308b68981a733fc8279fddb504a6312430d",
+    "named_before_SHA": "91d802ab5c8f9914b581ebe282dbdbfc878e4d60768d4981822a728d1cbcff27",
+    "known_missing_path": "/workspaces/quoridor/.artifacts/rust-migration/target/release/deps/libquoridor_runner-6aaa82ac9921176f.rlib",
+    "prior_B": 8949760,
+    "prior_SHA": "966a935bf585bad8d9c384912183719c5d3edab2aab0f66f12c01ba3cd491434",
+    "baseline_B": 8769536,
+    "command_output_lease_all_bound_prior": true,
+    "prepared_admission": false,
+    "actual_reader_STOP_pending": true,
+    "no_private_asset_images_opened": true,
+    "prepared_source_forecast_B": 4661248
+  },
+  "findings": {
+    "blockers": [
+      {
+        "id": "R1",
+        "source": "named_replacement.py:charge and worker.py:Resources.check",
+        "input": "one exact live OWN lease; prior8192/base4096; current stat16384 then FileNotFoundError",
+        "expected_missing_charge_B": 12288,
+        "actual_missing_charge_B": 4096,
+        "lost_charge_B": 8192,
+        "cause": "self.prior is never raised after observing larger current size. Disappearance falls back to original prior; worker cap uses current growth not growth_peak. Unobserved intermediate peak still UNKNOWN separately",
+        "repair_boundary": "retain per-path maximum actually observed charge and use it on legitimate lease disappearance (and subsequent lower restore checks), keeping existing live-owner/terminal/UNKNOWN refusal; producer only"
+      }
+    ],
+    "ordinary": [],
+    "launch": "ordered fail-closed source+mock confirmed; actual submission/preflight/job not executed"
+  },
+  "limits": [
+    "no actual compile/reconstruction lease/job submitted",
+    "live canonical Cargo argv and actual filesystem overwrite sequence not qualified",
+    "frozen prepared admission false and stop pending correctly block real entry; future admission/job not frozen by this review",
+    "unknown continuous/intermediate allocation remains UNKNOWN; no previous image/raw/refund deleted",
+    "own quiet predicate named proc snapshot, no recurring monitor/foreign interrupt",
+    "only inherited identity/execute/Resources necessary ranges, no broad old9/math/44 review"
+  ],
+  "after": {
+    "paths9_SHA_mode_bytes_match": true,
+    "packet_SHA_match": true,
+    "inherited_control_SHA_match": true,
+    "paths9_binding_digest": "d8cf21ee7497cf5042cffa16fbebddaa75a6e6c9e40396eb1c210d2aaf195288",
+    "wall_s": 0.008795792004093528
+  },
+  "reader_STOP_UTC": "2026-10-07T21:03:39.556273+00:00",
+  "remaining": [],
+  "owned_fixture_children": 0,
+  "source_main_Git_index_writes": 0,
+  "model_compiler_runtime_job_calls": 0,
+  "cost_notes": {
+    "Beads_start_wall_s": 2.7473877681186423,
+    "stdlib_probe_section_wall_s": 0.004416860989294946,
+    "probe_RSS_KiB": 23344,
+    "probe_exit": 1,
+    "probe_safety": "Popen blocked for supplied8; actual mainAST filesystem/tools/submit mocked; Torch/ORT/numpy/ctypes/runtime imports blocked; no worker/preflight import",
+    "unmetered_analysis_wall": "UNKNOWN",
+    "read_commands": "taskset CPU3 rg/sed/cat/hash/scoped small JSON; exact tool trace",
+    "old_failed_guard_whole_s": 2.4418700259411708,
+    "nested_cost_not_added": true
+  },
+  "notifications": [
+    {
+      "thread": "01a11062-b120-73a1-8aa3-fe2cb922c7c0",
+      "issue": "quoridor-4lc.331",
+      "wall_s": 5.195354236988351,
+      "exit": 0,
+      "directwait": true,
+      "stdout": "{\n  \"method\": \"turn/start\",\n  \"thread_id\": \"01a11062-b120-73a1-8aa3-fe2cb922c7c0\",\n  \"turn_id\": \"01a1182e-851d-7f72-97ce-7cd700559924\",\n  \"accepted\": true\n}\n",
+      "stderr": ""
+    },
+    {
+      "thread": "01a1153d-7900-7740-837f-c300ca54764f",
+      "issue": "quoridor-4lc.324",
+      "wall_s": 3.556571915978566,
+      "exit": 0,
+      "directwait": true,
+      "stdout": "{\n  \"method\": \"turn/start\",\n  \"thread_id\": \"01a1153d-7900-7740-837f-c300ca54764f\",\n  \"turn_id\": \"01a1182e-9322-7142-af91-51aa870e06dd\",\n  \"accepted\": true\n}\n",
+      "stderr": ""
+    }
+  ],
+  "administrative_children_STOP_UTC": "2026-10-07T21:04:27.963212+00:00",
+  "all_owned_child_directwait": true,
+  "review_MD_SHA": "3876f9bbc30dd3da5300fed89494b61956bc60d34ae3254a7286b18a28d43873"
+}

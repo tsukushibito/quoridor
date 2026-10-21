@@ -1,0 +1,143 @@
+{
+  "schema": "quoridor.common-corpus-framework-STOP.v1",
+  "scope": "three affected arrays/warmstart/export/both-teacher guide-render software definitions; no corpus/numerical/fit PASS",
+  "job_id": "88c98936-397b-47ee-8a4f-ce0d2bdb5efa",
+  "authoritative_manifest": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/framework-qualification-v1/entry-v4/operation-v4/manifest.json",
+    "sha256": "cfc82144d5252f5bf7c2fff70ed1ac8b83f50d04bfe3c83047d9a0d295ea9420",
+    "bytes": 6258,
+    "mode": "0644"
+  },
+  "experiment": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/framework-qualification-v1/entry-v4/experiment.json",
+    "sha256": "8cf5fb9cdba895699c53872dad2ad81116b0d32dd6990ca0e396b4c4ac40ca9c",
+    "bytes": 3889,
+    "mode": "0644"
+  },
+  "intent": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/framework-qualification-v1/entry-v4/intent.json",
+    "sha256": "8d4f572fe2e0eb92f019cb9d05eba34e87cff9e4fb56cbc61092baaabbceaff0",
+    "bytes": 8568,
+    "mode": "0644"
+  },
+  "approved_plan": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/plan.json",
+    "sha256": "285e6d9ecded3709d0e23dc8ff45e89184cec053e314d6d2f61fd2e5fc9eeac1",
+    "bytes": 48825,
+    "mode": "0644"
+  },
+  "qualification": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/framework-qualification-v1/data-v4/qualification.json",
+    "sha256": "e3059557a48accfa184a01c0cdba749274829f7120fd2c6e92ec8cb7f590dfe9",
+    "bytes": 401,
+    "mode": "0644"
+  },
+  "actual_tests_run": 3,
+  "tests_full_log": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/framework-qualification-v1/entry-v4/operation-v4/run.full.log",
+    "sha256": "d4f77a4b641878fcfb47865351e6f7f194bdce6951dd4b796abea7e7f8cbf42e",
+    "bytes": 101,
+    "mode": "0644"
+  },
+  "outer_result": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/framework-qualification-v1/entry-v4/runtime-v4/result.json",
+    "sha256": "11629929331680143cc1e7fd95f9336d3e5dc1ecee583a52a1c39abd6703cc51",
+    "bytes": 500,
+    "mode": "0600"
+  },
+  "outer_state": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/framework-qualification-v1/entry-v4/runtime-v4/state.json",
+    "sha256": "824e3359ef5269c54b02a41fe9491d391e43534127a31074faeb66fa3e23d82b",
+    "bytes": 707,
+    "mode": "0600"
+  },
+  "controller_start": "2026-10-11T11:56:25.381438+00:00",
+  "controller_STOP": "2026-10-11T11:56:34.092139+00:00",
+  "controller_whole_seconds": 8.704801743966527,
+  "child_command_wall_seconds": 5.603824490914121,
+  "child_nested_not_added": true,
+  "exact_child_and_worker_process_UTC_STOP": "UNKNOWN",
+  "candidate_finished_at_is_not_process_STOP": true,
+  "authoritative_finished_at": "2026-10-11T11:58:17.803815+00:00",
+  "guardian_return": {
+    "command": [
+      "/home/vscode/.cache/inference/python/cpython-3.14.7-linux-x86_64-gnu/bin/python3.14",
+      "-B",
+      "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/test_current_framework.py",
+      "--result",
+      "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/framework-qualification-v1/data-v4/qualification.json"
+    ],
+    "status": "complete",
+    "child": {
+      "pid": 569065,
+      "start_ticks": "97305564",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "log_bytes_seen": 101,
+    "scope": "session group and periodically recorded descendants; no daemon adoption",
+    "exit_code": 0,
+    "remaining": [],
+    "direct_child_reaped": true,
+    "descendant_visibility": "observed",
+    "cleanup_complete": true,
+    "log_bytes_retained": 101,
+    "wall_seconds": 5.603824490914121,
+    "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+    "primary_error": null,
+    "process_cleanup_complete": true,
+    "handle_closes_complete": true,
+    "signal_mask_restoration": "completed",
+    "final_record_persist": "completed",
+    "finalization_errors": []
+  },
+  "persisted_process_receipt": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/framework-qualification-v1/entry-v4/operation-v4/run.process.json",
+    "sha256": "8941366b4ab5ad38fbbe77683640c9577d8e9a3f5d07e72c2b8718c58e3c3b07",
+    "bytes": 1201,
+    "mode": "0600"
+  },
+  "persisted_signal_mask_restoration": "pending",
+  "persisted_final_record_persist": "attempted",
+  "source_current_callers_count": 22,
+  "source_current_callers_before_after": "SHA-size-mode MATCH",
+  "source_data_reader_STOP": "2026-10-11T11:59:59.308159+00:00",
+  "owned": {
+    "readers": [],
+    "children": [],
+    "jobs": [],
+    "TMP": [],
+    "remaining": []
+  },
+  "reservation": "NONE",
+  "old_failed_controller_seconds_once": 4.663329571951181,
+  "old_failed_operations_unchanged": true,
+  "software_controller_seconds_separate": 8.704801743966527,
+  "experimental_command_seconds_consumed": 0,
+  "experimental_command_seconds_remaining": 5400,
+  "actual_model_forwards": 0,
+  "fit_updates": 0,
+  "corpus_cache": "NOT_RUN / absent dependency",
+  "fit_A": "NOT_RUN",
+  "fit_B": "NOT_RUN",
+  "control_prewrite": {
+    "named_retained_sample_B": 425984,
+    "held_external_bytecode_B": 77824,
+    "new_inclusive_forward_B": 32768,
+    "existing_own_control_cap_B": 33554432,
+    "all_old_floors_and_failures_held": true
+  },
+  "collector_refusal": {
+    "stage": "before STOP file creation",
+    "condition": "expected data root to contain only qualification; empty TorchInductor TMP directory was also present",
+    "effect": "no scientific or authoritative manifest mutation; no test replay",
+    "duration": "UNKNOWN"
+  },
+  "owned_TMP_cleanup": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/framework-qualification-v1/data-v4/torchinductor_vscode",
+    "observed_empty_directory_allocation_B": 4096,
+    "action": "rmdir after verified empty",
+    "old_positive_floor_held_no_refund": true
+  },
+  "family_continuous_peak": "UNKNOWN",
+  "no_future_quiet_claim": true
+}

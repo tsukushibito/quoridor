@@ -1,0 +1,287 @@
+{
+  "issue": "quoridor-4lc.331.1",
+  "owner": "codex:01a1103c-fbe0-7412-a406-fbee697a1392",
+  "permissions": [
+    "danger-full-access",
+    "never",
+    "developer effective verified before ordinary command"
+  ],
+  "cwd": "/workspaces/quoridor/.worktree/learning-million",
+  "model_effort_preserved": true,
+  "CPU": [
+    3
+  ],
+  "RAMfamily_B": 536870912,
+  "cap_B": 65536,
+  "forecast_B": 32768,
+  "commands": [
+    {
+      "op": [
+        "ready",
+        "--json"
+      ],
+      "wall": 0.6789733909536153,
+      "exit": 0,
+      "directwait": true,
+      "RSS_KiB": 257640,
+      "scalar": [
+        {
+          "id": "quoridor-4lc.331.1",
+          "status": "open",
+          "assignee": "codex:01a1103c-fbe0-7412-a406-fbee697a1392"
+        }
+      ],
+      "error": ""
+    },
+    {
+      "op": [
+        "show",
+        "quoridor-4lc.331.1",
+        "--json"
+      ],
+      "wall": 0.9386632019886747,
+      "exit": 0,
+      "directwait": true,
+      "RSS_KiB": 278100,
+      "scalar": [
+        {
+          "id": "quoridor-4lc.331.1",
+          "status": "open",
+          "assignee": "codex:01a1103c-fbe0-7412-a406-fbee697a1392"
+        }
+      ],
+      "error": ""
+    },
+    {
+      "op": [
+        "update",
+        "quoridor-4lc.331.1",
+        "--claim",
+        "--json"
+      ],
+      "wall": 0.9425020499620587,
+      "exit": 0,
+      "directwait": true,
+      "RSS_KiB": 278100,
+      "scalar": [
+        {
+          "id": "quoridor-4lc.331.1",
+          "status": "in_progress",
+          "assignee": "codex:01a1103c-fbe0-7412-a406-fbee697a1392"
+        }
+      ],
+      "error": ""
+    },
+    {
+      "op": [
+        "update",
+        "quoridor-4lc.331.1",
+        "--append-notes",
+        "Fixed Sigma adapter static review R1 BLOCKER cancellation/queued backend reply race masks per-move original error and inflight caller scope; C1 ordinary valid-reply counter precedes validity. Evidence /workspaces/quoridor/.worktree/learning-million/.artifacts/search-ownership-review-v1/sigma-deadline-v1/review.md + control.json; source9/patch fixed before-after. readerSTOP 2026-10-07T19:59:11.288088+00:00 children0 remaining[]. No runtime qualification or parent closure."
+      ],
+      "wall": 0.9185905100312084,
+      "exit": 0,
+      "directwait": true,
+      "stdout": "\u2713 Updated issue: quoridor-4lc.331.1 \u2014 Sigma deadline / completed simulation / caller adapter related source review\n",
+      "stderr": ""
+    },
+    {
+      "op": [
+        "close",
+        "quoridor-4lc.331.1",
+        "--reason",
+        "Assigned fixed source-static review completed: R1 blocker1/C1 ordinary1 returned for ordinary repair; /workspaces/quoridor/.worktree/learning-million/.artifacts/search-ownership-review-v1/sigma-deadline-v1/review.md"
+      ],
+      "wall": 1.5017704440979287,
+      "exit": 0,
+      "directwait": true,
+      "stdout": "\u2713 Closed quoridor-4lc.331.1 \u2014 Sigma deadline / completed simulation / caller adapter related source review: Assigned fixed source-static review completed: R1 blocker1/C1 ordinary1 returned for ordinary repair; /workspaces/quoridor/.worktree/learning-million/.artifacts/search-ownership-review-v1/sigma-deadline-v1/review.md\n",
+      "stderr": ""
+    },
+    {
+      "op": [
+        "backup",
+        "sync"
+      ],
+      "wall": 1.116058261017315,
+      "exit": 0,
+      "directwait": true,
+      "stdout": "\nBackup synced in 519ms\n",
+      "stderr": ""
+    }
+  ],
+  "packet_SHA": "cbb67f437a8d9622370d8f75a06ea9d59888b14a743d327c5649f9b64392d02f",
+  "before": {
+    "source9_SHA": {
+      "crates/quoridor-runner/src/runtime.rs": "0801897f87c494886ad876ad0cd7fd4d021f8ca8bd4c4be2f92e1fb416583356",
+      "crates/quoridor-runner/src/sigma_clock.rs": "8321d83379932c55849d4db41c75705e562508ba7fbfe66b5176e855452469d6",
+      "crates/quoridor-runner/src/arena.rs": "45432cfc9797ed1c320eac35d7f28c02eb0cd95d752bf30fe305d43490850852",
+      "crates/quoridor-runner/src/arena_clock.rs": "56323e4b0c24951f1521077dd1f352ec216cf446682175ca500625a6abc5bdda",
+      "crates/quoridor-runner/src/arena_manifest.rs": "42bdd15deadb57ac9a5d23805c567c9fdbbf62734b7883dace29009fd45c3ca9",
+      "crates/quoridor-runner/src/lib.rs": "0168944f76eb4a9320a636664dfe507c9bfaf65db1721c3949318faf7c6e5b87",
+      "crates/quoridor-runner/src/config.rs": "dcc01fbc81ccc8fa82f2976c5761e8f50760d9e1588a488852883de34642789c",
+      "crates/quoridor-runner/tests/arena.rs": "48390113594c469d144d9c95392aae4bfa89d7f70910f9d2bece012b6a110951",
+      "crates/quoridor-runner/tests/sigma_clock.rs": "51376e370795c46555cbcd94825c4352bf580d3be3effa8390096187672a9698"
+    },
+    "patch_SHA": "9c50aad9030156ae01a72c1ed84cfdb5b6f5d3b6431fe87cbf27f9011525afbc",
+    "wall": 0.0006775399670004845
+  },
+  "fresh_own_physics": {
+    "science": [],
+    "compiler": [],
+    "foreign_interrupt": false
+  },
+  "unchanged_dependency_SHA": {
+    "crates/quoridor-ai/src/alphabeta.rs": "cd34a858a085353f76b184f8a609ca09d07f23874ae67df8a2dbac2ee7593d0e",
+    "crates/quoridor-ai/src/sigma_mcts.rs": "dd59988dd7ddae090e1d71b7a17e1ef4f1772151db295c716a1375d84de67eee",
+    "crates/quoridor-nnue/src/residual.rs": "a51834c0677391ed19af6d832ad5cb1bd27352fac0b75bc8841a8ec3390085a1",
+    "crates/quoridor-inference/src/lib.rs": "d7656d85ba0e00fa2e4b2ac40ebfdc0b2c5fa56aca5a52d1e2e4d79f463cfc0f",
+    "crates/quoridor-inference/native/ort.cpp": "0911d448754c58d1a8869cc1ec46aad7adcd8e530e05401446333777c80108d9",
+    "Cargo.lock": "5b448d049178c9227ba2d51a784918f1ab192574a4c79f92cb61187f6f1732fe"
+  },
+  "metadata_SHA": {
+    "accepted-comparison-protocol-v1.json": "8bd199ee4b29d283805c2e03389f908fb312e367ee7828e53e9341ca025b2e3c",
+    "consolidated-next-cost-v1.json": "4fe0bdaef9729a745697bae5ac08392a2c26e6a97e81c7ea93cf1afd1e19c663"
+  },
+  "preservation_archives": {
+    "pre-adapter-source.tar.gz": {
+      "SHA": "7649707ce673193c5e6bf508d5f483205d4d41fcf598c274f62e1d90afd91eb4",
+      "members": [
+        {
+          "name": "crates/quoridor-runner/src/runtime.rs",
+          "bytes": 116765,
+          "mode": 420
+        },
+        {
+          "name": "crates/quoridor-runner/src/arena.rs",
+          "bytes": 13318,
+          "mode": 420
+        },
+        {
+          "name": "crates/quoridor-runner/src/arena_clock.rs",
+          "bytes": 8797,
+          "mode": 420
+        },
+        {
+          "name": "crates/quoridor-runner/src/arena_manifest.rs",
+          "bytes": 27289,
+          "mode": 420
+        },
+        {
+          "name": "crates/quoridor-runner/src/lib.rs",
+          "bytes": 465,
+          "mode": 420
+        },
+        {
+          "name": "crates/quoridor-runner/tests/orchestration.rs",
+          "bytes": 7646,
+          "mode": 420
+        }
+      ]
+    },
+    "pre-adapter-config.tar.gz": {
+      "SHA": "1855a4cbf0df94a15653e81cf4e98c03c717253b563d76c4d979d18a43b5fe9c",
+      "members": [
+        {
+          "name": "crates/quoridor-runner/src/config.rs",
+          "bytes": 7280,
+          "mode": 420
+        }
+      ]
+    },
+    "pre-adapter-arena-test.tar.gz": {
+      "SHA": "48b537737e11b2c77b950c9d7eda2bc9ab1bb9236e6b650883590cc07d465385",
+      "members": [
+        {
+          "name": "crates/quoridor-runner/tests/arena.rs",
+          "bytes": 11267,
+          "mode": 420
+        }
+      ]
+    }
+  },
+  "static_checks_wall": 0.001436777994967997,
+  "review_RSS_KiB": 15992,
+  "findings": [
+    {
+      "id": "R1",
+      "priority": "blocker",
+      "location": "runtime.rs:870-880,1799-1827,1848-1858",
+      "call": "play_timed_sigma -> infer reply recv_timeout; pump backend Err followed by cancel",
+      "input": "prior completed simulation; recv_timeout returns Timeout just before matching Err response is enqueued; pump sends error then sets cancel before timeout branch loads flag",
+      "expected": "matched reply/backend error preserved at move level; synchronous inflight reply accounted before caller return; cancellation remains separate fact",
+      "actual": "waiter returns Err(cancelled) without draining matching response; Call.error=cancelled; backend_failed false; observation failure=Cancelled, engine_error=cancelled. Outcome later remapped EngineError but MoveObservation unchanged and journal already written",
+      "scope": "static possible schedule, no executed Rust/live backend failure; accepted move stays false",
+      "related_required_repair": "every admitted request needs an explicit matching terminal response; pending/inflight cancellation must not silently abandon or suppress backend return/validation. Retain reply error and cancellation separately, wait/account inflight completion; do not just remove early return because pump pending.clear and cancelled-success suppression currently omit replies."
+    },
+    {
+      "id": "C1",
+      "priority": "ordinary",
+      "location": "sigma_clock.rs:122-130",
+      "call": "run_with_clock infer Ok invalid output",
+      "input": "one prior valid reply plus an Ok NetworkOutput with NaN/range invalid",
+      "expected": "nn_valid_replies_returned counts only validated replies, or counter named returned outputs",
+      "actual": "returned increments before validity check; supplied invalid-output fixture has returned2 while valid replies1; no assertion covers counter",
+      "scope": "adapter validation branch; production pump normally rejects invalid reply earlier; no new observed live failure"
+    }
+  ],
+  "static_scope": [
+    "source9 and patch SHA; full new sigma_clock and both new/changed fixture code, relevant runtime pump/worker/play_completed, config/arena/manifest binding hunks",
+    "maintained MCTS advance/supply/backup/snapshot necessary range only; dependency6 hash-only unchanged proof",
+    "protocol and cost metadata only; preservation member metadata only, no archive extraction/copy",
+    "no NN0 fixture execution required for source scheduling counterexample; no old success suite replay"
+  ],
+  "after": {
+    "source9_SHA": {
+      "crates/quoridor-runner/src/runtime.rs": "0801897f87c494886ad876ad0cd7fd4d021f8ca8bd4c4be2f92e1fb416583356",
+      "crates/quoridor-runner/src/sigma_clock.rs": "8321d83379932c55849d4db41c75705e562508ba7fbfe66b5176e855452469d6",
+      "crates/quoridor-runner/src/arena.rs": "45432cfc9797ed1c320eac35d7f28c02eb0cd95d752bf30fe305d43490850852",
+      "crates/quoridor-runner/src/arena_clock.rs": "56323e4b0c24951f1521077dd1f352ec216cf446682175ca500625a6abc5bdda",
+      "crates/quoridor-runner/src/arena_manifest.rs": "42bdd15deadb57ac9a5d23805c567c9fdbbf62734b7883dace29009fd45c3ca9",
+      "crates/quoridor-runner/src/lib.rs": "0168944f76eb4a9320a636664dfe507c9bfaf65db1721c3949318faf7c6e5b87",
+      "crates/quoridor-runner/src/config.rs": "dcc01fbc81ccc8fa82f2976c5761e8f50760d9e1588a488852883de34642789c",
+      "crates/quoridor-runner/tests/arena.rs": "48390113594c469d144d9c95392aae4bfa89d7f70910f9d2bece012b6a110951",
+      "crates/quoridor-runner/tests/sigma_clock.rs": "51376e370795c46555cbcd94825c4352bf580d3be3effa8390096187672a9698"
+    },
+    "packet_patch_match": true,
+    "wall": 0.0004051739815622568
+  },
+  "reader_STOP_UTC": "2026-10-07T19:59:11.288088+00:00",
+  "remaining": [],
+  "owned_children": 0,
+  "directwait_cleanup_remaining": [],
+  "source_main_Git_index_writes": 0,
+  "science_model_native_compile_runtime_fixture_calls": 0,
+  "cost_limits": {
+    "claim_commands_actual_wall_s": 2.5601386429043487,
+    "static_checks_wall_s": 0.001436777994967997,
+    "read_command_tool_timings": "tool trace authoritative; grouped taskset CPU3 rg/sed/cat/nl and Python hashes/tar member metadata",
+    "analysis_wall": "UNKNOWN unmetered",
+    "first sigma module/test inspection preceded source9 hash; packet SHA checked before those reads": true,
+    "NN0_fixture_run": 0,
+    "historical_control_failure": "provided explicit-id plus parent wrapper refusal preserved; not replayed"
+  },
+  "notifications": [
+    {
+      "thread": "01a11062-b120-73a1-8aa3-fe2cb922c7c0",
+      "issue": "quoridor-4lc.331",
+      "wall": 4.345735910930671,
+      "exit": 0,
+      "directwait": true,
+      "stdout": "{\n  \"method\": \"turn/start\",\n  \"thread_id\": \"01a11062-b120-73a1-8aa3-fe2cb922c7c0\",\n  \"turn_id\": \"01a117f3-6616-7211-beb2-4735bbc00672\",\n  \"accepted\": true\n}\n",
+      "stderr": ""
+    },
+    {
+      "thread": "01a1153d-7900-7740-837f-c300ca54764f",
+      "issue": "quoridor-4lc.324",
+      "wall": 3.223992730025202,
+      "exit": 0,
+      "directwait": true,
+      "stdout": "{\n  \"method\": \"turn/steer\",\n  \"thread_id\": \"01a1153d-7900-7740-837f-c300ca54764f\",\n  \"turn_id\": \"01a117f0-c31b-7431-93bd-b797333e2b1c\",\n  \"accepted\": true\n}\n",
+      "stderr": ""
+    }
+  ],
+  "administrative_children_STOP_UTC": "2026-10-07T19:59:53.035305+00:00",
+  "all_owned_children_directwait": true,
+  "review_MD_SHA256": "f6c94f4dfc43c5b0dc6db4f652234cea5dde8ce9a9b7ea3dcc8380eb51b08797"
+}

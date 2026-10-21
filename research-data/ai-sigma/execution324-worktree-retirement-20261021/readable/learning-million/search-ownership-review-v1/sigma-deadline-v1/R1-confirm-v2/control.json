@@ -1,0 +1,219 @@
+{
+  "issue": "quoridor-4lc.331.1",
+  "permissions": [
+    "danger-full-access",
+    "never",
+    "effective developer verified before commands"
+  ],
+  "cwd": "/workspaces/quoridor/.worktree/learning-million",
+  "model_effort_preserved": true,
+  "CPU": [
+    3
+  ],
+  "RAMfamily_B": 536870912,
+  "cap_B": 32768,
+  "forecast_B": 24576,
+  "old_reservation_B": 32768,
+  "combined_cap_B": 65536,
+  "commands": [
+    {
+      "op": [
+        "ready",
+        "--json"
+      ],
+      "wall_s": 0.7806714000180364,
+      "exit": 0,
+      "directwait": true,
+      "RSS_KiB": 263936,
+      "scalar": [
+        {
+          "id": "quoridor-4lc.331.1",
+          "status": "open",
+          "assignee": "codex:01a1103c-fbe0-7412-a406-fbee697a1392"
+        }
+      ],
+      "error": ""
+    },
+    {
+      "op": [
+        "show",
+        "quoridor-4lc.331.1",
+        "--json"
+      ],
+      "wall_s": 1.1013144130120054,
+      "exit": 0,
+      "directwait": true,
+      "RSS_KiB": 275584,
+      "scalar": [
+        {
+          "id": "quoridor-4lc.331.1",
+          "status": "open",
+          "assignee": "codex:01a1103c-fbe0-7412-a406-fbee697a1392"
+        }
+      ],
+      "error": ""
+    },
+    {
+      "op": [
+        "update",
+        "quoridor-4lc.331.1",
+        "--claim",
+        "--json"
+      ],
+      "wall_s": 0.9164432890247554,
+      "exit": 0,
+      "directwait": true,
+      "RSS_KiB": 287572,
+      "scalar": [
+        {
+          "id": "quoridor-4lc.331.1",
+          "status": "in_progress",
+          "assignee": "codex:01a1103c-fbe0-7412-a406-fbee697a1392"
+        }
+      ],
+      "error": ""
+    },
+    {
+      "op": [
+        "update",
+        "quoridor-4lc.331.1",
+        "--append-notes",
+        "Related v2 fixed R1/C1 RESOLVED SOURCE-STATIC; blockers0/nonblocking C2 known guard terminal stop label engine_error (typed guard reason and engine_error None preserved). Changed2 SHA before/after, independent old2+patch=current2, scientific protocol unchanged. Evidence /workspaces/quoridor/.worktree/learning-million/.artifacts/search-ownership-review-v1/sigma-deadline-v1/R1-confirm-v2/review.md + control.json; readerSTOP 2026-10-07T20:11:13.860760+00:00 child0/cleanup[]. Rust/live/native NOT_RUN; parent remains incomplete."
+      ],
+      "wall_s": 1.3793530910043046,
+      "exit": 0,
+      "directwait": true,
+      "stdout": "\u2713 Updated issue: quoridor-4lc.331.1 \u2014 Sigma deadline / completed simulation / caller adapter related source review\n\n",
+      "stderr": ""
+    },
+    {
+      "op": [
+        "close",
+        "quoridor-4lc.331.1",
+        "--reason",
+        "R1/C1 repair source-static confirmation complete; blockers0, nonblocking label clarity; /workspaces/quoridor/.worktree/learning-million/.artifacts/search-ownership-review-v1/sigma-deadline-v1/R1-confirm-v2/review.md"
+      ],
+      "wall_s": 1.7035844259662554,
+      "exit": 0,
+      "directwait": true,
+      "stdout": "\u2713 Closed quoridor-4lc.331.1 \u2014 Sigma deadline / completed simulation / caller adapter related source review: R1/C1 repair source-static confirmation complete; blockers0, nonblocking label clarity; /workspaces/quoridor/.worktree/learning-million/.artifacts/search-ownership-review-v1/sigma-deadline-v1/R1-confirm-v2/review.md\n",
+      "stderr": ""
+    },
+    {
+      "op": [
+        "backup",
+        "sync"
+      ],
+      "wall_s": 1.5058813618961722,
+      "exit": 0,
+      "directwait": true,
+      "stdout": "\nBackup synced in 682ms\n",
+      "stderr": ""
+    }
+  ],
+  "packet_SHA": "d98736789f902d94fa09d664d946dd0f4fa8b8b39997825a8f6eef7d38350bdc",
+  "administrative_failure": {
+    "command": "initial version/hash script",
+    "exit": 1,
+    "tool_wall_s": 2.4733e-05,
+    "reason": "handoff fulladapter-source-v2.patch filename absent; no source SHA mismatch; scoped lookup found adapter-source-v2.patch, accepted only by exact bound SHA"
+  },
+  "before": {
+    "changed2_SHA": {
+      "crates/quoridor-runner/src/runtime.rs": "8a54d4c585977c2e2fd0bbe4366df8f2878e72cec5f259519ccc826bed727938",
+      "crates/quoridor-runner/src/sigma_clock.rs": "69761dfb475541e5f9d29ee350609dcf18dac469bb3f33100fcd7f03323d8a8a"
+    },
+    "other7_packet_bindings_identical_reused": true,
+    "R1_patch_SHA": "f15e4dc05a28a10589df038e9c637f8b8b68dc5a134f97cc83a35e051804b987",
+    "full_patch_SHA": "29c80a3cd793e05d076357e7f56ba6f0147ea432ea9e3954fc0c90fe9c5f7448",
+    "full_patch_actual_path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/adapter-source-v2.patch",
+    "wall_s": 0.0002848010044544935
+  },
+  "fresh_physics": {
+    "science": [],
+    "compiler": [],
+    "own_science_jobs": 0,
+    "foreign_interrupt": false
+  },
+  "independent_checks": {
+    "archive_SHA": "1dac368f41cec9d3fd5b232b7c2d8f3a7c81d56ef0b23a992b90c29a7e3849ac",
+    "archive_old2_SHA_matches_v1": true,
+    "in_memory_unified_patch_matches_current2": {
+      "crates/quoridor-runner/src/runtime.rs": "8a54d4c585977c2e2fd0bbe4366df8f2878e72cec5f259519ccc826bed727938",
+      "crates/quoridor-runner/src/sigma_clock.rs": "69761dfb475541e5f9d29ee350609dcf18dac469bb3f33100fcd7f03323d8a8a"
+    },
+    "protocol_science_unchanged": true,
+    "protocol_modified_keys": [
+      "deadline_policy"
+    ],
+    "protocol_added_keys": [
+      "per_call_reply_counters",
+      "prior_protocol_preserved_SHA256",
+      "source_stop_packet"
+    ],
+    "protocol_v2_SHA": "4571757de0f50f8bd1976cde69fe0ec01e7b7b197063645fd7ab42e915a6bd8b",
+    "wall_s": 0.002258618944324553,
+    "RSS_KiB": 16648,
+    "source_math_runtime_executed": false
+  },
+  "after": {
+    "changed2_SHA": {
+      "crates/quoridor-runner/src/runtime.rs": "8a54d4c585977c2e2fd0bbe4366df8f2878e72cec5f259519ccc826bed727938",
+      "crates/quoridor-runner/src/sigma_clock.rs": "69761dfb475541e5f9d29ee350609dcf18dac469bb3f33100fcd7f03323d8a8a"
+    },
+    "packet_patch_protocol_match": true,
+    "other7_prior_proof_reused": true,
+    "wall_s": 0.0002793039893731475
+  },
+  "result": {
+    "R1": "RESOLVED_SOURCE_STATIC",
+    "C1": "RESOLVED_SOURCE_STATIC",
+    "blockers": [],
+    "ordinary": [
+      {
+        "id": "C2",
+        "priority": "nonblocking label clarity",
+        "location": "sigma_clock.rs:123-132; runtime.rs:1913,1137",
+        "input": "queued request finish_pending terminal Err(wall_limit/deadline/memory_limit)",
+        "actual": "Call.stop=engine_error because only cancelled/paused get controlled stop; MoveObservation.engine_error=None and correct guard reason/failure remain",
+        "expected": "give known control reasons a control stop label, or explicitly document stop as generic callback-error stop; avoid interpreting this field alone as model failure",
+        "scope": "no accepted state or original failure fact lost; no runtime failure observed"
+      }
+    ]
+  },
+  "reader_STOP_UTC": "2026-10-07T20:11:13.860760+00:00",
+  "owned_children": 0,
+  "remaining": [],
+  "source_main_Git_index_writes": 0,
+  "model_runtime_compiler_native_NN0_calls": 0,
+  "cost_limits": {
+    "initial_Beads_wall_s": 2.798429102054797,
+    "other_read_command_times": "actual tool trace",
+    "analysis_wall": "UNKNOWN unmetered",
+    "fixture_status": "UNEXECUTED; new prepared tests inspected only",
+    "old_control_error_fees_UNKNOWN": "retained; no reset/refund"
+  },
+  "notifications": [
+    {
+      "thread": "01a11062-b120-73a1-8aa3-fe2cb922c7c0",
+      "issue": "quoridor-4lc.331",
+      "wall_s": 4.405121947987936,
+      "exit": 0,
+      "directwait": true,
+      "stdout": "{\n  \"method\": \"turn/steer\",\n  \"thread_id\": \"01a11062-b120-73a1-8aa3-fe2cb922c7c0\",\n  \"turn_id\": \"01a117f3-6616-7211-beb2-4735bbc00672\",\n  \"accepted\": true\n}\n",
+      "stderr": ""
+    },
+    {
+      "thread": "01a1153d-7900-7740-837f-c300ca54764f",
+      "issue": "quoridor-4lc.324",
+      "wall_s": 4.244625830906443,
+      "exit": 0,
+      "directwait": true,
+      "stdout": "{\n  \"method\": \"turn/start\",\n  \"thread_id\": \"01a1153d-7900-7740-837f-c300ca54764f\",\n  \"turn_id\": \"01a117fe-5b48-7e12-8efe-0a6a1c6940e2\",\n  \"accepted\": true\n}\n",
+      "stderr": ""
+    }
+  ],
+  "administrative_children_STOP_UTC": "2026-10-07T20:11:47.944393+00:00",
+  "all_owned_child_directwait": true,
+  "review_MD_SHA": "6d01b61ca9740b30a91943c652f8ce71b58f765c0677eaae8fbc626463c50444"
+}

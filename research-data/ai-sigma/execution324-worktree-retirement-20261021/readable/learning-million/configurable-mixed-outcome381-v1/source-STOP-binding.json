@@ -1,0 +1,177 @@
+{
+  "issue": "quoridor-4lc.381.1",
+  "status": "STOPPED_CONSUMER_SOURCE_AND_NN0_SOFTWARE_SCOPE_READY",
+  "scientific_entry": false,
+  "owner_thread": "01a1100f-6d45-78e0-8a87-84503ff0fbf6",
+  "cwd": "/workspaces/quoridor/.worktree/learning-million",
+  "context": {
+    "actual_turn": "01a1361f-f5f4-70f2-9257-a12bcbc18045",
+    "at": "2026-10-13T16:37:06.977Z",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "sandbox": "danger-full-access",
+    "approval_policy": "never"
+  },
+  "patch": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/configurable-mixed-outcome381-v1/learner.patch",
+    "sha256": "bcdb8f2f839501c60a2a4e8cd0bba8ed2d0a2b34791342ae596578f56c88d9c2",
+    "bytes": 150732,
+    "mode": "0644"
+  },
+  "report": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/configurable-mixed-outcome381-v1/report.md",
+    "sha256": "9e705b7d58f0c68efda85d97645140f07f2e41b0ff9d95692501117c76f80942",
+    "bytes": 5060,
+    "mode": "0644"
+  },
+  "interface": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/configurable-mixed-outcome381-v1/interface-draft.json",
+    "sha256": "18f3d06501a5934f006ba177466fee8c128b041421d20bc312c4248cad0ee388",
+    "bytes": 3513,
+    "mode": "0644"
+  },
+  "proposed_unselected_example": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/configurable-mixed-outcome381-v1/example-settings.UNSELECTED.json",
+    "sha256": "98883140593a5736d7195062549118df54533f450130fde9966f775a7ee36d08",
+    "bytes": 4464,
+    "mode": "0644"
+  },
+  "proof": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/configurable-mixed-outcome381-v1/proof/unchanged-ast.json",
+    "sha256": "191a1d335493fd4f80fd22fa54300a7f2d90908389181542e499ba1e2501ff3d",
+    "bytes": 5148,
+    "mode": "0644"
+  },
+  "current_Main_before_map": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/configurable-mixed-outcome381-v1/proof/final-current-before-map.json",
+    "sha256": "a39da06fdbcfde6d9d1fa92bfd955f8930f4b8c16f5c1da21becf8fa0bb288ef",
+    "bytes": 1246,
+    "mode": "0644"
+  },
+  "original_before_gzip": [
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/configurable-mixed-outcome381-v1/before/common.py.gz",
+      "sha256": "44412a7554145bead035acd10002d2cbe304e55e5903c987b29bcbb372bbe1bb",
+      "bytes": 8868,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/configurable-mixed-outcome381-v1/before/public_replay.py.gz",
+      "sha256": "71922376921fa8e1edef8be1e75065696730103309ce1ffc881b2d6c9935c8df",
+      "bytes": 6912,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/configurable-mixed-outcome381-v1/before/sampling.py.gz",
+      "sha256": "e2c8e05f2c946cc4569d76184ab46d26010cfbded195e82acd7c5cda093bf070",
+      "bytes": 2433,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/configurable-mixed-outcome381-v1/before/test_public_replay.py.gz",
+      "sha256": "0caeed67ca88a0a2578809e94d46f1fc415434580a137037c1b8f7640b3fae4a",
+      "bytes": 6450,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/configurable-mixed-outcome381-v1/before/train.py.gz",
+      "sha256": "56f3f23b9afa32cc9be5c5034edaf3e9175f540ffef061a39e4cabe77c25249f",
+      "bytes": 22618,
+      "mode": "0644"
+    }
+  ],
+  "source_postimages": [
+    {
+      "target": "/workspaces/quoridor/python/quoridor_training/common.py",
+      "derivative": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/configurable-mixed-outcome381-v1/source/common.py",
+        "sha256": "c78c341545c1110a92656577c31a4863eec67814fb282ebfd2767ce9dad30677",
+        "bytes": 33467,
+        "mode": "0644"
+      }
+    },
+    {
+      "target": "/workspaces/quoridor/python/quoridor_training/train.py",
+      "derivative": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/configurable-mixed-outcome381-v1/source/train.py",
+        "sha256": "0284c2b029ecbd872e8f5cbb4be1e9d66b848e7be29582befbb2be61e7db797b",
+        "bytes": 92443,
+        "mode": "0644"
+      }
+    },
+    {
+      "target": "/workspaces/quoridor/python/quoridor_training/sampling.py",
+      "derivative": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/configurable-mixed-outcome381-v1/source/sampling.py",
+        "sha256": "6579f09ea8f71cba75aaecc8141828863e4b9afe6b5f76d14ab8904528cb1dc3",
+        "bytes": 8872,
+        "mode": "0644"
+      }
+    },
+    {
+      "target": "/workspaces/quoridor/python/quoridor_training/public_replay.py",
+      "derivative": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/configurable-mixed-outcome381-v1/source/public_replay.py",
+        "sha256": "ce7f49351f872262611d6f1a2bcbd3fd9165a2a87e97515849f73f485eea44c5",
+        "bytes": 24449,
+        "mode": "0644"
+      }
+    },
+    {
+      "target": "/workspaces/quoridor/python/quoridor_training/test_public_replay.py",
+      "derivative": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/configurable-mixed-outcome381-v1/source/test_public_replay.py",
+        "sha256": "305d291f573142f5730f5af10eec209e9631c460eb8e9ae9e019d056dc21d0f0",
+        "bytes": 15309,
+        "mode": "0644"
+      }
+    },
+    {
+      "target": "/workspaces/quoridor/python/quoridor_training/test_mixed_entry.py",
+      "derivative": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/configurable-mixed-outcome381-v1/source/test_mixed_entry.py",
+        "sha256": "8229e16a8e08add23be0363d67badc4217a3a5b1e02b1d2f5b139df431598f58",
+        "bytes": 13381,
+        "mode": "0644"
+      }
+    },
+    {
+      "target": "/workspaces/quoridor/python/quoridor_training/test_mixed_lineage.py",
+      "derivative": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/configurable-mixed-outcome381-v1/source/test_mixed_lineage.py",
+        "sha256": "d776d9d8f5485d83009133aa799669d983bc5f73ffa733ad8f135c1bf886b519",
+        "bytes": 5400,
+        "mode": "0644"
+      }
+    },
+    {
+      "target": "/workspaces/quoridor/python/quoridor_training/test_mixed_reflection.py",
+      "derivative": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/configurable-mixed-outcome381-v1/source/test_mixed_reflection.py",
+        "sha256": "59fd37ec502728f8d9c4dfa00c6a9fa9ce8fcfe9c930c96193266e184ab0c778",
+        "bytes": 2494,
+        "mode": "0644"
+      }
+    }
+  ],
+  "test_receipts": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/configurable-mixed-outcome381-v1/proof/test-receipts.json",
+    "sha256": "743f2c40dcd24fdf24340bbce3d96aed69e0fe571335603a86ef4a7a19265b6f",
+    "bytes": 5545,
+    "mode": "0644"
+  },
+  "actual_new_NN0_definitions": 11,
+  "actual_model_forwards": 0,
+  "actual_fit_updates": 0,
+  "native_or_GPU_kernels": "UNRUN",
+  "produced_outcome_cache_interop": "UNRUN;381.2 publication/loader belongs producer",
+  "source_writer_STOP": "2026-10-13T16:59:16.618323+00:00",
+  "owned_readers_children_jobs_TMP_remaining": [],
+  "lease_or_idle_hardware_reservation": null,
+  "unselected_human_choices": [
+    "T-family cap64 versus null/allrows",
+    "public-V nonregression selector versus new-V-only",
+    "bulk whole capacity/partial-stop/missing-family policy"
+  ],
+  "next_owner": "Root324 sole Main/Git/Cargo/current caller integration; no scientific entry from readiness"
+}

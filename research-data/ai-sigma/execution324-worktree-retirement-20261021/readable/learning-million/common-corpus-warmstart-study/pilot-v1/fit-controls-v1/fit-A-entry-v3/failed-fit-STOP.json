@@ -1,0 +1,131 @@
+{
+  "issue": "quoridor-4lc.362.1",
+  "outcome": "FAILED original A-entry-v3, no retry/source edit",
+  "authoritative_manifest": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v1/fit-A-entry-v3/operation-v3/manifest.json",
+    "sha256": "bb40f55a0e5a930544bf26ee3ecfc895226fccf50f3591dc9d995a5f3adb4948",
+    "bytes": 28495,
+    "mode": "0644"
+  },
+  "authoritative_finished_at": "2026-10-11T13:06:49.281664+00:00",
+  "actual_controller_START": "2026-10-11T13:04:44.890119+00:00",
+  "actual_controller_STOP": "2026-10-11T13:04:47.839961+00:00",
+  "controller_wall_seconds_separate": 2.9503114009276032,
+  "original_command_wall_seconds": 2.1457970540504903,
+  "experimental_consumed_seconds_once": 138.60220936406404,
+  "experimental_remaining_seconds": 5261.397790635936,
+  "original_job_id": "9520b3e4-eeef-4acc-9275-c917de6f30ab",
+  "original_result": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v1/fit-A-entry-v3/runtime-v3/result.json",
+    "sha256": "53e21b495e75d9541ce425a405e52fbbbbafc70c17599a825f0a53a38d3284f3",
+    "bytes": 506,
+    "mode": "0600"
+  },
+  "runtime_config": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v1/fit-A-entry-v3/runtime-v3/config.json",
+    "sha256": "0b8efcaf2dce2e4e65350c26d5afa4c619e7315208d7db7bda3834551249650c",
+    "bytes": 938,
+    "mode": "0600"
+  },
+  "original_intent": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v1/fit-A-entry-v3/intent.json",
+    "sha256": "14755eda68e39fc820054e6d9d2772d99df27e5bd3f201ac9c092596297a3373",
+    "bytes": 12820,
+    "mode": "0644"
+  },
+  "original_Experiment": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v1/fit-A-entry-v3/experiment.json",
+    "sha256": "c6677a3b387386e45bb311769600c6b95953bfc54948867670cb2c3543129cd6",
+    "bytes": 11324,
+    "mode": "0644"
+  },
+  "original_candidate": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v1/fit-A-entry-v3/operation-v3/candidate.json",
+    "sha256": "fd56a54325c708d30f0a23532b9c7184b46c0953dd5c49569895f31dadd441f5",
+    "bytes": 19353,
+    "mode": "0644"
+  },
+  "full_child_log": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v1/fit-A-entry-v3/operation-v3/run.full.log",
+    "sha256": "7a731165bfdbc76f19fb7e9b3eeb55d387bddbd42b6f3ba7deaa0a444ccb6a70",
+    "bytes": 1797,
+    "mode": "0644"
+  },
+  "persisted_process": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v1/fit-A-entry-v3/operation-v3/run.process.json",
+    "sha256": "beff465a6dfd45a37e0970cb3603bd2fe7f2fd509e029b1935e0a095205241fc",
+    "bytes": 2963,
+    "mode": "0600"
+  },
+  "actual_current_smallest_condition": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v1/fit-A-entry-v3/smallest-condition.json",
+    "sha256": "fca510546cb9bada0dbf96adcd70f8343e05fc07cc9fd744b64c3749b30f0492",
+    "bytes": 7437,
+    "mode": "0644"
+  },
+  "condition": "common.py:713 requires history == sorted(history). Original actual ply27/source-row23 history is unique/well-shaped and its SHA EXACTLY matches original teacher history_key, but original order is not Python lexical order. Need narrow producer/source-domain confirmation and Root repair scope; no arbitrary history sorting or source/data rewrite.",
+  "A_updates": 0,
+  "B": "NOT_RUN",
+  "new_fit_output_exists": false,
+  "original_primary_secondary_data_errors": "Retained verbatim in authoritative manifest; data.errors24, files[]; no promotion",
+  "facts_distinct": {
+    "authoritative_cleanup_complete": false,
+    "outer_result_cleanup_complete": true,
+    "guardian_return": null,
+    "missing_returned_cleanup_mask": "UNKNOWN",
+    "persisted_direct_child_reaped": true,
+    "persisted_process_cleanup_complete": true,
+    "persisted_handles_cleanup_complete": true,
+    "persisted_mask": "pending",
+    "persisted_final_record": "attempted",
+    "exact_worker_and_fit_child_UTC_STOP": "UNKNOWN"
+  },
+  "named_process_observations": [
+    {
+      "role": "supervisor",
+      "identity": {
+        "pid": 628878,
+        "start_ticks": "97715179",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "same_identity_present": false
+    },
+    {
+      "role": "lifecycle_worker",
+      "identity": {
+        "pid": 628913,
+        "start_ticks": "97715369",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "same_identity_present": false
+    },
+    {
+      "role": "fit_child",
+      "identity": {
+        "pid": 628946,
+        "start_ticks": "97715430",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "same_identity_present": false
+    }
+  ],
+  "source_caller_after_MATCH": true,
+  "canonical_data_cache": "Unchanged refs/hash checks; retained through original selected consumers",
+  "empty_TMP_directories_removed_after_exact_absence": [
+    "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-TMP-v1/torchinductor_vscode"
+  ],
+  "removed_TMP_floor_stays_held": true,
+  "owned_pilot_allocated_B": 1376256,
+  "old_external_bytecode_floor_B": 77824,
+  "contained_admin_forward_B": 32768,
+  "controls_cap_B": 33554432,
+  "new_grant_or_refund": false,
+  "actual_source_data_reader_STOP": "2026-10-11T13:08:45.963130+00:00",
+  "canonical_lease": "released",
+  "owned_readers": [],
+  "owned_children": [],
+  "owned_jobs": [],
+  "owned_TMP": [],
+  "reservation": "NONE",
+  "next": "Root ordinary same-source correctness decision only; no B or fresh A entry until actual correction/adoption. Original settings/data/corpus/model/image unchanged."
+}

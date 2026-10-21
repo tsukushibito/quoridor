@@ -1,0 +1,315 @@
+{
+  "schema": "quoridor.research.completion.v1",
+  "kind": "run",
+  "status": "FAILED",
+  "intent": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v1/fit-A-entry-v2/intent.json",
+    "sha256": "c4c2c96db26784263ad1add092f18424ee11a78d2364e250e63de81fd2d8183b",
+    "bytes": 12820,
+    "mode": "0644"
+  },
+  "started_at": "2026-10-11T12:42:14.013510+00:00",
+  "checks": [
+    {
+      "name": "run",
+      "role": "run",
+      "argv": [
+        "/home/vscode/.cache/inference/python/cpython-3.14.7-linux-x86_64-gnu/bin/python3.14",
+        "-B",
+        "-m",
+        "quoridor_training.train",
+        "train",
+        "--cache",
+        "/workspaces/quoridor/.worktree/assets/data/common-corpus-warmstart-study/pilot-v1/cache",
+        "--output",
+        "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2",
+        "--config",
+        "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A.json",
+        "--input-binding",
+        "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v1/fit-A-entry-v2/input-binding.json"
+      ],
+      "status": "FAILED",
+      "guardian_return": null,
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v1/fit-A-entry-v2/operation-v2/run.full.log",
+        "sha256": "d2cf8169e8b0b630ca732b53bc833d404bf7c0869e120f50ce532426f4fd53de",
+        "bytes": 1911,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v1/fit-A-entry-v2/operation-v2/run.process.json",
+        "sha256": "cf8c2c552c852940d25d1c82688721d15eaa32801af6da0d3c7b4bea62427e2f",
+        "bytes": 2962,
+        "mode": "0600"
+      },
+      "capture_complete": false,
+      "secondary": [],
+      "primary": {
+        "type": "CycleStopped",
+        "message": "cycle child failed: ['/home/vscode/.cache/inference/python/cpython-3.14.7-linux-x86_64-gnu/bin/python3.14', '-B', '-m', 'quoridor_training.train', 'train', '--cache', '/workspaces/quoridor/.worktree/assets/data/common-corpus-warmstart-study/pilot-v1/cache', '--output', '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2', '--config', '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A.json', '--input-binding', '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v1/fit-A-entry-v2/input-binding.json']: 1",
+        "notes": []
+      }
+    }
+  ],
+  "primary": {
+    "type": "CycleStopped",
+    "message": "cycle child failed: ['/home/vscode/.cache/inference/python/cpython-3.14.7-linux-x86_64-gnu/bin/python3.14', '-B', '-m', 'quoridor_training.train', 'train', '--cache', '/workspaces/quoridor/.worktree/assets/data/common-corpus-warmstart-study/pilot-v1/cache', '--output', '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2', '--config', '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A.json', '--input-binding', '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v1/fit-A-entry-v2/input-binding.json']: 1",
+    "notes": [
+      "data finalization secondary: durable data finalization incomplete: [{\"stage\": \"freeze_json\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/freeze.json'\", \"notes\": []}, {\"stage\": \"config_json\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/config.json'\", \"notes\": []}, {\"stage\": \"scale_json\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/scale.json'\", \"notes\": []}, {\"stage\": \"data_json\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/data.json'\", \"notes\": []}, {\"stage\": \"cache-binding_json_gz\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/cache-binding.json.gz'\", \"notes\": []}, {\"stage\": \"initial_pt\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/initial.pt'\", \"notes\": []}, {\"stage\": \"best_pt\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/best.pt'\", \"notes\": []}, {\"stage\": \"initial-model_manifest_json\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/initial-model/manifest.json'\", \"notes\": []}, {\"stage\": \"initial-model_weights_f32\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/initial-model/weights.f32'\", \"notes\": []}, {\"stage\": \"initial-model_training-target_json\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/initial-model/training-target.json'\", \"notes\": []}, {\"stage\": \"best-model_manifest_json\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/best-model/manifest.json'\", \"notes\": []}, {\"stage\": \"best-model_weights_f32\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/best-model/weights.f32'\", \"notes\": []}, {\"stage\": \"best-model_training-target_json\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/best-model/training-target.json'\", \"notes\": []}, {\"stage\": \"last_pt\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/last.pt'\", \"notes\": []}, {\"stage\": \"last-model_manifest_json\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/last-model/manifest.json'\", \"notes\": []}, {\"stage\": \"last-model_weights_f32\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/last-model/weights.f32'\", \"notes\": []}, {\"stage\": \"last-model_training-target_json\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/last-model/training-target.json'\", \"notes\": []}, {\"stage\": \"warm-start_json\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/warm-start.json'\", \"notes\": []}, {\"stage\": \"z-curves_svg\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/z-curves.svg'\", \"notes\": []}, {\"stage\": \"completed_root_raw-curves_svg\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/completed_root_raw-curves.svg'\", \"notes\": []}, {\"stage\": \"curves_csv\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/curves.csv'\", \"notes\": []}, {\"stage\": \"observations_jsonl_gz\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/observations.jsonl.gz'\", \"notes\": []}, {\"stage\": \"run_status\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/run-status.json'\", \"notes\": []}, {\"stage\": \"common_pilot_data\", \"type\": \"KeyError\", \"message\": \"'run_status'\", \"notes\": []}]"
+    ]
+  },
+  "secondary": [
+    {
+      "stage": "candidate",
+      "facts": {
+        "type": "CycleStopped",
+        "message": "cycle child failed: ['/home/vscode/.cache/inference/python/cpython-3.14.7-linux-x86_64-gnu/bin/python3.14', '-B', '-m', 'quoridor_training.train', 'train', '--cache', '/workspaces/quoridor/.worktree/assets/data/common-corpus-warmstart-study/pilot-v1/cache', '--output', '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2', '--config', '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A.json', '--input-binding', '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v1/fit-A-entry-v2/input-binding.json']: 1",
+        "notes": [
+          "data finalization secondary: durable data finalization incomplete: [{\"stage\": \"freeze_json\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/freeze.json'\", \"notes\": []}, {\"stage\": \"config_json\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/config.json'\", \"notes\": []}, {\"stage\": \"scale_json\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/scale.json'\", \"notes\": []}, {\"stage\": \"data_json\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/data.json'\", \"notes\": []}, {\"stage\": \"cache-binding_json_gz\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/cache-binding.json.gz'\", \"notes\": []}, {\"stage\": \"initial_pt\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/initial.pt'\", \"notes\": []}, {\"stage\": \"best_pt\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/best.pt'\", \"notes\": []}, {\"stage\": \"initial-model_manifest_json\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/initial-model/manifest.json'\", \"notes\": []}, {\"stage\": \"initial-model_weights_f32\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/initial-model/weights.f32'\", \"notes\": []}, {\"stage\": \"initial-model_training-target_json\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/initial-model/training-target.json'\", \"notes\": []}, {\"stage\": \"best-model_manifest_json\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/best-model/manifest.json'\", \"notes\": []}, {\"stage\": \"best-model_weights_f32\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/best-model/weights.f32'\", \"notes\": []}, {\"stage\": \"best-model_training-target_json\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/best-model/training-target.json'\", \"notes\": []}, {\"stage\": \"last_pt\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/last.pt'\", \"notes\": []}, {\"stage\": \"last-model_manifest_json\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/last-model/manifest.json'\", \"notes\": []}, {\"stage\": \"last-model_weights_f32\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/last-model/weights.f32'\", \"notes\": []}, {\"stage\": \"last-model_training-target_json\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/last-model/training-target.json'\", \"notes\": []}, {\"stage\": \"warm-start_json\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/warm-start.json'\", \"notes\": []}, {\"stage\": \"z-curves_svg\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/z-curves.svg'\", \"notes\": []}, {\"stage\": \"completed_root_raw-curves_svg\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/completed_root_raw-curves.svg'\", \"notes\": []}, {\"stage\": \"curves_csv\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/curves.csv'\", \"notes\": []}, {\"stage\": \"observations_jsonl_gz\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/observations.jsonl.gz'\", \"notes\": []}, {\"stage\": \"run_status\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/run-status.json'\", \"notes\": []}, {\"stage\": \"common_pilot_data\", \"type\": \"KeyError\", \"message\": \"'run_status'\", \"notes\": []}]"
+        ]
+      }
+    },
+    {
+      "stage": "outer_job",
+      "type": "Refused",
+      "message": "outer job unsuccessful or not cleaned",
+      "notes": [],
+      "available_result": {
+        "job_id": "3aeed42f-d786-40db-842b-4d830d4fc324",
+        "outcome": "failed",
+        "error": null,
+        "exit_code": 1,
+        "finished_at": "2026-10-11T12:42:16.797624+00:00",
+        "wall_seconds": 2.935566524975002,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+        "cleanup_complete": true,
+        "cleanup_errors": [],
+        "log_bytes_seen": 25922,
+        "log_bytes_retained": 25922
+      }
+    },
+    {
+      "stage": "command_return",
+      "command": "run",
+      "type": "Refused",
+      "message": "returned command facts unavailable",
+      "notes": []
+    },
+    {
+      "stage": "data_finalization",
+      "type": "Refused",
+      "message": "data finalization missing/failed",
+      "notes": []
+    }
+  ],
+  "cleanup_complete": false,
+  "remaining": [],
+  "owed_finalizers": [],
+  "originating_job": {
+    "runtime": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v1/fit-A-entry-v2/runtime-v2",
+    "job_id": "3aeed42f-d786-40db-842b-4d830d4fc324",
+    "config": {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v1/fit-A-entry-v2/runtime-v2/config.json",
+      "sha256": "d651b7758252cbe3ab72b27ecc79b7decfe28a9322e6cb99254323127e48a417",
+      "bytes": 938,
+      "mode": "0600"
+    },
+    "config_sha256": "2647fa335d81e1aada6995af595c8563365260e29644f9c81fc900ac0ae72f3f",
+    "supervisor": {
+      "pid": 611644,
+      "start_ticks": "97580129",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child": {
+      "pid": 611683,
+      "start_ticks": "97580284",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    }
+  },
+  "experiment": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v1/fit-A-entry-v2/experiment.json",
+    "sha256": "850fa463408bd179cb44c849c013d82b0b77a16db9bd24a32825d4018265e58b",
+    "bytes": 10151,
+    "mode": "0644"
+  },
+  "build_manifest": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/build-v4/operation-v4/manifest.json",
+    "sha256": "4ce963dfea6af76885c0bd911e503e6c9c28a0b99bbd1e1b113facc6443b334f",
+    "bytes": 85626,
+    "mode": "0644"
+  },
+  "planned_slots": 0,
+  "data": {
+    "status": "FAILED",
+    "files": [],
+    "errors": [
+      {
+        "stage": "freeze_json",
+        "type": "FileNotFoundError",
+        "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/freeze.json'",
+        "notes": []
+      },
+      {
+        "stage": "config_json",
+        "type": "FileNotFoundError",
+        "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/config.json'",
+        "notes": []
+      },
+      {
+        "stage": "scale_json",
+        "type": "FileNotFoundError",
+        "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/scale.json'",
+        "notes": []
+      },
+      {
+        "stage": "data_json",
+        "type": "FileNotFoundError",
+        "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/data.json'",
+        "notes": []
+      },
+      {
+        "stage": "cache-binding_json_gz",
+        "type": "FileNotFoundError",
+        "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/cache-binding.json.gz'",
+        "notes": []
+      },
+      {
+        "stage": "initial_pt",
+        "type": "FileNotFoundError",
+        "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/initial.pt'",
+        "notes": []
+      },
+      {
+        "stage": "best_pt",
+        "type": "FileNotFoundError",
+        "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/best.pt'",
+        "notes": []
+      },
+      {
+        "stage": "initial-model_manifest_json",
+        "type": "FileNotFoundError",
+        "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/initial-model/manifest.json'",
+        "notes": []
+      },
+      {
+        "stage": "initial-model_weights_f32",
+        "type": "FileNotFoundError",
+        "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/initial-model/weights.f32'",
+        "notes": []
+      },
+      {
+        "stage": "initial-model_training-target_json",
+        "type": "FileNotFoundError",
+        "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/initial-model/training-target.json'",
+        "notes": []
+      },
+      {
+        "stage": "best-model_manifest_json",
+        "type": "FileNotFoundError",
+        "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/best-model/manifest.json'",
+        "notes": []
+      },
+      {
+        "stage": "best-model_weights_f32",
+        "type": "FileNotFoundError",
+        "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/best-model/weights.f32'",
+        "notes": []
+      },
+      {
+        "stage": "best-model_training-target_json",
+        "type": "FileNotFoundError",
+        "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/best-model/training-target.json'",
+        "notes": []
+      },
+      {
+        "stage": "last_pt",
+        "type": "FileNotFoundError",
+        "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/last.pt'",
+        "notes": []
+      },
+      {
+        "stage": "last-model_manifest_json",
+        "type": "FileNotFoundError",
+        "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/last-model/manifest.json'",
+        "notes": []
+      },
+      {
+        "stage": "last-model_weights_f32",
+        "type": "FileNotFoundError",
+        "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/last-model/weights.f32'",
+        "notes": []
+      },
+      {
+        "stage": "last-model_training-target_json",
+        "type": "FileNotFoundError",
+        "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/last-model/training-target.json'",
+        "notes": []
+      },
+      {
+        "stage": "warm-start_json",
+        "type": "FileNotFoundError",
+        "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/warm-start.json'",
+        "notes": []
+      },
+      {
+        "stage": "z-curves_svg",
+        "type": "FileNotFoundError",
+        "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/z-curves.svg'",
+        "notes": []
+      },
+      {
+        "stage": "completed_root_raw-curves_svg",
+        "type": "FileNotFoundError",
+        "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/completed_root_raw-curves.svg'",
+        "notes": []
+      },
+      {
+        "stage": "curves_csv",
+        "type": "FileNotFoundError",
+        "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/curves.csv'",
+        "notes": []
+      },
+      {
+        "stage": "observations_jsonl_gz",
+        "type": "FileNotFoundError",
+        "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/observations.jsonl.gz'",
+        "notes": []
+      },
+      {
+        "stage": "run_status",
+        "type": "FileNotFoundError",
+        "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-A-output-v2/run-status.json'",
+        "notes": []
+      },
+      {
+        "stage": "common_pilot_data",
+        "type": "KeyError",
+        "message": "'run_status'",
+        "notes": []
+      }
+    ],
+    "planned_slots": 0,
+    "observed_local_games": [],
+    "missing_local_games": [],
+    "batch": null,
+    "global_campaign_complete": false
+  },
+  "finished_at": "2026-10-11T12:42:16.609047+00:00",
+  "process_cleanup_complete": false,
+  "outer_job_state": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v1/fit-A-entry-v2/runtime-v2/state.json",
+    "sha256": "ab7df29dfe2ffd51c78bd20612cf01075107fd6f350db5ea9b4a5e19d159150f",
+    "bytes": 704,
+    "mode": "0600"
+  },
+  "outer_job_result": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/fit-controls-v1/fit-A-entry-v2/runtime-v2/result.json",
+    "sha256": "7ce2cf0785ea5c3a6db4f888339de121ea268a6e8226ee1193956b028c8541f1",
+    "bytes": 505,
+    "mode": "0600"
+  },
+  "authoritative_finished_at": "2026-10-11T12:44:25.168539+00:00"
+}

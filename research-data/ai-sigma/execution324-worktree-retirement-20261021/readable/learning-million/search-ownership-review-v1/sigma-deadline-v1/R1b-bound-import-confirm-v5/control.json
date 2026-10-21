@@ -1,0 +1,225 @@
+{
+  "issue": "quoridor-4lc.331.1",
+  "permissions": [
+    "danger-full-access",
+    "never",
+    "effective developer verified before ordinary commands"
+  ],
+  "cwd": "/workspaces/quoridor/.worktree/learning-million",
+  "model_effort_preserved": true,
+  "CPU": [
+    3
+  ],
+  "RAMfamily_B": 536870912,
+  "cap_B": 32768,
+  "prewrite_forecast_B": 28672,
+  "old_bounds_raw_failures_held": true,
+  "commands": [
+    {
+      "op": [
+        "ready",
+        "--json"
+      ],
+      "wall_s": 0.7993253039894626,
+      "exit": 0,
+      "directwait": true,
+      "RSS_KiB": 268044,
+      "scalar": [
+        {
+          "id": "quoridor-4lc.331.1",
+          "status": "open",
+          "assignee": "codex:01a1103c-fbe0-7412-a406-fbee697a1392"
+        }
+      ],
+      "stderr": ""
+    },
+    {
+      "op": [
+        "show",
+        "quoridor-4lc.331.1",
+        "--json"
+      ],
+      "wall_s": 0.9751485099550337,
+      "exit": 0,
+      "directwait": true,
+      "RSS_KiB": 281400,
+      "scalar": [
+        {
+          "id": "quoridor-4lc.331.1",
+          "status": "open",
+          "assignee": "codex:01a1103c-fbe0-7412-a406-fbee697a1392"
+        }
+      ],
+      "stderr": ""
+    },
+    {
+      "op": [
+        "update",
+        "quoridor-4lc.331.1",
+        "--claim",
+        "--json"
+      ],
+      "wall_s": 0.9476000500144437,
+      "exit": 0,
+      "directwait": true,
+      "RSS_KiB": 281400,
+      "scalar": [
+        {
+          "id": "quoridor-4lc.331.1",
+          "status": "in_progress",
+          "assignee": "codex:01a1103c-fbe0-7412-a406-fbee697a1392"
+        }
+      ],
+      "stderr": ""
+    },
+    {
+      "op": [
+        "update",
+        "quoridor-4lc.331.1",
+        "--append-notes",
+        "R1b RESOLVED source-static/focusedNN0: membership before IO, one raw read SHA-before-parse, all-record validation before any retain. Focused4 PASS + independent actualhelper3 PASS, no old suites/live entry. /workspaces/quoridor/.worktree/learning-million/.artifacts/search-ownership-review-v1/sigma-deadline-v1/R1b-bound-import-confirm-v5/review.md + control.json; readerSTOP 2026-10-07T21:37:17.444674+00:00 children0/cleanup[]. Current prepared false/listempty, no job/compile/model. Parent331 incomplete; heavy requires own current predicates."
+      ],
+      "wall_s": 1.6172684779157862,
+      "exit": 0,
+      "directwait": true,
+      "stdout": "\u2713 Updated issue: quoridor-4lc.331.1 \u2014 Sigma deadline / completed simulation / caller adapter related source review\n\n",
+      "stderr": ""
+    },
+    {
+      "op": [
+        "close",
+        "quoridor-4lc.331.1",
+        "--reason",
+        "R1b related bound-import source/NN0 confirmation complete: blockers0 ordinary0; /workspaces/quoridor/.worktree/learning-million/.artifacts/search-ownership-review-v1/sigma-deadline-v1/R1b-bound-import-confirm-v5/review.md"
+      ],
+      "wall_s": 1.4604393920162693,
+      "exit": 0,
+      "directwait": true,
+      "stdout": "\u2713 Closed quoridor-4lc.331.1 \u2014 Sigma deadline / completed simulation / caller adapter related source review: R1b related bound-import source/NN0 confirmation complete: blockers0 ordinary0; /workspaces/quoridor/.worktree/learning-million/.artifacts/search-ownership-review-v1/sigma-deadline-v1/R1b-bound-import-confirm-v5/review.md\n",
+      "stderr": ""
+    },
+    {
+      "op": [
+        "backup",
+        "sync"
+      ],
+      "wall_s": 1.3711778889410198,
+      "exit": 0,
+      "directwait": true,
+      "stdout": "\nBackup synced in 730ms\n",
+      "stderr": ""
+    }
+  ],
+  "packet_SHA": "40ae980fdf3d357d997e231f4db39cab9a039cf7c5a4e50c2157909b14f05554",
+  "before": {
+    "changed2_SHA": {
+      "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/software-recovery-v2/worker.py": "04338e86cb5e6566c3bb62f1aae6405acc8c95224cf5cf8f1024107a6b94132c",
+      "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/software-recovery-v2/test_bound_charge_import.py": "36bcd2f7e4ef6c6840cc2eb49aff222652c9796f9a1644acf8cea3e122057dd5"
+    },
+    "prepared_evidence_SHA_match": true,
+    "wall_s": 0.00010259600821882486
+  },
+  "fresh_physics": {
+    "named_science_compiler": [],
+    "own_jobs": 0,
+    "foreign_interrupt": false
+  },
+  "NN0": {
+    "focused_cases": 4,
+    "PASS": true,
+    "log": "test_empty_list_remains_unchanged_without_read_or_retain (focused_bound_tests.BoundImportTests.test_empty_list_remains_unchanged_without_read_or_retain) ... ok\ntest_exact_bound_bytes_merge_after_single_verified_read (focused_bound_tests.BoundImportTests.test_exact_bound_bytes_merge_after_single_verified_read) ... ok\ntest_missing_wrong_baseline_and_malformed_record_refuse_before_any_retain (focused_bound_tests.BoundImportTests.test_missing_wrong_baseline_and_malformed_record_refuse_before_any_retain) ... ok\ntest_unbound_and_mismatched_record_refuse_before_retain (focused_bound_tests.BoundImportTests.test_unbound_and_mismatched_record_refuse_before_retain) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.024s\n\nOK\n",
+    "independent_actual_helper_checks": [
+      {
+        "case": "old_unbound",
+        "error": "retained charge record is not bound: /record",
+        "reads": 0,
+        "parses": 0
+      },
+      {
+        "case": "wrong_digest_before_parse",
+        "error": "retained charge record SHA mismatch: /record",
+        "reads": 1,
+        "parses": 0
+      },
+      {
+        "case": "bound_same_raw_once",
+        "reads": 1,
+        "parses": 1
+      }
+    ],
+    "old_suites_replayed": 0,
+    "actual_worker_preflight_runtime_imported": false,
+    "actual_Popen_Cargo_model": 0,
+    "wall_s": 0.027121575083583593,
+    "RSS_KiB": 24556,
+    "CPU": [
+      3
+    ],
+    "RLIMIT_AS_B": 536870912,
+    "cleanup_remaining": [],
+    "direct_exec_wait": true,
+    "exit": 0
+  },
+  "independent_static": {
+    "outside_helper_and_init_AST_identical_v6": true,
+    "archives_SHA_verified": {
+      "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/pre-lease-R1b-control-v6.tar.gz": "1f5eee99253549c35118148e9d67f07ecafc83dcdc2dd3f1983e612949b71ae4",
+      "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/pre-R1b-intermediate-control-v7.tar.gz": "1e353db4b65f3df3d4a6522025a629b602fab8e19cbc171e97565862c57625b9"
+    },
+    "old_review_raw_SHA_verified": true,
+    "prior_packet_SHA_verified": true,
+    "ledger_and_maxima_test_binding_metadata_unchanged": true,
+    "prepared_admission": false,
+    "actual_entry": false,
+    "retained_records_now": [],
+    "source_forecast_B": 4923392,
+    "wall_s": 0.007414523977786303
+  },
+  "result": {
+    "R1b": "RESOLVED_SOURCE_STATIC_AND_FOCUSED_NN0",
+    "blockers": [],
+    "ordinary": []
+  },
+  "after": {
+    "changed2_SHA_mode_length_match": true,
+    "packet_prepared_evidence_SHA_match": true,
+    "wall_s": 0.0001644809963181615
+  },
+  "reader_STOP_UTC": "2026-10-07T21:37:17.444674+00:00",
+  "owned_fixture_children": 0,
+  "remaining": [],
+  "source_main_Git_index_writes": 0,
+  "actual_Cargo_runtime_private_model_job_calls": 0,
+  "cost_limits": {
+    "initial_Beads_wall_s": 2.72207386395894,
+    "NN0_section_wall_s": 0.027121575083583593,
+    "read_command_wait": "actual tool trace",
+    "analysis_wall": "UNKNOWN unmetered",
+    "producer_support_s_separate": 0.06596224789973348,
+    "old_failed_controller_s_held_not_added": 124.9569185449509,
+    "live_io_peak_entry_qualification": "NOT_RUN"
+  },
+  "notifications": [
+    {
+      "thread": "01a11062-b120-73a1-8aa3-fe2cb922c7c0",
+      "issue": "quoridor-4lc.331",
+      "wall_s": 4.098856758908369,
+      "exit": 0,
+      "directwait": true,
+      "stdout": "{\n  \"method\": \"turn/start\",\n  \"thread_id\": \"01a11062-b120-73a1-8aa3-fe2cb922c7c0\",\n  \"turn_id\": \"01a1184d-bd60-7c73-bd32-d4bf981fed48\",\n  \"accepted\": true\n}\n",
+      "stderr": ""
+    },
+    {
+      "thread": "01a1153d-7900-7740-837f-c300ca54764f",
+      "issue": "quoridor-4lc.324",
+      "wall_s": 3.3235882469452918,
+      "exit": 0,
+      "directwait": true,
+      "stdout": "{\n  \"method\": \"turn/start\",\n  \"thread_id\": \"01a1153d-7900-7740-837f-c300ca54764f\",\n  \"turn_id\": \"01a1184d-ca6d-7711-9a71-d29178b318a2\",\n  \"accepted\": true\n}\n",
+      "stderr": ""
+    }
+  ],
+  "administrative_children_STOP_UTC": "2026-10-07T21:38:33.733921+00:00",
+  "all_owned_child_directwait": true,
+  "review_MD_SHA": "c5c28001e88636cc7437bcbf5a4182e5d92da98b546afbab618dd3d5b7cd953b"
+}

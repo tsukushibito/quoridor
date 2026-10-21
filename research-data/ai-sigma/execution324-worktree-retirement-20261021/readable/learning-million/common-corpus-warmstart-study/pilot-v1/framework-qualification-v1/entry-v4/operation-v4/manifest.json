@@ -1,0 +1,149 @@
+{
+  "schema": "quoridor.research.completion.v1",
+  "kind": "run",
+  "status": "PASS",
+  "intent": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/framework-qualification-v1/entry-v4/intent.json",
+    "sha256": "8d4f572fe2e0eb92f019cb9d05eba34e87cff9e4fb56cbc61092baaabbceaff0",
+    "bytes": 8568,
+    "mode": "0644"
+  },
+  "started_at": "2026-10-11T11:56:25.543173+00:00",
+  "checks": [
+    {
+      "name": "run",
+      "role": "run",
+      "argv": [
+        "/home/vscode/.cache/inference/python/cpython-3.14.7-linux-x86_64-gnu/bin/python3.14",
+        "-B",
+        "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/test_current_framework.py",
+        "--result",
+        "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/framework-qualification-v1/data-v4/qualification.json"
+      ],
+      "status": "PASS",
+      "guardian_return": {
+        "command": [
+          "/home/vscode/.cache/inference/python/cpython-3.14.7-linux-x86_64-gnu/bin/python3.14",
+          "-B",
+          "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/test_current_framework.py",
+          "--result",
+          "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/framework-qualification-v1/data-v4/qualification.json"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 569065,
+          "start_ticks": "97305564",
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        "log_bytes_seen": 101,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 101,
+        "wall_seconds": 5.603824490914121,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/framework-qualification-v1/entry-v4/operation-v4/run.full.log",
+        "sha256": "d4f77a4b641878fcfb47865351e6f7f194bdce6951dd4b796abea7e7f8cbf42e",
+        "bytes": 101,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/framework-qualification-v1/entry-v4/operation-v4/run.process.json",
+        "sha256": "8941366b4ab5ad38fbbe77683640c9577d8e9a3f5d07e72c2b8718c58e3c3b07",
+        "bytes": 1201,
+        "mode": "0600"
+      },
+      "capture_complete": true,
+      "secondary": [],
+      "primary": null
+    }
+  ],
+  "primary": null,
+  "secondary": [],
+  "cleanup_complete": true,
+  "remaining": [],
+  "owed_finalizers": [],
+  "originating_job": {
+    "runtime": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/framework-qualification-v1/entry-v4/runtime-v4",
+    "job_id": "88c98936-397b-47ee-8a4f-ce0d2bdb5efa",
+    "config": {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/framework-qualification-v1/entry-v4/runtime-v4/config.json",
+      "sha256": "c67f472f371a13623ba20e2b545c03cb3fc2d42ff85e834448fb3e33e37474a7",
+      "bytes": 943,
+      "mode": "0600"
+    },
+    "config_sha256": "b85bb6de44cbd03e35718ab2b14337edc26f7b9e8b004e988f2063f9711a9056",
+    "supervisor": {
+      "pid": 568927,
+      "start_ticks": "97305345",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child": {
+      "pid": 568974,
+      "start_ticks": "97305502",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    }
+  },
+  "experiment": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/framework-qualification-v1/entry-v4/experiment.json",
+    "sha256": "8cf5fb9cdba895699c53872dad2ad81116b0d32dd6990ca0e396b4c4ac40ca9c",
+    "bytes": 3889,
+    "mode": "0644"
+  },
+  "build_manifest": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/build-v4/operation-v4/manifest.json",
+    "sha256": "4ce963dfea6af76885c0bd911e503e6c9c28a0b99bbd1e1b113facc6443b334f",
+    "bytes": 85626,
+    "mode": "0644"
+  },
+  "planned_slots": 0,
+  "data": {
+    "status": "PASS",
+    "files": [
+      {
+        "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/framework-qualification-v1/data-v4/qualification.json",
+        "sha256": "e3059557a48accfa184a01c0cdba749274829f7120fd2c6e92ec8cb7f590dfe9",
+        "bytes": 401,
+        "mode": "0644"
+      }
+    ],
+    "errors": [],
+    "planned_slots": 0,
+    "observed_local_games": [],
+    "missing_local_games": [],
+    "batch": null,
+    "global_campaign_complete": false,
+    "scope": "software-only; no corpus or numerical PASS"
+  },
+  "finished_at": "2026-10-11T11:56:31.960081+00:00",
+  "process_cleanup_complete": true,
+  "outer_job_state": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/framework-qualification-v1/entry-v4/runtime-v4/state.json",
+    "sha256": "824e3359ef5269c54b02a41fe9491d391e43534127a31074faeb66fa3e23d82b",
+    "bytes": 707,
+    "mode": "0600"
+  },
+  "outer_job_result": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/common-corpus-warmstart-study/pilot-v1/framework-qualification-v1/entry-v4/runtime-v4/result.json",
+    "sha256": "11629929331680143cc1e7fd95f9336d3e5dc1ecee583a52a1c39abd6703cc51",
+    "bytes": 500,
+    "mode": "0600"
+  },
+  "authoritative_finished_at": "2026-10-11T11:58:17.803815+00:00"
+}
