@@ -589,6 +589,9 @@ pub enum LmrMethod {
     #[default]
     DepthRank,
 }
+#[path = "probcut.rs"]
+mod probcut;
+pub use probcut::{ProbCutParameters, ProbCutReport, ProbCutSample};
 #[path = "lmr_parameters.rs"]
 mod lmr_parameters;
 pub use lmr_parameters::LmrParameters;
@@ -789,6 +792,7 @@ fn permit_zero_stock_approx(threshold: Option<u8>, root_walls: u16, max_depth: u
 
 #[derive(Debug, Default, Clone)]
 pub struct SearchStats {
+    pub probcut: Option<ProbCutReport>,
     /// One per-Search snapshot; method selection alone does not enable LMR.
     pub lmr_enabled: bool,
     pub lmr_method: LmrMethod,
@@ -1476,6 +1480,7 @@ struct Search<
     const SMP: bool = false,
     const HISTORY: bool = false,
 > {
+    probcut: probcut::State,
     eval: &'a dyn StaticEvaluator,
     score_domain: ScoreDomain,
     eval_scratch: EvalScratch,
@@ -1853,6 +1858,202 @@ impl<
             observation,
         })
     }
+    /// Explicit scout origin, not a PV label inferred from a narrow numeric window.
+    fn scout_child(
+        &mut self,
+        c: &mut SigmaContext,
+        parent: Option<&EvalAccumulator>,
+        action: u16,
+        depth: u16,
+        window: [f32; 2],
+        ply: usize,
+    ) -> NodeResult<f32> {
+        if self.probcut.parameters.is_none() && self.probcut.sample_limit == 0 {
+            return self.child(c, parent, action, depth, window, ply);
+        }
+        let previous = self.probcut.non_pv;
+        self.probcut.non_pv = true;
+        let result = self.child(c, parent, action, depth, window, ply);
+        self.probcut.non_pv = previous;
+        result
+    }
+    /// One same-state shallow probe; every node/eval/deadline/cancel remains cumulative.
+    fn probcut_sample(
+        &mut self,
+        c: &mut SigmaContext,
+        a: Option<&EvalAccumulator>,
+        depth: u16,
+        alpha: f32,
+        beta: f32,
+        ply: usize,
+    ) -> NodeResult<()> {
+        if self.probcut.sample_limit == 0
+            || !self.probcut.non_pv
+            || self.probcut.inside_probe
+            || depth != 3
+            || !self.score_domain.admits(beta)
+        {
+            return Ok(());
+        }
+        let report = self.stats.probcut.as_mut().expect("sample report");
+        report.matching_nonpv_after_tt += 1;
+        report.opportunity_by_ply_capped15[ply.min(15)] += 1;
+        if report.samples.len() >= usize::from(self.probcut.sample_limit) {
+            return Ok(());
+        }
+        let index = self.stats.probcut.as_ref().expect("report").samples.len();
+        self.stats
+            .probcut
+            .as_mut()
+            .expect("report")
+            .samples
+            .push(ProbCutSample {
+                path: self.path.iter().map(|p| p.action).collect(),
+                ply,
+                remaining_depth: depth,
+                alpha,
+                beta,
+                shallow: None,
+                deep: None,
+                deep_bound: None,
+                shallow_nodes: 0,
+                deep_nodes: 0,
+                complete: false,
+            });
+        self.probcut.inside_probe = true;
+        let start_nodes = self.stats.nodes;
+        let start_evals = self.stats.evaluations;
+        self.stats
+            .probcut
+            .as_mut()
+            .expect("report")
+            .diagnostic_explicit_calls += 1;
+        let shallow = self.negamax(c, a, 1, f32::NEG_INFINITY, f32::INFINITY, ply);
+        let shallow_nodes = self.stats.nodes - start_nodes;
+        {
+            let report = self.stats.probcut.as_mut().expect("report");
+            report.diagnostic_nodes += shallow_nodes;
+            report.diagnostic_evaluations += self.stats.evaluations - start_evals;
+            report.samples[index].shallow_nodes = shallow_nodes;
+            report.samples[index].shallow = shallow.as_ref().ok().copied();
+        }
+        if let Err(error) = shallow {
+            self.probcut.inside_probe = false;
+            return Err(error);
+        }
+        let start_nodes = self.stats.nodes;
+        let start_evals = self.stats.evaluations;
+        self.stats
+            .probcut
+            .as_mut()
+            .expect("report")
+            .diagnostic_explicit_calls += 1;
+        // Full-window local OFF reference supplies regression values; the sampled
+        // scout beta is preserved separately. It is not the ordinary scout tree.
+        let deep = self.negamax(c, a, 3, f32::NEG_INFINITY, f32::INFINITY, ply);
+        self.probcut.inside_probe = false;
+        {
+            let report = self.stats.probcut.as_mut().expect("report");
+            let work = self.stats.nodes - start_nodes;
+            report.diagnostic_nodes += work;
+            report.diagnostic_evaluations += self.stats.evaluations - start_evals;
+            let row = &mut report.samples[index];
+            row.deep_nodes = work;
+            if let Ok(value) = &deep {
+                row.deep = Some(*value);
+                row.deep_bound = Some("Exact");
+                row.complete = true;
+            }
+        }
+        deep?;
+        self.control()?;
+        Ok(())
+    }
+
+    fn probcut_attempt(
+        &mut self,
+        c: &mut SigmaContext,
+        a: Option<&EvalAccumulator>,
+        depth: u16,
+        beta: f32,
+        ply: usize,
+    ) -> NodeResult<Option<f32>> {
+        if self.probcut.non_pv && !self.probcut.inside_probe && depth == 3 {
+            let report = self.stats.probcut.as_mut().expect("configured report");
+            report.matching_nonpv_after_tt += 1;
+            report.opportunity_by_ply_capped15[ply.min(15)] += 1;
+        }
+        let Some(threshold) = self.probcut.parameters.as_ref().and_then(|p| {
+            p.threshold(
+                self.score_domain,
+                depth,
+                beta,
+                self.probcut.non_pv,
+                self.probcut.inside_probe,
+            )
+        }) else {
+            if self.probcut.non_pv && !self.probcut.inside_probe && depth == 3 {
+                self.stats
+                    .probcut
+                    .as_mut()
+                    .expect("report")
+                    .threshold_outside_domain += 1;
+            }
+            return Ok(None);
+        };
+        self.stats
+            .probcut
+            .as_mut()
+            .expect("configured report")
+            .eligible_after_tt += 1;
+        self.stats
+            .probcut
+            .as_mut()
+            .expect("configured report")
+            .shallow_probes += 1;
+        let before = (self.stats.nodes, self.stats.evaluations);
+        self.probcut.inside_probe = true;
+        let probe = self.negamax(c, a, 1, -next_up(-threshold), threshold, ply);
+        self.probcut.inside_probe = false;
+        let r = self.stats.probcut.as_mut().expect("configured report");
+        r.shallow_nodes += self.stats.nodes - before.0;
+        r.shallow_evaluations += self.stats.evaluations - before.1;
+        let value = match probe {
+            Ok(v) => v,
+            Err(e) => {
+                r.probe_aborts += 1;
+                return Err(e);
+            }
+        };
+        self.control()?;
+        if !self.score_domain.admits(value) {
+            self.stats
+                .probcut
+                .as_mut()
+                .expect("configured report")
+                .terminal_probe_rejects += 1;
+            return Ok(None);
+        }
+        if value >= threshold
+            && self
+                .probcut
+                .parameters
+                .as_ref()
+                .expect("configured")
+                .predicts_lower(value, beta, self.score_domain)
+        {
+            self.stats
+                .probcut
+                .as_mut()
+                .expect("configured report")
+                .predicted_cuts += 1;
+            // Heuristic fail-high only. Never write this prediction as a deep TT
+            // Exact/Lower or solver value. Probe entries keep their actual depth1.
+            return Ok(Some(beta));
+        }
+        Ok(None)
+    }
+
     fn child(
         &mut self,
         c: &mut SigmaContext,
@@ -1892,7 +2093,7 @@ impl<
             self.stats.tt_context_transitions += 1;
         }
         // Only signed history consumes speculative actor/lag contexts.
-        let track_path = self.ordering.is_some();
+        let track_path = self.ordering.is_some() || self.probcut.sample_limit != 0;
         if track_path {
             self.path.push(PlayedMove {
                 colour: mover,
@@ -2453,6 +2654,14 @@ impl<
                 self.stats.tt_illegal_moves += 1;
             }
         }
+        if self.probcut.sample_limit != 0 {
+            self.probcut_sample(c, a, depth, alpha, beta, ply)?;
+        }
+        if self.probcut.parameters.is_some()
+            && let Some(predicted_lower) = self.probcut_attempt(c, a, depth, beta, ply)?
+        {
+            return Ok(predicted_lower);
+        }
         let legal = legal.unwrap_or_else(|| c.legal_ids());
         // The verified TT move already outranks every other tier. Only the
         // Shared signed targets without a provider defer preparing siblings.
@@ -2676,7 +2885,7 @@ impl<
                     },
                 )?
             } else if self.limits.use_pvs && i > 0 && alpha.is_finite() {
-                self.child(c, a, action, depth - 1, [alpha, next_up(alpha)], ply + 1)?
+                self.scout_child(c, a, action, depth - 1, [alpha, next_up(alpha)], ply + 1)?
             } else {
                 self.child(c, a, action, depth - 1, [alpha, beta], ply + 1)?
             };
@@ -2860,7 +3069,7 @@ impl<
         let [child_depth, reduced_depth] = child_depths;
         debug_assert!(reduced_depth < child_depth);
         self.stats.lmr_attempts += 1;
-        let shallow = self.child(
+        let shallow = self.scout_child(
             c,
             parent,
             action,
@@ -2874,7 +3083,7 @@ impl<
             if HISTORY && let Some(confirmed) = history_confirmation {
                 *confirmed = true;
             }
-            self.child(c, parent, action, child_depth, [alpha, next_up(alpha)], ply)
+            self.scout_child(c, parent, action, child_depth, [alpha, next_up(alpha)], ply)
         } else {
             // Selective fail-low; the child stores only its actual reduced
             // depth. Parent nominal TT depth belongs exclusively to LMR method.
@@ -3069,7 +3278,7 @@ impl<
                 );
             }
             let mut v = if self.limits.use_pvs && i > 0 {
-                self.child(c, a, action, depth - 1, [value, next_up(value)], 1)?
+                self.scout_child(c, a, action, depth - 1, [value, next_up(value)], 1)?
             } else {
                 self.child(c, a, action, depth - 1, [value, f32::INFINITY], 1)?
             };
@@ -3338,6 +3547,8 @@ impl SessionMethod {
 /// A player/game owns this bounded table across its real move sequence.
 /// New games explicitly reset or create a session; namespace switches clear all entries.
 pub struct SearchSession {
+    probcut: Option<ProbCutParameters>,
+    probcut_samples: u8,
     namespace: SearchNamespace,
     #[cfg(not(target_arch = "wasm32"))]
     native_workers: Option<Box<lazy_smp::NativeWorkers>>,
@@ -3621,6 +3832,80 @@ impl SearchSession {
     pub fn lmr_method(&self) -> Option<LmrMethod> {
         self.lmr.then_some(self.lmr_method)
     }
+    /// Research-only single pair; a changed numeric method clears all authority.
+    pub fn set_probcut(&mut self, parameters: Option<ProbCutParameters>) -> Result<()> {
+        if parameters.is_some() && self.probcut_samples != 0 {
+            return Err(SearchError::Limits(
+                "ProbCut pruning and OFF calibration references are exclusive".into(),
+            ));
+        }
+        if let Some(p) = &parameters {
+            p.validate(self.score_domain)?;
+            if !matches!(self.static_enabled, StaticMode::CheapControl) {
+                return Err(SearchError::Limits(
+                    "ProbCut requires explicit Control".into(),
+                ));
+            }
+            #[cfg(not(target_arch = "wasm32"))]
+            if self.search_threads() != 1 {
+                return Err(SearchError::Limits(
+                    "initial ProbCut pair requires N1".into(),
+                ));
+            }
+        }
+        if self
+            .probcut
+            .as_ref()
+            .map(ProbCutParameters::namespace_suffix)
+            == parameters.as_ref().map(ProbCutParameters::namespace_suffix)
+        {
+            return Ok(());
+        }
+        #[cfg(not(target_arch = "wasm32"))]
+        self.stop_native_workers();
+        if let Some(old) = &self.probcut {
+            let suffix = format!(":{}", old.namespace_suffix());
+            let base = self
+                .namespace
+                .evaluator
+                .strip_suffix(&suffix)
+                .ok_or_else(|| SearchError::Limits("ProbCut namespace ownership mismatch".into()))?
+                .len();
+            self.namespace.evaluator.truncate(base);
+        }
+        self.probcut = parameters;
+        if let Some(p) = &self.probcut {
+            self.namespace.evaluator.push(':');
+            self.namespace.evaluator.push_str(&p.namespace_suffix());
+        }
+        self.table.clear();
+        if let Some(history) = self.ordering.as_mut() {
+            history.reset();
+        }
+        Ok(())
+    }
+    /// First fixed eligible nodes only. Both explicit references use the same cumulative budget.
+    pub fn set_probcut_samples(&mut self, maximum: u8) -> Result<()> {
+        if maximum > 8
+            || (maximum != 0
+                && (self.probcut.is_some()
+                    || !matches!(self.static_enabled, StaticMode::CheapControl)))
+        {
+            return Err(SearchError::Limits(
+                "OFF Control calibration: 0..8 first samples per Search".into(),
+            ));
+        }
+        #[cfg(not(target_arch = "wasm32"))]
+        if maximum != 0 && self.search_threads() != 1 {
+            return Err(SearchError::Limits("calibration requires N1".into()));
+        }
+        self.probcut_samples = maximum;
+        Ok(())
+    }
+    pub fn probcut_parameters(&self) -> Option<&ProbCutParameters> {
+        self.probcut.as_ref()
+    }
+
     /// Observation only; fixed376 enables its two scheduled calls per process.
     /// Does not reset/age tables/history or select a scoring algorithm.
     pub fn set_ordering_observation(&mut self, enabled: bool) {
@@ -3723,6 +4008,8 @@ impl SearchSession {
             .session_residual_owner()
             .map(|owner| owner.model.evaluation_scratch());
         Ok(Self {
+            probcut: None,
+            probcut_samples: 0,
             namespace,
             #[cfg(not(target_arch = "wasm32"))]
             native_workers: None,
@@ -3821,6 +4108,12 @@ impl SearchSession {
                 .evaluator
                 .push_str(&score_domain.namespace_suffix());
         }
+        let probcut = self.probcut.take().filter(|p| {
+            let suffix = format!(":{}", p.namespace_suffix());
+            self.namespace.evaluator.strip_suffix(&suffix) == Some(namespace.evaluator.as_str())
+                && self.namespace.rules == namespace.rules
+                && self.score_domain == score_domain
+        });
         self.residual_head_scratch = evaluator
             .session_residual_owner()
             .map(|owner| owner.model.evaluation_scratch());
@@ -3835,6 +4128,11 @@ impl SearchSession {
         // claim resolved authority until the next real Search supplies its root.
         self.zero_stock_approx_effective = false;
         self.attach_safe_race_namespace();
+        self.probcut = probcut;
+        if let Some(p) = &self.probcut {
+            self.namespace.evaluator.push(':');
+            self.namespace.evaluator.push_str(&p.namespace_suffix());
+        }
         self.score_domain = score_domain;
         self.table.clear();
         if let Some(history) = self.ordering.as_mut() {
@@ -3859,6 +4157,11 @@ impl SearchSession {
         limits: &SearchLimits,
         cancel: &AtomicBool,
     ) -> Result<SearchResult> {
+        if self.probcut.is_some() || self.probcut_samples != 0 {
+            return Err(SearchError::Limits(
+                "ProbCut requires ordinary all-legal root".into(),
+            ));
+        }
         #[cfg(not(target_arch = "wasm32"))]
         if self.native_workers.is_some() {
             return Err(SearchError::Limits(
@@ -3924,6 +4227,12 @@ impl SearchSession {
         on_completed: &mut dyn FnMut(&SearchResult),
     ) -> Result<SearchResult> {
         #[cfg(not(target_arch = "wasm32"))]
+        if (self.probcut.is_some() || self.probcut_samples != 0) && self.search_threads() != 1 {
+            return Err(SearchError::Limits(
+                "initial ProbCut pair requires N1".into(),
+            ));
+        }
+        #[cfg(not(target_arch = "wasm32"))]
         if let Some(mut workers) = self.native_workers.take() {
             let result = workers.search(self, root, limits, cancel, on_completed);
             self.native_workers = Some(workers);
@@ -3955,6 +4264,18 @@ impl SearchSession {
             root_walls,
             limits.max_depth,
         ));
+        if self.probcut.is_some() && !limits.use_pvs {
+            return Err(SearchError::Limits(
+                "ProbCut requires actual PVS scout origin".into(),
+            ));
+        }
+        invocation.probcut = self.probcut.as_ref();
+        invocation.probcut_samples = self.probcut_samples;
+        if self.probcut_samples != 0 && !limits.use_pvs {
+            return Err(SearchError::Limits(
+                "calibration requires PVS origin".into(),
+            ));
+        }
         invocation.lmr_table = self.lmr_table.as_deref();
         invocation.safe_race_method = self.zero_stock_safe_race_method;
         invocation.residual_head = self
@@ -4021,6 +4342,8 @@ type SearchTableAndDomain<'table, 'history> = (
 );
 
 struct SearchInvocation<'a> {
+    probcut: Option<&'a ProbCutParameters>,
+    probcut_samples: u8,
     #[cfg(not(target_arch = "wasm32"))]
     worker_budget: Option<&'a mut lazy_smp::WorkerBudget>,
     residual_head: Option<(&'a ResidualEvaluator, &'a mut ResidualScratch)>,
@@ -4038,6 +4361,8 @@ struct SearchInvocation<'a> {
 impl<'a> SearchInvocation<'a> {
     fn root(on_completed: &'a mut dyn FnMut(&SearchResult)) -> Self {
         Self {
+            probcut: None,
+            probcut_samples: 0,
             on_completed,
             #[cfg(not(target_arch = "wasm32"))]
             worker_budget: None,
@@ -4237,6 +4562,11 @@ fn search_in_table_observed<
             .is_some_and(|b| b.sharing_enabled()))
     .then(SmpSharingProvenance::default);
     let mut state = Search::<OBSERVE, TRACE, OPPORTUNITY, SMP, HISTORY> {
+        probcut: probcut::State {
+            parameters: invocation.probcut.cloned(),
+            sample_limit: invocation.probcut_samples,
+            ..probcut::State::default()
+        },
         eval: evaluator,
         score_domain,
         // Only the opt-in head input persists. Geometry/counters remain fresh
@@ -4257,6 +4587,8 @@ fn search_in_table_observed<
         deadline,
         table,
         stats: SearchStats {
+            probcut: (invocation.probcut.is_some() || invocation.probcut_samples != 0)
+                .then(ProbCutReport::default),
             #[cfg(not(target_arch = "wasm32"))]
             smp_sharing,
             lmr_enabled: lmr,
@@ -4834,6 +5166,7 @@ mod persistent_tt_tests {
             let l = limits(1, true, 4096);
             let cancel = AtomicBool::new(false);
             let mut state = Search::<false> {
+                probcut: probcut::State::default(),
                 #[cfg(not(target_arch = "wasm32"))]
                 worker_budget: None,
                 eval: e.as_ref(),
@@ -5529,6 +5862,7 @@ mod child_buffer_tests {
             let history = c.history_counts();
             let parent = e.prepare_context(&c).unwrap();
             let mut state = Search::<false> {
+                probcut: probcut::State::default(),
                 #[cfg(not(target_arch = "wasm32"))]
                 worker_budget: None,
                 eval: &e,
@@ -6234,3 +6568,7 @@ mod session_residual_owner_tests {
         }
     }
 }
+
+#[cfg(test)]
+#[path = "probcut_tests.rs"]
+mod probcut_tests;

@@ -436,7 +436,9 @@ pub struct LmrTrialResult {
 }
 impl SearchSession {
     fn observation_compatible(&self, limits: &SearchLimits) -> bool {
-        self.static_enabled == StaticMode::CheapControl
+        self.probcut.is_none()
+            && self.probcut_samples == 0
+            && self.static_enabled == StaticMode::CheapControl
             && self.lmr
             && self.lmr_method == LmrMethod::DepthRank
             && self.lmr_parameters == LmrParameters::default()
@@ -472,6 +474,8 @@ impl SearchSession {
             cancel,
             None,
             SearchInvocation {
+                probcut: None,
+                probcut_samples: 0,
                 #[cfg(not(target_arch = "wasm32"))]
                 worker_budget: None,
                 residual_head: None,
@@ -565,6 +569,8 @@ impl SearchSession {
             cancel,
             None,
             SearchInvocation {
+                probcut: None,
+                probcut_samples: 0,
                 #[cfg(not(target_arch = "wasm32"))]
                 worker_budget: None,
                 residual_head: None,
@@ -666,6 +672,64 @@ mod trial_tests {
         )
     }
     #[test]
+    fn probcut_mix_cannot_enter_lmr_observation_or_trial() {
+        let (root, branch) = branch(0.0);
+        let limits = SearchLimits {
+            max_depth: 5,
+            max_nodes: 1_000_000,
+            time_limit: None,
+            tt_entries: 1_048_576,
+            use_pvs: true,
+            use_tt: true,
+        };
+        let cancel = AtomicBool::new(false);
+        let mut s = session(Arc::new(Constant));
+        assert!(s.observation_compatible(&limits)); // Otherwise valid old cold LMR shape.
+        for sampling in [false, true] {
+            if sampling {
+                s.set_probcut_samples(8).unwrap();
+            } else {
+                s.set_probcut(Some(ProbCutParameters {
+                    shallow_depth: 1,
+                    deep_depth: 3,
+                    slope: 1.,
+                    intercept: 0.,
+                    margin: 0.1,
+                    nonterminal_abs_bound: 1.,
+                    terminal_utility: 2.,
+                    calibration_sha256: "0".repeat(64),
+                }))
+                .unwrap();
+            }
+            let namespace = s.namespace.clone();
+            let generation = s.table.generation;
+            let root_before = Key::of(&root);
+            let history_before = root.history_counts();
+            let mut observation = LmrObservation::default();
+            assert!(!s.observation_compatible(&limits));
+            assert!(
+                s.search_with_lmr_observation(&root, &limits, &cancel, &mut observation)
+                    .is_err()
+            );
+            assert!(!observation.used); // The common callee never entered.
+            assert!(
+                s.lmr_trial(&root, &branch, LmrArm::Normal, &cancel)
+                    .is_err()
+            );
+            assert_eq!(s.table.generation, generation);
+            assert_eq!(s.namespace, namespace);
+            assert_eq!(Key::of(&root), root_before);
+            assert_eq!(root.history_counts(), history_before);
+            if sampling {
+                s.set_probcut_samples(0).unwrap();
+            } else {
+                s.set_probcut(None).unwrap();
+            }
+            assert!(s.observation_compatible(&limits)); // Ordinary OFF path remains eligible.
+        }
+    }
+
+    #[test]
     fn lmr417_r_fail_low_omits_confirmation_and_keeps_shallow_depth() {
         let (root, b) = branch(0.5);
         let s = session(Arc::new(Constant));
@@ -753,6 +817,8 @@ mod trial_tests {
             &AtomicBool::new(false),
             None,
             SearchInvocation {
+                probcut: None,
+                probcut_samples: 0,
                 #[cfg(not(target_arch = "wasm32"))]
                 worker_budget: None,
                 residual_head: None,

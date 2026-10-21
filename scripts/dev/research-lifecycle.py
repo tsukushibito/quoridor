@@ -2638,6 +2638,8 @@ def measurement_config(experiment):
         and set(config)
         <= {
             "inference",
+            "probcut",
+            "probcut_samples",
             "search_threads",
             "smp_sharing_provenance",
             "search_cpu_cores",
@@ -2677,6 +2679,70 @@ def measurement_config(experiment):
         <= set(config),
         "measurement settings shape",
     )
+    if "probcut" in config or "probcut_samples" in config:
+        p = config.get("probcut")
+        samples = config.get("probcut_samples", 0)
+        require(type(samples) is int and 0 <= samples <= 8, "ProbCut first sample bound")
+        require(
+            config.get("search_threads", 1) == 1
+            and config["profile"] == "control"
+            and config["use_pvs"]
+            and config["use_tt"]
+            and config.get("zero_stock_approx_min_root_walls") is None
+            and "neighbour_opportunity" not in config
+            and "root_ordering_quality" not in config
+            and "history_provenance" not in config,
+            "ProbCut is N1 Control/PVS with no other observer or approximation",
+        )
+        require(
+            not (p is not None or samples != 0)
+            or all(not r.get("observe_lmr", False) for r in requests),
+            "ProbCut or sampling cannot enter the OFF-only LMR observation path",
+        )
+        if "probcut" in config:
+            require(
+                isinstance(p, dict)
+                and set(p)
+                == {
+                    "shallow_depth",
+                    "deep_depth",
+                    "slope",
+                    "intercept",
+                    "margin",
+                    "nonterminal_abs_bound",
+                    "terminal_utility",
+                    "calibration_sha256",
+                },
+                "complete calibrated ProbCut object; absence is OFF",
+            )
+            require(
+                samples == 0
+                and type(p["shallow_depth"]) is int
+                and p["shallow_depth"] == 1
+                and type(p["deep_depth"]) is int
+                and p["deep_depth"] == 3,
+                "exact1/3 only; calibration references are OFF",
+            )
+            require(
+                all(
+                    type(p[k]) in (int, float) and math.isfinite(p[k])
+                    for k in (
+                        "slope",
+                        "intercept",
+                        "margin",
+                        "nonterminal_abs_bound",
+                        "terminal_utility",
+                    )
+                )
+                and p["slope"] > 0
+                and p["margin"] >= 0
+                and p["nonterminal_abs_bound"] > 0
+                and p["terminal_utility"] > p["nonterminal_abs_bound"]
+                and isinstance(p["calibration_sha256"], str)
+                and len(p["calibration_sha256"]) == 64
+                and all(c in "0123456789abcdefABCDEF" for c in p["calibration_sha256"]),
+                "finite calibrated domain and provenance; actual domain checked by native owner",
+            )
     if "search_threads" in config:
         threads = config["search_threads"]
         team = config.get("search_cpu_cores")

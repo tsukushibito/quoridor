@@ -654,6 +654,13 @@ fn arena_alpha_namespace(
     if enabled {
         method.qualify_namespace(&mut namespace);
     }
+    if let Some(p) = &engine.probcut {
+        namespace.evaluator.push(':');
+        namespace.evaluator.push_str(
+            &p.resolve(quoridor_ai::score::ScoreDomain::LEGACY)?
+                .namespace_suffix(),
+        );
+    }
     Ok(namespace)
 }
 fn arena_alpha_session(
@@ -711,6 +718,13 @@ fn arena_alpha_session(
             }),
         )?;
     }
+    session.set_probcut(
+        engine
+            .probcut
+            .as_ref()
+            .map(|p| p.resolve(session.score_domain()))
+            .transpose()?,
+    )?;
     Ok(session)
 }
 

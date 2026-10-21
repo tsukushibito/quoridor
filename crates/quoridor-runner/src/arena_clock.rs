@@ -126,7 +126,7 @@ pub fn stop_name(reason: StopReason) -> &'static str {
 }
 pub fn alpha_counters(r: &SearchResult) -> serde_json::Value {
     let s = &r.stats;
-    serde_json::json!({"TT_representation":quoridor_ai::alphabeta::TT_REPRESENTATION,"nodes":s.nodes,"static_evaluations":s.evaluations,"terminal":s.terminal,
+    let mut output = serde_json::json!({"TT_representation":quoridor_ai::alphabeta::TT_REPRESENTATION,"nodes":s.nodes,"static_evaluations":s.evaluations,"terminal":s.terminal,
         "cutoffs":s.cutoffs,"tt_probes":s.tt_probes,"tt_key_hits":s.tt_hits,"tt_exact_hits":s.tt_exact_hits,
         "tt_usable_depth":s.tt_usable_depth,"tt_bound_cutoffs":s.tt_cutoffs,"tt_order_only":s.tt_order_only,
         "tt_key_builds":s.tt_key_builds,"tt_context_initial_items":s.tt_context_initial_items,
@@ -134,7 +134,11 @@ pub fn alpha_counters(r: &SearchResult) -> serde_json::Value {
         "tt_collisions":s.tt_collisions,"tt_replacements":s.tt_replacements,"tt_capacity_skips":s.tt_capacity_skips,
         "tt_illegal_moves":s.tt_illegal_moves,"tt_retained_bytes":s.tt_retained_bytes,"tt_generation":s.tt_generation,
         "pvs_researches":s.pvs_researches,"delta_updates":s.delta_updates,"policy_calls":s.policy_calls,
-        "lmr_parameters":s.lmr_parameters.map(crate::config::LmrParameters::from),"leaf_count":null,"physical_nn_calls":null})
+        "lmr_parameters":s.lmr_parameters.map(crate::config::LmrParameters::from),"leaf_count":null,"physical_nn_calls":null});
+    if let Some(p) = &s.probcut {
+        output["probcut"] = crate::config::probcut_report(p);
+    }
+    output
 }
 
 /// Single caller-owned snapshot, never a hard real-time asynchronous return promise.

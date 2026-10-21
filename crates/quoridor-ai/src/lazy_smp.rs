@@ -340,6 +340,8 @@ impl SearchSession {
     }
     fn fork_worker(&self, shared: Arc<SharedTable>, writer: usize) -> Result<Self> {
         Ok(Self {
+            probcut: None,
+            probcut_samples: 0,
             namespace: self.namespace.clone(),
             native_workers: None,
             evaluator: self.evaluator.clone(),

@@ -182,9 +182,52 @@ pub(crate) fn deserialize_lmr_parameters<'de, D: serde::Deserializer<'de>>(
     // Absent is default; explicit null/partial/unknown objects are errors.
     LmrParameters::deserialize(deserializer).map(Some)
 }
+/// Serialized once; the numerical method validates against the actual score domain.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ProbCutConfig {
+    pub shallow_depth: u16,
+    pub deep_depth: u16,
+    pub slope: f32,
+    pub intercept: f32,
+    pub margin: f32,
+    pub nonterminal_abs_bound: f32,
+    pub terminal_utility: f32,
+    pub calibration_sha256: String,
+}
+impl ProbCutConfig {
+    pub fn resolve(
+        &self,
+        domain: quoridor_ai::score::ScoreDomain,
+    ) -> quoridor_ai::alphabeta::Result<quoridor_ai::alphabeta::ProbCutParameters> {
+        let p = quoridor_ai::alphabeta::ProbCutParameters {
+            shallow_depth: self.shallow_depth,
+            deep_depth: self.deep_depth,
+            slope: self.slope,
+            intercept: self.intercept,
+            margin: self.margin,
+            nonterminal_abs_bound: self.nonterminal_abs_bound,
+            terminal_utility: self.terminal_utility,
+            calibration_sha256: self.calibration_sha256.clone(),
+        };
+        p.validate(domain)?;
+        Ok(p)
+    }
+}
+pub(crate) fn deserialize_probcut<'de, D: serde::Deserializer<'de>>(
+    deserializer: D,
+) -> Result<Option<ProbCutConfig>, D::Error> {
+    ProbCutConfig::deserialize(deserializer).map(Some)
+}
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct Engine {
+    #[serde(
+        default,
+        deserialize_with = "deserialize_probcut",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub probcut: Option<ProbCutConfig>,
     /// Total search workers INCLUDING main; omission preserves the original one.
     #[serde(
         default,
@@ -946,6 +989,15 @@ impl Config {
         let mut maximum = 1;
         for (index, engine) in self.engines.iter().enumerate() {
             let threads = engine.search_threads.unwrap_or(1);
+            if engine.probcut.is_some()
+                && (!self.evaluation_workers()
+                    || threads != 1
+                    || engine.ordering_profile.as_deref() != Some("control")
+                    || !matches!(engine.kind.as_str(), "nnue" | "nnue_quantized" | "distance"))
+            {
+                return Err("ProbCut requires research alpha N1 Control arena".into());
+            }
+
             if threads == 0 {
                 return Err("search_threads must be positive".into());
             }
@@ -1048,5 +1100,85 @@ mod smp_team_boundary_tests {
             }
             assert!(bad.search_team_cores().is_err());
         }
+    }
+}
+
+pub(crate) fn probcut_report(r: &quoridor_ai::alphabeta::ProbCutReport) -> serde_json::Value {
+    serde_json::json!({"eligible_after_TT":r.eligible_after_tt,"matching_nonPV_after_TT":r.matching_nonpv_after_tt,"threshold_outside_domain":r.threshold_outside_domain,"opportunity_by_ply_capped15":r.opportunity_by_ply_capped15,"shallow_probes":r.shallow_probes,
+        "shallow_nodes":r.shallow_nodes,"shallow_evaluations":r.shallow_evaluations,
+        "predicted_cuts_ALL":r.predicted_cuts,"probe_aborts":r.probe_aborts,
+        "terminal_probe_rejects":r.terminal_probe_rejects,
+        "diagnostic_explicit_child_calls":r.diagnostic_explicit_calls,
+        "diagnostic_nodes_in_parent_budget":r.diagnostic_nodes,"diagnostic_evaluations":r.diagnostic_evaluations,
+        "samples":r.samples.iter().map(|s|serde_json::json!({"root_relative_path":s.path,"ply":s.ply,"remaining_depth":s.remaining_depth,
+            "alpha":s.alpha,"beta":s.beta,"parent_candidate_rank":null,"shallow":s.shallow,"deep_OFF_reference":s.deep,
+            "reference_window":"full","deep_bound":s.deep_bound,"reference_at_or_above_beta":s.deep_beta_side(),"shallow_nodes":s.shallow_nodes,"deep_nodes":s.deep_nodes,"complete":s.complete,
+            "reference_semantics":"same local selective OFF full-window reference; beta is actual scout beta; not WDL oracle"})).collect::<Vec<_>>()})
+}
+
+#[cfg(test)]
+mod probcut_consumer_tests {
+    use super::*;
+    #[test]
+    fn probcut_typed_pair_domain_null_and_record_correspondence() {
+        let value = serde_json::json!({"shallow_depth":1,"deep_depth":3,"slope":1.,"intercept":0.,"margin":0.1,
+            "nonterminal_abs_bound":1.,"terminal_utility":2.,"calibration_sha256":"a".repeat(64)});
+        let config: ProbCutConfig = serde_json::from_value(value.clone()).unwrap();
+        let p = config
+            .resolve(quoridor_ai::score::ScoreDomain::LEGACY)
+            .unwrap();
+        assert_eq!(p.deep_depth, 3);
+        assert_eq!(p.shallow_depth, 1);
+        assert_eq!(serde_json::to_value(&config).unwrap(), value);
+        for (key, bad) in [
+            ("deep_depth", serde_json::json!(4)),
+            ("slope", serde_json::json!(0.)),
+            ("terminal_utility", serde_json::json!(3.)),
+        ] {
+            let mut v = value.clone();
+            v[key] = bad;
+            assert!(
+                serde_json::from_value::<ProbCutConfig>(v)
+                    .unwrap()
+                    .resolve(quoridor_ai::score::ScoreDomain::LEGACY)
+                    .is_err()
+            );
+        }
+        #[derive(Deserialize)]
+        struct Inlet {
+            #[serde(default, deserialize_with = "deserialize_probcut")]
+            probcut: Option<ProbCutConfig>,
+        }
+        assert!(
+            serde_json::from_value::<Inlet>(serde_json::json!({}))
+                .unwrap()
+                .probcut
+                .is_none()
+        );
+        assert!(serde_json::from_value::<Inlet>(serde_json::json!({"probcut":null})).is_err());
+    }
+    #[test]
+    fn probcut_output_keeps_all_predictions_separate_from_unknown_references() {
+        let mut r = quoridor_ai::alphabeta::ProbCutReport {
+            predicted_cuts: 3,
+            ..Default::default()
+        };
+        r.samples.push(quoridor_ai::alphabeta::ProbCutSample {
+            path: vec![13],
+            ply: 1,
+            remaining_depth: 3,
+            alpha: 0.1,
+            beta: 0.2,
+            shallow: Some(0.),
+            deep: Some(0.1),
+            deep_bound: Some("Lower"),
+            shallow_nodes: 4,
+            deep_nodes: 10,
+            complete: true,
+        });
+        let output = probcut_report(&r);
+        assert_eq!(output["predicted_cuts_ALL"], 3);
+        assert!(output["samples"][0]["reference_at_or_above_beta"].is_null());
+        assert_eq!(output["samples"][0]["remaining_depth"], 3);
     }
 }

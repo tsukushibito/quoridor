@@ -62,6 +62,14 @@ struct RootInput {
 struct Settings {
     #[serde(
         default,
+        deserialize_with = "crate::config::deserialize_probcut",
+        skip_serializing_if = "Option::is_none"
+    )]
+    probcut: Option<crate::config::ProbCutConfig>,
+    #[serde(default)]
+    probcut_samples: u8,
+    #[serde(
+        default,
         deserialize_with = "crate::config::deserialize_search_threads",
         skip_serializing_if = "Option::is_none"
     )]
@@ -168,6 +176,25 @@ fn default_zero_stock_approx_method() -> String {
 }
 
 fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
+    if (settings.probcut.is_some() || settings.probcut_samples != 0)
+        && (settings.probcut_samples > 8
+            || (settings.probcut.is_some() && settings.probcut_samples != 0)
+            || settings.search_threads.unwrap_or(1) != 1
+            || settings.profile != Profile::Control
+            || !settings.use_pvs
+            || !settings.use_tt
+            || settings.zero_stock_approx_min_root_walls.is_some()
+            || settings.neighbour_opportunity.is_some()
+            || settings.root_ordering_quality.is_some()
+            || settings.history_provenance.is_some()
+            || requests.iter().any(|r| r.observe_lmr))
+    {
+        return Err(
+            "ProbCut exact pair and exclusive OFF reference mode require ordinary N1 Control/PVS"
+                .into(),
+        );
+    }
+
     if let Some(threads) = settings.search_threads {
         let team = settings
             .search_cpu_cores
@@ -568,6 +595,14 @@ impl Target for SearchTarget {
                 }),
             )?;
         }
+        session.set_probcut(
+            self.settings
+                .probcut
+                .as_ref()
+                .map(|p| p.resolve(session.score_domain()))
+                .transpose()?,
+        )?;
+        session.set_probcut_samples(self.settings.probcut_samples)?;
         session.set_smp_sharing_provenance(self.settings.smp_sharing_provenance);
         let method = session.namespace().selectivity.clone();
         let lmr = session.lmr_enabled();
@@ -816,6 +851,15 @@ impl Target for SearchTarget {
             row["process_peak_RSS_B"] = json!(crate::resources::process_peak_rss_bytes());
             row["peak_RSS_scope"] = json!("process cumulative highwater, not per-root reset");
             row["time_reserve_ms"] = json!(self.settings.time_reserve_ms);
+        }
+        if self.settings.probcut.is_some() || self.settings.probcut_samples != 0 {
+            row["probcut_requested"] = json!(self.settings.probcut);
+            row["probcut_samples_requested"] = json!(self.settings.probcut_samples);
+            row["probcut_namespace"] = json!(
+                self.session
+                    .as_ref()
+                    .map(|s| s.namespace().evaluator.clone())
+            );
         }
         row["Search_call_seconds"] = json!(search_seconds);
         row["parent_unchanged"] = json!(after == self.before);
@@ -1364,6 +1408,9 @@ fn observed_work(s: &alphabeta::SearchStats) -> Value {
     work["safe_race_history_checks"] = json!(s.safe_race_history_checks);
     work["safe_race_history_rejects"] = json!(s.safe_race_history_rejects);
     work["safe_race_proven_leaves"] = json!(s.safe_race_proven_leaves);
+    if let Some(p) = &s.probcut {
+        work["probcut"] = crate::config::probcut_report(p);
+    }
     safe_path_work(&mut work, s);
     work
 }
@@ -3226,5 +3273,53 @@ mod node_publication_settings_tests {
             on["smp_sharing_provenance"] = invalid;
             assert!(serde_json::from_value::<Settings>(on.clone()).is_err());
         }
+    }
+}
+
+#[cfg(test)]
+mod probcut_lmr_admission_tests {
+    use super::*;
+    #[test]
+    fn probcut_and_samples_reject_lmr_observer_without_changing_off() {
+        let settings: Settings = serde_json::from_value(json!({
+            "roots":[{"input":0,"pointer":"/0","field":"prefix","label":"toy"}],
+            "profile":"control","tt_entries":1048576,"use_tt":true,"use_pvs":true,
+            "lmr":true,"lmr_method":"depth_rank","zero_stock_safe_race":false,
+            "namespace":{"evaluator":"toy","rules":"toy","selectivity":"PVS"},
+            "output_bytes":1048576,"record_bytes":32768
+        }))
+        .unwrap();
+        let observed: Request = serde_json::from_value(json!({"id":"one","session":"one","root":0,
+            "depth":5,"node_cap":1000000,"observe_lmr":true}))
+        .unwrap();
+        assert!(settings.search_threads.is_none()); // Concrete old N1-default admission counterexample.
+        assert!(validate(&settings, std::slice::from_ref(&observed)).is_ok());
+        let ordinary = Request {
+            observe_lmr: false,
+            ..observed.clone()
+        };
+        for sampling in [false, true] {
+            let mut configured = settings.clone();
+            if sampling {
+                configured.probcut_samples = 8;
+            } else {
+                configured.probcut = Some(crate::config::ProbCutConfig {
+                    shallow_depth: 1,
+                    deep_depth: 3,
+                    slope: 1.,
+                    intercept: 0.,
+                    margin: 0.1,
+                    nonterminal_abs_bound: 1.,
+                    terminal_utility: 2.,
+                    calibration_sha256: "0".repeat(64),
+                });
+            }
+            let error = validate(&configured, std::slice::from_ref(&observed))
+                .unwrap_err()
+                .to_string();
+            assert!(error.contains("ProbCut"));
+            assert!(validate(&configured, std::slice::from_ref(&ordinary)).is_ok());
+        }
+        assert!(validate(&settings, std::slice::from_ref(&observed)).is_ok());
     }
 }

@@ -88,6 +88,7 @@ fn with_search<T>(
     table.next_generation();
     let mut history = ContinuationHistory::new().unwrap();
     let mut s = Search {
+        probcut: probcut::State::default(),
         #[cfg(not(target_arch = "wasm32"))]
         worker_budget: None,
         #[cfg(feature = "research-diagnostics")]
