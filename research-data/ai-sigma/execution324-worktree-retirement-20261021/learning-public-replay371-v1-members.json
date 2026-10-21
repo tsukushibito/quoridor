@@ -1,0 +1,1946 @@
+{
+  "issue": "quoridor-4lc.324.12.6.1",
+  "namespace": ".artifacts/public-replay371-v1/",
+  "scope": "finite source/control/review custody only; no scientific validation",
+  "original_snapshot": {
+    "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/group-A/remaining-learning-v1/artifact-coverage-v2/catalogue-and-bounded-namespaces.json",
+    "sha256": "d6a540e57edff9f6b89116b822752d0828dbc99f28ca5be9a56a0e416c2e796d",
+    "bytes": 2465973,
+    "mode": "0644"
+  },
+  "Git_locator": {
+    "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/group-A/remaining-learning-v1/artifact-coverage-v2/directed-current-Git-custody-locator.json",
+    "sha256": "f7817edea1fe472819d921e313ef7e728e771dadc436614c0950048ff70dd4c1",
+    "bytes": 119799,
+    "mode": "0644"
+  },
+  "Git_saved": [],
+  "excluded_no_body_read": [
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/outputs/replay-v1/exposure.npz",
+      "relative": ".artifacts/public-replay371-v1/outputs/replay-v1/exposure.npz",
+      "kind": "file",
+      "bytes": 37666,
+      "mode": "0644",
+      "existing_custody_metadata_matches": [],
+      "existing_expected_refs_only": [],
+      "payload_boundary": true,
+      "reason": "protected/model/input/RAW or opaque non-control boundary; no body read"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/outputs/replay-v1/last.pt",
+      "relative": ".artifacts/public-replay371-v1/outputs/replay-v1/last.pt",
+      "kind": "file",
+      "bytes": 54321,
+      "mode": "0644",
+      "existing_custody_metadata_matches": [],
+      "existing_expected_refs_only": [],
+      "payload_boundary": true,
+      "reason": "protected/model/input/RAW or opaque non-control boundary; no body read"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/outputs/replay-v1/last-model/weights.f32",
+      "relative": ".artifacts/public-replay371-v1/outputs/replay-v1/last-model/weights.f32",
+      "kind": "file",
+      "bytes": 49284,
+      "mode": "0644",
+      "existing_custody_metadata_matches": [],
+      "existing_expected_refs_only": [],
+      "payload_boundary": true,
+      "reason": "protected/model/input/RAW or opaque non-control boundary; no body read"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/outputs/added_only-v1/exposure.npz",
+      "relative": ".artifacts/public-replay371-v1/outputs/added_only-v1/exposure.npz",
+      "kind": "file",
+      "bytes": 23958,
+      "mode": "0644",
+      "existing_custody_metadata_matches": [],
+      "existing_expected_refs_only": [],
+      "payload_boundary": true,
+      "reason": "protected/model/input/RAW or opaque non-control boundary; no body read"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/outputs/added_only-v1/last.pt",
+      "relative": ".artifacts/public-replay371-v1/outputs/added_only-v1/last.pt",
+      "kind": "file",
+      "bytes": 54321,
+      "mode": "0644",
+      "existing_custody_metadata_matches": [],
+      "existing_expected_refs_only": [],
+      "payload_boundary": true,
+      "reason": "protected/model/input/RAW or opaque non-control boundary; no body read"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/outputs/added_only-v1/last-model/weights.f32",
+      "relative": ".artifacts/public-replay371-v1/outputs/added_only-v1/last-model/weights.f32",
+      "kind": "file",
+      "bytes": 49284,
+      "mode": "0644",
+      "existing_custody_metadata_matches": [],
+      "existing_expected_refs_only": [],
+      "payload_boundary": true,
+      "reason": "protected/model/input/RAW or opaque non-control boundary; no body read"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/operation-v1/finalizing",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/operation-v1/finalizing",
+      "kind": "file",
+      "bytes": 0,
+      "mode": "0644",
+      "existing_custody_metadata_matches": [],
+      "existing_expected_refs_only": [],
+      "payload_boundary": false,
+      "reason": "protected/model/input/RAW or opaque non-control boundary; no body read"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/operation-v1/finalizing",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/replay-entry-v1/operation-v1/finalizing",
+      "kind": "file",
+      "bytes": 0,
+      "mode": "0644",
+      "existing_custody_metadata_matches": [],
+      "existing_expected_refs_only": [],
+      "payload_boundary": false,
+      "reason": "protected/model/input/RAW or opaque non-control boundary; no body read"
+    }
+  ],
+  "existing_custody_reused": [
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/source/public_replay.py",
+      "relative": ".artifacts/public-replay371-v1/source/public_replay.py",
+      "kind": "file",
+      "bytes": 24490,
+      "mode": "0644",
+      "existing_custody_metadata_matches": [
+        {
+          "provenance": "existing supplied custody",
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/source/public_replay.py",
+          "bytes": 24490,
+          "mode": "0644",
+          "sha256": "218ed67f1bf98816d639408d2f738fef0d12e01077cdc0a45744707e548f725a",
+          "restoration": {
+            "kind": "existing_28_bound_evidence",
+            "mapping": {
+              "kind": "new_finite_evidence_archive",
+              "member": "files/.artifacts/public-replay371-v1/source/public_replay.py"
+            },
+            "archive": {
+              "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/group-A/remaining-learning-v1/bound-evidence-preservation/retained.tar.gz",
+              "sha256": "a659f964da571ebe85487805a30a5b94ef9c006d6d9677e184fe482a85a6f4ca",
+              "bytes": 94614,
+              "mode": "0644"
+            },
+            "Root_adoption": "planned; no rearchive"
+          }
+        }
+      ],
+      "existing_expected_refs_only": [],
+      "payload_boundary": false
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/source/common.py",
+      "relative": ".artifacts/public-replay371-v1/source/common.py",
+      "kind": "file",
+      "bytes": 34043,
+      "mode": "0644",
+      "existing_custody_metadata_matches": [
+        {
+          "provenance": "existing supplied custody",
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/source/common.py",
+          "bytes": 34043,
+          "mode": "0644",
+          "sha256": "cfb88486a0f58158b35eb707fd5cd754b107be99b41da2723b0ab6159e20c06f",
+          "restoration": {
+            "kind": "existing_28_bound_evidence",
+            "mapping": {
+              "kind": "new_finite_evidence_archive",
+              "member": "files/.artifacts/public-replay371-v1/source/common.py"
+            },
+            "archive": {
+              "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/group-A/remaining-learning-v1/bound-evidence-preservation/retained.tar.gz",
+              "sha256": "a659f964da571ebe85487805a30a5b94ef9c006d6d9677e184fe482a85a6f4ca",
+              "bytes": 94614,
+              "mode": "0644"
+            },
+            "Root_adoption": "planned; no rearchive"
+          }
+        }
+      ],
+      "existing_expected_refs_only": [],
+      "payload_boundary": false
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/source/train.py",
+      "relative": ".artifacts/public-replay371-v1/source/train.py",
+      "kind": "file",
+      "bytes": 99344,
+      "mode": "0644",
+      "existing_custody_metadata_matches": [
+        {
+          "provenance": "existing supplied custody",
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/source/train.py",
+          "bytes": 99344,
+          "mode": "0644",
+          "sha256": "ff67c0dbab8ae3d581d196281e791d72e0177a414099ca8e4e176bd9f0e7a447",
+          "restoration": {
+            "kind": "existing_28_bound_evidence",
+            "mapping": {
+              "kind": "new_finite_evidence_archive",
+              "member": "files/.artifacts/public-replay371-v1/source/train.py"
+            },
+            "archive": {
+              "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/group-A/remaining-learning-v1/bound-evidence-preservation/retained.tar.gz",
+              "sha256": "a659f964da571ebe85487805a30a5b94ef9c006d6d9677e184fe482a85a6f4ca",
+              "bytes": 94614,
+              "mode": "0644"
+            },
+            "Root_adoption": "planned; no rearchive"
+          }
+        }
+      ],
+      "existing_expected_refs_only": [],
+      "payload_boundary": false
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/source/sampling.py",
+      "relative": ".artifacts/public-replay371-v1/source/sampling.py",
+      "kind": "file",
+      "bytes": 7438,
+      "mode": "0644",
+      "existing_custody_metadata_matches": [
+        {
+          "provenance": "existing supplied custody",
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/source/sampling.py",
+          "bytes": 7438,
+          "mode": "0644",
+          "sha256": "9d449f88657c94e155dfd552cf0dfcd9d3b7174bb788e315c26b84b8d2ae453e",
+          "restoration": {
+            "kind": "existing_28_bound_evidence",
+            "mapping": {
+              "kind": "new_finite_evidence_archive",
+              "member": "files/.artifacts/public-replay371-v1/source/sampling.py"
+            },
+            "archive": {
+              "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/group-A/remaining-learning-v1/bound-evidence-preservation/retained.tar.gz",
+              "sha256": "a659f964da571ebe85487805a30a5b94ef9c006d6d9677e184fe482a85a6f4ca",
+              "bytes": 94614,
+              "mode": "0644"
+            },
+            "Root_adoption": "planned; no rearchive"
+          }
+        }
+      ],
+      "existing_expected_refs_only": [],
+      "payload_boundary": false
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/related-v2/compact_cache.py",
+      "relative": ".artifacts/public-replay371-v1/related-v2/compact_cache.py",
+      "kind": "file",
+      "bytes": 15222,
+      "mode": "0644",
+      "existing_custody_metadata_matches": [
+        {
+          "provenance": "existing supplied custody",
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/related-v2/compact_cache.py",
+          "bytes": 15222,
+          "mode": "0644",
+          "sha256": "b8f96bd11eeb330fee5d862d7f63bf00443d23b8c6133e5bd46058a54ae769b0",
+          "restoration": {
+            "kind": "existing_28_bound_evidence",
+            "mapping": {
+              "kind": "new_finite_evidence_archive",
+              "member": "files/.artifacts/public-replay371-v1/related-v2/compact_cache.py"
+            },
+            "archive": {
+              "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/group-A/remaining-learning-v1/bound-evidence-preservation/retained.tar.gz",
+              "sha256": "a659f964da571ebe85487805a30a5b94ef9c006d6d9677e184fe482a85a6f4ca",
+              "bytes": 94614,
+              "mode": "0644"
+            },
+            "Root_adoption": "planned; no rearchive"
+          }
+        }
+      ],
+      "existing_expected_refs_only": [],
+      "payload_boundary": false
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/related-v2/qualification.json",
+      "relative": ".artifacts/public-replay371-v1/related-v2/qualification.json",
+      "kind": "file",
+      "bytes": 171,
+      "mode": "0644",
+      "existing_custody_metadata_matches": [
+        {
+          "provenance": "existing supplied custody",
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/related-v2/qualification.json",
+          "bytes": 171,
+          "mode": "0644",
+          "sha256": "022c50bf215191237dc263fc89f1bf5fe73be9b4d5817d7586cbc0b654b6af4f",
+          "restoration": {
+            "kind": "existing_28_bound_evidence",
+            "mapping": {
+              "kind": "new_finite_evidence_archive",
+              "member": "files/.artifacts/public-replay371-v1/related-v2/qualification.json"
+            },
+            "archive": {
+              "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/group-A/remaining-learning-v1/bound-evidence-preservation/retained.tar.gz",
+              "sha256": "a659f964da571ebe85487805a30a5b94ef9c006d6d9677e184fe482a85a6f4ca",
+              "bytes": 94614,
+              "mode": "0644"
+            },
+            "Root_adoption": "planned; no rearchive"
+          }
+        }
+      ],
+      "existing_expected_refs_only": [],
+      "payload_boundary": false
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/related-v2/source-STOP-binding.json",
+      "relative": ".artifacts/public-replay371-v1/related-v2/source-STOP-binding.json",
+      "kind": "file",
+      "bytes": 8629,
+      "mode": "0644",
+      "existing_custody_metadata_matches": [
+        {
+          "provenance": "existing supplied custody",
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/related-v2/source-STOP-binding.json",
+          "bytes": 8629,
+          "mode": "0644",
+          "sha256": "82f63f2d4e3edcb2f8f0837a7c22f7c3f715370e35f3389a33fbb18ad427f7e5",
+          "restoration": {
+            "kind": "existing_28_bound_evidence",
+            "mapping": {
+              "kind": "new_finite_evidence_archive",
+              "member": "files/.artifacts/public-replay371-v1/related-v2/source-STOP-binding.json"
+            },
+            "archive": {
+              "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/group-A/remaining-learning-v1/bound-evidence-preservation/retained.tar.gz",
+              "sha256": "a659f964da571ebe85487805a30a5b94ef9c006d6d9677e184fe482a85a6f4ca",
+              "bytes": 94614,
+              "mode": "0644"
+            },
+            "Root_adoption": "planned; no rearchive"
+          }
+        }
+      ],
+      "existing_expected_refs_only": [],
+      "payload_boundary": false
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/related-v2/test_public_replay_cleanup.py",
+      "relative": ".artifacts/public-replay371-v1/related-v2/test_public_replay_cleanup.py",
+      "kind": "file",
+      "bytes": 10472,
+      "mode": "0644",
+      "existing_custody_metadata_matches": [
+        {
+          "provenance": "existing supplied custody",
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/related-v2/test_public_replay_cleanup.py",
+          "bytes": 10472,
+          "mode": "0644",
+          "sha256": "292c0efd253f6fc77342dde3c48bf8372b8cc7862b30287eb0a1df062e165551",
+          "restoration": {
+            "kind": "existing_28_bound_evidence",
+            "mapping": {
+              "kind": "new_finite_evidence_archive",
+              "member": "files/.artifacts/public-replay371-v1/related-v2/test_public_replay_cleanup.py"
+            },
+            "archive": {
+              "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/group-A/remaining-learning-v1/bound-evidence-preservation/retained.tar.gz",
+              "sha256": "a659f964da571ebe85487805a30a5b94ef9c006d6d9677e184fe482a85a6f4ca",
+              "bytes": 94614,
+              "mode": "0644"
+            },
+            "Root_adoption": "planned; no rearchive"
+          }
+        }
+      ],
+      "existing_expected_refs_only": [],
+      "payload_boundary": false
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/qualification-v1/qualification.json",
+      "relative": ".artifacts/public-replay371-v1/qualification-v1/qualification.json",
+      "kind": "file",
+      "bytes": 170,
+      "mode": "0644",
+      "existing_custody_metadata_matches": [
+        {
+          "provenance": "existing supplied custody",
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/qualification-v1/qualification.json",
+          "bytes": 170,
+          "mode": "0644",
+          "sha256": "1a26547342fb500cf02f39a3132fac02f09cc022e8572f16ce32f40ced24c0a9",
+          "restoration": {
+            "kind": "existing_28_bound_evidence",
+            "mapping": {
+              "kind": "new_finite_evidence_archive",
+              "member": "files/.artifacts/public-replay371-v1/qualification-v1/qualification.json"
+            },
+            "archive": {
+              "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/group-A/remaining-learning-v1/bound-evidence-preservation/retained.tar.gz",
+              "sha256": "a659f964da571ebe85487805a30a5b94ef9c006d6d9677e184fe482a85a6f4ca",
+              "bytes": 94614,
+              "mode": "0644"
+            },
+            "Root_adoption": "planned; no rearchive"
+          }
+        }
+      ],
+      "existing_expected_refs_only": [],
+      "payload_boundary": false
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/qualification-v1/composite-binding.json",
+      "relative": ".artifacts/public-replay371-v1/qualification-v1/composite-binding.json",
+      "kind": "file",
+      "bytes": 13581,
+      "mode": "0644",
+      "existing_custody_metadata_matches": [
+        {
+          "provenance": "existing supplied custody",
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/qualification-v1/composite-binding.json",
+          "bytes": 13581,
+          "mode": "0644",
+          "sha256": "afef3715ff6dbb40e3b70d80275424de99a37ab265e0589b7c5b481da6dd6e65",
+          "restoration": {
+            "kind": "existing_28_bound_evidence",
+            "mapping": {
+              "kind": "new_finite_evidence_archive",
+              "member": "files/.artifacts/public-replay371-v1/qualification-v1/composite-binding.json"
+            },
+            "archive": {
+              "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/group-A/remaining-learning-v1/bound-evidence-preservation/retained.tar.gz",
+              "sha256": "a659f964da571ebe85487805a30a5b94ef9c006d6d9677e184fe482a85a6f4ca",
+              "bytes": 94614,
+              "mode": "0644"
+            },
+            "Root_adoption": "planned; no rearchive"
+          }
+        }
+      ],
+      "existing_expected_refs_only": [],
+      "payload_boundary": false
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/qualification-v1/test_public_replay.py",
+      "relative": ".artifacts/public-replay371-v1/qualification-v1/test_public_replay.py",
+      "kind": "file",
+      "bytes": 23813,
+      "mode": "0644",
+      "existing_custody_metadata_matches": [
+        {
+          "provenance": "existing supplied custody",
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/qualification-v1/test_public_replay.py",
+          "bytes": 23813,
+          "mode": "0644",
+          "sha256": "f430b33a69bafdabee9af00905552cfc3b82ab84c8892b8b9c3afd8c90406f7b",
+          "restoration": {
+            "kind": "existing_28_bound_evidence",
+            "mapping": {
+              "kind": "new_finite_evidence_archive",
+              "member": "files/.artifacts/public-replay371-v1/qualification-v1/test_public_replay.py"
+            },
+            "archive": {
+              "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/group-A/remaining-learning-v1/bound-evidence-preservation/retained.tar.gz",
+              "sha256": "a659f964da571ebe85487805a30a5b94ef9c006d6d9677e184fe482a85a6f4ca",
+              "bytes": 94614,
+              "mode": "0644"
+            },
+            "Root_adoption": "planned; no rearchive"
+          }
+        }
+      ],
+      "existing_expected_refs_only": [],
+      "payload_boundary": false
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/saved-output-audit.json",
+      "relative": ".artifacts/public-replay371-v1/result-v1/saved-output-audit.json",
+      "kind": "file",
+      "bytes": 1978,
+      "mode": "0644",
+      "existing_custody_metadata_matches": [
+        {
+          "provenance": "existing supplied custody",
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/saved-output-audit.json",
+          "bytes": 1978,
+          "mode": "0644",
+          "sha256": "50c8f9cce8ab5dae08d85f07bf39dc43635dcd59d909ebc4727c776563ec2cdf",
+          "restoration": {
+            "kind": "existing_seven_closed_results",
+            "member": "files/.artifacts/public-replay371-v1/result-v1/saved-output-audit.json",
+            "archive": {
+              "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/group-A/learning-public-replay371-seven-results-v1/retained.tar.gz",
+              "sha256": "a2006b089ca8fbba4cf1dd62918bad765ce9ba036f609b5afa3098de1f4bfc77",
+              "bytes": 64486,
+              "mode": "0644"
+            },
+            "durable_Root_commit": "a0631d9b"
+          }
+        },
+        {
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/saved-output-audit.json",
+          "bytes": 1978,
+          "mode": "0644",
+          "sha256": "50c8f9cce8ab5dae08d85f07bf39dc43635dcd59d909ebc4727c776563ec2cdf",
+          "metadata_ref": {
+            "path": "/workspaces/quoridor/research-data/ai-sigma/execution324-worktree-retirement-20261021/learning-million-public-replay371-preservation.json",
+            "sha256": "eccdb1738d37dbb132bbe9db37cac776d61e4880e0d96fffa0a1b9d000382b2e",
+            "bytes": 9260,
+            "mode": "0644"
+          },
+          "member": "files/.artifacts/public-replay371-v1/result-v1/saved-output-audit.json",
+          "archive": {
+            "path": "research-data/ai-sigma/execution324-worktree-retirement-20261021/learning-million-public-replay371-seven-results.tar.gz",
+            "sha256": "a2006b089ca8fbba4cf1dd62918bad765ce9ba036f609b5afa3098de1f4bfc77",
+            "bytes": 64486,
+            "mode": "0644"
+          }
+        }
+      ],
+      "existing_expected_refs_only": [
+        {
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/saved-output-audit.json",
+          "bytes": 1978,
+          "mode": "0644",
+          "sha256": "50c8f9cce8ab5dae08d85f07bf39dc43635dcd59d909ebc4727c776563ec2cdf",
+          "metadata_ref": {
+            "path": "/workspaces/quoridor/research-data/ai-sigma/public-replay371/result-acceptance-v1.json",
+            "sha256": "82ce42315b8df1c7f851284ad69a28ab4982951aa72999dbb2b2b053dde6647d",
+            "bytes": 6831,
+            "mode": "0644"
+          },
+          "member": null,
+          "archive": null
+        }
+      ],
+      "payload_boundary": false
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/summary.json",
+      "relative": ".artifacts/public-replay371-v1/result-v1/summary.json",
+      "kind": "file",
+      "bytes": 14611,
+      "mode": "0644",
+      "existing_custody_metadata_matches": [
+        {
+          "provenance": "existing supplied custody",
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/summary.json",
+          "bytes": 14611,
+          "mode": "0644",
+          "sha256": "ad5f761f13b3e3bb4fba84338e9d1306e6f538b9d0fb34c9c1edcbbb04306ec2",
+          "restoration": {
+            "kind": "existing_seven_closed_results",
+            "member": "files/.artifacts/public-replay371-v1/result-v1/summary.json",
+            "archive": {
+              "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/group-A/learning-public-replay371-seven-results-v1/retained.tar.gz",
+              "sha256": "a2006b089ca8fbba4cf1dd62918bad765ce9ba036f609b5afa3098de1f4bfc77",
+              "bytes": 64486,
+              "mode": "0644"
+            },
+            "durable_Root_commit": "a0631d9b"
+          }
+        },
+        {
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/summary.json",
+          "bytes": 14611,
+          "mode": "0644",
+          "sha256": "ad5f761f13b3e3bb4fba84338e9d1306e6f538b9d0fb34c9c1edcbbb04306ec2",
+          "metadata_ref": {
+            "path": "/workspaces/quoridor/research-data/ai-sigma/execution324-worktree-retirement-20261021/learning-million-public-replay371-preservation.json",
+            "sha256": "eccdb1738d37dbb132bbe9db37cac776d61e4880e0d96fffa0a1b9d000382b2e",
+            "bytes": 9260,
+            "mode": "0644"
+          },
+          "member": "files/.artifacts/public-replay371-v1/result-v1/summary.json",
+          "archive": {
+            "path": "research-data/ai-sigma/execution324-worktree-retirement-20261021/learning-million-public-replay371-seven-results.tar.gz",
+            "sha256": "a2006b089ca8fbba4cf1dd62918bad765ce9ba036f609b5afa3098de1f4bfc77",
+            "bytes": 64486,
+            "mode": "0644"
+          }
+        }
+      ],
+      "existing_expected_refs_only": [
+        {
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/summary.json",
+          "bytes": 14611,
+          "mode": "0644",
+          "sha256": "ad5f761f13b3e3bb4fba84338e9d1306e6f538b9d0fb34c9c1edcbbb04306ec2",
+          "metadata_ref": {
+            "path": "/workspaces/quoridor/research-data/ai-sigma/public-replay371/result-acceptance-v1.json",
+            "sha256": "82ce42315b8df1c7f851284ad69a28ab4982951aa72999dbb2b2b053dde6647d",
+            "bytes": 6831,
+            "mode": "0644"
+          },
+          "member": null,
+          "archive": null
+        }
+      ],
+      "payload_boundary": false
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/mse-curves.svg",
+      "relative": ".artifacts/public-replay371-v1/result-v1/mse-curves.svg",
+      "kind": "file",
+      "bytes": 162940,
+      "mode": "0644",
+      "existing_custody_metadata_matches": [
+        {
+          "provenance": "existing supplied custody",
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/mse-curves.svg",
+          "bytes": 162940,
+          "mode": "0644",
+          "sha256": "91773c08f3f259c3d325cba8ae7e47510cf9a913155a7d013ab84355714ed396",
+          "restoration": {
+            "kind": "existing_seven_closed_results",
+            "member": "files/.artifacts/public-replay371-v1/result-v1/mse-curves.svg",
+            "archive": {
+              "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/group-A/learning-public-replay371-seven-results-v1/retained.tar.gz",
+              "sha256": "a2006b089ca8fbba4cf1dd62918bad765ce9ba036f609b5afa3098de1f4bfc77",
+              "bytes": 64486,
+              "mode": "0644"
+            },
+            "durable_Root_commit": "a0631d9b"
+          }
+        },
+        {
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/mse-curves.svg",
+          "bytes": 162940,
+          "mode": "0644",
+          "sha256": "91773c08f3f259c3d325cba8ae7e47510cf9a913155a7d013ab84355714ed396",
+          "metadata_ref": {
+            "path": "/workspaces/quoridor/research-data/ai-sigma/execution324-worktree-retirement-20261021/learning-million-public-replay371-preservation.json",
+            "sha256": "eccdb1738d37dbb132bbe9db37cac776d61e4880e0d96fffa0a1b9d000382b2e",
+            "bytes": 9260,
+            "mode": "0644"
+          },
+          "member": "files/.artifacts/public-replay371-v1/result-v1/mse-curves.svg",
+          "archive": {
+            "path": "research-data/ai-sigma/execution324-worktree-retirement-20261021/learning-million-public-replay371-seven-results.tar.gz",
+            "sha256": "a2006b089ca8fbba4cf1dd62918bad765ce9ba036f609b5afa3098de1f4bfc77",
+            "bytes": 64486,
+            "mode": "0644"
+          }
+        }
+      ],
+      "existing_expected_refs_only": [
+        {
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/mse-curves.svg",
+          "bytes": 162940,
+          "mode": "0644",
+          "sha256": "91773c08f3f259c3d325cba8ae7e47510cf9a913155a7d013ab84355714ed396",
+          "metadata_ref": {
+            "path": "/workspaces/quoridor/research-data/ai-sigma/public-replay371/result-acceptance-v1.json",
+            "sha256": "82ce42315b8df1c7f851284ad69a28ab4982951aa72999dbb2b2b053dde6647d",
+            "bytes": 6831,
+            "mode": "0644"
+          },
+          "member": null,
+          "archive": null
+        }
+      ],
+      "payload_boundary": false
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/public-replay371-comparison.pdf",
+      "relative": ".artifacts/public-replay371-v1/result-v1/public-replay371-comparison.pdf",
+      "kind": "file",
+      "bytes": 35147,
+      "mode": "0644",
+      "existing_custody_metadata_matches": [
+        {
+          "provenance": "existing supplied custody",
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/public-replay371-comparison.pdf",
+          "bytes": 35147,
+          "mode": "0644",
+          "sha256": "4f7042dd3322e0304dcc042408fdf3c10df21df72daf0fcf8ea92fe45c10b5b8",
+          "restoration": {
+            "kind": "existing_seven_closed_results",
+            "member": "files/.artifacts/public-replay371-v1/result-v1/public-replay371-comparison.pdf",
+            "archive": {
+              "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/group-A/learning-public-replay371-seven-results-v1/retained.tar.gz",
+              "sha256": "a2006b089ca8fbba4cf1dd62918bad765ce9ba036f609b5afa3098de1f4bfc77",
+              "bytes": 64486,
+              "mode": "0644"
+            },
+            "durable_Root_commit": "a0631d9b"
+          }
+        },
+        {
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/public-replay371-comparison.pdf",
+          "bytes": 35147,
+          "mode": "0644",
+          "sha256": "4f7042dd3322e0304dcc042408fdf3c10df21df72daf0fcf8ea92fe45c10b5b8",
+          "metadata_ref": {
+            "path": "/workspaces/quoridor/research-data/ai-sigma/execution324-worktree-retirement-20261021/learning-million-public-replay371-preservation.json",
+            "sha256": "eccdb1738d37dbb132bbe9db37cac776d61e4880e0d96fffa0a1b9d000382b2e",
+            "bytes": 9260,
+            "mode": "0644"
+          },
+          "member": "files/.artifacts/public-replay371-v1/result-v1/public-replay371-comparison.pdf",
+          "archive": {
+            "path": "research-data/ai-sigma/execution324-worktree-retirement-20261021/learning-million-public-replay371-seven-results.tar.gz",
+            "sha256": "a2006b089ca8fbba4cf1dd62918bad765ce9ba036f609b5afa3098de1f4bfc77",
+            "bytes": 64486,
+            "mode": "0644"
+          }
+        }
+      ],
+      "existing_expected_refs_only": [
+        {
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/public-replay371-comparison.pdf",
+          "bytes": 35147,
+          "mode": "0644",
+          "sha256": "4f7042dd3322e0304dcc042408fdf3c10df21df72daf0fcf8ea92fe45c10b5b8",
+          "metadata_ref": {
+            "path": "/workspaces/quoridor/research-data/ai-sigma/public-replay371/result-acceptance-v1.json",
+            "sha256": "82ce42315b8df1c7f851284ad69a28ab4982951aa72999dbb2b2b053dde6647d",
+            "bytes": 6831,
+            "mode": "0644"
+          },
+          "member": null,
+          "archive": null
+        }
+      ],
+      "payload_boundary": false
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/report.md",
+      "relative": ".artifacts/public-replay371-v1/result-v1/report.md",
+      "kind": "file",
+      "bytes": 8984,
+      "mode": "0644",
+      "existing_custody_metadata_matches": [
+        {
+          "provenance": "existing supplied custody",
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/report.md",
+          "bytes": 8984,
+          "mode": "0644",
+          "sha256": "45c3e4b9ac1ac769d11136dde4696b9e1183a286826e07cc3ac1c9978a879bed",
+          "restoration": {
+            "kind": "existing_seven_closed_results",
+            "member": "files/.artifacts/public-replay371-v1/result-v1/report.md",
+            "archive": {
+              "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/group-A/learning-public-replay371-seven-results-v1/retained.tar.gz",
+              "sha256": "a2006b089ca8fbba4cf1dd62918bad765ce9ba036f609b5afa3098de1f4bfc77",
+              "bytes": 64486,
+              "mode": "0644"
+            },
+            "durable_Root_commit": "a0631d9b"
+          }
+        },
+        {
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/report.md",
+          "bytes": 8984,
+          "mode": "0644",
+          "sha256": "45c3e4b9ac1ac769d11136dde4696b9e1183a286826e07cc3ac1c9978a879bed",
+          "metadata_ref": {
+            "path": "/workspaces/quoridor/research-data/ai-sigma/execution324-worktree-retirement-20261021/learning-million-public-replay371-preservation.json",
+            "sha256": "eccdb1738d37dbb132bbe9db37cac776d61e4880e0d96fffa0a1b9d000382b2e",
+            "bytes": 9260,
+            "mode": "0644"
+          },
+          "member": "files/.artifacts/public-replay371-v1/result-v1/report.md",
+          "archive": {
+            "path": "research-data/ai-sigma/execution324-worktree-retirement-20261021/learning-million-public-replay371-seven-results.tar.gz",
+            "sha256": "a2006b089ca8fbba4cf1dd62918bad765ce9ba036f609b5afa3098de1f4bfc77",
+            "bytes": 64486,
+            "mode": "0644"
+          }
+        }
+      ],
+      "existing_expected_refs_only": [
+        {
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/report.md",
+          "bytes": 8984,
+          "mode": "0644",
+          "sha256": "45c3e4b9ac1ac769d11136dde4696b9e1183a286826e07cc3ac1c9978a879bed",
+          "metadata_ref": {
+            "path": "/workspaces/quoridor/research-data/ai-sigma/public-replay371/result-acceptance-v1.json",
+            "sha256": "82ce42315b8df1c7f851284ad69a28ab4982951aa72999dbb2b2b053dde6647d",
+            "bytes": 6831,
+            "mode": "0644"
+          },
+          "member": null,
+          "archive": null
+        }
+      ],
+      "payload_boundary": false
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/result-binding.json",
+      "relative": ".artifacts/public-replay371-v1/result-v1/result-binding.json",
+      "kind": "file",
+      "bytes": 26379,
+      "mode": "0644",
+      "existing_custody_metadata_matches": [
+        {
+          "provenance": "existing supplied custody",
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/result-binding.json",
+          "bytes": 26379,
+          "mode": "0644",
+          "sha256": "7600b05d9cab11f53eff5428d236ec64820f3a0de62ac762b02cd1a1b93001ed",
+          "restoration": {
+            "kind": "existing_28_bound_evidence",
+            "mapping": {
+              "kind": "new_finite_evidence_archive",
+              "member": "files/.artifacts/public-replay371-v1/result-v1/result-binding.json"
+            },
+            "archive": {
+              "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/group-A/remaining-learning-v1/bound-evidence-preservation/retained.tar.gz",
+              "sha256": "a659f964da571ebe85487805a30a5b94ef9c006d6d9677e184fe482a85a6f4ca",
+              "bytes": 94614,
+              "mode": "0644"
+            },
+            "Root_adoption": "planned; no rearchive"
+          }
+        }
+      ],
+      "existing_expected_refs_only": [
+        {
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/result-binding.json",
+          "bytes": 26379,
+          "mode": "0644",
+          "sha256": "7600b05d9cab11f53eff5428d236ec64820f3a0de62ac762b02cd1a1b93001ed",
+          "metadata_ref": {
+            "path": "/workspaces/quoridor/research-data/ai-sigma/public-replay371/result-acceptance-v1.json",
+            "sha256": "82ce42315b8df1c7f851284ad69a28ab4982951aa72999dbb2b2b053dde6647d",
+            "bytes": 6831,
+            "mode": "0644"
+          },
+          "member": null,
+          "archive": null
+        }
+      ],
+      "payload_boundary": false
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/administrative-refusals.json",
+      "relative": ".artifacts/public-replay371-v1/result-v1/administrative-refusals.json",
+      "kind": "file",
+      "bytes": 668,
+      "mode": "0644",
+      "existing_custody_metadata_matches": [
+        {
+          "provenance": "existing supplied custody",
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/administrative-refusals.json",
+          "bytes": 668,
+          "mode": "0644",
+          "sha256": "d8d2760ba8cdd311c039558e912e11b04c70853b47c17b7c4977a77a64f63cc4",
+          "restoration": {
+            "kind": "existing_seven_closed_results",
+            "member": "files/.artifacts/public-replay371-v1/result-v1/administrative-refusals.json",
+            "archive": {
+              "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/group-A/learning-public-replay371-seven-results-v1/retained.tar.gz",
+              "sha256": "a2006b089ca8fbba4cf1dd62918bad765ce9ba036f609b5afa3098de1f4bfc77",
+              "bytes": 64486,
+              "mode": "0644"
+            },
+            "durable_Root_commit": "a0631d9b"
+          }
+        },
+        {
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/administrative-refusals.json",
+          "bytes": 668,
+          "mode": "0644",
+          "sha256": "d8d2760ba8cdd311c039558e912e11b04c70853b47c17b7c4977a77a64f63cc4",
+          "metadata_ref": {
+            "path": "/workspaces/quoridor/research-data/ai-sigma/execution324-worktree-retirement-20261021/learning-million-public-replay371-preservation.json",
+            "sha256": "eccdb1738d37dbb132bbe9db37cac776d61e4880e0d96fffa0a1b9d000382b2e",
+            "bytes": 9260,
+            "mode": "0644"
+          },
+          "member": "files/.artifacts/public-replay371-v1/result-v1/administrative-refusals.json",
+          "archive": {
+            "path": "research-data/ai-sigma/execution324-worktree-retirement-20261021/learning-million-public-replay371-seven-results.tar.gz",
+            "sha256": "a2006b089ca8fbba4cf1dd62918bad765ce9ba036f609b5afa3098de1f4bfc77",
+            "bytes": 64486,
+            "mode": "0644"
+          }
+        }
+      ],
+      "existing_expected_refs_only": [
+        {
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/administrative-refusals.json",
+          "bytes": 668,
+          "mode": "0644",
+          "sha256": "d8d2760ba8cdd311c039558e912e11b04c70853b47c17b7c4977a77a64f63cc4",
+          "metadata_ref": {
+            "path": "/workspaces/quoridor/research-data/ai-sigma/public-replay371/result-acceptance-v1.json",
+            "sha256": "82ce42315b8df1c7f851284ad69a28ab4982951aa72999dbb2b2b053dde6647d",
+            "bytes": 6831,
+            "mode": "0644"
+          },
+          "member": null,
+          "archive": null
+        }
+      ],
+      "payload_boundary": false
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/all-curves.csv",
+      "relative": ".artifacts/public-replay371-v1/result-v1/all-curves.csv",
+      "kind": "file",
+      "bytes": 7948,
+      "mode": "0644",
+      "existing_custody_metadata_matches": [
+        {
+          "provenance": "existing supplied custody",
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/all-curves.csv",
+          "bytes": 7948,
+          "mode": "0644",
+          "sha256": "93141a355cebf2e1fa544e2b7474aec85b3d1541e9135d267ab2c813d5a6bb77",
+          "restoration": {
+            "kind": "existing_seven_closed_results",
+            "member": "files/.artifacts/public-replay371-v1/result-v1/all-curves.csv",
+            "archive": {
+              "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/group-A/learning-public-replay371-seven-results-v1/retained.tar.gz",
+              "sha256": "a2006b089ca8fbba4cf1dd62918bad765ce9ba036f609b5afa3098de1f4bfc77",
+              "bytes": 64486,
+              "mode": "0644"
+            },
+            "durable_Root_commit": "a0631d9b"
+          }
+        },
+        {
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/all-curves.csv",
+          "bytes": 7948,
+          "mode": "0644",
+          "sha256": "93141a355cebf2e1fa544e2b7474aec85b3d1541e9135d267ab2c813d5a6bb77",
+          "metadata_ref": {
+            "path": "/workspaces/quoridor/research-data/ai-sigma/execution324-worktree-retirement-20261021/learning-million-public-replay371-preservation.json",
+            "sha256": "eccdb1738d37dbb132bbe9db37cac776d61e4880e0d96fffa0a1b9d000382b2e",
+            "bytes": 9260,
+            "mode": "0644"
+          },
+          "member": "files/.artifacts/public-replay371-v1/result-v1/all-curves.csv",
+          "archive": {
+            "path": "research-data/ai-sigma/execution324-worktree-retirement-20261021/learning-million-public-replay371-seven-results.tar.gz",
+            "sha256": "a2006b089ca8fbba4cf1dd62918bad765ce9ba036f609b5afa3098de1f4bfc77",
+            "bytes": 64486,
+            "mode": "0644"
+          }
+        }
+      ],
+      "existing_expected_refs_only": [
+        {
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/all-curves.csv",
+          "bytes": 7948,
+          "mode": "0644",
+          "sha256": "93141a355cebf2e1fa544e2b7474aec85b3d1541e9135d267ab2c813d5a6bb77",
+          "metadata_ref": {
+            "path": "/workspaces/quoridor/research-data/ai-sigma/public-replay371/result-acceptance-v1.json",
+            "sha256": "82ce42315b8df1c7f851284ad69a28ab4982951aa72999dbb2b2b053dde6647d",
+            "bytes": 6831,
+            "mode": "0644"
+          },
+          "member": null,
+          "archive": null
+        }
+      ],
+      "payload_boundary": false
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/operation-v1/manifest.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/operation-v1/manifest.json",
+      "kind": "file",
+      "bytes": 8841,
+      "mode": "0644",
+      "existing_custody_metadata_matches": [
+        {
+          "provenance": "existing supplied custody",
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/operation-v1/manifest.json",
+          "bytes": 8841,
+          "mode": "0644",
+          "sha256": "b8a67007ef5d7cc964d679875ff0c32e20b2eafa991d4dd0aa26426631a72710",
+          "restoration": {
+            "kind": "existing_28_bound_evidence",
+            "mapping": {
+              "kind": "new_finite_evidence_archive",
+              "member": "files/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/operation-v1/manifest.json"
+            },
+            "archive": {
+              "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/group-A/remaining-learning-v1/bound-evidence-preservation/retained.tar.gz",
+              "sha256": "a659f964da571ebe85487805a30a5b94ef9c006d6d9677e184fe482a85a6f4ca",
+              "bytes": 94614,
+              "mode": "0644"
+            },
+            "Root_adoption": "planned; no rearchive"
+          }
+        }
+      ],
+      "existing_expected_refs_only": [
+        {
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/operation-v1/manifest.json",
+          "bytes": 8841,
+          "mode": "0644",
+          "sha256": "b8a67007ef5d7cc964d679875ff0c32e20b2eafa991d4dd0aa26426631a72710",
+          "metadata_ref": {
+            "path": "/workspaces/quoridor/research-data/ai-sigma/public-replay371/result-acceptance-v1.json",
+            "sha256": "82ce42315b8df1c7f851284ad69a28ab4982951aa72999dbb2b2b053dde6647d",
+            "bytes": 6831,
+            "mode": "0644"
+          },
+          "member": null,
+          "archive": null
+        }
+      ],
+      "payload_boundary": false
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/operation-v1/manifest.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/replay-entry-v1/operation-v1/manifest.json",
+      "kind": "file",
+      "bytes": 8748,
+      "mode": "0644",
+      "existing_custody_metadata_matches": [
+        {
+          "provenance": "existing supplied custody",
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/operation-v1/manifest.json",
+          "bytes": 8748,
+          "mode": "0644",
+          "sha256": "d4f8dd26f65dbabc50ac206ff23b09e368fbf7419ff11f39bb2d41b24155ddf8",
+          "restoration": {
+            "kind": "existing_28_bound_evidence",
+            "mapping": {
+              "kind": "new_finite_evidence_archive",
+              "member": "files/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/operation-v1/manifest.json"
+            },
+            "archive": {
+              "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/group-A/remaining-learning-v1/bound-evidence-preservation/retained.tar.gz",
+              "sha256": "a659f964da571ebe85487805a30a5b94ef9c006d6d9677e184fe482a85a6f4ca",
+              "bytes": 94614,
+              "mode": "0644"
+            },
+            "Root_adoption": "planned; no rearchive"
+          }
+        }
+      ],
+      "existing_expected_refs_only": [
+        {
+          "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/operation-v1/manifest.json",
+          "bytes": 8748,
+          "mode": "0644",
+          "sha256": "d4f8dd26f65dbabc50ac206ff23b09e368fbf7419ff11f39bb2d41b24155ddf8",
+          "metadata_ref": {
+            "path": "/workspaces/quoridor/research-data/ai-sigma/public-replay371/result-acceptance-v1.json",
+            "sha256": "82ce42315b8df1c7f851284ad69a28ab4982951aa72999dbb2b2b053dde6647d",
+            "bytes": 6831,
+            "mode": "0644"
+          },
+          "member": null,
+          "archive": null
+        }
+      ],
+      "payload_boundary": false
+    }
+  ],
+  "members": [
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/report.md",
+      "relative": ".artifacts/public-replay371-v1/report.md",
+      "bytes": 5997,
+      "mode": "0644",
+      "sha256": "4ff106ad3ea2d9dc84bae6e56b967c31a239b59e8e2b36d858e4becd6f2f9628",
+      "member": "files/.artifacts/public-replay371-v1/report.md"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/controls/preparation-support.json",
+      "relative": ".artifacts/public-replay371-v1/controls/preparation-support.json",
+      "bytes": 718,
+      "mode": "0644",
+      "sha256": "5a3b42af6bc1c4b098534ae3b04226a46a84ad5456dba067550c06c221cfb0f3",
+      "member": "files/.artifacts/public-replay371-v1/controls/preparation-support.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/controls/fit-interface.json",
+      "relative": ".artifacts/public-replay371-v1/controls/fit-interface.json",
+      "bytes": 3964,
+      "mode": "0644",
+      "sha256": "6efa3e06a4418f3a41471dc16be56a4f4783bda53384afc00043a8b8889e143f",
+      "member": "files/.artifacts/public-replay371-v1/controls/fit-interface.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/controls/AST-proof.json",
+      "relative": ".artifacts/public-replay371-v1/controls/AST-proof.json",
+      "bytes": 7707,
+      "mode": "0644",
+      "sha256": "65165d67214be086d3e9df03b8116e72dff77b78e417cf1203e29cb0af7359b1",
+      "member": "files/.artifacts/public-replay371-v1/controls/AST-proof.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/controls/diagnostic-indices.json",
+      "relative": ".artifacts/public-replay371-v1/controls/diagnostic-indices.json",
+      "bytes": 145329,
+      "mode": "0644",
+      "sha256": "ea0f01513339de1ca6518ba28027af5f7def57f77c584954d1cf05262278629d",
+      "member": "files/.artifacts/public-replay371-v1/controls/diagnostic-indices.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/controls/source-STOP-binding.json",
+      "relative": ".artifacts/public-replay371-v1/controls/source-STOP-binding.json",
+      "bytes": 10614,
+      "mode": "0644",
+      "sha256": "3f316547588bd5ef8a345760dc45f857e4290e61b6489ea6646f8e0f5d36bfed",
+      "member": "files/.artifacts/public-replay371-v1/controls/source-STOP-binding.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/controls/handoff.json",
+      "relative": ".artifacts/public-replay371-v1/controls/handoff.json",
+      "bytes": 1639,
+      "mode": "0644",
+      "sha256": "399326d9109d6207ad5de7f7dfff19746e1ec64dbbdbe208af7e01b08d44d847",
+      "member": "files/.artifacts/public-replay371-v1/controls/handoff.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/controls/selected-before.json",
+      "relative": ".artifacts/public-replay371-v1/controls/selected-before.json",
+      "bytes": 1099,
+      "mode": "0644",
+      "sha256": "7b0758440bbbb06b750fbc613654dd0ebb1e86f518e852ff34b8326a7988c293",
+      "member": "files/.artifacts/public-replay371-v1/controls/selected-before.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/controls/fit-replay-draft.json",
+      "relative": ".artifacts/public-replay371-v1/controls/fit-replay-draft.json",
+      "bytes": 2534,
+      "mode": "0644",
+      "sha256": "db2e675834c2776801843f38532049460032b6289ac3e070b1c9b01263e7dff9",
+      "member": "files/.artifacts/public-replay371-v1/controls/fit-replay-draft.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/controls/selected-study-formatted.json",
+      "relative": ".artifacts/public-replay371-v1/controls/selected-study-formatted.json",
+      "bytes": 5467,
+      "mode": "0644",
+      "sha256": "a16edbbe758257cac48d0e27949978bb4b56afbef5417d8c3650c26d7e0b3835",
+      "member": "files/.artifacts/public-replay371-v1/controls/selected-study-formatted.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/controls/fit-added_only-draft.json",
+      "relative": ".artifacts/public-replay371-v1/controls/fit-added_only-draft.json",
+      "bytes": 2538,
+      "mode": "0644",
+      "sha256": "62c2f8f97d4b8becc9152510d8ffbb1ba406d4a5cb7c0d58ebdec866a0bde054",
+      "member": "files/.artifacts/public-replay371-v1/controls/fit-added_only-draft.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/controls/selected-study-draft.json",
+      "relative": ".artifacts/public-replay371-v1/controls/selected-study-draft.json",
+      "bytes": 5787,
+      "mode": "0644",
+      "sha256": "3109fe3ba23acd3837aebe06acbd3b07e9053f96b45b73f98ea9c799f1676643",
+      "member": "files/.artifacts/public-replay371-v1/controls/selected-study-draft.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/source/compact_cache.py",
+      "relative": ".artifacts/public-replay371-v1/source/compact_cache.py",
+      "bytes": 13972,
+      "mode": "0644",
+      "sha256": "127990ad8cc762049c79d5e39431fe966333ff63d200dc64085a922c1965ac3e",
+      "member": "files/.artifacts/public-replay371-v1/source/compact_cache.py"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/source/compact_cache.py.patch",
+      "relative": ".artifacts/public-replay371-v1/source/compact_cache.py.patch",
+      "bytes": 5910,
+      "mode": "0644",
+      "sha256": "553856422d7287b31c46a6909bf1ed74352fe728d5b5f131ab69e660952a92a2",
+      "member": "files/.artifacts/public-replay371-v1/source/compact_cache.py.patch"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/source/test_public_replay.py.patch",
+      "relative": ".artifacts/public-replay371-v1/source/test_public_replay.py.patch",
+      "bytes": 23012,
+      "mode": "0644",
+      "sha256": "eb2138f8ad967a2ec4e16fdade4ae2eb652401fb6a5ca6bb3d992a2a2b73fb76",
+      "member": "files/.artifacts/public-replay371-v1/source/test_public_replay.py.patch"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/source/sampling.py.patch",
+      "relative": ".artifacts/public-replay371-v1/source/sampling.py.patch",
+      "bytes": 774,
+      "mode": "0644",
+      "sha256": "d3520799bdd4ec2a0e65e1978960a6882c106339ce813f2d178eca1a8390676c",
+      "member": "files/.artifacts/public-replay371-v1/source/sampling.py.patch"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/source/public_replay.py.patch",
+      "relative": ".artifacts/public-replay371-v1/source/public_replay.py.patch",
+      "bytes": 25100,
+      "mode": "0644",
+      "sha256": "6ea12da8faa7369e02bb920ffd224a03896e22140371ed082082df63875ee6dd",
+      "member": "files/.artifacts/public-replay371-v1/source/public_replay.py.patch"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/source/train.py.before.gz",
+      "relative": ".artifacts/public-replay371-v1/source/train.py.before.gz",
+      "bytes": 22519,
+      "mode": "0644",
+      "sha256": "a784095daa569cc1a3918f508c3aa434b48fde3e2d1b65a4333265620c5db5d5",
+      "member": "files/.artifacts/public-replay371-v1/source/train.py.before.gz"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/source/train.py.patch",
+      "relative": ".artifacts/public-replay371-v1/source/train.py.patch",
+      "bytes": 641,
+      "mode": "0644",
+      "sha256": "b78198479f9366e39e5776022e706a46c504842a327a8968a6d707e377c7143f",
+      "member": "files/.artifacts/public-replay371-v1/source/train.py.patch"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/source/sampling.py.before.gz",
+      "relative": ".artifacts/public-replay371-v1/source/sampling.py.before.gz",
+      "bytes": 2268,
+      "mode": "0644",
+      "sha256": "6592f866d5de8d4c24637518a4e5715030429a3757758dcfbedd86a9881ebac7",
+      "member": "files/.artifacts/public-replay371-v1/source/sampling.py.before.gz"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/source/common.py.patch",
+      "relative": ".artifacts/public-replay371-v1/source/common.py.patch",
+      "bytes": 4487,
+      "mode": "0644",
+      "sha256": "511614fdd138fe459e412d2ae3a6f336ec4aff16f67a3f9a3ccfe135a90a4f91",
+      "member": "files/.artifacts/public-replay371-v1/source/common.py.patch"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/source/research-lifecycle.py.patch",
+      "relative": ".artifacts/public-replay371-v1/source/research-lifecycle.py.patch",
+      "bytes": 12683,
+      "mode": "0644",
+      "sha256": "f400e8955844e9e5a7dc519220c8d7c45d4912336fde45236759f62cc71d3886",
+      "member": "files/.artifacts/public-replay371-v1/source/research-lifecycle.py.patch"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/source/research-lifecycle.py",
+      "relative": ".artifacts/public-replay371-v1/source/research-lifecycle.py",
+      "bytes": 145724,
+      "mode": "0644",
+      "sha256": "eb9e054190525b9c3370a8b588e0c77bbeb6ffddf49736ac375bea9da88ea314",
+      "member": "files/.artifacts/public-replay371-v1/source/research-lifecycle.py"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/source/research-lifecycle.py.before.gz",
+      "relative": ".artifacts/public-replay371-v1/source/research-lifecycle.py.before.gz",
+      "bytes": 31748,
+      "mode": "0644",
+      "sha256": "1eddaaacbd0f7b460db37b299241171b485cfc1f70abef66df14dbbdeb3bdcb6",
+      "member": "files/.artifacts/public-replay371-v1/source/research-lifecycle.py.before.gz"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/source/compact_cache.py.before.gz",
+      "relative": ".artifacts/public-replay371-v1/source/compact_cache.py.before.gz",
+      "bytes": 2533,
+      "mode": "0644",
+      "sha256": "c745eb7e0d6f186da4170085ee7c0d920d10c927d07c4e9eb6a2afb7644ff160",
+      "member": "files/.artifacts/public-replay371-v1/source/compact_cache.py.before.gz"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/source/common.py.before.gz",
+      "relative": ".artifacts/public-replay371-v1/source/common.py.before.gz",
+      "bytes": 8701,
+      "mode": "0644",
+      "sha256": "c12bc9114e8c6c68d0e88eed0b7860a14f19c6eaaeceee7880b42b6eb158fe4d",
+      "member": "files/.artifacts/public-replay371-v1/source/common.py.before.gz"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/related-v2/tail.log",
+      "relative": ".artifacts/public-replay371-v1/related-v2/tail.log",
+      "bytes": 256,
+      "mode": "0644",
+      "sha256": "5423f12a1028b72d743ad7be233cb450be3ad27124559975a6b893d8920badcc",
+      "member": "files/.artifacts/public-replay371-v1/related-v2/tail.log"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/related-v2/AST-proof-formatted.json",
+      "relative": ".artifacts/public-replay371-v1/related-v2/AST-proof-formatted.json",
+      "bytes": 1591,
+      "mode": "0644",
+      "sha256": "dc0b697395a8a1cdae6f1d129ca43059845929a242abdb1a032a82103d7067ec",
+      "member": "files/.artifacts/public-replay371-v1/related-v2/AST-proof-formatted.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/related-v2/cleanup-test.patch",
+      "relative": ".artifacts/public-replay371-v1/related-v2/cleanup-test.patch",
+      "bytes": 10818,
+      "mode": "0644",
+      "sha256": "4fc58c3e53a4b5bc2422b2dace2f166ecd4a392e0ac7e59213121569513143fa",
+      "member": "files/.artifacts/public-replay371-v1/related-v2/cleanup-test.patch"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/related-v2/AST-proof.json",
+      "relative": ".artifacts/public-replay371-v1/related-v2/AST-proof.json",
+      "bytes": 1603,
+      "mode": "0644",
+      "sha256": "ccaea9f3558027a26f350c18ae91a0d8ea11a4043a21cf4f4320c49655467096",
+      "member": "files/.artifacts/public-replay371-v1/related-v2/AST-proof.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/related-v2/report.md",
+      "relative": ".artifacts/public-replay371-v1/related-v2/report.md",
+      "bytes": 2575,
+      "mode": "0644",
+      "sha256": "a2c14695c2d4ff28a9c9fe95856be88dbb5eefe56ea0b501c20f7cbccc91a6f9",
+      "member": "files/.artifacts/public-replay371-v1/related-v2/report.md"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/related-v2/full.log",
+      "relative": ".artifacts/public-replay371-v1/related-v2/full.log",
+      "bytes": 256,
+      "mode": "0644",
+      "sha256": "5423f12a1028b72d743ad7be233cb450be3ad27124559975a6b893d8920badcc",
+      "member": "files/.artifacts/public-replay371-v1/related-v2/full.log"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/related-v2/related.patch",
+      "relative": ".artifacts/public-replay371-v1/related-v2/related.patch",
+      "bytes": 2474,
+      "mode": "0644",
+      "sha256": "a650131a9348746fb9cb653af0b020c37a5569a5e355fb445058839cc7cffc62",
+      "member": "files/.artifacts/public-replay371-v1/related-v2/related.patch"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/related-v2/bound-inputs.json",
+      "relative": ".artifacts/public-replay371-v1/related-v2/bound-inputs.json",
+      "bytes": 6715,
+      "mode": "0644",
+      "sha256": "e83151039c0fb2f63aebc8443051c3bb36aa2fcb92f731bedaa44dd02372b3c2",
+      "member": "files/.artifacts/public-replay371-v1/related-v2/bound-inputs.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/related-v2/compact_cache.before.gz",
+      "relative": ".artifacts/public-replay371-v1/related-v2/compact_cache.before.gz",
+      "bytes": 3896,
+      "mode": "0644",
+      "sha256": "95b2a88d5f8dc51fcc395c7b4584c05ee3b05c39cf6d9a9b77c9a50c71db561c",
+      "member": "files/.artifacts/public-replay371-v1/related-v2/compact_cache.before.gz"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/related-v2/run.py",
+      "relative": ".artifacts/public-replay371-v1/related-v2/run.py",
+      "bytes": 4932,
+      "mode": "0644",
+      "sha256": "d4e6518a4121b9dab67c81875b59b2edde1ae9db6b55f33a685a0fe084309f86",
+      "member": "files/.artifacts/public-replay371-v1/related-v2/run.py"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/related-v2/STOP.json",
+      "relative": ".artifacts/public-replay371-v1/related-v2/STOP.json",
+      "bytes": 2633,
+      "mode": "0644",
+      "sha256": "519ede69ba7a4cd7370543962723a9bcd4b6d322d88222d076497422355ee651",
+      "member": "files/.artifacts/public-replay371-v1/related-v2/STOP.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/related-v2/current-Main.patch",
+      "relative": ".artifacts/public-replay371-v1/related-v2/current-Main.patch",
+      "bytes": 7233,
+      "mode": "0644",
+      "sha256": "d62a34da339989fc308d9510672d1a1236870deaf1c3b5c50b16a1780795324d",
+      "member": "files/.artifacts/public-replay371-v1/related-v2/current-Main.patch"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/related-v2/tail.process.json",
+      "relative": ".artifacts/public-replay371-v1/related-v2/tail.process.json",
+      "bytes": 1520,
+      "mode": "0600",
+      "sha256": "db17a9e6cb222f1f675c7433f4a2047045d42fc1faa4b7c5381b358bd6da801e",
+      "member": "files/.artifacts/public-replay371-v1/related-v2/tail.process.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/render-v1/tail.log",
+      "relative": ".artifacts/public-replay371-v1/render-v1/tail.log",
+      "bytes": 203,
+      "mode": "0644",
+      "sha256": "86a0df2da52132fed5f5e7c93c873bd350c0399f7a27c15701ab535648bfbf99",
+      "member": "files/.artifacts/public-replay371-v1/render-v1/tail.log"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/render-v1/render.py",
+      "relative": ".artifacts/public-replay371-v1/render-v1/render.py",
+      "bytes": 9306,
+      "mode": "0644",
+      "sha256": "b2f02b57dab1e53e86cdafc23c3a94d0ff33e116cfd4e1a8b5381c3c3d73fc25",
+      "member": "files/.artifacts/public-replay371-v1/render-v1/render.py"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/render-v1/full.log",
+      "relative": ".artifacts/public-replay371-v1/render-v1/full.log",
+      "bytes": 203,
+      "mode": "0644",
+      "sha256": "86a0df2da52132fed5f5e7c93c873bd350c0399f7a27c15701ab535648bfbf99",
+      "member": "files/.artifacts/public-replay371-v1/render-v1/full.log"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/render-v1/bound-inputs.json",
+      "relative": ".artifacts/public-replay371-v1/render-v1/bound-inputs.json",
+      "bytes": 3089,
+      "mode": "0644",
+      "sha256": "5be34ecdf4e8d35d99b4dd94840304e8a2a6ec48843f9a2cf65d233b6c812d7b",
+      "member": "files/.artifacts/public-replay371-v1/render-v1/bound-inputs.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/render-v1/run.py",
+      "relative": ".artifacts/public-replay371-v1/render-v1/run.py",
+      "bytes": 4923,
+      "mode": "0644",
+      "sha256": "06f4303b827c1434edbf83e37129fe7a9d3e3450dc177bc20d003e4f16f45323",
+      "member": "files/.artifacts/public-replay371-v1/render-v1/run.py"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/render-v1/STOP.json",
+      "relative": ".artifacts/public-replay371-v1/render-v1/STOP.json",
+      "bytes": 2088,
+      "mode": "0644",
+      "sha256": "26c7a97392e50edc41a525da5a0d43907935531ba3f2e5f1a8682aad10440d17",
+      "member": "files/.artifacts/public-replay371-v1/render-v1/STOP.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/render-v1/tail.process.json",
+      "relative": ".artifacts/public-replay371-v1/render-v1/tail.process.json",
+      "bytes": 1003,
+      "mode": "0600",
+      "sha256": "6ee08f77b3042cf92a749b67f251811b7a806e96a1a2b2025cb542c4bda30152",
+      "member": "files/.artifacts/public-replay371-v1/render-v1/tail.process.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/outputs/replay-v1/curves.csv",
+      "relative": ".artifacts/public-replay371-v1/outputs/replay-v1/curves.csv",
+      "bytes": 3895,
+      "mode": "0644",
+      "sha256": "cc3c6bcd88bc1d969c9cb3572bebc7f3261db4e1e5b94820edf31951fffd55c6",
+      "member": "files/.artifacts/public-replay371-v1/outputs/replay-v1/curves.csv"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/outputs/replay-v1/training.json",
+      "relative": ".artifacts/public-replay371-v1/outputs/replay-v1/training.json",
+      "bytes": 28451,
+      "mode": "0600",
+      "sha256": "aa649ab3941bffc7728a8ad148600efe1e704bda6497f0dfde3bdf95fc0ed772",
+      "member": "files/.artifacts/public-replay371-v1/outputs/replay-v1/training.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/outputs/replay-v1/curves.json",
+      "relative": ".artifacts/public-replay371-v1/outputs/replay-v1/curves.json",
+      "bytes": 24083,
+      "mode": "0600",
+      "sha256": "76a437a49826d114a5d76bb76286f1368c49e9e661f6fb66a665a2dcf1f8f503",
+      "member": "files/.artifacts/public-replay371-v1/outputs/replay-v1/curves.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/outputs/replay-v1/last-model/training-target.json",
+      "relative": ".artifacts/public-replay371-v1/outputs/replay-v1/last-model/training-target.json",
+      "bytes": 24,
+      "mode": "0600",
+      "sha256": "0178dc3ec51f87ce1b5b5f0a60762eec293cab72dd386d85ad001a15801f0883",
+      "member": "files/.artifacts/public-replay371-v1/outputs/replay-v1/last-model/training-target.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/outputs/replay-v1/last-model/manifest.json",
+      "relative": ".artifacts/public-replay371-v1/outputs/replay-v1/last-model/manifest.json",
+      "bytes": 681,
+      "mode": "0600",
+      "sha256": "0c871702446b46ad7c6282a08537a7197a0ed015c4c8149547a060b72a5b1066",
+      "member": "files/.artifacts/public-replay371-v1/outputs/replay-v1/last-model/manifest.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/outputs/added_only-v1/curves.csv",
+      "relative": ".artifacts/public-replay371-v1/outputs/added_only-v1/curves.csv",
+      "bytes": 4122,
+      "mode": "0644",
+      "sha256": "b40878ed938e656b4b71fa5a046191bdd5b6b8d881f9cbb2f78f37a68a08a306",
+      "member": "files/.artifacts/public-replay371-v1/outputs/added_only-v1/curves.csv"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/outputs/added_only-v1/training.json",
+      "relative": ".artifacts/public-replay371-v1/outputs/added_only-v1/training.json",
+      "bytes": 28311,
+      "mode": "0600",
+      "sha256": "536f2f7700425794dd11da0972735c8e04baa0ea15b0510c0b11d72390f70670",
+      "member": "files/.artifacts/public-replay371-v1/outputs/added_only-v1/training.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/outputs/added_only-v1/curves.json",
+      "relative": ".artifacts/public-replay371-v1/outputs/added_only-v1/curves.json",
+      "bytes": 23945,
+      "mode": "0600",
+      "sha256": "67868eb80cfd1842e275a2180776ee76f559f48bfbd34e076667a43e4aa6c0d3",
+      "member": "files/.artifacts/public-replay371-v1/outputs/added_only-v1/curves.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/outputs/added_only-v1/last-model/training-target.json",
+      "relative": ".artifacts/public-replay371-v1/outputs/added_only-v1/last-model/training-target.json",
+      "bytes": 24,
+      "mode": "0600",
+      "sha256": "0178dc3ec51f87ce1b5b5f0a60762eec293cab72dd386d85ad001a15801f0883",
+      "member": "files/.artifacts/public-replay371-v1/outputs/added_only-v1/last-model/training-target.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/outputs/added_only-v1/last-model/manifest.json",
+      "relative": ".artifacts/public-replay371-v1/outputs/added_only-v1/last-model/manifest.json",
+      "bytes": 681,
+      "mode": "0600",
+      "sha256": "ba1984394d43272586856b57262a19c83ebe62dbd84b1028878222b6f9a4a428",
+      "member": "files/.artifacts/public-replay371-v1/outputs/added_only-v1/last-model/manifest.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/qualification-v1/tail.log",
+      "relative": ".artifacts/public-replay371-v1/qualification-v1/tail.log",
+      "bytes": 698,
+      "mode": "0644",
+      "sha256": "1f8fee67e923d44ba4fe390b7b66d3959804cd0a52d7cb0572976e426b4bfda4",
+      "member": "files/.artifacts/public-replay371-v1/qualification-v1/tail.log"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/qualification-v1/test-canonical.patch",
+      "relative": ".artifacts/public-replay371-v1/qualification-v1/test-canonical.patch",
+      "bytes": 24455,
+      "mode": "0644",
+      "sha256": "8ec0a7d4e6c9bd1bff0793376720762a047ef444ef245336e26f84248a0ab715",
+      "member": "files/.artifacts/public-replay371-v1/qualification-v1/test-canonical.patch"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/qualification-v1/test-fixture.patch",
+      "relative": ".artifacts/public-replay371-v1/qualification-v1/test-fixture.patch",
+      "bytes": 5153,
+      "mode": "0644",
+      "sha256": "62a159ba25d8e616c289225c0886860e5ad419d0c40440f4d8005ada50c62536",
+      "member": "files/.artifacts/public-replay371-v1/qualification-v1/test-fixture.patch"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/qualification-v1/full.log",
+      "relative": ".artifacts/public-replay371-v1/qualification-v1/full.log",
+      "bytes": 698,
+      "mode": "0644",
+      "sha256": "1f8fee67e923d44ba4fe390b7b66d3959804cd0a52d7cb0572976e426b4bfda4",
+      "member": "files/.artifacts/public-replay371-v1/qualification-v1/full.log"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/qualification-v1/fit-interface-v2.json",
+      "relative": ".artifacts/public-replay371-v1/qualification-v1/fit-interface-v2.json",
+      "bytes": 4824,
+      "mode": "0644",
+      "sha256": "436955e243b8e5d80628bb7e610b813cb3b26cadec2c5ae114bf2d61903bad29",
+      "member": "files/.artifacts/public-replay371-v1/qualification-v1/fit-interface-v2.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/qualification-v1/bound-inputs.json",
+      "relative": ".artifacts/public-replay371-v1/qualification-v1/bound-inputs.json",
+      "bytes": 5997,
+      "mode": "0644",
+      "sha256": "977dbdee794910dac5acd9105da2267881481caa898f9086ec95b11dd6e64631",
+      "member": "files/.artifacts/public-replay371-v1/qualification-v1/bound-inputs.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/qualification-v1/run.py",
+      "relative": ".artifacts/public-replay371-v1/qualification-v1/run.py",
+      "bytes": 5081,
+      "mode": "0644",
+      "sha256": "5e25acb9e530ac787a617faec1fbc4b977fdf3f0bf4696624e034535ce8513ba",
+      "member": "files/.artifacts/public-replay371-v1/qualification-v1/run.py"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/qualification-v1/STOP.json",
+      "relative": ".artifacts/public-replay371-v1/qualification-v1/STOP.json",
+      "bytes": 2776,
+      "mode": "0644",
+      "sha256": "f4d1f1e8770c61c4981025cf61f451743d8670a55f0539a6a552b3230aa5869a",
+      "member": "files/.artifacts/public-replay371-v1/qualification-v1/STOP.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/qualification-v1/tail.process.json",
+      "relative": ".artifacts/public-replay371-v1/qualification-v1/tail.process.json",
+      "bytes": 1668,
+      "mode": "0600",
+      "sha256": "fee24e5f211c1751d9f089e0238dd80244c95447c7d61f56db581927e4fccade",
+      "member": "files/.artifacts/public-replay371-v1/qualification-v1/tail.process.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/tests/test_public_replay.py",
+      "relative": ".artifacts/public-replay371-v1/tests/test_public_replay.py",
+      "bytes": 22427,
+      "mode": "0644",
+      "sha256": "28b9b01c6f0bf03daaa178ec2af88d3118a51a1f6d5c75bfb893cb4f0e9f9edb",
+      "member": "files/.artifacts/public-replay371-v1/tests/test_public_replay.py"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/owner-closure-v1.json",
+      "relative": ".artifacts/public-replay371-v1/result-v1/owner-closure-v1.json",
+      "bytes": 1625,
+      "mode": "0644",
+      "sha256": "032b5c891b41826e16f2b081541580c5ac846b55cceab1578cde0891cb7a8519",
+      "member": "files/.artifacts/public-replay371-v1/result-v1/owner-closure-v1.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/result-v1/audit_saved.py",
+      "relative": ".artifacts/public-replay371-v1/result-v1/audit_saved.py",
+      "bytes": 4021,
+      "mode": "0644",
+      "sha256": "5ae1fd23d40c2a93e7d09d22d82fdd8c0c36a5a2a1b505394a0385d4f54520c2",
+      "member": "files/.artifacts/public-replay371-v1/result-v1/audit_saved.py"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/prepare.py",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/prepare.py",
+      "bytes": 10898,
+      "mode": "0644",
+      "sha256": "0c882ed72e3c2b260531390c5293d8d6c271b81df59215e9c8955030227a442d",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/prepare.py"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/numerical-correspondence.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/numerical-correspondence.json",
+      "bytes": 8140,
+      "mode": "0644",
+      "sha256": "f86b33b043717f6f6ee8468772bbc4dc7a66e05af5f92f7e6a8aa3961f3941ef",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/numerical-correspondence.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/input-binding.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/input-binding.json",
+      "bytes": 2420,
+      "mode": "0644",
+      "sha256": "3973b33580b6ffed79e2f6fb661eb925542ff1fb9bd327b9081e738faa71270d",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/input-binding.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/experiment.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/experiment.json",
+      "bytes": 13939,
+      "mode": "0644",
+      "sha256": "597808c8186aa4df2e06330006fdbf7b34750cf2912339baa560444ea44531c9",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/experiment.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/job-config.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/job-config.json",
+      "bytes": 864,
+      "mode": "0644",
+      "sha256": "2ecbc1cb1a97c81d569dab797c2330f2822aa16451ac0aaeeb928826a31ef745",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/job-config.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/admission.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/admission.json",
+      "bytes": 775,
+      "mode": "0644",
+      "sha256": "aadc91a5ffb9260a65a2960f314ab30e97e2fa0d0f218ebb1dd0cb0ec67ea981",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/admission.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/collection-port-refusal.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/collection-port-refusal.json",
+      "bytes": 341,
+      "mode": "0644",
+      "sha256": "770f4de95316ee97a0a97cd396af9946633cd416d8ea6db50f78e22bb2df25fb",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/collection-port-refusal.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/preflight.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/preflight.json",
+      "bytes": 907,
+      "mode": "0644",
+      "sha256": "07d023870c1613b214f3d756ab78a62e890f1f67e5396eed12a6a13a6a81574b",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/preflight.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/qualified-STOP.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/qualified-STOP.json",
+      "bytes": 1963,
+      "mode": "0644",
+      "sha256": "0f91449f74a422bd3983c2eaf2cbd48bd322917a940e501a4c6245951c6ea946",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/qualified-STOP.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/intent.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/intent.json",
+      "bytes": 9269,
+      "mode": "0644",
+      "sha256": "0a1b83eda335e3d532d2ee5a5fc120d682bd857989b2c004e40867500fdc491c",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/intent.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/runtime-v1/config.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/runtime-v1/config.json",
+      "bytes": 864,
+      "mode": "0600",
+      "sha256": "2ecbc1cb1a97c81d569dab797c2330f2822aa16451ac0aaeeb928826a31ef745",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/runtime-v1/config.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/runtime-v1/output.log",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/runtime-v1/output.log",
+      "bytes": 0,
+      "mode": "0644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/runtime-v1/output.log"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/runtime-v1/result.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/runtime-v1/result.json",
+      "bytes": 500,
+      "mode": "0600",
+      "sha256": "da813e5a3df05b0f708a678e885a33115f7e08e94151ae1c8546ccd76f5bab05",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/runtime-v1/result.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/runtime-v1/notify.lock",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/runtime-v1/notify.lock",
+      "bytes": 0,
+      "mode": "0644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/runtime-v1/notify.lock"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/runtime-v1/process.lock",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/runtime-v1/process.lock",
+      "bytes": 0,
+      "mode": "0644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/runtime-v1/process.lock"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/runtime-v1/state.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/runtime-v1/state.json",
+      "bytes": 711,
+      "mode": "0600",
+      "sha256": "2167523ac305571b3a79870467338ae93eb113280ffb32f85ebcb8cf099dd053",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/runtime-v1/state.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/runtime-v1/notification.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/runtime-v1/notification.json",
+      "bytes": 234,
+      "mode": "0600",
+      "sha256": "732ef176e2c54722be3d5aef43e3e972ffeedcd714b2b065b3eefb26052032e7",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/runtime-v1/notification.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/runtime-v1/supervisor.log",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/runtime-v1/supervisor.log",
+      "bytes": 234,
+      "mode": "0644",
+      "sha256": "732ef176e2c54722be3d5aef43e3e972ffeedcd714b2b065b3eefb26052032e7",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/runtime-v1/supervisor.log"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/operation-v1/candidate.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/operation-v1/candidate.json",
+      "bytes": 8196,
+      "mode": "0644",
+      "sha256": "dd5bcde5d2c1548524de678be8ef2a5d1057f7ea2917da1f8b5ce7470ea4aa36",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/operation-v1/candidate.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/operation-v1/run.full.log",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/operation-v1/run.full.log",
+      "bytes": 30241,
+      "mode": "0644",
+      "sha256": "896676039cbc38cfee1f7c8db17c40148bc292c29f54630b7f55d8b597a9dd35",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/operation-v1/run.full.log"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/operation-v1/run.process.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/operation-v1/run.process.json",
+      "bytes": 1478,
+      "mode": "0600",
+      "sha256": "df5474900d81f730319190dac4894ea1536ee4cff381d4371644d8f4ef598cee",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/operation-v1/run.process.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/operation-v1/run.log",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/operation-v1/run.log",
+      "bytes": 30241,
+      "mode": "0644",
+      "sha256": "896676039cbc38cfee1f7c8db17c40148bc292c29f54630b7f55d8b597a9dd35",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/operation-v1/run.log"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/operation-v1/intent.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/operation-v1/intent.json",
+      "bytes": 9269,
+      "mode": "0644",
+      "sha256": "0a1b83eda335e3d532d2ee5a5fc120d682bd857989b2c004e40867500fdc491c",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/added_only-entry-v1/operation-v1/intent.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/numerical-correspondence.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/replay-entry-v1/numerical-correspondence.json",
+      "bytes": 8284,
+      "mode": "0644",
+      "sha256": "40750a1716f29fdbc456547b4ae6aeb5d35aef737ff454c159c5883ce641ab6e",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/numerical-correspondence.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/input-binding.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/replay-entry-v1/input-binding.json",
+      "bytes": 3005,
+      "mode": "0644",
+      "sha256": "dbdb12a8d11b319029db822a10c1eebf622567418703e8a6d153338b27d6e26c",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/input-binding.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/experiment.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/replay-entry-v1/experiment.json",
+      "bytes": 14482,
+      "mode": "0644",
+      "sha256": "6455e1a82fa909efbc26e43d4333d7eecf28a736047f2ea4d3152ca45f261d31",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/experiment.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/job-config.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/replay-entry-v1/job-config.json",
+      "bytes": 860,
+      "mode": "0644",
+      "sha256": "b3ffa4e8a1e76323f9b29a7484e4b0b0cc5a34b70d43158f043a3c2f04558170",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/job-config.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/admission.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/replay-entry-v1/admission.json",
+      "bytes": 775,
+      "mode": "0644",
+      "sha256": "2bde6679de5e02957c45aa908791cf981fa1f3d1904b1a1dd7a78fecd6ebe6bd",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/admission.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/preflight.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/replay-entry-v1/preflight.json",
+      "bytes": 857,
+      "mode": "0644",
+      "sha256": "74ec47b41e0814f37d5d6d2f1c5c3faec131398e9fbf4a62ec2a0a8960a41719",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/preflight.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/qualified-STOP.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/replay-entry-v1/qualified-STOP.json",
+      "bytes": 2032,
+      "mode": "0644",
+      "sha256": "cc612258e647cfb39b33edcb749b3ae511a7e05d97bbb74feabcfac15579e49c",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/qualified-STOP.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/intent.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/replay-entry-v1/intent.json",
+      "bytes": 9201,
+      "mode": "0644",
+      "sha256": "0a50bc33305cefef8b3d385af2237ffb959c0b053099c5176a6795bab3a8f40f",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/intent.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/runtime-v1/config.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/replay-entry-v1/runtime-v1/config.json",
+      "bytes": 860,
+      "mode": "0600",
+      "sha256": "b3ffa4e8a1e76323f9b29a7484e4b0b0cc5a34b70d43158f043a3c2f04558170",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/runtime-v1/config.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/runtime-v1/output.log",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/replay-entry-v1/runtime-v1/output.log",
+      "bytes": 0,
+      "mode": "0644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/runtime-v1/output.log"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/runtime-v1/result.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/replay-entry-v1/runtime-v1/result.json",
+      "bytes": 500,
+      "mode": "0600",
+      "sha256": "0fe2e3a729e8e1563e61736334f53995f8608decd69dfbe504c0173b84a66502",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/runtime-v1/result.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/runtime-v1/notify.lock",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/replay-entry-v1/runtime-v1/notify.lock",
+      "bytes": 0,
+      "mode": "0644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/runtime-v1/notify.lock"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/runtime-v1/process.lock",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/replay-entry-v1/runtime-v1/process.lock",
+      "bytes": 0,
+      "mode": "0644",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/runtime-v1/process.lock"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/runtime-v1/state.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/replay-entry-v1/runtime-v1/state.json",
+      "bytes": 711,
+      "mode": "0600",
+      "sha256": "d47e6707234ed77ad0b6cb39567d83d285a7b9e1bb0843338feda81b1f857fbb",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/runtime-v1/state.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/runtime-v1/notification.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/replay-entry-v1/runtime-v1/notification.json",
+      "bytes": 234,
+      "mode": "0600",
+      "sha256": "80c5848408c35381176cabb744c1fd8d044dc5bf2d76fda9cfba1e95f61e5e71",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/runtime-v1/notification.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/runtime-v1/supervisor.log",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/replay-entry-v1/runtime-v1/supervisor.log",
+      "bytes": 234,
+      "mode": "0644",
+      "sha256": "80c5848408c35381176cabb744c1fd8d044dc5bf2d76fda9cfba1e95f61e5e71",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/runtime-v1/supervisor.log"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/operation-v1/candidate.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/replay-entry-v1/operation-v1/candidate.json",
+      "bytes": 8111,
+      "mode": "0644",
+      "sha256": "70f39758035a73e21d4c7db2e7132aede2f60656a11dd7529a48531f94d2209b",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/operation-v1/candidate.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/operation-v1/run.full.log",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/replay-entry-v1/operation-v1/run.full.log",
+      "bytes": 30383,
+      "mode": "0644",
+      "sha256": "0067b35e6c425802897b227981ea1ce85e3355e057dac7c294db5da6f374e882",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/operation-v1/run.full.log"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/operation-v1/run.process.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/replay-entry-v1/operation-v1/run.process.json",
+      "bytes": 1466,
+      "mode": "0600",
+      "sha256": "5c5d81938845f2314213bc4b9f6be04fd4f7ef43b804d9e4dd584e77126f3d0a",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/operation-v1/run.process.json"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/operation-v1/run.log",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/replay-entry-v1/operation-v1/run.log",
+      "bytes": 30383,
+      "mode": "0644",
+      "sha256": "0067b35e6c425802897b227981ea1ce85e3355e057dac7c294db5da6f374e882",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/operation-v1/run.log"
+    },
+    {
+      "original_path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/operation-v1/intent.json",
+      "relative": ".artifacts/public-replay371-v1/execution-v1/replay-entry-v1/operation-v1/intent.json",
+      "bytes": 9201,
+      "mode": "0644",
+      "sha256": "0a50bc33305cefef8b3d385af2237ffb959c0b053099c5176a6795bab3a8f40f",
+      "member": "files/.artifacts/public-replay371-v1/execution-v1/replay-entry-v1/operation-v1/intent.json"
+    }
+  ],
+  "caches_not_traversed": [],
+  "symlinks": [],
+  "payload_reads": 0,
+  "prior_streams_replayed": 0
+}
