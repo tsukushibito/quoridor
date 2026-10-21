@@ -1,0 +1,3687 @@
+{
+  "issue": "quoridor-4lc.324.12.6",
+  "status": "COMMITTED_FINITE_PRESERVATION_BEFORE_REMOVAL",
+  "candidate": "frame21-search",
+  "archive": {
+    "path": "research-data/ai-sigma/execution324-worktree-retirement-20261021/frame21-search-evidence.tar.gz",
+    "sha256": "33e9692e19048716359919940f8099cd226edef37fd884c2ed6e437f485ce6ac",
+    "bytes": 42591,
+    "mode": "0644"
+  },
+  "original_to_member": [
+    {
+      "original": "/workspaces/quoridor/.worktree/frame21-search/docs/reports/ai-sigma-critic-frame21-search-efficiency.md",
+      "relative": "docs/reports/ai-sigma-critic-frame21-search-efficiency.md",
+      "member": "files/docs/reports/ai-sigma-critic-frame21-search-efficiency.md",
+      "bytes": 6449,
+      "mode": "0644",
+      "sha256": "cced0a30b443bdf8264cb2b10889496269e4afed1efc5f3f097dc963f2e80401"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/archive-manifest.json",
+      "relative": "research-data/ai-sigma/frame21-search-efficiency/archive-manifest.json",
+      "member": "files/research-data/ai-sigma/frame21-search-efficiency/archive-manifest.json",
+      "bytes": 6975,
+      "mode": "0644",
+      "sha256": "e5881087ed1660c31028a03621c77c0bf13e1b111c39c187885777d734682319"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/asset-reader-stop.json",
+      "relative": "research-data/ai-sigma/frame21-search-efficiency/asset-reader-stop.json",
+      "member": "files/research-data/ai-sigma/frame21-search-efficiency/asset-reader-stop.json",
+      "bytes": 1847,
+      "mode": "0644",
+      "sha256": "be46ee528b58180064bf1f455955b5cb2cb29c5417623032e4dd39fd1c3b972d"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/save-handoff-v2.json",
+      "relative": "research-data/ai-sigma/frame21-search-efficiency/save-handoff-v2.json",
+      "member": "files/research-data/ai-sigma/frame21-search-efficiency/save-handoff-v2.json",
+      "bytes": 1445,
+      "mode": "0644",
+      "sha256": "378154b397ca16d13d1801b20df226740de5de28682469aaf31a54ce033fa4be"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/save-handoff.json",
+      "relative": "research-data/ai-sigma/frame21-search-efficiency/save-handoff.json",
+      "member": "files/research-data/ai-sigma/frame21-search-efficiency/save-handoff.json",
+      "bytes": 1026,
+      "mode": "0644",
+      "sha256": "6b285074889a8d232833037487a992263a83681db7585c81621fa6814cfd9cae"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/source.patch",
+      "relative": "research-data/ai-sigma/frame21-search-efficiency/source.patch",
+      "member": "files/research-data/ai-sigma/frame21-search-efficiency/source.patch",
+      "bytes": 15410,
+      "mode": "0644",
+      "sha256": "7b169a3abe772e9f5516baafac6c33aae8fb169421d766b048539b7960bc5c3e"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/storage-final.json",
+      "relative": "research-data/ai-sigma/frame21-search-efficiency/storage-final.json",
+      "member": "files/research-data/ai-sigma/frame21-search-efficiency/storage-final.json",
+      "bytes": 521,
+      "mode": "0644",
+      "sha256": "262b0fe7d34c26e9be7973b29da543c39f148a13a9005fec8ea915258bf7061c"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/beads-append-recovered-notes.txt",
+      "relative": "research-data/ai-sigma/frame24-persistent-tt/beads-append-recovered-notes.txt",
+      "member": "files/research-data/ai-sigma/frame24-persistent-tt/beads-append-recovered-notes.txt",
+      "bytes": 492,
+      "mode": "0644",
+      "sha256": "8bdab336bd2a4890e5f177781ec1003b2f08767498340c3132948ecb4131c1fc"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/beads-note-recovery-v1.json",
+      "relative": "research-data/ai-sigma/frame24-persistent-tt/beads-note-recovery-v1.json",
+      "member": "files/research-data/ai-sigma/frame24-persistent-tt/beads-note-recovery-v1.json",
+      "bytes": 564,
+      "mode": "0644",
+      "sha256": "a93b34256be7ed284e00ea9542138661976084f9940c3060973cf85619be6138"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/closure-addendum-manifest-v1.json",
+      "relative": "research-data/ai-sigma/frame24-persistent-tt/closure-addendum-manifest-v1.json",
+      "member": "files/research-data/ai-sigma/frame24-persistent-tt/closure-addendum-manifest-v1.json",
+      "bytes": 1012,
+      "mode": "0644",
+      "sha256": "d6aa2f68109cffa9e11a3997d35b51a3758b58fd13c3ebef33ad15eeb6c39feb"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/closure-addendum-v1.tar.gz",
+      "relative": "research-data/ai-sigma/frame24-persistent-tt/closure-addendum-v1.tar.gz",
+      "member": "files/research-data/ai-sigma/frame24-persistent-tt/closure-addendum-v1.tar.gz",
+      "bytes": 982,
+      "mode": "0644",
+      "sha256": "69ca34cc33ff1c084eeb972ff2f395237aea937893c8629aa054d91bd08ea133"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/final-save-current-v2.json",
+      "relative": "research-data/ai-sigma/frame24-persistent-tt/final-save-current-v2.json",
+      "member": "files/research-data/ai-sigma/frame24-persistent-tt/final-save-current-v2.json",
+      "bytes": 552,
+      "mode": "0644",
+      "sha256": "6f4f8f9f9beda09514e1880cf7c6e786d7aa0b2d12901307a083eedace27fbfc"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/final-save-report.txt",
+      "relative": "research-data/ai-sigma/frame24-persistent-tt/final-save-report.txt",
+      "member": "files/research-data/ai-sigma/frame24-persistent-tt/final-save-report.txt",
+      "bytes": 1106,
+      "mode": "0644",
+      "sha256": "709808d0c30b57abcef40b62732c376a1a4aab0440a8b26f95a67dbfbc3c0dc5"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/necessary-evidence-manifest-v1.json",
+      "relative": "research-data/ai-sigma/frame24-persistent-tt/necessary-evidence-manifest-v1.json",
+      "member": "files/research-data/ai-sigma/frame24-persistent-tt/necessary-evidence-manifest-v1.json",
+      "bytes": 9279,
+      "mode": "0644",
+      "sha256": "8d6f0acc4d84f02d0c2620621531964855b7a81e1db69ae93158b5fbd3c4ac71"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/owner-close-backup-v1.json",
+      "relative": "research-data/ai-sigma/frame24-persistent-tt/owner-close-backup-v1.json",
+      "member": "files/research-data/ai-sigma/frame24-persistent-tt/owner-close-backup-v1.json",
+      "bytes": 761,
+      "mode": "0644",
+      "sha256": "3d13e4ad6babd182731c3d9043bc538c10e7a8755205dd143af81e641edb7819"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/owner-closed-report.txt",
+      "relative": "research-data/ai-sigma/frame24-persistent-tt/owner-closed-report.txt",
+      "member": "files/research-data/ai-sigma/frame24-persistent-tt/owner-closed-report.txt",
+      "bytes": 645,
+      "mode": "0644",
+      "sha256": "b953bb6112d4c39cf90dde8e6134517dd89a9bff88c340ce899827ac9dc96919"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/save-handoff-v1.json",
+      "relative": "research-data/ai-sigma/frame24-persistent-tt/save-handoff-v1.json",
+      "member": "files/research-data/ai-sigma/frame24-persistent-tt/save-handoff-v1.json",
+      "bytes": 12848,
+      "mode": "0644",
+      "sha256": "1b4277e9e2fe06cb11ed27a6e4bf74f429f29422b721f04af82c56dfb6d80f97"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/freeze_public_evaluation.py",
+      "relative": "tools/research-review/freeze_public_evaluation.py",
+      "member": "files/tools/research-review/freeze_public_evaluation.py",
+      "bytes": 9257,
+      "mode": "0644",
+      "sha256": "d8213c5b8fad39b1623d5280635c515e651c82b2ef2270c4e1ebf0598abbe925"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/guard_frozen_public_prediction.py",
+      "relative": "tools/research-review/guard_frozen_public_prediction.py",
+      "member": "files/tools/research-review/guard_frozen_public_prediction.py",
+      "bytes": 8393,
+      "mode": "0644",
+      "sha256": "e8187b53350d3f97803af8fe782f710e0b9b41d063ee46c1c3c361a51d7ab000"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/guard_frozen_public_score.py",
+      "relative": "tools/research-review/guard_frozen_public_score.py",
+      "member": "files/tools/research-review/guard_frozen_public_score.py",
+      "bytes": 8367,
+      "mode": "0644",
+      "sha256": "47b4e2f11c48207776d0c7d4014be404a1aab9049315594f477b008fd601636e"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/predict_public_rulea_frozen.py",
+      "relative": "tools/research-review/predict_public_rulea_frozen.py",
+      "member": "files/tools/research-review/predict_public_rulea_frozen.py",
+      "bytes": 9717,
+      "mode": "0644",
+      "sha256": "5c947762f9d5dc7f25052ec7560fb5f67ee9cceb619463b06bacff29571840fe"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/public_metadata_exposure_guard.py",
+      "relative": "tools/research-review/public_metadata_exposure_guard.py",
+      "member": "files/tools/research-review/public_metadata_exposure_guard.py",
+      "bytes": 13515,
+      "mode": "0644",
+      "sha256": "4e1cdae9ee631487b56b0397d67e7cf3892048389b7603075c2d1f5ba0243dbb"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/rulea_targetfree_mask_review.py",
+      "relative": "tools/research-review/rulea_targetfree_mask_review.py",
+      "member": "files/tools/research-review/rulea_targetfree_mask_review.py",
+      "bytes": 7017,
+      "mode": "0644",
+      "sha256": "61ac74e58e3b4c4b9ce5c3bd02ce3c889c72c56e2f8a14bffa445890a2ff0a63"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/score_public_rulea_frozen.py",
+      "relative": "tools/research-review/score_public_rulea_frozen.py",
+      "member": "files/tools/research-review/score_public_rulea_frozen.py",
+      "bytes": 14052,
+      "mode": "0644",
+      "sha256": "5d2c99d0842a501a7c180ac7942bfab97abb4bc9c4dadcbc1c8e6fd9ab30d55f"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/sigma_input_review.py",
+      "relative": "tools/research-review/sigma_input_review.py",
+      "member": "files/tools/research-review/sigma_input_review.py",
+      "bytes": 10793,
+      "mode": "0644",
+      "sha256": "f516ca5b6cbc6c1048cef9d89057815f6f69aeb5af32ff0ea83d7d3db8a89561"
+    }
+  ],
+  "private_restoration_receipt": {
+    "at": "2026-10-21T08:07:45.751210+00:00",
+    "status": "PRIVATE_BYTE_RESTORATION_PASS",
+    "candidate": "frame21-search",
+    "archive": {
+      "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/group-A/frame21-search-preservation-v1/retained.tar.gz",
+      "sha256": "33e9692e19048716359919940f8099cd226edef37fd884c2ed6e437f485ce6ac",
+      "bytes": 42591,
+      "mode": "0644"
+    },
+    "manifest": {
+      "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/group-A/frame21-search-preservation-v1/manifest.json",
+      "sha256": "d6a94050c71e70b807dafe30059cfc5d718260dc15c2e266e009fef8fdf2a1b2",
+      "bytes": 11649,
+      "mode": "0644"
+    },
+    "regular_members": 25,
+    "logical_member_B": 143025,
+    "stream_reconstruction_passes": 1,
+    "byte_mode_correspondence": true,
+    "extraction_to_disk": 0,
+    "original_worktree_mutations": 0,
+    "models_seals_shared_assets_caches_copied": 0,
+    "scientific_qualification": false,
+    "tests_native_Search_RNG": 0,
+    "disposition": "Private finite restoration proof only. Root durable adoption, existing archive custody and final actual consumer/remove remain separate."
+  },
+  "prior_correspondence": {
+    "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/frame21-search-combined-preservation-correspondence-v3.json",
+    "sha256": "6af50a190c6ec2f6191274fc5b89fa7bff216f6a2dcbdf7dbef552b7dc487e6d",
+    "bytes": 145997,
+    "mode": "0644"
+  },
+  "original_paths_rewritten": false,
+  "reader_scope": "Author explicitly closed this candidate after returned helper STOP; Root final consumer check still required",
+  "removal_ready": false,
+  "model_payload_read_copy_hash": 0,
+  "scientific_calls": 0,
+  "prior_failures_NULL_unknown_costs": "PRESERVED",
+  "global_actual_fullfees": "UNKNOWN",
+  "refunds_lending": false,
+  "existing_other_path_correspondence": {
+    "mappings": [
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-ai/src/alphabeta.rs",
+        "relative": "crates/quoridor-ai/src/alphabeta.rs",
+        "bytes": 52064,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "current_source_byteexact_committed",
+        "source_match": {
+          "original": {
+            "path": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-ai/src/alphabeta.rs",
+            "sha256": "5faf36cf9cbf99d97f35a6e1dd5aa0db183a50e9c22f12b66bb2fba6be2408f6",
+            "bytes": 52064,
+            "mode": "0644"
+          },
+          "commit": "6e8d4ab5ac1a3305eff66e4c5b72dd36bfb06b28",
+          "member": "crates/quoridor-ai/src/alphabeta.rs",
+          "Git_bytes": 52064,
+          "Git_SHA256": "5faf36cf9cbf99d97f35a6e1dd5aa0db183a50e9c22f12b66bb2fba6be2408f6",
+          "exact_bytes": true,
+          "command": {
+            "argv": [
+              "git",
+              "--no-optional-locks",
+              "show",
+              "6e8d4ab5ac1a3305eff66e4c5b72dd36bfb06b28:crates/quoridor-ai/src/alphabeta.rs"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "directwait_reaped": true,
+            "handles_closed": true
+          }
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-core/src/position.rs",
+        "relative": "crates/quoridor-core/src/position.rs",
+        "bytes": 17800,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-current-source-v1.tar.gz",
+            "member": "crates/quoridor-core/src/position.rs",
+            "bytes": 17800,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-data/src/lib.rs",
+        "relative": "crates/quoridor-data/src/lib.rs",
+        "bytes": 37655,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-current-source-v1.tar.gz",
+            "member": "crates/quoridor-data/src/lib.rs",
+            "bytes": 37655,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-nnue/src/features.rs",
+        "relative": "crates/quoridor-nnue/src/features.rs",
+        "bytes": 3401,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-current-source-v1.tar.gz",
+            "member": "crates/quoridor-nnue/src/features.rs",
+            "bytes": 3401,
+            "mode": "0644",
+            "type": "0"
+          },
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-old-WT-sourcepoint-v1.tar.gz",
+            "member": "crates/quoridor-nnue/src/features.rs",
+            "bytes": 3401,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-nnue/src/lib.rs",
+        "relative": "crates/quoridor-nnue/src/lib.rs",
+        "bytes": 16836,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-current-source-v1.tar.gz",
+            "member": "crates/quoridor-nnue/src/lib.rs",
+            "bytes": 16836,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-runner/Cargo.toml",
+        "relative": "crates/quoridor-runner/Cargo.toml",
+        "bytes": 679,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-current-source-v1.tar.gz",
+            "member": "crates/quoridor-runner/Cargo.toml",
+            "bytes": 679,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-runner/src/bin/nnue-diagnose.rs",
+        "relative": "crates/quoridor-runner/src/bin/nnue-diagnose.rs",
+        "bytes": 23799,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-current-source-v1.tar.gz",
+            "member": "crates/quoridor-runner/src/bin/nnue-diagnose.rs",
+            "bytes": 23799,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-runner/src/config.rs",
+        "relative": "crates/quoridor-runner/src/config.rs",
+        "bytes": 6075,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-current-source-v1.tar.gz",
+            "member": "crates/quoridor-runner/src/config.rs",
+            "bytes": 6075,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-runner/src/resources.rs",
+        "relative": "crates/quoridor-runner/src/resources.rs",
+        "bytes": 12738,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-current-source-v1.tar.gz",
+            "member": "crates/quoridor-runner/src/resources.rs",
+            "bytes": 12738,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-runner/src/runtime.rs",
+        "relative": "crates/quoridor-runner/src/runtime.rs",
+        "bytes": 77083,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "current_source_byteexact_committed",
+        "source_match": {
+          "original": {
+            "path": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-runner/src/runtime.rs",
+            "sha256": "345234616f94494f53085028ec2ba51449cd9e742ba4a63bfad88bd343ac0dae",
+            "bytes": 77083,
+            "mode": "0644"
+          },
+          "commit": "6e8d4ab5ac1a3305eff66e4c5b72dd36bfb06b28",
+          "member": "crates/quoridor-runner/src/runtime.rs",
+          "Git_bytes": 77083,
+          "Git_SHA256": "345234616f94494f53085028ec2ba51449cd9e742ba4a63bfad88bd343ac0dae",
+          "exact_bytes": true,
+          "command": {
+            "argv": [
+              "git",
+              "--no-optional-locks",
+              "show",
+              "6e8d4ab5ac1a3305eff66e4c5b72dd36bfb06b28:crates/quoridor-runner/src/runtime.rs"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "directwait_reaped": true,
+            "handles_closed": true
+          }
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-ai/src/diagnostic277.rs",
+        "relative": "crates/quoridor-ai/src/diagnostic277.rs",
+        "bytes": 7715,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-current-source-v1.tar.gz",
+            "member": "crates/quoridor-ai/src/diagnostic277.rs",
+            "bytes": 7715,
+            "mode": "0644",
+            "type": "0"
+          },
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-old-WT-sourcepoint-v1.tar.gz",
+            "member": "crates/quoridor-ai/src/diagnostic277.rs",
+            "bytes": 7715,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-core/tests/wall_legality.rs",
+        "relative": "crates/quoridor-core/tests/wall_legality.rs",
+        "bytes": 5345,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-old-WT-sourcepoint-v1.tar.gz",
+            "member": "crates/quoridor-core/tests/wall_legality.rs",
+            "bytes": 5345,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-core/tests/whole_maps.rs",
+        "relative": "crates/quoridor-core/tests/whole_maps.rs",
+        "bytes": 7286,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-old-WT-sourcepoint-v1.tar.gz",
+            "member": "crates/quoridor-core/tests/whole_maps.rs",
+            "bytes": 7286,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-nnue/src/diagnostic277.rs",
+        "relative": "crates/quoridor-nnue/src/diagnostic277.rs",
+        "bytes": 4032,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-current-source-v1.tar.gz",
+            "member": "crates/quoridor-nnue/src/diagnostic277.rs",
+            "bytes": 4032,
+            "mode": "0644",
+            "type": "0"
+          },
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-old-WT-sourcepoint-v1.tar.gz",
+            "member": "crates/quoridor-nnue/src/diagnostic277.rs",
+            "bytes": 4032,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-nnue/src/residual.rs",
+        "relative": "crates/quoridor-nnue/src/residual.rs",
+        "bytes": 7509,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-current-source-v1.tar.gz",
+            "member": "crates/quoridor-nnue/src/residual.rs",
+            "bytes": 7509,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-nnue/tests/map_regression.rs",
+        "relative": "crates/quoridor-nnue/tests/map_regression.rs",
+        "bytes": 4505,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-old-WT-sourcepoint-v1.tar.gz",
+            "member": "crates/quoridor-nnue/tests/map_regression.rs",
+            "bytes": 4505,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-runner/examples/map_work.rs",
+        "relative": "crates/quoridor-runner/examples/map_work.rs",
+        "bytes": 3654,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-old-WT-sourcepoint-v1.tar.gz",
+            "member": "crates/quoridor-runner/examples/map_work.rs",
+            "bytes": 3654,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-runner/examples/wall_work.rs",
+        "relative": "crates/quoridor-runner/examples/wall_work.rs",
+        "bytes": 8592,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-old-WT-sourcepoint-v1.tar.gz",
+            "member": "crates/quoridor-runner/examples/wall_work.rs",
+            "bytes": 8592,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-runner/src/bin/sigma-import.rs",
+        "relative": "crates/quoridor-runner/src/bin/sigma-import.rs",
+        "bytes": 4146,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-current-source-v1.tar.gz",
+            "member": "crates/quoridor-runner/src/bin/sigma-import.rs",
+            "bytes": 4146,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-runner/src/bin/teacher-qualify.rs",
+        "relative": "crates/quoridor-runner/src/bin/teacher-qualify.rs",
+        "bytes": 7898,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-current-source-v1.tar.gz",
+            "member": "crates/quoridor-runner/src/bin/teacher-qualify.rs",
+            "bytes": 7898,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/docs/reports/ai-sigma-critic-extension25-tt-telemetry.md",
+        "relative": "docs/reports/ai-sigma-critic-extension25-tt-telemetry.md",
+        "bytes": 4100,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+            "member": "docs/reports/ai-sigma-critic-extension25-tt-telemetry.md",
+            "bytes": 4100,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/docs/reports/ai-sigma-critic-frame21-search-efficiency.md",
+        "relative": "docs/reports/ai-sigma-critic-frame21-search-efficiency.md",
+        "bytes": 6449,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/docs/reports/ai-sigma-critic-frame24-persistent-tt.md",
+        "relative": "docs/reports/ai-sigma-critic-frame24-persistent-tt.md",
+        "bytes": 6636,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "docs/reports/ai-sigma-critic-frame24-persistent-tt.md",
+            "bytes": 6636,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/admission-point.txt",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/admission-point.txt",
+        "bytes": 564,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "admission-point.txt",
+          "bytes": 564,
+          "SHA": "d8437fcda6e606a31045186ec6ee818a3df25f7d375f3b2fdbeeb02c63415154"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/archive-manifest.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/archive-manifest.json",
+        "bytes": 6975,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/asset-reader-stop.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/asset-reader-stop.json",
+        "bytes": 1847,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/baseline-r1/actual-start.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/baseline-r1/actual-start.json",
+        "bytes": 802,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "baseline-r1/actual-start.json",
+          "bytes": 802,
+          "SHA": "be42ef6b790f5051ceb948654e88ef9d8e4721cc154505c9d1c17319e3af598f"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/baseline-r1/admission.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/baseline-r1/admission.json",
+        "bytes": 8189,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "baseline-r1/admission.json",
+          "bytes": 8189,
+          "SHA": "a57a6e8d3d89e6a0c92736529a5fe7ad2d6ce4e0017479eb816c359e223142ae"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/baseline-r1/process.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/baseline-r1/process.json",
+        "bytes": 1269,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "baseline-r1/process.json",
+          "bytes": 1269,
+          "SHA": "8e89dc18d1ea8d365e82f6c3c78e2b0a5608d24ecaf092ca96a96f13d97ed4e3"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/baseline-r1/stderr.log",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/baseline-r1/stderr.log",
+        "bytes": 0,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "baseline-r1/stderr.log",
+          "bytes": 0,
+          "SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/baseline-r1/stdout.log",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/baseline-r1/stdout.log",
+        "bytes": 34459,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "baseline-r1/stdout.log",
+          "bytes": 34459,
+          "SHA": "74039d5a66af6bb9792d87699830f1b79dd5a239ad4c4666ef055e779fb6a9c3"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/bitparallel-early.txt",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/bitparallel-early.txt",
+        "bytes": 894,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "bitparallel-early.txt",
+          "bytes": 894,
+          "SHA": "c05d27e001738b1de7ceb28e928a4920c746e634addf6aae19468b43d7e10955"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/bitparallel-source-plan.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/bitparallel-source-plan.json",
+        "bytes": 1361,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "bitparallel-source-plan.json",
+          "bytes": 1361,
+          "SHA": "d148685d03d9eb73426d5e967061522ca680a393c32374b7ad0195f90bd4c003"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/bounds-report.txt",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/bounds-report.txt",
+        "bytes": 719,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "bounds-report.txt",
+          "bytes": 719,
+          "SHA": "3b73ae88de39711a72f3804cb729ec65d885655daa268c29909734961090d945"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/build-baseline-r1/admission.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/build-baseline-r1/admission.json",
+        "bytes": 10259,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "build-baseline-r1/admission.json",
+          "bytes": 10259,
+          "SHA": "bc46afd9438e3019894caefe88bccc3762923e3300d44554b985beb8ce9fd53f"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/build-baseline-r1/process.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/build-baseline-r1/process.json",
+        "bytes": 1921,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "build-baseline-r1/process.json",
+          "bytes": 1921,
+          "SHA": "f6fcd5840e15c9c275db30c13eeb2e60596056c70b04ab8ce92cb36c7e4e6981"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/build-baseline-r2/actual-start.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/build-baseline-r2/actual-start.json",
+        "bytes": 756,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "build-baseline-r2/actual-start.json",
+          "bytes": 756,
+          "SHA": "609fab4c7f128556a3c2882aa4a5036cee733beafd4ae9cc29be18bc69aa0a56"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/build-baseline-r2/admission.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/build-baseline-r2/admission.json",
+        "bytes": 8437,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "build-baseline-r2/admission.json",
+          "bytes": 8437,
+          "SHA": "0468df3254b5778e93eb8fa479f45ee2d82095a59897e9ffe4530919ca70ff69"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/build-baseline-r2/process.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/build-baseline-r2/process.json",
+        "bytes": 66555,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "build-baseline-r2/process.json",
+          "bytes": 66555,
+          "SHA": "7f2dda251c148a117dc18d353eec4ba8b9a4b1a0f1a7b03643b62fc541ff03c6"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/build-baseline-r2/stderr.log",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/build-baseline-r2/stderr.log",
+        "bytes": 588,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "build-baseline-r2/stderr.log",
+          "bytes": 588,
+          "SHA": "27e12c3b49cca5af7523871d5241eefd3fef3a35d8755865dfd16d920f56ad7c"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/build-baseline-r2/stdout.log",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/build-baseline-r2/stdout.log",
+        "bytes": 0,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "build-baseline-r2/stdout.log",
+          "bytes": 0,
+          "SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/build-candidate-r1/actual-start.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/build-candidate-r1/actual-start.json",
+        "bytes": 755,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "build-candidate-r1/actual-start.json",
+          "bytes": 755,
+          "SHA": "07011eec5a274dfbefb25e816e52af4d68ba6b96159f84141b7e04e0b2b12a20"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/build-candidate-r1/admission.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/build-candidate-r1/admission.json",
+        "bytes": 8156,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "build-candidate-r1/admission.json",
+          "bytes": 8156,
+          "SHA": "ab63b23baf13d1c677b3acaff9d5bb3c900f76a6918bbe1258e61db7b6436ed2"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/build-candidate-r1/process.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/build-candidate-r1/process.json",
+        "bytes": 72891,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "build-candidate-r1/process.json",
+          "bytes": 72891,
+          "SHA": "d72a327e95926b27c3c6c91052a35c4addb493b5246cdda8858f8c9e92d4bee8"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/build-candidate-r1/stderr.log",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/build-candidate-r1/stderr.log",
+        "bytes": 578,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "build-candidate-r1/stderr.log",
+          "bytes": 578,
+          "SHA": "c660a322759f8c1d97c0240172a39855b80df6aec1aafbc7ae43deb836549faf"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/build-candidate-r1/stdout.log",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/build-candidate-r1/stdout.log",
+        "bytes": 0,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "build-candidate-r1/stdout.log",
+          "bytes": 0,
+          "SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/candidate-r1/actual-start.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/candidate-r1/actual-start.json",
+        "bytes": 804,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "candidate-r1/actual-start.json",
+          "bytes": 804,
+          "SHA": "1bfe2817cc3f3f9468c39b8d87aad12b2d631d36f2241069907a76029bd02e30"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/candidate-r1/admission.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/candidate-r1/admission.json",
+        "bytes": 8190,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "candidate-r1/admission.json",
+          "bytes": 8190,
+          "SHA": "6e27d5839da1ee8e5f2990b5f878b52beb26c511380d2ae1068bc13227b9393f"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/candidate-r1/process.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/candidate-r1/process.json",
+        "bytes": 1272,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "candidate-r1/process.json",
+          "bytes": 1272,
+          "SHA": "c11abee5f9cfc239eb297e450fea4cfdc8d5cc1c9f9ac0b7cb25a137c23c25bd"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/candidate-r1/stderr.log",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/candidate-r1/stderr.log",
+        "bytes": 0,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "candidate-r1/stderr.log",
+          "bytes": 0,
+          "SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/candidate-r1/stdout.log",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/candidate-r1/stdout.log",
+        "bytes": 34377,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "candidate-r1/stdout.log",
+          "bytes": 34377,
+          "SHA": "e70d0d672d63e4713c87ee8a9bf5e30b9fc14892d0afbf9a0afe168f02420c2d"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/candidate-source-change.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/candidate-source-change.json",
+        "bytes": 507,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "candidate-source-change.json",
+          "bytes": 507,
+          "SHA": "1cd9b29aa4167d584115c055c585941c3e5857844cd9fd8e453589cae356aea6"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/comparison-r1.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/comparison-r1.json",
+        "bytes": 7475,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "comparison-r1.json",
+          "bytes": 7475,
+          "SHA": "b8d9082756cd8dc42473bd493283e9fe78b36aca2b47078cc8304fd2a981aa2d"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/config.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/config.json",
+        "bytes": 1501,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "config.json",
+          "bytes": 1501,
+          "SHA": "3ac5b3dc80f1a6ee2a9f39d6e53551a4b5e3ceefef9a477e6dcebad9c53b8ecf"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/core-tests-r1/actual-start.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/core-tests-r1/actual-start.json",
+        "bytes": 1028,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "core-tests-r1/actual-start.json",
+          "bytes": 1028,
+          "SHA": "d36a0c508e3a2a51f0bf50548005be6553553030ca096292b9225473f21957d7"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/core-tests-r1/admission.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/core-tests-r1/admission.json",
+        "bytes": 8285,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "core-tests-r1/admission.json",
+          "bytes": 8285,
+          "SHA": "fd64c80971b356b8b35f9f6f999abd8dfeee8e62a9d1bf0637cf0d9d00dc5dee"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/core-tests-r1/process.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/core-tests-r1/process.json",
+        "bytes": 76697,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "core-tests-r1/process.json",
+          "bytes": 76697,
+          "SHA": "78f8427642810be1b66215c1036bb14c40d1719dadc28f0f360f055f0cdf2bb3"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/core-tests-r1/stderr.log",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/core-tests-r1/stderr.log",
+        "bytes": 572,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "core-tests-r1/stderr.log",
+          "bytes": 572,
+          "SHA": "c082bb6340b54e80295da5e2ba012bae110703d16bd495eb82cb04437299d7cd"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/core-tests-r1/stdout.log",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/core-tests-r1/stdout.log",
+        "bytes": 936,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "core-tests-r1/stdout.log",
+          "bytes": 936,
+          "SHA": "32905e82f41b843b47a653db43f990e12598aed4f4be9d8e3a481f8c31a4406f"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/errata.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/errata.json",
+        "bytes": 387,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "errata.json",
+          "bytes": 387,
+          "SHA": "a291dbeee49f997de8232bd48218b8a7df145070d8cffdadc2d0d3cf20a84ca1"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/evidence.tar.gz",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/evidence.tar.gz",
+        "bytes": 51022,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_Git_archive_alias_size",
+        "historical_Git_archive": {
+          "argv": [
+            "git",
+            "--no-optional-locks",
+            "ls-tree",
+            "-l",
+            "6c3acdd7d122fce16e0e0e9f9bfbf51029657599",
+            "--",
+            "research-data/ai-sigma/frame21-search-efficiency/evidence.tar.gz",
+            "research-data/ai-sigma/frame21-search-efficiency/archive-manifest.json"
+          ],
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "directwait_reaped": true,
+          "handles_closed": true
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/integration-handoff.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/integration-handoff.json",
+        "bytes": 1117,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "integration-handoff.json",
+          "bytes": 1117,
+          "SHA": "40a271e6854b762a44541d960e619adae09f18b48b3016ecde8364e34990cb65"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/preregister-v2.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/preregister-v2.json",
+        "bytes": 686,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "preregister-v2.json",
+          "bytes": 686,
+          "SHA": "2f6679c831e6c19d6b00491d0c4cd92ff4c72999f4b0829dc5b56927ff02e59a"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/prestart-storage.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/prestart-storage.json",
+        "bytes": 578,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "prestart-storage.json",
+          "bytes": 578,
+          "SHA": "8468cdc00b93c2720f10718bb9f900d48c1e2bcb34fca0d07e7b447937f405df"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/prospective-fixedqueue-v1.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/prospective-fixedqueue-v1.json",
+        "bytes": 2743,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "prospective-fixedqueue-v1.json",
+          "bytes": 2743,
+          "SHA": "4bcd658b0b37683b376ac30b941c1f24c1f54ab08e9a27c5ebc0790221125491"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/prospective-plan.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/prospective-plan.json",
+        "bytes": 3362,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "prospective-plan.json",
+          "bytes": 3362,
+          "SHA": "12dc52c19381270807501dd95f025bfec3085565b8c761336a7ba0dea1c1c9af"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/prototype-pending.txt",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/prototype-pending.txt",
+        "bytes": 831,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "prototype-pending.txt",
+          "bytes": 831,
+          "SHA": "512523891ba551e297f21bdd45788263eef005ba0e794a3f8b2dd9055485f382"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/run_guard-v1.py",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/run_guard-v1.py",
+        "bytes": 5888,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "run_guard-v1.py",
+          "bytes": 5888,
+          "SHA": "877c4292f69acf0b6859b94330967970cb1ae023ab39d13e09ae0efe20cb1cf5"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/run_guard.py",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/run_guard.py",
+        "bytes": 6054,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "run_guard.py",
+          "bytes": 6054,
+          "SHA": "b23205804212f743e51d069ff5a096d57dcdc2a9e65eb1e24f715aae163825df"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/save-handoff-v2.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/save-handoff-v2.json",
+        "bytes": 1445,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/save-handoff.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/save-handoff.json",
+        "bytes": 1026,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/science-source-stop.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/science-source-stop.json",
+        "bytes": 3424,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "science-source-stop.json",
+          "bytes": 3424,
+          "SHA": "1c440d495c4461ff5a6e02e402536a05bae2f4af584939021ca2dd8a54f6bf22"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/source.patch",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/source.patch",
+        "bytes": 15410,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/storage-final.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/storage-final.json",
+        "bytes": 521,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/unused-transfer.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/unused-transfer.json",
+        "bytes": 1211,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "unused-transfer.json",
+          "bytes": 1211,
+          "SHA": "6c82657dcad4258919b64747b772f122aa133bfde3f041951cd0e7518175f1c3"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/wall_distance.fragment",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/wall_distance.fragment",
+        "bytes": 1701,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_frame21_archive_member_path_size",
+        "historical_member": {
+          "archive": "evidence.tar.gz",
+          "member": "wall_distance.fragment",
+          "bytes": 1701,
+          "SHA": "35f6c1b0e3a05414d84b45ed2d946d14cf4938756d4d144c427c8cbd2915c1b6"
+        }
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/argv-schema-fixture-v1.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/argv-schema-fixture-v1.json",
+        "bytes": 495,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/argv-schema-fixture-v1.json",
+            "bytes": 495,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/beads-append-recovered-notes.txt",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/beads-append-recovered-notes.txt",
+        "bytes": 492,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/beads-identity-mismatch-v1.txt",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/beads-identity-mismatch-v1.txt",
+        "bytes": 837,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/beads-identity-mismatch-v1.txt",
+            "bytes": 837,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/beads-note-recovery-v1.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/beads-note-recovery-v1.json",
+        "bytes": 564,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/closure-addendum-manifest-v1.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/closure-addendum-manifest-v1.json",
+        "bytes": 1012,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/closure-addendum-v1.tar.gz",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/closure-addendum-v1.tar.gz",
+        "bytes": 982,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/compile-failure-interpretation-v1.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/compile-failure-interpretation-v1.json",
+        "bytes": 441,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/compile-failure-interpretation-v1.json",
+            "bytes": 441,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/compile-final/actual-start-0.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/compile-final/actual-start-0.json",
+        "bytes": 6913,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/compile-final/actual-start-0.json",
+            "bytes": 6913,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/compile-final/actual-start-1.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/compile-final/actual-start-1.json",
+        "bytes": 6922,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/compile-final/actual-start-1.json",
+            "bytes": 6922,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/compile-final/admission.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/compile-final/admission.json",
+        "bytes": 13161,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/compile-final/admission.json",
+            "bytes": 13161,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/compile-final/command-0.log",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/compile-final/command-0.log",
+        "bytes": 27572,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/compile-final/command-0.log",
+            "bytes": 27572,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/compile-final/command-1.log",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/compile-final/command-1.log",
+        "bytes": 381,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/compile-final/command-1.log",
+            "bytes": 381,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/compile-final/process.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/compile-final/process.json",
+        "bytes": 55291,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/compile-final/process.json",
+            "bytes": 55291,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/compile-r2/actual-start-0.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/compile-r2/actual-start-0.json",
+        "bytes": 6922,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/compile-r2/actual-start-0.json",
+            "bytes": 6922,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/compile-r2/admission.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/compile-r2/admission.json",
+        "bytes": 12938,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/compile-r2/admission.json",
+            "bytes": 12938,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/compile-r2/command-0.log",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/compile-r2/command-0.log",
+        "bytes": 690,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/compile-r2/command-0.log",
+            "bytes": 690,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/compile-r2/process.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/compile-r2/process.json",
+        "bytes": 49656,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/compile-r2/process.json",
+            "bytes": 49656,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/compile-start-report.txt",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/compile-start-report.txt",
+        "bytes": 401,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/compile-start-report.txt",
+            "bytes": 401,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/compile/actual-start-0.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/compile/actual-start-0.json",
+        "bytes": 6913,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/compile/actual-start-0.json",
+            "bytes": 6913,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/compile/actual-start-1.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/compile/actual-start-1.json",
+        "bytes": 6876,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/compile/actual-start-1.json",
+            "bytes": 6876,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/compile/admission.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/compile/admission.json",
+        "bytes": 12853,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/compile/admission.json",
+            "bytes": 12853,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/compile/command-0.log",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/compile/command-0.log",
+        "bytes": 27781,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/compile/command-0.log",
+            "bytes": 27781,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/compile/command-1.log",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/compile/command-1.log",
+        "bytes": 877,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/compile/command-1.log",
+            "bytes": 877,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/compile/process.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/compile/process.json",
+        "bytes": 51735,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/compile/process.json",
+            "bytes": 51735,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/current-source-manifest-v1.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/current-source-manifest-v1.json",
+        "bytes": 7007,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/current-source-manifest-v1.json",
+            "bytes": 7007,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/current-source-v1.tar.gz",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/current-source-v1.tar.gz",
+        "bytes": 97920,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": {
+          "source": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/current-source-v1.tar.gz",
+          "path": "research-data/ai-sigma/frame24-coordinator/tt311-current-source-v1.tar.gz",
+          "bytes": 97920,
+          "sha256": "c49713bc6211488ea6bdc7da8656d371e75878d8310e6fd8f215f8126af94887"
+        },
+        "coverage": "prior_archive_alias_size"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/final-current-child-absence-v1.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/final-current-child-absence-v1.json",
+        "bytes": 204,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/final-current-child-absence-v1.json",
+            "bytes": 204,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/final-resource-retention-v1.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/final-resource-retention-v1.json",
+        "bytes": 809,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/final-resource-retention-v1.json",
+            "bytes": 809,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/final-save-current-v2.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/final-save-current-v2.json",
+        "bytes": 552,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/final-save-report.txt",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/final-save-report.txt",
+        "bytes": 1106,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/guard.py",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/guard.py",
+        "bytes": 11043,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-current-source-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/guard.py",
+            "bytes": 11043,
+            "mode": "0644",
+            "type": "0"
+          },
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/guard.py",
+            "bytes": 11043,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/implementation.patch",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/implementation.patch",
+        "bytes": 39643,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/implementation.patch",
+            "bytes": 39643,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/interim-readiness-v1.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/interim-readiness-v1.json",
+        "bytes": 559,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/interim-readiness-v1.json",
+            "bytes": 559,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/interim-report.txt",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/interim-report.txt",
+        "bytes": 640,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/interim-report.txt",
+            "bytes": 640,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/main-source-alignment-v1.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/main-source-alignment-v1.json",
+        "bytes": 10062,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/main-source-alignment-v1.json",
+            "bytes": 10062,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/necessary-evidence-manifest-v1.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/necessary-evidence-manifest-v1.json",
+        "bytes": 9279,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/necessary-evidence-v1.tar.gz",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/necessary-evidence-v1.tar.gz",
+        "bytes": 82739,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": {
+          "source": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/necessary-evidence-v1.tar.gz",
+          "path": "research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+          "bytes": 82739,
+          "sha256": "72c0ad2772fed16d5abd756761816952dd5592c0f36eccea7e1fe53d43ee0130"
+        },
+        "coverage": "prior_archive_alias_size"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/old-WT-sourcepoint-v1.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/old-WT-sourcepoint-v1.json",
+        "bytes": 12004,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/old-WT-sourcepoint-v1.json",
+            "bytes": 12004,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/old-WT-sourcepoint-v1.tar.gz",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/old-WT-sourcepoint-v1.tar.gz",
+        "bytes": 148551,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": {
+          "source": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/old-WT-sourcepoint-v1.tar.gz",
+          "path": "research-data/ai-sigma/frame24-coordinator/tt311-old-WT-sourcepoint-v1.tar.gz",
+          "bytes": 148551,
+          "sha256": "581939172c297d0a0ec2a295a11162c88396625d0d5a1c14adbc92f6f27fa6e3"
+        },
+        "coverage": "prior_archive_alias_size"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/owner-close-backup-v1.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/owner-close-backup-v1.json",
+        "bytes": 761,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/owner-closed-report.txt",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/owner-closed-report.txt",
+        "bytes": 645,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/recipient-budget-acceptance-v1.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/recipient-budget-acceptance-v1.json",
+        "bytes": 2406,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/recipient-budget-acceptance-v1.json",
+            "bytes": 2406,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/registration-compile-final.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/registration-compile-final.json",
+        "bytes": 7883,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/registration-compile-final.json",
+            "bytes": 7883,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/registration-compile-r2.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/registration-compile-r2.json",
+        "bytes": 7643,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/registration-compile-r2.json",
+            "bytes": 7643,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/registration-science-v1.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/registration-science-v1.json",
+        "bytes": 8342,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/registration-science-v1.json",
+            "bytes": 8342,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/registration-v1.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/registration-v1.json",
+        "bytes": 7741,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/registration-v1.json",
+            "bytes": 7741,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/resource-handoff-v1.txt",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/resource-handoff-v1.txt",
+        "bytes": 949,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/resource-handoff-v1.txt",
+            "bytes": 949,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/result-handoff-v1.txt",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/result-handoff-v1.txt",
+        "bytes": 1406,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/result-handoff-v1.txt",
+            "bytes": 1406,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/result.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/result.json",
+        "bytes": 21043,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/result.json",
+            "bytes": 21043,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/save-handoff-v1.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/save-handoff-v1.json",
+        "bytes": 12848,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/science-attempt-consumed.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/science-attempt-consumed.json",
+        "bytes": 93,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/science-attempt-consumed.json",
+            "bytes": 93,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/science/actual-start-0.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/science/actual-start-0.json",
+        "bytes": 7117,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/science/actual-start-0.json",
+            "bytes": 7117,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/science/admission.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/science/admission.json",
+        "bytes": 13304,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/science/admission.json",
+            "bytes": 13304,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/science/command-0.log",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/science/command-0.log",
+        "bytes": 9597,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/science/command-0.log",
+            "bytes": 9597,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/science/process.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/science/process.json",
+        "bytes": 15074,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/science/process.json",
+            "bytes": 15074,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/source-science-stop-v1.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/source-science-stop-v1.json",
+        "bytes": 7173,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/source-science-stop-v1.json",
+            "bytes": 7173,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/telemetry317/actual-start-0.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/actual-start-0.json",
+        "bytes": 378,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/actual-start-0.json",
+            "bytes": 378,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/telemetry317/actual-start-1.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/actual-start-1.json",
+        "bytes": 446,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/actual-start-1.json",
+            "bytes": 446,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/telemetry317/actual-start-2.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/actual-start-2.json",
+        "bytes": 485,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/actual-start-2.json",
+            "bytes": 485,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/telemetry317/admission.json.gz",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/admission.json.gz",
+        "bytes": 2130,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/admission.json.gz",
+            "bytes": 2130,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/telemetry317/adopted-sourcepoint-v1.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/adopted-sourcepoint-v1.json",
+        "bytes": 1194,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/adopted-sourcepoint-v1.json",
+            "bytes": 1194,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/telemetry317/check.py.gz",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/check.py.gz",
+        "bytes": 3170,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/check.py.gz",
+            "bytes": 3170,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/telemetry317/command-0.log",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/command-0.log",
+        "bytes": 827,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/command-0.log",
+            "bytes": 827,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/telemetry317/command-1.log",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/command-1.log",
+        "bytes": 268,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/command-1.log",
+            "bytes": 268,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/telemetry317/command-2.log",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/command-2.log",
+        "bytes": 1331,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/command-2.log",
+            "bytes": 1331,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/telemetry317/compact-retention-manifest.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/compact-retention-manifest.json",
+        "bytes": 2328,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/compact-retention-manifest.json",
+            "bytes": 2328,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/telemetry317/donor-and-forecast-v1.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/donor-and-forecast-v1.json",
+        "bytes": 1553,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/donor-and-forecast-v1.json",
+            "bytes": 1553,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/telemetry317/entry-start-report.txt",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/entry-start-report.txt",
+        "bytes": 461,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/entry-start-report.txt",
+            "bytes": 461,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/telemetry317/entrypoint-fixture.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/entrypoint-fixture.json",
+        "bytes": 339,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/entrypoint-fixture.json",
+            "bytes": 339,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/telemetry317/forecast-report.txt",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/forecast-report.txt",
+        "bytes": 1099,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/forecast-report.txt",
+            "bytes": 1099,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/telemetry317/implementation.patch.gz",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/implementation.patch.gz",
+        "bytes": 4444,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/implementation.patch.gz",
+            "bytes": 4444,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/telemetry317/next-workload-proposal-v1.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/next-workload-proposal-v1.json",
+        "bytes": 2104,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/next-workload-proposal-v1.json",
+            "bytes": 2104,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/telemetry317/owner-close-backup.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/owner-close-backup.json",
+        "bytes": 543,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/owner-close-backup.json",
+            "bytes": 543,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/telemetry317/process-archive.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/process-archive.json",
+        "bytes": 803,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/process-archive.json",
+            "bytes": 803,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/telemetry317/process.json.gz",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/process.json.gz",
+        "bytes": 8814,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/process.json.gz",
+            "bytes": 8814,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/telemetry317/registration.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/registration.json",
+        "bytes": 1641,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/registration.json",
+            "bytes": 1641,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/telemetry317/result.json.gz",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/result.json.gz",
+        "bytes": 1672,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/result.json.gz",
+            "bytes": 1672,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/telemetry317/retention-summary.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/retention-summary.json",
+        "bytes": 780,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/retention-summary.json",
+            "bytes": 780,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/telemetry317/save-handoff.txt",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/save-handoff.txt",
+        "bytes": 837,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/save-handoff.txt",
+            "bytes": 837,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/telemetry317/semantic-boundary-v1.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/semantic-boundary-v1.json",
+        "bytes": 397,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/semantic-boundary-v1.json",
+            "bytes": 397,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/telemetry317/software-unit-attempt.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/software-unit-attempt.json",
+        "bytes": 134,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/software-unit-attempt.json",
+            "bytes": 134,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/telemetry317/source-stop.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/source-stop.json",
+        "bytes": 1326,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/source-stop.json",
+            "bytes": 1326,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/telemetry317/static-ready-report.txt",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/static-ready-report.txt",
+        "bytes": 993,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/static-ready-report.txt",
+            "bytes": 993,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/telemetry317/stop-report.txt",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/stop-report.txt",
+        "bytes": 1098,
+        "mode": "0644",
+        "archive_header_matches": [
+          {
+            "archive": "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+            "member": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/stop-report.txt",
+            "bytes": 1098,
+            "mode": "0644",
+            "type": "0"
+          }
+        ],
+        "direct_archive_import_alias": null,
+        "coverage": "prior_member_path_size_mode"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/freeze_public_evaluation.py",
+        "relative": "tools/research-review/freeze_public_evaluation.py",
+        "bytes": 9257,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/guard_frozen_public_prediction.py",
+        "relative": "tools/research-review/guard_frozen_public_prediction.py",
+        "bytes": 8393,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/guard_frozen_public_score.py",
+        "relative": "tools/research-review/guard_frozen_public_score.py",
+        "bytes": 8367,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/predict_public_rulea_frozen.py",
+        "relative": "tools/research-review/predict_public_rulea_frozen.py",
+        "bytes": 9717,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/public_metadata_exposure_guard.py",
+        "relative": "tools/research-review/public_metadata_exposure_guard.py",
+        "bytes": 13515,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/rulea_targetfree_mask_review.py",
+        "relative": "tools/research-review/rulea_targetfree_mask_review.py",
+        "bytes": 7017,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/score_public_rulea_frozen.py",
+        "relative": "tools/research-review/score_public_rulea_frozen.py",
+        "bytes": 14052,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/sigma_input_review.py",
+        "relative": "tools/research-review/sigma_input_review.py",
+        "bytes": 10793,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      }
+    ],
+    "source_matches": [
+      {
+        "original": {
+          "path": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-ai/src/alphabeta.rs",
+          "sha256": "5faf36cf9cbf99d97f35a6e1dd5aa0db183a50e9c22f12b66bb2fba6be2408f6",
+          "bytes": 52064,
+          "mode": "0644"
+        },
+        "commit": "6e8d4ab5ac1a3305eff66e4c5b72dd36bfb06b28",
+        "member": "crates/quoridor-ai/src/alphabeta.rs",
+        "Git_bytes": 52064,
+        "Git_SHA256": "5faf36cf9cbf99d97f35a6e1dd5aa0db183a50e9c22f12b66bb2fba6be2408f6",
+        "exact_bytes": true,
+        "command": {
+          "argv": [
+            "git",
+            "--no-optional-locks",
+            "show",
+            "6e8d4ab5ac1a3305eff66e4c5b72dd36bfb06b28:crates/quoridor-ai/src/alphabeta.rs"
+          ],
+          "exit_code": 0,
+          "stderr": "",
+          "directwait_reaped": true,
+          "handles_closed": true
+        }
+      },
+      {
+        "original": {
+          "path": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-runner/src/runtime.rs",
+          "sha256": "345234616f94494f53085028ec2ba51449cd9e742ba4a63bfad88bd343ac0dae",
+          "bytes": 77083,
+          "mode": "0644"
+        },
+        "commit": "6e8d4ab5ac1a3305eff66e4c5b72dd36bfb06b28",
+        "member": "crates/quoridor-runner/src/runtime.rs",
+        "Git_bytes": 77083,
+        "Git_SHA256": "345234616f94494f53085028ec2ba51449cd9e742ba4a63bfad88bd343ac0dae",
+        "exact_bytes": true,
+        "command": {
+          "argv": [
+            "git",
+            "--no-optional-locks",
+            "show",
+            "6e8d4ab5ac1a3305eff66e4c5b72dd36bfb06b28:crates/quoridor-runner/src/runtime.rs"
+          ],
+          "exit_code": 0,
+          "stderr": "",
+          "directwait_reaped": true,
+          "handles_closed": true
+        }
+      },
+      {
+        "original": {
+          "path": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/freeze_public_evaluation.py",
+          "sha256": "d8213c5b8fad39b1623d5280635c515e651c82b2ef2270c4e1ebf0598abbe925",
+          "bytes": 9257,
+          "mode": "0644"
+        },
+        "commit": "current_HEAD_source_blob",
+        "member": "tools/research-review/freeze_public_evaluation.py",
+        "Git_bytes": 0,
+        "Git_SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "exact_bytes": false,
+        "command": {
+          "argv": [
+            "git",
+            "--no-optional-locks",
+            "show",
+            "HEAD:tools/research-review/freeze_public_evaluation.py"
+          ],
+          "exit_code": 128,
+          "stderr": "fatal: path 'tools/research-review/freeze_public_evaluation.py' does not exist in 'HEAD'\n",
+          "directwait_reaped": true,
+          "handles_closed": true
+        }
+      },
+      {
+        "original": {
+          "path": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/guard_frozen_public_prediction.py",
+          "sha256": "e8187b53350d3f97803af8fe782f710e0b9b41d063ee46c1c3c361a51d7ab000",
+          "bytes": 8393,
+          "mode": "0644"
+        },
+        "commit": "current_HEAD_source_blob",
+        "member": "tools/research-review/guard_frozen_public_prediction.py",
+        "Git_bytes": 0,
+        "Git_SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "exact_bytes": false,
+        "command": {
+          "argv": [
+            "git",
+            "--no-optional-locks",
+            "show",
+            "HEAD:tools/research-review/guard_frozen_public_prediction.py"
+          ],
+          "exit_code": 128,
+          "stderr": "fatal: path 'tools/research-review/guard_frozen_public_prediction.py' does not exist in 'HEAD'\n",
+          "directwait_reaped": true,
+          "handles_closed": true
+        }
+      },
+      {
+        "original": {
+          "path": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/guard_frozen_public_score.py",
+          "sha256": "47b4e2f11c48207776d0c7d4014be404a1aab9049315594f477b008fd601636e",
+          "bytes": 8367,
+          "mode": "0644"
+        },
+        "commit": "current_HEAD_source_blob",
+        "member": "tools/research-review/guard_frozen_public_score.py",
+        "Git_bytes": 0,
+        "Git_SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "exact_bytes": false,
+        "command": {
+          "argv": [
+            "git",
+            "--no-optional-locks",
+            "show",
+            "HEAD:tools/research-review/guard_frozen_public_score.py"
+          ],
+          "exit_code": 128,
+          "stderr": "fatal: path 'tools/research-review/guard_frozen_public_score.py' does not exist in 'HEAD'\n",
+          "directwait_reaped": true,
+          "handles_closed": true
+        }
+      },
+      {
+        "original": {
+          "path": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/predict_public_rulea_frozen.py",
+          "sha256": "5c947762f9d5dc7f25052ec7560fb5f67ee9cceb619463b06bacff29571840fe",
+          "bytes": 9717,
+          "mode": "0644"
+        },
+        "commit": "current_HEAD_source_blob",
+        "member": "tools/research-review/predict_public_rulea_frozen.py",
+        "Git_bytes": 0,
+        "Git_SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "exact_bytes": false,
+        "command": {
+          "argv": [
+            "git",
+            "--no-optional-locks",
+            "show",
+            "HEAD:tools/research-review/predict_public_rulea_frozen.py"
+          ],
+          "exit_code": 128,
+          "stderr": "fatal: path 'tools/research-review/predict_public_rulea_frozen.py' does not exist in 'HEAD'\n",
+          "directwait_reaped": true,
+          "handles_closed": true
+        }
+      },
+      {
+        "original": {
+          "path": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/public_metadata_exposure_guard.py",
+          "sha256": "4e1cdae9ee631487b56b0397d67e7cf3892048389b7603075c2d1f5ba0243dbb",
+          "bytes": 13515,
+          "mode": "0644"
+        },
+        "commit": "current_HEAD_source_blob",
+        "member": "tools/research-review/public_metadata_exposure_guard.py",
+        "Git_bytes": 0,
+        "Git_SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "exact_bytes": false,
+        "command": {
+          "argv": [
+            "git",
+            "--no-optional-locks",
+            "show",
+            "HEAD:tools/research-review/public_metadata_exposure_guard.py"
+          ],
+          "exit_code": 128,
+          "stderr": "fatal: path 'tools/research-review/public_metadata_exposure_guard.py' does not exist in 'HEAD'\n",
+          "directwait_reaped": true,
+          "handles_closed": true
+        }
+      },
+      {
+        "original": {
+          "path": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/rulea_targetfree_mask_review.py",
+          "sha256": "61ac74e58e3b4c4b9ce5c3bd02ce3c889c72c56e2f8a14bffa445890a2ff0a63",
+          "bytes": 7017,
+          "mode": "0644"
+        },
+        "commit": "current_HEAD_source_blob",
+        "member": "tools/research-review/rulea_targetfree_mask_review.py",
+        "Git_bytes": 0,
+        "Git_SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "exact_bytes": false,
+        "command": {
+          "argv": [
+            "git",
+            "--no-optional-locks",
+            "show",
+            "HEAD:tools/research-review/rulea_targetfree_mask_review.py"
+          ],
+          "exit_code": 128,
+          "stderr": "fatal: path 'tools/research-review/rulea_targetfree_mask_review.py' does not exist in 'HEAD'\n",
+          "directwait_reaped": true,
+          "handles_closed": true
+        }
+      },
+      {
+        "original": {
+          "path": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/score_public_rulea_frozen.py",
+          "sha256": "5d2c99d0842a501a7c180ac7942bfab97abb4bc9c4dadcbc1c8e6fd9ab30d55f",
+          "bytes": 14052,
+          "mode": "0644"
+        },
+        "commit": "current_HEAD_source_blob",
+        "member": "tools/research-review/score_public_rulea_frozen.py",
+        "Git_bytes": 0,
+        "Git_SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "exact_bytes": false,
+        "command": {
+          "argv": [
+            "git",
+            "--no-optional-locks",
+            "show",
+            "HEAD:tools/research-review/score_public_rulea_frozen.py"
+          ],
+          "exit_code": 128,
+          "stderr": "fatal: path 'tools/research-review/score_public_rulea_frozen.py' does not exist in 'HEAD'\n",
+          "directwait_reaped": true,
+          "handles_closed": true
+        }
+      },
+      {
+        "original": {
+          "path": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/sigma_input_review.py",
+          "sha256": "f516ca5b6cbc6c1048cef9d89057815f6f69aeb5af32ff0ea83d7d3db8a89561",
+          "bytes": 10793,
+          "mode": "0644"
+        },
+        "commit": "current_HEAD_source_blob",
+        "member": "tools/research-review/sigma_input_review.py",
+        "Git_bytes": 0,
+        "Git_SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "exact_bytes": false,
+        "command": {
+          "argv": [
+            "git",
+            "--no-optional-locks",
+            "show",
+            "HEAD:tools/research-review/sigma_input_review.py"
+          ],
+          "exit_code": 128,
+          "stderr": "fatal: path 'tools/research-review/sigma_input_review.py' does not exist in 'HEAD'\n",
+          "directwait_reaped": true,
+          "handles_closed": true
+        }
+      }
+    ],
+    "prior_frame21_manifest": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame21-search-efficiency/archive-manifest.json",
+      "sha256": "e5881087ed1660c31028a03621c77c0bf13e1b111c39c187885777d734682319",
+      "bytes": 6975,
+      "mode": "0644"
+    },
+    "prior_frame21_archive_Git_locator": {
+      "argv": [
+        "git",
+        "--no-optional-locks",
+        "ls-tree",
+        "-l",
+        "6c3acdd7d122fce16e0e0e9f9bfbf51029657599",
+        "--",
+        "research-data/ai-sigma/frame21-search-efficiency/evidence.tar.gz",
+        "research-data/ai-sigma/frame21-search-efficiency/archive-manifest.json"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "directwait_reaped": true,
+      "handles_closed": true
+    },
+    "frame24_final_Git_proof": {
+      "reference": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/frame24/final-stopped-Git-proof-v1.json",
+        "sha256": "592f3cd3bceef68d7f454b8a6794f58850aa339d1a1fea61461cf197598ba308",
+        "bytes": 11626,
+        "mode": "0644"
+      },
+      "parsed": {
+        "commit": "6e8d4ab5ac1a3305eff66e4c5b72dd36bfb06b28",
+        "paths": [
+          {
+            "path": "crates/quoridor-ai/src/alphabeta.rs",
+            "bytes": 52064,
+            "SHA": "5faf36cf9cbf99d97f35a6e1dd5aa0db183a50e9c22f12b66bb2fba6be2408f6"
+          },
+          {
+            "path": "crates/quoridor-runner/src/runtime.rs",
+            "bytes": 77083,
+            "SHA": "345234616f94494f53085028ec2ba51449cd9e742ba4a63bfad88bd343ac0dae"
+          },
+          {
+            "path": "docs/design/ai-sigma-continuation-20261001.md",
+            "bytes": 11370,
+            "SHA": "a6a5a1bd098bec67974e108c3776272858c65c1a325e5be471601054f03794b9"
+          },
+          {
+            "path": "docs/design/ai-sigma-contract-supervisor-continuation.md",
+            "bytes": 2852,
+            "SHA": "b487918f084753f6bae3882e2abf7e8f6bf8ef315e8b15cf6f72e725ba2daa0b"
+          },
+          {
+            "path": "docs/reports/ai-sigma-critic-extension25-tt-telemetry.md",
+            "bytes": 4100,
+            "SHA": "76e224281f218c674a9095375d658be27cc260a98f9649b10554681eed53f2b2"
+          },
+          {
+            "path": "docs/reports/ai-sigma-steward-extension25.md",
+            "bytes": 5055,
+            "SHA": "22f206eb7c90615ffdd85bb26799990b02aaca7bbf716358d14adbbe5bf7bfff"
+          },
+          {
+            "path": "docs/reports/ai-sigma-steward-runtime-retirement-1gj.md",
+            "bytes": 3634,
+            "SHA": "9c0e66d43503a595355f36373bc3ad0d9a765f5b04695cf1349834aa9b8a72b4"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-coordinator/316-compressed-inventory-independent-read-v1.json",
+            "bytes": 540,
+            "SHA": "f2760d2b480bf048c4222873e24115983f4527ab12bfc78acfa61db9511209ab"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-coordinator/317-independent-adoption-preservation-v1.json",
+            "bytes": 7843,
+            "SHA": "315afe7ee8483e67fd24dbc6466290e36941f3bd56d4434af24ace0ee02bc064"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-coordinator/extension25-parent-Beads-description.md",
+            "bytes": 3087,
+            "SHA": "2a8b0aa50b09b453cf84a04337691bc57ebe4fc816deb9f50c9b7f45dd1a2efe"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-coordinator/final-stopped-coordinator-handoff.md",
+            "bytes": 5526,
+            "SHA": "e649512998407763164e97fa18cf8fa8089e1004ac47340cf4b1dec1ad5315ac"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-coordinator/parent-description-before-extension25.txt.gz",
+            "bytes": 2207,
+            "SHA": "de68bb0b0b029cb0c7f0c8c0027de9172b354be607dacbace70cc2bdb9cffcf5"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-coordinator/parent-description-update-proof-v1.json",
+            "bytes": 477,
+            "SHA": "046c6e2c636ae0ec16ff31e2238cb2dd230c5040dbbcbbeeec9cadf816732294"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+            "bytes": 32067,
+            "SHA": "e98d63329a4a315db896f5bbf4b22d5fda348ab11015379310043348dc5803de"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-learning-analysis/analysis-source-partial-patch-v2-failure.json",
+            "bytes": 380,
+            "SHA": "181e822cd658be6f5d86f4cca9ad2663050425a76b291e304497bb99ca9d0e2b"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-learning-analysis/analyze_saved-initial-source-v1.py.txt",
+            "bytes": 7925,
+            "SHA": "83043dcd56a0d59832a8e264118976c28de622b070b268a21fd20be884d01452"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-learning-analysis/analyze_saved-partial-patch-source-v2.py.txt",
+            "bytes": 8342,
+            "SHA": "b8e3a4c2bf3114ddf019bdde1fd99c642370c55ebd68ba8d8166f0c56e926ad0"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-learning-analysis/current-forecast-gpu-update-report-v1.txt",
+            "bytes": 1160,
+            "SHA": "6e964942deadd6f38a94e19167045fcfbde5262006a5db44eb68d0e57a3c3b80"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-learning-analysis/early-analysis-output-gap-report-v1.txt",
+            "bytes": 1718,
+            "SHA": "e6be07810f62769b3a7ee1759d5768d4caa507c572c18a99b3d71e8ff6f53d1d"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-learning-analysis/independent-saved-analysis-v1.md",
+            "bytes": 3624,
+            "SHA": "e207e344432438d36583d24cd9374742942d72827ac9bd9de02fbc51f2ecb3ff"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-learning-analysis/next-main-learning-proposal-v1.md",
+            "bytes": 12981,
+            "SHA": "22ef22373541ab7a0e569fe6f03a07209b192de8fa65dc1feeec53ba236c8b0f"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-learning-analysis/next-main-learning-source-refs-v1.json",
+            "bytes": 3398,
+            "SHA": "4d9609968f11aaf25ecaae968d841c6048a9e3fc26f0eeba63c49ce5dcdcca28"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-learning-analysis/own-completed-intermediate-compression-v1.json",
+            "bytes": 659,
+            "SHA": "0280691c1ed71271e2e996ea425f0067028ac44f86b5bb612fc0ce0631865659"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-learning-analysis/owner-local-forecast-v1.json",
+            "bytes": 386,
+            "SHA": "bb5c9c9955064158ce5fc168c20cb778f90cf97d700fe649aad999472ec779e0"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-learning-analysis/primitive-metadata-read-failures-v1.json",
+            "bytes": 557,
+            "SHA": "991b7bd91d0d2cc1e03d39a8fbd054087c9ffc1fbf43fc031041a4dcba2cafc7"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-learning-analysis/saved-analysis-v1.json.gz",
+            "bytes": 7145,
+            "SHA": "c070756e9297b6a328fb19911e07ea0af237509e33dc13bf7f149edf363c6d42"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-learning-analysis/saved-analysis-v3.json",
+            "bytes": 50306,
+            "SHA": "622a3dfa57385b75aeb6a22f46ef220335d683e26ca38f57a5fd9c43f8b6c208"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-steward/1gj-before-terminal-runtime-manifest-v1.json",
+            "bytes": 4317,
+            "SHA": "d79f040266d795e024b72d774660b69b5d94bdfa37b7932d2c8a87934ca80526"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-steward/1gj-before-terminal-runtime-v1.tar.gz",
+            "bytes": 12759,
+            "SHA": "a11a598e32bc54c107e82681fc61c887ac20e51c57bc313e9a0a0f7f79929a26"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-steward/1gj-final-resource-handoff-v1.json",
+            "bytes": 2391,
+            "SHA": "a273bf915505e8cec374ad89c305409a6dffc2836f37fcaa609381654ae53021"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-steward/1gj-final-source-handoff-v1.json",
+            "bytes": 2841,
+            "SHA": "43af58a9456df6c193308590aa50727a90bb516062dc221f963295b63e9d73df"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-steward/1gj-late317-handoff-reference-v1.json",
+            "bytes": 1786,
+            "SHA": "0598e5d17a22f8f7c1e96a0165df5448fa18d1d79289913ce2c028f92d8d9045"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-steward/1gj-natural-idle-pre-stop-v1.json",
+            "bytes": 658,
+            "SHA": "afaf9b2c727fb08fb495450bc268809e07b6593ad444db6e6f9ca3a64d147eed"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-steward/1gj-terminal-runtime-stop-v1.json",
+            "bytes": 3118,
+            "SHA": "8b3943bf8f067fdc5e6404f9dc48ee4f063aae49acab7f3e5de1c5f6155d6242"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-steward/1gj-terminal-state-events-v1.tar.gz",
+            "bytes": 1594,
+            "SHA": "dfc0c52da154e77857dea0973f71ca069aef9d260f722b16030e4f28dd735caa"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-steward/1gj-terminal-state-manifest-v1.json",
+            "bytes": 1602,
+            "SHA": "68a4a8414d2683fb924071ea341da2eea118ce20f95e12c88f06eeb763b75338"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-steward/extension25-before-runtime-manifest-v1.json",
+            "bytes": 4029,
+            "SHA": "bf8c426b2dab344844a9a234758454468dab821191acca9659e9617a9108ef20"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-steward/extension25-before-runtime-v1.tar.gz",
+            "bytes": 13217,
+            "SHA": "d94fc1c04b787195675f924b45f2c68fe6625802e2d35127c207ad39d7a5b076"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-steward/extension25-orderly-stop-v1.json",
+            "bytes": 2465,
+            "SHA": "37bc7a9be98746f64db4e4ab4207eecd314c15641d3106f27ee9316f65f322ab"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-steward/extension25-post-refusal-current-binding-v1.json",
+            "bytes": 2810,
+            "SHA": "6b79a56719148849978850f414200a9d79151e8ff1be539535c195cb2f09c3b9"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-steward/extension25-running-loaded-v1.json",
+            "bytes": 7570,
+            "SHA": "6cae4e4f0e42f146837f7c9754abc75c0ed8e80aa8d49acca295d526422ffd60"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-steward/extension25-runtime-inputs-and-first-refusal-v1.tar.gz",
+            "bytes": 9183,
+            "SHA": "47ce247de77ee7e024d3af2fc1abd53e73528a87c7c52a484d904e66b970c678"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-steward/extension25-runtime-inputs-manifest-v1.json",
+            "bytes": 5509,
+            "SHA": "c7f158e1f0051f5d287a9357d00db81d667b009a0a08214f968a31c5afabbed9"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-steward/extension25-safe-window-v1.json",
+            "bytes": 1265,
+            "SHA": "2301c227fff60ab324854dffae1ee786aa88fcfc21747d0cb56606faccd3c73c"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-steward/extension25-safe-window-v2.json",
+            "bytes": 4060,
+            "SHA": "103398a68cc8ca85b04ae7d4c8b8506ce47227220b46351924f86c90ce72cccb"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-steward/extension25-safe-window-v3.json",
+            "bytes": 4022,
+            "SHA": "c006a9f2e48a9d01f783f3b7fef56065d80e1a30e7328bb40b2c736dad0bf2fa"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-steward/extension25-source-application-v1.json",
+            "bytes": 716,
+            "SHA": "1103f5b7070bad26ccd31cebfa4ddbbe79c514abfc5a5f4286592aa4a89f4f70"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-steward/extension25-source-handoff-v1.json",
+            "bytes": 5932,
+            "SHA": "08b8546de54b75f0b3a732517a1ab92b491a54270a2e6342b260a07c6acd325f"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-steward/extension25-start-binding-gap-v1.json",
+            "bytes": 723,
+            "SHA": "9d8455e27b8ee8f70b418c00da818bd25ab946d21af09a8fda10163f70b41096"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-steward/extension25-validate-start-v1.json",
+            "bytes": 1563,
+            "SHA": "45366146674bc06ee4bff2e8405ad57842e575ed5ea495baa80e4b5410d98dbf"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-steward/storage-310-final-conserved-overlay-v1.json",
+            "bytes": 1653,
+            "SHA": "6bdd5292fea83749f04c3f6386c8ab5b3c6a3a4620a07f48c6b5498dd725f029"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-steward/storage-310-final-local-check-v1.json",
+            "bytes": 1172,
+            "SHA": "f1eb6d4fe1b2eb640c4562dec99c88bee4206ab09158b02ced6c417ea94d6d14"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-steward/storage-315-rendering-overlay-v1.json",
+            "bytes": 1957,
+            "SHA": "07054dd6eb9145afc673757c8e9e3463725047299ad11ecbe23b6e1518da8d8c"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-steward/storage-316-proposal-overlay-v1.json",
+            "bytes": 1169,
+            "SHA": "47658a3538f6193ed9f9ba5678df03aaaf143f6beb5124872e054cd83f6bf8fc"
+          },
+          {
+            "path": "research-data/ai-sigma/frame24-steward/storage-317-TT-telemetry-overlay-v1.json",
+            "bytes": 2797,
+            "SHA": "57a88c556ca9fee536af75eb7a060229c40630d220f0f3fa6d5984b3b38545bb"
+          }
+        ],
+        "all_explicit_Git_blobs_equal": true,
+        "unstaged_Root_scope": "left unchanged and unstaged",
+        "scientific_model_assets_staged": false
+      }
+    },
+    "totals": {
+      "changed_paths": 168,
+      "unresolved_paths": 25,
+      "unresolved_logical_B": 143025,
+      "current_source_byteexact": 2,
+      "prior_frame21_member": 46
+    },
+    "unresolved": [
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/docs/reports/ai-sigma-critic-frame21-search-efficiency.md",
+        "relative": "docs/reports/ai-sigma-critic-frame21-search-efficiency.md",
+        "bytes": 6449,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/archive-manifest.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/archive-manifest.json",
+        "bytes": 6975,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/asset-reader-stop.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/asset-reader-stop.json",
+        "bytes": 1847,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/save-handoff-v2.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/save-handoff-v2.json",
+        "bytes": 1445,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/save-handoff.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/save-handoff.json",
+        "bytes": 1026,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/source.patch",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/source.patch",
+        "bytes": 15410,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/storage-final.json",
+        "relative": "research-data/ai-sigma/frame21-search-efficiency/storage-final.json",
+        "bytes": 521,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/beads-append-recovered-notes.txt",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/beads-append-recovered-notes.txt",
+        "bytes": 492,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/beads-note-recovery-v1.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/beads-note-recovery-v1.json",
+        "bytes": 564,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/closure-addendum-manifest-v1.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/closure-addendum-manifest-v1.json",
+        "bytes": 1012,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/closure-addendum-v1.tar.gz",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/closure-addendum-v1.tar.gz",
+        "bytes": 982,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/final-save-current-v2.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/final-save-current-v2.json",
+        "bytes": 552,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/final-save-report.txt",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/final-save-report.txt",
+        "bytes": 1106,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/necessary-evidence-manifest-v1.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/necessary-evidence-manifest-v1.json",
+        "bytes": 9279,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/owner-close-backup-v1.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/owner-close-backup-v1.json",
+        "bytes": 761,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/owner-closed-report.txt",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/owner-closed-report.txt",
+        "bytes": 645,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/save-handoff-v1.json",
+        "relative": "research-data/ai-sigma/frame24-persistent-tt/save-handoff-v1.json",
+        "bytes": 12848,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/freeze_public_evaluation.py",
+        "relative": "tools/research-review/freeze_public_evaluation.py",
+        "bytes": 9257,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/guard_frozen_public_prediction.py",
+        "relative": "tools/research-review/guard_frozen_public_prediction.py",
+        "bytes": 8393,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/guard_frozen_public_score.py",
+        "relative": "tools/research-review/guard_frozen_public_score.py",
+        "bytes": 8367,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/predict_public_rulea_frozen.py",
+        "relative": "tools/research-review/predict_public_rulea_frozen.py",
+        "bytes": 9717,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/public_metadata_exposure_guard.py",
+        "relative": "tools/research-review/public_metadata_exposure_guard.py",
+        "bytes": 13515,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/rulea_targetfree_mask_review.py",
+        "relative": "tools/research-review/rulea_targetfree_mask_review.py",
+        "bytes": 7017,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/score_public_rulea_frozen.py",
+        "relative": "tools/research-review/score_public_rulea_frozen.py",
+        "bytes": 14052,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/sigma_input_review.py",
+        "relative": "tools/research-review/sigma_input_review.py",
+        "bytes": 10793,
+        "mode": "0644",
+        "archive_header_matches": [],
+        "direct_archive_import_alias": null,
+        "coverage": "UNRESOLVED_SPECIFIC_PATH"
+      }
+    ],
+    "limits": "Only previously unmapped small source files read for exact comparison; metadata/RAW archive matches reuse historical provenance/path+size and do not assert new current byte identity. No archive/model/RAW payload body rehash/requalification. Root owns final actual consumer and preservation/removal.",
+    "closed_WT_scopes_touched": 0
+  },
+  "prior_frame21_archive_current_HEAD_locator": "100644 blob 503baf4e300b48d1b8704c5c477d0f12cdf14a8b    6975\tresearch-data/ai-sigma/frame21-search-efficiency/archive-manifest.json\n100644 blob d0386aaa1ee9d96d2e6a11d125fff59976e4dd1c   51022\tresearch-data/ai-sigma/frame21-search-efficiency/evidence.tar.gz\n"
+}
