@@ -1,0 +1,548 @@
+{
+  "issue": "quoridor-4lc.324.12.6",
+  "status": "TWO_SIGMA_CHECKOUTS_REMOVED_AFTER_COMMITTED_PRESERVATION",
+  "completed": [
+    {
+      "status": "REMOVED_BY_NORMAL_MANAGED_HELPER",
+      "candidate": "sigma-receipt-caller",
+      "at": "2026-10-21T10:01:16.530797+00:00",
+      "before_registered": 18,
+      "after_registered": 17,
+      "helper_exit": 0,
+      "branch_preserved": "refs/heads/codex/sigma-receipt-caller",
+      "revision": "3543d63a0557f80fbf49c1f30de9bd9ec671f7f5",
+      "worktree_specific_metadata": {
+        "HEAD": {
+          "text": "ref: refs/heads/codex/sigma-receipt-caller\n",
+          "mode": "0644"
+        },
+        "config.worktree": {
+          "text": "[core]\n\tsparseCheckout = true\n\tsparseCheckoutCone = true\n[index]\n\tsparse = true\n",
+          "mode": "0644"
+        },
+        "info/sparse-checkout": {
+          "text": "/*\n!/*/\n/configs/\n!/configs/*/\n/scripts/\n!/scripts/*/\n/configs/arena/\n/crates/\n/scripts/dev/\n",
+          "mode": "0644"
+        },
+        "info/exclude": null
+      },
+      "index_flags": {
+        "S": 9609,
+        "H": 182
+      },
+      "staging_empty": true,
+      "preservation_commit": "8776d8669ffd2f55799f96dcbeb0906739db9cb5",
+      "public_manifest": "research-data/ai-sigma/execution324-worktree-retirement-20261021/sigma-receipt-caller-preservation.json",
+      "controlled_reader_boundary": "Group D closed same-owner finite preparation after reader STOP09:47:18.174071Z and actual closure STOP09:55:45.573817Z; no controlled old WT reader, no new owner ACK required",
+      "old_owner": "quoridor-4lc.347.6",
+      "old_source_STOP": "Historical source acceptance and Group D exact reader STOP retained separately",
+      "supporting_proc_scan": {
+        "processes": 118,
+        "descriptors": 2242,
+        "matches": [],
+        "permission_denied": [
+          {
+            "pid": 1,
+            "uid": 0,
+            "comm": "docker-init",
+            "kind": "cwd"
+          },
+          {
+            "pid": 1,
+            "uid": 0,
+            "comm": "docker-init",
+            "kind": "exe"
+          },
+          {
+            "pid": 1,
+            "uid": 0,
+            "comm": "docker-init",
+            "kind": "fd-directory"
+          },
+          {
+            "pid": 7,
+            "uid": 0,
+            "comm": "sh",
+            "kind": "cwd"
+          },
+          {
+            "pid": 7,
+            "uid": 0,
+            "comm": "sh",
+            "kind": "exe"
+          },
+          {
+            "pid": 7,
+            "uid": 0,
+            "comm": "sh",
+            "kind": "fd-directory"
+          },
+          {
+            "pid": 5767,
+            "uid": 0,
+            "comm": "sshd",
+            "kind": "cwd"
+          },
+          {
+            "pid": 5767,
+            "uid": 0,
+            "comm": "sshd",
+            "kind": "exe"
+          },
+          {
+            "pid": 5767,
+            "uid": 0,
+            "comm": "sshd",
+            "kind": "fd-directory"
+          },
+          {
+            "pid": 9541,
+            "uid": 0,
+            "comm": "sh",
+            "kind": "cwd"
+          },
+          {
+            "pid": 9541,
+            "uid": 0,
+            "comm": "sh",
+            "kind": "exe"
+          },
+          {
+            "pid": 9541,
+            "uid": 0,
+            "comm": "sh",
+            "kind": "fd-directory"
+          },
+          {
+            "pid": 9547,
+            "uid": 0,
+            "comm": "sh",
+            "kind": "cwd"
+          },
+          {
+            "pid": 9547,
+            "uid": 0,
+            "comm": "sh",
+            "kind": "exe"
+          },
+          {
+            "pid": 9547,
+            "uid": 0,
+            "comm": "sh",
+            "kind": "fd-directory"
+          },
+          {
+            "pid": 9648,
+            "uid": 0,
+            "comm": "sh",
+            "kind": "cwd"
+          },
+          {
+            "pid": 9648,
+            "uid": 0,
+            "comm": "sh",
+            "kind": "exe"
+          },
+          {
+            "pid": 9648,
+            "uid": 0,
+            "comm": "sh",
+            "kind": "fd-directory"
+          },
+          {
+            "pid": 275324,
+            "uid": 0,
+            "comm": "sleep",
+            "kind": "cwd"
+          },
+          {
+            "pid": 275324,
+            "uid": 0,
+            "comm": "sleep",
+            "kind": "exe"
+          },
+          {
+            "pid": 275324,
+            "uid": 0,
+            "comm": "sleep",
+            "kind": "fd-directory"
+          },
+          {
+            "pid": 2470305,
+            "uid": 0,
+            "comm": "sshd",
+            "kind": "cwd"
+          },
+          {
+            "pid": 2470305,
+            "uid": 0,
+            "comm": "sshd",
+            "kind": "exe"
+          },
+          {
+            "pid": 2470305,
+            "uid": 0,
+            "comm": "sshd",
+            "kind": "fd-directory"
+          },
+          {
+            "pid": 2470311,
+            "uid": 1000,
+            "comm": "sshd",
+            "kind": "cwd"
+          },
+          {
+            "pid": 2470311,
+            "uid": 1000,
+            "comm": "sshd",
+            "kind": "exe"
+          },
+          {
+            "pid": 2470311,
+            "uid": 1000,
+            "comm": "sshd",
+            "kind": "fd-directory"
+          }
+        ],
+        "full_host_stop_claim": false
+      },
+      "full_host_future_quiet": false,
+      "original_FAILED_NULL_costs": "PRESERVED",
+      "Main_dirty_unchanged": true,
+      "force_remove": false,
+      "branch_session_deleted": false,
+      "refund_lending": false
+    },
+    {
+      "status": "REMOVED_BY_NORMAL_MANAGED_HELPER",
+      "candidate": "sigma-receipt-reevaluation",
+      "at": "2026-10-21T10:01:16.848663+00:00",
+      "before_registered": 17,
+      "after_registered": 16,
+      "helper_exit": 0,
+      "branch_preserved": "refs/heads/codex/sigma-receipt-reevaluation",
+      "revision": "3543d63a0557f80fbf49c1f30de9bd9ec671f7f5",
+      "worktree_specific_metadata": {
+        "HEAD": {
+          "text": "ref: refs/heads/codex/sigma-receipt-reevaluation\n",
+          "mode": "0644"
+        },
+        "config.worktree": {
+          "text": "[core]\n\tsparseCheckout = true\n\tsparseCheckoutCone = true\n[index]\n\tsparse = true\n",
+          "mode": "0644"
+        },
+        "info/sparse-checkout": {
+          "text": "/*\n!/*/\n/configs/\n!/configs/*/\n/scripts/\n!/scripts/*/\n/configs/arena/\n/crates/\n/scripts/dev/\n",
+          "mode": "0644"
+        },
+        "info/exclude": null
+      },
+      "index_flags": {
+        "S": 9609,
+        "H": 182
+      },
+      "staging_empty": true,
+      "preservation_commit": "8776d8669ffd2f55799f96dcbeb0906739db9cb5",
+      "public_manifest": "research-data/ai-sigma/execution324-worktree-retirement-20261021/sigma-receipt-reevaluation-preservation.json",
+      "controlled_reader_boundary": "Group D closed same-owner finite preparation after reader STOP09:47:18.174071Z and actual closure STOP09:55:45.573817Z; no controlled old WT reader, no new owner ACK required",
+      "old_owner": "quoridor-4lc.347.6",
+      "old_source_STOP": "Historical source acceptance and Group D exact reader STOP retained separately",
+      "supporting_proc_scan": {
+        "processes": 118,
+        "descriptors": 2241,
+        "matches": [],
+        "permission_denied": [
+          {
+            "pid": 1,
+            "uid": 0,
+            "comm": "docker-init",
+            "kind": "cwd"
+          },
+          {
+            "pid": 1,
+            "uid": 0,
+            "comm": "docker-init",
+            "kind": "exe"
+          },
+          {
+            "pid": 1,
+            "uid": 0,
+            "comm": "docker-init",
+            "kind": "fd-directory"
+          },
+          {
+            "pid": 7,
+            "uid": 0,
+            "comm": "sh",
+            "kind": "cwd"
+          },
+          {
+            "pid": 7,
+            "uid": 0,
+            "comm": "sh",
+            "kind": "exe"
+          },
+          {
+            "pid": 7,
+            "uid": 0,
+            "comm": "sh",
+            "kind": "fd-directory"
+          },
+          {
+            "pid": 5767,
+            "uid": 0,
+            "comm": "sshd",
+            "kind": "cwd"
+          },
+          {
+            "pid": 5767,
+            "uid": 0,
+            "comm": "sshd",
+            "kind": "exe"
+          },
+          {
+            "pid": 5767,
+            "uid": 0,
+            "comm": "sshd",
+            "kind": "fd-directory"
+          },
+          {
+            "pid": 9541,
+            "uid": 0,
+            "comm": "sh",
+            "kind": "cwd"
+          },
+          {
+            "pid": 9541,
+            "uid": 0,
+            "comm": "sh",
+            "kind": "exe"
+          },
+          {
+            "pid": 9541,
+            "uid": 0,
+            "comm": "sh",
+            "kind": "fd-directory"
+          },
+          {
+            "pid": 9547,
+            "uid": 0,
+            "comm": "sh",
+            "kind": "cwd"
+          },
+          {
+            "pid": 9547,
+            "uid": 0,
+            "comm": "sh",
+            "kind": "exe"
+          },
+          {
+            "pid": 9547,
+            "uid": 0,
+            "comm": "sh",
+            "kind": "fd-directory"
+          },
+          {
+            "pid": 9648,
+            "uid": 0,
+            "comm": "sh",
+            "kind": "cwd"
+          },
+          {
+            "pid": 9648,
+            "uid": 0,
+            "comm": "sh",
+            "kind": "exe"
+          },
+          {
+            "pid": 9648,
+            "uid": 0,
+            "comm": "sh",
+            "kind": "fd-directory"
+          },
+          {
+            "pid": 275324,
+            "uid": 0,
+            "comm": "sleep",
+            "kind": "cwd"
+          },
+          {
+            "pid": 275324,
+            "uid": 0,
+            "comm": "sleep",
+            "kind": "exe"
+          },
+          {
+            "pid": 275324,
+            "uid": 0,
+            "comm": "sleep",
+            "kind": "fd-directory"
+          },
+          {
+            "pid": 2470305,
+            "uid": 0,
+            "comm": "sshd",
+            "kind": "cwd"
+          },
+          {
+            "pid": 2470305,
+            "uid": 0,
+            "comm": "sshd",
+            "kind": "exe"
+          },
+          {
+            "pid": 2470305,
+            "uid": 0,
+            "comm": "sshd",
+            "kind": "fd-directory"
+          },
+          {
+            "pid": 2470311,
+            "uid": 1000,
+            "comm": "sshd",
+            "kind": "cwd"
+          },
+          {
+            "pid": 2470311,
+            "uid": 1000,
+            "comm": "sshd",
+            "kind": "exe"
+          },
+          {
+            "pid": 2470311,
+            "uid": 1000,
+            "comm": "sshd",
+            "kind": "fd-directory"
+          }
+        ],
+        "full_host_stop_claim": false
+      },
+      "full_host_future_quiet": false,
+      "original_FAILED_NULL_costs": "PRESERVED",
+      "Main_dirty_unchanged": true,
+      "force_remove": false,
+      "branch_session_deleted": false,
+      "refund_lending": false
+    }
+  ],
+  "actual_returned_cleanup": {
+    "returned": {
+      "command": [
+        "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+        "-B",
+        "/workspaces/quoridor/.artifacts/research-team/integration324/worktree-retirement-v1/ready-D-v1/remove.py"
+      ],
+      "status": "complete",
+      "child": {
+        "pid": 275392,
+        "start_ticks": "62516670",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "cpu_plan": {
+        "management": [18],
+        "commands": {
+          "maintenance": [0]
+        },
+        "allocation": [0, 18],
+        "resource_CPUs": 2,
+        "worker_CPUs": 1,
+        "library_threads": 1
+      },
+      "command_cpu_scope": "maintenance",
+      "log_bytes_seen": 177,
+      "scope": "session group and periodically recorded descendants; no daemon adoption",
+      "exit_code": 0,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "cleanup_complete": true,
+      "log_bytes_retained": 177,
+      "wall_seconds": 0.7055076330434531,
+      "handle_closes_attempted": [
+        "selector_close",
+        "pipe_close",
+        "pidfd_close",
+        "log_close"
+      ],
+      "primary_error": null,
+      "process_cleanup_complete": true,
+      "handle_closes_complete": true,
+      "signal_mask_restoration": "completed",
+      "final_record_persist": "completed",
+      "finalization_errors": []
+    },
+    "disk": {
+      "command": [
+        "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+        "-B",
+        "/workspaces/quoridor/.artifacts/research-team/integration324/worktree-retirement-v1/ready-D-v1/remove.py"
+      ],
+      "status": "complete",
+      "child": {
+        "pid": 275392,
+        "start_ticks": "62516670",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "cpu_plan": {
+        "management": [18],
+        "commands": {
+          "maintenance": [0]
+        },
+        "allocation": [0, 18],
+        "resource_CPUs": 2,
+        "worker_CPUs": 1,
+        "library_threads": 1
+      },
+      "command_cpu_scope": "maintenance",
+      "log_bytes_seen": 177,
+      "scope": "session group and periodically recorded descendants; no daemon adoption",
+      "exit_code": 0,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "cleanup_complete": true,
+      "log_bytes_retained": 177,
+      "wall_seconds": 0.7055076330434531,
+      "handle_closes_attempted": [
+        "selector_close",
+        "pipe_close",
+        "pidfd_close",
+        "log_close"
+      ],
+      "primary_error": null,
+      "process_cleanup_complete": true,
+      "handle_closes_complete": true,
+      "signal_mask_restoration": "pending",
+      "final_record_persist": "attempted",
+      "finalization_errors": []
+    },
+    "failure": null,
+    "TMP": [],
+    "sourceleases": [],
+    "host_future_quiet": false,
+    "scientific_calls": 0
+  },
+  "total_removed": 9,
+  "registered": 16,
+  "remaining_candidates": 12,
+  "preservation_commit": "8776d8669ffd2f55799f96dcbeb0906739db9cb5",
+  "external_original_generation_RAW_root": "/workspaces/quoridor/.worktree/assets/data/deeper-teacher-generation-v1",
+  "external_assets_preserved": "Exact directory inode retained before/after removal; no payload read/copy or new generation",
+  "source_restoration": "Six caller and eight reevaluation source files match existing dbcc245c Git objects; no current source rehash or source/qualification replay",
+  "evidence": "27 caller records /949545B and883 reevaluation records /49533142B, with106 directory modes for reevaluation; prior ONEstream restoration reused, no rearchive",
+  "controlled_readers": "Group D finite preparation CLOSED same original assignee after actual09:47:18 source and09:55:45 closure STOP, no extra owner ACK",
+  "current_pending_scope": "docs/research-findings.md ETC17 result pending separate publication; unchanged/excluded",
+  "protected_four_models_seals_Beads_branches_sessions": "PRESERVED",
+  "all_original_FAILED_NULL_masks_cost_UNKNOWN": "PRESERVED",
+  "scientific_calls": 0,
+  "global_actual_fullfees": "UNKNOWN",
+  "refunds_lending": false
+}
