@@ -219,9 +219,34 @@ pub(crate) fn deserialize_probcut<'de, D: serde::Deserializer<'de>>(
 ) -> Result<Option<ProbCutConfig>, D::Error> {
     ProbCutConfig::deserialize(deserializer).map(Some)
 }
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum EtcConfig {
+    Off,
+    Depth3Top2,
+}
+impl EtcConfig {
+    pub fn resolve(self) -> quoridor_ai::alphabeta::EtcMode {
+        match self {
+            Self::Off => quoridor_ai::alphabeta::EtcMode::Off,
+            Self::Depth3Top2 => quoridor_ai::alphabeta::EtcMode::Depth3Top2,
+        }
+    }
+}
+pub(crate) fn deserialize_etc<'de, D: serde::Deserializer<'de>>(
+    d: D,
+) -> Result<Option<EtcConfig>, D::Error> {
+    EtcConfig::deserialize(d).map(Some)
+}
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct Engine {
+    #[serde(
+        default,
+        deserialize_with = "deserialize_etc",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub etc: Option<EtcConfig>,
     #[serde(
         default,
         deserialize_with = "deserialize_probcut",
@@ -438,6 +463,7 @@ impl Config {
                     || e.lmr
                     || e.lmr_method.is_some()
                     || e.lmr_parameters.is_some()
+                    || e.etc.is_some()
             })
         {
             return Err("explicit ordering/LMR settings belong to an arena config".into());
@@ -451,6 +477,7 @@ impl Config {
             return Err("safe-race enable belongs to a research alpha arena".into());
         }
         for engine in &self.engines {
+            crate::runtime::arena_etc(engine, self.arena.as_ref()).map_err(|e| e.to_string())?;
             crate::runtime::arena_lmr_parameters(engine, self.arena.as_ref())
                 .map_err(|e| e.to_string())?;
             quoridor_ai::alphabeta::ZeroStockSafeRaceMethod::from_name(
@@ -1101,6 +1128,14 @@ mod smp_team_boundary_tests {
             assert!(bad.search_team_cores().is_err());
         }
     }
+}
+
+pub(crate) fn etc_report(r: &quoridor_ai::alphabeta::EtcReport) -> serde_json::Value {
+    serde_json::json!({"mode":"depth3_top2", "root_distance_bins":["1..2","3..5","6+"],
+        "residual_depth_bins":["3","4..5","6+"], "opportunities":r.opportunities,
+        "child_probes":r.child_probes,"qualified_hits":r.qualified_hits,
+        "terminal_proofs":r.terminal_proofs,"cuts":r.cuts,
+        "scope":"ETC cuts attributed once; canonical terminal checks are distinct from strict child TT hits; extra make/probe work included in Search"})
 }
 
 pub(crate) fn probcut_report(r: &quoridor_ai::alphabeta::ProbCutReport) -> serde_json::Value {

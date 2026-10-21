@@ -277,6 +277,18 @@ impl PreparedMoves {
         }
     }
 
+    /// No pull, sort, score scan, clone or allocation. A signed tail is usable
+    /// only after its existing second pull has established final sibling order.
+    pub(super) fn etc_next_ordered(&self) -> Option<u16> {
+        match self {
+            Self::Eager(moves) => moves.as_slice().first().copied(),
+            Self::SignedKeys { ids, next, .. } if *next >= 2 || ids.len() <= 2 => {
+                ids.get(*next).copied()
+            }
+            Self::SignedKeys { .. } => None,
+        }
+    }
+
     pub fn lmr_protected(&self, id: u16) -> bool {
         match self {
             Self::SignedKeys { keys, .. } => keys[id as usize] >> 40 < 4,

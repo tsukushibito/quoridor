@@ -2601,6 +2601,41 @@ def numerical_fields(experiment, manifest):
     }
 
 
+def resolved_etc(config, profile, *, supported=True):
+    if "etc" not in config:
+        return "off"
+    mode = config["etc"]
+    require(
+        supported and profile == "control" and type(mode) is str and mode in {"off", "depth3_top2"},
+        "typed research ETC setting",
+    )
+    if mode != "off":
+        require(
+            config.get("search_threads", 1) == 1
+            and config.get("probcut") is None
+            and config.get("probcut_samples", 0) == 0
+            and config.get("lmr_method", "depth_rank") == "depth_rank"
+            and config.get("zero_stock_approx_min_root_walls") is None
+            and all(
+                config.get(k) is None
+                for k in ("neighbour_opportunity", "root_ordering_quality", "history_provenance")
+            ),
+            "ETC ordinary N1/depth_rank, MPC/observers/approximation OFF",
+        )
+    return mode
+
+
+def etc_correspondence(config, record, *, profile, namespace):
+    mode = resolved_etc(config, profile)
+    require(type(namespace) is str, "ETC namespace string")
+    require(
+        record.get("etc_requested") == config.get("etc")
+        and record.get("etc_effective") == mode
+        and namespace.startswith("etc-depth3-top2-v1:") == (mode != "off"),
+        "ETC requested/effective/namespace correspondence",
+    )
+
+
 def resolved_lmr_parameters(config, profile, *, supported=True):
     """Typed coefficient box shared by preparation and normal data correspondence.
 
@@ -2640,6 +2675,7 @@ def measurement_config(experiment):
         <= {
             "inference",
             "probcut",
+            "etc",
             "probcut_samples",
             "search_threads",
             "smp_sharing_provenance",
@@ -2680,6 +2716,14 @@ def measurement_config(experiment):
         <= set(config),
         "measurement settings shape",
     )
+    etc = resolved_etc(config, config["profile"])
+    if etc != "off":
+        require(
+            config["use_tt"]
+            and config["use_pvs"]
+            and all(not r.get("observe_lmr", False) for r in requests),
+            "ETC excludes LMR observation/trial custody",
+        )
     if "probcut" in config or "probcut_samples" in config:
         p = config.get("probcut")
         samples = config.get("probcut_samples", 0)
@@ -3241,6 +3285,18 @@ def measurement_evidence(spec, experiment, values, *, files=()):
                     "measurement count type: " + key,
                 )
         require(isinstance(result.get("errors"), list), "measurement errors array")
+    etc_config = document(experiment["config"])
+    for row in rows:
+        measured = row.get("measurement", {})
+        namespace = measured.get("actual_selectivity", "")
+        if (
+            "etc" in etc_config
+            or "etc_effective" in measured
+            or namespace.startswith("etc-depth3-top2-v1:")
+        ):
+            etc_correspondence(
+                etc_config, measured, profile=etc_config["profile"], namespace=namespace
+            )
     raw_refs = [ref for ref in files if spec.get("perf") and ref["path"] == spec["perf"]["output"]]
     if result is not None and spec.get("perf"):
         result = {**result, "perf_RAW": raw_refs}
@@ -4945,6 +5001,15 @@ def arena_plan_check(experiment, plan):
         else:
             require(engine.get("claustrophobia") is None, "unused Claustrophobia settings")
         require("shallow_main_history" not in engine, "retired arena setting")
+        etc_mode = resolved_etc(
+            engine,
+            engine.get("ordering_profile"),
+            supported=engine["kind"] in {"nnue", "distance"} and a["comparison"] != "functional",
+        )
+        require(
+            etc_mode == "off" or a["comparison"] in {"search_wall_time", "search_fixed_work"},
+            "ETC same-evaluator search comparison only",
+        )
         resolved_lmr_parameters(
             engine,
             engine.get("ordering_profile"),
@@ -5522,6 +5587,16 @@ def arena_observation(config, row):
                     else obs["returned_ns"] == receipt
                 ),
                 "main receipt/terminal drain",
+            )
+        namespace = counters.get("actual_search_namespace") or {}
+        selectivity = namespace.get("selectivity", "")
+        if (
+            "etc" in engine
+            or "etc_effective" in counters
+            or selectivity.startswith("etc-depth3-top2-v1:")
+        ):
+            etc_correspondence(
+                engine, counters, profile=engine.get("ordering_profile"), namespace=selectivity
             )
         accepted.append(obs["action"])
     if not config["arena"].get("decision_only", False):
@@ -8023,6 +8098,9 @@ def comparison_conditions(common):
     for variant in variants:
         if "lmr_parameters" in common:
             variant["lmr_parameters"] = copy.deepcopy(common["lmr_parameters"])
+        if "etc" in common:
+            variant["etc"] = common["etc"]
+        resolved_etc(variant, variant["profile"])
         resolved_lmr_parameters(variant, variant["profile"])
     return variants
 
@@ -8044,6 +8122,11 @@ def apply_comparison_cost(config, common, variant):
     else:
         config.pop("lmr_parameters", None)
 
+    if "etc" in variant:
+        config["etc"] = variant["etc"]
+    else:
+        config.pop("etc", None)
+    resolved_etc(config, config["profile"])
     config["zero_stock_safe_race"] = variant["zero_stock_safe_race"]
     config["zero_stock_safe_race_method"] = variant["zero_stock_safe_race_method"]
 
@@ -8073,6 +8156,11 @@ def apply_comparison_arena(config, common, pair):
             engine["lmr_parameters"] = copy.deepcopy(variant["lmr_parameters"])
         else:
             engine.pop("lmr_parameters", None)
+        if "etc" in variant:
+            engine["etc"] = variant["etc"]
+        else:
+            engine.pop("etc", None)
+        resolved_etc(engine, engine["ordering_profile"])
         engine["zero_stock_safe_race"] = variant["zero_stock_safe_race"]
         engine["zero_stock_safe_race_method"] = variant["zero_stock_safe_race_method"]
         for key in ("depth", "max_nodes", "time_ms"):
@@ -8939,6 +9027,12 @@ def sequence(
     if settings.get("arena_cohort") is not None:
         new_json(output / "lane-origin.json", dict(settings=settings_ref, originating_job=origin))
     initial_affinity = os.sched_getaffinity(0)
+    if settings.get("arena_cohort") is not None:
+        cohort, _ = arena_cohort(arena_cohort_spec(settings_ref))
+        management = set(cohort.get("management_cpu_pool", [cohort["global_controller_cpu"]]))
+        require(management <= initial_affinity, "cohort management CPUs outside launch affinity")
+        initial_affinity = management
+        os.sched_setaffinity(0, initial_affinity)
     active = None
     active_spec = None
     stopped = False

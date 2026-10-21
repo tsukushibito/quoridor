@@ -36,6 +36,7 @@ fn with_tt<T>(
     let mut history = ContinuationHistory::new().unwrap();
     let mut s = Search {
         probcut: probcut::State::default(),
+        etc: EtcMode::Off,
         #[cfg(not(target_arch = "wasm32"))]
         worker_budget: None,
         #[cfg(feature = "research-diagnostics")]

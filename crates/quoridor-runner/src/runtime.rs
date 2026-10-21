@@ -523,6 +523,7 @@ pub struct TtProfile {
     pub actual_lmr_parameters: Option<crate::config::LmrParameters>,
     #[serde(default)]
     pub actual_probcut: Option<serde_json::Value>,
+    pub actual_etc: Option<String>,
     #[serde(default)]
     pub lmr_reduction_rule: Option<String>,
     #[serde(default)]
@@ -578,6 +579,41 @@ pub(crate) fn arena_lmr_method(engine: &Engine) -> alphabeta::Result<alphabeta::
             .unwrap_or(alphabeta::LmrMethod::default().name()),
     )
 }
+pub(crate) fn arena_etc(
+    engine: &Engine,
+    arena: Option<&crate::arena::ArenaConfig>,
+) -> alphabeta::Result<alphabeta::EtcMode> {
+    let mode = engine.etc.map_or(alphabeta::EtcMode::Off, |p| p.resolve());
+    if engine.etc.is_some()
+        && (!matches!(engine.kind.as_str(), "nnue" | "distance")
+            || engine.ordering_profile.as_deref() != Some("control")
+            || arena.is_none_or(|a| a.comparison == crate::arena::Comparison::Functional))
+    {
+        return Err(alphabeta::SearchError::Limits(
+            "explicit ETC setting requires research Control arena".into(),
+        ));
+    }
+    if mode != alphabeta::EtcMode::Off
+        && (!matches!(engine.kind.as_str(), "nnue" | "distance")
+            || engine.search_threads.unwrap_or(1) != 1
+            || engine.probcut.is_some()
+            || engine.lmr_method.as_deref().unwrap_or("depth_rank") != "depth_rank"
+            || arena.is_none_or(|a| {
+                !matches!(
+                    a.comparison,
+                    crate::arena::Comparison::SearchWallTime
+                        | crate::arena::Comparison::SearchFixedWork
+                )
+            }))
+    {
+        return Err(alphabeta::SearchError::Limits(
+            "ETC requires same-evaluator research search comparison/N1/Control/depth_rank, MPC OFF"
+                .into(),
+        ));
+    }
+    Ok(mode)
+}
+
 pub(crate) fn arena_lmr_parameters(
     engine: &Engine,
     arena: Option<&crate::arena::ArenaConfig>,
@@ -663,6 +699,7 @@ fn arena_alpha_namespace(
                 .namespace_suffix(),
         );
     }
+    arena_etc(engine, arena)?.qualify_namespace(&mut namespace);
     Ok(namespace)
 }
 fn arena_alpha_session(
@@ -727,6 +764,7 @@ fn arena_alpha_session(
             .map(|p| p.resolve(session.score_domain()))
             .transpose()?,
     )?;
+    session.set_etc(arena_etc(engine, arena)?)?;
     Ok(session)
 }
 
@@ -845,6 +883,7 @@ fn invoke_alpha_observed(
             "nonterminal_abs_bound":p.nonterminal_abs_bound,"terminal_utility":p.terminal_utility,
             "calibration_sha256":p.calibration_sha256,
         }));
+        profile.actual_etc = Some(session.etc_mode().name().into());
         profile.search_invocations += 1;
         let start = Instant::now();
         let mut bounded = limits.clone();
@@ -3126,6 +3165,8 @@ fn record_evaluation_alpha(
         "requested_zero_stock_safe_race_method":arena_safe_race(&config.engines[engine], config.arena.as_ref()).ok().map(|(_, method)| method.name()),
         "actual_zero_stock_safe_race_method_id":game.tt_profiles[engine].actual_zero_stock_safe_race_method_id,
         "requested_lmr_method":config.engines[engine].lmr_method.as_deref().unwrap_or(alphabeta::LmrMethod::default().name()),
+        "etc_requested":config.engines[engine].etc,
+        "etc_effective":game.tt_profiles[engine].actual_etc,
         "requested_lmr_parameters":config.engines[engine].lmr_parameters,
         "requested_probcut":config.engines[engine].probcut,
         "actual_probcut":game.tt_profiles[engine].actual_probcut,

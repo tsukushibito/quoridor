@@ -135,6 +135,9 @@ pub fn alpha_counters(r: &SearchResult) -> serde_json::Value {
         "tt_illegal_moves":s.tt_illegal_moves,"tt_retained_bytes":s.tt_retained_bytes,"tt_generation":s.tt_generation,
         "pvs_researches":s.pvs_researches,"delta_updates":s.delta_updates,"policy_calls":s.policy_calls,
         "lmr_parameters":s.lmr_parameters.map(crate::config::LmrParameters::from),"leaf_count":null,"physical_nn_calls":null});
+    if let Some(report) = &s.etc {
+        output["etc"] = crate::config::etc_report(report);
+    }
     if let Some(p) = &s.probcut {
         output["probcut"] = crate::config::probcut_report(p);
     }

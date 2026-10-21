@@ -13,6 +13,10 @@ use std::{
     time::Duration,
 };
 
+#[path = "etc.rs"]
+mod etc;
+pub use etc::{EtcMode, EtcReport};
+
 #[path = "continuation_history.rs"]
 mod continuation_history;
 pub use continuation_history::OrderingProfile;
@@ -793,6 +797,7 @@ fn permit_zero_stock_approx(threshold: Option<u8>, root_walls: u16, max_depth: u
 #[derive(Debug, Default, Clone)]
 pub struct SearchStats {
     pub probcut: Option<ProbCutReport>,
+    pub etc: Option<EtcReport>,
     /// One per-Search snapshot; method selection alone does not enable LMR.
     pub lmr_enabled: bool,
     pub lmr_method: LmrMethod,
@@ -1481,6 +1486,7 @@ struct Search<
     const HISTORY: bool = false,
 > {
     probcut: probcut::State,
+    etc: EtcMode,
     eval: &'a dyn StaticEvaluator,
     score_domain: ScoreDomain,
     eval_scratch: EvalScratch,
@@ -2805,6 +2811,41 @@ impl<
                 }
                 action
             };
+            // After ordinary TT-first/first-child expansion, inspect only this
+            // already-pulled action and a tail entry already in final order.
+            // An unsorted deferred tail supplies no second candidate: no new scan.
+            if self.etc == EtcMode::Depth3Top2 && i == 1 && depth >= 3 && beta.is_finite() {
+                let bin = EtcReport::bin(depth, ply);
+                self.stats.etc.as_mut().expect("ETC report").opportunities[bin] += 1;
+                let candidates = [
+                    Some(action),
+                    moves.as_ref().and_then(|m| m.etc_next_ordered()),
+                ];
+                for candidate in candidates.into_iter().flatten() {
+                    if let Some(lower) = self.etc_child_bound(c, candidate, depth - 1, beta, bin)? {
+                        self.control()?;
+                        self.stats.etc.as_mut().expect("ETC report").cuts[bin] += 1;
+                        if let Some(key) = key {
+                            self.table.insert_probed::<SMP>(
+                                key,
+                                NodeValue {
+                                    depth,
+                                    value: lower,
+                                    bound: Bound::Lower,
+                                    best: Some(candidate),
+                                },
+                                &mut self.stats,
+                            );
+                        }
+                        // No searched-return/history/killer claim for a key-only probe.
+                        // The actual ETC cut has one attribution in EtcReport::cuts.
+                        if let Some(work) = node_work {
+                            work.finish(&mut self.stats.ordering, false);
+                        }
+                        return Ok(lower);
+                    }
+                }
+            }
             let eligible = self.lmr
                 && moves
                     .as_ref()
@@ -3548,6 +3589,7 @@ impl SessionMethod {
 /// New games explicitly reset or create a session; namespace switches clear all entries.
 pub struct SearchSession {
     probcut: Option<ProbCutParameters>,
+    etc: EtcMode,
     probcut_samples: u8,
     namespace: SearchNamespace,
     #[cfg(not(target_arch = "wasm32"))]
@@ -4009,6 +4051,7 @@ impl SearchSession {
             .map(|owner| owner.model.evaluation_scratch());
         Ok(Self {
             probcut: None,
+            etc: EtcMode::Off,
             probcut_samples: 0,
             namespace,
             #[cfg(not(target_arch = "wasm32"))]
@@ -4133,6 +4176,7 @@ impl SearchSession {
             self.namespace.evaluator.push(':');
             self.namespace.evaluator.push_str(&p.namespace_suffix());
         }
+        self.etc.qualify_namespace(&mut self.namespace);
         self.score_domain = score_domain;
         self.table.clear();
         if let Some(history) = self.ordering.as_mut() {
@@ -4157,6 +4201,11 @@ impl SearchSession {
         limits: &SearchLimits,
         cancel: &AtomicBool,
     ) -> Result<SearchResult> {
+        if self.etc != EtcMode::Off {
+            return Err(SearchError::Limits(
+                "ETC excludes forced-root diagnostic invocation".into(),
+            ));
+        }
         if self.probcut.is_some() || self.probcut_samples != 0 {
             return Err(SearchError::Limits(
                 "ProbCut requires ordinary all-legal root".into(),
@@ -4269,6 +4318,10 @@ impl SearchSession {
                 "ProbCut requires actual PVS scout origin".into(),
             ));
         }
+        if self.etc != EtcMode::Off {
+            self.check_etc_invocation(limits)?;
+        }
+        invocation.etc = self.etc;
         invocation.probcut = self.probcut.as_ref();
         invocation.probcut_samples = self.probcut_samples;
         if self.probcut_samples != 0 && !limits.use_pvs {
@@ -4343,6 +4396,7 @@ type SearchTableAndDomain<'table, 'history> = (
 
 struct SearchInvocation<'a> {
     probcut: Option<&'a ProbCutParameters>,
+    etc: EtcMode,
     probcut_samples: u8,
     #[cfg(not(target_arch = "wasm32"))]
     worker_budget: Option<&'a mut lazy_smp::WorkerBudget>,
@@ -4362,6 +4416,7 @@ impl<'a> SearchInvocation<'a> {
     fn root(on_completed: &'a mut dyn FnMut(&SearchResult)) -> Self {
         Self {
             probcut: None,
+            etc: EtcMode::Off,
             probcut_samples: 0,
             on_completed,
             #[cfg(not(target_arch = "wasm32"))]
@@ -4562,6 +4617,7 @@ fn search_in_table_observed<
             .is_some_and(|b| b.sharing_enabled()))
     .then(SmpSharingProvenance::default);
     let mut state = Search::<OBSERVE, TRACE, OPPORTUNITY, SMP, HISTORY> {
+        etc: invocation.etc,
         probcut: probcut::State {
             parameters: invocation.probcut.cloned(),
             sample_limit: invocation.probcut_samples,
@@ -4587,6 +4643,7 @@ fn search_in_table_observed<
         deadline,
         table,
         stats: SearchStats {
+            etc: (invocation.etc != EtcMode::Off).then(EtcReport::default),
             probcut: (invocation.probcut.is_some() || invocation.probcut_samples != 0)
                 .then(ProbCutReport::default),
             #[cfg(not(target_arch = "wasm32"))]
@@ -5167,6 +5224,7 @@ mod persistent_tt_tests {
             let cancel = AtomicBool::new(false);
             let mut state = Search::<false> {
                 probcut: probcut::State::default(),
+                etc: EtcMode::Off,
                 #[cfg(not(target_arch = "wasm32"))]
                 worker_budget: None,
                 eval: e.as_ref(),
@@ -5863,6 +5921,7 @@ mod child_buffer_tests {
             let parent = e.prepare_context(&c).unwrap();
             let mut state = Search::<false> {
                 probcut: probcut::State::default(),
+                etc: EtcMode::Off,
                 #[cfg(not(target_arch = "wasm32"))]
                 worker_budget: None,
                 eval: &e,
@@ -6572,3 +6631,7 @@ mod session_residual_owner_tests {
 #[cfg(test)]
 #[path = "probcut_tests.rs"]
 mod probcut_tests;
+
+#[cfg(test)]
+#[path = "etc_tests.rs"]
+mod etc_tests;
